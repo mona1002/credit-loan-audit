@@ -1,0 +1,197 @@
+@media screen and (max-width: 1366px) {
+    #Abody{
+      width:1366px;
+    }
+    html{
+      width:1366px;
+    }
+  }
+  @media screen and (min-width: 1366px) {
+    html{
+      width:100%;
+    }
+    #Abody{
+      width:100%;
+    }
+  }
+
+@charset "utf-8";
+*, *:after, *:before {    
+    box-sizing: border-box;
+}
+html,body{
+    width:100%;
+}
+  html,
+  body,
+  div,
+  span,
+  applet,
+  object,
+  iframe,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  blockquote,
+  pre,
+  a,
+  abbr,
+  acronym,
+  address,
+  big,
+  cite,
+  code,
+  del,
+  dfn,
+  em,
+  img,
+  ins,
+  kbd,
+  q,
+  s,
+  samp,
+  small,
+  strike,
+  strong,
+  sub,
+  sup,
+  tt,
+  var,
+  b,
+  u,
+  i,
+  center,
+  dl,
+  dt,
+  dd,
+  ol,
+  ul,
+  li,
+  fieldset,
+  form,
+  label,
+  legend,
+  input,
+  button,
+  textarea,
+  table,
+  caption,
+  tbody,
+  tfoot,
+  thead,
+  tr,
+  th,
+  td,
+  article,
+  aside,
+  canvas,
+  details,
+  figcaption,
+  figure,
+  footer,
+  header,
+  hgroup,
+  menu,
+  nav,
+  section,
+  summary,
+  time,
+  mark,
+  audio,
+  video,
+  hr {
+      margin: 0;
+      padding: 0;
+  }
+  
+  body,
+  button,
+  input,
+  select,
+  textarea {
+      font: 12px/1.5 '微软雅黑', tahoma, arial, '\5b8b\4f53';
+      color: #3b3b3b;
+      border: none;
+      *line-height: 1.5;
+      -ms-overflow-style: scrollbar;
+      -webkit-tap-highlight-color:rgba(0,0,0,0); 
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+      font-size: 100%;
+  }
+  
+  ul,
+  ol,
+  li,
+  dl {
+      list-style: none;
+  }
+  
+  address,
+  cite,
+  dfn,
+  em,
+  var {
+      font-style: normal;
+  }
+  
+  code,
+  kbd,
+  pre,
+  samp {
+      font-family: courier new, courier, monospace;
+  }
+  
+  small {
+      font-size: 12px;
+  }
+  
+  a {
+      text-decoration: none;
+      color: #3a302e;
+  }
+  
+  a:hover {
+      text-decoration: underline;
+  }
+  
+  sup {
+      vertical-align: text-top;
+  }
+  
+  sub {
+      vertical-align: text-bottom;
+  }
+  
+  legend {
+      color: #000;
+  }
+  
+  fieldset,
+  img {
+      border: 0;
+  }
+  
+  button,
+  input,
+  select,
+  textarea {
+      font-size: 100%;
+      -webkit-tap-highlight-color:rgba(0,0,0,0);
+      outline: none;
+  }
+  
+  table {
+      border-spacing: 0;
+      border-collapse: collapse;
+  }

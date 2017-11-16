@@ -1,0 +1,36 @@
+/* 公共部分 */
+/* 普通input的宽度 */
+.el-input{
+    width: 180px;
+}
+/* button按钮 */
+.el-button{
+    height: 36px;
+}
+
+/* 表格行高 */
+.el-table .cell{
+		line-height: 40px;
+	}
+    /* 表头颜色 */
+    .el-table__header-wrapper tr{
+		background-color: #f5f7fa;
+		color: #1f2d3d;
+		text-align: center;
+	}
+/* 字体图标颜色大小 */
+.icon{
+    color:#20a0ff;
+    font-size: 20px;
+}
+
+
+/* 各自部分 */
+
+/* 工作台部分修改 */
+.el-icon-arrow-right:before {
+    content: "";
+}
+.el-collapse-item.is-active .el-collapse-item__header{
+    border-bottom-color:#eee;
+}
