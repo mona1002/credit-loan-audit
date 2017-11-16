@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import {getCookie} from '@/util/util'
 import HelloWorld from '@/view/HelloWorld'
-import login from '@/view/login'
+import login from '@/view/login/login'
+import InternalMatch from '@/view/InternalMatch/InternalMatch'
 
 
 
@@ -20,6 +21,11 @@ const routes = [
     path: '/login',
     component: login
   },
+  {
+    //内部匹配
+    path: '/InternalMatch',
+    component: InternalMatch
+  }
 ];
 
 const router = new Router({
