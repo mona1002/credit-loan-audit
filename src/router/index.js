@@ -3,6 +3,14 @@ import Router from 'vue-router'
 import {getCookie} from '@/util/util'
 import HelloWorld from '@/view/HelloWorld'
 import login from '@/view/login'
+/*初审审批*/
+import taskInWaitting from '@/view/FirstTrail/taskInWaitting'
+/*备注信息*/
+import remark from '@/view/FirstTrail/detailComponent/remark'
+/*实地征信*/
+import creditInvestigation from '@/view/FirstTrail/detailComponent/creditInvestigation'
+/*借款人资料*/
+import borrowerInformation from '@/view/FirstTrail/detailComponent/borrowerInformation'
 
 
 
@@ -19,6 +27,26 @@ const routes = [
   {
     path: '/login',
     component: login
+  },
+  /*初审审批*/
+  {
+    path: '/taskInWaitting',
+    component: taskInWaitting
+  },
+  /*备注信息*/
+  {
+    path: '/remark',
+    component: remark
+  },
+  /*实地征信*/
+  {
+    path: '/creditInvestigation',
+    component: creditInvestigation
+  },
+  /*借款人资料*/
+  {
+    path: '/borrowerInformation',
+    component: borrowerInformation
   },
 ];
 

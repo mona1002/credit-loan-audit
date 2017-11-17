@@ -1,7 +1,11 @@
 <template>
   <div class="hello">
     <p>有get、post请求demo</p>
-  
+    <router-link to="taskInWaitting">初审审批</router-link>
+    <router-link to="remark">备注信息</router-link>
+    <router-link to="creditInvestigation">实地征信</router-link>
+    <router-link to="borrowerInformation">借款人资料</router-link>
+    <!-- <router-link to="index">借款人资料</router-link> -->
   
   </div>
 </template>
