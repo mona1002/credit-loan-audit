@@ -426,5 +426,18 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
 	width: 33.3%;
 	float: left;
 	margin-top:20px;
+	text-align: center;
+}
+.fuzhaixinxi ol li label{
+	display: inline-block;
+	width: 150px;
+	text-align: right;
+	background-color: pink;
+}
+.fuzhaixinxi ol li p{
+	width: 180px;
+	height: 30px;
+	background-color: yellow;
+	float: left;
 }
 </style>
