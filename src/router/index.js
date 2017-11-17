@@ -4,7 +4,6 @@ import {
   getCookie
 } from '@/util/util'
 import HelloWorld from '@/view/HelloWorld'
-<<<<<<< HEAD
 
 /*初审审批*/
 import taskInWaitting from '@/view/FirstTrail/taskInWaitting'
@@ -15,10 +14,10 @@ import creditInvestigation from '@/view/FirstTrail/detailComponent/creditInvesti
 /*借款人资料*/
 import borrowerInformation from '@/view/FirstTrail/detailComponent/borrowerInformation'
 
-import workbench from '@/view/FirstTrail/workbench'
+/*import workbench from '@/view/FirstTrail/workbench'
 import SplitScreen from '@/view/FirstTrail/SplitScreen'
 import AudioVisual from '@/view/FirstTrail/detailComponent/AudioVisual'
-import CreditForm from '@/view/FirstTrail/detailComponent/CreditForm'
+import CreditForm from '@/view/FirstTrail/detailComponent/CreditForm'*/
 import login from '@/view/login/login'
 import InternalMatch from '@/view/InternalMatch/InternalMatch'
 
@@ -58,7 +57,7 @@ const routes = [{
     path: '/borrowerInformation',
     component: borrowerInformation
   },
-  {
+  /*{
     path: '/workbench',
     component: workbench,
   },
@@ -73,7 +72,7 @@ const routes = [{
   {
     path: '/CreditForm',
     component: CreditForm
-  },
+  },*/
   {
     //内部匹配
     path: '/InternalMatch',

@@ -197,7 +197,7 @@
 				</div>
 		  	</el-collapse-item>
 		  	<el-collapse-item title="贷款总况" name="6">
-		  		<div class="xinyongka">
+		  		<div class="xinyongka daikuanzongkuang">
 		  			<ul>
 				    	<li><label>车贷共有笔数:</label><p>{{input}}</p></li>
 				    	<li><label>信用贷总笔数:</label><p>{{input}}</p></li>
@@ -228,12 +228,31 @@
 				    <ol>
 				    	<li><label>车贷每月还款额[元]:</label><el-input v-model="input"></el-input></li>
 				    	<li><label>其他贷款每月还款额[元]:</label><el-input v-model="input"></el-input></li>
-				    	<li><label>负债合计[元]:</label><p>{{input}}</p></li>
+				    	<li class="zongji"><label>负债合计[元]:</label><el-input v-model="input"></el-input></li>
+				    </ol>
+				    <ol class="num">
+				    	<li><label>最近三个月信用卡/贷款申请次数:</label><el-input v-model="input"></el-input></li>
+				    	<li><label>文字说明:</label><div><textarea></textarea></div></li>
+				    </ol>
+		  		</div> 
+		  	</el-collapse-item>
+		  	<el-collapse-item title="征询报告" name="8">
+		  		<div class="fuzhaixinxi zhengxunbaogao">
+		  			<ol>
+				    	<li><label>报告来源:</label><el-input v-model="input"></el-input></li>
+					    <li><label>有无征信报告查询记录:</label><el-select v-model="value">
+						    <el-option
+						      v-for="item in options"
+						      :key="item.value"
+						      :label="item.label"
+						      :value="item.value">
+						    </el-option>
+						  </el-select>
+						</li>
+				    	<li><label>近6个月内信用报告查询次数:</label><el-input v-model="input"></el-input></li>
 				    </ol>
 				    <ol>
-				    	<li><label>最近三个月信用
-卡/贷款申请次数:</label><el-input v-model="input"></el-input></li>
-				    	<li><label>文字说明:</label><el-input v-model="input"></el-input></li>
+				    	<li><label>报告描述:</label><div><textarea></textarea></div></li>
 				    </ol>
 		  		</div> 
 		  	</el-collapse-item>
@@ -286,6 +305,14 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
 	    data() {
 	      return {
 	      	input:'',
+	      	value:'',
+	      	options: [{
+	          value: '1',
+	          label: '是'
+	        }, {
+	          value: '2',
+	          label: '否'
+	        }],
 	        activeNames: ['1','2','3','4','5','6','7','8','9','10'],
       		cross_rable_home: 0,
       		cross_rable_vehicle: 0,
@@ -378,19 +405,23 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
 	}
 	.xinyongka ul{
 		float: left;
-		margin-right: 300px;
+		width: 33.3%;
 		margin-bottom: 20px;
-	}
-	.xinyongka ul:nth-of-type(1){
-		margin-left: 150px;
+		text-align: center;
 	}
 	.xinyongka ul li{
 		margin-top: 20px;
 	}
 	.xinyongka ul li label{
-		width: 100px;
+		width: 110px;
 		display: inline-block;
 		text-align: right;
+	}
+	/* 贷款总况 */
+	.daikuanzongkuang li p{
+		width: 180px;
+		height: 30px;
+		display: inline-block;
 	}
   table.mytable{
     font-family: verdana,arial,sans-serif;
@@ -415,12 +446,8 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
         background-color: #ffffff;
   }
 /* 负债信息 */
-.fuzhaixinxi{
+.fuzhaixinxi,.fuzhaixinxi ol{
 	width: 100%;
-}
-.fuzhaixinxi ol{
-	width: 100%;
-	/* margin-top:20px;  */
 }
 .fuzhaixinxi ol li{
 	width: 33.3%;
@@ -432,12 +459,58 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
 	display: inline-block;
 	width: 150px;
 	text-align: right;
-	background-color: pink;
+	padding-right: 5px;
 }
-.fuzhaixinxi ol li p{
-	width: 180px;
+/* 负债信息：负债合计 */
+.fuzhaixinxi ol li.zongji input{
+	border: none;
+}
+/* 负债信息：文字说明 */
+ol.num li:nth-of-type(1) input{
+	position: absolute;
+	left: 0;
+	top: -29px;
+}
+ol.num li:nth-of-type(2){
+	width: 66.6%;
+	text-align: left;
+	padding-left: calc( 16.6% - 167px );
+	
+}
+ol.num li:nth-of-type(2) textarea{
+	width: 640px;
+	border: 1px solid #d8dce5; 
 	height: 30px;
-	background-color: yellow;
-	float: left;
+	border-radius: 4px;
+	position: absolute;
+	top: -18px;
+	padding-top: 5px;
+}
+ol.num li:nth-of-type(2) div{
+	position: relative;
+	display: inline-block;
+}
+/* 征询报告 */
+.zhengxunbaogao ol{
+	width: 100%;
+}
+.zhengxunbaogao li label{
+	width: 174px !important;
+}
+.zhengxunbaogao ol:nth-of-type(2) li{
+	width: 100%;
+	text-align: left;
+	padding-left: calc( 16.6% - 178px );
+	margin-bottom: 20px;
+}
+.zhengxunbaogao ol:nth-of-type(2) li div{
+	display: inline-block;
+	height: 50px;
+	border: 1px solid #d8dce5; 
+	width: 700px;
+}
+.zhengxunbaogao ol:nth-of-type(2) li div textarea{
+	width: 700px;
+	padding: 5px 5px 0 5px;
 }
 </style>
