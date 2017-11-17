@@ -3,7 +3,11 @@ import Router from 'vue-router'
 import {getCookie} from '@/util/util'
 import HelloWorld from '@/view/HelloWorld'
 import login from '@/view/login'
-
+import workbench from '@/view/FirstTrail/workbench'
+import SplitScreen from '@/view/FirstTrail/SplitScreen'
+import AudioVisual from '@/view/FirstTrail/detailComponent/AudioVisual'
+import CreditForm from '@/view/FirstTrail/detailComponent/CreditForm'
+// import AudioVisual from '@/view/FirstTrail/detailComponent/AudioVisual'
 
 
 Vue.use(Router)
@@ -19,6 +23,22 @@ const routes = [
   {
     path: '/login',
     component: login
+  },
+  {
+    path: '/workbench',
+    component: workbench,
+  },
+  {
+    path: '/SplitScreen',
+    component: SplitScreen
+  },
+  {
+    path: '/AudioVisual',
+    component: AudioVisual
+  },
+  {
+    path: '/CreditForm',
+    component: CreditForm
   },
 ];
 
