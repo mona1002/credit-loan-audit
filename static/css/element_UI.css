@@ -28,9 +28,9 @@
 /* 各自部分 */
 
 /* 工作台部分修改 */
-.el-icon-arrow-right:before {
+.workbench .el-icon-arrow-right:before {
     content: "";
 }
-.el-collapse-item.is-active .el-collapse-item__header{
+.workbench .el-collapse-item.is-active .el-collapse-item__header{
     border-bottom-color:#eee;
 }
