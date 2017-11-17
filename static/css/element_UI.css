@@ -44,3 +44,13 @@
 .workbench .el-collapse-item.is-active .el-collapse-item__header{
     border-bottom-color:#eee;
 }
+
+/* th */
+.el-table td, .el-table th{
+    padding: 0;
+}
+/* 信审表 */
+.CreditForm .el-collapse-item__header{
+border:1px solid silver;
+background: #20a0ff;
+}

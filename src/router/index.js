@@ -20,7 +20,7 @@ import AudioVisual from '@/view/FirstTrail/detailComponent/AudioVisual'
 import CreditForm from '@/view/FirstTrail/detailComponent/CreditForm'*/
 import login from '@/view/login/login'
 import InternalMatch from '@/view/InternalMatch/InternalMatch'
-
+import PhoneCredit from '@/view/PhoneCredit/PhoneCredit'
 
 
 
@@ -77,6 +77,10 @@ const routes = [{
     //内部匹配
     path: '/InternalMatch',
     component: InternalMatch
+  },{
+    //电话征信
+    path: '/PhoneCredit',
+    component: PhoneCredit
   }
 ];
 
