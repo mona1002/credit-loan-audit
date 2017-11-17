@@ -1,7 +1,10 @@
 /* 公共部分 */
 /* 普通input的宽度 */
 .el-input{
-    width: 180px;
+    width: 180px; 
+}
+.el-input__inner{
+     height: 30px;
 }
 /* button按钮 */
 .el-button{
@@ -22,6 +25,13 @@
 .icon{
     color:#20a0ff;
     font-size: 20px;
+}
+/* 表格内容居中 */
+.el-table th,td{
+    text-align: center;
+}
+.el-table td, .el-table th{
+    padding:0;
 }
 
 

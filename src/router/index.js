@@ -4,12 +4,23 @@ import {
   getCookie
 } from '@/util/util'
 import HelloWorld from '@/view/HelloWorld'
-import workbench from '@/view/FirstTrail/workbench'
+
+/*初审审批*/
+import taskInWaitting from '@/view/FirstTrail/taskInWaitting'
+/*备注信息*/
+import remark from '@/view/FirstTrail/detailComponent/remark'
+/*实地征信*/
+import creditInvestigation from '@/view/FirstTrail/detailComponent/creditInvestigation'
+/*借款人资料*/
+import borrowerInformation from '@/view/FirstTrail/detailComponent/borrowerInformation'
+
+/*import workbench from '@/view/FirstTrail/workbench'
 import SplitScreen from '@/view/FirstTrail/SplitScreen'
 import AudioVisual from '@/view/FirstTrail/detailComponent/AudioVisual'
-import CreditForm from '@/view/FirstTrail/detailComponent/CreditForm'
+import CreditForm from '@/view/FirstTrail/detailComponent/CreditForm'*/
 import login from '@/view/login/login'
 import InternalMatch from '@/view/InternalMatch/InternalMatch'
+
 
 
 
@@ -26,7 +37,27 @@ const routes = [{
     path: '/login',
     component: login
   },
+  /*初审审批*/
   {
+    path: '/taskInWaitting',
+    component: taskInWaitting
+  },
+  /*备注信息*/
+  {
+    path: '/remark',
+    component: remark
+  },
+  /*实地征信*/
+  {
+    path: '/creditInvestigation',
+    component: creditInvestigation
+  },
+  /*借款人资料*/
+  {
+    path: '/borrowerInformation',
+    component: borrowerInformation
+  },
+  /*{
     path: '/workbench',
     component: workbench,
   },
@@ -41,7 +72,7 @@ const routes = [{
   {
     path: '/CreditForm',
     component: CreditForm
-  },
+  },*/
   {
     //内部匹配
     path: '/InternalMatch',
