@@ -4,7 +4,7 @@ import {getCookie} from '@/util/util'
 import HelloWorld from '@/view/HelloWorld'
 import login from '@/view/login/login'
 import InternalMatch from '@/view/InternalMatch/InternalMatch'
-
+import PhoneCredit from '@/view/PhoneCredit/PhoneCredit'
 
 
 Vue.use(Router)
@@ -25,6 +25,10 @@ const routes = [
     //内部匹配
     path: '/InternalMatch',
     component: InternalMatch
+  },{
+    //电话征信
+    path: '/PhoneCredit',
+    component: PhoneCredit
   }
 ];
 
