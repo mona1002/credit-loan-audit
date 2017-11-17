@@ -21,6 +21,7 @@
 }
 html,body{
     width:100%;
+    height: 100%;
 }
   html,
   body,
@@ -194,4 +195,9 @@ html,body{
   table {
       border-spacing: 0;
       border-collapse: collapse;
+  }
+
+  #app{
+    width: 100%;
+    height: 100%;
   }
