@@ -38,4 +38,9 @@
 /* 各自部分 */
 
 /* 工作台部分修改 */
-
+.workbench .el-icon-arrow-right:before {
+    content: "";
+}
+.workbench .el-collapse-item.is-active .el-collapse-item__header{
+    border-bottom-color:#eee;
+}
