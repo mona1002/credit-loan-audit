@@ -1,7 +1,10 @@
 /* 公共部分 */
 /* 普通input的宽度 */
 .el-input{
-    width: 180px;
+    width: 180px; 
+}
+.el-input__inner{
+     height: 30px;
 }
 /* button按钮 */
 .el-button{
@@ -23,19 +26,31 @@
     color:#20a0ff;
     font-size: 20px;
 }
+/* 表格内容居中 */
+.el-table th,td{
+    text-align: center;
+}
+.el-table td, .el-table th{
+    padding:0;
+}
 
 
 /* 各自部分 */
 
 /* 工作台部分修改 */
-.el-icon-arrow-right:before {
+.workbench .el-icon-arrow-right:before {
     content: "";
 }
-.el-collapse-item.is-active .el-collapse-item__header{
+.workbench .el-collapse-item.is-active .el-collapse-item__header{
     border-bottom-color:#eee;
 }
 
 /* th */
 .el-table td, .el-table th{
     padding: 0;
+}
+/* 信审表 */
+.CreditForm .el-collapse-item__header{
+border:1px solid silver;
+background: #20a0ff;
 }
