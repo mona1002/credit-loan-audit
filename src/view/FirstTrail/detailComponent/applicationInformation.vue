@@ -176,9 +176,9 @@
 						</el-select>
 					</li>
 				</ul>
-				<ul>
+				<ul v-if="value4=='其他渠道还款'">
 					<li>
-						<label v-if="value4=='其他渠道还款'">其他渠道还款说明：</label>
+						<label style="float:left;line-height:40px;">其他渠道还款说明：</label>
 						<div class="channel">
 							<textarea></textarea>
 						</div>
@@ -186,7 +186,7 @@
 					
 				</ul>
 		  	</el-collapse-item>
-		  	<el-collapse-item title="工作人员填写" name="1">
+		  	<el-collapse-item title="您的个人信息" name="3">
 				<ul class="firstUl">
 					<li>
 						<label>申请类型：</label><el-select v-model="value">
@@ -859,5 +859,15 @@
 	.button button{
 		float: right;
 		margin: 20px 15px 20px 0;
+	}
+	.channel{
+		width: 336px;
+		height: 40px;
+		display: inline-block;
+	}
+	.channel textarea{
+		width: 336px;
+		height: 40px;
+		border: 1px solid #d8dce5; 
 	}
 </style>
