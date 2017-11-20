@@ -16,10 +16,10 @@ import borrowerInformation from '@/view/FirstTrail/detailComponent/borrowerInfor
 /*申请信息*/
 import applicationInformation from '@/view/FirstTrail/detailComponent/applicationInformation'
 
-/*import workbench from '@/view/FirstTrail/workbench'
+import workbench from '@/view/FirstTrail/workbench'
 import SplitScreen from '@/view/FirstTrail/SplitScreen'
 import AudioVisual from '@/view/FirstTrail/detailComponent/AudioVisual'
-import CreditForm from '@/view/FirstTrail/detailComponent/CreditForm'*/
+import CreditForm from '@/view/FirstTrail/detailComponent/CreditForm'
 import login from '@/view/login/login'
 import InternalMatch from '@/view/InternalMatch/InternalMatch'
 import PhoneCredit from '@/view/PhoneCredit/PhoneCredit'
@@ -59,12 +59,14 @@ const routes = [{
     path: '/borrowerInformation',
     component: borrowerInformation
   },
+
   /*申请信息*/
   {
     path: '/applicationInformation',
     component: applicationInformation
   },
-  /*{
+
+  {
     path: '/workbench',
     component: workbench,
   },
@@ -79,12 +81,12 @@ const routes = [{
   {
     path: '/CreditForm',
     component: CreditForm
-  },*/
+  },
   {
     //内部匹配
     path: '/InternalMatch',
     component: InternalMatch
-  },{
+  }, {
     //电话征信
     path: '/PhoneCredit',
     component: PhoneCredit

@@ -11,15 +11,37 @@
           <span>页数</span>
         </p>
         <!-- 折叠面板-手风琴List -->
-        <!--缩略图 对比 按钮  -->
+        <!-- 按钮 : 缩略图 对比  -->
         <el-button type="primary" @click="SmallpicAlert">缩略图</el-button>
         <el-button type="primary">对比</el-button>
       </div>
       <!-- 右侧 图片 -->
+      <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
+        <!-- <img src="http://img.1ppt.com/uploads/allimg/1606/4_160609151925_1.jpg"> -->
+        <i class="el-icon-arrow-left position_and_size icon_pre" @click="pre"></i>
+        <i class="el-icon-arrow-right position_and_size icon_next" @click="next"></i>
+        <i class="el-icon-zoom-in position_and_size icon_larger" @click="larger "></i>
+        <i class="el-icon-zoom-out position_and_size icon_smaller" @click="smaller"></i>
+        <i class="el-icon-refresh position_and_size icon_clockWise" @click="clockWise "></i>
+        <i class="el-icon-sort position_and_size icon_AclockWise" @click="AclockWise "></i>
 
+        <img v-for="(val,key) in picData" :src="val.pic" v-if="key==smallPicInd" ref="Big_pic_ref" />
+      </div>
       <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
-    
+      <div class="Small_pic_div" v-show="SmallPicShow">
+        <i class="el-icon-close small_pic_close" @click="SmallpicClose"></i>
+        <img class="Small_pic" v-for="(val,index) in picData" :src="val.pic" @click="ChangeSmallpicCss(index)" @dblclick="smallPic($event,index)"
+          ref="small_pic_ref" />
+      </div>
+      <!-- 对比弹出层   不在右侧div里面，再 wrap 里面  可以用fixed定位-->
+      <!-- <div class="AudioVisual_wrap_compare">
+        <div class="AudioVisual_wrap_compare_left ">
 
+        </div>
+        <div class="AudioVisual_wrap_compare_right ">
+
+        </div>
+      </div> -->
     </div>
 
   </div>
@@ -48,17 +70,146 @@
         this.$refs.AudioVisual_Img_ref.style.left = "200px";
         this.$refs.AudioVisual_Img_ref.style.width = document.documentElement.clientWidth - 200 + "px";
       },
-
+      SmallpicClose() { //缩略图弹框 关闭
+        this.SmallPicShow = false;
+      },
       SmallpicAlert() { //缩略图弹框 打开
         this.SmallPicShow = true;
       },
-     
+      // pre() {
+      //   console.log("上一页")
+      //   this.smallPicInd--;
+      //   this.defaultBigPicCss(); // 点击切换图片时，让显示的大图高度重新为100%，不旋转。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
+      //   if (this.smallPicInd < 0) {
+      //     console.log("我下标小于0了")
+      //     this.smallPicInd = this.$refs.small_pic_ref.length - 1;
+      //   }
+      //   // this.changeSmallPicCss();
+      // },
+      // next() {
+      //   console.log("下一页")
+      //   this.smallPicInd++;
+      //   this.defaultBigPicCss(); // 同上
+      //   if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
+      //     this.smallPicInd = 0;
+      //   }
+      //   // this.changeSmallPicCss();
+      // },
+      // larger() {
+      //   console.log("放大")
+      //   this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
+      //     100 + "px";
+      // },
+      // smaller() {
+      //   console.log("缩小")
+      //   this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
+      //     100 + "px";
+      // },
+      // clockWise() {
+      //   console.log("顺时针");
+      //   if (this.$refs.Big_pic_ref[0].style.transform == "") { // 输出结果为： rotate(900deg) 每次加 90度
+      //     this.$refs.Big_pic_ref[0].style.transform += "rotate(90deg)";
+      //   } else {
+      //     this.$refs.Big_pic_ref[0].style.transform = this.$refs.Big_pic_ref[0].style.transform.slice(0, 7) + (
+      //       parseFloat(this.$refs
+      //         .Big_pic_ref[0]
+      //         .style.transform.slice(7, -4)) + 90) + this.$refs.Big_pic_ref[0].style.transform.slice(-4);
+      //   }
+      // },
+      // AclockWise() {
+      //   console.log("逆时针")
+      //   if (this.$refs.Big_pic_ref[0].style.transform == "") {
+      //     this.$refs.Big_pic_ref[0].style.transform += "rotate(-90deg)";
+      //   } else {
+      //     this.$refs.Big_pic_ref[0].style.transform = this.$refs.Big_pic_ref[0].style.transform.slice(0, 7) + (
+      //       parseFloat(this.$refs
+      //         .Big_pic_ref[0]
+      //         .style.transform.slice(7, -4)) - 90) + this.$refs.Big_pic_ref[0].style.transform.slice(-4);
+      //   }
+      // },
+      ChangeSmallpicCss(ind) { // 图片单击 不选中图片，标注选中，增加css效果
+        this.changeSmallPicCss(ind);
+      },
+      smallPic(ev, ind) {
+        console.log(ind);
+        this.smallPicInd = ind; //  选中图片的下标赋值给data里面的值， 以便大图片根据这个下标值 显示对应下标的图片
+        this.defaultBigPicCss();
+        // this.changeSmallPicCss(ind);
+        this.SmallPicShow = false;
+      },
+      // 公共重复方法
+      defaultBigPicCss() { // （重复代码）通用方法 ：  大图 --------------- 恢复默认高度、不旋转
+        if (getComputedStyle(this.$refs.Big_pic_ref[0], false).width > getComputedStyle(this.$refs.Big_pic_ref[0], //判断宽度>高度  按宽度100%显示
+            false).height) { // 点击切换图片时，让显示的大图宽高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
+          this.$refs.Big_pic_ref[0].style.width = "calc( 100% - 202px)";
+          console.log("默认大图css样式if" + this.$refs.Big_pic_ref[0].style.width)
+        } else {
+          this.$refs.Big_pic_ref[0].style.height = "99.8%";
+          // this.$refs.Big_pic_ref[0].style.height = "800px";
+          console.log("默认大图css样式else")
+          console.log(this.$refs.Big_pic_ref[0])
+          console.log(this.$refs.Big_pic_ref[0].style.height)
+        }
+        this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
+      },
+      changeSmallPicCss(ind) { // （重复代码）通用方法： 遍历所有小图片，恢复默认（初始时）设置的css样式--------- click时改变显示大图和选中小图的 高度 + 透明度
+        for (var i = 0; i < this.$refs.small_pic_ref.length; i++) {
+          // this.$refs.small_pic_ref[i].style.width="100px"; //设置所有图片默认高度
+          this.$refs.small_pic_ref[i].style.opacity = 1; //设置所有图片默认透明度
+        }
+        if (ind) {
+          this.$refs.small_pic_ref[ind].style.opacity = 0.8; //设置显示图片改变后的透明度 
+        }
+        // else{
+        // this.$refs.small_pic_ref[this.smallPicInd].style.opacity = 0.8; //设置显示图片改变后的透明度   
+        // }
+      },
+      Imgscroll() { //滚轮放大缩小图片
+        console.log("我是mouseout滚轮事件")
+      
+        this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => { // 非 Firefox 浏览器
+          event = event || window.event;
+          this.$refs.AudioVisual_Img_ref.scrollTop=0;//  让图片一直top为0， 可以显示 上面的按钮
+          // event.Handled =true;
+          console.log(event)
+          console.log(this.$refs.AudioVisual_Img_ref.scrollTop)
+          if (event.wheelDelta < 0) { // 放大
+            this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
+              100 + "px";
+          } else { //  缩小
+            this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
+              100 + "px";
+          }
+          console.log(event.wheelDelta)
+        };
+        this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => { // 兼容 Firefox 浏览器
+          console.dir(event);
+          console.log(event.detail)
+          this.$refs.AudioVisual_Img_ref.scrollTop=0;//  让图片一直top为0， 可以显示 上面的按钮          
+          if (event.detail > 0) { // 放大
+            this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
+              100 + "px";
+          } else { //  缩小
+            this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
+              100 + "px";
+          }
+        });
+      },
+      ImgScrollRemove() {
+        console.log("我是mouseout移除滚轮事件")
+        this.$refs.AudioVisual_Img_ref.onmousewheel = "";
+        this.$refs.AudioVisual_Img_ref.removeEventListener('DOMMouseScroll', (event) => {
+          event.preventDefault();
+        }, false);
+      }
     },
     mounted() {
       this.get('../../../../static/json/img.json').then(response => { // axios 请求
         console.info(response.data.items);
         this.picData = response.data.items;
-
+        // console.log(this.$refs.Big_pic_ref.length)
+        // console.log(this.picData[0].pic);
+        // console.log(this.$refs.big_pic)
       });
     }
   }
@@ -93,22 +244,22 @@
 
   .icon_larger {
     right: 20px;
-    top: 30px;
+    top: 200px;
   }
 
   .icon_smaller {
     left: 20px;
-    top: 30px;
+    top: 200px;
   }
 
   .icon_clockWise {
     left: 20px;
-    top: 70px;
+    top: 270px;
   }
 
   .icon_AclockWise {
     right: 20px;
-    top: 70px;
+    top: 270px;
   }
   /* private */
 
@@ -118,7 +269,6 @@
 
   .AudioVisual_List,
   .AudioVisual_Img {
-    border: 1px solid red;
     position: absolute;
     height: 100vh;
     overflow: auto;
