@@ -74,6 +74,10 @@ td {
   border-bottom-color: #eee;
 }
 
+/* th */
+.el-table td, .el-table th{
+    padding: 0;
+}
 
 /* 信审表 */
 

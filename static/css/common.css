@@ -1,9 +1,13 @@
 @media screen and (max-width: 1366px) {
     #Abody{
       width:1366px;
+      height: 100%;
+      overflow-x: scroll;
     }
     html{
       width:1366px;
+      height: 100%;
+      overflow-x: scroll;
     }
   }
   @media screen and (min-width: 1366px) {

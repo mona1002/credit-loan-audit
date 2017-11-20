@@ -295,6 +295,13 @@
 				    </table>
 				</div>
 		  	</el-collapse-item>
+		  	<el-collapse-item title="其他信息" name="10">
+		  		<div class="qita">
+				    <ol>
+				    	<li><label>其他:</label><div><textarea></textarea></div></li>
+				    </ol>
+		  		</div> 
+		  	</el-collapse-item>
 		</el-collapse>
 	</div>
 </template>
@@ -512,5 +519,27 @@ ol.num li:nth-of-type(2) div{
 .zhengxunbaogao ol:nth-of-type(2) li div textarea{
 	width: 700px;
 	padding: 5px 5px 0 5px;
+}
+/* 其他信息 */
+.qita{
+	width: 100%;
+}
+.qita ol li{
+	width: 100%;
+	height: 240px;
+	margin-top: 20px;
+}
+.qita ol div{
+	display: inline-block;
+	width: 70%;
+}
+.qita ol label{
+	height: 240px;
+	line-height: 240px;
+}
+.qita ol textarea{
+	width: 70%;
+	height: 200px;
+	border: 1px solid #d8dce5;  
 }
 </style>
