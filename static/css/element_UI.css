@@ -107,3 +107,23 @@ td {
   padding:2px 15px;
   margin-top:3.5px;
 }
+/* 影音资料-左侧列表 */
+.AudioVisual .el-collapse-item__header{
+  height:30px;
+  line-height: 30px;
+  background: #eeeFFF;
+}
+/* 影音列表-左侧列表-title  */
+.AudioVisual .el-collapse-item__header p span{
+ padding:5px 10px;
+ border-right:1px solid #e6ebf5;
+}
+/* 影音列表-左侧列表-折叠小箭头 */
+.AudioVisual .el-collapse-item__arrow{
+  line-height: 34px;
+}
+/* 影音列表-左侧列表--title-最外侧包裹层 */
+.el-collapse-item__wrap{
+width: 100%;
+}
+
