@@ -371,18 +371,8 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
 	    }
 	}
 </script>
-<style type="text/css">
-	/* 折叠面板头部背景色 */
-	.el-collapse-item__header{
-		background-color: #ccc;
-		font-size: 14px;
-		padding-left: 10px;
-		height: 40px;
-		line-height: 40px;
-	}
-	.el-collapse-item__header .el-collapse-item__arrow{
-		line-height: 40px;
-	}
+<style type="text/css" >/*scoped  */
+	
 	/* 字体图标 */
 	.icon{
 		color:#20a0ff;
@@ -431,27 +421,22 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
 		display: inline-block;
 	}
   table.mytable{
-    font-family: verdana,arial,sans-serif;
-    font-size:14px;
-    color:#333333;
-    border-width: 1px;
-    border-color: #666666;
+    /* border-width: 1px;
+    border-color: #666666; */
+    border: 1px solid #d8dce5;  
     border-collapse: collapse;
   }
-  table.mytable th {
+  table.mytable th {  
+        padding: 8px;
+        border: 1px solid #d8dce5;  
+        background-color: #e6ebf5;
+  }
+  /* table.mytable td {
         border-width: 1px;
         padding: 8px;
         border-style: solid;
         border-color: #666666;
-        background-color: #dedede;
-  }
-  table.mytable td {
-        border-width: 1px;
-        padding: 8px;
-        border-style: solid;
-        border-color: #666666;
-        background-color: #ffffff;
-  }
+  } */
 /* 负债信息 */
 .fuzhaixinxi,.fuzhaixinxi ol{
 	width: 100%;

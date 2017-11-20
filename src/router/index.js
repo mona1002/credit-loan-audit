@@ -13,7 +13,12 @@ import remark from '@/view/FirstTrail/detailComponent/remark'
 import creditInvestigation from '@/view/FirstTrail/detailComponent/creditInvestigation'
 /*借款人资料*/
 import borrowerInformation from '@/view/FirstTrail/detailComponent/borrowerInformation'
+
 // 工作台
+
+/*申请信息*/
+import applicationInformation from '@/view/FirstTrail/detailComponent/applicationInformation'
+
 import workbench from '@/view/FirstTrail/workbench'
 import SplitScreen from '@/view/FirstTrail/SplitScreen'
 import AudioVisual from '@/view/FirstTrail/detailComponent/AudioVisual'
@@ -57,6 +62,13 @@ const routes = [{
     path: '/borrowerInformation',
     component: borrowerInformation
   },
+
+  /*申请信息*/
+  {
+    path: '/applicationInformation',
+    component: applicationInformation
+  },
+
   {
     path: '/workbench',
     component: workbench,
@@ -77,7 +89,7 @@ const routes = [{
     //内部匹配
     path: '/InternalMatch',
     component: InternalMatch
-  },{
+  }, {
     //电话征信
     path: '/PhoneCredit',
     component: PhoneCredit

@@ -59,6 +59,17 @@ td {
 .el-table th {
   padding: 0;
 }
+/* 折叠面板头部背景色 */
+.el-collapse-item__header{
+    background-color: #ccc;
+    font-size: 14px;
+    padding-left: 10px;
+    height: 40px;
+    line-height: 40px;
+}
+.el-collapse-item__header .el-collapse-item__arrow{
+    line-height: 40px;
+}
 
 
 /* 各自部分 */
@@ -101,6 +112,23 @@ td {
   padding:2px 15px;
   margin-top:3.5px;
   width:400px;
+}
+
+
+/* 借款人资料 */
+.borrowerInformation .el-select{
+    width: 130px;
+}
+.borrowerInformation .el-select>.el-input{
+    width: 130px;
+}
+/* 申请信息 */
+.applicationInformation .el-collapse-item__content{
+    padding-bottom: 0;
+}
+/* 下拉框禁用背景色 */
+.applicationInformation .el-input.is-disabled .el-input__inner{
+    background-color: #fff;
 }
 /* 信审表-核实身份-textarea部分 */
 .CreditForm .CreditForm_CheckId_ul_right .el-textarea__inner{
