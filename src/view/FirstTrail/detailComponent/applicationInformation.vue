@@ -189,14 +189,9 @@
 		  	<el-collapse-item title="您的个人信息" name="3">
 				<ul class="firstUl">
 					<li>
-						<label>申请类型：</label><el-select v-model="value">
-						    <el-option
-						      v-for="item in options"
-						      :key="item.value"
-						      :label="item.label"
-						      :value="item.value">
-						    </el-option>
-						</el-select>
+						<label><i>*</i>客户名称：</label>
+						<el-input v-model="inputname" v-on:focus = "ee=true" v-on:blur="ee=false"></el-input>
+						<span v-show="ee">客户名称不能为空</span>
 					</li>
 					<li>
 						<label>借款人类型：</label><el-select v-model="value">
@@ -567,6 +562,7 @@
 				bb:false,
 				cc:false,
 				dd:false,
+				ee:false,
 				incomingChannel: [{
 		          value: '1',
 		          label: '线下'
