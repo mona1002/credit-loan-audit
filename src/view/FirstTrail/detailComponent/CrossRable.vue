@@ -1,14 +1,14 @@
 <template>
-  <tr class="my_cross_table">
+  <tr class="my_cross_table" @mouseenter="enter($event)" @mouseleave="leave($event)">
     <td v-for="(tab,index) in tablejson[ytablemsg]">
         <div class="td_box" v-if="tab.val == 0 ">
         	{{ynum}}
         </div>
         <div class="td_box" v-if="tab.val == 1 ">
-        	<input type="text" placeholder="请输入"/>
+        	<input type="text"/>
         </div>
         <div class="td_box" v-if="tab.val == 2 ">
-        	<el-select v-model="y_value" placeholder="请选择">
+        	<el-select v-model="y_value">
 			    <el-option
 			      v-for="item in tab.options"
 			      :key="item.value"
@@ -187,6 +187,14 @@ export default {
   props: ['ytablemsg','ynum'],
   created () {
 
+  },
+  methods:{
+        enter: function(e){
+            e.target.style.background = '#e6ebf5';
+        },
+        leave: function(e){
+            e.target.style.background = '';
+        },
   }
 
 }
@@ -198,7 +206,7 @@ export default {
     .td_date{width:260px;}
   } */
   .my_cross_table .td_box{
-    width:130px;height:30px;background-color: #ff0;
+    width:130px;height:30px;
   }
   .my_cross_table .td_date{width:260px;}
 </style>
