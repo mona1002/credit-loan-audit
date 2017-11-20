@@ -103,7 +103,7 @@
 					<li v-if="value3=='收费加急'">
 						<label><i>*</i>加急费用[元]：</label>
 						<el-input v-model="inputname" v-on:focus = "cc=true" v-on:blur="cc=false"></el-input>
-						<span v-show="cc">知晓人姓名不能为空</span>
+						<span v-show="cc">加急费用不能为空</span>
 					</li>
 				</ul>
 		  	</el-collapse-item>

@@ -59,13 +59,11 @@ const routes = [{
     path: '/borrowerInformation',
     component: borrowerInformation
   },
-
   /*申请信息*/
   {
     path: '/applicationInformation',
     component: applicationInformation
   },
-
   {
     path: '/workbench',
     component: workbench,
