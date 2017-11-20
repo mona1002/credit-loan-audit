@@ -13,6 +13,8 @@ import remark from '@/view/FirstTrail/detailComponent/remark'
 import creditInvestigation from '@/view/FirstTrail/detailComponent/creditInvestigation'
 /*借款人资料*/
 import borrowerInformation from '@/view/FirstTrail/detailComponent/borrowerInformation'
+/*申请信息*/
+import applicationInformation from '@/view/FirstTrail/detailComponent/applicationInformation'
 
 /*import workbench from '@/view/FirstTrail/workbench'
 import SplitScreen from '@/view/FirstTrail/SplitScreen'
@@ -56,6 +58,11 @@ const routes = [{
   {
     path: '/borrowerInformation',
     component: borrowerInformation
+  },
+  /*申请信息*/
+  {
+    path: '/applicationInformation',
+    component: applicationInformation
   },
   /*{
     path: '/workbench',

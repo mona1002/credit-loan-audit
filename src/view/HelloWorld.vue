@@ -5,6 +5,7 @@
     <router-link to="remark">备注信息</router-link>
     <router-link to="creditInvestigation">实地征信</router-link>
     <router-link to="borrowerInformation">借款人资料</router-link>
+    <router-link to="applicationInformation">申请信息</router-link>
    <router-link to="/workbench">  <el-button type="primary">workbench</el-button></router-link>
   <router-link to="/SplitScreen">  <el-button type="primary">SplitScreen</el-button></router-link>
   <router-link to="/AudioVisual">  <el-button type="primary">AudioVisual</el-button></router-link>
