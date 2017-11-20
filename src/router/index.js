@@ -19,9 +19,10 @@ import SplitScreen from '@/view/FirstTrail/SplitScreen'
 import AudioVisual from '@/view/FirstTrail/detailComponent/AudioVisual'
 import CreditForm from '@/view/FirstTrail/detailComponent/CreditForm'*/
 import login from '@/view/login/login'
-import InternalMatch from '@/view/InternalMatch/InternalMatch'
-import PhoneCredit from '@/view/PhoneCredit/PhoneCredit'
-
+import InternalMatch from '@/view/FirstTrail/InternalMatch/InternalMatch'
+import PhoneCredit from '@/view/FirstTrail/PhoneCredit/PhoneCredit'
+// 住址电话
+import AddressForm from '@/view/FirstTrail/PhoneCredit/Form/AddressForm'
 
 
 Vue.use(Router)
@@ -80,7 +81,14 @@ const routes = [{
   },{
     //电话征信
     path: '/PhoneCredit',
-    component: PhoneCredit
+    component: PhoneCredit,
+    children:[
+      {
+        path:'/AddressForm/:formTag/:id/:phoneType',
+        component: AddressForm,
+
+      }
+    ]
   }
 ];
 
