@@ -70,7 +70,16 @@
 
         <div class="tab2_Content">
           <AudioVisual v-if=" this.tabContent2==0"></AudioVisual>
-          <workbench v-if=" this.tabContent2==1"></workbench>
+          <remark v-if=" this.tabContent2==1"></remark>
+          <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
+          <remark v-if=" this.tabContent2==3"></remark>
+          <borrowerInformation  v-if=" this.tabContent2==4"></borrowerInformation>
+          <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
+          <CreditForm v-if=" this.tabContent2==6"></CreditForm>
+          <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
+          <CreditForm v-if=" this.tabContent2==8"></CreditForm><!-- 反欺诈结论 空白 -->
+          <CreditForm v-if=" this.tabContent2==9"></CreditForm><!-- 信审审批 空白 -->
+          
         </div>
       </div>
 
@@ -83,9 +92,18 @@
 </template>
 <script>
   // import right from "./elementUI-右边栏";
+
   import AudioVisual from "./detailComponent/AudioVisual";
-  import workbench from "./workbench";
-  // import AudioVisual from"../view/AudioVisual"
+  import remark from "./detailComponent/remark";
+  import InternalMatch from "../InternalMatch/InternalMatch";
+  import borrowerInformation from "./detailComponent/borrowerInformation";
+  // import PhoneCredit from "./detailComponent/PhoneCredit";
+  import PhoneCredit from "../PhoneCredit/PhoneCredit";
+import CreditForm from "./detailComponent/CreditForm";
+  import creditInvestigation from "./detailComponent/creditInvestigation";
+  import s from "./detailComponent/remark";
+// 反欺诈结论 写此处
+// 信审审批写此处
   export default {
     data() {
       return {
@@ -223,8 +241,13 @@
       this.title = "影音资料";
     },
     components: {
-      workbench,
       AudioVisual,
+      remark,
+      InternalMatch,
+      borrowerInformation,
+      PhoneCredit,
+      CreditForm,
+      creditInvestigation,
     }
   }
 
@@ -264,6 +287,7 @@
   /* 左右分屏 */
 .SplitScreen_wrap{
     position: relative;
+    min-width: 1366px;
 }
   #div1 {
     width: 200px;
@@ -275,6 +299,9 @@
   .left,
   .right {
     width: 50%;
+    height:100%;
+    /* overflow: auto; */
+    overflow: scroll;    
     background: pink;
     height: 100vh;
     border: 1px solid black;
@@ -346,6 +373,7 @@
 
   .tab2_Content {
     clear: both;
+    /* height: ; */
   }
 
 </style>

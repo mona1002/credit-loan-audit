@@ -13,6 +13,9 @@ import remark from '@/view/FirstTrail/detailComponent/remark'
 import creditInvestigation from '@/view/FirstTrail/detailComponent/creditInvestigation'
 /*借款人资料*/
 import borrowerInformation from '@/view/FirstTrail/detailComponent/borrowerInformation'
+
+// 工作台
+
 /*申请信息*/
 import applicationInformation from '@/view/FirstTrail/detailComponent/applicationInformation'
 
