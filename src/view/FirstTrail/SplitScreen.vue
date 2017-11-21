@@ -95,13 +95,15 @@
 
   import AudioVisual from "./detailComponent/AudioVisual";
   import remark from "./detailComponent/remark";
+  // import InternalMatch from "./InternalMatch";
   import InternalMatch from "./InternalMatch";
+  
   import borrowerInformation from "./detailComponent/borrowerInformation";
   // import PhoneCredit from "./detailComponent/PhoneCredit";
   import PhoneCredit from "./PhoneCredit";
 import CreditForm from "./detailComponent/CreditForm";
   import creditInvestigation from "./detailComponent/creditInvestigation";
-  import s from "./detailComponent/remark";
+  // import s from "./detailComponent/remark";
 // 反欺诈结论 写此处
 // 信审审批写此处
   export default {
