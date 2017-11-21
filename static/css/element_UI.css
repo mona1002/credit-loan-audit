@@ -126,7 +126,13 @@ td {
 .applicationInformation .el-collapse-item__content{
     padding-bottom: 0;
 }
-/* 下拉框禁用背景色 */
+.applicationInformation .el-date-editor.el-input, .el-date-editor.el-input__inner{
+  width: 180px;
+}
+.applicationInformation .el-select .el-input.is-focus .el-input__inner{
+  height: 30px;
+}
+/* 申请信息 下拉框禁用背景色 */
 .applicationInformation .el-input.is-disabled .el-input__inner{
     background-color: #fff;
 }
