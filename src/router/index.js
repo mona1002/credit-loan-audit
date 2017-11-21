@@ -22,12 +22,16 @@ import applicationInformation from '@/view/FirstTrail/detailComponent/applicatio
 import workbench from '@/view/FirstTrail/workbench'
 import SplitScreen from '@/view/FirstTrail/SplitScreen'
 import AudioVisual from '@/view/FirstTrail/detailComponent/AudioVisual'
-import CreditForm from '@/view/FirstTrail/detailComponent/CreditForm'
+// import CreditForm from '@/view/FirstTrail/detailComponent/CreditForm'
 import login from '@/view/login/login'
-import InternalMatch from '@/view/FirstTrail/InternalMatch/InternalMatch'
-import PhoneCredit from '@/view/FirstTrail/PhoneCredit/PhoneCredit'
+// import InternalMatch from '@/view/FirstTrail/InternalMatch/InternalMatch'
+// import PhoneCredit from '@/view/FirstTrail/PhoneCredit/PhoneCredit'
 // 住址电话
 import AddressForm from '@/view/FirstTrail/PhoneCredit/Form/AddressForm'
+// 查看页面
+// import cCreditForm from '@/view/FirstTrail/checkComponent/cCreditForm.vue'
+import InternalMatch from '@/view/FirstTrail/InternalMatch'
+import PhoneCredit from '@/view/FirstTrail/PhoneCredit'
 
 
 Vue.use(Router)
@@ -80,25 +84,23 @@ const routes = [{
     path: '/AudioVisual',
     component: AudioVisual
   },
-  {
-    path: '/CreditForm',
-    component: CreditForm
-  },
+  // {
+  //   path: '/CreditForm',
+  //   component: CreditForm
+  // },
+  // {
+  //   path: '/cCreditForm',
+  //   component: cCreditForm
+  // },
   {
     //内部匹配
     path: '/InternalMatch',
     component: InternalMatch
-  }, {
+  },
+  {
     //电话征信
     path: '/PhoneCredit',
-    component: PhoneCredit,
-    children:[
-      {
-        path:'/AddressForm/:formTag/:id/:phoneType',
-        component: AddressForm,
-
-      }
-    ]
+    component: PhoneCredit
   }
 ];
 

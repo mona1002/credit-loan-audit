@@ -2,7 +2,7 @@ import axios from 'axios'
 // axios 配置
 axios.defaults.timeout = 5000; 
 //数据接口
- axios.defaults.baseURL = 'http://localhost:8080/api/v1';
+ axios.defaults.baseURL = 'http://10.1.26.200:20716/riskManagement';
 
 axios.defaults.withCredentials=true;
 
@@ -46,6 +46,9 @@ export default{
                   }, err => {
                     reject(err);
                   })
+            // .catch(err=>{
+            //   reject(err)
+            // })
               })
       }
 

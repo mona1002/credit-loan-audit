@@ -95,10 +95,10 @@
 
   import AudioVisual from "./detailComponent/AudioVisual";
   import remark from "./detailComponent/remark";
-  import InternalMatch from "./InternalMatch/InternalMatch";
+  import InternalMatch from "./InternalMatch";
   import borrowerInformation from "./detailComponent/borrowerInformation";
   // import PhoneCredit from "./detailComponent/PhoneCredit";
-  import PhoneCredit from "./PhoneCredit/PhoneCredit";
+  import PhoneCredit from "./PhoneCredit";
 import CreditForm from "./detailComponent/CreditForm";
   import creditInvestigation from "./detailComponent/creditInvestigation";
   import s from "./detailComponent/remark";
