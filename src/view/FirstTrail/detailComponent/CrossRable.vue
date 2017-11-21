@@ -1,5 +1,5 @@
 <template>
-  <tr class="my_cross_table" @mouseenter="enter($event)" @mouseleave="leave($event)">
+  <tr class="my_cross_table">
     <td v-for="(tab,index) in tablejson[ytablemsg]">
         <div class="td_box" v-if="tab.val == 0 ">
         	{{ynum}}
@@ -180,6 +180,39 @@ export default {
           {'val':1},
           {'val':1},
           {'val':1}
+        ],
+        'people':[
+          {'val':0},//0为序列，1为input，2为下拉框， 3为日期 
+          {'val':1}, 
+          {'val':2,options:[
+              {'value': '1' ,'label':' 家庭联系人'},
+              {'value': '2' ,'label': '工作证明人'},
+              {'value': '3' ,'label': '其他联系人'}
+            ]},
+          {'val':2,options:[
+              {'value': '1' ,'label': '夫妻'},
+              {'value': '2' ,'label': '父母'},
+              {'value': '3' ,'label': '子女'},
+              {'value': '4' ,'label': '兄弟'},
+              {'value': '5' ,'label': '姐妹'},
+              {'value': '6' ,'label': '兄妹'},
+              {'value': '7' ,'label': '姐弟'},
+              {'value': '8' ,'label': '朋友'},
+              {'value': '9' ,'label': '同事'},
+              {'value': '10' ,'label':'房东'},
+              {'value': '11' ,'label': '亲属'},
+              {'value': '12' ,'label': '其他'}
+            ]},
+          {'val':1},
+          {'val':1},
+          {'val':1},
+          {'val':2,options:[
+            {'value': '1' ,'label': '身份证'}
+          ]},
+          {'val':1},
+          {'val':1},
+          {'val':1},
+          {'val':1}
         ]
       },
     }
@@ -189,24 +222,20 @@ export default {
 
   },
   methods:{
-        enter: function(e){
-            e.target.style.background = '#e6ebf5';
-        },
-        leave: function(e){
-            e.target.style.background = '';
-        },
+        // enter: function(e){
+        //     e.target.style.background = '#e6ebf5';
+        // },
+        // leave: function(e){
+        //     e.target.style.background = '';
+        // },
   }
 
 }
 </script>
 
 <style scoped>
-	/* .my_cross_table{
-    .td_box{width:130px;height:30px;background-color: #ff0;}
-    .td_date{width:260px;}
-  } */
-  .my_cross_table .td_box{
+  .my_cross_table td{
     width:130px;height:30px;
+    border: 1px solid #d8dce5;
   }
-  .my_cross_table .td_date{width:260px;}
 </style>

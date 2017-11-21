@@ -135,9 +135,21 @@ td {
   padding: 2px 15px;
   margin-top: 3.5px;
 }
+
 /* 信审表-工作信息-单位地址-input框 */
 .CreditForm .company_address_select .el-input{
  width:120px;
+}
+.applicationInformation .el-date-editor.el-input, .el-date-editor.el-input__inner{
+  width: 180px;
+}
+.applicationInformation .el-select .el-input.is-focus .el-input__inner{
+  height: 30px;
+}
+/* 申请信息 下拉框禁用背景色 */
+.applicationInformation .el-input.is-disabled .el-input__inner{
+    background-color: #fff;
+
 }
 /* 信审表-工作信息+私营企业信息-单位地址-第四个地址详情input框 */
 .CreditForm .company_address_select .el-input:nth-of-type(4){
