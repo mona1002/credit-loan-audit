@@ -39,7 +39,7 @@
 				          <td></td>
 				          <td></td>
 				        </tr> -->
-				        <cross-rable v-for="cro in cross_rable_home" ytablemsg="house_property" v-bind:ynum="cro" :key="cro"></cross-rable>
+				        <cross-rable class="house_property" v-for="(cro,index) in cross_rable_home" ytablemsg="house_property" v-bind:ynum="cro" :key="index"  @mouseenter.native="enter($event)" @mouseleave.native="leave($event)" @click.native='buttonClick(index)'></cross-rable>
 				      </tbody>
 				    </table>
 				</div>
@@ -326,6 +326,7 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
       		cross_rable_card:0,
       		cross_rable_loanDetail:0,
       		cross_rable_turnover:0,
+      		house_property: document.getElementsByClassName("house_property"),
 	      };
 	    },
 	    components: {
@@ -368,10 +369,35 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
 			delet_turnover(){
 				console.log(333);
 			},
+			enter: function(e){
+			    e.target.style.background = '#e6ebf5';
+			},
+			leave: function(e){
+			    e.target.style.background = '';
+			},
+			buttonClick(index){
+				console.log(index);
+				console.log(this.house_property[index]);
+
+				var items = this.house_property;
+				for(var i=0,len=items.length;i<len;i++){
+					items[i].style.background = '';
+				}
+				items[index].style.background = 'red';
+				// items[index].removeEventListener('mouseenter',this.enter);
+				// items[index].removeEventListener('mouseleave',this.leave);
+				// items[index].onmouseenter = function(){
+				// 	items[index].style.background = 'red';
+				// };
+				// items[index].onmouseleave = function(){
+				// 	items[index].style.background = 'red';
+				// };
+
+			}
 	    }
 	}
 </script>
-<style type="text/css" >/*scoped  */
+<style type="text/css" scoped>
 	
 	/* 字体图标 */
 	.icon{
