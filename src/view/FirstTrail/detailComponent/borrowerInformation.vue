@@ -370,10 +370,14 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
 				console.log(333);
 			},
 			enter: function(e){
-			    e.target.style.background = '#e6ebf5';
+				if(e.target.style.background !== 'pink'){
+				    e.target.style.background = '#e6ebf5';
+				}
 			},
 			leave: function(e){
-			    e.target.style.background = '';
+				if(e.target.style.background !== 'pink'){
+				    e.target.style.background = '';
+				}
 			},
 			buttonClick(index){
 				console.log(index);
@@ -383,16 +387,7 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
 				for(var i=0,len=items.length;i<len;i++){
 					items[i].style.background = '';
 				}
-				items[index].style.background = 'red';
-				// items[index].removeEventListener('mouseenter',this.enter);
-				// items[index].removeEventListener('mouseleave',this.leave);
-				// items[index].onmouseenter = function(){
-				// 	items[index].style.background = 'red';
-				// };
-				// items[index].onmouseleave = function(){
-				// 	items[index].style.background = 'red';
-				// };
-
+				items[index].style.background = 'pink';
 			}
 	    }
 	}
