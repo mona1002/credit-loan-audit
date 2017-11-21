@@ -6,11 +6,8 @@
         <!-- 折叠面板title -->
         <button @click="hid" style="margin:0 0 0 130px;">隐藏</button>
         <button @click="showList">显示</button>
-        <p>
-          <span>影像名称</span>
-          <span>页数</span>
-        </p>
         <!-- 折叠面板-手风琴List -->
+         <p class="list_title"><span>影像名称</span><span>编号</span><span>页数</span><span>上传日期</span></p>
         <el-collapse >
           <!-- v-for="" -->
   <el-collapse-item v-for="">
@@ -20,7 +17,9 @@
     <div class="list_title_div">
      <p><span>影像名称</span><span>编号</span><span>页数</span><span>上传日期</span></p>      
     </div>
-   
+   <div class="list_title_div">
+     <p><span>影像名称</span><span>编号</span><span>页数</span><span>上传日期</span></p>      
+    </div>
   </el-collapse-item>
    <el-collapse-item>
     <template slot="title">
@@ -43,7 +42,6 @@
         <i class="el-icon-zoom-out position_and_size icon_smaller" @click="smaller"></i>
         <i class="el-icon-refresh position_and_size icon_clockWise" @click="clockWise "></i>
         <i class="el-icon-sort position_and_size icon_AclockWise" @click="AclockWise "></i>
-
         <img v-for="(val,key) in picData" :src="val.pic" v-if="key==smallPicInd" ref="Big_pic_ref" />
       </div>
       <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
@@ -240,10 +238,30 @@
     top: 5px;
   }
   /* 左侧折叠面板 */
-.list_title_div{
-  width: 100%;
-  background: orange;
-}
+  /* 折叠面板上面的四个 th 表头 */
+  .list_title span,.list_title_div p span{
+    display: inline-block;
+ border:1px solid #e6ebf5;
+ text-align: center;
+  }
+  .list_title span:nth-of-type(1){
+    width:30%;
+  }
+   .list_title span:nth-of-type(2){
+    width:20%;
+    border-right:none;
+    border-left:none;
+  }
+   .list_title span:nth-of-type(3){
+    width:20%;
+ 
+  }
+   .list_title span:nth-of-type(4){
+    width:30%;
+    border-left:none;
+    
+  }
+
 
   /* 图片功能按钮 */
 
@@ -301,10 +319,26 @@
     left: 0;
     z-index: 4;
   }
-.list_title_div p span{
-   padding:5px 10px;
- border-right:1px solid #e6ebf5;
-}
+
+ .list_title_div p span:nth-of-type(1){
+    width:30%;
+    border-top:none;
+  }
+   .list_title_div p span:nth-of-type(2){
+    width:20%;
+    border-top:none;    
+    border-right:none;
+    border-left:none;
+  }
+   .list_title_div p span:nth-of-type(3){
+    width:20%;
+    border-top:none;    
+    border-right:none;
+  }
+   .list_title_div p span:nth-of-type(4){
+    border-top:none;     
+    width:30%;
+  }
   .AudioVisual_Img {
     width: calc( 100% - 300px);
     left: 200px;

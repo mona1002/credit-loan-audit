@@ -12,14 +12,13 @@
 <style>
   .mheader{
     width: 100%;
+    min-width: 1366px;
     height: 60px;
     line-height: 60px;
     background: #20a0ff;
-  }
-  .mheader{
-      font-size: 30px;
+     font-size: 30px;
       color: white;
       padding-left:20px;
-
   }
+
 </style>
