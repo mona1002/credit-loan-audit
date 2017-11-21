@@ -9,45 +9,57 @@
         <!-- renderContent 指定渲染函数,该函数返回需要的节点区内容即可 -->
         <el-tree :data="data" :props="defaultProps" accordion no-key="id" @node-click="handleNodeClick">
         </el-tree>
+        <!-- 备选  折叠面板- 手风琴效果 -->
         <el-button @click.native="coverShow=true">添加</el-button>
         <!-- <el-button type="text" @click="open">添加</el-button> -->
       </el-aside>
       <!-- 右侧 表单内容 -->
       <el-container>
         <el-header style="text-align: right; font-size: 12px">
-          <div class="head-title">
-            历史调查日志
+          <div v-if="hisListShow">
+            <div class="head-title">
+              历史调查日志
+            </div>
+            <!-- 列表 -->
+            <el-table :data="tableData" height="250" border style="width: 100%" @row-click="rowClick">
+              <el-table-column type="index" label="序号">
+              </el-table-column>
+              <el-table-column prop="phoneType" label="电话类型">
+              </el-table-column>
+              <el-table-column prop="checkTime" label="调查时间">
+              </el-table-column>
+              <el-table-column prop="source" label="来源">
+              </el-table-column>
+              <el-table-column prop="phoneNum" label="电话号码">
+              </el-table-column>
+              <el-table-column prop="answer" label="接听情况">
+              </el-table-column>
+              <el-table-column prop="checkStage" label="调查阶段">
+              </el-table-column>
+              <el-table-column prop="conclusion" label="调查结论">
+              </el-table-column>
+            </el-table>
+            <!-- 分页 -->
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 20, 30]" :page-size="5" layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
+            </el-pagination>
           </div>
-          <!-- 列表 -->
-          <el-table :data="tableData" height="250" border style="width: 100%">
-            <el-table-column prop="date" label="序号">
-            </el-table-column>
-            <el-table-column prop="phoneType" label="电话类型">
-            </el-table-column>
-            <el-table-column prop="checkTime" label="调查时间">
-            </el-table-column>
-            <el-table-column prop="source" label="来源">
-            </el-table-column>
-            <el-table-column prop="phoneNum" label="电话号码">
-            </el-table-column>
-            <el-table-column prop="answer" label="接听情况">
-            </el-table-column>
-            <el-table-column prop="checkStage" label="调查阶段">
-            </el-table-column>
-            <el-table-column prop="conclusion" label="调查结论">
-            </el-table-column>
-          </el-table>
-          <!-- 分页 -->
-          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 20, 30]" :page-size="5" layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
-          </el-pagination>
         </el-header>
         <!-- 表单部分 -->
         <el-main>
+          <!-- 默认的新增表单 -->
+          <!-- 住址电话 - 表单 -->
+          <AddressForm class="form-his" v-if="addressFormShow"></AddressForm>
+          <!-- 住址电话 - 历史 -->
+          <AddressHis class="form-his" v-if="addressHisShow"></AddressHis>
+          <!-- 单位电话 - 表单 -->
+          <!-- <CompanyForm class="form-his" v-if="companyFormShow"></CompanyForm> -->
+          <!-- 单位电话 - 历史 -->
+          <!-- <CompanyHis class="form-his" v-if="companyHisShow"></CompanyHis> -->
           <!-- 子组件 -->
-          <router-link to="/AddressForm/formTag='testtag'/id='123'/phoneType='01'">  <el-button type="primary">住址电话</el-button></router-link>
-          <router-view></router-view>
-          <!-- 表单详情 -->
-          <!-- <AddressForm formTag="testTag" id="515313" phoneType="01"></AddressForm> -->
+          <!-- <router-link to="/AddressForm/formTag='testtag'/id='123'/phoneType='01'">
+            <el-button type="primary">住址电话</el-button>
+          </router-link> -->
+          <!-- <router-view></router-view> -->
         </el-main>
       </el-container>
     </el-container>
@@ -81,7 +93,29 @@
   </div>
 </template>
 <script>
-// import AddressForm from "@view/PhoneCredit/Form/AddressFrom"
+// 电话征信 - 住址电话 表单
+import AddressForm from './detailComponent/AddressForm'
+// 电话征信 - 住址电话 详情
+import AddressHis from './detailComponent/AddressHis'
+// 电话征信 - 单位电话 表单 CompanyForm
+import CompanyForm from './detailComponent/CompanyForm'
+// 电话征信 - 单位电话  详情 CompanyHis
+import CompanyHis from './detailComponent/CompanyHis'
+// 电话征信 - 家庭联系人 表单
+import FamilyForm from './detailComponent/FamilyForm'
+// 电话征信 - 家庭联系人 详情
+import FamilyHis from './detailComponent/FamilyHis'
+// 电话征信 紧急联系人 表单
+import HurryForm from './detailComponent/HurryForm'
+// 电话征信 紧急联系人 历史
+import HurryHis from './detailComponent/HurryHis'
+// 电话征信 工作证明人 表单
+import WorkForm from './detailComponent/WorkForm'
+// 电话征信 工作证明人 历史 
+import WorkHis from './detailComponent/WorkHis'
+
+
+
 export default {
   data() {
     return {
@@ -220,9 +254,19 @@ export default {
       },
       id: '',
       value: '',
+      // 当前页码
       currentPage: 1,
-      coverShow: false
-    };
+      // 添加界面
+      coverShow: false,
+      // 头部列表
+      hisListShow: false,
+      // 住址
+      addressFormShow: false,
+      addressHisShow: false,
+      // 单位
+      companyFormShow: false,
+      companyHisShow: false
+    }
   },
   methods: {
     handleNodeClick(data) {
@@ -230,13 +274,19 @@ export default {
       console.log(data);
       console.log('id:' + data.id + '\nlabel:' + data.label);
       this.id = data.id;
-    },
-    open() {
-      // 提交 添加的电话数据
-      console.log(this.id);
+      // 点击数据展示历史记录  列表
+      this.hisListShow = true;
+      // 点击 住址电话 显示
+      this.addressFormShow = true;
+      this.addressHisShow = false;
+
+      // 点击 单位电话
+      this.companyFormShow = true;
+      this.companyHisShow = false;
     },
     append(data) {
       // 点击添加方法,用过 key 来判断 添加的哪项.
+      console.log('append');
       console.log(this.id);
       alert(this.id);
       this.coverShow = false;
@@ -251,7 +301,23 @@ export default {
     },
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
+    },
+    rowClick() {
+      console.log('click row')
+      // 点击 住址电话 显示
+      this.addressHisShow = true;
+      this.addressFormShow = false;
+
+      // 点击 单位电话
+      this.companyFormShow = true;
+      this.companyHisShow = false;
     }
+  },
+  components: {
+    AddressForm,
+    AddressHis,
+    CompanyForm,
+    CompanyHis
   }
 }
 
@@ -268,62 +334,41 @@ el-header {
   height: 100%;
 }
 
-
-
-
-
-
-/* element-ui tree icon 箭头*/
-
-.el-tree-node__content>.el-tree-node__expand-icon {
-  /*display: none;*/
+/* 树形  结构 */
+.el-tree{
+  padding-left: 10px;
 }
 
-
-
-
-
+/* element-ui tree icon 箭头*/
+.el-tree-node__content>.el-tree-node__expand-icon {
+  /*display: none;*/
+  position: absolute;
+  left: 150px;
+}
 
 /* 三角 icon */
-
 .el-tree-node__expand-icon {
   font-size: 20px;
 }
 
-
-
-
-
-
 /* label 字体 */
-
 .el-tree-node__label {
   font-size: 20px;
 }
 
-
-
-
-
-
 /* 二级 目录 样式 */
-
 .el-tree-node__content {
   padding-left: 0px !important;
 }
 
-
 /* 添加电话 按钮 */
-.el-aside .el-button{
-  width:80px;
-  margin:20px;
+.el-aside .el-button {
+  width: 80px;
+  margin: 20px;
   margin-left: 60px;
 }
 
-
-
 /* 点击添加出现的 页面 */
-
 .cover-view {
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
@@ -333,13 +378,7 @@ el-header {
   left: 0;
 }
 
-
-
-
-
-
 /* 添加页面内容 */
-
 .cover-content {
   z-index: 99;
   background: #fff;
@@ -355,30 +394,17 @@ el-header {
   padding: 5px;
 }
 
-
-
-
-
-
 /* title */
-
 .cover-content .add-title {
   text-align: left;
 }
 
-
-
-
-
-
 /**/
-
 .add-content li {
   border-bottom: 1px solid #ededed;
   padding: 5px;
   height: 40px;
 }
-
 .add-content li span:first-child {
   width: 80px;
   text-align: center;
@@ -391,13 +417,7 @@ el-header {
   text-indent: 5px;
 }
 
-
-
-
-
-
 /* 确定按钮 */
-
 .cover-content .el-button {
   display: block;
   float: right;
@@ -405,13 +425,7 @@ el-header {
   margin-right: 10px;
 }
 
-
-
-
-
-
 /* 弹窗页面 关闭按钮*/
-
 .el-tag {
   width: 0;
   height: 0;
@@ -426,16 +440,18 @@ el-header {
   right: 0px;
 }
 
-
-
-
-
-
 /* 右侧 头 table*/
-
 .el-header {
   width: 100%;
   height: auto !important;
+  height: 350px !important;
+}
+
+.el-main {
+  height: calc(100% - 300px);
+  padding: 0;
+  padding-bottom: 10px;
+  overflow: hidden;
 }
 
 .el-header .head-title {
@@ -449,37 +465,24 @@ el-header {
   padding-left: 20px;
 }
 
-
-
-
-
-
 /* 表格分页 */
-
 .el-pagination {
   margin-top: 10px;
   width: 100%;
   text-align: center;
 }
 
-
-
-
-
-
 /* 前往 第几页 */
-
 .el-pagination__jump {
   display: none !important;
 }
 
-
-
-
-
-
 /* 共 100条*/
-
 .el-pagination__total {}
 
+/* form-his */
+.form-his {
+  width: 100%;
+  height: 100%;
+}
 </style>

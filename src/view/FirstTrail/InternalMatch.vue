@@ -32,7 +32,8 @@ export default {
                 height="250"\
                 border\
                 style="width: 100%"\
-                @row-click="itemClick"\
+                @row-dblclick="itemDbclick"\
+                @cell-mouse-enter="cellHover"\
                 >\
                     <el-table-column\
                     prop="name"\
@@ -88,6 +89,7 @@ export default {
         return {
           tableData: [
             {
+              id:'1',
               name: "姓名1",
               phoneType: "电话类型1",
               inNumber: "进件编号1",
@@ -98,6 +100,7 @@ export default {
               mark: "备注1"
             },
             {
+              id:'2',
               name: "姓名2",
               phoneType: "电话类型2",
               inNumber: "进件编号2",
@@ -355,17 +358,20 @@ export default {
         };
       },
       methods: {
-        itemClick(row, event, column) {
-          // console.log(row,event,column);
-          console.log(
-            row.name,
-            row.phoneType,
-            row.inNumber,
-            row.custName,
-            row.idNumber,
-            row.busState,
-            row.mark
-          );
+        itemDbclick(row,event){
+          // 行被双击 事件
+          console.log('row dbclick');
+          console.log(row.name);
+        },
+        cellHover(row, column, cell, event){
+          // cell hover 事件
+          console.log(row);
+          console.log(column);
+          console.log(event);
+          console.log(cell.innerText);// 备注
+          console.log(column.label);
+          // this.tableData[]
+
         },
         handleSizeChange(val) {
           console.log("每页 ${val}条", val);
