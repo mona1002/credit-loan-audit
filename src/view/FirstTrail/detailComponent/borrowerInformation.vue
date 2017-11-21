@@ -39,7 +39,7 @@
 				          <td></td>
 				          <td></td>
 				        </tr> -->
-				        <cross-rable class="house_property" v-for="(cro,index) in cross_rable_home" ytablemsg="house_property" v-bind:ynum="cro" :key="index"  @mouseenter.native="enter($event)" @mouseleave.native="leave($event)" @click.native='buttonClick(index)'></cross-rable>
+				        <cross-rable class="house_property" v-for="(cro,index) in cross_rable_home" ytablemsg="house_property" v-bind:ynum="index" :key="index"  @mouseenter.native="enter($event)" @mouseleave.native="leave($event)" @click.native='buttonClick(index)'></cross-rable>
 				      </tbody>
 				    </table>
 				</div>
@@ -353,8 +353,15 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
 		      this.cross_rable_turnover += 1;
 		    }, 
 		    
-			delet_home(){
-				console.log(333);
+			delet_home(){	
+				console.log(this.house_property);
+				var items = this.house_property;
+				for(var i=0,len=items.length;i<len;i++){
+					if(items[i].style.background =='pink'){
+						items[i].parentNode.removeChild(items[i]);
+						this.cross_rable_home -= 1;
+					}
+				};
 			},
 			delet_vehicle(){
 				console.log(333);

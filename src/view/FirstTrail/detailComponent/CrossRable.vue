@@ -2,7 +2,7 @@
   <tr class="my_cross_table">
     <td v-for="(tab,index) in tablejson[ytablemsg]">
         <div class="td_box" v-if="tab.val == 0 ">
-        	{{ynum}}
+        	{{ynum+1}}
         </div>
         <div class="td_box" v-if="tab.val == 1 ">
         	<input type="text"/>
