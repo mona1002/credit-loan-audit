@@ -32,6 +32,9 @@ import cCreditForm from '@/view/FirstTrail/checkComponent/cCreditForm.vue'
 import InternalMatch from '@/view/FirstTrail/InternalMatch'
 // 电话征信
 import PhoneCredit from '@/view/FirstTrail/PhoneCredit'
+// 查询详情页面（部分）
+import ApprovalConclusion from '@/view/FirstTrail/checkComponent/ApprovalConclusion'
+
 
 Vue.use(Router)
 
@@ -101,10 +104,14 @@ const routes = [{
     component: InternalMatch
   },
   {
-    //电话征信
+    //电话征信  
     path: '/PhoneCredit',
     component: PhoneCredit
-  }
+  },
+  {
+    path: '/ApprovalConclusion',
+    component: ApprovalConclusion
+  },
 ];
 
 const router = new Router({

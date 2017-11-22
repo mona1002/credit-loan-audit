@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="HelloWorld">
     <p>有get、post请求demo</p>
     <router-link to="taskInWaitting">初审审批</router-link>
     <router-link to="remark">备注信息</router-link>
@@ -19,6 +19,9 @@
     <router-link to="/login">  <el-button type="primary">登录</el-button></router-link>
   <router-link to="/InternalMatch">  <el-button type="primary">内部匹配</el-button></router-link>
   <router-link to="/PhoneCredit">  <el-button type="primary">电话征信</el-button></router-link>
+  <router-link to="/ApprovalConclusion">  <el-button type="ApprovalConclusion">电话征信</el-button></router-link>
+  
+  
   </div>
 </template>
 
