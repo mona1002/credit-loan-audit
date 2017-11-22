@@ -2,8 +2,9 @@
   <div id="app">
 
        <myHead></myHead>
+       <img src="../static/img/20171122102421.png" width="100%">
 <!-- <el-row class="header"></el-row> -->
-    <router-view id="Abody"></router-view>
+    <router-view id="Abody" ref="ddd"></router-view>
     <div v-show="false" > </div>
   </div>
 
@@ -12,6 +13,10 @@
 <script>
 import myHead from "./view/header"
   export default {
+    mounted(){
+      console.log(this.$refs.ddd)
+
+    },
 components:{
   myHead
 }

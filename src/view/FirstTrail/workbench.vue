@@ -127,7 +127,9 @@
         
 
         this.currentRow = val;
-        this.$router.push({path:'/examine',query:'123'})
+        this.$router.push({path:'/taskInWaitting'})
+        
+        // this.$router.push({path:'/taskInWaitting',query:'123'})
         //  console.log(111, this.$route.query.picName)   接参数
       }
 

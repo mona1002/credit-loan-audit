@@ -9,8 +9,8 @@
    <router-link to="/workbench">  <el-button type="primary">workbench</el-button></router-link>
   <router-link to="/SplitScreen">  <el-button type="primary">SplitScreen</el-button></router-link>
   <router-link to="/AudioVisual">  <el-button type="primary">AudioVisual</el-button></router-link>
-  <!-- <router-link to="/CreditForm">  <el-button type="primary">CreditForm</el-button></router-link> -->
-  <!-- <router-link to="/cCreditForm">  <el-button type="primary">CreditFormCheck</el-button></router-link> -->
+  <router-link to="/CreditForm">  <el-button type="primary">CreditForm</el-button></router-link>
+  <router-link to="/cCreditForm">  <el-button type="primary">CreditFormCheck</el-button></router-link>
   
   <!-- <router-link to="/AudioVisual">  <el-button type="primary">AudioVisual</el-button></router-link> -->
   
