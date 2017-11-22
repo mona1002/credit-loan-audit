@@ -424,14 +424,13 @@
 
 
 // 信审表
-      //  this.post("/creauditInfo/queryCreauditInfoObj", {
-      //   id:"bb30607c-b5aa-4915-9474-460e099a33e8",
-      // }).then(res => {
-      //   console.log(res);
-      // }).catch(err=>{
-      //         reject(err)
-      //       })
-      // ;
+       this.post("/creauditInfo/queryCreauditInfoObj", {
+        id:"bb30607c-b5aa-4915-9474-460e099a33e8",
+      }).then(res => {
+        console.log(res);
+      }).catch(err=>{
+              reject(err)
+            }) ;
       // 登录
              this.post("/smUser/login", {
         userCode:"djjijd",

@@ -24,10 +24,8 @@ import AudioVisual from '@/view/FirstTrail/detailComponent/AudioVisual'
 import CreditForm from '@/view/FirstTrail/detailComponent/CreditForm'
 // 登录页
 import login from '@/view/login/login'
-// 住址电话
-import AddressForm from '@/view/FirstTrail/detailComponent/AddressForm'
-// 查看页面
-import cCreditForm from '@/view/FirstTrail/checkComponent/cCreditForm.vue'
+
+import cCreditForm from '@/view/FirstTrail/checkComponent/cCreditForm'
 // 内部匹配
 import InternalMatch from '@/view/FirstTrail/InternalMatch'
 // 电话征信
@@ -35,6 +33,8 @@ import PhoneCredit from '@/view/FirstTrail/PhoneCredit'
 // 查询详情页面（部分）
 import ApprovalConclusion from '@/view/FirstTrail/checkComponent/ApprovalConclusion'
 
+// 信审审批
+import CreditApproval from '@/view/FirstTrail/CreditApproval'
 
 Vue.use(Router)
 
@@ -108,10 +108,17 @@ const routes = [{
     path: '/PhoneCredit',
     component: PhoneCredit
   },
+  // 
   {
     path: '/ApprovalConclusion',
     component: ApprovalConclusion
   },
+{
+    // 信审审批
+    path: '/CreditApproval',
+    component: CreditApproval
+  }
+
 ];
 
 const router = new Router({

@@ -19,15 +19,15 @@
           </div>
           <div class="form-class">
             <div class="user-class">用户名</div>
-            <span class="user-icon"></span>
-            <el-input prefix-icon="el-icon-user" class="user-input" v-model="userName" placeholder="请输入内容">
+            <!-- <span class="user-icon" model="userCode"></span> -->
+            <el-input prefix-icon="el-icon-user" class="user-input" v-model="userCode" placeholder="请输入内容">
               <!-- <i slot="prefix" class="el-input__icon el-icon-date"></i> -->
             </el-input>
             <div class="password-class">密码</div>
             <span class="password-icon"></span>
-            <el-input type="password" prefix-icon="el-icon-password" class="password-input" v-model="password" placeholder="请输入内容">
+            <el-input type="password" prefix-icon="el-icon-password" class="password-input" v-model="loginPassword" placeholder="请输入内容">
             </el-input>
-            <el-button class="submit-button" type="primary">登 录</el-button>
+            <el-button class="submit-button" type="primary" @click="loginFn()">登 录</el-button>
           </div>
         </div>
       </div>
@@ -41,6 +41,20 @@ export default {
       userName: "",
       password: ""
     };
+  },
+  methods:{
+    loginFn(){
+      console.log('login ')
+      
+      this.post("/smUser/login", {
+        userCode: "02103C3003",
+        loginPassword: "111111"
+      }).then(res => {
+        console.log(res);
+      });
+
+      // /creTelInfo/queryTels
+    }
   }
 };
 

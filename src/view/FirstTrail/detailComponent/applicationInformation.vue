@@ -750,7 +750,7 @@
 				          <th>月供[元]</th>
 				          <th>贷款余额[月]</th>
 				          <th>车牌号码</th>
-				          <th>车辆易购保险</th>
+				          <th>车辆已购保险</th>
 				          <th>购买时间</th>
 				        </tr>
 				      </thead>
@@ -951,9 +951,104 @@
 		</el-collapse>
 		<div class="button">
 			<el-button type="primary" @click="maintenanceLog">维护日志</el-button>
-	    	<el-button type="primary" @click="sure">确认</el-button>
-	    	
+	    	<el-button type="primary" @click="sure">确认</el-button>	
 	    </div>
+	    <!-- 弹层 -->
+		<div class="layer" v-show="layerShow">
+			<div class="maintenanceLog">
+				<p class="logP"><span>维护日志</span><i class="el-icon-close" @click="close"></i></p>
+				<div class="layerBox">
+					<p>
+						<i class="el-icon-refresh"></i>
+						<span @click="renovate">刷新</span>
+					</p>
+					<div class="layerTable">
+						<el-table
+						    :data="tableData"
+						    style="width: 100%"
+						    :default-sort = "{prop: 'date', order: 'descending'}">
+						    <el-table-column
+						      prop="number"
+						      label="修改个数">
+						    </el-table-column>
+						    <el-table-column
+						      prop="date"
+						      label="操作时间"
+						      width="180"
+						      sortable>
+						    </el-table-column>
+						    <el-table-column
+						      prop="address"
+						      label="操作人员"
+						      :formatter="formatter">
+						    </el-table-column>
+						    <el-table-column  
+						      label="操作">
+						      <template slot-scope="scope">
+						      	<i style="display:inline-block;width:20px;height:20px;background-color:red;" @click='goDetail(scope.$index)'></i>
+						      </template>				      
+						    </el-table-column>
+						</el-table>
+						  <el-pagination
+						      @size-change="handleSizeChange"
+						      @current-change="handleCurrentChange"
+						      :current-page="currentPage4"
+						      :page-sizes="[10, 20, 30, 40, 50]"
+						      :page-size="5"
+						      layout="total, sizes, prev, pager, next, jumper"
+						      :total="50">
+						  </el-pagination>
+						  <div style="width:100%;height:40px;">
+						  	<el-button type="primary" @click="layerSure">确定</el-button>
+						  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 详情弹层 -->
+		<div class="detialLayer" v-show="detialLayerShow">
+			<div class="detialLog">
+				<p class="logP"><span>浏览日志明细信息</span><i class="el-icon-close" @click="detialClose"></i></p>
+				<div class="detialLayerBox">
+					<div class="detialLayerTable">
+						<el-table :data="tableData2" border style="width: 100%" 
+						:default-sort = "{prop: 'date', order: 'descending'}">
+						    <el-table-column
+						      type="index"
+						      :index='1'
+						      >
+						    </el-table-column>
+						    <el-table-column
+						      prop="name"
+						      label="字段名"
+						      >
+						    </el-table-column>
+						    <el-table-column
+						      prop="before"
+						      label="变更前">
+						    </el-table-column>
+						    <el-table-column
+						      prop="after"
+						      label="变更后"
+						      sortable>
+						    </el-table-column>
+					    </el-table>
+						  <el-pagination
+						      @size-change="handleSizeChange"
+						      @current-change="handleCurrentChange"
+						      :current-page="currentPage4"
+						      :page-sizes="[10, 20, 30, 40, 50]"
+						      :page-size="5"
+						      layout="total, sizes, prev, pager, next, jumper"
+						      :total="50">
+						  </el-pagination>
+						  <div style="width:100%;height:40px;">
+						  	<el-button type="primary" @click="detialLayerSure">确定</el-button>
+						  </div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 <script type="text/javascript">
@@ -1008,11 +1103,100 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
 				insurance:'',
 				insuranceType:'',
 				privateOwner:'',
+				layerShow:false,
+				detialLayerShow:false,
+				currentPage4: 1,
 				pickerOptions1: {
 		          disabledDate(time) {
 		            return time.getTime() > Date.now();
 		          }
 		      	},
+		      	tableData: [{
+		          date: '2016-05-02 13:42:13',
+		          number: '王小虎',
+		          address: '江路 1518 弄',
+		          doit:'do'
+		        }, {
+		          date: '2016-05-04 13:42:13',
+		          number: '王小虎',
+		          address: '江路 1517 弄',
+		          doit:'do'
+		        }, {
+		          date: '2016-05-03 13:42:13',
+		          number: '王小虎',
+		          address: '江路 1519 弄',
+		          doit:'do'
+		        }, 
+		        {
+		          date: '2016-05-03 13:42:13',
+		          number: '王小虎',
+		          address: '江路 1519 弄',
+		          doit:'do'
+		        },
+		        {
+		          date: '2016-05-03 13:42:13',
+		          number: '王小虎',
+		          address: '江路 1519 弄',
+		          doit:'do'
+		        },
+		        {
+		          date: '2016-05-03 13:42:13',
+		          number: '王小虎',
+		          address: '江路 1519 弄',
+		          doit:'do'
+		        },
+		        {
+		          date: '2016-05-03 13:42:13',
+		          number: '王小虎',
+		          address: '江路 1519 弄',
+		          doit:'do'
+		        },
+		        {
+		          date: '2016-05-03 13:42:14',
+		          number: '王小虎',
+		          address: '江路 1516 弄',
+		          doit:'do'
+		        }],
+		        tableData2: [{
+		          name: '2016-05-02 13:42:13',
+		          after: '王小虎',
+		          before: '江路 1518 弄'
+		        }, 
+		        {
+		          name: '2016-05-02 13:42:13',
+		          after: '王小虎',
+		          before: '江路 1518 弄'
+		        }, 
+		        {
+		          name: '2016-05-02 13:42:13',
+		          after: '王小虎',
+		          before: '江路 1518 弄'
+		        }, 
+		        {
+		          name: '2016-05-02 13:42:13',
+		          after: '王小虎',
+		          before: '江路 1518 弄'
+		        },
+		        {
+		          name: '2016-05-02 13:42:13',
+		          after: '王小虎',
+		          before: '江路 1518 弄'
+		        },
+		        {
+		          name: '2016-05-02 13:42:13',
+		          after: '王小虎',
+		          before: '江路 1518 弄'
+		        },
+		        {
+		          name: '2016-05-02 13:42:13',
+		          after: '王小虎',
+		          before: '江路 1518 弄'
+		        },
+		        {
+		          name: '2016-05-02 13:42:13',
+		          after: '王小虎',
+		          before: '江路 1518 弄'
+		        }],
 				incomingChannel: [{
 		          value: '1',
 		          label: '线下'
@@ -1503,9 +1687,6 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
 			handleChange(){
 
 	    	},
-	    	maintenanceLog(){
-
-	    	},
 	    	sure(){
 	    		if(this.value2=="是" && this.inputname==''){
 	    			alert('不能为空');
@@ -1585,12 +1766,58 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
 			delet_vehicle(){
 				console.log(333);
 			},
+			/*维护日志*/
+	    	maintenanceLog(){
+	    		this.layerShow=true;
+				document.getElementsByTagName('body')[0].style.overflow='hidden';
+	    	},
 			/*联系人信息 添加*/
 	    	add_people: function(str) {
 		      this.cross_rable_people += 1;
 		    },
 		    delet_people(){
 				console.log(333);
+			},
+			/*维护日志 刷新按钮*/
+			renovate(){
+
+			},
+			/*维护日志 表格方法*/
+			formatter(row, column) {
+		        return row.address;
+		    },
+		    /*维护日志 关闭按钮*/
+		    close(){
+				this.layerShow=false;
+				document.getElementsByTagName('body')[0].style.overflow='';
+			},
+			/*弹层确定按钮*/
+	    	layerSure(){
+	    		this.layerShow=false;
+				document.getElementsByTagName('body')[0].style.overflow='';
+	    	},
+	    	/*弹层列表页点击进入另一个弹层*/
+	    	goDetail(row) {
+		      console.log(row);
+		      this.detialLayerShow=true;
+				document.getElementsByTagName('body')[0].style.overflow='hidden';
+		      //this.$router.push({path:'/examine',row:row})
+		    },
+			/*弹层表格*/
+			 handleSizeChange(val) {
+		        console.log(`每页 ${val} 条`);
+		      },
+		      handleCurrentChange(val) {
+		        console.log(`当前页: ${val}`);
+		      },
+		      /*详情弹层关闭按钮*/
+		      detialClose(){	
+		      	this.detialLayerShow=false;
+				/*document.getElementsByTagName('body')[0].style.overflow='';*/
+		      },
+		      detialLayerSure(){
+		      	this.detialLayerShow=false;
+				/*document.getElementsByTagName('body')[0].style.overflow='';*/
 			},
 		},
 		components: {
@@ -1707,5 +1934,89 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
         border: 1px solid #d8dce5;
         width: 100px;  
   }
-  
+  /* 弹层 */
+.layer,.detialLayer{
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,.4);
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 1000;
+}
+.maintenanceLog{
+	width: 848px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -424px;
+	margin-top: -200px;
+	border: 1px solid #eee;
+	background-color: #fff;
+	z-index: 10000;
+}
+p.logP{
+	font-size: 14px;
+	width: 100%;
+	height: 40px;
+	padding-left: 10px;
+	line-height: 40px;
+}
+p.logP span{
+	float: left;
+}
+p.logP i{
+	float: right;
+	font-size: 20px;
+	line-height: 40px;
+	color: #20a0ff;
+	padding-right: 10px;
+}
+.maintenanceLog .layerBox,.detialLayerBox{
+	clear: both;
+	width: 98%;
+	margin: 0 auto;
+	background-color: #eee;
+	border: 1px solid #ccc;
+	margin-bottom: 5px;
+}
+.layerBox p{
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	font-size: 14px;
+	border-bottom: 1px solid #ccc;
+}
+.layerBox p i{
+	padding-left: 10px;
+	font-size: 18px;
+	color: #20a0ff;
+}
+.maintenanceLog .layerBox table{
+	background-color: #fff;
+}  
+.maintenanceLog table{
+	width: 100%;
+	height: 400px;
+	overflow-y: scroll;
+}
+.layerBox button,.detialLayerBox button{
+	float: right;
+	margin:5px 5px 5px 0;
+	height: 30px;
+	line-height: 30px;
+	padding:0 20px;
+}
+/* 详情弹层 */
+.detialLog{
+	width: 688px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -344px;
+	margin-top: -233px;
+	border: 1px solid #eee;
+	background-color: #fff;
+	z-index: 10000;
+}
 </style>
