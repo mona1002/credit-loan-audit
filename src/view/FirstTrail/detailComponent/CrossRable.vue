@@ -2,7 +2,7 @@
   <tr class="my_cross_table">
     <td v-for="(tab,index) in tablejson[ytablemsg]">
         <div class="td_box" v-if="tab.val == 0 ">
-        	{{ynum+1}}
+        	{{ynum}}
         </div>
         <div class="td_box" v-if="tab.val == 1 ">
         	<input type="text"/>
@@ -222,13 +222,8 @@ export default {
 
   },
   methods:{
-        // enter: function(e){
-        //     e.target.style.background = '#e6ebf5';
-        // },
-        // leave: function(e){
-        //     e.target.style.background = '';
-        // },
-  }
+
+  },
 
 }
 </script>

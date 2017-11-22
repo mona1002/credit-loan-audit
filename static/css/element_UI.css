@@ -245,3 +245,15 @@ td {
 .applicationInformation .el-input.is-disabled .el-input__inner {
   background-color: #fff;
 }
+.applicationInformation .layer .el-table__body-wrapper{
+  height: 206px;
+  overflow-x: hidden;
+}
+.applicationInformation .detialLog .el-table__body-wrapper{
+  height: 306px;
+  overflow-x: hidden;
+}
+.applicationInformation .el-pagination{
+  text-align: center;
+  margin-top: 10px;
+}

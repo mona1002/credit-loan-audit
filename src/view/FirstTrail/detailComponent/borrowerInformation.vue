@@ -39,7 +39,7 @@
 				          <td></td>
 				          <td></td>
 				        </tr> -->
-				        <cross-rable class="house_property" v-for="(cro,index) in cross_rable_home" ytablemsg="house_property" v-bind:ynum="index" :key="index"  @mouseenter.native="enter($event)" @mouseleave.native="leave($event)" @click.native='buttonClick(index)'></cross-rable>
+				        <cross-rable class="house_property" v-for="(cro,index) in cross_rable_home" ytablemsg="house_property" v-bind:ynum="cro" :key="index"  @mouseenter.native="enter($event)" @mouseleave.native="leave($event)" @click.native='buttonClick(index)'></cross-rable>
 				      </tbody>
 				    </table>
 				</div>
@@ -63,7 +63,7 @@
 				          <th>月供[元]</th>
 				          <th>贷款余额[月]</th>
 				          <th>车牌号码</th>
-				          <th>车辆易购保险</th>
+				          <th>车辆已购保险</th>
 				          <th>购买时间</th>
 				        </tr>
 				      </thead>
@@ -358,8 +358,11 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
 				var items = this.house_property;
 				for(var i=0,len=items.length;i<len;i++){
 					if(items[i].style.background =='pink'){
-						items[i].parentNode.removeChild(items[i]);
+						/*items[i].parentNode.removeChild(items[i]);
+						*/
+						items[i].parentNode.deleteRow(i+1);
 						this.cross_rable_home -= 1;
+						console.log(i+1);
 					}
 				};
 			},
