@@ -220,9 +220,9 @@
     },
 
     mounted() {
-      this.get('../../../../static/json/img.json').then(response => { // axios 请求
-        this.picData = response.data.items;
-      });
+      // this.get('../../../../static/json/img.json').then(response => { // axios 请求
+      //   this.picData = response.data.items;
+      // });
     }
   }
 
