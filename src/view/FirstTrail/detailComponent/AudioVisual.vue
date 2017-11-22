@@ -30,8 +30,8 @@
   </el-collapse-item>
 </el-collapse>
         <!-- 按钮 : 缩略图 对比  -->
-        <el-button type="primary" @click="SmallpicAlert">缩略图</el-button>
-        <el-button type="primary">对比</el-button>
+        <el-button type="primary" @click="SmallpicAlert" style="position:absolute;top:700px">缩略图</el-button>
+        <el-button type="primary"  style="position:absolute;top:700px;left:90px;padding:0 30px;">对比</el-button>
       </div>
       <!-- 右侧 图片 -->
       <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
@@ -222,7 +222,6 @@
     mounted() {
       this.get('../../../../static/json/img.json').then(response => { // axios 请求
         this.picData = response.data.items;
-
       });
     }
   }
@@ -239,6 +238,10 @@
   }
   /* 左侧折叠面板 */
   /* 折叠面板上面的四个 th 表头 */
+  .list_title{
+    line-height: 27px;
+    font-weight: bold;
+  }
   .list_title span,.list_title_div p span{
     display: inline-block;
  border:1px solid #e6ebf5;
@@ -304,18 +307,21 @@
 
   .AudioVisual_wrap {
     position: relative;
+    /* height: 99vh; */
+    background: red;
   }
 
   .AudioVisual_List,
   .AudioVisual_Img {
     position: absolute;
-    height: 100vh;
+    height: 78.7vh;
     overflow: auto;
   }
 
   .AudioVisual_List {
-    width: 300px;
-    background: pink;
+    width: 200px;
+    /* background: pink; */
+    border: 1px solid black;
     left: 0;
     z-index: 4;
   }
@@ -340,9 +346,9 @@
     width:30%;
   }
   .AudioVisual_Img {
-    width: calc( 100% - 300px);
+    width: calc( 100% - 200px);
     left: 200px;
-    background: red;
+    /* background: red; */
   }
 
   .Small_pic_div {

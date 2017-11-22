@@ -11,101 +11,109 @@
       <span class="PerInf"> 是否行政区域进件 : 是</span>
     </p>
     <div class="SplitScreen_wrap">
-    <!-- 左侧分屏部分 -->
-    <div class="left" ref="rLeft">
-      <button @mouseenter="showList" v-show="flexible" class="stretch">展开</button>
-      <button @mouseleave="hid" v-show="!flexible" class="stretch">隐藏</button>
-      <br>
-      <!-- 左侧菜单栏 -->
-      <div ref="Left_title" class="Left_ul" @mouseenter="showList" @mouseleave="hid">
-        <!-- 左侧 收缩 title列表 -->
-        <ul>
-          <!-- tab 1 -->
-          <li ref="tabOne" v-for="(val,index) in items1" :key="index" :class="{tabActColor1:tab1Index==index}" @mousedown="flag1[index] &&  tab1($event,index,val)">
-            {{val}}</li>
-        </ul>
-      </div>
-      <!-- 左侧详情 -->
-      <!-- <div>
+      <!-- 左侧分屏部分 -->
+      <div class="left" ref="rLeft">
+        <button @mouseenter="showList" v-show="flexible" class="stretch" style="padding:5px 10px">展开</button>
+        <button @mouseleave="hid" v-show="!flexible" class="stretch"  style="padding:5px 10px">隐藏</button>
+        <br>
+        <!-- 左侧菜单栏 -->
+        <div ref="Left_title" class="Left_ul" @mouseenter="showList" @mouseleave="hid">
+          <!-- 左侧 收缩 title列表 ====================弹出列表============ -->
+          <ul>
+            <!-- tab 1 -->
+            <li ref="tabOne" v-for="(val,index) in items1" :key="index" :class="{tabActColor1:tab1Index==index}" @mousedown="flag1[index] &&  tab1($event,index,val)">
+              {{val}}</li>
+          </ul>
+        </div>
+        <!-- 左侧详情 -->
+        <!-- <div>
 
       </div> -->
-      <div ref="Left_detail" class="Left_detail_div">
-        <p class="Left_right_Title"> {{this.title}} </p>
-        <div class="Left_right_BigImg ">
+        <div ref="Left_detail" class="Left_detail_div">
+          <p class="Left_right_Title"> {{this.title}} </p>
+          <div class="Left_right_BigImg ">
             <AudioVisual v-if=" this.tabContent1==0"></AudioVisual>
-          <workbench v-if=" this.tabContent1==1"></workbench>
-           <div v-if=" this.tabContent1==3">asdfa</div>
-          <div v-if=" this.tabContent1==4">asdf adf</div>
-          <!-- <div></div> -->
-          <!-- <AudioVisual v-if=" this.tab1Index==0"></AudioVisual>
+            <!-- <workbench v-if=" this.tabContent1==1"></workbench> -->
+            <!-- <div v-if=" this.tabContent1==3">asdfa</div> -->
+            <!-- <div v-if=" this.tabContent1==4">asdf adf</div> -->
+            <!-- <div v-if=" this.tabContent1==5">asdf adf</div> -->
+            
+            <cCreditForm v-if=" this.tabContent1==6"></cCreditForm>
+            <!-- <div v-if=" this.tabContent1==7">asdf adf</div> -->
+            <!-- <div v-if=" this.tabContent1==8">asdf adf</div> -->
+            
+            <!-- <div></div> -->
+            <!-- <AudioVisual v-if=" this.tab1Index==0"></AudioVisual>
         <workbench v-if=" this.tab1Index==1"></workbench> -->
+          </div>
         </div>
-      </div>
 
-    </div>
-    <!-- 右侧分屏部分 -->
-    <div class="right" ref="rRight">
-      <button @click="FullScreen" v-show="FullScreenlShow" class="stretch">全屏显示</button>
-      <button @click="DblScreen" v-show="!FullScreenlShow" class="stretch">返回</button>
-      <br>
-      <!-- tab2 切换 -->
-      <!-- <el-tabs @tab-click="flag2 &&handleClick" type="border-card">
+      </div>
+      <!-- 右侧分屏部分 -->
+      <div class="right" ref="rRight">
+        <button @click="FullScreen" v-show="FullScreenlShow" class="stretch">全屏显示</button>
+        <button @click="DblScreen" v-show="!FullScreenlShow" class="stretch">返回</button>
+        <br>
+        <!-- tab2 切换 -->
+        <!-- <el-tabs @tab-click="flag2 &&handleClick" type="border-card">
         <el-tab-pane :label="val" v-for="(val,index) in items2" :key="index">
         </el-tab-pane>
         <AudioVisual v-if=" this.tabContent2==0"></AudioVisual>
         <workbench v-if=" this.tabContent2==1"></workbench>
       </el-tabs> -->
-      <!-- 右屏tab切换 -->
-      <div class="Right_tab_title_div">
-        <!-- tab 1 -->
-        <!-- <ul>    
+        <!-- 右屏tab切换 -->
+        <div class="Right_tab_title_div">
+          <!-- tab 1 -->
+          <!-- <ul>    
           <li class="Right_tab_title" ref="tabTwo" v-for="(val,index) in items2" :key="index" :class="{tabActColor2:tab1Index==index}" @mousedown="flag2[index] &&  tab2($event,index,val)">
           {{val}}</li>
         </ul> -->
-        <p>
-          <span class="Right_tab_title" ref="tabTwo" v-for="(val,index) in items2" :key="index" :class="{tabActColor2:tab2Index==index}"
-            @mousedown="flag2[index] &&  tab2($event,index,val)">
-            {{val}}</span>
-        </p>
+          <p>
+            <span class="Right_tab_title" ref="tabTwo" v-for="(val,index) in items2" :key="index" :class="{tabActColor2:tab2Index==index}"
+              @mousedown="flag2[index] &&  tab2($event,index,val)">
+              {{val}}</span>
+          </p>
 
-        <div class="tab2_Content">
-          <AudioVisual v-if=" this.tabContent2==0"></AudioVisual>
-          <remark v-if=" this.tabContent2==1"></remark>
-          <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
-          <remark v-if=" this.tabContent2==3"></remark>
-          <borrowerInformation  v-if=" this.tabContent2==4"></borrowerInformation>
-          <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
-          <CreditForm v-if=" this.tabContent2==6"></CreditForm>
-          <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
-          <CreditForm v-if=" this.tabContent2==8"></CreditForm><!-- 反欺诈结论 空白 -->
-          <CreditForm v-if=" this.tabContent2==9"></CreditForm><!-- 信审审批 空白 -->
-          
+          <div class="tab2_Content">
+            <AudioVisual v-if=" this.tabContent2==0"></AudioVisual>
+            <remark v-if=" this.tabContent2==1"></remark>
+            <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
+            <applicationInformation v-if=" this.tabContent2==3"></applicationInformation>
+            <borrowerInformation v-if=" this.tabContent2==4"></borrowerInformation>
+            <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
+            <CreditForm v-if=" this.tabContent2==6"></CreditForm>
+            <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
+            <!-- 反欺诈结论 空白 -->
+            <!-- <CreditForm v-if=" this.tabContent2==8"></CreditForm> -->
+            <!-- 信审审批 空白 -->
+            <!-- <CreditForm v-show=" this.tabContent2==9"></CreditForm> -->
+
+          </div>
         </div>
+
+
       </div>
-
-
-    </div>
     </div>
 
   </div>
 
 </template>
 <script>
-  // import right from "./elementUI-右边栏";
-
+// 编辑
   import AudioVisual from "./detailComponent/AudioVisual";
   import remark from "./detailComponent/remark";
-  // import InternalMatch from "./InternalMatch";
   import InternalMatch from "./InternalMatch";
-  
+  import applicationInformation from "./detailComponent/applicationInformation";
   import borrowerInformation from "./detailComponent/borrowerInformation";
-  // import PhoneCredit from "./detailComponent/PhoneCredit";
   import PhoneCredit from "./PhoneCredit";
-import CreditForm from "./detailComponent/CreditForm";
-  import creditInvestigation from "./detailComponent/creditInvestigation";
+  import CreditForm from "./detailComponent/CreditForm";
+  import creditInvestigation from "./detailComponent/creditInvestigation";//实地征信
   // import s from "./detailComponent/remark";
-// 反欺诈结论 写此处
-// 信审审批写此处
+  // 反欺诈结论 写此处
+  // 信审审批写此处
+  // 查询
+  import cCreditForm from "./checkComponent/cCreditForm";
+  
   export default {
     data() {
       return {
@@ -121,7 +129,7 @@ import CreditForm from "./detailComponent/CreditForm";
         items1: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "信审审批", "流程轨迹"],
         items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "信审审批"],
         // rightList: false, //右键菜单 默认不显示    ---------tab1 用
-        tab1Index: 0,  // tab1 激活样式的时用的下表
+        tab1Index: 0, // tab1 激活样式的时用的下表
         tab2Index: 0, // 不是for循环，获取不到index时候的tab切换（ data部分 ）------tab 2 用
         // 不是for循环，获取不到index时候的tab切换（ data部分 ）------tab 2 用
         flag1: [true, true, true, true, true, true, true, true, true, true, true], //  ---------------------------------------------------- tab1用
@@ -210,14 +218,14 @@ import CreditForm from "./detailComponent/CreditForm";
         this.tabActiveInd1 = ind; //将当前点击显示的下标，赋值给需要设置激活样式 li 的下标-----作用：tab2点击的时候，可以赋值tab1激活时候的样式
         for (var i = 0; i < this.$refs.tabTwo.length; i++) {
           this.$refs.tabTwo[i].style.color = "black";
-          this.$refs.tabTwo[i].style.background = "green";
+          this.$refs.tabTwo[i].style.background = "silver";
           this.flag2[i] = true;
         }
         this.$refs.tabTwo[this.tabActiveInd2].style.color = "red"; // tab2 之前激活样式赋值回去 
         this.$refs.tabTwo[this.tabActiveInd2].style.background = "yellowgreen"; // tab2 之前激活样式赋值回去  
         if (ind != 0) { // 点击影音资料的时候，两边不置灰，影音资料部分可点击
           console.log("wo bu deng yu 00000000000000-------tab1")
-          this.$refs.tabTwo[ind].style.color = "silver"; // tab2 对应css 样式标灰
+          this.$refs.tabTwo[ind].style.color = "#eee"; // tab2 对应css 样式标灰
           this.flag2[ind] = false; // tab2 对应click 事件不可用
         }
         // 鼠标点击时  判断点击按钮  ==0 的时候 触发click事件  ， ==2的时候   触发右击事件
@@ -241,15 +249,20 @@ import CreditForm from "./detailComponent/CreditForm";
     },
     mounted() {
       this.title = "影音资料";
+      // console.log(this.$route.query.row.id) //接参数
     },
     components: {
+      // 编辑
       AudioVisual,
       remark,
       InternalMatch,
+      applicationInformation,
       borrowerInformation,
       PhoneCredit,
       CreditForm,
       creditInvestigation,
+      // 查询
+      cCreditForm,
     }
   }
 
@@ -261,10 +274,12 @@ import CreditForm from "./detailComponent/CreditForm";
     color: blue;
     background: yellow;
   }
- .tabActColor2 {
+
+  .tabActColor2 {
     color: red;
     background: yellowgreen;
   }
+
   .active {
     color: blue;
     background: silver;
@@ -274,6 +289,8 @@ import CreditForm from "./detailComponent/CreditForm";
   .PerDtl {
     color: blue;
     background: silver;
+    height: 30px;
+    line-height: 30px;
   }
 
   .PerInf {
@@ -287,25 +304,21 @@ import CreditForm from "./detailComponent/CreditForm";
     top: 2px;
   }
   /* 左右分屏 */
-.SplitScreen_wrap{
+
+  .SplitScreen_wrap {
     position: relative;
     min-width: 1366px;
-}
-  #div1 {
-    width: 200px;
-    height: 200px;
-    background: red;
-    position: absolute;
   }
 
   .left,
   .right {
     width: 50%;
-    height:100%;
+    /* height: 100%; */
+    height:844px;
     /* overflow: auto; */
-    overflow: scroll;    
-    background: pink;
-    height: 100vh;
+    overflow: scroll;
+    /* background: pink; */
+    /* height: 100vh; */
     border: 1px solid black;
     /* float: left; */
     position: absolute;
@@ -331,18 +344,19 @@ import CreditForm from "./detailComponent/CreditForm";
     background: white;
     position: absolute;
     /* left:-200px;     */
-    left: 0;
+    left: -100px;
     z-index: 21;
     /* display:none; */
   }
-  /* .Left_detail_div{
-    float:left;
-    background:red;
-    height:400px;
-  } */
+  .Left_detail_div{
+    /* float:left; */
+    
+    /* background:red; */
+    /* height:400px; */
+  }
 
   .Left_right_BigImg {
-    background: red;
+    /* background: red; */
     height: 100px;
   }
 
@@ -358,7 +372,8 @@ import CreditForm from "./detailComponent/CreditForm";
   .Right_tab_title_div {
     height: 40px;
     line-height: 40px;
-    background: green;
+    background: silver;
+
     /* 不换行 */
     white-space: nowrap;
   }
