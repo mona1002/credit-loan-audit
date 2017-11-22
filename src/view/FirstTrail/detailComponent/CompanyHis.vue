@@ -59,7 +59,7 @@
       <el-form-item label="核对工作证明人2:" class="item-column2">
         <el-label v-model="form.name">531531</el-label>
       </el-form-item>
-      <el-form-item label="活动形式">
+      <el-form-item label="调查结论">
         <el-label v-model="form.name">531531</el-label>
       </el-form-item>
       

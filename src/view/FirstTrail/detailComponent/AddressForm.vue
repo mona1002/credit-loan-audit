@@ -14,9 +14,11 @@
         </el-select>
       </el-form-item>
       <el-form-item label="电话号码:" class="item-column3">
-        <!-- <el-input v-model="form.name" :disabled="true">1310358294</el-input> -->
-        1310358294
+        <el-input v-model="form.name"></el-input>
       </el-form-item>
+      <!-- <el-form-item label="电话号码" class="item-column3">
+        <el-form-item label="13103582965"></el-form-item>
+      </el-form-item> -->
       <el-form-item label="来源:" class="item-column3">
         <el-select v-model="form.region" placeholder="请选择来源">
           <el-option label="申请表" value="shanghai"></el-option>
@@ -44,73 +46,103 @@
       <div class="address-title">
         录入地址电话调查信息
       </div>
-      <el-form-item label="拨打电话:">
+      <el-form-item label="第三方调查结果:">
+        <el-input type="textarea" v-model="form.region"></el-input>
+      </el-form-item>
+      <el-form-item label="三方查询是否异常:">
         <el-select v-model="form.region" placeholder="请选择调查情况">
           <el-option label="区域一" value="shanghai"></el-option>
           <el-option label="区域二" value="beijing"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="接电话人身份:">
+      <el-form-item label="是否与家庭联系人为同一接听人:">
         <el-select v-model="form.region" placeholder="请选择调查情况">
           <el-option label="区域一" value="shanghai"></el-option>
           <el-option label="区域二" value="beijing"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="核对单位及工作信息:">
+      <el-form-item label="与借款人关系:">
         <el-select v-model="form.region" placeholder="请选择调查情况">
           <el-option label="区域一" value="shanghai"></el-option>
           <el-option label="区域二" value="beijing"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="核对工作时间:">
+      <el-form-item label="核对工作情况:">
         <el-select v-model="form.region" placeholder="请选择调查情况">
           <el-option label="区域一" value="shanghai"></el-option>
           <el-option label="区域二" value="beijing"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="核对收入:">
+      <el-form-item label="核对婚姻情况:">
         <el-select v-model="form.region" placeholder="请选择调查情况">
           <el-option label="区域一" value="shanghai"></el-option>
           <el-option label="区域二" value="beijing"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="用工方式:">
+      <el-form-item label="核对子女情况:">
         <el-select v-model="form.region" placeholder="请选择调查情况">
           <el-option label="区域一" value="shanghai"></el-option>
           <el-option label="区域二" value="beijing"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="工作发放情况:">
+      <el-form-item label="核对地址:">
         <el-select v-model="form.region" placeholder="请选择调查情况">
           <el-option label="区域一" value="shanghai"></el-option>
           <el-option label="区域二" value="beijing"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="是否缴纳养老保险:" class="item-column2">
+      <el-form-item label="核对房产:">
         <el-select v-model="form.region" placeholder="请选择调查情况">
           <el-option label="区域一" value="shanghai"></el-option>
           <el-option label="区域二" value="beijing"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="是否缴纳住房公积金:" class="item-column2">
+      <el-form-item label="其他收入:">
         <el-select v-model="form.region" placeholder="请选择调查情况">
           <el-option label="区域一" value="shanghai"></el-option>
           <el-option label="区域二" value="beijing"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="核对工作证明人1:" class="item-column2">
+      <el-form-item label="近期大项开销:" class="item-column2">
         <el-select v-model="form.region" placeholder="请选择调查情况">
           <el-option label="区域一" value="shanghai"></el-option>
           <el-option label="区域二" value="beijing"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="核对工作证明人2:" class="item-column2">
+      <el-form-item label="父母:" class="item-column2">
         <el-select v-model="form.region" placeholder="请选择调查情况">
           <el-option label="区域一" value="shanghai"></el-option>
           <el-option label="区域二" value="beijing"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="调查结论">
+      <el-form-item label="兄弟姐妹:" class="item-column2">
+        <el-select v-model="form.region" placeholder="请选择调查情况">
+          <el-option label="区域一" value="shanghai"></el-option>
+          <el-option label="区域二" value="beijing"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="支付家庭生活费用:" class="item-column2">
+        <el-select v-model="form.region" placeholder="请选择调查情况">
+          <el-option label="区域一" value="shanghai"></el-option>
+          <el-option label="区域二" value="beijing"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="核对家庭生活费用:" class="item-column2">
+        <el-select v-model="form.region" placeholder="请选择调查情况">
+          <el-option label="区域一" value="shanghai"></el-option>
+          <el-option label="区域二" value="beijing"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="核对家庭固话:" class="item-column2">
+        <el-select v-model="form.region" placeholder="请选择调查情况">
+          <el-option label="区域一" value="shanghai"></el-option>
+          <el-option label="区域二" value="beijing"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="借款人爱好和品行:">
+        <el-input type="textarea" v-model="form.region"></el-input>
+      </el-form-item>
+      <el-form-item label="调查结论:">
         <el-input type="textarea" v-model="form.region"></el-input>
       </el-form-item>
       <el-form-item class="address-submit">
@@ -157,7 +189,8 @@ export default {
         delivery: false,
         type: [],
         resource: '',
-        desc: ''
+        desc: '',
+        phone:1310358254
       }
     }
   },
@@ -185,7 +218,15 @@ export default {
 }
 
 
+
+
+
+
+
+
+
 /* */
+
 .el-form-item__label {
   width: 150px !important;
 }
@@ -194,7 +235,15 @@ export default {
   margin-bottom: 0;
 }
 
+
+
+
+
+
+
+
 /* 三列 */
+
 .item-column3 {
   width: 33%;
   float: left;
@@ -202,18 +251,31 @@ export default {
   margin-bottom: 10px;
 }
 
+
+
+
+
+
+
+
 /* 两列 */
+
 .item-column2 {
   width: 50%;
   float: left;
   margin: 0;
 }
 
+
+
+
 /* 表单提交 */
+
 .address-submit {
   margin: 0;
   padding: 0;
   float: right;
   margin: 20px;
 }
+
 </style>
