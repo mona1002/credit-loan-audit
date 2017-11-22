@@ -109,7 +109,7 @@
 			//跳转到详情页
 			goDetail(row, event, column) {
 		      console.log(row.id);
-		      //this.$router.push({path:'/examine',row:row})
+		      this.$router.push({path:'/SplitScreen',query:row})
 		    },
 		    request(){
 		    	/*alert(1111111);

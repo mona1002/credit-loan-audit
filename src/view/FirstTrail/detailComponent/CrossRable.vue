@@ -222,13 +222,8 @@ export default {
 
   },
   methods:{
-        // enter: function(e){
-        //     e.target.style.background = '#e6ebf5';
-        // },
-        // leave: function(e){
-        //     e.target.style.background = '';
-        // },
-  }
+
+  },
 
 }
 </script>

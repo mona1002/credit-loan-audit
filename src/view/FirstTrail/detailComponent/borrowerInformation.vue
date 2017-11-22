@@ -63,7 +63,7 @@
 				          <th>月供[元]</th>
 				          <th>贷款余额[月]</th>
 				          <th>车牌号码</th>
-				          <th>车辆易购保险</th>
+				          <th>车辆已购保险</th>
 				          <th>购买时间</th>
 				        </tr>
 				      </thead>
@@ -353,8 +353,18 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
 		      this.cross_rable_turnover += 1;
 		    }, 
 		    
-			delet_home(){
-				console.log(333);
+			delet_home(){	
+				console.log(this.house_property);
+				var items = this.house_property;
+				for(var i=0,len=items.length;i<len;i++){
+					if(items[i].style.background =='pink'){
+						/*items[i].parentNode.removeChild(items[i]);
+						*/
+						items[i].parentNode.deleteRow(i+1);
+						this.cross_rable_home -= 1;
+						console.log(i+1);
+					}
+				};
 			},
 			delet_vehicle(){
 				console.log(333);
@@ -370,10 +380,14 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
 				console.log(333);
 			},
 			enter: function(e){
-			    e.target.style.background = '#e6ebf5';
+				if(e.target.style.background !== 'pink'){
+				    e.target.style.background = '#e6ebf5';
+				}
 			},
 			leave: function(e){
-			    e.target.style.background = '';
+				if(e.target.style.background !== 'pink'){
+				    e.target.style.background = '';
+				}
 			},
 			buttonClick(index){
 				console.log(index);
@@ -383,16 +397,7 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
 				for(var i=0,len=items.length;i<len;i++){
 					items[i].style.background = '';
 				}
-				items[index].style.background = 'red';
-				// items[index].removeEventListener('mouseenter',this.enter);
-				// items[index].removeEventListener('mouseleave',this.leave);
-				// items[index].onmouseenter = function(){
-				// 	items[index].style.background = 'red';
-				// };
-				// items[index].onmouseleave = function(){
-				// 	items[index].style.background = 'red';
-				// };
-
+				items[index].style.background = 'pink';
 			}
 	    }
 	}

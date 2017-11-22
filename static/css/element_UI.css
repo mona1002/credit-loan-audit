@@ -146,11 +146,7 @@ td {
 .applicationInformation .el-select .el-input.is-focus .el-input__inner{
   height: 30px;
 }
-/* 申请信息 下拉框禁用背景色 */
-.applicationInformation .el-input.is-disabled .el-input__inner{
-    background-color: #fff;
 
-}
 /* 信审表-工作信息+私营企业信息-单位地址-第四个地址详情input框 */
 .CreditForm .company_address_select .el-input:nth-of-type(4){
   width:258px;
@@ -203,10 +199,10 @@ td {
 
 /* 影音列表-左侧列表-折叠小箭头 */
 
-.AudioVisual .el-collapse-item__arrow {
+.AudioVisual .el-collapse-item__header .el-collapse-item__arrow{
   line-height: 30px;
+  /* display: none; */
 }
-
 
 /* 影音列表-左侧列表--内容title-最外侧包裹层 */
 
@@ -244,4 +240,21 @@ td {
 
 .applicationInformation .el-input.is-disabled .el-input__inner {
   background-color: #fff;
+}
+
+.applicationInformation .layer .el-table__body-wrapper{
+  height: 206px;
+  overflow-x: hidden;
+}
+.applicationInformation .detialLog .el-table__body-wrapper{
+  height: 306px;
+  overflow-x: hidden;
+}
+.applicationInformation .el-pagination{
+  text-align: center;
+  margin-top: 10px;
+}
+/* 申请信息 下拉框禁用背景色 */
+.applicationInformation .el-input.is-disabled .el-input__inner{
+    background-color: #fff;
 }

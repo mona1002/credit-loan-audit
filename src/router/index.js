@@ -4,7 +4,6 @@ import {
   getCookie
 } from '@/util/util'
 import HelloWorld from '@/view/HelloWorld'
-
 /*初审审批*/
 import taskInWaitting from '@/view/FirstTrail/taskInWaitting'
 /*备注信息*/
@@ -13,22 +12,20 @@ import remark from '@/view/FirstTrail/detailComponent/remark'
 import creditInvestigation from '@/view/FirstTrail/detailComponent/creditInvestigation'
 /*借款人资料*/
 import borrowerInformation from '@/view/FirstTrail/detailComponent/borrowerInformation'
-
-// 工作台
-
 /*申请信息*/
 import applicationInformation from '@/view/FirstTrail/detailComponent/applicationInformation'
-
+// 工作台
 import workbench from '@/view/FirstTrail/workbench'
+// 分屏
 import SplitScreen from '@/view/FirstTrail/SplitScreen'
+// 影音资料
 import AudioVisual from '@/view/FirstTrail/detailComponent/AudioVisual'
-// import CreditForm from '@/view/FirstTrail/detailComponent/CreditForm'
+// 信审表
+import CreditForm from '@/view/FirstTrail/detailComponent/CreditForm'
+// 登录页
 import login from '@/view/login/login'
-// 住址电话
-// import AddressForm from '@/view/FirstTrail/detailComponent/AddressForm'
-// 查看页面
-// import cCreditForm from '@/view/FirstTrail/checkComponent/cCreditForm.vue'
 
+import cCreditForm from '@/view/FirstTrail/checkComponent/cCreditForm'
 // 内部匹配
 import InternalMatch from '@/view/FirstTrail/InternalMatch'
 // 电话征信
@@ -40,7 +37,7 @@ Vue.use(Router)
 
 const routes = [{
     path: '/',
-    component: HelloWorld
+    component: workbench
     // meta: {
     //   requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
     // },
@@ -75,25 +72,29 @@ const routes = [{
     component: applicationInformation
   },
   {
-    path: '/workbench',
-    component: workbench,
+    path: '/HelloWorld',
+    component: HelloWorld,
   },
+  // 分屏
   {
     path: '/SplitScreen',
     component: SplitScreen
   },
+  // 影音资料
   {
     path: '/AudioVisual',
     component: AudioVisual
   },
-  // {
-  //   path: '/CreditForm',
-  //   component: CreditForm
-  // },
-  // {
-  //   path: '/cCreditForm',
-  //   component: cCreditForm
-  // },
+  // 申请表
+  {
+    path: '/CreditForm',
+    component: CreditForm
+  },
+  // 申请表
+  {
+    path: '/cCreditForm',
+    component: cCreditForm
+  },
   {
     //内部匹配
     path: '/InternalMatch',

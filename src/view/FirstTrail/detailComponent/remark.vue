@@ -46,6 +46,7 @@
 				<el-button type="primary" @click="sure">确定</el-button>
 			</div>
 		</div>
+		<div style="width:100%;height:1000px;"></div>
 	</div>
 </template>
 <script type="text/javascript">
@@ -55,7 +56,7 @@
 				//sortable:true,
 				ok:false,
 				tableData: [{
-		          date: '2016-05-02',
+		          date: '2016-05-01',
 		          name: '王小虎',
 		          address: '上海市普陀区金沙江路 1518 弄'
 		        }, {
@@ -117,8 +118,7 @@
 .layer{
 	width: 100%;
 	height: 100%;
-	background: #ccc;
-	opacity: 0.7;
+	background-color: rgba(0,0,0,.4);
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -131,7 +131,7 @@
 	left: 50%;
 	margin-left: -319px;
 	margin-top: -200px;
-	border: 1px solid red;
+	border: 1px solid #ccc;
 	background-color: #fff;
 	z-index: 10000;
 }
@@ -154,10 +154,10 @@
 }
 .layerbox div{
 	clear: both;
-	width: 90%;
+	width: 98%;
 	height: 208px;
 	margin: 0 auto;
-	background-color: #ccc;
+	background-color: #eee;
 }
 .layerbox div label{
 	display: inline-block;
@@ -169,6 +169,7 @@
 	height: 200px;
 	margin-top: 4px;
 	float: left;
+	padding: 5px 0 0 10px;
 }
 .layerbox button{
 	float: right;
