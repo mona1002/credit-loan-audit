@@ -7,7 +7,8 @@
         <!-- 手风琴效果 -->
         <!-- no-key 每个树节点用来作为唯一标识的属性,整棵树应是唯一的 -->
         <!-- renderContent 指定渲染函数,该函数返回需要的节点区内容即可 -->
-        <el-tree :data="data" :props="defaultProps" accordion no-key="id" @node-click="handleNodeClick">
+        <!-- highlight-current 是否高亮当前选中项 -->
+        <el-tree :data="data" :props="defaultProps" highlight-current accordion no-key="id" @node-click="handleNodeClick" >
         </el-tree>
         <!-- 备选  折叠面板- 手风琴效果 -->
         <el-button @click.native="coverShow=true">添加</el-button>
@@ -47,19 +48,31 @@
         <!-- 表单部分 -->
         <el-main>
           <!-- 默认的新增表单 -->
+
           <!-- 住址电话 - 表单 -->
           <AddressForm class="form-his" v-if="addressFormShow"></AddressForm>
           <!-- 住址电话 - 历史 -->
           <AddressHis class="form-his" v-if="addressHisShow"></AddressHis>
           <!-- 单位电话 - 表单 -->
-          <!-- <CompanyForm class="form-his" v-if="companyFormShow"></CompanyForm> -->
+          <CompanyForm class="form-his" v-if="companyFormShow"></CompanyForm>
           <!-- 单位电话 - 历史 -->
-          <!-- <CompanyHis class="form-his" v-if="companyHisShow"></CompanyHis> -->
+          <CompanyHis class="form-his" v-if="companyHisShow"></CompanyHis>
+          <!-- 家庭联系人 - 表单 -->
+          <FamilyForm class="form-his" v-if="familyFormShow"></FamilyForm>
+          <!-- 家庭联系人 - 历史 -->
+          <FamilyHis class="form-his" v-if="familyHisShow"></FamilyHis>
+          <!-- 紧急联系人 - 表单 -->
+          <WorkForm class="form-his" v-if="workFormShow"></WorkForm>
+          <!-- 紧急联系人 - 历史 -->
+          <WorkHis class="form-his" v-if="workHisShow"></WorkHis>
+
           <!-- 子组件 -->
           <!-- <router-link to="/AddressForm/formTag='testtag'/id='123'/phoneType='01'">
             <el-button type="primary">住址电话</el-button>
           </router-link> -->
           <!-- <router-view></router-view> -->
+
+
         </el-main>
       </el-container>
     </el-container>
@@ -265,7 +278,16 @@ export default {
       addressHisShow: false,
       // 单位
       companyFormShow: false,
-      companyHisShow: false
+      companyHisShow: false,
+      // 家庭
+      familyFormShow: false,
+      familyHisShow: false,
+      // 紧急联系人
+      hurryFormShow: false,
+      hurryHisShow: false,
+      // 工作证明人
+      workFormShow: false,
+      workHisShow: false
     }
   },
   methods: {
