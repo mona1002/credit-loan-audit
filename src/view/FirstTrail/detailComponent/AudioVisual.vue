@@ -31,7 +31,7 @@
 </el-collapse>
         <!-- 按钮 : 缩略图 对比  -->
         <el-button type="primary" @click="SmallpicAlert" style="position:absolute;top:700px">缩略图</el-button>
-        <el-button type="primary"  style="position:absolute;top:700px;left:90px;padding:0 30px;">对比</el-button>
+        <el-button type="primary" @click="this.$emit('this.CompareAlert=true')" style="position:absolute;top:700px;left:90px;padding:0 30px;">对比</el-button>
       </div>
       <!-- 右侧 图片 -->
       <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
@@ -51,27 +51,47 @@
           ref="small_pic_ref" />
       </div>
       <!-- 对比弹出层   不在右侧div里面，再 wrap 里面  可以用fixed定位-->
-      <!-- <div class="AudioVisual_wrap_compare">
+      <div class="AudioVisual_wrap_compare" v-show="CompareAlert">
         <div class="AudioVisual_wrap_compare_left ">
-
+<!-- <AudVis></AudVis> -->
         </div>
         <div class="AudioVisual_wrap_compare_right ">
+<!-- <el-select v-model="d" placeholder="请选择">
+                <el-option v-for="item in v" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select> -->
 
         </div>
-      </div> -->
+      </div>
+      <!-- 对比弹出层结束 -->
     </div>
 
   </div>
 </template>
 
 <script>
+// import AudVis from "./AudioVisual";
+import AudVis from "./AudioVisual";
+
   export default {
     data() {
       return {
         picData: "",
         smallPicInd: 0, // 未知
         SmallPicShow: false,
+        CompareAlert:true,
+        // d:'',
+        // v: [{ // 单位性质
+        //   value: 'yes',
+        //   label: '是'
+        // }, {
+        //   value: 'no',
+        //   label: '否'
+        // }],
       }
+    },
+    components:{
+      AudVis
     },
     methods: {
       hid() { //左侧 li 列表
