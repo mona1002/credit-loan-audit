@@ -230,6 +230,9 @@ td {
 .borrowerInformation .el-input{
   width: 180px;
 }
+.borrowerInformation .el-input__inner {
+  height: 30px;
+}
 
 
 /* 申请信息 */
@@ -239,6 +242,9 @@ td {
 }
 .applicationInformation .el-input{
   width: 180px;
+}
+.applicationInformation .el-input__inner {
+  height: 30px;
 }
 
 /* 下拉框禁用背景色 */
@@ -262,4 +268,8 @@ td {
 /* 申请信息 下拉框禁用背景色 */
 .applicationInformation .el-input.is-disabled .el-input__inner{
     background-color: #fff;
+}
+/* 信审任务列表 */
+.taskWinput .el-input__inner {
+  height: 30px;
 }
