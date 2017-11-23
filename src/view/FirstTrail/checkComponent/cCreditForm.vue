@@ -433,8 +433,8 @@
       //   reject(err)
       // });
 
-      // 信审表
-      //  this.post("productArchive/getProductArchiveParentList", {
+      // 信审表 查询
+      //  this.post("/creauditInfo/queryCreauditInfoObj", {
       //   id:"bb30607c-b5aa-4915-9474-460e099a33e8",
       // }).then(res => {
       //   console.log(res);
@@ -442,11 +442,14 @@
       //         reject(err)
       //       }) ;
 
-      //  this.post("/creauditInfo/queryCreauditInfoObj", {
-      //         id:"bb30607c-b5aa-4915-9474-460e099a33e8",
-      //       }).then(res => {
-      //         console.log(res);
-      //       });
+    // 获取影像名称的节点树列表
+      //    this.post("/creauditInfo/queryCreauditInfoObj", {
+      //   applyId:"7364",
+      // }).then(res => {
+      //   console.log(res);
+      // }).catch(err=>{
+      //         reject(err)
+      //       }) ;
 
 
     }

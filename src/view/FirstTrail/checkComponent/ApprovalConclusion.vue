@@ -1,6 +1,7 @@
 <template>
   <div id="AudioVisual">
     <h2> 影音资料</h2>
+    <!-- ApprovalConclusion  -->
     <div>
       <div class="AVLeft" ref="AuVleft" @mouseenter.stop="mouseEnter">
         <!--  @mouseleave.stop="mouseOut" -->
@@ -87,51 +88,12 @@
       // 鼠标点击隐藏，放上去显示的时候 解开。 放上去显示 mouseOUt 隐藏的时候  注释掉
       this.$refs.AuVright.style.width = document.documentElement.clientWidth - 200 + "px";
       // 发送get请求
-      this.axios.get('../../static/json/imgData.json')
-        //  .then(function (response) {
-        //   console.info(response.data);
-        //   console.log(this)
-        //   // this.$set(this,picData,response.data)
-        //   // console.log(this.picData)
-        // })
-        .then((response) => {
+       this.get("../../static/json/img.json").then(response => {
+        // axios 请求
           console.info(response.data);
-          this.picData = response.data.data;
+          this.picData = response.data;
           console.log(this.picData)
-        })
-      // .catch(function(res){
-      //   console.log(res)
-      // }) ;
-      // ev各事件 及 各宽度
-      //   console.log("ev.clientX==" + ev.clientX + ",ev.clientWidth==" + ev.clientWidth + ",body.clientWidth==" +
-      //     document.body.clientWidth + ",document.documentElement.clientWidth==" + document.documentElement.clientWidth +
-      //     ",window.innerWidth==" + window.innerWidth)
-      //-------------------------滚轮事件---------------------------------------------
-      document.body.onmousewheel = (event) => { // 非 Firefox 浏览器
-        event = event || window.event;
-        // console.dir(event);
-        if (event.wheelDelta < 0) { // 放大
-          this.$refs.big_pic[0].style.height = parseFloat(getComputedStyle(this.$refs.big_pic[0], false).height) +
-            100 + "px";
-        } else { //  缩小
-          this.$refs.big_pic[0].style.height = parseFloat(getComputedStyle(this.$refs.big_pic[0], false).height) -
-            100 + "px";
-        }
-        console.log(event.wheelDelta)
-      };
-
-      document.body.addEventListener("DOMMouseScroll", (event)=> { // 兼容 Firefox 浏览器
-        console.dir(event);
-        console.log(event.detail)
-        if (event.detail > 0) { // 放大
-          this.$refs.big_pic[0].style.height = parseFloat(getComputedStyle(this.$refs.big_pic[0], false).height) +
-            100 + "px";
-        } else { //  缩小
-          this.$refs.big_pic[0].style.height = parseFloat(getComputedStyle(this.$refs.big_pic[0], false).height) -
-            100 + "px";
-        }
       });
-      // ------------------------------------------------------------------------------------------------
     },
     methods: {
       AVtab(id) {
@@ -275,7 +237,7 @@
   /* 影音资料 大图片 CSS样式 */
 
   .AVRight .AVRight_big_pic {
-    height: 300px;
+    height: 100vh;
     background: orange;
     border: 1px solid black;
     overflow: auto;
@@ -283,7 +245,7 @@
   }
   .AVRight .AVRight_big_pic img {
     display: block;
-    height: 100%;
+    /* height: 100%; */
     background: purple;
     border: 3px solid black;
 
