@@ -1,4 +1,4 @@
-<!-- 信审视审批 -->
+<!-- 信审 - 审批 -->
 <template>
   <div style="padding:10px">
     <div class="address-title">
@@ -28,14 +28,14 @@
       </el-form-item>
     </el-form>
     <div class="btn-div">
-      <el-button type="primary" icon="el-icon-search">挂起</el-button>
-      <el-button type="primary" icon="el-icon-search">回退</el-button>
-      <el-button type="primary" icon="el-icon-search">拒绝</el-button>
-      <el-button type="primary" icon="el-icon-search">放弃</el-button>
-      <el-button type="primary" icon="el-icon-search">审批</el-button>
-      <el-button type="primary" icon="el-icon-search">发起反欺诈</el-button>
-      <el-button type="primary" icon="el-icon-search">审批结论轨迹</el-button>
-      <el-button type="primary" icon="el-icon-search">流程轨迹</el-button>
+      <el-button type="primary" icon="el-icon-check">挂起</el-button>
+      <el-button type="primary" icon="el-icon-check">回退</el-button>
+      <el-button type="primary" icon="el-icon-check">拒绝</el-button>
+      <el-button type="primary" icon="el-icon-check">放弃</el-button>
+      <el-button type="primary" icon="el-icon-check">审批</el-button>
+      <el-button type="primary" icon="el-icon-check">发起反欺诈</el-button>
+      <el-button type="primary" icon="el-icon-check">审批结论轨迹</el-button>
+      <el-button type="primary" icon="el-icon-check">流程轨迹</el-button>
     </div>
 
   </div>
