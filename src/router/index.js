@@ -3,6 +3,9 @@ import Router from 'vue-router'
 import {
   getCookie
 } from '@/util/util'
+// 头部导航
+import myHead from '@/view/header'
+
 import HelloWorld from '@/view/HelloWorld'
 /*初审审批*/
 import taskInWaitting from '@/view/FirstTrail/taskInWaitting'
@@ -39,15 +42,22 @@ import CreditApproval from '@/view/FirstTrail/CreditApproval'
 Vue.use(Router)
 
 const routes = [{
-    path: '/',
-    component: login
+   path: '/',
+    component: workbench
+    // path: '/',
+    // component: login
     // meta: {
     //   requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
     // },
   },
+  // {
+  //   path: '/myHead',
+  //   component: myHead
+  // },
   {
     path: '/workbench',
-    component: workbench
+    component: workbench,
+    require:myHead
   },
   /*初审审批*/
   {

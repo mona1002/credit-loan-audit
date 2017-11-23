@@ -32,7 +32,7 @@
         <div ref="Left_detail" class="Left_detail_div">
           <p class="Left_right_Title"> {{this.title}} </p>
           <div class="Left_right_BigImg ">
-            <AudioVisual v-if=" this.tabContent1==0"></AudioVisual>
+            <AudioVisual v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></AudioVisual>
             <!-- <workbench v-if=" this.tabContent1==1"></workbench> -->
             <!-- <div v-if=" this.tabContent1==3">asdfa</div> -->
             <!-- <div v-if=" this.tabContent1==4">asdf adf</div> -->
@@ -75,7 +75,7 @@
           </p>
 
           <div class="tab2_Content">
-            <AudioVisual v-if=" this.tabContent2==0"></AudioVisual>
+            <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
             <remark v-if=" this.tabContent2==1"></remark>
             <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
             <applicationInformation v-if=" this.tabContent2==3"></applicationInformation>
@@ -95,17 +95,19 @@
       </div>
     </div>
       <!-- 对比弹出层   不在右侧div里面，再 wrap 里面  可以用fixed定位-->
-      <!-- <div class="AudioVisual_wrap_compare">
+      <div class="AudioVisual_wrap_compare" v-show="CompareAlert" v-on:CompareShow="compBtnS">
+      <i class="el-icon-close" @click="closeCompareBtn"></i>
         <div class="AudioVisual_wrap_compare_left ">
-            <InternalMatch></InternalMatch>
-            
+            <!-- <Internal-match></Internal-match> -->
+            <Audio-visual></Audio-visual>
+
         </div>
         <div class="AudioVisual_wrap_compare_right ">
 
             <InternalMatch></InternalMatch>
             
         </div>
-      </div> -->
+      </div>
       <!-- 对比弹出层结束 -->
   </div>
 
@@ -158,6 +160,14 @@
       }
     },
     methods: {
+      // 对比按钮
+      compBtnS(){
+        console.log("我是傅祖建")
+        this.CompareAlert=true;
+      },
+      closeCompareBtn(){
+        this.CompareAlert=false;
+      },
       handleClick(tab, event) { //   tab2 切换 触发函数
         // console.log(tab, event);
         // console.log(event.target.innerHTML);

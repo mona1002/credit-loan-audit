@@ -2,7 +2,7 @@
   <div id="app">
 
        <myHead></myHead>
-       <img src="../static/img/20171122102421.png" width="100%">
+       <!-- <img src="../static/img/20171122102421.png" width="100%"> -->
 <!-- <el-row class="header"></el-row> -->
     <router-view id="Abody" ref="ddd"></router-view>
     <div v-show="false" > </div>

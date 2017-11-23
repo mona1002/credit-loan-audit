@@ -875,14 +875,15 @@
     display: inline-block;
     width: 50%;
     padding: 10px 15px 10px 7px;
+    word-break: normal ;
     /* border: 1px solid yellow; */
     text-align: right;
   }
   /* 单独设置-上网查询信息- 左侧下拉框*/
-    .CreditForm_InternetInf_ul_left li{
+    /* .CreditForm_InternetInf_ul_left li{
       padding:1.5px 0;
 
-    }
+    } */
   /* 单独设置-家庭信息-右侧li上面的margin空行 */
 
   .CreditForm_FamilyInf_ul_right {

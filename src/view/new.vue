@@ -35,6 +35,10 @@ export default {
 </script>
 
 <style scope>
-
+.a{
+      white-space: normal;
+    word-break: break-all;
+    /* no break */
+}
 </style>
 

@@ -29,7 +29,8 @@
     <!-- 右边 -->
     <div class="workbench_right">
       <!-- 工作通知 -->
-      <el-collapse v-model="activeNames" @change="handleChange">
+      <div class="workbench_right_top">
+<el-collapse v-model="activeNames" @change="handleChange">
         <el-collapse-item name="1">
           <template slot="title">
             <i class="el-icon-menu"></i> 工作通知
@@ -40,9 +41,11 @@
           <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
         </el-collapse-item>
       </el-collapse>
+      </div>
+
       <!-- 公司动态 -->
-      <div class="workNotify_p">
-        <el-collapse v-model="activeNames1" @change="workNotify">
+         <div class="workbench_right_bottom">
+<el-collapse v-model="activeNames1" @change="workNotify">
           <el-collapse-item name="1">
             <template slot="title" class="border_top_bottom">
               <i class="el-icon-menu"></i> 公司动态
@@ -54,6 +57,7 @@
           </el-collapse-item>
         </el-collapse>
       </div>
+    
 <!-- test 信息 之router 带params-->
 				<!-- <router-link :to=" {path:'/ProductLists',query:{picName:val.name}}" v-for="(val,index) in pic" :key="index"> -->
 
@@ -143,12 +147,6 @@ console.log(this.$event)
 </script>
 <style scoped>
 
-  .workNotify_p {
-    position: absolute;
-    top: 300px;
-    left: 0;
-    right: 0;
-  }
   /* public 部分 */
 
   .border_top_bottom {
@@ -177,10 +175,17 @@ console.log(this.$event)
 
   .workbench_right {
     width: 30%;
-    height: 100vh;
+    height: calc( 100% - 60px );
+    /* height: 100vh; */
+    margin-top: 20px;    
+    /* padding:0 10px; */
     position: relative;
-  }
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.12), 0 0 6px 0 rgba(0,0,0,.04);
 
+  }
+/* .workbench_right_top,.workbench_right_bottom{
+  height:40vh;
+} */
   .moreC {
     /* background: red; */
     float: right;
