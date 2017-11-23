@@ -8,11 +8,11 @@
     }],
     "stage-2"
   ],
-  "plugins": ["transform-runtime","transform-vue-jsx"],
+  "plugins": ["transform-runtime"],
   "env": {
     "test": {
-      "presets": ["env", "stage-2"],
-      "plugins": ["istanbul"]
+      "presets": ["env", "stage-2","es2015"],
+      "plugins": ["istanbul","transform-vue-jsx"]
     }
   }
 }

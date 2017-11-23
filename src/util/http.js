@@ -6,6 +6,9 @@ axios.defaults.timeout = 5000;
 //  axios.defaults.baseURL = 'http://localhost:8080';
 //  axios.defaults.baseURL = 'http://10.1.26.65:8090/interface/api/v1/';  //木接口地址
 
+
+//  axios.defaults.baseURL = '/riskManagement';// 用代理时 打开----修改为代理路径
+
 axios.defaults.withCredentials=true;
 
 axios.interceptors.response.use(
