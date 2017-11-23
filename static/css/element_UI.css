@@ -230,6 +230,8 @@ td {
 }
 .borrowerInformation .el-input__inner {
   height: 30px;
+  border: 1px solid rgb(229,229,229);
+  border-radius: 4px;
 }
 
 
@@ -243,9 +245,13 @@ td {
 }
 .applicationInformation .el-date-editor.el-input, .el-date-editor.el-input__inner{
   width: 180px;
+  border: 1px solid rgb(229,229,229);
+  border-radius: 4px;
 }
 .applicationInformation .el-input__inner {
   height: 30px;
+  border: 1px solid rgb(229,229,229);
+  border-radius: 4px;
 }
 
 /* 下拉框禁用背景色 */
@@ -273,4 +279,6 @@ td {
 /* 信审任务列表 */
 .taskWinput .el-input__inner {
   height: 30px;
+  border: 1px solid rgb(229,229,229);
+  border-radius: 4px;
 }
