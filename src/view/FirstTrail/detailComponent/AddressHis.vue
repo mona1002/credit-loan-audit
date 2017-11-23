@@ -29,43 +29,48 @@
       <div class="address-title">
         录入地址电话调查信息
       </div>
-      <el-form-item label="拨打电话:">
+      <el-form-item label="第三方查询结果">
         <el-label v-model="form.name">531531</el-label>
       </el-form-item>
-      <el-form-item label="接电话人身份:">
+      <el-form-item label="三方查询是否异常:">
         <el-label v-model="form.name">531531</el-label>
       </el-form-item>
-      <el-form-item label="核对单位及工作信息:">
+      <el-form-item label="是否与家庭联系人为同一接听人:">
         <el-label v-model="form.name">531531</el-label>
       </el-form-item>
-      <el-form-item label="核对工作时间:">
+      <el-form-item label="与借款人关系:">
         <el-label v-model="form.name">531531</el-label>
       </el-form-item>
-      <el-form-item label="核对收入:">
+      <el-form-item label="核对工作情况:">
         <el-label v-model="form.name">531531</el-label>
       </el-form-item>
-      <el-form-item label="用工方式:">
+      <el-form-item label="核对房产:">
         <el-label v-model="form.name">531531</el-label>
       </el-form-item>
-      <el-form-item label="工作发放情况:">
+      <el-form-item label="其他收入:">
         <el-label v-model="form.name">531531</el-label>
       </el-form-item>
-      <el-form-item label="是否缴纳养老保险:" class="item-column2">
+      <el-form-item label="近期大项开销:">
         <el-label v-model="form.name">531531</el-label>
       </el-form-item>
-      <el-form-item label="是否缴纳住房公积金:" class="item-column2">
+      <el-form-item label="父母:" class="item-column2">
         <el-label v-model="form.name">531531</el-label>
       </el-form-item>
-      <el-form-item label="核对工作证明人1:" class="item-column2">
+      <el-form-item label="兄弟姐妹:" class="item-column2">
         <el-label v-model="form.name">531531</el-label>
       </el-form-item>
-      <el-form-item label="核对工作证明人2:" class="item-column2">
+      <el-form-item label="支付家庭生活费用:" class="item-column2">
         <el-label v-model="form.name">531531</el-label>
       </el-form-item>
-      <el-form-item label="活动形式">
+      <el-form-item label="核对家庭固话:" class="item-column2">
         <el-label v-model="form.name">531531</el-label>
       </el-form-item>
-      
+      <el-form-item label="借款人爱好和品行:">
+        <el-label v-model="form.name">531531</el-label>
+      </el-form-item>
+      <el-form-item label="调查结论:">
+        <el-label v-model="form.name">531531</el-label>
+      </el-form-item>
     </el-form>
   </div>
 </template>
