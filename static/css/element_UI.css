@@ -227,6 +227,9 @@ td {
 .borrowerInformation .el-select>.el-input {
   width: 130px;
 }
+.borrowerInformation .el-input{
+  width: 180px;
+}
 
 
 /* 申请信息 */
@@ -234,7 +237,9 @@ td {
 .applicationInformation .el-collapse-item__content {
   padding-bottom: 0;
 }
-
+.applicationInformation .el-input{
+  width: 180px;
+}
 
 /* 下拉框禁用背景色 */
 

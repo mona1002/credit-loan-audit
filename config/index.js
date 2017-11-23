@@ -31,7 +31,15 @@ module.exports = {
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      // '/riskManagement':{  //添加代理时打开  /riskManagement为http://10.1.26.200:20716域名后面剩下的baseURL路径名部分
+      //   target:'http://10.1.26.200:20716/riskManagement/',  //   域名后面的 /riskManagement  为url重写路径属性部分。不加此处，只写http://10.1.26.200:20716部分会报404，代理不生效。
+      //   changeOrigin:true,
+      //   pathRewrite:{
+      //     '^/riskManagement':""
+      //     }
+      // }  
+    },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
     // (https://github.com/webpack/css-loader#sourcemaps)

@@ -1,7 +1,7 @@
 <template>
   <div class="SplitScreen">
     <!-- 进件人详情 -->
-    <p class="PerDtl">
+    <p class="PerDtl">  <!-- p标签高度为30px -->
       <span class="PerInf"> 借款人姓名 :akdialkdinfl</span>
       <span class="PerInf"> 进件编号 :201608040133010004</span>
       <span class="PerInf"> 证件号码 :420701197505136996</span>
@@ -94,7 +94,25 @@
 
       </div>
     </div>
-
+      <!-- 对比弹出层   不在右侧div里面，再 wrap 里面  可以用fixed定位-->
+      <div class="AudioVisual_wrap_compare">
+        <div class="AudioVisual_wrap_compare_left ">
+            <!-- <AudioVisual></AudioVisual> -->
+            <InternalMatch></InternalMatch>
+            
+        </div>
+        <div class="AudioVisual_wrap_compare_right ">
+<!-- <el-select v-model="d" placeholder="请选择">
+                <el-option v-for="item in v" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select> -->
+              <!-- <input type="text" style=""> -->
+            <!-- <AudioVisual></AudioVisual> -->
+            <InternalMatch></InternalMatch>
+            
+        </div>
+      </div>
+      <!-- 对比弹出层结束 -->
   </div>
 
 </template>
@@ -117,6 +135,7 @@
   export default {
     data() {
       return {
+        CompareAlert:true,//对比按钮 弹出层
         title: "",
         // activeName: 'second', //---------右侧tab切换用
         isShow: false,
@@ -392,5 +411,20 @@
     clear: both;
     /* height: ; */
   }
-
+/* 全屏 对比弹出层 */
+.AudioVisual_wrap_compare{
+  position: absolute;
+  background: purple;
+  width:100%;
+  height:calc( 100% - 126px);
+  z-index: 99;
+  /* width:400px;
+  height:600px;
+  z-index:99; */
+}
+.AudioVisual_wrap_compare_left,.AudioVisual_wrap_compare_right{
+  float: left;
+  width:50%;
+  border: 10px solid orangered;
+}
 </style>
