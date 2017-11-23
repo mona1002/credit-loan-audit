@@ -40,14 +40,14 @@ Vue.use(Router)
 
 const routes = [{
     path: '/',
-    component: workbench
+    component: login
     // meta: {
     //   requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
     // },
   },
   {
-    path: '/login',
-    component: login
+    path: '/workbench',
+    component: workbench
   },
   /*初审审批*/
   {

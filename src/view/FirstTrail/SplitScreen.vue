@@ -95,23 +95,17 @@
       </div>
     </div>
       <!-- 对比弹出层   不在右侧div里面，再 wrap 里面  可以用fixed定位-->
-      <div class="AudioVisual_wrap_compare">
+      <!-- <div class="AudioVisual_wrap_compare">
         <div class="AudioVisual_wrap_compare_left ">
-            <!-- <AudioVisual></AudioVisual> -->
             <InternalMatch></InternalMatch>
             
         </div>
         <div class="AudioVisual_wrap_compare_right ">
-<!-- <el-select v-model="d" placeholder="请选择">
-                <el-option v-for="item in v" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select> -->
-              <!-- <input type="text" style=""> -->
-            <!-- <AudioVisual></AudioVisual> -->
+
             <InternalMatch></InternalMatch>
             
         </div>
-      </div>
+      </div> -->
       <!-- 对比弹出层结束 -->
   </div>
 

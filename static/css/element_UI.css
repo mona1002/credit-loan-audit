@@ -101,7 +101,11 @@ td {
 
 
 /* 信审表 */
-
+.CreditForm .el-input {
+  display: inline-block;
+  width: 180px;
+  height: 30px;
+}
 .CreditForm .el-collapse-item__header {
   border: 1px solid silver;
   background: #20a0ff;
@@ -139,12 +143,6 @@ td {
 /* 信审表-工作信息-单位地址-input框 */
 .CreditForm .company_address_select .el-input{
  width:120px;
-}
-.applicationInformation .el-date-editor.el-input, .el-date-editor.el-input__inner{
-  width: 180px;
-}
-.applicationInformation .el-select .el-input.is-focus .el-input__inner{
-  height: 30px;
 }
 
 /* 信审表-工作信息+私营企业信息-单位地址-第四个地址详情input框 */
@@ -239,6 +237,12 @@ td {
 }
 .applicationInformation .el-input{
   width: 180px;
+}
+.applicationInformation .el-date-editor.el-input, .el-date-editor.el-input__inner{
+  width: 180px;
+}
+.applicationInformation .el-select .el-input.is-focus .el-input__inner{
+  height: 30px;
 }
 
 /* 下拉框禁用背景色 */

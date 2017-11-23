@@ -176,7 +176,7 @@
           <ul class="CreditForm_WorkInfs_ul_left">
             <li>
               <label class="WorkInfs_left_label left_margin">工作单位：</label>
-              <el-input class="one_input" type="text" placeholder="请输入内容" v-model="hirecomName">
+              <el-input style="width:70%;" type="text" placeholder="请输入内容" v-model="hirecomName">
               </el-input>
             </li>
             <li>
@@ -311,7 +311,7 @@
             </li>
             <li>
               <label class="CompanyInfs_left_label left_margin">企业经营项目：</label>
-              <el-input class="one_input" type="text" placeholder="请输入内容" v-model="selfBusproject">
+              <el-input style="width:70%" type="text" placeholder="请输入内容" v-model="selfBusproject">
               </el-input>
             </li>
             <li>
@@ -345,7 +345,8 @@
               </el-input>
             </li>
             <li>
-              <label class=" CheckId_right_label "> 每月净利润[万元]：-------------------------------------------未写（先用员工人数）-----------------------待确认 </label>
+              <!-- 未写绑定数据 先用员工人数==========================待确定 -->
+              <label class=" CheckId_right_label "> 每月净利润[万元]：</label>
               <el-input type="text" placeholder="请输入内容" v-model="selfempCount">
               </el-input>
             </li>
@@ -822,9 +823,9 @@
 <style scope>
   /* 公共 */
 
-  .one_input {
+  /* .one_input {
     width: 70%;
-  }
+  } */
   /* 工作信息部分-公共 */
 
   .left_margin {
@@ -877,6 +878,11 @@
     /* border: 1px solid yellow; */
     text-align: right;
   }
+  /* 单独设置-上网查询信息- 左侧下拉框*/
+    .CreditForm_InternetInf_ul_left li{
+      padding:1.5px 0;
+
+    }
   /* 单独设置-家庭信息-右侧li上面的margin空行 */
 
   .CreditForm_FamilyInf_ul_right {
