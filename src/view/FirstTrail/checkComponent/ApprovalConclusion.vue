@@ -56,12 +56,12 @@
         <!-- 身份证明 ===证明  -->
         <div v-if=" this.ind==2">
           <h2>身份证明</h2>
-          <img src="../../static/imgs/20170512114059421.png" />
+          <!-- <img src="../../static/imgs/20170512114059421.png" /> -->
         </div>
         <!-- 身份证明 ====不证明  -->
         <div v-if=" this.ind==3">
           <h2>不证明</h2>
-          <img src="../../static/imgs/20170512114059421.png" />
+          <!-- <img src="../../static/imgs/20170512114059421.png" /> -->
         </div>
         <!-- 未完待续... -->
         <div v-if="">
