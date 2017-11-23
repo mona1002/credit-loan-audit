@@ -1,37 +1,66 @@
 <template>
   <div class="AudioVisual">
-    <div class="AudioVisual_wrap">
+    <div class="CompareShow">
       <!-- 左侧 折叠面板 -->
       <div class="AudioVisual_List" ref="AudioVisual_List_ref">
         <!-- 折叠面板title -->
         <button @click="hid" style="margin:0 0 0 130px;">隐藏</button>
         <button @click="showList">显示</button>
         <!-- 折叠面板-手风琴List -->
-         <p class="list_title"><span>影像名称</span><span>编号</span><span>页数</span><span>上传日期</span></p>
-        <el-collapse >
+        <p class="list_title">
+          <span>影像名称</span>
+          <span>编号</span>
+          <span>页数</span>
+          <span>上传日期</span>
+        </p>
+        <el-collapse>
           <!-- v-for="" -->
-  <el-collapse-item v-for="">
-    <template slot="title">
-     <p><span>影像名称</span><span>编号</span><span>页数</span><span>上传日期</span></p>
-    </template>
-    <div class="list_title_div">
-     <p><span>影像名称</span><span>编号</span><span>页数</span><span>上传日期</span></p>      
-    </div>
-   <div class="list_title_div">
-     <p><span>影像名称</span><span>编号</span><span>页数</span><span>上传日期</span></p>      
-    </div>
-  </el-collapse-item>
-   <el-collapse-item>
-    <template slot="title">
-     <p><span>影像名称</span><span>编号</span><span>页数</span><span>上传日期</span></p>
-    </template>
-    <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-    <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
-  </el-collapse-item>
-</el-collapse>
+          <el-collapse-item v-for="">
+            <template slot="title">
+              <p v-for="">
+                <span>影像名称</span>
+                <span>编号</span>
+                <span>页数</span>
+                <span>上传日期</span>
+              </p>
+            </template>
+            <div class="list_title_div">
+              <p v-for="">
+                <span>影像名称</span>
+                <span>编号</span>
+                <span>页数</span>
+                <span>上传日期</span>
+              </p>
+            </div>
+            <!-- 此处为重复的样式  得到数据之后删除 -->
+            <div class="list_title_div">
+              <p>
+                <span>影像名称</span>
+                <span>编号</span>
+                <span>页数</span>
+                <span>上传日期</span>
+              </p>
+            </div>
+            <!-- 重复部分结束 -->
+          </el-collapse-item>
+          <!-- 此处为重复的样式  得到数据之后删除 -->
+          <el-collapse-item>
+            <template slot="title">
+              <p>
+                <span>影像名称</span>
+                <span>编号</span>
+                <span>页数</span>
+                <span>上传日期</span>
+              </p>
+            </template>
+            <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
+            <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+          </el-collapse-item>
+          <!-- 重复部分结束 -->
+        </el-collapse>
         <!-- 按钮 : 缩略图 对比  -->
         <el-button type="primary" @click="SmallpicAlert" style="position:absolute;top:700px">缩略图</el-button>
-        <el-button type="primary" @click="this.$emit('this.CompareAlert=true')" style="position:absolute;top:700px;left:90px;padding:0 30px;">对比</el-button>
+        <el-button type="primary" @click="compBtnShow" style="position:absolute;top:700px;left:90px;padding:0 30px;">对比</el-button>
       </div>
       <!-- 右侧 图片 -->
       <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
@@ -47,31 +76,17 @@
       <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
       <div class="Small_pic_div" v-show="SmallPicShow">
         <i class="el-icon-close small_pic_close" @click="SmallpicClose"></i>
-        <img class="Small_pic" v-for="(val,index) in picData" :src="val.pic" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
+        <img class="Small_pic" v-for="(val,index) in picData" :src="val.pic" @click="ChangeCss(index)" @mouseenter="smallPic($event,index)"
           ref="small_pic_ref" />
       </div>
-      <!-- 对比弹出层   不在右侧div里面，再 wrap 里面  可以用fixed定位-->
-      <div class="AudioVisual_wrap_compare" v-show="CompareAlert">
-        <div class="AudioVisual_wrap_compare_left ">
-<!-- <AudVis></AudVis> -->
-        </div>
-        <div class="AudioVisual_wrap_compare_right ">
-<!-- <el-select v-model="d" placeholder="请选择">
-                <el-option v-for="item in v" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select> -->
-
-        </div>
-      </div>
-      <!-- 对比弹出层结束 -->
     </div>
 
   </div>
 </template>
 
 <script>
-// import AudVis from "./AudioVisual";
-import AudVis from "./AudioVisual";
+  // import AudVis from "./AudioVisual";
+  import AudVis from "./AudioVisual";
 
   export default {
     data() {
@@ -79,7 +94,7 @@ import AudVis from "./AudioVisual";
         picData: "",
         smallPicInd: 0, // 未知
         SmallPicShow: false,
-        CompareAlert:true,
+        CompareAlert: true,
         // d:'',
         // v: [{ // 单位性质
         //   value: 'yes',
@@ -90,7 +105,7 @@ import AudVis from "./AudioVisual";
         // }],
       }
     },
-    components:{
+    components: {
       AudVis
     },
     methods: {
@@ -99,7 +114,9 @@ import AudVis from "./AudioVisual";
         this.$refs.AudioVisual_List_ref.style.left = "-175px";
         this.$refs.AudioVisual_Img_ref.style.left = "25px";
         // this.$refs.AudioVisual_Img_ref.style.width = document.documentElement.clientWidth - 25 + "px";
-        this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 25px)";
+        // this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 25px)";
+        this.$refs.AudioVisual_Img_ref.style.width = "100%";
+        
       },
       showList() { //左侧 li 列表
         this.$refs.AudioVisual_List_ref.style.left = "0";
@@ -171,22 +188,30 @@ import AudVis from "./AudioVisual";
         this.smallPicInd = ind; //  选中图片的下标赋值给data里面的值， 以便大图片根据这个下标值 显示对应下标的图片
         this.defaultBigPicCss();
         // this.changeSmallPicCss(ind);
-        this.SmallPicShow = false;
+        // this.SmallPicShow = false;
       },
       // 公共重复方法
       defaultBigPicCss() { // （重复代码）通用方法 ：  大图 --------------- 恢复默认高度、不旋转
         console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).height)
-        if (getComputedStyle(this.$refs.Big_pic_ref[0], false).width > getComputedStyle(this.$refs.Big_pic_ref[0], //判断宽度>高度  按宽度100%显示
-            false).height) { // 点击切换图片时，让显示的大图宽高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
-          this.$refs.Big_pic_ref[0].style.width = "calc( 100% - 202px)";
-          console.log("默认大图css样式if" + this.$refs.Big_pic_ref[0].style.width)
-        } else {
-          this.$refs.Big_pic_ref[0].style.height = "99.8%";
-          console.log("默认大图css样式else")
-          console.log(this.$refs.Big_pic_ref[0])
-          console.log(this.$refs.Big_pic_ref[0].style.height)
-        }
-        this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
+        console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
+        
+        // if (getComputedStyle(this.$refs.Big_pic_ref[0], false).width > getComputedStyle(this.$refs.Big_pic_ref[0], //判断宽度>高度  按宽度100%显示
+        //     false).height) { // 点击切换图片时，让显示的大图宽高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
+        //   this.$refs.Big_pic_ref[0].style.width = "100%";//calc( 100% - 202px)
+        //   console.log("默认大图css样式if width >>>>>>>>>>> height" + this.$refs.Big_pic_ref[0].style.width)
+        // } else {
+        //   this.$refs.Big_pic_ref[0].style.height = "100%";
+        //   console.log("默认大图css样式else  width <<<<<<  height")
+        //   console.log(this.$refs.Big_pic_ref[0])
+        //   console.log(this.$refs.Big_pic_ref[0].style.height)
+        // }
+        // this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
+
+
+//  this.$refs.big_pic[0].style.height = "100%"; // 点击切换图片时，让显示的大图高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
+        // this.$refs.big_pic[0].style.transform = "rotate(0deg)"
+
+
       },
       changeSmallPicCss(ind) { // （重复代码）通用方法： 遍历所有小图片，恢复默认（初始时）设置的css样式--------- click时改变显示大图和选中小图的 高度 + 透明度
         for (var i = 0; i < this.$refs.small_pic_ref.length; i++) {
@@ -236,13 +261,27 @@ import AudVis from "./AudioVisual";
         this.$refs.AudioVisual_Img_ref.removeEventListener('DOMMouseScroll', (event) => {
           event.preventDefault();
         }, false);
+      },
+      compBtnShow() {
+        console.log("对比按钮出发")
+        this.$emit('CompareShow')
       }
     },
 
     mounted() {
-      // this.get('../../../../static/json/img.json').then(response => { // axios 请求
-      //   this.picData = response.data.items;
-      // });
+      this.get('../../../../static/json/img.json').then(response => { // axios 请求
+        this.picData = response.data.items;
+      });
+        //     if (getComputedStyle(this.$refs.Big_pic_ref[0], false).width > getComputedStyle(this.$refs.Big_pic_ref[0], //判断宽度>高度  按宽度100%显示
+        //     false).height) { // 点击切换图片时，让显示的大图宽高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
+        //   this.$refs.Big_pic_ref[0].style.width = "100%";//calc( 100% - 202px)
+        //   console.log("默认大图css样式if width >>>>>>>>>>> height" + this.$refs.Big_pic_ref[0].style.width)
+        // } else {
+        //   this.$refs.Big_pic_ref[0].style.height = "100%";
+        //   console.log("默认大图css样式else  width <<<<<<  height")
+        //   console.log(this.$refs.Big_pic_ref[0])
+        //   console.log(this.$refs.Big_pic_ref[0].style.height)
+        // }
     }
   }
 
@@ -258,34 +297,37 @@ import AudVis from "./AudioVisual";
   }
   /* 左侧折叠面板 */
   /* 折叠面板上面的四个 th 表头 */
-  .list_title{
+
+  .list_title {
     line-height: 27px;
     font-weight: bold;
   }
-  .list_title span,.list_title_div p span{
+
+  .list_title span,
+  .list_title_div p span {
     display: inline-block;
- border:1px solid #e6ebf5;
- text-align: center;
-  }
-  .list_title span:nth-of-type(1){
-    width:30%;
-  }
-   .list_title span:nth-of-type(2){
-    width:20%;
-    border-right:none;
-    border-left:none;
-  }
-   .list_title span:nth-of-type(3){
-    width:20%;
- 
-  }
-   .list_title span:nth-of-type(4){
-    width:30%;
-    border-left:none;
-    
+    border: 1px solid #e6ebf5;
+    text-align: center;
   }
 
+  .list_title span:nth-of-type(1) {
+    width: 30%;
+  }
 
+  .list_title span:nth-of-type(2) {
+    width: 20%;
+    border-right: none;
+    border-left: none;
+  }
+
+  .list_title span:nth-of-type(3) {
+    width: 20%;
+  }
+
+  .list_title span:nth-of-type(4) {
+    width: 30%;
+    border-left: none;
+  }
   /* 图片功能按钮 */
 
   .position_and_size {
@@ -325,7 +367,7 @@ import AudVis from "./AudioVisual";
   }
   /* private */
 
-  .AudioVisual_wrap {
+  .CompareShow {
     position: relative;
     /* height: 99vh; */
     background: red;
@@ -334,10 +376,15 @@ import AudVis from "./AudioVisual";
   .AudioVisual_List,
   .AudioVisual_Img {
     position: absolute;
-    height: 78.7vh;
+    height: 86vh;
     overflow: auto;
   }
-
+ .AudioVisual_Img {
+    width: calc( 100% - 200px);
+    left: 200px;
+    background: yellowgreen;
+    /* background: red; */
+  }
   .AudioVisual_List {
     width: 200px;
     /* background: pink; */
@@ -346,30 +393,30 @@ import AudVis from "./AudioVisual";
     z-index: 4;
   }
 
- .list_title_div p span:nth-of-type(1){
-    width:30%;
-    border-top:none;
+  .list_title_div p span:nth-of-type(1) {
+    width: 30%;
+    border-top: none;
   }
-   .list_title_div p span:nth-of-type(2){
-    width:20%;
-    border-top:none;    
-    border-right:none;
-    border-left:none;
+
+  .list_title_div p span:nth-of-type(2) {
+    width: 20%;
+    border-top: none;
+    border-right: none;
+    border-left: none;
   }
-   .list_title_div p span:nth-of-type(3){
-    width:20%;
-    border-top:none;    
-    border-right:none;
+
+  .list_title_div p span:nth-of-type(3) {
+    width: 20%;
+    border-top: none;
+    border-right: none;
   }
-   .list_title_div p span:nth-of-type(4){
-    border-top:none;     
-    width:30%;
+
+  .list_title_div p span:nth-of-type(4) {
+    border-top: none;
+    width: 30%;
   }
-  .AudioVisual_Img {
-    width: calc( 100% - 200px);
-    left: 200px;
-    /* background: red; */
-  }
+
+
 
   .Small_pic_div {
     border: 1px solid black;
@@ -377,12 +424,12 @@ import AudVis from "./AudioVisual";
     overflow: auto;
     /* position: fixed; */
     position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
+    /* left: 0; */
+    /* top: 0; */
+    /* right: 0; */
     /* bottom: 30px; */
-    /* width: 300px;
-    height: 300px; */
+    width: 300px;
+    height: 500px;
     z-index: 20;
   }
 

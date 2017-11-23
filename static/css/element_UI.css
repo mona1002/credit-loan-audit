@@ -8,7 +8,12 @@
   display: inline-block;
   width: 180px;
 }
+/* th */
 
+.el-table td,
+.el-table th {
+  padding: 0;
+}
 
 /* .el-input {
   display: inline-block;
@@ -86,25 +91,51 @@ td {
 .workbench .el-icon-arrow-right:before {
   content: "";
 }
+/* 工作通知 下边距 */
+.workbench .el-collapse{
+  margin-bottom: 10px;
+}
+/* 工作通知title颜色 */
+.workbench .el-collapse-item__header{
+  background: #f5f7fa;
+}
+/* 工通知内容设置内边距 */
+.workbench .el-collapse-item__content{
+ padding: 10px;
+ /* margin-bottom: 10px; */
+ height: 37.5vh;
+}
+/* .workbench .el-collapse-item.is-active .el-collapse-item__header {
+  border-bottom-color: #dfe4ed;
+} */
 
-.workbench .el-collapse-item.is-active .el-collapse-item__header {
-  border-bottom-color: #eee;
+/* 待办任务div高度修改 */
+.workbench .el-tabs--border-card{
+height: 87%;
 }
 
 
-/* th */
-
-.el-table td,
-.el-table th {
-  padding: 0;
+/* 分屏 */
+.SplitScreen .AudioVisual_wrap_compare .el-icon-close{
+  position: absolute;
+  color: white;
+  font-size: 30px;
+  right: 10px;
+  top: 10px; 
 }
-
 
 /* 信审表 */
+/* 解决测试环境宽高不生效问题 */
 .CreditForm .el-input {
   display: inline-block;
   width: 180px;
-  height: 30px;
+  height: 36px;
+}
+/* 解决第一次进来input有外边框加粗 radius+4 的问题 */
+.CreditForm .el-input__inner{
+  border:1px solid rgb(229,229,229) ;
+  border-radius: 4px;
+  height: 36px;
 }
 .CreditForm .el-collapse-item__header {
   border: 1px solid silver;
@@ -230,6 +261,8 @@ td {
 }
 .borrowerInformation .el-input__inner {
   height: 30px;
+  border: 1px solid rgb(229,229,229);
+  border-radius: 4px;
 }
 
 
@@ -243,9 +276,13 @@ td {
 }
 .applicationInformation .el-date-editor.el-input, .el-date-editor.el-input__inner{
   width: 180px;
+  border: 1px solid rgb(229,229,229);
+  border-radius: 4px;
 }
 .applicationInformation .el-input__inner {
   height: 30px;
+  border: 1px solid rgb(229,229,229);
+  border-radius: 4px;
 }
 
 /* 下拉框禁用背景色 */
@@ -273,4 +310,6 @@ td {
 /* 信审任务列表 */
 .taskWinput .el-input__inner {
   height: 30px;
+  border: 1px solid rgb(229,229,229);
+  border-radius: 4px;
 }

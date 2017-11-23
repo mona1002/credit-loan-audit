@@ -44,13 +44,13 @@ export default {
   },
   methods:{
     loginFn(){
-      // console.log('login ')
-      // this.post("/smUser/login", {
-      //   userCode: "02103C3003",
-      //   loginPassword: "111111"
-      // }).then(res => {
-      //   console.log(res);
-      // });
+      console.log('login ')
+      this.post("/smUser/login", {
+        userCode: "02103C3003",
+        loginPassword: "111111"
+      }).then(res => {
+        console.log(res);
+      });
  this.$router.push({path:'/workbench'})
         
       // /creTelInfo/queryTels
@@ -65,8 +65,6 @@ export default {
   height: 100%;
   background: linear-gradient(to right, #00a1ff, #42b1f2);
 }
-
-
 
 /* 1366 * 768 */
 
