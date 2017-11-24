@@ -442,6 +442,7 @@
             <li>
               <label class="check_reside__left_label">现住址：</label>
               <span> 北京市北京市延庆县宫本武藏 </span>
+                <span class="detail_inf oneline"> </span> {{this.address}} </span>
             </li>
             <li>
               <label class="check_reside__left_label">现住地址是否为常住地址 ：</label>
@@ -762,6 +763,7 @@
         livingHouseHoldsVal: '', //同住者关系
         livingEstateBelongsVal: '', //居住房产所属情况
         // 核对现住址
+        address:'',//现住址-----span 直接显示
         aisresidentVal: '', //现住地址是否为常住地址
         jhjk: '', //
 
@@ -781,7 +783,7 @@
         //核实身份
         isselftxt: '', //接听说明
         // 初审结论
-        firstConclusion: '', //初审结果评价
+        firstConclusion: '', //初审结果评价-----------待处理是否需要获取数据--------还是只可以填写
 
         // input 字段
         // 工作信息
