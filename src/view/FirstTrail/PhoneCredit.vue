@@ -8,7 +8,7 @@
         <!-- no-key 每个树节点用来作为唯一标识的属性,整棵树应是唯一的 -->
         <!-- renderContent 指定渲染函数,该函数返回需要的节点区内容即可 -->
         <!-- highlight-current 是否高亮当前选中项 -->
-        <el-tree :data="data" :props="defaultProps" highlight-current accordion no-key="id" @node-click="handleNodeClick" >
+        <el-tree :data="data" :props="defaultProps" highlight-current accordion no-key="applyId" @node-click="handleNodeClick">
         </el-tree>
         <!-- 备选  折叠面板- 手风琴效果 -->
         <el-button @click.native="coverShow=true">添加</el-button>
@@ -48,7 +48,6 @@
         <!-- 表单部分 -->
         <el-main>
           <!-- 默认的新增表单 -->
-
           <!-- 住址电话 - 表单 -->
           <AddressForm class="form-his" v-if="addressFormShow"></AddressForm>
           <!-- 住址电话 - 历史 -->
@@ -65,14 +64,11 @@
           <WorkForm class="form-his" v-if="workFormShow"></WorkForm>
           <!-- 紧急联系人 - 历史 -->
           <WorkHis class="form-his" v-if="workHisShow"></WorkHis>
-
           <!-- 子组件 -->
           <!-- <router-link to="/AddressForm/formTag='testtag'/id='123'/phoneType='01'">
             <el-button type="primary">住址电话</el-button>
           </router-link> -->
           <!-- <router-view></router-view> -->
-
-
         </el-main>
       </el-container>
     </el-container>
@@ -133,134 +129,58 @@ export default {
   data() {
     return {
       data: [{
-          id: 1,
-          label: '住址电话',
-          children: [{
-            id: 4,
-            label: '010-2345687',
-          }]
-        },
-        {
-          id: 2,
-          label: '单位电话',
-          children: [{
-            id: 5,
-            label: '010-4564646',
-          }, {
-            id: 6,
-            label: '010-5461615',
-          }]
-        },
-        {
-          id: 3,
-          label: '家庭联系人',
-          children: [{
-            id: 7,
-            label: '010-464646',
-          }, {
-            id: 8,
-            label: '010-4646165',
-          }]
-        },
-        {
-          id: '',
-          label: '紧急联系人',
-          children: [{
-            id: '',
-            label: '010-46464'
-          }]
-        },
-        {
-          id: '',
-          label: '工作证明人',
-          children: [{
-            id: '',
-            label: '584165654'
-          }]
-        }
-      ],
-      options: [{
-          value: '住址电话',
-          label: '住址电话'
-        },
-        {
-          value: '单位电话',
-          label: '单位电话'
-        },
-        {
-          value: '家庭联系人电话',
-          label: '家庭联系人电话'
-        },
-        {
-          value: '紧急联系人电话',
-          label: '紧急联系人电话'
-        },
-        {
-          value: '工作联系人电话',
-          label: '工作联系人电话'
-        }
-      ],
-      tableData: [{
-          date: '20107-11-20',
-          phoneType: '手机',
-          checkTime: '2017-11-20',
-          source: '来源',
-          phoneNum: '13103588888',
-          answer: '未接听',
-          checkStage: '第一阶段',
-          conclusion: '调查结论1'
-        },
-        {
-          date: '20107-11-20',
-          phoneType: '手机',
-          checkTime: '2017-11-20',
-          source: '来源',
-          phoneNum: '13103588888',
-          answer: '未接听',
-          checkStage: '第一阶段',
-          conclusion: '调查结论1'
-        },
-        {
-          date: '20107-11-20',
-          phoneType: '手机',
-          checkTime: '2017-11-20',
-          source: '来源',
-          phoneNum: '13103588888',
-          answer: '未接听',
-          checkStage: '第一阶段',
-          conclusion: '调查结论1'
-        },
-        {
-          date: '20107-11-20',
-          phoneType: '手机',
-          checkTime: '2017-11-20',
-          source: '来源',
-          phoneNum: '13103588888',
-          answer: '未接听',
-          checkStage: '第一阶段',
-          conclusion: '调查结论1'
-        },
-        {
-          date: '20107-11-20',
-          phoneType: '手机',
-          checkTime: '2017-11-20',
-          source: '来源',
-          phoneNum: '13103588888',
-          answer: '未接听',
-          checkStage: '第一阶段',
-          conclusion: '调查结论1'
-        },
-        {
-          date: '20107-11-20',
-          phoneType: '手机',
-          checkTime: '2017-11-20',
-          source: '来源',
-          phoneNum: '13103588888',
-          answer: '未接听',
-          checkStage: '第一阶段',
-          conclusion: '调查结论1'
-        }
-      ],
+            applyId: '01',
+            label: '家庭电话',
+            children: [{
+                applyId: "2222",
+                label: '家庭电话1',
+                creatorCode: "123",
+                creatorDate: 1510887596000,
+                id: "10a8ba62-cb44-11e7-a48c-64006a8cbdf8",
+                relationShip: null,
+                telName: "12344",
+                telNum: "123455",
+                telType: "03"
+              },
+              {
+                applyId: "2222",
+                creatorCode: "123",
+                creatorDate: 1510887596000,
+                id: "10a8ba62-cb44-11e7-a48c-64006a8cbdf8",
+                relationShip: null,
+                telName: "12344",
+                telNum: "123455",
+                telType: "03"
+              }
+            ]
+          },
+          {
+            applyId: '02',
+            label: '单位电话',
+            children: [{
+                applyId: "2222",
+                creatorCode: "123",
+                creatorDate: 1510887596000,
+                id: "10a8ba62-cb44-11e7-a48c-64006a8cbdf8",
+                relationShip: null,
+                telName: "12344",
+                telNum: "123455",
+                telType: "03"
+              },
+              {
+                applyId: "2222",
+                creatorCode: "123",
+                creatorDate: 1510887596000,
+                id: "10a8ba62-cb44-11e7-a48c-64006a8cbdf8",
+                relationShip: null,
+                telName: "12344",
+                telNum: "123455",
+                telType: "03"
+              }
+            ]
+
+          }
+        ],
       defaultProps: {
         children: 'children',
         label: 'label'
@@ -290,7 +210,22 @@ export default {
       workHisShow: false
     }
   },
+  created() {
+    // 组件歘估计完成后获取数据
+    // 此时 data 已经被 observed 了
+    this.fetchData();
+  },
   methods: {
+    fetchData() {
+      this.post("/creTelInfo/queryTels", {
+        applyId: '2222'
+      }).then(res => {
+        // console.log(res);
+        console.log(res.data);
+        // this.data = res.data;
+
+      });
+    },
     handleNodeClick(data) {
       // 点击每条数据的事件
       console.log(data);
@@ -356,41 +291,55 @@ el-header {
   height: 100%;
 }
 
+
 /* 树形  结构 */
-.el-tree{
+
+.el-tree {
   padding-left: 10px;
 }
 
+
 /* element-ui tree icon 箭头*/
+
 .el-tree-node__content>.el-tree-node__expand-icon {
   /*display: none;*/
   position: absolute;
   left: 150px;
 }
 
+
 /* 三角 icon */
+
 .el-tree-node__expand-icon {
   font-size: 20px;
 }
 
+
 /* label 字体 */
+
 .el-tree-node__label {
   font-size: 20px;
 }
 
+
 /* 二级 目录 样式 */
+
 .el-tree-node__content {
   padding-left: 0px !important;
 }
 
+
 /* 添加电话 按钮 */
+
 .el-aside .el-button {
   width: 80px;
   margin: 20px;
   margin-left: 60px;
 }
 
+
 /* 点击添加出现的 页面 */
+
 .cover-view {
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
@@ -400,7 +349,9 @@ el-header {
   left: 0;
 }
 
+
 /* 添加页面内容 */
+
 .cover-content {
   z-index: 99;
   background: #fff;
@@ -416,17 +367,22 @@ el-header {
   padding: 5px;
 }
 
+
 /* title */
+
 .cover-content .add-title {
   text-align: left;
 }
 
+
 /**/
+
 .add-content li {
   border-bottom: 1px solid #ededed;
   padding: 5px;
   height: 40px;
 }
+
 .add-content li span:first-child {
   width: 80px;
   text-align: center;
@@ -439,7 +395,9 @@ el-header {
   text-indent: 5px;
 }
 
+
 /* 确定按钮 */
+
 .cover-content .el-button {
   display: block;
   float: right;
@@ -447,7 +405,9 @@ el-header {
   margin-right: 10px;
 }
 
+
 /* 弹窗页面 关闭按钮*/
+
 .el-tag {
   width: 0;
   height: 0;
@@ -462,7 +422,9 @@ el-header {
   right: 0px;
 }
 
+
 /* 右侧 头 table*/
+
 .el-header {
   width: 100%;
   height: auto !important;
@@ -487,24 +449,33 @@ el-header {
   padding-left: 20px;
 }
 
+
 /* 表格分页 */
+
 .el-pagination {
   margin-top: 10px;
   width: 100%;
   text-align: center;
 }
 
+
 /* 前往 第几页 */
+
 .el-pagination__jump {
   display: none !important;
 }
 
+
 /* 共 100条*/
+
 .el-pagination__total {}
 
+
 /* form-his */
+
 .form-his {
   width: 100%;
   height: 100%;
 }
+
 </style>
