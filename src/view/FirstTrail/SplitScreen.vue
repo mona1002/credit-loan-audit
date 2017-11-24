@@ -86,7 +86,7 @@
             <!-- 反欺诈结论 空白 -->
             <!-- <CreditForm v-if=" this.tabContent2==8"></CreditForm> -->
             <!-- 信审审批 空白 -->
-            <!-- <CreditForm v-show=" this.tabContent2==9"></CreditForm> -->
+            <CreditApproval v-show=" this.tabContent2==9"></CreditApproval>
 
           </div>
         </div>
@@ -128,6 +128,7 @@ import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
   // import s from "./detailComponent/remark";
   // 反欺诈结论 写此处
   // 信审审批写此处
+  import CreditApproval from "./CreditApproval";
   // 查询
   import cCreditForm from "./checkComponent/cCreditForm";
   
@@ -288,6 +289,8 @@ import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
       PhoneCredit,
       CreditForm,
       creditInvestigation,
+      // 信审审批
+      CreditApproval,
       // 查询
       cCreditForm,
       AudioVisualLeft,
