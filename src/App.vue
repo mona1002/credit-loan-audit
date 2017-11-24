@@ -17,6 +17,18 @@ import myHead from "./view/header"
       console.log(this.$refs.ddd)
 
     },
+    mounted(){
+
+      
+      //    this.post("/smUser/login", {
+      //   userCode: "02103C3003",
+      //   loginPassword: "111111"
+      // }).then(res => {
+      //   console.log(res);
+      // }).catch(err => {
+      //   reject(err)
+      // });
+    },
 components:{
   myHead
 }

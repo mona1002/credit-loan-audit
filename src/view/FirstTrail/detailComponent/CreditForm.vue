@@ -301,7 +301,7 @@
             </li>
             <li>
               <label class="CompanyInfs_left_label left_margin_half_one">月还款额/租金[万元]：</label>
-                <el-input type="text" placeholder="请输入内容" v-model="selfhasProportion">
+              <el-input type="text" placeholder="请输入内容" v-model="monthrentamt">
               </el-input>
             </li>
             <li>
@@ -336,7 +336,7 @@
             <li>
               <!--   需要改成 date  输入框 -->
               <label class=" CheckId_right_label "> 经营场所：</label>
-                 <el-select v-model="selfpremisesVal" placeholder="请选择">
+              <el-select v-model="selfpremisesVal" placeholder="请选择">
                 <el-option v-for="item in selfpremises" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
@@ -394,7 +394,7 @@
             </li>
             <li>
               <label class="FamilyInf_left_label">个人/家庭月开销[元]：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="brothersIfhastxt">
+              <el-input type="text" placeholder="请输入内容" v-model="fconsumption">
               </el-input>
             </li>
           </ul>
@@ -648,7 +648,7 @@
         }, {
           value: '02',
           label: '自有房产'
-        },{
+        }, {
           value: '03',
           label: '按揭'
         }],
@@ -752,7 +752,7 @@
         hirecomPaymentTypeVal: '', // 工资发放形式：
         //  私营企业信息
         selfTypeVal: '', //企业类型
-        selfpremisesVal:'',// 经营场所
+        selfpremisesVal: '', // 经营场所
         // 家庭信息
         fmarrflagVal: '', //婚姻状况
         childFlagVal: '', //是否有子女
@@ -795,11 +795,11 @@
         hirecomGetjob: '', // 入职时间-日期选择器
         hirecomPostcode: '', // 单位地址邮编
         hirecomType: '', // 是否为私营业主
-        hirecomAddress:'',//单位地址 -----------------------------------------------------------------------------待确认
+        hirecomAddress: '', //单位地址 -----------------------------------------------------------------------------待确认
         // 私营企业信息
-        selfregcapital:'',//注册资金[万元]
+        selfregcapital: '', //注册资金[万元]
         selfhasProportion: '', //占股比例
-        selfhddasProportion: '',// 月还款额/租金[万元]
+        monthrentamt: '', // 月还款额/租金[万元]
         selfpremisesArea: '', //营业面积
         selfBusproject: '', //企业经营项目
         selfRecyearProfits: '', //近一年利润[万元]
@@ -810,7 +810,7 @@
         jfimeuuf: '', //每月净利润[万元]：-----------------------------------------------------------------------------待确认
         selfFirdistri: '', //第一分销商
         // 家庭信息
-        selfFirdikkstri: '',// 个人/家庭月开销[元]
+        fconsumption: '', // 个人/家庭月开销[元]
         brothersIfhastxt: '', //是否有兄弟姐妹备注
         fbalance: '', //可以承受的月还款[元]
 
@@ -826,11 +826,11 @@
         // kkkkkk: '', // 
         // kkkkkk: '', // 
 
-      
+
         form: {
           desc: '', //上网查询信息 右侧textarea框绑定值
         },
-  options: [{ // 现住地址是否为常住地址
+        options: [{ // 现住地址是否为常住地址
           value: '1',
           label: '是'
         }, {
@@ -868,6 +868,16 @@
       CFsave() {
         console.log("提交信息")
       }
+    },
+    mounted() {
+      // 省    
+      this.post("/credit/queryProvince", {
+        id: "bb30607c-b5aa-4915-9474-460e099a33e8",
+      }).then(res => {
+        console.log(res);
+      }).catch(err => {
+        reject(err)
+      });
     }
   }
 
@@ -875,7 +885,6 @@
 
 <style scope>
   /* 公共 */
-
   /* .one_input {
     width: 70%;
   } */
@@ -930,12 +939,12 @@
     display: inline-block;
     width: 50%;
     padding: 10px 15px 10px 7px;
-    word-break: 0rmal ;
+    word-break: 0rmal;
     /* border: 1px solid yellow; */
     text-align: right;
   }
   /* 单独设置-上网查询信息- 左侧下拉框*/
-    /* .CreditForm_InternetInf_ul_left li{
+  /* .CreditForm_InternetInf_ul_left li{
       padding:1.5px 0;
 
     } */
