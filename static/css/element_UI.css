@@ -8,16 +8,7 @@
   display: inline-block;
   width: 180px;
 }
-/* th */
 
-.el-table td,
-.el-table th {
-  padding: 0;
-}
-
-/* .el-input {
-  display: inline-block;
-} */
 
 .el-input__inner {
   height: 30px;
@@ -31,12 +22,17 @@
 }
 
 
-/* 表格行高 */
+/* 表格行高-----未生效---需要用的话单独设一下 */
 
 .el-table .cell {
   line-height: 40px;
 }
+/* 表格------未生效---需要用的话单独设一下*/
 
+.el-table td,
+.el-table th {
+  padding: 0;
+}
 
 /* 表头颜色 */
 
@@ -45,7 +41,12 @@
   color: #1f2d3d;
   text-align: center;
 }
+/* 表格内容居中 */
 
+.el-table th,
+td {
+  text-align: center;
+}
 
 /* 字体图标颜色大小 */
 
@@ -55,17 +56,7 @@
 }
 
 
-/* 表格内容居中 */
 
-.el-table th,
-td {
-  text-align: center;
-}
-
-.el-table td,
-.el-table th {
-  padding: 0;
-}
 
 
 /* 折叠面板头部背景色 */
@@ -122,6 +113,7 @@ height: 87%;
   font-size: 30px;
   right: 10px;
   top: 10px; 
+  z-index: 99;
 }
 
 /* 信审表 */

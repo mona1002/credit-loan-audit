@@ -2,10 +2,10 @@ import axios from 'axios'
 // axios 配置
 axios.defaults.timeout = 5000; 
 //数据接口
-//  axios.defaults.baseURL = 'http://10.1.26.200:20716/riskManagement';
+ axios.defaults.baseURL = 'http://10.1.26.200:20716/riskManagement';
 //  axios.defaults.baseURL = 'http://localhost:8080';
 //  axios.defaults.baseURL = 'http://10.1.26.65:8090/interface/api/v1/';  //木接口地址
- axios.defaults.baseURL = 'http://10.1.26.17:8080/riskManagement';//俊波本地地址
+//  axios.defaults.baseURL = 'http://10.1.26.17:8080/riskManagement';//俊波本地地址
 
 
 //  axios.defaults.baseURL = '/riskManagement';// 用代理时 打开----修改为代理路径

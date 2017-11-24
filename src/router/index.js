@@ -27,14 +27,17 @@ import AudioVisual from '@/view/FirstTrail/detailComponent/AudioVisual'
 import CreditForm from '@/view/FirstTrail/detailComponent/CreditForm'
 // 登录页
 import login from '@/view/login/login'
-
 import cCreditForm from '@/view/FirstTrail/checkComponent/cCreditForm'
+
+// import cCreditForm from '@/view/FirstTrail/checkComponent/cCreditForm'
 // 内部匹配
 import InternalMatch from '@/view/FirstTrail/InternalMatch'
 // 电话征信
 import PhoneCredit from '@/view/FirstTrail/PhoneCredit'
-// 查询详情页面（部分）
+// 查询详情页面审批结论轨迹（部分）
 import ApprovalConclusion from '@/view/FirstTrail/checkComponent/ApprovalConclusion'
+// 查询详情页面财务信息（部分）
+import FinanceInformation from '@/view/FirstTrail/checkComponent/FinanceInformation'
 
 // 信审审批
 import CreditApproval from '@/view/FirstTrail/CreditApproval'
@@ -43,7 +46,7 @@ Vue.use(Router)
 
 const routes = [{
    path: '/',
-    component: workbench
+    component: login
     // path: '/',
     // component: login
     // meta: {
@@ -118,10 +121,15 @@ const routes = [{
     path: '/PhoneCredit',
     component: PhoneCredit
   },
-  // 
+  // 审批结论轨迹
   {
     path: '/ApprovalConclusion',
     component: ApprovalConclusion
+  },
+   // 审批结论轨迹
+   {
+    path: '/FinanceInformation',
+    component: FinanceInformation
   },
 {
     // 信审审批

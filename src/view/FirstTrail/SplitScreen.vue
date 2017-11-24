@@ -32,7 +32,7 @@
         <div ref="Left_detail" class="Left_detail_div">
           <p class="Left_right_Title"> {{this.title}} </p>
           <div class="Left_right_BigImg ">
-            <AudioVisual v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></AudioVisual>
+            <AudioVisualLeft v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></AudioVisualLeft>
             <!-- <workbench v-if=" this.tabContent1==1"></workbench> -->
             <!-- <div v-if=" this.tabContent1==3">asdfa</div> -->
             <!-- <div v-if=" this.tabContent1==4">asdf adf</div> -->
@@ -99,12 +99,13 @@
       <i class="el-icon-close" @click="closeCompareBtn"></i>
         <div class="AudioVisual_wrap_compare_left ">
             <!-- <Internal-match></Internal-match> -->
-            <Audio-visual></Audio-visual>
-
+            <!-- <Audio-visual></Audio-visual> -->
+<AudioVisualLeft></AudioVisualLeft>
         </div>
         <div class="AudioVisual_wrap_compare_right ">
+<AudioVisualLeft></AudioVisualLeft>
 
-            <InternalMatch></InternalMatch>
+            <!-- <InternalMatch></InternalMatch> -->
             
         </div>
       </div>
@@ -115,6 +116,8 @@
 <script>
 // 编辑
   import AudioVisual from "./detailComponent/AudioVisual";
+import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
+  
   import remark from "./detailComponent/remark";
   import InternalMatch from "./InternalMatch";
   import applicationInformation from "./detailComponent/applicationInformation";
@@ -131,7 +134,7 @@
   export default {
     data() {
       return {
-        CompareAlert:true,//对比按钮 弹出层
+        CompareAlert:false,//对比按钮 弹出层
         title: "",
         // activeName: 'second', //---------右侧tab切换用
         isShow: false,
@@ -165,6 +168,7 @@
         console.log("我是傅祖建")
         this.CompareAlert=true;
       },
+      // 弹出层关闭按钮
       closeCompareBtn(){
         this.CompareAlert=false;
       },
@@ -286,6 +290,7 @@
       creditInvestigation,
       // 查询
       cCreditForm,
+      AudioVisualLeft,
     }
   }
 

@@ -1,6 +1,6 @@
 <template>
   <div id="AudioVisual">
-    <h2> 影音资料</h2>
+    <h2> 审批结论轨迹</h2>
     <!-- ApprovalConclusion  -->
     <div>
       <div class="AVLeft" ref="AuVleft" @mouseenter.stop="mouseEnter">
