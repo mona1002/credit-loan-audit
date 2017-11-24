@@ -287,10 +287,12 @@
             </li>
             <li>
               <label class="CompanyInfs_left_label left_margin_half_one">注册资金[万元]：</label>
-              <el-select v-model="selfregcapitalVal" placeholder="请选择">
+              <el-input type="text" placeholder="请输入内容" v-model="selfregcapital">
+              </el-input>
+              <!-- <el-select v-model="selfregcapitalVal" placeholder="请选择">
                 <el-option v-for="item in selfregcapital" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
-              </el-select>
+              </el-select> -->
             </li>
             <li>
               <label class="CompanyInfs_left_label left_margin_half_two">占股比例：</label>
@@ -299,10 +301,8 @@
             </li>
             <li>
               <label class="CompanyInfs_left_label left_margin_half_one">月还款额/租金[万元]：</label>
-              <el-select v-model="selfMonthRentVal" placeholder="请选择">
-                <el-option v-for="item in selfMonthRent" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
+              <el-input type="text" placeholder="请输入内容" v-model="monthrentamt">
+              </el-input>
             </li>
             <li>
               <label class="CompanyInfs_left_label left_margin_half_two">营业面积：</label>
@@ -336,8 +336,10 @@
             <li>
               <!--   需要改成 date  输入框 -->
               <label class=" CheckId_right_label "> 经营场所：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="selfpremisestxt">
-              </el-input>
+              <el-select v-model="selfpremisesVal" placeholder="请选择">
+                <el-option v-for="item in selfpremises" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
             </li>
             <li>
               <label class=" CheckId_right_label "> 员工人数： </label>
@@ -386,16 +388,14 @@
             <li>
               <label class="FamilyInf_left_label">是否有兄弟姐妹：</label>
               <el-select v-model="brothersIfhasVal" placeholder="请选择">
-                <el-option v-for="item in brothersIfhasVal" :key="item.value" :label="item.label" :value="item.value">
+                <el-option v-for="item in brothersIfhas" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
             <li>
               <label class="FamilyInf_left_label">个人/家庭月开销[元]：</label>
-              <el-select v-model="fconsumptionVal" placeholder="请选择">
-                <el-option v-for="item in fconsumption" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
+              <el-input type="text" placeholder="请输入内容" v-model="fconsumption">
+              </el-input>
             </li>
           </ul>
           <ul class="CreditForm_FamilyInf_ul_right">
@@ -474,206 +474,258 @@
         activeNames: ['1', "2", "3", "4", "5", "6", "7", "8"], //折叠面板 默认显示下标
         // -------上网查询信息------------
         beexEcuted: [{ //（上网查询信息）客户在人法网是否有被执行信
-          value: 'yes',
+          value: '1',
           label: '是'
         }, {
-          value: 'no',
+          value: '0',
           label: '否'
         }],
         netHirecom: [{ //（上网查询信息）单位在人法网是否有被执行信
-          value: 'yes',
+          value: '1',
           label: '是'
         }, {
-          value: 'no',
+          value: '0',
           label: '否'
         }],
         netEcutedBrea: [{ //（上网查询信息）客户在失信网是否有失信记录
-          value: 'yes',
+          value: '1',
           label: '是'
         }, {
-          value: 'no',
+          value: '0',
           label: '否'
         }],
         netHirecomBrea: [{ //（上网查询信息）单位在失信网是否有失信记录  4
-          value: 'yes',
+          value: '1',
           label: '是'
         }, {
-          value: 'no',
+          value: '0',
           label: '否'
         }],
         netPhone: [{ //（上网查询信息）网上搜索借款人的手机是否有异常信息 5
-          value: 'yes',
+          value: '1',
           label: '是'
         }, {
-          value: 'no',
+          value: '0',
           label: '否'
         }],
         netHirecomName: [{ //（上网查询信息）网搜单位名称是否有异常  6
-          value: 'yes',
+          value: '1',
           label: '是'
         }, {
-          value: 'no',
+          value: '0',
           label: '否'
         }],
         netHirecomPhone: [{ //（上网查询信息）网搜单位电话是否有异常  7
-          value: 'yes',
+          value: '1',
           label: '是'
         }, {
-          value: 'no',
+          value: '0',
           label: '否'
         }],
         netAddrandEstate: [{ //（上网查询信息）网上搜索借款人现居住地址和房产地址是否有异常  8
-          value: 'yes',
+          value: '1',
           label: '是'
         }, {
-          value: 'no',
+          value: '0',
           label: '否'
         }],
         netHirecomAddress: [{ //（上网查询信息）网搜单位地址是否有异常   9
-          value: 'yes',
+          value: '1',
           label: '是'
         }, {
-          value: 'no',
+          value: '0',
           label: '否'
         }],
         netCompany: [{ //（上网查询信息）当地工商网查询企业基本信息中是否有登记
-          value: 'yes',
+          value: '1',
           label: '是'
         }, {
-          value: 'no',
+          value: '0',
           label: '否'
         }],
         netAddrstate: [{ //（上网查询信息）客户工作单位在全国组织代码查询中是否存在  11
-          value: 'yes',
+          value: '1',
           label: '是'
         }, {
-          value: 'no',
+          value: '0',
           label: '否'
         }],
         // ---------------- 核实身份  ------------
         isself: [{ //  接听者是否是借款人本人：
-          value: 'yes',
+          value: '1',
           label: '是'
         }, {
-          value: 'no',
+          value: '0',
           label: '否'
         }],
         loanBefore: [{ // 是否在我司申请借款：
-          value: 'yes',
+          value: '1',
           label: '是'
         }, {
-          value: 'no',
+          value: '0',
           label: '否'
         }],
         // ---------------- 工作信息  ------------
         hirecomSign: [{ // 单位性质
-          value: 'yes',
-          label: '是'
+          value: '01',
+          label: '机关事业'
         }, {
-          value: 'no',
-          label: '否'
+          value: '02',
+          label: '国有'
+        }, {
+          value: '03',
+          label: '民营'
+        }, {
+          value: '04',
+          label: '外资'
+        }, {
+          value: '05',
+          label: '合资'
+        }, {
+          value: '06',
+          label: '私营'
+        }, {
+          value: '07',
+          label: '个体'
+        }, {
+          value: '08',
+          label: '上市公司'
+        }, {
+          value: '09',
+          label: '股份制'
+        }, {
+          value: '10',
+          label: '非盈利机构'
+        }, {
+          value: '11',
+          label: '其他'
         }],
         hirecomKind: [{ // 所属行业：
-          value: 'yes',
+          value: '1',
           label: '是'
         }, {
-          value: 'no',
+          value: '0',
           label: '否'
         }],
         hirecomAddress: [{ // 单位地址------------三级联动---待续 
-          value: 'yes',
+          value: '1',
           label: '是'
         }, {
-          value: 'no',
+          value: '0',
           label: '否'
         }],
         hirecomPaymentType: [{ // 工资发放形式
-          value: 'yes',
-          label: '是'
+          value: '01',
+          label: '网银'
         }, {
-          value: 'no',
-          label: '否'
+          value: '02',
+          label: '现金'
+        }, {
+          value: '03',
+          label: '网银+现金'
         }],
 
         // ------------------------------私营企业信息------------------------
         selfType: [{ // 企业类型
-          value: 'yes',
-          label: '是'
+          value: '01',
+          label: '独资'
         }, {
-          value: 'no',
-          label: '否'
+          value: '02',
+          label: '合伙'
+        }, {
+          value: '03',
+          label: '有限责任公司'
+        }, {
+          value: '04',
+          label: '股份有限公司否'
+        }, {
+          value: '05',
+          label: '个体工商户'
         }],
-        selfregcapital: [{ // 注册资金[万元]
-          value: 'yes',
-          label: '是'
+        selfpremises: [{ // 经营场所
+          value: '01',
+          label: '租用'
         }, {
-          value: 'no',
-          label: '否'
-        }],
-        selfMonthRent: [{ // 月还款额/租金[万元]
-          value: 'yes',
-          label: '是'
+          value: '02',
+          label: '自有房产'
         }, {
-          value: 'no',
-          label: '否'
+          value: '03',
+          label: '按揭'
         }],
         // ------------------------------家庭信息------------------------
         fmarrflag: [{ // 婚姻状况
-          value: 'yes',
-          label: '是'
+          value: '01',
+          label: '未婚'
         }, {
-          value: 'no',
-          label: '否'
+          value: '02',
+          label: '已婚'
+        }, {
+          value: '03',
+          label: '离异'
+        }, {
+          value: '04',
+          label: '丧偶'
         }],
         childFlag: [{ // 是否有子女
-          value: 'yes',
+          value: '1',
           label: '是'
         }, {
-          value: 'no',
+          value: '0',
           label: '否'
         }],
         parentIsliving: [{ // 父母是否在世
-          value: 'yes',
+          value: '1',
           label: '是'
         }, {
-          value: 'no',
+          value: '0',
           label: '否'
         }],
-        brothersIfhasVal: [{ // 是否有兄弟姐妹
-          value: 'yes',
+        brothersIfhas: [{ // 是否有兄弟姐妹
+          value: '1',
           label: '是'
         }, {
-          value: 'no',
-          label: '否'
-        }],
-        fconsumption: [{ // 个人/家庭月开销[元]
-          value: 'yes',
-          label: '是'
-        }, {
-          value: 'no',
+          value: '0',
           label: '否'
         }],
         // ------------------------------居住情况------------------------
         livingHouseHolds: [{ // 同住者关系
-          value: 'yes',
-          label: '是'
+          value: '00',
+          label: '普通'
         }, {
-          value: 'no',
-          label: '否'
+          value: '01',
+          label: '配偶及子女'
+        }, {
+          value: '02',
+          label: '其他'
+        }, {
+          value: '03',
+          label: '独居'
         }],
-        livingEstateBelongs: [{ // 居住房产所属情况
-          value: 'yes',
-          label: '是'
+        livingEstateBelongs: [{ // 同住者关系
+          value: '00',
+          label: '父母'
         }, {
-          value: 'no',
-          label: '否'
+          value: '01',
+          label: '本人及配偶'
+        }, {
+          value: '02',
+          label: '其他亲属'
+        }, {
+          value: '03',
+          label: '朋友'
+        }, {
+          value: '04',
+          label: '租住'
+        }, {
+          value: '05',
+          label: '宿舍'
         }],
         // ------------------------------核对现住址------------------------
         aisresident: [{ // 现住地址是否为常住地址
-          value: 'yes',
+          value: '1',
           label: '是'
         }, {
-          value: 'no',
+          value: '0',
           label: '否'
         }],
 
@@ -700,14 +752,12 @@
         hirecomPaymentTypeVal: '', // 工资发放形式：
         //  私营企业信息
         selfTypeVal: '', //企业类型
-        selfregcapitalVal: '', //注册资金[万元]
-        selfMonthRentVal: '', //月还款额/租金[万元]：
+        selfpremisesVal: '', // 经营场所
         // 家庭信息
         fmarrflagVal: '', //婚姻状况
         childFlagVal: '', //是否有子女
         parentIslivingVal: '', //父母是否在世
         brothersIfhasVal: '', //是否有兄弟姐妹
-        fconsumptionVal: '', //个人/家庭月开销[元]
         // 居住情况
         livingHouseHoldsVal: '', //同住者关系
         livingEstateBelongsVal: '', //居住房产所属情况
@@ -745,9 +795,11 @@
         hirecomGetjob: '', // 入职时间-日期选择器
         hirecomPostcode: '', // 单位地址邮编
         hirecomType: '', // 是否为私营业主
-        hirecomAddress:'',//单位地址 -----------------------------------------------------------------------------待确认
+        hirecomAddress: '', //单位地址 -----------------------------------------------------------------------------待确认
         // 私营企业信息
+        selfregcapital: '', //注册资金[万元]
         selfhasProportion: '', //占股比例
+        monthrentamt: '', // 月还款额/租金[万元]
         selfpremisesArea: '', //营业面积
         selfBusproject: '', //企业经营项目
         selfRecyearProfits: '', //近一年利润[万元]
@@ -758,6 +810,7 @@
         jfimeuuf: '', //每月净利润[万元]：-----------------------------------------------------------------------------待确认
         selfFirdistri: '', //第一分销商
         // 家庭信息
+        fconsumption: '', // 个人/家庭月开销[元]
         brothersIfhastxt: '', //是否有兄弟姐妹备注
         fbalance: '', //可以承受的月还款[元]
 
@@ -773,15 +826,15 @@
         // kkkkkk: '', // 
         // kkkkkk: '', // 
 
-      
+
         form: {
           desc: '', //上网查询信息 右侧textarea框绑定值
         },
-  options: [{ // 现住地址是否为常住地址
-          value: 'yes',
+        options: [{ // 现住地址是否为常住地址
+          value: '1',
           label: '是'
         }, {
-          value: 'no',
+          value: '0',
           label: '否'
         }],
       }
@@ -815,6 +868,16 @@
       CFsave() {
         console.log("提交信息")
       }
+    },
+    mounted() {
+      // 省    
+      this.post("/credit/queryProvince", {
+        id: "bb30607c-b5aa-4915-9474-460e099a33e8",
+      }).then(res => {
+        console.log(res);
+      }).catch(err => {
+        reject(err)
+      });
     }
   }
 
@@ -822,7 +885,6 @@
 
 <style scope>
   /* 公共 */
-
   /* .one_input {
     width: 70%;
   } */
@@ -845,6 +907,8 @@
 
   .CreditForm {
     min-width: 1366px;
+    /* height: 100%; */
+    overflow: auto;
   }
   /* 上网查询信息 */
 
@@ -875,14 +939,15 @@
     display: inline-block;
     width: 50%;
     padding: 10px 15px 10px 7px;
+    word-break: 0rmal;
     /* border: 1px solid yellow; */
     text-align: right;
   }
   /* 单独设置-上网查询信息- 左侧下拉框*/
-    .CreditForm_InternetInf_ul_left li{
+  /* .CreditForm_InternetInf_ul_left li{
       padding:1.5px 0;
 
-    }
+    } */
   /* 单独设置-家庭信息-右侧li上面的margin空行 */
 
   .CreditForm_FamilyInf_ul_right {

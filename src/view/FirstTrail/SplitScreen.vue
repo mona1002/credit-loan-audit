@@ -32,7 +32,7 @@
         <div ref="Left_detail" class="Left_detail_div">
           <p class="Left_right_Title"> {{this.title}} </p>
           <div class="Left_right_BigImg ">
-            <AudioVisual v-if=" this.tabContent1==0"></AudioVisual>
+            <AudioVisualLeft v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></AudioVisualLeft>
             <!-- <workbench v-if=" this.tabContent1==1"></workbench> -->
             <!-- <div v-if=" this.tabContent1==3">asdfa</div> -->
             <!-- <div v-if=" this.tabContent1==4">asdf adf</div> -->
@@ -75,7 +75,7 @@
           </p>
 
           <div class="tab2_Content">
-            <AudioVisual v-if=" this.tabContent2==0"></AudioVisual>
+            <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
             <remark v-if=" this.tabContent2==1"></remark>
             <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
             <applicationInformation v-if=" this.tabContent2==3"></applicationInformation>
@@ -86,7 +86,7 @@
             <!-- 反欺诈结论 空白 -->
             <!-- <CreditForm v-if=" this.tabContent2==8"></CreditForm> -->
             <!-- 信审审批 空白 -->
-            <!-- <CreditForm v-show=" this.tabContent2==9"></CreditForm> -->
+            <CreditApproval v-show=" this.tabContent2==9"></CreditApproval>
 
           </div>
         </div>
@@ -95,17 +95,20 @@
       </div>
     </div>
       <!-- 对比弹出层   不在右侧div里面，再 wrap 里面  可以用fixed定位-->
-      <!-- <div class="AudioVisual_wrap_compare">
+      <div class="AudioVisual_wrap_compare" v-show="CompareAlert" v-on:CompareShow="compBtnS">
+      <i class="el-icon-close" @click="closeCompareBtn"></i>
         <div class="AudioVisual_wrap_compare_left ">
-            <InternalMatch></InternalMatch>
-            
+            <!-- <Internal-match></Internal-match> -->
+            <!-- <Audio-visual></Audio-visual> -->
+<AudioVisualLeft></AudioVisualLeft>
         </div>
         <div class="AudioVisual_wrap_compare_right ">
+<AudioVisualLeft></AudioVisualLeft>
 
-            <InternalMatch></InternalMatch>
+            <!-- <InternalMatch></InternalMatch> -->
             
         </div>
-      </div> -->
+      </div>
       <!-- 对比弹出层结束 -->
   </div>
 
@@ -113,6 +116,8 @@
 <script>
 // 编辑
   import AudioVisual from "./detailComponent/AudioVisual";
+import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
+  
   import remark from "./detailComponent/remark";
   import InternalMatch from "./InternalMatch";
   import applicationInformation from "./detailComponent/applicationInformation";
@@ -123,13 +128,14 @@
   // import s from "./detailComponent/remark";
   // 反欺诈结论 写此处
   // 信审审批写此处
+  import CreditApproval from "./CreditApproval";
   // 查询
   import cCreditForm from "./checkComponent/cCreditForm";
   
   export default {
     data() {
       return {
-        CompareAlert:true,//对比按钮 弹出层
+        CompareAlert:false,//对比按钮 弹出层
         title: "",
         // activeName: 'second', //---------右侧tab切换用
         isShow: false,
@@ -158,6 +164,15 @@
       }
     },
     methods: {
+      // 对比按钮
+      compBtnS(){
+        console.log("我是傅祖建")
+        this.CompareAlert=true;
+      },
+      // 弹出层关闭按钮
+      closeCompareBtn(){
+        this.CompareAlert=false;
+      },
       handleClick(tab, event) { //   tab2 切换 触发函数
         // console.log(tab, event);
         // console.log(event.target.innerHTML);
@@ -274,8 +289,11 @@
       PhoneCredit,
       CreditForm,
       creditInvestigation,
+      // 信审审批
+      CreditApproval,
       // 查询
       cCreditForm,
+      AudioVisualLeft,
     }
   }
 

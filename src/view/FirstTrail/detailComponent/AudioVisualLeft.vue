@@ -9,9 +9,7 @@
         <!-- 折叠面板-手风琴List -->
         <p class="list_title">
           <span>影像名称</span>
-          <span>编号</span>
           <span>页数</span>
-          <span>上传日期</span>
         </p>
         <el-collapse>
           <!-- v-for="" -->
@@ -19,26 +17,20 @@
             <template slot="title">
               <p v-for="">
                 <span>影像名称</span>
-                <span>编号</span>
                 <span>页数</span>
-                <span>上传日期</span>
               </p>
             </template>
             <div class="list_title_div">
               <p v-for="">
                 <span>影像名称</span>
-                <span>编号</span>
                 <span>页数</span>
-                <span>上传日期</span>
               </p>
             </div>
             <!-- 此处为重复的样式  得到数据之后删除 -->
             <div class="list_title_div">
               <p>
                 <span>影像名称</span>
-                <span>编号</span>
                 <span>页数</span>
-                <span>上传日期</span>
               </p>
             </div>
             <!-- 重复部分结束 -->
@@ -48,9 +40,7 @@
             <template slot="title">
               <p>
                 <span>影像名称</span>
-                <span>编号</span>
                 <span>页数</span>
-                <span>上传日期</span>
               </p>
             </template>
             <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
@@ -272,6 +262,7 @@
       // this.get('../../../../static/json/img.json').then(response => { // axios 请求
       //   this.picData = response.data.items;
       // });
+
       
         //     if (getComputedStyle(this.$refs.Big_pic_ref[0], false).width > getComputedStyle(this.$refs.Big_pic_ref[0], //判断宽度>高度  按宽度100%显示
         //     false).height) { // 点击切换图片时，让显示的大图宽高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
