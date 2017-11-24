@@ -1,5 +1,6 @@
 <template>
   <div class="SplitScreen">
+    <myHead></myHead>
     <!-- 进件人详情 -->
     <p class="PerDtl">  <!-- p标签高度为30px -->
       <span class="PerInf"> 借款人姓名 :akdialkdinfl</span>
@@ -114,6 +115,7 @@
 
 </template>
 <script>
+import myHead from "../header.vue"
 // 编辑
   import AudioVisual from "./detailComponent/AudioVisual";
 import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
@@ -280,6 +282,7 @@ import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
       // console.log(this.$route.query.row.id) //接参数
     },
     components: {
+      myHead,
       // 编辑
       AudioVisual,
       remark,

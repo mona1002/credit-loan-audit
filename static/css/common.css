@@ -1,8 +1,8 @@
 @media screen and (max-width: 1366px) {
     #Abody{
       width:1366px;
-      height: calc(100% - 101px);
-      overflow-x: scroll;
+      /* height: calc(100% - 101px); */
+      /* overflow-x: scroll; */
     }
     html{
       width:1366px;
@@ -15,7 +15,7 @@
       width:100%;
     }
     #Abody{
-      height: calc(100% - 101px);
+      /* height: calc(100% - 101px); */
       /* overflow: hidden; */
     }
   }

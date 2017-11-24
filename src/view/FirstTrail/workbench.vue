@@ -1,5 +1,6 @@
 <template>
   <div class="workbench">
+    <myHead></myHead>
    <!-- 左边 -->
     <div class="workbench_left">
       <i class="el-icon-edit"> 常用</i>
@@ -65,6 +66,7 @@
   </div>
 </template>
 <script>
+import myHead from "../header.vue"
   export default {
    data() {
       return {
@@ -141,6 +143,9 @@
     mounted($event) {
       // var ev = ev || window.event;
 console.log(this.$event)
+    },
+    components:{
+      myHead
     }
   }
 
