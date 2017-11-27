@@ -17,7 +17,7 @@
   <router-link to="/InternalMatch">  <el-button type="primary">内部匹配</el-button></router-link>
   <router-link to="/PhoneCredit">  <el-button type="primary">电话征信</el-button></router-link>
   <router-link to="/ApprovalConclusion">  <el-button type="ApprovalConclusion">电话征信</el-button></router-link>
-  <router-link to="/CreditApproval">  <el-button type="primary">信审审批</el-button></router-link>
+  <router-link to="/CreditApproval"> <el-button type="primary">信审审批</el-button> </router-link>
   </div>
 
 

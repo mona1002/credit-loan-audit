@@ -176,6 +176,7 @@
           <ul class="CreditForm_WorkInfs_ul_left">
             <li>
               <label class="WorkInfs_left_label left_margin">工作单位：</label>
+
               <el-input style="width:70%;" type="text" placeholder="请输入内容" v-model="hirecomName">
               </el-input>
             </li>
@@ -217,8 +218,8 @@
             <li class="company_address_select">
               <label class="WorkInfs_left_label left_margin">单位地址 ：</label>
               <!-- 一级 -->
-              <el-select v-model="hirecomAddressVal" placeholder="请选择">
-                <el-option v-for="item in	hirecomAddress" :key="item.value" :label="item.label" :value="item.value">
+              <el-select v-model="hirecomAddressVal" placeholder="请选择" @change="province">
+                <el-option v-for="item in	hirecomAddress" :key="item.areaCode" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
               <!-- 二级 -->
@@ -797,7 +798,7 @@
         hirecomGetjob: '', // 入职时间-日期选择器
         hirecomPostcode: '', // 单位地址邮编
         hirecomType: '', // 是否为私营业主
-        hirecomAddress: '', //单位地址 -----------------------------------------------------------------------------待确认
+        hirecomAddress: '', //单位地址(input) -----------------------------------------------------------------------------待确认
         // 私营企业信息
         selfregcapital: '', //注册资金[万元]
         selfhasProportion: '', //占股比例
@@ -867,19 +868,50 @@
         }
         // this.rightList = false;
       },
-      CFsave() {
-        console.log("提交信息")
-      }
-    },
-    mounted() {
-      // 省    
-      this.post("/credit/queryProvince", {
+      province(){
+        console.log("province");
+          this.post("/credit/queryProvince", {
         id: "bb30607c-b5aa-4915-9474-460e099a33e8",
       }).then(res => {
         console.log(res);
       }).catch(err => {
         reject(err)
       });
+      },
+      city(){
+        console.log("city");
+          this.post("/credit/queryProvince", {
+        id: "bb30607c-b5aa-4915-9474-460e099a33e8",
+      }).then(res => {
+        console.log(res);
+      }).catch(err => {
+        reject(err)
+      });
+      },
+      town(){
+        console.log("town");
+          this.post("/credit/queryProvince", {
+        id: "bb30607c-b5aa-4915-9474-460e099a33e8",
+      }).then(res => {
+        console.log(res);
+      }).catch(err => {
+        reject(err)
+      });
+      },
+      CFsave() {
+        console.log("提交信息")
+      }
+    },
+    mounted() {
+      // 省    
+      this.post("credit/queryProvince", {
+      }).then(res => {
+        console.log(res);
+        this.hirecomAddress=res.data;
+      }).catch(err => {
+        reject(err)
+      });
+      
     }
   }
 
