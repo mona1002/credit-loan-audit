@@ -8,7 +8,7 @@
         <!-- no-key 每个树节点用来作为唯一标识的属性,整棵树应是唯一的 -->
         <!-- renderContent 指定渲染函数,该函数返回需要的节点区内容即可 -->
         <!-- highlight-current 是否高亮当前选中项 -->
-        <el-tree :data="data" :props="defaultProps" highlight-current accordion no-key="applyId" @node-click="handleNodeClick">
+        <el-tree :data="treeData" empty-text="123" :props="defaultProps" highlight-current expand-on-click-node default-expand-all no-key="id" @node-click="handleNodeClick">
         </el-tree>
         <!-- 备选  折叠面板- 手风琴效果 -->
         <el-button @click.native="coverShow=true">添加</el-button>
@@ -81,19 +81,22 @@
         </div>
         <ul class="add-content">
           <li>
+            <span class="require-icon">*</span>
             <span>电话类型:</span>
-            <el-select v-model="value" placeholder="请选择">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            <el-select v-model="addTelType" placeholder="请选择">
+              <el-option v-for="item in telTypes" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </li>
           <li>
+            <span class="require-icon">*</span>
             <span>电话名称:</span>
-            <el-input type="text" name="" value="" placeholder=""></el-input>
+            <el-input type="text" name="" v-model="addTelName" value="" placeholder=""></el-input>
           </li>
           <li>
+            <span class="require-icon">*</span>            
             <span>电话号码:</span>
-            <el-input type="text" name="" value="" placeholder=""></el-input>
+            <el-input type="text" name="" v-model="addTelNum" maxlength="13" value="" placeholder=""></el-input>
           </li>
         </ul>
         <el-button @click.native="append">确认</el-button>
@@ -128,63 +131,38 @@ import WorkHis from './detailComponent/WorkHis'
 export default {
   data() {
     return {
-      data: [{
-            applyId: '01',
-            label: '家庭电话',
-            children: [{
-                applyId: "2222",
-                label: '家庭电话1',
-                creatorCode: "123",
-                creatorDate: 1510887596000,
-                id: "10a8ba62-cb44-11e7-a48c-64006a8cbdf8",
-                relationShip: null,
-                telName: "12344",
-                telNum: "123455",
-                telType: "03"
-              },
-              {
-                applyId: "2222",
-                creatorCode: "123",
-                creatorDate: 1510887596000,
-                id: "10a8ba62-cb44-11e7-a48c-64006a8cbdf8",
-                relationShip: null,
-                telName: "12344",
-                telNum: "123455",
-                telType: "03"
-              }
-            ]
-          },
-          {
-            applyId: '02',
-            label: '单位电话',
-            children: [{
-                applyId: "2222",
-                creatorCode: "123",
-                creatorDate: 1510887596000,
-                id: "10a8ba62-cb44-11e7-a48c-64006a8cbdf8",
-                relationShip: null,
-                telName: "12344",
-                telNum: "123455",
-                telType: "03"
-              },
-              {
-                applyId: "2222",
-                creatorCode: "123",
-                creatorDate: 1510887596000,
-                id: "10a8ba62-cb44-11e7-a48c-64006a8cbdf8",
-                relationShip: null,
-                telName: "12344",
-                telNum: "123455",
-                telType: "03"
-              }
-            ]
-
-          }
-        ],
+      treeData: [{
+          "children": [],
+          "id": "01",
+          "label": "住址电话"
+        },
+        {
+          "children": [],
+          "id": "02",
+          "label": "单位电话"
+        },
+        {
+          "children": [],
+          "id": "03",
+          "label": "家庭联系人"
+        },
+        {
+          "children": [],
+          "id": "04",
+          "label": "紧急联系人"
+        },
+        {
+          "children": [],
+          "id": "05",
+          "label": "工作证明人"
+        }
+      ],
       defaultProps: {
         children: 'children',
         label: 'label'
       },
+      // 历史列表数据
+      tableData: [],
       id: '',
       value: '',
       // 当前页码
@@ -207,12 +185,27 @@ export default {
       hurryHisShow: false,
       // 工作证明人
       workFormShow: false,
-      workHisShow: false
+      workHisShow: false,
+      // 添加的电话类型
+      telTypes:[
+        {value:'01',label:'住址电话'},
+        {value:'02',label:'单位电话'},
+        {value:'03',label:'家庭联系人电话'},
+        {value:'04',label:'紧急联系人电话'},
+        {value:'05',label:'工作联系人电话'}
+      ],
+      // 添加申请单 带你和类型 
+      addTelType:'',
+      // 电话名称
+      addTelName:'',
+      // 电话号码
+      addTelNum:''
     }
   },
   created() {
-    // 组件歘估计完成后获取数据
+    // 组件 创建 估计完成后获取数据
     // 此时 data 已经被 observed 了
+    // 电话树数据
     this.fetchData();
   },
   methods: {
@@ -223,23 +216,56 @@ export default {
         // console.log(res);
         console.log(res.data);
         // this.data = res.data;
-
+        this.treeData = res.data;
       });
     },
     handleNodeClick(data) {
       // 点击每条数据的事件
       console.log(data);
       console.log('id:' + data.id + '\nlabel:' + data.label);
-      this.id = data.id;
-      // 点击数据展示历史记录  列表
-      this.hisListShow = true;
-      // 点击 住址电话 显示
-      this.addressFormShow = true;
-      this.addressHisShow = false;
+      if (data.id.length > 2 ) {
 
-      // 点击 单位电话
-      this.companyFormShow = true;
-      this.companyHisShow = false;
+      // telType  标志 是什么类型的数据
+      console.log('123123',data.telType);
+
+        this.id = data.id;
+
+        // 点击数据展示历史记录  列表
+        this.hisListShow = true;
+        console.log(this.id);
+        switch(this.id){
+          case '01':
+            this.addressFormShow = true;    
+            console.log(this.addressFormShow)
+            break;
+          case '02':
+            this.companyFormShow = true;
+            break;
+          case '03':
+            this.familyFormShow = true;
+            break;
+          case '04':
+            this.hurryFormShow = true;
+            break;
+          case '05':
+            this.workFormShow = true;
+            break;
+        }
+
+
+        // 点击 住址电话 显示
+        // this.addressFormShow = true;
+        // this.addressHisShow = false;
+
+        // 点击 单位电话
+        // this.companyFormShow = true;
+        // this.companyHisShow = false;
+
+      }else{
+        // 假如点击的是  父节点 , 则不改变
+        
+      }
+
     },
     append(data) {
       // 点击添加方法,用过 key 来判断 添加的哪项.
@@ -252,6 +278,21 @@ export default {
       //   this.$set(data, 'children', []);
       // }
       // data.children.push(newChild);
+      
+      this.post('/creTelInfo/addTel',{
+        "applyId":'2222',
+        "telNum":this.addTelNum,
+        "telName":this.addTelName,
+        "telType":this.addTelType,
+        // 登录人编号
+        "creatorCode": this.userCode
+      }).then( res => {
+        console.log(res);
+
+        if(res.statusCode == '200')
+          this.fetchData();
+      })
+
     },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
@@ -292,11 +333,17 @@ el-header {
 }
 
 
+
+
+
 /* 树形  结构 */
 
 .el-tree {
   padding-left: 10px;
 }
+
+
+
 
 
 /* element-ui tree icon 箭头*/
@@ -308,11 +355,18 @@ el-header {
 }
 
 
+
+
+
 /* 三角 icon */
 
 .el-tree-node__expand-icon {
   font-size: 20px;
+  /*display: none;*/
 }
+
+
+
 
 
 /* label 字体 */
@@ -322,11 +376,17 @@ el-header {
 }
 
 
+
+
+
 /* 二级 目录 样式 */
 
 .el-tree-node__content {
   padding-left: 0px !important;
 }
+
+
+
 
 
 /* 添加电话 按钮 */
@@ -336,6 +396,9 @@ el-header {
   margin: 20px;
   margin-left: 60px;
 }
+
+
+
 
 
 /* 点击添加出现的 页面 */
@@ -348,6 +411,9 @@ el-header {
   top: 0;
   left: 0;
 }
+
+
+
 
 
 /* 添加页面内容 */
@@ -368,11 +434,17 @@ el-header {
 }
 
 
+
+
+
 /* title */
 
 .cover-content .add-title {
   text-align: left;
 }
+
+
+
 
 
 /**/
@@ -396,6 +468,9 @@ el-header {
 }
 
 
+
+
+
 /* 确定按钮 */
 
 .cover-content .el-button {
@@ -404,6 +479,9 @@ el-header {
   margin-top: 10px;
   margin-right: 10px;
 }
+
+
+
 
 
 /* 弹窗页面 关闭按钮*/
@@ -421,6 +499,9 @@ el-header {
 .el-tag .el-icon-close {
   right: 0px;
 }
+
+
+
 
 
 /* 右侧 头 table*/
@@ -450,6 +531,9 @@ el-header {
 }
 
 
+
+
+
 /* 表格分页 */
 
 .el-pagination {
@@ -459,6 +543,9 @@ el-header {
 }
 
 
+
+
+
 /* 前往 第几页 */
 
 .el-pagination__jump {
@@ -466,9 +553,15 @@ el-header {
 }
 
 
+
+
+
 /* 共 100条*/
 
 .el-pagination__total {}
+
+
+
 
 
 /* form-his */
@@ -476,6 +569,12 @@ el-header {
 .form-his {
   width: 100%;
   height: 100%;
+}
+
+
+/* 添加申请单电话信息 必填 * */
+.require-icon{
+  color: #ff0000;
 }
 
 </style>
