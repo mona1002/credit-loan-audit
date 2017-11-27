@@ -63,7 +63,13 @@ const routes = [{
   //   component: myHead
   // },
   {
-    path: '/workbench',
+    // 工作台  误改, 误删
+    /*
+      userCode:    用户编码
+      orgCode:     机构编码
+     */
+    name:'workbench',
+    path: '/workbench/:userCode/:orgCode',
     component: workbench,
     require:myHead
   },
