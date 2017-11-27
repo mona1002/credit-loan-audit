@@ -1,5 +1,5 @@
 <template>
-  <tr class="my_cross_table">
+  <tr class="my_cross_table" v-bind:id="ynum">
     <td v-for="(tab,index) in tablejson[ytablemsg]">
         <div class="td_box" v-if="tab.val == 0 ">
         	{{ynum}}
@@ -215,6 +215,7 @@ export default {
           {'val':1}
         ]
       },
+      house_property:document.getElementsByClassName("house_property"),
     }
   },
   props: ['ytablemsg','ynum'],
@@ -222,7 +223,7 @@ export default {
 
   },
   methods:{
-
+   
   },
 
 }

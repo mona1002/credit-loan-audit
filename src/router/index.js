@@ -42,6 +42,9 @@ import FinanceInformation from '@/view/FirstTrail/checkComponent/FinanceInformat
 // 信审审批
 import CreditApproval from '@/view/FirstTrail/CreditApproval'
 
+/*借款人资料详情*/
+import borrowerInformationDetail from '@/view/FirstTrail/detailComponent/borrowerInformationDetail'
+
 Vue.use(Router)
 
 const routes = [{
@@ -135,8 +138,12 @@ const routes = [{
     // 信审审批
     path: '/CreditApproval',
     component: CreditApproval
-  }
-
+  },
+  {
+    // 借款人资料详情
+    path: '/borrowerInformationDetail',
+    component: borrowerInformationDetail
+  },
 ];
 
 const router = new Router({

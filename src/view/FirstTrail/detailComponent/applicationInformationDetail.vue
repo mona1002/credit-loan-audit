@@ -1,3 +1,4 @@
+<!-- 申请信息详情 -->
 <template>
 	<div class="applicationInformationDetailDetail">
 		<el-collapse v-model="activeNames" @change="handleChange">

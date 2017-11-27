@@ -1,3 +1,4 @@
+<!-- 借款人资料 -->
 <template>
 	<div class="borrowerInformation">
 		<el-collapse v-model="activeNames" @change="handleChange">
@@ -7,7 +8,7 @@
 					<i class="el-icon-remove icon" @click="delet_home"><span>删除</span></i>
 				</div>
 				<div class="tableDiv">
-					<table class="mytable">
+					<table class="myHomeTable">
 				      <thead>
 				        <tr>
 				          <th></th>
@@ -25,21 +26,17 @@
 				        </tr>
 				      </thead>
 				      <tbody>
-				        <!-- <tr>
-				          <td>0</td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				        </tr> -->
-				        <cross-rable class="house_property" v-for="(cro,index) in cross_rable_home" ytablemsg="house_property" v-bind:ynum="cro" :key="index"  @mouseenter.native="enter($event)" @mouseleave.native="leave($event)" @click.native='buttonClick(index)'></cross-rable>
+				      	
+				        <!-- <cross-rable 
+				        class="house_property" 
+				        v-for="(cro,index) in cross_rable_home" 
+				        ytablemsg="house_property" 
+				        v-bind:ynum="cro" 
+				        :key="index"  
+				        @mouseenter.native="enter($event)" 
+				        @mouseleave.native="leave($event)"
+				        @click.native='buttonClick(cro)'
+				        ></cross-rable> -->
 				      </tbody>
 				    </table>
 				</div>
@@ -68,7 +65,7 @@
 				        </tr>
 				      </thead>
 				      <tbody>
-				        <!-- <tr>
+				        <tr>
 				          <td>0</td>
 				          <td></td>
 				          <td></td>
@@ -81,7 +78,7 @@
 				          <td></td>
 				          <td></td>
 				          <td></td>
-				        </tr> -->
+				        </tr>
 				        <cross-rable v-for="cro in cross_rable_vehicle" ytablemsg="vehicle" v-bind:ynum="cro" :key="cro"></cross-rable>
 				      </tbody>
 				    </table>
@@ -112,7 +109,7 @@
 				        </tr>
 				      </thead>
 				      <tbody>
-				        <!-- <tr>
+				        <tr>
 				          <td>0</td>
 				          <td></td>
 				          <td></td>
@@ -125,7 +122,7 @@
 				          <td></td>
 				          <td></td>
 				          <td></td>
-				        </tr> -->
+				        </tr>
 				        <cross-rable v-for="cro in cross_rable_card" ytablemsg="card" v-bind:ynum="cro" :key="cro"></cross-rable>
 				      </tbody>
 				    </table>
@@ -177,7 +174,7 @@
 				        </tr>
 				      </thead>
 				      <tbody>
-				        <!-- <tr>
+				        <tr>
 				          <td>0</td>
 				          <td></td>
 				          <td></td>
@@ -190,7 +187,7 @@
 				          <td></td>
 				          <td></td>
 				          <td></td>
-				        </tr> -->
+				        </tr>
 				        <cross-rable v-for="cro in cross_rable_loanDetail" ytablemsg="loanDetail" v-bind:ynum="cro" :key="cro"></cross-rable>
 				      </tbody>
 				    </table>
@@ -278,7 +275,7 @@
 				        </tr>
 				      </thead>
 				      <tbody>
-				        <!-- <tr>
+				        <tr>
 				          <td>0</td>
 				          <td></td>
 				          <td></td>
@@ -289,7 +286,7 @@
 				          <td></td>
 				          <td></td>
 				          <td></td>
-				        </tr> -->
+				        </tr>
 				        <cross-rable v-for="cro in cross_rable_turnover" ytablemsg="turnover" v-bind:ynum="cro" :key="cro"></cross-rable>
 				      </tbody>
 				    </table>
@@ -303,10 +300,16 @@
 		  		</div> 
 		  	</el-collapse-item>
 		</el-collapse>
+		
+
+
+
 	</div>
 </template>
 <script type="text/javascript">
 import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
+import CrossRables from '@/view/FirstTrail/detailComponent/CrossRables'
+
 	export default {
 		name: 'borrowerInformation',
 	    data() {
@@ -321,23 +324,115 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
 	          label: '否'
 	        }],
 	        activeNames: ['1','2','3','4','5','6','7','8','9','10'],
-      		cross_rable_home: 0,
+      		cross_rable_home: [],
       		cross_rable_vehicle: 0,
       		cross_rable_card:0,
       		cross_rable_loanDetail:0,
       		cross_rable_turnover:0,
-      		house_property: document.getElementsByClassName("house_property"),
+      		home_k:1,
+      		//house_property: document.getElementsByClassName("house_property"),
+      		house_property:[
+	      		{'val':2,options:[
+	      				{'value': '1' ,'label':' 商业按揭购房'},
+	      				{'value': '2' ,'label': '公积金按揭购房'},
+	      				{'value': '3' ,'label': '无按揭购房'},
+	      				{'value': '4' ,'label': '自建房'}
+	      			]}, 
+	      		{'val':2,options:[
+	      				{'value': '1' ,'label':' 宅基地'},
+	      				{'value': '2' ,'label': '自建房'},
+	      				{'value': '3' ,'label': '小产权'},
+	      				{'value': '4' ,'label': '期房'},
+	      				{'value': '5' ,'label': '公租房'},
+			              {'value': '6' ,'label': '经济适用房'},
+			              {'value': '7' ,'label': '土地证'},
+			              {'value': '8' ,'label': '大产权'}
+	      			]},
+	      		
+	      		{'val':2,options:[
+	              {'value': '1' ,'label':' 已抵押'},
+	              {'value': '2' ,'label': '未抵押'},
+	          ]}
+      		],
 	      };
 	    },
 	    components: {
-		    CrossRable
+	    	CrossRable,
+		    CrossRables
+
 		},
 	    methods:{
 	    	handleChange(){
 
 	    	},
-	    	add_home: function(str) {
-		      this.cross_rable_home += 1;
+	    	add_home: function() {
+	    		 
+	    		/*var items=this.cross_rable_home;
+		      	items.push("home_"+this.home_k);
+		      	this.home_k+=1;
+		      	console.log(this.cross_rable_home);
+		      	}*/
+		      	var html = '<tr>\
+								<td>1</td>\
+								<td>\
+									<el-select v-model="">\
+								    <el-option\
+								      v-for="item in house_property[0].options"\
+								      :key="item.value"\
+								      :label="item.label"\
+								      :value="item.value">\
+								    </el-option>\
+								  </el-select>\
+								</td>\
+								<td>\
+									<el-select v-model="">\
+								    <el-option\
+								      v-for="item in house_property[1].options"\
+								      :key="item.value"\
+								      :label="item.label"\
+								      :value="item.value">\
+								    </el-option>\
+								  </el-select>\
+								</td>\
+								<td>\
+									<el-input v-model=""></el-input>\
+								</td>\
+								<td>\
+									<el-input v-model=""></el-input>\
+								</td>\
+								<td>\
+									<el-input v-model=""></el-input>\
+								</td>\
+								<td>\
+									<el-input v-model=""></el-input>\
+								</td>\
+								<td>\
+									<el-input v-model=""></el-input>\
+								</td>\
+								<td>\
+									<el-input v-model=""></el-input>\
+								</td>\
+								<td>\
+									<el-select v-model="y_value">\
+								    <el-option\
+								      v-for="item in house_property[2].options"\
+								      :key="item.value"\
+								      :label="item.label"\
+								      :value="item.value">\
+								    </el-option>\
+								  </el-select>\
+								</td>\
+								<td>\
+									<el-input v-model=""></el-input>\
+								</td>\
+								<td>\
+									<el-input v-model=""></el-input>\
+								</td>\
+							</tr>';
+				var html2 = '<tr><cross-rables></cross-rables></tr>';
+
+		      	$(".myHomeTable tbody").append(html2);
+		      	
 		    },
 		    add_vehicle: function(str) {
 		      this.cross_rable_vehicle += 1;
@@ -354,17 +449,32 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
 		    }, 
 		    
 			delet_home(){	
-				console.log(this.house_property);
+				// console.log(this.house_property);
+				// console.log(this.house_property.length);
 				var items = this.house_property;
 				for(var i=0,len=items.length;i<len;i++){
 					if(items[i].style.background =='pink'){
-						/*items[i].parentNode.removeChild(items[i]);
-						*/
-						items[i].parentNode.deleteRow(i+1);
-						this.cross_rable_home -= 1;
-						console.log(i+1);
+						//items[i].removeNode();
+						console.log(items[i]);
+						//items[i].parentNode.removeChild(items[i]);
+
+						for(var j = 0, homelen = this.cross_rable_home.length; j < homelen; j++){
+							if(this.cross_rable_home[j] == items[i].id){
+								this.cross_rable_home.splice(j,1);
+								console.log(this.cross_rable_home[j]);
+								console.log(this.cross_rable_home);
+							}
+						}
+						//items[i].parentNode.removeChild(items[i]);		
+						//items[i].parentNode.deleteRow(i+1);
+						//this.k -= 1;
+						// var trArr=this.cross_rable_home;
+						
+						
+						//trArr.remove(i);
 					}
 				};
+				console.log(this.cross_rable_home);
 			},
 			delet_vehicle(){
 				console.log(333);
@@ -390,14 +500,17 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
 				}
 			},
 			buttonClick(index){
-				console.log(index);
-				console.log(this.house_property[index]);
+				//console.log(index);
+				//console.log(this.house_property[index]);
 
 				var items = this.house_property;
 				for(var i=0,len=items.length;i<len;i++){
 					items[i].style.background = '';
+					if(items[i].id == index){
+						items[i].style.background = 'pink';
+					}
 				}
-				items[index].style.background = 'pink';
+				
 			}
 	    }
 	}
