@@ -73,7 +73,6 @@ td {
   line-height: 40px;
 }
 
-
 /* 各自部分 */
 
 
@@ -82,13 +81,19 @@ td {
 .workbench .el-icon-arrow-right:before {
   content: "";
 }
+/* 工作台 折叠面板 下面 content部分 */
+.el-collapse-item__wrap{
+  border:1px solid gray;
+}
 /* 工作通知 下边距 */
 .workbench .el-collapse{
   margin-bottom: 10px;
 }
 /* 工作通知title颜色 */
 .workbench .el-collapse-item__header{
-  background: #f5f7fa;
+  /* background: #f5f7fa; */
+  background: white;
+  border: 1px solid gray;
 }
 /* 工通知内容设置内边距 */
 .workbench .el-collapse-item__content{
@@ -96,16 +101,12 @@ td {
  /* margin-bottom: 10px; */
  height: 37.5vh;
 }
-/* .workbench .el-collapse-item.is-active .el-collapse-item__header {
-  border-bottom-color: #dfe4ed;
-} */
 
-/* 待办任务div高度修改 */
-.workbench .el-tabs--border-card{
-height: 87%;
+/* 代办任务下面div高度 */
+.workbench .main_right_task .el-collapse-item__content{
+  height: 100vh;
+  overflow: auto;
 }
-
-
 /* 分屏 */
 .SplitScreen .AudioVisual_wrap_compare .el-icon-close{
   position: absolute;
@@ -117,17 +118,25 @@ height: 87%;
 }
 
 /* 信审表 */
+
 /* 解决测试环境宽高不生效问题 */
 .CreditForm .el-input {
   display: inline-block;
   width: 180px;
   height: 36px;
+/* 改后 */
+  /* width:258px; */
+  /* height:50px */
 }
 /* 解决第一次进来input有外边框加粗 radius+4 的问题 */
 .CreditForm .el-input__inner{
   border:1px solid rgb(229,229,229) ;
   border-radius: 4px;
   height: 36px;
+  /* 改后 */
+  /* border-radius:6px;
+  width:258px;
+  height:50px */
 }
 .CreditForm .el-collapse-item__header {
   border: 1px solid silver;
@@ -234,9 +243,24 @@ height: 87%;
 
 /* 影音列表-左侧列表--内容下边距 */
 
-.AudioVisual .el-collapse-item__content {
+.AudioVisual .AudioVisual_wrap_compare_right .el-collapse-item__content {
   padding-bottom: 0;
 }
+/* 影音列表-弹出层-select-搜索框 */
+.SplitScreen .AudioVisual_wrap_compare_right .el-select>.el-input {
+  display: inline-block;
+  /* width: 180px;
+  height: 36px; */
+/* 改后 */
+  width:258px;
+  height:50px
+}
+
+.SplitScreen .AudioVisual_wrap_compare_right .el-input__inner{
+  width:258px;
+  height:50px
+}
+
 
 
 /* 借款人资料 */

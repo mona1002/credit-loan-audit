@@ -1,6 +1,6 @@
 <template>
   <div date="ApprovalConclusion">
-    <!-- 审批 结论轨迹=========================默认显示1-条？分页？ -->
+    <!-- 信审审批结论轨迹=========================默认显示1-条？分页？ -->
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="incom" label="核实收入[元]" width="180">
       </el-table-column>

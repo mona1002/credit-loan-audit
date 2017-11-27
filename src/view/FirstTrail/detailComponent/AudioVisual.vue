@@ -15,21 +15,21 @@
         </p>
         <el-collapse>
           <!-- v-for="" -->
-          <el-collapse-item v-for="">
+          <el-collapse-item v-for="(item,ind) in ListParent" :key="ind" @click.native="getChildrenList">
             <template slot="title">
-              <p v-for="">
-                <span>影像名称</span>
-                <span>编号</span>
-                <span>页数</span>
-                <span>上传日期</span>
+              <p>
+                <span>{{item.arcName}}</span>
+                <span>{{item.arcNum}}</span>
+                <span>{{item.imageCount}}</span>
+                <span>{{item.uploadDate}}</span>
               </p>
             </template>
             <div class="list_title_div">
-              <p v-for="">
-                <span>影像名称</span>
-                <span>编号</span>
-                <span>页数</span>
-                <span>上传日期</span>
+              <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg">
+                <span>{{item.arcName}}</span>
+                <span>{{item.arcNum}}</span>
+                <span>{{item.imageCount}}</span>
+                <span>{{item.uploadDate}}</span>
               </p>
             </div>
             <!-- 此处为重复的样式  得到数据之后删除 -->
@@ -91,10 +91,12 @@
   export default {
     data() {
       return {
-        picData: "",
+        picData: [],
         smallPicInd: 0, // 未知
         SmallPicShow: false,
         CompareAlert: true,
+        ListParent: [],
+        ListDetails: [],
         // d:'',
         // v: [{ // 单位性质
         //   value: 'yes',
@@ -109,6 +111,33 @@
       AudVis
     },
     methods: {
+      getChildrenList() {
+        console.log("获取子节点");
+        this.post("/productArchive/getProductArchiveChildList", {
+          applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
+          pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
+        }).then(res => {
+          console.log(res);
+          // console.log(res.data)
+          this.ListDetails=res.data;
+          // this.picData=res.data[0].uploadArcPaths;
+          for(var i=0;i<=res.data.length;i++){
+            
+          }
+          // console.log(this.picData)
+        });
+      },
+      getImg() {
+        console.log("获取图片");
+        this.post("/internalMatch/getInternalMatchCustName", {
+          applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
+          pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
+        }).then(res => {
+          console.log(res);
+          // console.log(res.data)
+          // this.picData=res.data
+        });
+      },
       hid() { //左侧 li 列表
         console.log("hid");
         this.$refs.AudioVisual_List_ref.style.left = "-175px";
@@ -116,7 +145,6 @@
         // this.$refs.AudioVisual_Img_ref.style.width = document.documentElement.clientWidth - 25 + "px";
         // this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 25px)";
         this.$refs.AudioVisual_Img_ref.style.width = "100%";
-        
       },
       showList() { //左侧 li 列表
         this.$refs.AudioVisual_List_ref.style.left = "0";
@@ -194,7 +222,6 @@
       defaultBigPicCss() { // （重复代码）通用方法 ：  大图 --------------- 恢复默认高度、不旋转
         console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).height)
         console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
-        
         // if (getComputedStyle(this.$refs.Big_pic_ref[0], false).width > getComputedStyle(this.$refs.Big_pic_ref[0], //判断宽度>高度  按宽度100%显示
         //     false).height) { // 点击切换图片时，让显示的大图宽高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
         //   this.$refs.Big_pic_ref[0].style.width = "100%";//calc( 100% - 202px)
@@ -206,12 +233,8 @@
         //   console.log(this.$refs.Big_pic_ref[0].style.height)
         // }
         // this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
-
-
-//  this.$refs.big_pic[0].style.height = "100%"; // 点击切换图片时，让显示的大图高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
+        //  this.$refs.big_pic[0].style.height = "100%"; // 点击切换图片时，让显示的大图高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
         // this.$refs.big_pic[0].style.transform = "rotate(0deg)"
-
-
       },
       changeSmallPicCss(ind) { // （重复代码）通用方法： 遍历所有小图片，恢复默认（初始时）设置的css样式--------- click时改变显示大图和选中小图的 高度 + 透明度
         for (var i = 0; i < this.$refs.small_pic_ref.length; i++) {
@@ -269,20 +292,54 @@
     },
 
     mounted() {
-      // this.get('../../../../static/json/img.json').then(response => { // axios 请求
-      //   this.picData = response.data.items;
+      // 登录
+      //  this.post("/smUser/login", {
+      //           userCode:"02114C1405",
+      //           loginPassword:"111111"
+      //         }).then(res => {
+      //           console.log(res);
+      //           console.log(res.data)
+      //         });
+// 父菜单
+      this.post("/productArchive/getProductArchiveParentList", {
+        // id:"bb30607c-b5aa-4915-9474-460e099a33e8",
+        applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
+      }).then(res => {
+        // console.log(res);
+        // console.log(res.data)
+        this.ListParent = res.data
+      });
+
+      // 子菜单栏
+      // this.post("/productArchive/getProductArchiveChildList", {
+      //   applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
+      //   pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
+      // }).then(res => {
+      //   console.log(res);
+      //   // console.log(res.data)
+      //   // this.ListParent=res.data
       // });
-      
-        //     if (getComputedStyle(this.$refs.Big_pic_ref[0], false).width > getComputedStyle(this.$refs.Big_pic_ref[0], //判断宽度>高度  按宽度100%显示
-        //     false).height) { // 点击切换图片时，让显示的大图宽高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
-        //   this.$refs.Big_pic_ref[0].style.width = "100%";//calc( 100% - 202px)
-        //   console.log("默认大图css样式if width >>>>>>>>>>> height" + this.$refs.Big_pic_ref[0].style.width)
-        // } else {
-        //   this.$refs.Big_pic_ref[0].style.height = "100%";
-        //   console.log("默认大图css样式else  width <<<<<<  height")
-        //   console.log(this.$refs.Big_pic_ref[0])
-        //   console.log(this.$refs.Big_pic_ref[0].style.height)
-        // }
+      // 图片
+      //  this.post("/internalMatch/getInternalMatchCustName", {
+      //   applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886",
+      //   pid:"9c3a2556-4111-42c4-aa78-0034866cf041"
+      // }).then(res => {
+      //   console.log(res);
+      //   console.log(res.data)
+      //   this.ListParent=res.data
+      // });
+
+
+      //     if (getComputedStyle(this.$refs.Big_pic_ref[0], false).width > getComputedStyle(this.$refs.Big_pic_ref[0], //判断宽度>高度  按宽度100%显示
+      //     false).height) { // 点击切换图片时，让显示的大图宽高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
+      //   this.$refs.Big_pic_ref[0].style.width = "100%";//calc( 100% - 202px)
+      //   console.log("默认大图css样式if width >>>>>>>>>>> height" + this.$refs.Big_pic_ref[0].style.width)
+      // } else {
+      //   this.$refs.Big_pic_ref[0].style.height = "100%";
+      //   console.log("默认大图css样式else  width <<<<<<  height")
+      //   console.log(this.$refs.Big_pic_ref[0])
+      //   console.log(this.$refs.Big_pic_ref[0].style.height)
+      // }
     }
   }
 
@@ -380,12 +437,14 @@
     height: 86vh;
     overflow: auto;
   }
- .AudioVisual_Img {
+
+  .AudioVisual_Img {
     width: calc( 100% - 200px);
     left: 200px;
     background: yellowgreen;
     /* background: red; */
   }
+
   .AudioVisual_List {
     width: 200px;
     /* background: pink; */

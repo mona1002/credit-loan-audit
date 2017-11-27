@@ -140,9 +140,8 @@
 <style>
   .mheader{
     width: 100%;
-    min-width: 1366px;
-    height: 60px;
-    line-height: 60px;
+    height: 70px;
+    line-height: 70px;
     background: #20a0ff;
     font-size: 30px;
     color: white;

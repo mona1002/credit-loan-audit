@@ -47,7 +47,6 @@ export default{
         return new Promise((resolve, reject) => {
                 axios.post(url, data)
                   .then(response => {
-                console.log("我是post方法")
                     resolve(response.data);
                   }, err => {
                     reject(err);

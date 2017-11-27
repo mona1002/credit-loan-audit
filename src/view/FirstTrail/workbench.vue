@@ -1,78 +1,87 @@
 <template>
   <div class="workbench">
-    <myHead></myHead>
-   <!-- 左边 -->
-    <div class="workbench_left">
-      <i class="el-icon-edit"> 常用</i>
-      <br>
-      <i class="el-icon-plus"> 常用</i>
-      <i class="el-icon-refresh"> </i>
-    </div>
-    <!-- 中间 -->
-    <div class="workbench_middle">
-      <el-tabs type="border-card">
-        <el-tab-pane label="待办任务">
-          <!-- 表格 -->
-          <el-table ref="singleTable" :data="tableData" highlight-current-row @current-change="handleCurrentChange" style="width: 100%">
-            <el-table-column property="TaskName" label="任务名称">
-            </el-table-column>
-            <el-table-column property="Nname" label="节点名称">
-            </el-table-column>
-            <el-table-column property="Num" label="任务数目">
-            </el-table-column>
-          </el-table>
-          <!-- 表格结束 -->
-        </el-tab-pane>
-        <el-tab-pane label="已办任务">配置管理</el-tab-pane>
-        <el-tab-pane label="历史任务">角色管理</el-tab-pane>
-      </el-tabs>
-    </div>
-    <!-- 右边 -->
-    <div class="workbench_right">
-      <!-- 工作通知 -->
-      <div class="workbench_right_top">
-<el-collapse v-model="activeNames" @change="handleChange">
-        <el-collapse-item name="1">
-          <template slot="title">
-            <i class="el-icon-menu"></i> 工作通知
-            <i class="el-icon-refresh"></i>
-            <span @click.stop="more" class="moreC"> 更多 </span>
-          </template>
-          <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-          <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
-        </el-collapse-item>
-      </el-collapse>
+    <myHead class="top"></myHead>
+    <div class="main">
+      <!-- 左边 -->
+      <div class="main_left">
+        <h2>
+          <i class="el-icon-edit"> </i>常用 </h2>
+      </div>
+      <div class="main_right">
+        <!-- 中间 -->
+        <div class="main_right_task">
+ <el-collapse v-model="activeNames" @change="waitting">
+              <el-collapse-item name="1">
+                <template slot="title">
+                  <i class="el-icon-menu"></i> 代办任务
+                  <!-- <i class="el-icon-refresh"></i> -->
+                  <!-- <span @click.stop="more" class="moreC"> 更多 </span> -->
+                </template>
+                <div class="waitting"> 
+                <el-table ref="singleTable" :data="tableData" highlight-current-row @current-change="handleCurrentChange" style="width: 100%">
+                <el-table-column property="TaskName" label="任务名称">
+                </el-table-column>
+                <el-table-column property="Nname" label="节点名称">
+                </el-table-column>
+                <el-table-column property="Num" label="任务数目">
+                </el-table-column>
+              </el-table>
+              <!-- 表格结束 -->
+                </div>
+              </el-collapse-item>
+            </el-collapse>
+        </div>
+        <!-- 右边 -->
+        <div class="main_right_work">
+          <!-- 工作通知 -->
+          <div class="workbench_right_top">
+            <el-collapse v-model="activeNames1" @change="handleChange">
+              <el-collapse-item name="1">
+                <template slot="title">
+                  <i class="el-icon-menu"></i> 工作通知
+                  <i class="el-icon-refresh"></i>
+                  <span @click.stop="more" class="moreC"> 更多 </span>
+                </template>
+                <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
+                <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+              </el-collapse-item>
+            </el-collapse>
+          </div>
+
+          <!-- 公司动态 -->
+          <div class="workbench_right_bottom">
+            <el-collapse v-model="activeNames2" @change="workNotify">
+              <el-collapse-item name="1">
+                <template slot="title" class="border_top_bottom">
+                  <i class="el-icon-menu"></i> 公司动态
+                  <i class="el-icon-refresh"></i>
+                  <span @click.stop="more" class="moreC"> 更多 </span>
+                </template>
+                <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
+                <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+              </el-collapse-item>
+            </el-collapse>
+          </div>
+
+          <!-- test 信息 之router 带params-->
+          <!-- <router-link :to=" {path:'/ProductLists',query:{picName:val.name}}" v-for="(val,index) in pic" :key="index"> -->
+        </div>
       </div>
 
-      <!-- 公司动态 -->
-         <div class="workbench_right_bottom">
-<el-collapse v-model="activeNames1" @change="workNotify">
-          <el-collapse-item name="1">
-            <template slot="title" class="border_top_bottom">
-              <i class="el-icon-menu"></i> 公司动态
-              <i class="el-icon-refresh"></i>
-              <span @click.stop="more" class="moreC"> 更多 </span>
-            </template>
-            <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-            <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
-          </el-collapse-item>
-        </el-collapse>
-      </div>
-    
-<!-- test 信息 之router 带params-->
-				<!-- <router-link :to=" {path:'/ProductLists',query:{picName:val.name}}" v-for="(val,index) in pic" :key="index"> -->
-
     </div>
+
   </div>
 </template>
 <script>
-import myHead from "../header.vue"
+  import myHead from "../header.vue"
   export default {
-   data() {
+    data() {
       return {
         activeNames: ['1'],
 
         activeNames1: ['1'],
+        activeNames2: ['1'],
+        
         // tableData: [{
         //   taskName: '信审流程',
         //   nName: '初审审批',
@@ -103,7 +112,79 @@ import myHead from "../header.vue"
           Nname: '反欺诈专员审批',
           Num: '3'
         }, {
-         TaskName: '审批流程',
+          TaskName: '审批流程',
+          Nname: '反欺诈专员审批',
+          Num: '3'
+        }, {
+          TaskName: '审批流程',
+          Nname: '反欺诈专员审批',
+          Num: '3'
+        }, {
+          TaskName: '审批流程',
+          Nname: '反欺诈专员审批',
+          Num: '3'
+        }, {
+          TaskName: '审批流程',
+          Nname: '反欺诈专员审批',
+          Num: '3'
+        }, {
+          TaskName: '审批流程',
+          Nname: '反欺诈专员审批',
+          Num: '3'
+        }, {
+          TaskName: '审批流程',
+          Nname: '反欺诈专员审批',
+          Num: '3'
+        }, {
+          TaskName: '审批流程',
+          Nname: '反欺诈专员审批',
+          Num: '3'
+        }, {
+          TaskName: '审批流程',
+          Nname: '反欺诈专员审批',
+          Num: '3'
+        }, {
+          TaskName: '审批流程',
+          Nname: '反欺诈专员审批',
+          Num: '3'
+        }, {
+          TaskName: '审批流程',
+          Nname: '反欺诈专员审批',
+          Num: '3'
+        }, {
+          TaskName: '审批流程',
+          Nname: '反欺诈专员审批',
+          Num: '3'
+        }, {
+          TaskName: '审批流程',
+          Nname: '反欺诈专员审批',
+          Num: '3'
+        }, {
+          TaskName: '审批流程',
+          Nname: '反欺诈专员审批',
+          Num: '3'
+        }, {
+          TaskName: '审批流程',
+          Nname: '反欺诈专员审批',
+          Num: '3'
+        }, {
+          TaskName: '审批流程',
+          Nname: '反欺诈专员审批',
+          Num: '3'
+        }, {
+          TaskName: '审批流程',
+          Nname: '反欺诈专员审批',
+          Num: '3'
+        }, {
+          TaskName: '审批流程',
+          Nname: '反欺诈专员审批',
+          Num: '3'
+        }, {
+          TaskName: '审批流程',
+          Nname: '反欺诈专员审批',
+          Num: '3'
+        }, {
+          TaskName: '审批流程',
           Nname: '反欺诈专员审批',
           Num: '3'
         }],
@@ -111,6 +192,9 @@ import myHead from "../header.vue"
       }
     },
     methods: {
+      waitting(){
+
+      },
       handleChange() { // 手风琴
 
       },
@@ -123,18 +207,20 @@ import myHead from "../header.vue"
       },
       setCurrent(row) {
         console.log("我是按钮")
-          
+
         console.log(row)
         this.$refs.singleTable.setCurrentRow(row);
       },
       handleCurrentChange(val) {
         console.log("我是表格")
         console.log(val)
-        
+
 
         this.currentRow = val;
-        this.$router.push({path:'/taskInWaitting'})
-        
+        this.$router.push({
+          path: '/taskInWaitting'
+        })
+
         // this.$router.push({path:'/taskInWaitting',query:'123'})
         //  console.log(111, this.$route.query.picName)   接参数
       }
@@ -142,85 +228,67 @@ import myHead from "../header.vue"
     },
     mounted($event) {
       // var ev = ev || window.event;
-console.log(this.$event)
+      console.log(this.$event)
     },
-    components:{
+    components: {
       myHead
     }
   }
 
 </script>
 <style scoped>
-
   /* public 部分 */
 
   .border_top_bottom {
     border-top: 1px solid gray;
   }
-  /* private 部分 */
+  /* 大框  */
 
-  .workbench_left,
-  .workbench_middle,
-  .workbench_right {
-    float: left;
+  .workbench {
+    background: #ededed;
+    width: 100%;
+    height: 100%;
   }
 
-  .workbench_left {
-    background: #eee;
-    width: 200px;
-    height: 100vh;
+  .workbench .top {
+    height: 70px;
   }
 
-  .workbench_middle {
-          width: calc( 70% - 200px );      
-    height: 100vh;
-    /* border: 1px solid black; */
-    padding: 20px 10px;
+  .workbench .main {
+    height: calc( 100% - 70px);
+    overflow: hidden;
+    background: #ededed;
   }
-
-  .workbench_right {
-    width: 30%;
-    height: calc( 100% - 60px );
-    /* height: 100vh; */
-    margin-top: 20px;    
-    /* padding:0 10px; */
-    position: relative;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.12), 0 0 6px 0 rgba(0,0,0,.04);
-
+  /* main */
+   .main .main_left,.main .main_right{
+     float: left;
+   }
+  /* 左边-常用 */
+  .main .main_left{
+    height: 100%;
+    width: 148px;
+    background:white;
   }
-/* .workbench_right_top,.workbench_right_bottom{
-  height:40vh;
-} */
-  .moreC {
-    /* background: red; */
-    float: right;
-    margin-right: 30px;
+  /* 右边-折叠面板 */
+  .main .main_right{
+    width:calc( 100% - 148px);
+    background: white;
   }
-
+/* 代办任务 */
+.main_right .main_right_task,.main_right .main_right_work{
+  float: left;
+  width: 50%;
+  height: 100vh;
+  padding: 10px 0 0 17px;
+  /* background: black; */
+  background: #f5f7fa;
+}
+.waitting{
+  /* height:800px; */
+  background: red;
+}
   @media screen and (min-width: 1366px) {
-/*    
-  .workbench_left {
-    background: #eee;
-    width:200px;
-    height: 100vh;
-  }
-
-    .workbench_middle {
-      width: calc( 100% - 200px );      
-      height: 100vh;
-      background: red;
-    }
-
-  .workbench_right {
-    width: 30%;
-    height: 100vh;
-    position: relative;
-  }
-
-    */
-   
 
   }
-
 
 </style>

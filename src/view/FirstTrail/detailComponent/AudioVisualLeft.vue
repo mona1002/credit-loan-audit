@@ -259,7 +259,7 @@
     },
 
     mounted() {
-      // this.get('../../../../static/json/img.json').then(response => { // axios 请求
+      // this.get('/productArchive/getProductArchiveParentList').then(response => { // axios 请求
       //   this.picData = response.data.items;
       // });
 
@@ -324,7 +324,7 @@
   .position_and_size {
     position: absolute;
     font-size: 30px;
-    z-index: 10;
+    z-index: 2;
   }
 
   .icon_pre {

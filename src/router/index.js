@@ -38,9 +38,11 @@ import PhoneCredit from '@/view/FirstTrail/PhoneCredit'
 import ApprovalConclusion from '@/view/FirstTrail/checkComponent/ApprovalConclusion'
 // 查询详情页面财务信息（部分）
 import FinanceInformation from '@/view/FirstTrail/checkComponent/FinanceInformation'
-
 // 信审审批
 import CreditApproval from '@/view/FirstTrail/CreditApproval'
+// ----------终审-------------------------
+import FSplitScreen from '@/view/FinalTrial/FSplitScreen.vue'
+// ------------反欺诈------------------
 
 Vue.use(Router)
 
@@ -135,8 +137,25 @@ const routes = [{
     // 信审审批
     path: '/CreditApproval',
     component: CreditApproval
-  }
-
+  },
+  // ----------------终审----------------
+{
+  path:'/FSplitScreen',
+  component:FSplitScreen
+},
+//-------------------反欺诈------------
+// {
+//   path:'/FSplitScreen',
+//   component:FSplitScreen
+// },
+// {
+//   path:'/FSplitScreen',
+//   component:FSplitScreen
+// },
+// {
+//   path:'/FSplitScreen',
+//   component:FSplitScreen
+// },
 ];
 
 const router = new Router({
