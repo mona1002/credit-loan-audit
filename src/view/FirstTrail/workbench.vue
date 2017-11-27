@@ -10,26 +10,26 @@
       <div class="main_right">
         <!-- 中间 -->
         <div class="main_right_task">
- <el-collapse v-model="activeNames" @change="waitting">
-              <el-collapse-item name="1">
-                <template slot="title">
-                  <i class="el-icon-menu"></i> 代办任务
-                  <!-- <i class="el-icon-refresh"></i> -->
-                  <!-- <span @click.stop="more" class="moreC"> 更多 </span> -->
-                </template>
-                <div class="waitting"> 
+          <el-collapse v-model="activeNames" @change="waitting">
+            <el-collapse-item name="1">
+              <template slot="title">
+                <i class="el-icon-menu"></i> 代办任务
+                <!-- <i class="el-icon-refresh"></i> -->
+                <!-- <span @click.stop="more" class="moreC"> 更多 </span> -->
+              </template>
+              <div class="waitting">
                 <el-table ref="singleTable" :data="tableData" highlight-current-row @current-change="handleCurrentChange" style="width: 100%">
-                <el-table-column property="TaskName" label="任务名称">
-                </el-table-column>
-                <el-table-column property="Nname" label="节点名称">
-                </el-table-column>
-                <el-table-column property="Num" label="任务数目">
-                </el-table-column>
-              </el-table>
-              <!-- 表格结束 -->
-                </div>
-              </el-collapse-item>
-            </el-collapse>
+                  <el-table-column property="TaskName" label="任务名称">
+                  </el-table-column>
+                  <el-table-column property="Nname" label="节点名称">
+                  </el-table-column>
+                  <el-table-column property="Num" label="任务数目">
+                  </el-table-column>
+                </el-table>
+                <!-- 表格结束 -->
+              </div>
+            </el-collapse-item>
+          </el-collapse>
         </div>
         <!-- 右边 -->
         <div class="main_right_work">
@@ -47,7 +47,6 @@
               </el-collapse-item>
             </el-collapse>
           </div>
-
           <!-- 公司动态 -->
           <div class="workbench_right_bottom">
             <el-collapse v-model="activeNames2" @change="workNotify">
@@ -62,220 +61,240 @@
               </el-collapse-item>
             </el-collapse>
           </div>
-
           <!-- test 信息 之router 带params-->
           <!-- <router-link :to=" {path:'/ProductLists',query:{picName:val.name}}" v-for="(val,index) in pic" :key="index"> -->
         </div>
       </div>
-
     </div>
-
   </div>
 </template>
 <script>
-  import myHead from "../header.vue"
-  export default {
-    data() {
-      return {
-        activeNames: ['1'],
+import myHead from "../header.vue"
+export default {
+  data() {
+    return {
+      activeNames: ['1'],
 
-        activeNames1: ['1'],
-        activeNames2: ['1'],
-        
-        // tableData: [{
-        //   taskName: '信审流程',
-        //   nName: '初审审批',
-        //   Num: 4,
-        // }, {
-        //   taskName: '2016-05-04',
-        //   nName: '王小虎',
-        //   Num: '上海市普陀区金沙江路 1517 弄'
-        // }, {
-        //   taskName: '2016-05-01',
-        //   nName: '王小虎',
-        //   Num: '上海市普陀区金沙江路 1519 弄'
-        // }, {
-        //   taskName: '2016-05-03',
-        //   nName: '王小虎',
-        //   Num: '上海市普陀区金沙江路 1516 弄'
-        // }],
-        tableData: [{
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }],
-        currentRow: null
-      }
-    },
-    methods: {
-      waitting(){
+      activeNames1: ['1'],
+      activeNames2: ['1'],
 
-      },
-      handleChange() { // 手风琴
-
-      },
-      more() {
-        console.log("more")
-      },
-      workNotify() {
-        console.log("workNotify")
-
-      },
-      setCurrent(row) {
-        console.log("我是按钮")
-
-        console.log(row)
-        this.$refs.singleTable.setCurrentRow(row);
-      },
-      handleCurrentChange(val) {
-        console.log("我是表格")
-        console.log(val)
-
-
-        this.currentRow = val;
-        this.$router.push({
-          path: '/taskInWaitting'
-        })
-
-        // this.$router.push({path:'/taskInWaitting',query:'123'})
-        //  console.log(111, this.$route.query.picName)   接参数
-      }
-
-    },
-    mounted($event) {
-      // var ev = ev || window.event;
-      console.log(this.$event)
-    },
-    components: {
-      myHead
+      // tableData: [{
+      //   taskName: '信审流程',
+      //   nName: '初审审批',
+      //   Num: 4,
+      // }, {
+      //   taskName: '2016-05-04',
+      //   nName: '王小虎',
+      //   Num: '上海市普陀区金沙江路 1517 弄'
+      // }, {
+      //   taskName: '2016-05-01',
+      //   nName: '王小虎',
+      //   Num: '上海市普陀区金沙江路 1519 弄'
+      // }, {
+      //   taskName: '2016-05-03',
+      //   nName: '王小虎',
+      //   Num: '上海市普陀区金沙江路 1516 弄'
+      // }],
+      tableData: [{
+        TaskName: '审批流程',
+        Nname: '反欺诈专员审批',
+        Num: '3'
+      }, {
+        TaskName: '审批流程',
+        Nname: '反欺诈专员审批',
+        Num: '3'
+      }, {
+        TaskName: '审批流程',
+        Nname: '反欺诈专员审批',
+        Num: '3'
+      }, {
+        TaskName: '审批流程',
+        Nname: '反欺诈专员审批',
+        Num: '3'
+      }, {
+        TaskName: '审批流程',
+        Nname: '反欺诈专员审批',
+        Num: '3'
+      }, {
+        TaskName: '审批流程',
+        Nname: '反欺诈专员审批',
+        Num: '3'
+      }, {
+        TaskName: '审批流程',
+        Nname: '反欺诈专员审批',
+        Num: '3'
+      }, {
+        TaskName: '审批流程',
+        Nname: '反欺诈专员审批',
+        Num: '3'
+      }, {
+        TaskName: '审批流程',
+        Nname: '反欺诈专员审批',
+        Num: '3'
+      }, {
+        TaskName: '审批流程',
+        Nname: '反欺诈专员审批',
+        Num: '3'
+      }, {
+        TaskName: '审批流程',
+        Nname: '反欺诈专员审批',
+        Num: '3'
+      }, {
+        TaskName: '审批流程',
+        Nname: '反欺诈专员审批',
+        Num: '3'
+      }, {
+        TaskName: '审批流程',
+        Nname: '反欺诈专员审批',
+        Num: '3'
+      }, {
+        TaskName: '审批流程',
+        Nname: '反欺诈专员审批',
+        Num: '3'
+      }, {
+        TaskName: '审批流程',
+        Nname: '反欺诈专员审批',
+        Num: '3'
+      }, {
+        TaskName: '审批流程',
+        Nname: '反欺诈专员审批',
+        Num: '3'
+      }, {
+        TaskName: '审批流程',
+        Nname: '反欺诈专员审批',
+        Num: '3'
+      }, {
+        TaskName: '审批流程',
+        Nname: '反欺诈专员审批',
+        Num: '3'
+      }, {
+        TaskName: '审批流程',
+        Nname: '反欺诈专员审批',
+        Num: '3'
+      }, {
+        TaskName: '审批流程',
+        Nname: '反欺诈专员审批',
+        Num: '3'
+      }, {
+        TaskName: '审批流程',
+        Nname: '反欺诈专员审批',
+        Num: '3'
+      }, {
+        TaskName: '审批流程',
+        Nname: '反欺诈专员审批',
+        Num: '3'
+      }],
+      currentRow: null
     }
+  },
+  methods: {
+    waitting() {
+
+    },
+    handleChange() { // 手风琴
+
+    },
+    more() {
+      console.log("more")
+    },
+    workNotify() {
+      console.log("workNotify")
+
+    },
+    setCurrent(row) {
+      console.log("我是按钮")
+
+      console.log(row)
+      this.$refs.singleTable.setCurrentRow(row);
+    },
+    handleCurrentChange(val) {
+      console.log("我是表格")
+      console.log(val)
+
+
+      this.currentRow = val;
+      this.$router.push({
+        path: '/taskInWaitting'
+      })
+
+      // this.$router.push({path:'/taskInWaitting',query:'123'})
+      //  console.log(111, this.$route.query.picName)   接参数
+    }
+
+  },
+  mounted($event) {
+    // var ev = ev || window.event;
+    console.log(this.$event)
+  },
+  components: {
+    myHead
+  },
+  created() {
+    console.log('created')
+    //  获取到 路由传参 
+    console.log(this.$route.params.userCode);
+    console.log(this.$route.params.orgCode);
+
   }
+}
 
 </script>
 <style scoped>
-  /* public 部分 */
+/* public 部分 */
 
-  .border_top_bottom {
-    border-top: 1px solid gray;
-  }
-  /* 大框  */
+.border_top_bottom {
+  border-top: 1px solid gray;
+}
 
-  .workbench {
-    background: #ededed;
-    width: 100%;
-    height: 100%;
-  }
 
-  .workbench .top {
-    height: 70px;
-  }
+/* 大框  */
 
-  .workbench .main {
-    height: calc( 100% - 70px);
-    overflow: hidden;
-    background: #ededed;
-  }
-  /* main */
-   .main .main_left,.main .main_right{
-     float: left;
-   }
-  /* 左边-常用 */
-  .main .main_left{
-    height: 100%;
-    width: 148px;
-    background:white;
-  }
-  /* 右边-折叠面板 */
-  .main .main_right{
-    width:calc( 100% - 148px);
-    background: white;
-  }
+.workbench {
+  background: #ededed;
+  width: 100%;
+  height: 100%;
+}
+
+.workbench .top {
+  height: 70px;
+}
+
+.workbench .main {
+  height: calc( 100% - 70px);
+  overflow: hidden;
+  background: #ededed;
+}
+
+
+/* main */
+
+.main .main_left,
+.main .main_right {
+  float: left;
+}
+
+
+/* 左边-常用 */
+
+.main .main_left {
+  height: 100%;
+  width: 148px;
+  background: white;
+}
+
+
+/* 右边-折叠面板 */
+
+.main .main_right {
+  width: calc( 100% - 148px);
+  background: white;
+}
+
+
 /* 代办任务 */
-.main_right .main_right_task,.main_right .main_right_work{
+
+.main_right .main_right_task,
+.main_right .main_right_work {
   float: left;
   width: 50%;
   height: 100vh;
@@ -283,12 +302,12 @@
   /* background: black; */
   background: #f5f7fa;
 }
-.waitting{
+
+.waitting {
   /* height:800px; */
   background: red;
 }
-  @media screen and (min-width: 1366px) {
 
-  }
+@media screen and (min-width: 1366px) {}
 
 </style>
