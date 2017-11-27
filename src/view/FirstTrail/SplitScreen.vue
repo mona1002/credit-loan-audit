@@ -49,7 +49,7 @@
 
       </div>
       <!-- 右侧分屏部分 -->
-      <div class="right" ref="rRight" style="background:green;">
+      <div class="right" ref="rRight" >
         <button @click="FullScreen" v-show="FullScreenlShow" class="stretch">全屏显示</button>
         <button @click="DblScreen" v-show="!FullScreenlShow" class="stretch">返回</button>
         <!-- <br> -->
@@ -85,8 +85,8 @@
           <!-- 反欺诈结论 空白 -->
           <!-- <CreditForm v-if=" this.tabContent2==8"></CreditForm> -->
           <!-- 信审审批 空白 -->
-          <!-- <CreditApproval v-show=" this.tabContent2==9"></CreditApproval>
-          </div> -->
+          <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>
+          <!-- </div> -->
         </div>
       </div>
     </div>
@@ -390,7 +390,7 @@
     /* position: relative; */
     width: 100%;
     height: calc( 100% - 100px);
-    background: red;
+    /*background: red;*/
   }
   /*   流  */
 
@@ -402,7 +402,7 @@
     overflow: auto;
     border: 1px solid black;
     float: left;
-    background: blue;
+    /*background: blue;*/
     position: relative;
   }
   /* 左屏 */
@@ -480,7 +480,7 @@
   /*  流 */
 
   .tab2_Content {
-    background: purple;
+    /*background: purple;*/
     height: calc( 100% - 40px);
     overflow: auto;
   }
