@@ -141,13 +141,11 @@ const routes = [{
     path: '/CreditApproval',
     component: CreditApproval
   },
-<<<<<<< HEAD
   {
     // 借款人资料详情
     path: '/borrowerInformationDetail',
     component: borrowerInformationDetail
   },
-=======
   // ----------------终审----------------
 {
   path:'/FSplitScreen',
@@ -166,7 +164,6 @@ const routes = [{
 //   path:'/FSplitScreen',
 //   component:FSplitScreen
 // },
->>>>>>> 51ad8f6115869086de1e619435d61c07864469aa
 ];
 
 const router = new Router({
