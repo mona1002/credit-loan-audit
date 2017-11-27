@@ -41,7 +41,7 @@
               </el-table-column>
             </el-table>
             <!-- 分页 -->
-            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 20, 30]" :page-size="5" layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 15, 20]" :page-size="5" layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
             </el-pagination>
           </div>
         </el-header>
@@ -167,6 +167,8 @@ export default {
       value: '',
       // 当前页码
       currentPage: 1,
+      // 每页显示的条数
+      currentPageSize: 5,
       // 添加界面
       coverShow: false,
       // 头部列表
@@ -251,6 +253,18 @@ export default {
             this.workFormShow = true;
             break;
         }
+
+        // 获取 历史调查日志 
+        this.post('/creTelResearchHis/queryTelLogByPage',{
+          applyId:this.applyId,
+          phoneNum:this.data.phoneNum,
+          phoneType:data.telType,
+          pageNum:data.telNum,
+          pageNum:this.pageNum,
+          pageSize:this.pageSize
+        }).then( res=> {
+          console.log(res)
+        })
 
 
         // 点击 住址电话 显示
