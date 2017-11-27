@@ -38,21 +38,41 @@
 export default {
   data() {
     return {
-      userCode: "",
-      loginPassword: ""
+      userCode: "ddyy",
+      loginPassword: "111111"
     };
   },
-  methods:{
-    loginFn(){
+  methods: {
+    loginFn() {
       console.log('login ')
       this.post("/smUser/login", {
-        userCode: "02103C3003",
-        loginPassword: "111111"
+        userCode: this.userCode,
+        loginPassword: this.loginPassword
       }).then(res => {
         console.log(res);
+        console.log(res.statusCode)
+        if (res.statusCode == '200') {
+
+
+          // uesrCode 用户编码
+          this.userCode = res.data.userCode;
+          // orgCode 机构编码
+          this.orgCode = res.data.orgCode;
+          console.log(this.userCode, this.orgCode);
+
+
+          const userCode = this.userCode;
+          const orgCode = this.orgCode;
+          // 
+          this.$router.push({ name: 'workbench', params: { userCode: this.userCode, orgCode: this.orgCode } });
+        }
+
       });
- this.$router.push({path:'/workbench'})
-        
+
+
+
+      // this.$router.push({ path: '/login', query: { stage: stage } });
+
       // /creTelInfo/queryTels
     }
   }
@@ -65,6 +85,10 @@ export default {
   height: 100%;
   background: linear-gradient(to right, #00a1ff, #42b1f2);
 }
+
+
+
+
 
 /* 1366 * 768 */
 
@@ -89,6 +113,10 @@ export default {
 
 
 
+
+
+
+
 /* 左块 区域 */
 
 .bg-left {
@@ -98,6 +126,10 @@ export default {
   float: left;
   margin-top: 50px;
 }
+
+
+
+
 
 
 
@@ -115,6 +147,10 @@ export default {
 
 
 
+
+
+
+
 /* log */
 
 .log {
@@ -123,7 +159,14 @@ export default {
   margin-bottom: 30px;
   /*background: url("./images/log-1.png") no-repeat 43px;*/
 }
+
+
+
+
+
 /* log-icon */
+
+
 /* 自定义的 icon */
 
 .log-icon {
@@ -134,7 +177,6 @@ export default {
   width: 145px;
   height: 100%;
   background: url("./images/log-1.png") no-repeat 43px;
-
 }
 
 .log-title {
@@ -152,7 +194,7 @@ export default {
   text-align: left;
   padding-left: 30px;
   letter-spacing: 4px;
-  font:  '微软雅黑', tahoma, arial, '\5b8b\4f53';
+  font: '微软雅黑', tahoma, arial, '\5b8b\4f53';
 }
 
 .log-title-second {
@@ -161,9 +203,13 @@ export default {
   text-align: left;
   padding-left: 30px;
   line-height: 30px;
-  font:  '宋体', tahoma, arial, '\5b8b\4f53';
+  font: '宋体', tahoma, arial, '\5b8b\4f53';
   font-weight: lighter;
 }
+
+
+
+
 
 
 
@@ -180,6 +226,10 @@ export default {
 
 
 
+
+
+
+
 /* 用户名 */
 
 .user-class {
@@ -190,6 +240,10 @@ export default {
   margin-bottom: 10px;
   text-indent: 10px;
 }
+
+
+
+
 
 
 
@@ -252,7 +306,7 @@ export default {
 .el-input__inner {
   text-indent: 10px;
   border-radius: 8px;
-  border: 3px solid rgb(229,229,229);
+  border: 3px solid rgb(229, 229, 229);
   height: 45px;
   line-height: 45px;
 }
@@ -271,12 +325,14 @@ export default {
 
 
 
+
+
+
+
 /* .el-icon-user{
   width: 30px;
   height: 30px;
   background:red;
 } */
-
-
 
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="workbench">
-    <myHead class="top"></myHead>
+    <!-- <myHead class="top"></myHead> -->
     <div class="main">
       <!-- 左边 -->
       <div class="main_left">
@@ -47,7 +47,6 @@
               </el-collapse-item>
             </el-collapse>
           </div>
-
           <!-- 公司动态 -->
           <div class="workbench_right_bottom">
             <el-collapse v-model="activeNames2" @change="workNotify">
@@ -62,14 +61,11 @@
               </el-collapse-item>
             </el-collapse>
           </div>
-
           <!-- test 信息 之router 带params-->
           <!-- <router-link :to=" {path:'/ProductLists',query:{picName:val.name}}" v-for="(val,index) in pic" :key="index"> -->
         </div>
       </div>
-
     </div>
-
   </div>
 </template>
 <script>
@@ -80,13 +76,13 @@
         activeNames: ['1'],
         activeNames1: ['1'],
         activeNames2: ['1'],
-taskStatus:'',//任务状态
-userCode:'',//用户编码
-orgCode:'',//机构编码
-pageNum:'',//页数（第几页）
-pageSize:'',//页面显示行数
-processTemplateId:'',// 流程模板Id
-taskNodeName:'', // 任务节点名称
+        taskStatus: '', //任务状态
+        userCode: '', //用户编码
+        orgCode: '', //机构编码
+        pageNum: '', //页数（第几页）
+        pageSize: '', //页面显示行数
+        processTemplateId: '', // 流程模板Id
+        taskNodeName: '', // 任务节点名称
         tableData: [{
           TaskName: '审批流程',
           Nname: '反欺诈专员审批',
@@ -179,6 +175,9 @@ taskNodeName:'', // 任务节点名称
         currentRow: null
       }
     },
+components:{
+  myHead
+},
     methods: {
       waitting() {
 
@@ -191,7 +190,6 @@ taskNodeName:'', // 任务节点名称
       },
       workNotify() {
         console.log("workNotify")
-
       },
       setCurrent(row) {
         console.log("我是按钮")
@@ -205,37 +203,42 @@ taskNodeName:'', // 任务节点名称
         this.currentRow = val;
         this.$router.push({
           path: '/taskInWaitting',
-          query:{
-            processTemplateId:this.processTemplateId,
-            taskNodeName:this.taskNodeName,
-            taskStatus:"ASSIGNED",
-            userCode:this.userCode,
-            orgCode:this.orgCode
-             }
+          query: {
+            processTemplateId: this.processTemplateId,
+            taskNodeName: this.taskNodeName,
+            taskStatus: "ASSIGNED",
+            userCode: this.userCode,
+            orgCode: this.orgCode
+          }
         });
         // this.$router.push({path:'/taskInWaitting',query:'123'})
         //  console.log(111, this.$route.query.picName)   接参数
       }
 
     },
+     created() {
+      console.log('created')
+      //  获取到 路由传参 
+      console.log(this.$route.params.userCode);
+      console.log(this.$route.params.orgCode);
+    },
     mounted() {
-        // this.$route.query.picName接参数
-       this.post("/workFlowTaskQuery/getTaskProfile", {
+      this.userCode=this.$route.params.userCode;
+      this.orgCode=this.$route.params.orgCode;
+      console.log(this.userCode +"================"+ this.orgCode )
+      // this.$route.query.picName接参数
+      this.post("/workFlowTaskQuery/getTaskProfile", {
         taskStatus: "ASSIGNED",
-        // userCode:this.userCode ,
-        userCode:"015101E005" ,
-        // orgCode:this.orgCode 
-        orgCode:"041FaD "
-        
+        userCode:this.userCode ,
+        // userCode: "015101E005",
+        orgCode:this.orgCode 
+        // orgCode: "041FaD "
       }).then(res => {
         console.log(res);
       });
 
     },
-    components: {
-      myHead
     }
-  }
 
 </script>
 <style scoped>
@@ -262,13 +265,11 @@ taskNodeName:'', // 任务节点名称
     background: #ededed;
   }
   /* main */
-
   .main .main_left,
   .main .main_right {
     float: left;
   }
   /* 左边-常用 */
-
   .main .main_left {
     height: 100%;
     width: 148px;
@@ -297,7 +298,6 @@ taskNodeName:'', // 任务节点名称
     /* background: black; */
     background: #ededed;
   }
-
   .waitting {
     /* height:800px; */
     background: red;

@@ -49,7 +49,7 @@
 
       </div>
       <!-- 右侧分屏部分 -->
-      <div class="right" ref="rRight" style="background:green;">
+      <div class="right" ref="rRight" >
         <button @click="FullScreen" v-show="FullScreenlShow" class="stretch">全屏显示</button>
         <button @click="DblScreen" v-show="!FullScreenlShow" class="stretch">返回</button>
         <!-- <br> -->
@@ -74,18 +74,19 @@
         </div>
         <!-- 右侧 tab 内容 -->
         <div class="tab2_Content">
-          <AudioVisual v-show=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
-          <remark v-show=" this.tabContent2==1"></remark>
-          <InternalMatch v-show=" this.tabContent2==2"></InternalMatch>
-          <applicationInformation v-show=" this.tabContent2==3"></applicationInformation>
-          <borrowerInformation v-show=" this.tabContent2==4"></borrowerInformation>
-          <PhoneCredit v-show=" this.tabContent2==5"></PhoneCredit>
-          <CreditForm v-show=" this.tabContent2==6"></CreditForm>
-          <creditInvestigation v-show=" this.tabContent2==7"></creditInvestigation>
+          <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
+          <remark v-if=" this.tabContent2==1"></remark>
+          <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
+          <applicationInformation v-if=" this.tabContent2==3"></applicationInformation>
+          <borrowerInformation v-if=" this.tabContent2==4"></borrowerInformation>
+          <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
+          <CreditForm v-if=" this.tabContent2==6"></CreditForm>
+          <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
           <!-- 反欺诈结论 空白 -->
-          <!-- <CreditForm v-show=" this.tabContent2==8"></CreditForm> -->
+          <!-- <CreditForm v-if=" this.tabContent2==8"></CreditForm> -->
           <!-- 信审审批 空白 -->
-          <CreditApproval v-show=" this.tabContent2==9"></CreditApproval>
+          <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>
+          <!-- </div> -->
         </div>
       </div>
     </div>
@@ -389,7 +390,7 @@
     /* position: relative; */
     width: 100%;
     height: calc( 100% - 100px);
-    background: red;
+    /*background: red;*/
   }
   /*   流  */
 
@@ -401,7 +402,7 @@
     overflow: auto;
     border: 1px solid black;
     float: left;
-    background: blue;
+    /*background: blue;*/
     position: relative;
   }
   /* 左屏 */
@@ -479,7 +480,7 @@
   /*  流 */
 
   .tab2_Content {
-    background: purple;
+    /*background: purple;*/
     height: calc( 100% - 40px);
     overflow: auto;
   }
