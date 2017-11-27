@@ -61,16 +61,18 @@ td {
 
 /* 折叠面板头部背景色 */
 
-.el-collapse-item__header {
+/* .el-collapse-item__header {
   background-color: #ccc;
   font-size: 14px;
   padding-left: 10px;
   height: 40px;
   line-height: 40px;
-}
+} */
 
 .el-collapse-item__header .el-collapse-item__arrow {
   line-height: 40px;
+  margin-top: 4px;
+  
 }
 
 /* 各自部分 */
@@ -78,12 +80,17 @@ td {
 
 /* 工作台部分修改 */
 
-.workbench .el-icon-arrow-right:before {
+/* .workbench .el-icon-arrow-right:before {
   content: "";
+} */
+/* 工作台 折叠面板 头部 箭头 */
+.workbench .el-collapse-item__header .el-collapse-item__arrow {
+  line-height: 40px;
+  margin-top: 4px;
 }
 /* 工作台 折叠面板 下面 content部分 */
-.el-collapse-item__wrap{
-  border:1px solid gray;
+.workbench .el-collapse-item__wrap{
+  border:1px solid #D5D5D5;
 }
 /* 工作通知 下边距 */
 .workbench .el-collapse{
@@ -93,19 +100,29 @@ td {
 .workbench .el-collapse-item__header{
   /* background: #f5f7fa; */
   background: white;
-  border: 1px solid gray;
+  border: 1px solid #D5D5D5;
+  height: 48px;
+  line-height: 48px;
+  font-size: 15.5px;
+  color: #173a56;
+  font-weight: bold;
+  padding-left: 10px;
 }
 /* 工通知内容设置内边距 */
 .workbench .el-collapse-item__content{
  padding: 10px;
  /* margin-bottom: 10px; */
- height: 37.5vh;
+ height: 38.8vh;
 }
 
-/* 代办任务下面div高度 */
+/* 代办任务下面div高度   #f3f3f3  */ 
 .workbench .main_right_task .el-collapse-item__content{
-  height: 100vh;
+  height: 84vh;
   overflow: auto;
+}
+/* 待办任务下面 table 表头颜色 */
+.workbench .el-collapse-item__content .el-table__header-wrapper tr{
+  background: #f3f3f3; 
 }
 /* 分屏 */
 .SplitScreen .AudioVisual_wrap_compare .el-icon-close{

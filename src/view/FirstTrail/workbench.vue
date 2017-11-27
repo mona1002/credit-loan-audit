@@ -10,26 +10,26 @@
       <div class="main_right">
         <!-- 中间 -->
         <div class="main_right_task">
- <el-collapse v-model="activeNames" @change="waitting">
-              <el-collapse-item name="1">
-                <template slot="title">
-                  <i class="el-icon-menu"></i> 代办任务
-                  <!-- <i class="el-icon-refresh"></i> -->
-                  <!-- <span @click.stop="more" class="moreC"> 更多 </span> -->
-                </template>
-                <div class="waitting"> 
+          <el-collapse v-model="activeNames" @change="waitting">
+            <el-collapse-item name="1">
+              <template slot="title">
+                <i class="el-icon-menu"></i> 待办任务
+                <!-- <i class="el-icon-refresh"></i> -->
+                <!-- <span @click.stop="more" class="moreC"> 更多 </span> -->
+              </template>
+              <div class="waitting">
                 <el-table ref="singleTable" :data="tableData" highlight-current-row @current-change="handleCurrentChange" style="width: 100%">
-                <el-table-column property="TaskName" label="任务名称">
-                </el-table-column>
-                <el-table-column property="Nname" label="节点名称">
-                </el-table-column>
-                <el-table-column property="Num" label="任务数目">
-                </el-table-column>
-              </el-table>
-              <!-- 表格结束 -->
-                </div>
-              </el-collapse-item>
-            </el-collapse>
+                  <el-table-column property="TaskName" label="任务名称">
+                  </el-table-column>
+                  <el-table-column property="Nname" label="节点名称">
+                  </el-table-column>
+                  <el-table-column property="Num" label="任务数目">
+                  </el-table-column>
+                </el-table>
+                <!-- 表格结束 -->
+              </div>
+            </el-collapse-item>
+          </el-collapse>
         </div>
         <!-- 右边 -->
         <div class="main_right_work">
@@ -78,27 +78,15 @@
     data() {
       return {
         activeNames: ['1'],
-
         activeNames1: ['1'],
         activeNames2: ['1'],
-        
-        // tableData: [{
-        //   taskName: '信审流程',
-        //   nName: '初审审批',
-        //   Num: 4,
-        // }, {
-        //   taskName: '2016-05-04',
-        //   nName: '王小虎',
-        //   Num: '上海市普陀区金沙江路 1517 弄'
-        // }, {
-        //   taskName: '2016-05-01',
-        //   nName: '王小虎',
-        //   Num: '上海市普陀区金沙江路 1519 弄'
-        // }, {
-        //   taskName: '2016-05-03',
-        //   nName: '王小虎',
-        //   Num: '上海市普陀区金沙江路 1516 弄'
-        // }],
+taskStatus:'',//任务状态
+userCode:'',//用户编码
+orgCode:'',//机构编码
+pageNum:'',//页数（第几页）
+pageSize:'',//页面显示行数
+processTemplateId:'',// 流程模板Id
+taskNodeName:'', // 任务节点名称
         tableData: [{
           TaskName: '审批流程',
           Nname: '反欺诈专员审批',
@@ -192,7 +180,7 @@
       }
     },
     methods: {
-      waitting(){
+      waitting() {
 
       },
       handleChange() { // 手风琴
@@ -214,21 +202,35 @@
       handleCurrentChange(val) {
         console.log("我是表格")
         console.log(val)
-
-
         this.currentRow = val;
         this.$router.push({
-          path: '/taskInWaitting'
-        })
-
+          path: '/taskInWaitting',
+          query:{
+            processTemplateId:this.processTemplateId,
+            taskNodeName:this.taskNodeName,
+            taskStatus:"ASSIGNED",
+            userCode:this.userCode,
+            orgCode:this.orgCode
+             }
+        });
         // this.$router.push({path:'/taskInWaitting',query:'123'})
         //  console.log(111, this.$route.query.picName)   接参数
       }
 
     },
-    mounted($event) {
-      // var ev = ev || window.event;
-      console.log(this.$event)
+    mounted() {
+        // this.$route.query.picName接参数
+       this.post("/workFlowTaskQuery/getTaskProfile", {
+        taskStatus: "ASSIGNED",
+        // userCode:this.userCode ,
+        userCode:"015101E005" ,
+        // orgCode:this.orgCode 
+        orgCode:"041FaD "
+        
+      }).then(res => {
+        console.log(res);
+      });
+
     },
     components: {
       myHead
@@ -260,35 +262,47 @@
     background: #ededed;
   }
   /* main */
-   .main .main_left,.main .main_right{
-     float: left;
-   }
+
+  .main .main_left,
+  .main .main_right {
+    float: left;
+  }
   /* 左边-常用 */
-  .main .main_left{
+
+  .main .main_left {
     height: 100%;
     width: 148px;
-    background:white;
+    background: white;
+    text-align: center;
+  }
+
+  .main .main_left h2 {
+    font-size: 16.5px;
+    margin-top: 3px;
   }
   /* 右边-折叠面板 */
-  .main .main_right{
-    width:calc( 100% - 148px);
+
+  .main .main_right {
+    width: calc( 100% - 148px);
     background: white;
   }
-/* 代办任务 */
-.main_right .main_right_task,.main_right .main_right_work{
-  float: left;
-  width: 50%;
-  height: 100vh;
-  padding: 10px 0 0 17px;
-  /* background: black; */
-  background: #f5f7fa;
-}
-.waitting{
-  /* height:800px; */
-  background: red;
-}
-  @media screen and (min-width: 1366px) {
+  /* 代办任务 */
 
+  .main_right .main_right_task,
+  .main_right .main_right_work {
+    float: left;
+    width: 50%;
+    height: 100vh;
+    padding: 19px 0 0 20px;
+    /* background: black; */
+    background: #ededed;
   }
+
+  .waitting {
+    /* height:800px; */
+    background: red;
+  }
+
+  @media screen and (min-width: 1366px) {}
 
 </style>

@@ -74,19 +74,18 @@
         </div>
         <!-- 右侧 tab 内容 -->
         <div class="tab2_Content">
-          <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
-          <remark v-if=" this.tabContent2==1"></remark>
-          <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
-          <applicationInformation v-if=" this.tabContent2==3"></applicationInformation>
-          <borrowerInformation v-if=" this.tabContent2==4"></borrowerInformation>
-          <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
-          <CreditForm v-if=" this.tabContent2==6"></CreditForm>
-          <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
+          <AudioVisual v-show=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
+          <remark v-show=" this.tabContent2==1"></remark>
+          <InternalMatch v-show=" this.tabContent2==2"></InternalMatch>
+          <applicationInformation v-show=" this.tabContent2==3"></applicationInformation>
+          <borrowerInformation v-show=" this.tabContent2==4"></borrowerInformation>
+          <PhoneCredit v-show=" this.tabContent2==5"></PhoneCredit>
+          <CreditForm v-show=" this.tabContent2==6"></CreditForm>
+          <creditInvestigation v-show=" this.tabContent2==7"></creditInvestigation>
           <!-- 反欺诈结论 空白 -->
-          <!-- <CreditForm v-if=" this.tabContent2==8"></CreditForm> -->
+          <!-- <CreditForm v-show=" this.tabContent2==8"></CreditForm> -->
           <!-- 信审审批 空白 -->
-          <!-- <CreditApproval v-show=" this.tabContent2==9"></CreditApproval>
-          </div> -->
+          <CreditApproval v-show=" this.tabContent2==9"></CreditApproval>
         </div>
       </div>
     </div>
@@ -240,12 +239,12 @@
         this.flag1[tab.index] = false;
         //---------- tab1禁用部分结束--------------------------
       },
-      showList() {
+      showList() {    // 左侧list 显示按钮
         console.log("show")
         this.$refs.Left_title.style.left = "0";
         this.flexible = false;
       },
-      hid() {
+      hid() {       // 左侧list 隐藏按钮
         console.log("hid")
         this.$refs.Left_title.style.left = "-200px";
         this.flexible = true;
@@ -524,7 +523,7 @@
     height: 100%;
     border: 1px solid orangered;
   }
-/* 弹出层 - p标签 - 标题栏 */
+/* 弹出层 - p标签 - 标题栏  流  */
   .AudioVisual_wrap_compare_left p,
   .AudioVisual_wrap_compare_right p{
     background: gray;
@@ -533,14 +532,13 @@
   text-align: center;
   font-weight: bold;
   }
-/* 弹出层 - p标签 - 左侧标题栏-上边距 */  
+/* 弹出层 - p标签 - 左侧标题栏-上边距  流  */  
     .AudioVisual_wrap_compare_left p{
       margin-top: 60px;
     }
-    /* 弹出层 - 两侧组件 content */
+    /* 弹出层 - 两侧组件 content  流 */
     .AlertContent{
       background: red;
-          /* height: calc( 100%- 90px ); */
               height: calc( 100% - 99px);
               overflow: auto;
 

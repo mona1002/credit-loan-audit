@@ -293,13 +293,22 @@
 
     mounted() {
       // 登录
-      //  this.post("/smUser/login", {
-      //           userCode:"02114C1405",
-      //           loginPassword:"111111"
-      //         }).then(res => {
-      //           console.log(res);
-      //           console.log(res.data)
-      //         });
+       this.post("/smUser/login", {
+                userCode:"ddyy",
+                loginPassword:"111111"
+              }).then(res => {
+                console.log(res);
+                console.log(res.data)
+              });
+
+      //     loginFn(){
+      // console.log('login ')
+      // this.post("/smUser/login", {
+      //   userCode: "02103C3003",
+      //   loginPassword: "111111"
+      // }).then(res => {
+      //   console.log(res);
+      // });
 // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         // id:"bb30607c-b5aa-4915-9474-460e099a33e8",
