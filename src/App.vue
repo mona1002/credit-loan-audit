@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 
-       <myHead></myHead>
+       <!-- <myHead></myHead> -->
        <!-- <img src="../static/img/20171122102421.png" width="100%"> -->
 <!-- <el-row class="header"></el-row> -->
     <router-view id="Abody" ref="ddd"></router-view>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import myHead from "./view/header"
+// import myHead from "./view/header"
   export default {
     mounted(){
       console.log(this.$refs.ddd)
@@ -29,9 +29,9 @@ import myHead from "./view/header"
       //   reject(err)
       // });
     },
-components:{
-  myHead
-}
+// components:{
+//   myHead
+// }
 }
 
 </script>

@@ -34,8 +34,8 @@
       <el-button icon="el-icon-check" class="credit-btn" @click="coverFn('07')">放弃</el-button>
       <el-button icon="el-icon-check" class="credit-btn" @click="coverFn('03')">审批</el-button>
       <el-button icon="el-icon-check" class="credit-btn">发起反欺诈</el-button>
-      <el-button icon="el-icon-check" class="credit-btn">审批结论轨迹</el-button>
-      <el-button icon="el-icon-check" class="credit-btn">流程轨迹</el-button>
+      <el-button icon="el-icon-check" class="credit-btn" @click="coverFn('spjl')">审批结论轨迹</el-button>
+      <el-button icon="el-icon-check" class="credit-btn" @click="coverFn('lcgj')">流程轨迹</el-button>
     </div>
     <!-- 弹窗 -->
     <div class="cover-view" v-show="coverShow">
@@ -197,6 +197,101 @@
           <el-button type="info " plain @click="showFlag=0,coverShow=false;">返回</el-button>
         </div>
       </el-form>
+      <!-- 审批结论轨迹 -->
+      <div v-show=" this.showFlag=='spjl'" class="spjl-div">
+        <div class="form-title" style="position:relative;">
+          信审审批结论轨迹
+          <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
+        </div>
+        <el-table :data="tableData" height="250" border style="width: 100%" @row-dblclick="itemDbclick" @cell-mouse-enter="cellHover">
+          <el-table-column prop="verIncome" label="核实收入[元]">
+          </el-table-column>
+          <el-table-column prop="proCode" label="批准产品">
+          </el-table-column>
+          <el-table-column prop="ploanAmt" label="批准金额[元]">
+          </el-table-column>
+          <el-table-column prop="ploanTerm" label="批准期限[月]">
+          </el-table-column>
+          <el-table-column prop="appmult" label="审批倍数">
+          </el-table-column>
+          <el-table-column prop="eachTermamt" label="每期还款额[元]">
+          </el-table-column>
+          <el-table-column prop="inteDebitrate" label="内部负债率">
+          </el-table-column>
+          <el-table-column prop="address" label="总信用负债率">
+          </el-table-column>
+          <el-table-column prop="totalRate" label="总负债率">
+          </el-table-column>
+          <el-table-column prop="appConclusion" label="审批结论">
+          </el-table-column>
+          <el-table-column prop="auditDate" label="审批时间">
+          </el-table-column>
+        </el-table>
+        <!-- 分页 -->
+        <div class="block tool-bar">
+          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
+          </el-pagination>
+        </div>
+      </div>
+      <!-- 流程轨迹 -->
+      <div v-show=" this.showFlag=='lcgj'" class="lcgj-div">
+        <div class="form-title" style="position:relative;">
+          信审审批结论轨迹
+          <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
+        </div>
+        <div>
+          <div style="position:relative;">
+            信审流程轨迹
+          </div>
+          <el-table :data="tableData" height="250" border style="width: 100%" @row-dblclick="itemDbclick" @cell-mouse-enter="cellHover">
+            <el-table-column type="index">
+            </el-table-column>
+            <el-table-column prop="verIncome" label="任务节点">
+            </el-table-column>
+            <el-table-column prop="proCode" label="任务类型">
+            </el-table-column>
+            <el-table-column prop="ploanAmt" label="进入本环节时间">
+            </el-table-column>
+            <el-table-column prop="ploanTerm" label="任务状态">
+            </el-table-column>
+            <el-table-column prop="appmult" label="处理人">
+            </el-table-column>
+            <el-table-column prop="eachTermamt" label="处理时间">
+            </el-table-column>
+            <el-table-column prop="inteDebitrate" label="处理结论">
+            </el-table-column>
+            <el-table-column prop="address" label="意见说明">
+            </el-table-column>
+          </el-table>
+        </div>
+        <!-- 反欺诈流程 -->
+        <!-- <div>
+          <div style="position:relative;">
+            反欺诈流程
+          </div>
+          <el-table :data="tableData" height="250" border style="width: 100%" @row-dblclick="itemDbclick" @cell-mouse-enter="cellHover">
+            <el-table-column prop="verIncome" label="任务节点">
+            </el-table-column>
+            <el-table-column prop="proCode" label="任务类型">
+            </el-table-column>
+            <el-table-column prop="ploanAmt" label="进入本环节时间">
+            </el-table-column>
+            <el-table-column prop="ploanTerm" label="任务状态">
+            </el-table-column>
+            <el-table-column prop="appmult" label="处理人">
+            </el-table-column>
+            <el-table-column prop="eachTermamt" label="处理时间">
+            </el-table-column>
+            <el-table-column prop="inteDebitrate" label="处理结论">
+            </el-table-column>
+            <el-table-column prop="address" label="意见说明">
+            </el-table-column>
+          </el-table>
+        </div> -->
+        <div class="back-form-li" style="text-align:right;padding:10px;">
+          <el-button type="info " plain @click="showFlag=0,coverShow=false;">返回</el-button>
+        </div>
+      </div>
     </div>
   </div>
   </div>
@@ -211,7 +306,35 @@ export default {
       title: '123',
       coverShow: false, // 弹窗
       showFlag: 0, // 要显示的 模块,
-      form: {}
+      form: {},
+      tableData: [{
+          verIncome: 'verIncome',
+          proCode: 'proCode',
+          ploanAmt: 'ploanAmt',
+          ploanTerm: 'ploanTerm',
+          appmult: 'appmult',
+          eachTermamt: 'eachTermamt',
+          inteDebitrate: 'inteDebitrate',
+          address: 'address',
+          totalRate: 'totalRate',
+          appConclusion: 'appConclusion',
+          auditDate: 'auditDate'
+        },
+        {
+          verIncome: 'verIncome',
+          proCode: 'proCode',
+          ploanAmt: 'ploanAmt',
+          ploanTerm: 'ploanTerm',
+          appmult: 'appmult',
+          eachTermamt: 'eachTermamt',
+          inteDebitrate: 'inteDebitrate',
+          address: 'address',
+          totalRate: 'totalRate',
+          appConclusion: 'appConclusion',
+          auditDate: 'auditDate'
+        }
+      ],
+      currentPage: 0
     }
   },
   methods: {
@@ -239,9 +362,9 @@ export default {
             //     // console.log("挂起1")
             //   }, 300);
             // }, 500);
-            
 
-            
+
+
             // 点击 确认 提交 方法
             // this.post("/creauditInfo/approval ", {
             //   userCode: "02103C3003 ",
@@ -261,7 +384,7 @@ export default {
       });
     },
     coverFn(flag) {
-      // 统一处理    回退 02 拒绝 01 放弃  07 审批 03
+      // 统一处理    回退 02 拒绝 01 放弃  07 审批 03 审批结论 spjl 流程轨迹 lcgj
       this.coverShow = true;
       switch (flag) {
         case '02':
@@ -275,6 +398,12 @@ export default {
           break;
         case '03':
           this.showFlag = '03';
+          break;
+        case 'spjl':
+          this.showFlag = 'spjl';
+          break;
+        case 'lcgj':
+          this.showFlag = 'lcgj';
           break;
       }
     },
@@ -291,6 +420,11 @@ export default {
           this.coverShow = false;
           this.showFlag = 0;
           break;
+        case '07':
+          console.log("放弃");
+          this.coverShow = false;
+          this.showFlag = 0;
+          break;
         case '03':
           console.log("审批");
           this.coverShow = false;
@@ -303,6 +437,27 @@ export default {
       // }).then(res => {
       //   console.log(res);
       // });
+    },
+    itemDbclick(row, event) {
+      // 行被双击 事件
+      console.log('row dbclick');
+      console.log(row.name);
+    },
+    cellHover(row, column, cell, event) {
+      // cell hover 事件
+      console.log(row);
+      console.log(column);
+      console.log(event);
+      console.log(cell.innerText); // 备注
+      console.log(column.label);
+      // this.tableData[]
+
+    },
+    handleSizeChange(val) {
+      console.log("每页 ${val}条", val);
+    },
+    handleCurrentChange(val) {
+      console.log("当前页: ${val}", val);
     }
   }
 }
@@ -327,6 +482,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* 三列 */
 
 .item-column3 {
@@ -345,11 +510,31 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* 按钮集合控件 */
 
 .btn-div {
   text-align: center;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -363,6 +548,16 @@ export default {
   color: #333;
   border: none;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -387,6 +582,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* 两列 */
 
 .item-column2 {
@@ -394,6 +599,16 @@ export default {
   float: left;
   margin: 0;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -416,6 +631,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* form-title */
 
 .form-title {
@@ -428,7 +653,7 @@ export default {
   padding-left: 10px;
   display: block;
   margin-bottom: 10px;
-  margin-top: 20px;
+  /*margin-top: 20px;*/
   overflow: hidden;
 }
 
@@ -444,6 +669,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* textarea */
 
 .back-form .back-form-li .el-textarea {
@@ -454,11 +689,31 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* 单独设置  label*/
 
 .back-form .el-form-item__label {
-  width: 70px;
+  width: 75px;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -485,6 +740,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* 审批 表单 */
 
 .appro-form {
@@ -503,6 +768,61 @@ export default {
 
 .appro-form .back-form-li .el-textarea {
   width: 60%;
+}
+
+
+
+
+
+
+
+
+
+
+/* 审批结论轨迹 */
+
+.spjl-div {
+  width: 80%;
+  height: 400px;
+  margin: 0 auto;
+  margin-top: 250px;
+  overflow: hidden;
+  padding: 10px;
+  background: #fff;
+  border-radius: 5px;
+}
+
+.el-table {
+  font-size: 12px;
+  line-height: 20px;
+}
+
+
+
+
+
+
+/* 分页 */
+
+.tool-bar {
+  width: 100%;
+  text-align: center;
+  padding: 10px 0 0 10px;
+}
+
+
+/* 流程轨迹 */
+
+.lcgj-div {
+  width: 80%;
+  height: 400px;
+  margin: 0 auto;
+  margin-top: 250px;
+  overflow: hidden;
+  padding: 10px;
+  background: #fff;
+  border-radius: 5px;
+  height: auto;
 }
 
 </style>

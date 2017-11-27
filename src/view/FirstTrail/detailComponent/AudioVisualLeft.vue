@@ -259,11 +259,10 @@
     },
 
     mounted() {
-      // this.get('../../../../static/json/img.json').then(response => { // axios 请求
+      // this.get('/productArchive/getProductArchiveParentList').then(response => { // axios 请求
       //   this.picData = response.data.items;
       // });
 
-      
         //     if (getComputedStyle(this.$refs.Big_pic_ref[0], false).width > getComputedStyle(this.$refs.Big_pic_ref[0], //判断宽度>高度  按宽度100%显示
         //     false).height) { // 点击切换图片时，让显示的大图宽高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
         //   this.$refs.Big_pic_ref[0].style.width = "100%";//calc( 100% - 202px)
@@ -325,7 +324,7 @@
   .position_and_size {
     position: absolute;
     font-size: 30px;
-    z-index: 10;
+    z-index: 2;
   }
 
   .icon_pre {

@@ -1,5 +1,5 @@
 <template>
-  <div id="new">
+  <div id="FSplitScreen">
 
   </div>
 </template>

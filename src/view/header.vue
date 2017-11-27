@@ -163,11 +163,20 @@
 <style scoped>
   .mheader{
     width: 100%;
+<<<<<<< HEAD
     min-width: 1366px;
     height: 70px;
     line-height: 70px;
     /* background: #20a0ff; */
     background-image:linear-gradient(-62deg, #3196e4 0%, #1f64b4 36%, #0f3889 100%);
+=======
+    height: 70px;
+    line-height: 70px;
+    background: #20a0ff;
+    font-size: 30px;
+    color: white;
+    padding-left:20px;
+>>>>>>> 51ad8f6115869086de1e619435d61c07864469aa
   }
   .mheader .logoDiv{
     float: left;

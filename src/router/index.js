@@ -38,9 +38,11 @@ import PhoneCredit from '@/view/FirstTrail/PhoneCredit'
 import ApprovalConclusion from '@/view/FirstTrail/checkComponent/ApprovalConclusion'
 // 查询详情页面财务信息（部分）
 import FinanceInformation from '@/view/FirstTrail/checkComponent/FinanceInformation'
-
 // 信审审批
 import CreditApproval from '@/view/FirstTrail/CreditApproval'
+// ----------终审-------------------------
+import FSplitScreen from '@/view/FinalTrial/FSplitScreen.vue'
+// ------------反欺诈------------------
 
 /*借款人资料详情*/
 import borrowerInformationDetail from '@/view/FirstTrail/detailComponent/borrowerInformationDetail'
@@ -139,11 +141,32 @@ const routes = [{
     path: '/CreditApproval',
     component: CreditApproval
   },
+<<<<<<< HEAD
   {
     // 借款人资料详情
     path: '/borrowerInformationDetail',
     component: borrowerInformationDetail
   },
+=======
+  // ----------------终审----------------
+{
+  path:'/FSplitScreen',
+  component:FSplitScreen
+},
+//-------------------反欺诈------------
+// {
+//   path:'/FSplitScreen',
+//   component:FSplitScreen
+// },
+// {
+//   path:'/FSplitScreen',
+//   component:FSplitScreen
+// },
+// {
+//   path:'/FSplitScreen',
+//   component:FSplitScreen
+// },
+>>>>>>> 51ad8f6115869086de1e619435d61c07864469aa
 ];
 
 const router = new Router({

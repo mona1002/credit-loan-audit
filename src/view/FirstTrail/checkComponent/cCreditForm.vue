@@ -153,7 +153,7 @@
             </li>
             <li class="company_address_select">
               <label class="WorkInfs_left_label left_margin">单位地址 ：</label>
-              <span class="detail_inf">{{this.hirecomAddress }} </span>
+              <span class="detail_inf">{{this.hirecomAddressVal }} </span>
             </li>
             <li>
               <label class="WorkInfs_left_label left_margin">前单位名称：</label>
@@ -308,12 +308,11 @@
           <ul class="CreditForm_check_reside_ul_left">
             <li>
               <label class="check_reside__left_label">现住址：</label>
-              <span>
-                <span class="detail_inf oneline"> </span> 北京市北京市延庆县宫本武藏 </span>
+                <span class="detail_inf oneline"> </span> {{this.address}} </span>
             </li>
             <li>
               <label class="check_reside__left_label">现住地址是否为常住地址 ：</label>
-              <span class="detail_inf">{{this.adafadsfadf }} </span>
+              <span class="detail_inf">{{this.aisresidentVal }} </span>
             </li>
           </ul>
         </div>
@@ -408,15 +407,10 @@
         livingHouseHoldsVal: '', //同住者关系
         livingEstateBelongsVal: '', //居住房产所属情况
         // 核对现住址
+        address:'',//现住址
         aisresidentVal: '', //现住地址是否为常住地址
-        jhjk: '', //
-
-
-        
         // 初审结论
-        firstConclusion: '', //初审结果评价
-
-
+        firstConclusion: '', //初审结果评价----------------------待处理是否需要获取数据-------------------还是只可以填写
       }
     },
     methods: {
@@ -504,26 +498,26 @@
 // 获取数据
 this.beexEcutedVal=res.data.wbeexEcuted; // select-客户在法网是否有被执行信息
 this.netHirecomVal=res.data.wnetHirecom; // select-单位在法网是否有被执行信息：
-this.netEcutedBreaVal=res.data.ddd // select-客户在失信网是否有失信记录：
-this.netHirecomBreaVal=res.data.ddd // select-单位在失信网是否有失信记录
-this.netPhoneVal=res.data.ddd // select-网上搜索借款人手机是否有异常：
-this.netHirecomNameVal=res.data.ddd // select-网搜单位名称是否有异常
-this.netHirecomPhoneVal=res.data.ddd // select-网搜单位电话是否有异常：
-this.netAddrandEstateVal=res.data.ddd // select-网上搜索借款人现居住地址和房产地址是否有异常：
-this.netHirecomAddressVal=res.data.ddd // select-网搜单位地址是否有异常：
-this.netCompanyVal=res.data.ddd // select-当地工商网查询企业基本信息中是否有登记：
-this.netAddrstateVal=res.data.ddd // select-客户工作单位在全国组织代码查询中是否存在：
+this.netEcutedBreaVal=res.data.wnetEcutedBrea // select-客户在失信网是否有失信记录：
+this.netHirecomBreaVal=res.data.wnetHirecomBrea // select-单位在失信网是否有失信记录
+this.netPhoneVal=res.data.wnetPhone // select-网上搜索借款人手机是否有异常：
+this.netHirecomNameVal=res.data.wnetHirecomName // select-网搜单位名称是否有异常
+this.netHirecomPhoneVal=res.data.wnetHirecomPhone // select-网搜单位电话是否有异常：
+this.netAddrandEstateVal=res.data.wnetAddrandEstate // select-网上搜索借款人现居住地址和房产地址是否有异常：
+this.netHirecomAddressVal=res.data.wnetHirecomAddress // select-网搜单位地址是否有异常：
+this.netCompanyVal=res.data.wnetCompany // select-当地工商网查询企业基本信息中是否有登记：
+this.netAddrstateVal=res.data.wnetAddrstate // select-客户工作单位在全国组织代码查询中是否存在：
 // 核实身份
-this.isselfVal=res.data.ddd // 接听者是否是借款人本人：
-this.loanBeforeVal=res.data.ddd //是否在我司申请借款：
+this.isselfVal=res.data.iisself // 接听者是否是借款人本人：
+this.loanBeforeVal=res.data.iloanBefore //是否在我司申请借款：
 // 工作信息
-this.hirecomSignVal=res.data.ddd //单位性质
-this.hirecomKindVal=res.data.ddd //所属行业：
-this.hirecomAddressVal=res.data.ddd //单位地址------------三级联动---待续
-this.hirecomPaymentTypeVal=res.data.ddd // 工资发放形式：
+this.hirecomSignVal=res.data.hirecomSign //单位性质
+this.hirecomKindVal=res.data.hirecomKind //所属行业：
+this.hirecomAddressVal=res.data.hirecomAddress //单位地址------------三级联动-----------------------待续
+this.hirecomPaymentTypeVal=res.data.hirecomPaymentType // 工资发放形式：
 //  私营企业信息
-this.selfTypeVal=res.data.ddd //企业类型
-this.selfpremisesVal=res.data.ddd // 经营场所
+this.selfTypeVal=res.data.selfType //企业类型
+this.selfpremisesVal=res.data.selfpremises // 经营场所
 // 家庭信息
 this.fmarrflagVal=res.data.ddd //婚姻状况
 this.childFlagVal=res.data.ddd //是否有子女
@@ -533,7 +527,8 @@ this.brothersIfhasVal=res.data.ddd //是否有兄弟姐妹
 this.livingHouseHoldsVal=res.data.ddd //同住者关系
 this.livingEstateBelongsVal=res.data.ddd //居住房产所属情况
 // 核对现住址
-this.aisresidentVal=res.data.ddd //现住地址是否为常住地址
+        this.address=res.data.aaddress,//现住址
+this.aisresidentVal=res.data.aisresident //现住地址是否为常住地址
 // textarea 文本输入域 字段
 this.beexEcutedtxt=res.data.wbeexEcutedtxt; // 执行信息说明
 this.netHirecomtxt=res.data.ddd //单位执行信息说明
@@ -549,7 +544,7 @@ this.netAddrstatetxt=res.data.ddd //组织机构代码信息说明
 //核实身份
 this.isselftxt=res.data.ddd //接听说明
 // 初审结论
-this.firstConclusion=res.data.ddd //初审结果评价
+this.firstConclusion=res.data.ddd //初审结果评价----------------------待处理是否需要获取数据--------还是只可以填写
 // input 字段
 // 工作信息
 this.hirecomName=res.data.ddd // 工作单位

@@ -1,7 +1,9 @@
 <template>
   <div class="SplitScreen">
+    <myHead></myHead>
     <!-- 进件人详情 -->
-    <p class="PerDtl">  <!-- p标签高度为30px -->
+    <p class="PerDtl">
+      <!-- p标签高度为30px -->
       <span class="PerInf"> 借款人姓名 :akdialkdinfl</span>
       <span class="PerInf"> 进件编号 :201608040133010004</span>
       <span class="PerInf"> 证件号码 :420701197505136996</span>
@@ -14,13 +16,13 @@
       <!-- 左侧分屏部分 -->
       <div class="left" ref="rLeft">
         <button @mouseenter="showList" v-show="flexible" class="stretch" style="padding:5px 10px">展开</button>
-        <button @mouseleave="hid" v-show="!flexible" class="stretch"  style="padding:5px 10px">隐藏</button>
-        <br>
+        <button @mouseleave="hid" v-show="!flexible" class="stretch" style="padding:5px 10px">隐藏</button>
+        <!-- <br> -->
         <!-- 左侧菜单栏 -->
-        <div ref="Left_title" class="Left_ul" @mouseenter="showList" @mouseleave="hid">
-          <!-- 左侧 收缩 title列表 ====================弹出列表============ -->
+        <!-- @mouseenter="showList" @mouseleave="hid" -->
+        <div ref="Left_title" class="Left_ul">
+          <!-- 左侧 title列表 == 影音资料等 ==================弹出列表============ -->
           <ul>
-            <!-- tab 1 -->
             <li ref="tabOne" v-for="(val,index) in items1" :key="index" :class="{tabActColor1:tab1Index==index}" @mousedown="flag1[index] &&  tab1($event,index,val)">
               {{val}}</li>
           </ul>
@@ -37,23 +39,20 @@
             <!-- <div v-if=" this.tabContent1==3">asdfa</div> -->
             <!-- <div v-if=" this.tabContent1==4">asdf adf</div> -->
             <!-- <div v-if=" this.tabContent1==5">asdf adf</div> -->
-            
             <cCreditForm v-if=" this.tabContent1==6"></cCreditForm>
             <!-- <div v-if=" this.tabContent1==7">asdf adf</div> -->
             <!-- <div v-if=" this.tabContent1==8">asdf adf</div> -->
-            
-            <!-- <div></div> -->
             <!-- <AudioVisual v-if=" this.tab1Index==0"></AudioVisual>
-        <workbench v-if=" this.tab1Index==1"></workbench> -->
+            <workbench v-if=" this.tab1Index==1"></workbench> -->
           </div>
         </div>
 
       </div>
       <!-- 右侧分屏部分 -->
-      <div class="right" ref="rRight">
+      <div class="right" ref="rRight" style="background:green;">
         <button @click="FullScreen" v-show="FullScreenlShow" class="stretch">全屏显示</button>
         <button @click="DblScreen" v-show="!FullScreenlShow" class="stretch">返回</button>
-        <br>
+        <!-- <br> -->
         <!-- tab2 切换 -->
         <!-- <el-tabs @tab-click="flag2 &&handleClick" type="border-card">
         <el-tab-pane :label="val" v-for="(val,index) in items2" :key="index">
@@ -61,81 +60,93 @@
         <AudioVisual v-if=" this.tabContent2==0"></AudioVisual>
         <workbench v-if=" this.tabContent2==1"></workbench>
       </el-tabs> -->
-        <!-- 右屏tab切换 -->
+        <!-- 右屏tab 表头 -->
         <div class="Right_tab_title_div">
-          <!-- tab 1 -->
-          <!-- <ul>    
-          <li class="Right_tab_title" ref="tabTwo" v-for="(val,index) in items2" :key="index" :class="{tabActColor2:tab1Index==index}" @mousedown="flag2[index] &&  tab2($event,index,val)">
-          {{val}}</li>
-        </ul> -->
-          <p>
-            <span class="Right_tab_title" ref="tabTwo" v-for="(val,index) in items2" :key="index" :class="{tabActColor2:tab2Index==index}"
+          <!-- 左右滑动 图标  -->
+          <i class="el-icon-d-arrow-left tab_left_arrow" @click="leftMovingBtn"></i>
+          <i class="el-icon-d-arrow-right tab_right_arrow" @click="rightMovingBtn"></i>
+          <!-- tab 2 -->
+          <ul ref="right_tab_ul" style="left:20px">
+            <li class="Right_tab_title" ref="tabTwo" v-for="(val,index) in items2" :key="index" :class="{tabActColor2:tab2Index==index}"
               @mousedown="flag2[index] &&  tab2($event,index,val)">
-              {{val}}</span>
-          </p>
-
-          <div class="tab2_Content">
-            <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
-            <remark v-if=" this.tabContent2==1"></remark>
-            <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
-            <applicationInformation v-if=" this.tabContent2==3"></applicationInformation>
-            <borrowerInformation v-if=" this.tabContent2==4"></borrowerInformation>
-            <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
-            <CreditForm v-if=" this.tabContent2==6"></CreditForm>
-            <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
-            <!-- 反欺诈结论 空白 -->
-            <!-- <CreditForm v-if=" this.tabContent2==8"></CreditForm> -->
-            <!-- 信审审批 空白 -->
-            <CreditApproval v-show=" this.tabContent2==9"></CreditApproval>
-
-          </div>
+              {{val}}</li>
+          </ul>
         </div>
-
-
+        <!-- 右侧 tab 内容 -->
+        <div class="tab2_Content">
+          <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
+          <remark v-if=" this.tabContent2==1"></remark>
+          <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
+          <applicationInformation v-if=" this.tabContent2==3"></applicationInformation>
+          <borrowerInformation v-if=" this.tabContent2==4"></borrowerInformation>
+          <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
+          <CreditForm v-if=" this.tabContent2==6"></CreditForm>
+          <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
+          <!-- 反欺诈结论 空白 -->
+          <!-- <CreditForm v-if=" this.tabContent2==8"></CreditForm> -->
+          <!-- 信审审批 空白 -->
+          <!-- <CreditApproval v-show=" this.tabContent2==9"></CreditApproval>
+          </div> -->
+        </div>
       </div>
     </div>
-      <!-- 对比弹出层   不在右侧div里面，再 wrap 里面  可以用fixed定位-->
-      <div class="AudioVisual_wrap_compare" v-show="CompareAlert" v-on:CompareShow="compBtnS">
+    <!-- 对比弹出层   不在右侧div里面，再 wrap 里面  可以用fixed定位-->
+    <div class="AudioVisual_wrap_compare" v-show="CompareAlert" v-on:CompareShow="compBtnS">
       <i class="el-icon-close" @click="closeCompareBtn"></i>
-        <div class="AudioVisual_wrap_compare_left ">
-            <!-- <Internal-match></Internal-match> -->
-            <!-- <Audio-visual></Audio-visual> -->
-<AudioVisualLeft></AudioVisualLeft>
-        </div>
-        <div class="AudioVisual_wrap_compare_right ">
-<AudioVisualLeft></AudioVisualLeft>
-
-            <!-- <InternalMatch></InternalMatch> -->
-            
+      <!-- 弹出层左侧 div -->
+      <div class="AudioVisual_wrap_compare_left ">
+        <div>
+          <p>影像资料</p>
+          <!-- h2 标题栏 -->
+          <div class="AlertContent">
+            <AudioVisualLeft></AudioVisualLeft>
+          </div>
+          
         </div>
       </div>
-      <!-- 对比弹出层结束 -->
+      <!-- 弹出层右侧 div -->
+      <div class="AudioVisual_wrap_compare_right ">
+        <!-- 搜索框 -->
+        <h2 style="margin:5px 0;"> 客户名称：
+          <el-select v-model="AlertSearch" placeholder="请选择">
+            <el-option v-for="item in AlertSearchCondition" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </h2>
+        <p>影响列表</p><!-- h2 标题栏 -->
+        <div class="AlertContent">
+          <AudioVisualLeft></AudioVisualLeft>
+        </div>
+      </div>
+    </div>
+    <!-- 对比弹出层结束 -->
   </div>
 
 </template>
 <script>
-// 编辑
+  import myHead from "../header.vue"
+  // 编辑
   import AudioVisual from "./detailComponent/AudioVisual";
-import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
-  
+  import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
+
   import remark from "./detailComponent/remark";
   import InternalMatch from "./InternalMatch";
   import applicationInformation from "./detailComponent/applicationInformation";
   import borrowerInformation from "./detailComponent/borrowerInformation";
   import PhoneCredit from "./PhoneCredit";
   import CreditForm from "./detailComponent/CreditForm";
-  import creditInvestigation from "./detailComponent/creditInvestigation";//实地征信
+  import creditInvestigation from "./detailComponent/creditInvestigation"; //实地征信
   // import s from "./detailComponent/remark";
   // 反欺诈结论 写此处
   // 信审审批写此处
   import CreditApproval from "./CreditApproval";
   // 查询
   import cCreditForm from "./checkComponent/cCreditForm";
-  
+
   export default {
     data() {
       return {
-        CompareAlert:false,//对比按钮 弹出层
+        CompareAlert: false, //对比按钮 弹出层
         title: "",
         // activeName: 'second', //---------右侧tab切换用
         isShow: false,
@@ -161,17 +172,53 @@ import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
         // }, {
         //   title: "内部匹配"
         // }],
+        AlertSearch: '', // 对比弹出层 客户名称：搜索框
+        AlertSearchCondition: [{
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'
+        }, {
+          value: '选项3',
+          label: '蚵仔煎'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        }],
       }
     },
     methods: {
       // 对比按钮
-      compBtnS(){
+      compBtnS() {
         console.log("我是傅祖建")
-        this.CompareAlert=true;
+        this.CompareAlert = true;
       },
       // 弹出层关闭按钮
-      closeCompareBtn(){
-        this.CompareAlert=false;
+      closeCompareBtn() {
+        this.CompareAlert = false;
+      },
+      // 右侧tab头向  向右移动  left++
+      leftMovingBtn() {
+        console.log("左滑动");
+        console.log(typeof (this.$refs.right_tab_ul.style.left))
+        if (parseFloat(this.$refs.right_tab_ul.style.left) >= 20) {
+          this.$refs.right_tab_ul.style.left = "20px"
+        } else {
+          this.$refs.right_tab_ul.style.left = parseFloat(this.$refs.right_tab_ul.style.left) + 20 + "px";
+        }
+        console.log(this.$refs.right_tab_ul.style.left)
+      },
+      // 右侧tab头向  向左移动  left--
+      rightMovingBtn() {
+        console.log("右滑动");
+        console.log(this.$refs.right_tab_ul.style.left)
+        if (parseFloat(this.$refs.right_tab_ul.style.left) <= 10) {
+          this.$refs.right_tab_ul.style.left = "0px";
+        } else {
+          this.$refs.right_tab_ul.style.left = parseFloat(this.$refs.right_tab_ul.style.left) - 20 + "px";
+        }
+        console.log(this.$refs.right_tab_ul.style.left)
       },
       handleClick(tab, event) { //   tab2 切换 触发函数
         // console.log(tab, event);
@@ -205,15 +252,13 @@ import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
       },
       FullScreen() {
         this.FullScreenlShow = false;
-        this.$refs.rLeft.style.left = "-50%";
-        this.$refs.rRight.style.left = "0";
+        this.$refs.rLeft.style.display = "none";
         this.$refs.rRight.style.width = "100%";
-        console.log(this.$refs.rRight.style.width)
+        // console.log(this.$refs.rRight.style.width)
       },
       DblScreen() {
         this.FullScreenlShow = true;
-        this.$refs.rLeft.style.left = "0";
-        this.$refs.rRight.style.left = "50%";
+        this.$refs.rLeft.style.display = "block";
         this.$refs.rRight.style.width = "50%";
       },
       tab2(ev, ind, val) {
@@ -280,6 +325,7 @@ import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
       // console.log(this.$route.query.row.id) //接参数
     },
     components: {
+      myHead,
       // 编辑
       AudioVisual,
       remark,
@@ -299,6 +345,9 @@ import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
 
 </script>
 <style scoped>
+  .SplitScreen {
+    height: 100%;
+  }
   /* 公共 */
 
   .tabActColor1 {
@@ -333,34 +382,57 @@ import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
     position: absolute;
     left: 5px;
     top: 2px;
+    z-index: 1;
   }
   /* 左右分屏 */
 
   .SplitScreen_wrap {
-    position: relative;
-    min-width: 1366px;
+    /* position: relative; */
+    width: 100%;
+    height: calc( 100% - 100px);
+    background: red;
   }
+  /*   流  */
 
   .left,
   .right {
     width: 50%;
-    /* height: 100%; */
-    height:844px;
-    /* overflow: auto; */
-    overflow: scroll;
-    /* background: pink; */
-    /* height: 100vh; */
+    /* height: calc( 100% - 100px); */
+    height: 100%;
+    overflow: auto;
     border: 1px solid black;
-    /* float: left; */
-    position: absolute;
-    /* left:0; */
+    float: left;
+    background: blue;
+    position: relative;
   }
   /* 左屏 */
+  /* 左侧列表  影音资料等 ul 外包   流 */
 
-  .left {
+  .left .Left_ul {
+    position: absolute;
     left: 0;
-    /* top:0; */
+    top: 40px;
+    width: 100px;
+    height: 90%;
+    background: #846793;
+    z-index: 10;
   }
+  /* 左侧列表 ul 内 li   流  */
+
+  .left .Left_ul li {
+    padding: 5px;
+  }
+
+  .left .Left_ul li:hover {
+    cursor: default;
+  }
+  /* 左侧详情 div   流 */
+
+  .Left_detail_div {
+    background: black;
+    height: 100%;
+  }
+  /* 左侧详情 p标签   流 */
 
   .Left_right_Title {
     background: silver;
@@ -368,75 +440,109 @@ import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
     line-height: 40px;
     text-align: center;
   }
-
-  .Left_ul {
-    /* float:left; */
-    width: 100px;
-    background: white;
-    position: absolute;
-    /* left:-200px;     */
-    left: -100px;
-    z-index: 21;
-    /* display:none; */
-  }
-  .Left_detail_div{
-    /* float:left; */
-    
-    /* background:red; */
-    /* height:400px; */
-  }
+  /* 左侧详情 p标签下的div 内容   流 */
 
   .Left_right_BigImg {
-    /* background: red; */
-    height: 100px;
-  }
-
-  .Left_ul ul li {
-    padding: 5px;
+    background: white;
+    height: calc( 100% - 40px);
+    overflow: auto;
   }
   /* 右屏 */
+  /* 右屏 tab 表头字段   流 */
 
-  .right {
-    left: 50%;
-  }
-
-  .Right_tab_title_div {
+  .right .Right_tab_title_div {
     height: 40px;
     line-height: 40px;
     background: silver;
-
     /* 不换行 */
-    white-space: nowrap;
+    /* white-space:nowrap; */
+    /* padding: 0 20px; */
+    overflow: hidden;
+    position: relative;
   }
+  /* 右侧tab切换头外的ul   流 */
 
   .Right_tab_title_div ul {
-    white-space: nowrap;
+    width: 700px;
+    height: 40px;
+    background: white;
+    position: absolute;
+    left: 20px;
+    /* white-space:nowrap; */
   }
+  /* 右侧tab切换头    流 */
 
   .Right_tab_title {
     float: left;
     padding: 0 10px;
     white-space: nowrap;
   }
+  /*  流 */
 
   .tab2_Content {
-    clear: both;
-    /* height: ; */
+    background: purple;
+    height: calc( 100% - 40px);
+    overflow: auto;
   }
-/* 全屏 对比弹出层 */
-.AudioVisual_wrap_compare{
-  position: absolute;
-  background: purple;
-  width:100%;
-  height:calc( 100% - 126px);
-  z-index: 99;
-  /* width:400px;
-  height:600px;
-  z-index:99; */
-}
-.AudioVisual_wrap_compare_left,.AudioVisual_wrap_compare_right{
-  float: left;
-  width:50%;
-  border: 10px solid orangered;
-}
+  /* 右侧tab切换头 左右滑动图标  流  */
+
+  .tab_left_arrow,
+  .tab_right_arrow {
+    position: absolute;
+    z-index: 2;
+    color: red;
+    font-size: 18px;
+    background: orange;
+    /* height: 40px; */
+    height: 100%;
+    line-height: 40px;
+  }
+
+  .tab_left_arrow {
+    left: 0;
+  }
+
+  .tab_right_arrow {
+    right: 0;
+  }
+  /*  对比弹出层 外包 div 流 */
+
+  .AudioVisual_wrap_compare {
+    position: absolute;
+    top: 100px;
+    background: black;
+    width: 100%;
+    height: calc( 100% - 100px);
+    z-index: 12;
+  }
+  /* 弹出层  左右分屏  流 */
+
+  .AudioVisual_wrap_compare_left,
+  .AudioVisual_wrap_compare_right {
+    float: left;
+    width: 50%;
+    height: 100%;
+    border: 1px solid orangered;
+  }
+/* 弹出层 - p标签 - 标题栏 */
+  .AudioVisual_wrap_compare_left p,
+  .AudioVisual_wrap_compare_right p{
+    background: gray;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-weight: bold;
+  }
+/* 弹出层 - p标签 - 左侧标题栏-上边距 */  
+    .AudioVisual_wrap_compare_left p{
+      margin-top: 60px;
+    }
+    /* 弹出层 - 两侧组件 content */
+    .AlertContent{
+      background: red;
+          /* height: calc( 100%- 90px ); */
+              height: calc( 100% - 99px);
+              overflow: auto;
+
+    }
 </style>
