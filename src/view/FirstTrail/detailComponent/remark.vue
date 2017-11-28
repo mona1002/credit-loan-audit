@@ -7,13 +7,14 @@
 		<div class="remarkIcon">
 			<i class="el-icon-circle-plus icon" @click="add"><span>添加</span></i>
 			<i class="el-icon-edit icon" @click="change"><span>修改</span></i>
-			<i class="el-icon-remove icon" @click="delet($index)"><span>删除</span></i>
+			<i class="el-icon-remove icon" @click="delet"><span>删除</span></i>
 		</div>
 		<div class="taskWtable">
 			<el-table :data="tableData" border style="width: 100%" 
 				:default-sort = "{prop: 'date', order: 'descending'}" 	
 				highlight-current-row
 				@current-change="handleCurrentChange"
+				@row-click='rowIndex'
 				><!-- order两个参数，顺序和倒序: ascending, descending -->
 				<!-- @row-click="addHeight(backColor)" :class="{active: activeName == backColor}" -->
 			    <el-table-column
@@ -54,9 +55,30 @@
 		<!-- 修改弹层 -->
 		<div class="layer" v-show="changeLayer"><!-- @touchmove.prevent  -->
 			<div class="layerbox">
-				<p><span>请输入您要添加的备注信息</span><i class="el-icon-close" @click="changeClose"></i></p>
-				<div><label>备注</label><textarea maxlength="600" placeholder="最多600字" v-model="remark">{{remark}}</textarea></div>
+				<p><span>请输入您要修改的备注信息</span><i class="el-icon-close" @click="changeClose"></i></p>
+				<div><label>备注</label><textarea maxlength="600" placeholder="最多600字" v-model="changeRemarks">{{changeRemarks}}</textarea></div>
 				<el-button type="primary" @click="changeSure">确定</el-button>
+			</div>
+		</div>
+		<!-- 修改和删除没有选中时提示弹框 -->
+		<div class="promptLayer" v-show="promptLayer"><!-- @touchmove.prevent  -->
+			<div class="layerbox">
+				<p><span>提示</span><i class="el-icon-close" @click="promptClose"></i></p>
+				<div>请选择一条记录！
+					<el-button type="primary" @click="promptSure">确定</el-button>
+				</div>		
+			</div>
+		</div>
+		<!-- 删除时提示弹框 -->
+		<div class="deletLayer" v-show="deletLayer"><!-- @touchmove.prevent  -->
+			<div class="layerbox">
+				<p><span>提示</span><i class="el-icon-close" @click="deletClose"></i></p>
+				<div>您要删除该备注吗？
+					<div class=buttonDiv>
+						<el-button type="primary" @click="deletCancle">取消</el-button>
+						<el-button type="primary" @click="deletSure">确定</el-button>
+					</div>
+				</div>		
 			</div>
 		</div>
 	</div>
@@ -66,36 +88,61 @@
 		data(){
 			return{
 				ok:false,
-				tableData: [{remarkType: '11', 
+				tableData: [/*{remarkType: '11', 
 								    remarker:'dd', 
 								    remarkTime: 'gg',
 								    remark:'bb',
 								    id:1
-								}],
+								}*/],
 		        remarkType:'',
 		        remarker:'',
 		        remarkTime:'',
 		        remark:'',
 		        changeLayer:false,
-		        k:1,
+		        promptLayer:false,
+		        k:0,
+		        isChecked:'',
+		        changeRemark:'',
+		        changeRemarks:'',
+		        deletLayer:false,
 			}
 		},
 		methods:{
 			add(){
 				this.ok=true;
 				document.getElementsByTagName('body')[0].style.overflow='hidden';
+				this.remark='';
 			},
 			change(){
-				$(".taskWtable tbody tr").each(function(item){
-					/*if($(".taskWtable tbody tr")[item].find('tr').attr('background-color','#ecf5ff')){
-						console.log(this);
-					}*/
-				})
-				this.changeLayer=true;
-				document.getElementsByTagName('body')[0].style.overflow='hidden';
+				//console.log(this.isChecked='');
+				if(this.isChecked==''){
+					this.promptLayer=true;
+					document.getElementsByTagName('body')[0].style.overflow='hidden';
+				}else{
+					console.log(this.isChecked);
+					this.changeRemarks='';
+					this.changeLayer=true;
+					document.getElementsByTagName('body')[0].style.overflow='hidden';
+					this.changeRemarks=this.tableData[this.isChecked-1].remark;
+					//this.isChecked='';
+					console.log(this.changeRemarks);
+					console.log(this.tableData[this.isChecked-1]);
+					console.log(this.tableData[this.isChecked-1].remark);
+				}
 			},
-			delet(){
-				 this.tableData.splice(index,1);
+			delet(index){
+				console.log(index);
+				 if(this.isChecked==''){
+					this.promptLayer=true;
+					document.getElementsByTagName('body')[0].style.overflow='hidden';
+				}else{
+					console.log(this.isChecked);
+					this.tableData.splice(index,1);
+					this.isChecked='';
+					console.log(this.tableData);
+					/*console.log(this.tableData[this.isChecked-1]);
+					console.log(this.tableData[this.isChecked-1].remark);*/
+				}
 			},
 			close(){
 				this.ok=false;
@@ -103,6 +150,18 @@
 			},
 			changeClose(){
 				this.changeLayer=false;
+				document.getElementsByTagName('body')[0].style.overflow='';
+			},
+			promptClose(){
+				this.promptLayer=false;
+				document.getElementsByTagName('body')[0].style.overflow='';
+			},
+			deletClose(){
+				this.deletLayer=false;
+				document.getElementsByTagName('body')[0].style.overflow='';
+			},
+			deletCancle(){
+				this.deletLayer=false;
 				document.getElementsByTagName('body')[0].style.overflow='';
 			},
 			sure(){
@@ -134,27 +193,35 @@
 				console.log(12345);
 				this.post('/applyRemark/modifyApplyRemark',{
 					id:'00542',
-					remark:this.remark
+					remark:this.changeRemarks
+				})
+				.then(res => {
+		   			console.log(this.changeRemarks);
+		   			this.tableData[this.isChecked-1].remark=this.changeRemarks;
+		          });
+			},
+			promptSure(){
+				this.promptLayer=false;
+				document.getElementsByTagName('body')[0].style.overflow='';
+			},
+			deletSure(){
+				this.deletLayer=false;
+				document.getElementsByTagName('body')[0].style.overflow='';
+				this.post('/applyRemark/deleteApplyRemarkById',{
+					id:'00542'
 				})
 				.then(res => {
 		   			console.log(res);
-		   			this.tableData[1].remark=this.remark;
 		          });
 			},
-			/*addHeight(row){
-				console.log(row.id);
-				$(".taskWtable tbody tr").each(function(index){
-					var index=index+1;
-					if(index == row.id){
-						console.log($(".taskWtable tbody tr")[index-1]);
-						$(".taskWtable tbody tr")[index-1].activeName = backColor;
-					}
-				})
-			},*/
 			handleCurrentChange(val) {
 		       this.currentRow = val;
-		       console.log(val);
+		       this.isChecked=val.id;
+		       console.log(val.id);
 		    },
+		    rowIndex(row){
+		    	console.log(row);
+		    }
 		},
 	}
 </script>
@@ -272,5 +339,70 @@
 .layerbox button{
 	float: right;
 	margin: 10px 10px 10px 0;
+}
+/* 提示弹层 */
+.promptLayer{
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,.4);
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 1000;
+}
+.promptLayer .layerbox{
+	width: 338px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -169px;
+	margin-top: -80px;
+	border: 1px solid #ccc;
+	background-color: #eee;
+	z-index: 10000;
+}
+.promptLayer .layerbox div{
+	background-color: #fff;
+	height: 100px;
+	padding: 10px 10px;
+}
+.promptLayer .layerbox div button{
+	margin:40px 0 10px 0;
+}
+/* 删除提示弹层 */
+.deletLayer{
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,.4);
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 1000;
+}
+.deletLayer .layerbox{
+	width: 338px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -169px;
+	margin-top: -80px;
+	border: 1px solid #ccc;
+	background-color: #eee;
+	z-index: 10000;
+}
+.deletLayer .layerbox div{
+	background-color: #fff;
+	height: 100px;
+	padding: 10px 10px;
+}
+.deletLayer .layerbox .buttonDiv{
+	/* float: left; */
+	width: 100%;
+	height: 50px;
+	margin-top:10px;
+}
+.deletLayer .layerbox .buttonDiv button{
+	float: left;
+	margin:0 0 0 50px;
 }
 </style>
