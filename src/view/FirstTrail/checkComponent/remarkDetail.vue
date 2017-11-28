@@ -1,11 +1,10 @@
-<!-- 备注信息详情 -->
 <template>
 	<div class="remark">
 		<div class="remarkHead">
 			<p>备注信息</p>
 		</div>
 		<div class="taskWtable">
-			<el-table :data="tableData" border style="width: 100%" 
+			<el-table :data="datas" border style="width: 100%" 
 			:default-sort = "{prop: 'date', order: 'descending'}"><!-- order两个参数，顺序和倒序: ascending, descending -->
 			    <el-table-column
 			      type="index"
@@ -41,6 +40,8 @@
 		data(){
 			return{
 				tableData:'',
+				//data:[],
+				datas:[],
 			}
 		},
 		created(){
@@ -53,8 +54,11 @@
 		        'applyId':'00542'
 		      }).then(res => {
 		        /*console.log(res);*/
-		        this.tableData=res.data;
-		        /*console.log(this.datas);*/
+		        this.datas=res.data;
+		        this.datas.forEach(function(item){
+		        	item.remarkTime = new Date(item.remarkTime).toLocaleString().replace(/\//g, "-").replace(/上午|中午|下午/g, "");
+		        	console.log(item.remarkTime);
+		        });
 		      });
 		  },
 	    }
