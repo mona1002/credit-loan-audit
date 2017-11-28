@@ -352,7 +352,6 @@
               </el-input>
             </li>
             <li>
-              <!-- 未写绑定数据 先用员工人数==========================待确定 -->
               <label class=" CheckId_right_label "> 每月净利润[万元]：</label>
               <el-input type="text" placeholder="请输入内容" v-model="checkData.profitamountmamt">
               </el-input>
@@ -745,104 +744,104 @@
           label: '否'
         }],
 
-        // select 字段
-        // 上网查询
-        beexEcutedVal: "", // select-客户在法网是否有被执行信息
-        netHirecomVal: '', // select-单位在法网是否有被执行信息：
-        netEcutedBreaVal: '', // select-客户在失信网是否有失信记录：
-        netHirecomBreaVal: '', // select-单位在失信网是否有失信记录
-        netPhoneVal: '', // select-网上搜索借款人手机是否有异常：
-        netHirecomNameVal: '', // select-网搜单位名称是否有异常
-        netHirecomPhoneVal: '', // select-网搜单位电话是否有异常：
-        netAddrandEstateVal: '', // select-网上搜索借款人现居住地址和房产地址是否有异常：
-        netHirecomAddressVal: '', // select-网搜单位地址是否有异常：
-        netCompanyVal: '', // select-当地工商网查询企业基本信息中是否有登记：
-        netAddrstateVal: '', // select-客户工作单位在全国组织代码查询中是否存在：
-        // 核实身份
-        isselfVal: '', // 接听者是否是借款人本人：
-        loanBeforeVal: '', //是否在我司申请借款：
-        // 工作信息
-        hirecomSignVal: '', //单位性质
-        hirecomKindVal: '', //所属行业：
-        hirecomAddressVal: '', //单位地址------------三级联动---待续
-        payFormVal: '', // 工资发放形式：
-        privateOwnerFlagVal:'',//是否为私营业主
-        //  私营企业信息
-        compTypeVal: '', //企业类型
-        selfpremisesVal: '', // 经营场所
-        // 家庭信息
-        fmarrflagVal: '', //婚姻状况
-        childFlagVal: '', //是否有子女
-        parentIslivingVal: '', //父母是否在世
-        brothersIfhasVal: '', //是否有兄弟姐妹
-        // 居住情况
-        livingHouseHoldsVal: '', //同住者关系
-        livingEstateBelongsVal: '', //居住房产所属情况
-        // 核对现住址
-        address:'',//现住址-----span 直接显示
-        aisresidentVal: '', //现住地址是否为常住地址
-        jhjk: '', //
+        // // select 字段
+        // // 上网查询
+        // beexEcutedVal: "", // select-客户在法网是否有被执行信息
+        // netHirecomVal: '', // select-单位在法网是否有被执行信息：
+        // netEcutedBreaVal: '', // select-客户在失信网是否有失信记录：
+        // netHirecomBreaVal: '', // select-单位在失信网是否有失信记录
+        // netPhoneVal: '', // select-网上搜索借款人手机是否有异常：
+        // netHirecomNameVal: '', // select-网搜单位名称是否有异常
+        // netHirecomPhoneVal: '', // select-网搜单位电话是否有异常：
+        // netAddrandEstateVal: '', // select-网上搜索借款人现居住地址和房产地址是否有异常：
+        // netHirecomAddressVal: '', // select-网搜单位地址是否有异常：
+        // netCompanyVal: '', // select-当地工商网查询企业基本信息中是否有登记：
+        // netAddrstateVal: '', // select-客户工作单位在全国组织代码查询中是否存在：
+        // // 核实身份
+        // isselfVal: '', // 接听者是否是借款人本人：
+        // loanBeforeVal: '', //是否在我司申请借款：
+        // // 工作信息
+        // hirecomSignVal: '', //单位性质
+        // hirecomKindVal: '', //所属行业：
+        // hirecomAddressVal: '', //单位地址------------三级联动---待续
+        // payFormVal: '', // 工资发放形式：
+        // privateOwnerFlagVal:'',//是否为私营业主
+        // //  私营企业信息
+        // compTypeVal: '', //企业类型
+        // selfpremisesVal: '', // 经营场所
+        // // 家庭信息
+        // fmarrflagVal: '', //婚姻状况
+        // childFlagVal: '', //是否有子女
+        // parentIslivingVal: '', //父母是否在世
+        // brothersIfhasVal: '', //是否有兄弟姐妹
+        // // 居住情况
+        // livingHouseHoldsVal: '', //同住者关系
+        // livingEstateBelongsVal: '', //居住房产所属情况
+        // // 核对现住址
+        // address:'',//现住址-----span 直接显示
+        // aisresidentVal: '', //现住地址是否为常住地址
+        // jhjk: '', //
 
 
-        // textarea 文本输入域 字段
-        beexEcutedtxt: '', // 执行信息说明
-        netHirecomtxt: "", //单位执行信息说明
-        netEcutedBreatxt: "", //失信记录说明
-        netHirecomBreatxt: "", //单位失信记录说明        
-        netPhonetxt: "", //手机异常信息说明        
-        netHirecomNametxt: "", //单位名称异常信息说明
-        netHirecomPhonetxt: "", //单位电话异常信息说明
-        netAddrandEstatetxt: "", //地址异常信息说明
-        netHirecomAddresstxt: "", //单位地址异常信息说明
-        netCompanytxt: "", //工商登记信息说明
-        netAddrstatetxt: "", //组织机构代码信息说明
-        //核实身份
-        isselftxt: '', //接听说明
-        // 初审结论
-        	oother: '', //初审结果评价
+        // // textarea 文本输入域 字段
+        // beexEcutedtxt: '', // 执行信息说明
+        // netHirecomtxt: "", //单位执行信息说明
+        // netEcutedBreatxt: "", //失信记录说明
+        // netHirecomBreatxt: "", //单位失信记录说明        
+        // netPhonetxt: "", //手机异常信息说明        
+        // netHirecomNametxt: "", //单位名称异常信息说明
+        // netHirecomPhonetxt: "", //单位电话异常信息说明
+        // netAddrandEstatetxt: "", //地址异常信息说明
+        // netHirecomAddresstxt: "", //单位地址异常信息说明
+        // netCompanytxt: "", //工商登记信息说明
+        // netAddrstatetxt: "", //组织机构代码信息说明
+        // //核实身份
+        // isselftxt: '', //接听说明
+        // // 初审结论
+        // 	oother: '', //初审结果评价
 
-        // input 字段
-        // 工作信息
-        hirecomName: '', // 工作单位
-        workPost: '', //职位级别
-        workTel: '', //单位电话
-        avgsalaryamt: '', //月均工资[元]
-        payDay: '', //每月发薪日
-        hirelastComname: '', //前单位名称：
-        hiredepartment: '', // 所在部门
-        entryDate: '', // 入职时间-日期选择器
-        workZip: '', // 单位地址邮编
-        // hirecomType: '', // 是否为私营业主
-        workAddress: '', //单位地址(input) -----------------------------------------------------------------------------待确认
-        // 私营企业信息
-        selfregcapital: '', //注册资金[万元]
-        selfhasProportion: '', //占股比例
-        monthrentamt: '', // 月还款额/租金[万元]
-        selfpremisesArea: '', //营业面积
-        projectManage: '', //企业经营项目
-        oneYearProfitamt: '', //近一年利润[万元]
-        firstSuppliers: '', //第一供销商
-        compegDate: '', //公司注册时间
-        selfpremisestxt: '', //经营场所
-        selfempCount: '', //员工人数
-        profitamountmamt: '', //每月净利润[万元]：-----------------------------------------------------------------------------待确认
-        firstDistributor: '', //第一分销商
-        // 家庭信息
-        fconsumption: '', // 个人/家庭月开销[元]
-        brothersIfhastxt: '', //是否有兄弟姐妹备注
-        fbalance: '', //可以承受的月还款[元]
+        // // input 字段
+        // // 工作信息
+        // hirecomName: '', // 工作单位
+        // workPost: '', //职位级别
+        // workTel: '', //单位电话
+        // avgsalaryamt: '', //月均工资[元]
+        // payDay: '', //每月发薪日
+        // hirelastComname: '', //前单位名称：
+        // hiredepartment: '', // 所在部门
+        // entryDate: '', // 入职时间-日期选择器
+        // workZip: '', // 单位地址邮编
+        // // hirecomType: '', // 是否为私营业主
+        // workAddress: '', //单位地址(input) -----------------------------------------------------------------------------待确认
+        // // 私营企业信息
+        // selfregcapital: '', //注册资金[万元]
+        // selfhasProportion: '', //占股比例
+        // monthrentamt: '', // 月还款额/租金[万元]
+        // selfpremisesArea: '', //营业面积
+        // projectManage: '', //企业经营项目
+        // oneYearProfitamt: '', //近一年利润[万元]
+        // firstSuppliers: '', //第一供销商
+        // compegDate: '', //公司注册时间
+        // selfpremisestxt: '', //经营场所
+        // selfempCount: '', //员工人数
+        // profitamountmamt: '', //每月净利润[万元]：-----------------------------------------------------------------------------待确认
+        // firstDistributor: '', //第一分销商
+        // // 家庭信息
+        // fconsumption: '', // 个人/家庭月开销[元]
+        // brothersIfhastxt: '', //是否有兄弟姐妹备注
+        // fbalance: '', //可以承受的月还款[元]
 
 
-        form: {
-          desc: '', //上网查询信息 右侧textarea框绑定值
-        },
-        options: [{ // 现住地址是否为常住地址
-          value: '1',
-          label: '是'
-        }, {
-          value: '0',
-          label: '否'
-        }],
+        // form: {
+        //   desc: '', //上网查询信息 右侧textarea框绑定值
+        // },
+        // options: [{ // 现住地址是否为常住地址
+        //   value: '1',
+        //   label: '是'
+        // }, {
+        //   value: '0',
+        //   label: '否'
+        // }],
       }
     },
     methods: {

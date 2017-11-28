@@ -32,9 +32,13 @@
           <div class="Left_right_BigImg ">
             <AudioVisualLeft v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></AudioVisualLeft>
             <!-- <workbench v-if=" this.tabContent1==1"></workbench> -->
-            <!-- <div v-if=" this.tabContent1==3">asdfa</div> -->
+            <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
             <!-- <div v-if=" this.tabContent1==4">asdf adf</div> -->
             <!-- <div v-if=" this.tabContent1==5">asdf adf</div> -->
+            <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
+            <cborrowerInformationDetail v-if=" this.tabContent1==4"></cborrowerInformationDetail>
+            <!-- <capplicationInformationDetail v-if=" this.tabContent1==5"></capplicationInformationDetail> -->
+            
             <cCreditForm v-if=" this.tabContent1==6"></cCreditForm>
           <creditInvestigation v-if=" this.tabContent1==7"></creditInvestigation> 
             
@@ -138,6 +142,12 @@
   import CreditApproval from "./CreditApproval";
   // 查询
   import cCreditForm from "./checkComponent/cCreditForm";
+  import cFinanceInformation from "./checkComponent/FinanceInformation";
+  import cremarkDetail from "./checkComponent/remarkDetail"; //备注信息
+  import cborrowerInformationDetail from "./checkComponent/borrowerInformationDetail";//借款人资料
+  import capplicationInformationDetail from "./checkComponent/applicationInformationDetail";//申请信息
+  
+  
 
   export default {
     data() {
@@ -368,6 +378,10 @@
       // 查询
       cCreditForm,
       AudioVisualLeft,
+      cremarkDetail,//
+      cFinanceInformation,
+      cborrowerInformationDetail,
+      capplicationInformationDetail
     }
   }
 
