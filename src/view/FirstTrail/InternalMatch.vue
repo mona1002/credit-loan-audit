@@ -7,7 +7,7 @@
       <div class="title-bar">
         {{title1}}
       </div>
-      <el-table :data="mobileData" height="250" border style="width: 100%" @row-dblclick="itemDbclick" @cell-mouse-enter="cellHover">
+      <el-table :data="mobileData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclick">
         <el-table-column prop="matchApplyCustName" label="命中号码姓名">
         </el-table-column>
         <el-table-column prop="applyTelTypeTxt" label="电话类型">
@@ -22,11 +22,11 @@
         </el-table-column>
         <el-table-column prop="matchApplyStateTxt" label="业务状态">
         </el-table-column>
-        <el-table-column prop="remark" width="200" fit="false" class="mark-cell" label="备注">
+        <el-table-column prop="remark" width="200" fit="false" class="mark-cell" label="备注" show-overflow-tooltip>
         </el-table-column>
       </el-table>
       <div class="block tool-bar">
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="mobileData.length">
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 15, 20]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="mobileData.totalRecord">
         </el-pagination>
       </div>
     </div>
@@ -34,26 +34,26 @@
       <div class="title-bar">
         {{title2}}
       </div>
-      <el-table :data="telData" height="250" border style="width: 100%" @row-dblclick="itemDbclick" @cell-mouse-enter="cellHover">
-        <el-table-column prop="name" label="命中号码姓名">
+      <el-table :data="telData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclick">
+        <el-table-column prop="matchApplyCustName" label="命中号码姓名">
         </el-table-column>
-        <el-table-column prop="phoneType" label="电话类型">
+        <el-table-column prop="applyTelTypeTxt" label="电话类型">
         </el-table-column>
-        <el-table-column prop="inNumber" label="进件编号">
+        <el-table-column prop="matchApplySubNo" label="进件编号">
         </el-table-column>
         <el-table-column prop="custName" label="客户名称">
         </el-table-column>
-        <el-table-column prop="idNumber" label="身份证号">
+        <el-table-column prop="certCode" label="身份证号">
         </el-table-column>
-        <el-table-column prop="inCompany" label="进件单位">
+        <el-table-column prop="matchApplyCustComName" label="进件单位">
         </el-table-column>
-        <el-table-column prop="busState" label="业务状态">
+        <el-table-column prop="matchApplyStateTxt" label="业务状态">
         </el-table-column>
-        <el-table-column prop="mark" width="200" fit="false" class="mark-cell" label="备注">
+        <el-table-column prop="remark" width="200" fit="false" class="mark-cell" label="备注" show-overflow-tooltip>
         </el-table-column>
       </el-table>
       <div class="block tool-bar">
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="telData.length">
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="telData.totalRecord">
         </el-pagination>
       </div>
     </div>
@@ -61,26 +61,26 @@
       <div class="title-bar">
         {{title3}}
       </div>
-      <el-table :data="workData" height="250" border style="width: 100%" @row-dblclick="itemDbclick" @cell-mouse-enter="cellHover">
-        <el-table-column prop="name" label="命中号码姓名">
+      <el-table :data="workData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclick">
+        <el-table-column prop="matchApplyCustName" label="命中号码姓名">
         </el-table-column>
-        <el-table-column prop="phoneType" label="电话类型">
+        <el-table-column prop="applyTelTypeTxt" label="电话类型">
         </el-table-column>
-        <el-table-column prop="inNumber" label="进件编号">
+        <el-table-column prop="matchApplySubNo" label="进件编号">
         </el-table-column>
         <el-table-column prop="custName" label="客户名称">
         </el-table-column>
-        <el-table-column prop="idNumber" label="身份证号">
+        <el-table-column prop="certCode" label="身份证号">
         </el-table-column>
-        <el-table-column prop="inCompany" label="进件单位">
+        <el-table-column prop="matchApplyCustComName" label="进件单位">
         </el-table-column>
-        <el-table-column prop="busState" label="业务状态">
+        <el-table-column prop="matchApplyStateTxt" label="业务状态">
         </el-table-column>
-        <el-table-column prop="mark" width="200" fit="false" class="mark-cell" label="备注">
+        <el-table-column prop="remark" width="200" fit="false" class="mark-cell" label="备注" show-overflow-tooltip>
         </el-table-column>
       </el-table>
       <div class="block tool-bar">
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="workData.length">
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="workData.totalRecord">
         </el-pagination>
       </div>
     </div>
@@ -142,15 +142,15 @@ export default {
 
       // 移动号码类
       this.post('internalMatch/getInternalMatchListByMobile',queryData).then(res => {
-        this.mobileData = res.data.recordList;
+        this.mobileData = res.data;
       });
       // 固定电话类
       this.post('internalMatch/getInternalMatchListByFixTel', queryData).then(res => {
-        this.telData = res.data.recordList;
+        this.telData = res.data;
       });
       // 单位名称类
       this.post('internalMatch/getInternalMatchListByWorkName',queryData2).then(res => {
-        this.workData = res.data.recordList;
+        this.workData = res.data;
       })
 
 
@@ -173,16 +173,16 @@ export default {
       console.log('row dbclick');
       console.log(row.name);
     },
-    cellHover(row, column, cell, event) {
-      // cell hover 事件
-      console.log(row);
-      console.log(column);
-      console.log(event);
-      console.log(cell.innerText); // 备注
-      console.log(column.label);
-      // this.tableData[]
+    // cellHover(row, column, cell, event) {
+    //   // cell hover 事件
+    //   console.log(row);
+    //   console.log(column);
+    //   console.log(event);
+    //   console.log(cell.innerText); // 备注
+    //   console.log(column.label);
+    //   // this.tableData[]
 
-    },
+    // },
     handleSizeChange(val) {
       console.log("每页 ${val}条", val);
     },
@@ -196,7 +196,7 @@ export default {
     "internal-match-textarea": {
       template: '\
             <el-form label-width="100px" class="demo-ruleForm">\
-            <el-form-item label="活动形式" class="mark-title">\
+            <el-form-item label="匹配结论" class="mark-title">\
             </el-form-item>\
             <el-input type="textarea" v-model="ruleForm.desc" class="mark-textarea" resize="none" :rows="5"></el-input>\
             <el-form-item class="mark-button">\
@@ -215,6 +215,17 @@ export default {
       methods: {
         submitForm: function() {
           console.log('click button')
+          // 提交 互动信审
+          this.post('internalMatch/addInternalMatchOption',{
+            // 申请单id
+            applyId:'',
+            // 匹配结论
+            audit_desc:'',
+            // 操作人用户编码  userCode
+            creator_code:''
+          }).then( res => {
+            console.log(res);
+          })
         }
       }
     }
