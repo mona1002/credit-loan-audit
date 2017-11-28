@@ -4,9 +4,9 @@
 			<img src=""><p>高级查询</p>
 		</div>
 		<div class="taskWinput">
-	  		<span>进件编号：</span><el-input v-model="input1"></el-input>
-		    <span>客户名称：</span><el-input v-model="input2"></el-input>
-		    <span>证件号码：</span><el-input v-model="input3"></el-input>
+	  		<!-- <span>进件编号：</span><el-input v-model="datas.applySubNo"></el-input>
+	  				    <span>客户名称：</span><el-input v-model="datas.custName_la"></el-input>
+	  				    <span>证件号码：</span><el-input v-model="datas.certCode"></el-input> -->
 	  	</div>
 	  	 <div class="wattingButton">
 	    	<el-button type="primary" @click="reset">重置</el-button>
@@ -16,7 +16,7 @@
 			<img src=""><p>信审任务列表</p>
 		</div>
 		<div class="taskWtable">
-			<el-table :data="tableData" border style="width: 100%" @row-click='goDetail'>
+			<!-- <el-table :data="datas" border style="width: 100%" @row-click='goDetail'>
 			    <el-table-column
 			      type="index"
 			      :index='1'
@@ -25,16 +25,66 @@
 			      >
 			    </el-table-column>
 			    <el-table-column
-			      prop="name"
+			      prop="datas.taskType"
 			      label="任务类型"
 			      >
 			    </el-table-column>
 			    <el-table-column
-			      prop="address"
+			      prop="datas.emerType"
 			      label="紧急程度">
 			    </el-table-column>
 			    <el-table-column
-			      prop="address"
+			      prop="datas.applySubNo"
+			      label="进件编号">
+			    </el-table-column>
+			    <el-table-column
+			      prop="datas.appDate"
+			      label="申请日期">
+			    </el-table-column>
+			    <el-table-column
+			      prop="datas.custName"
+			      label="客户名称">
+			    </el-table-column>
+			    <el-table-column
+			      prop="datas.certCode"
+			      label="证件号码">
+			    </el-table-column>
+			    <el-table-column
+			      prop="datas.appOrgCode"
+			      label="进件机构">
+			    </el-table-column>
+			    <el-table-column
+			      prop="datas.proName"
+			      label="产品名称">
+			    </el-table-column>
+			    <el-table-column
+			      prop="datas.activationTime"
+			      label="进入本环节时间">
+			    </el-table-column>
+			    <el-table-column
+			      prop="datas.completeTime"
+			      label="进入本环节时长（小时）" min-width="180">
+			    </el-table-column>
+					    </el-table> -->
+					    <el-table :data="tableData" border style="width: 100%" @row-click='goDetail'>
+			    <el-table-column
+			      type="index"
+			      :index='1'
+			      label="序号"
+			      width="180"
+			      >
+			    </el-table-column>
+			    <el-table-column
+			      prop="date"
+			      label="任务类型"
+			      >
+			    </el-table-column>
+			    <el-table-column
+			      prop="date"
+			      label="紧急程度">
+			    </el-table-column>
+			    <el-table-column
+			      prop="date"
 			      label="进件编号">
 			    </el-table-column>
 			    <el-table-column
@@ -42,23 +92,23 @@
 			      label="申请日期">
 			    </el-table-column>
 			    <el-table-column
-			      prop="address"
+			      prop="date"
 			      label="客户名称">
 			    </el-table-column>
 			    <el-table-column
-			      prop="address"
+			      prop="date"
 			      label="证件号码">
 			    </el-table-column>
 			    <el-table-column
-			      prop="address"
+			      prop="date"
 			      label="进件机构">
 			    </el-table-column>
 			    <el-table-column
-			      prop="address"
+			      prop="date"
 			      label="产品名称">
 			    </el-table-column>
 			    <el-table-column
-			      prop="address"
+			      prop="name"
 			      label="进入本环节时间">
 			    </el-table-column>
 			    <el-table-column
@@ -67,17 +117,28 @@
 			    </el-table-column>
 		    </el-table>
 		</div>
-	</div>
-	
+		<!-- 分页 -->
+		<el-pagination
+	      @size-change="handleSizeChange"
+	      @current-change="handleCurrentChange"
+	      :current-page="currentPage4"
+	      :page-sizes="[10, 30, 50, 100, 200]"
+	      :page-size="10"
+	      layout="total, sizes, prev, pager, next, jumper"
+	      :total="50"><!-- datas.totalNum -->
+	    </el-pagination>
+
+
+	</div>	
 </template>
 <script type="text/javascript">
 	export default{
 		data(){
 			return{
-				input1:'',
-				input2:'',
-				input3:'',
 				activeNames:['1'],
+				currentPage4:1,
+				data:[],
+				datas:'',
 				tableData: [{
 				  id:1,
 		          date: '2016-05-02',
@@ -108,24 +169,40 @@
 		methods:{
 			//跳转到详情页
 			goDetail(row, event, column) {
-		      console.log(row.id);
+		      /*console.log(this.datas.applyId);
+		      var applyId=this.datas.applyId;*/
 		      this.$router.push({path:'/SplitScreen',query:row})
 		    },
+		    handleSizeChange(val) {
+		      console.log('每页 ${val} 条');
+		    },
+		    handleCurrentChange(val) {
+		      console.log('当前页: ${val}');
+		    },
 		    request(){
-		    	/*alert(1111111);
-		    	this.post('/loginCookie', {
-		            username: '2',
-		            password: '1'
+		    	this.post('/workFlowTaskQuery/getTaskToDoList', {
+		            processTemplateId: 'creditApp',
+		            taskNodeName: '',
+		            taskStatus:'101',
+		            userCode:'admin',
+		            orgCode:'101',
+		            pageNum:1,
+		            pageSize:10,
+		            applySubNo:'',
+		            custName_la:'',
+		            certCode:''
 		          })
 	          .then(res => {
-	            console.log(res)
-	          }),*/
+	            console.log(res);
+	            this.datas=res.data;
+	            console.log(this.datas);
+	          })
 		    },
 		    reset(){
-		    	alert('reset')
+		    	alert('reset');
 		    },
 		    search(){
-		    	alert('search')
+		    	alert('search');
 		    },
 		}
 	}

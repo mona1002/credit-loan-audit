@@ -323,6 +323,10 @@ td {
 .applicationInformation .el-input.is-disabled .el-input__inner{
     background-color: #fff;
 }
+/* 备注信息 隐藏掉 '暂无数据'' */
+/* .remark .el-table__body-wrapper,.remark .is-scroll-left{
+  display: none;
+} */
 /* 信审任务列表 */
 .taskWinput .el-input__inner {
   height: 30px;
