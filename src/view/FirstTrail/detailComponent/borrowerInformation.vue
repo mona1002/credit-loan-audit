@@ -1,301 +1,378 @@
-<!-- 借款人资料 -->
+<!-- 借款人资料
 <template>
 	<div class="borrowerInformation">
 		<el-collapse v-model="activeNames" @change="handleChange">
 			<el-collapse-item title="房产信息" name="1">
-			    <div class="remarkIcon">
-					<i class="el-icon-circle-plus icon" @click="add_home"><span>添加</span></i>
-					<i class="el-icon-remove icon" @click="delet_home"><span>删除</span></i>
-				</div>
-				<div class="tableDiv">
-					<table class="myHomeTable">
-				      <thead>
-				        <tr>
-				          <th></th>
-				          <th>房产类型</th>
-				          <th>产权性质</th>
-				          <th>建筑面积[m^2]</th>
-				          <th>建筑单价[元]</th>
-				          <th>房产地址</th>
-				          <th>邮政编码</th>
-				          <th>产权比例</th>
-				          <th>贷款期限[月]</th>
-				          <th>抵押状况</th>
-				          <th>月供[元]</th>
-				          <th>贷款余额[元]</th>
-				        </tr>
-				      </thead>
-				      <tbody>
-				      	
-				        <!-- <cross-rable 
-				        class="house_property" 
-				        v-for="(cro,index) in cross_rable_home" 
-				        ytablemsg="house_property" 
-				        v-bind:ynum="cro" 
-				        :key="index"  
-				        @mouseenter.native="enter($event)" 
-				        @mouseleave.native="leave($event)"
-				        @click.native='buttonClick(cro)'
-				        ></cross-rable> -->
-				      </tbody>
-				    </table>
-				</div>
+			    <el-table
+			      :data="datas.borestateList"
+			      style="width: 100%">
+				      <el-table-column
+				        type="index"
+				      	:index='1'
+				      	label="序号" >
+				      </el-table-column>
+				      <el-table-column
+				        prop="estateType"
+				        label="房产类型">
+				      </el-table-column>
+				      <el-table-column
+				        prop="propertyType"
+				        label="产权性质">
+				      </el-table-column>
+				      <el-table-column
+				        prop="coveredArea"
+				        label="建筑面积[m^2]">
+				      </el-table-column>
+				      <el-table-column
+				        prop="unitPrice"
+				        label="建筑单价[元]">
+				      </el-table-column>
+				      <el-table-column
+				        prop=" "
+				        label="房产地址">
+				      </el-table-column>
+				      <el-table-column
+				        prop="estateZip"
+				        label="邮政编码">
+				      </el-table-column>
+				      <el-table-column
+				        prop="equityRatio"
+				        label="产权比例">
+				      </el-table-column>
+				      <el-table-column
+				        prop=" "
+				        label="产权性质">
+				      </el-table-column>
+				      <el-table-column
+				        prop="loanPeriod"
+				        label="贷款期限[月]">
+				      </el-table-column>
+				      <el-table-column
+				        prop="mortgageStatus"
+				        label="抵押状况">
+				      </el-table-column>
+				      <el-table-column
+				        prop="monthlyPay"
+				        label="月供[元]">
+				      </el-table-column>
+				      <el-table-column
+				        prop="restLoans"
+				        label="贷款余额[元]">
+				      </el-table-column>
+			    </el-table>
 		  	</el-collapse-item>
 		  	<el-collapse-item title="车辆信息" name="2">
-			    <div class="remarkIcon">
-					<i class="el-icon-circle-plus icon" @click="add_vehicle"><span>添加</span></i>
-					<i class="el-icon-remove icon" @click="delet_vehicle"><span>删除</span></i>
-				</div>
-				<div class="tableDiv">
-					<table class="mytable">
-				      <thead>
-				        <tr>
-				          <th></th>
-				          <th>车辆购置价[元]</th>
-				          <th>是否年检</th>
-				          <th>是否非运营</th>
-				          <th>车辆型号</th>
-				          <th>车辆类型</th>
-				          <th>贷款期限[月]</th>
-				          <th>月供[元]</th>
-				          <th>贷款余额[月]</th>
-				          <th>车牌号码</th>
-				          <th>车辆已购保险</th>
-				          <th>购买时间</th>
-				        </tr>
-				      </thead>
-				      <tbody>
-				        <tr>
-				          <td>0</td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				        </tr>
-				        <cross-rable v-for="cro in cross_rable_vehicle" ytablemsg="vehicle" v-bind:ynum="cro" :key="cro"></cross-rable>
-				      </tbody>
-				    </table>
-				</div>
+			    <el-table
+			      :data="datas.carInfoList"
+			      style="width: 100%">
+				      <el-table-column
+				        type="index"
+				      	:index='1'
+				      	label="序号" >
+				      </el-table-column>
+				      <el-table-column
+				        prop="carPrice"
+				        label="车辆购置价[元]">
+				      </el-table-column>
+				      <el-table-column
+				        prop="isYearCheck"
+				        label="是否年检">
+				      </el-table-column>
+				      <el-table-column
+				        prop="isOperate"
+				        label="是否非运营">
+				      </el-table-column>
+				      <el-table-column
+				        prop="carModel"
+				        label="车辆型号">
+				      </el-table-column>
+				      <el-table-column
+				        prop="carType"
+				        label="车辆类型">
+				      </el-table-column>
+				      <el-table-column
+				        prop="loanPeriod"
+				        label="贷款期限[月]">
+				      </el-table-column>
+				      <el-table-column
+				        prop="monthlyPay"
+				        label="月供[元]">
+				      </el-table-column>
+				      <el-table-column
+				        prop="restLoans"
+				        label="贷款余额[月]">
+				      </el-table-column>
+				      <el-table-column
+				        prop="carNo"
+				        label="车牌号码">
+				      </el-table-column>
+				      <el-table-column
+				        prop="buyInsur"
+				        label="车辆易购保险">
+				      </el-table-column>
+				      <el-table-column
+				        prop="buyDate"
+				        label="购买时间">
+				      </el-table-column>
+			    </el-table>
 		  	</el-collapse-item>
 		  	<el-collapse-item title="信用卡使用明细" name="3">
-			    <div class="remarkIcon">
-					<i class="el-icon-circle-plus icon" @click="add_card"><span>添加</span></i>
-					<i class="el-icon-remove icon" @click="delet_card"><span>删除</span></i>
-				</div>
-				<div class="tableDiv">
-					<table class="mytable">
-				      <thead>
-				        <tr>
-				          <th></th>
-				          <th>银行名称</th>
-				          <th>开卡日期</th>
-				          <th>信用额度</th>
-				          <th>已使用额度</th>
-				          <th>还款日</th>
-				          <th>本期应还款金额</th>
-				          <th>本期实际还款金额</th>
-				          <th>是否逾期</th>
-				          <th>当前逾期期数</th>
-				          <th>最高逾期期数</th>
-				          <th>近12个月累计逾期次数</th>
-				          <th>账户状态</th>
-				        </tr>
-				      </thead>
-				      <tbody>
-				        <tr>
-				          <td>0</td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				        </tr>
-				        <cross-rable v-for="cro in cross_rable_card" ytablemsg="card" v-bind:ynum="cro" :key="cro"></cross-rable>
-				      </tbody>
-				    </table>
-				</div>
+			    <el-table
+			      :data="datas.cardDetList"
+			      style="width: 100%">
+				      <el-table-column
+				        type="index"
+				      	:index='1'
+				      	label="序号" >
+				      </el-table-column>
+				      <el-table-column
+				        prop="bankName"
+				        label="银行名称">
+				      </el-table-column>
+				      <el-table-column
+				        prop="cardUseDate"
+				        label="开卡日期">
+				      </el-table-column>
+				      <el-table-column
+				        prop="cardAmt"
+				        label="信用额度">
+				      </el-table-column>
+				      <el-table-column
+				        prop="usedAmt"
+				        label="已使用额度">
+				      </el-table-column>
+				      <el-table-column
+				        prop="repayDay"
+				        label="还款日">
+				      </el-table-column>
+				      <el-table-column
+				        prop="realRepaymentAmt"
+				        label="本期应还款金额">
+				      </el-table-column>
+				      <el-table-column
+				        prop="actRepaymentAmt"
+				        label="本期实际还款金额">
+				      </el-table-column>
+				      <el-table-column
+				        prop="isOverdue"
+				        label="是否逾期">
+				      </el-table-column>
+				      <el-table-column
+				        prop="currOverdueTimes"
+				        label="当前逾期期数">
+				      </el-table-column>
+				      <el-table-column
+				        prop="maxOverdueTimes"
+				        label="最高逾期期数">
+				      </el-table-column>
+				      <el-table-column
+				        prop="overdueTimes"
+				        label="近12个月累计逾期次数">
+				      </el-table-column>
+				      <el-table-column
+				        prop="accountStatus"
+				        label="账户状态">
+				      </el-table-column>
+			    </el-table>
 		  	</el-collapse-item>
-		  	<el-collapse-item title="信用卡使用情况" name="4">
+		  	<el-collapse-item title="信用卡使用总况" name="4">
 		  		<div class="xinyongka">
 		  			<ul>
-				    	<li><label>信用卡张数：</label><el-input v-model="input"></el-input></li>
-				    	<li><label>正常使用张数：</label><el-input v-model="input"></el-input></li>
-				    	<li><label>呆帐数量：</label><el-input v-model="input"></el-input></li>
+				    	<li><label>信用卡张数：</label><el-input v-model="datas.borCard.cardCount"></el-input></li>
+				    	<li><label>正常使用张数：</label><el-input v-model="datas.borCard.normalCount"></el-input></li>
+				    	<li><label>呆帐数量：</label><el-input v-model="datas.borCard.badDebtCount"></el-input></li>
 				    </ul>
 				    <ul>
-				    	<li><label>未开卡张数：</label><el-input v-model="input"></el-input></li>
-				    	<li><label>冻结数量：</label><el-input v-model="input"></el-input></li>
-				    	<li><label>销户数量：</label><el-input v-model="input"></el-input></li>
+				    	<li><label>未开卡张数：</label><el-input v-model="datas.borCard.nouseCount"></el-input></li>
+				    	<li><label>冻结数量：</label><el-input v-model="datas.borCard.freezeCount"></el-input></li>
+				    	<li><label>销户数量：</label><el-input v-model="datas.borCard.cancelCount"></el-input></li>
 				    </ul>
 				    <ul>
-				    	<li><label>已使用张数：</label><el-input v-model="input"></el-input></li>
-				    	<li><label>止付数量：</label><el-input v-model="input"></el-input></li>
+				    	<li><label>已使用张数：</label><el-input v-model="datas.borCard.userdCount"></el-input></li>
+				    	<li><label>止付数量：</label><el-input v-model="datas.borCard.stopPaymentCount"></el-input></li>
 				    </ul>
 		  		</div> 
 		  	</el-collapse-item>
 		  	<el-collapse-item title="贷款明细" name="5">
-			    <div class="remarkIcon">
-					<i class="el-icon-circle-plus icon" @click="add_loanDetail"><span>添加</span></i>
-					<i class="el-icon-remove icon" @click="delet_loanDetail"><span>删除</span></i>
-				</div>
-				<div class="tableDiv">
-					<table class="mytable">
-				      <thead>
-				        <tr>
-				          <th></th>
-				          <th>贷款种类</th>
-				          <th>担保方式</th>
-				          <th>账户状态</th>
-				          <th>还款频率</th>
-				          <th>贷款发放日期</th>
-				          <th>贷款到期日期</th>
-				          <th>贷款合同金额[元]</th>
-				          <th>应还款日期</th>
-				          <th>贷款余额[元]</th>
-				          <th>本期应还款金额[元]</th>
-				          <th>本期实际还款金额[元]</th>
-				          <th>最后一次还款日期</th>
-				          <th>当前逾期金额</th>
-				          <th>累计逾期次数</th>
-				          <th>最高逾期期数</th>
-				        </tr>
-				      </thead>
-				      <tbody>
-				        <tr>
-				          <td>0</td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				        </tr>
-				        <cross-rable v-for="cro in cross_rable_loanDetail" ytablemsg="loanDetail" v-bind:ynum="cro" :key="cro"></cross-rable>
-				      </tbody>
-				    </table>
-				</div>
+			    <el-table
+			      :data="datas.loanDetailList"
+			      style="width: 100%">
+				      <el-table-column
+				        type="index"
+				      	:index='1'
+				      	label="序号" >
+				      </el-table-column>
+				      <el-table-column
+				        prop="loanType"
+				        label="贷款种类">
+				      </el-table-column>
+				      <el-table-column
+				        prop=" "
+				        label="担保方式">
+				      </el-table-column>
+				      <el-table-column
+				        prop="accountStatus"
+				        label="账户状态">
+				      </el-table-column>
+				      <el-table-column
+				        prop="repayFrequency"
+				        label="还款频率">
+				      </el-table-column>
+				      <el-table-column
+				        prop="loanBeginDate"
+				        label="贷款发放日期">
+				      </el-table-column>
+				      <el-table-column
+				        prop="loanExpireDate"
+				        label="贷款到期日期">
+				      </el-table-column>
+				      <el-table-column
+				        prop="loanContValue"
+				        label="贷款合同金额[元]">
+				      </el-table-column>
+				      <el-table-column
+				        prop="loanRepayDate"
+				        label="应还款日期">
+				      </el-table-column>
+				      <el-table-column
+				        prop="loanBal"
+				        label="贷款余额[元]">
+				      </el-table-column>
+				      <el-table-column
+				        prop="remainMonth"
+				        label="剩余还款月数">
+				      </el-table-column>
+				      <el-table-column
+				        prop="presentRepayAmt"
+				        label="本期应还款金额[元]">
+				      </el-table-column>
+				      <el-table-column
+				        prop=" "
+				        label="本期实际还款金额[元]">
+				      </el-table-column>
+				      <el-table-column
+				        prop="lastRepayDate"
+				        label="最后一次还款日期">
+				      </el-table-column>
+				      <el-table-column
+				        prop="presentOverAmt"
+				        label="当前逾期金额">
+				      </el-table-column>
+				      <el-table-column
+				        prop="overTimes"
+				        label="累计逾期次数">
+				      </el-table-column>
+				      <el-table-column
+				        prop="maxOverTimes"
+				        label="最高逾期期数">
+				      </el-table-column>
+			    </el-table>
 		  	</el-collapse-item>
 		  	<el-collapse-item title="贷款总况" name="6">
 		  		<div class="xinyongka daikuanzongkuang">
 		  			<ul>
-				    	<li><label>车贷共有笔数:</label><p>{{input}}</p></li>
-				    	<li><label>信用贷总笔数:</label><p>{{input}}</p></li>
-				    	<li><label>房贷总笔数:</label><p>{{input}}</p></li>
-				    	<li><label>其他贷款总笔数:</label><p>{{input}}</p></li>
+				    	<li><label>车贷共有笔数:</label><p>{{datas.loanInfo.carLoanTotal}}</p></li>
+				    	<li><label>信用贷总笔数:</label><p>{{datas.loanInfo.studentLoanTotal}}</p></li>
+				    	<li><label>房贷总笔数:</label><p>{{datas.loanInfo.houseLoanTotal}}</p></li>
+				    	<li><label>其他贷款总笔数:</label><p>{{datas.loanInfo.otherLoanTotal}}</p></li>
 				    </ul>
 				    <ul>
-				    	<li><label>车贷现存笔数:</label><p>{{input}}</p></li>
-				    	<li><label>信用贷现存笔数:</label><p>{{input}}</p></li>
-				    	<li><label>房贷现存笔数:</label><p>{{input}}</p></li>
-				    	<li><label>其他贷现存笔数:</label><p>{{input}}</p></li>
+				    	<li><label>车贷现存笔数:</label><p>{{datas.loanInfo.carLoanNoPayoff}}</p></li>
+				    	<li><label>信用贷现存笔数:</label><p>{{datas.loanInfo.studentLoanNoPayoff}}</p></li>
+				    	<li><label>房贷现存笔数:</label><p>{{datas.loanInfo.houseLoanNoPayoff}}</p></li>
+				    	<li><label>其他贷现存笔数:</label><p>{{datas.loanInfo.otherLoanNoPayoff}}</p></li>
 				    </ul>
 				    <ul>
-				    	<li><label>车贷结清笔数:</label><p>{{input}}</p></li>
-				    	<li><label>信用贷结清笔数:</label><p>{{input}}</p></li>
-				    	<li><label>房贷结清笔数:</label><p>{{input}}</p></li>
-				    	<li><label>其他贷款结清笔数:</label><p>{{input}}</p></li>
+				    	<li><label>车贷结清笔数:</label><p>{{datas.loanInfo.carLoanPayoff}}</p></li>
+				    	<li><label>信用贷结清笔数:</label><p>{{datas.loanInfo.studentLoanPayoff}}</p></li>
+				    	<li><label>房贷结清笔数:</label><p>{{datas.loanInfo.houseLoanPayoff}}</p></li>
+				    	<li><label>其他贷款结清笔数:</label><p>{{datas.loanInfo.otherLoanPayoff}}</p></li>
 				    </ul>
 		  		</div> 
 		  	</el-collapse-item>
 		  	<el-collapse-item title="负债信息" name="7">
 		  		<div class="fuzhaixinxi">
 		  			<ol>
-				    	<li><label>信用卡每月还款[元]:</label><el-input v-model="input"></el-input></li>
-				    	<li><label>信用贷每月还款额[元]:</label><el-input v-model="input"></el-input></li>
-				    	<li><label>房贷每月还款额[元]:</label><el-input v-model="input"></el-input></li>
+				    	<li><label>信用卡每月还款[元]:</label><el-input v-model="datas.borDebt.monthRepayAmt"></el-input></li>
+				    	<li><label>信用贷每月还款额[元]:</label><el-input v-model="datas.borDebt.studentLoanAmt"></el-input></li>
+				    	<li><label>房贷每月还款额[元]:</label><el-input v-model="datas.borDebt.houseLoanAmt"></el-input></li>
 				    </ol>
 				    <ol>
-				    	<li><label>车贷每月还款额[元]:</label><el-input v-model="input"></el-input></li>
-				    	<li><label>其他贷款每月还款额[元]:</label><el-input v-model="input"></el-input></li>
-				    	<li class="zongji"><label>负债合计[元]:</label><el-input v-model="input"></el-input></li>
+				    	<li><label>车贷每月还款额[元]:</label><el-input v-model="datas.borDebt.carLoanAmt"></el-input></li>
+				    	<li><label>其他贷款每月还款额[元]:</label><el-input v-model="datas.borDebt.otherLoanAmt"></el-input></li>
+				    	<li class="zongji"><label>负债合计[元]:</label><el-input v-model="datas.borDebt.totalLoan"></el-input></li>
 				    </ol>
 				    <ol class="num">
-				    	<li><label>最近三个月信用卡/贷款申请次数:</label><el-input v-model="input"></el-input></li>
-				    	<li><label>文字说明:</label><div><textarea></textarea></div></li>
+				    	<li><label>最近三个月信用卡/贷款申请次数:</label><el-input v-model="datas.borDebt.loanNumber"></el-input></li>
+				    	<li><label>文字说明:</label><div><textarea>{{datas.borDebt.remark}}</textarea></div></li>
 				    </ol>
 		  		</div> 
 		  	</el-collapse-item>
 		  	<el-collapse-item title="征询报告" name="8">
 		  		<div class="fuzhaixinxi zhengxunbaogao">
 		  			<ol>
-				    	<li><label>报告来源:</label><el-input v-model="input"></el-input></li>
-					    <li><label>有无征信报告查询记录:</label><el-select v-model="value">
-						    <el-option
-						      v-for="item in options"
-						      :key="item.value"
-						      :label="item.label"
-						      :value="item.value">
-						    </el-option>
-						  </el-select>
+				    	<li><label>报告来源:</label><el-input v-model="datas.rptInfo.crSource"></el-input></li>
+					    <li><label>有无征信报告查询记录:</label>
+					    	<el-input v-model="datas.rptInfo.crHasRecord"></el-input>
 						</li>
-				    	<li><label>近6个月内信用报告查询次数:</label><el-input v-model="input"></el-input></li>
+				    	<li><label>近6个月内信用报告查询次数:</label><el-input v-model="datas.rptInfo.crRecordTimes"></el-input></li>
 				    </ol>
 				    <ol>
-				    	<li><label>报告描述:</label><div><textarea></textarea></div></li>
+				    	<li><label>报告描述:</label><div><textarea>{{datas.rptInfo.crContent}}</textarea></div></li>
 				    </ol>
 		  		</div> 
 		  	</el-collapse-item>
 		  	<el-collapse-item title="流水明细" name="9">
-			    <div class="remarkIcon">
-					<i class="el-icon-circle-plus icon" @click="add_turnover"><span>添加</span></i>
-					<i class="el-icon-remove icon" @click="delet_turnover"><span>删除</span></i>
-				</div>
-				<div class="tableDiv">
-					<table class="mytable">
-				      <thead>
-				        <tr>
-				          <th></th>
-				          <th>流水类型</th>
-				          <th>N</th>
-				          <th>N-1</th>
-				          <th>N-2</th>
-				          <th>N-3</th>
-				          <th>N-4</th>
-				          <th>N-5</th>
-				          <th>计算</th>
-				          <th>平均收入[元]</th>
-				        </tr>
-				      </thead>
-				      <tbody>
-				        <tr>
-				          <td>0</td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				          <td></td>
-				        </tr>
-				        <cross-rable v-for="cro in cross_rable_turnover" ytablemsg="turnover" v-bind:ynum="cro" :key="cro"></cross-rable>
-				      </tbody>
-				    </table>
-				</div>
+			    <el-table
+			      :data="datas.incomeList"
+			      style="width: 100%">
+				      <el-table-column
+				        type="index"
+				      	:index='1'
+				      	label="序号" >
+				      </el-table-column>
+				      <el-table-column
+				        prop="incomeType"
+				        label="流水类型">
+				      </el-table-column>
+				      <el-table-column
+				        prop="n"
+				        label="N">
+				      </el-table-column>
+				      <el-table-column
+				        prop="n1"
+				        label="N-1">
+				      </el-table-column>
+				      <el-table-column
+				        prop="n2"
+				        label="N-2">
+				      </el-table-column>
+				      <el-table-column
+				        prop="n3"
+				        label="N-3">
+				      </el-table-column>
+				      <el-table-column
+				        prop="n4"
+				        label="N-4">
+				      </el-table-column>
+				      <el-table-column
+				        prop="n5"
+				        label="N-5">
+				      </el-table-column>
+				      <el-table-column
+				        prop="address"
+				        label="计算">
+				      </el-table-column>
+				      <el-table-column
+				        prop="avgIncome"
+				        label="平均收入[元]">
+				      </el-table-column>
+			    </el-table>
 		  	</el-collapse-item>
 		  	<el-collapse-item title="其他信息" name="10">
 		  		<div class="qita">
 				    <ol>
-				    	<li><label>其他:</label><div><textarea></textarea></div></li>
+				    	<li><label>其他:</label><div><textarea>{{datas.otherInfo.content}}</textarea></div></li>
 				    </ol>
 		  		</div> 
 		  	</el-collapse-item>
@@ -307,9 +384,6 @@
 	</div>
 </template>
 <script type="text/javascript">
-import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
-import CrossRables from '@/view/FirstTrail/detailComponent/CrossRables'
-
 	export default {
 		name: 'borrowerInformation',
 	    data() {
@@ -324,6 +398,7 @@ import CrossRables from '@/view/FirstTrail/detailComponent/CrossRables'
 	          label: '否'
 	        }],
 	        activeNames: ['1','2','3','4','5','6','7','8','9','10'],
+	        datas:[],
       		cross_rable_home: [],
       		cross_rable_vehicle: 0,
       		cross_rable_card:0,
@@ -356,83 +431,14 @@ import CrossRables from '@/view/FirstTrail/detailComponent/CrossRables'
       		],
 	      };
 	    },
-	    components: {
-	    	CrossRable,
-		    CrossRables
-
-		},
 	    methods:{
 	    	handleChange(){
 
 	    	},
 	    	add_home: function() {
 	    		 
-	    		/*var items=this.cross_rable_home;
-		      	items.push("home_"+this.home_k);
-		      	this.home_k+=1;
-		      	console.log(this.cross_rable_home);
-		      	}*/
-		      	var html = '<tr>\
-								<td>1</td>\
-								<td>\
-									<el-select v-model="">\
-								    <el-option\
-								      v-for="item in house_property[0].options"\
-								      :key="item.value"\
-								      :label="item.label"\
-								      :value="item.value">\
-								    </el-option>\
-								  </el-select>\
-								</td>\
-								<td>\
-									<el-select v-model="">\
-								    <el-option\
-								      v-for="item in house_property[1].options"\
-								      :key="item.value"\
-								      :label="item.label"\
-								      :value="item.value">\
-								    </el-option>\
-								  </el-select>\
-								</td>\
-								<td>\
-									<el-input v-model=""></el-input>\
-								</td>\
-								<td>\
-									<el-input v-model=""></el-input>\
-								</td>\
-								<td>\
-									<el-input v-model=""></el-input>\
-								</td>\
-								<td>\
-									<el-input v-model=""></el-input>\
-								</td>\
-								<td>\
-									<el-input v-model=""></el-input>\
-								</td>\
-								<td>\
-									<el-input v-model=""></el-input>\
-								</td>\
-								<td>\
-									<el-select v-model="y_value">\
-								    <el-option\
-								      v-for="item in house_property[2].options"\
-								      :key="item.value"\
-								      :label="item.label"\
-								      :value="item.value">\
-								    </el-option>\
-								  </el-select>\
-								</td>\
-								<td>\
-									<el-input v-model=""></el-input>\
-								</td>\
-								<td>\
-									<el-input v-model=""></el-input>\
-								</td>\
-							</tr>';
-				var html2 = '<tr><cross-rables></cross-rables></tr>';
-
-		      	$(".myHomeTable tbody").append(html2);
-		      	
+	    		
+		      
 		    },
 		    add_vehicle: function(str) {
 		      this.cross_rable_vehicle += 1;
@@ -449,32 +455,6 @@ import CrossRables from '@/view/FirstTrail/detailComponent/CrossRables'
 		    }, 
 		    
 			delet_home(){	
-				// console.log(this.house_property);
-				// console.log(this.house_property.length);
-				var items = this.house_property;
-				for(var i=0,len=items.length;i<len;i++){
-					if(items[i].style.background =='pink'){
-						//items[i].removeNode();
-						console.log(items[i]);
-						//items[i].parentNode.removeChild(items[i]);
-
-						for(var j = 0, homelen = this.cross_rable_home.length; j < homelen; j++){
-							if(this.cross_rable_home[j] == items[i].id){
-								this.cross_rable_home.splice(j,1);
-								console.log(this.cross_rable_home[j]);
-								console.log(this.cross_rable_home);
-							}
-						}
-						//items[i].parentNode.removeChild(items[i]);		
-						//items[i].parentNode.deleteRow(i+1);
-						//this.k -= 1;
-						// var trArr=this.cross_rable_home;
-						
-						
-						//trArr.remove(i);
-					}
-				};
-				console.log(this.cross_rable_home);
 			},
 			delet_vehicle(){
 				console.log(333);
@@ -489,29 +469,6 @@ import CrossRables from '@/view/FirstTrail/detailComponent/CrossRables'
 			delet_turnover(){
 				console.log(333);
 			},
-			enter: function(e){
-				if(e.target.style.background !== 'pink'){
-				    e.target.style.background = '#e6ebf5';
-				}
-			},
-			leave: function(e){
-				if(e.target.style.background !== 'pink'){
-				    e.target.style.background = '';
-				}
-			},
-			buttonClick(index){
-				//console.log(index);
-				//console.log(this.house_property[index]);
-
-				var items = this.house_property;
-				for(var i=0,len=items.length;i<len;i++){
-					items[i].style.background = '';
-					if(items[i].id == index){
-						items[i].style.background = 'pink';
-					}
-				}
-				
-			}
 	    }
 	}
 </script>
@@ -671,4 +628,4 @@ ol.num li:nth-of-type(2) div{
 	height: 200px;
 	border: 1px solid #d8dce5;  
 }
-</style>
+</style> -->
