@@ -17,39 +17,40 @@
       <div class="left" ref="rLeft">
         <button @mouseenter="showList" v-show="flexible" class="stretch" style="padding:5px 10px">展开</button>
         <button @mouseleave="hid" v-show="!flexible" class="stretch" style="padding:5px 10px">隐藏</button>
-        <!-- <br> -->
         <!-- 左侧菜单栏 -->
         <!-- @mouseenter="showList" @mouseleave="hid" -->
         <div ref="Left_title" class="Left_ul">
           <!-- 左侧 title列表 == 影音资料等 ==================弹出列表============ -->
           <ul>
-            <li ref="tabOne" v-for="(val,index) in items1" :key="index" :class="{tabActColor1:tab1Index==index}" @mousedown="flag1[index] &&  tab1($event,index,val)">
+            <li ref="tabOne" v-for="(val,index) in items1" :key="index" @mousedown="flag1[index] &&  tab1($event,index,val)">
               {{val}}</li>
           </ul>
         </div>
         <!-- 左侧详情 -->
-        <!-- <div>
-
-      </div> -->
         <div ref="Left_detail" class="Left_detail_div">
           <p class="Left_right_Title"> {{this.title}} </p>
           <div class="Left_right_BigImg ">
             <AudioVisualLeft v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></AudioVisualLeft>
             <!-- <workbench v-if=" this.tabContent1==1"></workbench> -->
-            <!-- <div v-if=" this.tabContent1==3">asdfa</div> -->
+            <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
             <!-- <div v-if=" this.tabContent1==4">asdf adf</div> -->
             <!-- <div v-if=" this.tabContent1==5">asdf adf</div> -->
+            <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
+            <cborrowerInformationDetail v-if=" this.tabContent1==4"></cborrowerInformationDetail>
+            <!-- <capplicationInformationDetail v-if=" this.tabContent1==5"></capplicationInformationDetail> -->
+            
             <cCreditForm v-if=" this.tabContent1==6"></cCreditForm>
+          <creditInvestigation v-if=" this.tabContent1==7"></creditInvestigation> 
+            
             <!-- <div v-if=" this.tabContent1==7">asdf adf</div> -->
             <!-- <div v-if=" this.tabContent1==8">asdf adf</div> -->
             <!-- <AudioVisual v-if=" this.tab1Index==0"></AudioVisual>
             <workbench v-if=" this.tab1Index==1"></workbench> -->
           </div>
         </div>
-
       </div>
       <!-- 右侧分屏部分 -->
-      <div class="right" ref="rRight" >
+      <div class="right" ref="rRight">
         <button @click="FullScreen" v-show="FullScreenlShow" class="stretch">全屏显示</button>
         <button @click="DblScreen" v-show="!FullScreenlShow" class="stretch">返回</button>
         <!-- <br> -->
@@ -67,8 +68,7 @@
           <i class="el-icon-d-arrow-right tab_right_arrow" @click="rightMovingBtn"></i>
           <!-- tab 2 -->
           <ul ref="right_tab_ul" style="left:20px">
-            <li class="Right_tab_title" ref="tabTwo" v-for="(val,index) in items2" :key="index" :class="{tabActColor2:tab2Index==index}"
-              @mousedown="flag2[index] &&  tab2($event,index,val)">
+            <li class="Right_tab_title" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="flag2[index] &&  tab2($event,index,val)">
               {{val}}</li>
           </ul>
         </div>
@@ -86,7 +86,6 @@
           <!-- <CreditForm v-if=" this.tabContent2==8"></CreditForm> -->
           <!-- 信审审批 空白 -->
           <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>
-          <!-- </div> -->
         </div>
       </div>
     </div>
@@ -101,7 +100,7 @@
           <div class="AlertContent">
             <AudioVisualLeft></AudioVisualLeft>
           </div>
-          
+
         </div>
       </div>
       <!-- 弹出层右侧 div -->
@@ -113,7 +112,8 @@
             </el-option>
           </el-select>
         </h2>
-        <p>影响列表</p><!-- h2 标题栏 -->
+        <p>影响列表</p>
+        <!-- h2 标题栏 -->
         <div class="AlertContent">
           <AudioVisualLeft></AudioVisualLeft>
         </div>
@@ -142,6 +142,12 @@
   import CreditApproval from "./CreditApproval";
   // 查询
   import cCreditForm from "./checkComponent/cCreditForm";
+  import cFinanceInformation from "./checkComponent/FinanceInformation";
+  import cremarkDetail from "./checkComponent/remarkDetail"; //备注信息
+  import cborrowerInformationDetail from "./checkComponent/borrowerInformationDetail";//借款人资料
+  import capplicationInformationDetail from "./checkComponent/applicationInformationDetail";//申请信息
+  
+  
 
   export default {
     data() {
@@ -220,32 +226,32 @@
         }
         console.log(this.$refs.right_tab_ul.style.left)
       },
-      handleClick(tab, event) { //   tab2 切换 触发函数
-        // console.log(tab, event);
-        // console.log(event.target.innerHTML);
-        // console.log(tab.index+"=========");
-        console.log(this.title) //影音资料
-        this.tabContent2 = tab.index;
-        // tab 2 用------------------------------------------
-        this.tab1Index = tab.index;
-        console.log(this.tab1Index)
-        //点击tab2切换让对应的tab1禁用
-        console.log(this.$refs.tabOne[this.tab1Index]);
-        for (var i = 0; i < this.$refs.tabOne.length; i++) {
-          this.$refs.tabOne[i].style.color = "black";
-          this.$refs.tabOne[i].style.background = "white";
-          this.flag1[i] = true;
-        }
-        this.$refs.tabOne[this.tab1Index].style.color = "silver"; // click 事件不可用
-        this.flag1[tab.index] = false;
-        //---------- tab1禁用部分结束--------------------------
-      },
-      showList() {    // 左侧list 显示按钮
+      // handleClick(tab, event) { //   tab2 切换 触发函数
+      //   // console.log(tab, event);
+      //   // console.log(event.target.innerHTML);
+      //   // console.log(tab.index+"=========");
+      //   console.log(this.title) //影音资料
+      //   this.tabContent2 = tab.index;
+      //   // tab 2 用------------------------------------------
+      //   this.tab1Index = tab.index;
+      //   console.log(this.tab1Index)
+      //   //点击tab2切换让对应的tab1禁用
+      //   console.log(this.$refs.tabOne[this.tab1Index]);
+      //   for (var i = 0; i < this.$refs.tabOne.length; i++) {
+      //     this.$refs.tabOne[i].style.color = "black";
+      //     this.$refs.tabOne[i].style.background = "white";
+      //     this.flag1[i] = true;
+      //   }
+      //   this.$refs.tabOne[this.tab1Index].style.color = "silver"; // click 事件不可用
+      //   this.flag1[tab.index] = false;
+      //   //---------- tab1禁用部分结束--------------------------
+      // },
+      showList() { // 左侧list 显示按钮
         console.log("show")
         this.$refs.Left_title.style.left = "0";
         this.flexible = false;
       },
-      hid() {       // 左侧list 隐藏按钮
+      hid() { // 左侧list 隐藏按钮
         console.log("hid")
         this.$refs.Left_title.style.left = "-200px";
         this.flexible = true;
@@ -263,21 +269,33 @@
       },
       tab2(ev, ind, val) {
         console.log("tab2" + "---" + ind + "---" + val);
-        // var ev = ev || window.event;
         this.tabContent2 = ind;
         this.tab2Index = ind; //只有tab1 换成active激活样式时用了
         this.tabActiveInd2 = ind;
+
+        // console.log(this.tabActiveInd2)
+        console.log(this.$refs.tabTwo[ind])
+        // 点击 tab2  之后赋值 tab 激活样式
+        for (var i = 0; i < this.$refs.tabTwo.length; i++) {
+          this.$refs.tabTwo[i].style.color = "black";
+          this.$refs.tabTwo[i].style.background = "silver";
+        }
+        this.$refs.tabTwo[ind].style.color = "red";
+        this.$refs.tabTwo[ind].style.background = "yellowgreen";
+        if (this.tabActiveInd1 != 0) {
+          this.$refs.tabTwo[this.tabActiveInd1].style.color = "gray"; // 影音资料样式不需要置灰
+        }
         //点击tab2切换让对应的tab1样式重新复制一遍正常显示
-        console.log(this.$refs.tabOne[this.tab1Index]);
+        // console.log(this.$refs.tabOne[this.tab1Index]);
         for (var i = 0; i < this.$refs.tabOne.length; i++) {
           this.$refs.tabOne[i].style.color = "black";
-          this.$refs.tabOne[i].style.background = "white";
+          this.$refs.tabOne[i].style.background = "purple";
           this.flag1[i] = true;
         }
         this.$refs.tabOne[this.tabActiveInd1].style.color = "blue"; // tab1 之前激活样式赋值回去   
         this.$refs.tabOne[this.tabActiveInd1].style.background = "yellow"; // tab1 之前激活样式赋值回去   
         if (ind != 0) { // 点击影音资料的时候，两边不置灰，影音资料部分可点击
-          console.log("wo bu deng yu 00000000000000--------tab2")
+          console.log("-----！= ---tab2")
           this.$refs.tabOne[ind].style.color = "silver"; // tab1 对应css 样式标灰
           this.flag1[ind] = false; // tab1 对应click 事件不可用
         }
@@ -289,6 +307,17 @@
         this.tabContent1 = ind;
         this.tab1Index = ind; // tab点击 激活active点击样式
         this.tabActiveInd1 = ind; //将当前点击显示的下标，赋值给需要设置激活样式 li 的下标-----作用：tab2点击的时候，可以赋值tab1激活时候的样式
+        // 点击 tab1  之后赋值 tab 激活样式
+        for (var i = 0; i < this.$refs.tabOne.length; i++) {
+          this.$refs.tabOne[i].style.color = "black";
+          this.$refs.tabOne[i].style.background = "purple";
+        }
+        this.$refs.tabOne[ind].style.color = "blue";
+        this.$refs.tabOne[ind].style.background = "yellow";
+        if (this.tabActiveInd1 != 0) {
+          this.$refs.tabTwo[this.tabActiveInd1].style.color = "silver"; // 影音资料样式不需要置灰
+        }
+        //点击tab切换让对应的tab2样式重新复制一遍正常显示
         for (var i = 0; i < this.$refs.tabTwo.length; i++) {
           this.$refs.tabTwo[i].style.color = "black";
           this.$refs.tabTwo[i].style.background = "silver";
@@ -301,6 +330,7 @@
           this.$refs.tabTwo[ind].style.color = "#eee"; // tab2 对应css 样式标灰
           this.flag2[ind] = false; // tab2 对应click 事件不可用
         }
+
         // 鼠标点击时  判断点击按钮  ==0 的时候 触发click事件  ， ==2的时候   触发右击事件
         //  tab1 ----------------mousedown >> click事件   切换tab   （等同于上面show(index)函数）
 
@@ -322,7 +352,15 @@
     },
     mounted() {
       this.title = "影音资料";
-      // console.log(this.$route.query.row.id) //接参数
+      // console.log(this.$route.query.row.id) //接参数   
+      //  this.post("/workFlowTaskQuery/getTaskProfile", {
+      //   taskStatus: "01",
+      //   userCode: this.userCode,
+      //   orgCode: this.orgCode
+      // }).then(res => {
+      //   console.log(res.data);
+      //   this.tableData = res.data;
+      // });
     },
     components: {
       myHead,
@@ -340,12 +378,16 @@
       // 查询
       cCreditForm,
       AudioVisualLeft,
+      cremarkDetail,//
+      cFinanceInformation,
+      cborrowerInformationDetail,
+      capplicationInformationDetail
     }
   }
 
 </script>
 <style scoped>
-  .SplitScreen {
+    .SplitScreen {
     height: 100%;
   }
   /* 公共 */
@@ -390,7 +432,7 @@
     /* position: relative; */
     width: 100%;
     height: calc( 100% - 100px);
-    /*background: red;*/
+    /* background: red; */
   }
   /*   流  */
 
@@ -411,7 +453,7 @@
   .left .Left_ul {
     position: absolute;
     left: 0;
-    top: 40px;
+    top: 20px;
     width: 100px;
     height: 90%;
     background: #846793;
@@ -421,6 +463,11 @@
 
   .left .Left_ul li {
     padding: 5px;
+  }
+
+  .left .Left_ul li:nth-of-type(1) {
+    background: yellow;
+    color: blue;
   }
 
   .left .Left_ul li:hover {
@@ -465,12 +512,17 @@
   .Right_tab_title_div ul {
     width: 700px;
     height: 40px;
-    background: white;
+    background: silver;
     position: absolute;
     left: 20px;
     /* white-space:nowrap; */
   }
   /* 右侧tab切换头    流 */
+
+  .Right_tab_title_div ul li:nth-of-type(1) {
+    color: red;
+    background: yellowgreen;
+  }
 
   .Right_tab_title {
     float: left;
@@ -524,24 +576,27 @@
     height: 100%;
     border: 1px solid orangered;
   }
-/* 弹出层 - p标签 - 标题栏  流  */
+  /* 弹出层 - p标签 - 标题栏  流  */
+
   .AudioVisual_wrap_compare_left p,
-  .AudioVisual_wrap_compare_right p{
+  .AudioVisual_wrap_compare_right p {
     background: gray;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  font-weight: bold;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-weight: bold;
   }
-/* 弹出层 - p标签 - 左侧标题栏-上边距  流  */  
-    .AudioVisual_wrap_compare_left p{
-      margin-top: 60px;
-    }
-    /* 弹出层 - 两侧组件 content  流 */
-    .AlertContent{
-      background: red;
-              height: calc( 100% - 99px);
-              overflow: auto;
+  /* 弹出层 - p标签 - 左侧标题栏-上边距  流  */
+
+  .AudioVisual_wrap_compare_left p {
+    margin-top: 60px;
+  }
+  /* 弹出层 - 两侧组件 content  流 */
+
+  .AlertContent {
+    /* background: red; */
+    height: calc( 100% - 99px);
+    overflow: auto;
 
     }
 </style>

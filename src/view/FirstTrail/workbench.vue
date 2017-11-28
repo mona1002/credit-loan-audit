@@ -16,8 +16,7 @@
                 <i class="el-icon-menu"></i> 待办任务
                 <!-- <i class="el-icon-refresh"></i> -->
                 <!-- <span @click.stop="more" class="moreC"> 更多 </span> -->
-              </template>float:right;
-              margin-right: 10px;
+              </template>
               <div class="waitting">
                 <el-table ref="singleTable" :data="tableData" highlight-current-row @current-change="handleCurrentChange" style="width: 100%">
                   <el-table-column property="processTemplateId" label="任务名称">
@@ -42,8 +41,7 @@
                   <i class="el-icon-menu"></i> 工作通知
                   <i class="el-icon-refresh"></i>
                   <span @click.stop="more" class="moreC"> 更多 </span>
-                </template>float:right;
-                margin-right: 10px;
+                </template>float:right; margin-right: 10px;
                 <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
                 <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
               </el-collapse-item>
@@ -57,8 +55,7 @@
                   <i class="el-icon-menu"></i> 公司动态
                   <i class="el-icon-refresh"></i>
                   <span @click.stop="more" class="moreC"> 更多 </span>
-                </template>float:right;
-                margin-right: 10px;
+                </template>float:right; margin-right: 10px;
                 <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
                 <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
               </el-collapse-item>
@@ -90,9 +87,9 @@
         currentRow: null
       }
     },
-components:{
-  myHead
-},
+    components: {
+      myHead
+    },
     methods: {
       waitting() {
 
@@ -126,46 +123,54 @@ components:{
             orgCode: this.orgCode
           }
         });
+          // localStorage.setItem("tableData", JSON.stringify(tableData));
         // this.$router.push({path:'/taskInWaitting',query:'123'})
         //  console.log(111, this.$route.query.picName)   接参数
       }
 
     },
-     created() {
+    created() {
       // console.log('created')
       // //  获取到 路由传参 
       // console.log(this.$route.params.userCode);
       // console.log(this.$route.params.orgCode);
+      
+      //  数据储存到 localstorage里
+      // localStorage.setItem("userInf", JSON.stringify(userInf));
+      // var userInf = JSON.parse(localStorage.getItem("userInf"));
+      // this.userCode=userInf.userCode;
     },
     mounted() {
-// 字段
-// ASSIGNED("01", "代办"),
-// COMPLETED("03","已办"),
-// ABORTED("04","历史"),
- //  获取到 路由传参 
-      this.userCode=this.$route.params.userCode;
-      this.orgCode=this.$route.params.orgCode;
-      console.log(this.userCode +"================"+ this.orgCode )
+      // 字段
+      // ASSIGNED("01", "代办"),
+      // COMPLETED("03","已办"),
+      // ABORTED("04","历史"),
+      //  获取到 路由传参 
+      this.userCode = this.$route.params.userCode;
+      this.orgCode = this.$route.params.orgCode;
+      console.log(this.userCode + "================" + this.orgCode)
       // this.$route.query.picName接参数
       this.post("/workFlowTaskQuery/getTaskProfile", {
         taskStatus: "01",
-        userCode:this.userCode ,
-        orgCode:this.orgCode 
+        userCode: this.userCode,
+        orgCode: this.orgCode
       }).then(res => {
         console.log(res.data);
-        this.tableData=res.data;
+        this.tableData = res.data;
       });
 
     },
-    }
+  }
 
 </script>
 <style scoped>
   /* public 部分 */
-.moreC{
-  /* float:right; */
-  margin-left: 35px;
-}
+
+  .moreC {
+    /* float:right; */
+    margin-left: 35px;
+  }
+
   .border_top_bottom {
     border-top: 1px solid gray;
   }
@@ -187,11 +192,13 @@ components:{
     background: #ededed;
   }
   /* main */
+
   .main .main_left,
   .main .main_right {
     float: left;
   }
   /* 左边-常用 */
+
   .main .main_left {
     height: 100%;
     width: 148px;
@@ -220,6 +227,7 @@ components:{
     /* background: black; */
     background: #ededed;
   }
+
   .waitting {
     /* height:800px; */
     background: red;

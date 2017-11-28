@@ -1,9 +1,9 @@
-<!-- <template>
-	实地征信
+<template>
+	<!-- 实地征信 -->
 	<div class="creditInvestigation">
-		<div class="creditHead">
+		<!-- <div class="creditHead">
 			<ul class="headul">
-				<li><label>日期：</label><span>{{datas.isCheckDocTxt}}</span></li>
+				<li><label>日期：</label><span>{{datas.creditDate}}</span></li>
 				<li><label>是否可对借款人有效证件：</label><span>是</span></li>
 				<li><label>实地场所：</label><span>{{datas.isCheckDocTxt}}</span></li>
 			</ul>
@@ -12,8 +12,8 @@
 				<li><label>不核对借款人有效证件原因：</label><span>{{datas.isCheckDocTxt}}</span></li>
 				<li><label>实地发起源：</label><span>{{datas.isCheckDocTxt}}</span></li>
 			</ul>
-		</div>
-		<div>
+		</div> -->
+		<!-- <div>
 			<el-collapse v-model="activeNames" @change="handleChange">
 				<el-collapse-item title="实地调查记录" name="1">
 				    <ul class="headul">
@@ -141,11 +141,11 @@
 				</ul>
 			  </el-collapse-item>
 			</el-collapse>
-		</div>
+		</div> -->
 		
 	</div>
 </template>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	export default {
 	    data() {
 	      return {
