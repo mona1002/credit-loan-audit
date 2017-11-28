@@ -16,14 +16,15 @@
                 <i class="el-icon-menu"></i> 待办任务
                 <!-- <i class="el-icon-refresh"></i> -->
                 <!-- <span @click.stop="more" class="moreC"> 更多 </span> -->
-              </template>
+              </template>float:right;
+              margin-right: 10px;
               <div class="waitting">
                 <el-table ref="singleTable" :data="tableData" highlight-current-row @current-change="handleCurrentChange" style="width: 100%">
-                  <el-table-column property="TaskName" label="任务名称">
+                  <el-table-column property="processTemplateId" label="任务名称">
                   </el-table-column>
-                  <el-table-column property="Nname" label="节点名称">
+                  <el-table-column property="taskNodeName" label="节点名称">
                   </el-table-column>
-                  <el-table-column property="Num" label="任务数目">
+                  <el-table-column property="count" label="任务数目">
                   </el-table-column>
                 </el-table>
                 <!-- 表格结束 -->
@@ -41,7 +42,8 @@
                   <i class="el-icon-menu"></i> 工作通知
                   <i class="el-icon-refresh"></i>
                   <span @click.stop="more" class="moreC"> 更多 </span>
-                </template>
+                </template>float:right;
+                margin-right: 10px;
                 <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
                 <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
               </el-collapse-item>
@@ -55,7 +57,8 @@
                   <i class="el-icon-menu"></i> 公司动态
                   <i class="el-icon-refresh"></i>
                   <span @click.stop="more" class="moreC"> 更多 </span>
-                </template>
+                </template>float:right;
+                margin-right: 10px;
                 <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
                 <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
               </el-collapse-item>
@@ -83,95 +86,7 @@
         pageSize: '', //页面显示行数
         processTemplateId: '', // 流程模板Id
         taskNodeName: '', // 任务节点名称
-        tableData: [{
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }, {
-          TaskName: '审批流程',
-          Nname: '反欺诈专员审批',
-          Num: '3'
-        }],
+        tableData: [],
         currentRow: null
       }
     },
@@ -199,14 +114,14 @@ components:{
       },
       handleCurrentChange(val) {
         console.log("我是表格")
-        console.log(val)
+        // console.log(val)
         this.currentRow = val;
         this.$router.push({
           path: '/taskInWaitting',
           query: {
-            processTemplateId: this.processTemplateId,
-            taskNodeName: this.taskNodeName,
-            taskStatus: "ASSIGNED",
+            processTemplateId: val.processTemplateId,
+            taskNodeName: val.taskNodeName,
+            taskStatus: "01",
             userCode: this.userCode,
             orgCode: this.orgCode
           }
@@ -217,24 +132,28 @@ components:{
 
     },
      created() {
-      console.log('created')
-      //  获取到 路由传参 
-      console.log(this.$route.params.userCode);
-      console.log(this.$route.params.orgCode);
+      // console.log('created')
+      // //  获取到 路由传参 
+      // console.log(this.$route.params.userCode);
+      // console.log(this.$route.params.orgCode);
     },
     mounted() {
+// 字段
+// ASSIGNED("01", "代办"),
+// COMPLETED("03","已办"),
+// ABORTED("04","历史"),
+ //  获取到 路由传参 
       this.userCode=this.$route.params.userCode;
       this.orgCode=this.$route.params.orgCode;
       console.log(this.userCode +"================"+ this.orgCode )
       // this.$route.query.picName接参数
       this.post("/workFlowTaskQuery/getTaskProfile", {
-        taskStatus: "ASSIGNED",
+        taskStatus: "01",
         userCode:this.userCode ,
-        // userCode: "015101E005",
         orgCode:this.orgCode 
-        // orgCode: "041FaD "
       }).then(res => {
-        console.log(res);
+        console.log(res.data);
+        this.tableData=res.data;
       });
 
     },
@@ -243,7 +162,10 @@ components:{
 </script>
 <style scoped>
   /* public 部分 */
-
+.moreC{
+  /* float:right; */
+  margin-left: 35px;
+}
   .border_top_bottom {
     border-top: 1px solid gray;
   }

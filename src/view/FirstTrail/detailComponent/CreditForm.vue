@@ -20,7 +20,8 @@
               </el-select>
             </li>
             <li>
-              <label class="InternetInf_left_label" @click="NewPage(1)">客户在失信网是否有失信记录：</label>
+             
+              <label class="InternetInf_left_label" @click="NewPage(1)"><span class="red"> * </span>客户在失信网是否有失信记录：</label>
               <el-select v-model="netEcutedBreaVal" placeholder="请选择">
                 <el-option v-for="item in netEcutedBrea" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
@@ -34,7 +35,7 @@
               </el-select>
             </li>
             <li>
-              <label class="InternetInf_left_label" @click="NewPage(2)">网上搜索借款人手机是否有异常：</label>
+              <label class="InternetInf_left_label" @click="NewPage(2)"><span class="red"> * </span>网上搜索借款人手机是否有异常：</label>
               <el-select v-model="netPhoneVal" placeholder="请选择">
                 <el-option v-for="item in netPhone" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
@@ -69,7 +70,7 @@
               </el-select>
             </li>
             <li>
-              <label class="InternetInf_left_label" @click="NewPage(3)">当地工商网查询企业基本信息中是否有登记：</label>
+              <label class="InternetInf_left_label" @click="NewPage(3)"><span class="red"> * </span>当地工商网查询企业基本信息中是否有登记：</label>
               <el-select v-model="netCompanyVal" placeholder="请选择">
                 <el-option v-for="item in netCompany" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
@@ -175,48 +176,49 @@
         <div class="CreditForm_WorkInfs">
           <ul class="CreditForm_WorkInfs_ul_left">
             <li>
-              <label class="WorkInfs_left_label left_margin">工作单位：</label>
+              <label class="WorkInfs_left_label left_margin"><span class="red"> * </span>工作单位：</label>
 
               <el-input style="width:70%;" type="text" placeholder="请输入内容" v-model="hirecomName">
               </el-input>
             </li>
             <li>
-              <label class="WorkInfs_left_label left_margin_half_one">单位性质：</label>
+              <label class="WorkInfs_left_label left_margin_half_one"><span class="red"> * </span>单位性质：</label>
               <el-select v-model="hirecomSignVal" placeholder="请选择">
                 <el-option v-for="item in hirecomSign" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
             <li>
+              <!--    给接口   待修改    -->
               <label class="WorkInfs_left_label left_margin_half_two">所属行业：</label>
               <el-select v-model="hirecomKindVal" placeholder="请选择">
-                <el-option v-for="item in	hirecomKind" :key="item.value" :label="item.label" :value="item.value">
+                <el-option v-for="item in	hirecomKind" :key="item.value" :label="item.text" :value="item.code">
                 </el-option>
               </el-select>
             </li>
             <li>
-              <label class="WorkInfs_left_label left_margin_half_one">职位级别：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="hirecomPosition">
+              <label class="WorkInfs_left_label left_margin_half_one"><span class="red"> * </span>职位级别：</label>
+              <el-input type="text" placeholder="请输入内容" v-model="workPost">
               </el-input>
             </li>
             <li>
-              <label class="WorkInfs_left_label left_margin_half_two">单位电话：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="hirecomPhone">
+              <label class="WorkInfs_left_label left_margin_half_two"><span class="red"> * </span>单位电话：</label>
+              <el-input type="text" placeholder="请输入内容" v-model="workTel">
               </el-input>
             </li>
             <li>
-              <label class="WorkInfs_left_label left_margin_half_one">月均工资[元]：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="hiremonthIncome">
+              <label class="WorkInfs_left_label left_margin_half_one"><span class="red"> * </span>月均工资[元]：</label>
+              <el-input type="text" placeholder="请输入内容" v-model="avgsalaryamt">
               </el-input>
             </li>
             <li>
-              <label class="WorkInfs_left_label left_margin_half_two">每月发薪日：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="hirecomPayday">
+              <label class="WorkInfs_left_label left_margin_half_two"><span class="red"> * </span>每月发薪日：</label>
+              <el-input type="text" placeholder="请输入内容" v-model="payDay">
               </el-input>
             </li>
             <!-- 三级联动：单位地址：	hirecomAddress  -->
             <li class="company_address_select">
-              <label class="WorkInfs_left_label left_margin">单位地址 ：</label>
+              <label class="WorkInfs_left_label left_margin"><span class="red"> * </span>单位地址 ：</label>
               <!-- 一级 -->
               <el-select v-model="hirecomAddressVal" placeholder="请选择" @change="province">
                 <el-option v-for="item in	hirecomAddress" :key="item.areaCode" :label="item.label" :value="item.value">
@@ -234,7 +236,7 @@
               </el-select>
               <!-- 具体地址input  text框 -->
               <!-- 单位地址================================================================================未写=============找不到字段 -->
-              <el-input type="text" placeholder="请输入内容" v-model="hirecomAddress">
+              <el-input type="text" placeholder="请输入内容" v-model="workAddress">
               </el-input>
             </li>
             <li>
@@ -245,32 +247,36 @@
           </ul>
           <ul class="CreditForm_WorkInfs_ul_right">
             <li>
-              <label class=" CheckId_right_label "> 所在部门： </label>
+              <label class=" CheckId_right_label "> <span class="red"> * </span>所在部门： </label>
               <el-input type="text" placeholder="请输入内容" v-model="hiredepartment">
               </el-input>
             </li>
             <li>
               <!--   需要改成 date  输入框 -->
-              <label class=" CheckId_right_label "> 入职时间： </label>
-              <el-date-picker v-model="hirecomGetjob" type="date" placeholder="选择日期">
+              <label class=" CheckId_right_label "><span class="red"> * </span> 入职时间： </label>
+              <el-date-picker v-model="entryDate" type="date" placeholder="选择日期">
               </el-date-picker>
             </li>
             <li>
-              <label class=" CheckId_right_label "> 工资发放形式： </label>
-              <el-select v-model="hirecomPaymentTypeVal" placeholder="请选择">
-                <el-option v-for="item in hirecomPaymentType" :key="item.value" :label="item.label" :value="item.value">
+              <label class=" CheckId_right_label "> <span class="red"> * </span>工资发放形式： </label>
+              <el-select v-model="payFormVal" placeholder="请选择">
+                <el-option v-for="item in payForm" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
             <li>
               <label class=" CheckId_right_label "> 单位地址邮编： </label>
-              <el-input type="text" placeholder="请输入内容" v-model="hirecomPostcode">
+              <el-input type="text" placeholder="请输入内容" v-model="workZip">
               </el-input>
             </li>
             <li>
               <label class=" CheckId_right_label "> 是否为私营业主： </label>
-              <el-input type="text" placeholder="请输入内容" v-model="hirecomType">
-              </el-input>
+ <el-select v-model="privateOwnerFlagVal" placeholder="请选择">
+                <el-option v-for="item in privateOwnerFlag" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
+              <!-- <el-input type="text" placeholder="请输入内容" v-model="hirecomType">
+              </el-input> -->
             </li>
           </ul>
         </div>
@@ -281,8 +287,8 @@
           <ul class="CreditForm_CompanyInfs_ul_left">
             <li>
               <label class="CompanyInfs_left_label left_margin">企业类型：</label>
-              <el-select v-model="selfTypeVal" placeholder="请选择">
-                <el-option v-for="item in selfType" :key="item.value" :label="item.label" :value="item.value">
+              <el-select v-model="compTypeVal" placeholder="请选择">
+                <el-option v-for="item in compType" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
@@ -312,26 +318,26 @@
             </li>
             <li>
               <label class="CompanyInfs_left_label left_margin">企业经营项目：</label>
-              <el-input style="width:70%" type="text" placeholder="请输入内容" v-model="selfBusproject">
+              <el-input style="width:70%" type="text" placeholder="请输入内容" v-model="projectManage">
               </el-input>
             </li>
             <li>
               <label class="CompanyInfs_left_label left_margin_half_one">近一年利润[万元]：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="selfRecyearProfits">
+              <el-input type="text" placeholder="请输入内容" v-model="oneYearProfitamt">
               </el-input>
             </li>
 
 
             <li>
               <label class="CompanyInfs_left_label left_margin_half_two">第一供销商：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="selfFirsupplier">
+              <el-input type="text" placeholder="请输入内容" v-model="firstSuppliers">
               </el-input>
             </li>
           </ul>
           <ul class="CreditForm_CompanyInfs_ul_right">
             <li>
               <label class=" CheckId_right_label "> 公司注册时间： </label>
-              <el-date-picker v-model="selfCreateDate" type="date" placeholder="选择日期">
+              <el-date-picker v-model="compegDate" type="date" placeholder="选择日期">
               </el-date-picker>
             </li>
             <li>
@@ -350,12 +356,12 @@
             <li>
               <!-- 未写绑定数据 先用员工人数==========================待确定 -->
               <label class=" CheckId_right_label "> 每月净利润[万元]：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="selfempCount">
+              <el-input type="text" placeholder="请输入内容" v-model="profitamountmamt">
               </el-input>
             </li>
             <li>
               <label class="CheckId_right_label "> 第一分销商： </label>
-              <el-input type="text" placeholder="请输入内容" v-model="selfFirdistri">
+              <el-input type="text" placeholder="请输入内容" v-model="firstDistributor">
               </el-input>
             </li>
           </ul>
@@ -406,7 +412,7 @@
               </el-input>
             </li>
             <li>
-              <label class=" FamilyInf_right_label family_left_margin_half_two"> 可以承受的月还款[元]： </label>
+              <label class=" FamilyInf_right_label family_left_margin_half_two"><span class="red"> * </span> 可以承受的月还款[元]： </label>
               <el-input type="text" placeholder="请输入内容" v-model="fbalance">
               </el-input>
             </li>
@@ -458,8 +464,8 @@
       <!-- 初审结论 -->
       <el-collapse-item title="初审结论" name="8">
         <div class=" CreditForm_result">
-          <p class="CreditForm_result_p_label">初审结果评价：</p>
-          <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="firstConclusion">
+          <p class="CreditForm_result_p_label"><span class="red"> * </span>初审结果评价：</p>
+          <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="oother">
           </el-input>
         </div>
       </el-collapse-item>
@@ -616,7 +622,7 @@
           value: '0',
           label: '否'
         }],
-        hirecomPaymentType: [{ // 工资发放形式
+        payForm: [{ // 工资发放形式
           value: '01',
           label: '网银'
         }, {
@@ -628,7 +634,16 @@
         }],
 
         // ------------------------------私营企业信息------------------------
-        selfType: [{ // 企业类型
+        privateOwnerFlag:[
+          { 
+          value: '1',
+          label: '是'
+        }, {
+           value: '0',
+          label: '否'
+        }, 
+        ],
+        compType: [{ // 企业类型
           value: '01',
           label: '独资'
         }, {
@@ -751,9 +766,10 @@
         hirecomSignVal: '', //单位性质
         hirecomKindVal: '', //所属行业：
         hirecomAddressVal: '', //单位地址------------三级联动---待续
-        hirecomPaymentTypeVal: '', // 工资发放形式：
+        payFormVal: '', // 工资发放形式：
+        privateOwnerFlagVal:'',//是否为私营业主
         //  私营企业信息
-        selfTypeVal: '', //企业类型
+        compTypeVal: '', //企业类型
         selfpremisesVal: '', // 经营场所
         // 家庭信息
         fmarrflagVal: '', //婚姻状况
@@ -784,34 +800,34 @@
         //核实身份
         isselftxt: '', //接听说明
         // 初审结论
-        firstConclusion: '', //初审结果评价-----------待处理是否需要获取数据--------还是只可以填写
+        	oother: '', //初审结果评价
 
         // input 字段
         // 工作信息
         hirecomName: '', // 工作单位
-        hirecomPosition: '', //职位级别
-        hirecomPhone: '', //单位电话
-        hiremonthIncome: '', //月均工资[元]
-        hirecomPayday: '', //每月发薪日
+        workPost: '', //职位级别
+        workTel: '', //单位电话
+        avgsalaryamt: '', //月均工资[元]
+        payDay: '', //每月发薪日
         hirelastComname: '', //前单位名称：
         hiredepartment: '', // 所在部门
-        hirecomGetjob: '', // 入职时间-日期选择器
-        hirecomPostcode: '', // 单位地址邮编
-        hirecomType: '', // 是否为私营业主
-        hirecomAddress: '', //单位地址(input) -----------------------------------------------------------------------------待确认
+        entryDate: '', // 入职时间-日期选择器
+        workZip: '', // 单位地址邮编
+        // hirecomType: '', // 是否为私营业主
+        workAddress: '', //单位地址(input) -----------------------------------------------------------------------------待确认
         // 私营企业信息
         selfregcapital: '', //注册资金[万元]
         selfhasProportion: '', //占股比例
         monthrentamt: '', // 月还款额/租金[万元]
         selfpremisesArea: '', //营业面积
-        selfBusproject: '', //企业经营项目
-        selfRecyearProfits: '', //近一年利润[万元]
-        selfFirsupplier: '', //第一供销商
-        selfCreateDate: '', //公司注册时间
+        projectManage: '', //企业经营项目
+        oneYearProfitamt: '', //近一年利润[万元]
+        firstSuppliers: '', //第一供销商
+        compegDate: '', //公司注册时间
         selfpremisestxt: '', //经营场所
         selfempCount: '', //员工人数
-        jfimeuuf: '', //每月净利润[万元]：-----------------------------------------------------------------------------待确认
-        selfFirdistri: '', //第一分销商
+        profitamountmamt: '', //每月净利润[万元]：-----------------------------------------------------------------------------待确认
+        firstDistributor: '', //第一分销商
         // 家庭信息
         fconsumption: '', // 个人/家庭月开销[元]
         brothersIfhastxt: '', //是否有兄弟姐妹备注
@@ -911,6 +927,14 @@
       }).catch(err => {
         reject(err)
       });
+      // 所属行业     ？？？？
+       this.post("/credit/industry", {
+      }).then(res => {
+        console.log(res);
+        this.hirecomKind=res.data;
+      }).catch(err => {
+        reject(err)
+      });
       
     }
   }
@@ -919,6 +943,13 @@
 
 <style scope>
   /* 公共 */
+  .red{
+    /* display: inline-block; */
+    color: red;
+    font-weight: bold;
+    font-size: 16px;
+  /* padding-top:3px; */
+  }
   /* .one_input {
     width: 70%;
   } */

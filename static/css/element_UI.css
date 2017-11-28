@@ -92,6 +92,10 @@ td {
 .workbench .el-collapse-item__wrap{
   border:1px solid #D5D5D5;
 }
+/* 工作台 - 刷新（refresh）- 按钮  */
+.workbench .el-icon-refresh{
+  margin-left: 335px;
+}
 /* 工作通知 下边距 */
 .workbench .el-collapse{
   margin-bottom: 10px;

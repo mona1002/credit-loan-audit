@@ -104,6 +104,13 @@
 		created(){
 			//一进入页面就发送请求
 			this.request();
+console.log( this.$route.query.processTemplateId)
+console.log( this.$route.query.taskNodeName)
+console.log( this.$route.query.taskStatus)
+console.log( this.$route.query.userCode)
+console.log( this.$route.query.orgCode)
+
+			
 		},
 		methods:{
 			//跳转到详情页

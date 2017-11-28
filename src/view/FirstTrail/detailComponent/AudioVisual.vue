@@ -15,7 +15,7 @@
         </p>
         <el-collapse>
           <!-- v-for="" -->
-          <el-collapse-item v-for="(item,ind) in ListParent" :key="ind" @click.native="getChildrenList">
+          <el-collapse-item v-for="(item,ind) in ListParent" :key="ind" @click.native="getChildrenList(item.id)">
             <template slot="title">
               <p>
                 <span>{{item.arcName}}</span>
@@ -25,7 +25,7 @@
               </p>
             </template>
             <div class="list_title_div">
-              <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg">
+              <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind)">
                 <span>{{item.arcName}}</span>
                 <span>{{item.arcNum}}</span>
                 <span>{{item.imageCount}}</span>
@@ -71,12 +71,12 @@
         <i class="el-icon-zoom-out position_and_size icon_smaller" @click="smaller"></i>
         <i class="el-icon-refresh position_and_size icon_clockWise" @click="clockWise "></i>
         <i class="el-icon-sort position_and_size icon_AclockWise" @click="AclockWise "></i>
-        <img v-for="(val,key) in picData" :src="val.pic" v-if="key==smallPicInd" ref="Big_pic_ref" />
+        <img v-for="(val,key) in imgPath" :src="'http://10.1.26.6:8080'+val" v-if="key==smallPicInd" ref="Big_pic_ref" />
       </div>
       <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
       <div class="Small_pic_div" v-show="SmallPicShow">
         <i class="el-icon-close small_pic_close" @click="SmallpicClose"></i>
-        <img class="Small_pic" v-for="(val,index) in picData" :src="val.pic" @click="ChangeCss(index)" @mouseenter="smallPic($event,index)"
+        <img class="Small_pic" v-for="(val,index) in imgPath" :src="'http://10.1.26.6:8080'+val" @click="ChangeCss(index)" @mouseenter="smallPic($event,index)"
           ref="small_pic_ref" />
       </div>
     </div>
@@ -95,8 +95,10 @@
         smallPicInd: 0, // 未知
         SmallPicShow: false,
         CompareAlert: true,
-        ListParent: [],
-        ListDetails: [],
+        ListParent: [],//父节点title列表
+        ListDetails: [],//子节点列表
+        applyId:'',//入参
+        imgPath:[],//图片路径
         // d:'',
         // v: [{ // 单位性质
         //   value: 'yes',
@@ -111,15 +113,20 @@
       AudVis
     },
     methods: {
-      getChildrenList() {
+      getChildrenList(id) {
         console.log("获取子节点");
         this.post("/productArchive/getProductArchiveChildList", {
           applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
-          pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
+          pid:id,
+          // pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
         }).then(res => {
-          console.log(res);
-          // console.log(res.data)
+          // console.log(res);
+          console.log(res.data)
           this.ListDetails=res.data;
+          // this.imgPath=this.ListDetails.uploadArcPaths
+
+          // console.log(this.ListDetails)
+          
           // this.picData=res.data[0].uploadArcPaths;
           for(var i=0;i<=res.data.length;i++){
             
@@ -127,16 +134,24 @@
           // console.log(this.picData)
         });
       },
-      getImg() {
+      getImg(ind) {
         console.log("获取图片");
-        this.post("/internalMatch/getInternalMatchCustName", {
-          applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
-          pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
-        }).then(res => {
-          console.log(res);
-          // console.log(res.data)
-          // this.picData=res.data
-        });
+        // this.imgPath="http://10.1.26.6:8080"+this.ListDetails.uploadArcPaths[ind]
+        // console.log(this.imgPath )
+        console.log(ind)
+        
+        // console.log(this.ListDetails[ind].uploadArcPaths)
+        this.imgPath=  this.ListDetails[ind].uploadArcPaths
+        console.log( this.imgPath)
+        
+        // this.post("/internalMatch/getInternalMatchCustName", {
+        //   applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
+        //   pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
+        // }).then(res => {
+        //   console.log(res);
+        //   // console.log(res.data)
+        //   // this.picData=res.data
+        // });
       },
       hid() { //左侧 li 列表
         console.log("hid");
@@ -293,30 +308,26 @@
 
     mounted() {
       // 登录
-       this.post("/smUser/login", {
-                userCode:"ddyy",
-                loginPassword:"111111"
-              }).then(res => {
-                console.log(res);
-                console.log(res.data)
-              });
+      //  this.post("/smUser/login", {
+      //           userCode:"ddyy",
+      //           loginPassword:"111111"
+      //         }).then(res => {
+      //           console.log(res);
+      //           console.log(res.data)
+      //         });
 
-      //     loginFn(){
-      // console.log('login ')
-      // this.post("/smUser/login", {
-      //   userCode: "02103C3003",
-      //   loginPassword: "111111"
-      // }).then(res => {
-      //   console.log(res);
-      // });
+//  this.applyId=this.$route.query.applyId;//接受参数
+
 // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         // id:"bb30607c-b5aa-4915-9474-460e099a33e8",
+        // applyId:this.applyId,
         applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
       }).then(res => {
         // console.log(res);
-        // console.log(res.data)
+        console.log(res.data)
         this.ListParent = res.data
+        // console.log(this.ListParent[0].id )
       });
 
       // 子菜单栏
