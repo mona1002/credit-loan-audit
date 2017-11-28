@@ -7,78 +7,77 @@
           <ul class="CreditForm_InternetInf_ul_left">
             <li>
               <label class="InternetInf_left_label" @click="NewPage(0)">客户在法网是否有被执行信息：</label>
-              <el-select v-model="beexEcutedVal" placeholder="请选择">
+              <el-select v-model="checkData.wbeexEcuted" placeholder="请选择">
                 <el-option v-for="item in beexEcuted" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
             <li>
               <label class="InternetInf_left_label" @click="NewPage(0)">单位在法网是否有被执行信息：</label>
-              <el-select v-model="netHirecomVal" placeholder="请选择">
+              <el-select v-model="checkData.wnetHirecom" placeholder="请选择">
                 <el-option v-for="item in netHirecom" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
             <li>
-             
               <label class="InternetInf_left_label" @click="NewPage(1)"><span class="red"> * </span>客户在失信网是否有失信记录：</label>
-              <el-select v-model="netEcutedBreaVal" placeholder="请选择">
+              <el-select v-model="checkData.wnetEcutedBrea" placeholder="请选择">
                 <el-option v-for="item in netEcutedBrea" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
             <li>
               <label class="InternetInf_left_label" @click="NewPage(1)">单位在失信网是否有失信记录：</label>
-              <el-select v-model="netHirecomBreaVal" placeholder="请选择">
+              <el-select v-model="checkData.wnetHirecomBrea" placeholder="请选择">
                 <el-option v-for="item in netHirecomBrea" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
             <li>
               <label class="InternetInf_left_label" @click="NewPage(2)"><span class="red"> * </span>网上搜索借款人手机是否有异常：</label>
-              <el-select v-model="netPhoneVal" placeholder="请选择">
+              <el-select v-model="checkData.wnetPhone" placeholder="请选择">
                 <el-option v-for="item in netPhone" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
             <li>
               <label class="InternetInf_left_label" @click="NewPage(2)">网搜单位名称是否有异常：</label>
-              <el-select v-model="netHirecomNameVal" placeholder="请选择">
+              <el-select v-model="checkData.wnetHirecomName" placeholder="请选择">
                 <el-option v-for="item in netHirecomName" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
             <li>
               <label class="InternetInf_left_label" @click="NewPage(2)">网搜单位电话是否有异常：</label>
-              <el-select v-model="netHirecomPhoneVal" placeholder="请选择">
+              <el-select v-model="checkData.wnetHirecomPhone" placeholder="请选择">
                 <el-option v-for="item in netHirecomPhone" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
             <li>
               <label class="InternetInf_left_label" @click="NewPage(2)">网上搜索借款人现居住地址和房产地址是否有异常：</label>
-              <el-select v-model="netAddrandEstateVal" placeholder="请选择">
+              <el-select v-model="checkData.wnetAddrandEstate" placeholder="请选择">
                 <el-option v-for="item in netAddrandEstate" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
             <li>
               <label class="InternetInf_left_label" @click="NewPage(2)">网搜单位地址是否有异常：</label>
-              <el-select v-model="netHirecomAddressVal" placeholder="请选择">
+              <el-select v-model="checkData.wnetHirecomAddress" placeholder="请选择">
                 <el-option v-for="item in netHirecomAddress" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
             <li>
               <label class="InternetInf_left_label" @click="NewPage(3)"><span class="red"> * </span>当地工商网查询企业基本信息中是否有登记：</label>
-              <el-select v-model="netCompanyVal" placeholder="请选择">
+              <el-select v-model="checkData.wnetCompany" placeholder="请选择">
                 <el-option v-for="item in netCompany" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
             <li>
               <label class="InternetInf_left_label" @click="NewPage(4)">客户工作单位在全国组织代码查询中是否存在：</label>
-              <el-select v-model="netAddrstateVal" placeholder="请选择">
+              <el-select v-model="checkData.wnetAddrstate" placeholder="请选择">
                 <el-option v-for="item in netAddrstate" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
@@ -87,57 +86,57 @@
           <ul class="CreditForm_InternetInf_ul_right">
             <li>
               <label class="InternetInf_right_label"> 执行信息说明： </label>
-              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="beexEcutedtxt">
+              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wbeexEcutedtxt">
               </el-input>
             </li>
             <li>
               <label class="InternetInf_right_label"> 单位执行信息说明：</label>
-              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="netHirecomtxt">
+              <el-input type="textcheckData.area" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomtxt">
               </el-input>
             </li>
             <li>
               <label class="InternetInf_right_label"> 失信记录说明： </label>
-              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="netEcutedBreatxt">
+              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetEcutedBreatxt">
               </el-input>
             </li>
             <li>
               <label class="InternetInf_right_label"> 单位失信记录说明： </label>
-              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="netHirecomBreatxt">
+              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomBreatxt">
               </el-input>
             </li>
             <li>
-              <label class="InternetInf_right_label"> 手机异常信息说明： </label>
-              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="netPhonetxt">
+              <label class="InterncheckData.etInf_right_label"> 手机异常信息说明： </label>
+              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetPhonetxt">
               </el-input>
             </li>
             <li>
               <label class="InternetInf_right_label"> 单位名称异常信息说明： </label>
-              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="netHirecomNametxt">
+              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomNametxt">
               </el-input>
             </li>
             <li>
               <label class="InternetInf_right_label"> 单位电话异常信息说明： </label>
-              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="netHirecomPhonetxt">
+              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomPhonetxt">
               </el-input>
             </li>
             <li>
               <label class="InternetInf_right_label"> 地址异常信息说明： </label>
-              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="netAddrandEstatetxt">
+              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetAddrandEstatetxt">
               </el-input>
             </li>
             <li>
               <label class="InternetInf_right_label"> 单位地址异常信息说明： </label>
-              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="netHirecomAddresstxt">
+              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomAddresstxt">
               </el-input>
             </li>
             <li>
               <label class="InternetInf_right_label"> 工商登记信息说明： </label>
-              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="netCompanytxt">
+              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetCompanytxt">
               </el-input>
             </li>
             <li>
               <label class="InternetInf_right_label"> 组织机构代码信息说明： </label>
-              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="netAddrstatetxt">
+              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetAddrstatetxt">
               </el-input>
             </li>
           </ul>
@@ -149,14 +148,14 @@
           <ul class="CreditForm_CheckId_ul_left">
             <li>
               <label class="CheckId_left_label">接听者是否是借款人本人：</label>
-              <el-select v-model="isselfVal" placeholder="请选择">
+              <el-select v-model="checkData.iisself" placeholder="请选择">
                 <el-option v-for="item in isself" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
             <li>
               <label class="CheckId_left_label">是否在我司申请借款：</label>
-              <el-select v-model="loanBeforeVal" placeholder="请选择">
+              <el-select v-model="checkData.iloanBefore" placeholder="请选择">
                 <el-option v-for="item in loanBefore" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
@@ -165,7 +164,7 @@
           <ul class="CreditForm_CheckId_ul_right">
             <li>
               <label class=" CheckId_right_label "> 接听说明： </label>
-              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="isselftxt">
+              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.iisselftxt">
               </el-input>
             </li>
           </ul>
@@ -177,13 +176,12 @@
           <ul class="CreditForm_WorkInfs_ul_left">
             <li>
               <label class="WorkInfs_left_label left_margin"><span class="red"> * </span>工作单位：</label>
-
-              <el-input style="width:70%;" type="text" placeholder="请输入内容" v-model="hirecomName">
+              <el-input style="width:70%;" type="text" placeholder="请输入内容" v-model="checkData.hirecomName">
               </el-input>
             </li>
             <li>
               <label class="WorkInfs_left_label left_margin_half_one"><span class="red"> * </span>单位性质：</label>
-              <el-select v-model="hirecomSignVal" placeholder="请选择">
+              <el-select v-model="checkData.hirecomSign" placeholder="请选择">
                 <el-option v-for="item in hirecomSign" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
@@ -191,91 +189,91 @@
             <li>
               <!--    给接口   待修改    -->
               <label class="WorkInfs_left_label left_margin_half_two">所属行业：</label>
-              <el-select v-model="hirecomKindVal" placeholder="请选择">
+              <el-select v-model="checkData.hirecomKind" placeholder="请选择">
                 <el-option v-for="item in	hirecomKind" :key="item.value" :label="item.text" :value="item.code">
                 </el-option>
               </el-select>
             </li>
             <li>
               <label class="WorkInfs_left_label left_margin_half_one"><span class="red"> * </span>职位级别：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="workPost">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.workPost">
               </el-input>
             </li>
             <li>
               <label class="WorkInfs_left_label left_margin_half_two"><span class="red"> * </span>单位电话：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="workTel">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.workTel">
               </el-input>
             </li>
             <li>
               <label class="WorkInfs_left_label left_margin_half_one"><span class="red"> * </span>月均工资[元]：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="avgsalaryamt">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.avgsalaryamt">
               </el-input>
             </li>
             <li>
               <label class="WorkInfs_left_label left_margin_half_two"><span class="red"> * </span>每月发薪日：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="payDay">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.payDay">
               </el-input>
             </li>
             <!-- 三级联动：单位地址：	hirecomAddress  -->
             <li class="company_address_select">
               <label class="WorkInfs_left_label left_margin"><span class="red"> * </span>单位地址 ：</label>
               <!-- 一级 -->
-              <el-select v-model="hirecomAddressVal" placeholder="请选择" @change="province">
+              <el-select v-model="checkData.hirecomAddress" placeholder="请选择" @change="province">
                 <el-option v-for="item in	hirecomAddress" :key="item.areaCode" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
               <!-- 二级 -->
-              <el-select v-model="hirecomAddressVal" placeholder="请选择">
+              <el-select v-model="checkData.hirecomAddress" placeholder="请选择">
                 <el-option v-for="item in hirecomAddress" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
               <!-- 三级 -->
-              <el-select v-model="hirecomAddressVal" placeholder="请选择">
+              <el-select v-model="checkData.hirecomAddress" placeholder="请选择">
                 <el-option v-for="item in hirecomAddress" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
               <!-- 具体地址input  text框 -->
               <!-- 单位地址================================================================================未写=============找不到字段 -->
-              <el-input type="text" placeholder="请输入内容" v-model="workAddress">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.workAddress">
               </el-input>
             </li>
             <li>
               <label class="WorkInfs_left_label left_margin">前单位名称：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="hirelastComname">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.hirelastComname">
               </el-input>
             </li>
           </ul>
           <ul class="CreditForm_WorkInfs_ul_right">
             <li>
               <label class=" CheckId_right_label "> <span class="red"> * </span>所在部门： </label>
-              <el-input type="text" placeholder="请输入内容" v-model="hiredepartment">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.hiredepartment">
               </el-input>
             </li>
             <li>
               <!--   需要改成 date  输入框 -->
               <label class=" CheckId_right_label "><span class="red"> * </span> 入职时间： </label>
-              <el-date-picker v-model="entryDate" type="date" placeholder="选择日期">
+              <el-date-picker v-model="checkData.entryDate" type="date" placeholder="选择日期">
               </el-date-picker>
             </li>
             <li>
               <label class=" CheckId_right_label "> <span class="red"> * </span>工资发放形式： </label>
-              <el-select v-model="payFormVal" placeholder="请选择">
+              <el-select v-model="checkData.payForm" placeholder="请选择">
                 <el-option v-for="item in payForm" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
             <li>
               <label class=" CheckId_right_label "> 单位地址邮编： </label>
-              <el-input type="text" placeholder="请输入内容" v-model="workZip">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.workZip">
               </el-input>
             </li>
             <li>
               <label class=" CheckId_right_label "> 是否为私营业主： </label>
- <el-select v-model="privateOwnerFlagVal" placeholder="请选择">
+ <el-select v-model="checkData.privateOwnerFlag" placeholder="请选择">
                 <el-option v-for="item in privateOwnerFlag" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
-              <!-- <el-input type="text" placeholder="请输入内容" v-model="hirecomType">
+              <!-- <el-input type="text" placeholder="请输入内容" v-model="checkData.hirecomType">
               </el-input> -->
             </li>
           </ul>
@@ -287,81 +285,81 @@
           <ul class="CreditForm_CompanyInfs_ul_left">
             <li>
               <label class="CompanyInfs_left_label left_margin">企业类型：</label>
-              <el-select v-model="compTypeVal" placeholder="请选择">
+              <el-select v-model="checkData.compType" placeholder="请选择">
                 <el-option v-for="item in compType" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
             <li>
               <label class="CompanyInfs_left_label left_margin_half_one">注册资金[万元]：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="selfregcapital">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.regcapitalamt">
               </el-input>
-              <!-- <el-select v-model="selfregcapitalVal" placeholder="请选择">
+              <!-- <el-select v-model="checkData.selfregcapital" placeholder="请选择">
                 <el-option v-for="item in selfregcapital" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select> -->
             </li>
             <li>
               <label class="CompanyInfs_left_label left_margin_half_two">占股比例：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="selfhasProportion">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.selfhasProportion">
               </el-input>
             </li>
             <li>
               <label class="CompanyInfs_left_label left_margin_half_one">月还款额/租金[万元]：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="monthrentamt">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.monthrentamt">
               </el-input>
             </li>
             <li>
               <label class="CompanyInfs_left_label left_margin_half_two">营业面积：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="selfpremisesArea">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.selfpremisesArea">
               </el-input>
             </li>
             <li>
               <label class="CompanyInfs_left_label left_margin">企业经营项目：</label>
-              <el-input style="width:70%" type="text" placeholder="请输入内容" v-model="projectManage">
+              <el-input style="width:70%" type="text" placeholder="请输入内容" v-model="checkData.projectManage">
               </el-input>
             </li>
             <li>
               <label class="CompanyInfs_left_label left_margin_half_one">近一年利润[万元]：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="oneYearProfitamt">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.oneYearProfitamt">
               </el-input>
             </li>
 
 
             <li>
               <label class="CompanyInfs_left_label left_margin_half_two">第一供销商：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="firstSuppliers">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.firstSuppliers">
               </el-input>
             </li>
           </ul>
           <ul class="CreditForm_CompanyInfs_ul_right">
             <li>
               <label class=" CheckId_right_label "> 公司注册时间： </label>
-              <el-date-picker v-model="compegDate" type="date" placeholder="选择日期">
+              <el-date-picker v-model="checkData.compegDate" type="date" placeholder="选择日期">
               </el-date-picker>
             </li>
             <li>
               <!--   需要改成 date  输入框 -->
               <label class=" CheckId_right_label "> 经营场所：</label>
-              <el-select v-model="selfpremisesVal" placeholder="请选择">
+              <el-select v-model="checkData.selfpremises" placeholder="请选择">
                 <el-option v-for="item in selfpremises" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
             <li>
               <label class=" CheckId_right_label "> 员工人数： </label>
-              <el-input type="text" placeholder="请输入内容" v-model="selfempCount">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.selfempCount">
               </el-input>
             </li>
             <li>
               <!-- 未写绑定数据 先用员工人数==========================待确定 -->
               <label class=" CheckId_right_label "> 每月净利润[万元]：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="profitamountmamt">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.profitamountmamt">
               </el-input>
             </li>
             <li>
               <label class="CheckId_right_label "> 第一分销商： </label>
-              <el-input type="text" placeholder="请输入内容" v-model="firstDistributor">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.firstDistributor">
               </el-input>
             </li>
           </ul>
@@ -373,47 +371,47 @@
           <ul class="CreditForm_FamilyInf_ul_left">
             <li>
               <label class="FamilyInf_left_label">婚姻状况：</label>
-              <el-select v-model="fmarrflagVal" placeholder="请选择">
+              <el-select v-model="checkData.fmarrflag" placeholder="请选择">
                 <el-option v-for="item in fmarrflag" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
             <li>
               <label class="FamilyInf_left_label">是否有子女：</label>
-              <el-select v-model="childFlagVal" placeholder="请选择">
+              <el-select v-model="checkData.childFlag" placeholder="请选择">
                 <el-option v-for="item in childFlag" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
             <li>
               <label class="FamilyInf_left_label">父母是否在世：</label>
-              <el-select v-model="parentIslivingVal" placeholder="请选择">
+              <el-select v-model="checkData.parentIsliving" placeholder="请选择">
                 <el-option v-for="item in parentIsliving" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
             <li>
               <label class="FamilyInf_left_label">是否有兄弟姐妹：</label>
-              <el-select v-model="brothersIfhasVal" placeholder="请选择">
+              <el-select v-model="checkData.brothersIfhas" placeholder="请选择">
                 <el-option v-for="item in brothersIfhas" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
             <li>
               <label class="FamilyInf_left_label">个人/家庭月开销[元]：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="fconsumption">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.fconsumption">
               </el-input>
             </li>
           </ul>
           <ul class="CreditForm_FamilyInf_ul_right">
             <li>
               <label class=" FamilyInf_right_label family_left_margin_half_two"> 是否有兄弟姐妹备注： </label>
-              <el-input type="text" placeholder="请输入内容" v-model="brothersIfhastxt">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.brothersIfhastxt">
               </el-input>
             </li>
             <li>
               <label class=" FamilyInf_right_label family_left_margin_half_two"><span class="red"> * </span> 可以承受的月还款[元]： </label>
-              <el-input type="text" placeholder="请输入内容" v-model="fbalance">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.fbalance">
               </el-input>
             </li>
           </ul>
@@ -425,7 +423,7 @@
           <ul class="CreditForm_live_ul_left">
             <li>
               <label class="live_left_label">同住者关系：</label>
-              <el-select v-model="livingHouseHoldsVal" placeholder="请选择">
+              <el-select v-model="checkData.livingHouseHolds" placeholder="请选择">
                 <el-option v-for="item in livingHouseHolds" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
@@ -434,7 +432,7 @@
           <ul class="CreditForm_live_ul_left">
             <li>
               <label class="live_right_label family_left_margin_half_two">居住房产所属情况：</label>
-              <el-select v-model="livingEstateBelongsVal" placeholder="请选择">
+              <el-select v-model="checkData.livingEstateBelongs" placeholder="请选择">
                 <el-option v-for="item in livingEstateBelongs" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
@@ -448,12 +446,12 @@
           <ul class="CreditForm_check_reside_ul_left">
             <li>
               <label class="check_reside__left_label">现住址：</label>
-              <span> 北京市北京市延庆县宫本武藏 </span>
-                <span class="detail_inf oneline"> </span> {{this.address}} </span>
+              <!-- <span> 北京市北京市延庆县宫本武藏 </span> -->
+                <span class="detail_inf oneline"> </span> {{this.checkData.aaddress}} </span>
             </li>
             <li>
               <label class="check_reside__left_label">现住地址是否为常住地址 ：</label>
-              <el-select v-model="aisresidentVal" placeholder="请选择">
+              <el-select v-model="checkData.aisresident" placeholder="请选择">
                 <el-option v-for="item in aisresident" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
@@ -465,7 +463,7 @@
       <el-collapse-item title="初审结论" name="8">
         <div class=" CreditForm_result">
           <p class="CreditForm_result_p_label"><span class="red"> * </span>初审结果评价：</p>
-          <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="oother">
+          <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="checkData.oother">
           </el-input>
         </div>
       </el-collapse-item>
@@ -480,6 +478,7 @@
     data() {
       return {
         activeNames: ['1', "2", "3", "4", "5", "6", "7", "8"], //折叠面板 默认显示下标
+        checkData:'',// 查询接口回来的数据
         // -------上网查询信息------------
         beexEcuted: [{ //（上网查询信息）客户在人法网是否有被执行信
           value: '1',
@@ -834,18 +833,6 @@
         fbalance: '', //可以承受的月还款[元]
 
 
-
-        // jfimeuuf: '', //
-        // jfimeuuf: '', //
-        // jfimeuuf: '', //
-        // jfimeuuf: '', //
-        // jfimeuuf: '', //
-        // jfimeuuf: '', //
-        // kkkkkk: '', // 
-        // kkkkkk: '', // 
-        // kkkkkk: '', // 
-
-
         form: {
           desc: '', //上网查询信息 右侧textarea框绑定值
         },
@@ -919,22 +906,26 @@
       }
     },
     mounted() {
-      // 省    
-      this.post("credit/queryProvince", {
+      // 获取查询列表数据
+      this.post("/creauditInfo/queryCreauditInfoObj", {
+        applyId:"00542",
       }).then(res => {
         console.log(res);
-        this.hirecomAddress=res.data;
-      }).catch(err => {
-        reject(err)
+        // console.log(res.data)
+        this.checkData=res.data;
       });
+      // 省    
+      // this.post("/credit/queryProvince", {
+      // }).then(res => {
+      //   console.log(res);
+      //   this.hirecomAddress=res.data;
+      // });
       // 所属行业     ？？？？
        this.post("/credit/industry", {
       }).then(res => {
         console.log(res);
-        this.hirecomKind=res.data;
-      }).catch(err => {
-        reject(err)
-      });
+        // this.hirecomKind=res.data;
+      })
       
     }
   }
@@ -1004,7 +995,7 @@
     display: inline-block;
     width: 50%;
     padding: 10px 15px 10px 7px;
-    word-break: 0rmal;
+    word-break: normal;
     /* border: 1px solid yellow; */
     text-align: right;
   }

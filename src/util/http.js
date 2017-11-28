@@ -14,7 +14,7 @@ axios.defaults.withCredentials=true;
 
 axios.interceptors.response.use(
   response => {
-    if(response.data.status == 900) {  
+    if(response.data.statusCode == 900) {  
       router.push({
         path: '/login',
         query: {redirect: router.currentRoute.fullPath} 
