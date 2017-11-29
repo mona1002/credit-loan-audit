@@ -18,12 +18,12 @@
             </div>
           </div>
           <div class="form-class">
-            <div class="user-class">用户名</div>
+            <div class="user-class login-font">用户名</div>
             <!-- <span class="user-icon" model="userCode"></span> -->
             <el-input prefix-icon="el-icon-user" class="user-input" v-model="userCode" placeholder="请输入内容">
               <!-- <i slot="prefix" class="el-input__icon el-icon-date"></i> -->
             </el-input>
-            <div class="password-class">密码</div>
+            <div class="password-class login-font">密码</div>
             <span class="password-icon"></span>
             <el-input type="password" prefix-icon="el-icon-password" class="password-input" v-model="loginPassword" placeholder="请输入内容">
             </el-input>
@@ -243,6 +243,7 @@ export default {
   width: 100%;
   height: 60px;
   font-size: 24px;
+  border-radius: 10px;
 }
 
 .login .el-icon-user {
@@ -269,8 +270,9 @@ export default {
   text-indent: 10px;
   border-radius: 8px;
   border: 3px solid rgb(229, 229, 229);
-  height: 45px;
-  line-height: 45px;
+  height: 43px;
+  line-height: 43px;
+  font-size: 16px; 
 }
 
 .login .el-input__icon {
@@ -291,5 +293,15 @@ export default {
   height: 30px;
   background:red;
 } */
+
+.login .el-button--primary{
+  background-color: #409eff;
+  border-color: #409eff;
+}
+/* 用户名 / 密码  */
+.login .login-font{
+  color: rgb( 0, 161, 255 );
+  font-size: 16px;
+}
 
 </style>
