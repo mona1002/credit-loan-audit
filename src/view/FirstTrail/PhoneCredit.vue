@@ -238,7 +238,6 @@ export default {
       this.queryTelLogByPage();
     },
     queryTelLogByPage() {
-      console.log('lsit')
       // 获取 历史调查日志 
       this.post('/creTelResearchHis/queryTelLogByPage', {
         applyId: '00542',
@@ -251,21 +250,13 @@ export default {
         //  历史table数据
         this.listData = res.data;
       })
-
-
     },
     append(data) {
       // 点击添加方法,用过 key 来判断 添加的哪项.
       console.log('append');
       console.log(this.id);
-      // alert(this.id);
+      // 点击添加 提交数据 
       this.coverShow = false;
-      // const newChild = { id: id++, label: 'texttext', children: [] };
-      // if (!data.children) {
-      //   this.$set(data, 'children', []);
-      // }
-      // data.children.push(newChild);
-
       this.post('/creTelInfo/addTel', {
         "applyId": '2222',
         "telNum": this.addTelNum,
@@ -277,6 +268,7 @@ export default {
         console.log(res);
 
         if (res.statusCode == '200')
+          // 点击提交之后 重新请求 电话树
           this.fetchData();
       })
 
@@ -292,21 +284,50 @@ export default {
       this.queryTelLogByPage();
     },
     rowClick() {
+      // 历史列表  点击每一行
       console.log('click row')
-      // 点击 住址电话 显示
-      this.addressHisShow = true;
-      this.addressFormShow = false;
-
-      // 点击 单位电话
-      this.companyFormShow = true;
-      this.companyHisShow = false;
+      // 点击行显示
+      // 通过 电话类型来判断 显示哪个表单
+      switch (this.phoneType) {
+        case '01':
+          // 点击 住址电话 显示
+          this.addressHisShow = false;
+          this.addressFormShow = true;
+          break;
+        case '02':
+          // 单位电话
+          this.companyFormShow = false;
+          this.companyHisShow = true;
+          break;
+        case '03':
+          // 家庭联系人
+          this.familyFormShow = false;
+          this.familyHisShow = true;
+          break;
+        case '04':
+          // 紧急联系人
+          this.hurryFormShow = false;
+          this.hurryHisShow = true;
+          break;
+        case '05':
+          // 工作证明人
+          this.workFormShow = false;
+          this.workHisShow = true;
+          break;
+      }
     }
   },
   components: {
     AddressForm,
     AddressHis,
     CompanyForm,
-    CompanyHis
+    CompanyHis,
+    FamilyForm,
+    FamilyHis,
+    HurryForm,
+    HurryHis,
+    WorkForm,
+    WorkHis
   }
 }
 
@@ -331,11 +352,13 @@ el-header {
 
 
 
+
 /* 树形  结构 */
 
 .el-tree {
   padding-left: 10px;
 }
+
 
 
 
@@ -361,12 +384,14 @@ el-header {
 
 
 
+
 /* 三角 icon */
 
 .el-tree-node__expand-icon {
   font-size: 20px;
   /*display: none;*/
 }
+
 
 
 
@@ -390,11 +415,13 @@ el-header {
 
 
 
+
 /* 二级 目录 样式 */
 
 .el-tree-node__content {
   padding-left: 0px !important;
 }
+
 
 
 
@@ -420,6 +447,7 @@ el-header {
 
 
 
+
 /* 点击添加出现的 页面 */
 
 .cover-view {
@@ -430,6 +458,7 @@ el-header {
   top: 0;
   left: 0;
 }
+
 
 
 
@@ -464,11 +493,13 @@ el-header {
 
 
 
+
 /* title */
 
 .cover-content .add-title {
   text-align: left;
 }
+
 
 
 
@@ -506,6 +537,7 @@ el-header {
 
 
 
+
 /* 确定按钮 */
 
 .cover-content .el-button {
@@ -514,6 +546,7 @@ el-header {
   margin-top: 10px;
   margin-right: 10px;
 }
+
 
 
 
@@ -538,6 +571,7 @@ el-header {
 .el-tag .el-icon-close {
   right: 0px;
 }
+
 
 
 
@@ -581,6 +615,7 @@ el-header {
 
 
 
+
 /* 表格分页 */
 
 .el-pagination {
@@ -588,6 +623,7 @@ el-header {
   width: 100%;
   text-align: center;
 }
+
 
 
 
@@ -611,9 +647,11 @@ el-header {
 
 
 
+
 /* 共 100条*/
 
 .el-pagination__total {}
+
 
 
 
@@ -629,6 +667,7 @@ el-header {
   width: 100%;
   height: 100%;
 }
+
 
 
 
