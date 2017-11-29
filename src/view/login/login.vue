@@ -66,7 +66,9 @@ export default {
           const userCode = this.userCode;
           const orgCode = this.orgCode;
           // 
-          this.$router.push({ name: 'workbench', params: { userCode: this.userCode, orgCode: this.orgCode } });
+          // this.$router.push({ name: 'workbench', params: { userCode: this.userCode, orgCode: this.orgCode } });
+
+          this.$router.push({ path: 'workbench', query: { userCode: this.userCode, orgCode: this.orgCode } });
         }
 
       });
