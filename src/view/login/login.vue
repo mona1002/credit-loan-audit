@@ -61,6 +61,8 @@ export default {
           console.log(this.userCode, this.orgCode);
 
 
+          localStorage.setItem("userInf", JSON.stringify(res.data));
+
           const userCode = this.userCode;
           const orgCode = this.orgCode;
           // 
@@ -87,9 +89,6 @@ export default {
 }
 
 
-
-
-
 /* 1366 * 768 */
 
 .login {
@@ -105,21 +104,15 @@ export default {
   margin-top: -265px;
 }
 
-
-.container {
+.login .container {
   width: 100%;
   height: 535px;
 }
 
 
-
-
-
-
-
 /* 左块 区域 */
 
-.bg-left {
+.login .bg-left {
   width: 446px;
   height: 100%;
   background: url("./images/bg-2.png") no-repeat;
@@ -128,17 +121,12 @@ export default {
 }
 
 
-
-
-
-
-
 /* 右块 区域 */
 
 
 /* 右侧 包含 Log*/
 
-.content {
+.login .content {
   width: 530px;
   height: 530px;
   float: left;
@@ -146,14 +134,9 @@ export default {
 }
 
 
-
-
-
-
-
 /* log */
 
-.log {
+.login .log {
   width: 100%;
   height: 56px;
   margin-bottom: 30px;
@@ -161,15 +144,12 @@ export default {
 }
 
 
-
-
-
 /* log-icon */
 
 
 /* 自定义的 icon */
 
-.log-icon {
+.login .log-icon {
   position: relative;
   top: 5px;
   z-index: 99;
@@ -179,14 +159,15 @@ export default {
   background: url("./images/log-1.png") no-repeat 43px;
 }
 
-.log-title {
+.login .log-title {
   width: 385px;
   height: 54px;
   float: right;
   text-align: center;
+  border-left: 1px solid #fff;
 }
 
-.log-title-first {
+.login .log-title-first {
   font-size: 30px;
   vertical-align: middle;
   color: #fff;
@@ -197,7 +178,7 @@ export default {
   font: '微软雅黑', tahoma, arial, '\5b8b\4f53';
 }
 
-.log-title-second {
+.login .log-title-second {
   font-size: 16px;
   color: #fff;
   text-align: left;
@@ -208,14 +189,9 @@ export default {
 }
 
 
-
-
-
-
-
 /* 表单 */
 
-.form-class {
+.login .form-class {
   padding: 40px;
   padding-top: 50px;
   border-radius: 20px;
@@ -225,14 +201,9 @@ export default {
 }
 
 
-
-
-
-
-
 /* 用户名 */
 
-.user-class {
+.login .user-class {
   width: 100%;
   height: 25px;
   line-height: 25px;
@@ -242,14 +213,9 @@ export default {
 }
 
 
-
-
-
-
-
 /* 用户名 输入框 */
 
-.user-input {
+.login .user-input {
   outline: 0px;
   border-radius: 10px;
   border: 0px;
@@ -258,7 +224,7 @@ export default {
   height: 45px;
 }
 
-.password-class {
+.login .password-class {
   width: 100%;
   height: 25px;
   line-height: 25px;
@@ -267,23 +233,19 @@ export default {
   text-indent: 10px;
 }
 
-.password-input {
+.login .password-input {
   width: 100%;
   height: 45px;
   margin-bottom: 75px;
 }
 
-.submit-button {
+.login .submit-button {
   width: 100%;
   height: 60px;
   font-size: 24px;
 }
 
-
-
-
-
-.el-icon-user {
+.login .el-icon-user {
   /* position: relative;
   top: 5px;
   z-index: 99; */
@@ -293,7 +255,7 @@ export default {
   display: inline-block; */
 }
 
-.el-icon-password {
+.login .el-icon-password {
   /* position: relative;
   top: 35px;
   z-index: 99; */
@@ -303,7 +265,7 @@ export default {
   display: inline-block; */
 }
 
-.el-input__inner {
+.login .el-input__inner {
   text-indent: 10px;
   border-radius: 8px;
   border: 3px solid rgb(229, 229, 229);
@@ -311,22 +273,17 @@ export default {
   line-height: 45px;
 }
 
-.el-input__icon {
+.login .el-input__icon {
   line-height: 45px;
 }
 
-.el-input__prefix {
+.login .el-input__prefix {
   width: 40px;
   height: 30px;
   top: 7px;
   left: 2px;
   /* left: 0px !important; */
 }
-
-
-
-
-
 
 
 /* .el-icon-user{
