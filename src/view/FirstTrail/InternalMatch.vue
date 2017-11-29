@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="internalMatch-class">
     <!--     <internal-match-list :title="title1"></internal-match-list>
     <internal-match-list :title="title2"></internal-match-list>
     <internal-match-list :title="title3"></internal-match-list> -->
@@ -7,7 +7,8 @@
       <div class="title-bar">
         {{title1}}
       </div>
-      <el-table :data="mobileData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclick">
+      <!-- 移动电话 -->
+      <el-table :data="mobileData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickMobiel" highlight-current-row v-loading="mobileLoading">
         <el-table-column prop="matchApplyCustName" label="命中号码姓名">
         </el-table-column>
         <el-table-column prop="applyTelTypeTxt" label="电话类型">
@@ -26,15 +27,16 @@
         </el-table-column>
       </el-table>
       <div class="block tool-bar">
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 15, 20]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="mobileData.totalRecord">
+        <el-pagination @size-change="handleSizeChangeMobile" @current-change="handleCurrentChangeMobile" :current-page="MobilePageNum" :page-sizes="[5, 10, 15, 20]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="mobileData.totalRecord">
         </el-pagination>
       </div>
     </div>
+    <!-- 固定电话 -->
     <div>
       <div class="title-bar">
         {{title2}}
       </div>
-      <el-table :data="telData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclick">
+      <el-table :data="fixTelData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickFixTel" highlight-current-row v-loading="fixTelLoading">
         <el-table-column prop="matchApplyCustName" label="命中号码姓名">
         </el-table-column>
         <el-table-column prop="applyTelTypeTxt" label="电话类型">
@@ -53,7 +55,7 @@
         </el-table-column>
       </el-table>
       <div class="block tool-bar">
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="telData.totalRecord">
+        <el-pagination @size-change="handleSizeChangeFixTel" @current-change="handleCurrentChangeFixTel" :current-page="FixTelPageNum" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="fixTelData.totalRecord">
         </el-pagination>
       </div>
     </div>
@@ -61,7 +63,8 @@
       <div class="title-bar">
         {{title3}}
       </div>
-      <el-table :data="workData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclick">
+      <!-- 单位名称 -->
+      <el-table :data="workData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickCompany" highlight-current-row v-loading="companyLoading">
         <el-table-column prop="matchApplyCustName" label="命中号码姓名">
         </el-table-column>
         <el-table-column prop="applyTelTypeTxt" label="电话类型">
@@ -80,7 +83,7 @@
         </el-table-column>
       </el-table>
       <div class="block tool-bar">
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="workData.totalRecord">
+        <el-pagination @size-change="handleSizeChangeCompany" @current-change="handleCurrentChangeCompany" :current-page="CompanyPageNum" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="workData.totalRecord">
         </el-pagination>
       </div>
     </div>
@@ -95,83 +98,119 @@ export default {
       title1: "移动号码类(手机号和联系人)|同事 1380013800 王五{{}}",
       title2: "固定电话类(家电、单电)|单位电话 888-88888888 诺远(住宅电话此项无)",
       title3: "单位名称|诺远 888-8888888",
-      currentPage: 1,
-      currentPageSize: 5,
-      queryData: {
-        pageParam: {
-          pageNum: this.currentPage,
-          pageSize: this.currentPageSize
-        },
-        applySubNo: '111'
-      },
-      mobileData: [],
-      telData: [],
-      workData: []
+      // currentPage: 1,
+      // currentPageSize: 5,
+      mobileData: [], // 移动电话数据
+      fixTelData: [], // 固话数据
+      workData: [], // 单位数据
+      applySubNo: '', // 进件编号
+      workName: '', // 公司名称
+      MobilePageSize: 5, // 移动 每页条数
+      MobilePageNum: 1, // 移动 当前页
+      FixTelPageSize: 5, // 固定电话 每页条数
+      FixTelPageNum: 1, // 固定电话 当前页
+      CompanyPageSize: 5, // 公司电话 每页条数
+      CompanyPageNum: 1, // 公司电话 当前页
+      mobileLoading: true,
+      fixTelLoading: true,
+      companyLoading: true
     };
   },
   created() {
     //   // 组件歘估计完成后获取数据
     //   // 此时 data 已经被 observed 了
-    //   // 移动号码类匹配
-    //   this.fetchData("internalMatch/getInternalMatchListByMobile");
-    //   // 固定电话类匹配
-    //   this.fetchData("internalMatch/getInternalMatchListByFixTel");
-    //   // 单位名称类匹配
-    //   // this.fetchData("internalMatch/getInternalMatchListByWorkName");
 
-    this.fetchData();
+    // 获取到传进来的参数   进件编号
+    this.applySubNo = this.$route.query.applySubNo;
+    console.log(this.applySubNo);
+    // 测试数据
+    this.applySubNo = '111';
+    // 公司名称
+    this.workName = this.$route.query.workName;
+    // 测试数据
+    this.workName = '阿里';
+    this.fetchData('mobile');
+    this.fetchData('fixed');
+    this.fetchData('company');
   },
   methods: {
-    fetchData(url) {
-      // 请求数据 移动号码类匹配
-      var queryData = {
-        pageParam: {
-          pageNum: this.currentPage,
-          pageSize: this.currentPageSize
-        },
-        applySubNo: '111'
-      };
-      var queryData2 = {
-        pageParam: {
-          pageNum: this.currentPage,
-          pageSize: this.currentPageSize
-        },
-        applySubNo: '111',
-        workName:'阿里'
-      };
-
-      // 移动号码类
-      this.post('internalMatch/getInternalMatchListByMobile',queryData).then(res => {
-        this.mobileData = res.data;
-      });
-      // 固定电话类
-      this.post('internalMatch/getInternalMatchListByFixTel', queryData).then(res => {
-        this.telData = res.data;
-      });
-      // 单位名称类
-      this.post('internalMatch/getInternalMatchListByWorkName',queryData2).then(res => {
-        this.workData = res.data;
-      })
-
-
-
-      // axios.all([
-      //   axios.post("internalMatch/getInternalMatchListByMobile"),
-      //   axios.post("internalMatch/getInternalMatchListByFixTel"),
-      //   axios.post("internalMatch/getInternalMatchListByWorkName"),
-      // ]).then(axios.spread(function(mobileData, telData) {
-      //   console.log(mobileData);
-      //   this.mobileData = mobileData.data.recordList;
-      //   console.log(telData);
-      //   this.telData = mobileData.data.recordList;
-      //   console.log(workData);
-      // }));
-
+    /*
+      mobile: 移动电话
+      fixed:  固定电话
+      company:  公司电话
+     */
+    fetchData(type) {
+      // 只做判断分流
+      switch (type) {
+        case 'mobile':
+          this.getListByMobile();
+          break;
+        case 'fixed':
+          this.getListByFixTel();
+          break;
+        case 'company':
+          this.getListByWorkName();
+          break;
+      }
     },
-    itemDbclick(row, event) {
-      // 行被双击 事件
-      console.log('row dbclick');
-      console.log(row.name);
+    getListByMobile() {
+      // 移动号码类
+      this.post('internalMatch/getInternalMatchListByMobile', {
+        pageParam: {
+          pageNum: this.MobilePageNum,
+          pageSize: this.MobilePageSize
+        },
+        applySubNo: this.applySubNo
+      }).then(res => {
+        this.mobileData = res.data;
+        this.mobileLoading = false;
+      });
+    },
+    getListByFixTel() {
+      // 固定电话类
+      this.post('internalMatch/getInternalMatchListByFixTel', {
+        pageParam: {
+          pageNum: this.FixTelPageNum,
+          pageSize: this.FixTelPageSize
+        },
+        applySubNo: this.applySubNo
+      }).then(res => {
+        this.fixTelData = res.data;
+        this.fixTelLoading = false;
+      });
+    },
+    getListByWorkName() {
+      // 单位名称类
+      this.post('internalMatch/getInternalMatchListByWorkName', {
+        pageParam: {
+          pageNum: this.CompanyPageNum,
+          pageSize: this.CompanyPageSize
+        },
+        applySubNo: this.applySubNo,
+        workName: this.workName
+        //this.workName
+      }).then(res => {
+        this.workData = res.data;
+        this.companyLoading = false;
+      })
+    },
+    itemDbclickMobiel(row, event) {
+      // 行被双击 事件  移动电话
+      console.log('mobile row dbclick');
+      console.log(row.id);
+      console.log(row);
+
+      // id: 客户id     orgCate
+    },
+    itemDbclickFixTel(row, event) {
+      // 行被双击 事件  固定电话
+      console.log('fix tel row dbclick');
+      console.log(row.id);
+    },
+    itemDbclickCompany(row, event) {
+      // 行被双击 事件  单位名称
+      console.log('company row dbclick');
+      console.log(row.id);
     },
     // cellHover(row, column, cell, event) {
     //   // cell hover 事件
@@ -183,22 +222,54 @@ export default {
     //   // this.tableData[]
 
     // },
-    handleSizeChange(val) {
-      console.log("每页 ${val}条", val);
+
+    // 移动电话
+    handleSizeChangeMobile(val) {
+      // 每页 10条
+      console.log("移动电话 每页 ${val}条", val);
+      this.MobilePageSize = val;
+      this.fetchData('mobile');
     },
-    handleCurrentChange(val) {
-      console.log("当前页: ${val}", val);
+    handleCurrentChangeMobile(val) {
+      // 第几页
+      console.log("移动电话 当前页: ${val}", val);
+      this.MobilePageNum = val;
+      this.fetchData('mobile');
+    },
+    // 固定电话
+    handleSizeChangeFixTel(val) {
+      // 每页 10条
+      console.log("固定电话 每页 ${val}条", val);
+      this.MobilePageSize = val;
+      this.fetchData('fixed');
+    },
+    handleCurrentChangeFixTel(val) {
+      // 第几页
+      console.log("固定电话 当前页: ${val}", val);
+      this.MobilePageNum = val;
+      this.fetchData('fixed');
+    },
+    // 单位电话
+    handleSizeChangeCompany(val) {
+      // 每页 10条
+      console.log("公司电话 每页 ${val}条", val);
+      this.CompanyPageSize = val;
+      this.fetchData('company');
+    },
+    handleCurrentChangeCompany(val) {
+      // 第几页
+      console.log("公司电话 当前页: ${val}", val);
+      this.CompanyPageNum = val;
+      this.fetchData('company');
     }
   },
   components: {
-
-
     "internal-match-textarea": {
       template: '\
             <el-form label-width="100px" class="demo-ruleForm">\
             <el-form-item label="匹配结论" class="mark-title">\
             </el-form-item>\
-            <el-input type="textarea" v-model="ruleForm.desc" class="mark-textarea" resize="none" :rows="5"></el-input>\
+            <el-input type="textarea" v-model="audit_desc" class="mark-textarea" resize="none" :rows="5"></el-input>\
             <el-form-item class="mark-button">\
                 <el-button type="primary" @click="submitForm()">确认</el-button>\
             </el-form-item>\
@@ -209,22 +280,49 @@ export default {
           mark: "",
           ruleForm: {
             type: []
-          }
+          },
+          applyId: '', // 申请单id
+          audit_desc: '', //匹配结论
+          creator_code: '' // 用户操作人编码 userCode
         };
+      },
+      created() {
+        // 获取到传进来的  applyId 申请单id
+        this.applyId = this.$route.query.applyId;
+        // 获取传进来的 操作人用户编码
+        this.creator_code = this.$route.query.userCode;
+        // 测试数据
+        this.applyId = '111';
+        this.creator_code = 'ddyy';
       },
       methods: {
         submitForm: function() {
           console.log('click button')
-          // 提交 互动信审
-          this.post('internalMatch/addInternalMatchOption',{
+          console.log('this.applyId:', this.applyId);
+          console.log('this.creator_code:', this.creator_code);
+          console.log('this.audit_desc:', this.audit_desc);
+          // 提交 匹配结论
+          this.post('internalMatch/addInternalMatchOption', {
             // 申请单id
-            applyId:'',
-            // 匹配结论
-            audit_desc:'',
+            applyId: this.applyId,
             // 操作人用户编码  userCode
-            creator_code:''
-          }).then( res => {
+            creator_code: this.creator_code,
+            // 匹配结论
+            audit_desc: this.audit_desc
+          }).then(res => {
             console.log(res);
+
+            if (res.statusCode == '200') {
+              this.$message({
+                message: '恭喜你，提交成功!',
+                type: 'success'
+              });
+            } else {
+              this.$message({
+                message: '提交失败,请重试!',
+                type: 'warning'
+              });
+            }
           })
         }
       }
@@ -236,100 +334,70 @@ export default {
 <style lang="css">
 /* 表头 */
 
-.title-bar {
+.internalMatch-class .title-bar {
   width: 100%;
   height: 50px;
   line-height: 50px;
 }
 
 
-
-
-
-
-
 /* 分页 */
 
-.tool-bar {
+.internalMatch-class .tool-bar {
   width: 100%;
   text-align: center;
   padding: 10px 0 0 10px;
 }
 
 
-
-
-
-
-
 /* 匹配结论 */
 
-.mark-title {
+.internalMatch-class .mark-title {
   width: 100%;
   margin: 0;
 }
 
-.mark-title label {
+.internalMatch-class .mark-title label {
   text-align: left;
 }
 
-.mark-textarea {
+.internalMatch-class .mark-textarea {
   margin: 10px;
   width: 98.5%;
 }
 
-.mark-textarea textarea {
+.internalMatch-class .mark-textarea textarea {
   min-height: 100px;
   max-height: 100px;
 }
 
 
-
-
-
-
-
 /* 确认按钮 */
 
-.mark-button {
+.internalMatch-class .mark-button {
   text-align: right;
   margin-right: 0px;
   margin-top: 20px;
 }
 
 
-
-
-
-
-
 /* 行高 */
 
-thead tr {
+.internalMatch-class thead tr {
   height: 40px;
 }
 
 
-
-
-
-
-
 /* 表头 header 颜色 */
 
-.el-table thead tr {
+.internalMatch-class .el-table thead tr {
   background-color: #f5f7fa;
 }
 
 
-
-
-
-
-
 /* 备注 width*/
 
-.mark-cell {
+.internalMatch-class .mark-cell {
   overflow: hidden;
   overflow-wrap: break-word;
 }
