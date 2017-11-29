@@ -1,75 +1,84 @@
 <!-- 电话征信 - 住址电话 历史 -->
 <template>
   <div>
-    <el-form ref="form" :model="form" label-width="80px">
+    <el-form ref="form" label-width="80px">
       <div class="address-title">
         新增调查日志
       </div>
       <el-form-item label="客户名称:" class="item-column3">
         <!-- <el-label v-model="form.name">531531</el-label> -->
-        <div v-model="form.name">
-          5315151
+        <div>
+          {{mobileData.custName}}
         </div>
       </el-form-item>
       <el-form-item label="电话类型:" class="item-column3">
-        <el-label v-model="form.name">531531</el-label>
+        {{mobileData.phoneType}}
       </el-form-item>
       <el-form-item label="电话号码:" class="item-column3">
-        <el-label v-model="form.name">531531</el-label>
+        {{mobileData.phoneNum}}
       </el-form-item>
       <el-form-item label="来源:" class="item-column3">
-        <el-label v-model="form.name">531531</el-label>
+        {{mobileData.source}}
       </el-form-item>
       <el-form-item label="接听情况:" class="item-column3">
-        <el-label v-model="form.name">531531</el-label>
+        {{mobileData.answer}}
       </el-form-item>
       <el-form-item label="调查情况:" class="item-column3">
-        <el-label v-model="form.name">531531</el-label>
+        {{mobileData.checkStage}}
       </el-form-item>
       <div class="address-title">
-        录入地址电话调查信息
+        录入住址电话调查信息
       </div>
       <el-form-item label="第三方查询结果">
-        <el-label v-model="form.name">531531</el-label>
+        {{mobileData.thirdResult}}
       </el-form-item>
       <el-form-item label="三方查询是否异常:">
-        <el-label v-model="form.name">531531</el-label>
+        {{mobileData.threeQueriestxt}}
       </el-form-item>
       <el-form-item label="是否与家庭联系人为同一接听人:">
-        <el-label v-model="form.name">531531</el-label>
+        {{mobileData.issameFamtxt}}
       </el-form-item>
       <el-form-item label="与借款人关系:">
-        <el-label v-model="form.name">531531</el-label>
+        {{mobileData.relBorrowertxt}}
       </el-form-item>
       <el-form-item label="核对工作情况:">
-        <el-label v-model="form.name">531531</el-label>
+        {{mobileData.checkWorktxt}}
+      </el-form-item>
+      <el-form-item label="核对婚姻情况:" class="item-column2">
+        {{mobileData.maritalStatustxt}}
+      </el-form-item>
+      <el-form-item label="核对子女情况:" class="item-column2">
+        {{mobileData.childrenStatustxt}}
+      </el-form-item>
+      <el-form-item label="核对地址:">
+        {{mobileData.checkAddrtxt}}
       </el-form-item>
       <el-form-item label="核对房产:">
-        <el-label v-model="form.name">531531</el-label>
+        {{mobileData.checkEstatetxt}}
       </el-form-item>
       <el-form-item label="其他收入:">
-        <el-label v-model="form.name">531531</el-label>
+        {{mobileData.otherIncometxt}}
       </el-form-item>
       <el-form-item label="近期大项开销:">
-        <el-label v-model="form.name">531531</el-label>
+        {{mobileData.recentlArgespendInfo}}
       </el-form-item>
       <el-form-item label="父母:" class="item-column2">
-        <el-label v-model="form.name">531531</el-label>
+        {{mobileData.parentsInfo}}
       </el-form-item>
       <el-form-item label="兄弟姐妹:" class="item-column2">
-        <el-label v-model="form.name">531531</el-label>
+        {{mobileData.brothertxt}}
       </el-form-item>
       <el-form-item label="支付家庭生活费用:" class="item-column2">
-        <el-label v-model="form.name">531531</el-label>
+        {{mobileData.expensestxt}}
       </el-form-item>
       <el-form-item label="核对家庭固话:" class="item-column2">
-        <el-label v-model="form.name">531531</el-label>
+        {{mobileData.checkHometeltxt}}
       </el-form-item>
       <el-form-item label="借款人爱好和品行:">
-        <el-label v-model="form.name">531531</el-label>
+        {{mobileData.hobbyandBehave}}
       </el-form-item>
       <el-form-item label="调查结论:">
-        <el-label v-model="form.name">531531</el-label>
+        {{mobileData.conclusion}}
       </el-form-item>
     </el-form>
   </div>
@@ -78,47 +87,23 @@
 export default {
   data() {
     return {
-      form: {
-        phoneTypes: [{
-            value: '住址电话',
-            label: '住址电话'
-          },
-          {
-            value: '单位电话',
-            label: '单位电话',
-            disabled: true
-          },
-          {
-            value: '家庭联系人',
-            label: '家庭联系人',
-            disabled: true
-          },
-          {
-            value: '紧急联系人',
-            label: '紧急联系人',
-            disabled: true
-          },
-          {
-            value: '工作证明人',
-            label: '工作证明人',
-            disabled: true
-          }
-        ],
-        phoneType: '',
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
-      }
+      id:'',  // 住宅电话调查日志记录 id
+      phoneType:'', // 电话类型
+      mobileData:'' // 请求返回的数据
     }
   },
+  created() {
+    this.queryHomeTel();
+  },
   methods: {
-    submitForm() {
-      console.log('submit!');
+    queryHomeTel(){
+      this.post('creTelResearchHis/queryHomeTel',{
+        id:this.id,
+        phoneType:this.phoneType
+      }).then( res => {
+        console.log(res);
+        this.mobileData = res.data;
+      })
     }
   }
 }
