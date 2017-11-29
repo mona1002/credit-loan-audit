@@ -402,4 +402,8 @@ export default {
   overflow-wrap: break-word;
 }
 
+/* tr */
+.internalMatch-class .el-table tr{
+  /*height: 67px;*/
+}
 </style>
