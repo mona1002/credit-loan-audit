@@ -131,7 +131,7 @@
 					</li>
 					<li>
 						<label>证件号码：</label>
-						<span>{{accepCusBasicInfo.certCode}}</span>
+						<span>{{accepCusBasicInfo.proName}}</span>
 					</li>
 					<li>
 						<label style="float:left">年龄：</label>
@@ -818,7 +818,19 @@
 		        }else if(this.datas.dataSource=='5'){
 		            this.datas.dataSource="APP";
 		        };
+		        var query={
+		        	appType:this.datas.appType,
+		        	appTypeTxt:this.datas.appTypeTxt,
+		        	certType:this.accepCusBasicInfo.certType,
+		        	certTypeTxt:this.accepCusBasicInfo.certTypeTxt,
+		        	certCode:this.accepCusBasicInfo.certCode,
+		        	proName:this.datas.proName,
+		        	loanTerm:this.accepApplyLoan.loanTerm,
+		        	applyMainNo:this.datas.applyMainNo,
+		        	applySubNo:this.datas.applySubNo
+		        };
 		        /*console.log(this.datas);*/
+		        localStorage.setItem("applicationInformationDetail",JSON.stringify(query));
 			    });
 			},
 		 	handleChange(){
