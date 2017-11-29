@@ -61,13 +61,13 @@ td {
 
 /* 折叠面板头部背景色 */
 
-/* .el-collapse-item__header {
+.el-collapse-item__header {
   background-color: #ccc;
   font-size: 14px;
   padding-left: 10px;
   height: 40px;
   line-height: 40px;
-} */
+}
 
 .el-collapse-item__header .el-collapse-item__arrow {
   line-height: 40px;
@@ -298,7 +298,6 @@ td {
 }
 .borrowerInformation .el-input__inner {
   height: 30px;
-  border: 1px solid rgb(229,229,229);
   border-radius: 4px;
 }
 
@@ -313,12 +312,10 @@ td {
 }
 .applicationInformation .el-date-editor.el-input, .el-date-editor.el-input__inner{
   width: 180px;
-  border: 1px solid rgb(229,229,229);
   border-radius: 4px;
 }
 .applicationInformation .el-input__inner {
   height: 30px;
-  border: 1px solid rgb(229,229,229);
   border-radius: 4px;
 }
 
@@ -351,6 +348,5 @@ td {
 /* 信审任务列表 */
 .taskWinput .el-input__inner {
   height: 30px;
-  border: 1px solid rgb(229,229,229);
   border-radius: 4px;
 }

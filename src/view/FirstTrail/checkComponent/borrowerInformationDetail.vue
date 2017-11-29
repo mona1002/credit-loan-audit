@@ -1,10 +1,10 @@
 <!-- 借款人资料详情 -->
 <template>
-	<div class="borrowerInformation">
+	<div class="borrowerInformationSetail">
 		<el-collapse v-model="activeNames" @change="handleChange">
 			<el-collapse-item title="房产信息" name="1">
 			    <el-table
-			      :data="datas.borestateList"
+			      :data="borestateList"
 			      style="width: 100%">
 				      <el-table-column
 				        type="index"
@@ -27,10 +27,10 @@
 				        prop="unitPrice"
 				        label="建筑单价[元]">
 				      </el-table-column>
-				      <!-- <el-table-column
-				        prop=" "
+				      <el-table-column
+				        prop="estateAddress"
 				        label="房产地址">
-				      </el-table-column> -->
+				      </el-table-column>
 				      <el-table-column
 				        prop="estateZip"
 				        label="邮政编码">
@@ -39,10 +39,6 @@
 				        prop="equityRatio"
 				        label="产权比例">
 				      </el-table-column>
-				      <!-- <el-table-column
-				        prop=" "
-				        label="产权性质">
-				      </el-table-column> -->
 				      <el-table-column
 				        prop="loanPeriod"
 				        label="贷款期限[月]">
@@ -63,7 +59,7 @@
 		  	</el-collapse-item>
 		  	<el-collapse-item title="车辆信息" name="2">
 			    <el-table
-			      :data="datas.carInfoList"
+			      :data="carInfoList"
 			      style="width: 100%">
 				      <el-table-column
 				        type="index"
@@ -118,7 +114,7 @@
 		  	</el-collapse-item>
 		  	<el-collapse-item title="信用卡使用明细" name="3">
 			    <el-table
-			      :data="datas.cardDetList"
+			      :data="cardDetList"
 			      style="width: 100%">
 				      <el-table-column
 				        type="index"
@@ -146,11 +142,11 @@
 				        label="还款日">
 				      </el-table-column>
 				      <el-table-column
-				        prop="realRepaymentAmt"
+				        prop="actRepaymentAmt"
 				        label="本期应还款金额">
 				      </el-table-column>
 				      <el-table-column
-				        prop="actRepaymentAmt"
+				        prop="realRepaymentAmt"
 				        label="本期实际还款金额">
 				      </el-table-column>
 				      <el-table-column
@@ -178,24 +174,24 @@
 		  	<el-collapse-item title="信用卡使用总况" name="4">
 		  		<div class="xinyongka">
 		  			<ul>
-				    	<li><label>信用卡张数：</label><el-input v-model="datas.borCard.cardCount"></el-input></li>
-				    	<li><label>正常使用张数：</label><el-input v-model="datas.borCard.normalCount"></el-input></li>
-				    	<li><label>呆帐数量：</label><el-input v-model="datas.borCard.badDebtCount"></el-input></li>
+				    	<li><label>信用卡张数：</label><el-input v-model="borCard.cardCount"></el-input></li>
+				    	<li><label>正常使用张数：</label><el-input v-model="borCard.normalCount"></el-input></li>
+				    	<li><label>呆帐数量：</label><el-input v-model="borCard.badDebtCount"></el-input></li>
 				    </ul>
 				    <ul>
-				    	<li><label>未开卡张数：</label><el-input v-model="datas.borCard.nouseCount"></el-input></li>
-				    	<li><label>冻结数量：</label><el-input v-model="datas.borCard.freezeCount"></el-input></li>
-				    	<li><label>销户数量：</label><el-input v-model="datas.borCard.cancelCount"></el-input></li>
+				    	<li><label>未开卡张数：</label><el-input v-model="borCard.nouseCount"></el-input></li>
+				    	<li><label>冻结数量：</label><el-input v-model="borCard.freezeCount"></el-input></li>
+				    	<li><label>销户数量：</label><el-input v-model="borCard.cancelCount"></el-input></li>
 				    </ul>
 				    <ul>
-				    	<li><label>已使用张数：</label><el-input v-model="datas.borCard.userdCount"></el-input></li>
-				    	<li><label>止付数量：</label><el-input v-model="datas.borCard.stopPaymentCount"></el-input></li>
+				    	<li><label>已使用张数：</label><el-input v-model="borCard.userdCount"></el-input></li>
+				    	<li><label>止付数量：</label><el-input v-model="borCard.stopPaymentCount"></el-input></li>
 				    </ul>
 		  		</div> 
 		  	</el-collapse-item>
 		  	<el-collapse-item title="贷款明细" name="5">
 			    <el-table
-			      :data="datas.loanDetailList"
+			      :data="loanDetailList"
 			      style="width: 100%">
 				      <el-table-column
 				        type="index"
@@ -206,10 +202,10 @@
 				        prop="loanType"
 				        label="贷款种类">
 				      </el-table-column>
-				      <!-- <el-table-column
-				        prop=" "
+				      <el-table-column
+				        prop="guaranteeType"
 				        label="担保方式">
-				      </el-table-column> -->
+				      </el-table-column>
 				      <el-table-column
 				        prop="accountStatus"
 				        label="账户状态">
@@ -246,10 +242,10 @@
 				        prop="presentRepayAmt"
 				        label="本期应还款金额[元]">
 				      </el-table-column>
-				      <!-- <el-table-column
-				        prop=" "
+				      <el-table-column
+				        prop="curMonthRepayAmt"
 				        label="本期实际还款金额[元]">
-				      </el-table-column> -->
+				      </el-table-column>
 				      <el-table-column
 				        prop="lastRepayDate"
 				        label="最后一次还款日期">
@@ -271,60 +267,60 @@
 		  	<el-collapse-item title="贷款总况" name="6">
 		  		<div class="xinyongka daikuanzongkuang">
 		  			<ul>
-				    	<li><label>车贷共有笔数:</label><p>{{datas.loanInfo.carLoanTotal}}</p></li>
-				    	<li><label>信用贷总笔数:</label><p>{{datas.loanInfo.studentLoanTotal}}</p></li>
-				    	<li><label>房贷总笔数:</label><p>{{datas.loanInfo.houseLoanTotal}}</p></li>
-				    	<li><label>其他贷款总笔数:</label><p>{{datas.loanInfo.otherLoanTotal}}</p></li>
+				    	<li><label>车贷共有笔数:</label><p>{{loanInfo.carLoanTotal}}</p></li>
+				    	<li><label>信用贷总笔数:</label><p>{{loanInfo.studentLoanTotal}}</p></li>
+				    	<li><label>房贷总笔数:</label><p>{{loanInfo.houseLoanTotal}}</p></li>
+				    	<li><label>其他贷款总笔数:</label><p>{{loanInfo.otherLoanTotal}}</p></li>
 				    </ul>
 				    <ul>
-				    	<li><label>车贷现存笔数:</label><p>{{datas.loanInfo.carLoanNoPayoff}}</p></li>
-				    	<li><label>信用贷现存笔数:</label><p>{{datas.loanInfo.studentLoanNoPayoff}}</p></li>
-				    	<li><label>房贷现存笔数:</label><p>{{datas.loanInfo.houseLoanNoPayoff}}</p></li>
-				    	<li><label>其他贷现存笔数:</label><p>{{datas.loanInfo.otherLoanNoPayoff}}</p></li>
+				    	<li><label>车贷现存笔数:</label><p>{{loanInfo.carLoanNoPayoff}}</p></li>
+				    	<li><label>信用贷现存笔数:</label><p>{{loanInfo.studentLoanNoPayoff}}</p></li>
+				    	<li><label>房贷现存笔数:</label><p>{{loanInfo.houseLoanNoPayoff}}</p></li>
+				    	<li><label>其他贷现存笔数:</label><p>{{loanInfo.otherLoanNoPayoff}}</p></li>
 				    </ul>
 				    <ul>
-				    	<li><label>车贷结清笔数:</label><p>{{datas.loanInfo.carLoanPayoff}}</p></li>
-				    	<li><label>信用贷结清笔数:</label><p>{{datas.loanInfo.studentLoanPayoff}}</p></li>
-				    	<li><label>房贷结清笔数:</label><p>{{datas.loanInfo.houseLoanPayoff}}</p></li>
-				    	<li><label>其他贷款结清笔数:</label><p>{{datas.loanInfo.otherLoanPayoff}}</p></li>
+				    	<li><label>车贷结清笔数:</label><p>{{loanInfo.carLoanPayoff}}</p></li>
+				    	<li><label>信用贷结清笔数:</label><p>{{loanInfo.studentLoanPayoff}}</p></li>
+				    	<li><label>房贷结清笔数:</label><p>{{loanInfo.houseLoanPayoff}}</p></li>
+				    	<li><label>其他贷款结清笔数:</label><p>{{loanInfo.otherLoanPayoff}}</p></li>
 				    </ul>
 		  		</div> 
 		  	</el-collapse-item>
 		  	<el-collapse-item title="负债信息" name="7">
 		  		<div class="fuzhaixinxi">
 		  			<ol>
-				    	<li><label>信用卡每月还款[元]:</label><el-input v-model="datas.borDebt.monthRepayAmt"></el-input></li>
-				    	<li><label>信用贷每月还款额[元]:</label><el-input v-model="datas.borDebt.studentLoanAmt"></el-input></li>
-				    	<li><label>房贷每月还款额[元]:</label><el-input v-model="datas.borDebt.houseLoanAmt"></el-input></li>
+				    	<li><label>信用卡每月还款[元]:</label><el-input v-model="borDebt.monthRepayAmt"></el-input></li>
+				    	<li><label>信用贷每月还款额[元]:</label><el-input v-model="borDebt.studentLoanAmt"></el-input></li>
+				    	<li><label>房贷每月还款额[元]:</label><el-input v-model="borDebt.houseLoanAmt"></el-input></li>
 				    </ol>
 				    <ol>
-				    	<li><label>车贷每月还款额[元]:</label><el-input v-model="datas.borDebt.carLoanAmt"></el-input></li>
-				    	<li><label>其他贷款每月还款额[元]:</label><el-input v-model="datas.borDebt.otherLoanAmt"></el-input></li>
-				    	<li class="zongji"><label>负债合计[元]:</label><el-input v-model="datas.borDebt.totalLoan"></el-input></li>
+				    	<li><label>车贷每月还款额[元]:</label><el-input v-model="borDebt.carLoanAmt"></el-input></li>
+				    	<li><label>其他贷款每月还款额[元]:</label><el-input v-model="borDebt.otherLoanAmt"></el-input></li>
+				    	<li class="zongji"><label>负债合计[元]:</label><el-input v-model="borDebt.totalLoan"></el-input></li>
 				    </ol>
 				    <ol class="num">
-				    	<li><label>最近三个月信用卡/贷款申请次数:</label><el-input v-model="datas.borDebt.loanNumber"></el-input></li>
-				    	<li><label>文字说明:</label><div><textarea>{{datas.borDebt.remark}}</textarea></div></li>
+				    	<li><label>最近三个月信用卡/贷款申请次数:</label><el-input v-model="borDebt.loanNumber"></el-input></li>
+				    	<li><label>文字说明:</label><div><textarea>{{borDebt.remark}}</textarea></div></li>
 				    </ol>
 		  		</div> 
 		  	</el-collapse-item>
 		  	<el-collapse-item title="征询报告" name="8">
 		  		<div class="fuzhaixinxi zhengxunbaogao">
 		  			<ol>
-				    	<li><label>报告来源:</label><el-input v-model="datas.rptInfo.crSource"></el-input></li>
+				    	<li><label>报告来源:</label><el-input v-model="rptInfo.crSource"></el-input></li>
 					    <li><label>有无征信报告查询记录:</label>
-					    	<el-input v-model="datas.rptInfo.crHasRecord"></el-input>
+					    	<el-input v-model="rptInfo.crHasRecord"></el-input>
 						</li>
-				    	<li><label>近6个月内信用报告查询次数:</label><el-input v-model="datas.rptInfo.crRecordTimes"></el-input></li>
+				    	<li><label>近6个月内信用报告查询次数:</label><el-input v-model="rptInfo.crRecordTimes"></el-input></li>
 				    </ol>
 				    <ol>
-				    	<li><label>报告描述:</label><div><textarea>{{datas.rptInfo.crContent}}</textarea></div></li>
+				    	<li><label>报告描述:</label><div><textarea>{{rptInfo.crContent}}</textarea></div></li>
 				    </ol>
 		  		</div> 
 		  	</el-collapse-item>
 		  	<el-collapse-item title="流水明细" name="9">
 			    <el-table
-			      :data="datas.incomeList"
+			      :data="incomeList"
 			      style="width: 100%">
 				      <el-table-column
 				        type="index"
@@ -372,7 +368,7 @@
 		  	<el-collapse-item title="其他信息" name="10">
 		  		<div class="qita">
 				    <ol>
-				    	<li><label>其他:</label><div><textarea>{{datas.otherInfo.content}}</textarea></div></li>
+				    	<li><label>其他:</label><div><textarea>{{otherInfo.content}}</textarea></div></li>
 				    </ol>
 		  		</div> 
 		  	</el-collapse-item>
@@ -385,6 +381,26 @@
 	      return {
 	        activeNames: ['1','2','3','4','5','6','7','8','9','10'],
 	        datas:[],
+	        /*房产信息*/
+	        borestateList:[],
+	        /*车辆信息*/
+	        carInfoList:[],
+	        /*信用卡使用明细*/
+	        cardDetList:[],
+	        /*信用卡使用总况*/
+	        borCard:'',
+	        /*贷款明细*/
+	        loanDetailList:[],
+	        /*贷款总况*/
+	        loanInfo:'',
+	        /*负债信息*/
+	        borDebt:'',
+	        /*征询报告*/
+	        rptInfo:'',
+	        /*流水明细*/
+	        incomeList:[],
+	        /*其他信息*/
+	        otherInfo:'',
 	      };
 	    },
 	    created(){
@@ -400,7 +416,26 @@
 		        'applyId':'00542'
 		      }).then(res => {
 		        /*console.log(res);*/
-		        this.datas=res.data;
+		        /*房产信息*/
+		        this.borestateList=res.data.borestateList;
+		        /*车辆信息*/
+		        this.carInfoList=res.data.carInfoList;
+		        /*信用卡使用明细*/
+		        this.cardDetList=res.data.cardDetList;
+		        /*信用卡使用总况*/
+		        this.borCard=res.data.borCard;
+		        /*贷款明细*/
+		        this.loanDetailList=res.data.loanDetailList;
+		        /*贷款总况*/
+		        this.loanInfo=res.data.loanInfo;
+		        /*负债信息*/
+		        this.borDebt=res.data.borDebt;
+		        /*征询报告*/
+		        this.rptInfo=res.data.rptInfo;
+		        /*流水明细*/
+		        this.incomeList=res.data.incomeList;
+		        /*其他信息*/
+		        this.otherInfo=res.data.otherInfo;
 		        /*console.log(this.datas);*/
 		      });
 		  },

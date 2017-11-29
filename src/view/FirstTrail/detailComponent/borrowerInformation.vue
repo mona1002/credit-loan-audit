@@ -1,4 +1,4 @@
-<!-- 借款人资料
+<!-- 借款人资料 -->
 <template>
 	<div class="borrowerInformation">
 		<el-collapse v-model="activeNames" @change="handleChange">
@@ -27,10 +27,10 @@
 				        prop="unitPrice"
 				        label="建筑单价[元]">
 				      </el-table-column>
-				      <el-table-column
+				      <!-- <el-table-column
 				        prop=" "
 				        label="房产地址">
-				      </el-table-column>
+				      </el-table-column> -->
 				      <el-table-column
 				        prop="estateZip"
 				        label="邮政编码">
@@ -39,10 +39,10 @@
 				        prop="equityRatio"
 				        label="产权比例">
 				      </el-table-column>
-				      <el-table-column
+				      <!-- <el-table-column
 				        prop=" "
 				        label="产权性质">
-				      </el-table-column>
+				      </el-table-column> -->
 				      <el-table-column
 				        prop="loanPeriod"
 				        label="贷款期限[月]">
@@ -206,10 +206,10 @@
 				        prop="loanType"
 				        label="贷款种类">
 				      </el-table-column>
-				      <el-table-column
+				      <!-- <el-table-column
 				        prop=" "
 				        label="担保方式">
-				      </el-table-column>
+				      </el-table-column> -->
 				      <el-table-column
 				        prop="accountStatus"
 				        label="账户状态">
@@ -246,10 +246,10 @@
 				        prop="presentRepayAmt"
 				        label="本期应还款金额[元]">
 				      </el-table-column>
-				      <el-table-column
+				      <!-- <el-table-column
 				        prop=" "
 				        label="本期实际还款金额[元]">
-				      </el-table-column>
+				      </el-table-column> -->
 				      <el-table-column
 				        prop="lastRepayDate"
 				        label="最后一次还款日期">
@@ -359,10 +359,10 @@
 				        prop="n5"
 				        label="N-5">
 				      </el-table-column>
-				      <el-table-column
+				      <!-- <el-table-column
 				        prop="address"
 				        label="计算">
-				      </el-table-column>
+				      </el-table-column> -->
 				      <el-table-column
 				        prop="avgIncome"
 				        label="平均收入[元]">
@@ -628,4 +628,4 @@ ol.num li:nth-of-type(2) div{
 	height: 200px;
 	border: 1px solid #d8dce5;  
 }
-</style> -->
+</style>

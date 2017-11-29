@@ -1053,7 +1053,6 @@
 	</div>
 </template>
 <script type="text/javascript">
-import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
 	export default{
 		data(){
 			return{
@@ -1821,9 +1820,9 @@ import CrossRable from '@/view/FirstTrail/detailComponent/CrossRable'
 				/*document.getElementsByTagName('body')[0].style.overflow='';*/
 			},
 		},
-		components: {
+		/*components: {
 		    CrossRable
-		},
+		},*/
 	}
 </script>
 <style type="text/css" scoped>
