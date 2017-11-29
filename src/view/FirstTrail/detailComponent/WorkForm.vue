@@ -6,72 +6,69 @@
         新增调查日志
       </div>
       <el-form-item label="客户名称:" class="item-column3">
-        <el-input v-model="form.name"></el-input>
+        {{form.custName}}
       </el-form-item>
       <el-form-item label="电话类型:" class="item-column3">
-        <el-select v-model="form.region" placeholder="请选择电话类型">
-          <el-option label="住址电话" value="shanghai"></el-option>
+        <el-select v-model="form.phoneType" placeholder="请选择电话类型">
+          <el-option label="工作证明人" value="05"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="电话号码:" class="item-column3">
-        <el-input v-model="form.name"></el-input>
+        {{form.phoneNum}}
       </el-form-item>
       <!-- <el-form-item label="电话号码" class="item-column3">
         <el-form-item label="13103582965"></el-form-item>
       </el-form-item> -->
       <el-form-item label="来源:" class="item-column3">
-        <el-select v-model="form.region" placeholder="请选择来源">
-          <el-option label="申请表" value="shanghai"></el-option>
-          <el-option label="第三方查询" value="beijing"></el-option>
-          <el-option label="其他" value="beijing"></el-option>
+        <el-select v-model="form.source" placeholder="请选择来源">
+          <el-option label="申请表" value="00"></el-option>
+          <el-option label="第三方查询" value="01"></el-option>
+          <el-option label="其他" value="02"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="接听情况:" class="item-column3">
-        <el-select v-model="form.region" placeholder="请选择接听情况">
-          <el-option label="无人接" value="shanghai"></el-option>
-          <el-option label="拒接" value="beijing"></el-option>
-          <el-option label="停机" value="beijing"></el-option>
-          <el-option label="空号" value="beijing"></el-option>
-          <el-option label="接通" value="beijing"></el-option>
+        <el-select v-model="form.answer" placeholder="请选择接听情况">
+          <el-option label="无人接" value="00"></el-option>
+          <el-option label="拒接" value="01"></el-option>
+          <el-option label="停机" value="02"></el-option>
+          <el-option label="空号" value="03"></el-option>
+          <el-option label="接通" value="04"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="调查阶段:" class="item-column3">
-        <el-select v-model="form.region" placeholder="请选择调查阶段">
-          <el-option label="正则调查" value="shanghai"></el-option>
-          <el-option label="完成调查" value="beijing"></el-option>
-          <el-option label="调查失败" value="beijing"></el-option>
-          <el-option label="未调查" value="beijing"></el-option>
+        <el-select v-model="form.checkStage" placeholder="请选择调查阶段">
+          <el-option label="正在调查" value="00"></el-option>
+          <el-option label="完成调查" value="01"></el-option>
+          <el-option label="调查失败" value="02"></el-option>
+          <el-option label="未调查" value="03"></el-option>
         </el-select>
       </el-form-item>
       <div class="address-title">
         录入工作证明人调查信息
       </div>
       <el-form-item label="微信/支付宝是否异常:">
-        <el-select v-model="form.region" placeholder="请选择调查情况">
-          <el-option label="区域一" value="shanghai"></el-option>
-          <el-option label="区域二" value="beijing"></el-option>
+        <el-select v-model="form.mobilepayment" placeholder="请选择调查情况">
+          <el-option label="否" value="00"></el-option>
+          <el-option label="是" value="01"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="异常项说明:">
-        <el-select v-model="form.region" placeholder="请选择调查情况">
-          <el-option label="区域一" value="shanghai"></el-option>
-          <el-option label="区域二" value="beijing"></el-option>
-        </el-select>
+        <el-input v-model="form.exceptionremark"></el-input>
       </el-form-item>
       <el-form-item label="接电话人身份:">
-        <el-select v-model="form.region" placeholder="请选择调查情况">
-          <el-option label="区域一" value="shanghai"></el-option>
-          <el-option label="区域二" value="beijing"></el-option>
+        <el-select v-model="form.answerIdentity" placeholder="请选择调查情况">
+          <el-option label="同事" value="00"></el-option>
+          <el-option label="本人" value="01"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="核对单位工作情况:">
-        <el-select v-model="form.region" placeholder="请选择调查情况">
-          <el-option label="区域一" value="shanghai"></el-option>
-          <el-option label="区域二" value="beijing"></el-option>
+        <el-select v-model="form.checkJob" placeholder="请选择调查情况">
+          <el-option label="一致" value="00"></el-option>
+          <el-option label="不一致" value="01"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="调查结论:">
-        <el-input type="textarea" v-model="form.region"></el-input>
+        <el-input type="textarea" v-model="form.conclusion"></el-input>
       </el-form-item>
       <el-form-item class="address-submit">
         <el-button type="primary" @click="submitForm('form')">确定</el-button>
@@ -84,47 +81,31 @@ export default {
   data() {
     return {
       form: {
-        phoneTypes: [{
-            value: '住址电话',
-            label: '住址电话'
-          },
-          {
-            value: '单位电话',
-            label: '单位电话',
-            disabled: true
-          },
-          {
-            value: '家庭联系人',
-            label: '家庭联系人',
-            disabled: true
-          },
-          {
-            value: '紧急联系人',
-            label: '紧急联系人',
-            disabled: true
-          },
-          {
-            value: '工作证明人',
-            label: '工作证明人',
-            disabled: true
-          }
-        ],
-        phoneType: '',
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: '',
-        phone: 1310358254
+        custName: '', // 客户姓名
+        phoneType: '', // 电话类型
+        phoneNum: '', // 电话号码
+        source: '', // 来源
+        answer: '', // 接听情况
+        checkStage: '', // 调查阶段
+        mobilepayment: '', // 微信/支付宝是否异常
+        exceptionremark: '', // 异常项说明
+        answerIdentity: '', // 接电话人身份
+        checkJob: '', // 核对单位工作情况
+        conclusion: '' // 调查结论
       }
     }
+  },
+  created() {
+    this.form.custName = '';
+    this.form.phoneNum = '';
   },
   methods: {
     submitForm() {
       console.log('submit!');
+      this.post('/creTelResearchHis/addTeljobref', this.form)
+        .then(res => {
+          console.log(res);
+        })
     }
   }
 }
@@ -155,6 +136,7 @@ export default {
 
 
 
+
 /* */
 
 .el-form-item__label {
@@ -164,6 +146,7 @@ export default {
 .el-form-item {
   margin-bottom: 0;
 }
+
 
 
 
@@ -192,6 +175,7 @@ export default {
 
 
 
+
 /* 两列 */
 
 .item-column2 {
@@ -199,6 +183,7 @@ export default {
   float: left;
   margin: 0;
 }
+
 
 
 

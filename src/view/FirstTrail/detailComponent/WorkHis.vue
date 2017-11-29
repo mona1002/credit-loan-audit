@@ -6,43 +6,40 @@
         新增调查日志
       </div>
       <el-form-item label="客户名称:" class="item-column3">
-        <!-- <el-label v-model="form.name">531531</el-label> -->
-        <div v-model="form.name">
-          5315151
-        </div>
+        {{workData.custName}}
       </el-form-item>
       <el-form-item label="电话类型:" class="item-column3">
-        <el-label v-model="form.name">531531</el-label>
+        {{workData.phoneType}}
       </el-form-item>
       <el-form-item label="电话号码:" class="item-column3">
-        <el-label v-model="form.name">531531</el-label>
+        {{workData.phoneNum}}
       </el-form-item>
       <el-form-item label="来源:" class="item-column3">
-        <el-label v-model="form.name">531531</el-label>
+        {{workData.source}}
       </el-form-item>
       <el-form-item label="接听情况:" class="item-column3">
-        <el-label v-model="form.name">531531</el-label>
+        {{workData.answer}}
       </el-form-item>
       <el-form-item label="调查情况:" class="item-column3">
-        <el-label v-model="form.name">531531</el-label>
+        {{workData.checkStage}}
       </el-form-item>
       <div class="address-title">
         录入工作证明人调查信息
       </div>
       <el-form-item label="微信/支付宝是否异常:">
-        <el-label v-model="form.name">531531</el-label>
+        {{workData.mobilepayment}}
       </el-form-item>
       <el-form-item label="异常项说明:">
-        <el-label v-model="form.name">531531</el-label>
+        {{workData.exceptionremark}}
       </el-form-item>
       <el-form-item label="接电话人身份:">
-        <el-label v-model="form.name">531531</el-label>
+        {{workData.answerIdentity}}
       </el-form-item>
       <el-form-item label="核对单位工作情况:">
-        <el-label v-model="form.name">531531</el-label>
+        {{workData.checkJob}}
       </el-form-item>
       <el-form-item label="调查结果:">
-        <el-label v-model="form.name">531531</el-label>
+        {{workData.conclusion}}
       </el-form-item>
     </el-form>
   </div>
@@ -52,46 +49,24 @@ export default {
   data() {
     return {
       form: {
-        phoneTypes: [{
-            value: '住址电话',
-            label: '住址电话'
-          },
-          {
-            value: '单位电话',
-            label: '单位电话',
-            disabled: true
-          },
-          {
-            value: '家庭联系人',
-            label: '家庭联系人',
-            disabled: true
-          },
-          {
-            value: '紧急联系人',
-            label: '紧急联系人',
-            disabled: true
-          },
-          {
-            value: '工作证明人',
-            label: '工作证明人',
-            disabled: true
-          }
-        ],
-        phoneType: '',
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+        id: '', // 住宅电话调查日志记录 id
+        phoneType: '', // 电话类型
+        workData: '' // 返回的数据
       }
     }
   },
+  created() {
+    this.queryTelJobRef();
+  },
   methods: {
-    submitForm() {
-      console.log('submit!');
+    queryTelJobRef() {
+      this.post('/creTelResearchHis/queryTelJobRef', {
+        id: this.id,
+        phoneType: this.phoneType
+      }).then(res => {
+        console.log(res);
+        this.workData = res.data;
+      })
     }
   }
 }
@@ -115,6 +90,7 @@ export default {
 
 
 
+
 /* */
 
 .el-form-item__label {
@@ -124,6 +100,7 @@ export default {
 .el-form-item {
   margin-bottom: 0;
 }
+
 
 
 
@@ -140,6 +117,7 @@ export default {
 
 
 
+
 /* 两列 */
 
 .item-column2 {
@@ -147,6 +125,7 @@ export default {
   float: left;
   margin: 0;
 }
+
 
 
 

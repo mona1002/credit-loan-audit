@@ -7,54 +7,52 @@
       </div>
       <el-form-item label="客户名称:" class="item-column3">
         <!-- <el-label v-model="form.name">531531</el-label> -->
-        <div v-model="form.name">
-          5315151
-        </div>
+        {{hurryData.custName}}
       </el-form-item>
       <el-form-item label="电话类型:" class="item-column3">
-        <el-label v-model="form.name">531531</el-label>
+        {{hurryData.phoneType}}
       </el-form-item>
       <el-form-item label="电话号码:" class="item-column3">
-        <el-label v-model="form.name">531531</el-label>
+        {{hurryData.phoneNum}}
       </el-form-item>
       <el-form-item label="来源:" class="item-column3">
-        <el-label v-model="form.name">531531</el-label>
+        {{hurryData.source}}
       </el-form-item>
       <el-form-item label="接听情况:" class="item-column3">
-        <el-label v-model="form.name">531531</el-label>
+        {{hurryData.answer}}
       </el-form-item>
-      <el-form-item label="调查情况:" class="item-column3">
-        <el-label v-model="form.name">531531</el-label>
+      <el-form-item label="调查阶段:" class="item-column3">
+        {{hurryData.checkStage}}
       </el-form-item>
       <div class="address-title">
         录入紧急联系人调查信息
       </div>
       <el-form-item label="第三方查询信息:">
-        <el-label v-model="form.name">531531</el-label>
+        {{hurryData.threeQueriestxt}}
       </el-form-item>
       <el-form-item label="三方查询是否异常:">
-        <el-label v-model="form.name">531531</el-label>
+        {{hurryData.threeQueries}}
       </el-form-item>
       <el-form-item label="微信/支付宝是否异常:">
-        <el-label v-model="form.name">531531</el-label>
+        {{hurryData.mobilepayment}}
       </el-form-item>
       <el-form-item label="异常项说明:">
-        <el-label v-model="form.name">531531</el-label>
+        {{hurryData.exceptionState}}
       </el-form-item>
       <el-form-item label="与借款人关系:">
-        <el-label v-model="form.name">531531</el-label>
+        {{hurryData.relBorrower}}
       </el-form-item>
       <el-form-item label="与借款人联系是否频繁:">
-        <el-label v-model="form.name">531531</el-label>
+        {{hurryData.contactfre}}
       </el-form-item>
       <el-form-item label="核对工作情况:">
-        <el-label v-model="form.name">531531</el-label>
+        {{hurryData.checkWork}}
       </el-form-item>
       <el-form-item label="核对婚姻情况:">
-        <el-label v-model="form.name">531531</el-label>
+        {{hurryData.maritalStatus}}
       </el-form-item>
       <el-form-item label="调查结果:">
-        <el-label v-model="form.name">531531</el-label>
+        {{hurryData.conclusion}}
       </el-form-item>
     </el-form>
   </div>
@@ -63,47 +61,24 @@
 export default {
   data() {
     return {
-      form: {
-        phoneTypes: [{
-            value: '住址电话',
-            label: '住址电话'
-          },
-          {
-            value: '单位电话',
-            label: '单位电话',
-            disabled: true
-          },
-          {
-            value: '家庭联系人',
-            label: '家庭联系人',
-            disabled: true
-          },
-          {
-            value: '紧急联系人',
-            label: '紧急联系人',
-            disabled: true
-          },
-          {
-            value: '工作证明人',
-            label: '工作证明人',
-            disabled: true
-          }
-        ],
-        phoneType: '',
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
-      }
+      id:'',  // 住宅电话调查日志记录 id
+      phoneType:'', // 电话类型
+      hurryData:'' // 请求返回的数据
     }
   },
+  created() {
+    this.queryTeleContract();
+  },
   methods: {
-    submitForm() {
+    queryTeleContract() {
       console.log('submit!');
+      this.post('/creTelResearchHis/queryTeleContract',{
+        id:this.id,
+        phoneType:this.phoneType
+      }).then( res => {
+        console.log(res);
+        this.hurryData = res.data;
+      })
     }
   }
 }
