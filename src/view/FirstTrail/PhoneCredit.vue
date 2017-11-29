@@ -22,7 +22,7 @@
               历史调查日志
             </div>
             <!-- 列表 -->
-            <el-table :data="tableData" height="250" border style="width: 100%" @row-click="rowClick">
+            <el-table :data="listData" height="250" border style="width: 100%" @row-click="rowClick">
               <el-table-column type="index" label="序号">
               </el-table-column>
               <el-table-column prop="phoneType" label="电话类型">
@@ -41,7 +41,7 @@
               </el-table-column>
             </el-table>
             <!-- 分页 -->
-            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 15, 20]" :page-size="5" layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 15, 20]" :page-size="5" layout="total, sizes, prev, pager, next, jumper" :total="listData.length">
             </el-pagination>
           </div>
         </el-header>
@@ -94,9 +94,9 @@
             <el-input type="text" name="" v-model="addTelName" value="" placeholder=""></el-input>
           </li>
           <li>
-            <span class="require-icon">*</span>            
+            <span class="require-icon">*</span>
             <span>电话号码:</span>
-            <el-input type="text" name="" v-model="addTelNum" maxlength="13" value="" placeholder=""></el-input>
+            <el-input type="text" name="" v-model="addTelNum" maxlength=13 value="" placeholder=""></el-input>
           </li>
         </ul>
         <el-button @click.native="append">确认</el-button>
@@ -162,13 +162,9 @@ export default {
         label: 'label'
       },
       // 历史列表数据
-      tableData: [],
-      id: '',
-      value: '',
-      // 当前页码
-      currentPage: 1,
-      // 每页显示的条数
-      currentPageSize: 5,
+      listData: [],
+
+
       // 添加界面
       coverShow: false,
       // 头部列表
@@ -189,19 +185,30 @@ export default {
       workFormShow: false,
       workHisShow: false,
       // 添加的电话类型
-      telTypes:[
-        {value:'01',label:'住址电话'},
-        {value:'02',label:'单位电话'},
-        {value:'03',label:'家庭联系人电话'},
-        {value:'04',label:'紧急联系人电话'},
-        {value:'05',label:'工作联系人电话'}
+      telTypes: [
+        { value: '01', label: '住址电话' },
+        { value: '02', label: '单位电话' },
+        { value: '03', label: '家庭联系人电话' },
+        { value: '04', label: '紧急联系人电话' },
+        { value: '05', label: '工作联系人电话' }
       ],
       // 添加申请单 带你和类型 
-      addTelType:'',
+      addTelType: '',
       // 电话名称
-      addTelName:'',
+      addTelName: '',
       // 电话号码
-      addTelNum:''
+      addTelNum: '',
+
+      //  历史列表相关
+      applyId: '00542', // 申请单id
+      phoneNum: '', // 电话号码
+      phoneType: '', // 电话类型
+      pageNum: '1', // 当前页数
+      pageSize: '5', // 每页条数
+      // 当前页码
+      currentPage: 1,
+      // 每页显示的条数
+      currentPageSize: 5,
     }
   },
   created() {
@@ -212,107 +219,77 @@ export default {
   },
   methods: {
     fetchData() {
+      // 测试数据
+      this.applyId = '2222';
       this.post("/creTelInfo/queryTels", {
-        applyId: '2222'
+        applyId: this.applyId
       }).then(res => {
-        // console.log(res);
         console.log(res.data);
-        // this.data = res.data;
         this.treeData = res.data;
       });
     },
     handleNodeClick(data) {
-      // 点击每条数据的事件
-      console.log(data);
-      console.log('id:' + data.id + '\nlabel:' + data.label);
-      if (data.id.length > 2 ) {
+      // 点击每条tree数据的事件
+      this.treeId = data.id;
+      // 点击数据展示历史记录  列表
+      this.hisListShow = true;
+      console.log(this.id);
+      // 请求历史调查日志
+      this.queryTelLogByPage();
+    },
+    queryTelLogByPage() {
+      console.log('lsit')
+      // 获取 历史调查日志 
+      this.post('/creTelResearchHis/queryTelLogByPage', {
+        applyId: '00542',
+        phoneNum: '11111',
+        phoneType: '00',
+        pageNum: this.pageNum,
+        pageSize: this.pageSize
+      }).then(res => {
+        console.log(res);
+        //  历史table数据
+        this.listData = res.data;
+      })
 
-      // telType  标志 是什么类型的数据
-      console.log('123123',data.telType);
-
-        this.id = data.id;
-
-        // 点击数据展示历史记录  列表
-        this.hisListShow = true;
-        console.log(this.id);
-        switch(this.id){
-          case '01':
-            this.addressFormShow = true;    
-            console.log(this.addressFormShow)
-            break;
-          case '02':
-            this.companyFormShow = true;
-            break;
-          case '03':
-            this.familyFormShow = true;
-            break;
-          case '04':
-            this.hurryFormShow = true;
-            break;
-          case '05':
-            this.workFormShow = true;
-            break;
-        }
-
-        // 获取 历史调查日志 
-        this.post('/creTelResearchHis/queryTelLogByPage',{
-          applyId:this.applyId,
-          phoneNum:this.data.phoneNum,
-          phoneType:data.telType,
-          pageNum:data.telNum,
-          pageNum:this.pageNum,
-          pageSize:this.pageSize
-        }).then( res=> {
-          console.log(res)
-        })
-
-
-        // 点击 住址电话 显示
-        // this.addressFormShow = true;
-        // this.addressHisShow = false;
-
-        // 点击 单位电话
-        // this.companyFormShow = true;
-        // this.companyHisShow = false;
-
-      }else{
-        // 假如点击的是  父节点 , 则不改变
-        
-      }
 
     },
     append(data) {
       // 点击添加方法,用过 key 来判断 添加的哪项.
       console.log('append');
       console.log(this.id);
-      alert(this.id);
+      // alert(this.id);
       this.coverShow = false;
       // const newChild = { id: id++, label: 'texttext', children: [] };
       // if (!data.children) {
       //   this.$set(data, 'children', []);
       // }
       // data.children.push(newChild);
-      
-      this.post('/creTelInfo/addTel',{
-        "applyId":'2222',
-        "telNum":this.addTelNum,
-        "telName":this.addTelName,
-        "telType":this.addTelType,
+
+      this.post('/creTelInfo/addTel', {
+        "applyId": '2222',
+        "telNum": this.addTelNum,
+        "telName": this.addTelName,
+        "telType": this.addTelType,
         // 登录人编号
         "creatorCode": this.userCode
-      }).then( res => {
+      }).then(res => {
         console.log(res);
 
-        if(res.statusCode == '200')
+        if (res.statusCode == '200')
           this.fetchData();
       })
 
     },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
+      this.pageSize = val;
+      this.queryTelLogByPage();
     },
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
+      this.pageNum = val;
+      this.queryTelLogByPage();
     },
     rowClick() {
       console.log('click row')
@@ -350,11 +327,19 @@ el-header {
 
 
 
+
+
+
+
 /* 树形  结构 */
 
 .el-tree {
   padding-left: 10px;
 }
+
+
+
+
 
 
 
@@ -372,12 +357,20 @@ el-header {
 
 
 
+
+
+
+
 /* 三角 icon */
 
 .el-tree-node__expand-icon {
   font-size: 20px;
   /*display: none;*/
 }
+
+
+
+
 
 
 
@@ -393,11 +386,19 @@ el-header {
 
 
 
+
+
+
+
 /* 二级 目录 样式 */
 
 .el-tree-node__content {
   padding-left: 0px !important;
 }
+
+
+
+
 
 
 
@@ -415,6 +416,10 @@ el-header {
 
 
 
+
+
+
+
 /* 点击添加出现的 页面 */
 
 .cover-view {
@@ -425,6 +430,10 @@ el-header {
   top: 0;
   left: 0;
 }
+
+
+
+
 
 
 
@@ -451,11 +460,19 @@ el-header {
 
 
 
+
+
+
+
 /* title */
 
 .cover-content .add-title {
   text-align: left;
 }
+
+
+
+
 
 
 
@@ -485,6 +502,10 @@ el-header {
 
 
 
+
+
+
+
 /* 确定按钮 */
 
 .cover-content .el-button {
@@ -493,6 +514,10 @@ el-header {
   margin-top: 10px;
   margin-right: 10px;
 }
+
+
+
+
 
 
 
@@ -513,6 +538,10 @@ el-header {
 .el-tag .el-icon-close {
   right: 0px;
 }
+
+
+
+
 
 
 
@@ -548,6 +577,10 @@ el-header {
 
 
 
+
+
+
+
 /* 表格分页 */
 
 .el-pagination {
@@ -555,6 +588,10 @@ el-header {
   width: 100%;
   text-align: center;
 }
+
+
+
+
 
 
 
@@ -570,9 +607,17 @@ el-header {
 
 
 
+
+
+
+
 /* 共 100条*/
 
 .el-pagination__total {}
+
+
+
+
 
 
 
@@ -586,8 +631,13 @@ el-header {
 }
 
 
+
+
+
+
 /* 添加申请单电话信息 必填 * */
-.require-icon{
+
+.require-icon {
   color: #ff0000;
 }
 
