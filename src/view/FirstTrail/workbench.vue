@@ -146,8 +146,8 @@
       // COMPLETED("03","已办"),
       // ABORTED("04","历史"),
       //  获取到 路由传参 
-      this.userCode = this.$route.params.userCode;
-      this.orgCode = this.$route.params.orgCode;
+      this.userCode = this.$route.query.userCode;
+      this.orgCode = this.$route.query.orgCode;
       console.log(this.userCode + "================" + this.orgCode)
       // this.$route.query.picName接参数
       this.post("/workFlowTaskQuery/getTaskProfile", {
