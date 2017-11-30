@@ -116,7 +116,7 @@ export default {
       companyLoading: true
     };
   },
-  created() {
+  mounted() {
     //   // 组件歘估计完成后获取数据
     //   // 此时 data 已经被 observed 了
 
@@ -305,9 +305,10 @@ export default {
         getOption() {
           // 获取匹配结论
           this.post('internalMatch/getInternalMatchOption', {
-            applyId: '22'
+            applyId: '111'
           }).then(res => {
             console.log(res);
+            this.audit_desc = res.data.auditDesc;
           })
 
         },
