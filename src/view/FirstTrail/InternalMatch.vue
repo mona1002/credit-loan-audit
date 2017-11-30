@@ -113,7 +113,8 @@ export default {
       CompanyPageNum: 1, // 公司电话 当前页
       mobileLoading: true,
       fixTelLoading: true,
-      companyLoading: true
+      companyLoading: true,
+      auditId: '' // 匹配结论id
     };
   },
   mounted() {
@@ -309,6 +310,7 @@ export default {
           }).then(res => {
             console.log(res);
             this.audit_desc = res.data.auditDesc;
+            this.auditId = res.data.id;
           })
 
         },
@@ -324,7 +326,8 @@ export default {
             // 操作人用户编码  userCode
             creator_code: this.creator_code,
             // 匹配结论
-            audit_desc: this.audit_desc
+            audit_desc: this.audit_desc,
+            id: this.auditId
           }).then(res => {
             console.log(res);
 
@@ -363,6 +366,7 @@ export default {
 
 
 
+
 /* 分页 */
 
 .internalMatch-class .tool-bar {
@@ -370,6 +374,7 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
 
 
 
@@ -402,6 +407,7 @@ export default {
 
 
 
+
 /* 确认按钮 */
 
 .internalMatch-class .mark-button {
@@ -415,11 +421,13 @@ export default {
 
 
 
+
 /* 行高 */
 
 .internalMatch-class thead tr {
   height: 40px;
 }
+
 
 
 
@@ -438,12 +446,14 @@ export default {
 
 
 
+
 /* 备注 width*/
 
 .internalMatch-class .mark-cell {
   overflow: hidden;
   overflow-wrap: break-word;
 }
+
 
 
 
