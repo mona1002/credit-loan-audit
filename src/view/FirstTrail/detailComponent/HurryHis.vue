@@ -6,7 +6,6 @@
         新增调查日志
       </div>
       <el-form-item label="客户名称:" class="item-column3">
-        <!-- <el-label v-model="form.name">531531</el-label> -->
         {{hurryData.custName}}
       </el-form-item>
       <el-form-item label="电话类型:" class="item-column3">
