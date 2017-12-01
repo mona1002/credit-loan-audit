@@ -566,4 +566,12 @@ export default {
 .functionalRoleManage .el-form-item {
   margin-bottom: 0;
 }
+
+/* 样式冲突的解决 */
+#Abody .functionalRoleManage .el-button{
+  /* padding: 0; */
+}
+.functionalRoleManage .el-input{
+  width: initial;
+}
 </style>
