@@ -564,7 +564,7 @@ export default {
   width: 90%;
 }
 .functionalRoleManage .el-form-item {
-  margin-bottom: 0;
+  margin-bottom: 10px;
 }
 
 /* 样式冲突的解决 */
