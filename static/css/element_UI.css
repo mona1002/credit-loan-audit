@@ -45,62 +45,6 @@ height: 40px;
 {
   height: 35px;
 }
-/* 普通input的宽度 */
-
-.el-input {
-  /* 设置el-input div 的元素属性 */
-  display: inline-block;
-  width: 180px;
-}
-
-
-.el-input__inner {
-  height: 30px;
-}
-
-
-/* button按钮 */
-
-.el-button {
-  height: 36px;
-}
-
-
-/* 表格行高-----未生效---需要用的话单独设一下 */
-
-.el-table .cell {
-  line-height: 40px;
-}
-/* 表格------未生效---需要用的话单独设一下*/
-
-.el-table td,
-.el-table th {
-  padding: 0;
-}
-
-/* 表头颜色 */
-
-.el-table__header-wrapper tr {
-  background-color: #f5f7fa;
-  color: #1f2d3d;
-  text-align: center;
-}
-/* 表格内容居中 */
-
-.el-table th,
-td {
-  text-align: center;
-}
-
-/* 字体图标颜色大小 */
-
-.icon {
-  color: #20a0ff;
-  font-size: 20px;
-}
-
-
-
 
 
 /* 折叠面板头部背景色 */
