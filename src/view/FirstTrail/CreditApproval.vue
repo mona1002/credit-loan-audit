@@ -70,8 +70,9 @@
           </el-form-item>
           <!-- 拒绝主原因选择 01 -->
           <el-form-item label="主原因:" class="item-column2" v-show="this.showFlag=='01' || this.showFlag=='07'">
-            <el-select v-model="form.mainReason" placeholder="请选择电话类型">
-              <el-option label="住址电话" value="shanghai"></el-option>
+            <el-select v-model="mainReason">
+              <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item.id">
+              </el-option>
             </el-select>
           </el-form-item>
           <!-- secondeReasons -->
@@ -456,12 +457,27 @@ export default {
           break;
         case '01':
           this.showFlag = '01';
+          this.get('system/getSystemDate').then(res => {
+            console.log(res)
+            // 请求系统时间
+            this.form.dealroperDate = res.data;
+          })
           break;
         case '07':
           this.showFlag = '07';
+          this.get('system/getSystemDate').then(res => {
+            console.log(res)
+            // 请求系统时间
+            this.form.dealroperDate = res.data;
+          })
           break;
         case '03':
           this.showFlag = '03';
+          this.get('system/getSystemDate').then(res => {
+            console.log(res)
+            // 请求系统时间
+            this.form.dealroperDate = res.data;
+          })
           break;
         case 'spjl':
           this.showFlag = 'spjl';
@@ -478,6 +494,8 @@ export default {
           console.log("拒绝");
           this.coverShow = false;
           this.showFlag = 0;
+          this.form.mainReason = this.mainReason; // 主原因同理
+          this.form.creauditAppOperate = 'check_Refuse';
           break;
         case '02':
           console.log("回退");
@@ -576,9 +594,13 @@ export default {
       this.getReason('second', this.mainReason);
     },
     showFlag: function(newValue) {
-      if (newValue == '01') {
+      // 统一处理    回退 02 拒绝 01 放弃  07 审批 03 审批结论 spjl 流程轨迹 lcgj
+      if (newValue == '01') {// 拒绝
         // 01 拒接 直接请求 主原因
-        this.getReason('main', '01')
+        this.getReason('main', '01');
+      }else if(newValue == '07'){ // 审批
+        // 07 拒接 直接请求 主原因
+        this.getReason('main', '07');
       }
     },
     coverShow: function(value) {
@@ -711,6 +733,7 @@ export default {
   margin: 0;
   width: 100%;
   height: 100%;
+  z-index: 100;
 }
 
 
