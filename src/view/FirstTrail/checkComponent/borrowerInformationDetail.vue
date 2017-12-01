@@ -413,7 +413,7 @@
 	    	},
 	    	request(){
 	    		this.post("/borrower/getBorrowerInfo", {
-		        'applyId':'00542'
+		        'applyId':'111'
 		      }).then(res => {
 		        /*console.log(res);*/
 		        /*房产信息*/
