@@ -302,7 +302,6 @@ export default {
       // 请求历史调查日志
       this.phoneType = data.telType;
       console.log(this.phoneType);
-      this.queryTelLogByPage();
 
       console.log(data);
       // 客户姓名
@@ -310,6 +309,7 @@ export default {
       // 电话号码
       this.phoneNum = data.telNum;
 
+      this.queryTelLogByPage();
 
       // 点击 电话树进来  默认编辑页面
       // 根据  tellType 判断
