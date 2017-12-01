@@ -48,7 +48,7 @@
         border
         show-header
         highlight-current-row
-        style="width: 100%">
+        >
         <!-- @current-change="handleCurrentChange" -->
         <el-table-column
           type="index"
@@ -69,12 +69,12 @@
           prop="resNameList"
           label="拥有资源"
           show-overflow-tooltip
-          width="450">
+          min-width="450">
         </el-table-column>
         <el-table-column
           prop="roleRemark"
           label="备注"
-          width="280">
+          width="275">
         </el-table-column>
         <el-table-column
           prop="validFlagTxt"
