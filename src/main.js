@@ -20,3 +20,12 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+
+// 定义全局 过滤器
+// 日期过滤器
+Vue.filter('dateFilter',function(value){
+	if(!value) return ''
+	console.log(value);
+	// console.log(new Date(value).toLocaleString().replace(/\//g,'-').match(/\d{4}\-\d{2}\-\d{1,2}/)[0])
+	return new Date(value).toLocaleString().replace(/\//g,'-').match(/\d{4}\-\d{2}\-\d{1,2}/)[0]
+})
