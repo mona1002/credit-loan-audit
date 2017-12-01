@@ -3,11 +3,12 @@
     <el-collapse v-model="activeNames" @change="handleChange">
       <!-- 上网查询信息 -->
       <el-collapse-item title=" 上网查询信息" name="1">
+                <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <div class="CreditForm_InternetInf">
           <ul class="CreditForm_InternetInf_ul_left">
             <li>
               <label class="InternetInf_left_label">客户在法网是否有被执行信息：</label>
-              <span class="detail_inf">{{this.FormData.wbeexEcutedtext}} </span>
+              <label class="detail_inf">{{this.FormData.wbeexEcutedtext}} </label>
             </li>
             <li>
               <label class="InternetInf_left_label">单位在法网是否有被执行信息：</label>
@@ -398,9 +399,13 @@
 
 </script>
 
-<style scope>
+<style scoped>
   /* 公共 */
-
+.icon_hat{
+  position: absolute;
+  top:10px;
+  left: 23px
+}
   .oneline {
     width: 100vw;
   }
@@ -554,8 +559,8 @@
     display: inline-block;
     width: 49%;
     overflow: hidden;
-    /* border: 1px solid orange;
-  background: yellowgreen; */
+    /* background: red; */
+    vertical-align: middle;
   }
 
 </style>

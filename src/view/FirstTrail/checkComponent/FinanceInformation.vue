@@ -1,14 +1,14 @@
 <template>
-  <div id="FinanceInformation">
-    <!-- 财务信息 -->
+  <div class="FinanceInformation">
+    <!-- 账务信息 -->
     <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="num" label="单据编号" width="180">
+      <el-table-column prop="num" label="单据编号" >
       </el-table-column>
-      <el-table-column prop="account" label="借款账号" width="180">
+      <el-table-column prop="account" label="借款账号" >
       </el-table-column>
-      <el-table-column prop="userName" label="客户姓名">
+      <el-table-column prop="userName" label="客户姓名" width="100">
       </el-table-column>
-      <el-table-column prop="id" label="证件号码">
+      <el-table-column prop="id" label="证件号码" width="180">
       </el-table-column>
       <el-table-column prop="productName" label="产品名称">
       </el-table-column>
@@ -18,7 +18,7 @@
       </el-table-column>
       <el-table-column prop="sum" label="放款金额">
       </el-table-column>
-      <el-table-column prop="city" label="开户行所在城市代码">
+      <el-table-column prop="city" label="开户行所在城市代码" width="150">
       </el-table-column>
       <el-table-column prop="bank" label="开户行代码">
       </el-table-column>
@@ -61,7 +61,7 @@
 
 </script>
 
-<style scope>
+<style scoped>
 
 
 </style>

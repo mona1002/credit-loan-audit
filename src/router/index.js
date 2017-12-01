@@ -5,7 +5,7 @@ import {
 } from '@/util/util'
 // 头部导航
 import myHead from '@/view/header'
-
+import test from '@/view/test'
 import HelloWorld from '@/view/HelloWorld'
 /*初审审批*/
 import taskInWaitting from '@/view/FirstTrail/taskInWaitting'
@@ -34,12 +34,15 @@ import cCreditForm from '@/view/FirstTrail/checkComponent/cCreditForm'
 import InternalMatch from '@/view/FirstTrail/InternalMatch'
 // 电话征信
 import PhoneCredit from '@/view/FirstTrail/PhoneCredit'
-// 查询详情页面审批结论轨迹（部分）
-import ApprovalConclusion from '@/view/FirstTrail/checkComponent/ApprovalConclusion'
-// 查询详情页面财务信息（部分）
-import FinanceInformation from '@/view/FirstTrail/checkComponent/FinanceInformation'
+
 // 信审审批
 import CreditApproval from '@/view/FirstTrail/CreditApproval'
+//----- 匹配查询页面--------
+import MatchingInf from '@/view/FirstTrail/MatchingInf'
+// 查询详情页面审批结论轨迹（部分）
+import ApprovalConclusion from '@/view/FirstTrail/checkComponent/ApprovalConclusion'
+// 查询详情页面放账信息（部分）
+import FinanceInformation from '@/view/FirstTrail/checkComponent/FinanceInformation'
 // ----------终审-------------------------
 import FSplitScreen from '@/view/FinalTrial/FSplitScreen.vue'
 // ------------反欺诈------------------
@@ -60,6 +63,7 @@ import functionalRoleManage from '@/view/systemManage/functionalRoleManage/funct
 Vue.use(Router)
 
 const routes = [{
+
   path: '/',
   component: login
   // path: '/',
@@ -68,10 +72,6 @@ const routes = [{
   //   requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
   // },
 },
-// {
-//   path: '/myHead',
-//   component: myHead
-// },
 {
   // 工作台  误改, 误删
   /*
@@ -81,6 +81,10 @@ const routes = [{
   path: '/workbench',
   component: workbench,
   require: myHead
+},
+{
+  path: '/test',
+  component: test
 },
 /*初审审批*/
 {
@@ -115,6 +119,11 @@ const routes = [{
 {
   path: '/SplitScreen',
   component: SplitScreen
+},
+// 匹配查看-页面
+{
+  path: '/MatchingInf',
+  component: MatchingInf
 },
 // 影音资料
 {
