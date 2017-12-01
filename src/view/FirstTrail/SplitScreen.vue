@@ -646,7 +646,7 @@ margin-bottom: 18px;
     /* overflow: hidden; */
     /* left: 50px; */
     /* white-space:nowrap; */
-    z-index: 90;
+    z-index: 16;
   }
 
   .Right_tab_ul_wrap ul li {
@@ -694,13 +694,10 @@ position: absolute;
   .AudioVisual_wrap_compare {
     position: absolute;
     top: 117px;
-    background: white;
-    /* border-radius: 4px; */
     width: calc( 100% - 60px);
     height: calc( 100% - 130px);
     z-index: 22;
     min-width: 1306px;
-    /* background: black; */
   }
   /* 弹出层  左右分屏  流 */
   /* .AudioVisual_wrap_compare_left,
