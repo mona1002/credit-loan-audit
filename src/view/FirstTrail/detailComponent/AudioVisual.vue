@@ -97,12 +97,12 @@
       <p class="Small_pic_title"> 缩略图-申请信息
         <img src="../../../../static/images/D625BA67-2F56-42C1-9E9D-A47AE03BA028@1x.png" class="small_pic_close" @click="SmallpicClose" >
          </p>
-      <figure v-for="(val,index) in imgPath" :key="index">
+      <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
 <!-- <img class="Small_pic" v-for="(val,index) in imgPath" :key="index" :src="'http://10.1.26.6:8080'+val" @click="ChangeCss(index)"
         @mouseenter="smallPic($event,index)" ref="small_pic_ref" /> -->
         <img class="Small_pic" :src="'http://10.1.26.6:8080'+val" @click="ChangeCss(index)"
         @mouseenter="smallPic($event,index)" ref="small_pic_ref" />
-        <p> </p>
+        <p> djf;aldaj;lsdjflas </p>
       </figure>
       
     </div>
@@ -428,7 +428,7 @@
     position: relative;
     z-index: 2;
   }
-
+/* 对比-按钮 */
   .compareBtn {
     position: absolute;
     bottom: 18px;
@@ -437,11 +437,18 @@
     border: 1px solid #0077ff;
     background: #eef0f9;
   }
-
+/* 缩略图-按钮 */
   .checkDetailBtn {
     position: absolute;
     bottom: 18px;
     right: 10px;
+  }
+  /* 缩略图片-figure-wrap */
+  .small_pic_figure{
+    float: left;
+    width: 187px;
+    height: 200px;
+    background: red; margin: 
   }
   /*  放大、缩小 按钮 wrap */
 

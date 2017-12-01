@@ -109,9 +109,8 @@
 			//跳转到详情页
 			goDetail(row, event, column) {
 				console.log(row);
-		      //console.log(this.datas.applyId);
-		      /*var applyId=this.datas.applyId;*/
 		      this.$router.push({path:'/SplitScreen',query:row});
+		      localStorage.setItem("taskInWaitting",JSON.stringify(row));
 		    },
 		    handleSizeChange(val) {
 		      console.log('每页 ${val} 条');

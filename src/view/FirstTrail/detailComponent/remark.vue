@@ -14,7 +14,6 @@
 				:default-sort = "{prop: 'date', order: 'descending'}" 	
 				highlight-current-row
 				@current-change="handleCurrentChange"
-				@row-click='rowIndex'
 				><!-- order两个参数，顺序和倒序: ascending, descending -->
 				<!-- @row-click="addHeight(backColor)" :class="{active: activeName == backColor}" -->
 			    <el-table-column
@@ -24,7 +23,7 @@
 			      >
 			    </el-table-column>
 			    <el-table-column
-			      prop="remarkType"
+			      prop="remarkTypeTxt"
 			      label="备注类型"
 			      >
 			    </el-table-column>
@@ -107,14 +106,28 @@
 		        deletLayer:false,
 			}
 		},
+		created(){
+			//一进入页面就发送请求
+			this.request();
+		},
 		methods:{
+			request(){
+	    		this.post("/applyRemark/getApplyRemarkList", {
+		        'applyId':'00542'
+		      }).then(res => {
+		        this.tableData=res.data;
+		        /*this.datas.forEach(function(item){
+		        	item.remarkTime = new Date(item.remarkTime).toLocaleString().replace(/\//g, "-").replace(/上午|中午|下午/g, "");
+		        	console.log(item.remarkTime);
+		        });*/
+		      });
+		  },
 			add(){
 				this.ok=true;
 				document.getElementsByTagName('body')[0].style.overflow='hidden';
 				this.remark='';
 			},
 			change(){
-				//console.log(this.isChecked='');
 				if(this.isChecked==''){
 					this.promptLayer=true;
 					document.getElementsByTagName('body')[0].style.overflow='hidden';
@@ -123,25 +136,34 @@
 					this.changeRemarks='';
 					this.changeLayer=true;
 					document.getElementsByTagName('body')[0].style.overflow='hidden';
-					this.changeRemarks=this.tableData[this.isChecked-1].remark;
-					//this.isChecked='';
+					for(var i=0;i<this.tableData.length;i++){
+
+						console.log(this.tableData[i].id);
+						if(this.tableData[i].id==this.isChecked){
+							this.changeRemarks=this.tableData[i].remark;
+						}
+					}
 					console.log(this.changeRemarks);
-					console.log(this.tableData[this.isChecked-1]);
-					console.log(this.tableData[this.isChecked-1].remark);
 				}
 			},
-			delet(index){
-				console.log(index);
-				 if(this.isChecked==''){
+			delet(){
+				if(this.isChecked==''){
 					this.promptLayer=true;
 					document.getElementsByTagName('body')[0].style.overflow='hidden';
 				}else{
-					console.log(this.isChecked);
-					this.tableData.splice(index,1);
-					this.isChecked='';
-					console.log(this.tableData);
-					/*console.log(this.tableData[this.isChecked-1]);
-					console.log(this.tableData[this.isChecked-1].remark);*/
+					this.deletLayer=true;
+					document.getElementsByTagName('body')[0].style.overflow='hidden';
+					
+					/*for(var i=0;i<this.tableData.length;i++){
+						console.log(this.tableData[i].id);
+						if(this.tableData[i].id==this.isChecked){
+							alert(123);
+							console.log(i);
+							this.tableData.splice(i,1);
+						}
+					}*/
+					//console.log(this.isChecked);
+					//alert(456)
 				}
 			},
 			close(){
@@ -175,8 +197,11 @@
 				})
 				.then(res => {
 		   			console.log(res);
+		   			 if(res.statusCode==200){
+						this.request();
+					}
 		          });
-				this.k+=1;
+				/*this.k+=1;
         		var type='初审';
 	           	var people='admin';
 	           	var date=new Date().toLocaleString().replace(/\//g, "-").replace(/上午|中午|下午/g, ""); 
@@ -184,20 +209,27 @@
 								    remarker:people, 
 								    remarkTime: date,
 								    remark:this.remark,
-								    id:this.k
-								}); 
+								    //id:this.k
+								});*/ 
 			},
 			changeSure(){
 				this.changeLayer=false;
 				document.getElementsByTagName('body')[0].style.overflow='';
 				console.log(12345);
 				this.post('/applyRemark/modifyApplyRemark',{
-					id:'00542',
+					id:this.isChecked,
 					remark:this.changeRemarks
 				})
 				.then(res => {
-		   			console.log(this.changeRemarks);
-		   			this.tableData[this.isChecked-1].remark=this.changeRemarks;
+					if(res.statusCode==200){
+						this.request();
+					}
+		   			/*console.log(this.changeRemarks);
+		   			for(var i=0;i<this.tableData.length;i++){
+						if(this.tableData[i].id==this.isChecked){
+							this.tableData[i].remark=this.changeRemarks;
+						}
+					}*/
 		          });
 			},
 			promptSure(){
@@ -207,21 +239,24 @@
 			deletSure(){
 				this.deletLayer=false;
 				document.getElementsByTagName('body')[0].style.overflow='';
-				this.post('/applyRemark/deleteApplyRemarkById',{
-					id:'00542'
-				})
-				.then(res => {
-		   			console.log(res);
-		          });
+				this.post("/applyRemark/deleteApplyRemark", {
+				        id:this.isChecked
+				      }).then(res => {
+				        if(res.statusCode==200){
+							this.request();
+						}
+				      });
 			},
 			handleCurrentChange(val) {
-		       this.currentRow = val;
-		       this.isChecked=val.id;
-		       console.log(val.id);
+				if(val == null){
+					this.isChecked = '';
+				}else{
+					this.currentRow = val;
+		        	this.isChecked=val.id;
+				}  
+				//console.log(val.id);  
+		        //console.log(this.isChecked);
 		    },
-		    rowIndex(row){
-		    	console.log(row);
-		    }
 		},
 	}
 </script>

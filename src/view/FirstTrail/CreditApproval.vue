@@ -1,6 +1,6 @@
 <!-- 信审 - 审批 -->
 <template>
-  <div style="padding:10px">
+  <div class="creditApproval-class" style="padding:10px">
     <div class="address-title">
       概要信息
     </div>
@@ -337,6 +337,13 @@ export default {
       currentPage: 0
     }
   },
+  mounted(){
+    // 页面创建的时候  找数据 
+    // 这里的数据是 申请信息 中存到本地的信息
+    // var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+
+    
+  },
   methods: {
     // open 打开 自定义 弹窗   挂起
     open() {
@@ -366,15 +373,16 @@ export default {
 
 
             // 点击 确认 提交 方法
-            // this.post("/creauditInfo/approval ", {
-            //   userCode: "02103C3003 ",
-            //   loginPassword: "111111 "
-            // }).then(res => {
-            //   console.log(res);
-            // });
+            this.post("/creauditInfo/approveHang ", {
+              taskId: ''
+            }).then(res => {
+              console.log(res);
+            });
           } else {
             done();
           }
+
+
         }
       }).then(action => {
         this.$message({
@@ -406,6 +414,9 @@ export default {
           this.showFlag = 'lcgj';
           break;
       }
+
+      // 这里处理  不同的 按钮事件
+
     },
     submitFn(opinionFlag) {
       console.log(opinionFlag)
@@ -464,7 +475,7 @@ export default {
 
 </script>
 <style>
-.address-title {
+.creditApproval-class .address-title {
   width: 100%;
   height: 40px;
   font-size: 18px;
@@ -479,70 +490,31 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 三列 */
 
-.item-column3 {
+.creditApproval-class .item-column3 {
   width: 30%;
   float: left;
   margin: 0;
   margin-bottom: 10px;
 }
 
-.el-form-item {
+.creditApproval-class .el-form-item {
   height: 40px;
   line-height: 40px;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 按钮集合控件 */
 
-.btn-div {
+.creditApproval-class .btn-div {
   text-align: center;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 信审审批 - btn*/
 
-.credit-btn {
+.creditApproval-class .credit-btn {
   padding: 10px;
   background: none;
   color: #333;
@@ -550,22 +522,9 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 弹窗背景 */
 
-.cover-view {
+.creditApproval-class .cover-view {
   background: rgba(0, 0, 0, 0.4);
   top: 0;
   right: 0;
@@ -579,44 +538,18 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 两列 */
 
-.item-column2 {
+.creditApproval-class .item-column2 {
   width: 50%;
   float: left;
   margin: 0;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 回退 拒绝 放弃 表单*/
 
-.back-form {
+.creditApproval-class .back-form {
   width: 600px;
   height: 350px;
   background: #fff;
@@ -627,23 +560,9 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* form-title */
 
-.form-title {
+.creditApproval-class .form-title {
   width: 100%;
   height: 40px;
   font-size: 18px;
@@ -657,7 +576,7 @@ export default {
   overflow: hidden;
 }
 
-.back-form .back-form-li {
+.creditApproval-class .back-form .back-form-li {
   border-top: 0.5px solid #ededed;
   margin: 10px 0px;
   line-height: 40px;
@@ -666,62 +585,23 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* textarea */
 
-.back-form .back-form-li .el-textarea {
+.creditApproval-class .back-form .back-form-li .el-textarea {
   width: 80%;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 单独设置  label*/
 
-.back-form .el-form-item__label {
+.creditApproval-class .back-form .el-form-item__label {
   width: 75px;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 弹窗页面 关闭按钮*/
 
-.el-tag {
+.creditApproval-class .el-tag {
   width: 0;
   height: 0;
   color: none;
@@ -731,28 +611,14 @@ export default {
   top: 0;
 }
 
-.el-tag .el-icon-close {
+.creditApproval-class .el-tag .el-icon-close {
   right: 0px;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 审批 表单 */
 
-.appro-form {
+.creditApproval-class .appro-form {
   width: 80%;
   height: 600px;
   margin-top: 150px;
@@ -762,26 +628,18 @@ export default {
   overflow: hidden;
 }
 
-.appro-form .el-form-item__label {
+.creditApproval-class .appro-form .el-form-item__label {
   width: 200px;
 }
 
-.appro-form .back-form-li .el-textarea {
+.creditApproval-class .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
 
 
-
-
-
-
-
-
-
-
 /* 审批结论轨迹 */
 
-.spjl-div {
+.creditApproval-class .spjl-div {
   width: 80%;
   height: 400px;
   margin: 0 auto;
@@ -792,19 +650,15 @@ export default {
   border-radius: 5px;
 }
 
-.el-table {
+.creditApproval-class .el-table {
   font-size: 12px;
   line-height: 20px;
 }
 
 
-
-
-
-
 /* 分页 */
 
-.tool-bar {
+.creditApproval-class .tool-bar {
   width: 100%;
   text-align: center;
   padding: 10px 0 0 10px;
@@ -813,7 +667,7 @@ export default {
 
 /* 流程轨迹 */
 
-.lcgj-div {
+.creditApproval-class .lcgj-div {
   width: 80%;
   height: 400px;
   margin: 0 auto;

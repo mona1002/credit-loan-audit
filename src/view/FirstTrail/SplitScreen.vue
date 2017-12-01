@@ -327,6 +327,9 @@
       this.title = "影音资料";
       this.customInf = this.$route.query.row;
       console.log(this.customInf)
+
+      console.log(this.$route.query);
+
       // console.log(this.$route.query.row.id) //接参数   
       //  this.post("/workFlowTaskQuery/getTaskProfile", {
       //   taskStatus: "01",
