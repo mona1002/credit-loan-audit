@@ -44,8 +44,6 @@ import CreditApproval from '@/view/FirstTrail/CreditApproval'
 import FSplitScreen from '@/view/FinalTrial/FSplitScreen.vue'
 // ------------反欺诈------------------
 
-/*借款人资料详情*/
-import borrowerInformationDetail from '@/view/FirstTrail/detailComponent/borrowerInformationDetail'
 
 // 系统管理
 // 机构管理
@@ -158,11 +156,6 @@ const routes = [{
   // 信审审批
   path: '/CreditApproval',
   component: CreditApproval
-},
-{
-  // 借款人资料详情
-  path: '/borrowerInformationDetail',
-  component: borrowerInformationDetail
 },
 // ----------------终审----------------
 {
