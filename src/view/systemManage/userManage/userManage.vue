@@ -169,13 +169,14 @@
         <el-table-column
           prop="functionalRole"
           label="功能角色"
-          fit
-          width="180">
+          show-overflow-tooltip
+          min-width="180">
         </el-table-column>
         <el-table-column
           prop="processRole"
           label="流程角色"
-          width="180">
+          show-overflow-tooltip
+          min-width="180">
         </el-table-column>
         <el-table-column
           prop="date"
