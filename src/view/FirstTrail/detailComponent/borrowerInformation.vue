@@ -19,9 +19,6 @@
 					      	label="序号" 
 					      	width="100"
 					      	>
-					      	<!-- <template slot-scope="scope">
-					      		<p @click='handleRow(scope.row.$index)'></p>
-					      	</template> -->
 					      </el-table-column>
 					      <el-table-column
 					        label="房产类型" 
@@ -668,7 +665,7 @@
 				        prop="n"
 				        label="N">
 				        <template slot-scope="scope">
-						  <el-input v-model="scope.row.n" placeholder="请输入内容"></el-input>
+						  <input v-model="scope.row.n" type=number></input>
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -710,7 +707,7 @@
 				        prop="count"
 				        label="计算">
 				        <template slot-scope="scope">
-						   <el-button @click="counted(scope.row)" type="text" size="small">结果</el-button>
+						   <el-button @click="counted(scope.row)" type="text" size="small"><i class="el-icon el-icon-circle-plus"></i></el-button>
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -954,11 +951,6 @@
 				{'value': '0' ,'label': '有'},
 				{'value': '1' ,'label': '否'}
       		],
-      		//房产id
-      		//车辆
-      		//信用卡使用明细
-      		//贷款明细
-      		//流水明细
 	      };
 	    },
 	    created(){
@@ -1196,7 +1188,7 @@
 		    	};
 		    }, 
 		    handleCurrentChange(val){
-		    	alert('qqq');
+		    	//alert('qqq');
 				if(val == null){
 					this.currentRow = '';
 				}else{
@@ -1205,7 +1197,7 @@
 				console.log(val);
 			},
 			carCurrentChange(val){
-				alert('车车');
+				//alert('车车');
 				if(val == null){
 					this.currentRowCar = '';
 				}else{
@@ -1214,7 +1206,7 @@
 				console.log(val);
 			},
 			cardCurrentChange(val){
-				alert('信用卡使用明细');
+				//alert('信用卡使用明细');
 				if(val == null){
 					this.currentRowCard = '';
 				}else{
@@ -1223,7 +1215,7 @@
 				console.log(val);
 			},
 			loanCurrentChange(val){
-				alert('贷款明细');
+				//alert('贷款明细');
 				if(val == null){
 					this.currentRowLoan = '';
 				}else{
@@ -1232,7 +1224,7 @@
 				console.log(val);
 			},
 			incomeCurrentChange(val){
-				alert('流水明细');
+				//alert('流水明细');
 				if(val == null){
 					this.currentRowIncome = '';
 				}else{
@@ -1371,9 +1363,18 @@
 				this.loanInfo.otherLoanPayoff=this.w;
 			},
 			counted(row){
-				console.log(row);
-				row.avgIncome=(row.n+row.n1+row.n2+row.n3+row.n4+row.n5)/6;
-				console.log(row.avgIncome);
+				if(row.incomeType==''){
+					return
+				}else{
+					console.log(row);
+					//console.log(typeof(row.n+row.n1+row.n2+row.n3+row.n4+row.n5));
+					var totalNum=row.n*1+row.n1*1+row.n2*1+row.n3*1+row.n4*1+row.n5*1;
+					console.log(totalNum);
+					row.avgIncome=totalNum/6;
+					console.log(row.avgIncome);
+				}
+				
+				
 			},
 			//确定按钮
 			sure(){

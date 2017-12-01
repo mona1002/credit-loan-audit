@@ -78,8 +78,7 @@ const routes = [{
     userCode:    用户编码
     orgCode:     机构编码
    */
-  name: 'workbench',
-  path: '/workbench/:userCode/:orgCode',
+  path: '/workbench',
   component: workbench,
   require: myHead
 },
