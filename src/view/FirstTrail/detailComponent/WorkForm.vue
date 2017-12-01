@@ -5,20 +5,17 @@
       <div class="address-title">
         新增调查日志
       </div>
-      <el-form-item label="客户名称:" class="item-column3">
-        {{form.custName}}
+      <el-form-item label="客户名称:" class="item-column3 dis-input">
+        <el-input v-model="custName" :disabled="true"></el-input>
       </el-form-item>
       <el-form-item label="电话类型:" class="item-column3">
-        <el-select v-model="form.phoneType" placeholder="请选择电话类型">
+        <el-select v-model="form.phoneType" disabled placeholder="请选择电话类型">
           <el-option label="工作证明人" value="05"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="电话号码:" class="item-column3">
-        {{form.phoneNum}}
+      <el-form-item label="电话号码:" class="item-column3 dis-input">
+        <el-input v-model="phoneNum" :disabled="true"></el-input>
       </el-form-item>
-      <!-- <el-form-item label="电话号码" class="item-column3">
-        <el-form-item label="13103582965"></el-form-item>
-      </el-form-item> -->
       <el-form-item label="来源:" class="item-column3">
         <el-select v-model="form.source" placeholder="请选择来源">
           <el-option label="申请表" value="00"></el-option>
@@ -68,7 +65,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="调查结论:">
-        <el-input type="textarea" v-model="form.conclusion"></el-input>
+        <el-input type="textarea" v-model="form.conclusion" :row="2" resize=none></el-input>
       </el-form-item>
       <el-form-item class="address-submit">
         <el-button type="primary" @click="submitForm('form')">确定</el-button>
@@ -95,9 +92,11 @@ export default {
       }
     }
   },
-  created() {
-    this.form.custName = '';
-    this.form.phoneNum = '';
+  props: ['custName', 'phoneNum'],
+  mounted() {
+    this.form.custName = this.custName;
+    this.form.phoneNum = this.phoneNum;
+    this.form.phoneType = '05'; // 工作证明人电话
   },
   methods: {
     submitForm() {
@@ -111,92 +110,3 @@ export default {
 }
 
 </script>
-<style>
-.address-title {
-  width: 100%;
-  height: 40px;
-  font-size: 18px;
-  font-weight: bold;
-  background: #ededed;
-  line-height: 40px;
-  padding-left: 10px;
-  display: block;
-  margin-bottom: 10px;
-  margin-top: 20px;
-  overflow: hidden;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-/* */
-
-.el-form-item__label {
-  width: 150px !important;
-}
-
-.el-form-item {
-  margin-bottom: 0;
-}
-
-
-
-
-
-
-
-
-
-
-
-/* 三列 */
-
-.item-column3 {
-  width: 33%;
-  float: left;
-  margin: 0;
-  margin-bottom: 10px;
-}
-
-
-
-
-
-
-
-
-
-
-
-/* 两列 */
-
-.item-column2 {
-  width: 50%;
-  float: left;
-  margin: 0;
-}
-
-
-
-
-
-
-
-/* 表单提交 */
-
-.address-submit {
-  margin: 0;
-  padding: 0;
-  float: right;
-  margin: 20px;
-}
-
-</style>

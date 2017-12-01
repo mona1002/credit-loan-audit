@@ -48,9 +48,7 @@ Vue.use(Router)
 
 const routes = [{
    path: '/',
-    component: login
-    // path: '/',
-    // component: login
+    component: login,
     // meta: {
     //   requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
     // },
@@ -60,40 +58,40 @@ const routes = [{
   //   component: myHead
   // },
   {
-    // 工作台  误改, 误删
+    // 工作台  勿改, 勿删
     /*
       userCode:    用户编码
       orgCode:     机构编码
      */
     name:'workbench',
-    path: '/workbench/:userCode/:orgCode',
+    path: '/workbench',
     component: workbench,
-    require:myHead
+    require:myHead,
   },
   /*初审审批*/
   {
     path: '/taskInWaitting',
-    component: taskInWaitting
+    component: taskInWaitting,
   },
   /*备注信息*/
   {
     path: '/remark',
-    component: remark
+    component: remark,
   },
   /*实地征信*/
   {
     path: '/creditInvestigation',
-    component: creditInvestigation
+    component: creditInvestigation,
   },
   /*借款人资料*/
   {
     path: '/borrowerInformation',
-    component: borrowerInformation
+    component: borrowerInformation,
   },
   /*申请信息*/
   {
     path: '/applicationInformation',
-    component: applicationInformation
+    component: applicationInformation,
   },
   {
     path: '/HelloWorld',
@@ -102,47 +100,47 @@ const routes = [{
   // 分屏
   {
     path: '/SplitScreen',
-    component: SplitScreen
+    component: SplitScreen,
   },
   // 影音资料
   {
     path: '/AudioVisual',
-    component: AudioVisual
+    component: AudioVisual,
   },
   // 申请表
   {
     path: '/CreditForm',
-    component: CreditForm
+    component: CreditForm,
   },
   // 申请表
   {
     path: '/cCreditForm',
-    component: cCreditForm
+    component: cCreditForm,
   },
   {
     //内部匹配
     path: '/InternalMatch',
-    component: InternalMatch
+    component: InternalMatch,
   },
   {
     //电话征信  
     path: '/PhoneCredit',
-    component: PhoneCredit
+    component: PhoneCredit,
   },
   // 审批结论轨迹
   {
     path: '/ApprovalConclusion',
-    component: ApprovalConclusion
+    component: ApprovalConclusion,
   },
    // 审批结论轨迹
    {
     path: '/FinanceInformation',
-    component: FinanceInformation
+    component: FinanceInformation,
   },
 {
     // 信审审批
     path: '/CreditApproval',
-    component: CreditApproval
+    component: CreditApproval,
   },
   // ----------------终审----------------
 {
