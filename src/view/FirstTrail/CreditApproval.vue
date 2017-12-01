@@ -69,7 +69,7 @@
             </el-select>
           </el-form-item>
           <!-- 拒绝主原因选择 01 -->
-          <el-form-item label="主原因:" class="item-column2" v-show="this.showFlag=='01'">
+          <el-form-item label="主原因:" class="item-column2" v-show="this.showFlag=='01' || this.showFlag=='07'">
             <el-select v-model="form.mainReason" placeholder="请选择电话类型">
               <el-option label="住址电话" value="shanghai"></el-option>
             </el-select>
