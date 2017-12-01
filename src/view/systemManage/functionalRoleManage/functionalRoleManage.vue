@@ -26,16 +26,16 @@
     <div class="title titleContainer">
       <span class="titleText">角色列表</span>
       <span class="iconContainer">
-        <span class="icon-item" @click="dialogAddVisible = true">
+        <span class="icon-item" @click="dialogAddVisible = true;">
           <i class="el-icon el-icon-circle-plus"></i><span class="el-icon-text">添加</span>
         </span>
-        <span class="icon-item" @click="dialogAuthVisible = true">
+        <span class="icon-item" @click="handleItem('auth')">
           <i class="el-icon el-icon-edit-outline"></i><span class="el-icon-text">授权</span>
         </span>
-        <span class="icon-item" @click="dialogStopVisible = true">
+        <span class="icon-item" @click="handleItem('stop')">
           <i class="el-icon el-icon-edit-outline"></i><span class="el-icon-text">停用</span>
         </span>
-        <span class="icon-item" @click="dialogStartVisible = true">
+        <span class="icon-item" @click="handleItem('enable')">
           <i class="el-icon el-icon-edit-outline"></i><span class="el-icon-text">启用</span>
         </span>
       </span>
@@ -47,8 +47,8 @@
         height="400"
         border
         show-header
-        highlight-current-row>
-        <!-- @current-change="handleCurrentChange" -->
+        highlight-current-row
+        @row-click="selectRow">
         <el-table-column
           type="index"
           label="序号"
@@ -85,7 +85,7 @@
           label="操作"
           width="140">
           <template slot-scope="scope">
-            <el-button class="btn-sm edit" @click="editItem(scope.row)">编辑</el-button><el-button class="btn-sm check" type="primary" @click="checkItem(scope.row)">查看</el-button>
+            <el-button class="btn-sm edit" @click="getItem('edit',scope.row)">编辑</el-button><el-button class="btn-sm check" type="primary" @click="getItem('check',scope.row)">查看</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -108,23 +108,23 @@
 
     <!-- 添加角色框 -->
     <el-dialog title="添加角色" :visible.sync="dialogAddVisible">
-      <el-form :model="form">
+      <el-form :model="newItem">
         <el-form-item label="角色名称：" :label-width="formLabelWidth">
-          <el-input v-model="form.roleName" auto-complete="off"></el-input>
+          <el-input v-model="newItem.roleName" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="角色编号：" :label-width="formLabelWidth">
-          <el-input v-model="form.roleCode" auto-complete="off"></el-input>
+          <el-input v-model="newItem.roleCode" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="排序：" :label-width="formLabelWidth">
-          <el-input type="number" v-model="form.order" auto-complete="off"></el-input>
+          <el-input type="number" v-model="newItem.roleSeq" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="备注：" :label-width="formLabelWidth">
-          <el-input type="textarea" :rows="2" v-model="form.remark"></el-input>
+          <el-input type="textarea" :rows="2" v-model="newItem.roleRemark"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogAddVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogAddVisible = false">确 定</el-button>
+        <el-button type="primary" @click="addRole">确 定</el-button>
       </div>
     </el-dialog>
 
@@ -138,15 +138,15 @@
           <el-input v-model="itemOfLists.roleCode" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="排序：" :label-width="formLabelWidth">
-          <el-input type="number" v-model="itemOfLists.order" auto-complete="off"></el-input>
+          <el-input type="number" v-model="itemOfLists.roleSeq" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="备注：" :label-width="formLabelWidth">
-          <el-input type="textarea" :rows="2" v-model="itemOfLists.remark"></el-input>
+          <el-input type="textarea" :rows="2" v-model="itemOfLists.roleRemark"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogEditVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogEditVisible = false">确 定</el-button>
+        <el-button type="primary" @click="commitEditedItem">确 定</el-button>
       </div>
     </el-dialog>
 
@@ -186,16 +186,24 @@
       <span>确定操作？</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogStopVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogStopVisible = false">确 定</el-button>
+        <el-button type="primary" @click="updateValidFlag('0')">确 定</el-button>
       </span>
     </el-dialog>
 
     <!-- 启用 -->
-    <el-dialog title="询问" :visible.sync="dialogStartVisible" width="30%" :before-close="handleClose">
+    <el-dialog title="询问" :visible.sync="dialogEnableVisible" width="30%" :before-close="handleClose">
       <span>确定操作？</span>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogStartVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogStartVisible = false">确 定</el-button>
+        <el-button @click="dialogEnableVisible = false">取 消</el-button>
+        <el-button type="primary" @click="updateValidFlag('1')">确 定</el-button>
+      </span>
+    </el-dialog>
+
+    <!-- 未选中提示 -->
+    <el-dialog title="提示" :visible.sync="dialogAlertVisible" width="30%" :before-close="handleClose">
+      <span>请选中要操作的记录！</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogAlertVisible = false">确定</el-button>
       </span>
     </el-dialog>
 
@@ -204,7 +212,7 @@
 
 <script>
 import myHead from "@/view/header.vue";
-// import this from "../systemMange_ser";
+import systemManageHttp from "../systemMange_ser";
 
 export default {
   data() {
@@ -213,16 +221,20 @@ export default {
       roleCode: "",
       resourceName: "",
 
-      // 角色列表数据
-      responseDatas: {},
-      roleDatas: [],
-      currentRow: null,
+      responseDatas: {}, // 角色列表请求的返回值
+      roleDatas: [], // 角色列表数组
+
+      currentRow: {}, // 当前选中的那一行数据
+      newItem: {}, // 添加一行数据
+
+      itemOfLists: {}, // 编辑、查看、授权某一条数据前，根据 id 查询其详细数据
 
       currentPage: 1, // 默认显示的当前页
       pageSizesArr: [20, 50, 80, 100], // 每页显示的数据数
       setPageSize: 20,
 
       queryParam: {
+        // 查询角色的入参
         roleCode: "",
         roleName: "",
         roleName_la: "",
@@ -234,70 +246,52 @@ export default {
       dialogAddVisible: false,
       dialogAuthVisible: false,
       dialogStopVisible: false,
-      dialogStartVisible: false,
+      dialogEnableVisible: false,
       dialogEditVisible: false,
       dialogCheckVisible: false,
+      dialogAlertVisible: false,
 
-      itemOfLists: {},
-
-      form: {
-        name: "",
-        region: "",
-        date1: "",
-        date2: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: ""
-      },
       formLabelWidth: "120px"
     };
   },
 
   mounted() {
-    console.log(this.getRoles);
     this.getRolesAll();
   },
 
   methods: {
     //请求数据接口
     getRoles(param) {
-      this.post(
-        "http://10.1.26.200:20717/roleMgr/getRolesByPage",
-        param
-      ).then(res => {
-        this.responseDatas = res.data;
-        this.roleDatas = this.responseDatas.recordList;
-      });
+      systemManageHttp
+        .getRoles(this.queryParam)
+        .then(res => {
+          this.responseDatas = res.data.data;
+          this.roleDatas = this.responseDatas.recordList;
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     // 根据 id 查询角色
-    getRoleById(id){
-        this.get(
-        "http://10.1.26.200:20717/roleMgr/getRoleById",
-        {roleId: id}
-      ).then(res => {
-        this.itemOfLists = res.data;
-      });
+    getRoleById(id) {
+      systemManageHttp
+        .getRoleById({ params: { roleId: id } })
+        .then(res => {
+          this.itemOfLists = res.data.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
-    // 编辑角色
-    updateRole(param){
-        this.post(
-        "http://10.1.26.200:20717/roleMgr/updateRole",
-        param
-      ).then(res => {
-        // this.itemOfLists = res.data;
-        console.log(res.data);
-      });
-    },
+
     // 请求全部数据
     getRolesAll() {
-      this.queryParam.roleCode = '';
-      this.queryParam.roleName_la = '';
+      this.queryParam.roleCode = "";
+      this.queryParam.roleName_la = "";
       this.queryParam.pageNum = 1;
       this.queryParam.pageSize = 20;
       this.queryParam.orders = null;
-      this.setPageSize = 20,
-      this.currentPage = 1;
+      (this.setPageSize = 20), (this.currentPage = 1);
       this.getRoles(this.queryParam);
     },
     // 查询按钮
@@ -329,33 +323,114 @@ export default {
       this.getRoles(this.queryParam);
     },
 
-    // 编辑条目
-    editItem(item){
+    // 查看或编辑条目
+    getItem(flag, item) {
       console.log(item);
-      this.dialogEditVisible = true;
-      this.getRoleById(item.id);
-      // this.updateRole(this.itemOfLists);
-    },
-    // 查看条目
-    checkItem(item){
-      console.log(item);
-      this.dialogCheckVisible = true;
+      if (flag === "edit") {
+        this.dialogEditVisible = true;
+      } else {
+        this.dialogCheckVisible = true;
+      }
       this.getRoleById(item.id);
     },
+    // 提交编辑过的条目
+    commitEditedItem() {
+      systemManageHttp
+        .updateRole(this.itemOfLists)
+        .then(res => {
+          console.log(res.data.statusCode);
+          if (res.data.statusCode === 200) {
+            this.getRoles(this.queryParam);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      this.dialogEditVisible = false;
+    },
 
+    // 授权、启用、停用
+    handleItem(flag) {
+      console.log(this.currentRow);
+      if (!this.currentRow) {
+        this.dialogAlertVisible = true;
+        return;
+      }
+      if (flag === "auth") {
+        this.dialogAuthVisible = true;
+      } else if (flag === "stop") {
+        this.dialogStopVisible = true;
+      } else if (flag === "enable") {
+        this.dialogEnableVisible = true;
+      }
+    },
 
-    // handleCurrentChange(val) {
-    //   this.currentRow = val;
-    //   console.log(this.currentRow);
-    // },
+    // 选中某一行
+    selectRow(row, event, column) {
+      console.log(row);
+      this.currentRow = row;
+    },
+
+    // 启用停用角色
+    updateValidFlag(flag) {
+      systemManageHttp
+        .updateValidFlag({
+          params: {
+            roleId: this.currentRow.id,
+            validFlag: flag
+          }
+        })
+        .then(res => {
+          console.log(res.data.msg);
+          this.currentRow = null;
+          this.getRoles(this.queryParam);
+        });
+      if (flag === "0") {
+        this.dialogStopVisible = false;
+      } else {
+        this.dialogEnableVisible = false;
+      }
+    },
+
+    // 新增角色
+    addRole() {
+      systemManageHttp
+        .addRole({
+          roleCode: this.newItem.roleCode,
+          roleName: this.newItem.roleName,
+          roleRemark: this.newItem.roleRemark,
+          // pid: "",
+          roleSeq: this.newItem.roleSeq
+          // validFlag: "",
+          // modelFlag: ""
+        })
+        .then(res => {
+          console.log(res.data);
+          if (res.data.statusCode === 200) {
+            this.newItem = {};
+            this.getRoles(this.queryParam);
+          }
+        });
+      this.dialogAddVisible = false;
+    },
+
+    // 授权角色
+    grantRes() {
+      systemManageHttp.grantRes({
+        roleId: this.currentRow.roleId,
+        reslds: this.resourceName
+      }).then(res => {
+        console.log(res.data);
+      });
+    },
 
     handleClose(done) {
-      this.$confirm('确认关闭？')
+      this.$confirm("确认关闭？")
         .then(_ => {
           done();
         })
         .catch(_ => {});
-    },
+    }
   },
 
   components: {
@@ -474,21 +549,21 @@ export default {
   margin-top: 20px;
 }
 
-.functionalRoleManage .iconContainer{
+.functionalRoleManage .iconContainer {
   float: right;
   line-height: 50px;
   margin-right: 29px;
 }
-.functionalRoleManage .icon-item{
+.functionalRoleManage .icon-item {
   cursor: pointer;
   margin-right: 14px;
   float: left;
 }
 
-.functionalRoleManage .el-textarea{
+.functionalRoleManage .el-textarea {
   width: 90%;
 }
-.functionalRoleManage .el-form-item{
+.functionalRoleManage .el-form-item {
   margin-bottom: 0;
 }
 </style>
