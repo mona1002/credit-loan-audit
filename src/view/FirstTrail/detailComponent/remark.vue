@@ -2,45 +2,60 @@
 <template>
 	<div class="remark">
 		<div class="remarkHead">
-			<p>备注信息</p>
+			<span class="titleText">备注信息</span>
+			<span class="iconContainer">
+		        <span class="icon-item" @click="add">
+		          <i class="el-icon-circle-plus icon"></i><span class="el-icon-text">添加</span>
+		        </span>
+		        <span class="icon-item" @click="change">
+		         <i class="el-icon-edit icon"></i><span class="el-icon-text">修改</span>
+		        </span>
+		        <span class="icon-item" @click="delet">
+		          <i class="el-icon-remove icon"></i><span class="el-icon-text">删除</span>
+		        </span>
+		    </span>
 		</div>
-		<div class="remarkIcon">
+		<!-- <div class="remarkIcon">
 			<i class="el-icon-circle-plus icon" @click="add"><span>添加</span></i>
 			<i class="el-icon-edit icon" @click="change"><span>修改</span></i>
 			<i class="el-icon-remove icon" @click="delet"><span>删除</span></i>
-		</div>
+		</div> -->
 		<div class="taskWtable">
-			<el-table :data="tableData" border style="width: 100%" 
-				:default-sort = "{prop: 'date', order: 'descending'}" 	
+			<el-table :data="tableData" height="450" style="width: 100%" 
+				:default-sort = "{prop: 'date', order: 'descending'}" 
+				show-header	
 				highlight-current-row
 				@current-change="handleCurrentChange"
-				@row-click='rowIndex'
 				><!-- order两个参数，顺序和倒序: ascending, descending -->
 				<!-- @row-click="addHeight(backColor)" :class="{active: activeName == backColor}" -->
 			    <el-table-column
 			      type="index"
 			      :index='1'
-			      width="180"
+			      min-width="50"
 			      >
 			    </el-table-column>
 			    <el-table-column
-			      prop="remarkType"
+			      prop="remarkTypeTxt"
 			      label="备注类型"
+			      min-width="130"
 			      >
 			    </el-table-column>
 			    <el-table-column
 			      prop="remarker"
-			      label="备注人">
+			      label="备注人"
+			      min-width="150">
 			    </el-table-column>
 			    <el-table-column
 			      prop="remarkTime"
 			      label="备注时间"
+			      min-width="200"
 			      sortable>
 			    </el-table-column>
 			    <el-table-column
 			      prop="remark"
 			      label="备注"
-			      min-width="290">
+			      show-overflow-tooltip
+			      min-width="300">
 			    </el-table-column>
 			</el-table>
 		</div>
@@ -64,7 +79,8 @@
 		<div class="promptLayer" v-show="promptLayer"><!-- @touchmove.prevent  -->
 			<div class="layerbox">
 				<p><span>提示</span><i class="el-icon-close" @click="promptClose"></i></p>
-				<div>请选择一条记录！
+				<div>
+					<p class="choces">请选择一条记录！</p>
 					<el-button type="primary" @click="promptSure">确定</el-button>
 				</div>		
 			</div>
@@ -73,7 +89,8 @@
 		<div class="deletLayer" v-show="deletLayer"><!-- @touchmove.prevent  -->
 			<div class="layerbox">
 				<p><span>提示</span><i class="el-icon-close" @click="deletClose"></i></p>
-				<div>您要删除该备注吗？
+				<div>
+					<p class="choces">您要删除该备注吗？</p>
 					<div class=buttonDiv>
 						<el-button type="primary" @click="deletCancle">取消</el-button>
 						<el-button type="primary" @click="deletSure">确定</el-button>
@@ -107,14 +124,28 @@
 		        deletLayer:false,
 			}
 		},
+		created(){
+			//一进入页面就发送请求
+			this.request();
+		},
 		methods:{
+			request(){
+	    		this.post("/applyRemark/getApplyRemarkList", {
+		        'applyId':'00542'
+		      }).then(res => {
+		        this.tableData=res.data;
+		        /*this.datas.forEach(function(item){
+		        	item.remarkTime = new Date(item.remarkTime).toLocaleString().replace(/\//g, "-").replace(/上午|中午|下午/g, "");
+		        	console.log(item.remarkTime);
+		        });*/
+		      });
+		  },
 			add(){
 				this.ok=true;
 				document.getElementsByTagName('body')[0].style.overflow='hidden';
 				this.remark='';
 			},
 			change(){
-				//console.log(this.isChecked='');
 				if(this.isChecked==''){
 					this.promptLayer=true;
 					document.getElementsByTagName('body')[0].style.overflow='hidden';
@@ -123,25 +154,34 @@
 					this.changeRemarks='';
 					this.changeLayer=true;
 					document.getElementsByTagName('body')[0].style.overflow='hidden';
-					this.changeRemarks=this.tableData[this.isChecked-1].remark;
-					//this.isChecked='';
+					for(var i=0;i<this.tableData.length;i++){
+
+						console.log(this.tableData[i].id);
+						if(this.tableData[i].id==this.isChecked){
+							this.changeRemarks=this.tableData[i].remark;
+						}
+					}
 					console.log(this.changeRemarks);
-					console.log(this.tableData[this.isChecked-1]);
-					console.log(this.tableData[this.isChecked-1].remark);
 				}
 			},
-			delet(index){
-				console.log(index);
-				 if(this.isChecked==''){
+			delet(){
+				if(this.isChecked==''){
 					this.promptLayer=true;
 					document.getElementsByTagName('body')[0].style.overflow='hidden';
 				}else{
-					console.log(this.isChecked);
-					this.tableData.splice(index,1);
-					this.isChecked='';
-					console.log(this.tableData);
-					/*console.log(this.tableData[this.isChecked-1]);
-					console.log(this.tableData[this.isChecked-1].remark);*/
+					this.deletLayer=true;
+					document.getElementsByTagName('body')[0].style.overflow='hidden';
+					
+					/*for(var i=0;i<this.tableData.length;i++){
+						console.log(this.tableData[i].id);
+						if(this.tableData[i].id==this.isChecked){
+							alert(123);
+							console.log(i);
+							this.tableData.splice(i,1);
+						}
+					}*/
+					//console.log(this.isChecked);
+					//alert(456)
 				}
 			},
 			close(){
@@ -175,8 +215,11 @@
 				})
 				.then(res => {
 		   			console.log(res);
+		   			 if(res.statusCode==200){
+						this.request();
+					}
 		          });
-				this.k+=1;
+				/*this.k+=1;
         		var type='初审';
 	           	var people='admin';
 	           	var date=new Date().toLocaleString().replace(/\//g, "-").replace(/上午|中午|下午/g, ""); 
@@ -184,20 +227,27 @@
 								    remarker:people, 
 								    remarkTime: date,
 								    remark:this.remark,
-								    id:this.k
-								}); 
+								    //id:this.k
+								});*/ 
 			},
 			changeSure(){
 				this.changeLayer=false;
 				document.getElementsByTagName('body')[0].style.overflow='';
 				console.log(12345);
 				this.post('/applyRemark/modifyApplyRemark',{
-					id:'00542',
+					id:this.isChecked,
 					remark:this.changeRemarks
 				})
 				.then(res => {
-		   			console.log(this.changeRemarks);
-		   			this.tableData[this.isChecked-1].remark=this.changeRemarks;
+					if(res.statusCode==200){
+						this.request();
+					}
+		   			/*console.log(this.changeRemarks);
+		   			for(var i=0;i<this.tableData.length;i++){
+						if(this.tableData[i].id==this.isChecked){
+							this.tableData[i].remark=this.changeRemarks;
+						}
+					}*/
 		          });
 			},
 			promptSure(){
@@ -207,78 +257,77 @@
 			deletSure(){
 				this.deletLayer=false;
 				document.getElementsByTagName('body')[0].style.overflow='';
-				this.post('/applyRemark/deleteApplyRemarkById',{
-					id:'00542'
-				})
-				.then(res => {
-		   			console.log(res);
-		          });
+				this.post("/applyRemark/deleteApplyRemark", {
+				        id:this.isChecked
+				      }).then(res => {
+				        if(res.statusCode==200){
+							this.request();
+						}
+				      });
 			},
 			handleCurrentChange(val) {
-		       this.currentRow = val;
-		       this.isChecked=val.id;
-		       console.log(val.id);
+				if(val == null){
+					this.isChecked = '';
+				}else{
+					this.currentRow = val;
+		        	this.isChecked=val.id;
+				}  
+				//console.log(val.id);  
+		        //console.log(this.isChecked);
 		    },
-		    rowIndex(row){
-		    	console.log(row);
-		    }
 		},
 	}
 </script>
 <style type="text/css" scoped>
+	.remark{
+		padding: 15px 30px;
+		width: 100%;
+		height: 100%;
+		background-color: #fafbfc;
+	}
 /* 备注信息 */
-.remark .remarkHead{
-	width: 100%;
-	height: 28px;
-	line-height: 28px;
-	padding-left: 10px;
-	border-bottom: 1px solid #ccc;
-}
-.remark .remarkIcon{
-	width: 100%;
-	height: 40px;
-	line-height: 40px; 
-}
-.remark .icon span{
-	color:#475669;
-}
-.backColor{
-	background-color: blue;
-}
+	.remark .remarkHead{
+		opacity:0.75;
+		background:#ebedf8;
+		border-radius:6px;
+		width:100%;
+		height:50px;
+	}
+	.remark .remarkHead .titleText{
+		font-size: 16px;
+		color: #1f2d3d;
+		text-align: left;
+		margin: 15px 25px 13px;
+		display: inline-block;
+		height: 22px;
+		width: 130px;
+		line-height: 22px;
+		font-weight: bold;
+	}
+	.remark .remarkHead .iconContainer{
+	    float: right;
+	    line-height: 50px;
+	    margin-right: 29px;
+	}
+	.remark .remarkHead .icon-item{
+	   cursor: pointer;
+	   margin-right: 14px;
+	   float: left;
+	}
+	.remark .remarkHead .icon {
+	   font-size: 24px;
+	   color: #0077ff;
+	   margin-right: 6px;
+	   vertical-align: sub;
+	}
+	.remark .remarkHead .el-icon-text {
+	   font-size: 14px;
+	   color: #1f2d3d;
+	}
 /* 表格头部 */
-/*.tableHead{
+.taskWtable .el-table__header-wrapper{
 	width: 100%;
 }
-.tableHead .headUl{
-	width: 100%;
-	height: 40px;
-	border: 1px solid #ccc;
-	line-height: 40px;
-}
-.tableHead ul{
-	width: 100%;
-	height: 40px;
-	border: 1px solid #ccc;
-	line-height: 40px;
-}
-.tableHead .headUl li{
-	float: left;
-	width: 150px;
-	height: 40px;
-	border-right: 1px solid #ccc;
-	text-align: center;
-}
-.tableHead ul li{
-	float: left;
-	width: 150px;
-	height: 40px;
-	border-right: 1px solid #ccc;
-	text-align: center;
-}
-.tableHead .headUl li:nth-of-type(5){
-	width: calc( 100% - 600px );
-	border-right:none;
-}*/
 /* 弹层 */
 .layer{
 	width: 100%;
@@ -314,7 +363,7 @@
 	float: right;
 	font-size: 20px;
 	line-height: 40px;
-	color: #20a0ff;
+	color: #0077ff;
 	padding-right: 10px;
 }
 .layerbox div{
@@ -323,11 +372,15 @@
 	height: 208px;
 	margin: 0 auto;
 	background-color: #eee;
+	text-align: center;
+	font-size: 14px;
+	/* padding-top: 15px; */
 }
 .layerbox div label{
 	display: inline-block;
 	padding: 94px 10px 0 10px;
 	float: left;
+	font-size: 14px;
 }
 .layerbox div textarea{
 	width: 90%;
@@ -339,6 +392,12 @@
 .layerbox button{
 	float: right;
 	margin: 10px 10px 10px 0;
+	height: 33px;
+	border-radius: 8px;
+	width: 79px;
+	font-size: 14px;
+	line-height: 33px;
+	padding: 0;
 }
 /* 提示弹层 */
 .promptLayer{
@@ -367,7 +426,7 @@
 	padding: 10px 10px;
 }
 .promptLayer .layerbox div button{
-	margin:40px 0 10px 0;
+	/* margin:40px 0 10px 0; */
 }
 /* 删除提示弹层 */
 .deletLayer{

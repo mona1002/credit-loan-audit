@@ -1,6 +1,50 @@
 /* 公共部分 */
+/* #Abody 部分 */
+/* #Abody .el-button{
+  background:#0077ff;
+  border-radius:8px;
+  padding:9px 22px;
+} */
+#Abody .el-button{
+  /* background:#0077ff; */
+  border-radius:8px;
+  padding:9px 22px;
+}
+#Abody .el-button el-button--primary{
+  background:#0077ff;
+  border-radius:8px;
+  padding:9px 22px;
+  font-size:16px;  
+}
+/* 公用 表格 表头 th */
+/* 放款信息 信审审结论轨迹  */
+/* .FinanceInformation .el-table__header-wrapper tr{
+height: 40px;
+}
+.FinanceInformation .el-table .cell{
+      line-height: 23px;
+} */
 
-
+.FinanceInformation .el-table .cell,
+.ApprovalConclusion .el-table .cell 
+  {
+  line-height: 23px;
+}
+.FinanceInformation .el-table,
+.ApprovalConclusion .el-table
+{
+  font-size: 13px;
+}
+.FinanceInformation .el-table__header-wrapper tr ,
+.ApprovalConclusion .el-table__header-wrapper tr 
+{
+  height: 40px;
+}
+.FinanceInformation .el-table__body-wrapper tr ,
+.ApprovalConclusion .el-table__body-wrapper tr 
+{
+  height: 35px;
+}
 /* 普通input的宽度 */
 
 .el-input {
@@ -91,10 +135,13 @@ td {
 /* 工作台 折叠面板 下面 content部分 */
 .workbench .el-collapse-item__wrap{
   border:1px solid #D5D5D5;
+  width:100%;
 }
 /* 工作台 - 刷新（refresh）- 按钮  */
 .workbench .el-icon-refresh{
-  margin-left: 335px;
+  float: right;
+  margin-right:20px;
+  line-height: 48px;
 }
 /* 工作通知 下边距 */
 .workbench .el-collapse{
@@ -159,12 +206,23 @@ td {
   width:258px;
   height:50px */
 }
+/* 信审表 ----各个  title 一行 */
 .CreditForm .el-collapse-item__header {
   border: 1px solid silver;
-  background: #20a0ff;
+  background:#eef0f9;
+  border:1px solid #e6eaee;
+  font-size:16px;
+  color:#1f2d3d;
+  padding-left: 50px;
 }
-
-
+/* 信审表 ----各个  title 小帽子部分 */
+.CreditForm .el-collapse-item{
+position: relative
+}
+/* .CreditForm .el-collapse-item is-active{
+  position: relative
+  
+} */
 /* 信审表-上网查询信息-文本域部分 */
 
 .CreditForm .CreditForm_InternetInf_ul_right .el-textarea,
@@ -210,80 +268,92 @@ td {
  .CreditForm .el-date-editor.el-input{
    width:180px;
  }
-
+/* 影音列表----缩略图按钮 */
+/*   */
 /* 影音资料-左侧列表 */
 
-.AudioVisual .el-collapse-item__header {
-  height: 30px;
-  line-height: 30px;
+.AudioVisual .el-collapse-item__header,
+.AudioVisualLeft .el-collapse-item__header {
+  height: 35px;
+  line-height: 35px;
   background: #eeeFFF;
   padding:0;
 }
 
 /* 影音列表-左侧列表-title表头  */
 
-.AudioVisual .el-collapse-item__header p span {
-  /* padding:5px 10px; */
-  display: inline-block;
-  border-right: 1px solid #e6ebf5;
+.AudioVisual .el-collapse-item__header p span,
+.AudioVisualLeft .el-collapse-item__header p span {
+  display: block;
+  float: left;
+  border: 1px solid #e6ebf5;
+  /* border-top: none; */
+  border-bottom: none;
   text-align: center;
+  font-size: 13px;
+ background: white;
 }
 
-.AudioVisual .el-collapse-item__header p span:nth-of-type(1) {
-  width: 30%;
+.AudioVisual .el-collapse-item__header p span:nth-of-type(1),
+.AudioVisualLeft  .el-collapse-item__header p span:nth-of-type(1)
+ {
+  width: 135px;
+  color:#0077ff;
+}
+.AudioVisualLeft  .el-collapse-item__header p span:nth-of-type(1){
+  width: 125px;
+  color:#0077ff;
+}
+.AudioVisual .el-collapse-item__header p span:nth-of-type(2){
+  width: 60px;
+  border-right: none;
+  border-left: none;
 }
 
-.AudioVisual .el-collapse-item__header p span:nth-of-type(2) {
-  width: 20%;
-  /* border-right:none; */
-  /* border-left:none; */
+.AudioVisualLeft .el-collapse-item__header p span:nth-of-type(2) {
+  width:76px;
+  border-right: none;
+  border-left: none;
+}
+.AudioVisual .el-collapse-item__header p span:nth-of-type(3){
+  width: 60px;
 }
 
-.AudioVisual .el-collapse-item__header p span:nth-of-type(3) {
-  width: 20%;
-}
-
-.AudioVisual .el-collapse-item__header p span:nth-of-type(4) {
-  width: 20%;
-  /* border-left:none; */
+.AudioVisual .el-collapse-item__header p span:nth-of-type(4){
+  width: 144px;
+  border-left: none;
 }
 
 /* 影音列表-左侧列表-折叠小箭头 */
 
-.AudioVisual .el-collapse-item__header .el-collapse-item__arrow{
-  line-height: 30px;
-  /* display: none; */
+.AudioVisual .el-collapse-item__header .el-collapse-item__arrow,
+.AudioVisualLeft .el-collapse-item__header .el-collapse-item__arrow{
+  /* line-height: 30px; */
+  display: none;
 }
 
 /* 影音列表-左侧列表--内容title-最外侧包裹层 */
 
-.AudioVisual .el-collapse-item__wrap {
+.AudioVisual .el-collapse-item__wrap,.AudioVisualLeft .el-collapse-item__wrap {
   width: 100%;
+  color: #666666;
+  background: #f8f9fd;
 }
 
 
 /* 影音列表-左侧列表--内容下边距 */
 
-.AudioVisual .AudioVisual_wrap_compare_right .el-collapse-item__content {
+.AudioVisual .AudioVisual_wrap_compare_right .el-collapse-item__content,
+.AudioVisualLeft .AudioVisual_wrap_compare_right .el-collapse-item__content {
   padding-bottom: 0;
 }
-/* 影音列表-弹出层-select-搜索框 */
-.SplitScreen .AudioVisual_wrap_compare_right .el-select>.el-input {
+/* 影音列表- 对比弹出层-select-搜索框-wrap */
+.SplitScreen .AudioVisual_wrap_compare_right .el-select>.el-input,
+.SplitScreen .AudioVisual_wrap_compare_right .el-input__inner {
   display: inline-block;
-  /* width: 180px;
-  height: 36px; */
-/* 改后 */
-  width:258px;
-  height:50px
+  width:200px;
+  height:35px
 }
-
-.SplitScreen .AudioVisual_wrap_compare_right .el-input__inner{
-  width:258px;
-  height:50px
-}
-
-
-
 /* 借款人资料 */
 
 .borrowerInformation .el-select {
@@ -349,4 +419,7 @@ td {
 .taskWinput .el-input__inner {
   height: 30px;
   border-radius: 4px;
+}
+.taskWatting .el-table__header-wrapper tr{
+  background-color: #fff；
 }

@@ -15,7 +15,10 @@
 		</div> -->
 		<div>
 			<el-collapse v-model="activeNames" @change="handleChange">
-				<el-collapse-item title="实地调查记录" name="1">
+				<el-collapse-item name="1">
+					<template slot="title">
+				      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">实地调查记录
+				    </template>
 				    <ul class="headul">
 						<li><label>日期：</label><span>{{datas.creditDate}}</span></li>
 						<li><label>是否核对借款人有效证件：</label><span>{{datas.isCheckDocTxt}}</span></li>
@@ -181,24 +184,19 @@
 	    }
 	}
 </script>
-<style type="text/css">
-	*{
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-	}
-	html,body{
+<style type="text/css" scoped>
+	.creditInvestigation{
+		/* padding: 15px 30px; */
 		width: 100%;
 		height: 100%;
-	}
-	ul,ol,li{
-		list-style: none;
+		background-color: #fafbfc;
 	}
 	/* 头部 */
 	.creditHead{
 		width: 100%;
 		
 	}
+	/* icon_hat */
 	ul.headul{
 		float: left;
 		width: 50%;

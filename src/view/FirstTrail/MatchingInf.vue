@@ -16,11 +16,7 @@
       <div class="SplitScreen_wrap">
         <!-- 左侧分屏部分 -->
         <div class="left" ref="rLeft">
-          <!-- <button @mouseenter="showList" v-show="flexible" class="stretch" style="padding:5px 10px">展开</button> -->
-          <!-- <button @mouseleave="hid" v-show="!flexible" class="stretch" style="padding:5px 10px">隐藏</button> -->
-          <!-- <button @click="aaa" style="padding-left:100px">huoqu</button> -->
           <!-- 左侧菜单栏 -->
-          <!-- @mouseenter="showList" @mouseleave="hid" -->
           <div ref="Left_title" class="Left_ul" @mouseenter="showList" @mouseleave="hid">
             <!-- 左侧 title列表 == 影音资料等 ==================弹出列表============ -->
             <ul>
@@ -62,20 +58,12 @@
         <div class="right" ref="rRight">
           <img src="../../../static/images/Vector%20Smart%20Object@1x.png" class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen">
           <!-- tab2 切换 -->
-          <!-- <el-tabs @tab-click="flag2 &&handleClick" type="border-card">
-        <el-tab-pane :label="val" v-for="(val,index) in items2" :key="index">
-        </el-tab-pane>
-        <AudioVisual v-if=" this.tabContent2==0"></AudioVisual>
-        <workbench v-if=" this.tabContent2==1"></workbench>
-      </el-tabs> -->
           <!-- 右屏tab 表头 -->
           <div class="Right_tab_title_div">
       <!-- 左右滑动 图标  -->
-            <!-- <i class="el-icon-d-arrow-left tab_left_arrow"></i> -->
             <span class="pre_next_btn_wrap" @click="leftMovingBtn">
             <img src="../../../static/images/Shape@1x.png" >
             </span>
-            <!-- <i class="el-icon-d-arrow-right tab_right_arrow" ></i> -->
             <span class="pre_next_btn_wrap" style="color:red;"  @click="rightMovingBtn">
             <img src="../../../static/images/Shaperight@1x.png">
             </span>
@@ -107,7 +95,6 @@
       </div>
       <!-- 对比弹出层   不在右侧div里面，再 wrap 里面  可以用fixed定位-->
       <div class="AudioVisual_wrap_compare" v-show="CompareAlert" v-on:CompareShow="compBtnS">
-        <!-- <i class="el-icon-close" @click="closeCompareBtn"></i> -->
         <el-button type="primary compareClose" @click="closeCompareBtn">关闭</el-button>
         <!-- 弹出层左侧 div -->
         <div class="AudioVisual_wrap_compare_left ">
@@ -134,7 +121,6 @@
       </div>
       <!-- 对比弹出层结束 -->
     </div>
-
   </div>
 
 </template>
@@ -167,8 +153,7 @@
   export default {
     data() {
       return {
-        // 进件人信息
-        customInf: [],
+        customInf: [],// 进件人信息
         // 对比按钮弹出层  下拉框
         options: [{
           value: '选项1',
@@ -178,13 +163,10 @@
           label: '北京烤鸭'
         }],
         value: '',
-        // -------------------------------结束
         showHalfBtn: false, // 显示 分屏按钮
         CompareAlert: false, //对比按钮 弹出层
         title: "",
-        // activeName: 'second', //---------右侧tab切换用
         isShow: false,
-        // FullScreenlShow: true,
         flexible: true,
         tabContent1: 0,
         tabContent2: 0, // ----------- tab1 用
@@ -192,20 +174,11 @@
         tabActiveInd2: 0,
         items1: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "信审审批", "流程轨迹"],
         items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "信审审批"],
-        // rightList: false, //右键菜单 默认不显示    ---------tab1 用
         tab1Index: 0, // tab1 激活样式的时用的下表
         tab2Index: 0, // 不是for循环，获取不到index时候的tab切换（ data部分 ）------tab 2 用
         // 不是for循环，获取不到index时候的tab切换（ data部分 ）------tab 2 用
         flag1: [true, true, true, true, true, true, true, true, true, true, true], //  ---------------------------------------------------- tab1用
         flag2: [true, true, true, true, true, true, true, true, true, true], //  ---------------------------------------------------- tab2用        
-
-        // items: [{ // ----------- tab1 用
-        //   title: "影音资料",
-        // }, {
-        //   title: "备注信息"
-        // }, {
-        //   title: "内部匹配"
-        // }],
         AlertSearch: '', // 对比弹出层 客户名称：搜索框
         AlertSearchCondition: [{
           value: '选项1',
@@ -314,14 +287,12 @@
         this.$refs.tabOne[this.tabActiveInd1].className = "tab1Act"; //  tab1 之前激活样式赋值回去 
         if (ind != 0) { // 点击影音资料的时候，两边不置灰，影音资料部分可点击
           console.log("-----！= ---tab2")
-          // this.$refs.tabOne[ind].className= "setGray";// tab1 对应css 样式标灰
           this.flag1[ind] = false; // tab1 对应click 事件不可用
         }
       }
     },
     mounted() {
       this.title = "影音资料";
-
       console.log(this.$route.query);
       this.customInf = this.$route.query;
       console.log(this.customInf);
@@ -401,7 +372,6 @@
     top: 18px;
     left: 18px;
     z-index: 3;
-    /* background:rgba(0, 119, 255, 0.75); */
     background: #4099ff;
   }
 
@@ -409,32 +379,19 @@
     position: absolute;
     top: 0;
     right: 17px;
-    /* right: 0; */
   }
 
   .showAllList {
-    /* display: inline-block; */
     position: absolute;
     padding-top: 6px;
     width: 55px;
     height: 50px;
-    /* background: red; */
     left: 0;
     top: 0;
-    /* padding-top: 10px; */
-    /* top:10px; */
-    /* color:#ffffff; */
-    /* color:white; */
-    /* background: white; */
-    /* left: 0; */
-    /* top: 10px; */
   }
-  /*-------------------------------- */
 
   .SplitScreen_content {
     border: 1px solid #0077ff;
-    /* background: #000; */
-    /* height: 100%; */
     height: calc(100% - 70px);
     overflow: auto;
     padding: 13px 30px;
@@ -444,8 +401,6 @@
   .PerDtl {
     color: #0077ff;
     background: white;
-    /* height: 46px; */
-    /* line-height: 46px; */
     height: 20px;
     line-height: 20px;
     margin-bottom: 13px;
@@ -457,40 +412,8 @@
     font-size: 14px;
     margin-right: 40px;
   }
-  /* 
-  .PerDtl span:nth-of-type(1) {
-    width: 139px;
-    margin-right: 43px;
-  }
-
-  .PerDtl span:nth-of-type(2) {
-    width: 214px;
-    margin-right: 42px;
-  }
-
-  .PerDtl span:nth-of-type(3) {
-    width: 226px;
-    margin-right: 43px;
-  }
-
-  .PerDtl span:nth-of-type(4) {
-    width: 121px;
-    margin-right: 42px;
-  }
-
-  .PerDtl span:nth-of-type(5) {
-    width: 173px;
-    margin-right: 43px;
-  }
-
-  .PerDtl span:nth-of-type(6) {
-    width: 191px;
-    margin-right: 41px;
-  } */
-
   .PerDtl span:nth-of-type(7) {
     width: 202px;
-    /* margin-right: 0; */
   }
   /* 切换按钮 */
 
@@ -501,15 +424,10 @@
     z-index: 1;
   }
   /* 左右分屏 */
-
   .SplitScreen_wrap {
-    /* position: relative; */
     width: 100%;
     height: calc( 100% - 33px);
-    /* background: red; */
   }
-  /*   流-css  */
-
   .left,
   .right,
   .AudioVisual_wrap_compare_left,
@@ -530,12 +448,9 @@
   }
   /* 左屏 */
   /* 左侧列表  影音资料等 ul 外包   流 */
-
   .left .Left_ul {
     width: 110px;
-    /* height:359px; */
     background: rgba(31, 45, 61, 0.59);
-    /* background:#1f2d3d; */
     box-shadow: 0 5px 20px 0 #475669;
     position: fixed;
     left: -110px;
@@ -551,19 +466,6 @@
     line-height: 12px;
     padding: 0 0 30px 20px;
   }
-  /* 左侧列表 ul 内 li   流  */
-  /* .left .Left_ul li {
-color:#bfcbd9;
-font-size:15px;
-letter-spacing:0.1px;
-height: 21px;
-line-height: 12px;
-margin-bottom: 18px;
-  } */
-  /* .left .Left_ul li:nth-of-type(1) {
-    color: white;
-  } */
-
   .left .Left_ul li:hover,
     {
     cursor: default;
@@ -585,16 +487,10 @@ margin-bottom: 18px;
     font-size: 16px;
     text-align: center;
     background: rgba(0, 119, 255, 0.75);
-    /* opacity: 0.75; */
-    /* background: #0077ff; */
     height: 48px;
     line-height: 48px;
     color: #f8f9fd;
-    /* 不换行 */
-    /* white-space:nowrap; */
-    /* padding: 0 20px; */
     overflow: hidden;
-    /* overflow: hidden; =======================================================================================*/
     position: relative;
   }
 
@@ -602,12 +498,6 @@ margin-bottom: 18px;
     text-align: right;
     padding-right: 40px;
   }
-  /* 左侧详情- title- 全屏功能icon */
-  /* .Left_right_Title img:nth-of-type(1) {
-    position: absolute;
-    top: 18px;
-    right: 17px;
-  } */
   /* 左侧详情 content div 内容   流-css */
 
   .Left_right_BigImg {
@@ -616,64 +506,29 @@ margin-bottom: 18px;
     overflow: auto;
   }
   /* 右屏 */
-  /* 右屏 tab 表头字段   流-css */
-  /* .right .Right_tab_title_div {
-    font-size: 16px;
-    text-align: center;
-    background: #0077ff;
-    height: 48px;
-    line-height: 48px;
-    color: #f8f9fd;
-
-  } */
   /* 右侧tab切换头外的ul   流 */
 .Right_tab_ul_wrap {
     overflow: hidden;
-    /* width: 675px; */
     width:calc( 100% - 100px);
-    /* background: yellow; */
-    /* position: relative; */
     margin-left: 50px;
   }
   .Right_tab_ul_wrap ul {
   width: 1061px;
     height: 48px;
-    /* color:#bfcbd9; */
     position: relative;
-    /* position: absolute; */
     text-align: left;
-    /* background: #000; */
-    /* overflow: hidden; */
-    /* left: 50px; */
-    /* white-space:nowrap; */
     z-index: 16;
   }
 
   .Right_tab_ul_wrap ul li {
-    /* float: left; */
      display: inline-block;
     margin-right: 40px;
-    /* white-space: nowrap; */
     letter-spacing: 0.11px;
     height: 38px;
     line-height: 38px;
   }
-  /* ======================================================================================================= */
-  /* 右侧tab切换头    流-del */
-  /* 
-  .Right_tab_title_div ul li:nth-of-type(1) {
-    color: red;
-    background: yellowgreen;
-  } */
-  /* .Right_tab_title {
-    float: left;
-    padding: 0 10px;
-    white-space: nowrap;
-  } */
-  /*  流 */
 
   .tab2_Content {
-    /*background: purple;*/
     height: calc( 100% - 48px);
     overflow: auto;
   }
@@ -694,51 +549,18 @@ position: absolute;
   .AudioVisual_wrap_compare {
     position: absolute;
     top: 117px;
+    background: white;
     width: calc( 100% - 60px);
     height: calc( 100% - 130px);
     z-index: 22;
     min-width: 1306px;
   }
-  /* 弹出层  左右分屏  流 */
-  /* .AudioVisual_wrap_compare_left,
-  .AudioVisual_wrap_compare_right {
-    float: left;
-    width: 50%;
-    height: 100%;
-    border: 1px solid orangered;
-  } */
-  /* 弹出层 - p标签 - 标题栏  流  */
-  /* 
-  .AudioVisual_wrap_compare_left p,
-  .AudioVisual_wrap_compare_right p {
-    background: gray;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    font-weight: bold;
-  } */
-  /* 弹出层 - p标签 - 左侧标题栏-上边距  流  */
-  /* .AudioVisual_wrap_compare_left p {
-    margin-top: 60px;
-  } */
   /* 弹出层 - 两侧组件 content  流 */
 
   .AlertContent {
     height: calc( 100% - 48px);
     overflow: auto;
-    /* background: red; */
-    /* position: relative; */
-  }
-  /* ----------------调试用css ------------------------*/
 
-  /* .right .Right_tab_title_div {
-    z-index: 22;
-    overflow: visible;
   }
-
-  .right .Right_tab_title_div li {
-    color: red;
-  } */
-  /* ------------------------------------------------- */
 
 </style>
