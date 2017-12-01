@@ -47,8 +47,7 @@
         height="400"
         border
         show-header
-        highlight-current-row
-        >
+        highlight-current-row>
         <!-- @current-change="handleCurrentChange" -->
         <el-table-column
           type="index"
