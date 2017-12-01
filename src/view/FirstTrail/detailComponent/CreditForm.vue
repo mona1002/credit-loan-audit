@@ -20,7 +20,8 @@
               </el-select>
             </li>
             <li>
-              <label class="InternetInf_left_label" @click="NewPage(1)"><span class="red"> * </span>客户在失信网是否有失信记录：</label>
+              <label class="InternetInf_left_label" @click="NewPage(1)">
+                <span class="red"> * </span>客户在失信网是否有失信记录：</label>
               <el-select v-model="checkData.wnetEcutedBrea" placeholder="请选择">
                 <el-option v-for="item in netEcutedBrea" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
@@ -34,7 +35,8 @@
               </el-select>
             </li>
             <li>
-              <label class="InternetInf_left_label" @click="NewPage(2)"><span class="red"> * </span>网上搜索借款人手机是否有异常：</label>
+              <label class="InternetInf_left_label" @click="NewPage(2)">
+                <span class="red"> * </span>网上搜索借款人手机是否有异常：</label>
               <el-select v-model="checkData.wnetPhone" placeholder="请选择">
                 <el-option v-for="item in netPhone" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
@@ -69,7 +71,8 @@
               </el-select>
             </li>
             <li>
-              <label class="InternetInf_left_label" @click="NewPage(3)"><span class="red"> * </span>当地工商网查询企业基本信息中是否有登记：</label>
+              <label class="InternetInf_left_label" @click="NewPage(3)">
+                <span class="red"> * </span>当地工商网查询企业基本信息中是否有登记：</label>
               <el-select v-model="checkData.wnetCompany" placeholder="请选择">
                 <el-option v-for="item in netCompany" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
@@ -105,7 +108,7 @@
               </el-input>
             </li>
             <li>
-              <label class="InterncheckData.etInf_right_label"> 手机异常信息说明： </label>
+              <label class="InternetInf_right_label"> 手机异常信息说明： </label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetPhonetxt">
               </el-input>
             </li>
@@ -175,12 +178,14 @@
         <div class="CreditForm_WorkInfs">
           <ul class="CreditForm_WorkInfs_ul_left">
             <li>
-              <label class="WorkInfs_left_label left_margin"><span class="red"> * </span>工作单位：</label>
+              <label class="WorkInfs_left_label left_margin">
+                <span class="red"> * </span>工作单位：</label>
               <el-input style="width:70%;" type="text" placeholder="请输入内容" v-model="checkData.hirecomName">
               </el-input>
             </li>
             <li>
-              <label class="WorkInfs_left_label left_margin_half_one"><span class="red"> * </span>单位性质：</label>
+              <label class="WorkInfs_left_label left_margin_half_one">
+                <span class="red"> * </span>单位性质：</label>
               <el-select v-model="checkData.hirecomSign" placeholder="请选择">
                 <el-option v-for="item in hirecomSign" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
@@ -195,41 +200,46 @@
               </el-select>
             </li>
             <li>
-              <label class="WorkInfs_left_label left_margin_half_one"><span class="red"> * </span>职位级别：</label>
+              <label class="WorkInfs_left_label left_margin_half_one">
+                <span class="red"> * </span>职位级别：</label>
               <el-input type="text" placeholder="请输入内容" v-model="checkData.workPost">
               </el-input>
             </li>
             <li>
-              <label class="WorkInfs_left_label left_margin_half_two"><span class="red"> * </span>单位电话：</label>
+              <label class="WorkInfs_left_label left_margin_half_two">
+                <span class="red"> * </span>单位电话：</label>
               <el-input type="text" placeholder="请输入内容" v-model="checkData.workTel">
               </el-input>
             </li>
             <li>
-              <label class="WorkInfs_left_label left_margin_half_one"><span class="red"> * </span>月均工资[元]：</label>
+              <label class="WorkInfs_left_label left_margin_half_one">
+                <span class="red"> * </span>月均工资[元]：</label>
               <el-input type="text" placeholder="请输入内容" v-model="checkData.avgsalaryamt">
               </el-input>
             </li>
             <li>
-              <label class="WorkInfs_left_label left_margin_half_two"><span class="red"> * </span>每月发薪日：</label>
+              <label class="WorkInfs_left_label left_margin_half_two">
+                <span class="red"> * </span>每月发薪日：</label>
               <el-input type="text" placeholder="请输入内容" v-model="checkData.payDay">
               </el-input>
             </li>
             <!-- 三级联动：单位地址：	hirecomAddress  -->
             <li class="company_address_select">
-              <label class="WorkInfs_left_label left_margin"><span class="red"> * </span>单位地址 ：</label>
+              <label class="WorkInfs_left_label left_margin">
+                <span class="red"> * </span>单位地址 ：</label>
               <!-- 一级 -->
-              <el-select v-model="checkData.hirecomAddress" placeholder="请选择" @change="province">
-                <el-option v-for="item in	hirecomAddress" :key="item.areaCode" :label="item.label" :value="item.value">
+              <el-select v-model="checkData.workProvince" placeholder="请选择" @change="getCity(checkData.workProvince)">
+                <el-option v-for="item in	hirecomAddress" :key="item.id" :label="item.areaName" :value="item.id">
                 </el-option>
               </el-select>
               <!-- 二级 -->
-              <el-select v-model="checkData.hirecomAddress" placeholder="请选择">
-                <el-option v-for="item in hirecomAddress" :key="item.value" :label="item.label" :value="item.value">
+              <el-select v-model="checkData.workCity" placeholder="请选择" @change="getTown(checkData.workCity)">
+                <el-option v-for="item in hireProvincd" :key="item.id" :label="item.areaName" :value="item.id">
                 </el-option>
               </el-select>
               <!-- 三级 -->
-              <el-select v-model="checkData.hirecomAddress" placeholder="请选择">
-                <el-option v-for="item in hirecomAddress" :key="item.value" :label="item.label" :value="item.value">
+              <el-select v-model="checkData.workCounty" placeholder="请选择">
+                <el-option v-for="item in hireTown" :key="item.id" :label="item.areaName" :value="item.id">
                 </el-option>
               </el-select>
               <!-- 具体地址input  text框 -->
@@ -245,18 +255,21 @@
           </ul>
           <ul class="CreditForm_WorkInfs_ul_right">
             <li>
-              <label class=" CheckId_right_label "> <span class="red"> * </span>所在部门： </label>
+              <label class=" CheckId_right_label ">
+                <span class="red"> * </span>所在部门： </label>
               <el-input type="text" placeholder="请输入内容" v-model="checkData.hiredepartment">
               </el-input>
             </li>
             <li>
               <!--   需要改成 date  输入框 -->
-              <label class=" CheckId_right_label "><span class="red"> * </span> 入职时间： </label>
+              <label class=" CheckId_right_label ">
+                <span class="red"> * </span> 入职时间： </label>
               <el-date-picker v-model="checkData.entryDate" type="date" placeholder="选择日期">
               </el-date-picker>
             </li>
             <li>
-              <label class=" CheckId_right_label "> <span class="red"> * </span>工资发放形式： </label>
+              <label class=" CheckId_right_label ">
+                <span class="red"> * </span>工资发放形式： </label>
               <el-select v-model="checkData.payForm" placeholder="请选择">
                 <el-option v-for="item in payForm" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
@@ -269,7 +282,7 @@
             </li>
             <li>
               <label class=" CheckId_right_label "> 是否为私营业主： </label>
- <el-select v-model="checkData.privateOwnerFlag" placeholder="请选择">
+              <el-select v-model="checkData.privateOwnerFlag" placeholder="请选择">
                 <el-option v-for="item in privateOwnerFlag" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
@@ -409,7 +422,8 @@
               </el-input>
             </li>
             <li>
-              <label class=" FamilyInf_right_label family_left_margin_half_two"><span class="red"> * </span> 可以承受的月还款[元]： </label>
+              <label class=" FamilyInf_right_label family_left_margin_half_two">
+                <span class="red"> * </span> 可以承受的月还款[元]： </label>
               <el-input type="text" placeholder="请输入内容" v-model="checkData.fbalance">
               </el-input>
             </li>
@@ -446,7 +460,7 @@
             <li>
               <label class="check_reside__left_label">现住址：</label>
               <!-- <span> 北京市北京市延庆县宫本武藏 </span> -->
-                <span class="detail_inf oneline"> </span> {{this.checkData.aaddress}} </span>
+              <span class="detail_inf oneline"> </span> {{this.checkData.aaddress}} </span>
             </li>
             <li>
               <label class="check_reside__left_label">现住地址是否为常住地址 ：</label>
@@ -461,7 +475,8 @@
       <!-- 初审结论 -->
       <el-collapse-item title="初审结论" name="8">
         <div class=" CreditForm_result">
-          <p class="CreditForm_result_p_label"><span class="red"> * </span>初审结果评价：</p>
+          <p class="CreditForm_result_p_label">
+            <span class="red"> * </span>初审结果评价：</p>
           <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="checkData.oother">
           </el-input>
         </div>
@@ -476,8 +491,9 @@
   export default {
     data() {
       return {
+        addressOne: '',
         activeNames: ['1', "2", "3", "4", "5", "6", "7", "8"], //折叠面板 默认显示下标
-        checkData:'',// 查询接口回来的数据
+        checkData: [], // 查询接口回来的数据
         // -------上网查询信息------------
         beexEcuted: [{ //（上网查询信息）客户在人法网是否有被执行信
           value: '1',
@@ -606,20 +622,24 @@
           value: '11',
           label: '其他'
         }],
-        hirecomKind: [{ // 所属行业：
-          value: '1',
-          label: '是'
-        }, {
-          value: '0',
-          label: '否'
-        }],
-        hirecomAddress: [{ // 单位地址------------三级联动---待续 
-          value: '1',
-          label: '是'
-        }, {
-          value: '0',
-          label: '否'
-        }],
+        hirecomKind: [],
+        // hirecomKind: [{ // 所属行业：
+        //   value: '1',
+        //   label: '是'
+        // }, {
+        //   value: '0',
+        //   label: '否'
+        // }],
+        hirecomAddress: [], //省份
+        hireProvincd: [], //市区
+        hireTown: [], //县区
+        // hirecomAddress: [{ // 单位地址------------三级联动---待续 
+        //   value: '1',
+        //   label: '是'
+        // }, {
+        //   value: '0',
+        //   label: '否'
+        // }],
         payForm: [{ // 工资发放形式
           value: '01',
           label: '网银'
@@ -632,15 +652,13 @@
         }],
 
         // ------------------------------私营企业信息------------------------
-        privateOwnerFlag:[
-          { 
+        privateOwnerFlag: [{
           value: '1',
           label: '是'
         }, {
-           value: '0',
+          value: '0',
           label: '否'
-        }, 
-        ],
+        }, ],
         compType: [{ // 企业类型
           value: '01',
           label: '独资'
@@ -842,6 +860,7 @@
         //   value: '0',
         //   label: '否'
         // }],
+
       }
     },
     methods: {
@@ -870,62 +889,59 @@
         }
         // this.rightList = false;
       },
-      province(){
-        console.log("province");
-          this.post("/credit/queryProvince", {
-        id: "bb30607c-b5aa-4915-9474-460e099a33e8",
-      }).then(res => {
-        console.log(res);
-      }).catch(err => {
-        reject(err)
-      });
+      getCity(item) {
+        console.log("省份-市区")
+        // console.log(item)
+        this.post("/credit/queryCityCounty", {
+          parentCode: item,
+        }).then(res => {
+          console.log(res);
+          this.hireProvincd = res.data;
+          // 修改的时候 市区  县区 清空数据
+          this.checkData.workCity = "";
+          this.checkData.workCounty = "";
+          this.hireTown = "";
+        })
       },
-      city(){
+      getTown(item) {
         console.log("city");
-          this.post("/credit/queryProvince", {
-        id: "bb30607c-b5aa-4915-9474-460e099a33e8",
-      }).then(res => {
-        console.log(res);
-      }).catch(err => {
-        reject(err)
-      });
-      },
-      town(){
-        console.log("town");
-          this.post("/credit/queryProvince", {
-        id: "bb30607c-b5aa-4915-9474-460e099a33e8",
-      }).then(res => {
-        console.log(res);
-      }).catch(err => {
-        reject(err)
-      });
+        this.post("/credit/queryCityCounty", {
+          parentCode: item,
+        }).then(res => {
+          console.log(res);
+          this.hireTown = res.data;
+        })
       },
       CFsave() {
-        console.log("提交信息")
+        console.log("提交信息");
+        // 下面为需要验证不为 空 的字段
+        
+        // console.log(this.checkData)
+        this.post("/creauditInfo/addOrUpdate", this.checkData).then(res => {
+          console.log(res);
+          // this.checkData = res.data;
+        });
       }
     },
     mounted() {
       // 获取查询列表数据
       this.post("/creauditInfo/queryCreauditInfoObj", {
-        applyId:"00542",
+        applyId: "00542",
       }).then(res => {
-        console.log(res);
-        // console.log(res.data)
-        this.checkData=res.data;
+        console.log(res.data);
+        this.checkData = res.data;
       });
       // 省    
-      // this.post("/credit/queryProvince", {
-      // }).then(res => {
-      //   console.log(res);
-      //   this.hirecomAddress=res.data;
-      // });
-      // 所属行业     ？？？？
-       this.post("/credit/industry", {
-      }).then(res => {
-        console.log(res);
-        // this.hirecomKind=res.data;
+      this.post("/credit/queryProvince", {}).then(res => {
+        // console.log(res);
+        this.hirecomAddress = res.data;
+      });
+      // 所属行业 
+      this.post("/credit/industry", {}).then(res => {
+        // console.log(res.data);
+        this.hirecomKind = res.data;
       })
-      
+
     }
   }
 
@@ -933,12 +949,13 @@
 
 <style scope>
   /* 公共 */
-  .red{
+
+  .red {
     /* display: inline-block; */
     color: red;
     font-weight: bold;
     font-size: 16px;
-  /* padding-top:3px; */
+    /* padding-top:3px; */
   }
   /* .one_input {
     width: 70%;

@@ -5,6 +5,8 @@ import {
 } from '@/util/util'
 // 头部导航
 import myHead from '@/view/header'
+import test from '@/view/test'
+
 
 import HelloWorld from '@/view/HelloWorld'
 /*初审审批*/
@@ -55,10 +57,10 @@ const routes = [{
     //   requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
     // },
   },
-  // {
-  //   path: '/myHead',
-  //   component: myHead
-  // },
+  {
+    path: '/test',
+    component: test
+  },
   {
     // 工作台  误改, 误删
     /*

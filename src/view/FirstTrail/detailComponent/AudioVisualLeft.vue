@@ -279,6 +279,9 @@
 </script>
 
 <style scope>
+/* .AudioVisual{
+  height: 100%;
+} */
   /* public */
 
   .small_pic_close {
@@ -372,7 +375,7 @@
   }
  .AudioVisual_Img {
     width: calc( 100% - 200px);
-    left: 200px;
+    /* left: 200px; */
     background: yellowgreen;
     /* background: red; */
   }
@@ -419,8 +422,8 @@
     /* top: 0; */
     /* right: 0; */
     /* bottom: 30px; */
-    width: 300px;
-    height: 500px;
+    /* width: 300px; */
+    /* height: 500px; */
     z-index: 20;
   }
 

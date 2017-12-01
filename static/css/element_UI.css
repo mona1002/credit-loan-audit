@@ -1,6 +1,21 @@
 /* 公共部分 */
-
-
+/* #Abody 部分 */
+/* #Abody .el-button{
+  background:#0077ff;
+  border-radius:8px;
+  padding:9px 22px;
+} */
+#Abody .el-button{
+  /* background:#0077ff; */
+  border-radius:8px;
+  padding:9px 22px;
+}
+#Abody .el-button el-button--primary{
+  background:#0077ff;
+  border-radius:8px;
+  padding:9px 22px;
+  font-size:16px;  
+}
 /* 普通input的宽度 */
 
 .el-input {
@@ -91,10 +106,13 @@ td {
 /* 工作台 折叠面板 下面 content部分 */
 .workbench .el-collapse-item__wrap{
   border:1px solid #D5D5D5;
+  width:100%;
 }
 /* 工作台 - 刷新（refresh）- 按钮  */
 .workbench .el-icon-refresh{
-  margin-left: 335px;
+  float: right;
+  margin-right:20px;
+  line-height: 48px;
 }
 /* 工作通知 下边距 */
 .workbench .el-collapse{
@@ -210,12 +228,13 @@ td {
  .CreditForm .el-date-editor.el-input{
    width:180px;
  }
-
+/* 影音列表----缩略图按钮 */
+/*   */
 /* 影音资料-左侧列表 */
 
 .AudioVisual .el-collapse-item__header {
-  height: 30px;
-  line-height: 30px;
+  height: 35px;
+  line-height: 35px;
   background: #eeeFFF;
   padding:0;
 }
@@ -223,42 +242,49 @@ td {
 /* 影音列表-左侧列表-title表头  */
 
 .AudioVisual .el-collapse-item__header p span {
-  /* padding:5px 10px; */
-  display: inline-block;
-  border-right: 1px solid #e6ebf5;
+  display: block;
+  float: left;
+  border: 1px solid #e6ebf5;
+  /* border-top: none; */
+  border-bottom: none;
   text-align: center;
+  font-size: 13px;
+ background: white;
 }
 
 .AudioVisual .el-collapse-item__header p span:nth-of-type(1) {
-  width: 30%;
+  width: 135px;
+  color:#0077ff;
 }
 
 .AudioVisual .el-collapse-item__header p span:nth-of-type(2) {
-  width: 20%;
-  /* border-right:none; */
-  /* border-left:none; */
+  width: 60px;
+  border-right: none;
+  border-left: none;
 }
 
 .AudioVisual .el-collapse-item__header p span:nth-of-type(3) {
-  width: 20%;
+  width: 60px;
 }
 
 .AudioVisual .el-collapse-item__header p span:nth-of-type(4) {
-  width: 20%;
-  /* border-left:none; */
+  width: 144px;
+  border-left: none;
 }
 
 /* 影音列表-左侧列表-折叠小箭头 */
 
 .AudioVisual .el-collapse-item__header .el-collapse-item__arrow{
-  line-height: 30px;
-  /* display: none; */
+  /* line-height: 30px; */
+  display: none;
 }
 
 /* 影音列表-左侧列表--内容title-最外侧包裹层 */
 
 .AudioVisual .el-collapse-item__wrap {
   width: 100%;
+  color: #666666;
+  background: #f8f9fd;
 }
 
 
@@ -267,23 +293,12 @@ td {
 .AudioVisual .AudioVisual_wrap_compare_right .el-collapse-item__content {
   padding-bottom: 0;
 }
-/* 影音列表-弹出层-select-搜索框 */
-.SplitScreen .AudioVisual_wrap_compare_right .el-select>.el-input {
+/* 影音列表- 对比弹出层-select-搜索框-wrap */
+.SplitScreen .AudioVisual_wrap_compare_right .el-select>.el-input,.SplitScreen .AudioVisual_wrap_compare_right .el-input__inner {
   display: inline-block;
-  /* width: 180px;
-  height: 36px; */
-/* 改后 */
-  width:258px;
-  height:50px
+  width:200px;
+  height:35px
 }
-
-.SplitScreen .AudioVisual_wrap_compare_right .el-input__inner{
-  width:258px;
-  height:50px
-}
-
-
-
 /* 借款人资料 */
 
 .borrowerInformation .el-select {
