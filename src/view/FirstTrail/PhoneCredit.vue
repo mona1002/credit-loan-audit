@@ -784,7 +784,7 @@ el-header {
 
 
 /* 表单 */
-.address-title {
+.phone-credit .address-title {
   width: 100%;
   height: 40px;
   font-size: 18px;
@@ -798,33 +798,33 @@ el-header {
   overflow: hidden;
 }
 /* label */
-.el-form-item__label {
+.phone-credit .el-form-item__label {
   width: 150px !important;
 }
-.el-form-item {
+.phone-credit .el-form-item {
   margin-bottom: 5px !important;
 
 }
 /* 三列 */
-.item-column3 {
+.phone-credit .item-column3 {
   width: 33%;
   float: left;
   margin: 0;
   margin-bottom: 10px;
 }
 /* 两列 */
-.item-column2 {
+.phone-credit .item-column2 {
   width: 50%;
   float: left;
   margin: 0;
 }
-.item-column1{
+.phone-credit .item-column1{
   width:80%;
   float: left;
   margin: 0;
 }
 /* 表单提交 */
-.address-submit {
+.phone-credit .address-submit {
   margin: 0;
   padding: 0;
   float: left;
@@ -840,10 +840,10 @@ el-header {
 
 }
 
-.el-select>.el-input{
+.phone-credit .el-select>.el-input{
   height: 30px;
 }
-.el-input__inner{
+.phone-credit .el-input__inner{
   height: 30px !important;
 }
 
