@@ -1,9 +1,9 @@
-<!-- <template>
-	实地征信
+<template>
+	<!-- 实地征信 -->
 	<div class="creditInvestigation">
-		<div class="creditHead">
+		<!-- <div class="creditHead">
 			<ul class="headul">
-				<li><label>日期：</label><span>{{datas.isCheckDocTxt}}</span></li>
+				<li><label>日期：</label><span>{{datas.creditDate}}</span></li>
 				<li><label>是否可对借款人有效证件：</label><span>是</span></li>
 				<li><label>实地场所：</label><span>{{datas.isCheckDocTxt}}</span></li>
 			</ul>
@@ -12,19 +12,19 @@
 				<li><label>不核对借款人有效证件原因：</label><span>{{datas.isCheckDocTxt}}</span></li>
 				<li><label>实地发起源：</label><span>{{datas.isCheckDocTxt}}</span></li>
 			</ul>
-		</div>
+		</div> -->
 		<div>
 			<el-collapse v-model="activeNames" @change="handleChange">
 				<el-collapse-item title="实地调查记录" name="1">
 				    <ul class="headul">
 						<li><label>日期：</label><span>{{datas.creditDate}}</span></li>
 						<li><label>是否核对借款人有效证件：</label><span>{{datas.isCheckDocTxt}}</span></li>
-						<li><label>实地场所：</label><span>{{datas.}}</span></li>
+						<li><label>实地场所：</label><span>{{aa}}</span></li>
 					</ul>
 					<ul class="headul">
-						<li><label>实地人员1：</label><span>{{datas.}}</span></li>
+						<li><label>实地人员1：</label><span>{{bb}}</span></li>
 						<li><label>不核对借款人有效证件原因：</label><span>{{datas.isCheckDocRemark}}</span></li>
-						<li><label>实地发起源：</label><span>{{datas.}}</span></li>
+						<li><label>实地发起源：</label><span>{{cc}}</span></li>
 					</ul>
 			  </el-collapse-item>
 			  <el-collapse-item title="家庭实地征信内容" name="2">
@@ -43,7 +43,7 @@
 					<li><label></label><span></span></li>
 					<li><label></label><span></span></li>
 					<li><label>与借款人关系：</label><span>{{datas.homeRelBorrower}}</span></li>
-					<li><label>房屋户型</label><span>{{datas.homeHouseSize}}</span></li>
+					<li><label>房屋户型：</label><span>{{datas.homeHouseSize}}</span></li>
 					<li><label></label><span></span></li>
 				</ul>
 			  </el-collapse-item>
@@ -79,7 +79,7 @@
 				<ul class="headul">
 					<li><label></label><span></span></li>
 					<li><label></label><span></span></li>
-					<li><label>企业是否存在：</label><span>{{datas.}}</span></li>
+					<li><label>企业是否存在：</label><span>{{dd}}</span></li>
 				</ul>
 			  </el-collapse-item>
 			  <el-collapse-item title="办公环境" name="6">
@@ -102,20 +102,20 @@
 				</ul>
 				<ul class="headul">
 					<li><label>厂房面积：</label><span>{{datas.comArea}}</span></li>
-					<li><label>办公区工位数情况</label><span>{{datas.}}</span></li>
-					<li><label>工位上是否有电话：</label><span>{{datas.}}</span></li>
+					<li><label>办公区工位数情况：</label><span>{{ee}}</span></li>
+					<li><label>工位上是否有电话：</label><span>{{ff}}</span></li>
 				</ul>
 			  </el-collapse-item>
 			  <el-collapse-item title="员工" name="8">
 			    <ul class="headul">
 					<li><label>是否开工中：</label><span>{{datas.comIsStartTxt}}</span></li>
 					<li><label>是否统一着装：</label><span>{{datas.comIsDressUni}}</span></li>
-					<li><label>办公区工位数情况：</label><span>{{datas.}}</span></li>
+					<li><label>办公区工位数情况：</label><span>{{gg}}</span></li>
 				</ul>
 				<ul class="headul">
 					<li><label>见到办公人数：</label><span>{{datas.comWorkerNum}}</span></li>
 					<li><label></label><span></span></li>
-					<li><label>工位上是否有电话：</label><span>{{datas.}}</span></li>
+					<li><label>工位上是否有电话：</label><span>{{hh}}</span></li>
 				</ul>
 			  </el-collapse-item>
 			  <el-collapse-item title="口述企业状况" name="9">
@@ -132,7 +132,7 @@
 				<ul class="headul">
 					<li><label></label><span></span></li>
 					<li><label>年收支[万元]：</label><span>{{datas.comPay}}</span></li>
-					<li><label>纯利[万元]：</label><span>{{data.comNetProfit}}</span></li>
+					<li><label>纯利[万元]：</label><span>{{datas.comNetProfit}}</span></li>
 					<li><label>上下游结算方式：</label><span>{{datas.comCaculation}}</span></li>
 					<li><label></label><span></span></li>
 					<li><label>应付账款[万元]：</label><span>{{datas.comPayables}}</span></li>
@@ -151,6 +151,14 @@
 	      return {
 	        activeNames: ['1','2','3','4','5','6','7','8','9'],
 	        datas:'',
+	        aa:'',
+	        bb:'',
+	        cc:'',
+	        dd:'',
+	        ee:'',
+	        ff:'',
+	        gg:'',
+	        hh:'',
 	      };
 	    },
 	    created(){

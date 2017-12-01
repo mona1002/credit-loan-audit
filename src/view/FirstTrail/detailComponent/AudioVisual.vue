@@ -15,7 +15,7 @@
         </p>
         <el-collapse>
           <!-- v-for="" -->
-          <el-collapse-item v-for="(item,ind) in ListParent" :key="ind" @click.native="getChildrenList">
+          <el-collapse-item v-for="(item,ind) in ListParent" :key="ind" @click.native="getChildrenList(item.id)">
             <template slot="title">
               <p>
                 <span>{{item.arcName}}</span>
@@ -25,7 +25,7 @@
               </p>
             </template>
             <div class="list_title_div">
-              <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg">
+              <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind)">
                 <span>{{item.arcName}}</span>
                 <span>{{item.arcNum}}</span>
                 <span>{{item.imageCount}}</span>
@@ -71,12 +71,12 @@
         <i class="el-icon-zoom-out position_and_size icon_smaller" @click="smaller"></i>
         <i class="el-icon-refresh position_and_size icon_clockWise" @click="clockWise "></i>
         <i class="el-icon-sort position_and_size icon_AclockWise" @click="AclockWise "></i>
-        <img v-for="(val,key) in picData" :src="val.pic" v-if="key==smallPicInd" ref="Big_pic_ref" />
+        <img  ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val" v-if="key==smallPicInd" />
       </div>
       <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
       <div class="Small_pic_div" v-show="SmallPicShow">
         <i class="el-icon-close small_pic_close" @click="SmallpicClose"></i>
-        <img class="Small_pic" v-for="(val,index) in picData" :src="val.pic" @click="ChangeCss(index)" @mouseenter="smallPic($event,index)"
+        <img class="Small_pic" v-for="(val,index) in imgPath" :key="index" :src="'http://10.1.26.6:8080'+val" @click="ChangeCss(index)" @mouseenter="smallPic($event,index)"
           ref="small_pic_ref" />
       </div>
     </div>
@@ -85,58 +85,59 @@
 </template>
 
 <script>
-  // import AudVis from "./AudioVisual";
-  import AudVis from "./AudioVisual";
-
   export default {
     data() {
       return {
-        picData: [],
+        // picData: [],
         smallPicInd: 0, // 未知
         SmallPicShow: false,
         CompareAlert: true,
-        ListParent: [],
-        ListDetails: [],
-        // d:'',
-        // v: [{ // 单位性质
-        //   value: 'yes',
-        //   label: '是'
-        // }, {
-        //   value: 'no',
-        //   label: '否'
-        // }],
+        ListParent: [],//父节点title列表
+        ListDetails: [],//子节点列表
+        applyId:'',//入参
+        imgPath:[],//图片路径
       }
     },
-    components: {
-      AudVis
-    },
     methods: {
-      getChildrenList() {
+      getChildrenList(id) {
         console.log("获取子节点");
         this.post("/productArchive/getProductArchiveChildList", {
           applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
-          pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
+          pid:id,
+          // pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
         }).then(res => {
-          console.log(res);
-          // console.log(res.data)
+          // console.log(res);
+          console.log(res.data)
           this.ListDetails=res.data;
-          // this.picData=res.data[0].uploadArcPaths;
-          for(var i=0;i<=res.data.length;i++){
-            
-          }
-          // console.log(this.picData)
+
         });
       },
-      getImg() {
+      getImg(ind) {
         console.log("获取图片");
-        this.post("/internalMatch/getInternalMatchCustName", {
-          applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
-          pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
-        }).then(res => {
-          console.log(res);
-          // console.log(res.data)
-          // this.picData=res.data
-        });
+        console.log(ind)
+        this.imgPath=  this.ListDetails[ind].uploadArcPaths;
+        // this.$mount( ".AudioVisual" )
+  this.$nextTick(function () {
+
+    // this.$watch(function(){ return this.$refs.Big_pic_ref[0]},
+    // function(newd){  console.log("333"+newd) }
+    // )
+                    console.log(this.$refs.Big_pic_ref[0]);
+                  
+                    console.log(parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0]).height ))
+        console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
+        console.log(typeof( getComputedStyle(this.$refs.Big_pic_ref[0], false).width))
+        
+        // DOM 现在更新了
+        // `this` 绑定到当前实例
+        // this.doSomethingElse()
+      })
+                
+        
+                // console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).height)
+        // console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
+        // console.log(typeof( getComputedStyle(this.$refs.Big_pic_ref[0], false).width))
+        // console.log( this.imgPath)
       },
       hid() { //左侧 li 列表
         console.log("hid");
@@ -222,6 +223,7 @@
       defaultBigPicCss() { // （重复代码）通用方法 ：  大图 --------------- 恢复默认高度、不旋转
         console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).height)
         console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
+        console.log(typeof( getComputedStyle(this.$refs.Big_pic_ref[0], false).width))
         // if (getComputedStyle(this.$refs.Big_pic_ref[0], false).width > getComputedStyle(this.$refs.Big_pic_ref[0], //判断宽度>高度  按宽度100%显示
         //     false).height) { // 点击切换图片时，让显示的大图宽高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
         //   this.$refs.Big_pic_ref[0].style.width = "100%";//calc( 100% - 202px)
@@ -294,20 +296,25 @@
     mounted() {
       // 登录
       //  this.post("/smUser/login", {
-      //           userCode:"02114C1405",
+      //           userCode:"ddyy",
       //           loginPassword:"111111"
       //         }).then(res => {
       //           console.log(res);
       //           console.log(res.data)
       //         });
+
+//  this.applyId=this.$route.query.applyId;//接受参数
+
 // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         // id:"bb30607c-b5aa-4915-9474-460e099a33e8",
+        // applyId:this.applyId,
         applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
       }).then(res => {
         // console.log(res);
         // console.log(res.data)
         this.ListParent = res.data
+        // console.log(this.ListParent[0].id )
       });
 
       // 子菜单栏

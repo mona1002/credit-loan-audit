@@ -7,93 +7,93 @@
           <ul class="CreditForm_InternetInf_ul_left">
             <li>
               <label class="InternetInf_left_label">客户在法网是否有被执行信息：</label>
-              <span class="detail_inf">{{this.beexEcutedVal}} </span>
+              <span class="detail_inf">{{this.FormData.wbeexEcutedtext}} </span>
             </li>
             <li>
               <label class="InternetInf_left_label">单位在法网是否有被执行信息：</label>
-              <span class="detail_inf">{{this.netHirecomVal }} </span>
+              <span class="detail_inf">{{this.FormData.wnetHirecomtext}} </span>
             </li>
             <li>
               <label class="InternetInf_left_label">客户在失信网是否有失信记录：</label>
-              <span class="detail_inf">{{this.netEcutedBreaVal }} </span>
+              <span class="detail_inf">{{this.FormData.wnetEcutedBreatext }} </span>
             </li>
             <li>
               <label class="InternetInf_left_label">单位在失信网是否有失信记录：</label>
-              <span class="detail_inf">{{this.netHirecomBreaVal }} </span>
+              <span class="detail_inf">{{this.FormData.wnetHirecomBreatext }} </span>
             </li>
             <li>
               <label class="InternetInf_left_label">网上搜索借款人手机是否有异常：</label>
-              <span class="detail_inf">{{this.netPhoneVal }} </span>
+              <span class="detail_inf">{{this.FormData.wnetPhonetext }} </span>
             </li>
             <li>
               <label class="InternetInf_left_label">网搜单位名称是否有异常：</label>
-              <span class="detail_inf">{{this.netHirecomNameVal }} </span>
+              <span class="detail_inf">{{this.FormData.wnetHirecomNametext }} </span>
             </li>
             <li>
               <label class="InternetInf_left_label">网搜单位电话是否有异常：</label>
-              <span class="detail_inf">{{this.netHirecomPhoneVal }} </span>
+              <span class="detail_inf">{{this.FormData.wnetHirecomPhonetext }} </span>
             </li>
             <li>
               <label class="InternetInf_left_label">网上搜索借款人现居住地址和房产地址是否有异常：</label>
-              <span class="detail_inf">{{this.netAddrandEstateVal }} </span>
+              <span class="detail_inf">{{this.FormData.wnetAddrandEstatetext }} </span>
             </li>
             <li>
               <label class="InternetInf_left_label">网搜单位地址是否有异常：</label>
-              <span class="detail_inf">{{this.netHirecomAddressVal }} </span>
+              <span class="detail_inf">{{this.FormData.wnetHirecomAddresstext }} </span>
             </li>
             <li>
               <label class="InternetInf_left_label">当地工商网查询企业基本信息中是否有登记：</label>
-              <span class="detail_inf">{{this.netCompanyVal }} </span>
+              <span class="detail_inf">{{this.FormData.wnetCompanytext }} </span>
             </li>
             <li>
               <label class="InternetInf_left_label">客户工作单位在全国组织代码查询中是否存在：</label>
-              <span class="detail_inf">{{this.netAddrstateVal }} </span>
+              <span class="detail_inf">{{this.FormData.wnetAddrstatetext }} </span>
             </li>
           </ul>
           <ul class="CreditForm_InternetInf_ul_right">
             <li>
               <label class="InternetInf_right_label"> 执行信息说明： </label>
-              <span class="detail_inf">{{this.beexEcutedtxt}} </span>
+              <span class="detail_inf">{{this.FormData.beexEcutedtxt}} </span>
             </li>
             <li>
               <label class="InternetInf_right_label"> 单位执行信息说明：</label>
-              <span class="detail_inf">{{this.netHirecomtxt }} </span>
+              <span class="detail_inf">{{this.FormData.wnetHirecomtxt }} </span>
             </li>
             <li>
               <label class="InternetInf_right_label"> 失信记录说明： </label>
-              <span class="detail_inf">{{this.netEcutedBreatxt }} </span>
+              <span class="detail_inf">{{this.FormData.wnetEcutedBreatxt }} </span>
             </li>
             <li>
               <label class="InternetInf_right_label"> 单位失信记录说明： </label>
-              <span class="detail_inf">{{this.netHirecomBreatxt }} </span>
+              <span class="detail_inf">{{this.FormData.wnetHirecomBreatxt }} </span>
             </li>
             <li>
               <label class="InternetInf_right_label"> 手机异常信息说明： </label>
-              <span class="detail_inf">{{this.netPhonetxt }} </span>
+              <span class="detail_inf">{{this.FormData.wnetPhonetxt }} </span>
             </li>
             <li>
               <label class="InternetInf_right_label"> 单位名称异常信息说明： </label>
-              <span class="detail_inf">{{this.netHirecomNametxt }} </span>
+              <span class="detail_inf">{{this.FormData.wnetHirecomNametxt }} </span>
             </li>
             <li>
               <label class="InternetInf_right_label"> 单位电话异常信息说明： </label>
-              <span class="detail_inf">{{this.netHirecomPhonetxt }} </span>
+              <span class="detail_inf">{{this.FormData.wnetHirecomPhonetxt }} </span>
             </li>
             <li>
               <label class="InternetInf_right_label"> 地址异常信息说明： </label>
-              <span class="detail_inf">{{this.netAddrandEstatetxt }} </span>
+              <span class="detail_inf">{{this.FormData.wnetAddrandEstatetxt }} </span>
             </li>
             <li>
               <label class="InternetInf_right_label"> 单位地址异常信息说明： </label>
-              <span class="detail_inf">{{this.netHirecomAddresstxt }} </span>
+              <span class="detail_inf">{{this.FormData.wnetHirecomAddresstxt }} </span>
             </li>
             <li>
               <label class="InternetInf_right_label"> 工商登记信息说明： </label>
-              <span class="detail_inf">{{this.netCompanytxt }} </span>
+              <span class="detail_inf">{{this.FormData.wnetCompanytxt }} </span>
             </li>
             <li>
               <label class="InternetInf_right_label"> 组织机构代码信息说明： </label>
-              <span class="detail_inf">{{this.netAddrstatetxt }} </span>
+              <span class="detail_inf">{{this.FormData.wnetAddrstatetxt }} </span>
             </li>
           </ul>
         </div>
@@ -104,17 +104,17 @@
           <ul class="CreditForm_CheckId_ul_left">
             <li>
               <label class="CheckId_left_label">接听者是否是借款人本人：</label>
-              <span class="detail_inf">{{this.isselfVal }} </span>
+              <span class="detail_inf">{{this.FormData.iisselftext }} </span>
             </li>
             <li>
               <label class="CheckId_left_label">是否在我司申请借款：</label>
-              <span class="detail_inf">{{this.loanBeforeVal }} </span>
+              <span class="detail_inf">{{this.FormData.iloanBeforetext }} </span>
             </li>
           </ul>
           <ul class="CreditForm_CheckId_ul_right">
             <li>
               <label class=" CheckId_right_label "> 接听说明： </label>
-              <span class="detail_inf">{{this.isselftxt }} </span>
+              <span class="detail_inf">{{this.FormData.iisselftxt }} </span>
             </li>
           </ul>
         </div>
@@ -125,61 +125,61 @@
           <ul class="CreditForm_WorkInfs_ul_left">
             <li>
               <label class="WorkInfs_left_label left_margin">工作单位：</label>
-              <span class="detail_inf">{{this.hirecomName }} </span>
+              <span class="detail_inf">{{this.FormData.hirecomName }} </span>
             </li>
             <li>
               <label class="WorkInfs_left_label left_margin_half_one">单位性质：</label>
-              <span class="detail_inf">{{this.hirecomSignVal }} </span>
+              <span class="detail_inf">{{this.FormData.hirecomSigntext }} </span>
             </li>
             <li>
               <label class="WorkInfs_left_label left_margin_half_two">所属行业：</label>
-              <span class="detail_inf">{{this.hirecomKindVal }} </span>
+              <span class="detail_inf">{{this.FormData.hirecomKind}} </span>
             </li>
             <li>
               <label class="WorkInfs_left_label left_margin_half_one">职位级别：</label>
-              <span class="detail_inf">{{this.hirecomPosition }} </span>
+              <span class="detail_inf">{{this.FormData.workPost }} </span>
             </li>
             <li>
               <label class="WorkInfs_left_label left_margin_half_two">单位电话：</label>
-              <span class="detail_inf">{{this.hirecomPhone }} </span>
+              <span class="detail_inf">{{this.FormData.workTel }} </span>
             </li>
             <li>
               <label class="WorkInfs_left_label left_margin_half_one">月均工资[元]：</label>
-              <span class="detail_inf">{{this.hiremonthIncome }} </span>
+              <span class="detail_inf">{{this.FormData.avgsalaryamt }} </span>
             </li>
             <li>
               <label class="WorkInfs_left_label left_margin_half_two">每月发薪日：</label>
-              <span class="detail_inf">{{this.hirecomPayday }} </span>
+              <span class="detail_inf">{{this.FormData.payDay }} </span>
             </li>
             <li class="company_address_select">
               <label class="WorkInfs_left_label left_margin">单位地址 ：</label>
-              <span class="detail_inf">{{this.hirecomAddressVal }} </span>
+              <span class="detail_inf">{{this.FormData.addressMsg}} </span>
             </li>
             <li>
               <label class="WorkInfs_left_label left_margin">前单位名称：</label>
-              <span class="detail_inf">{{this.hirelastComname }} </span>
+              <span class="detail_inf">{{this.FormData.hirelastComname }} </span>
             </li>
           </ul>
           <ul class="CreditForm_WorkInfs_ul_right">
             <li>
               <label class=" CheckId_right_label "> 所在部门： </label>
-              <span class="detail_inf">{{this.hiredepartment }} </span>
+              <span class="detail_inf">{{this.FormData.hiredepartment }} </span>
             </li>
             <li>
               <label class=" CheckId_right_label "> 入职时间： </label>
-              <span class="detail_inf">{{this.hirecomGetjob }} </span>
+              <span class="detail_inf">{{this.FormData.entryDate }} </span>
             </li>
             <li>
               <label class=" CheckId_right_label "> 工资发放形式： </label>
-              <span class="detail_inf">{{this.hirecomPaymentTypeVal }} </span>
+              <span class="detail_inf">{{this.FormData.hirecomPaymentTypetext }} </span>
             </li>
             <li>
               <label class=" CheckId_right_label "> 单位地址邮编： </label>
-              <span class="detail_inf">{{this.hirecomPostcode }} </span>
+              <span class="detail_inf">{{this.FormData.workZip }} </span>
             </li>
             <li>
               <label class=" CheckId_right_label "> 是否为私营业主： </label>
-              <span class="detail_inf">{{this.hirecomType }} </span>
+              <span class="detail_inf">{{this.FormData.privateOwnerFlagtext}} </span>
             </li>
           </ul>
         </div>
@@ -190,60 +190,60 @@
           <ul class="CreditForm_CompanyInfs_ul_left">
             <li>
               <label class="CompanyInfs_left_label left_margin">企业类型：</label>
-              <span class="detail_inf">{{this.selfTypeVal }} </span>
+              <span class="detail_inf">{{this.FormData.selfTypetext }} </span>
             </li>
             <li>
               <label class="CompanyInfs_left_label left_margin_half_one">注册资金[万元]：</label>
-              <span class="detail_inf">{{this.selfregcapital }} </span>
+              <span class="detail_inf">{{this.FormData.regcapitalamt }} </span>
             </li>
             <li>
               <label class="CompanyInfs_left_label left_margin_half_two">占股比例：</label>
-              <span class="detail_inf">{{this.selfhasProportion }} </span>
+              <span class="detail_inf">{{this.FormData.selfhasProportion }} </span>
             </li>
             <li>
               <label class="CompanyInfs_left_label left_margin_half_one">月还款额/租金[万元]：</label>
-              <span class="detail_inf">{{this.monthrentamt }} </span>
+              <span class="detail_inf">{{this.FormData.monthrentamt }} </span>
             </li>
             <li>
               <label class="CompanyInfs_left_label left_margin_half_two">营业面积：</label>
-              <span class="detail_inf">{{this.selfpremisesArea }} </span>
+              <span class="detail_inf">{{this.FormData.selfpremisesArea }} </span>
             </li>
             <li>
               <label class="CompanyInfs_left_label left_margin">企业经营项目：</label>
-              <span class="detail_inf">{{this.selfBusproject }} </span>
+              <span class="detail_inf">{{this.FormData.projectManage }} </span>
             </li>
             <li>
               <label class="CompanyInfs_left_label left_margin_half_one">近一年利润[万元]：</label>
-              <span class="detail_inf">{{this.selfRecyearProfits }} </span>
+              <span class="detail_inf">{{this.FormData.oneYearProfitamt }} </span>
             </li>
 
 
             <li>
               <label class="CompanyInfs_left_label left_margin_half_two">第一供销商：</label>
-              <span class="detail_inf">{{this.selfFirsupplier }} </span>
+              <span class="detail_inf">{{this.FormData.firstSuppliers }} </span>
             </li>
           </ul>
           <ul class="CreditForm_CompanyInfs_ul_right">
             <li>
               <label class=" CheckId_right_label "> 公司注册时间： </label>
-              <span class="detail_inf">{{this.selfCreateDate }} </span>
+              <span class="detail_inf">{{this.FormData.compegDate }} </span>
             </li>
             <li>
               <!--   需要改成 date  输入框 -->
               <label class=" CheckId_right_label "> 经营场所： </label>
-              <span class="detail_inf">{{this.selfpremisesVal }} </span>
+              <span class="detail_inf">{{this.FormData.selfpremisestext }} </span>
             </li>
             <li>
               <label class=" CheckId_right_label "> 员工人数： </label>
-              <span class="detail_inf">{{this.selfempCount }} </span>
+              <span class="detail_inf">{{this.FormData.selfempCount }} </span>
             </li>
             <li>
               <label class=" CheckId_right_label "> 每月净利润[万元]： </label>
-              <span class="detail_inf">{{this.profitamountmamtVal }} </span>
+              <span class="detail_inf">{{this.FormData.profitamountmamt }} </span>
             </li>
             <li>
               <label class=" CheckId_right_label "> 第一分销商： </label>
-              <span class="detail_inf">{{this.selfFirdistri }} </span>
+              <span class="detail_inf">{{this.FormData.firstDistributor }} </span>
             </li>
           </ul>
         </div>
@@ -254,33 +254,33 @@
           <ul class="CreditForm_FamilyInf_ul_left">
             <li>
               <label class="FamilyInf_left_label">婚姻状况：</label>
-              <span class="detail_inf">{{this.fmarrflagVal }} </span>
+              <span class="detail_inf">{{this.FormData.fmarrflagtext }} </span>
             </li>
             <li>
               <label class="FamilyInf_left_label">是否有子女：</label>
-              <span class="detail_inf">{{this.childFlagVal }} </span>
+              <span class="detail_inf">{{this.FormData.childFlagtext }} </span>
             </li>
             <li>
               <label class="FamilyInf_left_label">父母是否在世：</label>
-              <span class="detail_inf">{{this.parentIslivingVal }} </span>
+              <span class="detail_inf">{{this.FormData.parentIslivingtext }} </span>
             </li>
             <li>
               <label class="FamilyInf_left_label">是否有兄弟姐妹：</label>
-              <span class="detail_inf">{{this.brothersIfhasVal }} </span>
+              <span class="detail_inf">{{this.FormData.brothersIfhastext }} </span>
             </li>
             <li>
               <label class="FamilyInf_left_label">个人/家庭月开销[元]：</label>
-              <span class="detail_inf">{{this.fconsumption }} </span>
+              <span class="detail_inf">{{this.FormData.fconsumption }} </span>
             </li>
           </ul>
           <ul class="CreditForm_FamilyInf_ul_right">
             <li>
               <label class=" FamilyInf_right_label family_left_margin_half_two"> 是否有兄弟姐妹备注： </label>
-              <span class="detail_inf">{{this.brothersIfhastxt }} </span>
+              <span class="detail_inf">{{this.FormData.brothersIfhastxt }} </span>
             </li>
             <li>
               <label class=" FamilyInf_right_label family_left_margin_half_two"> 可以承受的月还款[元]： </label>
-              <span class="detail_inf">{{this.fbalance }} </span>
+              <span class="detail_inf">{{this.FormData.fbalance }} </span>
             </li>
           </ul>
         </div>
@@ -291,13 +291,13 @@
           <ul class="CreditForm_live_ul_left">
             <li>
               <label class="live_left_label">同住者关系：</label>
-              <span class="detail_inf">{{this.livingHouseHoldsVal }} </span>
+              <span class="detail_inf">{{this.FormData.livingHouseHoldstext }} </span>
             </li>
           </ul>
           <ul class="CreditForm_live_ul_left">
             <li>
               <label class="live_right_label family_left_margin_half_two">居住房产所属情况：</label>
-              <span class="detail_inf">{{this.livingEstateBelongsVal }} </span>
+              <span class="detail_inf">{{this.FormData.livingEstateBelongstext }} </span>
             </li>
           </ul>
         </div>
@@ -308,11 +308,11 @@
           <ul class="CreditForm_check_reside_ul_left">
             <li>
               <label class="check_reside__left_label">现住址：</label>
-                <span class="detail_inf oneline"> </span> {{this.address}} </span>
+                <span class="detail_inf oneline"> </span> {{this.FormData.aaddress}} </span>
             </li>
             <li>
               <label class="check_reside__left_label">现住地址是否为常住地址 ：</label>
-              <span class="detail_inf">{{this.aisresidentVal }} </span>
+              <span class="detail_inf">{{this.FormData.aisresidenttext}} </span>
             </li>
           </ul>
         </div>
@@ -321,13 +321,14 @@
       <el-collapse-item title="初审结论" name="8">
         <div class=" CreditForm_result">
           <p class="CreditForm_result_p_label">初审结果评价：</p>
-          <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="firstConclusion">
-          </el-input>
+              <span class="detail_inf">{{this.FormData.oother}} </span>
+          <!-- <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="oother">
+          </el-input> -->
         </div>
       </el-collapse-item>
     </el-collapse>
     <el-button type="primary" class="btn" @click="CFsave">确认</el-button>
-    <button @click="test">test</button>
+    <!-- <button @click="test">test</button> -->
 
   </div>
 </template>
@@ -337,104 +338,10 @@
     data() {
       return {
         activeNames: ['1', "2", "3", "4", "5", "6", "7", "8"], //折叠面板 默认显示下标
-        // 上网查询
-        beexEcutedVal: "", // select-客户在法网是否有被执行信息
-        netHirecomVal: '', // select-单位在法网是否有被执行信息：
-        netEcutedBreaVal: '', // select-客户在失信网是否有失信记录：
-        netHirecomBreaVal: '', // select-单位在失信网是否有失信记录
-        netPhoneVal: '', // select-网上搜索借款人手机是否有异常：
-        netHirecomNameVal: '', // select-网搜单位名称是否有异常
-        netHirecomPhoneVal: '', // select-网搜单位电话是否有异常：
-        netAddrandEstateVal: '', // select-网上搜索借款人现居住地址和房产地址是否有异常：
-        netHirecomAddressVal: '', // select-网搜单位地址是否有异常：
-        netCompanyVal: '', // select-当地工商网查询企业基本信息中是否有登记：
-        netAddrstateVal: '', // select-客户工作单位在全国组织代码查询中是否存在：
-        // textarea 文本输入域 字段
-        beexEcutedtxt: '', // 执行信息说明
-        netHirecomtxt: "", //单位执行信息说明
-        netEcutedBreatxt: "", //失信记录说明
-        netHirecomBreatxt: "", //单位失信记录说明        
-        netPhonetxt: "", //手机异常信息说明        
-        netHirecomNametxt: "", //单位名称异常信息说明
-        netHirecomPhonetxt: "", //单位电话异常信息说明
-        netAddrandEstatetxt: "", //地址异常信息说明
-        netHirecomAddresstxt: "", //单位地址异常信息说明
-        netCompanytxt: "", //工商登记信息说明
-        netAddrstatetxt: "", //组织机构代码信息说明
-        // 核实身份
-        isselfVal: '', // 接听者是否是借款人本人：
-        loanBeforeVal: '', //是否在我司申请借款：
-                isselftxt: '', //接听说明
-        // 工作信息
-        hirecomSignVal: '', //单位性质
-        hirecomKindVal: '', //所属行业：
-        hirecomAddressVal: '', //单位地址------------三级联动---待续
-        hirecomPaymentTypeVal: '', // 工资发放形式：
-         hirecomName: '', // 工作单位
-        hirecomPosition: '', //职位级别
-        hirecomPhone: '', //单位电话
-        hiremonthIncome: '', //月均工资[元]
-        hirecomPayday: '', //每月发薪日
-        hirelastComname: '', //前单位名称：
-        hiredepartment: '', // 所在部门
-        hirecomGetjob: '', // 入职时间-日期选择器
-        hirecomPostcode: '', // 单位地址邮编
-        hirecomType: '', // 是否为私营业主
-        hirecomAddress: '', //单位地址 -----------------------------------------------------------------------------待确认
-        //  私营企业信息
-        selfTypeVal: '', //企业类型
-        selfpremisesVal: '', // 经营场所
-         selfregcapital: '', //注册资金[万元]
-        selfhasProportion: '', //占股比例
-        monthrentamt: '', // 月还款额/租金[万元]
-        selfpremisesArea: '', //营业面积
-        selfBusproject: '', //企业经营项目
-        selfRecyearProfits: '', //近一年利润[万元]
-        selfFirsupplier: '', //第一供销商
-        selfCreateDate: '', //公司注册时间
-        selfempCount: '', //员工人数
-        profitamountmamtVal: '', //每月净利润[万元]：-----------------------------------------------------------------------------待确认
-        selfFirdistri: '', //第一分销商
-        // 家庭信息
-        fmarrflagVal: '', //婚姻状况
-        childFlagVal: '', //是否有子女
-        parentIslivingVal: '', //父母是否在世
-        brothersIfhasVal: '', //是否有兄弟姐妹
-         fconsumption: '', // 个人/家庭月开销[元]
-        brothersIfhastxt: '', //是否有兄弟姐妹备注
-        fbalance: '', //可以承受的月还款[元]
-        // 居住情况
-        livingHouseHoldsVal: '', //同住者关系
-        livingEstateBelongsVal: '', //居住房产所属情况
-        // 核对现住址
-        address:'',//现住址
-        aisresidentVal: '', //现住地址是否为常住地址
-        // 初审结论
-        firstConclusion: '', //初审结果评价----------------------待处理是否需要获取数据-------------------还是只可以填写
-      }
+        FormData:[],
+ }
     },
     methods: {
-      test() {
-        console.log("post");
-
-        this.post("/loginCookie", {
-          // id:"bb30607c-b5aa-4915-9474-460e099a33e8",
-          username: '2',
-          password: '1'
-        }).then(res => {
-          console.log(res);
-        })
-        //   post('/loginCookie', {
-        //       username: '2',
-        //       password: '1'
-        //     })
-        //     .then(res => {
-        //       console.log(res)
-        //     });
-        // .catch(err=>{
-        //         reject(err)
-        //       })
-      },
       handleChange(tab, event) {
         console.log(tab, event);
       },
@@ -457,7 +364,6 @@
             window.open("https://www.tianyancha.com/");
             break;
         }
-        // this.rightList = false;
       },
       CFsave() {
         console.log("提交信息")
@@ -478,127 +384,15 @@
       //   console.info(response.data);
       // });
 
-      // 登录     cCreditForm
-      // this.post("/smUser/login", {
-      //   userCode: "02103C3003",
-      //   loginPassword: "111111"
-      // }).then(res => {
-      //   console.log(res);
-      // }).catch(err => {
-      //   reject(err)
-      // });
-
       // 信审表 查询
        this.post("/creauditInfo/queryCreauditInfoObj", {
-        id:"14447cef-c7a6-438c-ac80-cbb92e8c4cf0", 
-        // id:"",
+       applyId:"00542",
+        // applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886",
       }).then(res => {
         console.log(res);
-        console.log(res.data)
-// 获取数据
-this.beexEcutedVal=res.data.wbeexEcuted; // select-客户在法网是否有被执行信息
-this.netHirecomVal=res.data.wnetHirecom; // select-单位在法网是否有被执行信息：
-this.netEcutedBreaVal=res.data.wnetEcutedBrea // select-客户在失信网是否有失信记录：
-this.netHirecomBreaVal=res.data.wnetHirecomBrea // select-单位在失信网是否有失信记录
-this.netPhoneVal=res.data.wnetPhone // select-网上搜索借款人手机是否有异常：
-this.netHirecomNameVal=res.data.wnetHirecomName // select-网搜单位名称是否有异常
-this.netHirecomPhoneVal=res.data.wnetHirecomPhone // select-网搜单位电话是否有异常：
-this.netAddrandEstateVal=res.data.wnetAddrandEstate // select-网上搜索借款人现居住地址和房产地址是否有异常：
-this.netHirecomAddressVal=res.data.wnetHirecomAddress // select-网搜单位地址是否有异常：
-this.netCompanyVal=res.data.wnetCompany // select-当地工商网查询企业基本信息中是否有登记：
-this.netAddrstateVal=res.data.wnetAddrstate // select-客户工作单位在全国组织代码查询中是否存在：
-// 核实身份
-this.isselfVal=res.data.iisself // 接听者是否是借款人本人：
-this.loanBeforeVal=res.data.iloanBefore //是否在我司申请借款：
-// 工作信息
-this.hirecomSignVal=res.data.hirecomSign //单位性质
-this.hirecomKindVal=res.data.hirecomKind //所属行业：
-this.hirecomAddressVal=res.data.hirecomAddress //单位地址------------三级联动-----------------------待续
-this.hirecomPaymentTypeVal=res.data.hirecomPaymentType // 工资发放形式：
-//  私营企业信息
-this.selfTypeVal=res.data.selfType //企业类型
-this.selfpremisesVal=res.data.selfpremises // 经营场所
-// 家庭信息
-this.fmarrflagVal=res.data.ddd //婚姻状况
-this.childFlagVal=res.data.ddd //是否有子女
-this.parentIslivingVal=res.data.ddd //父母是否在世
-this.brothersIfhasVal=res.data.ddd //是否有兄弟姐妹
-// 居住情况
-this.livingHouseHoldsVal=res.data.ddd //同住者关系
-this.livingEstateBelongsVal=res.data.ddd //居住房产所属情况
-// 核对现住址
-        this.address=res.data.aaddress,//现住址
-this.aisresidentVal=res.data.aisresident //现住地址是否为常住地址
-// textarea 文本输入域 字段
-this.beexEcutedtxt=res.data.wbeexEcutedtxt; // 执行信息说明
-this.netHirecomtxt=res.data.ddd //单位执行信息说明
-this.netEcutedBreatxt=res.data.ddd //失信记录说明
-this.netHirecomBreatxt=res.data.ddd //单位失信记录说明
-this.netPhonetxt=res.data.ddd //手机异常信息说明
-this.netHirecomNametxt=res.data.ddd //单位名称异常信息说明
-this.netHirecomPhonetxt=res.data.ddd //单位电话异常信息说明
-this.netAddrandEstatetxt=res.data.ddd //地址异常信息说明
-this.netHirecomAddresstxt=res.data.ddd //单位地址异常信息说明
-this.netCompanytxt=res.data.ddd //工商登记信息说明
-this.netAddrstatetxt=res.data.ddd //组织机构代码信息说明
-//核实身份
-this.isselftxt=res.data.ddd //接听说明
-// 初审结论
-this.firstConclusion=res.data.ddd //初审结果评价----------------------待处理是否需要获取数据--------还是只可以填写
-// input 字段
-// 工作信息
-this.hirecomName=res.data.ddd // 工作单位
-this.hirecomPosition=res.data.ddd //职位级别
-this.hirecomPhone=res.data.ddd //单位电话
-this.hiremonthIncome=res.data.ddd //月均工资[元]
-this.hirecomPayday=res.data.ddd //每月发薪日
-this.hirelastComname=res.data.ddd //前单位名称：
-this.hiredepartment=res.data.ddd // 所在部门
-this.hirecomGetjob=res.data.ddd // 入职时间-日期选择器
-this.hirecomPostcode=res.data.ddd // 单位地址邮编
-this.hirecomType=res.data.ddd // 是否为私营业主
-this.hirecomAddress=res.data.ddd //单位地址 -----------------------------------------------------------------------------待确认
-// 私营企业信息
-this.selfregcapital=res.data.ddd //注册资金[万元]
-this.selfhasProportion=res.data.ddd //占股比例
-this.monthrentamt=res.data.ddd // 月还款额/租金[万元]
-this.selfpremisesArea=res.data.ddd //营业面积
-this.selfBusproject=res.data.ddd //企业经营项目
-this.selfRecyearProfits=res.data.ddd //近一年利润[万元]
-this.selfFirsupplier=res.data.ddd //第一供销商
-this.selfCreateDate=res.data.ddd //公司注册时间
-this.selfempCount=res.data.ddd //员工人数
-this.profitamountmamtVal=res.data.ddd //每月净利润[万元]：-----------------------------------------------------------------------------待确认
-this.selfFirdistri=res.data.ddd //第一分销商
-// 家庭信息
-this.fconsumption=res.data.ddd // 个人/家庭月开销[元]
-this.brothersIfhastxt=res.data.ddd //是否有兄弟姐妹备注
-this.fbalance=res.data.ddd //可以承受的月还款[元]
-// console.log(res.data.oother)
+        // console.log(res.data)
+        this.FormData=res.data;
       })
-      // .catch(err=>{
-      //this. reject(err)
-      //       }) ;
-// 添加
-      //  this.post("/creauditInfo/addOrUpdate", {
-      //   // id:"bb30607c-b5aa-4915-9474-460e099a33e8", 
-      // }).then(res => {
-      //   console.log(res);
-      // }).catch(err=>{
-      //         reject(err)
-      //       }) ;
-
-// /creauditInfo/addOrUpdate
-    // 获取影像名称的节点树列表
-      //    this.post("/productArchive/getProductArchiveParentList", {
-      //   applyId:"7364",
-      // }).then(res => {
-      //   console.log(res);
-      // }).catch(err=>{
-      //         reject(err)
-      //       }) ;
-
-
     }
   }
 

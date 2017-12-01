@@ -1,72 +1,69 @@
 <!-- 电话征信 - 家庭联系人 历史 -->
 <template>
   <div>
-    <el-form ref="form" :model="form" label-width="80px">
+    <el-form ref="form" label-width="80px">
       <div class="address-title">
         新增调查日志
       </div>
       <el-form-item label="客户名称:" class="item-column3">
-        <!-- <el-label v-model="form.name">531531</el-label> -->
-        <div v-model="form.name">
-          5315151
-        </div>
+        {{familyData.custName}}
       </el-form-item>
       <el-form-item label="电话类型:" class="item-column3">
-        <el-label v-model="form.name">531531</el-label>
+        {{familyData.phoneType}}
       </el-form-item>
       <el-form-item label="电话号码:" class="item-column3">
-        <el-label v-model="form.name">531531</el-label>
+        {{familyData.phoneNum}}
       </el-form-item>
       <el-form-item label="来源:" class="item-column3">
-        <el-label v-model="form.name">531531</el-label>
+        {{familyData.source}}
       </el-form-item>
       <el-form-item label="接听情况:" class="item-column3">
-        <el-label v-model="form.name">531531</el-label>
+        {{familyData.answer}}
       </el-form-item>
       <el-form-item label="调查情况:" class="item-column3">
-        <el-label v-model="form.name">531531</el-label>
+        {{familyData.checkStage}}
       </el-form-item>
       <div class="address-title">
         录入家庭联系人电话调查信息
       </div>
-      <el-form-item label="第三方查询结果">
-        <el-label v-model="form.name">531531</el-label>
+      <el-form-item label="第三方查询信息">
+        {{familyData.threeQueriestxt}}
       </el-form-item>
       <el-form-item label="三方查询是否异常:">
-        <el-label v-model="form.name">531531</el-label>
+        {{familyData.threeQueriestxt}}
       </el-form-item>
-      <el-form-item label="微信/支付宝是否异常:">
-        <el-label v-model="form.name">531531</el-label>
+      <el-form-item label="微信/支付宝是否异常:" class="item-column2">
+        {{familyData.mobilepaymenttxt}}
       </el-form-item>
-      <el-form-item label="异常项说明:">
-        <el-label v-model="form.name">531531</el-label>
+      <el-form-item label="异常项说明:" class="item-column2">
+        {{familyData.exceptionremark}}
       </el-form-item>
       <el-form-item label="是否与家庭联系人为同一接听人:">
-        <el-label v-model="form.name">531531</el-label>
+        {{familyData.issameFamtxt}}
       </el-form-item>
       <el-form-item label="与借款人关系:">
-        <el-label v-model="form.name">531531</el-label>
+        {{familyData.relBorrower}}
       </el-form-item>
       <el-form-item label="核对工作情况:">
-        <el-label v-model="form.name">531531</el-label>
+        {{familyData.checkWorktxt}}
       </el-form-item>
-      <el-form-item label="核对婚姻情况:">
-        <el-label v-model="form.name">531531</el-label>
+      <el-form-item label="核对婚姻情况:" class="item-column2">
+        {{familyData.maritalStatustxt}}
       </el-form-item>
-      <el-form-item label="核对子女情况:">
-        <el-label v-model="form.name">531531</el-label>
+      <el-form-item label="核对子女情况:" class="item-column2">
+        {{familyData.childrenStatustxt}}
       </el-form-item>
       <el-form-item label="核实居住地址:">
-        <el-label v-model="form.name">531531</el-label>
+        {{familyData.checkAddrtxt}}
       </el-form-item>
       <el-form-item label="核对房产:">
-        <el-label v-model="form.name">531531</el-label>
+        {{familyData.checkEstatetxt}}
       </el-form-item>
       <el-form-item label="其他收入:">
-        <el-label v-model="form.name">531531</el-label>
+        {{familyData.otherIncometxt}}
       </el-form-item>
       <el-form-item label="调查结果:">
-        <el-label v-model="form.name">531531</el-label>
+        {{familyData.conclusion}}
       </el-form-item>
     </el-form>
   </div>
@@ -75,109 +72,25 @@
 export default {
   data() {
     return {
-      form: {
-        phoneTypes: [{
-            value: '住址电话',
-            label: '住址电话'
-          },
-          {
-            value: '单位电话',
-            label: '单位电话',
-            disabled: true
-          },
-          {
-            value: '家庭联系人',
-            label: '家庭联系人',
-            disabled: true
-          },
-          {
-            value: '紧急联系人',
-            label: '紧急联系人',
-            disabled: true
-          },
-          {
-            value: '工作证明人',
-            label: '工作证明人',
-            disabled: true
-          }
-        ],
-        phoneType: '',
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
-      }
+      id:'',  // 住宅电话调查日志记录 id
+      phoneType:'', // 电话类型
+      familyData:'' // 请求返回的数据
     }
   },
+  mounted() {
+    this.queryTelfContract();
+  },
   methods: {
-    submitForm() {
-      console.log('submit!');
+    queryTelfContract(){
+      this.post('/creTelResearchHis/queryTelfContract',{
+        id:this.id,
+        phoneType:this.phoneType
+      }).then( res => {
+        console.log(res);
+        this.mobileData = res.data;
+      })
     }
   }
 }
 
 </script>
-<style>
-.address-title {
-  width: 100%;
-  height: 40px;
-  font-size: 18px;
-  font-weight: bold;
-  background: #ededed;
-  line-height: 40px;
-  padding-left: 10px;
-  display: block;
-  margin-bottom: 10px;
-  margin-top: 20px;
-  overflow: hidden;
-}
-
-
-
-/* */
-
-.el-form-item__label {
-  width: 150px !important;
-}
-
-.el-form-item {
-  margin-bottom: 0;
-}
-
-
-
-/* 三列 */
-
-.item-column3 {
-  width: 33%;
-  float: left;
-  margin: 0;
-  margin-bottom: 10px;
-}
-
-
-
-/* 两列 */
-
-.item-column2 {
-  width: 50%;
-  float: left;
-  margin: 0;
-}
-
-
-
-/* 表单提交 */
-
-.address-submit {
-  margin: 0;
-  padding: 0;
-  float: right;
-  margin: 20px;
-}
-
-</style>
