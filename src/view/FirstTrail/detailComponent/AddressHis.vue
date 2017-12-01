@@ -6,9 +6,7 @@
         新增调查日志
       </div>
       <el-form-item label="客户名称:" class="item-column3">
-        <div>
           {{mobileData.custName}}
-        </div>
       </el-form-item>
       <el-form-item label="电话类型:" class="item-column3">
         {{mobileData.phoneType}}
