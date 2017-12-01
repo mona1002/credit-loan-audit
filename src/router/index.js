@@ -47,115 +47,127 @@ import FSplitScreen from '@/view/FinalTrial/FSplitScreen.vue'
 /*借款人资料详情*/
 import borrowerInformationDetail from '@/view/FirstTrail/detailComponent/borrowerInformationDetail'
 
+// 系统管理
+// 机构管理
+import organManage from '@/view/systemManage/organManage/organManage'
+// 资源管理
+import resourceManage from '@/view/systemManage/resourceManage/resourceManage'
+// 用户管理
+import userManage from '@/view/systemManage/userManage/userManage'
+// 流程角色管理
+import processRoleManage from '@/view/systemManage/processRoleManage/processRoleManage'
+// 功能角色管理
+import functionalRoleManage from '@/view/systemManage/functionalRoleManage/functionalRoleManage'
+
 Vue.use(Router)
 
 const routes = [{
-   path: '/',
-    component: login
-    // path: '/',
-    // component: login
-    // meta: {
-    //   requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
-    // },
-  },
-  // {
-  //   path: '/myHead',
-  //   component: myHead
+  path: '/',
+  component: login
+  // path: '/',
+  // component: login
+  // meta: {
+  //   requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
   // },
-  {
-    // 工作台  误改, 误删
-    /*
-      userCode:    用户编码
-      orgCode:     机构编码
-     */
-    name:'workbench',
-    path: '/workbench/:userCode/:orgCode',
-    component: workbench,
-    require:myHead
-  },
-  /*初审审批*/
-  {
-    path: '/taskInWaitting',
-    component: taskInWaitting
-  },
-  /*备注信息*/
-  {
-    path: '/remark',
-    component: remark
-  },
-  /*实地征信*/
-  {
-    path: '/creditInvestigation',
-    component: creditInvestigation
-  },
-  /*借款人资料*/
-  {
-    path: '/borrowerInformation',
-    component: borrowerInformation
-  },
-  /*申请信息*/
-  {
-    path: '/applicationInformation',
-    component: applicationInformation
-  },
-  {
-    path: '/HelloWorld',
-    component: HelloWorld,
-  },
-  // 分屏
-  {
-    path: '/SplitScreen',
-    component: SplitScreen
-  },
-  // 影音资料
-  {
-    path: '/AudioVisual',
-    component: AudioVisual
-  },
-  // 申请表
-  {
-    path: '/CreditForm',
-    component: CreditForm
-  },
-  // 申请表
-  {
-    path: '/cCreditForm',
-    component: cCreditForm
-  },
-  {
-    //内部匹配
-    path: '/InternalMatch',
-    component: InternalMatch
-  },
-  {
-    //电话征信  
-    path: '/PhoneCredit',
-    component: PhoneCredit
-  },
-  // 审批结论轨迹
-  {
-    path: '/ApprovalConclusion',
-    component: ApprovalConclusion
-  },
-   // 审批结论轨迹
-   {
-    path: '/FinanceInformation',
-    component: FinanceInformation
-  },
+},
+// {
+//   path: '/myHead',
+//   component: myHead
+// },
 {
-    // 信审审批
-    path: '/CreditApproval',
-    component: CreditApproval
-  },
-  {
-    // 借款人资料详情
-    path: '/borrowerInformationDetail',
-    component: borrowerInformationDetail
-  },
-  // ----------------终审----------------
+  // 工作台  误改, 误删
+  /*
+    userCode:    用户编码
+    orgCode:     机构编码
+   */
+  name: 'workbench',
+  path: '/workbench/:userCode/:orgCode',
+  component: workbench,
+  require: myHead
+},
+/*初审审批*/
 {
-  path:'/FSplitScreen',
-  component:FSplitScreen
+  path: '/taskInWaitting',
+  component: taskInWaitting
+},
+/*备注信息*/
+{
+  path: '/remark',
+  component: remark
+},
+/*实地征信*/
+{
+  path: '/creditInvestigation',
+  component: creditInvestigation
+},
+/*借款人资料*/
+{
+  path: '/borrowerInformation',
+  component: borrowerInformation
+},
+/*申请信息*/
+{
+  path: '/applicationInformation',
+  component: applicationInformation
+},
+{
+  path: '/HelloWorld',
+  component: HelloWorld,
+},
+// 分屏
+{
+  path: '/SplitScreen',
+  component: SplitScreen
+},
+// 影音资料
+{
+  path: '/AudioVisual',
+  component: AudioVisual
+},
+// 申请表
+{
+  path: '/CreditForm',
+  component: CreditForm
+},
+// 申请表
+{
+  path: '/cCreditForm',
+  component: cCreditForm
+},
+{
+  //内部匹配
+  path: '/InternalMatch',
+  component: InternalMatch
+},
+{
+  //电话征信  
+  path: '/PhoneCredit',
+  component: PhoneCredit
+},
+// 审批结论轨迹
+{
+  path: '/ApprovalConclusion',
+  component: ApprovalConclusion
+},
+// 审批结论轨迹
+{
+  path: '/FinanceInformation',
+  component: FinanceInformation
+},
+{
+  // 信审审批
+  path: '/CreditApproval',
+  component: CreditApproval
+},
+{
+  // 借款人资料详情
+  path: '/borrowerInformationDetail',
+  component: borrowerInformationDetail
+},
+// ----------------终审----------------
+{
+  path: '/FSplitScreen',
+  component: FSplitScreen
 },
 //-------------------反欺诈------------
 // {
@@ -170,6 +182,29 @@ const routes = [{
 //   path:'/FSplitScreen',
 //   component:FSplitScreen
 // },
+
+//-------------------系统管理------------
+{
+  path: '/organManage',
+  component: organManage
+},
+{
+  path: '/resourceManage',
+  component: resourceManage
+},
+{
+  path: '/userManage',
+  component: userManage
+},
+{
+  path: '/processRoleManage',
+  component: processRoleManage
+},
+{
+  path: '/functionalRoleManage',
+  component: functionalRoleManage
+},
+
 ];
 
 const router = new Router({
