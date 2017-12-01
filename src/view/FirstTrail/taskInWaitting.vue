@@ -1,84 +1,100 @@
 <template>
 	<div class="taskWatting">
-		<div class="taskWhead">
-			<img src=""><p>高级查询</p>
-		</div>
-		<div class="taskWinput">
-	  		<span>进件编号：</span><el-input v-model="datas.applySubNo"></el-input>
-		    <span>客户名称：</span><el-input v-model="datas.custName_la"></el-input>
-		    <span>证件号码：</span><el-input v-model="datas.certCode"></el-input>
-	  	</div>
-	  	 <div class="wattingButton">
-	    	<el-button type="primary" @click="reset">重置</el-button>
-	    	<el-button type="primary" @click="search">查询</el-button>
+	  	<div class="taskWinput">
+	      <el-row class="row row1"  type="flex">
+	        <el-col :span="8" :offset="0">
+	          <span class="keywordText">进件编号</span><el-input class="" v-model="applySubNo" placeholder="请输入进件编号"></el-input>
+	        </el-col>
+	        <el-col :span="8">
+	          <span class="keywordText">客户名称</span><el-input class="" v-model="custName_la" placeholder="请输入客户名称"></el-input>
+	        </el-col>
+	        <el-col :span="8">
+	          <span class="keywordText">证件号码</span><el-input class="" v-model="certCode" placeholder="请输入证件号码"></el-input>
+	        </el-col>
+	      </el-row>
+	      <el-row class="row row1"  type="flex">
+		       <el-col :span="22">  
+		         <el-button class="btn query" type="primary" @click="search">查询</el-button>
+		         <el-button class="btn reset" @click="reset">重置</el-button>
+		       </el-col>
+	      </el-row>
 	    </div>
 	    <div class="taskWhead">
-			<img src=""><p>信审任务列表</p>
+			<p>信审任务列表</p>
 		</div>
 		<div class="taskWtable">
-			<el-table :data="datas" border style="width: 100%" @row-click='goDetail'>
+			<el-table :data="datas" style="width: 100%" height="400" @row-click='goDetail'>
 			    <el-table-column
 			      type="index" 
 			      label="序号"
-			      width="180"
+			      width="46"
 			      >
 			    </el-table-column>
 			    <el-table-column
 			      prop="taskType"
 			      label="任务类型"
+			      min-width="80"
 			      >
 			    </el-table-column>
 			    <el-table-column
 			      prop="emerType"
-			      label="紧急程度">
+			      label="紧急程度"
+			      min-width="80">
 			    </el-table-column>
 			    <el-table-column
 			      prop="applySubNo"
-			      label="进件编号">
+			      label="进件编号"
+			      min-width="160">
 			    </el-table-column>
 			    <el-table-column
 			      prop="appDate"
-			      label="申请日期">
+			      label="申请日期"
+			      min-width="100">
 			    </el-table-column>
 			    <el-table-column
 			      prop="custName"
-			      label="客户名称">
+			      label="客户名称"
+			      min-width="98">
 			    </el-table-column>
 			    <el-table-column
 			      prop="certCode"
-			      label="证件号码">
+			      label="证件号码"
+			      min-width="160">
 			    </el-table-column>
 			    <el-table-column
 			      prop="appOrgCode"
-			      label="进件机构">
+			      label="进件机构"
+			      min-width="100">
 			    </el-table-column>
 			    <el-table-column
 			      prop="proName"
-			      label="产品名称">
+			      label="产品名称"
+			      width="100">
 			    </el-table-column>
 			    <el-table-column
 			      prop="activationTime"
-			      label="进入本环节时间">
+			      label="进入本环节时间"
+			      min-width="150">
 			    </el-table-column>
 			    <el-table-column
 			      prop="completeTime"
-			      label="进入本环节时长（小时）" min-width="180">
+			      label="进入本环节时长（小时）" 
+			      min-width="180">
 			    </el-table-column>
 			</el-table>
+			<!-- 分页 -->
+			<div class="page">
+				<el-pagination
+			      @size-change="handleSizeChange"
+			      @current-change="handleCurrentChange"
+			      :current-page="currentPage"
+			      :page-sizes="[20, 50, 80, 100]"
+			      :page-size=setPageSize
+			      layout="total, sizes, prev, pager, next, jumper"
+			      :total="datas.totalNum">
+			    </el-pagination>
+		    </div>
 		</div>
-		<!-- 分页 -->
-		<el-pagination
-	      @size-change="handleSizeChange"
-	      @current-change="handleCurrentChange"
-	      :current-page="currentPage4"
-	      :page-sizes="[10, 30, 50, 100, 200]"
-	      :page-size="10"
-	      layout="total, sizes, prev, pager, next, jumper"
-	      :total="datas.totalNum">
-	      			<!-- :page-size="10" 每页几条 -->
-	    </el-pagination>
-
-
 	</div>	
 </template>
 <script type="text/javascript">
@@ -86,58 +102,49 @@
 		data(){
 			return{
 				activeNames:['1'],
-				currentPage4:1,
+				currentPage:1,// 默认显示的当前页
 				//data:[],
 				datas:[],
-				pageNum:1,
-		        pageSize:10,
+				applySubNo : '',
+		        custName_la : '',
+		        certCode : '',
+				//pageNum:1,
+		        //pageSize:20,
+		        setPageSize:20,
+			    queryParam: {
+			        processTemplateId :'',
+		            taskNodeName : '',
+		            taskStatus : '',
+		            userCode : '',
+		            orgCode : '',
+		            pageNum : 1,
+		            pageSize : 20,
+		            applySubNo : '',
+		            custName_la : '',
+		            certCode : ''
+			      },
 		        //taskType:'',
 			}
 		},
 		created(){
 			//一进入页面就发送请求
-			this.processTemplateId=this.$route.query.processTemplateId;
-			this.taskNodeName=this.$route.query.taskNodeName;
-			this.taskStatus=this.$route.query.taskStatus;
-			this.userCode=this.$route.query.userCode;
-			this.orgCode=this.$route.query.orgCode;
+			this.queryParam.processTemplateId=this.$route.query.processTemplateId;
+			this.queryParam.taskNodeName=this.$route.query.taskNodeName;
+			this.queryParam.taskStatus=this.$route.query.taskStatus;
+			this.queryParam.userCode=this.$route.query.userCode;
+			this.queryParam.orgCode=this.$route.query.orgCode;
 			console.log(this.processTemplateId+'...'+this.taskNodeName+'...'+this.taskStatus+'...'+this.userCode+'...'+this.orgCode);
 			
-			this.request();	
+			this.request(this.queryParam);	
 		},
 		methods:{
-			//跳转到详情页
-			goDetail(row, event, column) {
-				console.log(row);
-		      this.$router.push({path:'/SplitScreen',query:row});
-		      localStorage.setItem("taskInWaitting",JSON.stringify(row));
-		    },
-		    handleSizeChange(val) {
-		      console.log('每页 ${val} 条');
-		    },
-		    handleCurrentChange(val) {
-		      console.log('当前页: ${val}');
-		    },
-		    request(){
-		    	this.post('/workFlowTaskQuery/getTaskToDoList', {
-		            processTemplateId: this.processTemplateId,
-		            taskNodeName: this.taskNodeName,
-		            taskStatus:this.taskStatus,
-		            userCode:this.userCode,
-		            orgCode:this.orgCode,
-		            pageNum:1,
-		            pageSize:10,
-		            applySubNo:'',
-		            custName_la:'',
-		            certCode:''
-		          })
-	          .then(res => {
-	            // console.log(this.pageNum);   
+		    request(param){
+		    	console.log(this.queryParam);
+		    	this.post('/workFlowTaskQuery/getTaskToDoList',
+		    		param
+	          ).then(res => {
 	            if(res.statusCode==200 &&　res.data.taskDetailList!=null){
 	            	this.datas=res.data.taskDetailList;
-	            	// console.log(res.data.taskDetailList.taskType)
-	            	// console.log(this.datas);
-	            	// console.log(this.datas.taskType)
 	            	console.log(this.datas.length)
 	            	for(var i=0;i<this.datas.length;i++){
 	            		if(this.datas[i].taskType=='1'){//00
@@ -157,15 +164,6 @@
 		            		this.datas[i].emerType="收费加急";
 		            	};
 	            	};
-	            	
-	            	
-	            	// console.log(this.taskType);
-	            	/*if(this.pageNum==1){
-	            		this.datas.push(res.data);
-	            		 console.log(this.datas);
-	            	}else{
-	            		this.datas=this.datas.concat(this.datas.push(res.data))
-	            	}*/
 	            }else{
 	            	this.datas=[];
 	            }
@@ -174,69 +172,136 @@
 		    },
 		    /*重置*/
 		    reset(){
-		    	this.datas.applySubNo = '';
-	            this.datas.custName_la = '';
-	            this.datas.certCode = '';
-			    this.request();
+		    	this.applySubNo = '';
+	            this.custName_la = '';
+	            this.certCode = '';
+	            this.queryParam.applySubNo = '';
+			    this.queryParam.custName_la = '';
+			    this.queryParam.certCode = '';
+			    this.request(this.queryParam);
 		    },
 		    /*查询*/
 		    search(){
-		      this.post("/workFlowTaskQuery/getTaskToDoList", {
-		        processTemplateId: this.processTemplateId,
-	            taskNodeName: this.taskNodeName,
-	            taskStatus:this.taskStatus,
-	            userCode:this.userCode,
-	            orgCode:this.orgCode,
-	            pageNum:1,
-	            pageSize:10,
-	            applySubNo:this.datas.applySubNo,
-	            custName_la:this.datas.custName_la,
-	            certCode:this.datas.certCode
-		      }).then(res => {
-		        console.log(res);
-		      });
+		    	this.queryParam.applySubNo = this.applySubNo;
+			    this.queryParam.custName_la = this.custName_la;
+			    this.queryParam.certCode = this.certCode;
+			    this.request(this.queryParam);
+			    console.log(this.queryParam);
+		    },
+		    //跳转到详情页
+			goDetail(row, event, column) {
+				console.log(row);
+		      this.$router.push({path:'/SplitScreen',query:row});
+		      localStorage.setItem("taskInWaitting",JSON.stringify(row));
+		    },
+		    handleSizeChange(val) {
+		      console.log('每页 ${val} 条');
+		      this.queryParam.pageSize = val;
+		      this.queryParam.pageNum = 1;
+		      if (this.currentPage !== 1 || this.setPageSize !== 20) {
+		        this.currentPage = 1;
+		        this.setPageSize = 20;
+		      } else {
+		        this.request(this.queryParam);
+		      };
+		    },
+		    handleCurrentChange(val) {
+		      console.log('当前页: ${val}');
+		      this.queryParam.pageNum = val;
+      		  this.request(this.queryParam);
 		    },
 		}
 	}
 </script>
 <style type="text/css" scoped>
 	.taskWatting{
+		padding: 15px 30px;
 		width: 100%;
-	}
-	/* 高级查询 */
-	.taskWatting .taskWhead{
-		width: 100%;
-		height: 28px;
-		line-height: 28px;
-		padding-left: 10px;
-		border-bottom: 1px solid #ccc;
+		height: 100%;
+		background-color: #fafbfc;
 	}
 	/* 高级查询下的input */
-	.taskWatting .taskWinput{
-		height: 55px;
-		margin: 15px 0;
-		padding-left: 10px; 
-		border-bottom: 1px solid #ccc;
+	.taskWatting .row {
+	  margin-bottom: 20px;
 	}
-	.taskWinput .el-input{
-		width: 180px;
+	.taskWatting .row1 {
+	  margin-top: 21px;
+	}
+	.taskWatting .taskWinput {
+	  background-color: #ffffff;
+	  border: 1px solid #e6eaee;
+	  margin-bottom: 26px;
+	}
+	.taskWatting .keywordText {
+	  font-size: 14px;
+	  color: #475669;
+	  text-align: right;
+	  display: inline-block;
+	  width: 126px;
+	  height: 20px;
+	  margin-right: 10px;
+	}
+	.taskWatting .taskWinput .el-input__inner {
+	  border-radius: 6px;
+	  height: 35px;
+	  width: 258px;
 	}
 	/* 查询、重置按钮 */
-	.wattingButton{
-		width: 100%;
-		height:51px;
-		border-bottom: 1px solid #ccc;
+	.taskWinput .btn {
+	  height: 33px;
+	  border-radius: 8px;
+	  width: 79px;
+	  font-size: 14px;
+	  line-height: 33px;
+	  padding: 0;
+	  float: right;
 	}
-	.wattingButton .el-button{
-		float: right;
-		margin: 0px 10px 15px 0;
-		height: 36px;
+	.taskWinput .query {
+	  margin-left: 20px;
 	}
+	.taskWinput .reset {
+	  margin-left: 214px;
+	}
+	/* 信审任务列表*/
+	.taskWatting .taskWhead{
+		opacity:0.75;
+		background:#ebedf8;
+		border-radius:6px;
+		width:100%;
+		height:50px;
+	}
+	.taskWatting .taskWhead p{
+		font-size:16px;
+		color:#1f2d3d;
+		padding-left:50px;
+		text-align:left;
+		line-height: 50px;
+	}
+	
+	
 	/* 信审任务列表 表格*/
-	.taskWtable .el-table .cell{
-		line-height: 40px;
+	.taskWatting .taskWtable{
+		background-color: #ffffff;
+		border: 1px solid #e6eaee;
+		margin-bottom: 40px;
+		padding: 25px;
+		width: 100%;
 	}
-	.taskWtable .el-table td, .el-table th{
-		padding:0;
+	.taskWtable .el-table .cell {
+	  line-height: 23px;
+	}
+	.taskWtable .el-table {
+	  font-size: 13px;
+	}
+	.taskWtable .el-table__header-wrapper tr {
+	  height: 40px;
+	}
+	.taskWtable .el-table__body-wrapper tr {
+	  height: 35px;
+	}
+	/* 分页 */
+	.page{
+		text-align: center;
+  		margin-top: 20px;
 	}
 </style>

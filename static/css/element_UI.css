@@ -420,3 +420,6 @@ position: relative
   height: 30px;
   border-radius: 4px;
 }
+.taskWatting .el-table__header-wrapper tr{
+  background-color: #fff；
+}
