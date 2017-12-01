@@ -1,10 +1,10 @@
 <template>
-  <div date="ApprovalConclusion">
+  <div class="ApprovalConclusion">
     <!-- 审批 结论轨迹=========================默认显示1-条？分页？ -->
     <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="incom" label="核实收入[元]" width="180">
+      <el-table-column prop="incom" label="核实收入[元]" width="100">
       </el-table-column>
-      <el-table-column prop="productName" label="批准产品" width="180">
+      <el-table-column prop="productName" label="批准产品">
       </el-table-column>
       <el-table-column prop="num" label="批准金额[元]">
       </el-table-column>
@@ -53,5 +53,6 @@
 
 </script>
 <style scoped>
+
 
 </style>

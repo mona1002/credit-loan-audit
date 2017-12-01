@@ -1,6 +1,6 @@
 <template>
   <div class="workbench">
-    <!-- <myHead class="top"></myHead> -->
+    <myHead class="top"></myHead>
     <div class="main">
       <!-- 左边 -->
       <div class="main_left">
@@ -10,7 +10,7 @@
       <div class="main_right">
         <!-- 中间 -->
         <div class="main_right_task">
-          <el-collapse v-model="activeNames" @change="waitting">
+          <el-collapse v-model="activeNames">
             <el-collapse-item name="1">
               <template slot="title">
                 <i class="el-icon-menu"></i> 待办任务
@@ -35,13 +35,14 @@
         <div class="main_right_work">
           <!-- 工作通知 -->
           <div class="workbench_right_top">
-            <el-collapse v-model="activeNames1" @change="handleChange">
+            <el-collapse v-model="activeNames1">
               <el-collapse-item name="1">
                 <template slot="title">
                   <i class="el-icon-menu"></i> 工作通知
-                  <i class="el-icon-refresh"></i>
+                  <!-- <i class="el-icon-refresh"></i> -->
                   <span @click.stop="more" class="moreC"> 更多 </span>
-                </template>float:right; margin-right: 10px;
+                  <i class="el-icon-refresh"></i>
+                </template>
                 <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
                 <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
               </el-collapse-item>
@@ -49,13 +50,13 @@
           </div>
           <!-- 公司动态 -->
           <div class="workbench_right_bottom">
-            <el-collapse v-model="activeNames2" @change="workNotify">
+            <el-collapse v-model="activeNames2">
               <el-collapse-item name="1">
                 <template slot="title" class="border_top_bottom">
                   <i class="el-icon-menu"></i> 公司动态
-                  <i class="el-icon-refresh"></i>
                   <span @click.stop="more" class="moreC"> 更多 </span>
-                </template>float:right; margin-right: 10px;
+                  <i class="el-icon-refresh"></i>                  
+                </template>
                 <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
                 <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
               </el-collapse-item>
@@ -91,17 +92,8 @@
       myHead
     },
     methods: {
-      waitting() {
-
-      },
-      handleChange() { // 手风琴
-
-      },
       more() {
         console.log("more")
-      },
-      workNotify() {
-        console.log("workNotify")
       },
       setCurrent(row) {
         console.log("我是按钮")
@@ -156,8 +148,8 @@
   /* public 部分 */
 
   .moreC {
-    /* float:right; */
-    margin-left: 35px;
+    float:right;
+    margin-right: 35px;
   }
 
   .border_top_bottom {
@@ -205,6 +197,7 @@
     width: calc( 100% - 148px);
     background: white;
   }
+
   /* 代办任务 */
 
   .main_right .main_right_task,
@@ -212,7 +205,7 @@
     float: left;
     width: 50%;
     height: 100vh;
-    padding: 19px 0 0 20px;
+    padding: 19px 25px 0 20px;
     /* background: black; */
     background: #ededed;
   }

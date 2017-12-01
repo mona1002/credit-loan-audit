@@ -15,6 +15,7 @@ axios.defaults.withCredentials=true;
 axios.interceptors.response.use(
   response => {
     if(response.data.statusCode == 900) {  
+  console.log("拦截")
       router.push({
         path: '/login',
         query: {redirect: router.currentRoute.fullPath} 
