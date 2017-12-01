@@ -14,7 +14,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 .a{
       white-space: normal;
     word-break: break-all;

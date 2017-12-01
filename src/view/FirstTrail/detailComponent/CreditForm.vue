@@ -3,6 +3,7 @@
     <el-collapse v-model="activeNames" @change="handleChange">
       <!-- 上网查询信息 -->
       <el-collapse-item title=" 上网查询信息" name="1">
+        <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <div class="CreditForm_InternetInf">
           <ul class="CreditForm_InternetInf_ul_left">
             <li>
@@ -147,6 +148,7 @@
       </el-collapse-item>
       <!-- 核实身份 -->
       <el-collapse-item title=" 核实身份" name="2">
+        <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">        
         <div class="CreditForm_CheckId">
           <ul class="CreditForm_CheckId_ul_left">
             <li>
@@ -947,9 +949,13 @@
 
 </script>
 
-<style scope>
+<style scoped>
   /* 公共 */
-
+.icon_hat{
+  position: absolute;
+  top:10px;
+  left: 23px
+}
   .red {
     /* display: inline-block; */
     color: red;

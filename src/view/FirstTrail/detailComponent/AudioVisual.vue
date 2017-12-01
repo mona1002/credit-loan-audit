@@ -97,13 +97,16 @@
       <p class="Small_pic_title"> 缩略图-申请信息
         <img src="../../../../static/images/D625BA67-2F56-42C1-9E9D-A47AE03BA028@1x.png" class="small_pic_close" @click="SmallpicClose" >
          </p>
-      <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
+         <div class="small_pic_content">
+ <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
 <!-- <img class="Small_pic" v-for="(val,index) in imgPath" :key="index" :src="'http://10.1.26.6:8080'+val" @click="ChangeCss(index)"
         @mouseenter="smallPic($event,index)" ref="small_pic_ref" /> -->
         <img class="Small_pic" :src="'http://10.1.26.6:8080'+val" @click="ChangeCss(index)"
         @mouseenter="smallPic($event,index)" ref="small_pic_ref" />
-        <p> djf;aldaj;lsdjflas </p>
+        <p> djf;aldaj;lsdjf电路设计发大幅黄金时代好烦 las </p>
       </figure>
+         </div>
+     
       
     </div>
 
@@ -385,8 +388,7 @@
   }
 
 </script>
-
-<style scope>
+<style scoped>
   /* css */
 
   .AudioVisual {
@@ -405,13 +407,13 @@
 
   .showBtn {
     position: absolute;
-    top: 5px;
+    top: 7px;
     right: 2px;
   }
 
   .hidBtn {
     position: absolute;
-    top: 5px;
+    top: 7px;
     right: 10px;
   }
 
@@ -443,13 +445,7 @@
     bottom: 18px;
     right: 10px;
   }
-  /* 缩略图片-figure-wrap */
-  .small_pic_figure{
-    float: left;
-    width: 187px;
-    height: 200px;
-    background: red; margin: 
-  }
+  
   /*  放大、缩小 按钮 wrap */
 
   .BtnIcons {
@@ -518,8 +514,8 @@
   } */
   /*  css */
 
-  .AudioVisual_List,
-  .AudioVisual_Img {
+ .AudioVisual .AudioVisual_List,
+ .AudioVisual .AudioVisual_Img {
     float: left;
     height: 100%;
     overflow: auto;
@@ -527,13 +523,13 @@
   }
   /*  css */
 
-  .AudioVisual_Img {
+ .AudioVisual .AudioVisual_Img {
     width: calc( 100% - 412px);
     /* background: yellowgreen; */
   }
   /*  css */
 
-  .AudioVisual_List {
+ .AudioVisual .AudioVisual_List {
     width: 401px;
     background: #eef0f9;
     border: 1px solid #bfcbd9;
@@ -544,13 +540,13 @@
   /* 左侧折叠面板 */
   /* 折叠面板上面的四个 th 表头 */
 
-  .list_title {
+ .AudioVisual .list_title {
     line-height: 27px;
     font-weight: bold;
   }
 
-  .list_title span,
-  .list_title_div p span {
+ .AudioVisual .list_title span,
+ .AudioVisual .list_title_div p span {
     height: 35px;
     line-height: 35px;
     display: block;
@@ -561,16 +557,16 @@
     text-align: center;
   }
 
-  .list_title span {
+ .AudioVisual .list_title span {
     font-size: 14px;
   }
 
-  .list_title_div p span {
+ .AudioVisual .list_title_div p span {
     font-size: 13px;
   }
 
-  .list_title span:nth-of-type(1),
-  .list_title_div p span:nth-of-type(1) {
+ .AudioVisual .list_title span:nth-of-type(1),
+.AudioVisual  .list_title_div p span:nth-of-type(1) {
     width: 135px;
     /* 省略号 */
     overflow: hidden;
@@ -578,26 +574,26 @@
     white-space: nowrap;
   }
 
-  .list_title span:nth-of-type(2),
-  .list_title_div p span:nth-of-type(2) {
+ .AudioVisual .list_title span:nth-of-type(2),
+ .AudioVisual .list_title_div p span:nth-of-type(2) {
     width: 60px;
     border-right: none;
     border-left: none;
   }
 
-  .list_title span:nth-of-type(3),
-  .list_title_div p span:nth-of-type(3) {
+ .AudioVisual .list_title span:nth-of-type(3),
+ .AudioVisual .list_title_div p span:nth-of-type(3) {
     width: 60px;
   }
 
-  .list_title span:nth-of-type(4),
-  .list_title_div p span:nth-of-type(4) {
+.AudioVisual  .list_title span:nth-of-type(4),
+ .AudioVisual .list_title_div p span:nth-of-type(4) {
     width: 144px;
     border-left: none;
   }
   /* ------------------------------- */
-
-  .Small_pic_div {
+/* 缩略图最外侧div */
+ .AudioVisual .Small_pic_div {
     position: absolute;
     left: 0;
     top: 0;
@@ -607,10 +603,11 @@
         overflow: auto;
     border: 1px solid #bfcbd9;
         background: #ffffff;
-        background: #000;
+        /* background: #000; */
     border-radius: 4px;
   }
-.Small_pic_title{
+  /* 缩略图 p 标签  title */
+.AudioVisual .Small_pic_title{
   font-size: 16px;
     text-align: center;
     background: rgba(0, 119, 255, 0.75);
@@ -622,15 +619,46 @@
     /* 不换行 */
     /* white-space:nowrap; */
     overflow: hidden;
-    position: relative;
-
-    
-    
-    
+    position: relative;    
 }
-  .Small_pic {
-    width: 30%;
-    margin: 0 1%;
+/* 缩略图 content */
+.AudioVisual .small_pic_content{
+position: relative;
+height: calc( 100% - 48px);
+overflow: auto;
+padding-top: 30px;
+}
+/* 缩略图片-figure-wrap */
+.AudioVisual  .small_pic_figure{
+    float: left;
+    width: 187px;
+    height: 200px;
+    /* margin: 30px 0 30px 23px; */
+    margin: 0 0 0 18px;
+
+    /* margin-left:40px;  */
+  }
+  /*  缩略图 figure 内 图片名字 p 标签 */
+ .AudioVisual .small_pic_figure p{
+    height: 22px;
+    line-height: 22px;
+    margin-top: 15px;
+    text-align: center;
+    font-size:16px;
+color:#475669;
+letter-spacing:0.11px;
+/* 超出 省略号显示 */
+overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
+  }
+/* 缩略图 各个 img 图片 */
+ .AudioVisual .Small_pic {
+    height: calc( 100% - 60px);
+    /* UI设计部分 */
+    border-radius:5px;
+    border:1px solid #bfcbd9;
+    box-shadow:2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
   }
 
 </style>

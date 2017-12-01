@@ -205,7 +205,7 @@
     float: left;
     width: 50%;
     height: 100vh;
-    padding: 19px 0 0 20px;
+    padding: 19px 25px 0 20px;
     /* background: black; */
     background: #ededed;
   }
