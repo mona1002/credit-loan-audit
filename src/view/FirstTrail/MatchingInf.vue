@@ -1,5 +1,5 @@
 <template>
-  <div class="SplitScreen">
+  <div class="MatchingInf">
     <myHead></myHead>
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
@@ -332,7 +332,7 @@
 
 </script>
 <style scoped>
-  .SplitScreen {
+  .MatchingInf {
     height: 100%;
   }
   /* 激活样式 流-css */

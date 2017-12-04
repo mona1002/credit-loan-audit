@@ -8,6 +8,8 @@
         <span> 进件编号: {{customInf.applySubNo}}</span>
         <span> 证件号码: {{customInf.certCode}}</span>
         <span> 进件机构: {{customInf.appOrgCode}}</span>
+<button @click="count++"> count++</button>
+<span>{{count}}</span>
         <span> 门店成立时间: {{customInf.applySubNo}}</span>
         <span> 业务员入职时间： {{customInf.applySubNo}}</span>
         <!-- <span> 行政区域进件(或非行政区域进件)</span> -->
@@ -121,25 +123,27 @@
         <div class="AudioVisual_wrap_compare_right ">
           <!-- 搜索框 -->
           <p>客户名称：
-            <el-select v-model="value" placeholder="请选择">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            <el-select v-model="AlertSearch" placeholder="请选择" @change="AlertSearchChange">
+              <el-option v-for="item in AlertSearchCondition" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <AudioVisualLeft></AudioVisualLeft>
+            <!-- <AudioVisualLeft :AlertSearch="AlertSearch" ></AudioVisualLeft> -->
+            <aut :AlertSearch="AlertSearch" @click.native="a"></aut>
           </div>
         </div>
       </div>
       <!-- 对比弹出层结束 -->
     </div>
-
   </div>
 
 </template>
 <script>
   import myHead from "../header.vue"
+  import aut from "./checkComponent/aut"
+  
   // 编辑
   import AudioVisual from "./detailComponent/AudioVisual";
   import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
@@ -167,6 +171,8 @@
   export default {
     data() {
       return {
+count:0,
+        
         // 进件人信息
         customInf: [],
         // 对比按钮弹出层  下拉框
@@ -209,16 +215,13 @@
         AlertSearch: '', // 对比弹出层 客户名称：搜索框
         AlertSearchCondition: [{
           value: '选项1',
-          label: '黄金糕'
+          label: '最近时间原则排列'
         }, {
           value: '选项2',
-          label: '双皮奶'
+          label: '内匹客户姓名+本人进件'
         }, {
           value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
+          label: '内匹客户姓名'
         }],
       }
     },
@@ -229,9 +232,16 @@
         this.$refs.tabOne[3].className = "tabAct";
         // this.$refs.tabOne.className="tabAct"
       },
+      // 对比弹出层change事件
+      AlertSearchChange(){
+        // console.log(this.AlertSearch)
+        this.a();
+        console.log(this.a())
+      },
       // 对比按钮
       compBtnS() {
         console.log("我是傅祖建")
+
         this.CompareAlert = true;
       },
       // 弹出层关闭按钮
@@ -319,12 +329,15 @@
         }
       }
     },
+    update(){
+      console.log(this.count)
+    },
     mounted() {
       this.title = "影音资料";
-
+console.log(this.count)
       console.log(this.$route.query);
       this.customInf = this.$route.query;
-      console.log(this.customInf);
+      // console.log(this.customInf);
 
       // console.log(this.$route.query.row.id) //接参数   
       //  this.post("/workFlowTaskQuery/getTaskProfile", {
@@ -338,6 +351,7 @@
     },
     components: {
       myHead,
+      aut,
       // 编辑
       AudioVisual,
       remark,

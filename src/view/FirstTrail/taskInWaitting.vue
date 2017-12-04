@@ -193,6 +193,7 @@
 				console.log(row);
 		      this.$router.push({path:'/SplitScreen',query:row});
 		      localStorage.setItem("taskInWaitting",JSON.stringify(row));
+		      
 		    },
 		    handleSizeChange(val) {
 		      console.log('每页 ${val} 条');

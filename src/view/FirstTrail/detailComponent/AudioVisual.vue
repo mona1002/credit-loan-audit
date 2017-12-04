@@ -89,7 +89,7 @@
         <img src="../../../../static/images/dasf.png" @click="clockWise ">
       </div>
 
-      <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val" v-if="key==smallPicInd"
+      <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
       />
     </div>
     <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
@@ -101,9 +101,9 @@
  <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
 <!-- <img class="Small_pic" v-for="(val,index) in imgPath" :key="index" :src="'http://10.1.26.6:8080'+val" @click="ChangeCss(index)"
         @mouseenter="smallPic($event,index)" ref="small_pic_ref" /> -->
-        <img class="Small_pic" :src="'http://10.1.26.6:8080'+val" @click="ChangeCss(index)"
+        <img class="Small_pic" :src="'http://10.1.26.6:8080'+val.imagePath" @click="ChangeCss(index)"
         @mouseenter="smallPic($event,index)" ref="small_pic_ref" />
-        <p> djf;aldaj;lsdjf电路设计发大幅黄金时代好烦 las </p>
+        <p>{{val.arcSubType}} </p>
       </figure>
          </div>
      
@@ -135,8 +135,9 @@
       getChildrenList(id) {
         console.log("获取子节点");
         this.post("/productArchive/getProductArchiveChildList", {
-          applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
-          pid: id,
+          applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
+          // pid: id,
+          pid:'9c3a2556-4111-42c4-aa78-0034866cf041'
           // pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
         }).then(res => {
           // console.log(res);
@@ -148,7 +149,7 @@
       getImg(ind) {
         console.log("获取图片");
         console.log(ind)
-        this.imgPath = this.ListDetails[ind].uploadArcPaths;
+        this.imgPath = this.ListDetails[ind].applyArchiveInfos;
         console.log(this.imgPath)
         // this.$mount( ".AudioVisual" )
         this.$nextTick(function () {
@@ -324,8 +325,18 @@
           event.preventDefault();
         }, false);
       },
-      compBtnShow() {
+      compBtnShow() { //对比按钮
         console.log("对比按钮出发")
+        //      this.post("internalMatch/getInternalMatchCustName", {
+        //   applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
+        //   pid: id,
+        //   // pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
+        // }).then(res => {
+        //   // console.log(res);
+        //   console.log(res.data)
+        //   this.ListDetails = res.data;
+        // });
+
         this.$emit('CompareShow')
       }
     },
@@ -346,7 +357,7 @@
       this.post("/productArchive/getProductArchiveParentList", {
         // id:"bb30607c-b5aa-4915-9474-460e099a33e8",
         // applyId:this.applyId,
-        applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
+        applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
       }).then(res => {
         // console.log(res);
         // console.log(res.data)
