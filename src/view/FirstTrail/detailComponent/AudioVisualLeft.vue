@@ -9,61 +9,44 @@
     <!-- 左侧 折叠面板 -->
     <div class="AudioVisual_List" ref="AudioVisual_List_ref" v-show="showListDiv">
       <!-- 折叠面板title -->
-      <!-- <button @click="hid" style="margin:0 0 0 130px;">隐藏</button> -->
-      <!-- <button @click="showList">显示</button> -->
       <img class="hidBtn" src="../../../../static/images/Shapearrowhide@1x.png" @click="hid">
       <!-- 折叠面板-手风琴List -->
       <p class="list_title clearFix">
         <span>影像名称</span>
-        <!-- <span>编号</span> -->
         <span>页数</span>
-        <!-- <span>上传日期</span> -->
       </p>
-      <el-collapse>
-        <el-collapse-item v-for="(item,ind) in ListParent" :key="ind" @click.native="getChildrenList(item.id)">
+      <el-collapse accordion>
+        <el-collapse-item v-for="(item,ind) in ListParent" :key="ind" @click.native="getChildrenList(item.id,ind,item)">
           <template slot="title">
             <p>
               <!-- 一级节点 -->
               <span>{{item.arcName}}</span>
-              <!-- <span>{{item.arcNum}}</span> -->
               <span>{{item.imageCount}}</span>
-              <!-- <span>{{item.uploadDate}}</span> -->
             </p>
           </template>
           <div class="list_title_div">
             <!--  二级 内容 节点 -->
             <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind)">
               <span>{{item.arcName}}</span>
-              <!-- <span>{{item.arcNum}}</span> -->
               <span>{{item.imageCount}}</span>
-              <!-- <span>{{item.uploadDate}}</span> -->
             </p>
           </div>
         </el-collapse-item>
       </el-collapse>
       <!-- 按钮 : 缩略图 对比  -->
       <el-button @click="SmallpicAlert" class="compareBtn">缩略图</el-button>
-      <!-- <el-button type="success" @click="SmallpicAlert" class="compareBtn">缩略图</el-button> -->
       <el-button type="primary" @click="compBtnShow" class="checkDetailBtn">对比</el-button>
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
-      <!-- <img src="http://img.1ppt.com/uploads/allimg/1606/4_160609151925_1.jpg"> -->
       <img src="../../../../static/images/0865C99F-2D8D-417E-A39D-1644063E5A84@1x.png" class="icon_pre " @click="pre">
       <img src="../../../../static/images/C20F2D59-5CCD-4C61-B12F-874344861071@1x.png" class="icon_next" @click="next">
       <div class="BtnIcons">
-        <!-- <i class="el-icon-arrow-left position_and_size icon_pre" @click="pre"></i>
-      <i class="el-icon-arrow-right position_and_size icon_next" @click="next"></i>
-      <i class="el-icon-zoom-in position_and_size icon_larger" @click="larger "></i>
-      <i class="el-icon-zoom-out position_and_size icon_smaller" @click="smaller"></i>
-      <i class="el-icon-refresh position_and_size icon_clockWise" @click="clockWise "></i>
-      <i class="el-icon-sort position_and_size icon_AclockWise" @click="AclockWise "></i> -->
         <img src="../../../../static/images/efw.png" @click="smaller ">
         <img src="../../../../static/images/net.png" @click="larger">
         <img src="../../../../static/images/daf.png" @click="AclockWise ">
         <img src="../../../../static/images/dasf.png" @click="clockWise ">
       </div>
-
       <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
       />
     </div>
@@ -74,17 +57,12 @@
       </p>
       <div class="small_pic_content">
         <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
-          <!-- <img class="Small_pic" v-for="(val,index) in imgPath" :key="index" :src="'http://10.1.26.6:8080'+val" @click="ChangeCss(index)"
-        @mouseenter="smallPic($event,index)" ref="small_pic_ref" /> -->
           <img class="Small_pic" :src="'http://10.1.26.6:8080'+val.imagePath" @click="ChangeCss(index)" @mouseenter="smallPic($event,index)"
             ref="small_pic_ref" />
           <p> {{val.arcSubType}} </p>
         </figure>
       </div>
-
-
     </div>
-
     <!-- </div> -->
 
   </div>
@@ -94,8 +72,9 @@
   export default {
     data() {
       return {
+        // props:[smallPicDivClose],
         // picData: [],
-        taskWaiting:[],
+        localInf: [],
         showListDiv: true, // 列表显示与否
         show: true, // 收缩按钮显示控制
         smallPicInd: 0, // 未知
@@ -107,19 +86,16 @@
         imgPath: [], //图片路径
       }
     },
-    // props:[smallPicDivClose],
+
     methods: {
-      getChildrenList(id) {
+      getChildrenList(id,ind,item) {
         console.log("获取子节点");
         this.post("/productArchive/getProductArchiveChildList", {
-          applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
-          // pid: id,
-          pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
+          applyId: this.localInf.applyId,
+          pid: id
         }).then(res => {
-          // console.log(res);
           console.log(res.data)
           this.ListDetails = res.data;
-
         });
       },
       getImg(ind) {
@@ -127,25 +103,15 @@
         console.log(ind)
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
         console.log(this.imgPath)
-        // this.$mount( ".AudioVisual" )
         this.$nextTick(function () {
-
-          // this.$watch(function(){ return this.$refs.Big_pic_ref[0]},
-          // function(newd){  console.log("333"+newd) }
-          // )
-          console.log(this.$refs.Big_pic_ref[0]);
-
-          console.log(parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0]).height))
-          console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
-          console.log(typeof (getComputedStyle(this.$refs.Big_pic_ref[0], false).width))
+          // console.log(this.$refs.Big_pic_ref[0]);
+          // console.log(parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0]).height))
+          // console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
+          // console.log(typeof (getComputedStyle(this.$refs.Big_pic_ref[0], false).width))
           // DOM 现在更新了
           // `this` 绑定到当前实例
           // this.doSomethingElse()
         })
-        // console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).height)
-        // console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
-        // console.log(typeof( getComputedStyle(this.$refs.Big_pic_ref[0], false).width))
-        // console.log( this.imgPath)
       },
       hid() { //左侧 li 列表
         console.log("hid");
@@ -304,15 +270,15 @@
       compBtnShow() {
         console.log("对比按钮出发")
         // console.log(this.SmallPicShow )
-        
+
         // this.SmallPicShow=this.props[0];
         // console.log(this.SmallPicShow )
-         this.post("internalMatch/getInternalMatchCustName", {
-          // applySubNo: this.taskWaiting.applySubNo,
-          // certCode: this.taskWaiting.certCode,
-          applySubNo:'201504130173041858',
-          certCode:'341422198409070094',
-          
+        this.post("internalMatch/getInternalMatchCustName", {
+          // applySubNo: this.localInf.applySubNo,
+          // certCode: this.localInf.certCode,
+          applySubNo: '201504130173041858',
+          certCode: '341422198409070094',
+
         }).then(res => {
           console.log(res);
           console.log(res.data)
@@ -324,63 +290,16 @@
     },
 
     mounted() {
-      // 登录
-      //  this.post("/smUser/login", {
-      //           userCode:"ddyy",
-      //           loginPassword:"111111"
-      //         }).then(res => {
-      //           console.log(res);
-      //           console.log(res.data)
-      //         });
-
-      //  this.applyId=this.$route.query.applyId;//接受参数
-// localstorage
-// localStorage.setItem("userInf", JSON.stringify(userInf));
-this.taskWaiting = JSON.parse(localStorage.getItem("taskInWaitting") )
-// console.log(JSON.parse(localStorage.getItem("taskInWaitting") ));
-console.log(JSON.parse(localStorage.getItem("taskInWaitting") ))
+      // localStorage.setItem("userInf", JSON.stringify(userInf));
+       // console.log(JSON.parse(localStorage.getItem("taskInWaitting") ));
+      this.localInf = JSON.parse(localStorage.getItem("taskInWaitting"))
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
-        // id:"bb30607c-b5aa-4915-9474-460e099a33e8",
-        // applyId:this.applyId,
-        applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
+        applyId: this.localInf.applyId,
       }).then(res => {
-        // console.log(res);
         // console.log(res.data)
-        this.ListParent = res.data
-        // console.log(this.ListParent[0].id )
+        this.ListParent = res.data;
       });
-
-      // 子菜单栏
-      // this.post("/productArchive/getProductArchiveChildList", {
-      //   applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
-      //   pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
-      // }).then(res => {
-      //   console.log(res);
-      //   // console.log(res.data)
-      //   // this.ListParent=res.data
-      // });
-      // 图片
-      //  this.post("/internalMatch/getInternalMatchCustName", {
-      //   applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886",
-      //   pid:"9c3a2556-4111-42c4-aa78-0034866cf041"
-      // }).then(res => {
-      //   console.log(res);
-      //   console.log(res.data)
-      //   this.ListParent=res.data
-      // });
-
-
-      //     if (getComputedStyle(this.$refs.Big_pic_ref[0], false).width > getComputedStyle(this.$refs.Big_pic_ref[0], //判断宽度>高度  按宽度100%显示
-      //     false).height) { // 点击切换图片时，让显示的大图宽高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
-      //   this.$refs.Big_pic_ref[0].style.width = "100%";//calc( 100% - 202px)
-      //   console.log("默认大图css样式if width >>>>>>>>>>> height" + this.$refs.Big_pic_ref[0].style.width)
-      // } else {
-      //   this.$refs.Big_pic_ref[0].style.height = "100%";
-      //   console.log("默认大图css样式else  width <<<<<<  height")
-      //   console.log(this.$refs.Big_pic_ref[0])
-      //   console.log(this.$refs.Big_pic_ref[0].style.height)
-      // }
     }
   }
 
