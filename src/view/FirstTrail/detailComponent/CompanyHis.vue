@@ -76,8 +76,12 @@ export default {
     }
   },
   mounted() {
+        console.log('id='+this.id);
+    console.log('phoneType='+this.phoneType);
+    // 测试数据
     this.queryComTelLog();
   },
+  props:['id','phoneType'],
   methods: {
     queryComTelLog(){
       this.post('/creTelResearchHis/queryComTelLog',{
