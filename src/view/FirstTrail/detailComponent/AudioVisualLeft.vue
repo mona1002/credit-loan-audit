@@ -22,7 +22,6 @@
       <el-collapse>
         <el-collapse-item v-for="(item,ind) in ListParent" :key="ind" @click.native="getChildrenList(item.id)">
           <template slot="title">
-
             <p>
               <!-- 一级节点 -->
               <span>{{item.arcName}}</span>
@@ -40,31 +39,7 @@
               <!-- <span>{{item.uploadDate}}</span> -->
             </p>
           </div>
-          <!-- 此处为重复的样式  得到数据之后删除 -->
-          <div class="list_title_div">
-            <p>
-              <span>影像名称</span>
-              <!-- <span>编号</span> -->
-              <span>页数</span>
-              <!-- <span>上传日期</span> -->
-            </p>
-          </div>
-          <!-- 重复部分结束 -->
         </el-collapse-item>
-        <!-- 此处为重复的样式  得到数据之后删除 -->
-        <el-collapse-item>
-          <template slot="title">
-            <p>
-              <span>影像名称</span>
-              <!-- <span>编号</span> -->
-              <span>页数</span>
-              <!-- <span>上传日期</span> -->
-            </p>
-          </template>
-          <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-          <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
-        </el-collapse-item>
-        <!-- 重复部分结束 -->
       </el-collapse>
       <!-- 按钮 : 缩略图 对比  -->
       <el-button @click="SmallpicAlert" class="compareBtn">缩略图</el-button>
@@ -89,7 +64,7 @@
         <img src="../../../../static/images/dasf.png" @click="clockWise ">
       </div>
 
-      <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val" v-if="key==smallPicInd"
+      <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
       />
     </div>
     <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
@@ -101,9 +76,9 @@
         <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
           <!-- <img class="Small_pic" v-for="(val,index) in imgPath" :key="index" :src="'http://10.1.26.6:8080'+val" @click="ChangeCss(index)"
         @mouseenter="smallPic($event,index)" ref="small_pic_ref" /> -->
-          <img class="Small_pic" :src="'http://10.1.26.6:8080'+val" @click="ChangeCss(index)" @mouseenter="smallPic($event,index)"
+          <img class="Small_pic" :src="'http://10.1.26.6:8080'+val.imagePath" @click="ChangeCss(index)" @mouseenter="smallPic($event,index)"
             ref="small_pic_ref" />
-          <p> djf;aldaj;lsdjf电路设计发大幅黄金时代好烦 las </p>
+          <p> {{val.arcSubType}} </p>
         </figure>
       </div>
 
@@ -120,6 +95,7 @@
     data() {
       return {
         // picData: [],
+        taskWaiting:[],
         showListDiv: true, // 列表显示与否
         show: true, // 收缩按钮显示控制
         smallPicInd: 0, // 未知
@@ -136,9 +112,9 @@
       getChildrenList(id) {
         console.log("获取子节点");
         this.post("/productArchive/getProductArchiveChildList", {
-          applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
-          pid: id,
-          // pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
+          applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
+          // pid: id,
+          pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
         }).then(res => {
           // console.log(res);
           console.log(res.data)
@@ -149,7 +125,7 @@
       getImg(ind) {
         console.log("获取图片");
         console.log(ind)
-        this.imgPath = this.ListDetails[ind].uploadArcPaths;
+        this.imgPath = this.ListDetails[ind].applyArchiveInfos;
         console.log(this.imgPath)
         // this.$mount( ".AudioVisual" )
         this.$nextTick(function () {
@@ -327,10 +303,22 @@
       },
       compBtnShow() {
         console.log("对比按钮出发")
-        console.log(this.SmallPicShow )
+        // console.log(this.SmallPicShow )
         
         // this.SmallPicShow=this.props[0];
         // console.log(this.SmallPicShow )
+         this.post("internalMatch/getInternalMatchCustName", {
+          // applySubNo: this.taskWaiting.applySubNo,
+          // certCode: this.taskWaiting.certCode,
+          applySubNo:'201504130173041858',
+          certCode:'341422198409070094',
+          
+        }).then(res => {
+          console.log(res);
+          console.log(res.data)
+          // this.ListDetails = res.data;
+
+        });
         this.$emit('CompareShow')
       }
     },
@@ -346,12 +334,16 @@
       //         });
 
       //  this.applyId=this.$route.query.applyId;//接受参数
-
+// localstorage
+// localStorage.setItem("userInf", JSON.stringify(userInf));
+this.taskWaiting = JSON.parse(localStorage.getItem("taskInWaitting") )
+// console.log(JSON.parse(localStorage.getItem("taskInWaitting") ));
+console.log(JSON.parse(localStorage.getItem("taskInWaitting") ))
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         // id:"bb30607c-b5aa-4915-9474-460e099a33e8",
         // applyId:this.applyId,
-        applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
+        applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
       }).then(res => {
         // console.log(res);
         // console.log(res.data)

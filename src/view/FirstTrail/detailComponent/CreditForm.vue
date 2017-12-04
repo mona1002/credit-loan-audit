@@ -8,7 +8,7 @@
           <ul class="CreditForm_InternetInf_ul_left">
             <li>
               <label class="InternetInf_left_label" @click="NewPage(0)">客户在法网是否有被执行信息：</label>
-              <el-select v-model="checkData.wbeexEcuted" placeholder="请选择">
+              <el-select v-model="checkData.wbeexEcuted" placeholder="请选择" @change="commentShow1(checkData.wbeexEcuted)">
                 <el-option v-for="item in beexEcuted" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
@@ -52,7 +52,7 @@
             </li>
             <li>
               <label class="InternetInf_left_label" @click="NewPage(2)">网搜单位电话是否有异常：</label>
-              <el-select v-model="checkData.wnetHirecomPhone" placeholder="请选择">
+              <el-select v-model="checkData.wnetHirecomPhone" placeholder="请选择" @change="commentShow1">
                 <el-option v-for="item in netHirecomPhone" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
@@ -89,57 +89,57 @@
           </ul>
           <ul class="CreditForm_InternetInf_ul_right">
             <li>
-              <label class="InternetInf_right_label"> 执行信息说明： </label>
+              <label class="InternetInf_right_label" v-if="commentShow"> 执行信息说明： </label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wbeexEcutedtxt">
               </el-input>
             </li>
             <li>
-              <label class="InternetInf_right_label"> 单位执行信息说明：</label>
+              <label class="InternetInf_right_label" v-if="commentShow"> 单位执行信息说明：</label>
               <el-input type="textcheckData.area" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomtxt">
               </el-input>
             </li>
             <li>
-              <label class="InternetInf_right_label"> 失信记录说明： </label>
+              <label class="InternetInf_right_label" v-if="commentShow"> 失信记录说明： </label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetEcutedBreatxt">
               </el-input>
             </li>
             <li>
-              <label class="InternetInf_right_label"> 单位失信记录说明： </label>
+              <label class="InternetInf_right_label" v-if="commentShow"> 单位失信记录说明： </label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomBreatxt">
               </el-input>
             </li>
             <li>
-              <label class="InternetInf_right_label"> 手机异常信息说明： </label>
+              <label class="InternetInf_right_label" v-if="commentShow"> 手机异常信息说明： </label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetPhonetxt">
               </el-input>
             </li>
             <li>
-              <label class="InternetInf_right_label"> 单位名称异常信息说明： </label>
+              <label class="InternetInf_right_label" v-if="commentShow"> 单位名称异常信息说明： </label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomNametxt">
               </el-input>
             </li>
             <li>
-              <label class="InternetInf_right_label"> 单位电话异常信息说明： </label>
+              <label class="InternetInf_right_label" v-if="commentShow"> 单位电话异常信息说明： </label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomPhonetxt">
               </el-input>
             </li>
             <li>
-              <label class="InternetInf_right_label"> 地址异常信息说明： </label>
+              <label class="InternetInf_right_label" v-if="commentShow"> 地址异常信息说明： </label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetAddrandEstatetxt">
               </el-input>
             </li>
             <li>
-              <label class="InternetInf_right_label"> 单位地址异常信息说明： </label>
+              <label class="InternetInf_right_label" v-if="commentShow"> 单位地址异常信息说明： </label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomAddresstxt">
               </el-input>
             </li>
             <li>
-              <label class="InternetInf_right_label"> 工商登记信息说明： </label>
+             <label class="InternetInf_right_label" v-if="commentShow"> 工商登记信息说明： </label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetCompanytxt">
               </el-input>
             </li>
             <li>
-              <label class="InternetInf_right_label"> 组织机构代码信息说明： </label>
+              <label class="InternetInf_right_label" v-if="commentShow"> 组织机构代码信息说明： </label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetAddrstatetxt">
               </el-input>
             </li>
@@ -494,6 +494,7 @@
     data() {
       return {
         addressOne: '',
+        commentShow:true,
         activeNames: ['1', "2", "3", "4", "5", "6", "7", "8"], //折叠面板 默认显示下标
         checkData: [], // 查询接口回来的数据
         // -------上网查询信息------------
@@ -870,6 +871,13 @@
         console.log(tab, event);
 
       },
+      commentShow1(name){
+        console.log(" commentShow")
+        console.log(name)
+        // switch(){
+        //   // case 
+        // }
+      },
       NewPage(ind) { // tab1-------------------右键菜单栏 li[0] 点击事件
         console.log(ind);
         switch (ind) {
@@ -893,8 +901,8 @@
       },
       getCity(item) {
         console.log("省份-市区")
-        // console.log(item)
-        this.post("/credit/queryCityCounty", {
+        console.log(item)
+        this.get("/credit/queryCityCounty", {
           parentCode: item,
         }).then(res => {
           console.log(res);
@@ -907,7 +915,7 @@
       },
       getTown(item) {
         console.log("city");
-        this.post("/credit/queryCityCounty", {
+        this.get("/credit/queryCityCounty", {
           parentCode: item,
         }).then(res => {
           console.log(res);
@@ -934,13 +942,13 @@
         this.checkData = res.data;
       });
       // 省    
-      this.post("/credit/queryProvince", {}).then(res => {
-        // console.log(res);
+      this.get("/credit/queryProvince", {}).then(res => {
+        console.log(res);
         this.hirecomAddress = res.data;
       });
       // 所属行业 
-      this.post("/credit/industry", {}).then(res => {
-        // console.log(res.data);
+      this.get("/credit/industry", {}).then(res => {
+        console.log(res.data);
         this.hirecomKind = res.data;
       })
 
