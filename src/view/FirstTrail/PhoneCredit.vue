@@ -25,17 +25,17 @@
                 <el-table :data="listData.recordList" height="250" border style="width: 100%" @row-dblclick="rowDbClick" stripe v-loading="mobileLoading">
                   <el-table-column type="index" label="序号">
                   </el-table-column>
-                  <el-table-column prop="phoneType" label="电话类型">
+                  <el-table-column prop="phoneTypeDes" label="电话类型">
                   </el-table-column>
                   <el-table-column prop="checkTime" label="调查时间">
                   </el-table-column>
-                  <el-table-column prop="source" label="来源">
+                  <el-table-column prop="sourceDes" label="来源">
                   </el-table-column>
-                  <el-table-column prop="phoneNum" label="电话号码">
+                  <el-table-column prop="phoneNumDes" label="电话号码">
                   </el-table-column>
-                  <el-table-column prop="answer" label="接听情况">
+                  <el-table-column prop="answerDes" label="接听情况">
                   </el-table-column>
-                  <el-table-column prop="checkStage" label="调查阶段">
+                  <el-table-column prop="checkStageDes" label="调查阶段">
                   </el-table-column>
                   <el-table-column prop="conclusion" label="调查结论">
                   </el-table-column>
@@ -54,7 +54,7 @@
         <el-main>
           <!-- 默认的新增表单 -->
           <!-- 住址电话 - 表单 -->
-          <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum"></AddressForm>
+          <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId"></AddressForm>
           <!-- 住址电话 - 历史 -->
           <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :id="id" :phoneType="phoneType"></AddressHis>
           <!-- 单位电话 - 表单 -->
@@ -258,8 +258,9 @@ export default {
       hisShow: false,
       activeNames: ['1'], // 折叠默认展开的选项
       treeFlag: '', // 用来标志  电话树是否需要更新
-      listFlag: '' // 用来标志  历史调查日志, 
+      listFlag: '', // 用来标志  历史调查日志, 
       //是否需要更新  在子组件操作的时候, $emit 
+      applySubNo:'' // 进件编号
     }
   },
   mounted() {
@@ -267,8 +268,14 @@ export default {
     // 此时 data 已经被 observed 了
     // 测试数据
     // 调用历史数据
-    this.applyId = '2222';
-    this.phoneNum = '11111';
+    var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+    this.applyId = taskInWaitting.applyId;
+    // 进件编号
+    console.log(this.applyId);
+    this.applySubNo = taskInWaitting.applySubNo;
+    console.log(this.applySubNo);
+
+    // this.phoneNum = '11111';
     // this.phoneType = '00';
     // 电话树数据
     this.fetchData();
@@ -309,6 +316,7 @@ export default {
     },
     handleNodeClick(data) {
 
+
       // 点击每条tree数据的事件
       this.treeId = data.id;
       if (data.id.length > 2) {
@@ -323,6 +331,7 @@ export default {
         this.custName = data.telName;
         // 电话号码
         this.phoneNum = data.telNum;
+        // this.phoneNum = '010-001';
         console.log(data.id.length);
 
         this.queryTelLogByPage();
@@ -370,7 +379,7 @@ export default {
       this.post('/creTelResearchHis/queryByPage', {
         creTelInvestDto: {
           applyId: this.applyId,
-          phoneNum: '11111',
+          phoneNum: this.phoneNum,
           phoneType: this.phoneType,
           // phoneType: '00',
         },
@@ -414,7 +423,8 @@ export default {
           "creatorCode": this.userCode,
           "relationShip": this.addRelationShip // 关系
         },
-        "applySubNo": '201504130173041858'
+        // "applySubNo": '201504130173041858'
+        "applySubNo": this.applySubNo
       }).then(res => {
         console.log(res);
 
