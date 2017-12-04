@@ -9,13 +9,13 @@
       </div>
       <!-- 移动电话 -->
       <el-table stripe :data="mobileData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickMobiel" highlight-current-row v-loading="mobileLoading">
-        <el-table-column prop="matchApplyCustName" label="命中号码姓名">
+        <el-table-column prop="targetCustName" label="命中号码姓名">
         </el-table-column>
         <el-table-column prop="applyTelTypeTxt" label="电话类型">
         </el-table-column>
         <el-table-column prop="matchApplySubNo" label="进件编号">
         </el-table-column>
-        <el-table-column prop="custName" label="客户名称">
+        <el-table-column prop="matchApplyCustName" label="客户名称">
         </el-table-column>
         <el-table-column prop="certCode" label="身份证号">
         </el-table-column>
@@ -37,13 +37,13 @@
         {{title2}}
       </div>
       <el-table stripe :data="fixTelData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickFixTel" highlight-current-row v-loading="fixTelLoading">
-        <el-table-column prop="matchApplyCustName" label="命中号码姓名">
+        <el-table-column prop="targetCustName" label="命中号码姓名">
         </el-table-column>
         <el-table-column prop="applyTelTypeTxt" label="电话类型">
         </el-table-column>
         <el-table-column prop="matchApplySubNo" label="进件编号">
         </el-table-column>
-        <el-table-column prop="custName" label="客户名称">
+        <el-table-column prop="matchApplyCustName" label="客户名称">
         </el-table-column>
         <el-table-column prop="certCode" label="身份证号">
         </el-table-column>
@@ -65,13 +65,13 @@
       </div>
       <!-- 单位名称 -->
       <el-table stripe :data="workData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickCompany" highlight-current-row v-loading="companyLoading">
-        <el-table-column prop="matchApplyCustName" label="命中号码姓名">
+        <el-table-column prop="targetCustName" label="命中号码姓名">
         </el-table-column>
         <el-table-column prop="applyTelTypeTxt" label="电话类型">
         </el-table-column>
         <el-table-column prop="matchApplySubNo" label="进件编号">
         </el-table-column>
-        <el-table-column prop="custName" label="客户名称">
+        <el-table-column prop="matchApplyCustName" label="客户名称">
         </el-table-column>
         <el-table-column prop="certCode" label="身份证号">
         </el-table-column>
