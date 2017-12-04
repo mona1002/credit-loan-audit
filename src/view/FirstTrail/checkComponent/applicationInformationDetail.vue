@@ -2,7 +2,11 @@
 <template>
 	<div class="applicationInformationDetail">
 		<el-collapse v-model="activeNames" @change="handleChange">
-			<el-collapse-item title="工作人员填写" name="1">
+			<el-collapse-item name="1">
+				<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">工作人员填写</span>
+				</template>
 				<ul class="firstUl">
 					<li>
 						<label>申请类型：</label><span>{{datas.appTypeTxt}}</span>
@@ -62,7 +66,11 @@
 					</li>
 				</ul>
 		  	</el-collapse-item>
-		  	<el-collapse-item title="您的借款需求" name="2">
+		  	<el-collapse-item name="2">
+		  		<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">您的借款需求</span>
+				</template>
 				<ul class="firstUl">
 					<li>
 						<label>借款用途：</label>
@@ -109,7 +117,11 @@
 					
 				</ul>
 		  	</el-collapse-item>
-		  	<el-collapse-item title="您的个人信息" name="3">
+		  	<el-collapse-item name="3">
+		  		<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">您的个人信息</span>
+				</template>
 				<ul class="firstUl">
 					<li>
 						<label>客户名称：</label>
@@ -324,7 +336,11 @@
 					<li></li>
 				</ul>
 		  	</el-collapse-item>
-		  	<el-collapse-item title="私人业主信息" name="4" v-if="accepCusBasicInfo.privateOwnerFlag=='1'">
+		  	<el-collapse-item name="4" v-if="accepCusBasicInfo.privateOwnerFlag=='1'">
+		  		<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">私人业主信息</span>
+				</template>
 				<ul class="firstUl">
 					<li>
 						<label>企业类型：</label>
@@ -474,7 +490,11 @@
 					</li>
 				</ul>
 			</el-collapse-item>
-			<el-collapse-item title="房产信息" name="5">
+			<el-collapse-item name="5">
+				<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">房产信息</span>
+				</template>
 			    <el-table
 			      :data="accepCusEstates"
 			      style="width: 100%">
@@ -529,7 +549,11 @@
 				      </el-table-column>
 			    </el-table>
 		  	</el-collapse-item>
-		  	<el-collapse-item title="车辆信息" name="6">
+		  	<el-collapse-item name="6">
+		  		<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">车辆信息</span>
+				</template>
 			    <el-table
 			      :data="accepCusCarInfos"
 			      style="width: 100%">
@@ -584,7 +608,11 @@
 				      </el-table-column>
 			    </el-table>
 		  	</el-collapse-item>
-		  	<el-collapse-item title="您的工作信息" name="7">
+		  	<el-collapse-item name="7">
+		  		<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">您的工作信息</span>
+				</template>
 				<ul class="firstUl">
 					<li style="width:66.6%;">
 						<label style="float:left;">工作单位：</label>
@@ -685,7 +713,11 @@
 					</li>
 				</ul>
 		  	</el-collapse-item>
-		  	<el-collapse-item title="联系人信息" name="8">
+		  	<el-collapse-item name="8">
+		  		<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">联系人信息</span>
+				</template>
 			    <el-table
 			      :data="accepCusRelations"
 			      style="width: 100%">
@@ -842,6 +874,10 @@
 <style type="text/css" scoped>
 	.applicationInformationDetail{
 		width: 100%;
+		min-width: 1366px;
+		height: 100%;
+		background-color: #fafbfc;
+		font-size: 14px;
 	}
 	.applicationInformationDetail ul{
 		width: 100%;
@@ -895,5 +931,13 @@
 	}
 	.spans{
 		padding-right: 20px;
+	}
+	/* 折叠面板头部背景色和icon */
+	.icon_hat{
+		padding: 9px 10px 10px 13px;
+		vertical-align: middle;
+	}
+	.headFont{
+		font-size: 16px;
 	}
 </style>

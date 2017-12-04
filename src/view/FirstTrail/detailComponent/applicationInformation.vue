@@ -1828,6 +1828,10 @@
 <style type="text/css" scoped>
 	.applicationInformation{
 		width: 100%;
+		height: 100%;
+		background-color: #fafbfc;
+		font-size: 14px;
+		min-width: 1366px;
 	}
 	.applicationInformation ul{
 		width: 100%;
