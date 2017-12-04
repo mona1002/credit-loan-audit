@@ -3,7 +3,8 @@
   <div class="phone-credit">
     <el-container style="height: 100%; border: 1px solid #eee">
       <!-- 左侧 导航列表 -->
-      <el-aside width="200px" style="heightbackground-color: rgb(238, 241, 246)">
+      <!-- width="200px" style="heightbackground-color: rgb(238, 241, 246)" -->
+      <el-aside style="width:210px;">
         <!-- 手风琴效果 -->
         <!-- no-key 每个树节点用来作为唯一标识的属性,整棵树应是唯一的 -->
         <!-- renderContent 指定渲染函数,该函数返回需要的节点区内容即可 -->
@@ -17,34 +18,37 @@
       <!-- 右侧 表单内容 -->
       <el-container>
         <el-header style="text-align: right; font-size: 12px">
-          <div v-show="hisListShow">
-            <div class="head-title">
-              历史调查日志
-            </div>
-            <!-- 列表 -->
-            <el-table :data="listData.recordList" height="250" border style="width: 100%" @row-click="rowClick" stripe v-loading="mobileLoading">
-              <el-table-column type="index" label="序号">
-              </el-table-column>
-              <el-table-column prop="phoneType" label="电话类型">
-              </el-table-column>
-              <el-table-column prop="checkTime" label="调查时间">
-              </el-table-column>
-              <el-table-column prop="source" label="来源">
-              </el-table-column>
-              <el-table-column prop="phoneNum" label="电话号码">
-              </el-table-column>
-              <el-table-column prop="answer" label="接听情况">
-              </el-table-column>
-              <el-table-column prop="checkStage" label="调查阶段">
-              </el-table-column>
-              <el-table-column prop="conclusion" label="调查结论">
-              </el-table-column>
-            </el-table>
-            <!-- 分页 -->
-            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 15, 20]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="listData.totalRecord">
-            </el-pagination>
-            </el-pagination>
-          </div>
+          <!--  v-show="hisListShow" -->
+          <el-collapse v-model="activeNames">
+            <el-collapse-item title="历史调查日志" style="text-align:left;" v-show="hisListShow" name="1">
+              <div>
+                <el-table :data="listData.recordList" height="250" border style="width: 100%" @row-click="rowClick" stripe v-loading="mobileLoading">
+                  <el-table-column type="index" label="序号">
+                  </el-table-column>
+                  <el-table-column prop="phoneType" label="电话类型">
+                  </el-table-column>
+                  <el-table-column prop="checkTime" label="调查时间">
+                  </el-table-column>
+                  <el-table-column prop="source" label="来源">
+                  </el-table-column>
+                  <el-table-column prop="phoneNum" label="电话号码">
+                  </el-table-column>
+                  <el-table-column prop="answer" label="接听情况">
+                  </el-table-column>
+                  <el-table-column prop="checkStage" label="调查阶段">
+                  </el-table-column>
+                  <el-table-column prop="conclusion" label="调查结论">
+                  </el-table-column>
+                </el-table>
+                <!-- 分页 -->
+                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 15, 20]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="listData.totalRecord">
+                </el-pagination>
+              </div>
+            </el-collapse-item>
+          </el-collapse>
+          <!-- <div v-show="hisListShow"> -->
+          <!-- <div class="head-title"> 历史调查日志 </div> -->
+          <!-- 列表 -->
         </el-header>
         <!-- 表单部分 -->
         <el-main>
@@ -69,8 +73,6 @@
           <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum"></WorkForm>
           <!-- 工作证明人 - 历史 -->
           <WorkHis class="form-his" v-if="hisShow && phoneType=='05'"></WorkHis>
-          
-
           <!-- 子组件 -->
           <!-- <router-link to="/AddressForm/formTag='testtag'/id='123'/phoneType='01'">
             <el-button type="primary">住址电话</el-button>
@@ -248,11 +250,12 @@ export default {
       // 电话号码
       telNum: '',
       // 请求历史日志
-      hisId:'',
-      hisPhoneType:'',
+      hisId: '',
+      hisPhoneType: '',
       // 改造 , 通过 电话类型 , formShwo/hisShow 来控制所有的 表单/历史显示
-      formShow:false,
-      hisShow:false
+      formShow: false,
+      hisShow: false,
+      activeNames: ['1']  // 折叠默认展开的选项
     }
   },
   mounted() {
@@ -265,7 +268,7 @@ export default {
     // this.phoneType = '00';
     // 电话树数据
     this.fetchData();
-    
+
   },
   watch: {
     // 监听属性  电话类型
@@ -275,8 +278,8 @@ export default {
     //   }
     // },
     // 监听 添加电话 页面是否显示
-    coverShow:function(){
-      if(!this.coverShow){
+    coverShow: function() {
+      if (!this.coverShow) {
         this.addTelType = '';
         this.addTelName = '';
         this.addRelationShip = '';
@@ -341,7 +344,7 @@ export default {
       //     this.workHisShow = false;
       // }
       // 
-      
+
 
       this.formShow = true;
 
@@ -368,15 +371,15 @@ export default {
         this.listData = res.data;
       })
     },
-    queryHisLog(){
+    queryHisLog() {
       // 获取历史数据
       // id 日志记录 id
       // phoneType 电话类型
-      
+
     },
-    queryHomeTelHis(){
+    queryHomeTelHis() {
       // 查询住址电话日志
-      this.post('creTelResearchHis/queryHomeTel',{
+      this.post('creTelResearchHis/queryHomeTel', {
 
       })
     },
@@ -446,7 +449,7 @@ export default {
       //     break;
       // }
       // 
-      
+
 
       // 直接处理 显示  历史
       this.formShow = false;
@@ -469,16 +472,50 @@ export default {
 
 </script>
 <style>
-el-header {
+.phone-credit {
+  width: 100%;
+  height: 100%;
+}
+
+.phone-credit .el-container {
+  width: 100%;
+  height: 100%;
+}
+
+.phone-credit el-header {
   background-color: #B3C0D1;
   color: #333;
   line-height: 60px;
 }
 
+
 .phone-credit .el-aside {
-  color: #333;
+  /*color: #333;*/
   height: 100%;
+
+
+  background: #f8f9fd;
+  border: 1px solid #e6eaee;
+  border-radius: 4px;
+  /*width: 210px !important;*/
+  /*height: 321px;*/
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -490,8 +527,51 @@ el-header {
 /* 树形  结构 */
 
 .phone-credit .el-tree {
-  padding-left: 10px;
+  /*padding-left: 10px;*/
+  /*  background: #f8f9fd;
+  border: 1px solid #e6eaee;
+  border-radius: 4px;
+  width: 233px;
+  height: 321px;*/
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* el-tree  title */
+
+.phone-credit .el-tree-node__content {
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #0077ff;
+  letter-spacing: 1.49px;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -503,11 +583,51 @@ el-header {
 
 /* element-ui tree icon 箭头*/
 
-.phone-credit .el-tree-node__content>.el-tree-node__expand-icon {
+.phone-credit .el-tree-node__content .el-tree-node__expand-icon {
   /*display: none;*/
   position: relative;
   left: 150px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 三角 */
+
+.phone-credit .el-tree-node__expand-icon {
+
+  /*transform: rotate(180deg);*/
+  /*background: #0077ff;*/
+  /*width: 10px;*/
+  /*height: 6px;*/
+  /*color:inherit;*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -533,6 +653,22 @@ el-header {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* label 字体 */
 
 .phone-credit .el-tree-node__label {
@@ -546,11 +682,43 @@ el-header {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 二级 目录 样式 */
 
 .phone-credit .el-tree-node__content {
   padding-left: 0px !important;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -574,6 +742,22 @@ el-header {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 点击添加出现的 页面 */
 
 .phone-credit .cover-view {
@@ -584,6 +768,22 @@ el-header {
   top: 0;
   left: 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -617,11 +817,43 @@ el-header {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* title */
 
 .phone-credit .cover-content .add-title {
   text-align: left;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -661,6 +893,65 @@ el-header {
 
 
 
+
+
+
+
+
+/* el-tree - label*/
+
+.phone-credit .el-tree-node__label {
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #0077ff;
+  letter-spacing: 1.49px;
+  text-align: center;
+  line-height: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* children - label*/
+
+.phone-credit .el-tree-node__children .el-tree-node__label {
+  font-family: PingFangSC-Regular;
+  font-size: 13px;
+  color: #666666;
+  letter-spacing: 0.09px;
+  line-height: 21px;
+  text-align: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 确定按钮 */
 
 .phone-credit .cover-content .el-button {
@@ -669,6 +960,22 @@ el-header {
   /*margin-top: 10px;*/
   /*margin-right: 10px;*/
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -700,19 +1007,35 @@ el-header {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 右侧 头 table*/
 
 .phone-credit .el-header {
   width: 100%;
   height: auto !important;
-  height: 350px !important;
+  /*min-height: 350px !important;*/
 }
 
 .phone-credit .el-main {
   height: calc(100% - 300px);
   padding: 0;
   padding-bottom: 10px;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .phone-credit .el-header .head-title {
@@ -723,8 +1046,38 @@ el-header {
   background: #ededed;
   vertical-align: middle;
   line-height: 40px;
-  padding-left: 20px;
+  /*padding-left: 20px;*/
+  background: #eef0f9;
+  border: 1px solid #e6eaee;
+  /*border-radius:23px;*/
+  /*width: 1517px;*/
+  height: 38px;
+  width: 100%;
+
+  font-family: PingFangSC-Regular;
+  font-size: 16px;
+  color: #1f2d3d;
+  letter-spacing: 0.11px;
+  text-align: left;
+  vertical-align: middle;
+  line-height: 38px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -748,12 +1101,44 @@ el-header {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* form-his */
 
 .phone-credit .form-his {
   width: 100%;
   height: 100%;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -773,6 +1158,22 @@ el-header {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 添加申请单电话 label*/
 
 .phone-credit .add-label {
@@ -783,8 +1184,25 @@ el-header {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 表单 */
-.phone-credit .address-title {
+
+.phone-credit .el-main .form-his .address-title {
   width: 100%;
   height: 40px;
   font-size: 18px;
@@ -796,55 +1214,201 @@ el-header {
   margin-bottom: 10px;
   margin-top: 20px;
   overflow: hidden;
+
+
+  background: #eef0f9;
+  border: 1px solid #e6eaee;
+  /*width: 1517px;*/
+  height: 38px;
+  width: 100%;
+  width: 100%;
+
+  font-family: PingFangSC-Regular;
+  font-size: 16px;
+  color: #1f2d3d;
+  letter-spacing: 0.11px;
+  text-align: left;
+  vertical-align: middle;
+  line-height: 38px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* label */
+
 .phone-credit .el-form-item__label {
   width: 150px !important;
 }
+
 .phone-credit .el-form-item {
   margin-bottom: 5px !important;
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 三列 */
+
 .phone-credit .item-column3 {
   width: 33%;
   float: left;
   margin: 0;
   margin-bottom: 10px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 两列 */
+
 .phone-credit .item-column2 {
   width: 50%;
   float: left;
   margin: 0;
 }
-.phone-credit .item-column1{
-  width:80%;
+
+.phone-credit .item-column1 {
+  width: 80%;
   float: left;
   margin: 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 表单提交 */
+
 .phone-credit .address-submit {
   margin: 0;
   padding: 0;
   float: left;
   margin: 20px;
-  width:80%;
+  width: 80%;
   text-align: right;
   margin-top: 50px;
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* input 不可编辑状态*/
-.dis-input{
 
-}
+.dis-input {}
 
-.phone-credit .el-select>.el-input{
+
+
+.phone-credit .el-select>.el-input {
   height: 30px;
 }
-.phone-credit .el-input__inner{
+
+.phone-credit .el-input__inner {
   height: 30px !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* el-input width*/
+
+.phone-credit .el-container .el-main .el-input {
+  width: 258px !important;
+}
+
+
+
+/* 表格头 */
+.phone-credit .el-header{
+  padding: 0;
+}
+
+.el-collapse-item__header {
+  background: #eef0f9;
+}
+
+/* 折叠 头 箭头样式*/
+.phone-credit .el-collapse-item__header .el-collapse-item__arrow{
+  padding-right: 20px;
 }
 
 </style>
