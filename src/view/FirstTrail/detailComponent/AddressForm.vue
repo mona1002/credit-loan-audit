@@ -57,7 +57,7 @@
       </el-form-item>
       <!-- 三方异常出 -->
       <el-form-item label="异常说明" class="item-column2">
-        <el-input v-model="form.cretelhometel.threeQueriesDes"></el-input>
+        <el-input v-model="form.cretelhometel.exceptionState"></el-input>
       </el-form-item>
       <!-- 家庭联系人 -->
       <el-form-item label="是否与为同一接听人:" class="item-column2 min-lin-class">
@@ -68,7 +68,7 @@
       </el-form-item>
       <!-- 与家庭联系人不是同一接听人 -->
       <el-form-item label="-" class="item-column2">
-        <el-input v-model="form.cretelhometel.issameFamDes"></el-input>
+        <el-input v-model="form.cretelhometel.issameFamtxt"></el-input>
       </el-form-item>
       <el-form-item label="与借款人关系:" class="item-column2">
         <el-select v-model="form.cretelhometel.relBorrower" placeholder="">
@@ -80,7 +80,7 @@
       </el-form-item>
       <!-- 与借款人关系  其他 -->
       <el-form-item label="-" class="item-column2">
-        <el-input v-model="form.cretelhometel.relBorrowerDes"></el-input>
+        <el-input v-model="form.cretelhometel.relBorrowertxt"></el-input>
       </el-form-item>
       <el-form-item label="核对工作情况:" class="item-column2">
         <el-select v-model="form.cretelhometel.checkWork" placeholder="">
@@ -105,13 +105,13 @@
         </el-select>
       </el-form-item>
       <el-form-item label="核对子女情况:" class="item-column2">
-        <el-select v-model="form.cretelhometel.childrenStatus" placeholder="">
+        <el-select v-model="form.cretelhometel.maritalStatustxt" placeholder="">
           <el-option label="有子女" value="00"></el-option>
           <el-option label="无子女" value="01"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="核对地址:" class="item-column2">
-        <el-select v-model="form.checkAddr" placeholder="">
+        <el-select v-model="form.cretelhometel.checkAddr" placeholder="">
           <el-option label="一致" value="00"></el-option>
           <el-option label="基本一致" value="01"></el-option>
           <el-option label="不一致" value="02"></el-option>
@@ -120,10 +120,10 @@
       </el-form-item>
       <!-- 核对地址 基本一致/不一致 -->
       <el-form-item label="-" class="item-column2">
-        <el-input v-model="other"></el-input>
+        <el-input v-model="form.cretelhometel.checkAddrtxt"></el-input>
       </el-form-item>
       <el-form-item label="核对房产:" class="item-column2">
-        <el-select v-model="form.checkEstate" placeholder="">
+        <el-select v-model="form.cretelhometel.checkEstate" placeholder="">
           <el-option label="有" value="00"></el-option>
           <el-option label="无" value="01"></el-option>
           <el-option label="租房" value="02"></el-option>
@@ -133,10 +133,10 @@
       </el-form-item>
       <!-- 核对房产  有 -->
       <el-form-item label="-" class="item-column2">
-        <el-input v-model="other"></el-input>
+        <el-input v-model="form.cretelhometel.checkEstatetxt"></el-input>
       </el-form-item>
       <el-form-item label="其他收入:" class="item-column2">
-        <el-select v-model="form.otherIncome" placeholder="">
+        <el-select v-model="form.cretelhometel.otherIncome" placeholder="">
           <el-option label="有" value="00"></el-option>
           <el-option label="无" value="01"></el-option>
           <el-option label="被调查人不清楚" value="02"></el-option>
@@ -144,10 +144,10 @@
       </el-form-item>
       <!-- 其他收入  有 -->
       <el-form-item label="-" class="item-column2">
-        <el-input v-model="other"></el-input>
+        <el-input v-model="form.cretelhometel.otherIncometxt"></el-input>
       </el-form-item>
       <el-form-item label="近期大项开销:" class="item-column2">
-        <el-select v-model="form.recentLargespend" placeholder="">
+        <el-select v-model="form.cretelhometel.recentLargespend" placeholder="">
           <el-option label="有" value="00"></el-option>
           <el-option label="无" value="01"></el-option>
           <el-option label="被调查人不清楚" value="02"></el-option>
@@ -155,10 +155,10 @@
       </el-form-item>
       <!-- 近期大项开销  有 -->
       <el-form-item label="-" class="item-column2">
-        <el-input v-model="other"></el-input>
+        <el-input v-model="form.cretelhometel.recentlArgespendInfo"></el-input>
       </el-form-item>
       <el-form-item label="父母:" class="item-column2">
-        <el-select v-model="form.parents" placeholder="">
+        <el-select v-model="form.cretelhometel.parents" placeholder="">
           <el-option label="退休" value="00"></el-option>
           <el-option label="在职" value="01"></el-option>
           <el-option label="务农" value="02"></el-option>
@@ -167,10 +167,10 @@
       </el-form-item>
       <!-- 父母  在职-->
       <el-form-item label="-" class="item-column2">
-        <el-input v-model="other"></el-input>
+        <el-input v-model="form.cretelhometel.parentsInfo"></el-input>
       </el-form-item>
       <el-form-item label="兄弟姐妹:" class="item-column2">
-        <el-select v-model="form.brother" placeholder="">
+        <el-select v-model="form.cretelhometel.brother" placeholder="">
           <el-option label="有" value="00"></el-option>
           <el-option label="无" value="01"></el-option>
           <el-option label="被调查人不清楚" value="02"></el-option>
@@ -178,10 +178,10 @@
       </el-form-item>
       <!-- 兄弟姐妹  有 -->
       <el-form-item label="-" class="item-column2">
-        <el-input v-model="other"></el-input>
+        <el-input v-model="form.cretelhometel.brothertxt"></el-input>
       </el-form-item>
       <el-form-item label="支付家庭生活费用:" class="item-column2">
-        <el-select v-model="form.expenses" placeholder="">
+        <el-select v-model="form.cretelhometel.expenses" placeholder="">
           <el-option label="需要" value="00"></el-option>
           <el-option label="不需要" value="01"></el-option>
           <el-option label="被调查人不清楚" value="02"></el-option>
@@ -189,10 +189,10 @@
       </el-form-item>
       <!-- 支付家庭生活费用  需要 -->
       <el-form-item label="-" class="item-column2">
-        <el-input v-model="other"></el-input>
+        <el-input v-model="form.cretelhometel.expensestxt"></el-input>
       </el-form-item>
       <el-form-item label="核对家庭固话:" class="item-column2">
-        <el-select v-model="form.checkHometel" placeholder="">
+        <el-select v-model="form.cretelhometel.checkHometel" placeholder="">
           <el-option label="一致" value="00"></el-option>
           <el-option label="基本一致" value="01"></el-option>
           <el-option label="不一致" value="02"></el-option>
@@ -201,13 +201,13 @@
       </el-form-item>
       <!-- 核对家庭收入  基本一致/不一致 -->
       <el-form-item label="-" class="item-column2">
-        <el-input v-model="other"></el-input>
+        <el-input v-model="form.cretelhometel.checkHometeltxt"></el-input>
       </el-form-item>
       <el-form-item label="借款人爱好和品行:" class="item-column1">
-        <el-input v-model="form.hobbyandBehave" type="textarea" :row="2" resize=none></el-input>
+        <el-input v-model="form.cretelhometel.hobbyandBehave" type="textarea" :row="2" resize=none></el-input>
       </el-form-item>
       <el-form-item label="调查结论:" class="item-column1">
-        <el-input v-model="form.conclusion" type="textarea" :row="2" resize=none></el-input>
+        <el-input v-model="form.cretelhometel.conclusion" type="textarea" :row="2" resize=none></el-input>
       </el-form-item>
       <el-form-item class="address-submit item-column1">
         <el-button type="primary" @click="submitForm('form')">确定</el-button>
@@ -228,43 +228,43 @@ export default {
           answer: '',
           checkStage: '',
           sourceDesc:'', // 其他来源说明
-          applyId: '',
+          applyId: '2222',
         },
         cretelhometel: {
-          applyId: '',
+          applyId: '2222',
           thirdResult: '',
           issameFam: '',
           relBorrower: '',
           checkWork: '',
-          maritalStatustxt: '',
+          maritalStatustxt: '',// 核对子女情况说明
           maritalStatus: '',
           checkAddr: '',
-          checkEstate: '',
+          checkEstate: '',// 核对房产
           otherIncome: '',
           recentLargespend: '',
           parents: '',
           brother: '',
           threeQueries: '',
-          threeQueriesDes:'',
-          expenses: '',
+          // threeQueriesDes:'',
+          exceptionState:'', // 异常项说明
+          expenses: '',// 支付家庭费用
           checkStage: '',
-          checkHometel: '',
-          hobbyandBehave: '',
-          conclusion: '',
-          issameFamtxt: '',
-          relBorrowertxt: '',
-          checkWorktxt: '',
-          checkAddrtxt: '',
-          checkEstatetxt: '',
-          otherIncometxt: '',
-          recentlArgespendInfo: '',
-          parentsInfo: '',
-          brothertxt: '',
-          expensestxt: '',
-          checkHometeltxt: '',
+          checkHometel: '',// 核对家庭固话
+          hobbyandBehave: '',// 借款人爱好和品行
+          conclusion: '',// 调查结论
+          issameFamtxt: '',// 是否与家庭联系人为同一人接听说明
+          relBorrowertxt: '',// 与借款人关系说明
+          checkWorktxt: '',// 工作情况说明
+          checkAddrtxt: '',// 核对地址说明
+          checkEstatetxt: '',// 核对房产说明
+          otherIncometxt: '',// 其他收入说明
+          recentlArgespendInfo: '',// 近期大项开销说明
+          parentsInfo: '',// 父母情况说明
+          brothertxt: '',// 兄弟姐妹情况说明
+          expensestxt: '',// 支付家庭费用说明
+          checkHometeltxt: '',// 核对家庭固话说明
         }
-      },
-      other: ''
+      }
     }
   },
   props: ['custName', 'phoneNum'],
