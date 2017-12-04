@@ -9,22 +9,22 @@
           {{mobileData.custName}}
       </el-form-item>
       <el-form-item label="电话类型:" class="item-column3">
-        {{mobileData.phoneType}}
+        {{mobileData.phoneTypeDes}}
       </el-form-item>
       <el-form-item label="电话号码:" class="item-column3">
         {{mobileData.phoneNum}}
       </el-form-item>
       <el-form-item label="来源:" class="item-column3">
-        {{mobileData.source}}
+        {{mobileData.sourceDes}}
       </el-form-item>
       <el-form-item label="接听情况:" class="item-column3">
-        {{mobileData.answer}}
+        {{mobileData.answerDes}}
       </el-form-item>
       <el-form-item label="调查情况:" class="item-column3">
-        {{mobileData.checkStage}}
+        {{mobileData.checkStageDes}}
       </el-form-item>
       <el-form-item label="其它来源情况说明:" class="item-column3">
-        {{mobileData.checkStage}}
+        {{mobileData.otherIncomeDes}}
       </el-form-item>
       <div class="address-title">
         录入住址电话调查信息
@@ -123,8 +123,13 @@ export default {
     }
   },
   mounted() {
+    console.log('id='+this.id);
+    console.log('phoneType='+this.phoneType);
+    // 测试数据
+    this.id = '07a3c0ac-68f1-4400-9090-3144aff68015'
     this.queryHomeTel();
   },
+  props:['id','phoneType'],
   methods: {
     queryHomeTel(){
       this.post('creTelResearchHis/queryHomeTel',{
