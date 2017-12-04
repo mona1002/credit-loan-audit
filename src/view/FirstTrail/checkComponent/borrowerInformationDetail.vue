@@ -523,19 +523,22 @@
 	        incomeList:[],
 	        /*其他信息*/
 	        otherInfo:'',
+
+	        taskInWaitting:'',
 	      };
 	    },
 	    created(){
 			//一进入页面就发送请求
-			this.request();
+			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+			this.request(this.taskInWaitting.applyId);
 		},
 	    methods:{
 	    	handleChange(){
 
 	    	},
-	    	request(){
+	    	request(param){
 	    		this.post("/borrower/getBorrowerInfo", {
-		        'applyId':'111'
+		        'applyId':param
 		      }).then(res => {
 		        /*console.log(res);*/
 		        /*房产信息*/

@@ -1,63 +1,33 @@
 <template>
   <div class="mheader">
-    <div class="logoDiv"><img class="logo" src="/static/images/logo.png"></div> 
-    <!-- <div class="firstDiv">
-       <ul class="first">
-           <li class="firstLi" v-for="(item1,index) in datas" @click="showSpan">
-               <a class="firstA" @click="clickFirst(index)">{{item1.text}}</a>
-               <span v-show="bottomLine"></span>
-               <ul class="second" v-if="item1.children!=null">
-                   <li class="secondLi" v-for="(item2,index2) in item1.children">
-                       <a class="secondA">{{item2.text}}</a>
-                       <router-link to="url"></router-link>
-                       <ul class="three" v-if="item2.children!=null">
-                         <li class="threeLi" v-for="(item3,index3) in item2.children">
-                           <a class="threeA">{{item3.text}}</a>
-                         </li>
-                       </ul>
-                   </li>
-               </ul>
-           </li>
-       </ul>
-       </div> -->
-       <!-- <div class="source">
-          <div role="tree" class="el-tree">
-            <div role="treeitem" tabindex="0" aria-disabled="" class="el-tree-node is-expanded is-focusable" aria-expanded="true">
-              <div class="el-tree-node__content" style="padding-left: 0px;">
-                <span class="el-tree-node__expand-icon el-icon-caret-right expanded"></span>
-                <span class="el-tree-node__label">一级 1</span>
-              </div>
-              <div role="group" class="el-tree-node__children" aria-expanded="true" data-old-padding-top="" data-old-padding-bottom="" data-old-overflow="">
-                <div role="treeitem" tabindex="-1" aria-disabled="" class="el-tree-node is-expanded is-focusable" aria-expanded="true">
-                  <div class="el-tree-node__content" style="padding-left: 18px;">
-                    <span class="el-tree-node__expand-icon el-icon-caret-right expanded"></span>
-                    <span class="el-tree-node__label">二级 1-1</span>
-                  </div>
-                  <div role="group" class="el-tree-node__children" aria-expanded="true" data-old-padding-top="" data-old-padding-bottom="" data-old-overflow="">
-                    <div role="treeitem" tabindex="-1" aria-disabled="" class="el-tree-node is-focusable">
-                      <div class="el-tree-node__content" style="padding-left: 36px;">
-                        <span class="el-tree-node__expand-icon el-icon-caret-right is-leaf"></span>
-                        <span class="el-tree-node__label">三级 1-1-1</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-           <div role="treeitem" tabindex="-1" aria-disabled="" class="el-tree-node is-focusable">
-             <div class="el-tree-node__content" style="padding-left: 0px;">
-               <span class="el-tree-node__expand-icon el-icon-caret-right"></span>
-               <span class="el-tree-node__label">一级 2</span>
-             </div>
-           </div>
-              <div role="treeitem" tabindex="-1" aria-disabled="" class="el-tree-node is-focusable">
-                <div class="el-tree-node__content" style="padding-left: 0px;">
-                  <span class="el-tree-node__expand-icon el-icon-caret-right"></span>
-                  <span class="el-tree-node__label">一级 3</span>
-                </div>
-              </div>
-            </div>
-          </div> -->
+    <!-- 导航图片 -->
+    <div class="logoDiv">
+      <img class="logo" src="/static/images/logo.png">
+    </div> 
+    <!-- 导航内容 -->
+    <!-- <p v-for="(item, n) in datas">
+      <p>{{n}}</p>
+    </p> -->
+      <el-menu 
+        router 
+        unique-opened 
+        ref="navbar"
+        :default-active="onRoutes"
+        @select="selectMenu">
+        <nav-item 
+            v-for="(item, n) in datas" 
+            :item="item" 
+            :navIndex="String(n)" 
+            :key="n">
+        </nav-item>
+    </el-menu>
+    
+
+
+
+
+
+
 
 
 
@@ -65,137 +35,80 @@
 </template>
 
 <script>
+import NavItem from '@/view/navItem'
   export default {
     data() {
       return {
-        aa:false,
-        bottomLine:false,
-        /*url:this.item2.attributes.url,*/
-        datas:[
-          {
-              "attributes":{},
-              "checked":false,
-              "children":Array[5],
-              "iconCls":"",
-              "id":"76d307df-9651-4be0-83b7-9fecb425f469",
-              "state":"closed",
-              "text":"销售例子"
-          },
-          {
-              "attributes":{},
-              "checked":false,
-              "children":[
-                  {
-                      "attributes":
-                          {
-                          "url":"/invest/investOrderAction!mainPage.action?reqSource=invest&resId=77f96eac-942d-49da-823b-3377f0c5d751"
-                          },
-                      "checked":false,
-                      "children":Array[0],
-                      "iconCls":"",
-                      "id":"77f96eac-942d-49da-823b-3377f0c5d751",
-                      "state":"open",
-                      "text":"投资申请预约"
-                  },
-                  {
-                      "attributes":{
-                          "url":"/invest/investApplyInfoAction!mainPage.action?resId=12d2985d-feb8-48c8-a39d-b57e3d87d797"
-                      },
-                      "checked":false,
-                      "children":Array[0],
-                      "iconCls":"book_open",
-                      "id":"12d2985d-feb8-48c8-a39d-b57e3d87d797",
-                      "state":"open",
-                      "text":"投资申请登记"
-                  },
-                  {
-                      "attributes":{
-                          "url":"/invest/investApplyAction!taskToDoPage.action?taskNodeName=financeApp_invest_apply&resId=395934c9-01a4-4dbd-901d-998b639e0b6e"
-                      },
-                      "checked":false,
-                      "children":Array[0],
-                      "iconCls":"",
-                      "id":"395934c9-01a4-4dbd-901d-998b639e0b6e",
-                      "state":"open",
-                      "text":"投资申请回退"
-                  },
-                  {
-                      "attributes":{
-                          "url":"/invest/investApplyProAction!qcCheckListPage.action?taskNodeName=financeApp_invest_check&resId=2f9eb657-f3f4-4687-9968-f7d875a2eb5a"
-                      },
-                      "checked":false,
-                      "children":Array[0],
-                      "iconCls":"",
-                      "id":"2f9eb657-f3f4-4687-9968-f7d875a2eb5a",
-                      "state":"open",
-                      "text":"投资申请质检"
-                  },
-                  {
-                      "attributes":{
-                          "url":"/invest/investApplyAction!approvePage.action?taskNodeName=financeApp_invest_approve&resId=769c55fb-cc01-42ca-a784-5dde6a4a6628"
-                      },
-                      "checked":false,
-                      "children":Array[0],
-                      "iconCls":"arrow_green",
-                      "id":"769c55fb-cc01-42ca-a784-5dde6a4a6628",
-                      "state":"open",
-                      "text":"投资申请审核"
-                  },
-                  {
-                      "attributes":{
-                          "url":"/continuedinvest/continueInvestPackAction!mainPage.action?resId=851ecfa4-4e5e-4160-925b-e9bcb9d8379e"
-                      },
-                      "checked":false,
-                      "children":[
-                        {
-                          "attributes":{
-                            "url":"/invest/investMatchInfoAction!mainPage.action?resId=cbb08b46-4925-431c-a17c-09cbab42c80b"},
-                        "checked":false,
-                        "children":[],
-                        "iconCls":"anchor",
-                        "id":"cbb08b46-4925-431c-a17c-09cbab42c80b",
-                        "state":"open",
-                        "text":"理财VIP客户"
-                        },
-                        {
-                          "attributes":{
-                            "url":"/invest/investMatchInfoAction!mainPage.action?resId=cbb08b46-4925-431c-a17c-09cbab42c80b"},
-                        "checked":false,
-                        "children":[],
-                        "iconCls":"anchor",
-                        "id":"cbb08b46-4925-431c-a17c-09cbab42c80b",
-                        "state":"open",
-                        "text":"理财VIP客户2"
-                        },
-                      ],
-                      "iconCls":"",
-                      "id":"851ecfa4-4e5e-4160-925b-e9bcb9d8379e",
-                      "state":"open",
-                      "text":"续投投资合并"
-                  }
-              ],
-              "iconCls":"status_online",
-              "id":"87d7a401-4e36-4e79-a19c-b87973990381",
-              "state":"closed",
-              "text":"投资管理"
-          }],
-        
+        datas:[], 
+        activeIndex:'1',//当前激活菜单的 index
+        aaa:true,
+        bbbb:false,
+        cccc:false,
       };
     },
+    created(){
+      //一进入页面就发送请求  
+      this.request();  
+    },
     methods: {
-      clickFirst(index) {
-        console.log(index);
-        
-        this.bottomLine=true;
+      request(){
+          this.post('/smUser/getResTree').then(res => {
+              this.datas = res.data;
+              console.log(this.datas);
+              for(var i=0;i<this.datas.length;i++){
+                for(var j=0;j<this.datas[i].children.length;j++){
+                  if(this.datas[i].children[j].children.length==0){
+                    this.bbbb=true;
+                    this.cccc=false;
+                  }else{
+                    this.bbbb=false;
+                    this.cccc=true;
+                  }
+                }
+                
+              }
+              
+          })
+        },
+      /*handleSelect(key, keyPath) {
+        console.log(key, keyPath);//index: 选中菜单项的 indexPath: 选中菜单项的 index path
       },
-      handleNodeClick(data) {
-        console.log(data);
+      handleOpen(key, keyPath) {
+        console.log(key, keyPath);//展开指定的 sub-menu  index: 需要打开的 sub-menu 的 index
       },
-      showSpan(){
-        $("firstA").on('click',function(){
+      handleClose(key, keyPath) {
+        console.log(key, keyPath);//收起指定的 sub-menu  index: 需要收起的 sub-menu 的 index
+      }*/
+      selectMenu(index, indexPath){
+            /**
+             * 在选择父级菜单时自动关闭其下所有子菜单
+             * 选择时获取点击菜单的父级index，并计算得到该index在已打开菜单中的索引值，
+             * 关闭位于当前打开菜单中该索引值之后的全部菜单
+             */
+            // 获取当前打开的所有菜单
+            let openMenu = this.$refs.navbar.openedMenus.concat([])
+            // 获取点击菜单的父级index，如果当前点击的是根节点，则直接关闭所有打开菜单
+            let nowMenuPath = indexPath.length > 1 ? indexPath[indexPath.length-2] : ""
+            if(nowMenuPath){
+                // 获取父级index在数组中索引，关闭其后所有的菜单
+                let menuIndex = openMenu.indexOf(nowMenuPath)
+                openMenu = openMenu.slice(menuIndex+1)
+            }
+            openMenu = openMenu.reverse()
+            openMenu.forEach((ele) => {
+                this.$refs.navbar.closeMenu(ele)
+            })
+        },
 
-        })
-      },
+
+    },
+    computed: {
+        onRoutes(){
+            return this.$route.path
+        },
+    },
+    components: {
+        NavItem,
     },
   };
 </script>
@@ -211,7 +124,7 @@
     background-image:linear-gradient(-62deg, #3196e4 0%, #1f64b4 36%, #0f3889 100%);
     height: 70px;
     line-height: 70px;
-    background: #20a0ff;
+    /* background: #20a0ff; */
     font-size: 30px;
     color: white;
     padding-left:20px;
@@ -227,56 +140,5 @@
     height: 34px;
     margin:15px 0 21px 28px;
   }
-  .firstDiv{
-    float:left;
-  }
-  .first .firstLi{
-    float: left;
-    margin: 0 39px;
-    position: relative;
-    position: relative;
-  }
-  .first li .firstA{
-    font-size: 15px;
-    color:#bfcbd9;
-    text-decoration:none;
-  }
-  .first .firstLi span{
-    width: 61px;
-    height: 2px;
-    background-color: #fff;
-    display: inline-block;
-    position: absolute;
-    bottom: 10px;
-  }
-  .second{
-    width: 150px;
-    /* height: 200px; */
-    background-color: #ccc;
-    position: absolute;
-  }
-  .second .secondLi{
-    /* padding: 10px 10px; */
-    width: 100%;
-    height: 30px;
-    line-height: 30px;
-    position: relative;
-  }
-  .second .secondA{
-    font-size: 18px;
-  }
-  .three{
-    width: 150px;
-    font-size: 18px;
-    background-color: pink;
-    position: absolute;
-    left: 150px;
-    top: 0;
-  }
-  .three .threeLi{
-    width: 100%;
-    height: 30px;
-    /* padding: 10px 10px; */
-    line-height: 30px;
-  }
+  /* 导航内容 */
 </style>

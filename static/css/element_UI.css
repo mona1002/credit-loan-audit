@@ -102,6 +102,22 @@ height: 40px;
   clear: both;
   border-bottom: none;
 }
+/* 借款人资料input框 */
+.borrowerInformation .el-input {
+  width: auto;
+}
+.borrowerInformation .el-input__inner {
+  height: 35px;
+  border-radius: 6px;
+  width: 180px;
+}
+/* 借款人资料表格内容居中 */
+.borrowerInformation .el-table th{
+  text-align: center;
+}
+.borrowerInformation .el-table__body-wrapper .el-table__body td{
+  text-align: center;
+}
 /*借款人资料详情 折叠面板头部背景色 */
 .borrowerInformationSetail .el-collapse-item__header{
     background:#eef0f9;
@@ -125,6 +141,22 @@ height: 40px;
 .borrowerInformationSetail .el-collapse-item__wrap{
     clear: both;
     border-bottom: none;
+}
+/* 借款人资料input框 */
+.borrowerInformationSetail .el-input {
+  width: auto;
+}
+.borrowerInformationSetail .el-input__inner {
+  height: 35px;
+  border-radius: 6px;
+  width: 180px;
+}
+/* 借款人资料表格内容居中 */
+.borrowerInformationSetail .el-table th{
+  text-align: center;
+}
+.borrowerInformationSetail .el-table__body-wrapper .el-table__body td{
+  text-align: center;
 }
 
 /* 各自部分 */
@@ -386,13 +418,7 @@ position: relative
 .borrowerInformation .el-select>.el-input {
   width: 130px;
 }
-.borrowerInformation .el-input{
-  width: 180px;
-}
-.borrowerInformation .el-input__inner {
-  height: 30px;
-  border-radius: 4px;
-}
+
 /* 车辆信息 时间 */
 .borrowerInformation .carContain .el-table__body-wrapper tbody tr td:last-child .el-input {
   width: 140px;
@@ -475,10 +501,47 @@ ol.num li:nth-of-type(1) .el-input__inner{
   display: none;
 } */
 /* 信审任务列表 */
+.taskWinput .el-input {
+  width: auto;
+}
 .taskWinput .el-input__inner {
-  height: 30px;
-  border-radius: 4px;
+  height: 35px;
+  border-radius: 6px;
+  width: 258px;
 }
 .taskWatting .el-table__header-wrapper tr{
   background-color: #fff;
+}
+.taskWatting .el-table th{
+  text-align: center;
+}
+.taskWatting .el-table__body-wrapper .el-table__body td{
+  text-align: center;
+}
+
+/* 工作台导航 */
+.mheader .el-menu{
+  background-color: transparent;
+}
+.mheader .el-menu--horizontal .el-menu-item{
+  height: 70px;
+  line-height: 70px;
+  font-size: 15px;
+}
+.mheader .el-menu--horizontal .el-submenu>.el-menu{
+  /* opacity:0.41;
+  background:#1f2d3d;
+  box-shadow:0 10px 20px 0 #475669;
+  font-size:14px;
+  color:#bfcbd9; */
+  background-color: pink;
+}
+.mheader .el-menu--horizontal .el-submenu>.el-menu li:hover{
+  background-color: transparent;
+}
+.mheader .el-menu--horizontal .el-submenu>.el-menu .el-menu{
+   background-color: yellow;
+   /* position: absolute;
+     left: 100%;
+     top: 0; */
 }
