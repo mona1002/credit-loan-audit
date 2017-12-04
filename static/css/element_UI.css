@@ -1,20 +1,13 @@
 /* 公共部分 */
-/* #Abody 部分 */
-/* #Abody .el-button{
-  background:#0077ff;
+/* .Abody 部分 */
+.Abody .el-button{
   border-radius:8px;
   padding:9px 22px;
-} */
-#Abody .el-button{
-  /* background:#0077ff; */
-  /* border-radius:8px; */
-  /* padding:9px 22px; */
 }
-#Abody .el-button el-button--primary{
-  /* background:#0077ff;
+.Abody .el-button el-button--primary{
   border-radius:8px;
   padding:9px 22px;
-  font-size:16px;   */
+  font-size:16px;
 }
 /* 公用 表格 表头 th */
 /* 放款信息 信审审结论轨迹  */

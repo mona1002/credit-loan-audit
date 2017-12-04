@@ -568,8 +568,8 @@ export default {
 }
 
 /* 样式冲突的解决 */
-#Abody .functionalRoleManage .el-button{
-  /* padding: 0; */
+.functionalRoleManage .el-button{
+  padding: 0;
 }
 .functionalRoleManage .el-input{
   width: initial;
