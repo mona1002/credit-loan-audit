@@ -95,7 +95,8 @@
             <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
             <remark v-if=" this.tabContent2==1"></remark>
             <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
-            <applicationInformation v-if=" this.tabContent2==3"></applicationInformation>
+            <capplicationInformationDetail v-if=" this.tabContent2==3"></capplicationInformationDetail>
+            <!-- <applicationInformation v-if=" this.tabContent2==3"></applicationInformation> -->
             <borrowerInformation v-if=" this.tabContent2==4"></borrowerInformation>
             <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
             <CreditForm v-if=" this.tabContent2==6"></CreditForm>
@@ -123,15 +124,19 @@
         <div class="AudioVisual_wrap_compare_right ">
           <!-- 搜索框 -->
           <p>客户名称：
-            <el-select v-model="AlertSearch" placeholder="请选择" @change="AlertSearchChange">
+            <!-- <el-select v-model="AlertSearch" placeholder="请选择" @change="AlertSearchChange">
               <el-option v-for="item in AlertSearchCondition" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
-            </el-select>
+            </el-select> -->
+            <el-input v-model="AlertSearch" placeholder="请输入内容" :disabled="true" style="display:inline;" ></el-input>
+     <el-button type="primary" @click="compareProps">  <i class="el-icon-search" style="fontSize:16px" ></i>  </el-button>
           </p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
             <!-- <AudioVisualLeft :AlertSearch="AlertSearch" ></AudioVisualLeft> -->
-            <aut :AlertSearch="AlertSearch" @click.native="a"></aut>
+            <!-- <aut :AlertSearchProps="AlertSearch" @click.native="a" ref="audioChild"></aut> -->
+            <aut ref="audioChild"></aut>
+            
           </div>
         </div>
       </div>
@@ -212,7 +217,7 @@ count:0,
         // }, {
         //   title: "内部匹配"
         // }],
-        AlertSearch: '', // 对比弹出层 客户名称：搜索框
+        AlertSearch:false, // 对比弹出层 客户名称：搜索框
         AlertSearchCondition: [{
           value: '选项1',
           label: '最近时间原则排列'
@@ -231,6 +236,12 @@ count:0,
         console.log(this.$refs.tabOne[0].className)
         this.$refs.tabOne[3].className = "tabAct";
         // this.$refs.tabOne.className="tabAct"
+      },
+      compareProps(){
+        console.log("compareProps")
+        // console.log(this.$refs.AlertSearchDiv)
+        // this.AlertSearch=true;
+        this.$refs.audioChild.a()
       },
       // 对比弹出层change事件
       AlertSearchChange(){
