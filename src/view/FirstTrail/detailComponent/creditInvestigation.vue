@@ -195,18 +195,20 @@
 	        ff:'',
 	        gg:'',
 	        hh:'',
+	        taskInWaitting:'',
 	      };
 	    },
 	    created(){
 			//一进入页面就发送请求
-			this.request();
+			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+			this.request(this.taskInWaitting.applyId);
 		},
 	    methods:{
 	    	handleChange(){
 
 	    	},
-	    	request(){
-	    		this.get("/credit/fieldReference?applyId=00542").then(res => {
+	    	request(query){
+	    		this.get("/credit/fieldReference",{applyId:query}).then(res => {
 		        /*console.log(res);*/
 		        this.datas=res.data;
 		        /*console.log(this.datas);*/
