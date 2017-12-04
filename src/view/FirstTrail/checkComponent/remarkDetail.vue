@@ -46,16 +46,18 @@
 				tableData:'',
 				//data:[],
 				datas:[],
+				taskInWaitting:'',
 			}
 		},
 		created(){
 			//一进入页面就发送请求
-			this.request();
+			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+			this.request(this.taskInWaitting.applyId);
 		},
 		methods:{
-	    	request(){
+	    	request(param){
 	    		this.post("/applyRemark/getApplyRemarkList", {
-		        'applyId':'00542'
+		        'applyId':param
 		      }).then(res => {
 		        /*console.log(res);*/
 		        this.datas=res.data;

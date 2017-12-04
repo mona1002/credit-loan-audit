@@ -455,18 +455,18 @@
 			    </template>
 		  		<div class="xinyongka">
 		  			<ul>
-				    	<li><label>信用卡张数：</label><el-input v-model="borCard.cardCount"></el-input></li>
-				    	<li><label>正常使用张数：</label><el-input v-model="borCard.normalCount"></el-input></li>
-				    	<li><label>呆帐数量：</label><el-input v-model="borCard.badDebtCount"></el-input></li>
+				    	<li><label>信用卡张数：</label><el-input v-model="datas.borCard.cardCount"></el-input></li>
+				    	<li><label>正常使用张数：</label><el-input v-model="datas.borCard.normalCount"></el-input></li>
+				    	<li><label>呆帐数量：</label><el-input v-model="datas.borCard.badDebtCount"></el-input></li>
 				    </ul>
 				    <ul>
-				    	<li><label>未开卡张数：</label><el-input v-model="borCard.nouseCount"></el-input></li>
-				    	<li><label>冻结数量：</label><el-input v-model="borCard.freezeCount"></el-input></li>
-				    	<li><label>销户数量：</label><el-input v-model="borCard.cancelCount"></el-input></li>
+				    	<li><label>未开卡张数：</label><el-input v-model="datas.borCard.nouseCount"></el-input></li>
+				    	<li><label>冻结数量：</label><el-input v-model="datas.borCard.freezeCount"></el-input></li>
+				    	<li><label>销户数量：</label><el-input v-model="datas.borCard.cancelCount"></el-input></li>
 				    </ul>
 				    <ul>
-				    	<li><label>已使用张数：</label><el-input v-model="borCard.userdCount"></el-input></li>
-				    	<li><label>止付数量：</label><el-input v-model="borCard.stopPaymentCount"></el-input></li>
+				    	<li><label>已使用张数：</label><el-input v-model="datas.borCard.userdCount"></el-input></li>
+				    	<li><label>止付数量：</label><el-input v-model="datas.borCard.stopPaymentCount"></el-input></li>
 				    </ul>
 		  		</div> 
 		  	</el-collapse-item>
@@ -951,8 +951,10 @@
             // 信用卡使用明细
             cardDetList:[],
 
+            taskInWaitting:'',
+
             //信用卡使用总况
-            borCard:{
+            /*borCard:{
 		        "applyId":"111", // 申请单Id    
 		        "cardCount":'', // 信用卡张数
 		        "nouseCount":'', // 未开卡张数
@@ -962,7 +964,7 @@
 		        "stopPaymentCount":'', // 止付数量
 		        "badDebtCount":'', // 呆账数量
 		        "cancelCount":'', // 销户数量
-		    },
+		    },*/
 
             // 贷款明细
             loanDetailList:[],
@@ -1121,14 +1123,16 @@
 	    },
 	    created(){
 			//一进入页面就发送请求
-			this.request();
+			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+			this.request(this.taskInWaitting.applyId);
 		},
 	    methods:{
-	    	request(){
+	    	request(param){
 	    		this.post("/borrower/getBorrowerInfo", {
-		        'applyId':'111'
+		        'applyId':param
 		      }).then(res => {
 		        /*console.log(res);*/
+		        this.datas=res.data;
 		        /*房产信息*/
 		        this.borestateList=res.data.borestateList;
 		        /*车辆信息*/
@@ -1149,16 +1153,17 @@
 		        this.incomeList=res.data.incomeList;
 		        /*其他信息*/
 		        this.otherInfo=res.data.otherInfo;
-		        console.log(this.borCard);
+		        //console.log(this.borCard);
 		      });
 		  },
 	    	handleChange(){
 
 	    	},
-	    	add_home: function() {
+	    	add_home: function(event,param) {
+	    		 event.stopPropagation();
 	    		if(this.borestateList.length==0){
 	    			this.borestateList.push({
-	    							"applyId":"111", // 申请单Id
+	    							"applyId":param, // 申请单Id
 						            "estateType":"", // 房产类型
 						            "propertyType":"", // 产权性质
 						            "coveredArea":"", // 建筑面积
@@ -1197,7 +1202,8 @@
 	    		};
 	    		  
 		    },
-		    add_vehicle: function(str) {
+		    add_vehicle: function(event) {
+		    	event.stopPropagation();
 		    	if(this.carInfoList.length==0){
 		    		this.carInfoList.push({
 						            "applyId":"111", // 申请单Id
@@ -1235,7 +1241,8 @@
 		    	};
 				
 		    },
-		    add_card: function(str) {
+		    add_card: function(event) {
+		    	event.stopPropagation();
 		    	if(this.cardDetList.length==0){
 		    		this.cardDetList.push({
 						            "applyId":"111", // 申请单Id
@@ -1274,7 +1281,8 @@
 	    			}
 		    	};
 		    },
-		    add_loanDetail: function(str) {
+		    add_loanDetail: function(event) {
+		    	event.stopPropagation();
 		    	if(this.loanDetailList.length==0){
 		    		this.loanDetailList.push({
 						            "applyId":"111", // 申请单Id
@@ -1322,7 +1330,8 @@
 		    	};
 		    },
 		    /*流水明细*/
-		    add_turnover: function(str) {
+		    add_turnover: function(event) {
+		    	event.stopPropagation();
 		    	if(this.incomeList.length==0){
 		    		this.incomeList.push({
 						            "applyId":"111", // 申请单Id    
@@ -1398,7 +1407,8 @@
 				};  
 				console.log(val);
 			},
-			delet_home(){
+			delet_home(event){
+				event.stopPropagation();
 				console.log(this.currentRow);
 				for(var i=0;i<this.borestateList.length;i++){
 					if(this.borestateList[i]==this.currentRow){
@@ -1406,7 +1416,8 @@
 					}
 				}
 			},
-			delet_vehicle(){
+			delet_vehicle(event){
+				event.stopPropagation();
 				console.log(this.currentRowCar);
 				for(var i=0;i<this.carInfoList.length;i++){
 					if(this.carInfoList[i]==this.currentRowCar){
@@ -1414,7 +1425,8 @@
 					}
 				}
 			},
-			delet_card(){
+			delet_card(event){
+				event.stopPropagation();
 				console.log(this.currentRowCard);
 				for(var i=0;i<this.cardDetList.length;i++){
 					if(this.cardDetList[i]==this.currentRowCard){
@@ -1422,7 +1434,8 @@
 					}
 				}
 			},
-			delet_loanDetail(){
+			delet_loanDetail(event){
+				event.stopPropagation();
 				console.log(this.currentRowLoan);
 				for(var i=0;i<this.loanDetailList.length;i++){
 					if(this.loanDetailList[i]==this.currentRowLoan){
@@ -1431,7 +1444,8 @@
 				}
 			},
 			/*流水明细*/
-			delet_turnover(){
+			delet_turnover(event){
+				event.stopPropagation();
 				console.log(this.currentRowIncome);
 				for(var i=0;i<this.incomeList.length;i++){
 					if(this.incomeList[i]==this.currentRowIncome){
@@ -1440,7 +1454,8 @@
 				}
 			},
 			/*统计按钮*/
-			countNum(){
+			countNum(event){
+				event.stopPropagation();
 				//车贷共有笔数
 				this.k=0;
 				this.l=0;

@@ -19,10 +19,10 @@
         <span>页数</span>
         <span>上传日期</span>
       </p>
-      <el-collapse>
-        <el-collapse-item v-for="(item,ind) in ListParent" :key="ind" @click.native="getChildrenList(item.id)">
+      <el-collapse accordion>
+         <!-- @click.native="getChildrenList(item.id)" -->
+        <el-collapse-item v-for="(item,ind) in ListParent" :key="ind" @click.native="getChildrenList(item.id,ind,item)">
           <template slot="title">
-
             <p>
               <!-- 一级节点 -->
               <span>{{item.arcName}}</span>
@@ -40,49 +40,17 @@
               <span>{{item.uploadDate}}</span>
             </p>
           </div>
-          <!-- 此处为重复的样式  得到数据之后删除 -->
-          <div class="list_title_div">
-            <p>
-              <span>影像名称</span>
-              <span>编号</span>
-              <span>页数</span>
-              <span>上传日期</span>
-            </p>
-          </div>
-          <!-- 重复部分结束 -->
         </el-collapse-item>
-        <!-- 此处为重复的样式  得到数据之后删除 -->
-        <el-collapse-item>
-          <template slot="title">
-            <p>
-              <span>影像名称</span>
-              <span>编号</span>
-              <span>页数</span>
-              <span>上传日期</span>
-            </p>
-          </template>
-          <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-          <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
-        </el-collapse-item>
-        <!-- 重复部分结束 -->
       </el-collapse>
       <!-- 按钮 : 缩略图 对比  -->
       <el-button @click="SmallpicAlert" class="compareBtn">缩略图</el-button>
-      <!-- <el-button type="success" @click="SmallpicAlert" class="compareBtn">缩略图</el-button> -->
       <el-button type="primary" @click="compBtnShow" class="checkDetailBtn">对比</el-button>
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
-      <!-- <img src="http://img.1ppt.com/uploads/allimg/1606/4_160609151925_1.jpg"> -->
       <img src="../../../../static/images/0865C99F-2D8D-417E-A39D-1644063E5A84@1x.png" class="icon_pre " @click="pre">
       <img src="../../../../static/images/C20F2D59-5CCD-4C61-B12F-874344861071@1x.png" class="icon_next" @click="next">
       <div class="BtnIcons">
-        <!-- <i class="el-icon-arrow-left position_and_size icon_pre" @click="pre"></i>
-      <i class="el-icon-arrow-right position_and_size icon_next" @click="next"></i>
-      <i class="el-icon-zoom-in position_and_size icon_larger" @click="larger "></i>
-      <i class="el-icon-zoom-out position_and_size icon_smaller" @click="smaller"></i>
-      <i class="el-icon-refresh position_and_size icon_clockWise" @click="clockWise "></i>
-      <i class="el-icon-sort position_and_size icon_AclockWise" @click="AclockWise "></i> -->
         <img src="../../../../static/images/efw.png" @click="smaller ">
         <img src="../../../../static/images/net.png" @click="larger">
         <img src="../../../../static/images/daf.png" @click="AclockWise ">
@@ -95,19 +63,15 @@
     <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
     <div class="Small_pic_div" v-show="SmallPicShow">
       <p class="Small_pic_title"> 缩略图-申请信息
-        <img src="../../../../static/images/D625BA67-2F56-42C1-9E9D-A47AE03BA028@1x.png" class="small_pic_close" @click="SmallpicClose" >
-         </p>
-         <div class="small_pic_content">
- <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
-<!-- <img class="Small_pic" v-for="(val,index) in imgPath" :key="index" :src="'http://10.1.26.6:8080'+val" @click="ChangeCss(index)"
-        @mouseenter="smallPic($event,index)" ref="small_pic_ref" /> -->
-        <img class="Small_pic" :src="'http://10.1.26.6:8080'+val.imagePath" @click="ChangeCss(index)"
-        @mouseenter="smallPic($event,index)" ref="small_pic_ref" />
-        <p>{{val.arcSubType}} </p>
-      </figure>
-         </div>
-     
-      
+        <img src="../../../../static/images/D625BA67-2F56-42C1-9E9D-A47AE03BA028@1x.png" class="small_pic_close" @click="SmallpicClose">
+      </p>
+      <div class="small_pic_content">
+        <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
+          <img class="Small_pic" :src="'http://10.1.26.6:8080'+val.imagePath" @click="ChangeCss(index)" @mouseenter="smallPic($event,index)"
+            ref="small_pic_ref" />
+          <p>{{val.arcSubType}} </p>
+        </figure>
+      </div>
     </div>
 
     <!-- </div> -->
@@ -129,21 +93,22 @@
         ListDetails: [], //子节点列表
         applyId: '', //入参
         imgPath: [], //图片路径
+        localInf:[]//localstorage 接收的所有参数
       }
     },
     methods: {
-      getChildrenList(id) {
+      getChildrenList(id,ind,item) {
         console.log("获取子节点");
+        console.log(ind)
+        console.log(item)
         this.post("/productArchive/getProductArchiveChildList", {
-          applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
-          // pid: id,
-          pid:'9c3a2556-4111-42c4-aa78-0034866cf041'
-          // pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
+          applyId: this.localInf.applyId,
+          pid: id
         }).then(res => {
-          // console.log(res);
           console.log(res.data)
           this.ListDetails = res.data;
-
+          // this.ListParent[ind]=res.data
+          // console.log(this.ListDetails)
         });
       },
       getImg(ind) {
@@ -153,12 +118,10 @@
         console.log(this.imgPath)
         // this.$mount( ".AudioVisual" )
         this.$nextTick(function () {
-
           // this.$watch(function(){ return this.$refs.Big_pic_ref[0]},
           // function(newd){  console.log("333"+newd) }
           // )
           console.log(this.$refs.Big_pic_ref[0]);
-
           console.log(parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0]).height))
           console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
           console.log(typeof (getComputedStyle(this.$refs.Big_pic_ref[0], false).width))
@@ -174,22 +137,11 @@
       hid() { //左侧 li 列表
         console.log("hid");
         this.showListDiv = false;
-        // this.$refs.AudioVisual_List_ref.style.left = "-175px";
-        // this.$refs.AudioVisual_Img_ref.style.left = "25px";
-        // this.$refs.AudioVisual_Img_ref.style.width = document.documentElement.clientWidth - 25 + "px";
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
-        // this.$refs.AudioVisual_Img_ref.style.width = "100%";
       },
       showList() { //左侧 li 列表
         this.showListDiv = true;
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 412px)";
-
-
-        // this.$refs.hidDiv_ref=
-        // this.$refs.AudioVisual_List_ref.style.left = "0";
-        // this.$refs.AudioVisual_List_ref.style.width = "200px";
-        // this.$refs.AudioVisual_Img_ref.style.left = "200px";
-        // this.$refs.AudioVisual_Img_ref.style.width = document.documentElement.clientWidth - 200 + "px";
       },
       SmallpicClose() { //缩略图弹框 关闭
         this.SmallPicShow = false;
@@ -205,7 +157,6 @@
           console.log("我下标小于0了")
           this.smallPicInd = this.$refs.small_pic_ref.length - 1;
         }
-        // this.changeSmallPicCss();
       },
       next() {
         console.log("下一页")
@@ -214,7 +165,6 @@
         if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
           this.smallPicInd = 0;
         }
-        // this.changeSmallPicCss();
       },
       larger() {
         console.log("放大")
@@ -327,42 +277,18 @@
       },
       compBtnShow() { //对比按钮
         console.log("对比按钮出发")
-        //      this.post("internalMatch/getInternalMatchCustName", {
-        //   applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
-        //   pid: id,
-        //   // pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
-        // }).then(res => {
-        //   // console.log(res);
-        //   console.log(res.data)
-        //   this.ListDetails = res.data;
-        // });
-
         this.$emit('CompareShow')
       }
     },
-
     mounted() {
-      // 登录
-      //  this.post("/smUser/login", {
-      //           userCode:"ddyy",
-      //           loginPassword:"111111"
-      //         }).then(res => {
-      //           console.log(res);
-      //           console.log(res.data)
-      //         });
-
-      //  this.applyId=this.$route.query.applyId;//接受参数
-
+      console.log("mounted")
+      this.localInf = JSON.parse(localStorage.getItem("taskInWaitting"));
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
-        // id:"bb30607c-b5aa-4915-9474-460e099a33e8",
-        // applyId:this.applyId,
-        applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
+        applyId: this.localInf.applyId,
       }).then(res => {
-        // console.log(res);
         // console.log(res.data)
         this.ListParent = res.data
-        // console.log(this.ListParent[0].id )
       });
 
       // 子菜单栏
@@ -441,7 +367,8 @@
     position: relative;
     z-index: 2;
   }
-/* 对比-按钮 */
+  /* 对比-按钮 */
+
   .compareBtn {
     position: absolute;
     bottom: 18px;
@@ -450,13 +377,13 @@
     border: 1px solid #0077ff;
     background: #eef0f9;
   }
-/* 缩略图-按钮 */
+  /* 缩略图-按钮 */
+
   .checkDetailBtn {
     position: absolute;
     bottom: 18px;
     right: 10px;
   }
-  
   /*  放大、缩小 按钮 wrap */
 
   .BtnIcons {
@@ -525,8 +452,8 @@
   } */
   /*  css */
 
- .AudioVisual .AudioVisual_List,
- .AudioVisual .AudioVisual_Img {
+  .AudioVisual .AudioVisual_List,
+  .AudioVisual .AudioVisual_Img {
     float: left;
     height: 100%;
     overflow: auto;
@@ -534,13 +461,13 @@
   }
   /*  css */
 
- .AudioVisual .AudioVisual_Img {
+  .AudioVisual .AudioVisual_Img {
     width: calc( 100% - 412px);
     /* background: yellowgreen; */
   }
   /*  css */
 
- .AudioVisual .AudioVisual_List {
+  .AudioVisual .AudioVisual_List {
     width: 401px;
     background: #eef0f9;
     border: 1px solid #bfcbd9;
@@ -551,13 +478,13 @@
   /* 左侧折叠面板 */
   /* 折叠面板上面的四个 th 表头 */
 
- .AudioVisual .list_title {
+  .AudioVisual .list_title {
     line-height: 27px;
     font-weight: bold;
   }
 
- .AudioVisual .list_title span,
- .AudioVisual .list_title_div p span {
+  .AudioVisual .list_title span,
+  .AudioVisual .list_title_div p span {
     height: 35px;
     line-height: 35px;
     display: block;
@@ -568,16 +495,16 @@
     text-align: center;
   }
 
- .AudioVisual .list_title span {
+  .AudioVisual .list_title span {
     font-size: 14px;
   }
 
- .AudioVisual .list_title_div p span {
+  .AudioVisual .list_title_div p span {
     font-size: 13px;
   }
 
- .AudioVisual .list_title span:nth-of-type(1),
-.AudioVisual  .list_title_div p span:nth-of-type(1) {
+  .AudioVisual .list_title span:nth-of-type(1),
+  .AudioVisual .list_title_div p span:nth-of-type(1) {
     width: 135px;
     /* 省略号 */
     overflow: hidden;
@@ -585,41 +512,43 @@
     white-space: nowrap;
   }
 
- .AudioVisual .list_title span:nth-of-type(2),
- .AudioVisual .list_title_div p span:nth-of-type(2) {
+  .AudioVisual .list_title span:nth-of-type(2),
+  .AudioVisual .list_title_div p span:nth-of-type(2) {
     width: 60px;
     border-right: none;
     border-left: none;
   }
 
- .AudioVisual .list_title span:nth-of-type(3),
- .AudioVisual .list_title_div p span:nth-of-type(3) {
+  .AudioVisual .list_title span:nth-of-type(3),
+  .AudioVisual .list_title_div p span:nth-of-type(3) {
     width: 60px;
   }
 
-.AudioVisual  .list_title span:nth-of-type(4),
- .AudioVisual .list_title_div p span:nth-of-type(4) {
+  .AudioVisual .list_title span:nth-of-type(4),
+  .AudioVisual .list_title_div p span:nth-of-type(4) {
     width: 144px;
     border-left: none;
   }
   /* ------------------------------- */
-/* 缩略图最外侧div */
- .AudioVisual .Small_pic_div {
+  /* 缩略图最外侧div */
+
+  .AudioVisual .Small_pic_div {
     position: absolute;
     left: 0;
     top: 0;
     right: 0;
     bottom: 0;
     z-index: 20;
-        overflow: auto;
+    overflow: auto;
     border: 1px solid #bfcbd9;
-        background: #ffffff;
-        /* background: #000; */
+    background: #ffffff;
+    /* background: #000; */
     border-radius: 4px;
   }
   /* 缩略图 p 标签  title */
-.AudioVisual .Small_pic_title{
-  font-size: 16px;
+
+  .AudioVisual .Small_pic_title {
+    font-size: 16px;
     text-align: center;
     background: rgba(0, 119, 255, 0.75);
     /* opacity: 0.75; */
@@ -630,17 +559,19 @@
     /* 不换行 */
     /* white-space:nowrap; */
     overflow: hidden;
-    position: relative;    
-}
-/* 缩略图 content */
-.AudioVisual .small_pic_content{
-position: relative;
-height: calc( 100% - 48px);
-overflow: auto;
-padding-top: 30px;
-}
-/* 缩略图片-figure-wrap */
-.AudioVisual  .small_pic_figure{
+    position: relative;
+  }
+  /* 缩略图 content */
+
+  .AudioVisual .small_pic_content {
+    position: relative;
+    height: calc( 100% - 48px);
+    overflow: auto;
+    padding-top: 30px;
+  }
+  /* 缩略图片-figure-wrap */
+
+  .AudioVisual .small_pic_figure {
     float: left;
     width: 187px;
     height: 200px;
@@ -650,26 +581,28 @@ padding-top: 30px;
     /* margin-left:40px;  */
   }
   /*  缩略图 figure 内 图片名字 p 标签 */
- .AudioVisual .small_pic_figure p{
+
+  .AudioVisual .small_pic_figure p {
     height: 22px;
     line-height: 22px;
     margin-top: 15px;
     text-align: center;
-    font-size:16px;
-color:#475669;
-letter-spacing:0.11px;
-/* 超出 省略号显示 */
-overflow: hidden;
-text-overflow:ellipsis;
-white-space: nowrap;
+    font-size: 16px;
+    color: #475669;
+    letter-spacing: 0.11px;
+    /* 超出 省略号显示 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
-/* 缩略图 各个 img 图片 */
- .AudioVisual .Small_pic {
+  /* 缩略图 各个 img 图片 */
+
+  .AudioVisual .Small_pic {
     height: calc( 100% - 60px);
     /* UI设计部分 */
-    border-radius:5px;
-    border:1px solid #bfcbd9;
-    box-shadow:2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
+    border-radius: 5px;
+    border: 1px solid #bfcbd9;
+    box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
   }
 
 </style>

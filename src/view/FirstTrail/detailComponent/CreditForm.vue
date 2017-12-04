@@ -903,7 +903,7 @@
         console.log("省份-市区")
         console.log(item)
         this.get("/credit/queryCityCounty", {
-          parentCode: item,
+          parentCode:item,
         }).then(res => {
           console.log(res);
           this.hireProvincd = res.data;

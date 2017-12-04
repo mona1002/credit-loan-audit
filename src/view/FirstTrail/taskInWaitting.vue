@@ -91,7 +91,7 @@
 			      :page-sizes="[20, 50, 80, 100]"
 			      :page-size=setPageSize
 			      layout="total, sizes, prev, pager, next, jumper"
-			      :total="datas.totalNum">
+			      :total="totals.totalNum">
 			    </el-pagination>
 		    </div>
 		</div>
@@ -102,6 +102,7 @@
 		data(){
 			return{
 				activeNames:['1'],
+				totals:{},
 				currentPage:1,// 默认显示的当前页
 				//data:[],
 				datas:[],
@@ -144,10 +145,11 @@
 		    		param
 	          ).then(res => {
 	            if(res.statusCode==200 &&　res.data.taskDetailList!=null){
+	            	this.totals=res.data;
 	            	this.datas=res.data.taskDetailList;
 	            	console.log(this.datas.length)
 	            	for(var i=0;i<this.datas.length;i++){
-	            		if(this.datas[i].taskType=='1'){//00
+	            		if(this.datas[i].taskType=='00'){//00
 		            		this.datas[i].taskType="新任务";
 		            	}else if(this.datas[i].taskType=='01'){
 		            		this.datas[i].taskType="回退任务";

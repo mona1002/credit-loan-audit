@@ -8,8 +8,8 @@
         <span> 进件编号: {{customInf.applySubNo}}</span>
         <span> 证件号码: {{customInf.certCode}}</span>
         <span> 进件机构: {{customInf.appOrgCode}}</span>
-<button @click="count++"> count++</button>
-<span>{{count}}</span>
+<!-- <button @click="count++"> count++</button>
+<span>{{count}}</span> -->
         <span> 门店成立时间: {{customInf.applySubNo}}</span>
         <span> 业务员入职时间： {{customInf.applySubNo}}</span>
         <!-- <span> 行政区域进件(或非行政区域进件)</span> -->
@@ -135,7 +135,7 @@
           <div class="AlertContent">
             <!-- <AudioVisualLeft :AlertSearch="AlertSearch" ></AudioVisualLeft> -->
             <!-- <aut :AlertSearchProps="AlertSearch" @click.native="a" ref="audioChild"></aut> -->
-            <aut ref="audioChild"></aut>
+            <aut ref="audioChild"  v-on:inputInf="inputInner"></aut>
             
           </div>
         </div>
@@ -176,7 +176,7 @@
   export default {
     data() {
       return {
-count:0,
+// count:0,
         
         // 进件人信息
         customInf: [],
@@ -198,16 +198,16 @@ count:0,
         // FullScreenlShow: true,
         flexible: true,
         tabContent1: 0,
-        tabContent2: 0, // ----------- tab1 用
+        tabContent2: 3, // ----------- tab1 用
         tabActiveInd1: 0, // tab1 点击时候选中的下标
-        tabActiveInd2: 0,
+        tabActiveInd2: 0,//???????????
         items1: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "信审审批", "流程轨迹"],
         items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "信审审批"],
         // rightList: false, //右键菜单 默认不显示    ---------tab1 用
         tab1Index: 0, // tab1 激活样式的时用的下表
-        tab2Index: 0, // 不是for循环，获取不到index时候的tab切换（ data部分 ）------tab 2 用
+        tab2Index: 3, // 不是for循环，获取不到index时候的tab切换（ data部分 ）------tab 2 用
         // 不是for循环，获取不到index时候的tab切换（ data部分 ）------tab 2 用
-        flag1: [true, true, true, true, true, true, true, true, true, true, true], //  ---------------------------------------------------- tab1用
+        flag1: [true, true, true, false, true, true, true, true, true, true, true], //  ---------------------------------------------------- tab1用
         flag2: [true, true, true, true, true, true, true, true, true, true], //  ---------------------------------------------------- tab2用        
 
         // items: [{ // ----------- tab1 用
@@ -217,7 +217,7 @@ count:0,
         // }, {
         //   title: "内部匹配"
         // }],
-        AlertSearch:false, // 对比弹出层 客户名称：搜索框
+        AlertSearch:"", // 对比弹出层 客户名称：搜索框
         AlertSearchCondition: [{
           value: '选项1',
           label: '最近时间原则排列'
@@ -237,6 +237,8 @@ count:0,
         this.$refs.tabOne[3].className = "tabAct";
         // this.$refs.tabOne.className="tabAct"
       },
+     
+      // 触发子组件方法
       compareProps(){
         console.log("compareProps")
         // console.log(this.$refs.AlertSearchDiv)
@@ -248,6 +250,12 @@ count:0,
         // console.log(this.AlertSearch)
         this.a();
         console.log(this.a())
+      },
+       //子组件传回客户名称，进件编号
+      inputInner(a,b){
+        console.log("inputInner")
+        console.log(a+b)
+        this.AlertSearch=a+""+b;
       },
       // 对比按钮
       compBtnS() {
@@ -340,12 +348,14 @@ count:0,
         }
       }
     },
-    update(){
-      console.log(this.count)
-    },
+    // update(){
+    //   console.log(this.count)
+    // },
     mounted() {
       this.title = "影音资料";
-console.log(this.count)
+// console.log(this.count)
+      console.log("分屏");
+
       console.log(this.$route.query);
       this.customInf = this.$route.query;
       // console.log(this.customInf);

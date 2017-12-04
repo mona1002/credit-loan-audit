@@ -76,7 +76,7 @@
       <!-- <img src="http://img.1ppt.com/uploads/allimg/1606/4_160609151925_1.jpg"> -->
       <img src="../../../../static/images/0865C99F-2D8D-417E-A39D-1644063E5A84@1x.png" class="icon_pre " @click="pre">
       <img src="../../../../static/images/C20F2D59-5CCD-4C61-B12F-874344861071@1x.png" class="icon_next" @click="next">
-      
+
       <div class="BtnIcons">
         <!-- <i class="el-icon-arrow-left position_and_size icon_pre" @click="pre"></i>
       <i class="el-icon-arrow-right position_and_size icon_next" @click="next"></i>
@@ -92,8 +92,68 @@
 
       <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val" v-if="key==smallPicInd"
       />
-      <span>  {{AlertSearch}}</span>
+      <!-- <p>  {{AlertSearchProps}}</p> -->
+      <p>{{this.dataa}}</p>
+      <p>大家说了空间发当升科技发圣诞快乐ad设计费拉开</p>
     </div>
+    <!--=================================  查询弹出层 ================================= -->
+    <div v-show="dataa" class="posiiiii">
+      <!-- 折叠 -->
+      <h3>内皮客户查询列表</h3>
+      <el-collapse v-model="activeNames">
+        <el-collapse-item title="本人进件列表" name="1">
+          <div>
+            <!-- <el-table :data="personal" height="250" border style="width: 100%" @change="handleChange">
+              <el-table-column prop="matchApplyCustName" label="客户名称" width="180">
+              </el-table-column>
+              <el-table-column prop="matchApplySubNo" label="进件编号" width="180">
+              </el-table-column>
+              <el-table-column prop="matchApplyDate" label="申请时间">
+              </el-table-column>
+               <el-table-column prop="matchApplyDate" label="业务状态">
+              </el-table-column>
+            </el-table> -->
+            <!--  @dblclick="getParentList(currentRow.matchApplyId)" -->
+            <el-table ref="singleTable" :data="personal" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange" style="width: 100%">
+              <el-table-column property="matchApplyCustName" label="客户名称">
+              </el-table-column>
+              <el-table-column property="matchApplySubNo" label="进件编号">
+              </el-table-column>
+              <el-table-column property="matchApplyDate" label="申请时间">
+              </el-table-column>
+              <el-table-column prop="matchApplyDate" label="业务状态">
+              </el-table-column>
+            </el-table>
+          </div>
+        </el-collapse-item>
+        <!-- 折叠2 -->
+        <el-collapse-item title="内匹客户进件" name="2">
+          <div>
+            <el-table ref="singleTable" :data="others" height="250" border  @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange" style="width: 100%">
+              <el-table-column property="matchApplyCustName" label="客户名称">
+              </el-table-column>
+              <el-table-column property="matchApplySubNo" label="进件编号">
+              </el-table-column>
+              <el-table-column property="matchApplyDate" label="申请时间">
+              </el-table-column>
+              <el-table-column prop="matchApplyDate" label="业务状态">
+              </el-table-column>
+            </el-table>
+          </div>
+          <!-- 确认  取消 按钮 -->
+          <div style="margin-top: 20px">
+            <!-- <el-button @click="setCurrent(tableData[1])">选中第二行</el-button>
+    <el-button @click="setCurrent()">取消选择</el-button> -->
+            <el-button @click.native="getParentList(currentRow.matchApplyId)">确认</el-button>
+          </div>
+        </el-collapse-item>
+
+      </el-collapse>
+
+
+
+    </div>
+    <!-- ================================= 结束================================= -->
     <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
     <div class="Small_pic_div" v-show="SmallPicShow">
       <p class="Small_pic_title"> 缩略图-申请信息
@@ -119,10 +179,14 @@
 
 <script>
   export default {
-    props:['AlertSearch'],      
+    // props:["AlertSearchProps"],     
+    //  props: {
+    // AlertSearchProps: [String, Boolean],
+    // } ,
     data() {
       return {
         // picData: [],
+        activeNames: ['1', '2'], //查询弹出框 默认展开选项
         showListDiv: true, // 列表显示与否
         show: true, // 收缩按钮显示控制
         smallPicInd: 0, // 未知
@@ -132,25 +196,117 @@
         ListDetails: [], //子节点列表
         applyId: '', //入参
         imgPath: [], //图片路径
-        dataa:this.AlertSearch,
+        dataa: false,
+        // AlertSearchProps:false
+        localInf: [],
+        personal: [], // 匹配查询-个人
+        others: [], // 匹配查询-他人
+        currentRow: null,
+        custName:'',//客户名称-input（disable）
+        custmatchApplySubNo:'',//客户进件编号-input（disable）
+        // currentRowId:"",
       }
     },
     // props:[smallPicDivClose],
     methods: {
-        a(){
-            console.log("子组件a")
-        },
+      // 固定表头 可以选中变色
+      //      setCurrent(row) {
+      //     this.$refs.singleTable.setCurrentRow(row);
+      //   },
+      handleCurrentChange(val) {
+        //   console.log(val)
+        this.currentRow = val;
+        console.log(this.currentRow)
+        // this.currentRowId=val.matchApplyId
+        // console.log( this.currentRowId)
+// 双击 获取新数据
+//  console.log(id);
+//         this.post("/productArchive/getProductArchiveParentList", {
+//           // id:"bb30607c-b5aa-4915-9474-460e099a33e8",
+//           // applyId:this.applyId,
+//           applyId: id,
+//         }).then(res => {
+//           // console.log(res);
+//           // console.log(res.data)
+//           this.ListParent = res.data
+//           // console.log(this.ListParent[0].id )
+//         });
+      },
+      a() {
+        console.log("子组件a")
+        this.dataa = true;
+        // 个人进件        
+        this.post("/internalMatch/getPersonalInternalMatchList", {
+          //   applySubNo: this.localInf.applySubNo,
+          //   certCode: this.localInf.certCode,
+          applySubNo: "201504130173041858",
+          certCode: "341422198409070094",
+        }).then(res => {
+          // console.log(res);
+          console.log("个人")
+          //   console.log(res.data)
+          this.personal = res.data;
+          console.log(this.personal)
+        });
+        // //他人进件（ 不包含个人）
+        this.post("/internalMatch/getNonPersonalInternalMatch", {
+          //   applySubNo: this.localInf.applySubNo,
+          //   certCode: this.localInf.certCode,
+          pageParam: {
+            pageNum: "1", //当前页
+            pageSize: '5' //每页的显示数量
+          },
+          applySubNo: "201504130173041858",
+          certCode: "341422198409070094"
+
+        }).then(res => {
+          // console.log(res);
+          console.log("他人")
+          //   console.log(res)
+          this.others = res.data;
+          console.log(this.others)
+
+        });
+      },
+      getParentList(id) {
+          console.log("选中")
+        console.log(id);
+        this.post("/productArchive/getProductArchiveParentList", {
+          // id:"bb30607c-b5aa-4915-9474-460e099a33e8",
+          // applyId:this.applyId,
+        applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
+          
+        //   applyId: id,
+        }).then(res => {
+          // console.log(res);
+        //   
+          console.log("双击选中")
+          console.log(res.data)
+          
+   this.ListParent = res.data;
+          
+          this.dataa=false;
+          this.custName=this.currentRow.matchApplyCustName;
+          this.custmatchApplySubNo=this.currentRow.matchApplySubNo;
+        this.$emit('inputInf',this.custName,this.custmatchApplySubNo)
+          
+        // this.$emit('inputInner',this.custName,this.custmatchApplySubNo)
+        //       console.log( this.custName)
+        //   console.log( this.custmatchApplySubNo)
+          // console.log(this.ListParent[0].id )
+        });
+      },
       getChildrenList(id) {
         console.log("获取子节点");
         this.post("/productArchive/getProductArchiveChildList", {
           applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
-          pid: id,
-          // pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
+        //   pid: id,
+          pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
         }).then(res => {
           // console.log(res);
-          console.log(res.data)
-          this.ListDetails = res.data;
-
+          //   console.log(res.data)
+          this.others = res.data;
+          console.log(this.others)
         });
       },
       getImg(ind) {
@@ -334,21 +490,31 @@
       },
       compBtnShow() {
         console.log("对比按钮出发")
-        console.log(this.SmallPicShow )
-        
+        console.log(this.SmallPicShow)
+
         // this.SmallPicShow=this.props[0];
         // console.log(this.SmallPicShow )
         this.$emit('CompareShow')
       }
     },
-beforeUpdate(){
-    // console.log(AlertSearch)
-        // console.log(this.dataa)
-    
-},
+    beforeUpdate() {
+      // console.log(AlertSearch)
+      // console.log(this.dataa)
+
+    },
+    // created(){
+    //         console.log(typeof(AlertSearchProps))
+    // },
     mounted() {
-        // console.log(AlertSearch)
-        // console.log(this.dataa)
+      //   localStorage.setItem("userInf", JSON.stringify(userInf));
+      console.log("mounted")
+      this.localInf = JSON.parse(localStorage.getItem("taskInWaitting"));
+      console.log(this.localInf.applySubNo)
+      console.log(this.localInf.certCode)
+
+      // console.log(typeof(this.AlertSearchProps))
+      // console.log(AlertSearch)
+      // console.log(this.dataa)
       // 登录
       //  this.post("/smUser/login", {
       //           userCode:"ddyy",
@@ -682,6 +848,15 @@ beforeUpdate(){
     border-radius: 5px;
     border: 1px solid #bfcbd9;
     box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
+  }
+  /* test--------------del */
+
+  .posiiiii {
+    position: absolute;
+    width: 500px;
+    height: 600px;
+    background: green;
+    top: 200px;
   }
 
 </style>
