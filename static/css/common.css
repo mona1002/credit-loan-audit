@@ -1,5 +1,5 @@
 @media screen and (max-width: 1366px) {
-    #Abody{
+    .Abody{
       width:1366px;
       /* height: calc(100% - 101px); */
       /* overflow-x: scroll; */

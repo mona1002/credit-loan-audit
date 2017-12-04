@@ -4,7 +4,7 @@
        <!-- <myHead></myHead> -->
        <!-- <img src="../static/img/20171122102421.png" width="100%"> -->
 <!-- <el-row class="header"></el-row> -->
-    <router-view id="Abody" ref="ddd"></router-view>
+    <router-view class="Abody" ref="ddd"></router-view>
     <div v-show="false" > </div>
   </div>
 

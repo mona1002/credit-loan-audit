@@ -293,7 +293,6 @@
     },
     mounted() {
       this.title = "影音资料";
-
       console.log(this.$route.query);
       this.customInf = this.$route.query;
       console.log(this.customInf);
@@ -518,7 +517,7 @@
     height: 48px;
     position: relative;
     text-align: left;
-    z-index: 90;
+    z-index: 16;
   }
 
   .Right_tab_ul_wrap ul li {

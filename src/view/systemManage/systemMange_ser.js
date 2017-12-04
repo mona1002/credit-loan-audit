@@ -1,9 +1,22 @@
+import apiService from '../../util/http2'
+import appConstant from '../../util/constant'
 
-var systemManageObj = {
+var URL = {
   // 请求数据接口
-  getRoles: "http://10.1.26.200:20717/roleMgr/getRolesByPage",
+  getRoles: "roleMgr/getRolesByPage",
   // 根据 id 查询角色
-  getRoleById: "http://10.1.26.200:20717/roleMgr/getRoleById",
-}
+  getRoleById: "get::roleMgr/getRoleById",
+  // 编辑角色
+  updateRole: "roleMgr/updateRole",
+  // 启用停用角色
+  updateValidFlag: "get::roleMgr/updateValidFlag",
+  // 新增角色
+  addRole: "roleMgr/addRole",
+  // 授权角色
+  grantRes: "roleMgr/grantRes",
+  
+};
 
-export default systemManageObj
+var systemManageHttp = apiService(appConstant.baseUrl_user).build(URL);
+
+export default systemManageHttp

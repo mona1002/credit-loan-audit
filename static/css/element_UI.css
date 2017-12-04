@@ -1,20 +1,13 @@
 /* 公共部分 */
-/* #Abody 部分 */
-/* #Abody .el-button{
-  background:#0077ff;
-  border-radius:8px;
-  padding:9px 22px;
-} */
-#Abody .el-button{
-  /* background:#0077ff; */
+/* .Abody 部分 */
+.Abody .el-button{
   border-radius:8px;
   padding:9px 22px;
 }
-#Abody .el-button el-button--primary{
-  background:#0077ff;
+.Abody .el-button el-button--primary{
   border-radius:8px;
   padding:9px 22px;
-  font-size:16px;  
+  font-size:16px;
 }
 /* 公用 表格 表头 th */
 /* 放款信息 信审审结论轨迹  */
@@ -45,62 +38,6 @@ height: 40px;
 {
   height: 35px;
 }
-/* 普通input的宽度 */
-
-.el-input {
-  /* 设置el-input div 的元素属性 */
-  display: inline-block;
-  width: 180px;
-}
-
-
-.el-input__inner {
-  height: 30px;
-}
-
-
-/* button按钮 */
-
-.el-button {
-  height: 36px;
-}
-
-
-/* 表格行高-----未生效---需要用的话单独设一下 */
-
-.el-table .cell {
-  line-height: 40px;
-}
-/* 表格------未生效---需要用的话单独设一下*/
-
-.el-table td,
-.el-table th {
-  padding: 0;
-}
-
-/* 表头颜色 */
-
-.el-table__header-wrapper tr {
-  background-color: #f5f7fa;
-  color: #1f2d3d;
-  text-align: center;
-}
-/* 表格内容居中 */
-
-.el-table th,
-td {
-  text-align: center;
-}
-
-/* 字体图标颜色大小 */
-
-.icon {
-  color: #20a0ff;
-  font-size: 20px;
-}
-
-
-
 
 
 /* 实地征信 折叠面板头部背景色 */
@@ -543,5 +480,5 @@ ol.num li:nth-of-type(1) .el-input__inner{
   border-radius: 4px;
 }
 .taskWatting .el-table__header-wrapper tr{
-  background-color: #fff；
+  background-color: #fff;
 }
