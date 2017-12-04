@@ -28,7 +28,7 @@ axios.interceptors.response.use(
 axios.interceptors.request.use((config) => {
   if(config.url.indexOf("api") >= 0 ) { 
     config.url = config.url.replace('/api', "");
-    config.baseURL = 'http://10.150.254.7:8081/api/v1/ ';
+    config.baseURL = 'http://10.1.26.200/20717 ';
   }
   return config;
 },(error) =>{
