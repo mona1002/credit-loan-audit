@@ -135,7 +135,8 @@
           <div class="AlertContent">
             <!-- <AudioVisualLeft :AlertSearch="AlertSearch" ></AudioVisualLeft> -->
             <!-- <aut :AlertSearchProps="AlertSearch" @click.native="a" ref="audioChild"></aut> -->
-            <aut ref="audioChild"  v-on:inputInf="inputInner"></aut>
+            <!-- <aut ref="audioChild"  v-on:inputInf="inputInner"></aut> -->
+            <AudioVisualLeft ref="audioChild" v-on:inputInf="inputInner"></AudioVisualLeft>
             
           </div>
         </div>
@@ -231,36 +232,35 @@
       }
     },
     methods: {
-      aaa() {
-        console.log("aaa")
-        console.log(this.$refs.tabOne[0].className)
-        this.$refs.tabOne[3].className = "tabAct";
-        // this.$refs.tabOne.className="tabAct"
-      },
+      // aaa() {
+      //   console.log("aaa")
+      //   console.log(this.$refs.tabOne[0].className)
+      //   this.$refs.tabOne[3].className = "tabAct";
+      //   // this.$refs.tabOne.className="tabAct"
+      // },
      
       // 触发子组件方法
       compareProps(){
         console.log("compareProps")
         // console.log(this.$refs.AlertSearchDiv)
         // this.AlertSearch=true;
-        this.$refs.audioChild.a()
+        this.$refs.audioChild.personalNunPerson()
       },
       // 对比弹出层change事件
-      AlertSearchChange(){
-        // console.log(this.AlertSearch)
-        this.a();
-        console.log(this.a())
-      },
+      // AlertSearchChange(){
+      //   // console.log(this.AlertSearch)
+      //   this.a();
+      //   console.log(this.a())
+      // },
        //子组件传回客户名称，进件编号
       inputInner(a,b){
         console.log("inputInner")
         console.log(a+b)
-        this.AlertSearch=a+""+b;
+        this.AlertSearch=a+" "+b;
       },
       // 对比按钮
       compBtnS() {
         console.log("我是傅祖建")
-
         this.CompareAlert = true;
       },
       // 弹出层关闭按钮
@@ -352,13 +352,24 @@
     //   console.log(this.count)
     // },
     mounted() {
-      this.title = "影音资料";
-// console.log(this.count)
       console.log("分屏");
+      
+       console.log( "1")      
+       console.log( this.customInf)  
 
+      //  this.customInf = JSON.parse(localStorage.getItem("taskInWaitting"));
+       this.customInf = JSON.parse(localStorage.getItem("applicationInformationDetail"));
+       
+      
+      console.log( "2")            
+      console.log( this.customInf)
+
+      this.title = "影音资料";
       console.log(this.$route.query);
       this.customInf = this.$route.query;
-      // console.log(this.customInf);
+      
+       console.log( "3")            
+      console.log(this.customInf);
 
       // console.log(this.$route.query.row.id) //接参数   
       //  this.post("/workFlowTaskQuery/getTaskProfile", {

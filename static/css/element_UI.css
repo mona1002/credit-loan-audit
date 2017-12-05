@@ -391,7 +391,7 @@ position: relative
 .SplitScreen .AudioVisual_wrap_compare_right .el-select>.el-input,
 .SplitScreen .AudioVisual_wrap_compare_right .el-input__inner {
   display: inline-block;
-  width:200px;
+  width:260px;
   height:35px
 }
 /* 借款人资料 */
