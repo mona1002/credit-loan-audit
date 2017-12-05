@@ -122,17 +122,29 @@ export default {
     //   // 此时 data 已经被 observed 了
 
     // 获取到传进来的参数   进件编号
-    this.applySubNo = this.$route.query.applySubNo;
+    // this.applySubNo = this.$route.query.applySubNo;
+    
+    var applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
+
+    // 进件编号
+    this.applySubNo = applicationInformationDetail.applySubNo;
     console.log(this.applySubNo);
+
+    this.workName = applicationInformationDetail.workName;
+
     // 测试数据
-    this.applySubNo = '111';
+    // this.applySubNo = '111';
     // 公司名称
-    this.workName = this.$route.query.workName;
+    // this.workName = this.$route.query.workName;
+    
+
     // 测试数据
-    this.workName = '阿里';
+    // this.workName = '阿里';
     this.fetchData('mobile');
     this.fetchData('fixed');
     this.fetchData('company');
+
+
   },
   methods: {
     /*
@@ -204,6 +216,9 @@ export default {
       console.log(row);
 
       // id: 客户id     orgCate
+      
+      localStorage.setItem("internalId", JSON.stringify(row.id));
+      
     },
     itemDbclickFixTel(row, event) {
       // 行被双击 事件  固定电话
@@ -284,7 +299,7 @@ export default {
           ruleForm: {
             type: []
           },
-          applyId: '111', // 申请单id
+          applyId: '', // 申请单id
           audit_desc: '', //匹配结论
           creator_code: '' // 用户操作人编码 userCode
         };
