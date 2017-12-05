@@ -859,7 +859,10 @@
 		        	proName:this.datas.proName,
 		        	loanTerm:this.accepApplyLoan.loanTerm,
 		        	applyMainNo:this.datas.applyMainNo,
-		        	applySubNo:this.datas.applySubNo
+		        	applySubNo:this.datas.applySubNo,
+		        	salPerEmployDate:this.datas.salPerEmployDate,
+		        	appOrgRegisterDate:this.datas.appOrgRegisterDate,
+		        	adminIntroduce:this.datas.adminIntroduce
 		        };
 		        /*console.log(this.datas);*/
 		        localStorage.setItem("applicationInformationDetail",JSON.stringify(query));
