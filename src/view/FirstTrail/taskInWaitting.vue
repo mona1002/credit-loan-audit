@@ -54,7 +54,7 @@
 			    <el-table-column
 			      prop="custName"
 			      label="客户名称"
-			      min-width="98">
+			      min-width="130">
 			    </el-table-column>
 			    <el-table-column
 			      prop="certCode"
