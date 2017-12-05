@@ -228,10 +228,10 @@ export default {
           answer: '',
           checkStage: '',
           sourceDesc:'', // 其他来源说明
-          applyId: '2222',
+          applyId: this.applyId,
         },
         cretelhometel: {
-          applyId: '2222',
+          applyId: this.applyId,
           thirdResult: '',
           issameFam: '',
           relBorrower: '',
@@ -267,11 +267,12 @@ export default {
       }
     }
   },
-  props: ['custName', 'phoneNum'],
+  props: ['custName', 'phoneNum','applyId'],
   mounted() {
     this.form.cretelinvest.custName = this.custName;
     this.form.cretelinvest.phoneNum = this.phoneNum;
     this.form.cretelinvest.phoneType = '01'; // 住址电话
+
   },
   methods: {
     submitForm() {
