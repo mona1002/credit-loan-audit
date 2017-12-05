@@ -62,8 +62,8 @@
       <!-- 家庭联系人 -->
       <el-form-item label="是否与为同一接听人:" class="item-column2 min-lin-class">
         <el-select v-model="form.cretelhometel.issameFam" placeholder="">
-          <el-option label="否" value="00"></el-option>
-          <el-option label="是" value="01"></el-option>
+          <el-option label="否" value="0"></el-option>
+          <el-option label="是" value="1"></el-option>
         </el-select>
       </el-form-item>
       <!-- 与家庭联系人不是同一接听人 -->
@@ -92,7 +92,7 @@
       </el-form-item>
       <!-- 工作情况  基本一致/不一致 -->
       <el-form-item label="-" class="item-column2">
-        <el-input v-model="form.cretelhometel.checkWorkDes"></el-input>
+        <el-input v-model="form.cretelhometel.checkWorktxt"></el-input>
       </el-form-item>
       <el-form-item label="核对婚姻情况:" class="item-column2">
         <el-select v-model="form.cretelhometel.maritalStatus" placeholder="">
@@ -227,7 +227,7 @@ export default {
           source: '',
           answer: '',
           checkStage: '',
-          sourceDesc:'', // 其他来源说明
+          sourceDesc: '', // 其他来源说明
           applyId: this.applyId,
         },
         cretelhometel: {
@@ -236,38 +236,38 @@ export default {
           issameFam: '',
           relBorrower: '',
           checkWork: '',
-          maritalStatustxt: '',// 核对子女情况说明
+          maritalStatustxt: '', // 核对子女情况说明
           maritalStatus: '',
           checkAddr: '',
-          checkEstate: '',// 核对房产
+          checkEstate: '', // 核对房产
           otherIncome: '',
           recentLargespend: '',
           parents: '',
           brother: '',
           threeQueries: '',
           // threeQueriesDes:'',
-          exceptionState:'', // 异常项说明
-          expenses: '',// 支付家庭费用
+          exceptionState: '', // 异常项说明
+          expenses: '', // 支付家庭费用
           checkStage: '',
-          checkHometel: '',// 核对家庭固话
-          hobbyandBehave: '',// 借款人爱好和品行
-          conclusion: '',// 调查结论
-          issameFamtxt: '',// 是否与家庭联系人为同一人接听说明
-          relBorrowertxt: '',// 与借款人关系说明
-          checkWorktxt: '',// 工作情况说明
-          checkAddrtxt: '',// 核对地址说明
-          checkEstatetxt: '',// 核对房产说明
-          otherIncometxt: '',// 其他收入说明
-          recentlArgespendInfo: '',// 近期大项开销说明
-          parentsInfo: '',// 父母情况说明
-          brothertxt: '',// 兄弟姐妹情况说明
-          expensestxt: '',// 支付家庭费用说明
-          checkHometeltxt: '',// 核对家庭固话说明
+          checkHometel: '', // 核对家庭固话
+          hobbyandBehave: '', // 借款人爱好和品行
+          conclusion: '', // 调查结论
+          issameFamtxt: '', // 是否与家庭联系人为同一人接听说明
+          relBorrowertxt: '', // 与借款人关系说明
+          checkWorktxt: '', // 工作情况说明
+          checkAddrtxt: '', // 核对地址说明
+          checkEstatetxt: '', // 核对房产说明
+          otherIncometxt: '', // 其他收入说明
+          recentlArgespendInfo: '', // 近期大项开销说明
+          parentsInfo: '', // 父母情况说明
+          brothertxt: '', // 兄弟姐妹情况说明
+          expensestxt: '', // 支付家庭费用说明
+          checkHometeltxt: '', // 核对家庭固话说明
         }
       }
     }
   },
-  props: ['custName', 'phoneNum','applyId'],
+  props: ['custName', 'phoneNum', 'applyId'],
   mounted() {
     this.form.cretelinvest.custName = this.custName;
     this.form.cretelinvest.phoneNum = this.phoneNum;
@@ -280,6 +280,10 @@ export default {
       this.post('/creTelResearchHis/addHomeTelLog', this.form)
         .then(res => {
           console.log(res);
+          if (res.statusCode == '200')
+            // 提交数据成功,广播事件 重新刷新列表
+            this.$emit('updateList');
+
         })
     }
   }
