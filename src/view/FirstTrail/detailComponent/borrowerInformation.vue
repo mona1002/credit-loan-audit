@@ -455,18 +455,18 @@
 			    </template>
 		  		<div class="xinyongka">
 		  			<ul>
-				    	<li><label>信用卡张数：</label><el-input v-model="datas.borCard.cardCount"></el-input></li>
-				    	<li><label>正常使用张数：</label><el-input v-model="datas.borCard.normalCount"></el-input></li>
-				    	<li><label>呆帐数量：</label><el-input v-model="datas.borCard.badDebtCount"></el-input></li>
+				    	<li><label>信用卡张数：</label><el-input v-model="borCard.cardCount"></el-input></li>
+				    	<li><label>正常使用张数：</label><el-input v-model="borCard.normalCount"></el-input></li>
+				    	<li><label>呆帐数量：</label><el-input v-model="borCard.badDebtCount"></el-input></li>
 				    </ul>
 				    <ul>
-				    	<li><label>未开卡张数：</label><el-input v-model="datas.borCard.nouseCount"></el-input></li>
-				    	<li><label>冻结数量：</label><el-input v-model="datas.borCard.freezeCount"></el-input></li>
-				    	<li><label>销户数量：</label><el-input v-model="datas.borCard.cancelCount"></el-input></li>
+				    	<li><label>未开卡张数：</label><el-input v-model="borCard.nouseCount"></el-input></li>
+				    	<li><label>冻结数量：</label><el-input v-model="borCard.freezeCount"></el-input></li>
+				    	<li><label>销户数量：</label><el-input v-model="borCard.cancelCount"></el-input></li>
 				    </ul>
 				    <ul>
-				    	<li><label>已使用张数：</label><el-input v-model="datas.borCard.userdCount"></el-input></li>
-				    	<li><label>止付数量：</label><el-input v-model="datas.borCard.stopPaymentCount"></el-input></li>
+				    	<li><label>已使用张数：</label><el-input v-model="borCard.userdCount"></el-input></li>
+				    	<li><label>止付数量：</label><el-input v-model="borCard.stopPaymentCount"></el-input></li>
 				    </ul>
 		  		</div> 
 		  	</el-collapse-item>
@@ -806,7 +806,8 @@
 				        label="N"
 				        min-width="130">
 				        <template slot-scope="scope">
-						  <input v-model="scope.row.n" type=number></input>
+				        	<input type="text" name="" v-model="scope.row.n" placeholder="请输入内容" v-numbers>
+				          <!-- <el-input v-model="scope.row.n" placeholder="请输入内容" v-numbers></el-input> -->
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -814,7 +815,8 @@
 				        label="N-1"
 				        min-width="130">
 				        <template slot-scope="scope">
-						  <el-input v-model="scope.row.n1" placeholder="请输入内容"></el-input>
+				        	<input type="text" name="" v-model="scope.row.n1" placeholder="请输入内容" v-numberss>
+						  <!-- <el-input v-model="scope.row.n1" placeholder="请输入内容"></el-input> -->
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -822,7 +824,8 @@
 				        label="N-2"
 				        min-width="130">
 				        <template slot-scope="scope">
-						  <el-input v-model="scope.row.n2" placeholder="请输入内容"></el-input>
+				        	<input type="text" name="" v-model="scope.row.n2" placeholder="请输入内容" v-numbers>
+						  <!-- <el-input v-model="scope.row.n2" placeholder="请输入内容"></el-input> -->
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -830,7 +833,8 @@
 				        label="N-3"
 				        min-width="130">
 				        <template slot-scope="scope">
-						  <el-input v-model="scope.row.n3" placeholder="请输入内容"></el-input>
+				        	<input type="text" name="" v-model="scope.row.n3" placeholder="请输入内容" v-numbers>
+						  <!-- <el-input v-model="scope.row.n3" placeholder="请输入内容"></el-input> -->
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -838,7 +842,8 @@
 				        label="N-4"
 				        min-width="130">
 				        <template slot-scope="scope">
-						  <el-input v-model="scope.row.n4" placeholder="请输入内容"></el-input>
+				        	<input type="text" name="" v-model="scope.row.n4" placeholder="请输入内容" v-numbers>
+						  <!-- <el-input v-model="scope.row.n4" placeholder="请输入内容"></el-input> -->
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -846,7 +851,8 @@
 				        label="N-5"
 				        min-width="130">
 				        <template slot-scope="scope">
-						  <el-input v-model="scope.row.n5" placeholder="请输入内容"></el-input>
+				        	<input type="text" name="" v-model="scope.row.n5" placeholder="请输入内容" v-numbers>
+						  <!-- <el-input v-model="scope.row.n5" placeholder="请输入内容"></el-input> -->
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -891,6 +897,18 @@
 					<div class=buttonDiv>
 						<el-button type="primary" @click="Cancle">取消</el-button>
 						<el-button type="primary" @click="trueSure">确定</el-button>
+					</div>
+				</div>		
+			</div>
+		</div>
+		<!-- 点击确认时提示错误弹框 -->
+		<div class="layer" v-show="infoLyer">
+			<div class="layerbox">
+				<p><span>提示</span><i class="el-icon-close" @click="infoClose"></i></p>
+				<div>
+					<p class="choces">{{info}}</p>
+					<div class=infoButton>
+						<el-button type="primary" @click="infoSure">确定</el-button>
 					</div>
 				</div>		
 			</div>
@@ -952,10 +970,11 @@
             cardDetList:[],
 
             taskInWaitting:'',
+            applyId:'',
 
             //信用卡使用总况
-            /*borCard:{
-		        "applyId":"111", // 申请单Id    
+            borCard:{
+		        "applyId":this.applyId, // 申请单Id    
 		        "cardCount":'', // 信用卡张数
 		        "nouseCount":'', // 未开卡张数
 		        "userdCount":'', // 已使用张数
@@ -964,14 +983,14 @@
 		        "stopPaymentCount":'', // 止付数量
 		        "badDebtCount":'', // 呆账数量
 		        "cancelCount":'', // 销户数量
-		    },*/
+		    },
 
             // 贷款明细
             loanDetailList:[],
 
             // 贷款总况
             loanInfo:{
-		        "applyId":"111", // 申请单Id
+		        "applyId":this.applyId, // 申请单Id
 		        "carLoanTotal":'', // 车贷共有笔数
 		        "carLoanNoPayoff":'', // 车贷现存笔数
 		        "carLoanPayoff":'', // 车贷结清笔数
@@ -988,7 +1007,7 @@
 
             // 负债信息
             borDebt:{
-		        "applyId":"111", // 申请单Id
+		        "applyId":this.applyId, // 申请单Id
 		        "monthRepayAmt":'', // 信用卡每月还款[元]
 		        "studentLoanAmt":'', // 助学贷每月还款额[元]
 		        "houseLoanAmt":'', // 房贷每月还款额[元]
@@ -1001,7 +1020,7 @@
 
             // 征询报告
             rptInfo:{
-		        "applyId":"111", // 申请单Id    
+		        "applyId":this.applyId, // 申请单Id    
 		        "crSource":"", // 报告来源
 		        "crHasRecord":"", // 有无征信报告查询记录
 		        "crRecordTimes":"", // 近6个月内信用报告查询次数
@@ -1013,7 +1032,7 @@
 
             // 其他信息
             otherInfo:{
-		        "applyId":"111", // 申请单Id    
+		        "applyId":this.applyId, // 申请单Id    
 		        "content":"", // 其他内容
 		    },
             //房产类型
@@ -1119,11 +1138,14 @@
       		],
       		//弹框
       		layer:false,
+      		info:'',
+      		infoLyer:false,
 	      };
 	    },
 	    created(){
 			//一进入页面就发送请求
 			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+			this.applyId=this.taskInWaitting.applyId;
 			this.request(this.taskInWaitting.applyId);
 		},
 	    methods:{
@@ -1140,30 +1162,52 @@
 		        /*信用卡使用明细*/
 		        this.cardDetList=res.data.cardDetList;
 		        /*信用卡使用总况*/
-		        this.borCard=res.data.borCard;
+		        if(res.data.borCard==null){
+		        	this.borCard=this.borCard
+		        }else{
+		        	this.borCard=res.data.borCard;
+		        }
+		        
 		        /*贷款明细*/
 		        this.loanDetailList=res.data.loanDetailList;
 		        /*贷款总况*/
-		        this.loanInfo=res.data.loanInfo;
+		        if(res.data.loanInfo==null){
+		        	this.loanInfo=this.loanInfo
+		        }else{
+		        	this.loanInfo=res.data.loanInfo;
+		        }
+		        
 		        /*负债信息*/
-		        this.borDebt=res.data.borDebt;
+		        if(res.data.borDebt==null){
+		        	this.borDebt=this.borDebt
+		        }else{
+		        	this.borDebt=res.data.borDebt;
+		        }
 		        /*征询报告*/
-		        this.rptInfo=res.data.rptInfo;
+		        if(res.data.rptInfo==null){
+		        	this.rptInfo=this.rptInfo
+		        }else{
+		        	this.rptInfo=res.data.rptInfo;
+		        }
 		        /*流水明细*/
 		        this.incomeList=res.data.incomeList;
 		        /*其他信息*/
-		        this.otherInfo=res.data.otherInfo;
+		        if(res.data.otherInfo==null){
+		        	this.otherInfo=this.otherInfo
+		        }else{
+		        	this.otherInfo=res.data.otherInfo;
+		        }
 		        //console.log(this.borCard);
 		      });
 		  },
 	    	handleChange(){
 
 	    	},
-	    	add_home: function(event,param) {
+	    	add_home: function(event) {
 	    		 event.stopPropagation();
 	    		if(this.borestateList.length==0){
 	    			this.borestateList.push({
-	    							"applyId":param, // 申请单Id
+	    							"applyId":this.applyId, // 申请单Id
 						            "estateType":"", // 房产类型
 						            "propertyType":"", // 产权性质
 						            "coveredArea":"", // 建筑面积
@@ -1183,7 +1227,7 @@
 	    				return
 	    			}else{
 	    				this.borestateList.push({
-	    							"applyId":"111", // 申请单Id
+	    							"applyId":this.applyId, // 申请单Id
 						            "estateType":"", // 房产类型
 						            "propertyType":"", // 产权性质
 						            "coveredArea":"", // 建筑面积
@@ -1206,7 +1250,7 @@
 		    	event.stopPropagation();
 		    	if(this.carInfoList.length==0){
 		    		this.carInfoList.push({
-						            "applyId":"111", // 申请单Id
+						            "applyId":this.applyId, // 申请单Id
 						            "carPrice":"", // 车辆购置价
 						            "isYearCheck":"", // 是否年检
 						            "isOperate":"", // 是否非运营
@@ -1224,7 +1268,7 @@
 	    				return
 	    			}else{
 	    				this.carInfoList.push({
-	    							"applyId":"111", // 申请单Id
+	    							"applyId":this.applyId, // 申请单Id
 						            "carPrice":"", // 车辆购置价
 						            "isYearCheck":"", // 是否年检
 						            "isOperate":"", // 是否非运营
@@ -1245,7 +1289,7 @@
 		    	event.stopPropagation();
 		    	if(this.cardDetList.length==0){
 		    		this.cardDetList.push({
-						            "applyId":"111", // 申请单Id
+						            "applyId":this.applyId, // 申请单Id
 						            "bankName":"", // 银行名称
 						            "cardUseDate":"", // 开卡日期
 						            "cardAmt":"" ,// 信用额度
@@ -1264,7 +1308,7 @@
 	    				return
 	    			}else{
 	    				this.cardDetList.push({
-	    							"applyId":"111", // 申请单Id
+	    							"applyId":this.applyId, // 申请单Id
 						            "bankName":"", // 银行名称
 						            "cardUseDate":"", // 开卡日期
 						            "cardAmt":"" ,// 信用额度
@@ -1285,7 +1329,7 @@
 		    	event.stopPropagation();
 		    	if(this.loanDetailList.length==0){
 		    		this.loanDetailList.push({
-						            "applyId":"111", // 申请单Id
+						            "applyId":this.applyId, // 申请单Id
 						            "loanType":"", // 贷款种类
 						            "guaranteeType":"",// 担保方式
 						            "accountStatus":"", // 账户状态
@@ -1308,7 +1352,7 @@
 	    				return
 	    			}else{
 	    				this.loanDetailList.push({
-	    							"applyId":"111", // 申请单Id
+	    							"applyId":this.applyId, // 申请单Id
 						            "loanType":"", // 贷款种类
 						            "guaranteeType":"",// 担保方式
 						            "accountStatus":"", // 账户状态
@@ -1334,7 +1378,7 @@
 		    	event.stopPropagation();
 		    	if(this.incomeList.length==0){
 		    		this.incomeList.push({
-						            "applyId":"111", // 申请单Id    
+						            "applyId":this.applyId, // 申请单Id    
 							        "incomeType":"", // 流水类型
 							        "n":"",
 							        "n1":"",
@@ -1349,7 +1393,7 @@
 	    				return
 	    			}else{
 	    				this.incomeList.push({
-	    							"applyId":"111", // 申请单Id    
+	    							"applyId":this.applyId, // 申请单Id    
 							        "incomeType":"", // 流水类型
 							        "n":"",
 							        "n1":"",
@@ -1559,6 +1603,42 @@
 			},
 			//确定按钮
 			sure(){
+				for(var i=0;i<this.borestateList.length;i++){
+					if(this.borestateList[i].estateType==''){
+						this.infoLyer=true;
+						this.info="房产信息不能为空！"
+						return
+					}
+				};
+				for(var i=0;i<this.carInfoList.length;i++){
+					if(this.carInfoList[i].carType==''){
+						this.infoLyer=true;
+						this.info="车辆信息不能为空！"
+						return
+					}
+				};
+				for(var i=0;i<this.cardDetList.length;i++){
+					if(this.cardDetList[i].bankName=='' || this.cardDetList[i].accountStatus==''){
+						this.infoLyer=true;
+						this.info="信用卡使用明细不能为空！"
+						return　
+					}
+				};
+				for(var i=0;i<this.loanDetailList.length;i++){
+					if(this.loanDetailList[i].loanType=='' || this.loanDetailList[i].guaranteeType=='' || this.loanDetailList[i].accountStatus==''){
+						this.infoLyer=true;
+						this.info="贷款明细不能为空！"　
+						return
+					}
+				};
+				for(var i=0;i<this.incomeList.length;i++){
+					if(this.incomeList[i].incomeType==''){
+						this.infoLyer=true;
+						this.info="流水明细不能为空！"　
+						return
+					}
+				};
+				
 				this.layer=true;
 				document.getElementsByTagName('body')[0].style.overflow='hidden';
 			},
@@ -1572,7 +1652,7 @@
 				this.layer=false;
 				document.getElementsByTagName('body')[0].style.overflow='';	
 				this.post("/borrower/saveBorrowerInfo", {
-			        "applyId":"111",
+			        "applyId":this.applyId,
 			        "borestateList":this.borestateList,
 			        "carInfoList":this.carInfoList,
 			        "cardDetList":this.cardDetList,
@@ -1592,7 +1672,126 @@
 				this.layer=false;
 				document.getElementsByTagName('body')[0].style.overflow='';	
 			},
-	    }
+			//提示弹框关闭
+			infoSure(){
+				this.infoLyer=false;
+				document.getElementsByTagName('body')[0].style.overflow='';
+				this.layer=false;
+			},
+			infoClose(){
+				this.infoLyer=false;
+				document.getElementsByTagName('body')[0].style.overflow='';
+				this.layer=false;
+			},
+			
+
+	    },
+	    directives: {
+	    // 指令的定义
+	    numbers:{
+      		twoWay: true,
+      		bind:function (el) {
+      			console.log(el);
+				el.addEventListener('blur',function () {
+    				let value;
+    				function formatNumber(num,cent,isThousand) {
+					    var num = num.toString().replace(/\$|\,/g,'');
+
+					    // 检查传入数值为数值类型
+					    if(isNaN(num))
+					        num = "0";
+
+					    // 获取符号(正/负数)
+					    let sign = (num == (num = Math.abs(num)));
+
+					    num = Math.floor(num*Math.pow(10,cent)+0.50000000001);  // 把指定的小数位先转换成整数.多余的小数位四舍五入
+					    let cents = num%Math.pow(10,cent);              // 求出小数位数值
+					    num = Math.floor(num/Math.pow(10,cent)).toString();   // 求出整数位数值
+					    cents = cents.toString();               // 把小数位转换成字符串,以便求小数位长度
+
+					    // 补足小数位到指定的位数
+					    while(cents.length<cent)
+					        cents = "0" + cents;
+
+					    if(isThousand) {
+					        // 对整数部分进行千分位格式化.
+					        for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
+					            num = num.substring(0,num.length-(4*i+3))+','+ num.substring(num.length-(4*i+3));
+					    }
+
+					    if (cent > 0)
+					        return (((sign)?'':'-') + num + '.' + cents);
+					    else
+					        return (((sign)?'':'-') + num);
+						};
+    				console.log(formatNumber(el.value,2,0));
+			        (function(){
+			            value = formatNumber(el.value,2,0)
+			           	console.log(value);
+			            return value
+			        })()
+    				el.value =value
+				})
+			},
+	  		update:function (el,binding,vnode) {
+		        if(el.value !== ''){
+		            el.value = el.value.replace(/[^0-9.]+/g, '');
+		        }
+		    }
+		},
+		numberss:{
+      		twoWay: true,
+      		bind:function (el) {
+      			console.log(el);
+				el.addEventListener('blur',function () {
+    				let value;
+    				function formatNumber(num,cent,isThousand) {
+					    var num = num.toString().replace(/\$|\,/g,'');
+
+					    // 检查传入数值为数值类型
+					    if(isNaN(num))
+					        num = "0";
+
+					    // 获取符号(正/负数)
+					    let sign = (num == (num = Math.abs(num)));
+
+					    num = Math.floor(num*Math.pow(10,cent)+0.50000000001);  // 把指定的小数位先转换成整数.多余的小数位四舍五入
+					    let cents = num%Math.pow(10,cent);              // 求出小数位数值
+					    num = Math.floor(num/Math.pow(10,cent)).toString();   // 求出整数位数值
+					    cents = cents.toString();               // 把小数位转换成字符串,以便求小数位长度
+
+					    // 补足小数位到指定的位数
+					    while(cents.length<cent)
+					        cents = "0" + cents;
+
+					    if(isThousand) {
+					        // 对整数部分进行千分位格式化.
+					        for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
+					            num = num.substring(0,num.length-(4*i+3))+','+ num.substring(num.length-(4*i+3));
+					    }
+
+					    if (cent > 0)
+					        return (((sign)?'':'-') + num + '.' + cents);
+					    else
+					        return (((sign)?'':'-') + num);
+						};
+    				console.log(formatNumber(el.value,2,0));
+			        (function(){
+			            value = formatNumber(el.value,2,0)
+			           	console.log(value);
+			            return value
+			        })()
+    				el.value =value
+				})
+			},
+	  		update:function (el,binding,vnode) {
+		        if(el.value !== ''){
+		            el.value = el.value.replace(/[^0-9.]+/g, '');
+		        }
+		    }
+		},
+
+		},
 	}
 </script>
 <style type="text/css" scoped>
@@ -1765,7 +1964,7 @@
 		margin:10px;
 	}
 
-	/* 删除提示弹层 */
+	/* 提示弹层 */
 	.layer{
 		width: 100%;
 		height: 100%;
@@ -1816,5 +2015,11 @@
 	.layer .layerbox .buttonDiv button{
 		float: left;
 		margin:0 0 0 50px;
+	}
+	.layer .layerbox .infoButton{
+		height: auto;
+	}
+	.layer .layerbox .infoButton button{
+		float: right;
 	}
 </style>

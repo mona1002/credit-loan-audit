@@ -8,10 +8,9 @@
         <span> 进件编号: {{customInf.applySubNo}}</span>
         <span> 证件号码: {{customInf.certCode}}</span>
         <span> 进件机构: {{customInf.appOrgCode}}</span>
-        <span> 门店成立时间: {{customInf.applySubNo}}</span>
-        <span> 业务员入职时间： {{customInf.applySubNo}}</span>
-        <!-- <span> 行政区域进件(或非行政区域进件)</span> -->
-        <span> 行政区域进件 / 非行政区域进件</span>
+        <span> 门店成立时间: {{customInf1.appOrgRegisterDate}}</span>
+        <span> 业务员入职时间： {{customInf1.salPerEmployDate}}</span>
+        <span>{{customInf1.adminIntroduce}}</span>
       </p>
       <div class="SplitScreen_wrap">
         <!-- 左侧分屏部分 -->
@@ -24,7 +23,6 @@
                 :class="{tab1Act:tab1Index==index}">
                 {{val}}</li>
             </ul>
-
           </div>
           <!-- 左侧详情 -->
           <div ref="Left_detail" class="Left_detail_div">
@@ -37,20 +35,20 @@
               </span>
             </p>
             <div class="Left_right_BigImg ">
-              <AudioVisualLeft v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></AudioVisualLeft>
-              <!-- <workbench v-if=" this.tabContent1==1"></workbench> -->
-              <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
-              <!-- <div v-if=" this.tabContent1==4">asdf adf</div> -->
-              <!-- <div v-if=" this.tabContent1==5">asdf adf</div> -->
-              <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
-              <cborrowerInformationDetail v-if=" this.tabContent1==4"></cborrowerInformationDetail>
-              <!-- <capplicationInformationDetail v-if=" this.tabContent1==5"></capplicationInformationDetail> -->
-              <cCreditForm v-if=" this.tabContent1==6"></cCreditForm>
-              <creditInvestigation v-if=" this.tabContent1==7"></creditInvestigation>
-              <!-- <div v-if=" this.tabContent1==7">asdf adf</div> -->
-              <!-- <div v-if=" this.tabContent1==8">asdf adf</div> -->
-              <!-- <AudioVisual v-if=" this.tab1Index==0"></AudioVisual>
-            <workbench v-if=" this.tab1Index==1"></workbench> -->
+              <AudioVisualLeft v-if="this.tabContent1==0" v-on:CompareShow="compBtnS"></AudioVisualLeft>
+              <cremarkDetail v-if="this.tabContent1==1"></cremarkDetail>
+              <InternalMatch v-if="this.tabContent1==2"></InternalMatch>
+              <capplicationInformationDetail v-if="this.tabContent1==3"></capplicationInformationDetail>
+              <cborrowerInformationDetail v-if="this.tabContent1==4"></cborrowerInformationDetail>
+              <PhoneCredit v-if="this.tabContent1==5"></PhoneCredit>
+              <cCreditForm v-if="this.tabContent1==6"></cCreditForm>
+              <creditInvestigation v-if="this.tabContent1==7"></creditInvestigation>
+              <cAntiConclution v-if="this.tabContent1==8"></cAntiConclution>
+              <!-- 反欺诈结论 空白 -->
+              <FinanceInformation v-if="this.tabContent1==9"> </FinanceInformation>
+              <workbench v-if="this.tabContent1==10"></workbench>
+              <!-- 流程轨迹 -->
+              <ApprovalConclusion v-if="this.tabContent1==11"> </ApprovalConclusion>
             </div>
           </div>
         </div>
@@ -60,12 +58,13 @@
           <!-- tab2 切换 -->
           <!-- 右屏tab 表头 -->
           <div class="Right_tab_title_div">
-      <!-- 左右滑动 图标  -->
+            <!-- 左滑动 图标  -->
             <span class="pre_next_btn_wrap" @click="leftMovingBtn">
-            <img src="../../../static/images/Shape@1x.png" >
+              <img src="../../../static/images/Shape@1x.png">
             </span>
-            <span class="pre_next_btn_wrap" style="color:red;"  @click="rightMovingBtn">
-            <img src="../../../static/images/Shaperight@1x.png">
+            <!--右滑动 图标  -->
+            <span class="pre_next_btn_wrap" style="color:red;" @click="rightMovingBtn">
+              <img src="../../../static/images/Shaperight@1x.png">
             </span>
             <!-- tab 2 -=====================tab2里面的ul-->
             <div class="Right_tab_ul_wrap">
@@ -78,18 +77,20 @@
           </div>
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
-            <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
-            <remark v-if=" this.tabContent2==1"></remark>
-            <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
-            <applicationInformation v-if=" this.tabContent2==3"></applicationInformation>
-            <borrowerInformation v-if=" this.tabContent2==4"></borrowerInformation>
-            <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
-            <CreditForm v-if=" this.tabContent2==6"></CreditForm>
-            <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
+            <AudioVisual v-if="this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
+            <cremarkDetail v-if="this.tabContent2==1"></cremarkDetail>
+            <InternalMatch v-if="this.tabContent2==2"></InternalMatch>
+            <capplicationInformationDetail v-if="this.tabContent2==3"></capplicationInformationDetail>
+            <cborrowerInformationDetail v-if="this.tabContent2==4"></cborrowerInformationDetail>
+            <PhoneCredit v-if="this.tabContent2==5"></PhoneCredit>
+            <cCreditForm v-if="this.tabContent2==6"></cCreditForm>
+            <creditInvestigation v-if="this.tabContent2==7"></creditInvestigation>
             <!-- 反欺诈结论 空白 -->
-            <!-- <CreditForm v-if=" this.tabContent2==8"></CreditForm> -->
-            <!-- 信审审批 空白 -->
-            <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>
+            <cAntiConclution v-if="this.tabContent2==8"></cAntiConclution>
+            <FinanceInformation v-if="this.tabContent2==9"> </FinanceInformation>
+            <!-- 流程轨迹 -->
+            <workbench v-if="this.tabContent2==10"></workbench>
+            <ApprovalConclusion v-if="this.tabContent2==11"> </ApprovalConclusion>
           </div>
         </div>
       </div>
@@ -108,14 +109,14 @@
         <div class="AudioVisual_wrap_compare_right ">
           <!-- 搜索框 -->
           <p>客户名称：
-            <el-select v-model="value" placeholder="请选择">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
+            <el-input v-model="AlertSearch" placeholder="请输入内容" :disabled="true" style="display:inline;"></el-input>
+            <el-button type="primary" @click="compareProps">
+              <i class="el-icon-search" style="fontSize:16px"></i>
+            </el-button>
           </p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <AudioVisualLeft></AudioVisualLeft>
+            <AudioVisualLeft ref="audioChild" v-on:inputInf="inputInner"></AudioVisualLeft>
           </div>
         </div>
       </div>
@@ -125,35 +126,29 @@
 
 </template>
 <script>
+  import workbench from "./workbench"
+
   import myHead from "../header.vue"
   // 编辑
   import AudioVisual from "./detailComponent/AudioVisual";
   import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
-
-  import remark from "./detailComponent/remark";
-  import InternalMatch from "./InternalMatch";
-  import applicationInformation from "./detailComponent/applicationInformation";
-  import borrowerInformation from "./detailComponent/borrowerInformation";
-  import PhoneCredit from "./PhoneCredit";
-  import CreditForm from "./detailComponent/CreditForm";
-  import creditInvestigation from "./detailComponent/creditInvestigation"; //实地征信
-  // import s from "./detailComponent/remark";
-  // 反欺诈结论 写此处
-  // 信审审批写此处
-  import CreditApproval from "./CreditApproval";
   // 查询
-  import cCreditForm from "./checkComponent/cCreditForm";
-  import cFinanceInformation from "./checkComponent/FinanceInformation";
+  import cCreditForm from "./checkComponent/cCreditForm"; //信审表 
+  import cAntiConclution from "./checkComponent/cAntiConclution"; //反欺诈结论 
+  // InternalMatch 内部匹配
+  // PhoneCredit  电话征信
+  import creditInvestigation from "./detailComponent/creditInvestigation"; //实地征信 
+  import FinanceInformation from "./checkComponent/FinanceInformation"; // 财务信息
+  import ApprovalConclusion from "./checkComponent/ApprovalConclusion"; // 审批 结论轨迹
   import cremarkDetail from "./checkComponent/remarkDetail"; //备注信息
   import cborrowerInformationDetail from "./checkComponent/borrowerInformationDetail"; //借款人资料
   import capplicationInformationDetail from "./checkComponent/applicationInformationDetail"; //申请信息
-
-
-
   export default {
     data() {
       return {
-        customInf: [],// 进件人信息
+        // 进件人信息
+        customInf: [], //列表详情页local字段
+        customInf1: [], //申请信息页 lcoal字段
         // 对比按钮弹出层  下拉框
         options: [{
           value: '选项1',
@@ -163,44 +158,63 @@
           label: '北京烤鸭'
         }],
         value: '',
+        // -------------------------------结束
         showHalfBtn: false, // 显示 分屏按钮
         CompareAlert: false, //对比按钮 弹出层
         title: "",
+        // activeName: 'second', //---------右侧tab切换用
         isShow: false,
         flexible: true,
         tabContent1: 0,
-        tabContent2: 0, // ----------- tab1 用
+        tabContent2: 3, // ----------- tab1 用
         tabActiveInd1: 0, // tab1 点击时候选中的下标
-        tabActiveInd2: 0,
-        items1: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "信审审批", "流程轨迹"],
-        items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "信审审批"],
+        tabActiveInd2: 3, // 点击tab1 时  tab2初始下表
+        items1: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "财务信息", "流程轨迹", "审批结论轨迹"],
+        items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "财务信息", "流程轨迹", "审批结论轨迹"],
         tab1Index: 0, // tab1 激活样式的时用的下表
-        tab2Index: 0, // 不是for循环，获取不到index时候的tab切换（ data部分 ）------tab 2 用
+        tab2Index: 3, // 不是for循环，获取不到index时候的tab切换（ data部分 ）------tab 2 用
         // 不是for循环，获取不到index时候的tab切换（ data部分 ）------tab 2 用
-        flag1: [true, true, true, true, true, true, true, true, true, true, true], //  ---------------------------------------------------- tab1用
-        flag2: [true, true, true, true, true, true, true, true, true, true], //  ---------------------------------------------------- tab2用        
-        AlertSearch: '', // 对比弹出层 客户名称：搜索框
+        flag1: [true, true, true, false, true, true, true, true, true, true, true, true], //  ---------------------------------------------------- tab1用
+        flag2: [true, true, true, true, true, true, true, true, true, true, true, true], //  ---------------------------------------------------- tab2用        
+        AlertSearch: "", // 对比弹出层 客户名称：搜索框
         AlertSearchCondition: [{
           value: '选项1',
-          label: '黄金糕'
+          label: '最近时间原则排列'
         }, {
           value: '选项2',
-          label: '双皮奶'
+          label: '内匹客户姓名+本人进件'
         }, {
           value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
+          label: '内匹客户姓名'
         }],
       }
     },
     methods: {
-      aaa() {
-        console.log("aaa")
-        console.log(this.$refs.tabOne[0].className)
-        this.$refs.tabOne[3].className = "tabAct";
-        // this.$refs.tabOne.className="tabAct"
+      // aaa() {
+      //   console.log("aaa")
+      //   console.log(this.$refs.tabOne[0].className)
+      //   this.$refs.tabOne[3].className = "tabAct";
+      //   // this.$refs.tabOne.className="tabAct"
+      // },
+
+      // 触发子组件方法
+      compareProps() {
+        console.log("compareProps")
+        // console.log(this.$refs.AlertSearchDiv)
+        // this.AlertSearch=true;
+        this.$refs.audioChild.personalNunPerson()
+      },
+      // 对比弹出层change事件
+      // AlertSearchChange(){
+      //   // console.log(this.AlertSearch)
+      //   this.a();
+      //   console.log(this.a())
+      // },
+      //子组件传回客户名称，进件编号
+      inputInner(a, b) {
+        console.log("inputInner")
+        console.log(a + b)
+        this.AlertSearch = a + " " + b;
       },
       // 对比按钮
       compBtnS() {
@@ -226,8 +240,8 @@
       rightMovingBtn() {
         console.log("右滑动");
         console.log(this.$refs.right_tab_ul.style.left)
-        if (parseFloat(this.$refs.right_tab_ul.style.left) <= -500) {
-          this.$refs.right_tab_ul.style.left = "-500px";
+        if (parseFloat(this.$refs.right_tab_ul.style.left) <= -650) {
+          this.$refs.right_tab_ul.style.left = "-680px";
         } else {
           this.$refs.right_tab_ul.style.left = parseFloat(this.$refs.right_tab_ul.style.left) - 50 + "px";
         }
@@ -252,7 +266,6 @@
       },
       DblScreen() {
         this.showHalfBtn = false;
-        // this.FullScreenlShow = true;
         this.$refs.rLeft.style.display = "block";
         this.$refs.rRight.style.width = "50%";
       },
@@ -287,14 +300,27 @@
         this.$refs.tabOne[this.tabActiveInd1].className = "tab1Act"; //  tab1 之前激活样式赋值回去 
         if (ind != 0) { // 点击影音资料的时候，两边不置灰，影音资料部分可点击
           console.log("-----！= ---tab2")
+          // this.$refs.tabOne[ind].className= "setGray";// tab1 对应css 样式标灰
           this.flag1[ind] = false; // tab1 对应click 事件不可用
         }
       }
     },
     mounted() {
+      console.log("分屏");
+      //  this.customInf = JSON.parse(localStorage.getItem("taskInWaitting"));
+      this.customInf1 = JSON.parse(localStorage.getItem("applicationInformationDetail"));
+
+
+      console.log("2")
+      console.log(this.customInf1)
+
       this.title = "影音资料";
-      console.log(this.$route.query);
-      this.customInf = this.$route.query;
+      // console.log(this.$route.query);
+
+      // this.customInf = this.$route.query;
+      this.customInf = JSON.parse(localStorage.getItem("taskInWaitting"));
+
+      console.log("3")
       console.log(this.customInf);
 
       // console.log(this.$route.query.row.id) //接参数   
@@ -308,25 +334,21 @@
       // });
     },
     components: {
+      workbench,
       myHead,
       // 编辑
       AudioVisual,
-      remark,
-      InternalMatch,
-      applicationInformation,
-      borrowerInformation,
-      PhoneCredit,
-      CreditForm,
-      creditInvestigation,
-      // 信审审批
-      CreditApproval,
       // 查询
       cCreditForm,
       AudioVisualLeft,
       cremarkDetail, //
-      cFinanceInformation,
       cborrowerInformationDetail,
-      capplicationInformationDetail
+      capplicationInformationDetail,
+      creditInvestigation, //实地征信
+      cAntiConclution, //反欺诈
+      FinanceInformation, //财务信息
+      ApprovalConclusion, // 审批 结论轨迹
+      //  流程轨迹
     }
   }
 
@@ -389,8 +411,9 @@
     left: 0;
     top: 0;
   }
+  /*-------------------------------- */
 
-  .SplitScreen_content {
+  .MatchingInf .SplitScreen_content {
     border: 1px solid #0077ff;
     height: calc(100% - 70px);
     overflow: auto;
@@ -410,8 +433,9 @@
     display: inline-block;
     letter-spacing: 0.1px;
     font-size: 14px;
-    margin-right: 40px;
+    margin-right: 35px;
   }
+
   .PerDtl span:nth-of-type(7) {
     width: 202px;
   }
@@ -424,14 +448,16 @@
     z-index: 1;
   }
   /* 左右分屏 */
+
   .SplitScreen_wrap {
     width: 100%;
     height: calc( 100% - 33px);
   }
-  .left,
-  .right,
-  .AudioVisual_wrap_compare_left,
-  .AudioVisual_wrap_compare_right {
+
+  .MatchingInf .left,
+  .MatchingInf .right,
+  .MatchingInf .AudioVisual_wrap_compare_left,
+  .MatchingInf .AudioVisual_wrap_compare_right {
     width: calc(50% - 2px);
     height: 100%;
     overflow: auto;
@@ -442,48 +468,47 @@
     position: relative;
   }
 
-  .left,
-  .AudioVisual_wrap_compare_left {
+  .MatchingInf .left,
+  .MatchingInf .AudioVisual_wrap_compare_left {
     margin-right: 2px;
   }
   /* 左屏 */
   /* 左侧列表  影音资料等 ul 外包   流 */
-  .left .Left_ul {
-    width: 110px;
+
+  .MatchingInf .left .Left_ul {
+    width: 130px;
     background: rgba(31, 45, 61, 0.59);
     box-shadow: 0 5px 20px 0 #475669;
     position: fixed;
-    left: -110px;
+    left: -130px;
     top: 165px;
     z-index: 10;
     padding-top: 24px;
   }
 
-  .left .Left_ul li {
+  .MatchingInf .left .Left_ul li {
     font-size: 15px;
     letter-spacing: 0.1px;
     height: 21px;
     line-height: 12px;
     padding: 0 0 30px 20px;
   }
-  .left .Left_ul li:hover,
-    {
-    cursor: default;
-  }
-  .Right_tab_ul_wrap ul li:hover {
+
+.MatchingInf .left .Left_ul li:hover,
+  .MatchingInf .Right_tab_ul_wrap ul li:hover {
     cursor: pointer;
   }
   /* 左侧详情 div   流 */
 
-  .Left_detail_div {
+  .MatchingInf .Left_detail_div {
     height: 100%;
   }
   /* 左侧详情 p标签   流-css */
 
-  .Left_right_Title,
-  .right .Right_tab_title_div,
-  .AudioVisual_wrap_compare_left p,
-  .AudioVisual_wrap_compare_right p {
+  .MatchingInf .Left_right_Title,
+  .MatchingInf .right .Right_tab_title_div,
+  .MatchingInf .AudioVisual_wrap_compare_left p,
+  .MatchingInf .AudioVisual_wrap_compare_right p {
     font-size: 16px;
     text-align: center;
     background: rgba(0, 119, 255, 0.75);
@@ -494,26 +519,28 @@
     position: relative;
   }
 
-  .AudioVisual_wrap_compare_right p {
+  .MatchingInf .AudioVisual_wrap_compare_right p {
     text-align: right;
     padding-right: 40px;
   }
   /* 左侧详情 content div 内容   流-css */
 
-  .Left_right_BigImg {
+  .MatchingInf .Left_right_BigImg {
     background: white;
     height: calc( 100% - 48px);
     overflow: auto;
   }
   /* 右屏 */
   /* 右侧tab切换头外的ul   流 */
-.Right_tab_ul_wrap {
+
+  .MatchingInf .Right_tab_ul_wrap {
     overflow: hidden;
-    width:calc( 100% - 100px);
+    width: calc( 100% - 100px);
     margin-left: 50px;
   }
+
   .Right_tab_ul_wrap ul {
-  width: 1061px;
+    width: 1310px;
     height: 48px;
     position: relative;
     text-align: left;
@@ -521,7 +548,7 @@
   }
 
   .Right_tab_ul_wrap ul li {
-     display: inline-block;
+    display: inline-block;
     margin-right: 40px;
     letter-spacing: 0.11px;
     height: 38px;
@@ -533,23 +560,25 @@
     overflow: auto;
   }
   /* 右侧tab切换头 左右滑动图标  流  */
-.pre_next_btn_wrap{
-position: absolute;
+
+  .MatchingInf .pre_next_btn_wrap {
+    position: absolute;
     z-index: 2;
     width: 25px;
-}
-  .pre_next_btn_wrap:nth-of-type(1) {
+  }
+
+  .MatchingInf .pre_next_btn_wrap:nth-of-type(1) {
     left: 10px;
   }
-  .pre_next_btn_wrap:nth-of-type(2) {
+
+  .MatchingInf .pre_next_btn_wrap:nth-of-type(2) {
     right: 10px;
   }
   /*  对比弹出层 外包 div 流 */
 
-  .AudioVisual_wrap_compare {
+  .MatchingInf .AudioVisual_wrap_compare {
     position: absolute;
     top: 117px;
-    background: white;
     width: calc( 100% - 60px);
     height: calc( 100% - 130px);
     z-index: 22;
@@ -557,10 +586,9 @@ position: absolute;
   }
   /* 弹出层 - 两侧组件 content  流 */
 
-  .AlertContent {
+  .MatchingInf .AlertContent {
     height: calc( 100% - 48px);
     overflow: auto;
-
   }
 
 </style>

@@ -1,28 +1,28 @@
 <template>
   <div class="FinanceInformation">
     <!-- 账务信息 -->
-    <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="num" label="单据编号" >
+    <el-table :data="FinanceInf" style="width: 100%">
+      <el-table-column prop="fhReceiptNo" label="单据编号" >
       </el-table-column>
-      <el-table-column prop="account" label="借款账号" >
+      <el-table-column prop="loanAcNo" label="借款账号" >
       </el-table-column>
-      <el-table-column prop="userName" label="客户姓名" width="100">
+      <el-table-column prop="custName" label="客户姓名" width="100">
       </el-table-column>
-      <el-table-column prop="id" label="证件号码" width="180">
+      <el-table-column prop="certCode" label="证件号码" width="180">
       </el-table-column>
-      <el-table-column prop="productName" label="产品名称">
+      <el-table-column prop="proName" label="产品名称">
       </el-table-column>
-      <el-table-column prop="preLoanD" label="预放款日期">
+      <el-table-column prop="preLoanDate" label="预放款日期">
       </el-table-column>
-      <el-table-column prop="loanD" label="放款日期">
+      <el-table-column prop="loanDate" label="放款日期">
       </el-table-column>
-      <el-table-column prop="sum" label="放款金额">
+      <el-table-column prop="loanReceiptPayAmt" label="放款金额">
       </el-table-column>
-      <el-table-column prop="city" label="开户行所在城市代码" width="150">
+      <el-table-column prop="bankCityCode" label="开户行所在城市代码" width="150">
       </el-table-column>
-      <el-table-column prop="bank" label="开户行代码">
+      <el-table-column prop="bankCityCode" label="开户行代码">
       </el-table-column>
-      <el-table-column prop="bankName" label="开户行名称">
+      <el-table-column prop="bankCityCode" label="开户行名称">
       </el-table-column>
     </el-table>
   </div>
@@ -32,30 +32,17 @@
   export default {
     data() {
       return {
-        tableData: [{
-          num: '86575765',
-          account: '564346',
-          userName: 'nick',
-          id:"08e88893798233423",
-          productName:'NuoYuan',
-          preLoanD:'2091',
-          loanD:'2014',
-          sum:'375056',
-          city:'航海',
-          bank:'code工行',
-          bankName:'工行',
-        }]
+        FinanceInf:[],
       }
     },
     mounted(){
-    //      this.post("/productArchive/getProductArchiveChildList", {
-    //     applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
-    //     pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
-    //   }).then(res => {
-    //     console.log(res);
-    //     // console.log(res.data)
-    //     // this.ListParent=res.data
-    //   });
+         this.post("/creAccountInfo/getAccountInfo", {
+        applyId: "24667563-2ca2-4da6-8e02-4bf7d7c839b6",
+      }).then(res => {
+        console.log(res);
+        // console.log(res.data)
+        this.FinanceInf=res.data
+      });
     }
   }
 

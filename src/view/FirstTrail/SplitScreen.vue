@@ -8,12 +8,12 @@
         <span> 进件编号: {{customInf.applySubNo}}</span>
         <span> 证件号码: {{customInf.certCode}}</span>
         <span> 进件机构: {{customInf.appOrgCode}}</span>
-<!-- <button @click="count++"> count++</button>
-<span>{{count}}</span> -->
-        <span> 门店成立时间: {{customInf.applySubNo}}</span>
-        <span> 业务员入职时间： {{customInf.applySubNo}}</span>
+        <span> 门店成立时间: {{customInf1.appOrgRegisterDate}}</span>
+        <span> 业务员入职时间： {{customInf1.salPerEmployDate}}</span>
         <!-- <span> 行政区域进件(或非行政区域进件)</span> -->
-        <span> 行政区域进件 / 非行政区域进件</span>
+        <!-- <span> 行政区域进件 / 非行政区域进件{{customInf1.adminIntroduce}}</span> -->
+        <span>{{customInf1.adminIntroduce}}</span>
+        
       </p>
       <div class="SplitScreen_wrap">
         <!-- 左侧分屏部分 -->
@@ -135,7 +135,8 @@
           <div class="AlertContent">
             <!-- <AudioVisualLeft :AlertSearch="AlertSearch" ></AudioVisualLeft> -->
             <!-- <aut :AlertSearchProps="AlertSearch" @click.native="a" ref="audioChild"></aut> -->
-            <aut ref="audioChild"  v-on:inputInf="inputInner"></aut>
+            <!-- <aut ref="audioChild"  v-on:inputInf="inputInner"></aut> -->
+            <AudioVisualLeft ref="audioChild" v-on:inputInf="inputInner"></AudioVisualLeft>
             
           </div>
         </div>
@@ -176,10 +177,9 @@
   export default {
     data() {
       return {
-// count:0,
-        
         // 进件人信息
-        customInf: [],
+        customInf: [],//列表详情页local字段
+        customInf1:[],//申请信息页 lcoal字段
         // 对比按钮弹出层  下拉框
         options: [{
           value: '选项1',
@@ -200,7 +200,7 @@
         tabContent1: 0,
         tabContent2: 3, // ----------- tab1 用
         tabActiveInd1: 0, // tab1 点击时候选中的下标
-        tabActiveInd2: 0,//???????????
+        tabActiveInd2: 3,// 点击tab1 时  tab2初始下表
         items1: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "信审审批", "流程轨迹"],
         items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "信审审批"],
         // rightList: false, //右键菜单 默认不显示    ---------tab1 用
@@ -231,36 +231,35 @@
       }
     },
     methods: {
-      aaa() {
-        console.log("aaa")
-        console.log(this.$refs.tabOne[0].className)
-        this.$refs.tabOne[3].className = "tabAct";
-        // this.$refs.tabOne.className="tabAct"
-      },
+      // aaa() {
+      //   console.log("aaa")
+      //   console.log(this.$refs.tabOne[0].className)
+      //   this.$refs.tabOne[3].className = "tabAct";
+      //   // this.$refs.tabOne.className="tabAct"
+      // },
      
       // 触发子组件方法
       compareProps(){
         console.log("compareProps")
         // console.log(this.$refs.AlertSearchDiv)
         // this.AlertSearch=true;
-        this.$refs.audioChild.a()
+        this.$refs.audioChild.personalNunPerson()
       },
       // 对比弹出层change事件
-      AlertSearchChange(){
-        // console.log(this.AlertSearch)
-        this.a();
-        console.log(this.a())
-      },
+      // AlertSearchChange(){
+      //   // console.log(this.AlertSearch)
+      //   this.a();
+      //   console.log(this.a())
+      // },
        //子组件传回客户名称，进件编号
       inputInner(a,b){
         console.log("inputInner")
         console.log(a+b)
-        this.AlertSearch=a+""+b;
+        this.AlertSearch=a+" "+b;
       },
       // 对比按钮
       compBtnS() {
         console.log("我是傅祖建")
-
         this.CompareAlert = true;
       },
       // 弹出层关闭按钮
@@ -348,17 +347,23 @@
         }
       }
     },
-    // update(){
-    //   console.log(this.count)
-    // },
     mounted() {
-      this.title = "影音资料";
-// console.log(this.count)
       console.log("分屏");
+      //  this.customInf = JSON.parse(localStorage.getItem("taskInWaitting"));
+       this.customInf1 = JSON.parse(localStorage.getItem("applicationInformationDetail"));
+       
+      
+      console.log( "2")            
+      console.log( this.customInf1)
 
-      console.log(this.$route.query);
-      this.customInf = this.$route.query;
-      // console.log(this.customInf);
+      this.title = "影音资料";
+      // console.log(this.$route.query);
+
+      // this.customInf = this.$route.query;
+       this.customInf = JSON.parse(localStorage.getItem("taskInWaitting"));
+      
+       console.log( "3")            
+      console.log(this.customInf);
 
       // console.log(this.$route.query.row.id) //接参数   
       //  this.post("/workFlowTaskQuery/getTaskProfile", {
@@ -490,7 +495,7 @@
     display: inline-block;
     letter-spacing: 0.1px;
     font-size: 14px;
-    margin-right: 40px;
+    margin-right: 35px;
   }
   /* 
   .PerDtl span:nth-of-type(1) {
@@ -598,11 +603,7 @@ margin-bottom: 18px;
   /* .left .Left_ul li:nth-of-type(1) {
     color: white;
   } */
-
-  .left .Left_ul li:hover,
-    {
-    cursor: default;
-  }
+.left .Left_ul li:hover,
   .Right_tab_ul_wrap ul li:hover {
     cursor: pointer;
   }

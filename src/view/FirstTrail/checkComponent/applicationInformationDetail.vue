@@ -803,16 +803,21 @@
 				/*联系人信息*/
 				accepCusRelations:[],
 				
+				taskInWaitting:'',
+
+				applyId:'',
 			};
 		},
 		created(){
 			//一进入页面就发送请求
+			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+			this.applyId=this.taskInWaitting.applyId;
 			this.request();
 		},
 		methods:{
 			request(){
 	    		this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-		        'id':'a8d02f0d-0718-4d91-b6bb-14f3b24036a7'
+		        'id':this.applyId
 		      }).then(res => {
 		      	this.datas=res.data;
 		        /*console.log(res);*/
@@ -859,7 +864,11 @@
 		        	proName:this.datas.proName,
 		        	loanTerm:this.accepApplyLoan.loanTerm,
 		        	applyMainNo:this.datas.applyMainNo,
-		        	applySubNo:this.datas.applySubNo
+		        	applySubNo:this.datas.applySubNo,
+		        	salPerEmployDate:this.datas.salPerEmployDate,
+		        	appOrgRegisterDate:this.datas.appOrgRegisterDate,
+		        	adminIntroduce:this.datas.adminIntroduce,
+		        	applyId:this.datas.id
 		        };
 		        /*console.log(this.datas);*/
 		        localStorage.setItem("applicationInformationDetail",JSON.stringify(query));

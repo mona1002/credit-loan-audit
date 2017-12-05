@@ -5,13 +5,12 @@
       <img class="logo" src="/static/images/logo.png">
     </div> 
     <!-- 导航内容 -->
-    <!-- <p v-for="(item, n) in datas">
-      <p>{{n}}</p>
-    </p> -->
+    <div class="navContain">
       <el-menu 
         router 
         unique-opened 
         ref="navbar"
+        active-text-color="#ffd04b"
         :default-active="onRoutes"
         @select="selectMenu">
         <nav-item 
@@ -20,16 +19,8 @@
             :navIndex="String(n)" 
             :key="n">
         </nav-item>
-    </el-menu>
-    
-
-
-
-
-
-
-
-
+      </el-menu>
+    </div>
 
   </div>
 </template>
@@ -40,10 +31,6 @@ import NavItem from '@/view/navItem'
     data() {
       return {
         datas:[], 
-        activeIndex:'1',//当前激活菜单的 index
-        aaa:true,
-        bbbb:false,
-        cccc:false,
       };
     },
     created(){
@@ -54,32 +41,11 @@ import NavItem from '@/view/navItem'
       request(){
           this.post('/smUser/getResTree').then(res => {
               this.datas = res.data;
-              console.log(this.datas);
-              for(var i=0;i<this.datas.length;i++){
-                for(var j=0;j<this.datas[i].children.length;j++){
-                  if(this.datas[i].children[j].children.length==0){
-                    this.bbbb=true;
-                    this.cccc=false;
-                  }else{
-                    this.bbbb=false;
-                    this.cccc=true;
-                  }
-                }
-                
-              }
-              
+              //console.log(this.datas);  
           })
         },
-      /*handleSelect(key, keyPath) {
-        console.log(key, keyPath);//index: 选中菜单项的 indexPath: 选中菜单项的 index path
-      },
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);//展开指定的 sub-menu  index: 需要打开的 sub-menu 的 index
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);//收起指定的 sub-menu  index: 需要收起的 sub-menu 的 index
-      }*/
       selectMenu(index, indexPath){
+        console.log(indexPath);
             /**
              * 在选择父级菜单时自动关闭其下所有子菜单
              * 选择时获取点击菜单的父级index，并计算得到该index在已打开菜单中的索引值，
@@ -87,8 +53,10 @@ import NavItem from '@/view/navItem'
              */
             // 获取当前打开的所有菜单
             let openMenu = this.$refs.navbar.openedMenus.concat([])
+            console.log(openMenu);
             // 获取点击菜单的父级index，如果当前点击的是根节点，则直接关闭所有打开菜单
             let nowMenuPath = indexPath.length > 1 ? indexPath[indexPath.length-2] : ""
+            console.log(nowMenuPath);
             if(nowMenuPath){
                 // 获取父级index在数组中索引，关闭其后所有的菜单
                 let menuIndex = openMenu.indexOf(nowMenuPath)
@@ -100,11 +68,10 @@ import NavItem from '@/view/navItem'
             })
         },
 
-
     },
     computed: {
         onRoutes(){
-            return this.$route.path
+            return this.$route.resUrl
         },
     },
     components: {
@@ -141,4 +108,17 @@ import NavItem from '@/view/navItem'
     margin:15px 0 21px 28px;
   }
   /* 导航内容 */
+  .mheader .navContain{
+    width: calc( 100% - 116px );
+    float: left;
+    height: 70px;
+  }
+  .mheader .navContain .el-menu div{
+    width: auto;
+    float: left;
+    height: 70px;
+  }
+  .mheader .navContain .el-menu div:nth-of-type(1){
+    margin-left: 128px;
+  }
 </style>

@@ -4,7 +4,7 @@
 			<p titleText>备注信息</p>
 		</div>
 		<div class="taskWtable">
-			<el-table :data="datas" height="450" style="width: 100%" 
+			<el-table :data="datas" height="400" style="width: 100%" 
 			:default-sort = "{prop: 'date', order: 'descending'}"><!-- order两个参数，顺序和倒序: ascending, descending -->
 			    <el-table-column
 			      type="index"
@@ -15,24 +15,24 @@
 			    <el-table-column
 			      prop="remarkTypeTxt"
 			      label="备注类型"
-			      min-width="130"
+			      min-width="90"
 			      >
 			    </el-table-column>
 			    <el-table-column
 			      prop="remarker"
 			      label="备注人"
-			      min-width="150">
+			      min-width="130">
 			    </el-table-column>
 			    <el-table-column
 			      prop="remarkTime"
 			      label="备注时间"
 			      sortable
-			      min-width="200">
+			      min-width="140">
 			    </el-table-column>
 			    <el-table-column
 			      prop="remark"
 			      label="备注"
-			      min-width="300"
+			      min-width="200"
 			      show-overflow-tooltip>
 			    </el-table-column>
 		    </el-table>

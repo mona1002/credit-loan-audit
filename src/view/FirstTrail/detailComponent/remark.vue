@@ -37,25 +37,25 @@
 			    <el-table-column
 			      prop="remarkTypeTxt"
 			      label="备注类型"
-			      min-width="130"
+			      min-width="90"
 			      >
 			    </el-table-column>
 			    <el-table-column
 			      prop="remarker"
 			      label="备注人"
-			      min-width="150">
+			      min-width="130">
 			    </el-table-column>
 			    <el-table-column
 			      prop="remarkTime"
 			      label="备注时间"
-			      min-width="200"
+			      min-width="140"
 			      sortable>
 			    </el-table-column>
 			    <el-table-column
 			      prop="remark"
 			      label="备注"
 			      show-overflow-tooltip
-			      min-width="300">
+			      min-width="200">
 			    </el-table-column>
 			</el-table>
 		</div>
@@ -123,13 +123,22 @@
 		        changeRemarks:'',
 		        deletLayer:false,
 		        taskInWaitting:'',
+		        applyId:'',
+		        userInf:'',
+		        remarker:'',
 			}
 		},
 		created(){
 			//一进入页面就发送请求
+			//获取applyId
 			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+			this.applyId=this.taskInWaitting.applyId;
+			//获取当前登陆人的用户名
+			this.userInf=JSON.parse(localStorage.getItem('userInf'));
+			this.remarker=this.userInf.userCode;
+			console.log(this.remarker);
 			this.request(this.taskInWaitting.applyId);
-			console.log(this.taskInWaitting.applyId);
+			//console.log(this.taskInWaitting.applyId);
 		},
 		methods:{
 			request(param){
@@ -211,15 +220,15 @@
 				this.ok=false;
 				document.getElementsByTagName('body')[0].style.overflow='';
 				this.post('/applyRemark/addApplyRemark',{
-					applyId:'00542',
-					remarkType:'01',
+					applyId:this.applyId,
+					remarkType:'03',
 					remark:this.remark,
-					remarker:'remark'
+					remarker:this.remarker
 				})
 				.then(res => {
 		   			console.log(res);
 		   			 if(res.statusCode==200){
-						this.request();
+						this.request(this.applyId);
 					}
 		          });
 				/*this.k+=1;
@@ -243,7 +252,7 @@
 				})
 				.then(res => {
 					if(res.statusCode==200){
-						this.request();
+						this.request(this.applyId);
 					}
 		   			/*console.log(this.changeRemarks);
 		   			for(var i=0;i<this.tableData.length;i++){
@@ -264,7 +273,7 @@
 				        id:this.isChecked
 				      }).then(res => {
 				        if(res.statusCode==200){
-							this.request();
+							this.request(this.applyId);
 						}
 				      });
 			},
@@ -456,12 +465,14 @@
 	background-color: #fff;
 	height: 100px;
 	padding: 10px 10px;
+	margin-bottom: 5px;
+	width: 97%;
 }
 .deletLayer .layerbox .buttonDiv{
 	/* float: left; */
 	width: 100%;
 	height: 50px;
-	margin-top:10px;
+	/* margin-top:10px; */
 }
 .deletLayer .layerbox .buttonDiv button{
 	float: left;
