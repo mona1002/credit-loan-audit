@@ -22,6 +22,7 @@ height: 40px;
 .ApprovalConclusion .el-table .cell 
   {
   line-height: 23px;
+  text-align: center;
 }
 .FinanceInformation .el-table,
 .ApprovalConclusion .el-table
@@ -382,9 +383,11 @@ position: relative
 }
 /* 影音列表- 对比弹出层-select-搜索框-wrap */
 .SplitScreen .AudioVisual_wrap_compare_right .el-select>.el-input,
-.SplitScreen .AudioVisual_wrap_compare_right .el-input__inner {
+.SplitScreen .AudioVisual_wrap_compare_right .el-input__inner,
+.MatchingInf .AudioVisual_wrap_compare_right .el-select>.el-input,
+.MatchingInf .AudioVisual_wrap_compare_right .el-input__inner {
   display: inline-block;
-  width:200px;
+  width:260px;
   height:35px
 }
 /* 借款人资料表格内容居中 */

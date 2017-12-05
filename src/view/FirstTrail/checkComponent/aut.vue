@@ -76,7 +76,6 @@
       <!-- <img src="http://img.1ppt.com/uploads/allimg/1606/4_160609151925_1.jpg"> -->
       <img src="../../../../static/images/0865C99F-2D8D-417E-A39D-1644063E5A84@1x.png" class="icon_pre " @click="pre">
       <img src="../../../../static/images/C20F2D59-5CCD-4C61-B12F-874344861071@1x.png" class="icon_next" @click="next">
-
       <div class="BtnIcons">
         <!-- <i class="el-icon-arrow-left position_and_size icon_pre" @click="pre"></i>
       <i class="el-icon-arrow-right position_and_size icon_next" @click="next"></i>
@@ -89,7 +88,6 @@
         <img src="../../../../static/images/daf.png" @click="AclockWise ">
         <img src="../../../../static/images/dasf.png" @click="clockWise ">
       </div>
-
       <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val" v-if="key==smallPicInd"
       />
       <!-- <p>  {{AlertSearchProps}}</p> -->
@@ -114,7 +112,8 @@
               </el-table-column>
             </el-table> -->
             <!--  @dblclick="getParentList(currentRow.matchApplyId)" -->
-            <el-table ref="singleTable" :data="personal" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange" style="width: 100%">
+            <el-table ref="singleTable" :data="personal" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)"
+              @current-change="handleCurrentChange" style="width: 100%">
               <el-table-column property="matchApplyCustName" label="客户名称">
               </el-table-column>
               <el-table-column property="matchApplySubNo" label="进件编号">
@@ -129,7 +128,8 @@
         <!-- 折叠2 -->
         <el-collapse-item title="内匹客户进件" name="2">
           <div>
-            <el-table ref="singleTable" :data="others" height="250" border  @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange" style="width: 100%">
+            <el-table ref="singleTable" :data="others" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)"
+              @current-change="handleCurrentChange" style="width: 100%">
               <el-table-column property="matchApplyCustName" label="客户名称">
               </el-table-column>
               <el-table-column property="matchApplySubNo" label="进件编号">
@@ -149,9 +149,6 @@
         </el-collapse-item>
 
       </el-collapse>
-
-
-
     </div>
     <!-- ================================= 结束================================= -->
     <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
@@ -202,8 +199,8 @@
         personal: [], // 匹配查询-个人
         others: [], // 匹配查询-他人
         currentRow: null,
-        custName:'',//客户名称-input（disable）
-        custmatchApplySubNo:'',//客户进件编号-input（disable）
+        custName: '', //客户名称-input（disable）
+        custmatchApplySubNo: '', //客户进件编号-input（disable）
         // currentRowId:"",
       }
     },
@@ -219,20 +216,21 @@
         console.log(this.currentRow)
         // this.currentRowId=val.matchApplyId
         // console.log( this.currentRowId)
-// 双击 获取新数据
-//  console.log(id);
-//         this.post("/productArchive/getProductArchiveParentList", {
-//           // id:"bb30607c-b5aa-4915-9474-460e099a33e8",
-//           // applyId:this.applyId,
-//           applyId: id,
-//         }).then(res => {
-//           // console.log(res);
-//           // console.log(res.data)
-//           this.ListParent = res.data
-//           // console.log(this.ListParent[0].id )
-//         });
+        // 双击 获取新数据
+        //  console.log(id);
+        //         this.post("/productArchive/getProductArchiveParentList", {
+        //           // id:"bb30607c-b5aa-4915-9474-460e099a33e8",
+        //           // applyId:this.applyId,
+        //           applyId: id,
+        //         }).then(res => {
+        //           // console.log(res);
+        //           // console.log(res.data)
+        //           this.ListParent = res.data
+        //           // console.log(this.ListParent[0].id )
+        //         });
       },
-      a() {
+      // 父组件触发子组件事件--显示弹框，并请求数据展示
+      personalNunPerson() {
         console.log("子组件a")
         this.dataa = true;
         // 个人进件        
@@ -269,30 +267,25 @@
         });
       },
       getParentList(id) {
-          console.log("选中")
+        console.log("table选中-获取父节点")
         console.log(id);
         this.post("/productArchive/getProductArchiveParentList", {
           // id:"bb30607c-b5aa-4915-9474-460e099a33e8",
           // applyId:this.applyId,
-        applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
-          
-        //   applyId: id,
+          applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
+          //   applyId: id,
         }).then(res => {
           // console.log(res);
-        //   
           console.log("双击选中")
           console.log(res.data)
-          
-   this.ListParent = res.data;
-          
-          this.dataa=false;
-          this.custName=this.currentRow.matchApplyCustName;
-          this.custmatchApplySubNo=this.currentRow.matchApplySubNo;
-        this.$emit('inputInf',this.custName,this.custmatchApplySubNo)
-          
-        // this.$emit('inputInner',this.custName,this.custmatchApplySubNo)
-        //       console.log( this.custName)
-        //   console.log( this.custmatchApplySubNo)
+          this.ListParent = res.data;
+          this.dataa = false;
+          this.custName = this.currentRow.matchApplyCustName;
+          this.custmatchApplySubNo = this.currentRow.matchApplySubNo;
+          this.$emit('inputInf', this.custName, this.custmatchApplySubNo)
+          // this.$emit('inputInner',this.custName,this.custmatchApplySubNo)
+          //       console.log( this.custName)
+          //   console.log( this.custmatchApplySubNo)
           // console.log(this.ListParent[0].id )
         });
       },
@@ -300,12 +293,13 @@
         console.log("获取子节点");
         this.post("/productArchive/getProductArchiveChildList", {
           applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
-        //   pid: id,
+          //   pid: id,
           pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
         }).then(res => {
           // console.log(res);
           //   console.log(res.data)
           this.others = res.data;
+                    // this.ListDetails = res.data;  //auditVisualLeft  里面的写法
           console.log(this.others)
         });
       },
@@ -316,12 +310,10 @@
         console.log(this.imgPath)
         // this.$mount( ".AudioVisual" )
         this.$nextTick(function () {
-
           // this.$watch(function(){ return this.$refs.Big_pic_ref[0]},
           // function(newd){  console.log("333"+newd) }
           // )
           console.log(this.$refs.Big_pic_ref[0]);
-
           console.log(parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0]).height))
           console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
           console.log(typeof (getComputedStyle(this.$refs.Big_pic_ref[0], false).width))
@@ -346,8 +338,6 @@
       showList() { //左侧 li 列表
         this.showListDiv = true;
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 214px)";
-
-
         // this.$refs.hidDiv_ref=
         // this.$refs.AudioVisual_List_ref.style.left = "0";
         // this.$refs.AudioVisual_List_ref.style.width = "200px";
@@ -491,7 +481,6 @@
       compBtnShow() {
         console.log("对比按钮出发")
         console.log(this.SmallPicShow)
-
         // this.SmallPicShow=this.props[0];
         // console.log(this.SmallPicShow )
         this.$emit('CompareShow')

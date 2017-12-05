@@ -2,8 +2,11 @@
   <div class="CreditForm">
     <el-collapse v-model="activeNames" @change="handleChange">
       <!-- 上网查询信息 -->
-      <el-collapse-item title=" 上网查询信息" name="1">
-                <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+      <el-collapse-item name="1">
+        <template slot="title">
+          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+          <span class="headFont">上网查询信息</span>
+        </template>
         <div class="CreditForm_InternetInf">
           <ul class="CreditForm_InternetInf_ul_left">
             <li>
@@ -100,7 +103,11 @@
         </div>
       </el-collapse-item>
       <!-- 核实身份 -->
-      <el-collapse-item title=" 核实身份" name="2">
+      <el-collapse-item  name="2">
+         <template slot="title">
+          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+          <span class="headFont">核实身份</span>
+        </template>
         <div class="CreditForm_CheckId">
           <ul class="CreditForm_CheckId_ul_left">
             <li>
@@ -121,7 +128,11 @@
         </div>
       </el-collapse-item>
       <!-- 工作信息 -->
-      <el-collapse-item title=" 工作信息" name="3">
+      <el-collapse-item name="3">
+         <template slot="title">
+          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+          <span class="headFont">工作信息</span>
+        </template>
         <div class="CreditForm_WorkInfs">
           <ul class="CreditForm_WorkInfs_ul_left">
             <li>
@@ -186,7 +197,11 @@
         </div>
       </el-collapse-item>
       <!-- 私营企业信息 -->
-      <el-collapse-item title="私营企业信息" name="4">
+      <el-collapse-item name="4">
+         <template slot="title">
+          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+          <span class="headFont">私营企业信息</span>
+        </template>
         <div class="CreditForm_CompanyInfs">
           <ul class="CreditForm_CompanyInfs_ul_left">
             <li>
@@ -250,7 +265,11 @@
         </div>
       </el-collapse-item>
       <!-- 家庭信息 -->
-      <el-collapse-item title="家庭信息" name="5">
+      <el-collapse-item name="5">
+         <template slot="title">
+          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+          <span class="headFont">家庭信息</span>
+        </template>
         <div class="CreditForm_FamilyInf">
           <ul class="CreditForm_FamilyInf_ul_left">
             <li>
@@ -287,7 +306,11 @@
         </div>
       </el-collapse-item>
       <!-- 居住情况 -->
-      <el-collapse-item title="居住情况" name="6">
+      <el-collapse-item  name="6">
+         <template slot="title">
+          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+          <span class="headFont">居住情况</span>
+        </template>
         <div class="CreditForm_live">
           <ul class="CreditForm_live_ul_left">
             <li>
@@ -304,12 +327,16 @@
         </div>
       </el-collapse-item>
       <!-- 核对现住址 -->
-      <el-collapse-item title="核对现住址" name="7">
+      <el-collapse-item name="7">
+        <template slot="title">
+          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+          <span class="headFont">核对现住址</span>
+        </template>
         <div class="CreditForm_check_reside">
           <ul class="CreditForm_check_reside_ul_left">
             <li>
               <label class="check_reside__left_label">现住址：</label>
-                <span class="detail_inf oneline"> </span> {{this.FormData.aaddress}} </span>
+              <span class="detail_inf oneline"> </span> {{this.FormData.aaddress}} </span>
             </li>
             <li>
               <label class="check_reside__left_label">现住地址是否为常住地址 ：</label>
@@ -319,10 +346,14 @@
         </div>
       </el-collapse-item>
       <!-- 初审结论 -->
-      <el-collapse-item title="初审结论" name="8">
+      <el-collapse-item name="8">
+         <template slot="title">
+          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+          <span class="headFont">初审结论</span>
+        </template>
         <div class=" CreditForm_result">
           <p class="CreditForm_result_p_label">初审结果评价：</p>
-              <span class="detail_inf">{{this.FormData.oother}} </span>
+          <span class="detail_inf">{{this.FormData.oother}} </span>
           <!-- <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="oother">
           </el-input> -->
         </div>
@@ -339,8 +370,8 @@
     data() {
       return {
         activeNames: ['1', "2", "3", "4", "5", "6", "7", "8"], //折叠面板 默认显示下标
-        FormData:[],
- }
+        FormData: [],
+      }
     },
     methods: {
       handleChange(tab, event) {
@@ -386,13 +417,13 @@
       // });
 
       // 信审表 查询
-       this.post("/creauditInfo/queryCreauditInfoObj", {
-       applyId:"00542",
+      this.post("/creauditInfo/queryCreauditInfoObj", {
+        applyId: "00542",
         // applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886",
       }).then(res => {
         console.log(res);
         // console.log(res.data)
-        this.FormData=res.data;
+        this.FormData = res.data;
       })
     }
   }
@@ -401,11 +432,17 @@
 
 <style scoped>
   /* 公共 */
-.icon_hat{
-  position: absolute;
-  top:10px;
-  left: 23px
-}
+
+  .icon_hat {
+    position: absolute;
+    top: 15px;
+    left: 18px;
+  }
+
+  .headFont {
+    font-size: 16px;
+  }
+
   .oneline {
     width: 100vw;
   }
@@ -460,7 +497,6 @@
   .live_left_label,
   .live_right_label,
   /* .check_reside__left_label, */
-
   .CreditForm_result_p_label {
     display: inline-block;
     width: 50%;

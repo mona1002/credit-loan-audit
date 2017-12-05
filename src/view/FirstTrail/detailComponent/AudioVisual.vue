@@ -115,24 +115,16 @@
         console.log("获取图片");
         console.log(ind)
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
-        console.log(this.imgPath)
-        // this.$mount( ".AudioVisual" )
-        this.$nextTick(function () {
-          // this.$watch(function(){ return this.$refs.Big_pic_ref[0]},
-          // function(newd){  console.log("333"+newd) }
-          // )
-          console.log(this.$refs.Big_pic_ref[0]);
-          console.log(parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0]).height))
-          console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
-          console.log(typeof (getComputedStyle(this.$refs.Big_pic_ref[0], false).width))
-          // DOM 现在更新了
-          // `this` 绑定到当前实例
-          // this.doSomethingElse()
-        })
-        // console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).height)
-        // console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
-        // console.log(typeof( getComputedStyle(this.$refs.Big_pic_ref[0], false).width))
-        // console.log( this.imgPath)
+        // console.log(this.imgPath)
+        // this.$nextTick(function () {
+        //   console.log(this.$refs.Big_pic_ref[0]);
+        //   console.log(parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0]).height))
+        //   console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
+        //   console.log(typeof (getComputedStyle(this.$refs.Big_pic_ref[0], false).width))
+        //   // DOM 现在更新了
+        //   // `this` 绑定到当前实例
+        //   // this.doSomethingElse()
+        // })
       },
       hid() { //左侧 li 列表
         console.log("hid");
