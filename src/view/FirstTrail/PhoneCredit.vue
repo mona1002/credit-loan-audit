@@ -31,7 +31,7 @@
                   </el-table-column>
                   <el-table-column prop="sourceDes" label="来源">
                   </el-table-column>
-                  <el-table-column prop="phoneNumDes" label="电话号码">
+                  <el-table-column prop="phoneNum" label="电话号码">
                   </el-table-column>
                   <el-table-column prop="answerDes" label="接听情况">
                   </el-table-column>
@@ -54,25 +54,25 @@
         <el-main>
           <!-- 默认的新增表单 -->
           <!-- 住址电话 - 表单 -->
-          <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId"></AddressForm>
+          <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" @updateList="queryTelLogByPage"></AddressForm>
           <!-- 住址电话 - 历史 -->
-          <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :id="id" :phoneType="phoneType"></AddressHis>
+          <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :mobileData="mobileData"></AddressHis>
           <!-- 单位电话 - 表单 -->
-          <CompanyForm class="form-his" v-if="formShow && phoneType=='02'" :custName="custName" :phoneNum="phoneNum"></CompanyForm>
+          <CompanyForm class="form-his" v-if="formShow && phoneType=='02'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" @updateList="queryTelLogByPage"></CompanyForm>
           <!-- 单位电话 - 历史 -->
-          <CompanyHis class="form-his" v-if="hisShow && phoneType=='02'" :id="id" :phoneType="phoneType"></CompanyHis>
+          <CompanyHis class="form-his" v-if="hisShow && phoneType=='02'" :comData="comData"></CompanyHis>
           <!-- 家庭联系人 - 表单 -->
-          <FamilyForm class="form-his" v-if="formShow && phoneType=='03'" :custName="custName" :phoneNum="phoneNum"></FamilyForm>
+          <FamilyForm class="form-his" v-if="formShow && phoneType=='03'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" @updateList="queryTelLogByPage"></FamilyForm>
           <!-- 家庭联系人 - 历史 -->
-          <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :id="id" :phoneType="phoneType"></FamilyHis>
+          <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :familyData="familyData"></FamilyHis>
           <!-- 紧急联系人 - 表单 -->
-          <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum"></HurryForm>
+          <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" @updateList="queryTelLogByPage"></HurryForm>
           <!-- 紧急联系人 - 历史 -->
-          <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :id="id" :phoneType="phoneType"></HurryHis>
+          <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :hurryData="hurryData"></HurryHis>
           <!-- 工作证明人 - 表单 -->
-          <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum"></WorkForm>
+          <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" @updateList="queryTelLogByPage"></WorkForm>
           <!-- 工作证明人 - 历史 -->
-          <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :id="id" :phoneType="phoneType"></WorkHis>
+          <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="workData"></WorkHis>
           <!-- 子组件 -->
           <!-- <router-link to="/AddressForm/formTag='testtag'/id='123'/phoneType='01'">
             <el-button type="primary">住址电话</el-button>
@@ -256,11 +256,17 @@ export default {
       // 改造 , 通过 电话类型 , formShwo/hisShow 来控制所有的 表单/历史显示
       formShow: false,
       hisShow: false,
-      activeNames: ['1'], // 折叠默认展开的选项
+      activeNames: '', // 折叠默认展开的选项
       treeFlag: '', // 用来标志  电话树是否需要更新
       listFlag: '', // 用来标志  历史调查日志, 
       //是否需要更新  在子组件操作的时候, $emit 
-      applySubNo:'' // 进件编号
+      applySubNo: '', // 进件编号
+      // 历史数据
+      mobileData: [],
+      comData: [],
+      familyData: [],
+      hurryData: [],
+      workData: []
     }
   },
   mounted() {
@@ -297,13 +303,13 @@ export default {
         this.addTelNum = '';
       }
     },
-    // 监听 子组件的点击重新请求
-    treeFlag: function() {
-      this.fetchData();
-    },
-    listFlag: function() {
+    // // 监听 子组件的点击重新请求
+    // treeFlag: function() {
+    //   this.fetchData();
+    // },
+    // listFlag: function() {
 
-    }
+    // }
   },
   methods: {
     fetchData() {
@@ -336,6 +342,7 @@ export default {
 
         this.queryTelLogByPage();
         this.formShow = true;
+        this.hisShow = false;
       }
 
 
@@ -437,11 +444,13 @@ export default {
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
       this.pageSize = val;
+      this.pageNum = 1;
       this.queryTelLogByPage();
     },
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
       this.pageNum = val;
+      // this.pageSize=5;
       this.queryTelLogByPage();
     },
     rowDbClick(row) {
@@ -454,46 +463,107 @@ export default {
 
       console.log(this.id);
       console.log(this.phoneType);
+      // 请求历史数据
+      // this.queryHomeTel();
 
       // 点击行显示
       // 通过 电话类型来判断 显示哪个表单
-      // switch (this.phoneType) {
-      //   case '01':
-      //     // 点击 住址电话 显示
-      //     this.addressFormShow = false;
-      //     this.addressHisShow = true;
-      //     console.log('010101')
-      //     break;
-      //   case '02':
-      //     // 单位电话
-      //     this.companyFormShow = false;
-      //     this.companyHisShow = true;
-      //     console.log('020202')
-      //     break;
-      //   case '03':
-      //     // 家庭联系人
-      //     this.familyFormShow = false;
-      //     this.familyHisShow = true;
-      //     break;
-      //   case '04':
-      //     // 紧急联系人
-      //     this.hurryFormShow = false;
-      //     this.hurryHisShow = true;
-      //     break;
-      //   case '05':
-      //     // 工作证明人
-      //     this.workFormShow = false;
-      //     this.workHisShow = true;
-      //     break;
-      // }
+      switch (this.phoneType) {
+        case '01':
+          // 点击 住址电话 显示
+          this.queryHomeTel();
+          break;
+        case '02':
+          // 单位电话
+          this.queryComTelLog();
+          break;
+        case '03':
+          // 家庭联系人
+          this.queryTelfContract();
+          break;
+        case '04':
+          // 紧急联系人
+          this.queryTeleContract();
+          break;
+        case '05':
+          // 工作证明人
+          this.queryTelJobRef();
+          break;
+      }
 
 
 
-      // 直接处理 显示  历史
-      this.formShow = false;
-      this.hisShow = true;
 
+    },
+    queryHomeTel() {
+      // 请求历史数据 , 直接传给  his 组件
+      this.post('creTelResearchHis/queryHomeTel', {
+        id: this.id,
+        phoneType: this.phoneType
+      }).then(res => {
+        console.log(res);
+        this.mobileData = res.data;
+        if (res.statusCode == '200')
+          // 直接处理 显示  历史
+          this.hisShow = true;
+
+      })
+    },
+    queryComTelLog() {
+      // 单位联系人历史
+      this.post('/creTelResearchHis/queryComTelLog', {
+        id: this.id,
+        phoneType: this.phoneType
+      }).then(res => {
+        console.log(res);
+        this.mobileData = res.data;
+        if (res.statusCode == '200')
+          // 直接处理 显示  历史
+          this.hisShow = true;
+      })
+    },
+    queryTelfContract() {
+      // 家庭联系人类似
+      this.post('/creTelResearchHis/queryTelfContract', {
+        id: this.id,
+        phoneType: this.phoneType
+      }).then(res => {
+        console.log(res);
+        this.mobileData = res.data;
+        if (res.statusCode == '200')
+          // 直接处理 显示  历史
+          this.hisShow = true;
+      })
+    },
+    queryTeleContract() {
+      // 紧急联系人历史
+      console.log('submit!');
+      this.post('/creTelResearchHis/queryTeleContract', {
+        id: this.id,
+        phoneType: this.phoneType
+      }).then(res => {
+        console.log(res);
+        this.hurryData = res.data;
+        if (res.statusCode == '200')
+          // 直接处理 显示  历史
+          this.hisShow = true;
+      })
+    },
+    queryTelJobRef() {
+      // 工作联系人历史
+      this.post('/creTelResearchHis/queryTelJobRef', {
+        id: this.id,
+        phoneType: this.phoneType
+      }).then(res => {
+        console.log(res);
+        this.workData = res.data;
+        if (res.statusCode == '200')
+          // 直接处理 显示  历史
+          this.hisShow = true;
+      })
     }
+
+
   },
   components: {
     AddressForm,
@@ -545,6 +615,9 @@ export default {
 
 
 
+
+
+
 /* 树形  结构 */
 
 .phone-credit .el-tree {
@@ -555,6 +628,9 @@ export default {
   width: 233px;
   height: 321px;*/
 }
+
+
+
 
 
 
@@ -576,6 +652,9 @@ export default {
 
 
 
+
+
+
 /* element-ui tree icon 箭头*/
 
 .phone-credit .el-tree-node__content .el-tree-node__expand-icon {
@@ -583,6 +662,9 @@ export default {
   position: relative;
   left: 150px;
 }
+
+
+
 
 
 
@@ -604,12 +686,18 @@ export default {
 
 
 
+
+
+
 /* 三角 icon */
 
 .phone-credit .el-tree-node__expand-icon {
   font-size: 20px;
   /*display: none;*/
 }
+
+
+
 
 
 
@@ -626,11 +714,17 @@ export default {
 
 
 
+
+
+
 /* 二级 目录 样式 */
 
 .phone-credit .el-tree-node__content {
   padding-left: 0px !important;
 }
+
+
+
 
 
 
@@ -648,6 +742,9 @@ export default {
 
 
 
+
+
+
 /* 点击添加出现的 页面 */
 
 .phone-credit .cover-view {
@@ -658,6 +755,9 @@ export default {
   top: 0;
   left: 0;
 }
+
+
+
 
 
 
@@ -687,11 +787,17 @@ export default {
 
 
 
+
+
+
 /* title */
 
 .phone-credit .cover-content .add-title {
   text-align: left;
 }
+
+
+
 
 
 
@@ -724,11 +830,17 @@ export default {
 
 
 
+
+
+
 /* 添加电话  input 样式*/
 
 .phone-credit .add-content .el-input {
   width: inherit;
 }
+
+
+
 
 
 
@@ -751,6 +863,9 @@ export default {
 
 
 
+
+
+
 /* children - label*/
 
 .phone-credit .el-tree-node__children .el-tree-node__label {
@@ -767,6 +882,9 @@ export default {
 
 
 
+
+
+
 /* 确定按钮 */
 
 .phone-credit .cover-content .el-button {
@@ -775,6 +893,9 @@ export default {
   /*margin-top: 10px;*/
   /*margin-right: 10px;*/
 }
+
+
+
 
 
 
@@ -800,6 +921,9 @@ export default {
 
 
 
+
+
+
 /* 右侧 头 table*/
 
 .phone-credit .el-header {
@@ -816,7 +940,7 @@ export default {
 }
 
 .phone-credit .el-header .head-title {
-/*  font-size: 18px;
+  /*  font-size: 18px;
   width: 100%;
   height: 40px;
   text-align: left;
@@ -830,8 +954,7 @@ export default {
   /*width: 1517px;*/
   /*height: 38px;
   width: 100%;*/
-
- /* font-family: PingFangSC-Regular;
+  /* font-family: PingFangSC-Regular;
   font-size: 16px;
   color: #1f2d3d;
   letter-spacing: 0.11px;
@@ -839,6 +962,9 @@ export default {
   vertical-align: middle;
   line-height: 38px;*/
 }
+
+
+
 
 
 
@@ -856,12 +982,18 @@ export default {
 
 
 
+
+
+
 /* form-his */
 
 .phone-credit .form-his {
   width: 100%;
   height: 100%;
 }
+
+
+
 
 
 
@@ -878,12 +1010,18 @@ export default {
 
 
 
+
+
+
 /* 添加申请单电话 label*/
 
 .phone-credit .add-label {
   display: inline-block;
   width: 70px;
 }
+
+
+
 
 
 
@@ -925,6 +1063,9 @@ export default {
 
 
 
+
+
+
 /* label */
 
 .phone-credit .el-form-item__label {
@@ -939,6 +1080,9 @@ export default {
 
 
 
+
+
+
 /* 三列 */
 
 .phone-credit .item-column3 {
@@ -947,6 +1091,9 @@ export default {
   margin: 0;
   margin-bottom: 10px;
 }
+
+
+
 
 
 
@@ -971,6 +1118,9 @@ export default {
 
 
 
+
+
+
 /* 表单提交 */
 
 .phone-credit .address-submit {
@@ -982,6 +1132,9 @@ export default {
   text-align: right;
   margin-top: 50px;
 }
+
+
+
 
 
 
@@ -1003,11 +1156,17 @@ export default {
 
 
 
+
+
+
 /* el-input width*/
 
 .phone-credit .el-container .el-main .el-input {
   width: 258px !important;
 }
+
+
+
 
 
 
@@ -1021,16 +1180,23 @@ export default {
   padding: 0;
 }
 
+
+
+
 /* 历史调查日志 收缩 title */
+
 .el-collapse-item__header {
   background: #eef0f9;
-  font-family:PingFangSC-Regular;
-font-size:16px;
-color:#1f2d3d;
-letter-spacing:0.11px;
-text-align:left;
-padding-left: 10px;
+  font-family: PingFangSC-Regular;
+  font-size: 16px;
+  color: #1f2d3d;
+  letter-spacing: 0.11px;
+  text-align: left;
+  padding-left: 10px;
 }
+
+
+
 
 
 
