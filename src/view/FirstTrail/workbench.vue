@@ -6,6 +6,12 @@
       <div class="main_left">
         <h2>
           <i class="el-icon-edit"> </i>常用 </h2>
+  <router-link to="/functionalRoleManage">  <el-button type="primary">功能角色管理</el-button></router-link>
+  <router-link to="/processRoleManage">  <el-button type="primary">流程角色</el-button></router-link>
+  <router-link to="/resourceManage">  <el-button type="primary">资源管理</el-button></router-link>
+  <router-link to="/organManage">  <el-button type="primary">机构管理</el-button></router-link>
+  <router-link to="/userManage">  <el-button type="primary">用户管理</el-button></router-link>
+
       </div>
       <div class="main_right">
         <!-- 中间 -->
@@ -55,7 +61,7 @@
                 <template slot="title" class="border_top_bottom">
                   <i class="el-icon-menu"></i> 公司动态
                   <span @click.stop="more" class="moreC"> 更多 </span>
-                  <i class="el-icon-refresh"></i>                  
+                  <i class="el-icon-refresh"></i>
                 </template>
                 <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
                 <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
@@ -115,7 +121,7 @@
             orgCode: this.orgCode
           }
         });
-          // localStorage.setItem("tableData", JSON.stringify(tableData));
+        // localStorage.setItem("tableData", JSON.stringify(tableData));
         // this.$router.push({path:'/taskInWaitting',query:'123'})
         //  console.log(111, this.$route.query.picName)   接参数
       }
@@ -148,7 +154,7 @@
   /* public 部分 */
 
   .moreC {
-    float:right;
+    float: right;
     margin-right: 35px;
   }
 
@@ -197,7 +203,6 @@
     width: calc( 100% - 148px);
     background: white;
   }
-
   /* 代办任务 */
 
   .main_right .main_right_task,
