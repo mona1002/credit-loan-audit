@@ -403,8 +403,7 @@
       }
     },
     mounted() {
-           this.getParams = JSON.parse(localStorage.getItem("applicationInformationDetail"));
-          //  console.log(this.getParams.applyId)
+         this.getParams = JSON.parse(localStorage.getItem("applicationInformationDetail"));
       // post
       //  this.post("/loginCookie", {
       //   // id:"bb30607c-b5aa-4915-9474-460e099a33e8",
@@ -421,8 +420,8 @@
 
       // 信审表 查询
       this.post("/creauditInfo/queryCreauditInfoObj", {
-        applyId: "00542",
-        // applyId:this.getParams.applyId,
+        applyId: "00542",// 测试账号
+       // applyId:this.getParams.applyId,------ 上面删除，下面打开
       }).then(res => {
         console.log(res);
         // console.log(res.data)

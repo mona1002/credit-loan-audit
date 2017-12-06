@@ -4,13 +4,13 @@
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
       <p class="PerDtl">
-        <span> 借款人： {{customInf.custName}}</span>
-        <span> 进件编号: {{customInf.applySubNo}}</span>
+       <span> 借款人： {{customInf.mainCustName}}</span>
+        <span> 进件编号: {{customInf.applyMainNo}}</span>
         <span> 证件号码: {{customInf.certCode}}</span>
-        <span> 进件机构: {{customInf.appOrgCode}}</span>
-        <span> 门店成立时间: {{customInf1.appOrgRegisterDate}}</span>
-        <span> 业务员入职时间： {{customInf1.salPerEmployDate}}</span>
-        <span>{{customInf1.adminIntroduce}}</span>
+        <span> 进件机构: {{customInf.appOrgName}}</span>
+        <span> 门店成立时间: {{customInf.appOrgRegisterDate}}</span>
+        <span> 业务员入职时间： {{customInf.salPerEmployDate}}</span>
+        <span>{{customInf.adminIntroduce}}</span>
       </p>
       <div class="SplitScreen_wrap">
         <!-- 左侧分屏部分 -->
@@ -41,7 +41,7 @@
               <capplicationInformationDetail v-if="this.tabContent1==3"></capplicationInformationDetail>
               <cborrowerInformationDetail v-if="this.tabContent1==4"></cborrowerInformationDetail>
               <PhoneCredit v-if="this.tabContent1==5"></PhoneCredit>
-              <cCreditForm v-if="this.tabContent1==6"></cCreditForm>
+              <RcCreditForm v-if="this.tabContent1==6"></RcCreditForm>
               <creditInvestigation v-if="this.tabContent1==7"></creditInvestigation>
               <cAntiConclution v-if="this.tabContent1==8"></cAntiConclution>
               <!-- 反欺诈结论 空白 -->
@@ -83,7 +83,7 @@
             <capplicationInformationDetail v-if="this.tabContent2==3"></capplicationInformationDetail>
             <cborrowerInformationDetail v-if="this.tabContent2==4"></cborrowerInformationDetail>
             <PhoneCredit v-if="this.tabContent2==5"></PhoneCredit>
-            <cCreditForm v-if="this.tabContent2==6"></cCreditForm>
+            <RcCreditForm v-if="this.tabContent2==6"></RcCreditForm>
             <creditInvestigation v-if="this.tabContent2==7"></creditInvestigation>
             <!-- 反欺诈结论 空白 -->
             <cAntiConclution v-if="this.tabContent2==8"></cAntiConclution>
@@ -130,10 +130,10 @@
 
   import myHead from "../header.vue"
   // 编辑
-  import AudioVisual from "./detailComponent/AudioVisual";
-  import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
+  import AudioVisual from "./ReadComponent/RAudioVisual.vue"; //-----------------
+  import AudioVisualLeft from "./ReadComponent/RAudioVisualLeft.vue"; //--------------
   // 查询
-  import cCreditForm from "./checkComponent/cCreditForm"; //信审表 
+  import RcCreditForm from "./ReadComponent/RcCreditForm.vue"; //信审表 ------------
   import cAntiConclution from "./checkComponent/cAntiConclution"; //反欺诈结论 
   // InternalMatch 内部匹配
   // PhoneCredit  电话征信
@@ -148,7 +148,6 @@
       return {
         // 进件人信息
         customInf: [], //列表详情页local字段
-        customInf1: [], //申请信息页 lcoal字段
         // 对比按钮弹出层  下拉框
         options: [{
           value: '选项1',
@@ -306,23 +305,11 @@
       }
     },
     mounted() {
-      console.log("分屏");
-      //  this.customInf = JSON.parse(localStorage.getItem("taskInWaitting"));
-      this.customInf1 = JSON.parse(localStorage.getItem("applicationInformationDetail"));
-
-
-      console.log("2")
-      console.log(this.customInf1)
-
+      console.log("匹配查看");
+      this.customInf = JSON.parse(localStorage.getItem("applicationInformationDetail"));
       this.title = "影音资料";
-      // console.log(this.$route.query);
-
-      // this.customInf = this.$route.query;
-      this.customInf = JSON.parse(localStorage.getItem("taskInWaitting"));
-
-      console.log("3")
-      console.log(this.customInf);
-
+      console.log(this.customInf)
+      // console.log(this.customInf.applyId)
       // console.log(this.$route.query.row.id) //接参数   
       //  this.post("/workFlowTaskQuery/getTaskProfile", {
       //   taskStatus: "01",
@@ -339,7 +326,7 @@
       // 编辑
       AudioVisual,
       // 查询
-      cCreditForm,
+      RcCreditForm,
       AudioVisualLeft,
       cremarkDetail, //
       cborrowerInformationDetail,
@@ -494,7 +481,7 @@
     padding: 0 0 30px 20px;
   }
 
-.MatchingInf .left .Left_ul li:hover,
+  .MatchingInf .left .Left_ul li:hover,
   .MatchingInf .Right_tab_ul_wrap ul li:hover {
     cursor: pointer;
   }

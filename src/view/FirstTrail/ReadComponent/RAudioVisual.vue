@@ -274,9 +274,7 @@
     },
     mounted() {
       console.log("mounted")
-      // this.localInf = JSON.parse(localStorage.getItem("taskInWaitting"));
       this.localInf = JSON.parse(localStorage.getItem("applicationInformationDetail"))
-      // console.log(this.localInf)
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.applyId,

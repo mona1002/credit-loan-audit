@@ -313,7 +313,11 @@ position: relative
   background: #eeeFFF;
   padding:0;
 }
-
+/* 影音列表-对比弹出层-右侧-折叠面板-title */
+.AudioVisual .posiiiii .el-collapse-item__header,
+.AudioVisualLeft .posiiiii .el-collapse-item__header{
+  padding:0 10px;
+}
 /* 影音列表-左侧列表-title表头  */
 
 .AudioVisual .el-collapse-item__header p span,
