@@ -17,7 +17,8 @@
 			<el-collapse v-model="activeNames" @change="handleChange">
 				<el-collapse-item name="1">
 					<template slot="title">
-				      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">实地调查记录
+				      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+				      <span class="headFont">实地调查记录</span>
 				    </template>
 				    <ul class="headul">
 						<li><label>日期：</label><span>{{datas.creditDate}}</span></li>
@@ -30,7 +31,11 @@
 						<li><label>实地发起源：</label><span>{{cc}}</span></li>
 					</ul>
 			  </el-collapse-item>
-			  <el-collapse-item title="家庭实地征信内容" name="2">
+			  <el-collapse-item name="2">
+			  	<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">家庭实地征信内容</span>
+			    </template>
 			    <ul class="headul">
 					<li><label>地址：</label><span>{{datas.homeAddr}}</span></li>
 					<li><label>标志性建筑：</label><span>{{datas.homeLandMark}}</span></li>
@@ -50,7 +55,11 @@
 					<li><label></label><span></span></li>
 				</ul>
 			  </el-collapse-item>
-			  <el-collapse-item title="日常生活迹象" name="3">
+			  <el-collapse-item name="3">
+			  	<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">日常生活迹象</span>
+			    </template>
 			    <ul class="headul">
 					<li><label>起居室：</label><span>{{datas.homeLivingRoom}}</span></li>
 					<li><label>厨房：</label><span>{{datas.homeKichen}}</span></li>
@@ -61,7 +70,11 @@
 					<li><label>卫生清洁：</label><span>{{datas.homeHygiene}}</span></li>
 				</ul>
 			  </el-collapse-item>
-			  <el-collapse-item title="其他" name="4">
+			  <el-collapse-item name="4">
+			  	<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">其他</span>
+			    </template>
 			    <ul class="headul">
 					<li><label>植物：</label><span>{{datas.homeBotany}}</span></li>
 					<li><label>货物：</label><span>{{datas.homeGoods}}</span></li>
@@ -73,7 +86,11 @@
 					<li><label>异常说明：</label><span>{{datas.homeOtherExpRemark}}</span></li>
 				</ul>
 			  </el-collapse-item>
-			  <el-collapse-item title="企业实地征信内容" name="5">
+			  <el-collapse-item name="5">
+			  	<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">企业实地征信内容</span>
+			    </template>
 			    <ul class="headul">
 					<li><label>企业征信地址：</label><span>{{datas.comAddr}}</span></li>
 					<li><label>是否查验企业有效证件：</label><span>{{datas.comisEffDoc}}</span></li>
@@ -85,7 +102,11 @@
 					<li><label>企业是否存在：</label><span>{{dd}}</span></li>
 				</ul>
 			  </el-collapse-item>
-			  <el-collapse-item title="办公环境" name="6">
+			  <el-collapse-item name="6">
+			  	<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">办公环境</span>
+			    </template>
 			    <ul class="headul">
 					<li><label>企业水牌位置及新旧程度：</label><span>{{datas.comSignPlace}}</span></li>
 					<li><label>办公场所装修情况：</label><span>{{datas.comOffDecora}}</span></li>
@@ -97,7 +118,11 @@
 					<li><label></label><span></span></li>
 				</ul>
 			  </el-collapse-item>
-			  <el-collapse-item title="库房/车间" name="7">
+			  <el-collapse-item name="7">
+			  	<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">库房/车间</span>
+			    </template>
 			    <ul class="headul">
 					<li><label>机器设备：</label><span>{{datas.comEquipment}}</span></li>
 					<li><label>现代化程度：</label><span>{{datas.comModenLevel}}</span></li>
@@ -109,7 +134,11 @@
 					<li><label>工位上是否有电话：</label><span>{{ff}}</span></li>
 				</ul>
 			  </el-collapse-item>
-			  <el-collapse-item title="员工" name="8">
+			  <el-collapse-item name="8">
+			  	<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">员工</span>
+			    </template>
 			    <ul class="headul">
 					<li><label>是否开工中：</label><span>{{datas.comIsStartTxt}}</span></li>
 					<li><label>是否统一着装：</label><span>{{datas.comIsDressUni}}</span></li>
@@ -121,7 +150,11 @@
 					<li><label>工位上是否有电话：</label><span>{{hh}}</span></li>
 				</ul>
 			  </el-collapse-item>
-			  <el-collapse-item title="口述企业状况" name="9">
+			  <el-collapse-item name="9">
+			  	<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">口述企业状况</span>
+			    </template>
 			    <ul class="headul">
 					<li><label>规模：</label><span>{{datas.comScale}}</span></li>
 					<li><label>经营年限：</label><span>{{datas.comOperaYears}}</span></li>
@@ -162,20 +195,20 @@
 	        ff:'',
 	        gg:'',
 	        hh:'',
+	        taskInWaitting:'',
 	      };
 	    },
-	    created(){
+	    mounted(){
 			//一进入页面就发送请求
-			this.request();
+			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+			this.request(this.taskInWaitting.applyId);
 		},
 	    methods:{
 	    	handleChange(){
 
 	    	},
-	    	request(){
-	    		this.post("/credit/fieldReference", {
-		        'applyId':'00542'
-		      }).then(res => {
+	    	request(query){
+	    		this.get("/credit/fieldReference",{applyId:query}).then(res => {
 		        /*console.log(res);*/
 		        this.datas=res.data;
 		        /*console.log(this.datas);*/
@@ -190,6 +223,8 @@
 		width: 100%;
 		height: 100%;
 		background-color: #fafbfc;
+		font-size: 14px;
+		min-width: 1285px;
 	}
 	/* 头部 */
 	.creditHead{
@@ -204,20 +239,20 @@
 	ul.headul li{
 		margin-top: 10px;
 	} 
+	ul.headul li:last-child{
+		margin-bottom: 10px;
+	} 
 	ul.headul li label{
 		width: 210px;
 		display: inline-block;
 		text-align: right;
 	}
 	/* 折叠面板头部背景色 */
-	.el-collapse-item__header{
-		background-color: #ccc;
-		font-size: 14px;
-		padding-left: 10px;
-		height: 40px;
-		line-height: 40px;
+	.icon_hat{
+		padding: 9px 10px 10px 13px;
+		vertical-align: middle;
 	}
-	.el-collapse-item__header .el-collapse-item__arrow{
-		line-height: 40px;
+	.headFont{
+		font-size: 16px;
 	}
-</style> -->
+</style> 

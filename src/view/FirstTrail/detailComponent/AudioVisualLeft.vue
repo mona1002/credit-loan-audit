@@ -9,87 +9,45 @@
     <!-- 左侧 折叠面板 -->
     <div class="AudioVisual_List" ref="AudioVisual_List_ref" v-show="showListDiv">
       <!-- 折叠面板title -->
-      <!-- <button @click="hid" style="margin:0 0 0 130px;">隐藏</button> -->
-      <!-- <button @click="showList">显示</button> -->
       <img class="hidBtn" src="../../../../static/images/Shapearrowhide@1x.png" @click="hid">
       <!-- 折叠面板-手风琴List -->
       <p class="list_title clearFix">
         <span>影像名称</span>
-        <!-- <span>编号</span> -->
         <span>页数</span>
-        <!-- <span>上传日期</span> -->
       </p>
-      <el-collapse>
-        <el-collapse-item v-for="(item,ind) in ListParent" :key="ind" @click.native="getChildrenList(item.id)">
+      <el-collapse accordion>
+        <el-collapse-item v-for="(item,ind) in ListParent" :key="ind" @click.native="getChildrenList(item.id,ind,item)">
           <template slot="title">
-
             <p>
               <!-- 一级节点 -->
               <span>{{item.arcName}}</span>
-              <!-- <span>{{item.arcNum}}</span> -->
               <span>{{item.imageCount}}</span>
-              <!-- <span>{{item.uploadDate}}</span> -->
             </p>
           </template>
           <div class="list_title_div">
             <!--  二级 内容 节点 -->
             <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind)">
               <span>{{item.arcName}}</span>
-              <!-- <span>{{item.arcNum}}</span> -->
               <span>{{item.imageCount}}</span>
-              <!-- <span>{{item.uploadDate}}</span> -->
             </p>
           </div>
-          <!-- 此处为重复的样式  得到数据之后删除 -->
-          <div class="list_title_div">
-            <p>
-              <span>影像名称</span>
-              <!-- <span>编号</span> -->
-              <span>页数</span>
-              <!-- <span>上传日期</span> -->
-            </p>
-          </div>
-          <!-- 重复部分结束 -->
         </el-collapse-item>
-        <!-- 此处为重复的样式  得到数据之后删除 -->
-        <el-collapse-item>
-          <template slot="title">
-            <p>
-              <span>影像名称</span>
-              <!-- <span>编号</span> -->
-              <span>页数</span>
-              <!-- <span>上传日期</span> -->
-            </p>
-          </template>
-          <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-          <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
-        </el-collapse-item>
-        <!-- 重复部分结束 -->
       </el-collapse>
       <!-- 按钮 : 缩略图 对比  -->
       <el-button @click="SmallpicAlert" class="compareBtn">缩略图</el-button>
-      <!-- <el-button type="success" @click="SmallpicAlert" class="compareBtn">缩略图</el-button> -->
       <el-button type="primary" @click="compBtnShow" class="checkDetailBtn">对比</el-button>
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
-      <!-- <img src="http://img.1ppt.com/uploads/allimg/1606/4_160609151925_1.jpg"> -->
       <img src="../../../../static/images/0865C99F-2D8D-417E-A39D-1644063E5A84@1x.png" class="icon_pre " @click="pre">
       <img src="../../../../static/images/C20F2D59-5CCD-4C61-B12F-874344861071@1x.png" class="icon_next" @click="next">
       <div class="BtnIcons">
-        <!-- <i class="el-icon-arrow-left position_and_size icon_pre" @click="pre"></i>
-      <i class="el-icon-arrow-right position_and_size icon_next" @click="next"></i>
-      <i class="el-icon-zoom-in position_and_size icon_larger" @click="larger "></i>
-      <i class="el-icon-zoom-out position_and_size icon_smaller" @click="smaller"></i>
-      <i class="el-icon-refresh position_and_size icon_clockWise" @click="clockWise "></i>
-      <i class="el-icon-sort position_and_size icon_AclockWise" @click="AclockWise "></i> -->
         <img src="../../../../static/images/efw.png" @click="smaller ">
         <img src="../../../../static/images/net.png" @click="larger">
         <img src="../../../../static/images/daf.png" @click="AclockWise ">
         <img src="../../../../static/images/dasf.png" @click="clockWise ">
       </div>
-
-      <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val" v-if="key==smallPicInd"
+      <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
       />
     </div>
     <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
@@ -99,17 +57,62 @@
       </p>
       <div class="small_pic_content">
         <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
-          <!-- <img class="Small_pic" v-for="(val,index) in imgPath" :key="index" :src="'http://10.1.26.6:8080'+val" @click="ChangeCss(index)"
-        @mouseenter="smallPic($event,index)" ref="small_pic_ref" /> -->
-          <img class="Small_pic" :src="'http://10.1.26.6:8080'+val" @click="ChangeCss(index)" @mouseenter="smallPic($event,index)"
+          <img class="Small_pic" :src="'http://10.1.26.6:8080'+val.imagePath" @click="ChangeCss(index)" @mouseenter="smallPic($event,index)"
             ref="small_pic_ref" />
-          <p> djf;aldaj;lsdjf电路设计发大幅黄金时代好烦 las </p>
+          <p> {{val.arcSubType}} </p>
         </figure>
       </div>
-
-
     </div>
+    <!--=================================  查询弹出层 ================================= -->
+    <div v-show="dataa" class="posi">
+      <!-- 折叠 -->
+      <p>内匹配客户查询列表
+        <i class="el-icon-close" style="color:white;fontSize:18px;right:13px;top:16px" @click="closeAlertSearch"></i>
+      </p>
+      <el-collapse v-model="activeNames">
+        <el-collapse-item title="本人进件列表" name="1">
+          <div>
+            <!-- <i class="el-icon-edit" style="color:white;fontSize:18px"></i> -->
+            <!-- <el-table :data="personal" height="250" border style="width: 100%" @change="handleChange">
+            </el-table> -->
+            <!--  @dblclick="getParentList(currentRow.matchApplyId)" -->
+            <el-table :data="personal" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
+              style="width: 100%">
+              <el-table-column property="matchApplyCustName" label="客户名称">
+              </el-table-column>
+              <el-table-column property="matchApplySubNo" label="进件编号">
+              </el-table-column>
+              <el-table-column property="matchApplyDate" label="申请时间">
+              </el-table-column>
+              <el-table-column prop="matchApplyDate" label="业务状态">
+              </el-table-column>
+            </el-table>
+          </div>
+        </el-collapse-item>
+        <!-- 折叠2 -->
+        <el-collapse-item title="内匹客户进件" name="2">
+          <div>
+            <el-table :data="others" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
+              style="width: 100%">
+              <el-table-column property="matchApplyCustName" label="客户名称">
+              </el-table-column>
+              <el-table-column property="matchApplySubNo" label="进件编号">
+              </el-table-column>
+              <el-table-column property="matchApplyDate" label="申请时间">
+              </el-table-column>
+              <el-table-column prop="matchApplyDate" label="业务状态">
+              </el-table-column>
+            </el-table>
+          </div>
+          <!-- 确认  取消 按钮 -->
+          <div style="margin-top: 20px">
+            <!-- <el-button @click.native="getParentList(currentRow.matchApplyId)">确认</el-button> -->
+          </div>
+        </el-collapse-item>
 
+      </el-collapse>
+    </div>
+    <!-- ================================= 结束================================= -->
     <!-- </div> -->
 
   </div>
@@ -119,7 +122,9 @@
   export default {
     data() {
       return {
+        // props:[smallPicDivClose],
         // picData: [],
+        localInf: [], //初始化的时候，根据传进来的applyId获取初始化数据
         showListDiv: true, // 列表显示与否
         show: true, // 收缩按钮显示控制
         smallPicInd: 0, // 未知
@@ -129,67 +134,114 @@
         ListDetails: [], //子节点列表
         applyId: '', //入参
         imgPath: [], //图片路径
+        // ----------------------------------
+        activeNames: ['1', '2'], //查询弹出框 默认展开选项
+        dataa: false,
+        // // AlertSearchProps:false
+        personal: [], // 匹配查询-个人
+        others: [], // 匹配查询-他人
+        currentRow: null,
+        custName: '', //客户名称-input（disable）
+        custmatchApplySubNo: '', //客户进件编号-input（disable）
+        // // currentRowId:"",
+        // ----------------------------------------
       }
     },
-    // props:[smallPicDivClose],
     methods: {
-      getChildrenList(id) {
-        console.log("获取子节点");
-        this.post("/productArchive/getProductArchiveChildList", {
-          applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
-          pid: id,
-          // pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
+      closeAlertSearch() {
+        this.dataa = false;
+      },
+      handleCurrentChange(val) { // 选中当前行信息
+        //   console.log(val)
+        this.currentRow = val;
+        // console.log(this.currentRow)
+      },
+      // 通过父组件触发的子组件事件--显示弹框，并请求数据展示
+      personalNunPerson() {
+        console.log("子组件a")
+        this.dataa = true;
+        // console.log(  this.localInf.applySubNo)
+        // console.log(  this.localInf.certCode)
+        // 个人进件        
+        this.post("/internalMatch/getPersonalInternalMatchList", {
+          // applySubNo: "201504130173041858",
+          // certCode: "341422198409070094",
+          applySubNo: this.localInf.applySubNo,
+          certCode: this.localInf.certCode,
         }).then(res => {
-          // console.log(res);
+          console.log("个人")
+          this.personal = res.data;
+          // console.log(this.personal)
+        });
+        // //他人进件（ 不包含个人）
+        this.post("/internalMatch/getNonPersonalInternalMatch", {
+          pageParam: {
+            pageNum: "1", //当前页
+            pageSize: '1000' //每页的显示数量
+          },
+          //  applySubNo: "201504130173041858",
+          // certCode: "341422198409070094",
+          applySubNo: this.localInf.applySubNo,
+          certCode: this.localInf.certCode,
+        }).then(res => {
+          console.log("他人")
+          this.others = res.data;
+          // console.log(this.others)
+        });
+      },
+      getParentList(id) { //  未写 -----未对
+        console.log("table选中-获取父节点")
+        console.log(id);
+        this.post("/productArchive/getProductArchiveParentList", {
+          // applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",//待删除-----------------------------------------
+          applyId: id, //上面删除后 此处打开
+          // a2b23bbf-46ef-4d94-9872-322843cebb7d matchApplyId
+          // applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",//上面删除后 此处打开
+
+        }).then(res => {
+          console.log("双击选中")
+          console.log(res);
+          // console.log(res.data)
+          this.ListParent = res.data;
+          this.localInf.applyId = id; //将此处获得的matchApplyId赋值给 this.localInf.applyId,更改localInf的值，以便用更改后的值获取子节点
+          // console.log( this.localInf.applyId)
+          //  this.localInf.applyId="e0b51098-b24d-4211-8ae4-f08f657d7886";
+          console.log(id)
+          this.dataa = false;
+          this.custName = this.currentRow.matchApplyCustName;
+          this.custmatchApplySubNo = this.currentRow.matchApplySubNo;
+          this.$emit('inputInf', this.custName, this.custmatchApplySubNo)
+        });
+      },
+      getChildrenList(id, ind, item) {
+        console.log("获取子节点");
+        // console.log(id)//父节点获取的id
+        // console.log( this.localInf.applyId)
+        this.post("/productArchive/getProductArchiveChildList", {
+          applyId: this.localInf.applyId,
+          pid: id
+        }).then(res => {
           console.log(res.data)
           this.ListDetails = res.data;
-
+          //  this.others = res.data;   aut里面的写法
         });
       },
       getImg(ind) {
         console.log("获取图片");
         console.log(ind)
-        this.imgPath = this.ListDetails[ind].uploadArcPaths;
-        console.log(this.imgPath)
-        // this.$mount( ".AudioVisual" )
-        this.$nextTick(function () {
-
-          // this.$watch(function(){ return this.$refs.Big_pic_ref[0]},
-          // function(newd){  console.log("333"+newd) }
-          // )
-          console.log(this.$refs.Big_pic_ref[0]);
-
-          console.log(parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0]).height))
-          console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
-          console.log(typeof (getComputedStyle(this.$refs.Big_pic_ref[0], false).width))
-          // DOM 现在更新了
-          // `this` 绑定到当前实例
-          // this.doSomethingElse()
-        })
-        // console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).height)
-        // console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
-        // console.log(typeof( getComputedStyle(this.$refs.Big_pic_ref[0], false).width))
-        // console.log( this.imgPath)
+        this.imgPath = this.ListDetails[ind].applyArchiveInfos;
+        // console.log(this.imgPath)
+        // this.$nextTick(function () {
+        // })
       },
       hid() { //左侧 li 列表
         console.log("hid");
         this.showListDiv = false;
-        // this.$refs.AudioVisual_List_ref.style.left = "-175px";
-        // this.$refs.AudioVisual_Img_ref.style.left = "25px";
-        // this.$refs.AudioVisual_Img_ref.style.width = document.documentElement.clientWidth - 25 + "px";
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
-        // this.$refs.AudioVisual_Img_ref.style.width = "100%";
       },
       showList() { //左侧 li 列表
         this.showListDiv = true;
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 214px)";
-
-
-        // this.$refs.hidDiv_ref=
-        // this.$refs.AudioVisual_List_ref.style.left = "0";
-        // this.$refs.AudioVisual_List_ref.style.width = "200px";
-        // this.$refs.AudioVisual_Img_ref.style.left = "200px";
-        // this.$refs.AudioVisual_Img_ref.style.width = document.documentElement.clientWidth - 200 + "px";
       },
       SmallpicClose() { //缩略图弹框 关闭
         this.SmallPicShow = false;
@@ -205,7 +257,6 @@
           console.log("我下标小于0了")
           this.smallPicInd = this.$refs.small_pic_ref.length - 1;
         }
-        // this.changeSmallPicCss();
       },
       next() {
         console.log("下一页")
@@ -214,7 +265,6 @@
         if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
           this.smallPicInd = 0;
         }
-        // this.changeSmallPicCss();
       },
       larger() {
         console.log("放大")
@@ -327,68 +377,29 @@
       },
       compBtnShow() {
         console.log("对比按钮出发")
-        console.log(this.SmallPicShow )
-        
-        // this.SmallPicShow=this.props[0];
-        // console.log(this.SmallPicShow )
         this.$emit('CompareShow')
       }
     },
-
     mounted() {
-      // 登录
-      //  this.post("/smUser/login", {
-      //           userCode:"ddyy",
-      //           loginPassword:"111111"
-      //         }).then(res => {
-      //           console.log(res);
-      //           console.log(res.data)
-      //         });
-
-      //  this.applyId=this.$route.query.applyId;//接受参数
-
+      // localStorage.setItem("userInf", JSON.stringify(userInf));
+      console.log(" 影音资料")
+      // console.log(JSON.parse(localStorage.getItem("taskInWaitting") ));
+      this.localInf = JSON.parse(localStorage.getItem("applicationInformationDetail"))
+      // console.log(this.localInf)
+      // console.log(this.localInf.applyId)
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
-        // id:"bb30607c-b5aa-4915-9474-460e099a33e8",
-        // applyId:this.applyId,
-        applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
+        applyId: this.localInf.applyId,
+        // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
+        //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
+
       }).then(res => {
-        // console.log(res);
         // console.log(res.data)
-        this.ListParent = res.data
-        // console.log(this.ListParent[0].id )
+        // console.log("ListParent")
+        this.ListParent = res.data; //父节点数组 [{},{},{},{}]----获取父节点名称
+        // console.log( this.ListParent )
+
       });
-
-      // 子菜单栏
-      // this.post("/productArchive/getProductArchiveChildList", {
-      //   applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",
-      //   pid: "9c3a2556-4111-42c4-aa78-0034866cf041"
-      // }).then(res => {
-      //   console.log(res);
-      //   // console.log(res.data)
-      //   // this.ListParent=res.data
-      // });
-      // 图片
-      //  this.post("/internalMatch/getInternalMatchCustName", {
-      //   applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886",
-      //   pid:"9c3a2556-4111-42c4-aa78-0034866cf041"
-      // }).then(res => {
-      //   console.log(res);
-      //   console.log(res.data)
-      //   this.ListParent=res.data
-      // });
-
-
-      //     if (getComputedStyle(this.$refs.Big_pic_ref[0], false).width > getComputedStyle(this.$refs.Big_pic_ref[0], //判断宽度>高度  按宽度100%显示
-      //     false).height) { // 点击切换图片时，让显示的大图宽高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
-      //   this.$refs.Big_pic_ref[0].style.width = "100%";//calc( 100% - 202px)
-      //   console.log("默认大图css样式if width >>>>>>>>>>> height" + this.$refs.Big_pic_ref[0].style.width)
-      // } else {
-      //   this.$refs.Big_pic_ref[0].style.height = "100%";
-      //   console.log("默认大图css样式else  width <<<<<<  height")
-      //   console.log(this.$refs.Big_pic_ref[0])
-      //   console.log(this.$refs.Big_pic_ref[0].style.height)
-      // }
     }
   }
 
@@ -669,6 +680,29 @@
     border-radius: 5px;
     border: 1px solid #bfcbd9;
     box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
+  }
+  /* --------------------------- */
+
+  .posi {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+     z-index: 28;
+  }
+
+  .posi p {
+    font-size: 16px;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 20px;
+        background: rgba(0, 119, 255, 0.75);
+       
+        color: #f8f9fd;
+    text-align: center
+        
   }
 
 </style>

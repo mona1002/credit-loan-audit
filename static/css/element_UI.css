@@ -22,6 +22,7 @@ height: 40px;
 .ApprovalConclusion .el-table .cell 
   {
   line-height: 23px;
+  text-align: center;
 }
 .FinanceInformation .el-table,
 .ApprovalConclusion .el-table
@@ -40,20 +41,139 @@ height: 40px;
 }
 
 
-/* 折叠面板头部背景色 */
+/* 实地征信 折叠面板头部背景色 */
 
-.el-collapse-item__header {
-  background-color: #ccc;
-  font-size: 14px;
-  padding-left: 10px;
-  height: 40px;
-  line-height: 40px;
+.creditInvestigation .el-collapse-item__header{
+    background:#eef0f9;
+    border:1px solid #e6eaee;
+    /* border-radius:23px; */
+    width:100%;
+    height:38px;
+  }
+.creditInvestigation .el-collapse-item__header{
+  line-height: 38px;
 }
-
-.el-collapse-item__header .el-collapse-item__arrow {
-  line-height: 40px;
-  margin-top: 4px;
-  
+.creditInvestigation .el-collapse-item__arrow{
+  line-height: 38px;
+   /* padding: 16px 16px 0 0; */
+   margin-right: 12px;
+}
+.creditInvestigation .el-collapse-item__content{
+  font-size: 14px;
+}
+/*申请信息 折叠面板头部背景色 */
+.applicationInformationDetail .el-collapse-item__header{
+    background:#eef0f9;
+    border:1px solid #e6eaee;
+    /* border-radius:23px; */
+    width:100%;
+    height:38px;
+  }
+.applicationInformationDetail .el-collapse-item__header{
+  line-height: 38px;
+}
+.applicationInformationDetail .el-collapse-item__arrow{
+  line-height: 38px;
+   padding: 16px 16px 0 0;
+}
+.applicationInformationDetail .el-collapse-item__content{
+  font-size: 14px;
+}
+/*申请信息 表格 */
+.applicationInformationDetail .el-table th{
+  text-align: center;
+  font-weight: 400;
+  color: #878d99;
+  font-size: 13px;
+}
+.applicationInformationDetail .el-table__body-wrapper .el-table__body td{
+  text-align: center;
+  font-weight: 400;
+  color: #5a5e66;
+  font-size: 13px;
+}
+/*申请信息 表格去掉overflow:hidden; */
+.applicationInformationDetail .el-collapse-item__wrap{
+  overflow: inherit;
+}
+/*借款人资料 折叠面板头部背景色 */
+.borrowerInformation .el-collapse-item__header{
+    background:#eef0f9;
+    border:1px solid #e6eaee;
+    /* border-radius:23px; */
+    width:100%;
+    height:38px;
+  }
+.borrowerInformation .el-collapse-item__header{
+  line-height: 38px;
+  overflow:hidden;
+}
+.borrowerInformation .el-collapse-item__arrow{
+  line-height: 38px;
+  margin-right: 12px;
+  /* padding: 16px 16px 0 0; */
+}
+.borrowerInformation .el-collapse-item__content{
+  font-size: 14px;
+}
+.borrowerInformation .el-collapse-item__wrap{
+  clear: both;
+  border-bottom: none;
+}
+/* 借款人资料input框 */
+.borrowerInformation .el-input {
+  width: auto;
+}
+.borrowerInformation .el-input__inner {
+  height: 35px;
+  border-radius: 6px;
+  width: 258px;
+}
+/* 借款人资料表格内容居中 */
+.borrowerInformation .el-table th{
+  text-align: center;
+  font-weight: 400;
+  color: #878d99;
+  font-size: 13px;
+}
+.borrowerInformation .el-table__body-wrapper .el-table__body td{
+  text-align: center;
+  font-weight: 400;
+  color: #5a5e66;
+  font-size: 13px;
+}
+/*借款人资料详情 折叠面板头部背景色 */
+.borrowerInformationSetail .el-collapse-item__header{
+    background:#eef0f9;
+    border:1px solid #e6eaee;
+    /* border-radius:23px; */
+    width:100%;
+    height:38px;
+}
+.borrowerInformationSetail .el-collapse-item__header{
+    line-height: 38px;
+    overflow:hidden;
+}
+.borrowerInformationSetail .el-collapse-item__arrow{
+    line-height: 38px;
+    margin-right: 12px;
+    /* padding: 16px 16px 0 0; */
+}
+.borrowerInformationSetail .el-collapse-item__content{
+    font-size: 14px;
+}
+.borrowerInformationSetail .el-collapse-item__wrap{
+    clear: both;
+    border-bottom: none;
+}
+/* 借款人资料input框 */
+.borrowerInformationSetail .el-input {
+  width: auto;
+}
+.borrowerInformationSetail .el-input__inner {
+  height: 35px;
+  border-radius: 6px;
+  width: 180px;
 }
 
 /* 各自部分 */
@@ -216,7 +336,11 @@ position: relative
   background: #eeeFFF;
   padding:0;
 }
-
+/* 影音列表-对比弹出层-右侧-折叠面板-title */
+.AudioVisual .posiiiii .el-collapse-item__header,
+.AudioVisualLeft .posiiiii .el-collapse-item__header{
+  padding:0 10px;
+}
 /* 影音列表-左侧列表-title表头  */
 
 .AudioVisual .el-collapse-item__header p span,
@@ -284,29 +408,94 @@ position: relative
 .AudioVisualLeft .AudioVisual_wrap_compare_right .el-collapse-item__content {
   padding-bottom: 0;
 }
+.AudioVisualLeft .posi .el-collapse-item__content,
+.MatchingInf .posi .el-collapse-item__content{
+  /* background: red; */
+  height: 355px;
+}
 /* 影音列表- 对比弹出层-select-搜索框-wrap */
 .SplitScreen .AudioVisual_wrap_compare_right .el-select>.el-input,
-.SplitScreen .AudioVisual_wrap_compare_right .el-input__inner {
+.SplitScreen .AudioVisual_wrap_compare_right .el-input__inner,
+.MatchingInf .AudioVisual_wrap_compare_right .el-select>.el-input,
+.MatchingInf .AudioVisual_wrap_compare_right .el-input__inner {
   display: inline-block;
-  width:200px;
+  width:260px;
   height:35px
+}
+/* 借款人资料表格内容居中 */
+.borrowerInformationSetail .el-table th{
+  text-align: center;
+  font-weight: 400;
+  color: #878d99;
+  font-size: 13px;
+}
+.borrowerInformationSetail .el-table__body-wrapper .el-table__body td{
+  text-align: center;
+  font-weight: 400;
+  color: #5a5e66;
+  font-size: 13px;
 }
 /* 借款人资料 */
 
-.borrowerInformation .el-select {
-  width: 130px;
+.borrowerInformation .el-table__body-wrapper .el-select>.el-input .el-input__inner {
+   border: none;
+}
+.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(2) .el-select {
+  width: 150px;
+}
+.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(2) .el-select>.el-input {
+  width: 150px;
+}
+.borrowerInformation .el-table__body-wrapper .el-input{
+  width: 120px;
+}
+.borrowerInformation .el-table__body-wrapper .el-input .el-input__inner{
+  border: none;
+}
+.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(6) .el-input{
+  width: 180px;
 }
 
 .borrowerInformation .el-select>.el-input {
   width: 130px;
 }
-.borrowerInformation .el-input{
-  width: 180px;
+
+/* 车辆信息 时间 */
+.borrowerInformation .carContain .el-table__body-wrapper tbody tr td:last-child .el-input {
+  width: 140px;
 }
-.borrowerInformation .el-input__inner {
-  height: 30px;
-  border-radius: 4px;
+/* 信用卡使用明细 时间 */
+.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(3) .el-input {
+  width: 140px;
 }
+.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(6) .el-input {
+  width: 140px;
+}
+/* 贷款明细 时间 */
+.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(6) .el-input {
+  width: 140px;
+}
+.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(7) .el-input {
+  width: 140px;
+}
+.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(9) .el-input {
+  width: 140px;
+}
+.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(14) .el-input {
+  width: 140px;
+}
+/* 负债信息 */
+ol.num li:nth-of-type(1) .el-input__inner{
+    position: absolute;
+    left: 0;
+    top: -29px;
+  }
+/* 征询报告 */
+.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(3) .el-input__inner{
+    position: absolute;
+    left: 0;
+    top: -30px;
+  }
 
 
 /* 申请信息 */
@@ -348,15 +537,160 @@ position: relative
 .applicationInformation .el-input.is-disabled .el-input__inner{
     background-color: #fff;
 }
-/* 备注信息 隐藏掉 '暂无数据'' */
-/* .remark .el-table__body-wrapper,.remark .is-scroll-left{
-  display: none;
-} */
+
+/* 备注信息表格内容居中 */
+.remark .el-table th{
+  text-align: center;
+  font-weight: 400;
+  color: #878d99;
+  font-size: 13px;
+}
+.remark .el-table__body-wrapper .el-table__body td{
+  text-align: center;
+  font-weight: 400;
+  color: #5a5e66;
+  font-size: 13px;
+}
+/* 备注信息表格内容居中 */
+.remarkDetial .el-table th{
+  text-align: center;
+  font-weight: 400;
+  color: #878d99;
+  font-size: 13px;
+}
+.remarkDetial .el-table__body-wrapper .el-table__body td{
+  text-align: center;
+  font-weight: 400;
+  color: #5a5e66;
+  font-size: 13px;
+}
+
+
 /* 信审任务列表 */
+.taskWinput .el-input {
+  width: auto;
+}
 .taskWinput .el-input__inner {
-  height: 30px;
-  border-radius: 4px;
+  height: 35px;
+  border-radius: 6px;
+  width: 258px;
 }
 .taskWatting .el-table__header-wrapper tr{
   background-color: #fff;
 }
+.taskWatting .el-table th{
+  text-align: center;
+  font-weight: 400;
+  color: #878d99;
+  font-size: 13px;
+}
+.taskWatting .el-table__body-wrapper .el-table__body td{
+  text-align: center;
+  font-weight: 400;
+  color: #5a5e66;
+  font-size: 13px;
+}
+/* 信审任务列表 按钮宽度*/
+.taskWatting .el-col-22{
+  width: calc( 66.6% + 394px );
+}
+/* 信审任务列表 分页去掉浮动*/
+.taskWatting .el-select-dropdown__item{
+  float: none;
+}
+
+/* 工作台导航 */
+.mheader .el-menu{
+  background-color: transparent;
+}
+.mheader .el-submenu__title{
+  font-size:15px;
+  color:#bfcbd9;
+  margin-right:39px;
+  height: 60px;
+  line-height: 60px;
+}
+.mheader .el-menu .el-submenu__title:hover{
+  background-color: transparent;
+  border-bottom: 2px solid #fff;
+  color: #fff;
+}
+.mheader .el-menu .el-submenu .el-submenu__icon-arrow{
+  display: none;
+}
+/* 二级 */
+.mheader .el-menu .el-menu{
+  z-index: 10000;
+  background:#1f2d3d;
+  box-shadow:0 10px 20px 0 #475669;
+  opacity:0.41;
+  margin-top: 10px;
+}
+.mheader .el-menu .el-menu .el-submenu__title:hover{
+  background-color: transparent;
+  border-bottom: none;
+  color: #fff;
+}
+/* .mheader .el-menu .el-submenu__title:active{
+  background:#1f2d3d;
+  box-shadow:0 10px 20px 0 #475669;
+  opacity:0.41;
+  border-bottom: 2px solid #fff;
+} */
+.mheader .el-menu .el-menu .el-submenu__title{
+  font-size:14px;
+  color:#bfcbd9;
+  padding-left: 10px !important;
+  height: 25px;
+  line-height: 25px;
+  padding-right: 10px;
+}
+
+.mheader .el-menu .el-menu .el-menu-item{
+  font-size:14px;
+  color:#bfcbd9;
+  padding-left: 10px !important;
+  height: 25px;
+  line-height: 25px;
+  padding-right: 10px;
+  min-width: 0;
+  width: auto;
+}
+.mheader .el-menu .el-menu .el-menu-item:hover{
+  background-color: transparent;
+  border-bottom: none;
+  color: #fff;
+} 
+/*二级li加绝对定位 */
+.mheader .el-menu .el-menu .el-submenu{
+  position: relative;
+}
+/*二级三角样式设置 */
+.mheader .el-menu .el-menu .el-submenu .el-submenu__icon-arrow{
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-left: 5px solid #bfcbd9;
+  border-bottom: 5px solid transparent;
+  margin-top:-4px;
+  margin-right: -40px;
+  -webkit-transform:rotateZ(0deg);
+  transform:rotateZ(0deg);
+}
+/*二级三角before样式设置 */
+.mheader .el-menu .el-menu .el-submenu .el-submenu__icon-arrow:before{
+  display: none;
+}
+/* 三级 */
+.mheader .el-menu .el-menu .el-menu{
+  z-index: 10000;
+  opacity:1;
+  background:#1f2d3d;
+  box-shadow:0 10px 20px 0 #475669;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  margin-top: 0px;
+}
+

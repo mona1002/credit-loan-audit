@@ -34,7 +34,7 @@
     <!-- 弹窗 -->
     <div class="cover-view" v-show="coverShow">
       <!-- 回退 02 拒绝 01 放弃 07-->
-      <el-form v-show=" this.showFlag=='02' || this.showFlag=='01' || this.showFlag=='07'" class="back-form">
+      <el-form v-show=" this.showFlag=='02' || this.showFlag=='01' || this.showFlag=='07'" class="back-form" :model="form">
         <div class="form-title" style="position:relative;" v-show="this.showFlag=='02'">
           回退信息
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
@@ -92,7 +92,7 @@
         <div class="back-form-li">
           <el-form-item label="经办人:" class="item-column2">
             <!-- 取登录用户 -->
-            {{form.dealroperCode}}
+            {{dealroperCode}}
           </el-form-item>
           <el-form-item label="经办时间:" class="item-column2">
             <!-- {{2017-12-1}} -->
@@ -110,7 +110,7 @@
         </div>
       </el-form>
       <!-- 审批 03-->
-      <el-form v-show=" this.showFlag=='03'" class="back-form appro-form">
+      <el-form v-show=" this.showFlag=='03'" class="back-form appro-form" :model="form">
         <div class="form-title" style="position:relative;" v-show="this.showFlag=='03'">
           审批信息
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
@@ -215,7 +215,7 @@
           信审审批结论轨迹
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
         </div>
-        <el-table :data="tableData" height="250" border style="width: 100%" @row-dblclick="itemDbclick" @cell-mouse-enter="cellHover">
+        <el-table :data="tableData.recordList" height="250" border style="width: 100%" stripe highlight-current-row v-loading="loading">
           <el-table-column prop="verIncome" label="核实收入[元]">
           </el-table-column>
           <el-table-column prop="proCode" label="批准产品">
@@ -241,7 +241,7 @@
         </el-table>
         <!-- 分页 -->
         <div class="block tool-bar">
-          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
+          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalRecord">
           </el-pagination>
         </div>
       </div>
@@ -305,6 +305,8 @@
         </div>
       </div>
     </div>
+    <!-- <el-alert title=warnMsg type="warning" v-show="warnShow"> -->
+    </el-alert>
   </div>
   <!-- </div> -->
 </template>
@@ -316,32 +318,18 @@ export default {
       coverShow: false, // 弹窗
       showFlag: 0, // 要显示的 模块,默认给0
       tableData: [{
-          verIncome: 'verIncome',
-          proCode: 'proCode',
-          ploanAmt: 'ploanAmt',
-          ploanTerm: 'ploanTerm',
-          appmult: 'appmult',
-          eachTermamt: 'eachTermamt',
-          inteDebitrate: 'inteDebitrate',
-          address: 'address',
-          totalRate: 'totalRate',
-          appConclusion: 'appConclusion',
-          auditDate: 'auditDate'
-        },
-        {
-          verIncome: 'verIncome',
-          proCode: 'proCode',
-          ploanAmt: 'ploanAmt',
-          ploanTerm: 'ploanTerm',
-          appmult: 'appmult',
-          eachTermamt: 'eachTermamt',
-          inteDebitrate: 'inteDebitrate',
-          address: 'address',
-          totalRate: 'totalRate',
-          appConclusion: 'appConclusion',
-          auditDate: 'auditDate'
-        }
-      ],
+        verIncome: 'verIncome',
+        proCode: 'proCode',
+        ploanAmt: 'ploanAmt',
+        ploanTerm: 'ploanTerm',
+        appmult: 'appmult',
+        eachTermamt: 'eachTermamt',
+        inteDebitrate: 'inteDebitrate',
+        address: 'address',
+        totalRate: 'totalRate',
+        appConclusion: 'appConclusion',
+        auditDate: 'auditDate'
+      }],
       currentPage: 0,
 
       form: {
@@ -361,9 +349,9 @@ export default {
         secondaryReason: '', // 回退子原因
         reasonDesc: '', // 意见描述/原因说明
         appOrgId: '', // 进件机构id
-        applyId: '', // 申请单id
+        applyId: this.applyId, // 申请单id
         rollbackNodeName: '', // 回退节点名称
-        dealroperCode: '', // 回退 经办人
+        // dealroperCode: '', // 回退 经办人
         dealroperDate: '', // 经办时间
         creauditAppOperate: '' // 操作类型
       },
@@ -373,7 +361,15 @@ export default {
       flag: '', // 定义的判断 回退类型
       rollbackNodeName: '', // 监听使用的  回退节点
       mainReason: '', // 监听使用的 主原因
-
+      dealroperCode: '', // 经办人
+      // warnShow: '', // 警告 弹窗/
+      // warnMsg: '' // 警告文字
+      spjlData: [], // 审批结论轨迹数据
+      lcgjData: [], // 流程轨迹
+      // 审批结论轨迹
+      pageNum:1,
+      pageSize:5,
+      loading:false // 加载
     }
   },
   mounted() {
@@ -386,10 +382,11 @@ export default {
     this.form.taskId = taskInWaitting.taskId;
     console.log(this.form.taskId);
 
-    // 回退
+    // 回退 拒绝  审批
     // 经办人 登录用户名
     var userInfo = JSON.parse(localStorage.getItem('userInf'));
-    this.form.dealroperCode = userInfo.userCode;
+    this.dealroperCode = userInfo.userCode;
+    // this.form.dealroperCode = userInfo.userCode;
     console.log(this.form.dealroperCode);
     // 经办时间
     // this.form.dealroperDate =
@@ -400,8 +397,8 @@ export default {
 
 
     // applyId
-    this.form.applyId = '00542';
-
+    // this.form.applyId = '00542';
+    this.applyId = '00542';
   },
   methods: {
     // open 打开 自定义 弹窗   挂起
@@ -423,7 +420,7 @@ export default {
 
             // 点击 确认 提交 方法
             this.post("/creauditInfo/approveHang ", {
-              taskId: this.taskId
+              taskId: this.form.taskId
             }).then(res => {
               console.log(res);
               console.log(res.statusCode);
@@ -481,14 +478,18 @@ export default {
           break;
         case 'spjl':
           this.showFlag = 'spjl';
+          this.getSpjlList();
           break;
         case 'lcgj':
           this.showFlag = 'lcgj';
+
           break;
       }
     },
     submitFn(opinionFlag) {
       console.log(opinionFlag)
+      // 手动赋值  经办人
+      this.form.dealroperCode = this.dealroperCode;
       switch (opinionFlag) {
         case '01':
           console.log("拒绝");
@@ -518,8 +519,14 @@ export default {
           this.showFlag = 0;
       }
       // 点击 确认 提交 方法
-      this.post("/creauditInfo/approval ", this.form).then(res => {
+      this.post("/creauditInfo/approval", this.form).then(res => {
         console.log(res);
+        if (res.statusCode != '200') {
+          // this.warnShow = true;
+          // this.warnMsg = res.msg;
+          this.$message(res.msg);
+          // this.$message(res.data.msg);
+        }
         if (res.statusCode == '200') {
           this.form = {};
         }
@@ -576,9 +583,27 @@ export default {
     },
     handleSizeChange(val) {
       console.log("每页 ${val}条", val);
+      this.pageSize = val;
+      this.getSpjlList();
     },
     handleCurrentChange(val) {
       console.log("当前页: ${val}", val);
+      this.pageNum = val;
+      this.getSpjlList();
+    },
+    // 审批结论轨迹
+    getSpjlList() {
+      this.post('/creauditOpinion/queryByPage', {
+        applyId: this.applyId,
+        pageNum: this.pageNum, // 页码
+        pageSize: this.pageSize // 每页条数
+      }).then(res => {
+        this.loading = false;
+        console.log('审批结论轨迹');
+        console.log(res);
+        this.tableData = res.data;
+
+      })
     }
   },
   // 监听器
@@ -595,10 +620,10 @@ export default {
     },
     showFlag: function(newValue) {
       // 统一处理    回退 02 拒绝 01 放弃  07 审批 03 审批结论 spjl 流程轨迹 lcgj
-      if (newValue == '01') {// 拒绝
+      if (newValue == '01') { // 拒绝
         // 01 拒接 直接请求 主原因
         this.getReason('main', '01');
-      }else if(newValue == '07'){ // 审批
+      } else if (newValue == '07') { // 审批
         // 07 拒接 直接请求 主原因
         this.getReason('main', '07');
       }
@@ -632,20 +657,6 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 三列 */
 
 .creditApproval-class .item-column3 {
@@ -661,39 +672,11 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 按钮集合控件 */
 
 .creditApproval-class .btn-div {
   text-align: center;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* 信审审批 - btn*/
@@ -704,19 +687,6 @@ export default {
   color: #333;
   border: none;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -737,20 +707,6 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -758,20 +714,6 @@ export default {
   float: left;
   margin: 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* 回退 拒绝 放弃 表单*/
@@ -785,19 +727,6 @@ export default {
   border-radius: 10px;
   overflow: hidden;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -828,18 +757,6 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 /* textarea */
 
 .creditApproval-class .back-form .back-form-li .el-textarea {
@@ -848,38 +765,11 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 单独设置  label*/
 
 .creditApproval-class .back-form .el-form-item__label {
   width: 80px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* 弹窗页面 关闭按钮*/
@@ -900,19 +790,6 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 审批 表单 */
 
 .creditApproval-class .appro-form {
@@ -926,25 +803,12 @@ export default {
 }
 
 .creditApproval-class .appro-form .el-form-item__label {
-  width: 200px;
+  width: 220px;
 }
 
 .creditApproval-class .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -968,19 +832,6 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -988,18 +839,6 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1016,6 +855,11 @@ export default {
   background: #fff;
   border-radius: 5px;
   height: auto;
+}
+
+
+.creditApproval-class .el-input {
+  width: inherit;
 }
 
 </style>

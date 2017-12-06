@@ -3,268 +3,364 @@
 	<div class="borrowerInformationSetail">
 		<el-collapse v-model="activeNames" @change="handleChange">
 			<el-collapse-item title="房产信息" name="1">
+				<template slot="title">
+					<div class="left">
+				      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+				      <span class="headFont">房产信息</span>
+				    </div>
+			    </template>
 			    <el-table
 			      :data="borestateList"
-			      style="width: 100%">
+			      style="width: 100%"
+			      border>
 				      <el-table-column
 				        type="index"
 				      	:index='1'
-				      	label="序号" >
+				      	label="序号"
+				      	min-width="50" >
 				      </el-table-column>
 				      <el-table-column
 				        prop="estateType"
-				        label="房产类型">
+				        label="房产类型"
+				        min-width="130">
 				      </el-table-column>
 				      <el-table-column
 				        prop="propertyType"
-				        label="产权性质">
+				        label="产权性质"
+				        min-width="130">
 				      </el-table-column>
 				      <el-table-column
 				        prop="coveredArea"
-				        label="建筑面积[m^2]">
+				        label="建筑面积[m^2]"
+				        min-width="130">
 				      </el-table-column>
 				      <el-table-column
 				        prop="unitPrice"
-				        label="建筑单价[元]">
+				        label="建筑单价[元]"
+				        min-width="130">
 				      </el-table-column>
 				      <el-table-column
 				        prop="estateAddress"
-				        label="房产地址">
+				        label="房产地址"
+				        show-overflow-tooltip
+				        min-width="200">
 				      </el-table-column>
 				      <el-table-column
 				        prop="estateZip"
-				        label="邮政编码">
+				        label="邮政编码"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="equityRatio"
-				        label="产权比例">
+				        label="产权比例"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="loanPeriod"
-				        label="贷款期限[月]">
+				        label="贷款期限[月]"
+				        min-width="130"
+				        >
 				      </el-table-column>
 				      <el-table-column
 				        prop="mortgageStatus"
-				        label="抵押状况">
+				        label="抵押状况"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="monthlyPay"
-				        label="月供[元]">
+				        label="月供[元]"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="restLoans"
-				        label="贷款余额[元]">
+				        label="贷款余额[元]"
+				        min-width="130">
 				      </el-table-column>
 			    </el-table>
 		  	</el-collapse-item>
 		  	<el-collapse-item title="车辆信息" name="2">
+		  		<template slot="title">
+					<div class="left">
+				      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+				      <span class="headFont">车辆信息</span>
+				    </div>
+			    </template>
 			    <el-table
 			      :data="carInfoList"
-			      style="width: 100%">
+			      style="width: 100%"
+			      border>
 				      <el-table-column
 				        type="index"
 				      	:index='1'
-				      	label="序号" >
+				      	label="序号" 
+				      	min-width="50">
 				      </el-table-column>
 				      <el-table-column
 				        prop="carPrice"
-				        label="车辆购置价[元]">
+				        label="车辆购置价[元]"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="isYearCheck"
-				        label="是否年检">
+				        label="是否年检"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="isOperate"
-				        label="是否非运营">
+				        label="是否非运营"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="carModel"
-				        label="车辆型号">
+				        label="车辆型号"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="carType"
-				        label="车辆类型">
+				        label="车辆类型"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="loanPeriod"
-				        label="贷款期限[月]">
+				        label="贷款期限[月]"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="monthlyPay"
-				        label="月供[元]">
+				        label="月供[元]"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="restLoans"
-				        label="贷款余额[月]">
+				        label="贷款余额[月]"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="carNo"
-				        label="车牌号码">
+				        label="车牌号码"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="buyInsur"
-				        label="车辆易购保险">
+				        label="车辆易购保险"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="buyDate"
-				        label="购买时间">
+				        label="购买时间"
+				        min-width="120">
 				      </el-table-column>
 			    </el-table>
 		  	</el-collapse-item>
 		  	<el-collapse-item title="信用卡使用明细" name="3">
+		  		<template slot="title">
+					<div class="left">
+				      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+				      <span class="headFont">信用卡使用明细</span>
+				    </div>
+			    </template>
 			    <el-table
 			      :data="cardDetList"
-			      style="width: 100%">
+			      style="width: 100%"
+			      border>
 				      <el-table-column
 				        type="index"
 				      	:index='1'
-				      	label="序号" >
+				      	label="序号" 
+				      	min-width="50">
 				      </el-table-column>
 				      <el-table-column
 				        prop="bankName"
-				        label="银行名称">
+				        label="银行名称"
+				        min-width="150">
 				      </el-table-column>
 				      <el-table-column
 				        prop="cardUseDate"
-				        label="开卡日期">
+				        label="开卡日期"
+				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
 				        prop="cardAmt"
-				        label="信用额度">
+				        label="信用额度"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="usedAmt"
-				        label="已使用额度">
+				        label="已使用额度"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="repayDay"
-				        label="还款日">
+				        label="还款日"
+				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
 				        prop="actRepaymentAmt"
-				        label="本期应还款金额">
+				        label="本期应还款金额"
+				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
 				        prop="realRepaymentAmt"
-				        label="本期实际还款金额">
+				        label="本期实际还款金额"
+				        min-width="150">
 				      </el-table-column>
 				      <el-table-column
 				        prop="isOverdue"
-				        label="是否逾期">
+				        label="是否逾期"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="currOverdueTimes"
-				        label="当前逾期期数">
+				        label="当前逾期期数"
+				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
 				        prop="maxOverdueTimes"
-				        label="最高逾期期数">
+				        label="最高逾期期数"
+				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
 				        prop="overdueTimes"
-				        label="近12个月累计逾期次数">
+				        label="近12个月累计逾期次数"
+				        min-width="170">
 				      </el-table-column>
 				      <el-table-column
 				        prop="accountStatus"
-				        label="账户状态">
+				        label="账户状态"
+				        min-width="100">
 				      </el-table-column>
 			    </el-table>
 		  	</el-collapse-item>
 		  	<el-collapse-item title="信用卡使用总况" name="4">
+		  		<template slot="title">
+					<div class="left">
+				      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+				      <span class="headFont">信用卡使用总况</span>
+				    </div>
+			    </template>
 		  		<div class="xinyongka">
 		  			<ul>
-				    	<li><label>信用卡张数：</label><el-input v-model="borCard.cardCount"></el-input></li>
-				    	<li><label>正常使用张数：</label><el-input v-model="borCard.normalCount"></el-input></li>
-				    	<li><label>呆帐数量：</label><el-input v-model="borCard.badDebtCount"></el-input></li>
+				    	<li><label>信用卡张数：</label><span>{{borCard.cardCount}}</span></li>
+				    	<li><label>正常使用张数：</label><span>{{borCard.normalCount}}</span></li>
+				    	<li><label>呆帐数量：</label><span>{{borCard.badDebtCount}}</span></li>
 				    </ul>
 				    <ul>
-				    	<li><label>未开卡张数：</label><el-input v-model="borCard.nouseCount"></el-input></li>
-				    	<li><label>冻结数量：</label><el-input v-model="borCard.freezeCount"></el-input></li>
-				    	<li><label>销户数量：</label><el-input v-model="borCard.cancelCount"></el-input></li>
+				    	<li><label>未开卡张数：</label><span>{{borCard.nouseCount}}</span></li>
+				    	<li><label>冻结数量：</label><span>{{borCard.freezeCount}}</span></li>
+				    	<li><label>销户数量：</label><span>{{borCard.cancelCount}}</span></li>
 				    </ul>
 				    <ul>
-				    	<li><label>已使用张数：</label><el-input v-model="borCard.userdCount"></el-input></li>
-				    	<li><label>止付数量：</label><el-input v-model="borCard.stopPaymentCount"></el-input></li>
+				    	<li><label>已使用张数：</label><span>{{borCard.userdCount}}</span></li>
+				    	<li><label>止付数量：</label><span>{{borCard.stopPaymentCount}}</span></li>
 				    </ul>
 		  		</div> 
 		  	</el-collapse-item>
 		  	<el-collapse-item title="贷款明细" name="5">
+		  		<template slot="title">
+					<div class="left">
+				      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+				      <span class="headFont">贷款明细</span>
+				    </div>
+			    </template>
 			    <el-table
 			      :data="loanDetailList"
-			      style="width: 100%">
+			      style="width: 100%"
+			      border>
 				      <el-table-column
 				        type="index"
-				      	:index='1'
-				      	label="序号" >
+				      	:index='1'	
+				      	label="序号" 
+				      	min-width="50">
 				      </el-table-column>
 				      <el-table-column
 				        prop="loanType"
-				        label="贷款种类">
+				        label="贷款种类"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="guaranteeType"
-				        label="担保方式">
+				        label="担保方式"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="accountStatus"
-				        label="账户状态">
+				        label="账户状态"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="repayFrequency"
-				        label="还款频率">
+				        label="还款频率"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="loanBeginDate"
-				        label="贷款发放日期">
+				        label="贷款发放日期"
+				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
 				        prop="loanExpireDate"
-				        label="贷款到期日期">
+				        label="贷款到期日期"
+				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
 				        prop="loanContValue"
-				        label="贷款合同金额[元]">
+				        label="贷款合同金额[元]"
+				        min-width="140">
 				      </el-table-column>
 				      <el-table-column
 				        prop="loanRepayDate"
-				        label="应还款日期">
+				        label="应还款日期"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="loanBal"
-				        label="贷款余额[元]">
+				        label="贷款余额[元]"
+				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
 				        prop="remainMonth"
-				        label="剩余还款月数">
+				        label="剩余还款月数"
+				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
 				        prop="presentRepayAmt"
-				        label="本期应还款金额[元]">
+				        label="本期应还款金额[元]"
+				        min-width="150">
 				      </el-table-column>
 				      <el-table-column
 				        prop="curMonthRepayAmt"
-				        label="本期实际还款金额[元]">
+				        label="本期实际还款金额[元]"
+				        min-width="170">
 				      </el-table-column>
 				      <el-table-column
 				        prop="lastRepayDate"
-				        label="最后一次还款日期">
+				        label="最后一次还款日期"
+				        min-width="150">
 				      </el-table-column>
 				      <el-table-column
 				        prop="presentOverAmt"
-				        label="当前逾期金额">
+				        label="当前逾期金额"
+				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
 				        prop="overTimes"
-				        label="累计逾期次数">
+				        label="累计逾期次数"
+				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
 				        prop="maxOverTimes"
-				        label="最高逾期期数">
+				        label="最高逾期期数"
+				        min-width="120">
 				      </el-table-column>
 			    </el-table>
 		  	</el-collapse-item>
 		  	<el-collapse-item title="贷款总况" name="6">
+		  		<template slot="title">
+					<div class="left">
+				      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+				      <span class="headFont">贷款总况</span>
+				    </div>
+			    </template>
 		  		<div class="xinyongka daikuanzongkuang">
 		  			<ul>
 				    	<li><label>车贷共有笔数:</label><p>{{loanInfo.carLoanTotal}}</p></li>
@@ -287,6 +383,12 @@
 		  		</div> 
 		  	</el-collapse-item>
 		  	<el-collapse-item title="负债信息" name="7">
+		  		<template slot="title">
+					<div class="left">
+				      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+				      <span class="headFont">负债信息</span>
+				    </div>
+			    </template>
 		  		<div class="fuzhaixinxi">
 		  			<ol>
 				    	<li><label>信用卡每月还款[元]:</label><el-input v-model="borDebt.monthRepayAmt"></el-input></li>
@@ -305,6 +407,12 @@
 		  		</div> 
 		  	</el-collapse-item>
 		  	<el-collapse-item title="征询报告" name="8">
+				<template slot="title">
+					<div class="left">
+				      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+				      <span class="headFont">征询报告</span>
+				    </div>
+			    </template>
 		  		<div class="fuzhaixinxi zhengxunbaogao">
 		  			<ol>
 				    	<li><label>报告来源:</label><el-input v-model="rptInfo.crSource"></el-input></li>
@@ -319,13 +427,21 @@
 		  		</div> 
 		  	</el-collapse-item>
 		  	<el-collapse-item title="流水明细" name="9">
+		  		<template slot="title">
+					<div class="left">
+				      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+				      <span class="headFont">流水明细</span>
+				    </div>
+			    </template>
 			    <el-table
 			      :data="incomeList"
-			      style="width: 100%">
+			      style="width: 100%"
+			      border>
 				      <el-table-column
 				        type="index"
 				      	:index='1'
-				      	label="序号" >
+				      	label="序号" 
+				      	min-width='50'>
 				      </el-table-column>
 				      <el-table-column
 				        prop="incomeType"
@@ -366,6 +482,12 @@
 			    </el-table>
 		  	</el-collapse-item>
 		  	<el-collapse-item title="其他信息" name="10">
+		  		<template slot="title">
+					<div class="left">
+				      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+				      <span class="headFont">其他信息</span>
+				    </div>
+			    </template>
 		  		<div class="qita">
 				    <ol>
 				    	<li><label>其他:</label><div><textarea>{{otherInfo.content}}</textarea></div></li>
@@ -401,31 +523,167 @@
 	        incomeList:[],
 	        /*其他信息*/
 	        otherInfo:'',
+
+	        taskInWaitting:'',
 	      };
 	    },
 	    created(){
 			//一进入页面就发送请求
-			this.request();
+			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+			this.request(this.taskInWaitting.applyId);
 		},
 	    methods:{
 	    	handleChange(){
 
 	    	},
-	    	request(){
+	    	request(param){
 	    		this.post("/borrower/getBorrowerInfo", {
-		        'applyId':'111'
+		        'applyId':param
 		      }).then(res => {
 		        /*console.log(res);*/
 		        /*房产信息*/
 		        this.borestateList=res.data.borestateList;
+		        for(var i=0;i<this.borestateList.length;i++){
+		        	if(this.borestateList[i].estateType=='01'){
+		        		this.borestateList[i].estateType = '租用'
+		        	}else if(this.borestateList[i].estateType=='02'){
+		        		this.borestateList[i].estateType = '商业按揭购房'
+		        	}else if(this.borestateList[i].estateType=='03'){
+		        		this.borestateList[i].estateType = '公积金按揭购房'
+		        	}else if(this.borestateList[i].estateType=='04'){
+		        		this.borestateList[i].estateType = '无按揭购房'
+		        	}else if(this.borestateList[i].estateType=='05'){
+		        		this.borestateList[i].estateType = '自建房'
+		        	}else if(this.borestateList[i].estateType=='06'){
+		        		this.borestateList[i].estateType = '亲属住房'
+		        	}else if(this.borestateList[i].estateType=='07'){
+		        		this.borestateList[i].estateType = '单位宿舍'
+		        	};
+		        	if(this.borestateList[i].propertyType =='01'){
+		        		this.borestateList[i].propertyType = '宅基地'
+		        	}else if(this.borestateList[i].propertyType	=='02'){
+		        		this.borestateList[i].propertyType = '自建房'
+		        	}else if(this.borestateList[i].propertyType	=='03'){
+		        		this.borestateList[i].propertyType = '小产权'
+		        	}else if(this.borestateList[i].propertyType	=='04'){
+		        		this.borestateList[i].propertyType = '期房'
+		        	}else if(this.borestateList[i].propertyType	=='05'){
+		        		this.borestateList[i].propertyType = '公租房'
+		        	}else if(this.borestateList[i].propertyType	=='06'){
+		        		this.borestateList[i].propertyType = '经济适用房'
+		        	}else if(this.borestateList[i].propertyType	=='07'){
+		        		this.borestateList[i].propertyType = '土地证'
+		        	}else if(this.borestateList[i].propertyType	=='08'){
+		        		this.borestateList[i].propertyType = '大产权'
+		        	};
+		        	if(this.borestateList[i].mortgageStatus =='0'){
+		        		this.borestateList[i].mortgageStatus = '已抵押'
+		        	}else if(this.borestateList[i].mortgageStatus	=='1'){
+		        		this.borestateList[i].mortgageStatus = '未抵押'
+		        	};
+
+		        }
 		        /*车辆信息*/
 		        this.carInfoList=res.data.carInfoList;
+		        for(var i=0;i<this.carInfoList.length;i++){
+		        	if(this.carInfoList[i].isYearCheck=='0'){
+		        		this.carInfoList[i].isYearCheck = '否'
+		        	}else if(this.carInfoList[i].isYearCheck=='1'){
+		        		this.carInfoList[i].isYearCheck = '是'
+		        	};
+		        	if(this.carInfoList[i].isOperate =='0'){
+		        		this.carInfoList[i].isOperate = '否'
+		        	}else if(this.carInfoList[i].isOperate	=='1'){
+		        		this.carInfoList[i].isOperate = '是'
+		        	};
+		        	if(this.carInfoList[i].carType =='00'){
+		        		this.carInfoList[i].carType = '按揭购车'
+		        	}else if(this.carInfoList[i].carType =='01'){
+		        		this.carInfoList[i].carType = '无按揭购车'
+		        	};
+		        	if(this.carInfoList[i].buyInsur =='00'){
+		        		this.carInfoList[i].buyInsur = '交强险'
+		        	}else if(this.carInfoList[i].buyInsur =='01'){
+		        		this.carInfoList[i].buyInsur = '商业险'
+		        	}else if(this.carInfoList[i].buyInsur =='02'){
+		        		this.carInfoList[i].buyInsur = '车损险'
+		        	};
+
+		        }
 		        /*信用卡使用明细*/
 		        this.cardDetList=res.data.cardDetList;
+		        for(var i=0;i<this.cardDetList.length;i++){
+		        	if(this.cardDetList[i].isOverdue=='0'){
+		        		this.cardDetList[i].isOverdue = '否'
+		        	}else if(this.cardDetList[i].isOverdue=='1'){
+		        		this.cardDetList[i].isOverdue = '是'
+		        	};
+		        	
+		        	if(this.cardDetList[i].accountStatus =='01'){
+		        		this.cardDetList[i].accountStatus = '正常'
+		        	}else if(this.cardDetList[i].accountStatus	=='02'){
+		        		this.cardDetList[i].accountStatus = '冻结'
+		        	}else if(this.cardDetList[i].accountStatus	=='03'){
+		        		this.cardDetList[i].accountStatus = '止付'
+		        	}else if(this.cardDetList[i].accountStatus	=='04'){
+		        		this.cardDetList[i].accountStatus = '销户'
+		        	}else if(this.cardDetList[i].accountStatus	=='05'){
+		        		this.cardDetList[i].accountStatus = '呆帐'
+		        	}else if(this.cardDetList[i].accountStatus	=='06'){
+		        		this.cardDetList[i].accountStatus = '未激活'
+		        	}else if(this.cardDetList[i].accountStatus	=='07'){
+		        		this.cardDetList[i].accountStatus = '转出'
+		        	}else if(this.cardDetList[i].accountStatus	=='08'){
+		        		this.cardDetList[i].accountStatus = '核销'
+		        	};
+		        }
 		        /*信用卡使用总况*/
 		        this.borCard=res.data.borCard;
 		        /*贷款明细*/
 		        this.loanDetailList=res.data.loanDetailList;
+		        for(var i=0;i<this.loanDetailList.length;i++){
+		        	if(this.loanDetailList[i].loanType=='01'){
+		        		this.loanDetailList[i].loanType = '车贷'
+		        	}else if(this.loanDetailList[i].loanType=='02'){
+		        		this.loanDetailList[i].loanType = '房贷'
+		        	}
+		        	else if(this.loanDetailList[i].loanType=='03'){
+		        		this.loanDetailList[i].loanType = '信用贷'
+		        	}
+		        	else if(this.loanDetailList[i].loanType=='04'){
+		        		this.loanDetailList[i].loanType = '其他贷款'
+		        	};
+
+		        	if(this.loanDetailList[i].guaranteeType=='01'){
+		        		this.loanDetailList[i].guaranteeType = '信用'
+		        	}else if(this.loanDetailList[i].guaranteeType=='02'){
+		        		this.loanDetailList[i].guaranteeType = '信用+抵押'
+		        	}else if(this.loanDetailList[i].guaranteeType=='03'){
+		        		this.loanDetailList[i].guaranteeType = '抵押'
+		        	}
+		        	else if(this.loanDetailList[i].guaranteeType=='04'){
+		        		this.loanDetailList[i].guaranteeType = '质押'
+		        	}
+		        	else if(this.loanDetailList[i].guaranteeType=='05'){
+		        		this.loanDetailList[i].guaranteeType = '抵押+质押'
+		        	};
+		        	if(this.loanDetailList[i].accountStatus=='00'){
+		        		this.loanDetailList[i].accountStatus = '正常'
+		        	}else if(this.loanDetailList[i].accountStatus=='01'){
+		        		this.loanDetailList[i].accountStatus = '逾期'
+		        	}else if(this.loanDetailList[i].accountStatus=='02'){
+		        		this.loanDetailList[i].accountStatus = '结清'
+		        	};
+
+		        	if(this.loanDetailList[i].repayFrequency=='01'){
+		        		this.loanDetailList[i].repayFrequency = '1个月'
+		        	}else if(this.loanDetailList[i].repayFrequency=='02'){
+		        		this.loanDetailList[i].repayFrequency = '3个月'
+		        	}else if(this.loanDetailList[i].repayFrequency=='03'){
+		        		this.loanDetailList[i].repayFrequency = '一次性还清'
+		        	};
+
+		        }
 		        /*贷款总况*/
 		        this.loanInfo=res.data.loanInfo;
 		        /*负债信息*/
@@ -443,30 +701,18 @@
 	}
 </script>
 <style type="text/css" scoped>
-	
-	/* 字体图标 */
-	.icon{
-		color:#20a0ff;
-		font-size: 20px;
-	}
-	.remarkIcon{
+	.borrowerInformationSetail{
 		width: 100%;
-		height: 40px;
-		line-height: 40px; 
+		height: 100%;
+		background-color: #fafbfc;
+		font-size: 14px;
+		min-width: 1366px;
 	}
-	.icon span{
-		color:#475669;
+	/* 折叠面板头部背景色 */
+	.icon_hat{
+		padding: 9px 10px 10px 13px;
+		vertical-align: middle;
 	}
-	/* 表格 */
-	.tableDiv{
-		width: 100%;
-	}
-	.tableDiv table{
-		width: 100%;
-		border-collapse:collapse;
-	}
-	.tableDiv table td{border:1px solid #ccc;color: #1f2d3d;}
-	.tableDiv table th{border:1px solid #ccc;height: 40px;background: #f5f7fa;color: #1f2d3d;}
 	/* 信用卡使用总况 */
 	.xinyongka{
 		width: 100%;
@@ -481,7 +727,7 @@
 		margin-top: 20px;
 	}
 	.xinyongka ul li label{
-		width: 110px;
+		width: 120px;
 		display: inline-block;
 		text-align: right;
 	}
@@ -520,7 +766,7 @@
 }
 .fuzhaixinxi ol li label{
 	display: inline-block;
-	width: 150px;
+	width: 160px;
 	text-align: right;
 	padding-right: 5px;
 }
@@ -529,10 +775,8 @@
 	border: none;
 }
 /* 负债信息：文字说明 */
-ol.num li:nth-of-type(1) input{
-	position: absolute;
-	left: 0;
-	top: -29px;
+ol.num li{
+	margin-bottom: 10px;
 }
 ol.num li:nth-of-type(2){
 	width: 66.6%;
@@ -543,7 +787,7 @@ ol.num li:nth-of-type(2){
 ol.num li:nth-of-type(2) textarea{
 	width: 640px;
 	border: 1px solid #d8dce5; 
-	height: 30px;
+	height: 50px;
 	border-radius: 4px;
 	position: absolute;
 	top: -18px;
@@ -556,9 +800,6 @@ ol.num li:nth-of-type(2) div{
 /* 征询报告 */
 .zhengxunbaogao ol{
 	width: 100%;
-}
-.zhengxunbaogao li label{
-	width: 174px !important;
 }
 .zhengxunbaogao ol:nth-of-type(2) li{
 	width: 100%;
@@ -573,8 +814,13 @@ ol.num li:nth-of-type(2) div{
 	width: 700px;
 }
 .zhengxunbaogao ol:nth-of-type(2) li div textarea{
-	width: 700px;
+	width: 696px;
 	padding: 5px 5px 0 5px;
+}
+.reportLabel{
+	float: left;
+	height: 50px;
+	line-height: 50px;
 }
 /* 其他信息 */
 .qita{
@@ -590,12 +836,16 @@ ol.num li:nth-of-type(2) div{
 	width: 70%;
 }
 .qita ol label{
-	height: 240px;
-	line-height: 240px;
+	height: 206px;
+	line-height: 206px;
+	display: inline-block;
+	float: left;
+	margin:0 10px 0 20px;
 }
 .qita ol textarea{
 	width: 70%;
 	height: 200px;
 	border: 1px solid #d8dce5;  
+	padding:10px 0 0 10px;
 }
 </style>

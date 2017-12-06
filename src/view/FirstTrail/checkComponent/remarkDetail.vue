@@ -1,35 +1,39 @@
 <template>
-	<div class="remark">
+	<div class="remarkDetial">
 		<div class="remarkHead">
-			<p>备注信息</p>
+			<p titleText>备注信息</p>
 		</div>
 		<div class="taskWtable">
-			<el-table :data="datas" border style="width: 100%" 
+			<el-table :data="datas" height="400" style="width: 100%" 
 			:default-sort = "{prop: 'date', order: 'descending'}"><!-- order两个参数，顺序和倒序: ascending, descending -->
 			    <el-table-column
 			      type="index"
 			      :index='1'
-			      width="180"
+			      min-width="50"
 			      >
 			    </el-table-column>
 			    <el-table-column
 			      prop="remarkTypeTxt"
 			      label="备注类型"
+			      min-width="90"
 			      >
 			    </el-table-column>
 			    <el-table-column
 			      prop="remarker"
-			      label="备注人">
+			      label="备注人"
+			      min-width="130">
 			    </el-table-column>
 			    <el-table-column
 			      prop="remarkTime"
 			      label="备注时间"
-			      sortable>
+			      sortable
+			      min-width="140">
 			    </el-table-column>
 			    <el-table-column
 			      prop="remark"
 			      label="备注"
-			      min-width="290">
+			      min-width="200"
+			      show-overflow-tooltip>
 			    </el-table-column>
 		    </el-table>
 		</div>		
@@ -42,16 +46,18 @@
 				tableData:'',
 				//data:[],
 				datas:[],
+				taskInWaitting:'',
 			}
 		},
-		created(){
+		mounted(){
 			//一进入页面就发送请求
-			this.request();
+			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+			this.request(this.taskInWaitting.applyId);
 		},
 		methods:{
-	    	request(){
+	    	request(param){
 	    		this.post("/applyRemark/getApplyRemarkList", {
-		        'applyId':'00542'
+		        'applyId':param
 		      }).then(res => {
 		        /*console.log(res);*/
 		        this.datas=res.data;
@@ -66,19 +72,56 @@
 </script>
 <style type="text/css" scoped>
 /* 备注信息 */
-.remark .remarkHead{
-	width: 100%;
-	height: 28px;
-	line-height: 28px;
-	padding-left: 10px;
-	border-bottom: 1px solid #ccc;
-}
-.remark .remarkIcon{
+	.remarkDetial{
+			/* padding: 15px 30px; */
+			width: 100%;
+			height: 100%;
+			background-color: #fafbfc;
+		}
+	.remarkDetial .remarkHead{
+		opacity:0.75;
+		background:#ebedf8;
+		border-radius:6px;
+		width:100%;
+		height:50px;
+	}
+	.remarkDetial .remarkHead p{
+		font-size: 16px;
+		color: #1f2d3d;
+		text-align: left;
+		margin: 15px 25px 13px;
+		display: inline-block;
+		height: 22px;
+		width: 130px;
+		line-height: 22px;
+		font-weight: bold;
+	}
+	.remarkDetial .remarkHead .iconContainer{
+	    float: right;
+	    line-height: 50px;
+	    margin-right: 29px;
+	}
+	.remarkDetial .remarkHead .icon-item{
+	   cursor: pointer;
+	   margin-right: 14px;
+	   float: left;
+	}
+	.remarkDetial .remarkHead .icon {
+	   font-size: 24px;
+	   color: #0077ff;
+	   margin-right: 6px;
+	   vertical-align: sub;
+	}
+	.remarkDetial .remarkHead .el-icon-text {
+	   font-size: 14px;
+	   color: #1f2d3d;
+	}
+.remarkDetial .remarkIcon{
 	width: 100%;
 	height: 40px;
 	line-height: 40px; 
 }
-.remark .icon span{
+.remarkDetial .icon span{
 	color:#475669;
 }
 </style>

@@ -27,7 +27,7 @@
 			    <el-table-column
 			      type="index" 
 			      label="序号"
-			      width="46"
+			      width="50"
 			      >
 			    </el-table-column>
 			    <el-table-column
@@ -54,7 +54,7 @@
 			    <el-table-column
 			      prop="custName"
 			      label="客户名称"
-			      min-width="98">
+			      min-width="130">
 			    </el-table-column>
 			    <el-table-column
 			      prop="certCode"
@@ -91,7 +91,7 @@
 			      :page-sizes="[20, 50, 80, 100]"
 			      :page-size=setPageSize
 			      layout="total, sizes, prev, pager, next, jumper"
-			      :total="datas.totalNum">
+			      :total="totals.totalNum">
 			    </el-pagination>
 		    </div>
 		</div>
@@ -102,6 +102,7 @@
 		data(){
 			return{
 				activeNames:['1'],
+				totals:{},
 				currentPage:1,// 默认显示的当前页
 				//data:[],
 				datas:[],
@@ -126,7 +127,7 @@
 		        //taskType:'',
 			}
 		},
-		created(){
+		mounted(){
 			//一进入页面就发送请求
 			this.queryParam.processTemplateId=this.$route.query.processTemplateId;
 			this.queryParam.taskNodeName=this.$route.query.taskNodeName;
@@ -144,10 +145,11 @@
 		    		param
 	          ).then(res => {
 	            if(res.statusCode==200 &&　res.data.taskDetailList!=null){
+	            	this.totals=res.data;
 	            	this.datas=res.data.taskDetailList;
 	            	console.log(this.datas.length)
 	            	for(var i=0;i<this.datas.length;i++){
-	            		if(this.datas[i].taskType=='1'){//00
+	            		if(this.datas[i].taskType=='00'){//00
 		            		this.datas[i].taskType="新任务";
 		            	}else if(this.datas[i].taskType=='01'){
 		            		this.datas[i].taskType="回退任务";
@@ -193,6 +195,7 @@
 				console.log(row);
 		      this.$router.push({path:'/SplitScreen',query:row});
 		      localStorage.setItem("taskInWaitting",JSON.stringify(row));
+		      
 		    },
 		    handleSizeChange(val) {
 		      console.log('每页 ${val} 条');

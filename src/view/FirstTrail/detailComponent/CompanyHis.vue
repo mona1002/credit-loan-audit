@@ -23,29 +23,50 @@
       <el-form-item label="调查阶段:" class="item-column3">
         {{comData.checkStage}}
       </el-form-item>
+      <el-form-item label="其他来源说明:" class="item-column3">
+        {{comData.custName}}
+      </el-form-item>
       <div class="address-title">
         录入单位电话调查信息
       </div>
-      <el-form-item label="拨打电话:">
+      <el-form-item label="拨打电话:" class="item-column2">
         {{comData.phonetxt}}
       </el-form-item>
-      <el-form-item label="接电话人身份:">
+      <el-form-item label="-:" class="item-column2">
+        {{comData.custName}}
+      </el-form-item>
+      <el-form-item label="接电话人身份:" class="item-column2">
         {{comData.answertxt}}
       </el-form-item>
-      <el-form-item label="核对单位及工作信息:">
+      <el-form-item label="-:" class="item-column2">
+        {{comData.custName}}
+      </el-form-item>
+      <el-form-item label="核对单位及工作信息:" class="item-column2">
         {{comData.companytxt}}
       </el-form-item>
-      <el-form-item label="核对工作时间:">
+      <el-form-item label="-:" class="item-column2">
+        {{comData.custName}}
+      </el-form-item>
+      <el-form-item label="核对工作时间:" class="item-column2">
         {{comData.checkTimetxt}}
       </el-form-item>
-      <el-form-item label="核对收入:">
+      <el-form-item label="-:" class="item-column2">
+        {{comData.custName}}
+      </el-form-item>
+      <el-form-item label="核对收入:" class="item-column2">
         {{comData.checkIncometxt}}
       </el-form-item>
-      <el-form-item label="用工方式:">
+      <el-form-item label="-:" class="item-column2">
+        {{comData.custName}}
+      </el-form-item>
+      <el-form-item label="用工方式:" class="item-column1">
         {{comData.employmentmodetxt}}
       </el-form-item>
-      <el-form-item label="工作发放情况:">
+      <el-form-item label="工资发放情况:" class="item-column2">
         {{comData.payrollSituationtxt}}
+      </el-form-item>
+      <el-form-item label="-:" class="item-column2">
+        {{comData.custName}}
       </el-form-item>
       <el-form-item label="是否缴纳养老保险:" class="item-column2">
         {{comData.pensionInsurance}}
@@ -59,7 +80,7 @@
       <el-form-item label="核对工作证明人2:" class="item-column2">
         {{comData.jobref2}}
       </el-form-item>
-      <el-form-item label="调查结论">
+      <el-form-item label="调查结论" class="item-column1">
         {{comData.conclusion}}
       </el-form-item>
       
@@ -70,25 +91,29 @@
 export default {
   data() {
     return {
-      id:'',  // 住宅电话调查日志记录 id
-      phoneType:'', // 电话类型
+      // id:'',  // 住宅电话调查日志记录 id
+      // phoneType:'', // 电话类型
       comData:'' // 请求返回的数据
     }
   },
-  mounted() {
-    this.queryComTelLog();
-  },
-  methods: {
-    queryComTelLog(){
-      this.post('/creTelResearchHis/queryComTelLog',{
-        id:this.id,
-        phoneType:this.phoneType
-      }).then( res => {
-        console.log(res);
-        this.mobileData = res.data;
-      })
-    }
-  }
+  // mounted() {
+  //       console.log('id='+this.id);
+  //   console.log('phoneType='+this.phoneType);
+  //   // 测试数据
+  //   // this.queryComTelLog();
+  // },
+  props:['comData']
+  // methods: {
+  //   queryComTelLog(){
+  //     this.post('/creTelResearchHis/queryComTelLog',{
+  //       id:this.id,
+  //       phoneType:this.phoneType
+  //     }).then( res => {
+  //       console.log(res);
+  //       this.mobileData = res.data;
+  //     })
+  //   }
+  // }
 }
 
 </script>

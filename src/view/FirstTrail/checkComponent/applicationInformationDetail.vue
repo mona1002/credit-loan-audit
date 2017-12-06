@@ -2,7 +2,11 @@
 <template>
 	<div class="applicationInformationDetail">
 		<el-collapse v-model="activeNames" @change="handleChange">
-			<el-collapse-item title="工作人员填写" name="1">
+			<el-collapse-item name="1">
+				<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">工作人员填写</span>
+				</template>
 				<ul class="firstUl">
 					<li>
 						<label>申请类型：</label><span>{{datas.appTypeTxt}}</span>
@@ -62,7 +66,11 @@
 					</li>
 				</ul>
 		  	</el-collapse-item>
-		  	<el-collapse-item title="您的借款需求" name="2">
+		  	<el-collapse-item name="2">
+		  		<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">您的借款需求</span>
+				</template>
 				<ul class="firstUl">
 					<li>
 						<label>借款用途：</label>
@@ -109,7 +117,11 @@
 					
 				</ul>
 		  	</el-collapse-item>
-		  	<el-collapse-item title="您的个人信息" name="3">
+		  	<el-collapse-item name="3">
+		  		<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">您的个人信息</span>
+				</template>
 				<ul class="firstUl">
 					<li>
 						<label>客户名称：</label>
@@ -324,7 +336,11 @@
 					<li></li>
 				</ul>
 		  	</el-collapse-item>
-		  	<el-collapse-item title="私人业主信息" name="4" v-if="accepCusBasicInfo.privateOwnerFlag=='1'">
+		  	<el-collapse-item name="4" v-if="accepCusBasicInfo.privateOwnerFlag=='1'">
+		  		<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">私人业主信息</span>
+				</template>
 				<ul class="firstUl">
 					<li>
 						<label>企业类型：</label>
@@ -474,117 +490,153 @@
 					</li>
 				</ul>
 			</el-collapse-item>
-			<el-collapse-item title="房产信息" name="5">
+			<el-collapse-item name="5">
+				<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">房产信息</span>
+				</template>
 			    <el-table
 			      :data="accepCusEstates"
 			      style="width: 100%">
 				      <el-table-column
 				        type="index"
 				      	:index='1'
-				      	label="序号" >
+				      	label="序号" 
+				      	min-width="50">
 				      </el-table-column>
 				      <el-table-column
 				        prop="estateTypeTxt"
-				        label="房产类型">
+				        label="房产类型"
+				        min-width="130">
 				      </el-table-column>
 				      <el-table-column
 				        prop="propertyTypeTxt"
-				        label="产权性质">
+				        label="产权性质"
+				        min-width="130">
 				      </el-table-column>
 				      <el-table-column
 				        prop="coveredArea"
-				        label="建筑面积[m^2]">
+				        label="建筑面积[m^2]"
+				        min-width="130">
 				      </el-table-column>
 				      <el-table-column
 				        prop="unitPrice"
-				        label="建筑单价[元]">
+				        label="建筑单价[元]"
+				        min-width="130">
 				      </el-table-column>
 				      <el-table-column
 				        prop="estateAddress"
-				        label="房产地址">
+				        label="房产地址"
+				        min-width="200">
 				      </el-table-column>
 				      <el-table-column
 				        prop="estateZip"
-				        label="邮政编码">
+				        label="邮政编码"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="equityRatio"
-				        label="产权比例">
+				        label="产权比例"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="loanPeriod"
-				        label="贷款期限[月]">
+				        label="贷款期限[月]"
+				        min-width="130">
 				      </el-table-column>
 				      <el-table-column
 				        prop="mortgageStatusTxt"
-				        label="抵押状况">
+				        label="抵押状况"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="monthlyPay"
-				        label="月供[元]">
+				        label="月供[元]"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="restLoans"
-				        label="贷款余额[元]">
+				        label="贷款余额[元]"
+				        min-width="130">
 				      </el-table-column>
 			    </el-table>
 		  	</el-collapse-item>
-		  	<el-collapse-item title="车辆信息" name="6">
+		  	<el-collapse-item name="6">
+		  		<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">车辆信息</span>
+				</template>
 			    <el-table
 			      :data="accepCusCarInfos"
 			      style="width: 100%">
 				      <el-table-column
 				        type="index"
 				      	:index='1'
-				      	label="序号" >
+				      	label="序号" 
+				      	min-width="50">
 				      </el-table-column>
 				      <el-table-column
 				        prop="carPrice"
-				        label="车辆购置价[元]">
+				        label="车辆购置价[元]"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="isYearCheckTxt"
-				        label="是否年检">
+				        label="是否年检"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="isOperateTxt"
-				        label="是否非运营">
+				        label="是否非运营"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="carModel"
-				        label="车辆型号">
+				        label="车辆型号"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="carTypeTxt"
-				        label="车辆类型">
+				        label="车辆类型"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="loanPeriod"
-				        label="贷款期限[月]">
+				        label="贷款期限[月]"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="monthlyPay"
-				        label="月供[元]">
+				        label="月供[元]"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="restLoans"
-				        label="贷款余额[月]">
+				        label="贷款余额[月]"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="carNo"
-				        label="车牌号码">
+				        label="车牌号码"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="buyInsurTxt"
-				        label="车辆易购保险">
+				        label="车辆易购保险"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="buyDate"
-				        label="购买时间">
+				        label="购买时间"
+				        min-width="120">
 				      </el-table-column>
 			    </el-table>
 		  	</el-collapse-item>
-		  	<el-collapse-item title="您的工作信息" name="7">
+		  	<el-collapse-item name="7">
+		  		<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">您的工作信息</span>
+				</template>
 				<ul class="firstUl">
 					<li style="width:66.6%;">
 						<label style="float:left;">工作单位：</label>
@@ -685,58 +737,78 @@
 					</li>
 				</ul>
 		  	</el-collapse-item>
-		  	<el-collapse-item title="联系人信息" name="8">
+		  	<el-collapse-item name="8">
+		  		<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">联系人信息</span>
+				</template>
 			    <el-table
 			      :data="accepCusRelations"
-			      style="width: 100%">
+			      style="width: 100%"
+			      highlight-current-row>
 				      <el-table-column
 				        type="index"
 				      	:index='1'
-				      	label="序号" >
+				      	label="序号" 
+				      	min-width="50">
 				      </el-table-column>
 				      <el-table-column
 				        prop="contactName"
-				        label="姓名">
+				        label="姓名"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="contactTypeTxt"
-				        label="类型">
+				        label="类型"
+				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
 				        prop="relationshipTxt"
-				        label="关系">
+				        label="关系"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="mobile"
-				        label="手机号码">
+				        label="手机号码"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="homeTel"
-				        label="住宅电话">
+				        label="住宅电话"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="contactAge"
-				        label="年龄">
+				        label="年龄"
+				        min-width="50">
 				      </el-table-column>
 				      <el-table-column
 				        prop="certTypeTxt"
-				        label="证件类型">
+				        label="证件类型"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="certCode"
-				        label="证件号码">
+				        label="证件号码"
+				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
 				        prop="workName"
-				        label="单位名称">
+				        label="单位名称"
+				        min-width="120"
+				        show-overflow-tooltip>
 				      </el-table-column>
 				      <el-table-column
 				        prop="workTel"
-				        label="单位电话">
+				        label="单位电话"
+				        min-width="100"
+				        >
 				      </el-table-column>
 				      <el-table-column
 				        prop="workAddr"
-				        label="地址">
+				        label="地址"
+				        min-width="120"
+				        show-overflow-tooltip>
 				      </el-table-column>
 				      <!-- 单位地址没有 -->
 			    </el-table>
@@ -771,16 +843,21 @@
 				/*联系人信息*/
 				accepCusRelations:[],
 				
+				taskInWaitting:'',
+
+				applyId:'',
 			};
 		},
-		created(){
+		mounted(){
 			//一进入页面就发送请求
+			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+			this.applyId=this.taskInWaitting.applyId;
 			this.request();
 		},
 		methods:{
 			request(){
 	    		this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-		        'id':'a8d02f0d-0718-4d91-b6bb-14f3b24036a7'
+		        'id':this.applyId
 		      }).then(res => {
 		      	this.datas=res.data;
 		        /*console.log(res);*/
@@ -827,7 +904,12 @@
 		        	proName:this.datas.proName,
 		        	loanTerm:this.accepApplyLoan.loanTerm,
 		        	applyMainNo:this.datas.applyMainNo,
-		        	applySubNo:this.datas.applySubNo
+		        	applySubNo:this.datas.applySubNo,
+		        	salPerEmployDate:this.datas.salPerEmployDate,
+		        	appOrgRegisterDate:this.datas.appOrgRegisterDate,
+		        	adminIntroduce:this.datas.adminIntroduce,
+		        	applyId:this.datas.id,
+		        	workName:this.datas.accepCusWorkInfo.workName,
 		        };
 		        /*console.log(this.datas);*/
 		        localStorage.setItem("applicationInformationDetail",JSON.stringify(query));
@@ -842,6 +924,10 @@
 <style type="text/css" scoped>
 	.applicationInformationDetail{
 		width: 100%;
+		min-width: 1258px;
+		height: 100%;
+		background-color: #fafbfc;
+		font-size: 14px;
 	}
 	.applicationInformationDetail ul{
 		width: 100%;
@@ -895,5 +981,13 @@
 	}
 	.spans{
 		padding-right: 20px;
+	}
+	/* 折叠面板头部背景色和icon */
+	.icon_hat{
+		padding: 9px 10px 10px 13px;
+		vertical-align: middle;
+	}
+	.headFont{
+		font-size: 16px;
 	}
 </style>
