@@ -40,31 +40,40 @@
           <el-option label="未调查" value="03"></el-option>
         </el-select>
       </el-form-item>
+      <el-form-item label="其他来源说明" class="item-column3">
+        <el-input v-model="form"></el-input>
+      </el-form-item>
       <div class="address-title">
         录入工作证明人调查信息
       </div>
-      <el-form-item label="微信/支付宝是否异常:">
+      <el-form-item label="微信/支付宝是否异常:" class="item-column2">
         <el-select v-model="form.mobilepayment" placeholder="请选择调查情况">
-          <el-option label="否" value="00"></el-option>
-          <el-option label="是" value="01"></el-option>
+          <el-option label="否" value="0"></el-option>
+          <el-option label="是" value="1"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="异常项说明:">
+      <el-form-item label="异常项说明:" class="item-column2">
         <el-input v-model="form.exceptionremark"></el-input>
       </el-form-item>
-      <el-form-item label="接电话人身份:">
+      <el-form-item label="接电话人身份:" class="item-column2">
         <el-select v-model="form.answerIdentity" placeholder="请选择调查情况">
           <el-option label="同事" value="00"></el-option>
           <el-option label="本人" value="01"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="核对单位工作情况:">
+      <el-form-item label="-" class="item-column2">
+        <el-input v-model="form"></el-input>
+      </el-form-item>
+      <el-form-item label="核对单位工作情况:" class="item-column2">
         <el-select v-model="form.checkJob" placeholder="请选择调查情况">
           <el-option label="一致" value="00"></el-option>
           <el-option label="不一致" value="01"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="调查结论:">
+      <el-form-item label="-" class="item-column2">
+        <el-input v-model="form"></el-input>
+      </el-form-item>
+      <el-form-item label="调查结论:" class="item-column1">
         <el-input type="textarea" v-model="form.conclusion" :row="2" resize=none></el-input>
       </el-form-item>
       <el-form-item class="address-submit">

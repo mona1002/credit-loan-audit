@@ -519,7 +519,7 @@ export default {
           this.showFlag = 0;
       }
       // 点击 确认 提交 方法
-      this.post("/creauditInfo/approval ", this.form).then(res => {
+      this.post("/creauditInfo/approval", this.form).then(res => {
         console.log(res);
         if (res.statusCode != '200') {
           // this.warnShow = true;

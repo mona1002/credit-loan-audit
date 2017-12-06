@@ -20,8 +20,11 @@
       <el-form-item label="接听情况:" class="item-column3">
         {{workData.answer}}
       </el-form-item>
-      <el-form-item label="调查情况:" class="item-column3">
+      <el-form-item label="调查阶段:" class="item-column3">
         {{workData.checkStage}}
+      </el-form-item>
+      <el-form-item label="其他来源说明:" class="item-column3">
+        {{workData.custName}}
       </el-form-item>
       <div class="address-title">
         录入工作证明人调查信息
@@ -35,8 +38,14 @@
       <el-form-item label="接电话人身份:">
         {{workData.answerIdentity}}
       </el-form-item>
+      <el-form-item label="-" class="item-column3">
+        {{workData.custName}}
+      </el-form-item>
       <el-form-item label="核对单位工作情况:">
         {{workData.checkJob}}
+      </el-form-item>
+      <el-form-item label="-" class="item-column3">
+        {{workData.custName}}
       </el-form-item>
       <el-form-item label="调查结果:">
         {{workData.conclusion}}
@@ -49,26 +58,27 @@ export default {
   data() {
     return {
       form: {
-        id: '', // 住宅电话调查日志记录 id
-        phoneType: '', // 电话类型
+        // id: '', // 住宅电话调查日志记录 id
+        // phoneType: '', // 电话类型
         workData: '' // 返回的数据
       }
     }
   },
-  created() {
-    this.queryTelJobRef();
-  },
-  methods: {
-    queryTelJobRef() {
-      this.post('/creTelResearchHis/queryTelJobRef', {
-        id: this.id,
-        phoneType: this.phoneType
-      }).then(res => {
-        console.log(res);
-        this.workData = res.data;
-      })
-    }
-  }
+  props:['workData']
+  // created() {
+  //   this.queryTelJobRef();
+  // },
+  // methods: {
+  //   queryTelJobRef() {
+  //     this.post('/creTelResearchHis/queryTelJobRef', {
+  //       id: this.id,
+  //       phoneType: this.phoneType
+  //     }).then(res => {
+  //       console.log(res);
+  //       this.workData = res.data;
+  //     })
+  //   }
+  // }
 }
 
 </script>

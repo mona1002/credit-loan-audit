@@ -24,7 +24,7 @@
         {{mobileData.checkStageDes}}
       </el-form-item>
       <el-form-item label="其它来源情况说明:" class="item-column3">
-        {{mobileData.otherIncomeDes}}
+        {{mobileData.sourceDesc}}
       </el-form-item>
       <div class="address-title">
         录入住址电话调查信息
@@ -33,10 +33,14 @@
         {{mobileData.thirdResult}}
       </el-form-item>
       <el-form-item label="三方查询是否异常:" class="item-column2">
-        {{mobileData.threeQueriestxt}}
+        {{mobileData.threeQueriesdes}}
       </el-form-item>
-      <el-form-item label="是否与家庭联系人为同一接听人:" class="item-column2">
-        {{mobileData.issameFamtxt}}
+      <el-form-item label="异常说明:" class="item-column2">
+        {{mobileData.exceptionState}}
+      </el-form-item>
+      <!-- 是否与家庭联系人为同一接听人 -->
+      <el-form-item label="是否为同一接听人:" class="item-column2">
+        {{mobileData.issameFamDes}}
       </el-form-item>
       <el-form-item label="-" class="item-column2">
         {{mobileData.issameFamtxt}}
@@ -45,16 +49,16 @@
         {{mobileData.relBorrowertxt}}
       </el-form-item>
       <el-form-item label="核对工作情况:" class="item-column2">
-        {{mobileData.checkWorktxt}}
+        {{mobileData.checkWorkDes}}
       </el-form-item>
       <el-form-item label="-:" class="item-column2">
         {{mobileData.checkWorktxt}}
       </el-form-item>
       <el-form-item label="核对婚姻情况:" class="item-column2">
-        {{mobileData.maritalStatustxt}}
+        {{mobileData.maritalStatusDes}}
       </el-form-item>
       <el-form-item label="核对子女情况:" class="item-column2">
-        {{mobileData.childrenStatustxt}}
+        {{mobileData.maritalStatustxtDes}}
       </el-form-item>
       <el-form-item label="核对地址:" class="item-column2">
         {{mobileData.checkAddrtxt}}
@@ -102,45 +106,57 @@
         {{mobileData.checkHometeltxt}}
       </el-form-item>
       <el-form-item label="-" class="item-column2">
-        {{mobileData.checkEstatetxt}}
+        {{mobileData.checkHometeltxt}}
       </el-form-item>
-      <el-form-item label="借款人爱好和品行:">
+      <el-form-item label="借款人爱好和品行:" class="item-column1">
         {{mobileData.hobbyandBehave}}
       </el-form-item>
-      <el-form-item label="调查结论:">
+      <el-form-item label="调查结论:" class="item-column1">
         {{mobileData.conclusion}}
       </el-form-item>
     </el-form>
   </div>
 </template>
-<script>
+ <script>
 export default {
   data() {
     return {
-      id:'',  // 住宅电话调查日志记录 id
-      phoneType:'', // 电话类型
-      mobileData:'' // 请求返回的数据
+      // id:'',  // 住宅电话调查日志记录 id
+      // phoneType:'', // 电话类型
+      mobileData:'', // 请求返回的数据
+      // queryHis:'' // 监听对象
     }
   },
-  mounted() {
-    console.log('id='+this.id);
-    console.log('phoneType='+this.phoneType);
-    // 测试数据
-    this.id = '07a3c0ac-68f1-4400-9090-3144aff68015'
-    this.queryHomeTel();
-  },
-  props:['id','phoneType'],
-  methods: {
-    queryHomeTel(){
-      this.post('creTelResearchHis/queryHomeTel',{
-        id:this.id,
-        phoneType:this.phoneType
-      }).then( res => {
-        console.log(res);
-        this.mobileData = res.data;
-      })
-    }
-  }
+  // mounted() {
+  //   console.log('id='+this.id);
+  //   // console.log('phoneType='+this.phoneType);
+  //   // 测试数据
+  //   // this.id = '07a3c0ac-68f1-4400-9090-3144aff68015'
+  //   // this.queryHomeTel();
+  //   console.log(this.mobileData);
+  // },
+  props:['mobileData']
+//   props:['id','phoneType','queryHis'],
+//   methods: {
+//     queryHomeTel(){
+//       this.post('creTelResearchHis/queryHomeTel',{
+//         id:this.id,
+//         phoneType:this.phoneType
+//       }).then( res => {
+//         console.log(res);
+//         this.mobileData = res.data;
+//       })
+//     }
+//   },
+//   watch:{
+//     queryHis:function(){
+//       console.log('id====='+this.id);
+//     console.log('phoneType='+this.phoneType);
+//       if(this.queryHis){
+//         this.queryHomeTel();
+//       }
+//     }
+//   }
 }
 
-</script>
+ </script>
