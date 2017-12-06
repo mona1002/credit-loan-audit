@@ -64,10 +64,10 @@
       </div>
     </div>
     <!--=================================  查询弹出层 ================================= -->
-    <div v-show="dataa" class="posiiiii">
+    <div v-show="dataa" class="posi">
       <!-- 折叠 -->
-      <h1>内皮客户查询列表
-        <i class="el-icon-close" style="color:white;fontSize:18px" @click="closeAlertSearch"></i>
+      <h1>内匹配客户查询列表
+        <i class="el-icon-close" style="color:white;fontSize:18px;right:13px;top:16px" @click="closeAlertSearch"></i>
       </h1>
       <el-collapse v-model="activeNames">
         <el-collapse-item title="本人进件列表" name="1">
@@ -682,20 +682,25 @@
   }
   /* --------------------------- */
 
-  .posiiiii {
-    position: absolute;
+  .posi {
+position: absolute;
     top: 0;
     left: 0;
     right: 0;
-        bottom: 0;
-    background: green;
+    bottom: 0;
+    background: white;
+     z-index: 28;
   }
 
-  .posiiiii h1 {
+  .posi h1 {
     font-size: 16px;
-    height: 43px;
-    line-height: 43px;
+    height: 48px;
+    line-height: 48px;
     padding: 0 20px;
+        background: rgba(0, 119, 255, 0.75);
+       
+        color: #f8f9fd;
+    text-align: center
   }
 
 </style>
