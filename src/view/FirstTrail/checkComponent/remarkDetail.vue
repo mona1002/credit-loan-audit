@@ -49,7 +49,7 @@
 				taskInWaitting:'',
 			}
 		},
-		created(){
+		mounted(){
 			//一进入页面就发送请求
 			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
 			this.request(this.taskInWaitting.applyId);

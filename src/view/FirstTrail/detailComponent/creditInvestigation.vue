@@ -198,7 +198,7 @@
 	        taskInWaitting:'',
 	      };
 	    },
-	    created(){
+	    mounted(){
 			//一进入页面就发送请求
 			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
 			this.request(this.taskInWaitting.applyId);
@@ -224,6 +224,7 @@
 		height: 100%;
 		background-color: #fafbfc;
 		font-size: 14px;
+		min-width: 1285px;
 	}
 	/* 头部 */
 	.creditHead{
