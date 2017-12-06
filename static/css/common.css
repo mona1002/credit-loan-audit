@@ -14,10 +14,10 @@
     html{
       width:100%;
     }
-    #Abody{
+    /* .Abody{         */
       /* height: calc(100% - 101px); */
       /* overflow: hidden; */
-    }
+    /* } */
   }
 
 @charset "utf-8";
@@ -27,6 +27,10 @@
 html,body{
     width:100%;
     height: 100%;
+}
+.Abody li{
+float: none;
+font-weight: 400;
 }
   html,
   body,
@@ -211,5 +215,4 @@ html,body{
       clear: both;
       height: 0;
       visibility: hidden;
-
   }

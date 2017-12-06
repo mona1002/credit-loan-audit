@@ -430,6 +430,11 @@ position: relative
 .AudioVisualLeft .AudioVisual_wrap_compare_right .el-collapse-item__content {
   padding-bottom: 0;
 }
+.AudioVisualLeft .posi .el-collapse-item__content,
+.MatchingInf .posi .el-collapse-item__content{
+  /* background: red; */
+  height: 355px;
+}
 /* 影音列表- 对比弹出层-select-搜索框-wrap */
 .SplitScreen .AudioVisual_wrap_compare_right .el-select>.el-input,
 .SplitScreen .AudioVisual_wrap_compare_right .el-input__inner,

@@ -174,7 +174,12 @@
 
     <!-- 授权框 -->
     <el-dialog title="角色授权" :visible.sync="dialogAuthVisible">
-      <span>确定授权？</span>
+      <el-tree
+        :data="resDatas"
+        show-checkbox
+        node-key="id"
+        :props="defaultProps">
+      </el-tree>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogAuthVisible = false">取 消</el-button>
         <el-button type="primary" @click="dialogAuthVisible = false">确 定</el-button>
@@ -232,6 +237,12 @@ export default {
       currentPage: 1, // 默认显示的当前页
       pageSizesArr: [20, 50, 80, 100], // 每页显示的数据数
       setPageSize: 20,
+
+      resDatas: [], // 资源数据列表
+      defaultProps: {
+        children: 'children',
+        label: 'resName'
+      },
 
       queryParam: {
         // 查询角色的入参
@@ -351,13 +362,13 @@ export default {
 
     // 授权、启用、停用
     handleItem(flag) {
-      console.log(this.currentRow);
-      if (!this.currentRow) {
+      if (!this.currentRow||!this.currentRow.id) {
         this.dialogAlertVisible = true;
         return;
       }
       if (flag === "auth") {
         this.dialogAuthVisible = true;
+        this.getResTree();
       } else if (flag === "stop") {
         this.dialogStopVisible = true;
       } else if (flag === "enable") {
@@ -414,13 +425,18 @@ export default {
       this.dialogAddVisible = false;
     },
 
-    // 授权角色
-    grantRes() {
-      systemManageHttp.grantRes({
-        roleId: this.currentRow.roleId,
-        reslds: this.resourceName
+    // 获取资源列表
+    getResTree() {
+      systemManageHttp.getResTree({
+        reqFlag: '2',
+        pid: '',
+        resType: '',
+        validFlag: '',
+        recurseveFlag: false,
+        limitIdsList: ''
       }).then(res => {
-        console.log(res.data);
+        console.log(res.data.data);
+        this.resDatas = res.data.data;
       });
     },
 
@@ -442,8 +458,8 @@ export default {
 <style>
 .functionalRoleManage {
   padding: 15px 30px;
-  width: 100%;
-  height: 100%;
+  /* width: 100%; */
+  /* height: 100%; */
   background-color: #fafbfc;
 }
 .functionalRoleManage .row {
@@ -490,6 +506,14 @@ export default {
   height: 35px;
   width: 258px;
 }
+.functionalRoleManage .el-dialog{
+  width: 660px;
+}
+.functionalRoleManage .el-dialog .el-input__inner{
+  width: 185px;
+  height: 35px;
+}
+
 .functionalRoleManage .btn {
   height: 33px;
   border-radius: 8px;
@@ -567,8 +591,13 @@ export default {
   margin-bottom: 10px;
 }
 
+.functionalRoleManage .el-tree{
+  height: 500px;
+  overflow-y: auto;
+}
+
 /* 样式冲突的解决 */
-.functionalRoleManage .el-button{
+.functionalRoleManage .listContainer .el-button{
   padding: 0;
 }
 .functionalRoleManage .el-input{
