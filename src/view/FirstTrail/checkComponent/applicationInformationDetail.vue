@@ -501,51 +501,63 @@
 				      <el-table-column
 				        type="index"
 				      	:index='1'
-				      	label="序号" >
+				      	label="序号" 
+				      	min-width="50">
 				      </el-table-column>
 				      <el-table-column
 				        prop="estateTypeTxt"
-				        label="房产类型">
+				        label="房产类型"
+				        min-width="130">
 				      </el-table-column>
 				      <el-table-column
 				        prop="propertyTypeTxt"
-				        label="产权性质">
+				        label="产权性质"
+				        min-width="130">
 				      </el-table-column>
 				      <el-table-column
 				        prop="coveredArea"
-				        label="建筑面积[m^2]">
+				        label="建筑面积[m^2]"
+				        min-width="130">
 				      </el-table-column>
 				      <el-table-column
 				        prop="unitPrice"
-				        label="建筑单价[元]">
+				        label="建筑单价[元]"
+				        min-width="130">
 				      </el-table-column>
 				      <el-table-column
 				        prop="estateAddress"
-				        label="房产地址">
+				        label="房产地址"
+				        min-width="200">
 				      </el-table-column>
 				      <el-table-column
 				        prop="estateZip"
-				        label="邮政编码">
+				        label="邮政编码"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="equityRatio"
-				        label="产权比例">
+				        label="产权比例"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="loanPeriod"
-				        label="贷款期限[月]">
+				        label="贷款期限[月]"
+				        min-width="130">
 				      </el-table-column>
 				      <el-table-column
 				        prop="mortgageStatusTxt"
-				        label="抵押状况">
+				        label="抵押状况"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="monthlyPay"
-				        label="月供[元]">
+				        label="月供[元]"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="restLoans"
-				        label="贷款余额[元]">
+				        label="贷款余额[元]"
+				        min-width="130">
 				      </el-table-column>
 			    </el-table>
 		  	</el-collapse-item>
@@ -560,51 +572,63 @@
 				      <el-table-column
 				        type="index"
 				      	:index='1'
-				      	label="序号" >
+				      	label="序号" 
+				      	min-width="50">
 				      </el-table-column>
 				      <el-table-column
 				        prop="carPrice"
-				        label="车辆购置价[元]">
+				        label="车辆购置价[元]"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="isYearCheckTxt"
-				        label="是否年检">
+				        label="是否年检"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="isOperateTxt"
-				        label="是否非运营">
+				        label="是否非运营"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="carModel"
-				        label="车辆型号">
+				        label="车辆型号"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="carTypeTxt"
-				        label="车辆类型">
+				        label="车辆类型"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="loanPeriod"
-				        label="贷款期限[月]">
+				        label="贷款期限[月]"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="monthlyPay"
-				        label="月供[元]">
+				        label="月供[元]"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="restLoans"
-				        label="贷款余额[月]">
+				        label="贷款余额[月]"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="carNo"
-				        label="车牌号码">
+				        label="车牌号码"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="buyInsurTxt"
-				        label="车辆易购保险">
+				        label="车辆易购保险"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="buyDate"
-				        label="购买时间">
+				        label="购买时间"
+				        min-width="120">
 				      </el-table-column>
 			    </el-table>
 		  	</el-collapse-item>
@@ -720,55 +744,71 @@
 				</template>
 			    <el-table
 			      :data="accepCusRelations"
-			      style="width: 100%">
+			      style="width: 100%"
+			      highlight-current-row>
 				      <el-table-column
 				        type="index"
 				      	:index='1'
-				      	label="序号" >
+				      	label="序号" 
+				      	min-width="50">
 				      </el-table-column>
 				      <el-table-column
 				        prop="contactName"
-				        label="姓名">
+				        label="姓名"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="contactTypeTxt"
-				        label="类型">
+				        label="类型"
+				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
 				        prop="relationshipTxt"
-				        label="关系">
+				        label="关系"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="mobile"
-				        label="手机号码">
+				        label="手机号码"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="homeTel"
-				        label="住宅电话">
+				        label="住宅电话"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="contactAge"
-				        label="年龄">
+				        label="年龄"
+				        min-width="50">
 				      </el-table-column>
 				      <el-table-column
 				        prop="certTypeTxt"
-				        label="证件类型">
+				        label="证件类型"
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="certCode"
-				        label="证件号码">
+				        label="证件号码"
+				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
 				        prop="workName"
-				        label="单位名称">
+				        label="单位名称"
+				        min-width="120"
+				        show-overflow-tooltip>
 				      </el-table-column>
 				      <el-table-column
 				        prop="workTel"
-				        label="单位电话">
+				        label="单位电话"
+				        min-width="100"
+				        >
 				      </el-table-column>
 				      <el-table-column
 				        prop="workAddr"
-				        label="地址">
+				        label="地址"
+				        min-width="120"
+				        show-overflow-tooltip>
 				      </el-table-column>
 				      <!-- 单位地址没有 -->
 			    </el-table>
@@ -808,7 +848,7 @@
 				applyId:'',
 			};
 		},
-		created(){
+		mounted(){
 			//一进入页面就发送请求
 			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
 			this.applyId=this.taskInWaitting.applyId;
@@ -868,7 +908,8 @@
 		        	salPerEmployDate:this.datas.salPerEmployDate,
 		        	appOrgRegisterDate:this.datas.appOrgRegisterDate,
 		        	adminIntroduce:this.datas.adminIntroduce,
-		        	applyId:this.datas.id
+		        	applyId:this.datas.id,
+		        	workName:this.datas.accepCusWorkInfo.workName,
 		        };
 		        /*console.log(this.datas);*/
 		        localStorage.setItem("applicationInformationDetail",JSON.stringify(query));
@@ -883,7 +924,7 @@
 <style type="text/css" scoped>
 	.applicationInformationDetail{
 		width: 100%;
-		min-width: 1366px;
+		min-width: 1258px;
 		height: 100%;
 		background-color: #fafbfc;
 		font-size: 14px;

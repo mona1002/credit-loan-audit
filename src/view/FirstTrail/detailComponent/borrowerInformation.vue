@@ -1800,7 +1800,7 @@
 		height: 100%;
 		background-color: #fafbfc;
 		font-size: 14px;
-		min-width: 1366px;
+		/* min-width: 1366px; */
 	}
 	.left{
 		float: left;
@@ -1852,6 +1852,7 @@
 		width: 120px;
 		display: inline-block;
 		text-align: right;
+		color: #475669;
 	}
 	/* 贷款总况 */
 	.daikuanzongkuang li p{
@@ -1874,6 +1875,7 @@
 		width: 160px;
 		text-align: right;
 		padding-right: 5px;
+		color: #475669;
 	}
 	/* 负债信息：负债合计 */
 	.fuzhaixinxi ol li.zongji input{
@@ -1921,6 +1923,7 @@
 	.zhengxunbaogao ol:nth-of-type(2) li div textarea{
 		width: 696px;
 		padding: 5px 5px 0 5px;
+		color: #475669;
 	}
 	.reportLabel{
 		float: left;
@@ -1946,12 +1949,14 @@
 		display: inline-block;
 		float: left;
 		margin:0 10px 0 20px;
+		color: #475669;
 	}
 	.qita ol textarea{
 		width: 70%;
 		height: 200px;
 		border: 1px solid #d8dce5;  
 		padding:10px 0 0 10px;
+		color: #475669;
 	}
 	/* 必填 */
 	.must{
@@ -1991,6 +1996,10 @@
 		font-size: 14px;
 		line-height: 30px;
 		padding-left: 10px;
+		color: #475669;
+	}
+	.layer .layerbox p.choces{
+		text-align: center;
 	}
 	.layer p i{
 		float: right;

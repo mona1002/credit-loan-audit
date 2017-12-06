@@ -27,7 +27,7 @@
 			    <el-table-column
 			      type="index" 
 			      label="序号"
-			      width="46"
+			      width="50"
 			      >
 			    </el-table-column>
 			    <el-table-column
@@ -127,7 +127,7 @@
 		        //taskType:'',
 			}
 		},
-		created(){
+		mounted(){
 			//一进入页面就发送请求
 			this.queryParam.processTemplateId=this.$route.query.processTemplateId;
 			this.queryParam.taskNodeName=this.$route.query.taskNodeName;
