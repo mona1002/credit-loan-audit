@@ -89,7 +89,8 @@
         currentRow: null,
         workbenchPass:{
           processTemplateId:'',
-           taskStatus: "01"
+           taskStatus: "01",
+           taskNodeName:''
         }
       }
     },
@@ -110,17 +111,18 @@
         console.log("我是表格")
         // console.log(val)
         this.currentRow = val;
-        this.workbenchPass.processTemplateId=this.currentRow.processTemplateId
+        this.workbenchPass.processTemplateId=val.processTemplateId;
+        this.workbenchPass.taskNodeName=val.taskNodeName;
         localStorage.setItem("workbenchPass",JSON.stringify( this.workbenchPass));
         this.$router.push({
           path: '/taskInWaitting',
-          query: {
-            processTemplateId: val.processTemplateId,
-            taskNodeName: val.taskNodeName,
-            taskStatus: "01",
-            userCode: this.loginPass.userCode,
-            orgCode: this.loginPass.orgCode
-          }
+          // query: {
+          //   processTemplateId: val.processTemplateId,
+          //   taskNodeName: val.taskNodeName,
+          //   taskStatus: "01",
+          //   userCode: this.loginPass.userCode,
+          //   orgCode: this.loginPass.orgCode
+          // }
         });
         // localStorage.setItem("tableData", JSON.stringify(tableData));
         // this.$router.push({path:'/taskInWaitting',query:'123'})
