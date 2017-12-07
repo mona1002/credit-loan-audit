@@ -12,7 +12,7 @@
 .Abody el-select-dropdown__item{
 float:none;
 }
-.Abody el-select-dropdown__item{
+.Abody .el-select-dropdown__item{
 float:none;
 }
 /* 公用 表格 表头 th */
@@ -612,8 +612,12 @@ position: relative
   width: calc( 66.6% + 394px );
 }
 /* 信审任务列表 分页去掉浮动*/
-.taskWatting li.el-select-dropdown__item,
-.CreditForm .el-select-dropdown__item{
+.taskWatting .el-select-dropdown__item,
+.Abody .CreditForm .el-select-dropdown__item{
+  float: none;
+}
+.taskWatting el-select-dropdown__item,
+.Abody .CreditForm el-select-dropdown__item{
   float: none;
 }
 /* 信审表div content 外wrap */
