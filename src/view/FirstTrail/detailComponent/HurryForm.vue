@@ -206,8 +206,8 @@ export default {
       conclusion: '',
       phoneType: '',
       sourceDesc: '',
-      threeQueries: ''
-
+      threeQueries: '',
+      phoneId: ''
     }
   },
   props: ['custName', 'phoneNum', 'applyId'],
@@ -226,10 +226,12 @@ export default {
             answer: this.answer,
             checkStage: this.checkStage,
             sourceDesc: this.sourceDesc, // 其他来源说明
-            applyId: this.applyId
+            applyId: this.applyId,
+            id: this.phoneId
           },
           cretelecontact: {
             applyId: this.applyId,
+            id: this.phoneId,
             thirdResult: this.thirdResult,
             relBorrower: this.relBorrower,
             relBorrowertxt: this.relBorrowertxt,
@@ -248,6 +250,13 @@ export default {
         })
         .then(res => {
           console.log(res);
+          if (res.statusCode == '200') {
+
+            this.phoneId = res.data.id;
+            console.log(this.phoneId);
+            // 提交数据成功,广播事件 重新刷新列表
+            this.$emit('updateList');
+          }
         })
     }
   },

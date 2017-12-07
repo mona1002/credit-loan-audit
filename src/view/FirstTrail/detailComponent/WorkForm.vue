@@ -146,7 +146,7 @@ export default {
       mobilepayment: '',
       mobilepaymenttxt: '',
       conclusion: '',
-      
+      phoneId: ''
     }
   },
   props: ['custName', 'phoneNum', 'applyId'],
@@ -168,9 +168,11 @@ export default {
             checkStage: this.checkStage,
             sourceDesc: this.sourceDesc, // 其他来源说明
             applyId: this.applyId,
+            id:this.phoneId
           },
           creteljobref: {
             applyId: this.applyId,
+            id: this.phoneId,
             answer: this.answerIdentity, // 接电话人身份
             answertxt: this.answertxt,
             checkJob: this.checkJob,
@@ -182,9 +184,11 @@ export default {
         })
         .then(res => {
           console.log(res);
-          if (res.statusCode == '200')
+          if (res.statusCode == '200'){
+            this.phoneId = res.data.id; 
             // 提交数据成功,广播事件 重新刷新列表
             this.$emit('updateList');
+          }
         })
     }
   },
