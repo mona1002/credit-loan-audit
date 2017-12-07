@@ -806,7 +806,7 @@
 				        label="N"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n" placeholder="请输入内容" v-numbers='numn'>
+				        	<input type="text" name="" v-model="scope.row.n" placeholder="请输入内容" v-number-only>
 				          <!-- <el-input v-model="scope.row.n" placeholder="请输入内容" v-numbers></el-input> -->
 						</template>
 				      </el-table-column>
@@ -815,7 +815,7 @@
 				        label="N-1"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n1" placeholder="请输入内容" v-numTwo='numn1'>
+				        	<input type="text" name="" v-model="scope.row.n1" placeholder="请输入内容" v-number-only>
 						  <!-- <el-input v-model="scope.row.n1" placeholder="请输入内容"></el-input> -->
 						</template>
 				      </el-table-column>
@@ -1691,115 +1691,94 @@
 	    },
 	    directives: {
 	    // 指令的定义
-	    numbers:{
-      		twoWay: true,
-      		bind:function (el) {
-      			console.log(el);
-				el.addEventListener('blur',function () {
-    				let value;
-    				function formatNumber(num,cent,isThousand) {
-					    var num = num.toString().replace(/\$|\,/g,'');
+		   /* numbers:{
+	      		twoWay: true,
+	      		bind:function (el) {
+	      			console.log(el);
+					el.addEventListener('blur',function () {
+	    				let value;
+	    				function formatNumber(num,cent,isThousand) {
+						    var num = num.toString().replace(/\$|\,/g,'');
 
-					    // 检查传入数值为数值类型
-					    if(isNaN(num))
-					        num = "0";
+						    // 检查传入数值为数值类型
+						    if(isNaN(num))
+						        num = "0";
 
-					    // 获取符号(正/负数)
-					    let sign = (num == (num = Math.abs(num)));
+						    // 获取符号(正/负数)
+						    let sign = (num == (num = Math.abs(num)));
 
-					    num = Math.floor(num*Math.pow(10,cent)+0.50000000001);  // 把指定的小数位先转换成整数.多余的小数位四舍五入
-					    let cents = num%Math.pow(10,cent);              // 求出小数位数值
-					    num = Math.floor(num/Math.pow(10,cent)).toString();   // 求出整数位数值
-					    cents = cents.toString();               // 把小数位转换成字符串,以便求小数位长度
+						    num = Math.floor(num*Math.pow(10,cent)+0.50000000001);  // 把指定的小数位先转换成整数.多余的小数位四舍五入
+						    let cents = num%Math.pow(10,cent);              // 求出小数位数值
+						    num = Math.floor(num/Math.pow(10,cent)).toString();   // 求出整数位数值
+						    cents = cents.toString();               // 把小数位转换成字符串,以便求小数位长度
 
-					    // 补足小数位到指定的位数
-					    while(cents.length<cent)
-					        cents = "0" + cents;
+						    // 补足小数位到指定的位数
+						    while(cents.length<cent)
+						        cents = "0" + cents;
 
-					    if(isThousand) {
-					        // 对整数部分进行千分位格式化.
-					        for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
-					            num = num.substring(0,num.length-(4*i+3))+','+ num.substring(num.length-(4*i+3));
-					    }
+						    if(isThousand) {
+						        // 对整数部分进行千分位格式化.
+						        for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
+						            num = num.substring(0,num.length-(4*i+3))+','+ num.substring(num.length-(4*i+3));
+						    }
 
-					    if (cent > 0)
-					        return (((sign)?'':'-') + num + '.' + cents);
-					    else
-					        return (((sign)?'':'-') + num);
-						};
-    				console.log(formatNumber(el.value,2,0));
-			        (function(){
-			            value = formatNumber(el.value,2,0)
-			           	console.log(value);
-			            return value
-			        })()
-    				el.value =value
-    				 console.log(el.value);
-				})
-			},
-	  		update:function (el,binding,vnode) {
-		        if(el.value !== ''){
-		            el.value = el.value.replace(/[^0-9.]+/g, '');
-		            console.log(el.value);
-		        }
-		    },
-		    unbind: function () {
-			    this.el.removeEventListener('input', this.handler)
-			}
-
-			
-		},
-		numTwo:{
-      		twoWay: true,
-      		bind:function (el) {
-      			console.log(el);
-				el.addEventListener('blur',function () {
-    				let value;
-    				function formatNumber(num,cent,isThousand) {
-					    var num = num.toString().replace(/\$|\,/g,'');
-
-					    // 检查传入数值为数值类型
-					    if(isNaN(num))
-					        num = "0";
-
-					    // 获取符号(正/负数)
-					    let sign = (num == (num = Math.abs(num)));
-
-					    num = Math.floor(num*Math.pow(10,cent)+0.50000000001);  // 把指定的小数位先转换成整数.多余的小数位四舍五入
-					    let cents = num%Math.pow(10,cent);              // 求出小数位数值
-					    num = Math.floor(num/Math.pow(10,cent)).toString();   // 求出整数位数值
-					    cents = cents.toString();               // 把小数位转换成字符串,以便求小数位长度
-
-					    // 补足小数位到指定的位数
-					    while(cents.length<cent)
-					        cents = "0" + cents;
-
-					    if(isThousand) {
-					        // 对整数部分进行千分位格式化.
-					        for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
-					            num = num.substring(0,num.length-(4*i+3))+','+ num.substring(num.length-(4*i+3));
-					    }
-
-					    if (cent > 0)
-					        return (((sign)?'':'-') + num + '.' + cents);
-					    else
-					        return (((sign)?'':'-') + num);
-						};
-    				console.log(formatNumber(el.value,2,0));
-			        (function(){
-			            value = formatNumber(el.value,2,0)
-			           	console.log(value);
-			            return value
-			        })()
-    				el.value =value
-				})
-			},
-	  		update:function (el,binding,vnode) {
-		        if(el.value !== ''){
-		            el.value = el.value.replace(/[^0-9.]+/g, '');
-		        }
-		    }
-		},
+						    if (cent > 0)
+						        return (((sign)?'':'-') + num + '.' + cents);
+						    else
+						        return (((sign)?'':'-') + num);
+							};
+	    				console.log(formatNumber(el.value,2,0));
+				        (function(){
+				            value = formatNumber(el.value,2,0)
+				           	console.log(value);
+				            return value
+				        })()
+	    				el.value =value
+	    				 console.log(el.value);
+					})
+				},
+		  		update:function (el,binding,vnode) {
+			        if(el.value !== ''){
+			            el.value = el.value.replace(/[^0-9.]+/g, '');
+			            console.log(el.value);
+			        }
+			    }
+			},*/
+			numberOnly: {
+	            bind: function(el) {
+	                el.handler = function() {
+	                	el.value = el.value.replace(/\D+/, '');
+	                	if(!isNaN(el.value)){
+	                		//alert('sdf');
+	                		el.value=Math.round(parseFloat(el.value)*100)/100;
+	                		console.log(el.value);
+							 var xsd=el.value.toString().split(".");
+							 //console.log(xsd);
+							 if(xsd.length==1){
+								 el.value=el.value.toString()+".00";
+								 console.log(el.value);
+								 //return el.value;
+							 };
+							 alert(111);
+							 console.log(el.value);
+							 return el.value;
+							 console.log(el.value);
+							 if(xsd.length>1){
+								 if(xsd[1].length<2){
+								 el.value=el.value.toString()+"0";
+								 }
+							 return el.value;
+							 } 
+							 //return el.value;
+	                	} 
+	                     
+	                }
+	                el.addEventListener('input', el.handler)
+	            },
+	            unbind: function(el) {
+	                el.removeEventListener('input', el.handler)
+	            }
+	        }
 
 		},
 	}
