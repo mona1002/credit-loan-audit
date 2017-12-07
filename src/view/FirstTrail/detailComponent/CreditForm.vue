@@ -1154,7 +1154,6 @@
 
   .CreditForm_InternetInf_ul_right {
     height: 630px;
-    background:pink;
     position: relative;
   }
 

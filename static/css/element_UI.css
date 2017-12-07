@@ -606,7 +606,8 @@ position: relative
   width: calc( 66.6% + 394px );
 }
 /* 信审任务列表 分页去掉浮动*/
-.taskWatting .el-select-dropdown__item{
+.taskWatting li.el-select-dropdown__item,
+.CreditForm .el-select-dropdown__item{
   float: none;
 }
 /* 信审表div content 外wrap */
