@@ -9,45 +9,45 @@
         {{workData.custName}}
       </el-form-item>
       <el-form-item label="电话类型:" class="item-column3">
-        {{workData.phoneType}}
+        {{workData.phoneTypeDes}}
       </el-form-item>
       <el-form-item label="电话号码:" class="item-column3">
         {{workData.phoneNum}}
       </el-form-item>
       <el-form-item label="来源:" class="item-column3">
-        {{workData.source}}
+        {{workData.sourceDes}}
       </el-form-item>
       <el-form-item label="接听情况:" class="item-column3">
-        {{workData.answer}}
+        {{workData.answerDes}}
       </el-form-item>
       <el-form-item label="调查阶段:" class="item-column3">
-        {{workData.checkStage}}
+        {{workData.checkStageDes}}
       </el-form-item>
       <el-form-item label="其他来源说明:" class="item-column3">
-        {{workData.custName}}
+        {{workData.sourceDesc}}
       </el-form-item>
       <div class="address-title">
         录入工作证明人调查信息
       </div>
-      <el-form-item label="微信/支付宝是否异常:">
-        {{workData.mobilepayment}}
+      <el-form-item label="微信/支付宝是否异常:" class="item-column2">
+        {{workData.mobilepaymentDes}}
       </el-form-item>
-      <el-form-item label="异常项说明:">
-        {{workData.exceptionremark}}
+      <el-form-item label="异常项说明:" class="item-column2">
+        {{workData.mobilepaymenttxt}}
       </el-form-item>
-      <el-form-item label="接电话人身份:">
-        {{workData.answerIdentity}}
+      <el-form-item label="接电话人身份:" class="item-column2">
+        {{workData.answerIdentityDes}}
       </el-form-item>
-      <el-form-item label="-" class="item-column3">
-        {{workData.custName}}
+      <el-form-item label="-" class="item-column2">
+        {{workData.answertxt}}
       </el-form-item>
-      <el-form-item label="核对单位工作情况:">
-        {{workData.checkJob}}
+      <el-form-item label="核对单位工作情况:" class="item-column2">
+        {{workData.checkJobDes}}
       </el-form-item>
-      <el-form-item label="-" class="item-column3">
-        {{workData.custName}}
+      <el-form-item label="-" class="item-column2">
+        {{workData.checkJobtxt}}
       </el-form-item>
-      <el-form-item label="调查结果:">
+      <el-form-item label="调查结果:" class="item-column1">
         {{workData.conclusion}}
       </el-form-item>
     </el-form>

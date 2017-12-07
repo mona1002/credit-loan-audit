@@ -1,119 +1,202 @@
 <!-- 电话征信 - 工作证明人 -->
 <template>
   <div>
-    <el-form ref="form" :model="form" label-width="80px">
-      <div class="address-title">
-        新增调查日志
-      </div>
-      <el-form-item label="客户名称:" class="item-column3 dis-input">
-        <el-input v-model="custName" :disabled="true"></el-input>
-      </el-form-item>
-      <el-form-item label="电话类型:" class="item-column3">
-        <el-select v-model="form.phoneType" disabled placeholder="请选择电话类型">
-          <el-option label="工作证明人" value="05"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="电话号码:" class="item-column3 dis-input">
-        <el-input v-model="phoneNum" :disabled="true"></el-input>
-      </el-form-item>
-      <el-form-item label="来源:" class="item-column3">
-        <el-select v-model="form.source" placeholder="请选择来源">
-          <el-option label="申请表" value="00"></el-option>
-          <el-option label="第三方查询" value="01"></el-option>
-          <el-option label="其他" value="02"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="接听情况:" class="item-column3">
-        <el-select v-model="form.answer" placeholder="请选择接听情况">
-          <el-option label="无人接" value="00"></el-option>
-          <el-option label="拒接" value="01"></el-option>
-          <el-option label="停机" value="02"></el-option>
-          <el-option label="空号" value="03"></el-option>
-          <el-option label="接通" value="04"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="调查阶段:" class="item-column3">
-        <el-select v-model="form.checkStage" placeholder="请选择调查阶段">
-          <el-option label="正在调查" value="00"></el-option>
-          <el-option label="完成调查" value="01"></el-option>
-          <el-option label="调查失败" value="02"></el-option>
-          <el-option label="未调查" value="03"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="其他来源说明" class="item-column3">
-        <el-input v-model="form"></el-input>
-      </el-form-item>
-      <div class="address-title">
-        录入工作证明人调查信息
-      </div>
-      <el-form-item label="微信/支付宝是否异常:" class="item-column2">
-        <el-select v-model="form.mobilepayment" placeholder="请选择调查情况">
-          <el-option label="否" value="0"></el-option>
-          <el-option label="是" value="1"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="异常项说明:" class="item-column2">
-        <el-input v-model="form.exceptionremark"></el-input>
-      </el-form-item>
-      <el-form-item label="接电话人身份:" class="item-column2">
-        <el-select v-model="form.answerIdentity" placeholder="请选择调查情况">
-          <el-option label="同事" value="00"></el-option>
-          <el-option label="本人" value="01"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="-" class="item-column2">
-        <el-input v-model="form"></el-input>
-      </el-form-item>
-      <el-form-item label="核对单位工作情况:" class="item-column2">
-        <el-select v-model="form.checkJob" placeholder="请选择调查情况">
-          <el-option label="一致" value="00"></el-option>
-          <el-option label="不一致" value="01"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="-" class="item-column2">
-        <el-input v-model="form"></el-input>
-      </el-form-item>
-      <el-form-item label="调查结论:" class="item-column1">
-        <el-input type="textarea" v-model="form.conclusion" :row="2" resize=none></el-input>
-      </el-form-item>
-      <el-form-item class="address-submit">
+    <div class="address-title">
+      新增调查日志
+    </div>
+    <ul>
+      <li class="item-column3">
+        <div class="left-title">客户名称:</div>
+        <div class="dis-input">
+          <el-input v-model="custName" :disabled="true"></el-input>
+        </div>
+      </li>
+      <li class="item-column3">
+        <div class="left-title">电话类型:</div>
+        <div>
+          <el-select v-model="phoneType" disabled>
+            <el-option label="住址电话" value="01"></el-option>
+          </el-select>
+        </div>
+      </li>
+      <li class="item-column3">
+        <div class="left-title">电话号码:</div>
+        <div>
+          <el-input v-model="phoneNum" :disabled="true"></el-input>
+        </div>
+      </li>
+      <li class="item-column3">
+        <div class="left-title">来源:</div>
+        <div>
+          <el-select v-model="source">
+            <el-option label="申请表" value="00"></el-option>
+            <el-option label="第三方查询" value="01"></el-option>
+            <el-option label="其他" value="02"></el-option>
+          </el-select>
+        </div>
+      </li>
+      <li class="item-column3">
+        <div class="left-title">接听情况:</div>
+        <div>
+          <el-select v-model="answer">
+            <el-option label="无人接" value="00"></el-option>
+            <el-option label="拒接" value="01"></el-option>
+            <el-option label="停机" value="02"></el-option>
+            <el-option label="空号" value="03"></el-option>
+            <el-option label="接通" value="04"></el-option>
+          </el-select>
+        </div>
+      </li>
+      <li class="item-column3">
+        <div class="left-title">调查阶段:</div>
+        <div>
+          <el-select v-model="checkStage">
+            <el-option label="正在调查" value="00"></el-option>
+            <el-option label="完成调查" value="01"></el-option>
+            <el-option label="调查失败" value="02"></el-option>
+            <el-option label="未调查" value="03"></el-option>
+          </el-select>
+        </div>
+      </li>
+      <li class="item-column3" v-show="source=='02'">
+        <div class="left-title">其他来源说明:</div>
+        <div>
+          <el-input v-model="sourceDesc"></el-input>
+        </div>
+      </li>
+    </ul>
+    <div class="address-title">
+      录入工作证明人调查信息
+    </div>
+    <ul>
+      <li class="item-column2">
+        <div class="left-title">微信/支付宝是否异常</div>
+        <div>
+          <el-select v-model="mobilepayment" placeholder="请选择调查情况">
+            <el-option label="否" value="0"></el-option>
+            <el-option label="是" value="1"></el-option>
+          </el-select>
+        </div>
+      </li>
+      <li class="item-column2">
+        <div class="left-title">异常项说明</div>
+        <div>
+          <el-input v-model="mobilepaymenttxt"></el-input>
+        </div>
+      </li>
+      <li class="item-column2">
+        <div class="left-title">接电话人身份</div>
+        <div>
+          <el-select v-model="answerIdentity" placeholder="请选择调查情况">
+            <el-option label="同事" value="00"></el-option>
+            <el-option label="本人" value="01"></el-option>
+          </el-select>
+        </div>
+      </li>
+      <li class="item-column2">
+        <div class="left-title"></div>
+        <div v-show="answerIdentity=='00'">
+          <el-input v-model="answertxt"></el-input>
+        </div>
+      </li>
+      <li class="item-column2">
+        <div class="left-title">核对单位工作情况</div>
+        <div>
+          <el-select v-model="checkJob" placeholder="请选择调查情况">
+            <el-option label="一致" value="00"></el-option>
+            <el-option label="基本一致" value="01"></el-option>
+            <el-option label="不一致" value="02"></el-option>
+            <el-option label="被调查人不清楚" value="03"></el-option>
+          </el-select>
+        </div>
+      </li>
+      <li class="item-column2">
+        <div class="left-title"></div>
+        <div v-show="checkJob=='01'">
+          <el-input v-model="checkJobtxt"></el-input>
+        </div>
+      </li>
+      <li class="item-column1">
+        <div class="left-title">调查结论</div>
+        <div>
+          <el-input type="textarea" v-model="conclusion" :row="2" resize=none></el-input>
+        </div>
+      </li>
+      <li class="item-column1 submit-class">
         <el-button type="primary" @click="submitForm('form')">确定</el-button>
-      </el-form-item>
-    </el-form>
+      </li>
+    </ul>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      form: {
-        custName: '', // 客户姓名
-        phoneType: '', // 电话类型
-        phoneNum: '', // 电话号码
-        source: '', // 来源
-        answer: '', // 接听情况
-        checkStage: '', // 调查阶段
-        mobilepayment: '', // 微信/支付宝是否异常
-        exceptionremark: '', // 异常项说明
-        answerIdentity: '', // 接电话人身份
-        checkJob: '', // 核对单位工作情况
-        conclusion: '' // 调查结论
-      }
+      // custName: '',
+      phoneType: '',
+      // phoneNum: '',
+      source: '',
+      answer: '',
+      checkStage: '',
+      sourceDesc: '',
+      answerIdentity: '',
+      answertxt: '',
+      checkJob: '',
+      checkJobtxt: '',
+      mobilepayment: '',
+      mobilepaymenttxt: '',
+      conclusion: '',
+      
     }
   },
-  props: ['custName', 'phoneNum'],
+  props: ['custName', 'phoneNum', 'applyId'],
   mounted() {
-    this.form.custName = this.custName;
-    this.form.phoneNum = this.phoneNum;
-    this.form.phoneType = '05'; // 工作证明人电话
+    this.phoneType = '05'; // 住址电话
+
   },
   methods: {
     submitForm() {
       console.log('submit!');
-      this.post('/creTelResearchHis/addTeljobref', this.form)
+      
+      this.post('/creTelResearchHis/addTeljobref', {
+          cretelinvest: {
+            custName: this.custName,
+            phoneType: this.phoneType,
+            phoneNum: this.phoneNum,
+            source: this.source,
+            answer: this.answer,
+            checkStage: this.checkStage,
+            sourceDesc: this.sourceDesc, // 其他来源说明
+            applyId: this.applyId,
+          },
+          creteljobref: {
+            applyId: this.applyId,
+            answer: this.answerIdentity, // 接电话人身份
+            answertxt: this.answertxt,
+            checkJob: this.checkJob,
+            checkJobtxt: this.checkJobtxt,
+            mobilepayment: this.mobilepayment,
+            mobilepaymenttxt: this.mobilepaymenttxt,
+            conclusion: this.conclusion
+          }
+        })
         .then(res => {
           console.log(res);
+          if (res.statusCode == '200')
+            // 提交数据成功,广播事件 重新刷新列表
+            this.$emit('updateList');
         })
+    }
+  },
+  watch: {
+    source: function() {
+      this.sourceDesc = '';
+    },
+    answerIdentity: function() {
+      this.answertxt = '';
+    },
+    checkJob: function() {
+      this.checkJobtxt = '';
     }
   }
 }
