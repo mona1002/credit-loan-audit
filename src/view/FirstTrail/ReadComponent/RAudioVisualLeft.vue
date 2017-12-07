@@ -203,9 +203,9 @@
           console.log(res);
           // console.log(res.data)
           this.ListParent = res.data;
-          this.localInf.applyId = id; //将此处获得的matchApplyId赋值给 this.localInf.applyId,更改localInf的值，以便用更改后的值获取子节点
-          // console.log( this.localInf.applyId)
-          //  this.localInf.applyId="e0b51098-b24d-4211-8ae4-f08f657d7886";
+          this.localInf.matchApplyId = id; //将此处获得的matchApplyId赋值给 this.localInf.matchApplyId,更改localInf的值，以便用更改后的值获取子节点
+          // console.log( this.localInf.matchApplyId)
+          //  this.localInf.matchApplyId="e0b51098-b24d-4211-8ae4-f08f657d7886";
           console.log(id)
           this.dataa = false;
           this.custName = this.currentRow.matchApplyCustName;
@@ -216,9 +216,9 @@
       getChildrenList(id, ind, item) {
         console.log("获取子节点");
         // console.log(id)//父节点获取的id
-        // console.log( this.localInf.applyId)
+        // console.log( this.localInf.matchApplyId)
         this.post("/productArchive/getProductArchiveChildList", {
-          applyId: this.localInf.applyId,
+          applyId: this.localInf.matchApplyId,
           pid: id
         }).then(res => {
           console.log(res.data)
@@ -383,12 +383,14 @@
     mounted() {
       // localStorage.setItem("userInf", JSON.stringify(userInf));
       // console.log(JSON.parse(localStorage.getItem("taskInWaitting") ));
-      this.localInf = JSON.parse(localStorage.getItem("applicationInformationDetail"))
+            console.log("查询页面-影音资料左")
+      this.localInf = JSON.parse(localStorage.getItem("internalId"))
+      // localStorage.setItem("internalId", JSON.stringify({id:row.id ,matchApplyId:row.matchApplyId})
       // console.log("localInf")
-      // console.log(this.localInf.applyId)
+      // console.log(this.localInf.matchApplyId)
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
-        applyId: this.localInf.applyId,
+        applyId: this.localInf.matchApplyId,
         // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
         //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
 

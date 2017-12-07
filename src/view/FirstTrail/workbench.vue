@@ -6,12 +6,6 @@
       <div class="main_left">
         <h2>
           <i class="el-icon-edit"> </i>常用 </h2>
-  <router-link to="/functionalRoleManage">  <el-button type="primary">功能角色管理</el-button></router-link>
-  <router-link to="/processRoleManage">  <el-button type="primary">流程角色</el-button></router-link>
-  <router-link to="/resourceManage">  <el-button type="primary">资源管理</el-button></router-link>
-  <router-link to="/organManage">  <el-button type="primary">机构管理</el-button></router-link>
-  <router-link to="/userManage">  <el-button type="primary">用户管理</el-button></router-link>
-
       </div>
       <div class="main_right">
         <!-- 中间 -->
@@ -84,6 +78,7 @@
         activeNames1: ['1'],
         activeNames2: ['1'],
         taskStatus: '', //任务状态
+        loginPass:[],
         userCode: '', //用户编码
         orgCode: '', //机构编码
         pageNum: '', //页数（第几页）
@@ -91,7 +86,12 @@
         processTemplateId: '', // 流程模板Id
         taskNodeName: '', // 任务节点名称
         tableData: [],
-        currentRow: null
+        currentRow: null,
+        workbenchPass:{
+          processTemplateId:'',
+           taskStatus: "01",
+           taskNodeName:''
+        }
       }
     },
     components: {
@@ -101,24 +101,27 @@
       more() {
         console.log("more")
       },
-      setCurrent(row) {
-        console.log("我是按钮")
+      // setCurrent(row) {
+      //   console.log("我是按钮")
 
-        console.log(row)
-        this.$refs.singleTable.setCurrentRow(row);
-      },
+      //   console.log(row)
+      //   this.$refs.singleTable.setCurrentRow(row);
+      // },
       handleCurrentChange(val) {
         console.log("我是表格")
         // console.log(val)
         this.currentRow = val;
+        this.workbenchPass.processTemplateId=val.processTemplateId;
+        this.workbenchPass.taskNodeName=val.taskNodeName;
+        localStorage.setItem("workbenchPass",JSON.stringify( this.workbenchPass));
         this.$router.push({
           path: '/taskInWaitting',
           query: {
             processTemplateId: val.processTemplateId,
             taskNodeName: val.taskNodeName,
             taskStatus: "01",
-            userCode: this.userCode,
-            orgCode: this.orgCode
+            userCode: this.loginPass.userCode,
+            orgCode: this.loginPass.orgCode
           }
         });
         // localStorage.setItem("tableData", JSON.stringify(tableData));
@@ -133,19 +136,19 @@
       // COMPLETED("03","已办"),
       // ABORTED("04","历史"),
       //  获取到 路由传参 
-      this.userCode = this.$route.query.userCode;
-      this.orgCode = this.$route.query.orgCode;
-      console.log(this.userCode + "================" + this.orgCode)
-      // this.$route.query.picName接参数
+      // this.userCode = this.$route.query.userCode;
+      // this.orgCode = this.$route.query.orgCode;
+      // console.log(this.userCode + "================" + this.orgCode)
+      // this.$route.query.picName接参数 
+      this.loginPass=JSON.parse(localStorage.getItem('userInf'));
       this.post("/workFlowTaskQuery/getTaskProfile", {
         taskStatus: "01",
-        userCode: this.userCode,
-        orgCode: this.orgCode
+        userCode: this.loginPass.userCode,
+        orgCode: this.loginPass.orgCode
       }).then(res => {
         console.log(res.data);
         this.tableData = res.data;
       });
-
     },
   }
 

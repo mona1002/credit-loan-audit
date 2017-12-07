@@ -243,7 +243,8 @@ export default {
       housingFund: '',
       jobref1: '',
       jobref2: '',
-      conclusion: ''
+      conclusion: '',
+      phoneId: ''
     }
   },
   props: ['custName', 'phoneNum', 'applyId'],
@@ -262,10 +263,12 @@ export default {
             answer: this.answer,
             checkStage: this.checkStage,
             sourceDesc: this.sourceDesc, // 其他来源说明
-            applyId: this.applyId
+            applyId: this.applyId,
+            id: this.phoneId
           },
           cretelcompany: {
             applyId: this.applyId,
+            id: this.phoneId,
             thirdResult: this.thirdResult,
             phone: this.phone,
             phonetxt: this.phonetxt,
@@ -290,9 +293,12 @@ export default {
         })
         .then(res => {
           console.log(res);
-          if (res.statusCode == '200')
+          if (res.statusCode == '200') {
+
+            this.phoneId = res.data.id;
             // 提交数据成功,广播事件 重新刷新列表
             this.$emit('updateList');
+          }
         })
     }
   },

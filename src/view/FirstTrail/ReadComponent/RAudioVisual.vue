@@ -1,7 +1,7 @@
 <template>
   <div class="AudioVisual">
     <!-- <div class="CompareShow"> -->
-    <!-- 左侧list隐藏时显示的div     在根元素下面，与left right 平级-->
+    <!-- 左侧list隐藏时显示的div       在根元素下面，与left right 平级-->
     <div class="hidDiv" v-show="!showListDiv" ref="hidDiv_ref">
       <img class="showBtn" src="../../../../static/images/Shapearrowhide@1x.png" @click="showList" style="transform: rotate(180deg)">
     </div>
@@ -102,7 +102,7 @@
         console.log(ind)
         console.log(item)
         this.post("/productArchive/getProductArchiveChildList", {
-          applyId: this.localInf.applyId,
+          applyId: this.localInf.matchApplyId,
           pid: id
         }).then(res => {
           console.log(res.data)
@@ -273,11 +273,12 @@
       }
     },
     mounted() {
-      console.log("mounted")
-      this.localInf = JSON.parse(localStorage.getItem("applicationInformationDetail"))
+      console.log("查询页面-影音资料右")
+      this.localInf = JSON.parse(localStorage.getItem("internalId"))//获取列表详情的id
+      // this.localInf = JSON.parse(localStorage.getItem("applicationInformationDetail"))
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
-        applyId: this.localInf.applyId,
+        applyId: this.localInf.matchApplyId,
       }).then(res => {
         // console.log(res.data)
         this.ListParent = res.data

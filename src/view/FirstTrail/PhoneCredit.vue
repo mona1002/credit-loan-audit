@@ -19,8 +19,13 @@
       <el-container>
         <el-header style="text-align: right; font-size: 12px">
           <!--  v-show="hisListShow" -->
+          <!-- title="历史调查日志"  -->
           <el-collapse v-model="activeNames">
-            <el-collapse-item title="历史调查日志" style="text-align:left;" v-show="hisListShow" name="1">
+            <el-collapse-item style="text-align:left;" v-show="hisListShow" name="1">
+              <template slot="title">
+                <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+                <span class="headFont">历史调查日志</span>
+              </template>
               <div>
                 <el-table :data="listData.recordList" height="250" border style="width: 100%" @row-dblclick="rowDbClick" stripe v-loading="mobileLoading">
                   <el-table-column type="index" label="序号">
@@ -266,7 +271,7 @@ export default {
       comData: [],
       familyData: [],
       hurryData: [],
-      workData: []
+      workData: [],
     }
   },
   mounted() {
@@ -618,6 +623,10 @@ export default {
 
 
 
+
+
+
+
 /* 树形  结构 */
 
 .phone-credit .el-tree {
@@ -627,7 +636,13 @@ export default {
   border-radius: 4px;
   width: 233px;
   height: 321px;*/
+
+  box-shadow:0 2px 2px 0 #bfcbd9;
 }
+
+
+
+
 
 
 
@@ -655,6 +670,10 @@ export default {
 
 
 
+
+
+
+
 /* element-ui tree icon 箭头*/
 
 .phone-credit .el-tree-node__content .el-tree-node__expand-icon {
@@ -662,6 +681,10 @@ export default {
   position: relative;
   left: 150px;
 }
+
+
+
+
 
 
 
@@ -689,12 +712,20 @@ export default {
 
 
 
+
+
+
+
 /* 三角 icon */
 
 .phone-credit .el-tree-node__expand-icon {
   font-size: 20px;
   /*display: none;*/
 }
+
+
+
+
 
 
 
@@ -717,11 +748,19 @@ export default {
 
 
 
+
+
+
+
 /* 二级 目录 样式 */
 
 .phone-credit .el-tree-node__content {
   padding-left: 0px !important;
 }
+
+
+
+
 
 
 
@@ -745,6 +784,10 @@ export default {
 
 
 
+
+
+
+
 /* 点击添加出现的 页面 */
 
 .phone-credit .cover-view {
@@ -755,6 +798,10 @@ export default {
   top: 0;
   left: 0;
 }
+
+
+
+
 
 
 
@@ -790,11 +837,19 @@ export default {
 
 
 
+
+
+
+
 /* title */
 
 .phone-credit .cover-content .add-title {
   text-align: left;
 }
+
+
+
+
 
 
 
@@ -833,11 +888,19 @@ export default {
 
 
 
+
+
+
+
 /* 添加电话  input 样式*/
 
 .phone-credit .add-content .el-input {
   width: inherit;
 }
+
+
+
+
 
 
 
@@ -866,6 +929,10 @@ export default {
 
 
 
+
+
+
+
 /* children - label*/
 
 .phone-credit .el-tree-node__children .el-tree-node__label {
@@ -876,6 +943,10 @@ export default {
   line-height: 21px;
   text-align: left;
 }
+
+
+
+
 
 
 
@@ -901,6 +972,10 @@ export default {
 
 
 
+
+
+
+
 /* 弹窗页面 关闭按钮*/
 
 .phone-credit .el-tag {
@@ -916,6 +991,10 @@ export default {
 .phone-credit .el-tag .el-icon-close {
   right: 0px;
 }
+
+
+
+
 
 
 
@@ -970,6 +1049,10 @@ export default {
 
 
 
+
+
+
+
 /* 表格分页 */
 
 .phone-credit .el-pagination {
@@ -977,6 +1060,10 @@ export default {
   width: 100%;
   text-align: center;
 }
+
+
+
+
 
 
 
@@ -999,11 +1086,19 @@ export default {
 
 
 
+
+
+
+
 /* 添加申请单电话信息 必填 * */
 
 .phone-credit .require-icon {
   color: #ff0000;
 }
+
+
+
+
 
 
 
@@ -1019,6 +1114,10 @@ export default {
   display: inline-block;
   width: 70px;
 }
+
+
+
+
 
 
 
@@ -1066,6 +1165,10 @@ export default {
 
 
 
+
+
+
+
 /* label */
 
 .phone-credit .el-form-item__label {
@@ -1083,6 +1186,10 @@ export default {
 
 
 
+
+
+
+
 /* 三列 */
 
 .phone-credit .item-column3 {
@@ -1091,6 +1198,10 @@ export default {
   margin: 0;
   margin-bottom: 10px;
 }
+
+
+
+
 
 
 
@@ -1121,6 +1232,10 @@ export default {
 
 
 
+
+
+
+
 /* 表单提交 */
 
 .phone-credit .address-submit {
@@ -1132,6 +1247,10 @@ export default {
   text-align: right;
   margin-top: 50px;
 }
+
+
+
+
 
 
 
@@ -1159,6 +1278,10 @@ export default {
 
 
 
+
+
+
+
 /* el-input width*/
 
 .phone-credit .el-container .el-main .el-input {
@@ -1174,11 +1297,19 @@ export default {
 
 
 
+
+
+
+
 /* 表格头 */
 
 .phone-credit .el-header {
   padding: 0;
 }
+
+
+
+
 
 
 
@@ -1202,6 +1333,10 @@ export default {
 
 
 
+
+
+
+
 /* 折叠 头 箭头样式*/
 
 .phone-credit .el-collapse-item__header .el-collapse-item__arrow {
@@ -1209,7 +1344,12 @@ export default {
 }
 
 
+
+
+
+
 /*  表单样式 */
+
 .phone-credit .left-title {
   float: left;
   width: 150px;
@@ -1220,18 +1360,31 @@ export default {
   text-align: right;
 }
 
-.phone-credit li{
-  padding:10px;
+.phone-credit li {
+  padding: 10px;
   /*min-height: 30px;*/
 }
 
-.phone-credit li .textarea-class{
+.phone-credit li .textarea-class {
   height: 100px;
 }
 
 
-.phone-credit  .submit-class{
+.phone-credit .submit-class {
   text-align: right;
+}
+
+
+
+/* 折叠面板头部背景色和icon */
+
+.phone-credit .icon_hat {
+  padding: 9px 10px 10px 13px;
+  vertical-align: middle;
+}
+
+.phone-credit .headFont {
+  font-size: 16px;
 }
 
 </style>

@@ -270,6 +270,7 @@ export default {
       otherIncome: '',
       otherIncometxt: '',
       conclusion: '',
+      phoneId:''
     }
   },
   props: ['custName', 'phoneNum', 'applyId'],
@@ -288,10 +289,12 @@ export default {
             answer: this.answer,
             sourceDesc: this.sourceDesc,
             checkStage: this.checkStage,
-            applyId: this.applyId
+            applyId: this.applyId,
+            id:this.phoneId
           },
           cretelfcontact: {
             applyId: this.applyId,
+            id: this.phoneId,
             thirdResult: this.thirdResult, // 第三方查询信息
             threeQueries: this.threeQueries, // 三方异常
             threeQueriestxt: this.threeQueriestxt, // 三方异常说明
@@ -318,9 +321,11 @@ export default {
         })
         .then(res => {
           console.log(res);
-          if (res.statusCode == '200')
+          if (res.statusCode == '200'){
+            this.phoneId = res.data.id; 
             // 提交数据成功,广播事件 重新刷新列表
             this.$emit('updateList');
+          }
         })
     }
   },

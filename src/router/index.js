@@ -55,7 +55,7 @@ import FSplitScreen from '@/view/FinalTrial/FSplitScreen.vue'
 // 机构管理
 import organManage from '@/view/systemManage/organManage/organManage'
 // 资源管理
-import resourceManage from '@/view/systemManage/resourceManage/resourceManage'
+// import resourceManage from '@/view/systemManage/resourceManage/resourceManage'
 // 用户管理
 import userManage from '@/view/systemManage/userManage/userManage'
 // 流程角色管理
@@ -192,10 +192,10 @@ const routes = [{
   path: '/organManage',
   component: organManage
 },
-{
-  path: '/resourceManage',
-  component: resourceManage
-},
+// {
+//   path: '/resourceManage',
+//   component: resourceManage
+// },
 {
   path: '/userManage',
   component: userManage

@@ -5,7 +5,9 @@
     <internal-match-list :title="title3"></internal-match-list> -->
     <div>
       <div class="title-bar">
-        {{title1}}
+        <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+        <span class="headFont">移动号码类(手机号和联系人)</span>
+        <!-- {{title1}} -->
       </div>
       <!-- 移动电话 -->
       <el-table stripe :data="mobileData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickMobiel" highlight-current-row v-loading="mobileLoading">
@@ -34,7 +36,9 @@
     <!-- 固定电话 -->
     <div>
       <div class="title-bar">
-        {{title2}}
+        <!-- {{title2}} -->
+        <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+        <span class="headFont">固定电话类(家电、单电)</span>
       </div>
       <el-table stripe :data="fixTelData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickFixTel" highlight-current-row v-loading="fixTelLoading">
         <el-table-column prop="targetCustName" label="命中号码姓名">
@@ -61,7 +65,9 @@
     </div>
     <div>
       <div class="title-bar">
-        {{title3}}
+        <!-- {{title3}} -->
+        <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+        <span class="headFont">单位名称</span>
       </div>
       <!-- 单位名称 -->
       <el-table stripe :data="workData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickCompany" highlight-current-row v-loading="companyLoading">
@@ -123,7 +129,7 @@ export default {
 
     // 获取到传进来的参数   进件编号
     // this.applySubNo = this.$route.query.applySubNo;
-    
+
     var applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
 
     // 进件编号
@@ -136,7 +142,7 @@ export default {
     // this.applySubNo = '111';
     // 公司名称
     // this.workName = this.$route.query.workName;
-    
+
 
     // 测试数据
     // this.workName = '阿里';
@@ -216,19 +222,25 @@ export default {
       console.log(row);
 
       // id: 客户id     orgCate
-      
-      localStorage.setItem("internalId", JSON.stringify(row.id));
-      
+
+      localStorage.setItem("internalId", JSON.stringify({id:row.id,matchApplyId:row.matchApplyId}));
+      this.$router.go('/SplitScreen');
     },
     itemDbclickFixTel(row, event) {
       // 行被双击 事件  固定电话
       console.log('fix tel row dbclick');
       console.log(row.id);
+
+      localStorage.setItem("internalId", JSON.stringify(row.id));
+      this.$router.go('/SplitScreen');
     },
     itemDbclickCompany(row, event) {
       // 行被双击 事件  单位名称
       console.log('company row dbclick');
       console.log(row.id);
+
+      localStorage.setItem("internalId", JSON.stringify(row.id));
+      this.$router.go('/SplitScreen');
     },
     // cellHover(row, column, cell, event) {
     //   // cell hover 事件
@@ -383,6 +395,8 @@ export default {
 
 
 
+
+
 /* 分页 */
 
 .internalMatch-class .tool-bar {
@@ -390,6 +404,8 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
+
 
 
 
@@ -424,6 +440,8 @@ export default {
 
 
 
+
+
 /* 确认按钮 */
 
 .internalMatch-class .mark-button {
@@ -438,11 +456,15 @@ export default {
 
 
 
+
+
 /* 行高 */
 
 .internalMatch-class thead tr {
   height: 40px;
 }
+
+
 
 
 
@@ -463,6 +485,8 @@ export default {
 
 
 
+
+
 /* 备注 width*/
 
 .internalMatch-class .mark-cell {
@@ -475,11 +499,25 @@ export default {
 
 
 
+
+
 /* tr */
 
 .internalMatch-class .el-table tr {
   height: 35px;
   background: #ffffff;
+}
+
+
+/* 折叠面板头部背景色和icon */
+
+.internalMatch-class .icon_hat {
+  padding: 9px 10px 10px 13px;
+  vertical-align: middle;
+}
+
+.internalMatch-class .headFont {
+  font-size: 16px;
 }
 
 </style>

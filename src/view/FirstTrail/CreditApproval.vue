@@ -69,14 +69,14 @@
           <el-form-item label="主原因:" class="item-column2" v-show="this.showFlag=='02'">
             <!-- <el-input v-model="mainReason"></el-input> -->
             <!-- 改成后台获取   filter-method     visible-change 下拉框 出现/隐藏时触发-->
-            <el-select @change="selectChange">
+            <el-select @change="selectChange" v-model="mainReason">
               <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
               </el-option>
             </el-select>
           </el-form-item>
           <!-- 拒绝主原因选择 01 -->
-          <el-form-item label="主原因:" class="item-column2" v-show="this.showFlag=='01' || this.showFlag=='07'">
-            <el-select @change="selectChange">
+          <el-form-item label="主原因:" class="item-column2" v-show="this.showFlag=='01' || this.showFlag=='07'" >
+            <el-select @change="selectChange" v-model="mainReason">
               <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
               </el-option>
             </el-select>
@@ -91,7 +91,7 @@
         </div>
         <div class="back-form-li" style="height:60px;line-height: 60px;padding-top:5px;">
           <el-form-item label="原因说明:">
-            <el-input type="textarea" :row="2" resize="none" v-model="reasonRemark  "></el-input>
+            <el-input type="textarea" :row="2" resize="none" v-model="reasonRemark"></el-input>
             <span style="color:red;display:inline-block;width:0px;float:right;margin-right: 25px;">*</span>
           </el-form-item>
         </div>
@@ -127,42 +127,43 @@
           </div>
           <div class="back-form-li">
             <el-form-item label="申请金额[元]:" class="item-column2">
-              80,000,00
+              <!-- {{loanAmt}} -->
+              {{loanAmt}}
             </el-form-item>
             <el-form-item label="申请期限[月]:" class="item-column2">
-              18
+              {{loanTerm}}
             </el-form-item>
           </div>
           <div class="back-form-li">
             <el-form-item label="申请产品:" class="item-column2">
-              诺工贷
+              {{sqproName}}
             </el-form-item>
             <el-form-item label="可接受最高每期还款额[元]:" class="item-column2">
-              8,899.00
+              {{eachTermAmt}}
             </el-form-item>
           </div>
           <div class="back-form-li">
             <el-form-item label="信用评分:" class="item-column2">
-              6.19
+              接口取值评分 
             </el-form-item>
             <el-form-item label="申请类型:" class="item-column2">
-              非循环贷
+              {{loanType}}
             </el-form-item>
           </div>
           <div class="form-title">
             信审核实信息
           </div>
           <el-form-item label="核实可接受最高每期还款额[元]:" style="width:300px;">
-            8,000.00
+            接口取值
           </el-form-item>
           <div class="form-title">
             审批信息
           </div>
           <div class="back-form-li">
             <el-form-item label="结论">
-              <el-radio-group v-model="resource">
-                <el-radio label="同意"></el-radio>
-              </el-radio-group>
+              <!-- <el-radio-group v-model="applyConclusion"> -->
+                <el-radio label="00" v-model="applyConclusion">同意</el-radio>
+              <!-- </el-radio-group> -->
             </el-form-item>
           </div>
           <div class="back-form-li">
@@ -177,7 +178,7 @@
           </div>
           <div class="back-form-li">
             <el-form-item label="批准期限[月]:" class="item-column2">
-              <el-input v-model="month"></el-input>
+              <el-input v-model="ploanTerm"></el-input>
             </el-form-item>
             <el-form-item label="批准金额[元]:" class="item-column2">
               <el-input v-model="ploanAmt"></el-input>
@@ -219,6 +220,7 @@
       <div v-show=" this.showFlag=='spjl'" class="spjl-div">
         <div class="form-title" style="position:relative;">
           信审审批结论轨迹
+          <!-- <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag> -->
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
         </div>
         <el-table :data="tableData.recordList" height="250" border style="width: 100%" stripe highlight-current-row v-loading="loading">
@@ -342,18 +344,18 @@ export default {
       type: '', // 定义的判断 主/次 原因
       flag: '', // 定义的判断 回退类型
       dealroperCode: '', // 经办人
-      taskId: '',// 任务id
+      taskId: '', // 任务id
       custName: '',
       custNo: '',
       certType: '',
       certCode: '',
       emerType: '',
       appOrgCode: '',
-      proName: '',
-      proCode: '',
-      proId: '',
+      proName: '', 
+      proCode: '', // 批准产品 产品编号
+      proId: '', // 产品id
       opinionFlag: '',
-      mainReason: '',  // 主原因name
+      mainReason: '', // 主原因name
       secondaryReason: '',
       reasonDesc: '',
       appOrgId: '',
@@ -361,7 +363,7 @@ export default {
       rollbackNodeName: '', // 监听使用的  回退节点
       dealroperDate: '',
       creauditAppOperate: '',
-      resource:'',
+      resource: '',
       // warnShow: '', // 警告 弹窗/
       // warnMsg: '' // 警告文字
       spjlData: [], // 审批结论轨迹数据
@@ -371,7 +373,22 @@ export default {
       pageNum: 1,
       pageSize: 5,
       loading: false, // 加载
-      mainId:'', // 主原因 id
+      mainId: '', // 主原因 id
+      mainReasonTitle:'',// 主原因 title
+      applicationInformationDetail:'',// 申请详情传过来的数据
+      // 审批
+      loanAmt:'', // 批准金额
+      loanTerm:'', // 申请期限
+      sqproName:'', // 申请信息-申请产品
+      eachTermAmt:'', // 可接受最高每期还款额
+      loanType:'', // 申请类型
+      // 审批同意
+      applyConclusion:'00', // 审批同意
+      verIncome:'', // 核实收入
+      // proCode:'', // 产品编号
+      // proId: '', // 产品id
+      ploanTerm:'', // 批准期限
+      ploanAmt:'' , // 批准金额
     }
   },
   mounted() {
@@ -400,7 +417,10 @@ export default {
 
     // applyId
     // this.applyId = '00542';
-    this.applyId = '00542';
+    // this.applyId = '00542';
+
+    this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
+    this.applyId = this.applicationInformationDetail.applyId;
   },
   methods: {
     // open 打开 自定义 弹窗   挂起
@@ -477,7 +497,33 @@ export default {
           this.get('system/getSystemDate').then(res => {
             console.log(res)
             // 请求系统时间
-            this.dealroperDate = res.data;
+            // this.dealroperDate = res.data;
+            // 请求存到本地的数据
+            // 申请金额
+            this.loanAmt = this.applicationInformationDetail.loanAmt;
+            // 申请期限
+            this.loanTerm = this.applicationInformationDetail.loanTerm;
+            // 申请信息-申请产品
+            this.sqproName = this.applicationInformationDetail.proName;
+            // 可接受最高每期还款额
+            this.eachTermAmt = this.applicationInformationDetail.eachTermAmt;
+            // 申请类型/借款类型
+            this.loanType = this.applicationInformationDetail.loanTypeTxt;
+
+            /* 请求 
+              信用评分 
+              核实可接受最高还款额
+              产品
+            */
+           // 产品
+           this.get('/credit/product').then(res=>{
+            console.log(res);
+            if(res.statusCode == '200'){
+              // 假如没有  核实可接受最高每期还款额 
+              // if(res.)  提交的时候也要判断
+              this.$message("提示:请求完善 信审表中可承受的月还款金额");
+            }
+           })
           })
           break;
         case 'spjl':
@@ -486,6 +532,10 @@ export default {
           break;
         case 'lcgj':
           this.showFlag = 'lcgj';
+          // 取本地的 流程模版id
+          this.processTemplateId = JSON.parse(localStorage.getItem('processTemplateId'));
+          console.log(this.processTemplateId);
+          // 
 
           break;
       }
@@ -501,7 +551,7 @@ export default {
           this.showFlag = 0;
           // this.mainReason = this.mainReason; // 主原因同理
           this.creauditAppOperate = 'check_Refuse';
-          
+          this.taskId = '180074';
           break;
         case '02':
           console.log("回退");
@@ -511,7 +561,7 @@ export default {
           this.rollbackNodeName = this.rollbackNodeName;
           // this.mainReason = this.mainReason; // 主原因同理
           this.creauditAppOperate = 'check_Back';
-          this.taskId = '180024';
+          this.taskId = '180049';
           break;
         case '07':
           console.log("放弃");
@@ -525,8 +575,20 @@ export default {
           this.coverShow = false;
           this.showFlag = 0;
           this.taskId = '177574';
+
+          // 假如没有  核实可接受最高每期还款额 , 提示
+          this.$message("提示:请求完善 信审表中可承受的月还款金额");
           break;
       }
+      // 传给接口的日期
+      this.dealroperDate = new Date(this.dealroperDate).toLocaleString().replace(/\//g, '-').match(/\d{4}\-\d{2}\-\d{1,2}/)[0];
+      var dates = this.dealroperDate.split('-');
+      if(dates[1].length<2)
+        dates[1]= '0'+dates[1]
+      if(dates[2].length<2)
+        dates[2]='0'+dates[2];
+
+      this.dealroperDate = dates[0]+'-'+dates[1]+'-'+dates[2];
       // 点击 确认 提交 方法
       this.post("/creauditInfo/approval", {
         // 挂起 taskId 任务id
@@ -570,15 +632,16 @@ export default {
           this.proCode = ''; //  产品代码
           this.proId = ''; // 产品id
           this.opinionFlag = ''; // 标志任务类型
-          this.mainReasonName = ''; // 回退主原因
+          this.mainReason = ''; // 回退主原因
           this.secondaryReason = ''; // 回退子原因
           this.reasonRemark = ''; // 意见描述/原因说明
           this.appOrgId = ''; // 进件机构id
-          this.applyId = ''; // 申请单id
+          // this.applyId = ''; // 申请单id
           this.rollbackNodeName = ''; // 回退节点名称
           this.dealroperDate = ''; // 经办时间
           this.creauditAppOperate = ''; // 操作类型
-          this.reasonRemark = '';
+
+          this.$message(res.msg);
         }
       });
     },
@@ -656,7 +719,7 @@ export default {
       })
     },
     // 回退/拒绝 主原因 select - change
-    selectChange:function(val){
+    selectChange: function(val) {
       console.log(val)
       console.log('回退/拒绝主原因  select - change')
       var id = val.id; // 主原因的 id
@@ -709,7 +772,7 @@ export default {
         this.secondaryReason = ''; // 回退子原因
         this.reasonRemark = ''; // 意见描述/原因说明
         this.appOrgId = ''; // 进件机构id
-        this.applyId = ''; // 申请单id
+        // this.applyId = ''; // 申请单id
         this.rollbackNodeName = ''; // 回退节点名称
         this.dealroperDate = ''; // 经办时间
         this.creauditAppOperate = ''; // 操作类型
@@ -733,6 +796,7 @@ export default {
   margin-top: 20px;
   overflow: hidden;
 }
+
 
 
 
@@ -768,11 +832,13 @@ export default {
 
 
 
+
 /* 按钮集合控件 */
 
 .creditApproval-class .btn-div {
   text-align: center;
 }
+
 
 
 
@@ -792,6 +858,7 @@ export default {
   color: #333;
   border: none;
 }
+
 
 
 
@@ -830,6 +897,7 @@ export default {
 
 
 
+
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -837,6 +905,7 @@ export default {
   float: left;
   margin: 0;
 }
+
 
 
 
@@ -859,6 +928,7 @@ export default {
   border-radius: 10px;
   overflow: hidden;
 }
+
 
 
 
@@ -907,11 +977,13 @@ export default {
 
 
 
+
 /* textarea */
 
 .creditApproval-class .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
 
 
 
@@ -940,6 +1012,7 @@ export default {
 
 
 
+
 /* 弹窗页面 关闭按钮*/
 
 .creditApproval-class .el-tag {
@@ -955,6 +1028,7 @@ export default {
 .creditApproval-class .el-tag .el-icon-close {
   right: 0px;
 }
+
 
 
 
@@ -998,6 +1072,7 @@ export default {
 
 
 
+
 /* 审批结论轨迹 */
 
 .creditApproval-class .spjl-div {
@@ -1027,6 +1102,7 @@ export default {
 
 
 
+
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -1034,6 +1110,7 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
 
 
 
