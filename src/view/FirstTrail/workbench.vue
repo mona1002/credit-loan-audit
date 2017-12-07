@@ -91,7 +91,11 @@
         processTemplateId: '', // 流程模板Id
         taskNodeName: '', // 任务节点名称
         tableData: [],
-        currentRow: null
+        currentRow: null,
+        workbenchPass:{
+          processTemplateId:'',
+           taskStatus: "01"
+        }
       }
     },
     components: {
@@ -111,7 +115,8 @@
         console.log("我是表格")
         // console.log(val)
         this.currentRow = val;
-        localStorage.setItem("processTemplateId",JSON.stringify(this.currentRow.processTemplateId));
+        this.workbenchPass.processTemplateId=this.currentRow.processTemplateId
+        localStorage.setItem("workbenchPass",JSON.stringify( this.workbenchPass));
         this.$router.push({
           path: '/taskInWaitting',
           query: {
