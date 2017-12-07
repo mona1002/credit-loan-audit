@@ -100,7 +100,7 @@ import NavItem from '@/view/navItem'
     float: left;
     height: 70px;
     width: 116px;
-    border-right: 1px solid #12346b;
+    border-right: 1px solid #bfcbd9;
   }
   .mheader .logoDiv .logo{
     width: 58px;

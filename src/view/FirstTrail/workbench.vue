@@ -79,8 +79,8 @@
         activeNames2: ['1'],
         taskStatus: '', //任务状态
         loginPass:[],
-        // userCode: '', //用户编码
-        // orgCode: '', //机构编码
+        userCode: '', //用户编码
+        orgCode: '', //机构编码
         pageNum: '', //页数（第几页）
         pageSize: '', //页面显示行数
         processTemplateId: '', // 流程模板Id
@@ -89,7 +89,8 @@
         currentRow: null,
         workbenchPass:{
           processTemplateId:'',
-           taskStatus: "01"
+           taskStatus: "01",
+           taskNodeName:''
         }
       }
     },
@@ -110,7 +111,8 @@
         console.log("我是表格")
         // console.log(val)
         this.currentRow = val;
-        this.workbenchPass.processTemplateId=this.currentRow.processTemplateId
+        this.workbenchPass.processTemplateId=val.processTemplateId;
+        this.workbenchPass.taskNodeName=val.taskNodeName;
         localStorage.setItem("workbenchPass",JSON.stringify( this.workbenchPass));
         this.$router.push({
           path: '/taskInWaitting',
@@ -134,20 +136,19 @@
       // COMPLETED("03","已办"),
       // ABORTED("04","历史"),
       //  获取到 路由传参 
-      this.loginPass=JSON.parse(localStorage.getItem('userInf'));
       // this.userCode = this.$route.query.userCode;
       // this.orgCode = this.$route.query.orgCode;
       // console.log(this.userCode + "================" + this.orgCode)
-      // this.$route.query.picName接参数
+      // this.$route.query.picName接参数 
+      this.loginPass=JSON.parse(localStorage.getItem('userInf'));
       this.post("/workFlowTaskQuery/getTaskProfile", {
         taskStatus: "01",
         userCode: this.loginPass.userCode,
         orgCode: this.loginPass.orgCode
       }).then(res => {
-        // console.log(res.data);
+        console.log(res.data);
         this.tableData = res.data;
       });
-
     },
   }
 

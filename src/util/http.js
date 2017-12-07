@@ -10,6 +10,9 @@ axios.defaults.timeout = 5000;
 //  axios.defaults.baseURL = 'http://10.1.26.47:8080/riskManagement';//沿海本地地址
  // axios.defaults.baseURL = 'http://10.1.26.27:8080/riskManagement';//宝来本地地址
 
+// 设置options 不进行发送option 验证  ------错误
+// Vue.http.options.emulateJSON = true
+
 axios.defaults.withCredentials=true;
 
 axios.interceptors.response.use(

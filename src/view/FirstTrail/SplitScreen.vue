@@ -6,14 +6,14 @@
       <p class="PerDtl">
         <span> 借款人： {{customInf.mainCustName}}</span>
         <span> 进件编号: {{customInf.applyMainNo}}</span>
-        <span> 证件号码: {{customInf.certCode}}</span>
+        <span> 证件号码: {{tastwaitingPass.certCode}}</span>
         <span> 进件机构: {{customInf.appOrgName}}</span>
         <span> 门店成立时间: {{customInf.appOrgRegisterDate}}</span>
         <span> 业务员入职时间： {{customInf.salPerEmployDate}}</span>
         <!-- <span> 行政区域进件(或非行政区域进件)</span> -->
         <!-- <span> 行政区域进件 / 非行政区域进件{{customInf1.adminIntroduce}}</span> -->
         <span>{{customInf.adminIntroduce}}</span>
-        
+
       </p>
       <div class="SplitScreen_wrap">
         <!-- 左侧分屏部分 -->
@@ -72,14 +72,14 @@
       </el-tabs> -->
           <!-- 右屏tab 表头 -->
           <div class="Right_tab_title_div">
-      <!-- 左右滑动 图标  -->
+            <!-- 左右滑动 图标  -->
             <!-- <i class="el-icon-d-arrow-left tab_left_arrow"></i> -->
             <span class="pre_next_btn_wrap" @click="leftMovingBtn">
-            <img src="../../../static/images/Shape@1x.png" >
+              <img src="../../../static/images/Shape@1x.png">
             </span>
             <!-- <i class="el-icon-d-arrow-right tab_right_arrow" ></i> -->
-            <span class="pre_next_btn_wrap" style="color:red;"  @click="rightMovingBtn">
-            <img src="../../../static/images/Shaperight@1x.png">
+            <span class="pre_next_btn_wrap" style="color:red;" @click="rightMovingBtn">
+              <img src="../../../static/images/Shaperight@1x.png">
             </span>
             <!-- tab 2 -=====================tab2里面的ul-->
             <div class="Right_tab_ul_wrap">
@@ -95,7 +95,7 @@
             <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
             <remark v-if=" this.tabContent2==1"></remark>
             <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
-            <capplicationInformationDetail v-if=" this.tabContent2==3"></capplicationInformationDetail>
+            <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <!-- <applicationInformation v-if=" this.tabContent2==3"></applicationInformation> -->
             <borrowerInformation v-if=" this.tabContent2==4"></borrowerInformation>
             <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
@@ -128,8 +128,10 @@
               <el-option v-for="item in AlertSearchCondition" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select> -->
-            <el-input v-model="AlertSearch" placeholder="请输入内容" :disabled="true" style="display:inline;" ></el-input>
-     <el-button type="primary" @click="compareProps">  <i class="el-icon-search" style="fontSize:16px" ></i>  </el-button>
+            <el-input v-model="AlertSearch" placeholder="请输入内容" :disabled="true" style="display:inline;"></el-input>
+            <el-button type="primary" @click="compareProps">
+              <i class="el-icon-search" style="fontSize:16px"></i>
+            </el-button>
           </p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
@@ -137,7 +139,7 @@
             <!-- <aut :AlertSearchProps="AlertSearch" @click.native="a" ref="audioChild"></aut> -->
             <!-- <aut ref="audioChild"  v-on:inputInf="inputInner"></aut> -->
             <AudioVisualLeft :custom="customInf.applyId " ref="audioChild" v-on:inputInf="inputInner"></AudioVisualLeft>
-            
+
           </div>
         </div>
       </div>
@@ -149,7 +151,6 @@
 <script>
   import myHead from "../header.vue"
   import aut from "./checkComponent/aut"
-  
   // 编辑
   import AudioVisual from "./detailComponent/AudioVisual";
   import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
@@ -178,7 +179,8 @@
     data() {
       return {
         // 进件人信息
-        customInf: [],//申请信息页local字段
+        customInf: [], //申请信息页local字段
+        tastwaitingPass: [], //详情列表页信息--(含)取applyId
         // -------------------------------结束
         showHalfBtn: false, // 显示 分屏按钮
         CompareAlert: false, //对比按钮 弹出层
@@ -190,7 +192,7 @@
         tabContent1: 0,
         tabContent2: 3, // ----------- tab1 用
         tabActiveInd1: 0, // tab1 点击时候选中的下标
-        tabActiveInd2: 3,// 点击tab1 时  tab2初始下表
+        tabActiveInd2: 3, // 点击tab1 时  tab2初始下表
         items1: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "信审审批", "流程轨迹"],
         items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "信审审批"],
         // rightList: false, //右键菜单 默认不显示    ---------tab1 用
@@ -207,7 +209,7 @@
         // }, {
         //   title: "内部匹配"
         // }],
-        AlertSearch:"", // 对比弹出层 客户名称：搜索框
+        AlertSearch: "", // 对比弹出层 客户名称：搜索框
         AlertSearchCondition: [{
           value: '选项1',
           label: '最近时间原则排列'
@@ -227,9 +229,9 @@
       //   this.$refs.tabOne[3].className = "tabAct";
       //   // this.$refs.tabOne.className="tabAct"
       // },
-     
+
       // 触发子组件方法
-      compareProps(){
+      compareProps() {
         // console.log("compareProps")
         // console.log(this.$refs.AlertSearchDiv)
         // this.AlertSearch=true;
@@ -241,11 +243,11 @@
       //   this.a();
       //   console.log(this.a())
       // },
-       //子组件传回客户名称，进件编号
-      inputInner(a,b){
+      //子组件传回客户名称，进件编号
+      inputInner(a, b) {
         // console.log("inputInner")
         // console.log(a+b)
-        this.AlertSearch=a+" "+b;
+        this.AlertSearch = a + " " + b;
       },
       // 对比按钮
       compBtnS() {
@@ -339,20 +341,20 @@
     },
     mounted() {
       console.log("分屏");
-      //  this.customInf = JSON.parse(localStorage.getItem("taskInWaitting"));
-       this.customInf = JSON.parse(localStorage.getItem("applicationInformationDetail"));
-
-      // console.log( "2")            
-      console.log( this.customInf)
-      console.log( this.customInf.applyId)
-
-
+      this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
+      //  console.log(  this.tastwaitingPass )
+      this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", { // 申请信息--请求
+        id: this.tastwaitingPass.applyId,
+      }).then(res => {
+        // console.log(res.data)
+        this.customInf = res.data;
+      });
       this.title = "影音资料";
       // console.log(this.$route.query);
 
       // this.customInf = this.$route.query;
       //  this.customInf = JSON.parse(localStorage.getItem("taskInWaitting"));
-      
+
       //  console.log( "3")            
       // console.log(this.customInf);
 
@@ -594,7 +596,8 @@ margin-bottom: 18px;
   /* .left .Left_ul li:nth-of-type(1) {
     color: white;
   } */
-.left .Left_ul li:hover,
+
+  .left .Left_ul li:hover,
   .Right_tab_ul_wrap ul li:hover {
     cursor: pointer;
   }
@@ -654,16 +657,18 @@ margin-bottom: 18px;
 
   } */
   /* 右侧tab切换头外的ul   流 */
-.Right_tab_ul_wrap {
+
+  .Right_tab_ul_wrap {
     overflow: hidden;
     /* width: 675px; */
-    width:calc( 100% - 100px);
+    width: calc( 100% - 100px);
     /* background: yellow; */
     /* position: relative; */
     margin-left: 50px;
   }
+
   .Right_tab_ul_wrap ul {
-  width: 1061px;
+    width: 1061px;
     height: 48px;
     /* color:#bfcbd9; */
     position: relative;
@@ -678,7 +683,7 @@ margin-bottom: 18px;
 
   .Right_tab_ul_wrap ul li {
     /* float: left; */
-     display: inline-block;
+    display: inline-block;
     margin-right: 40px;
     /* white-space: nowrap; */
     letter-spacing: 0.11px;
@@ -705,14 +710,17 @@ margin-bottom: 18px;
     overflow: auto;
   }
   /* 右侧tab切换头 左右滑动图标  流  */
-.pre_next_btn_wrap{
-position: absolute;
+
+  .pre_next_btn_wrap {
+    position: absolute;
     z-index: 2;
     width: 25px;
-}
+  }
+
   .pre_next_btn_wrap:nth-of-type(1) {
     left: 10px;
   }
+
   .pre_next_btn_wrap:nth-of-type(2) {
     right: 10px;
   }
@@ -757,7 +765,6 @@ position: absolute;
     /* position: relative; */
   }
   /* ----------------调试用css ------------------------*/
-
   /* .right .Right_tab_title_div {
     z-index: 22;
     overflow: visible;
