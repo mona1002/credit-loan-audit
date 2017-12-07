@@ -931,6 +931,11 @@
 		        	appOrgName:this.datas.appOrgName,
 		        	loanType:this.datas.accepApplyLoan.loanType,
 		        	loanTypeTxt:this.datas.accepApplyLoan.loanTypeTxt,  
+		        	appOrgId:this.datas.appOrgId,
+		        	appOrgCode:this.datas.appOrgCode,
+		        	applyCustId:this.datas.accepCusBasicInfo.id,
+		        	custNo:this.datas.accepCusBasicInfo.custNo,
+
 		        };
 		        /*console.log(this.datas);*/
 		        localStorage.setItem("applicationInformationDetail",JSON.stringify(query));
