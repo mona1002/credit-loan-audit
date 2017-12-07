@@ -9,6 +9,12 @@
   padding:9px 22px;
   font-size:16px;
 }
+.Abody el-select-dropdown__item{
+float:none;
+}
+.Abody el-select-dropdown__item{
+float:none;
+}
 /* 公用 表格 表头 th */
 /* 放款信息 信审审结论轨迹  */
 /* .FinanceInformation .el-table__header-wrapper tr{
