@@ -928,7 +928,9 @@
 		        	loanAmt:this.datas.accepApplyLoan.loanAmt,
 		        	eachTermAmt:this.datas.accepApplyLoan.eachTermAmt,
 		        	mainCustName:this.datas.mainCustName,   
-		        	appOrgName:this.datas.appOrgName  
+		        	appOrgName:this.datas.appOrgName,
+		        	loanType:this.datas.accepApplyLoan.loanType,
+		        	loanTypeTxt:this.datas.accepApplyLoan.loanTypeTxt,  
 		        };
 		        /*console.log(this.datas);*/
 		        localStorage.setItem("applicationInformationDetail",JSON.stringify(query));
