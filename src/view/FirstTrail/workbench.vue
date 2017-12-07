@@ -101,16 +101,17 @@
       more() {
         console.log("more")
       },
-      setCurrent(row) {
-        console.log("我是按钮")
+      // setCurrent(row) {
+      //   console.log("我是按钮")
 
-        console.log(row)
-        this.$refs.singleTable.setCurrentRow(row);
-      },
+      //   console.log(row)
+      //   this.$refs.singleTable.setCurrentRow(row);
+      // },
       handleCurrentChange(val) {
         console.log("我是表格")
         // console.log(val)
         this.currentRow = val;
+        localStorage.setItem("processTemplateId",JSON.stringify(this.currentRow.processTemplateId));
         this.$router.push({
           path: '/taskInWaitting',
           query: {
