@@ -23,6 +23,7 @@
       <el-form-item label="调查情况:" class="item-column3">
         {{mobileData.checkStageDes}}
       </el-form-item>
+      <!-- v-show=source=='02' -->
       <el-form-item label="其它来源情况说明:" class="item-column3">
         {{mobileData.sourceDesc}}
       </el-form-item>
@@ -35,22 +36,29 @@
       <el-form-item label="三方查询是否异常:" class="item-column2">
         {{mobileData.threeQueriesdes}}
       </el-form-item>
-      <el-form-item label="异常说明:" class="item-column2">
+      <!-- v-show="mobileData.threeQueries=='1'" -->
+      <el-form-item label="异常说明:" class="item-column2" >
         {{mobileData.exceptionState}}
       </el-form-item>
       <!-- 是否与家庭联系人为同一接听人 -->
       <el-form-item label="是否为同一接听人:" class="item-column2">
         {{mobileData.issameFamDes}}
       </el-form-item>
-      <el-form-item label="-" class="item-column2">
+      <!-- v-show="mobileData.issameFam=='0'" -->
+      <el-form-item label="-" class="item-column2" >
         {{mobileData.issameFamtxt}}
       </el-form-item>
       <el-form-item label="与借款人关系:" class="item-column1">
+        {{mobileData.relBorrowerDes}}
+      </el-form-item>
+      <!-- v-show="mobileData.relBorrower=='03'" -->
+      <el-form-item label="-" class="item-column1" >
         {{mobileData.relBorrowertxt}}
       </el-form-item>
       <el-form-item label="核对工作情况:" class="item-column2">
         {{mobileData.checkWorkDes}}
       </el-form-item>
+      <!-- v-show="mobileData.checkWork=='01'" -->
       <el-form-item label="-:" class="item-column2">
         {{mobileData.checkWorktxt}}
       </el-form-item>
@@ -63,49 +71,57 @@
       <el-form-item label="核对地址:" class="item-column2">
         {{mobileData.checkAddrtxt}}
       </el-form-item>
+      <!-- v-show="mobileData.checkAddr=='01'" -->
       <el-form-item label="-:" class="item-column2">
         {{mobileData.checkAddrtxt}}
       </el-form-item>
       <el-form-item label="核对房产:" class="item-column2">
         {{mobileData.checkEstatetxt}}
       </el-form-item>
+      <!-- v-show="mobileData.checkEstate=='00'" -->
       <el-form-item label="-" class="item-column2">
         {{mobileData.checkEstatetxt}}
       </el-form-item>
       <el-form-item label="其他收入:" class="item-column2">
+        {{mobileData.otherIncomeDes}}
+      </el-form-item>
+      <!-- v-show="mobileData.otherIncome=='00'" -->
+      <el-form-item label="-" class="item-column2">
         {{mobileData.otherIncometxt}}
       </el-form-item>
-      <el-form-item label="-" class="item-column2">
-        {{mobileData.checkEstatetxt}}
-      </el-form-item>
       <el-form-item label="近期大项开销:" class="item-column2">
+        {{mobileData.recentLargespendDes}}
+      </el-form-item>
+      <!-- v-show="mobileData.recentLargespend=='00'" -->
+      <el-form-item label="-" class="item-column2">
         {{mobileData.recentlArgespendInfo}}
       </el-form-item>
-      <el-form-item label="-" class="item-column2">
-        {{mobileData.checkEstatetxt}}
-      </el-form-item>
       <el-form-item label="父母:" class="item-column2">
+        {{mobileData.parentsDes}}
+      </el-form-item>
+      <!-- v-show="mobileData.parents=='01'" -->
+      <el-form-item label="-" class="item-column2">
         {{mobileData.parentsInfo}}
       </el-form-item>
-      <el-form-item label="-" class="item-column2">
-        {{mobileData.checkEstatetxt}}
-      </el-form-item>
       <el-form-item label="兄弟姐妹:" class="item-column2">
+        {{mobileData.brotherDes}}
+      </el-form-item>
+      <!-- v-show="mobileData.brother=='00'" -->
+      <el-form-item label="-" class="item-column2">
         {{mobileData.brothertxt}}
       </el-form-item>
-      <el-form-item label="-" class="item-column2">
-        {{mobileData.checkEstatetxt}}
-      </el-form-item>
       <el-form-item label="支付家庭生活费用:" class="item-column2">
+        {{mobileData.expensesDes}}
+      </el-form-item>
+      <!-- v-show="mobileData.expenses=='00'" -->
+      <el-form-item label="-" class="item-column2">
         {{mobileData.expensestxt}}
       </el-form-item>
-      <el-form-item label="-" class="item-column2">
-        {{mobileData.checkEstatetxt}}
-      </el-form-item>
       <el-form-item label="核对家庭固话:" class="item-column2">
-        {{mobileData.checkHometeltxt}}
+        {{mobileData.checkHometelDes}}
       </el-form-item>
-      <el-form-item label="-" class="item-column2">
+      <!-- v-show="mobileData.checkHometel=='01'" -->
+      <el-form-item label="-" class="item-column2" >
         {{mobileData.checkHometeltxt}}
       </el-form-item>
       <el-form-item label="借款人爱好和品行:" class="item-column1">

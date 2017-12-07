@@ -516,7 +516,7 @@ export default {
         phoneType: this.phoneType
       }).then(res => {
         console.log(res);
-        this.mobileData = res.data;
+        this.comData = res.data;
         if (res.statusCode == '200')
           // 直接处理 显示  历史
           this.hisShow = true;
@@ -529,7 +529,7 @@ export default {
         phoneType: this.phoneType
       }).then(res => {
         console.log(res);
-        this.mobileData = res.data;
+        this.familyData = res.data;
         if (res.statusCode == '200')
           // 直接处理 显示  历史
           this.hisShow = true;
@@ -1206,6 +1206,32 @@ export default {
 
 .phone-credit .el-collapse-item__header .el-collapse-item__arrow {
   padding-right: 20px;
+}
+
+
+/*  表单样式 */
+.phone-credit .left-title {
+  float: left;
+  width: 150px;
+  line-height: 30px;
+  min-height: 30px;
+  padding-right: 10px;
+
+  text-align: right;
+}
+
+.phone-credit li{
+  padding:10px;
+  /*min-height: 30px;*/
+}
+
+.phone-credit li .textarea-class{
+  height: 100px;
+}
+
+
+.phone-credit  .submit-class{
+  text-align: right;
 }
 
 </style>

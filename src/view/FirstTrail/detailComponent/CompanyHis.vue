@@ -9,40 +9,40 @@
         {{comData.custName}}
       </el-form-item>
       <el-form-item label="电话类型:" class="item-column3">
-        {{comData.phoneType}}
+        {{comData.phoneTypeDes}}
       </el-form-item>
       <el-form-item label="电话号码:" class="item-column3">
         {{comData.phoneNum}}
       </el-form-item>
       <el-form-item label="来源:" class="item-column3">
-        {{comData.source}}
+        {{comData.sourceDes}}
       </el-form-item>
       <el-form-item label="接听情况:" class="item-column3">
         {{comData.answer}}
       </el-form-item>
       <el-form-item label="调查阶段:" class="item-column3">
-        {{comData.checkStage}}
+        {{comData.checkStageDes}}
       </el-form-item>
       <el-form-item label="其他来源说明:" class="item-column3">
-        {{comData.custName}}
+        {{comData.sourceDesc}}
       </el-form-item>
       <div class="address-title">
         录入单位电话调查信息
       </div>
       <el-form-item label="拨打电话:" class="item-column2">
+        {{comData.phoneDes}}
+      </el-form-item>
+      <el-form-item label="-:" class="item-column2">
         {{comData.phonetxt}}
       </el-form-item>
-      <el-form-item label="-:" class="item-column2">
-        {{comData.custName}}
-      </el-form-item>
       <el-form-item label="接电话人身份:" class="item-column2">
+        {{comData.answerDes}}
+      </el-form-item>
+      <el-form-item label="-:" class="item-column2">
         {{comData.answertxt}}
       </el-form-item>
-      <el-form-item label="-:" class="item-column2">
-        {{comData.custName}}
-      </el-form-item>
       <el-form-item label="核对单位及工作信息:" class="item-column2">
-        {{comData.companytxt}}
+        {{comData.companyDes}}
       </el-form-item>
       <el-form-item label="-:" class="item-column2">
         {{comData.custName}}
@@ -51,28 +51,28 @@
         {{comData.checkTimetxt}}
       </el-form-item>
       <el-form-item label="-:" class="item-column2">
-        {{comData.custName}}
+        {{comData.companytxt}}
       </el-form-item>
       <el-form-item label="核对收入:" class="item-column2">
+        {{comData.checkIncomeDes}}
+      </el-form-item>
+      <el-form-item label="-:" class="item-column2">
         {{comData.checkIncometxt}}
       </el-form-item>
-      <el-form-item label="-:" class="item-column2">
-        {{comData.custName}}
-      </el-form-item>
       <el-form-item label="用工方式:" class="item-column1">
-        {{comData.employmentmodetxt}}
+        {{comData.employmentmodeDes}}
       </el-form-item>
       <el-form-item label="工资发放情况:" class="item-column2">
-        {{comData.payrollSituationtxt}}
+        {{comData.payrollSituationDes}}
       </el-form-item>
       <el-form-item label="-:" class="item-column2">
-        {{comData.custName}}
+        {{comData.payrollSituationtxt}}
       </el-form-item>
       <el-form-item label="是否缴纳养老保险:" class="item-column2">
-        {{comData.pensionInsurance}}
+        {{comData.pensionInsuranceDes}}
       </el-form-item>
       <el-form-item label="是否缴纳住房公积金:" class="item-column2">
-        {{comData.housingFund}}
+        {{comData.housingFundDes}}
       </el-form-item>
       <el-form-item label="核对工作证明人1:" class="item-column2">
         {{comData.jobref1}}
