@@ -127,6 +127,7 @@
           </div>
           <div class="back-form-li">
             <el-form-item label="申请金额[元]:" class="item-column2">
+              <!-- {{loanAmt}} -->
               {{loanAmt}}
             </el-form-item>
             <el-form-item label="申请期限[月]:" class="item-column2">
@@ -219,6 +220,7 @@
       <div v-show=" this.showFlag=='spjl'" class="spjl-div">
         <div class="form-title" style="position:relative;">
           信审审批结论轨迹
+          <!-- <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag> -->
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
         </div>
         <el-table :data="tableData.recordList" height="250" border style="width: 100%" stripe highlight-current-row v-loading="loading">
@@ -516,7 +518,11 @@ export default {
            // 产品
            this.get('/credit/product').then(res=>{
             console.log(res);
-
+            if(res.statusCode == '200'){
+              // 假如没有  核实可接受最高每期还款额 
+              // if(res.)  提交的时候也要判断
+              this.$message("提示:请求完善 信审表中可承受的月还款金额");
+            }
            })
           })
           break;
@@ -526,6 +532,10 @@ export default {
           break;
         case 'lcgj':
           this.showFlag = 'lcgj';
+          // 取本地的 流程模版id
+          this.processTemplateId = JSON.parse(localStorage.getItem('processTemplateId'));
+          console.log(this.processTemplateId);
+          // 
 
           break;
       }
@@ -565,9 +575,12 @@ export default {
           this.coverShow = false;
           this.showFlag = 0;
           this.taskId = '177574';
+
+          // 假如没有  核实可接受最高每期还款额 , 提示
+          this.$message("提示:请求完善 信审表中可承受的月还款金额");
           break;
       }
-
+      // 传给接口的日期
       this.dealroperDate = new Date(this.dealroperDate).toLocaleString().replace(/\//g, '-').match(/\d{4}\-\d{2}\-\d{1,2}/)[0];
       var dates = this.dealroperDate.split('-');
       if(dates[1].length<2)
@@ -623,7 +636,7 @@ export default {
           this.secondaryReason = ''; // 回退子原因
           this.reasonRemark = ''; // 意见描述/原因说明
           this.appOrgId = ''; // 进件机构id
-          this.applyId = ''; // 申请单id
+          // this.applyId = ''; // 申请单id
           this.rollbackNodeName = ''; // 回退节点名称
           this.dealroperDate = ''; // 经办时间
           this.creauditAppOperate = ''; // 操作类型
@@ -759,7 +772,7 @@ export default {
         this.secondaryReason = ''; // 回退子原因
         this.reasonRemark = ''; // 意见描述/原因说明
         this.appOrgId = ''; // 进件机构id
-        this.applyId = ''; // 申请单id
+        // this.applyId = ''; // 申请单id
         this.rollbackNodeName = ''; // 回退节点名称
         this.dealroperDate = ''; // 经办时间
         this.creauditAppOperate = ''; // 操作类型
