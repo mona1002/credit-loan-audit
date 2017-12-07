@@ -273,10 +273,17 @@
       }
     },
     mounted() {
-      console.log("mounted")
-      // this.localInf = JSON.parse(localStorage.getItem("taskInWaitting"));
-      this.localInf = JSON.parse(localStorage.getItem("applicationInformationDetail"))
-      // console.log(this.localInf)
+      console.log("影音资料右-mounted")
+
+//  this.$nextTick(function () {
+      //  console.log("nextTick")
+        //   // DOM 现在更新了
+        //   // `this` 绑定到当前实例
+        //   // this.doSomethingElse()
+           this.localInf = JSON.parse(localStorage.getItem("taskInWaitting"));
+      // this.localInf = JSON.parse(localStorage.getItem("applicationInformationDetail"))
+          // this.localInf.applyId ="45678906789"
+      console.log(this.localInf.applyId)
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.applyId,
@@ -284,6 +291,10 @@
         // console.log(res.data)
         this.ListParent = res.data
       });
+        // })
+
+// ========================================申请信息信息
+   
 
       // 子菜单栏
       // this.post("/productArchive/getProductArchiveChildList", {

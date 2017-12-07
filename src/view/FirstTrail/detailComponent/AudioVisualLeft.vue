@@ -382,23 +382,22 @@
     },
     mounted() {
       // localStorage.setItem("userInf", JSON.stringify(userInf));
-      console.log(" 影音资料")
-      // console.log(JSON.parse(localStorage.getItem("taskInWaitting") ));
-      this.localInf = JSON.parse(localStorage.getItem("applicationInformationDetail"))
-      // console.log(this.localInf)
-      // console.log(this.localInf.applyId)
+      console.log(" 影音资料左")
+      // console.log(JSON.parse(localStorage.getItem("applicationInformationDetail") ));
+      // this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
+      this.localInf = JSON.parse(localStorage.getItem("taskInWaitting"))//获取列表详情的id
+      // this.localInf = JSON.parse(localStorage.getItem("applicationInformationDetail"))   
+      console.log(this.localInf)
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.applyId,
         // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
         //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
-
       }).then(res => {
         // console.log(res.data)
         // console.log("ListParent")
         this.ListParent = res.data; //父节点数组 [{},{},{},{}]----获取父节点名称
         // console.log( this.ListParent )
-
       });
     }
   }
