@@ -598,7 +598,10 @@ ol.num li:nth-of-type(1) .el-input__inner{
 .taskWatting .el-select-dropdown__item{
   float: none;
 }
-
+/* 信审表div content 外wrap */
+.CreditForm .el-collapse-item__wrap{
+  padding: 15px 0 10px 0;
+}
 /* 工作台导航 */
 .mheader .el-menu{
   background-color: transparent;

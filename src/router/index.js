@@ -1,11 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import {
-  getCookie
-} from '@/util/util'
+// import {
+//   getCookie
+// } from '@/util/util'
 // 头部导航
 import myHead from '@/view/header'
 import test from '@/view/test'
+import new2 from '@/view/new2'
+import new1 from '@/view/new1'
+
 import HelloWorld from '@/view/HelloWorld'
 /*初审审批*/
 import taskInWaitting from '@/view/FirstTrail/taskInWaitting'
