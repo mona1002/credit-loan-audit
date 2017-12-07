@@ -24,46 +24,46 @@
         {{hurryData.checkStage}}
       </el-form-item>
       <el-form-item label="其他来源说明:" class="item-column3">
-        {{hurryData.custName}}
+        {{hurryData.sourceDesc}}
       </el-form-item>
       <div class="address-title">
         录入紧急联系人调查信息
       </div>
       <el-form-item label="第三方查询信息:" class="item-column1">
-        {{hurryData.threeQueriestxt}}
+        {{hurryData.thirdResult}}
       </el-form-item>
       <el-form-item label="三方查询是否异常:" class="item-column2">
-        {{hurryData.threeQueries}}
+        {{hurryData.threeQueriesDes}}
       </el-form-item>
       <el-form-item label="异常说明:" class="item-column2">
         {{hurryData.threeQueriestxt}}
       </el-form-item>
       <el-form-item label="微信/支付宝是否异常:" class="item-column2">
-        {{hurryData.mobilepayment}}
+        {{hurryData.mobilepaymentDes}}
       </el-form-item>
       <el-form-item label="异常项说明:" class="item-column2">
-        {{hurryData.threeQueriestxt}}
+        {{hurryData.mobilepaymenttxt}}
       </el-form-item>
       <el-form-item label="与借款人关系:" class="item-column2">
-        {{hurryData.relBorrower}}
+        {{hurryData.relBorrowerDes}}
       </el-form-item>
       <el-form-item label="-" class="item-column2">
-        {{hurryData.threeQueriestxt}}
+        {{hurryData.relBorrowertxt}}
       </el-form-item>
       <el-form-item label="与借款人联系是否频繁:" class="item-column1">
-        {{hurryData.contactfre}}
+        {{hurryData.contactfreDes}}
       </el-form-item>
       <el-form-item label="核对工作情况:" class="item-column2">
-        {{hurryData.checkWork}}
+        {{hurryData.checkWorkDes}}
       </el-form-item>
       <el-form-item label="-" class="item-column2">
-        {{hurryData.threeQueriestxt}}
+        {{hurryData.checkWorktxt}}
       </el-form-item>
       <el-form-item label="核对婚姻情况:" class="item-column2">
-        {{hurryData.maritalStatus}}
+        {{hurryData.maritalStatusDes}}
       </el-form-item>
-      <el-form-item label="-" class="item-column2">
-        {{hurryData.threeQueriestxt}}
+      <el-form-item label="核对子女情况:" class="item-column2">
+        {{hurryData.maritalStatustxtDes}}
       </el-form-item>
       <el-form-item label="调查结果:" class="item-column1">
         {{hurryData.conclusion}}

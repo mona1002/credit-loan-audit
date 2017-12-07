@@ -95,9 +95,9 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      title1: "移动号码类(手机号和联系人)|同事 1380013800 王五{{}}",
-      title2: "固定电话类(家电、单电)|单位电话 888-88888888 诺远(住宅电话此项无)",
-      title3: "单位名称|诺远 888-8888888",
+      title1: "移动号码类(手机号和联系人)",
+      title2: "固定电话类(家电、单电)",
+      title3: "单位名称",
       // currentPage: 1,
       // currentPageSize: 5,
       mobileData: [], // 移动电话数据
@@ -374,6 +374,7 @@ export default {
   line-height: 38px;
   background: #eef0f9;
   border: 1px solid #e6eaee;
+  text-indent: 10px;
 }
 
 

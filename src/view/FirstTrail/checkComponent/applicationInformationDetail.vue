@@ -527,6 +527,7 @@
 				      <el-table-column
 				        prop="estateAddress"
 				        label="房产地址"
+				        show-overflow-tooltip
 				        min-width="200">
 				      </el-table-column>
 				      <el-table-column
@@ -868,16 +869,28 @@
 		        this.accepCusCarInfos=res.data.accepCusCarInfos;
 
 		        /*您的借款需求*/
-		        this.accepApplyLoan=res.data.accepApplyLoan;
+		        if(res.data.accepApplyLoan==null){
+		        	this.accepApplyLoan=this.accepApplyLoan
+		        }else{
+		        	this.accepApplyLoan=res.data.accepApplyLoan;
+		        }
 
 		        /*您的个人信息*/
-		        this.accepCusBasicInfo=res.data.accepCusBasicInfo;
+		        if(res.data.accepCusBasicInfo==null){
+		        	this.accepCusBasicInfo=this.accepCusBasicInfo
+		        }else{
+		        	this.accepCusBasicInfo=res.data.accepCusBasicInfo;
+		        }
 
 		        /*私人业主信息*/
 		        this.accepCusPrivate=res.data.accepCusPrivate;
 
 		        /*您的工作信息*/
-		        this.accepCusWorkInfo=res.data.accepCusWorkInfo;
+		        if(res.data.accepCusWorkInfo==null){
+		        	this.accepCusWorkInfo=this.accepCusWorkInfo
+		        }else{
+		        	this.accepCusWorkInfo=res.data.accepCusWorkInfo;
+		        }
 
 		        /*联系人信息*/
 		        this.accepCusRelations=res.data.accepCusRelations;
@@ -910,6 +923,12 @@
 		        	adminIntroduce:this.datas.adminIntroduce,
 		        	applyId:this.datas.id,
 		        	workName:this.datas.accepCusWorkInfo.workName,
+		        	proId:this.datas.proId,
+		        	proCode:this.datas.proCode,
+		        	loanAmt:this.datas.accepApplyLoan.loanAmt,
+		        	eachTermAmt:this.datas.accepApplyLoan.eachTermAmt,
+		        	mainCustName:this.datas.mainCustName,   
+		        	appOrgName:this.datas.appOrgName  
 		        };
 		        /*console.log(this.datas);*/
 		        localStorage.setItem("applicationInformationDetail",JSON.stringify(query));

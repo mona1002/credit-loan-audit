@@ -225,6 +225,7 @@
 		background-color: #fafbfc;
 		font-size: 14px;
 		min-width: 1285px;
+		color: #475669;
 	}
 	/* 头部 */
 	.creditHead{

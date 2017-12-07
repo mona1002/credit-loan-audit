@@ -481,8 +481,6 @@ export default {
 <style>
 .userManage {
   padding: 15px 30px;
-  width: 100%;
-  height: 100%;
   background-color: #fafbfc;
 }
 .userManage .row {
