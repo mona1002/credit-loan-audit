@@ -47,7 +47,7 @@ export default {
       console.log('login ')
       this.post("/smUser/login", {
         userCode: this.userCode,
-        loginPassword: this.loginPassword
+        password: this.loginPassword
       }).then(res => {
         console.log(res);
         console.log(res.statusCode)

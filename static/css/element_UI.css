@@ -705,3 +705,17 @@ position: relative
   margin-top: 0px;
 }
 
+.mheader .el-menu .el-submenu.is-opened .el-submenu__title{
+  opacity:0.41;
+  background:#1f2d3d;
+  box-shadow:0 10px 20px 0 #475669; 
+  border-bottom:2px solid #fff;
+  color: #fff;
+}
+.mheader .el-menu .el-menu .el-submenu .el-submenu__title{
+  border-bottom:none;
+  opacity:0.41;
+  background:none;
+  box-shadow:0 0px 0px 0 #475669; 
+  color: none;
+}
