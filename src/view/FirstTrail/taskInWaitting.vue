@@ -129,12 +129,13 @@
 		},
 		mounted(){
 			//一进入页面就发送请求
-			this.queryParam = JSON.parse(localStorage.getItem('workbenchPass'));
-			this.queryParam.processTemplateId=this.workbenchPass.processTemplateId;
-			this.queryParam.taskNodeName=this.workbenchPass.taskNodeName;
-			this.queryParam.taskStatus=this.workbenchPass.taskStatus;
-			this.queryParam.userCode=this.workbenchPass.userCode;
-			this.queryParam.orgCode=this.workbenchPass.orgCode;
+			//this.queryParam = JSON.parse(localStorage.getItem('workbenchPass'));
+
+			this.queryParam.processTemplateId=JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
+			this.queryParam.taskNodeName=JSON.parse(localStorage.getItem('workbenchPass')).taskNodeName;
+			this.queryParam.taskStatus=JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
+			this.queryParam.userCode=JSON.parse(localStorage.getItem('userInf')).userCode;
+			this.queryParam.orgCode=JSON.parse(localStorage.getItem('userInf')).orgCode;
 			console.log(this.processTemplateId+'...'+this.taskNodeName+'...'+this.taskStatus+'...'+this.userCode+'...'+this.orgCode);
 			
 			this.request(this.queryParam);	
