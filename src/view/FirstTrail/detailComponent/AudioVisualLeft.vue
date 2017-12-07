@@ -63,19 +63,21 @@
         </figure>
       </div>
     </div>
-        <!--=================================  查询弹出层 ================================= -->
-    <div v-show="dataa" class="posiiiii">
+    <!--=================================  查询弹出层 ================================= -->
+    <div v-show="dataa" class="posi">
       <!-- 折叠 -->
-      <h1>内皮客户查询列表  <i class="el-icon-close" style="color:white;fontSize:18px" @click="closeAlertSearch"></i></h1>
+      <p>内匹配客户查询列表
+        <i class="el-icon-close" style="color:white;fontSize:18px;right:13px;top:16px" @click="closeAlertSearch"></i>
+      </p>
       <el-collapse v-model="activeNames">
         <el-collapse-item title="本人进件列表" name="1">
           <div>
-             <!-- <i class="el-icon-edit" style="color:white;fontSize:18px"></i> -->
+            <!-- <i class="el-icon-edit" style="color:white;fontSize:18px"></i> -->
             <!-- <el-table :data="personal" height="250" border style="width: 100%" @change="handleChange">
             </el-table> -->
             <!--  @dblclick="getParentList(currentRow.matchApplyId)" -->
-            <el-table :data="personal" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)"
-              @current-change="handleCurrentChange" style="width: 100%">
+            <el-table :data="personal" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
+              style="width: 100%">
               <el-table-column property="matchApplyCustName" label="客户名称">
               </el-table-column>
               <el-table-column property="matchApplySubNo" label="进件编号">
@@ -90,8 +92,8 @@
         <!-- 折叠2 -->
         <el-collapse-item title="内匹客户进件" name="2">
           <div>
-            <el-table :data="others" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)"
-              @current-change="handleCurrentChange" style="width: 100%">
+            <el-table :data="others" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
+              style="width: 100%">
               <el-table-column property="matchApplyCustName" label="客户名称">
               </el-table-column>
               <el-table-column property="matchApplySubNo" label="进件编号">
@@ -122,7 +124,7 @@
       return {
         // props:[smallPicDivClose],
         // picData: [],
-        localInf: [],//初始化的时候，根据传进来的applyId获取初始化数据
+        localInf: [], //初始化的时候，根据传进来的applyId获取初始化数据
         showListDiv: true, // 列表显示与否
         show: true, // 收缩按钮显示控制
         smallPicInd: 0, // 未知
@@ -133,7 +135,7 @@
         applyId: '', //入参
         imgPath: [], //图片路径
         // ----------------------------------
-         activeNames: ['1', '2'], //查询弹出框 默认展开选项
+        activeNames: ['1', '2'], //查询弹出框 默认展开选项
         dataa: false,
         // // AlertSearchProps:false
         personal: [], // 匹配查询-个人
@@ -146,10 +148,10 @@
       }
     },
     methods: {
-      closeAlertSearch(){
-          this.dataa=false;
+      closeAlertSearch() {
+        this.dataa = false;
       },
-       handleCurrentChange(val) {  // 选中当前行信息
+      handleCurrentChange(val) { // 选中当前行信息
         //   console.log(val)
         this.currentRow = val;
         // console.log(this.currentRow)
@@ -164,7 +166,7 @@
         this.post("/internalMatch/getPersonalInternalMatchList", {
           // applySubNo: "201504130173041858",
           // certCode: "341422198409070094",
-              applySubNo:this.localInf.applySubNo,
+          applySubNo: this.localInf.applySubNo,
           certCode: this.localInf.certCode,
         }).then(res => {
           console.log("个人")
@@ -177,7 +179,9 @@
             pageNum: "1", //当前页
             pageSize: '1000' //每页的显示数量
           },
-          applySubNo:this.localInf.applySubNo,
+          //  applySubNo: "201504130173041858",
+          // certCode: "341422198409070094",
+          applySubNo: this.localInf.applySubNo,
           certCode: this.localInf.certCode,
         }).then(res => {
           console.log("他人")
@@ -190,18 +194,19 @@
         console.log(id);
         this.post("/productArchive/getProductArchiveParentList", {
           // applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",//待删除-----------------------------------------
-            applyId: id,//上面删除后 此处打开
-            // a2b23bbf-46ef-4d94-9872-322843cebb7d matchApplyId
-            // applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",//上面删除后 此处打开
-            
+          applyId: id, //上面删除后 此处打开
+          // a2b23bbf-46ef-4d94-9872-322843cebb7d matchApplyId
+          // applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",//上面删除后 此处打开
+
         }).then(res => {
-          console.log(res);
           console.log("双击选中")
+          console.log(res);
           // console.log(res.data)
           this.ListParent = res.data;
-          this.localInf.applyId=id;//将此处获得的matchApplyId赋值给 this.localInf.applyId,更改localInf的值，以便用更改后的值获取子节点
+          this.localInf.applyId = id; //将此处获得的matchApplyId赋值给 this.localInf.applyId,更改localInf的值，以便用更改后的值获取子节点
           // console.log( this.localInf.applyId)
-          // console.log(id)
+          //  this.localInf.applyId="e0b51098-b24d-4211-8ae4-f08f657d7886";
+          console.log(id)
           this.dataa = false;
           this.custName = this.currentRow.matchApplyCustName;
           this.custmatchApplySubNo = this.currentRow.matchApplySubNo;
@@ -210,6 +215,7 @@
       },
       getChildrenList(id, ind, item) {
         console.log("获取子节点");
+        // console.log(id)//父节点获取的id
         // console.log( this.localInf.applyId)
         this.post("/productArchive/getProductArchiveChildList", {
           applyId: this.localInf.applyId,
@@ -376,22 +382,23 @@
     },
     mounted() {
       // localStorage.setItem("userInf", JSON.stringify(userInf));
+      console.log(" 影音资料")
       // console.log(JSON.parse(localStorage.getItem("taskInWaitting") ));
-      this.localInf = JSON.parse(localStorage.getItem("taskInWaitting"))
-      // console.log("localInf")
+      this.localInf = JSON.parse(localStorage.getItem("applicationInformationDetail"))
       // console.log(this.localInf)
-      
+      // console.log(this.localInf.applyId)
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.applyId,
         // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
         //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
+
       }).then(res => {
         // console.log(res.data)
-      // console.log("ListParent")
-        this.ListParent = res.data;//父节点数组 [{},{},{},{}]----获取父节点名称
-      // console.log( this.ListParent )
-        
+        // console.log("ListParent")
+        this.ListParent = res.data; //父节点数组 [{},{},{},{}]----获取父节点名称
+        // console.log( this.ListParent )
+
       });
     }
   }
@@ -674,18 +681,28 @@
     border: 1px solid #bfcbd9;
     box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
   }
-/* --------------------------- */
-.posiiiii{
-      position: absolute;
-    width: 500px;
-    height: 600px;
-    background: green;
-    top: 200px;
-}
-.posiiiii h1{
-  font-size: 16px;
-  height: 43px;
-  line-height: 43px;
-  padding: 0 20px;
-}
+  /* --------------------------- */
+
+  .posi {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+     z-index: 28;
+  }
+
+  .posi p {
+    font-size: 16px;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 20px;
+        background: rgba(0, 119, 255, 0.75);
+       
+        color: #f8f9fd;
+    text-align: center
+        
+  }
+
 </style>

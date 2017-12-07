@@ -806,7 +806,7 @@
 				        label="N"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n" placeholder="请输入内容" v-numbers>
+				        	<input type="text" name="" v-model="scope.row.n" placeholder="请输入内容" v-numbers='numn'>
 				          <!-- <el-input v-model="scope.row.n" placeholder="请输入内容" v-numbers></el-input> -->
 						</template>
 				      </el-table-column>
@@ -815,7 +815,7 @@
 				        label="N-1"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n1" placeholder="请输入内容" v-numberss>
+				        	<input type="text" name="" v-model="scope.row.n1" placeholder="请输入内容" v-numTwo='numn1'>
 						  <!-- <el-input v-model="scope.row.n1" placeholder="请输入内容"></el-input> -->
 						</template>
 				      </el-table-column>
@@ -824,7 +824,7 @@
 				        label="N-2"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n2" placeholder="请输入内容" v-numbers>
+				        	<input type="text" name="" v-model="scope.row.n2" placeholder="请输入内容"><!--  v-numbers='scope.row.n2' -->
 						  <!-- <el-input v-model="scope.row.n2" placeholder="请输入内容"></el-input> -->
 						</template>
 				      </el-table-column>
@@ -833,7 +833,7 @@
 				        label="N-3"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n3" placeholder="请输入内容" v-numbers>
+				        	<input type="text" name="" v-model="scope.row.n3" placeholder="请输入内容"><!--  v-numbers='scope.row.n3' -->
 						  <!-- <el-input v-model="scope.row.n3" placeholder="请输入内容"></el-input> -->
 						</template>
 				      </el-table-column>
@@ -842,7 +842,7 @@
 				        label="N-4"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n4" placeholder="请输入内容" v-numbers>
+				        	<input type="text" name="" v-model="scope.row.n4" placeholder="请输入内容"><!--  v-numbers='scope.row.n4' -->
 						  <!-- <el-input v-model="scope.row.n4" placeholder="请输入内容"></el-input> -->
 						</template>
 				      </el-table-column>
@@ -851,7 +851,7 @@
 				        label="N-5"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n5" placeholder="请输入内容" v-numbers>
+				        	<input type="text" name="" v-model="scope.row.n5" placeholder="请输入内容"><!--  v-numbers='scope.row.n5' -->
 						  <!-- <el-input v-model="scope.row.n5" placeholder="请输入内容"></el-input> -->
 						</template>
 				      </el-table-column>
@@ -868,7 +868,8 @@
 				        label="平均收入[元]"
 				        min-width="130">
 				        <template slot-scope="scope">
-						  <el-input v-model="scope.row.avgIncome" placeholder="请输入内容"></el-input>
+						  <!-- <el-input v-model="scope.row.avgIncome" placeholder="请输入内容"></el-input> -->
+						  <input type="text" name="" v-model="scope.row.avgIncome" placeholder="请输入内容" ><!-- v-numbers='scope.row.avgIncome' -->
 						</template>
 				      </el-table-column>
 			    </el-table>
@@ -924,6 +925,8 @@
 	      return {
 	        activeNames: ['1','2','3','4','5','6','7','8','9','10'],
 	        datas:'',
+	        numn:'',
+	        numn1:'',
 	        //车贷总笔数
 	        k:0,
 
@@ -1731,15 +1734,22 @@
 			            return value
 			        })()
     				el.value =value
+    				 console.log(el.value);
 				})
 			},
 	  		update:function (el,binding,vnode) {
 		        if(el.value !== ''){
 		            el.value = el.value.replace(/[^0-9.]+/g, '');
+		            console.log(el.value);
 		        }
-		    }
+		    },
+		    unbind: function () {
+			    this.el.removeEventListener('input', this.handler)
+			}
+
+			
 		},
-		numberss:{
+		numTwo:{
       		twoWay: true,
       		bind:function (el) {
       			console.log(el);
@@ -1800,7 +1810,7 @@
 		height: 100%;
 		background-color: #fafbfc;
 		font-size: 14px;
-		min-width: 1366px;
+		/* min-width: 1366px; */
 	}
 	.left{
 		float: left;
@@ -1852,6 +1862,7 @@
 		width: 120px;
 		display: inline-block;
 		text-align: right;
+		color: #475669;
 	}
 	/* 贷款总况 */
 	.daikuanzongkuang li p{
@@ -1874,6 +1885,7 @@
 		width: 160px;
 		text-align: right;
 		padding-right: 5px;
+		color: #475669;
 	}
 	/* 负债信息：负债合计 */
 	.fuzhaixinxi ol li.zongji input{
@@ -1883,10 +1895,17 @@
 	ol.num li{
 		margin-bottom: 10px;
 	}
+	ol.num li:nth-of-type(1){
+		position: relative;
+	}
 	ol.num li:nth-of-type(2){
 		width: 66.6%;
 		text-align: left;
-		padding-left: calc( 16.6% - 167px );
+		padding-left: calc( 16.6% - 208.5px );
+		
+	}
+	ol.num li:nth-of-type(2) label{
+		padding-top: 10px
 		
 	}
 	ol.num li:nth-of-type(2) textarea{
@@ -1895,7 +1914,7 @@
 		height: 50px;
 		border-radius: 4px;
 		position: absolute;
-		top: -18px;
+		top: -30px;
 		padding-top: 5px;
 	}
 	ol.num li:nth-of-type(2) div{
@@ -1909,7 +1928,7 @@
 	.zhengxunbaogao ol:nth-of-type(2) li{
 		width: 100%;
 		text-align: left;
-		padding-left: calc( 16.6% - 178px );
+		padding-left: calc( 16.6% - 208.5px );
 		margin-bottom: 20px;
 	}
 	.zhengxunbaogao ol:nth-of-type(2) li div{
@@ -1921,6 +1940,7 @@
 	.zhengxunbaogao ol:nth-of-type(2) li div textarea{
 		width: 696px;
 		padding: 5px 5px 0 5px;
+		color: #475669;
 	}
 	.reportLabel{
 		float: left;
@@ -1946,12 +1966,14 @@
 		display: inline-block;
 		float: left;
 		margin:0 10px 0 20px;
+		color: #475669;
 	}
 	.qita ol textarea{
 		width: 70%;
 		height: 200px;
 		border: 1px solid #d8dce5;  
 		padding:10px 0 0 10px;
+		color: #475669;
 	}
 	/* 必填 */
 	.must{
@@ -1991,6 +2013,10 @@
 		font-size: 14px;
 		line-height: 30px;
 		padding-left: 10px;
+		color: #475669;
+	}
+	.layer .layerbox p.choces{
+		text-align: center;
 	}
 	.layer p i{
 		float: right;
