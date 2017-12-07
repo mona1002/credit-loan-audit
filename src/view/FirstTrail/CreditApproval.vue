@@ -265,10 +265,10 @@
           <div style="position:relative;">
             信审流程轨迹
           </div>
-          <el-table :data="tableData" height="250" border style="width: 100%" @row-dblclick="itemDbclick" @cell-mouse-enter="cellHover">
+          <el-table :data="lcgjData" height="250" border style="width: 100%" highlight-current-row>
             <el-table-column type="index">
             </el-table-column>
-            <el-table-column prop="verIncome" label="任务节点">
+            <el-table-column prop="taskName" label="任务节点">
             </el-table-column>
             <el-table-column prop="proCode" label="任务类型">
             </el-table-column>
@@ -369,7 +369,7 @@ export default {
       // warnShow: '', // 警告 弹窗/
       // warnMsg: '' // 警告文字
       spjlData: [], // 审批结论轨迹数据
-      lcgjData: [], // 流程轨迹
+      lcgjData: [], // 流程轨迹 lcgjData
       products: [], // 审批产品
 
       // 审批结论轨迹
@@ -414,6 +414,7 @@ export default {
     this.taskId = taskInWaitting.taskId;
     console.log(this.taskId);
 
+
     // 回退 拒绝  审批
     // 经办人 登录用户名
     var userInfo = JSON.parse(localStorage.getItem('userInf'));
@@ -434,6 +435,9 @@ export default {
 
     this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
     this.applyId = this.applicationInformationDetail.applyId;
+    console.log(this.applyId);
+    this.appOrgId = this.applicationInformationDetail.appOrgId;
+    console.log(this.appOrgId);
   },
   methods: {
     // open 打开 自定义 弹窗   挂起
@@ -507,38 +511,38 @@ export default {
           break;
         case '03':
           this.showFlag = '03';
-          this.get('system/getSystemDate').then(res => {
-            console.log(res)
-            // 请求系统时间
-            // this.dealroperDate = res.data;
-            // 请求存到本地的数据
-            // 申请金额
-            this.loanAmt = this.applicationInformationDetail.loanAmt;
-            // 申请期限
-            this.loanTerm = this.applicationInformationDetail.loanTerm;
-            // 申请信息-申请产品
-            this.sqproName = this.applicationInformationDetail.proName;
-            // 可接受最高每期还款额
-            this.eachTermAmt = this.applicationInformationDetail.eachTermAmt;
-            // 申请类型/借款类型
-            this.loanType = this.applicationInformationDetail.loanTypeTxt;
+          // this.get('system/getSystemDate').then(res => {})
+          // console.log(res)
+          // 请求系统时间
+          // this.dealroperDate = res.data;
+          // 请求存到本地的数据
+          // 申请金额
+          this.loanAmt = this.applicationInformationDetail.loanAmt;
+          // 申请期限
+          this.loanTerm = this.applicationInformationDetail.loanTerm;
+          // 申请信息-申请产品
+          this.sqproName = this.applicationInformationDetail.proName;
+          // 可接受最高每期还款额
+          this.eachTermAmt = this.applicationInformationDetail.eachTermAmt;
+          // 申请类型/借款类型
+          this.loanType = this.applicationInformationDetail.loanTypeTxt;
 
-            /* 请求 
-              信用评分 
-              核实可接受最高还款额
-              产品
-            */
-            // 产品
-            this.get('/credit/product').then(res => {
-              console.log(res);
-              if (res.statusCode == '200') {
-                // 假如没有  核实可接受最高每期还款额 
-                // if(res.)  提交的时候也要判断
-                // this.$message("提示:请完善信审表中可承受的月还款金额");
-                this.products = res.data;
-              }
-            })
+          /* 请求 
+            信用评分 
+            核实可接受最高还款额
+            产品
+          */
+          // 产品
+          this.get('/credit/product').then(res => {
+            console.log(res);
+            if (res.statusCode == '200') {
+              // 假如没有  核实可接受最高每期还款额 
+              // if(res.)  提交的时候也要判断
+              // this.$message("提示:请完善信审表中可承受的月还款金额");
+              this.products = res.data;
+            }
           })
+
           break;
         case 'spjl':
           this.showFlag = 'spjl';
@@ -547,9 +551,11 @@ export default {
         case 'lcgj':
           this.showFlag = 'lcgj';
           // 取本地的 流程模版id
-          this.processTemplateId = JSON.parse(localStorage.getItem('processTemplateId'));
+          this.processTemplateId = JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
           console.log(this.processTemplateId);
-          // 
+          // 任务状态
+          this.taskStatus = JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
+          this.getLcgjList();
 
           break;
       }
@@ -679,7 +685,7 @@ export default {
         newOldMainnos: '', //借新还旧进件编号集合
         applyMainNo: '', //主进件编号
         applySubNo: '', //从进件编号
-        appOrgId: '', //进件机构ID
+        appOrgId: this.appOrgId, //进件机构ID
         appOrgCode: '', //进件机构代码
         applyType: '', //申请类型[“00”:”非循环贷”,”01”:”循环贷(借新还旧)”,”02”:”循环贷(非借新还旧)”]
         custId: '', //客户ID
@@ -773,6 +779,16 @@ export default {
 
       })
     },
+    // 流程轨迹
+    getLcgjList(){
+      this.post('/creauditInfo/approvalTrajectory',{
+        processTemplateId:this.processTemplateId,
+        taskStatus:this.taskStatus
+      }).then(res=>{
+        console.log(res);
+        this.lcgjData = res.data.taskDetailList;
+      })
+    },
     // 回退/拒绝 主原因 select - change
     selectChange: function(val) {
       console.log(val)
@@ -853,7 +869,7 @@ export default {
         this.mainReason = ''; // 回退主原因
         this.secondaryReason = ''; // 回退子原因
         this.reasonRemark = ''; // 意见描述/原因说明
-        this.appOrgId = ''; // 进件机构id
+        // this.appOrgId = ''; // 进件机构id
         // this.applyId = ''; // 申请单id
         this.rollbackNodeName = ''; // 回退节点名称
         this.dealroperDate = ''; // 经办时间
@@ -927,6 +943,7 @@ export default {
 
 
 
+
 /* 三列 */
 
 .creditApproval-class .item-column3 {
@@ -940,6 +957,7 @@ export default {
   height: 40px;
   line-height: 40px;
 }
+
 
 
 
@@ -983,6 +1001,7 @@ export default {
 
 
 
+
 /* 信审审批 - btn*/
 
 .creditApproval-class .credit-btn {
@@ -991,6 +1010,7 @@ export default {
   color: #333;
   border: none;
 }
+
 
 
 
@@ -1045,6 +1065,7 @@ export default {
 
 
 
+
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -1052,6 +1073,7 @@ export default {
   float: left;
   margin: 0;
 }
+
 
 
 
@@ -1082,6 +1104,7 @@ export default {
   border-radius: 10px;
   overflow: hidden;
 }
+
 
 
 
@@ -1146,11 +1169,13 @@ export default {
 
 
 
+
 /* textarea */
 
 .creditApproval-class .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
 
 
 
@@ -1195,6 +1220,7 @@ export default {
 
 
 
+
 /* 弹窗页面 关闭按钮*/
 
 .creditApproval-class .el-tag {
@@ -1210,6 +1236,7 @@ export default {
 .creditApproval-class .el-tag .el-icon-close {
   right: 0px;
 }
+
 
 
 
@@ -1269,6 +1296,7 @@ export default {
 
 
 
+
 /* 审批结论轨迹 */
 
 .creditApproval-class .spjl-div {
@@ -1306,6 +1334,7 @@ export default {
 
 
 
+
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -1313,6 +1342,7 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
 
 
 
