@@ -23,7 +23,7 @@
 			<p>信审任务列表</p>
 		</div>
 		<div class="taskWtable">
-			<el-table :data="datas" style="width: 100%" height="400" @row-click='goDetail'>
+			<el-table :data="datas" style="width: 100%" height="450" @row-click='goDetail'>
 			    <el-table-column
 			      type="index" 
 			      label="序号"
@@ -129,11 +129,13 @@
 		},
 		mounted(){
 			//一进入页面就发送请求
-			this.queryParam.processTemplateId=this.$route.query.processTemplateId;
-			this.queryParam.taskNodeName=this.$route.query.taskNodeName;
-			this.queryParam.taskStatus=this.$route.query.taskStatus;
-			this.queryParam.userCode=this.$route.query.userCode;
-			this.queryParam.orgCode=this.$route.query.orgCode;
+			//this.queryParam = JSON.parse(localStorage.getItem('workbenchPass'));
+
+			this.queryParam.processTemplateId=JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
+			this.queryParam.taskNodeName=JSON.parse(localStorage.getItem('workbenchPass')).taskNodeName;
+			this.queryParam.taskStatus=JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
+			this.queryParam.userCode=JSON.parse(localStorage.getItem('userInf')).userCode;
+			this.queryParam.orgCode=JSON.parse(localStorage.getItem('userInf')).orgCode;
 			console.log(this.processTemplateId+'...'+this.taskNodeName+'...'+this.taskStatus+'...'+this.userCode+'...'+this.orgCode);
 			
 			this.request(this.queryParam);	
