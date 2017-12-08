@@ -616,9 +616,11 @@ position: relative
 .Abody .CreditForm el-select-dropdown__item{
   float: none;
 }
-.taskWatting .el-select-dropdown__item,
-.Abody .CreditForm .el-select-dropdown__item{
+.taskWatting .el-select-dropdown__item{
   float: none;
+}
+.taskWatting .el-select-dropdown__item.selected{
+  font-weight: 400;
 }
 /* 信审表div content 外wrap */
 .CreditForm .el-collapse-item__wrap{

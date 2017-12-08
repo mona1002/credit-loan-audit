@@ -23,6 +23,7 @@
 @charset "utf-8";
 *, *:after, *:before {    
     box-sizing: border-box;
+    font-weight: 400;
 }
 html,body{
     width:100%;
