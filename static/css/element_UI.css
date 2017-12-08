@@ -9,12 +9,12 @@
   padding:9px 22px;
   font-size:16px;
 }
-.Abody el-select-dropdown__item{
+/* .Abody el-select-dropdown__item{
 float:none;
 }
 .Abody .el-select-dropdown__item{
 float:none;
-}
+} */
 /* 公用 表格 表头 th */
 /* 放款信息 信审审结论轨迹  */
 /* .FinanceInformation .el-table__header-wrapper tr{
@@ -612,13 +612,13 @@ position: relative
   width: calc( 66.6% + 394px );
 }
 /* 信审任务列表 分页去掉浮动-----------------------------------------未成功，待调整*/
-.taskWatting el-select-dropdown__item,
+/* .taskWatting el-select-dropdown__item,
 .Abody .CreditForm el-select-dropdown__item{
   float: none;
-}
-.taskWatting .el-select-dropdown__item{
+} */
+/* .taskWatting .el-select-dropdown__item{
   float: none;
-}
+} */
 .taskWatting .el-select-dropdown__item.selected{
   font-weight: 400;
 }
