@@ -388,7 +388,7 @@
     height: 52px;
     /* background:#475669; */
     /* background:#475669; */
-    background: rgba(71, 86, 105, 0.26);
+    background: rgba(71, 86, 105, 0.6);
     box-shadow: 0 10px 20px 0 #47566942;
     border-radius: 6px;
     padding: 12px 0 11px 19px;
