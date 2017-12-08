@@ -2,7 +2,8 @@
 <template>
   <div>
     <div class="address-title">
-      新增调查日志
+      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+      <span class="headFont">新增调查日志</span>
     </div>
     <ul>
       <li class="item-column3">
@@ -14,7 +15,7 @@
       <li class="item-column3">
         <div class="left-title">电话类型</div>
         <div>
-          <el-select v-model="phoneType" disabled placeholder="请选择电话类型">
+          <el-select v-model="phoneType" disabled>
             <el-option label="紧急联系人" value="04"></el-option>
           </el-select>
         </div>
@@ -66,7 +67,8 @@
       </li>
     </ul>
     <div class="address-title">
-      录入紧急联系人调查信息
+      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+      <span class="headFont">录入紧急联系人调查信息</span>
     </div>
     <ul>
       <li class="item-column1">
@@ -204,7 +206,7 @@ export default {
       contactfre: '',
       contactfretxt: '',
       conclusion: '',
-      phoneType: '',
+      phoneType: '04',
       sourceDesc: '',
       threeQueries: '',
       phoneId: ''
@@ -254,8 +256,30 @@ export default {
 
             this.phoneId = res.data.id;
             console.log(this.phoneId);
+
+            // 清数据
+            this.source = '';
+            this.answer = '';
+            this.checkStage = '';
+            this.sourceDesc = '';
+            this.thirdResult = '';
+            this.relBorrower = '';
+            this.relBorrowertxt = '';
+            this.checkWork = '';
+            this.checkWorktxt = '';
+            this.mobilepayment = '';
+            this.mobilepaymenttxt = '';
+            this.threeQueries = '';
+            this.threeQueriestxt = '';
+            this.maritalStatus = '';
+            this.maritalStatustxt = '';
+            this.contactfre = '';
+            this.contactfretxt = '';
+            this.conclusion = '';
+
             // 提交数据成功,广播事件 重新刷新列表
             this.$emit('updateList');
+            this.$emit('updateTree');
           }
         })
     }

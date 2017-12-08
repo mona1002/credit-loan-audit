@@ -2,7 +2,8 @@
 <template>
   <div>
     <div class="address-title">
-      新增调查日志
+      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+      <span class="headFont">新增调查日志</span>
     </div>
     <ul>
       <li class="item-column3">
@@ -14,7 +15,7 @@
       <li class="item-column3">
         <div class="left-title">电话类型</div>
         <div>
-          <el-select v-model="phoneType">
+          <el-select v-model="phoneType" disabled>
             <el-option label="家庭联系人" value="03"></el-option>
           </el-select>
         </div>
@@ -66,7 +67,8 @@
       </li>
     </ul>
     <div class="address-title">
-      录入家庭联系人电话调查信息
+      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+      <span class="headFont">录入家庭联系人电话调查信息</span>
     </div>
     <ul>
       <li class="item-column1">
@@ -243,7 +245,7 @@
 export default {
   data() {
     return {
-      phoneType: '',
+      phoneType: '03',
       source: '',
       answer: '',
       sourceDesc: '',
@@ -270,10 +272,10 @@ export default {
       otherIncome: '',
       otherIncometxt: '',
       conclusion: '',
-      phoneId:''
+      phoneId: ''
     }
   },
-  props: ['custName', 'phoneNum', 'applyId'],
+  props: ['custName', 'phoneNum', 'applyId', 'formId'],
   mounted() {
     this.phoneType = '03'; // 家庭联系人电话
   },
@@ -290,7 +292,7 @@ export default {
             sourceDesc: this.sourceDesc,
             checkStage: this.checkStage,
             applyId: this.applyId,
-            id:this.phoneId
+            id: this.phoneId
           },
           cretelfcontact: {
             applyId: this.applyId,
@@ -321,10 +323,39 @@ export default {
         })
         .then(res => {
           console.log(res);
-          if (res.statusCode == '200'){
-            this.phoneId = res.data.id; 
+          if (res.statusCode == '200') {
+            this.phoneId = res.data.id;
+            // 清数据
+            this.source = '';
+            this.answer = '';
+            this.sourceDesc = '';
+            this.checkStage = '';
+            this.thirdResult = '';
+            this.threeQueries = '';
+            this.threeQueriestxt = '';
+            this.issameFam = '';
+            this.issameFamtxt = '';
+            this.wetherThirdAbnormal = '';
+            this.wetherThirdAbnormaltxt = '';
+            this.mobilepayment = '';
+            this.mobilepaymenttxt = '';
+            this.relBorrower = '';
+            this.relBorrowertxt = '';
+            this.checkWork = '';
+            this.checkWorktxt = '';
+            this.maritalStatus = '';
+            this.maritalStatustxt = '';
+            this.checkAddr = '';
+            this.checkAddrtxt = '';
+            this.checkEstate = '';
+            this.checkEstatetxt = '';
+            this.otherIncome = '';
+            this.otherIncometxt = '';
+            this.conclusion = '';
+
             // 提交数据成功,广播事件 重新刷新列表
             this.$emit('updateList');
+            this.$emit('updateTree');
           }
         })
     }

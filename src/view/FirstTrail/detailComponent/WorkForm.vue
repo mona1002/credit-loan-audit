@@ -2,7 +2,8 @@
 <template>
   <div>
     <div class="address-title">
-      新增调查日志
+      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+      <span class="headFont">新增调查日志</span>
     </div>
     <ul>
       <li class="item-column3">
@@ -66,7 +67,8 @@
       </li>
     </ul>
     <div class="address-title">
-      录入工作证明人调查信息
+      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+      <span class="headFont">录入工作证明人调查信息</span>
     </div>
     <ul>
       <li class="item-column2">
@@ -133,7 +135,7 @@ export default {
   data() {
     return {
       // custName: '',
-      phoneType: '',
+      phoneType: '05',
       // phoneNum: '',
       source: '',
       answer: '',
@@ -149,7 +151,7 @@ export default {
       phoneId: ''
     }
   },
-  props: ['custName', 'phoneNum', 'applyId'],
+  props: ['custName', 'phoneNum', 'applyId', 'formId'],
   mounted() {
     this.phoneType = '05'; // 住址电话
 
@@ -157,7 +159,7 @@ export default {
   methods: {
     submitForm() {
       console.log('submit!');
-      
+
       this.post('/creTelResearchHis/addTeljobref', {
           cretelinvest: {
             custName: this.custName,
@@ -168,7 +170,7 @@ export default {
             checkStage: this.checkStage,
             sourceDesc: this.sourceDesc, // 其他来源说明
             applyId: this.applyId,
-            id:this.phoneId
+            id: this.phoneId
           },
           creteljobref: {
             applyId: this.applyId,
@@ -184,10 +186,26 @@ export default {
         })
         .then(res => {
           console.log(res);
-          if (res.statusCode == '200'){
-            this.phoneId = res.data.id; 
+          if (res.statusCode == '200') {
+            this.phoneId = res.data.id;
+
+            // 清数据
+            this.source = '';
+            this.answer = '';
+            this.checkStage = '';
+            this.sourceDesc = '';
+            this.answerIdentity = '';
+            this.answertxt = '';
+            this.checkJob = '';
+            this.checkJobtxt = '';
+            this.mobilepayment = '';
+            this.mobilepaymenttxt = '';
+            this.conclusion = '';
+
+
             // 提交数据成功,广播事件 重新刷新列表
             this.$emit('updateList');
+            this.$emit('updateTree');
           }
         })
     }

@@ -2,7 +2,8 @@
 <template>
   <div class="company-form">
     <div class="address-title">
-      新增调查日志
+      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+      <span class="headFont">新增调查日志</span>
     </div>
     <ul>
       <li class="item-column3">
@@ -14,7 +15,7 @@
       <li class="item-column3">
         <div class="left-title">电话类型:</div>
         <div>
-          <el-select v-model="phoneType">
+          <el-select v-model="phoneType" disabled>
             <el-option label="单位电话" value="02"></el-option>
           </el-select>
         </div>
@@ -66,7 +67,8 @@
       </li>
     </ul>
     <div class="address-title">
-      录入单位电话调查信息
+      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+      <span class="headFont">录入单位电话调查信息</span>
     </div>
     <ul>
       <li class="item-column2">
@@ -218,7 +220,7 @@ export default {
   data() {
     return {
       // custName: '',
-      phoneType: '',
+      phoneType: '02',
       // phoneNum: '',
       source: '',
       answer: '',
@@ -247,7 +249,7 @@ export default {
       phoneId: ''
     }
   },
-  props: ['custName', 'phoneNum', 'applyId'],
+  props: ['custName', 'phoneNum', 'applyId', 'formId'],
   mounted() {
     this.phoneType = '02'; // 单位电话
   },
@@ -296,8 +298,37 @@ export default {
           if (res.statusCode == '200') {
 
             this.phoneId = res.data.id;
+
+
+            this.source = '';
+            this.answer = '';
+            this.checkStage = '';
+            this.sourceDesc = '';
+            this.thirdResult = '';
+            this.phone = '';
+            this.phonetxt = '';
+            this.answerIdentity = '';
+            this.answertxt = '';
+            this.company = '';
+            this.companytxt = '';
+            this.checkTime = '';
+            this.checkTimetxt = '';
+            this.checkIncome = '';
+            this.checkIncometxt = '';
+            this.payrollSituation = '';
+            this.payrollSituationtxt = '';
+            this.pensionInsurance = '';
+            this.employmentmodetxt = '';
+            this.employmentmode = '';
+            this.housingFund = '';
+            this.jobref1 = '';
+            this.jobref2 = '';
+            this.conclusion = '';
+
+
             // 提交数据成功,广播事件 重新刷新列表
             this.$emit('updateList');
+            this.$emit('updateTree');
           }
         })
     }
