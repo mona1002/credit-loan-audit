@@ -9,12 +9,12 @@
   padding:9px 22px;
   font-size:16px;
 }
-.Abody el-select-dropdown__item{
+/* .Abody el-select-dropdown__item{
 float:none;
 }
 .Abody .el-select-dropdown__item{
 float:none;
-}
+} */
 /* 公用 表格 表头 th */
 /* 放款信息 信审审结论轨迹  */
 /* .FinanceInformation .el-table__header-wrapper tr{
@@ -52,16 +52,12 @@ height: 40px;
 .creditInvestigation .el-collapse-item__header{
     background:#eef0f9;
     border:1px solid #e6eaee;
-    /* border-radius:23px; */
     width:100%;
-    height:38px;
+    height:40px;
+     line-height: 40px;
   }
-.creditInvestigation .el-collapse-item__header{
-  line-height: 38px;
-}
 .creditInvestigation .el-collapse-item__arrow{
   line-height: 38px;
-   /* padding: 16px 16px 0 0; */
    margin-right: 12px;
 }
 
@@ -74,17 +70,17 @@ height: 40px;
 .applicationInformationDetail .el-collapse-item__header{
     background:#eef0f9;
     border:1px solid #e6eaee;
-    /* border-radius:23px; */
     width:100%;
-    height:38px;
+    height:40px;
+    line-height: 40px;
   }
-.applicationInformationDetail .el-collapse-item__header{
-  line-height: 38px;
-}
 .applicationInformationDetail .el-collapse-item__arrow{
   line-height: 38px;
-   padding: 16px 16px 0 0;
+  margin-right: 12px;
 }
+.applicationInformationDetail .el-table__body-wrapper{
+    overflow: hidden;
+  }
 
 /*申请信息 表格 */
 .applicationInformationDetail .el-table th{
@@ -107,23 +103,20 @@ height: 40px;
 .applicationInformationDetail .el-collapse-item__content{
   color: #475669;
   font-size: 14px;
+  padding-bottom: 0px;
 }
 /*借款人资料 折叠面板头部背景色 */
 .borrowerInformation .el-collapse-item__header{
     background:#eef0f9;
     border:1px solid #e6eaee;
-    /* border-radius:23px; */
     width:100%;
-    height:38px;
+    height:40px;
+    line-height: 40px;
+    overflow:hidden;
   }
-.borrowerInformation .el-collapse-item__header{
-  line-height: 38px;
-  overflow:hidden;
-}
 .borrowerInformation .el-collapse-item__arrow{
   line-height: 38px;
   margin-right: 12px;
-  /* padding: 16px 16px 0 0; */
 }
 
 .borrowerInformation .el-collapse-item__wrap{
@@ -169,21 +162,21 @@ height: 40px;
 }
 
 /*借款人资料详情 折叠面板头部背景色 */
+.borrowerInformationSetail .el-collapse-item:nth-of-type(9) .el-table__body-wrapper{
+    overflow: hidden;
+  }
 .borrowerInformationSetail .el-collapse-item__header{
     background:#eef0f9;
     border:1px solid #e6eaee;
     /* border-radius:23px; */
     width:100%;
-    height:38px;
-}
-.borrowerInformationSetail .el-collapse-item__header{
-    line-height: 38px;
+    height:40px;
+    line-height: 40px;
     overflow:hidden;
 }
 .borrowerInformationSetail .el-collapse-item__arrow{
     line-height: 38px;
     margin-right: 12px;
-    /* padding: 16px 16px 0 0; */
 }
 .borrowerInformationSetail .el-collapse-item__content{
     font-size: 14px;
@@ -464,7 +457,9 @@ position: relative
   font-size: 14px;
 }
 /* 借款人资料 */
-
+/* .borrowerInformation .el-table__body-wrapper{
+    overflow: hidden;
+  } */
 .borrowerInformation .el-table__body-wrapper .el-select>.el-input .el-input__inner {
    border: none;
 }
@@ -556,30 +551,62 @@ position: relative
 }
 
 /* 备注信息表格内容居中 */
+.remark .el-table__body-wrapper{
+    overflow: hidden;
+  }
 .remark .el-table th{
-  text-align: center;
   font-weight: 400;
   color: #1f2d3d;
   font-size: 14px;
+  padding-left: 10px;
 }
 .remark .el-table__body-wrapper .el-table__body td{
-  text-align: center;
   font-weight: 400;
   color: #666666;
   font-size: 14px;
+  padding-left: 10px;
+}
+.remark .el-table th:nth-of-type(1){
+  text-align: center;
+}
+.remark .el-table th:nth-of-type(4){
+  text-align: center;
+}
+.remark .el-table__body-wrapper .el-table__body td:nth-of-type(1){
+  text-align: center;
+}
+.remark .el-table__body-wrapper .el-table__body td:nth-of-type(4){
+  text-align: center;
 }
 /* 备注信息表格内容居中 */
+.remarkDetial .el-table__body-wrapper{
+    overflow: hidden;
+  }
 .remarkDetial .el-table th{
-  text-align: center;
+  /* text-align: center; */
   font-weight: 400;
   color: #1f2d3d;
   font-size: 14px;
+  padding-left: 10px;
 }
 .remarkDetial .el-table__body-wrapper .el-table__body td{
-  text-align: center;
+  /* text-align: center; */
   font-weight: 400;
   color: #666666;
   font-size: 14px;
+  padding-left: 10px;
+}
+.remarkDetial .el-table th:nth-of-type(1){
+  text-align: center;
+}
+.remarkDetial .el-table th:nth-of-type(4){
+  text-align: center;
+}
+.remarkDetial .el-table__body-wrapper .el-table__body td:nth-of-type(1){
+  text-align: center;
+}
+.remarkDetial .el-table__body-wrapper .el-table__body td:nth-of-type(4){
+  text-align: center;
 }
 
 
@@ -596,29 +623,52 @@ position: relative
   background-color: #fff;
 }
 .taskWatting .el-table th{
-  text-align: center;
+  padding-left: 10px;
   font-weight: 400;
   color: #1f2d3d;
   font-size: 14px;
 }
 .taskWatting .el-table__body-wrapper .el-table__body td{
-  text-align: center;
+  padding-left: 10px;
   font-weight: 400;
   color: #666666;
   font-size: 14px;
+}
+.taskWatting .el-table th:nth-of-type(1){
+  text-align: center;
+}
+.taskWatting .el-table__body-wrapper{
+  overflow: hidden;
+}
+.taskWatting .el-table__body-wrapper .el-table__body td:nth-of-type(1){
+  text-align: center;
+}
+.taskWatting .el-table th:nth-of-type(5){
+  text-align: center;
+}
+.taskWatting .el-table__body-wrapper .el-table__body td:nth-of-type(5){
+  text-align: center;
+}
+.taskWatting .el-table th:nth-of-type(10){
+  text-align: center;
+}
+.taskWatting .el-table__body-wrapper .el-table__body td:nth-of-type(10){
+  text-align: center;
 }
 /* 信审任务列表 按钮宽度*/
 .taskWatting .el-col-22{
   width: calc( 66.6% + 394px );
 }
 /* 信审任务列表 分页去掉浮动-----------------------------------------未成功，待调整*/
-.taskWatting el-select-dropdown__item,
+/* .taskWatting el-select-dropdown__item,
 .Abody .CreditForm el-select-dropdown__item{
   float: none;
-}
-.taskWatting .el-select-dropdown__item,
-.Abody .CreditForm .el-select-dropdown__item{
+} */
+/* .taskWatting .el-select-dropdown__item{
   float: none;
+} */
+.taskWatting .el-select-dropdown__item.selected{
+  font-weight: 400;
 }
 /* 信审表div content 外wrap */
 .CreditForm .el-collapse-item__wrap{
@@ -751,4 +801,17 @@ position: relative
   background:rgba(31, 45, 61,.6);
   box-shadow:0 10px 20px 0 #475669;
   margin-top: -7px; 
+}
+/*流程轨迹查询 表格 */
+.processTrajectory .el-table th{
+  text-align: center;
+  font-weight: 400;
+  color: #1f2d3d;
+  font-size: 14px;
+}
+.processTrajectory .el-table__body-wrapper .el-table__body td{
+  text-align: center;
+  font-weight: 400;
+  color: #666666;
+  font-size: 14px;
 }

@@ -69,7 +69,7 @@
     }
   }
 </script>
-<style>
+<style scoped>
   .warp {
     background: green;
     height: 48px;
@@ -94,8 +94,8 @@
   }
 
   li {
-    float: left;
-    font-weight: bold;
+    /* float: left; */
+    /* font-weight: bold; */
     /* background: orchid; */
     /* position: absolute; */
     /* left: -200px; */

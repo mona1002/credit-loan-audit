@@ -23,7 +23,7 @@
 			<p>信审任务列表</p>
 		</div>
 		<div class="taskWtable">
-			<el-table :data="datas" style="width: 100%" height="450" @row-click='goDetail'>
+			<el-table :data="datas" style="width: 100%" height="600" @row-click='goDetail' border>
 			    <el-table-column
 			      type="index" 
 			      label="序号"
@@ -278,7 +278,7 @@
 	.taskWatting .taskWhead p{
 		font-size:16px;
 		color:#1f2d3d;
-		padding-left:50px;
+		padding-left:37px;
 		text-align:left;
 		line-height: 50px;
 	}

@@ -497,8 +497,7 @@
 				</template>
 			    <el-table
 			      :data="accepCusEstates"
-			      style="width: 100%"
-			      border>
+			      style="width: 100%">
 				      <el-table-column
 				        type="index"
 				      	:index='1'
@@ -570,8 +569,7 @@
 				</template>
 			    <el-table
 			      :data="accepCusCarInfos"
-			      style="width: 100%"
-			      border>
+			      style="width: 100%">
 				      <el-table-column
 				        type="index"
 				      	:index='1'
@@ -738,10 +736,6 @@
 						<label>前单位工作年限[月]：</label>
 						<span>{{accepCusWorkInfo.befWorkMonth}}</span>
 					</li>
-					<li>
-						<label>前单位工作年限[月]：</label>
-						<span>{{accepCusWorkInfo.befWorkMonth}}</span>
-					</li>
 				</ul>
 		  	</el-collapse-item>
 		  	<el-collapse-item name="8">
@@ -857,8 +851,8 @@
 		},
 		mounted(){
 			//一进入页面就发送请求
-			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-			this.applyId=this.taskInWaitting.applyId;
+			this.taskInWaitting = JSON.parse(localStorage.getItem('internalId'));
+			this.applyId=this.taskInWaitting.matchApplyId;
 			this.request();
 		},
 		methods:{
@@ -963,23 +957,23 @@
 	}
 	.applicationInformationDetail ul{
 		width: 100%;
-		height: 36px;
-	}
-	.applicationInformationDetail ul.firstUl{
-		margin-top: 10px;
+		height: 50px;
 	}
 	.applicationInformationDetail ul li{
 		float: left;
 		width: 33.3%;
-		/*margin-top: 10px;
-		 position: relative; */
+		margin-top: 10px;
+		position: relative;
 		min-width: 336px;
+	}
+	.applicationInformationDetail ul li span{
+		
 	}
 	ul li label{
 		width: 178px;
 		display: inline-block;
 		text-align: right;
-		/* position: relative; */
+		position: relative;
 	}
 	ul li .firstP{
 		display: inline-block;
