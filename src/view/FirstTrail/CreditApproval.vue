@@ -6,25 +6,25 @@
     </div>
     <el-form style="padding:0 20px;width:100%; height:150px; ">
       <el-form-item label="审批人:" class="item-column3">
-        审批人
+        {{userName}}
       </el-form-item>
       <el-form-item label="申请类型:" class="item-column3">
-        申请类型
+        {{certTypeTxt}}
       </el-form-item>
       <el-form-item label="进件编号:" class="item-column3">
-        进件编号
+        {{applySubNo}}
       </el-form-item>
       <el-form-item label="证件类型:" class="item-column3">
-        证件类型
+        身份证
       </el-form-item>
       <el-form-item label="证件号码:" class="item-column3">
-        证件号码
+        {{certCode}}
       </el-form-item>
       <el-form-item label="产品名称:" class="item-column3">
-        产品名称
+        {{proName}}
       </el-form-item>
-      <el-form-item label="申请期限[元]" class="item-column3">
-        申请期限[元]
+      <el-form-item label="申请期限[月]" class="item-column3">
+        {{loanTerm}}
       </el-form-item>
     </el-form>
     <div class="btn-div">
@@ -240,7 +240,7 @@
           </el-table-column>
           <el-table-column prop="inteDebitrate" label="内部负债率">
           </el-table-column>
-          <el-table-column prop="address" label="总信用负债率">
+          <el-table-column prop="creditDebitRate" label="总信用负债率">
           </el-table-column>
           <el-table-column prop="totalRate" label="总负债率">
           </el-table-column>
@@ -265,24 +265,24 @@
           <div style="position:relative;">
             信审流程轨迹
           </div>
-          <el-table :data="lcgjData" height="250" border style="width: 100%" highlight-current-row>
+          <el-table :data="lcgjData" height="250" border style="width: 100%" highlight-current-row v-loading="lcgjLoading">
             <el-table-column type="index">
             </el-table-column>
             <el-table-column prop="taskName" label="任务节点">
             </el-table-column>
-            <el-table-column prop="proCode" label="任务类型">
+            <el-table-column prop="taskTypeTxt" label="任务类型">
             </el-table-column>
-            <el-table-column prop="ploanAmt" label="进入本环节时间">
+            <el-table-column prop="activationTime" label="进入本环节时间">
             </el-table-column>
-            <el-table-column prop="ploanTerm" label="任务状态">
+            <el-table-column prop="taskStatusTxt" label="任务状态">
             </el-table-column>
-            <el-table-column prop="appmult" label="处理人">
+            <el-table-column prop="operatorCode" label="处理人">
             </el-table-column>
-            <el-table-column prop="eachTermamt" label="处理时间">
+            <el-table-column prop="completeTime" label="处理时间">
             </el-table-column>
-            <el-table-column prop="inteDebitrate" label="处理结论">
+            <el-table-column prop="approvalOpinionTxt" label="处理结论">
             </el-table-column>
-            <el-table-column prop="address" label="意见说明">
+            <el-table-column prop="opinionExplain" label="意见说明">
             </el-table-column>
           </el-table>
         </div>
@@ -350,7 +350,7 @@ export default {
       custName: '',
       custNo: '',
       certType: '',
-      certCode: '',
+      certCode: '',// 证件号码
       emerType: '',
       appOrgCode: '',
       proName: '',
@@ -375,10 +375,12 @@ export default {
       // 审批结论轨迹
       pageNum: 1,
       pageSize: 5,
-      loading: false, // 加载
+      loading: false, // 加载  审批结论轨迹
       mainId: '', // 主原因 id
       mainReasonTitle: '', // 主原因 title
       applicationInformationDetail: '', // 申请详情传过来的数据
+      taskInWaitting:'', // 
+      userInfo:'', // 登录信息
       // 审批
       loanAmt: '', // 批准金额
       loanTerm: '', // 申请期限
@@ -401,7 +403,13 @@ export default {
       totalRate: '', // 总负债率
       reasonRemark: '',
       caculData: '', // 审批结论数据
-      appConclusion: '' // 审批结论内容
+      appConclusion: '', // 审批结论内容
+      lcgjLoading: '', // 流程轨迹
+      userName:'', // 审批人
+      proName:'', // 产品名称
+      applySubNo:'', // 进件编号
+      appTypeTxt:'', // 申请类型
+      certTypeTxt:'', // 证件类型
     }
   },
   mounted() {
@@ -409,16 +417,16 @@ export default {
     // 这里的数据是 申请信息 中存到本地的信息
     // var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
     // 取出存在本地当然 userInfo 
-    var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+    this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
     // 挂起 任务id
-    this.taskId = taskInWaitting.taskId;
+    this.taskId = this.taskInWaitting.taskId;
     console.log(this.taskId);
 
 
     // 回退 拒绝  审批
     // 经办人 登录用户名
-    var userInfo = JSON.parse(localStorage.getItem('userInf'));
-    this.dealroperCode = userInfo.userCode;
+    this.userInfo = JSON.parse(localStorage.getItem('userInf'));
+    this.dealroperCode = this.userInfo.userCode;
     // this.dealroperCode = userInfo.userCode;
     console.log(this.dealroperCode);
     // 经办时间
@@ -438,6 +446,25 @@ export default {
     console.log(this.applyId);
     this.appOrgId = this.applicationInformationDetail.appOrgId;
     console.log(this.appOrgId);
+    // 客户编号
+    this.custNo = this.applicationInformationDetail.custNo;
+
+
+    // 显示
+    // 审批人
+    this.userName = this.userInfo.userName;
+    // 申请类型
+    this.proName = this.applicationInformationDetail.proName;
+    // 进件编号
+    this.applySubNo = this.applicationInformationDetail.applySubNo;
+    // 证件类型
+    this.certType = this.applicationInformationDetail.certType;
+    // 证件号码
+    this.certCode = this.applicationInformationDetail.certCode;
+    // 产品名称
+    this.proName = this.applicationInformationDetail.proName;
+    // 申请期限 
+    this.loanTerm = this.applicationInformationDetail.loanTerm;
   },
   methods: {
     // open 打开 自定义 弹窗   挂起
@@ -519,7 +546,7 @@ export default {
           // 申请金额
           this.loanAmt = this.applicationInformationDetail.loanAmt;
           // 申请期限
-          this.loanTerm = this.applicationInformationDetail.loanTerm;
+          // this.loanTerm = this.applicationInformationDetail.loanTerm;
           // 申请信息-申请产品
           this.sqproName = this.applicationInformationDetail.proName;
           // 可接受最高每期还款额
@@ -555,6 +582,7 @@ export default {
           console.log(this.processTemplateId);
           // 任务状态
           this.taskStatus = JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
+          this.lcgjLoading = true;
           this.getLcgjList();
 
           break;
@@ -571,7 +599,8 @@ export default {
           this.showFlag = 0;
           // this.mainReason = this.mainReason; // 主原因同理
           this.creauditAppOperate = 'check_Refuse';
-          this.taskId = '180074';
+          // this.taskId = '180074';
+          this.approvalFn();
           break;
         case '02':
           console.log("回退");
@@ -581,20 +610,22 @@ export default {
           this.rollbackNodeName = this.rollbackNodeName;
           // this.mainReason = this.mainReason; // 主原因同理
           this.creauditAppOperate = 'check_Back';
-          this.taskId = '180049';
+          // this.taskId = '180049';
+          this.approvalFn();
           break;
         case '07':
           console.log("放弃");
           this.coverShow = false;
           this.showFlag = 0;
           // 放弃测试数据
-          this.taskId = '177524';
+          // this.taskId = '177524';
+          this.approvalFn();
           break;
         case '03':
           console.log("审批");
           this.coverShow = false;
           this.showFlag = 0;
-          this.taskId = '177574';
+          // this.taskId = '182525';
 
           // 假如没有  核实可接受最高每期还款额 , 提示
           // this.$message("提示:请求完善 信审表中可承受的月还款金额");
@@ -602,15 +633,11 @@ export default {
           this.saveCreaduit();
           break;
       }
-      // 传给接口的日期
-      this.dealroperDate = new Date(this.dealroperDate).toLocaleString().replace(/\//g, '-').match(/\d{4}\-\d{2}\-\d{1,2}/)[0];
-      var dates = this.dealroperDate.split('-');
-      if (dates[1].length < 2)
-        dates[1] = '0' + dates[1]
-      if (dates[2].length < 2)
-        dates[2] = '0' + dates[2];
 
-      this.dealroperDate = dates[0] + '-' + dates[1] + '-' + dates[2];
+
+    },
+    // 回退/拒绝/放弃
+    approvalFn() {
       // 点击 确认 提交 方法
       this.post("/creauditInfo/approval", {
         // 挂起 taskId 任务id
@@ -676,11 +703,11 @@ export default {
         proCode: this.proCode,
         verIncome: this.verIncome,
         ploanAmt: this.ploanAmt,
-        ploanTerm: this.ploanTerm,
-        appmult: this.appmult,
-        eachTermamt: this.eachTermamt,
-        inteDebitrate: this.inteDebitrate,
-        totalRate: this.totalRate,
+        ploanTerm: this.caculData.ploanTerm, //批准期限
+        appmult: this.caculData.appmult, // 审批倍数
+        eachTermamt: this.caculData.eachTermamt, //每期还款额[元]
+        inteDebitrate: this.caculData.inteDebitrate, //内部负债率
+        totalRate: this.caculData.totalRate, // 总负债率
         appConclusion: this.appConclusion,
         newOldMainnos: '', //借新还旧进件编号集合
         applyMainNo: '', //主进件编号
@@ -689,7 +716,7 @@ export default {
         appOrgCode: '', //进件机构代码
         applyType: '', //申请类型[“00”:”非循环贷”,”01”:”循环贷(借新还旧)”,”02”:”循环贷(非借新还旧)”]
         custId: '', //客户ID
-        custNo: '', //客户编号
+        custNo: this.custNo, //客户编号
         applyCustId: '', //申请客户ID（申请登记-个人信息）
         applyConclusion: '00',
         ploanOperId: '', // 批准人员
@@ -699,11 +726,44 @@ export default {
         ploanDate: '', // 批准日期
         auditDate: '', // 批准时间
         auditFlag: '', // 终审结束标识 0 初审 1终审
-        proId: this.proId //产品id
-
-
+        proId: this.proId, //产品id
+        taskId: this.taskId, // 任务id
       }).then(res => {
         console.log(res);
+        if (res.statusCode == '200') {
+          this.$message(res.msg);
+
+          // applyId: this.applyId,
+          // auditType: '00',
+          // proCode: this.proCode,
+          this.verIncome = ''; // 核实收入
+          this.ploanAmt = ''; // 批准金额
+          // ploanTerm: this.caculData.ploanTerm, //批准期限
+          // appmult: this.caculData.appmult, // 审批倍数
+          // eachTermamt: this.caculData.eachTermamt, //每期还款额[元]
+          // inteDebitrate: this.caculData.inteDebitrate, //内部负债率
+          // totalRate: this.caculData.totalRate, // 总负债率
+          this.appConclusion = ''; //审批结论内容（文本框）
+          // newOldMainnos: '', //借新还旧进件编号集合
+          // applyMainNo: '', //主进件编号
+          // applySubNo: '', //从进件编号
+          // appOrgId: this.appOrgId, //进件机构ID
+          // appOrgCode: '', //进件机构代码
+          // applyType: '', //申请类型[“00”:”非循环贷”,”01”:”循环贷(借新还旧)”,”02”:”循环贷(非借新还旧)”]
+          // custId: '', //客户ID
+          // custNo: this.custNo, //客户编号
+          // applyCustId: '', //申请客户ID（申请登记-个人信息）
+          // applyConclusion: '00',
+          // ploanOperId: '', // 批准人员
+          this.srcPloanAmt = ''; // 信审批准额度
+          this.creditDebitRate = ''; // 信用负债率
+          // approvalFlag: '0', // 终审通过标志
+          // ploanDate: '', // 批准日期
+          // auditDate: '', // 批准时间
+          // auditFlag: '', // 终审结束标识 0 初审 1终审
+          // proId: this.proId, //产品id
+          // taskId: this.taskId, // 任务id
+        }
       })
     },
     // 获取主次原因
@@ -772,21 +832,30 @@ export default {
         pageNum: this.pageNum, // 页码
         pageSize: this.pageSize // 每页条数
       }).then(res => {
-        this.loading = false;
         console.log('审批结论轨迹');
         console.log(res);
-        this.tableData = res.data;
+        if (res.statusCode == '200') {
+          this.loading = false;
+          this.tableData = res.data;
+        } else {
+          this.$message(res.msg);
+        }
 
       })
     },
     // 流程轨迹
-    getLcgjList(){
-      this.post('/creauditInfo/approvalTrajectory',{
-        processTemplateId:this.processTemplateId,
-        taskStatus:this.taskStatus
-      }).then(res=>{
+    getLcgjList() {
+      this.post('/creauditInfo/approvalTrajectory', {
+        processTemplateId: this.processTemplateId,
+        taskStatus: this.taskStatus
+      }).then(res => {
         console.log(res);
-        this.lcgjData = res.data.taskDetailList;
+        if (res.statusCode == '200') {
+          this.lcgjLoading = false;
+          this.lcgjData = res.data;
+        } else {
+          this.$message(res.msg);
+        }
       })
     },
     // 回退/拒绝 主原因 select - change
@@ -944,6 +1013,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* 三列 */
 
 .creditApproval-class .item-column3 {
@@ -957,6 +1036,16 @@ export default {
   height: 40px;
   line-height: 40px;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1002,6 +1091,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* 信审审批 - btn*/
 
 .creditApproval-class .credit-btn {
@@ -1010,6 +1109,16 @@ export default {
   color: #333;
   border: none;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1066,6 +1175,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -1073,6 +1192,16 @@ export default {
   float: left;
   margin: 0;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1104,6 +1233,16 @@ export default {
   border-radius: 10px;
   overflow: hidden;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1170,11 +1309,31 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* textarea */
 
 .creditApproval-class .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1221,6 +1380,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* 弹窗页面 关闭按钮*/
 
 .creditApproval-class .el-tag {
@@ -1236,6 +1405,16 @@ export default {
 .creditApproval-class .el-tag .el-icon-close {
   right: 0px;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1297,6 +1476,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* 审批结论轨迹 */
 
 .creditApproval-class .spjl-div {
@@ -1335,6 +1524,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -1342,6 +1541,16 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

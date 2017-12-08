@@ -195,9 +195,9 @@
 		    //跳转到详情页
 			goDetail(row, event, column) {
 				console.log(row);
-		      this.$router.push({path:'/SplitScreen',query:row});
+					// this.$router.push({path:'/SplitScreen',query:row});
+		      this.$router.push({path:'/SplitScreen'});
 		      localStorage.setItem("taskInWaitting",JSON.stringify(row));
-		      
 		    },
 		    handleSizeChange(val) {
 		      console.log('每页 ${val} 条');
