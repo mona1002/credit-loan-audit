@@ -105,6 +105,9 @@
 			      })
 
 			},
+			handleCurrentChange(){
+
+			},
 		},
 	}
 </script>
