@@ -34,10 +34,10 @@
           <div class="list_title_div">
             <!--  二级 内容 节点 -->
             <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind)">
-              <span>{{item.arcName}}</span>
+              <span v-bind:title="item.arcName" >{{item.arcName}}</span>
               <span>{{item.arcNum}}</span>
               <span>{{item.imageCount}}</span>
-              <span>{{item.uploadDate}}</span>
+              <span v-bind:title="item.uploadDate" >{{item.uploadDate}}</span>
             </p>
           </div>
         </el-collapse-item>
