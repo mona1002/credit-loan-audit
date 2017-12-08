@@ -2,6 +2,7 @@
 <template>
 	<div class="remark">
 		<div class="remarkHead">
+			<img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
 			<span class="titleText">备注信息</span>
 			<span class="iconContainer">
 		        <span class="icon-item" @click="add">
@@ -21,11 +22,11 @@
 			<i class="el-icon-remove icon" @click="delet"><span>删除</span></i>
 		</div> -->
 		<div class="taskWtable">
-			<el-table :data="tableData" height="450" style="width: 100%" 
+			<el-table :data="tableData" height="710" style="width: 100%" 
 				:default-sort = "{prop: 'date', order: 'descending'}" 
 				show-header	
 				highlight-current-row
-				@current-change="handleCurrentChange"
+				@current-change="handleCurrentChange" border
 				><!-- order两个参数，顺序和倒序: ascending, descending -->
 				<!-- @row-click="addHeight(backColor)" :class="{active: activeName == backColor}" -->
 			    <el-table-column
@@ -55,7 +56,7 @@
 			      prop="remark"
 			      label="备注"
 			      show-overflow-tooltip
-			      min-width="200">
+			      min-width="600">
 			    </el-table-column>
 			</el-table>
 		</div>
@@ -303,22 +304,23 @@
 		background:#ebedf8;
 		border-radius:6px;
 		width:100%;
-		height:50px;
+		height:40px;
+		line-height: 40px;
 	}
 	.remark .remarkHead .titleText{
 		font-size: 16px;
 		color: #1f2d3d;
-		text-align: left;
-		margin: 15px 25px 13px;
+		/* text-align: left;
+		margin: 15px 25px 13px; */
 		display: inline-block;
-		height: 22px;
+		/* height: 22px;
 		width: 130px;
-		line-height: 22px;
-		font-weight: bold;
+		line-height: 22px; */
+		font-weight: 400;
 	}
 	.remark .remarkHead .iconContainer{
 	    float: right;
-	    line-height: 50px;
+	    line-height: 40px;
 	    margin-right: 29px;
 	}
 	.remark .remarkHead .icon-item{
@@ -477,5 +479,13 @@
 .deletLayer .layerbox .buttonDiv button{
 	float: left;
 	margin:0 0 0 50px;
+}
+/* 折叠面板头部背景色 */
+.icon_hat{
+	padding: 9px 10px 10px 13px;
+	vertical-align: middle;
+}
+.headFont{
+	font-size: 16px;
 }
 </style>

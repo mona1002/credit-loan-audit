@@ -1,11 +1,12 @@
 <template>
 	<div class="remarkDetial">
 		<div class="remarkHead">
+			<img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
 			<p titleText>备注信息</p>
 		</div>
 		<div class="taskWtable">
-			<el-table :data="datas" height="400" style="width: 100%" 
-			:default-sort = "{prop: 'date', order: 'descending'}"><!-- order两个参数，顺序和倒序: ascending, descending -->
+			<el-table :data="datas" height="743" style="width: 100%" 
+			:default-sort = "{prop: 'date', order: 'descending'}" border><!-- order两个参数，顺序和倒序: ascending, descending -->
 			    <el-table-column
 			      type="index"
 			      :index='1'
@@ -15,19 +16,19 @@
 			    <el-table-column
 			      prop="remarkTypeTxt"
 			      label="备注类型"
-			      min-width="90"
+			      min-width="60"
 			      >
 			    </el-table-column>
 			    <el-table-column
 			      prop="remarker"
 			      label="备注人"
-			      min-width="130">
+			      min-width="60">
 			    </el-table-column>
 			    <el-table-column
 			      prop="remarkTime"
 			      label="备注时间"
 			      sortable
-			      min-width="140">
+			      min-width="80">
 			    </el-table-column>
 			    <el-table-column
 			      prop="remark"
@@ -83,18 +84,19 @@
 		background:#ebedf8;
 		border-radius:6px;
 		width:100%;
-		height:50px;
+		height:40px;
+		line-height: 40px;
 	}
 	.remarkDetial .remarkHead p{
 		font-size: 16px;
 		color: #1f2d3d;
-		text-align: left;
-		margin: 15px 25px 13px;
+		/* text-align: left;
+		margin: 15px 25px 13px; */
 		display: inline-block;
-		height: 22px;
-		width: 130px;
-		line-height: 22px;
-		font-weight: bold;
+		/* height: 22px; */
+		/*width: 130px;
+		 line-height: 22px; */
+		font-weight: 400;
 	}
 	.remarkDetial .remarkHead .iconContainer{
 	    float: right;
@@ -123,5 +125,13 @@
 }
 .remarkDetial .icon span{
 	color:#475669;
+}
+/* 折叠面板头部背景色 */
+.icon_hat{
+	padding: 9px 10px 10px 13px;
+	vertical-align: middle;
+}
+.headFont{
+	font-size: 16px;
 }
 </style>

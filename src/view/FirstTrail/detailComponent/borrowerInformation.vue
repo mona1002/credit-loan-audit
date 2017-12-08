@@ -45,7 +45,7 @@
 								     :label="item.label"
 								     :value="item.value">
 								   </el-option>
-								</el-select>
+								</el-select>							
 							</template>
 					      </el-table-column>
 					      <el-table-column
@@ -1884,7 +1884,7 @@
 		height: 100%;
 		background-color: #fafbfc;
 		font-size: 14px;
-		/* min-width: 1366px; */
+		min-width: 1366px;
 	}
 	.left{
 		float: left;

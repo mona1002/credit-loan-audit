@@ -497,7 +497,8 @@
 				</template>
 			    <el-table
 			      :data="accepCusEstates"
-			      style="width: 100%">
+			      style="width: 100%"
+			      border>
 				      <el-table-column
 				        type="index"
 				      	:index='1'
@@ -569,7 +570,8 @@
 				</template>
 			    <el-table
 			      :data="accepCusCarInfos"
-			      style="width: 100%">
+			      style="width: 100%"
+			      border>
 				      <el-table-column
 				        type="index"
 				      	:index='1'
@@ -731,6 +733,10 @@
 					<li>
 						<label>前单位电话：</label>
 						<span>{{accepCusWorkInfo.befworkTel}}</span>
+					</li>
+					<li>
+						<label>前单位工作年限[月]：</label>
+						<span>{{accepCusWorkInfo.befWorkMonth}}</span>
 					</li>
 					<li>
 						<label>前单位工作年限[月]：</label>
@@ -957,23 +963,23 @@
 	}
 	.applicationInformationDetail ul{
 		width: 100%;
-		height: 50px;
+		height: 36px;
+	}
+	.applicationInformationDetail ul.firstUl{
+		margin-top: 10px;
 	}
 	.applicationInformationDetail ul li{
 		float: left;
 		width: 33.3%;
-		margin-top: 10px;
-		position: relative;
+		/*margin-top: 10px;
+		 position: relative; */
 		min-width: 336px;
-	}
-	.applicationInformationDetail ul li span{
-		
 	}
 	ul li label{
 		width: 178px;
 		display: inline-block;
 		text-align: right;
-		position: relative;
+		/* position: relative; */
 	}
 	ul li .firstP{
 		display: inline-block;
