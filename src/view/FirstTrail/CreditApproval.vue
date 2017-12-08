@@ -266,7 +266,7 @@
             信审流程轨迹
           </div>
           <el-table :data="lcgjData" height="250" border style="width: 100%" highlight-current-row v-loading="lcgjLoading">
-            <el-table-column type="index">
+            <el-table-column type="index" label="序号">
             </el-table-column>
             <el-table-column prop="taskName" label="任务节点">
             </el-table-column>
