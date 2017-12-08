@@ -44,19 +44,14 @@
             </p>
             <div class="Left_right_BigImg ">
               <AudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></AudioVisualLeft>
-              <!-- <workbench v-if=" this.tabContent1==1"></workbench> -->
-              <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
-              <!-- <div v-if=" this.tabContent1==4">asdf adf</div> -->
-              <!-- <div v-if=" this.tabContent1==5">asdf adf</div> -->
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
+              <!-- <workbench v-if=" this.tabContent1==2">内部匹配</workbench> -->
+              <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
               <cborrowerInformationDetail v-if=" this.tabContent1==4"></cborrowerInformationDetail>
-              <!-- <capplicationInformationDetail v-if=" this.tabContent1==5"></capplicationInformationDetail> -->
+              <!-- <capplicationInformationDetail v-if=" this.tabContent1==5"> 电话征信</capplicationInformationDetail> -->
               <cCreditForm v-if=" this.tabContent1==6"></cCreditForm>
               <creditInvestigation v-if=" this.tabContent1==7"></creditInvestigation>
-              <!-- <div v-if=" this.tabContent1==7">asdf adf</div> -->
-              <!-- <div v-if=" this.tabContent1==8">asdf adf</div> -->
-              <!-- <AudioVisual v-if=" this.tab1Index==0"></AudioVisual>
-            <workbench v-if=" this.tab1Index==1"></workbench> -->
+              <processTrajectory v-if=" this.tabContent1==8"></processTrajectory>
             </div>
           </div>
         </div>
@@ -172,6 +167,7 @@
   import cremarkDetail from "./checkComponent/remarkDetail"; //备注信息
   import cborrowerInformationDetail from "./checkComponent/borrowerInformationDetail"; //借款人资料
   import capplicationInformationDetail from "./checkComponent/applicationInformationDetail"; //申请信息
+  import processTrajectory from "./checkComponent/processTrajectory"; //流程轨迹
 
 
 
@@ -193,13 +189,13 @@
         tabContent2: 3, // ----------- tab1 用
         tabActiveInd1: 0, // tab1 点击时候选中的下标
         tabActiveInd2: 3, // 点击tab1 时  tab2初始下表
-        items1: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "信审审批", "流程轨迹"],
+        items1: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹"],
         items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "信审审批"],
         // rightList: false, //右键菜单 默认不显示    ---------tab1 用
         tab1Index: 0, // tab1 激活样式的时用的下表
         tab2Index: 3, // 不是for循环，获取不到index时候的tab切换（ data部分 ）------tab 2 用
         // 不是for循环，获取不到index时候的tab切换（ data部分 ）------tab 2 用
-        flag1: [true, true, true, false, true, true, true, true, true, true, true], //  ---------------------------------------------------- tab1用
+        flag1: [true, true, true, false, true, true, true, true, true], //  ---------------------------------------------------- tab1用
         flag2: [true, true, true, true, true, true, true, true, true, true], //  ---------------------------------------------------- tab2用        
 
         // items: [{ // ----------- tab1 用
@@ -388,7 +384,8 @@
       cremarkDetail, //
       cFinanceInformation,
       cborrowerInformationDetail,
-      capplicationInformationDetail
+      capplicationInformationDetail,
+      processTrajectory
     }
   }
 
