@@ -137,6 +137,7 @@ export default {
     console.log(this.applySubNo);
 
     this.workName = applicationInformationDetail.workName;
+    console.log(this.workName);
 
     // 测试数据
     // this.applySubNo = '111';
@@ -296,8 +297,10 @@ export default {
   components: {
     "internal-match-textarea": {
       template: '\
-            <el-form label-width="100px" class="demo-ruleForm">\
-            <el-form-item label="匹配结论" class="mark-title">\
+            <el-form label-width="10px" class="demo-ruleForm">\
+            <el-form-item  class="title-bar">\
+            <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">\
+        <span class="headFont">匹配结论</span>\
             </el-form-item>\
             <el-input type="textarea" v-model="audit_desc" class="mark-textarea" resize="none" :rows="5"></el-input>\
             <el-form-item class="mark-button">\
@@ -336,8 +339,8 @@ export default {
             applyId: '111'
           }).then(res => {
             console.log(res);
-            this.audit_desc = res.data.auditDesc;
-            this.auditId = res.data.id;
+            res.data!=null?this.audit_desc = res.data.auditDesc:'';
+            res.data!=null?this.auditId = res.data.id:'';
           })
 
         },
@@ -403,6 +406,7 @@ export default {
   width: 100%;
   text-align: center;
   padding: 10px 0 0 10px;
+  margin-bottom: 10px;
 }
 
 
@@ -432,6 +436,8 @@ export default {
 .internalMatch-class .mark-textarea textarea {
   min-height: 100px;
   max-height: 100px;
+  width:800px;
+  margin-left: 50px;
 }
 
 
@@ -445,9 +451,10 @@ export default {
 /* 确认按钮 */
 
 .internalMatch-class .mark-button {
-  text-align: right;
+  text-align: left;
   margin-right: 0px;
   margin-top: 20px;
+  margin-left: 775px;
 }
 
 
@@ -518,6 +525,11 @@ export default {
 
 .internalMatch-class .headFont {
   font-size: 16px;
+}
+
+
+.internalMatch-class .el-table th>.cell{
+  text-align: center;
 }
 
 </style>
