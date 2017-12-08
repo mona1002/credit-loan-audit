@@ -16,7 +16,7 @@
         <!-- <el-button type="text" @click="open">添加</el-button> -->
       </el-aside>
       <!-- 右侧 表单内容 -->
-      <el-container>
+      <el-container style="background:url(.../../../static/images/3C281C6A-532B-4A55-A9BF-F142E9F09063@1x.png) center no-repeat;">
         <el-header style="text-align: right; font-size: 12px">
           <!--  v-show="hisListShow" -->
           <!-- title="历史调查日志"  -->
@@ -56,7 +56,7 @@
           <!-- 列表 -->
         </el-header>
         <!-- 表单部分 -->
-        <el-main>
+        <el-main >
           <!-- 默认的新增表单 -->
           <!-- 住址电话 - 表单 -->
           <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" @updateList="queryTelLogByPage"></AddressForm>
@@ -594,6 +594,8 @@ export default {
 .phone-credit .el-container {
   width: 100%;
   height: 100%;
+
+  /*background: url(.../../../static/images/3C281C6A-532B-4A55-A9BF-F142E9F09063@3x.png) no-repeat;*/
 }
 
 .phone-credit el-header {
@@ -1016,6 +1018,7 @@ export default {
   padding: 0;
   padding-bottom: 10px;
   overflow: auto;
+  /*background:url(.../../../static/images/3C281C6A-532B-4A55-A9BF-F142E9F09063@1x.png) center no-repeat;"*/
 }
 
 .phone-credit .el-header .head-title {
@@ -1077,6 +1080,7 @@ export default {
 .phone-credit .form-his {
   width: 100%;
   height: 100%;
+  background: #fff;
 }
 
 
@@ -1138,7 +1142,7 @@ export default {
   padding-left: 10px;
   display: block;
   margin-bottom: 10px;
-  margin-top: 20px;
+  /*margin-top: 20px;*/
   overflow: hidden;
 
 
