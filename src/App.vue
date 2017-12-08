@@ -4,7 +4,7 @@
        <!-- <myHead></myHead> -->
        <!-- <img src="../static/img/20171122102421.png" width="100%"> -->
 <!-- <el-row class="header"></el-row> -->
-    <router-view class="Abody" ref="ddd"></router-view>
+    <router-view class="Abody"></router-view>
     <div v-show="false" > </div>
   </div>
 
@@ -14,7 +14,7 @@
 // import myHead from "./view/header"
   export default {
     mounted(){
-      console.log(this.$refs.ddd)
+      // console.log(this.$refs.ddd)
 
     },
     mounted(){
@@ -39,10 +39,10 @@
 <style>
   @import "../static/css/common.css";
   @import "../static/css/element_UI.css";
-  .header{
+  /* .header{
     width: 100%;
     height: 60px;
     line-height: 60px;
     background: #20a0ff;
-  }
+  } */
 </style>
