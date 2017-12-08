@@ -9,7 +9,7 @@
         <!-- no-key 每个树节点用来作为唯一标识的属性,整棵树应是唯一的 -->
         <!-- renderContent 指定渲染函数,该函数返回需要的节点区内容即可 -->
         <!-- highlight-current 是否高亮当前选中项 -->
-        <el-tree :data="treeData" empty-text="123" :props="defaultProps" highlight-current expand-on-click-node default-expand-all no-key="id" @node-click="handleNodeClick">
+        <el-tree :data="treeData" :props="defaultProps" highlight-current expand-on-click-node default-expand-all no-key="id" @node-click="handleNodeClick">
         </el-tree>
         <!-- 备选  折叠面板- 手风琴效果 -->
         <el-button @click.native="coverShow=true">添加</el-button>
@@ -27,7 +27,7 @@
                 <span class="headFont">历史调查日志</span>
               </template>
               <div>
-                <el-table :data="listData.recordList" height="250" border style="width: 100%" @row-dblclick="rowDbClick" stripe v-loading="mobileLoading">
+                <el-table :data="listData.recordList" height="250" border style="" @row-dblclick="rowDbClick" stripe v-loading="mobileLoading">
                   <el-table-column type="index" label="序号">
                   </el-table-column>
                   <el-table-column prop="phoneTypeDes" label="电话类型">
@@ -56,26 +56,26 @@
           <!-- 列表 -->
         </el-header>
         <!-- 表单部分 -->
-        <el-main >
+        <el-main>
           <!-- 默认的新增表单 -->
           <!-- 住址电话 - 表单 -->
-          <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" @updateList="queryTelLogByPage"></AddressForm>
+          <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"></AddressForm>
           <!-- 住址电话 - 历史 -->
           <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :mobileData="mobileData"></AddressHis>
           <!-- 单位电话 - 表单 -->
-          <CompanyForm class="form-his" v-if="formShow && phoneType=='02'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" @updateList="queryTelLogByPage"></CompanyForm>
+          <CompanyForm class="form-his" v-if="formShow && phoneType=='02'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"></CompanyForm>
           <!-- 单位电话 - 历史 -->
           <CompanyHis class="form-his" v-if="hisShow && phoneType=='02'" :comData="comData"></CompanyHis>
           <!-- 家庭联系人 - 表单 -->
-          <FamilyForm class="form-his" v-if="formShow && phoneType=='03'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" @updateList="queryTelLogByPage"></FamilyForm>
+          <FamilyForm class="form-his" v-if="formShow && phoneType=='03'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"></FamilyForm>
           <!-- 家庭联系人 - 历史 -->
           <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :familyData="familyData"></FamilyHis>
           <!-- 紧急联系人 - 表单 -->
-          <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" @updateList="queryTelLogByPage"></HurryForm>
+          <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"></HurryForm>
           <!-- 紧急联系人 - 历史 -->
           <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :hurryData="hurryData"></HurryHis>
           <!-- 工作证明人 - 表单 -->
-          <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" @updateList="queryTelLogByPage"></WorkForm>
+          <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"></WorkForm>
           <!-- 工作证明人 - 历史 -->
           <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="workData"></WorkHis>
           <!-- 子组件 -->
@@ -115,10 +115,11 @@
           </li>
           <li>
             <span class="add-label"><span class="require-icon">*</span>电话号码:</span>
-            <el-input type="text" name="" v-model="addTelNum" value="" placeholder=""></el-input>
+            <el-input type="text" name="" v-model="addTelNum" value=""></el-input>
           </li>
           <li>
-            <el-button @click.native="append">确认</el-button>
+            <el-button @click.native="append" type="primary" v-show="active">确认</el-button>
+            <el-button type="primary" disabled v-show="active==false">确认</el-button>
           </li>
         </ul>
       </div>
@@ -211,7 +212,7 @@ export default {
         { value: '02', label: '单位电话' },
         { value: '03', label: '家庭联系人电话' },
         { value: '04', label: '紧急联系人电话' },
-        { value: '05', label: '工作联系人电话' }
+        { value: '05', label: '工作证明人电话' }
       ],
       // 添加的电话类型
       relationShips: [
@@ -272,6 +273,9 @@ export default {
       familyData: [],
       hurryData: [],
       workData: [],
+      active: false, // 添加电话 提示语
+      addTelRex: false, // 添加电话 校验
+      formId:'' , // 传给表单的  id
     }
   },
   mounted() {
@@ -315,6 +319,69 @@ export default {
     // listFlag: function() {
 
     // }
+
+    // 添加电话  电话类型
+    addTelType: function(value) {
+      if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelRex) ||
+        ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelRex)
+      ) {
+        this.active = true;
+      } else {
+        this.active = false;
+      }
+    },
+    // 电话名称
+    addTelName: function(value) {
+      if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelRex) ||
+        ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelRex)
+      ) {
+        this.active = true;
+      } else {
+        this.active = false;
+      }
+    },
+    // 关系
+    addRelationShip: function(value) {
+      //  有关系 判断 
+      //  无关系 判断
+      if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelRex) ||
+        ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelRex)
+      ) {
+        this.active = true;
+      } else {
+        this.active = false;
+      }
+
+    },
+
+    // 添加电话  电话校验
+    addTelNum: function(value) {
+
+      this.addTelRex = /^(1)\d{10}$/i.test(value) || /^((\(\d{2,3}\))|(\d{3}\-))?(\(0\d{2,3}\)|0\d{2,3}-)?[1-9]\d{6,7}(\-\d{1,4})?$/i.test(value);
+      console.log(this.addTelRex);
+      // 判断 显示 电话格式
+      if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelNum.length >= 11 && !this.addTelRex) ||
+        ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelNum.length >= 11 && !this.addTelRex)
+      ) {
+        this.active = false;
+        this.$message({
+          message: '格式不正确,请使用下面的格式:区号-电话号码或者11位手机号',
+          type: 'warning'
+        });
+        return;
+      }
+
+
+      if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelRex) ||
+        ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelRex)
+      ) {
+        this.active = true;
+      } else {
+        this.active = false;
+      }
+
+
+    },
   },
   methods: {
     fetchData() {
@@ -350,7 +417,8 @@ export default {
         this.hisShow = false;
       }
 
-
+      // 点击的时候清空  
+      this.formId = '';
       // 点击 电话树进来  默认编辑页面
       // 根据  tellType 判断
       // switch (data.telType) {
@@ -629,6 +697,22 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 树形  结构 */
 
 .phone-credit .el-tree {
@@ -638,9 +722,24 @@ export default {
   border-radius: 4px;
   width: 233px;
   height: 321px;*/
-
-  box-shadow:0 2px 2px 0 #bfcbd9;
+  box-shadow: 0 2px 2px 0 #bfcbd9;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -676,6 +775,22 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* element-ui tree icon 箭头*/
 
 .phone-credit .el-tree-node__content .el-tree-node__expand-icon {
@@ -683,6 +798,22 @@ export default {
   position: relative;
   left: 150px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -718,12 +849,44 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 三角 icon */
 
 .phone-credit .el-tree-node__expand-icon {
   font-size: 20px;
   /*display: none;*/
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -754,11 +917,43 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 二级 目录 样式 */
 
 .phone-credit .el-tree-node__content {
   padding-left: 0px !important;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -790,6 +985,22 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 点击添加出现的 页面 */
 
 .phone-credit .cover-view {
@@ -800,6 +1011,22 @@ export default {
   top: 0;
   left: 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -843,11 +1070,43 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* title */
 
 .phone-credit .cover-content .add-title {
   text-align: left;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -894,11 +1153,43 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 添加电话  input 样式*/
 
 .phone-credit .add-content .el-input {
   width: inherit;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -935,6 +1226,22 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* children - label*/
 
 .phone-credit .el-tree-node__children .el-tree-node__label {
@@ -958,6 +1265,22 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 确定按钮 */
 
 .phone-credit .cover-content .el-button {
@@ -966,6 +1289,22 @@ export default {
   /*margin-top: 10px;*/
   /*margin-right: 10px;*/
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1005,6 +1344,22 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 右侧 头 table*/
 
 .phone-credit .el-header {
@@ -1019,6 +1374,7 @@ export default {
   padding-bottom: 10px;
   overflow: auto;
   /*background:url(.../../../static/images/3C281C6A-532B-4A55-A9BF-F142E9F09063@1x.png) center no-repeat;"*/
+  background: #ffffff;
 }
 
 .phone-credit .el-header .head-title {
@@ -1056,6 +1412,22 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 表格分页 */
 
 .phone-credit .el-pagination {
@@ -1063,6 +1435,22 @@ export default {
   width: 100%;
   text-align: center;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1094,11 +1482,43 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 添加申请单电话信息 必填 * */
 
 .phone-credit .require-icon {
   color: #ff0000;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1118,6 +1538,22 @@ export default {
   display: inline-block;
   width: 70px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1173,6 +1609,22 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* label */
 
 .phone-credit .el-form-item__label {
@@ -1182,6 +1634,22 @@ export default {
 .phone-credit .el-form-item {
   margin-bottom: 5px !important;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1215,6 +1683,22 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 两列 */
 
 .phone-credit .item-column2 {
@@ -1224,10 +1708,29 @@ export default {
 }
 
 .phone-credit .item-column1 {
-  width: 80%;
+  width: 90%;
   float: left;
   margin: 0;
 }
+
+.phone-credit .item-column1 textarea {
+  margin-left: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1263,6 +1766,22 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* input 不可编辑状态*/
 
 .dis-input {}
@@ -1274,6 +1793,22 @@ export default {
 .phone-credit .el-input__inner {
   height: 30px !important;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1305,11 +1840,43 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 表格头 */
 
 .phone-credit .el-header {
   padding: 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1341,11 +1908,43 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 折叠 头 箭头样式*/
 
 .phone-credit .el-collapse-item__header .el-collapse-item__arrow {
   padding-right: 20px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1364,12 +1963,12 @@ export default {
   text-align: right;
 }
 
-.phone-credit li {
+.phone-credit .form-his li {
   padding: 10px;
   /*min-height: 30px;*/
 }
 
-.phone-credit li .textarea-class {
+.phone-credit .form-his li .textarea-class {
   height: 100px;
 }
 
@@ -1377,6 +1976,22 @@ export default {
 .phone-credit .submit-class {
   text-align: right;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1389,6 +2004,118 @@ export default {
 
 .phone-credit .headFont {
   font-size: 16px;
+}
+
+
+.phone-credit .el-select:hover .el-input__inner {
+  background: #ffffff;
+  border: 1px solid #475669;
+  border-radius: 6px;
+  /*width: 258px;*/
+  height: 33px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.phone-credit .el-select .el-input.is-disabled:hover .el-input__inner {
+  background: #f8f9fd;
+  border: 1px solid #bfcbd9;
+  border-radius: 6px;
+  width: 258px;
+  height: 33px;
+}*/
+
+.phone-credit .el-input__inner:hover {
+  background: #ffffff;
+  border: 1px solid #475669;
+  border-radius: 6px;
+  /*width: 258px;*/
+  height: 33px;
+}
+
+.phone-credit .el-textarea__inner:hover {
+  background: #ffffff;
+  border: 1px solid #475669;
+  border-radius: 6px;
+  /*width: 807px;
+  height: 102px;*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*add-content*/
+
+
+/* el-tree node */
+
+
+/*内容*/
+
+.el-tree .el-tree-node .el-tree-node__content {
+  background: #f8f9fd;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*单独设置头*/
+
+.el-tree .el-tree-node .el-tree-node__children .el-tree-node__content {
+  background: #ffffff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 高亮 */
+
+.el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
+  background: #f8f9fd;
 }
 
 </style>
