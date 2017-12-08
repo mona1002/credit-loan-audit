@@ -4,10 +4,16 @@
   border-radius:8px;
   padding:9px 22px;
 }
-.Abody .el-button el-button--primary{
+.Abody .el-button el-button--primary{ 
   border-radius:8px;
   padding:9px 22px;
   font-size:16px;
+}
+.Abody el-select-dropdown__item{
+float:none;
+}
+.Abody .el-select-dropdown__item{
+float:none;
 }
 /* 公用 表格 表头 th */
 /* 放款信息 信审审结论轨迹  */
@@ -84,14 +90,14 @@ height: 40px;
 .applicationInformationDetail .el-table th{
   text-align: center;
   font-weight: 400;
-  color: #878d99;
-  font-size: 13px;
+  color: #1f2d3d;
+  font-size: 14px;
 }
 .applicationInformationDetail .el-table__body-wrapper .el-table__body td{
   text-align: center;
   font-weight: 400;
-  color: #5a5e66;
-  font-size: 13px;
+  color: #666666;
+  font-size: 14px;
 }
 /*申请信息 表格去掉overflow:hidden; */
 .applicationInformationDetail .el-collapse-item__wrap{
@@ -137,14 +143,14 @@ height: 40px;
 .borrowerInformation .el-table th{
   text-align: center;
   font-weight: 400;
-  color: #878d99;
-  font-size: 13px;
+  color: #1f2d3d;
+  font-size: 14px;
 }
 .borrowerInformation .el-table__body-wrapper .el-table__body td{
   text-align: center;
   font-weight: 400;
-  color: #5a5e66;
-  font-size: 13px;
+  color: #666666;
+  font-size: 14px;
 }
 .borrowerInformation ol.num li:nth-of-type(1) .el-input__inner{
     margin-top: -10px;
@@ -448,14 +454,14 @@ position: relative
 .borrowerInformationSetail .el-table th{
   text-align: center;
   font-weight: 400;
-  color: #878d99;
-  font-size: 13px;
+  color: #1f2d3d;
+  font-size: 14px;
 }
 .borrowerInformationSetail .el-table__body-wrapper .el-table__body td{
   text-align: center;
   font-weight: 400;
-  color: #5a5e66;
-  font-size: 13px;
+  color: #666666;
+  font-size: 14px;
 }
 /* 借款人资料 */
 
@@ -553,27 +559,27 @@ position: relative
 .remark .el-table th{
   text-align: center;
   font-weight: 400;
-  color: #878d99;
-  font-size: 13px;
+  color: #1f2d3d;
+  font-size: 14px;
 }
 .remark .el-table__body-wrapper .el-table__body td{
   text-align: center;
   font-weight: 400;
-  color: #5a5e66;
-  font-size: 13px;
+  color: #666666;
+  font-size: 14px;
 }
 /* 备注信息表格内容居中 */
 .remarkDetial .el-table th{
   text-align: center;
   font-weight: 400;
-  color: #878d99;
-  font-size: 13px;
+  color: #1f2d3d;
+  font-size: 14px;
 }
 .remarkDetial .el-table__body-wrapper .el-table__body td{
   text-align: center;
   font-weight: 400;
-  color: #5a5e66;
-  font-size: 13px;
+  color: #666666;
+  font-size: 14px;
 }
 
 
@@ -592,29 +598,36 @@ position: relative
 .taskWatting .el-table th{
   text-align: center;
   font-weight: 400;
-  color: #878d99;
-  font-size: 13px;
+  color: #1f2d3d;
+  font-size: 14px;
 }
 .taskWatting .el-table__body-wrapper .el-table__body td{
   text-align: center;
   font-weight: 400;
-  color: #5a5e66;
-  font-size: 13px;
+  color: #666666;
+  font-size: 14px;
 }
 /* 信审任务列表 按钮宽度*/
 .taskWatting .el-col-22{
   width: calc( 66.6% + 394px );
 }
-/* 信审任务列表 分页去掉浮动*/
-.taskWatting li.el-select-dropdown__item,
-.CreditForm .el-select-dropdown__item{
+/* 信审任务列表 分页去掉浮动-----------------------------------------未成功，待调整*/
+.taskWatting el-select-dropdown__item,
+.Abody .CreditForm el-select-dropdown__item{
+  float: none;
+}
+.taskWatting .el-select-dropdown__item,
+.Abody .CreditForm .el-select-dropdown__item{
   float: none;
 }
 /* 信审表div content 外wrap */
 .CreditForm .el-collapse-item__wrap{
   padding: 15px 0 10px 0;
 }
+/* 信审表--清除li受影响的float:left */
+/* .CreditForm .el-select-dropdown__item{
 
+} */
 
 /* 工作台导航 */
 .mheader .el-menu{

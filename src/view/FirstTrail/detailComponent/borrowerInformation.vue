@@ -1145,7 +1145,7 @@
       		infoLyer:false,
 	      };
 	    },
-	    created(){
+	    mounted(){
 			//一进入页面就发送请求
 			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
 			this.applyId=this.taskInWaitting.applyId;
@@ -1591,6 +1591,7 @@
 				this.loanInfo.otherLoanPayoff=this.w;
 			},
 			counted(row){
+				//alert('222');
 				if(row.incomeType==''){
 					return
 				}else{
@@ -1652,8 +1653,18 @@
 			},
 			//弹框确认
 			trueSure(){
+				if(this.loanInfo.carLoanTotal!='' || this.loanInfo.studentLoanTotal!='' || this.loanInfo.houseLoanTotal!=='' || this.loanInfo.otherLoanTotal!=''){
+					this.countNum(event);
+				};
+				
 				this.layer=false;
 				document.getElementsByTagName('body')[0].style.overflow='';	
+				this.loanInfo.applyId=this.applyId;
+				this.borCard.applyId=this.applyId;
+				this.borDebt.applyId=this.applyId;
+				this.rptInfo.applyId=this.applyId;
+				this.otherInfo.applyId=this.applyId;
+				
 				this.post("/borrower/saveBorrowerInfo", {
 			        "applyId":this.applyId,
 			        "borestateList":this.borestateList,
@@ -1667,7 +1678,9 @@
 			        "incomeList":this.incomeList,
 			        "otherInfo":this.otherInfo
 			      }).then(res => {
-			        console.log(res);
+			        if(res.statusCode==200){
+			        	this.request(this.applyId);
+			        }
 			    });				
 			},
 			//弹框关闭
@@ -1826,9 +1839,9 @@
                         console.log(el.value);
                     }
                 },
-                unbind: function(el) {
+                /*unbind: function(el) {
                     el.removeEventListener('blur', el.handler)
-                }
+                }*/
             },
 			/*numberOnly: {
 	            bind: function(el) {

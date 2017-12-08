@@ -537,10 +537,8 @@
           commentS9: true,
           commentS10: true,
         },
-        Internet: ["客户执行", "单位执行", "客户失信 ", " 单位失信", "客户手机 ", "单位名称 ", " 单位电话", " 客户住址房产", " 单位地址", "企业登记 ", " 单位组织代码",
-          " 接听是否本人", "是否私营业主", " ", " ", " ", " ", " ", " ", " ", " "
-        ],
-        activeNames: ['1', "2", "3", "4", "5", "6", "7", "8"], //折叠面板 默认显示下标
+
+        activeNames: ['1', "2", "3", "4", "5", "6", "7", "8"], 
         checkData: [], // 查询接口回来的数据
         // -------上网查询信息------------
         beexEcuted: [{ //（上网查询信息）客户在人法网是否有被执行信
@@ -920,104 +918,6 @@
         // console.log("commentShow")
         console.log(name)
         console.log(hidLabel)
-        // "客户执行", "单位执行","客户失信 "," 单位失信","客户手机 ","单位名称 "," 单位电话"," 客户住址房产"," 单位地址","企业登记 "," 单位组织代码"," 接听是否本人","是否私营业主"
-        if (name == 0) { // 否
-          switch (hidLabel) {
-            case "客户执行":
-              this.InternetShow.commentS = false;
-              break;
-            case "单位执行":
-              this.InternetShow.commentS1 = false;
-              break;
-            case "客户失信":
-              this.InternetShow.commentS2 = false;
-              break;
-            case "单位失信":
-              this.InternetShow.commentS3 = false;
-              break;
-            case "客户手机":
-              this.InternetShow.commentS4 = false;
-              break;
-            case "单位名称":
-              this.InternetShow.commentS5 = false;
-              break;
-            case "单位电话":
-              this.InternetShow.commentS6 = false;
-              break;
-            case "客户住址房产":
-              this.InternetShow.commentS7 = false;
-              break;
-            case "单位地址":
-              this.InternetShow.commentS8 = false;
-              break;
-            case "企业登记":
-              this.InternetShow.commentS9 = false;
-              break;
-            case "单位组织代码":
-              this.InternetShow.commentS10 = false;
-              break;
-              //  case "接听是否本人":this.InternetShow.commentS = false; break;
-              //  case "是否私营业主":this.InternetShow.commentS = false; break;
-
-          }
-        } else if (name == 1) { //是
-          switch (hidLabel) {
-            case "客户执行":
-              this.InternetShow.commentS = true;
-              break;
-            case "单位执行":
-              this.InternetShow.commentS1 = true;
-              break;
-            case "客户失信":
-              this.InternetShow.commentS2 = true;
-              break;
-            case "单位失信":
-              this.InternetShow.commentS3 = true;
-              break;
-            case "客户手机":
-              this.InternetShow.commentS4 = true;
-              break;
-            case "单位名称":
-              this.InternetShow.commentS5 = true;
-              break;
-            case "单位电话":
-              this.InternetShow.commentS6 = true;
-              break;
-            case "客户住址房产":
-              this.InternetShow.commentS7 = true;
-              break;
-            case "单位地址":
-              this.InternetShow.commentS8 = true;
-              break;
-            case "企业登记":
-              this.InternetShow.commentS9 = true;
-              break;
-            case "单位组织代码":
-              this.InternetShow.commentS10 = true;
-              break;
-              //  case "接听是否本人": this.InternetShow.commentS = true;break;
-              //  case "是否私营业主": this.InternetShow.commentS = true;break;
-
-          }
-        }
-
-        //  if(name==0){
-        //    console.log("我是否")
-        //    hidLabel=true;
-        //    console.log( hidLabel)
-
-        //  }else{
-
-        //    console.log("我是是")
-        //    hidLabel=false
-        //    console.log( hidLabel)
-
-        //  }
-        //  name==0? this.hidLabel=false:this.hidLabel==true;
-
-        // switch(){
-        //   // case 
-        // }
       },
       NewPage(ind) { // tab1-------------------右键菜单栏 li[0] 点击事件
         console.log(ind);
@@ -1101,9 +1001,10 @@
 <style scoped>
   /* 公共 */
 
-  li {
+ .CreditForm li {
     color: #475669;
     font-size: 14px;
+    float: none;
   }
 
   .InternetPosition {}

@@ -48,8 +48,8 @@
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
-      <img src="../../../../static/images/0865C99F-2D8D-417E-A39D-1644063E5A84@1x.png" class="icon_pre " @click="pre">
-      <img src="../../../../static/images/C20F2D59-5CCD-4C61-B12F-874344861071@1x.png" class="icon_next" @click="next">
+      <img src="../../../../static/images/left.png" class="icon_pre " @click="pre">
+      <img src="../../../../static/images/pc1.png" class="icon_next" @click="next">
       <div class="BtnIcons">
         <img src="../../../../static/images/efw.png" @click="smaller ">
         <img src="../../../../static/images/net.png" @click="larger">
@@ -400,7 +400,7 @@
     height: 52px;
     /* background:#475669; */
     /* background:#475669; */
-    background: rgba(71, 86, 105, 0.26);
+    background: rgba(71, 86, 105, 0.6);
     box-shadow: 0 10px 20px 0 #47566942;
     border-radius: 6px;
     padding: 12px 0 11px 19px;

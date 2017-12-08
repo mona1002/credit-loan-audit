@@ -444,7 +444,7 @@
 				      	min-width='50'>
 				      </el-table-column>
 				      <el-table-column
-				        prop="incomeType"
+				        prop="incomeTypeTxt"
 				        label="流水类型">
 				      </el-table-column>
 				      <el-table-column
@@ -712,6 +712,9 @@
 	.icon_hat{
 		padding: 9px 10px 10px 13px;
 		vertical-align: middle;
+	}
+	.headFont{
+		font-size: 16px;
 	}
 	/* 信用卡使用总况 */
 	.xinyongka{
