@@ -26,10 +26,13 @@
             <li>
               <label class="InternetInf_left_label" @click="NewPage(1)">
                 <span class="red"> * </span>客户在失信网是否有失信记录：</label>
-              <el-select v-model="checkData.wnetEcutedBrea" placeholder="请选择" @change="commentShow1(checkData.wnetEcutedBrea,Internet[2])">
+              <el-select v-model="checkData.wnetEcutedBrea" placeholder="请选择" @change="commentShow1(checkData.wnetEcutedBrea,Internet[2])"
+                name="blank" v-validate="'required'">
                 <el-option v-for="item in netEcutedBrea" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
+              <!-- 提示语 -->
+              <span v-show="checkData.wnetEcutedBrea==null&&errors.has('blank')" class="help is-danger">{{ errors.first('blank') }}</span>
             </li>
             <li>
               <label class="InternetInf_left_label" @click="NewPage(1)">单位在失信网是否有失信记录：</label>
@@ -41,10 +44,13 @@
             <li>
               <label class="InternetInf_left_label" @click="NewPage(2)">
                 <span class="red"> * </span>网上搜索借款人手机是否有异常：</label>
-              <el-select v-model="checkData.wnetPhone" placeholder="请选择" @change="commentShow1(checkData.wnetPhone,Internet[4])">
+              <el-select v-model="checkData.wnetPhone" placeholder="请选择" @change="commentShow1(checkData.wnetPhone,Internet[4])" name="blank"
+                v-validate="'required'">
                 <el-option v-for="item in netPhone" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
+              <!-- 提示语 -->
+              <span v-show="checkData.wnetPhone==null&&errors.has('blank')" class="help is-danger">{{ errors.first('blank') }}</span>
             </li>
             <li>
               <label class="InternetInf_left_label" @click="NewPage(2)">网搜单位名称是否有异常：</label>
@@ -55,17 +61,23 @@
             </li>
             <li>
               <label class="InternetInf_left_label" @click="NewPage(2)">网搜单位电话是否有异常：</label>
-              <el-select v-model="checkData.wnetHirecomPhone" placeholder="请选择" @change="commentShow1(checkData.wnetHirecomPhone,Internet[6])">
+              <el-select v-model="checkData.wnetHirecomPhone" placeholder="请选择" @change="commentShow1(checkData.wnetHirecomPhone,Internet[6])"
+                name="blank" v-validate="'required'">
                 <el-option v-for="item in netHirecomPhone" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
+              <!-- 提示语 -->
+              <span v-show="errors.first('blank')" class="help is-danger">{{ errors.first('blank') }}</span>
             </li>
             <li>
               <label class="InternetInf_left_label" @click="NewPage(2)">网上搜索借款人现居住地址和房产地址是否有异常：</label>
-              <el-select v-model="checkData.wnetAddrandEstate" placeholder="请选择" @change="commentShow1(checkData.wnetAddrandEstate,Internet[7])">
+              <el-select v-model="checkData.wnetAddrandEstate" placeholder="请选择" @change="commentShow1(checkData.wnetAddrandEstate,Internet[7])"
+                name="blank" v-validate="'required'">
                 <el-option v-for="item in netAddrandEstate" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
+              <!-- 提示语 -->
+              <span v-show="errors.first('blank')" class="help is-danger">{{ errors.first('blank') }}</span>
             </li>
             <li>
               <label class="InternetInf_left_label" @click="NewPage(2)">网搜单位地址是否有异常：</label>
@@ -77,10 +89,12 @@
             <li>
               <label class="InternetInf_left_label" @click="NewPage(3)">
                 <span class="red"> * </span>当地工商网查询企业基本信息中是否有登记：</label>
-              <el-select v-model="checkData.wnetCompany" placeholder="请选择" @change="commentShow1(checkData.wnetCompany,Internet[9])">
+              <el-select v-model="checkData.wnetCompany" placeholder="请选择" @change="commentShow1(checkData.wnetCompany,Internet[9])" name="blank"
+                v-validate="'required'">
                 <el-option v-for="item in netCompany" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
+              <span v-show="checkData.wnetCompany==null&&errors.has('blank')" class="help is-danger">{{ errors.first('blank') }}</span>
             </li>
             <li>
               <label class="InternetInf_left_label" @click="NewPage(4)">客户工作单位在全国组织代码查询中是否存在：</label>
@@ -91,57 +105,57 @@
             </li>
           </ul>
           <ul class="CreditForm_InternetInf_ul_right">
-            <li v-if="this.InternetShow.commentS">
+            <li v-show="this.InternetShow.commentS">
               <label class="InternetInf_right_label"> 执行信息说明： </label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wbeexEcutedtxt">
               </el-input>
             </li>
-            <li v-if="this.InternetShow.commentS1">
+            <li v-show="this.InternetShow.commentS1">
               <label class="InternetInf_right_label"> 单位执行信息说明：</label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomtxt">
               </el-input>
             </li>
-            <li v-if="this.InternetShow.commentS2">
+            <li v-show="this.InternetShow.commentS2">
               <label class="InternetInf_right_label"> 失信记录说明： </label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetEcutedBreatxt">
               </el-input>
             </li>
-            <li v-if="this.InternetShow.commentS3">
+            <li v-show="this.InternetShow.commentS3">
               <label class="InternetInf_right_label"> 单位失信记录说明： </label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomBreatxt">
               </el-input>
             </li>
-            <li v-if="this.InternetShow.commentS4">
+            <li v-show="this.InternetShow.commentS4">
               <label class="InternetInf_right_label"> 手机异常信息说明： </label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetPhonetxt">
               </el-input>
             </li>
-            <li v-if="this.InternetShow.commentS5">
+            <li v-show="this.InternetShow.commentS5">
               <label class="InternetInf_right_label"> 单位名称异常信息说明： </label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomNametxt">
               </el-input>
             </li>
-            <li v-if="this.InternetShow.commentS6">
+            <li v-show="this.InternetShow.commentS6">
               <label class="InternetInf_right_label"> 单位电话异常信息说明： </label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomPhonetxt">
               </el-input>
             </li>
-            <li v-if="this.InternetShow.commentS7">
+            <li v-show="this.InternetShow.commentS7">
               <label class="InternetInf_right_label"> 地址异常信息说明： </label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetAddrandEstatetxt">
               </el-input>
             </li>
-            <li v-if="this.InternetShow.commentS8">
+            <li v-show="this.InternetShow.commentS8">
               <label class="InternetInf_right_label"> 单位地址异常信息说明： </label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomAddresstxt">
               </el-input>
             </li>
-            <li v-if="this.InternetShow.commentS9">
+            <li v-show="this.InternetShow.commentS9">
               <label class="InternetInf_right_label"> 工商登记信息说明： </label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetCompanytxt">
               </el-input>
             </li>
-            <li v-if="this.InternetShow.commentS10">
+            <li v-show="this.InternetShow.commentS10">
               <label class="InternetInf_right_label"> 组织机构代码信息说明： </label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetAddrstatetxt">
               </el-input>
@@ -159,25 +173,53 @@
           <ul class="CreditForm_CheckId_ul_left">
             <li>
               <label class="CheckId_left_label">接听者是否是借款人本人：</label>
-              <el-select v-model="checkData.iisself" placeholder="请选择">
+              <el-select v-model="checkData.iisself" placeholder="请选择" @change="commentShow1(checkData.iisself,Internet[11])">
                 <el-option v-for="item in isself" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
-            <li>
+            <li v-show="this.checkId.declearNloaned">
               <label class="CheckId_left_label">是否在我司申请借款：</label>
-              <el-select v-model="checkData.iloanBefore" placeholder="请选择">
+              <el-select v-model="checkData.iloanBefore" placeholder="请选择" @change="commentShow1(checkData.iloanBefore,Internet[12])">
                 <el-option v-for="item in loanBefore" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
+            </li>
+            <li v-show="this.checkId.loanNot">
+              <label class="CheckId_left_label">借款金额[元]：</label>
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.iloanAmt">
+              </el-input>
+            </li>
+            <li v-show="this.checkId.loanNot">
+              <label class="CheckId_left_label">借款用途：</label>
+              <el-select v-model="checkData.iloanPurpose" placeholder="请选择">
+                <el-option v-for="item in loanPurpose" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
           </ul>
           <ul class="CreditForm_CheckId_ul_right">
-            <li>
+            <li v-show="this.checkId.declearNloaned">
               <label class=" CheckId_right_label "> 接听说明： </label>
               <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.iisselftxt">
               </el-input>
             </li>
+            <li v-show="this.checkId.loanNot">
+              <label class=" CheckId_right_label "> 说明： </label>
+              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.iloanBeforetxt">
+              </el-input>
+            </li>
+            <li v-show="this.checkId.loanNot">
+              <label class=" CheckId_right_label "> 借款期限[月]： </label>
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.iloanTerm">
+              </el-input>
+            </li>
+            <li v-show="this.checkId.loanNot">
+              <label class=" CheckId_right_label "> 借款用途详细说明： </label>
+              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.iloanPurposetxt">
+              </el-input>
+            </li>
+
           </ul>
         </div>
       </el-collapse-item>
@@ -190,14 +232,12 @@
         <div class="CreditForm_WorkInfs">
           <ul class="CreditForm_WorkInfs_ul_left">
             <li>
-              <label class="WorkInfs_left_label left_margin">
-                <span class="red"> * </span>工作单位：</label>
+              <label class="WorkInfs_left_label left_margin">工作单位：</label>
               <el-input style="width:70%;" type="text" placeholder="请输入内容" v-model="checkData.hirecomName">
               </el-input>
             </li>
             <li>
-              <label class="WorkInfs_left_label left_margin_half_one">
-                <span class="red"> * </span>单位性质：</label>
+              <label class="WorkInfs_left_label left_margin_half_one">单位性质：</label>
               <el-select v-model="checkData.hirecomSign" placeholder="请选择">
                 <el-option v-for="item in hirecomSign" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
@@ -212,33 +252,28 @@
               </el-select>
             </li>
             <li>
-              <label class="WorkInfs_left_label left_margin_half_one">
-                <span class="red"> * </span>职位级别：</label>
+              <label class="WorkInfs_left_label left_margin_half_one"> 职位级别：</label>
               <el-input type="text" placeholder="请输入内容" v-model="checkData.workPost">
               </el-input>
             </li>
             <li>
-              <label class="WorkInfs_left_label left_margin_half_two">
-                <span class="red"> * </span>单位电话：</label>
+              <label class="WorkInfs_left_label left_margin_half_two">单位电话：</label>
               <el-input type="text" placeholder="请输入内容" v-model="checkData.workTel">
               </el-input>
             </li>
             <li>
-              <label class="WorkInfs_left_label left_margin_half_one">
-                <span class="red"> * </span>月均工资[元]：</label>
+              <label class="WorkInfs_left_label left_margin_half_one">月均工资[元]：</label>
               <el-input type="text" placeholder="请输入内容" v-model="checkData.avgsalaryamt">
               </el-input>
             </li>
             <li>
-              <label class="WorkInfs_left_label left_margin_half_two">
-                <span class="red"> * </span>每月发薪日：</label>
+              <label class="WorkInfs_left_label left_margin_half_two">每月发薪日：</label>
               <el-input type="text" placeholder="请输入内容" v-model="checkData.payDay">
               </el-input>
             </li>
             <!-- 三级联动：单位地址：	hirecomAddress  -->
             <li class="company_address_select">
-              <label class="WorkInfs_left_label left_margin">
-                <span class="red"> * </span>单位地址 ：</label>
+              <label class="WorkInfs_left_label left_margin">单位地址 ：</label>
               <!-- 一级 -->
               <el-select v-model="checkData.workProvince" placeholder="请选择" @change="getCity(checkData.workProvince)">
                 <el-option v-for="item in	hirecomAddress" :key="item.id" :label="item.areaName" :value="item.id">
@@ -256,32 +291,29 @@
               </el-select>
               <!-- 具体地址input  text框 -->
               <!-- 单位地址================================================================================未写=============找不到字段 -->
-              <el-input type="text" placeholder="请输入内容" v-model="checkData.workAddress">
+              <el-input style="width:273px;" type="text" placeholder="请输入内容" v-model="checkData.workAddress">
               </el-input>
             </li>
             <li>
               <label class="WorkInfs_left_label left_margin">前单位名称：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="checkData.hirelastComname">
+              <el-input style="width:70%;" type="text" placeholder="请输入内容" v-model="checkData.hirelastComname">
               </el-input>
             </li>
           </ul>
           <ul class="CreditForm_WorkInfs_ul_right">
             <li>
-              <label class=" CheckId_right_label ">
-                <span class="red"> * </span>所在部门： </label>
+              <label class=" CheckId_right_label ">所在部门： </label>
               <el-input type="text" placeholder="请输入内容" v-model="checkData.hiredepartment">
               </el-input>
             </li>
             <li>
               <!--   需要改成 date  输入框 -->
-              <label class=" CheckId_right_label ">
-                <span class="red"> * </span> 入职时间： </label>
+              <label class=" CheckId_right_label "> 入职时间： </label>
               <el-date-picker v-model="checkData.entryDate" type="date" placeholder="选择日期">
               </el-date-picker>
             </li>
             <li>
-              <label class=" CheckId_right_label ">
-                <span class="red"> * </span>工资发放形式： </label>
+              <label class=" CheckId_right_label ">工资发放形式： </label>
               <el-select v-model="checkData.payForm" placeholder="请选择">
                 <el-option v-for="item in payForm" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
@@ -294,7 +326,7 @@
             </li>
             <li>
               <label class=" CheckId_right_label "> 是否为私营业主： </label>
-              <el-select v-model="checkData.privateOwnerFlag" placeholder="请选择">
+              <el-select v-model="checkData.privateOwnerFlag" placeholder="请选择" @change="commentShow1(checkData.privateOwnerFlag,Internet[13])">
                 <el-option v-for="item in privateOwnerFlag" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
@@ -310,7 +342,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">私营企业信息</span>
         </template>
-        <div class="CreditForm_CompanyInfs">
+        <div class="CreditForm_CompanyInfs" v-show="this.workInf.private">
           <ul class="CreditForm_CompanyInfs_ul_left">
             <li>
               <label class="CompanyInfs_left_label left_margin">企业类型：</label>
@@ -403,11 +435,34 @@
           <ul class="CreditForm_FamilyInf_ul_left">
             <li>
               <label class="FamilyInf_left_label">婚姻状况：</label>
-              <el-select v-model="checkData.fmarrflag" placeholder="请选择">
+              <el-select v-model="checkData.fmarrflag" placeholder="请选择" @change="commentShow1(checkData.fmarrflag,Internet[14])">
                 <el-option v-for="item in fmarrflag" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </li>
+            <li v-show=" this.marriage.couple">
+              <label class="FamilyInf_left_label">配偶工作情况：</label>
+              <el-select v-model="checkData.spouseWork" placeholder="请选择" @change="commentShow1(checkData.spouseWork,Internet[15])">
+                <el-option v-for="item in spouseWork" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
+            </li>
+            <li v-show=" this.marriage.workingCondition">
+              <label class="FamilyInf_left_label">配偶工作类型：</label>
+              <el-select v-model="checkData.spouseWorktype" placeholder="请选择">
+                <el-option v-for="item in spouseWorktype" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
+            </li>
+            <li v-show=" this.marriage.couple">
+              <label class="FamilyInf_left_label">是否在同一个城市工作生活：</label>
+              <el-select v-model="checkData.spouseSamecity" placeholder="请选择" @change="commentShow1(checkData.spouseSamecity,Internet[16])">
+                <el-option v-for="item in spouseSamecity" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
+            </li>
+
+
             <li>
               <label class="FamilyInf_left_label">是否有子女：</label>
               <el-select v-model="checkData.childFlag" placeholder="请选择">
@@ -436,6 +491,16 @@
             </li>
           </ul>
           <ul class="CreditForm_FamilyInf_ul_right">
+            <li v-show="this.marriage.workingCondition">
+              <label class=" FamilyInf_right_label family_left_margin_half_two"> 配偶收入情况[月/元]： </label>
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.spouseIncome">
+              </el-input>
+            </li>
+            <li v-show="this.marriage.workingLivingInf">
+              <label class=" FamilyInf_right_label family_left_margin_half_two"> 在同一个城市工作生活信息： </label>
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.spouseSamecitytxt">
+              </el-input>
+            </li>
             <li>
               <label class=" FamilyInf_right_label family_left_margin_half_two"> 是否有兄弟姐妹备注： </label>
               <el-input type="text" placeholder="请输入内容" v-model="checkData.brothersIfhastxt">
@@ -537,8 +602,20 @@
           commentS9: true,
           commentS10: true,
         },
-        Internet: ["客户执行", "单位执行", "客户失信 ", " 单位失信", "客户手机 ", "单位名称 ", " 单位电话", " 客户住址房产", " 单位地址", "企业登记 ", " 单位组织代码",
-          " 接听是否本人", "是否私营业主", " ", " ", " ", " ", " ", " ", " ", " "
+        checkId: {
+          declearNloaned: false,
+          loanNot: false,
+        },
+        workInf: {
+          private: false,
+        },
+        marriage: {
+          couple: true,
+          workingCondition: false,
+          workingLivingInf: false,
+        },
+        Internet: ["客户执行", "单位执行", "客户失信", "单位失信", "客户手机", "单位名称", "单位电话", "客户住址房产", "单位地址", "企业登记", "单位组织代码",
+          "接听是否本人", "是否申请借款", "是否私营业主", "婚姻状况", "配偶工作情况", "同城工作生活", " ", " ", " ", " ", " "
         ],
         activeNames: ['1', "2", "3", "4", "5", "6", "7", "8"], //折叠面板 默认显示下标
         checkData: [], // 查询接口回来的数据
@@ -634,6 +711,34 @@
         }, {
           value: '0',
           label: '否'
+        }],
+        loanPurpose: [{ //借款用途：
+          value: '01',
+          label: '日常生活消费'
+        }, { //借款用途：
+          value: '02',
+          label: '教育支出'
+        }, { //借款用途：
+          value: '03',
+          label: '医疗支出'
+        }, { //借款用途：
+          value: '04',
+          label: '提高生活质量'
+        }, { //借款用途：
+          value: '05',
+          label: '其他消费'
+        }, { //借款用途：
+          value: '06',
+          label: '货物采买'
+        }, { //借款用途：
+          value: '07',
+          label: '商铺运营'
+        }, { //借款用途：
+          value: '08',
+          label: '家庭消费'
+        }, { //借款用途：
+          value: '09',
+          label: '个人消费'
         }],
         // ---------------- 工作信息  ------------
         hirecomSign: [{ // 单位性质
@@ -747,6 +852,45 @@
           value: '04',
           label: '丧偶'
         }],
+        spouseWork: [{ //配偶工作情况
+          value: '00',
+          label: '在职'
+        }, {
+          value: '01',
+          label: '退休'
+        }, {
+          value: '02',
+          label: '务农'
+        }, {
+          value: '03',
+          label: '自营'
+        }, {
+          value: '04',
+          label: '无业'
+        }],
+        spouseWorktype: [{// 配偶工作类型
+         value: '00',
+          label: '公务员'
+        }, {
+          value: '01',
+          label: '事业单位'
+        }, {
+          value: '02',
+          label: '国企'
+        }, {
+          value: '03',
+          label: '三资企业'
+        }, {
+          value: '04',
+          label: '民营企业'
+        }],
+        spouseSamecity: [{ //是否在同一个城市工作生活
+          value: '1',
+          label: '是'
+        }, {
+          value: '0',
+          label: '否'
+        }],
         childFlag: [{ // 是否有子女
           value: '1',
           label: '是'
@@ -795,7 +939,7 @@
           value: '03',
           label: '朋友'
         }, {
-          value: '04',
+          value: '04', 
           label: '租住'
         }, {
           value: '05',
@@ -883,6 +1027,8 @@
         // selfregcapital: '', //注册资金[万元]
         // selfhasProportion: '', //占股比例
         // monthrentamt: '', // 月还款额/租金[万元]
+        // selfempCount: '', //员工人数
+        // profitamountmamt: '', //每月净利润[万元
         // selfpremisesArea: '', //营业面积
         // projectManage: '', //企业经营项目
         // oneYearProfitamt: '', //近一年利润[万元]
@@ -914,53 +1060,108 @@
     methods: {
       handleChange(tab, event) {
         console.log(tab, event);
-
       },
       commentShow1(name, hidLabel) {
+        // @change="commentShow1(checkData.fmarrflag,Internet[14])" 
         // console.log("commentShow")
         console.log(name)
         console.log(hidLabel)
-        // "客户执行", "单位执行","客户失信 "," 单位失信","客户手机 ","单位名称 "," 单位电话"," 客户住址房产"," 单位地址","企业登记 "," 单位组织代码"," 接听是否本人","是否私营业主"
-        if (name == 0) { // 否
+        //  " 接听是否本人","是否私营业主"
+        if (name == "0") { // 否
           switch (hidLabel) {
             case "客户执行":
               this.InternetShow.commentS = false;
+              this.checkData.wbeexEcutedtxt = "";
               break;
             case "单位执行":
               this.InternetShow.commentS1 = false;
+              this.checkData.wnetHirecomtxt = "";
               break;
             case "客户失信":
               this.InternetShow.commentS2 = false;
+              this.checkData.wnetEcutedBreatxt = "";
               break;
             case "单位失信":
               this.InternetShow.commentS3 = false;
+              this.checkData.wnetHirecomBreatxt = "";
               break;
             case "客户手机":
               this.InternetShow.commentS4 = false;
+              this.checkData.wnetPhonetxt = "";
               break;
             case "单位名称":
               this.InternetShow.commentS5 = false;
+              this.checkData.wnetHirecomNametxt = "";
               break;
             case "单位电话":
               this.InternetShow.commentS6 = false;
+              this.checkData.wnetHirecomPhonetxt = "";
               break;
             case "客户住址房产":
               this.InternetShow.commentS7 = false;
+              this.checkData.wnetAddrandEstatetxt = "";
               break;
             case "单位地址":
               this.InternetShow.commentS8 = false;
+              this.checkData.wnetHirecomAddresstxt = "";
               break;
             case "企业登记":
               this.InternetShow.commentS9 = false;
+              this.checkData.wnetCompanytxt = "";
               break;
             case "单位组织代码":
               this.InternetShow.commentS10 = false;
+              this.checkData.wnetAddrstatetxt = "";
               break;
-              //  case "接听是否本人":this.InternetShow.commentS = false; break;
-              //  case "是否私营业主":this.InternetShow.commentS = false; break;
-
+            case "接听是否本人":
+              this.checkId.declearNloaned = false;
+              this.checkId.loanNot = false;
+              this.checkData.iloanBefore = "";
+              this.checkData.iisselftxt = "";
+              this.checkData.iloanBeforetxt = ""; //说明-input
+              this.checkData.iloanTerm = ""; //借款期限[月]：	
+              this.checkData.iloanPurposetxt = ""; //借款用途详细说明：
+              this.checkData.iloanPurpose = ""; //借款用途
+              this.checkData.iloanAmt = ""; //借款金额[元]
+              break;
+            case "是否申请借款":
+              this.checkId.loanNot = false;
+              this.checkData.iloanBeforetxt = ""; //说明-input
+              this.checkData.iloanTerm = ""; //借款期限[月]：	
+              this.checkData.iloanPurposetxt = ""; //借款用途详细说明：
+              this.checkData.iloanPurpose = ""; //借款用途
+              this.checkData.iloanAmt = ""; //借款金额[元]
+              break;
+              //  iisselftxt iloanBeforetxt iloanTerm iloanPurpose
+            case "是否私营业主":
+              this.workInf.private = false;
+              this.checkData.compType = "";
+              this.checkData.regcapitalamt = "";
+              this.checkData.selfhasProportion = "";
+              this.checkData.monthrentamt = "";
+              this.checkData.selfpremisesArea = "";
+              this.checkData.projectManage = "";
+              this.checkData.oneYearProfitamt = "";
+              this.checkData.firstSuppliers = "";
+              this.checkData.compegDate = ""; //公司注册时间
+              this.checkData.selfpremises = "";
+              this.checkData.selfempCount = "";
+              this.checkData.profitamountmamt = "";
+              this.checkData.firstDistributor = ""; //第一分销商
+              break;
+              //     case "配偶工作情况":
+              //  this.marriage.workingCondition = false;
+              // this.checkData.spouseWorktype = "";
+              // this.checkData.spouseIncome = "";
+              //   break;
+            case "同城工作生活":
+              this.marriage.workingLivingInf = false;
+              this.checkData.spouseSamecitytxt = ""; //工作生活信息详情
+              break;
+              // 
           }
-        } else if (name == 1) { //是
+        } else if (name == "1") { //是   
+          console.log("我是是1")
           switch (hidLabel) {
             case "客户执行":
               this.InternetShow.commentS = true;
@@ -995,29 +1196,53 @@
             case "单位组织代码":
               this.InternetShow.commentS10 = true;
               break;
-              //  case "接听是否本人": this.InternetShow.commentS = true;break;
-              //  case "是否私营业主": this.InternetShow.commentS = true;break;
+            case "接听是否本人":
+              this.checkId.declearNloaned = true;
+              break;
+            case "是否申请借款":
+              this.checkId.loanNot = true;
+              break;
+            case "是否私营业主":
+              this.workInf.private = true;
+              break;
+              //    case "配偶工作情况":
+              //  this.marriage.workingCondition = true;
+              //   break;
+            case "同城工作生活":
+              this.marriage.workingLivingInf = true;
+              break;
+              //  case "是否私营业主":
+              // this.workInf.private = true;
+              // break;
+
 
           }
+        } else if (hidLabel == "婚姻状况") {
+          console.log(hidLabel + name)
+          if (name == "02" || name == "03") {
+            this.marriage.couple = true;
+            this.marriage.workingCondition = false;
+            this.marriage.workingLivingInf = false;
+          } else {
+            this.marriage.couple = false;
+            this.checkData.spouseWork = ""; //配偶工作情况清空
+            this.checkData.spouseWorktype = "";
+            this.checkData.spouseIncome = "";
+            this.checkData.spouseSamecity = ""; //同城工作生活 下拉select
+            this.checkData.spouseSamecitytxt = "";
+          }
+        } else if (hidLabel == "配偶工作情况") {
+          if (name == "00" || name == "03") {
+            this.marriage.workingCondition = true;
+          } else {
+            this.marriage.workingCondition = false;
+            this.checkData.spouseWorktype = "";
+            this.checkData.spouseIncome = "";
+          }
         }
+        // else if(name==){
 
-        //  if(name==0){
-        //    console.log("我是否")
-        //    hidLabel=true;
-        //    console.log( hidLabel)
-
-        //  }else{
-
-        //    console.log("我是是")
-        //    hidLabel=false
-        //    console.log( hidLabel)
-
-        //  }
-        //  name==0? this.hidLabel=false:this.hidLabel==true;
-
-        // switch(){
-        //   // case 
-        // }
+        // }{}
       },
       NewPage(ind) { // tab1-------------------右键菜单栏 li[0] 点击事件
         console.log(ind);
@@ -1038,7 +1263,6 @@
             window.open("https://www.tianyancha.com/");
             break;
         }
-        // this.rightList = false;
       },
       getCity(item) {
         console.log("省份-市区")
@@ -1065,13 +1289,90 @@
       },
       CFsave() {
         console.log("提交信息");
-        // 下面为需要验证不为 空 的字段
-
-        // console.log(this.checkData)
-        this.post("/creauditInfo/addOrUpdate", this.checkData).then(res => {
-          console.log(res);
-          // this.checkData = res.data;
+        this.$validator.validateAll().then((result) => {
+          if (result) {
+            // eslint-disable-next-line
+            // alert('From Submitted!');
+            // 下面为需要验证不为 空 的字段
+            // console.log(this.checkData)
+            this.post("/creauditInfo/addOrUpdate", this.checkData).then(res => {
+              console.log(res);
+              if (res.statusCode == 200) {
+                alert('提交成功!');
+              } else {
+                alert("提交失败，请重新提交")
+              }
+            });
+            // alert('提交成功!');
+            // return;
+          } else {
+            alert('请按要求填写！');
+          }
+          // alert('Correct them errors!');
         });
+      },
+      mountJ(code, val) {
+        // this.checkData+"."+val==0? this+"."+comment=false: this+"."+comment=true;
+        // this.checkData.val==0? this.comment=false: this.comment=true;
+        // console.log(code)
+        switch (code) {
+          case 0:
+            val == 0 ? this.InternetShow.commentS = false : this.InternetShow.commentS = true;
+            break; //上网-客户被执行
+          case 1:
+            val == 0 ? this.InternetShow.commentS1 = false : this.InternetShow.commentS1 = true;
+            break; //上网-单位被执行
+          case 2:
+            val == 0 ? this.InternetShow.commentS2 = false : this.InternetShow.commentS2 = true;
+            break; //上网-客户被执行
+          case 3:
+            val == 0 ? this.InternetShow.commentS3 = false : this.InternetShow.commentS3 = true;
+            break; //上网-客户被执行
+          case 4:
+            val == 0 ? this.InternetShow.commentS4 = false : this.InternetShow.commentS4 = true;
+            break; //上网-客户被执行
+          case 5:
+            val == 0 ? this.InternetShow.commentS5 = false : this.InternetShow.commentS5 = true;
+            break; //上网-客户被执行  
+          case 6:
+            val == 0 ? this.InternetShow.commentS6 = false : this.InternetShow.commentS6 = true;
+            break; //上网-客户被执行
+          case 7:
+            val == 0 ? this.InternetShow.commentS7 = false : this.InternetShow.commentS7 = true;
+            break; //上网-客户被执行
+          case 8:
+            val == 0 ? this.InternetShow.commentS8 = false : this.InternetShow.commentS8 = true;
+            break; //上网-客户被执行
+          case 9:
+            val == 0 ? this.InternetShow.commentS9 = false : this.InternetShow.commentS9 = true;
+            break; //上网-客户被执行
+          case 10:
+            val == 0 ? this.InternetShow.commentS10 = false : this.InternetShow.commentS10 = true;
+            break; //上网-客户被执行
+          case 11:
+            val == 0 ? this.checkId.declearNloaned = false : this.checkId.declearNloaned = true;
+            break;
+          case 12: //私营业主整个部分
+            val == 0  || val == null ? this.workInf.private = false : this.workInf.private = true;
+            break;
+          case 13: //婚姻状况
+            val == "01" || val == "04" || val == null ? this.marriage.couple = false : this.marriage.couple = true;
+            break;
+             case 14:  // 配偶工作情况
+            val == "00"||val=="03" ? this.marriage.workingCondition = true : this.marriage.workingCondition = false;
+            break;
+            //  case 15: // 是否在同一个城市工作
+            // val == "01" || val== "04" || val == null ? this.marriage.couple = false : this.marriage.couple = true;
+            // break;
+            //  case 16: // 
+            // val == "01" || val== "04" || val == null ? this.marriage.couple = false : this.marriage.couple = true;
+            // break;
+
+        }
+        // this.checkData.val==0? this.InternetShow.commentS=false: this.InternetShow.commentS=true;
+
+        // val==0? comment=false:comment=true;
+
       }
     },
     mounted() {
@@ -1081,15 +1382,44 @@
       }).then(res => {
         console.log(res.data);
         this.checkData = res.data;
+        // console.log(this.checkData.wnetEcutedBrea)
+        // console.log(this.InternetShow.commentS)
+        this.mountJ(0, res.data.wbeexEcuted);
+        this.mountJ(1, res.data.wnetHirecom);
+        this.mountJ(2, res.data.wnetEcutedBrea);
+        this.mountJ(3, res.data.wnetHirecomBrea);
+        this.mountJ(4, res.data.wnetPhone);
+        this.mountJ(5, res.data.wnetHirecomName);
+        this.mountJ(6, res.data.wnetHirecomPhone);
+        this.mountJ(7, res.data.wnetAddrandEstate);
+        this.mountJ(8, res.data.wnetHirecomAddress);
+        this.mountJ(9, res.data.wnetCompany);
+        this.mountJ(10, res.data.wnetAddrstate);
+        this.mountJ(11, res.data.iisself);
+        this.mountJ(12, res.data.privateOwnerFlag); //私营业主是否
+        this.mountJ(13, res.data.fmarrflag); //婚姻状况
+        this.mountJ(14, res.data.spouseWork); //配偶工作情况
+        // this.mountJ(15, res.data.spouseSamecity); // 是否在同一个城市工作生活
+        // this.mountJ(16, res.data.spouseSamecity); // 
+        // this.mountJ(17, res.data.spouseSamecity); // 
+        // this.mountJ(18, res.data.spouseSamecity); // 
+        // this.mountJ(19, res.data.spouseSamecity); // 
+        // this.mountJ(20, res.data.spouseSamecity); // 
+
+        // this.mountJ(12, res.data.privateOwnerFlag);//私营业主是否字段
+        // console.log(res.data.privateOwnerFlag)
+
+        // console.log(this.checkData.wnetHirecom)
+        // checkData.iisself
       });
       // 省    
       this.get("/credit/queryProvince", {}).then(res => {
-        console.log(res);
+        // console.log(res);
         this.hirecomAddress = res.data;
       });
       // 所属行业 
       this.get("/credit/industry", {}).then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         this.hirecomKind = res.data;
       })
 
@@ -1101,12 +1431,17 @@
 <style scoped>
   /* 公共 */
 
-  li {
+  .CreditForm li {
     color: #475669;
     font-size: 14px;
+    height: 55px;
   }
+  /* .InternetPosition {} */
 
-  .InternetPosition {}
+  .help {
+    color: red;
+    margin-left: 10px;
+  }
 
   .icon_hat {
     position: absolute;
@@ -1119,11 +1454,9 @@
   }
 
   .red {
-    /* display: inline-block; */
     color: red;
     font-weight: bold;
     font-size: 16px;
-    /* padding-top:3px; */
   }
   /* .one_input {
     width: 70%;
@@ -1150,66 +1483,7 @@
     /* height: 100%; */
     overflow: auto;
   }
-  /* 上网查询-右ul 里面的li position定位 */
-
-  .CreditForm_InternetInf_ul_right {
-    height: 630px;
-    background:pink;
-    position: relative;
-  }
-
-  .CreditForm_InternetInf_ul_right li {
-    position: absolute;
-    /* width: 50%; */
-    width:360px;
-    left: 0;
-  }
-
-  .CreditForm_InternetInf_ul_right li:nth-of-type(1) {
-    top: 0px;
-  }
-
-  .CreditForm_InternetInf_ul_right li:nth-of-type(2) {
-    top: 44px;
-    /* width: 500px; */
-  }
-
-  .CreditForm_InternetInf_ul_right li:nth-of-type(3) {
-    top: 100px;
-  }
-
-  .CreditForm_InternetInf_ul_right li:nth-of-type(4) {
-    top: 150px;
-  }
-
-  .CreditForm_InternetInf_ul_right li:nth-of-type(5) {
-    top: 225px;
-  }
-
-  .CreditForm_InternetInf_ul_right li:nth-of-type(6) {
-    top: 275px;
-  }
-
-  .CreditForm_InternetInf_ul_right li:nth-of-type(7) {
-    top: 320px;
-  }
-
-  .CreditForm_InternetInf_ul_right li:nth-of-type(8) {
-    top: 380px;
-  }
-
-  .CreditForm_InternetInf_ul_right li:nth-of-type(9) {
-    top: 420px;
-  }
-
-  .CreditForm_InternetInf_ul_right li:nth-of-type(10) {
-    top: 495px;
-  }
-
-  .CreditForm_InternetInf_ul_right li:nth-of-type(11) {
-    top: 560px;
-  }
-  /* 上网查询信息 */
+  /* 全部统一样式 */
 
   .CreditForm_InternetInf_ul_left,
   .CreditForm_InternetInf_ul_right,
@@ -1224,6 +1498,13 @@
     float: left;
     width: 33%;
   }
+  /* 上网查询信息 */
+
+  .CreditForm_InternetInf_ul_left li,
+  .CreditForm_InternetInf_ul_right li {
+    height: 60px;
+  }
+
 
   .InternetInf_left_label,
   .InternetInf_right_label,
@@ -1242,11 +1523,69 @@
     /* border: 1px solid yellow; */
     text-align: right;
   }
-  /* 单独设置-上网查询信息- 左侧下拉框*/
-  /* .CreditForm_InternetInf_ul_left li{
-      padding:1.5px 0;
+  /* 上网查询信息- 左侧ul*/
+  /*  √ */
 
-    } */
+  .CreditForm_InternetInf_ul_left {
+    padding-top: 6px;
+    width: 50%;
+  }
+  /* 上网查询-右ul 里面的li position定位 */
+
+  .CreditForm_InternetInf_ul_right {
+    height: 630px;
+    position: relative;
+  }
+
+  .CreditForm_InternetInf_ul_right li {
+    position: absolute;
+    width: 360px;
+    left: 0;
+  }
+
+  .CreditForm_InternetInf_ul_right li:nth-of-type(1) {
+    top: 0px;
+  }
+
+  .CreditForm_InternetInf_ul_right li:nth-of-type(2) {
+    top: 60px;
+  }
+
+  .CreditForm_InternetInf_ul_right li:nth-of-type(3) {
+    top: 120px;
+  }
+
+  .CreditForm_InternetInf_ul_right li:nth-of-type(4) {
+    top: 180px;
+  }
+
+  .CreditForm_InternetInf_ul_right li:nth-of-type(5) {
+    top: 240px;
+  }
+
+  .CreditForm_InternetInf_ul_right li:nth-of-type(6) {
+    top: 300px;
+  }
+
+  .CreditForm_InternetInf_ul_right li:nth-of-type(7) {
+    top: 360px;
+  }
+
+  .CreditForm_InternetInf_ul_right li:nth-of-type(8) {
+    top: 420px;
+  }
+
+  .CreditForm_InternetInf_ul_right li:nth-of-type(9) {
+    top: 480px;
+  }
+
+  .CreditForm_InternetInf_ul_right li:nth-of-type(10) {
+    top: 540px;
+  }
+
+  .CreditForm_InternetInf_ul_right li:nth-of-type(11) {
+    top: 600px;
+  }
   /* 单独设置-家庭信息-右侧li上面的margin空行 */
 
   .CreditForm_FamilyInf_ul_right {
@@ -1273,6 +1612,11 @@
   .CreditForm_CompanyInfs_ul_left {
     /* border: 1px solid green; */
     width: 66%;
+    float: left;
+  }
+
+  .CreditForm_WorkInfs_ul_left li,
+  .CreditForm_CompanyInfs_ul_left li {
     float: left;
   }
 
@@ -1305,12 +1649,23 @@
     width: 33%;
     float: left;
   }
+  /* .CreditForm_WorkInfs_ul_right li,
+  .CreditForm_CompanyInfs_ul_right li,
+  .CreditForm_FamilyInf_ul_left li{
+height: 55px;;
+  } */
 
   .CreditForm_WorkInfs .CreditForm_WorkInfs_ul_left li,
   .CreditForm_CompanyInfs_ul_left,
-  .CreditForm_CompanyInfs_ul_left li {
+  .CreditForm_CompanyInfs_ul_left li,
+  {
     float: left;
+    /* border: 1px solid green; */
+    /* height: 55px; */
   }
+  /* .CreditForm_FamilyInf_ul_right li{
+    height: 55px;
+  } */
   /* 工作信息-左侧-两行-第二行 */
 
   .WorkInfs_left_label,
