@@ -1538,8 +1538,8 @@ export default {
 
 /* 历史调查日志 收缩 title */
 
-.el-collapse-item__header {
-  background: #eef0f9;
+.phone-credit .el-collapse-item__header {
+  background: #eef0f9!important;
   font-family: PingFangSC-Regular;
   font-size: 16px;
   color: #1f2d3d;
