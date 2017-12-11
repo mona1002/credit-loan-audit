@@ -86,7 +86,7 @@
           <!-- secondeReasons -->
           <span style="color:red;display:inline-block;width:0px;float:left;">*</span>
           <el-form-item label="子原因:" class="item-column2">
-            <el-select v-model="secondaryReason" >
+            <el-select v-model="secondaryReason">
               <el-option v-for="item in secondeReasons" :key="item.id" :label="item.reasonName" :value="item.reasonName">
               </el-option>
             </el-select>
@@ -121,14 +121,14 @@
       </el-form>
       <!-- 审批 03-->
       <!-- :model="spruleForm" :rules="sprules" ref="spruleForm" -->
-      <el-form  class="back-form appro-form" v-show="this.showFlag=='03'">
+      <el-form class="back-form appro-form" v-show="this.showFlag=='03'">
         <!-- <div class="form-title" style="position:relative;" >
           审批信息
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
         </div> -->
         <div class="form-title" style="position:relative;" v-show=" this.showFlag=='03'">
           审批信息
-          <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
+          <el-tag closable @close="coverShow=false;showFlag='';proName=''" style="position:absolute;"></el-tag>
         </div>
         <div style="padding:5px;padding-top:0;">
           <div class="form-title">
@@ -153,7 +153,7 @@
           </div>
           <div class="back-form-li">
             <el-form-item label="信用评分:" class="item-column2">
-              接口取值评分
+              {{creditScore}}
             </el-form-item>
             <el-form-item label="申请类型:" class="item-column2">
               {{loanType}}
@@ -163,7 +163,7 @@
             信审核实信息
           </div>
           <el-form-item label="核实可接受最高每期还款额[元]:" style="width:300px;">
-            接口取值
+            {{monthrentamt}}
           </el-form-item>
           <div class="form-title">
             审批信息
@@ -225,7 +225,7 @@
           </div>
         </div>
         <div class="back-form-li" style="text-align:right;padding:10px;">
-          <el-button type="info " plain @click="showFlag=0,coverShow=false;">返回</el-button>
+          <el-button type="info " plain @click="showFlag=0,coverShow=false;proName=''">返回</el-button>
           <el-button type="primary" v-show="this.showFlag=='03'" @click="submitFn('03')">提交</el-button>
         </div>
       </el-form>
@@ -421,18 +421,22 @@ export default {
       applySubNo: '', // 进件编号
       appTypeTxt: '', // 申请类型
       certTypeTxt: '', // 证件类型
+      sproId: '', // 审批 proId
+      quotaData: '', // 评分 月还款额
+      creditScore:'', // 单独处理的评分
+      monthrentamt:'', // 核实每月可接受最高还款额
       // 表单必填
-      spruleForm:{verIncome:'',ploanTerm:'',ploanAmt:''},
-      sprules:{
-        verIncome:[
+      spruleForm: { verIncome: '', ploanTerm: '', ploanAmt: '' },
+      sprules: {
+        verIncome: [
           { required: true, message: '请输入活动名称', trigger: 'blur' },
           { min: 3, max: 5, message: '', trigger: 'blur' }
         ],
-        ploanTerm:[
+        ploanTerm: [
           { required: true, message: '请输入活动名称', trigger: 'blur' },
           { min: 3, max: 5, message: '', trigger: 'blur' }
         ],
-        ploanAmt:[
+        ploanAmt: [
           { required: true, message: '请输入活动名称', trigger: 'blur' },
           { min: 3, max: 5, message: '', trigger: 'blur' }
         ]
@@ -492,6 +496,8 @@ export default {
     this.proName = this.applicationInformationDetail.proName;
     // 申请期限 
     this.loanTerm = this.applicationInformationDetail.loanTerm;
+
+    this.sproId = this.applicationInformationDetail.proId;
   },
   methods: {
     // open 打开 自定义 弹窗   挂起
@@ -539,8 +545,8 @@ export default {
       this.coverShow = true;
       switch (flag) {
         case '02':
-        console.log('020202020202020202')
-        console.log(this.showFlag);
+          console.log('020202020202020202')
+          console.log(this.showFlag);
           this.showFlag = '02';
           // 获取系统时间
           this.get('system/getSystemDate').then(res => {
@@ -550,7 +556,7 @@ export default {
           })
           break;
         case '01':
-        console.log('01010101010101')
+          console.log('01010101010101')
           this.showFlag = '01';
           this.get('system/getSystemDate').then(res => {
             console.log(res)
@@ -586,9 +592,21 @@ export default {
           // 申请类型/借款类型
           this.loanType = this.applicationInformationDetail.loanTypeTxt;
 
+
+          // 信用评分  核实可接受最高还款额
+          this.post('/credit/quotaScoring', {
+            applyId: this.applyId,
+            proId: this.sproId,
+            appOrgId: this.appOrgId
+          }).then(res => {
+            console.log(res);
+            if (this.statusCode == '200')
+              this.quotaData = res.data;
+            // 单独处理 评分   =>  "评分:51.6"
+              this.creditScore = this.quotaData.creditScore.split(':')[1]
+              this.monthrentamt = this.quotaData.monthrentamt;
+          })
           /* 请求 
-            信用评分 
-            核实可接受最高还款额
             产品
           */
           // 产品
@@ -604,7 +622,7 @@ export default {
 
           break;
         case 'spjl':
-        console.log('spspspspsppspspspspsp')
+          console.log('spspspspsppspspspspsp')
           this.showFlag = 'spjl';
           this.getSpjlList();
           break;
@@ -660,12 +678,16 @@ export default {
           this.coverShow = false;
           this.showFlag = 0;
           // this.taskId = '182525';
-
           // 假如没有  核实可接受最高每期还款额 , 提示
-          // this.$message("提示:请求完善 信审表中可承受的月还款金额");
-          // 保存审批信息
-          this.saveCreaduit();
-          break;
+          console.log(this.quotaData.monthrentamt);
+          if (!this.quotaData.monthrentamt) {
+            this.$message("提示:请完善信审表中可承受的月还款金额");
+            return;
+          } else {
+            // 保存审批信息
+            this.saveCreaduit();
+            break;
+          }
       }
 
 
@@ -1029,6 +1051,8 @@ export default {
 }
 
 
+
+
 /* 三列 */
 
 .creditApproval-class .item-column3 {
@@ -1042,17 +1066,21 @@ export default {
   height: 35px;
   line-height: 35px;
   margin: 0;
-  padding:0;
+  padding: 0;
 }
+
+
 
 
 /* 按钮集合控件 */
 
 .creditApproval-class .btn-div {
   text-align: center;
-  width:80%;
+  width: 80%;
   float: left;
 }
+
+
 
 
 
@@ -1064,6 +1092,8 @@ export default {
   color: #333;
   border: none;
 }
+
+
 
 
 
@@ -1084,6 +1114,8 @@ export default {
 }
 
 
+
+
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -1091,6 +1123,8 @@ export default {
   float: left;
   margin: 0;
 }
+
+
 
 
 
@@ -1108,6 +1142,8 @@ export default {
 }
 
 
+
+
 /* form-title */
 
 .creditApproval-class .form-title {
@@ -1116,7 +1152,7 @@ export default {
   font-size: 18px;
   /*font-weight: bold;*/
   /*background: #ededed;*/
-  background:#eef0f9;
+  background: #eef0f9;
   line-height: 40px;
   padding-left: 10px;
   display: block;
@@ -1134,6 +1170,8 @@ export default {
 }
 
 
+
+
 /* textarea */
 
 .creditApproval-class .back-form .back-form-li .el-textarea {
@@ -1141,11 +1179,15 @@ export default {
 }
 
 
+
+
 /* 单独设置  label*/
 
 .creditApproval-class .back-form .el-form-item__label {
   width: 80px;
 }
+
+
 
 
 /* 弹窗页面 关闭按钮*/
@@ -1164,6 +1206,8 @@ export default {
   right: 0px;
   top: 5px;
 }
+
+
 
 
 /* 审批 表单 */
@@ -1187,6 +1231,8 @@ export default {
 }
 
 
+
+
 /* 审批结论轨迹 */
 
 .creditApproval-class .spjl-div {
@@ -1206,6 +1252,8 @@ export default {
 }
 
 
+
+
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -1213,6 +1261,8 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
+
 
 
 /* 流程轨迹 */
@@ -1239,35 +1289,45 @@ export default {
 
 
 
-.creditApproval-class .el-select{
+.creditApproval-class .el-select {
   height: 100%;
   line-height: 100%;
 }
 
-.creditApproval-class .el-input--suffix .el-input__inner{
-  margin:0;
-  padding:0;
+.creditApproval-class .el-input--suffix .el-input__inner {
+  margin: 0;
+  padding: 0;
   padding-right: 30px;
   text-indent: 5px;
 }
 
 
+
+
 /* 申请信息 */
-.creditApproval-class .info .el-form-item__content{
+
+.creditApproval-class .info .el-form-item__content {
   line-height: 40px;
 }
 
-.creditApproval-class .info .el-form-item__label{
+.creditApproval-class .info .el-form-item__label {
   width: 100px;
 }
 
+
+
 /* 报错提示 */
-.creditApproval-class .el-form-item__error{
-  top:-22px;
-  left:220px;
+
+.creditApproval-class .el-form-item__error {
+  top: -22px;
+  left: 220px;
 }
+
+
+
 /* 有编辑框的 提示信息*/
-.creditApproval-class .back-form .back-form-edit-li{
+
+.creditApproval-class .back-form .back-form-edit-li {
   margin-top: 20px !important;
 }
 
