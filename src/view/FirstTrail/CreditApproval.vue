@@ -28,14 +28,14 @@
       </el-form-item>
     </el-form>
     <div class="btn-div">
-      <el-button icon="el-icon-check" class="credit-btn" @click="open">挂起</el-button>
-      <el-button icon="el-icon-check" class="credit-btn" @click="coverFn('02')">回退</el-button>
-      <el-button icon="el-icon-check" class="credit-btn" @click="coverFn('01')">拒绝</el-button>
-      <el-button icon="el-icon-check" class="credit-btn" @click="coverFn('07')">放弃</el-button>
-      <el-button icon="el-icon-check" class="credit-btn" @click="coverFn('03')">审批</el-button>
-      <el-button icon="el-icon-check" class="credit-btn">发起反欺诈</el-button>
-      <el-button icon="el-icon-check" class="credit-btn" @click="coverFn('spjl')">审批结论轨迹</el-button>
-      <el-button icon="el-icon-check" class="credit-btn" @click="coverFn('lcgj')">流程轨迹</el-button>
+      <el-button icon="el-icon-check-hang" class="credit-btn" @click="open">挂起</el-button>
+      <el-button icon="el-icon-check-back" class="credit-btn" @click="coverFn('02')">回退</el-button>
+      <el-button icon="el-icon-check-reject" class="credit-btn" @click="coverFn('01')">拒绝</el-button>
+      <el-button icon="el-icon-check-giveup" class="credit-btn" @click="coverFn('07')">放弃</el-button>
+      <el-button icon="el-icon-check-appro" class="credit-btn" @click="coverFn('03')">审批</el-button>
+      <el-button icon="el-icon-check-start" class="credit-btn">发起反欺诈</el-button>
+      <el-button icon="el-icon-check-spjl" class="credit-btn" @click="coverFn('spjl')">审批结论轨迹</el-button>
+      <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('lcgj')">流程轨迹</el-button>
     </div>
     <!-- 弹窗 -->
     <div class="cover-view" v-show="coverShow">
@@ -179,6 +179,7 @@
             <!-- <span style="color:red;display:inline-block;width:0px;float:left;">*</span> -->
             <!-- prop="verIncome" -->
             <!-- spruleForm. -->
+            <!-- <span style="color:red;display:inline-block;width:0px;float:left;">*</span> -->
             <el-form-item label="月核实收入[元]:" class="item-column2">
               <el-input v-model="verIncome"></el-input>
             </el-form-item>
@@ -1329,6 +1330,96 @@ export default {
 
 .creditApproval-class .back-form .back-form-edit-li {
   margin-top: 20px !important;
+}
+
+/* icon */
+/*挂起*/
+.creditApproval-class .el-icon-check-hang {
+  background:url(../../../static/images/guaqi.png);
+  width:20px;
+  height: 20px;
+  background-size: 20px;
+  padding:0;
+  margin:0;
+  vertical-align: middle;
+  display: inline-block;
+}
+/*回退*/
+.creditApproval-class .el-icon-check-back{
+background:url(../../../static/images/guaqi.png);
+  width:20px;
+  height: 20px;
+  background-size: 20px;
+  padding:0;
+  margin:0;
+  vertical-align: middle;
+  display: inline-block;
+}
+/*拒绝*/
+.creditApproval-class .el-icon-check-reject{
+background:url(../../../static/images/jujue.png);
+  width:20px;
+  height: 20px;
+  background-size: 20px;
+  padding:0;
+  margin:0;
+  vertical-align: middle;
+  display: inline-block;
+}
+/*放弃*/
+.creditApproval-class .el-icon-check-giveup{
+background:url(../../../static/images/fangqi.png);
+  width:20px;
+  height: 20px;
+  background-size: 20px;
+  padding:0;
+  margin:0;
+  vertical-align: middle;
+  display: inline-block;
+}
+/*审批*/
+.creditApproval-class .el-icon-check-appro{
+background:url(../../../static/images/appro.png);
+  width:20px;
+  height: 20px;
+  background-size: 20px;
+  padding:0;
+  margin:0;
+  vertical-align: middle;
+  display: inline-block;
+}
+/*发起反欺诈*/
+.creditApproval-class .el-icon-check-start{
+background:url(../../../static/images/faqi.png);
+  width:20px;
+  height: 20px;
+  background-size: 20px;
+  padding:0;
+  margin:0;
+  vertical-align: middle;
+  display: inline-block;
+}
+/*审批结论轨迹*/
+.creditApproval-class .el-icon-check-spjl{
+background:url(../../../static/images/jielun.png);
+  width:20px;
+  height: 20px;
+  background-size: 20px;
+  padding:0;
+  margin:0;
+  vertical-align: middle;
+  display: inline-block;
+}
+/*流程轨迹*/
+.creditApproval-class .el-icon-check-lcgj{
+background:url(../../../static/images/liucheng.png);
+  width:20px;
+  height: 20px;
+  background-size: 20px;
+  padding:0;
+  margin:0;
+  vertical-align: middle;
+  display: inline-block;
 }
 
 </style>
