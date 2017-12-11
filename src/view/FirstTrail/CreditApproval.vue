@@ -9,13 +9,13 @@
         {{userName}}
       </el-form-item>
       <el-form-item label="申请类型:" class="item-column3">
-        {{certTypeTxt}}
+        {{appTypeTxt}}
       </el-form-item>
       <el-form-item label="进件编号:" class="item-column3">
         {{applySubNo}}
       </el-form-item>
       <el-form-item label="证件类型:" class="item-column3">
-        身份证
+        {{certTypeTxt}}
       </el-form-item>
       <el-form-item label="证件号码:" class="item-column3">
         {{certCode}}
@@ -110,7 +110,7 @@
           </el-form-item>
         </div>
         <div class="back-form-li" style="text-align:right;padding:20px;">
-          <el-button type="" plain @click="showFlag=0,coverShow=false;">返回</el-button>
+          <el-button plain @click="showFlag=0,coverShow=false;">返回</el-button>
           <!-- 回退 -->
           <el-button type="primary" v-show="this.showFlag=='02'" @click="submitFn('02')">提交</el-button>
           <!-- 拒绝 -->
@@ -225,7 +225,7 @@
           </div>
         </div>
         <div class="back-form-li" style="text-align:right;padding:10px;">
-          <el-button type="info " plain @click="showFlag=0,coverShow=false;proName=''">返回</el-button>
+          <el-button plain @click="showFlag=0,coverShow=false;proName=''">返回</el-button>
           <el-button type="primary" v-show="this.showFlag=='03'" @click="submitFn('03')">提交</el-button>
         </div>
       </el-form>
@@ -322,7 +322,7 @@
           </el-table>
         </div> -->
         <div class="back-form-li" style="text-align:right;padding:10px;">
-          <el-button type="info " plain @click="showFlag=0,coverShow=false;">返回</el-button>
+          <el-button plain @click="showFlag=0,coverShow=false;">返回</el-button>
         </div>
       </div>
     </div>
@@ -485,11 +485,11 @@ export default {
     // 审批人
     this.userName = this.userInfo.userName;
     // 申请类型
-    this.proName = this.applicationInformationDetail.proName;
+    this.appTypeTxt = this.applicationInformationDetail.appTypeTxt;
     // 进件编号
     this.applySubNo = this.applicationInformationDetail.applySubNo;
     // 证件类型
-    this.certType = this.applicationInformationDetail.certType;
+    this.certTypeTxt = this.applicationInformationDetail.certTypeTxt;
     // 证件号码
     this.certCode = this.applicationInformationDetail.certCode;
     // 产品名称
@@ -1136,7 +1136,7 @@ export default {
   background: #fff;
   margin: 0 auto;
   margin-top: 300px;
-  border-radius: 10px;
+  border-radius: 2px;
   overflow: hidden;
   padding-bottom: 30px;
 }
