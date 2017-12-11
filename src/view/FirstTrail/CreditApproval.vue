@@ -21,7 +21,7 @@
         {{certCode}}
       </el-form-item>
       <el-form-item label="产品名称:" class="item-column3">
-        {{proName}}
+        {{baseProName}}
       </el-form-item>
       <el-form-item label="申请期限[月]:" class="item-column3">
         {{loanTerm}}
@@ -226,7 +226,7 @@
           </div>
         </div>
         <div class="back-form-li" style="text-align:right;padding:10px;">
-          <el-button plain @click="showFlag=0,coverShow=false;proName=''">返回</el-button>
+          <el-button plain @click="showFlag=0,coverShow=false;">返回</el-button>
           <el-button type="primary" v-show="this.showFlag=='03'" @click="submitFn('03')">提交</el-button>
         </div>
       </el-form>
@@ -383,7 +383,7 @@ export default {
       spjlData: [], // 审批结论轨迹数据
       lcgjData: [], // 流程轨迹 lcgjData
       products: [], // 审批产品
-
+      baseProName:'',// 详情带过了的 产品名称
       // 审批结论轨迹
       pageNum: 1,
       pageSize: 5,
@@ -499,6 +499,9 @@ export default {
     this.loanTerm = this.applicationInformationDetail.loanTerm;
 
     this.sproId = this.applicationInformationDetail.proId;
+
+    // 申请信息 带过来的 产品名称
+    this.baseProName = this.applicationInformationDetail.proName;
   },
   methods: {
     // open 打开 自定义 弹窗   挂起
@@ -734,7 +737,7 @@ export default {
           this.certCode = ''; // 证件号码
           this.emerType = ''; // 紧急程度
           this.appOrgCode = ''; // 门店代码
-          this.proName = ''; // 产品名称
+          // this.proName = ''; // 产品名称
           this.proCode = ''; //  产品代码
           this.proId = ''; // 产品id
           this.opinionFlag = ''; // 标志任务类型
@@ -988,7 +991,7 @@ export default {
         this.certCode = ''; // 证件号码
         this.emerType = ''; // 紧急程度
         this.appOrgCode = ''; // 门店代码
-        this.proName = ''; // 产品名称
+        // this.proName = ''; // 产品名称
         this.proCode = ''; //  产品代码
         this.proId = ''; // 产品id
         this.opinionFlag = ''; // 标志任务类型
