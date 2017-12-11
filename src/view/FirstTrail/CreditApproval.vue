@@ -4,7 +4,7 @@
     <div class="address-title">
       概要信息
     </div>
-    <el-form style="padding:0 20px;width:100%; height:150px; ">
+    <el-form style="padding:0 20px;width:100%; height:150px; " class="info">
       <el-form-item label="审批人:" class="item-column3">
         {{userName}}
       </el-form-item>
@@ -23,7 +23,7 @@
       <el-form-item label="产品名称:" class="item-column3">
         {{proName}}
       </el-form-item>
-      <el-form-item label="申请期限[月]" class="item-column3">
+      <el-form-item label="申请期限[月]:" class="item-column3">
         {{loanTerm}}
       </el-form-item>
     </el-form>
@@ -63,9 +63,11 @@
             </el-select>
           </el-form-item>
         </div>
+        <!--  :rules="rules" -->
         <div class="back-form-li">
           <!-- 回退主原因输入 02 -->
           <!-- 拒绝主原因选择 01 -->
+          <span style="color:red;display:inline-block;width:0px;float:left;">*</span>
           <el-form-item label="主原因:" class="item-column2" v-show="this.showFlag=='02'">
             <!-- <el-input v-model="mainReason"></el-input> -->
             <!-- 改成后台获取   filter-method     visible-change 下拉框 出现/隐藏时触发-->
@@ -82,15 +84,16 @@
             </el-select>
           </el-form-item>
           <!-- secondeReasons -->
+          <span style="color:red;display:inline-block;width:0px;float:left;">*</span>
           <el-form-item label="子原因:" class="item-column2">
-            <el-select v-model="secondaryReason" placeholder="请选择电话类型">
+            <el-select v-model="secondaryReason" >
               <el-option v-for="item in secondeReasons" :key="item.id" :label="item.reasonName" :value="item.reasonName">
               </el-option>
             </el-select>
           </el-form-item>
         </div>
         <div class="back-form-li" style="height:60px;line-height: 60px;padding-top:5px;">
-          <span style="color:red;display:inline-block;width:0px;float:left;">*</span>
+          <span style="color:red;display:inline-block;width:0px;float:left;position:relative;top:-8px;">*</span>
           <el-form-item label="原因说明:">
             <!--             <span style="color:red;display:inline-block;width:0px;float:right;margin-right: 25px;">*</span> -->
             <el-input type="textarea" :row="2" resize="none" v-model="reasonRemark"></el-input>
@@ -107,18 +110,23 @@
           </el-form-item>
         </div>
         <div class="back-form-li" style="text-align:right;padding:20px;">
+          <el-button type="" plain @click="showFlag=0,coverShow=false;">返回</el-button>
           <!-- 回退 -->
           <el-button type="primary" v-show="this.showFlag=='02'" @click="submitFn('02')">提交</el-button>
           <!-- 拒绝 -->
           <el-button type="primary" v-show="this.showFlag=='01'" @click="submitFn('01')">提交</el-button>
           <!-- 放弃 -->
           <el-button type="primary" v-show="this.showFlag=='07'" @click="submitFn('07')">提交</el-button>
-          <el-button type="" plain @click="showFlag=0,coverShow=false;">返回</el-button>
         </div>
       </el-form>
       <!-- 审批 03-->
-      <el-form v-show=" this.showFlag=='03'" class="back-form appro-form">
-        <div class="form-title" style="position:relative;" v-show="this.showFlag=='03'">
+      <!-- :model="spruleForm" :rules="sprules" ref="spruleForm" -->
+      <el-form  class="back-form appro-form" v-show="this.showFlag=='03'">
+        <!-- <div class="form-title" style="position:relative;" >
+          审批信息
+          <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
+        </div> -->
+        <div class="form-title" style="position:relative;" v-show=" this.showFlag=='03'">
           审批信息
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
         </div>
@@ -167,18 +175,21 @@
               <!-- </el-radio-group> -->
             </el-form-item>
           </div>
-          <div class="back-form-li">
+          <div class="back-form-li back-form-edit-li">
+            <!-- <span style="color:red;display:inline-block;width:0px;float:left;">*</span> -->
+            <!-- prop="verIncome" -->
+            <!-- spruleForm. -->
             <el-form-item label="月核实收入[元]:" class="item-column2">
               <el-input v-model="verIncome"></el-input>
             </el-form-item>
             <el-form-item label="批准产品" class="item-column2">
-              <el-select @change="proSlelecChange" v-model="proName" placeholder="请选择电话类型">
+              <el-select @change="proSlelecChange" v-model="proName">
                 <el-option v-for="item in products" :key="item.id" :label="item.proName" :value="item"></el-option>
                 <!-- <el-option v-for="item in secondeReasons" :key="item.id" :label="item.reasonName" :value="item.reasonName"> -->
               </el-select>
             </el-form-item>
           </div>
-          <div class="back-form-li">
+          <div class="back-form-li back-form-edit-li">
             <el-form-item label="批准期限[月]:" class="item-column2">
               <el-input v-model="ploanTerm"></el-input>
             </el-form-item>
@@ -214,8 +225,8 @@
           </div>
         </div>
         <div class="back-form-li" style="text-align:right;padding:10px;">
-          <el-button type="info" plain v-show="this.showFlag=='03'" @click="submitFn('03')">提交</el-button>
           <el-button type="info " plain @click="showFlag=0,coverShow=false;">返回</el-button>
+          <el-button type="primary" v-show="this.showFlag=='03'" @click="submitFn('03')">提交</el-button>
         </div>
       </el-form>
       <!-- 审批结论轨迹 -->
@@ -350,7 +361,7 @@ export default {
       custName: '',
       custNo: '',
       certType: '',
-      certCode: '',// 证件号码
+      certCode: '', // 证件号码
       emerType: '',
       appOrgCode: '',
       proName: '',
@@ -379,8 +390,8 @@ export default {
       mainId: '', // 主原因 id
       mainReasonTitle: '', // 主原因 title
       applicationInformationDetail: '', // 申请详情传过来的数据
-      taskInWaitting:'', // 
-      userInfo:'', // 登录信息
+      taskInWaitting: '', // 
+      userInfo: '', // 登录信息
       // 审批
       loanAmt: '', // 批准金额
       loanTerm: '', // 申请期限
@@ -405,11 +416,27 @@ export default {
       caculData: '', // 审批结论数据
       appConclusion: '', // 审批结论内容
       lcgjLoading: '', // 流程轨迹
-      userName:'', // 审批人
-      proName:'', // 产品名称
-      applySubNo:'', // 进件编号
-      appTypeTxt:'', // 申请类型
-      certTypeTxt:'', // 证件类型
+      userName: '', // 审批人
+      proName: '', // 产品名称
+      applySubNo: '', // 进件编号
+      appTypeTxt: '', // 申请类型
+      certTypeTxt: '', // 证件类型
+      // 表单必填
+      spruleForm:{verIncome:'',ploanTerm:'',ploanAmt:''},
+      sprules:{
+        verIncome:[
+          { required: true, message: '请输入活动名称', trigger: 'blur' },
+          { min: 3, max: 5, message: '', trigger: 'blur' }
+        ],
+        ploanTerm:[
+          { required: true, message: '请输入活动名称', trigger: 'blur' },
+          { min: 3, max: 5, message: '', trigger: 'blur' }
+        ],
+        ploanAmt:[
+          { required: true, message: '请输入活动名称', trigger: 'blur' },
+          { min: 3, max: 5, message: '', trigger: 'blur' }
+        ]
+      }
     }
   },
   mounted() {
@@ -512,6 +539,8 @@ export default {
       this.coverShow = true;
       switch (flag) {
         case '02':
+        console.log('020202020202020202')
+        console.log(this.showFlag);
           this.showFlag = '02';
           // 获取系统时间
           this.get('system/getSystemDate').then(res => {
@@ -521,6 +550,7 @@ export default {
           })
           break;
         case '01':
+        console.log('01010101010101')
           this.showFlag = '01';
           this.get('system/getSystemDate').then(res => {
             console.log(res)
@@ -529,6 +559,7 @@ export default {
           })
           break;
         case '07':
+          console.log('070707007')
           this.showFlag = '07';
           this.get('system/getSystemDate').then(res => {
             console.log(res)
@@ -537,6 +568,7 @@ export default {
           })
           break;
         case '03':
+          console.log('030303003030300330')
           this.showFlag = '03';
           // this.get('system/getSystemDate').then(res => {})
           // console.log(res)
@@ -572,10 +604,12 @@ export default {
 
           break;
         case 'spjl':
+        console.log('spspspspsppspspspspsp')
           this.showFlag = 'spjl';
           this.getSpjlList();
           break;
         case 'lcgj':
+          console.log('lclclcllclclclclcllclcl')
           this.showFlag = 'lcgj';
           // 取本地的 流程模版id
           this.processTemplateId = JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
@@ -984,7 +1018,7 @@ export default {
   width: 100%;
   height: 40px;
   font-size: 18px;
-  font-weight: bold;
+  /*font-weight: bold;*/
   background: #ededed;
   line-height: 40px;
   padding-left: 10px;
@@ -993,34 +1027,6 @@ export default {
   margin-top: 20px;
   overflow: hidden;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* 三列 */
@@ -1033,71 +1039,20 @@ export default {
 }
 
 .creditApproval-class .el-form-item {
-  height: 40px;
-  line-height: 40px;
+  height: 35px;
+  line-height: 35px;
+  margin: 0;
+  padding:0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* 按钮集合控件 */
 
 .creditApproval-class .btn-div {
   text-align: center;
+  width:80%;
+  float: left;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1109,34 +1064,6 @@ export default {
   color: #333;
   border: none;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1157,34 +1084,6 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -1192,33 +1091,6 @@ export default {
   float: left;
   margin: 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1232,36 +1104,8 @@ export default {
   margin-top: 300px;
   border-radius: 10px;
   overflow: hidden;
+  padding-bottom: 30px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* form-title */
@@ -1270,53 +1114,24 @@ export default {
   width: 100%;
   height: 40px;
   font-size: 18px;
-  font-weight: bold;
-  background: #ededed;
+  /*font-weight: bold;*/
+  /*background: #ededed;*/
+  background:#eef0f9;
   line-height: 40px;
   padding-left: 10px;
   display: block;
   margin-bottom: 10px;
-  /*margin-top: 20px;*/
   overflow: hidden;
+  font-size: 16px;
 }
 
 .creditApproval-class .back-form .back-form-li {
-  border-top: 0.5px solid #ededed;
+  /*border-top: 0.5px solid #ededed;*/
   margin: 10px 0px;
   line-height: 40px;
-  height: 40px;
-  padding: 0px 10px
+  height: 35px;
+  padding: 2px 10px 0 10px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* textarea */
@@ -1326,68 +1141,11 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 单独设置  label*/
 
 .creditApproval-class .back-form .el-form-item__label {
   width: 80px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* 弹窗页面 关闭按钮*/
@@ -1404,36 +1162,8 @@ export default {
 
 .creditApproval-class .el-tag .el-icon-close {
   right: 0px;
+  top: 5px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* 审批 表单 */
@@ -1457,35 +1187,6 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 审批结论轨迹 */
 
 .creditApproval-class .spjl-div {
@@ -1505,35 +1206,6 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -1541,36 +1213,6 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* 流程轨迹 */
@@ -1590,6 +1232,43 @@ export default {
 
 .creditApproval-class .el-input {
   width: inherit;
+  height: 35px;
+  line-height: 35px;
+}
+
+
+
+
+.creditApproval-class .el-select{
+  height: 100%;
+  line-height: 100%;
+}
+
+.creditApproval-class .el-input--suffix .el-input__inner{
+  margin:0;
+  padding:0;
+  padding-right: 30px;
+  text-indent: 5px;
+}
+
+
+/* 申请信息 */
+.creditApproval-class .info .el-form-item__content{
+  line-height: 40px;
+}
+
+.creditApproval-class .info .el-form-item__label{
+  width: 100px;
+}
+
+/* 报错提示 */
+.creditApproval-class .el-form-item__error{
+  top:-22px;
+  left:220px;
+}
+/* 有编辑框的 提示信息*/
+.creditApproval-class .back-form .back-form-edit-li{
+  margin-top: 20px !important;
 }
 
 </style>
