@@ -319,14 +319,18 @@ export default {
           creator_code: '' // 用户操作人编码 userCode
         };
       },
-      created() {
+      mounted() {
         // 获取到传进来的  applyId 申请单id
-        this.applyId = this.$route.query.applyId;
+        // this.applyId = this.$route.query.applyId;
         // 获取传进来的 操作人用户编码
-        this.creator_code = this.$route.query.userCode;
+        // this.creator_code = this.$route.query.userCode;
         // 测试数据
-        this.applyId = '111';
-        this.creator_code = 'ddyy';
+        // this.applyId = '111';
+        // this.creator_code = 'ddyy';
+        var applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
+        this.applyId = applicationInformationDetail.applyId;
+        var userInfo = JSON.parse(localStorage.getItem('userInf'));
+        this.creator_code = userInfo.userCode;
 
         // 获取匹配信息
         this.getOption();
@@ -334,9 +338,10 @@ export default {
       },
       methods: {
         getOption() {
+          console.log('匹配结论',this.applyId);
           // 获取匹配结论
           this.post('internalMatch/getInternalMatchOption', {
-            applyId: '111'
+            applyId: this.applyId
           }).then(res => {
             console.log(res);
             res.data!=null?this.audit_desc = res.data.auditDesc:'';
