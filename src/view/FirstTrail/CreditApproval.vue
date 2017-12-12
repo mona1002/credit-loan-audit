@@ -1219,7 +1219,7 @@ export default {
 .creditApproval-class .appro-form {
   width: 80%;
   height: 600px;
-  margin-top: 150px;
+  margin-top: 100px !important;
   height: auto;
   margin: 0 auto;
   padding: 10px;
@@ -1339,9 +1339,9 @@ export default {
 /*挂起*/
 .creditApproval-class .el-icon-check-hang {
   background:url(../../../static/images/guaqi.png);
-  width:20px;
-  height: 20px;
-  background-size: 20px;
+  width:30px;
+  height: 30px;
+  background-size: 30px;
   padding:0;
   margin:0;
   vertical-align: middle;
@@ -1350,9 +1350,9 @@ export default {
 /*回退*/
 .creditApproval-class .el-icon-check-back{
 background:url(../../../static/images/back.png);
-  width:20px;
-  height: 20px;
-  background-size: 20px;
+  width:30px;
+  height: 30px;
+  background-size: 30px;
   padding:0;
   margin:0;
   vertical-align: middle;
@@ -1361,9 +1361,9 @@ background:url(../../../static/images/back.png);
 /*拒绝*/
 .creditApproval-class .el-icon-check-reject{
 background:url(../../../static/images/jujue.png);
-  width:20px;
-  height: 20px;
-  background-size: 20px;
+  width:30px;
+  height: 30px;
+  background-size: 30px;
   padding:0;
   margin:0;
   vertical-align: middle;
@@ -1372,9 +1372,9 @@ background:url(../../../static/images/jujue.png);
 /*放弃*/
 .creditApproval-class .el-icon-check-giveup{
 background:url(../../../static/images/fangqi.png);
-  width:20px;
-  height: 20px;
-  background-size: 20px;
+  width:30px;
+  height: 30px;
+  background-size: 30px;
   padding:0;
   margin:0;
   vertical-align: middle;
@@ -1383,9 +1383,9 @@ background:url(../../../static/images/fangqi.png);
 /*审批*/
 .creditApproval-class .el-icon-check-appro{
 background:url(../../../static/images/appro.png);
-  width:20px;
-  height: 20px;
-  background-size: 20px;
+  width:30px;
+  height: 30px;
+  background-size: 30px;
   padding:0;
   margin:0;
   vertical-align: middle;
@@ -1394,9 +1394,9 @@ background:url(../../../static/images/appro.png);
 /*发起反欺诈*/
 .creditApproval-class .el-icon-check-start{
 background:url(../../../static/images/faqi.png);
-  width:20px;
-  height: 20px;
-  background-size: 20px;
+  width:30px;
+  height: 30px;
+  background-size: 30px;
   padding:0;
   margin:0;
   vertical-align: middle;
@@ -1405,9 +1405,9 @@ background:url(../../../static/images/faqi.png);
 /*审批结论轨迹*/
 .creditApproval-class .el-icon-check-spjl{
 background:url(../../../static/images/jielun.png);
-  width:20px;
-  height: 20px;
-  background-size: 20px;
+  width:30px;
+  height: 30px;
+  background-size: 30px;
   padding:0;
   margin:0;
   vertical-align: middle;
@@ -1416,9 +1416,9 @@ background:url(../../../static/images/jielun.png);
 /*流程轨迹*/
 .creditApproval-class .el-icon-check-lcgj{
 background:url(../../../static/images/liucheng.png);
-  width:20px;
-  height: 20px;
-  background-size: 20px;
+  width:30px;
+  height: 30px;
+  background-size: 30px;
   padding:0;
   margin:0;
   vertical-align: middle;
