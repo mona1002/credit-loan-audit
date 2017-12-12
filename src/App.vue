@@ -15,6 +15,18 @@
   export default {
     mounted(){
       // console.log(this.$refs.ddd)
+      
+// taskNodeName:
+
+// 初审审批
+// creditApp_firstTrial   
+
+// 终审审批
+// creditApp_finalTrial_one
+// creditApp_finalTrial_two
+// creditApp_finalTrial_three
+// creditApp_finalTrial_four
+// creditApp_finalTrial_five
 
     },
     mounted(){
