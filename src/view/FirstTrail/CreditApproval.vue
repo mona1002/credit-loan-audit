@@ -84,7 +84,7 @@
             </el-select>
           </el-form-item>
           <!-- secondeReasons -->
-          <span style="color:red;display:inline-block;width:0px;float:left;">*</span>
+          <!-- <span style="color:red;display:inline-block;width:0px;float:left;">*</span> -->
           <el-form-item label="子原因:" class="item-column2">
             <el-select v-model="secondaryReason">
               <el-option v-for="item in secondeReasons" :key="item.id" :label="item.reasonName" :value="item.reasonName">
@@ -494,7 +494,7 @@ export default {
     // 证件号码
     this.certCode = this.applicationInformationDetail.certCode;
     // 产品名称
-    this.proName = this.applicationInformationDetail.proName;
+    // this.proName = this.applicationInformationDetail.proName;
     // 申请期限 
     this.loanTerm = this.applicationInformationDetail.loanTerm;
 
@@ -608,7 +608,7 @@ export default {
               this.quotaData = res.data;
               // 单独处理 评分   =>  "评分:51.6"
               console.log(res.data.creditScore);
-              this.creditScore = res.data.creditScore.split(',')[0].substr(3,4);
+              this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
               console.log(this.creditScore);
               this.monthrentamt = res.data.monthrentamt;
               console.log(this.monthrentamt);
@@ -655,6 +655,25 @@ export default {
       switch (opinionFlag) {
         case '01':
           console.log("拒绝");
+          // 必填校验
+          // 主原因
+          if (!this.mainReason) {
+            this.$message({
+              message: '提示:请选择主原因!',
+              type: 'warning'
+            });
+
+            return;
+          }
+          // 原因说明
+          if (!this.reasonRemark) {
+            this.$message({
+              message: "提示:请填写原因说明!",
+              type: 'warning'
+            });
+            return;
+          }
+
           this.coverShow = false;
           this.showFlag = 0;
           // this.mainReason = this.mainReason; // 主原因同理
@@ -664,6 +683,32 @@ export default {
           break;
         case '02':
           console.log("回退");
+          // 进行必填校验
+          // 回退节点
+          if (!this.rollbackNodeName) {
+            this.$message({
+              messag: "提示:请选择回退节点!",
+              type: 'warning'
+            });
+            return;
+          }
+          // 主原因
+          if (!this.mainReason) {
+            this.$message({
+              message: "提示:请选择主原因!",
+              type: 'warning'
+            });
+            return;
+          }
+          // 原因说明
+          if (!this.reasonRemark) {
+            this.$message({
+              message: "提示:请填写原因说明!",
+              type: 'warning'
+            });
+            return;
+          }
+
           this.coverShow = false;
           this.showFlag = 0;
           // 回退节点 使用了监听,所以单独赋值
@@ -673,8 +718,25 @@ export default {
           // this.taskId = '180049';
           this.approvalFn();
           break;
+
         case '07':
           console.log("放弃");
+          // 主原因
+          if (!this.mainReason) {
+            this.$message({
+              message: "提示:请选择主原因!",
+              type: 'warning'
+            });
+            return;
+          }
+          // 原因说明
+          if (!this.reasonRemark) {
+            this.$message({
+              message: "提示:请填写原因说明!",
+              type: 'warning'
+            });
+            return;
+          }
           this.coverShow = false;
           this.showFlag = 0;
           // 放弃测试数据
@@ -683,22 +745,63 @@ export default {
           break;
         case '03':
           console.log("审批");
-          this.coverShow = false;
-          this.showFlag = 0;
-          // this.taskId = '182525';
+          // 校验必填项
           // 假如没有  核实可接受最高每期还款额 , 提示
           console.log(this.quotaData.monthrentamt);
           if (!this.quotaData.monthrentamt) {
-            this.$message("提示:请完善信审表中可承受的月还款金额");
+            this.$message({
+              message: "提示:请完善信审表中可承受的月还款金额",
+              type: 'warning'
+            });
             return;
-          } else {
-            // 保存审批信息
-            this.saveCreaduit();
-            break;
           }
+          // 月核实收入
+          if (!this.verIncome) {
+            this.$message({
+              message: "提示:请填月核实收入!",
+              type: 'warning'
+            });
+            return;
+          }
+          // 批准产品 id
+          if (!this.proId) {
+            this.$message({
+              message: "提示:请选择批准产品!",
+              type: 'warning'
+            });
+            return;
+          }
+          // 批准期限
+          if (!this.ploanTerm) {
+            this.$message({
+              message: "提示:请填写批准期限!",
+              type: 'warning'
+            });
+            return;
+          }
+          // 批准金额 ploanAmt
+          if (!this.ploanAmt) {
+            this.$message({
+              message: "提示:请填写批准金额!",
+              type: 'warning'
+            })
+            return;
+          }
+          // 意见说明 appConclusion
+          if (!this.appConclusion) {
+            this.$message({
+              message: "提示:请填写意见说明!",
+              type: 'warning'
+            })
+            return;
+          }
+          this.coverShow = false;
+          this.showFlag = 0;
+          // this.taskId = '182525';
+          // 保存审批信息
+          this.saveCreaduit();
+          break;
       }
-
-
     },
     // 回退/拒绝/放弃
     approvalFn() {
@@ -1062,6 +1165,11 @@ export default {
 
 
 
+
+
+
+
+
 /* 三列 */
 
 .creditApproval-class .item-column3 {
@@ -1082,6 +1190,11 @@ export default {
 
 
 
+
+
+
+
+
 /* 按钮集合控件 */
 
 .creditApproval-class .btn-div {
@@ -1089,6 +1202,11 @@ export default {
   width: 80%;
   float: left;
 }
+
+
+
+
+
 
 
 
@@ -1103,6 +1221,11 @@ export default {
   color: #333;
   border: none;
 }
+
+
+
+
+
 
 
 
@@ -1129,6 +1252,11 @@ export default {
 
 
 
+
+
+
+
+
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -1136,6 +1264,11 @@ export default {
   float: left;
   margin: 0;
 }
+
+
+
+
+
 
 
 
@@ -1154,6 +1287,11 @@ export default {
   overflow: hidden;
   padding-bottom: 30px;
 }
+
+
+
+
+
 
 
 
@@ -1188,6 +1326,11 @@ export default {
 
 
 
+
+
+
+
+
 /* textarea */
 
 .creditApproval-class .back-form .back-form-li .el-textarea {
@@ -1198,11 +1341,21 @@ export default {
 
 
 
+
+
+
+
+
 /* 单独设置  label*/
 
 .creditApproval-class .back-form .el-form-item__label {
   width: 80px;
 }
+
+
+
+
+
 
 
 
@@ -1224,6 +1377,11 @@ export default {
   right: 0px;
   top: 5px;
 }
+
+
+
+
+
 
 
 
@@ -1253,6 +1411,11 @@ export default {
 
 
 
+
+
+
+
+
 /* 审批结论轨迹 */
 
 .creditApproval-class .spjl-div {
@@ -1275,6 +1438,11 @@ export default {
 
 
 
+
+
+
+
+
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -1282,6 +1450,11 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
+
+
+
+
 
 
 
@@ -1327,6 +1500,11 @@ export default {
 
 
 
+
+
+
+
+
 /* 申请信息 */
 
 .creditApproval-class .info .el-form-item__content {
@@ -1336,6 +1514,11 @@ export default {
 .creditApproval-class .info .el-form-item__label {
   width: 100px;
 }
+
+
+
+
+
 
 
 
@@ -1350,11 +1533,21 @@ export default {
 
 
 
+
+
+
+
+
 /* 有编辑框的 提示信息*/
 
 .creditApproval-class .back-form .back-form-edit-li {
   margin-top: 20px !important;
 }
+
+
+
+
+
 
 
 /* icon */
@@ -1374,6 +1567,11 @@ export default {
 }
 
 
+
+
+
+
+
 /*回退*/
 
 .creditApproval-class .el-icon-check-back {
@@ -1386,6 +1584,11 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
+
 
 
 /*拒绝*/
@@ -1402,6 +1605,11 @@ export default {
 }
 
 
+
+
+
+
+
 /*放弃*/
 
 .creditApproval-class .el-icon-check-giveup {
@@ -1414,6 +1622,11 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
+
 
 
 /*审批*/
@@ -1430,6 +1643,11 @@ export default {
 }
 
 
+
+
+
+
+
 /*发起反欺诈*/
 
 .creditApproval-class .el-icon-check-start {
@@ -1444,6 +1662,11 @@ export default {
 }
 
 
+
+
+
+
+
 /*审批结论轨迹*/
 
 .creditApproval-class .el-icon-check-spjl {
@@ -1456,6 +1679,11 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
+
 
 
 /*流程轨迹*/
