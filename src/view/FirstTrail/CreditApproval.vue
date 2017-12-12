@@ -1349,7 +1349,7 @@ export default {
 }
 /*回退*/
 .creditApproval-class .el-icon-check-back{
-background:url(../../../static/images/guaqi.png);
+background:url(../../../static/images/back.png);
   width:20px;
   height: 20px;
   background-size: 20px;
