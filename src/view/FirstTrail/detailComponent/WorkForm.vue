@@ -124,7 +124,7 @@
           <el-input type="textarea" v-model="conclusion" :row="2" resize=none></el-input>
         </div>
       </li>
-      <li class="item-column1 submit-class" style="padding-right:15px;">
+      <li class="item-column1 submit-class">
         <el-button type="primary" @click="submitForm('form')">确定</el-button>
       </li>
     </ul>

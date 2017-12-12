@@ -1583,6 +1583,7 @@ export default {
 
 .phone-credit .submit-class {
   text-align: right;
+  width:59.3%;
 }
 
 /* 折叠面板头部背景色和icon */
