@@ -383,7 +383,7 @@ export default {
       spjlData: [], // 审批结论轨迹数据
       lcgjData: [], // 流程轨迹 lcgjData
       products: [], // 审批产品
-      baseProName:'',// 详情带过了的 产品名称
+      baseProName: '', // 详情带过了的 产品名称
       // 审批结论轨迹
       pageNum: 1,
       pageSize: 5,
@@ -424,8 +424,8 @@ export default {
       certTypeTxt: '', // 证件类型
       sproId: '', // 审批 proId
       quotaData: '', // 评分 月还款额
-      creditScore:'', // 单独处理的评分
-      monthrentamt:'', // 核实每月可接受最高还款额
+      creditScore: '', // 单独处理的评分
+      monthrentamt: '', // 核实每月可接受最高还款额
       // 表单必填
       spruleForm: { verIncome: '', ploanTerm: '', ploanAmt: '' },
       sprules: {
@@ -604,11 +604,15 @@ export default {
             appOrgId: this.appOrgId
           }).then(res => {
             console.log(res);
-            if (this.statusCode == '200')
+            if (res.statusCode == '200') {
               this.quotaData = res.data;
-            // 单独处理 评分   =>  "评分:51.6"
-              this.creditScore = this.quotaData.creditScore.split(':')[1]
-              this.monthrentamt = this.quotaData.monthrentamt;
+              // 单独处理 评分   =>  "评分:51.6"
+              console.log(res.data.creditScore);
+              this.creditScore = res.data.creditScore.split(',')[0].substr(3,4);
+              console.log(this.creditScore);
+              this.monthrentamt = res.data.monthrentamt;
+              console.log(this.monthrentamt);
+            }
           })
           /* 请求 
             产品
@@ -1057,6 +1061,7 @@ export default {
 
 
 
+
 /* 三列 */
 
 .creditApproval-class .item-column3 {
@@ -1076,6 +1081,7 @@ export default {
 
 
 
+
 /* 按钮集合控件 */
 
 .creditApproval-class .btn-div {
@@ -1083,6 +1089,7 @@ export default {
   width: 80%;
   float: left;
 }
+
 
 
 
@@ -1096,6 +1103,7 @@ export default {
   color: #333;
   border: none;
 }
+
 
 
 
@@ -1120,6 +1128,7 @@ export default {
 
 
 
+
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -1127,6 +1136,7 @@ export default {
   float: left;
   margin: 0;
 }
+
 
 
 
@@ -1144,6 +1154,7 @@ export default {
   overflow: hidden;
   padding-bottom: 30px;
 }
+
 
 
 
@@ -1176,6 +1187,7 @@ export default {
 
 
 
+
 /* textarea */
 
 .creditApproval-class .back-form .back-form-li .el-textarea {
@@ -1185,11 +1197,13 @@ export default {
 
 
 
+
 /* 单独设置  label*/
 
 .creditApproval-class .back-form .el-form-item__label {
   width: 80px;
 }
+
 
 
 
@@ -1210,6 +1224,7 @@ export default {
   right: 0px;
   top: 5px;
 }
+
 
 
 
@@ -1237,6 +1252,7 @@ export default {
 
 
 
+
 /* 审批结论轨迹 */
 
 .creditApproval-class .spjl-div {
@@ -1258,6 +1274,7 @@ export default {
 
 
 
+
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -1265,6 +1282,7 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
 
 
 
@@ -1308,6 +1326,7 @@ export default {
 
 
 
+
 /* 申请信息 */
 
 .creditApproval-class .info .el-form-item__content {
@@ -1320,6 +1339,7 @@ export default {
 
 
 
+
 /* 报错提示 */
 
 .creditApproval-class .el-form-item__error {
@@ -1329,98 +1349,124 @@ export default {
 
 
 
+
 /* 有编辑框的 提示信息*/
 
 .creditApproval-class .back-form .back-form-edit-li {
   margin-top: 20px !important;
 }
 
+
 /* icon */
+
+
 /*挂起*/
+
 .creditApproval-class .el-icon-check-hang {
-  background:url(../../../static/images/guaqi.png);
-  width:30px;
+  background: url(../../../static/images/guaqi.png);
+  width: 30px;
   height: 30px;
   background-size: 30px;
-  padding:0;
-  margin:0;
+  padding: 0;
+  margin: 0;
   vertical-align: middle;
   display: inline-block;
 }
+
+
 /*回退*/
-.creditApproval-class .el-icon-check-back{
-background:url(../../../static/images/back.png);
-  width:30px;
+
+.creditApproval-class .el-icon-check-back {
+  background: url(../../../static/images/back.png);
+  width: 30px;
   height: 30px;
   background-size: 30px;
-  padding:0;
-  margin:0;
+  padding: 0;
+  margin: 0;
   vertical-align: middle;
   display: inline-block;
 }
+
+
 /*拒绝*/
-.creditApproval-class .el-icon-check-reject{
-background:url(../../../static/images/jujue.png);
-  width:30px;
+
+.creditApproval-class .el-icon-check-reject {
+  background: url(../../../static/images/jujue.png);
+  width: 30px;
   height: 30px;
   background-size: 30px;
-  padding:0;
-  margin:0;
+  padding: 0;
+  margin: 0;
   vertical-align: middle;
   display: inline-block;
 }
+
+
 /*放弃*/
-.creditApproval-class .el-icon-check-giveup{
-background:url(../../../static/images/fangqi.png);
-  width:30px;
+
+.creditApproval-class .el-icon-check-giveup {
+  background: url(../../../static/images/fangqi.png);
+  width: 30px;
   height: 30px;
   background-size: 30px;
-  padding:0;
-  margin:0;
+  padding: 0;
+  margin: 0;
   vertical-align: middle;
   display: inline-block;
 }
+
+
 /*审批*/
-.creditApproval-class .el-icon-check-appro{
-background:url(../../../static/images/appro.png);
-  width:30px;
+
+.creditApproval-class .el-icon-check-appro {
+  background: url(../../../static/images/appro.png);
+  width: 30px;
   height: 30px;
   background-size: 30px;
-  padding:0;
-  margin:0;
+  padding: 0;
+  margin: 0;
   vertical-align: middle;
   display: inline-block;
 }
+
+
 /*发起反欺诈*/
-.creditApproval-class .el-icon-check-start{
-background:url(../../../static/images/faqi.png);
-  width:30px;
+
+.creditApproval-class .el-icon-check-start {
+  background: url(../../../static/images/faqi.png);
+  width: 30px;
   height: 30px;
   background-size: 30px;
-  padding:0;
-  margin:0;
+  padding: 0;
+  margin: 0;
   vertical-align: middle;
   display: inline-block;
 }
+
+
 /*审批结论轨迹*/
-.creditApproval-class .el-icon-check-spjl{
-background:url(../../../static/images/jielun.png);
-  width:30px;
+
+.creditApproval-class .el-icon-check-spjl {
+  background: url(../../../static/images/jielun.png);
+  width: 30px;
   height: 30px;
   background-size: 30px;
-  padding:0;
-  margin:0;
+  padding: 0;
+  margin: 0;
   vertical-align: middle;
   display: inline-block;
 }
+
+
 /*流程轨迹*/
-.creditApproval-class .el-icon-check-lcgj{
-background:url(../../../static/images/liucheng.png);
-  width:30px;
+
+.creditApproval-class .el-icon-check-lcgj {
+  background: url(../../../static/images/liucheng.png);
+  width: 30px;
   height: 30px;
   background-size: 30px;
-  padding:0;
-  margin:0;
+  padding: 0;
+  margin: 0;
   vertical-align: middle;
   display: inline-block;
 }
