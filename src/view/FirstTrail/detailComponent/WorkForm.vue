@@ -120,11 +120,11 @@
       </li>
       <li class="item-column1">
         <div class="left-title">调查结论</div>
-        <div>
+        <div class="textarea-class" style="width:805px;">
           <el-input type="textarea" v-model="conclusion" :row="2" resize=none></el-input>
         </div>
       </li>
-      <li class="item-column1 submit-class">
+      <li class="item-column1 submit-class" style="padding-right:15px;">
         <el-button type="primary" @click="submitForm('form')">确定</el-button>
       </li>
     </ul>

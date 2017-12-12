@@ -1497,9 +1497,9 @@ export default {
   margin: 0;
 }
 
-.phone-credit .item-column1 textarea {
+/*.phone-credit .item-column1 textarea {
   margin-left: 20px;
-}
+}*/
 
 /* 表单提交 */
 
@@ -1573,7 +1573,11 @@ export default {
 }
 
 .phone-credit .form-his li .textarea-class {
-  height: 100px;
+  height: auto;
+  float: left;
+  width: 795px;
+
+
 }
 
 

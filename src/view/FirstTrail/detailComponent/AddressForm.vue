@@ -298,13 +298,13 @@
       </li>
       <li class="item-column1">
         <div class="left-title">借款人爱好和品行:</div>
-        <div>
+        <div class="textarea-class">
           <el-input v-model="hobbyandBehave" type="textarea" :row="2" resize=none></el-input>
         </div>
       </li>
       <li class="item-column1">
         <div class="left-title">调查结论:</div>
-        <div>
+        <div class="textarea-class">
           <el-input v-model="conclusion" type="textarea" :row="2" resize=none></el-input>
         </div>
       </li>

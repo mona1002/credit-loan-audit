@@ -73,7 +73,7 @@
     <ul>
       <li class="item-column1">
         <div class="left-title">第三方查询信息</div>
-        <div>
+        <div class="textarea-class">
           <el-input type="textarea" v-model="thirdResult" :row="2" resize=none></el-input>
         </div>
       </li>
@@ -176,7 +176,7 @@
       </li>
       <li class="item-column1">
         <div class="left-title">调查结果</div>
-        <div>
+        <div class="textarea-class">
           <el-input type="textarea" v-model="conclusion" :row="2" resize=none></el-input>
         </div>
       </li>
