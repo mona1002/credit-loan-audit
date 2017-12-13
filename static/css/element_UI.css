@@ -682,7 +682,7 @@ position: relative
 /* 工作台导航 */
 .mheader .el-menu{
   background-color: transparent;
-  z-index: 10000;
+  z-index: 100;
 }
 .mheader .el-submenu__title{
   font-size:15px;
