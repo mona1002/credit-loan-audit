@@ -26,7 +26,7 @@
 			<el-table :data="datas" style="width: 100%" height="600" @row-click='goDetail' border>
 			    <el-table-column
 			      type="index" 
-			      label="序号"
+			      :index='1'
 			      width="50"
 			      >
 			    </el-table-column>
