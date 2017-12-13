@@ -39,8 +39,8 @@
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
-      <img src="../../../../static/images/0865C99F-2D8D-417E-A39D-1644063E5A84@1x.png" class="icon_pre " @click="pre">
-      <img src="../../../../static/images/C20F2D59-5CCD-4C61-B12F-874344861071@1x.png" class="icon_next" @click="next">
+      <img src="../../../../static/images/left.png" class="icon_pre " @click="pre">
+      <img src="../../../../static/images/pc1.png" class="icon_next" @click="next">
       <div class="BtnIcons">
         <img src="../../../../static/images/efw.png" @click="smaller ">
         <img src="../../../../static/images/net.png" @click="larger">
@@ -66,11 +66,11 @@
     <!--=================================  查询弹出层 ================================= -->
     <div v-show="dataa" class="posi">
       <!-- 折叠 -->
-      <h1>内匹配客户查询列表
+      <p>内匹配客户查询列表
         <i class="el-icon-close" style="color:white;fontSize:18px;right:13px;top:16px" @click="closeAlertSearch"></i>
-      </h1>
+      </p>
       <div class="posi_content">
-    <el-collapse v-model="activeNames">
+      <el-collapse v-model="activeNames">
         <el-collapse-item title="本人进件列表" name="1">
           <div>
             <!-- <i class="el-icon-edit" style="color:white;fontSize:18px"></i> -->
@@ -112,7 +112,7 @@
         </el-collapse-item>
       </el-collapse>
       </div>
-  
+
     </div>
     <!-- ================================= 结束================================= -->
     <!-- </div> -->
@@ -205,9 +205,9 @@
           console.log(res);
           // console.log(res.data)
           this.ListParent = res.data;
-          this.localInf.matchApplyId = id; //将此处获得的matchApplyId赋值给 this.localInf.matchApplyId,更改localInf的值，以便用更改后的值获取子节点
-          // console.log( this.localInf.matchApplyId)
-          //  this.localInf.matchApplyId="e0b51098-b24d-4211-8ae4-f08f657d7886";
+          this.localInf.applyId = id; //将此处获得的matchApplyId赋值给 this.localInf.applyId,更改localInf的值，以便用更改后的值获取子节点
+          // console.log( this.localInf.applyId)
+          //  this.localInf.applyId="e0b51098-b24d-4211-8ae4-f08f657d7886";
           console.log(id)
           this.dataa = false;
           this.custName = this.currentRow.matchApplyCustName;
@@ -218,9 +218,9 @@
       getChildrenList(id, ind, item) {
         console.log("获取子节点");
         // console.log(id)//父节点获取的id
-        // console.log( this.localInf.matchApplyId)
+        // console.log( this.localInf.applyId)
         this.post("/productArchive/getProductArchiveChildList", {
-          applyId: this.localInf.matchApplyId,
+          applyId: this.localInf.applyId,
           pid: id
         }).then(res => {
           console.log(res.data)
@@ -384,24 +384,22 @@
     },
     mounted() {
       // localStorage.setItem("userInf", JSON.stringify(userInf));
-      // console.log(JSON.parse(localStorage.getItem("taskInWaitting") ));
-            console.log("查询页面-影音资料左")
-      this.localInf = JSON.parse(localStorage.getItem("internalId"))
-      // localStorage.setItem("internalId", JSON.stringify({id:row.id ,matchApplyId:row.matchApplyId})
-      // console.log("localInf")
-      // console.log(this.localInf.matchApplyId)
+      console.log(" 影音资料左")
+      // console.log(JSON.parse(localStorage.getItem("applicationInformationDetail") ));
+      // this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
+      this.localInf = JSON.parse(localStorage.getItem("taskInWaitting"))//获取列表详情的id
+      // this.localInf = JSON.parse(localStorage.getItem("applicationInformationDetail"))   
+      console.log(this.localInf)
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
-        applyId: this.localInf.matchApplyId,
+        applyId: this.localInf.applyId,
         // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
         //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
-
       }).then(res => {
         // console.log(res.data)
         // console.log("ListParent")
         this.ListParent = res.data; //父节点数组 [{},{},{},{}]----获取父节点名称
         // console.log( this.ListParent )
-
       });
     }
   }
@@ -687,7 +685,7 @@
   /* --------------------------- */
 
   .posi {
-position: absolute;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -696,7 +694,7 @@ position: absolute;
      z-index: 28;
   }
 
-  .posi h1 {
+  .posi p {
     font-size: 16px;
     height: 48px;
     line-height: 48px;
@@ -705,6 +703,7 @@ position: absolute;
        
         color: #f8f9fd;
     text-align: center
+        
   }
  .posi_content {
     height: calc(100% - 48px);
