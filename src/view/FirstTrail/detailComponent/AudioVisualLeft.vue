@@ -69,48 +69,50 @@
       <p>内匹配客户查询列表
         <i class="el-icon-close" style="color:white;fontSize:18px;right:13px;top:16px" @click="closeAlertSearch"></i>
       </p>
-      <el-collapse v-model="activeNames">
-        <el-collapse-item title="本人进件列表" name="1">
-          <div>
-            <!-- <i class="el-icon-edit" style="color:white;fontSize:18px"></i> -->
-            <!-- <el-table :data="personal" height="250" border style="width: 100%" @change="handleChange">
+      <div class="posi_content">
+        <el-collapse v-model="activeNames">
+          <el-collapse-item title="本人进件列表" name="1">
+            <div>
+              <!-- <i class="el-icon-edit" style="color:white;fontSize:18px"></i> -->
+              <!-- <el-table :data="personal" height="250" border style="width: 100%" @change="handleChange">
             </el-table> -->
-            <!--  @dblclick="getParentList(currentRow.matchApplyId)" -->
-            <el-table :data="personal" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
-              style="width: 100%">
-              <el-table-column property="matchApplyCustName" label="客户名称">
-              </el-table-column>
-              <el-table-column property="matchApplySubNo" label="进件编号">
-              </el-table-column>
-              <el-table-column property="matchApplyDate" label="申请时间">
-              </el-table-column>
-              <el-table-column prop="matchApplyDate" label="业务状态">
-              </el-table-column>
-            </el-table>
-          </div>
-        </el-collapse-item>
-        <!-- 折叠2 -->
-        <el-collapse-item title="内匹客户进件" name="2">
-          <div>
-            <el-table :data="others" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
-              style="width: 100%">
-              <el-table-column property="matchApplyCustName" label="客户名称">
-              </el-table-column>
-              <el-table-column property="matchApplySubNo" label="进件编号">
-              </el-table-column>
-              <el-table-column property="matchApplyDate" label="申请时间">
-              </el-table-column>
-              <el-table-column prop="matchApplyDate" label="业务状态">
-              </el-table-column>
-            </el-table>
-          </div>
-          <!-- 确认  取消 按钮 -->
-          <div style="margin-top: 20px">
-            <!-- <el-button @click.native="getParentList(currentRow.matchApplyId)">确认</el-button> -->
-          </div>
-        </el-collapse-item>
+              <!--  @dblclick="getParentList(currentRow.matchApplyId)" -->
+              <el-table :data="personal" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
+                style="width: 100%">
+                <el-table-column property="matchApplyCustName" label="客户名称">
+                </el-table-column>
+                <el-table-column property="matchApplySubNo" label="进件编号">
+                </el-table-column>
+                <el-table-column property="matchApplyDate" label="申请时间">
+                </el-table-column>
+                <el-table-column prop="matchApplyDate" label="业务状态">
+                </el-table-column>
+              </el-table>
+            </div>
+          </el-collapse-item>
+          <!-- 折叠2 -->
+          <el-collapse-item title="内匹客户进件" name="2">
+            <div>
+              <el-table :data="others" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
+                style="width: 100%">
+                <el-table-column property="matchApplyCustName" label="客户名称">
+                </el-table-column>
+                <el-table-column property="matchApplySubNo" label="进件编号">
+                </el-table-column>
+                <el-table-column property="matchApplyDate" label="申请时间">
+                </el-table-column>
+                <el-table-column prop="matchApplyDate" label="业务状态">
+                </el-table-column>
+              </el-table>
+            </div>
+            <!-- 确认  取消 按钮 -->
+            <div style="margin-top: 20px">
+              <!-- <el-button @click.native="getParentList(currentRow.matchApplyId)">确认</el-button> -->
+            </div>
+          </el-collapse-item>
+        </el-collapse>
+      </div>
 
-      </el-collapse>
     </div>
     <!-- ================================= 结束================================= -->
     <!-- </div> -->
@@ -385,7 +387,7 @@
       console.log(" 影音资料左")
       // console.log(JSON.parse(localStorage.getItem("applicationInformationDetail") ));
       // this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
-      this.localInf = JSON.parse(localStorage.getItem("taskInWaitting"))//获取列表详情的id
+      this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //获取列表详情的id
       // this.localInf = JSON.parse(localStorage.getItem("applicationInformationDetail"))   
       console.log(this.localInf)
       // 父菜单
@@ -450,7 +452,7 @@
   .compareBtn {
     position: absolute;
     bottom: 18px;
-    right: 100px;
+    right:98px;
     color: #0077ff;
     border: 1px solid #0077ff;
     background: #eef0f9;
@@ -460,7 +462,7 @@
   .checkDetailBtn {
     position: absolute;
     bottom: 18px;
-    right: 10px;
+    right: 17px;
   }
   /*  放大、缩小 按钮 wrap */
 
@@ -689,7 +691,7 @@
     right: 0;
     bottom: 0;
     background: white;
-     z-index: 28;
+    z-index: 28;
   }
 
   .posi p {
@@ -697,11 +699,15 @@
     height: 48px;
     line-height: 48px;
     padding: 0 20px;
-        background: rgba(0, 119, 255, 0.75);
-       
-        color: #f8f9fd;
+    background: rgba(0, 119, 255, 0.75);
+
+    color: #f8f9fd;
     text-align: center
-        
+  }
+
+  .posi_content {
+    height: calc(100% - 48px);
+    overflow: auto;
   }
 
 </style>

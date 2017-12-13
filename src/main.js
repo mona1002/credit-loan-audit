@@ -3,10 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import store from './store/store'
+import "babel-polyfill"
 import qs from 'qs'
 import http from '@/util/http' 
-// import validation from '@/util/validation' 
+import validation from '@/util/validation' 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import $ from 'jquery'
@@ -22,7 +22,6 @@ Vue.use(http)
 new Vue({
   el: '#app',
   router,
-  store,
   template: '<App/>',
   components: { App }
 })

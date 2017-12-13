@@ -365,7 +365,7 @@
   .compareBtn {
     position: absolute;
     bottom: 18px;
-    right: 100px;
+    right: 98px;
     color: #0077ff;
     border: 1px solid #0077ff;
     background: #eef0f9;
@@ -375,7 +375,7 @@
   .checkDetailBtn {
     position: absolute;
     bottom: 18px;
-    right: 10px;
+    right: 17px;
   }
   /*  放大、缩小 按钮 wrap */
 
