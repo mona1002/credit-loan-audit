@@ -29,7 +29,7 @@
         </el-table-column>
       </el-table>
       <div class="block tool-bar">
-        <el-pagination @size-change="handleSizeChangeMobile" @current-change="handleCurrentChangeMobile" :current-page="MobilePageNum" :page-sizes="[5, 10, 15, 20]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="mobileData.totalRecord">
+        <el-pagination @size-change="handleSizeChangeMobile" @current-change="handleCurrentChangeMobile" :current-page="MobilePageNum" :page-sizes="[5, 10, 15, 20]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="mobileData.totalRecord" v-show="mobileData.recordList.length">
         </el-pagination>
       </div>
     </div>
@@ -59,7 +59,7 @@
         </el-table-column>
       </el-table>
       <div class="block tool-bar">
-        <el-pagination @size-change="handleSizeChangeFixTel" @current-change="handleCurrentChangeFixTel" :current-page="FixTelPageNum" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="fixTelData.totalRecord">
+        <el-pagination @size-change="handleSizeChangeFixTel" @current-change="handleCurrentChangeFixTel" :current-page="FixTelPageNum" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="fixTelData.totalRecord" v-show="fixTelData.recordList.length">
         </el-pagination>
       </div>
     </div>
@@ -89,7 +89,7 @@
         </el-table-column>
       </el-table>
       <div class="block tool-bar">
-        <el-pagination @size-change="handleSizeChangeCompany" @current-change="handleCurrentChangeCompany" :current-page="CompanyPageNum" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="workData.totalRecord">
+        <el-pagination @size-change="handleSizeChangeCompany" @current-change="handleCurrentChangeCompany" :current-page="CompanyPageNum" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="workData.totalRecord" v-show="workData.recordList.length">
         </el-pagination>
       </div>
     </div>
@@ -137,6 +137,7 @@ export default {
     console.log(this.applySubNo);
 
     this.workName = applicationInformationDetail.workName;
+    console.log(this.workName);
 
     // 测试数据
     // this.applySubNo = '111';
@@ -296,8 +297,10 @@ export default {
   components: {
     "internal-match-textarea": {
       template: '\
-            <el-form label-width="100px" class="demo-ruleForm">\
-            <el-form-item label="匹配结论" class="mark-title">\
+            <el-form label-width="10px" class="demo-ruleForm">\
+            <el-form-item  class="title-bar">\
+            <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">\
+        <span class="headFont">匹配结论</span>\
             </el-form-item>\
             <el-input type="textarea" v-model="audit_desc" class="mark-textarea" resize="none" :rows="5"></el-input>\
             <el-form-item class="mark-button">\
@@ -316,14 +319,18 @@ export default {
           creator_code: '' // 用户操作人编码 userCode
         };
       },
-      created() {
+      mounted() {
         // 获取到传进来的  applyId 申请单id
-        this.applyId = this.$route.query.applyId;
+        // this.applyId = this.$route.query.applyId;
         // 获取传进来的 操作人用户编码
-        this.creator_code = this.$route.query.userCode;
+        // this.creator_code = this.$route.query.userCode;
         // 测试数据
-        this.applyId = '111';
-        this.creator_code = 'ddyy';
+        // this.applyId = '111';
+        // this.creator_code = 'ddyy';
+        var applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
+        this.applyId = applicationInformationDetail.applyId;
+        var userInfo = JSON.parse(localStorage.getItem('userInf'));
+        this.creator_code = userInfo.userCode;
 
         // 获取匹配信息
         this.getOption();
@@ -331,13 +338,14 @@ export default {
       },
       methods: {
         getOption() {
+          console.log('匹配结论',this.applyId);
           // 获取匹配结论
           this.post('internalMatch/getInternalMatchOption', {
-            applyId: '111'
+            applyId: this.applyId
           }).then(res => {
             console.log(res);
-            this.audit_desc = res.data.auditDesc;
-            this.auditId = res.data.id;
+            res.data!=null?this.audit_desc = res.data.auditDesc:'';
+            res.data!=null?this.auditId = res.data.id:'';
           })
 
         },
@@ -403,6 +411,7 @@ export default {
   width: 100%;
   text-align: center;
   padding: 10px 0 0 10px;
+  margin-bottom: 10px;
 }
 
 
@@ -432,6 +441,8 @@ export default {
 .internalMatch-class .mark-textarea textarea {
   min-height: 100px;
   max-height: 100px;
+  width:800px;
+  margin-left: 50px;
 }
 
 
@@ -445,9 +456,10 @@ export default {
 /* 确认按钮 */
 
 .internalMatch-class .mark-button {
-  text-align: right;
+  text-align: left;
   margin-right: 0px;
   margin-top: 20px;
+  margin-left: 775px;
 }
 
 
@@ -518,6 +530,11 @@ export default {
 
 .internalMatch-class .headFont {
   font-size: 16px;
+}
+
+
+.internalMatch-class .el-table th>.cell{
+  text-align: center;
 }
 
 </style>

@@ -2,7 +2,8 @@
 <template>
   <div>
     <div class="address-title">
-      新增调查日志
+      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+      <span class="headFont">新增调查日志</span>
     </div>
     <ul>
       <li class="item-column3">
@@ -66,7 +67,8 @@
       </li>
     </ul>
     <div class="address-title">
-      录入住址电话调查信息
+      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+      <span class="headFont">录入住址电话调查信息</span>
     </div>
     <ul>
       <li class="item-column1">
@@ -296,13 +298,13 @@
       </li>
       <li class="item-column1">
         <div class="left-title">借款人爱好和品行:</div>
-        <div>
+        <div class="textarea-class">
           <el-input v-model="hobbyandBehave" type="textarea" :row="2" resize=none></el-input>
         </div>
       </li>
       <li class="item-column1">
         <div class="left-title">调查结论:</div>
-        <div>
+        <div class="textarea-class">
           <el-input v-model="conclusion" type="textarea" :row="2" resize=none></el-input>
         </div>
       </li>
@@ -318,7 +320,7 @@ export default {
     return {
       threeQueries: '',
       // custName: '',
-      phoneType: '',
+      phoneType: '01',
       // phoneNum: '',
       source: '',
       answer: '',
@@ -357,7 +359,7 @@ export default {
       phoneId: '' // 用来区分是添加 还是 修改 
     }
   },
-  props: ['custName', 'phoneNum', 'applyId'],
+  props: ['custName', 'phoneNum', 'applyId', 'formId'],
   mounted() {
     this.phoneType = '01'; // 住址电话
   },
@@ -416,8 +418,46 @@ export default {
           if (res.statusCode == '200') {
             this.phoneId = res.data.id;
             console.log(this.phoneId);
+
+            // 清数据
+            this.source == '';
+            this.answer == '';
+            this.checkStage == '';
+            this.sourceDesc == '';
+            this.thirdResult = '';
+            this.issameFam = '';
+            this.relBorrower = '';
+            this.checkWork = '';
+            this.maritalStatustxt = '';
+            this.maritalStatus = '';
+            this.checkAddr = '';
+            this.checkEstate = '';
+            this.otherIncome = '';
+            this.recentLargespend = '';
+            this.parents = '';
+            this.brother = '';
+            this.threeQueries = '';
+            this.exceptionState = '';
+            this.expenses = '';
+            this.checkStage = '';
+            this.checkHometel = '';
+            this.hobbyandBehave = '';
+            this.conclusion = '';
+            this.issameFamtxt = '';
+            this.relBorrowertxt = '';
+            this.checkWorktxt = '';
+            this.checkAddrtxt = '';
+            this.checkEstatetxt = '';
+            this.otherIncometxt = '';
+            this.recentlArgespendInfo = '';
+            this.parentsInfo = '';
+            this.brothertxt = '';
+            this.expensestxt = '';
+            this.checkHometeltxt = '';
+
             // 提交数据成功,广播事件 重新刷新列表
             this.$emit('updateList');
+            this.$emit('updateTree');
           }
         })
     }

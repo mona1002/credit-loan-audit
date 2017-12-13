@@ -3,6 +3,19 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 let state = {
+  First:{
+    LogIn:[],
+    // FirstWorkbench:[],
+    Workbench:"6789",
+    TaskinWaitting:[],
+    ApplacationInf:[],
+  },
+  Final:{
+
+  },
+  Anit:{
+
+  }
 
 };
 let mutations = {

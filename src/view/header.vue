@@ -5,7 +5,7 @@
       <img class="logo" src="/static/images/logo.png">
     </div> 
     <!-- 导航内容 -->
-    <div class="navContain">
+    <div class="navContain"  style="display:none" >
       <el-menu 
         router 
         unique-opened 
