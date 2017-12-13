@@ -78,7 +78,7 @@
         activeNames1: ['1'],
         activeNames2: ['1'],
         taskStatus: '', //任务状态
-        loginPass:[],
+        loginPass: [],
         userCode: '', //用户编码
         orgCode: '', //机构编码
         pageNum: '', //页数（第几页）
@@ -87,10 +87,10 @@
         taskNodeName: '', // 任务节点名称
         tableData: [],
         currentRow: null,
-        workbenchPass:{
-          processTemplateId:'',
-           taskStatus: "01",
-           taskNodeName:''
+        workbenchPass: {
+          processTemplateId: '',
+          taskStatus: "01",
+          taskNodeName: ''
         }
       }
     },
@@ -100,28 +100,55 @@
     methods: {
       more() {
         console.log("more")
+        this.$store.commit('workB', {
+          processTemplateId: "56789",
+          taskNodeName: "67uj"
+        })
+        console.log(this.$store.state.First)
       },
       handleCurrentChange(val) {
         console.log("我是表格")
-        // console.log(val)
-        this.currentRow = val;
-        this.workbenchPass.processTemplateId=val.processTemplateId;
-        this.workbenchPass.taskNodeName=val.taskNodeName;
-        localStorage.setItem("workbenchPass",JSON.stringify( this.workbenchPass));//工作台部分信息，带入workbenchPass
-        this.$router.push({
-          path: '/taskInWaitting',
-          // query: {
-          //   processTemplateId: val.processTemplateId,
-          //   taskNodeName: val.taskNodeName,
-          //   taskStatus: "01",
-          //   userCode: this.loginPass.userCode,
-          //   orgCode: this.loginPass.orgCode
-          // }
-        });
-        // localStorage.setItem("tableData", JSON.stringify(tableData));
-        // this.$router.push({path:'/taskInWaitting',query:'123'})
-        //  console.log(111, this.$route.query.picName)   接参数
+        console.log(val.taskNodeName)
+        if (val.taskNodeName == "creditApp_firstTrial") {
+          this.currentRow = val;
+          this.workbenchPass.processTemplateId = val.processTemplateId;
+          this.workbenchPass.taskNodeName = val.taskNodeName;
+          // this.$store.state
+          // console.log(this.$store.state.First.Workbench="ghjkld67890")
+          // this.$store.state.First.Workbench=this.workbenchPass;
+          // console.log(this.$store.state.First)
+
+          localStorage.setItem("workbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
+          this.$router.push({
+            path: '/taskInWaitting',
+            // query: {
+            //   processTemplateId: val.processTemplateId,
+            //   taskNodeName: val.taskNodeName,
+            //   taskStatus: "01",
+            //   userCode: this.loginPass.userCode,
+            //   orgCode: this.loginPass.orgCode
+            // }
+          });
+          // localStorage.setItem("tableData", JSON.stringify(tableData));
+          // this.$router.push({path:'/taskInWaitting',query:'123'})
+          //  console.log(111, this.$route.query.picName)   接参数
+        } else if (val.taskNodeName == "creditApp_finalTrial_one" || val.taskNodeName == "creditApp_finalTrial_two" ||
+          val.taskNodeName == "creditApp_finalTrial_three" || val.taskNodeName == "creditApp_finalTrial_four" || val.taskNodeName ==
+          "creditApp_finalTrial_five") {
+          this.currentRow = val;
+          this.workbenchPass.processTemplateId = val.processTemplateId;
+          this.workbenchPass.taskNodeName = val.taskNodeName;
+          localStorage.setItem("FinalWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
+          // this.$router.push({
+          //   path: '/taskInWaitting',
+          // });
+        }
+
+
       }
+
+    },
+    computed: {
 
     },
     mounted() {
@@ -134,7 +161,7 @@
       // this.orgCode = this.$route.query.orgCode;
       // console.log(this.userCode + "================" + this.orgCode)
       // this.$route.query.picName接参数 
-      this.loginPass=JSON.parse(localStorage.getItem('userInf'));
+      this.loginPass = JSON.parse(localStorage.getItem('userInf'));
       this.post("/workFlowTaskQuery/getTaskProfile", {
         taskStatus: "01",
         userCode: this.loginPass.userCode,
