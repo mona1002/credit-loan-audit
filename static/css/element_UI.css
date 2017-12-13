@@ -231,6 +231,10 @@ height: 40px;
 /* .workbench .el-icon-arrow-right:before {
   content: "";
 } */
+/* 工作台 待办任务 hover 小手 */
+.workbench .el-table tr:hover{
+  cursor: pointer;
+}
 /* 工作台 折叠面板 头部 箭头 */
 .workbench .el-collapse-item__header .el-collapse-item__arrow {
   line-height: 40px;
