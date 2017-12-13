@@ -51,6 +51,13 @@ export default {
       }).then(res => {
         console.log(res);
         console.log(res.statusCode)
+        if (res.statusCode != '200') {
+          this.$message({
+            message: res.msg,
+            type: 'warning'
+          })
+          return;
+        }
         if (res.statusCode == '200') {
 
 

@@ -830,11 +830,13 @@ export default {
       }).then(res => {
         console.log(res);
         console.log(this);
+
         if (res.statusCode != '200') {
-          // this.warnShow = true;
-          // this.warnMsg = res.msg;
-          this.$message(res.msg);
-          // this.$message(res.data.msg);
+          this.$message({
+            message: res.msg,
+            type: 'warning'
+          })
+          return;
         }
         if (res.statusCode == '200') {
           // this.taskId = '';
@@ -897,6 +899,13 @@ export default {
         taskId: this.taskId, // 任务id
       }).then(res => {
         console.log(res);
+        if (res.statusCode != '200') {
+          this.$message({
+            message: res.msg,
+            type: 'warning'
+          })
+          return;
+        }
         if (res.statusCode == '200') {
           this.$message(res.msg);
 
@@ -1170,6 +1179,8 @@ export default {
 
 
 
+
+
 /* 三列 */
 
 .creditApproval-class .item-column3 {
@@ -1185,6 +1196,8 @@ export default {
   margin: 0;
   padding: 0;
 }
+
+
 
 
 
@@ -1213,6 +1226,8 @@ export default {
 
 
 
+
+
 /* 信审审批 - btn*/
 
 .creditApproval-class .credit-btn {
@@ -1221,6 +1236,8 @@ export default {
   color: #333;
   border: none;
 }
+
+
 
 
 
@@ -1257,6 +1274,8 @@ export default {
 
 
 
+
+
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -1264,6 +1283,8 @@ export default {
   float: left;
   margin: 0;
 }
+
+
 
 
 
@@ -1287,6 +1308,8 @@ export default {
   overflow: hidden;
   padding-bottom: 30px;
 }
+
+
 
 
 
@@ -1331,6 +1354,8 @@ export default {
 
 
 
+
+
 /* textarea */
 
 .creditApproval-class .back-form .back-form-li .el-textarea {
@@ -1346,11 +1371,15 @@ export default {
 
 
 
+
+
 /* 单独设置  label*/
 
 .creditApproval-class .back-form .el-form-item__label {
   width: 80px;
 }
+
+
 
 
 
@@ -1377,6 +1406,8 @@ export default {
   right: 0px;
   top: 5px;
 }
+
+
 
 
 
@@ -1416,6 +1447,8 @@ export default {
 
 
 
+
+
 /* 审批结论轨迹 */
 
 .creditApproval-class .spjl-div {
@@ -1443,6 +1476,8 @@ export default {
 
 
 
+
+
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -1450,6 +1485,8 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
+
 
 
 
@@ -1505,6 +1542,8 @@ export default {
 
 
 
+
+
 /* 申请信息 */
 
 .creditApproval-class .info .el-form-item__content {
@@ -1514,6 +1553,8 @@ export default {
 .creditApproval-class .info .el-form-item__label {
   width: 100px;
 }
+
+
 
 
 
@@ -1538,11 +1579,15 @@ export default {
 
 
 
+
+
 /* 有编辑框的 提示信息*/
 
 .creditApproval-class .back-form .back-form-edit-li {
   margin-top: 20px !important;
 }
+
+
 
 
 
@@ -1572,6 +1617,8 @@ export default {
 
 
 
+
+
 /*回退*/
 
 .creditApproval-class .el-icon-check-back {
@@ -1584,6 +1631,8 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
 
 
 
@@ -1610,6 +1659,8 @@ export default {
 
 
 
+
+
 /*放弃*/
 
 .creditApproval-class .el-icon-check-giveup {
@@ -1622,6 +1673,8 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
 
 
 
@@ -1648,6 +1701,8 @@ export default {
 
 
 
+
+
 /*发起反欺诈*/
 
 .creditApproval-class .el-icon-check-start {
@@ -1667,6 +1722,8 @@ export default {
 
 
 
+
+
 /*审批结论轨迹*/
 
 .creditApproval-class .el-icon-check-spjl {
@@ -1679,6 +1736,8 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
 
 
 
