@@ -28,7 +28,6 @@
 					      <el-table-column
 					        type="index"
 					      	:index="1"
-					      	label="序号" 
 					      	min-width="50"
 					      	>
 					      </el-table-column>
