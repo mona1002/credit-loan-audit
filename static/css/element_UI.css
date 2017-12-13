@@ -66,7 +66,7 @@ height: 40px;
   color: #475669;
   font-size: 14px;
 }
-/*申请信息 折叠面板头部背景色 */
+/*申请信息详情 折叠面板头部背景色 */
 .applicationInformationDetail .el-collapse-item__header{
     background:#eef0f9;
     border:1px solid #e6eaee;
@@ -82,19 +82,41 @@ height: 40px;
     overflow: hidden;
   }
 
-/*申请信息 表格 */
+/*申请信息详情 表格 */
 .applicationInformationDetail .el-table th{
-  text-align: center;
+ /*  text-align: center; */
   font-weight: 400;
   color: #1f2d3d;
   font-size: 14px;
 }
 .applicationInformationDetail .el-table__body-wrapper .el-table__body td{
-  text-align: center;
+  /* text-align: center; */
   font-weight: 400;
   color: #666666;
   font-size: 14px;
 }
+/* 房产信息 邮政编码、产权比例 居中 */
+.applicationInformationDetail .house.el-table th:nth-of-type(1),.applicationInformationDetail .house.el-table th:nth-of-type(7),.applicationInformationDetail .house.el-table th:nth-of-type(8){
+ text-align: center;
+}
+.applicationInformationDetail .house .el-table__body-wrapper .el-table__body td:nth-of-type(1),.applicationInformationDetail .house .el-table__body-wrapper .el-table__body td:nth-of-type(7),.applicationInformationDetail .house .el-table__body-wrapper .el-table__body td:nth-of-type(8){
+  text-align: center;
+}
+/* 车辆信息 序号、购买时间 居中 */
+.applicationInformationDetail .car.el-table th:nth-of-type(1),.applicationInformationDetail .car.el-table th:nth-of-type(12){
+ text-align: center;
+}
+.applicationInformationDetail .car .el-table__body-wrapper .el-table__body td:nth-of-type(1),.applicationInformationDetail .car .el-table__body-wrapper .el-table__body td:nth-of-type(12){
+  text-align: center;
+}
+/* 联系人信息 序号 居中 */
+.applicationInformationDetail .people.el-table th:nth-of-type(1){
+ text-align: center;
+}
+.applicationInformationDetail .people .el-table__body-wrapper .el-table__body td:nth-of-type(1){
+  text-align: center;
+}
+
 /*申请信息 表格去掉overflow:hidden; */
 .applicationInformationDetail .el-collapse-item__wrap{
   overflow: inherit;
@@ -105,6 +127,10 @@ height: 40px;
   font-size: 14px;
   padding-bottom: 0px;
 }
+
+
+
+
 /*借款人资料 折叠面板头部背景色 */
 .borrowerInformation .el-collapse-item__header{
     background:#eef0f9;
