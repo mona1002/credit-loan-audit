@@ -8,8 +8,8 @@ var host = location.hostname,
   developmentEnv = "10.1.26.203", // 开发环境
   // developmentEnv = "10.1.26.50", // 刘礼飞本地环境
   testEnv = "10.1.26.200", // 测试环境
-  releaseEnv = "10.1.26.200", // 准生产环境
-  productionEnv = "10.1.26.200"; // 生产环境
+  releaseEnv = "10.1.26.204", // 准生产环境
+  productionEnv = "10.1.26.205"; // 生产环境
 
 if (host === productionEnv) {
   host = productionEnv;
