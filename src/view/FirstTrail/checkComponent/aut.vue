@@ -74,8 +74,8 @@
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <!-- <img src="http://img.1ppt.com/uploads/allimg/1606/4_160609151925_1.jpg"> -->
-      <img src="../../../../static/images/0865C99F-2D8D-417E-A39D-1644063E5A84@1x.png" class="icon_pre " @click="pre">
-      <img src="../../../../static/images/C20F2D59-5CCD-4C61-B12F-874344861071@1x.png" class="icon_next" @click="next">
+      <img src="../../../../static/images/pc1.png" class="icon_pre " @click="pre">
+      <img src="../../../../static/images/pc1.png" class="icon_next" @click="next">
       <div class="BtnIcons">
         <!-- <i class="el-icon-arrow-left position_and_size icon_pre" @click="pre"></i>
       <i class="el-icon-arrow-right position_and_size icon_next" @click="next"></i>

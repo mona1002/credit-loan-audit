@@ -19,7 +19,9 @@ let state = {
 
 };
 let mutations = {
-
+workB(state,payload){
+  state.First.Workbench=payload;
+}
 };
 
 let getters = {

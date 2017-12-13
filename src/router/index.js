@@ -8,6 +8,8 @@ import myHead from '@/view/header'
 import test from '@/view/test'
 import new2 from '@/view/new2'
 import new1 from '@/view/new1'
+import testCF from '@/view/testCF'
+
 
 import HelloWorld from '@/view/HelloWorld'
 /*初审审批*/
@@ -88,6 +90,10 @@ const routes = [{
 {
   path: '/test',
   component: test
+},
+{
+  path: '/testCF',
+  component: testCF
 },
 /*初审审批*/
 {
