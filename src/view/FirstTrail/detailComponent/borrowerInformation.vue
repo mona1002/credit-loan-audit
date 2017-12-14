@@ -10,10 +10,10 @@
 					    </div>
 				      	<div class="remarkIcon right">
 				      		<span @click="add_home" class="rightSpan">
-				      			<i class="el-icon-circle-plus icon"></i><span>添加</span>
+				      			<img src="../../../../static/images/add.png" class="icon"><span>添加</span>
 				      		</span>
 							<span @click="delet_home" class="rightSpan">
-								<i class="el-icon-remove icon"></i><span>删除</span>
+								<img src="../../../../static/images/delete.png" class="icon"><span>删除</span>
 							</span>
 						</div>
 				    </template>
@@ -22,6 +22,7 @@
 				    <el-table
 				      :data="borestateList"
 				      style="width: 100%"
+				      class="house"
 				      highlight-current-row
 				      border
 				      @current-change="handleCurrentChange">
@@ -34,7 +35,7 @@
 					      <el-table-column
 					        label="房产类型" 
 					        prop="estateType"
-					        min-width="190">
+					        min-width="130">
 					        <template slot-scope="scope">
 					        	<span class="must">*</span>
 						        <el-select v-model="scope.row.estateType" placeholder="请选择">
@@ -50,7 +51,7 @@
 					      <el-table-column
 					        prop="propertyType"
 					        label="产权性质"
-					        min-width="140">
+					        min-width="100">
 					        <template slot-scope="scope">
 						        <el-select v-model="scope.row.propertyType" placeholder="请选择">
 								    <el-option
@@ -152,10 +153,10 @@
 					    </div>
 				      	<div class="remarkIcon right">
 				      		<span @click="add_vehicle" class="rightSpan">
-				      			<i class="el-icon-circle-plus icon"></i><span>添加</span>
+				      			<img src="../../../../static/images/add.png" class="icon"></i><span>添加</span>
 				      		</span>
 							<span @click="delet_vehicle" class="rightSpan">
-								<i class="el-icon-remove icon"></i><span>删除</span>
+								<img src="../../../../static/images/delete.png" class="icon"><span>删除</span>
 							</span>
 						</div>
 				    </template>
@@ -304,10 +305,10 @@
 					    </div>
 				      	<div class="remarkIcon right">
 				      		<span @click="add_card" class="rightSpan">
-				      			<i class="el-icon-circle-plus icon"></i><span>添加</span>
+				      			<img src="../../../../static/images/add.png" class="icon"></i><span>添加</span>
 				      		</span>
 							<span @click="delet_card" class="rightSpan">
-								<i class="el-icon-remove icon"></i><span>删除</span>
+								<img src="../../../../static/images/delete.png" class="icon"><span>删除</span>
 							</span>
 						</div>
 				    </template>
@@ -477,13 +478,13 @@
 				    </div>
 			      	<div class="remarkIcon right">
 			      		<span @click="add_loanDetail" class="rightSpan">
-			      			<i class="el-icon-circle-plus icon"></i><span>添加</span>
+			      			<img src="../../../../static/images/add.png" class="icon"></i><span>添加</span>
 			      		</span>
 						<span @click="delet_loanDetail" class="rightSpan">
-							<i class="el-icon-remove icon"></i><span>删除</span>
+							<img src="../../../../static/images/delete.png" class="icon"><span>删除</span>
 						</span>
 						<span @click="countNum" class="rightSpan">
-							<i class="el-icon-remove icon"></i><span>统计</span>
+							<img src="../../../../static/images/delete.png" class="icon"><span>统计</span>
 						</span>
 					</div>
 			    </template>
@@ -765,10 +766,10 @@
 				    </div>
 			      	<div class="remarkIcon right">
 			      		<span @click="add_turnover" class="rightSpan">
-			      			<i class="el-icon-circle-plus icon"></i><span>添加</span>
+			      			<img src="../../../../static/images/add.png" class="icon"></i><span>添加</span>
 			      		</span>
 						<span @click="delet_turnover" class="rightSpan">
-							<i class="el-icon-remove icon"></i><span>删除</span>
+							<img src="../../../../static/images/delete.png" class="icon"><span>删除</span>
 						</span>
 					</div>
 			    </template>
@@ -859,7 +860,7 @@
 				        label="计算"
 				        min-width="130">
 				        <template slot-scope="scope">
-						   <el-button @click="counted(scope.row)" type="text" size="small"><i class="el-icon el-icon-circle-plus"></i></el-button>
+						   <el-button @click="counted(scope.row)" type="text" size="small"><img src="../../../../static/images/jielun.png" class="icon"></el-button>
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -1883,7 +1884,7 @@
 		height: 100%;
 		background-color: #fafbfc;
 		font-size: 14px;
-		min-width: 1366px;
+		min-width: 1258px;
 	}
 	.left{
 		float: left;
@@ -1896,8 +1897,19 @@
 	.right .rightSpan{
 		margin-left: 10px;
 	}
+	.right .rightSpan img{
+		padding-top: 5px;
+		float: left;
+	}
+	.right .rightSpan:nth-of-type(2) img{
+		padding-left: 24px;
+	}
+	.right .rightSpan:nth-of-type(3) img{
+		padding-left: 24px;
+	}
 	.right .rightSpan span{
 		margin-left: 10px;
+		float: left;
 	}
 	.containDiv{
 		clear: both;

@@ -27,13 +27,14 @@
 			    <el-table-column
 			      type="index" 
 			     :index="1"
+			     label="序号"
 			      width="50"
 			      >
 			    </el-table-column>
 			    <el-table-column
 			      prop="taskType"
 			      label="任务类型"
-			      min-width="80"
+			      min-width="110"
 			      >
 			    </el-table-column>
 			    <el-table-column
@@ -44,7 +45,7 @@
 			    <el-table-column
 			      prop="applySubNo"
 			      label="进件编号"
-			      min-width="160">
+			      min-width="170">
 			    </el-table-column>
 			    <el-table-column
 			      prop="appDate"
@@ -59,7 +60,7 @@
 			    <el-table-column
 			      prop="certCode"
 			      label="证件号码"
-			      min-width="160">
+			      min-width="170">
 			    </el-table-column>
 			    <el-table-column
 			      prop="appOrgCode"
@@ -74,7 +75,7 @@
 			    <el-table-column
 			      prop="activationTime"
 			      label="进入本环节时间"
-			      min-width="150">
+			      min-width="170">
 			    </el-table-column>
 			    <el-table-column
 			      prop="completeTime"

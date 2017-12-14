@@ -778,7 +778,7 @@
 				      <el-table-column
 				        prop="mobile"
 				        label="手机号码"
-				        min-width="110">
+				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
 				        prop="homeTel"
@@ -804,8 +804,7 @@
 				        prop="workName"
 				        label="单位名称"
 				        show-overflow-tooltip
-				        min-width="120"
-				        show-overflow-tooltip>
+				        min-width="180">
 				      </el-table-column>
 				      <el-table-column
 				        prop="workTel"
@@ -816,8 +815,7 @@
 				      <el-table-column
 				        prop="workAddr"
 				        label="地址"
-				        min-width="120"
-				        show-overflow-tooltip
+				        min-width="200"
 				        show-overflow-tooltip>
 				      </el-table-column>
 				      <!-- 单位地址没有 -->

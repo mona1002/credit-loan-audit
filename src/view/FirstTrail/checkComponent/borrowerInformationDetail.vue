@@ -12,11 +12,11 @@
 			    <el-table
 			      :data="borestateList"
 			      style="width: 100%"
+			      class="house"
 			      border>
 				      <el-table-column
 				        type="index"
 				      	:index='1'
-				      	label="序号"
 				      	min-width="50" >
 				      </el-table-column>
 				      <el-table-column
@@ -88,11 +88,11 @@
 			    <el-table
 			      :data="carInfoList"
 			      style="width: 100%"
+			      class="car"
 			      border>
 				      <el-table-column
 				        type="index"
-				      	:index='1'
-				      	label="序号" 
+				      	:index='1' 
 				      	min-width="50">
 				      </el-table-column>
 				      <el-table-column
@@ -162,11 +162,11 @@
 			    <el-table
 			      :data="cardDetList"
 			      style="width: 100%"
+			      class="card"
 			      border>
 				      <el-table-column
 				        type="index"
-				      	:index='1'
-				      	label="序号" 
+				      	:index='1' 
 				      	min-width="50">
 				      </el-table-column>
 				      <el-table-column
@@ -265,11 +265,11 @@
 			    <el-table
 			      :data="loanDetailList"
 			      style="width: 100%"
+			      class="loan"
 			      border>
 				      <el-table-column
 				        type="index"
-				      	:index='1'	
-				      	label="序号" 
+				      	:index='1'	 
 				      	min-width="50">
 				      </el-table-column>
 				      <el-table-column
@@ -436,11 +436,11 @@
 			    <el-table
 			      :data="incomeList"
 			      style="width: 100%"
+			      class="income"
 			      border>
 				      <el-table-column
 				        type="index"
-				      	:index='1'
-				      	label="序号" 
+				      	:index='1' 
 				      	min-width='50'>
 				      </el-table-column>
 				      <el-table-column

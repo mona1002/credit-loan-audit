@@ -16,24 +16,24 @@
 			    <el-table-column
 			      prop="remarkTypeTxt"
 			      label="备注类型"
-			      min-width="60"
+			      min-width="70"
 			      >
 			    </el-table-column>
 			    <el-table-column
 			      prop="remarker"
 			      label="备注人"
-			      min-width="60">
+			      min-width="120">
 			    </el-table-column>
 			    <el-table-column
 			      prop="remarkTime"
 			      label="备注时间"
 			      sortable
-			      min-width="80">
+			      min-width="120">
 			    </el-table-column>
 			    <el-table-column
 			      prop="remark"
 			      label="备注"
-			      min-width="200"
+			      min-width="600"
 			      show-overflow-tooltip>
 			    </el-table-column>
 		    </el-table>
@@ -78,6 +78,7 @@
 			width: 100%;
 			height: 100%;
 			background-color: #fafbfc;
+			min-width: 1258px;
 		}
 	.remarkDetial .remarkHead{
 		opacity:0.75;
