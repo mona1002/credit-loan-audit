@@ -498,11 +498,11 @@
 			    <el-table
 			      :data="accepCusEstates"
 			      style="width: 100%"
-			      border>
+			      border
+			      class="house">
 				      <el-table-column
 				        type="index"
 				      	:index='1'
-				      	label="序号" 
 				      	min-width="50">
 				      </el-table-column>
 				      <el-table-column
@@ -571,17 +571,17 @@
 			    <el-table
 			      :data="accepCusCarInfos"
 			      style="width: 100%"
-			      border>
+			      border
+			      class="car">
 				      <el-table-column
 				        type="index"
 				      	:index='1'
-				      	label="序号" 
 				      	min-width="50">
 				      </el-table-column>
 				      <el-table-column
 				        prop="carPrice"
 				        label="车辆购置价[元]"
-				        min-width="100">
+				        min-width="110">
 				      </el-table-column>
 				      <el-table-column
 				        prop="isYearCheckTxt"
@@ -752,11 +752,12 @@
 			    <el-table
 			      :data="accepCusRelations"
 			      style="width: 100%"
-			      highlight-current-row>
+			      highlight-current-row
+			      border
+			      class="people">
 				      <el-table-column
 				        type="index"
 				      	:index='1'
-				      	label="序号" 
 				      	min-width="50">
 				      </el-table-column>
 				      <el-table-column
@@ -777,7 +778,7 @@
 				      <el-table-column
 				        prop="mobile"
 				        label="手机号码"
-				        min-width="100">
+				        min-width="110">
 				      </el-table-column>
 				      <el-table-column
 				        prop="homeTel"
@@ -802,6 +803,7 @@
 				      <el-table-column
 				        prop="workName"
 				        label="单位名称"
+				        show-overflow-tooltip
 				        min-width="120"
 				        show-overflow-tooltip>
 				      </el-table-column>
@@ -815,6 +817,7 @@
 				        prop="workAddr"
 				        label="地址"
 				        min-width="120"
+				        show-overflow-tooltip
 				        show-overflow-tooltip>
 				      </el-table-column>
 				      <!-- 单位地址没有 -->

@@ -6,13 +6,13 @@
 			<span class="titleText">备注信息</span>
 			<span class="iconContainer">
 		        <span class="icon-item" @click="add">
-		          <i class="el-icon-circle-plus icon"></i><span class="el-icon-text">添加</span>
+		          <img src="../../../../static/images/add.png" class="icon"><span class="span-text">添加</span>
 		        </span>
 		        <span class="icon-item" @click="change">
-		         <i class="el-icon-edit icon"></i><span class="el-icon-text">修改</span>
+		         <img src="../../../../static/images/change.png" class="icon"><span class="span-text">修改</span>
 		        </span>
 		        <span class="icon-item" @click="delet">
-		          <i class="el-icon-remove icon"></i><span class="el-icon-text">删除</span>
+		         <img src="../../../../static/images/delete.png" class="icon"><span class="span-text">删除</span>
 		        </span>
 		    </span>
 		</div>
@@ -310,33 +310,33 @@
 	.remark .remarkHead .titleText{
 		font-size: 16px;
 		color: #1f2d3d;
-		/* text-align: left;
-		margin: 15px 25px 13px; */
 		display: inline-block;
-		/* height: 22px;
-		width: 130px;
-		line-height: 22px; */
 		font-weight: 400;
 	}
 	.remark .remarkHead .iconContainer{
 	    float: right;
+	    display: inline-block;
+	    height: 40px;
 	    line-height: 40px;
 	    margin-right: 29px;
 	}
 	.remark .remarkHead .icon-item{
 	   cursor: pointer;
+	   display: inline-block;
+	   height: 40px;
 	   margin-right: 14px;
 	   float: left;
 	}
 	.remark .remarkHead .icon {
-	   font-size: 24px;
-	   color: #0077ff;
-	   margin-right: 6px;
-	   vertical-align: sub;
+	   font-size: 30px;
+	   padding-top: 5px;
+	   float: left;
 	}
-	.remark .remarkHead .el-icon-text {
-	   font-size: 14px;
+	.remark .remarkHead .span-text {
+	   font-size: 15px;
 	   color: #1f2d3d;
+	   float: left;
+	   padding-left: 10px;
 	}
 /* 表格头部 */
 .taskWtable .el-table__header-wrapper{
