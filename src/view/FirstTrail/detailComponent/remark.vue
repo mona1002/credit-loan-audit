@@ -32,7 +32,8 @@
 			    <el-table-column
 			      type="index"
 			      :index='1'
-			      min-width="50"
+			      label="序号"
+			      min-width="70"
 			      >
 			    </el-table-column>
 			    <el-table-column
@@ -49,14 +50,14 @@
 			    <el-table-column
 			      prop="remarkTime"
 			      label="备注时间"
-			      min-width="140"
+			      min-width="150"
 			      sortable>
 			    </el-table-column>
 			    <el-table-column
 			      prop="remark"
 			      label="备注"
 			      show-overflow-tooltip
-			      min-width="600">
+			      min-width="580">
 			    </el-table-column>
 			</el-table>
 		</div>
@@ -297,6 +298,7 @@
 		width: 100%;
 		height: 100%;
 		background-color: #fafbfc;
+		min-width: 1258px;
 	}
 /* 备注信息 */
 	.remark .remarkHead{

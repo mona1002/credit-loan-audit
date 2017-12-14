@@ -97,10 +97,9 @@ height: 40px;
   margin-right: 12px;
 }
 
-.applicationInformationDetail .el-table__body-wrapper {
-  overflow: hidden;
-}
-
+.applicationInformationDetail .el-table__body-wrapper{
+    /* overflow: hidden; */
+  }
 
 /*申请信息详情 表格 */
 
@@ -208,44 +207,45 @@ height: 40px;
   width: 258px;
 }
 
-
 /* 借款人资料表格内容居中 */
 
-.borrowerInformation .el-table th {
-  text-align: center;
+.borrowerInformation .el-table th{
+  /* text-align: center; */
   font-weight: 400;
   color: #1f2d3d;
   font-size: 14px;
 }
 
-.borrowerInformation .el-table__body-wrapper .el-table__body td {
-  text-align: center;
+.borrowerInformation .el-table__body-wrapper .el-table__body td{
+  /* text-align: center; */
   font-weight: 400;
   color: #666666;
   font-size: 14px;
 }
 
-.borrowerInformation ol.num li:nth-of-type(1) .el-input__inner {
-  margin-top: -10px;
-  position: relative;
+.borrowerInformation .house.el-table th:nth-of-type(1),.borrowerInformation .house.el-table th:nth-of-type(7),.borrowerInformation .house.el-table th:nth-of-type(8){
+  text-align: center;
+}
+.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(1),.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(7),.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(8){
+  text-align: center; 
 }
 
-.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) .el-select {
-  width: 258px;
-}
-
-.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) .el-select>.el-input {
-  width: 258px;
-}
-
-
+.borrowerInformation ol.num li:nth-of-type(1) .el-input__inner{
+    margin-top: -10px;
+    position: relative;
+  }
+.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) .el-select{
+    width: 258px;
+  }
+.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) .el-select>.el-input{
+    width: 258px;
+  }
 /*借款人资料 字体颜色 */
 
 .borrowerInformation .el-collapse-item__content {
   color: #475669;
   font-size: 14px;
 }
-
 
 /*借款人资料详情 折叠面板头部背景色 */
 
@@ -290,7 +290,54 @@ height: 40px;
   border-radius: 6px;
   width: 180px;
 }
-
+/* 借款人资料表格内容 */
+.borrowerInformationSetail .el-table th{
+  /* text-align: center; */
+  font-weight: 400;
+  color: #1f2d3d;
+  font-size: 14px;
+}
+.borrowerInformationSetail .el-table__body-wrapper .el-table__body td{
+  /* text-align: center; */
+  font-weight: 400;
+  color: #666666;
+  font-size: 14px;
+}
+/* 借款人资料 房产信息 表格内容居中 */
+.borrowerInformationSetail .house.el-table th:nth-of-type(1),.borrowerInformationSetail .house.el-table th:nth-of-type(7),.borrowerInformationSetail .house.el-table th:nth-of-type(8){
+  text-align: center; 
+}
+.borrowerInformationSetail .house .el-table__body-wrapper .el-table__body td:nth-of-type(1),.borrowerInformationSetail .house .el-table__body-wrapper .el-table__body td:nth-of-type(7),.borrowerInformationSetail .house .el-table__body-wrapper .el-table__body td:nth-of-type(8){
+  text-align: center; 
+}
+/* 借款人资料 车辆信息 表格内容居中 */
+.borrowerInformationSetail .car.el-table th:nth-of-type(1),.borrowerInformationSetail .car.el-table th:nth-of-type(12){
+  text-align: center; 
+}
+.borrowerInformationSetail .car .el-table__body-wrapper .el-table__body td:nth-of-type(1),.borrowerInformationSetail .car .el-table__body-wrapper .el-table__body td:nth-of-type(12){
+  text-align: center; 
+}
+/* 借款人资料 信用卡使用明细 表格内容居中 */
+.borrowerInformationSetail .card.el-table th:nth-of-type(1),.borrowerInformationSetail .card.el-table th:nth-of-type(3),.borrowerInformationSetail .card.el-table th:nth-of-type(6){
+  text-align: center; 
+}
+.borrowerInformationSetail .card .el-table__body-wrapper .el-table__body td:nth-of-type(1),.borrowerInformationSetail .card .el-table__body-wrapper .el-table__body td:nth-of-type(3),.borrowerInformationSetail .card .el-table__body-wrapper .el-table__body td:nth-of-type(6){
+  text-align: center; 
+}
+/* 借款人资料 贷款明细 表格内容居中 */
+.borrowerInformationSetail .loan.el-table th:nth-of-type(1),.borrowerInformationSetail .loan.el-table th:nth-of-type(6),.borrowerInformationSetail .loan.el-table th:nth-of-type(7),.borrowerInformationSetail .loan.el-table th:nth-of-type(9),.borrowerInformationSetail .loan.el-table th:nth-of-type(14){
+  text-align: center; 
+}
+.borrowerInformationSetail .loan .el-table__body-wrapper .el-table__body td:nth-of-type(1),.borrowerInformationSetail .loan .el-table__body-wrapper .el-table__body td:nth-of-type(6),.borrowerInformationSetail .loan .el-table__body-wrapper .el-table__body td:nth-of-type(7),.borrowerInformationSetail .loan .el-table__body-wrapper .el-table__body td:nth-of-type(9),.borrowerInformationSetail .loan .el-table__body-wrapper .el-table__body td:nth-of-type(14){
+  text-align: center; 
+}
+/* 借款人资料 流水明细 表格内容居中 */
+.borrowerInformationSetail .income.el-table th:nth-of-type(1){
+  text-align: center; 
+}
+.borrowerInformationSetail .income .el-table__body-wrapper .el-table__body td:nth-of-type(1){
+  text-align: center; 
+}
 
 /* 各自部分 */
 
@@ -638,27 +685,23 @@ height: 40px;
   height: 35px
 }
 
-
 /* 借款人资料表格内容居中 */
 
 .borrowerInformationSetail .el-table th {
-  text-align: center;
+  /* text-align: center; */
   font-weight: 400;
   color: #1f2d3d;
   font-size: 14px;
 }
 
 .borrowerInformationSetail .el-table__body-wrapper .el-table__body td {
-  text-align: center;
+  /* text-align: center; */
   font-weight: 400;
   color: #666666;
   font-size: 14px;
 }
 
-
 /* 借款人资料 */
-
-
 /* .borrowerInformation .el-table__body-wrapper{
     overflow: hidden;
   } */
@@ -667,12 +710,16 @@ height: 40px;
   border: none;
 }
 
+/* 借款人资料 房产类型 */
+.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(2) .el-input__inner{
+  width: 130px; 
+}
 .borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(2) .el-select {
-  width: 150px;
+  width: 130px;
 }
 
 .borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(2) .el-select>.el-input {
-  width: 150px;
+  width: 130px;
 }
 
 .borrowerInformation .el-table__body-wrapper .el-input {
@@ -875,15 +922,16 @@ height: 40px;
   background-color: #fff;
 }
 
-.taskWatting .el-table th {
-  padding-left: 10px;
+.taskWatting .el-table th{
+  /* padding-left: 10px; */
+
   font-weight: 400;
   color: #1f2d3d;
   font-size: 14px;
 }
 
-.taskWatting .el-table__body-wrapper .el-table__body td {
-  padding-left: 10px;
+.taskWatting .el-table__body-wrapper .el-table__body td{
+  /* padding-left: 10px; */
   font-weight: 400;
   color: #666666;
   font-size: 14px;
@@ -892,12 +940,18 @@ height: 40px;
 .taskWatting .el-table th:nth-of-type(1) {
   text-align: center;
 }
+@media screen and (max-width: 1485px){
+    .taskWatting .el-table__body-wrapper{
+      overflow-x: scroll;
+    }
+  }
+@media screen and (min-width: 1485px) {
+    .taskWatting .el-table__body-wrapper{
+      overflow: hidden;
+    }
+  }
 
-.taskWatting .el-table__body-wrapper {
-  overflow: hidden;
-}
-
-.taskWatting .el-table__body-wrapper .el-table__body td:nth-of-type(1) {
+.taskWatting .el-table__body-wrapper .el-table__body td:nth-of-type(1){
   text-align: center;
 }
 
@@ -956,76 +1010,85 @@ height: 40px;
 /* .CreditForm .el-select-dropdown__item{
 
 } */
-
-
 /* 工作台导航 */
-
-.mheader .el-menu {
+.mheader .el-menu{
   background-color: transparent;
   z-index: 100;
+ }
+ .mheader .el-menu--horizontal .el-submenu{
+  height: 70px;
 }
-
-.mheader .el-submenu__title {
-  font-size: 15px;
-  color: #bfcbd9;
-  /* margin-right:39px; */
+.mheader .el-menu--horizontal .el-submenu .el-submenu__title{
+  font-size:15px;
+  color:#bfcbd9;
   height: 60px;
   line-height: 70px;
+  margin:0 41px;
+  padding: 0 0;
+  padding-left: 0 !important;
 }
+.mheader .el-menu .el-submenu.is 
 
-.mheader .el-menu .el-submenu__title:hover {
+-opened{
+  background:rgba(31, 45, 61,.6);
+  box-shadow:0 10px 20px 0 #475669;
+}
+.mheader .el-menu--horizontal .el-submenu .el-submenu__title:hover{
   background-color: transparent;
-  border-bottom: 2px solid #fff;
+  border-bottom-color: #fff;
+  border-bottom : 2px solid #fff;
+}
+.mheader .el-menu--horizontal .el-submenu.is 
+
+-opened .el-submenu__title{
+  background-color: transparent;
+  border-bottom-color: #fff !important;
+  border-bottom : 2px solid #fff;
   color: #fff;
 }
-
-.mheader .el-menu .el-submenu .el-submenu__icon-arrow {
+.mheader .el-menu .el-submenu .el-submenu__icon-arrow{
   display: none;
 }
 
 
 /* 二级 */
 
-.mheader .el-menu .el-menu {
-  /* z-index: 10000; */
-  /* background:#1f2d3d; */
-  background: rgba(31, 45, 61, .41);
-  /* box-shadow:0 10px 20px 0 #475669; */
-  /* opacity:0.41; */
-  margin-top: 10px;
+.mheader .el-menu .el-menu{
+  background:rgba(31, 45, 61,.6);
+  margin-top: 5px;
 }
 
-.mheader .el-menu .el-submenu .el-submenu__title {
-  margin: 0 41px;
-  padding: 0 0;
-  padding-left: 0 !important;
-}
-
-.mheader .el-menu .el-menu div {
+.mheader .el-menu .el-menu div{
   height: 20px;
-  margin: 7px 0 10px 0;
+  margin:7px 0 10px 0;
 }
-
-.mheader .el-menu .el-menu .el-submenu__title:hover {
+.mheader .el-menu .el-menu .el-submenu__title:hover{
   background-color: transparent;
   border-bottom: none;
   color: #fff;
 }
-
-.mheader .el-menu .el-menu .el-submenu__title {
-  font-size: 14px;
-  color: #bfcbd9;
+.mheader .el-menu .el-menu .el-menu-item{
+  background-color: transparent;
+  border-bottom: none;
+}
+.mheader .el-menu .el-menu .el-submenu .el-submenu__title:hover{
+  background-color: transparent;
+  border-bottom: none;
+  color: #fff;
+}
+.mheader .el-menu .el-menu .el-submenu__title{
+  font-size:14px;
+  color:#bfcbd9;
   padding-left: 10px !important;
   height: 25px;
   line-height: 25px;
   padding-right: 10px;
-  margin: 0 0;
-  /* text-align: center; */
+  margin:0 0;
 }
 
-.mheader .el-menu .el-menu .el-menu-item {
-  font-size: 14px;
-  color: #bfcbd9;
+.mheader .el-menu .el-menu .el-menu-item{
+  font-size:14px;
+  color:#bfcbd9;
   padding-left: 10px !important;
   height: 25px;
   line-height: 25px;
@@ -1033,85 +1096,78 @@ height: 40px;
   min-width: 0;
   width: auto;
 }
-
-.mheader .el-menu .el-menu .el-menu-item:hover {
+.mheader .el-menu--horizontal .el-submenu .el-menu-item{
+  background-color:transparent;
+}
+.mheader .el-menu .el-menu .el-menu-item:hover{
   background-color: transparent;
   border-bottom: none;
   color: #fff;
-}
-
-
-/*二级li加绝对定位 */
-
-.mheader .el-menu .el-menu .el-submenu {
+} 
+/* 二级li加绝对定位 */
+.mheader .el-menu .el-menu .el-submenu{
   position: relative;
 }
-
-
-/*二级三角样式设置 */
-
-.mheader .el-menu .el-menu .el-submenu .el-submenu__icon-arrow {
+/* 二级三角样式设置 */
+.mheader .el-menu .el-menu .el-submenu .el-submenu__icon-arrow{
   display: block;
   width: 0;
   height: 0;
   border-top: 5px solid transparent;
   border-left: 5px solid #bfcbd9;
   border-bottom: 5px solid transparent;
-  margin-top: -4px;
+  margin-top:-4px;
   margin-right: -9px;
-  -webkit-transform: rotateZ(0deg);
-  transform: rotateZ(0deg);
+  -webkit-transform:rotateZ(0deg);
+  transform:rotateZ(0deg);
 }
-
-
-/*二级三角before样式设置 */
-
-.mheader .el-menu .el-menu .el-submenu .el-submenu__icon-arrow:before {
+.mheader .el-menu--horizontal .el-menu .el-submenu .el-submenu__icon-arrow{
+  position: absolute;
+}
+/* 二级三角before样式设置 */
+.mheader .el-menu .el-menu .el-submenu .el-submenu__icon-arrow:before{
   display: none;
+}
+.mheader .el-menu--horizontal .el-menu .el-submenu{
+  float: none;
 }
 
 
 /* 三级 */
-
-.mheader .el-menu .el-menu .el-menu {
-  /* z-index: 10000; */
-  background: rgba(31, 45, 61, .41);
-  box-shadow: 0 10px 20px 0 #475669;
+.mheader .el-menu .el-menu .el-menu{
+  z-index: 10000;
+  background:rgba(31, 45, 61,.6);
+  box-shadow:0 10px 20px 0 #475669;
   position: absolute;
   left: 100%;
-  top: 0;
-  margin-top: 0px;
+  top: -5px;
+  margin-top: -7px; 
 }
+.mheader .el-menu .el-submenu.is 
 
-.mheader .el-menu .el-submenu.is-opened {
-  background: rgba(31, 45, 61, .41);
-  box-shadow: 0 10px 20px 0 #475669;
-}
-
-.mheader .el-menu .el-submenu.is-opened .el-submenu__title {
-  border-bottom: 2px solid #fff;
+-opened .el-submenu__title{
+  border-bottom:2px solid #fff;
   color: #fff;
 }
-
-.mheader .el-menu .el-menu .el-submenu .el-submenu__title {
-  border-bottom: none;
+.mheader .el-menu .el-menu .el-submenu .el-submenu__title{
+  border-bottom:none;
   color: #bfcbd9;
-}
-
-
+} 
 /* 解决：点击三级时二级又一次加背景色 */
+.mheader .el-menu .el-menu .el-submenu.is 
 
-.mheader .el-menu .el-menu .el-submenu.is-opened {
-  background: none;
-  box-shadow: 0 0 0 0 #475669;
+-opened{
+  background:none;
+  box-shadow:0 0 0 0 #475669; 
 }
-
-.mheader .el-menu .el-menu .el-menu {
-  background: rgba(31, 45, 61, .6);
-  box-shadow: 0 10px 20px 0 #475669;
-  margin-top: -7px;
+/* .mheader .el-menu .el-menu .el-menu{
+  background:rgba(31, 45, 61,.6);
+  box-shadow:0 10px 20px 0 #475669;
+  margin-top: -7px; 
+} */
+.mheader .el-menu--horizontal .el-submenu>.el-menu{
+  border-radius: 0;
 }
-
 
 /*流程轨迹查询 表格 */
 
