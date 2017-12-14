@@ -12,7 +12,7 @@
             <li>
               <p>
                 <label class="InternetInf_left_label" @click="NewPage(0)">客户在法网是否有被执行信息：</label>
-                     <el-select v-model="checkData.wbeexEcuted" placeholder="请选择" @change="commentShow1(checkData.wbeexEcuted,Internet[0])">
+                <el-select v-model="checkData.wbeexEcuted" placeholder="请选择" @change="commentShow1(checkData.wbeexEcuted,Internet[0])">
                   <el-option v-for="item in beexEcuted" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -25,152 +25,152 @@
             </li>
             <li>
               <p>
-                 <label class="InternetInf_left_label" @click="NewPage(0)">单位在法网是否有被执行信息：</label>
-              <el-select v-model="checkData.wnetHirecom" placeholder="请选择" @change="commentShow1(checkData.wnetHirecom,Internet[1])">
-                <el-option v-for="item in netHirecom" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
+                <label class="InternetInf_left_label" @click="NewPage(0)">单位在法网是否有被执行信息：</label>
+                <el-select v-model="checkData.wnetHirecom" placeholder="请选择" @change="commentShow1(checkData.wnetHirecom,Internet[1])">
+                  <el-option v-for="item in netHirecom" :key="item.value" :label="item.label" :value="item.value">
+                  </el-option>
+                </el-select>
               </p>
               <p v-show="this.InternetShow.commentS1">
                 <label class="InternetInf_right_label"> 单位执行信息说明：</label>
-              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomtxt">
-              </el-input>
-              </p>
-            </li>
-             <li>
-              <p>
-                 <label class="InternetInf_left_label" @click="NewPage(1)">
-                <span class="red"> * </span>客户在失信网是否有失信记录：</label>
-              <el-select v-model="checkData.wnetEcutedBrea" placeholder="请选择" name="BrokenRecord" v-validate="'required'">
-                <el-option v-for="item in netEcutedBrea" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-              <!-- 提示语 -->
-              <span v-show="errors.has('BrokenRecord')" class="help is-danger">{{ errors.first('BrokenRecord') }}</span>
-              </p>
-              <p v-show="this.InternetShow.commentS2">
-               <label class="InternetInf_right_label"> 失信记录说明： </label>
-              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetEcutedBreatxt">
-              </el-input>
+                <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomtxt">
+                </el-input>
               </p>
             </li>
             <li>
               <p>
-                 <label class="InternetInf_left_label" @click="NewPage(1)">单位在失信网是否有失信记录：</label>
-              <el-select v-model="checkData.wnetHirecomBrea" placeholder="请选择" @change="commentShow1(checkData.wnetHirecomBrea,Internet[3])">
-                <el-option v-for="item in netHirecomBrea" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
+                <label class="InternetInf_left_label" @click="NewPage(1)">
+                  <span class="red"> * </span>客户在失信网是否有失信记录：</label>
+                <el-select v-model="checkData.wnetEcutedBrea" placeholder="请选择" name="BrokenRecord" v-validate="'required'">
+                  <el-option v-for="item in netEcutedBrea" :key="item.value" :label="item.label" :value="item.value">
+                  </el-option>
+                </el-select>
+                <!-- 提示语 -->
+                <span v-show="errors.has('BrokenRecord')" class="help is-danger">{{ errors.first('BrokenRecord') }}</span>
+              </p>
+              <p v-show="this.InternetShow.commentS2">
+                <label class="InternetInf_right_label"> 失信记录说明： </label>
+                <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetEcutedBreatxt">
+                </el-input>
+              </p>
+            </li>
+            <li>
+              <p>
+                <label class="InternetInf_left_label" @click="NewPage(1)">单位在失信网是否有失信记录：</label>
+                <el-select v-model="checkData.wnetHirecomBrea" placeholder="请选择" @change="commentShow1(checkData.wnetHirecomBrea,Internet[3])">
+                  <el-option v-for="item in netHirecomBrea" :key="item.value" :label="item.label" :value="item.value">
+                  </el-option>
+                </el-select>
               </p>
               <p v-show="this.InternetShow.commentS3">
                 <label class="InternetInf_right_label"> 单位失信记录说明： </label>
-              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomBreatxt">
-              </el-input>
+                <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomBreatxt">
+                </el-input>
               </p>
             </li>
             <li>
               <p>
                 <label class="InternetInf_left_label" @click="NewPage(2)">
-                <span class="red"> * </span>网上搜索借款人手机是否有异常：</label>
-              <el-select v-model="checkData.wnetPhone" placeholder="请选择" @change="commentShow1(checkData.wnetPhone,Internet[4])" name="abnormalPhone"
-                v-validate="'required'">
-                <el-option v-for="item in netPhone" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-              <!-- 提示语 -->
-              <span v-show="errors.has('abnormalPhone')" class="help is-danger">{{ errors.first('abnormalPhone') }}</span>
+                  <span class="red"> * </span>网上搜索借款人手机是否有异常：</label>
+                <el-select v-model="checkData.wnetPhone" placeholder="请选择" @change="commentShow1(checkData.wnetPhone,Internet[4])" name="abnormalPhone"
+                  v-validate="'required'">
+                  <el-option v-for="item in netPhone" :key="item.value" :label="item.label" :value="item.value">
+                  </el-option>
+                </el-select>
+                <!-- 提示语 -->
+                <span v-show="errors.has('abnormalPhone')" class="help is-danger">{{ errors.first('abnormalPhone') }}</span>
               </p>
               <p v-show="this.InternetShow.commentS4">
-                 <label class="InternetInf_right_label"> 手机异常信息说明： </label>
-              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetPhonetxt">
-              </el-input>
+                <label class="InternetInf_right_label"> 手机异常信息说明： </label>
+                <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetPhonetxt">
+                </el-input>
               </p>
             </li>
             <li>
               <p>
-                  <label class="InternetInf_left_label"  style="top:8px" @click="NewPage(2)">网搜单位名称是否有异常：</label>
-              <el-select v-model="checkData.wnetHirecomName" placeholder="请选择" style="top:8px" @change="commentShow1(checkData.wnetHirecomName,Internet[5])">
-                <el-option v-for="item in netHirecomName" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
+                <label class="InternetInf_left_label" style="top:8px" @click="NewPage(2)">网搜单位名称是否有异常：</label>
+                <el-select v-model="checkData.wnetHirecomName" placeholder="请选择" style="top:8px" @change="commentShow1(checkData.wnetHirecomName,Internet[5])">
+                  <el-option v-for="item in netHirecomName" :key="item.value" :label="item.label" :value="item.value">
+                  </el-option>
+                </el-select>
               </p>
               <p>
-                 <label class="InternetInf_right_label"> 单位名称异常信息说明： </label>
-              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomNametxt">
-              </el-input>
+                <label class="InternetInf_right_label"> 单位名称异常信息说明： </label>
+                <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomNametxt">
+                </el-input>
               </p>
             </li>
             <li>
               <p>
-                <label class="InternetInf_left_label"  style="top:8px" @click="NewPage(2)">网搜单位电话是否有异常：</label>
-              <el-select v-model="checkData.wnetHirecomPhone" placeholder="请选择" style="top:8px" @change="commentShow1(checkData.wnetHirecomPhone,Internet[6])">
-                <el-option v-for="item in netHirecomPhone" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
+                <label class="InternetInf_left_label" style="top:8px" @click="NewPage(2)">网搜单位电话是否有异常：</label>
+                <el-select v-model="checkData.wnetHirecomPhone" placeholder="请选择" style="top:8px" @change="commentShow1(checkData.wnetHirecomPhone,Internet[6])">
+                  <el-option v-for="item in netHirecomPhone" :key="item.value" :label="item.label" :value="item.value">
+                  </el-option>
+                </el-select>
               </p>
               <p v-show="this.InternetShow.commentS6">
                 <label class="InternetInf_right_label"> 单位电话异常信息说明： </label>
-              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomPhonetxt">
-              </el-input>
+                <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomPhonetxt">
+                </el-input>
               </p>
             </li>
             <li>
               <p>
-                     <label class="InternetInf_left_label" @click="NewPage(2)">网上搜索借款人现居住地址和房产地址是否有异常：</label>
-              <el-select v-model="checkData.wnetAddrandEstate" placeholder="请选择" @change="commentShow1(checkData.wnetAddrandEstate,Internet[7])">
-                <el-option v-for="item in netAddrandEstate" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
+                <label class="InternetInf_left_label" @click="NewPage(2)">网上搜索借款人现居住地址和房产地址是否有异常：</label>
+                <el-select v-model="checkData.wnetAddrandEstate" placeholder="请选择" @change="commentShow1(checkData.wnetAddrandEstate,Internet[7])">
+                  <el-option v-for="item in netAddrandEstate" :key="item.value" :label="item.label" :value="item.value">
+                  </el-option>
+                </el-select>
               </p>
               <p v-show="this.InternetShow.commentS7">
                 <label class="InternetInf_right_label"> 地址异常信息说明： </label>
-              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetAddrandEstatetxt">
-              </el-input>
+                <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetAddrandEstatetxt">
+                </el-input>
               </p>
             </li>
             <li>
               <p>
-                <label class="InternetInf_left_label" @click="NewPage(2)"  style="top:8px">网搜单位地址是否有异常：</label>
-              <el-select v-model="checkData.wnetHirecomAddress" placeholder="请选择" style="top:8px" @change="commentShow1(checkData.wnetHirecomAddress,Internet[8])">
-                <el-option v-for="item in netHirecomAddress" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
+                <label class="InternetInf_left_label" @click="NewPage(2)" style="top:8px">网搜单位地址是否有异常：</label>
+                <el-select v-model="checkData.wnetHirecomAddress" placeholder="请选择" style="top:8px" @change="commentShow1(checkData.wnetHirecomAddress,Internet[8])">
+                  <el-option v-for="item in netHirecomAddress" :key="item.value" :label="item.label" :value="item.value">
+                  </el-option>
+                </el-select>
               </p>
               <p v-show="this.InternetShow.commentS8">
-               <label class="InternetInf_right_label"> 单位地址异常信息说明： </label>
-              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomAddresstxt">
-              </el-input>
+                <label class="InternetInf_right_label"> 单位地址异常信息说明： </label>
+                <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomAddresstxt">
+                </el-input>
               </p>
             </li>
             <li>
               <p>
-                 <label class="InternetInf_left_label" @click="NewPage(3)">
-                <span class="red"> * </span>当地工商网查询企业基本信息中是否有登记：</label>
-              <el-select v-model="checkData.wnetCompany" placeholder="请选择" @change="commentShow1(checkData.wnetCompany,Internet[9])" name="registerInfor"
-                v-validate="'required'">
-                <el-option v-for="item in netCompany" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-              <span v-show="errors.has('registerInfor')" class="help is-danger">{{ errors.first('registerInfor') }}</span>
+                <label class="InternetInf_left_label" @click="NewPage(3)">
+                  <span class="red"> * </span>当地工商网查询企业基本信息中是否有登记：</label>
+                <el-select v-model="checkData.wnetCompany" placeholder="请选择" @change="commentShow1(checkData.wnetCompany,Internet[9])" name="registerInfor"
+                  v-validate="'required'">
+                  <el-option v-for="item in netCompany" :key="item.value" :label="item.label" :value="item.value">
+                  </el-option>
+                </el-select>
+                <span v-show="errors.has('registerInfor')" class="help is-danger">{{ errors.first('registerInfor') }}</span>
               </p>
               <p v-show="this.InternetShow.commentS9">
                 <label class="InternetInf_right_label"> 工商登记信息说明： </label>
-              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetCompanytxt">
-              </el-input>
+                <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetCompanytxt">
+                </el-input>
               </p>
             </li>
             <li>
               <p>
-                 <label class="InternetInf_left_label" @click="NewPage(4)">客户工作单位在全国组织代码查询中是否存在：</label>
-              <el-select v-model="checkData.wnetAddrstate" placeholder="请选择" @change="commentShow1(checkData.wnetAddrstate,Internet[10])">
-                <el-option v-for="item in netAddrstate" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
+                <label class="InternetInf_left_label" @click="NewPage(4)">客户工作单位在全国组织代码查询中是否存在：</label>
+                <el-select v-model="checkData.wnetAddrstate" placeholder="请选择" @change="commentShow1(checkData.wnetAddrstate,Internet[10])">
+                  <el-option v-for="item in netAddrstate" :key="item.value" :label="item.label" :value="item.value">
+                  </el-option>
+                </el-select>
               </p>
-              <p  v-show="this.InternetShow.commentS10">
+              <p v-show="this.InternetShow.commentS10">
                 <label class="InternetInf_right_label"> 组织机构代码信息说明： </label>
-              <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetAddrstatetxt">
-              </el-input>
+                <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wnetAddrstatetxt">
+                </el-input>
               </p>
             </li>
           </ul>
@@ -892,11 +892,6 @@
                 </el-option>
               </el-select>
             </li>
-            <!-- <li v-show="this.address.permanent">
-              <label class="check_reside__left_label">常住地址 ：</label>
-              <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="checkData.aisresidenttxt">
-          </el-input>
-            </li> -->
           </ul>
           <p v-show="this.address.permanent" style="clear:both;width:100%">
             <label class="prement_address">常住地址 ：</label>
@@ -914,7 +909,7 @@
         <div class=" CreditForm_result">
           <p class="CreditForm_result_p_label">
             <span class="red"> * </span>初审结果评价：</p>
-          <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="checkData.oother" name="conclusion" v-validate="'required'">
+          <el-input type="textarea" :rows="5" placeholder="请输入内容" @keydown="word(checkData.oother)" v-model="checkData.oother" name="conclusion" v-validate="'required'">
           </el-input>
           <!-- 提示语 -->
           <span v-show="errors.has('conclusion')" class="help is-danger">{{ errors.first('conclusion') }}</span>
@@ -1526,277 +1521,24 @@
       }
     },
     methods: {
+      word(val){
+        // console.log( " ");
+        console.log(val)
+      },
       handleChange(tab, event) {
         console.log(tab, event);
       },
       commentShow1(name, hidLabel) {
-        // @change="commentShow1(checkData.fmarrflag,Internet[14])" 
-        // console.log("commentShow")
-        console.log(name)
-        console.log(hidLabel)
-        //  " 接听是否本人","是否私营业主"
-        if (name == "0") { // 否
-          switch (hidLabel) {
-            case "客户执行":
-              this.InternetShow.commentS = false;
-              this.checkData.wbeexEcutedtxt = "";
-              break;
-            case "单位执行":
-              this.InternetShow.commentS1 = false;
-              this.checkData.wnetHirecomtxt = "";
-              break;
-            case "客户失信":
-              this.InternetShow.commentS2 = false;
-              this.checkData.wnetEcutedBreatxt = "";
-              break;
-            case "单位失信":
-              this.InternetShow.commentS3 = false;
-              this.checkData.wnetHirecomBreatxt = "";
-              break;
-            case "客户手机":
-              this.InternetShow.commentS4 = false;
-              this.checkData.wnetPhonetxt = "";
-              break;
-            case "单位名称":
-              this.InternetShow.commentS5 = false;
-              this.checkData.wnetHirecomNametxt = "";
-              break;
-            case "单位电话":
-              this.InternetShow.commentS6 = false;
-              this.checkData.wnetHirecomPhonetxt = "";
-              break;
-            case "客户住址房产":
-              this.InternetShow.commentS7 = false;
-              this.checkData.wnetAddrandEstatetxt = "";
-              break;
-            case "单位地址":
-              this.InternetShow.commentS8 = false;
-              this.checkData.wnetHirecomAddresstxt = "";
-              break;
-            case "企业登记":
-              this.InternetShow.commentS9 = false;
-              this.checkData.wnetCompanytxt = "";
-              break;
-            case "单位组织代码":
-              this.InternetShow.commentS10 = false;
-              this.checkData.wnetAddrstatetxt = "";
-              break;
-            case "接听是否本人":
-              this.checkId.declearNloaned = false;
-              this.checkId.loanNot = false;
-              this.checkData.iloanBefore = "";
-              this.checkData.iisselftxt = "";
-              this.checkData.iloanBeforetxt = ""; //说明-input
-              this.checkData.iloanTerm = ""; //借款期限[月]：	
-              this.checkData.iloanPurposetxt = ""; //借款用途详细说明：
-              this.checkData.iloanPurpose = ""; //借款用途
-              this.checkData.iloanAmt = ""; //借款金额[元]
-              break;
-            case "是否申请借款":
-              this.checkId.loanNot = false;
-              this.checkData.iloanBeforetxt = ""; //说明-input
-              this.checkData.iloanTerm = ""; //借款期限[月]：	
-              this.checkData.iloanPurposetxt = ""; //借款用途详细说明：
-              this.checkData.iloanPurpose = ""; //借款用途
-              this.checkData.iloanAmt = ""; //借款金额[元]
-              break;
-              //  iisselftxt iloanBeforetxt iloanTerm iloanPurpose
-            case "是否私营业主":
-              this.workInf.private = false;
-              this.checkData.compType = "";
-              this.checkData.regcapitalamt = "";
-              this.checkData.selfhasProportion = "";
-              this.checkData.monthrentamt = "";
-              this.checkData.selfpremisesArea = "";
-              this.checkData.projectManage = "";
-              this.checkData.oneYearProfitamt = "";
-              this.checkData.firstSuppliers = "";
-              this.checkData.compegDate = ""; //公司注册时间
-              this.checkData.selfpremises = "";
-              this.checkData.selfempCount = "";
-              this.checkData.profitamountmamt = "";
-              this.checkData.firstDistributor = ""; //第一分销商
-              if (name == 0 || name == '') {
-                this.reqd = '';
-              }
-              break;
-            case "同城工作生活":
-              this.marriage.workingLivingInf = false;
-              this.checkData.spouseSamecitytxt = ""; //工作生活信息详情
-              break;
-            case "是否有子女":
-              this.Children.ChildrenOrNot = false;
-              this.checkData.childCount = "";
-              this.checkData.childCounttxt = "";
-              this.checkData.childStatus = "";
-              this.checkData.childStatustxt = "";
-              this.checkData.childIspaycost = "";
-              this.checkData.childTogether = "";
-              this.checkData.childPaycostamt = "";
-              break;
-            case "是否支付生活费":
-              this.Children.PayAlimony = false;
-              this.checkData.childPaycostamt = "";
-              break;
-            case "父母是否在世":
-              this.parent.livingOrNot = false;
-              this.checkData.parentHealth = "";
-              this.checkData.parentPayalimony = "";
-              this.checkData.parentWork = "";
-              this.checkData.parentInformed = "";
-              this.checkData.parentIslivingtxt = "";
-              this.checkData.parentHealthtxt = "";
-              this.checkData.parentPayalimonytxt = "";
-              this.checkData.parentIncome = "";
-              break;
-            case "是否有兄弟姐妹":
-              this.siblings.siblingsOrNot = false;
-              this.checkData.brothersIfhastxt = "";
-              break;
-            case "是否为常住地址":
-              this.address.permanent = true;
-              break;
-          }
-        } else if (name == "1") { //是   
-          console.log("我是是1")
-          switch (hidLabel) {
-            case "客户执行":
-              this.InternetShow.commentS = true;
-              break;
-            case "单位执行":
-              this.InternetShow.commentS1 = true;
-              break;
-            case "客户失信":
-              this.InternetShow.commentS2 = true;
-              break;
-            case "单位失信":
-              this.InternetShow.commentS3 = true;
-              break;
-            case "客户手机":
-              this.InternetShow.commentS4 = true;
-              break;
-            case "单位名称":
-              this.InternetShow.commentS5 = true;
-              break;
-            case "单位电话":
-              this.InternetShow.commentS6 = true;
-              break;
-            case "客户住址房产":
-              this.InternetShow.commentS7 = true;
-              break;
-            case "单位地址":
-              this.InternetShow.commentS8 = true;
-              break;
-            case "企业登记":
-              this.InternetShow.commentS9 = true;
-              break;
-            case "单位组织代码":
-              this.InternetShow.commentS10 = true;
-              break;
-            case "接听是否本人":
-              this.checkId.declearNloaned = true;
-              break;
-            case "是否申请借款":
-              this.checkId.loanNot = true;
-
-              break;
-            case "是否私营业主":
-              this.workInf.private = true;
-              this.reqd = 'required';
-              break;
-            case "同城工作生活":
-              this.marriage.workingLivingInf = true;
-              break;
-            case "是否有子女":
-              this.Children.ChildrenOrNot = true;
-              break;
-            case "是否支付生活费":
-              this.Children.PayAlimony = true;
-              break;
-            case "父母是否在世":
-              this.parent.livingOrNot = true;
-              break;
-            case "是否有兄弟姐妹":
-              this.siblings.siblingsOrNot = true;
-              break;
-            case "是否为常住地址":
-              //             if(name==1 || name==""){
-              //  this.address.permanent = false;
-              //               this.checkData.aisresidenttxt = "";
-              //             }
-              this.address.permanent = false;
-              this.checkData.aisresidenttxt = "";
-              break;
-          }
-        } else if (hidLabel == "婚姻状况") {
-          console.log(hidLabel + name)
-          if (name == "02" || name == "03") {
-            this.marriage.couple = true;
-          } else {
-            this.marriage.couple = false;
-            this.marriage.workingCondition = false;
-            this.marriage.workingLivingInf = false;
-            this.checkData.spouseWork = ""; //配偶工作情况清空
-            this.checkData.spouseWorktype = "";
-            this.checkData.spouseIncome = "";
-            this.checkData.spouseSamecity = ""; //同城工作生活 下拉select
-            this.checkData.spouseSamecitytxt = "";
-          }
-        } else if (hidLabel == "配偶工作情况") {
-          if (name == "00" || name == "03") {
-            this.marriage.workingCondition = true;
-          } else {
-            this.marriage.workingCondition = false;
-            this.checkData.spouseWorktype = "";
-            this.checkData.spouseIncome = "";
-          }
-        }
-        // else if(name==){
-
-        // }{}
+ 
       },
       NewPage(ind) { // tab1-------------------右键菜单栏 li[0] 点击事件
-        console.log(ind);
-        switch (ind) {
-          case 0:
-            window.open("http://zhixing.court.gov.cn/search/");
-            break;
-          case 1:
-            window.open("http://shixin.court.gov.cn/");
-            break;
-          case 2:
-            window.open("https://www.baidu.com");
-            break;
-          case 3:
-            window.open("http://www.nacao.org.cn/portal/publish/index.html");
-            break;
-          case 4:
-            window.open("https://www.tianyancha.com/");
-            break;
-        }
+
       },
       getCity(item) {
-        console.log("省份-市区")
-        console.log(item)
-        this.get("/credit/queryCityCounty", {
-          parentCode: item,
-        }).then(res => {
-          console.log(res);
-          this.hireProvincd = res.data;
-          // 修改的时候 市区  县区 清空数据
-          this.checkData.workCity = "";
-          this.checkData.workCounty = "";
-          this.hireTown = "";
-        })
+ 
       },
       getTown(item) {
-        console.log("city");
-        this.get("/credit/queryCityCounty", {
-          parentCode: item,
-        }).then(res => {
-          console.log(res);
-          this.hireTown = res.data;
-        })
+  
       },
       makeSureBtn() {
         this.Confirm = true;
@@ -1810,521 +1552,58 @@
 
       },
       CFsave() {
-        console.log("提交信息");
-        this.$validator.validateAll().then((result) => {
-          if (result) {
-            // eslint-disable-next-line
-            // alert('From Submitted!');
-            // 下面为需要验证不为 空 的字段
-            // console.log(this.checkData)
-            this.checkData.selfpremisesArea = this.acreage; //面积
-            this.checkData.selfhasProportion = this.Percent; //比例
-            console.log(this.checkData.selfpremisesArea)
-            console.log(this.checkData.selfhasProportion)
-
-            this.post("/creauditInfo/addOrUpdate", this.checkData).then(res => {
-              console.log(res);
-              if (res.statusCode == 200) {
-                // console.log(this.checkData.childCount )
-                this.Confirm = false;
-                alert('提交成功!');
-                this.AreaNPercent();
-
-                // if (this.checkData.selfpremisesArea) {
-                //   this.checkData.selfpremisesArea += "m²";
-                // } else {
-                //   this.checkData.selfpremisesArea = "";
-                // }
-                // if (this.checkData.selfhasProportion) {
-                //   this.checkData.selfhasProportion += "%";
-                // } else {
-                //   this.checkData.selfhasProportion = "";
-                // }
-              } else {
-                alert("提交失败，请重新提交")
-                this.Confirm = false;
-              }
-            });
-            // alert('提交成功!');
-            // return;
-          } else {
-            alert('请按要求填写！');
-            this.Confirm = false;
-          }
-          // alert('Correct them errors!');
-        });
+     
       },
       AreaNPercent() {
-        if (this.checkData.selfpremisesArea) {
-          this.checkData.selfpremisesArea += "m²";
-        } else {
-          this.checkData.selfpremisesArea = "";
-        }
-        if (this.checkData.selfhasProportion) {
-          this.checkData.selfhasProportion += "%";
-        } else {
-          this.checkData.selfhasProportion = "";
-        }
+
       },
       mountJ(code, val) {
-        // this.checkData+"."+val==0? this+"."+comment=false: this+"."+comment=true;
-        // this.checkData.val==0? this.comment=false: this.comment=true;
-        // console.log(code)
-        switch (code) {
-          case 0:
-            val == 0 ? this.InternetShow.commentS = false : this.InternetShow.commentS = true;
-            break; //上网-客户被执行
-          case 1:
-            val == 0 ? this.InternetShow.commentS1 = false : this.InternetShow.commentS1 = true;
-            break; //上网-单位被执行
-          case 2:
-            val == 0 ? this.InternetShow.commentS2 = false : this.InternetShow.commentS2 = true;
-            break; //上网-客户被执行
-          case 3:
-            val == 0 ? this.InternetShow.commentS3 = false : this.InternetShow.commentS3 = true;
-            break; //上网-客户被执行
-          case 4:
-            val == 0 ? this.InternetShow.commentS4 = false : this.InternetShow.commentS4 = true;
-            break; //上网-客户被执行
-          case 5:
-            val == 0 ? this.InternetShow.commentS5 = false : this.InternetShow.commentS5 = true;
-            break; //上网-客户被执行  
-          case 6:
-            val == 0 ? this.InternetShow.commentS6 = false : this.InternetShow.commentS6 = true;
-            break; //上网-客户被执行
-          case 7:
-            val == 0 ? this.InternetShow.commentS7 = false : this.InternetShow.commentS7 = true;
-            break; //上网-客户被执行
-          case 8:
-            val == 0 ? this.InternetShow.commentS8 = false : this.InternetShow.commentS8 = true;
-            break; //上网-客户被执行
-          case 9:
-            val == 0 ? this.InternetShow.commentS9 = false : this.InternetShow.commentS9 = true;
-            break; //上网-客户被执行
-          case 10:
-            val == 0 ? this.InternetShow.commentS10 = false : this.InternetShow.commentS10 = true;
-            break; //上网-客户被执行
-          case 11:
-            val == 0 ? this.checkId.declearNloaned = false : this.checkId.declearNloaned = true;
-            break;
-          case 12: //私营业主整个部分
-            val == 0 || val == null ? this.workInf.private = false : this.workInf.private = true;
-            break;
-          case 13: //婚姻状况
-            val == "01" || val == "04" || val == null ? this.marriage.couple = false : this.marriage.couple = true;
-            break;
-          case 14: // 配偶工作情况
-            val == "00" || val == "03" ? this.marriage.workingCondition = true : this.marriage.workingCondition = false;
-            break;
-          case 15: // 是否在同一个城市工作
-            val == 0 || val == null ? this.marriage.workingLivingInf = false : this.marriage.workingLivingInf = true;
-            break;
-          case 16: // 是否有子女
-            val == 0 || val == null ? this.Children.ChildrenOrNot = false : this.Children.ChildrenOrNot = true;
-            break;
-          case 17: // 是否支付其生活费
-            val == 0 || val == null ? this.Children.PayAlimony = false : this.Children.PayAlimony = true;
-            break;
-          case 18: // 父母是否在世
-            val == 0 || val == null ? this.parent.livingOrNot = false : this.parent.livingOrNot = true;
-            break;
-          case 19: // 是否有兄弟姐妹
-            val == 0 || val == null ? this.siblings.siblingsOrNot = false : this.siblings.siblingsOrNot = true;
-            break;
-          case 20: // 是否为常住地址(选否显示)
-            val == 0 ? this.address.permanent = true : this.address.permanent = false;
-            break;
-
-          case 21: // 是否为常住地址(选否显示)
-            val == 0 || val == null ? this.checkId.loanNot = false : this.checkId.loanNot = true;
-            break;
-        }
-        // this.checkData.val==0? this.InternetShow.commentS=false: this.InternetShow.commentS=true;
-
-        // val==0? comment=false:comment=true;
 
       },
       hireDate(val, e) {
-        console.log("获取日期")
-        console.log(val)
-        // console.log(e.target.value)
+
       },
       postCode(val, e) {
-        // 邮编
-        var reg = /^\d{6}$/;
-        if (reg.test(val)) {
-          console.log("匹配")
-          this.checkData.workZip = e.target.value = val;
-          this.reg.mpostCode = false;
-        } else {
-          console.log("不匹配")
-          this.checkData.workZip = e.target.value = val = '';
-          this.reg.mpostCode = true;
-        }
+
       },
       ratio(val, e) {
 
       },
       businessArea(val, e, el, unit) {
-        console.log("营业面积")
-        val = parseFloat(val);
-        if (isNaN(val)) {
-          console.log(" 面积NAN")
-          val = e.target.value = "";
-          this.businessSC(val, el);
 
-        } else if (val <= 0) {
-          console.log(" 面积<0")
-          val = e.target.value = "0.00" + unit;
-          this.businessSC(val, el);
-
-        } else if (val > 0) {
-          console.log(" 面积>0")
-          if (val.toString().indexOf('.') == -1) {
-            console.log("无小数")
-            e.target.value = val = val + "." + "0" + '0' + unit;
-            this.businessSC(val, el);
-
-            console.log(e.target.value)
-            console.log(val)
-            console.log(this.checkData.selfpremisesArea)
-
-          } else if (val.toString().indexOf('.') != -1) {
-            console.log("有小数")
-            if (val.toString().split(".")[1].length < 2) {
-              console.log("一位小数")
-              e.target.value = val = val + "0" + unit;
-              this.businessSC(val, el);
-              console.log(this.checkData.selfpremisesArea)
-
-            } else {
-              console.log("两位小数")
-              e.target.value = val = val.toString().split(".")[0] + "." + val.toString()
-                .split(".")[1].slice(0, 2) + unit;
-              this.businessSC(val, el);
-            }
-          }
-        }
-        console.log(this.checkData.selfpremisesArea);
-        // console.log(this.checkData.selfpremisesArea.slice(0, -1))
-        this.acreage = this.checkData.selfpremisesArea.slice(0, -2);
-        this.Percent = this.checkData.selfhasProportion.slice(0, -1);
-        console.log(this.acreage)
-        console.log(this.Percent)
       },
       businessSC(val, el) {
-        switch (el) {
-          case "营业面积":
-            this.checkData.selfpremisesArea = val;
-            break;
-          case "占股比例":
-            this.checkData.selfhasProportion = val;
-            break;
-        }
+
       },
       mPhone(val, e) {
-        // mphoneM
-        // var reg=/^\d{3,4}$/;
-        var reg = /^(0[0-9]{2,3}-)?([0-9]{5,8})$/; //含重复
-        var regNoR =
-          /^(0[0-9]{2,3}-)?(0{5,8})|(1{5,8})|(2{5,8})|(3{5,8})|(4{5,8})|(5{5,8})|(6{5,8})|(7{5,8})|(8{5,8})|(9{5,8})$/; //不含重复
-        var regNoOrder =
-          /^(0[0-9]{2,3}-)?(12345)|(54321)|(123456)|(654321)|(23456)|(65432)|(1234567)|(7654321)|(234567)|(765432)|(34567)|(76543)|(12345678)|(87654321)|(2345678)|(8765432)|(345678)|(876543)|(45678)|(87654)$/; //非正序倒序
-        console.log("电话正则")
-        //  var rek=/?<k1>[0-9a-zA-Z])\k<k1>{5}$ /;//不重复
-        if (reg.test(val)) {
-          console.log("重复")
-          if (regNoR.test(val) || regNoOrder.test(val)) {
-            console.log("全是重复")
-            this.reg.mphoneM = false;
-            this.reg.mphoneR = true;
-            this.checkData.workTel = e.target.value = val = '';
-          }
-          // else if(regNoOrder.test(val)){
-          //   console.log("全是按顺序")
-          //       this.reg.mphoneM = false;
-          //   this.reg.mphoneR = false;
-          // this.reg.mphoneO = true;  
-          // }
-          else {
-            console.log("既不重复也没按顺序")
-            this.reg.mphoneM = false;
-            this.reg.mphoneR = false;
-            this.checkData.workTel = e.target.value = val;
-            // workTel=   =val;
-            // this.reg.mphoneO = false;
-          }
-          //  workTel this.
-        }
-        // else if(val=-1){
-        //   this.reg.mphoneM = false;
-        // }
-        //  else if(regNoR.tes(val)){
-        //    console.log("全是重复")
-        //    this.reg.mphoneM=true;         
-        //  }
-        else {
-          console.log("不匹配")
-          this.reg.mphoneM = true;
-          this.reg.mphoneR = false;
-          this.checkData.workTel = e.target.value = val = '';
-        }
+
       },
       mMonth(val, e) {
-        console.log("mMonth")
-        if (val >= 1 && val <= 12) {
-          console.log("小于31")
-          this.checkData.iloanTerm = e.target.value = val;
-          this.reg.mMontyP = false;
-        } else {
-          console.log("大于31")
-          this.checkData.iloanTerm = e.target.value = val = '';
-          this.reg.mMontyP = true;
-        }
+
       },
       mday(val, e) {
-        console.log("reg");
-        if (val >= 1 && val <= 31) {
-          console.log("小于31")
-          this.checkData.payDay = e.target.value = val;
-          this.reg.mpayDay = false;
-        } else {
-          console.log("大于31")
-          this.checkData.payDay = e.target.value = val = '';
-          this.reg.mpayDay = true;
-        }
+
       },
       childNumver(val, e) {
-        val = parseInt(val);
-        if (val >= 0 && val <= 99) {
-          this.checkData.childCount = val;
-          this.Children.ChildCount = false;
-        } else {
-          this.checkData.childCount = " ";
-          this.Children.ChildCount = true;
-        }
+
       },
       EmpNum(val, e) {
-        val = parseInt(val);
-        if (val >= 0 && val <= 99999) {
-          this.workInf.empNumber = val;
-          this.workInf.empNumber = false;
-        } else {
-          this.workInf.empNumber = " ";
-          this.workInf.empNumber = true;
-        }
+
       },
-      // count(val, e, name) {
-      //   console.log("数量")
-      //   val = parseInt(val);
-      //   console.log(val)
-      //   if (isNaN(val)) {
-      //     console.log(" 数量<NAN")
-      //     val = e.target.value = "";
-      //     this.countSC(name, val)
-      //   } else if (val <= 0) {
-      //     console.log(" 数量<0")
-      //     val = e.target.value = 0;
-      //   } else if (val > 0) {
-      //     console.log(" 数量>0")
-      //     e.target.value = val;
-      //   }
-      // },
-      // countSC(el, val) {
-      //   console.log(el + "=====" + val)
-      //   switch (el) {
-      //     case "子女数量":
-      //       this.checkData.childCount = val;
-      //       break;
-      //     case "员工人数":
-      //       this.checkData.selfempCount = val;
-      //       break;
-      //   }
-      // },
+    
       formatMoney(val, e, name) {
-        // this.formatSC(name,val);
-        console.log(name)
-        console.log(" blur更改金额")
-        val = parseFloat(val);
-        if (isNaN(val)) {
-          console.log(" 金额<NAN")
-          val = e.target.value = "";
-          this.formatSC(name, val);
-        } else if (val <= 0) {
-          console.log(" 金额<0")
-          val = e.target.value = "0.00";
-          this.formatSC(name, val);
-        } else if (val > 0) {
-          console.log(" 金额>0")
-          if (val.toString().indexOf('.') == -1) {
-            console.log("无小数")
-            // val = val + "."+0+0;
-            // for(var i=0;i<2;i++){
-            //   val[i]+=0
-            //   // }
-            //   console.log(val)
-            //   var k=parseFloat(val)
-            // e.target.value = val;
-            //   // parseFloat(val)
-            //   console.log(typeof(val))
-            //   console.log(k)
-            //   console.log(typeof(k))
-
-            // //  k= parseFloat(k)
-            //   e.target.value = val=parseFloat(val);
-            //   console.log(typeof(e.target.value))
-
-            val = val + "." + "0" + '0';
-            // e.target.value = val = val + "."+"0"+'0';
-
-            console.log(e.target.value)
-
-            // e.target.value= val+"%"
-            console.log(val)
-            console.log(e.target.value)
-            console.log(this.checkData.fbalance)
-
-            this.formatSC(name, val);
-            console.log(this.checkData.fbalance)
-
-
-          } else if (val.toString().indexOf('.') != -1) {
-            console.log("有小数")
-            // console.log(val.toString().split(".").length )
-            if (val.toString().split(".")[1].length < 2) {
-              console.log("一位小数")
-              //  e.target.value = val= val.toString().split(".")[0] + "." + val.toString().split(".")[1]+"0";
-              e.target.value = val = val + "0";
-              // console.log(this.checkData.fbalance)
-              // console.log(val)
-              // console.log(e.target.value)
-              this.formatSC(name, val);
-            } else {
-              console.log("两位小数")
-              e.target.value = val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
-              this.formatSC(name, val);
-            }
-
-          }
-        }
+       
       },
       formatSC(el, val) {
-        console.log(el + "=====" + val)
-        switch (el) {
-          case "月还款":
-            this.checkData.fbalance = val;
-            break;
-          case "借款金额":
-            this.checkData.iloanAmt = val;
-            break;
-          case "月均工资":
-            this.checkData.avgsalaryamt = val;
-            break;
-          case "注册资金":
-            this.checkData.regcapitalamt = val;
-            break;
-          case "月利润":
-            this.checkData.profitamountmamt = val;
-            break;
-          case "月还款/租金":
-            this.checkData.monthrentamt = val;
-            break;
-          case "近一年利润":
-            this.checkData.oneYearProfitamt = val;
-            break;
-          case "生活费支付":
-            this.checkData.childPaycostamt = val;
-            break;
-          case "父母收入":
-            this.checkData.parentIncome = val;
-            break;
-          case "开销":
-            this.checkData.fconsumption = val;
-            break;
-        }
+
       },
-      // testVuex(){
-      //   console.log("testVuex");
-      //   console.log(this.$store.state.First.Workbench)
 
-      //   console.log(this.First)
-
-      // },
       formatMoneyBackUp(val, e) {
-        console.log(" blur更改金额")
-        // console.log(e.target)
-        // console.log(val)
-        // console.log(this.checkData.fbalance)
-        // console.log(typeof(val))
-        console.log(parseFloat(val))
-        val = parseFloat(val);
-        console.log(typeof (val))
-        console.log(val)
-        // console.log(val)
-        if (val <= 0 || isNaN(val)) {
-          console.log(" 金额<0")
-
-          this.checkData.fbalance = this.val = val = e.target.value = "0.00";
-          console.log(e.target.value)
-          console.log(val)
-          console.log(this.checkData.fbalance)
-        } else if (val > 0) {
-          console.log(" 金额>0")
-
-          // this.checkData.fbalance = this.val = val = e.target.value = Math.floor(val * 100) 
-          console.log(e.target.value)
-          console.log(val)
-          console.log(this.checkData.fbalance)
-          console.log(val.toString().indexOf('.'))
-          if (val.toString().indexOf('.') == -1) {
-            console.log("无小数")
-            console.log(val)
-            e.target.value = val = val + ".00"
-          } else if (val.toString().indexOf('.') != -1) {
-            console.log("有小数")
-            console.log(typeof (val))
-            console.log(val.toString().split("."))
-            //  var FloatCount=  val.toString().split(".")
-            // val=FloatCount[0]+"."+ FloatCount[1].slice(0,2);
-            e.target.value = val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
-            console.log(val)
-          }
-        }
-
+       
       },
 
     },
-    computed: {
-      First() {
-        return this.$store.state.First
-      },
-      // 计算属性的 getter
-      format: function (val) {
-        // `this` 指向 vm 实例
-        console.log(val)
-        return val.split(".")
-        // return this.message.split('').reverse().join('')
-      }
-    },
-    filters: {
-      formateAmount: function (val) {
-        if (val <= 0) {
-          return "0.00"
-        }
-        // if (!value) return ''
-        // value = value.toString()
-        // return value.charAt(0).toUpperCase() + value.slice(1)
-      }
-    },
-    // computed: {
-    //   formatMoney(val) {
-    //     console.log("格式化金额");
-    //     console.log(val)
-    //     // if (val <= 0) {
-    //     //  return val = 0;
-    //     // }
-    //   },
-    // },
+
     mounted() {
       this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
 
@@ -2335,40 +1614,7 @@
       }).then(res => {
         console.log(res.data);
         this.checkData = res.data;
-        this.AreaNPercent(); // 营业面积 百分比拼上后面字符
-        console.log("查询到的日期")
-        console.log(this.checkData.entryDate)
-        console.log(this.checkData.compegDate)
 
-
-        // console.log(this.checkData.wnetEcutedBrea)
-        // console.log(this.InternetShow.commentS)
-        this.mountJ(0, res.data.wbeexEcuted);
-        this.mountJ(1, res.data.wnetHirecom);
-        this.mountJ(2, res.data.wnetEcutedBrea);
-        this.mountJ(3, res.data.wnetHirecomBrea);
-        this.mountJ(4, res.data.wnetPhone);
-        this.mountJ(5, res.data.wnetHirecomName);
-        this.mountJ(6, res.data.wnetHirecomPhone);
-        this.mountJ(7, res.data.wnetAddrandEstate);
-        this.mountJ(8, res.data.wnetHirecomAddress);
-        this.mountJ(9, res.data.wnetCompany);
-        this.mountJ(10, res.data.wnetAddrstate);
-        this.mountJ(11, res.data.iisself);
-        this.mountJ(12, res.data.privateOwnerFlag); //私营业主是否
-        this.mountJ(13, res.data.fmarrflag); //婚姻状况
-        this.mountJ(14, res.data.spouseWork); //配偶工作情况
-        this.mountJ(15, res.data.spouseSamecity); // 是否在同一个城市工作生活
-        this.mountJ(16, res.data.childFlag); // 是否有子女
-        this.mountJ(17, res.data.childIspaycost); // 是否支付其生活费
-        this.mountJ(18, res.data.parentIsliving); // 父母是否在世
-        this.mountJ(19, res.data.brothersIfhas); // 是否有兄弟姐妹
-        this.mountJ(20, res.data.aisresident); // 是否为常住地址
-        this.mountJ(21, res.data.iloanBefore); //是否在我司申请借款
-        // console.log(res.data.privateOwnerFlag)
-
-        // console.log(this.checkData.wnetHirecom)
-        // checkData.iisself
       });
       // 省    
       this.get("/credit/queryProvince", {}).then(res => {
@@ -2381,77 +1627,7 @@
         this.hirecomKind = res.data;
       })
     },
-    directives: {
 
-      numberOnly: {
-        // bind() {
-        //   handler = function () {
-        //     this.el.value = this.el.value.replace(/\D+/, '')
-        //   }.bind(this)
-        //   this.el.addEventListener('input', this.handler)
-        // },
-        // unbind() {
-        //   this.el.removeEventListener('input', this.handler)
-        // }
-      }
-
-      // 指令的定义
-      // numbers: {
-      //   twoWay: true,
-      //   bind: function (el) {
-      //     console.log(el);
-      //     el.handler = function () {
-      //       let value;
-
-      //       function formatNumber(num, cent, isThousand) {
-      //         var num = num.toString().replace(/\$|\,/g, '');
-
-      //         // 检查传入数值为数值类型
-      //         if (isNaN(num))
-      //           num = "0";
-
-      //         // 获取符号(正/负数)
-      //         let sign = (num == (num = Math.abs(num)));
-
-      //         num = Math.floor(num * Math.pow(10, cent) + 0.50000000001); // 把指定的小数位先转换成整数.多余的小数位四舍五入
-      //         let cents = num % Math.pow(10, cent); // 求出小数位数值
-      //         num = Math.floor(num / Math.pow(10, cent)).toString(); // 求出整数位数值
-      //         cents = cents.toString(); // 把小数位转换成字符串,以便求小数位长度
-
-      //         // 补足小数位到指定的位数
-      //         while (cents.length < cent)
-      //           cents = "0" + cents;
-
-      //         if (isThousand) {
-      //           // 对整数部分进行千分位格式化.
-      //           for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
-      //             num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
-      //         }
-
-      //         if (cent > 0)
-      //           return (((sign) ? '' : '-') + num + '.' + cents);
-      //         else
-      //           return (((sign) ? '' : '-') + num);
-      //       };
-      //       console.log(formatNumber(el.value, 2, 0));
-      //       (function () {
-      //         value = formatNumber(el.value, 2, 0)
-      //         console.log(value);
-      //         return value
-      //       })()
-      //       el.value = value
-      //       console.log(el.value);
-      //     };
-      //     el.addEventListener('blur', el.handler);
-      //   },
-      //   update: function (el, binding, vnode) {
-      //     if (el.value !== '') {
-      //       el.value = el.value.replace(/[^0-9.]+/g, '');
-      //       console.log(el.value);
-      //     }
-      //   },
-      // },
-    },
   }
 
 </script>
@@ -2540,10 +1716,8 @@
     width: 33%;
   }
   /* 上网查询信息 */
-
-
-
   /* .InternetInf_left_label, */
+
   .InternetInf_right_label,
   .CheckId_left_label,
   .CheckId_right_label,
@@ -2561,8 +1735,6 @@
     /* border: 1px solid yellow; */
     text-align: right;
   }
-
-
   /* 单独设置-家庭信息-右侧li上面的margin空行 */
 
   .CreditForm_FamilyInf_ul_right {
@@ -2642,12 +1814,14 @@ height: 55px;;
     /* height: 55px; */
   }
   /* 家庭信息----我一行一个li后样式 */
-.CreditForm_InternetInf li{
+
+  .CreditForm_InternetInf li {
     /* border: 1px solid yellowgreen; */
     clear: both;
-/* height: 60px; */
-/* line-height: 60px; */
-}
+    /* height: 60px; */
+    /* line-height: 60px; */
+  }
+
   .CreditForm_FamilyInf li {
     /* border: 1px solid yellowgreen; */
     /* margin-top: 30px; */
@@ -2655,22 +1829,26 @@ height: 55px;;
     height: 55px;
     line-height: 55px;
   }
-/* .InternetInf_left_label  */
-  .CreditForm_FamilyInf li p,.CreditForm_InternetInf li p {
-/* border: 1px solid blue; */
+  /* .InternetInf_left_label  */
+
+  .CreditForm_FamilyInf li p,
+  .CreditForm_InternetInf li p {
+    /* border: 1px solid blue; */
     float: left;
     width: 28%;
     position: relative;
     vertical-align: middle;
   }
- .InternetInf_left_label{
+
+  .InternetInf_left_label {
     width: 176px;
     display: inline-block;
     text-align: right;
     vertical-align: middle;
     /* top: 10px; */
   }
-  .inter{
+
+  .inter {
     /* display: inline-block; */
     /* border: 1px solid red; */
     /* height: 32px; */
