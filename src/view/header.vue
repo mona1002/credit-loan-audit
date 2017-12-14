@@ -9,6 +9,7 @@
       <el-menu 
         router 
         unique-opened 
+        mode="horizontal"  
         ref="navbar"
         active-text-color="#ffd04b"
         :default-active="onRoutes"
