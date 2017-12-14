@@ -3,13 +3,15 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import store from './store/store'
+// import store from './store/store'
 import qs from 'qs'
 import http from '@/util/http' 
 // import validation from '@/util/validation' 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import $ from 'jquery'
+import 'babel-polyfill'
+
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI)
@@ -22,7 +24,6 @@ Vue.use(http)
 new Vue({
   el: '#app',
   router,
-  store,
   template: '<App/>',
   components: { App }
 })
