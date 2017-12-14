@@ -322,7 +322,7 @@
               </p>
               <p v-show="this.marriage.workingLivingInf">
                 <label class="Family_label"> 在同一个城市工作生活信息： </label>
-                <span class="detail_inf family">{{this.FormData.spouseSamecitytxt }} </span>
+                <span class="detail_inf">{{this.FormData.spouseSamecitytxt }} </span>
               </p>
             </li>
             <li>
@@ -338,7 +338,7 @@
               </p>
               <p>
                 <label class="Family_label"> 子女数量备注： </label>
-                <span class="detail_inf family">{{this.FormData.childCounttxt }} </span>
+                <span class="detail_inf">{{this.FormData.childCounttxt }} </span>
               </p>
             </li>
             <li v-show="this.Children.ChildrenOrNot">
@@ -374,7 +374,7 @@
               </p>
               <p v-show="this.parent.livingOrNot">
                 <label class="Family_label"> 父母备注： </label>
-                <span class="detail_inf family">{{this.FormData.parentIslivingtxt }} </span>
+                <span class="detail_inf">{{this.FormData.parentIslivingtxt }} </span>
               </p>
             </li>
             <li v-show="this.parent.livingOrNot">
@@ -384,7 +384,7 @@
               </p>
               <p>
                 <label class="Family_label"> 父母身体状况备注： </label>
-                <span class="detail_inf family">{{this.FormData.parentHealthtxt }} </span>
+                <span class="detail_inf">{{this.FormData.parentHealthtxt }} </span>
               </p>
             </li>
             <li v-show="this.parent.livingOrNot">
@@ -394,7 +394,7 @@
               </p>
               <p>
                 <label class="Family_label"> 父母是否需要赡养备注： </label>
-                <span class="detail_inf family">{{this.FormData.parentPayalimonytxt }} </span>
+                <span class="detail_inf">{{this.FormData.parentPayalimonytxt }} </span>
               </p>
             </li>
             <li v-show="this.parent.livingOrNot">
@@ -712,7 +712,7 @@
 
   .CreditForm {
     min-width: 1443px;
-    overflow: auto;    
+        overflow: auto;
   }
 
   .CreditForm li {
@@ -965,7 +965,6 @@ height: 55px;;
   .CreditForm_FamilyInf li {
     /* border: 1px solid yellowgreen; */
     /* margin-top: 30px; */
-    clear: both;
     height: 55px;
     line-height: 55px;
   }
@@ -973,8 +972,6 @@ height: 55px;;
   .CreditForm_FamilyInf li p {
     float: left;
     width: 50%;
-        /* border: 1px solid blueviolet; */
-
   }
   /* 工作信息-左侧-两行-第二行 */
 
@@ -1006,8 +1003,5 @@ height: 55px;;
     /* background: red; */
     vertical-align: middle;
   }
-.family{
-  line-height:20px;
-  width: 69%;
-}
+
 </style>

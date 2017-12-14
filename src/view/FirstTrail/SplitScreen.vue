@@ -163,7 +163,7 @@
   import CreditApproval from "./CreditApproval";
   // 查询
   import cCreditForm from "./checkComponent/cCreditForm";
-  import cFinanceInformation from "./checkComponent/FinanceInformation";
+  // import cFinanceInformation from "./checkComponent/FinanceInformation";
   import cremarkDetail from "./checkComponent/remarkDetail"; //备注信息
   import cborrowerInformationDetail from "./checkComponent/borrowerInformationDetail"; //借款人资料
   import capplicationInformationDetail from "./checkComponent/applicationInformationDetail"; //申请信息
@@ -174,6 +174,7 @@
   export default {
     data() {
       return {
+         originLeft:'',
         // 进件人信息
         customInf: [], //申请信息页local字段
         tastwaitingPass: [], //详情列表页信息--(含)取applyId
@@ -277,17 +278,18 @@
         console.log(this.$refs.right_tab_ul.style.left)
       },
       showList() { // 左侧list 显示按钮
-        console.log("show")
+        // console.log("show")
         this.$refs.Left_title.style.left = "0";
         this.flexible = false;
       },
       hid() { // 左侧list 隐藏按钮
-        console.log("hid")
+        // console.log("hid")
         this.$refs.Left_title.style.left = "-200px";
         this.flexible = true;
       },
       FullScreen() {
         this.showHalfBtn = true;
+        this.originLeft = this.$refs.right_tab_ul.style.left; //点击全屏之前，将滑动tab的left赋值给一个变量，作用：点击分屏之后回到此left值
         this.$refs.right_tab_ul.style.left = "0"; // 让tab 重新从影音列表开始显示
         this.$refs.rLeft.style.display = "none";
         this.$refs.rRight.style.width = "100%";
@@ -296,6 +298,7 @@
       DblScreen() {
         this.showHalfBtn = false;
         // this.FullScreenlShow = true;
+        this.$refs.right_tab_ul.style.left = this.originLeft; //回到全屏之前的left值
         this.$refs.rLeft.style.display = "block";
         this.$refs.rRight.style.width = "50%";
       },
@@ -311,7 +314,7 @@
           this.flag2[i] = true;
         }
         this.$refs.tabTwo[this.tabActiveInd2].className = "tab2Act"; //  tab2 之前激活样式赋值回去 
-        if (ind != 0) { // 点击影音资料的时候，两边不置灰，影音资料部分可点击
+        if (ind != 0 && ind != 8) { // 点击影音资料的时候，两边不置灰，影音资料部分可点击
           console.log("wo bu deng yu 00000000000000-------tab1")
           // this.$refs.tabTwo[ind].className= "setGray"; // tab2 对应css 样式标灰
           this.flag2[ind] = false; // tab2 对应click 事件不可用
@@ -328,8 +331,9 @@
           this.flag1[i] = true;
         }
         this.$refs.tabOne[this.tabActiveInd1].className = "tab1Act"; //  tab1 之前激活样式赋值回去 
-        if (ind != 0) { // 点击影音资料的时候，两边不置灰，影音资料部分可点击
+        if (ind != 0 && ind != 8) { // 点击影音资料的时候，两边不置灰，影音资料部分可点击
           console.log("-----！= ---tab2")
+          console.log(ind)
           // this.$refs.tabOne[ind].className= "setGray";// tab1 对应css 样式标灰
           this.flag1[ind] = false; // tab1 对应click 事件不可用
         }
@@ -382,7 +386,7 @@
       cCreditForm,
       AudioVisualLeft,
       cremarkDetail, //
-      cFinanceInformation,
+      // cFinanceInformation,
       cborrowerInformationDetail,
       capplicationInformationDetail,
       processTrajectory
@@ -467,7 +471,7 @@
     /* height: 100%; */
     height: calc(100% - 70px);
     overflow: auto;
-    padding: 13px 30px;
+    padding: 13px 9px;
   }
   /* 借款人详情 */
 
