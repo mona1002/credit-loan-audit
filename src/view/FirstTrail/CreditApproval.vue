@@ -2,7 +2,9 @@
 <template>
   <div class="creditApproval-class" style="padding:10px">
     <div class="address-title">
-      概要信息
+      <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+      <span class="headFont">概要信息</span>
+      <!-- {{title1}} -->
     </div>
     <el-form style="padding:0 20px;width:100%; height:150px; " class="info">
       <el-form-item label="审批人:" class="item-column3">
@@ -1181,6 +1183,8 @@ export default {
 
 
 
+
+
 /* 三列 */
 
 .creditApproval-class .item-column3 {
@@ -1208,6 +1212,8 @@ export default {
 
 
 
+
+
 /* 按钮集合控件 */
 
 .creditApproval-class .btn-div {
@@ -1215,6 +1221,8 @@ export default {
   width: 80%;
   float: left;
 }
+
+
 
 
 
@@ -1249,31 +1257,31 @@ export default {
 
 
 
+
+
 /* 弹窗背景 */
 
 .creditApproval-class .cover-view {
   background: rgba(0, 0, 0, 0.4);
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  position: fixed;
   overflow: auto;
   margin: 0;
   width: 100%;
   height: 100%;
   z-index: 101;
+
+
+  /*position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;*/
 }
-
-
-
-
-
-
-
-
-
-
 
 
 /* 两列 */
@@ -1283,6 +1291,8 @@ export default {
   float: left;
   margin: 0;
 }
+
+
 
 
 
@@ -1308,6 +1318,8 @@ export default {
   overflow: hidden;
   padding-bottom: 30px;
 }
+
+
 
 
 
@@ -1356,11 +1368,15 @@ export default {
 
 
 
+
+
 /* textarea */
 
 .creditApproval-class .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
+
 
 
 
@@ -1390,6 +1406,8 @@ export default {
 
 
 
+
+
 /* 弹窗页面 关闭按钮*/
 
 .creditApproval-class .el-tag {
@@ -1406,6 +1424,8 @@ export default {
   right: 0px;
   top: 5px;
 }
+
+
 
 
 
@@ -1449,6 +1469,8 @@ export default {
 
 
 
+
+
 /* 审批结论轨迹 */
 
 .creditApproval-class .spjl-div {
@@ -1478,6 +1500,8 @@ export default {
 
 
 
+
+
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -1485,6 +1509,8 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
+
 
 
 
@@ -1544,6 +1570,8 @@ export default {
 
 
 
+
+
 /* 申请信息 */
 
 .creditApproval-class .info .el-form-item__content {
@@ -1553,6 +1581,8 @@ export default {
 .creditApproval-class .info .el-form-item__label {
   width: 100px;
 }
+
+
 
 
 
@@ -1581,11 +1611,15 @@ export default {
 
 
 
+
+
 /* 有编辑框的 提示信息*/
 
 .creditApproval-class .back-form .back-form-edit-li {
   margin-top: 20px !important;
 }
+
+
 
 
 
@@ -1619,6 +1653,8 @@ export default {
 
 
 
+
+
 /*回退*/
 
 .creditApproval-class .el-icon-check-back {
@@ -1631,6 +1667,8 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
 
 
 
@@ -1661,6 +1699,8 @@ export default {
 
 
 
+
+
 /*放弃*/
 
 .creditApproval-class .el-icon-check-giveup {
@@ -1673,6 +1713,8 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
 
 
 
@@ -1703,6 +1745,8 @@ export default {
 
 
 
+
+
 /*发起反欺诈*/
 
 .creditApproval-class .el-icon-check-start {
@@ -1715,6 +1759,8 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
 
 
 
@@ -1745,6 +1791,8 @@ export default {
 
 
 
+
+
 /*流程轨迹*/
 
 .creditApproval-class .el-icon-check-lcgj {
@@ -1756,6 +1804,19 @@ export default {
   margin: 0;
   vertical-align: middle;
   display: inline-block;
+}
+
+
+
+/* 折叠面板头部背景色和icon */
+
+.creditApproval-class .icon_hat {
+  padding: 9px 10px 10px 13px;
+  vertical-align: middle;
+}
+
+.creditApproval-class .headFont {
+  font-size: 16px;
 }
 
 </style>
