@@ -12,6 +12,7 @@ import $ from 'jquery'
 import promise from 'es6-promise';
 promise.polyfill();
 
+
 Vue.config.productionTip = false;
 Vue.use(ElementUI)
 Vue.use(http)

@@ -12,8 +12,8 @@
         <el-tree :data="treeData" :props="defaultProps" highlight-current expand-on-click-node default-expand-all no-key="id" @node-click="handleNodeClick">
         </el-tree>
         <!-- 备选  折叠面板- 手风琴效果 -->
-        <el-button @click.native="coverShow=true">添加</el-button>
-        <!-- <el-button type="text" @click="open">添加</el-button> -->
+        <!-- <el-button @click.native="coverShow=true">添加</el-button> -->
+        <el-button type="text" @click="open">添加</el-button>
       </el-aside>
       <!-- 右侧 表单内容 -->
       <el-container style="background:url(.../../../static/images/3C281C6A-532B-4A55-A9BF-F142E9F09063@1x.png) center no-repeat;">
@@ -48,7 +48,7 @@
                 </el-table>
                 <!-- 分页 -->
                 <!-- v-show="listData.recordList.length" -->
-                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 15, 20]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="listData.totalRecord" >
+                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 15, 20]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="listData.totalRecord">
                 </el-pagination>
               </div>
             </el-collapse-item>
@@ -277,7 +277,7 @@ export default {
       workData: [],
       active: false, // 添加电话 提示语
       addTelRex: false, // 添加电话 校验
-      formId:'' , // 传给表单的  id
+      formId: '', // 传给表单的  id
     }
   },
   mounted() {
@@ -636,6 +636,43 @@ export default {
           // 直接处理 显示  历史
           this.hisShow = true;
       })
+    },
+    // 弹窗 
+    open() {
+      this.$alert(
+        '<div class="add-title">\
+          <span>添加申请单电话信息</span>\
+        </div>\
+        <ul class="add-content">\
+          <li>\
+            <span class="add-label"><span class="require-icon">*</span>电话类型:</span>\
+            <el-select v-model="addTelType" placeholder="请选择">\
+              <el-option v-for="item in telTypes" :key="item.value" \:label="item.label" :value="item.value">\
+              </el-option>\
+            </el-select>\
+          </li>\
+          <li>\
+            <span class="add-label"><span class="require-icon">*</span>电话名称:</span>\
+            <el-input type="text" name="" v-model="addTelName" value="" placeholder=""></el-input>\
+          </li>\
+          <li v-show="(addTelType!="01"|| addTelType!="02") && (addTelType=="03" || addTelType=="04" || addTelType=="05")">\
+            <span class="add-label"><span class="require-icon">*</span>关系:</span>\
+            <el-select v-model="addRelationShip" placeholder="请选择">\
+              <el-option v-for="item in relationShips" :key="item.value" :label="item.label" :value="item.value">\
+              </el-option>\
+            </el-select>\
+          </li>\
+          <li>\
+            <span class="add-label"><span class="require-icon">*</span>电话号码:</span>\
+            <el-input type="text" name="" v-model="addTelNum" value=""></el-input>\
+          </li>\
+          <li>\
+            <el-button @click.native="append" type="primary" v-show="active">确认</el-button>\
+            <el-button type="primary" disabled v-show="active==false">确认</el-button>\
+          </li>\
+        </ul>', {
+          dangerouslyUseHTMLString: true
+        });
     }
 
 
@@ -674,7 +711,6 @@ export default {
   line-height: 60px;
 }
 
-
 .phone-credit .el-aside {
   /*color: #333;*/
   height: 100%;
@@ -686,33 +722,6 @@ export default {
   /*width: 210px !important;*/
   /*height: 321px;*/
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* 树形  结构 */
@@ -728,33 +737,6 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* el-tree  title */
 
 .phone-credit .el-tree-node__content {
@@ -766,33 +748,6 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* element-ui tree icon 箭头*/
 
 .phone-credit .el-tree-node__content .el-tree-node__expand-icon {
@@ -802,69 +757,15 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 三角 */
 
 .phone-credit .el-tree-node__expand-icon {
-
   /*transform: rotate(180deg);*/
   /*background: #0077ff;*/
   /*width: 10px;*/
   /*height: 6px;*/
   /*color:inherit;*/
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* 三角 icon */
@@ -875,32 +776,6 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* label 字体 */
 
 .phone-credit .el-tree-node__label {
@@ -908,64 +783,11 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 二级 目录 样式 */
 
 .phone-credit .el-tree-node__content {
   padding-left: 0px !important;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* 添加电话 按钮 */
@@ -977,32 +799,6 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 点击添加出现的 页面 */
 
 .phone-credit .cover-view {
@@ -1010,36 +806,15 @@ export default {
   width: 100%;
   height: 100%;
   position: absolute;
+
+  position: fixed;
   top: 0;
   left: 0;
+  vertical-align: middle;
+  text-align: center;
+  overflow: auto;
+  z-index: 101;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* 添加页面内容 */
@@ -1061,33 +836,6 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* title */
 
 .phone-credit .cover-content .add-title {
@@ -1095,33 +843,7 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**/
+/* 添加表单内容 */
 
 .phone-credit .add-content li {
   border-bottom: 1px solid #ededed;
@@ -1146,63 +868,11 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 添加电话  input 样式*/
 
 .phone-credit .add-content .el-input {
   width: inherit;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* el-tree - label*/
@@ -1217,33 +887,6 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* children - label*/
 
 .phone-credit .el-tree-node__children .el-tree-node__label {
@@ -1256,33 +899,6 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 确定按钮 */
 
 .phone-credit .cover-content .el-button {
@@ -1291,32 +907,6 @@ export default {
   /*margin-top: 10px;*/
   /*margin-right: 10px;*/
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* 弹窗页面 关闭按钮*/
@@ -1334,32 +924,6 @@ export default {
 .phone-credit .el-tag .el-icon-close {
   right: 0px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* 右侧 头 table*/
@@ -1403,6 +967,7 @@ export default {
   line-height: 38px;*/
 }
 
+
 /* 表格分页 */
 
 .phone-credit .el-pagination {
@@ -1410,6 +975,7 @@ export default {
   width: 100%;
   text-align: center;
 }
+
 
 /* form-his */
 
@@ -1419,11 +985,13 @@ export default {
   background: #fff;
 }
 
+
 /* 添加申请单电话信息 必填 * */
 
 .phone-credit .require-icon {
   color: #ff0000;
 }
+
 
 /* 添加申请单电话 label*/
 
@@ -1431,6 +999,7 @@ export default {
   display: inline-block;
   width: 70px;
 }
+
 
 /* 表单 */
 
@@ -1464,6 +1033,7 @@ export default {
   line-height: 38px;
 }
 
+
 /* label */
 
 .phone-credit .el-form-item__label {
@@ -1474,6 +1044,7 @@ export default {
   margin-bottom: 5px !important;
 }
 
+
 /* 三列 */
 
 .phone-credit .item-column3 {
@@ -1482,6 +1053,7 @@ export default {
   margin: 0;
   margin-bottom: 10px;
 }
+
 
 /* 两列 */
 
@@ -1497,9 +1069,11 @@ export default {
   margin: 0;
 }
 
+
 /*.phone-credit .item-column1 textarea {
   margin-left: 20px;
 }*/
+
 
 /* 表单提交 */
 
@@ -1513,6 +1087,7 @@ export default {
   margin-top: 50px;
 }
 
+
 /* input 不可编辑状态*/
 
 .dis-input {}
@@ -1524,17 +1099,21 @@ export default {
 .phone-credit .el-input__inner {
   height: 30px !important;
 }
+
+
 /* el-input width*/
 
 .phone-credit .el-container .el-main .el-input {
   width: 258px !important;
 }
 
+
 /* 表格头 */
 
 .phone-credit .el-header {
   padding: 0;
 }
+
 
 /* 历史调查日志 收缩 title */
 
@@ -1554,6 +1133,7 @@ export default {
 .phone-credit .el-collapse-item__header .el-collapse-item__arrow {
   padding-right: 20px;
 }
+
 
 /*  表单样式 */
 
@@ -1576,15 +1156,13 @@ export default {
   height: auto;
   float: left;
   width: 795px;
-
-
 }
-
 
 .phone-credit .submit-class {
   text-align: right;
-  width:59.3%;
+  width: 59.3%;
 }
+
 
 /* 折叠面板头部背景色和icon */
 
@@ -1597,7 +1175,6 @@ export default {
   font-size: 16px;
 }
 
-
 .phone-credit .el-select:hover .el-input__inner {
   background: #ffffff;
   border: 1px solid #475669;
@@ -1605,6 +1182,7 @@ export default {
   /*width: 258px;*/
   height: 33px;
 }
+
 
 /*.phone-credit .el-select .el-input.is-disabled:hover .el-input__inner {
   background: #f8f9fd;
@@ -1630,41 +1208,10 @@ export default {
   height: 102px;*/
 }
 
+
 /*add-content*/
 
-/* el-tree node */
-
-/*内容*/
-
-.el-tree .el-tree-node .el-tree-node__content {
-  background: #f8f9fd;
- box-shadow: 0 0 1px 0 rgba(151, 151, 151, .3);
-}
-
-/*单独设置头*/
-
-.el-tree .el-tree-node .el-tree-node__children .el-tree-node__content {
-  background: #ffffff;
-}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 高亮 */
-
-.el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
-  background: #f8f9fd;
-}
 
 </style>
