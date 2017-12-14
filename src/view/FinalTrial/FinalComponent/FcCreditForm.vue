@@ -712,7 +712,7 @@
 
   .CreditForm {
     min-width: 1443px;
-    overflow: auto;    
+        overflow: auto;
   }
 
   .CreditForm li {

@@ -384,12 +384,12 @@
     },
     mounted() {
       // localStorage.setItem("userInf", JSON.stringify(userInf));
-      console.log(" 影音资料左")
+      // console.log(" 影音资料左")
       // console.log(JSON.parse(localStorage.getItem("applicationInformationDetail") ));
       // this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
       this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //获取列表详情的id
       // this.localInf = JSON.parse(localStorage.getItem("applicationInformationDetail"))   
-      console.log(this.localInf)
+      // console.log(this.localInf)
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.applyId,

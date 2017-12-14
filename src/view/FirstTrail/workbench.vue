@@ -234,11 +234,13 @@
     float: left;
     width: 50%;
     height: 100vh;
-    padding: 19px 25px 0 20px;
+    padding: 19px 20px 0 20px;
     /* background: black; */
     background: #ededed;
   }
-
+.main_right .main_right_work {
+  padding-left: 0;
+}
   .waitting {
     /* height:800px; */
     background: red;

@@ -44,10 +44,10 @@ import PhoneCredit from '@/view/FirstTrail/PhoneCredit'
 import CreditApproval from '@/view/FirstTrail/CreditApproval'
 //----- 匹配查询页面--------
 import MatchingInf from '@/view/FirstTrail/MatchingInf'
-// 查询详情页面审批结论轨迹（部分）
-import ApprovalConclusion from '@/view/FirstTrail/checkComponent/ApprovalConclusion'
-// 查询详情页面放账信息（部分）
-import FinanceInformation from '@/view/FirstTrail/checkComponent/FinanceInformation'
+// 审批结论轨迹（部分）
+import RApprovalConclusion from '@/view/FirstTrail/ReadComponent/RApprovalConclusion'
+// 放账信息（部分）
+import RFinanceInformation from '@/view/FirstTrail/ReadComponent/RFinanceInformation'
 // ----------终审-------------------------
 import FSplitScreen from '@/view/FinalTrial/FSplitScreen.vue'
 // ------------反欺诈------------------
@@ -161,13 +161,13 @@ const routes = [{
 },
 // 审批结论轨迹
 {
-  path: '/ApprovalConclusion',
-  component: ApprovalConclusion
+  path: '/RApprovalConclusion',
+  component: RApprovalConclusion
 },
-// 审批结论轨迹
+// 账务信息
 {
-  path: '/FinanceInformation',
-  component: FinanceInformation
+  path: '/RFinanceInformation',
+  component: RFinanceInformation
 },
 {
   // 信审审批

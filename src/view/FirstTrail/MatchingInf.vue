@@ -43,20 +43,19 @@
               </span>
             </p>
             <div class="Left_right_BigImg ">
-              <AudioVisualLeft :custom="customInf.matchApplyId " v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></AudioVisualLeft>
-              <!-- <workbench v-if=" this.tabContent1==1"></workbench> -->
-              <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
-              <!-- <div v-if=" this.tabContent1==4">asdf adf</div> -->
-              <!-- <div v-if=" this.tabContent1==5">asdf adf</div> -->
+              <RAudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></RAudioVisualLeft>
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
-              <cborrowerInformationDetail v-if=" this.tabContent1==4"></cborrowerInformationDetail>
-              <!-- <capplicationInformationDetail v-if=" this.tabContent1==5"></capplicationInformationDetail> -->
-              <cCreditForm v-if=" this.tabContent1==6"></cCreditForm>
-              <creditInvestigation v-if=" this.tabContent1==7"></creditInvestigation>
-              <!-- <div v-if=" this.tabContent1==7">asdf adf</div> -->
-              <!-- <div v-if=" this.tabContent1==8">asdf adf</div> -->
-              <!-- <AudioVisual v-if=" this.tab1Index==0"></AudioVisual>
-            <workbench v-if=" this.tab1Index==1"></workbench> -->
+              <!-- <workbench v-if=" this.tabContent1==2">内部匹配</workbench> -->
+              <RapplicationInformationDetail v-if=" this.tabContent1==3">申请信息</RapplicationInformationDetail>
+              <cborrowerInformationDetail v-if=" this.tabContent1==4">借款人资料</cborrowerInformationDetail>
+              <!-- <RapplicationInformationDetail v-if=" this.tabContent1==5"> 电话征信</RapplicationInformationDetail> -->
+              <RcCreditForm v-if=" this.tabContent1==6">信审表</RcCreditForm>
+              <creditInvestigation v-if=" this.tabContent1==7">实地征信</creditInvestigation>
+              <RAntiConclution v-if=" this.tabContent1==8">反欺诈结论</RAntiConclution>
+              <RFinanceInformation v-if=" this.tabContent1==9">财务信息</RFinanceInformation>
+              <processTrajectory v-if=" this.tabContent1==10">流程轨迹</processTrajectory>
+              <RApprovalConclusion v-if=" this.tabContent1==11">审批结论轨迹</RApprovalConclusion>
+
             </div>
           </div>
         </div>
@@ -92,19 +91,18 @@
           </div>
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
-            <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
-            <remark v-if=" this.tabContent2==1"></remark>
-            <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
-            <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
-            <!-- <applicationInformation v-if=" this.tabContent2==3"></applicationInformation> -->
-            <borrowerInformation v-if=" this.tabContent2==4"></borrowerInformation>
-            <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
-            <CreditForm v-if=" this.tabContent2==6"></CreditForm>
-            <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
-            <!-- 反欺诈结论 空白 -->
-            <!-- <CreditForm v-if=" this.tabContent2==8"></CreditForm> -->
-            <!-- 信审审批 空白 -->
-            <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>
+                       <RAudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></RAudioVisualLeft>
+              <cremarkDetail v-if=" this.tabContent2==1"></cremarkDetail>
+              <!-- <workbench v-if=" this.tabContent2==2">内部匹配</workbench> -->
+              <RapplicationInformationDetail v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
+              <cborrowerInformationDetail v-if=" this.tabContent2==4">借款人资料</cborrowerInformationDetail>
+              <!-- <RapplicationInformationDetail v-if=" this.tabContent2==5"> 电话征信</RapplicationInformationDetail> -->
+              <RcCreditForm v-if=" this.tabContent2==6">信审表</RcCreditForm>
+              <creditInvestigation v-if=" this.tabContent2==7">实地征信</creditInvestigation>
+              <RAntiConclution v-if=" this.tabContent2==8">反欺诈结论</RAntiConclution>
+              <RFinanceInformation v-if=" this.tabContent2==9">财务信息</RFinanceInformation>
+              <processTrajectory v-if=" this.tabContent2==10">流程轨迹</processTrajectory>
+              <RApprovalConclusion v-if=" this.tabContent2==11">审批结论轨迹</RApprovalConclusion>
           </div>
         </div>
       </div>
@@ -117,7 +115,7 @@
           <p>影像资料</p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <AudioVisualLeft :custom="customInf.matchApplyId "></AudioVisualLeft>
+            <RAudioVisualLeft :custom="customInf.applyId "></RAudioVisualLeft>
           </div>
         </div>
         <!-- 弹出层右侧 div -->
@@ -135,10 +133,10 @@
           </p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <!-- <AudioVisualLeft :custom="customInf.matchApplyId " :AlertSearch="AlertSearch" ></AudioVisualLeft> -->
+            <!-- <AudioVisualLeft :custom="customInf.applyId " :AlertSearch="AlertSearch" ></AudioVisualLeft> -->
             <!-- <aut :AlertSearchProps="AlertSearch" @click.native="a" ref="audioChild"></aut> -->
             <!-- <aut ref="audioChild"  v-on:inputInf="inputInner"></aut> -->
-            <AudioVisualLeft :custom="customInf.matchApplyId " ref="audioChild" v-on:inputInf="inputInner"></AudioVisualLeft>
+            <RAudioVisualLeft :custom="customInf.applyId " ref="audioChild" v-on:inputInf="inputInner"></RAudioVisualLeft>
 
           </div>
         </div>
@@ -152,35 +150,43 @@
   import myHead from "../header.vue"
   import aut from "./checkComponent/aut"
   // 编辑
-  import AudioVisual from "./detailComponent/AudioVisual";
-  import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
+  // import AudioVisual from "./detailComponent/AudioVisual";
+  import RAudioVisual from "./ReadComponent/RAudioVisual";
+  import RAudioVisualLeft from "./ReadComponent/RAudioVisualLeft.vue";
+  import RcCreditForm from "./ReadComponent/RcCreditForm.vue";
+  import RapplicationInformationDetail from "./ReadComponent/RapplicationInformationDetail"; //申请信息
+  import RFinanceInformation from "./ReadComponent/RFinanceInformation"; //账务信息
+  import RAntiConclution from "./ReadComponent/RAntiConclution"; //反欺诈结论
+  import RApprovalConclusion from "./ReadComponent/RApprovalConclusion"; //信审审批结论轨迹
+
 
   import remark from "./detailComponent/remark";
   import InternalMatch from "./InternalMatch";
-  import applicationInformation from "./detailComponent/applicationInformation";
+
   import borrowerInformation from "./detailComponent/borrowerInformation";
   import PhoneCredit from "./PhoneCredit";
   import CreditForm from "./detailComponent/CreditForm";
   import creditInvestigation from "./detailComponent/creditInvestigation"; //实地征信
   // import s from "./detailComponent/remark";
-  // 反欺诈结论 写此处
+
   // 信审审批写此处
   import CreditApproval from "./CreditApproval";
   // 查询
-  import cCreditForm from "./checkComponent/cCreditForm";
-  import cFinanceInformation from "./checkComponent/FinanceInformation";
+
+
   import cremarkDetail from "./checkComponent/remarkDetail"; //备注信息
   import cborrowerInformationDetail from "./checkComponent/borrowerInformationDetail"; //借款人资料
-  import capplicationInformationDetail from "./checkComponent/applicationInformationDetail"; //申请信息
+  import processTrajectory from "./checkComponent/processTrajectory"; //流程轨迹
 
 
 
   export default {
     data() {
       return {
+        originLeft:'',
         // 进件人信息
         customInf: [], //申请信息页local字段
-        InnerMatchPass: [], //详情列表页信息--(含) 取 matchApplyId InnerMatchPass
+        InnerMatchPass: [], //详情列表页信息--(含)取applyId
         // -------------------------------结束
         showHalfBtn: false, // 显示 分屏按钮
         CompareAlert: false, //对比按钮 弹出层
@@ -193,14 +199,14 @@
         tabContent2: 3, // ----------- tab1 用
         tabActiveInd1: 0, // tab1 点击时候选中的下标
         tabActiveInd2: 3, // 点击tab1 时  tab2初始下表
-        items1: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "信审审批", "流程轨迹"],
-        items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "信审审批"],
+        items1: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "财务信息", "流程轨迹", "审批结论轨迹"],
+        items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "财务信息", "流程轨迹", "审批结论轨迹"],
         // rightList: false, //右键菜单 默认不显示    ---------tab1 用
         tab1Index: 0, // tab1 激活样式的时用的下表
         tab2Index: 3, // 不是for循环，获取不到index时候的tab切换（ data部分 ）------tab 2 用
         // 不是for循环，获取不到index时候的tab切换（ data部分 ）------tab 2 用
-        flag1: [true, true, true, false, true, true, true, true, true, true, true], //  ---------------------------------------------------- tab1用
-        flag2: [true, true, true, true, true, true, true, true, true, true], //  ---------------------------------------------------- tab2用        
+        flag1: [true, true, true, false, true, true, true, true, true,true,true,true], //  ---------------------------------------------------- tab1用
+        flag2: [true, true, true, true, true, true, true, true, true, true,true,true], //  ---------------------------------------------------- tab2用        
 
         // items: [{ // ----------- tab1 用
         //   title: "影音资料",
@@ -273,25 +279,26 @@
       rightMovingBtn() {
         console.log("右滑动");
         console.log(this.$refs.right_tab_ul.style.left)
-        if (parseFloat(this.$refs.right_tab_ul.style.left) <= -500) {
-          this.$refs.right_tab_ul.style.left = "-500px";
+        if (parseFloat(this.$refs.right_tab_ul.style.left) <= -650) {
+          this.$refs.right_tab_ul.style.left = "-650px";
         } else {
           this.$refs.right_tab_ul.style.left = parseFloat(this.$refs.right_tab_ul.style.left) - 50 + "px";
         }
         console.log(this.$refs.right_tab_ul.style.left)
       },
       showList() { // 左侧list 显示按钮
-        console.log("show")
+        // console.log("show")
         this.$refs.Left_title.style.left = "0";
         this.flexible = false;
       },
       hid() { // 左侧list 隐藏按钮
-        console.log("hid")
+        // console.log("hid")
         this.$refs.Left_title.style.left = "-200px";
         this.flexible = true;
       },
       FullScreen() {
         this.showHalfBtn = true;
+        this.originLeft=this.$refs.right_tab_ul.style.left;//点击全屏之前，将滑动tab的left赋值给一个变量，作用：点击分屏之后回到此left值
         this.$refs.right_tab_ul.style.left = "0"; // 让tab 重新从影音列表开始显示
         this.$refs.rLeft.style.display = "none";
         this.$refs.rRight.style.width = "100%";
@@ -299,6 +306,7 @@
       },
       DblScreen() {
         this.showHalfBtn = false;
+        this.$refs.right_tab_ul.style.left=this.originLeft;//回到全屏之前的left值
         // this.FullScreenlShow = true;
         this.$refs.rLeft.style.display = "block";
         this.$refs.rRight.style.width = "50%";
@@ -334,6 +342,7 @@
         this.$refs.tabOne[this.tabActiveInd1].className = "tab1Act"; //  tab1 之前激活样式赋值回去 
         if (ind != 0) { // 点击影音资料的时候，两边不置灰，影音资料部分可点击
           console.log("-----！= ---tab2")
+          console.log(ind)
           // this.$refs.tabOne[ind].className= "setGray";// tab1 对应css 样式标灰
           this.flag1[ind] = false; // tab1 对应click 事件不可用
         }
@@ -341,15 +350,16 @@
     },
     mounted() {
       console.log("分屏");
-      this.InnerMatchPass = JSON.parse(localStorage.getItem("internalId"));
-      //  console.log(  this.InnerMatchPass )
-      this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {  // 申请信息--请求
-        id: this.InnerMatchPass.matchApplyId,
-      }).then(res => {
-        // console.log(res.data)
-        this.customInf = res.data;
-      });
+      // this.InnerMatchPass = JSON.parse(localStorage.getItem("internalId"));
+      // // console.log( this.InnerMatchPass )
+      // this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", { // 申请信息--请求
+      // id: this.InnerMatchPass.matchApplyId,
+      // }).then(res => {
+      // // console.log(res.data)InnerMatchPass 
+      // this.customInf = res.data;
+      // });
       this.title = "影音资料";
+
       // console.log(this.$route.query);
 
       // this.customInf = this.$route.query;
@@ -370,25 +380,29 @@
     },
     components: {
       myHead,
-      aut,
+
       // 编辑
-      AudioVisual,
+      RAudioVisual,
+      RAudioVisualLeft,
+      RcCreditForm,
+      RapplicationInformationDetail,
+      RFinanceInformation, //账务信息
+      RAntiConclution, //反欺诈结论
+      RApprovalConclusion, //信审审批结论归结
       remark,
       InternalMatch,
-      applicationInformation,
       borrowerInformation,
       PhoneCredit,
-      CreditForm,
+
       creditInvestigation,
       // 信审审批
       CreditApproval,
       // 查询
-      cCreditForm,
-      AudioVisualLeft,
+      aut,
       cremarkDetail, //
-      cFinanceInformation,
+
       cborrowerInformationDetail,
-      capplicationInformationDetail
+      processTrajectory
     }
   }
 
@@ -470,7 +484,7 @@
     /* height: 100%; */
     height: calc(100% - 70px);
     overflow: auto;
-    padding: 13px 30px;
+    padding: 13px 9px;
   }
   /* 借款人详情 */
 
@@ -565,13 +579,13 @@
   /* 左侧列表  影音资料等 ul 外包   流 */
 
   .left .Left_ul {
-    width: 110px;
+    width: 130px;
     /* height:359px; */
     background: rgba(31, 45, 61, 0.59);
     /* background:#1f2d3d; */
     box-shadow: 0 5px 20px 0 #475669;
     position: fixed;
-    left: -110px;
+    left: -135px;
     top: 165px;
     z-index: 10;
     padding-top: 24px;
@@ -669,6 +683,8 @@ margin-bottom: 18px;
 
   .Right_tab_ul_wrap ul {
     width: 1061px;
+    width: 1310px;
+
     height: 48px;
     /* color:#bfcbd9; */
     position: relative;
@@ -684,7 +700,7 @@ margin-bottom: 18px;
   .Right_tab_ul_wrap ul li {
     /* float: left; */
     display: inline-block;
-    margin-right: 40px;
+    margin-right: 35px;
     /* white-space: nowrap; */
     letter-spacing: 0.11px;
     height: 38px;
