@@ -27,18 +27,21 @@
         </div>
       </li>
       <li class="item-column3">
-        <div class="left-title">来源:</div>
-        <div>
+        <div class="left-title"><span class="require-icon" style="left:80px;">*</span> 来源:</div>
+        <!-- <div> -->
+        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="source">
             <el-option label="申请表" value="00"></el-option>
             <el-option label="第三方查询" value="01"></el-option>
             <el-option label="其他" value="02"></el-option>
           </el-select>
-        </div>
+        </el-tooltip>
+        <!-- </div> -->
       </li>
       <li class="item-column3">
-        <div class="left-title">接听情况:</div>
-        <div>
+        <div class="left-title"><span class="require-icon" style="left:50px;">*</span> 接听情况:</div>
+        <!-- <div> -->
+        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="answer">
             <el-option label="无人接" value="00"></el-option>
             <el-option label="拒接" value="01"></el-option>
@@ -46,23 +49,26 @@
             <el-option label="空号" value="03"></el-option>
             <el-option label="接通" value="04"></el-option>
           </el-select>
-        </div>
+        </el-tooltip>
+        <!-- </div> -->
       </li>
       <li class="item-column3">
-        <div class="left-title">调查阶段:</div>
-        <div>
+        <div class="left-title"><span class="require-icon" style="left:50px;">*</span> 调查阶段:</div>
+        <!-- <div> -->
+        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="checkStage">
             <el-option label="正在调查" value="00"></el-option>
             <el-option label="完成调查" value="01"></el-option>
             <el-option label="调查失败" value="02"></el-option>
             <el-option label="未调查" value="03"></el-option>
           </el-select>
-        </div>
+        </el-tooltip>
+        <!-- </div> -->
       </li>
       <li class="item-column3" v-show="source=='02'">
         <div class="left-title">其他来源说明:</div>
-        <div>
-          <el-input v-model="sourceDesc"></el-input>
+        <div class="textarea-class">
+          <el-input v-model="sourceDesc" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
         </div>
       </li>
     </ul>
@@ -72,22 +78,26 @@
     </div>
     <ul>
       <li class="item-column2">
-        <div class="left-title">微信/支付宝是否异常</div>
-        <div>
+        <div class="left-title left-title2"><span class="require-icon" style="left:0px;">*</span>微信/支付宝是否异常:</div>
+        <!-- <div> -->
+        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="mobilepayment" placeholder="请选择调查情况">
             <el-option label="否" value="0"></el-option>
             <el-option label="是" value="1"></el-option>
           </el-select>
-        </div>
+        </el-tooltip>
+        <!-- </div> -->
       </li>
       <li class="item-column2">
-        <div class="left-title">异常项说明</div>
-        <div>
-          <el-input v-model="mobilepaymenttxt"></el-input>
-        </div>
+        <div class="left-title" v-show="mobilepayment=='1'"><span class="require-icon" style="left:80px;">*</span> 说明:</div>
+        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+          <div class="textarea-class2" v-show="mobilepayment=='1'">
+            <el-input v-model="mobilepaymenttxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          </div>
+        </el-tooltip>
       </li>
       <li class="item-column2">
-        <div class="left-title">接电话人身份</div>
+        <div class="left-title">接电话人身份:</div>
         <div>
           <el-select v-model="answerIdentity" placeholder="请选择调查情况">
             <el-option label="同事" value="00"></el-option>
@@ -96,15 +106,15 @@
         </div>
       </li>
       <li class="item-column2">
-        <div class="left-title"></div>
-        <div v-show="answerIdentity=='00'">
-          <el-input v-model="answertxt"></el-input>
+        <div class="left-title" v-show="answerIdentity=='00'">说明:</div>
+        <div class="textarea-class2" v-show="answerIdentity=='00'">
+          <el-input v-model="answertxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
         </div>
       </li>
       <li class="item-column2">
-        <div class="left-title">核对单位工作情况</div>
+        <div class="left-title">核对单位工作情况:</div>
         <div>
-          <el-select v-model="checkJob" placeholder="请选择调查情况">
+          <el-select v-model="checkJob">
             <el-option label="一致" value="00"></el-option>
             <el-option label="基本一致" value="01"></el-option>
             <el-option label="不一致" value="02"></el-option>
@@ -113,16 +123,18 @@
         </div>
       </li>
       <li class="item-column2">
-        <div class="left-title"></div>
-        <div v-show="checkJob=='01'">
-          <el-input v-model="checkJobtxt"></el-input>
+        <div class="left-title" v-show="checkJob=='01'">说明:</div>
+        <div class="textarea-class2" v-show="checkJob=='01'">
+          <el-input v-model="checkJobtxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
         </div>
       </li>
       <li class="item-column1">
-        <div class="left-title">调查结论</div>
-        <div class="textarea-class" style="width:805px;">
-          <el-input type="textarea" v-model="conclusion" :row="2" resize=none></el-input>
-        </div>
+        <div class="left-title"><span class="require-icon" style="left:50px;">*</span> 调查结论:</div>
+        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+          <div class="textarea-class">
+            <el-input v-model="conclusion" type="textarea" :rows="2" resize=none :maxlength="500"></el-input>
+          </div>
+        </el-tooltip>
       </li>
       <li class="item-column1 submit-class">
         <el-button type="primary" @click="submitForm('form')">确定</el-button>
@@ -159,6 +171,14 @@ export default {
   methods: {
     submitForm() {
       console.log('submit!');
+      // 检测必填项
+      if (!this.source || !this.answer || !this.checkStage || !this.mobilepayment || (this.mobilepayment == '1' && !this.mobilepaymenttxt) || !this.conclusion) {
+        this.$message({
+          message: '请输入必填项!',
+          type: 'warning'
+        });
+        return;
+      }
 
       this.post('/creTelResearchHis/addTeljobref', {
           cretelinvest: {
@@ -206,6 +226,16 @@ export default {
             // 提交数据成功,广播事件 重新刷新列表
             this.$emit('updateList');
             this.$emit('updateTree');
+
+            this.$message({
+              message: res.data.msg,
+              type: 'success'
+            });
+          } else {
+            this.$message({
+              message: res.data.msg,
+              type: 'warning'
+            });
           }
         })
     }

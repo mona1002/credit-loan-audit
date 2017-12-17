@@ -12,8 +12,8 @@
         <el-tree :data="treeData" :props="defaultProps" highlight-current expand-on-click-node default-expand-all no-key="id" @node-click="handleNodeClick">
         </el-tree>
         <!-- 备选  折叠面板- 手风琴效果 -->
-        <!-- <el-button @click.native="coverShow=true">添加</el-button> -->
-        <el-button type="text" @click="open">添加</el-button>
+        <el-button @click.native="dialogFormVisible=true">添加</el-button>
+        <!-- <el-button type="text" @click="open">添加</el-button> -->
       </el-aside>
       <!-- 右侧 表单内容 -->
       <el-container style="background:url(.../../../static/images/3C281C6A-532B-4A55-A9BF-F142E9F09063@1x.png) center no-repeat;">
@@ -88,8 +88,43 @@
         </el-main>
       </el-container>
     </el-container>
+    <!-- 更改的 添加电话选项 -->
+    <el-dialog title="添加申请单电话信息" :visible.sync="dialogFormVisible">
+      <el-form>
+        <el-form-item label="电话类型:" :label-width="addTellFormLabelWidth" prop="addTelType">
+          <!-- <span class="add-label"><span class="require-icon">*</span>电话类型:</span> -->
+          <!-- <span class="require-icon">*</span> -->
+          <el-select v-model="addTelType" placeholder="请选择">
+            <el-option v-for="item in telTypes" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <!-- <span class="require-icon">*</span> -->
+        <el-form-item label="电话名称:" :label-width="addTellFormLabelWidth" prop="addTelName">
+          <!-- <span class="add-label"><span class="require-icon">*</span>电话名称:</span> -->
+          <el-input v-model="addTelName" auto-complete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="关系:" v-show="(addTelType!='01'|| addTelType!='02') && (addTelType=='03' || addTelType=='04' || addTelType=='05')" :label-width="addTellFormLabelWidth">
+          <!-- <span class="add-label"><span class="require-icon">*</span>关系:</span> -->
+          <el-select v-model="addRelationShip" placeholder="请选择">
+            <el-option v-for="item in relationShips" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <!-- <span class="require-icon">*</span> -->
+        <el-form-item label="电话号码:" :label-width="addTellFormLabelWidth" prop="addTelNum">
+          <el-input auto-complete="off" v-model="addTelNum"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <!-- <el-button @click="dialogFormVisible = false">取 消</el-button> -->
+        <!-- <el-button type="primary" @click.native="append">确 定</el-button> -->
+        <el-button @click.native="append" type="primary" v-show="active">确认</el-button>
+        <el-button type="primary" disabled v-show="active==false">确认</el-button>
+      </div>
+    </el-dialog>
     <!-- 点击 添加出现的弹窗 -->
-    <div class="cover-view" v-show="coverShow">
+    <div class="cover-view" v-show="false">
       <div class="cover-content">
         <el-tag closable @close="coverShow=false"></el-tag>
         <div class="add-title">
@@ -278,6 +313,28 @@ export default {
       active: false, // 添加电话 提示语
       addTelRex: false, // 添加电话 校验
       formId: '', // 传给表单的  id
+      dialogFormVisible: false, // 电话征信 点击添加
+      addTellForm: {
+        applyId: '',
+        addTelNum: '',
+        addTelName: '',
+        addRelationShip: '',
+        addTelType: '',
+        creatorCode: ''
+      }, // 添加电话征信 表单数据
+      // addTellRules: {
+      //   addTelType: [
+      //     { require: true, trigger: 'blue' }
+      //   ],
+      //   addTelNum: [
+      //     { require: true, trigger: 'blue' }
+      //   ],
+      //   addTelName: [
+      //     { require: true, trigger: 'blue' },
+      //     { mix:1, max:20, message:'长度在20个字符内', rigger:'blur'}
+      //   ]
+      // },
+      addTellFormLabelWidth: '80px', // 添加电话 表单 label-width
     }
   },
   mounted() {
@@ -306,7 +363,7 @@ export default {
     //   }
     // },
     // 监听 添加电话 页面是否显示
-    coverShow: function() {
+    dialogFormVisible: function() {
       if (!this.coverShow) {
         this.addTelType = '';
         this.addTelName = '';
@@ -358,13 +415,14 @@ export default {
 
     // 添加电话  电话校验
     addTelNum: function(value) {
-
+      console.log('监听 添加电话号码')
       this.addTelRex = /^(1)\d{10}$/i.test(value) || /^((\(\d{2,3}\))|(\d{3}\-))?(\(0\d{2,3}\)|0\d{2,3}-)?[1-9]\d{6,7}(\-\d{1,4})?$/i.test(value);
       console.log(this.addTelRex);
       // 判断 显示 电话格式
       if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelNum.length >= 11 && !this.addTelRex) ||
         ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelNum.length >= 11 && !this.addTelRex)
       ) {
+        console.log('选择了关系');
         this.active = false;
         this.$message({
           message: '格式不正确,请使用下面的格式:区号-电话号码或者11位手机号',
@@ -379,6 +437,7 @@ export default {
       ) {
         this.active = true;
       } else {
+        console.log('没选关系');
         this.active = false;
       }
 
@@ -492,8 +551,13 @@ export default {
     append(data) {
       // 点击添加方法,用过 key 来判断 添加的哪项.
       console.log('append');
+      // this.coverShow = false;
+      // 关闭 弹窗
+      this.dialogFormVisible = false;
       // 点击添加 提交数据 
-      this.coverShow = false;
+
+      // 判断必填
+
       this.post('/creTelInfo/addTel', {
         "creTelInfo": {
 
@@ -637,45 +701,10 @@ export default {
           this.hisShow = true;
       })
     },
-    // 弹窗 
-    open() {
-      this.$alert(
-        '<div class="add-title">\
-          <span>添加申请单电话信息</span>\
-        </div>\
-        <ul class="add-content">\
-          <li>\
-            <span class="add-label"><span class="require-icon">*</span>电话类型:</span>\
-            <el-select v-model="addTelType" placeholder="请选择">\
-              <el-option v-for="item in telTypes" :key="item.value" \:label="item.label" :value="item.value">\
-              </el-option>\
-            </el-select>\
-          </li>\
-          <li>\
-            <span class="add-label"><span class="require-icon">*</span>电话名称:</span>\
-            <el-input type="text" name="" v-model="addTelName" value="" placeholder=""></el-input>\
-          </li>\
-          <li v-show="(addTelType!="01"|| addTelType!="02") && (addTelType=="03" || addTelType=="04" || addTelType=="05")">\
-            <span class="add-label"><span class="require-icon">*</span>关系:</span>\
-            <el-select v-model="addRelationShip" placeholder="请选择">\
-              <el-option v-for="item in relationShips" :key="item.value" :label="item.label" :value="item.value">\
-              </el-option>\
-            </el-select>\
-          </li>\
-          <li>\
-            <span class="add-label"><span class="require-icon">*</span>电话号码:</span>\
-            <el-input type="text" name="" v-model="addTelNum" value=""></el-input>\
-          </li>\
-          <li>\
-            <el-button @click.native="append" type="primary" v-show="active">确认</el-button>\
-            <el-button type="primary" disabled v-show="active==false">确认</el-button>\
-          </li>\
-        </ul>', {
-          dangerouslyUseHTMLString: true
-        });
+    // 添加 电话 弹窗, 点击关闭的事件   无效?
+    close() {
+      console.log('点击了添加电话关闭按钮');
     }
-
-
   },
   components: {
     AddressForm,
@@ -719,9 +748,16 @@ export default {
   background: #f8f9fd;
   border: 1px solid #e6eaee;
   border-radius: 4px;
-  /*width: 210px !important;*/
+  width: 210px !important;
   /*height: 321px;*/
 }
+
+
+
+
+
+
+
 
 
 /* 树形  结构 */
@@ -737,6 +773,13 @@ export default {
 }
 
 
+
+
+
+
+
+
+
 /* el-tree  title */
 
 .phone-credit .el-tree-node__content {
@@ -748,13 +791,28 @@ export default {
 }
 
 
+
+
+
+
+
+
+
 /* element-ui tree icon 箭头*/
 
 .phone-credit .el-tree-node__content .el-tree-node__expand-icon {
   /*display: none;*/
   position: relative;
-  left: 150px;
+  left: 170px;
+  font-size: 18px;
 }
+
+
+
+
+
+
+
 
 
 /* 三角 */
@@ -768,12 +826,26 @@ export default {
 }
 
 
+
+
+
+
+
+
+
 /* 三角 icon */
 
 .phone-credit .el-tree-node__expand-icon {
   font-size: 20px;
   /*display: none;*/
 }
+
+
+
+
+
+
+
 
 
 /* label 字体 */
@@ -783,11 +855,25 @@ export default {
 }
 
 
+
+
+
+
+
+
+
 /* 二级 目录 样式 */
 
 .phone-credit .el-tree-node__content {
-  padding-left: 0px !important;
+  /*padding-left: 0px !important;*/
 }
+
+
+
+
+
+
+
 
 
 /* 添加电话 按钮 */
@@ -796,7 +882,17 @@ export default {
   width: 80px;
   margin: 20px;
   margin-left: 60px;
+  background: #0077ff;
+  color:white;
+  float: right;
 }
+
+
+
+
+
+
+
 
 
 /* 点击添加出现的 页面 */
@@ -815,6 +911,13 @@ export default {
   overflow: auto;
   z-index: 101;
 }
+
+
+
+
+
+
+
 
 
 /* 添加页面内容 */
@@ -836,11 +939,25 @@ export default {
 }
 
 
+
+
+
+
+
+
+
 /* title */
 
 .phone-credit .cover-content .add-title {
   text-align: left;
 }
+
+
+
+
+
+
+
 
 
 /* 添加表单内容 */
@@ -868,11 +985,25 @@ export default {
 }
 
 
+
+
+
+
+
+
+
 /* 添加电话  input 样式*/
 
 .phone-credit .add-content .el-input {
   width: inherit;
 }
+
+
+
+
+
+
+
 
 
 /* el-tree - label*/
@@ -887,6 +1018,13 @@ export default {
 }
 
 
+
+
+
+
+
+
+
 /* children - label*/
 
 .phone-credit .el-tree-node__children .el-tree-node__label {
@@ -899,6 +1037,13 @@ export default {
 }
 
 
+
+
+
+
+
+
+
 /* 确定按钮 */
 
 .phone-credit .cover-content .el-button {
@@ -907,6 +1052,13 @@ export default {
   /*margin-top: 10px;*/
   /*margin-right: 10px;*/
 }
+
+
+
+
+
+
+
 
 
 /* 弹窗页面 关闭按钮*/
@@ -924,6 +1076,13 @@ export default {
 .phone-credit .el-tag .el-icon-close {
   right: 0px;
 }
+
+
+
+
+
+
+
 
 
 /* 右侧 头 table*/
@@ -968,6 +1127,13 @@ export default {
 }
 
 
+
+
+
+
+
+
+
 /* 表格分页 */
 
 .phone-credit .el-pagination {
@@ -975,6 +1141,13 @@ export default {
   width: 100%;
   text-align: center;
 }
+
+
+
+
+
+
+
 
 
 /* form-his */
@@ -986,11 +1159,15 @@ export default {
 }
 
 
-/* 添加申请单电话信息 必填 * */
 
-.phone-credit .require-icon {
-  color: #ff0000;
-}
+
+
+
+
+
+
+
+
 
 
 /* 添加申请单电话 label*/
@@ -999,6 +1176,13 @@ export default {
   display: inline-block;
   width: 70px;
 }
+
+
+
+
+
+
+
 
 
 /* 表单 */
@@ -1010,7 +1194,7 @@ export default {
   /*font-weight: bold;*/
   background: #ededed;
   line-height: 40px;
-  padding-left: 10px;
+  /*padding-left: 10px;*/
   display: block;
   margin-bottom: 10px;
   /*margin-top: 20px;*/
@@ -1034,10 +1218,17 @@ export default {
 }
 
 
+
+
+
+
+
+
+
 /* label */
 
 .phone-credit .el-form-item__label {
-  width: 150px !important;
+  width: 150px;
 }
 
 .phone-credit .el-form-item {
@@ -1045,29 +1236,53 @@ export default {
 }
 
 
+
+
+
+
+
+
+
 /* 三列 */
 
 .phone-credit .item-column3 {
-  width: 33%;
+  min-width: 350px;
   float: left;
   margin: 0;
   margin-bottom: 10px;
 }
 
 
+
+
+
+
+
+
+
 /* 两列 */
 
 .phone-credit .item-column2 {
-  width: 50%;
+  /*width: 50%;*/
+  min-width: 450px;
+  float: left;
+  margin: 0;
+  min-height: 50px;
+}
+
+.phone-credit .item-column1 {
+  /*width: 90%;*/
+  min-width: 1366px;
   float: left;
   margin: 0;
 }
 
-.phone-credit .item-column1 {
-  width: 90%;
-  float: left;
-  margin: 0;
-}
+
+
+
+
+
+
 
 
 /*.phone-credit .item-column1 textarea {
@@ -1088,6 +1303,13 @@ export default {
 }
 
 
+
+
+
+
+
+
+
 /* input 不可编辑状态*/
 
 .dis-input {}
@@ -1101,11 +1323,22 @@ export default {
 }
 
 
+
 /* el-input width*/
 
 .phone-credit .el-container .el-main .el-input {
-  width: 258px !important;
+  /* 分屏 */
+  width: 150px;
+  /* 全屏 */
+  width: 200px;
 }
+
+
+
+
+
+
+
 
 
 /* 表格头 */
@@ -1113,6 +1346,13 @@ export default {
 .phone-credit .el-header {
   padding: 0;
 }
+
+
+
+
+
+
+
 
 
 /* 历史调查日志 收缩 title */
@@ -1124,8 +1364,15 @@ export default {
   color: #1f2d3d;
   letter-spacing: 0.11px;
   text-align: left;
-  padding-left: 10px;
+  /*padding-left: 10px;*/
 }
+
+
+
+
+
+
+
 
 
 /* 折叠 头 箭头样式*/
@@ -1135,39 +1382,76 @@ export default {
 }
 
 
+
+
+
+
+
+
+
 /*  表单样式 */
 
 .phone-credit .left-title {
   float: left;
-  width: 150px;
+  width: 140px;
   line-height: 30px;
   min-height: 30px;
   padding-right: 10px;
 
   text-align: right;
+
+  /* 配合必选 */
+  position: relative;
+
+  font-size: 14px;
+  letter-spacing: 1.49px;
+}
+
+.phone-credit .form-his{
+  font-size: 16px;
+}
+.phone-credit .form-his ul {
+  padding-left: 23px;
 }
 
 .phone-credit .form-his li {
-  padding: 10px;
+  /*padding: 10px;*/
   /*min-height: 30px;*/
 }
 
 .phone-credit .form-his li .textarea-class {
   height: auto;
   float: left;
-  width: 795px;
+  /*width: 795px;*/
+  min-width: 500px;
+  padding-bottom:10px;
 }
 
-.phone-credit .submit-class {
-  text-align: right;
-  width: 59.3%;
+.phone-credit .form-his li .textarea-class2 {
+  height: auto;
+  float: left;
+  min-width: 300px;
+  padding-bottom:10px;
 }
+
+/* 提交按钮 */
+.phone-credit .submit-class {
+  text-align: left;
+  margin-left: 570px;
+}
+
+
+
+
+
+
+
 
 
 /* 折叠面板头部背景色和icon */
 
 .phone-credit .icon_hat {
-  padding: 9px 10px 10px 13px;
+  padding: 10px 10px 10px 13px;
   vertical-align: middle;
 }
 
@@ -1182,6 +1466,13 @@ export default {
   /*width: 258px;*/
   height: 33px;
 }
+
+
+
+
+
+
+
 
 
 /*.phone-credit .el-select .el-input.is-disabled:hover .el-input__inner {
@@ -1209,9 +1500,98 @@ export default {
 }
 
 
+
+
+
+
+
+
+
 /*add-content*/
 
 
+/* 更改电话征信 弹窗*/
+
+.phone-credit .el-dialog {
+  width: 300px;
+  margin-top: 30vh !important;
+}
+
+
+
+
+
+/* 关闭按钮 */
+
+.phone-credit .el-dialog__headerbtn {
+  font-size: 20px;
+}
+
+
+
+
+
+/* 弹窗 内容 */
+
+.phone-credit .el-dialog__body {
+  padding: 20px;
+  padding-right: 30px;
+}
+
+
+
+
+
+/* 更改 电话征信 -- 添加电话 */
+
+.phone-credit .el-dialog__wrapper .el-form-item__label {
+  width: 100px;
+}
+
+
+
+
+
+/* el-input 输入框 */
+
+.phone-credit .el-dialog__wrapper .el-input {}
+
+
+
+
+
+
+/* 添加申请单电话信息 必填 * */
+
+.phone-credit .left-title2 {
+  line-height: 20px;
+}
+
+
+
+/* 必填 * */
+
+.phone-credit .require-icon {
+  color: #ff0000;
+  display: inline-block;
+  width: 0px;
+  float: left;
+  position: absolute;
+  left: 38px;
+  line-height: 35px;
+}
+
+
+
+/* 电话树  选中的  字体样式*/
+
+.phone-credit .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content .el-tree-node__label {
+  color: #0077ff;
+}
+
+.phone-credit .el-tree-node__content{
+  height: 32px;
+}
 
 
 </style>
