@@ -40,7 +40,8 @@
       <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('lcgj')">流程轨迹</el-button>
     </div>
     <!-- 弹窗 -->
-    <div class="cover-view" v-show="coverShow">
+    <!-- <div class="cover-view" v-show="coverShow"> -->
+    <el-dialog :visible.sync="coverShow">
       <!-- 回退 02 拒绝 01 放弃 07-->
       <el-form v-show=" this.showFlag=='02' || this.showFlag=='01' || this.showFlag=='07'" class="back-form">
         <div class="form-title" style="position:relative;" v-show="this.showFlag=='02'">
@@ -328,7 +329,8 @@
           <el-button plain @click="showFlag=0,coverShow=false;">返回</el-button>
         </div>
       </div>
-    </div>
+    </el-dialog>
+    <!-- </div> -->
     <!-- <el-alert title=warnMsg type="warning" v-show="warnShow"> -->
     </el-alert>
   </div>
@@ -443,7 +445,9 @@ export default {
           { required: true, message: '请输入活动名称', trigger: 'blur' },
           { min: 3, max: 5, message: '', trigger: 'blur' }
         ]
-      }
+      },
+      // 弹窗显示
+      dialogFormVisible:false
     }
   },
   mounted() {
@@ -520,7 +524,7 @@ export default {
         cancelButtonText: '取消',
         beforeClose: (action, instance, done) => {
           if (action === 'confirm') {
-            // instance.confirmButtonLoading = true;
+            instance.confirmButtonLoading = true;
             instance.confirmButtonText = '执行中...';
             console.log(this.taskId)
             // 点击 确认 提交 方法
@@ -531,8 +535,11 @@ export default {
               console.log(res.statusCode);
               if (res.statusCode == '200')
                 done();
-              else
+              else{
                 this.$message(res.msg);
+                instance.confirmButtonText = '';
+              }
+              instance.confirmButtonLoading = false;
             });
           } else {
             done();
@@ -1313,7 +1320,7 @@ export default {
   height: 350px;
   background: #fff;
   margin: 0 auto;
-  margin-top: 300px;
+  /*margin-top: 300px;*/
   border-radius: 2px;
   overflow: hidden;
   padding-bottom: 30px;
@@ -1441,7 +1448,7 @@ export default {
 /* 审批 表单 */
 
 .creditApproval-class .appro-form {
-  width: 80%;
+  /*width: 80%;*/
   height: 600px;
   margin-top: 100px !important;
   height: auto;
@@ -1474,10 +1481,10 @@ export default {
 /* 审批结论轨迹 */
 
 .creditApproval-class .spjl-div {
-  width: 80%;
+  /*width: 80%;*/
   height: 400px;
   margin: 0 auto;
-  margin-top: 250px;
+  /*margin-top: 250px;*/
   overflow: hidden;
   padding: 10px;
   background: #fff;
@@ -1817,6 +1824,21 @@ export default {
 
 .creditApproval-class .headFont {
   font-size: 16px;
+}
+
+/* 信审审批  - - 弹窗*/
+
+.creditApproval-class .el-dialog {
+  width: 600px;
+  margin-top: 30vh !important;
+}
+
+.el-dialog__header{
+  display: none;
+}
+
+.el-dialog__body{
+  padding:0;
 }
 
 </style>
