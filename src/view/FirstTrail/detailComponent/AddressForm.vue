@@ -40,7 +40,7 @@
       </li>
       <li class="item-column3">
         <div class="left-title">
-          <span class="require-icon">*</span> 接听情况:
+          <span class="require-icon" style="left:50px;">*</span> 接听情况:
         </div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
@@ -55,15 +55,17 @@
         <!-- </div> -->
       </li>
       <li class="item-column3">
-        <div class="left-title">调查阶段:</div>
-        <div>
+        <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查阶段:</div>
+        <!-- <div> -->
+        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="checkStage">
             <el-option label="正在调查" value="00"></el-option>
             <el-option label="完成调查" value="01"></el-option>
             <el-option label="调查失败" value="02"></el-option>
             <el-option label="未调查" value="03"></el-option>
           </el-select>
-        </div>
+        </el-tooltip>
+        <!-- </div> -->
       </li>
       <li class="item-column1" v-show="source=='02'">
         <div class="left-title">其他来源说明:</div>
@@ -379,7 +381,7 @@ export default {
     submitForm() {
       console.log('submit!');
       // 接听情况   三方查询是否异常/是  异常说明
-      if (!this.source || !this.answer || !this.threeQueries || (this.threeQueries == '1' && !this.exceptionState) || !this.conclusion) {
+      if (!this.source || !this.answer || !this.checkStage || !this.threeQueries || (this.threeQueries == '1' && !this.exceptionState) || !this.conclusion) {
         this.$message({
           message: '请输入必填项!',
           type: 'warning'
