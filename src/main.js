@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import "babel-polyfill"
 import qs from 'qs'
-import http from '@/util/http' 
+import http from '@/util/http'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import $ from 'jquery'
@@ -27,9 +27,8 @@ new Vue({
 
 // 定义全局 过滤器
 // 日期过滤器
-Vue.filter('dateFilter',function(value){
-	if(!value) return ''
-	console.log(value);
-	// console.log(new Date(value).toLocaleString().replace(/\//g,'-').match(/\d{4}\-\d{2}\-\d{1,2}/)[0])
-	return new Date(value).toLocaleString().replace(/\//g,'-').match(/\d{4}\-\d{2}\-\d{1,2}/)[0]
+Vue.filter('dateFilter', function(value) {
+  if (!value) return ''
+  console.log(value);
+  return new Date(value).getFullYear() + '-' + (new Date(value).getMonth() + 1) + '-' + new Date(value).getDate();
 })
