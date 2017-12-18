@@ -197,14 +197,16 @@ height: 40px;
 
 /* 借款人资料input框 */
 
-.borrowerInformation .el-input {
+/* .borrowerInformation .el-input {
   width: auto;
+} */
+.borrowerInformation .el-input__icon{
+  color: #0077ff;
 }
-
 .borrowerInformation .el-input__inner {
   height: 35px;
-  border-radius: 6px;
-  width: 258px;
+  min-width: 100px;
+  padding:0 0;
 }
 
 /* 借款人资料表格内容居中 */
@@ -235,10 +237,10 @@ height: 40px;
     position: relative;
   }
 .zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) .el-select{
-    width: 258px;
+    width: 200px;
   }
 .zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) .el-select>.el-input{
-    width: 258px;
+    width: 200px;
   }
 /*借款人资料 字体颜色 */
 
@@ -339,6 +341,239 @@ height: 40px;
   text-align: center; 
 }
 
+/* 借款人资料 */
+/* .borrowerInformation .el-table__body-wrapper .el-select>.el-input .el-input__inner {
+  border: none;
+} */
+
+/* 借款人资料 房产类型 */
+@media screen and (min-width: 1390px){
+    .borrowerInformation .house .el-table__body-wrapper{
+      overflow: hidden;
+    }
+  }
+.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(2) .el-input__inner{
+  width: 126px; 
+
+}
+.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(2) .el-input__inner>.el-input__suffix{
+  right:5px;
+}
+.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(2) .el-select {
+  width: 126px;
+}
+.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(2) .cell{
+  padding-right: 0;
+}
+/* 借款人资料 产权性质 */
+.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(3) .el-select>.el-input,.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(3) .el-input__inner,.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(3) .el-select,.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(3) .el-select>.el-input {
+  min-width: 100px;
+}
+.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(3) .el-input__inner>.el-input__suffix{
+  right:5px;
+}
+/* 借款人资料 抵押状况 */
+.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(10) .el-select>.el-input,.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(10) .el-input__inner,.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(10) .el-select,.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(10) .el-select>.el-input {
+  min-width: 100px;
+}
+.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(10) .el-input__inner>.el-input__suffix{
+  right:5px;
+}
+/* 借款人资料 房产地址 */
+.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(6) .el-select>.el-input,.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(6) .el-input__inner,.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(6) .el-select,.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(6) .el-select>.el-input {
+  min-width: 200px;
+}
+.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(6) .el-input__inner>.el-input__suffix{
+  right:5px;
+}
+/* 借款人资料 车辆信息 表格内容居中 */
+.borrowerInformation .el-table th:nth-of-type(1){
+  text-align: center; 
+}
+.borrowerInformation .el-table__body-wrapper .el-table__body td:nth-of-type(1){
+  text-align: center; 
+}
+/* 借款人资料 车辆信息 去掉滚动条 */
+@media screen and (min-width: 1366px){
+    .borrowerInformation .car .el-table__body-wrapper{
+      overflow: hidden;
+    }
+  }
+/* 借款人资料 车辆信息 */
+.borrowerInformation .car .el-table__body-wrapper .el-table__body td:nth-of-type(6) .el-input__inner{
+  width: 100px; 
+}
+.borrowerInformation .car .el-table__body-wrapper .el-table__body td:nth-of-type(6) .el-input__inner>.el-input__suffix{
+  right:5px;
+}
+.borrowerInformation .car .el-table__body-wrapper tbody tr td:nth-of-type(6) .el-select {
+  width: 100px;
+}
+.borrowerInformation .car .el-table__body-wrapper tbody tr td:nth-of-type(6) .cell{
+  padding-right: 0;
+}
+/* 借款人资料 车辆信息-已购时间 */
+.borrowerInformation .car .el-table__body-wrapper .el-table__body td:nth-of-type(12) .el-input__inner{
+  padding-left: 30px;
+}
+
+.borrowerInformation .el-table__body-wrapper .el-input {
+  min-width: 100px;
+}
+
+.borrowerInformation .el-table__body-wrapper .el-input .el-input__inner {
+  border: none;
+}
+
+/* .borrowerInformation .el-select>.el-input {
+  width: 130px;
+} */
+
+
+/* 车辆信息 时间 */
+
+.borrowerInformation .carContain .el-table__body-wrapper tbody tr td:last-child .el-input {
+  width: 140px;
+}
+/* 信用卡使用明细 银行名称*/
+.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(7) .cell,.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(8) .cell,.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(13) .cell{
+  padding-right: 0;
+}
+.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(2) .cell{
+  padding-right: 0;
+  padding-left: 5px;
+}
+.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(2) .el-input {
+  width: 140px;
+}
+.borrowerInformation .cardContain .el-table__body-wrapper .el-table__body td:nth-of-type(2) .el-input__inner{
+  width: 140px; 
+}
+.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(2) .el-select {
+  width: 140px;
+}
+/* 信用卡使用明细 时间 */
+.borrowerInformation .cardContain .el-table__body-wrapper .el-table__body td:nth-of-type(3) .el-input__inner,.borrowerInformation .cardContain .el-table__body-wrapper .el-table__body td:nth-of-type(6) .el-input__inner{
+  padding-left: 30px;
+}
+
+/* 信用卡使用明细 时间 */
+
+.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(3) .el-input {
+  width: 140px;
+}
+
+.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(6) .el-input {
+  width: 140px;
+}
+/* 信用卡使用明细 账户状态 */
+.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(13) .cell{
+  padding-right: 0;
+  padding-left: 5px;
+}
+.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(13) .el-select{
+  width: 100px;
+}
+.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(13) .el-input{
+  width: 100px;
+}
+.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(13) .el-input__inner{
+  width: 100px;
+}
+.borrowerInformation .cardContain .el-table__body-wrapper .el-table__body td:nth-of-type(9) .el-input__suffix{
+  right:15px;
+}
+/* 信用卡使用明细 是否逾期 */
+.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(2) .cell{
+  padding-right: 0;
+  padding-left: 5px;
+}
+
+/* 信用卡使用明细 信用卡使用总况 */
+.borrowerInformation .xinyongka .el-input{
+  width: 200px;
+}
+.borrowerInformation .xinyongka .el-input__inner{
+  width: 200px;
+  padding-left: 13px;
+}
+
+/* 信用卡使用明细 负债信息 */
+.borrowerInformation .fuzhaixinxi .el-input{
+  width: 200px;
+}
+.borrowerInformation .fuzhaixinxi .el-input__inner{
+  width: 200px;
+  padding-left:10px;
+}
+.borrowerInformation .fuzhaixinxi ol.num li:nth-of-type(2) .el-textarea__inner{
+  padding: 5px 10px;
+}
+.borrowerInformation .zhengxunbaogao ol:nth-of-type(2) li .el-textarea__inner{
+  padding: 5px 10px;
+}
+
+/* 贷款明细 时间 */
+.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(6) .el-input {
+  width: 140px;
+}
+
+.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(7) .el-input {
+  width: 140px;
+}
+
+.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(9) .el-input {
+  width: 140px;
+}
+
+.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(14) .el-input {
+  width: 140px;
+}
+/* 贷款明细 贷款种类 */
+.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(2) .el-select>.el-input{
+  width: 100px;
+}
+.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(2) .cell{
+  padding-right: 0;
+  padding-left: 5px;
+}
+/* 贷款明细 担保方知 */
+.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(3) .el-select>.el-input{
+  width: 100px;
+}
+.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(3) .cell{
+  padding-right: 0;
+  padding-left: 5px;
+}
+/* 贷款明细 担保方知 */
+.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(4) .el-select>.el-input{
+  width: 100px;
+}
+.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(4) .cell{
+  padding-right: 0;
+  padding-left: 5px;
+}
+/* 信用卡使用明细 时间 */
+.borrowerInformation .loanContain .el-table__body-wrapper .el-table__body td:nth-of-type(6) .el-input__inner,.borrowerInformation .loanContain .el-table__body-wrapper .el-table__body td:nth-of-type(7) .el-input__inner,.borrowerInformation .loanContain .el-table__body-wrapper .el-table__body td:nth-of-type(9) .el-input__inner,.borrowerInformation .loanContain .el-table__body-wrapper .el-table__body td:nth-of-type(14) .el-input__inner{
+  padding-left: 30px;
+}
+/* 流水明细 流水类型 */
+.borrowerInformation .income .el-table__body-wrapper tbody tr td:nth-of-type(2) .el-select>.el-input{
+  width: 100px;
+}
+.borrowerInformation .income .el-table__body-wrapper tbody tr td:nth-of-type(2) .cell{
+  padding-right: 0;
+  padding-left: 5px;
+}
+.borrowerInformation .income.el-table th:nth-of-type(9){
+  text-align: center; 
+}
+.borrowerInformation .income .el-table__body-wrapper .el-table__body td:nth-of-type(9){
+  text-align: center; 
+}
+.borrowerInformation .income .el-table__body-wrapper{
+  overflow: hidden;
+}
 /* 各自部分 */
 
 
@@ -701,79 +936,6 @@ height: 40px;
   font-size: 14px;
 }
 
-/* 借款人资料 */
-/* .borrowerInformation .el-table__body-wrapper{
-    overflow: hidden;
-  } */
-
-.borrowerInformation .el-table__body-wrapper .el-select>.el-input .el-input__inner {
-  border: none;
-}
-
-/* 借款人资料 房产类型 */
-.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(2) .el-input__inner{
-  width: 130px; 
-}
-.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(2) .el-select {
-  width: 130px;
-}
-
-.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(2) .el-select>.el-input {
-  width: 130px;
-}
-
-.borrowerInformation .el-table__body-wrapper .el-input {
-  width: 120px;
-}
-
-.borrowerInformation .el-table__body-wrapper .el-input .el-input__inner {
-  border: none;
-}
-
-.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(6) .el-input {
-  width: 180px;
-}
-
-.borrowerInformation .el-select>.el-input {
-  width: 130px;
-}
-
-
-/* 车辆信息 时间 */
-
-.borrowerInformation .carContain .el-table__body-wrapper tbody tr td:last-child .el-input {
-  width: 140px;
-}
-
-
-/* 信用卡使用明细 时间 */
-
-.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(3) .el-input {
-  width: 140px;
-}
-
-.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(6) .el-input {
-  width: 140px;
-}
-
-
-/* 贷款明细 时间 */
-
-.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(6) .el-input {
-  width: 140px;
-}
-
-.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(7) .el-input {
-  width: 140px;
-}
-
-.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(9) .el-input {
-  width: 140px;
-}
-
-.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(14) .el-input {
-  width: 140px;
-}
 
 
 /* 征询报告 */
@@ -840,7 +1002,6 @@ height: 40px;
   font-weight: 400;
   color: #1f2d3d;
   font-size: 14px;
-  padding-left: 10px;
 }
 
 .remark .el-table__body-wrapper .el-table__body td {
@@ -848,6 +1009,10 @@ height: 40px;
   color: #666666;
   font-size: 14px;
   padding-left: 10px;
+}
+
+.remark .el-table td .cell{
+  padding-left: 0;
 }
 
 .remark .el-table th:nth-of-type(1) {
@@ -874,11 +1039,9 @@ height: 40px;
 }
 
 .remarkDetial .el-table th {
-  /* text-align: center; */
   font-weight: 400;
   color: #1f2d3d;
   font-size: 14px;
-  padding-left: 10px;
 }
 
 .remarkDetial .el-table__body-wrapper .el-table__body td {
@@ -887,6 +1050,10 @@ height: 40px;
   color: #666666;
   font-size: 14px;
   padding-left: 10px;
+}
+
+.remarkDetial .el-table td .cell{
+  padding-left: 0;
 }
 
 .remarkDetial .el-table th:nth-of-type(1) {
@@ -1027,9 +1194,7 @@ height: 40px;
   padding: 0 0;
   padding-left: 0 !important;
 }
-.mheader .el-menu .el-submenu.is 
-
--opened{
+.mheader .el-menu .el-submenu.is-opened{
   background:rgba(31, 45, 61,.6);
   box-shadow:0 10px 20px 0 #475669;
 }
@@ -1038,9 +1203,7 @@ height: 40px;
   border-bottom-color: #fff;
   border-bottom : 2px solid #fff;
 }
-.mheader .el-menu--horizontal .el-submenu.is 
-
--opened .el-submenu__title{
+.mheader .el-menu--horizontal .el-submenu.is-opened .el-submenu__title{
   background-color: transparent;
   border-bottom-color: #fff !important;
   border-bottom : 2px solid #fff;
@@ -1143,9 +1306,7 @@ height: 40px;
   top: -5px;
   margin-top: -7px; 
 }
-.mheader .el-menu .el-submenu.is 
-
--opened .el-submenu__title{
+.mheader .el-menu .el-submenu.is-opened .el-submenu__title{
   border-bottom:2px solid #fff;
   color: #fff;
 }
@@ -1154,17 +1315,10 @@ height: 40px;
   color: #bfcbd9;
 } 
 /* 解决：点击三级时二级又一次加背景色 */
-.mheader .el-menu .el-menu .el-submenu.is 
-
--opened{
+.mheader .el-menu .el-menu .el-submenu.is-opened{
   background:none;
   box-shadow:0 0 0 0 #475669; 
 }
-/* .mheader .el-menu .el-menu .el-menu{
-  background:rgba(31, 45, 61,.6);
-  box-shadow:0 10px 20px 0 #475669;
-  margin-top: -7px; 
-} */
 .mheader .el-menu--horizontal .el-submenu>.el-menu{
   border-radius: 0;
 }

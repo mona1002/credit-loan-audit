@@ -17,10 +17,10 @@ if (host === productionEnv) {
   host = releaseEnv;
 } else if (host === testEnv) {
   host = testEnv;
-  port = 20716;
+  //port = 20716;
 } else {
   host = developmentEnv;
-  port = 20716;
+  //port = 20716;
   // port = 8080;
 }
 
