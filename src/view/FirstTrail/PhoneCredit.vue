@@ -16,75 +16,83 @@
         <!-- <el-button type="text" @click="open">添加</el-button> -->
       </el-aside>
       <!-- 右侧 表单内容 -->
-      <el-container style="background:url(.../../../static/images/3C281C6A-532B-4A55-A9BF-F142E9F09063@1x.png) center no-repeat;">
-        <el-header style="text-align: right; font-size: 12px">
-          <!--  v-show="hisListShow" -->
-          <!-- title="历史调查日志"  -->
-          <el-collapse v-model="activeNames">
-            <el-collapse-item style="text-align:left;" v-show="hisListShow" name="1">
-              <template slot="title">
-                <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-                <span class="headFont">历史调查日志</span>
-              </template>
-              <!-- 历史记录 -->
-              <div>
-                <el-table :data="listData.recordList" height="250" border style="" @row-dblclick="rowDbClick" stripe v-loading="mobileLoading" highlight-current-row>
-                  <el-table-column type="index" label="序号">
-                  </el-table-column>
-                  <el-table-column prop="phoneTypeDes" label="电话类型">
-                  </el-table-column>
-                  <el-table-column prop="checkTime" label="调查时间">
-                  </el-table-column>
-                  <el-table-column prop="sourceDes" label="来源">
-                  </el-table-column>
-                  <el-table-column prop="phoneNum" label="电话号码">
-                  </el-table-column>
-                  <el-table-column prop="answerDes" label="接听情况">
-                  </el-table-column>
-                  <el-table-column prop="checkStageDes" label="调查阶段">
-                  </el-table-column>
-                  <el-table-column prop="conclusion" label="调查结论">
-                  </el-table-column>
-                </el-table>
-                <!-- 分页 -->
-                <!-- v-show="listData.recordList.length" -->
-                <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 15, 20]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="listData.totalRecord">
-                </el-pagination>
-              </div>
-            </el-collapse-item>
-          </el-collapse>
+      <el-container>
+        <!-- <el-header > -->
+        <!--  v-show="hisListShow" -->
+        <!-- title="历史调查日志"  -->
+        <el-main style="overflow-y: hidden;">
+          <!-- 默认的背景 -->
+          <div class="form-his"  v-show="!formShow" style="background:url(.../../../static/images/3C281C6A-532B-4A55-A9BF-F142E9F09063@1x.png) center no-repeat;">
+          </div>
+          <div v-if="formShow" class="header-class">
+            <el-collapse v-model="activeNames">
+              <el-collapse-item style="text-align:left;" v-show="hisListShow" name="1">
+                <template slot="title">
+                  <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+                  <span class="headFont">历史调查日志</span>
+                </template>
+                <!-- 历史记录 -->
+                <div>
+                  <el-table :data="listData.recordList" height="250" border style="" @row-dblclick="rowDbClick" stripe v-loading="mobileLoading" highlight-current-row>
+                    <el-table-column type="index" label="序号">
+                    </el-table-column>
+                    <el-table-column prop="phoneTypeDes" label="电话类型">
+                    </el-table-column>
+                    <el-table-column prop="checkTime" label="调查时间">
+                    </el-table-column>
+                    <el-table-column prop="sourceDes" label="来源">
+                    </el-table-column>
+                    <el-table-column prop="phoneNum" label="电话号码">
+                    </el-table-column>
+                    <el-table-column prop="answerDes" label="接听情况">
+                    </el-table-column>
+                    <el-table-column prop="checkStageDes" label="调查阶段">
+                    </el-table-column>
+                    <el-table-column prop="conclusion" label="调查结论">
+                    </el-table-column>
+                  </el-table>
+                  <!-- 分页 -->
+                  <!-- v-show="listData.recordList.length" -->
+                  <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 15, 20]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="listData.totalRecord" v-show="listData.totalRecord>0">
+                  </el-pagination>
+                </div>
+              </el-collapse-item>
+            </el-collapse>
+          </div>
           <!-- <div v-show="hisListShow"> -->
           <!-- <div class="head-title"> 历史调查日志 </div> -->
           <!-- 列表 -->
-        </el-header>
-        <!-- 表单部分 -->
-        <el-main>
-          <!-- 默认的新增表单 -->
-          <!-- 住址电话 - 表单 -->
-          <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"></AddressForm>
-          <!-- 住址电话 - 历史 -->
-          <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :mobileData="mobileData"></AddressHis>
-          <!-- 单位电话 - 表单 -->
-          <CompanyForm class="form-his" v-if="formShow && phoneType=='02'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"></CompanyForm>
-          <!-- 单位电话 - 历史 -->
-          <CompanyHis class="form-his" v-if="hisShow && phoneType=='02'" :comData="comData"></CompanyHis>
-          <!-- 家庭联系人 - 表单 -->
-          <FamilyForm class="form-his" v-if="formShow && phoneType=='03'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"></FamilyForm>
-          <!-- 家庭联系人 - 历史 -->
-          <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :familyData="familyData"></FamilyHis>
-          <!-- 紧急联系人 - 表单 -->
-          <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"></HurryForm>
-          <!-- 紧急联系人 - 历史 -->
-          <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :hurryData="hurryData"></HurryHis>
-          <!-- 工作证明人 - 表单 -->
-          <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"></WorkForm>
-          <!-- 工作证明人 - 历史 -->
-          <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="workData"></WorkHis>
-          <!-- 子组件 -->
-          <!-- <router-link to="/AddressForm/formTag='testtag'/id='123'/phoneType='01'">
+          <!-- </el-header> -->
+          <!-- 表单部分 -->
+          
+          <div class="form-class" style="width:100%;height:100%;padding-bottom:30px;">
+            <!-- 默认的新增表单 -->
+            <!-- 住址电话 - 表单 -->
+            <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"></AddressForm>
+            <!-- 住址电话 - 历史 -->
+            <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :mobileData="mobileData"></AddressHis>
+            <!-- 单位电话 - 表单 -->
+            <CompanyForm class="form-his" v-if="formShow && phoneType=='02'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"></CompanyForm>
+            <!-- 单位电话 - 历史 -->
+            <CompanyHis class="form-his" v-if="hisShow && phoneType=='02'" :comData="comData"></CompanyHis>
+            <!-- 家庭联系人 - 表单 -->
+            <FamilyForm class="form-his" v-if="formShow && phoneType=='03'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"></FamilyForm>
+            <!-- 家庭联系人 - 历史 -->
+            <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :familyData="familyData"></FamilyHis>
+            <!-- 紧急联系人 - 表单 -->
+            <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"></HurryForm>
+            <!-- 紧急联系人 - 历史 -->
+            <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :hurryData="hurryData"></HurryHis>
+            <!-- 工作证明人 - 表单 -->
+            <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"></WorkForm>
+            <!-- 工作证明人 - 历史 -->
+            <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="workData"></WorkHis>
+            <!-- 子组件 -->
+            <!-- <router-link to="/AddressForm/formTag='testtag'/id='123'/phoneType='01'">
             <el-button type="primary">住址电话</el-button>
           </router-link> -->
-          <!-- <router-view></router-view> -->
+            <!-- <router-view></router-view> -->
+          </div>
         </el-main>
       </el-container>
     </el-container>
@@ -443,6 +451,13 @@ export default {
 
 
     },
+    formShow:function(){
+      console.log('formShow',this.formShow);
+      if(this.formShow){
+        $('.el-main').css("overflow-y",'auto');
+        
+      }
+    }
   },
   methods: {
     fetchData() {
@@ -736,8 +751,9 @@ export default {
 
 .phone-credit el-header {
   background-color: #B3C0D1;
-  color: #333;
-  line-height: 60px;
+  /*color: #333;*/
+  height: 40px !important;
+  line-height: 40px;
 }
 
 .phone-credit .el-aside {
@@ -751,6 +767,10 @@ export default {
   width: 210px !important;
   /*height: 321px;*/
 }
+
+
+
+
 
 
 
@@ -780,6 +800,10 @@ export default {
 
 
 
+
+
+
+
 /* el-tree  title */
 
 .phone-credit .el-tree-node__content {
@@ -798,6 +822,10 @@ export default {
 
 
 
+
+
+
+
 /* element-ui tree icon 箭头*/
 
 .phone-credit .el-tree-node__content .el-tree-node__expand-icon {
@@ -806,6 +834,10 @@ export default {
   left: 170px;
   font-size: 18px;
 }
+
+
+
+
 
 
 
@@ -833,12 +865,20 @@ export default {
 
 
 
+
+
+
+
 /* 三角 icon */
 
 .phone-credit .el-tree-node__expand-icon {
   font-size: 20px;
   /*display: none;*/
 }
+
+
+
+
 
 
 
@@ -862,11 +902,19 @@ export default {
 
 
 
+
+
+
+
 /* 二级 目录 样式 */
 
 .phone-credit .el-tree-node__content {
   /*padding-left: 0px !important;*/
 }
+
+
+
+
 
 
 
@@ -883,9 +931,13 @@ export default {
   margin: 20px;
   margin-left: 60px;
   background: #0077ff;
-  color:white;
+  color: white;
   float: right;
 }
+
+
+
+
 
 
 
@@ -911,6 +963,10 @@ export default {
   overflow: auto;
   z-index: 101;
 }
+
+
+
+
 
 
 
@@ -946,11 +1002,19 @@ export default {
 
 
 
+
+
+
+
 /* title */
 
 .phone-credit .cover-content .add-title {
   text-align: left;
 }
+
+
+
+
 
 
 
@@ -992,11 +1056,19 @@ export default {
 
 
 
+
+
+
+
 /* 添加电话  input 样式*/
 
 .phone-credit .add-content .el-input {
   width: inherit;
 }
+
+
+
+
 
 
 
@@ -1025,6 +1097,10 @@ export default {
 
 
 
+
+
+
+
 /* children - label*/
 
 .phone-credit .el-tree-node__children .el-tree-node__label {
@@ -1044,6 +1120,10 @@ export default {
 
 
 
+
+
+
+
 /* 确定按钮 */
 
 .phone-credit .cover-content .el-button {
@@ -1052,6 +1132,10 @@ export default {
   /*margin-top: 10px;*/
   /*margin-right: 10px;*/
 }
+
+
+
+
 
 
 
@@ -1085,12 +1169,19 @@ export default {
 
 
 
+
+
+
+
 /* 右侧 头 table*/
 
 .phone-credit .el-header {
   width: 100%;
   height: auto !important;
   /*min-height: 350px !important;*/
+  /*height: 40px !important;*/
+  /*line-height: 40px;*/
+  /*overflow: hidden;*/
 }
 
 .phone-credit .el-main {
@@ -1100,6 +1191,11 @@ export default {
   overflow: auto;
   /*background:url(.../../../static/images/3C281C6A-532B-4A55-A9BF-F142E9F09063@1x.png) center no-repeat;"*/
   background: #ffffff;
+
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
 }
 
 .phone-credit .el-header .head-title {
@@ -1134,6 +1230,10 @@ export default {
 
 
 
+
+
+
+
 /* 表格分页 */
 
 .phone-credit .el-pagination {
@@ -1141,6 +1241,10 @@ export default {
   width: 100%;
   text-align: center;
 }
+
+
+
+
 
 
 
@@ -1170,12 +1274,20 @@ export default {
 
 
 
+
+
+
+
 /* 添加申请单电话 label*/
 
 .phone-credit .add-label {
   display: inline-block;
   width: 70px;
 }
+
+
+
+
 
 
 
@@ -1225,6 +1337,10 @@ export default {
 
 
 
+
+
+
+
 /* label */
 
 .phone-credit .el-form-item__label {
@@ -1243,9 +1359,14 @@ export default {
 
 
 
+
+
+
+
 /* 三列 */
 
 .phone-credit .item-column3 {
+  width:33%;
   min-width: 350px;
   float: left;
   margin: 0;
@@ -1260,10 +1381,14 @@ export default {
 
 
 
+
+
+
+
 /* 两列 */
 
 .phone-credit .item-column2 {
-  /*width: 50%;*/
+  width: 50%;
   min-width: 450px;
   float: left;
   margin: 0;
@@ -1271,11 +1396,15 @@ export default {
 }
 
 .phone-credit .item-column1 {
-  /*width: 90%;*/
+  width: 90%;
   min-width: 1366px;
   float: left;
   margin: 0;
 }
+
+
+
+
 
 
 
@@ -1310,6 +1439,10 @@ export default {
 
 
 
+
+
+
+
 /* input 不可编辑状态*/
 
 .dis-input {}
@@ -1324,14 +1457,22 @@ export default {
 
 
 
+
+
+
+
 /* el-input width*/
 
-.phone-credit .el-container .el-main .el-input {
+.phone-credit .el-container .el-main .form-class .el-input {
   /* 分屏 */
   width: 150px;
   /* 全屏 */
   width: 200px;
 }
+
+
+
+
 
 
 
@@ -1355,6 +1496,10 @@ export default {
 
 
 
+
+
+
+
 /* 历史调查日志 收缩 title */
 
 .phone-credit .el-collapse-item__header {
@@ -1365,7 +1510,13 @@ export default {
   letter-spacing: 0.11px;
   text-align: left;
   /*padding-left: 10px;*/
+  height: 40px;
+  line-height: 40px;
 }
+
+
+
+
 
 
 
@@ -1380,6 +1531,10 @@ export default {
 .phone-credit .el-collapse-item__header .el-collapse-item__arrow {
   padding-right: 20px;
 }
+
+
+
+
 
 
 
@@ -1407,9 +1562,10 @@ export default {
   letter-spacing: 1.49px;
 }
 
-.phone-credit .form-his{
+.phone-credit .form-his {
   font-size: 16px;
 }
+
 .phone-credit .form-his ul {
   padding-left: 23px;
 }
@@ -1424,21 +1580,30 @@ export default {
   float: left;
   /*width: 795px;*/
   min-width: 500px;
-  padding-bottom:10px;
+  padding-bottom: 10px;
 }
 
 .phone-credit .form-his li .textarea-class2 {
   height: auto;
   float: left;
   min-width: 300px;
-  padding-bottom:10px;
+  padding-bottom: 10px;
 }
 
+
+
+
+
 /* 提交按钮 */
+
 .phone-credit .submit-class {
   text-align: left;
   margin-left: 570px;
 }
+
+
+
+
 
 
 
@@ -1466,6 +1631,10 @@ export default {
   /*width: 258px;*/
   height: 33px;
 }
+
+
+
+
 
 
 
@@ -1507,6 +1676,10 @@ export default {
 
 
 
+
+
+
+
 /*add-content*/
 
 
@@ -1521,11 +1694,19 @@ export default {
 
 
 
+
+
+
+
 /* 关闭按钮 */
 
 .phone-credit .el-dialog__headerbtn {
   font-size: 20px;
 }
+
+
+
+
 
 
 
@@ -1542,11 +1723,19 @@ export default {
 
 
 
+
+
+
+
 /* 更改 电话征信 -- 添加电话 */
 
 .phone-credit .el-dialog__wrapper .el-form-item__label {
   width: 100px;
 }
+
+
+
+
 
 
 
@@ -1561,11 +1750,19 @@ export default {
 
 
 
+
+
+
+
 /* 添加申请单电话信息 必填 * */
 
 .phone-credit .left-title2 {
   line-height: 20px;
 }
+
+
+
+
 
 
 
@@ -1583,15 +1780,40 @@ export default {
 
 
 
+
+
+
+
 /* 电话树  选中的  字体样式*/
 
 .phone-credit .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content .el-tree-node__label {
   color: #0077ff;
 }
 
-.phone-credit .el-tree-node__content{
+.phone-credit .el-tree-node__content {
   height: 32px;
 }
 
+
+
+
+
+
+/* 表头 */
+
+.phone-credit .el-collapse,
+.phone-credit .el-collapse-item__header,
+.el-collapse-item__wrap {
+  border: none;
+  width: 100%;
+}
+
+/* 历史几率表格 */
+.phone-credit .header-class .phone-credit .el-select:hover .el-input__inner{
+
+}
+.phone-credit .header-class .el-container .el-main .el-input{
+
+}
 
 </style>
