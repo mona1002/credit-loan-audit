@@ -138,7 +138,7 @@
           <el-input v-model="relBorrowertxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
         </div>
       </li>
-      <li class="item-column1">
+      <li class="item-column2">
         <div class="left-title">与借款人联系频繁:</div>
         <div>
           <el-select v-model="contactfre" placeholder="请选择调查情况">
@@ -147,6 +147,12 @@
             <el-option label="偶尔" value="02"></el-option>
             <el-option label="较少" value="03"></el-option>
           </el-select>
+        </div>
+      </li>
+      <li class="item-column2">
+        <div class="left-title"></div>
+        <div>
+          
         </div>
       </li>
       <li class="item-column2">

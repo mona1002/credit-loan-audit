@@ -311,11 +311,11 @@
       <li class="item-column1">
         <div class="left-title">借款人爱好和品行:</div>
         <div class="textarea-class">
-          <el-input v-model="hobbyandBehave" type="textarea" :rows="2" resize=none :maxlength="500"></el-input>
+          <el-input v-model="hobbyandBehave" type="textarea" :rows="3" resize=none :maxlength="500"></el-input>
         </div>
       </li>
       <li class="item-column1">
-        <div class="left-title"><span class="require-icon">*</span>调查结论:</div>
+        <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查结论:</div>
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <div class="textarea-class">
             <el-input v-model="conclusion" type="textarea" :rows="3" resize=none :maxlength="500"></el-input>
