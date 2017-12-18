@@ -29,7 +29,7 @@
         </el-table-column>
       </el-table>
       <div class="block tool-bar">
-        <el-pagination @size-change="handleSizeChangeMobile" @current-change="handleCurrentChangeMobile" :current-page="MobilePageNum" :page-sizes="[5, 10, 15, 20]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="mobileData.totalRecord" v-show="mobileData.recordList.length">
+        <el-pagination @size-change="handleSizeChangeMobile" @current-change="handleCurrentChangeMobile" :current-page="MobilePageNum" :page-sizes="[5, 10, 15, 20]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="mobileData.totalRecord" v-show="mobileData.totalRecord>0">
         </el-pagination>
       </div>
     </div>
@@ -59,7 +59,7 @@
         </el-table-column>
       </el-table>
       <div class="block tool-bar">
-        <el-pagination @size-change="handleSizeChangeFixTel" @current-change="handleCurrentChangeFixTel" :current-page="FixTelPageNum" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="fixTelData.totalRecord" v-show="fixTelData.recordList.length">
+        <el-pagination @size-change="handleSizeChangeFixTel" @current-change="handleCurrentChangeFixTel" :current-page="FixTelPageNum" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="fixTelData.totalRecord" v-show="fixTelData.totalRecord>0">
         </el-pagination>
       </div>
     </div>
@@ -89,7 +89,7 @@
         </el-table-column>
       </el-table>
       <div class="block tool-bar">
-        <el-pagination @size-change="handleSizeChangeCompany" @current-change="handleCurrentChangeCompany" :current-page="CompanyPageNum" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="workData.totalRecord" v-show="workData.recordList.length">
+        <el-pagination @size-change="handleSizeChangeCompany" @current-change="handleCurrentChangeCompany" :current-page="CompanyPageNum" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="workData.totalRecord" v-show="workData.totalRecord>0">
         </el-pagination>
       </div>
     </div>
@@ -302,7 +302,7 @@ export default {
             <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">\
         <span class="headFont">匹配结论</span>\
             </el-form-item>\
-            <el-input type="textarea" v-model="audit_desc" class="mark-textarea" resize="none" :rows="5" maxlength="500"></el-input>\
+            <el-input type="textarea" v-model="audit_desc" class="mark-textarea" resize="none" :rows="5" :maxlength="500"></el-input>\
             <el-form-item class="mark-button">\
                 <el-button type="primary" @click="submitForm()">确认</el-button>\
             </el-form-item>\
