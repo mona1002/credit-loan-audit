@@ -5,7 +5,7 @@
       <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
       <span class="headFont">新增调查日志</span>
     </div>
-    <ul>
+    <ul class="content-ul">
       <li class="item-column3">
         <div class="left-title">客户名称:</div>
         <div class="dis-input">
@@ -97,7 +97,7 @@
         <!-- </div> -->
       </li>
       <li class="item-column2">
-        <div class="left-title" v-show="threeQueries=='1'"><span class="require-icon" style="left:60px;">*</span>说明:</div>
+        <div class="left-title" v-show="threeQueries=='1'"><span class="require-icon" style="left:80px;">*</span>说明:</div>
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <div class="textarea-class2" v-show="threeQueries=='1'">
             <el-input v-model="exceptionState" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
@@ -515,7 +515,7 @@ export default {
     },
     // 第三方查询结果
     thirdResult: function() {
-      if (thirdResult.length == 500)
+      if (this.thirdResult.length == 500)
         this.$message({
           message: '输入长度不能超出100',
           type: 'warning'
