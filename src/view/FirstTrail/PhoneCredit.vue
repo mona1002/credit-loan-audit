@@ -20,7 +20,7 @@
         <!-- <el-header > -->
         <!--  v-show="hisListShow" -->
         <!-- title="历史调查日志"  -->
-        <el-main style="overflow-y: hidden;">
+        <el-main style="overflow-y: hidden;font-size:14px;">
           <!-- 默认的背景 -->
           <div class="form-his"  v-show="!formShow" style="background:url(.../../../static/images/3C281C6A-532B-4A55-A9BF-F142E9F09063@1x.png) center no-repeat;">
           </div>
@@ -65,7 +65,7 @@
           <!-- </el-header> -->
           <!-- 表单部分 -->
           
-          <div class="form-class" style="width:100%;height:100%;padding-bottom:30px;">
+          <div class="form-class" style="width:100%;height:auto;">
             <!-- 默认的新增表单 -->
             <!-- 住址电话 - 表单 -->
             <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"></AddressForm>
@@ -1465,9 +1465,9 @@ export default {
 
 .phone-credit .el-container .el-main .form-class .el-input {
   /* 分屏 */
-  width: 150px;
+  min-width: 150px;
   /* 全屏 */
-  width: 200px;
+  max-width: 200px;
 }
 
 
@@ -1815,5 +1815,6 @@ export default {
 .phone-credit .header-class .el-container .el-main .el-input{
 
 }
+
 
 </style>
