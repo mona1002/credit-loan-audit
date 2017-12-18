@@ -8,7 +8,7 @@
       </el-table-column>
       <el-table-column prop="ploanAmt" label="批准金额[元]" min-width="38" align="right">
       </el-table-column>
-      <el-table-column prop="ploanTerm" label="批准期限[月]"min-width="38">
+      <el-table-column prop="ploanTerm" label="批准期限[月]" min-width="38">
       </el-table-column>
       <el-table-column prop="appmult" label="审批倍数" min-width="30">
       </el-table-column>
@@ -31,27 +31,26 @@
   export default {
     data() {
       return {
-        ConclutionInf:[],
+        ConclutionInf: [],
+        MatchInf: []
       }
     },
     mounted() {
-      // this.localInf = JSON.parse(localStorage.getItem("taskInWaitting"))
-
-
-  this.post("/creauditOpinion/queryByPage", {
-        // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
-        applyId:"00542",
+      // this.MatchInf = JSON.parse(localStorage.getItem("internalId"));
+      this.post("/creauditOpinion/queryByPage", {
+        // applyId: this.MatchInf.matchApplyId,           
+        applyId: "00542",
       }).then(res => {
         console.log(res.data)
-        this.ConclutionInf=res.data.recordList;
+        this.ConclutionInf = res.data.recordList;
       });
     },
   }
 
 </script>
 <style scoped>
-.ApprovalConclusion{
-  min-width: 987px;
-}
+  .ApprovalConclusion {
+    min-width: 987px;
+  }
 
 </style>

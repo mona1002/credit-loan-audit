@@ -45,10 +45,10 @@
             <div class="Left_right_BigImg ">
               <AudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></AudioVisualLeft>
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
-              <!-- <workbench v-if=" this.tabContent1==2">内部匹配</workbench> -->
+              <InternalMatch v-if=" this.tabContent1==2"></InternalMatch>
               <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
               <cborrowerInformationDetail v-if=" this.tabContent1==4"></cborrowerInformationDetail>
-              <!-- <capplicationInformationDetail v-if=" this.tabContent1==5"> 电话征信</capplicationInformationDetail> -->
+              <PhoneCredit v-if=" this.tabContent1==5"></PhoneCredit>
               <cCreditForm v-if=" this.tabContent1==6"></cCreditForm>
               <creditInvestigation v-if=" this.tabContent1==7"></creditInvestigation>
               <processTrajectory v-if=" this.tabContent1==8"></processTrajectory>

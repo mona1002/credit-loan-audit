@@ -49,7 +49,9 @@ import RApprovalConclusion from '@/view/FirstTrail/ReadComponent/RApprovalConclu
 // 放账信息（部分）
 import RFinanceInformation from '@/view/FirstTrail/ReadComponent/RFinanceInformation'
 // ----------终审-------------------------
-import FSplitScreen from '@/view/FinalTrial/FSplitScreen.vue'
+import FSplitScreen from '@/view/FinalTrial/FSplitScreen'
+// import FMatchingInf from '@/view/FinalTrial/FMatchingInf'
+
 // ------------反欺诈------------------
 
 
@@ -179,13 +181,17 @@ const routes = [{
   path: '/FSplitScreen',
   component: FSplitScreen
 },
+// {
+//   path: '/FMatchingInf',
+//   component: FMatchingInf
+// },
 //-------------------反欺诈------------
 // {
 //   path:'/FSplitScreen',
 //   component:FSplitScreen
 // },
 // {
-//   path:'/FSplitScreen',
+//   path:'/FMatchingInf',
 //   component:FSplitScreen
 // },
 // {

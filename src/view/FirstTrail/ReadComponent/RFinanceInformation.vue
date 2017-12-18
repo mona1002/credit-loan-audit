@@ -4,13 +4,13 @@
     <el-table :data="FinanceInf" border height="790">
       <el-table-column prop="fhReceiptNo" label="单据编号" min-width="120">
       </el-table-column>
-      <el-table-column prop="loanAcNo" label="借款账号" min-width="130" >
+      <el-table-column prop="loanAcNo" label="借款账号" min-width="130">
       </el-table-column>
-      <el-table-column prop="custName" label="客户姓名" min-width="80" >
+      <el-table-column prop="custName" label="客户姓名" min-width="80">
       </el-table-column>
       <el-table-column prop="certCode" label="证件号码" min-width="160">
       </el-table-column>
-      <el-table-column prop="proName" label="产品名称"  min-width="80">
+      <el-table-column prop="proName" label="产品名称" min-width="80">
       </el-table-column>
       <el-table-column prop="preLoanDate" label="预放款日期" min-width="120" align="center">
       </el-table-column>
@@ -32,16 +32,19 @@
   export default {
     data() {
       return {
-        FinanceInf:[],
+        FinanceInf: [],
+        MatchInf: []
       }
     },
-    mounted(){
-         this.post("/creAccountInfo/getAccountInfo", {
+    mounted() {
+      // this.MatchInf = JSON.parse(localStorage.getItem("internalId"));
+      this.post("/creAccountInfo/getAccountInfo", {
+        // applyId: this.MatchInf.matchApplyId,           
         applyId: "24667563-2ca2-4da6-8e02-4bf7d7c839b6",
       }).then(res => {
         console.log(res);
         // console.log(res.data)
-        this.FinanceInf=res.data
+        this.FinanceInf = res.data
       });
     }
   }
@@ -49,10 +52,10 @@
 </script>
 
 <style scoped>
-.FinanceInformation{
-  /* overflow: hidden; */
-  height: 100%;
-  /* background: #000; */
-}
+  .FinanceInformation {
+    /* overflow: hidden; */
+    height: 100%;
+    /* background: #000; */
+  }
 
 </style>

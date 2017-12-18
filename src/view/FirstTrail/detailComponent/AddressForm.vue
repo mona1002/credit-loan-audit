@@ -15,7 +15,7 @@
       <li class="item-column3">
         <div class="left-title">电话类型:</div>
         <div>
-          <el-select v-model="phoneType" disabled>
+          <el-select v-model="phoneType" :disabled="true">
             <el-option label="住址电话" value="01"></el-option>
           </el-select>
         </div>
@@ -27,18 +27,23 @@
         </div>
       </li>
       <li class="item-column3">
-        <div class="left-title">来源:</div>
-        <div>
+        <div class="left-title"><span class="require-icon" style="left:80px;">*</span> 来源:</div>
+        <!-- <div> -->
+        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="source">
             <el-option label="申请表" value="00"></el-option>
             <el-option label="第三方查询" value="01"></el-option>
             <el-option label="其他" value="02"></el-option>
           </el-select>
-        </div>
+        </el-tooltip>
+        <!-- </div> -->
       </li>
       <li class="item-column3">
-        <div class="left-title">接听情况:</div>
-        <div>
+        <div class="left-title">
+          <span class="require-icon" style="left:50px;">*</span> 接听情况:
+        </div>
+        <!-- <div> -->
+        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="answer">
             <el-option label="无人接" value="00"></el-option>
             <el-option label="拒接" value="01"></el-option>
@@ -46,23 +51,26 @@
             <el-option label="空号" value="03"></el-option>
             <el-option label="接通" value="04"></el-option>
           </el-select>
-        </div>
+        </el-tooltip>
+        <!-- </div> -->
       </li>
       <li class="item-column3">
-        <div class="left-title">调查阶段:</div>
-        <div>
+        <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查阶段:</div>
+        <!-- <div> -->
+        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="checkStage">
             <el-option label="正在调查" value="00"></el-option>
             <el-option label="完成调查" value="01"></el-option>
             <el-option label="调查失败" value="02"></el-option>
             <el-option label="未调查" value="03"></el-option>
           </el-select>
-        </div>
+        </el-tooltip>
+        <!-- </div> -->
       </li>
-      <li class="item-column3" v-show="source=='02'">
+      <li class="item-column1" v-show="source=='02'">
         <div class="left-title">其他来源说明:</div>
-        <div>
-          <el-input v-model="sourceDesc"></el-input>
+        <div class="textarea-class">
+          <el-input v-model="sourceDesc" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
         </div>
       </li>
     </ul>
@@ -74,26 +82,30 @@
       <li class="item-column1">
         <div class="left-title">第三方查询结果:</div>
         <div class="textarea-class">
-          <el-input v-model="thirdResult" type="textarea" :row="2" resize=none></el-input>
+          <el-input v-model="thirdResult" type="textarea" :rows="3" resize=none :maxlength="500"></el-input>
         </div>
       </li>
       <li class="item-column2">
-        <div class="left-title">三方查询是否异常:</div>
-        <div>
+        <div class="left-title"><span class="require-icon" style="left:-10px;">*</span>三方查询是否异常:</div>
+        <!-- <div> -->
+        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="threeQueries">
             <el-option label="否" value="0"></el-option>
             <el-option label="是" value="1"></el-option>
           </el-select>
-        </div>
+        </el-tooltip>
+        <!-- </div> -->
       </li>
       <li class="item-column2">
-        <div class="left-title">异常说明:</div>
-        <div>
-          <el-input v-model="exceptionState"></el-input>
-        </div>
+        <div class="left-title" v-show="threeQueries=='1'"><span class="require-icon" style="left:60px;">*</span>说明:</div>
+        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+          <div class="textarea-class2" v-show="threeQueries=='1'">
+            <el-input v-model="exceptionState" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          </div>
+        </el-tooltip>
       </li>
       <li class="item-column2">
-        <div class="left-title">是否为同一接听人:</div>
+        <div class="left-title left-title2">是否与家庭联系人为同一人接听:</div>
         <div>
           <el-select v-model="issameFam">
             <el-option label="否" value="0"></el-option>
@@ -102,9 +114,9 @@
         </div>
       </li>
       <li class="item-column2">
-        <div class="left-title"></div>
-        <div v-show="issameFam=='0'">
-          <el-input v-model="issameFamtxt"></el-input>
+        <div class="left-title" v-show="issameFam=='0'">说明:</div>
+        <div class="textarea-class2" v-show="issameFam=='0'">
+          <el-input v-model="issameFamtxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
         </div>
       </li>
       <li class="item-column2">
@@ -119,9 +131,9 @@
         </div>
       </li>
       <li class="item-column2">
-        <div class="left-title"></div>
-        <div v-show="relBorrower=='03'">
-          <el-input v-model="relBorrowertxt"></el-input>
+        <div class="left-title" v-show="relBorrower=='03'">说明:</div>
+        <div class="textarea-class2" v-show="relBorrower=='03'">
+          <el-input v-model="relBorrowertxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
         </div>
       </li>
       <li class="item-column2">
@@ -136,9 +148,9 @@
         </div>
       </li>
       <li class="item-column2">
-        <div class="left-title"></div>
-        <div v-show="checkWork=='01'">
-          <el-input v-model="checkWorktxt"></el-input>
+        <div class="left-title" v-show="checkWork=='01'">说明:</div>
+        <div class="textarea-class2" v-show="checkWork=='01'">
+          <el-input v-model="checkWorktxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
         </div>
       </li>
       <li class="item-column2">
@@ -175,9 +187,9 @@
         </div>
       </li>
       <li class="item-column2">
-        <div class="left-title"></div>
-        <div v-show="checkAddr=='01'">
-          <el-input v-model="checkAddrtxt"></el-input>
+        <div class="left-title" v-show="checkAddr=='01'">说明:</div>
+        <div class="textarea-class2" v-show="checkAddr=='01'">
+          <el-input v-model="checkAddrtxt" type="textarea" resize=none :rows="2"></el-input>
         </div>
       </li>
       <li class="item-column2">
@@ -193,9 +205,9 @@
         </div>
       </li>
       <li class="item-column2">
-        <div class="left-title"></div>
-        <div v-show="checkEstate=='00'">
-          <el-input v-model="checkEstatetxt"></el-input>
+        <div class="left-title" v-show="checkEstate=='00'">说明:</div>
+        <div class="textarea-class2" v-show="checkEstate=='00'">
+          <el-input v-model="checkEstatetxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
         </div>
       </li>
       <li class="item-column2">
@@ -209,9 +221,9 @@
         </div>
       </li>
       <li class="item-column2">
-        <div class="left-title"></div>
-        <div v-show="otherIncome=='00'">
-          <el-input v-model="otherIncometxt"></el-input>
+        <div class="left-title" v-show="otherIncome=='00'">说明:</div>
+        <div class="textarea-class2" v-show="otherIncome=='00'">
+          <el-input v-model="otherIncometxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
         </div>
       </li>
       <li class="item-column2">
@@ -225,9 +237,9 @@
         </div>
       </li>
       <li class="item-column2">
-        <div class="left-title"></div>
-        <div v-show="recentLargespend=='00'">
-          <el-input v-model="recentlArgespendInfo"></el-input>
+        <div class="left-title" v-show="recentLargespend=='00'">说明:</div>
+        <div class="textarea-class2" v-show="recentLargespend=='00'">
+          <el-input v-model="recentlArgespendInfo" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
         </div>
       </li>
       <li class="item-column2">
@@ -242,9 +254,9 @@
         </div>
       </li>
       <li class="item-column2">
-        <div class="left-title"></div>
-        <div v-show="parents=='01'">
-          <el-input v-model="parentsInfo"></el-input>
+        <div class="left-title" v-show="parents=='01'">说明:</div>
+        <div class="textarea-class2" v-show="parents=='01'">
+          <el-input v-model="parentsInfo" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
         </div>
       </li>
       <li class="item-column2">
@@ -258,9 +270,9 @@
         </div>
       </li>
       <li class="item-column2">
-        <div class="left-title"></div>
-        <div v-show="brother=='00'">
-          <el-input v-model="brothertxt"></el-input>
+        <div class="left-title" v-show="brother=='00'">说明:</div>
+        <div class="textarea-class2" v-show="brother=='00'">
+          <el-input v-model="brothertxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
         </div>
       </li>
       <li class="item-column2">
@@ -274,9 +286,9 @@
         </div>
       </li>
       <li class="item-column2">
-        <div class="left-title"></div>
-        <div v-show="expenses=='00'">
-          <el-input v-model="expensestxt"></el-input>
+        <div class="left-title" v-show="expenses=='00'">说明:</div>
+        <div class="textarea-class2" v-show="expenses=='00'">
+          <el-input v-model="expensestxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
         </div>
       </li>
       <li class="item-column2">
@@ -291,22 +303,24 @@
         </div>
       </li>
       <li class="item-column2">
-        <div class="left-title"></div>
-        <div v-show="checkHometel=='01'">
-          <el-input v-model="checkHometeltxt"></el-input>
+        <div class="left-title" v-show="checkHometel=='01'">说明:</div>
+        <div class="textarea-class2" v-show="checkHometel=='01'">
+          <el-input v-model="checkHometeltxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
         </div>
       </li>
       <li class="item-column1">
         <div class="left-title">借款人爱好和品行:</div>
         <div class="textarea-class">
-          <el-input v-model="hobbyandBehave" type="textarea" :row="2" resize=none></el-input>
+          <el-input v-model="hobbyandBehave" type="textarea" :rows="3" resize=none :maxlength="500"></el-input>
         </div>
       </li>
       <li class="item-column1">
-        <div class="left-title">调查结论:</div>
-        <div class="textarea-class">
-          <el-input v-model="conclusion" type="textarea" :row="2" resize=none></el-input>
-        </div>
+        <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查结论:</div>
+        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+          <div class="textarea-class">
+            <el-input v-model="conclusion" type="textarea" :rows="3" resize=none :maxlength="500"></el-input>
+          </div>
+        </el-tooltip>
       </li>
       <li class="item-column1 submit-class">
         <el-button type="primary" @click="submitForm('form')">确定</el-button>
@@ -366,6 +380,15 @@ export default {
   methods: {
     submitForm() {
       console.log('submit!');
+      // 接听情况   三方查询是否异常/是  异常说明
+      if (!this.source || !this.answer || !this.checkStage || !this.threeQueries || (this.threeQueries == '1' && !this.exceptionState) || !this.conclusion) {
+        this.$message({
+          message: '请输入必填项!',
+          type: 'warning'
+        });
+        return;
+      }
+
       this.post('/creTelResearchHis/addHomeTelLog', {
           cretelinvest: {
             custName: this.custName,
@@ -458,6 +481,17 @@ export default {
             // 提交数据成功,广播事件 重新刷新列表
             this.$emit('updateList');
             this.$emit('updateTree');
+
+            this.$message({
+              message: res.data.msg,
+              type: 'success'
+            });
+
+          } else {
+            this.$message({
+              message: res.data.msg,
+              type: 'warning'
+            });
           }
         })
     }
@@ -469,50 +503,190 @@ export default {
       console.log(source)
       this.sourceDesc = '';
     },
+    // 其他来源说明
+    sourceDesc: function() {
+      if (this.sourceDesc.length == 100)
+        this.$message({
+          message: '输入长度不能超出100',
+          type: 'warning'
+        });
+      return;
+
+    },
+    // 第三方查询结果
+    thirdResult: function() {
+      if (thirdResult.length == 500)
+        this.$message({
+          message: '输入长度不能超出100',
+          type: 'warning'
+        });
+      return;
+
+    },
     // 三方查询异常
     threeQueries: function() {
       this.exceptionState = '';
+    },
+    // 三方查询异常说明
+    exceptionState: function() {
+      if (this.exceptionState.length == 100)
+        this.$message({
+          message: '输入长度不能超出100',
+          type: 'warning'
+        });
+      return;
     },
     // 是否为同一接听人
     issameFam: function() {
       this.issameFamtxt = '';
     },
+    // 是否为同一接听人异常说明
+    issameFamtxt: function() {
+      if (this.issameFamtxt.length == 100)
+        this.$message({
+          message: '输入长度不能超出100',
+          type: 'warning'
+        });
+      return;
+    },
     // 与借款人关系
     relBorrower: function() {
       this.relBorrowertxt = '';
+    },
+    // 与借款人关系其他说明
+    relBorrowertxt: function() {
+      if (relBorrowertxt.length == 100)
+        this.$message({
+          message: '输入长度不能超出100',
+          type: 'warning'
+        });
+      return;
     },
     // 核对工作情况
     checkWork: function() {
       this.checkWorktxt = '';
     },
+    // 核对工作情况 其他说明
+    checkWorktxt: function() {
+      if (this.checkWorktxt.length == 100)
+        this.$message({
+          message: '输入长度不能超出100',
+          type: 'warning'
+        });
+      return;
+    },
     // 核对地址
     checkAddr: function() {
       this.checkAddrtxt = '';
+    },
+    // 核对地址说明
+    checkAddrtxt: function() {
+      if (this.checkAddrtxt.length == 100)
+        this.$message({
+          message: '输入长度不能超出100',
+          type: 'warning'
+        });
+      return;
     },
     // 核对房产
     checkEstate: function() {
       this.checkEstatetxt = '';
     },
+    // 房产说明
+    checkEstatetxt: function() {
+      if (this.checkEstatetxt.length == 100)
+        this.$message({
+          message: '输入长度不能超出100',
+          type: 'warning'
+        });
+      return;
+    },
     // 其他收入
     otherIncome: function() {
       this.otherIncometxt = '';
+    },
+    // 其他收入说明
+    otherIncometxt: function() {
+      if (this.otherIncometxt.length == 100)
+        this.$message({
+          message: '输入长度不能超出100',
+          type: 'warning'
+        });
+      return;
     },
     // 父母
     parents: function() {
       this.parentsInfo = '';
     },
+    // 父母说明
+    parentsInfo: function() {
+      if (this.parentsInfo.length == 100)
+        this.$message({
+          message: '输入长度不能超出100',
+          type: 'warning'
+        });
+      return;
+    },
     // 兄弟姐妹
     brother: function() {
       this.brothertxt = '';
+    },
+    // 兄弟姐妹说明
+    brothertxt: function() {
+      if (this.brothertxt.length == 100)
+        this.$message({
+          message: '输入长度不能超出100',
+          type: 'warning'
+        });
+      return;
     },
     // 支付家庭生活费用
     expenses: function() {
       this.expensestxt = '';
     },
+    // 支付家庭生活费用说明
+    expensestxt: function() {
+      if (this.expensestxt.length == 100)
+        this.$message({
+          message: '输入长度不能超出100',
+          type: 'warning'
+        });
+      return;
+    },
     // 核对家庭固话
     checkHometel: function() {
       this.checkHometeltxt = '';
-    }
+    },
+    // 核对家庭固话说明
+    checkHometeltxt: function() {
+      if (this.checkHometeltxt.length == 100)
+        this.$message({
+          message: '输入长度不能超出100',
+          type: 'warning'
+        });
+      return;
+    },
+    // 借款人爱好和品行
+    hobbyandBehave: function() {
+      if (this.hobbyandBehave.length == 500) {
+        this.$message({
+          message: '输入长度不能超出500',
+          type: 'warning'
+        });
+        return;
+      }
+    },
+    // 调查结论
+    conclusion: function() {
+      if (this.conclusion.length == 500) {
+        this.$message({
+          message: '输入长度不能超出500',
+          type: 'warning'
+        });
+        return;
+      }
+    },
+
   }
 }
 

@@ -302,7 +302,7 @@ export default {
             <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">\
         <span class="headFont">匹配结论</span>\
             </el-form-item>\
-            <el-input type="textarea" v-model="audit_desc" class="mark-textarea" resize="none" :rows="5"></el-input>\
+            <el-input type="textarea" v-model="audit_desc" class="mark-textarea" resize="none" :rows="5" maxlength="500"></el-input>\
             <el-form-item class="mark-button">\
                 <el-button type="primary" @click="submitForm()">确认</el-button>\
             </el-form-item>\
