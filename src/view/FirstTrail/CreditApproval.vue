@@ -2093,7 +2093,7 @@ export default {
 /* 两行文字 样式 */
 
 .creditApproval-class .back-form .line-height2 .el-form-item__label {
-  line-height: 16px;
+  line-height: 20px;
 }
 
 
