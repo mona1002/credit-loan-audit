@@ -48,7 +48,7 @@
               <InternalMatch v-if=" this.tabContent1==2"></InternalMatch>
               <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
               <cborrowerInformationDetail v-if=" this.tabContent1==4"></cborrowerInformationDetail>
-              <PhoneCredit v-if=" this.tabContent1==5"></PhoneCredit>
+              <PhoneCredit v-if=" this.tabContent1==5" :isFull.sync="isFull"></PhoneCredit>
               <cCreditForm v-if=" this.tabContent1==6"></cCreditForm>
               <creditInvestigation v-if=" this.tabContent1==7"></creditInvestigation>
               <processTrajectory v-if=" this.tabContent1==8"></processTrajectory>
@@ -93,7 +93,7 @@
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <!-- <applicationInformation v-if=" this.tabContent2==3"></applicationInformation> -->
             <borrowerInformation v-if=" this.tabContent2==4"></borrowerInformation>
-            <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
+            <PhoneCredit v-if=" this.tabContent2==5" :isFull.sync="isFull"></PhoneCredit>
             <CreditForm v-if=" this.tabContent2==6"></CreditForm>
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
             <!-- 反欺诈结论 空白 -->
@@ -217,6 +217,7 @@
           value: '选项3',
           label: '内匹客户姓名'
         }],
+        isFull:false, // 是否全屏
       }
     },
     methods: {
@@ -294,6 +295,7 @@
         this.$refs.rLeft.style.display = "none";
         this.$refs.rRight.style.width = "100%";
         // console.log(this.$refs.rRight.style.width)
+        this.isFull = true;
       },
       DblScreen() {
         this.showHalfBtn = false;
@@ -301,6 +303,7 @@
         this.$refs.right_tab_ul.style.left = this.originLeft; //回到全屏之前的left值
         this.$refs.rLeft.style.display = "block";
         this.$refs.rRight.style.width = "50%";
+        this.isFull = false;
       },
       tab1(ev, ind, val) { //   tab1 ------------------mousedown 事件
         console.log("tab1" + "---" + ind + "---" + val);
