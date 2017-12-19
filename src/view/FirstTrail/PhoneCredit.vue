@@ -34,21 +34,21 @@
                 <!-- 历史记录 -->
                 <div>
                   <el-table :data="listData.recordList" height="250" border style="" @row-dblclick="rowDbClick" stripe v-loading="mobileLoading" highlight-current-row v-show="listData.totalRecord>0">
-                    <el-table-column type="index" label="序号">
+                    <el-table-column type="index" label="序号" width="50">
                     </el-table-column>
-                    <el-table-column prop="phoneTypeDes" label="电话类型">
+                    <el-table-column prop="phoneTypeDes" label="电话类型" width="100">
                     </el-table-column>
-                    <el-table-column prop="checkTime" label="调查时间">
+                    <el-table-column prop="checkTime" label="调查时间" width="180">
                     </el-table-column>
-                    <el-table-column prop="sourceDes" label="来源">
+                    <el-table-column prop="sourceDes" label="来源" width="150">
                     </el-table-column>
-                    <el-table-column prop="phoneNum" label="电话号码">
+                    <el-table-column prop="phoneNum" label="电话号码" width="120">
                     </el-table-column>
-                    <el-table-column prop="answerDes" label="接听情况">
+                    <el-table-column prop="answerDes" label="接听情况" width="100">
                     </el-table-column>
-                    <el-table-column prop="checkStageDes" label="调查阶段">
+                    <el-table-column prop="checkStageDes" label="调查阶段" width="80">
                     </el-table-column>
-                    <el-table-column prop="conclusion" label="调查结论">
+                    <el-table-column prop="conclusion" label="调查结论" width="100">
                     </el-table-column>
                   </el-table>
                   <!-- 分页 -->
@@ -1813,7 +1813,6 @@ export default {
   width: 100%;
 }
 
-/* 历史几率表格 */
 .phone-credit .header-class .phone-credit .el-select:hover .el-input__inner{
 
 }

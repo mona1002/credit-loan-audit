@@ -1402,3 +1402,38 @@ height: 40px;
   z-index: 100;
   font-size: 20px;
 }
+
+
+/* 电话征信 历史调查日志 样式*/
+.phone-credit .el-table th {
+  /*  text-align: center; */
+  font-weight: 400;
+  color: #1f2d3d;
+  font-size: 14px;
+}
+
+.phone-credit .el-table__body-wrapper .el-table__body td {
+  /* text-align: center; */
+  font-weight: 400;
+  color: #666666;
+  font-size: 14px;
+}
+/* 序号 时间  居中*/
+.phone-credit .el-table th:nth-of-type(1),
+.phone-credit .el-table th:nth-of-type(2){
+  text-align: center;
+}
+.phone-credit .el-table__body-wrapper .el-table__body td:nth-of-type(1),
+.phone-credit .el-table__body-wrapper .el-table__body td:nth-of-type(2) {
+  text-align: center;
+}
+
+
+
+/* 来源 居左*/
+.phone-credit .el-table th:nth-of-type(3){
+  text-align: left;
+}
+.phone-credit .el-table__body-wrapper .el-table__body td:nth-of-type(3) {
+  text-align: left;
+}
