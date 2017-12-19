@@ -22,9 +22,9 @@
         <!-- title="历史调查日志"  -->
         <el-main style="overflow-y: hidden;font-size:14px;">
           <!-- 默认的背景 -->
-          <div class="form-his"  v-show="!formShow" style="background:url(.../../../static/images/3C281C6A-532B-4A55-A9BF-F142E9F09063@1x.png) center no-repeat;">
+          <div class="form-his"  v-show="!formShow && !hisShow" style="background:url(.../../../static/images/3C281C6A-532B-4A55-A9BF-F142E9F09063@1x.png) center no-repeat;">
           </div>
-          <div v-if="formShow" class="header-class">
+          <div v-if="formShow || hisShow" class="header-class">
             <el-collapse v-model="activeNames">
               <el-collapse-item style="text-align:left;" v-show="hisListShow" name="1">
                 <template slot="title">
@@ -33,7 +33,7 @@
                 </template>
                 <!-- 历史记录 -->
                 <div>
-                  <el-table :data="listData.recordList" height="250" border style="" @row-dblclick="rowDbClick" stripe v-loading="mobileLoading" highlight-current-row>
+                  <el-table :data="listData.recordList" height="250" border style="" @row-dblclick="rowDbClick" stripe v-loading="mobileLoading" highlight-current-row v-show="listData.totalRecord>0">
                     <el-table-column type="index" label="序号">
                     </el-table-column>
                     <el-table-column prop="phoneTypeDes" label="电话类型">
@@ -68,25 +68,25 @@
           <div class="form-class" style="width:100%;height:auto;">
             <!-- 默认的新增表单 -->
             <!-- 住址电话 - 表单 -->
-            <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"></AddressForm>
+            <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull"></AddressForm>
             <!-- 住址电话 - 历史 -->
-            <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :mobileData="mobileData"></AddressHis>
+            <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :mobileData="mobileData" :isFull.sync="isFull"></AddressHis>
             <!-- 单位电话 - 表单 -->
-            <CompanyForm class="form-his" v-if="formShow && phoneType=='02'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"></CompanyForm>
+            <CompanyForm class="form-his" v-if="formShow && phoneType=='02'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull"></CompanyForm>
             <!-- 单位电话 - 历史 -->
-            <CompanyHis class="form-his" v-if="hisShow && phoneType=='02'" :comData="comData"></CompanyHis>
+            <CompanyHis class="form-his" v-if="hisShow && phoneType=='02'" :comData="comData" :isFull.sync="isFull"></CompanyHis>
             <!-- 家庭联系人 - 表单 -->
-            <FamilyForm class="form-his" v-if="formShow && phoneType=='03'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"></FamilyForm>
+            <FamilyForm class="form-his" v-if="formShow && phoneType=='03'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull"></FamilyForm>
             <!-- 家庭联系人 - 历史 -->
-            <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :familyData="familyData"></FamilyHis>
+            <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :familyData="familyData" :isFull.sync="isFull"></FamilyHis>
             <!-- 紧急联系人 - 表单 -->
-            <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"></HurryForm>
+            <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull"></HurryForm>
             <!-- 紧急联系人 - 历史 -->
-            <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :hurryData="hurryData"></HurryHis>
+            <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :hurryData="hurryData" :isFull.sync="isFull"></HurryHis>
             <!-- 工作证明人 - 表单 -->
-            <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"></WorkForm>
+            <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull"></WorkForm>
             <!-- 工作证明人 - 历史 -->
-            <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="workData"></WorkHis>
+            <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="workData" :isFull.sync="isFull"></WorkHis>
             <!-- 子组件 -->
             <!-- <router-link to="/AddressForm/formTag='testtag'/id='123'/phoneType='01'">
             <el-button type="primary">住址电话</el-button>
@@ -345,6 +345,7 @@ export default {
       addTellFormLabelWidth: '80px', // 添加电话 表单 label-width
     }
   },
+  props:['isFull'],
   mounted() {
     // 组件 创建 估计完成后获取数据
     // 此时 data 已经被 observed 了
@@ -465,6 +466,7 @@ export default {
         applyId: this.applyId
       }).then(res => {
         console.log(res.data);
+        if(res.statusCode == '200')
         this.treeData = res.data;
       });
     },
@@ -763,7 +765,7 @@ export default {
 
   background: #f8f9fd;
   border: 1px solid #e6eaee;
-  border-radius: 4px;
+  /*border-radius: 4px;*/
   width: 210px !important;
   /*height: 321px;*/
 }
@@ -789,7 +791,7 @@ export default {
   border-radius: 4px;
   width: 233px;
   height: 321px;*/
-  box-shadow: 0 2px 2px 0 #bfcbd9;
+  /*box-shadow: 0 2px 2px 0 #bfcbd9;*/
 }
 
 
@@ -807,10 +809,10 @@ export default {
 /* el-tree  title */
 
 .phone-credit .el-tree-node__content {
-  font-family: PingFangSC-Regular;
-  font-size: 14px;
+  /*font-family: PingFangSC-Regular;*/
+  font-size: 13px;
   color: #0077ff;
-  letter-spacing: 1.49px;
+  /*letter-spacing: 1.49px;*/
   text-align: center;
 }
 
@@ -989,7 +991,7 @@ export default {
   margin: 0 auto;
   position: relative;
   width: 338px;
-  border-radius: 5px;
+  border-radius: 4px;
   top: calc( 50% - 100px);
   padding: 5px;
 }
@@ -1081,10 +1083,10 @@ export default {
 /* el-tree - label*/
 
 .phone-credit .el-tree-node__label {
-  font-family: PingFangSC-Regular;
+  /*font-family: PingFangSC-Regular;*/
   font-size: 14px;
   color: #0077ff;
-  letter-spacing: 1.49px;
+  /*letter-spacing: 1.49px;*/
   text-align: center;
   line-height: 20px;
 }
@@ -1104,10 +1106,10 @@ export default {
 /* children - label*/
 
 .phone-credit .el-tree-node__children .el-tree-node__label {
-  font-family: PingFangSC-Regular;
+  /*font-family: PingFangSC-Regular;*/
   font-size: 13px;
   color: #666666;
-  letter-spacing: 0.09px;
+  /*letter-spacing: 0.09px;*/
   line-height: 21px;
   text-align: left;
 }
@@ -1320,10 +1322,10 @@ export default {
   width: 100%;
   width: 100%;
 
-  font-family: PingFangSC-Regular;
+  /*font-family: PingFangSC-Regular;*/
   font-size: 16px;
   color: #1f2d3d;
-  letter-spacing: 0.11px;
+  /*letter-spacing: 0.11px;*/
   text-align: left;
   vertical-align: middle;
   line-height: 38px;
@@ -1504,10 +1506,10 @@ export default {
 
 .phone-credit .el-collapse-item__header {
   background: #eef0f9!important;
-  font-family: PingFangSC-Regular;
+  /*font-family: PingFangSC-Regular;*/
   font-size: 16px;
   color: #1f2d3d;
-  letter-spacing: 0.11px;
+  /*letter-spacing: 0.11px;*/
   text-align: left;
   /*padding-left: 10px;*/
   height: 40px;
@@ -1559,7 +1561,8 @@ export default {
   position: relative;
 
   font-size: 14px;
-  letter-spacing: 1.49px;
+  /*letter-spacing: 1.49px;*/
+  
 }
 
 .phone-credit .form-his {
@@ -1579,7 +1582,8 @@ export default {
   height: auto;
   float: left;
   /*width: 795px;*/
-  min-width: 500px;
+  min-width: 300px;
+  /*min-width: 500px;*/
   padding-bottom: 10px;
 }
 
@@ -1587,7 +1591,7 @@ export default {
   height: auto;
   float: left;
   min-width: 300px;
-  padding-bottom: 10px;
+  /*padding-bottom: 10px;*/
 }
 
 
@@ -1627,7 +1631,7 @@ export default {
 .phone-credit .el-select:hover .el-input__inner {
   background: #ffffff;
   border: 1px solid #475669;
-  border-radius: 6px;
+  border-radius: 4px;
   /*width: 258px;*/
   height: 33px;
 }
@@ -1655,7 +1659,7 @@ export default {
 .phone-credit .el-input__inner:hover {
   background: #ffffff;
   border: 1px solid #475669;
-  border-radius: 6px;
+  border-radius: 4px;
   /*width: 258px;*/
   height: 33px;
 }
@@ -1663,7 +1667,7 @@ export default {
 .phone-credit .el-textarea__inner:hover {
   background: #ffffff;
   border: 1px solid #475669;
-  border-radius: 6px;
+  border-radius: 4px;
   /*width: 807px;
   height: 102px;*/
 }
@@ -1787,7 +1791,8 @@ export default {
 /* 电话树  选中的  字体样式*/
 
 .phone-credit .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content .el-tree-node__label {
-  color: #0077ff;
+  /*color: #0077ff;
+  color:#1f2d3d;*/
 }
 
 .phone-credit .el-tree-node__content {

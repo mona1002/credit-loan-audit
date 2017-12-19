@@ -86,7 +86,7 @@
       <li class="item-column2">
         <div class="left-title"><span class="require-icon" style="left:-10px;">*</span>三方查询是否异常:</div>
         <!-- <div> -->
-          <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="threeQueries">
             <el-option label="否" value="0"></el-option>
             <el-option label="是" value="1"></el-option>
@@ -206,7 +206,7 @@
       <li class="item-column2">
         <div class="left-title" v-show="checkAddr=='01'">说明:</div>
         <div class="textarea-class2" v-show="checkAddr=='01'">
-          <el-input v-model="checkAddrtxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <el-input v-model="checkAddrtxt" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
         </div>
       </li>
       <li class="item-column2">
@@ -291,15 +291,37 @@ export default {
       phoneId: ''
     }
   },
-  props: ['custName', 'phoneNum', 'applyId', 'formId'],
+  props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull'],
   mounted() {
     this.phoneType = '03'; // 家庭联系人电话
+    if (this.isFull == true) { // 全屏
+      console.log('全屏');
+      $(".textarea-class").css("minWidth", "500px")
+      // 提交按钮
+      $('.submit-class').css("margin-left", "570px")
+      // 显示 column2
+      $('.item-column2').css({
+        "min-height": "50px"
+      })
+      // textarea
+      $('.item-column1 textarea').css("width", "149%")
+
+    } else if (this.isFull == false) { // 分屏
+      console.log("分屏");
+      $(".textarea-class").css("minWidth", "300px")
+      // 提交按钮
+      $('.submit-class').css("margin-left", "370px")
+      $('.item-column2').css({
+        "min-height": "0px",
+        "margin-bottom": "10px"
+      })
+    }
   },
   methods: {
     submitForm() {
       console.log('submit!');
 
-      if (!this.source || this.answer || !this.checkStage || !this.threeQueries || (this.threeQueries == '1' && !this.threeQueriestxt) || !this.mobilepayment || (this.mobilepayment=='1' && !this.mobilepaymenttxt) || !this.conclusion) {
+      if (!this.source || this.answer || !this.checkStage || !this.threeQueries || (this.threeQueries == '1' && !this.threeQueriestxt) || !this.mobilepayment || (this.mobilepayment == '1' && !this.mobilepaymenttxt) || !this.conclusion) {
         this.$message({
           message: '请输入必填项!',
           type: 'warning'
@@ -416,6 +438,31 @@ export default {
     },
     otherIncome: function() {
       this.otherIncometxt = '';
+    },
+    // 判断全屏 , 更改样式
+    isFull: function(val) {
+      if (val == true) { // 全屏
+        console.log('全屏');
+        $(".textarea-class").css("minWidth", "500px")
+        // 提交按钮
+        $('.submit-class').css("margin-left", "810px")
+        // 显示 column2
+        $('.item-column2').css({
+          "min-height": "50px"
+        })
+        // textarea
+        $('.item-column1 textarea').css("width", "149%")
+      } else if (val == false) { // 分屏
+        console.log("分屏");
+        $(".textarea-class").css("minWidth", "300px")
+        // 提交按钮
+        $('.submit-class').css("margin-left", "370px")
+        $('.item-column2').css({
+          "min-height": "0px",
+          "margin-bottom": "10px"
+        })
+
+      }
     }
   }
 }

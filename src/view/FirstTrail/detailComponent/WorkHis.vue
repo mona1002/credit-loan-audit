@@ -38,13 +38,13 @@
       <el-form-item label="接电话人身份:" class="item-column2">
         {{workData.answerIdentityDes}}
       </el-form-item>
-      <el-form-item label="-" class="item-column2">
+      <el-form-item label="说明:" class="item-column2">
         {{workData.answertxt}}
       </el-form-item>
       <el-form-item label="核对单位工作情况:" class="item-column2">
         {{workData.checkJobDes}}
       </el-form-item>
-      <el-form-item label="-" class="item-column2">
+      <el-form-item label="说明:" class="item-column2">
         {{workData.checkJobtxt}}
       </el-form-item>
       <el-form-item label="调查结果:" class="item-column1">
@@ -64,7 +64,7 @@ export default {
       }
     }
   },
-  props:['workData']
+  props: ['workData', 'isFull'],
   // created() {
   //   this.queryTelJobRef();
   // },
@@ -79,6 +79,28 @@ export default {
   //     })
   //   }
   // }
+  mounted() {
+    if (this.isFull == true) { // 全屏
+      console.log('全屏');
+      $(".textarea-class").css("minWidth", "500px")
+    } else if (this.isFull == false) { // 分屏
+      console.log("分屏");
+      $(".textarea-class").css("minWidth", "300px")
+    }
+  },
+  watch: {
+    // 判断全屏 , 更改样式
+    isFull: function(val) {
+      if (val == true) { // 全屏
+        console.log('全屏');
+        $(".textarea-class").css("minWidth", "500px")
+      } else if (val == false) { // 分屏
+        console.log("分屏");
+        $(".textarea-class").css("minWidth", "300px")
+
+      }
+    }
+  }
 }
 
 </script>

@@ -27,7 +27,7 @@
         </div>
       </li>
       <li class="item-column3">
-        <div class="left-title"><span class="require-icon" style="left:80px;">*</span> 来源:</div>
+        <div class="left-title"><span class="require-icon" style="left:90px;">*</span> 来源:</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="source">
@@ -40,7 +40,7 @@
       </li>
       <li class="item-column3">
         <div class="left-title">
-          <span class="require-icon" style="left:50px;">*</span> 接听情况:
+          <span class="require-icon" style="left:60px;">*</span> 接听情况:
         </div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
@@ -55,7 +55,7 @@
         <!-- </div> -->
       </li>
       <li class="item-column3">
-        <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查阶段:</div>
+        <div class="left-title"><span class="require-icon" style="left:60px;">*</span>调查阶段:</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="checkStage">
@@ -70,7 +70,7 @@
       <li class="item-column1" v-show="source=='02'">
         <div class="left-title">其他来源说明:</div>
         <div class="textarea-class">
-          <el-input v-model="sourceDesc" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <el-input v-model="sourceDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
         </div>
       </li>
     </ul>
@@ -86,7 +86,7 @@
         </div>
       </li>
       <li class="item-column2">
-        <div class="left-title"><span class="require-icon" style="left:-10px;">*</span>三方查询是否异常:</div>
+        <div class="left-title"><span class="require-icon" style="left:5px;">*</span>三方查询是否异常:</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="threeQueries">
@@ -315,7 +315,7 @@
         </div>
       </li>
       <li class="item-column1">
-        <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查结论:</div>
+        <div class="left-title"><span class="require-icon" style="left:60px;">*</span>调查结论:</div>
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <div class="textarea-class">
             <el-input v-model="conclusion" type="textarea" :rows="3" resize=none :maxlength="500"></el-input>
@@ -373,9 +373,31 @@ export default {
       phoneId: '' // 用来区分是添加 还是 修改 
     }
   },
-  props: ['custName', 'phoneNum', 'applyId', 'formId'],
+  props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull'],
   mounted() {
     this.phoneType = '01'; // 住址电话
+    if (this.isFull == true) { // 全屏
+      console.log('全屏');
+      $(".textarea-class").css("minWidth", "500px")
+      // 提交按钮
+      $('.submit-class').css("margin-left", "810px")
+      // 显示 column2
+      $('.item-column2').css({
+        "min-height": "50px"
+      })
+      // textarea
+      $('.item-column1 textarea').css("width", "149%")
+    } else if (this.isFull == false) { // 分屏
+      console.log("分屏");
+      $(".textarea-class").css("minWidth", "300px")
+      // 提交按钮
+      $('.submit-class').css("margin-left", "370px")
+      // 
+      $('.item-column2').css({
+        "min-height": "0px",
+        "margin-bottom": "10px"
+      })
+    }
   },
   methods: {
     submitForm() {
@@ -500,7 +522,7 @@ export default {
     // 监听  
     // 来源
     source: function() {
-      console.log(source)
+      console.log(this.source)
       this.sourceDesc = '';
     },
     // 其他来源说明
@@ -686,6 +708,31 @@ export default {
         return;
       }
     },
+    // 判断全屏 , 更改样式
+    isFull: function(val) {
+      if (val == true) { // 全屏
+        console.log('全屏');
+        $(".textarea-class").css("minWidth", "500px")
+        // 提交按钮
+        $('.submit-class').css("margin-left", "810px")
+        // 显示 column2
+        $('.item-column2').css({
+          "min-height": "50px"
+        })
+        // textarea
+        $('.item-column1 textarea').css("width", "149%")
+      } else if (val == false) { // 分屏
+        console.log("分屏");
+        $(".textarea-class").css("minWidth", "300px")
+        // 提交按钮
+        $('.submit-class').css("margin-left", "370px")
+
+        $('.item-column2').css({
+          "min-height": "0px",
+          "margin-bottom": "10px"
+        })
+      }
+    }
 
   }
 }
