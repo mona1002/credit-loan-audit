@@ -1347,7 +1347,8 @@ height: 40px;
 /*内容*/
 
 .el-tree .el-tree-node .el-tree-node__content {
-  background: #f8f9fd;
+  /*background: #f8f9fd;*/
+  background: #fff;
   box-shadow: 0 0 1px 0 rgba(151, 151, 151, .3);
 }
 
@@ -1355,7 +1356,7 @@ height: 40px;
 /*单独设置头*/
 
 .el-tree .el-tree-node .el-tree-node__children .el-tree-node__content {
-  background: #ffffff;
+  background: #f8f9fd;
 }
 
 
