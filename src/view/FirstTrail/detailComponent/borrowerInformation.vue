@@ -1,6 +1,6 @@
 <!-- 借款人资料 -->
 <template>
-	<div class="borrowerInformation">
+	<div class="borrowerInformation" style="width:100%" ref="wrap">
 		<el-collapse v-model="activeNames" @change="handleChange">
 			<el-collapse-item name="1">
 				<template slot="title">
@@ -748,6 +748,7 @@
 								  placeholder="请输入内容"
 								  v-model="borDebt.remark"
 								  :maxlength="100"
+								  resize="none"
 								  >
 								</el-input>
 				    		</div>
@@ -799,6 +800,7 @@
 								  placeholder="请输入内容"
 								  v-model="rptInfo.crContent"
 								  :maxlength="500"
+								  resize="none"
 								  >
 								</el-input>
 				    		</div>
@@ -857,8 +859,8 @@
 				        label="N"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n" placeholder="请输入内容" v-numbers><!-- @blur="numns(scope.row.n)"  -->
-				          <!-- <el-input v-model="scope.row.n" placeholder="请输入内容" v-number-only></el-input> -->
+				        	<!-- <input type="text" name="" v-model="scope.row.n" placeholder="请输入内容">--><!-- @blur="numns(scope.row.n)"  -->
+				          <el-input v-model="scope.row.n" @blur="moneyBlur(scope.row.n,'n')" placeholder="请输入内容"></el-input> <!--  v-number-only -->
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -866,7 +868,7 @@
 				        label="N-1"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n1" placeholder="请输入内容" v-numbers><!--v-number-only -->
+				        	<input type="text" name="" v-model="scope.row.n1" @blur="moneyBlur(scope.row.n1,'n1')" placeholder="请输入内容"><!--v-number-only -->
 						  <!-- <el-input v-model="scope.row.n1" placeholder="请输入内容"></el-input> -->
 						</template>
 				      </el-table-column>
@@ -875,7 +877,7 @@
 				        label="N-2"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n2" placeholder="请输入内容" v-numbers><!--v-numbers  v-numbers='scope.row.n2' -->
+				        	<input type="text" name="" v-model="scope.row.n2" @blur="moneyBlur(scope.row.n2,'n2')" placeholder="请输入内容"><!--v-numbers ='scope.row.n2' -->
 						  <!-- <el-input v-model="scope.row.n2" placeholder="请输入内容"></el-input> -->
 						</template>
 				      </el-table-column>
@@ -884,7 +886,7 @@
 				        label="N-3"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n3" placeholder="请输入内容" v-numbers><!--  v-numbers='scope.row.n3' -->
+				        	<input type="text" name="" v-model="scope.row.n3" @blur="moneyBlur(scope.row.n3,'n3')" placeholder="请输入内容"><!-- ='scope.row.n3' -->
 						  <!-- <el-input v-model="scope.row.n3" placeholder="请输入内容"></el-input> -->
 						</template>
 				      </el-table-column>
@@ -893,7 +895,7 @@
 				        label="N-4"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n4" placeholder="请输入内容" v-numbers><!--  v-numbers='scope.row.n4' -->
+				        	<input type="text" name="" v-model="scope.row.n4" @blur="moneyBlur(scope.row.n4,'n4')" placeholder="请输入内容"><!-- ='scope.row.n4' -->
 						  <!-- <el-input v-model="scope.row.n4" placeholder="请输入内容"></el-input> -->
 						</template>
 				      </el-table-column>
@@ -902,7 +904,7 @@
 				        label="N-5"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n5" placeholder="请输入内容" v-numbers><!--  v-numbers='scope.row.n5' -->
+				        	<input type="text" name="" v-model="scope.row.n5" @blur="moneyBlur(scope.row.n5,'n5')" placeholder="请输入内容"><!-- ='scope.row.n5' -->
 						  <!-- <el-input v-model="scope.row.n5" placeholder="请输入内容"></el-input> -->
 						</template>
 				      </el-table-column>
@@ -921,7 +923,7 @@
 				        min-width="130">
 				        <template slot-scope="scope">
 						  <!-- <el-input v-model="scope.row.avgIncome" placeholder="请输入内容"></el-input> -->
-						  <input type="text" name="" v-model="scope.row.avgIncome" placeholder="请输入内容" v-numbers><!-- v-numbers='scope.row.avgIncome' -->
+						  <input type="text" name="" v-model="scope.row.avgIncome" @blur="moneyBlur(scope.row.avgIncome,'avgIncome')" placeholder="请输入内容"><!--='scope.row.avgIncome' -->
 						</template>
 				      </el-table-column>
 			    </el-table>
@@ -943,6 +945,7 @@
 								  placeholder="请输入内容"
 								  v-model="otherInfo.content"
 								  :maxlength="500"
+								  resize="none"
 								  >
 								</el-input>
 				    		</div>
@@ -992,6 +995,7 @@
 	        datas:'',
 	        numn:'',
 	        numn1:'',
+	        aaaa:'',
 	        //车贷总笔数
 	        k:0,
 
@@ -1211,6 +1215,7 @@
 	      };
 	    },
 	    mounted(){
+	    	//this.coming();
 			//一进入页面就发送请求
 			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
 			this.applyId=this.taskInWaitting.applyId;
@@ -1937,7 +1942,95 @@
 			},
 			debtTotal(){
 				this.borDebt.totalLoan=this.borDebt.monthRepayAmt+this.borDebt.houseLoanAmt+this.borDebt.carLoanAmt+this.borDebt.otherLoanAmt
-			}
+			},
+			moneyBlur: function(value, flag) {
+				console.log(value);
+			    // 无数据
+			    /*if (!value) {
+			        switch (flag) {
+			            case 'n':
+			                this.scope.row.n = '';
+			                break;
+			            case 'n1':
+			                this.scope.row.n1 = '';
+			                break;
+			            case 'n2':
+			                this.scope.row.n2 = '';
+			                break;
+			            case 'n3':
+			                this.scope.row.n3 = '';
+			                break;
+			            case 'n4':
+			                this.scope.row.n4 = '';
+			                break;
+			            case 'n5':
+			                this.scope.row.n5 = '';
+			                break;
+			            case 'avgIncome':
+			                this.scope.row.avgIncome = '';
+			                break;
+			        }
+			    }*/
+			    // 有数据
+			    if (value) {
+			    	console.log(value);
+			        // 传进来的值先按'.'拆分,取整数位,再replace ','
+			        value = value.split('.')[0].replace(/,/, '')
+			        // 正则判断数字  [0-9] +至少一次 , 第一位为0 不用处理
+			        //console.log(this.scope.row.n);
+			        /*if (/^[0-9]+$/g.test(Number(value))) {
+			            switch (flag) {
+			                case 'n':
+			                    this.scope.row.n = Number(value).toLocaleString() + '.00';
+			                    break;
+			                case 'n1':
+			                    this.scope.row.n1 = Number(value).toLocaleString() + '.00';
+			                    break;
+			                case 'n2':
+			                    this.scope.row.n2 = Number(value).toLocaleString() + '.00';
+			                    break;
+			                case 'n3':
+			                    this.scope.row.n3 = Number(value).toLocaleString() + '.00';
+			                    break;
+			                case 'n4':
+			                    this.scope.row.n4 = Number(value).toLocaleString() + '.00';
+			                    break;
+			                case 'n5':
+			                    this.scope.row.n5 = Number(value).toLocaleString() + '.00';
+			                    break;
+			                case 'avgIncome':
+			                    this.scope.row.avgIncome = Number(value).toLocaleString() + '.00';
+			                    break;
+			            }
+			        } else {
+			            console.log('错误提示')
+			            // 显示错误提示
+			            switch (flag) {
+			                case 'n':
+			                    this.scope.row.n = '';
+			                    break;
+			                case 'n1':
+			                    this.scope.row.n1 = '';
+			                    break;
+			                case 'n2':
+			                    this.scope.row.n2 = '';
+			                    break;
+			                case 'n3':
+			                    this.scope.row.n3 = '';
+			                    break;
+			                case 'n4':
+			                    this.scope.row.n4 = '';
+			                    break;
+			                case 'n5':
+			                    this.scope.row.n5 = '';
+			                    break;
+			                case 'avgIncome':
+			                    this.scope.row.avgIncome = '';
+			                    break;
+			            }
+			        }*/
+			    }
+			},
 	    },
 	    directives: {
 	    // 指令的定义
@@ -2029,6 +2122,10 @@
 	        },*/
 
 		},
+		watch:{
+			/*aaaa=this.$parent.$refs.rRight;
+		  	console.log(aaaa);*/
+		},
 	}
 </script>
 <style type="text/css" scoped>
@@ -2037,8 +2134,39 @@
 		height: 100%;
 		background-color: #fafbfc;
 		font-size: 14px;
-		min-width: 1327px;
+		/*min-width: 1327px;
+		 min-width: 990px; */
 	}
+	/* 借款人资料 分屏（小屏幕时）
+	@media screen and (max-width: 1920px){
+	  min-device-width
+	  .xinyongka{
+	    width: 946px !important;
+	    min-width: 946px !important;
+	  }
+	    .xinyongka ul,.xinyongka ul li{
+	      width: 270px !important;
+	      min-width: 270px !important;
+	    }
+	    .xinyongka ul div,.xinyongka ul li div input{
+	      width: 150px !important;
+	      min-width: 150px !important;
+	    }
+	} */
+	/* 借款人资料 分屏（小屏幕时） */
+	/* @media screen and (min-width:1920px){
+	  .xinyongka{
+	    width: 100% !important;
+	    min-width: 1327px;
+	  }
+	    .xinyongka ul,.xinyongka ul li{
+	      width: 33.3% !important;
+	    }
+	    .xinyongka ul div,.xinyongka ul li div input{
+	      width: 200px !important;
+	    }
+	} */
+
 	.left{
 		float: left;
 	}
@@ -2095,6 +2223,7 @@
 	}
 	.xinyongka ul li{
 		margin-top: 20px;
+		min-width: 270px;
 	}
 	.xinyongka ul li label{
 		width: 120px;
