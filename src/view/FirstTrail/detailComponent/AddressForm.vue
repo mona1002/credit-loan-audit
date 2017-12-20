@@ -97,7 +97,7 @@
         <!-- </div> -->
       </li>
       <li class="item-column2">
-        <div class="left-title" v-show="threeQueries=='1'"><span class="require-icon" style="left:80px;">*</span>说明:</div>
+        <div class="left-title" v-show="threeQueries=='1'"><span class="require-icon" style="left:90px;">*</span>说明:</div>
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <div class="textarea-class2" v-show="threeQueries=='1'">
             <el-input v-model="exceptionState" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
@@ -140,10 +140,8 @@
         <div class="left-title">核对工作情况:</div>
         <div>
           <el-select v-model="checkWork">
-            <el-option label="一致" value="00"></el-option>
-            <el-option label="基本一致" value="01"></el-option>
-            <el-option label="不一致" value="02"></el-option>
-            <el-option label="被调查人不清楚" value="03"></el-option>
+            <el-option label="有" value="0"></el-option>
+            <el-option label="无" value="1"></el-option>
           </el-select>
         </div>
       </li>
@@ -389,7 +387,7 @@ export default {
       $('.item-column1 textarea').css("width", "149%")
     } else if (this.isFull == false) { // 分屏
       console.log("分屏");
-      $(".textarea-class").css("minWidth", "300px")
+      // $(".textarea-class").css("minWidth", "300px")
       // 提交按钮
       $('.submit-class').css("margin-left", "370px")
       // 
@@ -397,6 +395,7 @@ export default {
         "min-height": "0px",
         "margin-bottom": "10px"
       })
+      $('.item-column1 textarea').css("width", "300px")
     }
   },
   methods: {
@@ -505,7 +504,7 @@ export default {
             this.$emit('updateTree');
 
             this.$message({
-              message: res.data.msg,
+              message: res.msg,
               type: 'success'
             });
 
@@ -723,7 +722,7 @@ export default {
         $('.item-column1 textarea').css("width", "149%")
       } else if (val == false) { // 分屏
         console.log("分屏");
-        $(".textarea-class").css("minWidth", "300px")
+        // $(".textarea-class").css("minWidth", "300px")
         // 提交按钮
         $('.submit-class').css("margin-left", "370px")
 
@@ -731,6 +730,7 @@ export default {
           "min-height": "0px",
           "margin-bottom": "10px"
         })
+        $('.item-column1 textarea').css("width", "300px")
       }
     }
 

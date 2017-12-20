@@ -27,7 +27,7 @@
         </div>
       </li>
       <li class="item-column3">
-        <div class="left-title"><span class="require-icon" style="left:80px;">*</span>来源:</div>
+        <div class="left-title"><span class="require-icon" style="left:90px;">*</span>来源:</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="source">
@@ -39,7 +39,7 @@
         <!-- </div> -->
       </li>
       <li class="item-column3">
-        <div class="left-title"><span class="require-icon" style="left:50px;">*</span>接听情况:</div>
+        <div class="left-title"><span class="require-icon" style="left:60px;">*</span>接听情况:</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="answer">
@@ -53,7 +53,7 @@
         <!-- </div> -->
       </li>
       <li class="item-column3">
-        <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查阶段:</div>
+        <div class="left-title"><span class="require-icon" style="left:60px;">*</span>调查阶段:</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="checkStage">
@@ -65,7 +65,7 @@
         </el-tooltip>
         <!-- </div> -->
       </li>
-      <li class="item-column3" v-show="source=='02'">
+      <li class="item-column1" v-show="source=='02'">
         <div class="left-title">其他来源说明:</div>
         <div class="textarea-class">
           <el-input v-model="sourceDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
@@ -80,11 +80,11 @@
       <li class="item-column1">
         <div class="left-title">第三方查询信息:</div>
         <div class="textarea-class">
-          <el-input type="textarea" v-model="thirdResult" :row="2" resize=none></el-input>
+          <el-input type="textarea" v-model="thirdResult" :rows="3" resize=none></el-input>
         </div>
       </li>
       <li class="item-column2">
-        <div class="left-title"><span class="require-icon" style="left:-10px;">*</span>三方查询是否异常:</div>
+        <div class="left-title"><span class="require-icon" style="left:5px;">*</span>三方查询是否异常:</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="threeQueries">
@@ -95,7 +95,7 @@
         <!-- </div> -->
       </li>
       <li class="item-column2">
-        <div class="left-title" v-show="threeQueries=='1'"><span class="require-icon" style="left:60px;">*</span>说明:</div>
+        <div class="left-title" v-show="threeQueries=='1'"><span class="require-icon" style="left:90px;">*</span>说明:</div>
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <div class="textarea-class2" v-show="threeQueries=='1'">
             <el-input v-model="threeQueriestxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
@@ -114,7 +114,7 @@
         <!-- </div> -->
       </li>
       <li class="item-column2">
-        <div class="left-title" v-show="mobilepayment=='1'"><span class="require-icon" style="left:60px;">*</span>说明:</div>
+        <div class="left-title" v-show="mobilepayment=='1'"><span class="require-icon" style="left:90px;">*</span>说明:</div>
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <div class="textarea-class2" v-show="mobilepayment=='1'">
             <el-input v-model="mobilepaymenttxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
@@ -206,7 +206,7 @@
       <li class="item-column2">
         <div class="left-title" v-show="checkAddr=='01'">说明:</div>
         <div class="textarea-class2" v-show="checkAddr=='01'">
-          <el-input v-model="checkAddrtxt" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
+          <el-input v-model="checkAddrtxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
         </div>
       </li>
       <li class="item-column2">
@@ -244,7 +244,7 @@
         </div>
       </li>
       <li class="item-column1">
-        <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查结果:</div>
+        <div class="left-title"><span class="require-icon" style="left:60px;">*</span>调查结果:</div>
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <div class="textarea-class">
             <el-input type="textarea" v-model="conclusion" :rows="3" resize=none></el-input>
@@ -298,7 +298,7 @@ export default {
       console.log('全屏');
       $(".textarea-class").css("minWidth", "500px")
       // 提交按钮
-      $('.submit-class').css("margin-left", "570px")
+        $('.submit-class').css("margin-left", "810px")
       // 显示 column2
       $('.item-column2').css({
         "min-height": "50px"
@@ -308,20 +308,21 @@ export default {
 
     } else if (this.isFull == false) { // 分屏
       console.log("分屏");
-      $(".textarea-class").css("minWidth", "300px")
+      // $(".textarea-class").css("minWidth", "300px")
       // 提交按钮
       $('.submit-class').css("margin-left", "370px")
       $('.item-column2').css({
         "min-height": "0px",
         "margin-bottom": "10px"
       })
+      $('.item-column1 textarea').css("width", "300px")
     }
   },
   methods: {
     submitForm() {
       console.log('submit!');
 
-      if (!this.source || this.answer || !this.checkStage || !this.threeQueries || (this.threeQueries == '1' && !this.threeQueriestxt) || !this.mobilepayment || (this.mobilepayment == '1' && !this.mobilepaymenttxt) || !this.conclusion) {
+      if (!this.source || !this.answer || !this.checkStage || !this.threeQueries || (this.threeQueries == '1' && !this.threeQueriestxt) || !this.mobilepayment || (this.mobilepayment == '1' && !this.mobilepaymenttxt) || !this.conclusion) {
         this.$message({
           message: '请输入必填项!',
           type: 'warning'
@@ -405,7 +406,7 @@ export default {
             this.$emit('updateTree');
 
             this.$message({
-              message: res.data.msg,
+              message: res.msg,
               type: 'success'
             });
           } else {
@@ -461,7 +462,7 @@ export default {
           "min-height": "0px",
           "margin-bottom": "10px"
         })
-
+        $('.item-column1 textarea').css("width", "300px")
       }
     }
   }
