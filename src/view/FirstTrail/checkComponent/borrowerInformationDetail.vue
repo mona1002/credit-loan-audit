@@ -431,7 +431,12 @@
 				    		<span>{{borDebt.loanNumber}}</span>
 				    		<!-- <el-input v-model="borDebt.loanNumber"></el-input> -->
 				    	</li>
-				    	<li><label>文字说明:</label><div v-bind:title="borDebt.remark">{{borDebt.remark}}</div></li>
+				    	<li>
+				    		<label>文字说明:</label>
+				    		<el-tooltip class="item" effect="dark" :content="borDebt.remark" placement="top">
+						      <div>{{borDebt.remark}}</div>
+						    </el-tooltip>
+				    	</li>
 				    </ol>
 		  		</div> 
 		  	</el-collapse-item>
@@ -446,7 +451,10 @@
 		  			<ol>
 				    	<li>
 				    		<label>报告来源:</label>
-				    		<span v-bind:title="rptInfo.crSource">{{rptInfo.crSource}}</span>
+				    		<el-tooltip class="item" effect="dark" :content="rptInfo.crSource" placement="top">
+						      <span>{{rptInfo.crSource}}</span>
+						    </el-tooltip>
+				    		
 				    		<!-- <el-input v-model="rptInfo.crSource"></el-input> -->
 				    	</li>
 					    <li>
@@ -463,8 +471,9 @@
 				    <ol>
 				    	<li>
 				    		<label>报告描述:</label>
-				    		<!-- <span>{{rptInfo.crContent}}</span> -->
-				    		<div v-bind:title="rptInfo.crContent">{{rptInfo.crContent}}</div>
+				    		<el-tooltip class="item" effect="dark" :content="rptInfo.crContent" placement="top">
+						      <div v-bind:title="rptInfo.crContent">{{rptInfo.crContent}}</div>
+						    </el-tooltip>
 				    	</li>
 				    </ol>
 		  		</div> 
@@ -534,7 +543,12 @@
 			    </template>
 		  		<div class="qita">
 				    <ol>
-				    	<li><label>其他:</label><div v-bind:title="otherInfo.content">{{otherInfo.content}}</div></li>
+				    	<li>
+				    		<label>其他:</label>
+				    		<el-tooltip class="item" effect="dark" :content="otherInfo.content" placement="top">
+						      <div v-bind:title="otherInfo.content">{{otherInfo.content}}</div>
+						    </el-tooltip>
+				    	</li>
 				    </ol>
 		  		</div> 
 		  	</el-collapse-item>
@@ -845,7 +859,8 @@ ol.num li:nth-of-type(2) div{
 	height: 54px;
 	float: right;
 	padding-left: 10px;
-	border: 1px solid #d8dce5; 
+	overflow: auto;
+	/* border: 1px solid #d8dce5; 
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
@@ -853,7 +868,7 @@ ol.num li:nth-of-type(2) div{
 	-webkit-box-orient: vertical;
 	display: box;
 	line-clamp: 2;
-	box-orient: vertical;
+	box-orient: vertical; */
 }
 /* 征询报告 */
 .zhengxunbaogao ol{
@@ -887,17 +902,18 @@ ol.num li:nth-of-type(2) div{
 .zhengxunbaogao ol:nth-of-type(2) li div{
 	float: left;
 	height: 75px;
-	border: 1px solid #d8dce5; 
 	width: calc( 66.6% - 170px );
 	padding-left: 10px;
-	overflow: hidden;
+	overflow: auto;
+	/* overflow: hidden;
+	border: 1px solid #d8dce5;
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 3;
 	-webkit-box-orient: vertical;
 	display: box;
 	line-clamp: 3;
-	box-orient: vertical;
+	box-orient: vertical; */
 }
 .reportLabel{
 	float: left;
@@ -916,16 +932,17 @@ ol.num li:nth-of-type(2) div{
 	display: inline-block;
 	width: calc( 66.6% - 170px );
 	height: 117px;
-	border: 1px solid #d8dce5;
+	overflow: auto;
 	padding-left: 10px;
-	overflow: hidden;
+	/* overflow: hidden;
+	border: 1px solid #d8dce5;
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 5;
 	-webkit-box-orient: vertical;
 	display: box;
 	line-clamp: 5;
-	box-orient: vertical;
+	box-orient: vertical; */
 }
 .qita ol label{
 	height: 117px;

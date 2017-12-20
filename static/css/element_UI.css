@@ -334,6 +334,7 @@ height: 40px;
   text-align: center; 
 }
 
+
 /* 借款人资料 */
 /* .borrowerInformation .el-table__body-wrapper .el-select>.el-input .el-input__inner {
   border: none;
@@ -558,6 +559,9 @@ height: 40px;
 }
 .borrowerInformation .income .el-table__body-wrapper{
   overflow: hidden;
+}
+.borrowerInformation .el-input.is-disabled .el-input__inner{
+  background: #fff;
 }
 /* 各自部分 */
 

@@ -5,7 +5,7 @@ var appConstant = {};
 // url 配置
 var host = location.hostname,
   port = 80,
-  developmentEnv = "testriskmgt.nuoyuan.com.cn", // 开发环境coderiskmgt.nuoyuan.com.cn
+  developmentEnv = "coderiskmgt.nuoyuan.com.cn", // 开发环境coderiskmgt.nuoyuan.com.cn
   // developmentEnv = "10.1.26.50", // 刘礼飞本地环境
   testEnv = "testriskmgt.nuoyuan.com.cn", // 测试环境
   releaseEnv = "preriskmgt.nuoyuan.com.cn", // 准生产环境
