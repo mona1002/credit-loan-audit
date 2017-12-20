@@ -47,7 +47,7 @@
       <el-form-item label="与借款人关系:" class="item-column2">
         {{hurryData.relBorrowerDes}}
       </el-form-item>
-      <el-form-item label="-" class="item-column2">
+      <el-form-item label="说明:" class="item-column2">
         {{hurryData.relBorrowertxt}}
       </el-form-item>
       <el-form-item label="与借款人联系是否频繁:" class="item-column1">
@@ -56,7 +56,7 @@
       <el-form-item label="核对工作情况:" class="item-column2">
         {{hurryData.checkWorkDes}}
       </el-form-item>
-      <el-form-item label="-" class="item-column2">
+      <el-form-item label="说明:" class="item-column2">
         {{hurryData.checkWorktxt}}
       </el-form-item>
       <el-form-item label="核对婚姻情况:" class="item-column2">
@@ -77,10 +77,10 @@ export default {
     return {
       // id:'',  // 住宅电话调查日志记录 id
       // phoneType:'', // 电话类型
-      hurryData:'' // 请求返回的数据
+      hurryData: '' // 请求返回的数据
     }
   },
-  props:['hurryData']
+  props: ['hurryData', 'isFull'],
   // mounted() {
   //   this.queryTeleContract();
   // },
@@ -96,6 +96,28 @@ export default {
   //     })
   //   }
   // }
+  mounted() {
+    if (this.isFull == true) { // 全屏
+      console.log('全屏');
+      $(".textarea-class").css("minWidth", "500px")
+    } else if (this.isFull == false) { // 分屏
+      console.log("分屏");
+      $(".textarea-class").css("minWidth", "300px")
+    }
+  },
+  watch: {
+    // 判断全屏 , 更改样式
+    isFull: function(val) {
+      if (val == true) { // 全屏
+        console.log('全屏');
+        $(".textarea-class").css("minWidth", "500px")
+      } else if (val == false) { // 分屏
+        console.log("分屏");
+        $(".textarea-class").css("minWidth", "300px")
+
+      }
+    }
+  }
 }
 
 </script>

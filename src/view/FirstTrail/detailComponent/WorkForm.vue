@@ -68,7 +68,7 @@
       <li class="item-column3" v-show="source=='02'">
         <div class="left-title">其他来源说明:</div>
         <div class="textarea-class">
-          <el-input v-model="sourceDesc" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <el-input v-model="sourceDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
         </div>
       </li>
     </ul>
@@ -163,10 +163,31 @@ export default {
       phoneId: ''
     }
   },
-  props: ['custName', 'phoneNum', 'applyId', 'formId'],
+  props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull'],
   mounted() {
     this.phoneType = '05'; // 住址电话
+    if (this.isFull == true) { // 全屏
+      console.log('全屏');
+      $(".textarea-class").css("minWidth", "500px")
+      // 提交按钮
+      $('.submit-class').css("margin-left", "810px")
+      // 显示 column2
+      $('.item-column2').css({
+        "min-height": "50px"
+      })
 
+      // textarea
+      $('.item-column1 textarea').css("width", "149%")
+    } else if (this.isFull == false) { // 分屏
+      console.log("分屏");
+      $(".textarea-class").css("minWidth", "300px")
+      // 提交按钮
+      $('.submit-class').css("margin-left", "370px")
+      $('.item-column2').css({
+        "min-height": "0px",
+        "margin-bottom": "10px"
+      })
+    }
   },
   methods: {
     submitForm() {
@@ -249,6 +270,32 @@ export default {
     },
     checkJob: function() {
       this.checkJobtxt = '';
+    },
+    // 判断全屏 , 更改样式
+    isFull: function(val) {
+      if (val == true) { // 全屏
+        console.log('全屏');
+        $(".textarea-class").css("minWidth", "500px")
+        // 提交按钮
+        $('.submit-class').css("margin-left", "810px")
+        // 显示 column2
+        $('.item-column2').css({
+          "min-height": "50px"
+        })
+        // textarea
+        $('.item-column1 textarea').css("width", "149%")
+
+      } else if (val == false) { // 分屏
+        console.log("分屏");
+        $(".textarea-class").css("minWidth", "300px")
+        // 提交按钮
+        $('.submit-class').css("margin-left", "370px")
+        $('.item-column2').css({
+          "min-height": "0px",
+          "margin-bottom": "10px"
+        })
+
+      }
     }
   }
 }

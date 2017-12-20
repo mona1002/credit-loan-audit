@@ -35,7 +35,7 @@
       <el-form-item label="三方查询是否异常:" class="item-column2">
         {{familyData.threeQueriesDes}}
       </el-form-item>
-      <el-form-item label="-:" class="item-column2">
+      <el-form-item label="说明:" class="item-column2">
         {{familyData.threeQueriestxt}}
       </el-form-item>
       <el-form-item label="微信/支付宝是否异常:" class="item-column2">
@@ -48,19 +48,19 @@
       <el-form-item label="是否为同一接听人:" class="item-column2">
         {{familyData.issameFamDes}}
       </el-form-item>
-      <el-form-item label="-:" class="item-column2">
+      <el-form-item label="说明:" class="item-column2">
         {{familyData.issameFamtxt}}
       </el-form-item>
       <el-form-item label="与借款人关系:" class="item-column2">
         {{familyData.relBorrowerDes}}
       </el-form-item>
-      <el-form-item label="-:" class="item-column2">
+      <el-form-item label="说明:" class="item-column2">
         {{familyData.relBorrowertxt}}
       </el-form-item>
       <el-form-item label="核对工作情况:" class="item-column2">
         {{familyData.checkWorkDes}}
       </el-form-item>
-      <el-form-item label="-:" class="item-column2">
+      <el-form-item label="说明:" class="item-column2">
         {{familyData.checkWorktxt}}
       </el-form-item>
       <el-form-item label="核对婚姻情况:" class="item-column2">
@@ -72,19 +72,19 @@
       <el-form-item label="核实居住地址:" class="item-column2">
         {{familyData.checkAddrDes}}
       </el-form-item>
-      <el-form-item label="-:" class="item-column2">
+      <el-form-item label="说明:" class="item-column2">
         {{familyData.checkAddrtxt}}
       </el-form-item>
       <el-form-item label="核对房产:" class="item-column2">
         {{familyData.checkEstateDes}}
       </el-form-item>
-      <el-form-item label="-:" class="item-column2">
+      <el-form-item label="说明:" class="item-column2">
         {{familyData.checkEstatetxt}}
       </el-form-item>
       <el-form-item label="其他收入:" class="item-column2">
         {{familyData.otherIncomeDes}}
       </el-form-item>
-      <el-form-item label="-:" class="item-column2">
+      <el-form-item label="说明:" class="item-column2">
         {{familyData.otherIncometxt}}
       </el-form-item>
       <el-form-item label="调查结果:" class="item-column1">
@@ -99,10 +99,10 @@ export default {
     return {
       // id:'',  // 住宅电话调查日志记录 id
       // phoneType:'', // 电话类型
-      familyData:'' // 请求返回的数据
+      familyData: '' // 请求返回的数据
     }
   },
-  props:['familyData']
+  props: ['familyData', 'isFull'],
   // mounted() {
   //   this.queryTelfContract();
   // },
@@ -117,6 +117,28 @@ export default {
   //     })
   //   }
   // }
+  mounted() {
+    if (this.isFull == true) { // 全屏
+      console.log('全屏');
+      $(".textarea-class").css("minWidth", "500px")
+    } else if (this.isFull == false) { // 分屏
+      console.log("分屏");
+      $(".textarea-class").css("minWidth", "300px")
+    }
+  },
+  watch: {
+    // 判断全屏 , 更改样式
+    isFull: function(val) {
+      if (val == true) { // 全屏
+        console.log('全屏');
+        $(".textarea-class").css("minWidth", "500px")
+      } else if (val == false) { // 分屏
+        console.log("分屏");
+        $(".textarea-class").css("minWidth", "300px")
+
+      }
+    }
+  }
 }
 
 </script>

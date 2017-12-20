@@ -48,7 +48,7 @@
               <InternalMatch v-if=" this.tabContent1==2"></InternalMatch>
               <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
               <cborrowerInformationDetail v-if=" this.tabContent1==4"></cborrowerInformationDetail>
-              <PhoneCredit v-if=" this.tabContent1==5"></PhoneCredit>
+              <PhoneCredit v-if=" this.tabContent1==5" :isFull.sync="isFull"></PhoneCredit>
               <cCreditForm v-if=" this.tabContent1==6"></cCreditForm>
               <creditInvestigation v-if=" this.tabContent1==7"></creditInvestigation>
               <processTrajectory v-if=" this.tabContent1==8"></processTrajectory>
@@ -93,7 +93,7 @@
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <!-- <applicationInformation v-if=" this.tabContent2==3"></applicationInformation> -->
             <borrowerInformation v-if=" this.tabContent2==4" :isFull.sync="isFull"></borrowerInformation>
-            <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
+            <PhoneCredit v-if=" this.tabContent2==5" :isFull.sync="isFull"></PhoneCredit>
             <CreditForm v-if=" this.tabContent2==6"></CreditForm>
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
             <!-- 反欺诈结论 空白 -->
@@ -217,8 +217,7 @@
           value: '选项3',
           label: '内匹客户姓名'
         }],
-        // 测试  分屏
-        isFull:false
+        isFull:false, // 是否全屏
       }
     },
     methods: {
@@ -296,7 +295,6 @@
         this.$refs.rLeft.style.display = "none";
         this.$refs.rRight.style.width = "100%";
         // console.log(this.$refs.rRight.style.width)
-        // 传给子组件的参数  .sync 双向绑定
         this.isFull = true;
       },
       DblScreen() {

@@ -32,31 +32,31 @@
       <el-form-item label="拨打电话:" class="item-column2">
         {{comData.phoneDes}}
       </el-form-item>
-      <el-form-item label="-:" class="item-column2">
+      <el-form-item label="说明:" class="item-column2">
         {{comData.phonetxt}}
       </el-form-item>
       <el-form-item label="接电话人身份:" class="item-column2">
         {{comData.answerDes}}
       </el-form-item>
-      <el-form-item label="-:" class="item-column2">
+      <el-form-item label="说明:" class="item-column2">
         {{comData.answertxt}}
       </el-form-item>
       <el-form-item label="核对单位及工作信息:" class="item-column2">
         {{comData.companyDes}}
       </el-form-item>
-      <el-form-item label="-:" class="item-column2">
+      <el-form-item label="说明:" class="item-column2">
         {{comData.custName}}
       </el-form-item>
       <el-form-item label="核对工作时间:" class="item-column2">
         {{comData.checkTimetxt}}
       </el-form-item>
-      <el-form-item label="-:" class="item-column2">
+      <el-form-item label="说明:" class="item-column2">
         {{comData.companytxt}}
       </el-form-item>
       <el-form-item label="核对收入:" class="item-column2">
         {{comData.checkIncomeDes}}
       </el-form-item>
-      <el-form-item label="-:" class="item-column2">
+      <el-form-item label="说明:" class="item-column2">
         {{comData.checkIncometxt}}
       </el-form-item>
       <el-form-item label="用工方式:" class="item-column1">
@@ -65,7 +65,7 @@
       <el-form-item label="工资发放情况:" class="item-column2">
         {{comData.payrollSituationDes}}
       </el-form-item>
-      <el-form-item label="-:" class="item-column2">
+      <el-form-item label="说明:" class="item-column2">
         {{comData.payrollSituationtxt}}
       </el-form-item>
       <el-form-item label="是否缴纳养老保险:" class="item-column2">
@@ -83,7 +83,6 @@
       <el-form-item label="调查结论" class="item-column1">
         {{comData.conclusion}}
       </el-form-item>
-      
     </el-form>
   </div>
 </template>
@@ -93,7 +92,7 @@ export default {
     return {
       // id:'',  // 住宅电话调查日志记录 id
       // phoneType:'', // 电话类型
-      comData:'' // 请求返回的数据
+      comData: '' // 请求返回的数据
     }
   },
   // mounted() {
@@ -102,7 +101,7 @@ export default {
   //   // 测试数据
   //   // this.queryComTelLog();
   // },
-  props:['comData']
+  props: ['comData', 'isFull'],
   // methods: {
   //   queryComTelLog(){
   //     this.post('/creTelResearchHis/queryComTelLog',{
@@ -114,6 +113,28 @@ export default {
   //     })
   //   }
   // }
+  mounted(){
+    if (this.isFull == true) { // 全屏
+      console.log('全屏');
+      $(".textarea-class").css("minWidth", "500px")
+    } else if (this.isFull == false) { // 分屏
+      console.log("分屏");
+      $(".textarea-class").css("minWidth", "300px")
+    }
+  },
+  watch: {
+    // 判断全屏 , 更改样式
+    isFull: function(val) {
+      if (val == true) { // 全屏
+        console.log('全屏');
+        $(".textarea-class").css("minWidth", "500px")
+      } else if (val == false) { // 分屏
+        console.log("分屏");
+        $(".textarea-class").css("minWidth", "300px")
+
+      }
+    }
+  }
 }
 
 </script>
