@@ -30,18 +30,16 @@
 // creditApp_finalTrial_five
 
     },
-    mounted(){
-
-      
-      //    this.post("/smUser/login", {
-      //   userCode: "02103C3003",
-      //   loginPassword: "111111"
-      // }).then(res => {
-      //   console.log(res);
-      // }).catch(err => {
-      //   reject(err)
-      // });
-    },
+updated () {
+  // this.$nextTick(function () {
+  //   // Code that will run only after the
+  //   // entire view has been re-rendered
+  //     var k=document.getElementsByClassName("el-select-dropdown el-popper")
+  //     console.log(document.getElementsByClassName("el-select-dropdown el-popper") )
+  //     console.log(k)
+  // })
+},
+  
 // components:{
 //   myHead
 // }

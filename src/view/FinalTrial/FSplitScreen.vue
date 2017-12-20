@@ -1,6 +1,6 @@
 <template>
   <div class="SplitScreen">
-      <!-- FSplitScreen -->
+    <!-- FSplitScreen -->
     <myHead></myHead>
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
@@ -37,10 +37,10 @@
           <div ref="Left_detail" class="Left_detail_div">
             <p class="Left_right_Title"> {{this.title}}
               <span class="icon_FullScreen">
-                <img src="../../../static/images/Vector%20Smart%20Object@1x.png" @click="FullScreen">
+                <img src="../../../static/images/backcopy 2.png" @click="FullScreen">
               </span>
               <span class="showAllList" @mouseenter="showList" @mouseleave="hid">
-                <img src="../../../static/images/vack.png">
+                <img src="../../../static/images/icon-02.png">
               </span>
             </p>
             <div class="Left_right_BigImg ">
@@ -58,7 +58,7 @@
         </div>
         <!-- 右侧分屏部分 -->
         <div class="right" ref="rRight">
-          <img src="../../../static/images/Vector%20Smart%20Object@1x.png" class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen">
+          <img src="../../../static/images/backcopy.png" class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen">
           <!-- tab2 切换 -->
           <!-- <el-tabs @tab-click="flag2 &&handleClick" type="border-card">
         <el-tab-pane :label="val" v-for="(val,index) in items2" :key="index">
@@ -148,7 +148,7 @@
   // import applicationInformation from "./detailComponent/applicationInformation";
   // import borrowerInformation from "./detailComponent/borrowerInformation";
   // import PhoneCredit from "./PhoneCredit";
-//   import CreditForm from "./detailComponent/CreditForm";
+  //   import CreditForm from "./detailComponent/CreditForm";
   // import creditInvestigation from "./detailComponent/creditInvestigation"; //实地征信
   // import s from "./detailComponent/remark";
   // 反欺诈结论 写此处
@@ -167,7 +167,7 @@
   export default {
     data() {
       return {
-         originLeft:'',
+        originLeft: '',
         // 进件人信息
         customInf: [], //申请信息页local字段
         FinalTastwaitingPass: [], //详情列表页信息--(含)取applyId
@@ -282,7 +282,7 @@
       },
       FullScreen() {
         this.showHalfBtn = true;
-                this.originLeft=this.$refs.right_tab_ul.style.left;//点击全屏之前，将滑动tab的left赋值给一个变量，作用：点击分屏之后回到此left值
+        this.originLeft = this.$refs.right_tab_ul.style.left; //点击全屏之前，将滑动tab的left赋值给一个变量，作用：点击分屏之后回到此left值
         this.$refs.right_tab_ul.style.left = "0"; // 让tab 重新从影音列表开始显示
         this.$refs.rLeft.style.display = "none";
         this.$refs.rRight.style.width = "100%";
@@ -290,7 +290,7 @@
       },
       DblScreen() {
         this.showHalfBtn = false;
-                this.$refs.right_tab_ul.style.left=this.originLeft;//回到全屏之前的left值
+        this.$refs.right_tab_ul.style.left = this.originLeft; //回到全屏之前的left值
         // this.FullScreenlShow = true;
         this.$refs.rLeft.style.display = "block";
         this.$refs.rRight.style.width = "50%";
@@ -353,7 +353,7 @@
       // applicationInformation,
       // borrowerInformation,
       // PhoneCredit,
-    //   CreditForm,
+      //   CreditForm,
       // creditInvestigation,
       // 信审审批
       // CreditApproval,
@@ -404,23 +404,24 @@
     z-index: 1;
   }
   /* 全屏  --  分屏 图标 */
+
   .icon_showHalf {
     position: absolute;
-    top: 18px;
-    left: 18px;
+    top: 6px;
+    left: 9px;
     z-index: 3;
     background: #4099ff;
   }
 
   .icon_FullScreen {
     position: absolute;
-    top: 0;
+    top: 7px;
     right: 17px;
   }
 
   .showAllList {
     position: absolute;
-    padding-top: 6px;
+    padding-top: 2px;
     width: 55px;
     height: 50px;
     left: 0;
@@ -449,6 +450,7 @@
     font-size: 14px;
     margin-right: 35px;
   }
+
   .PerDtl span:nth-of-type(7) {
     width: 202px;
   }
@@ -538,7 +540,6 @@
     text-align: right;
     padding-right: 40px;
   }
-
   /* 左侧详情 content div 内容   流-css */
 
   .Left_right_BigImg {
@@ -602,7 +603,6 @@
     z-index: 22;
     min-width: 1306px;
   }
-  
   /* 弹出层 - 两侧组件 content  流 */
 
   .AlertContent {

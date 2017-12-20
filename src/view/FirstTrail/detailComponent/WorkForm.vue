@@ -27,7 +27,7 @@
         </div>
       </li>
       <li class="item-column3">
-        <div class="left-title"><span class="require-icon" style="left:80px;">*</span> 来源:</div>
+        <div class="left-title"><span class="require-icon" style="left:90px;">*</span> 来源:</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="source">
@@ -39,7 +39,7 @@
         <!-- </div> -->
       </li>
       <li class="item-column3">
-        <div class="left-title"><span class="require-icon" style="left:50px;">*</span> 接听情况:</div>
+        <div class="left-title"><span class="require-icon" style="left:60px;">*</span> 接听情况:</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="answer">
@@ -53,7 +53,7 @@
         <!-- </div> -->
       </li>
       <li class="item-column3">
-        <div class="left-title"><span class="require-icon" style="left:50px;">*</span> 调查阶段:</div>
+        <div class="left-title"><span class="require-icon" style="left:60px;">*</span> 调查阶段:</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="checkStage">
@@ -65,7 +65,7 @@
         </el-tooltip>
         <!-- </div> -->
       </li>
-      <li class="item-column3" v-show="source=='02'">
+      <li class="item-column1" v-show="source=='02'">
         <div class="left-title">其他来源说明:</div>
         <div class="textarea-class">
           <el-input v-model="sourceDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
@@ -129,7 +129,7 @@
         </div>
       </li>
       <li class="item-column1">
-        <div class="left-title"><span class="require-icon" style="left:50px;">*</span> 调查结论:</div>
+        <div class="left-title"><span class="require-icon" style="left:60px;">*</span> 调查结论:</div>
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <div class="textarea-class">
             <el-input v-model="conclusion" type="textarea" :rows="2" resize=none :maxlength="500"></el-input>
@@ -249,12 +249,12 @@ export default {
             this.$emit('updateTree');
 
             this.$message({
-              message: res.data.msg,
+              message: res.msg,
               type: 'success'
             });
           } else {
             this.$message({
-              message: res.data.msg,
+              message: res.msg,
               type: 'warning'
             });
           }

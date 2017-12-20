@@ -5,6 +5,7 @@
       <!-- 进件人详情 -->
       <p class="PerDtl">
         <span> 借款人： {{customInf.mainCustName}}</span>
+        <span>{{watchData}}</span>
         <span> 进件编号: {{customInf.applyMainNo}}</span>
         <span> 证件号码: {{tastwaitingPass.certCode}}</span>
         <span> 进件机构: {{customInf.appOrgName}}</span>
@@ -36,10 +37,10 @@
           <div ref="Left_detail" class="Left_detail_div">
             <p class="Left_right_Title"> {{this.title}}
               <span class="icon_FullScreen">
-                <img src="../../../static/images/Vector%20Smart%20Object@1x.png" @click="FullScreen">
+                <img src="../../../static/images/backcopy 2.png" @click="FullScreen">
               </span>
               <span class="showAllList" @mouseenter="showList" @mouseleave="hid">
-                <img src="../../../static/images/vack.png">
+                <img src="../../../static/images/icon-02.png">
               </span>
             </p>
             <div class="Left_right_BigImg ">
@@ -57,7 +58,7 @@
         </div>
         <!-- 右侧分屏部分 -->
         <div class="right" ref="rRight">
-          <img src="../../../static/images/Vector%20Smart%20Object@1x.png" class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen">
+          <img src="../../../static/images/backcopy.png" class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen">
           <!-- tab2 切换 -->
           <!-- <el-tabs @tab-click="flag2 &&handleClick" type="border-card">
         <el-tab-pane :label="val" v-for="(val,index) in items2" :key="index">
@@ -94,7 +95,7 @@
             <!-- <applicationInformation v-if=" this.tabContent2==3"></applicationInformation> -->
             <borrowerInformation v-if=" this.tabContent2==4" :isFull.sync="isFull"></borrowerInformation>
             <PhoneCredit v-if=" this.tabContent2==5" :isFull.sync="isFull"></PhoneCredit>
-            <CreditForm v-if=" this.tabContent2==6"></CreditForm>
+            <CreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></CreditForm>
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
             <!-- 反欺诈结论 空白 -->
             <!-- <CreditForm v-if=" this.tabContent2==8"></CreditForm> -->
@@ -174,7 +175,8 @@
   export default {
     data() {
       return {
-         originLeft:'',
+        watchData:'',
+        originLeft: '',
         // 进件人信息
         customInf: [], //申请信息页local字段
         tastwaitingPass: [], //详情列表页信息--(含)取applyId
@@ -295,6 +297,7 @@
         this.$refs.rLeft.style.display = "none";
         this.$refs.rRight.style.width = "100%";
         // console.log(this.$refs.rRight.style.width)
+        this.watchData=this.$refs.rRight.style.width;
         this.isFull = true;
       },
       DblScreen() {
@@ -303,7 +306,7 @@
         this.$refs.right_tab_ul.style.left = this.originLeft; //回到全屏之前的left值
         this.$refs.rLeft.style.display = "block";
         this.$refs.rRight.style.width = "50%";
-
+        this.watchData=this.$refs.rRight.style.width;
         // 传给子组件的参数  .sync 双向绑定
         this.isFull = false;
       },
@@ -343,6 +346,14 @@
           this.flag1[ind] = false; // tab1 对应click 事件不可用
         }
       }
+    },
+    computed: {
+      // watchData: function () {
+      //   if (this.$refs.rRight.style.width) {
+      //     return this.$refs.rRight.style.width
+
+      //   }
+      // }
     },
     mounted() {
       console.log("分屏");
@@ -437,8 +448,8 @@
 
   .icon_showHalf {
     position: absolute;
-    top: 18px;
-    left: 18px;
+    top: 6px;
+    left: 9px;
     z-index: 3;
     /* background:rgba(0, 119, 255, 0.75); */
     background: #4099ff;
@@ -446,7 +457,7 @@
 
   .icon_FullScreen {
     position: absolute;
-    top: 0;
+    top: 7px;
     right: 17px;
     /* right: 0; */
   }
@@ -454,7 +465,7 @@
   .showAllList {
     /* display: inline-block; */
     position: absolute;
-    padding-top: 6px;
+    padding-top: 2px;
     width: 55px;
     height: 50px;
     /* background: red; */

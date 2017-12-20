@@ -347,27 +347,27 @@
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
         </div>
         <el-table :data="tableData.recordList" height="280" border style="width: 100%" stripe highlight-current-row v-loading="loading">
-          <el-table-column prop="verIncome" label="核实收入[元]">
+          <el-table-column prop="verIncome" label="核实收入[元]" min-width="100">
           </el-table-column>
-          <el-table-column prop="proCode" label="批准产品">
+          <el-table-column prop="proCode" label="批准产品" min-width="80">
           </el-table-column>
-          <el-table-column prop="ploanAmt" label="批准金额[元]">
+          <el-table-column prop="ploanAmt" label="批准金额[元]" min-width="100">
           </el-table-column>
-          <el-table-column prop="ploanTerm" label="批准期限[月]">
+          <el-table-column prop="ploanTerm" label="批准期限[月]" min-width="100">
           </el-table-column>
-          <el-table-column prop="appmult" label="审批倍数">
+          <el-table-column prop="appmult" label="审批倍数" min-width="80">
           </el-table-column>
-          <el-table-column prop="eachTermamt" label="每期还款额[元]">
+          <el-table-column prop="eachTermamt" label="每期还款额[元]" min-width="120">
           </el-table-column>
-          <el-table-column prop="inteDebitrate" label="内部负债率">
+          <el-table-column prop="inteDebitrate" label="内部负债率" min-width="100">
           </el-table-column>
-          <el-table-column prop="creditDebitRate" label="总信用负债率">
+          <el-table-column prop="creditDebitRate" label="总信用负债率" min-width="100">
           </el-table-column>
-          <el-table-column prop="totalRate" label="总负债率">
+          <el-table-column prop="totalRate" label="总负债率" min-width="80">
           </el-table-column>
-          <el-table-column prop="appConclusion" label="审批结论">
+          <el-table-column prop="appConclusion" label="审批结论" min-width="100" show-overflow-tooltip>
           </el-table-column>
-          <el-table-column prop="auditDate" label="审批时间">
+          <el-table-column prop="auditDate" label="审批时间" min-width="180">
           </el-table-column>
         </el-table>
         <!-- 分页 -->
@@ -387,23 +387,23 @@
             信审流程轨迹
           </div>
           <el-table :data="lcgjData" height="250" border style="width: 100%" highlight-current-row v-loading="lcgjLoading" center>
-            <el-table-column type="index" label="序号">
+            <el-table-column type="index" label="序号" min-width="50">
             </el-table-column>
-            <el-table-column prop="taskName" label="任务节点">
+            <el-table-column prop="taskNameTxt" label="任务节点" min-width="100">
             </el-table-column>
-            <el-table-column prop="taskTypeTxt" label="任务类型">
+            <el-table-column prop="taskTypeTxt" label="任务类型" min-width="100">
             </el-table-column>
-            <el-table-column prop="activationTime" label="进入本环节时间">
+            <el-table-column prop="activationTime" label="进入本环节时间" min-width="150">
             </el-table-column>
-            <el-table-column prop="taskStatusTxt" label="任务状态">
+            <el-table-column prop="taskStatusTxt" label="任务状态" min-width="100">
             </el-table-column>
-            <el-table-column prop="operatorCode" label="处理人">
+            <el-table-column prop="operatorCode" label="处理人" min-width="80">
             </el-table-column>
-            <el-table-column prop="completeTime" label="处理时间">
+            <el-table-column prop="completeTime" label="处理时间" min-width="150">
             </el-table-column>
-            <el-table-column prop="approvalOpinionTxt" label="处理结论">
+            <el-table-column prop="approvalOpinionTxt" label="处理结论" min-width="100">
             </el-table-column>
-            <el-table-column prop="opinionExplain" label="意见说明">
+            <el-table-column prop="opinionExplain" label="意见说明" min-width="100" show-overflow-tooltip>
             </el-table-column>
           </el-table>
         </div>
@@ -1793,7 +1793,7 @@ export default {
 
 .creditApproval-class .spjl-div {
   /*width: 80%;*/
-  min-width: 1000px;
+  min-width: 500px;
   height: 400px;
   margin: 0 auto;
   /*margin-top: 250px;*/

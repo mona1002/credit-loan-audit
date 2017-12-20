@@ -3,16 +3,19 @@
     <!-- <div class="CompareShow"> -->
     <!-- 左侧list隐藏时显示的div     在根元素下面，与left right 平级-->
     <div class="hidDiv" v-show="!showListDiv" ref="hidDiv_ref">
-      <img class="showBtn" src="../../../../static/images/Shapearrowhide@1x.png" @click="showList" style="transform: rotate(180deg)">
+      <img class="showBtn" src="../../../../static/images/Shape Copy.png" @click="showList" style="transform: rotate(180deg)">
     </div>
     <!-- ================================= -->
     <!-- 左侧 折叠面板 -->
     <div class="AudioVisual_List" ref="AudioVisual_List_ref" v-show="showListDiv">
       <!-- 折叠面板title -->
-      <img class="hidBtn" src="../../../../static/images/Shapearrowhide@1x.png" @click="hid">
+      <img class="hidBtn" src="../../../../static/images/Shape Copy.png" @click="hid">
       <!-- 折叠面板-手风琴List -->
       <p class="list_title clearFix">
-        <span>影像名称</span>
+        <span>影像名称
+          <img src="../../../../static/images/BAA30772-8C58-4169-9CF3-C1ACA1DB9C62@1x.png" style="position:absolute;top:12px;right:17px">
+          <img src="../../../../static/images/693BC9A6-4912-42DA-A313-32E8E75CD126@1x.png" style="position:absolute;top:19px;right:17px">
+        </span>
         <span>页数</span>
       </p>
       <el-collapse accordion>
@@ -20,7 +23,12 @@
           <template slot="title">
             <p>
               <!-- 一级节点 -->
-              <span>{{item.arcName}}</span>
+              <span style="position:relative;">{{item.arcName}}
+                <img src="../../../../static/images/918FE1E0-6EEB-4642-A5E6-253AC973FF41@1x.png" style="position:absolute;top:12px;left:23px"
+                  v-show="opendImg[ind]">
+                <img src="../../../../static/images/5530D698-2823-417F-B8BC-8DC9037BC848@1x.png" style="position:absolute;top:14px;left:23px"
+                  v-show="closedImg[ind]">
+              </span>
               <span>{{item.imageCount}}</span>
             </p>
           </template>
@@ -39,13 +47,15 @@
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
-      <img src="../../../../static/images/left.png" class="icon_pre " @click="pre">
-      <img src="../../../../static/images/pc1.png" class="icon_next" @click="next">
-      <div class="BtnIcons">
-        <img src="../../../../static/images/efw.png" @click="smaller ">
-        <img src="../../../../static/images/net.png" @click="larger">
-        <img src="../../../../static/images/daf.png" @click="AclockWise ">
-        <img src="../../../../static/images/dasf.png" @click="clockWise ">
+      <div class="showHidIcons" ref="showHidIcons">
+        <img src="../../../../static/images/left.png" class="icon_pre " @click="pre">
+        <img src="../../../../static/images/pc1.png" class="icon_next" @click="next">
+        <div class="BtnIcons">
+          <img src="../../../../static/images/efw.png" @click="smaller ">
+          <img src="../../../../static/images/net.png" @click="larger">
+          <img src="../../../../static/images/daf.png" @click="AclockWise ">
+          <img src="../../../../static/images/dasf.png" @click="clockWise ">
+        </div>
       </div>
       <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
       />
@@ -126,6 +136,8 @@
       return {
         // props:[smallPicDivClose],
         // picData: [],
+        opendImg: [true, true, true, true], //影响名称 一级节点前面图标显示与否flag
+        closedImg: [false, false, false, false], //同上
         localInf: [], //初始化的时候，根据传进来的applyId获取初始化数据
         showListDiv: true, // 列表显示与否
         show: true, // 收缩按钮显示控制
@@ -216,6 +228,21 @@
         });
       },
       getChildrenList(id, ind, item) {
+        // 一级节点前面的图标切换
+        if (this.opendImg[ind] == false) {
+          this.opendImg[ind] = true;
+          this.closedImg[ind] = false;
+        } else {
+          for (var i = 0; i < this.opendImg.length; i++) {
+            this.opendImg[i] = true;
+            this.closedImg[i] = false;
+          }
+          this.opendImg[ind] = false;
+          this.closedImg[ind] = true;
+        }
+        this.closeImg = ind;
+        this.openImg = ind
+        // 获取二级（子）节点
         console.log("获取子节点");
         // console.log(id)//父节点获取的id
         // console.log( this.localInf.applyId)
@@ -341,6 +368,9 @@
         // }
       },
       Imgscroll() { //滚轮放大缩小图片
+        console.log(this.$refs.AudioVisual_Img_ref)
+        this.$refs.showHidIcons.style.display = "block";
+
         // console.log("我是mouseout滚轮事件")
         this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => { // 非 Firefox 浏览器
           event = event || window.event;
@@ -371,6 +401,7 @@
         });
       },
       ImgScrollRemove() {
+        this.$refs.showHidIcons.style.display = "none";
         // console.log("我是mouseout移除滚轮事件")
         this.$refs.AudioVisual_Img_ref.onmousewheel = "";
         this.$refs.AudioVisual_Img_ref.removeEventListener('DOMMouseScroll', (event) => {
@@ -424,14 +455,15 @@
 
   .showBtn {
     position: absolute;
-    top: 7px;
+    top: 11px;
     right: 2px;
   }
 
   .hidBtn {
     position: absolute;
-    top: 7px;
+    top: 10px ;
     right: 5px;
+        z-index: 2;
   }
 
   .hidDiv {
@@ -443,7 +475,7 @@
     background: #eef0f9;
     margin-right: 11px;
     border: 1px solid #bfcbd9;
-    border-radius: 0 6px 6px 0;
+    /* border-radius: 0 6px 6px 0; */
     position: relative;
     z-index: 2;
   }
@@ -452,7 +484,7 @@
   .compareBtn {
     position: absolute;
     bottom: 18px;
-    right:98px;
+    right: 98px;
     color: #0077ff;
     border: 1px solid #0077ff;
     background: #eef0f9;
@@ -464,12 +496,15 @@
     bottom: 18px;
     right: 17px;
   }
+    .showHidIcons{
+    display: none;
+  }
   /*  放大、缩小 按钮 wrap */
 
   .BtnIcons {
     position: absolute;
     z-index: 2;
-    left: calc( 50% - 63px);
+    left: calc( 50% - 100px);
     bottom: 57px;
     width: 193px;
     height: 52px;
@@ -551,7 +586,7 @@
     width: 203px;
     background: #eef0f9;
     border: 1px solid #bfcbd9;
-    border-radius: 6px 6px 0 0;
+    /* border-radius: 6px 6px 0 0; */
     margin-right: 11px;
   }
   /* ----------------------------------- */
@@ -573,6 +608,7 @@
     /* border: 1px solid black; */
     border-bottom: none;
     text-align: center;
+    position: relative;
   }
 
   .AudioVisualLeft .list_title span {
