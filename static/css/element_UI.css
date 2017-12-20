@@ -1419,3 +1419,40 @@ height: 40px;
 .phone-credit .el-table__body-wrapper .el-table__body td:nth-of-type(3) {
   text-align: left;
 }
+
+
+/* 信审审批   */
+/* 金额右*/
+.creditApproval-class .spjl-div .el-table th:nth-of-type(1),
+.creditApproval-class .spjl-div .el-table th:nth-of-type(3),
+.creditApproval-class .spjl-div .el-table th:nth-of-type(6){
+  text-align: right;
+}
+.creditApproval-class .spjl-div .el-table__body-wrapper .el-table__body td:nth-of-type(1),
+.creditApproval-class .spjl-div .el-table__body-wrapper .el-table__body td:nth-of-type(3),
+.creditApproval-class .spjl-div .el-table__body-wrapper .el-table__body td:nth-of-type(6) {
+  text-align: right;
+}
+
+
+/* 时间 中*/
+.creditApproval-class .spjl-div .el-table th:nth-of-type(11){
+  text-align: center;
+}
+.creditApproval-class .spjl-div .el-table__body-wrapper .el-table__body td:nth-of-type(11){
+  text-align: center;
+}
+
+
+/* 信审审批 - 流程轨迹*/
+/* 序号居中*/
+.creditApproval-class .xllcgj-div .el-table th:nth-of-type(1),
+.creditApproval-class .xllcgj-div .el-table th:nth-of-type(4),
+.creditApproval-class .xllcgj-div .el-table th:nth-of-type(7){
+  text-align: center;
+}
+.creditApproval-class .xllcgj-div .el-table__body-wrapper .el-table__body td:nth-of-type(1),
+.creditApproval-class .xllcgj-div .el-table__body-wrapper .el-table__body td:nth-of-type(4),
+.creditApproval-class .xllcgj-div .el-table__body-wrapper .el-table__body td:nth-of-type(7){
+  text-align: center;
+}
