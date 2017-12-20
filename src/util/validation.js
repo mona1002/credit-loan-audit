@@ -18,4 +18,5 @@ const config = {
 
 };
 
+console.log("aaaaa")
 Vue.use(VeeValidate, config);
