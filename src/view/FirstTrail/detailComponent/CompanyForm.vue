@@ -376,12 +376,12 @@ export default {
             this.$emit('updateTree');
 
             this.$message({
-              message: res.data.msg,
+              message: res.msg,
               type: 'success'
             });
           } else {
             this.$message({
-              message: res.data.msg,
+              message: res.msg,
               type: 'warning'
             });
           }

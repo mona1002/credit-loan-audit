@@ -510,7 +510,7 @@ export default {
 
           } else {
             this.$message({
-              message: res.data.msg,
+              message: res.msg,
               type: 'warning'
             });
           }
