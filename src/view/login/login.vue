@@ -45,6 +45,7 @@ export default {
   methods: {
     loginFn() {
       console.log('login ')
+      localStorage.removeItem('isFull')
       this.post("/smUser/login", {
         userCode: this.userCode,
         password: this.loginPassword

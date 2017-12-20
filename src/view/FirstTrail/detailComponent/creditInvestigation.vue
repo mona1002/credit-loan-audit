@@ -219,12 +219,11 @@
 </script>
 <style type="text/css" scoped>
 	.creditInvestigation{
-		/* padding: 15px 30px; */
 		width: 100%;
 		height: 100%;
 		background-color: #fafbfc;
 		font-size: 14px;
-		min-width: 1285px;
+		min-width: 930px;
 		color: #475669;
 	}
 	/* 头部 */

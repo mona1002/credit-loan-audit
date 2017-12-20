@@ -92,7 +92,7 @@
             <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <!-- <applicationInformation v-if=" this.tabContent2==3"></applicationInformation> -->
-            <borrowerInformation v-if=" this.tabContent2==4"></borrowerInformation>
+            <borrowerInformation v-if=" this.tabContent2==4" :isFull.sync="isFull"></borrowerInformation>
             <PhoneCredit v-if=" this.tabContent2==5" :isFull.sync="isFull"></PhoneCredit>
             <CreditForm v-if=" this.tabContent2==6"></CreditForm>
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
@@ -303,6 +303,8 @@
         this.$refs.right_tab_ul.style.left = this.originLeft; //回到全屏之前的left值
         this.$refs.rLeft.style.display = "block";
         this.$refs.rRight.style.width = "50%";
+
+        // 传给子组件的参数  .sync 双向绑定
         this.isFull = false;
       },
       tab1(ev, ind, val) { //   tab1 ------------------mousedown 事件

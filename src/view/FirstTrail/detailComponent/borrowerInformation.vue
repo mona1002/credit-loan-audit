@@ -460,7 +460,7 @@
 			    </el-table>
 				</div> 
 		  	</el-collapse-item>
-		  	<el-collapse-item title="信用卡使用总况" name="4">
+		  	<el-collapse-item title="信用卡使用总况" name="4" ref="xinyongka">
 		  		<template slot="title">
 			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
 			      <span class="headFont">信用卡使用总况</span>
@@ -741,13 +741,13 @@
 
 				    		<label>文字说明:</label>
 				    		<div  class="require">
-				    			<span v-show="borDebt.remark.length==100"><i>*</i>输入长度不能超过100</span>
+				    			<span v-show="borDebt.remark.length==200"><i>*</i>输入长度不能超过200</span>
 				    			<el-input
 								  type="textarea"
 								  :rows="2"
 								  placeholder="请输入内容"
 								  v-model="borDebt.remark"
-								  :maxlength="100"
+								  :maxlength="200"
 								  resize="none"
 								  >
 								</el-input>
@@ -766,17 +766,18 @@
 				    	<li>
 				    		<label>报告来源:</label>
 				    		<div  class="require" style="display:inline-block">
-				    			<span v-if="rptInfo.crSource.length==20"><i>*</i>输入长度不能超过20</span>
+				    			<span v-if="rptInfo.crSource.length==50"><i>*</i>输入长度不能超过50</span>
 				    			<el-input
 								  :rows="1"
 								  placeholder="请输入内容"
 								  v-model="rptInfo.crSource"
-								  :maxlength="20"
+								  :maxlength="50"
 								  >
 								</el-input>
 							</div>
 				    	</li>
-					    <li><label>有无征信报告查询记录:</label>
+					    <li>
+					    	<label>有无征信报告查询记录:</label>
 					    	<el-select v-model="rptInfo.crHasRecord">
 							    <el-option
 							      v-for="item in crHasRecords"
@@ -1206,20 +1207,64 @@
       		//有无征信报告查询记录
       		crHasRecords:[
 				{'value': '0' ,'label': '有'},
-				{'value': '1' ,'label': '否'}
+				{'value': '1' ,'label': '无'}
       		],
       		//弹框
       		layer:false,
       		info:'',
       		infoLyer:false,
+      		ifFull:'', // 标志是否全屏
 	      };
 	    },
+		props:['isFull'],
 	    mounted(){
 	    	//this.coming();
 			//一进入页面就发送请求
 			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
 			this.applyId=this.taskInWaitting.applyId;
 			this.request(this.taskInWaitting.applyId);
+
+	  		if(this.isFull == false){// 分屏
+	  			//信用卡使用总况
+	  			$(".xinyongka").width('948px');
+	  			$(".xinyongka ul li div").width('150px');
+	  			$(".xinyongka ul li div input").width('150px');
+	  			//负债信息
+	  			$(".fuzhaixinxi").width('948px');
+	  			$(".fuzhaixinxi ol li div").width('150px');
+	  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 160px )');
+	  			$(".fuzhaixinxi ol li div.require div").width('100%');
+	  			$(".fuzhaixinxi ol li div input").width('150px');
+	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 155px )',"padding-right":'calc( 16.6% - 155px )'});
+	  			//征询报告
+	  			$(".zhengxunbaogao ol li div").width('150px');
+	  			$(".zhengxunbaogao ol li div.require div").width('150px');
+	  			$(".zhengxunbaogao ol li div.require input").width('150px');
+	  			$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) div").width('150px');
+	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 155px )',"padding-right":'calc( 49.9% - 155px )'});
+	  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require").width('calc( 100% - 160px )');
+	  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require div").width('100%');
+	  			
+	  		}else if(this.isFull == true){// 全屏
+	  			$(".xinyongka").width('100%');
+	  			$(".xinyongka ul li div").width('200px');
+	  			$(".xinyongka ul li div input").width('200px');
+	  			//负债信息
+	  			$(".fuzhaixinxi").width('100%');
+	  			$(".fuzhaixinxi ol li div").width('200px');
+	  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 160px )');
+	  			$(".fuzhaixinxi ol li div.require div").width('100%');
+	  			$(".fuzhaixinxi ol li div input").width('200px');
+	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 180px )',"padding-right":'calc( 16.6% - 180px )'});
+	  			//征询报告
+	  			$(".zhengxunbaogao ol li div.require").width('200px');
+	  			$(".zhengxunbaogao ol li div.require div").width('200px');
+	  			$(".zhengxunbaogao ol li div.require input").width('200px');
+	  			$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) div").width('200px');
+	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 180px )',"padding-right":'calc( 49.9% - 180px )'});
+	  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require").width('calc( 100% - 160px )');
+	  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require div").width('100%');
+	  		}
 		},
 	    methods:{
 	    	request(param){
@@ -1946,7 +1991,7 @@
 			moneyBlur: function(value, flag) {
 				console.log(value);
 			    // 无数据
-			    /*if (!value) {
+			    if (!value) {
 			        switch (flag) {
 			            case 'n':
 			                this.scope.row.n = '';
@@ -1970,7 +2015,7 @@
 			                this.scope.row.avgIncome = '';
 			                break;
 			        }
-			    }*/
+			    }
 			    // 有数据
 			    if (value) {
 			    	console.log(value);
@@ -1978,7 +2023,7 @@
 			        value = value.split('.')[0].replace(/,/, '')
 			        // 正则判断数字  [0-9] +至少一次 , 第一位为0 不用处理
 			        //console.log(this.scope.row.n);
-			        /*if (/^[0-9]+$/g.test(Number(value))) {
+			        if (/^[0-9]+$/g.test(Number(value))) {
 			            switch (flag) {
 			                case 'n':
 			                    this.scope.row.n = Number(value).toLocaleString() + '.00';
@@ -2028,7 +2073,7 @@
 			                    this.scope.row.avgIncome = '';
 			                    break;
 			            }
-			        }*/
+			        }
 			    }
 			},
 	    },
@@ -2123,8 +2168,51 @@
 
 		},
 		watch:{
-			/*aaaa=this.$parent.$refs.rRight;
-		  	console.log(aaaa);*/
+		  	isFull:function(val){
+		  		console.log(this.isFull);
+		  		if(val == false){// 分屏
+		  			//信用卡使用总况
+		  			$(".xinyongka").width('948px');
+		  			$(".xinyongka ul li div").width('150px');
+		  			$(".xinyongka ul li div input").width('150px');
+		  			//负债信息
+		  			$(".fuzhaixinxi").width('948px');
+		  			$(".fuzhaixinxi ol li div").width('150px');
+		  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 160px )');
+		  			$(".fuzhaixinxi ol li div.require div").width('100%');
+		  			$(".fuzhaixinxi ol li div input").width('150px');
+		  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 155px )',"padding-right":'calc( 16.6% - 155px )'});
+		  			//征询报告
+		  			$(".zhengxunbaogao ol li div").width('150px');
+		  			$(".zhengxunbaogao ol li div.require div").width('150px');
+		  			$(".zhengxunbaogao ol li div.require input").width('150px');
+		  			$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) div").width('150px');
+		  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 155px )',"padding-right":'calc( 49.9% - 155px )'});
+		  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require").width('calc( 100% - 160px )');
+		  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require div").width('100%');
+		  			
+		  		}else if(val == true){// 全屏
+		  			$(".xinyongka").width('100%');
+		  			$(".xinyongka ul li div").width('200px');
+		  			$(".xinyongka ul li div input").width('200px');
+		  			//负债信息
+		  			$(".fuzhaixinxi").width('100%');
+		  			$(".fuzhaixinxi ol li div").width('200px');
+		  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 160px )');
+		  			$(".fuzhaixinxi ol li div.require div").width('100%');
+		  			$(".fuzhaixinxi ol li div input").width('200px');
+		  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 180px )',"padding-right":'calc( 16.6% - 180px )'});
+		  			//征询报告
+		  			$(".zhengxunbaogao ol li div.require").width('200px');
+		  			$(".zhengxunbaogao ol li div.require div").width('200px');
+		  			$(".zhengxunbaogao ol li div.require input").width('200px');
+		  			$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) div").width('200px');
+		  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 180px )',"padding-right":'calc( 49.9% - 180px )'});
+		  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require").width('calc( 100% - 160px )');
+		  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require div").width('100%');
+		  		}
+		  	}
+
 		},
 	}
 </script>
@@ -2134,39 +2222,9 @@
 		height: 100%;
 		background-color: #fafbfc;
 		font-size: 14px;
-		/*min-width: 1327px;
-		 min-width: 990px; */
+		min-width: 1327px;
+		 /*min-width: 990px; */
 	}
-	/* 借款人资料 分屏（小屏幕时）
-	@media screen and (max-width: 1920px){
-	  min-device-width
-	  .xinyongka{
-	    width: 946px !important;
-	    min-width: 946px !important;
-	  }
-	    .xinyongka ul,.xinyongka ul li{
-	      width: 270px !important;
-	      min-width: 270px !important;
-	    }
-	    .xinyongka ul div,.xinyongka ul li div input{
-	      width: 150px !important;
-	      min-width: 150px !important;
-	    }
-	} */
-	/* 借款人资料 分屏（小屏幕时） */
-	/* @media screen and (min-width:1920px){
-	  .xinyongka{
-	    width: 100% !important;
-	    min-width: 1327px;
-	  }
-	    .xinyongka ul,.xinyongka ul li{
-	      width: 33.3% !important;
-	    }
-	    .xinyongka ul div,.xinyongka ul li div input{
-	      width: 200px !important;
-	    }
-	} */
-
 	.left{
 		float: left;
 	}
@@ -2213,7 +2271,7 @@
 	}
 	/* 信用卡使用总况 */
 	.xinyongka{
-		width: 100%;
+		width: 948px;
 	}
 	.xinyongka ul{
 		float: left;
@@ -2231,6 +2289,12 @@
 		text-align: right;
 		color: #475669;
 	}
+	.xinyongka ul li div{
+		width: 150px;
+	}
+	.xinyongka ul li div input{
+		width: 150px;
+	}
 	/* 贷款总况 */
 	.daikuanzongkuang li p{
 		width: 180px;
@@ -2240,7 +2304,10 @@
 		padding-left: 13px;
 	}
 	/* 负债信息 */
-	.fuzhaixinxi,.fuzhaixinxi ol{
+	.fuzhaixinxi{
+		width: 948px;
+	}
+	.fuzhaixinxi ol{
 		width: 100%;
 	}
 	.fuzhaixinxi ol li{
@@ -2256,6 +2323,13 @@
 		padding-right: 5px;
 		color: #475669;
 	}
+	.fuzhaixinxi ol li div{
+		width: 150px;
+	}
+	.fuzhaixinxi ol li div input{
+		width: 150px;
+		padding-left:10px;
+	}
 	/* 负债信息：负债合计 */
 	.fuzhaixinxi ol li.zongji input{
 		border: none;
@@ -2270,7 +2344,7 @@
 	ol.num li:nth-of-type(2){
 		width: 66.6%;
 		text-align: left;
-		padding-left: calc( 16.6% - 180px );	
+		padding: 0 calc( 16.6% - 155px );	
 	}
 	ol.num li:nth-of-type(2) label{
 		height: 54px; 
@@ -2278,14 +2352,18 @@
 		float: left;
 	}
 	ol.num li:nth-of-type(2) textarea{
-		width: 640px;
+		width: 100%;
 		border: 1px solid #d8dce5; 
 		border-radius: 4px;
 		padding:5px 10px;
 	}
 	ol.num li:nth-of-type(2) div{
-		width: 640px;
+		/* width: 640px; */
+		width: calc( 100% - 160px );
 		display: inline-block;
+	}
+	ol.num li:nth-of-type(2) div div{
+		width: 100%;
 	}
 	/* 征询报告 */
 	.zhengxunbaogao ol{
@@ -2294,7 +2372,8 @@
 	.zhengxunbaogao ol:nth-of-type(2) li{
 		width: 100%;
 		text-align: left;
-		padding-left: calc( 16.6% - 180px );
+		padding-right: calc( 49.9% - 155px );
+		padding-left: calc( 16.6% - 155px );
 		margin-bottom: 10px;
 	}
 	.zhengxunbaogao ol:nth-of-type(2) li label{
@@ -2303,7 +2382,11 @@
 	}
 	.zhengxunbaogao ol:nth-of-type(2) li div{
 		display: inline-block;
-		width: 640px;
+		/* width: 640px; */
+		width: calc( 100% - 160px );
+	}
+	.zhengxunbaogao ol:nth-of-type(2) li div div{
+		width: 100%;
 	}
 	.reportLabel{
 		float: left;

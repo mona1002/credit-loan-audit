@@ -13,7 +13,7 @@
 				    <el-table
 				      :data="taskDetailList"
 				      style="width: 100%"
-				      height="700"
+				      height="744"
 				      highlight-current-row
 				      border
 				      @current-change="handleCurrentChange">
@@ -120,6 +120,7 @@
 		background-color: #fafbfc;
 		font-size: 14px;
 		/* min-width: 1366px; */
+		overflow: hidden;
 	}
 	/* 折叠面板头部背景色 */
 	.icon_hat{

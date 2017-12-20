@@ -960,7 +960,7 @@
 <style type="text/css" scoped>
 	.applicationInformationDetail{
 		width: 100%;
-		min-width: 990px;
+		min-width: 1327px;
 		height: 100%;
 		background-color: #fafbfc;
 		font-size: 14px;
