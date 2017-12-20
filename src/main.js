@@ -4,11 +4,15 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import "babel-polyfill"
+// import store from './store/store'
 import qs from 'qs'
 import http from '@/util/http' 
+// import validation from '@/util/validation' 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import $ from 'jquery'
+// import promise from 'es6-promise';
+// promise.polyfill();
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI)
@@ -16,30 +20,12 @@ Vue.use(http)
 
 // 设置options 不进行发送option 验证  ------错误用法？
 // Vue.http.options.emulateJSON = true
-// import Vue from 'vue';
-import VeeValidate,{Validator} from 'vee-validate';
-// import zh from 'vee-validate/riskWeb/locale/zh_CN'
-import messages from './assets/js/zh_CN';
-
-Validator.updateDictionary({
-    zh_CN: {
-        messages
-    }
-});
-
-const config = {
-  locale: 'zh_CN', 
-  strict: true,
-  delay: 1000, 
-
-};
-
-Vue.use(VeeValidate, config);
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  // store,
   template: '<App/>',
   components: { App }
 })
