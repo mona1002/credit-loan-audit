@@ -1,6 +1,6 @@
 <!-- 借款人资料 -->
 <template>
-	<div class="borrowerInformation">
+	<div class="borrowerInformation" style="width:100%" ref="wrap">
 		<el-collapse v-model="activeNames" @change="handleChange">
 			<el-collapse-item name="1">
 				<template slot="title">
@@ -29,29 +29,32 @@
 					      <el-table-column
 					        type="index"
 					      	:index="1"
+					      	label="序号"
 					      	min-width="50"
 					      	>
 					      </el-table-column>
 					      <el-table-column
 					        label="房产类型" 
 					        prop="estateType"
-					        min-width="130">
+					        min-width="148">
 					        <template slot-scope="scope">
 					        	<span class="must">*</span>
-						        <el-select v-model="scope.row.estateType" placeholder="请选择">
-								    <el-option
-								     v-for="item in estateTypes"
-								     :key="item.value"
-								     :label="item.label"
-								     :value="item.value">
-								   </el-option>
-								</el-select>							
+					        	<el-tooltip class="item" effect="dark" :disabled="scope.row.estateType!=''" content="该项为必填项" placement="right">
+							        <el-select v-model="scope.row.estateType" placeholder="请选择">
+									    <el-option
+									     v-for="item in estateTypes"
+									     :key="item.value"
+									     :label="item.label"
+									     :value="item.value">
+									   </el-option>
+									</el-select>
+								</el-tooltip>							
 							</template>
 					      </el-table-column>
 					      <el-table-column
 					        prop="propertyType"
 					        label="产权性质"
-					        min-width="100">
+					        min-width="110">
 					        <template slot-scope="scope">
 						        <el-select v-model="scope.row.propertyType" placeholder="请选择">
 								    <el-option
@@ -66,7 +69,7 @@
 					      <el-table-column
 					        prop="coveredArea" 
 					        label="建筑面积[m^2]"
-					        min-width="140">
+					        min-width="120">
 					        <template slot-scope="scope">
 						        <el-input v-model="scope.row.coveredArea" placeholder="请输入内容"></el-input>
 					        </template>
@@ -74,7 +77,7 @@
 					      <el-table-column
 					        prop="unitPrice"
 					        label="建筑单价[元]"
-					        min-width="140">
+					        min-width="101">
 					         <template slot-scope="scope">
 						        <el-input v-model="scope.row.unitPrice" placeholder="请输入内容"></el-input>
 					        </template>
@@ -84,13 +87,16 @@
 					        label="房产地址"
 					        min-width="200">
 					        <template slot-scope="scope">
-						        <el-input v-bind:title="scope.row.estateAddress" v-model="scope.row.estateAddress" placeholder="请输入内容"></el-input>
+					        	<!-- <el-tooltip el-tooltip class="item" effect="dark" content="scope.row.estateAddress" placement="top"> -->
+							        <el-input v-bind:title="scope.row.estateAddress" v-model="scope.row.estateAddress" placeholder="请输入内容">
+							        </el-input>
+						    <!-- </el-tooltip> -->
 					        </template>
 					      </el-table-column>
 					      <el-table-column
 					        prop="estateZip"
 					        label="邮政编码"
-					        min-width="130">
+					        min-width="100">
 					        <template slot-scope="scope">
 						        <el-input v-model="scope.row.estateZip" placeholder="请输入内容"></el-input>
 					        </template>
@@ -98,7 +104,7 @@
 					      <el-table-column
 					        prop="equityRatio"
 					        label="产权比例"
-					        min-width="130">
+					        min-width="100">
 					        <template slot-scope="scope">
 						        <el-input v-model="scope.row.equityRatio" placeholder="请输入内容"></el-input>
 					        </template>
@@ -106,7 +112,7 @@
 					      <el-table-column
 					        prop="loanPeriod"
 					        label="贷款期限[月]"
-					        min-width="130">
+					        min-width="110">
 					        <template slot-scope="scope">
 						        <el-input v-model="scope.row.loanPeriod" placeholder="请输入内容"></el-input>
 					        </template>
@@ -114,7 +120,7 @@
 					      <el-table-column
 					        prop="mortgageStatus"
 					        label="抵押状况"
-					        min-width="150">
+					        min-width="110">
 					        <template slot-scope="scope">
 						        <el-select v-model="scope.row.mortgageStatus" placeholder="请选择">
 								    <el-option
@@ -129,7 +135,7 @@
 					      <el-table-column
 					        prop="monthlyPay"
 					        label="月供[元]"
-					        min-width="130">
+					        min-width="100">
 					        <template slot-scope="scope">
 						        <el-input v-model="scope.row.monthlyPay" placeholder="请输入内容"></el-input>
 					        </template>
@@ -137,7 +143,7 @@
 					      <el-table-column
 					        prop="restLoans"
 					        label="贷款余额[元]"
-					        min-width="130">
+					        min-width="102">
 					        <template slot-scope="scope">
 						        <el-input v-model="scope.row.restLoans" placeholder="请输入内容"></el-input>
 					        </template>
@@ -164,6 +170,7 @@
 					<el-table
 			      :data="carInfoList"
 			      style="width: 100%"
+			      class="car"
 			      highlight-current-row
 			      border
 			      @current-change="carCurrentChange">
@@ -176,7 +183,7 @@
 				      <el-table-column
 				        prop="carPrice"
 				        label="车辆购置价[元]"
-				        min-width="130">
+				        min-width="110">
 				        <template slot-scope="scope">
 					        <el-input v-model="scope.row.carPrice" placeholder="请输入内容"></el-input>
 				        </template>
@@ -184,7 +191,7 @@
 				      <el-table-column
 				        prop="isYearCheck"
 				        label="是否年检"
-				        min-width="140">
+				        min-width="100">
 				        <template slot-scope="scope">
 					        <el-select v-model="scope.row.isYearCheck" placeholder="请选择">
 							    <el-option
@@ -199,7 +206,7 @@
 				      <el-table-column
 				        prop="isOperate"
 				        label="是否非运营"
-				        min-width="140">
+				        min-width="100">
 				        <template slot-scope="scope">
 					        <el-select v-model="scope.row.isOperate" placeholder="请选择">
 							    <el-option
@@ -214,7 +221,7 @@
 				      <el-table-column
 				        prop="carModel"
 				        label="车辆型号"
-				        min-width="120">
+				        min-width="100">
 				        <template slot-scope="scope">
 					        <el-input v-model="scope.row.carModel" placeholder="请输入内容"></el-input>
 				        </template>
@@ -222,23 +229,25 @@
 				      <el-table-column
 				        prop="carType"
 				        label="车辆类型"
-				        min-width="170">
+				        min-width="120">
 				        <template slot-scope="scope">
 				        	<span class="must">*</span>
-					        <el-select v-model="scope.row.carType" placeholder="请选择">
-							    <el-option
-							     v-for="item in carTypes"
-							     :key="item.value"
-							     :label="item.label"
-							     :value="item.value">
-							   </el-option>
-							</el-select>
+				        	<el-tooltip class="item" effect="dark" :disabled="scope.row.carType!=''" content="该项为必填项" placement="right">
+						        <el-select v-model="scope.row.carType" placeholder="请选择">
+								    <el-option
+								     v-for="item in carTypes"
+								     :key="item.value"
+								     :label="item.label"
+								     :value="item.value">
+								   </el-option>
+								</el-select>
+							</el-tooltip>
 						</template>
 				      </el-table-column>
 				      <el-table-column
 				        prop="loanPeriod"
 				        label="贷款期限[月]"
-				        min-width="130">
+				        min-width="100">
 				        <template slot-scope="scope">
 					        <el-input v-model="scope.row.loanPeriod" placeholder="请输入内容"></el-input>
 				        </template>
@@ -246,7 +255,7 @@
 				      <el-table-column
 				        prop="monthlyPay"
 				        label="月供[元]"
-				        min-width="130">
+				        min-width="100">
 				        <template slot-scope="scope">
 					        <el-input v-model="scope.row.monthlyPay" placeholder="请输入内容"></el-input>
 				        </template>
@@ -254,7 +263,7 @@
 				      <el-table-column
 				        prop="restLoans"
 				        label="贷款余额[月]"
-				        min-width="130">
+				        min-width="100">
 				        <template slot-scope="scope">
 					        <el-input v-model="scope.row.restLoans" placeholder="请输入内容"></el-input>
 				        </template>
@@ -262,7 +271,7 @@
 				      <el-table-column
 				        prop="carNo"
 				        label="车牌号码"
-				        min-width="130">
+				        min-width="100">
 				        <template slot-scope="scope">
 					        <el-input v-model="scope.row.carNo" placeholder="请输入内容"></el-input>
 				        </template>
@@ -270,7 +279,7 @@
 				      <el-table-column
 				        prop="buyInsur"
 				        label="车辆已购保险"
-				        min-width="140">
+				        min-width="100">
 				        <template slot-scope="scope">
 					        <el-select v-model="scope.row.buyInsur" placeholder="请选择">
 							    <el-option
@@ -285,12 +294,12 @@
 				      <el-table-column
 				        prop="buyDate"
 				        label="购买时间"
-				        min-width="150">
+				        min-width="140">
 				        <template slot-scope="scope">
   							<el-date-picker
 						      v-model="scope.row.buyDate"
 						      type="date"
-						      placeholder="选择日期">
+						      >
 						    </el-date-picker>
 						</template> 
 				      </el-table-column>
@@ -316,6 +325,7 @@
 					<el-table
 				      :data="cardDetList"
 				      style="width: 100%"
+				      class="card"
 				      highlight-current-row
 				      border
 				      @current-change="cardCurrentChange">
@@ -331,25 +341,26 @@
 				        min-width="160">
 				        <template slot-scope="scope">
 				        	<span class="must">*</span>
-						  <el-input v-model="scope.row.bankName" placeholder="请输入内容"></el-input>
+				        	<el-tooltip class="item" effect="dark" :disabled="scope.row.bankName!=''" content="该项为必填项" placement="right">
+						  		<el-input v-bind:title="scope.row.bankName" v-model="scope.row.bankName" placeholder="请输入内容"></el-input>
+							</el-tooltip>
 						</template>
 				      </el-table-column>
 				      <el-table-column
 				        prop="cardUseDate"
 				        label="开卡日期"
-				        min-width="150">
+				        min-width="140">
 				        <template slot-scope="scope">
 			                <el-date-picker
 			                  v-model="scope.row.cardUseDate"
-			                  type="date"
-			                  placeholder="选择日期">
+			                  type="date">
 			                </el-date-picker>
 			            </template>
 				      </el-table-column>
 				      <el-table-column
 				        prop="cardAmt"
 				        label="信用额度"
-				        min-width="130">
+				        min-width="100">
 				        <template slot-scope="scope">
 						  <el-input v-model="scope.row.cardAmt" placeholder="请输入内容"></el-input>
 						</template>
@@ -357,7 +368,7 @@
 				      <el-table-column
 				        prop="usedAmt"
 				        label="已使用额度"
-				        min-width="130">
+				        min-width="100">
 				        <template slot-scope="scope">
 						  <el-input v-model="scope.row.usedAmt" placeholder="请输入内容"></el-input>
 						</template>
@@ -365,19 +376,18 @@
 				      <el-table-column
 				        prop="repayDay"
 				        label="还款日"
-				        min-width="150">
+				        min-width="140">
 				        <template slot-scope="scope">
 			                <el-date-picker
 			                  v-model="scope.row.repayDay"
-			                  type="date"
-			                  placeholder="选择日期">
+			                  type="date">
 			                </el-date-picker>
 			            </template>
 				      </el-table-column>
 				      <el-table-column
 				        prop="realRepaymentAmt"
 				        label="本期应还款金额"
-				        min-width="140">
+				        min-width="120">
 				        <template slot-scope="scope">
   							<el-input v-model="scope.row.realRepaymentAmt" placeholder="请输入内容"></el-input>
 						</template>
@@ -393,7 +403,7 @@
 				      <el-table-column
 				        prop="isOverdue"
 				        label="是否逾期"
-				        min-width="140">
+				        min-width="100">
 				        <template slot-scope="scope">
 						<el-select v-model="scope.row.isOverdue" placeholder="请选择">
 						    <el-option
@@ -408,7 +418,7 @@
 				      <el-table-column
 				        prop="currOverdueTimes"
 				        label="当前逾期期数"
-				        min-width="130">
+				        min-width="110">
 				        <template slot-scope="scope">
 						  <el-input v-model="scope.row.currOverdueTimes" placeholder="请输入内容"></el-input>
 						</template>
@@ -416,7 +426,7 @@
 				      <el-table-column
 				        prop="maxOverdueTimes"
 				        label="最高逾期期数"
-				        min-width="130">
+				        min-width="110">
 				        <template slot-scope="scope">
   							<el-input v-model="scope.row.maxOverdueTimes" placeholder="请输入内容"></el-input>
 						</template>
@@ -432,41 +442,43 @@
 				      <el-table-column
 				        prop="accountStatus"
 				        label="账户状态"
-				        min-width="170">
+				        min-width="120">
 				        <template slot-scope="scope">
 				        	<span class="must">*</span>
-							<el-select v-model="scope.row.accountStatus" placeholder="请选择">
-							    <el-option
-							     v-for="item in caraccountStatuss"
-							     :key="item.value"
-							     :label="item.label"
-							     :value="item.value">
-							   </el-option>
-							</el-select>
+							<el-tooltip class="item" effect="dark" :disabled="scope.row.accountStatus!=''" content="该项为必填项" placement="right">
+								<el-select v-model="scope.row.accountStatus" placeholder="请选择">
+								    <el-option
+								     v-for="item in caraccountStatuss"
+								     :key="item.value"
+								     :label="item.label"
+								     :value="item.value">
+								   </el-option>
+								</el-select>
+							</el-tooltip>
 						</template>
 				      </el-table-column>
 			    </el-table>
 				</div> 
 		  	</el-collapse-item>
-		  	<el-collapse-item title="信用卡使用总况" name="4">
+		  	<el-collapse-item title="信用卡使用总况" name="4" ref="xinyongka">
 		  		<template slot="title">
 			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
 			      <span class="headFont">信用卡使用总况</span>
 			    </template>
 		  		<div class="xinyongka">
 		  			<ul>
-				    	<li><label>信用卡张数：</label><el-input v-model="borCard.cardCount"></el-input></li>
-				    	<li><label>正常使用张数：</label><el-input v-model="borCard.normalCount"></el-input></li>
-				    	<li><label>呆帐数量：</label><el-input v-model="borCard.badDebtCount"></el-input></li>
+				    	<li><label>信用卡张数：</label><el-input v-on:blur="carNum(borCard.cardCount)" v-model="borCard.cardCount"></el-input></li>
+				    	<li><label>正常使用张数：</label><el-input v-on:blur="carNormal(borCard.normalCount)" v-model="borCard.normalCount"></el-input></li>
+				    	<li><label>呆帐数量：</label><el-input v-on:blur="carBadDebt(borCard.badDebtCount)" v-model="borCard.badDebtCount"></el-input></li>
 				    </ul>
 				    <ul>
-				    	<li><label>未开卡张数：</label><el-input v-model="borCard.nouseCount"></el-input></li>
-				    	<li><label>冻结数量：</label><el-input v-model="borCard.freezeCount"></el-input></li>
-				    	<li><label>销户数量：</label><el-input v-model="borCard.cancelCount"></el-input></li>
+				    	<li><label>未开卡张数：</label><el-input v-on:blur="carNouse(borCard.nouseCount)" v-model="borCard.nouseCount"></el-input></li>
+				    	<li><label>冻结数量：</label><el-input v-on:blur="carFreeze(borCard.freezeCount)" v-model="borCard.freezeCount"></el-input></li>
+				    	<li><label>销户数量：</label><el-input v-on:blur="carCancel(borCard.cancelCount)" v-model="borCard.cancelCount"></el-input></li>
 				    </ul>
 				    <ul>
-				    	<li><label>已使用张数：</label><el-input v-model="borCard.userdCount"></el-input></li>
-				    	<li><label>止付数量：</label><el-input v-model="borCard.stopPaymentCount"></el-input></li>
+				    	<li><label>已使用张数：</label><el-input v-on:blur="carUserd(borCard.userdCount)" v-model="borCard.userdCount"></el-input></li>
+				    	<li><label>止付数量：</label><el-input v-on:blur="carStopPayment(borCard.stopPaymentCount)" v-model="borCard.stopPaymentCount"></el-input></li>
 				    </ul>
 		  		</div> 
 		  	</el-collapse-item>
@@ -504,55 +516,61 @@
 				      <el-table-column
 				        prop="loanType"
 				        label="贷款种类"
-				        min-width="170">
+				        min-width="120">
 				        <template slot-scope="scope">
 				        	<span class="must">*</span>
-							<el-select v-model="scope.row.loanType" placeholder="请选择">
-							    <el-option
-							     v-for="item in loanTypes"
-							     :key="item.value"
-							     :label="item.label"
-							     :value="item.value">
-							   </el-option>
-							</el-select>
+				        	<el-tooltip class="item" effect="dark" :disabled="scope.row.loanType!=''" content="该项为必填项" placement="right">
+								<el-select v-model="scope.row.loanType" placeholder="请选择">
+								    <el-option
+								     v-for="item in loanTypes"
+								     :key="item.value"
+								     :label="item.label"
+								     :value="item.value">
+								   </el-option>
+								</el-select>
+							</el-tooltip>
 						</template>
 				      </el-table-column>
 				      <el-table-column
 				        prop="guaranteeType"
 				        label="担保方式"
-				        min-width="170">
+				        min-width="120">
 				        <template slot-scope="scope">
 				        	<span class="must">*</span>
-							<el-select v-model="scope.row.guaranteeType" placeholder="请选择">
-							    <el-option
-							     v-for="item in guaranteeTypes"
-							     :key="item.value"
-							     :label="item.label"
-							     :value="item.value">
-							   </el-option>
-							</el-select>
+				        	<el-tooltip class="item" effect="dark" :disabled="scope.row.guaranteeType!=''" content="该项为必填项" placement="right">
+								<el-select v-model="scope.row.guaranteeType" placeholder="请选择">
+								    <el-option
+								     v-for="item in guaranteeTypes"
+								     :key="item.value"
+								     :label="item.label"
+								     :value="item.value">
+								   </el-option>
+								</el-select>
+							</el-tooltip>
 						</template>
 				      </el-table-column>
 				      <el-table-column
 				        prop="accountStatus"
 				        label="账户状态"
-				        min-width="170">
+				        min-width="120">
 				        <template slot-scope="scope">
 				        	<span class="must">*</span>
-							<el-select v-model="scope.row.accountStatus" placeholder="请选择">
-							    <el-option
-							     v-for="item in accountStatuss"
-							     :key="item.value"
-							     :label="item.label"
-							     :value="item.value">
-							   </el-option>
-							</el-select>
+				        	<el-tooltip class="item" effect="dark" :disabled="scope.row.accountStatus!=''" content="该项为必填项" placement="right">
+								<el-select v-model="scope.row.accountStatus" placeholder="请选择">
+								    <el-option
+								     v-for="item in accountStatuss"
+								     :key="item.value"
+								     :label="item.label"
+								     :value="item.value">
+								   </el-option>
+								</el-select>
+							</el-tooltip>
 						</template>
 				      </el-table-column>
 				      <el-table-column
 				        prop="repayFrequency"
 				        label="还款频率"
-				        min-width="140">
+				        min-width="110">
 				        <template slot-scope="scope">
 							<el-select v-model="scope.row.repayFrequency" placeholder="请选择">
 							    <el-option
@@ -567,24 +585,22 @@
 				      <el-table-column
 				        prop="loanBeginDate"
 				        label="贷款发放日期"
-				        min-width="150">
+				        min-width="140">
 				        <template slot-scope="scope">
 			                <el-date-picker
 			                  v-model="scope.row.loanBeginDate"
-			                  type="date"
-			                  placeholder="选择日期">
+			                  type="date">
 			                </el-date-picker>
 			            </template>
 				      </el-table-column>
 				      <el-table-column
 				        prop="loanExpireDate"
 				        label="贷款到期日期"
-				        min-width="150">
+				        min-width="140">
 				        <template slot-scope="scope">
 			                <el-date-picker
 			                  v-model="scope.row.loanExpireDate"
-			                  type="date"
-			                  placeholder="选择日期">
+			                  type="date">
 			                </el-date-picker>
 			            </template>
 				      </el-table-column>
@@ -599,19 +615,18 @@
 				      <el-table-column
 				        prop="loanRepayDate"
 				        label="应还款日期"
-				        min-width="150">
+				        min-width="140">
 				        <template slot-scope="scope">
 			                <el-date-picker
 			                  v-model="scope.row.loanRepayDate"
-			                  type="date"
-			                  placeholder="选择日期">
+			                  type="date">
 			                </el-date-picker>
 			            </template>
 				      </el-table-column>
 				      <el-table-column
 				        prop="loanBal"
 				        label="贷款余额[元]"
-				        min-width="130">
+				        min-width="110">
 				        <template slot-scope="scope">
 						  <el-input v-model="scope.row.loanBal" placeholder="请输入内容"></el-input>
 						</template>
@@ -619,7 +634,7 @@
 				      <el-table-column
 				        prop="remainMonth"
 				        label="剩余还款月数"
-				        min-width="130">
+				        min-width="110">
 				        <template slot-scope="scope">
 						  <el-input v-model="scope.row.remainMonth" placeholder="请输入内容"></el-input>
 						</template>
@@ -643,19 +658,18 @@
 				      <el-table-column
 				        prop="lastRepayDate"
 				        label="最后一次还款日期"
-				        min-width="150">
+				        min-width="140">
 				        <template slot-scope="scope">
 			                <el-date-picker
 			                  v-model="scope.row.lastRepayDate"
-			                  type="date"
-			                  placeholder="选择日期">
+			                  type="date">
 			                </el-date-picker>
 			            </template>
 				      </el-table-column>
 				      <el-table-column
 				        prop="presentOverAmt"
 				        label="当前逾期金额"
-				        min-width="130">
+				        min-width="110">
 				        <template slot-scope="scope">
 						  <el-input v-model="scope.row.presentOverAmt" placeholder="请输入内容"></el-input>
 						</template>
@@ -663,7 +677,7 @@
 				      <el-table-column
 				        prop="overTimes"
 				        label="累计逾期次数"
-				        min-width="130">
+				        min-width="110">
 				        <template slot-scope="scope">
 						  <el-input v-model="scope.row.overTimes" placeholder="请输入内容"></el-input>
 						</template>
@@ -671,7 +685,7 @@
 				      <el-table-column
 				        prop="maxOverTimes"
 				        label="最高逾期期数"
-				        min-width="130">
+				        min-width="110">
 				        <template slot-scope="scope">
 						  <el-input v-model="scope.row.maxOverTimes" placeholder="请输入内容"></el-input>
 						</template>
@@ -712,18 +726,33 @@
 			    </template>
 		  		<div class="fuzhaixinxi">
 		  			<ol>
-				    	<li><label>信用卡每月还款[元]:</label><el-input v-model="borDebt.monthRepayAmt"></el-input></li>
+				    	<li><label>信用卡每月还款[元]:</label><el-input v-on:blur="debtTotal" v-model="borDebt.monthRepayAmt"></el-input></li>
 				    	<li><label>信用贷每月还款额[元]:</label><el-input v-model="borDebt.studentLoanAmt"></el-input></li>
-				    	<li><label>房贷每月还款额[元]:</label><el-input v-model="borDebt.houseLoanAmt"></el-input></li>
+				    	<li><label>房贷每月还款额[元]:</label><el-input v-on:blur="debtTotal" v-model="borDebt.houseLoanAmt"></el-input></li>
 				    </ol>
 				    <ol>
-				    	<li><label>车贷每月还款额[元]:</label><el-input v-model="borDebt.carLoanAmt"></el-input></li>
-				    	<li><label>其他贷款每月还款额[元]:</label><el-input v-model="borDebt.otherLoanAmt"></el-input></li>
+				    	<li><label>车贷每月还款额[元]:</label><el-input v-on:blur="debtTotal" v-model="borDebt.carLoanAmt"></el-input></li>
+				    	<li><label>其他贷款每月还款额[元]:</label><el-input v-on:blur="debtTotal" v-model="borDebt.otherLoanAmt"></el-input></li>
 				    	<li class="zongji"><label>负债合计[元]:</label><el-input v-model="borDebt.totalLoan"></el-input></li>
 				    </ol>
 				    <ol class="num">
 				    	<li><label>最近三个月信用卡/贷款申请次数:</label><el-input v-model="borDebt.loanNumber"></el-input></li>
-				    	<li><label>文字说明:</label><div><textarea>{{borDebt.remark}}</textarea></div></li>
+				    	<li>
+
+				    		<label>文字说明:</label>
+				    		<div  class="require">
+				    			<span v-show="borDebt.remark.length==200"><i>*</i>输入长度不能超过200</span>
+				    			<el-input
+								  type="textarea"
+								  :rows="2"
+								  placeholder="请输入内容"
+								  v-model="borDebt.remark"
+								  :maxlength="200"
+								  resize="none"
+								  >
+								</el-input>
+				    		</div>
+						</li>
 				    </ol>
 		  		</div> 
 		  	</el-collapse-item>
@@ -734,8 +763,21 @@
 			    </template>
 		  		<div class="fuzhaixinxi zhengxunbaogao">
 		  			<ol>
-				    	<li><label>报告来源:</label><el-input v-model="rptInfo.crSource"></el-input></li>
-					    <li><label>有无征信报告查询记录:</label>
+				    	<li>
+				    		<label>报告来源:</label>
+				    		<div  class="require" style="display:inline-block">
+				    			<span v-if="rptInfo.crSource.length==50"><i>*</i>输入长度不能超过50</span>
+				    			<el-input
+								  :rows="1"
+								  placeholder="请输入内容"
+								  v-model="rptInfo.crSource"
+								  :maxlength="50"
+								  >
+								</el-input>
+							</div>
+				    	</li>
+					    <li>
+					    	<label>有无征信报告查询记录:</label>
 					    	<el-select v-model="rptInfo.crHasRecord">
 							    <el-option
 							      v-for="item in crHasRecords"
@@ -751,8 +793,17 @@
 				    <ol>
 				    	<li>
 				    		<label class="reportLabel">报告描述:</label>
-				    		<div>
-				    			<textarea>{{rptInfo.crContent}}</textarea>
+				    		<div  class="require">
+				    			<span v-show="rptInfo.crContent.length==500"><i>*</i>输入长度不能超过500</span>
+				    			<el-input
+								  type="textarea"
+								  :rows="3"
+								  placeholder="请输入内容"
+								  v-model="rptInfo.crContent"
+								  :maxlength="500"
+								  resize="none"
+								  >
+								</el-input>
 				    		</div>
 				    	</li>
 				    </ol>
@@ -776,6 +827,7 @@
 			    <el-table
 			      :data="incomeList"
 			      style="width: 100%"
+			      class="income"
 			      highlight-current-row
 			      border
 			      @current-change="incomeCurrentChange">
@@ -788,17 +840,19 @@
 				      <el-table-column
 				        prop="incomeType"
 				        label="流水类型"
-				        min-width="170">
+				        min-width="110">
 				        <template slot-scope="scope">
 				        	<span class="must">*</span>
-							<el-select v-model="scope.row.incomeType" placeholder="请选择">
-							    <el-option
-							     v-for="item in incomeTypes"
-							     :key="item.value"
-							     :label="item.label"
-							     :value="item.value">
-							   </el-option>
-							</el-select>
+				        	<el-tooltip class="item" effect="dark" :disabled="scope.row.incomeType!=''" content="该项为必填项" placement="right">
+								<el-select v-model="scope.row.incomeType" placeholder="请选择">
+								    <el-option
+								     v-for="item in incomeTypes"
+								     :key="item.value"
+								     :label="item.label"
+								     :value="item.value">
+								   </el-option>
+								</el-select>
+							</el-tooltip>
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -806,8 +860,8 @@
 				        label="N"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n" placeholder="请输入内容" v-numbers><!-- @blur="numns(scope.row.n)"  -->
-				          <!-- <el-input v-model="scope.row.n" placeholder="请输入内容" v-number-only></el-input> -->
+				        	<!-- <input type="text" name="" v-model="scope.row.n" placeholder="请输入内容">--><!-- @blur="numns(scope.row.n)"  -->
+				          <el-input v-model="scope.row.n" @blur="moneyBlur(scope.row.n,'n')" placeholder="请输入内容"></el-input> <!--  v-number-only -->
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -815,7 +869,7 @@
 				        label="N-1"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n1" placeholder="请输入内容" v-numbers><!--v-number-only -->
+				        	<input type="text" name="" v-model="scope.row.n1" @blur="moneyBlur(scope.row.n1,'n1')" placeholder="请输入内容"><!--v-number-only -->
 						  <!-- <el-input v-model="scope.row.n1" placeholder="请输入内容"></el-input> -->
 						</template>
 				      </el-table-column>
@@ -824,7 +878,7 @@
 				        label="N-2"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n2" placeholder="请输入内容" v-numbers><!--v-numbers  v-numbers='scope.row.n2' -->
+				        	<input type="text" name="" v-model="scope.row.n2" @blur="moneyBlur(scope.row.n2,'n2')" placeholder="请输入内容"><!--v-numbers ='scope.row.n2' -->
 						  <!-- <el-input v-model="scope.row.n2" placeholder="请输入内容"></el-input> -->
 						</template>
 				      </el-table-column>
@@ -833,7 +887,7 @@
 				        label="N-3"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n3" placeholder="请输入内容" v-numbers><!--  v-numbers='scope.row.n3' -->
+				        	<input type="text" name="" v-model="scope.row.n3" @blur="moneyBlur(scope.row.n3,'n3')" placeholder="请输入内容"><!-- ='scope.row.n3' -->
 						  <!-- <el-input v-model="scope.row.n3" placeholder="请输入内容"></el-input> -->
 						</template>
 				      </el-table-column>
@@ -842,7 +896,7 @@
 				        label="N-4"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n4" placeholder="请输入内容" v-numbers><!--  v-numbers='scope.row.n4' -->
+				        	<input type="text" name="" v-model="scope.row.n4" @blur="moneyBlur(scope.row.n4,'n4')" placeholder="请输入内容"><!-- ='scope.row.n4' -->
 						  <!-- <el-input v-model="scope.row.n4" placeholder="请输入内容"></el-input> -->
 						</template>
 				      </el-table-column>
@@ -851,7 +905,7 @@
 				        label="N-5"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n5" placeholder="请输入内容" v-numbers><!--  v-numbers='scope.row.n5' -->
+				        	<input type="text" name="" v-model="scope.row.n5" @blur="moneyBlur(scope.row.n5,'n5')" placeholder="请输入内容"><!-- ='scope.row.n5' -->
 						  <!-- <el-input v-model="scope.row.n5" placeholder="请输入内容"></el-input> -->
 						</template>
 				      </el-table-column>
@@ -860,7 +914,8 @@
 				        label="计算"
 				        min-width="130">
 				        <template slot-scope="scope">
-						   <el-button @click="counted(scope.row)" type="text" size="small"><img src="../../../../static/images/jielun.png" class="icon"></el-button>
+				        	<img src="../../../../static/images/jielun.png" class="icon" @click="counted(scope.row)">
+						   <!-- <el-button @click="counted(scope.row)" type="text" size="small"><img src="../../../../static/images/jielun.png" class="icon"></el-button> -->
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -869,7 +924,7 @@
 				        min-width="130">
 				        <template slot-scope="scope">
 						  <!-- <el-input v-model="scope.row.avgIncome" placeholder="请输入内容"></el-input> -->
-						  <input type="text" name="" v-model="scope.row.avgIncome" placeholder="请输入内容" v-numbers><!-- v-numbers='scope.row.avgIncome' -->
+						  <input type="text" name="" v-model="scope.row.avgIncome" @blur="moneyBlur(scope.row.avgIncome,'avgIncome')" placeholder="请输入内容"><!--='scope.row.avgIncome' -->
 						</template>
 				      </el-table-column>
 			    </el-table>
@@ -881,7 +936,21 @@
 			    </template>
 		  		<div class="qita">
 				    <ol>
-				    	<li><label>其他:</label><div><textarea>{{otherInfo.content}}</textarea></div></li>
+				    	<li>
+				    		<label>其他:</label>
+				    		<div  class="require">
+				    			<span v-if="otherInfo.content.length==500"><i>*</i>输入长度不能超过500</span>
+				    			<el-input
+								  type="textarea"
+								  :rows="5"
+								  placeholder="请输入内容"
+								  v-model="otherInfo.content"
+								  :maxlength="500"
+								  resize="none"
+								  >
+								</el-input>
+				    		</div>
+				    	</li>
 				    </ol>
 		  		</div> 
 		  	</el-collapse-item>
@@ -927,6 +996,7 @@
 	        datas:'',
 	        numn:'',
 	        numn1:'',
+	        aaaa:'',
 	        //车贷总笔数
 	        k:0,
 
@@ -1137,19 +1207,64 @@
       		//有无征信报告查询记录
       		crHasRecords:[
 				{'value': '0' ,'label': '有'},
-				{'value': '1' ,'label': '否'}
+				{'value': '1' ,'label': '无'}
       		],
       		//弹框
       		layer:false,
       		info:'',
       		infoLyer:false,
+      		ifFull:'', // 标志是否全屏
 	      };
 	    },
+		props:['isFull'],
 	    mounted(){
+	    	//this.coming();
 			//一进入页面就发送请求
 			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
 			this.applyId=this.taskInWaitting.applyId;
 			this.request(this.taskInWaitting.applyId);
+
+	  		if(this.isFull == false){// 分屏
+	  			//信用卡使用总况
+	  			$(".xinyongka").width('948px');
+	  			$(".xinyongka ul li div").width('150px');
+	  			$(".xinyongka ul li div input").width('150px');
+	  			//负债信息
+	  			$(".fuzhaixinxi").width('948px');
+	  			$(".fuzhaixinxi ol li div").width('150px');
+	  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 160px )');
+	  			$(".fuzhaixinxi ol li div.require div").width('100%');
+	  			$(".fuzhaixinxi ol li div input").width('150px');
+	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 155px )',"padding-right":'calc( 16.6% - 155px )'});
+	  			//征询报告
+	  			$(".zhengxunbaogao ol li div").width('150px');
+	  			$(".zhengxunbaogao ol li div.require div").width('150px');
+	  			$(".zhengxunbaogao ol li div.require input").width('150px');
+	  			$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) div").width('150px');
+	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 155px )',"padding-right":'calc( 49.9% - 155px )'});
+	  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require").width('calc( 100% - 160px )');
+	  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require div").width('100%');
+	  			
+	  		}else if(this.isFull == true){// 全屏
+	  			$(".xinyongka").width('100%');
+	  			$(".xinyongka ul li div").width('200px');
+	  			$(".xinyongka ul li div input").width('200px');
+	  			//负债信息
+	  			$(".fuzhaixinxi").width('100%');
+	  			$(".fuzhaixinxi ol li div").width('200px');
+	  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 160px )');
+	  			$(".fuzhaixinxi ol li div.require div").width('100%');
+	  			$(".fuzhaixinxi ol li div input").width('200px');
+	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 180px )',"padding-right":'calc( 16.6% - 180px )'});
+	  			//征询报告
+	  			$(".zhengxunbaogao ol li div.require").width('200px');
+	  			$(".zhengxunbaogao ol li div.require div").width('200px');
+	  			$(".zhengxunbaogao ol li div.require input").width('200px');
+	  			$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) div").width('200px');
+	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 180px )',"padding-right":'calc( 49.9% - 180px )'});
+	  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require").width('calc( 100% - 160px )');
+	  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require div").width('100%');
+	  		}
 		},
 	    methods:{
 	    	request(param){
@@ -1741,7 +1856,226 @@
 			    console.log(newNum);
 
 			},*/
-
+			/*银行卡使用总况 去焦点时判断只能显示数字并且最大为999*/
+			carNum(num){
+				if(num!=null && num!=""){
+					if(isNaN(num)){
+						this.borCard.cardCount='';
+						//alert(num);
+					}else if(num<=0){
+						this.borCard.cardCount=0
+					}else if(num<0.5){
+						this.borCard.cardCount=0
+					}else if(1>num>0.5){
+						this.borCard.cardCount=1
+					}else if(num>999){
+						this.borCard.cardCount=999;
+					}
+				}
+			},
+			carNormal(num){
+				if(num!=null && num!=""){
+					if(isNaN(num)){
+						this.borCard.normalCount='';
+						//alert(num);
+					}else if(num<=0){
+						this.borCard.normalCount=0
+					}else if(num<0.5){
+						this.borCard.normalCount=0
+					}else if(1>num>0.5){
+						this.borCard.normalCount=1
+					}else if(num>999){
+						this.borCard.normalCount=999;
+					}
+				}
+			},
+			carBadDebt(num){
+				if(num!=null && num!=""){
+					if(isNaN(num)){
+						this.borCard.badDebtCount='';
+						//alert(num);
+					}else if(num<=0){
+						this.borCard.badDebtCount=0
+					}else if(num<0.5){
+						this.borCard.badDebtCount=0
+					}else if(1>num>0.5){
+						this.borCard.badDebtCount=1
+					}else if(num>999){
+						this.borCard.badDebtCount=999;
+					}
+				}
+			},
+			carNouse(num){
+				if(num!=null && num!=""){
+					if(isNaN(num)){
+						this.borCard.nouseCount='';
+						//alert(num);
+					}else if(num<=0){
+						this.borCard.nouseCount=0
+					}else if(num<0.5){
+						this.borCard.nouseCount=0
+					}else if(1>num>0.5){
+						this.borCard.nouseCount=1
+					}else if(num>999){
+						this.borCard.nouseCount=999;
+					}
+				}
+			},
+			carFreeze(num){
+				if(num!=null && num!=""){
+					if(isNaN(num)){
+						this.borCard.freezeCount='';
+						//alert(num);
+					}else if(num<=0){
+						this.borCard.freezeCount=0
+					}else if(num<0.5){
+						this.borCard.freezeCount=0
+					}else if(1>num>0.5){
+						this.borCard.freezeCount=1
+					}else if(num>999){
+						this.borCard.freezeCount=999;
+					}
+				}
+			},
+			carCancel(num){
+				if(num!=null && num!=""){
+					if(isNaN(num)){
+						this.borCard.cancelCount='';
+						//alert(num);
+					}else if(num<=0){
+						this.borCard.cancelCount=0
+					}else if(num<0.5){
+						this.borCard.cancelCount=0
+					}else if(1>num>0.5){
+						this.borCard.cancelCount=1
+					}else if(num>999){
+						this.borCard.cancelCount=999;
+					}
+				}
+			},
+			carUserd(num){
+				if(num!=null && num!=""){
+					if(isNaN(num)){
+						this.borCard.userdCount='';
+						//alert(num);
+					}else if(num<=0){
+						this.borCard.userdCount=0
+					}else if(num<0.5){
+						this.borCard.userdCount=0
+					}else if(1>num>0.5){
+						this.borCard.userdCount=1
+					}else if(num>999){
+						this.borCard.userdCount=999;
+					}
+				}
+			},
+			carStopPayment(num){
+				if(num!=null && num!=""){
+					if(isNaN(num)){
+						this.borCard.stopPaymentCount='';
+						//alert(num);
+					}else if(num<=0){
+						this.borCard.stopPaymentCount=0
+					}else if(num<0.5){
+						this.borCard.stopPaymentCount=0
+					}else if(1>num>0.5){
+						this.borCard.stopPaymentCount=1
+					}else if(num>999){
+						this.borCard.stopPaymentCount=999;
+					}
+				}
+			},
+			debtTotal(){
+				this.borDebt.totalLoan=this.borDebt.monthRepayAmt+this.borDebt.houseLoanAmt+this.borDebt.carLoanAmt+this.borDebt.otherLoanAmt
+			},
+			moneyBlur: function(value, flag) {
+				console.log(value);
+			    // 无数据
+			    if (!value) {
+			        switch (flag) {
+			            case 'n':
+			                this.scope.row.n = '';
+			                break;
+			            case 'n1':
+			                this.scope.row.n1 = '';
+			                break;
+			            case 'n2':
+			                this.scope.row.n2 = '';
+			                break;
+			            case 'n3':
+			                this.scope.row.n3 = '';
+			                break;
+			            case 'n4':
+			                this.scope.row.n4 = '';
+			                break;
+			            case 'n5':
+			                this.scope.row.n5 = '';
+			                break;
+			            case 'avgIncome':
+			                this.scope.row.avgIncome = '';
+			                break;
+			        }
+			    }
+			    // 有数据
+			    if (value) {
+			    	console.log(value);
+			        // 传进来的值先按'.'拆分,取整数位,再replace ','
+			        value = value.split('.')[0].replace(/,/, '')
+			        // 正则判断数字  [0-9] +至少一次 , 第一位为0 不用处理
+			        //console.log(this.scope.row.n);
+			        if (/^[0-9]+$/g.test(Number(value))) {
+			            switch (flag) {
+			                case 'n':
+			                    this.scope.row.n = Number(value).toLocaleString() + '.00';
+			                    break;
+			                case 'n1':
+			                    this.scope.row.n1 = Number(value).toLocaleString() + '.00';
+			                    break;
+			                case 'n2':
+			                    this.scope.row.n2 = Number(value).toLocaleString() + '.00';
+			                    break;
+			                case 'n3':
+			                    this.scope.row.n3 = Number(value).toLocaleString() + '.00';
+			                    break;
+			                case 'n4':
+			                    this.scope.row.n4 = Number(value).toLocaleString() + '.00';
+			                    break;
+			                case 'n5':
+			                    this.scope.row.n5 = Number(value).toLocaleString() + '.00';
+			                    break;
+			                case 'avgIncome':
+			                    this.scope.row.avgIncome = Number(value).toLocaleString() + '.00';
+			                    break;
+			            }
+			        } else {
+			            console.log('错误提示')
+			            // 显示错误提示
+			            switch (flag) {
+			                case 'n':
+			                    this.scope.row.n = '';
+			                    break;
+			                case 'n1':
+			                    this.scope.row.n1 = '';
+			                    break;
+			                case 'n2':
+			                    this.scope.row.n2 = '';
+			                    break;
+			                case 'n3':
+			                    this.scope.row.n3 = '';
+			                    break;
+			                case 'n4':
+			                    this.scope.row.n4 = '';
+			                    break;
+			                case 'n5':
+			                    this.scope.row.n5 = '';
+			                    break;
+			                case 'avgIncome':
+			                    this.scope.row.avgIncome = '';
+			                    break;
+			            }
+			        }
+			    }
+			},
 	    },
 	    directives: {
 	    // 指令的定义
@@ -1791,47 +2125,7 @@
                          console.log(el.value);
                     };
                     el.addEventListener('blur', el.handler);
-                    /*el.addEventListener('blur',function () {
-                        let value;
-                        function formatNumber(num,cent,isThousand) {
-                            var num = num.toString().replace(/\$|\,/g,'');
-
-                            // 检查传入数值为数值类型
-                            if(isNaN(num))
-                                num = "0";
-
-                            // 获取符号(正/负数)
-                            let sign = (num == (num = Math.abs(num)));
-
-                            num = Math.floor(num*Math.pow(10,cent)+0.50000000001);  // 把指定的小数位先转换成整数.多余的小数位四舍五入
-                            let cents = num%Math.pow(10,cent);              // 求出小数位数值
-                            num = Math.floor(num/Math.pow(10,cent)).toString();   // 求出整数位数值
-                            cents = cents.toString();               // 把小数位转换成字符串,以便求小数位长度
-
-                            // 补足小数位到指定的位数
-                            while(cents.length<cent)
-                                cents = "0" + cents;
-
-                            if(isThousand) {
-                                // 对整数部分进行千分位格式化.
-                                for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
-                                    num = num.substring(0,num.length-(4*i+3))+','+ num.substring(num.length-(4*i+3));
-                            }
-
-                            if (cent > 0)
-                                return (((sign)?'':'-') + num + '.' + cents);
-                            else
-                                return (((sign)?'':'-') + num);
-                            };
-                        console.log(formatNumber(el.value,2,0));
-                        (function(){
-                            value = formatNumber(el.value,2,0)
-                            console.log(value);
-                            return value
-                        })()
-                        el.value =value
-                         console.log(el.value);
-                    })*/
+                    
                 },
                 update:function (el,binding,vnode) {
                     if(el.value !== ''){
@@ -1839,9 +2133,6 @@
                         console.log(el.value);
                     }
                 },
-                /*unbind: function(el) {
-                    el.removeEventListener('blur', el.handler)
-                }*/
             },
 			/*numberOnly: {
 	            bind: function(el) {
@@ -1876,6 +2167,53 @@
 	        },*/
 
 		},
+		watch:{
+		  	isFull:function(val){
+		  		console.log(this.isFull);
+		  		if(val == false){// 分屏
+		  			//信用卡使用总况
+		  			$(".xinyongka").width('948px');
+		  			$(".xinyongka ul li div").width('150px');
+		  			$(".xinyongka ul li div input").width('150px');
+		  			//负债信息
+		  			$(".fuzhaixinxi").width('948px');
+		  			$(".fuzhaixinxi ol li div").width('150px');
+		  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 160px )');
+		  			$(".fuzhaixinxi ol li div.require div").width('100%');
+		  			$(".fuzhaixinxi ol li div input").width('150px');
+		  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 155px )',"padding-right":'calc( 16.6% - 155px )'});
+		  			//征询报告
+		  			$(".zhengxunbaogao ol li div").width('150px');
+		  			$(".zhengxunbaogao ol li div.require div").width('150px');
+		  			$(".zhengxunbaogao ol li div.require input").width('150px');
+		  			$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) div").width('150px');
+		  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 155px )',"padding-right":'calc( 49.9% - 155px )'});
+		  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require").width('calc( 100% - 160px )');
+		  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require div").width('100%');
+		  			
+		  		}else if(val == true){// 全屏
+		  			$(".xinyongka").width('100%');
+		  			$(".xinyongka ul li div").width('200px');
+		  			$(".xinyongka ul li div input").width('200px');
+		  			//负债信息
+		  			$(".fuzhaixinxi").width('100%');
+		  			$(".fuzhaixinxi ol li div").width('200px');
+		  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 160px )');
+		  			$(".fuzhaixinxi ol li div.require div").width('100%');
+		  			$(".fuzhaixinxi ol li div input").width('200px');
+		  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 180px )',"padding-right":'calc( 16.6% - 180px )'});
+		  			//征询报告
+		  			$(".zhengxunbaogao ol li div.require").width('200px');
+		  			$(".zhengxunbaogao ol li div.require div").width('200px');
+		  			$(".zhengxunbaogao ol li div.require input").width('200px');
+		  			$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) div").width('200px');
+		  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 180px )',"padding-right":'calc( 49.9% - 180px )'});
+		  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require").width('calc( 100% - 160px )');
+		  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require div").width('100%');
+		  		}
+		  	}
+
+		},
 	}
 </script>
 <style type="text/css" scoped>
@@ -1884,7 +2222,8 @@
 		height: 100%;
 		background-color: #fafbfc;
 		font-size: 14px;
-		min-width: 1258px;
+		min-width: 1327px;
+		 /*min-width: 990px; */
 	}
 	.left{
 		float: left;
@@ -1932,7 +2271,7 @@
 	}
 	/* 信用卡使用总况 */
 	.xinyongka{
-		width: 100%;
+		width: 948px;
 	}
 	.xinyongka ul{
 		float: left;
@@ -1942,6 +2281,7 @@
 	}
 	.xinyongka ul li{
 		margin-top: 20px;
+		min-width: 270px;
 	}
 	.xinyongka ul li label{
 		width: 120px;
@@ -1949,14 +2289,25 @@
 		text-align: right;
 		color: #475669;
 	}
+	.xinyongka ul li div{
+		width: 150px;
+	}
+	.xinyongka ul li div input{
+		width: 150px;
+	}
 	/* 贷款总况 */
 	.daikuanzongkuang li p{
 		width: 180px;
 		height: 30px;
 		display: inline-block;
+		text-align: left;
+		padding-left: 13px;
 	}
 	/* 负债信息 */
-	.fuzhaixinxi,.fuzhaixinxi ol{
+	.fuzhaixinxi{
+		width: 948px;
+	}
+	.fuzhaixinxi ol{
 		width: 100%;
 	}
 	.fuzhaixinxi ol li{
@@ -1972,6 +2323,13 @@
 		padding-right: 5px;
 		color: #475669;
 	}
+	.fuzhaixinxi ol li div{
+		width: 150px;
+	}
+	.fuzhaixinxi ol li div input{
+		width: 150px;
+		padding-left:10px;
+	}
 	/* 负债信息：负债合计 */
 	.fuzhaixinxi ol li.zongji input{
 		border: none;
@@ -1986,25 +2344,26 @@
 	ol.num li:nth-of-type(2){
 		width: 66.6%;
 		text-align: left;
-		padding-left: calc( 16.6% - 208.5px );
-		
+		padding: 0 calc( 16.6% - 155px );	
 	}
 	ol.num li:nth-of-type(2) label{
-		padding-top: 10px
-		
+		height: 54px; 
+		line-height: 54px;
+		float: left;
 	}
 	ol.num li:nth-of-type(2) textarea{
-		width: 640px;
+		width: 100%;
 		border: 1px solid #d8dce5; 
-		height: 50px;
 		border-radius: 4px;
-		position: absolute;
-		top: -30px;
-		padding-top: 5px;
+		padding:5px 10px;
 	}
 	ol.num li:nth-of-type(2) div{
-		position: relative;
+		/* width: 640px; */
+		width: calc( 100% - 160px );
 		display: inline-block;
+	}
+	ol.num li:nth-of-type(2) div div{
+		width: 100%;
 	}
 	/* 征询报告 */
 	.zhengxunbaogao ol{
@@ -2013,19 +2372,21 @@
 	.zhengxunbaogao ol:nth-of-type(2) li{
 		width: 100%;
 		text-align: left;
-		padding-left: calc( 16.6% - 208.5px );
-		margin-bottom: 20px;
+		padding-right: calc( 49.9% - 155px );
+		padding-left: calc( 16.6% - 155px );
+		margin-bottom: 10px;
+	}
+	.zhengxunbaogao ol:nth-of-type(2) li label{
+		height: 75px;
+		line-height: 75px;
 	}
 	.zhengxunbaogao ol:nth-of-type(2) li div{
 		display: inline-block;
-		height: 50px;
-		border: 1px solid #d8dce5; 
-		width: 700px;
+		/* width: 640px; */
+		width: calc( 100% - 160px );
 	}
-	.zhengxunbaogao ol:nth-of-type(2) li div textarea{
-		width: 696px;
-		padding: 5px 5px 0 5px;
-		color: #475669;
+	.zhengxunbaogao ol:nth-of-type(2) li div div{
+		width: 100%;
 	}
 	.reportLabel{
 		float: left;
@@ -2038,7 +2399,7 @@
 	}
 	.qita ol li{
 		width: 100%;
-		height: 240px;
+		height: 117px;
 		margin-top: 20px;
 	}
 	.qita ol div{
@@ -2046,8 +2407,8 @@
 		width: 70%;
 	}
 	.qita ol label{
-		height: 206px;
-		line-height: 206px;
+		height: 117px;
+		line-height: 117px;
 		display: inline-block;
 		float: left;
 		margin:0 10px 0 20px;
@@ -2063,7 +2424,7 @@
 	/* 必填 */
 	.must{
 		color:#ff7676;
-		font-size: 12px;
+		font-size: 14px;
 	}
 	/* 确定按钮 */
 	.wattingButton button{
@@ -2132,5 +2493,22 @@
 	}
 	.layer .layerbox .infoButton button{
 		float: right;
+	}
+	.require{
+		position: relative;
+	}
+	.require span{
+		position: absolute;
+		left: 10px;
+		top: -17px;
+		font-size: 12px;
+		color: #ff7676;
+		display: inline-block;
+		height: 17px;
+		line-height: 17px;
+	}
+	.require span i{
+		padding-right: 2px;
+		font-style: normal;
 	}
 </style>

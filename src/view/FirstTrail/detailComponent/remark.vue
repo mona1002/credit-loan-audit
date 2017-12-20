@@ -16,11 +16,6 @@
 		        </span>
 		    </span>
 		</div>
-		<!-- <div class="remarkIcon">
-			<i class="el-icon-circle-plus icon" @click="add"><span>添加</span></i>
-			<i class="el-icon-edit icon" @click="change"><span>修改</span></i>
-			<i class="el-icon-remove icon" @click="delet"><span>删除</span></i>
-		</div> -->
 		<div class="taskWtable">
 			<el-table :data="tableData" height="710" style="width: 100%" 
 				:default-sort = "{prop: 'date', order: 'descending'}" 
@@ -33,7 +28,7 @@
 			      type="index"
 			      :index='1'
 			      label="序号"
-			      min-width="70"
+			      min-width="50"
 			      >
 			    </el-table-column>
 			    <el-table-column

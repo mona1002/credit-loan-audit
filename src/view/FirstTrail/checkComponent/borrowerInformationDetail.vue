@@ -17,6 +17,7 @@
 				      <el-table-column
 				        type="index"
 				      	:index='1'
+				      	label="序号"
 				      	min-width="50" >
 				      </el-table-column>
 				      <el-table-column
@@ -93,12 +94,13 @@
 				      <el-table-column
 				        type="index"
 				      	:index='1' 
+				      	label="序号"
 				      	min-width="50">
 				      </el-table-column>
 				      <el-table-column
 				        prop="carPrice"
 				        label="车辆购置价[元]"
-				        min-width="100">
+				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
 				        prop="isYearCheck"
@@ -123,7 +125,7 @@
 				      <el-table-column
 				        prop="loanPeriod"
 				        label="贷款期限[月]"
-				        min-width="100">
+				        min-width="110">
 				      </el-table-column>
 				      <el-table-column
 				        prop="monthlyPay"
@@ -133,7 +135,7 @@
 				      <el-table-column
 				        prop="restLoans"
 				        label="贷款余额[月]"
-				        min-width="100">
+				        min-width="110">
 				      </el-table-column>
 				      <el-table-column
 				        prop="carNo"
@@ -143,7 +145,7 @@
 				      <el-table-column
 				        prop="buyInsur"
 				        label="车辆易购保险"
-				        min-width="100">
+				        min-width="110">
 				      </el-table-column>
 				      <el-table-column
 				        prop="buyDate"
@@ -269,7 +271,8 @@
 			      border>
 				      <el-table-column
 				        type="index"
-				      	:index='1'	 
+				      	:index='1'
+				      	label="序号"	 
 				      	min-width="50">
 				      </el-table-column>
 				      <el-table-column
@@ -363,22 +366,22 @@
 			    </template>
 		  		<div class="xinyongka daikuanzongkuang">
 		  			<ul>
-				    	<li><label>车贷共有笔数:</label><p>{{loanInfo.carLoanTotal}}</p></li>
-				    	<li><label>信用贷总笔数:</label><p>{{loanInfo.studentLoanTotal}}</p></li>
-				    	<li><label>房贷总笔数:</label><p>{{loanInfo.houseLoanTotal}}</p></li>
-				    	<li><label>其他贷款总笔数:</label><p>{{loanInfo.otherLoanTotal}}</p></li>
+				    	<li><label>车贷共有笔数:</label><span>{{loanInfo.carLoanTotal}}</span></li>
+				    	<li><label>信用贷总笔数:</label><span>{{loanInfo.studentLoanTotal}}</span></li>
+				    	<li><label>房贷总笔数:</label><span>{{loanInfo.houseLoanTotal}}</span></li>
+				    	<li><label>其他贷款总笔数:</label><span>{{loanInfo.otherLoanTotal}}</span></li>
 				    </ul>
 				    <ul>
-				    	<li><label>车贷现存笔数:</label><p>{{loanInfo.carLoanNoPayoff}}</p></li>
-				    	<li><label>信用贷现存笔数:</label><p>{{loanInfo.studentLoanNoPayoff}}</p></li>
-				    	<li><label>房贷现存笔数:</label><p>{{loanInfo.houseLoanNoPayoff}}</p></li>
-				    	<li><label>其他贷现存笔数:</label><p>{{loanInfo.otherLoanNoPayoff}}</p></li>
+				    	<li><label>车贷现存笔数:</label><span>{{loanInfo.carLoanNoPayoff}}</span></li>
+				    	<li><label>信用贷现存笔数:</label><span>{{loanInfo.studentLoanNoPayoff}}</span></li>
+				    	<li><label>房贷现存笔数:</label><span>{{loanInfo.houseLoanNoPayoff}}</span></li>
+				    	<li><label>其他贷现存笔数:</label><span>{{loanInfo.otherLoanNoPayoff}}</span></li>
 				    </ul>
 				    <ul>
-				    	<li><label>车贷结清笔数:</label><p>{{loanInfo.carLoanPayoff}}</p></li>
-				    	<li><label>信用贷结清笔数:</label><p>{{loanInfo.studentLoanPayoff}}</p></li>
-				    	<li><label>房贷结清笔数:</label><p>{{loanInfo.houseLoanPayoff}}</p></li>
-				    	<li><label>其他贷款结清笔数:</label><p>{{loanInfo.otherLoanPayoff}}</p></li>
+				    	<li><label>车贷结清笔数:</label><span>{{loanInfo.carLoanPayoff}}</span></li>
+				    	<li><label>信用贷结清笔数:</label><span>{{loanInfo.studentLoanPayoff}}</span></li>
+				    	<li><label>房贷结清笔数:</label><span>{{loanInfo.houseLoanPayoff}}</span></li>
+				    	<li><label>其他贷款结清笔数:</label><span>{{loanInfo.otherLoanPayoff}}</span></li>
 				    </ul>
 		  		</div> 
 		  	</el-collapse-item>
@@ -391,18 +394,44 @@
 			    </template>
 		  		<div class="fuzhaixinxi">
 		  			<ol>
-				    	<li><label>信用卡每月还款[元]:</label><el-input v-model="borDebt.monthRepayAmt"></el-input></li>
-				    	<li><label>信用贷每月还款额[元]:</label><el-input v-model="borDebt.studentLoanAmt"></el-input></li>
-				    	<li><label>房贷每月还款额[元]:</label><el-input v-model="borDebt.houseLoanAmt"></el-input></li>
+				    	<li>
+				    		<label>信用卡每月还款[元]:</label>
+				    		<span>{{borDebt.monthRepayAmt}}</span>
+				    		<!-- <el-input v-model="borDebt.monthRepayAmt"></el-input> -->
+				    	</li>
+				    	<li>
+				    		<label>信用贷每月还款额[元]:</label>
+				    		<span>{{borDebt.studentLoanAmt}}</span>
+				    		<!-- <el-input v-model="borDebt.studentLoanAmt"></el-input> -->
+				    	</li>
+				    	<li>
+				    		<label>房贷每月还款额[元]:</label>
+				    		<span>{{borDebt.houseLoanAmt}}</span>
+				    		<!-- <el-input v-model="borDebt.houseLoanAmt"></el-input> -->
+				    	</li>
 				    </ol>
 				    <ol>
-				    	<li><label>车贷每月还款额[元]:</label><el-input v-model="borDebt.carLoanAmt"></el-input></li>
-				    	<li><label>其他贷款每月还款额[元]:</label><el-input v-model="borDebt.otherLoanAmt"></el-input></li>
-				    	<li class="zongji"><label>负债合计[元]:</label><el-input v-model="borDebt.totalLoan"></el-input></li>
+				    	<li>
+				    		<label>车贷每月还款额[元]:</label>
+				    		<span>{{borDebt.carLoanAmt}}</span>
+				    		<!-- <el-input v-model="borDebt.carLoanAmt"></el-input></li> -->
+				    	<li>
+				    		<label>其他贷款每月还款额[元]:</label>
+				    		<span>{{borDebt.otherLoanAmt}}</span>
+				    		<!-- <el-input v-model="borDebt.otherLoanAmt"></el-input></li> -->
+				    	<li class="zongji">
+				    		<label>负债合计[元]:</label>
+				    		<span>{{borDebt.totalLoan}}</span>
+				    		<!-- <el-input v-model="borDebt.totalLoan"></el-input> -->
+				    	</li>
 				    </ol>
 				    <ol class="num">
-				    	<li><label>最近三个月信用卡/贷款申请次数:</label><el-input v-model="borDebt.loanNumber"></el-input></li>
-				    	<li><label>文字说明:</label><div><textarea>{{borDebt.remark}}</textarea></div></li>
+				    	<li>
+				    		<label>最近三个月信用卡/贷款申请次数:</label>
+				    		<span>{{borDebt.loanNumber}}</span>
+				    		<!-- <el-input v-model="borDebt.loanNumber"></el-input> -->
+				    	</li>
+				    	<li><label>文字说明:</label><div v-bind:title="borDebt.remark">{{borDebt.remark}}</div></li>
 				    </ol>
 		  		</div> 
 		  	</el-collapse-item>
@@ -415,14 +444,28 @@
 			    </template>
 		  		<div class="fuzhaixinxi zhengxunbaogao">
 		  			<ol>
-				    	<li><label>报告来源:</label><el-input v-model="rptInfo.crSource"></el-input></li>
-					    <li><label>有无征信报告查询记录:</label>
-					    	<el-input v-model="rptInfo.crHasRecord"></el-input>
+				    	<li>
+				    		<label>报告来源:</label>
+				    		<span v-bind:title="rptInfo.crSource">{{rptInfo.crSource}}</span>
+				    		<!-- <el-input v-model="rptInfo.crSource"></el-input> -->
+				    	</li>
+					    <li>
+					    	<label>有无征信报告查询记录:</label>
+					    	<span>{{rptInfo.crHasRecord}}</span>
+					    	<!-- <el-input v-model="rptInfo.crHasRecord"></el-input> -->
 						</li>
-				    	<li><label>近6个月内信用报告查询次数:</label><el-input v-model="rptInfo.crRecordTimes"></el-input></li>
+				    	<li>
+				    		<label>近6个月内信用报告查询次数:</label>
+				    		<span>{{rptInfo.crRecordTimes}}</span>
+				    		<!-- <el-input v-model="rptInfo.crRecordTimes"></el-input> -->
+				    	</li>
 				    </ol>
 				    <ol>
-				    	<li><label>报告描述:</label><div><textarea>{{rptInfo.crContent}}</textarea></div></li>
+				    	<li>
+				    		<label>报告描述:</label>
+				    		<!-- <span>{{rptInfo.crContent}}</span> -->
+				    		<div v-bind:title="rptInfo.crContent">{{rptInfo.crContent}}</div>
+				    	</li>
 				    </ol>
 		  		</div> 
 		  	</el-collapse-item>
@@ -441,6 +484,7 @@
 				      <el-table-column
 				        type="index"
 				      	:index='1' 
+				      	label="序号"
 				      	min-width='50'>
 				      </el-table-column>
 				      <el-table-column
@@ -490,7 +534,7 @@
 			    </template>
 		  		<div class="qita">
 				    <ol>
-				    	<li><label>其他:</label><div><textarea>{{otherInfo.content}}</textarea></div></li>
+				    	<li><label>其他:</label><div v-bind:title="otherInfo.content">{{otherInfo.content}}</div></li>
 				    </ol>
 		  		</div> 
 		  	</el-collapse-item>
@@ -706,7 +750,7 @@
 		height: 100%;
 		background-color: #fafbfc;
 		font-size: 14px;
-		min-width: 1366px;
+		min-width: 926px;
 	}
 	/* 折叠面板头部背景色 */
 	.icon_hat{
@@ -718,13 +762,13 @@
 	}
 	/* 信用卡使用总况 */
 	.xinyongka{
-		width: 100%;
+		width: 926px;
 	}
 	.xinyongka ul{
 		float: left;
 		width: 33.3%;
 		margin-bottom: 20px;
-		text-align: center;
+		/* text-align: center; */
 	}
 	.xinyongka ul li{
 		margin-top: 20px;
@@ -734,11 +778,13 @@
 		display: inline-block;
 		text-align: right;
 	}
+	.daikuanzongkuang{
+		width: 926px;
+	}
 	/* 贷款总况 */
-	.daikuanzongkuang li p{
-		width: 180px;
-		height: 30px;
-		display: inline-block;
+	.xinyongka.daikuanzongkuang ul li label{
+		padding-right: 10px;
+		width: 128px;
 	}
   table.mytable{
     /* border-width: 1px;
@@ -751,21 +797,18 @@
         border: 1px solid #d8dce5;  
         background-color: #e6ebf5;
   }
-  /* table.mytable td {
-        border-width: 1px;
-        padding: 8px;
-        border-style: solid;
-        border-color: #666666;
-  } */
 /* 负债信息 */
-.fuzhaixinxi,.fuzhaixinxi ol{
+.fuzhaixinxi{
+	width: 926px;
+}
+.fuzhaixinxi ol{
 	width: 100%;
 }
 .fuzhaixinxi ol li{
 	width: 33.3%;
 	float: left;
 	margin-top:20px;
-	text-align: center;
+	/* text-align: center; */
 }
 .fuzhaixinxi ol li label{
 	display: inline-block;
@@ -781,44 +824,80 @@
 ol.num li{
 	margin-bottom: 10px;
 }
+ol.num li:nth-of-type(1) label{
+	float: left;
+}
+ol.num li:nth-of-type(1) span{
+	height: 54px;
+	line-height: 54px;
+}
 ol.num li:nth-of-type(2){
 	width: 66.6%;
 	text-align: left;
-	padding-left: calc( 16.6% - 167px );
-	
+	padding: 0 calc( 16.6% - 155px );
 }
-ol.num li:nth-of-type(2) textarea{
-	width: 640px;
-	border: 1px solid #d8dce5; 
-	height: 50px;
-	border-radius: 4px;
-	position: absolute;
-	top: -18px;
-	padding-top: 5px;
+ol.num li:nth-of-type(2) label{
+	height: 54px;
+	line-height: 54px;
 }
 ol.num li:nth-of-type(2) div{
-	position: relative;
-	display: inline-block;
+	width: calc( 100% - 160px );
+	height: 54px;
+	float: right;
+	padding-left: 10px;
+	border: 1px solid #d8dce5; 
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	display: box;
+	line-clamp: 2;
+	box-orient: vertical;
 }
 /* 征询报告 */
 .zhengxunbaogao ol{
 	width: 100%;
+}
+.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(1) label{
+	float: left;
+}
+.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(1) span{
+	width: 142px;
+	height: 35px;
+	display: inline-block;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(3) label{
+	width: 186px;
 }
 .zhengxunbaogao ol:nth-of-type(2) li{
 	width: 100%;
 	text-align: left;
 	padding-left: calc( 16.6% - 178px );
 	margin-bottom: 20px;
+	margin-top: 0;
+}
+.zhengxunbaogao ol:nth-of-type(2) li label{
+	line-height: 75px;
+	float: left;
 }
 .zhengxunbaogao ol:nth-of-type(2) li div{
-	display: inline-block;
-	height: 50px;
+	float: left;
+	height: 75px;
 	border: 1px solid #d8dce5; 
-	width: 700px;
-}
-.zhengxunbaogao ol:nth-of-type(2) li div textarea{
-	width: 696px;
-	padding: 5px 5px 0 5px;
+	width: calc( 66.6% - 170px );
+	padding-left: 10px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	display: box;
+	line-clamp: 3;
+	box-orient: vertical;
 }
 .reportLabel{
 	float: left;
@@ -831,24 +910,30 @@ ol.num li:nth-of-type(2) div{
 }
 .qita ol li{
 	width: 100%;
-	height: 240px;
 	margin-top: 20px;
 }
 .qita ol div{
 	display: inline-block;
-	width: 70%;
+	width: calc( 66.6% - 170px );
+	height: 117px;
+	border: 1px solid #d8dce5;
+	padding-left: 10px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 5;
+	-webkit-box-orient: vertical;
+	display: box;
+	line-clamp: 5;
+	box-orient: vertical;
 }
 .qita ol label{
-	height: 206px;
-	line-height: 206px;
+	height: 117px;
+	width: 160px;
+	text-align: right;
+	line-height: 117px;
 	display: inline-block;
 	float: left;
-	margin:0 10px 0 20px;
-}
-.qita ol textarea{
-	width: 70%;
-	height: 200px;
-	border: 1px solid #d8dce5;  
-	padding:10px 0 0 10px;
+	padding-right: 10px;
 }
 </style>

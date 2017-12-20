@@ -13,6 +13,7 @@
 <script>
 // import myHead from "./view/header"
   export default {
+
     mounted(){
       // console.log(this.$refs.ddd)
       

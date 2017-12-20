@@ -503,6 +503,7 @@
 				      <el-table-column
 				        type="index"
 				      	:index='1'
+				      	label="序号"
 				      	min-width="50">
 				      </el-table-column>
 				      <el-table-column
@@ -576,6 +577,7 @@
 				      <el-table-column
 				        type="index"
 				      	:index='1'
+				      	label="序号"
 				      	min-width="50">
 				      </el-table-column>
 				      <el-table-column
@@ -758,6 +760,7 @@
 				      <el-table-column
 				        type="index"
 				      	:index='1'
+				      	label="序号"
 				      	min-width="50">
 				      </el-table-column>
 				      <el-table-column
@@ -957,7 +960,7 @@
 <style type="text/css" scoped>
 	.applicationInformationDetail{
 		width: 100%;
-		min-width: 1258px;
+		min-width: 1327px;
 		height: 100%;
 		background-color: #fafbfc;
 		font-size: 14px;
@@ -974,7 +977,7 @@
 		width: 33.3%;
 		/*margin-top: 10px;
 		 position: relative; */
-		min-width: 336px;
+		min-width: 330px;
 	}
 	ul li label{
 		width: 178px;
