@@ -10,6 +10,9 @@ Validator.updateDictionary({
 const config = {
   locale: 'zh_CN', 
   strict: true,
+  // events: 'input|blur',
   delay: 1000, 
+
 };
+
 Vue.use(VeeValidate, config);
