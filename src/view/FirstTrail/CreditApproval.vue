@@ -389,7 +389,7 @@
           <el-table :data="lcgjData" height="250" border style="width: 100%" highlight-current-row v-loading="lcgjLoading" center>
             <el-table-column type="index" label="序号" min-width="50">
             </el-table-column>
-            <el-table-column prop="taskName" label="任务节点" min-width="100">
+            <el-table-column prop="taskNameTxt" label="任务节点" min-width="100">
             </el-table-column>
             <el-table-column prop="taskTypeTxt" label="任务类型" min-width="100">
             </el-table-column>
