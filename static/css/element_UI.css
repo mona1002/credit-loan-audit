@@ -615,6 +615,9 @@ height: 40px;
 .borrowerInformation .income .el-table__body-wrapper{
   overflow: hidden;
 }
+.borrowerInformation .el-input.is-disabled .el-input__inner{
+  background: #fff;
+}
 /* 各自部分 */
 
 
