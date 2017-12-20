@@ -16,8 +16,8 @@ if (host === productionEnv) {
   host = productionEnv;
 } else if (host === releaseEnv) {
   host = releaseEnv;
-} else if (host === testEnv) {
-  host = testEnv;
+} else if (host === developmentEnv) {
+  host = developmentEnv;
   //port = 20716;
 } else {
   // host = developmentEnv;
