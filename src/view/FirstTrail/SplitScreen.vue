@@ -92,7 +92,7 @@
             <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <!-- <applicationInformation v-if=" this.tabContent2==3"></applicationInformation> -->
-            <borrowerInformation v-if=" this.tabContent2==4"></borrowerInformation>
+            <borrowerInformation v-if=" this.tabContent2==4" :isFull.sync="isFull"></borrowerInformation>
             <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
             <CreditForm v-if=" this.tabContent2==6"></CreditForm>
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
@@ -217,6 +217,8 @@
           value: '选项3',
           label: '内匹客户姓名'
         }],
+        // 测试  分屏
+        isFull:false
       }
     },
     methods: {
@@ -294,6 +296,8 @@
         this.$refs.rLeft.style.display = "none";
         this.$refs.rRight.style.width = "100%";
         // console.log(this.$refs.rRight.style.width)
+        // 传给子组件的参数  .sync 双向绑定
+        this.isFull = true;
       },
       DblScreen() {
         this.showHalfBtn = false;
@@ -301,6 +305,9 @@
         this.$refs.right_tab_ul.style.left = this.originLeft; //回到全屏之前的left值
         this.$refs.rLeft.style.display = "block";
         this.$refs.rRight.style.width = "50%";
+
+        // 传给子组件的参数  .sync 双向绑定
+        this.isFull = false;
       },
       tab1(ev, ind, val) { //   tab1 ------------------mousedown 事件
         console.log("tab1" + "---" + ind + "---" + val);

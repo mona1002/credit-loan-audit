@@ -23,7 +23,12 @@ new Vue({
   router,
   // store,
   template: '<App/>',
-  components: { App }
+  components: { App },
+  data() {
+    return {
+      isFull: false
+    }
+  }
 })
 
 // 定义全局 过滤器

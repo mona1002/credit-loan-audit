@@ -204,6 +204,9 @@ height: 40px;
   min-width: 100px;
   padding:0 0;
 }
+.borrowerInformation .xinyongka .el-input__inner,.borrowerInformation .fuzhaixinxi .el-input__inner {
+  padding-left:10px;
+}
 
 /* 借款人资料表格内容居中 */
 
@@ -231,12 +234,6 @@ height: 40px;
 .borrowerInformation ol.num li:nth-of-type(1) .el-input__inner{
     margin-top: -10px;
     position: relative;
-  }
-.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) .el-select{
-    width: 200px;
-  }
-.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) .el-select>.el-input{
-    width: 200px;
   }
 /*借款人资料 字体颜色 */
 
@@ -286,7 +283,7 @@ height: 40px;
 .borrowerInformationSetail .el-input__inner {
   height: 35px;
   border-radius: 6px;
-  width: 180px;
+  width: 150px;
 }
 /* 借款人资料表格内容 */
 .borrowerInformationSetail .el-table th{
@@ -485,57 +482,15 @@ height: 40px;
   padding-left: 5px;
 }
 
-/* 信用卡使用明细 信用卡使用总况 */
-.borrowerInformation .xinyongka .el-input{
-  max-width: 200px;
-  min-width: 150px;
-  width: calc( 100% - 120px);
-}
-.borrowerInformation .xinyongka .el-input__inner{
-  max-width: 200px;
-  min-width: 150px;
-  width: calc( 100% - 120px);
-  /* width: 200px;
-  padding-left: 13px; */
-}
-/* 借款人资料 分屏（小屏幕时） */
-  /* @media screen and (max-width: 1919px){
-    min-device-width
-    .xinyongka{
-      width: 946px;
-      min-width: 946px;
-    }
-      .xinyongka ul,.xinyongka ul li{
-        width: 270px;
-        min-width: 270px;
-      }
-      .xinyongka ul div,.xinyongka ul li div input{
-        width: 150px;
-        min-width: 150px;
-      }
-  } */
-  /* 借款人资料 分屏（小屏幕时） */
-  /* @media screen and (min-width:1920px){
-    .xinyongka{
-      width: 100%;
-      min-width: 1327px;
-    }
-      .xinyongka ul,.xinyongka ul li{
-        width: 33.3%;
-      }
-      .xinyongka ul div,.xinyongka ul li div input{
-        width: 200px;
-      }
-  } */
 
 /* 信用卡使用明细 负债信息 */
-.borrowerInformation .fuzhaixinxi .el-input{
+/* .borrowerInformation .fuzhaixinxi .el-input{
   width: 200px;
 }
 .borrowerInformation .fuzhaixinxi .el-input__inner{
   width: 200px;
   padding-left:10px;
-}
+} */
 .borrowerInformation .fuzhaixinxi ol.num li:nth-of-type(2) .el-textarea__inner{
   padding: 5px 10px;
 }
@@ -1152,11 +1107,35 @@ height: 40px;
   text-align: center;
 }
 
+.taskWatting .el-table th:nth-of-type(3) {
+  text-align: center;
+}
+
+.taskWatting .el-table__body-wrapper .el-table__body td:nth-of-type(3) {
+  text-align: center;
+}
+
+.taskWatting .el-table th:nth-of-type(4) {
+  text-align: center;
+}
+
+.taskWatting .el-table__body-wrapper .el-table__body td:nth-of-type(4) {
+  text-align: center;
+}
+
 .taskWatting .el-table th:nth-of-type(5) {
   text-align: center;
 }
 
 .taskWatting .el-table__body-wrapper .el-table__body td:nth-of-type(5) {
+  text-align: center;
+}
+
+.taskWatting .el-table th:nth-of-type(7) {
+  text-align: center;
+}
+
+.taskWatting .el-table__body-wrapper .el-table__body td:nth-of-type(7) {
   text-align: center;
 }
 
@@ -1211,6 +1190,9 @@ height: 40px;
 .mheader .el-menu{
   background-color: transparent;
   z-index: 100;
+ }
+ .mheader .el-menu--horizontal{
+  border-bottom:none;
  }
  .mheader .el-menu--horizontal .el-submenu{
   height: 70px;
