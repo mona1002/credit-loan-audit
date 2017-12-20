@@ -1,3 +1,4 @@
+console.log("里面");
 export default {
   after: (field, [target]) => ` ${field}必须在${target}之后`,
   alpha_dash: (field) => ` ${field}能够包含字母数字字符，包括破折号、下划线`,
