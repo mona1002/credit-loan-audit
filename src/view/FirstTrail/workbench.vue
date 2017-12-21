@@ -74,7 +74,7 @@
   export default {
     data() {
       return {
-        userInf:'',
+        userInf: '',
         activeNames: ['1'],
         activeNames1: ['1'],
         activeNames2: ['1'],
@@ -163,30 +163,38 @@
       // console.log(this.userCode + "================" + this.orgCode)
       // this.$route.query.picName接参数 
 
-  //  this.get("/smUser/getUserInfo").then(response => {
-    
-    this.get("http://testplatform.nuoyuan.com.cn:20717/remote/user/getUserInfo").then(response => {
+      //  this.get("/smUser/getUserInfo").then(response => {
+
+      this.get("http://testplatform.nuoyuan.com.cn:20717/remote/user/getUserInfo").then(response => {
         // axios 请求
         // console.info(response.data);
         // this.userInf=response.data;
-         this.userInf={
-           userCode:response.data.userCode,
-           orgCode:response.data.orgCode,
-         }
+        this.userInf = {
+          userCode: response.data.userCode,
+          orgCode: response.data.orgCode,
+        }
         // console.log(this.userInf.orgCode)
         // console.log(this.userInf.userCode)
-          localStorage.setItem("userInf",JSON.stringify(this.userInf));
+        localStorage.setItem("userInf", JSON.stringify(this.userInf));
+        this.post("/workFlowTaskQuery/getTaskProfile", {
+          taskStatus: "01",
+          userCode: this.userInf.userCode,
+          orgCode: this.userInf.orgCode
+        }).then(res => {
+          console.log(res.data);
+          this.tableData = res.data;
+        });
       });
 
       // this.loginPass = JSON.parse(localStorage.getItem('userInf'));
-      this.post("/workFlowTaskQuery/getTaskProfile", {
-        taskStatus: "01",
-        // userCode: "ddyy",
-        // orgCode: "021"
-      }).then(res => {
-        console.log(res.data);
-        this.tableData = res.data;
-      });
+      // this.post("/workFlowTaskQuery/getTaskProfile", {
+      //   taskStatus: "01",
+      //   // userCode: "ddyy",
+      //   // orgCode: "021"
+      // }).then(res => {
+      //   console.log(res.data);
+      //   this.tableData = res.data;
+      // });
     },
   }
 
@@ -255,9 +263,11 @@
     /* background: black; */
     background: #ededed;
   }
-.main_right .main_right_work {
-  padding-left: 0;
-}
+
+  .main_right .main_right_work {
+    padding-left: 0;
+  }
+
   .waitting {
     /* height:800px; */
     background: red;
