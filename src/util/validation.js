@@ -10,26 +10,12 @@ Validator.updateDictionary({
     }
 });
 
-
 Validator.extend('phone', {
     messages: {
       zh_CN:field => field + '手机号必须是11位手机号码',
     },
     validate: value => {
       return value.length == 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/.test(value)
-    }
-  });
-
-  Validator.extend('blank', {
-    messages: {
-      required:(field)=> "请选择"
-    },
-    validate: value => {
-        if(value =="") {
-            return false;
-        } 
-        return true;
-    
     }
   });
 
