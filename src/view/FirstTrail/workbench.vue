@@ -74,6 +74,7 @@
   export default {
     data() {
       return {
+        userInf:[],
         activeNames: ['1'],
         activeNames1: ['1'],
         activeNames2: ['1'],
@@ -166,14 +167,22 @@
     
     this.get("http://testplatform.nuoyuan.com.cn:20717/remote/user/getUserInfo").then(response => {
         // axios 请求
-        console.info(response.data);
+        // console.info(response.data);
+        this.userInf=response.data;
+         this.userInf={
+           userCode:response.data.userCode,
+           orgCode:response.data.orgCode,
+         }
+        // console.log(this.userInf.orgCode)
+        // console.log(this.userInf.userCode)
+          localStorage.setItem("userInf",JSON.stringify(userInf));
       });
 
-      this.loginPass = JSON.parse(localStorage.getItem('userInf'));
+      // this.loginPass = JSON.parse(localStorage.getItem('userInf'));
       this.post("/workFlowTaskQuery/getTaskProfile", {
         taskStatus: "01",
-        userCode: this.loginPass.userCode,
-        orgCode: this.loginPass.orgCode
+        // userCode: "ddyy",
+        // orgCode: "021"
       }).then(res => {
         console.log(res.data);
         this.tableData = res.data;
