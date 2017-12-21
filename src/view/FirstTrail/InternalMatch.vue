@@ -152,27 +152,21 @@ export default {
     this.fetchData('fixed');
     this.fetchData('company');
 
+
     // 样式处理
     if (this.isFull == true) { // 全屏
       console.log('全屏');
-      $(".internalMatch-class .mark-textarea").css("width", "98.5%")
-      $(".internalMatch-class .mark-textarea textarea").css({
-        "width": "800px",
-        "margin-left": "50px"
-      });
+      $(".internalMatch-class .mark-textarea").css("width", "800px")
+      $(".internalMatch-class .mark-textarea textarea").css("width", "800px");
       // 按钮
-      $(".internalMatch-class .mark-button").css("margin-left", "")
+      $(".internalMatch-class .mark-button").css("margin-left", "775px")
     } else if (this.isFull == false) { // 分屏
       console.log("分屏");
-      $(".internalMatch-class .mark-textarea").css("width", "50%")
-      $(".internalMatch-class .mark-textarea textarea").css(
-        "margin-left", "50px"
-      );
+      $(".internalMatch-class .mark-textarea").css("width", "600px")
+      $(".internalMatch-class .mark-textarea textarea").css("width", "600px");
       // 按钮
-      $(".internalMatch-class .mark-button").css("margin-left", "")
+      $(".internalMatch-class .mark-button").css("margin-left", "580px")
     }
-
-
   },
   methods: {
     /*
@@ -320,21 +314,16 @@ export default {
       // 样式处理
       if (this.isFull == true) { // 全屏
         console.log('全屏');
-        $(".internalMatch-class .mark-textarea").css("width", "98.5%")
-        $(".internalMatch-class .mark-textarea textarea").css({
-          "width": "800px",
-          "margin-left": "50px"
-        });
+        $(".internalMatch-class .mark-textarea").css("width", "800px")
+        $(".internalMatch-class .mark-textarea textarea").css("width", "800px");
         // 按钮
-        $(".internalMatch-class .mark-button").css("margin-left", "")
+        $(".internalMatch-class .mark-button").css("margin-left", "775px")
       } else if (this.isFull == false) { // 分屏
         console.log("分屏");
-        $(".internalMatch-class .mark-textarea").css("width", "500px")
-        $(".internalMatch-class .mark-textarea textarea").css(
-          "width", "500px"
-        );
+        $(".internalMatch-class .mark-textarea").css("width", "600px")
+        $(".internalMatch-class .mark-textarea textarea").css("width", "600px");
         // 按钮
-        $(".internalMatch-class .mark-button").css("margin-left", "")
+        $(".internalMatch-class .mark-button").css("margin-left", "580px")
       }
     }
   },
@@ -454,6 +443,12 @@ export default {
 
 
 
+
+
+
+
+
+
 /* 分页 */
 
 .internalMatch-class .tool-bar {
@@ -462,6 +457,12 @@ export default {
   padding: 10px 0 0 10px;
   margin-bottom: 10px;
 }
+
+
+
+
+
+
 
 
 
@@ -494,10 +495,16 @@ export default {
 
 .internalMatch-class .mark-textarea textarea {
   min-height: 100px;
-  max-height: 100px;
+  /*max-height: 100px;*/
   width: 800px;
   margin-left: 50px;
 }
+
+
+
+
+
+
 
 
 
@@ -534,11 +541,23 @@ export default {
 
 
 
+
+
+
+
+
+
 /* 行高 */
 
 .internalMatch-class thead tr {
   height: 40px;
 }
+
+
+
+
+
+
 
 
 
@@ -573,6 +592,12 @@ export default {
 
 
 
+
+
+
+
+
+
 /* 备注 width*/
 
 .internalMatch-class .mark-cell {
@@ -592,12 +617,24 @@ export default {
 
 
 
+
+
+
+
+
+
 /* tr */
 
 .internalMatch-class .el-table tr {
   height: 35px;
   background: #ffffff;
 }
+
+
+
+
+
+
 
 
 
