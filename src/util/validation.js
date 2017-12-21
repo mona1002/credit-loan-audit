@@ -1,5 +1,6 @@
 import Vue from 'vue';
-import VeeValidate,{Validator} from 'vee-validate';
+// import VeeValidate,{Validator} from 'vee-validate';
+import VeeValidate,{Validator}  from 'vee-validate/dist/vee-validate.esm.js'
 import zh from 'vee-validate/dist/locale/zh_CN'
 import messages from '../assets/js/zh_CN';
 
@@ -10,14 +11,6 @@ Validator.updateDictionary({
     }
 });
 
-Validator.extend('phone', {
-    messages: {
-      zh_CN:field => field + '手机号必须是11位手机号码',
-    },
-    validate: value => {
-      return value.length == 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/.test(value)
-    }
-  });
 
 const config = {
   locale: 'zh_CN', 
@@ -26,5 +19,6 @@ const config = {
   delay: 1000, 
 
 };
+
 
 Vue.use(VeeValidate, config);
