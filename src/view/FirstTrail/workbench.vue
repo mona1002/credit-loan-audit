@@ -178,8 +178,8 @@
         localStorage.setItem("userInf", JSON.stringify(this.userInf));
         this.post("/workFlowTaskQuery/getTaskProfile", {
           taskStatus: "01",
-          userCode: this.userInf.userCode,
-          orgCode: this.userInf.orgCode
+          // userCode: this.userInf.userCode,
+          // orgCode: this.userInf.orgCode
         }).then(res => {
           console.log(res.data);
           this.tableData = res.data;
