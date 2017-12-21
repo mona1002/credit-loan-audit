@@ -7,7 +7,7 @@ import "babel-polyfill"
 // import store from './store/store'
 import qs from 'qs'
 import http from '@/util/http' 
-import validation from '@/util/validation' 
+// import validation from '@/util/validation' 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import $ from 'jquery'
