@@ -2,7 +2,7 @@
 <template>
 	<div class="borrowerInformation">
 		<el-collapse v-model="activeNames" @change="handleChange">
-			<el-collapse-item name="1">
+			<el-collapse-item title="房产信息" name="1">
 				<template slot="title">
 						<div class="left">
 					      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
