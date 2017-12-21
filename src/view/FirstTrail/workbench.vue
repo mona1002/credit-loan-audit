@@ -163,7 +163,7 @@
       // this.$route.query.picName接参数 
 
   //  this.get("/smUser/getUserInfo").then(response => {
-    this.get("http://codeplatform.nuoyuan.com.cn/remote/user/getUserInfo").then(response => {
+    this.get("http://codeplatform.nuoyuan.com.cn:20717/remote/user/getUserInfo").then(response => {
         // axios 请求
         console.info(response.data);
       });
