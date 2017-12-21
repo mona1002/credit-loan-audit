@@ -181,8 +181,8 @@
       // this.loginPass = JSON.parse(localStorage.getItem('userInf'));
       this.post("/workFlowTaskQuery/getTaskProfile", {
         taskStatus: "01",
-        userCode: "ddyy",
-        orgCode: "021"
+        // userCode: "ddyy",
+        // orgCode: "021"
       }).then(res => {
         console.log(res.data);
         this.tableData = res.data;
