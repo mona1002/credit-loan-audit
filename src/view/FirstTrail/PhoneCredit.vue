@@ -12,7 +12,7 @@
         <el-tree :data="treeData" :props="defaultProps" highlight-current expand-on-click-node default-expand-all no-key="id" @node-click="handleNodeClick">
         </el-tree>
         <!-- 备选  折叠面板- 手风琴效果 -->
-        <el-button type="parimary" @click.native="dialogFormVisible=true">添加</el-button>
+        <el-button type="primary" @click.native="dialogFormVisible=true">添加</el-button>
         <!-- <el-button type="text" @click="open">添加</el-button> -->
       </el-aside>
       <!-- 右侧 表单内容 -->
@@ -1801,6 +1801,16 @@ export default {
 /* 历史调查日志  右箭头  */
 .phone-credit .el-collapse-item__header .el-collapse-item__arrow{
   padding: 0;
+}
+
+.phone-credit .el-collapse-item__arrow{
+  line-height: 40px
+}
+
+
+/* 添加 电话 title */
+.phone-credit .el-dialog__title{
+  font-size: 16px;
 }
 
 </style>
