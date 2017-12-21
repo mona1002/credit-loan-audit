@@ -2624,11 +2624,11 @@ export default {
   margin-top: 30vh !important;
 }
 
-.el-dialog__header {
+.creditApproval-class .el-dialog__header {
   display: none;
 }
 
-.el-dialog__body {
+.creditApproval-class .el-dialog__body {
   padding: 0;
 }
 
