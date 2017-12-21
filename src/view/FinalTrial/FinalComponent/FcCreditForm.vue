@@ -560,13 +560,109 @@
       },
       NewPage(ind) { // tab1-------------------右键菜单栏 li[0] 点击事件
         console.log(ind);
-
+        switch (ind) {
+          case 0:
+            window.open("http://zhixing.court.gov.cn/search/");
+            break;
+          case 1:
+            window.open("http://shixin.court.gov.cn/");
+            break;
+          case 2:
+            window.open("https://www.baidu.com");
+            break;
+          case 3:
+            window.open("http://www.nacao.org.cn/portal/publish/index.html");
+            break;
+          case 4:
+            window.open("https://www.tianyancha.com/");
+            break;
+        }
       },
        AreaNPercentC() {
-      
+        if (this.FormData.selfpremisesArea) {
+          this.FormData.selfpremisesArea += "m²";
+        } else {
+          this.FormData.selfpremisesArea = "";
+        }
+        if (this.FormData.selfhasProportion) {
+          this.FormData.selfhasProportion += "%";
+        } else {
+          this.FormData.selfhasProportion = "";
+        }
       },
       mountJ(code, val) {
-      
+        // this.checkData+"."+val==0? this+"."+comment=false: this+"."+comment=true;
+        // this.checkData.val==0? this.comment=false: this.comment=true;
+        // console.log(code)
+        switch (code) {
+          case 0:
+            val == 0 ? this.InternetShow.commentS = false : this.InternetShow.commentS = true;
+            break; //上网-客户被执行
+          case 1:
+            val == 0 ? this.InternetShow.commentS1 = false : this.InternetShow.commentS1 = true;
+            break; //上网-单位被执行
+          case 2:
+            val == 0 ? this.InternetShow.commentS2 = false : this.InternetShow.commentS2 = true;
+            break; //上网-客户被执行
+          case 3:
+            val == 0 ? this.InternetShow.commentS3 = false : this.InternetShow.commentS3 = true;
+            break; //上网-客户被执行
+          case 4:
+            val == 0 ? this.InternetShow.commentS4 = false : this.InternetShow.commentS4 = true;
+            break; //上网-客户被执行
+          case 5:
+            val == 0 ? this.InternetShow.commentS5 = false : this.InternetShow.commentS5 = true;
+            break; //上网-客户被执行  
+          case 6:
+            val == 0 ? this.InternetShow.commentS6 = false : this.InternetShow.commentS6 = true;
+            break; //上网-客户被执行
+          case 7:
+            val == 0 ? this.InternetShow.commentS7 = false : this.InternetShow.commentS7 = true;
+            break; //上网-客户被执行
+          case 8:
+            val == 0 ? this.InternetShow.commentS8 = false : this.InternetShow.commentS8 = true;
+            break; //上网-客户被执行
+          case 9:
+            val == 0 ? this.InternetShow.commentS9 = false : this.InternetShow.commentS9 = true;
+            break; //上网-客户被执行
+          case 10:
+            val == 0 ? this.InternetShow.commentS10 = false : this.InternetShow.commentS10 = true;
+            break; //上网-客户被执行
+          case 11:
+            val == 0 ? this.checkId.declearNloaned = false : this.checkId.declearNloaned = true;
+            break;
+          case 12: //私营业主整个部分 privateOwnerFlag
+            val == 0 || val == null ? this.workInf.private = false : this.workInf.private = true;
+            break;
+          case 13: //婚姻状况
+            val == "01" || val == "04" || val == null ? this.marriage.couple = false : this.marriage.couple = true;
+            break;
+          case 14: // 配偶工作情况
+            val == "00" || val == "03" ? this.marriage.workingCondition = true : this.marriage.workingCondition = false;
+            break;
+          case 15: // 是否在同一个城市工作
+            val == 0 || val == null ? this.marriage.workingLivingInf = false : this.marriage.workingLivingInf = true;
+            break;
+          case 16: // 是否有子女
+            val == 0 || val == null ? this.Children.ChildrenOrNot = false : this.Children.ChildrenOrNot = true;
+            break;
+          case 17: // 是否支付其生活费
+            val == 0 || val == null ? this.Children.PayAlimony = false : this.Children.PayAlimony = true;
+            break;
+          case 18: // 父母是否在世
+            val == 0 || val == null ? this.parent.livingOrNot = false : this.parent.livingOrNot = true;
+            break;
+          case 19: // 是否有兄弟姐妹
+            val == 0 || val == null ? this.siblings.siblingsOrNot = false : this.siblings.siblingsOrNot = true;
+            break;
+          case 20: // 是否为常住地址(选否显示)
+            val == 0 ? this.address.permanent = true : this.address.permanent = false;
+            break;
+
+          case 21: // 是否为常住地址(选否显示)
+            val == 0 || val == null ? this.checkId.loanNot = false : this.checkId.loanNot = true;
+            break;
+        }
       },
     },
     mounted() {
@@ -579,7 +675,31 @@
       }).then(res => {
         console.log(res.data);
         this.FormData = res.data;
-      
+        this.AreaNPercentC();
+        console.log("查询到的日期")
+        this.mountJ(0, res.data.wbeexEcuted);
+        this.mountJ(1, res.data.wnetHirecom);
+        this.mountJ(2, res.data.wnetEcutedBrea);
+        this.mountJ(3, res.data.wnetHirecomBrea);
+        this.mountJ(4, res.data.wnetPhone);
+        this.mountJ(5, res.data.wnetHirecomName);
+        this.mountJ(6, res.data.wnetHirecomPhone);
+        this.mountJ(7, res.data.wnetAddrandEstate);
+        this.mountJ(8, res.data.wnetHirecomAddress);
+        this.mountJ(9, res.data.wnetCompany);
+        this.mountJ(10, res.data.wnetAddrstate);
+        this.mountJ(11, res.data.iisself);
+        this.mountJ(12, res.data.privateOwnerFlag); //私营业主是否
+        this.mountJ(13, res.data.fmarrflag); //婚姻状况
+        this.mountJ(14, res.data.spouseWork); //配偶工作情况
+        this.mountJ(15, res.data.spouseSamecity); // 是否在同一个城市工作生活
+        this.mountJ(16, res.data.childFlag); // 是否有子女
+        this.mountJ(17, res.data.childIspaycost); // 是否支付其生活费
+        this.mountJ(18, res.data.parentIsliving); // 父母是否在世
+        this.mountJ(19, res.data.brothersIfhas); // 是否有兄弟姐妹
+        this.mountJ(20, res.data.aisresident); // 是否为常住地址
+        this.mountJ(21, res.data.iloanBefore); //是否在我司申请借款
+        console.log( res.data.privateOwnerFlag)
       });
     },
 

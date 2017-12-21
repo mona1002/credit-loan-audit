@@ -46,7 +46,7 @@
             <div class="Left_right_BigImg ">
               <AudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></AudioVisualLeft>
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
-              <InternalMatch v-if=" this.tabContent1==2"></InternalMatch>
+              <InternalMatch v-if=" this.tabContent1==2" :isFull.sync="isFull"></InternalMatch>
               <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
               <cborrowerInformationDetail v-if=" this.tabContent1==4"></cborrowerInformationDetail>
               <PhoneCredit v-if=" this.tabContent1==5" :isFull.sync="isFull"></PhoneCredit>
@@ -90,7 +90,7 @@
           <div class="tab2_Content">
             <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
             <remark v-if=" this.tabContent2==1"></remark>
-            <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
+            <InternalMatch v-if=" this.tabContent2==2" :isFull.sync="isFull"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <!-- <applicationInformation v-if=" this.tabContent2==3"></applicationInformation> -->
             <borrowerInformation v-if=" this.tabContent2==4" :isFull.sync="isFull"></borrowerInformation>

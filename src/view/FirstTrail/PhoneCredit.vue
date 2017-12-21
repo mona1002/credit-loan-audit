@@ -34,7 +34,7 @@
                 <!-- 历史记录 -->
                 <div>
                   <el-table :data="listData.recordList" height="250" border style="" @row-dblclick="rowDbClick" stripe v-loading="mobileLoading" highlight-current-row v-show="listData.totalRecord>0">
-                    <el-table-column type="index" label="序号" min-width="50">
+                    <el-table-column type="index" label="序号" min-width="80">
                     </el-table-column>
                     <el-table-column prop="phoneTypeDes" label="电话类型" min-width="100">
                     </el-table-column>

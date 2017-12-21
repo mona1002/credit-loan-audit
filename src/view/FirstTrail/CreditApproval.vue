@@ -298,7 +298,7 @@
             <span class="require" style="left:150px;top:-25px;" v-show="ploanTermError">* 批准期限1-12月</span>
             <el-form-item label="批准期限[月] :" class="item-column2 width-120">
               <el-select @change="ploanTermChange" v-model="ploanTerm">
-                <el-option v-for="item in ploanTerms"  :label="item.appDuration" :value="item">
+                <el-option v-for="item in ploanTerms" :label="item.appDuration" :value="item">
                 </el-option>
               </el-select>
             </el-form-item>
@@ -557,10 +557,10 @@ export default {
       verIncomError: false, // 审批 - 月核实收入错误
       ploanAmtError: false, // 审批 - 批准金额
       ploanTermError: false, // 批准期限 
-      ploanTerms:[], // 审批 - 返回的批准期限集合
-      ploanTermItem:'', // 审批 - 批准期限item
-      synthesisRateM:'', // 审批 - 计算审批结论数据 - 综合费率
-      loanRateYr:'', // 审批 - 计算审批结论数据 - 借款利率
+      ploanTerms: [], // 审批 - 返回的批准期限集合
+      ploanTermItem: '', // 审批 - 批准期限item
+      synthesisRateM: '', // 审批 - 计算审批结论数据 - 综合费率
+      loanRateYr: '', // 审批 - 计算审批结论数据 - 借款利率
     }
   },
   mounted() {
@@ -901,7 +901,7 @@ export default {
               message: "提示:请选择批准期限!",
               type: 'warning'
             });
-            this.ploanTermError=true;
+            this.ploanTermError = true;
             return;
           }
           // 批准金额 ploanAmt
@@ -992,12 +992,25 @@ export default {
     // 保存审批信息
     saveCreaduit() {
       console.log("保存审批信息");
+      let verIncome2 = 0;
+      let ploanAmt2 = 0;
+      if (/,/.test(this.verIncome))
+        verIncome2 = Number(this.verIncome.replace(/,/g, ''));
+      else
+        verIncome2 = Number(this.verIncome);
+      if (/,/.test(this.ploanAmt)) {
+        console.log('-------------------------------------------------')
+        ploanAmt2 = Number(this.ploanAmt.replace(/,/g, ''));
+      } else {
+        console.log('==========================================')
+        ploanAmt2 = Number(this.ploanAmt)
+      }
       this.post('/creauditOpinion/add', {
         applyId: this.applyId,
         auditType: '00',
         proCode: this.proCode,
-        verIncome: this.verIncome,
-        ploanAmt: this.ploanAmt,
+        verIncome: verIncome2,
+        ploanAmt: ploanAmt2,
         ploanTerm: this.caculData.ploanTerm, //批准期限
         appmult: this.caculData.appmult, // 审批倍数
         eachTermamt: this.caculData.eachTermamt, //每期还款额[元]
@@ -1033,7 +1046,11 @@ export default {
           return;
         }
         if (res.statusCode == '200') {
-          this.$message(res.msg);
+
+          this.$message({
+            message: res.msg,
+            type: 'success'
+          })
 
           // applyId: this.applyId,
           // auditType: '00',
@@ -1182,15 +1199,15 @@ export default {
       console.log(this.proCode);
       this.proName = val.proName;
       console.log('批准产品更改');
-      this.get('/credit/ploanTermByPro?proId='+this.proId).then(res => {
+      this.get('/credit/ploanTermByPro?proId=' + this.proId).then(res => {
         console.log(res.data);
-        if(res.statusCode == '200')
+        if (res.statusCode == '200')
           this.ploanTerms = res.data;
       })
 
     },
     // 批准期限更改
-    ploanTermChange:function(val){
+    ploanTermChange: function(val) {
       console.log('批准期限更改!');
       // 批准期限
       this.ploanTerm = val.appDuration;
@@ -1201,19 +1218,35 @@ export default {
     },
     // 计算审批结论数据
     calculateByAuditInfo: function() {
+      console.log('计算审批结论数据')
+      let verIncome2 = 0;
+      let ploanAmt2 = 0;
+      if (/,/.test(this.verIncome))
+        verIncome2 = Number(this.verIncome.replace(/,/g, ''));
+      else
+        verIncome2 = Number(this.verIncome);
+      if (/,/.test(this.ploanAmt)) {
+        console.log('-------------------------------------------------')
+        ploanAmt2 = Number(this.ploanAmt.replace(/,/g, ''));
+      } else {
+        console.log('==========================================')
+        ploanAmt2 = Number(this.ploanAmt)
+      }
+
       this.post('/creauditOpinion/calculateByAuditInfo', {
         applyId: this.applyId,
         proId: this.proId,
         ploanTerm: this.ploanTerm,
-        ploanAmt: this.ploanAmt,
-        verIncome: this.verIncome,
-        eachTermamt: this.eachTermamt,
-        repayWay:this.repayWay, // 还款方式
-        synthesisRateM:this.synthesisRateM, // 综合费率 
-        loanRateYr:this.loanRateYr, // 借款利率
+        ploanAmt: ploanAmt2,
+        verIncome: verIncome2,
+        eachTermamt: this.monthrentamt,
+        repayWay: this.repayWay, // 还款方式
+        synthesisRateM: this.synthesisRateM, // 综合费率 
+        loanRateYr: this.loanRateYr, // 借款利率
       }).then(res => {
         // 审批结论数据
-        this.caculData = res.data;
+        if (res.statusCode == '200')
+          this.caculData = res.data;
       })
     },
     // 月核实收入[元]
@@ -1237,6 +1270,15 @@ export default {
             this.verIncome = Number(val).toLocaleString() + '.00'
           if (flag == "ploanAmt")
             this.ploanAmt = Number(val).toLocaleString() + '.00'
+          // return Number(val).toLocaleString() + '.00';
+          // 检测 数据 并 请求计算接口
+          console.log("计算审批结论数据计算审批结论数据计算审批结论数据计算审批结论数据")
+          console.log(this.proId, this.ploanTerm, this.ploanAmt, this.verIncome, this.eachTermamt);
+          console.log(this.proId.length, this.ploanTerm.length, this.ploanAmt.length, this.verIncome.length, this.eachTermamt.length);
+
+          // if (this.proId.length > 0 && this.ploanTerm.length > 0 && this.ploanAmt.length > 0 && this.verIncome.length > 0 && this.eachTermamt.length > 0) {
+          //   this.calculateByAuditInfo();
+          // }
         } else {
           console.log('错误提示')
           // 显示错误提示
@@ -1247,6 +1289,7 @@ export default {
             this.ploanAmt = '';
             this.ploanAmtError = '';
           }
+          return '';
         }
       }
     }
@@ -1316,14 +1359,14 @@ export default {
       if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0)
         this.calculateByAuditInfo();
     },
-    // 批准金额
+    // // 批准金额
     ploanAmt: function() {
       console.log('批准金额');
-      console.log(this.verIncome,this.proId,this.ploanTerm,this.ploanAmt);
-      console.log(this.verIncome.length,this.proId.length,this.ploanTerm,this.ploanAmt.length);
+      console.log(this.verIncome, this.proId, this.ploanTerm, this.ploanAmt);
+      console.log(this.verIncome.length, this.proId.length, this.ploanTerm, this.ploanAmt.length);
       console.log(typeof this.ploanTerm)
       // 计算 审批记录数据
-      if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0){
+      if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0) {
         this.calculateByAuditInfo();
       }
     },
@@ -1351,6 +1394,16 @@ export default {
   margin-top: 20px;
   overflow: hidden;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1416,6 +1469,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* 按钮集合控件 */
 
 .creditApproval-class .btn-div {
@@ -1423,6 +1486,16 @@ export default {
   width: 80%;
   float: left;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1457,6 +1530,16 @@ export default {
   color: #333;
   border: none;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1519,6 +1602,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -1526,6 +1619,16 @@ export default {
   float: left;
   margin: 0;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1564,6 +1667,16 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1653,11 +1766,31 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* textarea */
 
 .creditApproval-class .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1733,6 +1866,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* 审批 表单 */
 
 .creditApproval-class .appro-form {
@@ -1757,6 +1900,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /*.creditApproval-class .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -1764,6 +1917,16 @@ export default {
 .creditApproval-class .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1832,6 +1995,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -1839,6 +2012,16 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1925,6 +2108,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* 申请信息 */
 
 .creditApproval-class .info .el-form-item__content {
@@ -1934,6 +2127,16 @@ export default {
 .creditApproval-class .info .el-form-item__label {
   width: 100px;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1988,11 +2191,31 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* 有编辑框的 提示信息*/
 
 .creditApproval-class .back-form .back-form-edit-li {
   margin-top: 25px !important;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2052,6 +2275,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /*回退*/
 
 .creditApproval-class .el-icon-check-back {
@@ -2064,6 +2297,16 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2120,6 +2363,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /*放弃*/
 
 .creditApproval-class .el-icon-check-giveup {
@@ -2132,6 +2385,16 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2188,6 +2451,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /*发起反欺诈*/
 
 .creditApproval-class .el-icon-check-start {
@@ -2200,6 +2473,16 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2256,6 +2539,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /*流程轨迹*/
 
 .creditApproval-class .el-icon-check-lcgj {
@@ -2268,6 +2561,16 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2304,6 +2607,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* 信审审批  - - 弹窗*/
 
 .creditApproval-class .el-dialog {
@@ -2311,13 +2624,23 @@ export default {
   margin-top: 30vh !important;
 }
 
-.el-dialog__header {
+.creditApproval-class .el-dialog__header {
   display: none;
 }
 
-.el-dialog__body {
+.creditApproval-class .el-dialog__body {
   padding: 0;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2335,6 +2658,16 @@ export default {
 .creditApproval-class .appro-form .back-form-edit-li .el-form-item__label {
   /*width: 120px;*/
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2372,11 +2705,31 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* 两行文字 样式 */
 
 .creditApproval-class .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2402,6 +2755,16 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* label 文字样式 */
 
 .creditApproval-class .huitui-class .el-form-item__label {
@@ -2409,6 +2772,16 @@ export default {
 }
 
 .creditApproval-class .jujue-class {}
+
+
+
+
+
+
+
+
+
+
 
 
 

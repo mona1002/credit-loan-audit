@@ -888,10 +888,10 @@ height: 40px;
   width: 700px;
 }
 /* 信审表----查询---气泡宽度 */
-.el-tooltip__popper{
+/* .el-tooltip__popper{ */
   /* width: calc( 100% - 197px); */
-  width: 800px;
-}
+  /* width: 800px; */
+/* } */
 
 
 /* 影音列表----缩略图按钮 */

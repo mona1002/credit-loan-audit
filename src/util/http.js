@@ -6,7 +6,6 @@ axios.defaults.timeout = 5000;
 //数据接口
  axios.defaults.baseURL =appConstant.baseUrl_common;
 
-
 axios.defaults.withCredentials=true;
 
 axios.interceptors.response.use(
@@ -49,11 +48,7 @@ export default{
                   }, err => {
                     reject(err);
                   })
-            // .catch(err=>{
-            //   reject(err)
-            // })
               })
       }
-
     }
   }

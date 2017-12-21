@@ -1,6 +1,6 @@
 <template>
   <div class="CreditForm">
-    <el-collapse v-model="activeNames" @change="handleChange">
+    <el-collapse v-model="activeNames">
       <!-- 上网查询信息 -->
       <el-collapse-item name="1">
         <template slot="title">
@@ -12,7 +12,6 @@
             <li>
               <p>
                 <i class="hint"> </i>
-                <!-- <span>{{myWatch+"aaa"}}</span> -->
                 <label class="InternetInf_left_label" @click="NewPage(0)">客户在法网是否有被执行信息：</label>
                 <el-select class="internet_top" v-model="checkData.wbeexEcuted" placeholder="请选择" style="minWidth:150px;" @change="commentShow1(checkData.wbeexEcuted,Internet[0])">
                   <el-option v-for="item in beexEcuted" :key="item.value" :label="item.label" :value="item.value">
@@ -22,15 +21,8 @@
               <p v-show="this.InternetShow.commentS">
                 <i class="hint">
                   <b v-show="this.Wordhint.Internet.excude" class="internet_textarea"> 输入长度不能超过500</b>
-                  <!-- <span v-if="this.checkData.wnetPhonetxt.length>=6"> neirong </span> -->
-                  <!-- <b v-show="this.checkData.wbeexEcutedtxt.length==10" class="internet_textarea"> 输入长度不能超过500</b> -->
-
                 </i>
                 <label class="InternetInf_right_label"> 执行信息说明： </label>
-                <!-- 此处为方法备用 -->
-                <!-- <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="checkData.wbeexEcutedtxt" @compositionend.native="wordarea(checkData.wbeexEcutedtxt,'执行信息')"
-                  @keyup.native="wordarea(checkData.wbeexEcutedtxt,'执行信息')">
-                </el-input> -->
                 <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wbeexEcutedtxt"
                   @compositionend.native="wordarea(checkData.wbeexEcutedtxt,'执行信息')" @keyup.native="wordarea(checkData.wbeexEcutedtxt,'执行信息')">
                 </el-input>
@@ -57,7 +49,6 @@
             </li>
             <li>
               <p>
-                <!-- <div  class="red" style="display:inlineBlock"> 该项为必填项</div> -->
                 <i class="hint">
                   <span v-show="errors.has('BrokenRecord')" class="internet_sel">{{ errors.first('BrokenRecord') }}</span>
                 </i>
@@ -296,10 +287,7 @@
                 </el-input>
               </p>
               <p v-show="this.checkId.loanNot">
-                <i class="hint">
-                  <!-- <b v-show="this.Wordhint.checkID.Declear" class="internet_textarea"> 输入长度不能超过500</b> -->
-                  <!-- <span v-show="this.reg.mMontyP" class="red"> 请输入1-999之间的整数</span> -->
-                </i>
+                <i class="hint"> </i>
                 <label class=" InternetInf_right_label "> 借款期限[月]： </label>
                 <el-input type="text" placeholder="请输入内容" v-model="checkData.iloanTerm" @blur="mMonth(checkData.iloanTerm,$event,'月均工资')">
                 </el-input>
@@ -343,10 +331,6 @@
               <input type="text" class="specialInput" :maxlength="this.longInputL" placeholder="请输入内容" v-model="checkData.hirecomName"
                 @compositionend="wordInput50(checkData.hirecomName,'工作单位')" @keydown="wordInput50(checkData.hirecomName,'工作单位')"
                 @keyup="wordInput50(checkData.hirecomName,'工作单位')">
-
-              <!-- <el-input type="text" :maxlength="this.longInputL" placeholder="请输入内容" v-model="checkData.hirecomName" @compositionend.native="wordInput50(checkData.hirecomName,'工作单位')"
-                @keydown.native="wordInput50(checkData.hirecomName,'工作单位')" @keyup.native="wordInput50(checkData.hirecomName,'工作单位')">
-              </el-input> -->
             </li>
             <li>
               <i class="hint"> </i>
@@ -372,12 +356,9 @@
               <el-input type="text" :maxlength="this.shotInputL" placeholder="请输入内容" v-model="checkData.workPost" @compositionend.native="wordInput20(checkData.workPost,'职位级别')"
                 @keydown.native="wordInput20(checkData.workPost,'职位级别')" @keyup.native="wordInput20(checkData.workPost,'职位级别')">
               </el-input>
-              <!-- 提示语  name="adddd" v-validate="'required|phone'"  -->
-              <!-- <span v-show="errors.has('adddd')" class="help is-danger">{{ errors.first('adddd') }}</span> -->
             </li>
             <li>
               <i class="hint">
-                <!-- <b v-show="this.Wordhint.Working.level" class="Working_input" > 输入长度不能超过40</b> -->
                 <span class="Working_middle" v-show="this.reg.mphoneM">请输入：区号+5-8位数字</span>
                 <span class="Working_middle" v-show="this.reg.mphoneR">不可输入：11111，12345等</span>
               </i>
@@ -387,7 +368,6 @@
             </li>
             <li>
               <i class="hint">
-                <!-- <b v-show="this.Wordhint.Working.level" class="Working_middle" >请输入数字</b> -->
               </i>
               <label class="InternetInf_left_label">月均工资[元]：</label>
               <el-input type="text" placeholder="请输入内容" v-model="checkData.avgsalaryamt" @blur="formatMoney(checkData.avgsalaryamt,$event,'月均工资')">
@@ -395,14 +375,12 @@
             </li>
             <li>
               <i class="hint">
-                <!-- <b v-show="this.Wordhint.Working.level" class="Working_middle" >请输入数字</b> -->
                 <span v-show="this.reg.mpayDay" class="Working_middle"> 请填入1-31之间的数字</span>
               </i>
               <label class="WorkInfs_left_label">每月发薪日：</label>
               <el-input type="text" placeholder="请输入内容" v-model="checkData.payDay" @blur="mday(checkData.payDay,$event)">
               </el-input>
             </li>
-            <!-- 三级联动：单位地址：	hirecomAddress  -->
             <li style="width:100%">
               <i class="hint">
                 <b v-show="this.Wordhint.Working.ComAdr" class="comaddressb" style="paddingLeft:826px">输入长度不能超过100</b>
@@ -423,8 +401,6 @@
                 <el-option v-for="item in hireTown" :key="item.id" :label="item.areaName" :value="item.id">
                 </el-option>
               </el-select>
-              <!-- 具体地址input  text框 -->
-              <!-- 单位地址================================================================================未写=============找不到字段 -->
               <el-input type="text" :maxlength="this.longLongInputL" placeholder="请输入内容" v-model="checkData.workAddress" @compositionend.native="wordInput100(checkData.workAddress,'单位具体地址')"
                 @keyup.native="wordInput100(checkData.workAddress,'单位具体地址')">
               </el-input>
@@ -436,12 +412,8 @@
               <label class="InternetInf_left_label">前单位名称：</label>
               <input type="text" class="specialInput" :maxlength="this.longInputL" placeholder="请输入内容" v-model="checkData.hirelastComname"
                 @compositionend="wordInput50(checkData.hirelastComname,'前单位')" @keyup="wordInput50(checkData.hirelastComname,'前单位')">
-              <!-- <el-input style="width:70%;" type="text" :maxlength="this.longInputL" placeholder="请输入内容" v-model="checkData.hirelastComname" @compositionend.native="wordInput50(checkData.hirelastComname,'前单位')"
-                @keyup.native="wordInput50(checkData.hirelastComname,'前单位')">
-              </el-input> -->
             </li>
           </ul>
-          <!-- style="minWidth:1370px;" -->
           <ul class="CreditForm_WorkInfs_ul_right" style="paddingTop:62px">
             <li>
               <i class="hint">
@@ -454,7 +426,6 @@
             </li>
             <li>
               <i class="hint"></i>
-              <!--   @change="hireDate(checkData.entryDate,$event)"-->
               <label class=" CheckId_right_label "> 入职时间： </label>
               <el-date-picker v-model="checkData.entryDate" style="maxWidth:200px;minWidth:150px" type="date" placeholder="选择日期" :picker-options="pickerOptions1">
               </el-date-picker>
@@ -483,8 +454,6 @@
                 <el-option v-for="item in privateOwnerFlag" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
-              <!-- <el-input type="text" placeholder="请输入内容" v-model="checkData.hirecomType">
-              </el-input> -->
             </li>
           </ul>
         </div>
@@ -500,7 +469,7 @@
             <li ref="compTypeDiv">
               <i class="hint">
                 <span v-show="errors.has('companyType')" class="Working_input">{{ errors.first('companyType') }}</span>
-                 </i>
+              </i>
               <label class="InternetInf_left_label ">
                 <span class="red"> * </span>企业类型：</label>
               <el-select v-model="checkData.compType" placeholder="请选择" ref="compTypes" name="companyType" v-validate="reqd">
@@ -510,7 +479,8 @@
             </li>
             <li>
               <i class="hint">
-                <span v-show="errors.has('registerDate')" class="Working_middle">{{ errors.first('registerDate') }}</span> </i>
+                <span v-show="errors.has('registerDate')" class="Working_middle">{{ errors.first('registerDate') }}</span>
+              </i>
               <label class=" WorkInfs_left_label ">
                 <span class="red"> * </span> 公司注册时间： </label>
               <el-date-picker style="maxWidth:200px;minWidth:150px" v-model="checkData.compegDate" type="date" placeholder="选择日期" :picker-options="pickerOptions1"
@@ -522,10 +492,6 @@
               <label class="InternetInf_left_label ">注册资金[万元]：</label>
               <el-input type="text" placeholder="请输入内容" v-model="checkData.regcapitalamt" @blur="formatMoney(checkData.regcapitalamt,$event,'注册资金')">
               </el-input>
-              <!-- <el-select v-model="checkData.selfregcapital" placeholder="请选择">
-                <el-option v-for="item in selfregcapital" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select> -->
             </li>
             <li>
               <i class="hint"> </i>
@@ -861,14 +827,11 @@
                 </el-input>
               </p>
               <p>
-                <!-- 提示语 v-numbers  @blur="formatMoney(checkData.fbalance,$event)"    @blur="formattingMoney(checkData.fbalance)"  -->
                 <i class="hint">
-                <span v-show="errors.has('Paymonth')" class="family_textarea">{{ errors.first('Paymonth') }}</span>
-                   </i>
+                  <span v-show="errors.has('Paymonth')" class="family_textarea">{{ errors.first('Paymonth') }}</span>
+                </i>
                 <label class="Family_right_label">
                   <span class="red"> * </span> 可以承受的月还款[元]： </label>
-                <!-- <input type="text" placeholder="请输入内容" v-model.number="checkData.fbalance" name="Paymonth" v-numbers
-                  v-validate="'required'"> -->
                 <el-input type="text" placeholder="请输入内容" :rows="2" resize="none" :maxlength="this.shotTextareaL" v-model.number="checkData.fbalance"
                   @blur="formatMoney(checkData.fbalance,$event,'月还款')" name="Paymonth" v-validate="'required'">
                 </el-input>
@@ -935,9 +898,6 @@
             <label class="InternetInf_left_label ">常住地址 ：</label>
             <input style="width:46%" type="text" :maxlength="this.longLongInputL" placeholder="请输入内容" v-model="checkData.aisresidenttxt"
               @compositionend="wordInput100(checkData.aisresidenttxt,'常住地址')" @keyup="wordInput100(checkData.aisresidenttxt,'常住地址')">
-            <!-- <el-input  type="text" :maxlength="this.longLongInputL" placeholder="请输入内容" v-model="checkData.aisresidenttxt"  @compositionend.native="wordInput100(checkData.aisresidenttxt,'常住地址')"
-                @keyup.native="wordInput100(checkData.aisresidenttxt,'常住地址')">
-            </el-input> -->
           </p>
         </div>
       </el-collapse-item>
@@ -954,22 +914,13 @@
           </i>
           <p class="InternetInf_left_label" style="textAlign:right">
             <span class="red"> * </span>初审结果评价：</p>
-          <!-- @click.native="this.adv" @mouseup.native="this.adv" -->
-          <!-- <div style=" width:50%;background:red;"> -->
-
           <el-input type="textarea" :rows="5" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" @compositionend.native="wordarea(checkData.oother,'评价')"
             @keyup.native="wordarea(checkData.oother,'评价')" v-model="checkData.oother" name="conclusion" v-validate="'required'">
           </el-input>
-          <!-- </div> -->
-
         </div>
       </el-collapse-item>
     </el-collapse>
-    <!-- <el-button type="primary" class="btn" @click="CFsave">确认</el-button> -->
-    <!-- <el-button type="primary" @click="testVuex" style="position:fixed;top:50%;left:50%;">测试vuex</el-button> -->
     <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
-
-
     <!-- ==============================点击确认时提示弹框=================================== -->
     <div class="layer" v-show="Confirm">
       <!-- @touchmove.prevent  -->
@@ -981,18 +932,25 @@
         <div>
           <p class="choces">您确定已填写好各项内容并提交？</p>
           <div class=buttonDiv>
-            <!-- <el-button type="primary" @click="Cancle">取消</el-button>
-            <el-button type="primary" @click="trueSure">确定</el-button> -->
             <el-button type="primary" @click="CFsave">确定</el-button>
             <el-button type="primary" @click="canc">取消</el-button>
           </div>
         </div>
       </div>
     </div>
-
+    <!-- ========================================提交成功提示================================= -->
+    <div class="layer" v-show="AlertS">
+      <div class="layerbox">
+        <p>
+          <span>提示</span>
+        </p>
+        <div>
+          <p class="choces">添加成功</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
-
 <script>
   export default {
     data() {
@@ -1001,12 +959,12 @@
         CFwidth: [],
         inputWidth: [],
         textareaPpraProj: [],
-        comaddressb:[],
-        shotInputL: 20,//20
-        longInputL: 50,//50
-        longLongInputL: 100,//100
-        shotTextareaL: 200,//200
-        textareaL: 500,//500
+        comaddressb: [],
+        shotInputL: 20, //20
+        longInputL: 50, //50
+        longLongInputL: 100, //100
+        shotTextareaL: 200, //200
+        textareaL: 500, //500
         acreage: '',
         Percent: '',
         Wordhint: {
@@ -1029,8 +987,6 @@
           checkID: {
             answerDec: false,
             Declear: false,
-            // loanAmount:false,
-            // loanExp:false,
             loanPurposed: false,
           },
           Working: {
@@ -1060,20 +1016,19 @@
           result: false,
         },
         getParams: [], //获取taskwaitting里面的 查询入参 applyId
-        // workkkk:this.First(),
         pickerOptions1: {
           disabledDate(time) {
             return time.getTime() > Date.now();
           }
         },
         Confirm: false,
+        AlertS: false,
         reg: {
           payDay: false,
           mMontyP: false,
           mpostCode: false,
           mphoneM: false,
           mphoneR: false,
-          // mphoneO: false,
         },
         reqd: '',
         addressOne: '',
@@ -1280,23 +1235,9 @@
           label: '其他'
         }],
         hirecomKind: [],
-        // hirecomKind: [{ // 所属行业：
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }],
         hirecomAddress: [], //省份
         hireProvincd: [], //市区
         hireTown: [], //县区
-        // hirecomAddress: [{ // 单位地址------------三级联动---待续 
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }],
         payForm: [{ // 工资发放形式
           value: '01',
           label: '网银'
@@ -1307,7 +1248,6 @@
           value: '03',
           label: '网银+现金'
         }],
-
         // ------------------------------私营企业信息------------------------
         privateOwnerFlag: [{
           value: '1',
@@ -1525,162 +1465,45 @@
           value: '0',
           label: '否'
         }],
-
-        // // select 字段
-        // // 上网查询
-        // beexEcutedVal: "", // select-客户在法网是否有被执行信息
-        // netHirecomVal: '', // select-单位在法网是否有被执行信息：
-        // netEcutedBreaVal: '', // select-客户在失信网是否有失信记录：
-        // netHirecomBreaVal: '', // select-单位在失信网是否有失信记录
-        // netPhoneVal: '', // select-网上搜索借款人手机是否有异常：
-        // netHirecomNameVal: '', // select-网搜单位名称是否有异常
-        // netHirecomPhoneVal: '', // select-网搜单位电话是否有异常：
-        // netAddrandEstateVal: '', // select-网上搜索借款人现居住地址和房产地址是否有异常：
-        // netHirecomAddressVal: '', // select-网搜单位地址是否有异常：
-        // netCompanyVal: '', // select-当地工商网查询企业基本信息中是否有登记：
-        // netAddrstateVal: '', // select-客户工作单位在全国组织代码查询中是否存在：
-        // // 核实身份
-        // isselfVal: '', // 接听者是否是借款人本人：
-        // loanBeforeVal: '', //是否在我司申请借款：
-        // // 工作信息
-        // hirecomSignVal: '', //单位性质
-        // hirecomKindVal: '', //所属行业：
-        // hirecomAddressVal: '', //单位地址------------三级联动---待续
-        // payFormVal: '', // 工资发放形式：
-        // privateOwnerFlagVal:'',//是否为私营业主
-        // //  私营企业信息
-        // compTypeVal: '', //企业类型
-        // selfpremisesVal: '', // 经营场所
-        // // 家庭信息
-        // fmarrflagVal: '', //婚姻状况
-        // childFlagVal: '', //是否有子女
-        // parentIslivingVal: '', //父母是否在世
-        // brothersIfhasVal: '', //是否有兄弟姐妹
-        // // 居住情况
-        // livingHouseHoldsVal: '', //同住者关系
-        // livingEstateBelongsVal: '', //居住房产所属情况
-        // // 核对现住址
-        // address:'',//现住址-----span 直接显示
-        // aisresidentVal: '', //现住地址是否为常住地址
-        // jhjk: '', //
-
-
-        // // textarea 文本输入域 字段
-        // beexEcutedtxt: '', // 执行信息说明
-        // netHirecomtxt: "", //单位执行信息说明
-        // netEcutedBreatxt: "", //失信记录说明
-        // netHirecomBreatxt: "", //单位失信记录说明        
-        // netPhonetxt: "", //手机异常信息说明        
-        // netHirecomNametxt: "", //单位名称异常信息说明
-        // netHirecomPhonetxt: "", //单位电话异常信息说明
-        // netAddrandEstatetxt: "", //地址异常信息说明
-        // netHirecomAddresstxt: "", //单位地址异常信息说明
-        // netCompanytxt: "", //工商登记信息说明
-        // netAddrstatetxt: "", //组织机构代码信息说明
-        // //核实身份
-        // isselftxt: '', //接听说明
-        // // 初审结论
-        // 	oother: '', //初审结果评价
-
-        // // input 字段
-        // // 工作信息
-        // hirecomName: '', // 工作单位
-        // workPost: '', //职位级别
-        // workTel: '', //单位电话
-        // avgsalaryamt: '', //月均工资[元]
-        // payDay: '', //每月发薪日
-        // hirelastComname: '', //前单位名称：
-        // hiredepartment: '', // 所在部门
-        // entryDate: '', // 入职时间-日期选择器
-        // workZip: '', // 单位地址邮编
-        // // hirecomType: '', // 是否为私营业主
-        // workAddress: '', //单位地址(input) -----------------------------------------------------------------------------待确认
-        // // 私营企业信息
-        // selfregcapital: '', //注册资金[万元]
-        // selfhasProportion: '', //占股比例
-        // monthrentamt: '', // 月还款额/租金[万元]
-        // selfempCount: '', //员工人数
-        // profitamountmamt: '', //每月净利润[万元
-        // selfpremisesArea: '', //营业面积
-        // projectManage: '', //企业经营项目
-        // oneYearProfitamt: '', //近一年利润[万元]
-        // firstSuppliers: '', //第一供销商
-        // compegDate: '', //公司注册时间
-        // selfpremisestxt: '', //经营场所
-        // selfempCount: '', //员工人数
-        // profitamountmamt: '', //每月净利润[万元]：-----------------------------------------------------------------------------待确认
-        // firstDistributor: '', //第一分销商
-        // // 家庭信息
-        // fconsumption: '', // 个人/家庭月开销[元]
-        // brothersIfhastxt: '', //是否有兄弟姐妹备注
-        // fbalance: '', //可以承受的月还款[元]
-
-
-        // form: {
-        //   desc: '', //上网查询信息 右侧textarea框绑定值
-        // },
-        // options: [{ // 现住地址是否为常住地址
-        //   value: '1',
-        //   label: '是'
-        // }, {
-        //   value: '0',
-        //   label: '否'
-        // }],
-
       }
     },
     methods: {
       wordInput20(val, el) {
-        console.log(val);
-        console.log(val.length);
         if (val.length >= 10) {
-          // console.log("不符合长度");
-          // val = val.substr(0, 20);
           this.wordInput20SC(val, el);
         } else {
           this.wordInput20SCF(val, el);
-
         }
       },
       wordInput20SC(val, el) {
         switch (el) {
-          // case "":  :break;
           case "职位级别":
             this.Wordhint.Working.level = true;
             break;
           case "部门":
             this.Wordhint.Working.department = true;
             break;
-
         }
       },
       wordInput20SCF(val, el) {
         switch (el) {
-          // case "":  :break;
           case "职位级别":
             this.Wordhint.Working.level = false;
             break;
           case "部门":
             this.Wordhint.Working.department = false;
             break;
-
         }
       },
       wordInput50(val, el) {
-        console.log(val);
-        console.log(val.length);
         if (val.length >= 10) {
-          // console.log("不符合长度");
-          // val = val.substr(0, 40);
           this.wordInput50SC(val, el);
         } else {
           this.wordInput50SCF(val, el);
         }
       },
       wordInput50SC(val, el) {
-        console.log("心事")
         switch (el) {
-          // case "":  :break;
           case "工作单位":
             this.Wordhint.Working.address = true;
             break;
@@ -1699,9 +1522,7 @@
         }
       },
       wordInput50SCF(val, el) {
-        console.log("心大师傅事")
         switch (el) {
-          // case "":  :break;
           case "工作单位":
             this.Wordhint.Working.address = false;
             break;
@@ -1721,7 +1542,6 @@
       },
       wordInput100(val, el) {
         switch (el) {
-          // case "":  :break;
           case "单位具体地址":
             val.length >= 10 ? this.Wordhint.Working.ComAdr = true : this.Wordhint.Working.ComAdr = false;
             break;
@@ -1729,7 +1549,6 @@
             val.length >= 10 ? this.Wordhint.address.permanentAddress = true : this.Wordhint.address.permanentAddress =
               false;
             break;
-
         }
       },
       wordarea200(val, el) {
@@ -1746,7 +1565,6 @@
       },
       wordarea200SC(val, el) {
         switch (el) {
-          // case "":  :break;
           case "经营项目":
             this.Wordhint.company.manage = true;
             break;
@@ -1771,12 +1589,10 @@
           case "兄弟姐妹备注":
             this.Wordhint.family.siblings = true;
             break;
-
         }
       },
       wordarea200SCF(val, el) {
         switch (el) {
-          // case "":  :break;
           case "经营项目":
             this.Wordhint.company.manage = false;
           case "同城生活信息":
@@ -1801,180 +1617,116 @@
           case "兄弟姐妹备注":
             this.Wordhint.family.siblings = false;
             break;
-
         }
       },
       wordarea(val, el, txt) {
-        // console.log("keydown") 
-        // console.log(val)
-        console.log(val.length)
-        // console.log(el)  
         if (val.length <= 8 && val.length >= 0) {
-          console.log("符合长度");
-          console.log(val.length)
-          //  this.Wordhint.excude=false;
-          //  console.log(this.Wordhint.excude)
           this.wordareaSCF(val, el);
-        }
-        // else if(val.length >9){
-        //    this.Wordhint.excude=true;
-        // this.wordareaSC(val,el);
-        // }
-        else {
-          //  this.Wordhint.excude=true;
+        } else {
           this.wordareaSC(val, el);
         }
       },
       wordareaSC(val, el) {
         console.log("显示")
         switch (el) {
-          // case "":  :break;
           case "执行信息":
-            // this.checkData.wbeexEcutedtxt = val;
             this.Wordhint.Internet.excude = true;
             break;
           case "单位执行信息":
-            // this.checkData.wnetHirecomtxt = val;
             this.Wordhint.Internet.comExcude = true;
             break;
           case "失信记录":
-            // this.checkData.wnetEcutedBreatxt = val;
             this.Wordhint.Internet.looseCre = true;
             break;
           case "单位失信":
-            // this.checkData.wnetHirecomBreatxt = val;
             this.Wordhint.Internet.comLooseCre = true;
             break;
           case "手机异常":
-            // this.checkData.wnetPhonetxt = val;
             this.Wordhint.Internet.phoneOUtS = true;
             break;
           case "单位名称异常":
-            // this.checkData.wnetHirecomNametxt = val;
             this.Wordhint.Internet.ComName = true;
             break;
           case "单位电话异常":
-            // this.checkData.wnetHirecomPhonetxt = val;
             this.Wordhint.Internet.comphoneOUtS = true;
             break;
           case "地址异常":
-            // this.checkData.wnetAddrandEstatetxt = val;
             this.Wordhint.Internet.address = true;
             break;
           case "单位地址异常":
-            // this.checkData.wnetHirecomAddresstxt = val;
             this.Wordhint.Internet.comAddress = true;
             break;
           case "公司上登记":
-            // this.checkData.wnetCompanytxt = val;
             this.Wordhint.Internet.loginOrNot = true;
             break;
           case "组织机构代码":
-            // this.checkData.wnetAddrstatetxt = val;
             this.Wordhint.Internet.institutionCode = true;
             break;
           case "接听说明":
-            // this.checkData.iisselftxt = val;
             this.Wordhint.checkID.answerDec = true;
             break;
           case "说明":
-            // this.checkData.iloanBeforetxt = val;
             this.Wordhint.checkID.Declear = true;
             break;
           case "详细用途":
-            // this.checkData.iloanPurposetxt = val;
             this.Wordhint.checkID.loanPurposed = true;
             break;
           case "评价":
-            // this.checkData.oother = val;
             this.Wordhint.result = true;
             break;
         }
       },
-      wordareaSCF(val, el) { //隐藏textare提示语
-        console.log("隐藏")
+      wordareaSCF(val, el) {
         switch (el) {
-          // case "":  :break;
           case "执行信息":
-            // this.checkData.wbeexEcutedtxt = val;
             this.Wordhint.Internet.excude = false;
             break;
           case "单位执行信息":
-            // this.checkData.wnetHirecomtxt = val;
             this.Wordhint.Internet.comExcude = false;
             break;
           case "失信记录":
-            // this.checkData.wnetEcutedBreatxt = val;
             this.Wordhint.Internet.looseCre = false;
             break;
           case "单位失信":
-            // this.checkData.wnetHirecomBreatxt = val;
             this.Wordhint.Internet.comLooseCre = false;
             break;
           case "手机异常":
-            // this.checkData.wnetPhonetxt = val;
             this.Wordhint.Internet.phoneOUtS = false;
             break;
           case "单位名称异常":
-            // this.checkData.wnetHirecomNametxt = val;
             this.Wordhint.Internet.ComName = false;
             break;
           case "单位电话异常":
-            // this.checkData.wnetHirecomPhonetxt = val;
             this.Wordhint.Internet.comphoneOUtS = false;
             break;
           case "地址异常":
-            // this.checkData.wnetAddrandEstatetxt = val;
             this.Wordhint.Internet.address = false;
             break;
           case "单位地址异常":
-            // this.checkData.wnetHirecomAddresstxt = val;
             this.Wordhint.Internet.comAddress = false;
             break;
           case "公司上登记":
-            // this.checkData.wnetCompanytxt = val;
             this.Wordhint.Internet.loginOrNot = false;
             break;
           case "组织机构代码":
-            // this.checkData.wnetAddrstatetxt = val;
             this.Wordhint.Internet.institutionCode = false;
             break;
           case "接听说明":
-            // this.checkData.iisselftxt = val;
             this.Wordhint.checkID.answerDec = false;
             break;
           case "说明":
-            // this.checkData.iloanBeforetxt = val;
             this.Wordhint.checkID.Declear = false;
             break;
           case "详细用途":
-            // this.checkData.iloanPurposetxt = val;
             this.Wordhint.checkID.loanPurposed = false;
             break;
           case "评价":
-            // this.checkData.oother = val;
             this.Wordhint.result = false;
             break;
-
         }
       },
-      // wordareaHint(el){
-      //   switch(el){
-      //     case "": :break;
-      //     case "": :break;
-
-      //   }
-      // },
-      handleChange(tab, event) {
-        console.log(tab, event);
-      },
       commentShow1(name, hidLabel) {
-        // @change="commentShow1(checkData.fmarrflag,Internet[14])" 
-        // console.log("commentShow")
-        console.log(name)
-        console.log(hidLabel)
-        //  " 接听是否本人","是否私营业主"
-        if (name == "0") { // 否
+        if (name == "0") {
           switch (hidLabel) {
             case "客户执行":
               this.InternetShow.commentS = false;
@@ -1985,7 +1737,6 @@
               this.checkData.wnetHirecomtxt = "";
               break;
             case "客户失信":
-              console.log("adnei")
               this.InternetShow.commentS2 = false;
               this.checkData.wnetEcutedBreatxt = "";
               break;
@@ -2026,21 +1777,20 @@
               this.checkId.loanNot = false;
               this.checkData.iloanBefore = "";
               this.checkData.iisselftxt = "";
-              this.checkData.iloanBeforetxt = ""; //说明-input
-              this.checkData.iloanTerm = ""; //借款期限[月]：	
-              this.checkData.iloanPurposetxt = ""; //借款用途详细说明：
-              this.checkData.iloanPurpose = ""; //借款用途
-              this.checkData.iloanAmt = ""; //借款金额[元]
+              this.checkData.iloanBeforetxt = "";
+              this.checkData.iloanTerm = "";
+              this.checkData.iloanPurposetxt = "";
+              this.checkData.iloanPurpose = "";
+              this.checkData.iloanAmt = "";
               break;
             case "是否申请借款":
               this.checkId.loanNot = false;
-              this.checkData.iloanBeforetxt = ""; //说明-input
-              this.checkData.iloanTerm = ""; //借款期限[月]：	
-              this.checkData.iloanPurposetxt = ""; //借款用途详细说明：
-              this.checkData.iloanPurpose = ""; //借款用途
-              this.checkData.iloanAmt = ""; //借款金额[元]
+              this.checkData.iloanBeforetxt = "";
+              this.checkData.iloanTerm = "";
+              this.checkData.iloanPurposetxt = "";
+              this.checkData.iloanPurpose = "";
+              this.checkData.iloanAmt = "";
               break;
-              //  iisselftxt iloanBeforetxt iloanTerm iloanPurpose
             case "是否私营业主":
               this.workInf.private = false;
               this.checkData.compType = "";
@@ -2051,18 +1801,18 @@
               this.checkData.projectManage = "";
               this.checkData.oneYearProfitamt = "";
               this.checkData.firstSuppliers = "";
-              this.checkData.compegDate = ""; //公司注册时间
+              this.checkData.compegDate = "";
               this.checkData.selfpremises = "";
               this.checkData.selfempCount = "";
               this.checkData.profitamountmamt = "";
-              this.checkData.firstDistributor = ""; //第一分销商
+              this.checkData.firstDistributor = "";
               if (name == 0 || name == '') {
                 this.reqd = '';
               }
               break;
             case "同城工作生活":
               this.marriage.workingLivingInf = false;
-              this.checkData.spouseSamecitytxt = ""; //工作生活信息详情
+              this.checkData.spouseSamecitytxt = "";
               break;
             case "是否有子女":
               this.Children.ChildrenOrNot = false;
@@ -2097,8 +1847,7 @@
               this.address.permanent = true;
               break;
           }
-        } else if (name == "1") { //是   
-          console.log("我是是1")
+        } else if (name == "1") {
           switch (hidLabel) {
             case "客户执行":
               this.InternetShow.commentS = true;
@@ -2160,26 +1909,21 @@
               this.siblings.siblingsOrNot = true;
               break;
             case "是否为常住地址":
-              //             if(name==1 || name==""){
-              //  this.address.permanent = false;
-              //               this.checkData.aisresidenttxt = "";
-              //             }
               this.address.permanent = false;
               this.checkData.aisresidenttxt = "";
               break;
           }
         } else if (hidLabel == "婚姻状况") {
-          console.log(hidLabel + name)
           if (name == "02" || name == "03") {
             this.marriage.couple = true;
           } else {
             this.marriage.couple = false;
             this.marriage.workingCondition = false;
             this.marriage.workingLivingInf = false;
-            this.checkData.spouseWork = ""; //配偶工作情况清空
+            this.checkData.spouseWork = "";
             this.checkData.spouseWorktype = "";
             this.checkData.spouseIncome = "";
-            this.checkData.spouseSamecity = ""; //同城工作生活 下拉select
+            this.checkData.spouseSamecity = "";
             this.checkData.spouseSamecitytxt = "";
           }
         } else if (hidLabel == "配偶工作情况") {
@@ -2191,12 +1935,8 @@
             this.checkData.spouseIncome = "";
           }
         }
-        // else if(name==){
-
-        // }{}
       },
-      NewPage(ind) { // tab1-------------------右键菜单栏 li[0] 点击事件
-        console.log(ind);
+      NewPage(ind) {
         switch (ind) {
           case 0:
             window.open("http://zhixing.court.gov.cn/search/");
@@ -2223,7 +1963,6 @@
         }).then(res => {
           console.log(res);
           this.hireProvincd = res.data;
-          // 修改的时候 市区  县区 清空数据
           this.checkData.workCity = "";
           this.checkData.workCounty = "";
           this.hireTown = "";
@@ -2234,64 +1973,39 @@
         this.get("/credit/queryCityCounty", {
           parentCode: item,
         }).then(res => {
-          console.log(res);
           this.hireTown = res.data;
         })
       },
       makeSureBtn() {
         this.Confirm = true;
-
       },
       canc() {
         this.Confirm = false;
       },
       closed() {
         this.Confirm = false;
-
       },
       CFsave() {
         console.log("提交信息");
         this.$validator.validateAll().then((result) => {
           if (result) {
-            // eslint-disable-next-line
-            // alert('From Submitted!');
-            // 下面为需要验证不为 空 的字段
-            // console.log(this.checkData)
-            this.checkData.selfpremisesArea = this.acreage; //面积
-            this.checkData.selfhasProportion = this.Percent; //比例
-            console.log(this.checkData.selfpremisesArea)
-            console.log(this.checkData.selfhasProportion)
-
+            this.checkData.selfpremisesArea = this.acreage;
+            this.checkData.selfhasProportion = this.Percent;
             this.post("/creauditInfo/addOrUpdate", this.checkData).then(res => {
               console.log(res);
               if (res.statusCode == 200) {
-                // console.log(this.checkData.childCount )
                 this.Confirm = false;
                 alert('提交成功!');
                 this.AreaNPercent();
-
-                // if (this.checkData.selfpremisesArea) {
-                //   this.checkData.selfpremisesArea += "m²";
-                // } else {
-                //   this.checkData.selfpremisesArea = "";
-                // }
-                // if (this.checkData.selfhasProportion) {
-                //   this.checkData.selfhasProportion += "%";
-                // } else {
-                //   this.checkData.selfhasProportion = "";
-                // }
               } else {
                 alert("提交失败，请重新提交")
                 this.Confirm = false;
               }
             });
-            // alert('提交成功!');
-            // return;
           } else {
             alert('请按要求填写！');
             this.Confirm = false;
           }
-          // alert('Correct them errors!');
         });
       },
       AreaNPercent() {
@@ -2307,90 +2021,77 @@
         }
       },
       mountJ(code, val) {
-        // this.checkData+"."+val==0? this+"."+comment=false: this+"."+comment=true;
-        // this.checkData.val==0? this.comment=false: this.comment=true;
-        // console.log(code)
         switch (code) {
           case 0:
             val == 0 ? this.InternetShow.commentS = false : this.InternetShow.commentS = true;
-            break; //上网-客户被执行
+            break;
           case 1:
             val == 0 ? this.InternetShow.commentS1 = false : this.InternetShow.commentS1 = true;
-            break; //上网-单位被执行
+            break;
           case 2:
             val == 0 ? this.InternetShow.commentS2 = false : this.InternetShow.commentS2 = true;
-            break; //上网-客户被执行
+            break;
           case 3:
             val == 0 ? this.InternetShow.commentS3 = false : this.InternetShow.commentS3 = true;
-            break; //上网-客户被执行
+            break;
           case 4:
             val == 0 ? this.InternetShow.commentS4 = false : this.InternetShow.commentS4 = true;
-            break; //上网-客户被执行
+            break;
           case 5:
             val == 0 ? this.InternetShow.commentS5 = false : this.InternetShow.commentS5 = true;
-            break; //上网-客户被执行  
+            break;
           case 6:
             val == 0 ? this.InternetShow.commentS6 = false : this.InternetShow.commentS6 = true;
-            break; //上网-客户被执行
+            break;
           case 7:
             val == 0 ? this.InternetShow.commentS7 = false : this.InternetShow.commentS7 = true;
-            break; //上网-客户被执行
+            break;
           case 8:
             val == 0 ? this.InternetShow.commentS8 = false : this.InternetShow.commentS8 = true;
-            break; //上网-客户被执行
+            break;
           case 9:
             val == 0 ? this.InternetShow.commentS9 = false : this.InternetShow.commentS9 = true;
-            break; //上网-客户被执行
+            break;
           case 10:
             val == 0 ? this.InternetShow.commentS10 = false : this.InternetShow.commentS10 = true;
-            break; //上网-客户被执行
+            break;
           case 11:
             val == 0 ? this.checkId.declearNloaned = false : this.checkId.declearNloaned = true;
             break;
-          case 12: //私营业主整个部分
+          case 12:
             val == 0 || val == null ? this.workInf.private = false : this.workInf.private = true;
             break;
-          case 13: //婚姻状况
+          case 13:
             val == "01" || val == "04" || val == null ? this.marriage.couple = false : this.marriage.couple = true;
             break;
-          case 14: // 配偶工作情况
+          case 14:
             val == "00" || val == "03" ? this.marriage.workingCondition = true : this.marriage.workingCondition = false;
             break;
-          case 15: // 是否在同一个城市工作
+          case 15:
             val == 0 || val == null ? this.marriage.workingLivingInf = false : this.marriage.workingLivingInf = true;
             break;
-          case 16: // 是否有子女
+          case 16:
             val == 0 || val == null ? this.Children.ChildrenOrNot = false : this.Children.ChildrenOrNot = true;
             break;
-          case 17: // 是否支付其生活费
+          case 17:
             val == 0 || val == null ? this.Children.PayAlimony = false : this.Children.PayAlimony = true;
             break;
-          case 18: // 父母是否在世
+          case 18:
             val == 0 || val == null ? this.parent.livingOrNot = false : this.parent.livingOrNot = true;
             break;
-          case 19: // 是否有兄弟姐妹
+          case 19:
             val == 0 || val == null ? this.siblings.siblingsOrNot = false : this.siblings.siblingsOrNot = true;
             break;
-          case 20: // 是否为常住地址(选否显示)
+          case 20:
             val == 0 ? this.address.permanent = true : this.address.permanent = false;
             break;
 
-          case 21: // 是否为常住地址(选否显示)
+          case 21:
             val == 0 || val == null ? this.checkId.loanNot = false : this.checkId.loanNot = true;
             break;
         }
-        // this.checkData.val==0? this.InternetShow.commentS=false: this.InternetShow.commentS=true;
-
-        // val==0? comment=false:comment=true;
-
-      },
-      hireDate(val, e) {
-        console.log("获取日期")
-        console.log(val)
-        // console.log(e.target.value)
       },
       postCode(val, e) {
-        // 邮编
         var reg = /^\d{6}$/;
         if (reg.test(val)) {
           console.log("匹配")
@@ -2402,55 +2103,31 @@
           this.reg.mpostCode = true;
         }
       },
-      ratio(val, e) {
-
-      },
       businessArea(val, e, el, unit) {
-        console.log("营业面积")
         val = parseFloat(val);
         if (isNaN(val)) {
-          console.log(" 面积NAN")
           val = e.target.value = "";
           this.businessSC(val, el);
-
         } else if (val <= 0) {
-          console.log(" 面积<0")
           val = e.target.value = "0.00" + unit;
           this.businessSC(val, el);
-
         } else if (val > 0) {
-          console.log(" 面积>0")
           if (val.toString().indexOf('.') == -1) {
-            console.log("无小数")
             e.target.value = val = val + "." + "0" + '0' + unit;
             this.businessSC(val, el);
-
-            console.log(e.target.value)
-            console.log(val)
-            console.log(this.checkData.selfpremisesArea)
-
           } else if (val.toString().indexOf('.') != -1) {
-            console.log("有小数")
             if (val.toString().split(".")[1].length < 2) {
-              console.log("一位小数")
               e.target.value = val = val + "0" + unit;
               this.businessSC(val, el);
-              console.log(this.checkData.selfpremisesArea)
-
             } else {
-              console.log("两位小数")
               e.target.value = val = val.toString().split(".")[0] + "." + val.toString()
                 .split(".")[1].slice(0, 2) + unit;
               this.businessSC(val, el);
             }
           }
         }
-        console.log(this.checkData.selfpremisesArea);
-        // console.log(this.checkData.selfpremisesArea.slice(0, -1))
         this.acreage = this.checkData.selfpremisesArea.slice(0, -2);
         this.Percent = this.checkData.selfhasProportion.slice(0, -1);
-        console.log(this.acreage)
-        console.log(this.Percent)
       },
       businessSC(val, el) {
         switch (el) {
@@ -2463,83 +2140,44 @@
         }
       },
       mPhone(val, e) {
-        // mphoneM
-        // var reg=/^\d{3,4}$/;
-        var reg = /^(0[0-9]{2,3}-)?([0-9]{5,8})$/; //含重复
+        var reg = /^(0[0-9]{2,3}-)?([0-9]{5,8})$/;
         var regNoR =
-          /^(0[0-9]{2,3}-)?(0{5,8})|(1{5,8})|(2{5,8})|(3{5,8})|(4{5,8})|(5{5,8})|(6{5,8})|(7{5,8})|(8{5,8})|(9{5,8})$/; //不含重复
+          /^(0[0-9]{2,3}-)?(0{5,8})|(1{5,8})|(2{5,8})|(3{5,8})|(4{5,8})|(5{5,8})|(6{5,8})|(7{5,8})|(8{5,8})|(9{5,8})$/;
         var regNoOrder =
-          /^(0[0-9]{2,3}-)?(12345)|(54321)|(123456)|(654321)|(23456)|(65432)|(1234567)|(7654321)|(234567)|(765432)|(34567)|(76543)|(12345678)|(87654321)|(2345678)|(8765432)|(345678)|(876543)|(45678)|(87654)$/; //非正序倒序
-        console.log("电话正则")
-        //  var rek=/?<k1>[0-9a-zA-Z])\k<k1>{5}$ /;//不重复
+          /^(0[0-9]{2,3}-)?(12345)|(54321)|(123456)|(654321)|(23456)|(65432)|(1234567)|(7654321)|(234567)|(765432)|(34567)|(76543)|(12345678)|(87654321)|(2345678)|(8765432)|(345678)|(876543)|(45678)|(87654)$/;
         if (reg.test(val)) {
-          console.log("重复")
           if (regNoR.test(val) || regNoOrder.test(val)) {
-            console.log("全是重复")
             this.reg.mphoneM = false;
             this.reg.mphoneR = true;
             this.checkData.workTel = e.target.value = val = '';
-          }
-          // else if(regNoOrder.test(val)){
-          //   console.log("全是按顺序")
-          //       this.reg.mphoneM = false;
-          //   this.reg.mphoneR = false;
-          // this.reg.mphoneO = true;  
-          // }
-          else {
-            console.log("既不重复也没按顺序")
+          } else {
             this.reg.mphoneM = false;
             this.reg.mphoneR = false;
             this.checkData.workTel = e.target.value = val;
-            // workTel=   =val;
-            // this.reg.mphoneO = false;
           }
-          //  workTel this.
-        }
-        // else if(val=-1){
-        //   this.reg.mphoneM = false;
-        // }
-        //  else if(regNoR.tes(val)){
-        //    console.log("全是重复")
-        //    this.reg.mphoneM=true;         
-        //  }
-        else {
-          console.log("不匹配")
+        } else {
           this.reg.mphoneM = true;
           this.reg.mphoneR = false;
           this.checkData.workTel = e.target.value = val = '';
         }
       },
       mMonth(val, e) {
-        console.log("mMonth")
         val = parseInt(val);
         if (val >= 1 && val <= 999) {
-          console.log("小于31")
           this.checkData.iloanTerm = e.target.value = val;
-          // this.reg.mMontyP = false;
         } else if (val >= 1 && val > 999) {
-          console.log("大于31")
           this.checkData.iloanTerm = e.target.value = val = 999;
-          // this.reg.mMontyP = true;
         } else {
           this.checkData.iloanTerm = e.target.value = val = " ";
-          // this.reg.mMontyP = true;
         }
       },
       mday(val, e) {
-        console.log("reg");
         if (val >= 1 && val <= 31) {
-          console.log("小于31")
           this.checkData.payDay = e.target.value = val;
           this.reg.mpayDay = false;
-          console.log(this.reg.mpayDay)
-
         } else {
-          console.log("大于31")
           this.checkData.payDay = e.target.value = val = '';
           this.reg.mpayDay = true;
-
-          console.log(this.reg.mpayDay)
         }
       },
       childNumver(val, e) {
@@ -2562,102 +2200,30 @@
           this.workInf.empNumber = true;
         }
       },
-      // count(val, e, name) {
-      //   console.log("数量")
-      //   val = parseInt(val);
-      //   console.log(val)
-      //   if (isNaN(val)) {
-      //     console.log(" 数量<NAN")
-      //     val = e.target.value = "";
-      //     this.countSC(name, val)
-      //   } else if (val <= 0) {
-      //     console.log(" 数量<0")
-      //     val = e.target.value = 0;
-      //   } else if (val > 0) {
-      //     console.log(" 数量>0")
-      //     e.target.value = val;
-      //   }
-      // },
-      // countSC(el, val) {
-      //   console.log(el + "=====" + val)
-      //   switch (el) {
-      //     case "子女数量":
-      //       this.checkData.childCount = val;
-      //       break;
-      //     case "员工人数":
-      //       this.checkData.selfempCount = val;
-      //       break;
-      //   }
-      // },
       formatMoney(val, e, name) {
-        // this.formatSC(name,val);
-        console.log(name)
-        console.log(" blur更改金额")
         val = parseFloat(val);
         if (isNaN(val)) {
-          console.log(" 金额<NAN")
           val = e.target.value = "";
           this.formatSC(name, val);
         } else if (val <= 0) {
-          console.log(" 金额<0")
           val = e.target.value = "0.00";
           this.formatSC(name, val);
         } else if (val > 0) {
-          console.log(" 金额>0")
           if (val.toString().indexOf('.') == -1) {
-            console.log("无小数")
-            // val = val + "."+0+0;
-            // for(var i=0;i<2;i++){
-            //   val[i]+=0
-            //   // }
-            //   console.log(val)
-            //   var k=parseFloat(val)
-            // e.target.value = val;
-            //   // parseFloat(val)
-            //   console.log(typeof(val))
-            //   console.log(k)
-            //   console.log(typeof(k))
-
-            // //  k= parseFloat(k)
-            //   e.target.value = val=parseFloat(val);
-            //   console.log(typeof(e.target.value))
-
             val = val + "." + "0" + '0';
-            // e.target.value = val = val + "."+"0"+'0';
-
-            console.log(e.target.value)
-
-            // e.target.value= val+"%"
-            console.log(val)
-            console.log(e.target.value)
-            console.log(this.checkData.fbalance)
-
             this.formatSC(name, val);
-            console.log(this.checkData.fbalance)
-
-
-          } else if (val.toString().indexOf('.') != -1) {
-            console.log("有小数")
-            // console.log(val.toString().split(".").length )
+        } else if (val.toString().indexOf('.') != -1) {
             if (val.toString().split(".")[1].length < 2) {
-              console.log("一位小数")
-              //  e.target.value = val= val.toString().split(".")[0] + "." + val.toString().split(".")[1]+"0";
               e.target.value = val = val + "0";
-              // console.log(this.checkData.fbalance)
-              // console.log(val)
-              // console.log(e.target.value)
               this.formatSC(name, val);
-            } else {
-              console.log("两位小数")
+         } else {
               e.target.value = val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
               this.formatSC(name, val);
             }
-
           }
         }
       },
       formatSC(el, val) {
-        console.log(el + "=====" + val)
         switch (el) {
           case "月还款":
             this.checkData.fbalance = val;
@@ -2695,59 +2261,21 @@
             break;
         }
       },
-      // testVuex(){
-      //   console.log("testVuex");
-      //   console.log(this.$store.state.First.Workbench)
-
-      //   console.log(this.First)
-
-      // },
       formatMoneyBackUp(val, e) {
-        console.log(" blur更改金额")
-        // console.log(e.target)
-        // console.log(val)
-        // console.log(this.checkData.fbalance)
-        // console.log(typeof(val))
-        console.log(parseFloat(val))
         val = parseFloat(val);
-        console.log(typeof (val))
-        console.log(val)
-        // console.log(val)
         if (val <= 0 || isNaN(val)) {
-          console.log(" 金额<0")
-
           this.checkData.fbalance = this.val = val = e.target.value = "0.00";
-          console.log(e.target.value)
-          console.log(val)
-          console.log(this.checkData.fbalance)
         } else if (val > 0) {
-          console.log(" 金额>0")
-
-          // this.checkData.fbalance = this.val = val = e.target.value = Math.floor(val * 100) 
-          console.log(e.target.value)
-          console.log(val)
-          console.log(this.checkData.fbalance)
-          console.log(val.toString().indexOf('.'))
           if (val.toString().indexOf('.') == -1) {
-            console.log("无小数")
-            console.log(val)
             e.target.value = val = val + ".00"
           } else if (val.toString().indexOf('.') != -1) {
-            console.log("有小数")
-            console.log(typeof (val))
-            console.log(val.toString().split("."))
-            //  var FloatCount=  val.toString().split(".")
-            // val=FloatCount[0]+"."+ FloatCount[1].slice(0,2);
             e.target.value = val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
-            console.log(val)
           }
         }
-
       },
       ElInputStyle(val) { //监听分屏右侧div宽度，100% / 50% 的时候改变input的大小
         console.log(val)
         if (val == "50%") {
-          console.log("50%");
           for (var i = 0; i < this.Pwidth.length; i++) {
             this.Pwidth[i].style.width = 150 + "px";
           };
@@ -2755,12 +2283,10 @@
             this.inputWidth[i].style.width = 515 + "px";;
           };
           this.CFwidth[0].style.minWidth = 1272 + "px";
-          this.comaddressb[0].style.paddingLeft = 674 + "px";//comaddressHint
-      //  this.textareaPpraProj[0].style.width=516+"px";
+          this.comaddressb[0].style.paddingLeft = 674 + "px";
           console.log(this.CFwidth[0].style.minWidth)
           console.log(this.CFwidth[0].style.minWidth)
         } else if (val == "100%") {
-          console.log("100%")
           for (var i = 0; i < this.Pwidth.length; i++) {
             this.Pwidth[i].style.width = 200 + "px";
           };
@@ -2769,60 +2295,18 @@
           };
           this.CFwidth[0].style.minWidth = 1592 + "px";
           this.comaddressb[0].style.paddingLeft = 826 + "px";
-          //  this.textareaPpraProj[0].style.width="100%";
-          //  this.textareaPpraProj[0].style.maxWidth=768+"px";
-          console.log(this.CFwidth[0].style.minWidth)
         }
       }
     },
-    computed: {
-      First() {
-        return this.$store.state.First
-      },
-      // 计算属性的 getter
-      format: function (val) {
-        // `this` 指向 vm 实例
-        console.log(val)
-        return val.split(".")
-        // return this.message.split('').reverse().join('')
-      }
-    },
-    filters: {
-      formateAmount: function (val) {
-        if (val <= 0) {
-          return "0.00"
-        }
-        // if (!value) return ''
-        // value = value.toString()
-        // return value.charAt(0).toUpperCase() + value.slice(1)
-      }
-    },
-    // computed: {
-    //   formatMoney(val) {
-    //     console.log("格式化金额");
-    //     console.log(val)
-    //     // if (val <= 0) {
-    //     //  return val = 0;
-    //     // }
-    //   },
-    // },
     mounted() {
       this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
-
       // 获取查询列表数据
       this.post("/creauditInfo/queryCreauditInfoObj", {
-        // applyId: this.getParams.applyId,
         applyId: "00542",
       }).then(res => {
         console.log(res.data);
         this.checkData = res.data;
-        this.AreaNPercent(); // 营业面积 百分比拼上后面字符
-        console.log("查询到的日期")
-        console.log(this.checkData.wnetPhonetxt.length)
-
-
-        // console.log(this.checkData.wnetEcutedBrea)
-        // console.log(this.InternetShow.commentS)
+        this.AreaNPercent();
         this.mountJ(0, res.data.wbeexEcuted);
         this.mountJ(1, res.data.wnetHirecom);
         this.mountJ(2, res.data.wnetEcutedBrea);
@@ -2835,20 +2319,16 @@
         this.mountJ(9, res.data.wnetCompany);
         this.mountJ(10, res.data.wnetAddrstate);
         this.mountJ(11, res.data.iisself);
-        this.mountJ(12, res.data.privateOwnerFlag); //私营业主是否
-        this.mountJ(13, res.data.fmarrflag); //婚姻状况
-        this.mountJ(14, res.data.spouseWork); //配偶工作情况
-        this.mountJ(15, res.data.spouseSamecity); // 是否在同一个城市工作生活
-        this.mountJ(16, res.data.childFlag); // 是否有子女
-        this.mountJ(17, res.data.childIspaycost); // 是否支付其生活费
-        this.mountJ(18, res.data.parentIsliving); // 父母是否在世
-        this.mountJ(19, res.data.brothersIfhas); // 是否有兄弟姐妹
-        this.mountJ(20, res.data.aisresident); // 是否为常住地址
-        this.mountJ(21, res.data.iloanBefore); //是否在我司申请借款
-        // console.log(res.data.privateOwnerFlag)
-
-        // console.log(this.checkData.wnetHirecom)
-        // checkData.iisself
+        this.mountJ(12, res.data.privateOwnerFlag);
+        this.mountJ(13, res.data.fmarrflag);
+        this.mountJ(14, res.data.spouseWork);
+        this.mountJ(15, res.data.spouseSamecity);
+        this.mountJ(16, res.data.childFlag);
+        this.mountJ(17, res.data.childIspaycost);
+        this.mountJ(18, res.data.parentIsliving);
+        this.mountJ(19, res.data.brothersIfhas);
+        this.mountJ(20, res.data.aisresident);
+        this.mountJ(21, res.data.iloanBefore);
       });
       // 省    
       this.get("/credit/queryProvince", {}).then(res => {
@@ -2857,20 +2337,12 @@
       });
       // 所属行业 
       this.get("/credit/industry", {}).then(res => {
-        // console.log(res.data);
         this.hirecomKind = res.data;
       })
-      //  var k= document.getElementsByClassName(" CreditForm>hint")
-      //  var k= document.getElementsByClassName("el-input")[0].style.width=150+"px"
-      //  var k= document.getElementsByClassName("el-input")
       this.Pwidth = document.getElementsByClassName("el-input")
       this.CFwidth = document.getElementsByClassName("CreditForm")
       this.inputWidth = document.getElementsByClassName("specialInput")
-      this.comaddressb=document.getElementsByClassName("comaddressb")
-      // this.textareaPpraProj=document.getElementsByClassName("opraProj")
-      console.log(this.textareaPpraProj)
-      // console.log(this.Pwidth)
-      // console.log(this.$parent.$refs.rRight.style.width)
+      this.comaddressb = document.getElementsByClassName("comaddressb")
       if (this.myWatch) {
         this.ElInputStyle(this.myWatch)
       } else {
@@ -2879,43 +2351,12 @@
           this.comaddressb[0].style.paddingLeft = 674 + "px";
         }
       }
-      console.log(this.myWatch)
     },
     props: ["myWatch"],
     watch: {
-      // 监听分屏右侧div宽度，100% / 50% 的时候改变input的大小
       myWatch: function (val) {
         this.ElInputStyle(val);
       }
-      // 监听分屏右侧div宽度，100% / 50% 的时候改变input的大小
-      //   myWatch:function(val){
-      //     console.log(val)
-      //     if(val=="50%"){
-      //       console.log("50%");
-      //        for(var i=0; i<this.Pwidth.length;i++){
-      //    this.Pwidth[i].style.width=150+"px";
-      //   };
-      //   for(var i=0; i<this.inputWidth.length;i++){
-      //    this.inputWidth[i].style.width=515+"px";;
-      //   };
-      //    this.CFwidth[0].style.minWidth=1272+"px";
-      // //  this.textareaPpraProj[0].style.width=516+"px";
-      //   console.log( this.CFwidth[0].style.minWidth )
-      //   console.log( this.CFwidth[0].style.minWidth )
-      //     }else if(val=="100%"){
-      //       console.log("100%")
-      //        for(var i=0; i<this.Pwidth.length;i++){
-      //   this.Pwidth[i].style.width=200+"px";
-      //   };
-      //    for(var i=0; i<this.inputWidth.length;i++){
-      //   this.inputWidth[i].style.width= "calc( 50% + 160px )"
-      //   };
-      //    this.CFwidth[0].style.minWidth=1592+"px";
-      //   //  this.textareaPpraProj[0].style.width="100%";
-      //   //  this.textareaPpraProj[0].style.maxWidth=768+"px";
-      //   console.log( this.CFwidth[0].style.minWidth )
-      //     }
-      //   }
     },
     directives: {
 
@@ -3004,25 +2445,25 @@
     color: #5a5e66;
   }
 
-  ::-webkit-input-placeholder {
+   ::-webkit-input-placeholder {
     /* WebKit browsers */
     color: #b4bccc;
     font-size: 14px;
   }
 
-  :-moz-placeholder {
+   :-moz-placeholder {
     /* Mozilla Firefox 4 to 18 */
     color: #b4bccc;
     font-size: 14px;
   }
 
-  ::-moz-placeholder {
+   ::-moz-placeholder {
     /* Mozilla Firefox 19+ */
     color: #b4bccc;
     font-size: 14px;
   }
 
-  :-ms-input-placeholder {
+   :-ms-input-placeholder {
     /* Internet Explorer 10+ */
     color: #b4bccc;
     font-size: 14px;
