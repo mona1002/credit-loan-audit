@@ -161,6 +161,13 @@
       // this.orgCode = this.$route.query.orgCode;
       // console.log(this.userCode + "================" + this.orgCode)
       // this.$route.query.picName接参数 
+
+  //  this.get("/smUser/getUserInfo").then(response => {
+    this.get("http://codeplatform.nuoyuan.com.cn/base/smUser/getUserInfo").then(response => {
+        // axios 请求
+        console.info(response.data);
+      });
+
       this.loginPass = JSON.parse(localStorage.getItem('userInf'));
       this.post("/workFlowTaskQuery/getTaskProfile", {
         taskStatus: "01",

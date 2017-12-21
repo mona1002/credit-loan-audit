@@ -1,6 +1,23 @@
 <template>
   <div class="new1">
 <h1>new1</h1>
+ Wordhint:{
+          Internet:{
+            excude
+            comExcude
+            looseCreSel            
+            looseCre
+            comLooseCre
+            phoneOUtSSel            
+            phoneOUtS
+            comphoneOUtS
+            ComName
+            address
+            comAddress
+            loginOrNotSel
+            loginOrNot
+            institutionCode          }
+        },
   </div>
 </template>
 

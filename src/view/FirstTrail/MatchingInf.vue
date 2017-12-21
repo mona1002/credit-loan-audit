@@ -36,10 +36,10 @@
           <div ref="Left_detail" class="Left_detail_div">
             <p class="Left_right_Title"> {{this.title}}
               <span class="icon_FullScreen">
-                <img src="../../../static/images/Vector%20Smart%20Object@1x.png" @click="FullScreen">
+                <img src="../../../static/images/backcopy 2.png" @click="FullScreen">
               </span>
               <span class="showAllList" @mouseenter="showList" @mouseleave="hid">
-                <img src="../../../static/images/vack.png">
+                <img src="../../../static/images/icon-02.png">
               </span>
             </p>
             <div class="Left_right_BigImg ">
@@ -61,7 +61,7 @@
         </div>
         <!-- 右侧分屏部分 -->
         <div class="right" ref="rRight">
-          <img src="../../../static/images/Vector%20Smart%20Object@1x.png" class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen">
+          <img src="../../../static/images/backcopy.png" class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen">
           <!-- tab2 切换 -->
           <!-- <el-tabs @tab-click="flag2 &&handleClick" type="border-card">
         <el-tab-pane :label="val" v-for="(val,index) in items2" :key="index">
@@ -445,8 +445,8 @@
 
   .icon_showHalf {
     position: absolute;
-    top: 18px;
-    left: 18px;
+    top: 6px;
+    left: 9px;
     z-index: 3;
     /* background:rgba(0, 119, 255, 0.75); */
     background: #4099ff;
@@ -454,7 +454,7 @@
 
   .icon_FullScreen {
     position: absolute;
-    top: 0;
+    top:7px;
     right: 17px;
     /* right: 0; */
   }
@@ -462,7 +462,7 @@
   .showAllList {
     /* display: inline-block; */
     position: absolute;
-    padding-top: 6px;
+    padding-top: 2px;
     width: 55px;
     height: 50px;
     /* background: red; */

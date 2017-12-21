@@ -1,6 +1,6 @@
 <!-- 借款人资料 -->
 <template>
-	<div class="borrowerInformation" style="width:100%" ref="wrap">
+	<div class="borrowerInformation">
 		<el-collapse v-model="activeNames" @change="handleChange">
 			<el-collapse-item name="1">
 				<template slot="title">
@@ -726,22 +726,51 @@
 			    </template>
 		  		<div class="fuzhaixinxi">
 		  			<ol>
-				    	<li><label>信用卡每月还款[元]:</label><el-input v-on:blur="debtTotal" v-model="borDebt.monthRepayAmt"></el-input></li>
-				    	<li><label>信用贷每月还款额[元]:</label><el-input v-model="borDebt.studentLoanAmt"></el-input></li>
-				    	<li><label>房贷每月还款额[元]:</label><el-input v-on:blur="debtTotal" v-model="borDebt.houseLoanAmt"></el-input></li>
+				    	<li>
+				    		<label>信用卡每月还款[元]:</label>
+				    		<el-input v-on:blur="debtTotal(borDebt.monthRepayAmt,'monthRepayAmt')" v-model="borDebt.monthRepayAmt">	
+				    		</el-input>
+				    	</li>
+				    	<li>
+				    		<label>信用贷每月还款额[元]:</label>
+				    		<el-input v-model="borDebt.studentLoanAmt" v-on:blur="debtTotal(borDebt.studentLoanAmt,'studentLoanAmt')">
+				    		</el-input>
+				    	</li>
+				    	<li>
+				    		<label>房贷每月还款额[元]:</label>
+				    		<el-input v-on:blur="debtTotal(borDebt.houseLoanAmt,'houseLoanAmt')" v-model="borDebt.houseLoanAmt">	
+				    		</el-input>
+				    	</li>
 				    </ol>
 				    <ol>
-				    	<li><label>车贷每月还款额[元]:</label><el-input v-on:blur="debtTotal" v-model="borDebt.carLoanAmt"></el-input></li>
-				    	<li><label>其他贷款每月还款额[元]:</label><el-input v-on:blur="debtTotal" v-model="borDebt.otherLoanAmt"></el-input></li>
-				    	<li class="zongji"><label>负债合计[元]:</label><el-input v-model="borDebt.totalLoan"></el-input></li>
+				    	<li>
+				    		<label>车贷每月还款额[元]:</label>
+				    		<el-input v-on:blur="debtTotal(borDebt.carLoanAmt,'carLoanAmt')" v-model="borDebt.carLoanAmt">
+				    		</el-input>
+				    	</li>
+				    	<li>
+				    		<label>其他贷款每月还款额[元]:</label>
+				    		<el-input v-on:blur="debtTotal(borDebt.otherLoanAmt,'otherLoanAmt')" v-model="borDebt.otherLoanAmt">	
+				    		</el-input>
+				    	</li>
+				    	<li class="zongji">
+				    		<label>负债合计[元]:</label>
+				    		<el-input v-model="borDebt.totalLoan" v-on:blur="debtTotal(borDebt.totalLoan,'totalLoan')">
+				    		</el-input>
+				    	</li>
 				    </ol>
 				    <ol class="num">
-				    	<li><label>最近三个月信用卡/贷款申请次数:</label><el-input v-model="borDebt.loanNumber"></el-input></li>
+				    	<li>
+				    		<label>最近三个月信用卡/贷款申请次数:</label>
+				    		<el-input v-model="borDebt.loanNumber" v-on:blur="loanNumber(borDebt.loanNumber)"></el-input>
+				    	</li>
 				    	<li>
 
 				    		<label>文字说明:</label>
 				    		<div  class="require">
-				    			<span v-show="borDebt.remark.length==200"><i>*</i>输入长度不能超过200</span>
+				    			<span v-show="borDebt.remark.length==200">
+				    				<i>*</i>输入长度不能超过200
+				    			</span>
 				    			<el-input
 								  type="textarea"
 								  :rows="2"
@@ -788,7 +817,7 @@
 							</el-select>
 					    	<!-- <el-input v-model="rptInfo.crHasRecord"></el-input> -->
 						</li>
-				    	<li><label>近6个月内信用报告查询次数:</label><el-input v-model="rptInfo.crRecordTimes"></el-input></li>
+				    	<li><label>近6个月内信用报告查询次数:</label><el-input v-model="rptInfo.crRecordTimes" v-on:blur="recordTimes(rptInfo.crRecordTimes)"></el-input></li>
 				    </ol>
 				    <ol>
 				    	<li>
@@ -861,7 +890,7 @@
 				        min-width="130">
 				        <template slot-scope="scope">
 				        	<!-- <input type="text" name="" v-model="scope.row.n" placeholder="请输入内容">--><!-- @blur="numns(scope.row.n)"  -->
-				          <el-input v-model="scope.row.n" @blur="moneyBlur(scope.row.n,'n')" placeholder="请输入内容"></el-input> <!--  v-number-only -->
+				          <el-input v-model="scope.row.n" @blur="moneyBlur(scope.row,'n')" placeholder="请输入内容"></el-input> <!--  v-number-only -->
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -869,8 +898,8 @@
 				        label="N-1"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n1" @blur="moneyBlur(scope.row.n1,'n1')" placeholder="请输入内容"><!--v-number-only -->
-						  <!-- <el-input v-model="scope.row.n1" placeholder="请输入内容"></el-input> -->
+				        	<!-- <input type="text" name="" v-model="scope.row.n1" @blur="moneyBlur(scope.row,'n1')" placeholder="请输入内容"> --><!--v-number-only -->
+						  <el-input v-model="scope.row.n1" @blur="moneyBlur(scope.row,'n1')" placeholder="请输入内容"></el-input>
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -878,8 +907,8 @@
 				        label="N-2"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n2" @blur="moneyBlur(scope.row.n2,'n2')" placeholder="请输入内容"><!--v-numbers ='scope.row.n2' -->
-						  <!-- <el-input v-model="scope.row.n2" placeholder="请输入内容"></el-input> -->
+				        	<!-- <input type="text" name="" v-model="scope.row.n2" @blur="moneyBlur(scope.row,'n2')" placeholder="请输入内容"> --><!--v-numbers ='scope.row.n2' -->
+						  <el-input v-model="scope.row.n2" @blur="moneyBlur(scope.row,'n2')" placeholder="请输入内容"></el-input>
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -887,8 +916,8 @@
 				        label="N-3"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n3" @blur="moneyBlur(scope.row.n3,'n3')" placeholder="请输入内容"><!-- ='scope.row.n3' -->
-						  <!-- <el-input v-model="scope.row.n3" placeholder="请输入内容"></el-input> -->
+				        	<!-- <input type="text" name="" v-model="scope.row.n3" @blur="moneyBlur(scope.row,'n3')" placeholder="请输入内容"> --><!-- ='scope.row.n3' -->
+						  <el-input v-model="scope.row.n3" @blur="moneyBlur(scope.row,'n3')" placeholder="请输入内容"></el-input>
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -896,8 +925,8 @@
 				        label="N-4"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n4" @blur="moneyBlur(scope.row.n4,'n4')" placeholder="请输入内容"><!-- ='scope.row.n4' -->
-						  <!-- <el-input v-model="scope.row.n4" placeholder="请输入内容"></el-input> -->
+				        	<!-- <input type="text" name="" v-model="scope.row.n4" @blur="moneyBlur(scope.row,'n4')" placeholder="请输入内容"> --><!-- ='scope.row.n4' -->
+						  <el-input v-model="scope.row.n4" @blur="moneyBlur(scope.row,'n4')" placeholder="请输入内容"></el-input>
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -905,8 +934,8 @@
 				        label="N-5"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<input type="text" name="" v-model="scope.row.n5" @blur="moneyBlur(scope.row.n5,'n5')" placeholder="请输入内容"><!-- ='scope.row.n5' -->
-						  <!-- <el-input v-model="scope.row.n5" placeholder="请输入内容"></el-input> -->
+				        	<!-- <input type="text" name="" v-model="scope.row.n5" @blur="moneyBlur(scope.row,'n5')" placeholder="请输入内容"> --><!-- ='scope.row.n5' -->
+						  <el-input v-model="scope.row.n5" @blur="moneyBlur(scope.row,'n5')" placeholder="请输入内容"></el-input>
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -923,8 +952,8 @@
 				        label="平均收入[元]"
 				        min-width="130">
 				        <template slot-scope="scope">
-						  <!-- <el-input v-model="scope.row.avgIncome" placeholder="请输入内容"></el-input> -->
-						  <input type="text" name="" v-model="scope.row.avgIncome" @blur="moneyBlur(scope.row.avgIncome,'avgIncome')" placeholder="请输入内容"><!--='scope.row.avgIncome' -->
+						  <el-input v-model="scope.row.avgIncome" @blur="moneyBlur(scope.row,'avgIncome')" placeholder="请输入内容" :disabled="true"></el-input>
+						  <!-- <input type="text" name="" v-model="scope.row.avgIncome" @blur="moneyBlur(scope.row,'avgIncome')" placeholder="请输入内容"> --><!--='scope.row.avgIncome' -->
 						</template>
 				      </el-table-column>
 			    </el-table>
@@ -1226,24 +1255,27 @@
 
 	  		if(this.isFull == false){// 分屏
 	  			//信用卡使用总况
-	  			$(".xinyongka").width('948px');
+	  			$(".xinyongka").width('930px');
 	  			$(".xinyongka ul li div").width('150px');
 	  			$(".xinyongka ul li div input").width('150px');
 	  			//负债信息
-	  			$(".fuzhaixinxi").width('948px');
+	  			$(".fuzhaixinxi").width('930px');
 	  			$(".fuzhaixinxi ol li div").width('150px');
-	  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 160px )');
+	  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 150px )');
 	  			$(".fuzhaixinxi ol li div.require div").width('100%');
-	  			$(".fuzhaixinxi ol li div input").width('150px');
-	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 155px )',"padding-right":'calc( 16.6% - 155px )'});
+	  			$(".fuzhaixinxi ol li div input").width('138px');
+	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 150px )',"padding-right":'calc( 16.6% - 150px )'});
 	  			//征询报告
 	  			$(".zhengxunbaogao ol li div").width('150px');
 	  			$(".zhengxunbaogao ol li div.require div").width('150px');
-	  			$(".zhengxunbaogao ol li div.require input").width('150px');
+	  			$(".zhengxunbaogao ol li div.require input").width('138px');
 	  			$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) div").width('150px');
-	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 155px )',"padding-right":'calc( 49.9% - 155px )'});
-	  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require").width('calc( 100% - 160px )');
+	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 150px )',"padding-right":'calc( 49.9% - 150px )'});
+	  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require").width('calc( 100% - 150px )');
 	  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require div").width('100%');
+	  			//其他信息
+	  			$(".qita").width('930px');
+	  			$(".qita ol li").css({'padding-right': 'calc( 49.9% - 155px )','padding-left': 'calc( 16.6% - 155px )'});
 	  			
 	  		}else if(this.isFull == true){// 全屏
 	  			$(".xinyongka").width('100%');
@@ -1252,18 +1284,21 @@
 	  			//负债信息
 	  			$(".fuzhaixinxi").width('100%');
 	  			$(".fuzhaixinxi ol li div").width('200px');
-	  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 160px )');
+	  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 150px )');
 	  			$(".fuzhaixinxi ol li div.require div").width('100%');
 	  			$(".fuzhaixinxi ol li div input").width('200px');
-	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 180px )',"padding-right":'calc( 16.6% - 180px )'});
+	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 175px )',"padding-right":'calc( 16.6% - 184px )'});
 	  			//征询报告
 	  			$(".zhengxunbaogao ol li div.require").width('200px');
 	  			$(".zhengxunbaogao ol li div.require div").width('200px');
 	  			$(".zhengxunbaogao ol li div.require input").width('200px');
 	  			$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) div").width('200px');
-	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 180px )',"padding-right":'calc( 49.9% - 180px )'});
-	  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require").width('calc( 100% - 160px )');
+	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 184px )'});
+	  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require").width('calc( 100% - 150px )');
 	  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require div").width('100%');
+	  			//其他信息
+	  			$(".qita").width('100%');
+	  			$(".qita ol li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 184px )'});
 	  		}
 		},
 	    methods:{
@@ -1309,6 +1344,7 @@
 		        }
 		        /*流水明细*/
 		        this.incomeList=res.data.incomeList;
+
 		        /*其他信息*/
 		        if(res.data.otherInfo==null){
 		        	this.otherInfo=this.otherInfo
@@ -1864,10 +1900,8 @@
 						//alert(num);
 					}else if(num<=0){
 						this.borCard.cardCount=0
-					}else if(num<0.5){
-						this.borCard.cardCount=0
-					}else if(1>num>0.5){
-						this.borCard.cardCount=1
+					}else if(num>0){
+						this.borCard.cardCount=Math.round(num);
 					}else if(num>999){
 						this.borCard.cardCount=999;
 					}
@@ -1880,10 +1914,8 @@
 						//alert(num);
 					}else if(num<=0){
 						this.borCard.normalCount=0
-					}else if(num<0.5){
-						this.borCard.normalCount=0
-					}else if(1>num>0.5){
-						this.borCard.normalCount=1
+					}else if(num>0){
+						this.borCard.normalCount=Math.round(num);
 					}else if(num>999){
 						this.borCard.normalCount=999;
 					}
@@ -1896,10 +1928,8 @@
 						//alert(num);
 					}else if(num<=0){
 						this.borCard.badDebtCount=0
-					}else if(num<0.5){
-						this.borCard.badDebtCount=0
-					}else if(1>num>0.5){
-						this.borCard.badDebtCount=1
+					}else if(num>0){
+						this.borCard.badDebtCount=Math.round(num);
 					}else if(num>999){
 						this.borCard.badDebtCount=999;
 					}
@@ -1912,10 +1942,8 @@
 						//alert(num);
 					}else if(num<=0){
 						this.borCard.nouseCount=0
-					}else if(num<0.5){
-						this.borCard.nouseCount=0
-					}else if(1>num>0.5){
-						this.borCard.nouseCount=1
+					}else if(num>0){
+						this.borCard.nouseCount=Math.round(num);
 					}else if(num>999){
 						this.borCard.nouseCount=999;
 					}
@@ -1928,10 +1956,8 @@
 						//alert(num);
 					}else if(num<=0){
 						this.borCard.freezeCount=0
-					}else if(num<0.5){
-						this.borCard.freezeCount=0
-					}else if(1>num>0.5){
-						this.borCard.freezeCount=1
+					}else if(num>0){
+						this.borCard.freezeCount=Math.round(num);
 					}else if(num>999){
 						this.borCard.freezeCount=999;
 					}
@@ -1944,10 +1970,8 @@
 						//alert(num);
 					}else if(num<=0){
 						this.borCard.cancelCount=0
-					}else if(num<0.5){
-						this.borCard.cancelCount=0
-					}else if(1>num>0.5){
-						this.borCard.cancelCount=1
+					}else if(num>0){
+						this.borCard.cancelCount=Math.round(num);
 					}else if(num>999){
 						this.borCard.cancelCount=999;
 					}
@@ -1960,10 +1984,8 @@
 						//alert(num);
 					}else if(num<=0){
 						this.borCard.userdCount=0
-					}else if(num<0.5){
-						this.borCard.userdCount=0
-					}else if(1>num>0.5){
-						this.borCard.userdCount=1
+					}else if(num>0){
+						this.borCard.userdCount=Math.round(num);
 					}else if(num>999){
 						this.borCard.userdCount=999;
 					}
@@ -1976,104 +1998,212 @@
 						//alert(num);
 					}else if(num<=0){
 						this.borCard.stopPaymentCount=0
-					}else if(num<0.5){
-						this.borCard.stopPaymentCount=0
-					}else if(1>num>0.5){
-						this.borCard.stopPaymentCount=1
+					}else if(num>0){
+						this.borCard.stopPaymentCount=Math.round(num);
 					}else if(num>999){
 						this.borCard.stopPaymentCount=999;
 					}
 				}
 			},
-			debtTotal(){
-				this.borDebt.totalLoan=this.borDebt.monthRepayAmt+this.borDebt.houseLoanAmt+this.borDebt.carLoanAmt+this.borDebt.otherLoanAmt
+			//征询报告 近6个月内信用卡报告查询次数
+			recordTimes(num){
+				if(num!=null && num!=""){
+					if(isNaN(num)){
+						this.rptInfo.crRecordTimes='';
+						//alert(num);
+					}else if(num<=0){
+						this.rptInfo.crRecordTimes=0
+					}else if(num>0){
+						this.rptInfo.crRecordTimes=Math.round(num);
+					}else if(num>99999){
+						this.rptInfo.crRecordTimes=99999;
+					}
+				}
 			},
-			moneyBlur: function(value, flag) {
-				console.log(value);
-			    // 无数据
-			    if (!value) {
-			        switch (flag) {
-			            case 'n':
-			                this.scope.row.n = '';
+			//负债信息 最近3个月信用卡/贷款申请次数
+			loanNumber(num){
+				if(num!=null && num!=""){
+					if(isNaN(num)){
+						this.borDebt.loanNumber='';
+					}else if(num<=0){
+						this.borDebt.loanNumber=0
+					}else if(num>0){
+						this.borDebt.loanNumber=Math.round(num); 
+					}else if(num>999){
+						this.borDebt.loanNumber=999;
+					}
+				}
+			},
+			debtTotal(val,flag){	
+		    // 无数据
+			    if (!val){
+			    	switch (flag) {
+			            case 'monthRepayAmt':
+			                this.borDebt.monthRepayAmt = '';
 			                break;
-			            case 'n1':
-			                this.scope.row.n1 = '';
+			            case 'studentLoanAmt':
+			                this.borDebt.studentLoanAmt = '';
 			                break;
-			            case 'n2':
-			                this.scope.row.n2 = '';
+			            case 'houseLoanAmt':
+			                this.borDebt.houseLoanAmt = '';
 			                break;
-			            case 'n3':
-			                this.scope.row.n3 = '';
+			            case 'carLoanAmt':
+			                this.borDebt.carLoanAmt = '';
 			                break;
-			            case 'n4':
-			                this.scope.row.n4 = '';
+			            case 'otherLoanAmt':
+			                this.borDebt.otherLoanAmt = '';
 			                break;
-			            case 'n5':
-			                this.scope.row.n5 = '';
-			                break;
-			            case 'avgIncome':
-			                this.scope.row.avgIncome = '';
-			                break;
+			            case 'totalLoan':
+			                this.borDebt.totalLoan = '';
+			                break;   
 			        }
 			    }
+			    // 有数据
+			    if (val) {
+			        // 传进来的值先按'.'拆分,取整数位,再replace ','
+			        val = val.split('.')[0].replace(/,/, '')
+			        // 正则判断数字  [0-9] +至少一次 , 第一位为0 不用处理
+			        if (/^[0-9]+$/g.test(Number(val))) {
+			        	switch (flag) {
+				            case 'monthRepayAmt':
+				            	this.borDebt.monthRepayAmt = Number(val).toLocaleString() + '.00';
+				            	this.borDebt.totalLoan=this.borDebt.monthRepayAmt*1+this.borDebt.houseLoanAmt*1+this.borDebt.carLoanAmt*1+this.borDebt.otherLoanAmt*1;
+				                break;
+				            case 'studentLoanAmt':
+				                this.borDebt.studentLoanAmt = Number(val).toLocaleString() + '.00';
+				                break;
+				            case 'houseLoanAmt':
+				                this.borDebt.houseLoanAmt = Number(val).toLocaleString() + '.00';
+				                this.borDebt.totalLoan=this.borDebt.monthRepayAmt*1+this.borDebt.houseLoanAmt*1+this.borDebt.carLoanAmt*1+this.borDebt.otherLoanAmt*1;
+				                break;
+				            case 'carLoanAmt':
+				                this.borDebt.carLoanAmt = Number(val).toLocaleString() + '.00';
+				                this.borDebt.totalLoan=this.borDebt.monthRepayAmt*1+this.borDebt.houseLoanAmt*1+this.borDebt.carLoanAmt*1+this.borDebt.otherLoanAmt*1;
+				                break;
+				            case 'otherLoanAmt':
+				                this.borDebt.otherLoanAmt = Number(val).toLocaleString() + '.00';
+				                this.borDebt.totalLoan=this.borDebt.monthRepayAmt*1+this.borDebt.houseLoanAmt*1+this.borDebt.carLoanAmt*1+this.borDebt.otherLoanAmt*1;
+				                break;
+				            case 'totalLoan':
+				                this.borDebt.totalLoan = Number(val).toLocaleString() + '.00';
+				                break;   
+				        }
+				    }else {
+			            console.log('错误提示')
+			            switch (flag) {
+				            case 'monthRepayAmt':
+				                this.borDebt.monthRepayAmt = '';
+				                break;
+				            case 'studentLoanAmt':
+				                this.borDebt.studentLoanAmt = '';
+				                break;
+				            case 'houseLoanAmt':
+				                this.borDebt.houseLoanAmt = '';
+				                break;
+				            case 'carLoanAmt':
+				                this.borDebt.carLoanAmt = '';
+				                break;
+				            case 'otherLoanAmt':
+				                this.borDebt.otherLoanAmt = '';
+				                break;
+				            case 'totalLoan':
+				                this.borDebt.totalLoan = '';
+				                break;   
+				        }
+			        }
+			    }
+			},
+			moneyBlur(value, flag) {
+				console.log(value);
+				//console.log(this.incomeList[0].n)
+
+			    // 无数据
+			    if(!value.n){
+			    	value.n = '';
+			    };
+			    if(!value.n1){
+			    	value.n1 = '';
+			    };
+			    if(!value.n2){
+			    	value.n2 = '';
+			    };
+			    if(!value.n3){
+			    	value.n3 = '';
+			    };
+			    if(!value.n4){
+			    	value.n4 = '';
+			    };
+			    if(!value.n5){
+			    	value.n5 = '';
+			    };
+			    if(!value.avgIncome){
+			    	value.avgIncome = '';
+			    };
 			    // 有数据
 			    if (value) {
 			    	console.log(value);
 			        // 传进来的值先按'.'拆分,取整数位,再replace ','
-			        value = value.split('.')[0].replace(/,/, '')
+			        switch (flag) {
+			                case 'n':
+			                    value.n = value.n.split('.')[0].replace(/,/, '');
+			                    break;
+			                case 'n1':
+			                    value.n1 = value.n1.split('.')[0].replace(/,/, '');
+			                    break;
+			                case 'n2':
+			                    value.n2 = value.n2.split('.')[0].replace(/,/, '');
+			                    break;
+			                case 'n3':
+			                    value.n3 = value.n3.split('.')[0].replace(/,/, '');
+			                    break;
+			                case 'n4':
+			                    value.n4 = value.n4.split('.')[0].replace(/,/, '');
+			                    break;
+			                case 'n5':
+			                    value.n5 = value.n5.split('.')[0].replace(/,/, '');
+			                    break;
+			                case 'avgIncome':
+			                    value.avgIncome = value.avgIncome.split('.')[0].replace(/,/, '');
+			                    break;
+			            }
+			        //value = value.split('.')[0].replace(/,/, '')
 			        // 正则判断数字  [0-9] +至少一次 , 第一位为0 不用处理
-			        //console.log(this.scope.row.n);
-			        if (/^[0-9]+$/g.test(Number(value))) {
-			            switch (flag) {
-			                case 'n':
-			                    this.scope.row.n = Number(value).toLocaleString() + '.00';
-			                    break;
-			                case 'n1':
-			                    this.scope.row.n1 = Number(value).toLocaleString() + '.00';
-			                    break;
-			                case 'n2':
-			                    this.scope.row.n2 = Number(value).toLocaleString() + '.00';
-			                    break;
-			                case 'n3':
-			                    this.scope.row.n3 = Number(value).toLocaleString() + '.00';
-			                    break;
-			                case 'n4':
-			                    this.scope.row.n4 = Number(value).toLocaleString() + '.00';
-			                    break;
-			                case 'n5':
-			                    this.scope.row.n5 = Number(value).toLocaleString() + '.00';
-			                    break;
-			                case 'avgIncome':
-			                    this.scope.row.avgIncome = Number(value).toLocaleString() + '.00';
-			                    break;
-			            }
-			        } else {
-			            console.log('错误提示')
-			            // 显示错误提示
-			            switch (flag) {
-			                case 'n':
-			                    this.scope.row.n = '';
-			                    break;
-			                case 'n1':
-			                    this.scope.row.n1 = '';
-			                    break;
-			                case 'n2':
-			                    this.scope.row.n2 = '';
-			                    break;
-			                case 'n3':
-			                    this.scope.row.n3 = '';
-			                    break;
-			                case 'n4':
-			                    this.scope.row.n4 = '';
-			                    break;
-			                case 'n5':
-			                    this.scope.row.n5 = '';
-			                    break;
-			                case 'avgIncome':
-			                    this.scope.row.avgIncome = '';
-			                    break;
-			            }
-			        }
+			        //console.log(scope.row.n);
+			        if (/^[0-9]+$/g.test(Number(value.n))) {
+			        	value.n = Number(value.n).toLocaleString() + '.00';
+			        }else{
+			        	value.n='';
+			        };
+			        if (/^[0-9]+$/g.test(Number(value.n1))) {
+			        	value.n1 = Number(value.n1).toLocaleString() + '.00';
+			        }else{
+			        	value.n1='';
+			        };
+			        if (/^[0-9]+$/g.test(Number(value.n2))) {
+			        	value.n2 = Number(value.n2).toLocaleString() + '.00';
+			        }else{
+			        	value.n2='';
+			        };
+			        if (/^[0-9]+$/g.test(Number(value.n3))) {
+			        	value.n3 = Number(value.n3).toLocaleString() + '.00';
+			        }else{
+			        	value.n3='';
+			        };
+			        if (/^[0-9]+$/g.test(Number(value.n4))) {
+			        	value.n4 = Number(value.n4).toLocaleString() + '.00';
+			        }else{
+			        	value.n4='';
+			        };
+			        if (/^[0-9]+$/g.test(Number(value.n5))) {
+			        	value.n5 = Number(value.n5).toLocaleString() + '.00';
+			        }else{
+			        	value.n5='';
+			        };
+			        if (/^[0-9]+$/g.test(Number(value.avgIncome))) {
+			        	value.avgIncome = Number(value.avgIncome).toLocaleString() + '.00';
+			        }else{
+			        	value.avgIncome='';
+			        };
 			    }
 			},
 	    },
@@ -2172,24 +2302,27 @@
 		  		console.log(this.isFull);
 		  		if(val == false){// 分屏
 		  			//信用卡使用总况
-		  			$(".xinyongka").width('948px');
+		  			$(".xinyongka").width('930px');
 		  			$(".xinyongka ul li div").width('150px');
 		  			$(".xinyongka ul li div input").width('150px');
 		  			//负债信息
-		  			$(".fuzhaixinxi").width('948px');
+		  			$(".fuzhaixinxi").width('930px');
 		  			$(".fuzhaixinxi ol li div").width('150px');
-		  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 160px )');
+		  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 150px )');
 		  			$(".fuzhaixinxi ol li div.require div").width('100%');
-		  			$(".fuzhaixinxi ol li div input").width('150px');
-		  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 155px )',"padding-right":'calc( 16.6% - 155px )'});
+		  			$(".fuzhaixinxi ol li div input").width('138px');
+		  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 150px )',"padding-right":'calc( 16.6% - 150px )'});
 		  			//征询报告
 		  			$(".zhengxunbaogao ol li div").width('150px');
 		  			$(".zhengxunbaogao ol li div.require div").width('150px');
-		  			$(".zhengxunbaogao ol li div.require input").width('150px');
+		  			$(".zhengxunbaogao ol li div.require input").width('138px');
 		  			$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) div").width('150px');
-		  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 155px )',"padding-right":'calc( 49.9% - 155px )'});
-		  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require").width('calc( 100% - 160px )');
+		  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 150px )',"padding-right":'calc( 49.9% - 150px )'});
+		  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require").width('calc( 100% - 150px )');
 		  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require div").width('100%');
+		  			//其他信息
+		  			$(".qita").width('930px');
+		  			$(".qita ol li").css({'padding-right': 'calc( 49.9% - 155px )','padding-left': 'calc( 16.6% - 155px )'});
 		  			
 		  		}else if(val == true){// 全屏
 		  			$(".xinyongka").width('100%');
@@ -2198,19 +2331,22 @@
 		  			//负债信息
 		  			$(".fuzhaixinxi").width('100%');
 		  			$(".fuzhaixinxi ol li div").width('200px');
-		  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 160px )');
+		  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 150px )');
 		  			$(".fuzhaixinxi ol li div.require div").width('100%');
 		  			$(".fuzhaixinxi ol li div input").width('200px');
-		  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 180px )',"padding-right":'calc( 16.6% - 180px )'});
+		  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 175px )',"padding-right":'calc( 16.6% - 184px )'});
 		  			//征询报告
 		  			$(".zhengxunbaogao ol li div.require").width('200px');
 		  			$(".zhengxunbaogao ol li div.require div").width('200px');
 		  			$(".zhengxunbaogao ol li div.require input").width('200px');
 		  			$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) div").width('200px');
-		  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 180px )',"padding-right":'calc( 49.9% - 180px )'});
-		  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require").width('calc( 100% - 160px )');
+		  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 184px )'});
+		  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require").width('calc( 100% - 150px )');
 		  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require div").width('100%');
-		  		}
+		  			//其他信息
+		  			$(".qita").width('100%');
+		  			$(".qita ol li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 184px )'});
+			  	}
 		  	}
 
 		},
@@ -2271,7 +2407,7 @@
 	}
 	/* 信用卡使用总况 */
 	.xinyongka{
-		width: 948px;
+		width: 930px;
 	}
 	.xinyongka ul{
 		float: left;
@@ -2305,7 +2441,7 @@
 	}
 	/* 负债信息 */
 	.fuzhaixinxi{
-		width: 948px;
+		width: 930px;
 	}
 	.fuzhaixinxi ol{
 		width: 100%;
@@ -2318,7 +2454,7 @@
 	}
 	.fuzhaixinxi ol li label{
 		display: inline-block;
-		width: 160px;
+		width: 150px;
 		text-align: right;
 		padding-right: 5px;
 		color: #475669;
@@ -2330,6 +2466,24 @@
 		width: 150px;
 		padding-left:10px;
 	}
+	.fuzhaixinxi ol:nth-of-type(2) li:nth-of-type(2){
+		height: 35px;
+	}
+	.fuzhaixinxi ol:nth-of-type(2) li:nth-of-type(2) label{
+		line-height: 1;
+	}
+	.fuzhaixinxi ol:nth-of-type(2) li:nth-of-type(2) div{
+		top: -5px;
+	}
+	.fuzhaixinxi ol:nth-of-type(3) li:nth-of-type(1){
+		height: 35px;
+	}
+	.fuzhaixinxi ol:nth-of-type(3) li:nth-of-type(1) label{
+		line-height: 1;
+	}
+	.fuzhaixinxi ol:nth-of-type(3) li:nth-of-type(1) div{
+		top: -5px;
+	}
 	/* 负债信息：负债合计 */
 	.fuzhaixinxi ol li.zongji input{
 		border: none;
@@ -2338,13 +2492,11 @@
 	ol.num li{
 		margin-bottom: 10px;
 	}
-	ol.num li:nth-of-type(1){
-		position: relative;
-	}
 	ol.num li:nth-of-type(2){
 		width: 66.6%;
 		text-align: left;
-		padding: 0 calc( 16.6% - 155px );	
+		padding-right: calc( 16.6% - 150px );
+		padding-left:calc( 16.6% - 150px );
 	}
 	ol.num li:nth-of-type(2) label{
 		height: 54px; 
@@ -2368,6 +2520,12 @@
 	/* 征询报告 */
 	.zhengxunbaogao ol{
 		width: 100%;
+	}
+	.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(3) div{
+		top: -5px;
+	}
+	.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(3) label{
+		line-height: 1;
 	}
 	.zhengxunbaogao ol:nth-of-type(2) li{
 		width: 100%;
@@ -2395,24 +2553,31 @@
 	}
 	/* 其他信息 */
 	.qita{
-		width: 100%;
+		width: 930px;
 	}
 	.qita ol li{
 		width: 100%;
 		height: 117px;
 		margin-top: 20px;
+		padding-right: calc( 49.9% - 155px );
+		padding-left: calc( 16.6% - 155px );
+	    text-align: right;
 	}
-	.qita ol div{
+	.qita ol div.require{
+		width: calc(100% - 150px);
 		display: inline-block;
-		width: 70%;
+	}
+	.qita ol div.require div{
+		width: 100%;
 	}
 	.qita ol label{
 		height: 117px;
 		line-height: 117px;
 		display: inline-block;
 		float: left;
-		margin:0 10px 0 20px;
 		color: #475669;
+		width: 150px;
+    	padding-right: 5px;
 	}
 	.qita ol textarea{
 		width: 70%;
