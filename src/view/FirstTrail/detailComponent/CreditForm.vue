@@ -1,6 +1,6 @@
 <template>
   <div class="CreditForm">
-    <el-collapse v-model="activeNames" @change="handleChange">
+    <el-collapse v-model="activeNames">
       <!-- 上网查询信息 -->
       <el-collapse-item name="1">
         <template slot="title">
