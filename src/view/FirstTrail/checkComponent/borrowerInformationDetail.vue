@@ -168,7 +168,8 @@
 			      border>
 				      <el-table-column
 				        type="index"
-				      	:index='1' 
+				      	:index='1'
+				      	label="序号" 
 				      	min-width="50">
 				      </el-table-column>
 				      <el-table-column
@@ -472,7 +473,7 @@
 				    	<li>
 				    		<label>报告描述:</label>
 				    		<el-tooltip class="item" effect="dark" :content="rptInfo.crContent" placement="top">
-						      <div v-bind:title="rptInfo.crContent">{{rptInfo.crContent}}</div>
+						      <div>{{rptInfo.crContent}}</div>
 						    </el-tooltip>
 				    	</li>
 				    </ol>

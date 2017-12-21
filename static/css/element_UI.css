@@ -888,10 +888,10 @@ height: 40px;
   width: 700px;
 }
 /* 信审表----查询---气泡宽度 */
-/* .el-tooltip__popper{ */
+.el-tooltip__popper{
   /* width: calc( 100% - 197px); */
-  /* width: 800px; */
-/* } */
+  max-width: 400px;
+}
 
 
 /* 影音列表----缩略图按钮 */
@@ -1320,9 +1320,7 @@ height: 40px;
   padding: 0 0;
   padding-left: 0 !important;
 }
-.mheader .el-menu .el-submenu.is 
-
--opened{
+.mheader .el-menu .el-submenu.is-opened{
   background:rgba(31, 45, 61,.6);
   box-shadow:0 10px 20px 0 #475669;
 }
@@ -1331,9 +1329,7 @@ height: 40px;
   border-bottom-color: #fff;
   border-bottom : 2px solid #fff;
 }
-.mheader .el-menu--horizontal .el-submenu.is 
-
--opened .el-submenu__title{
+.mheader .el-menu--horizontal .el-submenu.is-opened .el-submenu__title{
   background-color: transparent;
   border-bottom-color: #fff !important;
   border-bottom : 2px solid #fff;
@@ -1436,9 +1432,7 @@ height: 40px;
   top: -5px;
   margin-top: -7px; 
 }
-.mheader .el-menu .el-submenu.is 
-
--opened .el-submenu__title{
+.mheader .el-menu .el-submenu.is-opened .el-submenu__title{
   border-bottom:2px solid #fff;
   color: #fff;
 }
@@ -1447,9 +1441,7 @@ height: 40px;
   color: #bfcbd9;
 } 
 /* 解决：点击三级时二级又一次加背景色 */
-.mheader .el-menu .el-menu .el-submenu.is 
-
--opened{
+.mheader .el-menu .el-menu .el-submenu.is-opened{
   background:none;
   box-shadow:0 0 0 0 #475669; 
 }

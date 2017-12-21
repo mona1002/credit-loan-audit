@@ -1,44 +1,50 @@
 <template>
-  <div class="new1">
-<h1>new1</h1>
- Wordhint:{
-          Internet:{
-            excude
-            comExcude
-            looseCreSel            
-            looseCre
-            comLooseCre
-            phoneOUtSSel            
-            phoneOUtS
-            comphoneOUtS
-            ComName
-            address
-            comAddress
-            loginOrNotSel
-            loginOrNot
-            institutionCode          }
-        },
+  <div>
+    <h1>nature</h1>
+    import Vue from 'vue';
+import VeeValidate,{Validator} from 'vee-validate';
+import zh from 'vee-validate/dist/locale/zh_CN'
+import messages from '../assets/js/zh_CN';
+
+
+Validator.updateDictionary({
+    zh_CN: {
+        messages
+    }
+});
+
+
+Validator.extend('phone', {
+    messages: {
+      zh_CN:field => field + '手机号必须是11位手机号码',
+    },
+    validate: value => {
+      return value.length == 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/.test(value)
+    }
+  });
+
+  Validator.extend('blank', {
+    messages: {
+      required:(field)=> "请选择"
+    },
+    validate: value => {
+        if(value =="") {
+            return false;
+        } 
+        return true;
+    
+    }
+  });
+
+const config = {
+  locale: 'zh_CN', 
+  strict: true,
+  // events: 'input|blur',
+  delay: 1000, 
+
+};
+
+Vue.use(VeeValidate, config);
+
   </div>
 </template>
-
-<script>
-  export default {
-    data() {
-      return {
-
-      }
-    },
-    mounted() {
-      //  localStorage.setItem("userInf", JSON.stringify(userInf));
-      // var userInf = localStorage.getItem("userInf");
-
-      
-            //   localStorage.setItem("userInf", JSON.stringify(userInf));
-    //  this.localInf=JSON.parse(localStorage.getItem("taskInWaitting") ) ;
-    }
-  }
-
-</script>
-
-<style scoped>
-</style>
