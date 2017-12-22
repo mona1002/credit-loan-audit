@@ -14,8 +14,6 @@
             <el-collapse-item name="1">
               <template slot="title">
                 <i class="el-icon-menu"></i> 待办任务
-                <!-- <i class="el-icon-refresh"></i> -->
-                <!-- <span @click.stop="more" class="moreC"> 更多 </span> -->
               </template>
               <div class="waitting">
                 <el-table ref="singleTable" :data="tableData" highlight-current-row @current-change="handleCurrentChange" style="width: 100%">
@@ -39,9 +37,10 @@
               <el-collapse-item name="1">
                 <template slot="title">
                   <i class="el-icon-menu"></i> 工作通知
-                  <!-- <i class="el-icon-refresh"></i> -->
                   <span @click.stop="more" class="moreC"> 更多 </span>
-                  <i class="el-icon-refresh"></i>
+                  <span class="moreC">
+                    <img src="../../../static/images/shuaxin.png" class="moreCIcon">
+                  </span>
                 </template>
                 <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
                 <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
@@ -55,15 +54,15 @@
                 <template slot="title" class="border_top_bottom">
                   <i class="el-icon-menu"></i> 公司动态
                   <span @click.stop="more" class="moreC"> 更多 </span>
-                  <i class="el-icon-refresh"></i>
+                  <span class="moreC">
+                    <img src="../../../static/images/shuaxin.png" class="moreCIcon">
+                  </span>
                 </template>
                 <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
                 <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
               </el-collapse-item>
             </el-collapse>
           </div>
-          <!-- test 信息 之router 带params-->
-          <!-- <router-link :to=" {path:'/ProductLists',query:{picName:val.name}}" v-for="(val,index) in pic" :key="index"> -->
         </div>
       </div>
     </div>
@@ -74,6 +73,9 @@
   export default {
     data() {
       return {
+        judge: {
+          flag: ''
+        },
         userInf: '',
         activeNames: ['1'],
         activeNames1: ['1'],
@@ -100,7 +102,6 @@
     },
     methods: {
       more() {
-        console.log("more")
         this.$store.commit('workB', {
           processTemplateId: "56789",
           taskNodeName: "67uj"
@@ -108,8 +109,6 @@
         console.log(this.$store.state.First)
       },
       handleCurrentChange(val) {
-        console.log("我是表格")
-        console.log(val.taskNodeName)
         if (val.taskNodeName == "creditApp_firstTrial") {
           this.currentRow = val;
           this.workbenchPass.processTemplateId = val.processTemplateId;
@@ -118,17 +117,11 @@
           // console.log(this.$store.state.First.Workbench="ghjkld67890")
           // this.$store.state.First.Workbench=this.workbenchPass;
           // console.log(this.$store.state.First)
-
+          this.judge.flag = "01";
           localStorage.setItem("workbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
+          localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识
           this.$router.push({
             path: '/taskInWaitting',
-            // query: {
-            //   processTemplateId: val.processTemplateId,
-            //   taskNodeName: val.taskNodeName,
-            //   taskStatus: "01",
-            //   userCode: this.loginPass.userCode,
-            //   orgCode: this.loginPass.orgCode
-            // }
           });
           // localStorage.setItem("tableData", JSON.stringify(tableData));
           // this.$router.push({path:'/taskInWaitting',query:'123'})
@@ -139,17 +132,14 @@
           this.currentRow = val;
           this.workbenchPass.processTemplateId = val.processTemplateId;
           this.workbenchPass.taskNodeName = val.taskNodeName;
+          this.judge.flag = "02";
           localStorage.setItem("FinalWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
-          // this.$router.push({
-          //   path: '/taskInWaitting',
-          // });
+          localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
+          //  this.$router.push({path: '/FtaskInWaitting',});  跳转路径？？？？？？？？？？？？
         }
 
 
       }
-
-    },
-    computed: {
 
     },
     mounted() {
@@ -186,15 +176,15 @@
         });
       });
 
-      // this.loginPass = JSON.parse(localStorage.getItem('userInf'));
-      // this.post("/workFlowTaskQuery/getTaskProfile", {
-      //   taskStatus: "01",
-      //   // userCode: "ddyy",
-      //   // orgCode: "021"
-      // }).then(res => {
-      //   console.log(res.data);
-      //   this.tableData = res.data;
-      // });
+      this.loginPass = JSON.parse(localStorage.getItem('userInf'));
+      this.post("/workFlowTaskQuery/getTaskProfile", {
+        taskStatus: "01",
+        // userCode: "ddyy",
+        // orgCode: "021"
+      }).then(res => {
+        console.log(res.data);
+        this.tableData = res.data;
+      });
     },
   }
 
@@ -204,7 +194,24 @@
 
   .moreC {
     float: right;
-    margin-right: 35px;
+    width: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 25px;
+    display: inline-block;
+    background-color: #f3f3f3;
+    color: #3b5469;
+    font-size: 13px;
+    line-height: 25px;
+    text-align: center;
+    font-weight: normal;
+    margin-top: 11px;
+    margin-right: 8px;
+    cursor: pointer;
+  }
+
+  .moreCIcon {
+    margin-top: 6px;
   }
 
   .border_top_bottom {

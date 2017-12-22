@@ -13,10 +13,15 @@
 <script>
 // import myHead from "./view/header"
   export default {
-
+data(){
+return{
+  // 标识：01 初审-工作台 ；  02  终审-工作台； 03 初审-内部匹配 ； 04 终审-内部匹配；
+  // localstorage字段：  judge：{flag：01 }  （示例）
+}
+},
     mounted(){
       // console.log(this.$refs.ddd)
-      
+    
 // taskNodeName:
 
 // 初审审批
