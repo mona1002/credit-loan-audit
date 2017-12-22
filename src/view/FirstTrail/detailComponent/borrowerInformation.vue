@@ -68,7 +68,7 @@
 					      </el-table-column>
 					      <el-table-column
 					        prop="coveredArea" 
-					        label="建筑面积[m^2]"
+					        label="建筑面积[m²]"
 					        min-width="120">
 					        <template slot-scope="scope">
 						        <el-input v-model="scope.row.coveredArea" placeholder="请输入内容"></el-input>

@@ -36,10 +36,10 @@
             <div class="Left_right_BigImg ">
               <RAudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></RAudioVisualLeft>
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
-              <!-- <workbench v-if=" this.tabContent1==2">内部匹配</workbench> -->
+              <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
               <RapplicationInformationDetail v-if=" this.tabContent1==3">申请信息</RapplicationInformationDetail>
               <cborrowerInformationDetail v-if=" this.tabContent1==4">借款人资料</cborrowerInformationDetail>
-              <!-- <RapplicationInformationDetail v-if=" this.tabContent1==5"> 电话征信</RapplicationInformationDetail> -->
+              <PhoneCredit v-if=" this.tabContent1==5"> 电话征信</PhoneCredit>
               <RcCreditForm v-if=" this.tabContent1==6">信审表</RcCreditForm>
               <creditInvestigation v-if=" this.tabContent1==7">实地征信</creditInvestigation>
               <RAntiConclution v-if=" this.tabContent1==8">反欺诈结论</RAntiConclution>
@@ -74,10 +74,10 @@
           <div class="tab2_Content">
             <RAudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></RAudioVisualLeft>
             <cremarkDetail v-if=" this.tabContent2==1"></cremarkDetail>
-            <!-- <workbench v-if=" this.tabContent2==2">内部匹配</workbench> -->
+            <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
             <RapplicationInformationDetail v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
-            <cborrowerInformationDetail v-if=" this.tabContent2==4">借款人资料</cborrowerInformationDetail>
-            <!-- <RapplicationInformationDetail v-if=" this.tabContent2==5"> 电话征信</RapplicationInformationDetail> -->
+            <RborrowerInformationSetail v-if=" this.tabContent2==4">借款人资料</RborrowerInformationSetail>
+            <PhoneCredit v-if=" this.tabContent2==5"> 电话征信</PhoneCredit>
             <RcCreditForm v-if=" this.tabContent2==6">信审表</RcCreditForm>
             <creditInvestigation v-if=" this.tabContent2==7">实地征信</creditInvestigation>
             <RAntiConclution v-if=" this.tabContent2==8">反欺诈结论</RAntiConclution>
@@ -125,16 +125,15 @@
   import RAudioVisual from "./ReadComponent/RAudioVisual";
   import RAudioVisualLeft from "./ReadComponent/RAudioVisualLeft.vue";
   import RcCreditForm from "./ReadComponent/RcCreditForm.vue";
+  import RborrowerInformationSetail from "./ReadComponent/RborrowerInformationSetail"; //借款人资料
   import RapplicationInformationDetail from "./ReadComponent/RapplicationInformationDetail"; //申请信息
   import RFinanceInformation from "./ReadComponent/RFinanceInformation"; //账务信息
   import RAntiConclution from "./ReadComponent/RAntiConclution"; //反欺诈结论
   import RApprovalConclusion from "./ReadComponent/RApprovalConclusion"; //信审审批结论轨迹
-
   import remark from "./detailComponent/remark";
   import InternalMatch from "./InternalMatch";
-
   import borrowerInformation from "./detailComponent/borrowerInformation";
-  import PhoneCredit from "./PhoneCredit";
+  import PhoneCredit from "./PhoneCredit";//电话征信
   import CreditForm from "./detailComponent/CreditForm";
   import creditInvestigation from "./detailComponent/creditInvestigation"; //实地征信
   // 信审审批写此处
@@ -279,6 +278,7 @@
       RAudioVisualLeft,
       RcCreditForm,
       RapplicationInformationDetail,
+      RborrowerInformationSetail,//借款人资料
       RFinanceInformation, //账务信息
       RAntiConclution, //反欺诈结论
       RApprovalConclusion, //信审审批结论归结
