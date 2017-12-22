@@ -247,7 +247,7 @@
       </div>
       <div class="content-ul">
         <li class="item-column1">
-          <div class="left-title"><span class="require-icon" style="left:60px;">*</span>调查结论：</div>
+          <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查结论：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <div class="textarea-class">
               <el-input type="textarea" v-model="conclusion" :rows="5" resize=none :maxlength="500"></el-input>
