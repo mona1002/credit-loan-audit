@@ -613,25 +613,6 @@
         </div>
       </el-collapse-item>
     </el-collapse>
-    <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
-    <!-- ==============================点击确认时提示弹框=================================== -->
-    <div class="layer" v-show="Confirm">
-      <!-- @touchmove.prevent  -->
-      <div class="layerbox">
-        <p>
-          <span>询问</span>
-          <i class="el-icon-close" @click="closed"></i>
-        </p>
-        <div>
-          <p class="choces">您确定已填写好各项内容并提交？</p>
-          <div class=buttonDiv>
-            <el-button type="primary" @click="CFsave">确定</el-button>
-            <el-button type="primary" @click="canc">取消</el-button>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </template>
 
@@ -867,37 +848,13 @@
             break;
         }
       },
-      ElInputStyle(val) {
-        if (val == "50%") {
-          console.log("50%");
-          for (var i = 0; i < this.Pwidth.length; i++) {
-            this.Pwidth[i].style.width = 150 + "px";
-          };
-          for (var i = 0; i < this.inputWidth.length; i++) {
-            this.inputWidth[i].style.width = 515 + "px";;
-          };
-          this.CFwidth[0].style.minWidth = 1272 + "px";
-          console.log(this.CFwidth[0].style.minWidth)
-          console.log(this.CFwidth[0].style.minWidth)
-        } else if (val == "100%") {
-          console.log("100%")
-          for (var i = 0; i < this.Pwidth.length; i++) {
-            this.Pwidth[i].style.width = 200 + "px";
-          };
-          for (var i = 0; i < this.inputWidth.length; i++) {
-            this.inputWidth[i].style.width = "calc( 50% + 160px )"
-          };
-          this.CFwidth[0].style.minWidth = 1592 + "px";
-          console.log(this.CFwidth[0].style.minWidth)
-        }
-      }
     },
     mounted() {
       this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
       // 获取查询列表数据
       this.post("/creauditInfo/queryCreauditInfoObj", {
-        // applyId: this.getParams.applyId,
-        applyId: "00542",
+        applyId: this.getParams.applyId,
+        // applyId: "00542",
       }).then(res => {
         this.FormData = res.data;
         this.AreaNPercent();
@@ -923,9 +880,6 @@
         this.mountJ(19, res.data.brothersIfhas);
         this.mountJ(20, res.data.aisresident);
         this.mountJ(21, res.data.iloanBefore);
-        console.log(this.FormData.wbeexEcutedtxt)
-        console.log(this.FormData.wnetHirecom)
-
       });
       // 省    
       this.get("/credit/queryProvince", {}).then(res => {
@@ -943,15 +897,11 @@
 <style scoped>
   .detail_inf {
     display: inline-block;
-    /* background: pink; */
   }
 
   .InternetInf_left_label {
-    /* width: 170px; */
-    /* background: orange; */
     display: inline-block;
     width: 182px;
-    /* margin-right: 10px; */
   }
   /* ------------------------------------------------ */
   /* 最下面的 弹窗样式 */
@@ -969,11 +919,8 @@
   /* 上网查询 */
 
   .InternetInf_right_label {
-    /* width: 155px; */
     width: 182px;
     margin-right: 10px;
-    /* vertical-align: super; */
-    /* background: green; */
   }
   /* public */
 
@@ -988,7 +935,6 @@
   .CreditForm li {
     color: #475669;
     font-size: 14px;
-    /* border: 1px solid yellow ; */
     vertical-align: middle;
     position: relative;
     clear: both;
@@ -998,20 +944,10 @@
   .CreditForm label {
     display: inline-block;
     text-align: right;
-    /* margin-right: 10px; */
   }
   /*------------------------------------------- */
   /* 各自 */
   /* ------------------------------上网查询 +核实身份--------------------------- */
-  /* .CreditForm_InternetInf li,
-  .CreditForm_CheckId li,
-  .CreditForm_FamilyInf li
-
-  {
-    clear: both;
-    vertical-align: middle;
-  } */
-
   .CreditForm_InternetInf p,
   /*  上网查询 */
 
@@ -1028,38 +964,17 @@
   /* 家庭信息 */
 
   .CreditForm_live p {
-    /* border: 1px solid blue; */
-    /* display: inline-block; */
     float: left;
     width: 33%;
     vertical-align: middle;
-    /* ？？？？？？？？？？？ */
-    /* background: pink; */
-    /* padding-right: 10px; */
   }
-  /* .CreditForm_InternetInf p{
-      height: 50px;
-      overflow: hidden;
-    } */
-  /* 
-  .CreditForm_CheckId p:nth-of-type(odd) {
-    padding-top: 18px;
-  } */
   /* --------------------------工作信息 + 私营企业--------------------- */
-  /* 第二列p */
-  /* .InternetInf_right_label
-  
-  {
-    width: 142px;
-  } */
-
   .CheckId_right_label
   /* 第三列p */
 
   {
     width: 140px;
   }
-  /* ======================================== */
 
   .layer {
     width: 100%;
@@ -1113,7 +1028,6 @@
   }
 
   .layer .layerbox .buttonDiv {
-    /* float: left; */
     width: 100%;
     height: 50px;
     margin-top: 10px;
@@ -1132,10 +1046,6 @@
     float: right;
   }
   /* ========================================================================= */
-  /* 额外special css设置 */
-  /* .CreditForm_InternetInf p:nth-of-type(odd){
-
-} */
 
   .CreditForm_InternetInf p:nth-of-type(odd),
   .CreditForm_CheckId p:nth-of-type(odd),
@@ -1150,7 +1060,6 @@
 
   {
     width: 66%;
-    /* vertical-align: middle; */
   }
 
   .CreditForm_InternetInf p:nth-of-type(even) span,
@@ -1158,19 +1067,15 @@
 
   .CreditForm_CheckId p:nth-of-type(even) span,
   /* 核实身份-右侧span width */
-  /* .CreditForm_WorkInfs p:nth-of-type(12) span */
 
   .CreditForm_FamilyInf p:nth-of-type(even) span
   /* 家庭信息 */
 
   {
     width: calc( 100% - 197px);
-    /* height: 50px; */
-    /* background: black; */
     height: 60px;
     vertical-align: top;
     overflow: auto;
-    /* background: green; */
     border: 1px solid #d8dce5;
     padding: 5px 10px;
     border-radius: 4px;
@@ -1182,12 +1087,9 @@
     vertical-align: top;
     height: 60px;
     overflow: auto;
-    /* background: red; */
     border: 1px solid #d8dce5;
     padding: 5px 10px;
     border-radius: 4px;
-
-    /* background: red; */
   }
   /* 私营企业-第一分销商 --------------------------------label 为 140 px */
 
@@ -1196,13 +1098,9 @@
     vertical-align: top;
     height: 60px;
     overflow: auto;
-    /* background: blue; */
     border: 1px solid #d8dce5;
     padding: 5px 10px;
     border-radius: 4px;
-
-    /* background: blue; */
-    /* vertical-align: top; */
   }
   /* ------------测试-------------- */
 

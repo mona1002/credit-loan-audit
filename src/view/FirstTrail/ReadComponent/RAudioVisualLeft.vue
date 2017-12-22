@@ -1,6 +1,5 @@
 <template>
   <div class="AudioVisualLeft">
-    <!-- <div class="CompareShow"> -->
     <!-- 左侧list隐藏时显示的div     在根元素下面，与left right 平级-->
     <div class="hidDiv" v-show="!showListDiv" ref="hidDiv_ref">
       <img class="showBtn" src="../../../../static/images/Shape Copy.png" @click="showList" style="transform: rotate(180deg)">
@@ -24,8 +23,10 @@
             <p>
               <!-- 一级节点 -->
               <span style="position:relative;">{{item.arcName}}
-                 <img src="../../../../static/images/918FE1E0-6EEB-4642-A5E6-253AC973FF41@1x.png" style="position:absolute;top:12px;left:23px" v-show="opendImg[ind]">
-                <img src="../../../../static/images/5530D698-2823-417F-B8BC-8DC9037BC848@1x.png" style="position:absolute;top:14px;left:23px" v-show="closedImg[ind]">
+                <img src="../../../../static/images/918FE1E0-6EEB-4642-A5E6-253AC973FF41@1x.png" style="position:absolute;top:12px;left:23px"
+                  v-show="opendImg[ind]">
+                <img src="../../../../static/images/5530D698-2823-417F-B8BC-8DC9037BC848@1x.png" style="position:absolute;top:14px;left:23px"
+                  v-show="closedImg[ind]">
               </span>
               <span>{{item.imageCount}}</span>
             </p>
@@ -33,7 +34,9 @@
           <div class="list_title_div">
             <!--  二级 内容 节点 -->
             <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind)">
-              <span v-bind:title="item.arcName">{{item.arcName}}</span>
+              <el-tooltip class="item" effect="dark" :content="item.arcName" placement="right-end">
+                <span>{{item.arcName}}</span>
+              </el-tooltip>
               <span>{{item.imageCount}}</span>
             </p>
           </div>
@@ -45,7 +48,7 @@
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
- <div class="showHidIcons" ref="showHidIcons">
+      <div class="showHidIcons" ref="showHidIcons">
         <img src="../../../../static/images/left.png" class="icon_pre " @click="pre">
         <img src="../../../../static/images/pc1.png" class="icon_next" @click="next">
         <div class="BtnIcons">
@@ -65,7 +68,7 @@
       </p>
       <div class="small_pic_content">
         <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
-          <img class="Small_pic" :src="'http://10.1.26.6:8080'+val.imagePath" @click="ChangeCss(index)" @mouseenter="smallPic($event,index)"
+          <img class="Small_pic" :src="'http://10.1.26.6:8080'+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
             ref="small_pic_ref" />
           <p> {{val.arcSubType}} </p>
         </figure>
@@ -74,17 +77,13 @@
     <!--=================================  查询弹出层 ================================= -->
     <div v-show="dataa" class="posi">
       <!-- 折叠 -->
-      <h1>内匹配客户查询列表
+      <p>内匹配客户查询列表
         <i class="el-icon-close" style="color:white;fontSize:18px;right:13px;top:16px" @click="closeAlertSearch"></i>
-      </h1>
+      </p>
       <div class="posi_content">
         <el-collapse v-model="activeNames">
           <el-collapse-item title="本人进件列表" name="1">
             <div>
-              <!-- <i class="el-icon-edit" style="color:white;fontSize:18px"></i> -->
-              <!-- <el-table :data="personal" height="250" border style="width: 100%" @change="handleChange">
-            </el-table> -->
-              <!--  @dblclick="getParentList(currentRow.matchApplyId)" -->
               <el-table :data="personal" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
                 style="width: 100%">
                 <el-table-column property="matchApplyCustName" label="客户名称">
@@ -115,7 +114,6 @@
             </div>
             <!-- 确认  取消 按钮 -->
             <div style="margin-top: 20px">
-              <!-- <el-button @click.native="getParentList(currentRow.matchApplyId)">确认</el-button> -->
             </div>
           </el-collapse-item>
         </el-collapse>
@@ -123,8 +121,6 @@
 
     </div>
     <!-- ================================= 结束================================= -->
-    <!-- </div> -->
-
   </div>
 </template>
 
@@ -134,44 +130,38 @@
       return {
         // props:[smallPicDivClose],
         // picData: [],
+        judgeFlag: '',
+        opendImg: [true, true, true, true], 
+        closedImg: [false, false, false, false], 
         localInf: [], //初始化的时候，根据传进来的applyId获取初始化数据
-        showListDiv: true, // 列表显示与否
-        show: true, // 收缩按钮显示控制
+        showListDiv: true, 
+        show: true, 
         smallPicInd: 0, // 未知
         SmallPicShow: false,
         CompareAlert: true,
-        ListParent: [], //父节点title列表
-        ListDetails: [], //子节点列表
+        ListParent: [], 
+        ListDetails: [], 
         applyId: '', //入参
-        imgPath: [], //图片路径
+        imgPath: [], 
         // ----------------------------------
         activeNames: ['1', '2'], //查询弹出框 默认展开选项
         dataa: false,
-        // // AlertSearchProps:false
         personal: [], // 匹配查询-个人
         others: [], // 匹配查询-他人
         currentRow: null,
-        custName: '', //客户名称-input（disable）
-        custmatchApplySubNo: '', //客户进件编号-input（disable）
-        // // currentRowId:"",
-        // ----------------------------------------
+        custName: '', 
+        custmatchApplySubNo: '',
       }
     },
     methods: {
       closeAlertSearch() {
         this.dataa = false;
       },
-      handleCurrentChange(val) { // 选中当前行信息
-        //   console.log(val)
+      handleCurrentChange(val) {
         this.currentRow = val;
-        // console.log(this.currentRow)
       },
-      // 通过父组件触发的子组件事件--显示弹框，并请求数据展示
       personalNunPerson() {
-        console.log("子组件a")
         this.dataa = true;
-        // console.log(  this.localInf.applySubNo)
-        // console.log(  this.localInf.certCode)
         // 个人进件        
         this.post("/internalMatch/getPersonalInternalMatchList", {
           // applySubNo: "201504130173041858",
@@ -179,9 +169,7 @@
           applySubNo: this.localInf.applySubNo,
           certCode: this.localInf.certCode,
         }).then(res => {
-          console.log("个人")
           this.personal = res.data;
-          // console.log(this.personal)
         });
         // //他人进件（ 不包含个人）
         this.post("/internalMatch/getNonPersonalInternalMatch", {
@@ -194,29 +182,18 @@
           applySubNo: this.localInf.applySubNo,
           certCode: this.localInf.certCode,
         }).then(res => {
-          console.log("他人")
           this.others = res.data;
-          // console.log(this.others)
         });
       },
       getParentList(id) { //  未写 -----未对
         console.log("table选中-获取父节点")
-        console.log(id);
         this.post("/productArchive/getProductArchiveParentList", {
-          // applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",//待删除-----------------------------------------
           applyId: id, //上面删除后 此处打开
           // a2b23bbf-46ef-4d94-9872-322843cebb7d matchApplyId
           // applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",//上面删除后 此处打开
-
         }).then(res => {
-          console.log("双击选中")
-          console.log(res);
-          // console.log(res.data)
           this.ListParent = res.data;
-          this.localInf.matchApplyId = id; //将此处获得的matchApplyId赋值给 this.localInf.matchApplyId,更改localInf的值，以便用更改后的值获取子节点
-          // console.log( this.localInf.matchApplyId)
-          //  this.localInf.matchApplyId="e0b51098-b24d-4211-8ae4-f08f657d7886";
-          console.log(id)
+          this.localInf.applyId = id;
           this.dataa = false;
           this.custName = this.currentRow.matchApplyCustName;
           this.custmatchApplySubNo = this.currentRow.matchApplySubNo;
@@ -224,7 +201,6 @@
         });
       },
       getChildrenList(id, ind, item) {
-         // 一级节点前面的图标切换
         if (this.opendImg[ind] == false) {
           this.opendImg[ind] = true;
           this.closedImg[ind] = false;
@@ -238,72 +214,55 @@
         }
         this.closeImg = ind;
         this.openImg = ind
-        // 获取二级（子）节点
-        console.log("获取子节点");
-        // console.log(id)//父节点获取的id
-        // console.log( this.localInf.matchApplyId)
+        // 二级（子）节点
         this.post("/productArchive/getProductArchiveChildList", {
-          applyId: this.localInf.matchApplyId,
+          applyId: this.localInf.applyId,
           pid: id
         }).then(res => {
-          console.log(res.data)
           this.ListDetails = res.data;
-          //  this.others = res.data;   aut里面的写法
         });
       },
       getImg(ind) {
-        console.log("获取图片");
-        console.log(ind)
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
-        // console.log(this.imgPath)
-        // this.$nextTick(function () {
-        // })
       },
-      hid() { //左侧 li 列表
-        console.log("hid");
+      hid() { 
         this.showListDiv = false;
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
       },
-      showList() { //左侧 li 列表
+      showList() { 
         this.showListDiv = true;
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 214px)";
       },
-      SmallpicClose() { //缩略图弹框 关闭
+      SmallpicClose() { 
         this.SmallPicShow = false;
       },
-      SmallpicAlert() { //缩略图弹框 打开
+      SmallpicAlert() { 
         this.SmallPicShow = true;
       },
       pre() {
-        console.log("上一页")
         this.smallPicInd--;
-        this.defaultBigPicCss(); // 点击切换图片时，让显示的大图高度重新为100%，不旋转。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
+        this.defaultBigPicCss(); 
         if (this.smallPicInd < 0) {
-          console.log("我下标小于0了")
           this.smallPicInd = this.$refs.small_pic_ref.length - 1;
         }
       },
       next() {
-        console.log("下一页")
         this.smallPicInd++;
-        this.defaultBigPicCss(); // 同上
+        this.defaultBigPicCss(); 
         if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
           this.smallPicInd = 0;
         }
       },
       larger() {
-        console.log("放大")
         this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
           100 + "px";
       },
       smaller() {
-        console.log("缩小")
         this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
           100 + "px";
       },
       clockWise() {
-        console.log("顺时针");
-        if (this.$refs.Big_pic_ref[0].style.transform == "") { // 输出结果为： rotate(900deg) 每次加 90度
+        if (this.$refs.Big_pic_ref[0].style.transform == "") { 
           this.$refs.Big_pic_ref[0].style.transform += "rotate(90deg)";
         } else {
           this.$refs.Big_pic_ref[0].style.transform = this.$refs.Big_pic_ref[0].style.transform.slice(0, 7) + (
@@ -313,7 +272,6 @@
         }
       },
       AclockWise() {
-        console.log("逆时针")
         if (this.$refs.Big_pic_ref[0].style.transform == "") {
           this.$refs.Big_pic_ref[0].style.transform += "rotate(-90deg)";
         } else {
@@ -323,17 +281,16 @@
               .style.transform.slice(7, -4)) - 90) + this.$refs.Big_pic_ref[0].style.transform.slice(-4);
         }
       },
-      ChangeCss(ind) { // 图片单击 不选中图片，标注选中，增加css效果
+      ChangeCss(ind) { 
         this.changeSmallPicCss(ind);
       },
       smallPic(ev, ind) {
-        this.smallPicInd = ind; //  选中图片的下标赋值给data里面的值， 以便大图片根据这个下标值 显示对应下标的图片
+        this.smallPicInd = ind; 
         this.defaultBigPicCss();
-        // this.changeSmallPicCss(ind);
-        // this.SmallPicShow = false;
+         this.SmallPicShow = false;
       },
-      // 公共重复方法
-      defaultBigPicCss() { // （重复代码）通用方法 ：  大图 --------------- 恢复默认高度、不旋转
+      // 公共
+      defaultBigPicCss() { 
         console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).height)
         console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
         console.log(typeof (getComputedStyle(this.$refs.Big_pic_ref[0], false).width))
@@ -351,83 +308,82 @@
         //  this.$refs.big_pic[0].style.height = "100%"; // 点击切换图片时，让显示的大图高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
         // this.$refs.big_pic[0].style.transform = "rotate(0deg)"
       },
-      changeSmallPicCss(ind) { // （重复代码）通用方法： 遍历所有小图片，恢复默认（初始时）设置的css样式--------- click时改变显示大图和选中小图的 高度 + 透明度
+      changeSmallPicCss(ind) { 
         for (var i = 0; i < this.$refs.small_pic_ref.length; i++) {
-          // this.$refs.small_pic_ref[i].style.width="100px"; //设置所有图片默认高度
-          this.$refs.small_pic_ref[i].style.opacity = 1; //设置所有图片默认透明度
+          this.$refs.small_pic_ref[i].style.opacity = 1; 
         }
         if (ind || ind == 0) {
-          this.$refs.small_pic_ref[ind].style.opacity = 0.8; //设置显示图片改变后的透明度 
+          this.$refs.small_pic_ref[ind].style.opacity = 0.8;
         }
-        // else{
-        // this.$refs.small_pic_ref[this.smallPicInd].style.opacity = 0.8; //设置显示图片改变后的透明度   
-        // }
       },
-      Imgscroll() { //滚轮放大缩小图片
-      this.$refs.showHidIcons.style.display="block";
-        // console.log("我是mouseout滚轮事件")
-        this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => { // 非 Firefox 浏览器
+      Imgscroll() { 
+        this.$refs.showHidIcons.style.display = "block";
+        this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {
           event = event || window.event;
-          this.$refs.AudioVisual_Img_ref.scrollTop = 0; //  让图片一直top为0， 可以显示 上面的按钮
-          // event.Handled =true;
-          console.log(event)
-          console.log(this.$refs.AudioVisual_Img_ref.scrollTop)
-          if (event.wheelDelta < 0) { // 放大
+          this.$refs.AudioVisual_Img_ref.scrollTop = 0;
+          if (event.wheelDelta < 0) { 
             this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
               100 + "px";
-          } else { //  缩小
+          } else {
             this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
               100 + "px";
           }
-          console.log(event.wheelDelta)
         };
-        this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => { // 兼容 Firefox 浏览器
-          console.dir(event);
-          console.log(event.detail)
-          this.$refs.AudioVisual_Img_ref.scrollTop = 0; //  让图片一直top为0， 可以显示 上面的按钮          
-          if (event.detail > 0) { // 放大
+        this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => { 
+          this.$refs.AudioVisual_Img_ref.scrollTop = 0;       
+          if (event.detail > 0) {
             this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
               100 + "px";
-          } else { //  缩小
+          } else {
             this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
               100 + "px";
           }
         });
       },
       ImgScrollRemove() {
-        this.$refs.showHidIcons.style.display="none";
-        // console.log("我是mouseout移除滚轮事件")
+        this.$refs.showHidIcons.style.display = "none";
         this.$refs.AudioVisual_Img_ref.onmousewheel = "";
         this.$refs.AudioVisual_Img_ref.removeEventListener('DOMMouseScroll', (event) => {
           event.preventDefault();
         }, false);
       },
       compBtnShow() {
-        console.log("对比按钮出发")
         this.$emit('CompareShow')
       }
     },
     mounted() {
-      // localStorage.setItem("userInf", JSON.stringify(userInf));
-      // console.log(JSON.parse(localStorage.getItem("taskInWaitting") ));
-      console.log("查询页面-影音资料左")
-      this.localInf = JSON.parse(localStorage.getItem("internalId"))
-      // localStorage.setItem("internalId", JSON.stringify({id:row.id ,matchApplyId:row.matchApplyId})
-      // console.log("localInf")
-      // console.log(this.localInf.matchApplyId)
-      // 父菜单
-      this.post("/productArchive/getProductArchiveParentList", {
-        applyId: this.localInf.matchApplyId,
-        // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
-        //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
+      // console.log(" 影音资料左")
+      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      if (this.judgeFlag.flag == '01') {
+this.localInf = JSON.parse(localStorage.getItem("internalId"))//获取-初审-列表详情的id
+        // 父菜单
+        this.post("/productArchive/getProductArchiveParentList", {
+          applyId: this.localInf.applyId,
+          // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
+          //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
+        }).then(res => {
+          this.ListParent = res.data;
+        });
+      } else if (this.judgeFlag.flag == '02') { //----------------------获取 localstorage 路径待更改
+        this.localInf = JSON.parse(localStorage.getItem("FinaltaskInWaitting")) // 路径 ????????????//获取-终审-列表详情的id FinalWorkbenchPass-----待修改
+        //  与上面初审请求数据重复的---如果反欺诈 此处也相同，可以删除里面的，拿刀outside去
+        this.post("/productArchive/getProductArchiveParentList", {
+          applyId: this.localInf.applyId,
+        }).then(res => {
+          this.ListParent = res.data;
+        });
+      } else if (this.judgeFlag.flag == '03') {
+        this.localInf = JSON.parse(localStorage.getItem("internalId")) //获取-初审-内部匹配id
+        this.post("/productArchive/getProductArchiveParentList", {
+          applyId: this.localInf.matchApplyId,
+          // applyId: this.localInf.applyId,
+          // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
+          //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
+        }).then(res => {
+          this.ListParent = res.data;
+        });
+      }
 
-      }).then(res => {
-        // console.log(res.data)
-        // console.log("ListParent")
-        this.ListParent = res.data; //父节点数组 [{},{},{},{}]----获取父节点名称
-        // console.log( this.ListParent )
-
-      });
     }
   }
 
@@ -437,8 +393,6 @@
 
   .AudioVisualLeft {
     height: 100%;
-    /* position: relative; */
-    /* background: red; */
   }
   /* public */
 
@@ -459,7 +413,7 @@
     position: absolute;
     top: 10px;
     right: 5px;
- z-index: 2;
+    z-index: 2;
   }
 
   .hidDiv {
@@ -492,7 +446,8 @@
     bottom: 18px;
     right: 17px;
   }
-  .showHidIcons{
+
+  .showHidIcons {
     display: none;
   }
   /*  放大、缩小 按钮 wrap */
@@ -500,12 +455,10 @@
   .BtnIcons {
     position: absolute;
     z-index: 2;
-    left: calc( 50% - 100px);
+    left: calc( 50% - 97px);
     bottom: 57px;
     width: 193px;
     height: 52px;
-    /* background:#475669; */
-    /* background:#475669; */
     background: rgba(71, 86, 105, 0.6);
     box-shadow: 0 10px 20px 0 #47566942;
     border-radius: 6px;
@@ -535,43 +488,14 @@
     z-index: 2;
     top: 50%;
   }
-  /* .icon_larger {
-    right: 20px;
-    top: 200px;
-  }
-
-  .icon_smaller {
-    left: 20px;
-    top: 200px;
-  }
-
-  .icon_clockWise {
-    left: 20px;
-    top: 270px;
-  }
-
-  .icon_AclockWise {
-    right: 20px;
-    top: 270px;
-  } */
-  /* private */
-  /* .CompareShow {
-    height: 100%;
-    position: relative;
-    background: red;
-    overflow: auto;
-  } */
-  /*  css */
-
   .AudioVisualLeft .AudioVisual_List,
   .AudioVisualLeft .AudioVisual_Img {
     float: left;
     height: 100%;
     overflow: auto;
     position: relative;
+    
   }
-  /*  css */
-
   .AudioVisualLeft .AudioVisual_Img {
     width: calc( 100% - 214px);
     /* background: yellowgreen; */
@@ -613,6 +537,7 @@
 
   .AudioVisualLeft .list_title_div p span {
     font-size: 13px;
+    cursor: pointer;
   }
 
   .AudioVisualLeft .list_title span:nth-of-type(1),
@@ -631,17 +556,6 @@
     border-right: none;
     border-left: none;
   }
-  /* 
-.AudioVisualLeft .list_title span:nth-of-type(3),
-.AudioVisualLeft .list_title_div p span:nth-of-type(3) {
-    width: 60px;
-  } */
-  /* .AudioVisualLeft .list_title span:nth-of-type(4),
-.AudioVisualLeft .list_title_div p span:nth-of-type(4) {
-    width: 144px;
-    border-left: none;
-  } */
-  /* ------------------------------- */
   /* 缩略图最外侧div */
 
   .AudioVisualLeft .Small_pic_div {
@@ -694,6 +608,7 @@
 
   .AudioVisualLeft .small_pic_figure p {
     height: 22px;
+    width: 186px;
     line-height: 22px;
     margin-top: 15px;
     text-align: center;
@@ -711,7 +626,7 @@
     height: calc( 100% - 60px);
     /* UI设计部分 */
     border-radius: 5px;
-    border: 1px solid #bfcbd9;
+    border: 2px solid #bfcbd9;
     box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
   }
   /* --------------------------- */
@@ -726,7 +641,7 @@
     z-index: 28;
   }
 
-  .posi h1 {
+  .posi p {
     font-size: 16px;
     height: 48px;
     line-height: 48px;
