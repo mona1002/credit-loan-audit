@@ -36,12 +36,11 @@
       }
     },
     mounted() {
-      // this.MatchInf = JSON.parse(localStorage.getItem("internalId"));
+      this.MatchInf = JSON.parse(localStorage.getItem("internalId"));
       this.post("/creauditOpinion/queryByPage", {
-        // applyId: this.MatchInf.matchApplyId,           
-        applyId: "00542",
+        applyId: this.MatchInf.matchApplyId,           
+        // applyId: "00542",
       }).then(res => {
-        console.log(res.data)
         this.ConclutionInf = res.data.recordList;
       });
     },

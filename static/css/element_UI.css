@@ -891,7 +891,6 @@ height: 40px;
   width: 700px
 }
 
-
 /* 信审表-工作信息-单位地址-input框 */
 
 .CreditForm .company_address_select .el-input {
@@ -929,8 +928,7 @@ height: 40px;
 }
 /* 信审表----查询---气泡宽度 */
 .el-tooltip__popper{
-  /* width: calc( 100% - 197px); */
-  width: 400px;
+  max-width: 400px;
 }
 
 
@@ -944,7 +942,6 @@ height: 40px;
   background: #eeeFFF;
   padding: 0;
 }
-
 
 /* 影音列表-对比弹出层-右侧-折叠面板-title */
 
@@ -1583,6 +1580,16 @@ height: 40px;
 
 .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
   background: #f8f9fd;
+}
+
+/* 箭头 */
+.phone-credit .el-tree-node__content .el-tree-node__expand-icon{
+ transform:rotate(-90deg); 
+ -webkit-transform:rotate(-90deg);
+}
+.phone-credit .el-tree-node__expand-icon.expanded{
+  transform:rotate(90deg);
+  -webkit-transform:rotate(90deg);
 }
 
 

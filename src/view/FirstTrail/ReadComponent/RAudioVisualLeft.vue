@@ -353,26 +353,26 @@
     },
     mounted() {
       // console.log(" 影音资料左")
-      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '01') {
-this.localInf = JSON.parse(localStorage.getItem("internalId"))//获取-初审-列表详情的id
-        // 父菜单
-        this.post("/productArchive/getProductArchiveParentList", {
-          applyId: this.localInf.applyId,
-          // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
-          //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
-        }).then(res => {
-          this.ListParent = res.data;
-        });
-      } else if (this.judgeFlag.flag == '02') { //----------------------获取 localstorage 路径待更改
-        this.localInf = JSON.parse(localStorage.getItem("FinaltaskInWaitting")) // 路径 ????????????//获取-终审-列表详情的id FinalWorkbenchPass-----待修改
-        //  与上面初审请求数据重复的---如果反欺诈 此处也相同，可以删除里面的，拿刀outside去
-        this.post("/productArchive/getProductArchiveParentList", {
-          applyId: this.localInf.applyId,
-        }).then(res => {
-          this.ListParent = res.data;
-        });
-      } else if (this.judgeFlag.flag == '03') {
+//       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+//       if (this.judgeFlag.flag == '01') {
+// this.localInf = JSON.parse(localStorage.getItem("internalId"))//获取-初审-列表详情的id
+//         // 父菜单
+//         this.post("/productArchive/getProductArchiveParentList", {
+//           applyId: this.localInf.applyId,
+//           // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
+//           //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
+//         }).then(res => {
+//           this.ListParent = res.data;
+//         });
+//       } else if (this.judgeFlag.flag == '02') { //----------------------获取 localstorage 路径待更改
+//         this.localInf = JSON.parse(localStorage.getItem("FinaltaskInWaitting")) // 路径 ????????????//获取-终审-列表详情的id FinalWorkbenchPass-----待修改
+//         //  与上面初审请求数据重复的---如果反欺诈 此处也相同，可以删除里面的，拿刀outside去
+//         this.post("/productArchive/getProductArchiveParentList", {
+//           applyId: this.localInf.applyId,
+//         }).then(res => {
+//           this.ListParent = res.data;
+//         });
+//       } else if (this.judgeFlag.flag == '03') {
         this.localInf = JSON.parse(localStorage.getItem("internalId")) //获取-初审-内部匹配id
         this.post("/productArchive/getProductArchiveParentList", {
           applyId: this.localInf.matchApplyId,
@@ -382,7 +382,7 @@ this.localInf = JSON.parse(localStorage.getItem("internalId"))//获取-初审-�
         }).then(res => {
           this.ListParent = res.data;
         });
-      }
+      // }
 
     }
   }
