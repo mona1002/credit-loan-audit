@@ -48,6 +48,8 @@ import RApprovalConclusion from '@/view/FirstTrail/ReadComponent/RApprovalConclu
 import RFinanceInformation from '@/view/FirstTrail/ReadComponent/RFinanceInformation'
 // ----------终审-------------------------
 import FSplitScreen from '@/view/FinalTrial/FSplitScreen'
+import FcCreditForm from '@/view/FinalTrial/FinalComponent/FcCreditForm'
+
 // import FMatchingInf from '@/view/FinalTrial/FMatchingInf'
 
 // ------------反欺诈------------------
@@ -168,6 +170,18 @@ const routes = [{
   path: '/FSplitScreen',
   component: FSplitScreen
 },
+{
+  path: '/FcCreditForm',
+  component: FcCreditForm
+},
+// {
+//   path: '/a',
+//   component: FSplitScreen
+// },
+// {
+//   path: '/b',
+//   component: FSplitScreen
+// },
 // {
 //   path: '/FMatchingInf',
 //   component: FMatchingInf
