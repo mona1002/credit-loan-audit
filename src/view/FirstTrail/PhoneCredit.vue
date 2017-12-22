@@ -1923,4 +1923,9 @@ export default {
   min-height: 50px;
 }
 
+
+.phone-credit .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content .el-tree-node__label:hover{
+  color:green;
+}
+
 </style>
