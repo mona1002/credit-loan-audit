@@ -106,17 +106,12 @@
           processTemplateId: "56789",
           taskNodeName: "67uj"
         })
-        console.log(this.$store.state.First)
       },
       handleCurrentChange(val) {
         if (val.taskNodeName == "creditApp_firstTrial") {
           this.currentRow = val;
           this.workbenchPass.processTemplateId = val.processTemplateId;
           this.workbenchPass.taskNodeName = val.taskNodeName;
-          // this.$store.state
-          // console.log(this.$store.state.First.Workbench="ghjkld67890")
-          // this.$store.state.First.Workbench=this.workbenchPass;
-          // console.log(this.$store.state.First)
           this.judge.flag = "01";
           localStorage.setItem("workbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识
@@ -137,10 +132,7 @@
           localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
           //  this.$router.push({path: '/FtaskInWaitting',});  跳转路径？？？？？？？？？？？？
         }
-
-
       }
-
     },
     mounted() {
       // 字段
@@ -156,22 +148,14 @@
       //  this.get("/smUser/getUserInfo").then(response => {
 
       this.get("http://testplatform.nuoyuan.com.cn:20717/remote/user/getUserInfo").then(response => {
-        // axios 请求
-        // console.info(response.data);
-        // this.userInf=response.data;
         this.userInf = {
           userCode: response.data.userCode,
           orgCode: response.data.orgCode,
         }
-        // console.log(this.userInf.orgCode)
-        // console.log(this.userInf.userCode)
         localStorage.setItem("userInf", JSON.stringify(this.userInf));
         this.post("/workFlowTaskQuery/getTaskProfile", {
           taskStatus: "01",
-          // userCode: this.userInf.userCode,
-          // orgCode: this.userInf.orgCode
         }).then(res => {
-          console.log(res.data);
           this.tableData = res.data;
         });
       });
@@ -247,6 +231,7 @@
     width: 148px;
     background: white;
     text-align: center;
+    padding-top: 10px;
   }
 
   .main .main_left h2 {
