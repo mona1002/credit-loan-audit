@@ -372,17 +372,18 @@
         }).then(res => {
           this.ListParent = res.data;
         });
-      } else if (this.judgeFlag.flag == '03') {
-        this.localInf = JSON.parse(localStorage.getItem("internalId")) //获取-初审-内部匹配id
-        this.post("/productArchive/getProductArchiveParentList", {
-          applyId: this.localInf.matchApplyId,
-          // applyId: this.localInf.applyId,
-          // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
-          //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
-        }).then(res => {
-          this.ListParent = res.data;
-        });
-      }
+      } 
+      // else if (this.judgeFlag.flag == '03') {
+      //   this.localInf = JSON.parse(localStorage.getItem("internalId")) //获取-初审-内部匹配id
+      //   this.post("/productArchive/getProductArchiveParentList", {
+      //     applyId: this.localInf.matchApplyId,
+      //     // applyId: this.localInf.applyId,
+      //     // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
+      //     //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
+      //   }).then(res => {
+      //     this.ListParent = res.data;
+      //   });
+      // }
 
     }
   }

@@ -37,13 +37,11 @@
       }
     },
     mounted() {
-      // this.MatchInf = JSON.parse(localStorage.getItem("internalId"));
+      this.MatchInf = JSON.parse(localStorage.getItem("internalId"));
       this.post("/creAccountInfo/getAccountInfo", {
-        // applyId: this.MatchInf.matchApplyId,           
-        applyId: "24667563-2ca2-4da6-8e02-4bf7d7c839b6",
+        applyId: this.MatchInf.matchApplyId,           
+        // applyId: "24667563-2ca2-4da6-8e02-4bf7d7c839b6",
       }).then(res => {
-        console.log(res);
-        // console.log(res.data)
         this.FinanceInf = res.data
       });
     }
