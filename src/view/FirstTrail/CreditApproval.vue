@@ -1,6 +1,6 @@
 <!-- 信审 - 审批 -->
 <template>
-  <div class="creditApproval-class" style="padding:10px">
+  <div class="creditApproval-class">
     <div class="address-title">
       <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
       <span class="headFont">概要信息</span>
@@ -1386,12 +1386,12 @@ export default {
   height: 40px;
   font-size: 18px;
   /*font-weight: bold;*/
-  background: #ededed;
+  background: #eef0f9;
   line-height: 40px;
   padding-left: 10px;
   display: block;
   margin-bottom: 10px;
-  margin-top: 20px;
+  /*margin-top: 20px;*/
   overflow: hidden;
 }
 

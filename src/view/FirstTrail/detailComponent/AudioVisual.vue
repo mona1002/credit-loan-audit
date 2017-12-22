@@ -29,8 +29,10 @@
             <p>
               <!-- 一级节点 -->
               <span style="position:relative;">{{item.arcName}}
-                <img src="../../../../static/images/918FE1E0-6EEB-4642-A5E6-253AC973FF41@1x.png" style="position:absolute;top:12px;left:26px" v-show="opendImg[ind]">
-                <img src="../../../../static/images/5530D698-2823-417F-B8BC-8DC9037BC848@1x.png" style="position:absolute;top:14px;left:26px" v-show="closedImg[ind]">
+                <img src="../../../../static/images/918FE1E0-6EEB-4642-A5E6-253AC973FF41@1x.png" style="position:absolute;top:12px;left:26px"
+                  v-show="opendImg[ind]">
+                <img src="../../../../static/images/5530D698-2823-417F-B8BC-8DC9037BC848@1x.png" style="position:absolute;top:14px;left:26px"
+                  v-show="closedImg[ind]">
               </span>
               <span>{{item.arcNum}}</span>
               <span>{{item.imageCount}}</span>
@@ -40,7 +42,10 @@
           <div class="list_title_div">
             <!--  二级 内容 节点 -->
             <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind)">
-              <span v-bind:title="item.arcName">{{item.arcName}}</span>
+              <el-tooltip class="item" effect="dark" :content="item.arcName" placement="right-end">
+                <span v-bind:title="item.arcName">{{item.arcName}}</span>
+              </el-tooltip>
+
               <span>{{item.arcNum}}</span>
               <span>{{item.imageCount}}</span>
               <span v-bind:title="item.uploadDate">{{item.uploadDate}}</span>
@@ -54,7 +59,7 @@
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
-         <div class="showHidIcons" ref="showHidIcons">
+      <div class="showHidIcons" ref="showHidIcons">
         <img src="../../../../static/images/left.png" class="icon_pre " @click="pre">
         <img src="../../../../static/images/pc1.png" class="icon_next" @click="next">
         <div class="BtnIcons">
@@ -91,8 +96,8 @@
     data() {
       return {
         // picData: [],
-        opendImg: [true, true, true, true],//影响名称 一级节点前面图标显示与否flag
-        closedImg: [false, false, false, false],//同上
+        opendImg: [true, true, true, true], //影响名称 一级节点前面图标显示与否flag
+        closedImg: [false, false, false, false], //同上
         showListDiv: true, // 列表显示与否
         show: true, // 收缩按钮显示控制
         smallPicInd: 0, // 未知
@@ -106,8 +111,8 @@
       }
     },
     methods: {
-      opend(vv){
-console.log(vv)
+      opend(vv) {
+        console.log(vv)
       },
       getChildrenList(id, ind, item) {
         // 一级节点前面的图标切换
@@ -258,7 +263,7 @@ console.log(vv)
         // }
       },
       Imgscroll() { //滚轮放大缩小图片
-      this.$refs.showHidIcons.style.display = "block";
+        this.$refs.showHidIcons.style.display = "block";
         // console.log("我是mouseout滚轮事件")
         this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => { // 非 Firefox 浏览器
           event = event || window.event;
@@ -289,7 +294,7 @@ console.log(vv)
         });
       },
       ImgScrollRemove() {
-         this.$refs.showHidIcons.style.display = "none";
+        this.$refs.showHidIcons.style.display = "none";
         // console.log("我是mouseout移除滚轮事件")
         this.$refs.AudioVisual_Img_ref.onmousewheel = "";
         this.$refs.AudioVisual_Img_ref.removeEventListener('DOMMouseScroll', (event) => {
@@ -418,7 +423,8 @@ console.log(vv)
     bottom: 18px;
     right: 17px;
   }
-      .showHidIcons{
+
+  .showHidIcons {
     display: none;
   }
   /*  放大、缩小 按钮 wrap */
@@ -426,7 +432,7 @@ console.log(vv)
   .BtnIcons {
     position: absolute;
     z-index: 2;
-    left: calc( 50% - 63px);
+    left: calc( 50% - 97px);
     bottom: 57px;
     width: 193px;
     height: 52px;
@@ -539,6 +545,7 @@ console.log(vv)
 
   .AudioVisual .list_title_div p span {
     font-size: 13px;
+    cursor: pointer;
   }
 
   .AudioVisual .list_title span:nth-of-type(1),
@@ -622,6 +629,7 @@ console.log(vv)
 
   .AudioVisual .small_pic_figure p {
     height: 22px;
+    width: 186px;
     line-height: 22px;
     margin-top: 15px;
     text-align: center;

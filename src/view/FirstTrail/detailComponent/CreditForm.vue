@@ -1469,7 +1469,7 @@
     },
     methods: {
       wordInput20(val, el) {
-        if (val.length >= 10) {
+        if (val.length >= 20) {
           this.wordInput20SC(val, el);
         } else {
           this.wordInput20SCF(val, el);
@@ -1496,7 +1496,7 @@
         }
       },
       wordInput50(val, el) {
-        if (val.length >= 10) {
+        if (val.length >= 50) {
           this.wordInput50SC(val, el);
         } else {
           this.wordInput50SCF(val, el);
@@ -1543,23 +1543,18 @@
       wordInput100(val, el) {
         switch (el) {
           case "单位具体地址":
-            val.length >= 10 ? this.Wordhint.Working.ComAdr = true : this.Wordhint.Working.ComAdr = false;
+            val.length >= 100 ? this.Wordhint.Working.ComAdr = true : this.Wordhint.Working.ComAdr = false;
             break;
           case "常住地址":
-            val.length >= 10 ? this.Wordhint.address.permanentAddress = true : this.Wordhint.address.permanentAddress =
+            val.length >= 100 ? this.Wordhint.address.permanentAddress = true : this.Wordhint.address.permanentAddress =
               false;
             break;
         }
       },
       wordarea200(val, el) {
-        console.log("ghlfdkjadshj")
-        console.log(el);
-        console.log(val.length);
-        if (val.length >= 10) {
-          console.log("<10");
+        if (val.length >= 200) {
           this.wordarea200SC(val, el);
         } else {
-          console.log(">10");
           this.wordarea200SCF(val, el);
         }
       },
@@ -1620,14 +1615,13 @@
         }
       },
       wordarea(val, el, txt) {
-        if (val.length <= 8 && val.length >= 0) {
-          this.wordareaSCF(val, el);
+        if (val.length >= 500) {
+           this.wordareaSC(val, el);
         } else {
-          this.wordareaSC(val, el);
+          this.wordareaSCF(val, el);
         }
       },
       wordareaSC(val, el) {
-        console.log("显示")
         switch (el) {
           case "执行信息":
             this.Wordhint.Internet.excude = true;
@@ -1656,7 +1650,7 @@
           case "单位地址异常":
             this.Wordhint.Internet.comAddress = true;
             break;
-          case "公司上登记":
+          case "工商登记":
             this.Wordhint.Internet.loginOrNot = true;
             break;
           case "组织机构代码":
@@ -1705,7 +1699,7 @@
           case "单位地址异常":
             this.Wordhint.Internet.comAddress = false;
             break;
-          case "公司上登记":
+          case "工商登记":
             this.Wordhint.Internet.loginOrNot = false;
             break;
           case "组织机构代码":
@@ -1956,12 +1950,9 @@
         }
       },
       getCity(item) {
-        console.log("省份-市区")
-        console.log(item)
         this.get("/credit/queryCityCounty", {
           parentCode: item,
         }).then(res => {
-          console.log(res);
           this.hireProvincd = res.data;
           this.checkData.workCity = "";
           this.checkData.workCounty = "";
@@ -1969,7 +1960,6 @@
         })
       },
       getTown(item) {
-        console.log("city");
         this.get("/credit/queryCityCounty", {
           parentCode: item,
         }).then(res => {
@@ -1986,13 +1976,11 @@
         this.Confirm = false;
       },
       CFsave() {
-        console.log("提交信息");
         this.$validator.validateAll().then((result) => {
           if (result) {
             this.checkData.selfpremisesArea = this.acreage;
             this.checkData.selfhasProportion = this.Percent;
             this.post("/creauditInfo/addOrUpdate", this.checkData).then(res => {
-              console.log(res);
               if (res.statusCode == 200) {
                 this.Confirm = false;
                 alert('提交成功!');
@@ -2094,11 +2082,9 @@
       postCode(val, e) {
         var reg = /^\d{6}$/;
         if (reg.test(val)) {
-          console.log("匹配")
           this.checkData.workZip = e.target.value = val;
           this.reg.mpostCode = false;
         } else {
-          console.log("不匹配")
           this.checkData.workZip = e.target.value = val = '';
           this.reg.mpostCode = true;
         }
@@ -2249,7 +2235,6 @@
           case "配偶收入":
             this.checkData.spouseIncome = val;
             break;
-
           case "生活费支付":
             this.checkData.childPaycostamt = val;
             break;
@@ -2273,8 +2258,7 @@
           }
         }
       },
-      ElInputStyle(val) { //监听分屏右侧div宽度，100% / 50% 的时候改变input的大小
-        console.log(val)
+      ElInputStyle(val) {
         if (val == "50%") {
           for (var i = 0; i < this.Pwidth.length; i++) {
             this.Pwidth[i].style.width = 150 + "px";
@@ -2284,8 +2268,6 @@
           };
           this.CFwidth[0].style.minWidth = 1272 + "px";
           this.comaddressb[0].style.paddingLeft = 674 + "px";
-          console.log(this.CFwidth[0].style.minWidth)
-          console.log(this.CFwidth[0].style.minWidth)
         } else if (val == "100%") {
           for (var i = 0; i < this.Pwidth.length; i++) {
             this.Pwidth[i].style.width = 200 + "px";
@@ -2332,7 +2314,6 @@
       });
       // 省    
       this.get("/credit/queryProvince", {}).then(res => {
-        // console.log(res);
         this.hirecomAddress = res.data;
       });
       // 所属行业 
@@ -2357,77 +2338,6 @@
       myWatch: function (val) {
         this.ElInputStyle(val);
       }
-    },
-    directives: {
-
-      numberOnly: {
-        // bind() {
-        //   handler = function () {
-        //     this.el.value = this.el.value.replace(/\D+/, '')
-        //   }.bind(this)
-        //   this.el.addEventListener('input', this.handler)
-        // },
-        // unbind() {
-        //   this.el.removeEventListener('input', this.handler)
-        // }
-      }
-
-      // 指令的定义
-      // numbers: {
-      //   twoWay: true,
-      //   bind: function (el) {
-      //     console.log(el);
-      //     el.handler = function () {
-      //       let value;
-
-      //       function formatNumber(num, cent, isThousand) {
-      //         var num = num.toString().replace(/\$|\,/g, '');
-
-      //         // 检查传入数值为数值类型
-      //         if (isNaN(num))
-      //           num = "0";
-
-      //         // 获取符号(正/负数)
-      //         let sign = (num == (num = Math.abs(num)));
-
-      //         num = Math.floor(num * Math.pow(10, cent) + 0.50000000001); // 把指定的小数位先转换成整数.多余的小数位四舍五入
-      //         let cents = num % Math.pow(10, cent); // 求出小数位数值
-      //         num = Math.floor(num / Math.pow(10, cent)).toString(); // 求出整数位数值
-      //         cents = cents.toString(); // 把小数位转换成字符串,以便求小数位长度
-
-      //         // 补足小数位到指定的位数
-      //         while (cents.length < cent)
-      //           cents = "0" + cents;
-
-      //         if (isThousand) {
-      //           // 对整数部分进行千分位格式化.
-      //           for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
-      //             num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
-      //         }
-
-      //         if (cent > 0)
-      //           return (((sign) ? '' : '-') + num + '.' + cents);
-      //         else
-      //           return (((sign) ? '' : '-') + num);
-      //       };
-      //       console.log(formatNumber(el.value, 2, 0));
-      //       (function () {
-      //         value = formatNumber(el.value, 2, 0)
-      //         console.log(value);
-      //         return value
-      //       })()
-      //       el.value = value
-      //       console.log(el.value);
-      //     };
-      //     el.addEventListener('blur', el.handler);
-      //   },
-      //   update: function (el, binding, vnode) {
-      //     if (el.value !== '') {
-      //       el.value = el.value.replace(/[^0-9.]+/g, '');
-      //       console.log(el.value);
-      //     }
-      //   },
-      // },
     },
   }
 

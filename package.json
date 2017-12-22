@@ -14,7 +14,6 @@
     "babel-polyfill": "^6.26.0",
     "element-ui": "^2.0.4",
     "jquery": "^3.2.1",
-    "vee-validate": "^2.0.0-rc.27",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
