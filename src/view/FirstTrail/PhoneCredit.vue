@@ -216,7 +216,7 @@ export default {
         {
           "children": [],
           "id": "04",
-          "label": "紧急联系人"
+          "label": "其他联系人"
         },
         {
           "children": [],

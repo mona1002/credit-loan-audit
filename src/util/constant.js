@@ -21,8 +21,8 @@ if (host === productionEnv) {
   host = developmentEnv;
   //port = 20716;
 } else {
-  // host = developmentEnv;
-  host = testEnv;// 开发 改测试环境接口
+  host = developmentEnv;
+  // host = testEnv;// 开发 改测试环境接口
   // port = 20717;
 }
 

@@ -135,46 +135,110 @@
       }
     },
     mounted() {
-      // 字段
-      // ASSIGNED("01", "代办"),
-      // COMPLETED("03","已办"),
-      // ABORTED("04","历史"),
-      //  获取到 路由传参 
-      // this.userCode = this.$route.query.userCode;
-      // this.orgCode = this.$route.query.orgCode;
-      // console.log(this.userCode + "================" + this.orgCode)
-      // this.$route.query.picName接参数 
-
-      //  this.get("/smUser/getUserInfo").then(response => {
-
+      // 统一登录平台  调试   start 
       this.get("http://testplatform.nuoyuan.com.cn:20717/remote/user/getUserInfo").then(response => {
         this.userInf = {
           userCode: response.data.userCode,
           orgCode: response.data.orgCode,
         }
+        // 统一登录 平台  调测 end
+        // -------------------------//
+        //取 登录信息    start
         localStorage.setItem("userInf", JSON.stringify(this.userInf));
         this.post("/workFlowTaskQuery/getTaskProfile", {
           taskStatus: "01",
         }).then(res => {
           this.tableData = res.data;
         });
+        //取 登录信息   end
       });
-
-      this.loginPass = JSON.parse(localStorage.getItem('userInf'));
-      this.post("/workFlowTaskQuery/getTaskProfile", {
-        taskStatus: "01",
-        // userCode: "ddyy",
-        // orgCode: "021"
-      }).then(res => {
-        console.log(res.data);
-        this.tableData = res.data;
-      });
-    },
+    }
   }
 
 </script>
 <style scoped>
   /* public 部分 */
+
+  .moreC {
+    float: right;
+    margin-right: 35px;
+  }
+
+  .border_top_bottom {
+    border-top: 1px solid gray;
+  }
+
+  .main .main_left {
+    height: 100%;
+    width: 148px;
+    background: white;
+    text-align: center;
+    padding-top: 10px;
+  }
+  /* 大框  */
+
+  .workbench {
+    background: #ededed;
+    width: 100%;
+    height: 100%;
+  }
+
+  .workbench .top {
+    height: 70px;
+  }
+
+  .workbench .main {
+    height: calc( 100% - 70px);
+    overflow: hidden;
+    background: #ededed;
+  }
+  /* main */
+
+  .main .main_left,
+  .main .main_right {
+    float: left;
+  }
+  /* 左边-常用 */
+
+  .main .main_left {
+    height: 100%;
+    width: 148px;
+    background: white;
+    text-align: center;
+  }
+
+  .main .main_left h2 {
+    font-size: 16.5px;
+    margin-top: 3px;
+  }
+  /* 右边-折叠面板 */
+
+  .main .main_right {
+    width: calc( 100% - 148px);
+    background: white;
+  }
+  /* 代办任务 */
+
+  .main_right .main_right_task,
+  .main_right .main_right_work {
+    float: left;
+    width: 50%;
+    height: 100vh;
+    padding: 19px 20px 0 20px;
+    /* background: black; */
+    background: #ededed;
+  }
+
+  .main_right .main_right_work {
+    padding-left: 0;
+  }
+
+  .waitting {
+    /* height:800px; */
+    background: red;
+  }
+
+
 
   .moreC {
     float: right;
@@ -231,7 +295,6 @@
     width: 148px;
     background: white;
     text-align: center;
-    padding-top: 10px;
   }
 
   .main .main_left h2 {
