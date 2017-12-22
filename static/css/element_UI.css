@@ -927,7 +927,6 @@ height: 40px;
 }
 /* 信审表----查询---气泡宽度 */
 .el-tooltip__popper{
-  /* width: calc( 100% - 197px); */
   max-width: 400px;
 }
 
@@ -942,7 +941,6 @@ height: 40px;
   background: #eeeFFF;
   padding: 0;
 }
-
 
 /* 影音列表-对比弹出层-右侧-折叠面板-title */
 

@@ -1,13 +1,9 @@
 @media screen and (max-width: 1366px) {
   .Abody {
-    /* width:1366px; */
-    /* height: calc(100% - 101px); */
-    /* overflow-x: scroll; */
+    min-width:1366px;
   }
   html {
     width: 1366px;
-    /* height: 100%; */
-    /* overflow-x: scroll; */
   }
 }
 
@@ -15,10 +11,9 @@
   html {
     width: 100%;
   }
-  /* .Abody{         */
-  /* height: calc(100% - 101px); */
-  /* overflow: hidden; */
-  /* } */
+  .Abody{       
+    min-width: 1366px; 
+  }
 }
 
 @charset "utf-8";
