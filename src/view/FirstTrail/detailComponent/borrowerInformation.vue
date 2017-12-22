@@ -1284,6 +1284,10 @@
 	  			//其他信息
 	  			$(".qita").width('930px');
 	  			$(".qita ol li").css({'padding-right': 'calc( 49.9% - 155px )','padding-left': 'calc( 16.6% - 155px )'});
+	  			//确定按钮
+	  			$(".wattingButton").css({'width':'930'});
+	  			$(".wattingButton button").css({'margin-right':'calc( 49.9% - 155px )'});
+	  			
 	  			
 	  		}else if(this.isFull == true){// 全屏
 	  			$(".xinyongka").width('100%');
@@ -1308,6 +1312,9 @@
 	  			//其他信息
 	  			$(".qita").width('100%');
 	  			$(".qita ol li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 184px )'});
+	  			//确定按钮
+	  			$(".wattingButton").css({'width':'100%'});
+	  			$(".wattingButton button").css({'margin-right':'calc( 49.9% - 184px )'});
 	  		}
 		},
 	    methods:{
@@ -2333,6 +2340,9 @@
 		  			//其他信息
 		  			$(".qita").width('930px');
 		  			$(".qita ol li").css({'padding-right': 'calc( 49.9% - 155px )','padding-left': 'calc( 16.6% - 155px )'});
+		  			//确定按钮
+		  			$(".wattingButton").css({'width':'930'});
+		  			$(".wattingButton button").css({'margin-right':'calc( 49.9% - 155px )'});
 		  			
 		  		}else if(val == true){// 全屏
 		  			$(".xinyongka").width('100%');
@@ -2357,6 +2367,9 @@
 		  			//其他信息
 		  			$(".qita").width('100%');
 		  			$(".qita ol li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 184px )'});
+		  			//确定按钮
+		  			$(".wattingButton").css({'width':'100%'});
+		  			$(".wattingButton button").css({'margin-right':'calc( 49.9% - 184px )'});
 			  	}
 		  	}
 
@@ -2610,9 +2623,15 @@
 		font-size: 14px;
 	}
 	/* 确定按钮 */
+	.wattingButton{
+		width: 930px;
+		/* padding-left:calc( 16.6% - 174px );
+		padding-right:calc( 49.9% - 184px ); */
+	}
 	.wattingButton button{
 		float: right;
 		margin:10px;
+		margin-right: calc( 49.9% - 184px );
 	}
 
 	/* 提示弹层 */

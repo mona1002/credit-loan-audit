@@ -161,8 +161,8 @@
         tabContent2: 3,
         tabActiveInd1: 0,
         tabActiveInd2: 3,
-        items1: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹"],
-        items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "信审审批"],
+        items1: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹","反欺诈结论", "财务信息","流程轨迹","审批结论轨迹"],
+        items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹", "反欺诈结论", "财务信息","流程轨迹","审批结论轨迹"],
         tab1Index: 0,
         tab2Index: 3,
         flag1: [true, true, true, false, true, true, true, true, true],
@@ -262,7 +262,7 @@
       }
     },
     mounted() {
-      console.log("分屏");
+      console.log("匹配查看");
       this.tastwaitingPass = JSON.parse(localStorage.getItem("internalId"));
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.matchApplyId,
@@ -292,7 +292,7 @@
       CreditApproval,
       // 查询
       aut,
-      cremarkDetail, //
+      cremarkDetail, 
 
       cborrowerInformationDetail,
       processTrajectory
@@ -426,11 +426,11 @@
   /* 左侧列表  影音资料等 ul 外包   流 */
 
   .left .Left_ul {
-    width: 110px;
+    width: 128px;
     background: rgba(31, 45, 61, 0.59);
     box-shadow: 0 5px 20px 0 #475669;
     position: fixed;
-    left: -110px;
+    left: -128px;
     top: 165px;
     z-index: 10;
     padding-top: 24px;

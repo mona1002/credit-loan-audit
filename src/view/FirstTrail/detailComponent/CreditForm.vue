@@ -1267,7 +1267,7 @@
           label: '有限责任公司'
         }, {
           value: '04',
-          label: '股份有限公司否'
+          label: '股份有限公司'
         }, {
           value: '05',
           label: '个体工商户'
@@ -2284,7 +2284,7 @@
       this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
       // 获取查询列表数据
       this.post("/creauditInfo/queryCreauditInfoObj", {
-        applyId: "00542",
+        applyId: this.getParams.applyId,
       }).then(res => {
         console.log(res.data);
         this.checkData = res.data;
@@ -2350,7 +2350,6 @@
     height: 36px;
     outline: none;
     padding: 0 15px;
-    /* width:calc( 50% + 160px ); */
     font-size: inherit;
     color: #5a5e66;
   }
@@ -2392,10 +2391,8 @@
 
   .hint {
     color: red;
-    /* background: #000; */
     font-size: 12px;
     display: inline-block;
-    /* border:1px solid green; */
     width: 100%;
     font-style: normal;
   }
@@ -2428,7 +2425,6 @@
   /* 上网查询左侧label */
 
   .InternetInf_left_label {
-    /* width: 170px; */
     display: inline-block;
     width: 182px;
     margin-right: 10px;
@@ -2445,7 +2441,6 @@
   /* 工作信息 */
 
   .Working_input {
-    /* padding-left: 200px; */
     padding-left: 214px;
   }
 
@@ -2518,9 +2513,6 @@
   .CreditForm_CheckId p:nth-of-type(odd) {
     padding-top: 18px;
   }
-  /* .CreditForm_InternetInf li p:nth-of-type(1) {
-    min-width: 350px;
-  } */
   /* --------------------------工作信息 + 私营企业--------------------- */
 
   .WorkInfs_left_label {
@@ -2545,8 +2537,6 @@
   /* 私营企业 */
 
   {
-    /* min-width: 1010px; */
-    /* border:1px solid blue; */
     width: 66%;
     float: left;
   }
@@ -2624,7 +2614,6 @@
   }
 
   .layer .layerbox .buttonDiv {
-    /* float: left; */
     width: 100%;
     height: 50px;
     margin-top: 10px;
