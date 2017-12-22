@@ -46,6 +46,12 @@ export default {
         console.log(res);
       });
     }
+  },
+  a(){
+    //       router.push({
+//         path: '/',
+//         query: {redirect: router.currentRoute.fullPath} 
+//       })
   }
 };
 </script>

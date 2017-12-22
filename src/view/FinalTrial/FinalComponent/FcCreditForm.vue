@@ -1,8 +1,29 @@
 <template>
   <div class="CreditForm">
     <el-collapse v-model="activeNames">
+      <!-- 初审人员 -->
+            <el-collapse-item name="1">
+        <template slot="title">
+          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+          <span class="headFont">初审人员</span>
+        </template>
+        <div class="CreditForm_live">
+          <ul>
+            <li>
+              <p>
+                <label class="InternetInf_left_label ">初审人员编号：</label>
+                <!-- <span class="detail_inf">{{this.FormData.livingHouseHoldstext }} </span> -->
+              </p>
+              <p>
+                <label class="InternetInf_right_label">初审人员姓名：</label>
+                <!-- <span class="detail_inf">{{this.FormData.livingEstateBelongstext }} </span> -->
+              </p>
+            </li>
+          </ul>
+        </div>
+      </el-collapse-item>
       <!-- 上网查询信息 -->
-      <el-collapse-item name="1">
+      <el-collapse-item name="2">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">上网查询信息</span>
@@ -155,7 +176,7 @@
         </div>
       </el-collapse-item>
       <!-- 核实身份 -->
-      <el-collapse-item name="2">
+      <el-collapse-item name="3">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">核实身份</span>
@@ -214,7 +235,7 @@
         </div>
       </el-collapse-item>
       <!-- 工作信息  -->
-      <el-collapse-item name="3">
+      <el-collapse-item name="4">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">工作信息</span>
@@ -298,7 +319,7 @@
         </div>
       </el-collapse-item>
       <!-- 私营企业信息 -->
-      <el-collapse-item name="4">
+      <el-collapse-item name="5">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">私营企业信息</span>
@@ -381,7 +402,7 @@
         </div>
       </el-collapse-item>
       <!-- 家庭信息 -->
-      <el-collapse-item name="5">
+      <el-collapse-item name="6">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">家庭信息</span>
@@ -553,7 +574,7 @@
         </div>
       </el-collapse-item>
       <!-- 居住情况 -->
-      <el-collapse-item name="6">
+      <el-collapse-item name="7">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">居住情况</span>
@@ -574,7 +595,7 @@
         </div>
       </el-collapse-item>
       <!-- 核对现住址 -->
-      <el-collapse-item name="7">
+      <el-collapse-item name="8">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">核对现住址</span>
@@ -599,8 +620,50 @@
           </p>
         </div>
       </el-collapse-item>
+         <!-- 电话征信结论 -->
+      <el-collapse-item name="9">
+        <template slot="title">
+          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+          <span class="headFont">电话征信结论</span>
+        </template>
+        <div class="CreditForm_live">
+          <ul>
+            <li>
+              <p>
+                <label class="InternetInf_left_label ">同住者关系：</label>
+                <span class="detail_inf">{{this.FormData.livingHouseHoldstext }} </span>
+              </p>
+              <p>
+                <label class="InternetInf_right_label">居住房产所属情况：</label>
+                <span class="detail_inf">{{this.FormData.livingEstateBelongstext }} </span>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </el-collapse-item>
+             <!-- 内部匹配结论 -->
+      <el-collapse-item name="10">
+        <template slot="title">
+          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+          <span class="headFont">内部匹配结论</span>
+        </template>
+        <div class="CreditForm_live">
+          <ul>
+            <li>
+              <p>
+                <label class="InternetInf_left_label ">同住者关系：</label>
+                <span class="detail_inf">{{this.FormData.livingHouseHoldstext }} </span>
+              </p>
+              <p>
+                <label class="InternetInf_right_label">居住房产所属情况：</label>
+                <span class="detail_inf">{{this.FormData.livingEstateBelongstext }} </span>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </el-collapse-item>
       <!-- 初审结论 -->
-      <el-collapse-item name="8">
+      <el-collapse-item name="11">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">初审结论</span>
@@ -610,6 +673,17 @@
           <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==''" :content="this.FormData.oother" placement="top-start">
             <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
           </el-tooltip>
+          <div class="FinalConclution">
+            <i class="hint">
+            <span v-show="errors.has('conclusion')" class="result_textarea">{{ errors.first('conclusion') }}</span>
+            <b v-show="this.Wordhint.result" class="result_textarea"> 输入长度不能超过500</b>
+          </i>
+          <p class="InternetInf_left_label" style="textAlign:right">
+            <span class="red"> * </span>初审结果评价：</p>
+          <el-input type="textarea" :rows="5" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" @compositionend.native="wordarea(checkData.oother,'评价')"
+            @keyup.native="wordarea(checkData.oother,'评价')" v-model="checkData.oother" name="conclusion" v-validate="'required'">
+          </el-input>
+          </div>
         </div>
       </el-collapse-item>
     </el-collapse>
@@ -850,10 +924,10 @@
       },
     },
     mounted() {
-      this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
+       this.getParams = JSON.parse(localStorage.getItem("internalId")) //获取内部匹配的id
       // 获取查询列表数据
       this.post("/creauditInfo/queryCreauditInfoObj", {
-        applyId: this.getParams.applyId,
+        applyId: this.getParams.matchApplyId,
         // applyId: "00542",
       }).then(res => {
         this.FormData = res.data;
