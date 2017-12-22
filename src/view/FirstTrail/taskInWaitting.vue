@@ -44,6 +44,10 @@
 				      prop="emerType"
 				      label="紧急程度"
 				      min-width="80">
+				      <template slot-scope="scope">
+				      	<span style="color:#0077ff" v-if="timeColor==true">{{scope.row.emerType}}</span>
+				      	<span v-if="timeColor==false">{{scope.row.emerType}}</span>
+				      </template>
 				    </el-table-column>
 				    <el-table-column
 				      prop="applySubNo"
@@ -131,6 +135,7 @@
 		            certCode : ''
 			      },
 		        //taskType:'',
+		        timeColor:false,
 			}
 		},
 		components: {
@@ -175,6 +180,9 @@
 		            		this.datas[i].emerType="免费加急";
 		            	}else if(this.datas[i].emerType=='02'){
 		            		this.datas[i].emerType="收费加急";
+		            	};
+		            	if(this.datas[i].completeTime*1>=48){
+		            		this.timeColor=true;
 		            	};
 	            	};
 	            }else{

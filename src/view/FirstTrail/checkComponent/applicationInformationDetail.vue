@@ -962,7 +962,7 @@
 		width: 100%;
 		min-width: 1327px;
 		height: 100%;
-		background-color: #fafbfc;
+		/* background-color: #fafbfc; */
 		font-size: 14px;
 	}
 	.applicationInformationDetail ul{

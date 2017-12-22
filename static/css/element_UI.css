@@ -226,6 +226,20 @@ height: 40px;
   font-size: 14px;
 }
 
+.borrowerInformation .el-table th:nth-of-type(1) .cell{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.borrowerInformation .el-table__body-wrapper .el-table__body td:nth-of-type(1){
+  padding-left: 0 !important;
+}
+
+.borrowerInformation .el-table__body-wrapper .el-table__body td:nth-of-type(1) .cell{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
 .borrowerInformation .house.el-table th:nth-of-type(1),
 .borrowerInformation .house.el-table th:nth-of-type(7),
 .borrowerInformation .house.el-table th:nth-of-type(8) {
@@ -236,6 +250,10 @@ height: 40px;
 .borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(7),
 .borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(8) {
   text-align: center;
+}
+
+.borrowerInformation .income .el-table__body-wrapper .el-table__body td:nth-of-type(9) .cell{
+  padding-top: 3px;
 }
 
 .borrowerInformation ol.num li:nth-of-type(1) .el-input__inner {
@@ -252,6 +270,13 @@ height: 40px;
 .borrowerInformation .el-collapse-item__content {
   color: #475669;
   font-size: 14px;
+}
+
+.borrowerInformation .el-select-dropdown.el-popper{
+  width: auto !important;
+}
+.borrowerInformation .el-select-dropdown.el-popper div{
+  width: auto !important;
 }
 
 
@@ -316,7 +341,19 @@ height: 40px;
   font-size: 14px;
 }
 
+.borrowerInformationSetail .el-table th:nth-of-type(1) .cell{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
 
+.borrowerInformationSetail .el-table__body-wrapper .el-table__body td:nth-of-type(1){
+  padding-left: 0 !important;
+}
+
+.borrowerInformationSetail .el-table__body-wrapper .el-table__body td:nth-of-type(1) .cell{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
 /* 借款人资料 房产信息 表格内容居中 */
 
 .borrowerInformationSetail .house.el-table th:nth-of-type(1),
@@ -618,6 +655,9 @@ height: 40px;
 .borrowerInformation .el-input.is-disabled .el-input__inner{
   background: #fff;
 }
+.borrowerInformation .zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(1) div .el-input__inner{
+    padding-right: 10px;
+  }
 /* 各自部分 */
 
 
@@ -1107,6 +1147,10 @@ height: 40px;
 .remark .el-table th:nth-of-type(1) {
   text-align: center;
 }
+.remark .el-table th:nth-of-type(1) .cell{
+  padding-left: 0;
+  padding-right: 0;
+}
 
 .remark .el-table th:nth-of-type(4) {
   text-align: center;
@@ -1114,6 +1158,12 @@ height: 40px;
 
 .remark .el-table__body-wrapper .el-table__body td:nth-of-type(1) {
   text-align: center;
+  padding-left: 0;
+}
+
+.remark .el-table__body-wrapper .el-table__body td:nth-of-type(1) .cell{
+  padding-right: 0;
+  padding-left: 0;
 }
 
 .remark .el-table__body-wrapper .el-table__body td:nth-of-type(4) {
@@ -1149,12 +1199,23 @@ height: 40px;
   text-align: center;
 }
 
+.remarkDetial .el-table th:nth-of-type(1) .cell{
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .remarkDetial .el-table th:nth-of-type(4) {
   text-align: center;
 }
 
 .remarkDetial .el-table__body-wrapper .el-table__body td:nth-of-type(1) {
   text-align: center;
+  padding-left: 0;
+}
+
+.remarkDetial .el-table__body-wrapper .el-table__body td:nth-of-type(1) .cell{
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .remarkDetial .el-table__body-wrapper .el-table__body td:nth-of-type(4) {
@@ -1453,17 +1514,39 @@ height: 40px;
 /*流程轨迹查询 表格 */
 
 .processTrajectory .el-table th {
-  text-align: center;
+  /* text-align: center; */
   font-weight: 400;
   color: #1f2d3d;
   font-size: 14px;
 }
 
 .processTrajectory .el-table__body-wrapper .el-table__body td {
-  text-align: center;
+  /* text-align: center; */
   font-weight: 400;
   color: #666666;
   font-size: 14px;
+}
+
+.processTrajectory .el-table th:nth-of-type(1) .cell{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.processTrajectory .el-table__body-wrapper .el-table__body td:nth-of-type(1){
+  padding-left: 0 !important;
+}
+
+.processTrajectory .el-table__body-wrapper .el-table__body td:nth-of-type(1) .cell{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.processTrajectory .el-table th:nth-of-type(1),.processTrajectory .el-table th:nth-of-type(4),.processTrajectory .el-table th:nth-of-type(7),.processTrajectory .el-table th:nth-of-type(10) {
+  text-align: center;
+}
+
+.processTrajectory .el-table__body-wrapper .el-table__body td:nth-of-type(1),.processTrajectory .el-table__body-wrapper .el-table__body td:nth-of-type(4),.processTrajectory .el-table__body-wrapper .el-table__body td:nth-of-type(7),.processTrajectory .el-table__body-wrapper .el-table__body td:nth-of-type(10) {
+  text-align: center; 
 }
 
 

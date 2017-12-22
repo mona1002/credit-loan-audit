@@ -36,7 +36,7 @@
 					      <el-table-column
 					        label="房产类型" 
 					        prop="estateType"
-					        min-width="148">
+					        min-width="150">
 					        <template slot-scope="scope">
 					        	<span class="must">*</span>
 					        	<el-tooltip class="item" effect="dark" :disabled="scope.row.estateType!=''" content="该项为必填项" placement="right">
@@ -496,7 +496,7 @@
 							<img src="../../../../static/images/delete.png" class="icon"><span>删除</span>
 						</span>
 						<span @click="countNum" class="rightSpan">
-							<img src="../../../../static/images/delete.png" class="icon"><span>统计</span>
+							<img src="../../../../static/images/jielun.png" class="icon"><span>统计</span>
 						</span>
 					</div>
 			    </template>
@@ -726,41 +726,41 @@
 			    </template>
 		  		<div class="fuzhaixinxi">
 		  			<ol>
-				    	<li>
+				    	<li class="liDiv">
 				    		<label>信用卡每月还款[元]:</label>
 				    		<el-input v-on:blur="debtTotal(borDebt.monthRepayAmt,'monthRepayAmt')" v-model="borDebt.monthRepayAmt">	
 				    		</el-input>
 				    	</li>
-				    	<li>
+				    	<li class="liDiv">
 				    		<label>信用贷每月还款额[元]:</label>
 				    		<el-input v-model="borDebt.studentLoanAmt" v-on:blur="debtTotal(borDebt.studentLoanAmt,'studentLoanAmt')">
 				    		</el-input>
 				    	</li>
-				    	<li>
+				    	<li class="liDiv">
 				    		<label>房贷每月还款额[元]:</label>
 				    		<el-input v-on:blur="debtTotal(borDebt.houseLoanAmt,'houseLoanAmt')" v-model="borDebt.houseLoanAmt">	
 				    		</el-input>
 				    	</li>
 				    </ol>
 				    <ol>
-				    	<li>
+				    	<li class="liDiv">
 				    		<label>车贷每月还款额[元]:</label>
 				    		<el-input v-on:blur="debtTotal(borDebt.carLoanAmt,'carLoanAmt')" v-model="borDebt.carLoanAmt">
 				    		</el-input>
 				    	</li>
-				    	<li>
+				    	<li class="liDiv">
 				    		<label>其他贷款每月还款额[元]:</label>
 				    		<el-input v-on:blur="debtTotal(borDebt.otherLoanAmt,'otherLoanAmt')" v-model="borDebt.otherLoanAmt">	
 				    		</el-input>
 				    	</li>
-				    	<li class="zongji">
+				    	<li class="zongji liDiv">
 				    		<label>负债合计[元]:</label>
 				    		<el-input v-model="borDebt.totalLoan" v-on:blur="debtTotal(borDebt.totalLoan,'totalLoan')">
 				    		</el-input>
 				    	</li>
 				    </ol>
 				    <ol class="num">
-				    	<li>
+				    	<li class="liDiv">
 				    		<label>最近三个月信用卡/贷款申请次数:</label>
 				    		<el-input v-model="borDebt.loanNumber" v-on:blur="loanNumber(borDebt.loanNumber)"></el-input>
 				    	</li>
@@ -792,7 +792,7 @@
 			    </template>
 		  		<div class="fuzhaixinxi zhengxunbaogao">
 		  			<ol>
-				    	<li>
+				    	<li class="liDiv">
 				    		<label>报告来源:</label>
 				    		<div  class="require" style="display:inline-block">
 				    			<span v-if="rptInfo.crSource.length==50"><i>*</i>输入长度不能超过50</span>
@@ -807,9 +807,17 @@
 				    	</li>
 					    <li>
 					    	<label>有无征信报告查询记录:</label>
-					    	<el-select v-model="rptInfo.crHasRecord">
+					    	<!-- <el-select v-model="rptInfo.crHasRecord">
+					    								    <el-option
+					    								      v-for="item in crHasRecords"
+					    								      :key="item.value"
+					    								      :label="item.label"
+					    								      :value="item.value">
+					    								    </el-option>
+					    								</el-select> -->
+							<el-select v-model="rptInfo.crHasRecord" placeholder="请选择" class="unique">
 							    <el-option
-							      v-for="item in crHasRecords"
+							       v-for="item in crHasRecords"
 							      :key="item.value"
 							      :label="item.label"
 							      :value="item.value">
@@ -817,7 +825,7 @@
 							</el-select>
 					    	<!-- <el-input v-model="rptInfo.crHasRecord"></el-input> -->
 						</li>
-				    	<li><label>近6个月内信用报告查询次数:</label><el-input v-model="rptInfo.crRecordTimes" v-on:blur="recordTimes(rptInfo.crRecordTimes)"></el-input></li>
+				    	<li class="liDiv"><label>近6个月内信用报告查询次数:</label><el-input v-model="rptInfo.crRecordTimes" v-on:blur="recordTimes(rptInfo.crRecordTimes)"></el-input></li>
 				    </ol>
 				    <ol>
 				    	<li>
@@ -943,7 +951,7 @@
 				        label="计算"
 				        min-width="130">
 				        <template slot-scope="scope">
-				        	<img src="../../../../static/images/jielun.png" class="icon" @click="counted(scope.row)">
+				        	<img src="../../../../static/images/count.png" class="icon" @click="counted(scope.row)">
 						   <!-- <el-button @click="counted(scope.row)" type="text" size="small"><img src="../../../../static/images/jielun.png" class="icon"></el-button> -->
 						</template>
 				      </el-table-column>
@@ -1257,19 +1265,19 @@
 	  			//信用卡使用总况
 	  			$(".xinyongka").width('930px');
 	  			$(".xinyongka ul li div").width('150px');
-	  			$(".xinyongka ul li div input").width('150px');
+	  			$(".xinyongka ul li div input").css({'width':'100%','maxWidth':'150px'});
 	  			//负债信息
 	  			$(".fuzhaixinxi").width('930px');
-	  			$(".fuzhaixinxi ol li div").width('150px');
+	  			$(".fuzhaixinxi ol li.liDiv div").width('150px');
 	  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 150px )');
 	  			$(".fuzhaixinxi ol li div.require div").width('100%');
-	  			$(".fuzhaixinxi ol li div input").width('138px');
+	  			$(".fuzhaixinxi ol li div input").css({'width':'100%','maxWidth':'150px'});
 	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 150px )',"padding-right":'calc( 16.6% - 150px )'});
 	  			//征询报告
-	  			$(".zhengxunbaogao ol li div").width('150px');
+	  			$(".zhengxunbaogao ol li div.require").width('150px');
 	  			$(".zhengxunbaogao ol li div.require div").width('150px');
-	  			$(".zhengxunbaogao ol li div.require input").width('138px');
-	  			$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) div").width('150px');
+	  			$(".zhengxunbaogao ol li div.require input").css({'width':'100%','maxWidth':'150px'});
+	  			$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) .unique").css({'maxWidth':'150px','minWidth':'150px'});
 	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 150px )',"padding-right":'calc( 49.9% - 150px )'});
 	  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require").width('calc( 100% - 150px )');
 	  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require div").width('100%');
@@ -1280,19 +1288,20 @@
 	  		}else if(this.isFull == true){// 全屏
 	  			$(".xinyongka").width('100%');
 	  			$(".xinyongka ul li div").width('200px');
-	  			$(".xinyongka ul li div input").width('200px');
+	  			$(".xinyongka ul li div input").css({'width':'100%','maxWidth':'200px'});
 	  			//负债信息
 	  			$(".fuzhaixinxi").width('100%');
-	  			$(".fuzhaixinxi ol li div").width('200px');
+	  			$(".fuzhaixinxi ol li.liDiv div").width('200px');
 	  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 150px )');
 	  			$(".fuzhaixinxi ol li div.require div").width('100%');
-	  			$(".fuzhaixinxi ol li div input").width('200px');
+	  			$(".fuzhaixinxi ol li div input").css({'width':'100%','maxWidth':'200px'});
 	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 175px )',"padding-right":'calc( 16.6% - 184px )'});
 	  			//征询报告
 	  			$(".zhengxunbaogao ol li div.require").width('200px');
 	  			$(".zhengxunbaogao ol li div.require div").width('200px');
-	  			$(".zhengxunbaogao ol li div.require input").width('200px');
-	  			$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) div").width('200px');
+	  			$(".zhengxunbaogao ol li div.require input").css({'width':'100%','maxWidth':'200px'});
+	  			//$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) div").width('200px');
+	  			$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) .unique").css({'maxWidth':'200px','minWidth':'200px'});
 	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 184px )'});
 	  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require").width('calc( 100% - 150px )');
 	  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require div").width('100%');
@@ -2304,19 +2313,20 @@
 		  			//信用卡使用总况
 		  			$(".xinyongka").width('930px');
 		  			$(".xinyongka ul li div").width('150px');
-		  			$(".xinyongka ul li div input").width('150px');
+		  			$(".xinyongka ul li div input").css({'width':'100%','maxWidth':'150px'});
 		  			//负债信息
 		  			$(".fuzhaixinxi").width('930px');
-		  			$(".fuzhaixinxi ol li div").width('150px');
+		  			$(".fuzhaixinxi ol li.liDiv div").width('150px');
 		  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 150px )');
 		  			$(".fuzhaixinxi ol li div.require div").width('100%');
-		  			$(".fuzhaixinxi ol li div input").width('138px');
+		  			$(".fuzhaixinxi ol li div input").css({'width':'100%','maxWidth':'150px'});
 		  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 150px )',"padding-right":'calc( 16.6% - 150px )'});
 		  			//征询报告
 		  			$(".zhengxunbaogao ol li div").width('150px');
 		  			$(".zhengxunbaogao ol li div.require div").width('150px');
-		  			$(".zhengxunbaogao ol li div.require input").width('138px');
-		  			$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) div").width('150px');
+		  			$(".zhengxunbaogao ol li div.require input").css({'width':'100%','maxWidth':'150px'});
+		  			//$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) div").width('150px');
+		  			$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) .unique").css({'maxWidth':'150px','minWidth':'150px'});
 		  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 150px )',"padding-right":'calc( 49.9% - 150px )'});
 		  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require").width('calc( 100% - 150px )');
 		  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require div").width('100%');
@@ -2327,19 +2337,20 @@
 		  		}else if(val == true){// 全屏
 		  			$(".xinyongka").width('100%');
 		  			$(".xinyongka ul li div").width('200px');
-		  			$(".xinyongka ul li div input").width('200px');
+		  			$(".xinyongka ul li div input").css({'width':'100%','maxWidth':'200px'});
 		  			//负债信息
 		  			$(".fuzhaixinxi").width('100%');
-		  			$(".fuzhaixinxi ol li div").width('200px');
+		  			$(".fuzhaixinxi ol li.liDiv div").width('200px');
 		  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 150px )');
 		  			$(".fuzhaixinxi ol li div.require div").width('100%');
-		  			$(".fuzhaixinxi ol li div input").width('200px');
+		  			$(".fuzhaixinxi ol li div input").css({'width':'100%','maxWidth':'200px'});
 		  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 175px )',"padding-right":'calc( 16.6% - 184px )'});
 		  			//征询报告
 		  			$(".zhengxunbaogao ol li div.require").width('200px');
 		  			$(".zhengxunbaogao ol li div.require div").width('200px');
-		  			$(".zhengxunbaogao ol li div.require input").width('200px');
-		  			$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) div").width('200px');
+		  			$(".zhengxunbaogao ol li div.require input").css({'width':'100%','maxWidth':'200px'});
+		  			//$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) div").width('200px');
+		  			$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) .unique").css({'maxWidth':'200px','minWidth':'200px'});
 		  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 184px )'});
 		  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require").width('calc( 100% - 150px )');
 		  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require div").width('100%');
@@ -2429,7 +2440,8 @@
 		width: 150px;
 	}
 	.xinyongka ul li div input{
-		width: 150px;
+		width: 100%;
+		max-width: 150px
 	}
 	/* 贷款总况 */
 	.daikuanzongkuang li p{
@@ -2459,11 +2471,11 @@
 		padding-right: 5px;
 		color: #475669;
 	}
-	.fuzhaixinxi ol li div{
+	.fuzhaixinxi ol li.liDiv div{
 		width: 150px;
 	}
 	.fuzhaixinxi ol li div input{
-		width: 150px;
+		width: 100%;
 		padding-left:10px;
 	}
 	.fuzhaixinxi ol:nth-of-type(2) li:nth-of-type(2){
@@ -2521,11 +2533,17 @@
 	.zhengxunbaogao ol{
 		width: 100%;
 	}
+	.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(1) div .el-input__inner{
+		padding-right: 10px;
+	}
 	.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(3) div{
 		top: -5px;
 	}
 	.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(3) label{
 		line-height: 1;
+	}
+	.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) .unique{
+		max-width: 150px;
 	}
 	.zhengxunbaogao ol:nth-of-type(2) li{
 		width: 100%;
