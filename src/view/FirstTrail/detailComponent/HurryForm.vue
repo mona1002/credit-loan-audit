@@ -27,7 +27,7 @@
         </div>
       </li>
       <li class="item-column3">
-        <div class="left-title"><span class="require-icon" style="left:90px;">*</span>来源：</div>
+        <div class="left-title"><span class="require-icon" style="left:80px;">*</span>来源：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="source" placeholder="请选择来源">
@@ -39,7 +39,7 @@
         <!-- </div> -->
       </li>
       <li class="item-column3">
-        <div class="left-title"><span class="require-icon" style="left:60px;">*</span>接听情况：</div>
+        <div class="left-title"><span class="require-icon" style="left:50px;">*</span>接听情况：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="answer" placeholder="请选择接听情况">
@@ -53,7 +53,7 @@
         <!-- </div> -->
       </li>
       <li class="item-column3">
-        <div class="left-title"><span class="require-icon" style="left:60px;">*</span>调查阶段：</div>
+        <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查阶段：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="checkStage" placeholder="请选择调查阶段">
@@ -76,7 +76,7 @@
       <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
       <span class="headFont">录入紧急联系人调查信息</span>
     </div>
-    <ul>
+    <ul style="margin-left:15px;">
       <div class="content-ul">
         <li class="item-column1">
           <div class="left-title">第三方查询信息：</div>
@@ -87,7 +87,7 @@
       </div>
       <div class="content-ul">
         <li class="item-column3">
-          <div class="left-title"><span class="require-icon" style="left:5px;">*</span>三方查询是否异常：</div>
+          <div class="left-title"><span class="require-icon" style="left:-5px;">*</span>三方查询是否异常：</div>
           <!-- <div> -->
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <el-select v-model="threeQueries" placeholder="请选择调查情况">
@@ -108,7 +108,7 @@
       </div>
       <div class="content-ul">
         <li class="item-column3">
-          <div class="left-title left-title2"><span class="require-icon" style="left:0px;">*</span>微信/支付宝是否异常：</div>
+          <div class="left-title left-title2"><span class="require-icon" style="top:-5px;left:0px;">*</span>微信/支付宝是否异常：</div>
           <!-- <div> -->
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <el-select v-model="mobilepayment" placeholder="请选择调查情况">
@@ -119,7 +119,7 @@
           <!-- </div> -->
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="mobilepayment=='1'"><span class="require-icon" style="left:90px;">*</span>说明：</div>
+          <div class="left-title" v-show="mobilepayment=='1'"><span class="require-icon" style="left:80px;">*</span>说明：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <div class="textarea-class2" v-show="mobilepayment=='1'">
               <el-input v-model="mobilepaymenttxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
@@ -219,7 +219,7 @@
       </div>
       <div class="content-ul">
         <li class="item-column1">
-          <div class="left-title"><span class="require-icon" style="left:60px;">*</span>调查结果：</div>
+          <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查结果：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <div class="textarea-class">
               <el-input type="textarea" v-model="conclusion" :rows="5" resize=none></el-input>

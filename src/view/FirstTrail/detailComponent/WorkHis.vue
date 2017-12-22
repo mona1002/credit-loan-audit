@@ -54,6 +54,8 @@
             {{workData.mobilepaymenttxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="workData.mobilepayment!='1'">
+        </el-form-item>
         <el-form-item label="接电话人身份：" class="item-column3">
           {{workData.answerIdentityDes}}
         </el-form-item>
@@ -65,6 +67,8 @@
             {{workData.answertxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="workData.answerIdentity!='00'">
+        </el-form-item>
         <el-form-item label="核对单位工作情况：" class="item-column3">
           {{workData.checkJobDes}}
         </el-form-item>
@@ -73,6 +77,8 @@
             {{workData.checkJobtxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="workData.checkJob!='01'">
+        </el-form-item>
         <el-tooltip class="item" effect="dark" :content="workData.conclusion" placement="top">
           <el-form-item label="调查结果：" class="item-column1">
             {{workData.conclusion}}
