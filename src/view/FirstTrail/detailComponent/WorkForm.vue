@@ -5,7 +5,7 @@
       <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
       <span class="headFont">新增调查日志</span>
     </div>
-    <ul>
+    <ul class="content-ul">
       <li class="item-column3">
         <div class="left-title">客户名称:</div>
         <div class="dis-input">
@@ -77,65 +77,73 @@
       <span class="headFont">录入工作证明人调查信息</span>
     </div>
     <ul>
-      <li class="item-column2">
-        <div class="left-title left-title2"><span class="require-icon" style="left:0px;">*</span>微信/支付宝是否异常:</div>
-        <!-- <div> -->
-        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-          <el-select v-model="mobilepayment" placeholder="请选择调查情况">
-            <el-option label="否" value="0"></el-option>
-            <el-option label="是" value="1"></el-option>
-          </el-select>
-        </el-tooltip>
-        <!-- </div> -->
-      </li>
-      <li class="item-column2">
-        <div class="left-title" v-show="mobilepayment=='1'"><span class="require-icon" style="left:80px;">*</span> 说明:</div>
-        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-          <div class="textarea-class2" v-show="mobilepayment=='1'">
-            <el-input v-model="mobilepaymenttxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+      <div class="content-ul">
+        <li class="item-column3">
+          <div class="left-title left-title2"><span class="require-icon" style="left:0px;">*</span>微信/支付宝是否异常:</div>
+          <!-- <div> -->
+          <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+            <el-select v-model="mobilepayment" placeholder="请选择调查情况">
+              <el-option label="否" value="0"></el-option>
+              <el-option label="是" value="1"></el-option>
+            </el-select>
+          </el-tooltip>
+          <!-- </div> -->
+        </li>
+        <li class="item-column2 item-column3-2">
+          <div class="left-title" v-show="mobilepayment=='1'"><span class="require-icon" style="left:80px;">*</span> 说明:</div>
+          <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+            <div class="textarea-class2" v-show="mobilepayment=='1'">
+              <el-input v-model="mobilepaymenttxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+            </div>
+          </el-tooltip>
+        </li>
+      </div>
+      <div class="content-ul">
+        <li class="item-column3">
+          <div class="left-title">接电话人身份:</div>
+          <div>
+            <el-select v-model="answerIdentity" placeholder="请选择调查情况">
+              <el-option label="同事" value="00"></el-option>
+              <el-option label="本人" value="01"></el-option>
+            </el-select>
           </div>
-        </el-tooltip>
-      </li>
-      <li class="item-column2">
-        <div class="left-title">接电话人身份:</div>
-        <div>
-          <el-select v-model="answerIdentity" placeholder="请选择调查情况">
-            <el-option label="同事" value="00"></el-option>
-            <el-option label="本人" value="01"></el-option>
-          </el-select>
-        </div>
-      </li>
-      <li class="item-column2">
-        <div class="left-title" v-show="answerIdentity=='00'">说明:</div>
-        <div class="textarea-class2" v-show="answerIdentity=='00'">
-          <el-input v-model="answertxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
-        </div>
-      </li>
-      <li class="item-column2">
-        <div class="left-title">核对单位工作情况:</div>
-        <div>
-          <el-select v-model="checkJob">
-            <el-option label="一致" value="00"></el-option>
-            <el-option label="基本一致" value="01"></el-option>
-            <el-option label="不一致" value="02"></el-option>
-            <el-option label="被调查人不清楚" value="03"></el-option>
-          </el-select>
-        </div>
-      </li>
-      <li class="item-column2">
-        <div class="left-title" v-show="checkJob=='01'">说明:</div>
-        <div class="textarea-class2" v-show="checkJob=='01'">
-          <el-input v-model="checkJobtxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
-        </div>
-      </li>
-      <li class="item-column1">
-        <div class="left-title"><span class="require-icon" style="left:60px;">*</span> 调查结论:</div>
-        <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-          <div class="textarea-class">
-            <el-input v-model="conclusion" type="textarea" :rows="2" resize=none :maxlength="500"></el-input>
+        </li>
+        <li class="item-column2 item-column3-2">
+          <div class="left-title" v-show="answerIdentity=='00'">说明:</div>
+          <div class="textarea-class2" v-show="answerIdentity=='00'">
+            <el-input v-model="answertxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
-        </el-tooltip>
-      </li>
+        </li>
+      </div>
+      <div class="content-ul">
+        <li class="item-column3">
+          <div class="left-title">核对单位工作情况:</div>
+          <div>
+            <el-select v-model="checkJob">
+              <el-option label="一致" value="00"></el-option>
+              <el-option label="基本一致" value="01"></el-option>
+              <el-option label="不一致" value="02"></el-option>
+              <el-option label="被调查人不清楚" value="03"></el-option>
+            </el-select>
+          </div>
+        </li>
+        <li class="item-column2 item-column3-2">
+          <div class="left-title" v-show="checkJob=='01'">说明:</div>
+          <div class="textarea-class2" v-show="checkJob=='01'">
+            <el-input v-model="checkJobtxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          </div>
+        </li>
+      </div>
+      <div class="content-ul">
+        <li class="item-column1">
+          <div class="left-title"><span class="require-icon" style="left:60px;">*</span> 调查结论:</div>
+          <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
+            <div class="textarea-class">
+              <el-input v-model="conclusion" type="textarea" :rows="2" resize=none :maxlength="500"></el-input>
+            </div>
+          </el-tooltip>
+        </li>
+      </div>
       <li class="item-column1 submit-class">
         <el-button type="primary" @click="submitForm('form')">确定</el-button>
       </li>
@@ -168,25 +176,27 @@ export default {
     this.phoneType = '05'; // 住址电话
     if (this.isFull == true) { // 全屏
       console.log('全屏');
-      $(".textarea-class").css("minWidth", "500px")
+      $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
       // 提交按钮
-      $('.submit-class').css("margin-left", "810px")
+      $('.submit-class').css("margin-left", "calc( 66% - 140px)")
       // 显示 column2
-      $('.item-column2').css({
+      $('.item-column3').css({
         "min-height": "50px"
       })
-
-      // textarea
-      $('.item-column1 textarea').css("width", "149%")
+      $('.item-column3-2 .textarea-class2').css("width", "calc( 100% - 211px )");
+      $('.item-column2 textarea').css("width", "100%");
     } else if (this.isFull == false) { // 分屏
       console.log("分屏");
-      $(".textarea-class").css("minWidth", "300px")
+      // $(".textarea-class").css("minWidth", "300px")
       // 提交按钮
       $('.submit-class').css("margin-left", "370px")
-      $('.item-column2').css({
+
+      $('.item-column3').css({
         "min-height": "0px",
         "margin-bottom": "10px"
       })
+      $('.item-column1 textarea').css("width", "300px")
+      $('.item-column2 textarea').css("width", "300px")
     }
   },
   methods: {
@@ -275,26 +285,27 @@ export default {
     isFull: function(val) {
       if (val == true) { // 全屏
         console.log('全屏');
-        $(".textarea-class").css("minWidth", "500px")
+        $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
         // 提交按钮
-        $('.submit-class').css("margin-left", "810px")
+        $('.submit-class').css("margin-left", "calc( 66% - 140px)")
         // 显示 column2
-        $('.item-column2').css({
+        $('.item-column3').css({
           "min-height": "50px"
         })
-        // textarea
-        $('.item-column1 textarea').css("width", "149%")
-
+        $('.item-column3-2 .textarea-class2').css("width", "calc( 100% - 211px )");
+        $('.item-column2 textarea').css("width", "100%");
       } else if (val == false) { // 分屏
         console.log("分屏");
-        $(".textarea-class").css("minWidth", "300px")
+        // $(".textarea-class").css("minWidth", "300px")
         // 提交按钮
         $('.submit-class').css("margin-left", "370px")
-        $('.item-column2').css({
+
+        $('.item-column3').css({
           "min-height": "0px",
           "margin-bottom": "10px"
         })
-
+        $('.item-column1 textarea').css("width", "300px")
+        $('.item-column2 textarea').css("width", "300px")
       }
     }
   }

@@ -13,3 +13,4 @@ const config = {
   delay: 1000, 
 };
 Vue.use(VeeValidate, config);
+
