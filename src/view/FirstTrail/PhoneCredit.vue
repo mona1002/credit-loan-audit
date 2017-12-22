@@ -1888,7 +1888,7 @@ export default {
 /* 气泡 */
 
 .el-tooltip__popper {
-  width: 400px;
+  max-width: 400px;
   height: auto;
 }
 
