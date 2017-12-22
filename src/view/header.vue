@@ -2,7 +2,8 @@
   <div class="mheader">
     <!-- 导航图片 -->
     <div class="logoDiv">
-      <img class="logo" src="/static/images/logo.png">
+      <!-- <img class="logo" src="/static/images/logo.png"> -->
+      <span>诺远风控管理系统</span>
     </div> 
     <!-- 导航内容 -->
     <div class="navContain">
@@ -22,7 +23,9 @@
         </nav-item>
       </el-menu>
     </div>
-
+    <div class="backIcon">
+      <img @click="backLoin" src="/static/images/backLoin.png">
+    </div>
   </div>
 </template>
 
@@ -68,6 +71,9 @@ import NavItem from '@/view/navItem'
                 this.$refs.navbar.closeMenu(ele)
             })
         },
+        backLoin(){
+          window.location.href="http://codeplatform.nuoyuan.com.cn/#/";
+        },
 
     },
     computed: {
@@ -95,31 +101,41 @@ import NavItem from '@/view/navItem'
     /* background: #20a0ff; */
     font-size: 30px;
     color: white;
-    padding-left:20px;
+   /*  padding-left:20px; */
   }
   .mheader .logoDiv{
     float: left;
     height: 70px;
-    width: 116px;
+    /* width: 116px; */
     border-right: 1px solid #bfcbd9;
   }
-  .mheader .logoDiv .logo{
+  .mheader .logoDiv span{
+    font-size: 20px;
+    color:#fff;
+    padding:0 33px;
+    line-height: 70px;
+    letter-spacing: 2px;
+  }
+  /* .mheader .logoDiv .logo{
     width: 58px;
     height: 34px;
     margin:15px 0 21px 28px;
-  }
+  } */
   /* 导航内容 */
   .mheader .navContain{
-    width: calc( 100% - 116px );
+    width: calc( 100% - 305px );
     float: left;
     height: 70px;
+  }
+  .mheader .backIcon{
+    width: 60px;
+    padding: 0 20px;
+    line-height: 70px;
+    float: right;
   }
   .mheader .navContain .el-menu div{
     width: auto;
     float: left;
     height: 70px;
-  }
-  .mheader .navContain .el-menu div:nth-of-type(1){
-    margin-left: 128px;
   }
 </style>

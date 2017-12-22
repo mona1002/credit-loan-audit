@@ -453,7 +453,9 @@
 				    	<li>
 				    		<label>报告来源:</label>
 				    		<el-tooltip class="item" effect="dark" :content="rptInfo.crSource" placement="top">
-						      <span>{{rptInfo.crSource}}</span>
+				    			<div class="tipDiv">
+				    				<span>{{rptInfo.crSource}}</span>
+				    			</div>
 						    </el-tooltip>
 				    		
 				    		<!-- <el-input v-model="rptInfo.crSource"></el-input> -->
@@ -547,7 +549,7 @@
 				    	<li>
 				    		<label>其他:</label>
 				    		<el-tooltip class="item" effect="dark" :content="otherInfo.content" placement="top">
-						      <div v-bind:title="otherInfo.content">{{otherInfo.content}}</div>
+						      <div>{{otherInfo.content}}</div>
 						    </el-tooltip>
 				    	</li>
 				    </ol>
@@ -577,7 +579,13 @@
 	        /*负债信息*/
 	        borDebt:'',
 	        /*征询报告*/
-	        rptInfo:'',
+	        //rptInfo:'',
+	        rptInfo:{  
+		        "crSource":"", // 报告来源
+		        "crHasRecord":"", // 有无征信报告查询记录
+		        "crRecordTimes":"", // 近6个月内信用报告查询次数
+		        "crContent":"" // 报告描述
+		    },
 	        /*流水明细*/
 	        incomeList:[],
 	        /*其他信息*/
@@ -586,7 +594,7 @@
 	        taskInWaitting:'',
 	      };
 	    },
-	    created(){
+	    mounted(){
 			//一进入页面就发送请求
 			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
 			this.request(this.taskInWaitting.applyId);
@@ -748,7 +756,7 @@
 		        /*负债信息*/
 		        this.borDebt=res.data.borDebt;
 		        /*征询报告*/
-		        this.rptInfo=res.data.rptInfo;
+		        this.rptInfo=res.data.rptInfo;  
 		        /*流水明细*/
 		        this.incomeList=res.data.incomeList;
 		        /*其他信息*/
@@ -861,8 +869,8 @@ ol.num li:nth-of-type(2) div{
 	float: right;
 	padding-left: 10px;
 	overflow: auto;
-	/* border: 1px solid #d8dce5; 
-	overflow: hidden;
+	border: 1px solid #d8dce5; 
+	/*overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
@@ -879,9 +887,10 @@ ol.num li:nth-of-type(2) div{
 	float: left;
 }
 .zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(1) span{
-	width: 142px;
-	height: 35px;
+	 width: 100%;
+	/*height: auto; */
 	display: inline-block;
+	/* background: pink; */
 	overflow: hidden;
 	text-overflow:ellipsis;
 	white-space: nowrap;
@@ -906,8 +915,9 @@ ol.num li:nth-of-type(2) div{
 	width: calc( 66.6% - 170px );
 	padding-left: 10px;
 	overflow: auto;
-	/* overflow: hidden;
 	border: 1px solid #d8dce5;
+	/* 
+	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 3;
@@ -915,6 +925,12 @@ ol.num li:nth-of-type(2) div{
 	display: box;
 	line-clamp: 3;
 	box-orient: vertical; */
+}
+.zhengxunbaogao .tipDiv{
+	width: calc( 100% - 165px );
+	/* display: inline-block; */
+	height: 35px;
+	float: right;
 }
 .reportLabel{
 	float: left;
@@ -935,8 +951,8 @@ ol.num li:nth-of-type(2) div{
 	height: 117px;
 	overflow: auto;
 	padding-left: 10px;
-	/* overflow: hidden;
 	border: 1px solid #d8dce5;
+	/*overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 5;
