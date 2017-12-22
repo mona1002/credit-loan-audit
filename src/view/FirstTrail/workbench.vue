@@ -14,8 +14,6 @@
             <el-collapse-item name="1">
               <template slot="title">
                 <i class="el-icon-menu"></i> 待办任务
-                <!-- <i class="el-icon-refresh"></i> -->
-                <!-- <span @click.stop="more" class="moreC"> 更多 </span> -->
               </template>
               <div class="waitting">
                 <el-table ref="singleTable" :data="tableData" highlight-current-row @current-change="handleCurrentChange" style="width: 100%">
@@ -39,9 +37,10 @@
               <el-collapse-item name="1">
                 <template slot="title">
                   <i class="el-icon-menu"></i> 工作通知
-                  <!-- <i class="el-icon-refresh"></i> -->
                   <span @click.stop="more" class="moreC"> 更多 </span>
-                  <i class="el-icon-refresh"></i>
+                  <span class="moreC">
+                    <img src="../../../static/images/shuaxin.png" class="moreCIcon">
+                  </span>
                 </template>
                 <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
                 <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
@@ -55,15 +54,15 @@
                 <template slot="title" class="border_top_bottom">
                   <i class="el-icon-menu"></i> 公司动态
                   <span @click.stop="more" class="moreC"> 更多 </span>
-                  <i class="el-icon-refresh"></i>
+                  <span class="moreC">
+                    <img src="../../../static/images/shuaxin.png" class="moreCIcon">
+                  </span>
                 </template>
                 <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
                 <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
               </el-collapse-item>
             </el-collapse>
           </div>
-          <!-- test 信息 之router 带params-->
-          <!-- <router-link :to=" {path:'/ProductLists',query:{picName:val.name}}" v-for="(val,index) in pic" :key="index"> -->
         </div>
       </div>
     </div>
@@ -74,6 +73,9 @@ import myHead from "../header.vue"
 export default {
   data() {
     return {
+      judge: {
+        flag: ''
+      },
       userInf: '',
       activeNames: ['1'],
       activeNames1: ['1'],
@@ -108,27 +110,15 @@ export default {
       console.log(this.$store.state.First)
     },
     handleCurrentChange(val) {
-      console.log("我是表格")
-      console.log(val.taskNodeName)
       if (val.taskNodeName == "creditApp_firstTrial") {
         this.currentRow = val;
         this.workbenchPass.processTemplateId = val.processTemplateId;
         this.workbenchPass.taskNodeName = val.taskNodeName;
-        // this.$store.state
-        // console.log(this.$store.state.First.Workbench="ghjkld67890")
-        // this.$store.state.First.Workbench=this.workbenchPass;
-        // console.log(this.$store.state.First)
-
+        this.judge.flag = "01";
         localStorage.setItem("workbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
+        localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识
         this.$router.push({
           path: '/taskInWaitting',
-          // query: {
-          //   processTemplateId: val.processTemplateId,
-          //   taskNodeName: val.taskNodeName,
-          //   taskStatus: "01",
-          //   userCode: this.loginPass.userCode,
-          //   orgCode: this.loginPass.orgCode
-          // }
         });
         // localStorage.setItem("tableData", JSON.stringify(tableData));
         // this.$router.push({path:'/taskInWaitting',query:'123'})
@@ -139,19 +129,17 @@ export default {
         this.currentRow = val;
         this.workbenchPass.processTemplateId = val.processTemplateId;
         this.workbenchPass.taskNodeName = val.taskNodeName;
+        this.judge.flag = "02";
         localStorage.setItem("FinalWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
-        // this.$router.push({
-        //   path: '/taskInWaitting',
-        // });
+        localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
+        //  this.$router.push({path: '/FtaskInWaitting',});  跳转路径？？？？？？？？？？？？
       }
-
-
     }
 
-  },
-  computed: {
+
 
   },
+
   mounted() {
     // 字段
     // ASSIGNED("01", "代办"),
@@ -165,7 +153,7 @@ export default {
 
     //  this.get("/smUser/getUserInfo").then(response => {
 
-// 统一登录平台  调试   start 
+    // 统一登录平台  调试   start 
     // this.get("http://testplatform.nuoyuan.com.cn:20717/remote/user/getUserInfo").then(response => {
     // axios 请求
     // console.info(response.data);
@@ -176,7 +164,7 @@ export default {
     // }
     // console.log(this.userInf.orgCode)
     // console.log(this.userInf.userCode)
-// 统一登录 平台  调测 end
+    // 统一登录 平台  调测 end
 
 
     //取 登录信息  勿动!!!  start
@@ -191,8 +179,8 @@ export default {
     });
     //取 登录信息  勿动!!!  end
 
-// });
-// 统一登录 平台  闭合标签 end
+    // });
+    // 统一登录 平台  闭合标签 end
 
     // this.loginPass = JSON.parse(localStorage.getItem('userInf'));
     // this.post("/workFlowTaskQuery/getTaskProfile", {
@@ -203,7 +191,7 @@ export default {
     //   console.log(res.data);
     //   this.tableData = res.data;
     // });
-  },
+  }
 }
 
 </script>
@@ -218,6 +206,14 @@ export default {
 .border_top_bottom {
   border-top: 1px solid gray;
 }
+
+
+
+
+
+
+
+
 
 
 /* 大框  */
@@ -239,12 +235,28 @@ export default {
 }
 
 
+
+
+
+
+
+
+
+
 /* main */
 
 .main .main_left,
 .main .main_right {
   float: left;
 }
+
+
+
+
+
+
+
+
 
 
 /* 左边-常用 */
@@ -262,6 +274,14 @@ export default {
 }
 
 
+
+
+
+
+
+
+
+
 /* 右边-折叠面板 */
 
 .main .main_right {
@@ -270,8 +290,136 @@ export default {
 }
 
 
+
+
+
+
+
+
+
+
 /* 代办任务 */
 
+.main_right .main_right_task,
+.main_right .main_right_work {
+  float: left;
+  width: 50%;
+  height: 100vh;
+  padding: 19px 20px 0 20px;
+  /* background: black; */
+  background: #ededed;
+}
+
+.main_right .main_right_work {
+  padding-left: 0;
+}
+
+.waitting {
+  /* height:800px; */
+  background: red;
+}
+
+
+
+.moreC {
+  float: right;
+  width: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 25px;
+  display: inline-block;
+  background-color: #f3f3f3;
+  color: #3b5469;
+  font-size: 13px;
+  line-height: 25px;
+  text-align: center;
+  font-weight: normal;
+  margin-top: 11px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.moreCIcon {
+  margin-top: 6px;
+}
+
+.border_top_bottom {
+  border-top: 1px solid gray;
+}
+
+
+
+
+
+
+
+/* 大框  */
+.workbench {
+  background: #ededed;
+  width: 100%;
+  height: 100%;
+}
+
+.workbench .top {
+  height: 70px;
+}
+
+.workbench .main {
+  height: calc( 100% - 70px);
+  overflow: hidden;
+  background: #ededed;
+}
+
+
+
+
+
+
+
+/* main */
+.main .main_left,
+.main .main_right {
+  float: left;
+}
+
+
+
+
+
+
+
+/* 左边-常用 */
+.main .main_left {
+  height: 100%;
+  width: 148px;
+  background: white;
+  text-align: center;
+}
+
+.main .main_left h2 {
+  font-size: 16.5px;
+  margin-top: 3px;
+}
+
+
+
+
+
+
+
+/* 右边-折叠面板 */
+.main .main_right {
+  width: calc( 100% - 148px);
+  background: white;
+}
+
+
+
+
+
+
+
+/* 代办任务 */
 .main_right .main_right_task,
 .main_right .main_right_work {
   float: left;

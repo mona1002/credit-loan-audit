@@ -1,6 +1,6 @@
 <template>
   <div class="CreditForm">
-    <el-collapse v-model="activeNames" @change="handleChange">
+    <el-collapse v-model="activeNames">
       <!-- 上网查询信息 -->
       <el-collapse-item name="1">
         <template slot="title">
@@ -16,8 +16,9 @@
               </p>
               <p v-show="this.InternetShow.commentS">
                 <label class="InternetInf_right_label"> 执行信息说明： </label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.beexEcutedtxt" placement="top">
-                <span class="detail_inf">{{this.FormData.beexEcutedtxt}} </span>
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wbeexEcutedtxt==''" :content="this.FormData.wbeexEcutedtxt"
+                  placement="top-start">
+                  <span class="detail_inf">{{this.FormData.wbeexEcutedtxt}} </span>
                 </el-tooltip>
               </p>
             </li>
@@ -28,8 +29,9 @@
               </p>
               <p v-show="this.InternetShow.commentS1">
                 <label class="InternetInf_right_label"> 单位执行信息说明：</label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.wnetHirecomtxt" placement="top">
-                <span class="detail_inf">{{this.FormData.wnetHirecomtxt }} </span>
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetHirecomtxt==''" :content="this.FormData.wnetHirecomtxt"
+                  placement="top-start">
+                  <span class="detail_inf">{{this.FormData.wnetHirecomtxt }} </span>
                 </el-tooltip>
               </p>
             </li>
@@ -40,8 +42,9 @@
               </p>
               <p v-show="this.InternetShow.commentS2">
                 <label class="InternetInf_right_label"> 失信记录说明： </label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.wnetEcutedBreatxt" placement="top">
-                <span class="detail_inf">{{this.FormData.wnetEcutedBreatxt }} </span>
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetEcutedBreatxt==''" :content="this.FormData.wnetEcutedBreatxt"
+                  placement="top-start">
+                  <span class="detail_inf">{{this.FormData.wnetEcutedBreatxt }} </span>
                 </el-tooltip>
               </p>
             </li>
@@ -52,8 +55,9 @@
               </p>
               <p v-show="this.InternetShow.commentS3">
                 <label class="InternetInf_right_label"> 单位失信记录说明： </label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.wnetHirecomBreatxt" placement="top">
-                <span class="detail_inf">{{this.FormData.wnetHirecomBreatxt }} </span>
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetHirecomBreatxt==''" :content="this.FormData.wnetHirecomBreatxt"
+                  placement="top-start">
+                  <span class="detail_inf">{{this.FormData.wnetHirecomBreatxt }} </span>
                 </el-tooltip>
               </p>
             </li>
@@ -64,8 +68,8 @@
               </p>
               <p v-show="this.InternetShow.commentS4">
                 <label class="InternetInf_right_label"> 手机异常信息说明： </label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.wnetPhonetxt" placement="top">
-                <span class="detail_inf">{{this.FormData.wnetPhonetxt }} </span>
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetPhonetxt==''" :content="this.FormData.wnetPhonetxt" placement="top-start">
+                  <span class="detail_inf">{{this.FormData.wnetPhonetxt }} </span>
                 </el-tooltip>
               </p>
             </li>
@@ -76,8 +80,9 @@
               </p>
               <p v-show="this.InternetShow.commentS5">
                 <label class="InternetInf_right_label"> 单位名称异常信息说明： </label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.wnetHirecomNametxt" placement="top">
-                <span class="detail_inf">{{this.FormData.wnetHirecomNametxt }} </span>
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetHirecomNametxt==''" :content="this.FormData.wnetHirecomNametxt"
+                  placement="top-start">
+                  <span class="detail_inf">{{this.FormData.wnetHirecomNametxt }} </span>
                 </el-tooltip>
               </p>
             </li>
@@ -88,8 +93,9 @@
               </p>
               <p v-show="this.InternetShow.commentS6">
                 <label class="InternetInf_right_label"> 单位电话异常信息说明： </label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.wnetHirecomPhonetxt" placement="top">
-                <span class="detail_inf">{{this.FormData.wnetHirecomPhonetxt }} </span>
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetHirecomPhonetxt==''" :content="this.FormData.wnetHirecomPhonetxt"
+                  placement="top-start">
+                  <span class="detail_inf">{{this.FormData.wnetHirecomPhonetxt }} </span>
                 </el-tooltip>
               </p>
             </li>
@@ -100,8 +106,9 @@
               </p>
               <p v-show="this.InternetShow.commentS7">
                 <label class="InternetInf_right_label"> 地址异常信息说明： </label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.wnetAddrandEstatetxt" placement="top">
-                <span class="detail_inf">{{this.FormData.wnetAddrandEstatetxt }} </span>
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetAddrandEstatetxt==''" :content="this.FormData.wnetAddrandEstatetxt"
+                  placement="top-start">
+                  <span class="detail_inf">{{this.FormData.wnetAddrandEstatetxt }} </span>
                 </el-tooltip>
               </p>
             </li>
@@ -112,7 +119,8 @@
               </p>
               <p v-show="this.InternetShow.commentS8">
                 <label class="InternetInf_right_label"> 单位地址异常信息说明： </label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.wnetHirecomAddresstxt1" placement="top">
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetHirecomAddresstxt==''" :content="this.FormData.wnetHirecomAddresstxt"
+                  placement="top-start">
                   <span class="detail_inf">{{this.FormData.wnetHirecomAddresstxt }} </span>
                 </el-tooltip>
               </p>
@@ -124,7 +132,8 @@
               </p>
               <p v-show="this.InternetShow.commentS9">
                 <label class="InternetInf_right_label"> 工商登记信息说明： </label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.wnetCompanytxt" placement="top">
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetCompanytxt==''" :content="this.FormData.wnetCompanytxt"
+                  placement="top-start">
                   <span class="detail_inf">{{this.FormData.wnetCompanytxt }} </span>
                 </el-tooltip>
               </p>
@@ -136,7 +145,8 @@
               </p>
               <p v-show="this.InternetShow.commentS10">
                 <label class="InternetInf_right_label"> 组织机构代码信息说明： </label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.wnetAddrstatetxt" placement="top">
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetAddrstatetxt==''" :content="this.FormData.wnetAddrstatetxt"
+                  placement="top-start">
                   <span class="detail_inf">{{this.FormData.wnetAddrstatetxt }} </span>
                 </el-tooltip>
               </p>
@@ -159,7 +169,7 @@
               </p>
               <p v-show="this.checkId.declearNloaned">
                 <label class=" InternetInf_right_label "> 接听说明： </label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.iisselftxt" placement="top">
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.iisselftxt==''" :content="this.FormData.iisselftxt" placement="top-start">
                   <span class="detail_inf">{{this.FormData.iisselftxt }} </span>
                 </el-tooltip>
               </p>
@@ -171,7 +181,10 @@
               </p>
               <p v-show="this.checkId.loanNot">
                 <label class=" InternetInf_right_label "> 说明： </label>
-                <span class="detail_inf">{{this.FormData.iloanBeforetxt }} </span>
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.iloanBeforetxt==''" :content="this.FormData.iloanBeforetxt"
+                  placement="top-start">
+                  <span class="detail_inf">{{this.FormData.iloanBeforetxt }} </span>
+                </el-tooltip>
               </p>
             </li>
             <li>
@@ -191,7 +204,10 @@
               </p>
               <p v-show="this.checkId.loanNot">
                 <label class=" InternetInf_right_label "> 借款用途详细说明： </label>
-                <span class="detail_inf">{{this.FormData.iloanPurposetxt }} </span>
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.iloanPurposetxt==''" :content="this.FormData.iloanPurposetxt"
+                  placement="top-start">
+                  <span class="detail_inf">{{this.FormData.iloanPurposetxt }} </span>
+                </el-tooltip>
               </p>
             </li>
           </ul>
@@ -226,7 +242,7 @@
             <li>
               <p>
                 <label class="InternetInf_left_label "> 职位级别： </label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.workPost" placement="top">
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.workPost==''" :content="this.FormData.workPost" placement="top-start">
                   <span class="detail_inf ComAddr">{{this.FormData.workPost }} </span>
                 </el-tooltip>
               </p>
@@ -256,7 +272,7 @@
             <li class="company_address_select">
               <p style="width:66%">
                 <label class="InternetInf_left_label ">单位地址 ：</label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.addressMsg" placement="top">
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.addressMsg==''" :content="this.FormData.addressMsg" placement="top-start">
                   <span class="detail_inf ComAddr">{{this.FormData.addressMsg}} </span>
                 </el-tooltip>
               </p>
@@ -268,9 +284,9 @@
             <li>
               <p style="width: 66%;">
                 <label class="InternetInf_left_label">前单位名称：</label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.hirelastComname" placement="top">
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.hirelastComname==''" :content="this.FormData.hirelastComname"
+                  placement="top-start">
                   <span class="detail_inf ComAddr">{{this.FormData.hirelastComname }} </span>
-
                 </el-tooltip>
               </p>
               <p>
@@ -330,7 +346,8 @@
             <li>
               <p style="width:66%">
                 <label class=" InternetInf_left_label">企业经营项目：</label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.projectManage" placement="top">
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.projectManage==''" :content="this.FormData.projectManage"
+                  placement="top-start">
                   <span class="detail_inf ComAddr">{{this.FormData.projectManage }} </span>
                 </el-tooltip>
               </p>
@@ -346,13 +363,15 @@
               </p>
               <p>
                 <label class="InternetInf_right_label">第一供销商：</label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.firstSuppliers" placement="top">
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.firstSuppliers==''" :content="this.FormData.firstSuppliers"
+                  placement="top-start">
                   <span class="detail_inf ComAddr">{{this.FormData.firstSuppliers }} </span>
                 </el-tooltip>
               </p>
               <p>
                 <label class="CheckId_right_label "> 第一分销商： </label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.firstDistributor" placement="top">
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.firstDistributor==''" :content="this.FormData.firstDistributor"
+                  placement="top-start">
                   <span class="detail_inf distributor">{{this.FormData.firstDistributor }} </span>
 
                 </el-tooltip>
@@ -398,7 +417,8 @@
               </p>
               <p v-show="this.marriage.workingLivingInf">
                 <label class="InternetInf_right_label"> 在同一个城市工作生活信息： </label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.spouseSamecitytxt" placement="top">
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.spouseSamecitytxt==''" :content="this.FormData.spouseSamecitytxt"
+                  placement="top-start">
                   <span class="detail_inf family">{{this.FormData.spouseSamecitytxt }} </span>
                 </el-tooltip>
               </p>
@@ -416,7 +436,8 @@
               </p>
               <p>
                 <label class="InternetInf_right_label"> 子女数量备注： </label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.childCounttxt" placement="top">
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.childCounttxt==''" :content="this.FormData.childCounttxt"
+                  placement="top-start">
                   <span class="detail_inf family">{{this.FormData.childCounttxt }} </span>
                 </el-tooltip>
               </p>
@@ -428,7 +449,8 @@
               </p>
               <p>
                 <label class="InternetInf_right_label"> 子女现状备注： </label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.childStatustxt" placement="top">
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.childStatustxt==''" :content="this.FormData.childStatustxt"
+                  placement="top-start">
                   <span class="detail_inf">{{this.FormData.childStatustxt }} </span>
                 </el-tooltip>
               </p>
@@ -456,7 +478,8 @@
               </p>
               <p v-show="this.parent.livingOrNot">
                 <label class="InternetInf_right_label"> 父母备注： </label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.parentIslivingtxt" placement="top">
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.parentIslivingtxt==''" :content="this.FormData.parentIslivingtxt"
+                  placement="top-start">
                   <span class="detail_inf family">{{this.FormData.parentIslivingtxt }} </span>
                 </el-tooltip>
               </p>
@@ -468,7 +491,8 @@
               </p>
               <p>
                 <label class="InternetInf_right_label"> 父母身体状况备注： </label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.parentHealthtxt" placement="top">
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.parentHealthtxt==''" :content="this.FormData.parentHealthtxt"
+                  placement="top-start">
                   <span class="detail_inf family">{{this.FormData.parentHealthtxt }} </span>
                 </el-tooltip>
               </p>
@@ -480,7 +504,8 @@
               </p>
               <p>
                 <label class="InternetInf_right_label"> 父母是否需要赡养备注： </label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.parentPayalimonytxt" placement="top">
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.parentPayalimonytxt==''" :content="this.FormData.parentPayalimonytxt"
+                  placement="top-start">
                   <span class="detail_inf family">{{this.FormData.parentPayalimonytxt }} </span>
                 </el-tooltip>
               </p>
@@ -508,7 +533,8 @@
               </p>
               <p v-show="this.siblings.siblingsOrNot">
                 <label class="InternetInf_right_label"> 是否有兄弟姐妹备注： </label>
-                <el-tooltip class="item" effect="dark" :content="this.FormData.brothersIfhastxt" placement="top">
+                <el-tooltip class="item" effect="dark" :disabled="this.FormData.brothersIfhastxt==''" :content="this.FormData.brothersIfhastxt"
+                  placement="top-start">
                   <span class="detail_inf">{{this.FormData.brothersIfhastxt }} </span>
                 </el-tooltip>
               </p>
@@ -566,7 +592,8 @@
           </ul>
           <p v-show="this.address.permanent" style="clear:both;width:100%">
             <label class="InternetInf_left_label ">常住地址 ：</label>
-            <el-tooltip class="item" effect="dark" :content="this.FormData.aisresidenttxt" placement="top">
+            <el-tooltip class="item" effect="dark" :disabled="this.FormData.aisresidenttxt==''" :content="this.FormData.aisresidenttxt"
+              placement="top-start">
               <span class="detail_inf ComAddr">{{this.FormData.aisresidenttxt}} </span>
             </el-tooltip>
           </p>
@@ -580,7 +607,7 @@
         </template>
         <div class=" CreditForm_result" style="paddingTop:10px">
           <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
-          <el-tooltip class="item" effect="dark" :content="this.FormData.oother" placement="top">
+          <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==''" :content="this.FormData.oother" placement="top-start">
             <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
           </el-tooltip>
         </div>
@@ -737,10 +764,6 @@
       }
     },
     methods: {
-      handleChange(tab, event) {
-        console.log(tab, event);
-        // window.location.href="http://codeplatform.nuoyuan.com.cn/#/";
-      },
       NewPage(ind) {
         console.log(ind);
         switch (ind) {
@@ -761,38 +784,6 @@
             break;
         }
       },
-      makeSureBtn() {
-        this.Confirm = true;
-      },
-      canc() {
-        this.Confirm = false;
-      },
-      closed() {
-        this.Confirm = false;
-      },
-      CFsave() {
-        console.log("提交信息");
-        this.$validator.validateAll().then((result) => {
-          if (result) {
-            this.checkData.selfpremisesArea = this.acreage; 
-            this.checkData.selfhasProportion = this.Percent; 
-            this.post("/creauditInfo/addOrUpdate", this.checkData).then(res => {
-              console.log(res);
-              if (res.statusCode == 200) {
-                this.Confirm = false;
-                alert('提交成功!');
-                this.AreaNPercent();
-              } else {
-                alert("提交失败，请重新提交")
-                this.Confirm = false;
-              }
-            });
-          } else {
-            alert('请按要求填写！');
-            this.Confirm = false;
-          }
-        });
-      },
       AreaNPercent() {
         if (this.checkData.selfpremisesArea) {
           this.checkData.selfpremisesArea += "m²";
@@ -809,75 +800,74 @@
         switch (code) {
           case 0:
             val == 0 ? this.InternetShow.commentS = false : this.InternetShow.commentS = true;
-            break; 
+            break;
           case 1:
             val == 0 ? this.InternetShow.commentS1 = false : this.InternetShow.commentS1 = true;
-            break; //上网-单位被执行
+            break; 
           case 2:
             val == 0 ? this.InternetShow.commentS2 = false : this.InternetShow.commentS2 = true;
-            break; 
+            break;
           case 3:
             val == 0 ? this.InternetShow.commentS3 = false : this.InternetShow.commentS3 = true;
-            break; 
+            break;
           case 4:
             val == 0 ? this.InternetShow.commentS4 = false : this.InternetShow.commentS4 = true;
-            break; 
+            break;
           case 5:
             val == 0 ? this.InternetShow.commentS5 = false : this.InternetShow.commentS5 = true;
-            break;   
+            break;
           case 6:
             val == 0 ? this.InternetShow.commentS6 = false : this.InternetShow.commentS6 = true;
-            break; 
+            break;
           case 7:
             val == 0 ? this.InternetShow.commentS7 = false : this.InternetShow.commentS7 = true;
-            break; 
+            break;
           case 8:
             val == 0 ? this.InternetShow.commentS8 = false : this.InternetShow.commentS8 = true;
-            break; 
+            break;
           case 9:
             val == 0 ? this.InternetShow.commentS9 = false : this.InternetShow.commentS9 = true;
-            break; 
+            break;
           case 10:
             val == 0 ? this.InternetShow.commentS10 = false : this.InternetShow.commentS10 = true;
-            break; 
+            break;
           case 11:
             val == 0 ? this.checkId.declearNloaned = false : this.checkId.declearNloaned = true;
             break;
-          case 12: 
+          case 12:
             val == 0 || val == null ? this.workInf.private = false : this.workInf.private = true;
             break;
-          case 13: 
+          case 13:
             val == "01" || val == "04" || val == null ? this.marriage.couple = false : this.marriage.couple = true;
             break;
-          case 14:  
+          case 14:
             val == "00" || val == "03" ? this.marriage.workingCondition = true : this.marriage.workingCondition = false;
             break;
-          case 15:  
+          case 15:
             val == 0 || val == null ? this.marriage.workingLivingInf = false : this.marriage.workingLivingInf = true;
             break;
-          case 16:  
+          case 16:
             val == 0 || val == null ? this.Children.ChildrenOrNot = false : this.Children.ChildrenOrNot = true;
             break;
-          case 17:  
+          case 17:
             val == 0 || val == null ? this.Children.PayAlimony = false : this.Children.PayAlimony = true;
             break;
-          case 18:  
+          case 18:
             val == 0 || val == null ? this.parent.livingOrNot = false : this.parent.livingOrNot = true;
             break;
-          case 19: 
+          case 19:
             val == 0 || val == null ? this.siblings.siblingsOrNot = false : this.siblings.siblingsOrNot = true;
             break;
-          case 20: 
+          case 20:
             val == 0 ? this.address.permanent = true : this.address.permanent = false;
             break;
 
-          case 21: 
+          case 21:
             val == 0 || val == null ? this.checkId.loanNot = false : this.checkId.loanNot = true;
             break;
         }
       },
       ElInputStyle(val) {
-        console.log(val)
         if (val == "50%") {
           console.log("50%");
           for (var i = 0; i < this.Pwidth.length; i++) {
@@ -923,17 +913,19 @@
         this.mountJ(9, res.data.wnetCompany);
         this.mountJ(10, res.data.wnetAddrstate);
         this.mountJ(11, res.data.iisself);
-        this.mountJ(12, res.data.privateOwnerFlag); 
-        this.mountJ(13, res.data.fmarrflag); 
-        this.mountJ(14, res.data.spouseWork); 
-        this.mountJ(15, res.data.spouseSamecity);  
-        this.mountJ(16, res.data.childFlag);  
-        this.mountJ(17, res.data.childIspaycost);  
-        this.mountJ(18, res.data.parentIsliving);  
-        this.mountJ(19, res.data.brothersIfhas);  
-        this.mountJ(20, res.data.aisresident);  
-        this.mountJ(21, res.data.iloanBefore); 
-       
+        this.mountJ(12, res.data.privateOwnerFlag);
+        this.mountJ(13, res.data.fmarrflag);
+        this.mountJ(14, res.data.spouseWork);
+        this.mountJ(15, res.data.spouseSamecity);
+        this.mountJ(16, res.data.childFlag);
+        this.mountJ(17, res.data.childIspaycost);
+        this.mountJ(18, res.data.parentIsliving);
+        this.mountJ(19, res.data.brothersIfhas);
+        this.mountJ(20, res.data.aisresident);
+        this.mountJ(21, res.data.iloanBefore);
+        console.log(this.FormData.wbeexEcutedtxt)
+        console.log(this.FormData.wnetHirecom)
+
       });
       // 省    
       this.get("/credit/queryProvince", {}).then(res => {
@@ -959,7 +951,7 @@
     /* background: orange; */
     display: inline-block;
     width: 182px;
-    margin-right: 10px;
+    /* margin-right: 10px; */
   }
   /* ------------------------------------------------ */
   /* 最下面的 弹窗样式 */
@@ -996,7 +988,7 @@
   .CreditForm li {
     color: #475669;
     font-size: 14px;
-    /* border: 1px solid yellowgreen; */
+    /* border: 1px solid yellow ; */
     vertical-align: middle;
     position: relative;
     clear: both;
@@ -1006,7 +998,7 @@
   .CreditForm label {
     display: inline-block;
     text-align: right;
-    margin-right: 10px;
+    /* margin-right: 10px; */
   }
   /*------------------------------------------- */
   /* 各自 */
@@ -1175,17 +1167,26 @@
     width: calc( 100% - 197px);
     /* height: 50px; */
     /* background: black; */
-    height: 50px;
+    height: 60px;
     vertical-align: top;
     overflow: auto;
+    /* background: green; */
+    border: 1px solid #d8dce5;
+    padding: 5px 10px;
+    border-radius: 4px;
   }
   /* 工作信息-单位地址 + 私营企业-企业经营项目-------------label 为 182 px */
 
   .ComAddr {
     width: calc( 100% - 197px);
     vertical-align: top;
-    height: 50px;
+    height: 60px;
     overflow: auto;
+    /* background: red; */
+    border: 1px solid #d8dce5;
+    padding: 5px 10px;
+    border-radius: 4px;
+
     /* background: red; */
   }
   /* 私营企业-第一分销商 --------------------------------label 为 140 px */
@@ -1193,8 +1194,13 @@
   .distributor {
     width: calc( 100% - 155px);
     vertical-align: top;
-    height: 50px;
+    height: 60px;
     overflow: auto;
+    /* background: blue; */
+    border: 1px solid #d8dce5;
+    padding: 5px 10px;
+    border-radius: 4px;
+
     /* background: blue; */
     /* vertical-align: top; */
   }

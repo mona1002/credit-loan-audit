@@ -35,7 +35,9 @@
           <div class="list_title_div">
             <!--  二级 内容 节点 -->
             <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind)">
-              <span v-bind:title="item.arcName">{{item.arcName}}</span>
+              <el-tooltip class="item" effect="dark" :content="item.arcName" placement="right-end">
+                <span>{{item.arcName}}</span>
+              </el-tooltip>
               <span>{{item.imageCount}}</span>
             </p>
           </div>
@@ -136,6 +138,7 @@
       return {
         // props:[smallPicDivClose],
         // picData: [],
+        judgeFlag: '',
         opendImg: [true, true, true, true], //影响名称 一级节点前面图标显示与否flag
         closedImg: [false, false, false, false], //同上
         localInf: [], //初始化的时候，根据传进来的applyId获取初始化数据
@@ -417,21 +420,46 @@
       // localStorage.setItem("userInf", JSON.stringify(userInf));
       // console.log(" 影音资料左")
       // console.log(JSON.parse(localStorage.getItem("applicationInformationDetail") ));
-      // this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
-      this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //获取列表详情的id
-      // this.localInf = JSON.parse(localStorage.getItem("applicationInformationDetail"))   
-      // console.log(this.localInf)
-      // 父菜单
-      this.post("/productArchive/getProductArchiveParentList", {
-        applyId: this.localInf.applyId,
-        // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
-        //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
-      }).then(res => {
-        // console.log(res.data)
-        // console.log("ListParent")
-        this.ListParent = res.data; //父节点数组 [{},{},{},{}]----获取父节点名称
-        // console.log( this.ListParent )
-      });
+      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      // console.log(this.judgeFlag.flag)
+      if (this.judgeFlag.flag == '01') {
+        this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //获取-初审-列表详情的id
+        // 父菜单
+        this.post("/productArchive/getProductArchiveParentList", {
+          applyId: this.localInf.applyId,
+          // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
+          //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
+        }).then(res => {
+          // console.log(res.data)
+          // console.log("ListParent")
+          this.ListParent = res.data; //父节点数组 [{},{},{},{}]----获取父节点名称
+          // console.log( this.ListParent )
+        });
+      } else if (this.judgeFlag.flag == '02') { //----------------------获取 localstorage 路径待更改
+        this.localInf = JSON.parse(localStorage.getItem("FinaltaskInWaitting")) // 路径 ????????????//获取-终审-列表详情的id FinalWorkbenchPass-----待修改
+        //  与上面初审请求数据重复的---如果反欺诈 此处也相同，可以删除里面的，拿刀outside去
+        this.post("/productArchive/getProductArchiveParentList", {
+          applyId: this.localInf.applyId,
+        }).then(res => {
+          this.ListParent = res.data;
+        });
+      } else if (this.judgeFlag.flag == '03') {
+        this.localInf = JSON.parse(localStorage.getItem("internalId")) //获取-初审-内部匹配id
+        this.post("/productArchive/getProductArchiveParentList", {
+          applyId: this.localInf.matchApplyId,
+          // applyId: this.localInf.applyId,
+          // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
+          //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
+
+        }).then(res => {
+          // console.log(res.data)
+          // console.log("ListParent")
+          this.ListParent = res.data; //父节点数组 [{},{},{},{}]----获取父节点名称
+          // console.log( this.ListParent )
+
+        });
+      }
+
     }
   }
 
@@ -461,9 +489,9 @@
 
   .hidBtn {
     position: absolute;
-    top: 10px ;
+    top: 10px;
     right: 5px;
-        z-index: 2;
+    z-index: 2;
   }
 
   .hidDiv {
@@ -496,7 +524,8 @@
     bottom: 18px;
     right: 17px;
   }
-    .showHidIcons{
+
+  .showHidIcons {
     display: none;
   }
   /*  放大、缩小 按钮 wrap */
@@ -504,7 +533,7 @@
   .BtnIcons {
     position: absolute;
     z-index: 2;
-    left: calc( 50% - 100px);
+    left: calc( 50% - 97px);
     bottom: 57px;
     width: 193px;
     height: 52px;
@@ -617,6 +646,7 @@
 
   .AudioVisualLeft .list_title_div p span {
     font-size: 13px;
+    cursor: pointer;
   }
 
   .AudioVisualLeft .list_title span:nth-of-type(1),
@@ -698,6 +728,7 @@
 
   .AudioVisualLeft .small_pic_figure p {
     height: 22px;
+    width: 186px;
     line-height: 22px;
     margin-top: 15px;
     text-align: center;

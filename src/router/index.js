@@ -8,8 +8,6 @@ import myHead from '@/view/header'
 import test from '@/view/test'
 import new2 from '@/view/new2'
 import new1 from '@/view/new1'
-// import testCF from '@/view/testCF'
-
 
 import HelloWorld from '@/view/HelloWorld'
 /*初审审批*/
@@ -70,14 +68,8 @@ import functionalRoleManage from '@/view/systemManage/functionalRoleManage/funct
 Vue.use(Router)
 
 const routes = [{
-
   path: '/',
   component: login
-  // path: '/',
-  // component: login
-  // meta: {
-  //   requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
-  // },
 },
 {
   // 工作台  误改, 误删
@@ -87,7 +79,6 @@ const routes = [{
    */
   path: '/workbench',
   component: workbench,
-  require: myHead
 },
 {
   path: '/test',
@@ -222,21 +213,21 @@ const routes = [{
 const router = new Router({
   routes
 });
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(r => r.meta.requireAuth)) {
-    if (getCookie("sessionId") !== "") {
-      next();
-    } else {
-      next({
-        path: '/login',
-        query: {
-          redirect: to.fullPath
-        }
-      })
-    }
-  } else {
-    next();
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some(r => r.meta.requireAuth)) {
+//     if (getCookie("sessionId") !== "") {
+//       next();
+//     } else {
+//       next({
+//         path: '/login',
+//         query: {
+//           redirect: to.fullPath
+//         }
+//       })
+//     }
+//   } else {
+//     next();
+//   }
+// });
 
 export default router;
