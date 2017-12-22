@@ -119,8 +119,8 @@
 		height: 100%;
 		background-color: #fafbfc;
 		font-size: 14px;
-		/* min-width: 1366px; */
-		overflow: hidden;
+		min-width: 1327px;
+		/* overflow: hidden; */
 	}
 	/* 折叠面板头部背景色 */
 	.icon_hat{

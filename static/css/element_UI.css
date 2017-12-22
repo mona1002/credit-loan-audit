@@ -14,6 +14,7 @@
   font-size: 16px;
 }
 
+
 /* .Abody el-select-dropdown__item{
 float:none;
 }
@@ -1044,19 +1045,8 @@ height: 40px;
   width: 260px;
   height: 35px
 }
-/* 分屏-影音资料-对比弹出层-客户名称查询button */
-.SplitScreen .customName .el-button {
-  width: 35px;
-  height: 35px;
-  padding: 0;
-  border-radius: 4px;
-  background: white;
-  color: #0077ff;
-  border: none;
-  margin: 0;
-  float: right;
-  margin: 7px 0 0 2px;
-}
+
+
 /* 借款人资料表格内容居中 */
 
 .borrowerInformationSetail .el-table th {
@@ -1519,6 +1509,13 @@ height: 40px;
 
 
 /*流程轨迹查询 表格 */
+
+/* 借款人资料 房产类型 */
+@media screen and (min-width: 1327px){
+  .processTrajectory .el-table__body-wrapper{
+    overflow-x: hidden;
+  }
+}
 
 .processTrajectory .el-table th {
   /* text-align: center; */

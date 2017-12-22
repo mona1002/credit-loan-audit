@@ -150,13 +150,14 @@
       });
       // 统一登录 平台  调测 end
 
-      // 取登陆信息 
-      // localStorage.setItem("userInf", JSON.stringify(this.userInf));
-      // this.post("/workFlowTaskQuery/getTaskProfile", {
-      //   taskStatus: "01",
-      // }).then(res => {
-      //   this.tableData = res.data;
-      // });
+      //   // 取登陆信息 
+      //   localStorage.setItem("userInf", JSON.stringify(this.userInf));
+      //   this.post("/workFlowTaskQuery/getTaskProfile", {
+      //     taskStatus: "01",
+      //   }).then(res => {
+      //     this.tableData = res.data;
+      //   });
+      // }
     }
   }
 
