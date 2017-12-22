@@ -3,7 +3,7 @@
     <!-- 导航图片 -->
     <div class="logoDiv">
       <!-- <img class="logo" src="/static/images/logo.png"> -->
-      <span>诺远风控管理系统</span>
+      <span>风控管理系统</span>
     </div> 
     <!-- 导航内容 -->
     <div class="navContain">
@@ -72,7 +72,7 @@ import NavItem from '@/view/navItem'
             })
         },
         backLoin(){
-          window.location.href="http://codeplatform.nuoyuan.com.cn/#/";
+          window.location.href="http://testplatform.nuoyuan.com.cn/#/workbench";
         },
 
     },
@@ -94,20 +94,20 @@ import NavItem from '@/view/navItem'
     min-width: 1366px;
     height: 70px;
     line-height: 70px;
-    /* background: #20a0ff; */
-    background-image:linear-gradient(-62deg, #3196e4 0%, #1f64b4 36%, #0f3889 100%);
+    background-image:url(/static/images/daoLogo.png);
+    background-size: 100% 100%;
+    background-repeat: repeat-y;
+    /* background-image:linear-gradient(-62deg, #3196e4 0%, #1f64b4 36%, #0f3889 100%); */
     height: 70px;
     line-height: 70px;
-    /* background: #20a0ff; */
     font-size: 30px;
     color: white;
-   /*  padding-left:20px; */
   }
   .mheader .logoDiv{
     float: left;
     height: 70px;
-    /* width: 116px; */
     border-right: 1px solid #bfcbd9;
+    background: rgba(69,115,227,.2);
   }
   .mheader .logoDiv span{
     font-size: 20px;

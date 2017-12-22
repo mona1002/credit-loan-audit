@@ -45,8 +45,8 @@
 				      label="紧急程度"
 				      min-width="80">
 				      <template slot-scope="scope">
-				      	<span style="color:#0077ff" v-if="timeColor==true">{{scope.row.emerType}}</span>
-				      	<span v-if="timeColor==false">{{scope.row.emerType}}</span>
+				      	<span style="color:#0077ff" v-if="scope.row.timeColor">{{scope.row.emerType}}</span>
+				      	<span v-if="!scope.row.timeColor">{{scope.row.emerType}}</span>
 				      </template>
 				    </el-table-column>
 				    <el-table-column
@@ -85,7 +85,7 @@
 				      min-width="170">
 				    </el-table-column>
 				    <el-table-column
-				      prop="completeTime"
+				      prop="approveTimeLong"
 				      label="进入本环节时长（小时）" 
 				      min-width="180">
 				    </el-table-column>
@@ -135,7 +135,7 @@
 		            certCode : ''
 			      },
 		        //taskType:'',
-		        timeColor:false,
+		        // timeColor:false,
 			}
 		},
 		components: {
@@ -148,11 +148,11 @@
 			this.queryParam.processTemplateId=JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
 			this.queryParam.taskNodeName=JSON.parse(localStorage.getItem('workbenchPass')).taskNodeName;
 			this.queryParam.taskStatus=JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
-			this.queryParam.userCode=JSON.parse(localStorage.getItem('userInf')).userCode;
-			this.queryParam.orgCode=JSON.parse(localStorage.getItem('userInf')).orgCode;
+			//this.queryParam.userCode=JSON.parse(localStorage.getItem('userInf')).userCode;
+			//this.queryParam.orgCode=JSON.parse(localStorage.getItem('userInf')).orgCode;
 			// 登录 单独存  userCode  orgCode 
-			// this.queryParam.userCode=JSON.parse(localStorage.getItem('userCode'));
-			// this.queryParam.orgCode=JSON.parse(localStorage.getItem('orgCode'));
+			 this.queryParam.userCode=JSON.parse(localStorage.getItem('userCode'));
+			 this.queryParam.orgCode=JSON.parse(localStorage.getItem('orgCode'));
 			console.log(this.processTemplateId+'...'+this.taskNodeName+'...'+this.taskStatus+'...'+this.userCode+'...'+this.orgCode);
 			
 			this.request(this.queryParam);	
@@ -177,15 +177,17 @@
 		            	}else if(this.datas[i].taskType=='03'){
 		            		this.datas[i].taskType="回退再审任务";
 		            	};
-		            	if(this.datas[i].emerType=='1'){//00
+		            	if(this.datas[i].emerType=='00'){//00
 		            		this.datas[i].emerType="普通";
 		            	}else if(this.datas[i].emerType=='01'){
 		            		this.datas[i].emerType="免费加急";
 		            	}else if(this.datas[i].emerType=='02'){
 		            		this.datas[i].emerType="收费加急";
 		            	};
-		            	if(this.datas[i].completeTime*1>=48){
-		            		this.timeColor=true;
+		            	if(this.datas[i].approveTimeLong*1>=48){
+		            		this.datas[i].timeColor=true;
+		            	}else if(this.datas[i].approveTimeLong*1<48){
+		            		this.datas[i].timeColor=false;
 		            	};
 	            	};
 	            }else{
