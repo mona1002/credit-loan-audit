@@ -7,13 +7,13 @@
     </div>
     <ul class="content-ul">
       <li class="item-column3">
-        <div class="left-title">客户名称:</div>
+        <div class="left-title">客户名称：</div>
         <div>
           <el-input v-model="custName" :disabled="true"></el-input>
         </div>
       </li>
       <li class="item-column3">
-        <div class="left-title">电话类型:</div>
+        <div class="left-title">电话类型：</div>
         <div>
           <el-select v-model="phoneType" disabled>
             <el-option label="家庭联系人" value="03"></el-option>
@@ -21,13 +21,13 @@
         </div>
       </li>
       <li class="item-column3">
-        <div class="left-title">电话号码:</div>
+        <div class="left-title">电话号码：</div>
         <div>
           <el-input v-model="phoneNum" :disabled="true"></el-input>
         </div>
       </li>
       <li class="item-column3">
-        <div class="left-title"><span class="require-icon" style="left:90px;">*</span>来源:</div>
+        <div class="left-title"><span class="require-icon" style="left:90px;">*</span>来源：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="source">
@@ -39,7 +39,7 @@
         <!-- </div> -->
       </li>
       <li class="item-column3">
-        <div class="left-title"><span class="require-icon" style="left:60px;">*</span>接听情况:</div>
+        <div class="left-title"><span class="require-icon" style="left:60px;">*</span>接听情况：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="answer">
@@ -53,7 +53,7 @@
         <!-- </div> -->
       </li>
       <li class="item-column3">
-        <div class="left-title"><span class="require-icon" style="left:60px;">*</span>调查阶段:</div>
+        <div class="left-title"><span class="require-icon" style="left:60px;">*</span>调查阶段：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="checkStage">
@@ -66,7 +66,7 @@
         <!-- </div> -->
       </li>
       <li class="item-column1" v-show="source=='02'">
-        <div class="left-title">其他来源说明:</div>
+        <div class="left-title">其他来源说明：</div>
         <div class="textarea-class">
           <el-input v-model="sourceDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
         </div>
@@ -79,7 +79,7 @@
     <ul>
       <div class="content-ul">
         <li class="item-column1">
-          <div class="left-title">第三方查询信息:</div>
+          <div class="left-title">第三方查询信息：</div>
           <div class="textarea-class">
             <el-input type="textarea" v-model="thirdResult" :rows="3" resize=none :maxlength="500"></el-input>
           </div>
@@ -87,7 +87,7 @@
       </div>
       <div class="content-ul">
         <li class="item-column3">
-          <div class="left-title"><span class="require-icon" style="left:5px;">*</span>三方查询是否异常:</div>
+          <div class="left-title"><span class="require-icon" style="left:5px;">*</span>三方查询是否异常：</div>
           <!-- <div> -->
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <el-select v-model="threeQueries">
@@ -98,7 +98,7 @@
           <!-- </div> -->
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="threeQueries=='1'"><span class="require-icon" style="left:90px;">*</span>说明:</div>
+          <div class="left-title" v-show="threeQueries=='1'"><span class="require-icon" style="left:90px;">*</span>说明：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <div class="textarea-class2" v-show="threeQueries=='1'">
               <el-input v-model="threeQueriestxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
@@ -108,7 +108,7 @@
       </div>
       <div class="content-ul">
         <li class="item-column3">
-          <div class="left-title left-title2"><span class="require-icon" style="left:0px; top:-8px;">*</span>微信/支付宝是否异常:</div>
+          <div class="left-title left-title2"><span class="require-icon" style="left:0px; top:-8px;">*</span>微信/支付宝是否异常：</div>
           <!-- <div> -->
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <el-select v-model="mobilepayment">
@@ -119,7 +119,7 @@
           <!-- </div> -->
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="mobilepayment=='1'"><span class="require-icon" style="left:90px;">*</span>说明:</div>
+          <div class="left-title" v-show="mobilepayment=='1'"><span class="require-icon" style="left:90px;">*</span>说明：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <div class="textarea-class2" v-show="mobilepayment=='1'">
               <el-input v-model="mobilepaymenttxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
@@ -129,7 +129,7 @@
       </div>
       <div class="content-ul">
         <li class="item-column3">
-          <div class="left-title left-title2">是否与家庭联系人为同一接听人:</div>
+          <div class="left-title left-title2">是否与家庭联系人为同一接听人：</div>
           <div class="textarea-class2">
             <el-select v-model="issameFam">
               <el-option label="否" value="0"></el-option>
@@ -138,7 +138,7 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="issameFam=='0'">说明:</div>
+          <div class="left-title" v-show="issameFam=='0'">说明：</div>
           <div class="textarea-class2" v-show="issameFam=='0'">
             <el-input v-model="issameFamtxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
@@ -146,7 +146,7 @@
       </div>
       <div class="content-ul">
         <li class="item-column3">
-          <div class="left-title">与借款人关系:</div>
+          <div class="left-title">与借款人关系：</div>
           <div>
             <el-select v-model="relBorrower">
               <el-option label="父母" value="00"></el-option>
@@ -157,7 +157,7 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="relBorrower=='03'">说明:</div>
+          <div class="left-title" v-show="relBorrower=='03'">说明：</div>
           <div class="textarea-class2" v-show="relBorrower=='03'">
             <el-input v-model="relBorrowertxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
@@ -165,7 +165,7 @@
       </div>
       <div class="content-ul">
         <li class="item-column3">
-          <div class="left-title">核对工作情况:</div>
+          <div class="left-title">核对工作情况：</div>
           <div>
             <el-select v-model="checkWork">
               <el-option label="一致" value="00"></el-option>
@@ -176,7 +176,7 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="checkWork=='01'">说明:</div>
+          <div class="left-title" v-show="checkWork=='01'">说明：</div>
           <div class="textarea-class2" v-show="checkWork=='01'">
             <el-input v-model="checkWorktxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
@@ -184,7 +184,7 @@
       </div>
       <div class="content-ul">
         <li class="item-column2">
-          <div class="left-title">核对婚姻情况:</div>
+          <div class="left-title">核对婚姻情况：</div>
           <div>
             <el-select v-model="maritalStatus">
               <el-option label="未婚" value="00"></el-option>
@@ -197,7 +197,7 @@
           </div>
         </li>
         <li class="item-column2">
-          <div class="left-title">核对子女情况:</div>
+          <div class="left-title">核对子女情况：</div>
           <div>
             <el-select v-model="maritalStatustxt">
               <el-option label="有子女" value="00"></el-option>
@@ -208,7 +208,7 @@
       </div>
       <div class="content-ul">
         <li class="item-column3">
-          <div class="left-title">核实居住地址:</div>
+          <div class="left-title">核实居住地址：</div>
           <div>
             <el-select v-model="checkAddr">
               <el-option label="一致" value="00"></el-option>
@@ -219,7 +219,7 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="checkAddr=='01'">说明:</div>
+          <div class="left-title" v-show="checkAddr=='01'">说明：</div>
           <div class="textarea-class2" v-show="checkAddr=='01'">
             <el-input v-model="checkAddrtxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
@@ -227,7 +227,7 @@
       </div>
       <div class="content-ul">
         <li class="item-column3">
-          <div class="left-title">核对房产:</div>
+          <div class="left-title">核对房产：</div>
           <div>
             <el-select v-model="checkEstate">
               <el-option label="有" value="00"></el-option>
@@ -239,7 +239,7 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="checkEstate=='00'">说明:</div>
+          <div class="left-title" v-show="checkEstate=='00'">说明：</div>
           <div class="textarea-class2" v-show="checkEstate=='00'">
             <el-input v-model="checkEstatetxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
@@ -247,7 +247,7 @@
       </div>
       <div class="content-ul">
         <li class="item-column3">
-          <div class="left-title">其他收入:</div>
+          <div class="left-title">其他收入：</div>
           <div>
             <el-select v-model="otherIncome">
               <el-option label="有" value="00"></el-option>
@@ -257,7 +257,7 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="otherIncome=='00'">说明:</div>
+          <div class="left-title" v-show="otherIncome=='00'">说明：</div>
           <div class="textarea-class2" v-show="otherIncome=='00'">
             <el-input v-model="otherIncometxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
@@ -265,10 +265,10 @@
       </div>
       <div class="content-ul">
         <li class="item-column1">
-          <div class="left-title"><span class="require-icon" style="left:60px;">*</span>调查结果:</div>
+          <div class="left-title"><span class="require-icon" style="left:60px;">*</span>调查结果：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <div class="textarea-class">
-              <el-input type="textarea" v-model="conclusion" :rows="3" resize=none></el-input>
+              <el-input type="textarea" v-model="conclusion" :rows="5" resize=none></el-input>
             </div>
           </el-tooltip>
         </li>
