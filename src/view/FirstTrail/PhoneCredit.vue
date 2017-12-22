@@ -1888,7 +1888,7 @@ export default {
 /* 气泡 */
 
 .el-tooltip__popper {
-  width: 400px;
+  max-width: 400px;
   height: auto;
 }
 
@@ -1921,6 +1921,11 @@ export default {
 /* 3列 空位 */
 .item-column3-null{
   min-height: 50px;
+}
+
+
+.phone-credit .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content .el-tree-node__label:hover{
+  color:green;
 }
 
 </style>

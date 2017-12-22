@@ -853,7 +853,7 @@
        this.getParams = JSON.parse(localStorage.getItem("internalId")) //获取内部匹配的id
       // 获取查询列表数据
       this.post("/creauditInfo/queryCreauditInfoObj", {
-        applyId: this.getParams.applyId,
+        applyId: this.getParams.matchApplyId,
         // applyId: "00542",
       }).then(res => {
         this.FormData = res.data;

@@ -930,6 +930,7 @@ height: 40px;
 }
 /* 信审表----查询---气泡宽度 */
 .el-tooltip__popper{
+  width:auto;
   max-width: 400px;
 }
 
