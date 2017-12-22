@@ -136,11 +136,11 @@
     },
     mounted() {
       // 统一登录平台  调试   start 
-      this.get("http://testplatform.nuoyuan.com.cn:20717/remote/user/getUserInfo").then(response => {
-        this.userInf = {
-          userCode: response.data.userCode,
-          orgCode: response.data.orgCode,
-        }
+      // this.get("http://testplatform.nuoyuan.com.cn:20717/remote/user/getUserInfo").then(response => {
+      //   this.userInf = {
+      //     userCode: response.data.userCode,
+      //     orgCode: response.data.orgCode,
+      //   }
         // 统一登录 平台  调测 end
         // -------------------------//
         //取 登录信息    start
@@ -151,7 +151,7 @@
           this.tableData = res.data;
         });
         //取 登录信息   end
-      });
+      // });
     }
   }
 
