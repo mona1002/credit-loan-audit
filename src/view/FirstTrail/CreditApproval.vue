@@ -1033,10 +1033,10 @@ export default {
         ploanOperId: '', // 批准人员
         srcPloanAmt: this.srcPloanAmt, // 信审批准额度
         creditDebitRate: this.creditDebitRate, // 信用负债率
-        approvalFlag: '0', // 终审通过标志
+        approvalFlag: '0', // 终审通过标志  0 未
         ploanDate: '', // 批准日期
         auditDate: '', // 批准时间
-        auditFlag: '', // 终审结束标识 0 初审 1终审
+        auditFlag: '0', // 终审结束标识 0 初审 1终审 , 只有 终审 点审批的时候 才变为1 , 同 approvalFlag 字段
         proId: this.proId, //产品id
         taskId: this.taskId, // 任务id
         opinionFlag:this.opinionFlag, // 任务类型  初审 00 
