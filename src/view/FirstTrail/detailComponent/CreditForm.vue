@@ -2284,7 +2284,7 @@
       this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
       // 获取查询列表数据
       this.post("/creauditInfo/queryCreauditInfoObj", {
-        applyId: "00542",
+        applyId: this.getParams.applyId,
       }).then(res => {
         console.log(res.data);
         this.checkData = res.data;
