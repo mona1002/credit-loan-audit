@@ -9,29 +9,29 @@
         <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">新增调查日志</span>
       </div>
-      <el-form-item label="客户名称:" class="item-column3">
+      <el-form-item label="客户名称：" class="item-column3">
         {{workData.custName}}
       </el-form-item>
-      <el-form-item label="电话类型:" class="item-column3">
+      <el-form-item label="电话类型：" class="item-column3">
         {{workData.phoneTypeDes}}
       </el-form-item>
-      <el-form-item label="电话号码:" class="item-column3">
+      <el-form-item label="电话号码：" class="item-column3">
         {{workData.phoneNum}}
       </el-form-item>
-      <el-form-item label="来源:" class="item-column3">
+      <el-form-item label="来源：" class="item-column3">
         {{workData.sourceDes}}
       </el-form-item>
-      <el-form-item label="接听情况:" class="item-column3">
+      <el-form-item label="接听情况：" class="item-column3">
         {{workData.answerDes}}
       </el-form-item>
-      <el-form-item label="调查阶段:" class="item-column3">
+      <el-form-item label="调查阶段：" class="item-column3">
         {{workData.checkStageDes}}
       </el-form-item>
-      <!-- <el-form-item label="其他来源说明:" class="item-column3" v-show="workData.source=='02'">
+      <!-- <el-form-item label="其他来源说明：" class="item-column3" v-show="workData.source=='02'">
         {{workData.sourceDesc}}
       </el-form-item> -->
       <el-tooltip class="item" effect="dark" :content="workData.sourceDesc" placement="top">
-        <el-form-item label="其他来源说明:" class="item-column1" v-show="workData.source=='02'">
+        <el-form-item label="其他来源说明：" class="item-column1" v-show="workData.source=='02'">
           {{workData.sourceDesc}}
         </el-form-item>
       </el-tooltip>
@@ -43,38 +43,38 @@
         <span class="headFont">录入工作证明人调查信息</span>
       </div>
       <div>
-        <el-form-item label="微信/支付宝是否异常:" class="item-column3 line2-class">
+        <el-form-item label="微信/支付宝是否异常：" class="item-column3 line2-class">
           {{workData.mobilepaymentDes}}
         </el-form-item>
-        <!-- <el-form-item label="异常项说明:" class="item-column2" v-show="workData.mobilepayment=='1'">
+        <!-- <el-form-item label="异常项说明：" class="item-column2" v-show="workData.mobilepayment=='1'">
           {{workData.mobilepaymenttxt}}
         </el-form-item> -->
         <el-tooltip class="item" effect="dark" :content="workData.mobilepaymenttxt" placement="top">
-          <el-form-item label="异常项说明:" class="item-column2 item-column3-2" v-show="workData.mobilepayment=='1'">
+          <el-form-item label="异常项说明：" class="item-column2 item-column3-2" v-show="workData.mobilepayment=='1'">
             {{workData.mobilepaymenttxt}}
           </el-form-item>
         </el-tooltip>
-        <el-form-item label="接电话人身份:" class="item-column3">
+        <el-form-item label="接电话人身份：" class="item-column3">
           {{workData.answerIdentityDes}}
         </el-form-item>
-        <!-- <el-form-item label="说明:" class="item-column2" v-show="workData.answerIdentity=='00'">
+        <!-- <el-form-item label="说明：" class="item-column2" v-show="workData.answerIdentity=='00'">
           {{workData.answertxt}}
         </el-form-item> -->
         <el-tooltip class="item" effect="dark" :content="workData.answertxt" placement="top">
-          <el-form-item label="说明:" class="item-column2 item-column3-2" v-show="workData.answerIdentity=='00'">
+          <el-form-item label="说明：" class="item-column2 item-column3-2" v-show="workData.answerIdentity=='00'">
             {{workData.answertxt}}
           </el-form-item>
         </el-tooltip>
-        <el-form-item label="核对单位工作情况:" class="item-column3">
+        <el-form-item label="核对单位工作情况：" class="item-column3">
           {{workData.checkJobDes}}
         </el-form-item>
         <el-tooltip class="item" effect="dark" :content="workData.checkJobtxt" placement="top">
-          <el-form-item label="说明:" class="item-column2 item-column3-2" v-show="workData.checkJob=='01'">
+          <el-form-item label="说明：" class="item-column2 item-column3-2" v-show="workData.checkJob=='01'">
             {{workData.checkJobtxt}}
           </el-form-item>
         </el-tooltip>
         <el-tooltip class="item" effect="dark" :content="workData.conclusion" placement="top">
-          <el-form-item label="调查结果:" class="item-column1">
+          <el-form-item label="调查结果：" class="item-column1">
             {{workData.conclusion}}
           </el-form-item>
         </el-tooltip>

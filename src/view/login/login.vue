@@ -68,8 +68,13 @@ export default {
           this.orgCode = res.data.orgCode;
           console.log(this.userCode, this.orgCode);
 
+          console.log(JSON.stringify(res.data))
 
           localStorage.setItem("userInf", JSON.stringify(res.data));
+          localStorage.setItem("userCode", JSON.stringify(res.data.userCode));
+          
+          localStorage.setItem("orgCode", JSON.stringify(res.data.orgCode));
+          console.log(res.data);
 
           const userCode = this.userCode;
           const orgCode = this.orgCode;
