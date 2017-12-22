@@ -58,6 +58,8 @@
             {{mobileData.exceptionState}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="mobileData.expenses!='00'">
+        </el-form-item>
         <!-- 是否与家庭联系人为同一接听人 -->
         <el-form-item label="是否与家庭联系人为同一人接听：" class="item-column3 line2-class">
           {{mobileData.issameFamDes}}
@@ -71,6 +73,8 @@
             {{mobileData.issameFamtxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="mobileData.issameFam!='0'">
+        </el-form-item>
         <el-form-item label="与借款人关系：" class="item-column3">
           {{mobileData.relBorrowerDes}}
         </el-form-item>
@@ -83,6 +87,8 @@
             {{mobileData.relBorrowertxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="mobileData.relBorrower!='03'">
+        </el-form-item>
         <el-form-item label="核对工作情况：" class="item-column3">
           {{mobileData.checkWorkDes}}
         </el-form-item>
@@ -95,6 +101,8 @@
             {{mobileData.checkWorktxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="mobileData.checkWork!='01'">
+        </el-form-item>
         <el-form-item label="核对婚姻情况：" class="item-column3">
           {{mobileData.maritalStatusDes}}
         </el-form-item>
@@ -115,6 +123,8 @@
             {{mobileData.checkAddrtxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="mobileData.checkAddr!='01'">
+        </el-form-item>
         <el-form-item label="核对房产：" class="item-column3">
           {{mobileData.checkEstateDes}}
         </el-form-item>
@@ -127,6 +137,8 @@
             {{mobileData.checkEstatetxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="mobileData.checkEstate!='00'">
+        </el-form-item>
         <el-form-item label="其他收入：" class="item-column3">
           {{mobileData.otherIncomeDes}}
         </el-form-item>
@@ -139,6 +151,8 @@
             {{mobileData.otherIncometxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="mobileData.otherIncome!='00'">
+        </el-form-item>
         <el-form-item label="近期大项开销：" class="item-column3">
           {{mobileData.recentLargespendDes}}
         </el-form-item>
@@ -151,6 +165,8 @@
             {{mobileData.recentlArgespendInfo}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="mobileData.recentLargespend!='00'">
+        </el-form-item>
         <el-form-item label="父母：" class="item-column3">
           {{mobileData.parentsDes}}
         </el-form-item>
@@ -163,6 +179,8 @@
             {{mobileData.parentsInfo}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="mobileData.parents!='01'">
+        </el-form-item>
         <el-form-item label="兄弟姐妹：" class="item-column3">
           {{mobileData.brotherDes}}
         </el-form-item>
@@ -175,6 +193,8 @@
             {{mobileData.brothertxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="mobileData.brother!='00'">
+        </el-form-item>
         <el-form-item label="支付家庭生活费用：" class="item-column3">
           {{mobileData.expensesDes}}
         </el-form-item>
@@ -187,6 +207,8 @@
             {{mobileData.expensestxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="mobileData.expenses!='00'">
+        </el-form-item>
         <el-form-item label="核对家庭固话：" class="item-column3">
           {{mobileData.checkHometelDes}}
         </el-form-item>

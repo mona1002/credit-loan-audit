@@ -57,6 +57,8 @@
             {{hurryData.threeQueriestxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="hurryData.threeQueries!='1'">
+        </el-form-item>
         <el-form-item label="微信/支付宝是否异常：" class="item-column3 line2-class">
           {{hurryData.mobilepaymentDes}}
         </el-form-item>
@@ -68,18 +70,22 @@
             {{hurryData.mobilepaymenttxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="hurryData.mobilepayment!='1'">
+        </el-form-item>
         <el-form-item label="与借款人关系：" class="item-column3">
-          {{hurryData.relBorrowerDes}}5151551
+          {{hurryData.relBorrowerDes}}
         </el-form-item>
         <!-- <el-form-item label="说明：" class="item-column2" v-shwo="relBorrower=='03'">
           {{hurryData.relBorrowertxt}}
         </el-form-item> -->
         <!-- v-show="relBorrower=='03'" -->
         <el-tooltip class="item" effect="dark" :content="hurryData.relBorrowertxt" placement="top">
-          <el-form-item label="说明：" class="item-column2 item-column3-2" >
-            {{hurryData.relBorrowertxt}}afdskljafdsjkafj
+          <el-form-item label="说明：" class="item-column2 item-column3-2"  v-show="hurryData.relBorrower=='03'">
+            {{hurryData.relBorrowertxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="hurryData.relBorrower!='03'">
+        </el-form-item>
 <!-- =========================== -->
 <!--         <el-form-item label="与借款人联系是否频繁：" class="item-column1 line2-class">
           {{hurryData.contactfreDes}}
@@ -102,6 +108,8 @@
             {{hurryData.checkWorktxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="hurryData.checkWork!='01'">
+        </el-form-item>
         <el-form-item label="核对婚姻情况：" class="item-column3">
           {{hurryData.maritalStatusDes}}
         </el-form-item>

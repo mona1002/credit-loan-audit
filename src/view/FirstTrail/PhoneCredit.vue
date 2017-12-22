@@ -35,7 +35,7 @@
                 <div>
                   <el-table :data="listData.recordList" height="250" border style="" @row-dblclick="rowDbClick" stripe v-loading="mobileLoading" highlight-current-row v-show="listData.totalRecord>0">
                     <!-- type="index" -->
-                    <el-table-column prop="$index" label="序号" min-width="80">
+                    <el-table-column prop="$index" label="序号" min-width="60">
                     </el-table-column>
                     <el-table-column prop="phoneTypeDes" label="电话类型" min-width="100">
                     </el-table-column>
@@ -1909,6 +1909,18 @@ export default {
 .phone-credit .item-column3-2 .el-form-item__content {
   width: calc(100% - 150px);
   border: 1px solid #d8d9ec;
+  padding: 5px 10px;
+  line-height: 1.5;
+  font-size: 14px;
+  height: 75px;
+  overflow-y: auto;
+  border-radius: 4px;
+}
+
+/* 两行  空  */
+.phone-credit .item-column3-2-normal .el-form-item__content {
+  width: calc(100% - 150px);
+  /*border: 1px solid #d8d9ec;*/
   padding: 5px 10px;
   line-height: 1.5;
   font-size: 14px;
