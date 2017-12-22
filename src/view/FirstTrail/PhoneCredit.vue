@@ -365,7 +365,6 @@ export default {
     this.fetchData();
 
     // 取内匹存储的标志
-    localStorage.getItem("internalId");
     this.isInterFlag = JSON.parse(localStorage.getItem('internalId')).isInterFlag;
 
 
