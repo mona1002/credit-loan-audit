@@ -247,7 +247,8 @@ export default {
       console.log('fix tel row dbclick');
       console.log(row.id);
 
-      localStorage.setItem("internalId", JSON.stringify(row.id));
+      // localStorage.setItem("internalId", JSON.stringify(row.id));
+      localStorage.setItem("internalId", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId }));
       this.$router.go('/SplitScreen');
     },
     itemDbclickCompany(row, event) {
@@ -255,7 +256,9 @@ export default {
       console.log('company row dbclick');
       console.log(row.id);
 
-      localStorage.setItem("internalId", JSON.stringify(row.id));
+
+      // localStorage.setItem("internalId", JSON.stringify(row.id));
+      localStorage.setItem("internalId", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId }));
       this.$router.go('/SplitScreen');
     },
     // cellHover(row, column, cell, event) {
