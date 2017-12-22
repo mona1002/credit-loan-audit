@@ -26,7 +26,7 @@
 				<p>信审任务列表</p>
 			</div>
 			<div class="taskWtable">
-				<el-table :data="datas" style="width: 100%" height="600" @row-click='goDetail' border>
+				<el-table :data="datas" style="width: 100%" height="500" @row-click='goDetail' border>
 				    <el-table-column
 				      type="index" 
 				     :index="1"
@@ -247,7 +247,7 @@
 	.taskWattingContain{
 		padding: 30px 30px;
 		width: 100%;
-		height: 100%;
+		height: calc( 100% - 70px );
 	}
 	/* 高级查询下的input */
 	.taskWatting .row {
@@ -315,6 +315,7 @@
 		margin-bottom: 40px;
 		padding: 25px;
 		width: 100%;
+		/* height:calc( 100% - 232px ); */
 	}
 	.taskWtable .el-table .cell {
 	  line-height: 23px;
