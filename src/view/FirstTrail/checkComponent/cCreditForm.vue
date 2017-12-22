@@ -605,7 +605,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">初审结论</span>
         </template>
-        <div class=" CreditForm_result" style="paddingTop:10px">
+        <div class=" CreditForm_result" style="padding:15px 0 30px 0;">
           <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
           <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==''" :content="this.FormData.oother" placement="top-start">
             <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>

@@ -27,7 +27,7 @@
         </div>
       </li>
       <li class="item-column3">
-        <div class="left-title"><span class="require-icon" style="left:90px;">*</span> 来源：</div>
+        <div class="left-title"><span class="require-icon" style="left:80px;">*</span> 来源：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="source">
@@ -55,7 +55,7 @@
         <!-- </div> -->
       </li>
       <li class="item-column3">
-        <div class="left-title"><span class="require-icon" style="left:60px;">*</span>调查阶段：</div>
+        <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查阶段：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="checkStage">
@@ -78,7 +78,7 @@
       <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
       <span class="headFont">录入住址电话调查信息</span>
     </div>
-    <ul>
+    <ul style="margin-left:15px;">
       <div class="content-ul">
         <li class="item-column1">
           <div class="left-title">第三方查询结果：</div>
@@ -89,7 +89,7 @@
       </div>
       <div class="content-ul">
         <li class="item-column3">
-          <div class="left-title"><span class="require-icon" style="left:5px;">*</span>三方查询是否异常：</div>
+          <div class="left-title"><span class="require-icon" style="left:-5px;">*</span>三方查询是否异常：</div>
           <!-- <div> -->
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <el-select v-model="threeQueries">
@@ -100,7 +100,7 @@
           <!-- </div> -->
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="threeQueries=='1'"><span class="require-icon" style="left:90px;">*</span>说明：</div>
+          <div class="left-title" v-show="threeQueries=='1'"><span class="require-icon" style="left:80px;">*</span>说明：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <div class="textarea-class2" v-show="threeQueries=='1'">
               <el-input v-model="exceptionState" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
@@ -406,7 +406,7 @@
         </div>
       </li>
       <li class="item-column1">
-        <div class="left-title"><span class="require-icon" style="left:60px;">*</span>调查结论：</div>
+        <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查结论：</div>
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <div class="textarea-class">
             <el-input v-model="conclusion" type="textarea" :rows="5" resize=none :maxlength="500"></el-input>

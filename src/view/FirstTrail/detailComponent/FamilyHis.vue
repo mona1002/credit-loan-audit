@@ -57,6 +57,8 @@
             {{familyData.threeQueriestxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="familyData.threeQueries!='1'">
+        </el-form-item>
         <el-form-item label="微信/支付宝是否异常：" class="item-column3">
           {{familyData.mobilepaymentDes}}
         </el-form-item>
@@ -68,6 +70,8 @@
             {{familyData.mobilepaymenttxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="familyData.mobilepayment!='1'">
+        </el-form-item>
         <!-- 是否与家庭联系人为同一接听人 -->
         <el-form-item label="是否与家庭联系人为同一接听人：" class="item-column3 line2-class">
           {{familyData.issameFamDes}}
@@ -80,6 +84,8 @@
             {{familyData.issameFamtxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="familyData.issameFam!='0'">
+        </el-form-item>
         <el-form-item label="与借款人关系：" class="item-column3">
           {{familyData.relBorrowerDes}}
         </el-form-item>
@@ -91,6 +97,8 @@
             {{familyData.relBorrowertxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="familyData.relBorrower!='03'">
+        </el-form-item>
         <el-form-item label="核对工作情况：" class="item-column3">
           {{familyData.checkWorkDes}}
         </el-form-item>
@@ -102,6 +110,8 @@
             {{familyData.checkWorktxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="familyData.checkWork!='01'">
+        </el-form-item>
         <el-form-item label="核对婚姻情况：" class="item-column3">
           {{familyData.maritalStatusDes}}
         </el-form-item>
@@ -122,6 +132,8 @@
             {{familyData.checkAddrtxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="familyData.checkAddr!='01'">
+        </el-form-item>
         <el-form-item label="核对房产：" class="item-column3">
           {{familyData.checkEstateDes}}
         </el-form-item>
@@ -133,6 +145,8 @@
             {{familyData.checkEstatetxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="familyData.checkEstate!='00'">
+        </el-form-item>
         <el-form-item label="其他收入：" class="item-column3">
           {{familyData.otherIncomeDes}}
         </el-form-item>
@@ -144,6 +158,8 @@
             {{familyData.otherIncometxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="familyData.otherIncome!='00'">
+        </el-form-item>
         <el-tooltip class="item" effect="dark" :content="familyData.conclusion" placement="top">
           <el-form-item label="调查结果：" class="item-column2 item-column3-2">
             {{familyData.conclusion}}
