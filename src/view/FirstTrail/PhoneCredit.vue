@@ -393,7 +393,7 @@ export default {
       // },
       addTellFormLabelWidth: '80px', // 添加电话 表单 label-width
       isInterFlag: false, // 是否是内匹跳转的查看详情
-      activeTrees:["1","2","3","4","5"]
+      activeTrees: ["1", "2", "3", "4", "5"]
     }
   },
   props: ['isFull'],
@@ -811,8 +811,9 @@ export default {
   /*border-radius: 4px;*/
   width: 210px !important;
   /*height: 321px;*/
-  background:#eef0f9;
+  background: #eef0f9;
 }
+
 
 
 
@@ -840,6 +841,7 @@ export default {
 
 
 
+
 /* el-tree  title */
 
 .phone-credit .el-tree-node__content {
@@ -857,6 +859,7 @@ export default {
 
 
 
+
 /* element-ui tree icon 箭头*/
 
 .phone-credit .el-tree-node__content .el-tree-node__expand-icon {
@@ -865,6 +868,7 @@ export default {
   left: 170px;
   font-size: 18px;
 }
+
 
 
 
@@ -890,12 +894,14 @@ export default {
 
 
 
+
 /* 三角 icon */
 
 .phone-credit .el-tree-node__expand-icon {
   font-size: 20px;
   /*display: none;*/
 }
+
 
 
 
@@ -917,11 +923,13 @@ export default {
 
 
 
+
 /* 二级 目录 样式 */
 
 .phone-credit .el-tree-node__content {
   /*padding-left: 0px !important;*/
 }
+
 
 
 
@@ -951,6 +959,7 @@ export default {
 
 
 
+
 /* 点击添加出现的 页面 */
 
 .phone-credit .cover-view {
@@ -967,6 +976,7 @@ export default {
   overflow: auto;
   z-index: 101;
 }
+
 
 
 
@@ -1012,11 +1022,13 @@ export default {
 
 
 
+
 /* title */
 
 .phone-credit .cover-content .add-title {
   text-align: left;
 }
+
 
 
 
@@ -1080,11 +1092,13 @@ export default {
 
 
 
+
 /* 添加电话  input 样式*/
 
 .phone-credit .add-content .el-input {
   width: inherit;
 }
+
 
 
 
@@ -1135,6 +1149,7 @@ export default {
 
 
 
+
 /* children - label*/
 
 .phone-credit .el-tree-node__children .el-tree-node__label {
@@ -1145,6 +1160,7 @@ export default {
   line-height: 21px;
   text-align: left;
 }
+
 
 
 
@@ -1193,6 +1209,7 @@ export default {
 
 
 
+
 /* 弹窗页面 关闭按钮*/
 
 .phone-credit .el-tag {
@@ -1208,6 +1225,7 @@ export default {
 .phone-credit .el-tag .el-icon-close {
   right: 0px;
 }
+
 
 
 
@@ -1295,6 +1313,7 @@ export default {
 
 
 
+
 /* 表格分页 */
 
 .phone-credit .el-pagination {
@@ -1302,6 +1321,7 @@ export default {
   width: 100%;
   text-align: center;
 }
+
 
 
 
@@ -1353,12 +1373,14 @@ export default {
 
 
 
+
 /* 添加申请单电话 label*/
 
 .phone-credit .add-label {
   display: inline-block;
   width: 70px;
 }
+
 
 
 
@@ -1430,6 +1452,7 @@ export default {
 
 
 
+
 /* label */
 
 .phone-credit .el-form-item__label {
@@ -1459,6 +1482,7 @@ export default {
 
 
 
+
 /* 三列 */
 
 .phone-credit .item-column3 {
@@ -1468,6 +1492,7 @@ export default {
   margin: 0;
   margin-bottom: 10px;
 }
+
 
 
 
@@ -1525,6 +1550,7 @@ export default {
 
 
 
+
 /*.phone-credit .item-column1 textarea {
   margin-left: 20px;
 }*/
@@ -1541,6 +1567,7 @@ export default {
   text-align: right;
   margin-top: 50px;
 }
+
 
 
 
@@ -1586,6 +1613,7 @@ export default {
 
 
 
+
 /* el-input width*/
 
 .phone-credit .el-container .el-main .form-class .el-input {
@@ -1614,11 +1642,13 @@ export default {
 
 
 
+
 /* 表格头 */
 
 .phone-credit .el-header {
   padding: 0;
 }
+
 
 
 
@@ -1672,11 +1702,13 @@ export default {
 
 
 
+
 /* 折叠 头 箭头样式*/
 
 .phone-credit .el-collapse-item__header .el-collapse-item__arrow {
   padding-right: 20px;
 }
+
 
 
 
@@ -1755,12 +1787,14 @@ export default {
 
 
 
+
 /* 提交按钮 */
 
 .phone-credit .submit-class {
   text-align: left;
   margin-left: 570px;
 }
+
 
 
 
@@ -1799,6 +1833,7 @@ export default {
   /*width: 258px;*/
   height: 33px;
 }
+
 
 
 
@@ -1862,6 +1897,7 @@ export default {
 
 
 
+
 /*add-content*/
 
 
@@ -1887,11 +1923,13 @@ export default {
 
 
 
+
 /* 关闭按钮 */
 
 .phone-credit .el-dialog__headerbtn {
   font-size: 20px;
 }
+
 
 
 
@@ -1930,11 +1968,13 @@ export default {
 
 
 
+
 /* 更改 电话征信 -- 添加电话 */
 
 .phone-credit .el-dialog__wrapper .el-form-item__label {
   width: 100px;
 }
+
 
 
 
@@ -1971,11 +2011,13 @@ export default {
 
 
 
+
 /* 添加申请单电话信息 必填 * */
 
 .phone-credit .left-title2 {
   line-height: 20px;
 }
+
 
 
 
@@ -2015,6 +2057,7 @@ export default {
 
 
 
+
 /* 电话树  选中的  字体样式*/
 
 .phone-credit .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content .el-tree-node__label {
@@ -2026,6 +2069,7 @@ export default {
 .phone-credit .el-tree-node__content {
   height: 32px;
 }
+
 
 
 
@@ -2060,11 +2104,13 @@ export default {
 
 
 
+
 /* 两行  数据*/
 
 .phone-credit .line2-class label {
   line-height: 20px;
 }
+
 
 
 
@@ -2080,6 +2126,7 @@ export default {
 .phone-credit .el-collapse-item__arrow {
   line-height: 40px
 }
+
 
 
 
@@ -2105,12 +2152,14 @@ export default {
 
 
 
+
 /* 后面是 textarea 样式*/
 
 .phone-credit .item-column3-2 {
   width: 66%;
   /*border: 1px solid;*/
 }
+
 
 
 
@@ -2129,12 +2178,14 @@ export default {
 
 
 
+
 /* 气泡 */
 
 .el-tooltip__popper {
   max-width: 400px;
   height: auto;
 }
+
 
 
 
@@ -2169,6 +2220,7 @@ export default {
 
 
 
+
 /* 两行  空  */
 
 .phone-credit .item-column3-2-normal .el-form-item__content {
@@ -2187,11 +2239,13 @@ export default {
 
 
 
+
 /* 3列 空位 */
 
 .item-column3-null {
   min-height: 50px;
 }
+
 
 
 
@@ -2208,11 +2262,13 @@ export default {
 
 
 
+
 /* 默认隐藏 三级  树*/
 
 .phone-credit .el-tree-node.is-expanded .el-tree-node__children .el-tree-node .el-tree-node__children .el-tree-node {
   /*display: none;*/
 }
+
 
 
 
@@ -2224,6 +2280,7 @@ export default {
 
 
 
+
 /*二级hover改三级*/
 
 .phone-credit .el-tree--highlight-current .el-tree-node>.el-tree-node__children:hover .phone-credit .el-tree--highlight-current .el-tree-node>.el-tree-node__children .el-tree-node__children .el-tree-node__content {
@@ -2231,26 +2288,38 @@ export default {
 }
 
 
+
 /* 电话树更改  */
-.phone-credit .phone-tree{
+
+.phone-credit .phone-tree {
   width: 100%;
   height: auto;
-  background:#eef0f9;
+  background: #eef0f9;
 }
-.phone-credit .phone-tree .el-collapse-item__header{
-  padding-left:10px;
+
+.phone-credit .phone-tree .el-collapse-item__header {
+  padding-left: 10px;
   border-bottom: 1px solid #e6eaee;
 }
-.phone-credit .phone-tree .item-title{
-  width:100%;
+
+.phone-credit .phone-tree .item-title {
+  width: 100%;
   height: 38px;
   line-height: 38px;
   padding-left: 20px;
 }
-.phone-credit .phone-tree .el-collapse-item__content{
+
+.phone-credit .phone-tree .item-title:hover {
+  cursor: pointer;
+  color: #0077FF;
+}
+
+.phone-credit .phone-tree .el-collapse-item__content {
   padding-bottom: 0px;
 }
-.phone-credit .phone-tree .el-collapse-item__content:hover{
-  color:#666666;
+
+.phone-credit .phone-tree .el-collapse-item__content:hover {
+  color: #666666;
 }
+
 </style>
