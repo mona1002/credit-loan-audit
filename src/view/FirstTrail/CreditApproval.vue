@@ -989,6 +989,8 @@ export default {
           this.creauditAppOperate = ''; // 操作类型
 
           this.$message(res.msg);
+
+          this.$router.go('/taskInWaitting');
         }
       });
     },
@@ -1086,6 +1088,7 @@ export default {
           // auditFlag: '', // 终审结束标识 0 初审 1终审
           // proId: this.proId, //产品id
           // taskId: this.taskId, // 任务id
+          this.$router.go('/taskInWaitting');
         }
       })
     },
@@ -1168,10 +1171,21 @@ export default {
     },
     // 流程轨迹
     getLcgjList() {
-      this.post('/creauditInfo/approvalTrajectory', {
-        processTemplateId: this.processTemplateId,
-        taskStatus: this.taskStatus
-      }).then(res => {
+      // this.post('/creauditInfo/approvalTrajectory', {
+      //   processTemplateId: this.processTemplateId,
+      //   taskStatus: this.taskStatus
+      // }).then(res => {
+      //   console.log(res);
+      //   if (res.statusCode == '200') {
+      //     this.lcgjLoading = false;
+      //     this.lcgjData = res.data;
+      //   } else {
+      //     this.$message(res.msg);
+      //   }
+      // })
+
+      this.get('/creauditInfo/getProcessTraceList?processInstanceId='+this.processTemplateId)
+      .then(res=>{
         console.log(res);
         if (res.statusCode == '200') {
           this.lcgjLoading = false;
@@ -1180,6 +1194,8 @@ export default {
           this.$message(res.msg);
         }
       })
+
+
     },
     // 回退/拒绝 主原因 select - change
     selectChange: function(val) {
