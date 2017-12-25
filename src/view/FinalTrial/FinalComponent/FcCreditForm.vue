@@ -2,7 +2,7 @@
   <div class="CreditForm">
     <el-collapse v-model="activeNames">
       <!-- 初审人员 -->
-            <el-collapse-item name="1">
+      <el-collapse-item name="1">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">初审人员</span>
@@ -12,11 +12,11 @@
             <li>
               <p>
                 <label class="InternetInf_left_label ">初审人员编号：</label>
-                <!-- <span class="detail_inf">{{this.FormData.livingHouseHoldstext }} </span> -->
+                <span class="detail_inf">{{this.FormData.ploanOperCode}} </span>
               </p>
               <p>
                 <label class="InternetInf_right_label">初审人员姓名：</label>
-                <!-- <span class="detail_inf">{{this.FormData.livingEstateBelongstext }} </span> -->
+                <span class="detail_inf">{{this.FormData.ploanOperName}} </span>
               </p>
             </li>
           </ul>
@@ -428,7 +428,7 @@
               </p>
               <p>
                 <label class="InternetInf_right_label"> 配偶收入情况[月/元]： </label>
-                <span class="detail_inf">{{this.FormData.spouseIncome }} </span>
+                <span class="detail_inf" style="border:none;height:auto;">{{this.FormData.spouseIncome }} </span>
               </p>
             </li>
             <li v-show=" this.marriage.couple">
@@ -483,7 +483,7 @@
               </p>
               <p>
                 <label class="InternetInf_right_label"> 是否支付其生活费： </label>
-                <span class="detail_inf">{{this.FormData.childIspaycosttext }} </span>
+                <span class="detail_inf" style="border:none;height:auto;">{{this.FormData.childIspaycosttext }} </span>
               </p>
             </li>
             <li v-show="this.Children.PayAlimony">
@@ -567,7 +567,7 @@
               </p>
               <p>
                 <label class="InternetInf_right_label">可以承受的月还款[元]： </label>
-                <span class="detail_inf">{{this.FormData.fbalance }} </span>
+                <span class="detail_inf" style="border:none;height:auto;">{{this.FormData.fbalance }} </span>
               </p>
             </li>
           </ul>
@@ -620,44 +620,65 @@
           </p>
         </div>
       </el-collapse-item>
-         <!-- 电话征信结论 -->
+      <!-- 电话征信结论 -->
       <el-collapse-item name="9">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">电话征信结论</span>
         </template>
-        <div class="CreditForm_live">
+        <div class="PhontConclution">
           <ul>
             <li>
-              <p>
-                <label class="InternetInf_left_label ">同住者关系：</label>
-                <span class="detail_inf">{{this.FormData.livingHouseHoldstext }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label">居住房产所属情况：</label>
-                <span class="detail_inf">{{this.FormData.livingEstateBelongstext }} </span>
-              </p>
+              <label class="InternetInf_left_label ">住址电话调查结论：</label>
+              <el-tooltip class="item" effect="dark" :disabled="this.FormData.hometelConclusion==''" :content="this.FormData.hometelConclusion"
+                placement="top-start">
+                <span class="detail_inf ComAddr">{{this.FormData.hometelConclusion }} </span>
+              </el-tooltip>
+            </li>
+            <li>
+              <label class="InternetInf_left_label">单位电话调查结论：</label>
+              <el-tooltip class="item" effect="dark" :disabled="this.FormData.companyConclusion==''" :content="this.FormData.companyConclusion"
+                placement="top-start">
+                <span class="detail_inf ComAddr">{{this.FormData.companyConclusion }} </span>
+              </el-tooltip>
+            </li>
+            <li>
+              <label class="InternetInf_left_label">家庭联系人调查结论：</label>
+              <el-tooltip class="item" effect="dark" :disabled="this.FormData.fContractConclusion==''" :content="this.FormData.fContractConclusion"
+                placement="top-start">
+                <span class="detail_inf ComAddr">{{this.FormData.fContractConclusion }} </span>
+              </el-tooltip>
+            </li>
+            <li>
+              <label class="InternetInf_left_label">紧急联系人调查结论：</label>
+              <el-tooltip class="item" effect="dark" :disabled="this.FormData.eContractConclusion==''" :content="this.FormData.eContractConclusion"
+                placement="top-start">
+                <span class="detail_inf ComAddr">{{this.FormData.eContractConclusion }} </span>
+              </el-tooltip>
+            </li>
+            <li>
+              <label class="InternetInf_left_label">工作证明人调查结论：</label>
+              <el-tooltip class="item" effect="dark" :disabled="this.FormData.jobRefConclusion==''" :content="this.FormData.jobRefConclusion"
+                placement="top-start">
+                <span class="detail_inf ComAddr">{{this.FormData.jobRefConclusion }} </span>
+              </el-tooltip>
             </li>
           </ul>
         </div>
       </el-collapse-item>
-             <!-- 内部匹配结论 -->
+      <!-- 内部匹配结论 -->
       <el-collapse-item name="10">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">内部匹配结论</span>
         </template>
-        <div class="CreditForm_live">
+        <div class="interMath">
           <ul>
             <li>
-              <p>
-                <label class="InternetInf_left_label ">同住者关系：</label>
-                <span class="detail_inf">{{this.FormData.livingHouseHoldstext }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label">居住房产所属情况：</label>
-                <span class="detail_inf">{{this.FormData.livingEstateBelongstext }} </span>
-              </p>
+              <label class="InternetInf_left_label">匹配调查结论：</label>
+              <el-tooltip class="item" effect="dark" :disabled="this.FormData.auditDesc==''" :content="this.FormData.auditDesc" placement="top-start">
+                <span class="detail_inf ComAddr">{{this.FormData.auditDesc }} </span>
+              </el-tooltip>
             </li>
           </ul>
         </div>
@@ -669,24 +690,44 @@
           <span class="headFont">初审结论</span>
         </template>
         <div class=" CreditForm_result" style="paddingTop:10px">
-          <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
-          <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==''" :content="this.FormData.oother" placement="top-start">
-            <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
-          </el-tooltip>
-          <div class="FinalConclution">
-            <i class="hint">
-            <span v-show="errors.has('conclusion')" class="result_textarea">{{ errors.first('conclusion') }}</span>
-            <b v-show="this.Wordhint.result" class="result_textarea"> 输入长度不能超过500</b>
-          </i>
-          <p class="InternetInf_left_label" style="textAlign:right">
-            <span class="red"> * </span>初审结果评价：</p>
-          <el-input type="textarea" :rows="5" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" @compositionend.native="wordarea(checkData.oother,'评价')"
-            @keyup.native="wordarea(checkData.oother,'评价')" v-model="checkData.oother" name="conclusion" v-validate="'required'">
-          </el-input>
+          <div style="width:66%;">
+            <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
+            <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==''" :content="this.FormData.oother" placement="top-start">
+              <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
+            </el-tooltip>
+            <div class="FinalConclution">
+              <i class="hint">
+                <span v-show="errors.has('Finalconclusion')">{{ errors.first('Finalconclusion') }}</span>
+                <b v-show="this.finalResult"> * 输入长度不能超过500</b>
+              </i>
+              <p class="InternetInf_left_label" style="textAlign:right">
+                <span style="color:red;"> * </span>终审结果评价：</p>
+              <el-input type="textarea" :rows="5" resize="none" :maxlength="500" placeholder="请输入内容" @compositionend.native="wordarea(checkData.ootherfinal)"
+                @keyup.native="wordarea(checkData.ootherfinal)" v-model="checkData.ootherfinal" name="Finalconclusion" v-validate="'required'">
+              </el-input>
+            </div>
           </div>
         </div>
       </el-collapse-item>
     </el-collapse>
+    <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
+    <!-- ==============================点击确认时提示弹框=================================== -->
+    <div class="layer" v-show=" this.Confirm">
+      <!-- @touchmove.prevent  -->
+      <div class="layerbox">
+        <p>
+          <span>询问</span>
+          <i class="el-icon-close" @click="closed"></i>
+        </p>
+        <div>
+          <p class="choces">您确定已填写好各项内容并提交？</p>
+          <div class=buttonDiv>
+            <el-button type="primary" @click="CFsave">确定</el-button>
+            <el-button type="primary" @click="canc">取消</el-button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -694,6 +735,8 @@
   export default {
     data() {
       return {
+        //添加：
+        finalResult: false,
         FormData: [],
         Pwidth: [],
         CFwidth: [],
@@ -760,7 +803,7 @@
             return time.getTime() > Date.now();
           }
         },
-        Confirm: false,
+        Confirm: false, //√
         reg: {
           payDay: false,
           mMontyP: false,
@@ -814,11 +857,46 @@
           "接听是否本人", "是否申请借款", "是否私营业主", "婚姻状况", "配偶工作情况", "同城工作生活", "是否有子女", "是否支付生活费", "父母是否在世", "是否有兄弟姐妹",
           "是否为常住地址"
         ],
-        activeNames: ['1', "2", "3", "4", "5", "6", "7", "8","9","10","11"],
+        activeNames: ['1', "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"],
         checkData: [],
       }
     },
     methods: {
+      makeSureBtn() {
+        this.Confirm = true;
+      },
+      canc() {
+        this.Confirm = false;
+      },
+      closed() {
+        this.Confirm = false;
+      },
+      CFsave() {
+        this.$validator.validateAll().then((result) => {
+          if (result) {
+            this.post("/creauditInfo/addOrUpdate",{
+                   applyId: this.checkData.applyId,
+              id: this.checkData.id,
+
+            }).then(res => {
+              // 入参只写 this.checkData.ootherfinal 终审评价么？？？？？？？？？？-------------
+         
+
+              if (res.statusCode == 200) {
+                this.Confirm = false;
+                alert('提交成功!');
+                this.AreaNPercent();
+              } else {
+                alert("提交失败，请重新提交")
+                this.Confirm = false;
+              }
+            });
+          } else {
+            alert('请按要求填写！');
+            this.Confirm = false;
+          }
+        });
+      },
       NewPage(ind) {
         console.log(ind);
         switch (ind) {
@@ -851,6 +929,15 @@
           this.checkData.selfhasProportion = "";
         }
       },
+      wordarea(val) {
+        console.log(val.length)
+        if (val.length <= 499) {
+          this.checkData.ootherfinal = val;
+          this.finalResult = false;
+        } else {
+          this.finalResult = true;
+        }
+      },
       mountJ(code, val) {
         switch (code) {
           case 0:
@@ -858,7 +945,7 @@
             break;
           case 1:
             val == 0 ? this.InternetShow.commentS1 = false : this.InternetShow.commentS1 = true;
-            break; 
+            break;
           case 2:
             val == 0 ? this.InternetShow.commentS2 = false : this.InternetShow.commentS2 = true;
             break;
@@ -924,12 +1011,14 @@
       },
     },
     mounted() {
-       this.getParams = JSON.parse(localStorage.getItem("internalId")) //获取内部匹配的id
+      this.getParams = JSON.parse(localStorage.getItem("FinaltaskInWaitting")); // 终审工作台
       // 获取查询列表数据
       this.post("/creauditInfo/queryCreauditInfoObj", {
-        applyId: this.getParams.matchApplyId,
+        applyId: this.getParams.applyId,
         // applyId: "00542",
       }).then(res => {
+        console.log(res.data)
+        // console.log(res.data)
         this.FormData = res.data;
         this.AreaNPercent();
         this.mountJ(0, res.data.wbeexEcuted);
@@ -969,6 +1058,7 @@
 </script>
 
 <style scoped>
+
   .detail_inf {
     display: inline-block;
   }
@@ -1022,6 +1112,7 @@
   /*------------------------------------------- */
   /* 各自 */
   /* ------------------------------上网查询 +核实身份--------------------------- */
+
   .CreditForm_InternetInf p,
   /*  上网查询 */
 
@@ -1043,12 +1134,14 @@
     vertical-align: middle;
   }
   /* --------------------------工作信息 + 私营企业--------------------- */
+
   .CheckId_right_label
   /* 第三列p */
 
   {
     width: 140px;
   }
+  /* -----------------------------alert----------------------- */
 
   .layer {
     width: 100%;
@@ -1129,10 +1222,11 @@
 
   .CreditForm_InternetInf p:nth-of-type(even),
   .CreditForm_CheckId p:nth-of-type(even),
-  .CreditForm_FamilyInf p:nth-of-type(even)
+  .CreditForm_FamilyInf p:nth-of-type(even),
   /* 家庭信息 */
 
-  {
+  .PhontConclution,
+  .interMath {
     width: 66%;
   }
 
@@ -1176,6 +1270,28 @@
     padding: 5px 10px;
     border-radius: 4px;
   }
+
+  .CreditForm_result {
+    padding: 15px 0 30px 0;
+  }
+
+  .FinalConclution {
+    /* padding: 20px 0; */
+    /* background: red; */
+  }
+
+  .hint {
+    display: block;
+    height: 20px;
+    line-height: 20px;
+    color: red;
+    font-style: normal;
+    font-size: 12px;
+    padding-left: 202px;
+  }
+  /* .btn {
+    margin: 20px 0 0 80%;
+  } */
   /* ------------测试-------------- */
 
   .CreditForm_InternetInf p:nth-of-type(even) i {

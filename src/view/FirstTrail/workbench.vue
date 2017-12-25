@@ -108,6 +108,13 @@
         })
       },
       handleCurrentChange(val) {
+//         creditApp_antiFraud_commissioner 和 creditApp_antiFraud_manager
+// 其中第一个是 反欺诈专员审批，第二个是 反欺诈主管审批
+// reconsiderApp_apply  复议申请
+// reconsiderApp_credit_manager 信审经理审批
+// reconsiderApp_credit_seniro_manager 信审高级经理审批
+// reconsiderApp_credit_director 信审总监审批
+// 这4个是 复议
         if (val.taskNodeName == "creditApp_firstTrial") {
           this.currentRow = val;
           this.workbenchPass.processTemplateId = val.processTemplateId;
@@ -131,6 +138,8 @@
           localStorage.setItem("FinalWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
           //  this.$router.push({path: '/FtaskInWaitting',});  跳转路径？？？？？？？？？？？？
+        }else if(val.taskNodeName == ""){
+
         }
       }
     },

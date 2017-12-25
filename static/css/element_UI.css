@@ -933,8 +933,14 @@ height: 40px;
   width:auto;
   max-width: 400px;
 }
-
-
+/* 信审表-终审-终审评价textarea */
+.CreditForm .FinalConclution .el-textarea{
+  width: calc( 100% - 197px);
+  
+}
+.CreditForm .FinalConclution .el-textarea__inner{
+  width:100%;
+}
 /* 影音列表----缩略图按钮 */
 /* 影音资料-左侧列表 */
 

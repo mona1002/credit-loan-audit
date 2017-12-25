@@ -91,16 +91,16 @@
       return {
         // picData: [],
         opendImg: [true, true, true, true], //一级节点图标flag
-        closedImg: [false, false, false, false], 
-        showListDiv: true, 
-        show: true, 
-        smallPicInd: 0, 
+        closedImg: [false, false, false, false],
+        showListDiv: true,
+        show: true,
+        smallPicInd: 0,
         SmallPicShow: false,
         CompareAlert: true,
-        ListParent: [], 
-        ListDetails: [], 
+        ListParent: [],
+        ListDetails: [],
         applyId: '', //入参
-        imgPath: [], 
+        imgPath: [],
         localInf: [] //localstorage 接收的所有参数
       }
     },
@@ -135,23 +135,23 @@
       getImg(ind) {
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
       },
-      hid() { 
+      hid() {
         this.showListDiv = false;
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
       },
-      showList() { 
+      showList() {
         this.showListDiv = true;
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 412px)";
       },
-      SmallpicClose() { 
+      SmallpicClose() {
         this.SmallPicShow = false;
       },
-      SmallpicAlert() { 
+      SmallpicAlert() {
         this.SmallPicShow = true;
       },
       pre() {
         this.smallPicInd--;
-        this.defaultBigPicCss(); 
+        this.defaultBigPicCss();
         if (this.smallPicInd < 0) {
           this.smallPicInd = this.$refs.small_pic_ref.length - 1;
         }
@@ -191,13 +191,13 @@
               .style.transform.slice(7, -4)) - 90) + this.$refs.Big_pic_ref[0].style.transform.slice(-4);
         }
       },
-      ChangeCss(ind) { 
+      ChangeCss(ind) {
         this.changeSmallPicCss(ind);
       },
       smallPic(ev, ind) {
-        this.smallPicInd = ind; 
+        this.smallPicInd = ind;
         this.defaultBigPicCss();
-                 this.SmallPicShow = false;
+        this.SmallPicShow = false;
       },
       // 公共重复方法
       defaultBigPicCss() { // （重复代码）通用方法 ：  大图 --------------- 恢复默认高度、不旋转
@@ -226,12 +226,12 @@
           this.$refs.small_pic_ref[ind].style.opacity = 0.8;
         }
       },
-      Imgscroll() { 
+      Imgscroll() {
         this.$refs.showHidIcons.style.display = "block";
-        this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => { 
+        this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {
           event = event || window.event;
-          this.$refs.AudioVisual_Img_ref.scrollTop = 0; 
-          if (event.wheelDelta < 0) { 
+          this.$refs.AudioVisual_Img_ref.scrollTop = 0;
+          if (event.wheelDelta < 0) {
             this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
               100 + "px";
           } else {
@@ -239,12 +239,12 @@
               100 + "px";
           }
         };
-        this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => { 
-          this.$refs.AudioVisual_Img_ref.scrollTop = 0;   
-          if (event.detail > 0) { 
+        this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => {
+          this.$refs.AudioVisual_Img_ref.scrollTop = 0;
+          if (event.detail > 0) {
             this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
               100 + "px";
-          } else { 
+          } else {
             this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
               100 + "px";
           }
@@ -263,7 +263,12 @@
     },
     mounted() {
       console.log("影音资料右")
-      this.localInf = JSON.parse(localStorage.getItem("taskInWaitting"));
+      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      if (this.judgeFlag.flag == '01') {
+        this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
+      } else if (this.judgeFlag.flag == '02') {
+        this.localInf = JSON.parse(localStorage.getItem("FinaltaskInWaitting")) //终审
+      }
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.applyId,
@@ -373,6 +378,7 @@
     z-index: 2;
     top: 50%;
   }
+
   .AudioVisual .AudioVisual_List,
   .AudioVisual .AudioVisual_Img {
     float: left;
