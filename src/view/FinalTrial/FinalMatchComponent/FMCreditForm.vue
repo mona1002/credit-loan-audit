@@ -921,7 +921,8 @@
       },
     },
     mounted() {
-      this.getParams = JSON.parse(localStorage.getItem("FinalinternalId")); // 终审内部匹配
+      // this.getParams = JSON.parse(localStorage.getItem("FinalinternalObj")); // 终审内部匹配
+      this.getParams = JSON.parse(localStorage.getItem("internalObj")); // 终审内部匹配
       // 获取查询列表数据
       this.post("/creauditInfo/queryCreauditInfoObj", {
         applyId: this.getParams.matchApplyId,

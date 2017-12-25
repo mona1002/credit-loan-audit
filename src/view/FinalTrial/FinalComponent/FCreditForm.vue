@@ -1005,7 +1005,7 @@
       },
     },
     mounted() {
-      this.getParams = JSON.parse(localStorage.getItem("FinaltaskInWaitting")); // 终审工作台
+      this.getParams = JSON.parse(localStorage.getItem("FtaskInWaitting")); // 终审工作台
       // 获取查询列表数据
       this.post("/creauditInfo/queryCreauditInfoObj", {
         applyId: this.getParams.applyId,
