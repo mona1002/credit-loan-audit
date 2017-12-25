@@ -239,7 +239,7 @@ export default {
 
       // id: 客户id     orgCate
       // isInterFlag  标志是否是  内部匹配跳转的  查看
-      localStorage.setItem("internalId", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: true }));
+      localStorage.setItem("internalObj", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: true }));
       this.$router.go('/SplitScreen');
     },
     itemDbclickFixTel(row, event) {
@@ -247,8 +247,8 @@ export default {
       console.log('fix tel row dbclick');
       console.log(row.id);
 
-      // localStorage.setItem("internalId", JSON.stringify(row.id));
-      localStorage.setItem("internalId", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: true }));
+      // localStorage.setItem("internalObj", JSON.stringify(row.id));
+      localStorage.setItem("internalObj", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: true }));
       this.$router.go('/SplitScreen');
     },
     itemDbclickCompany(row, event) {
@@ -257,8 +257,8 @@ export default {
       console.log(row.id);
 
 
-      // localStorage.setItem("internalId", JSON.stringify(row.id));
-      localStorage.setItem("internalId", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: true }));
+      // localStorage.setItem("internalObj", JSON.stringify(row.id));
+      localStorage.setItem("internalObj", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: true }));
       this.$router.go('/SplitScreen');
     },
     // cellHover(row, column, cell, event) {
