@@ -2403,9 +2403,9 @@
   }
 
   .btn {
-    margin: 20px 0 0 80%;
+    margin: 20px 0 0 844px;
   }
-
+/* calc( 100%- 180px ) */
   .specialInput {
     width: 480px;
   }

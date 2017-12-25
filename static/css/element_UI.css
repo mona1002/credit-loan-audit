@@ -759,7 +759,10 @@ height: 40px;
 .CreditForm .el-icon-date:before {
   color: #0077ff;
 }
-
+/* 信审表-折叠面板title 后面的icon倾斜 */
+.CreditForm .el-collapse-item__arrow{
+  line-height: 40px;
+}
 /* 解决测试环境宽高不生效问题 */
 
 .CreditForm .el-input {
