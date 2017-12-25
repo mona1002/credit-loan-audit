@@ -1683,3 +1683,15 @@ height: 40px;
 .creditApproval-class .xllcgj-div .el-table__body-wrapper .el-table__body td:nth-of-type(7){
   text-align: center;
 }
+
+
+/* 电话征信 -- 电话树更改*/
+.phone-credit .el-collapse-item__header .el-collapse-item__arrow{
+  transform:rotate(-90deg); 
+ -webkit-transform:rotate(-90deg);
+}
+
+.el-collapse-item.is-active .el-collapse-item__header .el-collapse-item__arrow{
+  transform:rotate(90deg); 
+ -webkit-transform:rotate(90deg); 
+}

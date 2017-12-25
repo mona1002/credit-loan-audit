@@ -93,11 +93,13 @@
         </el-pagination>
       </div>
     </div>
-    <internal-match-textarea></internal-match-textarea>
+    <!-- 匹配结论编辑 -->
+    <internal-match-textarea v-show=""></internal-match-textarea>
+    <!-- 匹配结论查看 -->
+    <internal-match-read v-show=""></internal-match-read>
   </div>
 </template>
 <script>
-import axios from 'axios'
 export default {
   data() {
     return {
@@ -239,7 +241,7 @@ export default {
 
       // id: 客户id     orgCate
       // isInterFlag  标志是否是  内部匹配跳转的  查看
-      localStorage.setItem("internalId", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: true }));
+      localStorage.setItem("internalObj", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: true }));
       this.$router.go('/SplitScreen');
     },
     itemDbclickFixTel(row, event) {
@@ -247,8 +249,8 @@ export default {
       console.log('fix tel row dbclick');
       console.log(row.id);
 
-      // localStorage.setItem("internalId", JSON.stringify(row.id));
-      localStorage.setItem("internalId", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: true }));
+      // localStorage.setItem("internalObj", JSON.stringify(row.id));
+      localStorage.setItem("internalObj", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: true }));
       this.$router.go('/SplitScreen');
     },
     itemDbclickCompany(row, event) {
@@ -257,8 +259,8 @@ export default {
       console.log(row.id);
 
 
-      // localStorage.setItem("internalId", JSON.stringify(row.id));
-      localStorage.setItem("internalId", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: true }));
+      // localStorage.setItem("internalObj", JSON.stringify(row.id));
+      localStorage.setItem("internalObj", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: true }));
       this.$router.go('/SplitScreen');
     },
     // cellHover(row, column, cell, event) {
@@ -416,6 +418,61 @@ export default {
           })
         }
       }
+    },
+    // 匹配结论查看
+    "internal-match-read": {
+      template: '\
+            <el-form label-width="10px" class="demo-ruleForm">\
+            <el-form-item  class="title-bar">\
+            <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">\
+        <span class="headFont">匹配结论</span>\
+            </el-form-item>\
+            <el-input disabled type="textarea" v-model="audit_desc" class="mark-textarea" resize="none" :rows="5" :maxlength="500"></el-input>\
+            </el-form>\
+            ',
+      data() {
+        return {
+          mark: "",
+          ruleForm: {
+            type: []
+          },
+          applyId: '', // 申请单id
+          audit_desc: '', //匹配结论
+          creator_code: '' // 用户操作人编码 userCode
+        };
+      },
+      mounted() {
+        // 获取到传进来的  applyId 申请单id
+        // this.applyId = this.$route.query.applyId;
+        // 获取传进来的 操作人用户编码
+        // this.creator_code = this.$route.query.userCode;
+        // 测试数据
+        // this.applyId = '111';
+        // this.creator_code = 'ddyy';
+        var applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
+        this.applyId = applicationInformationDetail.applyId;
+        var userInfo = JSON.parse(localStorage.getItem('userInf'));
+        this.creator_code = userInfo.userCode;
+
+        // 获取匹配信息
+        this.getOption();
+
+      },
+      methods: {
+        getOption() {
+          console.log('匹配结论', this.applyId);
+          // 获取匹配结论
+          this.post('internalMatch/getInternalMatchOption', {
+            applyId: this.applyId
+          }).then(res => {
+            console.log(res);
+            res.data != null ? this.audit_desc = res.data.auditDesc : '';
+            res.data != null ? this.auditId = res.data.id : '';
+          })
+
+        },
+
+      }
     }
   }
 };
@@ -453,6 +510,9 @@ export default {
 
 
 
+
+
+
 /* 分页 */
 
 .internalMatch-class .tool-bar {
@@ -461,6 +521,9 @@ export default {
   padding: 10px 0 0 10px;
   margin-bottom: 10px;
 }
+
+
+
 
 
 
@@ -525,6 +588,9 @@ export default {
 
 
 
+
+
+
 /* 确认按钮 */
 
 .internalMatch-class .mark-button {
@@ -554,11 +620,17 @@ export default {
 
 
 
+
+
+
 /* 行高 */
 
 .internalMatch-class thead tr {
   height: 40px;
 }
+
+
+
 
 
 
@@ -607,6 +679,9 @@ export default {
 
 
 
+
+
+
 /* 备注 width*/
 
 .internalMatch-class .mark-cell {
@@ -633,12 +708,18 @@ export default {
 
 
 
+
+
+
 /* tr */
 
 .internalMatch-class .el-table tr {
   height: 35px;
   background: #ffffff;
 }
+
+
+
 
 
 

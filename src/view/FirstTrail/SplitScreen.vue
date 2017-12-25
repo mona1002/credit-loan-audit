@@ -166,7 +166,7 @@
         items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "信审审批"],
         tab1Index: 0, 
         tab2Index: 3,
-        flag1: [true, true, true, false, true, true, true, true, true],
+        flag1: [true, true, true, true, true, true, true, true, true],
         flag2: [true, true, true, true, true, true, true, true, true, true],
         AlertSearch: "", 
         AlertSearchCondition: [{
