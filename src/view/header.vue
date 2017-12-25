@@ -3,7 +3,7 @@
     <!-- 导航图片 -->
     <div class="logoDiv">
       <!-- <img class="logo" src="/static/images/logo.png"> -->
-      <span>风控管理系统</span>
+      风控管理系统
     </div> 
     <!-- 导航内容 -->
     <div class="navContain">
@@ -108,19 +108,12 @@ import NavItem from '@/view/navItem'
     height: 70px;
     border-right: 1px solid #bfcbd9;
     background: rgba(69,115,227,.2);
-  }
-  .mheader .logoDiv span{
     font-size: 20px;
     color:#fff;
     padding:0 33px;
     line-height: 70px;
     letter-spacing: 2px;
   }
-  /* .mheader .logoDiv .logo{
-    width: 58px;
-    height: 34px;
-    margin:15px 0 21px 28px;
-  } */
   /* 导航内容 */
   .mheader .navContain{
     width: calc( 100% - 305px );

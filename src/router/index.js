@@ -46,9 +46,13 @@ import MatchingInf from '@/view/FirstTrail/MatchingInf'
 import RApprovalConclusion from '@/view/FirstTrail/ReadComponent/RApprovalConclusion'
 // 放账信息（部分）
 import RFinanceInformation from '@/view/FirstTrail/ReadComponent/RFinanceInformation'
+
+
 // ----------终审-------------------------
 import FSplitScreen from '@/view/FinalTrial/FSplitScreen'
 import FcCreditForm from '@/view/FinalTrial/FinalComponent/FcCreditForm'
+import FtaskInWaitting from '@/view/FinalTrial/FtaskInWaitting'
+
 
 // import FMatchingInf from '@/view/FinalTrial/FMatchingInf'
 
@@ -173,6 +177,10 @@ const routes = [{
 {
   path: '/FcCreditForm',
   component: FcCreditForm
+},
+{
+  path: '/FtaskInWaitting',
+  component: FtaskInWaitting
 },
 // {
 //   path: '/a',
