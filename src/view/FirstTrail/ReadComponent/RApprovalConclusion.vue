@@ -36,9 +36,14 @@
       }
     },
     mounted() {
-      this.MatchInf = JSON.parse(localStorage.getItem("internalId"));
+      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      if (this.judgeFlag.flag == '01') {
+        this.MatchInf = JSON.parse(localStorage.getItem("internalId")); //初审-匹配查看
+      } else if (this.judgeFlag.flag == '02') {
+        this.MatchInf = JSON.parse(localStorage.getItem("FinalinternalId")); //终审-匹配查看
+      }
       this.post("/creauditOpinion/queryByPage", {
-        applyId: this.MatchInf.matchApplyId,           
+        applyId: this.MatchInf.matchApplyId,
         // applyId: "00542",
       }).then(res => {
         this.ConclutionInf = res.data.recordList;

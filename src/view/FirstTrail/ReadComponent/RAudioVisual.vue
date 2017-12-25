@@ -262,14 +262,24 @@
       }
     },
     mounted() {
-      this.localInf = JSON.parse(localStorage.getItem("internalId")) //获取列表详情的id
-      // 父菜单
+      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      if (this.judgeFlag.flag == '01') {
+        this.localInf = JSON.parse(localStorage.getItem("internalId")) //初审-匹配查看
+      } else if (this.judgeFlag.flag == '02') {
+        this.localInf = JSON.parse(localStorage.getItem("FinalinternalId")) //终审-匹配查看
+      }else if (this.judgeFlag.flag == '03') {
+        this.localInf = JSON.parse(localStorage.getItem("AntiinternalId")) //反欺诈专员-匹配查看
+      }else if (this.judgeFlag.flag == '04') {
+        this.localInf = JSON.parse(localStorage.getItem("AntiManagerinternalId")) //反欺诈主管-匹配查看
+      }
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.matchApplyId,
+        // applyId: this.localInf.applyId,
+        // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
+        //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
       }).then(res => {
-        this.ListParent = res.data
+        this.ListParent = res.data;
       });
-
     }
   }
 

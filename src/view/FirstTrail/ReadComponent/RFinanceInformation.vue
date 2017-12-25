@@ -37,7 +37,12 @@
       }
     },
     mounted() {
-      this.MatchInf = JSON.parse(localStorage.getItem("internalId"));
+        this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      if (this.judgeFlag.flag == '01') {
+       this.MatchInf = JSON.parse(localStorage.getItem("internalId")); //初审-匹配查看
+      } else if (this.judgeFlag.flag == '02') {
+        this.MatchInf = JSON.parse(localStorage.getItem("FinalinternalId")); //终审-匹配查看
+      }
       this.post("/creAccountInfo/getAccountInfo", {
         applyId: this.MatchInf.matchApplyId,           
         // applyId: "24667563-2ca2-4da6-8e02-4bf7d7c839b6",
