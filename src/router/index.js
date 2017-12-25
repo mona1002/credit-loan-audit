@@ -58,6 +58,8 @@ import FMatchingInf from '@/view/FinalTrial/FMatchingInf'
 
 
 // ------------反欺诈------------------
+import AntiAudit from '@/view/AntiFraud/AntiAudit.vue'
+
 
 
 // 系统管理
@@ -202,10 +204,10 @@ const routes = [{
 // },
 
 //-------------------反欺诈------------
-// {
-//   path:'/FSplitScreen',
-//   component:FSplitScreen
-// },
+{
+  path:'/AntiAudit',
+  component:AntiAudit
+},
 // {
 //   path:'/FMatchingInf',
 //   component:FSplitScreen
