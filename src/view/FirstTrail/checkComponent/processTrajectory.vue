@@ -81,14 +81,14 @@
 		data(){
 			return{
 				activeNames: ['1'],
-				processTemplateId:'',
-				taskStatus:'',
+				//processTemplateId:'',
+				//taskStatus:'',
+				processInstanceId:'',
 				taskDetailList:[],
 			}
 		},
 		mounted(){
-			this.processTemplateId=JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
-			this.taskStatus=JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
+			this.processInstanceId=JSON.parse(localStorage.getItem('taskInWaitting')).processInstanceId;
 			this.request()
 		},
 		methods:{
@@ -96,9 +96,8 @@
 
 			},
 			request(){
-				this.post('/creauditInfo/approvalTrajectory', {
-			        processTemplateId: this.processTemplateId,
-			        taskStatus: this.taskStatus
+				this.post('/creauditInfo/getProcessTraceList', {
+			        processInstanceId: this.processInstanceId
 			      }).then(res => {
 			        console.log(res);
 			        if (res.statusCode == '200') {

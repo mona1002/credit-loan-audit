@@ -53,7 +53,7 @@
 		},
 		mounted(){
 			//一进入页面就发送请求
-			this.taskInWaitting = JSON.parse(localStorage.getItem('internalId'));
+			this.taskInWaitting = JSON.parse(localStorage.getItem('internalObj'));
 			this.request(this.taskInWaitting.matchApplyId);
 		},
 		methods:{
