@@ -69,11 +69,11 @@
         <!-- <el-header > -->
         <!--  v-show="hisListShow" -->
         <!-- title="历史调查日志"  -->
-        <el-main style="overflow-y: hidden;font-size:14px;">
+        <el-main style="overflow-y: auto;overflow-x:hidden;font-size:14px;">
           <!-- 默认的背景 -->
-          <div class="form-his" v-show="!formShow && !hisShow" style="background:url(.../../../static/images/3C281C6A-532B-4A55-A9BF-F142E9F09063@1x.png) center no-repeat;">
+          <div class="form-his" v-show="!hisListShow" style="background:url(.../../../static/images/3C281C6A-532B-4A55-A9BF-F142E9F09063@1x.png) center no-repeat;">
           </div>
-          <div v-if="formShow || hisShow" class="header-class">
+          <div v-if="hisListShow" class="header-class">
             <el-collapse v-model="activeNames">
               <el-collapse-item style="text-align:left;" v-show="hisListShow" name="1">
                 <template slot="title">
@@ -396,7 +396,7 @@ export default {
       activeTrees: ["1", "2", "3", "4", "5"]
     }
   },
-  props: ['isFull'],
+  props: ['isFull','SplitS'],
   mounted() {
     // 组件 创建 估计完成后获取数据
     // 此时 data 已经被 observed 了
@@ -527,7 +527,7 @@ export default {
     },
     handleNodeClick(data) {
       console.log('handleNodeClick')
-      if (this.isInterFlag) {
+      if (this.isInterFlag==true || this.SplitS!='right' || this.hisShow) {
         // 内匹查看详情
         // 点击每条tree数据的事件
         this.treeId = data.id;
@@ -547,8 +547,8 @@ export default {
           console.log(data.id.length);
 
           this.queryTelLogByPage();
-          // this.formShow = true;
-          // this.hisShow = false;
+          // this.formShow = false;
+          // this.hisShow = true;
         }
       } else if (this.isInterFlag == false) {
         // 点击每条tree数据的事件
@@ -1261,13 +1261,14 @@ export default {
   height: calc(100% - 300px);
   padding: 0;
   padding-bottom: 10px;
-  overflow: auto;
+  /*overflow: auto;*/
   /*background:url(.../../../static/images/3C281C6A-532B-4A55-A9BF-F142E9F09063@1x.png) center no-repeat;"*/
   background: #ffffff;
 
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  /*overflow: hidden;*/
+  overflow-y: auto;
 }
 
 .phone-credit .el-header .head-title {
@@ -2307,6 +2308,7 @@ export default {
   height: 38px;
   line-height: 38px;
   padding-left: 20px;
+  border-bottom:  1px solid #d8dce5;
 }
 
 .phone-credit .phone-tree .item-title:hover {

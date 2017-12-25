@@ -51,6 +51,7 @@ import RFinanceInformation from '@/view/FirstTrail/ReadComponent/RFinanceInforma
 // ----------终审-------------------------
 import FSplitScreen from '@/view/FinalTrial/FSplitScreen'
 import FcCreditForm from '@/view/FinalTrial/FinalComponent/FcCreditForm'
+//列表页
 import FtaskInWaitting from '@/view/FinalTrial/FtaskInWaitting'
 import FMCreditForm from '@/view/FinalTrial/FinalMatchComponent/FMCreditForm'
 import FMatchingInf from '@/view/FinalTrial/FMatchingInf'

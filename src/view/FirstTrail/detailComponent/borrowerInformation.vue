@@ -758,7 +758,7 @@
 				    	</li>
 				    	<li class="zongji liDiv">
 				    		<label>负债合计[元]:</label>
-				    		<el-input v-model="borDebt.totalLoan" v-on:blur="debtTotal(borDebt.totalLoan,'totalLoan')">
+				    		<el-input v-model="borDebt.totalLoan" :disabled="true">
 				    		</el-input>
 				    	</li>
 				    </ol>
@@ -1767,9 +1767,10 @@
 				}else{
 					console.log(row);
 					//console.log(typeof(row.n+row.n1+row.n2+row.n3+row.n4+row.n5));
-					var totalNum=row.n*1+row.n1*1+row.n2*1+row.n3*1+row.n4*1+row.n5*1;
+					var totalNum=row.n.split(',').join("")*1+row.n1.split(',').join("")*1+row.n2.split(',').join("")*1+row.n3.split(',').join("")*1+row.n4.split(',').join("")*1+row.n5.split(',').join("")*1;
 					console.log(totalNum);
 					row.avgIncome=totalNum/6;
+					row.avgIncome = this.formatNumber(row.avgIncome,2,0);
 					console.log(row.avgIncome);
 				}
 				
@@ -1869,48 +1870,6 @@
 				document.getElementsByTagName('body')[0].style.overflow='';
 				this.layer=false;
 			},
-			/*失去焦点时判断只能显示数字并且保留两位小数*/
-			/*numns(newNum){
-				console.log(newNum);
-				function formatNumber(num,cent,isThousand) {
-				  num = num.toString().replace(/\$|\,/g,'');
-				 
-				  // 检查传入数值为数值类型
-				  if(isNaN(num))
-				    num = "0";
-				 
-				  // 获取符号(正/负数)
-				  let sign = (num == (num = Math.abs(num)));
-				 
-				  num = Math.floor(num*Math.pow(10,cent)+0.50000000001); // 把指定的小数位先转换成整数.多余的小数位四舍五入
-				  let cents = num%Math.pow(10,cent);       // 求出小数位数值
-				  num = Math.floor(num/Math.pow(10,cent)).toString();  // 求出整数位数值
-				  cents = cents.toString();        // 把小数位转换成字符串,以便求小数位长度
-				 
-				  // 补足小数位到指定的位数
-				  while(cents.length<cent)
-				    cents = "0" + cents;
-				 
-				  if(isThousand) {
-				    // 对整数部分进行千分位格式化.
-				    for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
-				      num = num.substring(0,num.length-(4*i+3))+','+ num.substring(num.length-(4*i+3));
-				  }
-				 
-				  if (cent > 0)
-				    return (((sign)?'':'-') + num + '.' + cents);
-				  else
-				    return (((sign)?'':'-') + num);
-				};
-				(function(){
-			      newNum = formatNumber(newNum,2,0)
-			      return newNum
-			    })()
-			    newNum =newNum;
-			    alert(newNum)
-			    console.log(newNum);
-
-			},*/
 			/*银行卡使用总况 去焦点时判断只能显示数字并且最大为999*/
 			carNum(num){
 				if(num!=null && num!=""){
@@ -2053,6 +2012,42 @@
 					}
 				}
 			},
+			//保留两位小数 整数千分位
+			formatNumber(num,cent,isThousand) {
+			    num = num.toString().replace(/\$|\,/g,'');
+			 
+			  	// 检查传入数值为数值类型
+			  	if(isNaN(num))
+			    	num = "0";
+			 
+			  	// 获取符号(正/负数)
+			  	let sign = (num == (num = Math.abs(num)));
+
+			  	num = Math.floor(num*Math.pow(10,cent)+0.50000000001); // 把指定的小数位先转换成整数.多余的小数位四舍五入
+			  	let cents = num%Math.pow(10,cent);       // 求出小数位数值
+			  	num = Math.floor(num/Math.pow(10,cent)).toString();  // 求出整数位数值
+			  	cents = cents.toString();        // 把小数位转换成字符串,以便求小数位长度
+			 
+			  	// 补足小数位到指定的位数
+			  	while(cents.length<cent)
+			    	cents = "0" + cents;
+			 
+		    	for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
+		      		num = num.substring(0,num.length-(4*i+3))+','+ num.substring(num.length-(4*i+3));
+			  
+			  	if (cent > 0){
+			  		//console.log(cent);
+			  		//console.log(((sign)?'':'-') + num + '.' + cents);
+			  		if(sign == true){
+			  			return (((sign)?'':'-') + num + '.' + cents);
+			  		}else if(sign == false){
+			  			return '0.00'
+			  		}
+			  	}else{
+			  		//console.log(((sign)?'':'-') + num);
+			    	return (((sign)?'':'-') + num);
+			    }
+			},
 			debtTotal(val,flag){	
 		    // 无数据
 			    if (!val){
@@ -2079,57 +2074,41 @@
 			    }
 			    // 有数据
 			    if (val) {
-			        // 传进来的值先按'.'拆分,取整数位,再replace ','
-			        val = val.split('.')[0].replace(/,/, '')
-			        // 正则判断数字  [0-9] +至少一次 , 第一位为0 不用处理
-			        if (/^[0-9]+$/g.test(Number(val))) {
-			        	switch (flag) {
-				            case 'monthRepayAmt':
-				            	this.borDebt.monthRepayAmt = Number(val).toLocaleString() + '.00';
-				            	this.borDebt.totalLoan=this.borDebt.monthRepayAmt*1+this.borDebt.houseLoanAmt*1+this.borDebt.carLoanAmt*1+this.borDebt.otherLoanAmt*1;
-				                break;
-				            case 'studentLoanAmt':
-				                this.borDebt.studentLoanAmt = Number(val).toLocaleString() + '.00';
-				                break;
-				            case 'houseLoanAmt':
-				                this.borDebt.houseLoanAmt = Number(val).toLocaleString() + '.00';
-				                this.borDebt.totalLoan=this.borDebt.monthRepayAmt*1+this.borDebt.houseLoanAmt*1+this.borDebt.carLoanAmt*1+this.borDebt.otherLoanAmt*1;
-				                break;
-				            case 'carLoanAmt':
-				                this.borDebt.carLoanAmt = Number(val).toLocaleString() + '.00';
-				                this.borDebt.totalLoan=this.borDebt.monthRepayAmt*1+this.borDebt.houseLoanAmt*1+this.borDebt.carLoanAmt*1+this.borDebt.otherLoanAmt*1;
-				                break;
-				            case 'otherLoanAmt':
-				                this.borDebt.otherLoanAmt = Number(val).toLocaleString() + '.00';
-				                this.borDebt.totalLoan=this.borDebt.monthRepayAmt*1+this.borDebt.houseLoanAmt*1+this.borDebt.carLoanAmt*1+this.borDebt.otherLoanAmt*1;
-				                break;
-				            case 'totalLoan':
-				                this.borDebt.totalLoan = Number(val).toLocaleString() + '.00';
-				                break;   
-				        }
-				    }else {
-			            console.log('错误提示')
-			            switch (flag) {
-				            case 'monthRepayAmt':
-				                this.borDebt.monthRepayAmt = '';
-				                break;
-				            case 'studentLoanAmt':
-				                this.borDebt.studentLoanAmt = '';
-				                break;
-				            case 'houseLoanAmt':
-				                this.borDebt.houseLoanAmt = '';
-				                break;
-				            case 'carLoanAmt':
-				                this.borDebt.carLoanAmt = '';
-				                break;
-				            case 'otherLoanAmt':
-				                this.borDebt.otherLoanAmt = '';
-				                break;
-				            case 'totalLoan':
-				                this.borDebt.totalLoan = '';
-				                break;   
-				        }
+		        	switch (flag) {
+			            case 'monthRepayAmt':
+						    this.borDebt.monthRepayAmt =this.formatNumber(this.borDebt.monthRepayAmt,2,0);
+			            	this.borDebt.totalLoan=this.borDebt.monthRepayAmt.split(',').join("")*1+this.borDebt.houseLoanAmt.split(',').join("")*1+this.borDebt.carLoanAmt.split(',').join("")*1+this.borDebt.otherLoanAmt.split(',').join("")*1;
+
+			            	this.borDebt.totalLoan =this.formatNumber(this.borDebt.totalLoan,2,0);
+			                break;
+			            case 'studentLoanAmt':
+			            	this.borDebt.studentLoanAmt =this.formatNumber(this.borDebt.studentLoanAmt,2,0);
+			                //this.borDebt.studentLoanAmt = Number(val).toLocaleString() + '.00';
+			                break;
+			            case 'houseLoanAmt':
+			            	this.borDebt.houseLoanAmt =this.formatNumber(this.borDebt.houseLoanAmt,2,0);
+			                //this.borDebt.houseLoanAmt = Number(val).toLocaleString() + '.00';
+			                this.borDebt.totalLoan=this.borDebt.monthRepayAmt.split(',').join("")*1+this.borDebt.houseLoanAmt.split(',').join("")*1+this.borDebt.carLoanAmt.split(',').join("")*1+this.borDebt.otherLoanAmt.split(',').join("")*1;
+			                //负债合计保留两位小数
+			                this.borDebt.totalLoan =this.formatNumber(this.borDebt.totalLoan,2,0);
+			                break;
+			            case 'carLoanAmt':
+			            	this.borDebt.carLoanAmt =this.formatNumber(this.borDebt.carLoanAmt,2,0);
+			                //this.borDebt.carLoanAmt = Number(val).toLocaleString() + '.00';
+			                this.borDebt.totalLoan=this.borDebt.monthRepayAmt.split(',').join("")*1+this.borDebt.houseLoanAmt.split(',').join("")*1+this.borDebt.carLoanAmt.split(',').join("")*1+this.borDebt.otherLoanAmt.split(',').join("")*1;
+			                //负债合计保留两位小数
+			                this.borDebt.totalLoan =this.formatNumber(this.borDebt.totalLoan,2,0);
+			                break;
+			            case 'otherLoanAmt':
+			            	this.borDebt.otherLoanAmt =this.formatNumber(this.borDebt.otherLoanAmt,2,0);
+			                //this.borDebt.otherLoanAmt = Number(val).toLocaleString() + '.00';
+			                this.borDebt.totalLoan=this.borDebt.monthRepayAmt.split(',').join("")*1+this.borDebt.houseLoanAmt.split(',').join("")*1+this.borDebt.carLoanAmt.split(',').join("")*1+this.borDebt.otherLoanAmt.split(',').join("")*1;
+			                //负债合计保留两位小数
+			                this.borDebt.totalLoan =this.formatNumber(this.borDebt.totalLoan,2,0);
+			                break;  
 			        }
+				    
+			        
 			    }
 			},
 			moneyBlur(value, flag) {
@@ -2161,71 +2140,26 @@
 			    };
 			    // 有数据
 			    if (value) {
-			    	console.log(value);
-			        // 传进来的值先按'.'拆分,取整数位,再replace ','
-			        switch (flag) {
-			                case 'n':
-			                    value.n = value.n.split('.')[0].replace(/,/, '');
-			                    console.log(value.n);
-			                    break;
-			                case 'n1':
-			                    value.n1 = value.n1.split('.')[0].replace(/,/, '');
-			                    console.log(value.n1);
-			                    break;
-			                case 'n2':
-			                    value.n2 = value.n2.split('.')[0].replace(/,/, '');
-			                    break;
-			                case 'n3':
-			                    value.n3 = value.n3.split('.')[0].replace(/,/, '');
-			                    break;
-			                case 'n4':
-			                    value.n4 = value.n4.split('.')[0].replace(/,/, '');
-			                    break;
-			                case 'n5':
-			                    value.n5 = value.n5.split('.')[0].replace(/,/, '');
-			                    break;
-			                case 'avgIncome':
-			                    value.avgIncome = value.avgIncome.split('.')[0].replace(/,/, '');
-			                    break;
-			            }
-			        //value = value.split('.')[0].replace(/,/, '')
-			        // 正则判断数字  [0-9] +至少一次 , 第一位为0 不用处理
-			        //console.log(scope.row.n);
-			        if (/^[0-9]+$/g.test(Number(value.n))) {
-			        	value.n = Number(value.n).toLocaleString() + '.00';
-			        }else{
-			        	value.n='';
-			        };
-			        if (/^[0-9]+$/g.test(Number(value.n1))) {
-			        	value.n1 = Number(value.n1).toLocaleString() + '.00';
-			        }else{
-			        	value.n1='';
-			        };
-			        if (/^[0-9]+$/g.test(Number(value.n2))) {
-			        	value.n2 = Number(value.n2).toLocaleString() + '.00';
-			        }else{
-			        	value.n2='';
-			        };
-			        if (/^[0-9]+$/g.test(Number(value.n3))) {
-			        	value.n3 = Number(value.n3).toLocaleString() + '.00';
-			        }else{
-			        	value.n3='';
-			        };
-			        if (/^[0-9]+$/g.test(Number(value.n4))) {
-			        	value.n4 = Number(value.n4).toLocaleString() + '.00';
-			        }else{
-			        	value.n4='';
-			        };
-			        if (/^[0-9]+$/g.test(Number(value.n5))) {
-			        	value.n5 = Number(value.n5).toLocaleString() + '.00';
-			        }else{
-			        	value.n5='';
-			        };
-			        if (/^[0-9]+$/g.test(Number(value.avgIncome))) {
-			        	value.avgIncome = Number(value.avgIncome).toLocaleString() + '.00';
-			        }else{
-			        	value.avgIncome='';
-			        };
+		        	switch (flag) {
+			            case 'n':
+						    value.n =this.formatNumber(value.n,2,0);
+			                break;
+			            case 'n1':
+			            	value.n1 =this.formatNumber(value.n1,2,0);
+			                break;
+			            case 'n2':
+			            	value.n2 =this.formatNumber(value.n2,2,0);
+			                break;
+			            case 'n3':
+			            	value.n3 =this.formatNumber(value.n3,2,0);
+			                break;
+			            case 'n4':
+			            	value.n4 =this.formatNumber(value.n4,2,0);
+			                break;
+			            case 'n5':
+			            	value.n5 =this.formatNumber(value.n5,2,0);
+			                break;  
+			        } 
 			    }
 			},
 	    },
@@ -2505,6 +2439,9 @@
 	}
 	.fuzhaixinxi ol:nth-of-type(2) li:nth-of-type(2) div{
 		top: -5px;
+	}
+	.fuzhaixinxi ol:nth-of-type(2) li:nth-of-type(3) input{
+		color: #5a5e66;
 	}
 	.fuzhaixinxi ol:nth-of-type(3) li:nth-of-type(1){
 		height: 35px;
