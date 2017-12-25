@@ -50,9 +50,9 @@ import RFinanceInformation from '@/view/FirstTrail/ReadComponent/RFinanceInforma
 import FSplitScreen from '@/view/FinalTrial/FSplitScreen'
 import FcCreditForm from '@/view/FinalTrial/FinalComponent/FcCreditForm'
 import FMCreditForm from '@/view/FinalTrial/FinalMatchComponent/FMCreditForm'
-
+import FMatchingInf from '@/view/FinalTrial/FMatchingInf'
 // FMCreditForm
-// import FMatchingInf from '@/view/FinalTrial/FMatchingInf'
+
 
 // ------------反欺诈------------------
 
@@ -173,6 +173,10 @@ const routes = [{
   component: FSplitScreen
 },
 {
+  path: '/FMatchingInf',
+  component: FMatchingInf
+},
+{
   path: '/FcCreditForm',
   component: FcCreditForm
 },
@@ -180,14 +184,12 @@ const routes = [{
   path: '/FMCreditForm',
   component: FMCreditForm
 },
+
 // {
 //   path: '/b',
 //   component: FSplitScreen
 // },
-// {
-//   path: '/FMatchingInf',
-//   component: FMatchingInf
-// },
+
 //-------------------反欺诈------------
 // {
 //   path:'/FSplitScreen',

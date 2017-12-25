@@ -697,9 +697,9 @@
             </el-tooltip>
             <div class="FinalConclution">
               <p class="InternetInf_left_label" style="textAlign:right">终审结果评价：</p>
-                 <el-tooltip class="item" effect="dark" :disabled="this.FormData.ootherfinal==''" :content="this.FormData.ootherfinal" placement="top-start">
-              <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.ootherfinal}} </span>
-            </el-tooltip>
+              <el-tooltip class="item" effect="dark" :disabled="this.FormData.ootherfinal==''" :content="this.FormData.ootherfinal" placement="top-start">
+                <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.ootherfinal}} </span>
+              </el-tooltip>
             </div>
           </div>
         </div>
@@ -921,10 +921,10 @@
       },
     },
     mounted() {
-      this.getParams = JSON.parse(localStorage.getItem("FinaltaskInWaitting")); // 终审工作台
+      this.getParams = JSON.parse(localStorage.getItem("FinalinternalId")); // 终审内部匹配
       // 获取查询列表数据
       this.post("/creauditInfo/queryCreauditInfoObj", {
-        applyId: this.getParams.applyId,
+        applyId: this.getParams.matchApplyId,
         // applyId: "00542",
       }).then(res => {
         console.log(res.data)
@@ -968,7 +968,6 @@
 </script>
 
 <style scoped>
-
   .detail_inf {
     display: inline-block;
   }

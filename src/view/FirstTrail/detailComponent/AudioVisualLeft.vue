@@ -355,9 +355,13 @@
       // console.log(" 影音资料左")
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '01') {
-        this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //获取-初审-列表详情的id
-      } else if (this.judgeFlag.flag == '02') { //----------------------获取 localstorage 路径待更改
-        this.localInf = JSON.parse(localStorage.getItem("FinaltaskInWaitting")) // 路径 ????????????//获取-终审-列表详情的id FinalWorkbenchPass-----待修改
+        this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
+      } else if (this.judgeFlag.flag == '02') { 
+        this.localInf = JSON.parse(localStorage.getItem("FinaltaskInWaitting")) //终审
+      }else if (this.judgeFlag.flag == '03') {
+        this.localInf = JSON.parse(localStorage.getItem("AntiWorkbenchPass")) //反欺诈专员
+      }else if (this.judgeFlag.flag == '04') {
+        this.localInf = JSON.parse(localStorage.getItem("AntiManagerWorkbenchPass")) //反欺诈主管
       }
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {

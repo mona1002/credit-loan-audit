@@ -696,38 +696,15 @@
               <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
             </el-tooltip>
             <div class="FinalConclution">
-              <i class="hint">
-                <span v-show="errors.has('Finalconclusion')">{{ errors.first('Finalconclusion') }}</span>
-                <b v-show="this.finalResult"> * 输入长度不能超过500</b>
-              </i>
-              <p class="InternetInf_left_label" style="textAlign:right">
-                <span style="color:red;"> * </span>终审结果评价：</p>
-              <el-input type="textarea" :rows="5" resize="none" :maxlength="500" placeholder="请输入内容" @compositionend.native="wordarea(checkData.ootherfinal)"
-                @keyup.native="wordarea(checkData.ootherfinal)" v-model="checkData.ootherfinal" name="Finalconclusion" v-validate="'required'">
-              </el-input>
+              <p class="InternetInf_left_label" style="textAlign:right">终审结果评价：</p>
+              <el-tooltip class="item" effect="dark" :disabled="this.FormData.ootherfinal==''" :content="this.FormData.ootherfinal" placement="top-start">
+                <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.ootherfinal}} </span>
+              </el-tooltip>
             </div>
           </div>
         </div>
       </el-collapse-item>
     </el-collapse>
-    <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
-    <!-- ==============================点击确认时提示弹框=================================== -->
-    <div class="layer" v-show=" this.Confirm">
-      <!-- @touchmove.prevent  -->
-      <div class="layerbox">
-        <p>
-          <span>询问</span>
-          <i class="el-icon-close" @click="closed"></i>
-        </p>
-        <div>
-          <p class="choces">您确定已填写好各项内容并提交？</p>
-          <div class=buttonDiv>
-            <el-button type="primary" @click="CFsave">确定</el-button>
-            <el-button type="primary" @click="canc">取消</el-button>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -742,11 +719,6 @@
         CFwidth: [],
         inputWidth: [],
         textareaPpraProj: [],
-        shotInputL: 10,
-        longInputL: 10,
-        longLongInputL: 10,
-        shotTextareaL: 10,
-        textareaL: 10,
         acreage: '',
         Percent: '',
         Wordhint: {
@@ -798,11 +770,6 @@
           result: false,
         },
         getParams: [], //获取taskwaitting里面的 查询入参 applyId
-        pickerOptions1: {
-          disabledDate(time) {
-            return time.getTime() > Date.now();
-          }
-        },
         Confirm: false, //√
         reg: {
           payDay: false,
@@ -862,38 +829,6 @@
       }
     },
     methods: {
-      makeSureBtn() {
-        this.Confirm = true;
-      },
-      canc() {
-        this.Confirm = false;
-      },
-      closed() {
-        this.Confirm = false;
-      },
-      CFsave() {
-        this.$validator.validateAll().then((result) => {
-          if (result) {
-            this.post("/creauditInfo/updateOtherfinalByPK", {
-              applyId: this.checkData.applyId,
-              id: this.checkData.id,
-              ootherfinal: this.checkData.ootherfinal
-            }).then(res => {
-              if (res.statusCode == 200) {
-                this.Confirm = false;
-                alert('提交成功!');
-                this.AreaNPercent();
-              } else {
-                alert("提交失败，请重新提交")
-                this.Confirm = false;
-              }
-            });
-          } else {
-            alert('请按要求填写！');
-            this.Confirm = false;
-          }
-        });
-      },
       NewPage(ind) {
         console.log(ind);
         switch (ind) {
@@ -1272,7 +1207,7 @@
   }
 
   .FinalConclution {
-    /* padding: 20px 0; */
+    padding: 20px 0;
     /* background: red; */
   }
 

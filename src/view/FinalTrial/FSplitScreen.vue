@@ -78,7 +78,7 @@
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <borrowerInformation v-if=" this.tabContent2==4" :isFull.sync="isFull"></borrowerInformation>
             <PhoneCredit v-if=" this.tabContent2==5" :isFull.sync="isFull"></PhoneCredit>
-            <FcCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></FcCreditForm>
+            <FCreditForm v-if=" this.tabContent2==6"></FCreditForm>
             <!-- √ -->
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
             <!-- 反欺诈结论 空白 -->
@@ -121,8 +121,9 @@
 <script>
   // -----------------------------------protect---------------------------
   import myHead from "../header"
-  import FcCreditForm from './FinalComponent/FcCreditForm';
-  import AudioVisual from "../FirstTrail/detailComponent/AudioVisual";
+  import FcCreditForm from './FinalComponent/FcCreditForm';//左侧
+  import FCreditForm from './FinalComponent/FCreditForm';//右侧
+  import AudioVisual from "../FirstTrail/detailComponent/AudioVisual.vue";
   import AudioVisualLeft from '../FirstTrail/detailComponent/AudioVisualLeft';
   // ----------------------------------------------------------
   // 编辑
@@ -142,8 +143,6 @@
   import cborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料
   import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息
   import processTrajectory from "../FirstTrail/checkComponent/processTrajectory.vue"; //流程轨迹
-
-
 
   export default {
     data() {
@@ -265,7 +264,7 @@
     },
     mounted() {
       console.log("分屏");
-      this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
+      this.tastwaitingPass = JSON.parse(localStorage.getItem("FinaltaskInWaitting"));
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.applyId,
       }).then(res => {
@@ -277,11 +276,11 @@
       myHead,
       //更改后的引入
       FcCreditForm,
+      FCreditForm,
       AudioVisualLeft,
       AudioVisual,
 // -----------------------------------------
       // 编辑
-
       remark,
       InternalMatch,
       applicationInformation,

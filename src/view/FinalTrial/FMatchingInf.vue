@@ -127,21 +127,21 @@
   import RFinanceInformation from'../FirstTrail/ReadComponent/RFinanceInformation';//账务信息
   // ---------------------------------------------------------------------
   // 编辑
-  import RborrowerInformationSetail from "./ReadComponent/RborrowerInformationSetail"; //借款人资料
-  import RapplicationInformationDetail from "./ReadComponent/RapplicationInformationDetail"; //申请信息
-  import RAntiConclution from "./ReadComponent/RAntiConclution"; //反欺诈结论
-  import remark from "./detailComponent/remark";
-  import InternalMatch from "./InternalMatch";
-  import borrowerInformation from "./detailComponent/borrowerInformation";
-  import PhoneCredit from "./PhoneCredit"; //电话征信
-  import CreditForm from "./detailComponent/CreditForm";
-  import creditInvestigation from "./detailComponent/creditInvestigation"; //实地征信
+  import RborrowerInformationSetail from "../FirstTrail/ReadComponent/RborrowerInformationSetail.vue"; //借款人资料
+  import RapplicationInformationDetail from "../FirstTrail/ReadComponent/RapplicationInformationDetail.vue"; //申请信息
+  import RAntiConclution from "../FirstTrail/ReadComponent/RAntiConclution.vue"; //反欺诈结论
+  import remark from "../FirstTrail/detailComponent/remark.vue";
+  import InternalMatch from "../FirstTrail/InternalMatch.vue";
+  import borrowerInformation from "../FirstTrail/detailComponent/borrowerInformation.vue";
+  import PhoneCredit from "../FirstTrail/PhoneCredit.vue"; //电话征信
+  import CreditForm from "../FirstTrail/detailComponent/CreditForm.vue";
+  import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信
   // 信审审批写此处
-  import CreditApproval from "./CreditApproval";
+  import CreditApproval from "../FirstTrail/CreditApproval.vue";
   // 查询
-  import cremarkDetail from "./checkComponent/remarkDetail"; //备注信息
-  import cborrowerInformationDetail from "./checkComponent/borrowerInformationDetail"; //借款人资料
-  import processTrajectory from "./checkComponent/processTrajectory"; //流程轨迹
+  import cremarkDetail from "../FirstTrail/checkComponent/remarkDetail.vue"; //备注信息
+  import cborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料
+  import processTrajectory from "../FirstTrail/checkComponent/processTrajectory.vue"; //流程轨迹
   export default {
     data() {
       return {
@@ -266,7 +266,7 @@
     },
     mounted() {
       console.log("匹配查看");
-      this.tastwaitingPass = JSON.parse(localStorage.getItem("internalId"));
+      this.tastwaitingPass = JSON.parse(localStorage.getItem("FinalinternalId"));
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.matchApplyId,
       }).then(res => {
@@ -277,8 +277,8 @@
     components: {
       myHead,
       FcCreditForm,
-      AudioVisual,
-      AudioVisualLeft,
+      // AudioVisual,
+      // AudioVisualLeft,
          RAudioVisual,
       RAudioVisualLeft,
       RApprovalConclusion, //信审审批结论归结
@@ -299,7 +299,7 @@
       // 信审审批
       CreditApproval,
       // 查询
-      aut,
+      // aut,
       cremarkDetail,
 
       cborrowerInformationDetail,
