@@ -238,8 +238,8 @@ export default {
       console.log(row);
 
       // id: 客户id     orgCate
-
-      localStorage.setItem("internalId", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId }));
+      // isInterFlag  标志是否是  内部匹配跳转的  查看
+      localStorage.setItem("internalId", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: true }));
       this.$router.go('/SplitScreen');
     },
     itemDbclickFixTel(row, event) {
@@ -248,7 +248,7 @@ export default {
       console.log(row.id);
 
       // localStorage.setItem("internalId", JSON.stringify(row.id));
-      localStorage.setItem("internalId", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId }));
+      localStorage.setItem("internalId", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: true }));
       this.$router.go('/SplitScreen');
     },
     itemDbclickCompany(row, event) {
@@ -258,7 +258,7 @@ export default {
 
 
       // localStorage.setItem("internalId", JSON.stringify(row.id));
-      localStorage.setItem("internalId", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId }));
+      localStorage.setItem("internalId", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: true }));
       this.$router.go('/SplitScreen');
     },
     // cellHover(row, column, cell, event) {
@@ -452,6 +452,7 @@ export default {
 
 
 
+
 /* 分页 */
 
 .internalMatch-class .tool-bar {
@@ -460,6 +461,7 @@ export default {
   padding: 10px 0 0 10px;
   margin-bottom: 10px;
 }
+
 
 
 
@@ -522,6 +524,7 @@ export default {
 
 
 
+
 /* 确认按钮 */
 
 .internalMatch-class .mark-button {
@@ -550,11 +553,13 @@ export default {
 
 
 
+
 /* 行高 */
 
 .internalMatch-class thead tr {
   height: 40px;
 }
+
 
 
 
@@ -601,6 +606,7 @@ export default {
 
 
 
+
 /* 备注 width*/
 
 .internalMatch-class .mark-cell {
@@ -626,12 +632,14 @@ export default {
 
 
 
+
 /* tr */
 
 .internalMatch-class .el-table tr {
   height: 35px;
   background: #ffffff;
 }
+
 
 
 

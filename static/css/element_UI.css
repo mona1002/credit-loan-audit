@@ -1413,6 +1413,11 @@ height: 40px;
   background:rgba(31, 45, 61,.6);
   margin-top: 5px;
 }
+/* 解决 测试环境二级无背景 */
+.mheader .el-menu--horizontal .el-submenu>.el-menu{
+  background:rgba(31, 45, 61,.6);
+  margin-top: 5px;
+}
 
 .mheader .el-menu .el-menu div{
   height: 20px;
