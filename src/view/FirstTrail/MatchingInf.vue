@@ -35,16 +35,16 @@
             </p>
             <div class="Left_right_BigImg ">
               <RAudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></RAudioVisualLeft>
-              <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
+              <Rremark v-if=" this.tabContent1==1"></Rremark>
               <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
               <RapplicationInformationDetail v-if=" this.tabContent1==3">申请信息</RapplicationInformationDetail>
               <cborrowerInformationDetail v-if=" this.tabContent1==4">借款人资料</cborrowerInformationDetail>
               <PhoneCredit v-if=" this.tabContent1==5"> 电话征信</PhoneCredit>
               <RcCreditForm v-if=" this.tabContent1==6">信审表</RcCreditForm>
-              <creditInvestigation v-if=" this.tabContent1==7">实地征信</creditInvestigation>
+              <RcreditInvestigation v-if=" this.tabContent1==7">实地征信</RcreditInvestigation>
               <RAntiConclution v-if=" this.tabContent1==8">反欺诈结论</RAntiConclution>
               <RFinanceInformation v-if=" this.tabContent1==9">财务信息</RFinanceInformation>
-              <processTrajectory v-if=" this.tabContent1==10">流程轨迹</processTrajectory>
+              <RprocessTrajectory v-if=" this.tabContent1==10">流程轨迹</RprocessTrajectory>
               <RApprovalConclusion v-if=" this.tabContent1==11">审批结论轨迹</RApprovalConclusion>
             </div>
           </div>
@@ -73,16 +73,16 @@
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
             <RAudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></RAudioVisualLeft>
-            <cremarkDetail v-if=" this.tabContent2==1"></cremarkDetail>
+            <Rremark v-if=" this.tabContent2==1"></Rremark>
             <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
             <RapplicationInformationDetail v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
             <RborrowerInformationSetail v-if=" this.tabContent2==4">借款人资料</RborrowerInformationSetail>
             <PhoneCredit v-if=" this.tabContent2==5"> 电话征信</PhoneCredit>
             <RcCreditForm v-if=" this.tabContent2==6">信审表</RcCreditForm>
-            <creditInvestigation v-if=" this.tabContent2==7">实地征信</creditInvestigation>
+            <RcreditInvestigation v-if=" this.tabContent2==7">实地征信</RcreditInvestigation>
             <RAntiConclution v-if=" this.tabContent2==8">反欺诈结论</RAntiConclution>
             <RFinanceInformation v-if=" this.tabContent2==9">财务信息</RFinanceInformation>
-            <processTrajectory v-if=" this.tabContent2==10">流程轨迹</processTrajectory>
+            <RprocessTrajectory v-if=" this.tabContent2==10">流程轨迹</RprocessTrajectory>
             <RApprovalConclusion v-if=" this.tabContent2==11">审批结论轨迹</RApprovalConclusion>
           </div>
         </div>
@@ -130,18 +130,17 @@
   import RFinanceInformation from "./ReadComponent/RFinanceInformation"; //账务信息
   import RAntiConclution from "./ReadComponent/RAntiConclution"; //反欺诈结论
   import RApprovalConclusion from "./ReadComponent/RApprovalConclusion"; //信审审批结论轨迹
-  import remark from "./detailComponent/remark";
+  import Rremark from "./ReadComponent/Rremark";//备注信息
+  import RprocessTrajectory from "./ReadComponent/RprocessTrajectory"; //流程轨迹
+  import RcreditInvestigation from "./ReadComponent/RcreditInvestigation"; //实地征信
+  
   import InternalMatch from "./InternalMatch";
   import borrowerInformation from "./detailComponent/borrowerInformation";
   import PhoneCredit from "./PhoneCredit";//电话征信
-  import CreditForm from "./detailComponent/CreditForm";
-  import creditInvestigation from "./detailComponent/creditInvestigation"; //实地征信
   // 信审审批写此处
   import CreditApproval from "./CreditApproval";
   // 查询
-  import cremarkDetail from "./checkComponent/remarkDetail"; //备注信息
   import cborrowerInformationDetail from "./checkComponent/borrowerInformationDetail"; //借款人资料
-  import processTrajectory from "./checkComponent/processTrajectory"; //流程轨迹
   export default {
     data() {
       return {
@@ -282,20 +281,21 @@
       RFinanceInformation, //账务信息
       RAntiConclution, //反欺诈结论
       RApprovalConclusion, //信审审批结论归结
-      remark,
+      Rremark,// 备注信息
+      RcreditInvestigation,//实地征信
       InternalMatch,
       borrowerInformation,
       PhoneCredit,
 
-      creditInvestigation,
+      
       // 信审审批
       CreditApproval,
       // 查询
       aut,
-      cremarkDetail, 
+      // cremarkDetail, 
 
       cborrowerInformationDetail,
-      processTrajectory
+      RprocessTrajectory
     }
   }
 

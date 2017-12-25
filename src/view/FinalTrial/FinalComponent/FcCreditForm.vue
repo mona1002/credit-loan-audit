@@ -874,14 +874,11 @@
       CFsave() {
         this.$validator.validateAll().then((result) => {
           if (result) {
-            this.post("/creauditInfo/addOrUpdate",{
-                   applyId: this.checkData.applyId,
+            this.post("/creauditInfo/updateOtherfinalByPK", {
+              applyId: this.checkData.applyId,
               id: this.checkData.id,
-
+              ootherfinal: this.checkData.ootherfinal
             }).then(res => {
-              // 入参只写 this.checkData.ootherfinal 终审评价么？？？？？？？？？？-------------
-         
-
               if (res.statusCode == 200) {
                 this.Confirm = false;
                 alert('提交成功!');
@@ -1058,7 +1055,6 @@
 </script>
 
 <style scoped>
-
   .detail_inf {
     display: inline-block;
   }
