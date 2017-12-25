@@ -94,9 +94,9 @@
       </div>
     </div>
     <!-- 匹配结论编辑 -->
-    <internal-match-textarea v-show=""></internal-match-textarea>
+    <internal-match-textarea v-show="SplitS=='right'"></internal-match-textarea>
     <!-- 匹配结论查看 -->
-    <internal-match-read v-show=""></internal-match-read>
+    <internal-match-read v-show="SplitS!='right'"></internal-match-read>
   </div>
 </template>
 <script>
@@ -122,11 +122,13 @@ export default {
       mobileLoading: true,
       fixTelLoading: true,
       companyLoading: true,
-      auditId: '' // 匹配结论id
+      auditId: '', // 匹配结论id
+      isInterFlag: false
     };
   },
-  props: ['isFull'],
+  props: ['isFull', 'SplitS'],
   mounted() {
+    console.log(this.SplitS);
     //   // 组件歘估计完成后获取数据
     //   // 此时 data 已经被 observed 了
 
@@ -238,19 +240,19 @@ export default {
       console.log('mobile row dbclick');
       console.log(row.id);
       console.log(row);
-
+      this.isInterFlag = true;
       // id: 客户id     orgCate
       // isInterFlag  标志是否是  内部匹配跳转的  查看
-      localStorage.setItem("internalObj", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: true }));
+      localStorage.setItem("internalObj", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: this.isInterFlag }));
       this.$router.go('/SplitScreen');
     },
     itemDbclickFixTel(row, event) {
       // 行被双击 事件  固定电话
       console.log('fix tel row dbclick');
       console.log(row.id);
-
+      this.isInterFlag = true;
       // localStorage.setItem("internalObj", JSON.stringify(row.id));
-      localStorage.setItem("internalObj", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: true }));
+      localStorage.setItem("internalObj", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: this.isInterFlag }));
       this.$router.go('/SplitScreen');
     },
     itemDbclickCompany(row, event) {
@@ -258,9 +260,9 @@ export default {
       console.log('company row dbclick');
       console.log(row.id);
 
-
+      this.isInterFlag = true;
       // localStorage.setItem("internalObj", JSON.stringify(row.id));
-      localStorage.setItem("internalObj", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: true }));
+      localStorage.setItem("internalObj", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: this.isInterFlag }));
       this.$router.go('/SplitScreen');
     },
     // cellHover(row, column, cell, event) {
@@ -513,6 +515,8 @@ export default {
 
 
 
+
+
 /* 分页 */
 
 .internalMatch-class .tool-bar {
@@ -521,6 +525,8 @@ export default {
   padding: 10px 0 0 10px;
   margin-bottom: 10px;
 }
+
+
 
 
 
@@ -591,6 +597,8 @@ export default {
 
 
 
+
+
 /* 确认按钮 */
 
 .internalMatch-class .mark-button {
@@ -623,11 +631,15 @@ export default {
 
 
 
+
+
 /* 行高 */
 
 .internalMatch-class thead tr {
   height: 40px;
 }
+
+
 
 
 
@@ -682,6 +694,8 @@ export default {
 
 
 
+
+
 /* 备注 width*/
 
 .internalMatch-class .mark-cell {
@@ -711,12 +725,16 @@ export default {
 
 
 
+
+
 /* tr */
 
 .internalMatch-class .el-table tr {
   height: 35px;
   background: #ffffff;
 }
+
+
 
 
 
