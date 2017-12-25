@@ -302,7 +302,7 @@
                 </el-option>
               </el-select>
             </el-form-item>
-            <span class="require" style="left:470px;top:-25px;" v-show="ploanAmtError">* 批准金额1-12月</span>
+            <span class="require" style="left:470px;top:-25px;" v-show="ploanAmtError">* 批准金额不能大于{{minAmount}},小于{{maxAmounnt}}</span>
             <el-form-item label="批准金额[元] :" class="item-column2 width-120">
               <el-input v-model="ploanAmt" @blur="moneyBlur(ploanAmt,'ploanAmt')"></el-input>
             </el-form-item>
@@ -379,13 +379,13 @@
       <!-- 流程轨迹 -->
       <div v-show=" this.showFlag=='lcgj'" class="lcgj-div">
         <div class="form-title" style="position:relative;">
-          信审流程轨迹
+          流程轨迹
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
         </div>
         <div class="xllcgj-div">
-          <div class="form-title2" style="position:relative;">
+          <!-- <div class="form-title2" style="position:relative;">
             信审流程轨迹
-          </div>
+          </div> -->
           <el-table :data="lcgjData" height="250" border style="width: 100%" highlight-current-row v-loading="lcgjLoading" center>
             <el-table-column type="index" label="序号" min-width="50">
             </el-table-column>
@@ -478,7 +478,8 @@ export default {
       proName: '',
       proCode: '', // 批准产品 产品编号
       proId: '', // 产品id
-      opinionFlag: '',
+      // "00"-"人工通过","01"-"人工拒绝","02"-"人工回退","03"-"高级审批","04"-"决策通过","05"-"决策拒绝","06"-"人工审批","07"-"客户放弃"),"08"-"系统通过","09"-"系统拒绝","10"-"人工撤销"
+      opinionFlag: '00',// 任务标志类型  默认00 , 点击了 更高 审批改  03
       mainReason: '', // 主原因name
       secondaryReason: '',
       reasonDesc: '',
@@ -561,6 +562,8 @@ export default {
       ploanTermItem: '', // 审批 - 批准期限item
       synthesisRateM: '', // 审批 - 计算审批结论数据 - 综合费率
       loanRateYr: '', // 审批 - 计算审批结论数据 - 借款利率
+      maxAmounnt:0, // 产品最大金额
+      minAmount:0 , // 产品最小金额
     }
   },
   mounted() {
@@ -1030,12 +1033,13 @@ export default {
         ploanOperId: '', // 批准人员
         srcPloanAmt: this.srcPloanAmt, // 信审批准额度
         creditDebitRate: this.creditDebitRate, // 信用负债率
-        approvalFlag: '0', // 终审通过标志
+        approvalFlag: '0', // 终审通过标志  0 未
         ploanDate: '', // 批准日期
         auditDate: '', // 批准时间
-        auditFlag: '', // 终审结束标识 0 初审 1终审
+        auditFlag: '0', // 终审结束标识 0 初审 1终审 , 只有 终审 点审批的时候 才变为1 , 同 approvalFlag 字段
         proId: this.proId, //产品id
         taskId: this.taskId, // 任务id
+        opinionFlag:this.opinionFlag, // 任务类型  初审 00 
       }).then(res => {
         console.log(res);
         if (res.statusCode != '200') {
@@ -1198,6 +1202,10 @@ export default {
       this.proCode = val.proCode;
       console.log(this.proCode);
       this.proName = val.proName;
+      // 最大金额
+      this.maxAmounnt = val.maxAmounnt;
+      // 最小金额
+      this.minAmount = val.minAmount;
       console.log('批准产品更改');
       this.get('/credit/ploanTermByPro?proId=' + this.proId).then(res => {
         console.log(res.data);
@@ -1232,6 +1240,41 @@ export default {
         console.log('==========================================')
         ploanAmt2 = Number(this.ploanAmt)
       }
+
+      // 大于最大
+      if(ploanAmt2>this.maxAmounnt){
+        // this.ploanAmtError = true;
+        this.$message({
+          showClose: true,
+          message: '批准金额不能小于产品最低下限'+this.minAmount,
+          type: 'warning'
+        });
+        this.ploanAmt = '';
+        return;
+      }
+      // 小于最小
+      if(ploanAmt2<this.minAmount){
+        // this.ploanAmtError = true;
+        this.$message({
+          showClose: true,
+          message: '批准金额不能大于申请金额,请重新输入!',
+          type: 'warning'
+        });
+        this.ploanAmt = '';
+        return;
+      }
+      // 大于申请金额
+      if(ploanAmt2>this.loanAmt){
+        // this.ploanAmtError = true;
+        this.$message({
+          showClose: true,
+          message: '此金额不能大于申请金额,请重新输入!',
+          type: 'warning'
+        });
+        this.ploanAmt = '';
+        return;
+      }
+
 
       this.post('/creauditOpinion/calculateByAuditInfo', {
         applyId: this.applyId,
