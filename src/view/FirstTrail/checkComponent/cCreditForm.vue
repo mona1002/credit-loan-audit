@@ -407,7 +407,7 @@
               </p>
               <p>
                 <label class="InternetInf_right_label"> 配偶收入情况[月/元]： </label>
-                <span class="detail_inf">{{this.FormData.spouseIncome }} </span>
+                <span class="detail_inf" style="border:none;height:auto;">{{this.FormData.spouseIncome }} </span>
               </p>
             </li>
             <li v-show=" this.marriage.couple">
@@ -462,7 +462,7 @@
               </p>
               <p>
                 <label class="InternetInf_right_label"> 是否支付其生活费： </label>
-                <span class="detail_inf">{{this.FormData.childIspaycosttext }} </span>
+                <span class="detail_inf" style="border:none;height:auto;">{{this.FormData.childIspaycosttext }} </span>
               </p>
             </li>
             <li v-show="this.Children.PayAlimony">
@@ -546,7 +546,7 @@
               </p>
               <p>
                 <label class="InternetInf_right_label">可以承受的月还款[元]： </label>
-                <span class="detail_inf">{{this.FormData.fbalance }} </span>
+                <span class="detail_inf" style="border:none;height:auto;">{{this.FormData.fbalance }} </span>
               </p>
             </li>
           </ul>
@@ -605,11 +605,13 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">初审结论</span>
         </template>
-        <div class=" CreditForm_result" style="padding:15px 0 30px 0;">
-          <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
-          <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==''" :content="this.FormData.oother" placement="top-start">
-            <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
-          </el-tooltip>
+        <div class=" CreditForm_result">
+          <div style="width:66%;">
+            <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
+            <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==''" :content="this.FormData.oother" placement="top-start">
+              <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
+            </el-tooltip>
+          </div>
         </div>
       </el-collapse-item>
     </el-collapse>
@@ -784,7 +786,7 @@
             break;
           case 1:
             val == 0 ? this.InternetShow.commentS1 = false : this.InternetShow.commentS1 = true;
-            break; 
+            break;
           case 2:
             val == 0 ? this.InternetShow.commentS2 = false : this.InternetShow.commentS2 = true;
             break;
@@ -857,6 +859,7 @@
         // applyId: "00542",
       }).then(res => {
         this.FormData = res.data;
+        console.log(this.FormData)
         this.AreaNPercent();
         this.mountJ(0, res.data.wbeexEcuted);
         this.mountJ(1, res.data.wnetHirecom);
@@ -948,6 +951,7 @@
   /*------------------------------------------- */
   /* 各自 */
   /* ------------------------------上网查询 +核实身份--------------------------- */
+
   .CreditForm_InternetInf p,
   /*  上网查询 */
 
@@ -969,6 +973,7 @@
     vertical-align: middle;
   }
   /* --------------------------工作信息 + 私营企业--------------------- */
+
   .CheckId_right_label
   /* 第三列p */
 
@@ -1102,12 +1107,19 @@
     padding: 5px 10px;
     border-radius: 4px;
   }
+  /* 初审结果div */
+
+  .CreditForm_result {
+    /* width: calc( 66% - 197px); */
+    /* width:80%; */
+    padding: 15px 0 30px 0;
+  }
   /* ------------测试-------------- */
 
   .CreditForm_InternetInf p:nth-of-type(even) i {
     background: red;
     display: inline-block;
-    width: calc( 100% - 197px);
+    width: 66%
   }
 
 </style>

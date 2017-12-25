@@ -131,25 +131,25 @@
         // props:[smallPicDivClose],
         // picData: [],
         judgeFlag: '',
-        opendImg: [true, true, true, true], 
-        closedImg: [false, false, false, false], 
+        opendImg: [true, true, true, true],
+        closedImg: [false, false, false, false],
         localInf: [], //初始化的时候，根据传进来的applyId获取初始化数据
-        showListDiv: true, 
-        show: true, 
+        showListDiv: true,
+        show: true,
         smallPicInd: 0, // 未知
         SmallPicShow: false,
         CompareAlert: true,
-        ListParent: [], 
-        ListDetails: [], 
+        ListParent: [],
+        ListDetails: [],
         applyId: '', //入参
-        imgPath: [], 
+        imgPath: [],
         // ----------------------------------
         activeNames: ['1', '2'], //查询弹出框 默认展开选项
         dataa: false,
         personal: [], // 匹配查询-个人
         others: [], // 匹配查询-他人
         currentRow: null,
-        custName: '', 
+        custName: '',
         custmatchApplySubNo: '',
       }
     },
@@ -225,30 +225,30 @@
       getImg(ind) {
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
       },
-      hid() { 
+      hid() {
         this.showListDiv = false;
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
       },
-      showList() { 
+      showList() {
         this.showListDiv = true;
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 214px)";
       },
-      SmallpicClose() { 
+      SmallpicClose() {
         this.SmallPicShow = false;
       },
-      SmallpicAlert() { 
+      SmallpicAlert() {
         this.SmallPicShow = true;
       },
       pre() {
         this.smallPicInd--;
-        this.defaultBigPicCss(); 
+        this.defaultBigPicCss();
         if (this.smallPicInd < 0) {
           this.smallPicInd = this.$refs.small_pic_ref.length - 1;
         }
       },
       next() {
         this.smallPicInd++;
-        this.defaultBigPicCss(); 
+        this.defaultBigPicCss();
         if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
           this.smallPicInd = 0;
         }
@@ -262,7 +262,7 @@
           100 + "px";
       },
       clockWise() {
-        if (this.$refs.Big_pic_ref[0].style.transform == "") { 
+        if (this.$refs.Big_pic_ref[0].style.transform == "") {
           this.$refs.Big_pic_ref[0].style.transform += "rotate(90deg)";
         } else {
           this.$refs.Big_pic_ref[0].style.transform = this.$refs.Big_pic_ref[0].style.transform.slice(0, 7) + (
@@ -281,16 +281,16 @@
               .style.transform.slice(7, -4)) - 90) + this.$refs.Big_pic_ref[0].style.transform.slice(-4);
         }
       },
-      ChangeCss(ind) { 
+      ChangeCss(ind) {
         this.changeSmallPicCss(ind);
       },
       smallPic(ev, ind) {
-        this.smallPicInd = ind; 
+        this.smallPicInd = ind;
         this.defaultBigPicCss();
-         this.SmallPicShow = false;
+        this.SmallPicShow = false;
       },
       // 公共
-      defaultBigPicCss() { 
+      defaultBigPicCss() {
         console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).height)
         console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
         console.log(typeof (getComputedStyle(this.$refs.Big_pic_ref[0], false).width))
@@ -308,20 +308,20 @@
         //  this.$refs.big_pic[0].style.height = "100%"; // 点击切换图片时，让显示的大图高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
         // this.$refs.big_pic[0].style.transform = "rotate(0deg)"
       },
-      changeSmallPicCss(ind) { 
+      changeSmallPicCss(ind) {
         for (var i = 0; i < this.$refs.small_pic_ref.length; i++) {
-          this.$refs.small_pic_ref[i].style.opacity = 1; 
+          this.$refs.small_pic_ref[i].style.opacity = 1;
         }
         if (ind || ind == 0) {
           this.$refs.small_pic_ref[ind].style.opacity = 0.8;
         }
       },
-      Imgscroll() { 
+      Imgscroll() {
         this.$refs.showHidIcons.style.display = "block";
         this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {
           event = event || window.event;
           this.$refs.AudioVisual_Img_ref.scrollTop = 0;
-          if (event.wheelDelta < 0) { 
+          if (event.wheelDelta < 0) {
             this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
               100 + "px";
           } else {
@@ -329,8 +329,8 @@
               100 + "px";
           }
         };
-        this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => { 
-          this.$refs.AudioVisual_Img_ref.scrollTop = 0;       
+        this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => {
+          this.$refs.AudioVisual_Img_ref.scrollTop = 0;
           if (event.detail > 0) {
             this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
               100 + "px";
@@ -355,36 +355,22 @@
       // console.log(" 影音资料左")
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '01') {
-        this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //获取-初审-列表详情的id
-        // 父菜单
-        this.post("/productArchive/getProductArchiveParentList", {
-          applyId: this.localInf.applyId,
-          // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
-          //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
-        }).then(res => {
-          this.ListParent = res.data;
-        });
-      } else if (this.judgeFlag.flag == '02') { //----------------------获取 localstorage 路径待更改
-        this.localInf = JSON.parse(localStorage.getItem("FinaltaskInWaitting")) // 路径 ????????????//获取-终审-列表详情的id FinalWorkbenchPass-----待修改
-        //  与上面初审请求数据重复的---如果反欺诈 此处也相同，可以删除里面的，拿刀outside去
-        this.post("/productArchive/getProductArchiveParentList", {
-          applyId: this.localInf.applyId,
-        }).then(res => {
-          this.ListParent = res.data;
-        });
-      } 
-      // else if (this.judgeFlag.flag == '03') {
-      //   this.localInf = JSON.parse(localStorage.getItem("internalId")) //获取-初审-内部匹配id
-      //   this.post("/productArchive/getProductArchiveParentList", {
-      //     applyId: this.localInf.matchApplyId,
-      //     // applyId: this.localInf.applyId,
-      //     // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
-      //     //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
-      //   }).then(res => {
-      //     this.ListParent = res.data;
-      //   });
-      // }
-
+        this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
+      } else if (this.judgeFlag.flag == '02') { 
+        this.localInf = JSON.parse(localStorage.getItem("FinaltaskInWaitting")) //终审
+      }else if (this.judgeFlag.flag == '03') {
+        this.localInf = JSON.parse(localStorage.getItem("AntiWorkbenchPass")) //反欺诈专员
+      }else if (this.judgeFlag.flag == '04') {
+        this.localInf = JSON.parse(localStorage.getItem("AntiManagerWorkbenchPass")) //反欺诈主管
+      }
+      // 父菜单
+      this.post("/productArchive/getProductArchiveParentList", {
+        applyId: this.localInf.applyId,
+        // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
+        //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
+      }).then(res => {
+        this.ListParent = res.data;
+      });
     }
   }
 
@@ -489,14 +475,15 @@
     z-index: 2;
     top: 50%;
   }
+
   .AudioVisualLeft .AudioVisual_List,
   .AudioVisualLeft .AudioVisual_Img {
     float: left;
     height: 100%;
     overflow: auto;
     position: relative;
-    
   }
+
   .AudioVisualLeft .AudioVisual_Img {
     width: calc( 100% - 214px);
     /* background: yellowgreen; */

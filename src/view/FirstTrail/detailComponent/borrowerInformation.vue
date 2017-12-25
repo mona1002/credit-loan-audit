@@ -728,6 +728,9 @@
 		  			<ol>
 				    	<li class="liDiv">
 				    		<label>信用卡每月还款[元]:</label>
+				    		<!-- <div>
+				    			<input type="text" name="" v-numbers v-model="borDebt.monthRepayAmt">
+				    		</div> -->
 				    		<el-input v-on:blur="debtTotal(borDebt.monthRepayAmt,'monthRepayAmt')" v-model="borDebt.monthRepayAmt">	
 				    		</el-input>
 				    	</li>
@@ -2131,11 +2134,12 @@
 			},
 			moneyBlur(value, flag) {
 				console.log(value);
-				//console.log(this.incomeList[0].n)
+				console.log(value.n);
 
 			    // 无数据
 			    if(!value.n){
 			    	value.n = '';
+			    	console.log(value.n);
 			    };
 			    if(!value.n1){
 			    	value.n1 = '';
@@ -2162,9 +2166,11 @@
 			        switch (flag) {
 			                case 'n':
 			                    value.n = value.n.split('.')[0].replace(/,/, '');
+			                    console.log(value.n);
 			                    break;
 			                case 'n1':
 			                    value.n1 = value.n1.split('.')[0].replace(/,/, '');
+			                    console.log(value.n1);
 			                    break;
 			                case 'n2':
 			                    value.n2 = value.n2.split('.')[0].replace(/,/, '');

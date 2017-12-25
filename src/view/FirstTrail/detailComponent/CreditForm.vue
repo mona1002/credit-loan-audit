@@ -922,7 +922,7 @@
     </el-collapse>
     <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
     <!-- ==============================点击确认时提示弹框=================================== -->
-    <div class="layer" v-show="Confirm">
+    <div class="layer" v-show="this.Confirm">
       <!-- @touchmove.prevent  -->
       <div class="layerbox">
         <p>
@@ -1976,6 +1976,7 @@
         this.Confirm = false;
       },
       CFsave() {
+        console.log("保存修改")
         this.$validator.validateAll().then((result) => {
           if (result) {
             this.checkData.selfpremisesArea = this.acreage;
