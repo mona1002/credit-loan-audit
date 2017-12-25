@@ -266,7 +266,8 @@
     },
     mounted() {
       console.log("匹配查看");
-      this.tastwaitingPass = JSON.parse(localStorage.getItem("FinalinternalId"));
+      // this.tastwaitingPass = JSON.parse(localStorage.getItem("FinalinternalObj"));//用终审 初审判断时打开
+      this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.matchApplyId,
       }).then(res => {

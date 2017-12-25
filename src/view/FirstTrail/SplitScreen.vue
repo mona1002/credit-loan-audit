@@ -36,10 +36,10 @@
             <div class="Left_right_BigImg ">
               <AudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></AudioVisualLeft>
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
-              <InternalMatch v-if=" this.tabContent1==2" :isFull.sync="isFull"></InternalMatch>
+              <InternalMatch v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
               <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
               <cborrowerInformationDetail v-if=" this.tabContent1==4"></cborrowerInformationDetail>
-              <PhoneCredit v-if=" this.tabContent1==5" :isFull.sync="isFull"></PhoneCredit>
+              <PhoneCredit v-if=" this.tabContent1==5" :SplitS="SplitLeft" :isFull.sync="isFull"></PhoneCredit>
               <cCreditForm v-if=" this.tabContent1==6"></cCreditForm>
               <creditInvestigation v-if=" this.tabContent1==7"></creditInvestigation>
               <processTrajectory v-if=" this.tabContent1==8"></processTrajectory>
@@ -71,10 +71,10 @@
           <div class="tab2_Content">
             <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
             <remark v-if=" this.tabContent2==1"></remark>
-            <InternalMatch v-if=" this.tabContent2==2" :isFull.sync="isFull"></InternalMatch>
+            <InternalMatch v-if=" this.tabContent2==2" :SplitS="SplitRight" :isFull.sync="isFull"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <borrowerInformation v-if=" this.tabContent2==4" :isFull.sync="isFull"></borrowerInformation>
-            <PhoneCredit v-if=" this.tabContent2==5" :isFull.sync="isFull"></PhoneCredit>
+            <PhoneCredit v-if=" this.tabContent2==5" :SplitS="SplitRight" :isFull.sync="isFull"></PhoneCredit>
             <CreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></CreditForm>
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
             <!-- 反欺诈结论 空白 -->
@@ -145,6 +145,8 @@
   export default {
     data() {
       return {
+        SplitLeft:"left",
+        SplitRight:"right",
         watchData:'',
         originLeft: '',
         // 进件人信息
@@ -164,7 +166,7 @@
         items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "信审审批"],
         tab1Index: 0, 
         tab2Index: 3,
-        flag1: [true, true, true, false, true, true, true, true, true],
+        flag1: [true, true, true, true, true, true, true, true, true],
         flag2: [true, true, true, true, true, true, true, true, true, true],
         AlertSearch: "", 
         AlertSearchCondition: [{

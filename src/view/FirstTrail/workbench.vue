@@ -115,41 +115,30 @@
         // reconsiderApp_credit_seniro_manager 信审高级经理审批
         // reconsiderApp_credit_director 信审总监审批
         // 这4个是 复议
+        // localStorage.setItem("tableData", JSON.stringify(tableData));
+        // this.$router.push({path:'/taskInWaitting',query:'123'})
+        //  console.log(111, this.$route.query.picName)   接参数
+        this.currentRow = val;
+        this.workbenchPass.processTemplateId = val.processTemplateId;
+        this.workbenchPass.taskNodeName = val.taskNodeName;
         if (val.taskNodeName == "creditApp_firstTrial") {
-          this.currentRow = val;
-          this.workbenchPass.processTemplateId = val.processTemplateId;
-          this.workbenchPass.taskNodeName = val.taskNodeName;
           this.judge.flag = "01";
           localStorage.setItem("workbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识
-          this.$router.push({
-            path: '/taskInWaitting',
-          });
-          // localStorage.setItem("tableData", JSON.stringify(tableData));
-          // this.$router.push({path:'/taskInWaitting',query:'123'})
-          //  console.log(111, this.$route.query.picName)   接参数
+          this.$router.push({ path: '/taskInWaitting',});
         } else if (val.taskNodeName == "creditApp_finalTrial_one" || val.taskNodeName == "creditApp_finalTrial_two" ||
           val.taskNodeName == "creditApp_finalTrial_three" || val.taskNodeName == "creditApp_finalTrial_four" || val.taskNodeName ==
           "creditApp_finalTrial_five") {
-          this.currentRow = val;
-          this.workbenchPass.processTemplateId = val.processTemplateId;
-          this.workbenchPass.taskNodeName = val.taskNodeName;
           this.judge.flag = "02";
           localStorage.setItem("FinalWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
-          //  this.$router.push({path: '/FtaskInWaitting',});  跳转路径？？？？？？？？？？？？
+          this.$router.push({path: '/FtaskInWaitting',});
         } else if (val.taskNodeName == "creditApp_antiFraud_commissioner") { //反欺诈专员
-          this.currentRow = val;
-          this.workbenchPass.processTemplateId = val.processTemplateId;
-          this.workbenchPass.taskNodeName = val.taskNodeName;
           this.judge.flag = "03";
           localStorage.setItem("AntiWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
           //  this.$router.push({path: '/FtaskInWaitting',});  跳转路径？？？？？？？？？？？？
         } else if (val.taskNodeName == "creditApp_antiFraud_manager") { //反欺诈主管
-          this.currentRow = val;
-          this.workbenchPass.processTemplateId = val.processTemplateId;
-          this.workbenchPass.taskNodeName = val.taskNodeName;
           this.judge.flag = "04";
           localStorage.setItem("AntiManagerWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
@@ -157,32 +146,33 @@
         }
       },
     },
-      mounted() {
-        // 统一登录平台  调试   start 
-        this.get("http://testplatform.nuoyuan.com.cn:20717/remote/user/getUserInfo").then(response => {
-          this.userInf = {
-            userCode: response.data.userCode,
-            orgCode: response.data.orgCode,
-          }
-          localStorage.setItem("userInf", JSON.stringify(this.userInf));
-          this.post("/workFlowTaskQuery/getTaskProfile", {
-            taskStatus: "01",
-          }).then(res => {
-            this.tableData = res.data;
-          });
+    mounted() {
+      // 统一登录平台  调试   start 
+      this.get("http://testplatform.nuoyuan.com.cn:20717/remote/user/getUserInfo").then(response => {
+        this.userInf = {
+          userCode: response.data.userCode,
+          orgCode: response.data.orgCode,
+        }
+        localStorage.setItem("userInf", JSON.stringify(this.userInf));
+        this.post("/workFlowTaskQuery/getTaskProfile", {
+          taskStatus: "01",
+        }).then(res => {
+          this.tableData = res.data;
         });
-        // 统一登录 平台  调测 end
+      });
+      // 统一登录 平台  调测 end
 
-        //   // 取登陆信息 
-        //   localStorage.setItem("userInf", JSON.stringify(this.userInf));
-        //   this.post("/workFlowTaskQuery/getTaskProfile", {
-        //     taskStatus: "01",
-        //   }).then(res => {
-        //     this.tableData = res.data;
-        //   });
-        // }
-      },
-    }
+      //   // 取登陆信息 
+      //   localStorage.setItem("userInf", JSON.stringify(this.userInf));
+      //   this.post("/workFlowTaskQuery/getTaskProfile", {
+      //     taskStatus: "01",
+      //   }).then(res => {
+      //     this.tableData = res.data;
+      //   });
+      // }
+    },
+  }
+
 </script>
 <style scoped>
   /* public 部分 */

@@ -267,7 +267,7 @@
       if (this.judgeFlag.flag == '01') {
         this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
       } else if (this.judgeFlag.flag == '02') {
-        this.localInf = JSON.parse(localStorage.getItem("FinaltaskInWaitting")) //终审
+        this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
       }else if (this.judgeFlag.flag == '03') {
         this.localInf = JSON.parse(localStorage.getItem("AntiWorkbenchPass")) //反欺诈专员
       }else if (this.judgeFlag.flag == '04') {

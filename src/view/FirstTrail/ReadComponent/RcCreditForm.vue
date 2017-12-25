@@ -850,7 +850,7 @@
       },
     },
     mounted() {
-       this.getParams = JSON.parse(localStorage.getItem("internalId")) //获取内部匹配的id
+       this.getParams = JSON.parse(localStorage.getItem("internalObj")) //初审
       // 获取查询列表数据
       this.post("/creauditInfo/queryCreauditInfoObj", {
         applyId: this.getParams.matchApplyId,

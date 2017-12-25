@@ -264,13 +264,13 @@
     mounted() {
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '01') {
-        this.localInf = JSON.parse(localStorage.getItem("internalId")) //初审-匹配查看
+        this.localInf = JSON.parse(localStorage.getItem("internalObj")) //初审-匹配查看
       } else if (this.judgeFlag.flag == '02') {
-        this.localInf = JSON.parse(localStorage.getItem("FinalinternalId")) //终审-匹配查看
+        this.localInf = JSON.parse(localStorage.getItem("FinalinternalObj")) //终审-匹配查看
       }else if (this.judgeFlag.flag == '03') {
-        this.localInf = JSON.parse(localStorage.getItem("AntiinternalId")) //反欺诈专员-匹配查看
+        this.localInf = JSON.parse(localStorage.getItem("AntiinternalObj")) //反欺诈专员-匹配查看
       }else if (this.judgeFlag.flag == '04') {
-        this.localInf = JSON.parse(localStorage.getItem("AntiManagerinternalId")) //反欺诈主管-匹配查看
+        this.localInf = JSON.parse(localStorage.getItem("AntiManagerinternalObj")) //反欺诈主管-匹配查看
       }
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.matchApplyId,

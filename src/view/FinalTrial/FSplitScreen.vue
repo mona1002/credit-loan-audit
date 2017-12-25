@@ -37,10 +37,10 @@
               <AudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></AudioVisualLeft>
               <!-- √ -->
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
-              <InternalMatch v-if=" this.tabContent1==2" :isFull.sync="isFull"></InternalMatch>
+              <InternalMatch v-if=" this.tabContent1==2"  :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
               <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
               <cborrowerInformationDetail v-if=" this.tabContent1==4"></cborrowerInformationDetail>
-              <PhoneCredit v-if=" this.tabContent1==5" :isFull.sync="isFull"></PhoneCredit>
+              <PhoneCredit v-if=" this.tabContent1==5"  :SplitS="SplitLeft" :isFull.sync="isFull"></PhoneCredit>
               <FcCreditForm v-if=" this.tabContent1==6"></FcCreditForm>
               <!-- √ -->
               <creditInvestigation v-if=" this.tabContent1==7"></creditInvestigation>
@@ -74,10 +74,10 @@
             <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
             <!-- √ -->
             <remark v-if=" this.tabContent2==1"></remark>
-            <InternalMatch v-if=" this.tabContent2==2" :isFull.sync="isFull"></InternalMatch>
+            <InternalMatch v-if=" this.tabContent2==2"  :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <borrowerInformation v-if=" this.tabContent2==4" :isFull.sync="isFull"></borrowerInformation>
-            <PhoneCredit v-if=" this.tabContent2==5" :isFull.sync="isFull"></PhoneCredit>
+            <PhoneCredit v-if=" this.tabContent2==5"  :SplitS="SplitLeft" :isFull.sync="isFull"></PhoneCredit>
             <FCreditForm v-if=" this.tabContent2==6"></FCreditForm>
             <!-- √ -->
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
@@ -121,8 +121,8 @@
 <script>
   // -----------------------------------protect---------------------------
   import myHead from "../header"
-  import FcCreditForm from './FinalComponent/FcCreditForm';//左侧
-  import FCreditForm from './FinalComponent/FCreditForm';//右侧
+  import FcCreditForm from './FinalComponent/FcCreditForm'; //左侧
+  import FCreditForm from './FinalComponent/FCreditForm'; //右侧
   import AudioVisual from "../FirstTrail/detailComponent/AudioVisual.vue";
   import AudioVisualLeft from '../FirstTrail/detailComponent/AudioVisualLeft';
   // ----------------------------------------------------------
@@ -147,6 +147,8 @@
   export default {
     data() {
       return {
+        SplitLeft: "left",
+        SplitRight: "right",
         watchData: '',
         originLeft: '',
         // 进件人信息
@@ -264,7 +266,7 @@
     },
     mounted() {
       console.log("分屏");
-      this.tastwaitingPass = JSON.parse(localStorage.getItem("FinaltaskInWaitting"));
+      this.tastwaitingPass = JSON.parse(localStorage.getItem("FtaskInWaitting"));
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.applyId,
       }).then(res => {
@@ -279,7 +281,7 @@
       FCreditForm,
       AudioVisualLeft,
       AudioVisual,
-// -----------------------------------------
+      // -----------------------------------------
       // 编辑
       remark,
       InternalMatch,
