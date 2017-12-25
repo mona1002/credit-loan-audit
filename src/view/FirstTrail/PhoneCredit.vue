@@ -2308,6 +2308,7 @@ export default {
   height: 38px;
   line-height: 38px;
   padding-left: 20px;
+  border-bottom:  1px solid #d8dce5;
 }
 
 .phone-credit .phone-tree .item-title:hover {
