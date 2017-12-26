@@ -49,7 +49,7 @@
               </el-tooltip>
             </div>
           </el-collapse-item>
-          <el-collapse-item :title="treeData[4].label" name="4">
+          <el-collapse-item :title="treeData[4].label" name="5">
             <div v-for="item in treeData[4].children">
               <el-tooltip effect="dark" :content="item.children[0].label" placement="right-end">
                 <div class="item-title" @click="handleNodeClick(item)">
