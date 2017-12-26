@@ -24,7 +24,7 @@ axios.interceptors.response.use(
 //         path: '/',
 //         query: {redirect: router.currentRoute.fullPath} 
 //       })
-window.location.href="http://codeplatform.nuoyuan.com.cn/#/";
+window.location.href="http://testplatform.nuoyuan.com.cn/#/";
     };
     return response;   
   },

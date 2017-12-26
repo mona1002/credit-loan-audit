@@ -982,7 +982,7 @@
   /* 上网信息-两行select下拉 居中 */
 
   .btn {
-    margin: 20px 0 0 80%;
+    margin: 20px 0 0 844px;
   }
 
   .icon_hat {
