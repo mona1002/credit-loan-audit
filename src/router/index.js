@@ -60,7 +60,10 @@ import FMatchingInf from '@/view/FinalTrial/FMatchingInf'
 
 // ------------反欺诈------------------
 import AntiAudit from '@/view/AntiFraud/AntiAudit.vue'
-
+// 反欺诈 列表
+import AntiFraud from '@/view/AntiFraud/AntiFraud.vue'
+// 反欺诈 申请
+import AntiApplyInf from '@/view/AntiFraud/AntiApplyInf.vue'
 
 
 // 系统管理
@@ -79,7 +82,7 @@ Vue.use(Router)
 
 const routes = [{
   path: '/',
-  component: login
+  component: workbench
 },
 {
   // 工作台  误改, 误删
@@ -88,7 +91,7 @@ const routes = [{
     orgCode:     机构编码
    */
   path: '/workbench',
-  component: workbench,
+  component: login,
 },
 {
   path: '/test',
@@ -208,6 +211,16 @@ const routes = [{
 {
   path:'/AntiAudit',
   component:AntiAudit
+},
+// 反欺诈列表
+{
+  path:'/AntiFraud',
+  component:AntiFraud
+},
+// 反欺诈 申请信息
+{
+  path:'/AntiApplyInf',
+  component:AntiApplyInf
 },
 // {
 //   path:'/FMatchingInf',

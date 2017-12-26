@@ -168,7 +168,8 @@ export default {
       mobilepayment: '',
       mobilepaymenttxt: '',
       conclusion: '',
-      phoneId: ''
+      phoneId: '',
+      resMsg:''
     }
   },
   props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull'],
@@ -210,66 +211,90 @@ export default {
         });
         return;
       }
+      this.open();
+    },
+    // open 打开 是否确认提交弹窗
+    open() {
+      const h = this.$createElement;
+      this.$msgbox({
+        title: '提示',
+        message: h('p', null, [
+          h('span', null, '确定操作? '),
+        ]),
+        showCancelButton: true,
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        beforeClose: (action, instance, done) => {
+          if (action === 'confirm') {
+            instance.confirmButtonLoading = true;
+            instance.confirmButtonText = '执行中...';
+            console.log(this.taskId)
+            // 点击 确认 提交 方法
+            this.post('/creTelResearchHis/addTeljobref', {
+              cretelinvest: {
+                custName: this.custName,
+                phoneType: this.phoneType,
+                phoneNum: this.phoneNum,
+                source: this.source,
+                answer: this.answer,
+                checkStage: this.checkStage,
+                sourceDesc: this.sourceDesc, // 其他来源说明
+                applyId: this.applyId,
+                id: this.phoneId
+              },
+              creteljobref: {
+                applyId: this.applyId,
+                id: this.phoneId,
+                answer: this.answerIdentity, // 接电话人身份
+                answertxt: this.answertxt,
+                checkJob: this.checkJob,
+                checkJobtxt: this.checkJobtxt,
+                mobilepayment: this.mobilepayment,
+                mobilepaymenttxt: this.mobilepaymenttxt,
+                conclusion: this.conclusion
+              }
+            }).then(res => {
+              if (res.statusCode == '200') {
 
-      this.post('/creTelResearchHis/addTeljobref', {
-          cretelinvest: {
-            custName: this.custName,
-            phoneType: this.phoneType,
-            phoneNum: this.phoneNum,
-            source: this.source,
-            answer: this.answer,
-            checkStage: this.checkStage,
-            sourceDesc: this.sourceDesc, // 其他来源说明
-            applyId: this.applyId,
-            id: this.phoneId
-          },
-          creteljobref: {
-            applyId: this.applyId,
-            id: this.phoneId,
-            answer: this.answerIdentity, // 接电话人身份
-            answertxt: this.answertxt,
-            checkJob: this.checkJob,
-            checkJobtxt: this.checkJobtxt,
-            mobilepayment: this.mobilepayment,
-            mobilepaymenttxt: this.mobilepaymenttxt,
-            conclusion: this.conclusion
-          }
-        })
-        .then(res => {
-          console.log(res);
-          if (res.statusCode == '200') {
-            this.phoneId = res.data.id;
+                this.phoneId = res.data.id;
 
-            // 清数据
-            this.source = '';
-            this.answer = '';
-            this.checkStage = '';
-            this.sourceDesc = '';
-            this.answerIdentity = '';
-            this.answertxt = '';
-            this.checkJob = '';
-            this.checkJobtxt = '';
-            this.mobilepayment = '';
-            this.mobilepaymenttxt = '';
-            this.conclusion = '';
+                // 清数据
+                // this.source = '';
+                // this.answer = '';
+                // this.checkStage = '';
+                // this.sourceDesc = '';
+                // this.answerIdentity = '';
+                // this.answertxt = '';
+                // this.checkJob = '';
+                // this.checkJobtxt = '';
+                // this.mobilepayment = '';
+                // this.mobilepaymenttxt = '';
+                // this.conclusion = '';
 
+                // 提交数据成功,广播事件 重新刷新列表
+                this.$emit('updateList');
+                this.$emit('updateTree');
 
-            // 提交数据成功,广播事件 重新刷新列表
-            this.$emit('updateList');
-            this.$emit('updateTree');
-
-            this.$message({
-              message: res.msg,
-              type: 'success'
+                this.resMsg = res.msg;
+                done();
+              } else {
+                this.resMsg = res.msg;
+ 
+                instance.confirmButtonText = '';
+              }
+              instance.confirmButtonLoading = false;
             });
           } else {
-            this.$message({
-              message: res.msg,
-              type: 'warning'
-            });
+            this.$message({ message: this.resMsg, type: 'warning' });
+
+            done();
           }
-        })
-    }
+        }
+      }).then(action => {
+        this.$message({ type: 'success', message: this.resMsg });
+
+      });
+    },
   },
   watch: {
     source: function() {

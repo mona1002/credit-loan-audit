@@ -292,7 +292,8 @@ export default {
       jobref1: '',
       jobref2: '',
       conclusion: '',
-      phoneId: ''
+      phoneId: '',
+      resMsg:''
     }
   },
   props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull'],
@@ -333,91 +334,113 @@ export default {
         });
         return;
       }
-      this.post('/creTelResearchHis/addComTelLog', {
-          cretelinvest: {
-            custName: this.custName,
-            phoneType: this.phoneType,
-            phoneNum: this.phoneNum,
-            source: this.source,
-            answer: this.answer,
-            checkStage: this.checkStage,
-            sourceDesc: this.sourceDesc, // 其他来源说明
-            applyId: this.applyId,
-            id: this.phoneId
-          },
-          cretelcompany: {
-            applyId: this.applyId,
-            id: this.phoneId,
-            thirdResult: this.thirdResult,
-            phone: this.phone,
-            phonetxt: this.phonetxt,
-            answer: this.answerIdentity,
-            answertxt: this.answertxt,
-            company: this.company,
-            companytxt: this.companytxt,
-            checkTime: this.checkTime,
-            checkTimetxt: this.checkTimetxt,
-            checkIncome: this.checkIncome,
-            checkIncometxt: this.checkIncometxt,
-            payrollSituation: this.payrollSituation,
-            payrollSituationtxt: this.payrollSituationtxt,
-            pensionInsurance: this.pensionInsurance,
-            employmentmodetxt: this.employmentmodetxt,
-            employmentmode: this.employmentmode,
-            housingFund: this.housingFund,
-            jobref1: this.jobref1,
-            jobref2: this.jobref2,
-            conclusion: this.conclusion
-          }
-        })
-        .then(res => {
-          console.log(res);
-          if (res.statusCode == '200') {
+      this.open();
+    },
+    // open 打开 是否确认提交弹窗
+    open() {
+      const h = this.$createElement;
+      this.$msgbox({
+        title: '提示',
+        message: h('p', null, [
+          h('span', null, '确定操作? '),
+        ]),
+        showCancelButton: true,
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        beforeClose: (action, instance, done) => {
+          if (action === 'confirm') {
+            instance.confirmButtonLoading = true;
+            instance.confirmButtonText = '执行中...';
+            console.log(this.taskId)
+            // 点击 确认 提交 方法
+            this.post('/creTelResearchHis/addComTelLog', {
+              cretelinvest: {
+                custName: this.custName,
+                phoneType: this.phoneType,
+                phoneNum: this.phoneNum,
+                source: this.source,
+                answer: this.answer,
+                checkStage: this.checkStage,
+                sourceDesc: this.sourceDesc, // 其他来源说明
+                applyId: this.applyId,
+                id: this.phoneId
+              },
+              cretelcompany: {
+                applyId: this.applyId,
+                id: this.phoneId,
+                thirdResult: this.thirdResult,
+                phone: this.phone,
+                phonetxt: this.phonetxt,
+                answer: this.answerIdentity,
+                answertxt: this.answertxt,
+                company: this.company,
+                companytxt: this.companytxt,
+                checkTime: this.checkTime,
+                checkTimetxt: this.checkTimetxt,
+                checkIncome: this.checkIncome,
+                checkIncometxt: this.checkIncometxt,
+                payrollSituation: this.payrollSituation,
+                payrollSituationtxt: this.payrollSituationtxt,
+                pensionInsurance: this.pensionInsurance,
+                employmentmodetxt: this.employmentmodetxt,
+                employmentmode: this.employmentmode,
+                housingFund: this.housingFund,
+                jobref1: this.jobref1,
+                jobref2: this.jobref2,
+                conclusion: this.conclusion
+              }
+            }).then(res => {
+              if (res.statusCode == '200') {
+                this.phoneId = res.data.id;
 
-            this.phoneId = res.data.id;
+                // 清数据
+                // this.source = '';
+                // this.answer = '';
+                // this.checkStage = '';
+                // this.sourceDesc = '';
+                // this.thirdResult = '';
+                // this.phone = '';
+                // this.phonetxt = '';
+                // this.answerIdentity = '';
+                // this.answertxt = '';
+                // this.company = '';
+                // this.companytxt = '';
+                // this.checkTime = '';
+                // this.checkTimetxt = '';
+                // this.checkIncome = '';
+                // this.checkIncometxt = '';
+                // this.payrollSituation = '';
+                // this.payrollSituationtxt = '';
+                // this.pensionInsurance = '';
+                // this.employmentmodetxt = '';
+                // this.employmentmode = '';
+                // this.housingFund = '';
+                // this.jobref1 = '';
+                // this.jobref2 = '';
+                // this.conclusion = '';
 
+                // 提交数据成功,广播事件 重新刷新列表
+                this.$emit('updateList');
+                this.$emit('updateTree');
+                this.resMsg = res.msg;
+                done();
+              } else {
+                this.resMsg = res.msg;
 
-            this.source = '';
-            this.answer = '';
-            this.checkStage = '';
-            this.sourceDesc = '';
-            this.thirdResult = '';
-            this.phone = '';
-            this.phonetxt = '';
-            this.answerIdentity = '';
-            this.answertxt = '';
-            this.company = '';
-            this.companytxt = '';
-            this.checkTime = '';
-            this.checkTimetxt = '';
-            this.checkIncome = '';
-            this.checkIncometxt = '';
-            this.payrollSituation = '';
-            this.payrollSituationtxt = '';
-            this.pensionInsurance = '';
-            this.employmentmodetxt = '';
-            this.employmentmode = '';
-            this.housingFund = '';
-            this.jobref1 = '';
-            this.jobref2 = '';
-            this.conclusion = '';
-
-
-            // 提交数据成功,广播事件 重新刷新列表
-            this.$emit('updateList');
-            this.$emit('updateTree');
-
-            this.$message({
-              message: res.msg,
-              type: 'success'
+                instance.confirmButtonText = '';
+              }
+              instance.confirmButtonLoading = false;
             });
           } else {
-            this.$message({
-              message: res.msg,
-              type: 'warning'
-            });
+            this.$message({ message: this.resMsg, type: 'warning' });
+
+            done();
           }
-        })
+        }
+      }).then(action => {
+        this.$message({ type: 'success', message: this.resMsg });
+
+      });
     },
     showMessage(value) {
       this.$message({

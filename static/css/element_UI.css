@@ -821,7 +821,10 @@ height: 40px;
 .CreditForm .el-collapse-item__wrap {
   padding: 0px 0 20px 21px;
 }
-
+.CreditForm .el-collapse-item:nth-of-type(4) .el-collapse-item__wrap{
+  /* background: red; */
+  padding:0;
+}
 /* 信审表-上网查询输下拉框长度设置 */
 
 /* --------------------下行 未生效 */
@@ -946,7 +949,17 @@ height: 40px;
 .CreditForm .FinalConclution .el-textarea__inner{
   width:100%;
 }
-/* 影音列表----缩略图按钮 */
+/* 信审表-弹窗 */
+.CreditForm .el-dialog{
+  border-radius: 4px;
+}
+.CreditForm .el-dialog__body{
+  padding: 10px 15px;
+}
+.CreditForm .el-dialog__footer{
+  padding: 5px 15px 10px;
+  }
+    /* 影音列表----缩略图按钮 */
 /* 影音资料-左侧列表 */
 
 .AudioVisual .el-collapse-item__header,

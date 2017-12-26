@@ -870,24 +870,34 @@
         this.$validator.validateAll().then((result) => {
           if (result) {
             this.post("/creauditInfo/updateOtherfinalByPK", {
-                applyId: this.checkData.applyId,
-                id: this.checkData.id,
-            //   applyId: "02110Z1002",
-            //   id: "afd",
+              applyId: this.checkData.applyId,
+              id: this.checkData.id,
+              //   applyId: "02110Z1002",
+              //   id: "afd",
               ootherfinal: this.checkData.ootherfinal
             }).then(res => {
               if (res.statusCode == 200) {
                 this.Confirm = false;
-                alert('提交成功!');
                 this.AreaNPercent();
+                this.$message({
+                  message: '恭喜你，提交成功!',
+                  type: 'success'
+                });
               } else {
                 alert("提交失败，请重新提交")
                 this.Confirm = false;
+                this.$message({
+                  message: '提交失败!',
+                  type: 'success'
+                });
               }
             });
           } else {
-            alert('请按要求填写！');
             this.Confirm = false;
+            this.$message({
+              message: '请按要求填写!',
+              type: 'success'
+            });
           }
         });
       },
@@ -1282,9 +1292,6 @@
     font-size: 12px;
     padding-left: 202px;
   }
-  /* .btn {
-    margin: 20px 0 0 80%;
-  } */
   /* ------------测试-------------- */
 
   .CreditForm_InternetInf p:nth-of-type(even) i {
