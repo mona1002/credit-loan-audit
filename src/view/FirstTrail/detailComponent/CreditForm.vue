@@ -829,6 +829,7 @@
               <p>
                 <i class="hint">
                   <span v-show="errors.has('Paymonth')" class="family_textarea">{{ errors.first('Paymonth') }}</span>
+                  <span v-show="this.Wordhint.family.acount" class="family_textarea">请输入正确金额</span>
                 </i>
                 <label class="Family_right_label">
                   <span class="red"> * </span> 可以承受的月还款[元]： </label>
@@ -940,7 +941,7 @@
         </div>
       </div>
     </div> -->
-    <el-dialog title="提示" :visible.sync="Confirm" top="30%" width="420px">
+    <el-dialog title="提示" :visible.sync="Confirm" top="43vh" width="420px">
       <span>确定操作？</span>
       <span slot="footer" class="dialog-footer">
         <button class="calbtn" @click="canc">取消</button>
@@ -1018,6 +1019,7 @@
             ParentHealth: false,
             Payalimony: false,
             siblings: false,
+            acount:false,
           },
           address: {
             permanentAddress: false,
@@ -2061,7 +2063,7 @@
           }
         });
 
-        
+
       },
       AreaNPercent() {
         if (this.checkData.selfpremisesArea) {
@@ -2256,62 +2258,82 @@
         }
       },
       formatMoney(val, e, name) {
-        console.log(val)
-        this.formatNumber(val, 2, 0)
-        console.log(val)
-        this.formatSC(name, val);
-        console.log(val)
-
-        // val = parseFloat(val);
-        // if (isNaN(val)) {
-        //   val = e.target.value = "";
-        //   this.formatSC(name, val);
-        // } else if (val <= 0) {
-        //   val = e.target.value = "0.00";
-        //   this.formatSC(name, val);
-        // } else if (val > 0) {
-        //   if (val.toString().indexOf('.') == -1) {
-        //     val = val + "." + "0" + '0';
-        //     this.formatSC(name, val);
-        //   } else if (val.toString().indexOf('.') != -1) {
-        //     if (val.toString().split(".")[1].length < 2) {
-        //       e.target.value = val = val + "0";
-        //       this.formatSC(name, val);
-        //     } else {
-        //       e.target.value = val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
-        //       this.formatSC(name, val);
-        //     }
-        //   }
-        // }
+        // console.log(val)
+        // this.formatNumber(val, 2, 0)
+        // console.log(val)
+        // this.formatSC(name, val);
+        // console.log(val)
+        val = parseFloat(val);
+        if (isNaN(val)) {
+          val = e.target.value = "";
+          this.formatSC(name, val);
+        } else if (val <= 0) {
+          val = e.target.value = "0.00";
+          this.formatSC(name, val);
+        } else if (val > 0) {
+          if (val.toString().indexOf('.') == -1) {
+            val = val + "." + "0" + '0';
+            this.formatSC(name, val);
+          } else if (val.toString().indexOf('.') != -1) {
+            if (val.toString().split(".")[1].length < 2) {
+              e.target.value = val = val + "0";
+              this.formatSC(name, val);
+            } else {
+              e.target.value = val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
+              this.formatSC(name, val);
+            }
+          }
+        }
       },
-      formatNumber(num, cent, isThousand) {
+      formatNumber(num, cent, isThousand, el) {
+        console.log("算法" + num)
         num = num.toString().replace(/\$|\,/g, '');
         // 检查传入数值为数值类型
-        if (isNaN(num))
+        if (isNaN(num)) {
           num = "0";
+          // this.formatSC(el, num);
+          // this.Wordhint.family.acount=true;
+        }
         // 获取符号(正/负数)
         let sign = (num == (num = Math.abs(num)));
         num = Math.floor(num * Math.pow(10, cent) + 0.50000000001); // 把指定的小数位先转换成整数.多余的小数位四舍五入
         let cents = num % Math.pow(10, cent); // 求出小数位数值
+        console.log(cents)
         num = Math.floor(num / Math.pow(10, cent)).toString(); // 求出整数位数值
         cents = cents.toString(); // 把小数位转换成字符串,以便求小数位长度
         // 补足小数位到指定的位数
         while (cents.length < cent)
           cents = "0" + cents;
+          console.log(cents)
+          console.log(num.length)
         if (isThousand) {
           // 对整数部分进行千分位格式化.
-          for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
+          for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++) {
             num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
+          }
+          console.log(num)
         }
-        if (cent > 0)
+        if (cent > 0) {
           return (((sign) ? '' : '-') + num + '.' + cents);
-        else
+          //  num = num + '.' + cents;
+           console.log(num);
+            // this.formatSC(el, num);
+        } else {
           return (((sign) ? '' : '-') + num);
+          // num
+          console.log(num)
+            // this.formatSC(el, num);
+        
+        }
       },
       formatSC(el, val) {
+      // formatSC(val, el) {
+        
+        console.log("ad")
         switch (el) {
           case "月还款":
             this.checkData.fbalance = val;
+          //  this.checkData.fbalance= this.formatNumber(this.checkData.fbalance,2,3);
             break;
           case "借款金额":
             this.checkData.iloanAmt = val;
@@ -2476,22 +2498,25 @@
     color: #b4bccc;
     font-size: 14px;
   }
-  .subtn{
-        background: #66b1ff;
+
+  .subtn {
+    background: #66b1ff;
     border-color: #66b1ff;
     color: #fff;
     margin-left: 10px;
     padding: 7px 15px;
-        font-size: 12px;
+    font-size: 12px;
     border-radius: 3px;
   }
-  .calbtn{
-       background:white;
-       border: 1px solid #d8dce5;
-      color: #5a5e66;;
+
+  .calbtn {
+    background: white;
+    border: 1px solid #d8dce5;
+    color: #5a5e66;
+    ;
     margin-left: 10px;
     padding: 7px 15px;
-        font-size: 12px;
+    font-size: 12px;
     border-radius: 3px;
   }
   /* 最下面的 弹窗样式 */
