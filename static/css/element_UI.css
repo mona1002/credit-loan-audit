@@ -818,7 +818,10 @@ height: 40px;
 .CreditForm .el-collapse-item__wrap {
   padding: 0px 0 20px 21px;
 }
-
+.CreditForm .el-collapse-item:nth-of-type(4) .el-collapse-item__wrap{
+  /* background: red; */
+  padding:0;
+}
 /* 信审表-上网查询输下拉框长度设置 */
 
 /* --------------------下行 未生效 */
