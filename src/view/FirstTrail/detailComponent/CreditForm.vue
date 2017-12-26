@@ -464,7 +464,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">私营企业信息</span>
         </template>
-        <div class="CreditForm_CompanyInfs" v-show="this.workInf.private">
+        <div class="CreditForm_CompanyInfs" v-show="this.workInf.private"  style="paddingLeft:21px;height:338px;">
           <ul class="CreditForm_CompanyInfs_ul_left">
             <li ref="compTypeDiv">
               <i class="hint">
@@ -938,8 +938,8 @@
         </div>
       </div>
     </div> -->
-    <el-dialog title="询问" :visible.sync="this.Confirm" width="400px" top="350px" append-to-body center>
-      <span>您确定已填写好各项内容并提交？</span>
+    <el-dialog title="您确定已填写好各项内容并提交？" :visible.sync="this.Confirm" width="400px" top="350px" append-to-body center>
+      <!-- <span></span> -->
       <span slot="footer" class="dialog-footer">
         <el-button @click="canc">取 消</el-button>
         <el-button type="primary" @click="CFsave">确 定</el-button>
@@ -2390,6 +2390,11 @@
 
   .mWidth {
     width: 100%;
+  }
+  /* content下边距+左边距 */
+  .padd{
+    /* margin: 0 0 20px 21px; */
+    padding: 0 0 20px 21px;
   }
   /* 上网信息-两行select下拉 居中 */
 
