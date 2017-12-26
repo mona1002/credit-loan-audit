@@ -356,7 +356,8 @@ export default {
           },
           applyId: '', // 申请单id
           audit_desc: '', //匹配结论
-          creator_code: '' // 用户操作人编码 userCode
+          creator_code: '', // 用户操作人编码 userCode
+          resMsg: ''
         };
       },
       mounted() {
@@ -394,30 +395,55 @@ export default {
           console.log('this.applyId:', this.applyId);
           console.log('this.creator_code:', this.creator_code);
           console.log('this.audit_desc:', this.audit_desc);
-          // 提交 匹配结论
-          this.post('internalMatch/addInternalMatchOption', {
-            // 申请单id
-            applyId: this.applyId,
-            // 操作人用户编码  userCode
-            creator_code: this.creator_code,
-            // 匹配结论
-            audit_desc: this.audit_desc,
-            id: this.auditId
-          }).then(res => {
-            console.log(res);
+          this.open();
+        },
+        // open 打开 是否确认提交弹窗
+        open() {
+          const h = this.$createElement;
+          this.$msgbox({
+            title: '提示',
+            message: h('p', null, [
+              h('span', null, '确定操作? '),
+            ]),
+            showCancelButton: true,
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            beforeClose: (action, instance, done) => {
+              if (action === 'confirm') {
+                instance.confirmButtonLoading = true;
+                instance.confirmButtonText = '执行中...';
+                console.log(this.taskId)
+                // 提交 匹配结论
+                this.post('internalMatch/addInternalMatchOption', {
+                  // 申请单id
+                  applyId: this.applyId,
+                  // 操作人用户编码  userCode
+                  creator_code: this.creator_code,
+                  // 匹配结论
+                  audit_desc: this.audit_desc,
+                  id: this.auditId
+                }).then(res => {
+                  console.log(res);
+                  console.log(res.statusCode);
+                  if (res.statusCode == '200') {
 
-            if (res.statusCode == '200') {
-              this.$message({
-                message: '恭喜你，保存成功!',
-                type: 'success'
-              });
-            } else {
-              this.$message({
-                message: '提交失败,请重试!',
-                type: 'warning'
-              });
+                    this.resMsg = '恭喜你，保存成功！';
+                    done();
+                  } else {
+                    this.resMsg = '提交失败,请重试！';
+                    instance.confirmButtonText = '';
+                  }
+                  instance.confirmButtonLoading = false;
+                });
+              } else {
+                this.$message({ message: this.resMsg, type: 'warning' });
+                done();
+              }
             }
-          })
+          }).then(action => {
+            this.$message({ type: 'success', message: this.resMsg });
+
+          });
         }
       }
     },
@@ -517,6 +543,9 @@ export default {
 
 
 
+
+
+
 /* 分页 */
 
 .internalMatch-class .tool-bar {
@@ -525,6 +554,9 @@ export default {
   padding: 10px 0 0 10px;
   margin-bottom: 10px;
 }
+
+
+
 
 
 
@@ -599,6 +631,9 @@ export default {
 
 
 
+
+
+
 /* 确认按钮 */
 
 .internalMatch-class .mark-button {
@@ -633,11 +668,17 @@ export default {
 
 
 
+
+
+
 /* 行高 */
 
 .internalMatch-class thead tr {
   height: 40px;
 }
+
+
+
 
 
 
@@ -696,6 +737,9 @@ export default {
 
 
 
+
+
+
 /* 备注 width*/
 
 .internalMatch-class .mark-cell {
@@ -727,12 +771,18 @@ export default {
 
 
 
+
+
+
 /* tr */
 
 .internalMatch-class .el-table tr {
   height: 35px;
   background: #ffffff;
 }
+
+
+
 
 
 
