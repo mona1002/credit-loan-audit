@@ -408,7 +408,7 @@ export default {
 
             if (res.statusCode == '200') {
               this.$message({
-                message: '恭喜你，提交成功!',
+                message: '恭喜你，保存成功!',
                 type: 'success'
               });
             } else {
