@@ -25,7 +25,7 @@
           <el-collapse-item :title="treeData[1].label" name="2">
             <div v-for="item in treeData[1].children">
               <el-tooltip effect="dark" :content="item.children[0].label" placement="right-end">
-                <div class="item-title">
+                <div class="item-title" @click="handleNodeClick(item)">
                   {{item.label}}
                 </div>
               </el-tooltip>
@@ -34,7 +34,7 @@
           <el-collapse-item :title="treeData[2].label" name="3">
             <div v-for="item in treeData[2].children">
               <el-tooltip effect="dark" :content="item.children[0].label" placement="right-end">
-                <div class="item-title">
+                <div class="item-title" @click="handleNodeClick(item)">
                   {{item.label}}
                 </div>
               </el-tooltip>
@@ -43,7 +43,7 @@
           <el-collapse-item :title="treeData[3].label" name="4">
             <div v-for="item in treeData[3].children">
               <el-tooltip effect="dark" :content="item.children[0].label" placement="right-end">
-                <div class="item-title">
+                <div class="item-title" @click="handleNodeClick(item)">
                   {{item.label}}
                 </div>
               </el-tooltip>
@@ -52,7 +52,7 @@
           <el-collapse-item :title="treeData[4].label" name="4">
             <div v-for="item in treeData[4].children">
               <el-tooltip effect="dark" :content="item.children[0].label" placement="right-end">
-                <div class="item-title">
+                <div class="item-title" @click="handleNodeClick(item)">
                   {{item.label}}
                 </div>
               </el-tooltip>
@@ -148,19 +148,21 @@
     <!-- 更改的 添加电话选项 -->
     <el-dialog title="添加申请单电话信息" :visible.sync="dialogFormVisible">
       <el-form>
+          <span class="require-icon" style="left:20px;line-height:45px;">*</span>
         <el-form-item label="电话类型:" :label-width="addTellFormLabelWidth" prop="addTelType">
           <!-- <span class="add-label"><span class="require-icon">*</span>电话类型:</span> -->
-          <!-- <span class="require-icon">*</span> -->
           <el-select v-model="addTelType" placeholder="请选择">
             <el-option v-for="item in telTypes" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
         <!-- <span class="require-icon">*</span> -->
+        <span class="require-icon" style="left:20px;line-height:45px;">*</span>
         <el-form-item label="电话名称:" :label-width="addTellFormLabelWidth" prop="addTelName">
           <!-- <span class="add-label"><span class="require-icon">*</span>电话名称:</span> -->
           <el-input v-model="addTelName" auto-complete="off"></el-input>
         </el-form-item>
+        <span class="require-icon" style="left:50px;line-height:45px;" v-show="(addTelType!='01'|| addTelType!='02') && (addTelType=='03' || addTelType=='04' || addTelType=='05')">*</span>
         <el-form-item label="关系:" v-show="(addTelType!='01'|| addTelType!='02') && (addTelType=='03' || addTelType=='04' || addTelType=='05')" :label-width="addTellFormLabelWidth">
           <!-- <span class="add-label"><span class="require-icon">*</span>关系:</span> -->
           <el-select v-model="addRelationShip" placeholder="请选择">
@@ -169,6 +171,7 @@
           </el-select>
         </el-form-item>
         <!-- <span class="require-icon">*</span> -->
+        <span class="require-icon" style="left:20px;line-height:45px;">*</span>
         <el-form-item label="电话号码:" :label-width="addTellFormLabelWidth" prop="addTelNum">
           <el-input auto-complete="off" v-model="addTelNum"></el-input>
         </el-form-item>
@@ -305,7 +308,7 @@ export default {
         { value: '01', label: '住址电话' },
         { value: '02', label: '单位电话' },
         { value: '03', label: '家庭联系人电话' },
-        { value: '04', label: '紧急联系人电话' },
+        { value: '04', label: '其他联系人电话' },
         { value: '05', label: '工作证明人电话' }
       ],
       // 添加的电话类型
@@ -356,7 +359,7 @@ export default {
       // 改造 , 通过 电话类型 , formShwo/hisShow 来控制所有的 表单/历史显示
       formShow: false,
       hisShow: false,
-      activeNames: '', // 折叠默认展开的选项
+      activeNames: ["1"], // 折叠默认展开的选项
       treeFlag: '', // 用来标志  电话树是否需要更新
       listFlag: '', // 用来标志  历史调查日志, 
       //是否需要更新  在子组件操作的时候, $emit 
@@ -393,7 +396,7 @@ export default {
       // },
       addTellFormLabelWidth: '80px', // 添加电话 表单 label-width
       isInterFlag: false, // 是否是内匹跳转的查看详情
-      activeTrees: ["1", "2", "3", "4", "5"]
+      activeTrees: ["1", "2", "3", "4", "5"],
     }
   },
   props: ['isFull','SplitS'],
@@ -534,6 +537,8 @@ export default {
         if (data.id.length > 2) {
           // 点击数据展示历史记录  列表
           this.hisListShow = true;
+          // 历史数据不显示
+          this.hisShow = false;
           // 请求历史调查日志
           this.phoneType = data.telType;
           console.log(this.phoneType);
