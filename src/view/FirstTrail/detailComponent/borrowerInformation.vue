@@ -79,7 +79,7 @@
 					        label="建筑单价[元]"
 					        min-width="101">
 					         <template slot-scope="scope">
-						        <el-input v-model="scope.row.unitPrice" placeholder="请输入内容"></el-input>
+						        <el-input v-model="scope.row.unitPrice" @blur="moneyBlur(scope.row,'unitPrice')" placeholder="请输入内容"></el-input>
 					        </template>
 					      </el-table-column>
 					      <el-table-column
@@ -88,7 +88,7 @@
 					        min-width="200">
 					        <template slot-scope="scope">
 					        	<!-- <el-tooltip el-tooltip class="item" effect="dark" content="scope.row.estateAddress" placement="top"> -->
-							        <el-input v-bind:title="scope.row.estateAddress" v-model="scope.row.estateAddress" placeholder="请输入内容">
+							        <el-input v-model="scope.row.estateAddress" placeholder="请输入内容">
 							        </el-input>
 						    <!-- </el-tooltip> -->
 					        </template>
@@ -98,7 +98,10 @@
 					        label="邮政编码"
 					        min-width="100">
 					        <template slot-scope="scope">
-						        <el-input v-model="scope.row.estateZip" placeholder="请输入内容"></el-input>
+					        	<!-- <el-tooltip class="item" effect="dark" content="邮政编码格式不正确" :disabled="postcodes==false" placement="top">
+					        	 						      		<el-input v-model="scope.row.estateZip" placeholder="请输入内容" v-on:blur="postcode(scope.row)" v-on:focus = "postcodes=false"></el-input>
+					        	 						    	</el-tooltip> --> 
+					        	<el-input v-model="scope.row.estateZip" placeholder="请输入内容" v-on:blur="postcode(scope.row)"></el-input>
 					        </template>
 					      </el-table-column>
 					      <el-table-column
@@ -137,7 +140,7 @@
 					        label="月供[元]"
 					        min-width="100">
 					        <template slot-scope="scope">
-						        <el-input v-model="scope.row.monthlyPay" placeholder="请输入内容"></el-input>
+						        <el-input v-model="scope.row.monthlyPay" @blur="moneyBlur(scope.row,'monthlyPay')" placeholder="请输入内容"></el-input>
 					        </template>
 					      </el-table-column>
 					      <el-table-column
@@ -145,7 +148,7 @@
 					        label="贷款余额[元]"
 					        min-width="102">
 					        <template slot-scope="scope">
-						        <el-input v-model="scope.row.restLoans" placeholder="请输入内容"></el-input>
+						        <el-input v-model="scope.row.restLoans" @blur="moneyBlur(scope.row,'restLoans')" placeholder="请输入内容"></el-input>
 					        </template>
 					      </el-table-column>
 				    </el-table>
@@ -185,7 +188,7 @@
 				        label="车辆购置价[元]"
 				        min-width="110">
 				        <template slot-scope="scope">
-					        <el-input v-model="scope.row.carPrice" placeholder="请输入内容"></el-input>
+					        <el-input v-model="scope.row.carPrice" @blur="moneyBlur(scope.row,'carPrice')" placeholder="请输入内容"></el-input>
 				        </template>
 				      </el-table-column>
 				      <el-table-column
@@ -257,7 +260,7 @@
 				        label="月供[元]"
 				        min-width="100">
 				        <template slot-scope="scope">
-					        <el-input v-model="scope.row.monthlyPay" placeholder="请输入内容"></el-input>
+					        <el-input v-model="scope.row.monthlyPay" @blur="moneyBlurs(scope.row,'monthlyPay')" placeholder="请输入内容"></el-input>
 				        </template>
 				      </el-table-column>
 				      <el-table-column
@@ -389,7 +392,7 @@
 				        label="本期应还款金额"
 				        min-width="120">
 				        <template slot-scope="scope">
-  							<el-input v-model="scope.row.realRepaymentAmt" placeholder="请输入内容"></el-input>
+  							<el-input v-model="scope.row.realRepaymentAmt" @blur="moneyBlur(scope.row,'realRepaymentAmt')" placeholder="请输入内容"></el-input>
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -397,7 +400,7 @@
 				        label="本期实际还款金额"
 				        min-width="140">
 				        <template slot-scope="scope">
-  							<el-input v-model="scope.row.actRepaymentAmt" placeholder="请输入内容"></el-input>
+  							<el-input v-model="scope.row.actRepaymentAmt" @blur="moneyBlur(scope.row,'actRepaymentAmt')" placeholder="请输入内容"></el-input>
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -609,7 +612,7 @@
 				        label="贷款合同金额[元]"
 				        min-width="140">
 				        <template slot-scope="scope">
-						  <el-input v-model="scope.row.loanContValue" placeholder="请输入内容"></el-input>
+						  <el-input v-model="scope.row.loanContValue" @blur="moneyBlur(scope.row,'loanContValue')" placeholder="请输入内容"></el-input>
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -628,7 +631,7 @@
 				        label="贷款余额[元]"
 				        min-width="110">
 				        <template slot-scope="scope">
-						  <el-input v-model="scope.row.loanBal" placeholder="请输入内容"></el-input>
+						  <el-input v-model="scope.row.loanBal" @blur="moneyBlur(scope.row,'loanBal')" placeholder="请输入内容"></el-input>
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -644,7 +647,7 @@
 				        label="本期应还款金额[元]"
 				        min-width="150">
 				        <template slot-scope="scope">
-						  <el-input v-model="scope.row.presentRepayAmt" placeholder="请输入内容"></el-input>
+						  <el-input v-model="scope.row.presentRepayAmt" @blur="moneyBlur(scope.row,'presentRepayAmt')" placeholder="请输入内容"></el-input>
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -652,7 +655,7 @@
 				        label="本期实际还款金额[元]"
 				        min-width="160">
 				        <template slot-scope="scope">
-						  <el-input v-model="scope.row.curMonthRepayAmt" placeholder="请输入内容"></el-input>
+						  <el-input v-model="scope.row.curMonthRepayAmt" @blur="moneyBlur(scope.row,'curMonthRepayAmt')" placeholder="请输入内容"></el-input>
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -671,7 +674,7 @@
 				        label="当前逾期金额"
 				        min-width="110">
 				        <template slot-scope="scope">
-						  <el-input v-model="scope.row.presentOverAmt" placeholder="请输入内容"></el-input>
+						  <el-input v-model="scope.row.presentOverAmt" @blur="moneyBlur(scope.row,'presentOverAmt')" placeholder="请输入内容"></el-input>
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -999,7 +1002,7 @@
 	    	<el-button type="primary" @click="sure">确定</el-button>
 	    </div>
 		<!-- 点击确认时提示弹框 -->
-		<div class="layer" v-show="layer"><!-- @touchmove.prevent  -->
+		<!-- <div class="layer" v-show="layer">@touchmove.prevent
 			<div class="layerbox">
 				<p><span>询问</span><i class="el-icon-close" @click="close"></i></p>
 				<div>
@@ -1010,9 +1013,24 @@
 					</div>
 				</div>		
 			</div>
+		</div> -->
+
+		<div class="sureLog">
+			<el-dialog
+			  title="询问"
+			  :visible.sync="dialogVisible"
+			  width="420px"
+			  top="35vh">
+			  <span>您确定已填写好各项内容并提交？</span>
+			  <span slot="footer" class="dialog-footer">
+			  	<el-button type="primary" @click="Cancle">取消</el-button>
+				<el-button type="primary" @click="trueSure">确定</el-button>
+			  </span>
+			</el-dialog>
 		</div>
+
 		<!-- 点击确认时提示错误弹框 -->
-		<div class="layer" v-show="infoLyer">
+		<!-- <div class="layer" v-show="tidialogVisible">
 			<div class="layerbox">
 				<p><span>提示</span><i class="el-icon-close" @click="infoClose"></i></p>
 				<div>
@@ -1022,7 +1040,21 @@
 					</div>
 				</div>		
 			</div>
+		</div> -->
+		
+		<div class="sureLog">
+			<el-dialog
+			  title="提示"
+			  :visible.sync="tidialogVisible"
+			  width="420px"
+			  top="35vh">
+			  <span>{{info}}</span>
+			  <span slot="footer" class="dialog-footer">
+			  	<el-button type="primary" @click="infoSure">确定</el-button>
+			  </span>
+			</el-dialog>
 		</div>
+
 
 
 	</div>
@@ -1083,8 +1115,17 @@
             cardDetList:[],
 
             taskInWaitting:'',
+
             applyId:'',
 
+            //邮政编码
+            postcodes:false,
+
+            //确定按钮弹框
+            dialogVisible:false,
+            //确定按钮弹框
+            tidialogVisible:false,
+            
             //信用卡使用总况
             borCard:{
 		        "applyId":this.applyId, // 申请单Id    
@@ -1252,7 +1293,7 @@
       		//弹框
       		layer:false,
       		info:'',
-      		infoLyer:false,
+      		tidialogVisible:false,
       		ifFull:'', // 标志是否全屏
 	      };
 	    },
@@ -1780,47 +1821,49 @@
 			sure(){
 				for(var i=0;i<this.borestateList.length;i++){
 					if(this.borestateList[i].estateType==''){
-						this.infoLyer=true;
+						this.tidialogVisible=true;
 						this.info="房产信息不能为空！"
 						return
 					}
 				};
 				for(var i=0;i<this.carInfoList.length;i++){
 					if(this.carInfoList[i].carType==''){
-						this.infoLyer=true;
+						this.tidialogVisible=true;
 						this.info="车辆信息不能为空！"
 						return
 					}
 				};
 				for(var i=0;i<this.cardDetList.length;i++){
 					if(this.cardDetList[i].bankName=='' || this.cardDetList[i].accountStatus==''){
-						this.infoLyer=true;
+						this.tidialogVisible=true;
 						this.info="信用卡使用明细不能为空！"
 						return　
 					}
 				};
 				for(var i=0;i<this.loanDetailList.length;i++){
 					if(this.loanDetailList[i].loanType=='' || this.loanDetailList[i].guaranteeType=='' || this.loanDetailList[i].accountStatus==''){
-						this.infoLyer=true;
+						this.tidialogVisible=true;
 						this.info="贷款明细不能为空！"　
 						return
 					}
 				};
 				for(var i=0;i<this.incomeList.length;i++){
 					if(this.incomeList[i].incomeType==''){
-						this.infoLyer=true;
+						this.tidialogVisible=true;
 						this.info="流水明细不能为空！"　
 						return
 					}
 				};
 				
-				this.layer=true;
-				document.getElementsByTagName('body')[0].style.overflow='hidden';
+				//this.layer=true;
+				//document.getElementsByTagName('body')[0].style.overflow='hidden';
+				this.dialogVisible = true;
 			},
 			//弹框取消
 			Cancle(){
-				this.layer=false;
-				document.getElementsByTagName('body')[0].style.overflow='';					
+				//this.layer=false;
+				//document.getElementsByTagName('body')[0].style.overflow='';
+				this.dialogVisible = false;					
 			},
 			//弹框确认
 			trueSure(){
@@ -1828,8 +1871,9 @@
 					this.countNum(event);
 				};
 				
-				this.layer=false;
-				document.getElementsByTagName('body')[0].style.overflow='';	
+				//this.layer=false;
+				//document.getElementsByTagName('body')[0].style.overflow='';	
+				this.dialogVisible = false;
 				this.loanInfo.applyId=this.applyId;
 				this.borCard.applyId=this.applyId;
 				this.borDebt.applyId=this.applyId;
@@ -1851,24 +1895,23 @@
 			      }).then(res => {
 			        if(res.statusCode==200){
 			        	this.request(this.applyId);
+			        	this.$message({
+							message:"保存成功！",
+							type:'success'
+						})
+			        }else{
+			        	this.$message({
+			              message:"保存失败！",
+			              type: 'error'
+			            })
 			        }
 			    });				
 			},
-			//弹框关闭
-			close(){
-				this.layer=false;
-				document.getElementsByTagName('body')[0].style.overflow='';	
-			},
 			//提示弹框关闭
 			infoSure(){
-				this.infoLyer=false;
-				document.getElementsByTagName('body')[0].style.overflow='';
-				this.layer=false;
-			},
-			infoClose(){
-				this.infoLyer=false;
-				document.getElementsByTagName('body')[0].style.overflow='';
-				this.layer=false;
+				this.tidialogVisible=false;
+				//document.getElementsByTagName('body')[0].style.overflow='';
+				//this.layer=false;
 			},
 			/*银行卡使用总况 去焦点时判断只能显示数字并且最大为999*/
 			carNum(num,flag){
@@ -1990,119 +2033,6 @@
 			        }
 			    }
 			},
-			/*carNormal(num){
-				if(num!=null && num!=""){
-					if(isNaN(num)){
-						this.borCard.normalCount='';
-						//alert(num);
-					}else if(num<=0){
-						this.borCard.normalCount=0
-					}else if(num>0 && num<999){
-						this.borCard.normalCount=Math.round(num);
-					}else if(num>999){
-						this.borCard.normalCount=999;
-					}
-				}
-			},*/
-			/*carBadDebt(num){
-				if(num!=null && num!=""){
-					if(isNaN(num)){
-						this.borCard.badDebtCount='';
-						//alert(num);
-					}else if(num<=0){
-						this.borCard.badDebtCount=0
-					}else if(num>0){
-						this.borCard.badDebtCount=Math.round(num);
-					}else if(num>999){
-						this.borCard.badDebtCount=999;
-					}
-				}
-			},*/
-			/*carNouse(num){
-				if(num!=null && num!=""){
-					if(isNaN(num)){
-						this.borCard.nouseCount='';
-						//alert(num);
-					}else if(num<=0){
-						this.borCard.nouseCount=0
-					}else if(num>0){
-						this.borCard.nouseCount=Math.round(num);
-					}else if(num>999){
-						this.borCard.nouseCount=999;
-					}
-				}
-			},*/
-			/*carFreeze(num){
-				if(num!=null && num!=""){
-					if(isNaN(num)){
-						this.borCard.freezeCount='';
-						//alert(num);
-					}else if(num<=0){
-						this.borCard.freezeCount=0
-					}else if(num>0){
-						this.borCard.freezeCount=Math.round(num);
-					}else if(num>999){
-						this.borCard.freezeCount=999;
-					}
-				}
-			},*/
-			/*carCancel(num){
-				if(num!=null && num!=""){
-					if(isNaN(num)){
-						this.borCard.cancelCount='';
-						//alert(num);
-					}else if(num<=0){
-						this.borCard.cancelCount=0
-					}else if(num>0){
-						this.borCard.cancelCount=Math.round(num);
-					}else if(num>999){
-						this.borCard.cancelCount=999;
-					}
-				}
-			},*/
-			/*carUserd(num){
-				if(num!=null && num!=""){
-					if(isNaN(num)){
-						this.borCard.userdCount='';
-						//alert(num);
-					}else if(num<=0){
-						this.borCard.userdCount=0
-					}else if(num>0){
-						this.borCard.userdCount=Math.round(num);
-					}else if(num>999){
-						this.borCard.userdCount=999;
-					}
-				}
-			},*/
-			/*carStopPayment(num){
-				if(num!=null && num!=""){
-					if(isNaN(num)){
-						this.borCard.stopPaymentCount='';
-						//alert(num);
-					}else if(num<=0){
-						this.borCard.stopPaymentCount=0
-					}else if(num>0){
-						this.borCard.stopPaymentCount=Math.round(num);
-					}else if(num>999){
-						this.borCard.stopPaymentCount=999;
-					}
-				}
-			},*/
-			//征询报告 近6个月内信用卡报告查询次数
-			/*recordTimes(num){
-				if(num!=null && num!=""){
-					if(isNaN(num)){
-						this.rptInfo.crRecordTimes='';
-						//alert(num);
-					}else if(num<=0){
-						this.rptInfo.crRecordTimes=0
-					}else if(num>0){
-						this.rptInfo.crRecordTimes=Math.round(num);
-					}else if(num>99999){
-						this.rptInfo.crRecordTimes=99999;
-					}
-				}
-			},*/
 			//负债信息 最近3个月信用卡/贷款申请次数
 			loanNumber(num){
 				if(num!=null && num!=""){
@@ -2243,6 +2173,45 @@
 			    if(!value.avgIncome){
 			    	value.avgIncome = '';
 			    };
+			    if(!value.unitPrice){
+			    	value.unitPrice = '';
+			    };
+			    if(!value.monthlyPay){
+			    	value.monthlyPay = '';
+			    };
+			    if(!value.restLoans){
+			    	value.restLoans = '';
+			    };
+			    if(!value.carPrice){
+			    	value.carPrice = '';
+			    };
+			    if(!value.realRepaymentAmt){
+			    	value.realRepaymentAmt = '';
+			    };
+			    if(!value.actRepaymentAmt){
+			    	value.actRepaymentAmt = '';
+			    };
+			    //贷款合同金额
+			    if(!value.loanContValue){
+			    	value.loanContValue = '';
+			    };
+			    //贷款余额
+			    if(!value.loanBal){
+			    	value.loanBal = '';
+			    };
+			    //本期应还款金额
+			    if(!value.presentRepayAmt){
+			    	value.presentRepayAmt = '';
+			    };
+			    //本期实际还款金额
+			    if(!value.curMonthRepayAmt){
+			    	value.curMonthRepayAmt = '';
+			    };
+			    //当前逾期金额
+			    if(!value.presentOverAmt){
+			    	value.presentOverAmt = '';
+			    };
+
 			    // 有数据
 			    if (value) {
 		        	switch (flag) {
@@ -2264,8 +2233,70 @@
 			            case 'n5':
 			            	value.n5 =this.formatNumber(value.n5,2,0);
 			                break;  
+			            case 'unitPrice':
+			            	value.unitPrice =this.formatNumber(value.unitPrice,2,0);
+			                break;
+			            case 'monthlyPay':
+			            	value.monthlyPay =this.formatNumber(value.monthlyPay,2,0);
+			                break;
+			            case 'restLoans':
+			            	value.restLoans =this.formatNumber(value.restLoans,2,0);
+			                break; 
+			            case 'carPrice':
+			            	value.carPrice =this.formatNumber(value.carPrice,2,0);
+			                break; 
+			            case 'realRepaymentAmt':
+			            	value.realRepaymentAmt =this.formatNumber(value.realRepaymentAmt,2,0);
+			                break;
+			            case 'actRepaymentAmt':
+			            	value.actRepaymentAmt =this.formatNumber(value.actRepaymentAmt,2,0);
+			                break;
+			            case 'loanContValue':
+			            	value.loanContValue =this.formatNumber(value.loanContValue,2,0);
+			                break;
+			            //贷款余额
+			            case 'loanBal':
+			            	value.loanBal =this.formatNumber(value.loanBal,2,0);
+			                break;
+			            //本期应还款金额  
+			            case 'presentRepayAmt':
+			            	value.presentRepayAmt =this.formatNumber(value.presentRepayAmt,2,0);
+			                break;
+			            //本期实际还款金额
+			            case 'curMonthRepayAmt':
+			            	value.curMonthRepayAmt =this.formatNumber(value.curMonthRepayAmt,2,0);
+			                break;
+			            //当前逾期金额
+			            case 'presentOverAmt':
+			            	value.presentOverAmt =this.formatNumber(value.presentOverAmt,2,0);
+			                break;
 			        } 
 			    }
+			},
+			moneyBlurs(value, flag){
+				if(!value.monthlyPay){
+			    	value.monthlyPay = '';
+			    };
+			    if (value) {
+		        	switch (flag) {
+			            case 'monthlyPay':
+			            	value.monthlyPay =this.formatNumber(value.monthlyPay,2,0);
+			                break; 
+			        } 
+			    }
+			},
+			//邮政编码验证
+			postcode(row){
+				console.log(row);
+				if(row.estateZip == ''){
+					row.estateZip = '';
+					//this.postcodes=false;
+				}else{
+					if(!/^[0-9][0-9]{5}$/.test(row.estateZip)){
+						//this.postcodes=true;
+						row.estateZip = '';
+					}
+				}
 			},
 	    },
 	    directives: {
