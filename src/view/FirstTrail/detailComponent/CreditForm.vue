@@ -922,7 +922,7 @@
     </el-collapse>
     <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
     <!-- ==============================点击确认时提示弹框=================================== -->
-    <!-- <div class="layer" v-show="this.Confirm">
+    <div class="layer" v-show="this.Confirm">
       @touchmove.prevent 
       <div class="layerbox">
         <p>
@@ -937,14 +937,14 @@
           </div>
         </div>
       </div>
-    </div> -->
-    <el-dialog title="您确定已填写好各项内容并提交？" :visible.sync="this.Confirm" width="400px" top="350px" append-to-body center>
-      <!-- <span></span> -->
+    </div>
+    <!-- <el-dialog title="您确定已填写好各项内容并提交？" :visible.sync="this.Confirm" width="400px" top="350px" append-to-body center>
+      <span></span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="canc">取 消</el-button>
         <el-button type="primary" @click="CFsave">确 定</el-button>
       </span>
-    </el-dialog>
+    </el-dialog> -->
     <!-- ========================================提交成功提示================================= -->
     <div class="layer" v-show="AlertS">
       <div class="layerbox">
