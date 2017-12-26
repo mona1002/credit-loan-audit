@@ -2184,7 +2184,7 @@ export default {
 }
 
 .creditApproval-class .info .el-form-item__label {
-  width: 100px;
+  width: 120px;
 }
 
 
