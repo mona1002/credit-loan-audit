@@ -922,8 +922,8 @@
     </el-collapse>
     <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
     <!-- ==============================点击确认时提示弹框=================================== -->
-    <div class="layer" v-show="this.Confirm">
-      <!-- @touchmove.prevent  -->
+    <!-- <div class="layer" v-show="this.Confirm">
+      @touchmove.prevent 
       <div class="layerbox">
         <p>
           <span>询问</span>
@@ -937,7 +937,14 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
+    <el-dialog title="询问" :visible.sync="this.Confirm" width="400px" top="350px" append-to-body center>
+      <span>您确定已填写好各项内容并提交？</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="canc">取 消</el-button>
+        <el-button type="primary" @click="CFsave">确 定</el-button>
+      </span>
+    </el-dialog>
     <!-- ========================================提交成功提示================================= -->
     <div class="layer" v-show="AlertS">
       <div class="layerbox">
@@ -962,7 +969,7 @@
         comaddressb: [],
         shotInputL: 20, //20
         longInputL: 50, //50
-        longLongInputL: 100, //100
+        longLongInputL: 100, //10
         shotTextareaL: 200, //200
         textareaL: 500, //500
         acreage: '',
@@ -1616,7 +1623,7 @@
       },
       wordarea(val, el, txt) {
         if (val.length >= 500) {
-           this.wordareaSC(val, el);
+          this.wordareaSC(val, el);
         } else {
           this.wordareaSCF(val, el);
         }
@@ -2199,11 +2206,11 @@
           if (val.toString().indexOf('.') == -1) {
             val = val + "." + "0" + '0';
             this.formatSC(name, val);
-        } else if (val.toString().indexOf('.') != -1) {
+          } else if (val.toString().indexOf('.') != -1) {
             if (val.toString().split(".")[1].length < 2) {
               e.target.value = val = val + "0";
               this.formatSC(name, val);
-         } else {
+            } else {
               e.target.value = val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
               this.formatSC(name, val);
             }
@@ -2405,7 +2412,8 @@
   .btn {
     margin: 20px 0 0 844px;
   }
-/* calc( 100%- 180px ) */
+  /* calc( 100%- 180px ) */
+
   .specialInput {
     width: 480px;
   }
