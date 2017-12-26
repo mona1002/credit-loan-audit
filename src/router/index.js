@@ -82,7 +82,7 @@ Vue.use(Router)
 
 const routes = [{
   path: '/',
-  component: login
+  component: workbench
 },
 {
   // 工作台  误改, 误删
@@ -91,7 +91,7 @@ const routes = [{
     orgCode:     机构编码
    */
   path: '/workbench',
-  component: workbench,
+  component: login,
 },
 {
   path: '/test',
