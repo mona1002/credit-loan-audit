@@ -280,7 +280,10 @@ height: 40px;
 .borrowerInformation .el-select-dropdown.el-popper div{
   width: auto !important;
 }
-
+/* 弹框 */
+.borrowerInformation .sureLog .el-dialog__body{
+  padding: 0 20px;
+}
 
 /*借款人资料详情 折叠面板头部背景色 */
 
@@ -1178,7 +1181,30 @@ height: 40px;
   text-align: center;
 }
 
-
+/* 备注信息弹框 */
+.remark .addLog .el-dialog__title{
+  font-size: 15px;
+}
+.remark .addLog .el-dialog__body{
+  height: 208px;
+  width: 98%;
+  margin: 0 auto;
+  background: #eee;
+  padding: 0 0;
+}
+.remark .isLog .el-dialog__body,.remark .deletLog .el-dialog__body{
+  padding: 0 20px;
+}
+.remark .changeLog .el-dialog__title{
+  font-size: 15px;
+}
+.remark .changeLog .el-dialog__body{
+  height: 208px;
+  width: 98%;
+  margin: 0 auto;
+  background: #eee;
+  padding: 0 0;
+}
 /* 备注信息表格内容居中 */
 
 .remarkDetial .el-table__body-wrapper {

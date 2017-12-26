@@ -96,7 +96,7 @@
 				      @size-change="handleSizeChange"
 				      @current-change="handleCurrentChange"
 				      :current-page="currentPage"
-				      :page-sizes="[20, 50, 80, 100]"
+				      :page-sizes="[10, 50, 80, 100]"
 				      :page-size=setPageSize
 				      layout="total, sizes, prev, pager, next, jumper"
 				      :total="totals.totalNum">
@@ -121,7 +121,7 @@
 		        certCode : '',
 				//pageNum:1,
 		        //pageSize:20,
-		        setPageSize:20,
+		        setPageSize:10,
 			    queryParam: {
 			        processTemplateId :'',
 		            taskNodeName : '',
@@ -129,7 +129,7 @@
 		            userCode : '',
 		            orgCode : '',
 		            pageNum : 1,
-		            pageSize : 20,
+		            pageSize : 10,
 		            applySubNo : '',
 		            custName_la : '',
 		            certCode : ''
@@ -225,9 +225,9 @@
 		      console.log('每页 ${val} 条');
 		      this.queryParam.pageSize = val;
 		      this.queryParam.pageNum = 1;
-		      if (this.currentPage !== 1 || this.setPageSize !== 20) {
+		      if (this.currentPage !== 1 || this.setPageSize !== 10) {
 		        this.currentPage = 1;
-		        this.setPageSize = 20;
+		        this.setPageSize = 10;
 		      } else {
 		        this.request(this.queryParam);
 		      };
