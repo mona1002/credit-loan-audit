@@ -749,7 +749,7 @@ export default {
             if (res.statusCode == '200') {
               // 假如没有  核实可接受最高每期还款额 
               // if(res.)  提交的时候也要判断
-              // this.$message("提示:请完善信审表中可承受的月还款金额");
+              // this.$message("提示：请完善信审表中可承受的月还款金额");
               this.products = res.data;
             }
           })
@@ -785,7 +785,7 @@ export default {
           // 主原因
           if (!this.mainReason) {
             this.$message({
-              message: '提示:请选择主原因!',
+              message: '提示：请选择主原因!',
               type: 'warning'
             });
 
@@ -794,7 +794,7 @@ export default {
           // 原因说明
           if (!this.reasonRemark) {
             this.$message({
-              message: "提示:请填写原因说明!",
+              message: "提示：请填写原因说明!",
               type: 'warning'
             });
             return;
@@ -813,7 +813,7 @@ export default {
           // 回退节点
           if (this.rollbackNodeName.length == 0) {
             this.$message({
-              message: "提示:请选择回退节点!",
+              message: "提示：请选择回退节点!",
               type: 'warning'
             });
             return;
@@ -821,7 +821,7 @@ export default {
           // 主原因
           if (!this.mainReason) {
             this.$message({
-              message: "提示:请选择主原因!",
+              message: "提示：请选择主原因!",
               type: 'warning'
             });
             return;
@@ -829,7 +829,7 @@ export default {
           // 原因说明
           if (!this.reasonRemark) {
             this.$message({
-              message: "提示:请填写原因说明!",
+              message: "提示：请填写原因说明!",
               type: 'warning'
             });
             return;
@@ -850,7 +850,7 @@ export default {
           // 主原因
           if (!this.mainReason) {
             this.$message({
-              message: "提示:请选择主原因!",
+              message: "提示：请选择主原因!",
               type: 'warning'
             });
             return;
@@ -858,7 +858,7 @@ export default {
           // 原因说明
           if (!this.reasonRemark) {
             this.$message({
-              message: "提示:请填写原因说明!",
+              message: "提示：请填写原因说明!",
               type: 'warning'
             });
             return;
@@ -876,7 +876,7 @@ export default {
           console.log(this.quotaData.monthrentamt);
           if (!this.quotaData.monthrentamt) {
             this.$message({
-              message: "提示:请完善信审表中可承受的月还款金额",
+              message: "提示：请完善信审表中可承受的月还款金额",
               type: 'warning'
             });
             return;
@@ -884,7 +884,7 @@ export default {
           // 月核实收入
           if (!this.verIncome) {
             this.$message({
-              message: "提示:请填月核实收入!",
+              message: "提示：请填月核实收入!",
               type: 'warning'
             });
             this.verIncomError = true;
@@ -893,7 +893,7 @@ export default {
           // 批准产品 id
           if (!this.proId) {
             this.$message({
-              message: "提示:请选择批准产品!",
+              message: "提示：请选择批准产品!",
               type: 'warning'
             });
             return;
@@ -901,7 +901,7 @@ export default {
           // 批准期限
           if (!this.ploanTerm) {
             this.$message({
-              message: "提示:请选择批准期限!",
+              message: "提示：请选择批准期限!",
               type: 'warning'
             });
             this.ploanTermError = true;
@@ -910,7 +910,7 @@ export default {
           // 批准金额 ploanAmt
           if (!this.ploanAmt) {
             this.$message({
-              message: "提示:请填写批准金额!",
+              message: "提示：请填写批准金额!",
               type: 'warning'
             })
             this.ploanAmtError = true;
@@ -919,7 +919,7 @@ export default {
           // 意见说明 appConclusion
           if (!this.appConclusion) {
             this.$message({
-              message: "提示:请填写意见说明!",
+              message: "提示：请填写意见说明!",
               type: 'warning'
             })
             return;
@@ -2123,7 +2123,7 @@ export default {
 
 
 .creditApproval-class .el-input {
-  width: inherit;
+  width: calc( 100% - 120px );
   height: 35px;
   line-height: 35px;
 }
@@ -2872,6 +2872,12 @@ export default {
   font-size: 14px;
   color: red;
   position: absolute;
+}
+
+
+/* 审批信息  */
+.creditApproval-class .el-form-item__content .el-select .el-input{
+  width: 100%;
 }
 
 </style>
