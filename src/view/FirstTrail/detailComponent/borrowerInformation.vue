@@ -467,18 +467,18 @@
 			    </template>
 		  		<div class="xinyongka">
 		  			<ul>
-				    	<li><label>信用卡张数：</label><el-input v-on:blur="carNum(borCard.cardCount)" v-model="borCard.cardCount"></el-input></li>
-				    	<li><label>正常使用张数：</label><el-input v-on:blur="carNormal(borCard.normalCount)" v-model="borCard.normalCount"></el-input></li>
-				    	<li><label>呆帐数量：</label><el-input v-on:blur="carBadDebt(borCard.badDebtCount)" v-model="borCard.badDebtCount"></el-input></li>
+				    	<li><label>信用卡张数：</label><el-input v-on:blur="carNum(borCard.cardCount,'cardCount')" v-model="borCard.cardCount"></el-input></li>
+				    	<li><label>正常使用张数：</label><el-input v-on:blur="carNum(borCard.normalCount,'normalCount')" v-model="borCard.normalCount"></el-input></li>
+				    	<li><label>呆帐数量：</label><el-input v-on:blur="carNum(borCard.badDebtCount,'badDebtCount')" v-model="borCard.badDebtCount"></el-input></li>
 				    </ul>
 				    <ul>
-				    	<li><label>未开卡张数：</label><el-input v-on:blur="carNouse(borCard.nouseCount)" v-model="borCard.nouseCount"></el-input></li>
-				    	<li><label>冻结数量：</label><el-input v-on:blur="carFreeze(borCard.freezeCount)" v-model="borCard.freezeCount"></el-input></li>
-				    	<li><label>销户数量：</label><el-input v-on:blur="carCancel(borCard.cancelCount)" v-model="borCard.cancelCount"></el-input></li>
+				    	<li><label>未开卡张数：</label><el-input v-on:blur="carNum(borCard.nouseCount,'nouseCount')" v-model="borCard.nouseCount"></el-input></li>
+				    	<li><label>冻结数量：</label><el-input v-on:blur="carNum(borCard.freezeCount,'freezeCount')" v-model="borCard.freezeCount"></el-input></li>
+				    	<li><label>销户数量：</label><el-input v-on:blur="carNum(borCard.cancelCount,'cancelCount')" v-model="borCard.cancelCount"></el-input></li>
 				    </ul>
 				    <ul>
-				    	<li><label>已使用张数：</label><el-input v-on:blur="carUserd(borCard.userdCount)" v-model="borCard.userdCount"></el-input></li>
-				    	<li><label>止付数量：</label><el-input v-on:blur="carStopPayment(borCard.stopPaymentCount)" v-model="borCard.stopPaymentCount"></el-input></li>
+				    	<li><label>已使用张数：</label><el-input v-on:blur="carNum(borCard.userdCount,'userdCount')" v-model="borCard.userdCount"></el-input></li>
+				    	<li><label>止付数量：</label><el-input v-on:blur="carNum(borCard.stopPaymentCount,'stopPaymentCount')" v-model="borCard.stopPaymentCount"></el-input></li>
 				    </ul>
 		  		</div> 
 		  	</el-collapse-item>
@@ -828,7 +828,7 @@
 							</el-select>
 					    	<!-- <el-input v-model="rptInfo.crHasRecord"></el-input> -->
 						</li>
-				    	<li class="liDiv"><label>近6个月内信用报告查询次数:</label><el-input v-model="rptInfo.crRecordTimes" v-on:blur="recordTimes(rptInfo.crRecordTimes)"></el-input></li>
+				    	<li class="liDiv"><label>近6个月内信用报告查询次数:</label><el-input v-model="rptInfo.crRecordTimes" v-on:blur="carNum(rptInfo.crRecordTimes,'crRecordTimes')"></el-input></li>
 				    </ol>
 				    <ol>
 				    	<li>
@@ -1871,35 +1871,140 @@
 				this.layer=false;
 			},
 			/*银行卡使用总况 去焦点时判断只能显示数字并且最大为999*/
-			carNum(num){
-				if(num!=null && num!=""){
-					if(isNaN(num)){
-						this.borCard.cardCount='';
-						//alert(num);
-					}else if(num<=0){
-						this.borCard.cardCount=0
-					}else if(num>0){
-						this.borCard.cardCount=Math.round(num);
-					}else if(num>999){
-						this.borCard.cardCount=999;
-					}
-				}
+			carNum(num,flag){
+				if (num!=""){
+			    	switch (flag) {
+			            case 'cardCount':
+			                if(isNaN(num)){
+								this.borCard.cardCount='';
+								//alert(num);
+							}else if(num<=0){
+								this.borCard.cardCount=0
+							}else if(num>0 && num<999){
+								//alert('oo1');
+								this.borCard.cardCount=Math.round(num);
+							}else if(num>=999){
+								//alert('oo');
+								this.borCard.cardCount=999;
+								//console.log(this.borCard.cardCount);
+							};
+			                break;
+			            case 'normalCount':
+			                if(isNaN(num)){
+								this.borCard.normalCount='';
+								//alert(num);
+							}else if(num<=0){
+								this.borCard.normalCount=0
+							}else if(num>0 && num<999){
+								this.borCard.normalCount=Math.round(num);
+							}else if(num>=999){
+								this.borCard.normalCount=999;
+							};
+			                break;
+			            case 'badDebtCount':
+			                if(isNaN(num)){
+								this.borCard.badDebtCount='';
+								//alert(num);
+							}else if(num<=0){
+								this.borCard.badDebtCount=0
+							}else if(num>0 && num<999){
+								this.borCard.badDebtCount=Math.round(num);
+							}else if(num>=999){
+								this.borCard.badDebtCount=999;
+							};
+			                break;
+			            case 'nouseCount':
+			                if(isNaN(num)){
+								this.borCard.nouseCount='';
+								//alert(num);
+							}else if(num<=0){
+								this.borCard.nouseCount=0
+							}else if(num>0 && num<999){
+								this.borCard.nouseCount=Math.round(num);
+							}else if(num>=999){
+								this.borCard.nouseCount=999;
+							};
+			                break;
+			            case 'freezeCount':
+			                if(isNaN(num)){
+								this.borCard.freezeCount='';
+								//alert(num);
+							}else if(num<=0){
+								this.borCard.freezeCount=0
+							}else if(num>0 && num<999){
+								this.borCard.freezeCount=Math.round(num);
+							}else if(num>=999){
+								this.borCard.freezeCount=999;
+							};
+			                break;
+			            case 'cancelCount':
+			                if(isNaN(num)){
+								this.borCard.cancelCount='';
+								//alert(num);
+							}else if(num<=0){
+								this.borCard.cancelCount=0
+							}else if(num>0 && num<999){
+								this.borCard.cancelCount=Math.round(num);
+							}else if(num>=999){
+								this.borCard.cancelCount=999;
+							};
+			                break;
+			            case 'userdCount':
+			                if(isNaN(num)){
+								this.borCard.userdCount='';
+								//alert(num);
+							}else if(num<=0){
+								this.borCard.userdCount=0
+							}else if(num>0 && num<999){
+								this.borCard.userdCount=Math.round(num);
+							}else if(num>=999){
+								this.borCard.userdCount=999;
+							};
+			                break;
+			            case 'stopPaymentCount':
+			                if(isNaN(num)){
+								this.borCard.stopPaymentCount='';
+								//alert(num);
+							}else if(num<=0){
+								this.borCard.stopPaymentCount=0
+							}else if(num>0 && num<999){
+								this.borCard.stopPaymentCount=Math.round(num);
+							}else if(num>=999){
+								this.borCard.stopPaymentCount=999;
+							};
+			                break;
+			            //征询报告 近6个月内信用卡报告查询次数
+			            case 'crRecordTimes':
+			                if(isNaN(num)){
+								this.rptInfo.crRecordTimes='';
+								//alert(num);
+							}else if(num<=0){
+								this.rptInfo.crRecordTimes=0
+							}else if(num>0 && num<99999){
+								this.rptInfo.crRecordTimes=Math.round(num);
+							}else if(num>=99999){
+								this.rptInfo.crRecordTimes=99999;
+							};
+			                break;  
+			                 
+			        }
+			    }
 			},
-			carNormal(num){
+			/*carNormal(num){
 				if(num!=null && num!=""){
 					if(isNaN(num)){
 						this.borCard.normalCount='';
 						//alert(num);
 					}else if(num<=0){
 						this.borCard.normalCount=0
-					}else if(num>0){
+					}else if(num>0 && num<999){
 						this.borCard.normalCount=Math.round(num);
 					}else if(num>999){
 						this.borCard.normalCount=999;
 					}
 				}
-			},
-			carBadDebt(num){
+			},*/
+			/*carBadDebt(num){
 				if(num!=null && num!=""){
 					if(isNaN(num)){
 						this.borCard.badDebtCount='';
@@ -1912,8 +2017,8 @@
 						this.borCard.badDebtCount=999;
 					}
 				}
-			},
-			carNouse(num){
+			},*/
+			/*carNouse(num){
 				if(num!=null && num!=""){
 					if(isNaN(num)){
 						this.borCard.nouseCount='';
@@ -1926,8 +2031,8 @@
 						this.borCard.nouseCount=999;
 					}
 				}
-			},
-			carFreeze(num){
+			},*/
+			/*carFreeze(num){
 				if(num!=null && num!=""){
 					if(isNaN(num)){
 						this.borCard.freezeCount='';
@@ -1940,8 +2045,8 @@
 						this.borCard.freezeCount=999;
 					}
 				}
-			},
-			carCancel(num){
+			},*/
+			/*carCancel(num){
 				if(num!=null && num!=""){
 					if(isNaN(num)){
 						this.borCard.cancelCount='';
@@ -1954,8 +2059,8 @@
 						this.borCard.cancelCount=999;
 					}
 				}
-			},
-			carUserd(num){
+			},*/
+			/*carUserd(num){
 				if(num!=null && num!=""){
 					if(isNaN(num)){
 						this.borCard.userdCount='';
@@ -1968,8 +2073,8 @@
 						this.borCard.userdCount=999;
 					}
 				}
-			},
-			carStopPayment(num){
+			},*/
+			/*carStopPayment(num){
 				if(num!=null && num!=""){
 					if(isNaN(num)){
 						this.borCard.stopPaymentCount='';
@@ -1982,9 +2087,9 @@
 						this.borCard.stopPaymentCount=999;
 					}
 				}
-			},
+			},*/
 			//征询报告 近6个月内信用卡报告查询次数
-			recordTimes(num){
+			/*recordTimes(num){
 				if(num!=null && num!=""){
 					if(isNaN(num)){
 						this.rptInfo.crRecordTimes='';
@@ -1997,7 +2102,7 @@
 						this.rptInfo.crRecordTimes=99999;
 					}
 				}
-			},
+			},*/
 			//负债信息 最近3个月信用卡/贷款申请次数
 			loanNumber(num){
 				if(num!=null && num!=""){
