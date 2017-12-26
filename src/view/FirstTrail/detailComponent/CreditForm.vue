@@ -464,7 +464,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">私营企业信息</span>
         </template>
-        <div class="CreditForm_CompanyInfs" v-show="this.workInf.private"  style="paddingLeft:21px;height:338px;">
+        <div class="CreditForm_CompanyInfs" v-show="this.workInf.private" style="paddingLeft:21px;height:338px;">
           <ul class="CreditForm_CompanyInfs_ul_left">
             <li ref="compTypeDiv">
               <i class="hint">
@@ -922,8 +922,8 @@
     </el-collapse>
     <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
     <!-- ==============================点击确认时提示弹框=================================== -->
-    <div class="layer" v-show="this.Confirm">
-      @touchmove.prevent 
+    <!-- <div class="layer" v-show="this.Confirm">
+      @touchmove.prevent
       <div class="layerbox">
         <p>
           <span>询问</span>
@@ -937,14 +937,14 @@
           </div>
         </div>
       </div>
-    </div>
-    <!-- <el-dialog title="您确定已填写好各项内容并提交？" :visible.sync="this.Confirm" width="400px" top="350px" append-to-body center>
-      <span></span>
+    </div> -->
+    <el-dialog title="" :visible.sync="this.Confirm" width="400px" top="350px" append-to-body center>
+      <span>您确定已填写好各项内容并提交？</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="canc">取 消</el-button>
         <el-button type="primary" @click="CFsave">确 定</el-button>
       </span>
-    </el-dialog> -->
+    </el-dialog>
     <!-- ========================================提交成功提示================================= -->
     <div class="layer" v-show="AlertS">
       <div class="layerbox">
@@ -1621,6 +1621,49 @@
             break;
         }
       },
+//       aa(){
+//         // open 打开 是否确认提交弹窗
+// open() {
+//     const h = this.$createElement;
+//     this.$msgbox({
+//         title: '提示',
+//         message: h('p', null, [
+//             h('span', null, '确定操作? '),
+//         ]),
+//         showCancelButton: true,
+//         confirmButtonText: '确定',
+//         cancelButtonText: '取消',
+//         beforeClose: (action, instance, done) => {
+//             if (action === 'confirm') {
+//                 instance.confirmButtonLoading = true;
+//                 instance.confirmButtonText = '执行中...';
+//                 console.log(this.taskId)
+//                 // 点击 确认 提交 方法
+//                 this.post("/creauditInfo/approveHang ", {
+//                     taskId: this.taskId
+//                 }).then(res => {
+//                     console.log(res);
+//                     console.log(res.statusCode);
+//                     if (res.statusCode == '200')
+//                         done();
+//                     else {
+//                         this.$message(res.msg);
+//                         instance.confirmButtonText = '';
+//                     }
+//                     instance.confirmButtonLoading = false;
+//                 });
+//             } else {
+//                 done();
+//             }
+//         }
+//     }).then(action => {
+//         this.$message({
+//             type: 'success',
+//             message: '挂起成功'
+//         });
+//     });
+// },
+//       },
       wordarea(val, el, txt) {
         if (val.length >= 500) {
           this.wordareaSC(val, el);
@@ -1988,19 +2031,83 @@
           if (result) {
             this.checkData.selfpremisesArea = this.acreage;
             this.checkData.selfhasProportion = this.Percent;
-            this.post("/creauditInfo/addOrUpdate", this.checkData).then(res => {
+
+  const h = this.$createElement;
+    this.$msgbox({
+        title: '提示',
+        message: h('p', null, [
+            h('span', null, '确定操作? '),
+        ]),
+        showCancelButton: true,
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        beforeClose: (action, instance, done) => {
+            if (action === 'confirm') {
+                instance.confirmButtonLoading = true;
+                instance.confirmButtonText = '执行中...';
+                console.log(this.taskId)
+                // 点击 确认 提交 方法
+                            this.post("/creauditInfo/addOrUpdate", this.checkData).then(res => {
               if (res.statusCode == 200) {
                 this.Confirm = false;
-                alert('提交成功!');
+                // alert('提交成功!');
                 this.AreaNPercent();
+                this.$message({
+                  message: '恭喜你，提交成功!',
+                  type: 'success'
+                });
               } else {
-                alert("提交失败，请重新提交")
+                // alert("提交失败，请重新提交")
                 this.Confirm = false;
+                this.$message({
+                  message: '提交失败!',
+                  type: 'success'
+                });
               }
             });
-          } else {
-            alert('请按要求填写！');
+             } else {
+            // alert('请按要求填写！');
             this.Confirm = false;
+             this.$message({
+                  message: '请按要求填写!',
+                  type: 'success'
+                });
+          }
+        }
+    }).then(action => {
+        this.$message({
+            type: 'success',
+            message: '恭喜你，提交成功!'
+        });
+    });
+
+
+
+            // this.post("/creauditInfo/addOrUpdate", this.checkData).then(res => {
+            //   if (res.statusCode == 200) {
+            //     this.Confirm = false;
+            //     // alert('提交成功!');
+            //     this.AreaNPercent();
+            //     this.$message({
+            //       message: '恭喜你，提交成功!',
+            //       type: 'success'
+            //     });
+            //   } else {
+            //     // alert("提交失败，请重新提交")
+            //     this.Confirm = false;
+            //     this.$message({
+            //       message: '提交失败!',
+            //       type: 'success'
+            //     });
+            //   }
+            // });
+          // } else {
+            // alert('请按要求填写！');
+            // this.Confirm = false;
+            //  this.$message({
+            //       message: '请按要求填写!',
+            //       type: 'success'
+            //     });
           }
         });
       },
@@ -2392,7 +2499,8 @@
     width: 100%;
   }
   /* content下边距+左边距 */
-  .padd{
+
+  .padd {
     /* margin: 0 0 20px 21px; */
     padding: 0 0 20px 21px;
   }
@@ -2417,7 +2525,6 @@
   .btn {
     margin: 20px 0 0 844px;
   }
-  /* calc( 100%- 180px ) */
 
   .specialInput {
     width: 480px;
