@@ -317,7 +317,8 @@ export default {
       otherIncome: '',
       otherIncometxt: '',
       conclusion: '',
-      phoneId: ''
+      phoneId: '',
+      resMsg:''
     }
   },
   props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull'],
@@ -360,93 +361,121 @@ export default {
         return;
       }
 
-      this.post('/creTelResearchHis/addTelfContract', {
-          cretelinvest: {
-            custName: this.custName,
-            phoneType: this.phoneType,
-            phoneNum: this.phoneNum,
-            source: this.source,
-            answer: this.answer,
-            sourceDesc: this.sourceDesc,
-            checkStage: this.checkStage,
-            applyId: this.applyId,
-            id: this.phoneId
-          },
-          cretelfcontact: {
-            applyId: this.applyId,
-            id: this.phoneId,
-            thirdResult: this.thirdResult, // 第三方查询信息
-            threeQueries: this.threeQueries, // 三方异常
-            threeQueriestxt: this.threeQueriestxt, // 三方异常说明
-            issameFam: this.issameFam,
-            issameFamtxt: this.issameFamtxt,
-            wetherThirdAbnormal: this.wetherThirdAbnormal,
-            wetherThirdAbnormaltxt: this.wetherThirdAbnormaltxt,
-            mobilepayment: this.mobilepayment,
-            mobilepaymenttxt: this.mobilepaymenttxt, // 微信/支付宝异常说明
-            relBorrower: this.relBorrower,
-            relBorrowertxt: this.relBorrowertxt,
-            checkWork: this.checkWork,
-            checkWorktxt: this.checkWorktxt,
-            maritalStatus: this.maritalStatus,
-            maritalStatustxt: this.maritalStatustxt,
-            checkAddr: this.checkAddr,
-            checkAddrtxt: this.checkAddrtxt,
-            checkEstate: this.checkEstate,
-            checkEstatetxt: this.checkEstatetxt,
-            otherIncome: this.otherIncome,
-            otherIncometxt: this.otherIncometxt,
-            conclusion: this.conclusion
-          }
-        })
-        .then(res => {
-          console.log(res);
-          if (res.statusCode == '200') {
-            this.phoneId = res.data.id;
-            // 清数据
-            this.source = '';
-            this.answer = '';
-            this.sourceDesc = '';
-            this.checkStage = '';
-            this.thirdResult = '';
-            this.threeQueries = '';
-            this.threeQueriestxt = '';
-            this.issameFam = '';
-            this.issameFamtxt = '';
-            this.wetherThirdAbnormal = '';
-            this.wetherThirdAbnormaltxt = '';
-            this.mobilepayment = '';
-            this.mobilepaymenttxt = '';
-            this.relBorrower = '';
-            this.relBorrowertxt = '';
-            this.checkWork = '';
-            this.checkWorktxt = '';
-            this.maritalStatus = '';
-            this.maritalStatustxt = '';
-            this.checkAddr = '';
-            this.checkAddrtxt = '';
-            this.checkEstate = '';
-            this.checkEstatetxt = '';
-            this.otherIncome = '';
-            this.otherIncometxt = '';
-            this.conclusion = '';
+      this.open();
 
-            // 提交数据成功,广播事件 重新刷新列表
-            this.$emit('updateList');
-            this.$emit('updateTree');
+    },
+    // open 打开 是否确认提交弹窗
+    open() {
+      const h = this.$createElement;
+      this.$msgbox({
+        title: '提示',
+        message: h('p', null, [
+          h('span', null, '确定操作? '),
+        ]),
+        showCancelButton: true,
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        beforeClose: (action, instance, done) => {
+          if (action === 'confirm') {
+            instance.confirmButtonLoading = true;
+            instance.confirmButtonText = '执行中...';
+            console.log(this.taskId)
+            // 点击 确认 提交 方法
+            this.post('/creTelResearchHis/addTelfContract', {
+              cretelinvest: {
+                custName: this.custName,
+                phoneType: this.phoneType,
+                phoneNum: this.phoneNum,
+                source: this.source,
+                answer: this.answer,
+                sourceDesc: this.sourceDesc,
+                checkStage: this.checkStage,
+                applyId: this.applyId,
+                id: this.phoneId
+              },
+              cretelfcontact: {
+                applyId: this.applyId,
+                id: this.phoneId,
+                thirdResult: this.thirdResult, // 第三方查询信息
+                threeQueries: this.threeQueries, // 三方异常
+                threeQueriestxt: this.threeQueriestxt, // 三方异常说明
+                issameFam: this.issameFam,
+                issameFamtxt: this.issameFamtxt,
+                wetherThirdAbnormal: this.wetherThirdAbnormal,
+                wetherThirdAbnormaltxt: this.wetherThirdAbnormaltxt,
+                mobilepayment: this.mobilepayment,
+                mobilepaymenttxt: this.mobilepaymenttxt, // 微信/支付宝异常说明
+                relBorrower: this.relBorrower,
+                relBorrowertxt: this.relBorrowertxt,
+                checkWork: this.checkWork,
+                checkWorktxt: this.checkWorktxt,
+                maritalStatus: this.maritalStatus,
+                maritalStatustxt: this.maritalStatustxt,
+                checkAddr: this.checkAddr,
+                checkAddrtxt: this.checkAddrtxt,
+                checkEstate: this.checkEstate,
+                checkEstatetxt: this.checkEstatetxt,
+                otherIncome: this.otherIncome,
+                otherIncometxt: this.otherIncometxt,
+                conclusion: this.conclusion
+              }
+            }).then(res => {
+              if (res.statusCode == '200') {
+                this.phoneId = res.data.id;
+                // 清数据
+                // this.source = '';
+                // this.answer = '';
+                // this.sourceDesc = '';
+                // this.checkStage = '';
+                // this.thirdResult = '';
+                // this.threeQueries = '';
+                // this.threeQueriestxt = '';
+                // this.issameFam = '';
+                // this.issameFamtxt = '';
+                // this.wetherThirdAbnormal = '';
+                // this.wetherThirdAbnormaltxt = '';
+                // this.mobilepayment = '';
+                // this.mobilepaymenttxt = '';
+                // this.relBorrower = '';
+                // this.relBorrowertxt = '';
+                // this.checkWork = '';
+                // this.checkWorktxt = '';
+                // this.maritalStatus = '';
+                // this.maritalStatustxt = '';
+                // this.checkAddr = '';
+                // this.checkAddrtxt = '';
+                // this.checkEstate = '';
+                // this.checkEstatetxt = '';
+                // this.otherIncome = '';
+                // this.otherIncometxt = '';
+                // this.conclusion = '';
 
-            this.$message({
-              message: res.msg,
-              type: 'success'
+
+                // 提交数据成功,广播事件 重新刷新列表
+                this.$emit('updateList');
+                this.$emit('updateTree');
+
+
+
+                this.resMsg = res.msg;
+                done();
+              } else {
+                // this.$message(res.msg);
+                this.resMsg = res.msg;
+                instance.confirmButtonText = '';
+              }
+              instance.confirmButtonLoading = false;
             });
           } else {
-            this.$message({
-              message: res.msg,
-              type: 'warning'
-            });
+            this.$message({ message: this.resMsg, type: 'warning' });
+            done();
           }
-        })
-    }
+        }
+      }).then(action => {
+        this.$message({ type: 'success', message:this.resMsg });
+
+      });
+    },
   },
   watch: {
     threeQueries: function() {
