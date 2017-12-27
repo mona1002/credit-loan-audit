@@ -1711,3 +1711,12 @@ height: 40px;
   transform:rotate(90deg); 
  -webkit-transform:rotate(90deg); 
 }
+
+
+/* 必填 * */
+.require-icon{
+  color: red;
+  font-weight: 700;
+  font-size: 16px;
+  vertical-align: middle;
+}
