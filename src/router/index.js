@@ -64,7 +64,8 @@ import AntiAudit from '@/view/AntiFraud/AntiAudit.vue'
 import AntiFraud from '@/view/AntiFraud/AntiFraud.vue'
 // 反欺诈 申请
 import AntiApplyInf from '@/view/AntiFraud/AntiApplyInf.vue'
-
+// 审批结论
+import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
 
 // 系统管理
 // 机构管理
@@ -221,6 +222,11 @@ const routes = [{
 {
   path:'/AntiApplyInf',
   component:AntiApplyInf
+},
+// 审批结论
+{
+  path:'/ApprovalConclus',
+  component:ApprovalConclus
 },
 // {
 //   path:'/FMatchingInf',
