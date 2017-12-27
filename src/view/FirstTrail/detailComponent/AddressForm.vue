@@ -5,7 +5,7 @@
       <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
       <span class="headFont">新增调查日志</span>
     </div>
-    <ul class="content-ul">
+    <ul class="content-ul" style="margin-left:15px;">
       <li class="item-column3">
         <div class="left-title">客户名称：</div>
         <div class="dis-input">
@@ -40,7 +40,7 @@
       </li>
       <li class="item-column3">
         <div class="left-title">
-          <span class="require-icon" style="left:60px;">*</span> 接听情况:
+          <span class="require-icon" style="left:50px;">*</span> 接听情况：
         </div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
