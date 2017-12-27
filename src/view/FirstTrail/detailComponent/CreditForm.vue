@@ -833,8 +833,16 @@
                 </i>
                 <label class="Family_right_label">
                   <span class="red"> * </span> 可以承受的月还款[元]： </label>
-                <el-input type="text" placeholder="请输入内容" :rows="2" resize="none" :maxlength="this.shotTextareaL" v-model.number="checkData.fbalance"
+                <!-- <el-input type="text" placeholder="请输入内容" :maxlength="this.shotTextareaL" v-model.number="checkData.fbalance"
                   @blur="formatMoney(checkData.fbalance,$event,'月还款')" name="Paymonth" v-validate="'required'">
+                </el-input> -->
+                <!-- formatNumber(num, cent, isThousand, el) -->
+                 <!-- <el-input type="text" placeholder="请输入内容" :rows="2" resize="none" :maxlength="this.shotTextareaL" v-model.number="checkData.fbalance"
+                  @blur="formatNumber(checkData.fbalance,2,0,'月还款')" name="Paymonth" v-validate="'required'">
+                </el-input> -->
+                <!-- formatSC -->
+                  <el-input type="text" placeholder="请输入内容" v-model.number="checkData.fbalance"
+                  @blur="formatSC('月还款')" name="Paymonth" v-validate="'required'">
                 </el-input>
               </p>
             </li>
@@ -948,17 +956,6 @@
         <button class="subtn" type="primary" @click="CFsave">确定</button>
       </span>
     </el-dialog>
-    <!-- ========================================提交成功提示================================= -->
-    <div class="layer" v-show="AlertS">
-      <div class="layerbox">
-        <p>
-          <span>提示</span>
-        </p>
-        <div>
-          <p class="choces">添加成功</p>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 <script>
@@ -2258,11 +2255,6 @@
         }
       },
       formatMoney(val, e, name) {
-        // console.log(val)
-        // this.formatNumber(val, 2, 0)
-        // console.log(val)
-        // this.formatSC(name, val);
-        // console.log(val)
         val = parseFloat(val);
         if (isNaN(val)) {
           val = e.target.value = "";
@@ -2285,7 +2277,7 @@
           }
         }
       },
-      formatNumber(num, cent, isThousand, el) {
+      formatNumber(num, cent, isThousand) {
         console.log("算法" + num)
         num = num.toString().replace(/\$|\,/g, '');
         // 检查传入数值为数值类型
@@ -2320,20 +2312,21 @@
             // this.formatSC(el, num);
         } else {
           return (((sign) ? '' : '-') + num);
+        	// return (((sign)?'':'-') + num);
           // num
           console.log(num)
             // this.formatSC(el, num);
         
         }
       },
-      formatSC(el, val) {
+      formatSC(el) {
       // formatSC(val, el) {
-        
         console.log("ad")
         switch (el) {
           case "月还款":
-            this.checkData.fbalance = val;
-          //  this.checkData.fbalance= this.formatNumber(this.checkData.fbalance,2,3);
+            // this.checkData.fbalance = val;
+            // ,checkData.fbalance
+           this.checkData.fbalance= this.formatNumber(this.checkData.fbalance,2,3);
             break;
           case "借款金额":
             this.checkData.iloanAmt = val;

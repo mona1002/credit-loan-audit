@@ -122,7 +122,7 @@ import NavItem from '@/view/navItem'
   }
   .mheader .backIcon{
     width: 60px;
-    padding: 0 20px;
+    padding: 0 16px;
     line-height: 70px;
     float: right;
   }

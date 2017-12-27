@@ -329,7 +329,7 @@
 				</div>
 				<ul>
 					<li>
-						<label>是否是私营业主:</label>
+						<label>是否是私营业主：</label>
 						<span>{{accepCusBasicInfo.privateOwnerFlagTxt}}</span>
 					</li>
 					<li></li>
@@ -509,22 +509,22 @@
 				      <el-table-column
 				        prop="estateTypeTxt"
 				        label="房产类型"
-				        min-width="130">
+				        min-width="110">
 				      </el-table-column>
 				      <el-table-column
 				        prop="propertyTypeTxt"
 				        label="产权性质"
-				        min-width="130">
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="coveredArea"
-				        label="建筑面积[m^2]"
-				        min-width="130">
+				        label="建筑面积[m²]"
+				        min-width="110">
 				      </el-table-column>
 				      <el-table-column
 				        prop="unitPrice"
 				        label="建筑单价[元]"
-				        min-width="130">
+				        min-width="110">
 				      </el-table-column>
 				      <el-table-column
 				        prop="estateAddress"
@@ -535,17 +535,17 @@
 				      <el-table-column
 				        prop="estateZip"
 				        label="邮政编码"
-				        min-width="100">
+				        min-width="80">
 				      </el-table-column>
 				      <el-table-column
 				        prop="equityRatio"
 				        label="产权比例"
-				        min-width="100">
+				        min-width="80">
 				      </el-table-column>
 				      <el-table-column
 				        prop="loanPeriod"
 				        label="贷款期限[月]"
-				        min-width="130">
+				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
 				        prop="mortgageStatusTxt"
@@ -555,12 +555,12 @@
 				      <el-table-column
 				        prop="monthlyPay"
 				        label="月供[元]"
-				        min-width="100">
+				        min-width="80">
 				      </el-table-column>
 				      <el-table-column
 				        prop="restLoans"
 				        label="贷款余额[元]"
-				        min-width="130">
+				        min-width="120">
 				      </el-table-column>
 			    </el-table>
 		  	</el-collapse-item>
@@ -771,7 +771,7 @@
 				      <el-table-column
 				        prop="contactTypeTxt"
 				        label="类型"
-				        min-width="120">
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="relationshipTxt"
@@ -980,7 +980,7 @@
 		min-width: 330px;
 	}
 	ul li label{
-		width: 178px;
+		width: 166px;
 		display: inline-block;
 		text-align: right;
 		/* position: relative; */

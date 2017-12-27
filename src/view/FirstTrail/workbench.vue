@@ -157,7 +157,12 @@
         this.post("/workFlowTaskQuery/getTaskProfile", {
           taskStatus: "01",
         }).then(res => {
+          console.log(res)
+          if(res.statusCode==200){
           this.tableData = res.data;
+          }else{
+            alert(res.msg);
+          }
         });
       });
       // 统一登录 平台  调测 end

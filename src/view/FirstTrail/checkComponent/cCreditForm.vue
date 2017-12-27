@@ -852,7 +852,14 @@
       },
     },
     mounted() {
-      this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
+      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      if (this.judgeFlag.flag == '01') {
+        this.getParams = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
+      } else if (this.judgeFlag.flag == '03') {
+        this.getParams = JSON.parse(localStorage.getItem("AntiWorkbenchPass")) //反欺诈专员
+      } else if (this.judgeFlag.flag == '04') {
+        this.getParams = JSON.parse(localStorage.getItem("AntiManagerWorkbenchPass")) //反欺诈主管
+      }
       // 获取查询列表数据
       this.post("/creauditInfo/queryCreauditInfoObj", {
         applyId: this.getParams.applyId,

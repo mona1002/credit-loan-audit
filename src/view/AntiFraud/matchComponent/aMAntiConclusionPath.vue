@@ -2,7 +2,7 @@
   <div date="aAntiConclusionPath">
     <!-- 反欺诈审批结论轨迹=========================默认显示1-条？分页？ -->
     <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="auditResultTxt" label="审批结果"  min-width="35">
+      <el-table-column prop="auditResultTxt" label="审批结果" min-width="35">
       </el-table-column>
       <el-table-column prop="mainreaName" label="主原因" min-width="35">
       </el-table-column>
@@ -23,12 +23,12 @@
       return {
         MatchInf: '',
         tastwaitingPass: '',
-        tableData:[]
+        tableData: []
       }
     },
     mounted() {
       this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //反欺诈专员-匹配查看 + 主管
-//需要做判读的时候打开
+      //需要做判读的时候打开
       // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       // if (this.judgeFlag.flag == '03') {
       //   this.MatchInf = JSON.parse(localStorage.getItem("AntiinternalObj")); //反欺诈专员-匹配查看
@@ -41,8 +41,8 @@
       }).then(res => {
         this.tableData = res.data;
       });
-      }
     }
+  }
 
 </script>
 <style scoped>

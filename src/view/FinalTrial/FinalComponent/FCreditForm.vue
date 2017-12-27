@@ -712,22 +712,13 @@
     </el-collapse>
     <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
     <!-- ==============================点击确认时提示弹框=================================== -->
-    <div class="layer" v-show=" this.Confirm">
-      <!-- @touchmove.prevent  -->
-      <div class="layerbox">
-        <p>
-          <span>询问</span>
-          <i class="el-icon-close" @click="closed"></i>
-        </p>
-        <div>
-          <p class="choces">您确定已填写好各项内容并提交？</p>
-          <div class=buttonDiv>
-            <el-button type="primary" @click="CFsave">确定</el-button>
-            <el-button type="primary" @click="canc">取消</el-button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <el-dialog title="提示" :visible.sync="Confirm" top="43vh" width="420px">
+      <span>确定操作？</span>
+      <span slot="footer" class="dialog-footer">
+        <button class="calbtn" @click="canc">取消</button>
+        <button class="subtn" type="primary" @click="CFsave">确定</button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -884,7 +875,6 @@
                   type: 'success'
                 });
               } else {
-                alert("提交失败，请重新提交")
                 this.Confirm = false;
                 this.$message({
                   message: '提交失败!',
