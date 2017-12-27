@@ -6,8 +6,6 @@ import Router from 'vue-router'
 // 头部导航
 import myHead from '@/view/header'
 import test from '@/view/test'
-import new2 from '@/view/new2'
-import new1 from '@/view/new1'
 
 import HelloWorld from '@/view/HelloWorld'
 /*初审审批*/
@@ -60,11 +58,11 @@ import FMatchingInf from '@/view/FinalTrial/FMatchingInf'
 
 // ------------反欺诈------------------
 import AntiAudit from '@/view/AntiFraud/AntiAudit.vue'
+import AnitAudioVisual from'../view/AntiFraud/components/AnitAudioVisual.vue'
 // 反欺诈 列表
 import AntiFraud from '@/view/AntiFraud/AntiFraud.vue'
 // 反欺诈 申请
 import AntiApplyInf from '@/view/AntiFraud/AntiApplyInf.vue'
-
 
 // 系统管理
 // 机构管理
@@ -211,6 +209,10 @@ const routes = [{
 {
   path:'/AntiAudit',
   component:AntiAudit
+},
+{
+  path:'/AnitAudioVisual',
+  component:AnitAudioVisual
 },
 // 反欺诈列表
 {

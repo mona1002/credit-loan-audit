@@ -33,21 +33,23 @@
     data() {
       return {
         FinanceInf: [],
-        MatchInf: []
+        MatchInf: '',
+        judgeFlag:''
       }
     },
     mounted() {
-        this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '01') {
        this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //初审-匹配查看
-      } else if (this.judgeFlag.flag == '02') {
-        this.MatchInf = JSON.parse(localStorage.getItem("FinalinternalObj")); //终审-匹配查看
-      } else if (this.judgeFlag.flag == '02') {
-        this.MatchInf = JSON.parse(localStorage.getItem("AntiinternalObj")); //反欺诈专员-匹配查看
-      } else if (this.judgeFlag.flag == '02') {
-        this.MatchInf = JSON.parse(localStorage.getItem("AntiManagerinternalObj")); //反欺诈主管-匹配查看
-      }
-      this.post("/creAccountInfo/getAccountInfo", {
+        // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      // if (this.judgeFlag.flag == '01') {
+      //  this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //初审-匹配查看
+      // } else if (this.judgeFlag.flag == '02') {
+      //   this.MatchInf = JSON.parse(localStorage.getItem("FinalinternalObj")); //终审-匹配查看
+      // } else if (this.judgeFlag.flag == '02') {
+      //   this.MatchInf = JSON.parse(localStorage.getItem("AntiinternalObj")); //反欺诈专员-匹配查看
+      // } else if (this.judgeFlag.flag == '02') {
+      //   this.MatchInf = JSON.parse(localStorage.getItem("AntiManagerinternalObj")); //反欺诈主管-匹配查看
+      // }
+      this.post("/creAccountInf·o/getAccountInfo", {
         applyId: this.MatchInf.matchApplyId,           
         // applyId: "24667563-2ca2-4da6-8e02-4bf7d7c839b6",
       }).then(res => {

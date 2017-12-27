@@ -36,13 +36,13 @@
           </div>
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
-            <AnitAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AnitAudioVisual>
+            <aMAnitAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></aMAnitAudioVisual>
             <remark v-if=" this.tabContent2==1"></remark>
             <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <borrowerInformation v-if=" this.tabContent2==4"></borrowerInformation>
             <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
-            <cCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></cCreditForm>
+            <RcCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></RcCreditForm>
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
             <!-- 反欺诈结论 空白 -->
             <!-- <CreditForm v-if=" this.tabContent2==8"></CreditForm> -->
@@ -56,10 +56,9 @@
 </template>
 <script>
   import myHead from "../header.vue"
-import AnitAudioVisual from'./components/AnitAudioVisual.vue';//工作台--》 av
 import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配查看 --》 aV
-  import cCreditForm from "../FirstTrail/checkComponent/cCreditForm.vue";
-
+  import RcCreditForm from "../FirstTrail/ReadComponent/RcCreditForm.vue";
+import RFinanceInformation from '../FirstTrail/ReadComponent/RFinanceInformation'//信审表-匹配查看-初审
   // 编辑
   import remark from "../FirstTrail/detailComponent/remark.vue";
   import InternalMatch from "../FirstTrail/InternalMatch.vue";
@@ -169,10 +168,9 @@ import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配�
     },
     components: {
       myHead,
-      AnitAudioVisual,
-      cCreditForm,
+      RcCreditForm,
       
-      // aMAnitAudioVisual,
+      aMAnitAudioVisual,
       // 编辑
       remark,
       InternalMatch,
