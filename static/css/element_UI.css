@@ -133,6 +133,28 @@ height: 40px;
   text-align: center;
 }
 
+.applicationInformationDetail .el-table th:nth-of-type(1) .cell{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.applicationInformationDetail .el-table__body-wrapper .el-table__body td:nth-of-type(1){
+  padding-left: 0 !important;
+}
+
+.applicationInformationDetail .el-table__body-wrapper .el-table__body td:nth-of-type(1) .cell{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.applicationInformationDetail .house .el-table__body-wrapper{
+      overflow: hidden;
+    }
+/* @media screen and (min-width: 1327px){
+    .applicationInformationDetail .house .el-table__body-wrapper{
+      overflow: hidden;
+    }
+  } */
 
 /* 车辆信息 序号、购买时间 居中 */
 
@@ -149,13 +171,30 @@ height: 40px;
 
 /* 联系人信息 序号 居中 */
 
-.applicationInformationDetail .people.el-table th:nth-of-type(1) {
+.applicationInformationDetail .people.el-table th{
   text-align: center;
 }
 
-.applicationInformationDetail .people .el-table__body-wrapper .el-table__body td:nth-of-type(1) {
+.applicationInformationDetail .people .el-table__body-wrapper .el-table__body td{
   text-align: center;
 }
+
+.applicationInformationDetail .people.el-table th:nth-of-type(2),.applicationInformationDetail .people.el-table th:nth-of-type(7),.applicationInformationDetail .people.el-table th:nth-of-type(8),.applicationInformationDetail .people.el-table th:nth-of-type(10),.applicationInformationDetail .people.el-table th:nth-of-type(12) {
+  text-align: left;
+}
+
+.applicationInformationDetail .people .el-table__body-wrapper .el-table__body td:nth-of-type(2),.applicationInformationDetail .people .el-table__body-wrapper .el-table__body td:nth-of-type(7),.applicationInformationDetail .people .el-table__body-wrapper .el-table__body td:nth-of-type(8),.applicationInformationDetail .people .el-table__body-wrapper .el-table__body td:nth-of-type(10),.applicationInformationDetail .people .el-table__body-wrapper .el-table__body td:nth-of-type(12) {
+  text-align: left;
+}
+
+.applicationInformationDetail .people .el-table__body-wrapper{
+      overflow: hidden;
+    }
+/* @media screen and (min-width: 1327px){
+    .applicationInformationDetail .people .el-table__body-wrapper{
+      overflow: hidden;
+    }
+  } */
 
 
 /*申请信息 表格去掉overflow:hidden; */
@@ -438,11 +477,14 @@ height: 40px;
 } */
 
 /* 借款人资料 房产类型 */
-@media screen and (min-width: 1390px){
+.borrowerInformation .house .el-table__body-wrapper{
+      overflow: hidden;
+    }
+/* @media screen and (min-width: 1327px){
     .borrowerInformation .house .el-table__body-wrapper{
       overflow: hidden;
     }
-  }
+  } */
 .borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(2) .el-input__inner{
   width: 126px; 
 
@@ -485,11 +527,14 @@ height: 40px;
   text-align: center; 
 }
 /* 借款人资料 车辆信息 去掉滚动条 */
-@media screen and (min-width: 1366px){
+.borrowerInformation .car .el-table__body-wrapper{
+      overflow: hidden;
+    }
+/* @media screen and (min-width: 1366px){
     .borrowerInformation .car .el-table__body-wrapper{
       overflow: hidden;
     }
-  }
+  } */
 /* 借款人资料 车辆信息 */
 .borrowerInformation .car .el-table__body-wrapper .el-table__body td:nth-of-type(6) .el-input__inner{
   width: 100px; 

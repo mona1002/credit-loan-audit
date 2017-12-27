@@ -69,7 +69,7 @@
 					      <el-table-column
 					        prop="coveredArea" 
 					        label="建筑面积[m²]"
-					        min-width="120">
+					        min-width="110">
 					        <template slot-scope="scope">
 						        <el-input v-model="scope.row.coveredArea" placeholder="请输入内容"></el-input>
 					        </template>
@@ -77,7 +77,7 @@
 					      <el-table-column
 					        prop="unitPrice"
 					        label="建筑单价[元]"
-					        min-width="101">
+					        min-width="100">
 					         <template slot-scope="scope">
 						        <el-input v-model="scope.row.unitPrice" @blur="moneyBlur(scope.row,'unitPrice')" placeholder="请输入内容"></el-input>
 					        </template>
@@ -96,7 +96,7 @@
 					      <el-table-column
 					        prop="estateZip"
 					        label="邮政编码"
-					        min-width="100">
+					        min-width="80">
 					        <template slot-scope="scope">
 					        	<!-- <el-tooltip class="item" effect="dark" content="邮政编码格式不正确" :disabled="postcodes==false" placement="top">
 					        	 						      		<el-input v-model="scope.row.estateZip" placeholder="请输入内容" v-on:blur="postcode(scope.row)" v-on:focus = "postcodes=false"></el-input>
@@ -138,7 +138,7 @@
 					      <el-table-column
 					        prop="monthlyPay"
 					        label="月供[元]"
-					        min-width="100">
+					        min-width="80">
 					        <template slot-scope="scope">
 						        <el-input v-model="scope.row.monthlyPay" @blur="moneyBlur(scope.row,'monthlyPay')" placeholder="请输入内容"></el-input>
 					        </template>
@@ -703,22 +703,22 @@
 			    </template>
 		  		<div class="xinyongka daikuanzongkuang">
 		  			<ul>
-				    	<li><label>车贷共有笔数:</label><p>{{loanInfo.carLoanTotal}}</p></li>
-				    	<li><label>信用贷总笔数:</label><p>{{loanInfo.studentLoanTotal}}</p></li>
-				    	<li><label>房贷总笔数:</label><p>{{loanInfo.houseLoanTotal}}</p></li>
-				    	<li><label>其他贷款总笔数:</label><p>{{loanInfo.otherLoanTotal}}</p></li>
+				    	<li><label>车贷共有笔数：</label><p>{{loanInfo.carLoanTotal}}</p></li>
+				    	<li><label>信用贷总笔数：</label><p>{{loanInfo.studentLoanTotal}}</p></li>
+				    	<li><label>房贷总笔数：</label><p>{{loanInfo.houseLoanTotal}}</p></li>
+				    	<li><label>其他贷款总笔数：</label><p>{{loanInfo.otherLoanTotal}}</p></li>
 				    </ul>
 				    <ul>
-				    	<li><label>车贷现存笔数:</label><p>{{loanInfo.carLoanNoPayoff}}</p></li>
-				    	<li><label>信用贷现存笔数:</label><p>{{loanInfo.studentLoanNoPayoff}}</p></li>
-				    	<li><label>房贷现存笔数:</label><p>{{loanInfo.houseLoanNoPayoff}}</p></li>
-				    	<li><label>其他贷现存笔数:</label><p>{{loanInfo.otherLoanNoPayoff}}</p></li>
+				    	<li><label>车贷现存笔数：</label><p>{{loanInfo.carLoanNoPayoff}}</p></li>
+				    	<li><label>信用贷现存笔数：</label><p>{{loanInfo.studentLoanNoPayoff}}</p></li>
+				    	<li><label>房贷现存笔数：</label><p>{{loanInfo.houseLoanNoPayoff}}</p></li>
+				    	<li><label>其他贷现存笔数：</label><p>{{loanInfo.otherLoanNoPayoff}}</p></li>
 				    </ul>
 				    <ul>
-				    	<li><label>车贷结清笔数:</label><p>{{loanInfo.carLoanPayoff}}</p></li>
-				    	<li><label>信用贷结清笔数:</label><p>{{loanInfo.studentLoanPayoff}}</p></li>
-				    	<li><label>房贷结清笔数:</label><p>{{loanInfo.houseLoanPayoff}}</p></li>
-				    	<li><label>其他贷款结清笔数:</label><p>{{loanInfo.otherLoanPayoff}}</p></li>
+				    	<li><label>车贷结清笔数：</label><p>{{loanInfo.carLoanPayoff}}</p></li>
+				    	<li><label>信用贷结清笔数：</label><p>{{loanInfo.studentLoanPayoff}}</p></li>
+				    	<li><label>房贷结清笔数：</label><p>{{loanInfo.houseLoanPayoff}}</p></li>
+				    	<li><label>其他贷款结清笔数：</label><p>{{loanInfo.otherLoanPayoff}}</p></li>
 				    </ul>
 		  		</div> 
 		  	</el-collapse-item>
@@ -730,7 +730,7 @@
 		  		<div class="fuzhaixinxi">
 		  			<ol>
 				    	<li class="liDiv">
-				    		<label>信用卡每月还款[元]:</label>
+				    		<label>信用卡每月还款[元]：</label>
 				    		<!-- <div>
 				    			<input type="text" name="" v-numbers v-model="borDebt.monthRepayAmt">
 				    		</div> -->
@@ -738,41 +738,41 @@
 				    		</el-input>
 				    	</li>
 				    	<li class="liDiv">
-				    		<label>信用贷每月还款额[元]:</label>
+				    		<label>信用贷每月还款额[元]：</label>
 				    		<el-input v-model="borDebt.studentLoanAmt" v-on:blur="debtTotal(borDebt.studentLoanAmt,'studentLoanAmt')">
 				    		</el-input>
 				    	</li>
 				    	<li class="liDiv">
-				    		<label>房贷每月还款额[元]:</label>
+				    		<label>房贷每月还款额[元]：</label>
 				    		<el-input v-on:blur="debtTotal(borDebt.houseLoanAmt,'houseLoanAmt')" v-model="borDebt.houseLoanAmt">	
 				    		</el-input>
 				    	</li>
 				    </ol>
 				    <ol>
 				    	<li class="liDiv">
-				    		<label>车贷每月还款额[元]:</label>
+				    		<label>车贷每月还款额[元]：</label>
 				    		<el-input v-on:blur="debtTotal(borDebt.carLoanAmt,'carLoanAmt')" v-model="borDebt.carLoanAmt">
 				    		</el-input>
 				    	</li>
 				    	<li class="liDiv">
-				    		<label>其他贷款每月还款额[元]:</label>
+				    		<label>其他贷款每月还款额[元]：</label>
 				    		<el-input v-on:blur="debtTotal(borDebt.otherLoanAmt,'otherLoanAmt')" v-model="borDebt.otherLoanAmt">	
 				    		</el-input>
 				    	</li>
 				    	<li class="zongji liDiv">
-				    		<label>负债合计[元]:</label>
+				    		<label>负债合计[元]：</label>
 				    		<el-input v-model="borDebt.totalLoan" :disabled="true">
 				    		</el-input>
 				    	</li>
 				    </ol>
 				    <ol class="num">
 				    	<li class="liDiv">
-				    		<label>最近三个月信用卡/贷款申请次数:</label>
+				    		<label>最近三个月信用卡/贷款申请次数：</label>
 				    		<el-input v-model="borDebt.loanNumber" v-on:blur="loanNumber(borDebt.loanNumber)"></el-input>
 				    	</li>
 				    	<li>
 
-				    		<label>文字说明:</label>
+				    		<label>文字说明：</label>
 				    		<div  class="require">
 				    			<span v-show="borDebt.remark.length==200">
 				    				<i>*</i>输入长度不能超过200
@@ -799,7 +799,7 @@
 		  		<div class="fuzhaixinxi zhengxunbaogao">
 		  			<ol>
 				    	<li class="liDiv">
-				    		<label>报告来源:</label>
+				    		<label>报告来源：</label>
 				    		<div  class="require" style="display:inline-block">
 				    			<span v-if="rptInfo.crSource.length==50"><i>*</i>输入长度不能超过50</span>
 				    			<el-input
@@ -812,7 +812,7 @@
 							</div>
 				    	</li>
 					    <li>
-					    	<label>有无征信报告查询记录:</label>
+					    	<label>有无征信报告查询记录：</label>
 					    	<!-- <el-select v-model="rptInfo.crHasRecord">
 					    								    <el-option
 					    								      v-for="item in crHasRecords"
@@ -831,11 +831,11 @@
 							</el-select>
 					    	<!-- <el-input v-model="rptInfo.crHasRecord"></el-input> -->
 						</li>
-				    	<li class="liDiv"><label>近6个月内信用报告查询次数:</label><el-input v-model="rptInfo.crRecordTimes" v-on:blur="carNum(rptInfo.crRecordTimes,'crRecordTimes')"></el-input></li>
+				    	<li class="liDiv"><label>近6个月内信用报告查询次数：</label><el-input v-model="rptInfo.crRecordTimes" v-on:blur="carNum(rptInfo.crRecordTimes,'crRecordTimes')"></el-input></li>
 				    </ol>
 				    <ol>
 				    	<li>
-				    		<label class="reportLabel">报告描述:</label>
+				    		<label class="reportLabel">报告描述：</label>
 				    		<div  class="require">
 				    			<span v-show="rptInfo.crContent.length==500"><i>*</i>输入长度不能超过500</span>
 				    			<el-input
@@ -980,7 +980,7 @@
 		  		<div class="qita">
 				    <ol>
 				    	<li>
-				    		<label>其他:</label>
+				    		<label>其他：</label>
 				    		<div  class="require">
 				    			<span v-if="otherInfo.content.length==500"><i>*</i>输入长度不能超过500</span>
 				    			<el-input
@@ -1313,7 +1313,7 @@
 	  			//负债信息
 	  			$(".fuzhaixinxi").width('930px');
 	  			$(".fuzhaixinxi ol li.liDiv div").width('150px');
-	  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 150px )');
+	  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 155px )');
 	  			$(".fuzhaixinxi ol li div.require div").width('100%');
 	  			$(".fuzhaixinxi ol li div input").css({'width':'100%','maxWidth':'150px'});
 	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 150px )',"padding-right":'calc( 16.6% - 150px )'});
@@ -1340,7 +1340,7 @@
 	  			//负债信息
 	  			$(".fuzhaixinxi").width('100%');
 	  			$(".fuzhaixinxi ol li.liDiv div").width('200px');
-	  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 150px )');
+	  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 155px )');
 	  			$(".fuzhaixinxi ol li div.require div").width('100%');
 	  			$(".fuzhaixinxi ol li div input").css({'width':'100%','maxWidth':'200px'});
 	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 175px )',"padding-right":'calc( 16.6% - 184px )'});
@@ -1350,15 +1350,15 @@
 	  			$(".zhengxunbaogao ol li div.require input").css({'width':'100%','maxWidth':'200px'});
 	  			//$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) div").width('200px');
 	  			$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) .unique").css({'maxWidth':'200px','minWidth':'200px'});
-	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 184px )'});
+	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 174px )'});
 	  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require").width('calc( 100% - 150px )');
 	  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require div").width('100%');
 	  			//其他信息
 	  			$(".qita").width('100%');
-	  			$(".qita ol li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 184px )'});
+	  			$(".qita ol li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 174px )'});
 	  			//确定按钮
 	  			$(".wattingButton").css({'width':'100%'});
-	  			$(".wattingButton button").css({'margin-right':'calc( 49.9% - 184px )'});
+	  			$(".wattingButton button").css({'margin-right':'calc( 49.9% - 174px )'});
 	  		}
 		},
 	    methods:{
@@ -2400,12 +2400,12 @@
 		  			//负债信息
 		  			$(".fuzhaixinxi").width('930px');
 		  			$(".fuzhaixinxi ol li.liDiv div").width('150px');
-		  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 150px )');
+		  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 155px )');
 		  			$(".fuzhaixinxi ol li div.require div").width('100%');
 		  			$(".fuzhaixinxi ol li div input").css({'width':'100%','maxWidth':'150px'});
 		  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 150px )',"padding-right":'calc( 16.6% - 150px )'});
 		  			//征询报告
-		  			$(".zhengxunbaogao ol li div").width('150px');
+		  			//$(".zhengxunbaogao ol li div").width('150px');
 		  			$(".zhengxunbaogao ol li div.require div").width('150px');
 		  			$(".zhengxunbaogao ol li div.require input").css({'width':'100%','maxWidth':'150px'});
 		  			//$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) div").width('150px');
@@ -2427,7 +2427,7 @@
 		  			//负债信息
 		  			$(".fuzhaixinxi").width('100%');
 		  			$(".fuzhaixinxi ol li.liDiv div").width('200px');
-		  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 150px )');
+		  			$(".fuzhaixinxi ol li div.require").width('calc( 100% - 155px )');
 		  			$(".fuzhaixinxi ol li div.require div").width('100%');
 		  			$(".fuzhaixinxi ol li div input").css({'width':'100%','maxWidth':'200px'});
 		  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 175px )',"padding-right":'calc( 16.6% - 184px )'});
@@ -2437,15 +2437,15 @@
 		  			$(".zhengxunbaogao ol li div.require input").css({'width':'100%','maxWidth':'200px'});
 		  			//$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) div").width('200px');
 		  			$(".zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) .unique").css({'maxWidth':'200px','minWidth':'200px'});
-		  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 184px )'});
+		  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 174px )'});
 		  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require").width('calc( 100% - 150px )');
 		  			$(".zhengxunbaogao ol:nth-of-type(2) li div.require div").width('100%');
 		  			//其他信息
 		  			$(".qita").width('100%');
-		  			$(".qita ol li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 184px )'});
+		  			$(".qita ol li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 174px )'});
 		  			//确定按钮
 		  			$(".wattingButton").css({'width':'100%'});
-		  			$(".wattingButton button").css({'margin-right':'calc( 49.9% - 184px )'});
+		  			$(".wattingButton button").css({'margin-right':'calc( 49.9% - 174px )'});
 			  	}
 		  	}
 
@@ -2540,6 +2540,9 @@
 		text-align: left;
 		padding-left: 13px;
 	}
+	.daikuanzongkuang ul:nth-of-type(3) li:nth-of-type(4) label{
+		width: 128px;
+	}
 	/* 负债信息 */
 	.fuzhaixinxi{
 		width: 930px;
@@ -2555,7 +2558,7 @@
 	}
 	.fuzhaixinxi ol li label{
 		display: inline-block;
-		width: 150px;
+		width: 155px;
 		text-align: right;
 		padding-right: 5px;
 		color: #475669;
@@ -2625,6 +2628,13 @@
 	.zhengxunbaogao ol{
 		width: 100%;
 	}
+	.zhengxunbaogao ol li label{
+		display: inline-block;
+		width: 150px;
+		text-align: right;
+		padding-right: 5px;
+		color: #475669;
+	}
 	.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(1) div .el-input__inner{
 		padding-right: 10px;
 	}
@@ -2634,8 +2644,12 @@
 	.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(3) label{
 		line-height: 1;
 	}
+	.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) label{
+		line-height: 1;
+	}
 	.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) .unique{
 		max-width: 150px;
+		top: -5px;
 	}
 	.zhengxunbaogao ol:nth-of-type(2) li{
 		width: 100%;
@@ -2710,7 +2724,7 @@
 	.wattingButton button{
 		float: right;
 		margin:10px;
-		margin-right: calc( 49.9% - 184px );
+		margin-right: calc( 49.9% - 174px );
 	}
 
 	/* 提示弹层 */

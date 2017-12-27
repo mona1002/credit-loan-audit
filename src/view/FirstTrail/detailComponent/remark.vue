@@ -74,7 +74,19 @@
 			  top="35vh">
 			  <div class="addBody">
 			  	<label>备注</label>
-			  	<textarea v-model="remark" maxlength="600" placeholder="最多600字"></textarea>
+			  	<span v-show="remark.length==600">
+    				<i>*</i>输入长度不能超过600
+    			</span>
+    			<el-input
+				  type="textarea"
+				  :rows="7"
+				  placeholder="最多600字"
+				  v-model="remark"
+				  :maxlength="600"
+				  resize="none"
+				  >
+				</el-input>
+			  	<!-- <textarea v-model="remark" maxlength="600" placeholder="最多600字"></textarea> -->
 			  </div>
 			  <span slot="footer" class="dialog-footer">
 			    <el-button type="primary" @click="sure">确定</el-button>
@@ -100,7 +112,19 @@
 			  top="35vh">
 			  <div class="changeBody">
 			  	<label>备注</label>
-			  	<textarea maxlength="600" placeholder="最多600字" v-model="changeRemarks">{{changeRemarks}}</textarea>
+			  	<span v-show="changeRemarks.length==600">
+    				<i>*</i>输入长度不能超过600
+    			</span>
+    			<el-input
+				  type="textarea"
+				  :rows="7"
+				  placeholder="最多600字"
+				  v-model="changeRemarks"
+				  :maxlength="600"
+				  resize="none"
+				  >
+				</el-input>
+			  	<!-- <textarea maxlength="600" placeholder="最多600字" v-model="changeRemarks">{{changeRemarks}}</textarea> -->
 			  </div>
 			  <span slot="footer" class="dialog-footer">
 			    <el-button type="primary" @click="changeSure">确定</el-button>
@@ -324,7 +348,7 @@
 				if(val == null){
 					this.isChecked = '';
 				}else{
-					this.currentRow = val;
+					//this.currentRow = val;
 		        	this.isChecked=val.id;
 				}  
 		    },
@@ -387,6 +411,7 @@
  .addLog .addBody{
  	height: 100%;
     width: 100%;
+    position: relative;
  }
  .addLog .addBody label{
  	height: 208px;
@@ -395,16 +420,34 @@
  	font-size: 14px;
  	float: left;
  }
- .addLog .addBody textarea{
+ .addLog .addBody div{
  	width: 90%;
     height: 200px;
-    margin-top: 4px;
+    margin-top: 26px;
     float: left;
-    padding: 5px 0 0 10px;
+ }
+ .addLog .addBody textarea{
+ 	width: 100%;
+    height: 100%;
+ }
+ .addLog .addBody span{
+ 	position: absolute;
+    left: 66px;
+    top: 5px;
+    font-size: 12px;
+    color: #ff7676;
+    display: inline-block;
+    height: 17px;
+    line-height: 17px;
+ }
+ .addLog .addBody span i{
+ 	padding-right: 2px;
+    font-style: normal;
  }
  .changeLog .changeBody{
  	height: 100%;
     width: 100%;
+    position: relative;
  }
  .changeLog .changeBody label{
  	height: 208px;
@@ -413,12 +456,30 @@
  	font-size: 14px;
  	float: left;
  }
- .changeLog .changeBody textarea{
+ .changeLog .changeBody div{
  	width: 90%;
     height: 200px;
-    margin-top: 4px;
+    margin-top: 26px;
     float: left;
-    padding: 5px 0 0 10px;
+    /* padding: 5px 0 0 10px; */
+ }
+ .changeLog .changeBody textarea{
+ 	width: 100%;
+ 	height: 100%;
+ }
+ .changeLog .changeBody span{
+ 	position: absolute;
+ 	left: 66px;
+ 	top: 5px;
+ 	font-size: 12px;
+ 	color: #ff7676;
+ 	display: inline-block;
+ 	height: 17px;
+ 	line-height: 17px;
+ }
+ .changeLog .changeBody span i{
+  padding-right: 2px;
+  font-style: normal;
  }
 /* 弹层 */
 /* .layer{

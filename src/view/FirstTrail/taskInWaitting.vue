@@ -245,6 +245,8 @@
 		width: 100%;
 		height: 100%;
 		background-color: #fafbfc;
+		overflow-y: auto;
+		overflow-x: hidden;
 	}
 	.taskWattingContain{
 		padding: 30px 30px;
