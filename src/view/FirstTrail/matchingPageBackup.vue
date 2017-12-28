@@ -2,11 +2,11 @@
 <!-- 初审-信审表-分屏-查看页面-更改为右屏样式之前的最后样式的备份 -->
   <div class="CreditForm">
     <el-collapse v-model="activeNames">
-      <!-- 上网查询信息 -->
+      <!-- 网上查询信息 -->
       <el-collapse-item name="1">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">上网查询信息</span>
+          <span class="headFont">网上查询信息</span>
         </template>
         <div class="CreditForm_InternetInf up_padding">
           <ul>

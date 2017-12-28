@@ -1,11 +1,11 @@
 <template>
   <div class="CreditForm">
     <el-collapse v-model="activeNames">
-      <!-- 上网查询信息 -->
+      <!-- 网上查询信息 -->
       <el-collapse-item name="1">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">上网查询信息</span>
+          <span class="headFont">网上查询信息</span>
         </template>
         <div class="CreditForm_InternetInf">
           <ul>
@@ -928,7 +928,10 @@
         </div>
       </el-collapse-item>
     </el-collapse>
-    <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
+     <div class="btn_wrap">
+      <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
+    </div>
+    <!-- <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button> -->
     <!-- <el-button type="primary" @click="CFsave">确定</el-button> -->
 
     <!-- ==============================点击确认时提示弹框=================================== -->
@@ -1069,78 +1072,78 @@
         ],
         activeNames: ['1', "2", "3", "4", "5", "6", "7", "8"], //折叠面板 默认显示下标
         checkData: [], // 查询接口回来的数据
-        // -------上网查询信息------------
-        beexEcuted: [{ //（上网查询信息）客户在人法网是否有被执行信
+        // -------网上查询信息------------
+        beexEcuted: [{ //（网上查询信息）客户在人法网是否有被执行信
           value: '1',
           label: '是'
         }, {
           value: '0',
           label: '否'
         }],
-        netHirecom: [{ //（上网查询信息）单位在人法网是否有被执行信
+        netHirecom: [{ //（网上查询信息）单位在人法网是否有被执行信
           value: '1',
           label: '是'
         }, {
           value: '0',
           label: '否'
         }],
-        netEcutedBrea: [{ //（上网查询信息）客户在失信网是否有失信记录
+        netEcutedBrea: [{ //（网上查询信息）客户在失信网是否有失信记录
           value: '1',
           label: '是'
         }, {
           value: '0',
           label: '否'
         }],
-        netHirecomBrea: [{ //（上网查询信息）单位在失信网是否有失信记录  4
+        netHirecomBrea: [{ //（网上查询信息）单位在失信网是否有失信记录  4
           value: '1',
           label: '是'
         }, {
           value: '0',
           label: '否'
         }],
-        netPhone: [{ //（上网查询信息）网上搜索借款人的手机是否有异常信息 5
+        netPhone: [{ //（网上查询信息）网上搜索借款人的手机是否有异常信息 5
           value: '1',
           label: '是'
         }, {
           value: '0',
           label: '否'
         }],
-        netHirecomName: [{ //（上网查询信息）网搜单位名称是否有异常  6
+        netHirecomName: [{ //（网上查询信息）网搜单位名称是否有异常  6
           value: '1',
           label: '是'
         }, {
           value: '0',
           label: '否'
         }],
-        netHirecomPhone: [{ //（上网查询信息）网搜单位电话是否有异常  7
+        netHirecomPhone: [{ //（网上查询信息）网搜单位电话是否有异常  7
           value: '1',
           label: '是'
         }, {
           value: '0',
           label: '否'
         }],
-        netAddrandEstate: [{ //（上网查询信息）网上搜索借款人现居住地址和房产地址是否有异常  8
+        netAddrandEstate: [{ //（网上查询信息）网上搜索借款人现居住地址和房产地址是否有异常  8
           value: '1',
           label: '是'
         }, {
           value: '0',
           label: '否'
         }],
-        netHirecomAddress: [{ //（上网查询信息）网搜单位地址是否有异常   9
+        netHirecomAddress: [{ //（网上查询信息）网搜单位地址是否有异常   9
           value: '1',
           label: '是'
         }, {
           value: '0',
           label: '否'
         }],
-        netCompany: [{ //（上网查询信息）当地工商网查询企业基本信息中是否有登记
+        netCompany: [{ //（网上查询信息）当地工商网查询企业基本信息中是否有登记
           value: '1',
           label: '是'
         }, {
           value: '0',
           label: '否'
         }],
-        netAddrstate: [{ //（上网查询信息）客户工作单位在全国组织代码查询中是否存在  11
+        netAddrstate: [{ //（网上查询信息）客户工作单位在全国组织代码查询中是否存在  11
           value: '1',
           label: '是'
         }, {
@@ -2373,7 +2376,7 @@
           this.CFwidth[0].style.minWidth = 1272 + "px";
           this.comaddressb[0].style.paddingLeft = 674 + "px";
           //  this.Alertbtn[0].style.margin ="20px 0 0 652px";
-           this.Alertbtn[0].style.margin ="20px 0 0 756px";
+          //  this.Alertbtn[0].style.margin ="20px 0 0 756px";
         } else if (val == "100%") {
           for (var i = 0; i < this.Pwidth.length; i++) {
             this.Pwidth[i].style.width = 200 + "px";
@@ -2390,7 +2393,7 @@
           this.CFwidth[0].style.minWidth = 1592 + "px";
           // this.CFwidth[0].style.minWidth = 1366 + "px";          
           this.comaddressb[0].style.paddingLeft = 826 + "px";
-           this.Alertbtn[0].style.margin ="20px 0 0 844px";          
+          //  this.Alertbtn[0].style.margin ="20px 0 0 844px";          
         }
       }
     },
@@ -2439,7 +2442,7 @@
       this.CFwidth = document.getElementsByClassName("CreditForm")
       this.inputWidth = document.getElementsByClassName("specialInput")
       this.comaddressb = document.getElementsByClassName("comaddressb")
-      this.Alertbtn = document.getElementsByClassName("btn")
+      // this.Alertbtn = document.getElementsByClassName("btn")
       console.log(this.Alertbtn)
       
       
@@ -2563,11 +2566,14 @@
     font-size: 16px;
     vertical-align: middle;
   }
-
+.btn_wrap{
+      width: 66.6%;
+    height: 60px;
+}
   .btn {
     /* margin: 20px 0 0 844px; */
-    margin: 20px 0 0 756px;
-    
+    /* margin: 20px 0 0 756px; */
+      margin-left: calc( 100% - 95px);
   }
 
   .specialInput {
