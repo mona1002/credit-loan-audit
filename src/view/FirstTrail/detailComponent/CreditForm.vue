@@ -2373,7 +2373,8 @@
           for (var i = 0; i < this.inputWidth.length; i++) {
             this.inputWidth[i].style.width = "calc( 50% + 160px )"
           };
-          this.CFwidth[0].style.minWidth = 1592 + "px";
+          // this.CFwidth[0].style.minWidth = 1592 + "px";
+          // this.CFwidth[0].style.minWidth = 1366 + "px";          
           this.comaddressb[0].style.paddingLeft = 826 + "px";
         }
       }
@@ -2613,6 +2614,7 @@
     /* min-width: 1592px; */
     overflow: auto;
     min-width: 1272px;
+    overflow-x: hidden;
   }
 
   .CreditForm li {
