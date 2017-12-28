@@ -2372,7 +2372,8 @@
             this.Txawidth[14].style.width = 'calc( 50% + 150px )';
           this.CFwidth[0].style.minWidth = 1272 + "px";
           this.comaddressb[0].style.paddingLeft = 674 + "px";
-           this.Alertbtn[0].style.margin ="20px 0 0 652px";
+          //  this.Alertbtn[0].style.margin ="20px 0 0 652px";
+           this.Alertbtn[0].style.margin ="20px 0 0 756px";
         } else if (val == "100%") {
           for (var i = 0; i < this.Pwidth.length; i++) {
             this.Pwidth[i].style.width = 200 + "px";
@@ -2565,7 +2566,7 @@
 
   .btn {
     /* margin: 20px 0 0 844px; */
-    margin: 20px 0 0 652px;
+    margin: 20px 0 0 756px;
     
   }
 
