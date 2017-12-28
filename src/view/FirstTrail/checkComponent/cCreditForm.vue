@@ -7,7 +7,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">上网查询信息</span>
         </template>
-        <div class="CreditForm_InternetInf">
+        <div class="CreditForm_InternetInf up_padding">
           <ul>
             <li>
               <p>
@@ -160,7 +160,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">核实身份</span>
         </template>
-        <div class="CreditForm_CheckId">
+        <div class="CreditForm_CheckId up_padding">
           <ul class="CreditForm_CheckId_ul_left">
             <li>
               <p>
@@ -219,7 +219,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">工作信息</span>
         </template>
-        <div class="CreditForm_WorkInfs">
+        <div class="CreditForm_WorkInfs up_padding">
           <ul>
             <li style="width:100%">
               <label class="InternetInf_left_label">工作单位：</label>
@@ -303,7 +303,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">私营企业信息</span>
         </template>
-        <div class="CreditForm_CompanyInfs" v-show="this.workInf.private">
+        <div class="CreditForm_CompanyInfs up_padding" v-show="this.workInf.private">
           <ul>
             <li>
               <p>
@@ -386,7 +386,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">家庭信息</span>
         </template>
-        <div class="CreditForm_FamilyInf">
+        <div class="CreditForm_FamilyInf up_padding">
           <ul>
             <li>
               <p>
@@ -558,7 +558,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">居住情况</span>
         </template>
-        <div class="CreditForm_live">
+        <div class="CreditForm_live up_padding">
           <ul>
             <li>
               <p>
@@ -579,7 +579,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">核对现住址</span>
         </template>
-        <div class="CreditForm_check_reside">
+        <div class="CreditForm_check_reside up_padding">
           <ul class="CreditForm_check_reside_ul_left">
             <li>
               <label class="InternetInf_left_label ">现住址：</label>
@@ -605,7 +605,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">初审结论</span>
         </template>
-        <div class=" CreditForm_result">
+        <div class=" CreditForm_result up_padding">
           <div style="width:66%;">
             <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
             <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==''" :content="this.FormData.oother" placement="top-start">
@@ -892,13 +892,13 @@
         this.mountJ(21, res.data.iloanBefore);
       });
       // 省    
-      this.get("/credit/queryProvince", {}).then(res => {
-        this.hirecomAddress = res.data;
-      });
-      // 所属行业 
-      this.get("/credit/industry", {}).then(res => {
-        this.hirecomKind = res.data;
-      })
+      // this.get("/credit/queryProvince", {}).then(res => {
+      //   this.hirecomAddress = res.data;
+      // });
+      // // 所属行业 
+      // this.get("/credit/industry", {}).then(res => {
+      //   this.hirecomKind = res.data;
+      // })
     },
   }
 
@@ -942,12 +942,19 @@
     min-width: 1272px;
   }
 
+  .up_padding {
+    padding-top: 10px;
+  }
+
   .CreditForm li {
     color: #475669;
     font-size: 14px;
     vertical-align: middle;
     position: relative;
     clear: both;
+  }
+
+  .CreditForm p {
     padding-top: 10px;
   }
 

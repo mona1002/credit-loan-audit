@@ -63,7 +63,7 @@ import AnitAudioVisual from'../view/AntiFraud/components/AnitAudioVisual.vue'
 import AntiFraud from '@/view/AntiFraud/AntiFraud.vue'
 // 反欺诈 申请
 import AntiApplyInf from '@/view/AntiFraud/AntiApplyInf.vue'
-
+import aAntiApplyInf from '@/view/AntiFraud/components/aAntiApplyInf.vue'
 // 系统管理
 // 机构管理
 import organManage from '@/view/systemManage/organManage/organManage'
@@ -224,10 +224,10 @@ const routes = [{
   path:'/AntiApplyInf',
   component:AntiApplyInf
 },
-// {
-//   path:'/FMatchingInf',
-//   component:FSplitScreen
-// },
+{
+  path:'/aAntiApplyInf',
+  component:aAntiApplyInf
+},
 // {
 //   path:'/FSplitScreen',
 //   component:FSplitScreen

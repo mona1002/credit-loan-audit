@@ -701,7 +701,7 @@
                 <b v-show="this.finalResult"> * 输入长度不能超过500</b>
               </i>
               <p class="InternetInf_left_label" style="textAlign:right">
-                <span style="color:red;"> * </span>终审结果评价：</p>
+                <span class="red"> * </span>终审结果评价：</p>
               <el-input type="textarea" :rows="5" resize="none" :maxlength="500" placeholder="请输入内容" @compositionend.native="wordarea(checkData.ootherfinal)"
                 @keyup.native="wordarea(checkData.ootherfinal)" v-model="checkData.ootherfinal" name="Finalconclusion" v-validate="'required'">
               </el-input>
@@ -1006,46 +1006,55 @@
     },
     mounted() {
       this.getParams = JSON.parse(localStorage.getItem("FtaskInWaitting")); // 终审工作台
+      console.log(this.getParams)
       // 获取查询列表数据
       this.post("/creauditInfo/queryCreauditInfoObj", {
         applyId: this.getParams.applyId,
         // applyId: "00542",
       }).then(res => {
-        console.log(res.data)
-        // console.log(res.data)
-        this.FormData = res.data;
-        this.AreaNPercent();
-        this.mountJ(0, res.data.wbeexEcuted);
-        this.mountJ(1, res.data.wnetHirecom);
-        this.mountJ(2, res.data.wnetEcutedBrea);
-        this.mountJ(3, res.data.wnetHirecomBrea);
-        this.mountJ(4, res.data.wnetPhone);
-        this.mountJ(5, res.data.wnetHirecomName);
-        this.mountJ(6, res.data.wnetHirecomPhone);
-        this.mountJ(7, res.data.wnetAddrandEstate);
-        this.mountJ(8, res.data.wnetHirecomAddress);
-        this.mountJ(9, res.data.wnetCompany);
-        this.mountJ(10, res.data.wnetAddrstate);
-        this.mountJ(11, res.data.iisself);
-        this.mountJ(12, res.data.privateOwnerFlag);
-        this.mountJ(13, res.data.fmarrflag);
-        this.mountJ(14, res.data.spouseWork);
-        this.mountJ(15, res.data.spouseSamecity);
-        this.mountJ(16, res.data.childFlag);
-        this.mountJ(17, res.data.childIspaycost);
-        this.mountJ(18, res.data.parentIsliving);
-        this.mountJ(19, res.data.brothersIfhas);
-        this.mountJ(20, res.data.aisresident);
-        this.mountJ(21, res.data.iloanBefore);
+        if (res.statusCode == 200) {
+          console.log(res.data)
+          // console.log(res.data)
+          this.FormData = res.data;
+          this.AreaNPercent();
+          this.mountJ(0, res.data.wbeexEcuted);
+          this.mountJ(1, res.data.wnetHirecom);
+          this.mountJ(2, res.data.wnetEcutedBrea);
+          this.mountJ(3, res.data.wnetHirecomBrea);
+          this.mountJ(4, res.data.wnetPhone);
+          this.mountJ(5, res.data.wnetHirecomName);
+          this.mountJ(6, res.data.wnetHirecomPhone);
+          this.mountJ(7, res.data.wnetAddrandEstate);
+          this.mountJ(8, res.data.wnetHirecomAddress);
+          this.mountJ(9, res.data.wnetCompany);
+          this.mountJ(10, res.data.wnetAddrstate);
+          this.mountJ(11, res.data.iisself);
+          this.mountJ(12, res.data.privateOwnerFlag);
+          this.mountJ(13, res.data.fmarrflag);
+          this.mountJ(14, res.data.spouseWork);
+          this.mountJ(15, res.data.spouseSamecity);
+          this.mountJ(16, res.data.childFlag);
+          this.mountJ(17, res.data.childIspaycost);
+          this.mountJ(18, res.data.parentIsliving);
+          this.mountJ(19, res.data.brothersIfhas);
+          this.mountJ(20, res.data.aisresident);
+          this.mountJ(21, res.data.iloanBefore);
+        } else {
+          // alert(res.msg);
+          //   this.$message({
+          // message:res.msg,
+          // type: 'warning'
+          // });
+        }
       });
       // 省    
-      this.get("/credit/queryProvince", {}).then(res => {
-        this.hirecomAddress = res.data;
-      });
-      // 所属行业 
-      this.get("/credit/industry", {}).then(res => {
-        this.hirecomKind = res.data;
-      })
+      // this.get("/credit/queryProvince", {}).then(res => {
+      //   this.hirecomAddress = res.data;
+      // });
+      // // 所属行业 
+      // this.get("/credit/industry", {}).then(res => {
+      //   this.hirecomKind = res.data;
+      // })
     },
   }
 
@@ -1134,78 +1143,6 @@
   {
     width: 140px;
   }
-  /* -----------------------------alert----------------------- */
-
-  .layer {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, .4);
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 1000;
-  }
-
-  .layer .layerbox {
-    width: 338px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -169px;
-    margin-top: -80px;
-    border: 1px solid #ccc;
-    background-color: #eee;
-    z-index: 10000;
-  }
-
-  .layer .layerbox p {
-    width: 100%;
-    height: 30px;
-    font-size: 14px;
-    line-height: 30px;
-    padding-left: 10px;
-    color: #475669;
-  }
-
-  .layer .layerbox p.choces {
-    text-align: center;
-  }
-
-  .layer p i {
-    float: right;
-    font-size: 20px;
-    color: #0077ff;
-    padding: 5px 10px 0 0;
-  }
-
-  .layer .layerbox div {
-    background-color: #fff;
-    height: 100px;
-    padding: 10px 10px;
-    width: 96%;
-    margin: auto;
-    margin-bottom: 8px;
-  }
-
-  .layer .layerbox .buttonDiv {
-    width: 100%;
-    height: 50px;
-    margin-top: 10px;
-  }
-
-  .layer .layerbox .buttonDiv button {
-    float: left;
-    margin: 0 0 0 50px;
-  }
-
-  .layer .layerbox .infoButton {
-    height: auto;
-  }
-
-  .layer .layerbox .infoButton button {
-    float: right;
-  }
-  /* ========================================================================= */
 
   .CreditForm_InternetInf p:nth-of-type(odd),
   .CreditForm_CheckId p:nth-of-type(odd),
@@ -1221,6 +1158,10 @@
   .PhontConclution,
   .interMath {
     width: 66%;
+  }
+
+  .PhontConclution li {
+    padding-top: 10px;
   }
 
   .CreditForm_InternetInf p:nth-of-type(even) span,
@@ -1277,17 +1218,24 @@
     display: block;
     height: 20px;
     line-height: 20px;
-    color: red;
+    color: #ff7676;
     font-style: normal;
     font-size: 12px;
     padding-left: 202px;
   }
-  /* ------------测试-------------- */
 
+  .red {
+    color: #ff7676;
+    font-weight: 700;
+    font-size: 16px;
+    vertical-align: middle;
+  }
+  /* ------------测试-------------- */
+  /* 
   .CreditForm_InternetInf p:nth-of-type(even) i {
-    background: red;
+    background: #ff7676;
     display: inline-block;
     width: calc( 100% - 197px);
-  }
+  } */
 
 </style>

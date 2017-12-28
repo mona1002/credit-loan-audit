@@ -1,4 +1,5 @@
 <template>
+<!-- 暂时没用了，待删，现在匹配查看都跳到初审里面的-匹配查看页面 -->
   <div class="SplitScreen">
     <myHead></myHead>
     <div class="SplitScreen_content">
@@ -13,6 +14,42 @@
         <span>{{customInf.adminIntroduce}}</span>
       </p>
       <div class="SplitScreen_wrap">
+        <!-- 左侧分屏部分 -->
+        <div class="left" ref="rLeft">
+          <div ref="Left_title" class="Left_ul" @mouseenter="showList" @mouseleave="hid">
+            <!-- 左侧 title列表 == 影音资料等 ==================弹出列表============ -->
+            <ul>
+              <li ref="tabOne" class="tab1Default" v-for="(val,index) in items1" :key="index" @mousedown="flag1[index] &&  tab1($event,index,val)"
+                :class="{tab1Act:tab1Index==index}">
+                {{val}}</li>
+            </ul>
+          </div>
+          <!-- 左侧详情 -->
+          <div ref="Left_detail" class="Left_detail_div">
+            <p class="Left_right_Title"> {{this.title}}
+              <span class="icon_FullScreen">
+                <img src="../../../static/images/backcopy 2.png" @click="FullScreen">
+              </span>
+              <span class="showAllList" @mouseenter="showList" @mouseleave="hid">
+                <img src="../../../static/images/icon-02.png">
+              </span>
+            </p>
+            <div class="Left_right_BigImg ">
+              <RAudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></RAudioVisualLeft>
+              <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
+              <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
+              <RapplicationInformationDetail v-if=" this.tabContent1==3">申请信息</RapplicationInformationDetail>
+              <cborrowerInformationDetail v-if=" this.tabContent1==4">借款人资料</cborrowerInformationDetail>
+              <PhoneCredit v-if=" this.tabContent1==5"> 电话征信</PhoneCredit>
+              <FcCreditForm v-if=" this.tabContent1==6">信审表</FcCreditForm>   <!-- √ -->
+              <creditInvestigation v-if=" this.tabContent1==7">实地征信</creditInvestigation>
+              <RAntiConclution v-if=" this.tabContent1==8">反欺诈结论</RAntiConclution>
+              <RFinanceInformation v-if=" this.tabContent1==9">财务信息</RFinanceInformation><!-- √ -->
+              <processTrajectory v-if=" this.tabContent1==10">流程轨迹</processTrajectory>
+              <RApprovalConclusion v-if=" this.tabContent1==11">审批结论轨迹</RApprovalConclusion> <!-- √ -->
+            </div>
+          </div>
+        </div>
         <!-- 右侧分屏部分 -->
         <div class="right" ref="rRight">
           <img src="../../../static/images/backcopy.png" class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen">
@@ -28,7 +65,7 @@
             <!-- tab 2 -=====================tab2里面的ul-->
             <div class="Right_tab_ul_wrap">
               <ul ref="right_tab_ul" style="left:0;right:0;">
-                <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="tab($event,index,val)"
+                <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="flag2[index] &&  tab2($event,index,val)"
                   :class="{tab2Act:tab2Index==index}">
                   {{val}}</li>
               </ul>
@@ -36,70 +73,125 @@
           </div>
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
-            <aMAnitAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></aMAnitAudioVisual>
-            <remark v-if=" this.tabContent2==1"></remark>
-            <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
-            <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
-            <borrowerInformation v-if=" this.tabContent2==4"></borrowerInformation>
-            <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
-            <RcCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></RcCreditForm>
-            <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
-            <!-- 反欺诈结论 空白 -->
-            <!-- <CreditForm v-if=" this.tabContent2==8"></CreditForm> -->
-            <!-- 信审审批 空白 -->
-            <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>
+            <RAudioVisual :custom="customInf.applyId " v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></RAudioVisual> <!-- √ -->
+            <cremarkDetail v-if=" this.tabContent2==1"></cremarkDetail>
+            <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
+            <RapplicationInformationDetail v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
+            <RborrowerInformationSetail v-if=" this.tabContent2==4">借款人资料</RborrowerInformationSetail>
+            <PhoneCredit v-if=" this.tabContent2==5"> 电话征信</PhoneCredit>
+            <FcCreditForm v-if=" this.tabContent2==6">信审表</FcCreditForm>  <!-- √ -->
+            <creditInvestigation v-if=" this.tabContent2==7">实地征信</creditInvestigation>
+            <RAntiConclution v-if=" this.tabContent2==8">反欺诈结论</RAntiConclution>
+            <RFinanceInformation v-if=" this.tabContent2==9">财务信息</RFinanceInformation><!-- √ -->
+            <processTrajectory v-if=" this.tabContent2==10">流程轨迹</processTrajectory>
+            <RApprovalConclusion v-if=" this.tabContent2==11">审批结论轨迹</RApprovalConclusion> <!-- √ -->
           </div>
         </div>
       </div>
+      <!-- 对比弹出层   不在右侧div里面，再 wrap 里面  可以用fixed定位-->
+      <div class="AudioVisual_wrap_compare" v-show="CompareAlert" v-on:CompareShow="compBtnS">
+        <el-button type="primary compareClose" @click="closeCompareBtn">关闭</el-button>
+        <!-- 弹出层左侧 div -->
+        <div class="AudioVisual_wrap_compare_left ">
+          <p>影像资料</p>
+          <!-- h2 标题栏 -->
+          <div class="AlertContent">
+            <RAudioVisualLeft :custom="customInf.applyId "></RAudioVisualLeft>
+          </div>
+        </div>
+        <!-- 弹出层右侧 div -->
+        <div class="AudioVisual_wrap_compare_right ">
+          <!-- 搜索框 -->
+          <p class="customName">客户名称：
+            <el-input v-model="AlertSearch" placeholder="请输入内容" :disabled="true" style="display:inline;"></el-input>
+            <el-button type="primary" @click="compareProps">
+              <i class="el-icon-search" style="fontSize:16px"></i>
+            </el-button>
+          </p>
+          <!-- h2 标题栏 -->
+          <div class="AlertContent">
+            <RAudioVisualLeft :custom="customInf.applyId " ref="audioChild" v-on:inputInf="inputInner"></RAudioVisualLeft>
+          </div>
+        </div>
+      </div>
+      <!-- 对比弹出层结束 -->
     </div>
   </div>
 </template>
 <script>
-  import myHead from "../header.vue"
-import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配查看 --》 aV
-  import RcCreditForm from "../FirstTrail/ReadComponent/RcCreditForm.vue";
-import RFinanceInformation from '../FirstTrail/ReadComponent/RFinanceInformation'//信审表-匹配查看-初审
+  // -----------------------------------protect---------------------------
+  import myHead from "../header"
+  import FcCreditForm from './FinalComponent/FcCreditForm';
+  import RAudioVisual from "../FirstTrail/ReadComponent/RAudioVisual";
+  import RAudioVisualLeft from '../FirstTrail/ReadComponent/RAudioVisualLeft';
+  import RApprovalConclusion from'../FirstTrail/ReadComponent/RApprovalConclusion'; //信审审批结论轨迹--lastOne
+  import RFinanceInformation from'../FirstTrail/ReadComponent/RFinanceInformation';//账务信息
+  // ---------------------------------------------------------------------
   // 编辑
+  import RborrowerInformationSetail from "../FirstTrail/ReadComponent/RborrowerInformationSetail.vue"; //借款人资料
+  import RapplicationInformationDetail from "../FirstTrail/ReadComponent/RapplicationInformationDetail.vue"; //申请信息
+  import RAntiConclution from "../FirstTrail/ReadComponent/RAntiConclution.vue"; //反欺诈结论
   import remark from "../FirstTrail/detailComponent/remark.vue";
   import InternalMatch from "../FirstTrail/InternalMatch.vue";
-  import applicationInformation from "../FirstTrail/detailComponent/applicationInformation.vue";
   import borrowerInformation from "../FirstTrail/detailComponent/borrowerInformation.vue";
-  import PhoneCredit from "../FirstTrail/PhoneCredit.vue";
+  import PhoneCredit from "../FirstTrail/PhoneCredit.vue"; //电话征信
+  import CreditForm from "../FirstTrail/detailComponent/CreditForm.vue";
   import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信
-  // import s from "./detailComponent/remark";
-  // 反欺诈结论 写此处
   // 信审审批写此处
   import CreditApproval from "../FirstTrail/CreditApproval.vue";
   // 查询
-  // import cFinanceInformation from "./checkComponent/FinanceInformation";
   import cremarkDetail from "../FirstTrail/checkComponent/remarkDetail.vue"; //备注信息
   import cborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料
-  import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息
   import processTrajectory from "../FirstTrail/checkComponent/processTrajectory.vue"; //流程轨迹
-
   export default {
     data() {
       return {
-        SplitLeft:"left",
-        SplitRight:"right",
-        watchData:'',
+        watchData: '',
         originLeft: '',
         // 进件人信息
         customInf: [], //申请信息页local字段
         tastwaitingPass: [], //详情列表页信息--(含)取applyId
         // -------------------------------结束
-        CompareAlert: false, 
+        showHalfBtn: false,
+        CompareAlert: false,
         title: "",
         isShow: false,
         flexible: true,
+        tabContent1: 0,
         tabContent2: 3,
-        tabActiveInd2: 3, 
-        items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "信审审批结论轨迹","反欺诈审批结论轨迹","反欺诈申请信息","反欺诈调查", "审批结论"],
+        tabActiveInd1: 0,
+        tabActiveInd2: 3,
+        items1: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹", "反欺诈结论", "财务信息", "流程轨迹",
+          "审批结论轨迹"
+        ],
+        items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹", "反欺诈结论", "财务信息", "流程轨迹",
+          "审批结论轨迹"
+        ],
+        tab1Index: 0,
         tab2Index: 3,
-        AlertSearch: "", 
+        flag1: [true, true, true, false, true, true, true, true, true],
+        flag2: [true, true, true, true, true, true, true, true, true, true],
+        AlertSearch: "",
+        AlertSearchCondition: [{
+          value: '选项1',
+          label: '最近时间原则排列'
+        }, {
+          value: '选项2',
+          label: '内匹客户姓名+本人进件'
+        }, {
+          value: '选项3',
+          label: '内匹客户姓名'
+        }],
+        isFull: false,
       }
     },
     methods: {
+      compareProps() {
+        this.$refs.audioChild.personalNunPerson()
+      },
+      inputInner(a, b) {
+        this.AlertSearch = a + " " + b;
+      },
       compBtnS() {
         this.CompareAlert = true;
       },
@@ -114,76 +206,105 @@ import RFinanceInformation from '../FirstTrail/ReadComponent/RFinanceInformation
         }
       },
       rightMovingBtn() {
-        if (parseFloat(this.$refs.right_tab_ul.style.left) <= -300) {
-          this.$refs.right_tab_ul.style.left = "-300px";
+        if (parseFloat(this.$refs.right_tab_ul.style.left) <= -500) {
+          this.$refs.right_tab_ul.style.left = "-500px";
         } else {
           this.$refs.right_tab_ul.style.left = parseFloat(this.$refs.right_tab_ul.style.left) - 50 + "px";
         }
       },
-      showList() { 
+      showList() {
         this.$refs.Left_title.style.left = "0";
         this.flexible = false;
       },
-      hid() { 
+      hid() {
         this.$refs.Left_title.style.left = "-200px";
         this.flexible = true;
       },
-    //   tab1(ev, ind, val) { 
-    //     this.title = val;
-    //     this.tabContent1 = ind;
-    //     this.tab1Index = ind; 
-    //     this.tabActiveInd1 = ind; 
-    //     for (var i = 0; i < this.$refs.tabTwo.length; i++) {
-    //       this.$refs.tabTwo[i].className = "tab2Default"; 
-    //       this.flag2[i] = true;
-    //     }
-    //     this.$refs.tabTwo[this.tabActiveInd2].className = "tab2Act"; 
-    //     if (ind != 0 && ind != 8) { 
-    //       this.flag2[ind] = false;
-    //     }
-    //   },
-      tab(ev, ind, val) {
+      FullScreen() {
+        this.showHalfBtn = true;
+        this.originLeft = this.$refs.right_tab_ul.style.left;
+        this.$refs.right_tab_ul.style.left = "0";
+        this.$refs.rLeft.style.display = "none";
+        this.$refs.rRight.style.width = "100%";
+        this.watchData = this.$refs.rRight.style.width;
+        this.isFull = true;
+      },
+      DblScreen() {
+        this.showHalfBtn = false;
+        this.$refs.right_tab_ul.style.left = this.originLeft;
+        this.$refs.rLeft.style.display = "block";
+        this.$refs.rRight.style.width = "50%";
+        this.watchData = this.$refs.rRight.style.width;
+        this.isFull = false;
+      },
+      tab1(ev, ind, val) {
+        this.title = val;
+        this.tabContent1 = ind;
+        this.tab1Index = ind;
+        this.tabActiveInd1 = ind;
+        for (var i = 0; i < this.$refs.tabTwo.length; i++) {
+          this.$refs.tabTwo[i].className = "tab2Default";
+          this.flag2[i] = true;
+        }
+        this.$refs.tabTwo[this.tabActiveInd2].className = "tab2Act";
+        if (ind != 0 && ind != 8) {
+          this.flag2[ind] = false;
+        }
+      },
+      tab2(ev, ind, val) {
         this.tabContent2 = ind;
-        this.tab2Index = ind; 
+        this.tab2Index = ind;
         this.tabActiveInd2 = ind;
         for (var i = 0; i < this.$refs.tabOne.length; i++) {
-          this.$refs.tabOne[i].className = "tab1Default"; 
-        //   this.flag1[i] = true;
+          this.$refs.tabOne[i].className = "tab1Default";
+          this.flag1[i] = true;
         }
-        // this.$refs.tabOne[this.tabActiveInd1].className = "tab1Act";
-        // if (ind != 0 && ind != 8) {
-        //   this.flag1[ind] = false;
-        // }
+        this.$refs.tabOne[this.tabActiveInd1].className = "tab1Act";
+        if (ind != 0 && ind != 8) {
+          this.flag1[ind] = false;
+        }
       }
     },
     mounted() {
-      console.log("分屏");
-    //   this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
-    //   this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-    //     id: this.tastwaitingPass.applyId,
-    //   }).then(res => {
-    //     this.customInf = res.data;
-    //   });
+      console.log("匹配查看");
+      // this.tastwaitingPass = JSON.parse(localStorage.getItem("FinalinternalObj"));//用终审 初审判断时打开
+      this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
+      this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
+        id: this.tastwaitingPass.matchApplyId,
+      }).then(res => {
+        this.customInf = res.data;
+      });
       this.title = "影音资料";
     },
     components: {
       myHead,
-      RcCreditForm,
+      FcCreditForm,
+      // AudioVisual,
+      // AudioVisualLeft,
+         RAudioVisual,
+      RAudioVisualLeft,
+      RApprovalConclusion, //信审审批结论归结
+      RFinanceInformation, //账务信息
       
-      aMAnitAudioVisual,
+    //   ------------------------------------------
       // 编辑
+   
+      RapplicationInformationDetail,
+      RborrowerInformationSetail, //借款人资料
+      RAntiConclution, //反欺诈结论
       remark,
       InternalMatch,
-      applicationInformation,
       borrowerInformation,
       PhoneCredit,
+
       creditInvestigation,
       // 信审审批
       CreditApproval,
       // 查询
-      cremarkDetail, //
+      // aut,
+      cremarkDetail,
+
       cborrowerInformationDetail,
-      capplicationInformationDetail,
       processTrajectory
     }
   }
@@ -192,7 +313,7 @@ import RFinanceInformation from '../FirstTrail/ReadComponent/RFinanceInformation
 <style scoped>
   .SplitScreen {
     height: 100%;
-     /* min-width: 1366; */
+    /* min-width: 1366; */
   }
   /* 激活样式 流-css */
 
@@ -216,8 +337,41 @@ import RFinanceInformation from '../FirstTrail/ReadComponent/RFinanceInformation
   .setGray {
     color: #bfcbd9;
   }
+  /* 对比弹出层关闭按钮 */
 
+  .compareClose {
+    position: absolute;
+    right: 40px;
+    bottom: 19px;
+    z-index: 1;
+  }
+  /* 全屏  --  分屏 图标 */
+
+  .icon_showHalf {
+    position: absolute;
+    top: 6px;
+    left: 9px;
+    z-index: 3;
+    background: #4099ff;
+  }
+
+  .icon_FullScreen {
+    position: absolute;
+    top: 7px;
+    right: 17px;
+    /* right: 0; */
+  }
+
+  .showAllList {
+    position: absolute;
+    padding-top: 2px;
+    width: 55px;
+    height: 50px;
+    left: 0;
+    top: 0;
+  }
   /*-------------------------------- */
+
   .SplitScreen_content {
     border: 1px solid #0077ff;
     height: calc(100% - 70px);
@@ -240,12 +394,18 @@ import RFinanceInformation from '../FirstTrail/ReadComponent/RFinanceInformation
     font-size: 14px;
     margin-right: 15px;
   }
-  
+
   .PerDtl span:nth-of-type(7) {
     width: 105px;
   }
   /* 切换按钮 */
 
+  .stretch {
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    z-index: 1;
+  }
   /* 左右分屏 */
 
   .SplitScreen_wrap {
@@ -254,8 +414,11 @@ import RFinanceInformation from '../FirstTrail/ReadComponent/RFinanceInformation
     min-width: 1306px;
   }
 
-  .right{
-    width: 100%;
+  .left,
+  .right,
+  .AudioVisual_wrap_compare_left,
+  .AudioVisual_wrap_compare_right {
+    width: calc(50% - 2px);
     height: 100%;
     overflow: auto;
     background: #ffffff;
@@ -265,11 +428,46 @@ import RFinanceInformation from '../FirstTrail/ReadComponent/RFinanceInformation
     position: relative;
   }
 
+  .left,
+  .AudioVisual_wrap_compare_left {
+    margin-right: 2px;
+  }
   /* 左屏 */
-  
+  /* 左侧列表  影音资料等 ul 外包   流 */
+
+  .left .Left_ul {
+    width: 128px;
+    background: rgba(31, 45, 61, 0.59);
+    box-shadow: 0 5px 20px 0 #475669;
+    position: fixed;
+    left: -128px;
+    top: 165px;
+    z-index: 10;
+    padding-top: 24px;
+  }
+
+  .left .Left_ul li {
+    font-size: 15px;
+    letter-spacing: 0.1px;
+    height: 21px;
+    line-height: 12px;
+    padding: 0 0 30px 20px;
+  }
+
+  .left .Left_ul li:hover,
+  .Right_tab_ul_wrap ul li:hover {
+    cursor: pointer;
+  }
+  /* 左侧详情 div   流 */
+
+  .Left_detail_div {
+    height: 100%;
+  }
   /* 左侧详情 p标签   流-css */
 
+  .Left_right_Title,
   .right .Right_tab_title_div,
+  .AudioVisual_wrap_compare_left p,
   .AudioVisual_wrap_compare_right p {
     font-size: 16px;
     text-align: center;
@@ -285,7 +483,6 @@ import RFinanceInformation from '../FirstTrail/ReadComponent/RFinanceInformation
     text-align: right;
     padding-right: 40px;
   }
-  
   /* 左侧详情 content div 内容   流-css */
 
   .Left_right_BigImg {
@@ -303,7 +500,7 @@ import RFinanceInformation from '../FirstTrail/ReadComponent/RFinanceInformation
   }
 
   .Right_tab_ul_wrap ul {
-    width: 1570px;
+    width: 1061px;
     height: 48px;
     position: relative;
     text-align: left;
@@ -318,6 +515,7 @@ import RFinanceInformation from '../FirstTrail/ReadComponent/RFinanceInformation
     line-height: 38px;
   }
   /* ======================================================================================================= */
+
   .tab2_Content {
     /*background: purple;*/
     height: calc( 100% - 48px);
@@ -338,6 +536,21 @@ import RFinanceInformation from '../FirstTrail/ReadComponent/RFinanceInformation
   .pre_next_btn_wrap:nth-of-type(2) {
     right: 10px;
   }
+  /*  对比弹出层 外包 div 流 */
 
+  .AudioVisual_wrap_compare {
+    position: absolute;
+    top: 117px;
+    width: calc( 100% - 18px);
+    height: calc( 100% - 130px);
+    z-index: 22;
+    min-width: 1306px;
+  }
+  /* 弹出层 - 两侧组件 content  流 */
+
+  .AlertContent {
+    height: calc( 100% - 48px);
+    overflow: auto;
+  }
 
 </style>

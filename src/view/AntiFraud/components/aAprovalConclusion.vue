@@ -1,6 +1,6 @@
 <template>
   <div class="ApprovalConclusion">
-    <!-- 信审审批结论轨迹=========================默认显示1-条？分页？ -->
+    <!-- 信审审批结论轨迹====反欺诈分屏=====================默认显示1-条？分页？ -->
     <!-- 信审审批结论轨迹 -->
     <el-table :data="ConclutionInf" border>
       <el-table-column prop="verIncome" label="核实收入[元]" min-width="35" align="right">
