@@ -1,4 +1,5 @@
 <template>
+<!-- 现匹配查看页面-用终身里面的信审表-应该为修改前最新版，待确认 -->
   <div class="CreditForm">
     <el-collapse v-model="activeNames">
       <!-- 网上查询信息 -->

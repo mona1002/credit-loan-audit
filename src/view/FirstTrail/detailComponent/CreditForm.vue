@@ -899,12 +899,12 @@
               </el-select>
             </li>
           </ul>
-          <p v-show="this.address.permanent" style="clear:both;width:100%;position:relative">
+          <p v-show="this.address.permanent" style="clear:both;width:66.6%;position:relative">
             <i class="hint">
               <b v-show="this.Wordhint.address.permanentAddress" class="family_textarea"> 输入长度不能超过100</b>
             </i>
             <label class="InternetInf_left_label ">常住地址 ：</label>
-            <input style="width:46%" type="text" :maxlength="this.longLongInputL" placeholder="请输入内容" v-model="checkData.aisresidenttxt"
+            <input class='specialInput' type="text" :maxlength="this.longLongInputL" placeholder="请输入内容" v-model="checkData.aisresidenttxt"
               @compositionend="wordInput100(checkData.aisresidenttxt,'常住地址')" @keyup="wordInput100(checkData.aisresidenttxt,'常住地址')">
           </p>
         </div>
@@ -915,7 +915,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">初审结论</span>
         </template>
-        <div class=" CreditForm_result" style="">
+        <div class=" CreditForm_result">
           <i class="hint">
             <span v-show="errors.has('conclusion')" class="result_textarea">{{ errors.first('conclusion') }}</span>
             <b v-show="this.Wordhint.result" class="result_textarea"> 输入长度不能超过500</b>
@@ -928,7 +928,7 @@
         </div>
       </el-collapse-item>
     </el-collapse>
-     <div class="btn_wrap">
+    <div class="btn_wrap">
       <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
     </div>
     <!-- <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button> -->
@@ -2365,18 +2365,24 @@
             this.Pwidth[i].style.width = 150 + "px";
           };
           for (var i = 0; i < this.inputWidth.length; i++) {
-            this.inputWidth[i].style.width = 515 + "px";//原来142px
-            this.inputWidth[i].style.width = 553 + "px";//改后182px
+            // this.inputWidth[i].style.width = 515 + "px"; //原来142px
+            this.inputWidth[i].style.width = 553 + "px"; //改后182px
+
+          };
+          for (var i = 0; i < this.Txawidth.length; i++) {
+            // this.Txawidth[i].style.width = 'calc( 50% + 104px )';
+            this.Txawidth[i].style.width = 'calc( 100% - 295px)';
+            
             
           };
-                for (var i = 0; i < this.Txawidth.length; i++) {
-            this.Txawidth[i].style.width = 'calc( 50% + 104px )';
-          };
-            this.Txawidth[14].style.width = 'calc( 50% + 150px )';
+          // this.Txawidth[14].style.width = 'calc( 50% + 150px )';
+          this.Txawidth[14].style.width = 'calc( 100% - 260px)';
+          this.Txawidth[22].style.width = 'calc( 100% - 260px)';
           this.CFwidth[0].style.minWidth = 1272 + "px";
           this.comaddressb[0].style.paddingLeft = 674 + "px";
-          //  this.Alertbtn[0].style.margin ="20px 0 0 652px";
-          //  this.Alertbtn[0].style.margin ="20px 0 0 756px";
+           this.Alertbtn[0].style.marginLeft =" calc( 100% - 148px)";
+          //  this.Alertbtn[0].style.margin ="20px 0 0 716px";
+           
         } else if (val == "100%") {
           for (var i = 0; i < this.Pwidth.length; i++) {
             this.Pwidth[i].style.width = 200 + "px";
@@ -2385,15 +2391,17 @@
             // 原来142宽度
             // this.inputWidth[i].style.width = "calc( 50% + 160px )"
             // 改为 182 对齐宽度
-            this.inputWidth[i].style.width = "calc( 50% + 200px )"
+            this.inputWidth[i].style.width = "calc( 50% + 200px )";
           };
           for (var i = 0; i < this.Txawidth.length; i++) {
-            this.Txawidth[i].style.width = 'calc( 50% + 200px )';
+            this.Txawidth[i].style.width = 'calc( 50% + 158px )';
           };
+          this.Txawidth[14].style.width = "calc( 50% + 200px )";
+          this.Txawidth[22].style.width = "calc( 50% + 200px )";
           this.CFwidth[0].style.minWidth = 1592 + "px";
           // this.CFwidth[0].style.minWidth = 1366 + "px";          
           this.comaddressb[0].style.paddingLeft = 826 + "px";
-          //  this.Alertbtn[0].style.margin ="20px 0 0 844px";          
+           this.Alertbtn[0].style.marginLeft ="calc( 50% + 329px )";          
         }
       }
     },
@@ -2442,10 +2450,10 @@
       this.CFwidth = document.getElementsByClassName("CreditForm")
       this.inputWidth = document.getElementsByClassName("specialInput")
       this.comaddressb = document.getElementsByClassName("comaddressb")
-      // this.Alertbtn = document.getElementsByClassName("btn")
-      console.log(this.Alertbtn)
-      
-      
+      this.Alertbtn = document.getElementsByClassName("btn")
+      console.log(this.Txawidth)
+
+
       if (this.myWatch) {
         this.ElInputStyle(this.myWatch)
       } else {
@@ -2527,7 +2535,8 @@
     opacity:0.75; */
     cursor: pointer;
   }
-  .bottom{
+
+  .bottom {
     margin-bottom: 20px;
   }
   /* 最下面的 弹窗样式 */
@@ -2566,18 +2575,22 @@
     font-size: 16px;
     vertical-align: middle;
   }
-.btn_wrap{
-      width: 66.6%;
+
+  .btn_wrap {
+    width: 66.6%;
     height: 60px;
-}
+  }
+
   .btn {
     /* margin: 20px 0 0 844px; */
     /* margin: 20px 0 0 756px; */
-      margin-left: calc( 100% - 95px);
+    margin-left: calc( 100% - 148px);
+    margin-top: 20px;
   }
 
   .specialInput {
     width: 480px;
+    width: calc( 100% - 260px);
   }
 
   .internet_sel {
@@ -2702,10 +2715,12 @@
     /* vertical-align:bottom; */
     margin-top: 20px;
   }
-.CreditForm_CheckId p{
-  margin-bottom:20px;
-  margin-top:0;
-}
+
+  .CreditForm_CheckId p {
+    margin-bottom: 20px;
+    margin-top: 0;
+  }
+
   .CreditForm_InternetInf li p:nth-of-type(even),
   /*  上网查询 */
 
@@ -2714,9 +2729,10 @@
 
   .CreditForm_FamilyInf li p:nth-of-type(even)
   /* 家庭信息 */
+
   {
-/* background: red; */
-width:66.6%
+    /* background: red; */
+    width: 66.6%
   }
   /* .CreditForm_CheckId p:nth-of-type(odd) {
     padding-top: 18px;
@@ -2748,7 +2764,7 @@ width:66.6%
   /* 私营企业 */
 
   {
-    width: 66%;
+    width: 66.6%;
     float: left;
   }
 
@@ -2790,9 +2806,10 @@ width:66.6%
   /* 初审结果评价 */
 
   .CreditForm_result {
-    width: 66%;
+    width: 66.6%;
     position: relative;
     margin-top: 20px;
+    /* background: #ff7676; */
   }
 
 </style>

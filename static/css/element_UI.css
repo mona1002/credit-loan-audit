@@ -933,7 +933,8 @@ height: 40px;
 .CreditForm .el-textarea {
   vertical-align: top;
   /* width: 40%; */
-width: calc( 50% + 158px );
+/* width: calc( 50% + 158px ); */
+width:calc(100% - 295px);
 }
 
 
@@ -957,7 +958,7 @@ width: calc( 50% + 158px );
 /* 信审表-私营企业-私营企业信息textarea宽度 */
 
 .CreditForm .CreditForm_CompanyInfs_ul_left .el-textarea {
-  width:calc(50% + 200px)
+  width: calc( 100% - 260px);
   /* width: 67%; */
 }
 
@@ -980,6 +981,7 @@ width: calc( 50% + 158px );
 /* 信审表：初审结果评价textarea宽度 */
 .CreditForm .CreditForm_result .el-textarea {
   width:calc( 50% + 200px );
+  width: calc(100% - 260px);
 }
 
 .CreditForm .CreditForm_result .el-textarea__inner {
