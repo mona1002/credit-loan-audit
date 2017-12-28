@@ -53,7 +53,7 @@ import FcCreditForm from '@/view/FinalTrial/FinalComponent/FcCreditForm'
 import FtaskInWaitting from '@/view/FinalTrial/FtaskInWaitting'
 import FMCreditForm from '@/view/FinalTrial/FinalMatchComponent/FMCreditForm'
 import FMatchingInf from '@/view/FinalTrial/FMatchingInf'
-// FMCreditForm
+import FCreditForm from '../view/FinalTrial/FinalComponent/FCreditForm'
 
 
 // ------------反欺诈------------------
@@ -195,10 +195,10 @@ const routes = [{
   path: '/FtaskInWaitting',
   component: FtaskInWaitting
 },
-// {
-//   path: '/a',
-//   component: FSplitScreen
-// },
+{
+  path: '/FCreditForm',
+  component: FCreditForm
+},
 {
   path: '/FMCreditForm',
   component: FMCreditForm

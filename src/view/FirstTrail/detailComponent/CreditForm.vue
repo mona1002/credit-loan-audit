@@ -13,7 +13,7 @@
               <p>
                 <i class="hint"> </i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(0)">客户在法网是否有被执行信息：</label>
-                <el-select class="internet_top" v-model="checkData.wbeexEcuted" placeholder="请选择" style="minWidth:150px;" @change="commentShow1(checkData.wbeexEcuted,Internet[0])">
+                <el-select class="internet_top" v-model="checkData.wbeexEcuted" placeholder="请选择" @change="commentShow1(checkData.wbeexEcuted,Internet[0])">
                   <el-option v-for="item in beexEcuted" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -32,7 +32,7 @@
               <p>
                 <i class="hint"> </i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(0)">单位在法网是否有被执行信息：</label>
-                <el-select class="internet_top" v-model="checkData.wnetHirecom" style="minWidth:150px;" placeholder="请选择" @change="commentShow1(checkData.wnetHirecom,Internet[1])">
+                <el-select class="internet_top" v-model="checkData.wnetHirecom" placeholder="请选择" @change="commentShow1(checkData.wnetHirecom,Internet[1])">
                   <el-option v-for="item in netHirecom" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -220,7 +220,7 @@
                   </el-option>
                 </el-select>
               </p>
-              <p v-show="this.InternetShow.commentS10">
+              <p v-show="this.InternetShow.commentS10" class="bottom">
                 <i class="hint">
                   <b v-show="this.Wordhint.Internet.institutionCode" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
@@ -241,7 +241,7 @@
         </template>
         <div class="CreditForm_CheckId">
           <ul class="CreditForm_CheckId_ul_left">
-            <li>
+            <li style="marginTop:20px;">
               <p>
                 <i class="hint"> </i>
                 <label class="InternetInf_left_label">接听者是否是借款人本人：</label>
@@ -302,7 +302,7 @@
                   </el-option>
                 </el-select>
               </p>
-              <p v-show="this.checkId.loanNot">
+              <p v-show="this.checkId.loanNot" class="bottom">
                 <i class="hint">
                   <b v-show="this.Wordhint.checkID.loanPurposed" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
@@ -405,7 +405,7 @@
                 @keyup.native="wordInput100(checkData.workAddress,'单位具体地址')">
               </el-input>
             </li>
-            <li style="width:100%">
+            <li style="width:100%" class="bottom">
               <i class="hint">
                 <b v-show="this.Wordhint.Working.preComName" class="Working_input"> 输入长度不能超过50</b>
               </i>
@@ -464,7 +464,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">私营企业信息</span>
         </template>
-        <div class="CreditForm_CompanyInfs" v-show="this.workInf.private" style="paddingLeft:21px;height:338px;">
+        <div class="CreditForm_CompanyInfs" v-show="this.workInf.private" style="paddingLeft:21px;height:320px;">
           <ul class="CreditForm_CompanyInfs_ul_left">
             <li ref="compTypeDiv">
               <i class="hint">
@@ -661,7 +661,7 @@
                   <b v-show="this.Wordhint.family.ChildCt" class="family_textarea"> 输入长度不能超过200</b>
                 </i>
                 <label class="Family_right_label "> 子女数量备注： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" style="width:49%" v-model="checkData.childCounttxt"
+                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" v-model="checkData.childCounttxt"
                   @compositionend.native="wordarea200(checkData.childCounttxt,'子女备注')" @keydown.native="wordarea200(checkData.childCounttxt,'子女备注')"
                   @keyup.native="wordarea200(checkData.childCounttxt,'子女备注')">
                 </el-input>
@@ -681,7 +681,7 @@
                   <b v-show="this.Wordhint.family.ChildCondition" class="family_textarea"> 输入长度不能超过200</b>
                 </i>
                 <label class="Family_right_label"> 子女现状备注： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" style="width:49%" v-model="checkData.childStatustxt"
+                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" v-model="checkData.childStatustxt"
                   @compositionend.native="wordarea200(checkData.childStatustxt,'子女现状')" @keydown.native="wordarea200(checkData.childStatustxt,'子女现状')"
                   @keyup.native="wordarea200(checkData.childStatustxt,'子女现状')">
                 </el-input>
@@ -727,7 +727,7 @@
                   <b v-show="this.Wordhint.family.ParentRemark" class="family_textarea"> 输入长度不能超过200</b>
                 </i>
                 <label class="Family_right_label"> 父母备注： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" style="width:49%" v-model="checkData.parentIslivingtxt"
+                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" v-model="checkData.parentIslivingtxt"
                   @compositionend.native="wordarea200(checkData.parentIslivingtxt,'父母备注')" @keydown.native="wordarea200(checkData.parentIslivingtxt,'父母备注')"
                   @keyup.native="wordarea200(checkData.parentIslivingtxt,'父母备注')">
                 </el-input>
@@ -747,7 +747,7 @@
                   <b v-show="this.Wordhint.family.ParentHealth" class="family_textarea"> 输入长度不能超过200</b>
                 </i>
                 <label class="Family_right_label"> 父母身体状况备注： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" style="width:49%" v-model="checkData.parentHealthtxt"
+                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" v-model="checkData.parentHealthtxt"
                   @compositionend.native="wordarea200(checkData.parentHealthtxt,'父母健康')" @keydown.native="wordarea200(checkData.parentHealthtxt,'父母健康')"
                   @keyup.native="wordarea200(checkData.parentHealthtxt,'父母健康')">
                 </el-input>
@@ -767,7 +767,7 @@
                   <b v-show="this.Wordhint.family.Payalimony" class="family_textarea"> 输入长度不能超过200</b>
                 </i>
                 <label class="Family_right_label"> 父母是否需要赡养备注： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" style="width:49%" v-model="checkData.parentPayalimonytxt"
+                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" v-model="checkData.parentPayalimonytxt"
                   @compositionend.native="wordarea200(checkData.parentPayalimonytxt,'父母赡养')" @keydown.native="wordarea200(checkData.parentPayalimonytxt,'父母赡养')"
                   @keyup.native="wordarea200(checkData.parentPayalimonytxt,'父母赡养')">
                 </el-input>
@@ -826,15 +826,15 @@
                 <el-input type="text" placeholder="请输入内容" v-model="checkData.fconsumption" @blur="formatMoney(checkData.fconsumption,$event,'开销')">
                 </el-input>
               </p>
-              <p>
+              <p class="bottom">
                 <i class="hint">
                   <span v-show="errors.has('Paymonth')" class="family_textarea">{{ errors.first('Paymonth') }}</span>
                   <span v-show="this.Wordhint.family.acount" class="family_textarea">请输入正确金额</span>
                 </i>
                 <label class="Family_right_label">
                   <span class="red"> * </span> 可以承受的月还款[元]： </label>
-                <el-input type="text" placeholder="请输入内容" v-model="checkData.fbalance"
-                  @blur="formatMoney(checkData.fbalance,$event,'月还款')" name="Paymonth" v-validate="'required'">
+                <el-input type="text" placeholder="请输入内容" v-model="checkData.fbalance" @blur="formatMoney(checkData.fbalance,$event,'月还款')"
+                  name="Paymonth" v-validate="'required'">
                 </el-input>
                 <!-- formatNumber(num, cent, isThousand, el) -->
                 <!-- <el-input type="text" placeholder="请输入内容" :rows="2" resize="none" :maxlength="this.shotTextareaL" v-model.number="checkData.fbalance"
@@ -866,7 +866,7 @@
             </li>
           </ul>
           <ul class="CreditForm_live_ul_left">
-            <li>
+            <li class="bottom">
               <i class="hint"> </i>
               <label class="Family_right_label ">居住房产所属情况：</label>
               <el-select v-model="checkData.livingEstateBelongs" placeholder="请选择">
@@ -885,7 +885,7 @@
         </template>
         <div class="CreditForm_check_reside">
           <ul class="CreditForm_check_reside_ul_left">
-            <li>
+            <li style="marginTop:20px;">
               <i class="hint"></i>
               <label class="InternetInf_left_label ">现住址：</label>
               <span class="detail_inf oneline"> </span> {{this.checkData.aaddress}} </span>
@@ -915,7 +915,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">初审结论</span>
         </template>
-        <div class=" CreditForm_result" style="position:relative;marginTop:20px;">
+        <div class=" CreditForm_result" style="">
           <i class="hint">
             <span v-show="errors.has('conclusion')" class="result_textarea">{{ errors.first('conclusion') }}</span>
             <b v-show="this.Wordhint.result" class="result_textarea"> 输入长度不能超过500</b>
@@ -2303,7 +2303,7 @@
         }
       },
       // formatSC(el) {
-        formatSC(el,val) {
+      formatSC(el, val) {
         console.log("ad")
         switch (el) {
           case "月还款":
@@ -2362,20 +2362,34 @@
             this.Pwidth[i].style.width = 150 + "px";
           };
           for (var i = 0; i < this.inputWidth.length; i++) {
-            this.inputWidth[i].style.width = 515 + "px";;
+            this.inputWidth[i].style.width = 515 + "px";//原来142px
+            this.inputWidth[i].style.width = 553 + "px";//改后182px
+            
           };
+                for (var i = 0; i < this.Txawidth.length; i++) {
+            this.Txawidth[i].style.width = 'calc( 50% + 104px )';
+          };
+            this.Txawidth[14].style.width = 'calc( 50% + 150px )';
           this.CFwidth[0].style.minWidth = 1272 + "px";
           this.comaddressb[0].style.paddingLeft = 674 + "px";
+           this.Alertbtn[0].style.margin ="20px 0 0 652px";
         } else if (val == "100%") {
           for (var i = 0; i < this.Pwidth.length; i++) {
             this.Pwidth[i].style.width = 200 + "px";
           };
           for (var i = 0; i < this.inputWidth.length; i++) {
-            this.inputWidth[i].style.width = "calc( 50% + 160px )"
+            // 原来142宽度
+            // this.inputWidth[i].style.width = "calc( 50% + 160px )"
+            // 改为 182 对齐宽度
+            this.inputWidth[i].style.width = "calc( 50% + 200px )"
           };
-          // this.CFwidth[0].style.minWidth = 1592 + "px";
+          for (var i = 0; i < this.Txawidth.length; i++) {
+            this.Txawidth[i].style.width = 'calc( 50% + 200px )';
+          };
+          this.CFwidth[0].style.minWidth = 1592 + "px";
           // this.CFwidth[0].style.minWidth = 1366 + "px";          
           this.comaddressb[0].style.paddingLeft = 826 + "px";
+           this.Alertbtn[0].style.margin ="20px 0 0 844px";          
         }
       }
     },
@@ -2420,9 +2434,14 @@
         this.hirecomKind = res.data;
       })
       this.Pwidth = document.getElementsByClassName("el-input")
+      this.Txawidth = document.getElementsByClassName("el-textarea")
       this.CFwidth = document.getElementsByClassName("CreditForm")
       this.inputWidth = document.getElementsByClassName("specialInput")
       this.comaddressb = document.getElementsByClassName("comaddressb")
+      this.Alertbtn = document.getElementsByClassName("btn")
+      console.log(this.Alertbtn)
+      
+      
       if (this.myWatch) {
         this.ElInputStyle(this.myWatch)
       } else {
@@ -2497,11 +2516,15 @@
     font-size: 12px;
     border-radius: 3px;
   }
-  .blueC:hover{
+
+  .blueC:hover {
     color: rgba(0, 119, 255, 0.75);
     /* color: #0077ff;
     opacity:0.75; */
     cursor: pointer;
+  }
+  .bottom{
+    margin-bottom: 20px;
   }
   /* 最下面的 弹窗样式 */
   /* add class */
@@ -2527,8 +2550,8 @@
     display: inline-block;
     width: 100%;
     font-style: normal;
-    position:absolute;
-    top:-20px;
+    position: absolute;
+    top: -20px;
     /* background: black; */
     /* height: 20px; */
   }
@@ -2541,7 +2564,9 @@
   }
 
   .btn {
-    margin: 20px 0 0 844px;
+    /* margin: 20px 0 0 844px; */
+    margin: 20px 0 0 652px;
+    
   }
 
   .specialInput {
@@ -2551,11 +2576,12 @@
   .internet_sel {
     padding-left: 190px;
   }
+
   .internet_textarea {
-/* 上网查询 原来155px*/    
+    /* 上网查询 原来155px*/
     /* padding-left: 185px; */
-/* 上网查询 现在182px   */    
-    padding-left: 211px; 
+    /* 上网查询 现在182px   */
+    padding-left: 211px;
   }
 
   .icon_hat {
@@ -2576,7 +2602,7 @@
     /* 原来的 */
     /* width: 155px; */
     /* UI设计的 */
-    width: 182px;    
+    width: 182px;
     margin-right: 10px;
   }
 
@@ -2594,11 +2620,13 @@
     /* 原来的 142px; */
     /* padding-left: 170px; */
     /* 现在的 182px */
-    padding-left: 211px;    
+    padding-left: 211px;
   }
-.Working_right{
+
+  .Working_right {
     padding-left: 170px;
-}
+  }
+
   .family_textarea {
     padding-left: 212px;
   }
@@ -2655,14 +2683,33 @@
   .CreditForm_FamilyInf li p,
   /* 家庭信息 */
 
-  .CreditForm_live_ul_left li {
+  .CreditForm_live_ul_left li
+  /* 居住情况 */
+
+  {
     /* border: 1px solid blue; */
     float: left;
-    width: 33%;
+    width: 33.3%;
     position: relative;
     vertical-align: middle;
     /* vertical-align:bottom; */
-    margin-top:20px;
+    margin-top: 20px;
+  }
+.CreditForm_CheckId p{
+  margin-bottom:20px;
+  margin-top:0;
+}
+  .CreditForm_InternetInf li p:nth-of-type(even),
+  /*  上网查询 */
+
+  .CreditForm_CheckId li p:nth-of-type(even),
+  /* 核实信息 ul */
+
+  .CreditForm_FamilyInf li p:nth-of-type(even)
+  /* 家庭信息 */
+  {
+/* background: red; */
+width:66.6%
   }
   /* .CreditForm_CheckId p:nth-of-type(odd) {
     padding-top: 18px;
@@ -2684,7 +2731,7 @@
 
   {
     float: left;
-    width: 33%;
+    width: 33.3%;
   }
 
   .CreditForm_WorkInfs_ul_left,
@@ -2696,7 +2743,6 @@
   {
     width: 66%;
     float: left;
-    
   }
 
   .CheckId_right_label
@@ -2715,12 +2761,13 @@
     margin-top: 20px;
     /* height: 65px; */
   }
-    .CreditForm_WorkInfs_ul_right li,
+
+  .CreditForm_WorkInfs_ul_right li,
   /* 工作信息 */
 
-  .CreditForm_CompanyInfs_ul_right li{
-margin-top: 20px;
-/* border: 1px solid; */
+  .CreditForm_CompanyInfs_ul_right li {
+    margin-top: 20px;
+    /* border: 1px solid; */
   }
   /* -----------------------家庭信息--------------------- */
 
@@ -2728,8 +2775,17 @@ margin-top: 20px;
     /* border: 1px solid yellowgreen; */
   }
   /*-------------------- 核对现住址-------------------------- */
+
   .CreditForm_check_reside li,
-  .CreditForm_check_reside p{
-margin-top: 20px;
+  .CreditForm_check_reside p {
+    margin-bottom: 20px;
   }
+  /* 初审结果评价 */
+
+  .CreditForm_result {
+    width: 66%;
+    position: relative;
+    margin-top: 20px;
+  }
+
 </style>

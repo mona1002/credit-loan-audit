@@ -852,7 +852,8 @@ height: 40px;
   /* width:600px; */
   /* width:70%; */
   width: calc( 50% + 160px);
-  background: red;
+  /* background: red; */
+  /* background: green */
 }
 
 /* 信审表-去掉所有重复paddingbottom值 */
@@ -865,7 +866,7 @@ height: 40px;
 
 .CreditForm .el-collapse-item__wrap,
 .aAntiApplyInf .el-collapse-item__wrap {
-  padding: 0px 0 20px 11px;
+  padding: 0px 0 0px 21px;
 }
 .CreditForm .el-collapse-item:nth-of-type(4) .el-collapse-item__wrap{
   /* background: red; */
@@ -931,7 +932,8 @@ height: 40px;
 
 .CreditForm .el-textarea {
   vertical-align: top;
-  width: 40%;
+  /* width: 40%; */
+width: calc( 50% + 158px );
 }
 
 
@@ -941,14 +943,10 @@ height: 40px;
 /* .CreditForm .CreditForm_InternetInf .el-textarea__inner, */
 
 .CreditForm .el-textarea__inner {
-  width: 370px;
+  /* width: 370px; */
+  width: 100%;
 }
 
-/* 信审表：初审结果评价textarea宽度 */
-
-.CreditForm .CreditForm_result .el-textarea__inner {
-  width: 700px
-}
 
 /* 信审表-工作信息-单位地址-input框 */
 
@@ -959,18 +957,16 @@ height: 40px;
 /* 信审表-私营企业-私营企业信息textarea宽度 */
 
 .CreditForm .CreditForm_CompanyInfs_ul_left .el-textarea {
-  /* width:calc( 100% - 350px ); */
-  /* width:705px; */
-  width: 67%;
-  /* min-width: 64%; */
+  width:calc(50% + 200px)
+  /* width: 67%; */
 }
 
 .CreditForm .CreditForm_CompanyInfs_ul_left .el-textarea__inner {
-  width: 100%;
+  /* width: 100%; */
   /* width:calc(50% + 160px); */
   /* width: calc( 100% - 160px ); */
-  max-width: 768px;
-  min-width: 516px;
+  /* max-width: 768px; */
+  /* min-width: 516px; */
 }
 
 
@@ -981,10 +977,13 @@ height: 40px;
 }
 
 
-/* 信审表-评价结论 */
-
+/* 信审表：初审结果评价textarea宽度 */
 .CreditForm .CreditForm_result .el-textarea {
-  width: 700px;
+  width:calc( 50% + 200px );
+}
+
+.CreditForm .CreditForm_result .el-textarea__inner {
+  width: 100%;
 }
 /* 信审表----查询---气泡宽度 */
 .el-tooltip__popper{
