@@ -33,7 +33,6 @@ export default {
     Get() {
       //get请求 示例
       this.get("/admin/admins").then(response => {
-        // axios 请求
         console.info(response.data);
       });
     },
