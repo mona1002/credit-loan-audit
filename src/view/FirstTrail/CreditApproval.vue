@@ -346,7 +346,7 @@
           <!-- <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag> -->
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
         </div>
-        <el-table :data="tableData.recordList" height="280" border style="width: 100%" stripe highlight-current-row v-loading="loading">
+        <el-table :data="tableData.recordList" height="280" border style="width: 100%"  highlight-current-row v-loading="loading">
           <el-table-column prop="verIncome" label="核实收入[元]" min-width="100">
           </el-table-column>
           <el-table-column prop="proCode" label="批准产品" min-width="80">

@@ -10,7 +10,7 @@
         <!-- {{title1}} -->
       </div>
       <!-- 移动电话 -->
-      <el-table stripe :data="mobileData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickMobiel" highlight-current-row v-loading="mobileLoading">
+      <el-table  :data="mobileData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickMobiel" highlight-current-row v-loading="mobileLoading">
         <el-table-column prop="targetCustName" label="命中号码姓名" min-width="150">
         </el-table-column>
         <el-table-column prop="applyTelTypeTxt" label="电话类型" min-width="100">
@@ -40,7 +40,7 @@
         <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">固定电话类(家电、单电)</span>
       </div>
-      <el-table stripe :data="fixTelData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickFixTel" highlight-current-row v-loading="fixTelLoading">
+      <el-table  :data="fixTelData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickFixTel" highlight-current-row v-loading="fixTelLoading">
         <el-table-column prop="targetCustName" label="命中号码姓名" min-width="150">
         </el-table-column>
         <el-table-column prop="applyTelTypeTxt" label="电话类型" min-width="100">
@@ -70,7 +70,7 @@
         <span class="headFont">单位名称</span>
       </div>
       <!-- 单位名称 -->
-      <el-table stripe :data="workData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickCompany" highlight-current-row v-loading="companyLoading">
+      <el-table  :data="workData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickCompany" highlight-current-row v-loading="companyLoading">
         <el-table-column prop="targetCustName" label="命中号码姓名" min-width="150">
         </el-table-column>
         <el-table-column prop="applyTelTypeTxt" label="电话类型" min-width="100">
