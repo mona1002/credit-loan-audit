@@ -23,22 +23,22 @@
 				      <el-table-column
 				        prop="estateType"
 				        label="房产类型"
-				        min-width="130">
+				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
 				        prop="propertyType"
 				        label="产权性质"
-				        min-width="130">
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="coveredArea"
 				        label="建筑面积[m^2]"
-				        min-width="130">
+				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
 				        prop="unitPrice"
 				        label="建筑单价[元]"
-				        min-width="130">
+				        min-width="110">
 				      </el-table-column>
 				      <el-table-column
 				        prop="estateAddress"
@@ -59,7 +59,7 @@
 				      <el-table-column
 				        prop="loanPeriod"
 				        label="贷款期限[月]"
-				        min-width="130"
+				        min-width="110"
 				        >
 				      </el-table-column>
 				      <el-table-column
@@ -75,7 +75,7 @@
 				      <el-table-column
 				        prop="restLoans"
 				        label="贷款余额[元]"
-				        min-width="130">
+				        min-width="110">
 				      </el-table-column>
 			    </el-table>
 		  	</el-collapse-item>
@@ -367,22 +367,22 @@
 			    </template>
 		  		<div class="xinyongka daikuanzongkuang">
 		  			<ul>
-				    	<li><label>车贷共有笔数:</label><span>{{loanInfo.carLoanTotal}}</span></li>
-				    	<li><label>信用贷总笔数:</label><span>{{loanInfo.studentLoanTotal}}</span></li>
-				    	<li><label>房贷总笔数:</label><span>{{loanInfo.houseLoanTotal}}</span></li>
-				    	<li><label>其他贷款总笔数:</label><span>{{loanInfo.otherLoanTotal}}</span></li>
+				    	<li><label>车贷共有笔数：</label><span>{{loanInfo.carLoanTotal}}</span></li>
+				    	<li><label>信用贷总笔数：</label><span>{{loanInfo.studentLoanTotal}}</span></li>
+				    	<li><label>房贷总笔数：</label><span>{{loanInfo.houseLoanTotal}}</span></li>
+				    	<li><label>其他贷款总笔数：</label><span>{{loanInfo.otherLoanTotal}}</span></li>
 				    </ul>
 				    <ul>
-				    	<li><label>车贷现存笔数:</label><span>{{loanInfo.carLoanNoPayoff}}</span></li>
-				    	<li><label>信用贷现存笔数:</label><span>{{loanInfo.studentLoanNoPayoff}}</span></li>
-				    	<li><label>房贷现存笔数:</label><span>{{loanInfo.houseLoanNoPayoff}}</span></li>
-				    	<li><label>其他贷现存笔数:</label><span>{{loanInfo.otherLoanNoPayoff}}</span></li>
+				    	<li><label>车贷现存笔数：</label><span>{{loanInfo.carLoanNoPayoff}}</span></li>
+				    	<li><label>信用贷现存笔数：</label><span>{{loanInfo.studentLoanNoPayoff}}</span></li>
+				    	<li><label>房贷现存笔数：</label><span>{{loanInfo.houseLoanNoPayoff}}</span></li>
+				    	<li><label>其他贷现存笔数：</label><span>{{loanInfo.otherLoanNoPayoff}}</span></li>
 				    </ul>
 				    <ul>
-				    	<li><label>车贷结清笔数:</label><span>{{loanInfo.carLoanPayoff}}</span></li>
-				    	<li><label>信用贷结清笔数:</label><span>{{loanInfo.studentLoanPayoff}}</span></li>
-				    	<li><label>房贷结清笔数:</label><span>{{loanInfo.houseLoanPayoff}}</span></li>
-				    	<li><label>其他贷款结清笔数:</label><span>{{loanInfo.otherLoanPayoff}}</span></li>
+				    	<li><label>车贷结清笔数：</label><span>{{loanInfo.carLoanPayoff}}</span></li>
+				    	<li><label>信用贷结清笔数：</label><span>{{loanInfo.studentLoanPayoff}}</span></li>
+				    	<li><label>房贷结清笔数：</label><span>{{loanInfo.houseLoanPayoff}}</span></li>
+				    	<li><label>其他贷款结清笔数：</label><span>{{loanInfo.otherLoanPayoff}}</span></li>
 				    </ul>
 		  		</div> 
 		  	</el-collapse-item>
@@ -396,44 +396,44 @@
 		  		<div class="fuzhaixinxi">
 		  			<ol>
 				    	<li>
-				    		<label>信用卡每月还款[元]:</label>
+				    		<label>信用卡每月还款[元]：</label>
 				    		<span>{{borDebt.monthRepayAmt}}</span>
 				    		<!-- <el-input v-model="borDebt.monthRepayAmt"></el-input> -->
 				    	</li>
 				    	<li>
-				    		<label>信用贷每月还款额[元]:</label>
+				    		<label>信用贷每月还款额[元]：</label>
 				    		<span>{{borDebt.studentLoanAmt}}</span>
 				    		<!-- <el-input v-model="borDebt.studentLoanAmt"></el-input> -->
 				    	</li>
 				    	<li>
-				    		<label>房贷每月还款额[元]:</label>
+				    		<label>房贷每月还款额[元]：</label>
 				    		<span>{{borDebt.houseLoanAmt}}</span>
 				    		<!-- <el-input v-model="borDebt.houseLoanAmt"></el-input> -->
 				    	</li>
 				    </ol>
 				    <ol>
 				    	<li>
-				    		<label>车贷每月还款额[元]:</label>
+				    		<label>车贷每月还款额[元]：</label>
 				    		<span>{{borDebt.carLoanAmt}}</span>
 				    		<!-- <el-input v-model="borDebt.carLoanAmt"></el-input></li> -->
 				    	<li>
-				    		<label>其他贷款每月还款额[元]:</label>
+				    		<label>其他贷款每月还款额[元]：</label>
 				    		<span>{{borDebt.otherLoanAmt}}</span>
 				    		<!-- <el-input v-model="borDebt.otherLoanAmt"></el-input></li> -->
 				    	<li class="zongji">
-				    		<label>负债合计[元]:</label>
+				    		<label>负债合计[元]：</label>
 				    		<span>{{borDebt.totalLoan}}</span>
 				    		<!-- <el-input v-model="borDebt.totalLoan"></el-input> -->
 				    	</li>
 				    </ol>
 				    <ol class="num">
 				    	<li>
-				    		<label>最近三个月信用卡/贷款申请次数:</label>
+				    		<label>最近三个月信用卡/贷款申请次数：</label>
 				    		<span>{{borDebt.loanNumber}}</span>
 				    		<!-- <el-input v-model="borDebt.loanNumber"></el-input> -->
 				    	</li>
 				    	<li>
-				    		<label>文字说明:</label>
+				    		<label>文字说明：</label>
 				    		<el-tooltip class="item" effect="dark" :content="borDebt.remark" :disabled="borDebt.remark==''" placement="top">
 						      <div>{{borDebt.remark}}</div>
 						    </el-tooltip>
@@ -451,7 +451,7 @@
 		  		<div class="fuzhaixinxi zhengxunbaogao">
 		  			<ol>
 				    	<li>
-				    		<label>报告来源:</label>
+				    		<label>报告来源：</label>
 				    		<el-tooltip class="item" effect="dark" :content="rptInfo.crSource" :disabled="rptInfo.crSource==''" placement="top">
 				    			<div class="tipDiv">
 				    				<span>{{rptInfo.crSource}}</span>
@@ -461,19 +461,19 @@
 				    		<!-- <el-input v-model="rptInfo.crSource"></el-input> -->
 				    	</li>
 					    <li>
-					    	<label>有无征信报告查询记录:</label>
+					    	<label>有无征信报告查询记录：</label>
 					    	<span>{{rptInfo.crHasRecord}}</span>
 					    	<!-- <el-input v-model="rptInfo.crHasRecord"></el-input> -->
 						</li>
 				    	<li>
-				    		<label>近6个月内信用报告查询次数:</label>
+				    		<label>近6个月内信用报告查询次数：</label>
 				    		<span>{{rptInfo.crRecordTimes}}</span>
 				    		<!-- <el-input v-model="rptInfo.crRecordTimes"></el-input> -->
 				    	</li>
 				    </ol>
 				    <ol>
 				    	<li>
-				    		<label>报告描述:</label>
+				    		<label>报告描述：</label>
 				    		<el-tooltip class="item" effect="dark" :content="rptInfo.crContent" :disabled="rptInfo.crContent==''" placement="top">
 						      <div>{{rptInfo.crContent}}</div>
 						    </el-tooltip>
@@ -594,10 +594,41 @@
 	        taskInWaitting:'',
 	      };
 	    },
+	    props:['isFull'],
 	    mounted(){
 			//一进入页面就发送请求
 			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
 			this.request(this.taskInWaitting.applyId);
+
+	  		if(this.isFull == false){// 分屏
+	  			//信用卡使用总况
+	  			$(".xinyongka").width('930px');
+	  			$(".xinyongka ul li span").width('150px');
+	  			//负债信息
+	  			$(".fuzhaixinxi").width('930px');
+	  			$(".fuzhaixinxi ol li span").width('150px');
+	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 150px )',"padding-right":'calc( 16.6% - 150px )'});
+	  			//征询报告
+	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 150px )',"padding-right":'calc( 49.9% - 150px )'});
+	  			$(".zhengxunbaogao ol li .tipDiv").width('150px');
+	  			//其他信息
+	  			$(".qita").width('930px');
+	  			$(".qita ol li").css({'padding-right': 'calc( 49.9% - 155px )','padding-left': 'calc( 16.6% - 155px )'});			
+	  			
+	  		}else if(this.isFull == true){// 全屏
+	  			$(".xinyongka").width('100%');
+	  			$(".xinyongka ul li span").width('200px');
+	  			//负债信息
+	  			$(".fuzhaixinxi").width('100%');
+	  			$(".fuzhaixinxi ol li span").width('200px');
+	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 180px )',"padding-right":'calc( 16.6% - 180px )'});
+	  			//征询报告
+	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 174px )'});
+	  			$(".zhengxunbaogao ol li .tipDiv").width('200px');
+	  			//其他信息
+	  			$(".qita").width('100%');
+	  			$(".qita ol li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 174px )'});
+	  		}
 		},
 	    methods:{
 	    	handleChange(){
@@ -764,7 +795,42 @@
 		        /*console.log(this.datas);*/
 		      });
 		  },
-	    }
+	    },
+	    watch:{
+		  	isFull:function(val){
+		  		console.log(this.isFull);
+		  		if(this.isFull == false){// 分屏
+	  			//信用卡使用总况
+	  			$(".xinyongka").width('930px');
+	  			$(".xinyongka ul li span").width('150px');
+	  			//负债信息
+	  			$(".fuzhaixinxi").width('930px');
+	  			$(".fuzhaixinxi ol li span").width('150px');
+	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 150px )',"padding-right":'calc( 16.6% - 150px )'});
+	  			//征询报告
+	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 150px )',"padding-right":'calc( 49.9% - 150px )'});
+	  			$(".zhengxunbaogao ol li .tipDiv").width('150px');
+	  			//其他信息
+	  			$(".qita").width('930px');
+	  			$(".qita ol li").css({'padding-right': 'calc( 49.9% - 155px )','padding-left': 'calc( 16.6% - 155px )'});			
+	  			
+	  		}else if(this.isFull == true){// 全屏
+	  			$(".xinyongka").width('100%');
+	  			$(".xinyongka ul li span").width('200px');
+	  			//负债信息
+	  			$(".fuzhaixinxi").width('100%');
+	  			$(".fuzhaixinxi ol li span").width('200px');
+	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 180px )',"padding-right":'calc( 16.6% - 180px )'});
+	  			//征询报告
+	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 174px )'});
+	  			$(".zhengxunbaogao ol li .tipDiv").width('200px');
+	  			//其他信息
+	  			$(".qita").width('100%');
+	  			$(".qita ol li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 174px )'});
+	  		}
+		  	}
+
+		},
 	}
 </script>
 <style type="text/css" scoped>
@@ -773,7 +839,7 @@
 		height: 100%;
 		background-color: #fafbfc;
 		font-size: 14px;
-		min-width: 926px;
+		min-width: 1327px;
 	}
 	/* 折叠面板头部背景色 */
 	.icon_hat{
@@ -791,7 +857,7 @@
 		float: left;
 		width: 33.3%;
 		margin-bottom: 20px;
-		/* text-align: center; */
+		text-align: center;
 	}
 	.xinyongka ul li{
 		margin-top: 20px;
@@ -801,6 +867,11 @@
 		display: inline-block;
 		text-align: right;
 	}
+	.xinyongka ul li span{
+		width: 150px;
+		display: inline-block;
+		text-align: left;
+	}
 	.daikuanzongkuang{
 		width: 926px;
 	}
@@ -809,16 +880,18 @@
 		padding-right: 10px;
 		width: 128px;
 	}
+	.daikuanzongkuang ul:nth-of-type(3) li:nth-of-type(4) label{
+		width: 136px;
+		margin-left: -8px;
+	}
   table.mytable{
-    /* border-width: 1px;
-    border-color: #666666; */
     border: 1px solid #d8dce5;  
     border-collapse: collapse;
   }
   table.mytable th {  
-        padding: 8px;
-        border: 1px solid #d8dce5;  
-        background-color: #e6ebf5;
+    padding: 8px;
+    border: 1px solid #d8dce5;  
+    background-color: #e6ebf5;
   }
 /* 负债信息 */
 .fuzhaixinxi{
@@ -831,79 +904,119 @@
 	width: 33.3%;
 	float: left;
 	margin-top:20px;
-	/* text-align: center; */
+	height: 28px;
+	text-align: center;
 }
 .fuzhaixinxi ol li label{
 	display: inline-block;
-	width: 160px;
+	width: 155px;
 	text-align: right;
 	padding-right: 5px;
+}
+.fuzhaixinxi ol li span{
+	display: inline-block;
+	width: 150px;
+	text-align: left;
 }
 /* 负债信息：负债合计 */
 .fuzhaixinxi ol li.zongji input{
 	border: none;
 }
+.fuzhaixinxi ol:nth-of-type(2) li:nth-of-type(2) label{
+	line-height: 1;
+}
+.fuzhaixinxi ol:nth-of-type(2) li:nth-of-type(2) span{
+	position: relative;
+	top: -3px;
+}
+.fuzhaixinxi ol:nth-of-type(3) li:nth-of-type(1) label{
+	line-height: 1;
+}
+.fuzhaixinxi ol:nth-of-type(3) li:nth-of-type(1) span{
+	position: relative;
+	top: -3px;
+}
+
 /* 负债信息：文字说明 */
 ol.num li{
 	margin-bottom: 10px;
 }
-ol.num li:nth-of-type(1) label{
-	float: left;
-}
-ol.num li:nth-of-type(1) span{
-	height: 54px;
-	line-height: 54px;
-}
 ol.num li:nth-of-type(2){
 	width: 66.6%;
 	text-align: left;
-	padding: 0 calc( 16.6% - 155px );
+	height: 54px;
+	padding-left:calc( 16.6% - 150px );
+	padding-right:calc( 16.6% - 150px );
 }
 ol.num li:nth-of-type(2) label{
 	height: 54px;
 	line-height: 54px;
 }
 ol.num li:nth-of-type(2) div{
-	width: calc( 100% - 160px );
+	width: calc( 100% - 155px );
 	height: 54px;
 	float: right;
 	padding-left: 10px;
 	overflow: auto;
 	border: 1px solid #d8dce5; 
-	/*overflow: hidden;
-	text-overflow: ellipsis;
-	display: -webkit-box;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
-	display: box;
-	line-clamp: 2;
-	box-orient: vertical; */
 }
 /* 征询报告 */
 .zhengxunbaogao ol{
 	width: 100%;
 }
-.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(1) label{
+.zhengxunbaogao ol li label{
+	display: inline-block;
+	width: 150px;
+	text-align: right;
+	padding-right: 5px;
+	color: #475669;
+}
+.zhengxunbaogao ol li span{
+	display: inline-block;
+	width: 150px;
+	text-align: left;
+}
+.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) label{
+	line-height: 1;
+}
+.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) span{
+	position: relative;
+	top: -3px;
+}
+.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(3) label{
+	line-height: 1;
 	float: left;
 }
-.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(1) span{
-	 width: 100%;
-	/*height: auto; */
+.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(3) span{
+	float: left;
+	margin-top: 3px;
+}
+.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(1) label{
+	height: 28px;
+    line-height: 28px;
+    position: relative;
+    top: -9px;
+}
+.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(1) .tipDiv{
+	width: 150px;
+	height: 28px;
+	line-height: 28px;
 	display: inline-block;
-	/* background: pink; */
+}
+.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(1) span{
+	width: 100%;
+	display: inline-block;
 	overflow: hidden;
 	text-overflow:ellipsis;
 	white-space: nowrap;
 }
-.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(3) label{
-	width: 186px;
-}
 .zhengxunbaogao ol:nth-of-type(2) li{
 	width: 100%;
+	height: 75px;
 	text-align: left;
-	padding-left: calc( 16.6% - 178px );
-	margin-bottom: 20px;
-	margin-top: 0;
+	margin: 20px 0;
+	padding-left: calc(16.6% - 150px);
+    padding-right: calc(49.9% - 150px);
 }
 .zhengxunbaogao ol:nth-of-type(2) li label{
 	line-height: 75px;
@@ -912,25 +1025,10 @@ ol.num li:nth-of-type(2) div{
 .zhengxunbaogao ol:nth-of-type(2) li div{
 	float: left;
 	height: 75px;
-	width: calc( 66.6% - 170px );
+	width: calc( 100% - 150px );
 	padding-left: 10px;
 	overflow: auto;
 	border: 1px solid #d8dce5;
-	/* 
-	overflow: hidden;
-	text-overflow: ellipsis;
-	display: -webkit-box;
-	-webkit-line-clamp: 3;
-	-webkit-box-orient: vertical;
-	display: box;
-	line-clamp: 3;
-	box-orient: vertical; */
-}
-.zhengxunbaogao .tipDiv{
-	width: calc( 100% - 165px );
-	/* display: inline-block; */
-	height: 35px;
-	float: right;
 }
 .reportLabel{
 	float: left;
@@ -939,27 +1037,21 @@ ol.num li:nth-of-type(2) div{
 }
 /* 其他信息 */
 .qita{
-	width: 100%;
+	width: 930px;
 }
 .qita ol li{
 	width: 100%;
 	margin-top: 20px;
+	padding-left: calc(16.6% - 155px);
+    padding-right: calc(49.9% - 155px);
 }
 .qita ol div{
 	display: inline-block;
-	width: calc( 66.6% - 170px );
+	width: calc( 100% - 170px );
 	height: 117px;
 	overflow: auto;
 	padding-left: 10px;
 	border: 1px solid #d8dce5;
-	/*overflow: hidden;
-	text-overflow: ellipsis;
-	display: -webkit-box;
-	-webkit-line-clamp: 5;
-	-webkit-box-orient: vertical;
-	display: box;
-	line-clamp: 5;
-	box-orient: vertical; */
 }
 .qita ol label{
 	height: 117px;

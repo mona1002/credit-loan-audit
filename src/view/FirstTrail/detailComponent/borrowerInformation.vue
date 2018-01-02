@@ -2542,6 +2542,7 @@
 	}
 	.daikuanzongkuang ul:nth-of-type(3) li:nth-of-type(4) label{
 		width: 128px;
+		margin-left: -8px;
 	}
 	/* 负债信息 */
 	.fuzhaixinxi{
