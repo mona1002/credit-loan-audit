@@ -58,8 +58,8 @@ import FCreditForm from '../view/FinalTrial/FinalComponent/FCreditForm'
 
 // ------------反欺诈------------------
 import AntiAudit from '@/view/AntiFraud/AntiAudit.vue'
-import AntiRules from '../view/AntiFraud/AntiRules.vue'//反欺诈规则设定
-import AntiCaseNum from '../view/AntiFraud/AntiCaseNum'// 案件编号维护
+// import AntiRules from '../view/AntiFraud/AntiRules.vue'//反欺诈规则设定
+// import AntiCaseNum from '../view/AntiFraud/AntiCaseNum'// 案件编号维护
 import AnitAudioVisual from'../view/AntiFraud/components/AnitAudioVisual.vue'
 // 反欺诈 列表
 import AntiFraud from '@/view/AntiFraud/AntiFraud.vue'
@@ -67,7 +67,7 @@ import AntiFraud from '@/view/AntiFraud/AntiFraud.vue'
 import AntiApplyInf from '@/view/AntiFraud/AntiApplyInf.vue'
 import aAntiApplyInf from '@/view/AntiFraud/components/aAntiApplyInf.vue'
 // 审批结论
-import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
+// import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
 // import ApprovalConclus from ''
 
 // 系统管理
@@ -235,20 +235,20 @@ const routes = [{
   component:aAntiApplyInf
 },
 // 审批结论
-{
-  path:'/ApprovalConclus',
-  component:ApprovalConclus
-},
+// {
+//   path:'/ApprovalConclus',
+//   component:ApprovalConclus
+// },
 // 反欺诈规则设定
-{
-  path:'/AntiRules',
-  component:AntiRules
-},
-// 案件编号维护
-{
-  path:'/AntiCaseNum',
-  component:AntiCaseNum
-},
+// {
+//   path:'/AntiRules',
+//   component:AntiRules
+// },
+// // 案件编号维护
+// {
+//   path:'/AntiCaseNum',
+//   component:AntiCaseNum
+// },
 
 //-------------------系统管理------------
 {

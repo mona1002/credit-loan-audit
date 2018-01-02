@@ -20,9 +20,9 @@
               </template>
               <div class="waitting">
                 <el-table ref="singleTable" :data="tableData" highlight-current-row @current-change="handleCurrentChange" style="width: 100%">
-                  <el-table-column property="processTemplateId" label="任务名称">
+                  <el-table-column property="processTemplateTxt" label="任务名称">
                   </el-table-column>
-                  <el-table-column property="taskNodeName" label="节点名称">
+                  <el-table-column property="taskNodeNameTxt" label="节点名称">
                   </el-table-column>
                   <el-table-column property="count" label="任务数目">
                   </el-table-column>
@@ -168,7 +168,7 @@
     },
     computed:{
       taskCount(){
-        console.log(this.tableData)
+        // console.log(this.tableData)
         for(var i=0;i<this.tableData.length;i++){
          this.TaskCount+= this.tableData[i].count;
         }
@@ -178,6 +178,7 @@
     mounted() {
       // 统一登录平台  调试   start 
       this.get("http://testplatform.nuoyuan.com.cn:20717/remote/user/getUserInfo").then(response => {
+        console.info(response.data);
         this.userInf = {
           userCode: response.data.userCode,
           orgCode: response.data.orgCode,
