@@ -1,3 +1,4 @@
+<!-- 信审流程轨迹 -->
 <template>
 	<div class="processTrajectory">
 		<el-collapse v-model="activeNames" @change="handleChange">

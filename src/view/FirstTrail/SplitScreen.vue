@@ -38,7 +38,7 @@
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
               <InternalMatch v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
               <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
-              <cborrowerInformationDetail v-if=" this.tabContent1==4"></cborrowerInformationDetail>
+              <cborrowerInformationDetail v-if=" this.tabContent1==4" :isFull.sync="isFull"></cborrowerInformationDetail>
               <PhoneCredit v-if=" this.tabContent1==5" :SplitS="SplitLeft" :isFull.sync="isFull"></PhoneCredit>
               <cCreditForm v-if=" this.tabContent1==6"></cCreditForm>
               <creditInvestigation v-if=" this.tabContent1==7"></creditInvestigation>
