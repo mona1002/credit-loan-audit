@@ -74,11 +74,11 @@
         </el-table-column>
       </el-table>
       <!-- 反欺诈专员审批  反欺诈主管审批 -->
-      <div class="address-title">
+      <div class="address-title" v-show="antiFlag=='03'||antiFlag=='04'">
         <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">反欺诈审批任务列表 </span>
       </div>
-      <el-table :data="tableData" style="width: 100%" border stripe fit highlight-current-row @row-dblclick="rowDbClick">
+      <el-table :data="tableData" style="width: 100%" border stripe fit highlight-current-row @row-dblclick="rowDbClick" v-show="antiFlag=='03'||antiFlag=='04'">
         <el-table-column type="index" label="序号">
         </el-table-column>
         <el-table-column prop="name" label="任务类型">
@@ -120,8 +120,8 @@ export default {
   mounted() {
     // 先取到 标志
     // 反欺诈申请 / 反欺诈专员审批 / 反欺诈主管审批
-    var judgeFlag = JSON.parse(localStorage.getItem('judgeFlag'));
-    this.antiFlag = judgeFlag.falg;
+    var judgeFlag = JSON.parse(localStorage.getItem('judge'));
+    this.antiFlag = judgeFlag.flag;
 
     this.queryList();
   },
