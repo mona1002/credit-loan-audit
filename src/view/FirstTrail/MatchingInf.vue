@@ -40,9 +40,9 @@
               <RapplicationInformationDetail v-if=" this.tabContent1==3">申请信息</RapplicationInformationDetail>
               <cborrowerInformationDetail v-if=" this.tabContent1==4">借款人资料</cborrowerInformationDetail>
               <PhoneCredit v-if=" this.tabContent1==5"> 电话征信</PhoneCredit>
-              <RcCreditForm v-if=" this.tabContent1==6">信审表</RcCreditForm>
+              <FMCreditForm v-if=" this.tabContent1==6">信审表</FMCreditForm>
               <RcreditInvestigation v-if=" this.tabContent1==7">实地征信</RcreditInvestigation>
-              <RAntiConclution v-if=" this.tabContent1==8">反欺诈结论</RAntiConclution>
+              <aMAntiApplyInf v-if=" this.tabContent1==8">反欺诈结论</aMAntiApplyInf>
               <RFinanceInformation v-if=" this.tabContent1==9">财务信息</RFinanceInformation>
               <RprocessTrajectory v-if=" this.tabContent1==10">流程轨迹</RprocessTrajectory>
               <RApprovalConclusion v-if=" this.tabContent1==11">审批结论轨迹</RApprovalConclusion>
@@ -78,9 +78,9 @@
             <RapplicationInformationDetail v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
             <RborrowerInformationSetail v-if=" this.tabContent2==4">借款人资料</RborrowerInformationSetail>
             <PhoneCredit v-if=" this.tabContent2==5"> 电话征信</PhoneCredit>
-            <RcCreditForm v-if=" this.tabContent2==6">信审表</RcCreditForm>
+            <FMCreditForm v-if=" this.tabContent2==6">信审表</FMCreditForm>
             <RcreditInvestigation v-if=" this.tabContent2==7">实地征信</RcreditInvestigation>
-            <RAntiConclution v-if=" this.tabContent2==8">反欺诈结论</RAntiConclution>
+            <aMAntiApplyInf v-if=" this.tabContent2==8">反欺诈结论</aMAntiApplyInf>
             <RFinanceInformation v-if=" this.tabContent2==9">财务信息</RFinanceInformation>
             <RprocessTrajectory v-if=" this.tabContent2==10">流程轨迹</RprocessTrajectory>
             <RApprovalConclusion v-if=" this.tabContent2==11">审批结论轨迹</RApprovalConclusion>
@@ -124,7 +124,7 @@
   // import AudioVisual from "./detailComponent/AudioVisual";
   import RAudioVisual from "./ReadComponent/RAudioVisual";
   import RAudioVisualLeft from "./ReadComponent/RAudioVisualLeft.vue";
-  import RcCreditForm from "./ReadComponent/RcCreditForm.vue";
+  import FMCreditForm from "../FinalTrial/FinalMatchComponent/FMCreditForm.vue";//信审表-终审-del初审人员-第一个
   import RborrowerInformationSetail from "./ReadComponent/RborrowerInformationSetail"; //借款人资料
   import RapplicationInformationDetail from "./ReadComponent/RapplicationInformationDetail"; //申请信息
   import RFinanceInformation from "./ReadComponent/RFinanceInformation"; //账务信息
@@ -133,7 +133,10 @@
   import Rremark from "./ReadComponent/Rremark";//备注信息
   import RprocessTrajectory from "./ReadComponent/RprocessTrajectory"; //流程轨迹
   import RcreditInvestigation from "./ReadComponent/RcreditInvestigation"; //实地征信
-  
+  import aMAntiApplyInf from '../AntiFraud/matchComponent/aMAntiApplyInf.vue'//反欺诈结论
+
+
+
   import InternalMatch from "./InternalMatch";
   import borrowerInformation from "./detailComponent/borrowerInformation";
   import PhoneCredit from "./PhoneCredit";//电话征信
@@ -275,7 +278,7 @@
       // 编辑
       RAudioVisual,
       RAudioVisualLeft,
-      RcCreditForm,
+      FMCreditForm,
       RapplicationInformationDetail,
       RborrowerInformationSetail,//借款人资料
       RFinanceInformation, //账务信息
@@ -283,6 +286,7 @@
       RApprovalConclusion, //信审审批结论归结
       Rremark,// 备注信息
       RcreditInvestigation,//实地征信
+      aMAntiApplyInf,//反欺诈结论
       InternalMatch,
       borrowerInformation,
       PhoneCredit,

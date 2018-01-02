@@ -1,5 +1,4 @@
 <template>
-<!-- 暂时没用了，待删，现在匹配查看都跳到初审里面的-匹配查看页面 -->
   <div class="SplitScreen">
     <myHead></myHead>
     <div class="SplitScreen_content">
@@ -35,18 +34,17 @@
               </span>
             </p>
             <div class="Left_right_BigImg ">
-              <RAudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></RAudioVisualLeft>
+              <AudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></AudioVisualLeft>
+              <!-- √ -->
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
-              <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
-              <RapplicationInformationDetail v-if=" this.tabContent1==3">申请信息</RapplicationInformationDetail>
-              <cborrowerInformationDetail v-if=" this.tabContent1==4">借款人资料</cborrowerInformationDetail>
-              <PhoneCredit v-if=" this.tabContent1==5"> 电话征信</PhoneCredit>
-              <FcCreditForm v-if=" this.tabContent1==6">信审表</FcCreditForm>   <!-- √ -->
-              <creditInvestigation v-if=" this.tabContent1==7">实地征信</creditInvestigation>
-              <RAntiConclution v-if=" this.tabContent1==8">反欺诈结论</RAntiConclution>
-              <RFinanceInformation v-if=" this.tabContent1==9">财务信息</RFinanceInformation><!-- √ -->
-              <processTrajectory v-if=" this.tabContent1==10">流程轨迹</processTrajectory>
-              <RApprovalConclusion v-if=" this.tabContent1==11">审批结论轨迹</RApprovalConclusion> <!-- √ -->
+              <InternalMatch v-if=" this.tabContent1==2"  :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
+              <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
+              <cborrowerInformationDetail v-if=" this.tabContent1==4"></cborrowerInformationDetail>
+              <PhoneCredit v-if=" this.tabContent1==5"  :SplitS="SplitLeft" :isFull.sync="isFull"></PhoneCredit>
+              <FcCreditForm v-if=" this.tabContent1==6"></FcCreditForm>
+              <!-- √ -->
+              <creditInvestigation v-if=" this.tabContent1==7"></creditInvestigation>
+              <processTrajectory v-if=" this.tabContent1==8"></processTrajectory>
             </div>
           </div>
         </div>
@@ -73,18 +71,20 @@
           </div>
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
-            <RAudioVisual :custom="customInf.applyId " v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></RAudioVisual> <!-- √ -->
-            <cremarkDetail v-if=" this.tabContent2==1"></cremarkDetail>
-            <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
-            <RapplicationInformationDetail v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
-            <RborrowerInformationSetail v-if=" this.tabContent2==4">借款人资料</RborrowerInformationSetail>
-            <PhoneCredit v-if=" this.tabContent2==5"> 电话征信</PhoneCredit>
-            <FcCreditForm v-if=" this.tabContent2==6">信审表</FcCreditForm>  <!-- √ -->
-            <creditInvestigation v-if=" this.tabContent2==7">实地征信</creditInvestigation>
-            <RAntiConclution v-if=" this.tabContent2==8">反欺诈结论</RAntiConclution>
-            <RFinanceInformation v-if=" this.tabContent2==9">财务信息</RFinanceInformation><!-- √ -->
-            <processTrajectory v-if=" this.tabContent2==10">流程轨迹</processTrajectory>
-            <RApprovalConclusion v-if=" this.tabContent2==11">审批结论轨迹</RApprovalConclusion> <!-- √ -->
+            <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
+            <!-- √ -->
+            <remark v-if=" this.tabContent2==1"></remark>
+            <InternalMatch v-if=" this.tabContent2==2"  :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
+            <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
+            <borrowerInformation v-if=" this.tabContent2==4" :isFull.sync="isFull"></borrowerInformation>
+            <PhoneCredit v-if=" this.tabContent2==5"  :SplitS="SplitLeft" :isFull.sync="isFull"></PhoneCredit>
+            <FCreditForm v-if=" this.tabContent2==6"></FCreditForm>
+            <!-- √ -->
+            <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
+            <!-- 反欺诈结论 空白 -->
+            <!-- <CreditForm v-if=" this.tabContent2==8"></CreditForm> -->
+            <!-- 信审审批 空白 -->
+            <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>
           </div>
         </div>
       </div>
@@ -96,7 +96,7 @@
           <p>影像资料</p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <RAudioVisualLeft :custom="customInf.applyId "></RAudioVisualLeft>
+            <AudioVisualLeft :custom="customInf.applyId "></AudioVisualLeft>
           </div>
         </div>
         <!-- 弹出层右侧 div -->
@@ -110,7 +110,7 @@
           </p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <RAudioVisualLeft :custom="customInf.applyId " ref="audioChild" v-on:inputInf="inputInner"></RAudioVisualLeft>
+            <AudioVisualLeft :custom="customInf.applyId " ref="audioChild" v-on:inputInf="inputInner"></AudioVisualLeft>
           </div>
         </div>
       </div>
@@ -121,31 +121,34 @@
 <script>
   // -----------------------------------protect---------------------------
   import myHead from "../header"
-  import FcCreditForm from './FinalComponent/FcCreditForm';
-  import RAudioVisual from "../FirstTrail/ReadComponent/RAudioVisual";
-  import RAudioVisualLeft from '../FirstTrail/ReadComponent/RAudioVisualLeft';
-  import RApprovalConclusion from'../FirstTrail/ReadComponent/RApprovalConclusion'; //信审审批结论轨迹--lastOne
-  import RFinanceInformation from'../FirstTrail/ReadComponent/RFinanceInformation';//账务信息
-  // ---------------------------------------------------------------------
+  import FcCreditForm from './FinalComponent/FcCreditForm'; //左侧
+  import FCreditForm from './FinalComponent/FCreditForm'; //右侧
+  import AudioVisual from "../FirstTrail/detailComponent/AudioVisual.vue";
+  import AudioVisualLeft from '../FirstTrail/detailComponent/AudioVisualLeft';
+  // ----------------------------------------------------------
   // 编辑
-  import RborrowerInformationSetail from "../FirstTrail/ReadComponent/RborrowerInformationSetail.vue"; //借款人资料
-  import RapplicationInformationDetail from "../FirstTrail/ReadComponent/RapplicationInformationDetail.vue"; //申请信息
-  import RAntiConclution from "../FirstTrail/ReadComponent/RAntiConclution.vue"; //反欺诈结论
   import remark from "../FirstTrail/detailComponent/remark.vue";
   import InternalMatch from "../FirstTrail/InternalMatch.vue";
+  import applicationInformation from "../FirstTrail/detailComponent/applicationInformation.vue";
   import borrowerInformation from "../FirstTrail/detailComponent/borrowerInformation.vue";
-  import PhoneCredit from "../FirstTrail/PhoneCredit.vue"; //电话征信
-  import CreditForm from "../FirstTrail/detailComponent/CreditForm.vue";
+  import PhoneCredit from "../FirstTrail/PhoneCredit.vue";
   import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信
+  // import s from "./detailComponent/remark";
+  // 反欺诈结论 写此处
   // 信审审批写此处
   import CreditApproval from "../FirstTrail/CreditApproval.vue";
   // 查询
+  // import cFinanceInformation from "./checkComponent/FinanceInformation";
   import cremarkDetail from "../FirstTrail/checkComponent/remarkDetail.vue"; //备注信息
   import cborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料
+  import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息
   import processTrajectory from "../FirstTrail/checkComponent/processTrajectory.vue"; //流程轨迹
+
   export default {
     data() {
       return {
+        SplitLeft: "left",
+        SplitRight: "right",
         watchData: '',
         originLeft: '',
         // 进件人信息
@@ -161,12 +164,8 @@
         tabContent2: 3,
         tabActiveInd1: 0,
         tabActiveInd2: 3,
-        items1: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹", "反欺诈结论", "财务信息", "流程轨迹",
-          "审批结论轨迹"
-        ],
-        items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹", "反欺诈结论", "财务信息", "流程轨迹",
-          "审批结论轨迹"
-        ],
+        items1: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹"],
+        items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "审核结论"],
         tab1Index: 0,
         tab2Index: 3,
         flag1: [true, true, true, false, true, true, true, true, true],
@@ -266,11 +265,10 @@
       }
     },
     mounted() {
-      console.log("匹配查看");
-      // this.tastwaitingPass = JSON.parse(localStorage.getItem("FinalinternalObj"));//用终审 初审判断时打开
-      this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
+      console.log("分屏");
+      this.tastwaitingPass = JSON.parse(localStorage.getItem("FtaskInWaitting"));
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-        id: this.tastwaitingPass.matchApplyId,
+        id: this.tastwaitingPass.applyId,
       }).then(res => {
         this.customInf = res.data;
       });
@@ -278,33 +276,25 @@
     },
     components: {
       myHead,
+      //更改后的引入
       FcCreditForm,
-      // AudioVisual,
-      // AudioVisualLeft,
-         RAudioVisual,
-      RAudioVisualLeft,
-      RApprovalConclusion, //信审审批结论归结
-      RFinanceInformation, //账务信息
-      
-    //   ------------------------------------------
+      FCreditForm,
+      AudioVisualLeft,
+      AudioVisual,
+      // -----------------------------------------
       // 编辑
-   
-      RapplicationInformationDetail,
-      RborrowerInformationSetail, //借款人资料
-      RAntiConclution, //反欺诈结论
       remark,
       InternalMatch,
+      applicationInformation,
       borrowerInformation,
       PhoneCredit,
-
       creditInvestigation,
       // 信审审批
       CreditApproval,
       // 查询
-      // aut,
-      cremarkDetail,
-
+      cremarkDetail, //
       cborrowerInformationDetail,
+      capplicationInformationDetail,
       processTrajectory
     }
   }
@@ -436,11 +426,11 @@
   /* 左侧列表  影音资料等 ul 外包   流 */
 
   .left .Left_ul {
-    width: 128px;
+    width: 110px;
     background: rgba(31, 45, 61, 0.59);
     box-shadow: 0 5px 20px 0 #475669;
     position: fixed;
-    left: -128px;
+    left: -110px;
     top: 165px;
     z-index: 10;
     padding-top: 24px;

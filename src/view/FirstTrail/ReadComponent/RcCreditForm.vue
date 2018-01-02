@@ -1,11 +1,12 @@
 <template>
+<!-- 现匹配查看页面-用终身里面的信审表-应该为修改前最新版，待确认 -->
   <div class="CreditForm">
     <el-collapse v-model="activeNames">
-      <!-- 上网查询信息 -->
+      <!-- 网上查询信息 -->
       <el-collapse-item name="1">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">上网查询信息</span>
+          <span class="headFont">网上查询信息</span>
         </template>
         <div class="CreditForm_InternetInf">
           <ul>
@@ -883,13 +884,13 @@
         this.mountJ(21, res.data.iloanBefore);
       });
       // 省    
-      this.get("/credit/queryProvince", {}).then(res => {
-        this.hirecomAddress = res.data;
-      });
-      // 所属行业 
-      this.get("/credit/industry", {}).then(res => {
-        this.hirecomKind = res.data;
-      })
+      // this.get("/credit/queryProvince", {}).then(res => {
+      //   this.hirecomAddress = res.data;
+      // });
+      // // 所属行业 
+      // this.get("/credit/industry", {}).then(res => {
+      //   this.hirecomKind = res.data;
+      // })
     },
   }
 
