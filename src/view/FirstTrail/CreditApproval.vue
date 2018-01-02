@@ -287,7 +287,7 @@
             <el-form-item label="月核实收入[元] :" class="item-column2 width-120">
               <el-input v-model="verIncome" @blur="moneyBlur(verIncome,'verIncome')"></el-input>
             </el-form-item>
-            <el-form-item label="批准产品 :" class="item-column2 width-120">
+            <el-form-item label="批准产品 :" class="item-column2 width-110">
               <el-select @change="proSlelecChange" v-model="proName">
                 <el-option v-for="item in products" :key="item.id" :label="item.proName" :value="item"></el-option>
                 <!-- <el-option v-for="item in secondeReasons" :key="item.id" :label="item.reasonName" :value="item.reasonName"> -->
@@ -303,7 +303,7 @@
               </el-select>
             </el-form-item>
             <span class="require" style="left:470px;top:-25px;" v-show="ploanAmtError">* 批准金额不能大于{{minAmount}},小于{{maxAmounnt}}</span>
-            <el-form-item label="批准金额[元] :" class="item-column2 width-120">
+            <el-form-item label="批准金额[元] :" class="item-column2 width-110">
               <el-input v-model="ploanAmt" @blur="moneyBlur(ploanAmt,'ploanAmt')"></el-input>
             </el-form-item>
           </div>
@@ -1892,6 +1892,9 @@ export default {
 
 .creditApproval-class .back-form .width-120 .el-form-item__label {
   width: 120px;
+}
+.creditApproval-class .back-form .width-110 .el-form-item__label {
+  width: 110px;
 }
 
 
