@@ -28,8 +28,7 @@
             <!-- tab 2 -=====================tab2里面的ul-->
             <div class="Right_tab_ul_wrap">
               <ul ref="right_tab_ul" style="left:0;right:0;">
-                <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="tab($event,index,val)"
-                  :class="{tab2Act:tab2Index==index}">
+                <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="tab($event,index,val)" :class="{tab2Act:tab2Index==index}">
                   {{val}}</li>
               </ul>
             </div>
@@ -44,10 +43,14 @@
             <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
             <cCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></cCreditForm>
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
-            <!-- 反欺诈结论 空白 -->
+            <!-- 信审审批结论轨迹 空白 -->
             <!-- <CreditForm v-if=" this.tabContent2==8"></CreditForm> -->
             <!-- 信审审批 空白 -->
-            <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>
+            <aAntiConclusionPath v-if=" this.tabContent2==9"></aAntiConclusionPath>
+            <aAntiConclusionPath v-if=" this.tabContent2==10">反欺诈申请信息</aAntiConclusionPath>
+            <aAntiConclusionPath v-if=" this.tabContent2==10">反欺诈调查</aAntiConclusionPath>
+            <aAntiConclusionPath v-if=" this.tabContent2==10">审批结论</aAntiConclusionPath>
+
           </div>
         </div>
       </div>
@@ -56,10 +59,12 @@
 </template>
 <script>
   import myHead from "../header.vue"
-import AnitAudioVisual from'./components/AnitAudioVisual.vue';//工作台--》 av
-import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配查看 --》 aV
-  import cCreditForm from "../FirstTrail/checkComponent/cCreditForm.vue";
-
+  import AnitAudioVisual from './components/AnitAudioVisual.vue'; //工作台--》 av
+  // import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配查看 --》 aV
+  import cCreditForm from "../FirstTrail/checkComponent/cCreditForm.vue"; //信审表
+  import aAntiConclusionPath from './components/aAntiConclusionPath.vue'; //反欺诈审批结论轨迹
+  import aAprovalConclusion from './components/aAprovalConclusion.vue' //信审审批结论轨迹
+  // --------------------------------------------------------------------------------------------
   // 编辑
   import remark from "../FirstTrail/detailComponent/remark.vue";
   import InternalMatch from "../FirstTrail/InternalMatch.vue";
@@ -81,23 +86,25 @@ import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配�
   export default {
     data() {
       return {
-        SplitLeft:"left",
-        SplitRight:"right",
-        watchData:'',
+        SplitLeft: "left",
+        SplitRight: "right",
+        watchData: '',
         originLeft: '',
         // 进件人信息
         customInf: [], //申请信息页local字段
         tastwaitingPass: [], //详情列表页信息--(含)取applyId
         // -------------------------------结束
-        CompareAlert: false, 
+        CompareAlert: false,
         title: "",
         isShow: false,
         flexible: true,
         tabContent2: 3,
-        tabActiveInd2: 3, 
-        items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "信审审批结论轨迹","反欺诈审批结论轨迹","反欺诈申请信息","反欺诈调查", "审批结论"],
+        tabActiveInd2: 3,
+        items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "信审审批结论轨迹", "反欺诈审批结论轨迹", "反欺诈申请信息",
+          "反欺诈调查", "审批结论"
+        ],
         tab2Index: 3,
-        AlertSearch: "", 
+        AlertSearch: "",
       }
     },
     methods: {
@@ -121,35 +128,35 @@ import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配�
           this.$refs.right_tab_ul.style.left = parseFloat(this.$refs.right_tab_ul.style.left) - 50 + "px";
         }
       },
-      showList() { 
+      showList() {
         this.$refs.Left_title.style.left = "0";
         this.flexible = false;
       },
-      hid() { 
+      hid() {
         this.$refs.Left_title.style.left = "-200px";
         this.flexible = true;
       },
-    //   tab1(ev, ind, val) { 
-    //     this.title = val;
-    //     this.tabContent1 = ind;
-    //     this.tab1Index = ind; 
-    //     this.tabActiveInd1 = ind; 
-    //     for (var i = 0; i < this.$refs.tabTwo.length; i++) {
-    //       this.$refs.tabTwo[i].className = "tab2Default"; 
-    //       this.flag2[i] = true;
-    //     }
-    //     this.$refs.tabTwo[this.tabActiveInd2].className = "tab2Act"; 
-    //     if (ind != 0 && ind != 8) { 
-    //       this.flag2[ind] = false;
-    //     }
-    //   },
+      //   tab1(ev, ind, val) { 
+      //     this.title = val;
+      //     this.tabContent1 = ind;
+      //     this.tab1Index = ind; 
+      //     this.tabActiveInd1 = ind; 
+      //     for (var i = 0; i < this.$refs.tabTwo.length; i++) {
+      //       this.$refs.tabTwo[i].className = "tab2Default"; 
+      //       this.flag2[i] = true;
+      //     }
+      //     this.$refs.tabTwo[this.tabActiveInd2].className = "tab2Act"; 
+      //     if (ind != 0 && ind != 8) { 
+      //       this.flag2[ind] = false;
+      //     }
+      //   },
       tab(ev, ind, val) {
         this.tabContent2 = ind;
-        this.tab2Index = ind; 
+        this.tab2Index = ind;
         this.tabActiveInd2 = ind;
         for (var i = 0; i < this.$refs.tabOne.length; i++) {
-          this.$refs.tabOne[i].className = "tab1Default"; 
-        //   this.flag1[i] = true;
+          this.$refs.tabOne[i].className = "tab1Default";
+          //   this.flag1[i] = true;
         }
         // this.$refs.tabOne[this.tabActiveInd1].className = "tab1Act";
         // if (ind != 0 && ind != 8) {
@@ -159,19 +166,20 @@ import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配�
     },
     mounted() {
       console.log("分屏");
-    //   this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
-    //   this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-    //     id: this.tastwaitingPass.applyId,
-    //   }).then(res => {
-    //     this.customInf = res.data;
-    //   });
+      //   this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
+      //   this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
+      //     id: this.tastwaitingPass.applyId,
+      //   }).then(res => {
+      //     this.customInf = res.data;
+      //   });
       this.title = "影音资料";
     },
     components: {
       myHead,
       AnitAudioVisual,
       cCreditForm,
-      
+      aAntiConclusionPath,
+      aAprovalConclusion,
       // aMAnitAudioVisual,
       // 编辑
       remark,
@@ -194,7 +202,7 @@ import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配�
 <style scoped>
   .SplitScreen {
     height: 100%;
-     /* min-width: 1366; */
+    /* min-width: 1366; */
   }
   /* 激活样式 流-css */
 
@@ -218,8 +226,8 @@ import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配�
   .setGray {
     color: #bfcbd9;
   }
-
   /*-------------------------------- */
+
   .SplitScreen_content {
     border: 1px solid #0077ff;
     height: calc(100% - 70px);
@@ -242,12 +250,11 @@ import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配�
     font-size: 14px;
     margin-right: 15px;
   }
-  
+
   .PerDtl span:nth-of-type(7) {
     width: 105px;
   }
   /* 切换按钮 */
-
   /* 左右分屏 */
 
   .SplitScreen_wrap {
@@ -256,7 +263,7 @@ import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配�
     min-width: 1306px;
   }
 
-  .right{
+  .right {
     width: 100%;
     height: 100%;
     overflow: auto;
@@ -266,9 +273,7 @@ import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配�
     float: left;
     position: relative;
   }
-
   /* 左屏 */
-  
   /* 左侧详情 p标签   流-css */
 
   .right .Right_tab_title_div,
@@ -287,7 +292,6 @@ import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配�
     text-align: right;
     padding-right: 40px;
   }
-  
   /* 左侧详情 content div 内容   流-css */
 
   .Left_right_BigImg {
@@ -320,6 +324,7 @@ import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配�
     line-height: 38px;
   }
   /* ======================================================================================================= */
+
   .tab2_Content {
     /*background: purple;*/
     height: calc( 100% - 48px);
@@ -340,6 +345,5 @@ import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配�
   .pre_next_btn_wrap:nth-of-type(2) {
     right: 10px;
   }
-
 
 </style>

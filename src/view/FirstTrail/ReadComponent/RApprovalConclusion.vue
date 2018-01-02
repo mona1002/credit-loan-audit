@@ -36,16 +36,17 @@
       }
     },
     mounted() {
-      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '01') {
-        this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //初审-匹配查看
-      } else if (this.judgeFlag.flag == '02') {
-        this.MatchInf = JSON.parse(localStorage.getItem("FinalinternalObj")); //终审-匹配查看
-      }else if (this.judgeFlag.flag == '03') {
-        this.MatchInf = JSON.parse(localStorage.getItem("AntiinternalObj")); //反欺诈专员-匹配查看
-      }else if (this.judgeFlag.flag == '04') {
-        this.MatchInf = JSON.parse(localStorage.getItem("AntiManagerinternalObj")); //反欺诈主管-匹配查看
-      }
+         this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //初审-匹配查看
+      // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      // if (this.judgeFlag.flag == '01') {
+      //   this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //初审-匹配查看
+      // } else if (this.judgeFlag.flag == '02') {
+      //   this.MatchInf = JSON.parse(localStorage.getItem("FinalinternalObj")); //终审-匹配查看
+      // }else if (this.judgeFlag.flag == '03') {
+      //   this.MatchInf = JSON.parse(localStorage.getItem("AntiinternalObj")); //反欺诈专员-匹配查看
+      // }else if (this.judgeFlag.flag == '04') {
+      //   this.MatchInf = JSON.parse(localStorage.getItem("AntiManagerinternalObj")); //反欺诈主管-匹配查看
+      // }
       this.post("/creauditOpinion/queryByPage", {
         applyId: this.MatchInf.matchApplyId,
         // applyId: "00542",

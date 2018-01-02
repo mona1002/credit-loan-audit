@@ -5,7 +5,7 @@
       <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
       <span class="headFont">新增调查日志</span>
     </div>
-    <ul class="content-ul">
+    <ul class="content-ul" style="margin-left:15px;">
       <li class="item-column3">
         <div class="left-title">客户名称：</div>
         <div class="dis-input">

@@ -11,19 +11,19 @@
           <li class="item-column3">
             <div class="left-title">进件编号：</div>
             <div class="item-content">
-              <el-input v-model="custName"></el-input>
+              <el-input></el-input>
             </div>
           </li>
           <li class="item-column3">
             <div class="left-title">客户名称：</div>
             <div class="item-content">
-              <el-input v-model="custName"></el-input>
+              <el-input></el-input>
             </div>
           </li>
           <li class="item-column3">
             <div class="left-title">证件号码：</div>
             <div class="item-content">
-              <el-input v-model="custName"></el-input>
+              <el-input></el-input>
             </div>
           </li>
           <li class="item-column1 submit-class">
@@ -84,7 +84,7 @@
         <el-table-column prop="name" label="任务类型">
         </el-table-column>
         <el-table-column prop="date" label="进件编号">
-        </el-table-column>\
+        </el-table-column>
         <el-table-column prop="name" label="申请日期">
         </el-table-column>
         <el-table-column prop="address" label="客户名称">

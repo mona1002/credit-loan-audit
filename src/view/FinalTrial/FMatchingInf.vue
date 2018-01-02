@@ -1,4 +1,5 @@
 <template>
+<!-- 暂时没用了，待删，现在匹配查看都跳到初审里面的-匹配查看页面 -->
   <div class="SplitScreen">
     <myHead></myHead>
     <div class="SplitScreen_content">

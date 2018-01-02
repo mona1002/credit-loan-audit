@@ -834,7 +834,8 @@ height: 40px;
   /* width:600px; */
   /* width:70%; */
   width: calc( 50% + 160px);
-  background: red;
+  /* background: red; */
+  /* background: green */
 }
 
 /* 信审表-去掉所有重复paddingbottom值 */
@@ -843,10 +844,11 @@ height: 40px;
   padding-bottom: 0;
 }
 
-/* 信审表-上网查询等-content 左边距*/
+/* 信审表+反欺诈结论-上网查询等-content 左边距*/
 
-.CreditForm .el-collapse-item__wrap {
-  padding: 0px 0 20px 21px;
+.CreditForm .el-collapse-item__wrap,
+.aAntiApplyInf .el-collapse-item__wrap {
+  padding: 0px 0 0px 21px;
 }
 .CreditForm .el-collapse-item:nth-of-type(4) .el-collapse-item__wrap{
   /* background: red; */
@@ -885,9 +887,11 @@ height: 40px;
 }
 
 
-/* 信审表 ----各个  title 一行 */
+/* 信审表+反欺诈结论（初审+终审） ----各个  title 一行 */
 
-.CreditForm .el-collapse-item__header {
+.CreditForm .el-collapse-item__header,
+.aAntiApplyInf .el-collapse-item__header
+ {
   border: 1px solid silver;
   background: #eef0f9;
   border: 1px solid #e6eaee;
@@ -901,32 +905,31 @@ height: 40px;
 
 /* 信审表 ----各个  title 小帽子部分 */
 
-.CreditForm .el-collapse-item {
+.CreditForm .el-collapse-item ,
+.aAntiApplyInf .el-collapse-item {
   position: relative
 }
 
 /* 信审表-textarea 文本域上下居中对齐 统一宽度，覆盖掉width：100%会掉下来的问题 */
 
 .CreditForm .el-textarea {
-  vertical-align: middle;
-  width: 40%;
+  vertical-align: top;
+  /* width: 40%; */
+/* width: calc( 50% + 158px ); */
+width:calc(100% - 295px);
 }
 
 
-/* 信审表-上网查询信息-textarea部分 */
+/* 信审表-网上查询信息-textarea部分 */
 
 
 /* .CreditForm .CreditForm_InternetInf .el-textarea__inner, */
 
 .CreditForm .el-textarea__inner {
-  width: 370px;
+  /* width: 370px; */
+  width: 100%;
 }
 
-/* 信审表：初审结果评价textarea宽度 */
-
-.CreditForm .CreditForm_result .el-textarea__inner {
-  width: 700px
-}
 
 /* 信审表-工作信息-单位地址-input框 */
 
@@ -937,17 +940,16 @@ height: 40px;
 /* 信审表-私营企业-私营企业信息textarea宽度 */
 
 .CreditForm .CreditForm_CompanyInfs_ul_left .el-textarea {
-  /* width:calc( 100% - 350px ); */
-  /* width:705px; */
-  width: 67%;
-  /* min-width: 64%; */
+  width: calc( 100% - 260px);
+  /* width: 67%; */
 }
 
 .CreditForm .CreditForm_CompanyInfs_ul_left .el-textarea__inner {
-  width: 100%;
+  /* width: 100%; */
   /* width:calc(50% + 160px); */
-  max-width: 768px;
-  min-width: 516px;
+  /* width: calc( 100% - 160px ); */
+  /* max-width: 768px; */
+  /* min-width: 516px; */
 }
 
 
@@ -958,10 +960,14 @@ height: 40px;
 }
 
 
-/* 信审表-评价结论 */
-
+/* 信审表：初审结果评价textarea宽度 */
 .CreditForm .CreditForm_result .el-textarea {
-  width: 700px;
+  width:calc( 50% + 200px );
+  width: calc(100% - 260px);
+}
+
+.CreditForm .CreditForm_result .el-textarea__inner {
+  width: 100%;
 }
 /* 信审表----查询---气泡宽度 */
 .el-tooltip__popper{
@@ -1100,7 +1106,60 @@ height: 40px;
   height: 35px
 }
 
-
+/* 反欺诈-案件编号列表页+反欺诈规则设定 */
+.AntiRules .el-input,
+.AntiCaseNum .el-input{
+/* display: inline-block; */
+width: auto;
+}
+/* 查询输入框宽度 */
+.AntiRules .el-input__inner,
+.AntiCaseNum .search .el-input__inner{
+  height: 35px;
+  border-radius: 6px;
+  width: 258px;
+}
+/* 弹框输入框+select宽度 */
+.AntiRules .redact .el-input__inner,
+.AntiCaseNum .redact .el-input__inner{
+ width:200px;
+}
+/* 文本域宽度 */
+.AntiRules .el-textarea {
+/* width:68%; */
+width:496px;
+vertical-align: top;
+}
+.AntiCaseNum .el-textarea{
+  width: 485px;
+vertical-align: top;  
+}
+/* 表格高度 */
+.AntiRules .el-table
+{
+height:100%;
+}
+.AntiCaseNum .el-table{
+height:100%;
+/* background: red; */
+}
+.AntiRules .el-table__body-wrapper,
+.AntiCaseNum .el-table__body-wrapper{
+overflow-x: hidden
+}
+/* 整个弹框宽度 */
+.AntiRules  .redact .el-dialog,
+.AntiCaseNum .redact .el-dialog{
+  /* min-width:620px; */
+  width:620px;
+  
+  /* background: #000; */
+}
+/* 弹框内自带padding  去掉 */
+.AntiRules .redact .el-dialog__body,
+.AntiCaseNum .redact .el-dialog__body{
+padding: 0;
+}
 /* 借款人资料表格内容居中 */
 
 .borrowerInformationSetail .el-table th {
@@ -1774,4 +1833,13 @@ height: 40px;
 .el-collapse-item.is-active .el-collapse-item__header .el-collapse-item__arrow{
   transform:rotate(90deg); 
  -webkit-transform:rotate(90deg); 
+}
+
+
+/* 必填 * */
+.require-icon{
+  color: #ff7676;
+  font-weight: 700;
+  font-size: 16px;
+  vertical-align: middle;
 }

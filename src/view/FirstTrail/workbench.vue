@@ -13,13 +13,16 @@
           <el-collapse v-model="activeNames">
             <el-collapse-item name="1">
               <template slot="title">
-                <i class="el-icon-menu"></i> 待办任务
+                <i class="el-icon-menu"></i> 待办任务( <b>{{this.taskCount}}</b> )
+                <span class="moreC" @click.stop="refresh">
+                  <img src="../../../static/images/shuaxin.png" class="moreCIcon trans" ref="worktask">
+                </span>
               </template>
               <div class="waitting">
                 <el-table ref="singleTable" :data="tableData" highlight-current-row @current-change="handleCurrentChange" style="width: 100%">
-                  <el-table-column property="processTemplateId" label="任务名称">
+                  <el-table-column property="processTemplateTxt" label="任务名称">
                   </el-table-column>
-                  <el-table-column property="taskNodeName" label="节点名称">
+                  <el-table-column property="taskNodeNameTxt" label="节点名称">
                   </el-table-column>
                   <el-table-column property="count" label="任务数目">
                   </el-table-column>
@@ -77,6 +80,7 @@
           flag: ''
         },
         userInf: '',
+        TaskCount:0,
         activeNames: ['1'],
         activeNames1: ['1'],
         activeNames2: ['1'],
@@ -93,8 +97,9 @@
         workbenchPass: {
           processTemplateId: '',
           taskStatus: "01",
-          taskNodeName: ''
-        }
+          taskNodeName: '',
+        },
+        rot: 0,
       }
     },
     components: {
@@ -106,6 +111,17 @@
           processTemplateId: "56789",
           taskNodeName: "67uj"
         })
+      },
+      refresh() {
+        this.rot += 360;
+        this.$refs.worktask.style = "transform: rotate(" + this.rot + "deg)";
+        // this.$refs.worktask.style = " -ms-transform: rotate("+this.rot+"deg)"; IE9
+        this.post("/workFlowTaskQuery/getTaskProfile", {
+          taskStatus: "01",
+        }).then(res => {
+          console.log(res.data)
+          this.tableData = res.data;
+        });
       },
       handleCurrentChange(val) {
         //         creditApp_antiFraud_commissioner 和 creditApp_antiFraud_manager
@@ -125,14 +141,18 @@
           this.judge.flag = "01";
           localStorage.setItem("workbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识
-          this.$router.push({ path: '/taskInWaitting',});
+          this.$router.push({
+            path: '/taskInWaitting',
+          });
         } else if (val.taskNodeName == "creditApp_finalTrial_one" || val.taskNodeName == "creditApp_finalTrial_two" ||
           val.taskNodeName == "creditApp_finalTrial_three" || val.taskNodeName == "creditApp_finalTrial_four" || val.taskNodeName ==
           "creditApp_finalTrial_five") {
           this.judge.flag = "02";
           localStorage.setItem("FinalWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
-          this.$router.push({path: '/FtaskInWaitting',});
+          this.$router.push({
+            path: '/FtaskInWaitting',
+          });
         } else if (val.taskNodeName == "creditApp_antiFraud_commissioner") { //反欺诈专员
           this.judge.flag = "03";
           localStorage.setItem("AntiWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
@@ -146,9 +166,19 @@
         }
       },
     },
+    computed:{
+      taskCount(){
+        // console.log(this.tableData)
+        for(var i=0;i<this.tableData.length;i++){
+         this.TaskCount+= this.tableData[i].count;
+        }
+        return this.TaskCount;
+      }
+    },
     mounted() {
       // 统一登录平台  调试   start 
       this.get("http://testplatform.nuoyuan.com.cn:20717/remote/user/getUserInfo").then(response => {
+        console.info(response.data);
         this.userInf = {
           userCode: response.data.userCode,
           orgCode: response.data.orgCode,
@@ -158,9 +188,9 @@
           taskStatus: "01",
         }).then(res => {
           console.log(res)
-          if(res.statusCode==200){
-          this.tableData = res.data;
-          }else{
+          if (res.statusCode == 200) {
+            this.tableData = res.data;
+          } else {
             alert(res.msg);
           }
         });
@@ -181,6 +211,13 @@
 </script>
 <style scoped>
   /* public 部分 */
+
+  .trans {
+    transition: All 1s ease-in-out;
+    -webkit-transition: All 0.4s ease-in-out;
+    -moz-transition: All 0.4s ease-in-out;
+    -o-transition: All 0.4s ease-in-out;
+  }
 
   .moreC {
     float: right;
@@ -260,8 +297,6 @@
     /* height:800px; */
     background: red;
   }
-
-
 
   .moreC {
     float: right;
@@ -350,7 +385,5 @@
     /* height:800px; */
     background: red;
   }
-
-  @media screen and (min-width: 1366px) {}
 
 </style>
