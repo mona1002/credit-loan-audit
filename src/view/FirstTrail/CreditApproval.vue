@@ -43,12 +43,12 @@
     <!-- <div class="cover-view" v-show="coverShow"> -->
     <el-dialog :visible.sync="coverShow">
       <!-- 回退 -->
-      <el-form v-show="this.showFlag=='02'" class="back-form huitui-class">
-        <div class="form-title" style="position:relative;" v-show="this.showFlag=='02'">
+      <el-form v-show="showFlag=='02'" class="back-form huitui-class">
+        <div class="form-title" style="position:relative;" v-show="showFlag=='02'">
           回退信息
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
         </div>
-        <div class="back-form-li" v-show="this.showFlag=='02'">
+        <div class="back-form-li" v-show="showFlag=='02'">
           <span style="color:red;display:inline-block;width:0px;float:left;">*</span>
           <el-form-item label="回退节点: ">
             <el-select v-model="rollbackNodeName">
@@ -61,7 +61,7 @@
           <!-- 回退主原因输入 02 -->
           <!-- 拒绝主原因选择 01 -->
           <span style="color:red;display:inline-block;width:0px;float:left;position: relative;left:15px;">*</span>
-          <el-form-item label="主原因:" class="item-column2" v-show="this.showFlag=='02'">
+          <el-form-item label="主原因:" class="item-column2" v-show="showFlag=='02'">
             <!-- <el-input v-model="mainReason"></el-input> -->
             <!-- 改成后台获取   filter-method     visible-change 下拉框 出现/隐藏时触发-->
             <el-select @change="selectChange" v-model="mainReason">
@@ -70,7 +70,7 @@
             </el-select>
           </el-form-item>
           <!-- 拒绝主原因选择 01 -->
-          <el-form-item label="主原因 :" class="item-column2" v-show="this.showFlag=='01' || this.showFlag=='07'">
+          <el-form-item label="主原因 :" class="item-column2" v-show="showFlag=='01' || showFlag=='07'">
             <el-select @change="selectChange" v-model="mainReason">
               <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
               </el-option>
@@ -105,12 +105,12 @@
         <div class="back-form-li" style="text-align:right;">
           <el-button plain @click="showFlag=0,coverShow=false;">返回</el-button>
           <!-- 回退 -->
-          <el-button type="primary" v-show="this.showFlag=='02'" @click="submitFn('02')">提交</el-button>
+          <el-button type="primary" v-show="showFlag=='02'" @click="submitFn('02')">提交</el-button>
         </div>
       </el-form>
       <!-- 拒绝 -->
-      <el-form v-show="this.showFlag=='01'" class="back-form jujue-class">
-        <div class="form-title" style="position:relative;" v-show="this.showFlag=='01'">
+      <el-form v-show="showFlag=='01'" class="back-form jujue-class">
+        <div class="form-title" style="position:relative;" v-show="showFlag=='01'">
           拒绝原因
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
         </div>
@@ -118,7 +118,7 @@
           <!-- 回退主原因输入 02 -->
           <!-- 拒绝主原因选择 01 -->
           <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:10px;">*</span>
-          <el-form-item label="主原因:" class="item-column2" v-show="this.showFlag=='02'">
+          <el-form-item label="主原因:" class="item-column2" v-show="showFlag=='02'">
             <!-- <el-input v-model="mainReason"></el-input> -->
             <!-- 改成后台获取   filter-method     visible-change 下拉框 出现/隐藏时触发-->
             <el-select @change="selectChange" v-model="mainReason">
@@ -127,7 +127,7 @@
             </el-select>
           </el-form-item>
           <!-- 拒绝主原因选择 01 -->
-          <el-form-item label="主原因 :" class="item-column2" v-show="this.showFlag=='01' || this.showFlag=='07'">
+          <el-form-item label="主原因 :" class="item-column2" v-show="showFlag=='01' || showFlag=='07'">
             <el-select @change="selectChange" v-model="mainReason">
               <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
               </el-option>
@@ -162,12 +162,12 @@
         <div class="back-form-li" style="text-align:right;">
           <el-button plain @click="showFlag=0,coverShow=false;">返回</el-button>
           <!-- 拒绝 -->
-          <el-button type="primary" v-show="this.showFlag=='01'" @click="submitFn('01')">提交</el-button>
+          <el-button type="primary" v-show="showFlag=='01'" @click="submitFn('01')">提交</el-button>
         </div>
       </el-form>
       <!-- 放弃 -->
-      <el-form v-show="this.showFlag=='07'" class="back-form fangqi-class">
-        <div class="form-title" style="position:relative;" v-show="this.showFlag=='07'">
+      <el-form v-show="showFlag=='07'" class="back-form fangqi-class">
+        <div class="form-title" style="position:relative;" v-show="showFlag=='07'">
           放弃原因
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
         </div>
@@ -175,7 +175,7 @@
           <!-- 回退主原因输入 02 -->
           <!-- 拒绝主原因选择 01 -->
           <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:10px;">*</span>
-          <el-form-item label="主原因:" class="item-column2" v-show="this.showFlag=='02'">
+          <el-form-item label="主原因:" class="item-column2" v-show="showFlag=='02'">
             <!-- <el-input v-model="mainReason"></el-input> -->
             <!-- 改成后台获取   filter-method     visible-change 下拉框 出现/隐藏时触发-->
             <el-select @change="selectChange" v-model="mainReason">
@@ -184,7 +184,7 @@
             </el-select>
           </el-form-item>
           <!-- 拒绝主原因选择 01 -->
-          <el-form-item label="主原因 :" class="item-column2" v-show="this.showFlag=='01' || this.showFlag=='07'">
+          <el-form-item label="主原因 :" class="item-column2" v-show="showFlag=='01' || showFlag=='07'">
             <el-select @change="selectChange" v-model="mainReason">
               <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
               </el-option>
@@ -219,17 +219,17 @@
         <div class="back-form-li" style="text-align:right;">
           <el-button plain @click="showFlag=0,coverShow=false;">返回</el-button>
           <!-- 放弃 -->
-          <el-button type="primary" v-show="this.showFlag=='07'" @click="submitFn('07')">提交</el-button>
+          <el-button type="primary" v-show="showFlag=='07'" @click="submitFn('07')">提交</el-button>
         </div>
       </el-form>
       <!-- 审批 03-->
       <!-- :model="spruleForm" :rules="sprules" ref="spruleForm" -->
-      <el-form class="back-form appro-form" v-show="this.showFlag=='03'">
+      <el-form class="back-form appro-form" v-show="showFlag=='03'">
         <!-- <div class="form-title" style="position:relative;" >
           审批信息
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
         </div> -->
-        <div class="form-title" style="position:relative;" v-show=" this.showFlag=='03'">
+        <div class="form-title" style="position:relative;" v-show=" showFlag=='03'">
           审批信息
           <el-tag closable @close="coverShow=false;showFlag='';proName='';" style="position:absolute;"></el-tag>
         </div>
@@ -336,11 +336,11 @@
         </div>
         <div class="back-form-li" style="text-align:right;padding:10px;">
           <el-button plain @click="showFlag=0,coverShow=false;">返回</el-button>
-          <el-button type="primary" v-show="this.showFlag=='03'" @click="submitFn('03')">提交</el-button>
+          <el-button type="primary" v-show="showFlag=='03'" @click="submitFn('03')">提交</el-button>
         </div>
       </el-form>
       <!-- 审批结论轨迹 -->
-      <div v-show=" this.showFlag=='spjl'" class="spjl-div">
+      <div v-show=" showFlag=='spjl'" class="spjl-div">
         <div class="form-title" style="position:relative;">
           信审审批结论轨迹
           <!-- <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag> -->
@@ -377,7 +377,7 @@
         </div>
       </div>
       <!-- 流程轨迹 -->
-      <div v-show=" this.showFlag=='lcgj'" class="lcgj-div">
+      <div v-show=" showFlag=='lcgj'" class="lcgj-div">
         <div class="form-title" style="position:relative;">
           流程轨迹
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
