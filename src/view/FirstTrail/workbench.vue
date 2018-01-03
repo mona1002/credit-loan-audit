@@ -157,12 +157,12 @@
           this.judge.flag = "03";
           localStorage.setItem("AntiWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
-          //  this.$router.push({path: '/FtaskInWaitting',});  跳转路径？？？？？？？？？？？？
+           this.$router.push({path: '/AntiFraud',});  
         } else if (val.taskNodeName == "creditApp_antiFraud_manager") { //反欺诈主管
           this.judge.flag = "04";
           localStorage.setItem("AntiManagerWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
-          //  this.$router.push({path: '/FtaskInWaitting',});  跳转路径？？？？？？？？？？？？
+           this.$router.push({path: '/AntiFraud',});  
         }
       },
     },

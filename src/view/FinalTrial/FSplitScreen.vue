@@ -90,8 +90,8 @@
             <!-- √ -->
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
             <!-- √ -->
-            <!-- 反欺诈结论 空白 -->
-            <!-- <CreditForm v-if=" this.tabContent2==8"></CreditForm> -->
+            <aAntiApplyInf v-if=" this.tabContent2==8"></aAntiApplyInf>
+            <!-- √ -->            
             <!-- 信审审批 空白 -->
             <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>
           </div>
@@ -140,7 +140,7 @@
   import cborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料（左+右）
   import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信（左右）
   import processTrajectory from "../FirstTrail/checkComponent/processTrajectory.vue"; //流程轨迹（左）
-
+import aAntiApplyInf from'../AntiFraud/components/aAntiApplyInf.vue'//反欺诈结论
   // ----------------------------------------------------------
   // 编辑
   import InternalMatch from "../FirstTrail/InternalMatch.vue";
@@ -296,6 +296,7 @@
       remark,
       cremarkDetail, //备注信息-左
       processTrajectory,
+      aAntiApplyInf,
       // -----------------------------------------
       // 编辑
       InternalMatch,
