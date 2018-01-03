@@ -71,17 +71,6 @@ import aAntiApplyInf from '@/view/AntiFraud/components/aAntiApplyInf.vue'
 // -------------------------复议---------------------
 import ReconsiderApply from '../view/Reconsider/ReconsiderComponents/ReconsiderApply.vue'//复议申请
 
-// 系统管理
-// 机构管理
-import organManage from '@/view/systemManage/organManage/organManage'
-// 资源管理
-// import resourceManage from '@/view/systemManage/resourceManage/resourceManage'
-// 用户管理
-import userManage from '@/view/systemManage/userManage/userManage'
-// 流程角色管理
-import processRoleManage from '@/view/systemManage/processRoleManage/processRoleManage'
-// 功能角色管理
-import functionalRoleManage from '@/view/systemManage/functionalRoleManage/functionalRoleManage'
 
 Vue.use(Router)
 
@@ -249,27 +238,7 @@ const routes = [{
 //   path:'/ReconsiderApply',
 //   component:ReconsiderApply
 // },
-//-------------------系统管理------------
-{
-  path: '/organManage',
-  component: organManage
-},
-// {
-//   path: '/resourceManage',
-//   component: resourceManage
-// },
-{
-  path: '/userManage',
-  component: userManage
-},
-{
-  path: '/processRoleManage',
-  component: processRoleManage
-},
-{
-  path: '/functionalRoleManage',
-  component: functionalRoleManage
-},
+
 
 ];
 
