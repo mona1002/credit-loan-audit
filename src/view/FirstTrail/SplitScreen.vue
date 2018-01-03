@@ -139,8 +139,6 @@
   import capplicationInformationDetail from "./checkComponent/applicationInformationDetail"; //申请信息
   import processTrajectory from "./checkComponent/processTrajectory"; //流程轨迹
 
-
-
   export default {
     data() {
       return {
@@ -267,6 +265,7 @@
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.applyId,
       }).then(res => {
+        console.log(res)
         this.customInf = res.data;
       });
       this.title = "影音资料";

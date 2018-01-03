@@ -20,11 +20,11 @@
               </template>
               <div class="waitting">
                 <el-table ref="singleTable" :data="tableData" highlight-current-row @current-change="handleCurrentChange" style="width: 100%">
-                  <el-table-column property="processTemplateTxt" label="任务名称">
+                  <el-table-column property="processTemplateTxt" label="任务名称" align="center">
                   </el-table-column>
-                  <el-table-column property="taskNodeNameTxt" label="节点名称">
+                  <el-table-column property="taskNodeNameTxt" label="节点名称" align="center">
                   </el-table-column>
-                  <el-table-column property="count" label="任务数目">
+                  <el-table-column property="count" label="任务数目" align="center">
                   </el-table-column>
                 </el-table>
                 <!-- 表格结束 -->
