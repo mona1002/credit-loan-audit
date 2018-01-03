@@ -58,7 +58,7 @@ import FCreditForm from '../view/FinalTrial/FinalComponent/FCreditForm'
 
 // ------------反欺诈------------------
 import AntiAudit from '@/view/AntiFraud/AntiAudit.vue'//反欺诈分屏
-// import AntiRules from '../view/AntiFraud/AntiRules.vue'//反欺诈规则设定
+import AntiRules from '../view/AntiFraud/AntiRules.vue'//反欺诈规则设定
 // import AntiCaseNum from '../view/AntiFraud/AntiCaseNum'// 案件编号维护
 import AnitAudioVisual from'../view/AntiFraud/components/AnitAudioVisual.vue'
 // 反欺诈 列表
@@ -231,11 +231,11 @@ const routes = [{
 //   component:ApprovalConclus
 // },
 // 反欺诈规则设定
-// {
-//   path:'/AntiRules',
-//   component:AntiRules
-// },
-// // 案件编号维护
+{
+  path:'/AntiRules',
+  component:AntiRules
+},
+// 案件编号维护
 // {
 //   path:'/AntiCaseNum',
 //   component:AntiCaseNum
