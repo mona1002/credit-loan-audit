@@ -35,7 +35,7 @@
       <el-button icon="el-icon-check-reject" class="credit-btn" @click="coverFn('01')">拒绝</el-button>
       <el-button icon="el-icon-check-giveup" class="credit-btn" @click="coverFn('07')">放弃</el-button>
       <el-button icon="el-icon-check-appro" class="credit-btn" @click="coverFn('03')">审批</el-button>
-      <!-- <el-button icon="el-icon-check-start" class="credit-btn">发起反欺诈</el-button> -->
+      <el-button icon="el-icon-check-start" class="credit-btn" @click="coverFn('fqz')">发起反欺诈</el-button>
       <el-button icon="el-icon-check-spjl" class="credit-btn" @click="coverFn('spjl')">审批结论轨迹</el-button>
       <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('lcgj')">流程轨迹</el-button>
     </div>
@@ -339,6 +339,12 @@
           <el-button type="primary" v-show="showFlag=='03'" @click="submitFn('03')">提交</el-button>
         </div>
       </el-form>
+      <!-- 反欺诈 -->
+      <!-- <div v-show="showFlag=='fqz'"></div> -->
+      <!-- 反欺诈显示 -->
+      <div class="back-form anti-form" v-show=" showFlag=='fqz'">
+        <AntiApplyInf  :showFlag.sync="showFlag"></AntiApplyInf>
+      </div>
       <!-- 审批结论轨迹 -->
       <div v-show=" showFlag=='spjl'" class="spjl-div">
         <div class="form-title" style="position:relative;">
@@ -438,11 +444,13 @@
     </el-dialog>
     <!-- </div> -->
     <!-- <el-alert title=warnMsg type="warning" v-show="warnShow"> -->
-    </el-alert>
+    <!-- </el-alert> -->
   </div>
   <!-- </div> -->
 </template>
 <script>
+// 信审审批 - 反欺诈申请 页面
+import AntiApplyInf from '../AntiFraud/AntiApplyInf'
 export default {
   data() {
     return {
@@ -564,8 +572,12 @@ export default {
       loanRateYr: '', // 审批 - 计算审批结论数据 - 借款利率
       maxAmounnt: 0, // 产品最大金额
       minAmount: 0, // 产品最小金额
-      verIncome2:0, // 
+      verIncome2: 0, // 
+      // showFqz: false, // 发起反欺诈显示
     }
+  },
+  components: {
+    AntiApplyInf
   },
   mounted() {
     // 页面创建的时候  找数据 
@@ -755,6 +767,13 @@ export default {
             }
           })
 
+          break;
+        case 'fqz':
+          console.log('点击发起反欺诈');
+          // console.log(this.showFqz);
+          // this.showFqz = true;
+          console.log(this.showFqz);
+          this.showFlag = 'fqz';
           break;
         case 'spjl':
           console.log('spspspspsppspspspspsp')
@@ -1516,6 +1535,8 @@ export default {
 
 
 
+
+
 /* 三列 */
 
 .creditApproval-class .item-column3 {
@@ -1535,6 +1556,8 @@ export default {
 
 
 
+
+
 /* 按钮集合控件 */
 
 .creditApproval-class .btn-div {
@@ -1542,6 +1565,8 @@ export default {
   width: 80%;
   float: left;
 }
+
+
 
 
 
@@ -1554,6 +1579,8 @@ export default {
   color: #333;
   border: none;
 }
+
+
 
 
 
@@ -1585,6 +1612,8 @@ export default {
 
 
 
+
+
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -1592,6 +1621,8 @@ export default {
   float: left;
   margin: 0;
 }
+
+
 
 
 
@@ -1608,6 +1639,8 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
+
 
 
 
@@ -1655,11 +1688,15 @@ export default {
 
 
 
+
+
 /* textarea */
 
 .creditApproval-class .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
+
 
 
 
@@ -1693,6 +1730,8 @@ export default {
 
 
 
+
+
 /* 审批 表单 */
 
 .creditApproval-class .appro-form {
@@ -1709,6 +1748,8 @@ export default {
 
 
 
+
+
 /*.creditApproval-class .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -1716,6 +1757,8 @@ export default {
 .creditApproval-class .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
+
 
 
 
@@ -1742,6 +1785,8 @@ export default {
 
 
 
+
+
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -1749,6 +1794,8 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
+
 
 
 
@@ -1771,6 +1818,7 @@ export default {
 
 .creditApproval-class .el-input {
   width: calc( 100% - 120px);
+  /*width: 100%;*/
   height: 35px;
   line-height: 35px;
 }
@@ -1793,6 +1841,8 @@ export default {
 
 
 
+
+
 /* 申请信息 */
 
 .creditApproval-class .info .el-form-item__content {
@@ -1802,6 +1852,8 @@ export default {
 .creditApproval-class .info .el-form-item__label {
   width: 120px;
 }
+
+
 
 
 
@@ -1816,11 +1868,15 @@ export default {
 
 
 
+
+
 /* 有编辑框的 提示信息*/
 
 .creditApproval-class .back-form .back-form-edit-li {
   margin-top: 25px !important;
 }
+
+
 
 
 
@@ -1844,6 +1900,8 @@ export default {
 
 
 
+
+
 /*回退*/
 
 .creditApproval-class .el-icon-check-back {
@@ -1856,6 +1914,8 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
 
 
 
@@ -1876,6 +1936,8 @@ export default {
 
 
 
+
+
 /*放弃*/
 
 .creditApproval-class .el-icon-check-giveup {
@@ -1888,6 +1950,8 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
 
 
 
@@ -1908,6 +1972,8 @@ export default {
 
 
 
+
+
 /*发起反欺诈*/
 
 .creditApproval-class .el-icon-check-start {
@@ -1920,6 +1986,8 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
 
 
 
@@ -1940,6 +2008,8 @@ export default {
 
 
 
+
+
 /*流程轨迹*/
 
 .creditApproval-class .el-icon-check-lcgj {
@@ -1956,6 +2026,8 @@ export default {
 
 
 
+
+
 /* 折叠面板头部背景色和icon */
 
 .creditApproval-class .icon_hat {
@@ -1966,6 +2038,8 @@ export default {
 .creditApproval-class .headFont {
   font-size: 16px;
 }
+
+
 
 
 
@@ -1988,11 +2062,15 @@ export default {
 
 
 
+
+
 /* 信审审批  - 审批  编辑部分 */
 
 .creditApproval-class .appro-form .back-form-edit-li .el-form-item__label {
   /*width: 120px;*/
 }
+
+
 
 
 
@@ -2018,11 +2096,15 @@ export default {
 
 
 
+
+
 /* 两行文字 样式 */
 
 .creditApproval-class .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
+
 
 
 
@@ -2034,6 +2116,8 @@ export default {
 
 
 
+
+
 /* label 文字样式 */
 
 .creditApproval-class .huitui-class .el-form-item__label {
@@ -2041,6 +2125,8 @@ export default {
 }
 
 .creditApproval-class .jujue-class {}
+
+
 
 
 
@@ -2076,10 +2162,25 @@ export default {
 
 
 
+
+
 /* 审批信息  */
 
 .creditApproval-class .el-form-item__content .el-select .el-input {
   width: 100%;
+}
+
+
+/* 反欺诈表单 */
+.creditApproval-class .anti-form {
+  /*width: 80%;*/
+  height: 600px;
+  min-width: 685px;
+  /*margin-top: 100px !important;*/
+  height: 460px;
+  margin: 0 auto;
+  padding: 10px;
+  overflow: auto;
 }
 
 </style>
