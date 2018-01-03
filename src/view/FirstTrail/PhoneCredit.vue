@@ -15,9 +15,11 @@
         <el-collapse class="phone-tree" v-model="activeTrees">
           <el-collapse-item :title="treeData[0].label" name="1">
             <div v-for="item in treeData[0].children">
-              <el-tooltip effect="dark" :content="item.children[0].label" placement="right-end">
-                <div slot="content">{{item.children[0].label}}
-                  <br/>{{item.children[0].label}}</div>
+              <!-- :content="item.children[0].label+item.children[0].id" -->
+              <el-tooltip effect="dark" placement="right-end">
+                <div slot="content">
+                  {{item.children[0].label}}
+                </div>
                 <div class="item-title" @click="handleNodeClick(item)">
                   {{item.label}}
                 </div>
@@ -26,7 +28,10 @@
           </el-collapse-item>
           <el-collapse-item :title="treeData[1].label" name="2">
             <div v-for="item in treeData[1].children">
-              <el-tooltip effect="dark" :content="item.children[0].label" placement="right-end">
+              <el-tooltip effect="dark" placement="right-end">
+                <div slot="content">
+                  {{item.children[0].label}}
+                </div>
                 <div class="item-title" @click="handleNodeClick(item)">
                   {{item.label}}
                 </div>
@@ -35,7 +40,12 @@
           </el-collapse-item>
           <el-collapse-item :title="treeData[2].label" name="3">
             <div v-for="item in treeData[2].children">
-              <el-tooltip effect="dark" :content="item.children[0].label" placement="right-end">
+              <el-tooltip effect="dark" placement="right-end">
+                <div slot="content">
+                  {{item.children[0].label}}
+                  <br/>
+                  <br/> {{item.children[0].relation}}
+                </div>
                 <div class="item-title" @click="handleNodeClick(item)">
                   {{item.label}}
                 </div>
@@ -44,7 +54,12 @@
           </el-collapse-item>
           <el-collapse-item :title="treeData[3].label" name="4">
             <div v-for="item in treeData[3].children">
-              <el-tooltip effect="dark" :content="item.children[0].label" placement="right-end">
+              <el-tooltip effect="dark" placement="right-end">
+                <div slot="content">
+                  {{item.children[0].label}}
+                  <br/>
+                  <br/> {{item.children[0].relation}}
+                </div>
                 <div class="item-title" @click="handleNodeClick(item)">
                   {{item.label}}
                 </div>
@@ -53,7 +68,12 @@
           </el-collapse-item>
           <el-collapse-item :title="treeData[4].label" name="5">
             <div v-for="item in treeData[4].children">
-              <el-tooltip effect="dark" :content="item.children[0].label" placement="right-end">
+              <el-tooltip effect="dark" placement="right-end">
+                <div slot="content">
+                  {{item.children[0].label}}
+                  <br/>
+                  <br/> {{item.children[0].relation}}
+                </div>
                 <div class="item-title" @click="handleNodeClick(item)">
                   {{item.label}}
                 </div>
@@ -841,6 +861,7 @@ export default {
 
 
 
+
 /* 添加电话 按钮 */
 
 .phone-credit .el-aside .el-button {
@@ -854,6 +875,7 @@ export default {
   background-color: #0077FF;
   border-color: #0077FF;*/
 }
+
 
 
 
@@ -873,6 +895,7 @@ export default {
   overflow: auto;
   z-index: 101;
 }
+
 
 
 
@@ -896,11 +919,13 @@ export default {
 
 
 
+
 /* title */
 
 .phone-credit .cover-content .add-title {
   text-align: left;
 }
+
 
 
 
@@ -930,11 +955,13 @@ export default {
 
 
 
+
 /* 添加电话  input 样式*/
 
 .phone-credit .add-content .el-input {
   width: inherit;
 }
+
 
 
 
@@ -946,6 +973,7 @@ export default {
   /*margin-top: 10px;*/
   /*margin-right: 10px;*/
 }
+
 
 
 
@@ -964,6 +992,7 @@ export default {
 .phone-credit .el-tag .el-icon-close {
   right: 0px;
 }
+
 
 
 
@@ -1017,6 +1046,7 @@ export default {
 
 
 
+
 /* 表格分页 */
 
 .phone-credit .el-pagination {
@@ -1024,6 +1054,7 @@ export default {
   width: 100%;
   text-align: center;
 }
+
 
 
 
@@ -1037,12 +1068,14 @@ export default {
 
 
 
+
 /* 添加申请单电话 label*/
 
 .phone-credit .add-label {
   display: inline-block;
   width: 70px;
 }
+
 
 
 
@@ -1080,6 +1113,7 @@ export default {
 
 
 
+
 /* label */
 
 .phone-credit .el-form-item__label {
@@ -1092,6 +1126,7 @@ export default {
 
 
 
+
 /* 三列 */
 
 .phone-credit .item-column3 {
@@ -1101,6 +1136,7 @@ export default {
   margin: 0;
   margin-bottom: 10px;
 }
+
 
 
 
@@ -1124,6 +1160,7 @@ export default {
 
 
 
+
 /*.phone-credit .item-column1 textarea {
   margin-left: 20px;
 }*/
@@ -1143,6 +1180,7 @@ export default {
 
 
 
+
 /* input 不可编辑状态*/
 
 .dis-input {}
@@ -1157,6 +1195,7 @@ export default {
 
 
 
+
 /* el-input width*/
 
 .phone-credit .el-container .el-main .form-class .el-input {
@@ -1168,11 +1207,13 @@ export default {
 
 
 
+
 /* 表格头 */
 
 .phone-credit .el-header {
   padding: 0;
 }
+
 
 
 
@@ -1192,11 +1233,13 @@ export default {
 
 
 
+
 /* 折叠 头 箭头样式*/
 
 .phone-credit .el-collapse-item__header .el-collapse-item__arrow {
   padding-right: 20px;
 }
+
 
 
 
@@ -1246,12 +1289,14 @@ export default {
 
 
 
+
 /* 提交按钮 */
 
 .phone-credit .submit-class {
   text-align: left;
   margin-left: 570px;
 }
+
 
 
 
@@ -1273,6 +1318,7 @@ export default {
   /*width: 258px;*/
   height: 33px;
 }
+
 
 
 
@@ -1302,6 +1348,7 @@ export default {
 
 
 
+
 /*add-content*/
 
 
@@ -1314,11 +1361,13 @@ export default {
 
 
 
+
 /* 关闭按钮 */
 
 .phone-credit .el-dialog__headerbtn {
   font-size: 20px;
 }
+
 
 
 
@@ -1331,11 +1380,13 @@ export default {
 
 
 
+
 /* 更改 电话征信 -- 添加电话 */
 
 .phone-credit .el-dialog__wrapper .el-form-item__label {
   width: 100px;
 }
+
 
 
 
@@ -1345,11 +1396,13 @@ export default {
 
 
 
+
 /* 添加申请单电话信息 必填 * */
 
 .phone-credit .left-title2 {
   line-height: 20px;
 }
+
 
 
 
@@ -1372,6 +1425,7 @@ export default {
 
 
 
+
 /* 电话树  选中的  字体样式*/
 
 .phone-credit .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content .el-tree-node__label {
@@ -1383,6 +1437,7 @@ export default {
 .phone-credit .el-tree-node__content {
   height: 32px;
 }
+
 
 
 
@@ -1401,11 +1456,13 @@ export default {
 
 
 
+
 /* 两行  数据*/
 
 .phone-credit .line2-class label {
   line-height: 20px;
 }
+
 
 
 
@@ -1418,6 +1475,7 @@ export default {
 .phone-credit .el-collapse-item__arrow {
   line-height: 40px
 }
+
 
 
 
@@ -1435,12 +1493,14 @@ export default {
 
 
 
+
 /* 后面是 textarea 样式*/
 
 .phone-credit .item-column3-2 {
   width: 66%;
   /*border: 1px solid;*/
 }
+
 
 
 
@@ -1452,12 +1512,14 @@ export default {
 
 
 
+
 /* 气泡 */
 
 .el-tooltip__popper {
   max-width: 400px;
   height: auto;
 }
+
 
 
 
@@ -1487,6 +1549,7 @@ export default {
 
 
 
+
 /* 两行  空  */
 
 .phone-credit .item-column3-2-normal .el-form-item__content {
@@ -1502,11 +1565,13 @@ export default {
 
 
 
+
 /* 3列 空位 */
 
 .item-column3-null {
   min-height: 50px;
 }
+
 
 
 
@@ -1522,11 +1587,13 @@ export default {
 
 
 
+
 /* 默认隐藏 三级  树*/
 
 .phone-credit .el-tree-node.is-expanded .el-tree-node__children .el-tree-node .el-tree-node__children .el-tree-node {
   /*display: none;*/
 }
+
 
 
 
@@ -1538,11 +1605,13 @@ export default {
 
 
 
+
 /*二级hover改三级*/
 
 .phone-credit .el-tree--highlight-current .el-tree-node>.el-tree-node__children:hover .phone-credit .el-tree--highlight-current .el-tree-node>.el-tree-node__children .el-tree-node__children .el-tree-node__content {
   color: red;
 }
+
 
 
 
