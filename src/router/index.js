@@ -64,10 +64,10 @@ import AnitAudioVisual from'../view/AntiFraud/components/AnitAudioVisual.vue'
 // 反欺诈 列表
 import AntiFraud from '@/view/AntiFraud/AntiFraud.vue'
 // 反欺诈 申请
-import AntiApplyInf from '@/view/AntiFraud/AntiApplyInf.vue'
+import AntiApplyEdit from '@/view/AntiFraud/AntiApplyEdit.vue'
 import aAntiApplyInf from '@/view/AntiFraud/components/aAntiApplyInf.vue'
 // 审批结论
-// import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
+import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
 // import ApprovalConclus from ''
 
 // 系统管理
@@ -227,18 +227,18 @@ const routes = [{
 },
 // 反欺诈 申请信息
 {
-  path:'/AntiApplyInf',
-  component:AntiApplyInf
+  path:'/AntiApplyEdit',
+  component:AntiApplyEdit
 },
 {
   path:'/aAntiApplyInf',
   component:aAntiApplyInf
 },
 // 审批结论
-// {
-//   path:'/ApprovalConclus',
-//   component:ApprovalConclus
-// },
+{
+  path:'/ApprovalConclus',
+  component:ApprovalConclus
+},
 // 反欺诈规则设定
 // {
 //   path:'/AntiRules',
