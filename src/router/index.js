@@ -57,7 +57,7 @@ import FCreditForm from '../view/FinalTrial/FinalComponent/FCreditForm'
 
 
 // ------------反欺诈------------------
-import AntiAudit from '@/view/AntiFraud/AntiAudit.vue'
+import AntiAudit from '@/view/AntiFraud/AntiAudit.vue'//反欺诈分屏
 // import AntiRules from '../view/AntiFraud/AntiRules.vue'//反欺诈规则设定
 // import AntiCaseNum from '../view/AntiFraud/AntiCaseNum'// 案件编号维护
 import AnitAudioVisual from'../view/AntiFraud/components/AnitAudioVisual.vue'
@@ -69,18 +69,10 @@ import aAntiApplyInf from '@/view/AntiFraud/components/aAntiApplyInf.vue'
 // 审批结论
 import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
 // import ApprovalConclus from ''
+// import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
+// -------------------------复议---------------------
+import ReconsiderApply from '../view/Reconsider/ReconsiderComponents/ReconsiderApply.vue'//复议申请
 
-// 系统管理
-// 机构管理
-import organManage from '@/view/systemManage/organManage/organManage'
-// 资源管理
-// import resourceManage from '@/view/systemManage/resourceManage/resourceManage'
-// 用户管理
-import userManage from '@/view/systemManage/userManage/userManage'
-// 流程角色管理
-import processRoleManage from '@/view/systemManage/processRoleManage/processRoleManage'
-// 功能角色管理
-import functionalRoleManage from '@/view/systemManage/functionalRoleManage/functionalRoleManage'
 
 Vue.use(Router)
 
@@ -89,11 +81,6 @@ const routes = [{
   component: workbench
 },
 {
-  // 工作台  误改, 误删
-  /*
-    userCode:    用户编码
-    orgCode:     机构编码
-   */
   path: '/workbench',
   component: login,
 },
@@ -206,11 +193,6 @@ const routes = [{
   component: FMCreditForm
 },
 
-// {
-//   path: '/b',
-//   component: FSplitScreen
-// },
-
 //-------------------反欺诈------------
 {
   path:'/AntiAudit',
@@ -249,49 +231,20 @@ const routes = [{
 //   path:'/AntiCaseNum',
 //   component:AntiCaseNum
 // },
-
-//-------------------系统管理------------
+// ---------------------复议-------------
 {
-  path: '/organManage',
-  component: organManage
+  path:'/ReconsiderApply',
+  component:ReconsiderApply
 },
 // {
-//   path: '/resourceManage',
-//   component: resourceManage
+//   path:'/ReconsiderApply',
+//   component:ReconsiderApply
 // },
-{
-  path: '/userManage',
-  component: userManage
-},
-{
-  path: '/processRoleManage',
-  component: processRoleManage
-},
-{
-  path: '/functionalRoleManage',
-  component: functionalRoleManage
-},
+
 
 ];
 
 const router = new Router({
   routes
 });
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(r => r.meta.requireAuth)) {
-//     if (getCookie("sessionId") !== "") {
-//       next();
-//     } else {
-//       next({
-//         path: '/login',
-//         query: {
-//           redirect: to.fullPath
-//         }
-//       })
-//     }
-//   } else {
-//     next();
-//   }
-// });
-
 export default router;
