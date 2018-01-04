@@ -125,6 +125,7 @@
 				      :data="hitRuleList"
 				      style="width: 100%"
 				      height="242"
+				      @cell-click="inquiry"
 				      border>
 					      <el-table-column
 					        type="index"
@@ -141,7 +142,7 @@
 					        prop="custCount"
 					        label="命中客户数"
 					        min-width="80"
-					        @click="inquiry($index)">
+					        >
 					      </el-table-column>
 				    </el-table>
 			    </div>
@@ -206,7 +207,7 @@
 				      style="width: 100%"
 				      highlight-current-row
 				      border
-				      @current-change="handleCurrentChange">
+				      @current-change="handleCurrentChanges">
 				      <el-table-column
 				        type="index"
 				      	:index='1'
@@ -266,7 +267,7 @@
 					    :data="recordList"
 					    tooltip-effect="dark"
 					    style="width: 100%"
-					    height="268"
+					    height="259"
 					    border
 					    @selection-change="handleSelectionChange">
 					    <el-table-column
@@ -324,6 +325,32 @@
 			  </span>
 			</el-dialog>
 		</div>
+		<!-- 解除弹框 -->
+		<div class="delLog">
+			<el-dialog
+			  title="提示"
+			  :visible.sync="deldialogVisible"
+			  width="420px"
+			  top="35vh">
+			  <span>只能针对未解除状态数据进行操作，请重新选择！</span>
+			  <span slot="footer" class="dialog-footer">
+				<el-button type="primary" @click="delSure">确定</el-button>
+			  </span>
+			</el-dialog>
+		</div>
+		<!-- 恢复弹框 -->
+		<div class="backLog">
+			<el-dialog
+			  title="提示"
+			  :visible.sync="backdialogVisible"
+			  width="420px"
+			  top="35vh">
+			  <span>只能针对已解除状态数据进行操作，请重新选择</span>
+			  <span slot="footer" class="dialog-footer">
+				<el-button type="primary" @click="backSure">确定</el-button>
+			  </span>
+			</el-dialog>
+		</div>
 	</div>
 </template>
 <script type="text/javascript">
@@ -337,7 +364,7 @@
 					{
 		                ruleId:"xxx", // 规则ID
 		                ruleContent:"方式开发健康", // 命中规则名称
-		                custCount:20 // 命中客户数
+		                custCount:0 // 命中客户数
 		            },
 		            {
 		                ruleId:"xxx", // 规则ID
@@ -374,7 +401,7 @@
 		            "auditCode":"", // 当前审核人编号
 		            "auditName":"" // 当前审核人姓名
 				},
-				dialogVisible: true,
+				dialogVisible: false,
 				/*命中规则 列表*/
 				//recordList:[],
 				totals:{},
@@ -387,7 +414,7 @@
 		            applySubNo:"13424675787", // 进件编号
 		            custName:"和规范化风格哈", // 命中客户名称
 		            status:"而非给", // 状态
-		            statusTxt:"法人股" // 状态文本
+		            statusTxt:"法人股1" // 状态文本
 		         },
 		         {
 		            ruleId:"xxxx", // 规则Id
@@ -395,7 +422,7 @@
 		            applySubNo:"13424675787", // 进件编号
 		            custName:"和规范化风格哈", // 命中客户名称
 		            status:"而非给", // 状态
-		            statusTxt:"法人股" // 状态文本
+		            statusTxt:"法人股2" // 状态文本
 		         },
 		         {
 		            ruleId:"xxxx", // 规则Id
@@ -403,7 +430,7 @@
 		            applySubNo:"13424675787", // 进件编号
 		            custName:"和规范化风格哈", // 命中客户名称
 		            status:"而非给", // 状态
-		            statusTxt:"法人股" // 状态文本
+		            statusTxt:"法人股2" // 状态文本
 		         },
 		         {
 		            ruleId:"xxxx", // 规则Id
@@ -411,7 +438,7 @@
 		            applySubNo:"13424675787", // 进件编号
 		            custName:"和规范化风格哈", // 命中客户名称
 		            status:"而非给", // 状态
-		            statusTxt:"法人股" // 状态文本
+		            statusTxt:"法人股3" // 状态文本
 		         },
 		         {
 		            ruleId:"xxxx", // 规则Id
@@ -419,7 +446,7 @@
 		            applySubNo:"13424675787", // 进件编号
 		            custName:"和规范化风格哈", // 命中客户名称
 		            status:"而非给", // 状态
-		            statusTxt:"法人股" // 状态文本
+		            statusTxt:"法人股3" // 状态文本
 		         },
 		         {
 		            ruleId:"xxxx", // 规则Id
@@ -427,7 +454,7 @@
 		            applySubNo:"13424675787", // 进件编号
 		            custName:"和规范化风格哈", // 命中客户名称
 		            status:"而非给", // 状态
-		            statusTxt:"法人股" // 状态文本
+		            statusTxt:"法人股1" // 状态文本
 		         },
 		         {
 		            ruleId:"xxxx", // 规则Id
@@ -435,7 +462,7 @@
 		            applySubNo:"13424675787", // 进件编号
 		            custName:"和规范化风格哈", // 命中客户名称
 		            status:"而非给", // 状态
-		            statusTxt:"法人股" // 状态文本
+		            statusTxt:"法人股1" // 状态文本
 		         },
 		         {
 		            ruleId:"xxxx", // 规则Id
@@ -443,7 +470,7 @@
 		            applySubNo:"13424675787", // 进件编号
 		            custName:"和规范化风格哈", // 命中客户名称
 		            status:"而非给", // 状态
-		            statusTxt:"法人股" // 状态文本
+		            statusTxt:"法人股2" // 状态文本
 		         },
 		         {
 		            ruleId:"xxxx", // 规则Id
@@ -451,7 +478,7 @@
 		            applySubNo:"13424675787", // 进件编号
 		            custName:"和规范化风格哈", // 命中客户名称
 		            status:"而非给", // 状态
-		            statusTxt:"法人股" // 状态文本
+		            statusTxt:"法人股3" // 状态文本
 		         },
 		         {
 		            ruleId:"xxxx", // 规则Id
@@ -459,7 +486,7 @@
 		            applySubNo:"13424675787", // 进件编号
 		            custName:"和规范化风格哈", // 命中客户名称
 		            status:"而非给", // 状态
-		            statusTxt:"法人股" // 状态文本
+		            statusTxt:"法人股3" // 状态文本
 		         },
 		      ],
 		      /*反欺诈申请ID*/
@@ -470,6 +497,12 @@
 			       pageSize:10,
 			       pageNum:1
 			   },
+			   /*存放多选时选中的数据*/
+			   multipleSelection:[],
+			   /*解除弹框*/
+			   deldialogVisible:false,
+			   /*恢复弹框*/
+			   backdialogVisible:false,
 			}
 		},
 		mounted(){
@@ -520,7 +553,7 @@
 			handleChange(){
 
 		 	},
-		 	handleCurrentChange(val){
+		 	handleCurrentChanges(val){
 		 		if(val == null){
 					this.currentRow = '';
 				}else{
@@ -556,56 +589,116 @@
 		 	sure(){
 		 		this.dialogVisible=false;
 		 	},
-		 	relieve(){
-
-		 	},
-		 	recovery(){
-
-		 	},
 		 	handlDetail(index, row) {
 	        	console.log(index, row);
 	      	},
-	      	handleSelectionChange(val) {
-		        this.multipleSelection = val;
-		    },
-		    /*分页*/
-		   	handleSizeChange(val) {
-		      /*console.log('每页 ${val} 条');
-		      this.queryParam.pageSize = val;
-		      this.queryParam.pageNum = 1;
-		      if (this.currentPage !== 1 || this.setPageSize !== 10) {
-		        this.currentPage = 1;
-		        this.setPageSize = 10;
-		      } else {
-		        this.request(this.queryParam);
-		      };*/
-		    },
-		     handleCurrentChange(val) {
-		      /*console.log('当前页: ${val}');
-		      this.queryParam.pageNum = val;
-      		  this.request(this.queryParam);*/
-		    },
 		    /*命中客户数 查询*/
-		    inquiry(index){
-		    	console.log(index);
+		    inquiry(row){
+		    	if(row.custCount==0){
+		    		return
+		    	}
+		    	this.dialogVisible = true;
+		    	/*console.log(index);
 		    	for(var i=0;i<this.hitRuleList.length-1;i++){
 		    		if(index==i){
 		    			this.ruleId = this.hitRuleList[i].ruleId;
 		    		}
-		    	}
+		    	}*/
+		    	console.log(row.ruleId);
 		    	this.post("antiFraud/getHitRuleCustList",{
 		    		pageParam:{
-				        pageSize:10,
-				        pageNum:1
+				        pageSize:this.pageParam.pageSize,
+				        pageNum:this.pageParam.pageNum
 				    },
-				    ruleId:this.ruleId, // 规则Id
+				    ruleId:row.ruleId, // 规则Id
 		    	}).then(res=>{
 		    		if(res.statusCode==200){
 		    			this.totals = res.data;
-		    			this.recordList = res.data.recordList;
+		    			//this.recordList = res.data.recordList;
 		    		}
 		    	})
 		    },
+		    /*分页*/
+		   	handleSizeChange(val) {
+		      console.log('每页 ${val} 条');
+		      this.pageParam.pageSize = val;
+		      this.pageParam.pageNum = 1;
+		      if (this.currentPage !== 1 || this.setPageSize !== 10) {
+		        this.currentPage = 1;
+		        this.setPageSize = 10;
+		      } else {
+		        this.inquiry();
+		      };
+		    },
+		     handleCurrentChange(val) {
+		      console.log('当前页: ${val}');
+		      this.pageParam.pageNum = val;
+      		  this.inquiry();
+		    },
+		    /*多选框*/
+		    handleSelectionChange(val) {
+		        this.multipleSelection = val;
+		        //console.log(this.multipleSelection);
+		    },
+		    /*解除*/
+		 	relieve(){
+		 		// for(var i=0;i<this.multipleSelection.length;i++){
+		   //      	if(this.multipleSelection[i].statusTxt == '已解除' || this.multipleSelection[i].statusTxt == '解除中'){
+		   //      		this.deldialogVisible = true;
+		   //      		return;
+		   //      	}else{
+		   //      		this.post("antiFraud/batchUpdateHitRule",{
+
+		   //      		}).then(res=>{
+
+		   //      		})
+		   //      	}
+		   //      }
+		   		/*var fg = this.multipleSelection.every(function(item){
+		   			return (item.statusTxt == '法人股3'|| item.statusTxt == '法人股2')
+		   		});*/
+		   		var fg = this.multipleSelection.every(function(item){
+		   			return (item.statusTxt == '法人股1')
+		   		});
+		   		if(!fg){
+		   			this.deldialogVisible = true;
+		   			//return;
+		   		}
+		   		if(fg){
+		   			this.post("antiFraud/batchUpdateHitRule",{
+
+		         		}).then(res=>{
+
+		        	})
+		        	//console.log(this.multipleSelection);
+		   		}
+		 	},
+		 	/*解除 弹框按钮*/
+		 	delSure(){
+		 		this.deldialogVisible = false;
+		 	},
+		 	/*恢复*/
+		 	recovery(){
+		 		var fg = this.multipleSelection.every(function(item){
+		   			return (item.statusTxt == '法人股2')
+		   		});
+		   		if(!fg){
+		   			this.backdialogVisible = true;
+		   			//return;
+		   		}
+		   		if(fg){
+		   			/*this.post("antiFraud/batchUpdateHitRule",{
+
+		         		}).then(res=>{
+
+		        	})*/
+		        	console.log(this.multipleSelection);
+		   		}
+		 	},
+		 	/*恢复 弹框按钮*/
+		 	backSure(){
+		 		this.backdialogVisible = false;
+		 	},
 		}
 	}
 </script>
