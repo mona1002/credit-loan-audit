@@ -85,7 +85,8 @@
 					      <el-table-column
 					        prop="estateAddress"
 					        label="房产地址"
-					        min-width="200">
+					        min-width="200"
+					        show-overflow-tooltip>
 					        <template slot-scope="scope">
 					        	<!-- <el-tooltip el-tooltip class="item" effect="dark" content="scope.row.estateAddress" placement="top"> -->
 							        <el-input v-model="scope.row.estateAddress" placeholder="请输入内容">
@@ -1395,6 +1396,8 @@
 		        	this.borDebt=this.borDebt
 		        }else{
 		        	this.borDebt=res.data.borDebt;
+		        	console.log(this.borDebt.houseLoanAmt);
+		        	console.log(typeof(this.borDebt.houseLoanAmt));
 		        }
 		        /*征询报告*/
 		        if(res.data.rptInfo==null){
