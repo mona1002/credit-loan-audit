@@ -39,8 +39,8 @@
         <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">反欺诈申请列表</span>
       </div>
-      <el-table :data="antiTableData" style="width: 100%" border stripe fit highlight-current-row @row-dblclick="rowDbClick" v-show="false">
-        <el-table-column type="index" label="序号">
+      <el-table :data="antiTableData" style="width: 100%" border stripe fit highlight-current-row v-show="false">
+        <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column prop="applySubno" label="进件编号">
         </el-table-column>
@@ -79,31 +79,31 @@
       </el-table>
       <!-- 反欺诈专员审批  反欺诈主管审批 -->
       <!-- v-show="antiFlag=='03'||antiFlag=='04'" -->
-      <div class="address-title">
+      <div class="address-title" v-show="antiFlag=='03'||antiFlag=='04'">
         <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">反欺诈审批任务列表 </span>
       </div>
       <!-- v-show="antiFlag=='03'||antiFlag=='04'" -->
-      <el-table :data="tableData" style="width: 100%" border stripe fit highlight-current-row @row-dblclick="rowDbClick">
-        <el-table-column type="index" label="序号">
+      <el-table :data="directorTableData" style="width: 100%" border stripe fit highlight-current-row @row-dblclick="rowDbClick" v-show="antiFlag=='03'||antiFlag=='04'">
+        <el-table-column type="index" :index="1" label="序号">
         </el-table-column>
-        <el-table-column prop="name" label="任务类型">
+        <el-table-column prop="taskType" label="任务类型">
         </el-table-column>
-        <el-table-column prop="date" label="进件编号">
+        <el-table-column prop="applySubNo" label="进件编号">
         </el-table-column>
-        <el-table-column prop="name" label="申请日期">
+        <el-table-column prop="appDate" label="申请日期">
         </el-table-column>
-        <el-table-column prop="address" label="客户名称">
+        <el-table-column prop="custName" label="客户名称">
         </el-table-column>
-        <el-table-column prop="address" label="证件类型">
+        <el-table-column prop="certType" label="证件类型">
         </el-table-column>
-        <el-table-column prop="address" label="证件号码">
+        <el-table-column prop="certCode" label="证件号码">
         </el-table-column>
-        <el-table-column prop="address" label="进件机构">
+        <el-table-column prop="appOrgCode" label="进件机构">
         </el-table-column>
-        <el-table-column prop="address" label="产品名称">
+        <el-table-column prop="proName" label="产品名称">
         </el-table-column>
-        <el-table-column prop="address" label="进入本环节时间" width="150">
+        <el-table-column prop="activationTime" label="进入本环节时间">
         </el-table-column>
       </el-table>
     </div>
@@ -118,22 +118,22 @@ export default {
       activeNames: ['1'], // 查询部分 默认显示
       antiFlag: '', // 列表标志
       antiTableData: [], // 反欺诈申请列表数据
-      tableData: [], // 专员/主管列表数据
+      directorTableData: [{}], // 专员/主管列表数据
       applySubno: '', // 进件编号
       applyCustName: '', // 客户名称
       applyCustNo: '', // 客户编号
       queryParam: {
-              processTemplateId :'',
-                taskNodeName : '',
-                taskStatus : '',
-                userCode : '',
-                orgCode : '',
-                pageNum : 1,
-                pageSize : 10,
-                applySubNo : '',
-                custName_la : '',
-                certCode : ''
-            },
+        processTemplateId: '',
+        taskNodeName: '',
+        taskStatus: '',
+        userCode: '',
+        orgCode: '',
+        pageNum: 1,
+        pageSize: 10,
+        applySubNo: '',
+        custName_la: '',
+        certCode: ''
+      },
     }
   },
   props: ['applyId'], // 申请单id
@@ -142,17 +142,18 @@ export default {
     // 反欺诈申请 / 反欺诈专员审批 / 反欺诈主管审批
     var judgeFlag = JSON.parse(localStorage.getItem('judge'));
     this.antiFlag = judgeFlag.flag;
+    console.log(this.antiFlag);
     // 根据  antiFlag 判断
     // 初审-信审审批-发起反欺诈
-    if(this.antiFlag == '03' || this.antiFlag=='04'){
-      this.queryParam.processTemplateId=JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
-      this.queryParam.taskNodeName=JSON.parse(localStorage.getItem('workbenchPass')).taskNodeName;
-      this.queryParam.taskStatus=JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
+    if (this.antiFlag == '03' || this.antiFlag == '04') {
+      this.queryParam.processTemplateId = JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
+      this.queryParam.taskNodeName = JSON.parse(localStorage.getItem('workbenchPass')).taskNodeName;
+      this.queryParam.taskStatus = JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
       // 登录 单独存  userCode  orgCode 
-       this.queryParam.userCode=JSON.parse(localStorage.getItem('userCode'));
-       this.queryParam.orgCode=JSON.parse(localStorage.getItem('orgCode'));
-       this.request(this.queryParam); 
-    }else{ 
+      this.queryParam.userCode = JSON.parse(localStorage.getItem('userCode'));
+      this.queryParam.orgCode = JSON.parse(localStorage.getItem('orgCode'));
+      this.request(this.queryParam);
+    } else {
       // 反欺诈申请 - 编辑
       this.queryList();
     }
@@ -167,36 +168,43 @@ export default {
       }).then(res => {
         console.log(res);
         if (res.statusCode == '200') {
-          // 根据 标志来判断 是哪个列表的数据
-          // 反欺诈申请
-          // 反欺诈专员审批  03  // 反欺诈主管审批 04
-          if (this.judgeFlag == '03' || his.judgeFlag == '04') {
-            this.tableData = res.data;
-          } else {
-            this.antiTableData = res.data;
-          }
+          this.antiTableData = res.data;
         }
       })
     },
-    request(param){
-          console.log(this.queryParam);
-          this.post('/workFlowTaskQuery/getTaskToDoList',
-            param
-            ).then(res => {
-              if(res.statusCode==200){
-                this.tableData = res.data;
-                
-              }else{
-                this.datas=[];
-              }
-             
-            })
-        },
+    request(param) {
+      console.log(this.queryParam);
+      this.post('/workFlowTaskQuery/getTaskToDoList',
+        param
+      ).then(res => {
+        if (res.statusCode == 200) {
+          this.directorTableData = res.data.taskDetailList;
+
+        } else {
+          this.datas = [];
+        }
+
+      })
+    },
     // 重置查询条件
     resetQuery() {
       // 查询条件 初始化
-      // 再次请求
-      this.queryList();
+      this.applySubNo = '';
+      this.custName_la = '';
+      this.certCode = '';
+      this.applySubno = '';
+      this.applyCustName = '';
+      this.applyCustNo = '';
+      this.queryParam.applySubNo = '';
+      this.queryParam.custName_la = '';
+      this.queryParam.certCode = '';
+
+      if (this.antiFlag == '03' || this.antiFlag == '04') {
+        this.request(this.queryParam);
+      } else {
+        // 再次请求
+        this.queryList();
+      }
     },
     // 反欺诈申请编辑
     handleClickEdit(row) {
@@ -204,12 +212,25 @@ export default {
       // 跳转到详情
       this.$router.push({
         path: '/AntiApplyEdit',
-        parmas:{applyId:row.applyId}
+        parmas: { applyId: row.applyId }
       });
     },
     // 反欺诈申请查看
-    handleClickInfo(row){
+    handleClickInfo(row) {
       // 
+    },
+    // 主管/专员审批 跳分屏
+    rowDbClick() {
+      console.log('主管/专员 跳分屏')
+      this.$router.push({ path: '/FSplitScreen' });
+      if (this.antiFlag == '03') {
+        // 反欺诈专员
+        localStorage.setItem("AntitaskInWaitting", JSON.stringify(row))
+      }
+      if (this.antiFlag == '04') {
+        // 反欺诈主管
+        localStorage.setItem("AntiManagertaskInWaitting", JSON.stringify(row))
+      }
     }
   }
 }
@@ -223,9 +244,19 @@ export default {
 
 
 
+
+
+
+
+
 /* 容器 */
 
 .anti-fraud .container {}
+
+
+
+
+
 
 
 
@@ -237,6 +268,11 @@ export default {
   float: left;
   margin: 0;
 }
+
+
+
+
+
 
 
 
@@ -253,6 +289,11 @@ export default {
 
 
 
+
+
+
+
+
 /* 三列 */
 
 .anti-fraud .item-column3 {
@@ -261,6 +302,11 @@ export default {
   margin: 0;
   margin-bottom: 10px;
 }
+
+
+
+
+
 
 
 
@@ -317,6 +363,11 @@ export default {
 
 
 
+
+
+
+
+
 /* 折叠面板头部背景色和icon */
 
 .anti-fraud .icon_hat {
@@ -327,6 +378,11 @@ export default {
 .anti-fraud .headFont {
   font-size: 16px;
 }
+
+
+
+
+
 
 
 
