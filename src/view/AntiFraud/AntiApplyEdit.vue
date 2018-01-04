@@ -298,7 +298,7 @@ export default {
 .anti-apply-info-class .submit-class {
   margin-top: 50px;
   /*margin-left: calc( 66% - 140px);*/
-  width: calc(66% - 290px);
+  width: calc(66% - 500px);
   text-align: right;
 }
 

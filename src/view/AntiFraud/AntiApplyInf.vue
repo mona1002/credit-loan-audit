@@ -274,7 +274,7 @@ export default {
 /* 一列 */
 
 .anti-apply-info-class .item-column1 {
-  width: 100%;
+  /*width: 100%;*/
   /*min-width: 1366px;*/
   float: left;
 }
@@ -378,9 +378,11 @@ export default {
   float: left;
   /*width: 795px;*/
   /*min-width: 300px;*/
-  min-width: 400px;
+  /*min-width: 400px;*/
+  /*max-width: 400px;*/
   padding-bottom: 10px;
   width: calc(66% - 290px);
+  width: 400px;
 }
 
 
@@ -407,8 +409,9 @@ export default {
 
 .anti-apply-info-class .submit-class {
   margin-top: 50px;
-  /*margin-left: calc( 66% - 140px);*/
+  margin-left: calc( 66% - 140px);
   text-align: right;
+  width: 300px;
 }
 
 .anti-apply-info-class .el-input {
