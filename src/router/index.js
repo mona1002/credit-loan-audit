@@ -67,8 +67,6 @@ import AntiFraud from '@/view/AntiFraud/AntiFraud.vue'
 import AntiApplyEdit from '@/view/AntiFraud/AntiApplyEdit.vue'
 import aAntiApplyInf from '@/view/AntiFraud/components/aAntiApplyInf.vue'
 // 审批结论
-import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
-// import ApprovalConclus from ''
 // import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
 // -------------------------复议---------------------
 import ReconsiderApply from '../view/Reconsider/ReconsiderComponents/ReconsiderApply.vue'//复议申请
@@ -217,10 +215,10 @@ const routes = [{
   component:aAntiApplyInf
 },
 // 审批结论
-{
-  path:'/ApprovalConclus',
-  component:ApprovalConclus
-},
+// {
+//   path:'/ApprovalConclus',
+//   component:ApprovalConclus
+// },
 // 反欺诈规则设定
 {
   path:'/AntiRules',
