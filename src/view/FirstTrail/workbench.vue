@@ -20,11 +20,11 @@
               </template>
               <div class="waitting">
                 <el-table ref="singleTable" :data="tableData" highlight-current-row @current-change="handleCurrentChange" style="width: 100%">
-                  <el-table-column property="processTemplateTxt" label="任务名称">
+                  <el-table-column property="processTemplateTxt" label="任务名称" align="center">
                   </el-table-column>
-                  <el-table-column property="taskNodeNameTxt" label="节点名称">
+                  <el-table-column property="taskNodeNameTxt" label="节点名称" align="center">
                   </el-table-column>
-                  <el-table-column property="count" label="任务数目">
+                  <el-table-column property="count" label="任务数目" align="center">
                   </el-table-column>
                 </el-table>
                 <!-- 表格结束 -->
@@ -157,12 +157,12 @@
           this.judge.flag = "03";
           localStorage.setItem("AntiWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
-          //  this.$router.push({path: '/FtaskInWaitting',});  跳转路径？？？？？？？？？？？？
+           this.$router.push({path: '/AntiFraud',});  
         } else if (val.taskNodeName == "creditApp_antiFraud_manager") { //反欺诈主管
           this.judge.flag = "04";
           localStorage.setItem("AntiManagerWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
-          //  this.$router.push({path: '/FtaskInWaitting',});  跳转路径？？？？？？？？？？？？
+           this.$router.push({path: '/AntiFraud',});  
         }
       },
     },

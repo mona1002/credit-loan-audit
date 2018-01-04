@@ -35,7 +35,7 @@
       <el-button icon="el-icon-check-reject" class="credit-btn" @click="coverFn('01')">拒绝</el-button>
       <el-button icon="el-icon-check-giveup" class="credit-btn" @click="coverFn('07')">放弃</el-button>
       <el-button icon="el-icon-check-appro" class="credit-btn" @click="coverFn('03')">审批</el-button>
-      <!-- <el-button icon="el-icon-check-start" class="credit-btn">发起反欺诈</el-button> -->
+      <el-button icon="el-icon-check-start" class="credit-btn" @click="coverFn('fqz')">发起反欺诈</el-button>
       <el-button icon="el-icon-check-spjl" class="credit-btn" @click="coverFn('spjl')">审批结论轨迹</el-button>
       <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('lcgj')">流程轨迹</el-button>
     </div>
@@ -43,12 +43,12 @@
     <!-- <div class="cover-view" v-show="coverShow"> -->
     <el-dialog :visible.sync="coverShow">
       <!-- 回退 -->
-      <el-form v-show="this.showFlag=='02'" class="back-form huitui-class">
-        <div class="form-title" style="position:relative;" v-show="this.showFlag=='02'">
+      <el-form v-show="showFlag=='02'" class="back-form huitui-class">
+        <div class="form-title" style="position:relative;" v-show="showFlag=='02'">
           回退信息
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
         </div>
-        <div class="back-form-li" v-show="this.showFlag=='02'">
+        <div class="back-form-li" v-show="showFlag=='02'">
           <span style="color:red;display:inline-block;width:0px;float:left;">*</span>
           <el-form-item label="回退节点: ">
             <el-select v-model="rollbackNodeName">
@@ -61,7 +61,7 @@
           <!-- 回退主原因输入 02 -->
           <!-- 拒绝主原因选择 01 -->
           <span style="color:red;display:inline-block;width:0px;float:left;position: relative;left:15px;">*</span>
-          <el-form-item label="主原因:" class="item-column2" v-show="this.showFlag=='02'">
+          <el-form-item label="主原因:" class="item-column2" v-show="showFlag=='02'">
             <!-- <el-input v-model="mainReason"></el-input> -->
             <!-- 改成后台获取   filter-method     visible-change 下拉框 出现/隐藏时触发-->
             <el-select @change="selectChange" v-model="mainReason">
@@ -70,7 +70,7 @@
             </el-select>
           </el-form-item>
           <!-- 拒绝主原因选择 01 -->
-          <el-form-item label="主原因 :" class="item-column2" v-show="this.showFlag=='01' || this.showFlag=='07'">
+          <el-form-item label="主原因 :" class="item-column2" v-show="showFlag=='01' || showFlag=='07'">
             <el-select @change="selectChange" v-model="mainReason">
               <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
               </el-option>
@@ -105,12 +105,12 @@
         <div class="back-form-li" style="text-align:right;">
           <el-button plain @click="showFlag=0,coverShow=false;">返回</el-button>
           <!-- 回退 -->
-          <el-button type="primary" v-show="this.showFlag=='02'" @click="submitFn('02')">提交</el-button>
+          <el-button type="primary" v-show="showFlag=='02'" @click="submitFn('02')">提交</el-button>
         </div>
       </el-form>
       <!-- 拒绝 -->
-      <el-form v-show="this.showFlag=='01'" class="back-form jujue-class">
-        <div class="form-title" style="position:relative;" v-show="this.showFlag=='01'">
+      <el-form v-show="showFlag=='01'" class="back-form jujue-class">
+        <div class="form-title" style="position:relative;" v-show="showFlag=='01'">
           拒绝原因
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
         </div>
@@ -118,7 +118,7 @@
           <!-- 回退主原因输入 02 -->
           <!-- 拒绝主原因选择 01 -->
           <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:10px;">*</span>
-          <el-form-item label="主原因:" class="item-column2" v-show="this.showFlag=='02'">
+          <el-form-item label="主原因:" class="item-column2" v-show="showFlag=='02'">
             <!-- <el-input v-model="mainReason"></el-input> -->
             <!-- 改成后台获取   filter-method     visible-change 下拉框 出现/隐藏时触发-->
             <el-select @change="selectChange" v-model="mainReason">
@@ -127,7 +127,7 @@
             </el-select>
           </el-form-item>
           <!-- 拒绝主原因选择 01 -->
-          <el-form-item label="主原因 :" class="item-column2" v-show="this.showFlag=='01' || this.showFlag=='07'">
+          <el-form-item label="主原因 :" class="item-column2" v-show="showFlag=='01' || showFlag=='07'">
             <el-select @change="selectChange" v-model="mainReason">
               <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
               </el-option>
@@ -162,12 +162,12 @@
         <div class="back-form-li" style="text-align:right;">
           <el-button plain @click="showFlag=0,coverShow=false;">返回</el-button>
           <!-- 拒绝 -->
-          <el-button type="primary" v-show="this.showFlag=='01'" @click="submitFn('01')">提交</el-button>
+          <el-button type="primary" v-show="showFlag=='01'" @click="submitFn('01')">提交</el-button>
         </div>
       </el-form>
       <!-- 放弃 -->
-      <el-form v-show="this.showFlag=='07'" class="back-form fangqi-class">
-        <div class="form-title" style="position:relative;" v-show="this.showFlag=='07'">
+      <el-form v-show="showFlag=='07'" class="back-form fangqi-class">
+        <div class="form-title" style="position:relative;" v-show="showFlag=='07'">
           放弃原因
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
         </div>
@@ -175,7 +175,7 @@
           <!-- 回退主原因输入 02 -->
           <!-- 拒绝主原因选择 01 -->
           <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:10px;">*</span>
-          <el-form-item label="主原因:" class="item-column2" v-show="this.showFlag=='02'">
+          <el-form-item label="主原因:" class="item-column2" v-show="showFlag=='02'">
             <!-- <el-input v-model="mainReason"></el-input> -->
             <!-- 改成后台获取   filter-method     visible-change 下拉框 出现/隐藏时触发-->
             <el-select @change="selectChange" v-model="mainReason">
@@ -184,7 +184,7 @@
             </el-select>
           </el-form-item>
           <!-- 拒绝主原因选择 01 -->
-          <el-form-item label="主原因 :" class="item-column2" v-show="this.showFlag=='01' || this.showFlag=='07'">
+          <el-form-item label="主原因 :" class="item-column2" v-show="showFlag=='01' || showFlag=='07'">
             <el-select @change="selectChange" v-model="mainReason">
               <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
               </el-option>
@@ -219,17 +219,17 @@
         <div class="back-form-li" style="text-align:right;">
           <el-button plain @click="showFlag=0,coverShow=false;">返回</el-button>
           <!-- 放弃 -->
-          <el-button type="primary" v-show="this.showFlag=='07'" @click="submitFn('07')">提交</el-button>
+          <el-button type="primary" v-show="showFlag=='07'" @click="submitFn('07')">提交</el-button>
         </div>
       </el-form>
       <!-- 审批 03-->
       <!-- :model="spruleForm" :rules="sprules" ref="spruleForm" -->
-      <el-form class="back-form appro-form" v-show="this.showFlag=='03'">
+      <el-form class="back-form appro-form" v-show="showFlag=='03'">
         <!-- <div class="form-title" style="position:relative;" >
           审批信息
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
         </div> -->
-        <div class="form-title" style="position:relative;" v-show=" this.showFlag=='03'">
+        <div class="form-title" style="position:relative;" v-show=" showFlag=='03'">
           审批信息
           <el-tag closable @close="coverShow=false;showFlag='';proName='';" style="position:absolute;"></el-tag>
         </div>
@@ -266,7 +266,7 @@
             信审核实信息
           </div>
           <el-form-item label="核实可接受最高每期还款额[元] :" style="width:300px;margin-bottom:10px;" class="item-column2 line-height2">
-            {{monthrentamt}}
+            {{fbalance}}
           </el-form-item>
           <div class="form-title">
             审批信息
@@ -283,11 +283,11 @@
             <!-- prop="verIncome" -->
             <!-- spruleForm. -->
             <!-- <span style="color:red;display:inline-block;width:0px;float:left;">*</span> -->
-            <span class="require" style="left:150px;top:-25px;" v-show="verIncomError">* 月核实收入</span>
+            <!-- <span class="require" style="left:150px;top:-25px;" v-show="verIncomError">* 月核实收入</span> -->
             <el-form-item label="月核实收入[元] :" class="item-column2 width-120">
               <el-input v-model="verIncome" @blur="moneyBlur(verIncome,'verIncome')"></el-input>
             </el-form-item>
-            <el-form-item label="批准产品 :" class="item-column2 width-120">
+            <el-form-item label="批准产品 :" class="item-column2 width-110">
               <el-select @change="proSlelecChange" v-model="proName">
                 <el-option v-for="item in products" :key="item.id" :label="item.proName" :value="item"></el-option>
                 <!-- <el-option v-for="item in secondeReasons" :key="item.id" :label="item.reasonName" :value="item.reasonName"> -->
@@ -295,15 +295,15 @@
             </el-form-item>
           </div>
           <div class="back-form-li back-form-edit-li" style="position:relative;">
-            <span class="require" style="left:150px;top:-25px;" v-show="ploanTermError">* 批准期限1-12月</span>
+            <!-- <span class="require" style="left:150px;top:-25px;" v-show="ploanTermError">* 批准期限1-12月</span> -->
             <el-form-item label="批准期限[月] :" class="item-column2 width-120">
               <el-select @change="ploanTermChange" v-model="ploanTerm">
                 <el-option v-for="item in ploanTerms" :label="item.appDuration" :value="item">
                 </el-option>
               </el-select>
             </el-form-item>
-            <span class="require" style="left:470px;top:-25px;" v-show="ploanAmtError">* 批准金额不能大于{{minAmount}},小于{{maxAmounnt}}</span>
-            <el-form-item label="批准金额[元] :" class="item-column2 width-120">
+            <!-- <span class="require" style="left:470px;top:-25px;" v-show="ploanAmtError">* 批准金额不能大于{{minAmount}},小于{{maxAmounnt}}</span> -->
+            <el-form-item label="批准金额[元] :" class="item-column2 width-110">
               <el-input v-model="ploanAmt" @blur="moneyBlur(ploanAmt,'ploanAmt')"></el-input>
             </el-form-item>
           </div>
@@ -336,17 +336,23 @@
         </div>
         <div class="back-form-li" style="text-align:right;padding:10px;">
           <el-button plain @click="showFlag=0,coverShow=false;">返回</el-button>
-          <el-button type="primary" v-show="this.showFlag=='03'" @click="submitFn('03')">提交</el-button>
+          <el-button type="primary" v-show="showFlag=='03'" @click="submitFn('03')">提交</el-button>
         </div>
       </el-form>
+      <!-- 反欺诈 -->
+      <!-- <div v-show="showFlag=='fqz'"></div> -->
+      <!-- 反欺诈显示 -->
+      <div class="back-form anti-form" v-show=" showFlag=='fqz'">
+        <AntiApplyInf  :showFlag.sync="showFlag"></AntiApplyInf>
+      </div>
       <!-- 审批结论轨迹 -->
-      <div v-show=" this.showFlag=='spjl'" class="spjl-div">
+      <div v-show=" showFlag=='spjl'" class="spjl-div">
         <div class="form-title" style="position:relative;">
           信审审批结论轨迹
           <!-- <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag> -->
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
         </div>
-        <el-table :data="tableData.recordList" height="280" border style="width: 100%" stripe highlight-current-row v-loading="loading">
+        <el-table :data="tableData.recordList" height="280" border style="width: 100%" highlight-current-row v-loading="loading">
           <el-table-column prop="verIncome" label="核实收入[元]" min-width="100">
           </el-table-column>
           <el-table-column prop="proCode" label="批准产品" min-width="80">
@@ -377,7 +383,7 @@
         </div>
       </div>
       <!-- 流程轨迹 -->
-      <div v-show=" this.showFlag=='lcgj'" class="lcgj-div">
+      <div v-show=" showFlag=='lcgj'" class="lcgj-div">
         <div class="form-title" style="position:relative;">
           流程轨迹
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
@@ -438,11 +444,13 @@
     </el-dialog>
     <!-- </div> -->
     <!-- <el-alert title=warnMsg type="warning" v-show="warnShow"> -->
-    </el-alert>
+    <!-- </el-alert> -->
   </div>
   <!-- </div> -->
 </template>
 <script>
+// 信审审批 - 反欺诈申请 页面
+import AntiApplyInf from '../AntiFraud/AntiApplyInf'
 export default {
   data() {
     return {
@@ -536,7 +544,7 @@ export default {
       sproId: '', // 审批 proId
       quotaData: '', // 评分 月还款额
       creditScore: '', // 单独处理的评分
-      monthrentamt: '', // 核实每月可接受最高还款额
+      fbalance: '', // 核实每月可接受最高还款额
       // 表单必填
       spruleForm: { verIncome: '', ploanTerm: '', ploanAmt: '' },
       sprules: {
@@ -564,7 +572,12 @@ export default {
       loanRateYr: '', // 审批 - 计算审批结论数据 - 借款利率
       maxAmounnt: 0, // 产品最大金额
       minAmount: 0, // 产品最小金额
+      verIncome2: 0, // 
+      // showFqz: false, // 发起反欺诈显示
     }
+  },
+  components: {
+    AntiApplyInf
   },
   mounted() {
     // 页面创建的时候  找数据 
@@ -736,8 +749,8 @@ export default {
               console.log(res.data.creditScore);
               this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
               console.log(this.creditScore);
-              this.monthrentamt = res.data.monthrentamt;
-              console.log(this.monthrentamt);
+              this.fbalance = res.data.fbalance;
+              console.log(this.fbalance);
             }
           })
           /* 请求 
@@ -754,6 +767,13 @@ export default {
             }
           })
 
+          break;
+        case 'fqz':
+          console.log('点击发起反欺诈');
+          // console.log(this.showFqz);
+          // this.showFqz = true;
+          console.log(this.showFqz);
+          this.showFlag = 'fqz';
           break;
         case 'spjl':
           console.log('spspspspsppspspspspsp')
@@ -873,8 +893,8 @@ export default {
           console.log("审批");
           // 校验必填项
           // 假如没有  核实可接受最高每期还款额 , 提示
-          console.log(this.quotaData.monthrentamt);
-          if (!this.quotaData.monthrentamt) {
+          console.log(this.quotaData.fbalance);
+          if (!this.quotaData.fbalance) {
             this.$message({
               message: "提示：请完善信审表中可承受的月还款金额",
               type: 'warning'
@@ -1213,7 +1233,9 @@ export default {
       console.log(val);
       // id val.id  产品id
       this.proId = val.id;
+      console.log('=========================')
       console.log(this.proId);
+      console.log('=========================')
       // proCode  产品code
       this.proCode = val.proCode;
       console.log(this.proCode);
@@ -1243,62 +1265,62 @@ export default {
     // 计算审批结论数据
     calculateByAuditInfo: function() {
       console.log('计算审批结论数据')
-      let verIncome2 = 0;
-      let ploanAmt2 = 0;
-      if (/,/.test(this.verIncome))
-        verIncome2 = Number(this.verIncome.replace(/,/g, ''));
-      else
-        verIncome2 = Number(this.verIncome);
-      if (/,/.test(this.ploanAmt)) {
-        console.log('-------------------------------------------------')
-        ploanAmt2 = Number(this.ploanAmt.replace(/,/g, ''));
-      } else {
-        console.log('==========================================')
-        ploanAmt2 = Number(this.ploanAmt)
-      }
+      // let this.ploanAmt2 = 0;
+      // let this.verIncome2 = 0;
+      // if (/,/.test(this.verIncome))
+      //   this.verIncome2 = Number(this.verIncome.replace(/,/g, ''));
+      // else
+      //   this.verIncome2 = Number(this.verIncome);
+      // if (/,/.test(this.ploanAmt)) {
+      //   console.log('-------------------------------------------------')
+      //   this.ploanAmt2 = Number(this.ploanAmt.replace(/,/g, ''));
+      // } else {
+      //   console.log('==========================================')
+      //   this.ploanAmt2 = Number(this.ploanAmt)
+      // }
 
-      // 大于最大
-      if (ploanAmt2 > this.maxAmounnt) {
-        // this.ploanAmtError = true;
-        this.$message({
-          showClose: true,
-          message: '批准金额不能小于产品最低下限' + this.minAmount,
-          type: 'warning'
-        });
-        this.ploanAmt = '';
-        return;
-      }
-      // 小于最小
-      if (ploanAmt2 < this.minAmount) {
-        // this.ploanAmtError = true;
-        this.$message({
-          showClose: true,
-          message: '批准金额不能大于申请金额,请重新输入!',
-          type: 'warning'
-        });
-        this.ploanAmt = '';
-        return;
-      }
-      // 大于申请金额
-      if (ploanAmt2 > this.loanAmt) {
-        // this.ploanAmtError = true;
-        this.$message({
-          showClose: true,
-          message: '此金额不能大于申请金额,请重新输入!',
-          type: 'warning'
-        });
-        this.ploanAmt = '';
-        return;
-      }
+      // // 大于最大
+      // if (this.ploanAmt2 > this.maxAmounnt) {
+      //   // this.ploanAmtError = true;
+      //   this.$message({
+      //     showClose: true,
+      //     message: '批准金额不能大于产品最高上限' + this.maxAmounnt + '元',
+      //     type: 'warning'
+      //   });
+      //   this.ploanAmt = '';
+      //   return;
+      // }
+      // // 小于最小
+      // if (this.ploanAmt2 < this.minAmount) {
+      //   // this.ploanAmtError = true;
+      //   this.$message({
+      //     showClose: true,
+      //     message: '批准金额不能小于产品最低下限' + this.minAmount + '元',
+      //     type: 'warning'
+      //   });
+      //   this.ploanAmt = '';
+      //   return;
+      // }
+      // // 大于申请金额
+      // if (this.ploanAmt2 > this.loanAmt) {
+      //   // this.ploanAmtError = true;
+      //   this.$message({
+      //     showClose: true,
+      //     message: '此金额不能大于申请金额,请重新输入!',
+      //     type: 'warning'
+      //   });
+      //   this.ploanAmt = '';
+      //   return;
+      // }
 
 
       this.post('/creauditOpinion/calculateByAuditInfo', {
         applyId: this.applyId,
         proId: this.proId,
         ploanTerm: this.ploanTerm,
-        ploanAmt: ploanAmt2,
-        verIncome: verIncome2,
-        eachTermamt: this.monthrentamt,
+        ploanAmt: this.ploanAmt2,
+        verIncome: this.verIncome2,
+        eachTermamt: this.fbalance,
         repayWay: this.repayWay, // 还款方式
         synthesisRateM: this.synthesisRateM, // 综合费率 
         loanRateYr: this.loanRateYr, // 借款利率
@@ -1322,13 +1344,68 @@ export default {
 
       // 有数据
       if (val) {
+        this.ploanAmt2 = 0;
+        this.verIncome2 = 0;
+        if (/,/.test(this.verIncome))
+          this.verIncome2 = Number(this.verIncome.replace(/,/g, ''));
+        else
+          this.verIncome2 = Number(this.verIncome);
+        if (/,/.test(this.ploanAmt)) {
+          console.log('-------------------------------------------------')
+          this.ploanAmt2 = Number(this.ploanAmt.replace(/,/g, ''));
+        } else {
+          console.log('==========================================')
+          this.ploanAmt2 = Number(this.ploanAmt)
+        }
+
+        // 大于最大
+        if (this.ploanAmt2 > this.maxAmounnt) {
+          // this.ploanAmtError = true;
+          this.$message({
+            showClose: true,
+            message: '批准金额不能大于产品最高上限' + this.maxAmounnt + '元',
+            type: 'warning'
+          });
+          this.ploanAmt = '';
+          return;
+        }
+        // 小于最小
+        if (this.ploanAmt2 < this.minAmount) {
+          // this.ploanAmtError = true;
+          this.$message({
+            showClose: true,
+            message: '批准金额不能小于产品最低下限' + this.minAmount + '元',
+            type: 'warning'
+          });
+          this.ploanAmt = '';
+          return;
+        }
+        // 大于申请金额
+        if (this.ploanAmt2 > this.loanAmt) {
+          // this.ploanAmtError = true;
+          this.$message({
+            showClose: true,
+            message: '此金额不能大于申请金额,请重新输入!',
+            type: 'warning'
+          });
+          this.ploanAmt = '';
+          return;
+        }
+
+
+
         val = val.split('.')[0].replace(/,/, '')
         if (/^[0-9]+$/g.test(Number(val))) {
           console.log(Number(val).toLocaleString() + '.00')
-          if (flag == "verIncome")
+          if (flag == "verIncome") {
             this.verIncome = Number(val).toLocaleString() + '.00'
-          if (flag == "ploanAmt")
+          }
+          if (flag == "ploanAmt") {
             this.ploanAmt = Number(val).toLocaleString() + '.00'
+          }
+
+
+
           // return Number(val).toLocaleString() + '.00';
           // 检测 数据 并 请求计算接口
           console.log("计算审批结论数据计算审批结论数据计算审批结论数据计算审批结论数据")
@@ -1336,8 +1413,9 @@ export default {
           console.log(this.proId.length, this.ploanTerm.length, this.ploanAmt.length, this.verIncome.length, this.eachTermamt.length);
 
           // if (this.proId.length > 0 && this.ploanTerm.length > 0 && this.ploanAmt.length > 0 && this.verIncome.length > 0 && this.eachTermamt.length > 0) {
-          //   this.calculateByAuditInfo();
-          // }
+          if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0) {
+            this.calculateByAuditInfo();
+          }
         } else {
           console.log('错误提示')
           // 显示错误提示
@@ -1403,13 +1481,13 @@ export default {
     },
     // 监听 输入请求
     // 月核实收入
-    verIncome: function() {
-      console.log('月核实收入');
-      // 计算 审批记录数据
+    // verIncome: function() {
+    //   console.log('月核实收入');
+    //   // 计算 审批记录数据
 
-      if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0)
-        this.calculateByAuditInfo();
-    },
+    //   if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0)
+    //     this.calculateByAuditInfo();
+    // },
     // 批准期限
     ploanTerm: function() {
       console.log('批准期限');
@@ -1418,17 +1496,17 @@ export default {
       if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0)
         this.calculateByAuditInfo();
     },
-    // // 批准金额
-    ploanAmt: function() {
-      console.log('批准金额');
-      console.log(this.verIncome, this.proId, this.ploanTerm, this.ploanAmt);
-      console.log(this.verIncome.length, this.proId.length, this.ploanTerm, this.ploanAmt.length);
-      console.log(typeof this.ploanTerm)
-      // 计算 审批记录数据
-      if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0) {
-        this.calculateByAuditInfo();
-      }
-    },
+    // // // 批准金额
+    // ploanAmt: function() {
+    //   console.log('批准金额');
+    //   console.log(this.verIncome, this.proId, this.ploanTerm, this.ploanAmt);
+    //   console.log(this.verIncome.length, this.proId.length, this.ploanTerm, this.ploanAmt.length);
+    //   console.log(typeof this.ploanTerm)
+    //   // 计算 审批记录数据
+    //   if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0) {
+    //     this.calculateByAuditInfo();
+    //   }
+    // },
     // 产品 id
     proId: function() {
       console.log('产品id');
@@ -1455,6 +1533,10 @@ export default {
 }
 
 
+
+
+
+
 /* 三列 */
 
 .creditApproval-class .item-column3 {
@@ -1472,6 +1554,10 @@ export default {
 }
 
 
+
+
+
+
 /* 按钮集合控件 */
 
 .creditApproval-class .btn-div {
@@ -1479,6 +1565,10 @@ export default {
   width: 80%;
   float: left;
 }
+
+
+
+
 
 
 /* 信审审批 - btn*/
@@ -1489,6 +1579,10 @@ export default {
   color: #333;
   border: none;
 }
+
+
+
+
 
 
 /* 弹窗背景 */
@@ -1516,6 +1610,10 @@ export default {
 }
 
 
+
+
+
+
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -1523,6 +1621,10 @@ export default {
   float: left;
   margin: 0;
 }
+
+
+
+
 
 
 /* 回退 拒绝 放弃 表单*/
@@ -1537,6 +1639,10 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
+
+
+
 
 
 /* form-title */
@@ -1580,11 +1686,19 @@ export default {
 }
 
 
+
+
+
+
 /* textarea */
 
 .creditApproval-class .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
+
+
+
 
 
 /* 单独设置  label*/
@@ -1614,6 +1728,10 @@ export default {
 }
 
 
+
+
+
+
 /* 审批 表单 */
 
 .creditApproval-class .appro-form {
@@ -1628,6 +1746,10 @@ export default {
 }
 
 
+
+
+
+
 /*.creditApproval-class .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -1635,6 +1757,10 @@ export default {
 .creditApproval-class .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
+
+
+
 
 
 /* 审批结论轨迹 */
@@ -1657,6 +1783,10 @@ export default {
 }
 
 
+
+
+
+
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -1664,6 +1794,10 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
+
+
+
 
 
 /* 流程轨迹 */
@@ -1684,6 +1818,7 @@ export default {
 
 .creditApproval-class .el-input {
   width: calc( 100% - 120px);
+  /*width: 100%;*/
   height: 35px;
   line-height: 35px;
 }
@@ -1704,6 +1839,10 @@ export default {
 }
 
 
+
+
+
+
 /* 申请信息 */
 
 .creditApproval-class .info .el-form-item__content {
@@ -1715,6 +1854,10 @@ export default {
 }
 
 
+
+
+
+
 /* 报错提示 */
 
 .creditApproval-class .el-form-item__error {
@@ -1723,11 +1866,19 @@ export default {
 }
 
 
+
+
+
+
 /* 有编辑框的 提示信息*/
 
 .creditApproval-class .back-form .back-form-edit-li {
   margin-top: 25px !important;
 }
+
+
+
+
 
 
 /* icon */
@@ -1747,6 +1898,10 @@ export default {
 }
 
 
+
+
+
+
 /*回退*/
 
 .creditApproval-class .el-icon-check-back {
@@ -1759,6 +1914,10 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
 
 
 /*拒绝*/
@@ -1775,6 +1934,10 @@ export default {
 }
 
 
+
+
+
+
 /*放弃*/
 
 .creditApproval-class .el-icon-check-giveup {
@@ -1787,6 +1950,10 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
 
 
 /*审批*/
@@ -1803,6 +1970,10 @@ export default {
 }
 
 
+
+
+
+
 /*发起反欺诈*/
 
 .creditApproval-class .el-icon-check-start {
@@ -1815,6 +1986,10 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
 
 
 /*审批结论轨迹*/
@@ -1831,6 +2006,10 @@ export default {
 }
 
 
+
+
+
+
 /*流程轨迹*/
 
 .creditApproval-class .el-icon-check-lcgj {
@@ -1845,6 +2024,10 @@ export default {
 }
 
 
+
+
+
+
 /* 折叠面板头部背景色和icon */
 
 .creditApproval-class .icon_hat {
@@ -1855,6 +2038,10 @@ export default {
 .creditApproval-class .headFont {
   font-size: 16px;
 }
+
+
+
+
 
 
 /* 信审审批  - - 弹窗*/
@@ -1873,11 +2060,19 @@ export default {
 }
 
 
+
+
+
+
 /* 信审审批  - 审批  编辑部分 */
 
 .creditApproval-class .appro-form .back-form-edit-li .el-form-item__label {
   /*width: 120px;*/
 }
+
+
+
+
 
 
 /* 结论  同意 */
@@ -1894,6 +2089,14 @@ export default {
   width: 120px;
 }
 
+.creditApproval-class .back-form .width-110 .el-form-item__label {
+  width: 110px;
+}
+
+
+
+
+
 
 /* 两行文字 样式 */
 
@@ -1902,9 +2105,17 @@ export default {
 }
 
 
+
+
+
+
 /* 2017-12-17 拆分表单 */
 
 .creditApproval-class .huitui-class {}
+
+
+
+
 
 
 /* label 文字样式 */
@@ -1914,6 +2125,10 @@ export default {
 }
 
 .creditApproval-class .jujue-class {}
+
+
+
+
 
 
 
@@ -1945,10 +2160,27 @@ export default {
 
 
 
+
+
+
+
 /* 审批信息  */
 
 .creditApproval-class .el-form-item__content .el-select .el-input {
   width: 100%;
+}
+
+
+/* 反欺诈表单 */
+.creditApproval-class .anti-form {
+  /*width: 80%;*/
+  height: 600px;
+  min-width: 685px;
+  /*margin-top: 100px !important;*/
+  height: 460px;
+  margin: 0 auto;
+  padding: 10px;
+  overflow: auto;
 }
 
 </style>

@@ -11,19 +11,19 @@
           <li class="item-column3">
             <div class="left-title">进件编号：</div>
             <div class="item-content">
-              <el-input></el-input>
+              <el-input v-model="applySubno"></el-input>
             </div>
           </li>
           <li class="item-column3">
             <div class="left-title">客户名称：</div>
             <div class="item-content">
-              <el-input></el-input>
+              <el-input v-model="applyCustName"></el-input>
             </div>
           </li>
           <li class="item-column3">
             <div class="left-title">证件号码：</div>
             <div class="item-content">
-              <el-input></el-input>
+              <el-input v-model="applyCustNo"></el-input>
             </div>
           </li>
           <li class="item-column1 submit-class">
@@ -39,7 +39,7 @@
         <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">反欺诈申请列表</span>
       </div>
-      <el-table :data="antiTableData" style="width: 100%" border stripe fit highlight-current-row>
+      <el-table :data="antiTableData" style="width: 100%" border stripe fit highlight-current-row @row-dblclick="rowDbClick">
         <el-table-column type="index" label="序号">
         </el-table-column>
         <el-table-column prop="date" label="进件编号">
@@ -74,11 +74,11 @@
         </el-table-column>
       </el-table>
       <!-- 反欺诈专员审批  反欺诈主管审批 -->
-      <div class="address-title">
+      <div class="address-title" v-show="antiFlag=='03'||antiFlag=='04'">
         <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">反欺诈审批任务列表 </span>
       </div>
-      <el-table :data="tableData" style="width: 100%" border stripe fit highlight-current-row @row-dblclick="rowDbClick">
+      <el-table :data="tableData" style="width: 100%" border stripe fit highlight-current-row @row-dblclick="rowDbClick" v-show="antiFlag=='03'||antiFlag=='04'">
         <el-table-column type="index" label="序号">
         </el-table-column>
         <el-table-column prop="name" label="任务类型">
@@ -114,22 +114,27 @@ export default {
       antiFlag:'', // 列表标志
       antiTableData:[], // 反欺诈数据
       tableData:[], // 列表数据
+      applySubno:'',// 进件编号
+      applyCustName:'',// 客户名称
+      applyCustNo:'',// 客户编号
     }
   },
   props:['applyId'], // 申请单id
   mounted() {
     // 先取到 标志
     // 反欺诈申请 / 反欺诈专员审批 / 反欺诈主管审批
-    var judgeFlag = JSON.parse(localStorage.getItem('judgeFlag'));
-    this.antiFlag = judgeFlag.falg;
+    var judgeFlag = JSON.parse(localStorage.getItem('judge'));
+    this.antiFlag = judgeFlag.flag;
 
     this.queryList();
   },
   methods: {
     // 请求列表
-    queryList: function() {
-      this.post('/fraudApplyInfoController/getFraudApplyInfo', {
-        applyId:this.applyId
+    queryList() {
+      this.post('/fraudApplyInfoController/getFraudApplyInfoList', {
+        applySubno:this.applySubno,// 进件编号
+        applyCustName:this.applyCustName,// 客户名称
+        applyCustNo:this.applyCustNo // 客户编号
       }).then(res => {
         console.log(res);
         if (res.statusCode == '200'){
@@ -145,13 +150,13 @@ export default {
       })
     },
     // 重置查询条件
-    resetQuery: function() {
+    resetQuery() {
       // 查询条件 初始化
       // 再次请求
       this.queryList();
     },
     // 点击表格行
-    rowDbClick:function(){
+    rowDbClick(row,evnet){
       console.log('click the row in table');
     }
   }

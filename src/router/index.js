@@ -57,33 +57,23 @@ import FCreditForm from '../view/FinalTrial/FinalComponent/FCreditForm'
 
 
 // ------------反欺诈------------------
-import AntiAudit from '@/view/AntiFraud/AntiAudit.vue'
-// import AntiRules from '../view/AntiFraud/AntiRules.vue'//反欺诈规则设定
+import AntiAudit from '@/view/AntiFraud/AntiAudit.vue'//反欺诈分屏
+import AntiRules from '../view/AntiFraud/AntiRules.vue'//反欺诈规则设定
 // import AntiCaseNum from '../view/AntiFraud/AntiCaseNum'// 案件编号维护
 import AnitAudioVisual from'../view/AntiFraud/components/AnitAudioVisual.vue'
 // 反欺诈 列表
 import AntiFraud from '@/view/AntiFraud/AntiFraud.vue'
 // 反欺诈 申请
-import AntiApplyInf from '@/view/AntiFraud/AntiApplyInf.vue'
+import AntiApplyEdit from '@/view/AntiFraud/AntiApplyEdit.vue'
 import aAntiApplyInf from '@/view/AntiFraud/components/aAntiApplyInf.vue'
 
 //反欺诈调查
 import aAntiFraudInvestigation from '@/view/AntiFraud/components/aAntiFraudInvestigation.vue'
 // 审批结论
-// import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
-// import ApprovalConclus from ''
+import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
+// -------------------------复议---------------------
+import ReconsiderApply from '../view/Reconsider/ReconsiderComponents/ReconsiderApply.vue'//复议申请
 
-// 系统管理
-// 机构管理
-import organManage from '@/view/systemManage/organManage/organManage'
-// 资源管理
-// import resourceManage from '@/view/systemManage/resourceManage/resourceManage'
-// 用户管理
-import userManage from '@/view/systemManage/userManage/userManage'
-// 流程角色管理
-import processRoleManage from '@/view/systemManage/processRoleManage/processRoleManage'
-// 功能角色管理
-import functionalRoleManage from '@/view/systemManage/functionalRoleManage/functionalRoleManage'
 
 Vue.use(Router)
 
@@ -92,11 +82,6 @@ const routes = [{
   component: workbench
 },
 {
-  // 工作台  误改, 误删
-  /*
-    userCode:    用户编码
-    orgCode:     机构编码
-   */
   path: '/workbench',
   component: login,
 },
@@ -209,11 +194,6 @@ const routes = [{
   component: FMCreditForm
 },
 
-// {
-//   path: '/b',
-//   component: FSplitScreen
-// },
-
 //-------------------反欺诈------------
 {
   path:'/AntiAudit',
@@ -230,8 +210,8 @@ const routes = [{
 },
 // 反欺诈 申请信息
 {
-  path:'/AntiApplyInf',
-  component:AntiApplyInf
+  path:'/AntiApplyEdit',
+  component:AntiApplyEdit
 },
 {
   path:'/aAntiApplyInf',
@@ -243,63 +223,34 @@ const routes = [{
   component:aAntiFraudInvestigation
 },
 // 审批结论
-// {
-//   path:'/ApprovalConclus',
-//   component:ApprovalConclus
-// },
+{
+  path:'/ApprovalConclus',
+  component:ApprovalConclus
+},
 // 反欺诈规则设定
-// {
-//   path:'/AntiRules',
-//   component:AntiRules
-// },
-// // 案件编号维护
+{
+  path:'/AntiRules',
+  component:AntiRules
+},
+// 案件编号维护
 // {
 //   path:'/AntiCaseNum',
 //   component:AntiCaseNum
 // },
-
-//-------------------系统管理------------
+// ---------------------复议-------------
 {
-  path: '/organManage',
-  component: organManage
+  path:'/ReconsiderApply',
+  component:ReconsiderApply
 },
 // {
-//   path: '/resourceManage',
-//   component: resourceManage
+//   path:'/ReconsiderApply',
+//   component:ReconsiderApply
 // },
-{
-  path: '/userManage',
-  component: userManage
-},
-{
-  path: '/processRoleManage',
-  component: processRoleManage
-},
-{
-  path: '/functionalRoleManage',
-  component: functionalRoleManage
-},
+
 
 ];
 
 const router = new Router({
   routes
 });
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(r => r.meta.requireAuth)) {
-//     if (getCookie("sessionId") !== "") {
-//       next();
-//     } else {
-//       next({
-//         path: '/login',
-//         query: {
-//           redirect: to.fullPath
-//         }
-//       })
-//     }
-//   } else {
-//     next();
-//   }
-// });
-
 export default router;

@@ -2372,8 +2372,6 @@
           for (var i = 0; i < this.Txawidth.length; i++) {
             // this.Txawidth[i].style.width = 'calc( 50% + 104px )';
             this.Txawidth[i].style.width = 'calc( 100% - 295px)';
-            
-            
           };
           // this.Txawidth[14].style.width = 'calc( 50% + 150px )';
           this.Txawidth[14].style.width = 'calc( 100% - 260px)';
@@ -2382,7 +2380,6 @@
           this.comaddressb[0].style.paddingLeft = 674 + "px";
            this.Alertbtn[0].style.marginLeft =" calc( 100% - 148px)";
           //  this.Alertbtn[0].style.margin ="20px 0 0 716px";
-           
         } else if (val == "100%") {
           for (var i = 0; i < this.Pwidth.length; i++) {
             this.Pwidth[i].style.width = 200 + "px";
@@ -2403,6 +2400,23 @@
           this.comaddressb[0].style.paddingLeft = 826 + "px";
            this.Alertbtn[0].style.marginLeft ="calc( 50% + 329px )";          
         }
+      },
+      acquire(val){
+        if(typeof(val)=="number"){
+          if (val.toString().indexOf('.') == -1) {
+            val = val + "." + "0" + '0';
+            // this.formatSC(name, val);
+          } else if (val.toString().indexOf('.') != -1) {
+            if (val.toString().split(".")[1].length < 2) {
+              e.target.value = val = val + "0";
+              // this.formatSC(name, val);
+            } else {
+              e.target.value = val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
+              // this.formatSC(name, val);
+            }
+          }
+        }
+        // this.checkData.fbalance
       }
     },
     mounted() {
@@ -2413,7 +2427,10 @@
       }).then(res => {
         console.log(res.data);
         this.checkData = res.data;
-        this.AreaNPercent();
+        this.checkData.applyId= this.getParams.applyId;
+        console.log(this.checkData.applyId)
+        this.AreaNPercent(this.checkData.fbalance);
+        this.acquire()
         this.mountJ(0, res.data.wbeexEcuted);
         this.mountJ(1, res.data.wnetHirecom);
         this.mountJ(2, res.data.wnetEcutedBrea);
