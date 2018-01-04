@@ -141,8 +141,12 @@
         // applyId:"00542",
         applyId: this.tastwaitingPass.applyId,
       }).then(res => {
-        console.log(res.data)
-        this.ConclutionInf = res.data.recordList;
+        if (res.statusCode == 200) {
+          console.log(res.data)
+          this.ConclutionInf = res.data.recordList;
+        } else {
+          this.$message.error(res.msg);
+        }
       });
     },
   }

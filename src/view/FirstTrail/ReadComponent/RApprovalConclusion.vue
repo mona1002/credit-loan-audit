@@ -32,11 +32,11 @@
     data() {
       return {
         ConclutionInf: [],
-        MatchInf:'',
+        MatchInf: '',
       }
     },
     mounted() {
-         this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //初审-匹配查看
+      this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //初审-匹配查看
       // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       // if (this.judgeFlag.flag == '01') {
       //   this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //初审-匹配查看
@@ -51,7 +51,11 @@
         applyId: this.MatchInf.matchApplyId,
         // applyId: "00542",
       }).then(res => {
-        this.ConclutionInf = res.data.recordList;
+        if (res.statusCode == 200) {
+          this.ConclutionInf = res.data.recordList;
+        } else {
+          this.$message.error(res.msg);
+        }
       });
     },
   }

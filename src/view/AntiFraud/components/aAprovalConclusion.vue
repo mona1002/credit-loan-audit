@@ -32,33 +32,37 @@
   export default {
     data() {
       return {
-        tastwaitingPass:[],
-        ConclutionInf:[],
+        tastwaitingPass: [],
+        ConclutionInf: [],
       }
     },
     mounted() {
       // this.localInf = JSON.parse(localStorage.getItem("taskInWaitting"))
-       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '03') {
         this.tastwaitingPass = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈专员-列表
       } else if (this.judgeFlag.flag == '04') {
         this.tastwaitingPass = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管-列表
       }
-  this.post("/creauditOpinion/queryByPage", {
+      this.post("/creauditOpinion/queryByPage", {
         // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
         // applyId:"00542",
         applyId: this.tastwaitingPass.applyId,
       }).then(res => {
-        console.log(res.data)
-        this.ConclutionInf=res.data.recordList;
+        if (res.statusCode == 200) {
+          console.log(res.data)
+          this.ConclutionInf = res.data.recordList;
+        } else {
+          this.$message.error(res.msg);
+        }
       });
     },
   }
 
 </script>
 <style scoped>
-.ApprovalConclusion{
-  min-width: 987px;
-}
+  .ApprovalConclusion {
+    min-width: 987px;
+  }
 
 </style>

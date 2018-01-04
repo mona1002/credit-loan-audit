@@ -170,7 +170,11 @@
       //   this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
       //     id: this.tastwaitingPass.applyId,
       //   }).then(res => {
-      //     this.customInf = res.data;
+      // if (res.statusCode == 200) {
+      //   //     this.customInf = res.data;
+      // } else {
+      //   this.$message.error(res.msg);
+      // }
       //   });
       this.title = "影音资料";
     },

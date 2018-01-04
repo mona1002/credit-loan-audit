@@ -37,13 +37,17 @@
               <AudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></AudioVisualLeft>
               <!-- √ -->
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
-              <InternalMatch v-if=" this.tabContent1==2"  :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
+              <InternalMatch v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
               <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
+              <!-- √ -->              
               <cborrowerInformationDetail v-if=" this.tabContent1==4"></cborrowerInformationDetail>
-              <PhoneCredit v-if=" this.tabContent1==5"  :SplitS="SplitLeft" :isFull.sync="isFull"></PhoneCredit>
+              <!-- √ -->
+              <PhoneCredit v-if=" this.tabContent1==5" :SplitS="SplitLeft" :isFull.sync="isFull"></PhoneCredit>
+              <!-- √ -->
               <FcCreditForm v-if=" this.tabContent1==6"></FcCreditForm>
               <!-- √ -->
               <creditInvestigation v-if=" this.tabContent1==7"></creditInvestigation>
+              <!-- √ -->
               <processTrajectory v-if=" this.tabContent1==8"></processTrajectory>
             </div>
           </div>
@@ -74,13 +78,17 @@
             <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
             <!-- √ -->
             <remark v-if=" this.tabContent2==1"></remark>
-            <InternalMatch v-if=" this.tabContent2==2"  :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
+            <InternalMatch v-if=" this.tabContent2==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
-            <borrowerInformation v-if=" this.tabContent2==4" :isFull.sync="isFull"></borrowerInformation>
-            <PhoneCredit v-if=" this.tabContent2==5"  :SplitS="SplitLeft" :isFull.sync="isFull"></PhoneCredit>
+              <!-- √ -->           
+            <cborrowerInformationDetail v-if=" this.tabContent2==4" :isFull.sync="isFull"></cborrowerInformationDetail>
+            <!-- √ -->
+            <PhoneCredit v-if=" this.tabContent2==5" :SplitS="SplitLeft" :isFull.sync="isFull"></PhoneCredit>
+            <!-- √ -->
             <FCreditForm v-if=" this.tabContent2==6"></FCreditForm>
             <!-- √ -->
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
+            <!-- √ -->
             <!-- 反欺诈结论 空白 -->
             <!-- <CreditForm v-if=" this.tabContent2==8"></CreditForm> -->
             <!-- 信审审批 空白 -->
@@ -125,24 +133,19 @@
   import FCreditForm from './FinalComponent/FCreditForm'; //右侧
   import AudioVisual from "../FirstTrail/detailComponent/AudioVisual.vue";
   import AudioVisualLeft from '../FirstTrail/detailComponent/AudioVisualLeft';
+  import remark from "../FirstTrail/detailComponent/remark.vue";  
+  import cremarkDetail from "../FirstTrail/checkComponent/remarkDetail.vue"; //备注信息
+  import cborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料
+  import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信
+  import processTrajectory from "../FirstTrail/checkComponent/processTrajectory.vue"; //流程轨迹
+  import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息  
   // ----------------------------------------------------------
   // 编辑
-  import remark from "../FirstTrail/detailComponent/remark.vue";
   import InternalMatch from "../FirstTrail/InternalMatch.vue";
-  import applicationInformation from "../FirstTrail/detailComponent/applicationInformation.vue";
-  import borrowerInformation from "../FirstTrail/detailComponent/borrowerInformation.vue";
   import PhoneCredit from "../FirstTrail/PhoneCredit.vue";
-  import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信
-  // import s from "./detailComponent/remark";
-  // 反欺诈结论 写此处
   // 信审审批写此处
   import CreditApproval from "../FirstTrail/CreditApproval.vue";
   // 查询
-  // import cFinanceInformation from "./checkComponent/FinanceInformation";
-  import cremarkDetail from "../FirstTrail/checkComponent/remarkDetail.vue"; //备注信息
-  import cborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料
-  import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息
-  import processTrajectory from "../FirstTrail/checkComponent/processTrajectory.vue"; //流程轨迹
 
   export default {
     data() {
@@ -265,8 +268,9 @@
       }
     },
     mounted() {
-      console.log("分屏");
+      console.log("分屏"+this.tastwaitingPass);
       this.tastwaitingPass = JSON.parse(localStorage.getItem("FtaskInWaitting"));
+      console.log(this.tastwaitingPass)
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.applyId,
       }).then(res => {
@@ -281,20 +285,22 @@
       FCreditForm,
       AudioVisualLeft,
       AudioVisual,
+      PhoneCredit,
+      creditInvestigation,
+      capplicationInformationDetail,
+      
       // -----------------------------------------
       // 编辑
       remark,
       InternalMatch,
-      applicationInformation,
-      borrowerInformation,
-      PhoneCredit,
-      creditInvestigation,
+      // applicationInformation,
+      // borrowerInformation,
+
       // 信审审批
       CreditApproval,
       // 查询
       cremarkDetail, //
       cborrowerInformationDetail,
-      capplicationInformationDetail,
       processTrajectory
     }
   }
