@@ -857,12 +857,22 @@
 				taskInWaitting:'',
 
 				applyId:'',
+				judgeFlag:'',
 			};
 		},
 		mounted(){
 			//一进入页面就发送请求
-			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-			this.applyId=this.taskInWaitting.applyId;
+			this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+		    if (this.judgeFlag.flag == '01') {
+		        this.taskInWaitting = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
+		        this.applyId=this.taskInWaitting.applyId;
+		    } else if (this.judgeFlag.flag == '02') {
+		        this.taskInWaitting = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
+		        this.applyId=this.taskInWaitting.applyId;
+		    }
+
+			/*this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+			this.applyId=this.taskInWaitting.applyId;*/
 			this.request();
 		},
 		methods:{

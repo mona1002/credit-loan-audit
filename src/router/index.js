@@ -66,6 +66,9 @@ import AntiFraud from '@/view/AntiFraud/AntiFraud.vue'
 // 反欺诈 申请
 import AntiApplyEdit from '@/view/AntiFraud/AntiApplyEdit.vue'
 import aAntiApplyInf from '@/view/AntiFraud/components/aAntiApplyInf.vue'
+
+//反欺诈调查
+import aAntiFraudInvestigation from '@/view/AntiFraud/components/aAntiFraudInvestigation.vue'
 // 审批结论
 import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
 // -------------------------复议---------------------
@@ -213,6 +216,11 @@ const routes = [{
 {
   path:'/aAntiApplyInf',
   component:aAntiApplyInf
+},
+//反欺诈调查
+{
+  path:'/aAntiFraudInvestigation',
+  component:aAntiFraudInvestigation
 },
 // 审批结论
 {

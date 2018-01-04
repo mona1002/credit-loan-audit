@@ -100,7 +100,7 @@
           <!-- 搜索框 -->
           <p class="customName">客户名称：
             <el-input v-model="AlertSearch" placeholder="请输入内容" :disabled="true" style="display:inline;"></el-input>
-            <el-button type="primary" @click="compareProps">
+            <el-button type="primary" @click="compareProps" class="compareIcon" style="">
               <i class="el-icon-search" style="fontSize:16px"></i>
             </el-button>
           </p>
@@ -535,5 +535,9 @@
     height: calc( 100% - 48px);
     overflow: auto;
   }
-
+.compareIcon{
+background:white;color:#0077ff;padding:0;height:38px;width:38px;
+float: right;
+margin: 5px 0 0 2px;
+}
 </style>
