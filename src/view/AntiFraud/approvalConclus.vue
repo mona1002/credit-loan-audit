@@ -1,6 +1,11 @@
 <!-- 审批结论 -->
 <template>
   <div class="approval-colun">
+    <div class="address-title">
+      <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+      <span class="headFont">概要信息</span>
+      <!-- {{title1}} -->
+    </div>
     <ul>
       <li class="item-column3">
         <div class="left-title">
@@ -109,6 +114,33 @@ export default {
 </script>
 <style>
 /*信审审批样式*/
+
+.approval-colun .address-title {
+  width: 100%;
+  height: 40px;
+  font-size: 18px;
+  /*font-weight: bold;*/
+  background: #eef0f9;
+  line-height: 40px;
+  padding-left: 10px;
+  display: block;
+  margin-bottom: 10px;
+  /*margin-top: 20px;*/
+  overflow: hidden;
+}
+
+
+/* 折叠面板头部背景色和icon */
+
+.approval-colun .icon_hat {
+  padding: 9px 10px 10px 13px;
+  vertical-align: middle;
+}
+
+.approval-colun .headFont {
+  font-size: 16px;
+}
+
 
 
 /* 一列 */
