@@ -159,7 +159,7 @@
           this.$router.push({
             path: '/FtaskInWaitting',
           });
-        } else if (val.taskNodeName == "antiFraud_commissioner") { //反欺诈专员
+        } else if (val.taskNodeName == "antiFraudApp_commissioner") { //反欺诈专员 
           console.log("反欺诈专员 ")
 
           this.judge.flag = "03";
@@ -168,7 +168,7 @@
           this.$router.push({
             path: '/AntiFraud',
           });
-        } else if (val.taskNodeName == "antiFraud_manager") { //反欺诈主管
+        } else if (val.taskNodeName == "antiFraudApp_manager") { //反欺诈主管 
           console.log("反欺诈主管 ")
           this.judge.flag = "04";
           localStorage.setItem("AntiManagerWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
@@ -191,7 +191,7 @@
     mounted() {
       // 统一登录平台  调试   start 
       this.get("http://testplatform.nuoyuan.com.cn:20717/remote/user/getUserInfo").then(response => {
-        if (res.statusCode == 200) {
+        if (response.statusCode == 200) {
           console.info(response.data);
           this.userInf = {
             userCode: response.data.userCode,
