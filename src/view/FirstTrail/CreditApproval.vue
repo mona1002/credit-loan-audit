@@ -275,6 +275,7 @@
             <el-form-item label="结论 :">
               <!-- <el-radio-group v-model="applyConclusion"> -->
               <el-radio label="00" v-model="applyConclusion">同意</el-radio>
+              <el-radio label="03" v-model="applyConclusion" v-show="judgeFlag=='02'">请求更高级审批</el-radio>
               <!-- </el-radio-group> -->
             </el-form-item>
           </div>
@@ -574,6 +575,7 @@ export default {
       minAmount: 0, // 产品最小金额
       verIncome2: 0, // 
       // showFqz: false, // 发起反欺诈显示
+      judgeFlag:'', // 初审/终审标志  
     }
   },
   components: {
@@ -637,6 +639,10 @@ export default {
 
     // 申请信息 带过来的 产品名称
     this.baseProName = this.applicationInformationDetail.proName;
+
+
+    // 初审 / 终审
+    this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
   },
   methods: {
     // open 打开 自定义 弹窗   挂起
@@ -794,11 +800,11 @@ export default {
           break;
       }
     },
-    submitFn(opinionFlag) {
-      console.log(opinionFlag)
+    submitFn(flag) {
+      console.log(flag)
       // 手动赋值  经办人
       this.dealroperCode = this.dealroperCode;
-      switch (opinionFlag) {
+      switch (flag) {
         case '01':
           console.log("拒绝");
           // 必填校验
@@ -825,6 +831,7 @@ export default {
           // this.mainReason = this.mainReason; // 主原因同理
           this.creauditAppOperate = 'check_Refuse';
           // this.taskId = '180074';
+          
           this.approvalFn();
           break;
         case '02':
@@ -862,6 +869,7 @@ export default {
           // this.mainReason = this.mainReason; // 主原因同理
           this.creauditAppOperate = 'check_Back';
           // this.taskId = '180049';
+          
           this.approvalFn();
           break;
 
@@ -887,6 +895,7 @@ export default {
           this.showFlag = 0;
           // 放弃测试数据
           // this.taskId = '177524';
+          
           this.approvalFn();
           break;
         case '03':
@@ -947,6 +956,7 @@ export default {
           this.coverShow = false;
           this.showFlag = 0;
           // this.taskId = '182525';
+          this.opinionFlag = '06';
           // 保存审批信息
           this.saveCreaduit();
           break;
@@ -954,6 +964,8 @@ export default {
     },
     // 回退/拒绝/放弃
     approvalFn() {
+      // 判断终审的 opinionFlag 
+      console.log(this.opinionFlag)
       // 点击 确认 提交 方法
       this.post("/creauditInfo/approval", {
         // 挂起 taskId 任务id
