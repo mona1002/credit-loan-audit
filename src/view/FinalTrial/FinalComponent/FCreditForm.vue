@@ -899,9 +899,7 @@
           if (result) {
             this.post("/creauditInfo/updateOtherfinalByPK", {
               applyId: this.FormData.applyId,
-              // id: this.FormData.id,
-              //   applyId: "02110Z1002",
-              //   id: "afd",
+              id: this.FormData.id,
               ootherfinal: this.FormData.ootherfinal
             }).then(res => {
               if (res.statusCode == 200) {
