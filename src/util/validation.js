@@ -11,6 +11,8 @@ const config = {
   locale: 'zh_CN', 
   strict: true,
   delay: 1000, 
+  errorBagName: 'errorBags',
+  fieldsBagName: 'fieldBags'
 };
 Vue.use(VeeValidate, config);
 
