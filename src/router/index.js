@@ -58,16 +58,19 @@ import FCreditForm from '../view/FinalTrial/FinalComponent/FCreditForm'
 
 // ------------反欺诈------------------
 import AntiAudit from '@/view/AntiFraud/AntiAudit.vue'//反欺诈分屏
-// import AntiRules from '../view/AntiFraud/AntiRules.vue'//反欺诈规则设定
+import AntiRules from '../view/AntiFraud/AntiRules.vue'//反欺诈规则设定
 // import AntiCaseNum from '../view/AntiFraud/AntiCaseNum'// 案件编号维护
 import AnitAudioVisual from'../view/AntiFraud/components/AnitAudioVisual.vue'
 // 反欺诈 列表
 import AntiFraud from '@/view/AntiFraud/AntiFraud.vue'
 // 反欺诈 申请
-import AntiApplyInf from '@/view/AntiFraud/AntiApplyInf.vue'
+import AntiApplyEdit from '@/view/AntiFraud/AntiApplyEdit.vue'
 import aAntiApplyInf from '@/view/AntiFraud/components/aAntiApplyInf.vue'
+
+//反欺诈调查
+import aAntiFraudInvestigation from '@/view/AntiFraud/components/aAntiFraudInvestigation.vue'
 // 审批结论
-// import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
+import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
 // -------------------------复议---------------------
 import ReconsiderApply from '../view/Reconsider/ReconsiderComponents/ReconsiderApply.vue'//复议申请
 
@@ -210,24 +213,30 @@ const routes = [{
 },
 // 反欺诈 申请信息
 {
-  path:'/AntiApplyInf',
-  component:AntiApplyInf
+  path:'/AntiApplyEdit',
+  name:'AntiApplyEdit',
+  component:AntiApplyEdit
 },
 {
   path:'/aAntiApplyInf',
   component:aAntiApplyInf
 },
+//反欺诈调查
+{
+  path:'/aAntiFraudInvestigation',
+  component:aAntiFraudInvestigation
+},
 // 审批结论
-// {
-//   path:'/ApprovalConclus',
-//   component:ApprovalConclus
-// },
+{
+  path:'/ApprovalConclus',
+  component:ApprovalConclus
+},
 // 反欺诈规则设定
-// {
-//   path:'/AntiRules',
-//   component:AntiRules
-// },
-// // 案件编号维护
+{
+  path:'/AntiRules',
+  component:AntiRules
+},
+// 案件编号维护
 // {
 //   path:'/AntiCaseNum',
 //   component:AntiCaseNum

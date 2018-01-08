@@ -100,7 +100,7 @@
           <!-- 搜索框 -->
           <p class="customName">客户名称：
             <el-input v-model="AlertSearch" placeholder="请输入内容" :disabled="true" style="display:inline;"></el-input>
-            <el-button type="primary" @click="compareProps">
+            <el-button type="primary" @click="compareProps" class="compareIcon">
               <i class="el-icon-search" style="fontSize:16px"></i>
             </el-button>
           </p>
@@ -128,7 +128,7 @@
   import PhoneCredit from "./PhoneCredit";
   import CreditForm from "./detailComponent/CreditForm";
   import creditInvestigation from "./detailComponent/creditInvestigation"; //实地征信
-  import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf'//反欺诈结论  
+  import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf' //反欺诈结论  
   // 信审审批写此处
   import CreditApproval from "./CreditApproval";
   // 查询
@@ -142,30 +142,30 @@
   export default {
     data() {
       return {
-        SplitLeft:"left",
-        SplitRight:"right",
-        watchData:'',
+        SplitLeft: "left",
+        SplitRight: "right",
+        watchData: '',
         originLeft: '',
         // 进件人信息
         customInf: [], //申请信息页local字段
         tastwaitingPass: [], //详情列表页信息--(含)取applyId
         // -------------------------------结束
-        showHalfBtn: false, 
-        CompareAlert: false, 
+        showHalfBtn: false,
+        CompareAlert: false,
         title: "",
         isShow: false,
         flexible: true,
         tabContent1: 0,
         tabContent2: 3,
         tabActiveInd1: 0,
-        tabActiveInd2: 3, 
+        tabActiveInd2: 3,
         items1: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹"],
         items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "信审审批"],
-        tab1Index: 0, 
+        tab1Index: 0,
         tab2Index: 3,
         flag1: [true, true, true, true, true, true, true, true, true],
         flag2: [true, true, true, true, true, true, true, true, true, true],
-        AlertSearch: "", 
+        AlertSearch: "",
         AlertSearchCondition: [{
           value: '选项1',
           label: '最近时间原则排列'
@@ -176,7 +176,7 @@
           value: '选项3',
           label: '内匹客户姓名'
         }],
-        isFull:false,
+        isFull: false,
       }
     },
     methods: {
@@ -206,51 +206,51 @@
           this.$refs.right_tab_ul.style.left = parseFloat(this.$refs.right_tab_ul.style.left) - 50 + "px";
         }
       },
-      showList() { 
+      showList() {
         this.$refs.Left_title.style.left = "0";
         this.flexible = false;
       },
-      hid() { 
+      hid() {
         this.$refs.Left_title.style.left = "-200px";
         this.flexible = true;
       },
       FullScreen() {
         this.showHalfBtn = true;
-        this.originLeft = this.$refs.right_tab_ul.style.left; 
+        this.originLeft = this.$refs.right_tab_ul.style.left;
         this.$refs.right_tab_ul.style.left = "0";
         this.$refs.rLeft.style.display = "none";
         this.$refs.rRight.style.width = "100%";
-        this.watchData=this.$refs.rRight.style.width;
+        this.watchData = this.$refs.rRight.style.width;
         this.isFull = true;
       },
       DblScreen() {
         this.showHalfBtn = false;
-        this.$refs.right_tab_ul.style.left = this.originLeft; 
+        this.$refs.right_tab_ul.style.left = this.originLeft;
         this.$refs.rLeft.style.display = "block";
         this.$refs.rRight.style.width = "50%";
-        this.watchData=this.$refs.rRight.style.width;
+        this.watchData = this.$refs.rRight.style.width;
         this.isFull = false;
       },
-      tab1(ev, ind, val) { 
+      tab1(ev, ind, val) {
         this.title = val;
         this.tabContent1 = ind;
-        this.tab1Index = ind; 
-        this.tabActiveInd1 = ind; 
+        this.tab1Index = ind;
+        this.tabActiveInd1 = ind;
         for (var i = 0; i < this.$refs.tabTwo.length; i++) {
-          this.$refs.tabTwo[i].className = "tab2Default"; 
+          this.$refs.tabTwo[i].className = "tab2Default";
           this.flag2[i] = true;
         }
-        this.$refs.tabTwo[this.tabActiveInd2].className = "tab2Act"; 
-        if (ind != 0 && ind != 8) { 
+        this.$refs.tabTwo[this.tabActiveInd2].className = "tab2Act";
+        if (ind != 0 && ind != 8) {
           this.flag2[ind] = false;
         }
       },
       tab2(ev, ind, val) {
         this.tabContent2 = ind;
-        this.tab2Index = ind; 
+        this.tab2Index = ind;
         this.tabActiveInd2 = ind;
         for (var i = 0; i < this.$refs.tabOne.length; i++) {
-          this.$refs.tabOne[i].className = "tab1Default"; 
+          this.$refs.tabOne[i].className = "tab1Default";
           this.flag1[i] = true;
         }
         this.$refs.tabOne[this.tabActiveInd1].className = "tab1Act";
@@ -266,7 +266,11 @@
         id: this.tastwaitingPass.applyId,
       }).then(res => {
         console.log(res)
-        this.customInf = res.data;
+        if (res.statusCode == 200) {
+          this.customInf = res.data;
+        } else {
+          this.$message.error(res.msg);
+        }
       });
       this.title = "影音资料";
     },
@@ -299,7 +303,7 @@
 <style scoped>
   .SplitScreen {
     height: 100%;
-     /* min-width: 1366; */
+    /* min-width: 1366; */
   }
   /* 激活样式 流-css */
 
@@ -324,6 +328,7 @@
     color: #bfcbd9;
   }
   /* 对比弹出层关闭按钮 */
+
   .compareClose {
     position: absolute;
     right: 40px;
@@ -331,6 +336,7 @@
     z-index: 1;
   }
   /* 全屏  --  分屏 图标 */
+
   .icon_showHalf {
     position: absolute;
     top: 6px;
@@ -355,6 +361,7 @@
     top: 0;
   }
   /*-------------------------------- */
+
   .SplitScreen_content {
     border: 1px solid #0077ff;
     height: calc(100% - 70px);
@@ -377,7 +384,7 @@
     font-size: 14px;
     margin-right: 15px;
   }
-  
+
   .PerDtl span:nth-of-type(7) {
     width: 105px;
   }
@@ -436,7 +443,7 @@
     line-height: 12px;
     padding: 0 0 30px 20px;
   }
- 
+
   .left .Left_ul li:hover,
   .Right_tab_ul_wrap ul li:hover {
     cursor: pointer;
@@ -466,7 +473,6 @@
     text-align: right;
     padding-right: 40px;
   }
-  
   /* 左侧详情 content div 内容   流-css */
 
   .Left_right_BigImg {
@@ -499,6 +505,7 @@
     line-height: 38px;
   }
   /* ======================================================================================================= */
+
   .tab2_Content {
     /*background: purple;*/
     height: calc( 100% - 48px);
@@ -534,6 +541,16 @@
   .AlertContent {
     height: calc( 100% - 48px);
     overflow: auto;
+  }
+
+  .compareIcon {
+    background: white;
+    color: #0077ff;
+    padding: 0;
+    height: 38px;
+    width: 38px;
+    float: right;
+    margin: 5px 0 0 2px;
   }
 
 </style>

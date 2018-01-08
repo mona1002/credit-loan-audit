@@ -22,7 +22,8 @@
           <el-collapse v-model="activeNames">
             <el-collapse-item name="1">
               <template slot="title">
-                <i class="el-icon-menu"></i> 待办任务( <b>{{this.taskCount}}</b> )
+                <i class="el-icon-menu"></i> 待办任务(
+                <b>{{this.taskCount}}</b> )
                 <span class="moreC" @click.stop="refresh">
                   <img src="../../../static/images/shuaxin.png" class="moreCIcon trans" ref="worktask">
                 </span>
@@ -89,7 +90,7 @@
           flag: ''
         },
         userInf: '',
-        TaskCount:0,
+        TaskCount: 0,
         activeNames: ['1'],
         activeNames1: ['1'],
         activeNames2: ['1'],
@@ -128,11 +129,16 @@
         this.post("/workFlowTaskQuery/getTaskProfile", {
           taskStatus: "01",
         }).then(res => {
-          console.log(res.data)
-          this.tableData = res.data;
+          if (res.statusCode == 200) {
+            console.log(res.data)
+            this.tableData = res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
         });
       },
       handleCurrentChange(val) {
+        console.log(val)
         //         creditApp_antiFraud_commissioner 和 creditApp_antiFraud_manager
         // 其中第一个是 反欺诈专员审批，第二个是 反欺诈主管审批
         // reconsiderApp_apply  复议申请
@@ -162,24 +168,31 @@
           this.$router.push({
             path: '/FtaskInWaitting',
           });
-        } else if (val.taskNodeName == "creditApp_antiFraud_commissioner") { //反欺诈专员
+        } else if (val.taskNodeName == "antiFraudApp_commissioner") { //反欺诈专员 
+          console.log("反欺诈专员 ")
+
           this.judge.flag = "03";
           localStorage.setItem("AntiWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
-           this.$router.push({path: '/AntiFraud',});  
-        } else if (val.taskNodeName == "creditApp_antiFraud_manager") { //反欺诈主管
+          this.$router.push({
+            path: '/AntiFraud',
+          });
+        } else if (val.taskNodeName == "antiFraudApp_manager") { //反欺诈主管 
+          console.log("反欺诈主管 ")
           this.judge.flag = "04";
           localStorage.setItem("AntiManagerWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
-           this.$router.push({path: '/AntiFraud',});  
+          this.$router.push({
+            path: '/AntiFraud',
+          });
         }
       },
     },
-    computed:{
-      taskCount(){
+    computed: {
+      taskCount() {
         // console.log(this.tableData)
-        for(var i=0;i<this.tableData.length;i++){
-         this.TaskCount+= this.tableData[i].count;
+        for (var i = 0; i < this.tableData.length; i++) {
+          this.TaskCount += this.tableData[i].count;
         }
         return this.TaskCount;
       }
@@ -201,7 +214,7 @@
           if (res.statusCode == 200) {
             this.tableData = res.data;
           } else {
-            alert(res.msg);
+            this.$message.error(res.msg);
           }
         });
       });

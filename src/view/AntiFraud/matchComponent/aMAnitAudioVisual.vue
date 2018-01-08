@@ -89,7 +89,7 @@
     data() {
       return {
         // picData: [],
-        MatchInf:'',
+        MatchInf: '',
         opendImg: [true, true, true, true], //一级节点图标flag
         closedImg: [false, false, false, false],
         showListDiv: true,
@@ -129,7 +129,11 @@
           applyId: this.localInf.applyId,
           pid: id
         }).then(res => {
-          this.ListDetails = res.data;
+          if (res.statusCode == 200) {
+            this.ListDetails = res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
         });
       },
       getImg(ind) {
@@ -263,8 +267,8 @@
     },
     mounted() {
       console.log("影音资料右")
-     this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //反欺诈专员-匹配查看 + 主管
-    //需要做判读的时候打开
+      this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //反欺诈专员-匹配查看 + 主管
+      //需要做判读的时候打开
       // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       // if (this.judgeFlag.flag == '03') {
       //   this.MatchInf = JSON.parse(localStorage.getItem("AntiinternalObj")); //反欺诈专员-匹配查看
@@ -275,7 +279,11 @@
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.MatchInf.matchApplyId,
       }).then(res => {
-        this.ListParent = res.data
+        if (res.statusCode == 200) {
+          this.ListParent = res.data
+        } else {
+          this.$message.error(res.msg);
+        }
       });
     }
   }
@@ -321,7 +329,6 @@
     position: relative;
     z-index: 2;
   }
-
   /* 缩略图-按钮 */
 
   .checkDetailBtn {

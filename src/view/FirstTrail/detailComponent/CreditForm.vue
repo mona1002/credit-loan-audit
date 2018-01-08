@@ -50,7 +50,7 @@
             <li>
               <p>
                 <i class="hint">
-                  <span v-show="errors.has('BrokenRecord')" class="internet_sel">{{ errors.first('BrokenRecord') }}</span>
+                  <!-- <span v-show="errors.has('BrokenRecord')" class="internet_sel">{{ errors.first('BrokenRecord') }}</span> -->
                 </i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(1)">
                   <span class="red"> * </span>客户在失信网是否有失信记录：</label>
@@ -92,7 +92,7 @@
             <li>
               <p>
                 <i class="hint">
-                  <span v-show="errors.has('abnormalPhone')" class="internet_sel">{{ errors.first('abnormalPhone') }}</span>
+                  <!-- <span v-show="errors.has('abnormalPhone')" class="internet_sel">{{ errors.first('abnormalPhone') }}</span> -->
                 </i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(2)">
                   <span class="red"> * </span>网上搜索借款人手机是否有异常：</label>
@@ -191,7 +191,7 @@
             <li>
               <p>
                 <i class="hint">
-                  <span v-show="errors.has('registerInfor')" class="internet_sel">{{ errors.first('registerInfor') }}</span>
+                  <!-- <span v-show="errors.has('registerInfor')" class="internet_sel">{{ errors.first('registerInfor') }}</span> -->
                 </i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(3)">
                   <span class="red"> * </span>当地工商网查询企业基本信息中是否有登记：</label>
@@ -289,7 +289,7 @@
               <p v-show="this.checkId.loanNot">
                 <i class="hint"> </i>
                 <label class=" InternetInf_right_label "> 借款期限[月]： </label>
-                <el-input type="text" placeholder="请输入内容" v-model="checkData.iloanTerm" @blur="mMonth(checkData.iloanTerm,$event,'月均工资')">
+                <el-input type="text" placeholder="请输入内容" v-model="checkData.iloanTerm" @blur="mMonth(checkData.iloanTerm,$event)">
                 </el-input>
               </p>
             </li>
@@ -468,7 +468,7 @@
           <ul class="CreditForm_CompanyInfs_ul_left">
             <li ref="compTypeDiv">
               <i class="hint">
-                <span v-show="errors.has('companyType')" class="Working_input">{{ errors.first('companyType') }}</span>
+                <!-- <span v-show="errors.has('companyType')" class="Working_input">{{ errors.first('companyType') }}</span> -->
               </i>
               <label class="InternetInf_left_label ">
                 <span class="red"> * </span>企业类型：</label>
@@ -479,7 +479,7 @@
             </li>
             <li>
               <i class="hint">
-                <span v-show="errors.has('registerDate')" class="Working_middle">{{ errors.first('registerDate') }}</span>
+                <!-- <span v-show="errors.has('registerDate')" class="Working_middle">{{ errors.first('registerDate') }}</span> -->
               </i>
               <label class=" WorkInfs_left_label ">
                 <span class="red"> * </span> 公司注册时间： </label>
@@ -828,7 +828,7 @@
               </p>
               <p class="bottom">
                 <i class="hint">
-                  <span v-show="errors.has('Paymonth')" class="family_textarea">{{ errors.first('Paymonth') }}</span>
+                  <!-- <span v-show="errors.has('Paymonth')" class="family_textarea">{{ errors.first('Paymonth') }}</span> -->
                   <span v-show="this.Wordhint.family.acount" class="family_textarea">请输入正确金额</span>
                 </i>
                 <label class="Family_right_label">
@@ -917,7 +917,7 @@
         </template>
         <div class=" CreditForm_result">
           <i class="hint">
-            <span v-show="errors.has('conclusion')" class="result_textarea">{{ errors.first('conclusion') }}</span>
+            <!-- <span v-show="errors.has('conclusion')" class="result_textarea">{{ errors.first('conclusion') }}</span> -->
             <b v-show="this.Wordhint.result" class="result_textarea"> 输入长度不能超过500</b>
           </i>
           <p class="InternetInf_left_label" style="textAlign:right;">
@@ -2014,10 +2014,12 @@
       },
       CFsave() {
         console.log("保存修改")
+            console.log(this.checkData)
         this.$validator.validateAll().then((result) => {
           if (result) {
             this.checkData.selfpremisesArea = this.acreage;
             this.checkData.selfhasProportion = this.Percent;
+            console.log(this.checkData.applyId)
             this.post("/creauditInfo/addOrUpdate", this.checkData).then(res => {
               if (res.statusCode == 200) {
                 this.Confirm = false;
@@ -2027,26 +2029,18 @@
                   message: '恭喜你，提交成功!',
                   type: 'success'
                 });
+                this.mountC();
               } else {
-                // alert("提交失败，请重新提交")
                 this.Confirm = false;
-                this.$message({
-                  message: '提交失败!',
-                  type: 'success'
-                });
+                  this.$message.error('提交失败！');
+                this.mountC();
               }
             });
           } else {
-            // alert('请按要求填写！');
             this.Confirm = false;
-            this.$message({
-              message: '请按要求填写!',
-              type: 'success'
-            });
+              this.$message.error('必填项不能为空！');
           }
         });
-
-
       },
       AreaNPercent() {
         if (this.checkData.selfpremisesArea) {
@@ -2302,17 +2296,12 @@
           // num
           console.log(num)
           // this.formatSC(el, num);
-
         }
       },
-      // formatSC(el) {
       formatSC(el, val) {
-        console.log("ad")
         switch (el) {
           case "月还款":
             this.checkData.fbalance = val;
-            // ,checkData.fbalance
-            // this.checkData.fbalance = this.formatNumber(this.checkData.fbalance, 2, 3);
             break;
           case "借款金额":
             this.checkData.iloanAmt = val;
@@ -2367,22 +2356,18 @@
           for (var i = 0; i < this.inputWidth.length; i++) {
             // this.inputWidth[i].style.width = 515 + "px"; //原来142px
             this.inputWidth[i].style.width = 553 + "px"; //改后182px
-
           };
           for (var i = 0; i < this.Txawidth.length; i++) {
             // this.Txawidth[i].style.width = 'calc( 50% + 104px )';
             this.Txawidth[i].style.width = 'calc( 100% - 295px)';
-            
-            
           };
           // this.Txawidth[14].style.width = 'calc( 50% + 150px )';
           this.Txawidth[14].style.width = 'calc( 100% - 260px)';
           this.Txawidth[22].style.width = 'calc( 100% - 260px)';
           this.CFwidth[0].style.minWidth = 1272 + "px";
           this.comaddressb[0].style.paddingLeft = 674 + "px";
-           this.Alertbtn[0].style.marginLeft =" calc( 100% - 148px)";
+          this.Alertbtn[0].style.marginLeft = " calc( 100% - 148px)";
           //  this.Alertbtn[0].style.margin ="20px 0 0 716px";
-           
         } else if (val == "100%") {
           for (var i = 0; i < this.Pwidth.length; i++) {
             this.Pwidth[i].style.width = 200 + "px";
@@ -2401,42 +2386,118 @@
           this.CFwidth[0].style.minWidth = 1592 + "px";
           // this.CFwidth[0].style.minWidth = 1366 + "px";          
           this.comaddressb[0].style.paddingLeft = 826 + "px";
-           this.Alertbtn[0].style.marginLeft ="calc( 50% + 329px )";          
+          this.Alertbtn[0].style.marginLeft = "calc( 50% + 329px )";
         }
+      },
+      acquire(val, name) {
+        if (val == null || val == '') {
+          return
+        } else {
+          if (val.toString().indexOf('.') == -1) {
+            val = val + "." + "0" + '0';
+            this.formatSC(name, val);
+          } else if (val.toString().indexOf('.') != -1) {
+            if (val.toString().split(".")[1].length < 2) {
+              val = val + "0";
+              this.formatSC(name, val);
+            } else {
+              val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
+              this.formatSC(name, val);
+            }
+          }
+        }
+      },
+      mountM() {
+        this.acquire(this.checkData.fbalance, '月还款');
+        this.acquire(this.checkData.regcapitalamt, '注册资金');
+        this.acquire(this.checkData.monthrentamt, '月还款/租金');
+        this.acquire(this.checkData.oneYearProfitamt, '近一年利润');
+        this.acquire(this.checkData.profitamountmamt, '月利润');
+        this.acquire(this.checkData.spouseIncome, '配偶收入');
+        this.acquire(this.checkData.parentIncome, '父母收入');
+        this.acquire(this.checkData.fconsumption, '开销');
+        this.acquire(this.checkData.childPaycostamt, '生活费支付');
+        this.acquire(this.checkData.avgsalaryamt, '月均工资');
+        this.acquire(this.checkData.iloanAmt, '借款金额');
+      },
+      mountC() {
+        // 获取查询列表数据
+        this.post("/creauditInfo/queryCreauditInfoObj", {
+          applyId: this.getParams.applyId,
+        }).then(res => {
+          console.log(res);
+          if (res.statusCode == 200) {
+            this.checkData = res.data;
+            this.checkData.applyId = this.getParams.applyId;
+            this.AreaNPercent(this.checkData.fbalance);
+            this.mountM();
+            console.log(this.checkData.fbalance);
+            console.log(this.checkData.fbalance);
+            this.mountJ(0, res.data.wbeexEcuted);
+            this.mountJ(1, res.data.wnetHirecom);
+            this.mountJ(2, res.data.wnetEcutedBrea);
+            this.mountJ(3, res.data.wnetHirecomBrea);
+            this.mountJ(4, res.data.wnetPhone);
+            this.mountJ(5, res.data.wnetHirecomName);
+            this.mountJ(6, res.data.wnetHirecomPhone);
+            this.mountJ(7, res.data.wnetAddrandEstate);
+            this.mountJ(8, res.data.wnetHirecomAddress);
+            this.mountJ(9, res.data.wnetCompany);
+            this.mountJ(10, res.data.wnetAddrstate);
+            this.mountJ(11, res.data.iisself);
+            this.mountJ(12, res.data.privateOwnerFlag);
+            this.mountJ(13, res.data.fmarrflag);
+            this.mountJ(14, res.data.spouseWork);
+            this.mountJ(15, res.data.spouseSamecity);
+            this.mountJ(16, res.data.childFlag);
+            this.mountJ(17, res.data.childIspaycost);
+            this.mountJ(18, res.data.parentIsliving);
+            this.mountJ(19, res.data.brothersIfhas);
+            this.mountJ(20, res.data.aisresident);
+            this.mountJ(21, res.data.iloanBefore);
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
       }
     },
     mounted() {
       this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
-      // 获取查询列表数据
-      this.post("/creauditInfo/queryCreauditInfoObj", {
-        applyId: this.getParams.applyId,
-      }).then(res => {
-        console.log(res.data);
-        this.checkData = res.data;
-        this.AreaNPercent();
-        this.mountJ(0, res.data.wbeexEcuted);
-        this.mountJ(1, res.data.wnetHirecom);
-        this.mountJ(2, res.data.wnetEcutedBrea);
-        this.mountJ(3, res.data.wnetHirecomBrea);
-        this.mountJ(4, res.data.wnetPhone);
-        this.mountJ(5, res.data.wnetHirecomName);
-        this.mountJ(6, res.data.wnetHirecomPhone);
-        this.mountJ(7, res.data.wnetAddrandEstate);
-        this.mountJ(8, res.data.wnetHirecomAddress);
-        this.mountJ(9, res.data.wnetCompany);
-        this.mountJ(10, res.data.wnetAddrstate);
-        this.mountJ(11, res.data.iisself);
-        this.mountJ(12, res.data.privateOwnerFlag);
-        this.mountJ(13, res.data.fmarrflag);
-        this.mountJ(14, res.data.spouseWork);
-        this.mountJ(15, res.data.spouseSamecity);
-        this.mountJ(16, res.data.childFlag);
-        this.mountJ(17, res.data.childIspaycost);
-        this.mountJ(18, res.data.parentIsliving);
-        this.mountJ(19, res.data.brothersIfhas);
-        this.mountJ(20, res.data.aisresident);
-        this.mountJ(21, res.data.iloanBefore);
-      });
+      this.mountC();
+      // // 获取查询列表数据
+      // this.post("/creauditInfo/queryCreauditInfoObj", {
+      //   applyId: this.getParams.applyId,
+      // }).then(res => {
+      //   console.log(res.data);
+      //   this.checkData = res.data;
+      //   this.checkData.applyId = this.getParams.applyId;
+      //   this.AreaNPercent(this.checkData.fbalance);
+      //   this.mountM();
+      //   console.log(this.checkData.fbalance);
+      //   console.log(this.checkData.fbalance);
+      //   this.mountJ(0, res.data.wbeexEcuted);
+      //   this.mountJ(1, res.data.wnetHirecom);
+      //   this.mountJ(2, res.data.wnetEcutedBrea);
+      //   this.mountJ(3, res.data.wnetHirecomBrea);
+      //   this.mountJ(4, res.data.wnetPhone);
+      //   this.mountJ(5, res.data.wnetHirecomName);
+      //   this.mountJ(6, res.data.wnetHirecomPhone);
+      //   this.mountJ(7, res.data.wnetAddrandEstate);
+      //   this.mountJ(8, res.data.wnetHirecomAddress);
+      //   this.mountJ(9, res.data.wnetCompany);
+      //   this.mountJ(10, res.data.wnetAddrstate);
+      //   this.mountJ(11, res.data.iisself);
+      //   this.mountJ(12, res.data.privateOwnerFlag);
+      //   this.mountJ(13, res.data.fmarrflag);
+      //   this.mountJ(14, res.data.spouseWork);
+      //   this.mountJ(15, res.data.spouseSamecity);
+      //   this.mountJ(16, res.data.childFlag);
+      //   this.mountJ(17, res.data.childIspaycost);
+      //   this.mountJ(18, res.data.parentIsliving);
+      //   this.mountJ(19, res.data.brothersIfhas);
+      //   this.mountJ(20, res.data.aisresident);
+      //   this.mountJ(21, res.data.iloanBefore);
+      // });
       // 省    
       this.get("/credit/queryProvince", {}).then(res => {
         this.hirecomAddress = res.data;
@@ -2452,8 +2513,6 @@
       this.comaddressb = document.getElementsByClassName("comaddressb")
       this.Alertbtn = document.getElementsByClassName("btn")
       console.log(this.Txawidth)
-
-
       if (this.myWatch) {
         this.ElInputStyle(this.myWatch)
       } else {

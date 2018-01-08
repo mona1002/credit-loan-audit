@@ -86,10 +86,18 @@
 				//taskStatus:'',
 				processInstanceId:'',
 				taskDetailList:[],
+				judgeFlag:'',
 			}
 		},
 		mounted(){
-			this.processInstanceId=JSON.parse(localStorage.getItem('taskInWaitting')).processInstanceId;
+			this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+		    if (this.judgeFlag.flag == '01') {
+		        this.processInstanceId = JSON.parse(localStorage.getItem("taskInWaitting")).processInstanceId; // 初审
+		    } else if (this.judgeFlag.flag == '02') {
+		        this.processInstanceId = JSON.parse(localStorage.getItem("FtaskInWaitting")).processInstanceId //终审
+		    }
+
+			//this.processInstanceId=JSON.parse(localStorage.getItem('taskInWaitting')).processInstanceId;
 			this.request()
 		},
 		methods:{

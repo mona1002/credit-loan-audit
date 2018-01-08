@@ -176,8 +176,12 @@
         this.post("/antiFraud/getAntiFraudRuleList", {
           ruleNum: this.rules
         }).then(res => {
-          console.log(res);
-          this.tableData = res.data;
+          if (res.statusCode == 200) {
+            console.log(res);
+            this.tableData = res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
         });
       },
       Rreset() {
@@ -205,8 +209,12 @@
             });
             //   查询接口
             this.post("/antiFraud/getAntiFraudRuleList", {}).then(res => {
-              console.log(res);
-              this.tableData = res.data;
+              if (res.statusCode == 200) {
+                console.log(res);
+                this.tableData = res.data;
+              } else {
+                this.$message.error(res.msg);
+              }
             });
           } else {
             this.$message.error('修改失败');
@@ -216,8 +224,12 @@
     },
     mounted() {
       this.post("/antiFraud/getAntiFraudRuleList", {}).then(res => {
-        console.log(res);
-        this.tableData = res.data;
+        if (res.statusCode == 200) {
+          console.log(res);
+          this.tableData = res.data;
+        } else {
+          this.$message.error(res.msg);
+        }
       });
     },
     components: {

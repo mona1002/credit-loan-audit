@@ -169,7 +169,11 @@
           applySubNo: this.localInf.applySubNo,
           certCode: this.localInf.certCode,
         }).then(res => {
-          this.personal = res.data;
+          if (res.statusCode == 200) {
+            this.personal = res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
         });
         // //他人进件（ 不包含个人）
         this.post("/internalMatch/getNonPersonalInternalMatch", {
@@ -182,7 +186,11 @@
           applySubNo: this.localInf.applySubNo,
           certCode: this.localInf.certCode,
         }).then(res => {
-          this.others = res.data;
+          if (res.statusCode == 200) {
+            this.others = res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
         });
       },
       getParentList(id) { //  未写 -----未对
@@ -192,12 +200,16 @@
           // a2b23bbf-46ef-4d94-9872-322843cebb7d matchApplyId
           // applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",//上面删除后 此处打开
         }).then(res => {
-          this.ListParent = res.data;
-          this.localInf.applyId = id;
-          this.dataa = false;
-          this.custName = this.currentRow.matchApplyCustName;
-          this.custmatchApplySubNo = this.currentRow.matchApplySubNo;
-          this.$emit('inputInf', this.custName, this.custmatchApplySubNo)
+          if (res.statusCode == 200) {
+            this.ListParent = res.data;
+            this.localInf.applyId = id;
+            this.dataa = false;
+            this.custName = this.currentRow.matchApplyCustName;
+            this.custmatchApplySubNo = this.currentRow.matchApplySubNo;
+            this.$emit('inputInf', this.custName, this.custmatchApplySubNo)
+          } else {
+            this.$message.error(res.msg);
+          }
         });
       },
       getChildrenList(id, ind, item) {
@@ -219,7 +231,11 @@
           applyId: this.localInf.applyId,
           pid: id
         }).then(res => {
-          this.ListDetails = res.data;
+          if (res.statusCode == 200) {
+            this.ListDetails = res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
         });
       },
       getImg(ind) {
@@ -356,20 +372,27 @@
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '01') {
         this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
-      } else if (this.judgeFlag.flag == '02') { 
+      } else if (this.judgeFlag.flag == '02') {
         this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-      }else if (this.judgeFlag.flag == '03') {
+        console.log("终审")
+      } else if (this.judgeFlag.flag == '03') {
         this.localInf = JSON.parse(localStorage.getItem("AntiWorkbenchPass")) //反欺诈专员
-      }else if (this.judgeFlag.flag == '04') {
+      } else if (this.judgeFlag.flag == '04') {
         this.localInf = JSON.parse(localStorage.getItem("AntiManagerWorkbenchPass")) //反欺诈主管
       }
+      console.log(this.localInf)
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.applyId,
         // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
         //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
       }).then(res => {
-        this.ListParent = res.data;
+        console.log(res)
+        if (res.statusCode == 200) {
+          this.ListParent = res.data;
+        } else {
+          this.$message.error(res.msg);
+        }
       });
     }
   }

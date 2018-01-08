@@ -34,12 +34,12 @@
       return {
         FinanceInf: [],
         MatchInf: '',
-        judgeFlag:''
+        judgeFlag: ''
       }
     },
     mounted() {
-       this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //初审-匹配查看
-        // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //初审-匹配查看
+      // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       // if (this.judgeFlag.flag == '01') {
       //  this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //初审-匹配查看
       // } else if (this.judgeFlag.flag == '02') {
@@ -50,10 +50,14 @@
       //   this.MatchInf = JSON.parse(localStorage.getItem("AntiManagerinternalObj")); //反欺诈主管-匹配查看
       // }
       this.post("/creAccountInf·o/getAccountInfo", {
-        applyId: this.MatchInf.matchApplyId,           
+        applyId: this.MatchInf.matchApplyId,
         // applyId: "24667563-2ca2-4da6-8e02-4bf7d7c839b6",
       }).then(res => {
-        this.FinanceInf = res.data
+        if (res.statusCode == 200) {
+          this.FinanceInf = res.data;
+        } else {
+          this.$message.error(res.msg);
+        }
       });
     }
   }
