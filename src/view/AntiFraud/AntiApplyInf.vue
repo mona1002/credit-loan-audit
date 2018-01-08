@@ -3,7 +3,7 @@
   <div date="AntiApplyInf" class="anti-apply-info-class">
     <!-- 反欺诈申请信息=========================默认显示1-条？分页？ -->
     <div class="address-title">
-      <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+      <!-- <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat"> -->
       <span class="headFont">基本信息</span>
     </div>
     <div class="header-area">
@@ -49,21 +49,20 @@
       </li>
     </div>
     <div class="address-title">
-      <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+      <!-- <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat"> -->
       <span class="headFont">反欺诈申请信息</span>
     </div>
     <!-- 反欺诈神效信息 表单 -->
-    <ul style="padding-left:20px;">
+    <!-- style="padding-left:20px;" -->
+    <ul>
       <li class="item-column2">
         <div class="left-title left-title2">
           反欺诈申请类型主原因：
         </div>
         <div>
-          <el-select v-model="mainReason">
-            <el-option label="信审黑名单" value="00"></el-option>
-            <el-option label="信审灰名单" value="01"></el-option>
-            <el-option label="外部黑名单" value="02"></el-option>
-            <el-option label="外部灰名单" value="03"></el-option>
+          <el-select @change="mainselectChange" v-model="mainReason">
+            <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
+            </el-option>
           </el-select>
         </div>
       </li>
@@ -71,15 +70,10 @@
         <div class="left-title">
           子原因：
         </div>
-        <div>
-          <el-select v-model="secondReason">
-            <el-option label="无人接" value="00"></el-option>
-            <el-option label="拒接" value="01"></el-option>
-            <el-option label="停机" value="02"></el-option>
-            <el-option label="空号" value="03"></el-option>
-            <el-option label="接通" value="04"></el-option>
-          </el-select>
-        </div>
+        <el-select @change="secondselectChange" v-model="secondReason">
+          <el-option v-for="item in secondReasons" :key="item.id" :label="item.reasonName" :value="item">
+          </el-option>
+        </el-select>
       </li>
       <li class="item-column1">
         <div class="left-title"><span class="require-icon" style="left:30px;">*</span>调查结论：</div>
@@ -108,7 +102,7 @@
         </div>
       </li>
       <li class="item-column1 submit-class">
-        <el-button type="primary" @click="close">关闭</el-button>
+        <!-- <el-button type="primary" @click="close">关闭</el-button> -->
         <el-button type="primary" @click="submitForm('form')">提交</el-button>
       </li>
     </ul>
@@ -118,58 +112,11 @@
 export default {
   data() {
     return {
-
-      // isFull: true, // 全屏
-      creditappTaskid: '', // 任务id
-      userCode: '', // 用户编号
-      orgCode: '', // 机构编号
-      applyId: '', // 申请单ID
-      applySubno: '', // 进件编号
-      applyCode: '', // 申请人code
-      applyPersonName: '', // 申请人姓名
-      appOrgCode: '', // 申请机构code
-      appOrgName: '', // 申请机构名称
-      mainreasonId: '', // 欺诈主原因id
-      subreasonId: '', // 欺诈子原因id
-      applyDesc: '', // 反欺诈申请描述
-      mainreaName: '', // 欺诈主原因名称
-      subreaName: '', // 欺诈子原因名称
-      appOrgId: '', // 申请机构id
-      appSuborgId: '', // 申请机构科室id
-      appSuborgCode: '', // 申请机构科室code
-      appSuborgName: '', // 申请机构科室名称
-      proId: '', // 产品id
-      proCode: '', // 产品code
-      applyCustId: '', // 客户id
-      applyCustName: '', // 客户姓名
-      applyCustNo: '', // 客户编号
-      channel: '', // 渠道
-      certCode: '', // 证件号码
-      proName: '', // 产品名称
-
-
-      certTypeTxt:'' , // 证件类型
+      id:''
     }
   },
-  props: ['showFlag'],
   mounted() {
-    // if (this.isFull == true) { // 全屏
-    //   console.log('全屏');
-    //   // $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
-    //   // 提交按钮
-    //   // $('.submit-class').css("margin-left", "calc( 66% - 140px)");
-    // }
-    console.log(this.showFqz);
-
-    // 经办人 登录用户名
-    var userInfo = JSON.parse(localStorage.getItem('userInf'));
-    this.userCode = userInfo.userCode;
-    this.orgCode = userInfo.orgCode;
-
-
-    // 先取到 id , 请求 反欺诈 页面信息
-    var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-    this.applyId = taskInWaitting.applyId;
+    this.id = this.$route.params.id;
     // 查询反欺诈信息
     this.getFraudApplyInfo();
   },
@@ -177,50 +124,53 @@ export default {
     // 查询 反欺诈信息
     getFraudApplyInfo() {
       this.post('/fraudApplyInfoController/getFraudApplyInfo', {
-          applyId: this.applyId
+          id: this.id
         })
         .then(res => {
-          // 任务id
-          this.creditappTaskid = res.data.fraudApplyInfo.creditappTaskid;
-          // 进件编号
-          this.applySubno = res.data.fraudApplyInfo.applySubno;
-          // 申请人code
-          this.applyCode = res.data.fraudApplyInfo.applyCode;
-          // 申请人姓名
-          this.applyPersonName = res.data.fraudApplyInfo.applyPersonName;
-          // 申请机构 code
-          this.appOrgCode = res.data.fraudApplyInfo.appOrgCode;
-          // 申请机构名称
-          this.appOrgName = res.data.fraudApplyInfo.appOrgName;
-          // 申请机构 id
-          this.appOrgId = res.data.fraudApplyInfo.appOrgId;
-          // 申请机构科室id
-          this.appSuborgId = res.data.fraudApplyInfo.appSuborgId;
-          // 申请机构科室code
-          this.appSuborgCode = res.data.fraudApplyInfo.appSuborgCode;
-          // 申请机构科室名称
-          this.appSuborgName = res.data.fraudApplyInfo.appSuborgName;
-          // 产品 id
-          this.proId = res.data.applyInfoPool.proId;
-          // 产品 code
-          this.proCode = res.data.applyInfoPool.proCode;
-          // 客户id
-          this.applyCustId = res.data.fraudApplyInfo.applyCustId;
-          // 客户姓名
-          this.applyCustName = res.data.fraudApplyInfo.applyCustName;
-          // 客户编号
-          this.applyCustNo = res.data.fraudApplyInfo.applyCustNo;
-          // 渠道
-          this.channel = res.data.applyInfoPool.channel;
-          // 证件号码
-          this.certCode = res.data.applyInfoPool.certCode;
-
-          // 证件类型
-          this.certTypeTxt = res.data.applyInfoPool.certTypeTxt
+          if (res.statusCode == 200) {
+            // 任务id
+            this.creditappTaskid = res.data.fraudApplyInfo.creditappTaskid;
+            // 进件编号
+            this.applySubno = res.data.fraudApplyInfo.applySubno;
+            // 申请人code
+            this.applyCode = res.data.fraudApplyInfo.applyCode;
+            // 申请人姓名
+            this.applyPersonName = res.data.fraudApplyInfo.applyPersonName;
+            // 申请机构 code
+            this.appOrgCode = res.data.fraudApplyInfo.appOrgCode;
+            // 申请机构名称
+            this.appOrgName = res.data.fraudApplyInfo.appOrgName;
+            // 申请机构 id
+            this.appOrgId = res.data.fraudApplyInfo.appOrgId;
+            // 申请机构科室id
+            this.appSuborgId = res.data.fraudApplyInfo.appSuborgId;
+            // 申请机构科室code
+            this.appSuborgCode = res.data.fraudApplyInfo.appSuborgCode;
+            // 申请机构科室名称
+            this.appSuborgName = res.data.fraudApplyInfo.appSuborgName;
+            // 产品 id
+            this.proId = res.data.applyInfoPool.proId;
+            // 产品 code
+            this.proCode = res.data.applyInfoPool.proCode;
+            // 客户id
+            this.applyCustId = res.data.fraudApplyInfo.applyCustId;
+            // 客户姓名
+            this.applyCustName = res.data.fraudApplyInfo.applyCustName;
+            // 客户编号
+            this.applyCustNo = res.data.fraudApplyInfo.applyCustNo;
+            // 渠道
+            this.channel = res.data.applyInfoPool.channel;
+            // 证件号码
+            this.certCode = res.data.applyInfoPool.certCode;
+            // 证件类型
+            this.certTypeTxt = res.data.applyInfoPool.certTypeTxt
+          }
         })
     },
     close() {
-      this.showFlag = 0;
+      console.log('点击关闭按钮')
+      // this.showFlag = 0;
+      this.$emit('showFlag', 0)
     },
     submitForm() {
       console.log('提交反欺诈')
@@ -253,8 +203,22 @@ export default {
           proName: this.proName, // 产品名称
         })
         .then(res => {
-
+        
+          this.showFlag = 0;
         })
+    },
+    // 主原因改变
+    mainselectChange(val) {
+      this.mainReason = val.reasonName;
+    },
+    // 子原因改变
+    secondselectChange(val) {
+      this.secondReason = val.reasonName;
+    }
+  },
+  watch: {
+    mainReason() {
+
     }
   }
 }
@@ -271,6 +235,10 @@ export default {
 
 
 
+
+
+
+
 /* 一列 */
 
 .anti-apply-info-class .item-column1 {
@@ -278,6 +246,10 @@ export default {
   /*min-width: 1366px;*/
   float: left;
 }
+
+
+
+
 
 
 
@@ -298,6 +270,10 @@ export default {
 
 
 
+
+
+
+
 /* 三列 */
 
 .anti-apply-info-class .item-column3 {
@@ -309,6 +285,10 @@ export default {
   /*border: 1px solid;*/
   min-width: 300px;
 }
+
+
+
+
 
 
 
@@ -389,6 +369,10 @@ export default {
 
 
 
+
+
+
+
 /* 必填 * */
 
 .anti-apply-info-class .require-icon {
@@ -400,6 +384,10 @@ export default {
   line-height: 35px;
   position: relative;
 }
+
+
+
+
 
 
 
