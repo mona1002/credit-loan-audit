@@ -268,6 +268,8 @@ export default {
         // 反欺诈主管
         localStorage.setItem("AntiManagertaskInWaitting", JSON.stringify(row))
       }
+      // 反欺诈  分屏
+      this.$router.push('AntiAudit')
     }
   }
 }
