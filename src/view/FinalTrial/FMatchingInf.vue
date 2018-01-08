@@ -43,7 +43,7 @@
               <PhoneCredit v-if=" this.tabContent1==5"> 电话征信</PhoneCredit>
               <FcCreditForm v-if=" this.tabContent1==6">信审表</FcCreditForm>   <!-- √ -->
               <creditInvestigation v-if=" this.tabContent1==7">实地征信</creditInvestigation>
-              <RAntiConclution v-if=" this.tabContent1==8">反欺诈结论</RAntiConclution>
+              <aMAntiApplyInf v-if=" this.tabContent1==8">反欺诈结论</aMAntiApplyInf>
               <RFinanceInformation v-if=" this.tabContent1==9">财务信息</RFinanceInformation><!-- √ -->
               <processTrajectory v-if=" this.tabContent1==10">流程轨迹</processTrajectory>
               <RApprovalConclusion v-if=" this.tabContent1==11">审批结论轨迹</RApprovalConclusion> <!-- √ -->
@@ -81,7 +81,7 @@
             <PhoneCredit v-if=" this.tabContent2==5"> 电话征信</PhoneCredit>
             <FcCreditForm v-if=" this.tabContent2==6">信审表</FcCreditForm>  <!-- √ -->
             <creditInvestigation v-if=" this.tabContent2==7">实地征信</creditInvestigation>
-            <RAntiConclution v-if=" this.tabContent2==8">反欺诈结论</RAntiConclution>
+            <aMAntiApplyInf v-if=" this.tabContent2==8">反欺诈结论</aMAntiApplyInf>
             <RFinanceInformation v-if=" this.tabContent2==9">财务信息</RFinanceInformation><!-- √ -->
             <processTrajectory v-if=" this.tabContent2==10">流程轨迹</processTrajectory>
             <RApprovalConclusion v-if=" this.tabContent2==11">审批结论轨迹</RApprovalConclusion> <!-- √ -->
@@ -130,7 +130,7 @@
   // 编辑
   import RborrowerInformationSetail from "../FirstTrail/ReadComponent/RborrowerInformationSetail.vue"; //借款人资料
   import RapplicationInformationDetail from "../FirstTrail/ReadComponent/RapplicationInformationDetail.vue"; //申请信息
-  import RAntiConclution from "../FirstTrail/ReadComponent/RAntiConclution.vue"; //反欺诈结论
+  import aMAntiApplyInf from "../AntiFraud/matchComponent/aMAntiApplyInf.vue"; //反欺诈结论
   import remark from "../FirstTrail/detailComponent/remark.vue";
   import InternalMatch from "../FirstTrail/InternalMatch.vue";
   import borrowerInformation from "../FirstTrail/detailComponent/borrowerInformation.vue";
@@ -291,7 +291,7 @@
    
       RapplicationInformationDetail,
       RborrowerInformationSetail, //借款人资料
-      RAntiConclution, //反欺诈结论
+      aMAntiApplyInf, //反欺诈结论
       remark,
       InternalMatch,
       borrowerInformation,

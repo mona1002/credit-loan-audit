@@ -91,7 +91,7 @@
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
             <!-- √ -->
             <aAntiApplyInf v-if=" this.tabContent2==8"></aAntiApplyInf>
-            <!-- √ -->            
+            <!-- √ -->
             <!-- 信审审批 空白 -->
             <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>
           </div>
@@ -140,7 +140,7 @@
   import cborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料（左+右）
   import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信（左右）
   import processTrajectory from "../FirstTrail/checkComponent/processTrajectory.vue"; //流程轨迹（左）
-import aAntiApplyInf from'../AntiFraud/components/aAntiApplyInf.vue'//反欺诈结论
+  import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf.vue' //反欺诈结论
   // ----------------------------------------------------------
   // 编辑
   import InternalMatch from "../FirstTrail/InternalMatch.vue";
@@ -279,7 +279,11 @@ import aAntiApplyInf from'../AntiFraud/components/aAntiApplyInf.vue'//反欺诈�
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.applyId,
       }).then(res => {
-        this.customInf = res.data;
+        if (res.statusCode == 200) {
+          this.customInf = res.data;
+        } else {
+          this.$message.error(res.msg);
+        }
       });
       this.title = "影音资料";
     },

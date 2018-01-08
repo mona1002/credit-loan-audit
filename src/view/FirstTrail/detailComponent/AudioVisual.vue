@@ -129,7 +129,11 @@
           applyId: this.localInf.applyId,
           pid: id
         }).then(res => {
-          this.ListDetails = res.data;
+          if (res.statusCode == 200) {
+            this.ListDetails = res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
         });
       },
       getImg(ind) {
@@ -268,16 +272,20 @@
         this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
       } else if (this.judgeFlag.flag == '02') {
         this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-      }else if (this.judgeFlag.flag == '03') {
+      } else if (this.judgeFlag.flag == '03') {
         this.localInf = JSON.parse(localStorage.getItem("AntiWorkbenchPass")) //反欺诈专员
-      }else if (this.judgeFlag.flag == '04') {
+      } else if (this.judgeFlag.flag == '04') {
         this.localInf = JSON.parse(localStorage.getItem("AntiManagerWorkbenchPass")) //反欺诈主管
       }
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.applyId,
       }).then(res => {
-        this.ListParent = res.data
+        if (res.statusCode == 200) {
+          this.ListParent = res.data
+        } else {
+          this.$message.error(res.msg);
+        }
       });
     }
   }

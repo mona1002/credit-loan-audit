@@ -1,4 +1,5 @@
 <template>
+<!-- 反欺诈分屏 -->
   <div class="SplitScreen">
     <myHead></myHead>
     <div class="SplitScreen_content">
@@ -41,7 +42,7 @@
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <borrowerInformation v-if=" this.tabContent2==4"></borrowerInformation>
             <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
-            <cCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></cCreditForm>
+            <FMCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></FMCreditForm>
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
             <!-- 信审审批结论轨迹 空白 -->
             <!-- <CreditForm v-if=" this.tabContent2==8"></CreditForm> -->
@@ -61,7 +62,7 @@
   import myHead from "../header.vue"
   import AnitAudioVisual from './components/AnitAudioVisual.vue'; //工作台--》 av
   // import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配查看 --》 aV
-  import cCreditForm from "../FirstTrail/checkComponent/cCreditForm.vue"; //信审表
+  import FMCreditForm from "../FinalTrial/FinalMatchComponent/FMCreditForm.vue"; //信审表-与内部匹配打开的是同一个页面
   import aAntiConclusionPath from './components/aAntiConclusionPath.vue'; //反欺诈审批结论轨迹
   import aAprovalConclusion from './components/aAprovalConclusion.vue' //信审审批结论轨迹
   // --------------------------------------------------------------------------------------------
@@ -170,14 +171,18 @@
       //   this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
       //     id: this.tastwaitingPass.applyId,
       //   }).then(res => {
-      //     this.customInf = res.data;
+      // if (res.statusCode == 200) {
+      //   //     this.customInf = res.data;
+      // } else {
+      //   this.$message.error(res.msg);
+      // }
       //   });
       this.title = "影音资料";
     },
     components: {
       myHead,
       AnitAudioVisual,
-      cCreditForm,
+      FMCreditForm,
       aAntiConclusionPath,
       aAprovalConclusion,
       // aMAnitAudioVisual,

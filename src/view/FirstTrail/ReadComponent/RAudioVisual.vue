@@ -129,7 +129,11 @@
           applyId: this.localInf.applyId,
           pid: id
         }).then(res => {
-          this.ListDetails = res.data;
+          if (res.statusCode == 200) {
+            this.ListDetails = res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
         });
       },
       getImg(ind) {
@@ -267,9 +271,9 @@
         this.localInf = JSON.parse(localStorage.getItem("internalObj")) //初审-匹配查看
       } else if (this.judgeFlag.flag == '02') {
         this.localInf = JSON.parse(localStorage.getItem("FinalinternalObj")) //终审-匹配查看
-      }else if (this.judgeFlag.flag == '03') {
+      } else if (this.judgeFlag.flag == '03') {
         this.localInf = JSON.parse(localStorage.getItem("AntiinternalObj")) //反欺诈专员-匹配查看
-      }else if (this.judgeFlag.flag == '04') {
+      } else if (this.judgeFlag.flag == '04') {
         this.localInf = JSON.parse(localStorage.getItem("AntiManagerinternalObj")) //反欺诈主管-匹配查看
       }
       this.post("/productArchive/getProductArchiveParentList", {
@@ -278,7 +282,11 @@
         // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
         //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
       }).then(res => {
-        this.ListParent = res.data;
+        if (res.statusCode == 200) {
+          this.ListParent = res.data;
+        } else {
+          this.$message.error(res.msg);
+        }
       });
     }
   }

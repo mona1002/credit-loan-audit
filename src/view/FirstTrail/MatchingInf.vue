@@ -118,28 +118,27 @@
   </div>
 </template>
 <script>
- import myHead from "../header.vue"
+  import myHead from "../header.vue"
   import aut from "./checkComponent/aut"
   // 编辑
   // import AudioVisual from "./detailComponent/AudioVisual";
   import RAudioVisual from "./ReadComponent/RAudioVisual";
   import RAudioVisualLeft from "./ReadComponent/RAudioVisualLeft.vue";
-  import FMCreditForm from "../FinalTrial/FinalMatchComponent/FMCreditForm.vue";//信审表-终审-del初审人员-第一个
+  import FMCreditForm from "../FinalTrial/FinalMatchComponent/FMCreditForm.vue"; //信审表-终审-del初审人员-第一个
   import RborrowerInformationSetail from "./ReadComponent/RborrowerInformationSetail"; //借款人资料
   import RapplicationInformationDetail from "./ReadComponent/RapplicationInformationDetail"; //申请信息
   import RFinanceInformation from "./ReadComponent/RFinanceInformation"; //账务信息
-  import RAntiConclution from "./ReadComponent/RAntiConclution"; //反欺诈结论
   import RApprovalConclusion from "./ReadComponent/RApprovalConclusion"; //信审审批结论轨迹
-  import Rremark from "./ReadComponent/Rremark";//备注信息
+  import Rremark from "./ReadComponent/Rremark"; //备注信息
   import RprocessTrajectory from "./ReadComponent/RprocessTrajectory"; //流程轨迹
   import RcreditInvestigation from "./ReadComponent/RcreditInvestigation"; //实地征信
-  import aMAntiApplyInf from '../AntiFraud/matchComponent/aMAntiApplyInf.vue'//反欺诈结论
+  import aMAntiApplyInf from '../AntiFraud/matchComponent/aMAntiApplyInf.vue' //反欺诈结论
 
 
 
   import InternalMatch from "./InternalMatch";
   import borrowerInformation from "./detailComponent/borrowerInformation";
-  import PhoneCredit from "./PhoneCredit";//电话征信
+  import PhoneCredit from "./PhoneCredit"; //电话征信
   // 信审审批写此处
   import CreditApproval from "./CreditApproval";
   // 查询
@@ -162,8 +161,12 @@
         tabContent2: 3,
         tabActiveInd1: 0,
         tabActiveInd2: 3,
-        items1: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹","反欺诈结论", "财务信息","流程轨迹","审批结论轨迹"],
-        items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹", "反欺诈结论", "财务信息","流程轨迹","审批结论轨迹"],
+        items1: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹", "反欺诈结论", "财务信息", "流程轨迹",
+          "审批结论轨迹"
+        ],
+        items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹", "反欺诈结论", "财务信息", "流程轨迹",
+          "审批结论轨迹"
+        ],
         tab1Index: 0,
         tab2Index: 3,
         flag1: [true, true, true, false, true, true, true, true, true],
@@ -268,30 +271,33 @@
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.matchApplyId,
       }).then(res => {
-        this.customInf = res.data;
+        if (res.statusCode == 200) {
+          this.customInf = res.data;
+        } else {
+          this.$message.error(res.msg);
+        }
       });
       this.title = "影音资料";
     },
     components: {
-       myHead,
+      myHead,
 
       // 编辑
       RAudioVisual,
       RAudioVisualLeft,
       FMCreditForm,
       RapplicationInformationDetail,
-      RborrowerInformationSetail,//借款人资料
+      RborrowerInformationSetail, //借款人资料
       RFinanceInformation, //账务信息
-      RAntiConclution, //反欺诈结论
       RApprovalConclusion, //信审审批结论归结
-      Rremark,// 备注信息
-      RcreditInvestigation,//实地征信
-      aMAntiApplyInf,//反欺诈结论
+      Rremark, // 备注信息
+      RcreditInvestigation, //实地征信
+      aMAntiApplyInf, //反欺诈结论
       InternalMatch,
       borrowerInformation,
       PhoneCredit,
 
-      
+
       // 信审审批
       CreditApproval,
       // 查询

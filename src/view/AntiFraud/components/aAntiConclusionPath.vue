@@ -2,7 +2,7 @@
   <div date="aAntiConclusionPath">
     <!-- 反欺诈审批结论轨迹=========================默认显示1-条？分页？ -->
     <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="auditResultTxt" label="审批结果"  min-width="35">
+      <el-table-column prop="auditResultTxt" label="审批结果" min-width="35">
       </el-table-column>
       <el-table-column prop="mainreaName" label="主原因" min-width="35">
       </el-table-column>
@@ -22,7 +22,7 @@
     data() {
       return {
         tastwaitingPass: '',
-        tableData:[]
+        tableData: []
       }
     },
     mounted() {
@@ -36,10 +36,14 @@
         appinfoId: this.tastwaitingPass.appinfoId,
         // appinfoId: "00542",
       }).then(res => {
-        this.tableData = res.data;
+        if (res.statusCode == 200) {
+          this.tableData = res.data;
+        } else {
+          this.$message.error(res.msg);
+        }
       });
-      }
     }
+  }
 
 </script>
 <style scoped>

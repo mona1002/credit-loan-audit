@@ -39,7 +39,11 @@
         appinfoId: this.MatchInf.matchApplyId,
         // appinfoId: "00542",
       }).then(res => {
-        this.tableData = res.data;
+        if (res.statusCode == 200) {
+          this.tableData = res.data;
+        } else {
+          this.$message.error(res.msg);
+        }
       });
     }
   }
