@@ -71,6 +71,9 @@ import aAntiApplyInf from '@/view/AntiFraud/components/aAntiApplyInf.vue'
 // -------------------------复议---------------------
 import ReconsiderApply from '../view/Reconsider/ReconsiderComponents/ReconsiderApply.vue'//复议申请
 
+// -------------------------流程监控---------------------
+import processMoni from '../view/processMoni/processMoni.vue'
+
 
 Vue.use(Router)
 
@@ -234,10 +237,12 @@ const routes = [{
   path:'/ReconsiderApply',
   component:ReconsiderApply
 },
-// {
-//   path:'/ReconsiderApply',
-//   component:ReconsiderApply
-// },
+
+// ---------------------流程监控---------
+{
+  path: '/processMoni',
+  component: processMoni
+}
 
 
 ];
