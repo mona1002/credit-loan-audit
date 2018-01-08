@@ -1108,6 +1108,11 @@ overflow-x: hidden
 .AntiCaseNum .redact .el-dialog__body{
 padding: 0;
 }
+/* 复议申请-最后一个折叠div border-bottom */
+.aAntiApplyInf .el-collapse-item:last-of-type .el-collapse-item__wrap{
+  border-bottom: none;
+}
+
 /* 借款人资料表格内容居中 */
 
 .borrowerInformationSetail .el-table th {

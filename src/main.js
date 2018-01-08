@@ -37,3 +37,33 @@ Vue.filter('dateFilter',function(value){
 	// console.log(new Date(value).toLocaleString().replace(/\//g,'-').match(/\d{4}\-\d{2}\-\d{1,2}/)[0])
 	return new Date(value).toLocaleString().replace(/\//g,'-').match(/\d{4}\-\d{2}\-\d{1,2}/)[0]
 })
+
+// 加入 检测
+var fundebug=require("fundebug-javascript");
+fundebug.apikey="347f590e75f32983d0b6d5f1edbc193c12273337cf7bc082781ce64095c0eddb"
+
+// vue2.2.0+ 提供的  errorHandler 
+function formatComponentName(vm)
+{
+  if (vm.$root === vm) return 'root';
+
+  var name = vm._isVue ? (vm.$options && vm.$options.name) || (vm.$options && vm.$options._componentTag) : vm.name;
+  return (name ? 'component <' + name + '>' : 'anonymous component') + (vm._isVue && vm.$options && vm.$options.__file ? ' at ' + (vm.$options && vm.$options.__file) : '');
+
+}
+
+Vue.config.errorHandler = function(err, vm, info)
+{
+  var componentName = formatComponentName(vm);
+  var propsData = vm.$options && vm.$options.propsData;
+
+  fundebug.notifyError(err,
+  {
+      metaData:
+      {
+          componentName: componentName,
+          propsData: propsData,
+          info: info
+      }
+   });
+};

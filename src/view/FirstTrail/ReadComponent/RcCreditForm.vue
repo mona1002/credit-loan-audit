@@ -1,5 +1,5 @@
 <template>
-<!-- 现匹配查看页面-用终身里面的信审表-应该为修改前最新版，待确认 -->
+  <!-- 现匹配查看页面-用终身里面的信审表- (此页面暂时无用，带删掉/备用)      应该为修改前最新版，待确认 =-->
   <div class="CreditForm">
     <el-collapse v-model="activeNames">
       <!-- 网上查询信息 -->
@@ -746,6 +746,74 @@
       }
     },
     methods: {
+      formatSC(el, val) {
+        switch (el) {
+          case "月还款":
+            this.FormData.fbalance = val;
+            break;
+          case "借款金额":
+            this.FormData.iloanAmt = val;
+            break;
+          case "月均工资":
+            this.FormData.avgsalaryamt = val;
+            break;
+          case "注册资金":
+            this.FormData.regcapitalamt = val;
+            break;
+          case "月利润":
+            this.FormData.profitamountmamt = val;
+            break;
+          case "月还款/租金":
+            this.FormData.monthrentamt = val;
+            break;
+          case "近一年利润":
+            this.FormData.oneYearProfitamt = val;
+            break;
+          case "配偶收入":
+            this.FormData.spouseIncome = val;
+            break;
+          case "生活费支付":
+            this.FormData.childPaycostamt = val;
+            break;
+          case "父母收入":
+            this.FormData.parentIncome = val;
+            break;
+          case "开销":
+            this.FormData.fconsumption = val;
+            break;
+        }
+      },
+      acquire(val, name) {
+        if (val == null || val == '') {
+          return
+        } else {
+          if (val.toString().indexOf('.') == -1) {
+            val = val + "." + "0" + '0';
+            this.formatSC(name, val);
+          } else if (val.toString().indexOf('.') != -1) {
+            if (val.toString().split(".")[1].length < 2) {
+              val = val + "0";
+              this.formatSC(name, val);
+            } else {
+              val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
+              this.formatSC(name, val);
+            }
+          }
+        }
+      },
+      mountM() {
+        this.acquire(this.FormData.fbalance, '月还款');
+        this.acquire(this.FormData.regcapitalamt, '注册资金');
+        this.acquire(this.FormData.monthrentamt, '月还款/租金');
+        this.acquire(this.FormData.oneYearProfitamt, '近一年利润');
+        this.acquire(this.FormData.profitamountmamt, '月利润');
+        this.acquire(this.FormData.spouseIncome, '配偶收入');
+        this.acquire(this.FormData.parentIncome, '父母收入');
+        this.acquire(this.FormData.fconsumption, '开销');
+        this.acquire(this.FormData.childPaycostamt, '生活费支付');
+        this.acquire(this.FormData.avgsalaryamt, '月均工资');
+        this.acquire(this.FormData.iloanAmt, '借款金额');
+      },
       NewPage(ind) {
         console.log(ind);
         switch (ind) {
@@ -785,7 +853,7 @@
             break;
           case 1:
             val == 0 ? this.InternetShow.commentS1 = false : this.InternetShow.commentS1 = true;
-            break; 
+            break;
           case 2:
             val == 0 ? this.InternetShow.commentS2 = false : this.InternetShow.commentS2 = true;
             break;
@@ -851,37 +919,41 @@
       },
     },
     mounted() {
-       this.getParams = JSON.parse(localStorage.getItem("internalObj")) //初审
-       
+      this.getParams = JSON.parse(localStorage.getItem("internalObj")) //初审 
       // 获取查询列表数据
       this.post("/creauditInfo/queryCreauditInfoObj", {
         applyId: this.getParams.matchApplyId,
         // applyId: "00542",
       }).then(res => {
-        this.FormData = res.data;
-        this.AreaNPercent();
-        this.mountJ(0, res.data.wbeexEcuted);
-        this.mountJ(1, res.data.wnetHirecom);
-        this.mountJ(2, res.data.wnetEcutedBrea);
-        this.mountJ(3, res.data.wnetHirecomBrea);
-        this.mountJ(4, res.data.wnetPhone);
-        this.mountJ(5, res.data.wnetHirecomName);
-        this.mountJ(6, res.data.wnetHirecomPhone);
-        this.mountJ(7, res.data.wnetAddrandEstate);
-        this.mountJ(8, res.data.wnetHirecomAddress);
-        this.mountJ(9, res.data.wnetCompany);
-        this.mountJ(10, res.data.wnetAddrstate);
-        this.mountJ(11, res.data.iisself);
-        this.mountJ(12, res.data.privateOwnerFlag);
-        this.mountJ(13, res.data.fmarrflag);
-        this.mountJ(14, res.data.spouseWork);
-        this.mountJ(15, res.data.spouseSamecity);
-        this.mountJ(16, res.data.childFlag);
-        this.mountJ(17, res.data.childIspaycost);
-        this.mountJ(18, res.data.parentIsliving);
-        this.mountJ(19, res.data.brothersIfhas);
-        this.mountJ(20, res.data.aisresident);
-        this.mountJ(21, res.data.iloanBefore);
+        if (res.statusCode == 200) {
+          this.FormData = res.data;
+          this.AreaNPercent();
+          this.mountM();
+          this.mountJ(0, res.data.wbeexEcuted);
+          this.mountJ(1, res.data.wnetHirecom);
+          this.mountJ(2, res.data.wnetEcutedBrea);
+          this.mountJ(3, res.data.wnetHirecomBrea);
+          this.mountJ(4, res.data.wnetPhone);
+          this.mountJ(5, res.data.wnetHirecomName);
+          this.mountJ(6, res.data.wnetHirecomPhone);
+          this.mountJ(7, res.data.wnetAddrandEstate);
+          this.mountJ(8, res.data.wnetHirecomAddress);
+          this.mountJ(9, res.data.wnetCompany);
+          this.mountJ(10, res.data.wnetAddrstate);
+          this.mountJ(11, res.data.iisself);
+          this.mountJ(12, res.data.privateOwnerFlag);
+          this.mountJ(13, res.data.fmarrflag);
+          this.mountJ(14, res.data.spouseWork);
+          this.mountJ(15, res.data.spouseSamecity);
+          this.mountJ(16, res.data.childFlag);
+          this.mountJ(17, res.data.childIspaycost);
+          this.mountJ(18, res.data.parentIsliving);
+          this.mountJ(19, res.data.brothersIfhas);
+          this.mountJ(20, res.data.aisresident);
+          this.mountJ(21, res.data.iloanBefore);
+        } else {
+          this.$message.error(res.msg);
+        }
       });
       // 省    
       // this.get("/credit/queryProvince", {}).then(res => {
@@ -950,6 +1022,7 @@
   /*------------------------------------------- */
   /* 各自 */
   /* ------------------------------上网查询 +核实身份--------------------------- */
+
   .CreditForm_InternetInf p,
   /*  上网查询 */
 
@@ -971,6 +1044,7 @@
     vertical-align: middle;
   }
   /* --------------------------工作信息 + 私营企业--------------------- */
+
   .CheckId_right_label
   /* 第三列p */
 

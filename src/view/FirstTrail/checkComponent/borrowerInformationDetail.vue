@@ -548,7 +548,7 @@
 				    <ol>
 				    	<li>
 				    		<label>其他:</label>
-				    		<el-tooltip class="item" effect="dark" :content="otherInfo.content" :disabled="otherInfo.content==''" placement="top">
+				    		<el-tooltip class="item" effect="dark" :content="otherInfo.content" :disabled="otherInfo.content==null" placement="top">
 						      <div>{{otherInfo.content}}</div>
 						    </el-tooltip>
 				    	</li>
