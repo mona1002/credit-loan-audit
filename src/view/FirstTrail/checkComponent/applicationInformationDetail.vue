@@ -180,11 +180,15 @@
 				</ul>
 				<ul>
 					<li class="province" style="width:66.6%">
-						<label>户口所在地：</label>
-						<span class="spans">{{accepCusBasicInfo.homeProvinceName}}</span>
-						<span class="spans">{{accepCusBasicInfo.homeCityName}}</span>
-						<span class="spans">{{accepCusBasicInfo.homeCountyName}}</span>
-						<span>{{accepCusBasicInfo.homeAddress}}</span>
+						<label class="ellipsis">户口所在地：</label>
+						<el-tooltip class="item" effect="dark" :content="accepCusBasicInfo.homeDetailAddr" :disabled="accepCusBasicInfo.homeDetailAddr==null" placement="top-start">
+					      <div class="textBox">{{accepCusBasicInfo.homeDetailAddr}}</div>
+					    </el-tooltip>
+						
+						<!-- <span class="spans">{{accepCusBasicInfo.homeProvinceName}}</span>
+						<span class="spans">南平市{{accepCusBasicInfo.homeCityName}}</span>
+						<span class="spans">察布查尔锡伯自治县{{accepCusBasicInfo.homeCountyName}}</span>
+						<span>{{accepCusBasicInfo.homeAddress}}</span> -->
 					</li>
 					<li>
 						<label>户口所在地邮编：</label>
@@ -193,11 +197,15 @@
 				</ul>
 				<ul>
 					<li class="province" style="width:66.6%">
-						<label>现住宅地址：</label>
-						<span class="spans">{{accepCusBasicInfo.liveProvinceName}}</span>
+						<label class="ellipsis">现住宅地址：</label>
+						<!-- <span class="spans">{{accepCusBasicInfo.liveProvinceName}}</span>
 						<span class="spans">{{accepCusBasicInfo.liveCityName}}</span>
-						<span class="spans">{{accepCusBasicInfo.liveCountyName}}</span>
-						<span class="spans">{{accepCusBasicInfo.liveAddress}}</span>
+						<span class="spans">察布查尔锡伯自治县{{accepCusBasicInfo.liveCountyName}}</span>
+						<span>{{accepCusBasicInfo.liveAddress}}</span> -->
+						<el-tooltip class="item" effect="dark" :content="accepCusBasicInfo.liveAddr" :disabled="accepCusBasicInfo.liveAddr==null" placement="top-start">
+					      <div class="textBox">{{accepCusBasicInfo.liveAddr}}</div>
+					    </el-tooltip>
+						
 					</li>
 					<li>
 						<label>住宅地邮编：</label>
@@ -279,10 +287,13 @@
 					<ul>
 						<li class="province" style="width:66.6%">
 						<label>投保地点：</label>
-						<span>{{accepCusBasicInfo.insurProvinceName}}</span>
+						<el-tooltip class="item" effect="dark" :content="insurAddr" :disabled="insurAddr==null" placement="top-start">
+					      <div class="textBox">{{insurAddr}}</div>
+					    </el-tooltip>
+						<!-- <span>{{accepCusBasicInfo.insurProvinceName}}</span>
 						<span>{{accepCusBasicInfo.insurCityName}}</span>
 						<span>{{accepCusBasicInfo.insurCountyName}}</span>
-						<span>{{accepCusBasicInfo.insurAddress}}</span>
+						<span>{{accepCusBasicInfo.insurAddress}}</span> -->
 						</li>
 						<li>	
 						</li>
@@ -644,8 +655,10 @@
 				</template>
 				<ul class="firstUl">
 					<li style="width:66.6%;">
-						<label style="float:left;">工作单位：</label>
-					    <div class="textBox">{{accepCusWorkInfo.workName}}</div>
+						<label class="ellipsis">工作单位：</label>
+					    <el-tooltip class="item" effect="dark" :content="accepCusWorkInfo.workName" :disabled="accepCusWorkInfo.workName==null" placement="top-start">
+					      <div class="textBox">{{accepCusWorkInfo.workName}}</div>
+					    </el-tooltip>
 					</li>
 					<li>
 						<label>单位性质：</label>
@@ -654,11 +667,14 @@
 				</ul>
 				<ul>
 					<li style="width:66.6%;">
-						<label>单位地址：</label>
-						<span class="spans">{{accepCusWorkInfo.workProvinceName}}</span>
+						<label class="ellipsis">单位地址：</label>
+						<!-- <span class="spans">{{accepCusWorkInfo.workProvinceName}}</span>
 						<span class="spans">{{accepCusWorkInfo.workCityName}}</span>
 						<span class="spans">{{accepCusWorkInfo.workCountyName}}</span>
-						<span>{{accepCusWorkInfo.workAddress}}</span>
+						<span>{{accepCusWorkInfo.workAddress}}</span> -->
+						<el-tooltip class="item" effect="dark" :content="accepCusWorkInfo.workAddr" :disabled="accepCusWorkInfo.workAddr==null" placement="top-start">
+					      <div class="textBox">{{accepCusWorkInfo.workAddr}}</div>
+					    </el-tooltip>
 					</li>
 					<li>
 						<label>单位地址邮编：</label>
@@ -727,8 +743,10 @@
 						<span>{{accepCusWorkInfo.payFormTxt}}</span>
 					</li>
 					<li style="width:66.6%;">
-						<label style="float:left;">前单位名称：</label>
-						<div class="textBox">{{accepCusWorkInfo.befWorkName}}</div>
+						<label class="ellipsis">前单位名称：</label>
+						<el-tooltip class="item" effect="dark" :content="accepCusWorkInfo.befWorkName" :disabled="accepCusWorkInfo.befWorkName==null" placement="top-start">
+					      <div class="textBox">{{accepCusWorkInfo.befWorkName}}</div>
+					    </el-tooltip>
 					</li>
 				</ul>
 				<ul>
@@ -858,6 +876,8 @@
 
 				applyId:'',
 				judgeFlag:'',
+				//您的个人信息 投保地点
+				insurAddr:'',
 			};
 		},
 		mounted(){
@@ -884,15 +904,48 @@
 		        /*console.log(res);*/
 		        /*房产信息*/
 		        this.accepCusEstates=res.data.accepCusEstates;
+		        for(var i=0;i<this.accepCusEstates.length;i++){
+		        	//console.log(this.accepCusEstates[i].monthlyPay);
+		        	//建筑单价 保留两位小数点
+		        	if(this.accepCusEstates[i].unitPrice != null){
+		        		this.accepCusEstates[i].unitPrice = this.formatNumber(this.accepCusEstates[i].unitPrice,2,0);
+		       		 };
+		        	
+		        	//贷款余额 保留两位小数点
+		        	if(this.accepCusEstates[i].restLoans != null){
+		        		this.accepCusEstates[i].restLoans = this.formatNumber(this.accepCusEstates[i].restLoans,2,0);
+		       		 };
+		        	//月供 保留两位小数点
+		        	if(this.accepCusEstates[i].monthlyPay != null){
+			        	this.accepCusEstates[i].monthlyPay = this.formatNumber(this.accepCusEstates[i].monthlyPay,2,0);
+			        };
+		        	//console.log(this.accepCusEstates[i].monthlyPay);
+		        };
 
 		        /*车辆信息*/
 		        this.accepCusCarInfos=res.data.accepCusCarInfos;
+		        for(var i=0;i<this.accepCusCarInfos.length;i++){
+		        	//车辆购置价 保留两位小数点
+		        	if(this.accepCusCarInfos[i].carPrice != null){
+			        	this.accepCusCarInfos[i].carPrice = this.formatNumber(this.accepCusCarInfos[i].carPrice,2,0);
+			        };
+			        //月供 保留两位小数点
+		        	if(this.accepCusCarInfos[i].monthlyPay != null){
+			        	this.accepCusCarInfos[i].monthlyPay = this.formatNumber(this.accepCusCarInfos[i].monthlyPay,2,0);
+			        };
+			        //贷款余额 保留两位小数点
+		        	if(this.accepCusCarInfos[i].restLoans != null){
+			        	this.accepCusCarInfos[i].restLoans = this.formatNumber(this.accepCusCarInfos[i].restLoans,2,0);
+			        };
+		        }
 
 		        /*您的借款需求*/
 		        if(res.data.accepApplyLoan==null){
 		        	this.accepApplyLoan=this.accepApplyLoan
 		        }else{
 		        	this.accepApplyLoan=res.data.accepApplyLoan;
+		        	this.accepApplyLoan.loanAmt = this.formatNumber(this.accepApplyLoan.loanAmt,2,0);
+		        	this.accepApplyLoan.eachTermAmt = this.formatNumber(this.accepApplyLoan.eachTermAmt,2,0);		        	
 		        }
 
 		        /*您的个人信息*/
@@ -900,16 +953,101 @@
 		        	this.accepCusBasicInfo=this.accepCusBasicInfo
 		        }else{
 		        	this.accepCusBasicInfo=res.data.accepCusBasicInfo;
+		        	//投保地点
+		        	this.insurAddr = this.accepCusBasicInfo.insurProvinceName + this.accepCusBasicInfo.insurCountyName + this.accepCusBasicInfo.insurAddress + this.accepCusBasicInfo.insurAddress
+		        	//每月家庭支出
+		        	if(this.accepCusBasicInfo.payAmt != null){
+			        	this.accepCusBasicInfo.payAmt = this.formatNumber(this.accepCusBasicInfo.payAmt,2,0);
+			        };
+		        	//单张信用卡最高额度
+		        	if(this.accepCusBasicInfo.cardMaxAmt != null){
+			        	this.accepCusBasicInfo.cardMaxAmt = this.formatNumber(this.accepCusBasicInfo.cardMaxAmt,2,0);
+			        };
+		        	//期缴保费
+		        	if(this.accepCusBasicInfo.eachPayAmt != null){
+			        	this.accepCusBasicInfo.eachPayAmt = this.formatNumber(this.accepCusBasicInfo.eachPayAmt,2,0);
+			        };
+		        	//总保额
+		        	if(this.accepCusBasicInfo.totalPayAmt != null){
+		        		this.accepCusBasicInfo.totalPayAmt = this.formatNumber(this.accepCusBasicInfo.totalPayAmt,2,0);	
+		        	};	       
 		        }
 
 		        /*私人业主信息*/
-		        this.accepCusPrivate=res.data.accepCusPrivate;
-
+		        if(this.accepCusPrivate == null){
+		        	this.accepCusPrivate =this.accepCusPrivate;
+		        }else{
+			        this.accepCusPrivate=res.data.accepCusPrivate;
+			        //注册资金
+			        if(this.accepCusBasicInfo.regCapitalAmt != null){
+			        	this.accepCusBasicInfo.regCapitalAmt = this.formatNumber(this.accepCusBasicInfo.regCapitalAmt,2,0);
+			    	};
+			        //每月净利润额
+			        if(this.accepCusBasicInfo.profitAmountMAmt != null){
+			        	this.accepCusBasicInfo.profitAmountMAmt = this.formatNumber(this.accepCusBasicInfo.profitAmountMAmt,2,0);
+			    	};
+			        //月还款额/月租金
+			        if(this.accepCusBasicInfo.monthRentAmt != null){
+			        	this.accepCusBasicInfo.monthRentAmt = this.formatNumber(this.accepCusBasicInfo.monthRentAmt,2,0);
+			    	};
+			        //淡季销售额
+			        if(this.accepCusBasicInfo.slowMonthSaleAmt != null){
+			        	this.accepCusBasicInfo.slowMonthSaleAmt = this.formatNumber(this.accepCusBasicInfo.slowMonthSaleAmt,2,0);
+			    	};
+			        //旺季销售额
+			        if(this.accepCusBasicInfo.peakMonthSaleAmt != null){
+			        	this.accepCusBasicInfo.peakMonthSaleAmt = this.formatNumber(this.accepCusBasicInfo.peakMonthSaleAmt,2,0);
+			    	};
+			        //平季销售额
+			        if(this.accepCusBasicInfo.avgMonthSaleAmt != null){
+			        	this.accepCusBasicInfo.avgMonthSaleAmt = this.formatNumber(this.accepCusBasicInfo.avgMonthSaleAmt,2,0);
+			    	};
+			        //企业近一年利润
+			        if(this.accepCusBasicInfo.oneYearProfitAmt != null){
+			        	this.accepCusBasicInfo.oneYearProfitAmt = this.formatNumber(this.accepCusBasicInfo.oneYearProfitAmt,2,0);
+			    	};
+			        //企业近两年利润
+			        if(this.accepCusBasicInfo.twoYearProfitAmt != null){
+			        	this.accepCusBasicInfo.twoYearProfitAmt = this.formatNumber(this.accepCusBasicInfo.twoYearProfitAmt,2,0);
+			    	};
+			        //企业近三年利润
+			        if(this.accepCusBasicInfo.threeYearProfitAmt != null){
+			        	this.accepCusBasicInfo.threeYearProfitAmt = this.formatNumber(this.accepCusBasicInfo.threeYearProfitAmt,2,0);
+			        };
+			        //企业近一年纳税额
+			        if(this.accepCusBasicInfo.oneYearTaxAmt != null){
+			        	this.accepCusBasicInfo.oneYearTaxAmt = this.formatNumber(this.accepCusBasicInfo.oneYearTaxAmt,2,0);
+			    	};
+			        //企业近两年纳税额
+			        if(this.accepCusBasicInfo.twoYearTaxAmt != null){
+			        	this.accepCusBasicInfo.twoYearTaxAmt = this.formatNumber(this.accepCusBasicInfo.twoYearTaxAmt,2,0);
+			    	};
+			        //企业近三年纳税额
+			        if(this.accepCusBasicInfo.threeYearTaxAmt != null){
+			        	this.accepCusBasicInfo.threeYearTaxAmt = this.formatNumber(this.accepCusBasicInfo.threeYearTaxAmt,2,0);	
+			    	};
+		    	};
 		        /*您的工作信息*/
 		        if(res.data.accepCusWorkInfo==null){
 		        	this.accepCusWorkInfo=this.accepCusWorkInfo
 		        }else{
 		        	this.accepCusWorkInfo=res.data.accepCusWorkInfo;
+		        	//社保缴纳基数
+		        	if(this.accepCusWorkInfo.insureBase != null){
+		        		this.accepCusWorkInfo.insureBase = this.formatNumber(this.accepCusWorkInfo.insureBase,2,0);
+		        	};
+		        	//公积金缴纳基数
+		        	if(this.accepCusWorkInfo.fundBase != null){
+		        		this.accepCusWorkInfo.fundBase = this.formatNumber(this.accepCusWorkInfo.fundBase,2,0);
+		        	};
+		        	//月均工资
+		        	if(this.accepCusWorkInfo.avgSalaryAmt != null){
+		        		this.accepCusWorkInfo.avgSalaryAmt = this.formatNumber(this.accepCusWorkInfo.avgSalaryAmt,2,0);
+		        	};
+		        	//其他收入
+		        	if(this.accepCusWorkInfo.otherIncome != null){
+			        	this.accepCusWorkInfo.otherIncome = this.formatNumber(this.accepCusWorkInfo.otherIncome,2,0);
+			        };
 		        }
 
 		        /*联系人信息*/
@@ -964,6 +1102,48 @@
 		 	handleChange(){
 
 		 	},
+		 	//保留两位小数 整数千分位
+			formatNumber(num,cent,isThousand) {
+				//console.log(num);
+				/*if(num == null){
+					console.log(num);
+				};*/
+				//if(num != null || num != ''){
+				    num = num.toString().replace(/\$|\,/g,'');
+				 
+				  	// 检查传入数值为数值类型
+				  	if(isNaN(num))
+				    	num = "0";
+				 
+				  	// 获取符号(正/负数)
+				  	let sign = (num == (num = Math.abs(num)));
+
+				  	num = Math.floor(num*Math.pow(10,cent)+0.50000000001); // 把指定的小数位先转换成整数.多余的小数位四舍五入
+				  	let cents = num%Math.pow(10,cent);       // 求出小数位数值
+				  	num = Math.floor(num/Math.pow(10,cent)).toString();  // 求出整数位数值
+				  	cents = cents.toString();        // 把小数位转换成字符串,以便求小数位长度
+				 
+				  	// 补足小数位到指定的位数
+				  	while(cents.length<cent)
+				    	cents = "0" + cents;
+				 
+			    	for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
+			      		num = num.substring(0,num.length-(4*i+3))+','+ num.substring(num.length-(4*i+3));
+				  
+				  	if (cent > 0){
+				  		//console.log(cent);
+				  		//console.log(((sign)?'':'-') + num + '.' + cents);
+				  		if(sign == true){
+				  			return (((sign)?'':'-') + num + '.' + cents);
+				  		}else if(sign == false){
+				  			return '0.00'
+				  		}
+				  	}else{
+				  		//console.log(((sign)?'':'-') + num);
+				    	return (((sign)?'':'-') + num);
+				    }
+				//};
+			},
 		},
 	}
 </script>
@@ -1020,13 +1200,25 @@
 		height: 30px;
 		border: 1px solid #d8dce5; 
 	}
+	.ellipsis{
+		float: left;
+		line-height: 30px;
+	}
 	.textBox{
-		width: 66.6%;
+		width: calc( 100% - 166px );
 		height: 30px;
+		line-height: 30px;
 		display: inline-block;
+		overflow: hidden;
+		text-overflow:ellipsis;
+		white-space: nowrap;
+		float: left;
 	}
 	.spans{
 		padding-right: 20px;
+		display: inline-block;
+		width: 150px;
+		height: 100%;
 	}
 	/* 折叠面板头部背景色和icon */
 	.icon_hat{
