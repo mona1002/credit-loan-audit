@@ -217,7 +217,7 @@
               </p>
               <p v-show="this.checkId.loanNot">
                 <label class=" InternetInf_right_label "> 借款期限[月]： </label>
-                <span class="detail_inf">{{this.FormData.iloanTerm }} </span>
+                <span class="detail_inf" style="border:none;padding:0;height:auto;">{{this.FormData.iloanTerm }} </span>
               </p>
             </li>
             <li>
@@ -267,7 +267,7 @@
                 <label class="InternetInf_left_label "> 职位级别： </label>
                 <el-tooltip class="item" effect="dark" :disabled="this.FormData.workPost==null||this.FormData.workPost==''" :content="this.FormData.workPost"
                   placement="top-start">
-                  <span class="detail_inf ComAddr">{{this.FormData.workPost }} </span>
+                  <span class="detail_inf elips">{{this.FormData.workPost }} </span>
                 </el-tooltip>
               </p>
               <p>
@@ -298,7 +298,7 @@
                 <label class="InternetInf_left_label ">单位地址 ：</label>
                 <el-tooltip class="item" effect="dark" :disabled="this.FormData.addressMsg==null||this.FormData.addressMsg==''" :content="this.FormData.addressMsg"
                   placement="top-start">
-                  <span class="detail_inf ComAddr">{{this.FormData.addressMsg}} </span>
+                  <span class="detail_inf elips">{{this.FormData.addressMsg}} </span>
                 </el-tooltip>
               </p>
               <p>
@@ -311,7 +311,7 @@
                 <label class="InternetInf_left_label">前单位名称：</label>
                 <el-tooltip class="item" effect="dark" :disabled="this.FormData.hirelastComname==null||this.FormData.hirelastComname==''"
                   :content="this.FormData.hirelastComname" placement="top-start">
-                  <span class="detail_inf ComAddr">{{this.FormData.hirelastComname }} </span>
+                  <span class="detail_inf elips">{{this.FormData.hirelastComname }} </span>
                 </el-tooltip>
               </p>
               <p>
@@ -390,7 +390,7 @@
                 <label class="InternetInf_right_label">第一供销商：</label>
                 <el-tooltip class="item" effect="dark" :disabled="this.FormData.firstSuppliers==null||this.FormData.firstSuppliers==''" :content="this.FormData.firstSuppliers"
                   placement="top-start">
-                  <span class="detail_inf ComAddr">{{this.FormData.firstSuppliers }} </span>
+                  <span class="detail_inf elips">{{this.FormData.firstSuppliers }} </span>
                 </el-tooltip>
               </p>
               <p>
@@ -432,7 +432,7 @@
               </p>
               <p>
                 <label class="InternetInf_right_label"> 配偶收入情况[月/元]： </label>
-                <span class="detail_inf" style="border:none;height:auto;">{{this.FormData.spouseIncome }} </span>
+                <span class="detail_inf" style="border:none;verticalAlign:middle;height:auto;">{{this.FormData.spouseIncome }} </span>
               </p>
             </li>
             <li v-show=" this.marriage.couple">
@@ -487,7 +487,7 @@
               </p>
               <p>
                 <label class="InternetInf_right_label"> 是否支付其生活费： </label>
-                <span class="detail_inf" style="border:none;height:auto;">{{this.FormData.childIspaycosttext }} </span>
+                <span class="detail_inf" style="border:none;vertiAlign:middle;height:auto;">{{this.FormData.childIspaycosttext }} </span>
               </p>
             </li>
             <li v-show="this.Children.PayAlimony">
@@ -573,7 +573,7 @@
               </p>
               <p class="bottom">
                 <label class="InternetInf_right_label">可以承受的月还款[元]： </label>
-                <span class="detail_inf" style="border:none;height:auto;">{{this.FormData.fbalance }} </span>
+                <span class="detail_inf" style="border:none;verticalAlign:middle;height:auto;">{{this.FormData.fbalance }} </span>
               </p>
             </li>
           </ul>
@@ -960,8 +960,6 @@
         }
       },
       acquire(val, name) {
-
-      console.log(val)
         if (val == null || val == '') {
           return
         } else {
@@ -1375,7 +1373,15 @@
     padding: 5px 10px;
     border-radius: 4px;
   }
-
+  /* 省略号 */
+  .elips {
+    width: calc( 100% - 197px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+  /* 第一经销商 */
   .Suppliers {
     width: calc( 100% - 205px);
   }
@@ -1383,12 +1389,10 @@
 
   .distributor {
     width: calc( 100% - 155px);
-    vertical-align: top;
-    height: 60px;
-    overflow: auto;
-    border: 1px solid #d8dce5;
-    padding: 5px 10px;
-    border-radius: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
   }
   /*-------------------- 核对现住址-------------------------- */
 
