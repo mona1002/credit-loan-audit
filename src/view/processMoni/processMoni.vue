@@ -614,7 +614,7 @@ export default {
               type: 'success'
             })
             this.itemOfLists.toUser = '';
-            this.getProcessMonitorList(this.queryParam);
+            // this.getProcessMonitorList(this.queryParam);
           }else{
             this.$message({
               message: '操作失败！',
