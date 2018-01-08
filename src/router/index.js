@@ -211,6 +211,7 @@ const routes = [{
 // 反欺诈 申请信息
 {
   path:'/AntiApplyEdit',
+  name:'AntiApplyEdit',
   component:AntiApplyEdit
 },
 {
