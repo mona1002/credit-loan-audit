@@ -1062,7 +1062,7 @@ export default {
         custId: '', //客户ID
         custNo: this.custNo, //客户编号
         applyCustId: '', //申请客户ID（申请登记-个人信息）
-        applyConclusion: '00',
+        applyConclusion: this.applyConclusion,
         ploanOperId: '', // 批准人员
         srcPloanAmt: this.srcPloanAmt, // 信审批准额度
         creditDebitRate: this.creditDebitRate, // 信用负债率
