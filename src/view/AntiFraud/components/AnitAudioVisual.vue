@@ -268,22 +268,18 @@
     mounted() {
       console.log("影音资料右")
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      //   if (this.judgeFlag.flag == '01') {
-      //     this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
-      //   } else if (this.judgeFlag.flag == '02') {
-      //     this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-      //   }else 
       if (this.judgeFlag.flag == '03') {
-        this.localInf = JSON.parse(localStorage.getItem("AntiWorkbenchPass")) //反欺诈专员
+        this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
       } else if (this.judgeFlag.flag == '04') {
-        this.localInf = JSON.parse(localStorage.getItem("AntiManagerWorkbenchPass")) //反欺诈主管
+        this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
       }
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.applyId,
       }).then(res => {
         if (res.statusCode == 200) {
-          this.ListParent = res.data
+          this.ListParent = res.data;
+          // console.log(this.ListParent)
         } else {
           this.$message.error(res.msg);
         }
