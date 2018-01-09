@@ -6,6 +6,15 @@
       <div class="main_left">
         <h2>
           <i class="el-icon-edit"> </i>常用 </h2>
+          <router-link to="/processMoni?creditApp00"><el-button type="primary">信审未分配监控</el-button></router-link>
+          <router-link to="/processMoni?creditApp01"><el-button type="primary">信审已分配监控</el-button></router-link>
+          <router-link to="/processMoni?creditApp03"><el-button type="primary">信审已完成监控</el-button></router-link>
+          <router-link to="/processMoni?reconsiderApp00"><el-button type="primary">复议未分配监控</el-button></router-link>
+          <router-link to="/processMoni?reconsiderApp01"><el-button type="primary">复议已分配监控</el-button></router-link>
+          <router-link to="/processMoni?reconsiderApp03"><el-button type="primary">复议已完成监控</el-button></router-link>
+          <router-link to="/processMoni?antiFraudApp00"><el-button type="primary">反欺诈未分配监控</el-button></router-link>
+          <router-link to="/processMoni?antiFraudApp01"><el-button type="primary">反欺诈已分配监控</el-button></router-link>
+          <router-link to="/processMoni?antiFraudApp03"><el-button type="primary">反欺诈已完成监控</el-button></router-link>
       </div>
       <div class="main_right">
         <!-- 中间 -->
@@ -217,26 +226,23 @@
     mounted() {
       // 统一登录平台  调试   start 
       this.get("http://testplatform.nuoyuan.com.cn:20717/remote/user/getUserInfo").then(response => {
-        if (response.statusCode == 200) {
-          console.info(response.data);
-          this.userInf = {
-            userCode: response.data.userCode,
-            orgCode: response.data.orgCode,
-          }
-          localStorage.setItem("userInf", JSON.stringify(this.userInf));
-          this.post("/workFlowTaskQuery/getTaskProfile", {
-            taskStatus: "01",
-          }).then(res => {
-            console.log(res)
-            if (res.statusCode == 200) {
-              this.tableData = res.data;
-            } else {
-              this.$message.error(res.msg);
-            }
-          });
-        } else {
-          this.$message.error(res.msg);
+        console.info(response.data);
+        this.userInf = {
+          userCode: response.data.userCode,
+          orgCode: response.data.orgCode,
+          orgId: response.data.orgId,
         }
+        localStorage.setItem("userInf", JSON.stringify(this.userInf));
+        this.post("/workFlowTaskQuery/getTaskProfile", {
+          taskStatus: "01",
+        }).then(res => {
+          console.log(res)
+          if (res.statusCode == 200) {
+            this.tableData = res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
       });
       // 统一登录 平台  调测 end
 

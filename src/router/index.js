@@ -76,6 +76,9 @@ import ReconsiderApply from '../view/Reconsider/ReconsiderComponents/ReconsiderA
 import ReconsiderSplit from '../view/Reconsider/ReconsiderSplit.vue'//复议专员主管分屏
 // import ReconsiderAntiSplit from '../view/Reconsider/ReconsiderAntiSplit.vue'//复议反欺诈分屏
 
+// -------------------------流程监控---------------------
+import processMoni from '../view/processMoni/processMoni.vue'
+
 
 Vue.use(Router)
 
@@ -213,6 +216,7 @@ const routes = [{
 // 反欺诈 申请信息
 {
   path:'/AntiApplyEdit',
+  name:'AntiApplyEdit',
   component:AntiApplyEdit
 },
 {
@@ -252,6 +256,11 @@ const routes = [{
 //   path:'/ReconsiderAntiSplit',
 //   component:ReconsiderAntiSplit
 // },
+// ---------------------流程监控---------
+{
+  path: '/processMoni',
+  component: processMoni
+}
 ];
 
 const router = new Router({

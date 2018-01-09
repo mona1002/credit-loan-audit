@@ -39,7 +39,7 @@
         <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">反欺诈申请列表</span>
       </div>
-      <el-table :data="antiTableData" style="width: 100%" border stripe fit highlight-current-row v-show="false">
+      <el-table :data="antiTableData" style="width: 100%" border stripe fit highlight-current-row v-show="antiFlag!='03'&& antiFlag!='04'">
         <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column prop="applySubno" label="进件编号">
@@ -117,7 +117,41 @@ export default {
       data: 'test',
       activeNames: ['1'], // 查询部分 默认显示
       antiFlag: '', // 列表标志
-      antiTableData: [], // 反欺诈申请列表数据
+      antiTableData: [{
+        "appDate": "2017-12-07 11:29:25",
+        "appOrgCode": "111",
+        "appOrgId": null,
+        "appOrgName": "营销一部",
+        "appSuborgCode": null,
+        "appSuborgId": null,
+        "appSuborgName": null,
+        "applyCode": "dyx",
+        "applyCustId": null,
+        "applyCustName": null,
+        "applyCustNo": null,
+        "applyDesc": null,
+        "applyId": "l9uJjGvYat9DnO6o26JhTgUrMCW14TCv",
+        "applyPersonName": null,
+        "applySubno": "999",
+        "caseNum": null,
+        "certCode": null,
+        "channel": "00",
+        "channelTxt": null,
+        "creatTime": null,
+        "creditappTaskid": null,
+        "fraudState": null,
+        "fraudStateTxt": null,
+        "id": "1",
+        "mainreaName": null,
+        "mainreasonId": null,
+        "proCode": "诺英贷",
+        "proId": "111",
+        "proName": null,
+        "processInstanceId": null,
+        "reconsiderNum": null,
+        "subreaName": null,
+        "subreasonId": null
+      }], // 反欺诈申请列表数据
       directorTableData: [{}], // 专员/主管列表数据
       applySubno: '', // 进件编号
       applyCustName: '', // 客户名称
@@ -168,7 +202,7 @@ export default {
       }).then(res => {
         console.log(res);
         if (res.statusCode == '200') {
-          this.antiTableData = res.data;
+          // this.antiTableData = res.data;
         }
       })
     },
@@ -210,9 +244,12 @@ export default {
     handleClickEdit(row) {
       console.log('click the row in table');
       // 跳转到详情
+
       this.$router.push({
-        path: '/AntiApplyEdit',
-        parmas: { applyId: row.applyId }
+        name: 'AntiApplyEdit',
+        params: {
+          id: 10011
+        }
       });
     },
     // 反欺诈申请查看
@@ -231,6 +268,8 @@ export default {
         // 反欺诈主管
         localStorage.setItem("AntiManagertaskInWaitting", JSON.stringify(row))
       }
+      // 反欺诈  分屏
+      this.$router.push('AntiAudit')
     }
   }
 }
@@ -240,6 +279,8 @@ export default {
 /* 反欺诈 查询 */
 
 .anti-fraud {}
+
+
 
 
 
@@ -261,6 +302,8 @@ export default {
 
 
 
+
+
 /* 一列 */
 
 .anti-fraud .item-column1 {
@@ -268,6 +311,8 @@ export default {
   float: left;
   margin: 0;
 }
+
+
 
 
 
@@ -294,6 +339,8 @@ export default {
 
 
 
+
+
 /* 三列 */
 
 .anti-fraud .item-column3 {
@@ -302,6 +349,8 @@ export default {
   margin: 0;
   margin-bottom: 10px;
 }
+
+
 
 
 
@@ -368,6 +417,8 @@ export default {
 
 
 
+
+
 /* 折叠面板头部背景色和icon */
 
 .anti-fraud .icon_hat {
@@ -378,6 +429,8 @@ export default {
 .anti-fraud .headFont {
   font-size: 16px;
 }
+
+
 
 
 
