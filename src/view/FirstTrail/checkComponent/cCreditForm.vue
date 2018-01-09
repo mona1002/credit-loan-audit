@@ -1122,16 +1122,16 @@
   }
   
   /* 省略号 */
-
   .elips {
    width: calc( 100% - 197px);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    /* background: yellowgreen; */
     vertical-align: middle;
   }
+  
   /* 工作信息-单位地址 + 私营企业-企业经营项目-------------label 为 182 px */
-
   .ComAddr {
     width: calc( 100% - 197px);
     vertical-align: top;
@@ -1152,6 +1152,7 @@
        overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    /* background: yellowgreen; */
     vertical-align: middle;
   }
   /*-------------------- 核对现住址-------------------------- */

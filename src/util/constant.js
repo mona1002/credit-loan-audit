@@ -29,4 +29,8 @@ if (host === productionEnv) {
 // appConstant.baseUrl_user = "http://" + host + (80 === port ? '' : (':' + port)) + "/";
 appConstant.baseUrl_common = "http://" + host + (80 === port ? '' : (':' + port)) + "/riskManagement";
 
+// 工作流接口
+// appConstant.baseUrl_common2 = "http://" + host + ":9480/bpm-service/";
+appConstant.baseUrl_common2 = "http://10.1.26.200:9480/bpm-service/";
+
 export default appConstant

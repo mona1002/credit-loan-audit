@@ -1,5 +1,5 @@
 <template>
-  <!-- 反欺诈分屏 -->
+<!-- 复议分屏-专员、主管 -->
   <div class="SplitScreen">
     <myHead></myHead>
     <div class="SplitScreen_content">
@@ -34,24 +34,22 @@
               </ul>
             </div>
           </div>
-          <!-- 右侧 tab 内容 -->
+          <!-- tab 内容 -->
           <div class="tab2_Content">
-            <AnitAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AnitAudioVisual>
+            <AnitAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AnitAudioVisual><!-- √ -->
             <remark v-if=" this.tabContent2==1"></remark>
             <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <borrowerInformation v-if=" this.tabContent2==4"></borrowerInformation>
             <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
-            <FMCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></FMCreditForm>
-            <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
-            <!-- 信审审批结论轨迹 -->
-            <aAprovalConclusion v-if=" this.tabContent2==8"></aAprovalConclusion>
-            <!-- 反欺诈审批结论轨迹 -->
-            <aAntiConclusionPath v-if=" this.tabContent2==9"></aAntiConclusionPath>
-            <!-- 以下待更新 -->
-            <aAntiConclusionPath v-if=" this.tabContent2==10">反欺诈申请信息</aAntiConclusionPath>
-            <aAntiConclusionPath v-if=" this.tabContent2==10">反欺诈调查</aAntiConclusionPath>
-            <aAntiConclusionPath v-if=" this.tabContent2==10">审批结论</aAntiConclusionPath>
+            <FMCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></FMCreditForm><!-- √ 内部匹配中信审表 -->
+            <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation><!-- 实地征信 -->
+            <!-- 复议申请 -->
+            <ReconsiderApply v-if=" this.tabContent2==8"></ReconsiderApply><!-- √ -->
+            <!-- 反欺诈结论 -->
+            <aAntiApplyInf v-if=" this.tabContent2==9"></aAntiApplyInf><!-- √ -->
+            <!-- 复议结论 -->
+            <!-- <aAntiConclusionPath v-if=" this.tabContent2==10">复议结论</aAntiConclusionPath> -->
           </div>
         </div>
       </div>
@@ -60,25 +58,22 @@
 </template>
 <script>
   import myHead from "../header.vue"
-  import AnitAudioVisual from './components/AnitAudioVisual.vue'; //工作台--》 av
+  import AnitAudioVisual from '../AntiFraud/components/AnitAudioVisual.vue'; //工作台--》 av
   // import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配查看 --》 aV
   import FMCreditForm from "../FinalTrial/FinalMatchComponent/FMCreditForm.vue"; //信审表-与内部匹配打开的是同一个页面
-  import aAntiConclusionPath from './components/aAntiConclusionPath.vue'; //反欺诈审批结论轨迹
-  import aAprovalConclusion from './components/aAprovalConclusion.vue' //信审审批结论轨迹
+  import aAntiConclusionPath from '../AntiFraud/components/aAntiConclusionPath.vue'; //反欺诈审批结论轨迹
+  import ReconsiderApply from'./ReconsiderComponents/ReconsiderApply.vue'//复议申请
+  import aAntiApplyInf from'../AntiFraud/components/aAntiApplyInf.vue'//反欺诈结论
   // --------------------------------------------------------------------------------------------
-  // 编辑
+  // 编辑（含有-未更新）
   import remark from "../FirstTrail/detailComponent/remark.vue";
   import InternalMatch from "../FirstTrail/InternalMatch.vue";
-  import applicationInformation from "../FirstTrail/detailComponent/applicationInformation.vue";
+  import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息
   import borrowerInformation from "../FirstTrail/detailComponent/borrowerInformation.vue";
   import PhoneCredit from "../FirstTrail/PhoneCredit.vue";
   import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信
-  // 信审审批写此处
-  import CreditApproval from "../FirstTrail/CreditApproval.vue";
-  // 查询
-  // import cFinanceInformation from "./checkComponent/FinanceInformation";
-  import cborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料
-  import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息
+  
+//   ----------------------------------------------------------------------------
 
   export default {
     data() {
@@ -97,9 +92,7 @@
         flexible: true,
         tabContent2: 3,
         tabActiveInd2: 3,
-        items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "信审审批结论轨迹", "反欺诈审批结论轨迹", "反欺诈申请信息",
-          "反欺诈调查", "审批结论"
-        ],
+        items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "复议申请", "反欺诈结论", "复议结论"],
         tab2Index: 3,
         AlertSearch: "",
       }
@@ -133,20 +126,6 @@
         this.$refs.Left_title.style.left = "-200px";
         this.flexible = true;
       },
-      //   tab1(ev, ind, val) { 
-      //     this.title = val;
-      //     this.tabContent1 = ind;
-      //     this.tab1Index = ind; 
-      //     this.tabActiveInd1 = ind; 
-      //     for (var i = 0; i < this.$refs.tabTwo.length; i++) {
-      //       this.$refs.tabTwo[i].className = "tab2Default"; 
-      //       this.flag2[i] = true;
-      //     }
-      //     this.$refs.tabTwo[this.tabActiveInd2].className = "tab2Act"; 
-      //     if (ind != 0 && ind != 8) { 
-      //       this.flag2[ind] = false;
-      //     }
-      //   },
       tab(ev, ind, val) {
         this.tabContent2 = ind;
         this.tab2Index = ind;
@@ -180,20 +159,14 @@
       AnitAudioVisual,
       FMCreditForm,
       aAntiConclusionPath,
-      aAprovalConclusion,
-      // aMAnitAudioVisual,
-      // 编辑
+      ReconsiderApply,//复议申请
+      aAntiApplyInf,//反欺诈结论
       remark,
       InternalMatch,
-      applicationInformation,
+      capplicationInformationDetail,
       borrowerInformation,
       PhoneCredit,
       creditInvestigation,
-      // 信审审批
-      CreditApproval,
-      // 查询
-      cborrowerInformationDetail,
-      capplicationInformationDetail,
     }
   }
 
@@ -216,11 +189,9 @@
   .tab2Default {
     color: #bfcbd9;
   }
-
-  .tab2Default:hover {
+.tab2Default:hover{
     cursor: pointer;
-  }
-
+}
   .tab2Act {
     color: white;
     border-bottom: 1px solid white;
