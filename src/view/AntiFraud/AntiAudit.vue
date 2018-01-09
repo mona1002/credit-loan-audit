@@ -1,5 +1,5 @@
 <template>
-<!-- 反欺诈分屏 -->
+  <!-- 反欺诈分屏 -->
   <div class="SplitScreen">
     <myHead></myHead>
     <div class="SplitScreen_content">
@@ -16,7 +16,7 @@
       <div class="SplitScreen_wrap">
         <!-- 右侧分屏部分 -->
         <div class="right" ref="rRight">
-          <img src="../../../static/images/backcopy.png" class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen">
+          <!-- <img src="../../../static/images/backcopy.png" class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen"> -->
           <!-- 右屏tab 表头 -->
           <div class="Right_tab_title_div">
             <!-- 左右滑动 图标  -->
@@ -44,14 +44,14 @@
             <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
             <FMCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></FMCreditForm>
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
-            <!-- 信审审批结论轨迹 空白 -->
-            <!-- <CreditForm v-if=" this.tabContent2==8"></CreditForm> -->
-            <!-- 信审审批 空白 -->
+            <!-- 信审审批结论轨迹 -->
+            <aAprovalConclusion v-if=" this.tabContent2==8"></aAprovalConclusion>
+            <!-- 反欺诈审批结论轨迹 -->
             <aAntiConclusionPath v-if=" this.tabContent2==9"></aAntiConclusionPath>
+            <!-- 以下待更新 -->
             <aAntiConclusionPath v-if=" this.tabContent2==10">反欺诈申请信息</aAntiConclusionPath>
             <aAntiConclusionPath v-if=" this.tabContent2==10">反欺诈调查</aAntiConclusionPath>
             <aAntiConclusionPath v-if=" this.tabContent2==10">审批结论</aAntiConclusionPath>
-
           </div>
         </div>
       </div>
@@ -73,16 +73,12 @@
   import borrowerInformation from "../FirstTrail/detailComponent/borrowerInformation.vue";
   import PhoneCredit from "../FirstTrail/PhoneCredit.vue";
   import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信
-  // import s from "./detailComponent/remark";
-  // 反欺诈结论 写此处
   // 信审审批写此处
   import CreditApproval from "../FirstTrail/CreditApproval.vue";
   // 查询
   // import cFinanceInformation from "./checkComponent/FinanceInformation";
-  import cremarkDetail from "../FirstTrail/checkComponent/remarkDetail.vue"; //备注信息
   import cborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料
   import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息
-  import processTrajectory from "../FirstTrail/checkComponent/processTrajectory.vue"; //流程轨迹
 
   export default {
     data() {
@@ -196,10 +192,8 @@
       // 信审审批
       CreditApproval,
       // 查询
-      cremarkDetail, //
       cborrowerInformationDetail,
       capplicationInformationDetail,
-      processTrajectory
     }
   }
 
@@ -221,6 +215,10 @@
 
   .tab2Default {
     color: #bfcbd9;
+  }
+
+  .tab2Default:hover {
+    cursor: pointer;
   }
 
   .tab2Act {
