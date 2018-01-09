@@ -74,6 +74,7 @@ import aAntiFraudInvestigation from '@/view/AntiFraud/components/aAntiFraudInves
 import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
 // -------------------------复议---------------------
 import ReconsiderApply from '../view/Reconsider/ReconsiderComponents/ReconsiderApply.vue'//复议申请
+import reconsiderList from '../view/Reconsider/reconsiderList.vue'//复议申请任务列表
 import ReconsiderSplit from '../view/Reconsider/ReconsiderSplit.vue'//复议专员主管分屏
 // import ReconsiderAntiSplit from '../view/Reconsider/ReconsiderAntiSplit.vue'//复议反欺诈分屏
 
@@ -254,6 +255,10 @@ const routes = [{
 {
   path:'/ReconsiderApply',
   component:ReconsiderApply
+},
+{
+  path:'/reconsiderList',
+  component:reconsiderList
 },
 {
   path:'/ReconsiderSplit',

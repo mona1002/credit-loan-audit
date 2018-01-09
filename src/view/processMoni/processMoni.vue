@@ -46,7 +46,7 @@
         </el-col>
       </el-row>
       <el-row class="row row3"  type="flex">
-        <el-col :span="8">
+        <el-col :span="8" v-if="routerState!=='03'">
           <span class="keywordText">任务类型</span><el-select v-model="queryParam.taskType" placeholder="请选择">
             <el-option
               v-for="item in taskTypes"
@@ -59,7 +59,10 @@
         <el-col :span="8">
           <span class="keywordText">当前处理人员</span><el-input class="" v-model="queryParam.operatorCode" placeholder="请输入当前处理人员"></el-input>
         </el-col>
-        <el-col :span="8">
+        <el-col :span="8" v-if="routerState!=='03'">
+          <el-button class="btn reset" @click="reset">重置</el-button><el-button class="btn query" type="primary" @click="getByKey">查询</el-button>
+        </el-col>
+        <el-col :span="8" :offset="8" v-else>
           <el-button class="btn reset" @click="reset">重置</el-button><el-button class="btn query" type="primary" @click="getByKey">查询</el-button>
         </el-col>
       </el-row>
@@ -72,7 +75,7 @@
         <span class="icon-item" @click="handleItem('trace')">
           <i class="el-icon liuchengIcon"></i><span class="el-icon-text">流程轨迹</span>
         </span>
-        <span class="icon-item" @click="handleItem('assign')">
+        <span class="icon-item" @click="handleItem('assign')" v-if="routerState!=='03'">
           <i class="el-icon addIcon"></i><span class="el-icon-text">任务分派</span>
         </span>
         <span class="icon-item" @click="handleItem('trans')">
@@ -412,6 +415,7 @@ export default {
       this.routerState = str.slice(-2);
       this.queryParam.processTemplateId = this.routerPath;
       this.queryParam.taskStatus = this.routerState;
+      console.log(this.routerState)
 
       this.userInf = JSON.parse(localStorage.getItem("userInf"));
       this.queryParam.userCode = this.userInf.userCode;
@@ -420,7 +424,7 @@ export default {
 
     // 查询经营产品
     getProductForUser(orgId){
-      this.post('http://codeuseros.nuoyuan.com.cn/base/product/getProductForUser',{
+      this.post('http://10.1.26.200:20717/base/product/getProductForUser',{
         orgId: this.userInf.orgId,
         validFlag: '1'
       }).then(res => {

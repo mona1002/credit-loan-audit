@@ -106,10 +106,10 @@
     },
     mounted() {
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '01') {
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
-      } else if (this.judgeFlag.flag == '02') {
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
+      if (this.judgeFlag.flag == '03') {
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈专员-匹配查看
+      } else if (this.judgeFlag.flag == '04') {
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管-匹配查看
       }
       this.post("/creauditOpinion/queryByPage", {
         // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
