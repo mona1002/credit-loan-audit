@@ -65,6 +65,7 @@ import AnitAudioVisual from'../view/AntiFraud/components/AnitAudioVisual.vue'
 import AntiFraud from '@/view/AntiFraud/AntiFraud.vue'
 // 反欺诈 申请
 import AntiApplyEdit from '@/view/AntiFraud/AntiApplyEdit.vue'
+import AntiApplyInf from '@/view/AntiFraud/AntiApplyInf.vue'
 import aAntiApplyInf from '@/view/AntiFraud/components/aAntiApplyInf.vue'
 
 //反欺诈调查
@@ -73,6 +74,7 @@ import aAntiFraudInvestigation from '@/view/AntiFraud/components/aAntiFraudInves
 import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
 // -------------------------复议---------------------
 import ReconsiderApply from '../view/Reconsider/ReconsiderComponents/ReconsiderApply.vue'//复议申请
+import reconsiderList from '../view/Reconsider/reconsiderList.vue'//复议申请任务列表
 import ReconsiderSplit from '../view/Reconsider/ReconsiderSplit.vue'//复议专员主管分屏
 // import ReconsiderAntiSplit from '../view/Reconsider/ReconsiderAntiSplit.vue'//复议反欺诈分屏
 
@@ -219,6 +221,12 @@ const routes = [{
   name:'AntiApplyEdit',
   component:AntiApplyEdit
 },
+// 反欺诈申请
+{
+  path:'/AntiApplyInf',
+  name:'AntiApplyInf',
+  component:AntiApplyInf
+},
 {
   path:'/aAntiApplyInf',
   component:aAntiApplyInf
@@ -247,6 +255,10 @@ const routes = [{
 {
   path:'/ReconsiderApply',
   component:ReconsiderApply
+},
+{
+  path:'/reconsiderList',
+  component:reconsiderList
 },
 {
   path:'/ReconsiderSplit',

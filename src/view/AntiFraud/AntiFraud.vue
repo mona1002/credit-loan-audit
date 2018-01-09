@@ -228,9 +228,11 @@ export default {
       // 登录 单独存  userCode  orgCode 
       this.queryParam.userCode = JSON.parse(localStorage.getItem('userInf')).userCode;
       this.queryParam.orgCode = JSON.parse(localStorage.getItem('userInf')).orgCode;
+      console.log('this.queryParam')
+      console.log(this.queryParam.userCode,this.queryParam.orgCode);
       this.request(this.queryParam);
     } else {
-      // 反欺诈申请 - 编辑
+      // 反欺诈申请 - 列表
       this.queryList();
     }
   },
@@ -244,7 +246,7 @@ export default {
       }).then(res => {
         console.log(res);
         if (res.statusCode == '200') {
-          // this.antiTableData = res.data;
+          this.antiTableData = res.data.taskDetailList;
         }
       })
     },
@@ -254,10 +256,9 @@ export default {
         param
       ).then(res => {
         if (res.statusCode == 200) {
-          // this.directorTableData = res.data.taskDetailList;
-
+          this.directorTableData = res.data.list;
         } else {
-          this.datas = [];
+          this.directorTableData = [];
         }
 
       })
@@ -297,6 +298,12 @@ export default {
     // 反欺诈申请查看
     handleClickInfo(row) {
       // 
+      this.$router.push({
+        name: 'AntiApplyInf',
+        params: {
+          id: 10011
+        }
+      });
     },
     // 主管/专员审批 跳分屏
     rowDbClick(row) {
