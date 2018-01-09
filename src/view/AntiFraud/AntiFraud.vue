@@ -152,7 +152,41 @@ export default {
         "subreaName": null,
         "subreasonId": null
       }], // 反欺诈申请列表数据
-      directorTableData: [{}], // 专员/主管列表数据
+      directorTableData: [{
+        "appDate": "2017-12-07 11:29:25",
+        "appOrgCode": "111",
+        "appOrgId": 'null',
+        "appOrgName": "营销一部",
+        "appSuborgCode": 'null',
+        "appSuborgId": 'null',
+        "appSuborgName": 'null',
+        "applyCode": "dyx",
+        "applyCustId": 'null',
+        "applyCustName": 'null',
+        "applyCustNo": 'null',
+        "applyDesc": 'null',
+        "applyId": "l9uJjGvYat9DnO6o26JhTgUrMCW14TCv",
+        "applyPersonName": 'null',
+        "applySubno": "999",
+        "caseNum": 'null',
+        "certCode": 'null',
+        "channel": "00",
+        "channelTxt": 'null',
+        "creatTime": 'null',
+        "creditappTaskid": 'null',
+        "fraudState": 'null',
+        "fraudStateTxt": 'null',
+        "id": "1",
+        "mainreaName": 'null',
+        "mainreasonId": 'null',
+        "proCode": "诺英贷",
+        "proId": "111",
+        "proName": 'null',
+        "processInstanceId": 'null',
+        "reconsiderNum": 'null',
+        "subreaName": 'null',
+        "subreasonId": 'null'
+      }], // 专员/主管列表数据
       applySubno: '', // 进件编号
       applyCustName: '', // 客户名称
       applyCustNo: '', // 客户编号
@@ -180,12 +214,20 @@ export default {
     // 根据  antiFlag 判断
     // 初审-信审审批-发起反欺诈
     if (this.antiFlag == '03' || this.antiFlag == '04') {
-      this.queryParam.processTemplateId = JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
-      this.queryParam.taskNodeName = JSON.parse(localStorage.getItem('workbenchPass')).taskNodeName;
+      if (this.antiFlag == '03') {
+        this.queryParam.processTemplateId = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).processTemplateId;
+
+        this.queryParam.taskNodeName = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskNodeName;
+      }
+      if (this.antiFlag == '04') {
+        this.queryParam.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
+
+        this.queryParam.taskNodeName = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskNodeName;
+      }
       this.queryParam.taskStatus = JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
       // 登录 单独存  userCode  orgCode 
-      this.queryParam.userCode = JSON.parse(localStorage.getItem('userCode'));
-      this.queryParam.orgCode = JSON.parse(localStorage.getItem('orgCode'));
+      this.queryParam.userCode = JSON.parse(localStorage.getItem('userInf')).userCode;
+      this.queryParam.orgCode = JSON.parse(localStorage.getItem('userInf')).orgCode;
       this.request(this.queryParam);
     } else {
       // 反欺诈申请 - 编辑
@@ -212,7 +254,7 @@ export default {
         param
       ).then(res => {
         if (res.statusCode == 200) {
-          this.directorTableData = res.data.taskDetailList;
+          // this.directorTableData = res.data.taskDetailList;
 
         } else {
           this.datas = [];
@@ -257,7 +299,7 @@ export default {
       // 
     },
     // 主管/专员审批 跳分屏
-    rowDbClick() {
+    rowDbClick(row) {
       console.log('主管/专员 跳分屏')
       this.$router.push({ path: '/FSplitScreen' });
       if (this.antiFlag == '03') {
@@ -290,9 +332,15 @@ export default {
 
 
 
+
+
+
 /* 容器 */
 
 .anti-fraud .container {}
+
+
+
 
 
 
@@ -311,6 +359,9 @@ export default {
   float: left;
   margin: 0;
 }
+
+
+
 
 
 
@@ -341,6 +392,9 @@ export default {
 
 
 
+
+
+
 /* 三列 */
 
 .anti-fraud .item-column3 {
@@ -349,6 +403,9 @@ export default {
   margin: 0;
   margin-bottom: 10px;
 }
+
+
+
 
 
 
@@ -419,6 +476,9 @@ export default {
 
 
 
+
+
+
 /* 折叠面板头部背景色和icon */
 
 .anti-fraud .icon_hat {
@@ -429,6 +489,9 @@ export default {
 .anti-fraud .headFont {
   font-size: 16px;
 }
+
+
+
 
 
 
