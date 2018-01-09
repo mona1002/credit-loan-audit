@@ -160,23 +160,49 @@
             path: '/FtaskInWaitting',
           });
         } else if (val.taskNodeName == "antiFraudApp_commissioner") { //反欺诈专员 
-          console.log("反欺诈专员 ")
-
           this.judge.flag = "03";
           localStorage.setItem("AntiWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
           this.$router.push({
             path: '/AntiFraud',
           });
-        } else if (val.taskNodeName == "antiFraudApp_manager") { //反欺诈主管 
-          console.log("反欺诈主管 ")
+        } else if (val.taskNodeName == "antiFraudApp_manager") { // 反欺诈主管 
           this.judge.flag = "04";
           localStorage.setItem("AntiManagerWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
           this.$router.push({
             path: '/AntiFraud',
           });
-        }
+        } else if (val.taskNodeName == "reconsiderApp_commissioner") { // 复议专员 
+          this.judge.flag = "05";
+          localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
+          localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
+          this.$router.push({
+            // path: '/AntiFraud',
+          });
+        } else if (val.taskNodeName == "reconsiderApp_manager") { // 复议经理
+          this.judge.flag = "06";
+          localStorage.setItem("ReManagerWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
+          localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
+          this.$router.push({
+            // path: '/AntiFraud',
+          });
+        } 
+        // else if (val.taskNodeName == "antiFraudApp_commissioner") { //复议反欺诈专员 
+        //   this.judge.flag = "07";
+        //   localStorage.setItem("ReAntiWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
+        //   localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
+        //   this.$router.push({
+        //     // path: '/AntiFraud',
+        //   });
+        // } else if (val.taskNodeName == "antiFraudApp_commissioner") { //复议反欺诈主管 
+        //   this.judge.flag = "08";
+        //   localStorage.setItem("ReAntiManagerWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
+        //   localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
+        //   this.$router.push({
+        //     // path: '/AntiFraud',
+        //   });
+        // }
       },
     },
     computed: {

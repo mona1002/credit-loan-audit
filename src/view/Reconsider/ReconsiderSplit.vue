@@ -1,5 +1,5 @@
 <template>
-<!-- 复议分屏 -->
+<!-- 复议分屏-专员、主管 -->
   <div class="SplitScreen">
     <myHead></myHead>
     <div class="SplitScreen_content">

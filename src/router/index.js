@@ -73,6 +73,8 @@ import aAntiFraudInvestigation from '@/view/AntiFraud/components/aAntiFraudInves
 import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
 // -------------------------复议---------------------
 import ReconsiderApply from '../view/Reconsider/ReconsiderComponents/ReconsiderApply.vue'//复议申请
+import ReconsiderSplit from '../view/Reconsider/ReconsiderSplit.vue'//复议专员主管分屏
+// import ReconsiderAntiSplit from '../view/Reconsider/ReconsiderAntiSplit.vue'//复议反欺诈分屏
 
 
 Vue.use(Router)
@@ -242,12 +244,14 @@ const routes = [{
   path:'/ReconsiderApply',
   component:ReconsiderApply
 },
+{
+  path:'/ReconsiderSplit',
+  component:ReconsiderSplit
+},
 // {
-//   path:'/ReconsiderApply',
-//   component:ReconsiderApply
+//   path:'/ReconsiderAntiSplit',
+//   component:ReconsiderAntiSplit
 // },
-
-
 ];
 
 const router = new Router({
