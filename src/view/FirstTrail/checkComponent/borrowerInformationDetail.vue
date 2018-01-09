@@ -548,7 +548,7 @@
 				    <ol>
 				    	<li>
 				    		<label>其他:</label>
-				    		<el-tooltip class="item" effect="dark" :content="otherInfo.content" :disabled="otherInfo.content==null" placement="top">
+				    		<el-tooltip class="item" effect="dark" :content="otherInfo.content" :disabled="otherInfo.content==''" placement="top">
 						      <div>{{otherInfo.content}}</div>
 						    </el-tooltip>
 				    	</li>
@@ -687,6 +687,19 @@
 		        	}else if(this.borestateList[i].mortgageStatus	=='1'){
 		        		this.borestateList[i].mortgageStatus = '未抵押'
 		        	};
+		        	//建筑单价 保留两位小数点
+		        	if(this.borestateList[i].unitPrice != null){
+		        		this.borestateList[i].unitPrice = this.formatNumber(this.borestateList[i].unitPrice,2,0);
+		       		 };
+		        	
+		        	//贷款余额 保留两位小数点
+		        	if(this.borestateList[i].restLoans != null){
+		        		this.borestateList[i].restLoans = this.formatNumber(this.borestateList[i].restLoans,2,0);
+		       		 };
+		        	//月供 保留两位小数点
+		        	if(this.borestateList[i].monthlyPay != null){
+			        	this.borestateList[i].monthlyPay = this.formatNumber(this.borestateList[i].monthlyPay,2,0);
+			        };
 
 		        }
 		        /*车辆信息*/
@@ -714,6 +727,18 @@
 		        	}else if(this.carInfoList[i].buyInsur =='02'){
 		        		this.carInfoList[i].buyInsur = '车损险'
 		        	};
+		        	//车辆购置价 保留两位小数点
+		        	if(this.carInfoList[i].carPrice != null){
+			        	this.carInfoList[i].carPrice = this.formatNumber(this.carInfoList[i].carPrice,2,0);
+			        };
+			        //月供 保留两位小数点
+		        	if(this.carInfoList[i].monthlyPay != null){
+			        	this.carInfoList[i].monthlyPay = this.formatNumber(this.carInfoList[i].monthlyPay,2,0);
+			        };
+			        //贷款余额 保留两位小数点
+		        	if(this.carInfoList[i].restLoans != null){
+			        	this.carInfoList[i].restLoans = this.formatNumber(this.carInfoList[i].restLoans,2,0);
+			        };
 
 		        }
 		        /*信用卡使用明细*/
@@ -742,6 +767,22 @@
 		        	}else if(this.cardDetList[i].accountStatus	=='08'){
 		        		this.cardDetList[i].accountStatus = '核销'
 		        	};
+		        	//信用卡使用明细 信用额度 保留两位小数点
+		        	if(this.cardDetList[i].cardAmt != null){
+			        	this.cardDetList[i].cardAmt = this.formatNumber(this.cardDetList[i].cardAmt,2,0);
+			        };
+			        //信用卡使用明细 已使用额度 保留两位小数点
+		        	if(this.cardDetList[i].usedAmt != null){
+			        	this.cardDetList[i].usedAmt = this.formatNumber(this.cardDetList[i].usedAmt,2,0);
+			        };
+			        //信用卡使用明细 本期应还款金额 保留两位小数点
+		        	if(this.cardDetList[i].actRepaymentAmt != null){
+			        	this.cardDetList[i].actRepaymentAmt = this.formatNumber(this.cardDetList[i].actRepaymentAmt,2,0);
+			        };
+			        //信用卡使用明细 本期实际还款金额 保留两位小数点
+		        	if(this.cardDetList[i].realRepaymentAmt != null){
+			        	this.cardDetList[i].realRepaymentAmt = this.formatNumber(this.cardDetList[i].realRepaymentAmt,2,0);
+			        };
 		        }
 		        /*信用卡使用总况*/
 		        this.borCard=res.data.borCard;
@@ -788,21 +829,135 @@
 		        	}else if(this.loanDetailList[i].repayFrequency=='03'){
 		        		this.loanDetailList[i].repayFrequency = '一次性还清'
 		        	};
+		        	//贷款明细 贷款合同金额 保留两位小数点
+		        	if(this.loanDetailList[i].loanContValue != null){
+			        	this.loanDetailList[i].loanContValue = this.formatNumber(this.loanDetailList[i].loanContValue,2,0);
+			        };
+			        //贷款明细 贷款余额 保留两位小数点
+		        	if(this.loanDetailList[i].loanBal != null){
+			        	this.loanDetailList[i].loanBal = this.formatNumber(this.loanDetailList[i].loanBal,2,0);
+			        };
+			        //贷款明细 本期应还款金额 保留两位小数点
+		        	if(this.loanDetailList[i].presentRepayAmt != null){
+			        	this.loanDetailList[i].presentRepayAmt = this.formatNumber(this.loanDetailList[i].presentRepayAmt,2,0);
+			        };
+			        //贷款明细 本期实际还款金额 保留两位小数点
+		        	if(this.loanDetailList[i].curMonthRepayAmt != null){
+			        	this.loanDetailList[i].curMonthRepayAmt = this.formatNumber(this.loanDetailList[i].curMonthRepayAmt,2,0);
+			        };
+			        //贷款明细 当前逾期金额 保留两位小数点
+		        	if(this.loanDetailList[i].presentOverAmt != null){
+			        	this.loanDetailList[i].presentOverAmt = this.formatNumber(this.loanDetailList[i].presentOverAmt,2,0);
+			        };
 
 		        }
 		        /*贷款总况*/
 		        this.loanInfo=res.data.loanInfo;
 		        /*负债信息*/
-		        this.borDebt=res.data.borDebt;
+		        if(res.data.borDebt==null){
+		        	this.borDebt=this.borDebt
+		        }else{
+		        	this.borDebt=res.data.borDebt;
+		        	//负债信息 信用卡每月还款 保留两位小数点
+		        	if(this.borDebt.monthRepayAmt != null){
+		        		this.borDebt.monthRepayAmt = this.formatNumber(this.borDebt.monthRepayAmt,2,0);
+		        	};
+		        	//负债信息 助学贷每月还款额 保留两位小数点
+		        	if(this.borDebt.studentLoanAmt != null){
+			        	this.borDebt.studentLoanAmt = this.formatNumber(this.borDebt.studentLoanAmt,2,0);
+			        };
+		        	//负债信息 房贷每月还款额 保留两位小数点
+		        	if(this.borDebt.houseLoanAmt != null){
+			        	this.borDebt.houseLoanAmt = this.formatNumber(this.borDebt.houseLoanAmt,2,0);
+			        };
+		        	//负债信息 车贷每月还款额 保留两位小数点
+		        	if(this.borDebt.carLoanAmt != null){
+			        	this.borDebt.carLoanAmt = this.formatNumber(this.borDebt.carLoanAmt,2,0);
+			        };
+		        	//负债信息 其他贷款每月还款额 保留两位小数点
+		        	if(this.borDebt.otherLoanAmt != null){
+			        	this.borDebt.otherLoanAmt = this.formatNumber(this.borDebt.otherLoanAmt,2,0);
+			        };
+		        	//负债信息 负债合计 保留两位小数点
+		        	if(this.borDebt.totalLoan != null){
+			        	this.borDebt.totalLoan = this.formatNumber(this.borDebt.totalLoan,2,0);
+			        };
+		        }
 		        /*征询报告*/
 		        this.rptInfo=res.data.rptInfo;  
 		        /*流水明细*/
 		        this.incomeList=res.data.incomeList;
+		        for(var i=0;i<this.incomeList.length;i++){
+		        	//流水明细 n 保留两位小数点
+		        	if(this.incomeList[i].n != null){
+			        	this.incomeList[i].n = this.formatNumber(this.incomeList[i].n,2,0);
+			        };
+			        //流水明细 n1 保留两位小数点
+		        	if(this.incomeList[i].n1 != null){
+			        	this.incomeList[i].n1 = this.formatNumber(this.incomeList[i].n1,2,0);
+			        };
+			        //流水明细 n2 保留两位小数点
+		        	if(this.incomeList[i].n2 != null){
+			        	this.incomeList[i].n2 = this.formatNumber(this.incomeList[i].n2,2,0);
+			        };
+			        //流水明细 n3 保留两位小数点
+		        	if(this.incomeList[i].n3 != null){
+			        	this.incomeList[i].n3 = this.formatNumber(this.incomeList[i].n3,2,0);
+			        };
+			        //流水明细 n4 保留两位小数点
+		        	if(this.incomeList[i].n4 != null){
+			        	this.incomeList[i].n4 = this.formatNumber(this.incomeList[i].n4,2,0);
+			        };
+			        //流水明细 n5 保留两位小数点
+		        	if(this.incomeList[i].n5 != null){
+			        	this.incomeList[i].n5 = this.formatNumber(this.incomeList[i].n5,2,0);
+			        };
+			        //流水明细 avgIncome 保留两位小数点
+		        	if(this.incomeList[i].avgIncome != null){
+			        	this.incomeList[i].avgIncome = this.formatNumber(this.incomeList[i].avgIncome,2,0);
+			        };
+		        }
 		        /*其他信息*/
 		        this.otherInfo=res.data.otherInfo;
 		        /*console.log(this.datas);*/
 		      });
-		  },
+		  	},
+		  	//保留两位小数 整数千分位
+			formatNumber(num,cent,isThousand) {
+			    num = num.toString().replace(/\$|\,/g,'');
+			 
+			  	// 检查传入数值为数值类型
+			  	if(isNaN(num))
+			    	num = "0";
+			 
+			  	// 获取符号(正/负数)
+			  	let sign = (num == (num = Math.abs(num)));
+
+			  	num = Math.floor(num*Math.pow(10,cent)+0.50000000001); // 把指定的小数位先转换成整数.多余的小数位四舍五入
+			  	let cents = num%Math.pow(10,cent);       // 求出小数位数值
+			  	num = Math.floor(num/Math.pow(10,cent)).toString();  // 求出整数位数值
+			  	cents = cents.toString();        // 把小数位转换成字符串,以便求小数位长度
+			 
+			  	// 补足小数位到指定的位数
+			  	while(cents.length<cent)
+			    	cents = "0" + cents;
+			 
+		    	for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
+		      		num = num.substring(0,num.length-(4*i+3))+','+ num.substring(num.length-(4*i+3));
+			  
+			  	if (cent > 0){
+			  		//console.log(cent);
+			  		//console.log(((sign)?'':'-') + num + '.' + cents);
+			  		if(sign == true){
+			  			return (((sign)?'':'-') + num + '.' + cents);
+			  		}else if(sign == false){
+			  			return '0.00'
+			  		}
+			  	}else{
+			  		//console.log(((sign)?'':'-') + num);
+			    	return (((sign)?'':'-') + num);
+			    }
+			},
 	    },
 	    watch:{
 		  	isFull:function(val){

@@ -73,6 +73,7 @@ import aAntiFraudInvestigation from '@/view/AntiFraud/components/aAntiFraudInves
 import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
 // -------------------------复议---------------------
 import ReconsiderApply from '../view/Reconsider/ReconsiderComponents/ReconsiderApply.vue'//复议申请
+import reconsiderList from '../view/Reconsider/reconsiderList.vue'//复议申请任务列表
 
 
 Vue.use(Router)
@@ -241,6 +242,10 @@ const routes = [{
 {
   path:'/ReconsiderApply',
   component:ReconsiderApply
+},
+{
+  path:'/reconsiderList',
+  component:reconsiderList
 },
 // {
 //   path:'/ReconsiderApply',
