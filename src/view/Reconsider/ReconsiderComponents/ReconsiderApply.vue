@@ -1,6 +1,6 @@
 <template>
   <div class="aAntiApplyInf">
-    <!-- 反欺诈结论======================= -->
+    <!-- 复议申请 ======================= -->
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
@@ -15,24 +15,22 @@
                 <span>{{this.conclu.applySubno}} </span>
               </p>
               <p>
-                <label>证件号码： </label>
-                <span>{{this.conclu.applySubno}} </span>
-              </p>
-            </li>
-            <li>
-              <p>
                 <label>客户名称： </label>
                 <span>{{this.conclu.custName}} </span>
               </p>
               <p>
-                <label>移动电话： </label>
-                <span>{{this.conclu.applySubno}} </span>
+                <label>证件类型： </label>
+                <span>{{this.conclu.certType}} </span>
               </p>
             </li>
             <li>
               <p>
-                <label>证件类型： </label>
-                <span>{{this.conclu.certType}} </span>
+                <label>证件号码： </label>
+                <span>{{this.conclu.applySubno}} </span>
+              </p>
+              <p>
+                <label>移动电话： </label>
+                <span>{{this.conclu.applySubno}} </span>
               </p>
             </li>
           </ul>
@@ -54,7 +52,7 @@
                 <label>拒贷部门： </label>
                 <span>{{this.conclu.certType}} </span>
               </p>
-               <p>
+              <p>
                 <label>拒贷结论： </label>
                 <span>{{this.conclu.certType}} </span>
               </p>
@@ -83,7 +81,7 @@
             </li>
             <li>
               <p>
-               <label>复议申请人： </label>
+                <label>复议申请人： </label>
                 <span>{{this.conclu.applySubno}} </span>
               </p>
               <p>
@@ -108,10 +106,10 @@
     },
     mounted() {
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '01') {
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
-      } else if (this.judgeFlag.flag == '02') {
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
+      if (this.judgeFlag.flag == '03') {
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈专员-匹配查看
+      } else if (this.judgeFlag.flag == '04') {
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管-匹配查看
       }
       this.post("/creauditOpinion/queryByPage", {
         // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
@@ -147,10 +145,12 @@
     border-radius: 4px;
   }
 
-.aAntiApplyInf li{
+  .aAntiApplyInf li {
     clear: both;
-}
-  .aAntiApplyInf li p{
+    width: 100%;
+  }
+
+  .aAntiApplyInf li p {
     width: 33.3%;
     float: left;
     margin: 10px 0;

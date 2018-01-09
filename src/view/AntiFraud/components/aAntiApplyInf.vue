@@ -143,7 +143,7 @@
       }).then(res => {
         if (res.statusCode == 200) {
           console.log(res.data)
-          this.ConclutionInf = res.data.recordList;
+          this.conclu = res.data.recordList;
         } else {
           this.$message.error(res.msg);
         }
