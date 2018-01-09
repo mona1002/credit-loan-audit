@@ -785,7 +785,11 @@
 			        };
 		        }
 		        /*信用卡使用总况*/
-		        this.borCard=res.data.borCard;
+		        if(res.data.borCard == null){
+		        	this.borCard = this.borCard;
+		        }else{
+		        	this.borCard=res.data.borCard;
+		        };
 		        /*贷款明细*/
 		        this.loanDetailList=res.data.loanDetailList;
 		        for(var i=0;i<this.loanDetailList.length;i++){
@@ -852,7 +856,11 @@
 
 		        }
 		        /*贷款总况*/
-		        this.loanInfo=res.data.loanInfo;
+		        if(res.data.loanInfo == null){
+		        	this.loanInfo = this.loanInfo;
+		        }else{
+		        	this.loanInfo=res.data.loanInfo;
+		        };
 		        /*负债信息*/
 		        if(res.data.borDebt==null){
 		        	this.borDebt=this.borDebt
@@ -884,7 +892,11 @@
 			        };
 		        }
 		        /*征询报告*/
-		        this.rptInfo=res.data.rptInfo;  
+		        if(res.data.rptInfo == null){
+		        	this.rptInfo == this.rptInfo;
+		        }else{
+		        	this.rptInfo=res.data.rptInfo; 
+		        };
 		        /*流水明细*/
 		        this.incomeList=res.data.incomeList;
 		        for(var i=0;i<this.incomeList.length;i++){
@@ -918,7 +930,11 @@
 			        };
 		        }
 		        /*其他信息*/
-		        this.otherInfo=res.data.otherInfo;
+		        if(res.data.otherInfo == null){
+		        	this.otherInfo = this.otherInfo;
+		        }else{
+		        	this.otherInfo=res.data.otherInfo;
+		        };
 		        /*console.log(this.datas);*/
 		      });
 		  	},
