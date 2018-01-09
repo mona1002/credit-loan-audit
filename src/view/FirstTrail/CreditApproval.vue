@@ -662,9 +662,9 @@ export default {
             }).then(res => {
               console.log(res);
               console.log(res.statusCode);
-              if (res.statusCode == '200')
+              if (res.statusCode == '200'){
                 done();
-              else {
+              } else {
                 this.$message(res.msg);
                 instance.confirmButtonText = '';
               }
@@ -679,6 +679,7 @@ export default {
           type: 'success',
           message: '挂起成功'
         });
+        this.$router.push('/taskInWaitting');
       });
     },
     coverFn(flag) {
@@ -889,7 +890,7 @@ export default {
           this.showFlag = 0;
           // 放弃测试数据
           // this.taskId = '177524';
-
+          this.creauditAppOperate = 'check_Abandon';
           this.approvalFn();
           break;
         case '03':
