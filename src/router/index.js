@@ -252,7 +252,7 @@ const routes = [{
 {
   path:'/reconsiderList',
   component:reconsiderList
-}
+},
 {
   path:'/ReconsiderSplit',
   component:ReconsiderSplit
