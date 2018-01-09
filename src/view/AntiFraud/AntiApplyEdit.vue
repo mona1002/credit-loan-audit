@@ -1,4 +1,4 @@
-<!-- 反欺诈申请 - - 详情页面 -->
+<!-- 反欺诈申请 - - 详情编辑页面 -->
 <template>
   <div date="AntiApplyInf" class="anti-apply-info-class">
     <!-- 反欺诈申请信息=========================默认显示1-条？分页？ -->
@@ -117,7 +117,7 @@ export default {
       userCode: '', // 用户编号
       orgCode: '', // 机构编号
       applyId: '', // 申请单ID
-      id:'', // 主管/专员 用 列表id
+      id: '', // 主管/专员 用 列表id
       applySubno: '', // 进件编号
       applyCode: '', // 申请人code
       applyPersonName: '', // 申请人姓名
@@ -174,8 +174,8 @@ export default {
       this.applyId = taskInWaitting.applyId;
     } else { // 其他取 列表id
       console.log(' 主管/专员 ');
-      this.id = this.$route.params.id; 
-    } 
+      this.id = this.$route.params.id;
+    }
 
     // 经办人 登录用户名
     var userInfo = JSON.parse(localStorage.getItem('userInf'));
@@ -190,7 +190,7 @@ export default {
     // 查询 反欺诈信息
     getFraudApplyInfo() {
       // 测试 id
-      this.fqzapplyId = 'ed353288-758d-4699-bec7-094bd6444556';
+      this.applyId = 'ed353288-758d-4699-bec7-094bd6444556';
 
       this.post('/fraudApplyInfoController/getFraudApplyInfo', {
           applyId: this.applyId
@@ -268,7 +268,14 @@ export default {
         })
         .then(res => {
 
-          this.showFlag = 0;
+          // 更加标志来 选择跳转
+          // 初审/终审 发起反欺诈 提交  -> 代办任务列表
+          if (this.antiFlag == '01' || this.antiFlag == '02') {
+            this.$router.push('/taskInWaitting');
+          } else {
+            this.$router.push('/AntiFraud');
+          }
+
         })
     },
     // 主原因改变
@@ -294,6 +301,7 @@ export default {
 
 
 
+
 /* 一列 */
 
 .anti-apply-info-class .item-column1 {
@@ -302,6 +310,7 @@ export default {
   float: left;
   /*max-width: 1366px;*/
 }
+
 
 
 
@@ -322,6 +331,7 @@ export default {
 
 
 
+
 /* 三列 */
 
 .anti-apply-info-class .item-column3 {
@@ -333,6 +343,7 @@ export default {
   /*border: 1px solid;*/
   /*min-width: 300px;*/
 }
+
 
 
 
@@ -411,6 +422,7 @@ export default {
 
 
 
+
 /* 必填 * */
 
 .anti-apply-info-class .require-icon {
@@ -427,6 +439,7 @@ export default {
 
 
 
+
 /* 提交按钮 */
 
 .anti-apply-info-class .submit-class {
@@ -435,6 +448,7 @@ export default {
   width: calc(66% - 500px);
   text-align: right;
 }
+
 
 
 

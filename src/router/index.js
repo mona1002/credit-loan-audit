@@ -65,6 +65,7 @@ import AnitAudioVisual from'../view/AntiFraud/components/AnitAudioVisual.vue'
 import AntiFraud from '@/view/AntiFraud/AntiFraud.vue'
 // 反欺诈 申请
 import AntiApplyEdit from '@/view/AntiFraud/AntiApplyEdit.vue'
+import AntiApplyInf from '@/view/AntiFraud/AntiApplyInf.vue'
 import aAntiApplyInf from '@/view/AntiFraud/components/aAntiApplyInf.vue'
 
 //反欺诈调查
@@ -218,6 +219,12 @@ const routes = [{
   path:'/AntiApplyEdit',
   name:'AntiApplyEdit',
   component:AntiApplyEdit
+},
+// 反欺诈申请
+{
+  path:'/AntiApplyInf',
+  name:'AntiApplyInf',
+  component:AntiApplyInf
 },
 {
   path:'/aAntiApplyInf',
