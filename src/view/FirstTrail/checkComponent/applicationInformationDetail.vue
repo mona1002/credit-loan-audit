@@ -888,7 +888,13 @@
 		        this.applyId=this.taskInWaitting.applyId;
 		    } else if (this.judgeFlag.flag == '02') {
 		        this.taskInWaitting = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-		        this.applyId=this.taskInWaitting.applyId;
+		        this.applyId=this.FtaskInWaitting.applyId;
+		    }else if (this.judgeFlag.flag == '03') {
+		        this.taskInWaitting = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
+		        this.applyId=this.AntitaskInWaitting.applyId;
+		    }else if (this.judgeFlag.flag == '04') {
+		        this.taskInWaitting = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
+		        this.applyId=this.AntiManagertaskInWaitting.applyId;
 		    }
 
 			/*this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));

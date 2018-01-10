@@ -117,6 +117,8 @@
 			      },
 		        //taskType:'',
 		        // timeColor:false,
+		        //根据judgeFlag判断取 复议专员 还是 复议经理的申请ID
+			   	judgeFlag:'',
 			}
 		},
 		components: {
@@ -125,10 +127,17 @@
 		mounted(){
 			//一进入页面就发送请求
 			//this.queryParam = JSON.parse(localStorage.getItem('workbenchPass'));
-			console.log(JSON.parse(localStorage.getItem('workbenchPass')))
-			this.queryParam.processTemplateId=JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
-			this.queryParam.taskNodeName=JSON.parse(localStorage.getItem('workbenchPass')).taskNodeName;
-			this.queryParam.taskStatus=JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
+			//console.log(JSON.parse(localStorage.getItem('workbenchPass')))
+			this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+			if(this.judgeFlag.flag == '05'){
+				this.queryParam.processTemplateId=JSON.parse(localStorage.getItem('ReWorkbenchPass')).processTemplateId;
+				this.queryParam.taskNodeName=JSON.parse(localStorage.getItem('ReWorkbenchPass')).taskNodeName;
+				this.queryParam.taskStatus=JSON.parse(localStorage.getItem('ReWorkbenchPass')).taskStatus;
+			}else if(this.judgeFlag.flag == '06'){
+				this.queryParam.processTemplateId=JSON.parse(localStorage.getItem('ReWorkbenchPass')).processTemplateId;
+				this.queryParam.taskNodeName=JSON.parse(localStorage.getItem('ReWorkbenchPass')).taskNodeName;
+				this.queryParam.taskStatus=JSON.parse(localStorage.getItem('ReWorkbenchPass')).taskStatus;
+			}
 			//this.queryParam.userCode=JSON.parse(localStorage.getItem('userInf')).userCode;
 			//this.queryParam.orgCode=JSON.parse(localStorage.getItem('userInf')).orgCode;
 			// 登录 单独存  userCode  orgCode 
@@ -195,8 +204,8 @@
 			goDetail(row, event, column) {
 				console.log(row);
 					// this.$router.push({path:'/SplitScreen',query:row});
-		      this.$router.push({path:'/SplitScreen'});
-		      localStorage.setItem("taskInWaitting",JSON.stringify(row));
+		      this.$router.push({path:'/ReconsiderSplit'});
+		      localStorage.setItem("RtaskInWaitting",JSON.stringify(row));
 		    },
 		    handleSizeChange(val) {
 		      console.log('每页 ${val} 条');
