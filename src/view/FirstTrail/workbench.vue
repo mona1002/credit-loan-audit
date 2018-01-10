@@ -217,7 +217,8 @@
     },
     computed: {
       taskCount() {
-        // console.log(this.tableData)
+         this.TaskCount=null;
+        console.log(this.tableData)
         for (var i = 0; i < this.tableData.length; i++) {
           this.TaskCount += this.tableData[i].count;
         }
