@@ -101,12 +101,12 @@
         title: "",
         isShow: false,
         flexible: true,
-        tabContent2: 0,
-        tabActiveInd2: 0,
+        tabContent2: 3,
+        tabActiveInd2: 3,
         items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "信审审批结论轨迹", "反欺诈审批结论轨迹", "反欺诈申请信息",
           "反欺诈调查", "审批结论"
         ],
-        tab2Index: 0,
+        tab2Index: 3,
         AlertSearch: "",
       }
     },

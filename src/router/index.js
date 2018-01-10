@@ -59,7 +59,7 @@ import FCreditForm from '../view/FinalTrial/FinalComponent/FCreditForm'
 // ------------反欺诈------------------
 import AntiAudit from '@/view/AntiFraud/AntiAudit.vue'//反欺诈分屏
 import AntiRules from '../view/AntiFraud/AntiRules.vue'//反欺诈规则设定
-// import AntiCaseNum from '../view/AntiFraud/AntiCaseNum'// 案件编号维护
+import AntiCaseNum from '../view/AntiFraud/AntiCaseNum'// 案件编号维护
 import AnitAudioVisual from'../view/AntiFraud/components/AnitAudioVisual.vue'
 // 反欺诈 列表
 import AntiFraud from '@/view/AntiFraud/AntiFraud.vue'
@@ -80,6 +80,9 @@ import ReconsiderSplit from '../view/Reconsider/ReconsiderSplit.vue'//复议专�
 
 // -------------------------流程监控---------------------
 import processMoni from '../view/processMoni/processMoni.vue'
+// -----------------------任务管理----------------------
+import DoneTask from'../view/TaskManagement/reconsider/DoneTask.vue'//
+import HistoryTask from'../view/TaskManagement/reconsider/HistoryTask.vue'//
 
 
 Vue.use(Router)
@@ -247,10 +250,10 @@ const routes = [{
   component:AntiRules
 },
 // 案件编号维护
-// {
-//   path:'/AntiCaseNum',
-//   component:AntiCaseNum
-// },
+{
+  path:'/AntiCaseNum',
+  component:AntiCaseNum
+},
 // ---------------------复议-------------
 {
   path:'/ReconsiderApply',
@@ -272,6 +275,15 @@ const routes = [{
 {
   path: '/processMoni',
   component: processMoni
+},
+// ------------------任务管理------------
+{
+  path: '/DoneTask',
+  component: DoneTask
+},
+{
+  path: '/HistoryTask',
+  component: HistoryTask
 }
 ];
 
