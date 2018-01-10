@@ -697,12 +697,28 @@
           <span class="headFont">初审结论</span>
         </template>
         <div class=" CreditForm_result up_padding">
-          <div style="width:66.6%;" class="bottom">
+          <!-- <div style="width:66.6%;" class="bottom">
             <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
             <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==null||this.FormData.oother==''" :content="this.FormData.oother" placement="top-start">
               <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
             </el-tooltip>
-          </div>
+          </div> -->
+          <ul>
+            <li style="width:66.6%;">
+              <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
+              <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==null||this.FormData.oother==''" :content="this.FormData.oother"
+                placement="top-start">
+                <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
+              </el-tooltip>
+            </li>
+            <li style="marginTop:20px;width:66.6%;">
+              <p class="InternetInf_left_label" style="textAlign:right">终审结果评价：</p>
+              <el-tooltip class="item" effect="dark" :disabled="this.FormData.ootherfinal==null||this.FormData.ootherfinal==''" :content="this.FormData.ootherfinal"
+                placement="top-start">
+                <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.ootherfinal}} </span>
+              </el-tooltip>
+            </li>
+          </ul>
         </div>
       </el-collapse-item>
     </el-collapse>

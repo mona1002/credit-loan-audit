@@ -1,16 +1,16 @@
 <template>
-<!-- 复议分屏-专员、主管 -->
+  <!-- 复议分屏-专员、主管 -->
   <div class="SplitScreen">
     <myHead></myHead>
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
       <p class="PerDtl">
-        <span> 借款人： {{customInf.mainCustName}}</span>
-        <span> 进件编号: {{customInf.applyMainNo}}</span>
-        <span> 证件号码: {{tastwaitingPass.certCode}}</span>
-        <span> 进件机构: {{customInf.appOrgName}}</span>
-        <span> 门店成立时间: {{customInf.appOrgRegisterDate}}</span>
-        <span> 业务员入职时间： {{customInf.salPerEmployDate}}</span>
+        <span> 借款人：{{custName}}</span>
+        <span> 进件编号：{{customInf.applyMainNo}}</span>
+        <span> 证件号码：{{tastwaitingPass.certCode}}</span>
+        <span> 进件机构：{{customInf.appOrgName}}</span>
+        <span> 门店成立时间：{{customInf.appOrgRegisterDate}}</span>
+        <span> 业务员入职时间：{{customInf.salPerEmployDate}}</span>
         <span>{{customInf.adminIntroduce}}</span>
       </p>
       <div class="SplitScreen_wrap">
@@ -36,18 +36,27 @@
           </div>
           <!-- tab 内容 -->
           <div class="tab2_Content">
-            <AnitAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AnitAudioVisual><!-- √ -->
-            <remark v-if=" this.tabContent2==1"></remark>
+            <AnitAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AnitAudioVisual>
+            <!-- √ -->
+            <cremark v-if=" this.tabContent2==1"></cremark>
+            <!-- √ -->
             <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
-            <borrowerInformation v-if=" this.tabContent2==4"></borrowerInformation>
+            <!-- √ -->
+            <cborrowerInformation v-if=" this.tabContent2==4"></cborrowerInformation>
+
             <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
-            <FMCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></FMCreditForm><!-- √ 内部匹配中信审表 -->
-            <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation><!-- 实地征信 -->
+            <FMCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></FMCreditForm>
+            <!-- √ 内部匹配中信审表 -->
+            <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
+            <!-- √ -->
+            <!-- 实地征信 -->
             <!-- 复议申请 -->
-            <ReconsiderApply v-if=" this.tabContent2==8"></ReconsiderApply><!-- √ -->
+            <ReconsiderApply v-if=" this.tabContent2==8"></ReconsiderApply>
+            <!-- √ -->
             <!-- 反欺诈结论 -->
-            <aAntiApplyInf v-if=" this.tabContent2==9"></aAntiApplyInf><!-- √ -->
+            <aAntiApplyInf v-if=" this.tabContent2==9"></aAntiApplyInf>
+            <!-- √ -->
             <!-- 复议结论 -->
             <!-- <aAntiConclusionPath v-if=" this.tabContent2==10">复议结论</aAntiConclusionPath> -->
           </div>
@@ -59,25 +68,24 @@
 <script>
   import myHead from "../header.vue"
   import AnitAudioVisual from '../AntiFraud/components/AnitAudioVisual.vue'; //工作台--》 av
+  import cremark from '../FirstTrail/checkComponent/remarkDetail.vue' //备注信息
   // import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配查看 --》 aV
+  import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息  
+  import cborrowerInformation from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料
   import FMCreditForm from "../FinalTrial/FinalMatchComponent/FMCreditForm.vue"; //信审表-与内部匹配打开的是同一个页面
-  import aAntiConclusionPath from '../AntiFraud/components/aAntiConclusionPath.vue'; //反欺诈审批结论轨迹
-  import ReconsiderApply from'./ReconsiderComponents/ReconsiderApply.vue'//复议申请
-  import aAntiApplyInf from'../AntiFraud/components/aAntiApplyInf.vue'//反欺诈结论
+  import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信
+  import ReconsiderApply from './ReconsiderComponents/ReconsiderApply.vue' //复议申请
+  import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf.vue' //反欺诈结论
+  //复议结论
   // --------------------------------------------------------------------------------------------
   // 编辑（含有-未更新）
-  import remark from "../FirstTrail/detailComponent/remark.vue";
   import InternalMatch from "../FirstTrail/InternalMatch.vue";
-  import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息
-  import borrowerInformation from "../FirstTrail/detailComponent/borrowerInformation.vue";
   import PhoneCredit from "../FirstTrail/PhoneCredit.vue";
-  import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信
-  
-//   ----------------------------------------------------------------------------
 
   export default {
     data() {
       return {
+        custName:"",
         SplitLeft: "left",
         SplitRight: "right",
         watchData: '',
@@ -147,6 +155,7 @@
       //     id: this.tastwaitingPass.applyId,
       //   }).then(res => {
       // if (res.statusCode == 200) {
+        //  this.custName=res.data.accepCusBasicInfo.custName;
       //   //     this.customInf = res.data;
       // } else {
       //   this.$message.error(res.msg);
@@ -157,16 +166,15 @@
     components: {
       myHead,
       AnitAudioVisual,
-      FMCreditForm,
-      aAntiConclusionPath,
-      ReconsiderApply,//复议申请
-      aAntiApplyInf,//反欺诈结论
-      remark,
-      InternalMatch,
+      cremark,
       capplicationInformationDetail,
-      borrowerInformation,
-      PhoneCredit,
+      cborrowerInformation,
+      FMCreditForm,
       creditInvestigation,
+      ReconsiderApply, //复议申请
+      aAntiApplyInf, //反欺诈结论
+      InternalMatch,
+      PhoneCredit,
     }
   }
 
@@ -189,9 +197,11 @@
   .tab2Default {
     color: #bfcbd9;
   }
-.tab2Default:hover{
+
+  .tab2Default:hover {
     cursor: pointer;
-}
+  }
+
   .tab2Act {
     color: white;
     border-bottom: 1px solid white;
