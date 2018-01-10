@@ -171,7 +171,7 @@ export default {
     if (this.antiFlag == '01' || this.antiFlag == '02') {
       // 先取到 id , 请求 反欺诈 页面信息
       var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-      this.applyId = taskInWaitting.applyId;
+      this.id = taskInWaitting.applyId;
     } else { // 其他取 列表id
       console.log(' 主管/专员 ');
       this.id = this.$route.params.id;
@@ -190,10 +190,10 @@ export default {
     // 查询 反欺诈信息
     getFraudApplyInfo() {
       // 测试 id
-      this.applyId = 'ed353288-758d-4699-bec7-094bd6444556';
+      this.id = 'ed353288-758d-4699-bec7-094bd6444556';
 
       this.post('/fraudApplyInfoController/getFraudApplyInfo', {
-          applyId: this.applyId
+          applyId: this.id
         })
         .then(res => {
           if (res.statusCode == 200) {
@@ -242,7 +242,7 @@ export default {
           creditappTaskid: this.creditappTaskid, // 任务id
           userCode: this.userCode, // 用户编号
           orgCode: this.orgCode, // 机构编号
-          applyId: this.applyId, // 申请单ID
+          applyId: this.id, // 申请单ID
           applySubno: this.applySubno, // 进件编号
           applyCode: this.applyCode, // 申请人code
           applyPersonName: this.applyPersonName, // 申请人姓名
@@ -267,13 +267,16 @@ export default {
           proName: this.proName, // 产品名称
         })
         .then(res => {
-
-          // 更加标志来 选择跳转
-          // 初审/终审 发起反欺诈 提交  -> 代办任务列表
-          if (this.antiFlag == '01' || this.antiFlag == '02') {
-            this.$router.push('/taskInWaitting');
-          } else {
-            this.$router.push('/AntiFraud');
+          if (res.statusCode == '200') {
+            // 更加标志来 选择跳转
+            // 初审/终审 发起反欺诈 提交  -> 代办任务列表
+            if (this.antiFlag == '01') {
+              this.$router.push('/taskInWaitting');
+            } else if(this.antiFlag =='02'){
+              this.$router.push('/FtaskInWaitting');
+            }else if(this.antiFlag == '03' || this.antiFlag == '04'){
+              this.$router.push('/AntiFraud');
+            }
           }
 
         })
@@ -302,6 +305,7 @@ export default {
 
 
 
+
 /* 一列 */
 
 .anti-apply-info-class .item-column1 {
@@ -310,6 +314,7 @@ export default {
   float: left;
   /*max-width: 1366px;*/
 }
+
 
 
 
@@ -332,6 +337,7 @@ export default {
 
 
 
+
 /* 三列 */
 
 .anti-apply-info-class .item-column3 {
@@ -343,6 +349,7 @@ export default {
   /*border: 1px solid;*/
   /*min-width: 300px;*/
 }
+
 
 
 
@@ -423,6 +430,7 @@ export default {
 
 
 
+
 /* 必填 * */
 
 .anti-apply-info-class .require-icon {
@@ -440,6 +448,7 @@ export default {
 
 
 
+
 /* 提交按钮 */
 
 .anti-apply-info-class .submit-class {
@@ -448,6 +457,7 @@ export default {
   width: calc(66% - 500px);
   text-align: right;
 }
+
 
 
 

@@ -35,11 +35,12 @@
     </el-collapse>
     <div class="content">
       <!-- 反欺诈申请 -->
-      <div class="address-title" v-show="false">
+      <!-- v-show="antiFlag!='03'&& antiFlag!='04'" -->
+      <div class="address-title" v-show="antiFlag!='03'&& antiFlag!='04'">
         <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">反欺诈申请列表</span>
       </div>
-      <el-table :data="antiTableData" style="width: 100%" border stripe fit highlight-current-row v-show="antiFlag!='03'&& antiFlag!='04'">
+      <el-table :data="antiTableData" style="width: 100%" border stripe fit highlight-current-row class="anti-table" v-show="antiFlag!='03'&& antiFlag!='04'">
         <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column prop="applySubno" label="进件编号">
@@ -70,12 +71,13 @@
         </el-table-column>
         <el-table-column prop="fraudStateTxt" label="反欺诈状态" width="120">
         </el-table-column>
-        <el-table-column fixed="right" label="操作" width="100">
+        <el-table-column label="操作" width="180">
           <template slot-scope="scope">
-            <el-button @click="handleClickInfo(scope.row)" type="text" size="small">查看</el-button>
-            <el-button @click="handleClickEdit(scope.row)" type="text" size="small">编辑</el-button>
+            <el-button size="mini" @click="handleClickInfo(scope.row)" >查看</el-button>
+            <el-button size="mini" @click="handleClickEdit(scope.row)" >编辑</el-button>
           </template>
         </el-table-column>
+        
       </el-table>
       <!-- 反欺诈专员审批  反欺诈主管审批 -->
       <!-- v-show="antiFlag=='03'||antiFlag=='04'" -->
@@ -84,7 +86,7 @@
         <span class="headFont">反欺诈审批任务列表 </span>
       </div>
       <!-- v-show="antiFlag=='03'||antiFlag=='04'" -->
-      <el-table :data="directorTableData" style="width: 100%" border stripe fit highlight-current-row @row-dblclick="rowDbClick" v-show="antiFlag=='03'||antiFlag=='04'">
+      <el-table :data="directorTableData" style="width: 100%" border stripe fit highlight-current-row @row-dblclick="rowDbClick" v-show="antiFlag=='03'||antiFlag=='04'" class="director-table">
         <el-table-column type="index" :index="1" label="序号">
         </el-table-column>
         <el-table-column prop="taskTypeTxt" label="任务类型">
@@ -246,13 +248,15 @@ export default {
         applyCustNo: this.applyCustNo // 客户编号
       }).then(res => {
         console.log(res);
+        console.log(res.statusCode);
+        console.log(res.data);
         if (res.statusCode == '200') {
-          this.antiTableData = res.data.taskDetailList;
+          this.antiTableData = res.data;
         }
       })
     },
     request() {
-      
+
 
       this.post('/workFlowTaskQuery/getTaskToDoList', {
         processTemplateId: this.processTemplateId,
@@ -294,7 +298,7 @@ export default {
       }
     },
     // 重新查询
-    resetQueryList(){
+    resetQueryList() {
       if (this.antiFlag == '03' || this.antiFlag == '04') {
         this.request();
       } else {
@@ -310,7 +314,7 @@ export default {
       this.$router.push({
         name: 'AntiApplyEdit',
         params: {
-          id: 10011
+          id: row.id
         }
       });
     },
@@ -320,12 +324,13 @@ export default {
       this.$router.push({
         name: 'AntiApplyInf',
         params: {
-          id: 10011
+          id: row.id
         }
       });
     },
     // 主管/专员审批 跳分屏
     rowDbClick(row) {
+      console.log(row);
       console.log('主管/专员 跳分屏')
       // this.$router.push({ path: '/FSplitScreen' });
       if (this.antiFlag == '03') {
@@ -368,9 +373,11 @@ export default {
 
 
 
+
 /* 容器 */
 
 .anti-fraud .container {}
+
 
 
 
@@ -382,6 +389,7 @@ export default {
   margin: 0;
 }
 
+
 /* 两列 */
 
 .anti-fraud .item-column2 {
@@ -389,6 +397,7 @@ export default {
   float: left;
   margin: 0;
 }
+
 
 
 /* 三列 */
@@ -399,6 +408,7 @@ export default {
   margin: 0;
   margin-bottom: 10px;
 }
+
 
 /* 搜索盒子 */
 
@@ -449,6 +459,7 @@ export default {
 }
 
 
+
 /* 折叠面板头部背景色和icon */
 
 .anti-fraud .icon_hat {
@@ -459,6 +470,7 @@ export default {
 .anti-fraud .headFont {
   font-size: 16px;
 }
+
 
 /* 反欺诈 收缩 title */
 
