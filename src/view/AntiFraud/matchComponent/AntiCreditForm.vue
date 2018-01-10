@@ -1,8 +1,9 @@
 <template>
+  <!-- 终审-内部匹配中-信审表-（去掉初审人员）-mounted获取反欺诈专员+主管字段 -->
   <div class="CreditForm">
     <el-collapse v-model="activeNames">
       <!-- 初审人员 -->
-      <el-collapse-item name="0">
+      <!-- <el-collapse-item name="0">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">初审人员</span>
@@ -21,7 +22,7 @@
             </li>
           </ul>
         </div>
-      </el-collapse-item>
+      </el-collapse-item> -->
       <!-- 网上查询信息 -->
       <el-collapse-item name="1">
         <template slot="title">
@@ -487,7 +488,7 @@
               </p>
               <p>
                 <label class="InternetInf_right_label"> 是否支付其生活费： </label>
-                <span class="detail_inf" style="border:none;vertiAlign:middle;height:auto;">{{this.FormData.childIspaycosttext }} </span>
+                <span class="detail_inf" style="border:none;verticalAlign:middle;height:auto;">{{this.FormData.childIspaycosttext }} </span>
               </p>
             </li>
             <li v-show="this.Children.PayAlimony">
@@ -691,7 +692,7 @@
         </div>
       </el-collapse-item>
       <!-- 初审结论 -->
-      <!-- <el-collapse-item name="10">
+      <el-collapse-item name="10">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">初审结论</span>
@@ -699,56 +700,13 @@
         <div class=" CreditForm_result up_padding">
           <div style="width:66.6%;" class="bottom">
             <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
-            <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==''" :content="this.FormData.oother" placement="top-start">
+            <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==null||this.FormData.oother==''" :content="this.FormData.oother" placement="top-start">
               <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
             </el-tooltip>
           </div>
         </div>
-      </el-collapse-item> -->
-      <el-collapse-item name="10">
-        <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">初审结论</span>
-        </template>
-        <div class=" CreditForm_result" style="paddingTop:20px;">
-          <div>
-            <ul>
-              <li>
-                <p>
-                  <label class="InternetInf_left_label" style="textAlign:right">初审结果评价：</label>
-                  <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==null||this.FormData.oother==''" :content="this.FormData.oother"
-                    placement="top-start">
-                    <span class="detail_inf ComAddr" style="height:115px;">{{this.FormData.oother}} </span>
-                  </el-tooltip>
-                </p>
-                <p class="FinalConclution" style="position:relative">
-                  <i class="hint">
-                    <!-- <span v-show="errors.has('Finalconclusion')">{{ errors.first('Finalconclusion') }}</span> -->
-                    <b v-show="this.finalResult"> * 输入长度不能超过500</b>
-                  </i>
-                  <label class="InternetInf_left_label" style="textAlign:right">
-                    <span style="color:#ff7676;"> * </span>终审结果评价：</label>
-                  <el-input type="textarea" :rows="5" resize="none" :maxlength="500" placeholder="请输入内容" @compositionend.native="wordarea(FormData.ootherfinal)"
-                    @keyup.native="wordarea(FormData.ootherfinal)" v-model="FormData.ootherfinal" name="Finalconclusion" v-validate="'required'">
-                  </el-input>
-                </p>
-              </li>
-            </ul>
-          </div>
-        </div>
       </el-collapse-item>
     </el-collapse>
-    <div class="btn_wrap">
-      <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
-    </div>
-    <!-- ==============================点击确认时提示弹框=================================== -->
-    <el-dialog title="提示" :visible.sync="Confirm" top="43vh" width="420px">
-      <span>确定操作？</span>
-      <span slot="footer" class="dialog-footer">
-        <button class="calbtn" @click="canc">取消</button>
-        <button class="subtn" type="primary" @click="CFsave">确定</button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 
@@ -756,7 +714,7 @@
   export default {
     data() {
       return {
-        finalResult: false,
+          judgeFlag:'',
         FormData: [],
         Pwidth: [],
         CFwidth: [],
@@ -882,44 +840,6 @@
       }
     },
     methods: {
-      makeSureBtn() {
-        this.Confirm = true;
-      },
-      canc() {
-        this.Confirm = false;
-      },
-      closed() {
-        this.Confirm = false;
-      },
-      CFsave() {
-        console.log(this.FormData)
-        this.$validator.validateAll().then((result) => {
-          if (result) {
-            this.post("/creauditInfo/updateOtherfinalByPK", {
-              applyId: this.FormData.applyId,
-              id: this.FormData.id,
-              ootherfinal: this.FormData.ootherfinal
-            }).then(res => {
-              if (res.statusCode == 200) {
-                this.Confirm = false;
-                this.AreaNPercent();
-                this.$message({
-                  message: '恭喜你，提交成功!',
-                  type: 'success'
-                });
-                this.mountC();
-              } else {
-                this.Confirm = false;
-                this.$message.error('提交失败！');
-                this.mountC();
-              }
-            });
-          } else {
-            this.Confirm = false;
-              this.$message.error('必填项不能为空！');
-          }
-        });
-      },
       formatSC(el, val) {
         switch (el) {
           case "月还款":
@@ -989,6 +909,7 @@
         this.acquire(this.FormData.iloanAmt, '借款金额');
       },
       NewPage(ind) {
+        console.log(ind);
         switch (ind) {
           case 0:
             window.open("http://zhixing.court.gov.cn/search/");
@@ -1008,63 +929,16 @@
         }
       },
       AreaNPercent() {
-        if (this.FormData.selfpremisesArea) {
-          this.FormData.selfpremisesArea += "m²";
+        if (this.checkData.selfpremisesArea) {
+          this.checkData.selfpremisesArea += "m²";
         } else {
-          this.FormData.selfpremisesArea = "";
+          this.checkData.selfpremisesArea = "";
         }
-        if (this.FormData.selfhasProportion) {
-          this.FormData.selfhasProportion += "%";
+        if (this.checkData.selfhasProportion) {
+          this.checkData.selfhasProportion += "%";
         } else {
-          this.FormData.selfhasProportion = "";
+          this.checkData.selfhasProportion = "";
         }
-      },
-      wordarea(val) {
-        if (val.length <= 499) {
-          this.FormData.ootherfinal = val;
-          this.finalResult = false;
-        } else {
-          this.finalResult = true;
-        }
-      },
-      mountC() {
-        // 获取查询列表数据
-        this.post("/creauditInfo/queryCreauditInfoObj", {
-          applyId: this.getParams.applyId,
-          // applyId: "00542",
-        }).then(res => {
-          if (res.statusCode == 200) {
-            console.log(res.data)
-            this.FormData = res.data;
-            this.FormData.applyId = this.getParams.applyId;
-            this.AreaNPercent();
-            this.mountM();
-            this.mountJ(0, res.data.wbeexEcuted);
-            this.mountJ(1, res.data.wnetHirecom);
-            this.mountJ(2, res.data.wnetEcutedBrea);
-            this.mountJ(3, res.data.wnetHirecomBrea);
-            this.mountJ(4, res.data.wnetPhone);
-            this.mountJ(5, res.data.wnetHirecomName);
-            this.mountJ(6, res.data.wnetHirecomPhone);
-            this.mountJ(7, res.data.wnetAddrandEstate);
-            this.mountJ(8, res.data.wnetHirecomAddress);
-            this.mountJ(9, res.data.wnetCompany);
-            this.mountJ(10, res.data.wnetAddrstate);
-            this.mountJ(11, res.data.iisself);
-            this.mountJ(12, res.data.privateOwnerFlag);
-            this.mountJ(13, res.data.fmarrflag);
-            this.mountJ(14, res.data.spouseWork);
-            this.mountJ(15, res.data.spouseSamecity);
-            this.mountJ(16, res.data.childFlag);
-            this.mountJ(17, res.data.childIspaycost);
-            this.mountJ(18, res.data.parentIsliving);
-            this.mountJ(19, res.data.brothersIfhas);
-            this.mountJ(20, res.data.aisresident);
-            this.mountJ(21, res.data.iloanBefore);
-          } else {
-            this.$message.error(res.msg);
-          }
-        });
       },
       mountJ(code, val) {
         switch (code) {
@@ -1139,45 +1013,49 @@
       },
     },
     mounted() {
-      this.getParams = JSON.parse(localStorage.getItem("FtaskInWaitting")); // 终审工作台
-      // console.log(this.getParams.applyId)
-      // // 获取查询列表数据
-      this.mountC();
-      // this.post("/creauditInfo/queryCreauditInfoObj", {
-      //   applyId: this.getParams.applyId,
-      //   // applyId: "00542",
-      // }).then(res => {
-      //   if (res.statusCode == 200) {
-      //     console.log(res.data)
-      //     this.FormData = res.data;
-      //     this.FormData.applyId = this.getParams.applyId;
-      //     this.AreaNPercent();
-      //     this.mountJ(0, res.data.wbeexEcuted);
-      //     this.mountJ(1, res.data.wnetHirecom);
-      //     this.mountJ(2, res.data.wnetEcutedBrea);
-      //     this.mountJ(3, res.data.wnetHirecomBrea);
-      //     this.mountJ(4, res.data.wnetPhone);
-      //     this.mountJ(5, res.data.wnetHirecomName);
-      //     this.mountJ(6, res.data.wnetHirecomPhone);
-      //     this.mountJ(7, res.data.wnetAddrandEstate);
-      //     this.mountJ(8, res.data.wnetHirecomAddress);
-      //     this.mountJ(9, res.data.wnetCompany);
-      //     this.mountJ(10, res.data.wnetAddrstate);
-      //     this.mountJ(11, res.data.iisself);
-      //     this.mountJ(12, res.data.privateOwnerFlag);
-      //     this.mountJ(13, res.data.fmarrflag);
-      //     this.mountJ(14, res.data.spouseWork);
-      //     this.mountJ(15, res.data.spouseSamecity);
-      //     this.mountJ(16, res.data.childFlag);
-      //     this.mountJ(17, res.data.childIspaycost);
-      //     this.mountJ(18, res.data.parentIsliving);
-      //     this.mountJ(19, res.data.brothersIfhas);
-      //     this.mountJ(20, res.data.aisresident);
-      //     this.mountJ(21, res.data.iloanBefore);
-      //   } else {
-      //  this.$message.error(res.msg);
-      //   }
-      // });
+             this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      if (this.judgeFlag.flag == '03') {
+        this.getParams = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈专员-匹配查看
+      } else if (this.judgeFlag.flag == '04') {
+        this.getParams = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管-匹配查看
+      }
+      console.log(this.getParams)
+      // 获取查询列表数据
+      this.post("/creauditInfo/queryCreauditInfoObj", {
+        applyId: this.getParams.applyId,
+        // applyId: "00542",
+      }).then(res => {
+        if (res.statusCode == 200) {
+          console.log(res.data)
+          this.FormData = res.data;
+          this.AreaNPercent();
+          this.mountM();
+          this.mountJ(0, res.data.wbeexEcuted);
+          this.mountJ(1, res.data.wnetHirecom);
+          this.mountJ(2, res.data.wnetEcutedBrea);
+          this.mountJ(3, res.data.wnetHirecomBrea);
+          this.mountJ(4, res.data.wnetPhone);
+          this.mountJ(5, res.data.wnetHirecomName);
+          this.mountJ(6, res.data.wnetHirecomPhone);
+          this.mountJ(7, res.data.wnetAddrandEstate);
+          this.mountJ(8, res.data.wnetHirecomAddress);
+          this.mountJ(9, res.data.wnetCompany);
+          this.mountJ(10, res.data.wnetAddrstate);
+          this.mountJ(11, res.data.iisself);
+          this.mountJ(12, res.data.privateOwnerFlag);
+          this.mountJ(13, res.data.fmarrflag);
+          this.mountJ(14, res.data.spouseWork);
+          this.mountJ(15, res.data.spouseSamecity);
+          this.mountJ(16, res.data.childFlag);
+          this.mountJ(17, res.data.childIspaycost);
+          this.mountJ(18, res.data.parentIsliving);
+          this.mountJ(19, res.data.brothersIfhas);
+          this.mountJ(20, res.data.aisresident);
+          this.mountJ(21, res.data.iloanBefore);
+        } else {
+          this.$message.error(res.msg);
+        }
+      });
     },
   }
 
@@ -1195,47 +1073,6 @@
   /* ------------------------------------------------ */
   /* 最下面的 弹窗样式 */
   /* 上网信息-两行select下拉 居中 */
-
-  .hint {
-    color: #ff7676;
-    font-size: 12px;
-    display: inline-block;
-    width: 100%;
-    font-style: normal;
-    position: absolute;
-    top: -20px;
-    left: 205px;
-  }
-
-  .btn_wrap {
-    width: 66.6%;
-    height: 60px;
-  }
-
-  .btn {
-    margin-left: calc( 100% - 95px);
-  }
-
-  .calbtn {
-    background: white;
-    border: 1px solid #d8dce5;
-    color: #5a5e66;
-    ;
-    margin-left: 10px;
-    padding: 7px 15px;
-    font-size: 12px;
-    border-radius: 3px;
-  }
-
-  .subtn {
-    background: #66b1ff;
-    border-color: #66b1ff;
-    color: #fff;
-    margin-left: 10px;
-    padding: 7px 15px;
-    font-size: 12px;
-    border-radius: 3px;
-  }
 
   .icon_hat {
     position: absolute;
@@ -1372,6 +1209,7 @@
     border-radius: 4px;
   }
   /* 省略号 */
+
   .elips {
     width: calc( 100% - 197px);
     overflow: hidden;
@@ -1380,6 +1218,7 @@
     vertical-align: middle;
   }
   /* 第一经销商 */
+
   .Suppliers {
     width: calc( 100% - 205px);
   }
@@ -1405,17 +1244,16 @@
   /*  */
 
   .interMath li,
-  .PhontConclution li,
-  .CreditForm_result li {
+  .PhontConclution li {
     margin-bottom: 20px;
     width: 66.6%;
-    /* background: red; */
   }
   /* 初审结果div */
-  /* .CreditForm_result { */
-  /* width: calc( 66.6% - 197px); */
-  /* width:80%; */
-  /* padding: 20px 0 30px 0; */
-  /* } */
+
+  .CreditForm_result {
+    /* width: calc( 66.6% - 197px); */
+    /* width:80%; */
+    padding: 20px 0 30px 0;
+  }
 
 </style>

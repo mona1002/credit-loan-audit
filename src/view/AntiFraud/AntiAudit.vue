@@ -37,21 +37,31 @@
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
             <AnitAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AnitAudioVisual>
-            <remark v-if=" this.tabContent2==1"></remark>
+            <!-- √ -->
+            <cremark v-if=" this.tabContent2==1"></cremark>
+            <!-- √ -->
             <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
-            <borrowerInformation v-if=" this.tabContent2==4"></borrowerInformation>
+            <!-- √ -->
+            <cborrowerInformationDetail v-if=" this.tabContent2==4"></cborrowerInformationDetail>
+            <!-- √ -->
             <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
-            <FMCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></FMCreditForm>
+            <AntiCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></AntiCreditForm>
+            <!-- √ -->
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
+            <!-- √ -->
             <!-- 信审审批结论轨迹 -->
             <aAprovalConclusion v-if=" this.tabContent2==8"></aAprovalConclusion>
+            <!-- √ -->
             <!-- 反欺诈审批结论轨迹 -->
             <aAntiConclusionPath v-if=" this.tabContent2==9"></aAntiConclusionPath>
-            <!-- 以下待更新 -->
-            <aAntiConclusionPath v-if=" this.tabContent2==10">反欺诈申请信息</aAntiConclusionPath>
-            <aAntiConclusionPath v-if=" this.tabContent2==10">反欺诈调查</aAntiConclusionPath>
-            <aAntiConclusionPath v-if=" this.tabContent2==10">审批结论</aAntiConclusionPath>
+            <!-- √ -->
+            <AntiApplyInf v-if=" this.tabContent2==10">反欺诈申请信息</AntiApplyInf>
+            <!-- √ -->
+            <aAntiFraudInvestigation v-if=" this.tabContent2==11">反欺诈调查</aAntiFraudInvestigation>
+            <!-- √ -->
+            <approvalConclus v-if=" this.tabContent2==12">审批结论</approvalConclus>
+            <!-- √ -->
           </div>
         </div>
       </div>
@@ -62,24 +72,19 @@
   import myHead from "../header.vue"
   import AnitAudioVisual from './components/AnitAudioVisual.vue'; //工作台--》 av
   // import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配查看 --》 aV
-  import FMCreditForm from "../FinalTrial/FinalMatchComponent/FMCreditForm.vue"; //信审表-与内部匹配打开的是同一个页面
-  import aAntiConclusionPath from './components/aAntiConclusionPath.vue'; //反欺诈审批结论轨迹
-  import aAprovalConclusion from './components/aAprovalConclusion.vue' //信审审批结论轨迹
-  // --------------------------------------------------------------------------------------------
-  // 编辑
-  import remark from "../FirstTrail/detailComponent/remark.vue";
-  import InternalMatch from "../FirstTrail/InternalMatch.vue";
-  import applicationInformation from "../FirstTrail/detailComponent/applicationInformation.vue";
-  import borrowerInformation from "../FirstTrail/detailComponent/borrowerInformation.vue";
-  import PhoneCredit from "../FirstTrail/PhoneCredit.vue";
-  import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信
-  // 信审审批写此处
-  import CreditApproval from "../FirstTrail/CreditApproval.vue";
-  // 查询
-  // import cFinanceInformation from "./checkComponent/FinanceInformation";
+  import cremark from '../FirstTrail/checkComponent/remarkDetail.vue' //备注信息
+  import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息  
   import cborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料
-  import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息
-
+  import AntiCreditForm from "./matchComponent/AntiCreditForm.vue"; //信审表-反欺诈匹配文件中-与匹配查看页面信审表一致
+  import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信
+  import aAprovalConclusion from './components/aAprovalConclusion.vue' //信审审批结论轨迹
+  import aAntiConclusionPath from './components/aAntiConclusionPath.vue'; //反欺诈审批结论轨迹
+  import AntiApplyInf from './AntiApplyInf.vue' //反欺诈申请信息
+  import aAntiFraudInvestigation from './components/aAntiFraudInvestigation.vue' //反欺诈调查
+  import approvalConclus from './approvalConclus.vue' //审批结论  
+  // --------------------------------------------------------------------------------------------
+  import InternalMatch from "../FirstTrail/InternalMatch.vue";
+  import PhoneCredit from "../FirstTrail/PhoneCredit.vue";
   export default {
     data() {
       return {
@@ -95,12 +100,12 @@
         title: "",
         isShow: false,
         flexible: true,
-        tabContent2: 3,
-        tabActiveInd2: 3,
+        tabContent2: 0,
+        tabActiveInd2: 0,
         items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "信审审批结论轨迹", "反欺诈审批结论轨迹", "反欺诈申请信息",
           "反欺诈调查", "审批结论"
         ],
-        tab2Index: 3,
+        tab2Index: 0,
         AlertSearch: "",
       }
     },
@@ -151,10 +156,10 @@
         this.tabContent2 = ind;
         this.tab2Index = ind;
         this.tabActiveInd2 = ind;
-        for (var i = 0; i < this.$refs.tabOne.length; i++) {
-          this.$refs.tabOne[i].className = "tab1Default";
-          //   this.flag1[i] = true;
-        }
+        // for (var i = 0; i < this.$refs.tabOne.length; i++) {
+        //   this.$refs.tabOne[i].className = "tab1Default";
+        //   //   this.flag1[i] = true;
+        // }
         // this.$refs.tabOne[this.tabActiveInd1].className = "tab1Act";
         // if (ind != 0 && ind != 8) {
         //   this.flag1[ind] = false;
@@ -162,38 +167,42 @@
       }
     },
     mounted() {
-      console.log("分屏");
-      //   this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
-      //   this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-      //     id: this.tastwaitingPass.applyId,
-      //   }).then(res => {
-      // if (res.statusCode == 200) {
-      //   //     this.customInf = res.data;
-      // } else {
-      //   this.$message.error(res.msg);
-      // }
-      //   });
+      console.log("反欺诈分屏");
+      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      if (this.judgeFlag.flag == '03') {
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈专员-匹配查看
+      } else if (this.judgeFlag.flag == '04') {
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管-匹配查看
+      }
+      this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
+        id: this.tastwaitingPass.applyId,
+      }).then(res => {
+        if (res.statusCode == 200) {
+          this.customInf = res.data;
+          console.log(this.customInf)
+        } else {
+          this.$message.error(res.msg);
+        }
+      });
       this.title = "影音资料";
     },
     components: {
       myHead,
       AnitAudioVisual,
-      FMCreditForm,
+      AntiCreditForm,
       aAntiConclusionPath,
       aAprovalConclusion,
+      AntiApplyInf, //反欺诈申请信息
+      approvalConclus, //审批结论
+      aAntiFraudInvestigation, //反欺诈调查
+      cremark, //备注信息
+      cborrowerInformationDetail, //借款人资料
+      capplicationInformationDetail, //申请信息
       // aMAnitAudioVisual,
       // 编辑
-      remark,
       InternalMatch,
-      applicationInformation,
-      borrowerInformation,
       PhoneCredit,
       creditInvestigation,
-      // 信审审批
-      CreditApproval,
-      // 查询
-      cborrowerInformationDetail,
-      capplicationInformationDetail,
     }
   }
 

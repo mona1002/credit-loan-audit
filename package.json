@@ -13,7 +13,6 @@
     "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
     "element-ui": "^2.0.4",
-    "fundebug-javascript": "^0.3.3",
     "jquery": "^3.2.1",
     "vee-validate": "^2.0.0-rc.25",
     "vue": "^2.5.2",

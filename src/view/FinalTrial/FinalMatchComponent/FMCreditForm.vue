@@ -699,7 +699,7 @@
         <div class=" CreditForm_result up_padding">
           <div style="width:66.6%;" class="bottom">
             <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
-            <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==''" :content="this.FormData.oother" placement="top-start">
+            <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==null||this.FormData.oother==''" :content="this.FormData.oother" placement="top-start">
               <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
             </el-tooltip>
           </div>
