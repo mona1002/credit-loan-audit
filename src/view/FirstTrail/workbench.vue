@@ -232,6 +232,7 @@
           userCode: response.data.userCode,
           orgCode: response.data.orgCode,
           orgId: response.data.orgId,
+          userName: response.data.userName
         }
         localStorage.setItem("userInf", JSON.stringify(this.userInf));
         this.post("/workFlowTaskQuery/getTaskProfile", {
