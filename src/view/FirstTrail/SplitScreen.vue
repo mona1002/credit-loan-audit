@@ -4,12 +4,12 @@
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
       <p class="PerDtl">
-        <span> 借款人： {{customInf.mainCustName}}</span>
-        <span> 进件编号: {{customInf.applyMainNo}}</span>
-        <span> 证件号码: {{tastwaitingPass.certCode}}</span>
-        <span> 进件机构: {{customInf.appOrgName}}</span>
-        <span> 门店成立时间: {{customInf.appOrgRegisterDate}}</span>
-        <span> 业务员入职时间： {{customInf.salPerEmployDate}}</span>
+        <span> 借款人：{{custName}}</span>
+        <span> 进件编号：{{customInf.applyMainNo}}</span>
+        <span> 证件号码：{{tastwaitingPass.certCode}}</span>
+        <span> 进件机构：{{customInf.appOrgName}}</span>
+        <span> 门店成立时间：{{customInf.appOrgRegisterDate}}</span>
+        <span> 业务员入职时间：{{customInf.salPerEmployDate}}</span>
         <span>{{customInf.adminIntroduce}}</span>
       </p>
       <div class="SplitScreen_wrap">
@@ -142,6 +142,7 @@
   export default {
     data() {
       return {
+        custName:'',//借款人
         SplitLeft: "left",
         SplitRight: "right",
         watchData: '',
@@ -265,9 +266,9 @@
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.applyId,
       }).then(res => {
-        console.log(res)
         if (res.statusCode == 200) {
-          this.customInf = res.data;
+           this.custName=res.data.accepCusBasicInfo.custName;
+          this.customInf =res.data;
         } else {
           this.$message.error(res.msg);
         }

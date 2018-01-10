@@ -32,11 +32,13 @@
       } else if (this.judgeFlag.flag == '04') {
         this.tastwaitingPass = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管-匹配查看
       }
-      this.post("/fraudauditopinion/getApproveConclusionTrack", {
-        appinfoId: this.tastwaitingPass.appinfoId,
+      console.log(this.tastwaitingPass)
+      this.post("/fraudAuditOpinion/getApproveConclusionTrack", {
+        appinfoId: this.tastwaitingPass.applyId,
         // appinfoId: "00542",
       }).then(res => {
         if (res.statusCode == 200) {
+          console.log(res)
           this.tableData = res.data;
         } else {
           this.$message.error(res.msg);

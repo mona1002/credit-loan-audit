@@ -380,14 +380,14 @@
       } else if (this.judgeFlag.flag == '04') {
         this.localInf = JSON.parse(localStorage.getItem("AntiManagerWorkbenchPass")) //反欺诈主管
       }
-      console.log(this.localInf)
+      // console.log(this.localInf)
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.applyId,
         // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
         //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
       }).then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.statusCode == 200) {
           this.ListParent = res.data;
         } else {

@@ -2,27 +2,6 @@
   <!-- 终审-内部匹配中-信审表-（去掉初审人员）-mounted获取反欺诈专员+主管字段 -->
   <div class="CreditForm">
     <el-collapse v-model="activeNames">
-      <!-- 初审人员 -->
-      <!-- <el-collapse-item name="0">
-        <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">初审人员</span>
-        </template>
-        <div class="CreditForm_live up_padding">
-          <ul>
-            <li class="top">
-              <p>
-                <label class="InternetInf_left_label ">初审人员编号：</label>
-                <span class="detail_inf">{{this.FormData.ploanOperCode}} </span>
-              </p>
-              <p class="bottom">
-                <label class="InternetInf_right_label">初审人员姓名：</label>
-                <span class="detail_inf">{{this.FormData.ploanOperName}} </span>
-              </p>
-            </li>
-          </ul>
-        </div>
-      </el-collapse-item> -->
       <!-- 网上查询信息 -->
       <el-collapse-item name="1">
         <template slot="title">
@@ -697,13 +676,23 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">初审结论</span>
         </template>
-        <div class=" CreditForm_result up_padding">
-          <div style="width:66.6%;" class="bottom">
-            <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
-            <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==null||this.FormData.oother==''" :content="this.FormData.oother" placement="top-start">
-              <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
-            </el-tooltip>
-          </div>
+        <div class="CreditForm_result up_padding">
+         <ul>
+            <li style="width:66.6%;">
+              <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
+              <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==null||this.FormData.oother==''" :content="this.FormData.oother"
+                placement="top-start">
+                <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
+              </el-tooltip>
+            </li>
+            <li style="marginTop:20px;width:66.6%;">
+              <p class="InternetInf_left_label" style="textAlign:right">终审结果评价：</p>
+              <el-tooltip class="item" effect="dark" :disabled="this.FormData.ootherfinal==null||this.FormData.ootherfinal==''" :content="this.FormData.ootherfinal"
+                placement="top-start">
+                <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.ootherfinal}} </span>
+              </el-tooltip>
+            </li>
+          </ul>
         </div>
       </el-collapse-item>
     </el-collapse>

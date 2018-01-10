@@ -5,7 +5,7 @@
       <el-collapse-item name="1">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">基本信息</span>
+          <span class="headFont">基本信息 </span>
         </template>
         <div class="baseInf">
           <ul>
@@ -16,7 +16,7 @@
               </p>
               <p>
                 <label>证件号码： </label>
-                <span>{{this.conclu.applySubno}} </span>
+                <span>{{this.conclu.certCode}} </span>
               </p>
             </li>
             <li>
@@ -26,13 +26,13 @@
               </p>
               <p>
                 <label>移动电话： </label>
-                <span>{{this.conclu.applySubno}} </span>
+                <span>{{this.conclu.mobile}} </span>
               </p>
             </li>
             <li>
               <p>
                 <label>证件类型： </label>
-                <span>{{this.conclu.certType}} </span>
+                <span>{{this.conclu.certTypeTxt}} </span>
               </p>
             </li>
           </ul>
@@ -48,7 +48,7 @@
             <li>
               <p>
                 <label>借欺诈申请类型主原因： </label>
-                <span>{{this.conclu.certType}} </span>
+                <span>{{this.conclu.mainreaName}} </span>
                 <!-- <el-select v-model="value" placeholder="请选择">
                 <el-option v-for="item in mainReason" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
@@ -56,27 +56,28 @@
               </p>
               <p>
                 <label>子原因： </label>
-                <span>{{this.conclu.certType}} </span>
+                <span>{{this.conclu.subreaName}} </span>
               </p>
             </li>
             <li>
               <p class="description">
                 <label>欺诈上报描述：</label>
-                <span class="textA"> </span>
+                <span class="textA"> {{this.conclu.applyDesc}}</span>
               </p>
             </li>
             <li>
               <p>
                 <label>反欺诈申请人： </label>
-                <span>{{this.conclu.certType}} </span>
+                <span>{{this.conclu.applyPersonName}} </span>
               </p>
               <p>
                 <label>反欺诈申请日期： </label>
-                <span>{{this.conclu.certType}} </span>
+                <span>{{this.conclu.appDate}} </span>
               </p>
               <p>
                 <label>反欺诈申请机构： </label>
-                <span>{{this.conclu.certType}} </span>
+                <span>{{this.conclu.appOrgName}} </span>
+                <!-- appOrgCode -->
               </p>
             </li>
           </ul>
@@ -85,13 +86,14 @@
       <el-collapse-item name="3">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">反欺诈结论</span>
+          <span class="headFont">反欺诈结论 </span>
         </template>
         <div class="AntiConclution">
           <ul style="margin:20px 0;">
             <li>
               <p class="description">
                 <label>反欺诈决策反馈： </label>
+                <!-- 字段不确定 -->
                 <span class="textA"> </span>
               </p>
             </li>
@@ -108,6 +110,9 @@
         activeNames: ['1', '2', '3'],
         conclu: '',
         tastwaitingPass: '',
+        applyInfoPool:'',
+        fraudApplyInfo:'',
+        fraudAuditOpinion:'',
         // mainReason: [{
         //     value: '选项1',
         //     label: '信审黑名单、信审灰名单、外部黑名单'
@@ -130,20 +135,22 @@
       }
     },
     mounted() {
+      //基本信息:applyInfoPool
+    // 反欺诈申请信息 fraudApplyInfo
+    // 反欺诈结论 fraudAuditOpinion 
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '01') {
         this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
       } else if (this.judgeFlag.flag == '02') {
         this.tastwaitingPass = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
       }
-      this.post("/creauditOpinion/queryByPage", {
-        // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
-        // applyId:"00542",
+      this.post("/fraudApplyInfoController/getRecentFraudApplyInfoWithOpinion", {
         applyId: this.tastwaitingPass.applyId,
       }).then(res => {
         if (res.statusCode == 200) {
-          console.log(res.data)
-          this.conclu = res.data.recordList;
+          // console.log(res)
+          this.conclu =Object.assign(res.data.applyInfoPool,res.data.fraudApplyInfo,res.data.fraudAuditOpinion);
+          console.log(this.conclu);
         } else {
           this.$message.error(res.msg);
         }
