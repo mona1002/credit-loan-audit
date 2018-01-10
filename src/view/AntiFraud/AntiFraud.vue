@@ -27,7 +27,7 @@
             </div>
           </li>
           <li class="item-column1 submit-class">
-            <el-button type="primary" @click="queryList">查询</el-button>
+            <el-button type="primary" @click="resetQueryList">查询</el-button>
             <el-button @click="resetQuery">重置</el-button>
           </li>
         </div>
@@ -87,7 +87,7 @@
       <el-table :data="directorTableData" style="width: 100%" border stripe fit highlight-current-row @row-dblclick="rowDbClick" v-show="antiFlag=='03'||antiFlag=='04'">
         <el-table-column type="index" :index="1" label="序号">
         </el-table-column>
-        <el-table-column prop="taskType" label="任务类型">
+        <el-table-column prop="taskTypeTxt" label="任务类型">
         </el-table-column>
         <el-table-column prop="applySubNo" label="进件编号">
         </el-table-column>
@@ -190,18 +190,18 @@ export default {
       applySubno: '', // 进件编号
       applyCustName: '', // 客户名称
       applyCustNo: '', // 客户编号
-      queryParam: {
-        processTemplateId: '',
-        taskNodeName: '',
-        taskStatus: '',
-        userCode: '',
-        orgCode: '',
-        pageNum: 1,
-        pageSize: 10,
-        applySubNo: '',
-        custName_la: '',
-        certCode: ''
-      },
+
+      processTemplateId: '',
+      taskNodeName: '',
+      taskStatus: '',
+      userCode: '',
+      orgCode: '',
+      pageNum: 1,
+      pageSize: 10,
+      applySubNo: '',
+      custName_la: '',
+      certCode: ''
+
     }
   },
   props: ['applyId'], // 申请单id
@@ -215,22 +215,23 @@ export default {
     // 初审-信审审批-发起反欺诈
     if (this.antiFlag == '03' || this.antiFlag == '04') {
       if (this.antiFlag == '03') {
-        this.queryParam.processTemplateId = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).processTemplateId;
+        this.processTemplateId = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).processTemplateId;
 
-        this.queryParam.taskNodeName = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskNodeName;
+        this.taskNodeName = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskNodeName;
       }
       if (this.antiFlag == '04') {
-        this.queryParam.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
+        this.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
 
-        this.queryParam.taskNodeName = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskNodeName;
+        this.taskNodeName = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskNodeName;
       }
-      this.queryParam.taskStatus = JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
+      this.taskStatus = JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
       // 登录 单独存  userCode  orgCode 
-      this.queryParam.userCode = JSON.parse(localStorage.getItem('userInf')).userCode;
-      this.queryParam.orgCode = JSON.parse(localStorage.getItem('userInf')).orgCode;
-      console.log('this.queryParam')
-      console.log(this.queryParam.userCode,this.queryParam.orgCode);
-      this.request(this.queryParam);
+      this.userCode = JSON.parse(localStorage.getItem('userInf')).userCode;
+      this.orgCode = JSON.parse(localStorage.getItem('userInf')).orgCode;
+
+      this.request();
+
+      this.queryList();
     } else {
       // 反欺诈申请 - 列表
       this.queryList();
@@ -250,13 +251,23 @@ export default {
         }
       })
     },
-    request(param) {
-      console.log(this.queryParam);
-      this.post('/workFlowTaskQuery/getTaskToDoList',
-        param
-      ).then(res => {
+    request() {
+      
+
+      this.post('/workFlowTaskQuery/getTaskToDoList', {
+        processTemplateId: this.processTemplateId,
+        taskNodeName: this.taskNodeName,
+        taskStatus: this.taskStatus,
+        userCode: this.userCode,
+        orgCode: this.orgCode,
+        pageNum: this.pageNum,
+        pageSize: this.pageSize,
+        applySubNo: this.applySubno,
+        custName_la: this.applyCustName,
+        certCode: this.applyCustNo,
+      }).then(res => {
         if (res.statusCode == 200) {
-          this.directorTableData = res.data.list;
+          this.directorTableData = res.data.taskDetailList;
         } else {
           this.directorTableData = [];
         }
@@ -266,18 +277,26 @@ export default {
     // 重置查询条件
     resetQuery() {
       // 查询条件 初始化
-      this.applySubNo = '';
-      this.custName_la = '';
-      this.certCode = '';
-      this.applySubno = '';
-      this.applyCustName = '';
-      this.applyCustNo = '';
-      this.queryParam.applySubNo = '';
-      this.queryParam.custName_la = '';
-      this.queryParam.certCode = '';
+      this.applySubno = ''; // 进件编号
+      this.applyCustName = ''; // 客户名称
+      this.applyCustNo = ''; // 客户编号
+      // this.taskNodeName= '';
+      // this.applySubNo= '';
+      // this.custName_la= '';
+      // this.certCode= '';
+
 
       if (this.antiFlag == '03' || this.antiFlag == '04') {
-        this.request(this.queryParam);
+        this.request();
+      } else {
+        // 再次请求
+        this.queryList();
+      }
+    },
+    // 重新查询
+    resetQueryList(){
+      if (this.antiFlag == '03' || this.antiFlag == '04') {
+        this.request();
       } else {
         // 再次请求
         this.queryList();
@@ -308,17 +327,19 @@ export default {
     // 主管/专员审批 跳分屏
     rowDbClick(row) {
       console.log('主管/专员 跳分屏')
-      this.$router.push({ path: '/FSplitScreen' });
+      // this.$router.push({ path: '/FSplitScreen' });
       if (this.antiFlag == '03') {
         // 反欺诈专员
         localStorage.setItem("AntitaskInWaitting", JSON.stringify(row))
+        // 反欺诈  分屏
+        this.$router.push('AntiAudit')
       }
       if (this.antiFlag == '04') {
         // 反欺诈主管
         localStorage.setItem("AntiManagertaskInWaitting", JSON.stringify(row))
+        // 反欺诈  分屏
+        this.$router.push('AntiAudit')
       }
-      // 反欺诈  分屏
-      this.$router.push('AntiAudit')
     }
   }
 }
@@ -342,20 +363,14 @@ export default {
 
 
 
+
+
+
+
+
 /* 容器 */
 
 .anti-fraud .container {}
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -367,19 +382,6 @@ export default {
   margin: 0;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 两列 */
 
 .anti-fraud .item-column2 {
@@ -387,19 +389,6 @@ export default {
   float: left;
   margin: 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* 三列 */
@@ -410,20 +399,6 @@ export default {
   margin: 0;
   margin-bottom: 10px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* 搜索盒子 */
 
@@ -474,18 +449,6 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 /* 折叠面板头部背景色和icon */
 
 .anti-fraud .icon_hat {
@@ -496,20 +459,6 @@ export default {
 .anti-fraud .headFont {
   font-size: 16px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* 反欺诈 收缩 title */
 
