@@ -12,7 +12,7 @@
             </nav-item>
         </el-submenu>
 
-        <el-menu-item v-else :index="item.resUrl">{{ item.resName }}</el-menu-item>
+        <el-menu-item @click="clickMenu(item)" v-else :index="item.resUrl">{{ item.resName }}</el-menu-item>
     <!-- <div>{{navIndex}}</div> -->
     </div>
 </template>
@@ -20,6 +20,16 @@
     export default {
         // 递归组件必须有name
         name: 'navItem',
+        data(){
+            return{
+
+            }
+        },
+        methods:{
+            clickMenu(e){
+                console.log(e);
+            },
+        },
         props: ['item','navIndex']
     }
 </script>

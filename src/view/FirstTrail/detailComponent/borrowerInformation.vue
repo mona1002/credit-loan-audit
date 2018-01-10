@@ -2708,6 +2708,9 @@
 		width: 100%;
 		padding-left:10px;
 	}
+	.fuzhaixinxi ol:nth-of-type(1) li:nth-of-type(2) label{
+		padding-right: 4px;
+	}
 	.fuzhaixinxi ol:nth-of-type(2) li:nth-of-type(2){
 		height: 35px;
 	}

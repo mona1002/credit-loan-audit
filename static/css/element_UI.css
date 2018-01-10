@@ -133,28 +133,31 @@ height: 40px;
   text-align: center;
 }
 
-.applicationInformationDetail .el-table th:nth-of-type(1) .cell{
+.applicationInformationDetail .el-table th:nth-of-type(1) .cell {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
 
-.applicationInformationDetail .el-table__body-wrapper .el-table__body td:nth-of-type(1){
+.applicationInformationDetail .el-table__body-wrapper .el-table__body td:nth-of-type(1) {
   padding-left: 0 !important;
 }
 
-.applicationInformationDetail .el-table__body-wrapper .el-table__body td:nth-of-type(1) .cell{
+.applicationInformationDetail .el-table__body-wrapper .el-table__body td:nth-of-type(1) .cell {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
 
-.applicationInformationDetail .house .el-table__body-wrapper{
-      overflow: hidden;
-    }
+.applicationInformationDetail .house .el-table__body-wrapper {
+  overflow: hidden;
+}
+
+
 /* @media screen and (min-width: 1327px){
     .applicationInformationDetail .house .el-table__body-wrapper{
       overflow: hidden;
     }
   } */
+
 
 /* 车辆信息 序号、购买时间 居中 */
 
@@ -171,25 +174,35 @@ height: 40px;
 
 /* 联系人信息 序号 居中 */
 
-.applicationInformationDetail .people.el-table th{
+.applicationInformationDetail .people.el-table th {
   text-align: center;
 }
 
-.applicationInformationDetail .people .el-table__body-wrapper .el-table__body td{
+.applicationInformationDetail .people .el-table__body-wrapper .el-table__body td {
   text-align: center;
 }
 
-.applicationInformationDetail .people.el-table th:nth-of-type(2),.applicationInformationDetail .people.el-table th:nth-of-type(7),.applicationInformationDetail .people.el-table th:nth-of-type(8),.applicationInformationDetail .people.el-table th:nth-of-type(10),.applicationInformationDetail .people.el-table th:nth-of-type(12) {
+.applicationInformationDetail .people.el-table th:nth-of-type(2),
+.applicationInformationDetail .people.el-table th:nth-of-type(7),
+.applicationInformationDetail .people.el-table th:nth-of-type(8),
+.applicationInformationDetail .people.el-table th:nth-of-type(10),
+.applicationInformationDetail .people.el-table th:nth-of-type(12) {
   text-align: left;
 }
 
-.applicationInformationDetail .people .el-table__body-wrapper .el-table__body td:nth-of-type(2),.applicationInformationDetail .people .el-table__body-wrapper .el-table__body td:nth-of-type(7),.applicationInformationDetail .people .el-table__body-wrapper .el-table__body td:nth-of-type(8),.applicationInformationDetail .people .el-table__body-wrapper .el-table__body td:nth-of-type(10),.applicationInformationDetail .people .el-table__body-wrapper .el-table__body td:nth-of-type(12) {
+.applicationInformationDetail .people .el-table__body-wrapper .el-table__body td:nth-of-type(2),
+.applicationInformationDetail .people .el-table__body-wrapper .el-table__body td:nth-of-type(7),
+.applicationInformationDetail .people .el-table__body-wrapper .el-table__body td:nth-of-type(8),
+.applicationInformationDetail .people .el-table__body-wrapper .el-table__body td:nth-of-type(10),
+.applicationInformationDetail .people .el-table__body-wrapper .el-table__body td:nth-of-type(12) {
   text-align: left;
 }
 
-.applicationInformationDetail .people .el-table__body-wrapper{
-      overflow: hidden;
-    }
+.applicationInformationDetail .people .el-table__body-wrapper {
+  overflow: hidden;
+}
+
+
 /* @media screen and (min-width: 1327px){
     .applicationInformationDetail .people .el-table__body-wrapper{
       overflow: hidden;
@@ -236,16 +249,20 @@ height: 40px;
 
 
 /* 借款人资料input框 */
-.borrowerInformation .el-input__icon{
+
+.borrowerInformation .el-input__icon {
   color: #0077ff;
 }
+
 .borrowerInformation .el-input__inner {
   height: 35px;
   min-width: 100px;
-  padding:0 0;
+  padding: 0 0;
 }
-.borrowerInformation .xinyongka .el-input__inner,.borrowerInformation .fuzhaixinxi .el-input__inner {
-  padding-left:10px;
+
+.borrowerInformation .xinyongka .el-input__inner,
+.borrowerInformation .fuzhaixinxi .el-input__inner {
+  padding-left: 10px;
 }
 
 
@@ -265,16 +282,16 @@ height: 40px;
   font-size: 14px;
 }
 
-.borrowerInformation .el-table th:nth-of-type(1) .cell{
+.borrowerInformation .el-table th:nth-of-type(1) .cell {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
 
-.borrowerInformation .el-table__body-wrapper .el-table__body td:nth-of-type(1){
+.borrowerInformation .el-table__body-wrapper .el-table__body td:nth-of-type(1) {
   padding-left: 0 !important;
 }
 
-.borrowerInformation .el-table__body-wrapper .el-table__body td:nth-of-type(1) .cell{
+.borrowerInformation .el-table__body-wrapper .el-table__body td:nth-of-type(1) .cell {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
@@ -291,21 +308,25 @@ height: 40px;
   text-align: center;
 }
 
-.borrowerInformation .income .el-table__body-wrapper .el-table__body td:nth-of-type(9) .cell{
+.borrowerInformation .income .el-table__body-wrapper .el-table__body td:nth-of-type(9) .cell {
   padding-top: 3px;
 }
-.borrowerInformation .income .el-table__body-wrapper .el-table__body td:nth-of-type(10) .cell input{
+
+.borrowerInformation .income .el-table__body-wrapper .el-table__body td:nth-of-type(10) .cell input {
   color: #5a5e66;
 }
+
 .borrowerInformation ol.num li:nth-of-type(1) .el-input__inner {
   margin-top: -10px;
   position: relative;
 }
 
-.borrowerInformation ol.num li:nth-of-type(1) .el-input__inner{
-    margin-top: -10px;
-    position: relative;
-  }
+.borrowerInformation ol.num li:nth-of-type(1) .el-input__inner {
+  margin-top: -10px;
+  position: relative;
+}
+
+
 /*借款人资料 字体颜色 */
 
 .borrowerInformation .el-collapse-item__content {
@@ -313,22 +334,27 @@ height: 40px;
   font-size: 14px;
 }
 
-.borrowerInformation .el-select-dropdown.el-popper{
+.borrowerInformation .el-select-dropdown.el-popper {
   width: auto !important;
 }
-.borrowerInformation .el-select-dropdown.el-popper div{
+
+.borrowerInformation .el-select-dropdown.el-popper div {
   width: auto !important;
 }
+
+
 /* 弹框 */
-.borrowerInformation .sureLog .el-dialog__body{
+
+.borrowerInformation .sureLog .el-dialog__body {
   padding: 0 20px;
 }
 
+
 /* 去掉自带的省略号 */
-.borrowerInformation .el-table .cell{
+
+.borrowerInformation .el-table .cell {
   text-overflow: initial;
 }
-
 
 
 /*借款人资料详情 折叠面板头部背景色 */
@@ -392,23 +418,27 @@ height: 40px;
   font-size: 14px;
 }
 
-.borrowerInformationSetail .el-table th:nth-of-type(1) .cell{
+.borrowerInformationSetail .el-table th:nth-of-type(1) .cell {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
 
-.borrowerInformationSetail .el-table__body-wrapper .el-table__body td:nth-of-type(1){
+.borrowerInformationSetail .el-table__body-wrapper .el-table__body td:nth-of-type(1) {
   padding-left: 0 !important;
 }
 
-.borrowerInformationSetail .el-table__body-wrapper .el-table__body td:nth-of-type(1) .cell{
+.borrowerInformationSetail .el-table__body-wrapper .el-table__body td:nth-of-type(1) .cell {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
+
+
 /* 借款人资料 房产信息 表格内容居中 */
-.borrowerInformationSetail .house .el-table__body-wrapper{
+
+.borrowerInformationSetail .house .el-table__body-wrapper {
   overflow: hidden;
 }
+
 .borrowerInformationSetail .house.el-table th:nth-of-type(1),
 .borrowerInformationSetail .house.el-table th:nth-of-type(7),
 .borrowerInformationSetail .house.el-table th:nth-of-type(8) {
@@ -423,9 +453,11 @@ height: 40px;
 
 
 /* 借款人资料 车辆信息 表格内容居中 */
-.borrowerInformationSetail .car .el-table__body-wrapper{
+
+.borrowerInformationSetail .car .el-table__body-wrapper {
   overflow: hidden;
 }
+
 .borrowerInformationSetail .car.el-table th:nth-of-type(1),
 .borrowerInformationSetail .car.el-table th:nth-of-type(12) {
   text-align: center;
@@ -483,74 +515,118 @@ height: 40px;
 
 
 /* 借款人资料 */
+
+
 /* .borrowerInformation .el-table__body-wrapper .el-select>.el-input .el-input__inner {
   border: none;
 } */
 
-/* 借款人资料 房产类型 */
-.borrowerInformation .house .el-table__body-wrapper{
-    overflow: hidden;
-  }
-.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(2) .el-input__inner{
-  width: 126px; 
 
+/* 借款人资料 房产类型 */
+
+.borrowerInformation .house .el-table__body-wrapper {
+  overflow: hidden;
 }
-.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(2) .el-input__inner>.el-input__suffix{
-  right:5px;
+
+.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(2) .el-input__inner {
+  width: 126px;
 }
+
+.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(2) .el-input__inner>.el-input__suffix {
+  right: 5px;
+}
+
 .borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(2) .el-select {
   width: 126px;
 }
-.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(2) .cell{
+
+.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(2) .cell {
   padding-right: 0;
 }
+
+
 /* 借款人资料 产权性质 */
-.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(3) .el-select>.el-input,.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(3) .el-input__inner,.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(3) .el-select,.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(3) .el-select>.el-input {
+
+.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(3) .el-select>.el-input,
+.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(3) .el-input__inner,
+.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(3) .el-select,
+.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(3) .el-select>.el-input {
   min-width: 100px;
 }
-.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(3) .el-input__inner>.el-input__suffix{
-  right:5px;
+
+.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(3) .el-input__inner>.el-input__suffix {
+  right: 5px;
 }
+
+
 /* 借款人资料 抵押状况 */
-.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(10) .el-select>.el-input,.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(10) .el-input__inner,.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(10) .el-select,.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(10) .el-select>.el-input {
+
+.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(10) .el-select>.el-input,
+.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(10) .el-input__inner,
+.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(10) .el-select,
+.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(10) .el-select>.el-input {
   min-width: 100px;
 }
-.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(10) .el-input__inner>.el-input__suffix{
-  right:5px;
+
+.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(10) .el-input__inner>.el-input__suffix {
+  right: 5px;
 }
+
+
 /* 借款人资料 房产地址 */
-.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(6) .el-select>.el-input,.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(6) .el-input__inner,.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(6) .el-select,.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(6) .el-select>.el-input {
+
+.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(6) .el-select>.el-input,
+.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(6) .el-input__inner,
+.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(6) .el-select,
+.borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(6) .el-select>.el-input {
   min-width: 200px;
 }
-.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(6) .el-input__inner>.el-input__suffix{
-  right:5px;
+
+.borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(6) .el-input__inner>.el-input__suffix {
+  right: 5px;
 }
+
+
 /* 借款人资料 车辆信息 表格内容居中 */
-.borrowerInformation .el-table th:nth-of-type(1){
-  text-align: center; 
+
+.borrowerInformation .el-table th:nth-of-type(1) {
+  text-align: center;
 }
-.borrowerInformation .el-table__body-wrapper .el-table__body td:nth-of-type(1){
-  text-align: center; 
+
+.borrowerInformation .el-table__body-wrapper .el-table__body td:nth-of-type(1) {
+  text-align: center;
 }
+
+
 /* 借款人资料 车辆信息 去掉滚动条 */
-.borrowerInformation .car .el-table__body-wrapper{
-      overflow: hidden;
-    }
+
+.borrowerInformation .car .el-table__body-wrapper {
+  overflow: hidden;
+}
+
+
 /* 借款人资料 车辆信息 */
-.borrowerInformation .car .el-table__body-wrapper .el-table__body td:nth-of-type(6) .el-input__inner{
-  width: 100px; 
+
+.borrowerInformation .car .el-table__body-wrapper .el-table__body td:nth-of-type(6) .el-input__inner {
+  width: 100px;
 }
-.borrowerInformation .car .el-table__body-wrapper .el-table__body td:nth-of-type(6) .el-input__inner>.el-input__suffix{
-  right:5px;
+
+.borrowerInformation .car .el-table__body-wrapper .el-table__body td:nth-of-type(6) .el-input__inner>.el-input__suffix {
+  right: 5px;
 }
+
 .borrowerInformation .car .el-table__body-wrapper tbody tr td:nth-of-type(6) .el-select {
   width: 100px;
 }
-.borrowerInformation .car .el-table__body-wrapper tbody tr td:nth-of-type(6) .cell{
+
+.borrowerInformation .car .el-table__body-wrapper tbody tr td:nth-of-type(6) .cell {
   padding-right: 0;
 }
+
+
 /* 借款人资料 车辆信息-已购时间 */
-.borrowerInformation .car .el-table__body-wrapper .el-table__body td:nth-of-type(12) .el-input__inner{
+
+.borrowerInformation .car .el-table__body-wrapper .el-table__body td:nth-of-type(12) .el-input__inner {
   padding-left: 30px;
 }
 
@@ -562,32 +638,47 @@ height: 40px;
   border: none;
 }
 
+
 /* 车辆信息 时间 */
 
 .borrowerInformation .carContain .el-table__body-wrapper tbody tr td:last-child .el-input {
   width: 140px;
 }
+
+
 /* 信用卡使用明细 银行名称*/
-.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(7) .cell,.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(8) .cell,.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(13) .cell{
+
+.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(7) .cell,
+.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(8) .cell,
+.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(13) .cell {
   padding-right: 0;
 }
-.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(2) .cell{
+
+.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(2) .cell {
   padding-right: 0;
   padding-left: 5px;
 }
+
 .borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(2) .el-input {
   width: 140px;
 }
-.borrowerInformation .cardContain .el-table__body-wrapper .el-table__body td:nth-of-type(2) .el-input__inner{
-  width: 140px; 
+
+.borrowerInformation .cardContain .el-table__body-wrapper .el-table__body td:nth-of-type(2) .el-input__inner {
+  width: 140px;
 }
+
 .borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(2) .el-select {
   width: 140px;
 }
+
+
 /* 信用卡使用明细 时间 */
-.borrowerInformation .cardContain .el-table__body-wrapper .el-table__body td:nth-of-type(3) .el-input__inner,.borrowerInformation .cardContain .el-table__body-wrapper .el-table__body td:nth-of-type(6) .el-input__inner{
+
+.borrowerInformation .cardContain .el-table__body-wrapper .el-table__body td:nth-of-type(3) .el-input__inner,
+.borrowerInformation .cardContain .el-table__body-wrapper .el-table__body td:nth-of-type(6) .el-input__inner {
   padding-left: 30px;
 }
+
 
 /* 信用卡使用明细 时间 */
 
@@ -598,39 +689,53 @@ height: 40px;
 .borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(6) .el-input {
   width: 140px;
 }
+
+
 /* 信用卡使用明细 账户状态 */
-.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(13) .cell{
+
+.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(13) .cell {
   padding-right: 0;
   padding-left: 5px;
 }
-.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(13) .el-select{
+
+.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(13) .el-select {
   width: 100px;
 }
-.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(13) .el-input{
+
+.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(13) .el-input {
   width: 100px;
 }
-.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(13) .el-input__inner{
+
+.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(13) .el-input__inner {
   width: 100px;
 }
-.borrowerInformation .cardContain .el-table__body-wrapper .el-table__body td:nth-of-type(9) .el-input__suffix{
-  right:15px;
+
+.borrowerInformation .cardContain .el-table__body-wrapper .el-table__body td:nth-of-type(9) .el-input__suffix {
+  right: 15px;
 }
+
+
 /* 信用卡使用明细 是否逾期 */
-.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(2) .cell{
+
+.borrowerInformation .cardContain .el-table__body-wrapper tbody tr td:nth-of-type(2) .cell {
   padding-right: 0;
   padding-left: 5px;
 }
 
 
 /* 信用卡使用明细 负债信息 */
-.borrowerInformation .fuzhaixinxi ol.num li:nth-of-type(2) .el-textarea__inner{
-  padding: 5px 10px;
-}
-.borrowerInformation .zhengxunbaogao ol:nth-of-type(2) li .el-textarea__inner{
+
+.borrowerInformation .fuzhaixinxi ol.num li:nth-of-type(2) .el-textarea__inner {
   padding: 5px 10px;
 }
 
+.borrowerInformation .zhengxunbaogao ol:nth-of-type(2) li .el-textarea__inner {
+  padding: 5px 10px;
+}
+
+
 /* 贷款明细 时间 */
+
 .borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(6) .el-input {
   width: 140px;
 }
@@ -646,57 +751,86 @@ height: 40px;
 .borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(14) .el-input {
   width: 140px;
 }
+
+
 /* 贷款明细 贷款种类 */
-.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(2) .el-select>.el-input{
+
+.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(2) .el-select>.el-input {
   width: 100px;
 }
-.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(2) .cell{
+
+.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(2) .cell {
   padding-right: 0;
   padding-left: 5px;
 }
+
+
 /* 贷款明细 担保方知 */
-.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(3) .el-select>.el-input{
+
+.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(3) .el-select>.el-input {
   width: 100px;
 }
-.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(3) .cell{
+
+.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(3) .cell {
   padding-right: 0;
   padding-left: 5px;
 }
+
+
 /* 贷款明细 担保方知 */
-.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(4) .el-select>.el-input{
+
+.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(4) .el-select>.el-input {
   width: 100px;
 }
-.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(4) .cell{
+
+.borrowerInformation .loanContain .el-table__body-wrapper tbody tr td:nth-of-type(4) .cell {
   padding-right: 0;
   padding-left: 5px;
 }
+
+
 /* 信用卡使用明细 时间 */
-.borrowerInformation .loanContain .el-table__body-wrapper .el-table__body td:nth-of-type(6) .el-input__inner,.borrowerInformation .loanContain .el-table__body-wrapper .el-table__body td:nth-of-type(7) .el-input__inner,.borrowerInformation .loanContain .el-table__body-wrapper .el-table__body td:nth-of-type(9) .el-input__inner,.borrowerInformation .loanContain .el-table__body-wrapper .el-table__body td:nth-of-type(14) .el-input__inner{
+
+.borrowerInformation .loanContain .el-table__body-wrapper .el-table__body td:nth-of-type(6) .el-input__inner,
+.borrowerInformation .loanContain .el-table__body-wrapper .el-table__body td:nth-of-type(7) .el-input__inner,
+.borrowerInformation .loanContain .el-table__body-wrapper .el-table__body td:nth-of-type(9) .el-input__inner,
+.borrowerInformation .loanContain .el-table__body-wrapper .el-table__body td:nth-of-type(14) .el-input__inner {
   padding-left: 30px;
 }
+
+
 /* 流水明细 流水类型 */
-.borrowerInformation .income .el-table__body-wrapper tbody tr td:nth-of-type(2) .el-select>.el-input{
+
+.borrowerInformation .income .el-table__body-wrapper tbody tr td:nth-of-type(2) .el-select>.el-input {
   width: 100px;
 }
-.borrowerInformation .income .el-table__body-wrapper tbody tr td:nth-of-type(2) .cell{
+
+.borrowerInformation .income .el-table__body-wrapper tbody tr td:nth-of-type(2) .cell {
   padding-right: 0;
   padding-left: 5px;
 }
-.borrowerInformation .income.el-table th:nth-of-type(9){
-  text-align: center; 
+
+.borrowerInformation .income.el-table th:nth-of-type(9) {
+  text-align: center;
 }
-.borrowerInformation .income .el-table__body-wrapper .el-table__body td:nth-of-type(9){
-  text-align: center; 
+
+.borrowerInformation .income .el-table__body-wrapper .el-table__body td:nth-of-type(9) {
+  text-align: center;
 }
-.borrowerInformation .income .el-table__body-wrapper{
+
+.borrowerInformation .income .el-table__body-wrapper {
   overflow: hidden;
 }
-.borrowerInformation .el-input.is-disabled .el-input__inner{
+
+.borrowerInformation .el-input.is-disabled .el-input__inner {
   background: #fff;
 }
-.borrowerInformation .zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(1) div .el-input__inner{
-    padding-right: 10px;
-  }
+
+.borrowerInformation .zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(1) div .el-input__inner {
+  padding-right: 10px;
+}
+
+
 /* 各自部分 */
 
 
@@ -730,6 +864,7 @@ height: 40px;
   width: 100%;
 }
 
+
 /* 工作台 - 刷新（refresh）- 按钮  */
 
 .workbench .el-icon-refresh {
@@ -738,11 +873,13 @@ height: 40px;
   line-height: 48px;
 }
 
+
 /* 工作通知 下边距 */
 
 .workbench .el-collapse {
   margin-bottom: 10px;
 }
+
 
 /* 工作通知title颜色 */
 
@@ -758,6 +895,7 @@ height: 40px;
   padding-left: 10px;
 }
 
+
 /* 工通知内容设置内边距 */
 
 .workbench .el-collapse-item__content {
@@ -766,6 +904,7 @@ height: 40px;
   height: 38.8vh;
 }
 
+
 /* 代办任务下面div高度   #f3f3f3  */
 
 .workbench .main_right_task .el-collapse-item__content {
@@ -773,11 +912,13 @@ height: 40px;
   overflow: auto;
 }
 
+
 /* 待办任务下面 table 表头颜色 */
 
 .workbench .el-collapse-item__content .el-table__header-wrapper tr {
   background: #f3f3f3;
 }
+
 
 /* 分屏 */
 
@@ -790,16 +931,24 @@ height: 40px;
   z-index: 99;
 }
 
+
 /* 信审表 */
+
+
 /* 日历-前面-图标icon */
 
 .CreditForm .el-icon-date:before {
   color: #0077ff;
 }
+
+
 /* 信审表-折叠面板title 后面的icon倾斜 */
-.CreditForm .el-collapse-item__arrow{
+
+.CreditForm .el-collapse-item__arrow {
   line-height: 40px;
 }
+
+
 /* 解决测试环境宽高不生效问题 */
 
 .CreditForm .el-input {
@@ -814,6 +963,7 @@ height: 40px;
   position: static;
 }
 
+
 /* 信审表-解决第一次进来input有外边框加粗 radius+4 的问题 */
 
 .CreditForm .el-input__inner {
@@ -826,6 +976,7 @@ height: 40px;
   height:50px */
 }
 
+
 /* 个别特殊input宽度 */
 
 .CreditForm .CreditForm_WorkInfs_ul_left li:nth-of-type(1) .el-input__inner,
@@ -834,11 +985,13 @@ height: 40px;
   width: calc( 50% + 160px);
 }
 
+
 /* 信审表-去掉所有重复paddingbottom值 */
 
 .CreditForm .el-collapse-item__content {
   padding-bottom: 0;
 }
+
 
 /* 信审表+反欺诈结论-上网查询等-content 左边距*/
 
@@ -846,16 +999,17 @@ height: 40px;
 .aAntiApplyInf .el-collapse-item__wrap {
   padding: 0px 0 0px 21px;
 }
-.CreditForm .el-collapse-item:nth-of-type(4) .el-collapse-item__wrap{
+
+.CreditForm .el-collapse-item:nth-of-type(4) .el-collapse-item__wrap {
   /* background: red; */
-  padding:0;
+  padding: 0;
 }
+
 
 /* 信审表+反欺诈结论（初审+终审） ----各个  title 一行 */
 
 .CreditForm .el-collapse-item__header,
-.aAntiApplyInf .el-collapse-item__header
- {
+.aAntiApplyInf .el-collapse-item__header {
   border: 1px solid silver;
   background: #eef0f9;
   border: 1px solid #e6eaee;
@@ -869,24 +1023,27 @@ height: 40px;
 
 /* 信审表 ----各个  title 小帽子部分 */
 
-.CreditForm .el-collapse-item ,
+.CreditForm .el-collapse-item,
 .aAntiApplyInf .el-collapse-item {
   position: relative
 }
+
 
 /* 信审表-textarea 文本域上下居中对齐 统一宽度，覆盖掉width：100%会掉下来的问题 */
 
 .CreditForm .el-textarea {
   vertical-align: top;
-width:calc(100% - 295px);
+  width: calc(100% - 295px);
 }
 
 
 /* 信审表-网上查询信息-textarea部分 */
+
 .CreditForm .el-textarea__inner {
   /* width: 370px; */
   width: 100%;
 }
+
 
 /* 信审表-工作信息-单位地址-input框 */
 
@@ -894,12 +1051,14 @@ width:calc(100% - 295px);
   width: 120px;
 }
 
+
 /* 信审表-私营企业-私营企业信息textarea宽度 */
 
 .CreditForm .CreditForm_CompanyInfs_ul_left .el-textarea {
   width: calc( 100% - 260px);
   /* width: 67%; */
 }
+
 
 /* 信审表-工作信息+私营企业信息-入职时间-日历图标位置 */
 
@@ -909,38 +1068,54 @@ width:calc(100% - 295px);
 
 
 /* 信审表：初审结果评价textarea宽度 */
+
 .CreditForm .CreditForm_result .el-textarea {
-  width:calc( 50% + 200px );
+  width: calc( 50% + 200px);
   width: calc(100% - 260px);
 }
 
 .CreditForm .CreditForm_result .el-textarea__inner {
   width: 100%;
 }
+
+
 /* 信审表----查询---气泡宽度 */
-.el-tooltip__popper{
-  width:auto;
+
+.el-tooltip__popper {
+  width: auto;
   max-width: 400px;
 }
+
+
 /* 信审表-终审-终审评价textarea */
-.CreditForm .FinalConclution .el-textarea{
+
+.CreditForm .FinalConclution .el-textarea {
   width: calc( 100% - 197px);
-  
 }
-.CreditForm .FinalConclution .el-textarea__inner{
-  width:100%;
+
+.CreditForm .FinalConclution .el-textarea__inner {
+  width: 100%;
 }
+
+
 /* 信审表-弹窗 */
-.CreditForm .el-dialog{
+
+.CreditForm .el-dialog {
   border-radius: 4px;
 }
-.CreditForm .el-dialog__body{
+
+.CreditForm .el-dialog__body {
   padding: 10px 15px;
 }
-.CreditForm .el-dialog__footer{
+
+.CreditForm .el-dialog__footer {
   padding: 5px 15px 10px;
-  }
-    /* 影音列表----缩略图按钮 */
+}
+
+
+/* 影音列表----缩略图按钮 */
+
+
 /* 影音资料-左侧列表 */
 
 .AudioVisual .el-collapse-item__header,
@@ -950,6 +1125,7 @@ width:calc(100% - 295px);
   background: #eeeFFF;
   padding: 0;
 }
+
 
 /* 影音列表-对比弹出层-右侧-折叠面板-title */
 
@@ -961,6 +1137,7 @@ width:calc(100% - 295px);
 {
   padding: 0 10px;
 }
+
 
 /* 影音列表-左侧列表-title表头  */
 
@@ -1008,6 +1185,7 @@ width:calc(100% - 295px);
   border-left: none;
 }
 
+
 /* 影音列表-左侧列表-折叠小箭头 */
 
 .AudioVisual .el-collapse-item__header .el-collapse-item__arrow,
@@ -1015,6 +1193,7 @@ width:calc(100% - 295px);
   /* line-height: 30px; */
   display: none;
 }
+
 
 /* 影音列表-左侧列表--内容title-最外侧包裹层 */
 
@@ -1024,6 +1203,7 @@ width:calc(100% - 295px);
   color: #666666;
   background: #f8f9fd;
 }
+
 
 /* 影音列表-左侧列表--内容下边距 */
 
@@ -1038,6 +1218,7 @@ width:calc(100% - 295px);
   height: 355px;
 }
 
+
 /* 影音列表- 对比弹出层-select-搜索框-wrap */
 
 .SplitScreen .AudioVisual_wrap_compare_right .el-select>.el-input,
@@ -1050,68 +1231,103 @@ width:calc(100% - 295px);
 }
 
 /* 反欺诈-案件编号列表页+反欺诈规则设定 */
+
 .AntiRules .el-input,
-.AntiCaseNum .el-input{
-/* display: inline-block; */
-width: auto;
+.AntiCaseNum .el-input {
+  /* display: inline-block; */
+  width: auto;
 }
+
 /* 气泡宽度 */
 /* .AntiRules .el-popover */
-.AntiCaseNum .el-popover{
+.AntiCaseNum .el-popover {
   max-width: 700px;
-  width:100%;
+  width: 100%;
 }
+
 /* 查询输入框宽度 */
+
 .AntiRules .el-input__inner,
-.AntiCaseNum .search .el-input__inner{
+.AntiCaseNum .search .el-input__inner {
   height: 35px;
   border-radius: 6px;
   width: 258px;
 }
+
+
 /* 弹框输入框+select宽度 */
+
 .AntiRules .redact .el-input__inner,
-.AntiCaseNum .redact .el-input__inner{
- width:200px;
+.AntiCaseNum .redact .el-input__inner {
+  width: 200px;
 }
+
+
 /* 文本域宽度 */
+
 .AntiRules .el-textarea {
-width:496px;
-vertical-align: top;
+  width: 496px;
+  vertical-align: top;
 }
-.AntiCaseNum .el-textarea{
+
+.AntiCaseNum .el-textarea {
   width: 485px;
-vertical-align: top;  
+  vertical-align: top;
 }
+
+
 /* 表格高度 */
-.AntiRules .el-table
-{
-height:100%;
+
+.AntiRules .el-table {
+  height: 100%;
 }
-.AntiCaseNum .el-table{
-height:100%;
-/* background: red; */
+
+.AntiCaseNum .el-table {
+  height: 100%;
+  /* background: red; */
 }
+
 .AntiRules .el-table__body-wrapper,
-.AntiCaseNum .el-table__body-wrapper{
-overflow-x: hidden
+.AntiCaseNum .el-table__body-wrapper {
+  overflow-x: hidden
 }
+
+
 /* 整个弹框宽度 */
-.AntiRules  .redact .el-dialog,
-.AntiCaseNum .redact .el-dialog{
+
+.AntiRules .redact .el-dialog,
+.AntiCaseNum .redact .el-dialog {
   /* min-width:620px; */
-  width:620px;
-  
+  width: 620px;
   /* background: #000; */
 }
+
+
 /* 弹框内自带padding  去掉 */
+
 .AntiRules .redact .el-dialog__body,
-.AntiCaseNum .redact .el-dialog__body{
-padding: 0;
+.AntiCaseNum .redact .el-dialog__body {
+  padding: 0;
 }
+
+
 /* 复议申请-最后一个折叠div border-bottom */
-.aAntiApplyInf .el-collapse-item:last-of-type .el-collapse-item__wrap{
+
+.aAntiApplyInf .el-collapse-item:last-of-type .el-collapse-item__wrap {
   border-bottom: none;
 }
+
+
+/* 任务管理-复议管理 */
+.AntiCaseNum .el-date-editor .el-range-separator {
+  padding: 0;
+  line-height: 32px;
+  width: 45px;
+  color: #2d2f33;
+  text-align: center;}
+  .AntiCaseNum .el-date-editor .el-range-input{
+    width: 35%;
+  }
 
 /* 借款人资料表格内容居中 */
 
@@ -1203,14 +1419,15 @@ padding: 0;
   padding-left: 10px;
 }
 
-.remark .el-table td .cell{
+.remark .el-table td .cell {
   padding-left: 0;
 }
 
 .remark .el-table th:nth-of-type(1) {
   text-align: center;
 }
-.remark .el-table th:nth-of-type(1) .cell{
+
+.remark .el-table th:nth-of-type(1) .cell {
   padding-left: 0;
   padding-right: 0;
 }
@@ -1224,7 +1441,7 @@ padding: 0;
   padding-left: 0;
 }
 
-.remark .el-table__body-wrapper .el-table__body td:nth-of-type(1) .cell{
+.remark .el-table__body-wrapper .el-table__body td:nth-of-type(1) .cell {
   padding-right: 0;
   padding-left: 0;
 }
@@ -1233,30 +1450,39 @@ padding: 0;
   text-align: center;
 }
 
+
 /* 备注信息弹框 */
-.remark .addLog .el-dialog__title{
+
+.remark .addLog .el-dialog__title {
   font-size: 15px;
 }
-.remark .addLog .el-dialog__body{
+
+.remark .addLog .el-dialog__body {
   height: 208px;
   width: 98%;
   margin: 0 auto;
   background: #eee;
   padding: 0 0;
 }
-.remark .isLog .el-dialog__body,.remark .deletLog .el-dialog__body{
+
+.remark .isLog .el-dialog__body,
+.remark .deletLog .el-dialog__body {
   padding: 0 20px;
 }
-.remark .changeLog .el-dialog__title{
+
+.remark .changeLog .el-dialog__title {
   font-size: 15px;
 }
-.remark .changeLog .el-dialog__body{
+
+.remark .changeLog .el-dialog__body {
   height: 208px;
   width: 98%;
   margin: 0 auto;
   background: #eee;
   padding: 0 0;
 }
+
+
 /* 备注信息表格内容居中 */
 
 .remarkDetial .el-table__body-wrapper {
@@ -1277,7 +1503,7 @@ padding: 0;
   padding-left: 10px;
 }
 
-.remarkDetial .el-table td .cell{
+.remarkDetial .el-table td .cell {
   padding-left: 0;
 }
 
@@ -1285,7 +1511,7 @@ padding: 0;
   text-align: center;
 }
 
-.remarkDetial .el-table th:nth-of-type(1) .cell{
+.remarkDetial .el-table th:nth-of-type(1) .cell {
   padding-left: 0;
   padding-right: 0;
 }
@@ -1299,7 +1525,7 @@ padding: 0;
   padding-left: 0;
 }
 
-.remarkDetial .el-table__body-wrapper .el-table__body td:nth-of-type(1) .cell{
+.remarkDetial .el-table__body-wrapper .el-table__body td:nth-of-type(1) .cell {
   padding-left: 0;
   padding-right: 0;
 }
@@ -1424,89 +1650,105 @@ padding: 0;
   font-weight: 400;
 }
 
+
 /* 工作台导航 */
-.mheader .el-menu{
+
+.mheader .el-menu {
   background-color: transparent;
   z-index: 100;
- }
- .mheader .el-menu--horizontal{
-  border-bottom:none;
- }
- .mheader .el-menu--horizontal .el-submenu{
+}
+
+.mheader .el-menu--horizontal {
+  border-bottom: none;
+}
+
+.mheader .el-menu--horizontal .el-submenu {
   height: 70px;
 }
-.mheader .el-menu--horizontal .el-submenu .el-submenu__title{
-  font-size:15px;
-  color:#bfcbd9;
+
+.mheader .el-menu--horizontal .el-submenu .el-submenu__title {
+  font-size: 15px;
+  color: #bfcbd9;
   height: 60px;
   line-height: 70px;
-  margin:0 41px;
+  margin: 0 41px;
   padding: 0 0;
   padding-left: 0 !important;
 }
-.mheader .el-menu .el-submenu.is-opened{
-  background:rgba(31, 45, 61,.6);
-  box-shadow:0 10px 20px 0 #475669;
+
+.mheader .el-menu .el-submenu.is-opened {
+  background: rgba(31, 45, 61, .6);
+  box-shadow: 0 10px 20px 0 #475669;
 }
-.mheader .el-menu--horizontal .el-submenu .el-submenu__title:hover{
+
+.mheader .el-menu--horizontal .el-submenu .el-submenu__title:hover {
   background-color: transparent;
   border-bottom-color: #fff;
-  border-bottom : 2px solid #fff;
+  border-bottom: 2px solid #fff;
 }
-.mheader .el-menu--horizontal .el-submenu.is-opened .el-submenu__title{
+
+.mheader .el-menu--horizontal .el-submenu.is-opened .el-submenu__title {
   background-color: transparent;
   border-bottom-color: #fff !important;
-  border-bottom : 2px solid #fff;
+  border-bottom: 2px solid #fff;
   color: #fff;
 }
-.mheader .el-menu .el-submenu .el-submenu__icon-arrow{
+
+.mheader .el-menu .el-submenu .el-submenu__icon-arrow {
   display: none;
 }
 
 
 /* 二级 */
 
-.mheader .el-menu .el-menu{
-  background:rgba(31, 45, 61,.6);
-  margin-top: 5px;
-}
-/* 解决 测试环境二级无背景 */
-.mheader .el-menu--horizontal .el-submenu>.el-menu{
-  background:rgba(31, 45, 61,.6);
+.mheader .el-menu .el-menu {
+  background: rgba(31, 45, 61, .6);
   margin-top: 5px;
 }
 
-.mheader .el-menu .el-menu div{
+
+/* 解决 测试环境二级无背景 */
+
+.mheader .el-menu--horizontal .el-submenu>.el-menu {
+  background: rgba(31, 45, 61, .6);
+  margin-top: 5px;
+}
+
+.mheader .el-menu .el-menu div {
   height: 20px;
-  margin:7px 0 10px 0;
+  margin: 7px 0 10px 0;
 }
-.mheader .el-menu .el-menu .el-submenu__title:hover{
+
+.mheader .el-menu .el-menu .el-submenu__title:hover {
   background-color: transparent;
   border-bottom: none;
   color: #fff;
 }
-.mheader .el-menu .el-menu .el-menu-item{
+
+.mheader .el-menu .el-menu .el-menu-item {
   background-color: transparent;
   border-bottom: none;
 }
-.mheader .el-menu .el-menu .el-submenu .el-submenu__title:hover{
+
+.mheader .el-menu .el-menu .el-submenu .el-submenu__title:hover {
   background-color: transparent;
   border-bottom: none;
   color: #fff;
 }
-.mheader .el-menu .el-menu .el-submenu__title{
-  font-size:14px;
-  color:#bfcbd9;
+
+.mheader .el-menu .el-menu .el-submenu__title {
+  font-size: 14px;
+  color: #bfcbd9;
   padding-left: 10px !important;
   height: 25px;
   line-height: 25px;
   padding-right: 10px;
-  margin:0 0;
+  margin: 0 0;
 }
 
-.mheader .el-menu .el-menu .el-menu-item{
-  font-size:14px;
-  color:#bfcbd9;
+.mheader .el-menu .el-menu .el-menu-item {
+  font-size: 14px;
+  color: #bfcbd9;
   padding-left: 10px !important;
   height: 25px;
   line-height: 25px;
@@ -1514,79 +1756,100 @@ padding: 0;
   min-width: 0;
   width: auto;
 }
-.mheader .el-menu--horizontal .el-submenu .el-menu-item{
-  background-color:transparent;
+
+.mheader .el-menu--horizontal .el-submenu .el-menu-item {
+  background-color: transparent;
 }
-.mheader .el-menu .el-menu .el-menu-item:hover{
+
+.mheader .el-menu .el-menu .el-menu-item:hover {
   background-color: transparent;
   border-bottom: none;
   color: #fff;
-} 
+}
+
+
 /* 二级li加绝对定位 */
-.mheader .el-menu .el-menu .el-submenu{
+
+.mheader .el-menu .el-menu .el-submenu {
   position: relative;
 }
+
+
 /* 二级三角样式设置 */
-.mheader .el-menu .el-menu .el-submenu .el-submenu__icon-arrow{
+
+.mheader .el-menu .el-menu .el-submenu .el-submenu__icon-arrow {
   display: block;
   width: 0;
   height: 0;
   border-top: 5px solid transparent;
   border-left: 5px solid #bfcbd9;
   border-bottom: 5px solid transparent;
-  margin-top:-4px;
+  margin-top: -4px;
   margin-right: -9px;
-  -webkit-transform:rotateZ(0deg);
-  transform:rotateZ(0deg);
+  -webkit-transform: rotateZ(0deg);
+  transform: rotateZ(0deg);
 }
-.mheader .el-menu--horizontal .el-menu .el-submenu .el-submenu__icon-arrow{
+
+.mheader .el-menu--horizontal .el-menu .el-submenu .el-submenu__icon-arrow {
   position: absolute;
 }
+
+
 /* 二级三角before样式设置 */
-.mheader .el-menu .el-menu .el-submenu .el-submenu__icon-arrow:before{
+
+.mheader .el-menu .el-menu .el-submenu .el-submenu__icon-arrow:before {
   display: none;
 }
-.mheader .el-menu--horizontal .el-menu .el-submenu{
+
+.mheader .el-menu--horizontal .el-menu .el-submenu {
   float: none;
 }
 
 
 /* 三级 */
-.mheader .el-menu .el-menu .el-menu{
+
+.mheader .el-menu .el-menu .el-menu {
   z-index: 10000;
-  background:rgba(31, 45, 61,.6);
-  box-shadow:0 10px 20px 0 #475669;
+  background: rgba(31, 45, 61, .6);
+  box-shadow: 0 10px 20px 0 #475669;
   position: absolute;
   left: 100%;
   top: -5px;
-  margin-top: -7px; 
+  margin-top: -7px;
 }
-.mheader .el-menu .el-submenu.is-opened .el-submenu__title{
-  border-bottom:2px solid #fff;
+
+.mheader .el-menu .el-submenu.is-opened .el-submenu__title {
+  border-bottom: 2px solid #fff;
   color: #fff;
 }
-.mheader .el-menu .el-menu .el-submenu .el-submenu__title{
-  border-bottom:none;
+
+.mheader .el-menu .el-menu .el-submenu .el-submenu__title {
+  border-bottom: none;
   color: #bfcbd9;
-} 
-/* 解决：点击三级时二级又一次加背景色 */
-.mheader .el-menu .el-menu .el-submenu.is-opened{
-  background:none;
-  box-shadow:0 0 0 0 #475669; 
 }
-.mheader .el-menu--horizontal .el-submenu>.el-menu{
+
+
+/* 解决：点击三级时二级又一次加背景色 */
+
+.mheader .el-menu .el-menu .el-submenu.is-opened {
+  background: none;
+  box-shadow: 0 0 0 0 #475669;
+}
+
+.mheader .el-menu--horizontal .el-submenu>.el-menu {
   border-radius: 0;
 }
 
 
 /*流程轨迹查询 表格 */
-@media screen and (min-width: 1327px){
-  .processTrajectory .el-table__body-wrapper{
+
+@media screen and (min-width: 1327px) {
+  .processTrajectory .el-table__body-wrapper {
     overflow-x: hidden;
   }
 }
 
-.processTrajectory .el-collapse-item__header{
+.processTrajectory .el-collapse-item__header {
   background: #eef0f9;
   border: 1px solid #e6eaee;
   width: 100%;
@@ -1595,8 +1858,8 @@ padding: 0;
 }
 
 .processTrajectory .el-collapse-item__arrow {
-    line-height: 38px;
-    margin-right: 12px;
+  line-height: 38px;
+  margin-right: 12px;
 }
 
 .processTrajectory .el-table th {
@@ -1613,26 +1876,32 @@ padding: 0;
   font-size: 14px;
 }
 
-.processTrajectory .el-table th:nth-of-type(1) .cell{
+.processTrajectory .el-table th:nth-of-type(1) .cell {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
 
-.processTrajectory .el-table__body-wrapper .el-table__body td:nth-of-type(1){
+.processTrajectory .el-table__body-wrapper .el-table__body td:nth-of-type(1) {
   padding-left: 0 !important;
 }
 
-.processTrajectory .el-table__body-wrapper .el-table__body td:nth-of-type(1) .cell{
+.processTrajectory .el-table__body-wrapper .el-table__body td:nth-of-type(1) .cell {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
 
-.processTrajectory .el-table th:nth-of-type(1),.processTrajectory .el-table th:nth-of-type(4),.processTrajectory .el-table th:nth-of-type(7),.processTrajectory .el-table th:nth-of-type(10) {
+.processTrajectory .el-table th:nth-of-type(1),
+.processTrajectory .el-table th:nth-of-type(4),
+.processTrajectory .el-table th:nth-of-type(7),
+.processTrajectory .el-table th:nth-of-type(10) {
   text-align: center;
 }
 
-.processTrajectory .el-table__body-wrapper .el-table__body td:nth-of-type(1),.processTrajectory .el-table__body-wrapper .el-table__body td:nth-of-type(4),.processTrajectory .el-table__body-wrapper .el-table__body td:nth-of-type(7),.processTrajectory .el-table__body-wrapper .el-table__body td:nth-of-type(10) {
-  text-align: center; 
+.processTrajectory .el-table__body-wrapper .el-table__body td:nth-of-type(1),
+.processTrajectory .el-table__body-wrapper .el-table__body td:nth-of-type(4),
+.processTrajectory .el-table__body-wrapper .el-table__body td:nth-of-type(7),
+.processTrajectory .el-table__body-wrapper .el-table__body td:nth-of-type(10) {
+  text-align: center;
 }
 
 
@@ -1664,14 +1933,17 @@ padding: 0;
   background: #f8f9fd;
 }
 
+
 /* 箭头 */
-.phone-credit .el-tree-node__content .el-tree-node__expand-icon{
- transform:rotate(-90deg); 
- -webkit-transform:rotate(-90deg);
+
+.phone-credit .el-tree-node__content .el-tree-node__expand-icon {
+  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
 }
-.phone-credit .el-tree-node__expand-icon.expanded{
-  transform:rotate(90deg);
-  -webkit-transform:rotate(90deg);
+
+.phone-credit .el-tree-node__expand-icon.expanded {
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
 }
 
 
@@ -1682,7 +1954,9 @@ padding: 0;
   font-size: 20px;
 }
 
+
 /* 电话征信 历史调查日志 样式*/
+
 .phone-credit .el-table th {
   /*  text-align: center; */
   font-weight: 400;
@@ -1696,34 +1970,43 @@ padding: 0;
   color: #666666;
   font-size: 14px;
 }
+
+
 /* 序号 时间  居中*/
+
 .phone-credit .el-table th:nth-of-type(1),
-.phone-credit .el-table th:nth-of-type(2){
+.phone-credit .el-table th:nth-of-type(2) {
   text-align: center;
 }
+
 .phone-credit .el-table__body-wrapper .el-table__body td:nth-of-type(1),
 .phone-credit .el-table__body-wrapper .el-table__body td:nth-of-type(2) {
   text-align: center;
 }
 
 
-
 /* 来源 居左*/
-.phone-credit .el-table th:nth-of-type(3){
+
+.phone-credit .el-table th:nth-of-type(3) {
   text-align: left;
 }
+
 .phone-credit .el-table__body-wrapper .el-table__body td:nth-of-type(3) {
   text-align: left;
 }
 
 
 /* 信审审批   */
+
+
 /* 金额右*/
+
 .creditApproval-class .spjl-div .el-table th:nth-of-type(1),
 .creditApproval-class .spjl-div .el-table th:nth-of-type(3),
-.creditApproval-class .spjl-div .el-table th:nth-of-type(6){
+.creditApproval-class .spjl-div .el-table th:nth-of-type(6) {
   text-align: right;
 }
+
 .creditApproval-class .spjl-div .el-table__body-wrapper .el-table__body td:nth-of-type(1),
 .creditApproval-class .spjl-div .el-table__body-wrapper .el-table__body td:nth-of-type(3),
 .creditApproval-class .spjl-div .el-table__body-wrapper .el-table__body td:nth-of-type(6) {
@@ -1732,131 +2015,169 @@ padding: 0;
 
 
 /* 时间 中*/
-.creditApproval-class .spjl-div .el-table th:nth-of-type(11){
+
+.creditApproval-class .spjl-div .el-table th:nth-of-type(11) {
   text-align: center;
 }
-.creditApproval-class .spjl-div .el-table__body-wrapper .el-table__body td:nth-of-type(11){
+
+.creditApproval-class .spjl-div .el-table__body-wrapper .el-table__body td:nth-of-type(11) {
   text-align: center;
 }
 
 
 /* 信审审批 - 流程轨迹*/
+
+
 /* 序号居中*/
+
 .creditApproval-class .xllcgj-div .el-table th:nth-of-type(1),
 .creditApproval-class .xllcgj-div .el-table th:nth-of-type(4),
-.creditApproval-class .xllcgj-div .el-table th:nth-of-type(7){
+.creditApproval-class .xllcgj-div .el-table th:nth-of-type(7) {
   text-align: center;
 }
+
 .creditApproval-class .xllcgj-div .el-table__body-wrapper .el-table__body td:nth-of-type(1),
 .creditApproval-class .xllcgj-div .el-table__body-wrapper .el-table__body td:nth-of-type(4),
-.creditApproval-class .xllcgj-div .el-table__body-wrapper .el-table__body td:nth-of-type(7){
+.creditApproval-class .xllcgj-div .el-table__body-wrapper .el-table__body td:nth-of-type(7) {
   text-align: center;
 }
 
 
 /* 电话征信 -- 电话树更改*/
-.phone-credit .el-collapse-item__header .el-collapse-item__arrow{
-  transform:rotate(-90deg); 
- -webkit-transform:rotate(-90deg);
+
+.phone-credit .el-collapse-item__header .el-collapse-item__arrow {
+  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
 }
 
-.el-collapse-item.is-active .el-collapse-item__header .el-collapse-item__arrow{
-  transform:rotate(90deg); 
- -webkit-transform:rotate(90deg); 
+.el-collapse-item.is-active .el-collapse-item__header .el-collapse-item__arrow {
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
 }
 
 
 /* 必填 * */
-.require-icon{
+
+.require-icon {
   color: #ff7676;
   font-weight: 700;
   font-size: 16px;
   vertical-align: middle;
 }
 
+
 /* 反欺诈 反欺诈调查 */
-.aAntiFraudInvestigation .el-collapse-item__header{
+
+.aAntiFraudInvestigation .el-collapse-item__header {
   background: #eef0f9;
   border: 1px solid #e6eaee;
   width: 100%;
   height: 40px;
   line-height: 40px;
 }
+
 .aAntiFraudInvestigation .el-collapse-item__arrow {
-    line-height: 38px;
-    margin-right: 14px;
+  line-height: 38px;
+  margin-right: 14px;
 }
-.aAntiFraudInvestigation .tibao .el-textarea.is-disabled .el-textarea__inner{
+
+.aAntiFraudInvestigation .tibao .el-textarea.is-disabled .el-textarea__inner {
   background-color: #fff;
 }
-.aAntiFraudInvestigation .el-collapse-item:nth-of-type(5) div.el-collapse-item__wrap{
+
+.aAntiFraudInvestigation .el-collapse-item:nth-of-type(5) div.el-collapse-item__wrap {
   width: 100%;
 }
-.aAntiFraudInvestigation td .el-input__inner{
-  border:none;
+
+.aAntiFraudInvestigation td .el-input__inner {
+  border: none;
 }
-.aAntiFraudInvestigation .el-table__body-wrapper{
-    overflow-x: hidden;
-  }
-.aAntiFraudInvestigation .ElectroNuclear .el-table__body-wrapper .el-table__body td:nth-of-type(1),.aAntiFraudInvestigation .ElectroNuclear .el-table__body-wrapper .el-table__body td:nth-of-type(2){
-  text-align: center;
-}
-.aAntiFraudInvestigation .ElectroNuclear .el-table__header-wrapper .el-table__header th:nth-of-type(1),.aAntiFraudInvestigation .ElectroNuclear .el-table__header-wrapper .el-table__header th:nth-of-type(2){
-  text-align: center;
-}
-.aAntiFraudInvestigation .tableDiv .el-table__body-wrapper .el-table__body td:nth-of-type(1){
-  text-align: center;
-}
-.aAntiFraudInvestigation .tableDiv .el-table__header-wrapper .el-table__header th:nth-of-type(1){
-  text-align: center;
-}
-.aAntiFraudInvestigation .numLog .el-dialog__title{
-  font-size: 14px;
-}
-.aAntiFraudInvestigation .el-dialog__body{
-  padding: 20px 20px;
-}
-.aAntiFraudInvestigation .numBody .el-table__body-wrapper{
-  overflow: auto;
-}
-.aAntiFraudInvestigation .numBody .el-table__body-wrapper{
+
+.aAntiFraudInvestigation .el-table__body-wrapper {
   overflow-x: hidden;
 }
+
+.aAntiFraudInvestigation .ElectroNuclear .el-table__body-wrapper .el-table__body td:nth-of-type(1),
+.aAntiFraudInvestigation .ElectroNuclear .el-table__body-wrapper .el-table__body td:nth-of-type(2) {
+  text-align: center;
+}
+
+.aAntiFraudInvestigation .ElectroNuclear .el-table__header-wrapper .el-table__header th:nth-of-type(1),
+.aAntiFraudInvestigation .ElectroNuclear .el-table__header-wrapper .el-table__header th:nth-of-type(2) {
+  text-align: center;
+}
+
+.aAntiFraudInvestigation .tableDiv .el-table__body-wrapper .el-table__body td:nth-of-type(1) {
+  text-align: center;
+}
+
+.aAntiFraudInvestigation .tableDiv .el-table__header-wrapper .el-table__header th:nth-of-type(1) {
+  text-align: center;
+}
+
+.aAntiFraudInvestigation .numLog .el-dialog__title {
+  font-size: 14px;
+}
+
+.aAntiFraudInvestigation .el-dialog__body {
+  padding: 20px 20px;
+}
+
+.aAntiFraudInvestigation .numBody .el-table__body-wrapper {
+  overflow: auto;
+}
+
+.aAntiFraudInvestigation .numBody .el-table__body-wrapper {
+  overflow-x: hidden;
+}
+
 .aAntiFraudInvestigation .numBody .el-table__body-wrapper .el-table__body td {
   padding: 5px 0;
 }
-.aAntiFraudInvestigation .numBody .el-table th{
+
+.aAntiFraudInvestigation .numBody .el-table th {
   padding: 8px 0;
 }
+
 .aAntiFraudInvestigation .numBody .el-table__body-wrapper .el-table__body td:nth-of-type(1) {
   text-align: center;
 }
+
+
 /* .aAntiFraudInvestigation .numBody .el-table__body-wrapper .el-table__body td:nth-of-type(6) button{
   background:#0077FF;
   color: #fff;
 } */
+
 .aAntiFraudInvestigation .numBody .el-table th:nth-of-type(6) {
   text-align: center;
 }
-.aAntiFraudInvestigation .numBody .page{
+
+.aAntiFraudInvestigation .numBody .page {
   text-align: center;
   margin-top: 20px;
 }
-.aAntiFraudInvestigation .numLog .el-dialog__body{
+
+.aAntiFraudInvestigation .numLog .el-dialog__body {
   padding: 10px 20px;
 }
-.aAntiFraudInvestigation .numLog .el-dialog__header{
+
+.aAntiFraudInvestigation .numLog .el-dialog__header {
   border-bottom: 1px solid #ccc;
 }
-.aAntiFraudInvestigation .tableDiv .el-table__body-wrapper .el-table__body td:nth-of-type(3){
+
+.aAntiFraudInvestigation .tableDiv .el-table__body-wrapper .el-table__body td:nth-of-type(3) {
   cursor: pointer;
 }
-.aAntiFraudInvestigation .numLog .el-dialog__body{
+
+.aAntiFraudInvestigation .numLog .el-dialog__body {
   padding-bottom: 0;
 }
-.aAntiFraudInvestigation .numLog .el-dialog__footer{
+
+.aAntiFraudInvestigation .numLog .el-dialog__footer {
   padding-top: 0;
 }
+
 
 
 /* 反欺诈 */
@@ -1868,5 +2189,4 @@ padding: 0;
 .el-table--border .has-gutter td:nth-last-of-type(2), .el-table--border .has-gutter th:nth-last-of-type(2){
   text-align: center;
 }
-
 

@@ -20,17 +20,17 @@
               </p>
               <p>
                 <label>证件类型： </label>
-                <span>{{this.conclu.certType}} </span>
+                <span>{{this.conclu.certTypeTxt}} </span>
               </p>
             </li>
             <li>
               <p>
                 <label>证件号码： </label>
-                <span>{{this.conclu.applySubno}} </span>
+                <span>{{this.conclu.certCode}} </span>
               </p>
               <p>
                 <label>移动电话： </label>
-                <span>{{this.conclu.applySubno}} </span>
+                <span>{{this.conclu.mobile}} </span>
               </p>
             </li>
           </ul>
@@ -46,21 +46,21 @@
             <li>
               <p>
                 <label>拒贷日期： </label>
-                <span>{{this.conclu.certType}} </span>
+                <span>{{this.conclu.dealOperDate}} </span>
               </p>
               <p>
                 <label>拒贷部门： </label>
-                <span>{{this.conclu.certType}} </span>
+                <span>{{this.conclu.dealOrgCode}} </span>
               </p>
               <p>
                 <label>拒贷结论： </label>
-                <span>{{this.conclu.certType}} </span>
+                <span>{{this.conclu.applyConclusion}} </span>
               </p>
             </li>
             <li>
               <p>
                 <label>拒贷主原因码： </label>
-                <span>{{this.conclu.certType}} </span>
+                <span>{{this.conclu.mainreasonCode}} </span>
               </p>
             </li>
           </ul>
@@ -76,17 +76,17 @@
             <li>
               <p>
                 <label>复议说明： </label>
-                <span>{{this.conclu.applySubno}} </span>
+                <span>{{this.conclu.reconRemark}} </span>
               </p>
             </li>
             <li>
               <p>
                 <label>复议申请人： </label>
-                <span>{{this.conclu.applySubno}} </span>
+                <span>{{this.conclu.reconOpercode}} </span>
               </p>
               <p>
                 <label>复议申请日期： </label>
-                <span>{{this.conclu.applySubno}} </span>
+                <span>{{this.conclu.reconDate}} </span>
               </p>
             </li>
           </ul>
@@ -107,14 +107,12 @@
     mounted() {
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '03') {
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈专员-匹配查看
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈专员-
       } else if (this.judgeFlag.flag == '04') {
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管-匹配查看
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管-
       }
-      this.post("/creauditOpinion/queryByPage", {
-        // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
-        // applyId:"00542",
-        applyId: this.tastwaitingPass.applyId,
+      this.post("/accepApplyReconController/getAccepApplyRecon", {
+        id: this.tastwaitingPass.applyId,
       }).then(res => {
         console.log(res.data)
         this.ConclutionInf = res.data.recordList;
