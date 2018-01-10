@@ -109,7 +109,7 @@
 						  type="textarea"
 						  :rows="3"
 						  placeholder="请输入内容"
-						  v-model="fraudApplyInfo.mainreaName+fraudApplyInfo.subreaName+fraudApplyInfo.applyDesc"
+						  v-model="reason"
 						  disabled>
 						</el-input>
 			    	</div>
@@ -361,7 +361,7 @@
 				activeNames: ['1','2','3','4','5','6','7','8','9','10'],
 				fraudApplyInfo:'',
 				hitRuleList:[
-					{
+					/*{
 		                ruleId:"xxx", // 规则ID
 		                ruleContent:"方式开发健康", // 命中规则名称
 		                custCount:0 // 命中客户数
@@ -390,7 +390,7 @@
 		                ruleId:"xxx", // 规则ID
 		                ruleContent:"方式开发健康", // 命中规则名称
 		                custCount:20 // 命中客户数
-		            },
+		            },*/
 				],
 				fraudTelCheckList:[],
 				fraudAuditInfo:{
@@ -408,7 +408,7 @@
 				currentPage:1,// 默认显示的当前页
 				setPageSize:10,
 				recordList:[
-		          {
+		          /*{
 		            ruleId:"xxxx", // 规则Id
 		            ruleContent:"功夫功夫", // 命中规则的名称
 		            applySubNo:"13424675787", // 进件编号
@@ -487,7 +487,7 @@
 		            custName:"和规范化风格哈", // 命中客户名称
 		            status:"而非给", // 状态
 		            statusTxt:"法人股3" // 状态文本
-		         },
+		         },*/
 		      ],
 		      /*反欺诈申请ID*/
 		      appinfoId:'',
@@ -503,11 +503,20 @@
 			   deldialogVisible:false,
 			   /*恢复弹框*/
 			   backdialogVisible:false,
+			   //根据judgeFlag判断取 反欺诈专员 还是 反欺诈主管的申请ID
+			   judgeFlag:'',
+			   //理由：主原因+子原因+描述
+			   reason:'',
 			}
 		},
 		mounted(){
 			/*获取 反欺诈申请ID*/
-			this.appinfoId=JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
+			this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+			if(this.judgeFlag.flag == '03'){
+				this.appinfoId=JSON.parse(localStorage.getItem('AntitaskInWaitting')).applyId;//反欺诈专员
+			}else if (this.judgeFlag.flag == '04') {
+		        this.appinfoId = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")).applyId; //反欺诈主管
+		    }
 			this.request(this.appinfoId);	
 		},
 		methods:{
@@ -518,10 +527,32 @@
 		      }
 	          ).then(res => {
 	          	if(res.statusCode==200 &&　res.data!=null){
-	          		this.fraudApplyInfo = res.data.fraudApplyInfo;
-	          		this.hitRuleList = res.data.hitRuleList;
-	          		this.fraudAuditInfo = res.data.fraudAuditInfo;
-	          		this.fraudTelCheckList = res.data.fraudTelCheckList;
+	          		//基本信息
+	          		if(res.data.fraudApplyInfo == null){
+	          			this.fraudApplyInfo = this.fraudApplyInfo;
+	          		}else{
+	          			this.fraudApplyInfo = res.data.fraudApplyInfo;
+	          			this.reason = this.fraudApplyInfo.mainreaName+this.fraudApplyInfo.subreaName+this.fraudApplyInfo.applyDesc;
+	          		};
+
+	          		//命中规则
+	          		if(res.data.hitRuleList == null){
+	          			this.hitRuleList = this.hitRuleList;
+	          		}else{
+	          			this.hitRuleList = res.data.hitRuleList;
+	          		};
+	          		
+	          		if(res.data.fraudAuditInfo == null){
+	          			this.fraudAuditInfo = this.fraudAuditInfo;
+	          		}else{
+	          			this.fraudAuditInfo = res.data.fraudAuditInfo;
+	          		};
+	          		
+	          		if(res.data.fraudTelCheckList == null){
+	          			this.fraudTelCheckList = this.fraudTelCheckList;
+	          		}else{
+	          			this.fraudTelCheckList = res.data.fraudTelCheckList;
+	          		};
 	          	}
 	          })
 			},
