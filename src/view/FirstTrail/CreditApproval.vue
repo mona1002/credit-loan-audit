@@ -269,7 +269,7 @@
             信审核实信息
           </div>
           <el-form-item label="核实可接受最高每期还款额[元]：" style="width:300px;margin-bottom:10px;" class="item-column2 line-height2">
-            {{fbalance}}
+            {{fbalance2}}
           </el-form-item>
           <div class="form-title">
             审批信息
@@ -544,6 +544,7 @@ export default {
       quotaData: '', // 评分 月还款额
       creditScore: '', // 单独处理的评分
       fbalance: '', // 核实每月可接受最高还款额
+      fbalance2: '', // 
       // 表单必填
       spruleForm: { verIncome: '', ploanTerm: '', ploanAmt: '' },
       sprules: {
@@ -795,7 +796,9 @@ export default {
                 this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
                 console.log(this.creditScore);
                 this.fbalance = res.data.fbalance;
+                this.fbalance2 = Number(res.data.fbalance).toLocaleString() + '.00'
                 console.log(this.fbalance);
+                console.log(this.fbalance2);
               }
             })
             /* 请求 
@@ -1981,6 +1984,7 @@ export default {
 .creditApproval-class .el-select {
   height: 100%;
   line-height: 100%;
+  width: calc( 100% - 120px);
 }
 
 .creditApproval-class .el-input--suffix .el-input__inner {
