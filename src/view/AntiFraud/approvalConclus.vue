@@ -1421,6 +1421,7 @@ export default {
 .approval-colun .el-select {
   height: 100%;
   line-height: 100%;
+  width:300px;
 }
 
 .approval-colun .el-input--suffix .el-input__inner {
