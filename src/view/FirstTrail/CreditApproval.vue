@@ -49,8 +49,9 @@
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
         </div>
         <div class="back-form-li" v-show="showFlag=='02'">
-          <span style="color:red;display:inline-block;width:0px;float:left;">*</span>
-          <el-form-item label="回退节点: ">
+          <!-- <span style="color:red;display:inline-block;width:0px;float:left;">*</span> -->
+          <span style="color:red;display:inline-block;width:0px;float:left;position: relative;left:-5px;">*</span>
+          <el-form-item label="回退节点：">
             <el-select v-model="rollbackNodeName">
               <!-- 初审只能回退到  申请登记 -->
               <!-- <el-option label="申请登记" value="creditApp_apply"></el-option>
@@ -63,7 +64,7 @@
         <div class="back-form-li">
           <!-- 回退主原因输入 02 -->
           <!-- 拒绝主原因选择 01 -->
-          <span style="color:red;display:inline-block;width:0px;float:left;position: relative;left:15px;">*</span>
+          <span style="color:red;display:inline-block;width:0px;float:left;position: relative;left:10px;">*</span>
           <el-form-item label="主原因：" class="item-column2" v-show="showFlag=='02'">
             <!-- <el-input v-model="mainReason"></el-input> -->
             <!-- 改成后台获取   filter-method     visible-change 下拉框 出现/隐藏时触发-->
@@ -89,7 +90,7 @@
           </el-form-item>
         </div>
         <div class="back-form-li" style="height:60px;line-height: 60px;padding-top:5px;">
-          <span style="color:red;display:inline-block;width:0px;float:left;position:relative;top:-8px;">*</span>
+          <span style="color:red;display:inline-block;width:0px;float:left;position:relative;top:-8px;left:-5px;">*</span>
           <el-form-item label="原因说明：">
             <!--             <span style="color:red;display:inline-block;width:0px;float:right;margin-right: 25px;">*</span> -->
             <el-input type="textarea" :row="2" resize="none" v-model="reasonRemark"></el-input>
