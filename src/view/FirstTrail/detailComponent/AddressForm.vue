@@ -225,7 +225,7 @@
         <li class="item-column2 item-column3-2">
           <div class="left-title" v-show="checkAddr=='01'">说明：</div>
           <div class="textarea-class2" v-show="checkAddr=='01'">
-            <el-input v-model="checkAddrtxt" type="textarea" resize=none :rows="2"></el-input>
+            <el-input v-model="checkAddrtxt" type="textarea" resize=none :rows="2" :maxlength="500"></el-input>
           </div>
         </li>
         <!-- <li class="item-column3">
