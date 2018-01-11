@@ -230,13 +230,13 @@
         <li class="item-column3">
           <div class="left-title">核对工作证明人1：</div>
           <div>
-            <el-input v-model="jobref1"></el-input>
+            <el-input v-model="jobref1" :maxlength="20"></el-input>
           </div>
         </li>
         <li class="item-column3">
           <div class="left-title">核对工作证明人2：</div>
           <div>
-            <el-input v-model="jobref2"></el-input>
+            <el-input v-model="jobref2" :maxlength="20"></el-input>
           </div>
         </li>
         <li class="item-column3 item-column3-null">
