@@ -2177,3 +2177,16 @@ height: 40px;
 .aAntiFraudInvestigation .numLog .el-dialog__footer {
   padding-top: 0;
 }
+
+
+
+/* 反欺诈 */
+/* 反欺诈 申请 列表 */
+
+.anti-fraud .anti-table .el-table__header-wrapper .el-table__header th:last-child{
+    text-align: center;
+}
+.el-table--border .has-gutter td:nth-last-of-type(2), .el-table--border .has-gutter th:nth-last-of-type(2){
+  text-align: center;
+}
+
