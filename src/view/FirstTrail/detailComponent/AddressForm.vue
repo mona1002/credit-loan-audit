@@ -471,6 +471,8 @@ export default {
     if (this.isFull == true) { // 全屏
       console.log('全屏');
       $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
+      $('.item-column1 textarea').css("width", "100%")
+      $('.item-column1 textarea').css("width", "100%")
       // 提交按钮
       $('.submit-class').css("margin-left", "calc( 66% - 140px)")
       // 显示 column2
@@ -829,6 +831,7 @@ export default {
       if (val == true) { // 全屏
         console.log('全屏');
         $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
+        $('.item-column1 textarea').css("width", "100%")
         // 提交按钮
         $('.submit-class').css("margin-left", "calc( 66% - 140px)")
         // 显示 column2
