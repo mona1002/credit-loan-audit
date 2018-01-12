@@ -121,7 +121,7 @@
                     </el-table-column>
                     <el-table-column prop="checkStageDes" label="调查阶段" min-width="80">
                     </el-table-column>
-                    <el-table-column prop="conclusion" label="调查结论" min-width="100" show-overflow-tooltip>
+                    <el-table-column prop="conclusion" label="调查结果" min-width="100" show-overflow-tooltip>
                     </el-table-column>
                   </el-table>
                   <!-- 分页 -->

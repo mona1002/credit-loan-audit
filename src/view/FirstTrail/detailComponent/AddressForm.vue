@@ -164,8 +164,10 @@
           <div class="left-title">核对工作情况：</div>
           <div>
             <el-select v-model="checkWork">
-              <el-option label="有" value="0"></el-option>
-              <el-option label="无" value="1"></el-option>
+              <el-option label="一致" value="00"></el-option>
+              <el-option label="基本一致" value="01"></el-option>
+              <el-option label="不一致" value="02"></el-option>
+              <el-option label="被调查人不清楚" value="03"></el-option>
             </el-select>
           </div>
         </li>
@@ -331,7 +333,7 @@
       </div>
       <div class="content-ul">
         <li class="item-column3">
-          <div class="left-title">兄弟姐妹：</div>
+          <div class="left-title">是否有兄弟姐妹：</div>
           <div>
             <el-select v-model="brother">
               <el-option label="有" value="00"></el-option>
@@ -406,7 +408,7 @@
         </div>
       </li>
       <li class="item-column1">
-        <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查结论：</div>
+        <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查结果：</div>
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <div class="textarea-class">
             <el-input v-model="conclusion" type="textarea" :rows="5" resize=none :maxlength="500"></el-input>
@@ -558,7 +560,7 @@ export default {
                 checkStage: this.checkStage,
                 checkHometel: this.checkHometel, // 核对家庭固话
                 hobbyandBehave: this.hobbyandBehave, // 借款人爱好和品行
-                conclusion: this.conclusion, // 调查结论
+                conclusion: this.conclusion, // 调查结果
                 issameFamtxt: this.issameFamtxt, // 是否与家庭联系人为同一人接听说明
                 relBorrowertxt: this.relBorrowertxt, // 与借款人关系说明
                 checkWorktxt: this.checkWorktxt, // 工作情况说明
@@ -626,7 +628,7 @@ export default {
               instance.confirmButtonLoading = false;
             });
           } else {
-            this.$message({ message: this.resMsg, type: 'warning' });
+            // this.$message({ message: this.resMsg, type: 'warning' });
             done();
           }
         }
@@ -816,7 +818,7 @@ export default {
         return;
       }
     },
-    // 调查结论
+    // 调查结果
     conclusion: function() {
       if (this.conclusion.length == 500) {
         this.$message({

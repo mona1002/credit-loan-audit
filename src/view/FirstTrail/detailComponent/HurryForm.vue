@@ -74,7 +74,7 @@
     </ul>
     <div class="address-title">
       <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-      <span class="headFont">录入紧急联系人调查信息</span>
+      <span class="headFont">录入其他联系人调查信息</span>
     </div>
     <ul style="margin-left:15px;">
       <div class="content-ul">
@@ -392,7 +392,7 @@ export default {
               instance.confirmButtonLoading = false;
             });
           } else {
-            this.$message({ message: this.resMsg, type: 'warning' });
+            // this.$message({ message: this.resMsg, type: 'warning' });
 
             done();
           }

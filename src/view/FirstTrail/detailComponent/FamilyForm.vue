@@ -469,7 +469,7 @@ export default {
               instance.confirmButtonLoading = false;
             });
           } else {
-            this.$message({ message: this.resMsg, type: 'warning' });
+            // this.$message({ message: this.resMsg, type: 'warning' });
             done();
           }
         }
