@@ -1085,6 +1085,7 @@
           this.FormData = res.data;
           this.AreaNPercent();
           // this.mountM();
+                  this.formatSC();
           this.mountJ(0, res.data.wbeexEcuted);
           this.mountJ(1, res.data.wnetHirecom);
           this.mountJ(2, res.data.wnetEcutedBrea);

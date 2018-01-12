@@ -1995,14 +1995,14 @@
       },
       CFsave() {
         console.log("保存修改")
-        console.log(this.checkData.workProvinceName)
-        console.log(this.checkData.workProvince)
+        // console.log(this.checkData.workProvinceName)
+        // console.log(this.checkData.workProvince)
 
         this.$validator.validateAll().then((result) => {
           if (result) {
             this.checkData.selfpremisesArea = this.acreage;
             this.checkData.selfhasProportion = this.Percent;
-            console.log(this.$refs.province)
+            // console.log(this.$refs.province)
 
             this.checkData.workProvinceName = this.$refs.province.selectedLabel;
             this.checkData.workCityName = this.$refs.city.selectedLabel;
@@ -2265,30 +2265,28 @@
         let sign = (num == (num = Math.abs(num)));
         num = Math.floor(num * Math.pow(10, cent) + 0.50000000001); // 把指定的小数位先转换成整数.多余的小数位四舍五入
         let cents = num % Math.pow(10, cent); // 求出小数位数值
-        console.log(cents)
+        // console.log(cents)
         num = Math.floor(num / Math.pow(10, cent)).toString(); // 求出整数位数值
         cents = cents.toString(); // 把小数位转换成字符串,以便求小数位长度
         // 补足小数位到指定的位数
         while (cents.length < cent)
           cents = "0" + cents;
-        console.log(cents)
-        console.log(num.length)
+        // console.log(cents)
+        // console.log(num.length)
         // if (isThousand) {
         // 对整数部分进行千分位格式化.
         for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++) {
           num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
         }
-        console.log(num)
+        // console.log(num)
         // }
         if (cent > 0) {
           return (((sign) ? '' : '-') + num + '.' + cents);
           //  num = num + '.' + cents;
-          console.log(num);
+          // console.log(num);
         } else {
           return (((sign) ? '' : '-') + num);
-          // return (((sign)?'':'-') + num);
-          // num
-          console.log(num)
+          // console.log(num)
         }
       },
       formatSC(el, val) {
@@ -2329,6 +2327,9 @@
         }
       },
       btnnn(){
+        console.log(this.checkData.selfpremisesArea )
+        console.log(this.checkData.selfhasProportion )
+        
 this.checkData.fbalance!=null && this.checkData.fbalance.indexOf(',')? this.checkData.fbalance=this.checkData.fbalance.split(",").join(''):this.checkData.fbalance ;
 this.checkData.iloanAmt!=null && this.checkData.iloanAmt.indexOf(',')? this.checkData.iloanAmt=this.checkData.iloanAmt.split(",").join(''):this.checkData.iloanAmt ;
 this.checkData.avgsalaryamt!=null && this.checkData.avgsalaryamt.indexOf(',')? this.checkData.avgsalaryamt=this.checkData.avgsalaryamt.split(",").join(''):this.checkData.avgsalaryamt ;
@@ -2340,9 +2341,14 @@ this.checkData.spouseIncome!=null && this.checkData.spouseIncome.indexOf(',')? t
 this.checkData.childPaycostamt!=null && this.checkData.childPaycostamt.indexOf(',')? this.checkData.childPaycostamt=this.checkData.childPaycostamt.split(",").join(''):this.checkData.childPaycostamt ;
 this.checkData.parentIncome!=null && this.checkData.parentIncome.indexOf(',')? this.checkData.parentIncome=this.checkData.parentIncome.split(",").join(''):this.checkData.parentIncome ;
 this.checkData.fconsumption!=null && this.checkData.fconsumption.indexOf(',')? this.checkData.fconsumption=this.checkData.fconsumption.split(",").join(''):this.checkData.fconsumption ;
-this.checkData.selfpremisesArea!=null && this.checkData.selfpremisesArea.indexOf(',')? this.checkData.selfpremisesArea= this.checkData.selfpremisesArea.slice(0, -2).split(",").join(''):this.checkData.selfpremisesArea ;
-this.checkData.selfhasProportion!=null && this.checkData.selfhasProportion.indexOf(',')? this.checkData.selfhasProportion= this.checkData.selfpremisesArea.slice(0, -1).split(",").join(''):this.checkData.selfhasProportion ;
-      },
+this.checkData.selfpremisesArea!=null && this.checkData.selfpremisesArea.indexOf(',')? this.checkData.selfpremisesArea= this.checkData.selfpremisesArea.split(",").join(''):this.checkData.selfpremisesArea ;
+this.checkData.selfhasProportion!=null && this.checkData.selfhasProportion.indexOf(',')? this.checkData.selfhasProportion= this.checkData.selfhasProportion.split(",").join(''):this.checkData.selfhasProportion ;
+        console.log(this.checkData.selfpremisesArea )
+        console.log(this.checkData.selfhasProportion )
+// this.checkData.selfpremisesArea!=null && this.checkData.selfpremisesArea.indexOf(',')? this.checkData.selfpremisesArea= this.checkData.selfpremisesArea.slice(0, -2).split(",").join(''):this.checkData.selfpremisesArea ;
+// this.checkData.selfhasProportion!=null && this.checkData.selfhasProportion.indexOf(',')? this.checkData.selfhasProportion= this.checkData.selfpremisesArea.slice(0, -1).split(",").join(''):this.checkData.selfhasProportion ;
+    
+    },
       ElInputStyle(val) {
         if (val == "50%") {
           for (var i = 0; i < this.Pwidth.length; i++) {
@@ -2414,7 +2420,7 @@ this.checkData.selfhasProportion!=null && this.checkData.selfhasProportion.index
         // this.acquire(this.checkData.childPaycostamt, '生活费支付');
         // this.acquire(this.checkData.avgsalaryamt, '月均工资');
         // this.acquire(this.checkData.iloanAmt, '借款金额');
-        console.log(this.checkData.iloanAmt)
+        // console.log(this.checkData.iloanAmt)
        this.checkData.fbalance? this.checkData.fbalance = this.formatNumber(this.checkData.fbalance, 2, 0): this.checkData.fbalance;
         this.checkData.iloanAmt? this.checkData.iloanAmt = this.formatNumber(this.checkData.iloanAmt, 2, 0):this.checkData.iloanAmt;
         this.checkData.avgsalaryamt ? this.checkData.avgsalaryamt = this.formatNumber(this.checkData.avgsalaryamt, 2, 0): this.checkData.avgsalaryamt ;
@@ -2435,8 +2441,6 @@ this.checkData.selfhasProportion!=null && this.checkData.selfhasProportion.index
           console.log(res);
           if (res.statusCode == 200) {
             this.checkData = res.data;
-            console.log(this.checkData.workProvinceName)
-
             this.checkData.applyId = this.getParams.applyId;
             // this.AreaNPercent(this.checkData.fbalance);
             this.AreaNPercent();
@@ -2510,7 +2514,7 @@ this.checkData.selfhasProportion!=null && this.checkData.selfhasProportion.index
       // 省    
       this.get("/credit/queryProvince", {}).then(res => {
         this.hirecomAddress = res.data;
-        console.log(res);
+        // console.log(res);
       });
       // 所属行业 
       this.get("/credit/industry", {}).then(res => {
