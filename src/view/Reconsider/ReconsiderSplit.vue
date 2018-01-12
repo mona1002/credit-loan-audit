@@ -150,18 +150,18 @@
     },
     mounted() {
       console.log("分屏");
-      //   this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
-      //   this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-      //     id: this.tastwaitingPass.applyId,
-      //   }).then(res => {
-      // if (res.statusCode == 200) {
-        //  this.custName=res.data.accepCusBasicInfo.custName;
-      //   //     this.customInf = res.data;
-      // } else {
-      //   this.$message.error(res.msg);
-      // }
-      //   });
-      this.title = "影音资料";
+            // 复议不用flag判断，列表页专员、主管存的同一个字段
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting"));
+        this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
+          id: this.tastwaitingPass.applyId,
+        }).then(res => {
+      if (res.statusCode == 200) {
+         this.custName=res.data.accepCusBasicInfo.custName;
+        //     this.customInf = res.data;
+      } else {
+        this.$message.error(res.msg);
+      }
+        });
     },
     components: {
       myHead,

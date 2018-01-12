@@ -107,13 +107,8 @@
       }
     },
     mounted() {
-      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '03') {
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈专员-
-      } else if (this.judgeFlag.flag == '04') {
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管-
-      }
-      // console.log(this.tastwaitingPass)
+      // 复议不用flag判断，列表页专员、主管存的同一个字段
+       this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting")); //复议申请专员+主管
       this.post("/accepApplyReconController/getAccepApplyRecon", {
         id: this.tastwaitingPass.processInstanceId,
         // id:'500001'
