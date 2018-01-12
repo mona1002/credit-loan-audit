@@ -1129,6 +1129,7 @@
             
             //信用卡使用总况
             borCard:{
+            	"id":'',
 		        "applyId":this.applyId, // 申请单Id    
 		        "cardCount":'', // 信用卡张数
 		        "nouseCount":'', // 未开卡张数
@@ -1145,6 +1146,7 @@
 
             // 贷款总况
             loanInfo:{
+            	"id":'',
 		        "applyId":this.applyId, // 申请单Id
 		        "carLoanTotal":'', // 车贷共有笔数
 		        "carLoanNoPayoff":'', // 车贷现存笔数
@@ -1162,6 +1164,7 @@
 
             // 负债信息
             borDebt:{
+            	"id":'',
 		        "applyId":this.applyId, // 申请单Id
 		        "monthRepayAmt":'', // 信用卡每月还款[元]
 		        "studentLoanAmt":'', // 助学贷每月还款额[元]
@@ -1175,6 +1178,7 @@
 
             // 征询报告
             rptInfo:{
+            	"id":'',
 		        "applyId":this.applyId, // 申请单Id    
 		        "crSource":"", // 报告来源
 		        "crHasRecord":"", // 有无征信报告查询记录
@@ -1187,6 +1191,7 @@
 
             // 其他信息
             otherInfo:{
+            	"id":'',
 		        "applyId":this.applyId, // 申请单Id    
 		        "content":"", // 其他内容
 		    },
@@ -1296,6 +1301,8 @@
       		info:'',
       		tidialogVisible:false,
       		ifFull:'', // 标志是否全屏
+      		//负债信息 负债合计
+      		arr:[],
 	      };
 	    },
 		props:['isFull'],
@@ -1430,6 +1437,7 @@
 		        	this.borCard=this.borCard
 		        }else{
 		        	this.borCard=res.data.borCard;
+		        	this.borCard.id=res.data.borCard.id;
 		        }
 		        
 		        /*贷款明细*/
@@ -1461,6 +1469,7 @@
 		        	this.loanInfo=this.loanInfo
 		        }else{
 		        	this.loanInfo=res.data.loanInfo;
+		        	this.loanInfo.id=res.data.loanInfo.id;
 		        }
 		        
 		        /*负债信息*/
@@ -1468,26 +1477,54 @@
 		        	this.borDebt=this.borDebt
 		        }else{
 		        	this.borDebt=res.data.borDebt;
+		        	this.borDebt.id=this.borDebt.id;
 		        	//console.log(this.borDebt.houseLoanAmt);
 		        	//console.log(typeof(this.borDebt.houseLoanAmt));
 		        	//负债信息 信用卡每月还款 保留两位小数点
-		        	this.borDebt.monthRepayAmt = this.formatNumber(this.borDebt.monthRepayAmt,2,0);
+		        	if(this.borDebt.monthRepayAmt != null){
+		        		this.borDebt.monthRepayAmt = this.formatNumber(this.borDebt.monthRepayAmt,2,0);
+		        	};
+
+		        	this.arr.push(this.borDebt.monthRepayAmt);
+		        	
 		        	//负债信息 助学贷每月还款额 保留两位小数点
-		        	this.borDebt.studentLoanAmt = this.formatNumber(this.borDebt.studentLoanAmt,2,0);
+		        	if(this.borDebt.studentLoanAmt != null){
+		        		this.borDebt.studentLoanAmt = this.formatNumber(this.borDebt.studentLoanAmt,2,0);
+		        	};
+
 		        	//负债信息 房贷每月还款额 保留两位小数点
-		        	this.borDebt.houseLoanAmt = this.formatNumber(this.borDebt.houseLoanAmt,2,0);
+		        	if(this.borDebt.houseLoanAmt != null){
+		        		this.borDebt.houseLoanAmt = this.formatNumber(this.borDebt.houseLoanAmt,2,0);
+		        	};
+
+		        	this.arr.push(this.borDebt.houseLoanAmt);
+		        	
 		        	//负债信息 车贷每月还款额 保留两位小数点
-		        	this.borDebt.carLoanAmt = this.formatNumber(this.borDebt.carLoanAmt,2,0);
+		        	if(this.borDebt.carLoanAmt != null){
+		        		this.borDebt.carLoanAmt = this.formatNumber(this.borDebt.carLoanAmt,2,0);
+		        	};
+
+		        	this.arr.push(this.borDebt.carLoanAmt);
+		        	
 		        	//负债信息 其他贷款每月还款额 保留两位小数点
-		        	this.borDebt.otherLoanAmt = this.formatNumber(this.borDebt.otherLoanAmt,2,0);
+		        	if(this.borDebt.otherLoanAmt != null){
+		        		this.borDebt.otherLoanAmt = this.formatNumber(this.borDebt.otherLoanAmt,2,0);
+		        	};
+
+		        	this.arr.push(this.borDebt.otherLoanAmt);
+		        	//console.log(this.aaa);
 		        	//负债信息 负债合计 保留两位小数点
-		        	this.borDebt.totalLoan = this.formatNumber(this.borDebt.totalLoan,2,0);
+		        	if(this.borDebt.totalLoan != null){
+		        		this.borDebt.totalLoan = this.formatNumber(this.borDebt.totalLoan,2,0);
+		        	};
+		        	//console.log(this.arr);
 		        }
 		        /*征询报告*/
 		        if(res.data.rptInfo==null){
 		        	this.rptInfo=this.rptInfo
 		        }else{
 		        	this.rptInfo=res.data.rptInfo;
+		        	this.rptInfo.id=res.data.rptInfo.id;
 		        }
 		        /*流水明细*/
 		        this.incomeList=res.data.incomeList;
@@ -1526,6 +1563,7 @@
 		        	this.otherInfo=this.otherInfo
 		        }else{
 		        	this.otherInfo=res.data.otherInfo;
+		        	this.otherInfo.id=res.data.otherInfo.id;
 		        }
 		        //console.log(this.borCard);
 		      });
@@ -2200,68 +2238,69 @@
 			    }
 			},
 			debtTotal(val,flag){	
-		    // 无数据
-			    if (!val){
-			    	switch (flag) {
-			            case 'monthRepayAmt':
-			                this.borDebt.monthRepayAmt = '';
-			                break;
-			            case 'studentLoanAmt':
-			                this.borDebt.studentLoanAmt = '';
-			                break;
-			            case 'houseLoanAmt':
-			                this.borDebt.houseLoanAmt = '';
-			                break;
-			            case 'carLoanAmt':
-			                this.borDebt.carLoanAmt = '';
-			                break;
-			            case 'otherLoanAmt':
-			                this.borDebt.otherLoanAmt = '';
-			                break;
-			            case 'totalLoan':
-			                this.borDebt.totalLoan = '';
-			                break;   
-			        }
-			    }
-			    // 有数据
-			    if (val) {
-		        	switch (flag) {
-			            case 'monthRepayAmt':
-						    this.borDebt.monthRepayAmt =this.formatNumber(this.borDebt.monthRepayAmt,2,0);
-			            	this.borDebt.totalLoan=this.borDebt.monthRepayAmt.split(',').join("")*1+this.borDebt.houseLoanAmt.split(',').join("")*1+this.borDebt.carLoanAmt.split(',').join("")*1+this.borDebt.otherLoanAmt.split(',').join("")*1;
-
-			            	this.borDebt.totalLoan =this.formatNumber(this.borDebt.totalLoan,2,0);
-			                break;
-			            case 'studentLoanAmt':
-			            	this.borDebt.studentLoanAmt =this.formatNumber(this.borDebt.studentLoanAmt,2,0);
-			                //this.borDebt.studentLoanAmt = Number(val).toLocaleString() + '.00';
-			                break;
-			            case 'houseLoanAmt':
-			            	this.borDebt.houseLoanAmt =this.formatNumber(this.borDebt.houseLoanAmt,2,0);
-			                //this.borDebt.houseLoanAmt = Number(val).toLocaleString() + '.00';
-			                this.borDebt.totalLoan=this.borDebt.monthRepayAmt.split(',').join("")*1+this.borDebt.houseLoanAmt.split(',').join("")*1+this.borDebt.carLoanAmt.split(',').join("")*1+this.borDebt.otherLoanAmt.split(',').join("")*1;
-			                //负债合计保留两位小数
-			                this.borDebt.totalLoan =this.formatNumber(this.borDebt.totalLoan,2,0);
-			                break;
-			            case 'carLoanAmt':
-			            	this.borDebt.carLoanAmt =this.formatNumber(this.borDebt.carLoanAmt,2,0);
-			                //this.borDebt.carLoanAmt = Number(val).toLocaleString() + '.00';
-			                this.borDebt.totalLoan=this.borDebt.monthRepayAmt.split(',').join("")*1+this.borDebt.houseLoanAmt.split(',').join("")*1+this.borDebt.carLoanAmt.split(',').join("")*1+this.borDebt.otherLoanAmt.split(',').join("")*1;
-			                //负债合计保留两位小数
-			                this.borDebt.totalLoan =this.formatNumber(this.borDebt.totalLoan,2,0);
-			                break;
-			            case 'otherLoanAmt':
-			            	this.borDebt.otherLoanAmt =this.formatNumber(this.borDebt.otherLoanAmt,2,0);
-			                //this.borDebt.otherLoanAmt = Number(val).toLocaleString() + '.00';
-			                this.borDebt.totalLoan=this.borDebt.monthRepayAmt.split(',').join("")*1+this.borDebt.houseLoanAmt.split(',').join("")*1+this.borDebt.carLoanAmt.split(',').join("")*1+this.borDebt.otherLoanAmt.split(',').join("")*1;
-			                //负债合计保留两位小数
-			                this.borDebt.totalLoan =this.formatNumber(this.borDebt.totalLoan,2,0);
-			                break;  
-			        }
-				    
-			        
-			    }
+	        	switch (flag) {
+		            case 'monthRepayAmt':
+		            	if(!this.borDebt.monthRepayAmt){
+		            		 this.borDebt.monthRepayAmt = this.formatNumber('0',2,0);
+		            		 console.log(this.borDebt.monthRepayAmt);
+		            		}else if( this.borDebt.monthRepayAmt){
+		            			this.borDebt.monthRepayAmt =this.formatNumber(this.borDebt.monthRepayAmt,2,0);
+		            		}
+					    
+					    this.arr[0]=this.borDebt.monthRepayAmt.split(',').join("")*1;
+					    this.totalNum();
+		                break;
+		            case 'studentLoanAmt':
+		            	if(!this.borDebt.studentLoanAmt){
+		            		this.borDebt.studentLoanAmt = this.formatNumber('0',2,0);
+		            	}else if(this.borDebt.studentLoanAmt){
+		            		this.borDebt.studentLoanAmt =this.formatNumber(this.borDebt.studentLoanAmt,2,0);
+		            	}
+		                break;
+		            case 'houseLoanAmt':
+		            		if(!this.borDebt.houseLoanAmt){
+		            			this.borDebt.houseLoanAmt = this.formatNumber('0',2,0);
+		            		}else if(this.borDebt.houseLoanAmt){
+		            			this.borDebt.houseLoanAmt =this.formatNumber(this.borDebt.houseLoanAmt,2,0);
+		            		};
+		            	this.arr[1]=this.borDebt.houseLoanAmt.split(',').join("")*1;
+		            	this.totalNum();
+		                break;
+		            case 'carLoanAmt':
+		            		if(!this.borDebt.carLoanAmt){
+		            			this.borDebt.carLoanAmt = this.formatNumber('0',2,0);
+		            		}else if(this.borDebt.carLoanAmt){
+		            			this.borDebt.carLoanAmt =this.formatNumber(this.borDebt.carLoanAmt,2,0);
+		            		};
+		            	this.arr[2]=this.borDebt.carLoanAmt.split(',').join("")*1;
+		            	this.totalNum();
+		                break;
+		            case 'otherLoanAmt':
+		            		if(!this.borDebt.otherLoanAmt){
+		            			this.borDebt.otherLoanAmt = this.formatNumber('0',2,0);
+		            		}else if(this.borDebt.otherLoanAmt){
+		            			this.borDebt.otherLoanAmt =this.formatNumber(this.borDebt.otherLoanAmt,2,0);
+		            		};
+		            	this.arr[3]=this.borDebt.otherLoanAmt.split(',').join("")*1;
+		            	this.totalNum();
+		                break;  
+		        }
 			},
+			totalNum(){
+				console.log(this.arr)
+				this.borDebt.totalLoan=0;
+	        	for(var i=0;i<this.arr.length;i++){
+	        		console.log(this.arr[i]);
+		            if(this.arr[i] == null){
+		                this.arr[i]=0;
+		            }else if(this.arr[i] != null){
+		                //console.log(this.borDebt.totalLoan);
+		                this.borDebt.totalLoan+= this.arr[i];
+		                //console.log(this.borDebt.totalLoan);
+		            }
+		        }
+			    this.borDebt.totalLoan=this.formatNumber(this.borDebt.totalLoan,2,0);
+	        },
 			moneyBlur(value, flag) {
 				console.log(value);
 				console.log(value.n);
