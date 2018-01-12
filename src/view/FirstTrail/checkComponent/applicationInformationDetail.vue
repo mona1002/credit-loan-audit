@@ -21,7 +21,7 @@
 						<label>进件渠道：</label><span>{{datas.sourcesChanTxt}}</span>
 					</li>
 					<li>
-						<label>获客渠道：</label><span>{{datas.dataSource}}</span><!-- 0线下、1线下转线上、2考拉、3H5、4诺优贷、5APP -->
+						<label>获客渠道：</label><span>{{datas.sourcesChan}}</span><!-- 0线下、1线下转线上、2考拉、3H5、4诺优贷、5APP -->
 					</li>
 					<li></li>
 				</ul>
@@ -143,7 +143,7 @@
 					</li>
 					<li>
 						<label>证件号码：</label>
-						<span>{{accepCusBasicInfo.proName}}</span>
+						<span>{{accepCusBasicInfo.certCode}}</span>
 					</li>
 					<li>
 						<label style="float:left">年龄：</label>
@@ -1059,18 +1059,20 @@
 		        /*联系人信息*/
 		        this.accepCusRelations=res.data.accepCusRelations;
 
-		        if(this.datas.dataSource=='0'){//00
-		            this.datas.dataSource="线下";
-		        }else if(this.datas.dataSource=='1'){
-	            	this.datas.dataSource="线下转线上";
-	            }else if(this.datas.dataSource=='2'){
-		            this.datas.dataSource="考拉";
-		        }else if(this.datas.dataSource=='3'){
-		            this.datas.dataSource="H5";
-		        }else if(this.datas.dataSource=='4'){
-		            this.datas.dataSource="诺优贷";
-		        }else if(this.datas.dataSource=='5'){
-		            this.datas.dataSource="APP";
+		        if(this.datas.sourcesChan=='00'){//00
+		            this.datas.sourcesChan="电销";
+		        }else if(this.datas.sourcesChan=='01'){
+	            	this.datas.sourcesChan="报纸";
+	            }else if(this.datas.sourcesChan=='02'){
+		            this.datas.sourcesChan="网络";
+		        }else if(this.datas.sourcesChan=='03'){
+		            this.datas.sourcesChan="促销活动";
+		        }else if(this.datas.sourcesChan=='04'){
+		            this.datas.sourcesChan="朋友介绍";
+		        }else if(this.datas.sourcesChan=='05'){
+		            this.datas.sourcesChan="销售开发";
+		        }else if(this.datas.sourcesChan=='06'){
+		            this.datas.sourcesChan="其他";
 		        };
 		        var query={
 		        	appType:this.datas.appType,
@@ -1099,6 +1101,8 @@
 		        	appOrgCode:this.datas.appOrgCode,
 		        	applyCustId:this.datas.accepCusBasicInfo.id,
 		        	custNo:this.datas.accepCusBasicInfo.custNo,
+		        	//客户名称
+		        	custName:this.datas.accepCusBasicInfo.custName
 
 		        };
 		        /*console.log(this.datas);*/
