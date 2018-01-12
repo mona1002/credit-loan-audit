@@ -74,9 +74,11 @@
         <div class="AntiConclution">
           <ul style="margin:20px 0;">
             <li>
-              <p>
+              <p style="width:100%;">
                 <label>复议说明： </label>
-                <span>{{this.conclu.reconRemark}} </span>
+                 <el-tooltip class="item" effect="dark" :disabled="this.conclu.reconRemark==null||this.conclu.reconRemark==''" :content="this.conclu.reconRemark" placement="top-start">
+                           <span class="Tarea">{{this.conclu.reconRemark}} </span>
+                </el-tooltip>
               </p>
             </li>
             <li>
@@ -105,17 +107,14 @@
       }
     },
     mounted() {
-      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '03') {
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈专员-
-      } else if (this.judgeFlag.flag == '04') {
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管-
-      }
+      // 复议不用flag判断，列表页专员、主管存的同一个字段
+       this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting")); //复议申请专员+主管
       this.post("/accepApplyReconController/getAccepApplyRecon", {
-        id: this.tastwaitingPass.applyId,
+        id: this.tastwaitingPass.processInstanceId,
+        // id:'500001'
       }).then(res => {
-        console.log(res.data)
-        this.ConclutionInf = res.data.recordList;
+        console.log(res)
+        this.conclu = res.data;
       });
     },
   }
@@ -152,6 +151,7 @@
     width: 33.3%;
     float: left;
     margin: 10px 0;
+    /* border:1px solid red; */
   }
 
   .aAntiApplyInf label {
@@ -160,5 +160,15 @@
     text-align: right;
     color: #475669;
   }
-
+.Tarea{
+  display: inline-block;
+  /* background: #000; */
+  height: 60px;
+    border: 1px solid #d8dce5;
+        padding: 5px 10px;
+    border-radius: 4px;
+        overflow: auto;
+  vertical-align: top;
+  width:calc( 100% - 150px);
+}
 </style>

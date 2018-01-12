@@ -239,7 +239,7 @@
             //   this.tableData = res.data.recordList;
             // });
           } else {
-            this.$message.error('提交失败');
+            this.$message.error('提交失败，请稍后再试！');
           }
         });
         this.form.caseNum = '';
