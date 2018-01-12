@@ -1997,13 +1997,11 @@
         console.log("保存修改")
         // console.log(this.checkData.workProvinceName)
         // console.log(this.checkData.workProvince)
-
         this.$validator.validateAll().then((result) => {
           if (result) {
             this.checkData.selfpremisesArea = this.acreage;
             this.checkData.selfhasProportion = this.Percent;
             // console.log(this.$refs.province)
-
             this.checkData.workProvinceName = this.$refs.province.selectedLabel;
             this.checkData.workCityName = this.$refs.city.selectedLabel;
             this.checkData.workCountyName = this.$refs.country.selectedLabel;
@@ -2011,7 +2009,6 @@
             this.post("/creauditInfo/addOrUpdate", this.checkData).then(res => {
               if (res.statusCode == 200) {
                 this.Confirm = false;
-                // alert('提交成功!');
                 this.AreaNPercent();
                 this.$message({
                   message: '提交成功!',
@@ -2152,17 +2149,21 @@
       //   this.Percent = this.checkData.selfhasProportion.slice(0, -1);
       // },
       businessSC(el) {
-        console.log("aaaaaaa")
+        console.log(el)
         switch (el) {
           case "营业面积":
-          this.checkData.selfpremisesArea = this.checkData.selfpremisesArea.slice(0, -2);
-            this.checkData.selfpremisesArea = this.formatNumber(this.checkData.selfpremisesArea,2,0)+'m²';
-              this.acreage = this.checkData.selfpremisesArea.slice(0, -2);
+            if (this.checkData.selfpremisesArea.indexOf('m²')!=-1) {
+              this.checkData.selfpremisesArea = this.checkData.selfpremisesArea.slice(0, -2);
+            }
+            this.checkData.selfpremisesArea = this.formatNumber(this.checkData.selfpremisesArea, 2, 0) + 'm²';
+            this.acreage = this.checkData.selfpremisesArea.slice(0, -2).split(",").join('');
             break;
           case "占股比例":
-           this.checkData.selfhasProportion = this.checkData.selfhasProportion.slice(0, -1);
-            this.checkData.selfhasProportion =  this.formatNumber(this.checkData.selfhasProportion,2,0)+'%';
-              this.Percent = this.checkData.selfhasProportion.slice(0, -1);
+            if (this.checkData.selfhasProportion.indexOf('%')!=-1) {
+              this.checkData.selfhasProportion = this.checkData.selfhasProportion.slice(0, -1);
+            }
+            this.checkData.selfhasProportion = this.formatNumber(this.checkData.selfhasProportion, 2, 0) + '%';
+            this.Percent = this.checkData.selfhasProportion.slice(0, -1).split(",").join('');
             break;
         }
       },
@@ -2227,33 +2228,6 @@
           this.workInf.empNumber = true;
         }
       },
-      // "12345678".replace(  /[0-9]+?(?=(?:([0-9]{3}))+$)/g  ,  function(a){return a+','});   //输出 12 345 678
-      // formatMoney(val, e, name) {
-      //   val = parseFloat(val);
-      //   if (isNaN(val)) {
-      //     val = e.target.value = "";
-      //     this.formatSC(name, val);
-      //   } else if (val <= 0) {
-      //     val = e.target.value = "0.00";
-      //     this.formatSC(name, val);
-      //   } else if (val > 0) {
-      //     if (val.toString().indexOf('.') == -1) {
-      //       console.log(val)
-      //     val=val.replace(/\d{1,3}(?=(\d{3})+$)/g,function(val){return val+','}) ;
-      //     console.log(val)
-      //       val = val + "." + "0" + '0';
-      //       this.formatSC(name, val);
-      //     } else if (val.toString().indexOf('.') != -1) {
-      //       if (val.toString().split(".")[1].length < 2) {
-      //         e.target.value = val = val + "0";
-      //         this.formatSC(name, val);
-      //       } else {
-      //         e.target.value = val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
-      //         this.formatSC(name, val);
-      //       }
-      //     }
-      //   }
-      // },
       formatNumber(num, cent, isThousand) {
         // console.log("算法" + num)
         num = num.toString().replace(/\$|\,/g, '');
@@ -2326,29 +2300,34 @@
             break;
         }
       },
-      btnnn(){
-        console.log(this.checkData.selfpremisesArea )
-        console.log(this.checkData.selfhasProportion )
-        
-this.checkData.fbalance!=null && this.checkData.fbalance.indexOf(',')? this.checkData.fbalance=this.checkData.fbalance.split(",").join(''):this.checkData.fbalance ;
-this.checkData.iloanAmt!=null && this.checkData.iloanAmt.indexOf(',')? this.checkData.iloanAmt=this.checkData.iloanAmt.split(",").join(''):this.checkData.iloanAmt ;
-this.checkData.avgsalaryamt!=null && this.checkData.avgsalaryamt.indexOf(',')? this.checkData.avgsalaryamt=this.checkData.avgsalaryamt.split(",").join(''):this.checkData.avgsalaryamt ;
-this.checkData.regcapitalamt!=null && this.checkData.regcapitalamt.indexOf(',')? this.checkData.regcapitalamt=this.checkData.regcapitalamt.split(",").join(''):this.checkData.regcapitalamt ;
-this.checkData.thiprofitamountmamt!=null && this.checkData.thiprofitamountmamt.indexOf(',')? this.checkData.thiprofitamountmamt=this.checkData.thiprofitamountmamt.split(",").join(''):this.checkData.thiprofitamountmamt ;
-this.checkData.monthrentamt!=null && this.checkData.monthrentamt.indexOf(',')? this.checkData.monthrentamt=this.checkData.monthrentamt.split(",").join(''):this.checkData.monthrentamt ;
-this.checkData.oneYearProfitamt!=null && this.checkData.oneYearProfitamt.indexOf(',')? this.checkData.oneYearProfitamt=this.checkData.oneYearProfitamt.split(",").join(''):this.checkData.oneYearProfitamt ;
-this.checkData.spouseIncome!=null && this.checkData.spouseIncome.indexOf(',')? this.checkData.spouseIncome=this.checkData.spouseIncome.split(",").join(''):this.checkData.spouseIncome ;
-this.checkData.childPaycostamt!=null && this.checkData.childPaycostamt.indexOf(',')? this.checkData.childPaycostamt=this.checkData.childPaycostamt.split(",").join(''):this.checkData.childPaycostamt ;
-this.checkData.parentIncome!=null && this.checkData.parentIncome.indexOf(',')? this.checkData.parentIncome=this.checkData.parentIncome.split(",").join(''):this.checkData.parentIncome ;
-this.checkData.fconsumption!=null && this.checkData.fconsumption.indexOf(',')? this.checkData.fconsumption=this.checkData.fconsumption.split(",").join(''):this.checkData.fconsumption ;
-this.checkData.selfpremisesArea!=null && this.checkData.selfpremisesArea.indexOf(',')? this.checkData.selfpremisesArea= this.checkData.selfpremisesArea.split(",").join(''):this.checkData.selfpremisesArea ;
-this.checkData.selfhasProportion!=null && this.checkData.selfhasProportion.indexOf(',')? this.checkData.selfhasProportion= this.checkData.selfhasProportion.split(",").join(''):this.checkData.selfhasProportion ;
-        console.log(this.checkData.selfpremisesArea )
-        console.log(this.checkData.selfhasProportion )
-// this.checkData.selfpremisesArea!=null && this.checkData.selfpremisesArea.indexOf(',')? this.checkData.selfpremisesArea= this.checkData.selfpremisesArea.slice(0, -2).split(",").join(''):this.checkData.selfpremisesArea ;
-// this.checkData.selfhasProportion!=null && this.checkData.selfhasProportion.indexOf(',')? this.checkData.selfhasProportion= this.checkData.selfpremisesArea.slice(0, -1).split(",").join(''):this.checkData.selfhasProportion ;
-    
-    },
+      btnnn() {
+        this.checkData.fbalance != null && this.checkData.fbalance.indexOf(',')!=-1 ? this.checkData.fbalance = this.checkData
+          .fbalance.split(",").join('') : this.checkData.fbalance;
+        this.checkData.iloanAmt != null && this.checkData.iloanAmt.indexOf(',')!=-1 ? this.checkData.iloanAmt = this.checkData
+          .iloanAmt.split(",").join('') : this.checkData.iloanAmt;
+        this.checkData.avgsalaryamt != null && this.checkData.avgsalaryamt.indexOf(',')!=-1 ? this.checkData.avgsalaryamt =
+          this.checkData.avgsalaryamt.split(",").join('') : this.checkData.avgsalaryamt;
+        this.checkData.regcapitalamt != null && this.checkData.regcapitalamt.indexOf(',')!=-1 ? this.checkData.regcapitalamt =
+          this.checkData.regcapitalamt.split(",").join('') : this.checkData.regcapitalamt;
+        this.checkData.thiprofitamountmamt != null && this.checkData.thiprofitamountmamt.indexOf(',')!=-1 ? this.checkData.thiprofitamountmamt =
+          this.checkData.thiprofitamountmamt.split(",").join('') : this.checkData.thiprofitamountmamt;
+        this.checkData.monthrentamt != null && this.checkData.monthrentamt.indexOf(',')!=-1 ? this.checkData.monthrentamt =
+          this.checkData.monthrentamt.split(",").join('') : this.checkData.monthrentamt;
+        this.checkData.oneYearProfitamt != null && this.checkData.oneYearProfitamt.indexOf(',')!=-1 ? this.checkData.oneYearProfitamt =
+          this.checkData.oneYearProfitamt.split(",").join('') : this.checkData.oneYearProfitamt;
+        this.checkData.spouseIncome != null && this.checkData.spouseIncome.indexOf(',')!=-1 ? this.checkData.spouseIncome =
+          this.checkData.spouseIncome.split(",").join('') : this.checkData.spouseIncome;
+        this.checkData.childPaycostamt != null && this.checkData.childPaycostamt.indexOf(',')!=-1 ? this.checkData.childPaycostamt =
+          this.checkData.childPaycostamt.split(",").join('') : this.checkData.childPaycostamt;
+        this.checkData.parentIncome != null && this.checkData.parentIncome.indexOf(',')!=-1 ? this.checkData.parentIncome =
+          this.checkData.parentIncome.split(",").join('') : this.checkData.parentIncome;
+        this.checkData.fconsumption != null && this.checkData.fconsumption.indexOf(',')!=-1 ? this.checkData.fconsumption =
+          this.checkData.fconsumption.split(",").join('') : this.checkData.fconsumption;
+        // this.checkData. != null && this.checkData.selfpremisesArea.indexOf(',') ? this.checkData.selfpremisesArea =
+        //   this.checkData.selfpremisesArea.split(",").join('') : this.checkData.selfpremisesArea;
+        // this.checkData.selfhasProportion != null && this.checkData.selfhasProportion.indexOf(',') ? this.checkData.selfhasProportion =
+        //   this.checkData.selfhasProportion.split(",").join('') : this.checkData.selfhasProportion;
+      },
       ElInputStyle(val) {
         if (val == "50%") {
           for (var i = 0; i < this.Pwidth.length; i++) {
@@ -2390,48 +2369,33 @@ this.checkData.selfhasProportion!=null && this.checkData.selfhasProportion.index
           this.Alertbtn[0].style.marginLeft = "calc( 50% + 329px )";
         }
       },
-      // acquire(val, name) {
-      //   if (val == null || val == '') {
-      //     return
-      //   } else {
-      //     if (val.toString().indexOf('.') == -1) {
-      //       val = val + "." + "0" + '0';
-      //       this.formatSC(name, val);
-      //     } else if (val.toString().indexOf('.') != -1) {
-      //       if (val.toString().split(".")[1].length < 2) {
-      //         val = val + "0";
-      //         this.formatSC(name, val);
-      //       } else {
-      //         val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
-      //         this.formatSC(name, val);
-      //       }
-      //     }
-      //   }
-      // },
       mountM() {
-        // this.acquire(this.checkData.fbalance, '月还款');
-        // this.acquire(this.checkData.regcapitalamt, '注册资金');
-        // this.acquire(this.checkData.monthrentamt, '月还款/租金');
-        // this.acquire(this.checkData.oneYearProfitamt, '近一年利润');
-        // this.acquire(this.checkData.profitamountmamt, '月利润');
-        // this.acquire(this.checkData.spouseIncome, '配偶收入');
-        // this.acquire(this.checkData.parentIncome, '父母收入');
-        // this.acquire(this.checkData.fconsumption, '开销');
-        // this.acquire(this.checkData.childPaycostamt, '生活费支付');
-        // this.acquire(this.checkData.avgsalaryamt, '月均工资');
-        // this.acquire(this.checkData.iloanAmt, '借款金额');
-        // console.log(this.checkData.iloanAmt)
-       this.checkData.fbalance? this.checkData.fbalance = this.formatNumber(this.checkData.fbalance, 2, 0): this.checkData.fbalance;
-        this.checkData.iloanAmt? this.checkData.iloanAmt = this.formatNumber(this.checkData.iloanAmt, 2, 0):this.checkData.iloanAmt;
-        this.checkData.avgsalaryamt ? this.checkData.avgsalaryamt = this.formatNumber(this.checkData.avgsalaryamt, 2, 0): this.checkData.avgsalaryamt ;
-        this.checkData.regcapitalamt? this.checkData.regcapitalamt = this.formatNumber(this.checkData.regcapitalamt, 2, 0):this.checkData.regcapitalamt;
-        this.checkData.profitamountmamt? this.checkData.profitamountmamt = this.formatNumber(this.checkData.profitamountmamt, 2, 0):this.checkData.profitamountmamt;
-        this.checkData.monthrentamt? this.checkData.monthrentamt = this.formatNumber(this.checkData.monthrentamt, 2, 0):this.checkData.monthrentamt;
-        this.checkData.oneYearProfitamt? this.checkData.oneYearProfitamt = this.formatNumber(this.checkData.oneYearProfitamt, 2, 0):this.checkData.oneYearProfitamt;
-        this.checkData.spouseIncome? this.checkData.spouseIncome = this.formatNumber(this.checkData.spouseIncome, 2, 0):this.checkData.spouseIncome;
-        this.checkData.childPaycostamt? this.checkData.childPaycostamt = this.formatNumber(this.checkData.childPaycostamt, 2, 0):this.checkData.childPaycostamt;
-        this.checkData.parentIncome? this.checkData.parentIncome = this.formatNumber(this.checkData.parentIncome, 2, 0):this.checkData.parentIncome;
-        this.checkData.fconsumption? this.checkData.fconsumption = this.formatNumber(this.checkData.fconsumption, 2, 0):this.checkData.fconsumption;
+        this.checkData.fbalance ? this.checkData.fbalance = this.formatNumber(this.checkData.fbalance, 2, 0) : this.checkData
+          .fbalance;
+        this.checkData.iloanAmt ? this.checkData.iloanAmt = this.formatNumber(this.checkData.iloanAmt, 2, 0) : this.checkData
+          .iloanAmt;
+        this.checkData.avgsalaryamt ? this.checkData.avgsalaryamt = this.formatNumber(this.checkData.avgsalaryamt, 2, 0) :
+          this.checkData.avgsalaryamt;
+        this.checkData.regcapitalamt ? this.checkData.regcapitalamt = this.formatNumber(this.checkData.regcapitalamt, 2,
+          0) : this.checkData.regcapitalamt;
+        this.checkData.profitamountmamt ? this.checkData.profitamountmamt = this.formatNumber(this.checkData.profitamountmamt,
+          2, 0) : this.checkData.profitamountmamt;
+        this.checkData.monthrentamt ? this.checkData.monthrentamt = this.formatNumber(this.checkData.monthrentamt, 2, 0) :
+          this.checkData.monthrentamt;
+        this.checkData.oneYearProfitamt ? this.checkData.oneYearProfitamt = this.formatNumber(this.checkData.oneYearProfitamt,
+          2, 0) : this.checkData.oneYearProfitamt;
+        this.checkData.spouseIncome ? this.checkData.spouseIncome = this.formatNumber(this.checkData.spouseIncome, 2, 0) :
+          this.checkData.spouseIncome;
+        this.checkData.childPaycostamt ? this.checkData.childPaycostamt = this.formatNumber(this.checkData.childPaycostamt,
+          2, 0) : this.checkData.childPaycostamt;
+        this.checkData.parentIncome ? this.checkData.parentIncome = this.formatNumber(this.checkData.parentIncome, 2, 0) :
+          this.checkData.parentIncome;
+        this.checkData.fconsumption ? this.checkData.fconsumption = this.formatNumber(this.checkData.fconsumption, 2, 0) :
+          this.checkData.fconsumption;
+            this.checkData.selfpremisesArea ? this.checkData.selfpremisesArea = this.formatNumber(this.checkData.selfpremisesArea, 2, 0) :
+          this.checkData.selfpremisesArea;
+            this.checkData.selfhasProportion ? this.checkData.selfhasProportion = this.formatNumber(this.checkData.selfhasProportion, 2, 0) :
+          this.checkData.selfhasProportion;
       },
       mountC() {
         // 获取查询列表数据
@@ -2441,11 +2405,11 @@ this.checkData.selfhasProportion!=null && this.checkData.selfhasProportion.index
           console.log(res);
           if (res.statusCode == 200) {
             this.checkData = res.data;
+            this.Percent = this.checkData.selfhasProportion
+            this.acreage = this.checkData.selfpremisesArea;
             this.checkData.applyId = this.getParams.applyId;
-            // this.AreaNPercent(this.checkData.fbalance);
-            this.AreaNPercent();
             this.mountM();
-            // this.formatSC();
+            this.AreaNPercent();
             this.mountJ(0, res.data.wbeexEcuted);
             this.mountJ(1, res.data.wnetHirecom);
             this.mountJ(2, res.data.wnetEcutedBrea);

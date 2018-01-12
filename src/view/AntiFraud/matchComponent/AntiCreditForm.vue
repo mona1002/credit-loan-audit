@@ -880,74 +880,6 @@
           return (((sign) ? '' : '-') + num);
         }
       },
-      // formatSC(el, val) {
-      //   switch (el) {
-      //     case "月还款":
-      //       this.FormData.fbalance = val;
-      //       break;
-      //     case "借款金额":
-      //       this.FormData.iloanAmt = val;
-      //       break;
-      //     case "月均工资":
-      //       this.FormData.avgsalaryamt = val;
-      //       break;
-      //     case "注册资金":
-      //       this.FormData.regcapitalamt = val;
-      //       break;
-      //     case "月利润":
-      //       this.FormData.profitamountmamt = val;
-      //       break;
-      //     case "月还款/租金":
-      //       this.FormData.monthrentamt = val;
-      //       break;
-      //     case "近一年利润":
-      //       this.FormData.oneYearProfitamt = val;
-      //       break;
-      //     case "配偶收入":
-      //       this.FormData.spouseIncome = val;
-      //       break;
-      //     case "生活费支付":
-      //       this.FormData.childPaycostamt = val;
-      //       break;
-      //     case "父母收入":
-      //       this.FormData.parentIncome = val;
-      //       break;
-      //     case "开销":
-      //       this.FormData.fconsumption = val;
-      //       break;
-      //   }
-      // },
-      // acquire(val, name) {
-      //   if (val == null || val == '') {
-      //     return
-      //   } else {
-      //     if (val.toString().indexOf('.') == -1) {
-      //       val = val + "." + "0" + '0';
-      //       this.formatSC(name, val);
-      //     } else if (val.toString().indexOf('.') != -1) {
-      //       if (val.toString().split(".")[1].length < 2) {
-      //         val = val + "0";
-      //         this.formatSC(name, val);
-      //       } else {
-      //         val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
-      //         this.formatSC(name, val);
-      //       }
-      //     }
-      //   }
-      // },
-      // mountM() {
-      //   this.acquire(this.FormData.fbalance, '月还款');
-      //   this.acquire(this.FormData.regcapitalamt, '注册资金');
-      //   this.acquire(this.FormData.monthrentamt, '月还款/租金');
-      //   this.acquire(this.FormData.oneYearProfitamt, '近一年利润');
-      //   this.acquire(this.FormData.profitamountmamt, '月利润');
-      //   this.acquire(this.FormData.spouseIncome, '配偶收入');
-      //   this.acquire(this.FormData.parentIncome, '父母收入');
-      //   this.acquire(this.FormData.fconsumption, '开销');
-      //   this.acquire(this.FormData.childPaycostamt, '生活费支付');
-      //   this.acquire(this.FormData.avgsalaryamt, '月均工资');
-      //   this.acquire(this.FormData.iloanAmt, '借款金额');
-      // },
       NewPage(ind) {
         console.log(ind);
         switch (ind) {
@@ -1069,8 +1001,7 @@
           console.log(res.data)
           this.FormData = res.data;
           this.AreaNPercent();
-          // this.mountM();
-                  this.formatSC();
+          this.formatSC();
           this.mountJ(0, res.data.wbeexEcuted);
           this.mountJ(1, res.data.wnetHirecom);
           this.mountJ(2, res.data.wnetEcutedBrea);
