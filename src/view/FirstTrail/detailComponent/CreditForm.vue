@@ -2342,21 +2342,7 @@ this.checkData.parentIncome!=null && this.checkData.parentIncome.indexOf(',')? t
 this.checkData.fconsumption!=null && this.checkData.fconsumption.indexOf(',')? this.checkData.fconsumption=this.checkData.fconsumption.split(",").join(''):this.checkData.fconsumption ;
 this.checkData.selfpremisesArea!=null && this.checkData.selfpremisesArea.indexOf(',')? this.checkData.selfpremisesArea= this.checkData.selfpremisesArea.slice(0, -2).split(",").join(''):this.checkData.selfpremisesArea ;
 this.checkData.selfhasProportion!=null && this.checkData.selfhasProportion.indexOf(',')? this.checkData.selfhasProportion= this.checkData.selfpremisesArea.slice(0, -1).split(",").join(''):this.checkData.selfhasProportion ;
-
       },
-      // formatMoneyBackUp(val, e) {
-      //   console.log(";kadls")
-      //   val = parseFloat(val);
-      //   if (val <= 0 || isNaN(val)) {
-      //     this.checkData.fbalance = this.val = val = e.target.value = "0.00";
-      //   } else if (val > 0) {
-      //     if (val.toString().indexOf('.') == -1) {
-      //       e.target.value = val = val + ".00"
-      //     } else if (val.toString().indexOf('.') != -1) {
-      //       e.target.value = val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
-      //     }
-      //   }
-      // },
       ElInputStyle(val) {
         if (val == "50%") {
           for (var i = 0; i < this.Pwidth.length; i++) {

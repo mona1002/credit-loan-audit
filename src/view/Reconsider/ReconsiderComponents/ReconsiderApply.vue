@@ -111,11 +111,12 @@
       } else if (this.judgeFlag.flag == '04') {
         this.tastwaitingPass = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管-
       }
+      // console.log(this.tastwaitingPass)
       this.post("/accepApplyReconController/getAccepApplyRecon", {
-        id: this.tastwaitingPass.applyId,
+        id: this.tastwaitingPass.processInstanceId,
       }).then(res => {
-        console.log(res.data)
-        this.ConclutionInf = res.data.recordList;
+        console.log(res)
+        this.conclu = res.data;
       });
     },
   }
