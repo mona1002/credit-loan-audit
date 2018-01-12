@@ -7,25 +7,25 @@
       <!-- {{title1}} -->
     </div>
     <el-form style="padding:0 20px;width:100%; height:150px; " class="info">
-      <el-form-item label="审批人 :" class="item-column3">
+      <el-form-item label="审批人：" class="item-column3">
         {{userName}}
       </el-form-item>
-      <el-form-item label="申请类型 :" class="item-column3">
+      <el-form-item label="申请类型：" class="item-column3">
         {{appTypeTxt}}
       </el-form-item>
-      <el-form-item label="进件编号 :" class="item-column3">
+      <el-form-item label="进件编号：" class="item-column3">
         {{applySubNo}}
       </el-form-item>
-      <el-form-item label="证件类型 :" class="item-column3">
+      <el-form-item label="证件类型：" class="item-column3">
         {{certTypeTxt}}
       </el-form-item>
-      <el-form-item label="证件号码 :" class="item-column3">
+      <el-form-item label="证件号码：" class="item-column3">
         {{certCode}}
       </el-form-item>
-      <el-form-item label="产品名称 :" class="item-column3">
+      <el-form-item label="产品名称：" class="item-column3">
         {{baseProName}}
       </el-form-item>
-      <el-form-item label="申请期限[月] :" class="item-column3">
+      <el-form-item label="申请期限[月]：" class="item-column3">
         {{loanTerm}}
       </el-form-item>
     </el-form>
@@ -64,7 +64,7 @@
           <!-- 回退主原因输入 02 -->
           <!-- 拒绝主原因选择 01 -->
           <span style="color:red;display:inline-block;width:0px;float:left;position: relative;left:15px;">*</span>
-          <el-form-item label="主原因:" class="item-column2" v-show="showFlag=='02'">
+          <el-form-item label="主原因：" class="item-column2" v-show="showFlag=='02'">
             <!-- <el-input v-model="mainReason"></el-input> -->
             <!-- 改成后台获取   filter-method     visible-change 下拉框 出现/隐藏时触发-->
             <el-select @change="selectChange" v-model="mainReason">
@@ -73,7 +73,7 @@
             </el-select>
           </el-form-item>
           <!-- 拒绝主原因选择 01 -->
-          <el-form-item label="主原因 :" class="item-column2" v-show="showFlag=='01' || showFlag=='07'">
+          <el-form-item label="主原因：" class="item-column2" v-show="showFlag=='01' || showFlag=='07'">
             <el-select @change="selectChange" v-model="mainReason">
               <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
               </el-option>
@@ -81,7 +81,7 @@
           </el-form-item>
           <!-- secondeReasons -->
           <!-- <span style="color:red;display:inline-block;width:0px;float:left;">*</span> -->
-          <el-form-item label="子原因 :" class="item-column2">
+          <el-form-item label="子原因：" class="item-column2">
             <el-select v-model="secondaryReason">
               <el-option v-for="item in secondeReasons" :key="item.id" :label="item.reasonName" :value="item.reasonName">
               </el-option>
@@ -90,17 +90,17 @@
         </div>
         <div class="back-form-li" style="height:60px;line-height: 60px;padding-top:5px;">
           <span style="color:red;display:inline-block;width:0px;float:left;position:relative;top:-8px;">*</span>
-          <el-form-item label="原因说明 :">
+          <el-form-item label="原因说明：">
             <!--             <span style="color:red;display:inline-block;width:0px;float:right;margin-right: 25px;">*</span> -->
             <el-input type="textarea" :row="2" resize="none" v-model="reasonRemark"></el-input>
           </el-form-item>
         </div>
         <div class="back-form-li">
-          <el-form-item label="经办人 :" class="item-column2">
+          <el-form-item label="经办人：" class="item-column2">
             <!-- 取登录用户 -->
             {{dealroperCode}}
           </el-form-item>
-          <el-form-item label="经办时间 :" class="item-column2">
+          <el-form-item label="经办时间：" class="item-column2">
             <!-- {{2017-12-1}} -->
             {{dealroperDate | dateFilter}}
           </el-form-item>
@@ -121,7 +121,7 @@
           <!-- 回退主原因输入 02 -->
           <!-- 拒绝主原因选择 01 -->
           <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:10px;">*</span>
-          <el-form-item label="主原因:" class="item-column2" v-show="showFlag=='02'">
+          <el-form-item label="主原因：" class="item-column2" v-show="showFlag=='02'">
             <!-- <el-input v-model="mainReason"></el-input> -->
             <!-- 改成后台获取   filter-method     visible-change 下拉框 出现/隐藏时触发-->
             <el-select @change="selectChange" v-model="mainReason">
@@ -130,7 +130,7 @@
             </el-select>
           </el-form-item>
           <!-- 拒绝主原因选择 01 -->
-          <el-form-item label="主原因 :" class="item-column2" v-show="showFlag=='01' || showFlag=='07'">
+          <el-form-item label="主原因：" class="item-column2" v-show="showFlag=='01' || showFlag=='07'">
             <el-select @change="selectChange" v-model="mainReason">
               <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
               </el-option>
@@ -138,7 +138,7 @@
           </el-form-item>
           <!-- secondeReasons -->
           <!-- <span style="color:red;display:inline-block;width:0px;float:left;">*</span> -->
-          <el-form-item label="子原因 :" class="item-column2">
+          <el-form-item label="子原因：" class="item-column2">
             <el-select v-model="secondaryReason">
               <el-option v-for="item in secondeReasons" :key="item.id" :label="item.reasonName" :value="item.reasonName">
               </el-option>
@@ -147,17 +147,17 @@
         </div>
         <div class="back-form-li" style="height:60px;line-height: 60px;padding-top:5px;">
           <span style="color:red;display:inline-block;width:0px;float:left;position:relative;top:-8px;">*</span>
-          <el-form-item label="原因说明 :">
+          <el-form-item label="原因说明：">
             <!--             <span style="color:red;display:inline-block;width:0px;float:right;margin-right: 25px;">*</span> -->
             <el-input type="textarea" :row="2" resize="none" v-model="reasonRemark"></el-input>
           </el-form-item>
         </div>
         <div class="back-form-li">
-          <el-form-item label="经办人 :" class="item-column2">
+          <el-form-item label="经办人：" class="item-column2">
             <!-- 取登录用户 -->
             {{dealroperCode}}
           </el-form-item>
-          <el-form-item label="经办时间 :" class="item-column2">
+          <el-form-item label="经办时间：" class="item-column2">
             <!-- {{2017-12-1}} -->
             {{dealroperDate | dateFilter}}
           </el-form-item>
@@ -178,7 +178,7 @@
           <!-- 回退主原因输入 02 -->
           <!-- 拒绝主原因选择 01 -->
           <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:10px;">*</span>
-          <el-form-item label="主原因:" class="item-column2" v-show="showFlag=='02'">
+          <el-form-item label="主原因：" class="item-column2" v-show="showFlag=='02'">
             <!-- <el-input v-model="mainReason"></el-input> -->
             <!-- 改成后台获取   filter-method     visible-change 下拉框 出现/隐藏时触发-->
             <el-select @change="selectChange" v-model="mainReason">
@@ -187,7 +187,7 @@
             </el-select>
           </el-form-item>
           <!-- 拒绝主原因选择 01 -->
-          <el-form-item label="主原因 :" class="item-column2" v-show="showFlag=='01' || showFlag=='07'">
+          <el-form-item label="主原因：" class="item-column2" v-show="showFlag=='01' || showFlag=='07'">
             <el-select @change="selectChange" v-model="mainReason">
               <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
               </el-option>
@@ -195,7 +195,7 @@
           </el-form-item>
           <!-- secondeReasons -->
           <!-- <span style="color:red;display:inline-block;width:0px;float:left;">*</span> -->
-          <el-form-item label="子原因 :" class="item-column2">
+          <el-form-item label="子原因：" class="item-column2">
             <el-select v-model="secondaryReason">
               <el-option v-for="item in secondeReasons" :key="item.id" :label="item.reasonName" :value="item.reasonName">
               </el-option>
@@ -204,17 +204,17 @@
         </div>
         <div class="back-form-li" style="height:60px;line-height: 60px;padding-top:5px;">
           <span style="color:red;display:inline-block;width:0px;float:left;position:relative;top:-8px;">*</span>
-          <el-form-item label="原因说明 :">
+          <el-form-item label="原因说明：">
             <!--             <span style="color:red;display:inline-block;width:0px;float:right;margin-right: 25px;">*</span> -->
             <el-input type="textarea" :row="2" resize="none" v-model="reasonRemark"></el-input>
           </el-form-item>
         </div>
         <div class="back-form-li">
-          <el-form-item label="经办人 :" class="item-column2">
+          <el-form-item label="经办人 ：" class="item-column2">
             <!-- 取登录用户 -->
             {{dealroperCode}}
           </el-form-item>
-          <el-form-item label="经办时间 :" class="item-column2">
+          <el-form-item label="经办时间：" class="item-column2">
             <!-- {{2017-12-1}} -->
             {{dealroperDate | dateFilter}}
           </el-form-item>
@@ -241,41 +241,41 @@
             申请信息
           </div>
           <div class="back-form-li">
-            <el-form-item label="申请金额[元] :" class="item-column2">
+            <el-form-item label="申请金额[元]：" class="item-column2">
               <!-- {{loanAmt}} -->
               {{loanAmt}}
             </el-form-item>
-            <el-form-item label="申请期限[月] :" class="item-column2">
+            <el-form-item label="申请期限[月]：" class="item-column2">
               {{loanTerm}}
             </el-form-item>
           </div>
           <div class="back-form-li">
-            <el-form-item label="申请产品 :" class="item-column2">
+            <el-form-item label="申请产品：" class="item-column2">
               {{sqproName}}
             </el-form-item>
-            <el-form-item label="可接受最高每期还款额[元] :" class="item-column2 line-height2">
+            <el-form-item label="可接受最高每期还款额[元]：" class="item-column2 line-height2">
               {{eachTermAmt}}
             </el-form-item>
           </div>
           <div class="back-form-li">
-            <el-form-item label="信用评分 :" class="item-column2">
+            <el-form-item label="信用评分：" class="item-column2">
               {{creditScore}}
             </el-form-item>
-            <el-form-item label="申请类型 :" class="item-column2">
+            <el-form-item label="申请类型：" class="item-column2">
               {{loanType}}
             </el-form-item>
           </div>
           <div class="form-title">
             信审核实信息
           </div>
-          <el-form-item label="核实可接受最高每期还款额[元] :" style="width:300px;margin-bottom:10px;" class="item-column2 line-height2">
-            {{fbalance}}
+          <el-form-item label="核实可接受最高每期还款额[元]：" style="width:300px;margin-bottom:10px;" class="item-column2 line-height2">
+            {{fbalance2}}
           </el-form-item>
           <div class="form-title">
             审批信息
           </div>
           <div class="back-form-li radio-li">
-            <el-form-item label="结论 :">
+            <el-form-item label="结论：">
               <!-- <el-radio-group v-model="applyConclusion"> -->
               <el-radio label="00" v-model="applyConclusion">同意</el-radio>
               <el-radio label="03" v-model="applyConclusion" v-show="judgeFlag=='02'">请求更高级审批</el-radio>
@@ -288,10 +288,10 @@
             <!-- spruleForm. -->
             <!-- <span style="color:red;display:inline-block;width:0px;float:left;">*</span> -->
             <!-- <span class="require" style="left:150px;top:-25px;" v-show="verIncomError">* 月核实收入</span> -->
-            <el-form-item label="月核实收入[元] :" class="item-column2 width-120">
+            <el-form-item label="月核实收入[元]：" class="item-column2 width-120">
               <el-input v-model="verIncome" @blur="moneyBlur(verIncome,'verIncome')"></el-input>
             </el-form-item>
-            <el-form-item label="批准产品 :" class="item-column2 width-110">
+            <el-form-item label="批准产品：" class="item-column2 width-110">
               <el-select @change="proSlelecChange" v-model="proName">
                 <el-option v-for="item in products" :key="item.id" :label="item.proName" :value="item"></el-option>
                 <!-- <el-option v-for="item in secondeReasons" :key="item.id" :label="item.reasonName" :value="item.reasonName"> -->
@@ -300,40 +300,40 @@
           </div>
           <div class="back-form-li back-form-edit-li" style="position:relative;">
             <!-- <span class="require" style="left:150px;top:-25px;" v-show="ploanTermError">* 批准期限1-12月</span> -->
-            <el-form-item label="批准期限[月] :" class="item-column2 width-120">
+            <el-form-item label="批准期限[月]：" class="item-column2 width-120">
               <el-select @change="ploanTermChange" v-model="ploanTerm">
                 <el-option v-for="item in ploanTerms" :label="item.appDuration" :value="item">
                 </el-option>
               </el-select>
             </el-form-item>
             <!-- <span class="require" style="left:470px;top:-25px;" v-show="ploanAmtError">* 批准金额不能大于{{minAmount}},小于{{maxAmounnt}}</span> -->
-            <el-form-item label="批准金额[元] :" class="item-column2 width-110">
+            <el-form-item label="批准金额[元]：" class="item-column2 width-110">
               <el-input v-model="ploanAmt" @blur="moneyBlur(ploanAmt,'ploanAmt')"></el-input>
             </el-form-item>
           </div>
           <div class="back-form-li">
-            <el-form-item label="审批倍数 :" class="item-column2 width-120">
+            <el-form-item label="审批倍数：" class="item-column2 width-120">
               {{caculData.appmult}}
             </el-form-item>
-            <el-form-item label="月还款额[元] :" class="item-column2 width-120">
+            <el-form-item label="月还款额[元]：" class="item-column2 width-120">
               {{caculData.eachTermamt}}
             </el-form-item>
           </div>
           <div class="back-form-li">
-            <el-form-item label="内部负债率 :" class="item-column2">
+            <el-form-item label="内部负债率：" class="item-column2">
               {{caculData.inteDebitrate}}
             </el-form-item>
-            <el-form-item label="总信用负债率 :">
+            <el-form-item label="总信用负债率：">
               {{caculData.creditDebitRate}}
             </el-form-item>
           </div>
           <div class="back-form-li">
-            <el-form-item label="总负债率 :">
+            <el-form-item label="总负债率：">
               {{caculData.totalRate}}
             </el-form-item>
           </div>
           <div class="back-form-li" style="height:60px;line-height: 60px;padding-top:5px;">
-            <el-form-item label="意见说明 :">
+            <el-form-item label="意见说明：">
               <el-input type="textarea" resize="none" :rows="3" v-model="appConclusion"></el-input>
             </el-form-item>
           </div>
@@ -544,6 +544,7 @@ export default {
       quotaData: '', // 评分 月还款额
       creditScore: '', // 单独处理的评分
       fbalance: '', // 核实每月可接受最高还款额
+      fbalance2: '', // 
       // 表单必填
       spruleForm: { verIncome: '', ploanTerm: '', ploanAmt: '' },
       sprules: {
@@ -795,7 +796,9 @@ export default {
                 this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
                 console.log(this.creditScore);
                 this.fbalance = res.data.fbalance;
+                this.fbalance2 = Number(res.data.fbalance).toLocaleString() + '.00'
                 console.log(this.fbalance);
+                console.log(this.fbalance2);
               }
             })
             /* 请求 
@@ -1981,6 +1984,7 @@ export default {
 .creditApproval-class .el-select {
   height: 100%;
   line-height: 100%;
+  width: calc( 100% - 120px);
 }
 
 .creditApproval-class .el-input--suffix .el-input__inner {

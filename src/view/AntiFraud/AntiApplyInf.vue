@@ -121,7 +121,7 @@ export default {
     if (this.antiFlag == '01' || this.antiFlag == '02') {
       // 先取到 id , 请求 反欺诈 页面信息
       var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-      this.applyId = taskInWaitting.applyId;
+      this.id = taskInWaitting.applyId;
     } else { // 其他取 列表id
       console.log(' 主管/专员 ');
       this.id = this.$route.params.id;
@@ -140,10 +140,10 @@ export default {
     // 查询 反欺诈信息
     getFraudApplyInfo() {
       // 测试 id
-      this.applyId = 'ed353288-758d-4699-bec7-094bd6444556';
+      this.id = 'ed353288-758d-4699-bec7-094bd6444556';
 
       this.post('/fraudApplyInfoController/getFraudApplyInfoWithOpinionById', {
-          applyId: this.applyId
+          applyId: this.id
         })
         .then(res => {
           if (res.statusCode == 200) {

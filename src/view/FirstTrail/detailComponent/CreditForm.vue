@@ -283,7 +283,7 @@
               <p v-show="this.checkId.loanNot">
                 <i class="hint"> </i>
                 <label class="InternetInf_left_label">借款金额[元]：</label>
-                <el-input type="text" placeholder="请输入内容" v-model="checkData.iloanAmt" @blur="formatMoney(checkData.iloanAmt,$event,'借款金额')">
+                <el-input type="text" placeholder="请输入内容" v-model="checkData.iloanAmt" @blur="formatSC('借款金额')">
                 </el-input>
               </p>
               <p v-show="this.checkId.loanNot">
@@ -370,7 +370,7 @@
               <i class="hint">
               </i>
               <label class="InternetInf_left_label">月均工资[元]：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="checkData.avgsalaryamt" @blur="formatMoney(checkData.avgsalaryamt,$event,'月均工资')">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.avgsalaryamt" @blur="formatSC('月均工资')">
               </el-input>
             </li>
             <li>
@@ -387,17 +387,17 @@
               </i>
               <label class="InternetInf_left_label ">单位地址 ：</label>
               <!-- 一级 -->
-              <el-select v-model="checkData.workProvince" placeholder="请选择" @change="getCity(checkData.workProvince)">
+              <el-select ref="province" v-model="checkData.workProvinceName" placeholder="请选择" @change="setProvince">
                 <el-option v-for="item in	hirecomAddress" :key="item.id" :label="item.areaName" :value="item.id">
                 </el-option>
               </el-select>
               <!-- 二级 -->
-              <el-select v-model="checkData.workCity" placeholder="请选择" @change="getTown(checkData.workCity)">
+              <el-select ref="city" v-model="checkData.workCityName" placeholder="请选择" @visible-change="getCity" @change="setCity">
                 <el-option v-for="item in hireProvincd" :key="item.id" :label="item.areaName" :value="item.id">
                 </el-option>
               </el-select>
               <!-- 三级 -->
-              <el-select v-model="checkData.workCounty" placeholder="请选择">
+              <el-select ref="country" v-model="checkData.workCountyName" placeholder="请选择" @visible-change="getCountry" @change="setCountry">
                 <el-option v-for="item in hireTown" :key="item.id" :label="item.areaName" :value="item.id">
                 </el-option>
               </el-select>
@@ -490,25 +490,25 @@
             <li>
               <i class="hint"> </i>
               <label class="InternetInf_left_label ">注册资金[万元]：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="checkData.regcapitalamt" @blur="formatMoney(checkData.regcapitalamt,$event,'注册资金')">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.regcapitalamt" @blur="formatSC('注册资金')">
               </el-input>
             </li>
             <li>
               <i class="hint"> </i>
               <label class="WorkInfs_left_label">占股比例：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="checkData.selfhasProportion" @blur="businessArea(checkData.selfhasProportion,$event,'占股比例','%')">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.selfhasProportion" @blur="businessSC('占股比例')">
               </el-input>
             </li>
             <li>
               <i class="hint"> </i>
               <label class="InternetInf_left_label ">月还款额/租金[万元]：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="checkData.monthrentamt" @blur="formatMoney(checkData.monthrentamt,$event,'月还款/租金')">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.monthrentamt" @blur="formatSC('月还款/租金')">
               </el-input>
             </li>
             <li>
               <i class="hint"> </i>
               <label class="WorkInfs_left_label">营业面积：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="checkData.selfpremisesArea" @blur="businessArea(checkData.selfpremisesArea,$event,'营业面积','m²')">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.selfpremisesArea" @blur="businessSC('营业面积')">
               </el-input>
             </li>
             <li style="width:100%;">
@@ -524,7 +524,7 @@
             <li>
               <i class="hint"> </i>
               <label class="InternetInf_left_label ">近一年利润[万元]：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="checkData.oneYearProfitamt" @blur="formatMoney(checkData.oneYearProfitamt,$event,'近一年利润')">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.oneYearProfitamt" @blur="formatSC('近一年利润')">
               </el-input>
             </li>
             <li>
@@ -557,7 +557,7 @@
             <li>
               <i class="hint"> </i>
               <label class=" CheckId_right_label "> 每月净利润额[万元]：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="checkData.profitamountmamt" @blur="formatMoney(checkData.profitamountmamt,$event,'月利润')">
+              <el-input type="text" placeholder="请输入内容" v-model="checkData.profitamountmamt" @blur="formatSC('月利润')">
               </el-input>
             </li>
             <li style="marginTop:38px">
@@ -613,7 +613,7 @@
               <p>
                 <i class="hint"> </i>
                 <label class="Family_right_label"> 配偶收入情况[月/元]： </label>
-                <el-input type="text" placeholder="请输入内容" v-model="checkData.spouseIncome" @blur="formatMoney(checkData.spouseIncome,$event,'配偶收入')">
+                <el-input type="text" placeholder="请输入内容" v-model="checkData.spouseIncome" @blur="formatSC('配偶收入')">
                 </el-input>
               </p>
             </li>
@@ -709,7 +709,7 @@
               <p>
                 <i class="hint"> </i>
                 <label class="InternetInf_left_label "> 生活费支付额度[元]： </label>
-                <el-input type="text" placeholder="请输入内容" v-model="checkData.childPaycostamt" @blur="formatMoney(checkData.childPaycostamt,$event,'生活费支付')">
+                <el-input type="text" placeholder="请输入内容" v-model="checkData.childPaycostamt" @blur="formatSC('生活费支付')">
                 </el-input>
               </p>
             </li>
@@ -785,7 +785,7 @@
               <p>
                 <i class="hint"> </i>
                 <label class="Family_right_label"> 父母收入[元]： </label>
-                <el-input type="text" placeholder="请输入内容" v-model="checkData.parentIncome" @blur="formatMoney(checkData.parentIncome,$event,'父母收入')">
+                <el-input type="text" placeholder="请输入内容" v-model="checkData.parentIncome" @blur="formatSC('父母收入')">
                 </el-input>
               </p>
             </li>
@@ -823,7 +823,7 @@
               <p>
                 <i class="hint"> </i>
                 <label class="InternetInf_left_label ">个人/家庭月开销[元]：</label>
-                <el-input type="text" placeholder="请输入内容" v-model="checkData.fconsumption" @blur="formatMoney(checkData.fconsumption,$event,'开销')">
+                <el-input type="text" placeholder="请输入内容" v-model="checkData.fconsumption" @blur="formatSC('开销')">
                 </el-input>
               </p>
               <p class="bottom">
@@ -833,16 +833,12 @@
                 </i>
                 <label class="Family_right_label">
                   <span class="red"> * </span> 可以承受的月还款[元]： </label>
-                <el-input type="text" placeholder="请输入内容" v-model="checkData.fbalance" @blur="formatMoney(checkData.fbalance,$event,'月还款')"
+                <!-- <el-input type="text" placeholder="请输入内容" v-model="checkData.fbalance" @blur="formatMoney(checkData.fbalance,$event,'月还款')"
                   name="Paymonth" v-validate="'required'">
-                </el-input>
-                <!-- formatNumber(num, cent, isThousand, el) -->
-                <!-- <el-input type="text" placeholder="请输入内容" :rows="2" resize="none" :maxlength="this.shotTextareaL" v-model.number="checkData.fbalance"
-                  @blur="formatNumber(checkData.fbalance,2,0,'月还款')" name="Paymonth" v-validate="'required'">
                 </el-input> -->
                 <!-- formatSC -->
-                <!-- <el-input type="text" placeholder="请输入内容" v-model.number="checkData.fbalance" @blur="formatSC('月还款')" name="Paymonth" v-validate="'required'">
-                </el-input> -->
+                <el-input type="text" placeholder="请输入内容" v-model="checkData.fbalance" @blur="formatSC('月还款')" name="Paymonth" v-validate="'required'">
+                </el-input>
               </p>
             </li>
           </ul>
@@ -1421,7 +1417,7 @@
         // ------------------------------居住情况------------------------
         livingHouseHolds: [{ // 同住者关系
           value: '00',
-          label: '普通'
+          label: '父母'
         }, {
           value: '01',
           label: '配偶及子女'
@@ -1608,49 +1604,6 @@
             break;
         }
       },
-      //       aa(){
-      //         // open 打开 是否确认提交弹窗
-      // open() {
-      //     const h = this.$createElement;
-      //     this.$msgbox({
-      //         title: '提示',
-      //         message: h('p', null, [
-      //             h('span', null, '确定操作? '),
-      //         ]),
-      //         showCancelButton: true,
-      //         confirmButtonText: '确定',
-      //         cancelButtonText: '取消',
-      //         beforeClose: (action, instance, done) => {
-      //             if (action === 'confirm') {
-      //                 instance.confirmButtonLoading = true;
-      //                 instance.confirmButtonText = '执行中...';
-      //                 console.log(this.taskId)
-      //                 // 点击 确认 提交 方法
-      //                 this.post("/creauditInfo/approveHang ", {
-      //                     taskId: this.taskId
-      //                 }).then(res => {
-      //                     console.log(res);
-      //                     console.log(res.statusCode);
-      //                     if (res.statusCode == '200')
-      //                         done();
-      //                     else {
-      //                         this.$message(res.msg);
-      //                         instance.confirmButtonText = '';
-      //                     }
-      //                     instance.confirmButtonLoading = false;
-      //                 });
-      //             } else {
-      //                 done();
-      //             }
-      //         }
-      //     }).then(action => {
-      //         this.$message({
-      //             type: 'success',
-      //             message: '挂起成功'
-      //         });
-      //     });
-      // },
-      //       },
       wordarea(val, el, txt) {
         if (val.length >= 500) {
           this.wordareaSC(val, el);
@@ -1986,22 +1939,50 @@
             break;
         }
       },
-      getCity(item) {
+      setProvince(item) {
+        console.log(this.checkData.workProvinceName)
+        console.log(item)
+        this.checkData.workProvince = item;
+        this.checkData.workCity = "";
+        this.checkData.workCityName = "";
+        this.checkData.workCounty = "";
+        this.checkData.workCountyName = "";
+      },
+      getCity() {
+        console.log("省：", this.checkData.workProvince)
         this.get("/credit/queryCityCounty", {
-          parentCode: item,
+          parentCode: this.checkData.workProvince,
         }).then(res => {
-          this.hireProvincd = res.data;
-          this.checkData.workCity = "";
-          this.checkData.workCounty = "";
-          this.hireTown = "";
+          if (res.statusCode == 200) {
+            this.hireProvincd = res.data;
+            this.checkData.workCounty = "";
+            this.checkData.workCountyName = "";
+            this.hireTown = "";
+          } else {
+            this.$message.error('查询失败');
+          }
         })
       },
-      getTown(item) {
+      setCity(item) {
+        console.log(item)
+        this.checkData.workCity = item;
+        console.log("市", this.checkData.workCity)
+      },
+      getCountry() {
+        console.log("市", this.checkData.workCity)
         this.get("/credit/queryCityCounty", {
-          parentCode: item,
+          parentCode: this.checkData.workCity,
         }).then(res => {
-          this.hireTown = res.data;
+          if (res.statusCode == 200) {
+            this.hireTown = res.data;
+          } else {
+            this.$message.error('查询失败');
+          }
         })
+      },
+      setCountry(item) {
+        this.checkData.workCounty = item;
+        console.log(this.checkData)
       },
       makeSureBtn() {
         this.Confirm = true;
@@ -2014,31 +1995,38 @@
       },
       CFsave() {
         console.log("保存修改")
-            console.log(this.checkData)
+        console.log(this.checkData.workProvinceName)
+        console.log(this.checkData.workProvince)
+
         this.$validator.validateAll().then((result) => {
           if (result) {
             this.checkData.selfpremisesArea = this.acreage;
             this.checkData.selfhasProportion = this.Percent;
-            console.log(this.checkData.applyId)
+            console.log(this.$refs.province)
+
+            this.checkData.workProvinceName = this.$refs.province.selectedLabel;
+            this.checkData.workCityName = this.$refs.city.selectedLabel;
+            this.checkData.workCountyName = this.$refs.country.selectedLabel;
+            this.btnnn();
             this.post("/creauditInfo/addOrUpdate", this.checkData).then(res => {
               if (res.statusCode == 200) {
                 this.Confirm = false;
                 // alert('提交成功!');
                 this.AreaNPercent();
                 this.$message({
-                  message: '恭喜你，提交成功!',
+                  message: '提交成功!',
                   type: 'success'
                 });
                 this.mountC();
               } else {
                 this.Confirm = false;
-                  this.$message.error('提交失败！');
+                this.$message.error('提交失败，请稍后再试！');
                 this.mountC();
               }
             });
           } else {
             this.Confirm = false;
-              this.$message.error('必填项不能为空！');
+            this.$message.error('提交失败，有必填项未填写！');
           }
         });
       },
@@ -2090,7 +2078,7 @@
             val == 0 ? this.InternetShow.commentS10 = false : this.InternetShow.commentS10 = true;
             break;
           case 11:
-            val == 0 ? this.checkId.declearNloaned = false : this.checkId.declearNloaned = true;
+            val == 0 || val == null ? this.checkId.declearNloaned = false : this.checkId.declearNloaned = true;
             break;
           case 12:
             val == 0 || val == null ? this.workInf.private = false : this.workInf.private = true;
@@ -2137,39 +2125,44 @@
           this.reg.mpostCode = true;
         }
       },
-      businessArea(val, e, el, unit) {
-        val = parseFloat(val);
-        if (isNaN(val)) {
-          val = e.target.value = "";
-          this.businessSC(val, el);
-        } else if (val <= 0) {
-          val = e.target.value = "0.00" + unit;
-          this.businessSC(val, el);
-        } else if (val > 0) {
-          if (val.toString().indexOf('.') == -1) {
-            e.target.value = val = val + "." + "0" + '0' + unit;
-            this.businessSC(val, el);
-          } else if (val.toString().indexOf('.') != -1) {
-            if (val.toString().split(".")[1].length < 2) {
-              e.target.value = val = val + "0" + unit;
-              this.businessSC(val, el);
-            } else {
-              e.target.value = val = val.toString().split(".")[0] + "." + val.toString()
-                .split(".")[1].slice(0, 2) + unit;
-              this.businessSC(val, el);
-            }
-          }
-        }
-        this.acreage = this.checkData.selfpremisesArea.slice(0, -2);
-        this.Percent = this.checkData.selfhasProportion.slice(0, -1);
-      },
-      businessSC(val, el) {
+      // businessArea(val, e, el, unit) {
+      //   val = parseFloat(val);
+      //   if (isNaN(val)) {
+      //     val = e.target.value = "";
+      //     this.businessSC(val, el);
+      //   } else if (val <= 0) {
+      //     val = e.target.value = "0.00" + unit;
+      //     this.businessSC(val, el);
+      //   } else if (val > 0) {
+      //     if (val.toString().indexOf('.') == -1) {
+      //       e.target.value = val = val + "." + "0" + '0' + unit;
+      //       this.businessSC(val, el);
+      //     } else if (val.toString().indexOf('.') != -1) {
+      //       if (val.toString().split(".")[1].length < 2) {
+      //         e.target.value = val = val + "0" + unit;
+      //         this.businessSC(val, el);
+      //       } else {
+      //         e.target.value = val = val.toString().split(".")[0] + "." + val.toString()
+      //           .split(".")[1].slice(0, 2) + unit;
+      //         this.businessSC(val, el);
+      //       }
+      //     }
+      //   }
+      //   this.acreage = this.checkData.selfpremisesArea.slice(0, -2);
+      //   this.Percent = this.checkData.selfhasProportion.slice(0, -1);
+      // },
+      businessSC(el) {
+        console.log("aaaaaaa")
         switch (el) {
           case "营业面积":
-            this.checkData.selfpremisesArea = val;
+          this.checkData.selfpremisesArea = this.checkData.selfpremisesArea.slice(0, -2);
+            this.checkData.selfpremisesArea = this.formatNumber(this.checkData.selfpremisesArea,2,0)+'m²';
+              this.acreage = this.checkData.selfpremisesArea.slice(0, -2);
             break;
           case "占股比例":
-            this.checkData.selfhasProportion = val;
+           this.checkData.selfhasProportion = this.checkData.selfhasProportion.slice(0, -1);
+            this.checkData.selfhasProportion =  this.formatNumber(this.checkData.selfhasProportion,2,0)+'%';
+              this.Percent = this.checkData.selfhasProportion.slice(0, -1);
             break;
         }
       },
@@ -2234,37 +2227,39 @@
           this.workInf.empNumber = true;
         }
       },
-      formatMoney(val, e, name) {
-        val = parseFloat(val);
-        if (isNaN(val)) {
-          val = e.target.value = "";
-          this.formatSC(name, val);
-        } else if (val <= 0) {
-          val = e.target.value = "0.00";
-          this.formatSC(name, val);
-        } else if (val > 0) {
-          if (val.toString().indexOf('.') == -1) {
-            val = val + "." + "0" + '0';
-            this.formatSC(name, val);
-          } else if (val.toString().indexOf('.') != -1) {
-            if (val.toString().split(".")[1].length < 2) {
-              e.target.value = val = val + "0";
-              this.formatSC(name, val);
-            } else {
-              e.target.value = val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
-              this.formatSC(name, val);
-            }
-          }
-        }
-      },
+      // "12345678".replace(  /[0-9]+?(?=(?:([0-9]{3}))+$)/g  ,  function(a){return a+','});   //输出 12 345 678
+      // formatMoney(val, e, name) {
+      //   val = parseFloat(val);
+      //   if (isNaN(val)) {
+      //     val = e.target.value = "";
+      //     this.formatSC(name, val);
+      //   } else if (val <= 0) {
+      //     val = e.target.value = "0.00";
+      //     this.formatSC(name, val);
+      //   } else if (val > 0) {
+      //     if (val.toString().indexOf('.') == -1) {
+      //       console.log(val)
+      //     val=val.replace(/\d{1,3}(?=(\d{3})+$)/g,function(val){return val+','}) ;
+      //     console.log(val)
+      //       val = val + "." + "0" + '0';
+      //       this.formatSC(name, val);
+      //     } else if (val.toString().indexOf('.') != -1) {
+      //       if (val.toString().split(".")[1].length < 2) {
+      //         e.target.value = val = val + "0";
+      //         this.formatSC(name, val);
+      //       } else {
+      //         e.target.value = val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
+      //         this.formatSC(name, val);
+      //       }
+      //     }
+      //   }
+      // },
       formatNumber(num, cent, isThousand) {
-        console.log("算法" + num)
+        // console.log("算法" + num)
         num = num.toString().replace(/\$|\,/g, '');
         // 检查传入数值为数值类型
         if (isNaN(num)) {
           num = "0";
-          // this.formatSC(el, num);
-          // this.Wordhint.family.acount=true;
         }
         // 获取符号(正/负数)
         let sign = (num == (num = Math.abs(num)));
@@ -2278,75 +2273,75 @@
           cents = "0" + cents;
         console.log(cents)
         console.log(num.length)
-        if (isThousand) {
-          // 对整数部分进行千分位格式化.
-          for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++) {
-            num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
-          }
-          console.log(num)
+        // if (isThousand) {
+        // 对整数部分进行千分位格式化.
+        for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++) {
+          num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
         }
+        console.log(num)
+        // }
         if (cent > 0) {
           return (((sign) ? '' : '-') + num + '.' + cents);
           //  num = num + '.' + cents;
           console.log(num);
-          // this.formatSC(el, num);
         } else {
           return (((sign) ? '' : '-') + num);
           // return (((sign)?'':'-') + num);
           // num
           console.log(num)
-          // this.formatSC(el, num);
         }
       },
       formatSC(el, val) {
         switch (el) {
           case "月还款":
-            this.checkData.fbalance = val;
+            this.checkData.fbalance = this.formatNumber(this.checkData.fbalance, 2, 0);
             break;
           case "借款金额":
-            this.checkData.iloanAmt = val;
+            this.checkData.iloanAmt = this.formatNumber(this.checkData.iloanAmt, 2, 0);
             break;
           case "月均工资":
-            this.checkData.avgsalaryamt = val;
+            this.checkData.avgsalaryamt = this.formatNumber(this.checkData.avgsalaryamt, 2, 0);
             break;
           case "注册资金":
-            this.checkData.regcapitalamt = val;
+            this.checkData.regcapitalamt = this.formatNumber(this.checkData.regcapitalamt, 2, 0);
             break;
           case "月利润":
-            this.checkData.profitamountmamt = val;
+            this.checkData.profitamountmamt = this.formatNumber(this.checkData.profitamountmamt, 2, 0);
             break;
           case "月还款/租金":
-            this.checkData.monthrentamt = val;
+            this.checkData.monthrentamt = this.formatNumber(this.checkData.monthrentamt, 2, 0);
             break;
           case "近一年利润":
-            this.checkData.oneYearProfitamt = val;
+            this.checkData.oneYearProfitamt = this.formatNumber(this.checkData.oneYearProfitamt, 2, 0);
             break;
           case "配偶收入":
-            this.checkData.spouseIncome = val;
+            this.checkData.spouseIncome = this.formatNumber(this.checkData.spouseIncome, 2, 0);
             break;
           case "生活费支付":
-            this.checkData.childPaycostamt = val;
+            this.checkData.childPaycostamt = this.formatNumber(this.checkData.childPaycostamt, 2, 0);
             break;
           case "父母收入":
-            this.checkData.parentIncome = val;
+            this.checkData.parentIncome = this.formatNumber(this.checkData.parentIncome, 2, 0);
             break;
           case "开销":
-            this.checkData.fconsumption = val;
+            this.checkData.fconsumption = this.formatNumber(this.checkData.fconsumption, 2, 0);
             break;
         }
       },
-      formatMoneyBackUp(val, e) {
-        console.log(";kadls")
-        val = parseFloat(val);
-        if (val <= 0 || isNaN(val)) {
-          this.checkData.fbalance = this.val = val = e.target.value = "0.00";
-        } else if (val > 0) {
-          if (val.toString().indexOf('.') == -1) {
-            e.target.value = val = val + ".00"
-          } else if (val.toString().indexOf('.') != -1) {
-            e.target.value = val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
-          }
-        }
+      btnnn(){
+this.checkData.fbalance!=null && this.checkData.fbalance.indexOf(',')? this.checkData.fbalance=this.checkData.fbalance.split(",").join(''):this.checkData.fbalance ;
+this.checkData.iloanAmt!=null && this.checkData.iloanAmt.indexOf(',')? this.checkData.iloanAmt=this.checkData.iloanAmt.split(",").join(''):this.checkData.iloanAmt ;
+this.checkData.avgsalaryamt!=null && this.checkData.avgsalaryamt.indexOf(',')? this.checkData.avgsalaryamt=this.checkData.avgsalaryamt.split(",").join(''):this.checkData.avgsalaryamt ;
+this.checkData.regcapitalamt!=null && this.checkData.regcapitalamt.indexOf(',')? this.checkData.regcapitalamt=this.checkData.regcapitalamt.split(",").join(''):this.checkData.regcapitalamt ;
+this.checkData.thiprofitamountmamt!=null && this.checkData.thiprofitamountmamt.indexOf(',')? this.checkData.thiprofitamountmamt=this.checkData.thiprofitamountmamt.split(",").join(''):this.checkData.thiprofitamountmamt ;
+this.checkData.monthrentamt!=null && this.checkData.monthrentamt.indexOf(',')? this.checkData.monthrentamt=this.checkData.monthrentamt.split(",").join(''):this.checkData.monthrentamt ;
+this.checkData.oneYearProfitamt!=null && this.checkData.oneYearProfitamt.indexOf(',')? this.checkData.oneYearProfitamt=this.checkData.oneYearProfitamt.split(",").join(''):this.checkData.oneYearProfitamt ;
+this.checkData.spouseIncome!=null && this.checkData.spouseIncome.indexOf(',')? this.checkData.spouseIncome=this.checkData.spouseIncome.split(",").join(''):this.checkData.spouseIncome ;
+this.checkData.childPaycostamt!=null && this.checkData.childPaycostamt.indexOf(',')? this.checkData.childPaycostamt=this.checkData.childPaycostamt.split(",").join(''):this.checkData.childPaycostamt ;
+this.checkData.parentIncome!=null && this.checkData.parentIncome.indexOf(',')? this.checkData.parentIncome=this.checkData.parentIncome.split(",").join(''):this.checkData.parentIncome ;
+this.checkData.fconsumption!=null && this.checkData.fconsumption.indexOf(',')? this.checkData.fconsumption=this.checkData.fconsumption.split(",").join(''):this.checkData.fconsumption ;
+this.checkData.selfpremisesArea!=null && this.checkData.selfpremisesArea.indexOf(',')? this.checkData.selfpremisesArea= this.checkData.selfpremisesArea.slice(0, -2).split(",").join(''):this.checkData.selfpremisesArea ;
+this.checkData.selfhasProportion!=null && this.checkData.selfhasProportion.indexOf(',')? this.checkData.selfhasProportion= this.checkData.selfpremisesArea.slice(0, -1).split(",").join(''):this.checkData.selfhasProportion ;
       },
       ElInputStyle(val) {
         if (val == "50%") {
@@ -2389,36 +2384,48 @@
           this.Alertbtn[0].style.marginLeft = "calc( 50% + 329px )";
         }
       },
-      acquire(val, name) {
-        if (val == null || val == '') {
-          return
-        } else {
-          if (val.toString().indexOf('.') == -1) {
-            val = val + "." + "0" + '0';
-            this.formatSC(name, val);
-          } else if (val.toString().indexOf('.') != -1) {
-            if (val.toString().split(".")[1].length < 2) {
-              val = val + "0";
-              this.formatSC(name, val);
-            } else {
-              val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
-              this.formatSC(name, val);
-            }
-          }
-        }
-      },
+      // acquire(val, name) {
+      //   if (val == null || val == '') {
+      //     return
+      //   } else {
+      //     if (val.toString().indexOf('.') == -1) {
+      //       val = val + "." + "0" + '0';
+      //       this.formatSC(name, val);
+      //     } else if (val.toString().indexOf('.') != -1) {
+      //       if (val.toString().split(".")[1].length < 2) {
+      //         val = val + "0";
+      //         this.formatSC(name, val);
+      //       } else {
+      //         val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
+      //         this.formatSC(name, val);
+      //       }
+      //     }
+      //   }
+      // },
       mountM() {
-        this.acquire(this.checkData.fbalance, '月还款');
-        this.acquire(this.checkData.regcapitalamt, '注册资金');
-        this.acquire(this.checkData.monthrentamt, '月还款/租金');
-        this.acquire(this.checkData.oneYearProfitamt, '近一年利润');
-        this.acquire(this.checkData.profitamountmamt, '月利润');
-        this.acquire(this.checkData.spouseIncome, '配偶收入');
-        this.acquire(this.checkData.parentIncome, '父母收入');
-        this.acquire(this.checkData.fconsumption, '开销');
-        this.acquire(this.checkData.childPaycostamt, '生活费支付');
-        this.acquire(this.checkData.avgsalaryamt, '月均工资');
-        this.acquire(this.checkData.iloanAmt, '借款金额');
+        // this.acquire(this.checkData.fbalance, '月还款');
+        // this.acquire(this.checkData.regcapitalamt, '注册资金');
+        // this.acquire(this.checkData.monthrentamt, '月还款/租金');
+        // this.acquire(this.checkData.oneYearProfitamt, '近一年利润');
+        // this.acquire(this.checkData.profitamountmamt, '月利润');
+        // this.acquire(this.checkData.spouseIncome, '配偶收入');
+        // this.acquire(this.checkData.parentIncome, '父母收入');
+        // this.acquire(this.checkData.fconsumption, '开销');
+        // this.acquire(this.checkData.childPaycostamt, '生活费支付');
+        // this.acquire(this.checkData.avgsalaryamt, '月均工资');
+        // this.acquire(this.checkData.iloanAmt, '借款金额');
+        console.log(this.checkData.iloanAmt)
+       this.checkData.fbalance? this.checkData.fbalance = this.formatNumber(this.checkData.fbalance, 2, 0): this.checkData.fbalance;
+        this.checkData.iloanAmt? this.checkData.iloanAmt = this.formatNumber(this.checkData.iloanAmt, 2, 0):this.checkData.iloanAmt;
+        this.checkData.avgsalaryamt ? this.checkData.avgsalaryamt = this.formatNumber(this.checkData.avgsalaryamt, 2, 0): this.checkData.avgsalaryamt ;
+        this.checkData.regcapitalamt? this.checkData.regcapitalamt = this.formatNumber(this.checkData.regcapitalamt, 2, 0):this.checkData.regcapitalamt;
+        this.checkData.profitamountmamt? this.checkData.profitamountmamt = this.formatNumber(this.checkData.profitamountmamt, 2, 0):this.checkData.profitamountmamt;
+        this.checkData.monthrentamt? this.checkData.monthrentamt = this.formatNumber(this.checkData.monthrentamt, 2, 0):this.checkData.monthrentamt;
+        this.checkData.oneYearProfitamt? this.checkData.oneYearProfitamt = this.formatNumber(this.checkData.oneYearProfitamt, 2, 0):this.checkData.oneYearProfitamt;
+        this.checkData.spouseIncome? this.checkData.spouseIncome = this.formatNumber(this.checkData.spouseIncome, 2, 0):this.checkData.spouseIncome;
+        this.checkData.childPaycostamt? this.checkData.childPaycostamt = this.formatNumber(this.checkData.childPaycostamt, 2, 0):this.checkData.childPaycostamt;
+        this.checkData.parentIncome? this.checkData.parentIncome = this.formatNumber(this.checkData.parentIncome, 2, 0):this.checkData.parentIncome;
+        this.checkData.fconsumption? this.checkData.fconsumption = this.formatNumber(this.checkData.fconsumption, 2, 0):this.checkData.fconsumption;
       },
       mountC() {
         // 获取查询列表数据
@@ -2428,11 +2435,13 @@
           console.log(res);
           if (res.statusCode == 200) {
             this.checkData = res.data;
+            console.log(this.checkData.workProvinceName)
+
             this.checkData.applyId = this.getParams.applyId;
-            this.AreaNPercent(this.checkData.fbalance);
+            // this.AreaNPercent(this.checkData.fbalance);
+            this.AreaNPercent();
             this.mountM();
-            console.log(this.checkData.fbalance);
-            console.log(this.checkData.fbalance);
+            // this.formatSC();
             this.mountJ(0, res.data.wbeexEcuted);
             this.mountJ(1, res.data.wnetHirecom);
             this.mountJ(2, res.data.wnetEcutedBrea);
@@ -2501,6 +2510,7 @@
       // 省    
       this.get("/credit/queryProvince", {}).then(res => {
         this.hirecomAddress = res.data;
+        console.log(res);
       });
       // 所属行业 
       this.get("/credit/industry", {}).then(res => {
@@ -2512,7 +2522,7 @@
       this.inputWidth = document.getElementsByClassName("specialInput")
       this.comaddressb = document.getElementsByClassName("comaddressb")
       this.Alertbtn = document.getElementsByClassName("btn")
-      console.log(this.Txawidth)
+      // console.log(this.Txawidth)
       if (this.myWatch) {
         this.ElInputStyle(this.myWatch)
       } else {
@@ -2675,6 +2685,8 @@
     width: 182px;
     /* width: 200px; */
     margin-right: 10px;
+    font-size: 14px;
+    font-weight: normal;
   }
 
   .InternetInf_right_label {

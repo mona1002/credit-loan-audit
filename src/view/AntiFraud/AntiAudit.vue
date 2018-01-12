@@ -186,7 +186,6 @@
           this.$message.error(res.msg);
         }
       });
-      this.title = "影音资料";
     },
     components: {
       myHead,

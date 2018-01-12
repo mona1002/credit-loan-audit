@@ -9,12 +9,12 @@
     <ul>
       <li class="item-column3">
         <div class="left-title">
-          审批结论：
+          审核结论：
         </div>
         <div>
-          <el-select v-model="mainReason">
-            <el-option label="风险拒贷[黑名单]" value="00"></el-option>
-            <el-option label="风险拒贷[灰名单]" value="01"></el-option>
+          <el-select v-model="auditResult" @change="selectChangeMain">
+            <el-option label="风险拒贷[黑名单]" value="08"></el-option>
+            <el-option label="风险拒贷[灰名单]" value="09"></el-option>
             <el-option label="风险排除" value="02"></el-option>
           </el-select>
         </div>
@@ -34,10 +34,12 @@
           主原因：
         </div>
         <div>
-          <el-select v-model="mainReason">
-            <el-option label="风险拒贷[黑名单]" value="00"></el-option>
+          <el-select @change="selectChange" v-model="mainReason">
+            <!--           <el-option label="风险拒贷[黑名单]" value="00"></el-option>
             <el-option label="风险拒贷[灰名单]" value="01"></el-option>
-            <el-option label="风险排除" value="02"></el-option>
+            <el-option label="风险排除" value="02"></el-option> -->
+            <el-option v-for="item in mainReasons" :label="item.reasonName" :value="item">
+            </el-option>
           </el-select>
         </div>
       </li>
@@ -46,10 +48,12 @@
           子原因：
         </div>
         <div>
-          <el-select v-model="mainReason">
-            <el-option label="风险拒贷[黑名单]" value="00"></el-option>
+          <el-select v-model="secondReason">
+            <!-- <el-option label="风险拒贷[黑名单]" value="00"></el-option>
             <el-option label="风险拒贷[灰名单]" value="01"></el-option>
-            <el-option label="风险排除" value="02"></el-option>
+            <el-option label="风险排除" value="02"></el-option> -->
+            <el-option v-for="item in secondReasons" :label="item.reasonName" :value="item">
+            </el-option>
           </el-select>
         </div>
       </li>
@@ -87,7 +91,7 @@
       <el-button icon="el-icon-check-back" class="credit-btn" @click="coverFn('02')">回退</el-button>
       <!-- <el-button icon="el-icon-check-reject" class="credit-btn" @click="coverFn('01')">拒绝</el-button> -->
       <!-- <el-button icon="el-icon-check-giveup" class="credit-btn" @click="coverFn('07')">放弃</el-button> -->
-      <el-button icon="el-icon-check-appro" class="credit-btn" @click="coverFn('03')">审批</el-button>
+      <el-button icon="el-icon-check-appro" class="credit-btn" @click="insert">审批</el-button>
       <!-- <el-button icon="el-icon-check-start" class="credit-btn" @click="coverFn('fqz')">发起反欺诈</el-button> -->
       <!-- <el-button icon="el-icon-check-spjl" class="credit-btn" @click="coverFn('spjl')">审批结论轨迹</el-button> -->
       <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('lcgj')">流程轨迹</el-button>
@@ -132,11 +136,11 @@
               </el-option>
             </el-select>
           </el-form-item>
-          <!-- secondeReasons -->
+          <!-- secondReasons -->
           <!-- <span style="color:red;display:inline-block;width:0px;float:left;">*</span> -->
           <el-form-item label="子原因 :" class="item-column2">
             <el-select v-model="secondaryReason">
-              <el-option v-for="item in secondeReasons" :key="item.id" :label="item.reasonName" :value="item.reasonName">
+              <el-option v-for="item in secondReasons" :key="item.id" :label="item.reasonName" :value="item.reasonName">
               </el-option>
             </el-select>
           </el-form-item>
@@ -208,7 +212,7 @@
             信审核实信息
           </div>
           <el-form-item label="核实可接受最高每期还款额[元] :" style="width:300px;margin-bottom:10px;" class="item-column2 line-height2">
-            {{fbalance}}
+            {{fbalance2}}
           </el-form-item>
           <div class="form-title">
             审批信息
@@ -233,7 +237,7 @@
             <el-form-item label="批准产品 :" class="item-column2 width-110">
               <el-select @change="proSlelecChange" v-model="proName">
                 <el-option v-for="item in products" :key="item.id" :label="item.proName" :value="item"></el-option>
-                <!-- <el-option v-for="item in secondeReasons" :key="item.id" :label="item.reasonName" :value="item.reasonName"> -->
+                <!-- <el-option v-for="item in secondReasons" :key="item.id" :label="item.reasonName" :value="item.reasonName"> -->
               </el-select>
             </el-form-item>
           </div>
@@ -361,6 +365,7 @@ export default {
       quotaData: '',
       creditScore: '',
       fbalance: '',
+      fbalance2: '',
       products: '',
       proCode: '',
       verIncome2: '',
@@ -378,26 +383,48 @@ export default {
       taskStatus: '',
       lcgjLoading: '',
       mainReason: '', // 主原因
+      mainReasons: [],
+      secondReason: '', // 子原因
+      secondReasons: [],
       secondaryReason: '',
       reasonRemark: '',
       issameFamtxt: '', // 风险项
       relBorrowertxt: '', // 案件描述,
       rollbackNodeName: '', // 监听使用的回退节点
       options: [], // 回退节点的数组
-      mainReasons:[],
       dealroperCode: '', // 经办人
-      loanTerm:'',
-      judgeFlag:'',
-      verIncome:'',
-      proName:'',
-      ploanTerm:'',
-      ploanTerms:'',
-      ploanAmt:'',
-      lcgjData:'',
-      secondeReasons:'',
+      loanTerm: '',
+      judgeFlag: '',
+      verIncome: '',
+      proName: '',
+      ploanTerm: '',
+      ploanTerms: '',
+      ploanAmt: '',
+      lcgjData: '',
+      auditResult: '', // 审核结论
+      mainId: '', // 主原因 id
+      // appinfoId:'', // 反欺诈申请id
     }
   },
   mounted() {
+    this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
+    if (this.judgeFlag == '01') { // 初审 任务 id  taskId
+      this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+      // 挂起 任务id
+      this.taskId = this.taskInWaitting.taskId;
+    } else if (this.judgeFlag == '02') { // 终审取终审  taskId
+      this.FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
+      // 挂起 任务id
+      this.taskId = this.FtaskInWaitting.taskId;
+    } else if (this.judgeFlag == '03') {
+      // 审批 专员 AntiWorkbenchPass
+      this.taskId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
+      // // 反欺诈申请id
+      // this.appinfoId = 
+    } else if (this.judgeFlag == '04') {
+      // 审批主管
+      this.taskId = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
+    }
 
   },
   methods: {
@@ -441,8 +468,28 @@ export default {
           type: 'success',
           message: '挂起成功'
         });
-        this.$router.push('/taskInWaitting');
+        this.$router.push('/AntiFraud');
       });
+    },
+    // 审批
+    insert() {
+
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });          
+        });
+      
     },
     coverFn(flag) {
       // 页面点击按钮出现 的 对应 弹窗
@@ -499,7 +546,9 @@ export default {
                 this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
                 console.log(this.creditScore);
                 this.fbalance = res.data.fbalance;
+                this.fbalance2 = Number(res.data.fbalance).toLocaleString() + '.00'
                 console.log(this.fbalance);
+                console.log(this.fbalance2);
               }
             })
             /* 请求 
@@ -596,14 +645,21 @@ export default {
 
 
     },
-    // 回退/拒绝 主原因 select - change
+    // 获取主原因
+    selectChangeMain: function(val) {
+      console.log(val)
+      this.secondReason = '';
+      // 在主原因改变的时候请求子原因
+      this.getReason('main', val);
+    },
     selectChange: function(val) {
       console.log(val)
-      console.log('回退/拒绝主原因  select - change')
+      console.log('========================')
       var id = val.id; // 主原因的 id
       // this.reasonName = val.reasonName;
       this.mainReason = val.reasonName;
       this.mainId = val.id;
+      console.log(val.id);
       // 在主原因改变的时候请求子原因
       this.getReason('second', this.mainId);
     },
@@ -809,6 +865,49 @@ export default {
         }
       }
     },
+    // 通过监听请求主原因
+    getReason(flag, type) {
+      if (flag == 'main') {
+        this.get('/credit/firstNodeReason?reasonType=' + type).then(res => {
+          console.log(res);
+          if (res.statusCode == '200') {
+            this.mainReasons = res.data;
+          }
+        })
+      } else if (flag == 'second') {
+        // 请求子原因
+        this.get('/credit/findNodeFirstChildren?id=' + this.mainId).then(res => {
+          console.log(res);
+          if (res.statusCode == '200') {
+            this.secondReasons = res.data;
+          }
+        })
+      }
+    }
+  },
+  watch: {
+    // 审核结论 改变请求主原因
+    auditResult: function(val) {
+      console.log(this.auditResult);
+      // 审核结论改变 , 主原因 子原因 都清空
+      this.mainReason = '';
+      this.mainId = '';
+      this.secondReason = '';
+
+      console.log(val);
+      if (val.value == '00') {
+        this.getReason('main', '08');
+      } else if (val.value == '01') {
+        this.getReason('main', '09');
+      } else if (val.value == '02') {
+        console.log('风险排除 不请求 原因')
+      }
+
+    },
+    // // 通过主原因  请求 子原因
+    mainReason: function() {
+      this.secondReason = '';
+    }
   }
 }
 
@@ -833,6 +932,9 @@ export default {
 
 
 
+
+
+
 /* 折叠面板头部背景色和icon */
 
 .approval-colun .icon_hat {
@@ -843,6 +945,9 @@ export default {
 .approval-colun .headFont {
   font-size: 16px;
 }
+
+
+
 
 
 
@@ -866,6 +971,9 @@ export default {
 
 
 
+
+
+
 /* 两列 */
 
 .approval-colun .item-column2 {
@@ -873,6 +981,9 @@ export default {
   float: left;
   margin: 0;
 }
+
+
+
 
 
 
@@ -911,6 +1022,9 @@ export default {
 
 
 
+
+
+
 /* 3列 空位 */
 
 .approval-colun .item-column3-null {
@@ -925,6 +1039,9 @@ export default {
   height: 30px;
   line-height: 30px;
 }
+
+
+
 
 
 
@@ -946,6 +1063,9 @@ export default {
 
 
 
+
+
+
 /* 按钮集合控件 */
 
 .approval-colun .btn-div {
@@ -953,6 +1073,9 @@ export default {
   width: 80%;
   float: left;
 }
+
+
+
 
 
 
@@ -969,6 +1092,9 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
 
 
 
@@ -1005,6 +1131,9 @@ export default {
 
 
 
+
+
+
 /*拒绝*/
 
 .approval-colun .el-icon-check-reject {
@@ -1017,6 +1146,9 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
 
 
 
@@ -1053,6 +1185,9 @@ export default {
 
 
 
+
+
+
 /*审批*/
 
 .approval-colun .el-icon-check-appro {
@@ -1065,64 +1200,6 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-/*发起反欺诈*/
-
-.approval-colun .el-icon-check-start {
-  background: url(../../../static/images/faqi.png);
-  width: 30px;
-  height: 30px;
-  background-size: 30px;
-  padding: 0;
-  margin: 0;
-  vertical-align: middle;
-  display: inline-block;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-/*审批结论轨迹*/
-
-.approval-colun .el-icon-check-spjl {
-  background: url(../../../static/images/jielun.png);
-  width: 30px;
-  height: 30px;
-  background-size: 30px;
-  padding: 0;
-  margin: 0;
-  vertical-align: middle;
-  display: inline-block;
-}
-
-
-
-
-
-
-
-
-
-
 
 
 /*流程轨迹*/
@@ -1139,7 +1216,6 @@ export default {
 }
 
 
-
 /* 反欺诈 审批结论 - btn*/
 
 .approval-colun .credit-btn {
@@ -1147,6 +1223,243 @@ export default {
   background: none;
   color: #333;
   border: none;
+}
+
+
+/* 反欺诈 审批结论  - - 弹窗*/
+
+.approval-colun .el-dialog {
+  width: 600px;
+  margin-top: 30vh !important;
+}
+
+.approval-colun .el-dialog__header {
+  display: none;
+}
+
+.approval-colun .el-dialog__body {
+  padding: 0;
+}
+
+
+.approval-colun .back-form {
+  min-width: 600px;
+  min-height: 250px;
+  background: #fff;
+  margin: 0 auto;
+  /*margin-top: 300px;*/
+  border-radius: 2px;
+  overflow: hidden;
+  padding-bottom: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* form-title */
+
+.approval-colun .form-title {
+  width: 100%;
+  height: 40px;
+  font-size: 18px;
+  /*font-weight: bold;*/
+  /*background: #ededed;*/
+  background: #eef0f9;
+  line-height: 40px;
+  padding-left: 10px;
+  display: block;
+  margin-bottom: 10px;
+  overflow: hidden;
+  font-size: 16px;
+}
+
+.approval-colun .form-title2 {
+  width: 100%;
+  height: 40px;
+  font-size: 18px;
+  /*font-weight: bold;*/
+  /*background: #ededed;*/
+  background: #eef0f9;
+  line-height: 40px;
+  padding-left: 10px;
+  display: block;
+  margin-bottom: 10px;
+  overflow: hidden;
+  font-size: 16px;
+}
+
+.approval-colun .back-form .back-form-li {
+  /*border-top: 0.5px solid #ededed;*/
+  margin: 10px 0px;
+  line-height: 40px;
+  height: 35px;
+  padding: 2px 10px 0 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* textarea */
+
+.approval-colun .back-form .back-form-li .el-textarea {
+  width: 80%;
+}
+
+
+
+/* 弹窗页面 关闭按钮*/
+
+.approval-colun .el-tag {
+  width: 0;
+  height: 0;
+  color: none;
+  border: none;
+  position: absolute;
+  right: 20px;
+  top: 0;
+}
+
+.approval-colun .el-tag .el-icon-close {
+  right: 0px;
+  top: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* 审批 表单 */
+
+.approval-colun .appro-form {
+  /*width: 80%;*/
+  height: 600px;
+  min-width: 685px;
+  margin-top: 100px !important;
+  height: auto;
+  margin: 0 auto;
+  padding: 10px;
+  overflow: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*.approval-colun .appro-form .el-form-item__label {
+  width: 220px;
+}*/
+
+.approval-colun .appro-form .back-form-li .el-textarea {
+  width: 60%;
+}
+
+
+
+
+/* 流程轨迹 */
+
+.approval-colun .lcgj-div {
+  min-width: 760px;
+  width: auto;
+  height: 400px;
+  margin: 0 auto;
+  margin-top: 250px;
+  overflow: hidden;
+
+  background: #fff;
+  border-radius: 5px;
+  height: auto;
+}
+
+
+
+.approval-colun .el-input {
+  width: calc( 100% - 120px);
+  /*width: 100%;*/
+  height: 35px;
+  line-height: 35px;
+}
+
+.approval-colun .el-select {
+  height: 100%;
+  line-height: 100%;
+}
+
+.approval-colun .el-input--suffix .el-input__inner {
+  margin: 0;
+  padding: 0;
+  padding-right: 30px;
+  text-indent: 5px;
+}
+
+
+.approval-colun .el-form-item__content .el-select .el-input {
+  width: 100%;
+}
+
+
+/* 审批 label*/
+
+.approval-colun .appro-form .back-form-edit-li .el-form-item__label {
+  width: 120px;
+}
+
+
+/* 结论  同意 */
+
+.approval-colun .appro-form .radio-li .el-form-item__label {
+  width: 120px;
+}
+
+.approval-colun .el-form-item__label {
+  width: 120px;
+}
+
+
+
+
+/* 两行文字 样式 */
+
+.approval-colun .back-form .line-height2 .el-form-item__label {
+  line-height: 20px;
 }
 
 </style>

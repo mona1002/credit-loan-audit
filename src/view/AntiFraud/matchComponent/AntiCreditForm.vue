@@ -1,5 +1,5 @@
 <template>
-  <!-- 终审-内部匹配中-信审表-（去掉初审人员）-mounted获取反欺诈专员+主管字段 -->
+  <!-- 终审-内部匹配中-信审表-（去掉初审人员）-mounted获取反欺诈专员+主管字段(匹配查看-内部匹配获取的是internal字段) -->
   <div class="CreditForm">
     <el-collapse v-model="activeNames">
       <!-- 网上查询信息 -->
@@ -829,74 +829,125 @@
       }
     },
     methods: {
-      formatSC(el, val) {
-        switch (el) {
-          case "月还款":
-            this.FormData.fbalance = val;
-            break;
-          case "借款金额":
-            this.FormData.iloanAmt = val;
-            break;
-          case "月均工资":
-            this.FormData.avgsalaryamt = val;
-            break;
-          case "注册资金":
-            this.FormData.regcapitalamt = val;
-            break;
-          case "月利润":
-            this.FormData.profitamountmamt = val;
-            break;
-          case "月还款/租金":
-            this.FormData.monthrentamt = val;
-            break;
-          case "近一年利润":
-            this.FormData.oneYearProfitamt = val;
-            break;
-          case "配偶收入":
-            this.FormData.spouseIncome = val;
-            break;
-          case "生活费支付":
-            this.FormData.childPaycostamt = val;
-            break;
-          case "父母收入":
-            this.FormData.parentIncome = val;
-            break;
-          case "开销":
-            this.FormData.fconsumption = val;
-            break;
-        }
+       formatSC() {
+        this.FormData.fbalance ? this.FormData.fbalance = this.formatNumber(this.FormData.fbalance, 2, 0) : this.FormData
+          .fbalance;
+        this.FormData.iloanAmt ? this.FormData.iloanAmt = this.formatNumber(this.FormData.iloanAmt, 2, 0) : this.FormData
+          .iloanAmt;
+        this.FormData.avgsalaryamt ? this.FormData.avgsalaryamt = this.formatNumber(this.FormData.avgsalaryamt, 2, 0) :
+          this.FormData.avgsalaryamt;
+        this.FormData.regcapitalamt ? this.FormData.regcapitalamt = this.formatNumber(this.FormData.regcapitalamt, 2, 0) :
+          this.FormData.regcapitalamt;
+        this.FormData.profitamountmamt ? this.FormData.profitamountmamt = this.formatNumber(this.FormData.profitamountmamt,
+          2, 0) : this.FormData.profitamountmamt;
+        this.FormData.monthrentamt ? this.FormData.monthrentamt = this.formatNumber(this.FormData.monthrentamt, 2, 0) :
+          this.FormData.monthrentamt;
+        this.FormData.oneYearProfitamt ? this.FormData.oneYearProfitamt = this.formatNumber(this.FormData.oneYearProfitamt,
+          2, 0) : this.FormData.oneYearProfitamt;
+        this.FormData.spouseIncome ? this.FormData.spouseIncome = this.formatNumber(this.FormData.spouseIncome, 2, 0) :
+          this.FormData.spouseIncome;
+        this.FormData.childPaycostamt ? this.FormData.childPaycostamt = this.formatNumber(this.FormData.childPaycostamt,
+          2, 0) : this.FormData.childPaycostamt;
+        this.FormData.parentIncome ? this.FormData.parentIncome = this.formatNumber(this.FormData.parentIncome, 2, 0) :
+          this.FormData.parentIncome;
+        this.FormData.fconsumption ? this.FormData.fconsumption = this.formatNumber(this.FormData.fconsumption, 2, 0) :
+          this.FormData.fconsumption;
+           this.FormData.selfpremisesArea = this.FormData.selfpremisesArea.slice(0, -2);
+  this.FormData.selfhasProportion = this.FormData.selfhasProportion.slice(0, -1);
+        this.checkData.selfpremisesArea ? this.checkData.selfpremisesArea = this.formatNumber(this.checkData.selfpremisesArea,
+          2, 0) + 'm²' : this.checkData.selfpremisesArea;
+        this.checkData.selfhasProportion ? this.checkData.selfhasProportion = this.formatNumber(this.checkData.selfhasProportion,
+          2, 0) + '%' : this.checkData.selfhasProportion;
       },
-      acquire(val, name) {
-        if (val == null || val == '') {
-          return
+      formatNumber(num, cent, isThousand) {
+        num = num.toString().replace(/\$|\,/g, '');
+        if (isNaN(num)) {
+          num = "0";
+        }
+        let sign = (num == (num = Math.abs(num)));
+        num = Math.floor(num * Math.pow(10, cent) + 0.50000000001);
+        let cents = num % Math.pow(10, cent);
+        num = Math.floor(num / Math.pow(10, cent)).toString();
+        cents = cents.toString();
+        while (cents.length < cent)
+          cents = "0" + cents;
+        for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++) {
+          num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
+        }
+        if (cent > 0) {
+          return (((sign) ? '' : '-') + num + '.' + cents);
         } else {
-          if (val.toString().indexOf('.') == -1) {
-            val = val + "." + "0" + '0';
-            this.formatSC(name, val);
-          } else if (val.toString().indexOf('.') != -1) {
-            if (val.toString().split(".")[1].length < 2) {
-              val = val + "0";
-              this.formatSC(name, val);
-            } else {
-              val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
-              this.formatSC(name, val);
-            }
-          }
+          return (((sign) ? '' : '-') + num);
         }
       },
-      mountM() {
-        this.acquire(this.FormData.fbalance, '月还款');
-        this.acquire(this.FormData.regcapitalamt, '注册资金');
-        this.acquire(this.FormData.monthrentamt, '月还款/租金');
-        this.acquire(this.FormData.oneYearProfitamt, '近一年利润');
-        this.acquire(this.FormData.profitamountmamt, '月利润');
-        this.acquire(this.FormData.spouseIncome, '配偶收入');
-        this.acquire(this.FormData.parentIncome, '父母收入');
-        this.acquire(this.FormData.fconsumption, '开销');
-        this.acquire(this.FormData.childPaycostamt, '生活费支付');
-        this.acquire(this.FormData.avgsalaryamt, '月均工资');
-        this.acquire(this.FormData.iloanAmt, '借款金额');
-      },
+      // formatSC(el, val) {
+      //   switch (el) {
+      //     case "月还款":
+      //       this.FormData.fbalance = val;
+      //       break;
+      //     case "借款金额":
+      //       this.FormData.iloanAmt = val;
+      //       break;
+      //     case "月均工资":
+      //       this.FormData.avgsalaryamt = val;
+      //       break;
+      //     case "注册资金":
+      //       this.FormData.regcapitalamt = val;
+      //       break;
+      //     case "月利润":
+      //       this.FormData.profitamountmamt = val;
+      //       break;
+      //     case "月还款/租金":
+      //       this.FormData.monthrentamt = val;
+      //       break;
+      //     case "近一年利润":
+      //       this.FormData.oneYearProfitamt = val;
+      //       break;
+      //     case "配偶收入":
+      //       this.FormData.spouseIncome = val;
+      //       break;
+      //     case "生活费支付":
+      //       this.FormData.childPaycostamt = val;
+      //       break;
+      //     case "父母收入":
+      //       this.FormData.parentIncome = val;
+      //       break;
+      //     case "开销":
+      //       this.FormData.fconsumption = val;
+      //       break;
+      //   }
+      // },
+      // acquire(val, name) {
+      //   if (val == null || val == '') {
+      //     return
+      //   } else {
+      //     if (val.toString().indexOf('.') == -1) {
+      //       val = val + "." + "0" + '0';
+      //       this.formatSC(name, val);
+      //     } else if (val.toString().indexOf('.') != -1) {
+      //       if (val.toString().split(".")[1].length < 2) {
+      //         val = val + "0";
+      //         this.formatSC(name, val);
+      //       } else {
+      //         val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
+      //         this.formatSC(name, val);
+      //       }
+      //     }
+      //   }
+      // },
+      // mountM() {
+      //   this.acquire(this.FormData.fbalance, '月还款');
+      //   this.acquire(this.FormData.regcapitalamt, '注册资金');
+      //   this.acquire(this.FormData.monthrentamt, '月还款/租金');
+      //   this.acquire(this.FormData.oneYearProfitamt, '近一年利润');
+      //   this.acquire(this.FormData.profitamountmamt, '月利润');
+      //   this.acquire(this.FormData.spouseIncome, '配偶收入');
+      //   this.acquire(this.FormData.parentIncome, '父母收入');
+      //   this.acquire(this.FormData.fconsumption, '开销');
+      //   this.acquire(this.FormData.childPaycostamt, '生活费支付');
+      //   this.acquire(this.FormData.avgsalaryamt, '月均工资');
+      //   this.acquire(this.FormData.iloanAmt, '借款金额');
+      // },
       NewPage(ind) {
         console.log(ind);
         switch (ind) {
@@ -965,7 +1016,7 @@
             val == 0 ? this.InternetShow.commentS10 = false : this.InternetShow.commentS10 = true;
             break;
           case 11:
-            val == 0 ? this.checkId.declearNloaned = false : this.checkId.declearNloaned = true;
+             val == 0 || val == null ? this.checkId.declearNloaned = false : this.checkId.declearNloaned = true;
             break;
           case 12:
             val == 0 || val == null ? this.workInf.private = false : this.workInf.private = true;
