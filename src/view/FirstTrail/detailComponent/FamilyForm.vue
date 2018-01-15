@@ -15,7 +15,7 @@
       <li class="item-column3">
         <div class="left-title">电话类型：</div>
         <div>
-          <el-select v-model="phoneType" disabled>
+          <el-select v-model="phoneType" :disabled="true">
             <el-option label="家庭联系人" value="03"></el-option>
           </el-select>
         </div>
@@ -273,7 +273,7 @@
           <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查结果：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <div class="textarea-class">
-              <el-input type="textarea" v-model="conclusion" :rows="5" resize=none></el-input>
+              <el-input type="textarea" v-model="conclusion" :rows="5" resize=none :maxlength="500"></el-input>
             </div>
           </el-tooltip>
         </li>
@@ -323,10 +323,12 @@ export default {
   },
   props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull'],
   mounted() {
-    this.phoneType = '01'; // 住址电话
+    this.phoneType = '03'; // 住址电话
     if (this.isFull == true) { // 全屏
       console.log('全屏');
       $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
+      $('.item-column1 textarea').css("width", "100%")
+      $('.item-column1 textarea').css("width", "100%")
       // 提交按钮
       $('.submit-class').css("margin-left", "calc( 66% - 140px)")
       // 显示 column2
@@ -467,7 +469,7 @@ export default {
               instance.confirmButtonLoading = false;
             });
           } else {
-            this.$message({ message: this.resMsg, type: 'warning' });
+            // this.$message({ message: this.resMsg, type: 'warning' });
             done();
           }
         }
@@ -504,6 +506,7 @@ export default {
       if (val == true) { // 全屏
         console.log('全屏');
         $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
+        $('.item-column1 textarea').css("width", "100%")
         // 提交按钮
         $('.submit-class').css("margin-left", "calc( 66% - 140px)")
         // 显示 column2

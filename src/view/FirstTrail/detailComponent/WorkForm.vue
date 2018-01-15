@@ -16,7 +16,7 @@
         <div class="left-title">电话类型：</div>
         <div>
           <el-select v-model="phoneType" disabled>
-            <el-option label="住址电话" value="01"></el-option>
+            <el-option label="工作证人" value="05"></el-option>
           </el-select>
         </div>
       </li>
@@ -136,7 +136,7 @@
       </div>
       <div class="content-ul">
         <li class="item-column1">
-          <div class="left-title"><span class="require-icon" style="left:50px;">*</span> 调查结论：</div>
+          <div class="left-title"><span class="require-icon" style="left:50px;">*</span> 调查结果：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <div class="textarea-class">
               <el-input v-model="conclusion" type="textarea" :rows="5" resize=none :maxlength="500"></el-input>
@@ -169,7 +169,7 @@ export default {
       mobilepaymenttxt: '',
       conclusion: '',
       phoneId: '',
-      resMsg:''
+      resMsg: ''
     }
   },
   props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull'],
@@ -178,6 +178,7 @@ export default {
     if (this.isFull == true) { // 全屏
       console.log('全屏');
       $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
+      $('.item-column1 textarea').css("width", "100%")
       // 提交按钮
       $('.submit-class').css("margin-left", "calc( 66% - 140px)")
       // 显示 column2
@@ -279,13 +280,13 @@ export default {
                 done();
               } else {
                 this.resMsg = res.msg;
- 
+                done();
                 instance.confirmButtonText = '';
               }
               instance.confirmButtonLoading = false;
             });
           } else {
-            this.$message({ message: this.resMsg, type: 'warning' });
+            
 
             done();
           }
@@ -311,6 +312,7 @@ export default {
       if (val == true) { // 全屏
         console.log('全屏');
         $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
+        $('.item-column1 textarea').css("width", "100%")
         // 提交按钮
         $('.submit-class').css("margin-left", "calc( 66% - 140px)")
         // 显示 column2

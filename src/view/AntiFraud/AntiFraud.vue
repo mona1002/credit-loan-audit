@@ -1,44 +1,52 @@
 <!-- 反欺诈申请 - 列表页 -->
 <template>
   <div class="anti-fraud">
-    <el-collapse v-model="activeNames">
-      <el-collapse-item style="text-align:left;" name="1">
-        <template slot="title">
+    <!-- <el-collapse v-model="activeNames"> -->
+    <div class="title-bar">
+      <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+      <span class="headFont">高级查询</span>
+      <!-- {{title1}} -->
+    </div>
+    <!-- <el-collapse-item style="text-align:left;" name="1"> -->
+    <!--  <template slot="title">
           <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">历史调查日志</span>
-        </template>
-        <div class="search-box">
-          <li class="item-column3">
-            <div class="left-title">进件编号：</div>
-            <div class="item-content">
-              <el-input v-model="applySubno"></el-input>
-            </div>
-          </li>
-          <li class="item-column3">
-            <div class="left-title">客户名称：</div>
-            <div class="item-content">
-              <el-input v-model="applyCustName"></el-input>
-            </div>
-          </li>
-          <li class="item-column3">
-            <div class="left-title">证件号码：</div>
-            <div class="item-content">
-              <el-input v-model="applyCustNo"></el-input>
-            </div>
-          </li>
-          <li class="item-column1 submit-class">
-            <el-button type="primary" @click="resetQueryList">查询</el-button>
-            <el-button @click="resetQuery">重置</el-button>
-          </li>
+        </template> -->
+    <div class="search-box">
+      <li class="item-column3">
+        <div class="left-title">进件编号：</div>
+        <div class="item-content">
+          <el-input v-model="applySubno"></el-input>
         </div>
-      </el-collapse-item>
-    </el-collapse>
+      </li>
+      <li class="item-column3">
+        <div class="left-title">客户名称：</div>
+        <div class="item-content">
+          <el-input v-model="applyCustName"></el-input>
+        </div>
+      </li>
+      <li class="item-column3">
+        <div class="left-title">证件号码：</div>
+        <div class="item-content">
+          <el-input v-model="applyCustNo"></el-input>
+        </div>
+      </li>
+      <li class="item-column1 submit-class">
+        <el-button type="primary" @click="resetQueryList">查询</el-button>
+        <el-button @click="resetQuery">重置</el-button>
+      </li>
+    </div>
+    <!-- </el-collapse-item> -->
+    <!-- </el-collapse> -->
     <div class="content">
       <!-- 反欺诈申请 -->
       <!-- v-show="antiFlag!='03'&& antiFlag!='04'" -->
       <div class="address-title" v-show="antiFlag!='03'&& antiFlag!='04'">
         <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">反欺诈申请列表</span>
+        <span class="btn-add" @click="handleClickEdit()">
+          <span class="icon-add"></span> 添加
+        </span>
       </div>
       <el-table :data="antiTableData" style="width: 100%" border stripe fit highlight-current-row class="anti-table" v-show="antiFlag!='03'&& antiFlag!='04'">
         <el-table-column type="index" label="序号" width="50">
@@ -73,19 +81,16 @@
         </el-table-column>
         <el-table-column label="操作" width="180">
           <template slot-scope="scope">
-            <el-button size="mini" @click="handleClickInfo(scope.row)" >查看</el-button>
-            <el-button size="mini" @click="handleClickEdit(scope.row)" >编辑</el-button>
+            <el-button size="mini" @click="handleClickInfo(scope.row)">查看</el-button>
+            <el-button size="mini" @click="handleClickEdit(scope.row)">编辑</el-button>
           </template>
         </el-table-column>
-        
       </el-table>
       <!-- 反欺诈专员审批  反欺诈主管审批 -->
-      <!-- v-show="antiFlag=='03'||antiFlag=='04'" -->
       <div class="address-title" v-show="antiFlag=='03'||antiFlag=='04'">
         <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">反欺诈审批任务列表 </span>
       </div>
-      <!-- v-show="antiFlag=='03'||antiFlag=='04'" -->
       <el-table :data="directorTableData" style="width: 100%" border stripe fit highlight-current-row @row-dblclick="rowDbClick" v-show="antiFlag=='03'||antiFlag=='04'" class="director-table">
         <el-table-column type="index" :index="1" label="序号">
         </el-table-column>
@@ -309,14 +314,24 @@ export default {
     // 反欺诈申请编辑
     handleClickEdit(row) {
       console.log('click the row in table');
-      // 跳转到详情
+      // row 有值, 跳编辑
+      if (row) {
+        // 跳转到编辑
+        this.$router.push({
+          name: 'AntiApplyEdit',
+          params: {
+            id: row.id
+          }
+        });
+      }else{ // 否则是新增
+        this.$router.push({
+          name: 'AntiApplyEdit',
+          params: {
+            id: row.id
+          }
+        });
 
-      this.$router.push({
-        name: 'AntiApplyEdit',
-        params: {
-          id: row.id
-        }
-      });
+      }
     },
     // 反欺诈申请查看
     handleClickInfo(row) {
@@ -374,9 +389,15 @@ export default {
 
 
 
+
+
+
 /* 容器 */
 
 .anti-fraud .container {}
+
+
+
 
 
 
@@ -390,6 +411,9 @@ export default {
 }
 
 
+
+
+
 /* 两列 */
 
 .anti-fraud .item-column2 {
@@ -397,6 +421,9 @@ export default {
   float: left;
   margin: 0;
 }
+
+
+
 
 
 
@@ -408,6 +435,9 @@ export default {
   margin: 0;
   margin-bottom: 10px;
 }
+
+
+
 
 
 /* 搜索盒子 */
@@ -460,6 +490,9 @@ export default {
 
 
 
+
+
+
 /* 折叠面板头部背景色和icon */
 
 .anti-fraud .icon_hat {
@@ -470,6 +503,9 @@ export default {
 .anti-fraud .headFont {
   font-size: 16px;
 }
+
+
+
 
 
 /* 反欺诈 收缩 title */
@@ -488,7 +524,7 @@ export default {
 
 .anti-fraud .address-title {
   width: 100%;
-  height: 35px;
+  height: 40px;
   font-size: 18px;
   background: #ededed;
   display: block;
@@ -496,13 +532,67 @@ export default {
   overflow: hidden;
   background: #eef0f9;
   border: 1px solid #e6eaee;
-  height: 38px;
+
   width: 100%;
   font-size: 16px;
   color: #1f2d3d;
   text-align: left;
   vertical-align: middle;
   line-height: 40px;
+  padding-right: 10px;
+}
+
+
+
+
+/* 反欺诈 添加 提交 作废 */
+
+.anti-fraud .btn-div {
+  padding: 10px;
+  background: none;
+  color: #333;
+  border: none;
+  text-align: right;
+}
+
+.anti-fraud .icon-add {
+  background: url(../../../static/images/add.png);
+  width: 30px;
+  height: 30px;
+  background-size: 30px;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+
+
+
+
+/* 添加按钮 */
+
+.anti-fraud .btn-add {
+  cursor: pointer;
+  display: inline-block;
+  height: 40px;
+  margin-right: 14px;
+  float: right;
+  line-height: 40px;
+  background: transparent;
+}
+
+
+
+/* 头部 */
+
+.anti-fraud .title-bar {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  background: #eef0f9;
+  border: 1px solid #e6eaee;
+  /*text-indent: 10px;*/
 }
 
 </style>

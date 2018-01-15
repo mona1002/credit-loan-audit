@@ -1,3 +1,4 @@
+<!-- 复议申请任务列表 -->
 <template>
 	<div class="taskWatting">
 		<myHead class="top"></myHead>
@@ -51,7 +52,7 @@
 				      min-width="130">
 				    </el-table-column>
 				    <el-table-column
-				      prop="certType"
+				      prop="certTypeTxt"
 				      label="证件类型" 
 				      min-width="100">
 				    </el-table-column>

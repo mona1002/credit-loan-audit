@@ -66,17 +66,25 @@ import AntiFraud from '@/view/AntiFraud/AntiFraud.vue'
 // 反欺诈 申请
 import AntiApplyEdit from '@/view/AntiFraud/AntiApplyEdit.vue'
 import AntiApplyInf from '@/view/AntiFraud/AntiApplyInf.vue'
+import AntiApplyAdd from '@/view/AntiFraud/AntiApplyAdd.vue'
 import aAntiApplyInf from '@/view/AntiFraud/components/aAntiApplyInf.vue'
 
 //反欺诈调查
 import aAntiFraudInvestigation from '@/view/AntiFraud/components/aAntiFraudInvestigation.vue'
 // 审批结论
 import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
+// 反欺诈借款人资料
+import AborrowerInformationDetail from '@/view/AntiFraud/components/AborrowerInformationDetail.vue'
+// 反欺诈、复议（内匹）借款人资料
+import MborrowerInformationSetail from '@/view/AntiFraud/matchComponent/MborrowerInformationSetail.vue'
+
 // -------------------------复议---------------------
 import ReconsiderApply from '../view/Reconsider/ReconsiderComponents/ReconsiderApply.vue'//复议申请
 import reconsiderList from '../view/Reconsider/reconsiderList.vue'//复议申请任务列表
 import ReconsiderSplit from '../view/Reconsider/ReconsiderSplit.vue'//复议专员主管分屏
 // import ReconsiderAntiSplit from '../view/Reconsider/ReconsiderAntiSplit.vue'//复议反欺诈分屏
+//复议结论
+import ReconsiderationConclusion from '../view/Reconsider/ReconsiderComponents/ReconsiderationConclusion.vue'
 
 // -------------------------流程监控---------------------
 import processMoni from '../view/processMoni/processMoni.vue'
@@ -169,6 +177,16 @@ const routes = [{
   path: '/RApprovalConclusion',
   component: RApprovalConclusion
 },
+// 反欺诈 借款人资料
+{
+  path: '/AborrowerInformationDetail',
+  component: AborrowerInformationDetail
+},
+// 反欺诈、复议（内匹） 借款人资料
+{
+  path: '/MborrowerInformationSetail',
+  component: MborrowerInformationSetail
+},
 // 账务信息
 {
   path: '/RFinanceInformation',
@@ -219,18 +237,24 @@ const routes = [{
   path:'/AntiFraud',
   component:AntiFraud
 },
-// 反欺诈 申请信息
+// 反欺诈申请 编辑
 {
   path:'/AntiApplyEdit',
   name:'AntiApplyEdit',
   component:AntiApplyEdit
 },
-// 反欺诈申请
+// 反欺诈申请 查看
 {
   path:'/AntiApplyInf',
   name:'AntiApplyInf',
   component:AntiApplyInf
 },
+// 反欺诈申请 添加
+{
+  path:'/AntiApplyAdd',
+  name:'AntiApplyAdd',
+  component:AntiApplyAdd
+}, 
 {
   path:'/aAntiApplyInf',
   component:aAntiApplyInf
@@ -268,6 +292,12 @@ const routes = [{
   path:'/ReconsiderSplit',
   component:ReconsiderSplit
 },
+//复议结论
+{
+  path:'/ReconsiderationConclusion',
+  component:ReconsiderationConclusion
+},
+
 // {
 //   path:'/ReconsiderAntiSplit',
 //   component:ReconsiderAntiSplit

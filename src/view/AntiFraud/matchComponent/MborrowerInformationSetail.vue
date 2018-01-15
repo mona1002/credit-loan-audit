@@ -1,4 +1,4 @@
-<!-- 借款人资料详情 -->
+<!-- 反欺诈（复议） 借款人资料详情 -->
 <template>
 	<div class="borrowerInformationSetail">
 		<el-collapse v-model="activeNames" @change="handleChange">
@@ -23,22 +23,22 @@
 				      <el-table-column
 				        prop="estateType"
 				        label="房产类型"
-				        min-width="120">
+				        min-width="130">
 				      </el-table-column>
 				      <el-table-column
 				        prop="propertyType"
 				        label="产权性质"
-				        min-width="100">
+				        min-width="130">
 				      </el-table-column>
 				      <el-table-column
 				        prop="coveredArea"
 				        label="建筑面积[m^2]"
-				        min-width="120">
+				        min-width="130">
 				      </el-table-column>
 				      <el-table-column
 				        prop="unitPrice"
 				        label="建筑单价[元]"
-				        min-width="110">
+				        min-width="130">
 				      </el-table-column>
 				      <el-table-column
 				        prop="estateAddress"
@@ -59,7 +59,7 @@
 				      <el-table-column
 				        prop="loanPeriod"
 				        label="贷款期限[月]"
-				        min-width="110"
+				        min-width="130"
 				        >
 				      </el-table-column>
 				      <el-table-column
@@ -75,7 +75,7 @@
 				      <el-table-column
 				        prop="restLoans"
 				        label="贷款余额[元]"
-				        min-width="110">
+				        min-width="130">
 				      </el-table-column>
 			    </el-table>
 		  	</el-collapse-item>
@@ -461,7 +461,7 @@
 				    		<!-- <el-input v-model="rptInfo.crSource"></el-input> -->
 				    	</li>
 					    <li>
-					    	<label>有无征信报告查询记录：</label>
+					    	<label>有无征信报告查询记录:</label>
 					    	<span>{{rptInfo.crHasRecord}}</span>
 					    	<!-- <el-input v-model="rptInfo.crHasRecord"></el-input> -->
 						</li>
@@ -547,8 +547,8 @@
 		  		<div class="qita">
 				    <ol>
 				    	<li>
-				    		<label>其他:</label>
-				    		<el-tooltip class="item" effect="dark" :content="otherInfo.content" :disabled="otherInfo.content==''" placement="top">
+				    		<label>其他：</label>
+				    		<el-tooltip class="item" effect="dark" :content="otherInfo.content" :disabled="otherInfo.content==null" placement="top">
 						      <div>{{otherInfo.content}}</div>
 						    </el-tooltip>
 				    	</li>
@@ -594,49 +594,10 @@
 	        taskInWaitting:'',
 	      };
 	    },
-	    props:['isFull'],
-	    judgeFlag:'',
 	    mounted(){
 			//一进入页面就发送请求
-			this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-		    if (this.judgeFlag.flag == '01') {
-		        this.taskInWaitting = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
-		    } else if (this.judgeFlag.flag == '02') {
-		        this.taskInWaitting = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-		    }
-
-			//this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-			this.request(this.taskInWaitting.applyId);
-
-	  		if(this.isFull == false){// 分屏
-	  			//信用卡使用总况
-	  			$(".xinyongka").width('930px');
-	  			$(".xinyongka ul li span").width('150px');
-	  			//负债信息
-	  			$(".fuzhaixinxi").width('930px');
-	  			$(".fuzhaixinxi ol li span").width('150px');
-	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 150px )',"padding-right":'calc( 16.6% - 150px )'});
-	  			//征询报告
-	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 150px )',"padding-right":'calc( 49.9% - 150px )'});
-	  			$(".zhengxunbaogao ol li .tipDiv").width('150px');
-	  			//其他信息
-	  			$(".qita").width('930px');
-	  			$(".qita ol li").css({'padding-right': 'calc( 49.9% - 155px )','padding-left': 'calc( 16.6% - 155px )'});			
-	  			
-	  		}else if(this.isFull == true){// 全屏
-	  			$(".xinyongka").width('100%');
-	  			$(".xinyongka ul li span").width('200px');
-	  			//负债信息
-	  			$(".fuzhaixinxi").width('100%');
-	  			$(".fuzhaixinxi ol li span").width('200px');
-	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 180px )',"padding-right":'calc( 16.6% - 180px )'});
-	  			//征询报告
-	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 174px )'});
-	  			$(".zhengxunbaogao ol li .tipDiv").width('200px');
-	  			//其他信息
-	  			$(".qita").width('100%');
-	  			$(".qita ol li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 174px )'});
-	  		}
+			this.taskInWaitting = JSON.parse(localStorage.getItem('internalObj'));
+			this.request(this.taskInWaitting.matchApplyId);
 		},
 	    methods:{
 	    	handleChange(){
@@ -687,19 +648,6 @@
 		        	}else if(this.borestateList[i].mortgageStatus	=='1'){
 		        		this.borestateList[i].mortgageStatus = '未抵押'
 		        	};
-		        	//建筑单价 保留两位小数点
-		        	if(this.borestateList[i].unitPrice != null){
-		        		this.borestateList[i].unitPrice = this.formatNumber(this.borestateList[i].unitPrice,2,0);
-		       		 };
-		        	
-		        	//贷款余额 保留两位小数点
-		        	if(this.borestateList[i].restLoans != null){
-		        		this.borestateList[i].restLoans = this.formatNumber(this.borestateList[i].restLoans,2,0);
-		       		 };
-		        	//月供 保留两位小数点
-		        	if(this.borestateList[i].monthlyPay != null){
-			        	this.borestateList[i].monthlyPay = this.formatNumber(this.borestateList[i].monthlyPay,2,0);
-			        };
 
 		        }
 		        /*车辆信息*/
@@ -727,18 +675,6 @@
 		        	}else if(this.carInfoList[i].buyInsur =='02'){
 		        		this.carInfoList[i].buyInsur = '车损险'
 		        	};
-		        	//车辆购置价 保留两位小数点
-		        	if(this.carInfoList[i].carPrice != null){
-			        	this.carInfoList[i].carPrice = this.formatNumber(this.carInfoList[i].carPrice,2,0);
-			        };
-			        //月供 保留两位小数点
-		        	if(this.carInfoList[i].monthlyPay != null){
-			        	this.carInfoList[i].monthlyPay = this.formatNumber(this.carInfoList[i].monthlyPay,2,0);
-			        };
-			        //贷款余额 保留两位小数点
-		        	if(this.carInfoList[i].restLoans != null){
-			        	this.carInfoList[i].restLoans = this.formatNumber(this.carInfoList[i].restLoans,2,0);
-			        };
 
 		        }
 		        /*信用卡使用明细*/
@@ -767,29 +703,9 @@
 		        	}else if(this.cardDetList[i].accountStatus	=='08'){
 		        		this.cardDetList[i].accountStatus = '核销'
 		        	};
-		        	//信用卡使用明细 信用额度 保留两位小数点
-		        	if(this.cardDetList[i].cardAmt != null){
-			        	this.cardDetList[i].cardAmt = this.formatNumber(this.cardDetList[i].cardAmt,2,0);
-			        };
-			        //信用卡使用明细 已使用额度 保留两位小数点
-		        	if(this.cardDetList[i].usedAmt != null){
-			        	this.cardDetList[i].usedAmt = this.formatNumber(this.cardDetList[i].usedAmt,2,0);
-			        };
-			        //信用卡使用明细 本期应还款金额 保留两位小数点
-		        	if(this.cardDetList[i].actRepaymentAmt != null){
-			        	this.cardDetList[i].actRepaymentAmt = this.formatNumber(this.cardDetList[i].actRepaymentAmt,2,0);
-			        };
-			        //信用卡使用明细 本期实际还款金额 保留两位小数点
-		        	if(this.cardDetList[i].realRepaymentAmt != null){
-			        	this.cardDetList[i].realRepaymentAmt = this.formatNumber(this.cardDetList[i].realRepaymentAmt,2,0);
-			        };
 		        }
 		        /*信用卡使用总况*/
-		        if(res.data.borCard == null){
-		        	this.borCard = this.borCard;
-		        }else{
-		        	this.borCard=res.data.borCard;
-		        };
+		        this.borCard=res.data.borCard;
 		        /*贷款明细*/
 		        this.loanDetailList=res.data.loanDetailList;
 		        for(var i=0;i<this.loanDetailList.length;i++){
@@ -833,183 +749,22 @@
 		        	}else if(this.loanDetailList[i].repayFrequency=='03'){
 		        		this.loanDetailList[i].repayFrequency = '一次性还清'
 		        	};
-		        	//贷款明细 贷款合同金额 保留两位小数点
-		        	if(this.loanDetailList[i].loanContValue != null){
-			        	this.loanDetailList[i].loanContValue = this.formatNumber(this.loanDetailList[i].loanContValue,2,0);
-			        };
-			        //贷款明细 贷款余额 保留两位小数点
-		        	if(this.loanDetailList[i].loanBal != null){
-			        	this.loanDetailList[i].loanBal = this.formatNumber(this.loanDetailList[i].loanBal,2,0);
-			        };
-			        //贷款明细 本期应还款金额 保留两位小数点
-		        	if(this.loanDetailList[i].presentRepayAmt != null){
-			        	this.loanDetailList[i].presentRepayAmt = this.formatNumber(this.loanDetailList[i].presentRepayAmt,2,0);
-			        };
-			        //贷款明细 本期实际还款金额 保留两位小数点
-		        	if(this.loanDetailList[i].curMonthRepayAmt != null){
-			        	this.loanDetailList[i].curMonthRepayAmt = this.formatNumber(this.loanDetailList[i].curMonthRepayAmt,2,0);
-			        };
-			        //贷款明细 当前逾期金额 保留两位小数点
-		        	if(this.loanDetailList[i].presentOverAmt != null){
-			        	this.loanDetailList[i].presentOverAmt = this.formatNumber(this.loanDetailList[i].presentOverAmt,2,0);
-			        };
 
 		        }
 		        /*贷款总况*/
-		        if(res.data.loanInfo == null){
-		        	this.loanInfo = this.loanInfo;
-		        }else{
-		        	this.loanInfo=res.data.loanInfo;
-		        };
+		        this.loanInfo=res.data.loanInfo;
 		        /*负债信息*/
-		        if(res.data.borDebt==null){
-		        	this.borDebt=this.borDebt
-		        }else{
-		        	this.borDebt=res.data.borDebt;
-		        	//负债信息 信用卡每月还款 保留两位小数点
-		        	if(this.borDebt.monthRepayAmt != null){
-		        		this.borDebt.monthRepayAmt = this.formatNumber(this.borDebt.monthRepayAmt,2,0);
-		        	};
-		        	//负债信息 助学贷每月还款额 保留两位小数点
-		        	if(this.borDebt.studentLoanAmt != null){
-			        	this.borDebt.studentLoanAmt = this.formatNumber(this.borDebt.studentLoanAmt,2,0);
-			        };
-		        	//负债信息 房贷每月还款额 保留两位小数点
-		        	if(this.borDebt.houseLoanAmt != null){
-			        	this.borDebt.houseLoanAmt = this.formatNumber(this.borDebt.houseLoanAmt,2,0);
-			        };
-		        	//负债信息 车贷每月还款额 保留两位小数点
-		        	if(this.borDebt.carLoanAmt != null){
-			        	this.borDebt.carLoanAmt = this.formatNumber(this.borDebt.carLoanAmt,2,0);
-			        };
-		        	//负债信息 其他贷款每月还款额 保留两位小数点
-		        	if(this.borDebt.otherLoanAmt != null){
-			        	this.borDebt.otherLoanAmt = this.formatNumber(this.borDebt.otherLoanAmt,2,0);
-			        };
-		        	//负债信息 负债合计 保留两位小数点
-		        	if(this.borDebt.totalLoan != null){
-			        	this.borDebt.totalLoan = this.formatNumber(this.borDebt.totalLoan,2,0);
-			        };
-		        }
+		        this.borDebt=res.data.borDebt;
 		        /*征询报告*/
-		        if(res.data.rptInfo == null){
-		        	this.rptInfo == this.rptInfo;
-		        }else{
-		        	this.rptInfo=res.data.rptInfo; 
-		        };
+		        this.rptInfo=res.data.rptInfo;  
 		        /*流水明细*/
 		        this.incomeList=res.data.incomeList;
-		        for(var i=0;i<this.incomeList.length;i++){
-		        	//流水明细 n 保留两位小数点
-		        	if(this.incomeList[i].n != null){
-			        	this.incomeList[i].n = this.formatNumber(this.incomeList[i].n,2,0);
-			        };
-			        //流水明细 n1 保留两位小数点
-		        	if(this.incomeList[i].n1 != null){
-			        	this.incomeList[i].n1 = this.formatNumber(this.incomeList[i].n1,2,0);
-			        };
-			        //流水明细 n2 保留两位小数点
-		        	if(this.incomeList[i].n2 != null){
-			        	this.incomeList[i].n2 = this.formatNumber(this.incomeList[i].n2,2,0);
-			        };
-			        //流水明细 n3 保留两位小数点
-		        	if(this.incomeList[i].n3 != null){
-			        	this.incomeList[i].n3 = this.formatNumber(this.incomeList[i].n3,2,0);
-			        };
-			        //流水明细 n4 保留两位小数点
-		        	if(this.incomeList[i].n4 != null){
-			        	this.incomeList[i].n4 = this.formatNumber(this.incomeList[i].n4,2,0);
-			        };
-			        //流水明细 n5 保留两位小数点
-		        	if(this.incomeList[i].n5 != null){
-			        	this.incomeList[i].n5 = this.formatNumber(this.incomeList[i].n5,2,0);
-			        };
-			        //流水明细 avgIncome 保留两位小数点
-		        	if(this.incomeList[i].avgIncome != null){
-			        	this.incomeList[i].avgIncome = this.formatNumber(this.incomeList[i].avgIncome,2,0);
-			        };
-		        }
 		        /*其他信息*/
-		        if(res.data.otherInfo == null){
-		        	this.otherInfo = this.otherInfo;
-		        }else{
-		        	this.otherInfo=res.data.otherInfo;
-		        };
+		        this.otherInfo=res.data.otherInfo;
 		        /*console.log(this.datas);*/
 		      });
-		  	},
-		  	//保留两位小数 整数千分位
-			formatNumber(num,cent,isThousand) {
-			    num = num.toString().replace(/\$|\,/g,'');
-			 
-			  	// 检查传入数值为数值类型
-			  	if(isNaN(num))
-			    	num = "0";
-			 
-			  	// 获取符号(正/负数)
-			  	let sign = (num == (num = Math.abs(num)));
-
-			  	num = Math.floor(num*Math.pow(10,cent)+0.50000000001); // 把指定的小数位先转换成整数.多余的小数位四舍五入
-			  	let cents = num%Math.pow(10,cent);       // 求出小数位数值
-			  	num = Math.floor(num/Math.pow(10,cent)).toString();  // 求出整数位数值
-			  	cents = cents.toString();        // 把小数位转换成字符串,以便求小数位长度
-			 
-			  	// 补足小数位到指定的位数
-			  	while(cents.length<cent)
-			    	cents = "0" + cents;
-			 
-		    	for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
-		      		num = num.substring(0,num.length-(4*i+3))+','+ num.substring(num.length-(4*i+3));
-			  
-			  	if (cent > 0){
-			  		//console.log(cent);
-			  		//console.log(((sign)?'':'-') + num + '.' + cents);
-			  		if(sign == true){
-			  			return (((sign)?'':'-') + num + '.' + cents);
-			  		}else if(sign == false){
-			  			return '0.00'
-			  		}
-			  	}else{
-			  		//console.log(((sign)?'':'-') + num);
-			    	return (((sign)?'':'-') + num);
-			    }
-			},
-	    },
-	    watch:{
-		  	isFull:function(val){
-		  		console.log(this.isFull);
-		  		if(this.isFull == false){// 分屏
-	  			//信用卡使用总况
-	  			$(".xinyongka").width('930px');
-	  			$(".xinyongka ul li span").width('150px');
-	  			//负债信息
-	  			$(".fuzhaixinxi").width('930px');
-	  			$(".fuzhaixinxi ol li span").width('150px');
-	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 150px )',"padding-right":'calc( 16.6% - 150px )'});
-	  			//征询报告
-	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 150px )',"padding-right":'calc( 49.9% - 150px )'});
-	  			$(".zhengxunbaogao ol li .tipDiv").width('150px');
-	  			//其他信息
-	  			$(".qita").width('930px');
-	  			$(".qita ol li").css({'padding-right': 'calc( 49.9% - 155px )','padding-left': 'calc( 16.6% - 155px )'});			
-	  			
-	  		}else if(this.isFull == true){// 全屏
-	  			$(".xinyongka").width('100%');
-	  			$(".xinyongka ul li span").width('200px');
-	  			//负债信息
-	  			$(".fuzhaixinxi").width('100%');
-	  			$(".fuzhaixinxi ol li span").width('200px');
-	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 180px )',"padding-right":'calc( 16.6% - 180px )'});
-	  			//征询报告
-	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 174px )'});
-	  			$(".zhengxunbaogao ol li .tipDiv").width('200px');
-	  			//其他信息
-	  			$(".qita").width('100%');
-	  			$(".qita ol li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 174px )'});
-	  		}
-		  	}
-
-		},
+		  },
+	    }
 	}
 </script>
 <style type="text/css" scoped>
@@ -1029,9 +784,6 @@
 		font-size: 16px;
 	}
 	/* 信用卡使用总况 */
-	.xinyongka{
-		width: 926px;
-	}
 	.xinyongka ul{
 		float: left;
 		width: 33.3%;
@@ -1047,35 +799,25 @@
 		text-align: right;
 	}
 	.xinyongka ul li span{
-		width: 150px;
 		display: inline-block;
+		width: 200px;
 		text-align: left;
 	}
-	.daikuanzongkuang{
-		width: 926px;
-	}
 	/* 贷款总况 */
-	.xinyongka.daikuanzongkuang ul li label{
+	.daikuanzongkuang ul li label{
 		padding-right: 10px;
-		width: 128px;
-	}
-	.daikuanzongkuang ul:nth-of-type(3) li:nth-of-type(4) label{
-		width: 136px;
-		margin-left: -8px;
+		width: 140px;
 	}
   table.mytable{
     border: 1px solid #d8dce5;  
     border-collapse: collapse;
   }
   table.mytable th {  
-    padding: 8px;
-    border: 1px solid #d8dce5;  
-    background-color: #e6ebf5;
+        padding: 8px;
+        border: 1px solid #d8dce5;  
+        background-color: #e6ebf5;
   }
 /* 负债信息 */
-.fuzhaixinxi{
-	width: 926px;
-}
 .fuzhaixinxi ol{
 	width: 100%;
 }
@@ -1083,56 +825,49 @@
 	width: 33.3%;
 	float: left;
 	margin-top:20px;
-	height: 28px;
 	text-align: center;
 }
 .fuzhaixinxi ol li label{
 	display: inline-block;
-	width: 155px;
+	width: 172px;
 	text-align: right;
-	padding-right: 5px;
 }
 .fuzhaixinxi ol li span{
-	display: inline-block;
-	width: 150px;
-	text-align: left;
+    display: inline-block;
+    width: 200px;
+    text-align: left;
+    height: 28px;
+}
+.fuzhaixinxi ol:nth-of-type(3) li:nth-of-type(1) label{
+    line-height: 1;
+}
+.fuzhaixinxi ol:nth-of-type(3) li:nth-of-type(1) span{
+    position: relative;
+    top: -3px;
 }
 /* 负债信息：负债合计 */
 .fuzhaixinxi ol li.zongji input{
 	border: none;
 }
-.fuzhaixinxi ol:nth-of-type(2) li:nth-of-type(2) label{
-	line-height: 1;
-}
-.fuzhaixinxi ol:nth-of-type(2) li:nth-of-type(2) span{
-	position: relative;
-	top: -3px;
-}
-.fuzhaixinxi ol:nth-of-type(3) li:nth-of-type(1) label{
-	line-height: 1;
-}
-.fuzhaixinxi ol:nth-of-type(3) li:nth-of-type(1) span{
-	position: relative;
-	top: -3px;
-}
-
 /* 负债信息：文字说明 */
 ol.num li{
 	margin-bottom: 10px;
 }
+ol.num li:nth-of-type(1) span{
+	height: 54px;
+	line-height: 54px;
+}
 ol.num li:nth-of-type(2){
 	width: 66.6%;
 	text-align: left;
-	height: 54px;
-	padding-left:calc( 16.6% - 150px );
-	padding-right:calc( 16.6% - 150px );
+	padding: 0 calc( 16.6% - 186px );
 }
 ol.num li:nth-of-type(2) label{
 	height: 54px;
 	line-height: 54px;
 }
 ol.num li:nth-of-type(2) div{
-	width: calc( 100% - 155px );
+	width: calc( 100% - 172px );
 	height: 54px;
 	float: right;
 	padding-left: 10px;
@@ -1143,59 +878,28 @@ ol.num li:nth-of-type(2) div{
 .zhengxunbaogao ol{
 	width: 100%;
 }
-.zhengxunbaogao ol li label{
-	display: inline-block;
-	width: 150px;
-	text-align: right;
-	padding-right: 5px;
-	color: #475669;
-}
-.zhengxunbaogao ol li span{
-	display: inline-block;
-	width: 150px;
-	text-align: left;
-}
-.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) label{
-	line-height: 1;
-}
-.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) span{
-	position: relative;
-	top: -3px;
-}
-.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(3) label{
-	line-height: 1;
-	float: left;
-}
-.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(3) span{
-	float: left;
-	margin-top: 3px;
-}
-.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(1) label{
-	height: 28px;
-    line-height: 28px;
-    position: relative;
-    top: -9px;
-}
-.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(1) .tipDiv{
-	width: 150px;
-	height: 28px;
-	line-height: 28px;
-	display: inline-block;
-}
 .zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(1) span{
-	width: 100%;
+	 width: 100%;
 	display: inline-block;
 	overflow: hidden;
 	text-overflow:ellipsis;
 	white-space: nowrap;
 }
+.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(3) label{
+	width: 186px;
+	line-height: 1;
+}
+.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(3) span{
+	position: relative;
+	top: -5px;
+}
 .zhengxunbaogao ol:nth-of-type(2) li{
 	width: 100%;
-	height: 75px;
 	text-align: left;
-	margin: 20px 0;
-	padding-left: calc(16.6% - 150px);
-    padding-right: calc(49.9% - 150px);
+	padding-left: calc( 16.6% - 186px );
+	padding-right: calc( 49.9% - 186px );
+	margin-bottom: 20px;
+	margin-top: 0;
 }
 .zhengxunbaogao ol:nth-of-type(2) li label{
 	line-height: 75px;
@@ -1204,10 +908,30 @@ ol.num li:nth-of-type(2) div{
 .zhengxunbaogao ol:nth-of-type(2) li div{
 	float: left;
 	height: 75px;
-	width: calc( 100% - 150px );
+	width: calc( 100% - 172px );
 	padding-left: 10px;
 	overflow: auto;
 	border: 1px solid #d8dce5;
+}
+
+.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(1) label{
+    height: 28px;
+    line-height: 28px;
+    position: relative;
+    top: -9px;
+}
+.zhengxunbaogao .tipDiv{
+	width: 200px;
+    height: 28px;
+    line-height: 28px;
+    display: inline-block;
+}
+.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(1) span{
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .reportLabel{
 	float: left;
@@ -1216,17 +940,17 @@ ol.num li:nth-of-type(2) div{
 }
 /* 其他信息 */
 .qita{
-	width: 930px;
+	width: 100%;
 }
 .qita ol li{
 	width: 100%;
 	margin-top: 20px;
-	padding-left: calc(16.6% - 155px);
-    padding-right: calc(49.9% - 155px);
+	padding-left: calc( 16.6% - 186px );
+	padding-right: calc( 49.9% - 186px );
 }
 .qita ol div{
 	display: inline-block;
-	width: calc( 100% - 170px );
+	width: calc( 100% - 172px );
 	height: 117px;
 	overflow: auto;
 	padding-left: 10px;
