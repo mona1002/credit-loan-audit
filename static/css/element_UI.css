@@ -2196,6 +2196,10 @@ height: 40px;
   padding-left: 10px;
 }
 
+.creditApproval-class .el-input--suffix .el-input__inner{
+  padding-left: 10px;
+}
+
 
 .creditApproval-class .el-form-item__label{
   padding: 0;
