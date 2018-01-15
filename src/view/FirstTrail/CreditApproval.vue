@@ -2116,7 +2116,7 @@ export default {
 
 
 .creditApproval-class .el-input {
-  width: calc( 100% - 120px);
+  width: calc( 100% - 130px);
   /*width: 100%;*/
   height: 35px;
   line-height: 35px;
@@ -2125,7 +2125,7 @@ export default {
 .creditApproval-class .el-select {
   height: 100%;
   line-height: 100%;
-  width: calc( 100% - 120px);
+  width: calc( 100% - 130px);
 }
 
 .creditApproval-class .el-input--suffix .el-input__inner {
@@ -2514,15 +2514,15 @@ export default {
 }
 
 .creditApproval-class .back-form .el-form-item__label {
-  width: 120px;
+  width: 125px;
 }
 
 .creditApproval-class .back-form .width-120 .el-form-item__label {
-  width: 120px;
+  width: 125px;
 }
 
 .creditApproval-class .back-form .width-110 .el-form-item__label {
-  width: 120px;
+  width: 125px;
 }
 
 
