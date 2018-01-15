@@ -46,7 +46,12 @@ height: 40px;
 .ApprovalConclusion .el-table {
   font-size: 13px;
 }
-
+/* 表格的x 滚动条 ...+反欺诈审批结论轨迹 */
+.FinanceInformation .el-table__body-wrapper,
+.ApprovalConclusion .el-table__body-wrapper,
+.aAntiConclusionPath .el-table__body-wrapper{
+overflow-x: hidden;
+}
 .FinanceInformation .el-table__header-wrapper tr,
 .ApprovalConclusion .el-table__header-wrapper tr {
   height: 40px;
