@@ -318,23 +318,23 @@
             </el-form-item>
           </div>
           <div class="back-form-li">
-            <el-form-item label="审批倍数：" class="item-column2 width-120">
+            <el-form-item label="审批倍数：" class="item-column2 width-120 item-label-show">
               {{caculData.appmult}}
             </el-form-item>
-            <el-form-item label="月还款额[元]：" class="item-column2 width-120">
+            <el-form-item label="月还款额[元]：" class="item-column2 width-120 item-label-show">
               {{caculData.eachTermamt}}
             </el-form-item>
           </div>
           <div class="back-form-li">
-            <el-form-item label="内部负债率：" class="item-column2">
+            <el-form-item label="内部负债率：" class="item-column2 item-label-show">
               {{caculData.inteDebitrate}}
             </el-form-item>
-            <el-form-item label="总信用负债率：">
+            <el-form-item label="总信用负债率：" class="item-column2 item-label-show">
               {{caculData.creditDebitRate}}
             </el-form-item>
           </div>
           <div class="back-form-li">
-            <el-form-item label="总负债率：">
+            <el-form-item label="总负债率：" class="item-column2 item-label-show">
               {{caculData.totalRate}}
             </el-form-item>
           </div>
@@ -2525,6 +2525,9 @@ export default {
   width: 125px;
 }
 
+.creditApproval-class .back-form .item-label-show .el-form-item__label{
+  margin-right: 15px;
+}
 
 
 
