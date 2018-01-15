@@ -43,7 +43,7 @@
             <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <!-- √ -->
-            <cborrowerInformationDetail v-if=" this.tabContent2==4"></cborrowerInformationDetail>
+            <AborrowerInformationDetail v-if=" this.tabContent2==4"></AborrowerInformationDetail>
             <!-- √ -->
             <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
             <AntiCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></AntiCreditForm>
@@ -74,7 +74,7 @@
   // import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配查看 --》 aV
   import cremark from '../FirstTrail/checkComponent/remarkDetail.vue' //备注信息
   import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息  
-  import cborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料
+  import AborrowerInformationDetail from "./components/AborrowerInformationDetail.vue"; //借款人资料
   import AntiCreditForm from "./matchComponent/AntiCreditForm.vue"; //信审表-反欺诈匹配文件中-与匹配查看页面信审表一致
   import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信
   import aAprovalConclusion from './components/aAprovalConclusion.vue' //信审审批结论轨迹
@@ -197,7 +197,7 @@
       approvalConclus, //审批结论
       aAntiFraudInvestigation, //反欺诈调查
       cremark, //备注信息
-      cborrowerInformationDetail, //借款人资料
+      AborrowerInformationDetail, //借款人资料
       capplicationInformationDetail, //申请信息
       // aMAnitAudioVisual,
       // 编辑

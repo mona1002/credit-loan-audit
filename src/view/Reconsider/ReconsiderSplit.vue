@@ -43,14 +43,14 @@
             <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <!-- √ -->
-            <cborrowerInformation v-if=" this.tabContent2==4"></cborrowerInformation>
+            <AborrowerInformationDetail v-if=" this.tabContent2==4"></AborrowerInformationDetail>
 
             <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
-            <FMCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></FMCreditForm>
             <!-- √ 内部匹配中信审表 -->
-            <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
+            <FMCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></FMCreditForm>
             <!-- √ -->
             <!-- 实地征信 -->
+            <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
             <!-- 复议申请 -->
             <ReconsiderApply v-if=" this.tabContent2==8"></ReconsiderApply>
             <!-- √ -->
@@ -58,7 +58,8 @@
             <aAntiApplyInf v-if=" this.tabContent2==9"></aAntiApplyInf>
             <!-- √ -->
             <!-- 复议结论 -->
-            <!-- <aAntiConclusionPath v-if=" this.tabContent2==10">复议结论</aAntiConclusionPath> -->
+            <ReconsiderationConclusion v-if=" this.tabContent2==10"></ReconsiderationConclusion>
+            <!-- √ -->
           </div>
         </div>
       </div>
@@ -71,12 +72,13 @@
   import cremark from '../FirstTrail/checkComponent/remarkDetail.vue' //备注信息
   // import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配查看 --》 aV
   import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息  
-  import cborrowerInformation from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料
+  import AborrowerInformationDetail from "../AntiFraud/components/AborrowerInformationDetail.vue"; //借款人资料
   import FMCreditForm from "../FinalTrial/FinalMatchComponent/FMCreditForm.vue"; //信审表-与内部匹配打开的是同一个页面
   import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信
   import ReconsiderApply from './ReconsiderComponents/ReconsiderApply.vue' //复议申请
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf.vue' //反欺诈结论
-  //复议结论
+  import ReconsiderationConclusion from './ReconsiderComponents/ReconsiderationConclusion.vue'  //复议结论
+  
   // --------------------------------------------------------------------------------------------
   // 编辑（含有-未更新）
   import InternalMatch from "../FirstTrail/InternalMatch.vue";
@@ -168,11 +170,12 @@
       AnitAudioVisual,
       cremark,
       capplicationInformationDetail,
-      cborrowerInformation,
+      AborrowerInformationDetail,
       FMCreditForm,
       creditInvestigation,
       ReconsiderApply, //复议申请
       aAntiApplyInf, //反欺诈结论
+      ReconsiderationConclusion,//复议结论
       InternalMatch,
       PhoneCredit,
     }
