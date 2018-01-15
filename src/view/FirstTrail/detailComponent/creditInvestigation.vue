@@ -27,7 +27,7 @@
 					</ul>
 					<ul class="headul">
 						<li><label>实地人员1：</label><span>{{bb}}</span></li>
-						<li><label>不核对借款人有效证件原因：</label><span>{{datas.isCheckDocRemark}}</span></li>
+						<li><label v-show="datas.isCheckDocTxt=='否'">不核对借款人有效证件原因：</label><span>{{datas.isCheckDocRemark}}</span></li>
 						<li><label>实地发起源：</label><span>{{cc}}</span></li>
 					</ul>
 			  </el-collapse-item>
@@ -310,6 +310,7 @@
 	}
 	ul.headul li{
 		margin-top: 10px;
+		height: 24px;
 	} 
 	ul.headul li:last-child{
 		margin-bottom: 10px;
