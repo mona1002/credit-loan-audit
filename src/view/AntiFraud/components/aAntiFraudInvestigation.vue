@@ -1,3 +1,4 @@
+<!-- 反欺诈调查 -->
 <template>
 	<div class="aAntiFraudInvestigation">
 		<el-collapse v-model="activeNames" @change="handleChange">
@@ -34,63 +35,6 @@
 					</tr>
 					</tbody>
 				</table>
-			    <!-- <el-table
-			      :data="fraudApplyInfo"
-			      style="width: 100%"
-			      border
-			      class="car">
-			    				      <el-table-column
-			    				        type="index"
-			    				      	:index='1'
-			    				      	label="序号"
-			    				      	min-width="50">
-			    				      </el-table-column>
-			    				      <el-table-column
-			    				        prop="applySubno"
-			    				        label="进件编号"
-			    				        min-width="110">
-			    				      </el-table-column>
-			    				      <el-table-column
-			    				        prop="caseNum"
-			    				        label="案件编号"
-			    				        min-width="100">
-			    				      </el-table-column>
-			    				      <el-table-column
-			    				        prop="applyCustName"
-			    				        label="客户姓名"
-			    				        min-width="100">
-			    				      </el-table-column>
-			    				      <el-table-column
-			    				        prop="certCode"
-			    				        label="身份证号"
-			    				        min-width="100">
-			    				      </el-table-column>
-			    				      <el-table-column
-			    				        prop="proName"
-			    				        label="申请产品"
-			    				        min-width="100">
-			    				      </el-table-column>
-			    				      <el-table-column
-			    				        prop="appOrgName"
-			    				        label="进件机构"
-			    				        min-width="100">
-			    				      </el-table-column>
-			    				      <el-table-column
-			    				        prop="salePersonName"
-			    				        label="销售人员"
-			    				        min-width="100">
-			    				      </el-table-column>
-			    				      <el-table-column
-			    				        prop="applyPersonName"
-			    				        label="提报人"
-			    				        min-width="100">
-			    				      </el-table-column>
-			    				      <el-table-column
-			    				        prop="appOrgName"
-			    				        label="提报组别"
-			    				        min-width="100">
-			    				      </el-table-column>
-			    </el-table> -->
 		  	</el-collapse-item>
 		  	<el-collapse-item name="2">
 				<template slot="title">
@@ -99,8 +43,8 @@
 				</template>
 			    <div class="tibao">
 			    	<ul>
-			    		<li><label>提报人工号：</label><p>33333333{{fraudApplyInfo.applyCode}}</p></li>
-			    		<li><label>提报人姓名：</label><p>粉红丝带{{fraudApplyInfo.applyPersonName}}</p></li>
+			    		<li><label>提报人工号：</label><p>{{fraudApplyInfo.applyCode}}</p></li>
+			    		<li><label>提报人姓名：</label><p>{{fraudApplyInfo.applyPersonName}}</p></li>
 			    		<li><label>提报渠道：</label><p>{{fraudApplyInfo.channelTxt}}</p></li>
 			    	</ul>
 			    	<div>
@@ -108,7 +52,6 @@
 			    		<el-input
 						  type="textarea"
 						  :rows="3"
-						  placeholder="请输入内容"
 						  v-model="reason"
 						  disabled>
 						</el-input>
@@ -361,7 +304,7 @@
 				activeNames: ['1','2','3','4','5','6','7','8','9','10'],
 				fraudApplyInfo:'',
 				hitRuleList:[
-					/*{
+					{
 		                ruleId:"xxx", // 规则ID
 		                ruleContent:"方式开发健康", // 命中规则名称
 		                custCount:0 // 命中客户数
@@ -390,7 +333,7 @@
 		                ruleId:"xxx", // 规则ID
 		                ruleContent:"方式开发健康", // 命中规则名称
 		                custCount:20 // 命中客户数
-		            },*/
+		            },
 				],
 				fraudTelCheckList:[],
 				fraudAuditInfo:{
@@ -408,7 +351,7 @@
 				currentPage:1,// 默认显示的当前页
 				setPageSize:10,
 				recordList:[
-		          /*{
+		          {
 		            ruleId:"xxxx", // 规则Id
 		            ruleContent:"功夫功夫", // 命中规则的名称
 		            applySubNo:"13424675787", // 进件编号
@@ -487,7 +430,7 @@
 		            custName:"和规范化风格哈", // 命中客户名称
 		            status:"而非给", // 状态
 		            statusTxt:"法人股3" // 状态文本
-		         },*/
+		         },
 		      ],
 		      /*反欺诈申请ID*/
 		      appinfoId:'',
@@ -523,7 +466,7 @@
 			/*先查询列表*/
 			request(val){
 				this.post('antiFraud/getAntiFraudSurveyInfo',{
-		        'appinfoId':val
+		        'appinfoId':442524
 		      }
 	          ).then(res => {
 	          	if(res.statusCode==200 &&　res.data!=null){
@@ -673,27 +616,11 @@
 		    },
 		    /*解除*/
 		 	relieve(){
-		 		// for(var i=0;i<this.multipleSelection.length;i++){
-		   //      	if(this.multipleSelection[i].statusTxt == '已解除' || this.multipleSelection[i].statusTxt == '解除中'){
-		   //      		this.deldialogVisible = true;
-		   //      		return;
-		   //      	}else{
-		   //      		this.post("antiFraud/batchUpdateHitRule",{
-
-		   //      		}).then(res=>{
-
-		   //      		})
-		   //      	}
-		   //      }
-		   		/*var fg = this.multipleSelection.every(function(item){
-		   			return (item.statusTxt == '法人股3'|| item.statusTxt == '法人股2')
-		   		});*/
 		   		var fg = this.multipleSelection.every(function(item){
 		   			return (item.statusTxt == '法人股1')
 		   		});
 		   		if(!fg){
 		   			this.deldialogVisible = true;
-		   			//return;
 		   		}
 		   		if(fg){
 		   			this.post("antiFraud/batchUpdateHitRule",{
@@ -701,7 +628,6 @@
 		         		}).then(res=>{
 
 		        	})
-		        	//console.log(this.multipleSelection);
 		   		}
 		 	},
 		 	/*解除 弹框按钮*/
@@ -715,14 +641,8 @@
 		   		});
 		   		if(!fg){
 		   			this.backdialogVisible = true;
-		   			//return;
 		   		}
 		   		if(fg){
-		   			/*this.post("antiFraud/batchUpdateHitRule",{
-
-		         		}).then(res=>{
-
-		        	})*/
 		        	console.log(this.multipleSelection);
 		   		}
 		 	},

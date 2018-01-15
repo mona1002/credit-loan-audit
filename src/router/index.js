@@ -72,6 +72,9 @@ import aAntiApplyInf from '@/view/AntiFraud/components/aAntiApplyInf.vue'
 import aAntiFraudInvestigation from '@/view/AntiFraud/components/aAntiFraudInvestigation.vue'
 // 审批结论
 import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
+// 反欺诈借款人资料
+import AborrowerInformationDetail from '@/view/AntiFraud/components/AborrowerInformationDetail.vue'
+
 // -------------------------复议---------------------
 import ReconsiderApply from '../view/Reconsider/ReconsiderComponents/ReconsiderApply.vue'//复议申请
 import reconsiderList from '../view/Reconsider/reconsiderList.vue'//复议申请任务列表
@@ -167,6 +170,11 @@ const routes = [{
 {
   path: '/RApprovalConclusion',
   component: RApprovalConclusion
+},
+// 反欺诈 借款人资料
+{
+  path: '/AborrowerInformationDetail',
+  component: AborrowerInformationDetail
 },
 // 账务信息
 {
