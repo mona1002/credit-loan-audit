@@ -2195,3 +2195,8 @@ height: 40px;
 .creditApproval-class .el-select .el-input.is-focus .el-input__inner{
   padding-left: 10px;
 }
+
+
+.creditApproval-class .el-form-item__label{
+  padding: 0;
+}
