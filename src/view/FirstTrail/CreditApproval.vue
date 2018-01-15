@@ -51,7 +51,7 @@
         <div class="back-form-li" v-show="showFlag=='02'">
           <!-- <span style="color:red;display:inline-block;width:0px;float:left;">*</span> -->
           <span style="color:red;display:inline-block;width:0px;float:left;position: relative;left:-5px;font-weight:bold;">*</span>
-          <el-form-item label="回退节点：">
+          <el-form-item label="回退节点：" class="item-column2">
             <el-select v-model="rollbackNodeName">
               <!-- 初审只能回退到  申请登记 -->
               <!-- <el-option label="申请登记" value="creditApp_apply"></el-option>
@@ -60,6 +60,7 @@
               </el-option>
             </el-select>
           </el-form-item>
+          <el-form-item class="item-column2"> </el-form-item>
         </div>
         <div class="back-form-li">
           <!-- 回退主原因输入 02 -->
@@ -871,8 +872,8 @@ export default {
                   console.log('遍历产品')
                   console.log(this.proId);
                   console.log(this.products.length);
-                  
-                  for (var i=0; i< this.products.length;i++) {
+
+                  for (var i = 0; i < this.products.length; i++) {
                     console.log(this.products[i]);
                     console.log('ttttttt', this.proId);
                     console.log('xxxxxxx', this.products[i].id);
@@ -1705,6 +1706,7 @@ export default {
 
 
 
+
 /* 三列 */
 
 .creditApproval-class .item-column3 {
@@ -1720,6 +1722,7 @@ export default {
   margin: 0;
   padding: 0;
 }
+
 
 
 
@@ -1755,6 +1758,7 @@ export default {
 
 
 
+
 /* 信审审批 - btn*/
 
 .creditApproval-class .credit-btn {
@@ -1763,6 +1767,7 @@ export default {
   color: #333;
   border: none;
 }
+
 
 
 
@@ -1814,6 +1819,7 @@ export default {
 
 
 
+
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -1821,6 +1827,7 @@ export default {
   float: left;
   margin: 0;
 }
+
 
 
 
@@ -1847,6 +1854,7 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
 
 
 
@@ -1926,11 +1934,13 @@ export default {
 
 
 
+
 /* textarea */
 
 .creditApproval-class .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
 
 
 
@@ -1984,6 +1994,7 @@ export default {
 
 
 
+
 /* 审批 表单 */
 
 .creditApproval-class .appro-form {
@@ -2010,6 +2021,7 @@ export default {
 
 
 
+
 /*.creditApproval-class .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -2017,6 +2029,7 @@ export default {
 .creditApproval-class .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
 
 
 
@@ -2063,6 +2076,7 @@ export default {
 
 
 
+
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -2070,6 +2084,7 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
 
 
 
@@ -2115,10 +2130,11 @@ export default {
 
 .creditApproval-class .el-input--suffix .el-input__inner {
   margin: 0;
-  padding: 0;
+  padding-left: 10px;
   padding-right: 30px;
   text-indent: 5px;
 }
+
 
 
 
@@ -2156,6 +2172,7 @@ export default {
 
 
 
+
 /* 报错提示 */
 
 .creditApproval-class .el-form-item__error {
@@ -2176,11 +2193,13 @@ export default {
 
 
 
+
 /* 有编辑框的 提示信息*/
 
 .creditApproval-class .back-form .back-form-edit-li {
   margin-top: 25px !important;
 }
+
 
 
 
@@ -2224,6 +2243,7 @@ export default {
 
 
 
+
 /*回退*/
 
 .creditApproval-class .el-icon-check-back {
@@ -2236,6 +2256,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -2276,6 +2297,7 @@ export default {
 
 
 
+
 /*放弃*/
 
 .creditApproval-class .el-icon-check-giveup {
@@ -2288,6 +2310,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -2328,6 +2351,7 @@ export default {
 
 
 
+
 /*发起反欺诈*/
 
 .creditApproval-class .el-icon-check-start {
@@ -2340,6 +2364,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -2380,6 +2405,7 @@ export default {
 
 
 
+
 /*流程轨迹*/
 
 .creditApproval-class .el-icon-check-lcgj {
@@ -2406,6 +2432,7 @@ export default {
 
 
 
+
 /* 折叠面板头部背景色和icon */
 
 .creditApproval-class .icon_hat {
@@ -2416,6 +2443,7 @@ export default {
 .creditApproval-class .headFont {
   font-size: 16px;
 }
+
 
 
 
@@ -2458,11 +2486,13 @@ export default {
 
 
 
+
 /* 信审审批  - 审批  编辑部分 */
 
 .creditApproval-class .appro-form .back-form-edit-li .el-form-item__label {
   /*width: 120px;*/
 }
+
 
 
 
@@ -2508,11 +2538,13 @@ export default {
 
 
 
+
 /* 两行文字 样式 */
 
 .creditApproval-class .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
 
 
 
@@ -2545,6 +2577,7 @@ export default {
 
 
 
+
 /* label 文字样式 */
 
 .creditApproval-class .huitui-class .el-form-item__label {
@@ -2552,6 +2585,7 @@ export default {
 }
 
 .creditApproval-class .jujue-class {}
+
 
 
 
@@ -2605,11 +2639,13 @@ export default {
 
 
 
+
 /* 审批信息  */
 
 .creditApproval-class .el-form-item__content .el-select .el-input {
   width: 100%;
 }
+
 
 
 
