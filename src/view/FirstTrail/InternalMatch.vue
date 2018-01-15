@@ -427,7 +427,7 @@ export default {
                   console.log(res.statusCode);
                   if (res.statusCode == '200') {
 
-                    this.resMsg = '恭喜你，保存成功！';
+                    this.resMsg = '保存成功！';
                     done();
                   } else {
                     this.resMsg = '提交失败,请重试！';

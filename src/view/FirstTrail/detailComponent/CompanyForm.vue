@@ -15,7 +15,7 @@
       <li class="item-column3">
         <div class="left-title">电话类型：</div>
         <div>
-          <el-select v-model="phoneType" disabled>
+          <el-select v-model="phoneType" :disabled="true">
             <el-option label="单位电话" value="02"></el-option>
           </el-select>
         </div>
@@ -230,13 +230,13 @@
         <li class="item-column3">
           <div class="left-title">核对工作证明人1：</div>
           <div>
-            <el-input v-model="jobref1"></el-input>
+            <el-input v-model="jobref1" :maxlength="20"></el-input>
           </div>
         </li>
         <li class="item-column3">
           <div class="left-title">核对工作证明人2：</div>
           <div>
-            <el-input v-model="jobref2"></el-input>
+            <el-input v-model="jobref2" :maxlength="20"></el-input>
           </div>
         </li>
         <li class="item-column3 item-column3-null">
@@ -247,7 +247,7 @@
       </div>
       <div class="content-ul">
         <li class="item-column1">
-          <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查结论：</div>
+          <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查结果：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <div class="textarea-class">
               <el-input type="textarea" v-model="conclusion" :rows="5" resize=none :maxlength="500"></el-input>
@@ -302,6 +302,8 @@ export default {
     if (this.isFull == true) { // 全屏
       console.log('全屏');
       $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
+      $('.item-column1 textarea').css("width", "100%")
+      $('.item-column1 textarea').css("width", "100%")
       // 提交按钮
       $('.submit-class').css("margin-left", "calc( 66% - 140px)")
       // 显示 column2
@@ -432,7 +434,7 @@ export default {
               instance.confirmButtonLoading = false;
             });
           } else {
-            this.$message({ message: this.resMsg, type: 'warning' });
+            // this.$message({ message: this.resMsg, type: 'warning' });
 
             done();
           }
@@ -478,6 +480,7 @@ export default {
       if (val == true) { // 全屏
         console.log('全屏');
         $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
+        $('.item-column1 textarea').css("width", "100%")
         // 提交按钮
         $('.submit-class').css("margin-left", "calc( 66% - 140px)")
         // 显示 column2

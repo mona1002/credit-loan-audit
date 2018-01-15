@@ -1,5 +1,5 @@
 <template>
-  <!-- 终审-内部匹配中-信审表-（去掉初审人员）-mounted获取反欺诈专员+主管字段(匹配查看-内部匹配获取的是internal字段) -->
+  <!-- 终审-内部匹配中-信审表-（去掉初审人员）-mounted获取分屏-反欺诈专员+主管字段(匹配查看-内部匹配获取的是internal字段) -->
   <div class="CreditForm">
     <el-collapse v-model="activeNames">
       <!-- 网上查询信息 -->
@@ -880,74 +880,6 @@
           return (((sign) ? '' : '-') + num);
         }
       },
-      // formatSC(el, val) {
-      //   switch (el) {
-      //     case "月还款":
-      //       this.FormData.fbalance = val;
-      //       break;
-      //     case "借款金额":
-      //       this.FormData.iloanAmt = val;
-      //       break;
-      //     case "月均工资":
-      //       this.FormData.avgsalaryamt = val;
-      //       break;
-      //     case "注册资金":
-      //       this.FormData.regcapitalamt = val;
-      //       break;
-      //     case "月利润":
-      //       this.FormData.profitamountmamt = val;
-      //       break;
-      //     case "月还款/租金":
-      //       this.FormData.monthrentamt = val;
-      //       break;
-      //     case "近一年利润":
-      //       this.FormData.oneYearProfitamt = val;
-      //       break;
-      //     case "配偶收入":
-      //       this.FormData.spouseIncome = val;
-      //       break;
-      //     case "生活费支付":
-      //       this.FormData.childPaycostamt = val;
-      //       break;
-      //     case "父母收入":
-      //       this.FormData.parentIncome = val;
-      //       break;
-      //     case "开销":
-      //       this.FormData.fconsumption = val;
-      //       break;
-      //   }
-      // },
-      // acquire(val, name) {
-      //   if (val == null || val == '') {
-      //     return
-      //   } else {
-      //     if (val.toString().indexOf('.') == -1) {
-      //       val = val + "." + "0" + '0';
-      //       this.formatSC(name, val);
-      //     } else if (val.toString().indexOf('.') != -1) {
-      //       if (val.toString().split(".")[1].length < 2) {
-      //         val = val + "0";
-      //         this.formatSC(name, val);
-      //       } else {
-      //         val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
-      //         this.formatSC(name, val);
-      //       }
-      //     }
-      //   }
-      // },
-      // mountM() {
-      //   this.acquire(this.FormData.fbalance, '月还款');
-      //   this.acquire(this.FormData.regcapitalamt, '注册资金');
-      //   this.acquire(this.FormData.monthrentamt, '月还款/租金');
-      //   this.acquire(this.FormData.oneYearProfitamt, '近一年利润');
-      //   this.acquire(this.FormData.profitamountmamt, '月利润');
-      //   this.acquire(this.FormData.spouseIncome, '配偶收入');
-      //   this.acquire(this.FormData.parentIncome, '父母收入');
-      //   this.acquire(this.FormData.fconsumption, '开销');
-      //   this.acquire(this.FormData.childPaycostamt, '生活费支付');
-      //   this.acquire(this.FormData.avgsalaryamt, '月均工资');
-      //   this.acquire(this.FormData.iloanAmt, '借款金额');
-      // },
       NewPage(ind) {
         console.log(ind);
         switch (ind) {
@@ -1058,6 +990,8 @@
         this.getParams = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈专员-匹配查看
       } else if (this.judgeFlag.flag == '04') {
         this.getParams = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管-匹配查看
+      }else if (this.judgeFlag.flag == '05'||this.judgeFlag.flag == '06') {
+        this.getParams = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议主管+专员
       }
       console.log(this.getParams)
       // 获取查询列表数据
@@ -1069,7 +1003,7 @@
           console.log(res.data)
           this.FormData = res.data;
           this.AreaNPercent();
-          this.mountM();
+          this.formatSC();
           this.mountJ(0, res.data.wbeexEcuted);
           this.mountJ(1, res.data.wnetHirecom);
           this.mountJ(2, res.data.wnetEcutedBrea);

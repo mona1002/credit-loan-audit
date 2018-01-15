@@ -272,7 +272,10 @@
         this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
       } else if (this.judgeFlag.flag == '04') {
         this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
+      }else if (this.judgeFlag.flag == '05'||this.judgeFlag.flag == '06') {
+        this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议主管+专员
       }
+      
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.applyId,

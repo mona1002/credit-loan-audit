@@ -1,6 +1,6 @@
 <!-- 反欺诈申请 - - 详情编辑页面 -->
 <template>
-  <div date="AntiApplyInf" class="anti-apply-edit-class">
+  <div date="AntiApplyAdd" class="anti-apply-add-class">
     <!-- 反欺诈申请信息=========================默认显示1-条？分页？ -->
     <div class="address-title">
       <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
@@ -168,8 +168,6 @@ export default {
       // this.id = taskInWaitting.applyId;
       this.id = this.$route.params.id;
       console.log(this.$route.params.id)
-      // 查询反欺诈信息
-      this.getFraudApplyInfo();
 
       if (this.antiFlag == '01') {
 
@@ -179,22 +177,7 @@ export default {
         // FtaskInWaitting
         this.creditappTaskid = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskId;
       }
-    } 
-    // 专员/主管 不跳  反欺诈 编辑页面
-    // else if (this.antiFlag == '03' || this.antiFlag == '04') { // 其他取 列表id
-    //   console.log(' 主管/专员 ');
-    //   this.id = this.$route.params.id;
-    //   if (this.antiFlag == '03') {
-    //     // AntitaskInWaitting
-    //     this.creditappTaskid = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
-    //     console.log('creditappTaskid===', this.creditappTaskid)
-    //   } else if (this.antiFlag == '04') {
-    //     // AntiManagertaskInWaitting
-    //     this.creditappTaskid = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
-    //   }
-    //   this.getFraudApplyInfoWithOpinionById();
-    // }
-
+    }
 
 
     // 请求系统时间
@@ -203,6 +186,8 @@ export default {
     // 请求主原因
     this.firstNodeReason();
 
+    // 查询反欺诈信息
+    // this.getFraudApplyInfo();
 
 
 
@@ -396,7 +381,7 @@ export default {
 
 </script>
 <style>
-.anti-apply-edit-class {
+.anti-apply-add-class {
   width: 100%;
   height: 100%;
   background: #fff;
@@ -417,9 +402,10 @@ export default {
 
 
 
+
 /* 一列 */
 
-.anti-apply-edit-class .item-column1 {
+.anti-apply-add-class .item-column1 {
   /*width: 100%;*/
   min-width: 1366px;
   float: left;
@@ -441,9 +427,10 @@ export default {
 
 
 
+
 /* 两列 */
 
-.anti-apply-edit-class .item-column2 {
+.anti-apply-add-class .item-column2 {
   width: 50%;
   min-width: 450px;
   float: left;
@@ -467,9 +454,10 @@ export default {
 
 
 
+
 /* 三列 */
 
-.anti-apply-edit-class .item-column3 {
+.anti-apply-add-class .item-column3 {
   width: 33%;
   min-width: 350px;
   float: left;
@@ -494,19 +482,20 @@ export default {
 
 
 
+
 /* 折叠面板头部背景色和icon */
 
-.anti-apply-edit-class .icon_hat {
+.anti-apply-add-class .icon_hat {
   padding: 10px 10px 10px 13px;
   vertical-align: middle;
 }
 
-.anti-apply-edit-class .headFont {
+.anti-apply-add-class .headFont {
   font-size: 16px;
 }
 
 
-.anti-apply-edit-class .address-title {
+.anti-apply-add-class .address-title {
   width: 100%;
   height: 35px;
   font-size: 18px;
@@ -526,12 +515,12 @@ export default {
 }
 
 
-.anti-apply-edit-class .header-area {
+.anti-apply-add-class .header-area {
   width: 100%;
   height: auto;
 }
 
-.anti-apply-edit-class .left-title {
+.anti-apply-add-class .left-title {
   float: left;
   width: 130px;
   line-height: 30px;
@@ -541,11 +530,11 @@ export default {
   font-size: 14px;
 }
 
-.anti-apply-edit-class .left-title2 {
+.anti-apply-add-class .left-title2 {
   line-height: 20px;
 }
 
-.anti-apply-edit-class .item-content {
+.anti-apply-add-class .item-content {
   float: left;
   width: calc( 100% - 130px);
   height: 30px;
@@ -553,7 +542,7 @@ export default {
   text-align: left;
 }
 
-.anti-apply-edit-class li .textarea-class {
+.anti-apply-add-class li .textarea-class {
   height: auto;
   float: left;
   /*width: 795px;*/
@@ -578,9 +567,10 @@ export default {
 
 
 
+
 /* 必填 * */
 
-.anti-apply-edit-class .require-icon {
+.anti-apply-add-class .require-icon {
   color: #ff0000;
   display: inline-block;
   width: 0px;
@@ -605,9 +595,10 @@ export default {
 
 
 
+
 /* 提交按钮 */
 
-.anti-apply-edit-class .submit-class {
+.anti-apply-add-class .submit-class {
   margin-top: 50px;
   /*margin-left: calc( 66% - 140px);*/
   width: calc(66% - 500px);
@@ -628,7 +619,8 @@ export default {
 
 
 
-/*.anti-apply-edit-class .el-input{
+
+/*.anti-apply-add-class .el-input{
   width: 100%;
 }*/
 

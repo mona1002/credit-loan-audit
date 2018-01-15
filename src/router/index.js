@@ -66,6 +66,7 @@ import AntiFraud from '@/view/AntiFraud/AntiFraud.vue'
 // 反欺诈 申请
 import AntiApplyEdit from '@/view/AntiFraud/AntiApplyEdit.vue'
 import AntiApplyInf from '@/view/AntiFraud/AntiApplyInf.vue'
+import AntiApplyAdd from '@/view/AntiFraud/AntiApplyAdd.vue'
 import aAntiApplyInf from '@/view/AntiFraud/components/aAntiApplyInf.vue'
 
 //反欺诈调查
@@ -226,18 +227,24 @@ const routes = [{
   path:'/AntiFraud',
   component:AntiFraud
 },
-// 反欺诈 申请信息
+// 反欺诈申请 编辑
 {
   path:'/AntiApplyEdit',
   name:'AntiApplyEdit',
   component:AntiApplyEdit
 },
-// 反欺诈申请
+// 反欺诈申请 查看
 {
   path:'/AntiApplyInf',
   name:'AntiApplyInf',
   component:AntiApplyInf
 },
+// 反欺诈申请 添加
+{
+  path:'/AntiApplyAdd',
+  name:'AntiApplyAdd',
+  component:AntiApplyAdd
+}, 
 {
   path:'/aAntiApplyInf',
   component:aAntiApplyInf

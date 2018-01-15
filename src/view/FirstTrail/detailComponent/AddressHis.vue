@@ -227,7 +227,7 @@
           </el-form-item>
         </el-tooltip>
         <el-tooltip class="item" effect="dark" :content="mobileData.conclusion" placement="top">
-          <el-form-item label="调查结论：" class="item-column1">
+          <el-form-item label="调查结果：" class="item-column1">
             {{mobileData.conclusion}}
           </el-form-item>
         </el-tooltip>

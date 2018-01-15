@@ -104,10 +104,10 @@ export default {
   data() {
     return {
 
-      
+
       applyId: '', // 申请单ID
       id: '', // 主管/专员 用 列表id
-      
+
       antiFlag: '', // 标志
     }
   },
@@ -120,11 +120,19 @@ export default {
     // 初审 终审 取 applyId
     if (this.antiFlag == '01' || this.antiFlag == '02') {
       // 先取到 id , 请求 反欺诈 页面信息
-      var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-      this.id = taskInWaitting.applyId;
-    } else { // 其他取 列表id
-      console.log(' 主管/专员 ');
-      this.id = this.$route.params.id;
+      // var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+      this.id = JSON.parse(localStorage.getItem('taskInWaitting')).applyId;
+    } else if (this.antiFlag == '02') {
+      // FtaskInWaitting
+      // var FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
+      this.id = JSON.parse(localStorage.getItem('FtaskInWaitting')).applyId;
+    } else if (this.antiFlag == '03') { // 其他取 列表id 取本地
+      console.log(' 专员 ');
+
+      this.id = JSON.parse(localStorage.getItem('AntitaskInWaitting')).applyId;
+    } else if (this.antiFlag == '04') {
+      console.log(' 主管 ');
+      this.id = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).applyId;
     }
 
     // 经办人 登录用户名
@@ -140,7 +148,7 @@ export default {
     // 查询 反欺诈信息
     getFraudApplyInfo() {
       // 测试 id
-      this.id = 'ed353288-758d-4699-bec7-094bd6444556';
+      // this.id = 'ed353288-758d-4699-bec7-094bd6444556';
 
       this.post('/fraudApplyInfoController/getFraudApplyInfoWithOpinionById', {
           applyId: this.id
@@ -197,7 +205,10 @@ export default {
   background: #fff;
 }
 
+
+
 /* 一列 */
+
 .anti-apply-info-class .item-column1 {
   /*width: 100%;*/
   min-width: 1366px;
@@ -205,7 +216,10 @@ export default {
   /*max-width: 1366px;*/
 }
 
+
+
 /* 两列 */
+
 .anti-apply-info-class .item-column2 {
   width: 50%;
   min-width: 450px;
@@ -215,7 +229,10 @@ export default {
   margin-bottom: 10px;
 }
 
+
+
 /* 三列 */
+
 .anti-apply-info-class .item-column3 {
   width: 33%;
   min-width: 350px;
@@ -225,14 +242,20 @@ export default {
   /*border: 1px solid;*/
   /*min-width: 300px;*/
 }
+
+
+
 /* 折叠面板头部背景色和icon */
+
 .anti-apply-info-class .icon_hat {
   padding: 10px 10px 10px 13px;
   vertical-align: middle;
 }
+
 .anti-apply-info-class .headFont {
   font-size: 16px;
 }
+
 .anti-apply-info-class .address-title {
   width: 100%;
   height: 35px;
@@ -251,10 +274,12 @@ export default {
   vertical-align: middle;
   line-height: 40px;
 }
+
 .anti-apply-info-class .header-area {
   width: 100%;
   height: auto;
 }
+
 .anti-apply-info-class .left-title {
   float: left;
   width: 130px;
@@ -264,9 +289,11 @@ export default {
   text-align: right;
   font-size: 14px;
 }
+
 .anti-apply-info-class .left-title2 {
   line-height: 20px;
 }
+
 .anti-apply-info-class .item-content {
   float: left;
   width: calc( 100% - 130px);
@@ -275,6 +302,7 @@ export default {
   text-align: left;
   font-size: 14px;
 }
+
 .anti-apply-info-class li .textarea-class {
   height: auto;
   float: left;
@@ -282,11 +310,16 @@ export default {
   padding-bottom: 10px;
   width: calc(66% - 195px);
 }
+
+
+
 /* 右侧显示内容 */
+
 .anti-apply-info-class .right-title {
   width: calc( 100% - 130px);
   line-height: 40px;
   font-size: 14px;
   float: left;
 }
+
 </style>

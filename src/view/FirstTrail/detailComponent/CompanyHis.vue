@@ -124,12 +124,12 @@
         <el-form-item label="核对工作证明人2：" class="item-column2">
           {{comData.jobref2}}
         </el-form-item>
-        <!-- <el-form-item label="调查结论" class="item-column1">
+        <!-- <el-form-item label="调查结果" class="item-column1">
   {{comData.conclusion}}
 </el-form-item>
  -->
         <el-tooltip class="item" effect="dark" :content="comData.conclusion" placement="top">
-          <el-form-item label="调查结论：" class="item-column1">
+          <el-form-item label="调查结果：" class="item-column1">
             {{comData.conclusion}}
           </el-form-item>
         </el-tooltip>

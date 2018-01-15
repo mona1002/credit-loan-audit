@@ -2190,3 +2190,17 @@ height: 40px;
   text-align: center;
 }
 
+
+/* 审批结论 下拉框 padding*/
+.creditApproval-class .el-select .el-input.is-focus .el-input__inner{
+  padding-left: 10px;
+}
+
+.creditApproval-class .el-input--suffix .el-input__inner{
+  padding-left: 10px;
+}
+
+/*
+.creditApproval-class .el-form-item__label{
+  padding: 0;
+}*/
