@@ -25,10 +25,11 @@
           <template slot="title">
             <p>
               <!-- 一级节点 -->
-              <span style="position:relative;">{{item.arcName}}
-                <img src="../../../../static/images/918FE1E0-6EEB-4642-A5E6-253AC973FF41@1x.png" style="position:absolute;top:12px;left:26px"
+              <span style="position:relative;lineHeight:36px;height:36px;">
+                <b class="NamParentNode"> {{item.arcName}}</b>
+                <img src="../../../../static/images/918FE1E0-6EEB-4642-A5E6-253AC973FF41@1x.png" style="position:absolute;top:12px;left:5px"
                   v-show="opendImg[ind]">
-                <img src="../../../../static/images/5530D698-2823-417F-B8BC-8DC9037BC848@1x.png" style="position:absolute;top:14px;left:26px"
+                <img src="../../../../static/images/5530D698-2823-417F-B8BC-8DC9037BC848@1x.png" style="position:absolute;top:14px;left:5px"
                   v-show="closedImg[ind]">
               </span>
               <span>{{item.arcNum}}</span>
@@ -377,6 +378,15 @@
     right: 24px;
     z-index: 2;
     top: 50%;
+  }
+
+  .NamParentNode {
+    display: inline-block;
+    font-style: normal;
+    width: 105px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .AudioVisual .AudioVisual_List,
