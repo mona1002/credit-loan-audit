@@ -304,7 +304,7 @@
 				activeNames: ['1','2','3','4','5','6','7','8','9','10'],
 				fraudApplyInfo:'',
 				hitRuleList:[
-					{
+					/*{
 		                ruleId:"xxx", // 规则ID
 		                ruleContent:"方式开发健康", // 命中规则名称
 		                custCount:0 // 命中客户数
@@ -333,7 +333,7 @@
 		                ruleId:"xxx", // 规则ID
 		                ruleContent:"方式开发健康", // 命中规则名称
 		                custCount:20 // 命中客户数
-		            },
+		            },*/
 				],
 				fraudTelCheckList:[],
 				fraudAuditInfo:{
@@ -351,7 +351,7 @@
 				currentPage:1,// 默认显示的当前页
 				setPageSize:10,
 				recordList:[
-		          {
+		          /*{
 		            ruleId:"xxxx", // 规则Id
 		            ruleContent:"功夫功夫", // 命中规则的名称
 		            applySubNo:"13424675787", // 进件编号
@@ -430,7 +430,7 @@
 		            custName:"和规范化风格哈", // 命中客户名称
 		            status:"而非给", // 状态
 		            statusTxt:"法人股3" // 状态文本
-		         },
+		         },*/
 		      ],
 		      /*反欺诈申请ID*/
 		      appinfoId:'',
@@ -450,6 +450,8 @@
 			   judgeFlag:'',
 			   //理由：主原因+子原因+描述
 			   reason:'',
+			   //恢复、解除的新数组
+			   newArray:[],
 			}
 		},
 		mounted(){
@@ -466,7 +468,7 @@
 			/*先查询列表*/
 			request(val){
 				this.post('antiFraud/getAntiFraudSurveyInfo',{
-		        'appinfoId':442524
+		        'appinfoId':1
 		      }
 	          ).then(res => {
 	          	if(res.statusCode==200 &&　res.data!=null){
@@ -475,7 +477,16 @@
 	          			this.fraudApplyInfo = this.fraudApplyInfo;
 	          		}else{
 	          			this.fraudApplyInfo = res.data.fraudApplyInfo;
-	          			this.reason = this.fraudApplyInfo.mainreaName+this.fraudApplyInfo.subreaName+this.fraudApplyInfo.applyDesc;
+	     				//提报来源  理由
+	          			if(this.fraudApplyInfo.mainreaName == null && this.fraudApplyInfo.subreaName == null && this.fraudApplyInfo.applyDesc == null){
+	          				this.reason = '';
+	          			}else{
+	          				this.reason = this.fraudApplyInfo.mainreaName+this.fraudApplyInfo.subreaName+this.fraudApplyInfo.applyDesc;
+	          			var reg = /null/g;
+	          			//var string = 'hdksjkdjnullfhdlfjl';
+	          			this.reason = this.reason.replace(reg,'');
+	          		};
+	          			
 	          		};
 
 	          		//命中规则
@@ -502,8 +513,7 @@
 			/*保存*/
 			bigSure(){
 				this.fraudAuditInfo.appinfoId=this.appinfoId;
-				this.fraudAuditInfo.auditCode=this.auditCode;
-				this.fraudAuditInfo.appinfoId=this.appinfoId;//当前审核人编号 登陆人
+				this.fraudAuditInfo.auditCode=this.auditCode;//当前审核人编号 登陆人
 				this.fraudTelCheckList.auditName=this.auditName;//当前审核人姓名 登陆人
 
 				this.post('antiFraud/saveAntiFraudSurveyInfo',{
@@ -568,27 +578,38 @@
 	      	},
 		    /*命中客户数 查询*/
 		    inquiry(row){
-		    	if(row.custCount==0){
-		    		return
-		    	}
+		    	if(row){
+		    		if(row.custCount==0){
+			    		return
+			    	}
+		    	};
+		    	
 		    	this.dialogVisible = true;
-		    	/*console.log(index);
-		    	for(var i=0;i<this.hitRuleList.length-1;i++){
-		    		if(index==i){
-		    			this.ruleId = this.hitRuleList[i].ruleId;
-		    		}
-		    	}*/
 		    	console.log(row.ruleId);
-		    	this.post("antiFraud/getHitRuleCustList",{
+		    	this.ruleId=row.ruleId;
+		    	/*this.post("antiFraud/getHitRuleCustList",{
 		    		pageParam:{
 				        pageSize:this.pageParam.pageSize,
-				        pageNum:this.pageParam.pageNum
+				        pageNum:this.pageParam.pageNum,
+				        ruleId:this.pageParam.ruleId
 				    },
-				    ruleId:row.ruleId, // 规则Id
+				    //ruleId:row.ruleId, // 规则Id
 		    	}).then(res=>{
 		    		if(res.statusCode==200){
 		    			this.totals = res.data;
-		    			//this.recordList = res.data.recordList;
+		    			this.recordList = res.data.recordList;
+		    		}
+		    	})*/
+		    	this.check(this.pageParam,this.ruleId);
+		    },
+		    check(param,id){
+		    	this.post("antiFraud/getHitRuleCustList",{
+		    		'pageParam':param,
+		    		'ruleId':id
+				    }).then(res=>{
+		    		if(res.statusCode==200){
+		    			this.totals = res.data;
+		    			this.recordList = res.data.recordList;
 		    		}
 		    	})
 		    },
@@ -601,32 +622,52 @@
 		        this.currentPage = 1;
 		        this.setPageSize = 10;
 		      } else {
-		        this.inquiry();
+		        this.check(this.pageParam,this.ruleId);
 		      };
 		    },
 		     handleCurrentChange(val) {
 		      console.log('当前页: ${val}');
 		      this.pageParam.pageNum = val;
-      		  this.inquiry();
+      		  this.check(this.pageParam,this.ruleId);
 		    },
 		    /*多选框*/
 		    handleSelectionChange(val) {
 		        this.multipleSelection = val;
-		        //console.log(this.multipleSelection);
+		        console.log(this.multipleSelection);
 		    },
 		    /*解除*/
 		 	relieve(){
 		   		var fg = this.multipleSelection.every(function(item){
-		   			return (item.statusTxt == '法人股1')
+		   			return (item.statusTxt == '未解除')
 		   		});
 		   		if(!fg){
 		   			this.deldialogVisible = true;
 		   		}
 		   		if(fg){
-		   			this.post("antiFraud/batchUpdateHitRule",{
-
-		         		}).then(res=>{
-
+		   			this.newArray=[];
+		   			for(var i=0;i<this.multipleSelection.length;i++){
+		   				this.newArray.push(
+		   					{'id':this.multipleSelection[i].id,
+		   					'status':this.multipleSelection[i].status
+		   					}
+		   				);
+		   			};
+		   			console.log(this.newArray);
+		   			this.post("antiFraud/batchUpdateHitRule",
+		   				this.newArray
+		         		).then(res=>{
+		         			if(res.statusCode==200){
+					        	this.check(this.pageParam,this.ruleId);
+					        	this.$message({
+									message:"解除成功！",
+									type:'success'
+								})
+					        }else{
+					        	this.$message({
+					              message:"解除失败！",
+					              type: 'error'
+					            })
+					        }
 		        	})
 		   		}
 		 	},
@@ -637,13 +678,38 @@
 		 	/*恢复*/
 		 	recovery(){
 		 		var fg = this.multipleSelection.every(function(item){
-		   			return (item.statusTxt == '法人股2')
+		   			return (item.statusTxt == '已解除')
 		   		});
 		   		if(!fg){
 		   			this.backdialogVisible = true;
 		   		}
 		   		if(fg){
-		        	console.log(this.multipleSelection);
+		        	//console.log(this.multipleSelection);
+		        	this.newArray=[];
+		        	for(var i=0;i<this.multipleSelection.length;i++){
+		   				this.newArray.push(
+		   					{'id':this.multipleSelection[i].id,
+		   					'status':this.multipleSelection[i].status
+		   					}
+		   				);
+		   			};
+		   			console.log(this.newArray);
+		        	this.post("antiFraud/batchUpdateHitRule",
+		   				this.newArray
+		         		).then(res=>{
+		         			if(res.statusCode==200){
+					        	this.check(this.pageParam,this.ruleId);
+					        	this.$message({
+									message:"恢复成功！",
+									type:'success'
+								})
+					        }else{
+					        	this.$message({
+					              message:"恢复失败！",
+					              type: 'error'
+					            })
+					        }
+		        	})
 		   		}
 		 	},
 		 	/*恢复 弹框按钮*/
