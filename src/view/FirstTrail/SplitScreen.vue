@@ -143,7 +143,7 @@
 
 
 import HelloWorld from "../HelloWorld.vue"
-import CreditFormKeydownEvent from './detailComponent/CreditFormKeydownEvent.vue'
+// import CreditFormKeydownEvent from './detailComponent/CreditFormKeydownEvent.vue'
   export default {
     data() {
       return {
@@ -303,7 +303,7 @@ import CreditFormKeydownEvent from './detailComponent/CreditFormKeydownEvent.vue
       processTrajectory,
       aAntiApplyInf,
       HelloWorld,
-      CreditFormKeydownEvent
+      //CreditFormKeydownEvent
     }
   }
 

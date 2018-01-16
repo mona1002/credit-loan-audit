@@ -32,7 +32,7 @@
 				      </el-table-column>
 				      <el-table-column
 				        prop="coveredArea"
-				        label="建筑面积[m^2]"
+				        label="建筑面积[m²]"
 				        min-width="130">
 				      </el-table-column>
 				      <el-table-column
@@ -99,7 +99,7 @@
 				      </el-table-column>
 				      <el-table-column
 				        prop="carPrice"
-				        label="车辆购置价[元]"
+				        label="车辆购置价[元]11111"
 				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
