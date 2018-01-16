@@ -599,44 +599,12 @@
 	    mounted(){
 			//一进入页面就发送请求
 			this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-		    if (this.judgeFlag.flag == '01') {
-		        this.taskInWaitting = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
-		    } else if (this.judgeFlag.flag == '02') {
-		        this.taskInWaitting = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
+		    if (this.judgeFlag.flag == '03') {
+		        this.taskInWaitting = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
+		    }else if (this.judgeFlag.flag == '04') {
+		        this.taskInWaitting = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
 		    }
-
-			//this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
 			this.request(this.taskInWaitting.applyId);
-
-	  		if(this.isFull == false){// 分屏
-	  			//信用卡使用总况
-	  			$(".xinyongka").width('930px');
-	  			$(".xinyongka ul li span").width('150px');
-	  			//负债信息
-	  			$(".fuzhaixinxi").width('930px');
-	  			$(".fuzhaixinxi ol li span").width('150px');
-	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 150px )',"padding-right":'calc( 16.6% - 150px )'});
-	  			//征询报告
-	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 150px )',"padding-right":'calc( 49.9% - 150px )'});
-	  			$(".zhengxunbaogao ol li .tipDiv").width('150px');
-	  			//其他信息
-	  			$(".qita").width('930px');
-	  			$(".qita ol li").css({'padding-right': 'calc( 49.9% - 155px )','padding-left': 'calc( 16.6% - 155px )'});			
-	  			
-	  		}else if(this.isFull == true){// 全屏
-	  			$(".xinyongka").width('100%');
-	  			$(".xinyongka ul li span").width('200px');
-	  			//负债信息
-	  			$(".fuzhaixinxi").width('100%');
-	  			$(".fuzhaixinxi ol li span").width('200px');
-	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 180px )',"padding-right":'calc( 16.6% - 180px )'});
-	  			//征询报告
-	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 174px )'});
-	  			$(".zhengxunbaogao ol li .tipDiv").width('200px');
-	  			//其他信息
-	  			$(".qita").width('100%');
-	  			$(".qita ol li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 174px )'});
-	  		}
 		},
 	    methods:{
 	    	handleChange(){
@@ -975,41 +943,6 @@
 			    }
 			},
 	    },
-	    watch:{
-		  	isFull:function(val){
-		  		console.log(this.isFull);
-		  		if(this.isFull == false){// 分屏
-	  			//信用卡使用总况
-	  			$(".xinyongka").width('930px');
-	  			$(".xinyongka ul li span").width('150px');
-	  			//负债信息
-	  			$(".fuzhaixinxi").width('930px');
-	  			$(".fuzhaixinxi ol li span").width('150px');
-	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 150px )',"padding-right":'calc( 16.6% - 150px )'});
-	  			//征询报告
-	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 150px )',"padding-right":'calc( 49.9% - 150px )'});
-	  			$(".zhengxunbaogao ol li .tipDiv").width('150px');
-	  			//其他信息
-	  			$(".qita").width('930px');
-	  			$(".qita ol li").css({'padding-right': 'calc( 49.9% - 155px )','padding-left': 'calc( 16.6% - 155px )'});			
-	  			
-	  		}else if(this.isFull == true){// 全屏
-	  			$(".xinyongka").width('100%');
-	  			$(".xinyongka ul li span").width('200px');
-	  			//负债信息
-	  			$(".fuzhaixinxi").width('100%');
-	  			$(".fuzhaixinxi ol li span").width('200px');
-	  			$(".fuzhaixinxi ol.num li:nth-of-type(2)").css({"padding-left":'calc( 16.6% - 180px )',"padding-right":'calc( 16.6% - 180px )'});
-	  			//征询报告
-	  			$(".zhengxunbaogao ol:nth-of-type(2) li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 174px )'});
-	  			$(".zhengxunbaogao ol li .tipDiv").width('200px');
-	  			//其他信息
-	  			$(".qita").width('100%');
-	  			$(".qita ol li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 174px )'});
-	  		}
-		  	}
-
-		},
 	}
 </script>
 <style type="text/css" scoped>
@@ -1029,9 +962,6 @@
 		font-size: 16px;
 	}
 	/* 信用卡使用总况 */
-	.xinyongka{
-		width: 926px;
-	}
 	.xinyongka ul{
 		float: left;
 		width: 33.3%;
@@ -1050,9 +980,6 @@
 		width: 150px;
 		display: inline-block;
 		text-align: left;
-	}
-	.daikuanzongkuang{
-		width: 926px;
 	}
 	/* 贷款总况 */
 	.xinyongka.daikuanzongkuang ul li label{
@@ -1073,9 +1000,6 @@
     background-color: #e6ebf5;
   }
 /* 负债信息 */
-.fuzhaixinxi{
-	width: 926px;
-}
 .fuzhaixinxi ol{
 	width: 100%;
 }
@@ -1088,25 +1012,20 @@
 }
 .fuzhaixinxi ol li label{
 	display: inline-block;
-	width: 155px;
+	width: 172px;
 	text-align: right;
-	padding-right: 5px;
+	/* position: relative;
+	top: -8px; */
 }
 .fuzhaixinxi ol li span{
 	display: inline-block;
-	width: 150px;
+	width: 200px;
 	text-align: left;
+	height: 28px;
 }
 /* 负债信息：负债合计 */
 .fuzhaixinxi ol li.zongji input{
 	border: none;
-}
-.fuzhaixinxi ol:nth-of-type(2) li:nth-of-type(2) label{
-	line-height: 1;
-}
-.fuzhaixinxi ol:nth-of-type(2) li:nth-of-type(2) span{
-	position: relative;
-	top: -3px;
 }
 .fuzhaixinxi ol:nth-of-type(3) li:nth-of-type(1) label{
 	line-height: 1;
@@ -1124,15 +1043,16 @@ ol.num li:nth-of-type(2){
 	width: 66.6%;
 	text-align: left;
 	height: 54px;
-	padding-left:calc( 16.6% - 150px );
-	padding-right:calc( 16.6% - 150px );
+	padding-left:calc( 16.6% - 186px );
+	padding-right:calc( 16.6% - 186px );
 }
 ol.num li:nth-of-type(2) label{
 	height: 54px;
 	line-height: 54px;
+	top: 0px;
 }
 ol.num li:nth-of-type(2) div{
-	width: calc( 100% - 155px );
+	width: calc( 100% - 172px );
 	height: 54px;
 	float: right;
 	padding-left: 10px;
@@ -1145,30 +1065,23 @@ ol.num li:nth-of-type(2) div{
 }
 .zhengxunbaogao ol li label{
 	display: inline-block;
-	width: 150px;
+	width: 172px;
 	text-align: right;
 	padding-right: 5px;
 	color: #475669;
 }
 .zhengxunbaogao ol li span{
 	display: inline-block;
-	width: 150px;
+	width: 200px;
 	text-align: left;
-}
-.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) label{
-	line-height: 1;
-}
-.zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(2) span{
-	position: relative;
-	top: -3px;
 }
 .zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(3) label{
 	line-height: 1;
-	float: left;
+	top: 0px;
 }
 .zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(3) span{
-	float: left;
-	margin-top: 3px;
+	position: relative;
+	top: -3px;
 }
 .zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(1) label{
 	height: 28px;
@@ -1177,7 +1090,7 @@ ol.num li:nth-of-type(2) div{
     top: -9px;
 }
 .zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(1) .tipDiv{
-	width: 150px;
+	width: 200px;
 	height: 28px;
 	line-height: 28px;
 	display: inline-block;
@@ -1194,17 +1107,18 @@ ol.num li:nth-of-type(2) div{
 	height: 75px;
 	text-align: left;
 	margin: 20px 0;
-	padding-left: calc(16.6% - 150px);
-    padding-right: calc(49.9% - 150px);
+	padding-left: calc(16.6% - 186px);
+    padding-right: calc(49.9% - 186px);
 }
 .zhengxunbaogao ol:nth-of-type(2) li label{
 	line-height: 75px;
 	float: left;
+	top: 0;
 }
 .zhengxunbaogao ol:nth-of-type(2) li div{
 	float: left;
 	height: 75px;
-	width: calc( 100% - 150px );
+	width: calc( 100% - 172px );
 	padding-left: 10px;
 	overflow: auto;
 	border: 1px solid #d8dce5;
@@ -1215,18 +1129,15 @@ ol.num li:nth-of-type(2) div{
 	line-height: 50px;
 }
 /* 其他信息 */
-.qita{
-	width: 930px;
-}
 .qita ol li{
 	width: 100%;
 	margin-top: 20px;
-	padding-left: calc(16.6% - 155px);
-    padding-right: calc(49.9% - 155px);
+	padding-left: calc(16.6% - 186px);
+    padding-right: calc(49.9% - 186px);
 }
 .qita ol div{
 	display: inline-block;
-	width: calc( 100% - 170px );
+	width: calc( 100% - 172px );
 	height: 117px;
 	overflow: auto;
 	padding-left: 10px;

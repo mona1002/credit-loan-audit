@@ -755,8 +755,8 @@
 						<span>{{accepCusWorkInfo.befworkTel}}</span>
 					</li>
 					<li>
-						<label>前单位工作年限[月]：</label>
-						<span>{{accepCusWorkInfo.befWorkMonth}}</span>
+						<!-- <label>前单位工作年限[月]：</label>
+						<span>{{accepCusWorkInfo.befWorkMonth}}</span> -->
 					</li>
 					<li>
 						<label>前单位工作年限[月]：</label>
@@ -959,8 +959,15 @@
 		        	this.accepCusBasicInfo=this.accepCusBasicInfo
 		        }else{
 		        	this.accepCusBasicInfo=res.data.accepCusBasicInfo;
+		        	var reg = /null/g;
 		        	//投保地点
-		        	this.insurAddr = this.accepCusBasicInfo.insurProvinceName + this.accepCusBasicInfo.insurCountyName + this.accepCusBasicInfo.insurAddress + this.accepCusBasicInfo.insurAddress
+		        	if(this.accepCusBasicInfo.insurProvinceName == null && this.accepCusBasicInfo.insurCountyName == null && this.accepCusBasicInfo.insurAddress == null && this.accepCusBasicInfo.insurAddress == null){
+		        		this.insurAddr = '';
+		        	}else{
+		        		this.insurAddr = this.accepCusBasicInfo.insurProvinceName + this.accepCusBasicInfo.insurCountyName + this.accepCusBasicInfo.insurAddress + this.accepCusBasicInfo.insurAddress;
+		        		this.insurAddr = this.insurAddr.replace(reg,'');
+		        	}
+		        	
 		        	//每月家庭支出
 		        	if(this.accepCusBasicInfo.payAmt != null){
 			        	this.accepCusBasicInfo.payAmt = this.formatNumber(this.accepCusBasicInfo.payAmt,2,0);
@@ -976,7 +983,11 @@
 		        	//总保额
 		        	if(this.accepCusBasicInfo.totalPayAmt != null){
 		        		this.accepCusBasicInfo.totalPayAmt = this.formatNumber(this.accepCusBasicInfo.totalPayAmt,2,0);	
-		        	};	       
+		        	};
+		        	//户口所在地
+		        	this.accepCusBasicInfo.homeDetailAddr = this.accepCusBasicInfo.homeDetailAddr.replace(reg,'');
+		        	//现住宅地址
+		        	this.accepCusBasicInfo.liveAddr = this.accepCusBasicInfo.liveAddr.replace(reg,'');   
 		        }
 
 		        /*私人业主信息*/
@@ -1054,6 +1065,9 @@
 		        	if(this.accepCusWorkInfo.otherIncome != null){
 			        	this.accepCusWorkInfo.otherIncome = this.formatNumber(this.accepCusWorkInfo.otherIncome,2,0);
 			        };
+			        //单位地址
+			        var reg = /null/g;
+			        this.accepCusWorkInfo.workAddr = this.accepCusWorkInfo.workAddr.replace(reg,'');
 		        }
 
 		        /*联系人信息*/
@@ -1175,8 +1189,7 @@
 	.applicationInformationDetail ul li{
 		float: left;
 		width: 33.3%;
-		/*margin-top: 10px;
-		 position: relative; */
+		height: 24px;
 		min-width: 330px;
 	}
 	ul li label{

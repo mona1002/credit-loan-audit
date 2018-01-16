@@ -1,3 +1,4 @@
+<!-- 反欺诈调查 -->
 <template>
 	<div class="aAntiFraudInvestigation">
 		<el-collapse v-model="activeNames" @change="handleChange">
@@ -34,63 +35,6 @@
 					</tr>
 					</tbody>
 				</table>
-			    <!-- <el-table
-			      :data="fraudApplyInfo"
-			      style="width: 100%"
-			      border
-			      class="car">
-			    				      <el-table-column
-			    				        type="index"
-			    				      	:index='1'
-			    				      	label="序号"
-			    				      	min-width="50">
-			    				      </el-table-column>
-			    				      <el-table-column
-			    				        prop="applySubno"
-			    				        label="进件编号"
-			    				        min-width="110">
-			    				      </el-table-column>
-			    				      <el-table-column
-			    				        prop="caseNum"
-			    				        label="案件编号"
-			    				        min-width="100">
-			    				      </el-table-column>
-			    				      <el-table-column
-			    				        prop="applyCustName"
-			    				        label="客户姓名"
-			    				        min-width="100">
-			    				      </el-table-column>
-			    				      <el-table-column
-			    				        prop="certCode"
-			    				        label="身份证号"
-			    				        min-width="100">
-			    				      </el-table-column>
-			    				      <el-table-column
-			    				        prop="proName"
-			    				        label="申请产品"
-			    				        min-width="100">
-			    				      </el-table-column>
-			    				      <el-table-column
-			    				        prop="appOrgName"
-			    				        label="进件机构"
-			    				        min-width="100">
-			    				      </el-table-column>
-			    				      <el-table-column
-			    				        prop="salePersonName"
-			    				        label="销售人员"
-			    				        min-width="100">
-			    				      </el-table-column>
-			    				      <el-table-column
-			    				        prop="applyPersonName"
-			    				        label="提报人"
-			    				        min-width="100">
-			    				      </el-table-column>
-			    				      <el-table-column
-			    				        prop="appOrgName"
-			    				        label="提报组别"
-			    				        min-width="100">
-			    				      </el-table-column>
-			    </el-table> -->
 		  	</el-collapse-item>
 		  	<el-collapse-item name="2">
 				<template slot="title">
@@ -99,8 +43,8 @@
 				</template>
 			    <div class="tibao">
 			    	<ul>
-			    		<li><label>提报人工号：</label><p>33333333{{fraudApplyInfo.applyCode}}</p></li>
-			    		<li><label>提报人姓名：</label><p>粉红丝带{{fraudApplyInfo.applyPersonName}}</p></li>
+			    		<li><label>提报人工号：</label><p>{{fraudApplyInfo.applyCode}}</p></li>
+			    		<li><label>提报人姓名：</label><p>{{fraudApplyInfo.applyPersonName}}</p></li>
 			    		<li><label>提报渠道：</label><p>{{fraudApplyInfo.channelTxt}}</p></li>
 			    	</ul>
 			    	<div>
@@ -108,7 +52,6 @@
 			    		<el-input
 						  type="textarea"
 						  :rows="3"
-						  placeholder="请输入内容"
 						  v-model="reason"
 						  disabled>
 						</el-input>
@@ -255,10 +198,10 @@
 			  <div class="numBody">
 				<div class="markIcon">
 		      		<span @click="relieve">
-		      			<img src="../../../../static/images/add.png" class="icon"><span>解除</span>
+		      			<img src="../../../../static/images/relieve.png" class="icon"><span>解除</span>
 		      		</span>
 					<span @click="recovery">
-						<img src="../../../../static/images/delete.png" class="icon"><span>恢复</span>
+						<img src="../../../../static/images/back.png" class="icon"><span>恢复</span>
 					</span>
 				</div>
 				<div>
@@ -507,6 +450,8 @@
 			   judgeFlag:'',
 			   //理由：主原因+子原因+描述
 			   reason:'',
+			   //恢复、解除的新数组
+			   newArray:[],
 			}
 		},
 		mounted(){
@@ -517,13 +462,20 @@
 			}else if (this.judgeFlag.flag == '04') {
 		        this.appinfoId = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")).applyId; //反欺诈主管
 		    }
-			this.request(this.appinfoId);	
+
+			this.request(this.appinfoId);
+			// //当前审核人编号 登陆人	
+			// this.fraudAuditInfo.auditCode=JSON.parse(localStorage.getItem('userInf')).userCode;
+			// //当前审核人姓名 登陆人
+			// this.fraudAuditInfo.auditName=JSON.parse(localStorage.getItem('userInf')).userName;
+			console.log(this.fraudAuditInfo.auditName +"...."+this.fraudAuditInfo.auditCode);
+			console.log(this.fraudAuditInfo)
 		},
 		methods:{
 			/*先查询列表*/
 			request(val){
 				this.post('antiFraud/getAntiFraudSurveyInfo',{
-		        'appinfoId':val
+		        'appinfoId':'1'//val,
 		      }
 	          ).then(res => {
 	          	if(res.statusCode==200 &&　res.data!=null){
@@ -532,7 +484,16 @@
 	          			this.fraudApplyInfo = this.fraudApplyInfo;
 	          		}else{
 	          			this.fraudApplyInfo = res.data.fraudApplyInfo;
-	          			this.reason = this.fraudApplyInfo.mainreaName+this.fraudApplyInfo.subreaName+this.fraudApplyInfo.applyDesc;
+	     				//提报来源  理由
+	          			if(this.fraudApplyInfo.mainreaName == null && this.fraudApplyInfo.subreaName == null && this.fraudApplyInfo.applyDesc == null){
+	          				this.reason = '';
+	          			}else{
+	          				this.reason = this.fraudApplyInfo.mainreaName+this.fraudApplyInfo.subreaName+this.fraudApplyInfo.applyDesc;
+	          			var reg = /null/g;
+	          			//var string = 'hdksjkdjnullfhdlfjl';
+	          			this.reason = this.reason.replace(reg,'');
+	          		};
+	          			
 	          		};
 
 	          		//命中规则
@@ -558,13 +519,23 @@
 			},
 			/*保存*/
 			bigSure(){
+				//当前审核人编号 登陆人	
+			this.fraudAuditInfo.auditCode=JSON.parse(localStorage.getItem('userInf')).userCode;
+			//当前审核人姓名 登陆人
+			this.fraudAuditInfo.auditName=JSON.parse(localStorage.getItem('userInf')).userName;
+				console.log(this.fraudAuditInfo);
+				console.log("aksdf"+this.fraudAuditInfo.auditName)
 				this.fraudAuditInfo.appinfoId=this.appinfoId;
-				this.fraudAuditInfo.auditCode=this.auditCode;
-				this.fraudAuditInfo.appinfoId=this.appinfoId;//当前审核人编号 登陆人
-				this.fraudTelCheckList.auditName=this.auditName;//当前审核人姓名 登陆人
-
 				this.post('antiFraud/saveAntiFraudSurveyInfo',{
-					"fraudAuditInfo":this.fraudAuditInfo,
+					"fraudAuditInfo":{
+						"appinfoId":'1',//this.appinfoId, // 反欺诈申请id
+			            "netCheck":this.fraudAuditInfo.netCheck, // 网查
+			            "oof":this.fraudAuditInfo.oof, // 114
+			            "other":this.fraudAuditInfo.other, // 其他
+			            "auditCode":this.fraudAuditInfo.auditCode, // 当前审核人编号
+			            "auditName":this.fraudAuditInfo.auditName, // 当前审核人姓名
+			            "id":this.fraudAuditInfo.id // 当前审核人姓名
+					},
 					"fraudTelCheckList":this.fraudTelCheckList
 				}).then(res=>{
 					if(res.statusCode==200){
@@ -622,30 +593,31 @@
 		 	},
 		 	handlDetail(index, row) {
 	        	console.log(index, row);
+	        	this.$router.push({path:'/MatchingInf'});
+	        	localStorage.setItem("internalObj", JSON.stringify({ id: row.id, matchApplyId: row.applyId, isInterFlag: false }));
+
 	      	},
 		    /*命中客户数 查询*/
 		    inquiry(row){
-		    	if(row.custCount==0){
-		    		return
-		    	}
+		    	if(row){
+		    		if(row.custCount==0){
+			    		return
+			    	}
+		    	};
+		    	
 		    	this.dialogVisible = true;
-		    	/*console.log(index);
-		    	for(var i=0;i<this.hitRuleList.length-1;i++){
-		    		if(index==i){
-		    			this.ruleId = this.hitRuleList[i].ruleId;
-		    		}
-		    	}*/
 		    	console.log(row.ruleId);
+		    	this.ruleId=row.ruleId;
+		    	this.check(this.pageParam,this.ruleId);
+		    },
+		    check(param,id){
 		    	this.post("antiFraud/getHitRuleCustList",{
-		    		pageParam:{
-				        pageSize:this.pageParam.pageSize,
-				        pageNum:this.pageParam.pageNum
-				    },
-				    ruleId:row.ruleId, // 规则Id
-		    	}).then(res=>{
+		    		'pageParam':param,
+		    		'ruleId':id
+				    }).then(res=>{
 		    		if(res.statusCode==200){
 		    			this.totals = res.data;
-		    			//this.recordList = res.data.recordList;
+		    			this.recordList = res.data.recordList;
 		    		}
 		    	})
 		    },
@@ -658,50 +630,54 @@
 		        this.currentPage = 1;
 		        this.setPageSize = 10;
 		      } else {
-		        this.inquiry();
+		        this.check(this.pageParam,this.ruleId);
 		      };
 		    },
 		     handleCurrentChange(val) {
 		      console.log('当前页: ${val}');
 		      this.pageParam.pageNum = val;
-      		  this.inquiry();
+      		  this.check(this.pageParam,this.ruleId);
 		    },
 		    /*多选框*/
 		    handleSelectionChange(val) {
 		        this.multipleSelection = val;
-		        //console.log(this.multipleSelection);
+		        console.log(this.multipleSelection);
 		    },
 		    /*解除*/
 		 	relieve(){
-		 		// for(var i=0;i<this.multipleSelection.length;i++){
-		   //      	if(this.multipleSelection[i].statusTxt == '已解除' || this.multipleSelection[i].statusTxt == '解除中'){
-		   //      		this.deldialogVisible = true;
-		   //      		return;
-		   //      	}else{
-		   //      		this.post("antiFraud/batchUpdateHitRule",{
-
-		   //      		}).then(res=>{
-
-		   //      		})
-		   //      	}
-		   //      }
-		   		/*var fg = this.multipleSelection.every(function(item){
-		   			return (item.statusTxt == '法人股3'|| item.statusTxt == '法人股2')
-		   		});*/
+		 		if(this.multipleSelection.length==0 ) return;
 		   		var fg = this.multipleSelection.every(function(item){
-		   			return (item.statusTxt == '法人股1')
+		   			return (item.statusTxt == '未解除')
 		   		});
 		   		if(!fg){
 		   			this.deldialogVisible = true;
-		   			//return;
 		   		}
 		   		if(fg){
-		   			this.post("antiFraud/batchUpdateHitRule",{
-
-		         		}).then(res=>{
-
+		   			this.newArray=[];
+		   			for(var i=0;i<this.multipleSelection.length;i++){
+		   				this.newArray.push(
+		   					{'id':this.multipleSelection[i].id,
+		   					'status':'01'
+		   					}
+		   				);
+		   			};
+		   			console.log(this.newArray);
+		   			this.post("antiFraud/batchUpdateHitRule",
+		   				this.newArray
+		         		).then(res=>{
+		         			if(res.statusCode==200){
+					        	this.check(this.pageParam,this.ruleId);
+					        	this.$message({
+									message:"解除成功！",
+									type:'success'
+								})
+					        }else{
+					        	this.$message({
+					              message:"解除失败！",
+					              type: 'error'
+					            })
+					        }
 		        	})
-		        	//console.log(this.multipleSelection);
 		   		}
 		 	},
 		 	/*解除 弹框按钮*/
@@ -710,20 +686,40 @@
 		 	},
 		 	/*恢复*/
 		 	recovery(){
+		 		if(this.multipleSelection.length==0 ) return;
 		 		var fg = this.multipleSelection.every(function(item){
-		   			return (item.statusTxt == '法人股2')
+		   			return (item.statusTxt == '已解除')
 		   		});
 		   		if(!fg){
 		   			this.backdialogVisible = true;
-		   			//return;
 		   		}
 		   		if(fg){
-		   			/*this.post("antiFraud/batchUpdateHitRule",{
-
-		         		}).then(res=>{
-
-		        	})*/
-		        	console.log(this.multipleSelection);
+		        	//console.log(this.multipleSelection);
+		        	this.newArray=[];
+		        	for(var i=0;i<this.multipleSelection.length;i++){
+		   				this.newArray.push(
+		   					{'id':this.multipleSelection[i].id,
+		   					'status':'00'
+		   					}
+		   				);
+		   			};
+		   			console.log(this.newArray);
+		        	this.post("antiFraud/batchUpdateHitRule",
+		   				this.newArray
+		         		).then(res=>{
+		         			if(res.statusCode==200){
+					        	this.check(this.pageParam,this.ruleId);
+					        	this.$message({
+									message:"恢复成功！",
+									type:'success'
+								})
+					        }else{
+					        	this.$message({
+					              message:"恢复失败！",
+					              type: 'error'
+					            })
+					        }
+		        	})
 		   		}
 		 	},
 		 	/*恢复 弹框按钮*/

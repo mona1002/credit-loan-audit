@@ -1,18 +1,6 @@
 <template>
 	<!-- 实地征信 -->
 	<div class="creditInvestigation">
-		<!-- <div class="creditHead">
-			<ul class="headul">
-				<li><label>日期：</label><span>{{datas.creditDate}}</span></li>
-				<li><label>是否可对借款人有效证件：</label><span>是</span></li>
-				<li><label>实地场所：</label><span>{{datas.isCheckDocTxt}}</span></li>
-			</ul>
-			<ul class="headul">
-				<li><label>实地人员1：</label><span>{{datas.isCheckDocTxt}}</span></li>
-				<li><label>不核对借款人有效证件原因：</label><span>{{datas.isCheckDocTxt}}</span></li>
-				<li><label>实地发起源：</label><span>{{datas.isCheckDocTxt}}</span></li>
-			</ul>
-		</div> -->
 		<div>
 			<el-collapse v-model="activeNames" @change="handleChange">
 				<el-collapse-item name="1">
@@ -22,12 +10,22 @@
 				    </template>
 				    <ul class="headul">
 						<li><label>日期：</label><span>{{datas.creditDate}}</span></li>
-						<li><label>是否核对借款人有效证件：</label><span>{{datas.isCheckDocTxt}}</span></li>
+						<li class="reason" v-show="datas.isCheckDocTxt=='否'"><label>是否核对借款人有效证件：</label><span>{{datas.isCheckDocTxt}}</span></li>
+						<li v-show="datas.isCheckDocTxt=='是'"><label>是否核对借款人有效证件：</label><span>{{datas.isCheckDocTxt}}</span></li>
+						<li v-show="datas.isCheckDocTxt==''"><label>是否核对借款人有效证件：</label><span>{{datas.isCheckDocTxt}}</span></li>
 						<li><label>实地场所：</label><span>{{aa}}</span></li>
 					</ul>
 					<ul class="headul">
 						<li><label>实地人员1：</label><span>{{bb}}</span></li>
-						<li><label>不核对借款人有效证件原因：</label><span>{{datas.isCheckDocRemark}}</span></li>
+						<!-- <li v-show="datas.isCheckDocTxt=='否'"><label>不核对借款人有效证件原因：</label><span>{{datas.isCheckDocRemark}}</span></li>-->
+						<li v-show="datas.isCheckDocTxt==''"></li> 
+						<li v-show="datas.isCheckDocTxt=='是'"></li> 
+						<li class="reason" v-show="datas.isCheckDocTxt=='否'">
+							<label>不核对借款人有效证件原因：</label>
+							<el-tooltip class="item" effect="dark" :content="datas.isCheckDocRemark" :disabled="datas.isCheckDocRemark==null" placement="top">
+						      <div>{{datas.isCheckDocRemark}}</div>
+						    </el-tooltip>
+						</li>
 						<li><label>实地发起源：</label><span>{{cc}}</span></li>
 					</ul>
 			  </el-collapse-item>
@@ -40,7 +38,14 @@
 					<li><label>地址：</label><span>{{datas.homeAddr}}</span></li>
 					<li><label>标志性建筑：</label><span>{{datas.homeLandMark}}</span></li>
 					<li><label>路线：</label><span>{{datas.homeRoute}}</span></li>
-					<li><label>是否核对借款人房产证件：</label><span>{{datas.homeNoverReason}}</span></li>
+
+
+					<li v-show="datas.homeNoverReasonTxt == ''"><label>是否核对借款人房产证件：</label><span>{{datas.homeNoverReasonTxt}}</span></li>
+					<li v-show="datas.homeNoverReasonTxt == '是'"><label>是否核对借款人房产证件：</label><span>{{datas.homeNoverReasonTxt}}</span></li>
+					<li class='reason' v-show="datas.homeNoverReasonTxt == '否'"><label>是否核对借款人房产证件：</label><span>{{datas.homeNoverReasonTxt}}</span></li>
+
+
+
 					<li><label>在场人员：</label><span>{{datas.homePresenter}}</span></li>
 					<li><label>社区周边环境：</label><span>{{datas.homeSurrounding}}</span></li>
 					<li><label>房屋建筑年代：</label><span>{{datas.homeBuildingAge}}</span></li>
@@ -49,9 +54,16 @@
 					<li><label></label><span></span></li>
 					<li><label></label><span></span></li>
 					<li><label></label><span></span></li>
-					<li><label></label><span></span></li>
+					<li v-show="datas.homeNoverReasonTxt == ''"></li>
+					<li v-show="datas.homeNoverReasonTxt == '是'"></li>
+					<li class='reason' v-show="datas.homeNoverReasonTxt == '否'">
+						<label>不核对借款人房产证件原因：</label>
+						<el-tooltip class="item" effect="dark" :content="datas.homeHouseInfo" :disabled="datas.homeHouseInfo==null" placement="top">
+						      <div>{{datas.homeHouseInfo}}</div>
+						</el-tooltip>
+					</li>
 					<li><label>与借款人关系：</label><span>{{datas.homeRelBorrower}}</span></li>
-					<li><label>房屋户型：</label><span>{{datas.homeHouseSize}}</span></li>
+					<li><label>房屋户型：</label><span>{{datas.homeHouseSizeTxt}}</span></li>
 					<li><label></label><span></span></li>
 				</ul>
 			  </el-collapse-item>
@@ -93,8 +105,8 @@
 			    </template>
 			    <ul class="headul">
 					<li><label>企业征信地址：</label><span>{{datas.comAddr}}</span></li>
-					<li><label>是否查验企业有效证件：</label><span>{{datas.comisEffDoc}}</span></li>
-					<li><label>各项材料原件是否收齐比对：</label><span>{{datas.comisMaterialComp}}</span></li>
+					<li><label>是否查验企业有效证件：</label><span>{{datas.comisEffDocTxt}}</span></li>
+					<li><label>各项材料原件是否收齐比对：</label><span>{{datas.comisMaterialCompTxt}}</span></li>
 				</ul>
 				<ul class="headul">
 					<li><label></label><span></span></li>
@@ -141,7 +153,7 @@
 			    </template>
 			    <ul class="headul">
 					<li><label>是否开工中：</label><span>{{datas.comIsStartTxt}}</span></li>
-					<li><label>是否统一着装：</label><span>{{datas.comIsDressUni}}</span></li>
+					<li><label>是否统一着装：</label><span>{{datas.comIsDressUniTxt}}</span></li>
 					<li><label>办公区工位数情况：</label><span>{{gg}}</span></li>
 				</ul>
 				<ul class="headul">
@@ -310,6 +322,7 @@
 	}
 	ul.headul li{
 		margin-top: 10px;
+		height: 24px;
 	} 
 	ul.headul li:last-child{
 		margin-bottom: 10px;
@@ -326,5 +339,25 @@
 	}
 	.headFont{
 		font-size: 16px;
+	}
+	ul.headul li.reason{
+		height: 75px;
+	}
+	.reason span{
+		height: 75px;
+		line-height: 75px;
+	}
+	.reason label{
+		height: 75px;
+		line-height: 75px;
+		float: left;
+	}
+	.reason div{
+		width: calc( 100% - 220px );
+		display: inline-block;
+	    height: 75px;
+	    overflow: auto;
+	    padding-left: 10px;
+	    border: 1px solid #d8dce5;
 	}
 </style> 

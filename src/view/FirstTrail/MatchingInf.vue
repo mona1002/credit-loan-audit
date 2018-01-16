@@ -72,7 +72,7 @@
           </div>
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
-            <RAudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></RAudioVisualLeft>
+            <RAudioVisual :custom="customInf.applyId " v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></RAudioVisual>
             <Rremark v-if=" this.tabContent2==1"></Rremark>
             <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
             <RapplicationInformationDetail v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
@@ -95,7 +95,7 @@
           <p>影像资料</p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <AudioVisualLeft :custom="customInf.applyId "></AudioVisualLeft>
+            <RAudioVisualLeft :custom="customInf.applyId "></RAudioVisualLeft>
           </div>
         </div>
         <!-- 弹出层右侧 div -->
@@ -109,7 +109,7 @@
           </p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <AudioVisualLeft :custom="customInf.applyId " ref="audioChild" v-on:inputInf="inputInner"></AudioVisualLeft>
+            <RAudioVisualLeft :custom="customInf.applyId " ref="audioChild" v-on:inputInf="inputInner"></RAudioVisualLeft>
           </div>
         </div>
       </div>
@@ -125,7 +125,7 @@
   import RAudioVisual from "./ReadComponent/RAudioVisual";
   import RAudioVisualLeft from "./ReadComponent/RAudioVisualLeft.vue";
   import FMCreditForm from "../FinalTrial/FinalMatchComponent/FMCreditForm.vue"; //信审表-终审查看-del初审人员-第一个
-  import RborrowerInformationSetail from "./ReadComponent/RborrowerInformationSetail"; //借款人资料
+  import RborrowerInformationSetail from "../AntiFraud/matchComponent/MborrowerInformationSetail.vue"; //借款人资料
   import RapplicationInformationDetail from "./ReadComponent/RapplicationInformationDetail"; //申请信息
   import RFinanceInformation from "./ReadComponent/RFinanceInformation"; //账务信息
   import RApprovalConclusion from "./ReadComponent/RApprovalConclusion"; //信审审批结论轨迹
@@ -267,7 +267,8 @@
     },
     mounted() {
       console.log("匹配查看");
-      this.tastwaitingPass = JSON.parse(localStorage.getItem("internalId"));
+      this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
+      console.log(this.tastwaitingPass)
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.matchApplyId,
       }).then(res => {
@@ -296,14 +297,11 @@
       InternalMatch,
       borrowerInformation,
       PhoneCredit,
-
-
       // 信审审批
       CreditApproval,
       // 查询
       aut,
       // cremarkDetail, 
-
       cborrowerInformationDetail,
       RprocessTrajectory
     }

@@ -75,17 +75,25 @@ import aAntiApplyInf from '@/view/AntiFraud/components/aAntiApplyInf.vue'
 import aAntiFraudInvestigation from '@/view/AntiFraud/components/aAntiFraudInvestigation.vue'
 // 审批结论
 import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
+// 反欺诈借款人资料
+import AborrowerInformationDetail from '@/view/AntiFraud/components/AborrowerInformationDetail.vue'
+// 反欺诈、复议（内匹）借款人资料
+import MborrowerInformationSetail from '@/view/AntiFraud/matchComponent/MborrowerInformationSetail.vue'
+
 // -------------------------复议---------------------
 import ReconsiderApply from '../view/Reconsider/ReconsiderComponents/ReconsiderApply.vue'//复议申请
 import reconsiderList from '../view/Reconsider/reconsiderList.vue'//复议申请任务列表
 import ReconsiderSplit from '../view/Reconsider/ReconsiderSplit.vue'//复议专员主管分屏
 // import ReconsiderAntiSplit from '../view/Reconsider/ReconsiderAntiSplit.vue'//复议反欺诈分屏
+//复议结论
+import ReconsiderationConclusion from '../view/Reconsider/ReconsiderComponents/ReconsiderationConclusion.vue'
 
 // -------------------------流程监控---------------------
 import processMoni from '../view/processMoni/processMoni.vue'
 // -----------------------任务管理----------------------
 import DoneTask from'../view/TaskManagement/reconsider/DoneTask.vue'//
 import HistoryTask from'../view/TaskManagement/reconsider/HistoryTask.vue'//
+import TaskManagementSplit from'../view/TaskManagement/reconsider/TaskManagementSplit.vue'//
 
 
 Vue.use(Router)
@@ -170,6 +178,16 @@ const routes = [{
 {
   path: '/RApprovalConclusion',
   component: RApprovalConclusion
+},
+// 反欺诈 借款人资料
+{
+  path: '/AborrowerInformationDetail',
+  component: AborrowerInformationDetail
+},
+// 反欺诈、复议（内匹） 借款人资料
+{
+  path: '/MborrowerInformationSetail',
+  component: MborrowerInformationSetail
 },
 // 账务信息
 {
@@ -281,6 +299,12 @@ const routes = [{
   path:'/ReconsiderSplit',
   component:ReconsiderSplit
 },
+//复议结论
+{
+  path:'/ReconsiderationConclusion',
+  component:ReconsiderationConclusion
+},
+
 // {
 //   path:'/ReconsiderAntiSplit',
 //   component:ReconsiderAntiSplit
@@ -298,6 +322,10 @@ const routes = [{
 {
   path: '/HistoryTask',
   component: HistoryTask
+},
+{
+  path: '/TaskManagementSplit',
+  component: TaskManagementSplit
 }
 ];
 
