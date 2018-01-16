@@ -198,10 +198,10 @@
 			  <div class="numBody">
 				<div class="markIcon">
 		      		<span @click="relieve">
-		      			<img src="../../../../static/images/add.png" class="icon"><span>解除</span>
+		      			<img src="../../../../static/images/relieve.png" class="icon"><span>解除</span>
 		      		</span>
 					<span @click="recovery">
-						<img src="../../../../static/images/delete.png" class="icon"><span>恢复</span>
+						<img src="../../../../static/images/back.png" class="icon"><span>恢复</span>
 					</span>
 				</div>
 				<div>
@@ -462,13 +462,20 @@
 			}else if (this.judgeFlag.flag == '04') {
 		        this.appinfoId = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")).applyId; //反欺诈主管
 		    }
-			this.request(this.appinfoId);	
+
+			this.request(this.appinfoId);
+			// //当前审核人编号 登陆人	
+			// this.fraudAuditInfo.auditCode=JSON.parse(localStorage.getItem('userInf')).userCode;
+			// //当前审核人姓名 登陆人
+			// this.fraudAuditInfo.auditName=JSON.parse(localStorage.getItem('userInf')).userName;
+			console.log(this.fraudAuditInfo.auditName +"...."+this.fraudAuditInfo.auditCode);
+			console.log(this.fraudAuditInfo)
 		},
 		methods:{
 			/*先查询列表*/
 			request(val){
 				this.post('antiFraud/getAntiFraudSurveyInfo',{
-		        'appinfoId':1
+		        'appinfoId':'1'//val,
 		      }
 	          ).then(res => {
 	          	if(res.statusCode==200 &&　res.data!=null){
@@ -512,12 +519,23 @@
 			},
 			/*保存*/
 			bigSure(){
+				//当前审核人编号 登陆人	
+			this.fraudAuditInfo.auditCode=JSON.parse(localStorage.getItem('userInf')).userCode;
+			//当前审核人姓名 登陆人
+			this.fraudAuditInfo.auditName=JSON.parse(localStorage.getItem('userInf')).userName;
+				console.log(this.fraudAuditInfo);
+				console.log("aksdf"+this.fraudAuditInfo.auditName)
 				this.fraudAuditInfo.appinfoId=this.appinfoId;
-				this.fraudAuditInfo.auditCode=this.auditCode;//当前审核人编号 登陆人
-				this.fraudTelCheckList.auditName=this.auditName;//当前审核人姓名 登陆人
-
 				this.post('antiFraud/saveAntiFraudSurveyInfo',{
-					"fraudAuditInfo":this.fraudAuditInfo,
+					"fraudAuditInfo":{
+						"appinfoId":'1',//this.appinfoId, // 反欺诈申请id
+			            "netCheck":this.fraudAuditInfo.netCheck, // 网查
+			            "oof":this.fraudAuditInfo.oof, // 114
+			            "other":this.fraudAuditInfo.other, // 其他
+			            "auditCode":this.fraudAuditInfo.auditCode, // 当前审核人编号
+			            "auditName":this.fraudAuditInfo.auditName, // 当前审核人姓名
+			            "id":this.fraudAuditInfo.id // 当前审核人姓名
+					},
 					"fraudTelCheckList":this.fraudTelCheckList
 				}).then(res=>{
 					if(res.statusCode==200){
@@ -575,6 +593,9 @@
 		 	},
 		 	handlDetail(index, row) {
 	        	console.log(index, row);
+	        	this.$router.push({path:'/MatchingInf'});
+	        	localStorage.setItem("internalObj", JSON.stringify({ id: row.id, matchApplyId: row.applyId, isInterFlag: false }));
+
 	      	},
 		    /*命中客户数 查询*/
 		    inquiry(row){
@@ -587,19 +608,6 @@
 		    	this.dialogVisible = true;
 		    	console.log(row.ruleId);
 		    	this.ruleId=row.ruleId;
-		    	/*this.post("antiFraud/getHitRuleCustList",{
-		    		pageParam:{
-				        pageSize:this.pageParam.pageSize,
-				        pageNum:this.pageParam.pageNum,
-				        ruleId:this.pageParam.ruleId
-				    },
-				    //ruleId:row.ruleId, // 规则Id
-		    	}).then(res=>{
-		    		if(res.statusCode==200){
-		    			this.totals = res.data;
-		    			this.recordList = res.data.recordList;
-		    		}
-		    	})*/
 		    	this.check(this.pageParam,this.ruleId);
 		    },
 		    check(param,id){
@@ -637,6 +645,7 @@
 		    },
 		    /*解除*/
 		 	relieve(){
+		 		if(this.multipleSelection.length==0 ) return;
 		   		var fg = this.multipleSelection.every(function(item){
 		   			return (item.statusTxt == '未解除')
 		   		});
@@ -648,7 +657,7 @@
 		   			for(var i=0;i<this.multipleSelection.length;i++){
 		   				this.newArray.push(
 		   					{'id':this.multipleSelection[i].id,
-		   					'status':this.multipleSelection[i].status
+		   					'status':'01'
 		   					}
 		   				);
 		   			};
@@ -677,6 +686,7 @@
 		 	},
 		 	/*恢复*/
 		 	recovery(){
+		 		if(this.multipleSelection.length==0 ) return;
 		 		var fg = this.multipleSelection.every(function(item){
 		   			return (item.statusTxt == '已解除')
 		   		});
@@ -689,7 +699,7 @@
 		        	for(var i=0;i<this.multipleSelection.length;i++){
 		   				this.newArray.push(
 		   					{'id':this.multipleSelection[i].id,
-		   					'status':this.multipleSelection[i].status
+		   					'status':'00'
 		   					}
 		   				);
 		   			};
