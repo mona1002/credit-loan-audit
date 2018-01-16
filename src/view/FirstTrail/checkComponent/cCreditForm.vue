@@ -775,8 +775,8 @@
           this.FormData.parentIncome;
         this.FormData.fconsumption ? this.FormData.fconsumption = this.formatNumber(this.FormData.fconsumption, 2, 0) :
           this.FormData.fconsumption;
-           this.FormData.selfpremisesArea = this.FormData.selfpremisesArea.slice(0, -2);
-  this.FormData.selfhasProportion = this.FormData.selfhasProportion.slice(0, -1);
+        this.FormData.selfpremisesArea = this.FormData.selfpremisesArea.slice(0, -2);
+        this.FormData.selfhasProportion = this.FormData.selfhasProportion.slice(0, -1);
         this.FormData.selfpremisesArea ? this.FormData.selfpremisesArea = this.formatNumber(this.FormData.selfpremisesArea,
           2, 0) + 'm²' : this.FormData.selfpremisesArea;
         this.FormData.selfhasProportion ? this.FormData.selfhasProportion = this.formatNumber(this.FormData.selfhasProportion,
@@ -902,7 +902,7 @@
             val == 0 ? this.InternetShow.commentS10 = false : this.InternetShow.commentS10 = true;
             break;
           case 11:
-             val == 0 || val == null ? this.checkId.declearNloaned = false : this.checkId.declearNloaned = true;
+            val == 0 || val == null ? this.checkId.declearNloaned = false : this.checkId.declearNloaned = true;
             break;
           case 12:
             val == 0 || val == null ? this.workInf.private = false : this.workInf.private = true;
@@ -952,40 +952,41 @@
         applyId: this.getParams.applyId,
         // applyId: "00542",
       }).then(res => {
-          if (res.statusCode == 200) {
-        this.FormData = res.data;
-        // console.log(this.FormData)
-        this.AreaNPercent();
-        // this.mountM();
-        this.formatSC();
-        this.mountJ(0, res.data.wbeexEcuted);
-        this.mountJ(1, res.data.wnetHirecom);
-        this.mountJ(2, res.data.wnetEcutedBrea);
-        this.mountJ(3, res.data.wnetHirecomBrea);
-        this.mountJ(4, res.data.wnetPhone);
-        this.mountJ(5, res.data.wnetHirecomName);
-        this.mountJ(6, res.data.wnetHirecomPhone);
-        this.mountJ(7, res.data.wnetAddrandEstate);
-        this.mountJ(8, res.data.wnetHirecomAddress);
-        this.mountJ(9, res.data.wnetCompany);
-        this.mountJ(10, res.data.wnetAddrstate);
-        this.mountJ(11, res.data.iisself);
-        this.mountJ(12, res.data.privateOwnerFlag);
-        this.mountJ(13, res.data.fmarrflag);
-        this.mountJ(14, res.data.spouseWork);
-        this.mountJ(15, res.data.spouseSamecity);
-        this.mountJ(16, res.data.childFlag);
-        this.mountJ(17, res.data.childIspaycost);
-        this.mountJ(18, res.data.parentIsliving);
-        this.mountJ(19, res.data.brothersIfhas);
-        this.mountJ(20, res.data.aisresident);
-        this.mountJ(21, res.data.iloanBefore);
-          }else {
+        if (res.statusCode == 200) {
+          this.FormData = res.data;
+          // console.log(this.FormData)
+          this.AreaNPercent();
+          // this.mountM();
+          this.formatSC();
+          this.checkData.aaddress = this.checkData.aaddress.replace(/null/g, '');
+          this.mountJ(0, res.data.wbeexEcuted);
+          this.mountJ(1, res.data.wnetHirecom);
+          this.mountJ(2, res.data.wnetEcutedBrea);
+          this.mountJ(3, res.data.wnetHirecomBrea);
+          this.mountJ(4, res.data.wnetPhone);
+          this.mountJ(5, res.data.wnetHirecomName);
+          this.mountJ(6, res.data.wnetHirecomPhone);
+          this.mountJ(7, res.data.wnetAddrandEstate);
+          this.mountJ(8, res.data.wnetHirecomAddress);
+          this.mountJ(9, res.data.wnetCompany);
+          this.mountJ(10, res.data.wnetAddrstate);
+          this.mountJ(11, res.data.iisself);
+          this.mountJ(12, res.data.privateOwnerFlag);
+          this.mountJ(13, res.data.fmarrflag);
+          this.mountJ(14, res.data.spouseWork);
+          this.mountJ(15, res.data.spouseSamecity);
+          this.mountJ(16, res.data.childFlag);
+          this.mountJ(17, res.data.childIspaycost);
+          this.mountJ(18, res.data.parentIsliving);
+          this.mountJ(19, res.data.brothersIfhas);
+          this.mountJ(20, res.data.aisresident);
+          this.mountJ(21, res.data.iloanBefore);
+        } else {
           this.$message.error(res.msg);
         }
       });
 
-      
+
       // 省    
       // this.get("/credit/queryProvince", {}).then(res => {
       //   this.hirecomAddress = res.data;
