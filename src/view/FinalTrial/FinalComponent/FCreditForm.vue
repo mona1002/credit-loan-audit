@@ -911,11 +911,11 @@
             });
           } else {
             this.Confirm = false;
-              this.$message.error('提交失败，有必填项未填写！');
+            this.$message.error('提交失败，有必填项未填写！');
           }
         });
       },
-       formatSC() {
+      formatSC() {
         this.FormData.fbalance ? this.FormData.fbalance = this.formatNumber(this.FormData.fbalance, 2, 0) : this.FormData
           .fbalance;
         this.FormData.iloanAmt ? this.FormData.iloanAmt = this.formatNumber(this.FormData.iloanAmt, 2, 0) : this.FormData
@@ -938,8 +938,8 @@
           this.FormData.parentIncome;
         this.FormData.fconsumption ? this.FormData.fconsumption = this.formatNumber(this.FormData.fconsumption, 2, 0) :
           this.FormData.fconsumption;
-           this.FormData.selfpremisesArea = this.FormData.selfpremisesArea.slice(0, -2);
-  this.FormData.selfhasProportion = this.FormData.selfhasProportion.slice(0, -1);
+        this.FormData.selfpremisesArea = this.FormData.selfpremisesArea.slice(0, -2);
+        this.FormData.selfhasProportion = this.FormData.selfhasProportion.slice(0, -1);
         this.checkData.selfpremisesArea ? this.checkData.selfpremisesArea = this.formatNumber(this.checkData.selfpremisesArea,
           2, 0) + 'm²' : this.checkData.selfpremisesArea;
         this.checkData.selfhasProportion ? this.checkData.selfhasProportion = this.formatNumber(this.checkData.selfhasProportion,
@@ -1085,7 +1085,8 @@
             this.FormData.applyId = this.getParams.applyId;
             this.AreaNPercent();
             // this.mountM();
-                    this.formatSC();
+            this.formatSC();
+            this.checkData.aaddress = this.checkData.aaddress.replace(/null/g, '')
             this.mountJ(0, res.data.wbeexEcuted);
             this.mountJ(1, res.data.wnetHirecom);
             this.mountJ(2, res.data.wnetEcutedBrea);
@@ -1419,6 +1420,7 @@
     border-radius: 4px;
   }
   /* 省略号 */
+
   .elips {
     width: calc( 100% - 197px);
     overflow: hidden;
@@ -1427,6 +1429,7 @@
     vertical-align: middle;
   }
   /* 第一经销商 */
+
   .Suppliers {
     width: calc( 100% - 205px);
   }

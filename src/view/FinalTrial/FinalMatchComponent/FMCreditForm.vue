@@ -1093,6 +1093,7 @@
           this.AreaNPercent();
           // this.mountM();
           this.formatSC();
+          this.checkData.aaddress = this.checkData.aaddress.replace(/null/g, '')
           this.mountJ(0, res.data.wbeexEcuted);
           this.mountJ(1, res.data.wnetHirecom);
           this.mountJ(2, res.data.wnetEcutedBrea);
