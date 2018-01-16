@@ -1574,6 +1574,7 @@ overflow-x: hidden;
   text-align: center;
 }
 
+
 @media screen and (max-width: 1485px) {
   .taskWatting .el-table__body-wrapper {
     overflow-x: scroll;
@@ -1598,11 +1599,43 @@ overflow-x: hidden;
   text-align: center;
 }
 
+.taskWatting.RtaskWatting .el-table th:nth-of-type(2) {
+  text-align: center;
+}
+
+.taskWatting.RtaskWatting .el-table__body-wrapper .el-table__body td:nth-of-type(2) {
+  text-align: center;
+}
+
 .taskWatting .el-table th:nth-of-type(4) {
   text-align: center;
 }
 
 .taskWatting .el-table__body-wrapper .el-table__body td:nth-of-type(4) {
+  text-align: center;
+}
+
+.taskWatting.RtaskWatting .el-table th:nth-of-type(5) {
+  text-align: center;
+}
+
+.taskWatting.RtaskWatting .el-table__body-wrapper .el-table__body td:nth-of-type(5) {
+  text-align: center;
+}
+
+.taskWatting.RtaskWatting .el-table th:nth-of-type(6) {
+  text-align: center;
+}
+
+.taskWatting.RtaskWatting .el-table__body-wrapper .el-table__body td:nth-of-type(6) {
+  text-align: center;
+}
+
+.taskWatting.RtaskWatting .el-table th:nth-of-type(8) {
+  text-align: center;
+}
+
+.taskWatting.RtaskWatting .el-table__body-wrapper .el-table__body td:nth-of-type(8) {
   text-align: center;
 }
 
