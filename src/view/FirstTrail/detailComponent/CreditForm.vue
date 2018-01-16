@@ -884,7 +884,7 @@
             <li style="marginTop:20px;">
               <i class="hint"></i>
               <label class="InternetInf_left_label ">现住址：</label>
-              <span class="detail_inf oneline"> </span> {{this.checkData.aaddress}} </span>
+              <span class="detail_inf oneline"> </span> {{this.checkData.aaddress}}</span>
             </li>
             <li>
               <i class="hint"></i>
@@ -2400,6 +2400,7 @@
             this.checkData.applyId = this.getParams.applyId;
             this.mountM();
             this.AreaNPercent();
+            this.checkData.aaddress=this.checkData.aaddress.replace(/null/g,'')
             this.mountJ(0, res.data.wbeexEcuted);
             this.mountJ(1, res.data.wnetHirecom);
             this.mountJ(2, res.data.wnetEcutedBrea);

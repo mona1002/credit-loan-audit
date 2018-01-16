@@ -677,7 +677,7 @@
           <span class="headFont">初审结论</span>
         </template>
         <div class="CreditForm_result up_padding">
-         <ul>
+          <ul>
             <li style="width:66.6%;">
               <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
               <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==null||this.FormData.oother==''" :content="this.FormData.oother"
@@ -703,7 +703,7 @@
   export default {
     data() {
       return {
-          judgeFlag:'',
+        judgeFlag: '',
         FormData: [],
         Pwidth: [],
         CFwidth: [],
@@ -829,7 +829,7 @@
       }
     },
     methods: {
-       formatSC() {
+      formatSC() {
         this.FormData.fbalance ? this.FormData.fbalance = this.formatNumber(this.FormData.fbalance, 2, 0) : this.FormData
           .fbalance;
         this.FormData.iloanAmt ? this.FormData.iloanAmt = this.formatNumber(this.FormData.iloanAmt, 2, 0) : this.FormData
@@ -852,8 +852,8 @@
           this.FormData.parentIncome;
         this.FormData.fconsumption ? this.FormData.fconsumption = this.formatNumber(this.FormData.fconsumption, 2, 0) :
           this.FormData.fconsumption;
-           this.FormData.selfpremisesArea = this.FormData.selfpremisesArea.slice(0, -2);
-  this.FormData.selfhasProportion = this.FormData.selfhasProportion.slice(0, -1);
+        this.FormData.selfpremisesArea = this.FormData.selfpremisesArea.slice(0, -2);
+        this.FormData.selfhasProportion = this.FormData.selfhasProportion.slice(0, -1);
         this.checkData.selfpremisesArea ? this.checkData.selfpremisesArea = this.formatNumber(this.checkData.selfpremisesArea,
           2, 0) + 'm²' : this.checkData.selfpremisesArea;
         this.checkData.selfhasProportion ? this.checkData.selfhasProportion = this.formatNumber(this.checkData.selfhasProportion,
@@ -948,7 +948,7 @@
             val == 0 ? this.InternetShow.commentS10 = false : this.InternetShow.commentS10 = true;
             break;
           case 11:
-             val == 0 || val == null ? this.checkId.declearNloaned = false : this.checkId.declearNloaned = true;
+            val == 0 || val == null ? this.checkId.declearNloaned = false : this.checkId.declearNloaned = true;
             break;
           case 12:
             val == 0 || val == null ? this.workInf.private = false : this.workInf.private = true;
@@ -985,12 +985,12 @@
       },
     },
     mounted() {
-             this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '03') {
         this.getParams = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈专员-匹配查看
       } else if (this.judgeFlag.flag == '04') {
         this.getParams = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管-匹配查看
-      }else if (this.judgeFlag.flag == '05'||this.judgeFlag.flag == '06') {
+      } else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
         this.getParams = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议主管+专员
       }
       console.log(this.getParams)
@@ -1004,6 +1004,7 @@
           this.FormData = res.data;
           this.AreaNPercent();
           this.formatSC();
+          this.checkData.aaddress = this.checkData.aaddress.replace(/null/g, '')
           this.mountJ(0, res.data.wbeexEcuted);
           this.mountJ(1, res.data.wnetHirecom);
           this.mountJ(2, res.data.wnetEcutedBrea);
