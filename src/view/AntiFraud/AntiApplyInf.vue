@@ -72,7 +72,7 @@
       </li>
       <li class="item-column1">
         <!-- <span class="require-icon" style="left:30px;">*</span> -->
-        <div class="left-title">调查结论：</div>
+        <div class="left-title">欺诈上报描述：</div>
         <div class="textarea-class">
           <el-input v-model="applyDesc" type="textarea" :rows="5" resize=none :maxlength="500" :disabled="true">
           </el-input>
@@ -106,7 +106,7 @@ export default {
 
 
       applyId: '', // 申请单ID
-      id: '', // 主管/专员 用 列表id
+      // id: '', // 主管/专员 用 列表id
 
       antiFlag: '', // 标志
     }
@@ -117,23 +117,26 @@ export default {
     var judgeFlag = JSON.parse(localStorage.getItem('judge'));
     this.antiFlag = judgeFlag.flag;
 
-    // 初审 终审 取 applyId
-    if (this.antiFlag == '01' || this.antiFlag == '02') {
-      // 先取到 id , 请求 反欺诈 页面信息
-      // var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-      this.id = JSON.parse(localStorage.getItem('taskInWaitting')).applyId;
-    } else if (this.antiFlag == '02') {
-      // FtaskInWaitting
-      // var FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
-      this.id = JSON.parse(localStorage.getItem('FtaskInWaitting')).applyId;
-    } else if (this.antiFlag == '03') { // 其他取 列表id 取本地
-      console.log(' 专员 ');
+    // // 初审 终审 取 applyId
+    // if (this.antiFlag == '01' || this.antiFlag == '02') {
+    //   // 先取到 id , 请求 反欺诈 页面信息
+    //   // var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+    //   this.id = JSON.parse(localStorage.getItem('taskInWaitting')).applyId;
+    // } else if (this.antiFlag == '02') {
+    //   // FtaskInWaitting
+    //   // var FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
+    //   this.id = JSON.parse(localStorage.getItem('FtaskInWaitting')).applyId;
+    // } else if (this.antiFlag == '03') { // 其他取 列表id 取本地
+    //   console.log(' 专员 ');
 
-      this.id = JSON.parse(localStorage.getItem('AntitaskInWaitting')).applyId;
-    } else if (this.antiFlag == '04') {
-      console.log(' 主管 ');
-      this.id = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).applyId;
-    }
+    //   this.id = JSON.parse(localStorage.getItem('AntitaskInWaitting')).applyId;
+    // } else if (this.antiFlag == '04') {
+    //   console.log(' 主管 ');
+    //   this.id = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).applyId;
+    // }
+
+    // 查询页面全部 用列表的 id
+    this.id = this.$route.params.id;
 
     // 经办人 登录用户名
     var userInfo = JSON.parse(localStorage.getItem('userInf'));

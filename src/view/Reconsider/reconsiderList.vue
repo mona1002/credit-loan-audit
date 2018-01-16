@@ -1,6 +1,6 @@
 <!-- 复议申请任务列表 -->
 <template>
-	<div class="taskWatting">
+	<div class="taskWatting RtaskWatting">
 		<myHead class="top"></myHead>
 		<div class="taskWattingContain">
 			

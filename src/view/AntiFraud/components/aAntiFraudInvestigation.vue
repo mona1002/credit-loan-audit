@@ -101,7 +101,7 @@
 			    			<el-input
 							  type="textarea"
 							  :rows="3"
-							  placeholder="请输入内容"
+							  resize="none"
 							  v-model="fraudAuditInfo.netCheck">
 							</el-input>
 							<!-- <textarea>{{fraudAuditInfo.netCheck}}</textarea> -->
@@ -111,7 +111,7 @@
 			    			<el-input
 							  type="textarea"
 							  :rows="3"
-							  placeholder="请输入内容"
+							  resize="none"
 							  v-model="fraudAuditInfo.oof">
 							</el-input>
 							<!-- <textarea>{{fraudAuditInfo.oof}}</textarea> -->
@@ -121,7 +121,7 @@
 			    			<el-input
 							  type="textarea"
 							  :rows="3"
-							  placeholder="请输入内容"
+							  resize="none"
 							  v-model="fraudAuditInfo.other">
 							</el-input>
 							<!-- <textarea>{{fraudAuditInfo.other}}</textarea> -->
@@ -303,38 +303,7 @@
 				aa: '命中规则名称：',
 				activeNames: ['1','2','3','4','5','6','7','8','9','10'],
 				fraudApplyInfo:'',
-				hitRuleList:[
-					/*{
-		                ruleId:"xxx", // 规则ID
-		                ruleContent:"方式开发健康", // 命中规则名称
-		                custCount:0 // 命中客户数
-		            },
-		            {
-		                ruleId:"xxx", // 规则ID
-		                ruleContent:"方式开发健康", // 命中规则名称
-		                custCount:20 // 命中客户数
-		            },
-		            {
-		                ruleId:"xxx", // 规则ID
-		                ruleContent:"方式开发健康", // 命中规则名称
-		                custCount:20 // 命中客户数
-		            },
-		            {
-		                ruleId:"xxx", // 规则ID
-		                ruleContent:"方式开发健康", // 命中规则名称
-		                custCount:20 // 命中客户数
-		            },
-		            {
-		                ruleId:"xxx", // 规则ID
-		                ruleContent:"方式开发健康", // 命中规则名称
-		                custCount:20 // 命中客户数
-		            },
-		            {
-		                ruleId:"xxx", // 规则ID
-		                ruleContent:"方式开发健康", // 命中规则名称
-		                custCount:20 // 命中客户数
-		            },*/
-				],
+				hitRuleList:[],
 				fraudTelCheckList:[],
 				fraudAuditInfo:{
 					"appinfoId":"", // 反欺诈申请id
@@ -345,93 +314,10 @@
 		            "auditName":"" // 当前审核人姓名
 				},
 				dialogVisible: false,
-				/*命中规则 列表*/
-				//recordList:[],
 				totals:{},
 				currentPage:1,// 默认显示的当前页
 				setPageSize:10,
-				recordList:[
-		          /*{
-		            ruleId:"xxxx", // 规则Id
-		            ruleContent:"功夫功夫", // 命中规则的名称
-		            applySubNo:"13424675787", // 进件编号
-		            custName:"和规范化风格哈", // 命中客户名称
-		            status:"而非给", // 状态
-		            statusTxt:"法人股1" // 状态文本
-		         },
-		         {
-		            ruleId:"xxxx", // 规则Id
-		            ruleContent:"功夫功夫", // 命中规则的名称
-		            applySubNo:"13424675787", // 进件编号
-		            custName:"和规范化风格哈", // 命中客户名称
-		            status:"而非给", // 状态
-		            statusTxt:"法人股2" // 状态文本
-		         },
-		         {
-		            ruleId:"xxxx", // 规则Id
-		            ruleContent:"功夫功夫", // 命中规则的名称
-		            applySubNo:"13424675787", // 进件编号
-		            custName:"和规范化风格哈", // 命中客户名称
-		            status:"而非给", // 状态
-		            statusTxt:"法人股2" // 状态文本
-		         },
-		         {
-		            ruleId:"xxxx", // 规则Id
-		            ruleContent:"功夫功夫", // 命中规则的名称
-		            applySubNo:"13424675787", // 进件编号
-		            custName:"和规范化风格哈", // 命中客户名称
-		            status:"而非给", // 状态
-		            statusTxt:"法人股3" // 状态文本
-		         },
-		         {
-		            ruleId:"xxxx", // 规则Id
-		            ruleContent:"功夫功夫", // 命中规则的名称
-		            applySubNo:"13424675787", // 进件编号
-		            custName:"和规范化风格哈", // 命中客户名称
-		            status:"而非给", // 状态
-		            statusTxt:"法人股3" // 状态文本
-		         },
-		         {
-		            ruleId:"xxxx", // 规则Id
-		            ruleContent:"功夫功夫", // 命中规则的名称
-		            applySubNo:"13424675787", // 进件编号
-		            custName:"和规范化风格哈", // 命中客户名称
-		            status:"而非给", // 状态
-		            statusTxt:"法人股1" // 状态文本
-		         },
-		         {
-		            ruleId:"xxxx", // 规则Id
-		            ruleContent:"功夫功夫", // 命中规则的名称
-		            applySubNo:"13424675787", // 进件编号
-		            custName:"和规范化风格哈", // 命中客户名称
-		            status:"而非给", // 状态
-		            statusTxt:"法人股1" // 状态文本
-		         },
-		         {
-		            ruleId:"xxxx", // 规则Id
-		            ruleContent:"功夫功夫", // 命中规则的名称
-		            applySubNo:"13424675787", // 进件编号
-		            custName:"和规范化风格哈", // 命中客户名称
-		            status:"而非给", // 状态
-		            statusTxt:"法人股2" // 状态文本
-		         },
-		         {
-		            ruleId:"xxxx", // 规则Id
-		            ruleContent:"功夫功夫", // 命中规则的名称
-		            applySubNo:"13424675787", // 进件编号
-		            custName:"和规范化风格哈", // 命中客户名称
-		            status:"而非给", // 状态
-		            statusTxt:"法人股3" // 状态文本
-		         },
-		         {
-		            ruleId:"xxxx", // 规则Id
-		            ruleContent:"功夫功夫", // 命中规则的名称
-		            applySubNo:"13424675787", // 进件编号
-		            custName:"和规范化风格哈", // 命中客户名称
-		            status:"而非给", // 状态
-		            statusTxt:"法人股3" // 状态文本
-		         },*/
-		      ],
+				recordList:[],
 		      /*反欺诈申请ID*/
 		      appinfoId:'',
 		      /*命中规则列表参数*/
@@ -475,7 +361,7 @@
 			/*先查询列表*/
 			request(val){
 				this.post('antiFraud/getAntiFraudSurveyInfo',{
-		        'appinfoId':'1'//val,
+		        'appinfoId':val//'1',
 		      }
 	          ).then(res => {
 	          	if(res.statusCode==200 &&　res.data!=null){
@@ -525,10 +411,10 @@
 			this.fraudAuditInfo.auditName=JSON.parse(localStorage.getItem('userInf')).userName;
 				console.log(this.fraudAuditInfo);
 				console.log("aksdf"+this.fraudAuditInfo.auditName)
-				this.fraudAuditInfo.appinfoId=this.appinfoId;
+				//this.fraudTelCheckList.appinfoId=this.appinfoId;
 				this.post('antiFraud/saveAntiFraudSurveyInfo',{
 					"fraudAuditInfo":{
-						"appinfoId":'1',//this.appinfoId, // 反欺诈申请id
+						"appinfoId":this.appinfoId,//'1', // 反欺诈申请id
 			            "netCheck":this.fraudAuditInfo.netCheck, // 网查
 			            "oof":this.fraudAuditInfo.oof, // 114
 			            "other":this.fraudAuditInfo.other, // 其他
@@ -566,7 +452,7 @@
 		 	add:function(event){
 		 		event.stopPropagation();
 		 		this.fraudTelCheckList.push({
-					                "appinfoId":"", // 反欺诈申请id
+					                "appinfoId":this.appinfoId, // 反欺诈申请id
 					                "phoneNum":"",// 号码
 					                "relation":"", // 关系
 					                "record":"" // 记录录入

@@ -8,12 +8,14 @@
     </div>
     <div class="header-area" style="padding-left:20px;">
       <li class="item-column3">
+        <span class="require-icon" style="left:40px;top:3px;">*</span>
         <div class="left-title">
           进件编号：
         </div>
         <div class="item-content">
           {{applySubno}}
         </div>
+        <el-button icon="el-icon-search" class="search-btn" @click="coverFn('shwoList')"></el-button>
       </li>
       <li class="item-column3">
         <div class="left-title">
@@ -55,6 +57,7 @@
     <!-- 反欺诈神效信息 表单 -->
     <ul style="padding-left:20px;">
       <li class="item-column3">
+        <span class="require-icon" style="left:0px;top:0px;">*</span>
         <div class="left-title left-title2">
           反欺诈申请类型主原因：
         </div>
@@ -75,7 +78,7 @@
         </el-select>
       </li>
       <li class="item-column1">
-        <div class="left-title"><span class="require-icon" style="left:30px;">*</span>调查结论：</div>
+        <div class="left-title"><span class="require-icon" style="left:15px;top:3px;">*</span>欺诈上报描述：</div>
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <div class="textarea-class">
             <el-input v-model="applyDesc" type="textarea" :rows="5" resize=none :maxlength="500"></el-input>
@@ -105,6 +108,80 @@
         <el-button type="primary" @click="submitForm('form')">提交</el-button>
       </li>
     </ul>
+    <!-- 弹窗 -->
+    <el-dialog :visible.sync="coverShow">
+      <div class="detail-list">
+        <div class="form-title" style="position:relative;">
+          请选择一条信息
+          <el-tag closable @close="coverShow=false;" style="position:absolute;"></el-tag>
+        </div>
+        <div>
+          <div class="form-title">
+            高级查询
+          </div>
+          <div>
+            <li class="item-column3-list">
+              <div class="left-title-list">
+                进件编号：
+              </div>
+              <div class="item-content-list">
+                <el-input v-model="applySubNo"></el-input>
+              </div>
+            </li>
+            <li class="item-column3-list">
+              <div class="left-title-list">
+                客户名称：
+              </div>
+              <div class="item-content-list">
+                <el-input v-model="custName_la"></el-input>
+              </div>
+            </li>
+            <li class="item-column3-list">
+              <div class="left-title-list">
+                证件号码：
+              </div>
+              <div class="item-content-list">
+                <el-input v-model="applyCustNo"></el-input>
+              </div>
+            </li>
+            <li class="item-column1">
+            </li>
+            <li class="item-column1 submit-class-list">
+              <el-button type="primary" @click="request">查询</el-button>
+              <el-button @click="resetQuery">重置</el-button>
+            </li>
+          </div>
+          <el-table :data="detailData" height="250" border style="width: 100%" highlight-current-row center>
+            <el-table-column type="index" label="序号" min-width="50" @row-click="itemClick" >
+            </el-table-column>
+            <el-table-column prop="taskNameTxt" label="进件编号" min-width="100">
+            </el-table-column>
+            <el-table-column prop="taskTypeTxt" label="申请日期" min-width="100">
+            </el-table-column>
+            <el-table-column prop="activationTime" label="客户名称" min-width="150">
+            </el-table-column>
+            <el-table-column prop="taskStatusTxt" label="证件类型" min-width="100">
+            </el-table-column>
+            <el-table-column prop="operatorCode" label="证件号码" min-width="80">
+            </el-table-column>
+            <el-table-column prop="completeTime" label="进件机构名称" min-width="150">
+            </el-table-column>
+            <el-table-column prop="approvalOpinionTxt" label="产品名称" min-width="100">
+            </el-table-column>
+            <el-table-column prop="opinionExplain" label="进件客服" min-width="100" show-overflow-tooltip>
+            </el-table-column>
+          </el-table>
+          <div class="block tool-bar">
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="detailData.totalRecord">
+            </el-pagination>
+          </div>
+        </div>
+        <div class="back-form-li" style="text-align:right;padding:10px;">
+          <el-button type="primary" @click="coverShow=false;">确定</el-button>
+          <el-button plain @click="coverShow=false;">取消</el-button>
+        </div>
+      </div>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -144,11 +221,24 @@ export default {
       mobile: '', // 移动电话
       dealroperDate: '', // 反欺诈申请日期
 
-
       certTypeTxt: '', // 证件类型
       mainReasons: [],
       secondReasons: [],
       antiFlag: '', // 标志
+      coverShow: false, // 弹窗
+      detailData: [], // 详情列表数据
+
+      processTemplateId: '',
+      taskNodeName: '',
+      taskStatus: '',
+      userCode: '',
+      orgCode: '',
+      pageNum: 1, // 页码
+      pageSize: 5, // 每页条数
+      applySubNo: '',
+      custName_la: '',
+      certCode: '',
+
     }
   },
   mounted() {
@@ -161,23 +251,39 @@ export default {
     var judgeFlag = JSON.parse(localStorage.getItem('judge'));
     this.antiFlag = judgeFlag.flag;
 
-    // 初审 终审 取 applyId
-    if (this.antiFlag == '01' || this.antiFlag == '02') {
-      // 先取到 id , 请求 反欺诈 页面信息
-      // var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-      // this.id = taskInWaitting.applyId;
-      this.id = this.$route.params.id;
-      console.log(this.$route.params.id)
-
+    // 初审 终审 取 applyId   
       if (this.antiFlag == '01') {
-
         // taskInWaitting
         this.creditappTaskid = JSON.parse(localStorage.getItem('taskInWaitting')).taskId;
-      } else if (this.antiFlag == '02') {
+        this.taskNodeName = JSON.parse(localStorage.getItem('taskInWaitting')).taskNodeName;
+        this.taskStatus = JSON.parse(localStorage.getItem('taskInWaitting')).taskStatus;
+        this.processTemplateId = JSON.parse(localStorage.getItem('taskInWaitting')).processTemplateId;
+      } 
+      if (this.antiFlag == '02') {
         // FtaskInWaitting
         this.creditappTaskid = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskId;
+        this.taskNodeName = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskNodeName;
+        this.taskStatus = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskStatus;
+        this.processTemplateId = JSON.parse(localStorage.getItem('FtaskInWaitting')).processTemplateId;
       }
-    }
+      if (this.antiFlag == '03') {
+        this.creditappTaskid = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
+        this.processTemplateId = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).processTemplateId;
+
+        this.taskNodeName = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskNodeName;
+        this.taskStatus = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskStatus;
+      }
+      if (this.antiFlag == '04') {
+        this.creditappTaskid = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
+        this.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
+
+        this.taskNodeName = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskNodeName;
+        this.taskStatus = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskStatus;
+      }
+
+      this.request();
+
+      // this.queryList();
 
 
     // 请求系统时间
@@ -264,15 +370,15 @@ export default {
           }
         })
     },
-    // 查询 反欺诈信息  , 从列表过来 , 根据列表 id 查询
-    getFraudApplyInfoWithOpinionById() {
-      this.post('/fraudApplyInfoController/getFraudApplyInfoWithOpinionById', {
-        id: this.id
-      }).then(res => {
-        console.log(res);
+    // // 查询 反欺诈信息  , 从列表过来 , 根据列表 id 查询
+    // getFraudApplyInfoWithOpinionById() {
+    //   this.post('/fraudApplyInfoController/getFraudApplyInfoWithOpinionById', {
+    //     id: this.id
+    //   }).then(res => {
+    //     console.log(res);
 
-      })
-    },
+    //   })
+    // },
     submitForm() {
       console.log('提交反欺诈')
       const h = this.$createElement;
@@ -375,7 +481,67 @@ export default {
     secondselectChange(val) {
       this.secondReason = val.reasonName;
       this.secondId = val.id
+    },
+    coverFn(flag) {
+      switch (flag) {
+        case 'shwoList':
+          this.coverShow = true;
+          // this.showFlag = 'shwoList';
+          this.request();
+          break;
+      }
+    },
+    // 每页条数
+    handleSizeChange(val) {
+      console.log("每页 ${val}条", val);
+      this.pageSize = val;
+      // this.queryDetailList();
+      this.request();
+    },
+    // 页码
+    handleCurrentChange(val) {
+      console.log("当前页: ${val}", val);
+      this.pageNum = val;
+      // this.queryDetailList();
+      this.request();
+    },
+    // 请求列表
+    request() {
+      console.log('详情列表 选择数据')
+      this.post('/workFlowTaskQuery/getTaskToDoList', {
+        processTemplateId: 'creditApp',
+        taskNodeName: this.taskNodeName,
+        taskStatus: '01',
+        userCode: this.userCode,
+        orgCode: this.orgCode,
+        pageNum: this.pageNum,
+        pageSize: this.pageSize,
+        applySubNo: this.applySubNo,
+        custName_la: this.custName_la,
+        certCode: this.applyCustNo,
+      }).then(res => {
+        if (res.statusCode == 200) {
+          this.detailData = res.data.taskDetailList;
+        } else {
+          this.directorTableData = [];
+        }
+
+      })
+    },
+    // 重置查询
+    resetQuery() {
+      // 清空数据 重新查询
+      // 查询条件 初始化
+      this.applySubNo = ''; // 进件编号
+      this.custName_la = ''; // 客户名称
+      this.applyCustNo = ''; // 客户编号
+      this.request();
+    },
+    // 选中弹窗某行
+    itemClick(){
+      console.log('点击了弹窗列表')
     }
+
   }
 }
 
@@ -403,6 +569,15 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
 /* 一列 */
 
 .anti-apply-add-class .item-column1 {
@@ -411,6 +586,15 @@ export default {
   float: left;
   /*max-width: 1366px;*/
 }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -455,6 +639,15 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
 /* 三列 */
 
 .anti-apply-add-class .item-column3 {
@@ -466,6 +659,63 @@ export default {
   /*border: 1px solid;*/
   /*min-width: 300px;*/
 }
+
+
+
+
+/* 弹窗 3列*/
+
+.anti-apply-add-class .item-column3-list {
+  width: 33%;
+  /*min-width: 350px;*/
+  float: left;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+
+
+
+/* 弹窗 */
+
+.anti-apply-add-class .left-title-list {
+  float: left;
+  width: 90px;
+  line-height: 30px;
+  min-height: 30px;
+  padding-right: 10px;
+  text-align: right;
+  font-size: 13px;
+}
+
+
+
+
+/* 弹窗 */
+
+.anti-apply-add-class .item-content-list {
+  float: left;
+  width: calc( 100% - 90px);
+  height: 28px;
+  line-height: 28px;
+  text-align: left;
+}
+
+.anti-apply-add-class .item-content-list .el-input {
+  position: relative;
+  font-size: 13px;
+  display: inline-block;
+  width: 100%;
+}
+
+.anti-apply-add-class .item-content-list .el-input__inner {
+  height: 30px;
+  line-height: 30px;
+}
+
+
+
+
 
 
 
@@ -568,6 +818,15 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
 /* 必填 * */
 
 .anti-apply-add-class .require-icon {
@@ -576,9 +835,18 @@ export default {
   width: 0px;
   float: left;
   left: 38px;
-  line-height: 35px;
+  line-height: 30px;
   position: relative;
 }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -616,12 +884,148 @@ export default {
 
 
 
+/* 放大 按钮  */
+
+.anti-apply-add-class .el-icon-check-fangda {
+  background: url(../../../static/images/fangda.png);
+  width: 30px;
+  height: 30px;
+  background-size: 30px;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
+  display: inline-block;
+}
 
 
 
 
-/*.anti-apply-add-class .el-input{
+
+
+
+
+
+/* 搜索按钮  */
+
+.anti-apply-add-class .search-btn {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  float: left;
+  position: absolute;
+  left: 300px;
+  border: none;
+}
+
+
+
+.anti-apply-add-class .el-dialog {
+  width: 700px;
+  margin-top: 15vh !important;
+}
+
+.anti-apply-add-class .el-dialog__header {
+  display: none;
+}
+
+.anti-apply-add-class .el-dialog__body {
+  padding: 0;
+}
+
+
+
+
+
+
+/* 流程轨迹 */
+
+.anti-apply-add-class .detail-list {
+  min-width: 760px;
+  width: auto;
+  height: 400px;
+  margin: 0 auto;
+  /*margin-top: 250px;*/
+  overflow: hidden;
+
+  background: #fff;
+  border-radius: 5px;
+  height: auto;
+  /*padding: 10px;*/
+}
+
+
+
+
+
+
+
+
+/* form-title */
+
+.anti-apply-add-class .form-title {
   width: 100%;
-}*/
+  height: 40px;
+  font-size: 18px;
+  /*font-weight: bold;*/
+  /*background: #ededed;*/
+  background: #eef0f9;
+  line-height: 40px;
+  padding-left: 10px;
+  display: block;
+  margin-bottom: 10px;
+  overflow: hidden;
+  font-size: 16px;
+  text-align: left;
+}
+
+
+
+
+
+
+
+
+/* 弹窗页面 关闭按钮*/
+
+.anti-apply-add-class .el-tag {
+  width: 0;
+  height: 0;
+  color: none;
+  border: none;
+  position: absolute;
+  right: 20px;
+  top: 0;
+}
+
+.anti-apply-add-class .el-tag .el-icon-close {
+  right: 0px;
+  top: 5px;
+}
+
+
+/* 弹窗 按钮 */
+
+.anti-apply-add-class .submit-class-list {
+  width: 100%;
+  float: right;
+  text-align: right;
+  margin: 0 5px 5px 0;
+}
+
+
+
+
+/* 分页 */
+
+.anti-apply-add-class .tool-bar {
+  width: 100%;
+  text-align: center;
+  padding: 10px 0 0 10px;
+}
+/* 隐藏分页 */
+.anti-apply-add-class .el-pagination__jump{
+  display: none;
+}
+
 
 </style>

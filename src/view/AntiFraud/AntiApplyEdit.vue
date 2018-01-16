@@ -75,7 +75,7 @@
         </el-select>
       </li>
       <li class="item-column1">
-        <div class="left-title"><span class="require-icon" style="left:30px;">*</span>调查结论：</div>
+        <div class="left-title"><span class="require-icon" style="left:30px;">*</span>欺诈上报描述：</div>
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <div class="textarea-class">
             <el-input v-model="applyDesc" type="textarea" :rows="5" resize=none :maxlength="500"></el-input>
@@ -162,14 +162,14 @@ export default {
     this.antiFlag = judgeFlag.flag;
 
     // 初审 终审 取 applyId
-    if (this.antiFlag == '01' || this.antiFlag == '02') {
-      // 先取到 id , 请求 反欺诈 页面信息
-      // var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-      // this.id = taskInWaitting.applyId;
-      this.id = this.$route.params.id;
-      console.log(this.$route.params.id)
-      // 查询反欺诈信息
-      this.getFraudApplyInfo();
+    // if (this.antiFlag == '01' || this.antiFlag == '02') {
+    //   // 先取到 id , 请求 反欺诈 页面信息
+    //   // var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+    //   // this.id = taskInWaitting.applyId;
+    //   this.id = this.$route.params.id;
+    //   console.log(this.$route.params.id)
+    //   // 查询反欺诈信息
+    //   this.getFraudApplyInfo();
 
       if (this.antiFlag == '01') {
 
@@ -179,23 +179,38 @@ export default {
         // FtaskInWaitting
         this.creditappTaskid = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskId;
       }
-    } 
+    // }
     // 专员/主管 不跳  反欺诈 编辑页面
     // else if (this.antiFlag == '03' || this.antiFlag == '04') { // 其他取 列表id
     //   console.log(' 主管/专员 ');
     //   this.id = this.$route.params.id;
-    //   if (this.antiFlag == '03') {
-    //     // AntitaskInWaitting
-    //     this.creditappTaskid = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
-    //     console.log('creditappTaskid===', this.creditappTaskid)
-    //   } else if (this.antiFlag == '04') {
-    //     // AntiManagertaskInWaitting
-    //     this.creditappTaskid = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
-    //   }
+      if (this.antiFlag == '03') {
+        // AntitaskInWaitting
+        this.creditappTaskid = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
+        console.log('creditappTaskid===', this.creditappTaskid)
+      } else if (this.antiFlag == '04') {
+        // AntiManagertaskInWaitting
+        this.creditappTaskid = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
+      }
     //   this.getFraudApplyInfoWithOpinionById();
     // }
 
+    // 获取到 id
+    this.id = this.$route.params.id;
+    console.log(this.$route.params.id)
+    /* 标志  
+     start 发起反欺诈
+     edit  编辑
+     add   添加 
+     */
+    this.flag = this.$route.params.flag;
+    console.log(this.flag);
 
+    if (this.flag == 'start') {
+      this.getFraudApplyInfo();
+    } else if (this.flag == 'edit' || this.flag == 'add') {
+      this.getFraudApplyInfoWithOpinionById();
+    }
 
     // 请求系统时间
     this.getSystemDate();
@@ -225,13 +240,14 @@ export default {
         this.mainReasons = res.data;
       })
     },
-    // 查询 反欺诈信息  , 发起反欺诈 , 根据 applyId 查询
+    // 查询 反欺诈信息  , 发起反欺诈 , 根据 applyId 查询 , 编辑页面根据 row.id
     getFraudApplyInfo() {
       // 测试 id
       // this.id = 'ed353288-758d-4699-bec7-094bd6444556';
 
       this.post('/fraudApplyInfoController/getFraudApplyInfo', {
           applyId: this.id
+          // applyId:'201506260173032182'
         })
         .then(res => {
           console.log(res.data.applyInfoPool);
@@ -282,7 +298,8 @@ export default {
     // 查询 反欺诈信息  , 从列表过来 , 根据列表 id 查询
     getFraudApplyInfoWithOpinionById() {
       this.post('/fraudApplyInfoController/getFraudApplyInfoWithOpinionById', {
-        id: this.id
+        // id: this.id
+        // id:'201506260173032182'
       }).then(res => {
         console.log(res);
 
@@ -310,6 +327,7 @@ export default {
                 fraudApplyInfo: {
                   creditappTaskid: this.creditappTaskid, // 任务id
                   applyId: this.id, // 申请单ID
+                  // applyId:'201506260173032182',
                   applySubno: this.applySubno, // 进件编号
                   // applyCode: this.applyCode, // 申请人code
                   // applyPersonName: this.applyPersonName, // 申请人姓名
@@ -338,6 +356,8 @@ export default {
                 if (res.statusCode == '200') {
                   // 更加标志来 选择跳转
                   // 初审/终审 发起反欺诈 提交  -> 代办任务列表
+                  this.resMsg = res.msg;
+                  done();
                   if (this.antiFlag == '01') {
                     this.$router.push('/taskInWaitting');
                   } else if (this.antiFlag == '02') {
@@ -346,10 +366,17 @@ export default {
                     this.$router.push('/AntiFraud');
                   }
                 } else {
-                  this.$message({
-                    type: 'warning',
-                    message: '网络异常,请重试!'
-                  });
+                  if (res.msg) {
+                    this.$message({
+                      type: 'warning',
+                      message: res.msg
+                    });
+                  } else {
+                    this.$message({
+                      type: 'warning',
+                      message: '网络异常,请重试!'
+                    });
+                  }
                   instance.confirmButtonText = '';
                 }
                 instance.confirmButtonLoading = false;
@@ -417,6 +444,10 @@ export default {
 
 
 
+
+
+
+
 /* 一列 */
 
 .anti-apply-edit-class .item-column1 {
@@ -425,6 +456,10 @@ export default {
   float: left;
   /*max-width: 1366px;*/
 }
+
+
+
+
 
 
 
@@ -467,6 +502,10 @@ export default {
 
 
 
+
+
+
+
 /* 三列 */
 
 .anti-apply-edit-class .item-column3 {
@@ -478,6 +517,10 @@ export default {
   /*border: 1px solid;*/
   /*min-width: 300px;*/
 }
+
+
+
+
 
 
 
@@ -578,6 +621,10 @@ export default {
 
 
 
+
+
+
+
 /* 必填 * */
 
 .anti-apply-edit-class .require-icon {
@@ -605,6 +652,10 @@ export default {
 
 
 
+
+
+
+
 /* 提交按钮 */
 
 .anti-apply-edit-class .submit-class {
@@ -613,6 +664,10 @@ export default {
   width: calc(66% - 500px);
   text-align: right;
 }
+
+
+
+
 
 
 

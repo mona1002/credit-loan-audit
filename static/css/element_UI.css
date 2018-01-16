@@ -1,4 +1,4 @@
-/* 公共部分 */
+ 公共部分 */
 
 
 /* .Abody 部分 */
@@ -1574,6 +1574,7 @@ overflow-x: hidden;
   text-align: center;
 }
 
+
 @media screen and (max-width: 1485px) {
   .taskWatting .el-table__body-wrapper {
     overflow-x: scroll;
@@ -1598,11 +1599,43 @@ overflow-x: hidden;
   text-align: center;
 }
 
+.taskWatting.RtaskWatting .el-table th:nth-of-type(2) {
+  text-align: center;
+}
+
+.taskWatting.RtaskWatting .el-table__body-wrapper .el-table__body td:nth-of-type(2) {
+  text-align: center;
+}
+
 .taskWatting .el-table th:nth-of-type(4) {
   text-align: center;
 }
 
 .taskWatting .el-table__body-wrapper .el-table__body td:nth-of-type(4) {
+  text-align: center;
+}
+
+.taskWatting.RtaskWatting .el-table th:nth-of-type(5) {
+  text-align: center;
+}
+
+.taskWatting.RtaskWatting .el-table__body-wrapper .el-table__body td:nth-of-type(5) {
+  text-align: center;
+}
+
+.taskWatting.RtaskWatting .el-table th:nth-of-type(6) {
+  text-align: center;
+}
+
+.taskWatting.RtaskWatting .el-table__body-wrapper .el-table__body td:nth-of-type(6) {
+  text-align: center;
+}
+
+.taskWatting.RtaskWatting .el-table th:nth-of-type(8) {
+  text-align: center;
+}
+
+.taskWatting.RtaskWatting .el-table__body-wrapper .el-table__body td:nth-of-type(8) {
   text-align: center;
 }
 
@@ -2191,9 +2224,20 @@ overflow-x: hidden;
 .anti-fraud .anti-table .el-table__header-wrapper .el-table__header th:last-child{
     text-align: center;
 }
-.el-table--border .has-gutter td:nth-last-of-type(2), .el-table--border .has-gutter th:nth-last-of-type(2){
+/*操作*/
+.anti-fraud .anti-table.el-table th:nth-of-type(1),
+.anti-fraud .anti-table.el-table th:nth-of-type(16) {
   text-align: center;
 }
+/*序号*/
+.anti-fraud .anti-table .el-table__body-wrapper .el-table__body td:nth-of-type(1),
+.anti-fraud .anti-table .el-table__body-wrapper .el-table__body td:nth-of-type(16){
+  text-align: center;
+
+}
+/*.el-table--border .has-gutter td:nth-last-of-type(2), .el-table--border .has-gutter th:nth-last-of-type(2){
+  text-align: center;
+}*/
 
 
 /* 审批结论 下拉框 padding*/
@@ -2209,3 +2253,4 @@ overflow-x: hidden;
 .creditApproval-class .el-form-item__label{
   padding: 0;
 }*/
+
