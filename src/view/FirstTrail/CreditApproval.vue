@@ -904,7 +904,7 @@ export default {
             name: 'AntiApplyEdit',
             params: {
               id: this.applyId,
-              flag:'start'
+              flag: 'start'
             }
           });
           break;
@@ -1143,20 +1143,20 @@ export default {
         }
         if (res.statusCode == '200') {
           // this.taskId = '';
-          this.custName = ''; // 客户名称
-          this.custNo = ''; // 客户code
-          this.certType = ''; // 证件类型
-          this.certCode = ''; // 证件号码
-          this.emerType = ''; // 紧急程度
-          this.appOrgCode = ''; // 门店代码
+          // this.custName = ''; // 客户名称
+          // this.custNo = ''; // 客户code
+          // this.certType = ''; // 证件类型
+          // this.certCode = ''; // 证件号码
+          // this.emerType = ''; // 紧急程度
+          // this.appOrgCode = ''; // 门店代码
           // this.proName = ''; // 产品名称
-          this.proCode = ''; //  产品代码
-          this.proId = ''; // 产品id
-          this.opinionFlag = ''; // 标志任务类型
+          // this.proCode = ''; //  产品代码
+          // this.proId = ''; // 产品id
+          // this.opinionFlag = ''; // 标志任务类型
           this.mainReason = ''; // 回退主原因
           this.secondaryReason = ''; // 回退子原因
           this.reasonRemark = ''; // 意见描述/原因说明
-          this.appOrgId = ''; // 进件机构id
+          // this.appOrgId = ''; // 进件机构id
           // this.applyId = ''; // 申请单id
           this.rollbackNodeName = ''; // 回退节点名称
           this.dealroperDate = ''; // 经办时间
@@ -1346,6 +1346,28 @@ export default {
         if (res.statusCode == '200') {
           this.loading = false;
           this.tableData = res.data;
+          // 处理 金额
+          for (var i = 0; i < this.tableData.recordList.length; i++) {
+            // 核实收入
+            if (this.tableData.recordList[i].verIncome.toString().split('.').length > 1)
+              this.tableData.recordList[i].verIncome = Number(this.tableData.recordList[i].verIncome[0]).toLocaleString() + '.' + this.tableData.recordList[i].verIncome.toString().split('.')[1];
+            else
+              this.tableData.recordList[i].verIncome = this.tableData.recordList[i].verIncome.toLocaleString();
+            // 批准金额
+            if (this.tableData.recordList[i].ploanAmt.toString().split('.').length > 1)
+              this.tableData.recordList[i].ploanAmt = Number(this.tableData.recordList[i].ploanAmt.toString().split('.')[0]).toLocaleString() + '.' + this.tableData.recordList[i].ploanAmt.toString().split('.')[1];
+            else
+              this.tableData.recordList[i].ploanAmt = this.tableData.recordList[i].ploanAmt.toLocaleString();
+            // 每期还款额
+            if (this.tableData.recordList[i].eachTermamt.toString().split('.').length > 1)
+              this.tableData.recordList[i].eachTermamt =
+              Number(this.tableData.recordList[i].eachTermamt.toString().split('.')[0]).toLocaleString() +
+              '.' +
+              this.tableData.recordList[i].eachTermamt.toString().split('.')[1];
+            else
+              this.tableData.recordList[i].eachTermamt = this.tableData.recordList[i].eachTermamt.toLocaleString();
+          }
+
         } else {
           this.$message(res.msg);
         }
@@ -1711,6 +1733,10 @@ export default {
 
 
 
+
+
+
+
 /* 三列 */
 
 .creditApproval-class .item-column3 {
@@ -1726,6 +1752,10 @@ export default {
   margin: 0;
   padding: 0;
 }
+
+
+
+
 
 
 
@@ -1763,6 +1793,10 @@ export default {
 
 
 
+
+
+
+
 /* 信审审批 - btn*/
 
 .creditApproval-class .credit-btn {
@@ -1771,6 +1805,10 @@ export default {
   color: #333;
   border: none;
 }
+
+
+
+
 
 
 
@@ -1824,6 +1862,10 @@ export default {
 
 
 
+
+
+
+
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -1831,6 +1873,10 @@ export default {
   float: left;
   margin: 0;
 }
+
+
+
+
 
 
 
@@ -1858,6 +1904,10 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
+
+
+
 
 
 
@@ -1939,11 +1989,19 @@ export default {
 
 
 
+
+
+
+
 /* textarea */
 
 .creditApproval-class .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
+
+
+
 
 
 
@@ -1999,6 +2057,10 @@ export default {
 
 
 
+
+
+
+
 /* 审批 表单 */
 
 .creditApproval-class .appro-form {
@@ -2026,6 +2088,10 @@ export default {
 
 
 
+
+
+
+
 /*.creditApproval-class .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -2033,6 +2099,10 @@ export default {
 .creditApproval-class .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
+
+
+
 
 
 
@@ -2081,6 +2151,10 @@ export default {
 
 
 
+
+
+
+
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -2088,6 +2162,10 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
+
+
+
 
 
 
@@ -2153,6 +2231,10 @@ export default {
 
 
 
+
+
+
+
 /* 申请信息 */
 
 .creditApproval-class .info .el-form-item__content {
@@ -2162,6 +2244,10 @@ export default {
 .creditApproval-class .info .el-form-item__label {
   width: 120px;
 }
+
+
+
+
 
 
 
@@ -2198,11 +2284,19 @@ export default {
 
 
 
+
+
+
+
 /* 有编辑框的 提示信息*/
 
 .creditApproval-class .back-form .back-form-edit-li {
   margin-top: 25px !important;
 }
+
+
+
+
 
 
 
@@ -2248,6 +2342,10 @@ export default {
 
 
 
+
+
+
+
 /*回退*/
 
 .creditApproval-class .el-icon-check-back {
@@ -2260,6 +2358,10 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
 
 
 
@@ -2302,6 +2404,10 @@ export default {
 
 
 
+
+
+
+
 /*放弃*/
 
 .creditApproval-class .el-icon-check-giveup {
@@ -2314,6 +2420,10 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
 
 
 
@@ -2356,6 +2466,10 @@ export default {
 
 
 
+
+
+
+
 /*发起反欺诈*/
 
 .creditApproval-class .el-icon-check-start {
@@ -2368,6 +2482,10 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
 
 
 
@@ -2410,6 +2528,10 @@ export default {
 
 
 
+
+
+
+
 /*流程轨迹*/
 
 .creditApproval-class .el-icon-check-lcgj {
@@ -2437,6 +2559,10 @@ export default {
 
 
 
+
+
+
+
 /* 折叠面板头部背景色和icon */
 
 .creditApproval-class .icon_hat {
@@ -2447,6 +2573,10 @@ export default {
 .creditApproval-class .headFont {
   font-size: 16px;
 }
+
+
+
+
 
 
 
@@ -2491,11 +2621,19 @@ export default {
 
 
 
+
+
+
+
 /* 信审审批  - 审批  编辑部分 */
 
 .creditApproval-class .appro-form .back-form-edit-li .el-form-item__label {
   /*width: 120px;*/
 }
+
+
+
+
 
 
 
@@ -2529,9 +2667,13 @@ export default {
   width: 125px;
 }
 
-.creditApproval-class .back-form .item-label-show .el-form-item__label{
+.creditApproval-class .back-form .item-label-show .el-form-item__label {
   margin-right: 15px;
 }
+
+
+
+
 
 
 
@@ -2566,9 +2708,17 @@ export default {
 
 
 
+
+
+
+
 /* 2017-12-17 拆分表单 */
 
 .creditApproval-class .huitui-class {}
+
+
+
+
 
 
 
@@ -2592,6 +2742,10 @@ export default {
 }
 
 .creditApproval-class .jujue-class {}
+
+
+
+
 
 
 
@@ -2647,11 +2801,19 @@ export default {
 
 
 
+
+
+
+
 /* 审批信息  */
 
 .creditApproval-class .el-form-item__content .el-select .el-input {
   width: 100%;
 }
+
+
+
+
 
 
 
