@@ -38,7 +38,7 @@
               <Rremark v-if=" this.tabContent1==1"></Rremark>
               <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
               <RapplicationInformationDetail v-if=" this.tabContent1==3">申请信息</RapplicationInformationDetail>
-              <cborrowerInformationDetail v-if=" this.tabContent1==4">借款人资料</cborrowerInformationDetail>
+              <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail>
               <PhoneCredit v-if=" this.tabContent1==5"> 电话征信</PhoneCredit>
               <FMCreditForm v-if=" this.tabContent1==6">信审表</FMCreditForm>
               <RcreditInvestigation v-if=" this.tabContent1==7">实地征信</RcreditInvestigation>
@@ -76,7 +76,7 @@
             <Rremark v-if=" this.tabContent2==1"></Rremark>
             <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
             <RapplicationInformationDetail v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
-            <RborrowerInformationSetail v-if=" this.tabContent2==4">借款人资料</RborrowerInformationSetail>
+            <RborrowerInformationSetail v-if=" this.tabContent2==4" :isFull.sync="isFull">借款人资料</RborrowerInformationSetail>
             <PhoneCredit v-if=" this.tabContent2==5"> 电话征信</PhoneCredit>
             <FMCreditForm v-if=" this.tabContent2==6">信审表</FMCreditForm>
             <RcreditInvestigation v-if=" this.tabContent2==7">实地征信</RcreditInvestigation>
@@ -141,8 +141,6 @@
   import PhoneCredit from "./PhoneCredit"; //电话征信
   // 信审审批写此处
   import CreditApproval from "./CreditApproval";
-  // 查询
-  import cborrowerInformationDetail from "./checkComponent/borrowerInformationDetail"; //借款人资料
   export default {
     data() {
       return {
@@ -302,7 +300,6 @@
       // 查询
       aut,
       // cremarkDetail, 
-      cborrowerInformationDetail,
       RprocessTrajectory
     }
   }
