@@ -95,7 +95,7 @@
           <p>影像资料</p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <AudioVisualLeft :custom="customInf.applyId "></AudioVisualLeft>
+            <RAudioVisualLeft :custom="customInf.applyId "></RAudioVisualLeft>
           </div>
         </div>
         <!-- 弹出层右侧 div -->
@@ -109,7 +109,7 @@
           </p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <AudioVisualLeft :custom="customInf.applyId " ref="audioChild" v-on:inputInf="inputInner"></AudioVisualLeft>
+            <RAudioVisualLeft :custom="customInf.applyId " ref="audioChild" v-on:inputInf="inputInner"></RAudioVisualLeft>
           </div>
         </div>
       </div>
@@ -268,6 +268,7 @@
     mounted() {
       console.log("匹配查看");
       this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
+      console.log(this.tastwaitingPass)
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.matchApplyId,
       }).then(res => {
