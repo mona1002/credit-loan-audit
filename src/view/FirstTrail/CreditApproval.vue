@@ -900,7 +900,8 @@ export default {
           this.$router.push({
             name: 'AntiApplyEdit',
             params: {
-              id: this.applyId
+              id: this.applyId,
+              flag:'start'
             }
           });
           break;

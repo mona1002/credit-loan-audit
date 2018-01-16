@@ -63,6 +63,8 @@ import AntiCaseNum from '../view/AntiFraud/AntiCaseNum'// 案件编号维护
 import AnitAudioVisual from'../view/AntiFraud/components/AnitAudioVisual.vue'
 // 反欺诈 列表
 import AntiFraud from '@/view/AntiFraud/AntiFraud.vue'
+// 反欺诈 专员 / 主管
+import AntiFraud34 from '@/view/AntiFraud/AntiFraud34.vue'
 // 反欺诈 申请
 import AntiApplyEdit from '@/view/AntiFraud/AntiApplyEdit.vue'
 import AntiApplyInf from '@/view/AntiFraud/AntiApplyInf.vue'
@@ -218,6 +220,11 @@ const routes = [{
 {
   path:'/AntiFraud',
   component:AntiFraud
+},
+// 反欺诈 专员/主管
+{
+  path:'/AntiFraud34',
+  component:AntiFraud34
 },
 // 反欺诈申请 编辑
 {
