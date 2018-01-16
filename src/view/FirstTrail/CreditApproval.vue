@@ -319,23 +319,26 @@
           </div>
           <div class="back-form-li">
             <el-form-item label="审批倍数：" class="item-column2 width-120 item-label-show">
-              {{caculData.appmult}}
+              {{caculData.appmult | formatValue}}%
             </el-form-item>
             <el-form-item label="月还款额[元]：" class="item-column2 width-120 item-label-show">
-              {{caculData.eachTermamt}}
+              {{caculData.eachTermamt | formatMoney}}
             </el-form-item>
           </div>
           <div class="back-form-li">
             <el-form-item label="内部负债率：" class="item-column2 item-label-show">
-              {{caculData.inteDebitrate}}
+              {{caculData.inteDebitrate | formatValue}}%
             </el-form-item>
-            <el-form-item label="总信用负债率：" class="item-column2 item-label-show">
-              {{caculData.creditDebitRate}}
+            <el-form-item label="总信用负债率：" class="item-column2 item-label-show" v-show="caculData.creditDebitRate>0">
+              {{caculData.creditDebitRate | formatValue}}%
+            </el-form-item>
+            <el-form-item label="总信用负债率：" class="item-column2 item-label-show" v-show="caculData.creditDebitRate==0">
+              0.00%
             </el-form-item>
           </div>
           <div class="back-form-li">
             <el-form-item label="总负债率：" class="item-column2 item-label-show">
-              {{caculData.totalRate}}
+              {{caculData.totalRate | formatValue}}%
             </el-form-item>
           </div>
           <span style="color:red;display:inline-block;width:0px;float:left;top:15px;left:35px;position:relative;font-weight:bold;">*</span>
