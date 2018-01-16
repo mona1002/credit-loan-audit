@@ -25,10 +25,11 @@
           <template slot="title">
             <p>
               <!-- 一级节点 -->
-              <span style="position:relative;">{{item.arcName}}
-                <img src="../../../../static/images/918FE1E0-6EEB-4642-A5E6-253AC973FF41@1x.png" style="position:absolute;top:12px;left:26px"
+              <span style="position:relative;">
+                <b class="NamParentNode"> {{item.arcName}}</b>
+                <img src="../../../../static/images/918FE1E0-6EEB-4642-A5E6-253AC973FF41@1x.png" style="position:absolute;top:12px;left:10px"
                   v-show="opendImg[ind]">
-                <img src="../../../../static/images/5530D698-2823-417F-B8BC-8DC9037BC848@1x.png" style="position:absolute;top:14px;left:26px"
+                <img src="../../../../static/images/5530D698-2823-417F-B8BC-8DC9037BC848@1x.png" style="position:absolute;top:14px;left:10px"
                   v-show="closedImg[ind]">
               </span>
               <span>{{item.arcNum}}</span>
@@ -55,7 +56,7 @@
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
-      <div class="showHidIcons" ref="showHidIcons">
+      <!-- <div class="showHidIcons" ref="showHidIcons">
         <img src="../../../../static/images/left.png" class="icon_pre " @click="pre">
         <img src="../../../../static/images/pc1.png" class="icon_next" @click="next">
         <div class="BtnIcons">
@@ -64,10 +65,18 @@
           <img src="../../../../static/images/daf.png" @click="AclockWise ">
           <img src="../../../../static/images/dasf.png" @click="clockWise ">
         </div>
-      </div>
+      </div> -->
       <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
       />
     </div>
+     <img src="../../../../static/images/left.png" class="icon_pre " @click="pre" v-show="perfBtn" @mouseenter='PerBtn'>
+        <img src="../../../../static/images/pc1.png" class="icon_next" @click="next" v-show="perfBtn" @mouseenter='PerBtn'>
+        <div class="BtnIcons" v-show="perfBtn" @mouseenter='PerBtn'>
+          <img src="../../../../static/images/efw.png" @click="smaller ">
+          <img src="../../../../static/images/net.png" @click="larger">
+          <img src="../../../../static/images/daf.png" @click="AclockWise ">
+          <img src="../../../../static/images/dasf.png" @click="clockWise ">
+        </div>
     <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
     <div class="Small_pic_div" v-show="SmallPicShow">
       <p class="Small_pic_title"> 缩略图-申请信息
@@ -90,6 +99,7 @@
     data() {
       return {
         // picData: [],
+        perfBtn:false,//功能按钮
         opendImg: [true, true, true, true], //一级节点图标flag
         closedImg: [false, false, false, false],
         showListDiv: true,
@@ -107,6 +117,9 @@
     methods: {
       opend(vv) {
         console.log(vv)
+      },
+      PerBtn(){
+this.perfBtn=true;
       },
       getChildrenList(id, ind, item) {
         // 一级节点
@@ -231,7 +244,9 @@
         }
       },
       Imgscroll() {
-        this.$refs.showHidIcons.style.display = "block";
+        // this.$refs.showHidIcons.style.display = "block";
+        this.perfBtn=true;
+               if (this.$refs.Big_pic_ref) {
         this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {
           event = event || window.event;
           this.$refs.AudioVisual_Img_ref.scrollTop = 0;
@@ -253,9 +268,11 @@
               100 + "px";
           }
         });
+               }
       },
       ImgScrollRemove() {
-        this.$refs.showHidIcons.style.display = "none";
+        // this.$refs.showHidIcons.style.display = "none";
+        this.perfBtn=false;
         this.$refs.AudioVisual_Img_ref.onmousewheel = "";
         this.$refs.AudioVisual_Img_ref.removeEventListener('DOMMouseScroll', (event) => {
           event.preventDefault();
@@ -278,6 +295,7 @@
         this.localInf = JSON.parse(localStorage.getItem("AntiManagerWorkbenchPass")) //反欺诈主管
       }
       // 父菜单
+
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.applyId,
       }).then(res => {
@@ -348,17 +366,19 @@
     bottom: 18px;
     right: 17px;
   }
-
+/* 
   .showHidIcons {
     display: none;
-  }
+  } */
   /*  放大、缩小 按钮 wrap */
 
   .BtnIcons {
     position: absolute;
     z-index: 2;
-    left: calc( 50% - 97px);
-    bottom: 57px;
+    /* left: calc( 50% - 97px); */
+        right: calc( 50% - 303px);
+            top:calc( 100% - 110px);
+    /* bottom: 57px; */
     width: 193px;
     height: 52px;
     background: rgba(71, 86, 105, 0.6);
@@ -379,7 +399,7 @@
 
   .icon_pre {
     position: absolute;
-    left: 20px;
+    left: 432px;
     top: 50%;
     z-index: 2;
   }
@@ -389,6 +409,16 @@
     right: 24px;
     z-index: 2;
     top: 50%;
+  }
+
+  .NamParentNode {
+    margin-left: 20px;
+    display: block;
+    font-style: normal;
+    width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .AudioVisual .AudioVisual_List,

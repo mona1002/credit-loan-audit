@@ -69,10 +69,12 @@
           </div>
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
+            <!-- <HelloWorld :myWatch="watchData" v-if=" this.tabContent2==0"></HelloWorld> -->
+            <CreditFormKeydownEvent :myWatch="watchData" v-if=" this.tabContent2==3"></CreditFormKeydownEvent>
             <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
             <remark v-if=" this.tabContent2==1"></remark>
             <InternalMatch v-if=" this.tabContent2==2" :SplitS="SplitRight" :isFull.sync="isFull"></InternalMatch>
-            <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
+            <!-- <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail> -->
             <borrowerInformation v-if=" this.tabContent2==4" :isFull.sync="isFull"></borrowerInformation>
             <PhoneCredit v-if=" this.tabContent2==5" :SplitS="SplitRight" :isFull.sync="isFull"></PhoneCredit>
             <CreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></CreditForm>
@@ -139,6 +141,9 @@
   import capplicationInformationDetail from "./checkComponent/applicationInformationDetail"; //申请信息
   import processTrajectory from "./checkComponent/processTrajectory"; //流程轨迹
 
+
+import HelloWorld from "../HelloWorld.vue"
+import CreditFormKeydownEvent from './detailComponent/CreditFormKeydownEvent.vue'
   export default {
     data() {
       return {
@@ -296,7 +301,9 @@
       cborrowerInformationDetail,
       capplicationInformationDetail,
       processTrajectory,
-      aAntiApplyInf
+      aAntiApplyInf,
+      HelloWorld,
+      CreditFormKeydownEvent
     }
   }
 
@@ -510,7 +517,7 @@
   .tab2_Content {
     /*background: purple;*/
     height: calc( 100% - 48px);
-    overflow: auto;
+    overflow: auto; 
   }
   /* 右侧tab切换头 左右滑动图标  流  */
 

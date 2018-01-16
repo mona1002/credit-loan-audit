@@ -54,19 +54,17 @@
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
-      <div class="showHidIcons" ref="showHidIcons">
-        <img src="../../../../static/images/left.png" class="icon_pre " @click="pre">
-        <img src="../../../../static/images/pc1.png" class="icon_next" @click="next">
-        <div class="BtnIcons">
+      <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
+      />
+    </div>
+        <img src="../../../../static/images/left.png" class="icon_pre "  v-show="perfBtn" @click="pre" @mouseenter='PerBtn'>
+        <img src="../../../../static/images/pc1.png" class="icon_next" v-show="perfBtn"  @mouseenter='PerBtn' @click="next">
+        <div class="BtnIcons" v-show="perfBtn"  @mouseenter='PerBtn'>
           <img src="../../../../static/images/efw.png" @click="smaller ">
           <img src="../../../../static/images/net.png" @click="larger">
           <img src="../../../../static/images/daf.png" @click="AclockWise ">
           <img src="../../../../static/images/dasf.png" @click="clockWise ">
         </div>
-      </div>
-      <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
-      />
-    </div>
     <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
     <div class="Small_pic_div" v-show="SmallPicShow">
       <p class="Small_pic_title"> 缩略图-申请信息
@@ -89,6 +87,7 @@
     data() {
       return {
         // picData: [],
+         perfBtn:false,
         judgeFlag: '',
         opendImg: [true, true, true, true], //一级节点图标flag
         closedImg: [false, false, false, false],
@@ -107,6 +106,9 @@
     methods: {
       opend(vv) {
         console.log(vv)
+      },
+            PerBtn(){
+this.perfBtn=true;
       },
       getChildrenList(id, ind, item) {
         // 一级节点
@@ -231,7 +233,8 @@
         }
       },
       Imgscroll() {
-        this.$refs.showHidIcons.style.display = "block";
+        this.perfBtn=true;
+               if (this.$refs.Big_pic_ref) {
         this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {
           event = event || window.event;
           this.$refs.AudioVisual_Img_ref.scrollTop = 0;
@@ -253,9 +256,10 @@
               100 + "px";
           }
         });
+               }
       },
       ImgScrollRemove() {
-        this.$refs.showHidIcons.style.display = "none";
+        this.perfBtn=false;
         this.$refs.AudioVisual_Img_ref.onmousewheel = "";
         this.$refs.AudioVisual_Img_ref.removeEventListener('DOMMouseScroll', (event) => {
           event.preventDefault();
@@ -347,8 +351,8 @@
   .BtnIcons {
     position: absolute;
     z-index: 2;
-    left: calc( 50% - 97px);
-    bottom: 57px;
+   right: calc( 50% - 303px);
+ top:calc( 100% - 110px);
     width: 193px;
     height: 52px;
     background: rgba(71, 86, 105, 0.6);
@@ -369,7 +373,7 @@
 
   .icon_pre {
     position: absolute;
-    left: 20px;
+    left: 432px;
     top: 50%;
     z-index: 2;
   }
