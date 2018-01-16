@@ -72,7 +72,7 @@
       </li>
       <li class="item-column1">
         <!-- <span class="require-icon" style="left:30px;">*</span> -->
-        <div class="left-title">调查结论：</div>
+        <div class="left-title">欺诈上报描述：</div>
         <div class="textarea-class">
           <el-input v-model="applyDesc" type="textarea" :rows="5" resize=none :maxlength="500" :disabled="true">
           </el-input>
