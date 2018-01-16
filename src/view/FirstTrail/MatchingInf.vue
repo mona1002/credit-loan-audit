@@ -72,7 +72,7 @@
           </div>
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
-            <RAudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></RAudioVisualLeft>
+            <RAudioVisual :custom="customInf.applyId " v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></RAudioVisual>
             <Rremark v-if=" this.tabContent2==1"></Rremark>
             <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
             <RapplicationInformationDetail v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
@@ -267,7 +267,7 @@
     },
     mounted() {
       console.log("匹配查看");
-      this.tastwaitingPass = JSON.parse(localStorage.getItem("internalId"));
+      this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.matchApplyId,
       }).then(res => {
@@ -296,14 +296,11 @@
       InternalMatch,
       borrowerInformation,
       PhoneCredit,
-
-
       // 信审审批
       CreditApproval,
       // 查询
       aut,
       // cremarkDetail, 
-
       cborrowerInformationDetail,
       RprocessTrajectory
     }

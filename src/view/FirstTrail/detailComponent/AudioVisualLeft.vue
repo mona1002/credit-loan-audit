@@ -59,8 +59,8 @@
           <img src="../../../../static/images/dasf.png" @click="clockWise ">
         </div>
       </div> -->
-      <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
-      />
+      <img ref="Big_pic_ref" v-for="(val,key) in imgPath" @mousedown="moving" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath"
+        v-if="key==smallPicInd" />
     </div>
     <!-- <div class="showHidIcons" ref="showHidIcons"> -->
     <img src="../../../../static/images/left.png" class="icon_pre " v-show="perfBtn" @click="pre" @mouseenter='PerBtn'>
@@ -167,6 +167,21 @@
       }
     },
     methods: {
+      moving(ev) {
+        console.log("moveing");
+        var e = ev || event;
+        var disX = 0;
+        var disY = 0;
+        console.log(this.$refs.Big_pic_ref[0].offsetTop)
+        console.log(e)
+        disX = e.clientX - this.$refs.Big_pic_ref[0].offsetLeft;
+        disY = e.clientY - this.$refs.Big_pic_ref[0].offsetTop;
+        console.log(disX, '-------------', disY);
+
+        document.onmousemove=function(){
+          console.log("ducumnt")
+        }
+      },
       closeAlertSearch() {
         this.dataa = false;
       },
@@ -377,7 +392,6 @@
             }
           });
         }
-
       },
       ImgScrollRemove() {
         // this.$refs.showHidIcons.style.display = "none";

@@ -98,6 +98,7 @@
   export default {
     data() {
       return {
+        MDate:'',
         // picData: [],
         perfBtn:false,//功能按钮
         opendImg: [true, true, true, true], //一级节点图标flag
@@ -280,6 +281,11 @@ this.perfBtn=true;
       },
       compBtnShow() {
         this.$emit('CompareShow')
+      },
+      comput(val){
+        // val=new Date().getFullYear()+"-"+(new Date().getMonth()+1)+"-"+new Date().getDate() +" "+new Date().getHours()+":"+new Date().getMinutes()+":"+new Date().getSeconds();
+        val=val.getFullYear()+"-"+(val.getMonth()+1)+"-"+val.getDate() +" "+val.getHours()+":"+val.getMinutes()+":"+val.getSeconds();
+      return val;
       }
     },
     mounted() {
@@ -300,7 +306,15 @@ this.perfBtn=true;
         applyId: this.localInf.applyId,
       }).then(res => {
         if (res.statusCode == 200) {
-          this.ListParent = res.data
+          this.ListParent = res.data;
+        
+          // console.log(this.ListParent.length)
+          for(var i=0;i<this.ListParent.length;i++){
+            console.log(new Date(this.ListParent[i].uploadDate).getSeconds())
+            this.MDate=  new Date(this.ListParent[i].uploadDate);
+            this.ListParent[i].uploadDate=this.comput( this.MDate) ;
+// console.log(   this.ListParent[i].uploadDate )
+          }
         } else {
           this.$message.error(res.msg);
         }

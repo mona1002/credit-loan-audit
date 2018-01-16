@@ -70,11 +70,11 @@
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
             <!-- <HelloWorld :myWatch="watchData" v-if=" this.tabContent2==0"></HelloWorld> -->
-            <CreditFormKeydownEvent :myWatch="watchData" v-if=" this.tabContent2==3"></CreditFormKeydownEvent>
+            <!-- <CreditFormKeydownEvent :myWatch="watchData" v-if=" this.tabContent2==3"></CreditFormKeydownEvent> -->
             <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
             <remark v-if=" this.tabContent2==1"></remark>
             <InternalMatch v-if=" this.tabContent2==2" :SplitS="SplitRight" :isFull.sync="isFull"></InternalMatch>
-            <!-- <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail> -->
+            <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <borrowerInformation v-if=" this.tabContent2==4" :isFull.sync="isFull"></borrowerInformation>
             <PhoneCredit v-if=" this.tabContent2==5" :SplitS="SplitRight" :isFull.sync="isFull"></PhoneCredit>
             <CreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></CreditForm>
