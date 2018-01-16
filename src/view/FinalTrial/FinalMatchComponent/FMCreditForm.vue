@@ -877,10 +877,14 @@
           this.FormData.parentIncome;
         this.FormData.fconsumption ? this.FormData.fconsumption = this.formatNumber(this.FormData.fconsumption, 2, 0) :
           this.FormData.fconsumption;
-           this.FormData.selfpremisesArea = this.FormData.selfpremisesArea.slice(0, -2);
-  this.FormData.selfhasProportion = this.FormData.selfhasProportion.slice(0, -1);
-           this.checkData.selfpremisesArea? this.checkData.selfpremisesArea = this.formatNumber(this.checkData.selfpremisesArea,2,0)+'m²': this.checkData.selfpremisesArea;
-          this.checkData.selfhasProportion? this.checkData.selfhasProportion =  this.formatNumber(this.checkData.selfhasProportion,2,0)+'%': this.checkData.selfhasProportion;
+        if (this.checkData.selfpremisesArea) {
+          this.FormData.selfpremisesArea = this.FormData.selfpremisesArea.slice(0, -2);
+          this.checkData.selfpremisesArea = this.formatNumber(this.checkData.selfpremisesArea, 2, 0) + 'm²';
+        }
+        if (this.FormData.selfhasProportion) {
+          this.FormData.selfhasProportion = this.FormData.selfhasProportion.slice(0, -1);
+          this.checkData.selfhasProportion = this.formatNumber(this.checkData.selfhasProportion, 2, 0) + '%'
+        }
       },
       formatNumber(num, cent, isThousand) {
         num = num.toString().replace(/\$|\,/g, '');
