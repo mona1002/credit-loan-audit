@@ -319,7 +319,7 @@
           </div>
           <div class="back-form-li">
             <el-form-item label="审批倍数：" class="item-column2 width-120 item-label-show">
-              {{caculData.appmult | formatValue}}%
+              {{caculData.appmult | formatValue}}
             </el-form-item>
             <el-form-item label="月还款额[元]：" class="item-column2 width-120 item-label-show">
               {{caculData.eachTermamt | formatMoney}}
@@ -327,10 +327,10 @@
           </div>
           <div class="back-form-li">
             <el-form-item label="内部负债率：" class="item-column2 item-label-show">
-              {{caculData.inteDebitrate | formatValue}}%
+              {{caculData.inteDebitrate | formatValue}}
             </el-form-item>
             <el-form-item label="总信用负债率：" class="item-column2 item-label-show" v-show="caculData.creditDebitRate>0">
-              {{caculData.creditDebitRate | formatValue}}%
+              {{caculData.creditDebitRate | formatValue}}
             </el-form-item>
             <el-form-item label="总信用负债率：" class="item-column2 item-label-show" v-show="caculData.creditDebitRate==0">
               0.00%
@@ -338,7 +338,7 @@
           </div>
           <div class="back-form-li">
             <el-form-item label="总负债率：" class="item-column2 item-label-show">
-              {{caculData.totalRate | formatValue}}%
+              {{caculData.totalRate | formatValue}}
             </el-form-item>
           </div>
           <span style="color:red;display:inline-block;width:0px;float:left;top:15px;left:35px;position:relative;font-weight:bold;">*</span>
@@ -1646,24 +1646,24 @@ export default {
         // 清空数据
 
         // this.taskId = '';
-        this.custName = ''; // 客户名称
-        this.custNo = ''; // 客户code
-        this.certType = ''; // 证件类型
-        this.certCode = ''; // 证件号码
-        this.emerType = ''; // 紧急程度
-        this.appOrgCode = ''; // 门店代码
+        // this.custName = ''; // 客户名称
+        // this.custNo = ''; // 客户code
+        // this.certType = ''; // 证件类型
+        // this.certCode = ''; // 证件号码
+        // this.emerType = ''; // 紧急程度
+        // this.appOrgCode = ''; // 门店代码
         // this.proName = ''; // 产品名称
-        this.proCode = ''; //  产品代码
-        this.proId = ''; // 产品id
-        this.opinionFlag = ''; // 标志任务类型
-        this.mainReason = ''; // 回退主原因
-        this.secondaryReason = ''; // 回退子原因
-        this.reasonRemark = ''; // 意见描述/原因说明
+        // this.proCode = ''; //  产品代码
+        // this.proId = ''; // 产品id
+        // this.opinionFlag = ''; // 标志任务类型
+        // this.mainReason = ''; // 回退主原因
+        // this.secondaryReason = ''; // 回退子原因
+        // this.reasonRemark = ''; // 意见描述/原因说明
         // this.appOrgId = ''; // 进件机构id
         // this.applyId = ''; // 申请单id
-        this.rollbackNodeName = ''; // 回退节点名称
-        this.dealroperDate = ''; // 经办时间
-        this.creauditAppOperate = ''; // 操作类型
+        // this.rollbackNodeName = ''; // 回退节点名称
+        // this.dealroperDate = ''; // 经办时间
+        // this.creauditAppOperate = ''; // 操作类型
       }
     },
     // 监听 输入请求
