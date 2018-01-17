@@ -69,14 +69,14 @@
       <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
       />
     </div>
-     <img src="../../../../static/images/left.png" class="icon_pre " @click="pre" v-show="perfBtn" @mouseenter='PerBtn'>
-        <img src="../../../../static/images/pc1.png" class="icon_next" @click="next" v-show="perfBtn" @mouseenter='PerBtn'>
-        <div class="BtnIcons" v-show="perfBtn" @mouseenter='PerBtn'>
-          <img src="../../../../static/images/efw.png" @click="smaller ">
-          <img src="../../../../static/images/net.png" @click="larger">
-          <img src="../../../../static/images/daf.png" @click="AclockWise ">
-          <img src="../../../../static/images/dasf.png" @click="clockWise ">
-        </div>
+    <img src="../../../../static/images/left.png" class="icon_pre " @click="pre" v-show="perfBtn" @mouseenter='PerBtn'>
+    <img src="../../../../static/images/pc1.png" class="icon_next" @click="next" v-show="perfBtn" @mouseenter='PerBtn'>
+    <div class="BtnIcons" v-show="perfBtn" @mouseenter='PerBtn'>
+      <img src="../../../../static/images/efw.png" @click="smaller ">
+      <img src="../../../../static/images/net.png" @click="larger">
+      <img src="../../../../static/images/daf.png" @click="AclockWise ">
+      <img src="../../../../static/images/dasf.png" @click="clockWise ">
+    </div>
     <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
     <div class="Small_pic_div" v-show="SmallPicShow">
       <p class="Small_pic_title"> 缩略图-申请信息
@@ -98,9 +98,9 @@
   export default {
     data() {
       return {
-        MDate:'',
+        MDate: '',
         // picData: [],
-        perfBtn:false,//功能按钮
+        perfBtn: false, //功能按钮
         opendImg: [true, true, true, true], //一级节点图标flag
         closedImg: [false, false, false, false],
         showListDiv: true,
@@ -119,8 +119,8 @@
       opend(vv) {
         console.log(vv)
       },
-      PerBtn(){
-this.perfBtn=true;
+      PerBtn() {
+        this.perfBtn = true;
       },
       getChildrenList(id, ind, item) {
         // 一级节点
@@ -246,34 +246,36 @@ this.perfBtn=true;
       },
       Imgscroll() {
         // this.$refs.showHidIcons.style.display = "block";
-        this.perfBtn=true;
-               if (this.$refs.Big_pic_ref) {
-        this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {
-          event = event || window.event;
-          this.$refs.AudioVisual_Img_ref.scrollTop = 0;
-          if (event.wheelDelta < 0) {
-            this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
-              100 + "px";
-          } else {
-            this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
-              100 + "px";
-          }
-        };
-        this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => {
-          this.$refs.AudioVisual_Img_ref.scrollTop = 0;
-          if (event.detail > 0) {
-            this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
-              100 + "px";
-          } else {
-            this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
-              100 + "px";
-          }
-        });
-               }
+        this.perfBtn = true;
+        if (this.$refs.Big_pic_ref) {
+          this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {
+            event = event || window.event;
+            this.$refs.AudioVisual_Img_ref.scrollTop = 0;
+            if (event.wheelDelta < 0) {
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
+                100 + "px";
+            } else {
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
+                100 + "px";
+            }
+          };
+          this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => {
+            this.$refs.AudioVisual_Img_ref.scrollTop = 0;
+            if (event.detail > 0) {
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
+                  .height) +
+                100 + "px";
+            } else {
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
+                  .height) -
+                100 + "px";
+            }
+          });
+        }
       },
       ImgScrollRemove() {
         // this.$refs.showHidIcons.style.display = "none";
-        this.perfBtn=false;
+        this.perfBtn = false;
         this.$refs.AudioVisual_Img_ref.onmousewheel = "";
         this.$refs.AudioVisual_Img_ref.removeEventListener('DOMMouseScroll', (event) => {
           event.preventDefault();
@@ -282,10 +284,11 @@ this.perfBtn=true;
       compBtnShow() {
         this.$emit('CompareShow')
       },
-      comput(val){
+      comput(val) {
         // val=new Date().getFullYear()+"-"+(new Date().getMonth()+1)+"-"+new Date().getDate() +" "+new Date().getHours()+":"+new Date().getMinutes()+":"+new Date().getSeconds();
-        val=val.getFullYear()+"-"+(val.getMonth()+1)+"-"+val.getDate() +" "+val.getHours()+":"+val.getMinutes()+":"+val.getSeconds();
-      return val;
+        val = val.getFullYear() + "-" + (val.getMonth() + 1) + "-" + val.getDate() + " " + val.getHours() + ":" + val.getMinutes() +
+          ":" + val.getSeconds();
+        return val;
       }
     },
     mounted() {
@@ -307,14 +310,15 @@ this.perfBtn=true;
       }).then(res => {
         if (res.statusCode == 200) {
           this.ListParent = res.data;
-        
-          // console.log(this.ListParent.length)
-          for(var i=0;i<this.ListParent.length;i++){
-            console.log(new Date(this.ListParent[i].uploadDate).getSeconds())
-            this.MDate=  new Date(this.ListParent[i].uploadDate);
-            this.ListParent[i].uploadDate=this.comput( this.MDate) ;
-// console.log(   this.ListParent[i].uploadDate )
-          }
+          // if (this.ListParent) {
+          //   for (var i = 0; i < this.ListParent.length; i++) {
+          //     console.log(new Date(this.ListParent[i].uploadDate).getSeconds())
+          //     this.MDate = new Date(this.ListParent[i].uploadDate);
+          //     this.ListParent[i].uploadDate = this.comput(this.MDate);
+          //     // console.log(   this.ListParent[i].uploadDate )
+          //   }
+          // }
+
         } else {
           this.$message.error(res.msg);
         }
@@ -380,7 +384,7 @@ this.perfBtn=true;
     bottom: 18px;
     right: 17px;
   }
-/* 
+  /* 
   .showHidIcons {
     display: none;
   } */
@@ -390,8 +394,8 @@ this.perfBtn=true;
     position: absolute;
     z-index: 2;
     /* left: calc( 50% - 97px); */
-        right: calc( 50% - 303px);
-            top:calc( 100% - 110px);
+    right: calc( 50% - 303px);
+    top: calc( 100% - 110px);
     /* bottom: 57px; */
     width: 193px;
     height: 52px;
