@@ -41,7 +41,7 @@
             <!--  二级 内容 节点 -->
             <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind)">
               <el-tooltip class="item" effect="dark" :content="item.arcName" placement="right-end">
-                <span v-bind:title="item.arcName">{{item.arcName}}</span>
+                <span style="width:135px;paddingLeft:20px;">{{item.arcName}}</span>
               </el-tooltip>
               <span>{{item.arcNum}}</span>
               <span>{{item.imageCount}}</span>
@@ -159,43 +159,55 @@
       pre() {
         this.smallPicInd--;
         this.defaultBigPicCss();
-        if (this.smallPicInd < 0) {
-          this.smallPicInd = this.$refs.small_pic_ref.length - 1;
+        if (this.$refs.small_pic_ref) {
+          if (this.smallPicInd < 0) {
+            this.smallPicInd = this.$refs.small_pic_ref.length - 1;
+          }
         }
       },
       next() {
         this.smallPicInd++;
         this.defaultBigPicCss();
-        if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
-          this.smallPicInd = 0;
+        if (this.$refs.small_pic_ref) {
+          if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
+            this.smallPicInd = 0;
+          }
         }
       },
       larger() {
-        this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
-          100 + "px";
+        if (this.$refs.Big_pic_ref) {
+          this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
+            100 + "px";
+        }
       },
       smaller() {
-        this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
-          100 + "px";
+        if (this.$refs.Big_pic_ref) {
+          this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
+            100 + "px";
+        }
       },
       clockWise() {
-        if (this.$refs.Big_pic_ref[0].style.transform == "") { // 输出结果为： rotate(900deg) 每次加 90度
-          this.$refs.Big_pic_ref[0].style.transform += "rotate(90deg)";
-        } else {
-          this.$refs.Big_pic_ref[0].style.transform = this.$refs.Big_pic_ref[0].style.transform.slice(0, 7) + (
-            parseFloat(this.$refs
-              .Big_pic_ref[0]
-              .style.transform.slice(7, -4)) + 90) + this.$refs.Big_pic_ref[0].style.transform.slice(-4);
+        if (this.$refs.Big_pic_ref) {
+          if (this.$refs.Big_pic_ref[0].style.transform == "") {
+            this.$refs.Big_pic_ref[0].style.transform += "rotate(90deg)";
+          } else {
+            this.$refs.Big_pic_ref[0].style.transform = this.$refs.Big_pic_ref[0].style.transform.slice(0, 7) + (
+              parseFloat(this.$refs
+                .Big_pic_ref[0]
+                .style.transform.slice(7, -4)) + 90) + this.$refs.Big_pic_ref[0].style.transform.slice(-4);
+          }
         }
       },
       AclockWise() {
-        if (this.$refs.Big_pic_ref[0].style.transform == "") {
-          this.$refs.Big_pic_ref[0].style.transform += "rotate(-90deg)";
-        } else {
-          this.$refs.Big_pic_ref[0].style.transform = this.$refs.Big_pic_ref[0].style.transform.slice(0, 7) + (
-            parseFloat(this.$refs
-              .Big_pic_ref[0]
-              .style.transform.slice(7, -4)) - 90) + this.$refs.Big_pic_ref[0].style.transform.slice(-4);
+        if (this.$refs.Big_pic_ref) {
+          if (this.$refs.Big_pic_ref[0].style.transform == "") {
+            this.$refs.Big_pic_ref[0].style.transform += "rotate(-90deg)";
+          } else {
+            this.$refs.Big_pic_ref[0].style.transform = this.$refs.Big_pic_ref[0].style.transform.slice(0, 7) + (
+              parseFloat(this.$refs
+                .Big_pic_ref[0]
+                .style.transform.slice(7, -4)) - 90) + this.$refs.Big_pic_ref[0].style.transform.slice(-4);
+          }
         }
       },
       ChangeCss(ind) {
@@ -235,32 +247,34 @@
       },
       Imgscroll() {
         this.perfBtn = true;
-       if (this.$refs.Big_pic_ref) {
-        this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {
-          event = event || window.event;
-          this.$refs.AudioVisual_Img_ref.scrollTop = 0;
-          if (event.wheelDelta < 0) {
-            this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
-              100 + "px";
-          } else {
-            this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
-              100 + "px";
-          }
-        };
-        this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => {
-          this.$refs.AudioVisual_Img_ref.scrollTop = 0;
-          if (event.detail > 0) {
-            this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
-              100 + "px";
-          } else {
-            this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
-              100 + "px";
-          }
-        });
-      }
+        if (this.$refs.Big_pic_ref) {
+          this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {
+            event = event || window.event;
+            this.$refs.AudioVisual_Img_ref.scrollTop = 0;
+            if (event.wheelDelta < 0) {
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
+                100 + "px";
+            } else {
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
+                100 + "px";
+            }
+          };
+          this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => {
+            this.$refs.AudioVisual_Img_ref.scrollTop = 0;
+            if (event.detail > 0) {
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
+                  .height) -
+                100 + "px";
+            } else {
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
+                  .height) +
+                100 + "px";
+            }
+          });
+        }
       },
       ImgScrollRemove() {
-        this.perfBtn=false;
+        this.perfBtn = false;
         this.$refs.AudioVisual_Img_ref.onmousewheel = "";
         this.$refs.AudioVisual_Img_ref.removeEventListener('DOMMouseScroll', (event) => {
           event.preventDefault();

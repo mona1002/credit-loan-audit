@@ -41,7 +41,7 @@
             <!--  二级 内容 节点 -->
             <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind)">
               <el-tooltip class="item" effect="dark" :content="item.arcName" placement="right-end">
-                <span v-bind:title="item.arcName">{{item.arcName}}</span>
+                <span style="width:135px;paddingLeft:20px;">{{item.arcName}}</span>
               </el-tooltip>
               <span>{{item.arcNum}}</span>
               <span>{{item.imageCount}}</span>
@@ -66,8 +66,9 @@
           <img src="../../../../static/images/dasf.png" @click="clockWise ">
         </div>
       </div> -->
+      <div style="position:absolute; left:0; top:0;background:yellowgreen;" id='ss'>
       <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
-      />
+      />      </div>
     </div>
     <img src="../../../../static/images/left.png" class="icon_pre " @click="pre" v-show="perfBtn" @mouseenter='PerBtn'>
     <img src="../../../../static/images/pc1.png" class="icon_next" @click="next" v-show="perfBtn" @mouseenter='PerBtn'>
@@ -169,27 +170,31 @@
       },
       pre() {
         this.smallPicInd--;
-        this.defaultBigPicCss();
+        this.defaultBigPicCss();        if( this.$refs.small_pic_ref){
         if (this.smallPicInd < 0) {
           this.smallPicInd = this.$refs.small_pic_ref.length - 1;
-        }
+        }}
       },
       next() {
         this.smallPicInd++;
         this.defaultBigPicCss();
+                if( this.$refs.small_pic_ref){
         if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
           this.smallPicInd = 0;
-        }
+        }}
       },
       larger() {
+                if( this.$refs.Big_pic_ref){
         this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
-          100 + "px";
+          100 + "px";}
       },
       smaller() {
+                if( this.$refs.Big_pic_ref){
         this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
-          100 + "px";
+          100 + "px";}
       },
       clockWise() {
+                if( this.$refs.Big_pic_ref){
         if (this.$refs.Big_pic_ref[0].style.transform == "") { // 输出结果为： rotate(900deg) 每次加 90度
           this.$refs.Big_pic_ref[0].style.transform += "rotate(90deg)";
         } else {
@@ -197,9 +202,10 @@
             parseFloat(this.$refs
               .Big_pic_ref[0]
               .style.transform.slice(7, -4)) + 90) + this.$refs.Big_pic_ref[0].style.transform.slice(-4);
-        }
+        }}
       },
       AclockWise() {
+                if( this.$refs.Big_pic_ref){
         if (this.$refs.Big_pic_ref[0].style.transform == "") {
           this.$refs.Big_pic_ref[0].style.transform += "rotate(-90deg)";
         } else {
@@ -207,7 +213,7 @@
             parseFloat(this.$refs
               .Big_pic_ref[0]
               .style.transform.slice(7, -4)) - 90) + this.$refs.Big_pic_ref[0].style.transform.slice(-4);
-        }
+        }}
       },
       ChangeCss(ind) {
         this.changeSmallPicCss(ind);
@@ -243,6 +249,28 @@
         if (ind || ind == 0) {
           this.$refs.small_pic_ref[ind].style.opacity = 0.8;
         }
+      },odivMove(id) {
+        console.log('start')
+        var disX = 0;
+        var disY = 0;
+        var oDiv = document.getElementById(id);
+        oDiv.onmousedown = function (ev) {
+          console.log('move')
+          var oEvent = ev || event;
+          disX = oEvent.clientX - oDiv.offsetLeft;
+          disY = oEvent.clientY - oDiv.offsetTop;
+          document.onmousemove = function (ev) {
+            var oEvent = ev || event;
+            oDiv.style.left = oEvent.clientX - disX + "px";
+            oDiv.style.top = oEvent.clientY - disY + "px";
+          }
+          document.onmouseup = function (ev) {
+            console.log('up')
+            document.onmousemove = null;
+            document.onmouseup = null;
+          }
+          return false; // 空div的时候，火狐浏览器二次拖拽之后会出现div阴影拖拽，实际div不动。  解决：return false 解决默认行为 和火狐的此bug
+        };
       },
       Imgscroll() {
         // this.$refs.showHidIcons.style.display = "block";
@@ -250,24 +278,24 @@
         if (this.$refs.Big_pic_ref) {
           this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {
             event = event || window.event;
-            this.$refs.AudioVisual_Img_ref.scrollTop = 0;
+            // this.$refs.AudioVisual_Img_ref.scrollTop = 0;
             if (event.wheelDelta < 0) {
-              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
                 100 + "px";
             } else {
-              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
                 100 + "px";
             }
           };
           this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => {
-            this.$refs.AudioVisual_Img_ref.scrollTop = 0;
+            // this.$refs.AudioVisual_Img_ref.scrollTop = 0;
             if (event.detail > 0) {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
-                  .height) +
+                  .height) -
                 100 + "px";
             } else {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
-                  .height) -
+                  .height) +
                 100 + "px";
             }
           });
@@ -293,6 +321,7 @@
     },
     mounted() {
       console.log("影音资料右")
+            this.odivMove("ss");
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '01') {
         this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审

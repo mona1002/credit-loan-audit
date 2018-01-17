@@ -40,7 +40,7 @@
             <!--  二级 内容 节点 -->
             <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind)">
               <el-tooltip class="item" effect="dark" :content="item.arcName" placement="right-end">
-                <span v-bind:title="item.arcName">{{item.arcName}}</span>
+                <span style="width:135px;paddingLeft:20px;">{{item.arcName}}</span>
               </el-tooltip>
               <span>{{item.arcNum}}</span>
               <span>{{item.imageCount}}</span>
@@ -57,14 +57,14 @@
       <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
       />
     </div>
-        <img src="../../../../static/images/left.png" class="icon_pre "  v-show="perfBtn" @click="pre" @mouseenter='PerBtn'>
-        <img src="../../../../static/images/pc1.png" class="icon_next" v-show="perfBtn"  @mouseenter='PerBtn' @click="next">
-        <div class="BtnIcons" v-show="perfBtn"  @mouseenter='PerBtn'>
-          <img src="../../../../static/images/efw.png" @click="smaller ">
-          <img src="../../../../static/images/net.png" @click="larger">
-          <img src="../../../../static/images/daf.png" @click="AclockWise ">
-          <img src="../../../../static/images/dasf.png" @click="clockWise ">
-        </div>
+    <img src="../../../../static/images/left.png" class="icon_pre " v-show="perfBtn" @click="pre" @mouseenter='PerBtn'>
+    <img src="../../../../static/images/pc1.png" class="icon_next" v-show="perfBtn" @mouseenter='PerBtn' @click="next">
+    <div class="BtnIcons" v-show="perfBtn" @mouseenter='PerBtn'>
+      <img src="../../../../static/images/efw.png" @click="smaller ">
+      <img src="../../../../static/images/net.png" @click="larger">
+      <img src="../../../../static/images/daf.png" @click="AclockWise ">
+      <img src="../../../../static/images/dasf.png" @click="clockWise ">
+    </div>
     <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
     <div class="Small_pic_div" v-show="SmallPicShow">
       <p class="Small_pic_title"> 缩略图-申请信息
@@ -87,7 +87,7 @@
     data() {
       return {
         // picData: [],
-         perfBtn:false,
+        perfBtn: false,
         judgeFlag: '',
         opendImg: [true, true, true, true], //一级节点图标flag
         closedImg: [false, false, false, false],
@@ -107,8 +107,8 @@
       opend(vv) {
         console.log(vv)
       },
-            PerBtn(){
-this.perfBtn=true;
+      PerBtn() {
+        this.perfBtn = true;
       },
       getChildrenList(id, ind, item) {
         // 一级节点
@@ -158,43 +158,56 @@ this.perfBtn=true;
       pre() {
         this.smallPicInd--;
         this.defaultBigPicCss();
-        if (this.smallPicInd < 0) {
-          this.smallPicInd = this.$refs.small_pic_ref.length - 1;
+        if (this.$refs.small_pic_ref) {
+          if (this.smallPicInd < 0) {
+            this.smallPicInd = this.$refs.small_pic_ref.length - 1;
+          }
         }
       },
       next() {
         this.smallPicInd++;
         this.defaultBigPicCss();
-        if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
-          this.smallPicInd = 0;
+        if (this.$refs.small_pic_ref) {
+          if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
+            this.smallPicInd = 0;
+          }
         }
+
       },
       larger() {
-        this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
-          100 + "px";
+        if (this.$refs.Big_pic_ref) {
+          this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
+            100 + "px";
+        }
       },
       smaller() {
-        this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
-          100 + "px";
+        if (this.$refs.Big_pic_ref) {
+          this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
+            100 + "px";
+        }
       },
       clockWise() {
-        if (this.$refs.Big_pic_ref[0].style.transform == "") { // 输出结果为： rotate(900deg) 每次加 90度
-          this.$refs.Big_pic_ref[0].style.transform += "rotate(90deg)";
-        } else {
-          this.$refs.Big_pic_ref[0].style.transform = this.$refs.Big_pic_ref[0].style.transform.slice(0, 7) + (
-            parseFloat(this.$refs
-              .Big_pic_ref[0]
-              .style.transform.slice(7, -4)) + 90) + this.$refs.Big_pic_ref[0].style.transform.slice(-4);
+        if (this.$refs.Big_pic_ref) {
+          if (this.$refs.Big_pic_ref[0].style.transform == "") { // 输出结果为： rotate(900deg) 每次加 90度
+            this.$refs.Big_pic_ref[0].style.transform += "rotate(90deg)";
+          } else {
+            this.$refs.Big_pic_ref[0].style.transform = this.$refs.Big_pic_ref[0].style.transform.slice(0, 7) + (
+              parseFloat(this.$refs
+                .Big_pic_ref[0]
+                .style.transform.slice(7, -4)) + 90) + this.$refs.Big_pic_ref[0].style.transform.slice(-4);
+          }
         }
       },
       AclockWise() {
-        if (this.$refs.Big_pic_ref[0].style.transform == "") {
-          this.$refs.Big_pic_ref[0].style.transform += "rotate(-90deg)";
-        } else {
-          this.$refs.Big_pic_ref[0].style.transform = this.$refs.Big_pic_ref[0].style.transform.slice(0, 7) + (
-            parseFloat(this.$refs
-              .Big_pic_ref[0]
-              .style.transform.slice(7, -4)) - 90) + this.$refs.Big_pic_ref[0].style.transform.slice(-4);
+        if (this.$refs.Big_pic_ref) {
+          if (this.$refs.Big_pic_ref[0].style.transform == "") {
+            this.$refs.Big_pic_ref[0].style.transform += "rotate(-90deg)";
+          } else {
+            this.$refs.Big_pic_ref[0].style.transform = this.$refs.Big_pic_ref[0].style.transform.slice(0, 7) + (
+              parseFloat(this.$refs
+                .Big_pic_ref[0]
+                .style.transform.slice(7, -4)) - 90) + this.$refs.Big_pic_ref[0].style.transform.slice(-4);
+          }
         }
       },
       ChangeCss(ind) {
@@ -233,33 +246,35 @@ this.perfBtn=true;
         }
       },
       Imgscroll() {
-        this.perfBtn=true;
-               if (this.$refs.Big_pic_ref) {
-        this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {
-          event = event || window.event;
-          this.$refs.AudioVisual_Img_ref.scrollTop = 0;
-          if (event.wheelDelta < 0) {
-            this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
-              100 + "px";
-          } else {
-            this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
-              100 + "px";
-          }
-        };
-        this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => {
-          this.$refs.AudioVisual_Img_ref.scrollTop = 0;
-          if (event.detail > 0) {
-            this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
-              100 + "px";
-          } else {
-            this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
-              100 + "px";
-          }
-        });
-               }
+        this.perfBtn = true;
+        if (this.$refs.Big_pic_ref) {
+          this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {
+            event = event || window.event;
+            this.$refs.AudioVisual_Img_ref.scrollTop = 0;
+            if (event.wheelDelta < 0) {
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
+                100 + "px";
+            } else {
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
+                100 + "px";
+            }
+          };
+          this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => {
+            this.$refs.AudioVisual_Img_ref.scrollTop = 0;
+            if (event.detail > 0) {
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
+                  .height) -
+                100 + "px";
+            } else {
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
+                  .height) +
+                100 + "px";
+            }
+          });
+        }
       },
       ImgScrollRemove() {
-        this.perfBtn=false;
+        this.perfBtn = false;
         this.$refs.AudioVisual_Img_ref.onmousewheel = "";
         this.$refs.AudioVisual_Img_ref.removeEventListener('DOMMouseScroll', (event) => {
           event.preventDefault();
@@ -276,10 +291,10 @@ this.perfBtn=true;
         this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
       } else if (this.judgeFlag.flag == '04') {
         this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
-      }else if (this.judgeFlag.flag == '05'||this.judgeFlag.flag == '06') {
+      } else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
         this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议主管+专员
       }
-      
+
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.applyId,
@@ -351,8 +366,8 @@ this.perfBtn=true;
   .BtnIcons {
     position: absolute;
     z-index: 2;
-   right: calc( 50% - 303px);
- top:calc( 100% - 110px);
+    right: calc( 50% - 303px);
+    top: calc( 100% - 110px);
     width: 193px;
     height: 52px;
     background: rgba(71, 86, 105, 0.6);

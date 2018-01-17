@@ -36,7 +36,7 @@
             <!--  二级 内容 节点 -->
             <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind)">
               <el-tooltip class="item" effect="dark" :content="item.arcName" placement="right-end">
-                <span>{{item.arcName}}</span>
+                <span style="width:105px;marginLeft:20px;">{{item.arcName}}</span>
               </el-tooltip>
               <span>{{item.imageCount}}</span>
             </p>
@@ -59,8 +59,10 @@
           <img src="../../../../static/images/dasf.png" @click="clockWise ">
         </div>
       </div> -->
-      <img ref="Big_pic_ref" v-for="(val,key) in imgPath" @mousedown="moving" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath"
-        v-if="key==smallPicInd" />
+      <div style="position:absolute; left:0; top:0;background:red;" id='kkk'>
+        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
+        />
+      </div>
     </div>
     <!-- <div class="showHidIcons" ref="showHidIcons"> -->
     <img src="../../../../static/images/left.png" class="icon_pre " v-show="perfBtn" @click="pre" @mouseenter='PerBtn'>
@@ -136,6 +138,7 @@
 </template>
 
 <script>
+  // import {drag} from '../../../../static/js/public'
   export default {
     data() {
       return {
@@ -167,21 +170,6 @@
       }
     },
     methods: {
-      moving(ev) {
-        console.log("moveing");
-        var e = ev || event;
-        var disX = 0;
-        var disY = 0;
-        console.log(this.$refs.Big_pic_ref[0].offsetTop)
-        console.log(e)
-        disX = e.clientX - this.$refs.Big_pic_ref[0].offsetLeft;
-        disY = e.clientY - this.$refs.Big_pic_ref[0].offsetTop;
-        console.log(disX, '-------------', disY);
-
-        document.onmousemove=function(){
-          console.log("ducumnt")
-        }
-      },
       closeAlertSearch() {
         this.dataa = false;
       },
@@ -268,10 +256,11 @@
             this.$message.error(res.msg);
           }
         });
+        // this.odivMove("ss");
       },
       getImg(ind) {
+        console.log('img')
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
-        this.true = true;
       },
       hid() {
         this.showListDiv = false;
@@ -290,43 +279,55 @@
       pre() {
         this.smallPicInd--;
         this.defaultBigPicCss();
-        if (this.smallPicInd < 0) {
-          this.smallPicInd = this.$refs.small_pic_ref.length - 1;
+        if (this.$refs.small_pic_ref) {
+          if (this.smallPicInd < 0) {
+            this.smallPicInd = this.$refs.small_pic_ref.length - 1;
+          }
         }
       },
       next() {
         this.smallPicInd++;
         this.defaultBigPicCss();
-        if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
-          this.smallPicInd = 0;
+        if (this.$refs.small_pic_ref) {
+          if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
+            this.smallPicInd = 0;
+          }
         }
       },
       larger() {
-        this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
-          100 + "px";
+        if (this.$refs.Big_pic_ref) {
+          this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
+            100 + "px";
+        }
       },
       smaller() {
-        this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
-          100 + "px";
+        if (this.$refs.Big_pic_ref) {
+          this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
+            100 + "px";
+        }
       },
       clockWise() {
-        if (this.$refs.Big_pic_ref[0].style.transform == "") {
-          this.$refs.Big_pic_ref[0].style.transform += "rotate(90deg)";
-        } else {
-          this.$refs.Big_pic_ref[0].style.transform = this.$refs.Big_pic_ref[0].style.transform.slice(0, 7) + (
-            parseFloat(this.$refs
-              .Big_pic_ref[0]
-              .style.transform.slice(7, -4)) + 90) + this.$refs.Big_pic_ref[0].style.transform.slice(-4);
+        if (this.$refs.Big_pic_ref) {
+          if (this.$refs.Big_pic_ref[0].style.transform == "") {
+            this.$refs.Big_pic_ref[0].style.transform += "rotate(90deg)";
+          } else {
+            this.$refs.Big_pic_ref[0].style.transform = this.$refs.Big_pic_ref[0].style.transform.slice(0, 7) + (
+              parseFloat(this.$refs
+                .Big_pic_ref[0]
+                .style.transform.slice(7, -4)) + 90) + this.$refs.Big_pic_ref[0].style.transform.slice(-4);
+          }
         }
       },
       AclockWise() {
-        if (this.$refs.Big_pic_ref[0].style.transform == "") {
-          this.$refs.Big_pic_ref[0].style.transform += "rotate(-90deg)";
-        } else {
-          this.$refs.Big_pic_ref[0].style.transform = this.$refs.Big_pic_ref[0].style.transform.slice(0, 7) + (
-            parseFloat(this.$refs
-              .Big_pic_ref[0]
-              .style.transform.slice(7, -4)) - 90) + this.$refs.Big_pic_ref[0].style.transform.slice(-4);
+        if (this.$refs.Big_pic_ref) {
+          if (this.$refs.Big_pic_ref[0].style.transform == "") {
+            this.$refs.Big_pic_ref[0].style.transform += "rotate(-90deg)";
+          } else {
+            this.$refs.Big_pic_ref[0].style.transform = this.$refs.Big_pic_ref[0].style.transform.slice(0, 7) + (
+              parseFloat(this.$refs
+                .Big_pic_ref[0]
+                .style.transform.slice(7, -4)) - 90) + this.$refs.Big_pic_ref[0].style.transform.slice(-4);
+          }
         }
       },
       ChangeCss(ind) {
@@ -339,9 +340,9 @@
       },
       // 公共
       defaultBigPicCss() {
-        console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).height)
-        console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
-        console.log(typeof (getComputedStyle(this.$refs.Big_pic_ref[0], false).width))
+        // console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).height)
+        // console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
+        // console.log(typeof (getComputedStyle(this.$refs.Big_pic_ref[0], false).width))
         // if (getComputedStyle(this.$refs.Big_pic_ref[0], false).width > getComputedStyle(this.$refs.Big_pic_ref[0], //判断宽度>高度  按宽度100%显示
         //     false).height) { // 点击切换图片时，让显示的大图宽高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
         //   this.$refs.Big_pic_ref[0].style.width = "100%";//calc( 100% - 202px)
@@ -364,30 +365,53 @@
           this.$refs.small_pic_ref[ind].style.opacity = 0.8;
         }
       },
+      odivMove(id) {
+        console.log('start')
+        var disX = 0;
+        var disY = 0;
+        var oDiv = document.getElementById(id);
+        oDiv.onmousedown = function (ev) {
+          console.log('move')
+          var oEvent = ev || event;
+          disX = oEvent.clientX - oDiv.offsetLeft;
+          disY = oEvent.clientY - oDiv.offsetTop;
+          document.onmousemove = function (ev) {
+            var oEvent = ev || event;
+            oDiv.style.left = oEvent.clientX - disX + "px";
+            oDiv.style.top = oEvent.clientY - disY + "px";
+          }
+          document.onmouseup = function (ev) {
+            console.log('up')
+            document.onmousemove = null;
+            document.onmouseup = null;
+          }
+          return false; // 空div的时候，火狐浏览器二次拖拽之后会出现div阴影拖拽，实际div不动。  解决：return false 解决默认行为 和火狐的此bug
+        };
+      },
       Imgscroll() {
         // this.$refs.showHidIcons.style.display = "block";
         this.perfBtn = true;
         if (this.$refs.Big_pic_ref) {
           this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {
             event = event || window.event;
-            this.$refs.AudioVisual_Img_ref.scrollTop = 0;
+            // this.$refs.AudioVisual_Img_ref.scrollTop = 0;
             if (event.wheelDelta < 0) {
-              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
                 100 + "px";
             } else {
-              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
                 100 + "px";
             }
           };
           this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => {
-            this.$refs.AudioVisual_Img_ref.scrollTop = 0;
+            // this.$refs.AudioVisual_Img_ref.scrollTop = 0;
             if (event.detail > 0) {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
-                  .height) +
+                  .height) -
                 100 + "px";
             } else {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
-                  .height) -
+                  .height) +
                 100 + "px";
             }
           });
@@ -406,6 +430,8 @@
       }
     },
     mounted() {
+      console.log(document.getElementById('kkk'));
+      this.odivMove("kkk");
       // console.log(" 影音资料左")
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '01') {
@@ -535,16 +561,6 @@
     right: 24px;
     z-index: 2;
     top: 50%;
-  }
-
-  .NamParentNode {
-    margin-left: 20px;
-    display: block;
-    font-style: normal;
-    width: 110px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 
   .AudioVisualLeft .AudioVisual_List,
@@ -689,7 +705,16 @@
     box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
   }
   /* --------------------------- */
-
+  .NamParentNode {
+    margin-left: 20px;
+    display: block;
+    font-style: normal;
+    width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+/* ----------------------------- */
   .posi {
     position: absolute;
     top: 0;
