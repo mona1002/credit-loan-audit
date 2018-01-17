@@ -34,7 +34,7 @@
               </span>
             </p>
             <div class="Left_right_BigImg ">
-              <RAudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></RAudioVisualLeft>
+              <RAudioVisualLeft msg="MspLone" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></RAudioVisualLeft>
               <Rremark v-if=" this.tabContent1==1"></Rremark>
               <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
               <RapplicationInformationDetail v-if=" this.tabContent1==3">申请信息</RapplicationInformationDetail>
@@ -72,7 +72,7 @@
           </div>
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
-            <RAudioVisual :custom="customInf.applyId " v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></RAudioVisual>
+            <RAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></RAudioVisual>
             <Rremark v-if=" this.tabContent2==1"></Rremark>
             <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
             <RapplicationInformationDetail v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
@@ -95,7 +95,7 @@
           <p>影像资料</p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <RAudioVisualLeft :custom="customInf.applyId "></RAudioVisualLeft>
+            <RAudioVisualLeft msg="MspLtwo"></RAudioVisualLeft>
           </div>
         </div>
         <!-- 弹出层右侧 div -->
@@ -109,7 +109,7 @@
           </p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <RAudioVisualLeft :custom="customInf.applyId " ref="audioChild" v-on:inputInf="inputInner"></RAudioVisualLeft>
+            <RAudioVisualLeft msg="MspLthree" ref="audioChild" v-on:inputInf="inputInner"></RAudioVisualLeft>
           </div>
         </div>
       </div>

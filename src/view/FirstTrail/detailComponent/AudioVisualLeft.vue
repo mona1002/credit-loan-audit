@@ -49,31 +49,19 @@
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
-      <!-- <div class="showHidIcons" ref="showHidIcons">
-        <img src="../../../../static/images/left.png" class="icon_pre " @click="pre">
-        <img src="../../../../static/images/pc1.png" class="icon_next" @click="next">
-        <div class="BtnIcons">
-          <img src="../../../../static/images/efw.png" @click="smaller ">
-          <img src="../../../../static/images/net.png" @click="larger">
-          <img src="../../../../static/images/daf.png" @click="AclockWise ">
-          <img src="../../../../static/images/dasf.png" @click="clockWise ">
-        </div>
-      </div> -->
-      <div style="position:absolute; left:0; top:0;background:red;" id='kkk'>
+      <div style="position:absolute; left:0; top:0;" :id='msg'>
         <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
         />
       </div>
     </div>
-    <!-- <div class="showHidIcons" ref="showHidIcons"> -->
-    <img src="../../../../static/images/left.png" class="icon_pre " v-show="perfBtn" @click="pre" @mouseenter='PerBtn'>
+    <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" v-show="perfBtn" @click="pre" @mouseenter='PerBtn'>
     <img src="../../../../static/images/pc1.png" class="icon_next" v-show="perfBtn" @click="next" @mouseenter='PerBtn'>
-    <div class="BtnIcons" v-show="perfBtn" @mouseenter='PerBtn'>
+    <div class="BtnIcons" v-show="perfBtn" @mouseenter='PerBtn' ref="PbtnIcons">
       <img src="../../../../static/images/efw.png" @click="smaller ">
       <img src="../../../../static/images/net.png" @click="larger">
       <img src="../../../../static/images/daf.png" @click="AclockWise ">
       <img src="../../../../static/images/dasf.png" @click="clockWise ">
     </div>
-    <!-- </div> -->
     <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
     <div class="Small_pic_div" v-show="SmallPicShow">
       <p class="Small_pic_title"> 缩略图-申请信息
@@ -169,6 +157,7 @@
         custmatchApplySubNo: '',
       }
     },
+    props: ['msg'],
     methods: {
       closeAlertSearch() {
         this.dataa = false;
@@ -256,7 +245,6 @@
             this.$message.error(res.msg);
           }
         });
-        // this.odivMove("ss");
       },
       getImg(ind) {
         console.log('img')
@@ -264,10 +252,14 @@
       },
       hid() {
         this.showListDiv = false;
+                this.$refs.preBtn.style.left = 37 + 'px';
+        this.$refs.PbtnIcons.style.left = 'calc( 50% - 97px)';
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
       },
       showList() {
         this.showListDiv = true;
+         this.$refs.preBtn.style.left = 223 + 'px';
+        this.$refs.PbtnIcons.style.left = ' calc( 50% + 9px)';
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 214px)";
       },
       SmallpicClose() {
@@ -366,12 +358,10 @@
         }
       },
       odivMove(id) {
-        console.log('start')
         var disX = 0;
         var disY = 0;
         var oDiv = document.getElementById(id);
         oDiv.onmousedown = function (ev) {
-          console.log('move')
           var oEvent = ev || event;
           disX = oEvent.clientX - oDiv.offsetLeft;
           disY = oEvent.clientY - oDiv.offsetTop;
@@ -381,11 +371,10 @@
             oDiv.style.top = oEvent.clientY - disY + "px";
           }
           document.onmouseup = function (ev) {
-            console.log('up')
             document.onmousemove = null;
             document.onmouseup = null;
           }
-          return false; // 空div的时候，火狐浏览器二次拖拽之后会出现div阴影拖拽，实际div不动。  解决：return false 解决默认行为 和火狐的此bug
+          return false;
         };
       },
       Imgscroll() {
@@ -430,8 +419,9 @@
       }
     },
     mounted() {
-      console.log(document.getElementById('kkk'));
-      this.odivMove("kkk");
+      // console.log(this.msg)
+      // console.log(document.getElementById('kkk'));
+      // this.odivMove(this.msg);
       // console.log(" 影音资料左")
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '01') {
@@ -705,6 +695,7 @@
     box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
   }
   /* --------------------------- */
+
   .NamParentNode {
     margin-left: 20px;
     display: block;
@@ -714,7 +705,8 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-/* ----------------------------- */
+  /* ----------------------------- */
+
   .posi {
     position: absolute;
     top: 0;

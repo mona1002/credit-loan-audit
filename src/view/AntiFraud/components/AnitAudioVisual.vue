@@ -54,12 +54,14 @@
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
-      <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
-      />
+      <div style="position:absolute; left:0; top:0;background:yellowgreen;" id='AntiFirstAud'>
+        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
+        />
+      </div>
     </div>
-    <img src="../../../../static/images/left.png" class="icon_pre " v-show="perfBtn" @click="pre" @mouseenter='PerBtn'>
+    <img src="../../../../static/images/left.png" class="icon_pre " v-show="perfBtn" ref="preBtn" @click="pre" @mouseenter='PerBtn'>
     <img src="../../../../static/images/pc1.png" class="icon_next" v-show="perfBtn" @mouseenter='PerBtn' @click="next">
-    <div class="BtnIcons" v-show="perfBtn" @mouseenter='PerBtn'>
+    <div class="BtnIcons" v-show="perfBtn" @mouseenter='PerBtn' ref="PbtnIcons">
       <img src="../../../../static/images/efw.png" @click="smaller ">
       <img src="../../../../static/images/net.png" @click="larger">
       <img src="../../../../static/images/daf.png" @click="AclockWise ">
@@ -133,6 +135,13 @@
         }).then(res => {
           if (res.statusCode == 200) {
             this.ListDetails = res.data;
+                if (this.ListDetails) {
+            var MChiDate=null;
+            for (var i = 0; i < this.ListDetails.length; i++) {
+               var MChiDate = new Date(this.ListDetails[i].uploadDate);
+              this.ListDetails[i].uploadDate = this.comput(MChiDate)
+            }
+          }
           } else {
             this.$message.error(res.msg);
           }
@@ -143,10 +152,14 @@
       },
       hid() {
         this.showListDiv = false;
+          this.$refs.preBtn.style.left=37+'px';
+        this.$refs.PbtnIcons.style.right='calc( 50% - 97px)';
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
       },
       showList() {
         this.showListDiv = true;
+                this.$refs.preBtn.style.left=417+'px';
+        this.$refs.PbtnIcons.style.right='calc( 50% - 303px)';
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 412px)";
       },
       SmallpicClose() {
@@ -237,6 +250,10 @@
         //  this.$refs.big_pic[0].style.height = "100%"; // 点击切换图片时，让显示的大图高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
         // this.$refs.big_pic[0].style.transform = "rotate(0deg)"
       },
+            comput(val) {
+        val = val.getFullYear()+"-"+ (val.getMonth() + 1)+"-"+val.getDate()+" "+(val.toString().split(' ')[4]);
+        return val;
+      },
       changeSmallPicCss(ind) { // （重复代码）通用方法： 遍历所有小图片，恢复默认（初始时）设置的css样式--------- click时改变显示大图和选中小图的 高度 + 透明度
         for (var i = 0; i < this.$refs.small_pic_ref.length; i++) {
           this.$refs.small_pic_ref[i].style.opacity = 1;
@@ -244,6 +261,26 @@
         if (ind || ind == 0) {
           this.$refs.small_pic_ref[ind].style.opacity = 0.8;
         }
+      },
+      odivMove(id) {
+        var disX = 0;
+        var disY = 0;
+        var oDiv = document.getElementById(id);
+        oDiv.onmousedown = function (ev) {
+          var oEvent = ev || event;
+          disX = oEvent.clientX - oDiv.offsetLeft;
+          disY = oEvent.clientY - oDiv.offsetTop;
+          document.onmousemove = function (ev) {
+            var oEvent = ev || event;
+            oDiv.style.left = oEvent.clientX - disX + "px";
+            oDiv.style.top = oEvent.clientY - disY + "px";
+          }
+          document.onmouseup = function (ev) {
+            document.onmousemove = null;
+            document.onmouseup = null;
+          }
+          return false;
+        };
       },
       Imgscroll() {
         this.perfBtn = true;
@@ -286,6 +323,7 @@
     },
     mounted() {
       console.log("影音资料右")
+      // this.odivMove("AntiFirstAud");
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '03') {
         this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
@@ -294,14 +332,19 @@
       } else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
         this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议主管+专员
       }
-
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.applyId,
       }).then(res => {
         if (res.statusCode == 200) {
           this.ListParent = res.data;
-          // console.log(this.ListParent)
+                   if (this.ListParent) {
+            var c=null,MDate=null;
+            for (var i = 0; i < this.ListParent.length; i++) {
+               var MDate = new Date(this.ListParent[i].uploadDate);
+              this.ListParent[i].uploadDate = this.comput(MDate)
+            }
+          }
         } else {
           this.$message.error(res.msg);
         }
@@ -388,7 +431,7 @@
 
   .icon_pre {
     position: absolute;
-    left: 432px;
+    left: 417px;
     top: 50%;
     z-index: 2;
   }
