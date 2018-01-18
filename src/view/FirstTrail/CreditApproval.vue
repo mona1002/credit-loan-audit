@@ -684,7 +684,7 @@ export default {
         "label": "反欺诈专员审批",
         "value": "antiFraudApp_commissioner",
         "type":''
-      }, ]
+      }]
     }
 
     // 请求产品  初审-审批结论 / 终审-审核结论
