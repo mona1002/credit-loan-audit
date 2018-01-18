@@ -842,59 +842,13 @@ export default {
           // } else 
           if (this.judgeFlag == '02') { // 终审
             console.log(222222222222222222222222)
-            this.post('/creauditOpinion/queryCreauditOpinionObj', {
-              applyId: this.applyId
-            }).then(res => {
-              console.log(res);
-              if (res.statusCode == '200') {
+            // 请求产品  初审-审批结论 / 终审-审核结论
+            this.getProducts();
 
-                // applyId: this.applyId,
-                // auditType: '00',
-                this.proCode = res.data.proCode;
-                this.verIncome2 = res.data.verIncome; // 月核实收入
-                this.verIncome = Number(res.data.verIncome).toLocaleString();
-                this.ploanAmt2 = res.data.ploanAmt; // 批准金额 
-                this.ploanAmt = Number(res.data.ploanAmt).toLocaleString();
-                this.caculData.ploanTerm = res.data.ploanTerm; //批准期限
-                this.ploanTerm = res.data.ploanTerm;
-                this.caculData.appmult = res.data.appmult; // 审批倍数
-                this.caculData.eachTermamt = res.data.eachTermamt; //每期还款额[元]
-                this.eachTermamt = res.data.eachTermamt;
-                this.caculData.inteDebitrate = res.data.inteDebitrate; //内部负债率
-                this.caculData.totalRate = res.data.totalRate; // 总负债率
-                this.appConclusion = res.data.appConclusion;
-                this.appOrgId = res.data.appOrgId; //进件机构ID
-                this.custNo = res.data.custNo; //客户编号
-                this.applyConclusion = res.data.applyConclusion;
-                this.srcPloanAmt = res.data.srcPloanAmt; // 信审批准额度
-                this.creditDebitRate = res.data.creditDebitRate; // 信用负债率
-                this.proId = res.data.proId; //产品id
-                // this.taskId = res.data.taskId; // 任务id
-                // opinionFlag: this.opinionFlag, // 任务类型  初审 00 
 
-                // 取到  产品 id 产品 code , 从请求回来的列表数据中找到对应的产品名
-                if (this.proId && this.products) {
-                  console.log('遍历产品')
-                  console.log(this.proId);
-                  console.log(this.products.length);
-
-                  for (var i = 0; i < this.products.length; i++) {
-                    console.log(this.products[i]);
-                    console.log('ttttttt', this.proId);
-                    console.log('xxxxxxx', this.products[i].id);
-                    if (this.proId == this.products[i].id) {
-                      this.proName = this.products[i].proName;
-
-                      console.log(this.products[i].proName, '++++++++++++', this.proName);
-                    }
-                  }
-                }
-              }
-            })
           }
 
-          // 请求产品  初审-审批结论 / 终审-审核结论
-          this.getProducts();
+
           break;
 
         case 'fqz':
@@ -946,6 +900,71 @@ export default {
           // this.$message("提示：请完善信审表中可承受的月还款金额");
           this.products = res.data;
           console.log('请求完产品了')
+          if (res.statusCode == '200') {
+            if (this.judgeFlag == '02') { // 终审
+              this.queryCreauditOpinionObj();
+            }
+          }
+        }
+      })
+    },
+    // 根据id 请求信息  终审 - 审批
+    queryCreauditOpinionObj() {
+      this.post('/creauditOpinion/queryCreauditOpinionObj', {
+        applyId: this.applyId
+      }).then(res => {
+        console.log(res);
+        if (res.statusCode == '200') {
+
+          // applyId: this.applyId,
+          // auditType: '00',
+          this.proCode = res.data.proCode;
+          this.verIncome2 = res.data.verIncome; // 月核实收入
+          this.verIncome = Number(res.data.verIncome).toLocaleString();
+          this.ploanAmt2 = res.data.ploanAmt; // 批准金额 
+          this.ploanAmt = Number(res.data.ploanAmt).toLocaleString();
+          this.caculData.ploanTerm = res.data.ploanTerm; //批准期限
+          this.ploanTerm = res.data.ploanTerm;
+          this.caculData.appmult = res.data.appmult; // 审批倍数
+          this.caculData.eachTermamt = res.data.eachTermamt; //每期还款额[元]
+          this.eachTermamt = res.data.eachTermamt;
+          this.caculData.inteDebitrate = res.data.inteDebitrate; //内部负债率
+          this.caculData.totalRate = res.data.totalRate; // 总负债率
+          this.appConclusion = res.data.appConclusion;
+          this.appOrgId = res.data.appOrgId; //进件机构ID
+          this.custNo = res.data.custNo; //客户编号
+          this.applyConclusion = res.data.applyConclusion;
+          this.srcPloanAmt = res.data.srcPloanAmt; // 信审批准额度
+          this.creditDebitRate = res.data.creditDebitRate; // 信用负债率
+          this.proId = res.data.proId; //产品id
+          // this.taskId = res.data.taskId; // 任务id
+          // opinionFlag: this.opinionFlag, // 任务类型  初审 00 
+
+          // 取到  产品 id 产品 code , 从请求回来的列表数据中找到对应的产品名
+          if (this.proId && this.products) {
+            console.log('遍历产品')
+            console.log(this.proId);
+            console.log(this.products.length);
+
+            for (var i = 0; i < this.products.length; i++) {
+              console.log(this.products[i]);
+              console.log('ttttttt', this.proId);
+              console.log('xxxxxxx', this.products[i].id);
+              if (this.proId == this.products[i].id) {
+
+                this.proName = this.products[i].proName;
+
+                console.log(this.products[i].proName, '++++++++++++', this.proName);
+                // 最大
+                this.maxAmounnt = this.products[i].maxAmounnt;
+                // 最小
+                this.minAmount = this.products[i].minAmount;
+
+                return;
+
+              }
+            }
+          }
         }
       })
     },
@@ -1766,6 +1785,8 @@ export default {
 
 
 
+
+
 /* 三列 */
 
 .creditApproval-class .item-column3 {
@@ -1781,6 +1802,8 @@ export default {
   margin: 0;
   padding: 0;
 }
+
+
 
 
 
@@ -1832,6 +1855,8 @@ export default {
 
 
 
+
+
 /* 信审审批 - btn*/
 
 .creditApproval-class .credit-btn {
@@ -1840,6 +1865,8 @@ export default {
   color: #333;
   border: none;
 }
+
+
 
 
 
@@ -1907,6 +1934,8 @@ export default {
 
 
 
+
+
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -1914,6 +1943,8 @@ export default {
   float: left;
   margin: 0;
 }
+
+
 
 
 
@@ -1948,6 +1979,8 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
+
 
 
 
@@ -2043,11 +2076,15 @@ export default {
 
 
 
+
+
 /* textarea */
 
 .creditApproval-class .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
+
 
 
 
@@ -2117,6 +2154,8 @@ export default {
 
 
 
+
+
 /* 审批 表单 */
 
 .creditApproval-class .appro-form {
@@ -2151,6 +2190,8 @@ export default {
 
 
 
+
+
 /*.creditApproval-class .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -2158,6 +2199,8 @@ export default {
 .creditApproval-class .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
+
 
 
 
@@ -2220,6 +2263,8 @@ export default {
 
 
 
+
+
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -2227,6 +2272,8 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
+
 
 
 
@@ -2306,6 +2353,8 @@ export default {
 
 
 
+
+
 /* 申请信息 */
 
 .creditApproval-class .info .el-form-item__content {
@@ -2315,6 +2364,8 @@ export default {
 .creditApproval-class .info .el-form-item__label {
   width: 120px;
 }
+
+
 
 
 
@@ -2365,11 +2416,15 @@ export default {
 
 
 
+
+
 /* 有编辑框的 提示信息*/
 
 .creditApproval-class .back-form .back-form-edit-li {
   margin-top: 25px !important;
 }
+
+
 
 
 
@@ -2429,6 +2484,8 @@ export default {
 
 
 
+
+
 /*回退*/
 
 .creditApproval-class .el-icon-check-back {
@@ -2441,6 +2498,8 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
 
 
 
@@ -2497,6 +2556,8 @@ export default {
 
 
 
+
+
 /*放弃*/
 
 .creditApproval-class .el-icon-check-giveup {
@@ -2509,6 +2570,8 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
 
 
 
@@ -2565,6 +2628,8 @@ export default {
 
 
 
+
+
 /*发起反欺诈*/
 
 .creditApproval-class .el-icon-check-start {
@@ -2577,6 +2642,8 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
 
 
 
@@ -2633,6 +2700,8 @@ export default {
 
 
 
+
+
 /*流程轨迹*/
 
 .creditApproval-class .el-icon-check-lcgj {
@@ -2667,6 +2736,8 @@ export default {
 
 
 
+
+
 /* 折叠面板头部背景色和icon */
 
 .creditApproval-class .icon_hat {
@@ -2677,6 +2748,8 @@ export default {
 .creditApproval-class .headFont {
   font-size: 16px;
 }
+
+
 
 
 
@@ -2735,11 +2808,15 @@ export default {
 
 
 
+
+
 /* 信审审批  - 审批  编辑部分 */
 
 .creditApproval-class .appro-form .back-form-edit-li .el-form-item__label {
   /*width: 120px;*/
 }
+
+
 
 
 
@@ -2804,11 +2881,15 @@ export default {
 
 
 
+
+
 /* 两行文字 样式 */
 
 .creditApproval-class .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
+
 
 
 
@@ -2857,6 +2938,8 @@ export default {
 
 
 
+
+
 /* label 文字样式 */
 
 .creditApproval-class .huitui-class .el-form-item__label {
@@ -2864,6 +2947,8 @@ export default {
 }
 
 .creditApproval-class .jujue-class {}
+
+
 
 
 
@@ -2933,11 +3018,15 @@ export default {
 
 
 
+
+
 /* 审批信息  */
 
 .creditApproval-class .el-form-item__content .el-select .el-input {
   width: 100%;
 }
+
+
 
 
 
