@@ -52,11 +52,11 @@
           <!-- <span style="color:red;display:inline-block;width:0px;float:left;">*</span> -->
           <span style="color:red;display:inline-block;width:0px;float:left;position: relative;left:-5px;font-weight:bold;">*</span>
           <el-form-item label="回退节点：" class="item-column2">
-            <el-select v-model="rollbackNodeName">
+            <el-select @change="backSelectChange" v-model="rollbackNodeName" >
               <!-- 初审只能回退到  申请登记 -->
               <!-- <el-option label="申请登记" value="creditApp_apply"></el-option>
               options -->
-              <el-option v-for="item in options" :label="item.label" :value="item.value">
+              <el-option v-for="item in options" :label="item.label" :value="item">
               </el-option>
             </el-select>
           </el-form-item>
@@ -74,13 +74,7 @@
               </el-option>
             </el-select>
           </el-form-item>
-          <!-- 拒绝主原因选择 01 -->
-          <el-form-item label="主原因：" class="item-column2" v-show="showFlag=='01' || showFlag=='07'">
-            <el-select @change="selectChange" v-model="mainReason">
-              <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
-              </el-option>
-            </el-select>
-          </el-form-item>
+          
           <!-- secondeReasons -->
           <!-- <span style="color:red;display:inline-block;width:0px;float:left;">*</span> -->
           <el-form-item label="子原因：" class="item-column2">
@@ -667,17 +661,20 @@ export default {
       this.opinionFlag = '00';
       this.options = [{
         "label": "申请登记",
-        "value": "creditApp_apply"
+        "value": "creditApp_apply",
+        "type":"01"
       }]
     } else if (this.judgeFlag == '02') {
       this.opinionFlag = '01'; // 终审
       this.options = [{
           "label": "申请登记",
-          "value": "creditApp_apply"
+          "value": "creditApp_apply",
+          "type":"01"
         },
         {
           "label": "初审审批",
-          "value": "creditApp_firstTrial"
+          "value": "creditApp_firstTrial",
+          "type":"02"
         }
       ]
     } else if (this.judgeFlag == '03') {
@@ -685,7 +682,8 @@ export default {
     } else if (this.judgeFlag == '04') { // 主管
       this.options = [{
         "label": "反欺诈专员审批",
-        "value": "antiFraudApp_commissioner"
+        "value": "antiFraudApp_commissioner",
+        "type":''
       }, ]
     }
 
@@ -742,7 +740,7 @@ export default {
     },
     coverFn(flag) {
       // 页面点击按钮出现 的 对应 弹窗
-      // 统一处理    回退 02 拒绝 01 放弃  07 审批 03 审批结论 spjl 流程轨迹 lcgj
+      // 统一处理    回退 02 ,拒绝 01, 放弃  07, 审批 03, 审批结论 spjl, 流程轨迹 lcgj
       this.coverShow = true;
       switch (flag) {
         case '02':
@@ -756,6 +754,8 @@ export default {
             this.dealroperDate = res.data;
             console.log('this.', this.dealroperDate);
           })
+          // 回退 01 new  根据节点 请求
+          // getReason('main', '01')
           break;
         case '01':
           console.log('01010101010101')
@@ -765,6 +765,8 @@ export default {
             // 请求系统时间
             this.dealroperDate = res.data;
           })
+          // 拒绝 03 new
+          this.getReason('main', '03')
           break;
         case '07':
           console.log('070707007')
@@ -774,6 +776,8 @@ export default {
             // 请求系统时间
             this.dealroperDate = res.data;
           })
+          // 放弃 05 new
+          this.getReason('main', '05')
           break;
         case '03':
           console.log('030303003030300330')
@@ -1280,17 +1284,17 @@ export default {
       console.log('获取主次原因');
       // flag 标志是 主/次   main/second
       // type 标志原因类型   02 回退  01 拒绝
-      console.log(type);
-      if (type == '02') {
-        // 回退
-        this.reasonType = '01';
-      } else if (type == '01') {
-        // 审批拒绝
-        this.reasonType = '03';
-      } else if (type == '07') {
-        // 客户放弃
-        this.reasonType = '05';
-      }
+      console.log(flag,'==============',type);
+      // if (type == '02') {
+      //   // 回退
+      //   this.reasonType = '01';
+      // } else if (type == '01') {
+      //   // 审批拒绝
+      //   this.reasonType = '03';
+      // } else if (type == '07') {
+      //   // 客户放弃
+      //   this.reasonType = '05';
+      // }
       if (flag == 'main') {
         // 请求主原因
         this.get('/credit/firstNodeReason?reasonType=' + type).then(res => {
@@ -1401,6 +1405,13 @@ export default {
         })
 
 
+    },
+    // 回退节点改变 请求主原因
+    backSelectChange:function(val){
+      console.log('====================================')
+      console.log('回退节点改变 ====',val);
+      this.getReason('main', val.type);
+      console.log('====================================')
     },
     // 回退/拒绝 主原因 select - change
     selectChange: function(val) {
@@ -1623,7 +1634,8 @@ export default {
     rollbackNodeName: function(newValue) {
       console.log(this.rollbackNodeName);
       // 在回退节点改变的时候 请求主原因
-      this.getReason('main', '02');
+      // 回退 01 new
+      // this.getReason('main', '01');
     },
     // mainReason: function(newValue) {
     //   console.log(this.mainReason.mainReasonName);
@@ -1632,13 +1644,13 @@ export default {
     // },
     showFlag: function(newValue) {
       // 统一处理    回退 02 拒绝 01 放弃  07 审批 03 审批结论 spjl 流程轨迹 lcgj
-      if (newValue == '01') { // 拒绝
-        // 01 拒接 直接请求 主原因
-        this.getReason('main', '01');
-      } else if (newValue == '07') { // 审批
-        // 07 拒接 直接请求 主原因
-        this.getReason('main', '07');
-      }
+      // if (newValue == '01') { // 拒绝
+      //   // 01 拒接 直接请求 主原因
+      //   this.getReason('main', '01');
+      // } else if (newValue == '07') { // 审批
+      //   // 07 拒接 直接请求 主原因
+      //   this.getReason('main', '07');
+      // }
     },
     coverShow: function(value) {
       // 当 弹窗消失 ,直接清空所有数据
