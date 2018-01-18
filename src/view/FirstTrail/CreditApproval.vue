@@ -52,7 +52,7 @@
           <!-- <span style="color:red;display:inline-block;width:0px;float:left;">*</span> -->
           <span style="color:red;display:inline-block;width:0px;float:left;position: relative;left:-5px;font-weight:bold;">*</span>
           <el-form-item label="回退节点：" class="item-column2">
-            <el-select @change="backSelectChange" v-model="rollbackNodeName" >
+            <el-select @change="backSelectChange" v-model="rollbackNodeName">
               <!-- 初审只能回退到  申请登记 -->
               <!-- <el-option label="申请登记" value="creditApp_apply"></el-option>
               options -->
@@ -74,7 +74,6 @@
               </el-option>
             </el-select>
           </el-form-item>
-          
           <!-- secondeReasons -->
           <!-- <span style="color:red;display:inline-block;width:0px;float:left;">*</span> -->
           <el-form-item label="子原因：" class="item-column2">
@@ -662,19 +661,19 @@ export default {
       this.options = [{
         "label": "申请登记",
         "value": "creditApp_apply",
-        "type":"01"
+        "type": "01"
       }]
     } else if (this.judgeFlag == '02') {
       this.opinionFlag = '01'; // 终审
       this.options = [{
           "label": "申请登记",
           "value": "creditApp_apply",
-          "type":"01"
+          "type": "01"
         },
         {
           "label": "初审审批",
           "value": "creditApp_firstTrial",
-          "type":"02"
+          "type": "02"
         }
       ]
     } else if (this.judgeFlag == '03') {
@@ -683,12 +682,11 @@ export default {
       this.options = [{
         "label": "反欺诈专员审批",
         "value": "antiFraudApp_commissioner",
-        "type":''
+        "type": ''
       }]
     }
 
-    // 请求产品  初审-审批结论 / 终审-审核结论
-    this.getProducts();
+
 
   },
   methods: {
@@ -894,6 +892,9 @@ export default {
               }
             })
           }
+
+          // 请求产品  初审-审批结论 / 终审-审核结论
+          this.getProducts();
           break;
 
         case 'fqz':
@@ -1284,7 +1285,7 @@ export default {
       console.log('获取主次原因');
       // flag 标志是 主/次   main/second
       // type 标志原因类型   02 回退  01 拒绝
-      console.log(flag,'==============',type);
+      console.log(flag, '==============', type);
       // if (type == '02') {
       //   // 回退
       //   this.reasonType = '01';
@@ -1407,9 +1408,9 @@ export default {
 
     },
     // 回退节点改变 请求主原因
-    backSelectChange:function(val){
+    backSelectChange: function(val) {
       console.log('====================================')
-      console.log('回退节点改变 ====',val);
+      console.log('回退节点改变 ====', val);
       this.getReason('main', val.type);
       console.log('====================================')
     },
@@ -1534,6 +1535,7 @@ export default {
       if (!val) {
         if (flag == 'verIncome') {
           this.verIncome = '';
+          this.verIncome2 = '';
         } else if (flag == 'ploanAmt') {
 
           this.ploanAmt = ''
@@ -1542,53 +1544,65 @@ export default {
 
       // 有数据
       if (val) {
-        this.ploanAmt2 = 0;
-        this.verIncome2 = 0;
-        if (/,/.test(this.verIncome))
-          this.verIncome2 = Number(this.verIncome.replace(/,/g, ''));
-        else
-          this.verIncome2 = Number(this.verIncome);
-        if (/,/.test(this.ploanAmt)) {
-          console.log('-------------------------------------------------')
-          this.ploanAmt2 = Number(this.ploanAmt.replace(/,/g, ''));
+        // this.ploanAmt2 = 0;
+        // this.verIncome2 = 0;
+        if (flag == 'verIncome') {
+          if (/,/.test(this.verIncome))
+            this.verIncome2 = Number(this.verIncome.replace(/,/g, ''));
+          else
+            this.verIncome2 = Number(this.verIncome);
+
+          // 大于最大
+          if (this.verIncome2 > this.maxAmounnt) {
+            // this.ploanAmtError = true;
+            this.$message({
+              showClose: true,
+              message: '批准金额不能大于产品最高上限' + this.maxAmounnt + '元',
+              type: 'warning'
+            });
+            this.verIncome2 = '';
+            this.verIncome = '';
+            return;
+          }
+          // 小于最小
+          if (this.verIncome2 < this.minAmount) {
+            // this.ploanAmtError = true;
+            this.$message({
+              showClose: true,
+              message: '批准金额不能小于产品最低下限' + this.minAmount + '元',
+              type: 'warning'
+            });
+
+            this.verIncome2 = '';
+            this.verIncome = '';
+            return;
+          }
         } else {
-          console.log('==========================================')
-          this.ploanAmt2 = Number(this.ploanAmt)
+          if (/,/.test(this.ploanAmt)) {
+            console.log('-------------------------------------------------')
+            this.ploanAmt2 = Number(this.ploanAmt.replace(/,/g, ''));
+          } else {
+            console.log('==========================================')
+            console.log(Number(this.ploanAmt))
+            this.ploanAmt2 = Number(this.ploanAmt)
+          }
+
+          // 大于申请金额
+          if (this.ploanAmt2 > this.loanAmt) {
+            // this.ploanAmtError = true;
+            this.$message({
+              showClose: true,
+              message: '此金额不能大于申请金额,请重新输入!',
+              type: 'warning'
+            });
+            this.ploanAmt = '';
+            this.ploanAmt2 = '';
+            return;
+          }
         }
 
-        // 大于最大
-        if (this.ploanAmt2 > this.maxAmounnt) {
-          // this.ploanAmtError = true;
-          this.$message({
-            showClose: true,
-            message: '批准金额不能大于产品最高上限' + this.maxAmounnt + '元',
-            type: 'warning'
-          });
-          this.ploanAmt = '';
-          return;
-        }
-        // 小于最小
-        if (this.ploanAmt2 < this.minAmount) {
-          // this.ploanAmtError = true;
-          this.$message({
-            showClose: true,
-            message: '批准金额不能小于产品最低下限' + this.minAmount + '元',
-            type: 'warning'
-          });
-          this.ploanAmt = '';
-          return;
-        }
-        // 大于申请金额
-        if (this.ploanAmt2 > this.loanAmt) {
-          // this.ploanAmtError = true;
-          this.$message({
-            showClose: true,
-            message: '此金额不能大于申请金额,请重新输入!',
-            type: 'warning'
-          });
-          this.ploanAmt = '';
-          return;
-        }
+
+
 
 
 
@@ -1749,6 +1763,9 @@ export default {
 
 
 
+
+
+
 /* 三列 */
 
 .creditApproval-class .item-column3 {
@@ -1764,6 +1781,9 @@ export default {
   margin: 0;
   padding: 0;
 }
+
+
+
 
 
 
@@ -1809,6 +1829,9 @@ export default {
 
 
 
+
+
+
 /* 信审审批 - btn*/
 
 .creditApproval-class .credit-btn {
@@ -1817,6 +1840,9 @@ export default {
   color: #333;
   border: none;
 }
+
+
+
 
 
 
@@ -1878,6 +1904,9 @@ export default {
 
 
 
+
+
+
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -1885,6 +1914,9 @@ export default {
   float: left;
   margin: 0;
 }
+
+
+
 
 
 
@@ -1916,6 +1948,9 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
+
+
 
 
 
@@ -2005,11 +2040,17 @@ export default {
 
 
 
+
+
+
 /* textarea */
 
 .creditApproval-class .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
+
+
 
 
 
@@ -2073,6 +2114,9 @@ export default {
 
 
 
+
+
+
 /* 审批 表单 */
 
 .creditApproval-class .appro-form {
@@ -2104,6 +2148,9 @@ export default {
 
 
 
+
+
+
 /*.creditApproval-class .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -2111,6 +2158,9 @@ export default {
 .creditApproval-class .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
+
+
 
 
 
@@ -2167,6 +2217,9 @@ export default {
 
 
 
+
+
+
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -2174,6 +2227,9 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
+
+
 
 
 
@@ -2247,6 +2303,9 @@ export default {
 
 
 
+
+
+
 /* 申请信息 */
 
 .creditApproval-class .info .el-form-item__content {
@@ -2256,6 +2315,9 @@ export default {
 .creditApproval-class .info .el-form-item__label {
   width: 120px;
 }
+
+
+
 
 
 
@@ -2300,11 +2362,17 @@ export default {
 
 
 
+
+
+
 /* 有编辑框的 提示信息*/
 
 .creditApproval-class .back-form .back-form-edit-li {
   margin-top: 25px !important;
 }
+
+
+
 
 
 
@@ -2358,6 +2426,9 @@ export default {
 
 
 
+
+
+
 /*回退*/
 
 .creditApproval-class .el-icon-check-back {
@@ -2370,6 +2441,9 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
 
 
 
@@ -2420,6 +2494,9 @@ export default {
 
 
 
+
+
+
 /*放弃*/
 
 .creditApproval-class .el-icon-check-giveup {
@@ -2432,6 +2509,9 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
 
 
 
@@ -2482,6 +2562,9 @@ export default {
 
 
 
+
+
+
 /*发起反欺诈*/
 
 .creditApproval-class .el-icon-check-start {
@@ -2494,6 +2577,9 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
 
 
 
@@ -2544,6 +2630,9 @@ export default {
 
 
 
+
+
+
 /*流程轨迹*/
 
 .creditApproval-class .el-icon-check-lcgj {
@@ -2575,6 +2664,9 @@ export default {
 
 
 
+
+
+
 /* 折叠面板头部背景色和icon */
 
 .creditApproval-class .icon_hat {
@@ -2585,6 +2677,9 @@ export default {
 .creditApproval-class .headFont {
   font-size: 16px;
 }
+
+
+
 
 
 
@@ -2637,11 +2732,17 @@ export default {
 
 
 
+
+
+
 /* 信审审批  - 审批  编辑部分 */
 
 .creditApproval-class .appro-form .back-form-edit-li .el-form-item__label {
   /*width: 120px;*/
 }
+
+
+
 
 
 
@@ -2700,11 +2801,17 @@ export default {
 
 
 
+
+
+
 /* 两行文字 样式 */
 
 .creditApproval-class .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
+
+
 
 
 
@@ -2747,6 +2854,9 @@ export default {
 
 
 
+
+
+
 /* label 文字样式 */
 
 .creditApproval-class .huitui-class .el-form-item__label {
@@ -2754,6 +2864,9 @@ export default {
 }
 
 .creditApproval-class .jujue-class {}
+
+
+
 
 
 
@@ -2817,11 +2930,17 @@ export default {
 
 
 
+
+
+
 /* 审批信息  */
 
 .creditApproval-class .el-form-item__content .el-select .el-input {
   width: 100%;
 }
+
+
+
 
 
 
