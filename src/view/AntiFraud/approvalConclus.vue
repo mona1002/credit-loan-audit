@@ -61,16 +61,25 @@
           {{custName}}
         </div>
       </li>
-      <li class="item-column1 item-column3-2">
+      <!-- item-column3-2 -->
+      <li class="item-column1 ">
         <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:5px;font-weight:bold;">*</span>
         <div class="left-title">
           风险项：
         </div>
         <div>
-          <el-select v-model="riskSection" @change="selectChangeRisk">
-            <el-option v-for="item in riskSections" :label="item.showMsg" :value="item">
-            </el-option>
-          </el-select>
+          <!-- @change="selectChangeRisk" multiple    class="muti-select"   -->
+          <!-- <el-select v-model="riskSection" multiple collapse-tags class="muti-select"> -->
+          <el-select 
+            v-model="riskSection" 
+            multiple 
+            collapse-tags 
+            placeholder="请选择"
+            class="muti-select"
+            >
+              <el-option v-for="item in riskSections" :key="item.enumCode" :label="item.showMsg" :value="item.showMsg">
+              </el-option>
+            </el-select>
         </div>
       </li>
       <li class="item-column1 item-column3-2">
@@ -291,17 +300,19 @@ export default {
       secondId: '', // 子原因id
       // appinfoId:'', // 反欺诈申请id
       applicationInformationDetail: '', // 取到 本地存储的 申请信息
-      riskSection: '', // 风险项
+      riskSectionArr: [], // 风险项
+      riskSection: [],
       auditDesc: '', // 反欺诈决策反馈
       caseDesc: '', // 案件描述
       taskNodeName: '', // 任务节点
+      taskId: '', // 任务节点
       processInstanceId: '', // 流程实例id
       caseOptions: [], // 请求回来的案件 
       caseNum: '', // 案件编号
-      riskSections: '', // 请求回来的风险项
+      riskSections: [], // 请求回来的风险项
       custName: '', // 客户名
       riskObj: {}, // 风险项对象
-      riskSection: '', // 风险项 显示 
+      // riskSection: '', // 风险项 显示 
       detailData: [{
         applyCustName: '100',
         applySubno: '100',
@@ -336,7 +347,7 @@ export default {
       this.options = [{
         "label": "申请登记",
         "value": "creditApp_apply",
-        "type":"01"
+        "type": "01"
       }]
 
     } else if (this.judgeFlag == '02') { // 终审取终审  taskId
@@ -348,12 +359,12 @@ export default {
       this.options = [{
           "label": "申请登记",
           "value": "creditApp_apply",
-          "type":"01"
+          "type": "01"
         },
         {
           "label": "初审审批",
           "value": "creditApp_firstTrial",
-          "type":"02"
+          "type": "02"
         }
       ]
     } else if (this.judgeFlag == '03') {
@@ -364,6 +375,8 @@ export default {
       this.applyId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).applyId;
       // 任务节点
       this.taskNodeName = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskNodeName;
+      this.taskId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
+
       // 流程实例id
       this.processInstanceId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).processInstanceId;
       // 任务状态
@@ -375,6 +388,7 @@ export default {
       this.applyId = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).applyId;
       // 任务节点
       this.taskNodeName = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskNodeName;
+      this.taskId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
       // 流程实例id
       this.processInstanceId = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).processInstanceId;
       // 任务状态
@@ -383,7 +397,7 @@ export default {
       this.options = [{
         "label": "反欺诈专员审批",
         "value": "antiFraudApp_commissioner",
-        "type":''
+        "type": ''
       }]
     }
 
@@ -471,13 +485,29 @@ export default {
     // 审批
     insert() {
       // 判断必填项
-      if (!this.auditResult || !this.mainReason || !this.secondReason || !this.riskSection || !this.auditDesc || !this.caseDesc) {
+      if (!this.auditResult || !this.mainReason || !this.secondReason || !this.riskSectionArr || !this.auditDesc || !this.caseDesc) {
         this.$message({
           showClose: true,
           message: '请输入必填项',
           type: 'warning'
         });
         return;
+      }
+
+      if (this.riskSection) {
+        for (var i = 0; i < this.riskSection.length; i++) {
+          for (var j = 0; j < this.riskSections.length; j++) {
+            if (this.riskSection[i] == this.riskSections[j].showMsg) {
+              // 赋值给对象 
+              this.riskObj.showMsg = this.riskSections[j].showMsg;
+              this.riskObj.enumCode = this.riskSections[j].enumCode;
+              this.riskObj.returnMsg = this.riskSections[j].returnMsg;
+              this.riskSectionArr.push(this.riskObj);
+              console.log(this.riskSectionArr);
+              // return
+            }
+          }
+        }
       }
 
       const h = this.$createElement;
@@ -500,25 +530,35 @@ export default {
               subreasonId: this.secondId, // 欺诈子原因id
               mainreaName: this.mainReason, // 欺诈主原因名称
               subreaName: this.secondReason, // 欺诈子原因名称
-              riskSection: this.riskObj, // 风险项
+              riskSection: this.riskSectionArr, // 风险项
               auditDesc: this.auditDesc, // 反欺诈决策反馈
               auditResult: this.auditResult, // 审核结论
               auditType: '01', // 审批类型
               caseNum: this.caseNum, // 案件编号 caseNum
               caseDesc: this.caseDesc, // 案件描述
               taskNodeName: this.taskNodeName, // 任务节点
+              taskId: this.taskId,
               processInstanceId: this.processInstanceId, // 流程实例Id
             }).then(res => {
               if (res.statusCode == '200') {
                 done();
               } else {
+                done();
+                if (res.statusCode == 500) {
+                  this.$message({
+                    type: 'warning',
+                    message: '网络异常,请重试!'
+                  });
+                  instance.confirmButtonText = '';
+                  instance.confirmButtonLoading = false;
+                }
                 this.$message({
                   type: 'warning',
                   message: res.msg
                 });
 
-                instance.confirmButtonText = '';
               }
+              instance.confirmButtonText = '';
               instance.confirmButtonLoading = false;
             })
           } else {
@@ -526,9 +566,11 @@ export default {
           }
         }
       }).then(action => {
+        instance.confirmButtonText = '';
+        instance.confirmButtonLoading = false;
         this.$message({
           type: 'success',
-          message: this.resMsg
+          message: res.msg
         });
       });
     },
@@ -558,7 +600,7 @@ export default {
           // 取本地的 流程模版id
           // this.processTemplateId = JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
           // console.log(this.processTemplateId);
-          
+
           this.lcgjLoading = true;
           this.getLcgjList();
 
@@ -746,11 +788,22 @@ export default {
     },
     // 风险项更改
     selectChangeRisk: function(val) {
+      console.log(val);
       if (val) {
-        // 赋值给对象 
-        this.riskObj.showMsg = val.showMsg;
-        this.riskObj.enumCode = val.enumCode;
-        this.riskObj.returnMsg = val.returnMsg;
+        for (var i = 0; i < val.length; i++) {
+          for (var j = 0; j < this.riskSections.length; j++) {
+            if (val[i] == this.riskSections[j].showMsg) {
+              // 赋值给对象 
+              this.riskObj.showMsg = this.riskSections[j].showMsg;
+              this.riskObj.enumCode = this.riskSections[j].enumCode;
+              this.riskObj.returnMsg = this.riskSections[j].returnMsg;
+              this.riskSectionArr.push(this.riskObj);
+              console.log(this.riskSectionArr);
+              return
+            }
+          }
+        }
+
       }
     },
     // 获取主原因
@@ -988,9 +1041,9 @@ export default {
       }
     },
     // 回退节点改变 请求主原因
-    backSelectChange:function(val){
+    backSelectChange: function(val) {
       console.log('====================================')
-      console.log('回退节点改变 ====',val);
+      console.log('回退节点改变 ====', val);
       this.getReason('main', val.type);
       console.log('====================================')
     },
@@ -1046,17 +1099,25 @@ export default {
 
 .approval-colun .address-title {
   width: 100%;
-  height: 40px;
+  height: 35px;
   font-size: 18px;
   /*font-weight: bold;*/
   background: #eef0f9;
-  line-height: 40px;
+  line-height: 35px;
   padding-left: 10px;
   display: block;
   margin-bottom: 10px;
   /*margin-top: 20px;*/
   overflow: hidden;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -1118,6 +1179,14 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
 /* 一列 */
 
 .approval-colun .item-column1 {
@@ -1126,6 +1195,14 @@ export default {
   margin: 0;
   margin-bottom: 10px;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -1196,6 +1273,14 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
 /* 三列 */
 
 .approval-colun .item-column3 {
@@ -1208,8 +1293,8 @@ export default {
 .approval-colun .left-title {
   float: left;
   width: 130px;
-  line-height: 30px;
-  min-height: 30px;
+  line-height: 35px;
+  min-height: 35px;
   padding-right: 10px;
   text-align: right;
   font-size: 14px;
@@ -1244,10 +1329,18 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
 /* 3列 空位 */
 
 .approval-colun .item-column3-null {
-  min-height: 40px;
+  min-height: 35px;
 }
 
 .approval-colun .item-column3-2 {
@@ -1258,6 +1351,14 @@ export default {
   height: 30px;
   line-height: 30px;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -1321,6 +1422,14 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
 /* 按钮集合控件 */
 
 .approval-colun .btn-div {
@@ -1328,6 +1437,14 @@ export default {
   width: 80%;
   float: left;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -1365,6 +1482,14 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -1443,6 +1568,14 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
 /*拒绝*/
 
 .approval-colun .el-icon-check-reject {
@@ -1455,6 +1588,14 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -1533,6 +1674,14 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
 /*审批*/
 
 .approval-colun .el-icon-check-appro {
@@ -1545,6 +1694,14 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -1597,6 +1754,14 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
 /* 反欺诈 审批结论 - btn*/
 
 .approval-colun .credit-btn {
@@ -1605,6 +1770,14 @@ export default {
   color: #333;
   border: none;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -1692,16 +1865,24 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
 /* form-title */
 
 .approval-colun .form-title {
   width: 100%;
-  height: 40px;
+  height: 35px;
   font-size: 18px;
   /*font-weight: bold;*/
   /*background: #ededed;*/
   background: #eef0f9;
-  line-height: 40px;
+  line-height: 35px;
   padding-left: 10px;
   display: block;
   margin-bottom: 10px;
@@ -1711,12 +1892,12 @@ export default {
 
 .approval-colun .form-title2 {
   width: 100%;
-  height: 40px;
+  height: 35px;
   font-size: 18px;
   /*font-weight: bold;*/
   /*background: #ededed;*/
   background: #eef0f9;
-  line-height: 40px;
+  line-height: 35px;
   padding-left: 10px;
   display: block;
   margin-bottom: 10px;
@@ -1727,10 +1908,18 @@ export default {
 .approval-colun .back-form .back-form-li {
   /*border-top: 0.5px solid #ededed;*/
   margin: 10px 0px;
-  line-height: 40px;
+  line-height: 35px;
   height: 35px;
   padding: 2px 10px 0 10px;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -1786,6 +1975,14 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
 /* 弹窗页面 关闭按钮*/
 
 .approval-colun .el-tag {
@@ -1802,6 +1999,14 @@ export default {
   right: 0px;
   top: 5px;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -1872,6 +2077,14 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
 /*.approval-colun .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -1879,6 +2092,14 @@ export default {
 .approval-colun .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -1947,11 +2168,27 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
 /* 反欺诈 -- 审批结论 */
 
 .approval-colun .form-ul {
   padding-left: 30px;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -2011,11 +2248,27 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
 /* 审批 label*/
 
 .approval-colun .appro-form .back-form-edit-li .el-form-item__label {
   width: 120px;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -2067,11 +2320,27 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
 /* 两行文字 样式 */
 
 .approval-colun .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -2108,14 +2377,30 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
 /* 详细 信息按钮*/
 
 .approval-colun .btn-detail {
   /*border: none;*/
   float: left;
-  margin-top: 40px;
+  margin-top: 35px;
   margin-left: 10px;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -2139,6 +2424,14 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
 /* 分页 */
 
 .approval-colun .tool-bar {
@@ -2146,9 +2439,90 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
+
+
+
+
+
+
+
+
 /* 隐藏分页 */
-.approval-colun .el-pagination__jump{
+
+.approval-colun .el-pagination__jump {
   display: none;
 }
+
+
+
+
+
+
+/*多选下拉*/
+
+.approval-colun .form-ul .muti-select {
+  display: flex;
+  position: relative;
+  width: 400px;
+  height: normal;
+  line-height: normal;
+  width: normal;
+  /*height: 100px;*/
+    /*border: 1px solid;*/
+    line-height: 100%;
+}
+
+.approval-colun .muti-select .el-select__tags {
+  max-width: 100%!important;
+  position: absolute;
+  line-height: normal;
+  white-space: normal;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.approval-colun .muti-select .el-select__tags>span{
+width: 100%;
+    height: auto;
+    white-space: nowrap;
+    display: inline-grid;
+    width: 100%;
+    height: 100%;
+    white-space: nowrap;
+    display: inline-grid
+}
+
+.approval-colun .muti-select .el-tag {
+  box-sizing: border-box;
+  border-color: transparent;
+  margin: 3px 0 3px 6px;
+  background-color: #f0f2f5;
+  right: 0;
+  position: relative;
+  height: auto;
+  width:min-content;
+}
+
+.approval-colun .muti-select>.el-input {
+  display: block;
+}
+
+.approval-colun .muti-select .el-tag .el-icon-close {
+  top: 0;
+}
+
+.approval-colun .muti-select .el-input {
+  height: auto;
+  min-height: 35px;
+}
+
+.approval-colun .muti-select .el-input--suffix .el-input__inner {
+  height: auto;
+  /*height: 100px;*/
+}
+
+
 
 </style>
