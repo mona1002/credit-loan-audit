@@ -134,25 +134,22 @@
             </el-select>
           </el-form-item>
         </div>
-        <div class="back-form-li">
           <!-- 回退主原因输入 02 -->
+        <!-- <div class="back-form-li">
           <span style="color:red;display:inline-block;width:0px;float:left;position: relative;left:15px;">*</span>
           <el-form-item label="主原因:" class="item-column2" v-show="showFlag=='02'">
-            <!-- 改成后台获取   filter-method     visible-change 下拉框 出现/隐藏时触发-->
             <el-select @change="selectChange" v-model="mainReason">
               <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
               </el-option>
             </el-select>
           </el-form-item>
-          <!-- secondReasons -->
-          <!-- <span style="color:red;display:inline-block;width:0px;float:left;">*</span> -->
           <el-form-item label="子原因 :" class="item-column2">
             <el-select v-model="secondaryReason">
               <el-option v-for="item in secondReasons" :key="item.id" :label="item.reasonName" :value="item.reasonName">
               </el-option>
             </el-select>
           </el-form-item>
-        </div>
+        </div> -->
         <div class="back-form-li" style="height:60px;line-height: 60px;padding-top:5px;">
           <span style="color:red;display:inline-block;width:0px;float:left;position:relative;top:-8px;">*</span>
           <el-form-item label="原因说明 :">
@@ -388,7 +385,7 @@ export default {
       this.applyId = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).applyId;
       // 任务节点
       this.taskNodeName = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskNodeName;
-      this.taskId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
+      this.taskId = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
       // 流程实例id
       this.processInstanceId = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).processInstanceId;
       // 任务状态
@@ -661,13 +658,13 @@ export default {
             return;
           }
           // 主原因
-          if (!this.mainReason) {
-            this.$message({
-              message: "提示：请选择主原因!",
-              type: 'warning'
-            });
-            return;
-          }
+          // if (!this.mainReason) {
+          //   this.$message({
+          //     message: "提示：请选择主原因!",
+          //     type: 'warning'
+          //   });
+          //   return;
+          // }
           // 原因说明
           if (!this.reasonRemark) {
             this.$message({
@@ -680,7 +677,7 @@ export default {
           this.coverShow = false;
           this.showFlag = 0;
           // 回退节点 使用了监听,所以单独赋值
-          this.rollbackNodeName = this.rollbackNodeName;
+          this.rollbackNodeName = this.rollbackNodeName.value;
           // this.mainReason = this.mainReason; // 主原因同理
           this.creauditAppOperate = 'check_Back';
           // this.taskId = '180049';
