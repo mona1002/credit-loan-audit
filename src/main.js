@@ -48,3 +48,11 @@ Vue.filter('formatMoney',function(value){
 	console.log(value)
 	return value.toLocaleString()
 })
+// 精度问题
+Vue.filter('formatAppmult',function(value){
+	
+	
+	if(!value) return ''
+
+	return Math.ceil(Number(value))
+})
