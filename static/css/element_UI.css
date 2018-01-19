@@ -1,4 +1,4 @@
-/* 公共部分 */
+ 公共部分 */
 
 
 /* .Abody 部分 */
@@ -2224,9 +2224,20 @@ overflow-x: hidden;
 .anti-fraud .anti-table .el-table__header-wrapper .el-table__header th:last-child{
     text-align: center;
 }
-.el-table--border .has-gutter td:nth-last-of-type(2), .el-table--border .has-gutter th:nth-last-of-type(2){
+/*操作*/
+.anti-fraud .anti-table.el-table th:nth-of-type(1),
+.anti-fraud .anti-table.el-table th:nth-of-type(16) {
   text-align: center;
 }
+/*序号*/
+.anti-fraud .anti-table .el-table__body-wrapper .el-table__body td:nth-of-type(1),
+.anti-fraud .anti-table .el-table__body-wrapper .el-table__body td:nth-of-type(16){
+  text-align: center;
+
+}
+/*.el-table--border .has-gutter td:nth-last-of-type(2), .el-table--border .has-gutter th:nth-last-of-type(2){
+  text-align: center;
+}*/
 
 
 /* 审批结论 下拉框 padding*/

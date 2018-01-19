@@ -7,7 +7,7 @@
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">网上查询信息</span>
-        </template>
+        </template> 
         <div class="CreditForm_InternetInf">
           <ul>
             <li>

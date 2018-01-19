@@ -34,3 +34,25 @@ Vue.filter('dateFilter',function(value){
 	// console.log(new Date(value).toLocaleString().replace(/\//g,'-').match(/\d{4}\-\d{2}\-\d{1,2}/)[0])
 	return new Date(value).toLocaleString().replace(/\//g,'-').match(/\d{4}\-\d{1,2}\-\d{1,2}/)[0]
 })
+// 信审审批 - 审批 计算倍数
+Vue.filter('formatValue',function(value){
+	if(!value) return ''
+	console.log(value);
+	if(Number(value)>0)
+	return Math.round(Number(value)*10000)/100 +'%';
+	
+})
+// 金额过滤
+Vue.filter('formatMoney',function(value){
+	if(!value) return ''
+	console.log(value)
+	return value.toLocaleString()
+})
+// 精度问题
+Vue.filter('formatAppmult',function(value){
+	
+	
+	if(!value) return ''
+
+	return Math.ceil(Number(value))
+})

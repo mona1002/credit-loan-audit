@@ -34,7 +34,7 @@
               </span>
             </p>
             <div class="Left_right_BigImg ">
-              <AudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></AudioVisualLeft>
+              <AudioVisualLeft msg="spLone" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></AudioVisualLeft>
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
               <InternalMatch v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
               <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
@@ -87,14 +87,14 @@
         </div>
       </div>
       <!-- 对比弹出层   不在右侧div里面，再 wrap 里面  可以用fixed定位-->
-      <div class="AudioVisual_wrap_compare" v-show="CompareAlert" v-on:CompareShow="compBtnS">
+      <div class="AudioVisual_wrap_compare" v-if="CompareAlert" v-on:CompareShow="compBtnS">
         <el-button type="primary compareClose" @click="closeCompareBtn">关闭</el-button>
         <!-- 弹出层左侧 div -->
         <div class="AudioVisual_wrap_compare_left ">
           <p>影像资料</p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <AudioVisualLeft :custom="customInf.applyId "></AudioVisualLeft>
+            <AudioVisualLeft msg="spLtwo" v-if="CompareAlert"></AudioVisualLeft>
           </div>
         </div>
         <!-- 弹出层右侧 div -->
@@ -108,7 +108,7 @@
           </p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <AudioVisualLeft :custom="customInf.applyId " ref="audioChild" v-on:inputInf="inputInner"></AudioVisualLeft>
+            <AudioVisualLeft msg="spLthree" ref="audioChild" v-on:inputInf="inputInner"></AudioVisualLeft>
           </div>
         </div>
       </div>
@@ -142,12 +142,12 @@
   import processTrajectory from "./checkComponent/processTrajectory"; //流程轨迹
 
 
-import HelloWorld from "../HelloWorld.vue"
-// import CreditFormKeydownEvent from './detailComponent/CreditFormKeydownEvent.vue'
+  import HelloWorld from "../HelloWorld.vue"
+  // import CreditFormKeydownEvent from './detailComponent/CreditFormKeydownEvent.vue'
   export default {
     data() {
       return {
-        custName:'',//借款人
+        custName: '', //借款人
         SplitLeft: "left",
         SplitRight: "right",
         watchData: '',
@@ -272,8 +272,8 @@ import HelloWorld from "../HelloWorld.vue"
         id: this.tastwaitingPass.applyId,
       }).then(res => {
         if (res.statusCode == 200) {
-           this.custName=res.data.accepCusBasicInfo.custName;
-          this.customInf =res.data;
+          this.custName = res.data.accepCusBasicInfo.custName;
+          this.customInf = res.data;
         } else {
           this.$message.error(res.msg);
         }
@@ -285,6 +285,7 @@ import HelloWorld from "../HelloWorld.vue"
       aut,
       // 编辑
       AudioVisual,
+      AudioVisualLeft,
       remark,
       InternalMatch,
       applicationInformation,
@@ -296,7 +297,6 @@ import HelloWorld from "../HelloWorld.vue"
       CreditApproval,
       // 查询
       cCreditForm,
-      AudioVisualLeft,
       cremarkDetail, //
       cborrowerInformationDetail,
       capplicationInformationDetail,
@@ -517,7 +517,7 @@ import HelloWorld from "../HelloWorld.vue"
   .tab2_Content {
     /*background: purple;*/
     height: calc( 100% - 48px);
-    overflow: auto; 
+    overflow: auto;
   }
   /* 右侧tab切换头 左右滑动图标  流  */
 

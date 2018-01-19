@@ -140,14 +140,6 @@
         this.tabContent2 = ind;
         this.tab2Index = ind;
         this.tabActiveInd2 = ind;
-        for (var i = 0; i < this.$refs.tabOne.length; i++) {
-          this.$refs.tabOne[i].className = "tab1Default";
-          //   this.flag1[i] = true;
-        }
-        // this.$refs.tabOne[this.tabActiveInd1].className = "tab1Act";
-        // if (ind != 0 && ind != 8) {
-        //   this.flag1[ind] = false;
-        // }
       }
     },
     mounted() {
