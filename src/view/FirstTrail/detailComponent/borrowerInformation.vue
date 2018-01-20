@@ -102,7 +102,7 @@
 					        	<!-- <el-tooltip class="item" effect="dark" content="邮政编码格式不正确" :disabled="postcodes==false" placement="top">
 					        	 						      		<el-input v-model="scope.row.estateZip" placeholder="请输入内容" v-on:blur="postcode(scope.row)" v-on:focus = "postcodes=false"></el-input>
 					        	 						    	</el-tooltip> --> 
-					        	<el-input v-model="scope.row.estateZip" placeholder="请输入内容" v-on:blur="postcode(scope.row)"></el-input>
+					        	<el-input v-model="scope.row.estateZip" placeholder="请输入内容" v-on:blur="postcode(scope.row,'estateZip')"></el-input>
 					        </template>
 					      </el-table-column>
 					      <el-table-column
@@ -110,7 +110,7 @@
 					        label="产权比例"
 					        min-width="100">
 					        <template slot-scope="scope">
-						        <el-input v-model="scope.row.equityRatio" placeholder="请输入内容"></el-input>
+						        <el-input v-model="scope.row.equityRatio" v-on:blur="postcode(scope.row,'equityRatio')" placeholder="请输入内容"></el-input>
 					        </template>
 					      </el-table-column>
 					      <el-table-column
@@ -1197,13 +1197,13 @@
 		    },
             //房产类型
             estateTypes:[
-				{'value': '01' ,'label': '租用'},
+				/*{'value': '01' ,'label': '租用'},*/
 				{'value': '02' ,'label': '商业按揭购房'},
 				{'value': '03' ,'label': '公积金按揭购房'},
 				{'value': '04' ,'label': '无按揭购房'},
 				{'value': '05' ,'label': '自建房'},
-				{'value': '06' ,'label': '亲属住房'},
-				{'value': '07' ,'label': '单位宿舍'}
+				/*{'value': '06' ,'label': '亲属住房'},
+				{'value': '07' ,'label': '单位宿舍'}*/
       		],
       		//产权性质
       		propertyTypes:[
@@ -2462,17 +2462,25 @@
 			    }
 			},
 			//邮政编码验证
-			postcode(row){
+			postcode(row,flage){
 				console.log(row);
-				if(row.estateZip == ''){
-					row.estateZip = '';
-					//this.postcodes=false;
-				}else{
-					if(!/^[0-9][0-9]{5}$/.test(row.estateZip)){
-						//this.postcodes=true;
-						row.estateZip = '';
-					}
-				}
+				switch (flage){
+					case 'estateZip':
+						if(row.estateZip == ''){
+							row.estateZip = '';
+							//this.postcodes=false;
+						}else{
+							if(!/^[0-9][0-9]{5}$/.test(row.estateZip)){
+								//this.postcodes=true;
+								row.estateZip = '';
+							}
+						};
+						break;
+					case 'equityRatio':
+					console.log(row.equityRatio);
+						row.equityRatio = this.formatNumber(row.equityRatio,2,0).replace(/,/,'')+'%';
+						break;
+				};
 			},
 	    },
 	    directives: {

@@ -674,6 +674,10 @@
 		        	if(this.borestateList[i].monthlyPay != null){
 			        	this.borestateList[i].monthlyPay = this.formatNumber(this.borestateList[i].monthlyPay,2,0);
 			        };
+			        //产权比例 保留两位小数点+%
+			        if(this.borestateList[i].equityRatio != null){
+			        	this.borestateList[i].equityRatio = this.formatNumber(this.borestateList[i].equityRatio,2,0).replace(/,/,'')+'%';
+			        }
 
 		        }
 		        /*车辆信息*/

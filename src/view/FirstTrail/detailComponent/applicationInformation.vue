@@ -472,7 +472,7 @@
 					</ul>
 					<ul>
 						<li>
-							<label><i>*</i>被保人姓名[元]：</label>
+							<label><i>*</i>被保人姓名：</label>
 							<el-input v-model="inputname" v-on:focus = "oo=true" v-on:blur="oo=false"></el-input>
 							<span v-show="oo">被保人姓名不能为空</span>
 						</li>

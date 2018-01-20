@@ -174,7 +174,7 @@
 					<li><label>上下游供货方式：</label><span>{{datas.comSupplyMode}}</span></li>
 					<li><label>上下游结算周期：</label><span>{{datas.comBillCycle}}</span></li>
 					<li><label>应收账款[万元]：</label><span>{{datas.comCollection}}</span></li>
-					<li><label>贷款及抵押情况[万元]：</label><span>{{datas.comLoan}}</span></li>
+					<li><label>贷款及抵押情况：</label><span>{{datas.comLoan}}</span></li>
 					<li><label>其他说明：</label><span>{{datas.comOtherInfo}}</span></li>
 				</ul>
 				<ul class="headul">
@@ -255,10 +255,15 @@
 		        	if(this.datas.comPayables !=null){
 		        		this.datas.comPayables = this.formatNumber(this.datas.comPayables,2,0);
 		        	};
-		        	//(企业)货款及抵押情况
-		        	if(this.datas.comLoan !=null){
-		        		this.datas.comLoan = this.formatNumber(this.datas.comLoan,2,0);
+		        	//办公环境 办公场所面积
+		        	if(this.datas.comOffArea !=null){
+		        		this.datas.comOffArea = this.formatNumber(this.datas.comOffArea,2,0).replace(/,/,'')+'㎡';
 		        	};
+		        	//库房/车间 厂房面积
+		        	if(this.datas.comArea !=null){
+		        		this.datas.comArea = this.formatNumber(this.datas.comArea,2,0).replace(/,/,'')+'㎡';
+		        	};
+		        	
 		        };
 		      });
 		  },
