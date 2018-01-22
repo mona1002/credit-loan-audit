@@ -932,8 +932,12 @@
 			        };
 			        //产权比例 保留两位小数点+%
 			        if(this.accepCusEstates[i].equityRatio != null){
-			        	this.accepCusEstates[i].equityRatio = this.formatNumber(this.accepCusEstates[i].equityRatio,2,0).replace(/,/,'')+'%';
-			        }
+			        	this.accepCusEstates[i].equityRatio = this.formatNumber(this.accepCusEstates[i].equityRatio,2,0).replace(/,/g,'')+'%';
+			        };
+			        //建筑面积
+		        	if(this.accepCusEstates[i].coveredArea != null){
+		        		this.accepCusEstates[i].coveredArea = this.formatNumber(this.accepCusEstates[i].coveredArea,2,0).replace(/,/g,'')+'㎡';
+		        	};
 		        	//console.log(this.accepCusEstates[i].monthlyPay);
 		        };
 
@@ -1000,8 +1004,10 @@
 		        }
 
 		        /*私人业主信息*/
-		        if(this.accepCusPrivate == null){
+		        if(res.data.accepCusPrivate == null){
 		        	this.accepCusPrivate =this.accepCusPrivate;
+		        	//alert(12345);
+		        	//return
 		        }else{
 			        this.accepCusPrivate=res.data.accepCusPrivate;
 			        //注册资金
@@ -1139,15 +1145,16 @@
 		        };
 		        /*console.log(this.datas);*/
 		        localStorage.setItem("applicationInformationDetail",JSON.stringify(query));
+		        console.log(res.data.accepCusEstates);
 		        /*将房产信息保存到本地*/
-		        localStorage.setItem("house",JSON.stringify(res.data.accepCusEstates));
-				/*if(res.data.accepCusEstates){
+		       // localStorage.setItem("house",JSON.stringify(res.data.accepCusEstates));
+				if(res.data.accepCusEstates != ''){
 					localStorage.setItem("house",JSON.stringify(res.data.accepCusEstates));
 				};
-				将车辆信息保存到本地
-				if(res.data.accepCusCarInfos){
+				/*将车辆信息保存到本地*/
+				if(res.data.accepCusCarInfos != ''){
 					localStorage.setItem("car",JSON.stringify(res.data.accepCusCarInfos));
-				};*/
+				};
 			   });
 				
 			},
