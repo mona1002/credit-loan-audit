@@ -622,99 +622,120 @@
 		      }).then(res => {
 		        /*console.log(res);*/
 		        /*房产信息*/
-		        this.borestateList=res.data.borestateList;
-		        for(var i=0;i<this.borestateList.length;i++){
-		        	if(this.borestateList[i].estateType=='01'){
-		        		this.borestateList[i].estateType = '租用'
-		        	}else if(this.borestateList[i].estateType=='02'){
-		        		this.borestateList[i].estateType = '商业按揭购房'
-		        	}else if(this.borestateList[i].estateType=='03'){
-		        		this.borestateList[i].estateType = '公积金按揭购房'
-		        	}else if(this.borestateList[i].estateType=='04'){
-		        		this.borestateList[i].estateType = '无按揭购房'
-		        	}else if(this.borestateList[i].estateType=='05'){
-		        		this.borestateList[i].estateType = '自建房'
-		        	}else if(this.borestateList[i].estateType=='06'){
-		        		this.borestateList[i].estateType = '亲属住房'
-		        	}else if(this.borestateList[i].estateType=='07'){
-		        		this.borestateList[i].estateType = '单位宿舍'
-		        	};
-		        	if(this.borestateList[i].propertyType =='01'){
-		        		this.borestateList[i].propertyType = '宅基地'
-		        	}else if(this.borestateList[i].propertyType	=='02'){
-		        		this.borestateList[i].propertyType = '自建房'
-		        	}else if(this.borestateList[i].propertyType	=='03'){
-		        		this.borestateList[i].propertyType = '小产权'
-		        	}else if(this.borestateList[i].propertyType	=='04'){
-		        		this.borestateList[i].propertyType = '期房'
-		        	}else if(this.borestateList[i].propertyType	=='05'){
-		        		this.borestateList[i].propertyType = '公租房'
-		        	}else if(this.borestateList[i].propertyType	=='06'){
-		        		this.borestateList[i].propertyType = '经济适用房'
-		        	}else if(this.borestateList[i].propertyType	=='07'){
-		        		this.borestateList[i].propertyType = '土地证'
-		        	}else if(this.borestateList[i].propertyType	=='08'){
-		        		this.borestateList[i].propertyType = '大产权'
-		        	};
-		        	if(this.borestateList[i].mortgageStatus =='0'){
-		        		this.borestateList[i].mortgageStatus = '已抵押'
-		        	}else if(this.borestateList[i].mortgageStatus	=='1'){
-		        		this.borestateList[i].mortgageStatus = '未抵押'
-		        	};
-		        	//建筑单价 保留两位小数点
-		        	if(this.borestateList[i].unitPrice != null){
-		        		this.borestateList[i].unitPrice = this.formatNumber(this.borestateList[i].unitPrice,2,0);
-		       		 };
-		        	
-		        	//贷款余额 保留两位小数点
-		        	if(this.borestateList[i].restLoans != null){
-		        		this.borestateList[i].restLoans = this.formatNumber(this.borestateList[i].restLoans,2,0);
-		       		 };
-		        	//月供 保留两位小数点
-		        	if(this.borestateList[i].monthlyPay != null){
-			        	this.borestateList[i].monthlyPay = this.formatNumber(this.borestateList[i].monthlyPay,2,0);
-			        };
+		        if(res.data.borestateList != ''){
+		        	this.borestateList=res.data.borestateList;
+			        for(var i=0;i<this.borestateList.length;i++){
+			        	if(this.borestateList[i].estateType=='01'){
+			        		this.borestateList[i].estateType = '租用'
+			        	}else if(this.borestateList[i].estateType=='02'){
+			        		this.borestateList[i].estateType = '商业按揭购房'
+			        	}else if(this.borestateList[i].estateType=='03'){
+			        		this.borestateList[i].estateType = '公积金按揭购房'
+			        	}else if(this.borestateList[i].estateType=='04'){
+			        		this.borestateList[i].estateType = '无按揭购房'
+			        	}else if(this.borestateList[i].estateType=='05'){
+			        		this.borestateList[i].estateType = '自建房'
+			        	}else if(this.borestateList[i].estateType=='06'){
+			        		this.borestateList[i].estateType = '亲属住房'
+			        	}else if(this.borestateList[i].estateType=='07'){
+			        		this.borestateList[i].estateType = '单位宿舍'
+			        	};
+			        	if(this.borestateList[i].propertyType =='01'){
+			        		this.borestateList[i].propertyType = '宅基地'
+			        	}else if(this.borestateList[i].propertyType	=='02'){
+			        		this.borestateList[i].propertyType = '自建房'
+			        	}else if(this.borestateList[i].propertyType	=='03'){
+			        		this.borestateList[i].propertyType = '小产权'
+			        	}else if(this.borestateList[i].propertyType	=='04'){
+			        		this.borestateList[i].propertyType = '期房'
+			        	}else if(this.borestateList[i].propertyType	=='05'){
+			        		this.borestateList[i].propertyType = '公租房'
+			        	}else if(this.borestateList[i].propertyType	=='06'){
+			        		this.borestateList[i].propertyType = '经济适用房'
+			        	}else if(this.borestateList[i].propertyType	=='07'){
+			        		this.borestateList[i].propertyType = '土地证'
+			        	}else if(this.borestateList[i].propertyType	=='08'){
+			        		this.borestateList[i].propertyType = '大产权'
+			        	};
+			        	if(this.borestateList[i].mortgageStatus =='0'){
+			        		this.borestateList[i].mortgageStatus = '已抵押'
+			        	}else if(this.borestateList[i].mortgageStatus	=='1'){
+			        		this.borestateList[i].mortgageStatus = '未抵押'
+			        	};
+			        	//建筑单价 保留两位小数点
+			        	if(this.borestateList[i].unitPrice != null){
+			        		this.borestateList[i].unitPrice = this.formatNumber(this.borestateList[i].unitPrice,2,0);
+			       		 };
+			        	
+			        	//贷款余额 保留两位小数点
+			        	if(this.borestateList[i].restLoans != null){
+			        		this.borestateList[i].restLoans = this.formatNumber(this.borestateList[i].restLoans,2,0);
+			       		 };
+			        	//月供 保留两位小数点
+			        	if(this.borestateList[i].monthlyPay != null){
+				        	this.borestateList[i].monthlyPay = this.formatNumber(this.borestateList[i].monthlyPay,2,0);
+				        };
+				        //产权比例 保留两位小数点+%
+				        if(this.borestateList[i].equityRatio != null){
+				        	this.borestateList[i].equityRatio = this.formatNumber(this.borestateList[i].equityRatio,2,0).replace(/,/g,'')+'%';
+				        };
+				        //建筑面积
+			        	if(this.borestateList[i].coveredArea != null){
+			        		this.borestateList[i].coveredArea = this.formatNumber(this.borestateList[i].coveredArea,2,0).replace(/,/g,'')+'㎡';
+			        	};
 
-		        }
+			        }
+			       }else if(res.data.borestateList == '' && JSON.parse(localStorage.getItem('house'))){
+			       		this.borestateList=JSON.parse(localStorage.getItem('house'));
+			       }else if(res.data.borestateList == '' && !JSON.parse(localStorage.getItem('house'))){
+			       		this.borestateList = this.borestateList;
+			       };
 		        /*车辆信息*/
-		        this.carInfoList=res.data.carInfoList;
-		        for(var i=0;i<this.carInfoList.length;i++){
-		        	if(this.carInfoList[i].isYearCheck=='0'){
-		        		this.carInfoList[i].isYearCheck = '否'
-		        	}else if(this.carInfoList[i].isYearCheck=='1'){
-		        		this.carInfoList[i].isYearCheck = '是'
-		        	};
-		        	if(this.carInfoList[i].isOperate =='0'){
-		        		this.carInfoList[i].isOperate = '否'
-		        	}else if(this.carInfoList[i].isOperate	=='1'){
-		        		this.carInfoList[i].isOperate = '是'
-		        	};
-		        	if(this.carInfoList[i].carType =='00'){
-		        		this.carInfoList[i].carType = '按揭购车'
-		        	}else if(this.carInfoList[i].carType =='01'){
-		        		this.carInfoList[i].carType = '无按揭购车'
-		        	};
-		        	if(this.carInfoList[i].buyInsur =='00'){
-		        		this.carInfoList[i].buyInsur = '交强险'
-		        	}else if(this.carInfoList[i].buyInsur =='01'){
-		        		this.carInfoList[i].buyInsur = '商业险'
-		        	}else if(this.carInfoList[i].buyInsur =='02'){
-		        		this.carInfoList[i].buyInsur = '车损险'
-		        	};
-		        	//车辆购置价 保留两位小数点
-		        	if(this.carInfoList[i].carPrice != null){
-			        	this.carInfoList[i].carPrice = this.formatNumber(this.carInfoList[i].carPrice,2,0);
-			        };
-			        //月供 保留两位小数点
-		        	if(this.carInfoList[i].monthlyPay != null){
-			        	this.carInfoList[i].monthlyPay = this.formatNumber(this.carInfoList[i].monthlyPay,2,0);
-			        };
-			        //贷款余额 保留两位小数点
-		        	if(this.carInfoList[i].restLoans != null){
-			        	this.carInfoList[i].restLoans = this.formatNumber(this.carInfoList[i].restLoans,2,0);
-			        };
-
-		        }
+		        if(res.data.carInfoList != ''){
+		        	this.carInfoList=res.data.carInfoList;
+		        	for(var i=0;i<this.carInfoList.length;i++){
+			        	if(this.carInfoList[i].isYearCheck=='0'){
+			        		this.carInfoList[i].isYearCheck = '否'
+			        	}else if(this.carInfoList[i].isYearCheck=='1'){
+			        		this.carInfoList[i].isYearCheck = '是'
+			        	};
+			        	if(this.carInfoList[i].isOperate =='0'){
+			        		this.carInfoList[i].isOperate = '否'
+			        	}else if(this.carInfoList[i].isOperate	=='1'){
+			        		this.carInfoList[i].isOperate = '是'
+			        	};
+			        	if(this.carInfoList[i].carType =='00'){
+			        		this.carInfoList[i].carType = '按揭购车'
+			        	}else if(this.carInfoList[i].carType =='01'){
+			        		this.carInfoList[i].carType = '无按揭购车'
+			        	};
+			        	if(this.carInfoList[i].buyInsur =='00'){
+			        		this.carInfoList[i].buyInsur = '交强险'
+			        	}else if(this.carInfoList[i].buyInsur =='01'){
+			        		this.carInfoList[i].buyInsur = '商业险'
+			        	}else if(this.carInfoList[i].buyInsur =='02'){
+			        		this.carInfoList[i].buyInsur = '车损险'
+			        	};
+			        	//车辆购置价 保留两位小数点
+			        	if(this.carInfoList[i].carPrice != null){
+				        	this.carInfoList[i].carPrice = this.formatNumber(this.carInfoList[i].carPrice,2,0);
+				        };
+				        //月供 保留两位小数点
+			        	if(this.carInfoList[i].monthlyPay != null){
+				        	this.carInfoList[i].monthlyPay = this.formatNumber(this.carInfoList[i].monthlyPay,2,0);
+				        };
+				        //贷款余额 保留两位小数点
+			        	if(this.carInfoList[i].restLoans != null){
+				        	this.carInfoList[i].restLoans = this.formatNumber(this.carInfoList[i].restLoans,2,0);
+				        };
+			        }
+		        }else if(res.data.carInfoList == '' && JSON.parse(localStorage.getItem('car'))){
+		        	this.carInfoList=JSON.parse(localStorage.getItem('car'));
+		        }else if(res.data.carInfoList == '' && !JSON.parse(localStorage.getItem('car'))){
+		        	this.carInfoList = this.carInfoList;
+		        };
+		        
+		        
 		        /*信用卡使用明细*/
 		        this.cardDetList=res.data.cardDetList;
 		        for(var i=0;i<this.cardDetList.length;i++){

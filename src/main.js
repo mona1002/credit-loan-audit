@@ -39,7 +39,7 @@ Vue.filter('formatValue',function(value){
 	if(!value) return ''
 	console.log(value);
 	if(Number(value)>0)
-	return Math.round(Number(value)*10000)/100;
+	return Math.round(Number(value)*10000)/100 +'%';
 	
 })
 // 金额过滤
@@ -47,4 +47,12 @@ Vue.filter('formatMoney',function(value){
 	if(!value) return ''
 	console.log(value)
 	return value.toLocaleString()
+})
+// 精度问题
+Vue.filter('formatAppmult',function(value){
+	
+	
+	if(!value) return ''
+
+	return Math.ceil(Number(value))
 })

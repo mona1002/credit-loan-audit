@@ -71,7 +71,7 @@
 					        label="建筑面积[m²]"
 					        min-width="110">
 					        <template slot-scope="scope">
-						        <el-input v-model="scope.row.coveredArea" placeholder="请输入内容"></el-input>
+						        <el-input v-model="scope.row.coveredArea" @blur="postcode(scope.row,'coveredArea')" placeholder="请输入内容"></el-input>
 					        </template>
 					      </el-table-column>
 					      <el-table-column
@@ -102,7 +102,7 @@
 					        	<!-- <el-tooltip class="item" effect="dark" content="邮政编码格式不正确" :disabled="postcodes==false" placement="top">
 					        	 						      		<el-input v-model="scope.row.estateZip" placeholder="请输入内容" v-on:blur="postcode(scope.row)" v-on:focus = "postcodes=false"></el-input>
 					        	 						    	</el-tooltip> --> 
-					        	<el-input v-model="scope.row.estateZip" placeholder="请输入内容" v-on:blur="postcode(scope.row)"></el-input>
+					        	<el-input v-model="scope.row.estateZip" placeholder="请输入内容" v-on:blur="postcode(scope.row,'estateZip')"></el-input>
 					        </template>
 					      </el-table-column>
 					      <el-table-column
@@ -110,7 +110,7 @@
 					        label="产权比例"
 					        min-width="100">
 					        <template slot-scope="scope">
-						        <el-input v-model="scope.row.equityRatio" placeholder="请输入内容"></el-input>
+						        <el-input v-model="scope.row.equityRatio" v-on:blur="postcode(scope.row,'equityRatio')" placeholder="请输入内容"></el-input>
 					        </template>
 					      </el-table-column>
 					      <el-table-column
@@ -1197,13 +1197,13 @@
 		    },
             //房产类型
             estateTypes:[
-				{'value': '01' ,'label': '租用'},
+				/*{'value': '01' ,'label': '租用'},*/
 				{'value': '02' ,'label': '商业按揭购房'},
 				{'value': '03' ,'label': '公积金按揭购房'},
 				{'value': '04' ,'label': '无按揭购房'},
 				{'value': '05' ,'label': '自建房'},
-				{'value': '06' ,'label': '亲属住房'},
-				{'value': '07' ,'label': '单位宿舍'}
+				/*{'value': '06' ,'label': '亲属住房'},
+				{'value': '07' ,'label': '单位宿舍'}*/
       		],
       		//产权性质
       		propertyTypes:[
@@ -1377,40 +1377,63 @@
 		        /*console.log(res);*/
 		        this.datas=res.data;
 		        /*房产信息*/
-		        this.borestateList=res.data.borestateList;
-		        for(var i=0;i<this.borestateList.length;i++){
-		        	console.log(this.borestateList[i].monthlyPay);
-		        	//建筑单价 保留两位小数点
-		        	if(this.borestateList[i].unitPrice != null){
-		        		this.borestateList[i].unitPrice = this.formatNumber(this.borestateList[i].unitPrice,2,0);
-		       		 };
-		        	
-		        	//贷款余额 保留两位小数点
-		        	if(this.borestateList[i].restLoans != null){
-		        		this.borestateList[i].restLoans = this.formatNumber(this.borestateList[i].restLoans,2,0);
-		       		 };
-		        	//月供 保留两位小数点
-		        	if(this.borestateList[i].monthlyPay != null){
-			        	this.borestateList[i].monthlyPay = this.formatNumber(this.borestateList[i].monthlyPay,2,0);
-			        };
-		        	console.log(this.borestateList[i].monthlyPay);
-		        }
+		        if(res.data.borestateList != ''){
+		        	this.borestateList=res.data.borestateList;
+		        	for(var i=0;i<this.borestateList.length;i++){
+			        	//console.log(this.borestateList[i].monthlyPay);
+			        	//建筑单价 保留两位小数点
+			        	if(this.borestateList[i].unitPrice != null){
+			        		this.borestateList[i].unitPrice = this.formatNumber(this.borestateList[i].unitPrice,2,0);
+			       		 };
+			        	
+			        	//贷款余额 保留两位小数点
+			        	if(this.borestateList[i].restLoans != null){
+			        		this.borestateList[i].restLoans = this.formatNumber(this.borestateList[i].restLoans,2,0);
+			       		 };
+			        	//月供 保留两位小数点
+			        	if(this.borestateList[i].monthlyPay != null){
+				        	this.borestateList[i].monthlyPay = this.formatNumber(this.borestateList[i].monthlyPay,2,0);
+				        };
+				        //产权比例 保留两位小数点+%
+				        if(this.accepCusEstates[i].equityRatio != null){
+				        	this.accepCusEstates[i].equityRatio = this.formatNumber(this.accepCusEstates[i].equityRatio,2,0).replace(/,/g,'')+'%';
+				        };
+				        //建筑面积
+			        	if(this.borestateList[i].coveredArea != null){
+			        		this.borestateList[i].coveredArea = this.formatNumber(this.borestateList[i].coveredArea,2,0).replace(/,/g,'')+'㎡';
+			        	};
+			        	//console.log(this.borestateList[i].monthlyPay);
+			        }
+		        }else if(res.data.borestateList == '' && JSON.parse(localStorage.getItem('house'))){
+		        	this.borestateList = JSON.parse(localStorage.getItem('house'));
+		        } else if(res.data.borestateList == '' && !JSON.parse(localStorage.getItem('house'))){
+		        	this.borestateList = this.borestateList;
+		        };
+		        
+		        
 		        /*车辆信息*/
-		        this.carInfoList=res.data.carInfoList;
-		        for(var i=0;i<this.carInfoList.length;i++){
+		        if(res.data.carInfoList != ''){
+		        	this.carInfoList=res.data.carInfoList;
+		        	for(var i=0;i<this.carInfoList.length;i++){
 		        	//车辆购置价 保留两位小数点
-		        	if(this.carInfoList[i].carPrice != null){
-			        	this.carInfoList[i].carPrice = this.formatNumber(this.carInfoList[i].carPrice,2,0);
-			        };
-			        //月供 保留两位小数点
-		        	if(this.carInfoList[i].monthlyPay != null){
-			        	this.carInfoList[i].monthlyPay = this.formatNumber(this.carInfoList[i].monthlyPay,2,0);
-			        };
-			        //贷款余额 保留两位小数点
-		        	if(this.carInfoList[i].restLoans != null){
-			        	this.carInfoList[i].restLoans = this.formatNumber(this.carInfoList[i].restLoans,2,0);
-			        };
-		        }
+			        	if(this.carInfoList[i].carPrice != null){
+				        	this.carInfoList[i].carPrice = this.formatNumber(this.carInfoList[i].carPrice,2,0);
+				        };
+				        //月供 保留两位小数点
+			        	if(this.carInfoList[i].monthlyPay != null){
+				        	this.carInfoList[i].monthlyPay = this.formatNumber(this.carInfoList[i].monthlyPay,2,0);
+				        };
+				        //贷款余额 保留两位小数点
+			        	if(this.carInfoList[i].restLoans != null){
+				        	this.carInfoList[i].restLoans = this.formatNumber(this.carInfoList[i].restLoans,2,0);
+				        };
+			        }
+		        }else if(res.data.carInfoList == '' && JSON.parse(localStorage.getItem('car'))){
+		        	this.carInfoList = JSON.parse(localStorage.getItem('car'));
+		        }else if(res.data.carInfoList == '' && !JSON.parse(localStorage.getItem('car'))){
+		        	this.carInfoList = this.carInfoList;
+		        };
+		        
 		        
 		        /*信用卡使用明细*/
 		        this.cardDetList=res.data.cardDetList;
@@ -2462,17 +2485,28 @@
 			    }
 			},
 			//邮政编码验证
-			postcode(row){
+			postcode(row,flage){
 				console.log(row);
-				if(row.estateZip == ''){
-					row.estateZip = '';
-					//this.postcodes=false;
-				}else{
-					if(!/^[0-9][0-9]{5}$/.test(row.estateZip)){
-						//this.postcodes=true;
-						row.estateZip = '';
-					}
-				}
+				switch (flage){
+					case 'estateZip':
+						if(row.estateZip == ''){
+							row.estateZip = '';
+							//this.postcodes=false;
+						}else{
+							if(!/^[0-9][0-9]{5}$/.test(row.estateZip)){
+								//this.postcodes=true;
+								row.estateZip = '';
+							}
+						};
+						break;
+					case 'equityRatio':
+					console.log(row.equityRatio);
+						row.equityRatio = this.formatNumber(row.equityRatio,2,0).replace(/,/g,'')+'%';
+						break;
+					case 'coveredArea':
+						row.coveredArea = this.formatNumber(row.coveredArea,2,0).replace(/,/g,'')+'㎡';
+						break;
+				};
 			},
 	    },
 	    directives: {

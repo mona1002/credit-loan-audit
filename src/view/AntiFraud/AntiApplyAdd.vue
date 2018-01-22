@@ -141,7 +141,7 @@
                 证件号码：
               </div>
               <div class="item-content-list">
-                <el-input v-model="applyCustNo"></el-input>
+                <el-input v-model="subCertCode"></el-input>
               </div>
             </li>
             <li class="item-column1">
@@ -151,8 +151,8 @@
               <el-button @click="resetQuery">重置</el-button>
             </li>
           </div>
-          <el-table :data="detailData" height="250" border style="width: 100%" highlight-current-row center>
-            <el-table-column type="index" label="序号" min-width="50" @row-click="itemClick" >
+          <el-table :data="tableData.recordList" height="250" border style="width: 100%" highlight-current-row center @row-click="itemClick">
+            <el-table-column type="index" label="序号" min-width="50" >
             </el-table-column>
             <el-table-column prop="taskNameTxt" label="进件编号" min-width="100">
             </el-table-column>
@@ -172,13 +172,13 @@
             </el-table-column>
           </el-table>
           <div class="block tool-bar">
-            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="detailData.totalRecord">
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalRecord" v-show="tableData.totalRecord">
             </el-pagination>
           </div>
         </div>
         <div class="back-form-li" style="text-align:right;padding:10px;">
-          <el-button type="primary" @click="coverShow=false;">确定</el-button>
-          <el-button plain @click="coverShow=false;">取消</el-button>
+          <el-button type="primary" @click="btnClick('sure')">确定</el-button>
+          <el-button plain @click="btnClick">取消</el-button>
         </div>
       </div>
     </el-dialog>
@@ -226,19 +226,20 @@ export default {
       secondReasons: [],
       antiFlag: '', // 标志
       coverShow: false, // 弹窗
-      detailData: [], // 详情列表数据
+      tableData: [], // 详情列表数据
 
       processTemplateId: '',
       taskNodeName: '',
       taskStatus: '',
       userCode: '',
-      orgCode: '',
+      // orgCode: '',
       pageNum: 1, // 页码
       pageSize: 5, // 每页条数
       applySubNo: '',
       custName_la: '',
       certCode: '',
-
+      rowObj:'', // 点击的列表数据
+      subCertCode:'', // 弹窗的证件号码
     }
   },
   mounted() {
@@ -252,38 +253,38 @@ export default {
     this.antiFlag = judgeFlag.flag;
 
     // 初审 终审 取 applyId   
-      if (this.antiFlag == '01') {
-        // taskInWaitting
-        this.creditappTaskid = JSON.parse(localStorage.getItem('taskInWaitting')).taskId;
-        this.taskNodeName = JSON.parse(localStorage.getItem('taskInWaitting')).taskNodeName;
-        this.taskStatus = JSON.parse(localStorage.getItem('taskInWaitting')).taskStatus;
-        this.processTemplateId = JSON.parse(localStorage.getItem('taskInWaitting')).processTemplateId;
-      } 
-      if (this.antiFlag == '02') {
-        // FtaskInWaitting
-        this.creditappTaskid = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskId;
-        this.taskNodeName = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskNodeName;
-        this.taskStatus = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskStatus;
-        this.processTemplateId = JSON.parse(localStorage.getItem('FtaskInWaitting')).processTemplateId;
-      }
-      if (this.antiFlag == '03') {
-        this.creditappTaskid = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
-        this.processTemplateId = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).processTemplateId;
+    if (this.antiFlag == '01') {
+      // taskInWaitting
+      this.creditappTaskid = JSON.parse(localStorage.getItem('taskInWaitting')).taskId;
+      this.taskNodeName = JSON.parse(localStorage.getItem('taskInWaitting')).taskNodeName;
+      this.taskStatus = JSON.parse(localStorage.getItem('taskInWaitting')).taskStatus;
+      this.processTemplateId = JSON.parse(localStorage.getItem('taskInWaitting')).processTemplateId;
+    }
+    if (this.antiFlag == '02') {
+      // FtaskInWaitting
+      this.creditappTaskid = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskId;
+      this.taskNodeName = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskNodeName;
+      this.taskStatus = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskStatus;
+      this.processTemplateId = JSON.parse(localStorage.getItem('FtaskInWaitting')).processTemplateId;
+    }
+    if (this.antiFlag == '03') {
+      this.creditappTaskid = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
+      this.processTemplateId = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).processTemplateId;
 
-        this.taskNodeName = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskNodeName;
-        this.taskStatus = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskStatus;
-      }
-      if (this.antiFlag == '04') {
-        this.creditappTaskid = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
-        this.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
+      this.taskNodeName = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskNodeName;
+      this.taskStatus = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskStatus;
+    }
+    if (this.antiFlag == '04') {
+      this.creditappTaskid = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
+      this.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
 
-        this.taskNodeName = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskNodeName;
-        this.taskStatus = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskStatus;
-      }
+      this.taskNodeName = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskNodeName;
+      this.taskStatus = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskStatus;
+    }
 
-      this.request();
+    // this.request();
 
-      // this.queryList();
+    // this.queryList();
 
 
     // 请求系统时间
@@ -508,24 +509,37 @@ export default {
     // 请求列表
     request() {
       console.log('详情列表 选择数据')
-      this.post('/workFlowTaskQuery/getTaskToDoList', {
-        processTemplateId: 'creditApp',
-        taskNodeName: this.taskNodeName,
-        taskStatus: '01',
-        userCode: this.userCode,
-        orgCode: this.orgCode,
-        pageNum: this.pageNum,
-        pageSize: this.pageSize,
-        applySubNo: this.applySubNo,
-        custName_la: this.custName_la,
-        certCode: this.applyCustNo,
+      // this.post('/workFlowTaskQuery/getTaskToDoList', {
+      //   processTemplateId: 'creditApp',
+      //   taskNodeName: this.taskNodeName,
+      //   taskStatus: '01',
+      //   userCode: this.userCode,
+      //   orgCode: this.orgCode,
+      //   pageNum: this.pageNum,
+      //   pageSize: this.pageSize,
+      //   applySubNo: this.applySubNo,
+      //   custName_la: this.custName_la,
+      //   certCode: this.applyCustNo,
+      // }).then(res => {
+      //   if (res.statusCode == 200) {
+      //     this.detailData = res.data.taskDetailList;
+      //   } else {
+      //     this.directorTableData = [];
+      //   }
+
+      // })
+      // 
+      // 请求列表
+      this.post('/applyInfoPool/queryByPage', {
+        applySubno: this.applySubNo, // 进件编号
+        applyId: '', // 申请单id
+        certCode: this.subCertCode, // 证件号码
+        custName: this.custName, // 客户名称
+        busiStateList: ["04", "14", "21", "42"]
       }).then(res => {
         if (res.statusCode == 200) {
-          this.detailData = res.data.taskDetailList;
-        } else {
-          this.directorTableData = [];
+          this.tableData = res.data;
         }
-
       })
     },
     // 重置查询
@@ -534,12 +548,27 @@ export default {
       // 查询条件 初始化
       this.applySubNo = ''; // 进件编号
       this.custName_la = ''; // 客户名称
-      this.applyCustNo = ''; // 客户编号
+      this.subCertCode = ''; // 客户编号
       this.request();
     },
     // 选中弹窗某行
-    itemClick(){
+    itemClick(row, event, column) {
       console.log('点击了弹窗列表')
+      // 点击的列表数据
+      this.rowObj = row;
+    },
+    // 点击 确定/取消
+    btnClick(val) {
+      // 确定
+      if (val == 'sure') {
+        this.applySubno = this.rowObj.applySubno; // 进件编号
+        this.applyCustName = this.rowObj.custName; // 客户名称
+        this.certTypeTxt = this.rowObj.certTypeTxt; // 证件类型
+        this.certType = this.rowObj.certType; // 证件类型
+        this.certCode = this.rowObj.certCode; // 证件号码
+        this.mobile = this.rowObj.mobile; // 移动电话
+      }
+      this.coverShow = false;
     }
 
   }
@@ -578,6 +607,7 @@ export default {
 
 
 
+
 /* 一列 */
 
 .anti-apply-add-class .item-column1 {
@@ -586,6 +616,7 @@ export default {
   float: left;
   /*max-width: 1366px;*/
 }
+
 
 
 
@@ -648,6 +679,7 @@ export default {
 
 
 
+
 /* 三列 */
 
 .anti-apply-add-class .item-column3 {
@@ -659,6 +691,7 @@ export default {
   /*border: 1px solid;*/
   /*min-width: 300px;*/
 }
+
 
 
 
@@ -676,6 +709,7 @@ export default {
 
 
 
+
 /* 弹窗 */
 
 .anti-apply-add-class .left-title-list {
@@ -687,6 +721,7 @@ export default {
   text-align: right;
   font-size: 13px;
 }
+
 
 
 
@@ -712,6 +747,7 @@ export default {
   height: 30px;
   line-height: 30px;
 }
+
 
 
 
@@ -827,6 +863,7 @@ export default {
 
 
 
+
 /* 必填 * */
 
 .anti-apply-add-class .require-icon {
@@ -838,6 +875,7 @@ export default {
   line-height: 30px;
   position: relative;
 }
+
 
 
 
@@ -884,6 +922,7 @@ export default {
 
 
 
+
 /* 放大 按钮  */
 
 .anti-apply-add-class .el-icon-check-fangda {
@@ -896,6 +935,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -937,6 +977,7 @@ export default {
 
 
 
+
 /* 流程轨迹 */
 
 .anti-apply-add-class .detail-list {
@@ -952,6 +993,7 @@ export default {
   height: auto;
   /*padding: 10px;*/
 }
+
 
 
 
@@ -985,6 +1027,7 @@ export default {
 
 
 
+
 /* 弹窗页面 关闭按钮*/
 
 .anti-apply-add-class .el-tag {
@@ -1003,6 +1046,7 @@ export default {
 }
 
 
+
 /* 弹窗 按钮 */
 
 .anti-apply-add-class .submit-class-list {
@@ -1015,6 +1059,7 @@ export default {
 
 
 
+
 /* 分页 */
 
 .anti-apply-add-class .tool-bar {
@@ -1022,10 +1067,12 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
+
 /* 隐藏分页 */
-.anti-apply-add-class .el-pagination__jump{
+
+.anti-apply-add-class .el-pagination__jump {
   display: none;
 }
-
 
 </style>
