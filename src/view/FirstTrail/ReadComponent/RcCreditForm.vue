@@ -600,11 +600,11 @@
           </p>
         </div>
       </el-collapse-item>
-      <!-- 初审结论 -->
+      <!-- 审批结论 -->
       <el-collapse-item name="8">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">初审结论</span>
+          <span class="headFont">审批结论</span>
         </template>
         <div class=" CreditForm_result" style="paddingTop:10px">
           <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>

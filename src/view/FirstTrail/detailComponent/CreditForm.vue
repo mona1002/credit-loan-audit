@@ -905,11 +905,11 @@
           </p>
         </div>
       </el-collapse-item>
-      <!-- 初审结论 -->
+      <!-- 审批结论 -->
       <el-collapse-item name="8">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">初审结论</span>
+          <span class="headFont">审批结论</span>
         </template>
         <div class=" CreditForm_result">
           <i class="hint">
@@ -2400,7 +2400,11 @@
             this.checkData.applyId = this.getParams.applyId;
             this.mountM();
             this.AreaNPercent();
-            this.checkData.aaddress=this.checkData.aaddress.replace(/null/g,'')
+            console.log(this.checkData.hirecomKind)
+            console.log(this.checkData.hirecomKindCode)
+            console.log(this.checkData.selfcompanyScale)
+            // console.log(this.checkData.hirecomKind)
+              this.checkData.aaddress?this.checkData.aaddress=this.checkData.aaddress.replace(/null/g,''):  this.checkData.aaddress;
             this.mountJ(0, res.data.wbeexEcuted);
             this.mountJ(1, res.data.wnetHirecom);
             this.mountJ(2, res.data.wnetEcutedBrea);
@@ -2474,6 +2478,7 @@
       // 所属行业 
       this.get("/credit/industry", {}).then(res => {
         this.hirecomKind = res.data;
+        console.log(this.hirecomKind)
       })
       this.Pwidth = document.getElementsByClassName("el-input")
       this.Txawidth = document.getElementsByClassName("el-textarea")
@@ -2690,7 +2695,7 @@
     /* min-width: 1140px; */
     /* min-width: 1420px; */
     /* min-width: 1592px; */
-    /* overflow: auto; */
+    overflow: auto;
     min-width: 1272px;
     /* overflow-x: hidden; */
   }
