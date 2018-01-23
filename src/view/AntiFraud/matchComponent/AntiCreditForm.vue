@@ -670,11 +670,11 @@
           </ul>
         </div>
       </el-collapse-item>
-      <!-- 初审结论 -->
+      <!-- 审批结论 -->
       <el-collapse-item name="10">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">初审结论</span>
+          <span class="headFont">审批结论</span>
         </template>
         <div class="CreditForm_result up_padding">
           <ul>
@@ -1004,7 +1004,8 @@
           this.FormData = res.data;
           this.AreaNPercent();
           this.formatSC();
-          this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, '')
+          // this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, '')
+           this.FormData.aaddress ? this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, ''):this.FormData.aaddress ;
           this.mountJ(0, res.data.wbeexEcuted);
           this.mountJ(1, res.data.wnetHirecom);
           this.mountJ(2, res.data.wnetEcutedBrea);

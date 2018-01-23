@@ -107,14 +107,13 @@
 						<span>{{accepApplyLoan.repaySourceTxt}}</span>
 					</li>
 				</ul>
-				<ul v-if="accepApplyLoan.repaySource=='03'">
+				<ul class="illustration" v-if="accepApplyLoan.repaySource=='03'">
 					<li>
-						<label style="float:left;line-height:40px;">其他渠道还款说明：</label>
-						<div class="channel">
-							{{accepApplyLoan.repaySourceRemark}}<!-- <textarea></textarea> -->
-						</div>
+						<label>其他渠道还款说明：</label>
+						<el-tooltip class="item" effect="dark" :content="accepApplyLoan.repaySourceRemark" :disabled="accepApplyLoan.repaySourceRemark==null" placement="top-start">
+					      <div>{{accepApplyLoan.repaySourceRemark}}</div>
+					    </el-tooltip>
 					</li>
-					
 				</ul>
 		  	</el-collapse-item>
 		  	<el-collapse-item name="3">
@@ -286,7 +285,7 @@
 					</ul>
 					<ul>
 						<li class="province" style="width:66.6%">
-						<label>投保地点：</label>
+						<label class="ellipsis">投保地点：</label>
 						<el-tooltip class="item" effect="dark" :content="insurAddr" :disabled="insurAddr==null" placement="top-start">
 					      <div class="textBox">{{insurAddr}}</div>
 					    </el-tooltip>
@@ -325,7 +324,7 @@
 					</ul>
 					<ul>
 						<li>
-							<label>被保人姓名[元]：</label>
+							<label>被保人姓名：</label>
 							<span>{{accepCusBasicInfo.insurerName}}</span>
 						</li>
 						<li>
@@ -333,7 +332,7 @@
 							<span>{{accepCusBasicInfo.insurerTel}}</span>			
 						</li>
 						<li>
-							<label>生效日期[月]：</label>
+							<label>生效日期：</label>
 							<span>{{accepCusBasicInfo.insurEffectDate}}</span>	
 						</li>
 					</ul>
@@ -387,7 +386,7 @@
 					</li>
 					<li>
 						<label>每月净利润额[万元]：</label>
-						<span>{{accepCusPrivate.profitMargin}}</span>
+						<span>{{accepCusPrivate.profitAmountMAmt}}</span>
 					</li>
 					<li>
 						<label>营业执照编号：</label>
@@ -408,12 +407,12 @@
 						<span>{{accepCusPrivate.busiArea}}</span>
 					</li>
 				</ul>
-				<ul>
+				<ul class="illustration">
 					<li>
 						<label>企业经营项目说明：</label>
-						<div class="channel2">
-							{{accepCusPrivate.projectManage}}<!-- <textarea></textarea> -->
-						</div>
+						<el-tooltip class="item" effect="dark" :content="accepCusPrivate.projectManage" :disabled="accepCusPrivate.projectManage==null" placement="top-start">
+					      <div>{{accepCusPrivate.projectManage}}</div>
+					    </el-tooltip>
 					</li>
 				</ul>
 				<ul>
@@ -910,6 +909,14 @@
 		        	if(this.accepCusEstates[i].monthlyPay != null){
 			        	this.accepCusEstates[i].monthlyPay = this.formatNumber(this.accepCusEstates[i].monthlyPay,2,0);
 			        };
+			        //产权比例 保留两位小数点+%
+			        if(this.accepCusEstates[i].equityRatio != null){
+			        	this.accepCusEstates[i].equityRatio = this.formatNumber(this.accepCusEstates[i].equityRatio,2,0).replace(/,/g,'')+'%';
+			        };
+			        //建筑面积
+		        	if(this.accepCusEstates[i].coveredArea != null){
+		        		this.accepCusEstates[i].coveredArea = this.formatNumber(this.accepCusEstates[i].coveredArea,2,0).replace(/,/g,'')+'㎡';
+		        	};
 		        	//console.log(this.accepCusEstates[i].monthlyPay);
 		        };
 
@@ -930,6 +937,11 @@
 			        };
 		        }
 
+		        /*工作人员填写  加急费用*/
+		        if(res.data != null){
+		        	this.datas.emerAmt = this.formatNumber(this.datas.emerAmt,2,0);
+		        };
+
 		        /*您的借款需求*/
 		        if(res.data.accepApplyLoan==null){
 		        	this.accepApplyLoan=this.accepApplyLoan
@@ -946,10 +958,10 @@
 		        	this.accepCusBasicInfo=res.data.accepCusBasicInfo;
 		        	var reg = /null/g;
 		        	//投保地点
-		        	if(this.accepCusBasicInfo.insurProvinceName == null && this.accepCusBasicInfo.insurCountyName == null && this.accepCusBasicInfo.insurAddress == null && this.accepCusBasicInfo.insurAddress == null){
+		        	if(this.accepCusBasicInfo.insurProvinceName == null && this.accepCusBasicInfo.insurCityName == null && this.accepCusBasicInfo.insurCountyName == null && this.accepCusBasicInfo.insurAddress == null){
 		        		this.insurAddr = '';
 		        	}else{
-		        		this.insurAddr = this.accepCusBasicInfo.insurProvinceName + this.accepCusBasicInfo.insurCountyName + this.accepCusBasicInfo.insurAddress + this.accepCusBasicInfo.insurAddress;
+		        		this.insurAddr = this.accepCusBasicInfo.insurProvinceName + this.accepCusBasicInfo.insurCityName + this.accepCusBasicInfo.insurCountyName + this.accepCusBasicInfo.insurAddress;
 		        		this.insurAddr = this.insurAddr.replace(reg,'');
 		        	}
 		        	
@@ -976,57 +988,65 @@
 		        }
 
 		        /*私人业主信息*/
-		        if(this.accepCusPrivate == null){
+		        if(res.data.accepCusPrivate == null){
 		        	this.accepCusPrivate =this.accepCusPrivate;
 		        }else{
 			        this.accepCusPrivate=res.data.accepCusPrivate;
 			        //注册资金
-			        if(this.accepCusBasicInfo.regCapitalAmt != null){
-			        	this.accepCusBasicInfo.regCapitalAmt = this.formatNumber(this.accepCusBasicInfo.regCapitalAmt,2,0);
+			        if(this.accepCusPrivate.regCapitalAmt != null){
+			        	this.accepCusPrivate.regCapitalAmt = this.formatNumber(this.accepCusPrivate.regCapitalAmt,2,0);
 			    	};
 			        //每月净利润额
-			        if(this.accepCusBasicInfo.profitAmountMAmt != null){
-			        	this.accepCusBasicInfo.profitAmountMAmt = this.formatNumber(this.accepCusBasicInfo.profitAmountMAmt,2,0);
+			        if(this.accepCusPrivate.profitAmountMAmt != null){
+			        	this.accepCusPrivate.profitAmountMAmt = this.formatNumber(this.accepCusPrivate.profitAmountMAmt,2,0);
 			    	};
 			        //月还款额/月租金
-			        if(this.accepCusBasicInfo.monthRentAmt != null){
-			        	this.accepCusBasicInfo.monthRentAmt = this.formatNumber(this.accepCusBasicInfo.monthRentAmt,2,0);
+			        if(this.accepCusPrivate.monthRentAmt != null){
+			        	this.accepCusPrivate.monthRentAmt = this.formatNumber(this.accepCusPrivate.monthRentAmt,2,0);
 			    	};
 			        //淡季销售额
-			        if(this.accepCusBasicInfo.slowMonthSaleAmt != null){
-			        	this.accepCusBasicInfo.slowMonthSaleAmt = this.formatNumber(this.accepCusBasicInfo.slowMonthSaleAmt,2,0);
+			        if(this.accepCusPrivate.slowMonthSaleAmt != null){
+			        	this.accepCusPrivate.slowMonthSaleAmt = this.formatNumber(this.accepCusPrivate.slowMonthSaleAmt,2,0);
 			    	};
 			        //旺季销售额
-			        if(this.accepCusBasicInfo.peakMonthSaleAmt != null){
-			        	this.accepCusBasicInfo.peakMonthSaleAmt = this.formatNumber(this.accepCusBasicInfo.peakMonthSaleAmt,2,0);
+			        if(this.accepCusPrivate.peakMonthSaleAmt != null){
+			        	this.accepCusPrivate.peakMonthSaleAmt = this.formatNumber(this.accepCusPrivate.peakMonthSaleAmt,2,0);
 			    	};
 			        //平季销售额
-			        if(this.accepCusBasicInfo.avgMonthSaleAmt != null){
-			        	this.accepCusBasicInfo.avgMonthSaleAmt = this.formatNumber(this.accepCusBasicInfo.avgMonthSaleAmt,2,0);
+			        if(this.accepCusPrivate.avgMonthSaleAmt != null){
+			        	this.accepCusPrivate.avgMonthSaleAmt = this.formatNumber(this.accepCusPrivate.avgMonthSaleAmt,2,0);
 			    	};
 			        //企业近一年利润
-			        if(this.accepCusBasicInfo.oneYearProfitAmt != null){
-			        	this.accepCusBasicInfo.oneYearProfitAmt = this.formatNumber(this.accepCusBasicInfo.oneYearProfitAmt,2,0);
+			        if(this.accepCusPrivate.oneYearProfitAmt != null){
+			        	this.accepCusPrivate.oneYearProfitAmt = this.formatNumber(this.accepCusPrivate.oneYearProfitAmt,2,0);
 			    	};
 			        //企业近两年利润
-			        if(this.accepCusBasicInfo.twoYearProfitAmt != null){
-			        	this.accepCusBasicInfo.twoYearProfitAmt = this.formatNumber(this.accepCusBasicInfo.twoYearProfitAmt,2,0);
+			        if(this.accepCusPrivate.twoYearProfitAmt != null){
+			        	this.accepCusPrivate.twoYearProfitAmt = this.formatNumber(this.accepCusPrivate.twoYearProfitAmt,2,0);
 			    	};
 			        //企业近三年利润
-			        if(this.accepCusBasicInfo.threeYearProfitAmt != null){
-			        	this.accepCusBasicInfo.threeYearProfitAmt = this.formatNumber(this.accepCusBasicInfo.threeYearProfitAmt,2,0);
+			        if(this.accepCusPrivate.threeYearProfitAmt != null){
+			        	this.accepCusPrivate.threeYearProfitAmt = this.formatNumber(this.accepCusPrivate.threeYearProfitAmt,2,0);
 			        };
 			        //企业近一年纳税额
-			        if(this.accepCusBasicInfo.oneYearTaxAmt != null){
-			        	this.accepCusBasicInfo.oneYearTaxAmt = this.formatNumber(this.accepCusBasicInfo.oneYearTaxAmt,2,0);
+			        if(this.accepCusPrivate.oneYearTaxAmt != null){
+			        	this.accepCusPrivate.oneYearTaxAmt = this.formatNumber(this.accepCusPrivate.oneYearTaxAmt,2,0);
 			    	};
 			        //企业近两年纳税额
-			        if(this.accepCusBasicInfo.twoYearTaxAmt != null){
-			        	this.accepCusBasicInfo.twoYearTaxAmt = this.formatNumber(this.accepCusBasicInfo.twoYearTaxAmt,2,0);
+			        if(this.accepCusPrivate.twoYearTaxAmt != null){
+			        	this.accepCusPrivate.twoYearTaxAmt = this.formatNumber(this.accepCusPrivate.twoYearTaxAmt,2,0);
 			    	};
 			        //企业近三年纳税额
-			        if(this.accepCusBasicInfo.threeYearTaxAmt != null){
-			        	this.accepCusBasicInfo.threeYearTaxAmt = this.formatNumber(this.accepCusBasicInfo.threeYearTaxAmt,2,0);	
+			        if(this.accepCusPrivate.threeYearTaxAmt != null){
+			        	this.accepCusPrivate.threeYearTaxAmt = this.formatNumber(this.accepCusPrivate.threeYearTaxAmt,2,0);	
+			    	};
+			    	//占股比例
+			    	if(this.accepCusPrivate.proShare != null){
+			        	this.accepCusPrivate.proShare = this.formatNumber(this.accepCusPrivate.proShare,2,0)+"%";	
+			    	};
+			    	//企业净利润率
+			    	if(this.accepCusPrivate.profitMargin != null){
+			        	this.accepCusPrivate.profitMargin = this.formatNumber(this.accepCusPrivate.profitMargin,2,0)+"%";	
 			    	};
 		    	};
 		        /*您的工作信息*/
@@ -1106,7 +1126,16 @@
 		        };
 		        /*console.log(this.datas);*/
 		        localStorage.setItem("applicationInformationDetail",JSON.stringify(query));
-			    });
+		        /*将房产信息保存到本地*/
+				if(res.data.accepCusEstates != ''){
+					localStorage.setItem("house",JSON.stringify(res.data.accepCusEstates));
+				};
+				/*将车辆信息保存到本地*/
+				if(res.data.accepCusCarInfos != ''){
+					localStorage.setItem("car",JSON.stringify(res.data.accepCusCarInfos));
+				};
+			  });
+				
 			},
 		 	handleChange(){
 

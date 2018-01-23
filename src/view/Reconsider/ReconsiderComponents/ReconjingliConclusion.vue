@@ -605,19 +605,19 @@
 					case 'back':
 					this.dialogVisible = true;
 					this.get('system/getSystemDate').then(res => {
-			            console.log('回退', res)
+			            //console.log('回退', res)
 			            // 请求系统时间
 			            this.dealroperDate = res.data;
-			            console.log('this.', this.dealroperDate);
+			            //console.log('this.', this.dealroperDate);
 			          })
 		         	break;
 		         	case 'refuse':
 					this.jdialogVisible = true;
 					this.get('system/getSystemDate').then(res => {
-			            console.log('回退', res)
+			            //console.log('回退', res)
 			            // 请求系统时间
 			            this.jdealroperDate = res.data;
-			            console.log('this.', this.jdealroperDate);
+			            //console.log('this.', this.jdealroperDate);
 			          });
 					this.get('/credit/firstNodeReason?reasonType=03').then(res => {
 			          console.log(res);
@@ -699,9 +699,9 @@
 	            })
 	            return;
 	          };
-
+	        
 	           var reg = /,/;
-	           
+
 	           this.post('/creauditOpinion/add', {
 		        applyId: this.applyId,
 		        auditType: '02',
@@ -725,9 +725,6 @@
 		        applyCustId: this.applyCustId, //申请客户ID（申请登记-个人信息）
 		        applyConclusion: this.applyConclusion,//申请结论（00-通过）
 		        ploanOperId: '', // 批准人员
-
-		        //srcPloanAmt: this.srcPloanAmt, // 信审批准额度
-
 		        creditDebitRate: (this.caculData.creditDebitRate == 0 || this.caculData.creditDebitRate == '') ? 0 : this.caculData.creditDebitRate.replace("%","")/100, // 信用负债率
 		        approvalFlag: '0', // 终审通过标志  0 未
 		        ploanDate: '', // 批准日期
@@ -819,7 +816,7 @@
 
 		          // return Number(val).toLocaleString() + '.00';
 		          // 检测 数据 并 请求计算接口
-		          console.log("计算审批结论数据计算审批结论数据计算审批结论数据计算审批结论数据")
+		          //console.log("计算审批结论数据计算审批结论数据计算审批结论数据计算审批结论数据")
 		          //console.log(this.proId, this.ploanTerm, this.ploanAmt, this.verIncome, this.eachTermamt);
 		          //console.log(this.proId.length, this.ploanTerm.length, this.ploanAmt.length, this.verIncome.length, this.eachTermamt.length);
 		    },
@@ -901,7 +898,7 @@
 		        proName: this.datas.proName, // 产品名称
 		        proCode: this.proCode, //  产品代码
 		        proId: this.sproId, // 产品id     //"d7fa0628-791d-4cc5-b854-aa8bef9340a6"
-		        opinionFlag: '01', // 标志任务类型(复议专员 拒绝)
+		        opinionFlag: '01', // 标志任务类型(复议经理 拒绝)
 		        mainReasonName: this.$refs.rmainReasonName.selectedLabel, // 回退主原因
 		        secondaryReason: this.$refs.rsubReasonName.selectedLabel, // 回退子原因
 		        reasonRemark: this.rreasonRemark, // 意见描述/原因说明
@@ -909,7 +906,7 @@
 		        applyId: this.applyId, // 申请单id
 		        rollbackNodeName: '', // 回退节点名称(没有回退节点) 
 		        dealroperDate: this.jdealroperDate, // 经办时间
-		        creauditAppOperate: 'check_Refuse' // 复议专员 拒绝
+		        creauditAppOperate: 'check_Refuse' // 复议经理 拒绝
 		      }).then(res => {
 		        console.log(res);
 		        if (res.statusCode != '200') {
@@ -949,10 +946,10 @@
 			},
 			//回退提交按钮
 			hsure(){
-				console.log(this.mainReasonName);
-				console.log(this.$refs.mainReasonName);
-				console.log(this.$refs.mainReasonName.selectedLabel);
-				console.log(this.values);
+				//console.log(this.mainReasonName);
+				//console.log(this.$refs.mainReasonName);
+				//console.log(this.$refs.mainReasonName.selectedLabel);
+				//console.log(this.values);
 				this.post("/creauditInfo/approval", {
 			        // 挂起 taskId 任务id
 			        taskId: this.taskId,
@@ -965,7 +962,7 @@
 			        proName: this.datas.proName, // 产品名称
 			        proCode: this.proCode, //  产品代码
 			        proId: this.sproId, // 产品id     //"d7fa0628-791d-4cc5-b854-aa8bef9340a6"
-			        opinionFlag: '02', // 标志任务类型(复议专员 回退)
+			        opinionFlag: '02', // 标志任务类型(复议经理 回退)
 			        mainReasonName: this.$refs.mainReasonName.selectedLabel, // 回退主原因
 			        secondaryReason: this.$refs.subReasonName.selectedLabel, // 回退子原因
 			        reasonRemark: this.reasonRemark, // 意见描述/原因说明
@@ -973,7 +970,7 @@
 			        applyId: this.applyId, // 申请单id
 			        rollbackNodeName: this.values, // 回退节点名称 
 			        dealroperDate: this.dealroperDate, // 经办时间
-			        creauditAppOperate: 'check_Back' // 复议专员 回退
+			        creauditAppOperate: 'check_Back' // 复议经理 回退
 			      }).then(res => {
 			        console.log(res);
 			        if (res.statusCode != '200') {
@@ -1025,9 +1022,9 @@
 				//"mainback":回退
 				//"mainrefuse":拒绝
 				if(flag == 'mainback'){
-					console.log('回退555'+$event);
+					//console.log('回退555'+$event);
 					this.get('/credit/findNodeFirstChildren?id=' + $event).then(res => {
-			          console.log('回退'+res);
+			          //console.log('回退'+res);
 			          if (res.statusCode == '200') {
 			            this.childReasons = res.data;
 			          }

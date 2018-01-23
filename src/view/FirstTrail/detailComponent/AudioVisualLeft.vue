@@ -33,8 +33,8 @@
             </p>
           </template>
           <div class="list_title_div">
-            <!--  二级 内容 节点 -->
-            <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind)">
+            <!--  二级 内容 节点  @mouseenter.once.stop="fff && getImg(ind)"-->
+            <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind,$event)">
               <el-tooltip class="item" effect="dark" :content="item.arcName" placement="right-end">
                 <span style="width:105px;marginLeft:20px;">{{item.arcName}}</span>
               </el-tooltip>
@@ -49,9 +49,15 @@
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
-      <div style="position:absolute; left:0; top:0;" :id='msg'>
-        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
-        />
+      <div ref="img_wrap" style="position:absolute; left:0; top:0;" :id='msg'>
+        <!-- <div id="aaaaa"> </div> -->
+        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" style="width:auto;height:auto;" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath"
+          v-if="key==smallPicInd" />
+        <!-- <img ref="Big_pic_ref" v-for="(val,key) in imgPathDetail" style="width:auto;height:auto;" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath"
+          />  -->
+
+        <!-- v-if="key==smallPicInd" -->
+        <!-- <img ref="Big_pic_ref" id='abcd'  style="width:auto;height:auto;" :src="uurl" /> -->
       </div>
     </div>
     <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" v-show="perfBtn" @click="pre" @mouseenter='PerBtn'>
@@ -130,13 +136,12 @@
   export default {
     data() {
       return {
-        // props:[smallPicDivClose],
-        // picData: [],
-        ImgD: false,
         perfBtn: false,
         judgeFlag: '',
-        opendImg: [true, true, true, true],
-        closedImg: [false, false, false, false],
+        opendImg: [],
+        closedImg: [],
+        uurl: '',
+        imgBaseUrl: 'http://10.1.26.6:8080',
         localInf: [], //初始化的时候，根据传进来的applyId获取初始化数据
         showListDiv: true,
         show: true,
@@ -147,6 +152,7 @@
         ListDetails: [],
         applyId: '', //入参
         imgPath: [],
+        imgPathDetail: [],
         // ----------------------------------
         activeNames: ['1', '2'], //查询弹出框 默认展开选项
         dataa: false,
@@ -221,6 +227,7 @@
         });
       },
       getChildrenList(id, ind, item) {
+        console.log("子节点")
         if (this.opendImg[ind] == false) {
           this.opendImg[ind] = true;
           this.closedImg[ind] = false;
@@ -237,6 +244,7 @@
         // 二级（子）节点
         this.post("/productArchive/getProductArchiveChildList", {
           applyId: this.localInf.applyId,
+          // applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
           pid: id
         }).then(res => {
           if (res.statusCode == 200) {
@@ -246,21 +254,31 @@
           }
         });
       },
+      smallPic(ev, ind) {
+        console.log("smalllpic")
+        this.smallPicInd = ind;
+        this.SmallPicShow = false;
+        this.defaultBigPicCss();
+      },
       getImg(ind) {
-        console.log('img')
+        console.log('img2')
+        this.smallPicInd = 0;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
+        this.defaultBigPicCss();
       },
       hid() {
         this.showListDiv = false;
-                this.$refs.preBtn.style.left = 37 + 'px';
+        this.$refs.preBtn.style.left = 37 + 'px';
         this.$refs.PbtnIcons.style.left = 'calc( 50% - 97px)';
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
+        this.defaultBigPicCss();
       },
       showList() {
         this.showListDiv = true;
-         this.$refs.preBtn.style.left = 223 + 'px';
+        this.$refs.preBtn.style.left = 223 + 'px';
         this.$refs.PbtnIcons.style.left = ' calc( 50% + 9px)';
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 214px)";
+        this.defaultBigPicCss();
       },
       SmallpicClose() {
         this.SmallPicShow = false;
@@ -270,32 +288,32 @@
       },
       pre() {
         this.smallPicInd--;
-        this.defaultBigPicCss();
         if (this.$refs.small_pic_ref) {
           if (this.smallPicInd < 0) {
             this.smallPicInd = this.$refs.small_pic_ref.length - 1;
           }
-        }
+        } this.defaultBigPicCss();
       },
       next() {
         this.smallPicInd++;
-        this.defaultBigPicCss();
         if (this.$refs.small_pic_ref) {
           if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
             this.smallPicInd = 0;
           }
-        }
+        } this.defaultBigPicCss();
       },
       larger() {
         if (this.$refs.Big_pic_ref) {
           this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
             100 + "px";
+          this.$refs.Big_pic_ref[0].style.width = "auto";
         }
       },
       smaller() {
         if (this.$refs.Big_pic_ref) {
           this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
             100 + "px";
+          this.$refs.Big_pic_ref[0].style.width = "auto";
         }
       },
       clockWise() {
@@ -325,13 +343,32 @@
       ChangeCss(ind) {
         this.changeSmallPicCss(ind);
       },
-      smallPic(ev, ind) {
-        this.smallPicInd = ind;
-        this.defaultBigPicCss();
-        this.SmallPicShow = false;
-      },
-      // 公共
       defaultBigPicCss() {
+        this.$nextTick(() => {
+          console.log("nextTick")
+          //  console.log(this.$refs.Big_pic_ref)
+          if (this.$refs.Big_pic_ref) {
+            this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
+            var outsideH = this.$refs.AudioVisual_Img_ref.offsetHeight;
+            var widthReduce = this.$refs.AudioVisual_Img_ref.offsetWidth - this.$refs.Big_pic_ref[0].offsetWidth;
+            var heightReduce = this.$refs.AudioVisual_Img_ref.offsetHeight - this.$refs.Big_pic_ref[0].offsetHeight;
+            // console.log(widthReduce, '--------', heightReduce)
+            if (widthReduce < heightReduce) {
+              // console.log("宽")
+              this.$refs.Big_pic_ref[0].style.width = '100%'; //calc( 100% - 202px)
+              this.$refs.Big_pic_ref[0].style.height = 'auto'; //calc( 100% - 202px)
+              // console.log(this.$refs.Big_pic_ref[0].style.height)
+              // console.log(this.$refs.Big_pic_ref[0].style.width)
+            } else {
+              // console.log("高")
+              this.$refs.Big_pic_ref[0].style.width = 'auto';
+              this.$refs.Big_pic_ref[0].style.height = (outsideH - 10) + "px";
+              // console.log(this.$refs.Big_pic_ref[0].style.height)
+              // console.log(this.$refs.Big_pic_ref[0].style.width)
+            }
+
+          }
+        })
         // console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).height)
         // console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
         // console.log(typeof (getComputedStyle(this.$refs.Big_pic_ref[0], false).width))
@@ -348,6 +385,10 @@
         // this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
         //  this.$refs.big_pic[0].style.height = "100%"; // 点击切换图片时，让显示的大图高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
         // this.$refs.big_pic[0].style.transform = "rotate(0deg)"
+        //    if (this.$refs.Big_pic_ref) {
+        //     this.$refs.Big_pic_ref[0].style.width = '100%'; //calc( 100% - 202px)
+        //     this.$refs.Big_pic_ref[0].style.height = 'auto'; //calc( 100% - 202px)
+        // }
       },
       changeSmallPicCss(ind) {
         for (var i = 0; i < this.$refs.small_pic_ref.length; i++) {
@@ -378,36 +419,36 @@
         };
       },
       Imgscroll() {
-        // this.$refs.showHidIcons.style.display = "block";
         this.perfBtn = true;
         if (this.$refs.Big_pic_ref) {
           this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {
             event = event || window.event;
-            // this.$refs.AudioVisual_Img_ref.scrollTop = 0;
             if (event.wheelDelta < 0) {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
                 100 + "px";
+              this.$refs.Big_pic_ref[0].style.width = "auto"
             } else {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
                 100 + "px";
+              this.$refs.Big_pic_ref[0].style.width = "auto"
             }
           };
           this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => {
-            // this.$refs.AudioVisual_Img_ref.scrollTop = 0;
             if (event.detail > 0) {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
                   .height) -
                 100 + "px";
+              this.$refs.Big_pic_ref[0].style.width = "auto"
             } else {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
                   .height) +
                 100 + "px";
+              this.$refs.Big_pic_ref[0].style.width = "auto"
             }
           });
         }
       },
       ImgScrollRemove() {
-        // this.$refs.showHidIcons.style.display = "none";
         this.perfBtn = false;
         this.$refs.AudioVisual_Img_ref.onmousewheel = "";
         this.$refs.AudioVisual_Img_ref.removeEventListener('DOMMouseScroll', (event) => {
@@ -419,31 +460,30 @@
       }
     },
     mounted() {
-      // console.log(this.msg)
-      // console.log(document.getElementById('kkk'));
-      // this.odivMove(this.msg);
-      // console.log(" 影音资料左")
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '01') {
         this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
       } else if (this.judgeFlag.flag == '02') {
         this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-        console.log("终审")
       } else if (this.judgeFlag.flag == '03') {
         this.localInf = JSON.parse(localStorage.getItem("AntiWorkbenchPass")) //反欺诈专员
       } else if (this.judgeFlag.flag == '04') {
         this.localInf = JSON.parse(localStorage.getItem("AntiManagerWorkbenchPass")) //反欺诈主管
       }
-      // console.log(this.localInf)
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.applyId,
-        // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
+        // applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
         //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
       }).then(res => {
-        // console.log(res)
         if (res.statusCode == 200) {
           this.ListParent = res.data;
+          if (this.ListParent) {
+            for (var i = 0; i < this.ListParent.length; i++) {
+              this.opendImg[i] = true;
+              this.closedImg[i] = false;
+            }
+          }
         } else {
           this.$message.error(res.msg);
         }
@@ -563,7 +603,6 @@
 
   .AudioVisualLeft .AudioVisual_Img {
     width: calc( 100% - 214px);
-    /* background: yellowgreen; */
   }
   /*  css */
 
@@ -617,7 +656,7 @@
 
   .AudioVisualLeft .list_title span:nth-of-type(2),
   .AudioVisualLeft .list_title_div p span:nth-of-type(2) {
-    width: 70px;
+    width: calc(100% - 125px);
     border-right: none;
     border-left: none;
   }

@@ -55,7 +55,7 @@
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
-      <div style="position:absolute; left:0; top:0;background:yellowgreen;" id='MAntiFirstAud'>
+      <div style="position:absolute; left:0; top:0;" id='MAntiFirstAud'>
         <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
         />
       </div>
@@ -92,8 +92,8 @@
         // picData: [],
         perfBtn: false,
         MatchInf: '',
-        opendImg: [true, true, true, true], //一级节点图标flag
-        closedImg: [false, false, false, false],
+             opendImg: [], 
+        closedImg: [],
         showListDiv: true,
         show: true,
         smallPicInd: 0,
@@ -149,19 +149,23 @@
         });
       },
       getImg(ind) {
+           this.smallPicInd = 0;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
+        this.defaultBigPicCss();
       },
       hid() {
         this.showListDiv = false;
           this.$refs.preBtn.style.left=37+'px';
         this.$refs.PbtnIcons.style.right='calc( 50% - 97px)';
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
+          this.defaultBigPicCss();
       },
       showList() {
         this.showListDiv = true;
                 this.$refs.preBtn.style.left=417+'px';
         this.$refs.PbtnIcons.style.right='calc( 50% - 303px)';
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 412px)";
+          this.defaultBigPicCss();
       },
       SmallpicClose() {
         this.SmallPicShow = false;
@@ -171,32 +175,30 @@
       },
       pre() {
         this.smallPicInd--;
-        this.defaultBigPicCss();
         if (this.$refs.small_pic_ref) {
           if (this.smallPicInd < 0) {
             this.smallPicInd = this.$refs.small_pic_ref.length - 1;
           }
-        }
+        }       this.defaultBigPicCss();
       },
       next() {
         this.smallPicInd++;
-        this.defaultBigPicCss();
         if (this.$refs.small_pic_ref) {
           if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
             this.smallPicInd = 0;
           }
-        }
+        }        this.defaultBigPicCss();
       },
       larger() {
         if (this.$refs.Big_pic_ref) {
           this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
-            100 + "px";
+            100 + "px"; this.$refs.Big_pic_ref[0].style.width = "auto";
         }
       },
       smaller() {
         if (this.$refs.Big_pic_ref) {
           this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
-            100 + "px";
+            100 + "px"; this.$refs.Big_pic_ref[0].style.width = "auto";
         }
       },
       clockWise() {
@@ -228,27 +230,25 @@
       },
       smallPic(ev, ind) {
         this.smallPicInd = ind;
-        this.defaultBigPicCss();
         this.SmallPicShow = false;
+                this.defaultBigPicCss();        
       },
-      // 公共重复方法
-      defaultBigPicCss() { // （重复代码）通用方法 ：  大图 --------------- 恢复默认高度、不旋转
-        // console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).height)
-        // console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
-        // console.log(typeof (getComputedStyle(this.$refs.Big_pic_ref[0], false).width))
-        // if (getComputedStyle(this.$refs.Big_pic_ref[0], false).width > getComputedStyle(this.$refs.Big_pic_ref[0], //判断宽度>高度  按宽度100%显示
-        //     false).height) { // 点击切换图片时，让显示的大图宽高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
-        //   this.$refs.Big_pic_ref[0].style.width = "100%";//calc( 100% - 202px)
-        //   console.log("默认大图css样式if width >>>>>>>>>>> height" + this.$refs.Big_pic_ref[0].style.width)
-        // } else {
-        //   this.$refs.Big_pic_ref[0].style.height = "100%";
-        //   console.log("默认大图css样式else  width <<<<<<  height")
-        //   console.log(this.$refs.Big_pic_ref[0])
-        //   console.log(this.$refs.Big_pic_ref[0].style.height)
-        // }
-        // this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
-        //  this.$refs.big_pic[0].style.height = "100%"; // 点击切换图片时，让显示的大图高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
-        // this.$refs.big_pic[0].style.transform = "rotate(0deg)"
+      defaultBigPicCss() {
+                this.$nextTick(() => {
+          if (this.$refs.Big_pic_ref) {
+            this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
+            var outsideH = this.$refs.AudioVisual_Img_ref.offsetHeight;
+            var widthReduce = this.$refs.AudioVisual_Img_ref.offsetWidth - this.$refs.Big_pic_ref[0].offsetWidth;
+            var heightReduce = this.$refs.AudioVisual_Img_ref.offsetHeight - this.$refs.Big_pic_ref[0].offsetHeight;
+            if (widthReduce < heightReduce) {
+              this.$refs.Big_pic_ref[0].style.width = '100%'; //calc( 100% - 202px)
+              this.$refs.Big_pic_ref[0].style.height = 'auto'; //calc( 100% - 202px)
+            } else {
+              this.$refs.Big_pic_ref[0].style.width = 'auto';
+              this.$refs.Big_pic_ref[0].style.height = (outsideH - 10) + "px";
+            }
+          }
+        })
       },
             comput(val) {
         val = val.getFullYear()+"-"+ (val.getMonth() + 1)+"-"+val.getDate()+" "+(val.toString().split(' ')[4]);
@@ -343,6 +343,10 @@
             for (var i = 0; i < this.ListParent.length; i++) {
                var MDate = new Date(this.ListParent[i].uploadDate);
               this.ListParent[i].uploadDate = this.comput(MDate)
+            }
+               for (var i = 0; i < this.ListParent.length; i++) {
+              this.opendImg[i] = true;
+              this.closedImg[i] = false;
             }
           }
         } else {
@@ -464,7 +468,6 @@
 
   .AudioVisual .AudioVisual_Img {
     width: calc( 100% - 412px);
-    /* background: yellowgreen; */
   }
   /*  css */
 
@@ -529,7 +532,7 @@
 
   .AudioVisual .list_title span:nth-of-type(4),
   .AudioVisual .list_title_div p span:nth-of-type(4) {
-    width: 144px;
+      width: calc(100% - 255px );
     border-left: none;
   }
   /* ------------------------------- */
