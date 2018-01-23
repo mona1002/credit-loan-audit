@@ -50,9 +50,14 @@
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:absolute; left:0; top:0;" :id='msg'>
+        <!-- <div id="aaaaa"> </div> -->
         <img ref="Big_pic_ref" v-for="(val,key) in imgPath" style="width:auto;height:auto;" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath"
           v-if="key==smallPicInd" />
-        <!-- <div class="adk" v-show="imgShow"> </div> -->
+        <!-- <img ref="Big_pic_ref" v-for="(val,key) in imgPathDetail" style="width:auto;height:auto;" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath"
+          />  -->
+
+        <!-- v-if="key==smallPicInd" -->
+        <!-- <img ref="Big_pic_ref" id='abcd'  style="width:auto;height:auto;" :src="uurl" /> -->
       </div>
     </div>
     <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" v-show="perfBtn" @click="pre" @mouseenter='PerBtn'>
@@ -127,13 +132,18 @@
 </template>
 
 <script>
+  // import {drag} from '../../../../static/js/public'
   export default {
     data() {
       return {
         perfBtn: false,
         judgeFlag: '',
-        opendImg: [true, true, true, true],
-        closedImg: [false, false, false, false],
+        opendImg: [],
+        // opendImg: [true, true, true, true],
+        // closedImg: [false, false, false, false],
+        closedImg: [],
+        uurl: '',
+        imgBaseUrl: 'http://10.1.26.6:8080',
         localInf: [], //初始化的时候，根据传进来的applyId获取初始化数据
         showListDiv: true,
         show: true,
@@ -144,6 +154,7 @@
         ListDetails: [],
         applyId: '', //入参
         imgPath: [],
+        imgPathDetail: [],
         // ----------------------------------
         activeNames: ['1', '2'], //查询弹出框 默认展开选项
         dataa: false,
@@ -167,6 +178,7 @@
       },
       personalNunPerson() {
         this.dataa = true;
+        // 个人进件        
         this.post("/internalMatch/getPersonalInternalMatchList", {
           // applySubNo: "201504130173041858",
           // certCode: "341422198409070094",
@@ -179,10 +191,11 @@
             this.$message.error(res.msg);
           }
         });
+        // //他人进件（ 不包含个人）
         this.post("/internalMatch/getNonPersonalInternalMatch", {
           pageParam: {
-            pageNum: "1",
-            pageSize: '1000'
+            pageNum: "1", //当前页
+            pageSize: '1000' //每页的显示数量
           },
           //  applySubNo: "201504130173041858",
           // certCode: "341422198409070094",
@@ -216,6 +229,7 @@
         });
       },
       getChildrenList(id, ind, item) {
+        console.log("子节点")
         if (this.opendImg[ind] == false) {
           this.opendImg[ind] = true;
           this.closedImg[ind] = false;
@@ -231,20 +245,82 @@
         this.openImg = ind
         // 二级（子）节点
         this.post("/productArchive/getProductArchiveChildList", {
-          // applyId: this.localInf.applyId,
-          applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
+          applyId: this.localInf.applyId,
+          // applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
           pid: id
         }).then(res => {
           if (res.statusCode == 200) {
             this.ListDetails = res.data;
+            // console.log(res.data)
+            // console.log(this.ListDetails)
           } else {
             this.$message.error(res.msg);
           }
         });
       },
-      getImg(ind) {
-        this.imgPath = this.ListDetails[ind].applyArchiveInfos;
+      smallPic(ev, ind) {
+        console.log("smalllpic")
+        //         var aaaaa = document.getElementById('aaaaa');
+        // aaaaa.innerHTML = aaaaa.key;
+        // console.log(this.$refs.small_pic_ref[ind].src)
+
+        this.smallPicInd = ind;
+        // this.$refs.Big_pic_ref[0] = this.$refs.small_pic_ref[ind];
+        //  this.$nextTick(() => { })
+        this.SmallPicShow = false;
+        // console.log(this.$refs.small_pic_ref[ind])
+        // console.log( this.$refs.Big_pic_ref)
+        // console.log(this.smallPicInd)
         this.defaultBigPicCss();
+      },
+      getImg(ind) {
+        console.log('img2')
+        // console.log(ind)
+        // console.log(this.ListDetails)
+        this.smallPicInd = 0;
+        this.imgPath = this.ListDetails[ind].applyArchiveInfos;
+        // this.imgPathDetail=this.ListDetails[ind].applyArchiveInfos[0];
+
+        // this.$nextTick(() => {
+        // // console.log(this.$refs.Big_pic_ref)
+        // console.log(this.imgPathDetail)
+
+        // })        
+
+
+        // this.imgBaseUrl= this.imgBaseUrl+this.imgPath[0].imagePath;
+        // this.uurl=this.imgBaseUrl+this.imgPath[0].imagePath;
+        // console.log(this.imgPath[0].imagePath)
+        this.defaultBigPicCss();
+
+        // if (this.$refs.Big_pic_ref) {
+        // //   // console.log(this.$refs.Big_pic_ref[0].offsetWidth)
+        // //   // console.log(this.$refs.Big_pic_ref[0].offsetHeight)
+        // //   // console.log('----------------------------------------')
+        // //   // console.log(this.$refs.img_wrap.offsetWidth)          
+        // //   // console.log(this.$refs.img_wrap.offsetHeight)
+        // //   // // console.log('----------------------------------------')n
+        // //   // // console.log('最外侧', this.$refs.AudioVisual_Img_ref.offsetHeight)
+        // //   // // console.log(this.$refs.AudioVisual_Img_ref.offsetWidth)
+        //   var outsideH = this.$refs.AudioVisual_Img_ref.offsetHeight;
+        //   var widthReduce = this.$refs.AudioVisual_Img_ref.offsetWidth - this.$refs.Big_pic_ref[0].offsetWidth;
+        //   var heightReduce = this.$refs.AudioVisual_Img_ref.offsetHeight - this.$refs.Big_pic_ref[0].offsetHeight;
+        //   // console.log(widthReduce, '--------', heightReduce)
+
+        //   if (widthReduce < heightReduce) {
+        //     console.log("宽")
+        //     this.$refs.Big_pic_ref[0].style.width = '100%'; //calc( 100% - 202px)
+        //     this.$refs.Big_pic_ref[0].style.height = 'auto'; //calc( 100% - 202px)
+        //     console.log(this.$refs.Big_pic_ref[0].style.height)
+        //     console.log(this.$refs.Big_pic_ref[0].style.width)
+        //   } else {
+        //     console.log("高")
+        //     this.$refs.Big_pic_ref[0].style.width = 'auto';
+        //     this.$refs.Big_pic_ref[0].style.height = outsideH + "px"; //this.$refs.AudioVisual_Img_ref.offsetHeight
+        //     console.log(this.$refs.Big_pic_ref[0].style.height)
+        //     console.log(this.$refs.Big_pic_ref[0].style.width)
+        //   }
+        // }
       },
       hid() {
         this.showListDiv = false;
@@ -323,23 +399,22 @@
       ChangeCss(ind) {
         this.changeSmallPicCss(ind);
       },
-      smallPic(ev, ind) {
-        this.SmallPicShow = false;
-        this.defaultBigPicCss();
 
-      },
+      // 公共 
       defaultBigPicCss() {
         this.$nextTick(() => {
+          console.log("nextTick")
           if (this.$refs.Big_pic_ref) {
+            this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
             var outsideH = this.$refs.AudioVisual_Img_ref.offsetHeight;
             var widthReduce = this.$refs.AudioVisual_Img_ref.offsetWidth - this.$refs.Big_pic_ref[0].offsetWidth;
             var heightReduce = this.$refs.AudioVisual_Img_ref.offsetHeight - this.$refs.Big_pic_ref[0].offsetHeight;
             if (widthReduce < heightReduce) {
-              this.$refs.Big_pic_ref[0].style.width = '100%';
-              this.$refs.Big_pic_ref[0].style.height = 'auto';
+              this.$refs.Big_pic_ref[0].style.width = '100%'; //calc( 100% - 202px)
+              this.$refs.Big_pic_ref[0].style.height = 'auto'; //calc( 100% - 202px)
             } else {
               this.$refs.Big_pic_ref[0].style.width = 'auto';
-              this.$refs.Big_pic_ref[0].style.height = outsideH + "px";
+              this.$refs.Big_pic_ref[0].style.height = (outsideH - 10) + "px";
             }
           }
         })
@@ -385,7 +460,6 @@
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
                 100 + "px";
               this.$refs.Big_pic_ref[0].style.width = "auto"
-
             }
           };
           this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => {
@@ -393,12 +467,12 @@
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
                   .height) -
                 100 + "px";
-              this.$refs.Big_pic_ref[0].style.width = "auto"                
+              this.$refs.Big_pic_ref[0].style.width = "auto"
             } else {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
                   .height) +
                 100 + "px";
-              this.$refs.Big_pic_ref[0].style.width = "auto"              
+              this.$refs.Big_pic_ref[0].style.width = "auto"
             }
           });
         }
@@ -420,14 +494,21 @@
         applyId: this.localInf.matchApplyId,
         // applyId: this.localInf.applyId,
         // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
-        //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
+        // applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
       }).then(res => {
         if (res.statusCode == 200) {
           this.ListParent = res.data;
+          if (this.ListParent) {
+            for (var i = 0; i < this.ListParent.length; i++) {
+              this.opendImg[i] = true;
+              this.closedImg[i] = false;
+            }
+          }
         } else {
           this.$message.error(res.msg);
         }
       });
+
     }
   }
 
@@ -596,7 +677,7 @@
 
   .AudioVisualLeft .list_title span:nth-of-type(2),
   .AudioVisualLeft .list_title_div p span:nth-of-type(2) {
-          width: calc(100% - 125px );
+    width: calc(100% - 125px);
     border-right: none;
     border-left: none;
   }
@@ -711,14 +792,6 @@
     height: calc(100% - 48px);
     overflow: auto;
   }
-  /* ---------------- */
 
-  .adk {
-    background: yellow;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-  }
 
 </style>
