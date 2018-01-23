@@ -42,11 +42,11 @@
         <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">录入其他联系人调查信息</span>
       </div>
-      <div>
+      <div style="margin-left:30px;">
         <el-form-item label="第三方查询信息：" class="item-column1">
           {{hurryData.thirdResult}}
         </el-form-item>
-        <el-form-item label="三方查询是否异常：" class="item-column3">
+        <el-form-item label="三方查询是否异常：" class="item-column3 line2-class">
           {{hurryData.threeQueriesDes}}
         </el-form-item>
         <!-- <el-form-item label="异常说明：" class="item-column2" v-show="hurryData.threeQueries=='1'">
@@ -80,17 +80,17 @@
         </el-form-item> -->
         <!-- v-show="relBorrower=='03'" -->
         <el-tooltip class="item" effect="dark" :content="hurryData.relBorrowertxt" placement="top">
-          <el-form-item label="说明：" class="item-column2 item-column3-2"  v-show="hurryData.relBorrower=='03'">
+          <el-form-item label="说明：" class="item-column2 item-column3-2" v-show="hurryData.relBorrower=='03'">
             {{hurryData.relBorrowertxt}}
           </el-form-item>
         </el-tooltip>
         <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="hurryData.relBorrower!='03'">
         </el-form-item>
-<!-- =========================== -->
-<!--         <el-form-item label="与借款人联系是否频繁：" class="item-column1 line2-class">
+        <!-- =========================== -->
+        <!--         <el-form-item label="与借款人联系是否频繁：" class="item-column1 line2-class">
           {{hurryData.contactfreDes}}
         </el-form-item> -->
-<!-- =========================== -->
+        <!-- =========================== -->
         <!-- <el-form-item label="" class="item-column3 item-column3-null">
           
         </el-form-item>
@@ -117,13 +117,12 @@
           {{hurryData.maritalStatustxtDes}}
         </el-form-item>
         <el-form-item label="" class="item-column3 item-column3-null">
-          
         </el-form-item>
         <!-- <el-form-item label="调查结果：" class="item-column1">
           {{hurryData.conclusion}}
         </el-form-item> -->
         <el-tooltip class="item" effect="dark" :content="hurryData.conclusion" placement="top">
-          <el-form-item label="调查结果：" class="item-column2 item-column3-2">
+          <el-form-item label="调查结果：" class="item-column1">
             {{hurryData.conclusion}}
           </el-form-item>
         </el-tooltip>

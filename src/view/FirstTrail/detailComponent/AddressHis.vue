@@ -9,30 +9,32 @@
         <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">新增调查日志</span>
       </div>
-      <el-form-item label="客户名称：" class="item-column3">
-        {{mobileData.custName}}
-      </el-form-item>
-      <el-form-item label="电话类型：" class="item-column3">
-        {{mobileData.phoneTypeDes}}
-      </el-form-item>
-      <el-form-item label="电话号码：" class="item-column3">
-        {{mobileData.phoneNum}}
-      </el-form-item>
-      <el-form-item label="来源：" class="item-column3">
-        {{mobileData.sourceDes}}
-      </el-form-item>
-      <el-form-item label="接听情况：" class="item-column3">
-        {{mobileData.answerDes}}
-      </el-form-item>
-      <el-form-item label="调查情况：" class="item-column3">
-        {{mobileData.checkStageDes}}
-      </el-form-item>
-      <!-- v-show=source=='02' -->
-      <el-tooltip class="item" effect="dark" :content="mobileData.sourceDesc" placement="top">
-        <el-form-item label="其它来源情况说明：" class="item-column1" v-show="mobileData.source=='02'">
-          {{mobileData.sourceDesc}}
+      <div style="margin-left:30px;">
+        <el-form-item label="客户名称：" class="item-column3">
+          {{mobileData.custName}}
         </el-form-item>
-      </el-tooltip>
+        <el-form-item label="电话类型：" class="item-column3">
+          {{mobileData.phoneTypeDes}}
+        </el-form-item>
+        <el-form-item label="电话号码：" class="item-column3">
+          {{mobileData.phoneNum}}
+        </el-form-item>
+        <el-form-item label="来源：" class="item-column3">
+          {{mobileData.sourceDes}}
+        </el-form-item>
+        <el-form-item label="接听情况：" class="item-column3">
+          {{mobileData.answerDes}}
+        </el-form-item>
+        <el-form-item label="调查情况：" class="item-column3">
+          {{mobileData.checkStageDes}}
+        </el-form-item>
+        <!-- v-show=source=='02' -->
+        <el-tooltip class="item" effect="dark" :content="mobileData.sourceDesc" placement="top">
+          <el-form-item label="其它来源情况说明：" class="item-column1" v-show="mobileData.source=='02'">
+            {{mobileData.sourceDesc}}
+          </el-form-item>
+        </el-tooltip>
+      </div>
       <!-- <div class="address-title">
         录入住址电话调查信息
       </div> -->
@@ -40,7 +42,7 @@
         <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">录入住址电话调查信息</span>
       </div>
-      <div>
+      <div style="margin-left:30px;">
         <!-- <el-form-item label="第三方查询结果" class="item-column1">
           {{mobileData.thirdResult}}
         </el-form-item> -->
