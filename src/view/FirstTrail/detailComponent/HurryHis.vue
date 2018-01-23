@@ -1,7 +1,7 @@
 <!-- 电话征信 - 紧急联系人 历史 -->
 <template>
   <div>
-    <el-form ref="form" :model="form" label-width="130px">
+    <el-form ref="form"  label-width="130px">
       <!--       <div class="address-title">
         新增调查日志
       </div> -->
@@ -136,7 +136,7 @@ export default {
     return {
       // id:'',  // 住宅电话调查日志记录 id
       // phoneType:'', // 电话类型
-      hurryData: '' // 请求返回的数据
+      // hurryData: '' // 请求返回的数据
     }
   },
   props: ['hurryData', 'isFull'],

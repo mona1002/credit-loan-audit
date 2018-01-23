@@ -243,7 +243,7 @@ export default {
     return {
       // id:'',  // 住宅电话调查日志记录 id
       // phoneType:'', // 电话类型
-      mobileData: '', // 请求返回的数据
+      // mobileData: '', // 请求返回的数据
       // queryHis:'' // 监听对象
     }
   },

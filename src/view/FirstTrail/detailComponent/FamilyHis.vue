@@ -176,7 +176,7 @@ export default {
     return {
       // id:'',  // 住宅电话调查日志记录 id
       // phoneType:'', // 电话类型
-      familyData: '' // 请求返回的数据
+      // familyData: '' // 请求返回的数据
     }
   },
   props: ['familyData', 'isFull'],

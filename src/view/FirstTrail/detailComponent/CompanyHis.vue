@@ -156,7 +156,7 @@ export default {
     return {
       // id:'',  // 住宅电话调查日志记录 id
       // phoneType:'', // 电话类型
-      comData: '' // 请求返回的数据
+      // comData: '' // 请求返回的数据
     }
   },
   props: ['comData', 'isFull'],
