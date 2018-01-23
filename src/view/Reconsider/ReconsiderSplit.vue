@@ -58,7 +58,8 @@
             <aAntiApplyInf v-if=" this.tabContent2==9"></aAntiApplyInf>
             <!-- √ -->
             <!-- 复议结论 -->
-            <ReconsiderationConclusion v-if=" this.tabContent2==10"></ReconsiderationConclusion>
+            <ReconsiderationConclusion v-if=" this.tabContent2==10 && this.Rcon==1"></ReconsiderationConclusion>
+            <ReconjingliConclusion v-if=" this.tabContent2==10 && this.Rcon==2"></ReconjingliConclusion>
             <!-- √ -->
           </div>
         </div>
@@ -77,8 +78,8 @@
   import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信
   import ReconsiderApply from './ReconsiderComponents/ReconsiderApply.vue' //复议申请
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf.vue' //反欺诈结论
-  import ReconsiderationConclusion from './ReconsiderComponents/ReconsiderationConclusion.vue'  //复议结论
-  
+  import ReconsiderationConclusion from './ReconsiderComponents/ReconsiderationConclusion.vue' //复议结论 - 专员
+  import ReconjingliConclusion from './ReconsiderComponents/ReconjingliConclusion.vue' //复议结论 - 经理
   // --------------------------------------------------------------------------------------------
   // 编辑（含有-未更新）
   import InternalMatch from "../FirstTrail/InternalMatch.vue";
@@ -87,7 +88,8 @@
   export default {
     data() {
       return {
-        custName:"",
+        Rcon: 0,
+        custName: "",
         SplitLeft: "left",
         SplitRight: "right",
         watchData: '',
@@ -144,18 +146,24 @@
     },
     mounted() {
       console.log("分屏");
-            // 复议不用flag判断，列表页专员、主管存的同一个字段
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting"));
-        this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-          id: this.tastwaitingPass.applyId,
-        }).then(res => {
-      if (res.statusCode == 200) {
-         this.custName=res.data.accepCusBasicInfo.custName;
-        //     this.customInf = res.data;
-      } else {
-        this.$message.error(res.msg);
+      // 复议不用flag判断，列表页专员、主管存的同一个字段
+      this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting"));
+      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      if (this.judgeFlag.flag == '05') {
+        this.Rcon == 1;
+      } else if (this.judgeFlag.flag == '06') {
+        this.Rcon == 2;
       }
-        });
+      this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
+        id: this.tastwaitingPass.applyId,
+      }).then(res => {
+        if (res.statusCode == 200) {
+          this.custName = res.data.accepCusBasicInfo.custName;
+          //     this.customInf = res.data;
+        } else {
+          this.$message.error(res.msg);
+        }
+      });
     },
     components: {
       myHead,
@@ -167,7 +175,8 @@
       creditInvestigation,
       ReconsiderApply, //复议申请
       aAntiApplyInf, //反欺诈结论
-      ReconsiderationConclusion,//复议结论
+      ReconsiderationConclusion, //复议结论-专员
+      ReconjingliConclusion, //复议结论-经理
       InternalMatch,
       PhoneCredit,
     }
