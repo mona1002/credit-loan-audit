@@ -332,7 +332,7 @@
 							<span>{{accepCusBasicInfo.insurerTel}}</span>			
 						</li>
 						<li>
-							<label>生效日期[月]：</label>
+							<label>生效日期：</label>
 							<span>{{accepCusBasicInfo.insurEffectDate}}</span>	
 						</li>
 					</ul>
@@ -1060,11 +1060,11 @@
 			    	};
 			    	//占股比例
 			    	if(this.accepCusPrivate.proShare != null){
-			        	this.accepCusPrivate.proShare = this.accepCusPrivate.proShare.toFixed(2)+"%";	
+			        	this.accepCusPrivate.proShare = this.formatNumber(this.accepCusPrivate.proShare,2,0)+"%";	
 			    	};
 			    	//企业净利润率
 			    	if(this.accepCusPrivate.profitMargin != null){
-			        	this.accepCusPrivate.profitMargin = this.accepCusPrivate.profitMargin.toFixed(2)+"%";	
+			        	this.accepCusPrivate.profitMargin = this.formatNumber(this.accepCusPrivate.profitMargin,2,0)+"%";	
 			    	};
 			    	
 		    	};
