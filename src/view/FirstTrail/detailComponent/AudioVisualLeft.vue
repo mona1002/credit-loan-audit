@@ -44,8 +44,10 @@
         </el-collapse-item>
       </el-collapse>
       <!-- 按钮 : 缩略图 对比  -->
-      <el-button @click="SmallpicAlert" class="compareBtn">缩略图</el-button>
-      <el-button type="primary" @click="compBtnShow" class="checkDetailBtn">对比</el-button>
+      <div class="btn_wrap">
+        <el-button @click="SmallpicAlert" class="compareBtn">缩略图</el-button>
+        <el-button type="primary" @click="compBtnShow" class="checkDetailBtn">对比</el-button>
+      </div>
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
@@ -292,7 +294,8 @@
           if (this.smallPicInd < 0) {
             this.smallPicInd = this.$refs.small_pic_ref.length - 1;
           }
-        } this.defaultBigPicCss();
+        }
+        this.defaultBigPicCss();
       },
       next() {
         this.smallPicInd++;
@@ -300,7 +303,8 @@
           if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
             this.smallPicInd = 0;
           }
-        } this.defaultBigPicCss();
+        }
+        this.defaultBigPicCss();
       },
       larger() {
         if (this.$refs.Big_pic_ref) {
@@ -534,11 +538,19 @@
     z-index: 2;
   }
   /* 对比-按钮 */
+  .btn_wrap{
+  /* background:red; */
+   position: absolute;
+    bottom: 18px;
+right:5px;
+    width:170px;
+    /* margin:0 auto; */
+}
 
   .compareBtn {
-    position: absolute;
+    /* position: absolute;
     bottom: 18px;
-    right: 98px;
+    right: 98px; */
     color: #0077ff;
     border: 1px solid #0077ff;
     background: #eef0f9;
@@ -546,9 +558,9 @@
   /* 缩略图-按钮 */
 
   .checkDetailBtn {
-    position: absolute;
+    /* position: absolute;
     bottom: 18px;
-    right: 17px;
+    right: 17px; */
   }
 
   .showHidIcons {
