@@ -332,7 +332,7 @@
 							<span>{{accepCusBasicInfo.insurerTel}}</span>			
 						</li>
 						<li>
-							<label>生效日期[月]：</label>
+							<label>生效日期：</label>
 							<span>{{accepCusBasicInfo.insurEffectDate}}</span>	
 						</li>
 					</ul>
@@ -958,10 +958,10 @@
 		        	this.accepCusBasicInfo=res.data.accepCusBasicInfo;
 		        	var reg = /null/g;
 		        	//投保地点
-		        	if(this.accepCusBasicInfo.insurProvinceName == null && this.accepCusBasicInfo.insurCountyName == null && this.accepCusBasicInfo.insurAddress == null && this.accepCusBasicInfo.insurAddress == null){
+		        	if(this.accepCusBasicInfo.insurProvinceName == null && this.accepCusBasicInfo.insurCityName == null && this.accepCusBasicInfo.insurCountyName == null && this.accepCusBasicInfo.insurAddress == null){
 		        		this.insurAddr = '';
 		        	}else{
-		        		this.insurAddr = this.accepCusBasicInfo.insurProvinceName + this.accepCusBasicInfo.insurCountyName + this.accepCusBasicInfo.insurAddress + this.accepCusBasicInfo.insurAddress;
+		        		this.insurAddr = this.accepCusBasicInfo.insurProvinceName + this.accepCusBasicInfo.insurCityName + this.accepCusBasicInfo.insurCountyName + this.accepCusBasicInfo.insurAddress;
 		        		this.insurAddr = this.insurAddr.replace(reg,'');
 		        	}
 		        	
@@ -1042,11 +1042,11 @@
 			    	};
 			    	//占股比例
 			    	if(this.accepCusPrivate.proShare != null){
-			        	this.accepCusPrivate.proShare = this.accepCusPrivate.proShare.toFixed(2)+"%";	
+			        	this.accepCusPrivate.proShare = this.formatNumber(this.accepCusPrivate.proShare,2,0)+"%";	
 			    	};
 			    	//企业净利润率
 			    	if(this.accepCusPrivate.profitMargin != null){
-			        	this.accepCusPrivate.profitMargin = this.accepCusPrivate.profitMargin.toFixed(2)+"%";	
+			        	this.accepCusPrivate.profitMargin = this.formatNumber(this.accepCusPrivate.profitMargin,2,0)+"%";	
 			    	};
 		    	};
 		        /*您的工作信息*/
