@@ -150,9 +150,9 @@
       this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting"));
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '05') {
-        this.Rcon == 1;
+        this.Rcon = 1;
       } else if (this.judgeFlag.flag == '06') {
-        this.Rcon == 2;
+        this.Rcon = 2;
       }
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.applyId,

@@ -39,7 +39,7 @@
           </template>
           <div class="list_title_div">
             <!--  二级 内容 节点 -->
-            <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind)">
+            <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind)" @mousedown="getImg(ind)">
               <el-tooltip class="item" effect="dark" :content="item.arcName" placement="right-end">
                 <span style="width:135px;paddingLeft:20px;">{{item.arcName}}</span>
               </el-tooltip>
@@ -159,7 +159,9 @@
         });
       },
       getImg(ind) {
+        console.log('图片')
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
+        this.defaultBigPicCss()
       },
       hid() {
         this.showListDiv = false;
@@ -259,7 +261,10 @@
         // this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
         //  this.$refs.big_pic[0].style.height = "100%"; // 点击切换图片时，让显示的大图高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
         // this.$refs.big_pic[0].style.transform = "rotate(0deg)"
-      },
+          if (this.$refs.Big_pic_ref) {
+            this.$refs.Big_pic_ref[0].style.width = '100%'; //calc( 100% - 202px)
+            this.$refs.Big_pic_ref[0].style.height = 'auto'; //calc( 100% - 202px)
+            }      },
       comput(val) {
         val = val.getFullYear() + "-" + (val.getMonth() + 1) + "-" + val.getDate() + " " + (val.toString().split(' ')[4]);
         return val;
@@ -424,10 +429,7 @@
     bottom: 18px;
     right: 17px;
   }
-  /* 
-  .showHidIcons {
-    display: none;
-  } */
+
   /*  放大、缩小 按钮 wrap */
 
   .BtnIcons {
@@ -555,7 +557,7 @@
 
   .AudioVisual .list_title span:nth-of-type(4),
   .AudioVisual .list_title_div p span:nth-of-type(4) {
-    width: 144px;
+      width: calc(100% - 255px );
     border-left: none;
   }
   /* ------------------------------- */

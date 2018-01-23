@@ -1176,7 +1176,7 @@ overflow-x: hidden;
 }
 
 .AudioVisualLeft .el-collapse-item__header p span:nth-of-type(2) {
-  width: 76px;
+  width: calc(100% - 125px );
   border-right: none;
   border-left: none;
 }
@@ -1186,7 +1186,7 @@ overflow-x: hidden;
 }
 
 .AudioVisual .el-collapse-item__header p span:nth-of-type(4) {
-  width: 144px;
+  width: calc(100% - 255px );
   border-left: none;
 }
 

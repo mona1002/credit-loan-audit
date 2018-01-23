@@ -519,7 +519,7 @@
 
   .AudioVisual .list_title span:nth-of-type(4),
   .AudioVisual .list_title_div p span:nth-of-type(4) {
-    width: 144px;
+          width: calc(100% - 255px );
     border-left: none;
   }
   /* ------------------------------- */
