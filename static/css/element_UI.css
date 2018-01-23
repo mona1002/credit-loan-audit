@@ -2259,6 +2259,12 @@ overflow-x: hidden;
   padding: 0;
 }*/
 
+
+
+.el-table .cell, .el-table th div, .el-table--border td:first-child .cell, .el-table--border th:first-child .cell{
+  padding: 0;
+}
+
 /* 复议结论 */
 .ReconsiderationConclusion .el-dialog__header{
   background-color: #eef0f9;
@@ -2346,3 +2352,4 @@ overflow-x: hidden;
 .ReconsiderationConclusion .liuchenggj .el-table__body-wrapper .el-table__body td:nth-of-type(7){
   text-align: center;
 }
+
