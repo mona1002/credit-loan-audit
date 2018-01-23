@@ -257,11 +257,11 @@
 		        	};
 		        	//办公环境 办公场所面积
 		        	if(this.datas.comOffArea !=null){
-		        		this.datas.comOffArea = this.formatNumber(this.datas.comOffArea,2,0).replace(/,/,'')+'㎡';
+		        		this.datas.comOffArea = this.formatNumber(this.datas.comOffArea,2,0).replace(/,/g,'')+'㎡';
 		        	};
 		        	//库房/车间 厂房面积
 		        	if(this.datas.comArea !=null){
-		        		this.datas.comArea = this.formatNumber(this.datas.comArea,2,0).replace(/,/,'')+'㎡';
+		        		this.datas.comArea = this.formatNumber(this.datas.comArea,2,0).replace(/,/g,'')+'㎡';
 		        	};
 		        	
 		        };

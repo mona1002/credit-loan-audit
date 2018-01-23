@@ -86,7 +86,9 @@ import reconsiderList from '../view/Reconsider/reconsiderList.vue'//复议申请
 import ReconsiderSplit from '../view/Reconsider/ReconsiderSplit.vue'//复议专员主管分屏
 // import ReconsiderAntiSplit from '../view/Reconsider/ReconsiderAntiSplit.vue'//复议反欺诈分屏
 //复议结论
-import ReconsiderationConclusion from '../view/Reconsider/ReconsiderComponents/ReconsiderationConclusion.vue'
+import ReconsiderationConclusion from '../view/Reconsider/ReconsiderComponents/ReconsiderationConclusion.vue'//复议专员
+import ReconjingliConclusion from '../view/Reconsider/ReconsiderComponents/ReconjingliConclusion.vue'//复议经理
+
 
 // -------------------------流程监控---------------------
 import processMoni from '../view/processMoni/processMoni.vue'
@@ -299,11 +301,17 @@ const routes = [{
   path:'/ReconsiderSplit',
   component:ReconsiderSplit
 },
-//复议结论
+//复议结论（专员）
 {
   path:'/ReconsiderationConclusion',
   component:ReconsiderationConclusion
 },
+//复议结论（经理）
+{
+  path:'/ReconjingliConclusion',
+  component:ReconjingliConclusion
+},
+
 
 // {
 //   path:'/ReconsiderAntiSplit',
