@@ -974,10 +974,10 @@
 		        	this.accepCusBasicInfo=res.data.accepCusBasicInfo;
 		        	var reg = /null/g;
 		        	//投保地点
-		        	if(this.accepCusBasicInfo.insurProvinceName == null && this.accepCusBasicInfo.insurCountyName == null && this.accepCusBasicInfo.insurAddress == null && this.accepCusBasicInfo.insurAddress == null){
+		        	if(this.accepCusBasicInfo.insurProvinceName == null && this.accepCusBasicInfo.insurCityName == null && this.accepCusBasicInfo.insurCountyName == null && this.accepCusBasicInfo.insurAddress == null){
 		        		this.insurAddr = '';
 		        	}else{
-		        		this.insurAddr = this.accepCusBasicInfo.insurProvinceName + this.accepCusBasicInfo.insurCountyName + this.accepCusBasicInfo.insurAddress + this.accepCusBasicInfo.insurAddress;
+		        		this.insurAddr = this.accepCusBasicInfo.insurProvinceName + this.accepCusBasicInfo.insurCityName + this.accepCusBasicInfo.insurCountyName + this.accepCusBasicInfo.insurAddress;
 		        		this.insurAddr = this.insurAddr.replace(reg,'');
 		        	}
 		        	
