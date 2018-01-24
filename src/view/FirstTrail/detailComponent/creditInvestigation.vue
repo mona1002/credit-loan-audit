@@ -175,7 +175,13 @@
 					<li><label>上下游结算周期：</label><span>{{datas.comBillCycle}}</span></li>
 					<li><label>应收账款[万元]：</label><span>{{datas.comCollection}}</span></li>
 					<li><label>贷款及抵押情况：</label><span>{{datas.comLoan}}</span></li>
-					<li><label>其他说明：</label><span>{{datas.comOtherInfo}}</span></li>
+					<!-- <li><label>其他说明：</label><span>{{datas.comOtherInfo}}</span></li> -->
+					<li class="reason">
+						<label>其他说明：</label>
+						<el-tooltip class="item" effect="dark" :content="datas.comOtherInfo" :disabled="datas.comOtherInfo==null" placement="top">
+					      <div>{{datas.comOtherInfo}}</div>
+					    </el-tooltip>
+					</li>
 				</ul>
 				<ul class="headul">
 					<li><label></label><span></span></li>
@@ -185,7 +191,13 @@
 					<li><label></label><span></span></li>
 					<li><label>应付账款[万元]：</label><span>{{datas.comPayables}}</span></li>
 					<li><label></label><span></span></li>
-					<li><label>异常说明：</label><span>{{datas.comExceptionInfo}}</span></li>
+					<!-- <li><label>异常说明：</label><span>{{datas.comExceptionInfo}}</span></li> -->
+					<li class="reason">
+						<label>异常说明：</label>
+						<el-tooltip class="item" effect="dark" :content="datas.comExceptionInfo" :disabled="datas.comExceptionInfo==null" placement="top">
+					      <div>{{datas.comExceptionInfo}}</div>
+					    </el-tooltip>
+					</li>
 				</ul>
 			  </el-collapse-item>
 			</el-collapse>

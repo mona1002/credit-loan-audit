@@ -96,6 +96,9 @@ import processMoni from '../view/processMoni/processMoni.vue'
 import DoneTask from'../view/TaskManagement/reconsider/DoneTask.vue'//
 import HistoryTask from'../view/TaskManagement/reconsider/HistoryTask.vue'//
 import TaskManagementSplit from'../view/TaskManagement/reconsider/TaskManagementSplit.vue'//
+import doTheTask from'../view/TaskManagement/examineAndApprove/doTheTask.vue'//审批任务管理——已办任务
+import historicalTask from'../view/TaskManagement/examineAndApprove/historicalTask.vue'//审批任务管理——历史任务
+
 
 
 Vue.use(Router)
@@ -334,6 +337,14 @@ const routes = [{
 {
   path: '/TaskManagementSplit',
   component: TaskManagementSplit
+},
+{
+  path: '/doTheTask',
+  component: doTheTask
+},
+{
+  path: '/historicalTask',
+  component: historicalTask
 }
 ];
 

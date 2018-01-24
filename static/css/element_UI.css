@@ -1241,7 +1241,9 @@ overflow-x: hidden;
 }
 
 /* 反欺诈-案件编号列表页+反欺诈规则设定 */
-
+.AntiCaseNum .cell:hover{
+  cursor: default;
+}
 .AntiRules .el-input,
 .AntiCaseNum .el-input {
   /* display: inline-block; */
@@ -1332,7 +1334,7 @@ overflow-x: hidden;
 .AntiCaseNum .el-date-editor .el-range-separator {
   padding: 0;
   line-height: 32px;
-  width: 45px;
+  width: 10%;
   color: #2d2f33;
   text-align: center;}
   .AntiCaseNum .el-date-editor .el-range-input{
@@ -2352,4 +2354,28 @@ overflow-x: hidden;
 .ReconsiderationConclusion .liuchenggj .el-table__body-wrapper .el-table__body td:nth-of-type(7){
   text-align: center;
 }
-
+/* 审批任务管理——待办任务 */
+.taskWatting .el-date-editor .el-range-separator{
+  width: 10%;
+}
+.taskWatting .el-date-editor .el-range-input{
+  width: 35%;
+}
+.taskWatting.doTheTask .el-table th:nth-of-type(5){
+  text-align: left;
+}
+.taskWatting.doTheTask .el-table__body-wrapper .el-table__body td:nth-of-type(5){
+  text-align: left;
+}
+.taskWatting.doTheTask .el-table th:nth-of-type(6){
+  text-align: center;
+}
+.taskWatting.doTheTask .el-table__body-wrapper .el-table__body td:nth-of-type(6){
+  text-align: center;
+}
+.taskWatting.doTheTask .el-table th:nth-of-type(9){
+  text-align: center;
+}
+.taskWatting.doTheTask .el-table__body-wrapper .el-table__body td:nth-of-type(9){
+  text-align: center;
+}

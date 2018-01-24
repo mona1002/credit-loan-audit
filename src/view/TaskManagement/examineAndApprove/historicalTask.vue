@@ -1,3 +1,5 @@
+<!-- 历史任务 -->
+<!-- 已办任务 -->
 <template>
 	<div class="taskWatting">
 		<myHead class="top"></myHead>
@@ -107,7 +109,7 @@
 	</div>	
 </template>
 <script type="text/javascript">
-	import myHead from "../header.vue"
+	import myHead from "../../header.vue"
 	export default{
 		data(){
 			return{
@@ -156,8 +158,6 @@
 			console.log(this.processTemplateId+'...'+this.taskNodeName+'...'+this.taskStatus+'...'+this.userCode+'...'+this.orgCode);
 			
 			this.request(this.queryParam);	
-			localStorage.removeItem("house");
-			localStorage.removeItem("car");
 		},
 		methods:{
 		    request(param){

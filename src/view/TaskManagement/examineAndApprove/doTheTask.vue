@@ -1,25 +1,70 @@
+<!-- 已办任务 -->
 <template>
-	<div class="taskWatting">
+	<div class="taskWatting doTheTask">
 		<myHead class="top"></myHead>
 		<div class="taskWattingContain">
 			
 		  	<div class="taskWinput">
 		      <el-row class="row row1"  type="flex">
-		        <el-col :span="8" :offset="0">
-		          <span class="keywordText">进件编号</span><el-input class="" v-model="applySubNo" placeholder="请输入进件编号"></el-input>
-		        </el-col>
-		        <el-col :span="8">
-		          <span class="keywordText">客户名称</span><el-input class="" v-model="custName_la" placeholder="请输入客户名称"></el-input>
-		        </el-col>
-		        <el-col :span="8">
-		          <span class="keywordText">证件号码</span><el-input class="" v-model="certCode" placeholder="请输入证件号码"></el-input>
-		        </el-col>
+			        <el-col :span="8" :offset="0">
+			          <span class="keywordText">进件编号</span><el-input class="" v-model="applySubNo" placeholder="请输入进件编号"></el-input>
+			        </el-col>
+			        <el-col :span="8">
+			          <span class="keywordText">客户名称</span><el-input class="" v-model="custName_la" placeholder="请输入客户名称"></el-input>
+			        </el-col>
+			        <el-col :span="8">
+			          <span class="keywordText">证件号码</span><el-input class="" v-model="certCode" placeholder="请输入证件号码"></el-input>
+			        </el-col>
 		      </el-row>
 		      <el-row class="row row1"  type="flex">
-			       <el-col :span="22">  
-			         <el-button class="btn query" type="primary" @click="search">查询</el-button>
-			         <el-button class="btn reset" @click="reset">重置</el-button>
-			       </el-col>
+			        <el-col :span="8" :offset="0">
+			          <span class="keywordText">产品名称</span>
+			          <el-select v-model="proName" placeholder="请选择">
+					    <el-option
+					      v-for="item in productNames"
+					      :key="item.value"
+					      :label="item.label"
+					      :value="item.value">
+					    </el-option>
+					  </el-select>
+			        </el-col>
+			        <el-col :span="8">
+			          <span class="keywordText">紧急程度</span>
+			          <el-select v-model="emerType" placeholder="请选择">
+					    <el-option
+					      v-for="item in UrgencyDegree"
+					      :key="item.value"
+					      :label="item.label"
+					      :value="item.value">
+					    </el-option>
+					  </el-select>
+			        </el-col>
+			        <el-col :span="8">
+			          	<span class="keywordText">申请日期</span>
+			          	<el-date-picker
+					      v-model="applicationDate"
+					      type="daterange"
+					      range-separator="至"
+					      start-placeholder="开始日期"
+					      end-placeholder="结束日期">
+					    </el-date-picker>
+			        </el-col>
+		      </el-row>
+		      <el-row class="row row1"  type="flex">
+			      	<el-col :span="8">
+				          <span class="keywordText">本环节处理时间</span>
+				          <el-date-picker
+					      v-model="processingTime"
+					      type="daterange"
+					      range-separator="至"
+					      start-placeholder="开始日期"
+					      end-placeholder="结束日期">
+					    </el-date-picker>
+			        </el-col>
+			        <el-col :span="16">  
+			              <el-button class="btn query" type="primary" @click="search">查询</el-button>
+			              <el-button class="btn reset" @click="reset">重置</el-button>
+			        </el-col>
 		      </el-row>
 		    </div>
 		    <div class="taskWhead">
@@ -34,12 +79,12 @@
 				      width="50"
 				      >
 				    </el-table-column>
-				    <el-table-column
+				    <!-- <el-table-column
 				      prop="taskType"
 				      label="任务类型"
 				      min-width="110"
 				      >
-				    </el-table-column>
+				    </el-table-column> -->
 				    <el-table-column
 				      prop="emerType"
 				      label="紧急程度"
@@ -72,23 +117,23 @@
 				    <el-table-column
 				      prop="appOrgCode"
 				      label="进件机构"
-				      min-width="100">
+				      min-width="120">
 				    </el-table-column>
 				    <el-table-column
 				      prop="proName"
 				      label="产品名称"
-				      width="100">
+				      width="120">
 				    </el-table-column>
 				    <el-table-column
 				      prop="activationTime"
 				      label="进入本环节时间"
 				      min-width="170">
 				    </el-table-column>
-				    <el-table-column
+				    <!-- <el-table-column
 				      prop="approveTimeLong"
 				      label="进入本环节时长（小时）" 
 				      min-width="180">
-				    </el-table-column>
+				    </el-table-column> -->
 				</el-table>
 				<!-- 分页 -->
 				<div class="page">
@@ -107,7 +152,7 @@
 	</div>	
 </template>
 <script type="text/javascript">
-	import myHead from "../header.vue"
+	import myHead from "../../header.vue"
 	export default{
 		data(){
 			return{
@@ -134,6 +179,41 @@
 		            custName_la : '',
 		            certCode : ''
 			      },
+		      	productNames: [{
+		          value: '选项1',
+		          label: '黄金糕'
+		        }, {
+		          value: '选项2',
+		          label: '双皮奶'
+		        }, {
+		          value: '选项3',
+		          label: '蚵仔煎'
+		        }, {
+		          value: '选项4',
+		          label: '龙须面'
+		        }, {
+		          value: '选项5',
+		          label: '北京烤鸭'
+		        }],
+		        //紧急程度
+		        UrgencyDegree:[{
+		        	value: '00',
+		            label: '普通'
+		        },
+		        {
+		        	value: '01',
+		            label: '免费加急'
+		        },
+		        {
+		        	value: '02',
+		            label: '收费加急'
+		        }],
+		        applicationDate:'',
+		        processingTime:'',
+		        //紧急程度
+		        emerType:'',
+		        //产品名称
+		        proName:'',
 		        //taskType:'',
 		        // timeColor:false,
 			}
@@ -156,8 +236,6 @@
 			console.log(this.processTemplateId+'...'+this.taskNodeName+'...'+this.taskStatus+'...'+this.userCode+'...'+this.orgCode);
 			
 			this.request(this.queryParam);	
-			localStorage.removeItem("house");
-			localStorage.removeItem("car");
 		},
 		methods:{
 		    request(param){
@@ -170,15 +248,6 @@
 	            	this.datas=res.data.taskDetailList;
 	            	console.log(this.datas.length)
 	            	for(var i=0;i<this.datas.length;i++){
-	            		if(this.datas[i].taskType=='00'){//00
-		            		this.datas[i].taskType="新任务";
-		            	}else if(this.datas[i].taskType=='01'){
-		            		this.datas[i].taskType="回退任务";
-		            	}else if(this.datas[i].taskType=='02'){
-		            		this.datas[i].taskType="挂起任务";
-		            	}else if(this.datas[i].taskType=='03'){
-		            		this.datas[i].taskType="回退再审任务";
-		            	};
 		            	if(this.datas[i].emerType=='00'){//00
 		            		this.datas[i].emerType="普通";
 		            	}else if(this.datas[i].emerType=='01'){
@@ -293,6 +362,7 @@
 	}
 	.taskWinput .query {
 	  margin-left: 20px;
+	  margin-right: calc( 50% - 394px );
 	}
 	.taskWinput .reset {
 	  margin-left: 214px;

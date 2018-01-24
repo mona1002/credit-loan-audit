@@ -12,27 +12,27 @@
             <li>
               <p>
                 <label>进件编号： </label>
-                <span>{{this.conclu.applySubno}} </span>
+                <span>{{this.conclu.applyInfoPool.applySubno}} </span>
               </p>
               <p>
                 <label>证件号码： </label>
-                <span>{{this.conclu.certCode}} </span>
+                <span>{{this.conclu.applyInfoPool.certCode}} </span>
               </p>
             </li>
             <li>
               <p>
                 <label>客户名称： </label>
-                <span>{{this.conclu.custName}} </span>
+                <span>{{this.conclu.applyInfoPool.custName}} </span>
               </p>
               <p>
                 <label>移动电话： </label>
-                <span>{{this.conclu.mobile}} </span>
+                <span>{{this.conclu.applyInfoPool.mobile}} </span>
               </p>
             </li>
             <li>
               <p>
                 <label>证件类型： </label>
-                <span>{{this.conclu.certTypeTxt}} </span>
+                <span>{{this.conclu.applyInfoPool.certTypeTxt}} </span>
               </p>
             </li>
           </ul>
@@ -48,7 +48,7 @@
             <li>
               <p>
                 <label>借欺诈申请类型主原因： </label>
-                <span>{{this.conclu.mainreaName}} </span>
+                <span>{{this.conclu.fraudApplyInfo.mainreaName}} </span>
                 <!-- <el-select v-model="value" placeholder="请选择">
                 <el-option v-for="item in mainReason" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
@@ -56,27 +56,27 @@
               </p>
               <p>
                 <label>子原因： </label>
-                <span>{{this.conclu.subreaName}} </span>
+                <span>{{this.conclu.fraudApplyInfo.subreaName}} </span>
               </p>
             </li>
             <li>
               <p class="description">
                 <label>欺诈上报描述：</label>
-                <span class="textA"> {{this.conclu.applyDesc}}</span>
+                <span class="textA"> {{this.conclu.fraudApplyInfo.applyDesc}}</span>
               </p>
             </li>
             <li>
               <p>
                 <label>反欺诈申请人： </label>
-                <span>{{this.conclu.applyPersonName}} </span>
+                <span>{{this.conclu.fraudApplyInfo.applyPersonName}} </span>
               </p>
               <p>
                 <label>反欺诈申请日期： </label>
-                <span>{{this.conclu.appDate}} </span>
+                <span>{{this.conclu.fraudApplyInfo.appDate}} </span>
               </p>
               <p>
                 <label>反欺诈申请机构： </label>
-                <span>{{this.conclu.appOrgName}} </span>
+                <span>{{this.conclu.fraudApplyInfo.appOrgName}} </span>
                 <!-- appOrgCode -->
               </p>
             </li>
@@ -93,8 +93,7 @@
             <li>
               <p class="description">
                 <label>反欺诈决策反馈： </label>
-                <!-- 字段不确定 -->
-                <span class="textA"> </span>
+                <span class="textA"> {{this.conclu.fraudAuditOpinion.auditDesc}}</span>
               </p>
             </li>
           </ul>
@@ -110,34 +109,12 @@
         activeNames: ['1', '2', '3'],
         conclu: '',
         tastwaitingPass: '',
-        applyInfoPool:'',
-        fraudApplyInfo:'',
-        fraudAuditOpinion:'',
-        // mainReason: [{
-        //     value: '选项1',
-        //     label: '信审黑名单、信审灰名单、外部黑名单'
-        //   },
-        //   {
-        //     value: '选项1',
-        //     label: '信审灰名单'
-        //   },
-        //   {
-        //     value: '选项1',
-        //     label: '外部黑名单'
-        //   }, {
-        //     value: '选项1',
-        //     label: '外部灰名单'
-        //   }, {
-        //     value: '选项1',
-        //     label: '不确定需下一级审批'
-        //   }
-        // ],
       }
     },
     mounted() {
       //基本信息:applyInfoPool
-    // 反欺诈申请信息 fraudApplyInfo
-    // 反欺诈结论 fraudAuditOpinion 
+      // 反欺诈申请信息 fraudApplyInfo
+      // 反欺诈结论 fraudAuditOpinion 
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '01') {
         this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
@@ -148,9 +125,8 @@
         applyId: this.tastwaitingPass.applyId,
       }).then(res => {
         if (res.statusCode == 200) {
-          // console.log(res)
-          this.conclu =Object.assign(res.data.applyInfoPool,res.data.fraudApplyInfo,res.data.fraudAuditOpinion);
-          console.log(this.conclu);
+          console.log(res.data)
+          this.conclu = res.data;
         } else {
           this.$message.error(res.msg);
         }
