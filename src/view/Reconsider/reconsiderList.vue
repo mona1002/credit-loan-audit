@@ -147,6 +147,8 @@
 			console.log(this.processTemplateId+'...'+this.taskNodeName+'...'+this.taskStatus+'...'+this.userCode+'...'+this.orgCode);
 			
 			this.request(this.queryParam);	
+			localStorage.removeItem("house");
+			localStorage.removeItem("car");
 		},
 		methods:{
 		    request(param){

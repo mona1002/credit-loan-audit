@@ -21,12 +21,12 @@
 				      	min-width="50" >
 				      </el-table-column>
 				      <el-table-column
-				        prop="estateType"
+				        prop="estateTypeTxt"
 				        label="房产类型"
 				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
-				        prop="propertyType"
+				        prop="propertyTypeTxt"
 				        label="产权性质"
 				        min-width="100">
 				      </el-table-column>
@@ -103,12 +103,12 @@
 				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
-				        prop="isYearCheck"
+				        prop="isYearCheckTxt"
 				        label="是否年检"
 				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
-				        prop="isOperate"
+				        prop="isOperateTxt"
 				        label="是否非运营"
 				        min-width="100">
 				      </el-table-column>
@@ -118,7 +118,7 @@
 				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
-				        prop="carType"
+				        prop="carTypeTxt"
 				        label="车辆类型"
 				        min-width="100">
 				      </el-table-column>
@@ -143,7 +143,7 @@
 				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
-				        prop="buyInsur"
+				        prop="buyInsurTxt"
 				        label="车辆易购保险"
 				        min-width="110">
 				      </el-table-column>
