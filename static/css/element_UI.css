@@ -2356,6 +2356,9 @@ overflow-x: hidden;
 .taskWatting .el-date-editor .el-range-separator{
   width: 10%;
 }
+.taskWatting .el-date-editor .el-range-input{
+  width: 35%;
+}
 .taskWatting.doTheTask .el-table th:nth-of-type(5){
   text-align: left;
 }
