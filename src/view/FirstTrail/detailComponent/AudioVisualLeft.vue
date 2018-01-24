@@ -44,16 +44,22 @@
         </el-collapse-item>
       </el-collapse>
       <!-- 按钮 : 缩略图 对比  -->
-      <el-button @click="SmallpicAlert" class="compareBtn">缩略图</el-button>
-      <el-button type="primary" @click="compBtnShow" class="checkDetailBtn">对比</el-button>
+      <div class="btn_wrap">
+        <el-button @click="SmallpicAlert" class="compareBtn">缩略图</el-button>
+        <el-button type="primary" @click="compBtnShow" class="checkDetailBtn">对比</el-button>
+      </div>
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:absolute; left:0; top:0;" :id='msg'>
-        <div id="aaaaa"> </div>
-        <img ref="Big_pic_ref" id='abcd' v-for="(val,key) in imgPath" style="width:auto;height:auto;" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath"
+        <!-- <div id="aaaaa"> </div> -->
+        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" style="width:auto;height:auto;" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath"
           v-if="key==smallPicInd" />
-        <!-- <div class="adk" v-show="imgShow"> </div> -->
+        <!-- <img ref="Big_pic_ref" v-for="(val,key) in imgPathDetail" style="width:auto;height:auto;" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath"
+          />  -->
+
+        <!-- v-if="key==smallPicInd" -->
+        <!-- <img ref="Big_pic_ref" id='abcd'  style="width:auto;height:auto;" :src="uurl" /> -->
       </div>
     </div>
     <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" v-show="perfBtn" @click="pre" @mouseenter='PerBtn'>
@@ -134,8 +140,10 @@
       return {
         perfBtn: false,
         judgeFlag: '',
-        opendImg: [true, true, true, true],
-        closedImg: [false, false, false, false],
+        opendImg: [],
+        closedImg: [],
+        uurl: '',
+        imgBaseUrl: 'http://10.1.26.6:8080',
         localInf: [], //初始化的时候，根据传进来的applyId获取初始化数据
         showListDiv: true,
         show: true,
@@ -146,6 +154,7 @@
         ListDetails: [],
         applyId: '', //入参
         imgPath: [],
+        imgPathDetail: [],
         // ----------------------------------
         activeNames: ['1', '2'], //查询弹出框 默认展开选项
         dataa: false,
@@ -220,6 +229,7 @@
         });
       },
       getChildrenList(id, ind, item) {
+        console.log("子节点")
         if (this.opendImg[ind] == false) {
           this.opendImg[ind] = true;
           this.closedImg[ind] = false;
@@ -246,73 +256,31 @@
           }
         });
       },
+      smallPic(ev, ind) {
+        console.log("smalllpic")
+        this.smallPicInd = ind;
+        this.SmallPicShow = false;
+        this.defaultBigPicCss();
+      },
       getImg(ind) {
         console.log('img2')
+        this.smallPicInd = 0;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
-        // this.defaultBigPicCss();
-        this.$nextTick(() => {
-          console.log("nextTick")
-          //  console.log(this.$refs.Big_pic_ref)
-          if (this.$refs.Big_pic_ref) {
-            var abcd = document.getElementById('abcd');
-            console.log(this.$refs.AudioVisual_Img_ref.offsetWidth)
-            console.log(abcd.offsetWidth)
-            //  console.log(this.$refs.AudioVisual_Img_ref)
-            var outsideH = this.$refs.AudioVisual_Img_ref.offsetHeight;
-            var widthReduce = this.$refs.AudioVisual_Img_ref.offsetWidth - this.$refs.Big_pic_ref[0].offsetWidth;
-            var heightReduce = this.$refs.AudioVisual_Img_ref.offsetHeight - this.$refs.Big_pic_ref[0].offsetHeight;
-            // console.log(widthReduce, '--------', heightReduce)
-            if (widthReduce < heightReduce) {
-              // console.log("宽")
-              this.$refs.Big_pic_ref[0].style.width = '100%'; //calc( 100% - 202px)
-              this.$refs.Big_pic_ref[0].style.height = 'auto'; //calc( 100% - 202px)
-            } else {
-              // console.log("高")
-              this.$refs.Big_pic_ref[0].style.width = 'auto';
-              this.$refs.Big_pic_ref[0].style.height = outsideH - 8 + "px";
-            }
-          }
-        })
-        // if (this.$refs.Big_pic_ref) {
-        // //   // console.log(this.$refs.Big_pic_ref[0].offsetWidth)
-        // //   // console.log(this.$refs.Big_pic_ref[0].offsetHeight)
-        // //   // console.log('----------------------------------------')
-        // //   // console.log(this.$refs.img_wrap.offsetWidth)          
-        // //   // console.log(this.$refs.img_wrap.offsetHeight)
-        // //   // // console.log('----------------------------------------')n
-        // //   // // console.log('最外侧', this.$refs.AudioVisual_Img_ref.offsetHeight)
-        // //   // // console.log(this.$refs.AudioVisual_Img_ref.offsetWidth)
-        //   var outsideH = this.$refs.AudioVisual_Img_ref.offsetHeight;
-        //   var widthReduce = this.$refs.AudioVisual_Img_ref.offsetWidth - this.$refs.Big_pic_ref[0].offsetWidth;
-        //   var heightReduce = this.$refs.AudioVisual_Img_ref.offsetHeight - this.$refs.Big_pic_ref[0].offsetHeight;
-        //   // console.log(widthReduce, '--------', heightReduce)
-
-        //   if (widthReduce < heightReduce) {
-        //     console.log("宽")
-        //     this.$refs.Big_pic_ref[0].style.width = '100%'; //calc( 100% - 202px)
-        //     this.$refs.Big_pic_ref[0].style.height = 'auto'; //calc( 100% - 202px)
-        //     console.log(this.$refs.Big_pic_ref[0].style.height)
-        //     console.log(this.$refs.Big_pic_ref[0].style.width)
-        //   } else {
-        //     console.log("高")
-        //     this.$refs.Big_pic_ref[0].style.width = 'auto';
-        //     this.$refs.Big_pic_ref[0].style.height = outsideH + "px"; //this.$refs.AudioVisual_Img_ref.offsetHeight
-        //     console.log(this.$refs.Big_pic_ref[0].style.height)
-        //     console.log(this.$refs.Big_pic_ref[0].style.width)
-        //   }
-        // }
+        this.defaultBigPicCss();
       },
       hid() {
         this.showListDiv = false;
         this.$refs.preBtn.style.left = 37 + 'px';
         this.$refs.PbtnIcons.style.left = 'calc( 50% - 97px)';
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
+        this.defaultBigPicCss();
       },
       showList() {
         this.showListDiv = true;
         this.$refs.preBtn.style.left = 223 + 'px';
         this.$refs.PbtnIcons.style.left = ' calc( 50% + 9px)';
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 214px)";
+        this.defaultBigPicCss();
       },
       SmallpicClose() {
         this.SmallPicShow = false;
@@ -322,34 +290,34 @@
       },
       pre() {
         this.smallPicInd--;
-        this.defaultBigPicCss();
         if (this.$refs.small_pic_ref) {
           if (this.smallPicInd < 0) {
             this.smallPicInd = this.$refs.small_pic_ref.length - 1;
           }
         }
+        this.defaultBigPicCss();
       },
       next() {
         this.smallPicInd++;
-        this.defaultBigPicCss();
         if (this.$refs.small_pic_ref) {
           if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
             this.smallPicInd = 0;
           }
         }
+        this.defaultBigPicCss();
       },
       larger() {
         if (this.$refs.Big_pic_ref) {
           this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
             100 + "px";
-          this.$refs.Big_pic_ref[0].style.width = "auto"
+          this.$refs.Big_pic_ref[0].style.width = "auto";
         }
       },
       smaller() {
         if (this.$refs.Big_pic_ref) {
           this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
             100 + "px";
-          this.$refs.Big_pic_ref[0].style.width = "auto"
+          this.$refs.Big_pic_ref[0].style.width = "auto";
         }
       },
       clockWise() {
@@ -379,35 +347,13 @@
       ChangeCss(ind) {
         this.changeSmallPicCss(ind);
       },
-      smallPic(ev, ind) {
-        console.log("smalllpic")
-        this.smallPicInd = ind;
-        var aaaaa = document.getElementById('aaaaa');
-        aaaaa.innerHTML = aaaaa.key;
-        console.log(aaaaa)
-        this.$refs.Big_pic_ref[0] = this.$refs.small_pic_ref[ind];
-        //  this.$nextTick(() => { })
-
-        this.SmallPicShow = false;
-        // console.log(this.$refs.small_pic_ref[ind])
-        // console.log( this.$refs.Big_pic_ref)
-
-        // console.log(this.smallPicInd)
-        this.defaultBigPicCss();
-      },
-      // 公共 
       defaultBigPicCss() {
         this.$nextTick(() => {
           console.log("nextTick")
           //  console.log(this.$refs.Big_pic_ref)
-
           if (this.$refs.Big_pic_ref) {
-            var abcd = document.getElementById('abcd');
-            console.log(abcd)
-            //  console.log(this.$refs.AudioVisual_Img_ref)
+            this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
             var outsideH = this.$refs.AudioVisual_Img_ref.offsetHeight;
-            // var widthReduce = this.$refs.AudioVisual_Img_ref.offsetWidth - this.$refs.Big_pic_ref[0].offsetWidth;
-            // var heightReduce = this.$refs.AudioVisual_Img_ref.offsetHeight - this.$refs.Big_pic_ref[0].offsetHeight;
             var widthReduce = this.$refs.AudioVisual_Img_ref.offsetWidth - this.$refs.Big_pic_ref[0].offsetWidth;
             var heightReduce = this.$refs.AudioVisual_Img_ref.offsetHeight - this.$refs.Big_pic_ref[0].offsetHeight;
             // console.log(widthReduce, '--------', heightReduce)
@@ -420,10 +366,11 @@
             } else {
               // console.log("高")
               this.$refs.Big_pic_ref[0].style.width = 'auto';
-              this.$refs.Big_pic_ref[0].style.height = outsideH - 8 + "px";
+              this.$refs.Big_pic_ref[0].style.height = (outsideH - 10) + "px";
               // console.log(this.$refs.Big_pic_ref[0].style.height)
               // console.log(this.$refs.Big_pic_ref[0].style.width)
             }
+
           }
         })
         // console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).height)
@@ -533,9 +480,14 @@
         // applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
         //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
       }).then(res => {
-        // console.log(res)
         if (res.statusCode == 200) {
           this.ListParent = res.data;
+          if (this.ListParent) {
+            for (var i = 0; i < this.ListParent.length; i++) {
+              this.opendImg[i] = true;
+              this.closedImg[i] = false;
+            }
+          }
         } else {
           this.$message.error(res.msg);
         }
@@ -586,11 +538,19 @@
     z-index: 2;
   }
   /* 对比-按钮 */
+  .btn_wrap{
+  /* background:red; */
+   position: absolute;
+    bottom: 18px;
+right:5px;
+    width:170px;
+    /* margin:0 auto; */
+}
 
   .compareBtn {
-    position: absolute;
+    /* position: absolute;
     bottom: 18px;
-    right: 98px;
+    right: 98px; */
     color: #0077ff;
     border: 1px solid #0077ff;
     background: #eef0f9;
@@ -598,9 +558,9 @@
   /* 缩略图-按钮 */
 
   .checkDetailBtn {
-    position: absolute;
+    /* position: absolute;
     bottom: 18px;
-    right: 17px;
+    right: 17px; */
   }
 
   .showHidIcons {
@@ -708,7 +668,7 @@
 
   .AudioVisualLeft .list_title span:nth-of-type(2),
   .AudioVisualLeft .list_title_div p span:nth-of-type(2) {
-      width: calc(100% - 125px );
+    width: calc(100% - 125px);
     border-right: none;
     border-left: none;
   }
@@ -822,15 +782,6 @@
   .posi_content {
     height: calc(100% - 48px);
     overflow: auto;
-  }
-  /* ---------------- */
-
-  .adk {
-    background: yellow;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
   }
 
 </style>

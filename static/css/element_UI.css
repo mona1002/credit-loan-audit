@@ -1130,7 +1130,12 @@ overflow-x: hidden;
   background: #eeeFFF;
   padding: 0;
 }
-
+/* 影响列表-左侧-list高度 */
+.AudioVisual .el-collapse,
+.AudioVisualLeft .el-collapse{
+    height: calc( 100% - 100px );
+     overflow: auto;
+}
 
 /* 影音列表-对比弹出层-右侧-折叠面板-title */
 
@@ -2253,6 +2258,12 @@ overflow-x: hidden;
 .creditApproval-class .el-form-item__label{
   padding: 0;
 }*/
+
+
+
+.el-table .cell, .el-table th div, .el-table--border td:first-child .cell, .el-table--border th:first-child .cell{
+  padding: 0;
+}
 
 /* 复议结论 */
 .ReconsiderationConclusion .el-dialog__header{

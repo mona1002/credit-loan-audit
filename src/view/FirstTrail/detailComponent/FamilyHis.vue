@@ -9,32 +9,34 @@
         <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">新增调查日志</span>
       </div>
-      <el-form-item label="客户名称：" class="item-column3">
-        {{familyData.custName}}
-      </el-form-item>
-      <el-form-item label="电话类型：" class="item-column3">
-        {{familyData.phoneTypeDes}}
-      </el-form-item>
-      <el-form-item label="电话号码：" class="item-column3">
-        {{familyData.phoneNum}}
-      </el-form-item>
-      <el-form-item label="来源：" class="item-column3">
-        {{familyData.sourceDes}}
-      </el-form-item>
-      <el-form-item label="接听情况：" class="item-column3">
-        {{familyData.answerDes}}
-      </el-form-item>
-      <el-form-item label="调查情况：" class="item-column3">
-        {{familyData.checkStageDes}}
-      </el-form-item>
-      <!-- <el-form-item label="其他来源说明：" class="item-column3" v-show="familyData.source=='02'">
+      <div style="margin-left:30px;">
+        <el-form-item label="客户名称：" class="item-column3">
+          {{familyData.custName}}
+        </el-form-item>
+        <el-form-item label="电话类型：" class="item-column3">
+          {{familyData.phoneTypeDes}}
+        </el-form-item>
+        <el-form-item label="电话号码：" class="item-column3">
+          {{familyData.phoneNum}}
+        </el-form-item>
+        <el-form-item label="来源：" class="item-column3">
+          {{familyData.sourceDes}}
+        </el-form-item>
+        <el-form-item label="接听情况：" class="item-column3">
+          {{familyData.answerDes}}
+        </el-form-item>
+        <el-form-item label="调查情况：" class="item-column3">
+          {{familyData.checkStageDes}}
+        </el-form-item>
+        <!-- <el-form-item label="其他来源说明：" class="item-column3" v-show="familyData.source=='02'">
         {{familyData.sourceDesc}}
       </el-form-item> -->
-      <el-tooltip class="item" effect="dark" :content="familyData.sourceDesc" placement="top">
-        <el-form-item label="其它来源情况说明：" class="item-column1" v-show="familyData.source=='02'">
-          {{familyData.sourceDesc}}
-        </el-form-item>
-      </el-tooltip>
+        <el-tooltip class="item" effect="dark" :content="familyData.sourceDesc" placement="top">
+          <el-form-item label="其它来源情况说明：" class="item-column1" v-show="familyData.source=='02'">
+            {{familyData.sourceDesc}}
+          </el-form-item>
+        </el-tooltip>
+      </div>
       <!-- <div class="address-title">
         录入家庭联系人电话调查信息
       </div> -->
@@ -42,8 +44,8 @@
         <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">录入家庭联系人电话调查信息</span>
       </div>
-      <div>
-        <el-form-item label="第三方查询信息" class="item-column1">
+      <div style="margin-left:30px;">
+        <el-form-item label="第三方查询信息：" class="item-column1">
           {{familyData.thirdResult}}
         </el-form-item>
         <el-form-item label="三方查询是否异常：" class="item-column3">
@@ -59,7 +61,7 @@
         </el-tooltip>
         <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="familyData.threeQueries!='1'">
         </el-form-item>
-        <el-form-item label="微信/支付宝是否异常：" class="item-column3">
+        <el-form-item label="微信/支付宝是否异常：" class="item-column3 line2-class">
           {{familyData.mobilepaymentDes}}
         </el-form-item>
         <!-- <el-form-item label="异常项说明：" class="item-column2" v-show="familyData.mobilepayment=='1'">
@@ -119,7 +121,6 @@
           {{familyData.maritalStatustxtDes}}
         </el-form-item>
         <el-form-item label="" class="item-column3 item-column3-null">
-          
         </el-form-item>
         <el-form-item label="核实居住地址：" class="item-column3">
           {{familyData.checkAddrDes}}
@@ -161,7 +162,7 @@
         <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="familyData.otherIncome!='00'">
         </el-form-item>
         <el-tooltip class="item" effect="dark" :content="familyData.conclusion" placement="top">
-          <el-form-item label="调查结果：" class="item-column2 item-column3-2">
+          <el-form-item label="调查结果：" class="item-column1 ">
             {{familyData.conclusion}}
           </el-form-item>
         </el-tooltip>
@@ -175,7 +176,7 @@ export default {
     return {
       // id:'',  // 住宅电话调查日志记录 id
       // phoneType:'', // 电话类型
-      familyData: '' // 请求返回的数据
+      // familyData: '' // 请求返回的数据
     }
   },
   props: ['familyData', 'isFull'],
