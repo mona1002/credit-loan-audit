@@ -472,7 +472,7 @@
 				rchildReasons:[],
 				options:[
 					{
-						value: 'reconsiderApp_apply',
+						value: 'reconsiderApp_commissioner',
           				label: '复议申请'
 					}
 				],

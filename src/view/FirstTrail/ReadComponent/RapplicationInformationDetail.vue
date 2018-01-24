@@ -439,7 +439,7 @@
 						<span>{{accepCusPrivate.peakMonthSaleAmt}}</span>
 					</li>
 					<li>
-						<label>平季销售额：</label>
+						<label>平季销售额[万元]：</label>
 						<span>{{accepCusPrivate.avgMonthSaleAmt}}</span>
 					</li>
 				</ul>
@@ -833,7 +833,7 @@
 				        >
 				      </el-table-column>
 				      <el-table-column
-				        prop="workAddr"
+				        prop="homeAddr"
 				        label="地址"
 				        min-width="200"
 				        show-overflow-tooltip>
@@ -1047,6 +1047,10 @@
 			    	//企业净利润率
 			    	if(this.accepCusPrivate.profitMargin != null){
 			        	this.accepCusPrivate.profitMargin = this.formatNumber(this.accepCusPrivate.profitMargin,2,0)+"%";	
+			    	};
+			    	//营业面积
+			    	if(this.accepCusPrivate.busiArea != null){
+			        	this.accepCusPrivate.busiArea = this.formatNumber(this.accepCusPrivate.busiArea,2,0)+"㎡";	
 			    	};
 		    	};
 		        /*您的工作信息*/
