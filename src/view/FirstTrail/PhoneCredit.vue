@@ -569,7 +569,6 @@ export default {
     handleNodeClick(data) {
       console.log('handleNodeClick')
       if (this.isInterFlag == true || this.SplitS != 'right' || this.hisShow) {
-        // 内匹查看详情
         // 点击每条tree数据的事件
         this.treeId = data.id;
         if (data.id.length > 2) {
