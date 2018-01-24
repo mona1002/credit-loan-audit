@@ -1241,7 +1241,9 @@ overflow-x: hidden;
 }
 
 /* 反欺诈-案件编号列表页+反欺诈规则设定 */
-
+.AntiCaseNum .cell:hover{
+  cursor: default;
+}
 .AntiRules .el-input,
 .AntiCaseNum .el-input {
   /* display: inline-block; */
@@ -1332,7 +1334,7 @@ overflow-x: hidden;
 .AntiCaseNum .el-date-editor .el-range-separator {
   padding: 0;
   line-height: 32px;
-  width: 45px;
+  width: 10%;
   color: #2d2f33;
   text-align: center;}
   .AntiCaseNum .el-date-editor .el-range-input{
