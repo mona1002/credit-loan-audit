@@ -31,6 +31,10 @@ height: 40px;
    /* line-height: 23px; */
    /* text-align: center; */
  }
+/* 信审审批结论轨迹 th全部居中 */
+/* .ApprovalConclusion .el-table th.is-center {
+   text-align: center;
+ } */
 
  .FinanceInformation .el-table,
  .ApprovalConclusion .el-table {
@@ -1091,7 +1095,7 @@ height: 40px;
 
  .AntiRules .redact .el-input__inner,
  .AntiCaseNum .redact .el-input__inner,
- .HistoryTask .redact .el-input__inner{
+ .HistoryTask .redact .el-input__inner {
    width: 200px;
  }
  /* 文本域宽度 */
@@ -1118,10 +1122,9 @@ height: 40px;
  }
 
  .AntiRules .el-table__body-wrapper,
- .AntiCaseNum .el-table__body-wrapper{
+ .AntiCaseNum .el-table__body-wrapper {
    overflow-x: hidden
  }
- 
  /* 整个弹框宽度 */
 
  .AntiRules .redact .el-dialog,
@@ -1153,13 +1156,10 @@ height: 40px;
  }
 
  .AntiCaseNum .el-date-editor .el-range-input,
- .HistoryTask .el-date-editor .el-range-input{
+ .HistoryTask .el-date-editor .el-range-input {
    width: 35%;
  }
  /* 复议、反欺诈-历史任务 */
-
-
- 
  /* 借款人资料表格内容居中 */
 
  .borrowerInformationSetail .el-table th {

@@ -830,8 +830,6 @@
     },
     methods: {
       formatSC() {
-        this.FormData.fbalance ? this.FormData.fbalance = this.formatNumber(this.FormData.fbalance, 2, 0) : this.FormData
-          .fbalance;
         this.FormData.iloanAmt ? this.FormData.iloanAmt = this.formatNumber(this.FormData.iloanAmt, 2, 0) : this.FormData
           .iloanAmt;
         this.FormData.avgsalaryamt ? this.FormData.avgsalaryamt = this.formatNumber(this.FormData.avgsalaryamt, 2, 0) :
@@ -852,12 +850,10 @@
           this.FormData.parentIncome;
         this.FormData.fconsumption ? this.FormData.fconsumption = this.formatNumber(this.FormData.fconsumption, 2, 0) :
           this.FormData.fconsumption;
-        this.FormData.selfpremisesArea = this.FormData.selfpremisesArea.slice(0, -2);
-        this.FormData.selfhasProportion = this.FormData.selfhasProportion.slice(0, -1);
-        this.checkData.selfpremisesArea ? this.checkData.selfpremisesArea = this.formatNumber(this.checkData.selfpremisesArea,
-          2, 0) + 'm²' : this.checkData.selfpremisesArea;
-        this.checkData.selfhasProportion ? this.checkData.selfhasProportion = this.formatNumber(this.checkData.selfhasProportion,
-          2, 0) + '%' : this.checkData.selfhasProportion;
+        this.FormData.selfpremisesArea ? this.FormData.selfpremisesArea = this.formatNumber(this.FormData.selfpremisesArea,
+          2, 0) + 'm²' : this.FormData.selfpremisesArea;
+        this.FormData.selfhasProportion ? this.FormData.selfhasProportion = this.formatNumber(this.FormData.selfhasProportion,
+          2, 0) + '%' : this.FormData.selfhasProportion;
       },
       formatNumber(num, cent, isThousand) {
         num = num.toString().replace(/\$|\,/g, '');
@@ -901,15 +897,16 @@
         }
       },
       AreaNPercent() {
-        if (this.checkData.selfpremisesArea) {
-          this.checkData.selfpremisesArea += "m²";
+        if (this.FormData.selfpremisesArea) {
+          
+          this.FormData.selfpremisesArea += "m²";
         } else {
-          this.checkData.selfpremisesArea = "";
+          this.FormData.selfpremisesArea = "";
         }
-        if (this.checkData.selfhasProportion) {
-          this.checkData.selfhasProportion += "%";
+        if (this.FormData.selfhasProportion) {
+          this.FormData.selfhasProportion += "%";
         } else {
-          this.checkData.selfhasProportion = "";
+          this.FormData.selfhasProportion = "";
         }
       },
       mountJ(code, val) {
@@ -964,6 +961,7 @@
             break;
           case 16:
             val == 0 || val == null ? this.Children.ChildrenOrNot = false : this.Children.ChildrenOrNot = true;
+            // console.log(this.Children.ChildrenOrNot )
             break;
           case 17:
             val == 0 || val == null ? this.Children.PayAlimony = false : this.Children.PayAlimony = true;
@@ -1002,10 +1000,11 @@
         if (res.statusCode == 200) {
           console.log(res.data)
           this.FormData = res.data;
-          this.AreaNPercent();
           this.formatSC();
+          // this.AreaNPercent();
           // this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, '')
-           this.FormData.aaddress ? this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, ''):this.FormData.aaddress ;
+          this.FormData.aaddress ? this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, '') : this.FormData
+            .aaddress;
           this.mountJ(0, res.data.wbeexEcuted);
           this.mountJ(1, res.data.wnetHirecom);
           this.mountJ(2, res.data.wnetEcutedBrea);

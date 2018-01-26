@@ -2400,9 +2400,9 @@
             this.checkData.applyId = this.getParams.applyId;
             this.mountM();
             this.AreaNPercent();
-            console.log(this.checkData.hirecomKind)
-            console.log(this.checkData.hirecomKindCode)
-            console.log(this.checkData.selfcompanyScale)
+            // console.log(this.checkData.hirecomKind)
+            // console.log(this.checkData.hirecomKindCode)
+            // console.log(this.checkData.selfcompanyScale)
             // console.log(this.checkData.hirecomKind)
               this.checkData.aaddress?this.checkData.aaddress=this.checkData.aaddress.replace(/null/g,''):  this.checkData.aaddress;
             this.mountJ(0, res.data.wbeexEcuted);
@@ -2478,7 +2478,7 @@
       // 所属行业 
       this.get("/credit/industry", {}).then(res => {
         this.hirecomKind = res.data;
-        console.log(this.hirecomKind)
+        // console.log(this.hirecomKind)
       })
       this.Pwidth = document.getElementsByClassName("el-input")
       this.Txawidth = document.getElementsByClassName("el-textarea")

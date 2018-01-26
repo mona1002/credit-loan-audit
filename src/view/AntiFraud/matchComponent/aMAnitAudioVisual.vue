@@ -291,9 +291,12 @@
             if (event.wheelDelta < 0) {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
                 100 + "px";
+                 this.$refs.Big_pic_ref[0].style.width='auto';
             } else {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
                 100 + "px";
+                 this.$refs.Big_pic_ref[0].style.width='auto';
+                
             }
           };
           this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => {
@@ -302,10 +305,12 @@
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
                   .height) -
                 100 + "px";
+                 this.$refs.Big_pic_ref[0].style.width='auto';
             } else {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
                   .height) +
                 100 + "px";
+                 this.$refs.Big_pic_ref[0].style.width='auto';
             }
           });
         }
