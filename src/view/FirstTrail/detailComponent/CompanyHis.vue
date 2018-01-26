@@ -67,6 +67,10 @@
             {{comData.answertxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column3 item-column3-null" v-show="comData.answerIdentity!='00'">
+        </el-form-item>
+        <el-form-item label="" class="item-column3 item-column3-null" v-show="comData.answerIdentity!='00'">
+        </el-form-item>
         <el-form-item label="核对单位及工作信息：" class="item-column3 line2-class">
           {{comData.companyDes}}
         </el-form-item>
@@ -78,9 +82,14 @@
             {{comData.companytxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column3 item-column3-null" v-show="comData.company!='01'">
+        </el-form-item>
+        <el-form-item label="" class="item-column3 item-column3-null" v-show="comData.company!='01'">
+        </el-form-item>
         <el-form-item label="核对工作时间：" class="item-column3">
           {{comData.checkTimeDes}}
         </el-form-item>
+        
         <!-- <el-form-item label="说明：" class="item-column2" v-shwo="comData.checkTime=='00'">
           {{comData.companytxt}}
         </el-form-item> -->
@@ -89,6 +98,10 @@
             {{comData.companytxt}}
           </el-form-item>
         </el-tooltip>
+        <el-form-item label="" class="item-column3 item-column3-null" v-show="comData.company!='01'">
+        </el-form-item>
+        <el-form-item label="" class="item-column3 item-column3-null" v-show="comData.company!='01'">
+        </el-form-item>
         <el-form-item label="核对收入：" class="item-column3">
           {{comData.checkIncomeDes}}
         </el-form-item>
@@ -100,6 +113,7 @@
             {{comData.checkIncometxt}}
           </el-form-item>
         </el-tooltip>
+
         <el-tooltip class="item" effect="dark" :content="comData.checkIncometxt" placement="top">
           <el-form-item label="" class="item-column2 item-column3-null" v-show="comData.checkIncome!='00'">
             {{comData.checkIncometxt}}
@@ -117,11 +131,11 @@
           {{comData.payrollSituationtxt}}
         </el-form-item> -->
         <el-tooltip class="item" effect="dark" :content="comData.payrollSituationtxt" placement="top">
-          <el-form-item label="说明：" class="item-column2 " v-show="comData.checkIncome=='00'">
+          <el-form-item label="说明：" class="item-column2 " v-show="comData.payrollSituation=='00'">
             {{comData.payrollSituationtxt}}
           </el-form-item>
         </el-tooltip>
-        <el-form-item label="" class="item-column3-null" v-show="comData.checkIncome!='00'">
+        <el-form-item label="" class="item-column3-null" v-show="comData.payrollSituation!='00'">
         </el-form-item>
         <el-form-item label="是否缴纳养老保险：" class="item-column3">
           {{comData.pensionInsuranceDes}}

@@ -74,7 +74,7 @@
   // import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配查看 --》 aV
   import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息  
   import AborrowerInformationDetail from "../AntiFraud/components/AborrowerInformationDetail.vue"; //借款人资料
-  import FMCreditForm from "../FinalTrial/FinalMatchComponent/FMCreditForm.vue"; //信审表-与内部匹配打开的是同一个页面
+  import FMCreditForm from "../AntiFraud/matchComponent/AntiCreditForm.vue"; //信审表-与内部匹配打开的是同一个页面
   import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信
   import ReconsiderApply from './ReconsiderComponents/ReconsiderApply.vue' //复议申请
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf.vue' //反欺诈结论

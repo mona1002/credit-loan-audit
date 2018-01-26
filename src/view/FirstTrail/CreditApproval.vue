@@ -595,11 +595,15 @@ export default {
       this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
       // 挂起 任务id
       this.taskId = this.taskInWaitting.taskId;
+      // 流程 实例id
+      this.processInstanceId = this.taskInWaitting.processInstanceId;
 
     } else if (this.judgeFlag == '02') { // 终审取终审  taskId
       this.FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
       // 挂起 任务id
       this.taskId = this.FtaskInWaitting.taskId;
+      // 流程 实例id
+      this.processInstanceId = this.FtaskInWaitting.processInstanceId;
     }
     console.log(this.taskId);
 
@@ -739,11 +743,15 @@ export default {
       });
     },
     coverFn(flag) {
+      // 清空原因
+      this.mainReason = '';
+      this.secondaryReason = '';
       // 页面点击按钮出现 的 对应 弹窗
       // 统一处理    回退 02 ,拒绝 01, 放弃  07, 审批 03, 审批结论 spjl, 流程轨迹 lcgj
       this.coverShow = true;
       switch (flag) {
         case '02':
+
           console.log('020202020202020202')
           console.log(this.showFlag);
           this.showFlag = '02';
@@ -876,8 +884,10 @@ export default {
           console.log('lclclcllclclclclcllclcl')
           this.showFlag = 'lcgj';
           // 取本地的 流程模版id
-          this.processTemplateId = JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
-          console.log(this.processTemplateId);
+          // this.processTemplateId = JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
+          // console.log(this.processTemplateId);
+          // 本地  流程实例id
+
           // 任务状态
           this.taskStatus = JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
           this.lcgjLoading = true;
@@ -940,31 +950,55 @@ export default {
           // this.taskId = res.data.taskId; // 任务id
           // opinionFlag: this.opinionFlag, // 任务类型  初审 00 
 
-          // 取到  产品 id 产品 code , 从请求回来的列表数据中找到对应的产品名
-          if (this.proId && this.products) {
-            console.log('遍历产品')
-            console.log(this.proId);
-            console.log(this.products.length);
+          // 根据产品id  取到  批准期限
+          this.get('/credit/ploanTermByPro?proId=' + this.proId).then(res => {
+            console.log(res.data);
+            console.log('// 根据产品id  取到  批准期限')
+            if (res.statusCode == '200') {
+              this.ploanTerms = res.data;
+              for (var i = 0; i < this.ploanTerms.length; i++) {
+                console.log(this.ploanTerm);
+                console.log(this.ploanTerms[i].appDuration)
+                if (this.ploanTerms[i].appDuration == this.ploanTerm) {
+                  // 批准期限
+                  this.ploanTerm = this.ploanTerms[i].appDuration;
+                  // 综合费率
+                  this.synthesisRateM = this.ploanTerms[i].synthesisRateM;
+                  // 借款利率
+                  this.loanRateYr = this.ploanTerms[i].loanRateYr;
+                  // 还款方式  
+                  this.repayWay = this.ploanTerms[i].repayWay;
+                  console.log('批准期限', this.ploanTerm, '综合费率', this.synthesisRateM, '借款利率', this.loanRateYr, '还款方式', this.repayWay)
+                  // 取到  产品 id 产品 code , 从请求回来的列表数据中找到对应的产品名
+                  if (this.proId && this.products) {
+                    console.log('遍历产品')
+                    console.log(this.proId);
+                    console.log(this.products.length);
 
-            for (var i = 0; i < this.products.length; i++) {
-              console.log(this.products[i]);
-              console.log('ttttttt', this.proId);
-              console.log('xxxxxxx', this.products[i].id);
-              if (this.proId == this.products[i].id) {
+                    for (var i = 0; i < this.products.length; i++) {
+                      console.log(this.products[i]);
+                      console.log('ttttttt', this.proId);
+                      console.log('xxxxxxx', this.products[i].id);
+                      if (this.proId == this.products[i].id) {
 
-                this.proName = this.products[i].proName;
+                        this.proName = this.products[i].proName;
 
-                console.log(this.products[i].proName, '++++++++++++', this.proName);
-                // 最大
-                this.maxAmounnt = this.products[i].maxAmounnt;
-                // 最小
-                this.minAmount = this.products[i].minAmount;
-
-                return;
-
+                        console.log(this.products[i].proName, '++++++++++++', this.proName);
+                        // 最大
+                        this.maxAmounnt = this.products[i].maxAmounnt;
+                        // 最小
+                        this.minAmount = this.products[i].minAmount;
+                        this.calculateByAuditInfo();
+                      }
+                    }
+                  }
+                }
               }
             }
-          }
+
+          })
+
+
         }
       })
     },
@@ -1413,7 +1447,7 @@ export default {
       //   }
       // })
 
-      this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processTemplateId)
+      this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processInstanceId)
         .then(res => {
           console.log(res);
           if (res.statusCode == '200') {
@@ -1445,6 +1479,7 @@ export default {
       var id = val.id; // 主原因的 id
       // this.reasonName = val.reasonName;
       this.mainReason = val.reasonName;
+      this.secondaryReason = '';
       this.mainId = val.id;
       // 在主原因改变的时候请求子原因
       this.getReason('second', this.mainId);
@@ -1676,10 +1711,14 @@ export default {
     // 批准期限
     ploanTerm: function() {
       console.log('批准期限');
+      console.log(this.judgeFlag)
       console.log(this.ploanTerm);
       // 计算 审批记录数据
-      if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0)
+
+      if (this.judgeFlag == '01' && this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0) {
+        console.log('初审', this.judgeFlag)
         this.calculateByAuditInfo();
+      }
     },
     // // // 批准金额
     // ploanAmt: function() {
@@ -1695,7 +1734,7 @@ export default {
     // 产品 id
     proId: function() {
       console.log('产品id');
-      if (this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.verIncome.length > 0 && this.eachTermamt.length > 0)
+      if (this.judgeFlag == '01' && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.verIncome.length > 0 && this.eachTermamt.length > 0)
         this.calculateByAuditInfo();
     }
   }
@@ -1716,6 +1755,9 @@ export default {
   /*margin-top: 20px;*/
   overflow: hidden;
 }
+
+
+
 
 
 
@@ -1807,6 +1849,9 @@ export default {
 
 
 
+
+
+
 /* 按钮集合控件 */
 
 .creditApproval-class .btn-div {
@@ -1814,6 +1859,9 @@ export default {
   width: 80%;
   float: left;
 }
+
+
+
 
 
 
@@ -1860,6 +1908,9 @@ export default {
   color: #333;
   border: none;
 }
+
+
+
 
 
 
@@ -1959,6 +2010,9 @@ export default {
 
 
 
+
+
+
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -1966,6 +2020,9 @@ export default {
   float: left;
   margin: 0;
 }
+
+
+
 
 
 
@@ -2016,6 +2073,9 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
+
+
 
 
 
@@ -2143,11 +2203,17 @@ export default {
 
 
 
+
+
+
 /* textarea */
 
 .creditApproval-class .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
+
+
 
 
 
@@ -2249,6 +2315,9 @@ export default {
 
 
 
+
+
+
 /* 审批 表单 */
 
 .creditApproval-class .appro-form {
@@ -2299,6 +2368,9 @@ export default {
 
 
 
+
+
+
 /*.creditApproval-class .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -2306,6 +2378,9 @@ export default {
 .creditApproval-class .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
+
+
 
 
 
@@ -2400,6 +2475,9 @@ export default {
 
 
 
+
+
+
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -2407,6 +2485,9 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
+
+
 
 
 
@@ -2518,6 +2599,9 @@ export default {
 
 
 
+
+
+
 /* 申请信息 */
 
 .creditApproval-class .info .el-form-item__content {
@@ -2527,6 +2611,9 @@ export default {
 .creditApproval-class .info .el-form-item__label {
   width: 120px;
 }
+
+
+
 
 
 
@@ -2609,11 +2696,17 @@ export default {
 
 
 
+
+
+
 /* 有编辑框的 提示信息*/
 
 .creditApproval-class .back-form .back-form-edit-li {
   margin-top: 25px !important;
 }
+
+
+
 
 
 
@@ -2705,6 +2798,9 @@ export default {
 
 
 
+
+
+
 /*回退*/
 
 .creditApproval-class .el-icon-check-back {
@@ -2717,6 +2813,9 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
 
 
 
@@ -2805,6 +2904,9 @@ export default {
 
 
 
+
+
+
 /*放弃*/
 
 .creditApproval-class .el-icon-check-giveup {
@@ -2817,6 +2919,9 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
 
 
 
@@ -2905,6 +3010,9 @@ export default {
 
 
 
+
+
+
 /*发起反欺诈*/
 
 .creditApproval-class .el-icon-check-start {
@@ -2917,6 +3025,9 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
 
 
 
@@ -3005,6 +3116,9 @@ export default {
 
 
 
+
+
+
 /*流程轨迹*/
 
 .creditApproval-class .el-icon-check-lcgj {
@@ -3055,6 +3169,9 @@ export default {
 
 
 
+
+
+
 /* 折叠面板头部背景色和icon */
 
 .creditApproval-class .icon_hat {
@@ -3065,6 +3182,9 @@ export default {
 .creditApproval-class .headFont {
   font-size: 16px;
 }
+
+
+
 
 
 
@@ -3155,11 +3275,17 @@ export default {
 
 
 
+
+
+
 /* 信审审批  - 审批  编辑部分 */
 
 .creditApproval-class .appro-form .back-form-edit-li .el-form-item__label {
   /*width: 120px;*/
 }
+
+
+
 
 
 
@@ -3256,11 +3382,17 @@ export default {
 
 
 
+
+
+
 /* 两行文字 样式 */
 
 .creditApproval-class .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
+
+
 
 
 
@@ -3341,6 +3473,9 @@ export default {
 
 
 
+
+
+
 /* label 文字样式 */
 
 .creditApproval-class .huitui-class .el-form-item__label {
@@ -3348,6 +3483,9 @@ export default {
 }
 
 .creditApproval-class .jujue-class {}
+
+
+
 
 
 
@@ -3449,11 +3587,17 @@ export default {
 
 
 
+
+
+
 /* 审批信息  */
 
 .creditApproval-class .el-form-item__content .el-select .el-input {
   width: 100%;
 }
+
+
+
 
 
 
