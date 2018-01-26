@@ -212,11 +212,11 @@
 					</li>
 				</ul>
 				<ul>
-					<li style="width:66.6%">
-						<label>收入来源：</label>
-						<div class="channel2">
-							{{accepCusBasicInfo.incomeSource}}<!-- </textarea><textarea> -->
-						</div>
+					<li class="province" style="width:66.6%">
+						<label class="ellipsis">收入来源：</label>
+						<el-tooltip class="item" effect="dark" :content="accepCusBasicInfo.incomeSource" :disabled="accepCusBasicInfo.incomeSource==null" placement="top-start">
+					      <div class="textBox">{{accepCusBasicInfo.incomeSource}}</div>
+					    </el-tooltip>
 					</li>
 					<li>
 						<label>借款人职业情况：</label>
@@ -224,11 +224,11 @@
 					</li>
 				</ul>
 				<ul>
-					<li style="width:66.6%">
-						<label>其他收入：</label>
-						<div class="channel2">
-							{{accepCusBasicInfo.otherIncome}}<!-- <textarea></textarea> -->
-						</div>
+					<li class="province" style="width:66.6%">
+						<label class="ellipsis">其他收入：</label>
+						<el-tooltip class="item" effect="dark" :content="accepCusBasicInfo.otherIncome" :disabled="accepCusBasicInfo.otherIncome==null" placement="top-start">
+					      <div class="textBox">{{accepCusBasicInfo.otherIncome}}</div>
+					    </el-tooltip>
 					</li>
 					<li></li>
 				</ul>

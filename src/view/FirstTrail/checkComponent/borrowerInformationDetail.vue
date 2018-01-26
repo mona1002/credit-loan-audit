@@ -63,7 +63,7 @@
 				        >
 				      </el-table-column>
 				      <el-table-column
-				        prop="mortgageStatus"
+				        prop="mortgageStatusTxt"
 				        label="抵押状况"
 				        min-width="100">
 				      </el-table-column>
