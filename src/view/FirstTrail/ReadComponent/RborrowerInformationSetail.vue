@@ -144,7 +144,7 @@
 				      </el-table-column>
 				      <el-table-column
 				        prop="buyInsur"
-				        label="车辆易购保险"
+				        label="车辆已购保险"
 				        min-width="110">
 				      </el-table-column>
 				      <el-table-column
