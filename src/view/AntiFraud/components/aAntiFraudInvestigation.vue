@@ -344,9 +344,9 @@
 			/*获取 反欺诈申请ID*/
 			this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
 			if(this.judgeFlag.flag == '03'){
-				this.appinfoId=JSON.parse(localStorage.getItem('AntitaskInWaitting')).applyId;//反欺诈专员
+				this.appinfoId=JSON.parse(localStorage.getItem('AntitaskInWaitting')).businessId;//反欺诈专员
 			}else if (this.judgeFlag.flag == '04') {
-		        this.appinfoId = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")).applyId; //反欺诈主管
+		        this.appinfoId = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")).businessId; //反欺诈主管
 		    }
 
 			this.request(this.appinfoId);

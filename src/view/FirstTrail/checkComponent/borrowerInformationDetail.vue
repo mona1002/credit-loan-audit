@@ -53,7 +53,7 @@
 				      </el-table-column>
 				      <el-table-column
 				        prop="equityRatio"
-				        label="产权比例"
+				        label="产权比例[%]"
 				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
@@ -703,11 +703,11 @@
 				        };
 				        //产权比例 保留两位小数点+%
 				        if(this.borestateList[i].equityRatio != null){
-				        	this.borestateList[i].equityRatio = this.formatNumber(this.borestateList[i].equityRatio,2,0).replace(/,/g,'')+'%';
+				        	this.borestateList[i].equityRatio = this.formatNumber(this.borestateList[i].equityRatio,2,0).replace(/,/g,'');
 				        };
 				        //建筑面积
 			        	if(this.borestateList[i].coveredArea != null){
-			        		this.borestateList[i].coveredArea = this.formatNumber(this.borestateList[i].coveredArea,2,0).replace(/,/g,'')+'㎡';
+			        		this.borestateList[i].coveredArea = this.formatNumber(this.borestateList[i].coveredArea,2,0).replace(/,/g,'');
 			        	};
 
 			        }

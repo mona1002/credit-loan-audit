@@ -212,6 +212,7 @@
 		        applicationDate:'',
 		        //本环节处理时间 时间 数组
 		        processingTime:'',
+		        judge:'',
 			}
 		},
 		components: {
@@ -349,8 +350,12 @@
 			goDetail(row, event, column) {
 				console.log(row);
 					// this.$router.push({path:'/SplitScreen',query:row});
-		      this.$router.push({path:'/SplitScreen'});
+		      this.$router.push({path:'/TaskManagementSplit'});
 		      localStorage.setItem("TtaskInWaitting",JSON.stringify(row));
+		      this.judge = {
+		      	flag:'07'
+		      };
+		      localStorage.setItem("TtaskInWaitting",JSON.stringify(judge));
 		    },
 		    handleSizeChange(val) {
 		      console.log('每页 ${val} 条');
