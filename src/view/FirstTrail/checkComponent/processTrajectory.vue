@@ -95,6 +95,10 @@
 		        this.processInstanceId = JSON.parse(localStorage.getItem("taskInWaitting")).processInstanceId; // 初审
 		    } else if (this.judgeFlag.flag == '02') {
 		        this.processInstanceId = JSON.parse(localStorage.getItem("FtaskInWaitting")).processInstanceId //终审
+		    } else if (this.judgeFlag.flag == '07') {
+		        this.processInstanceId = JSON.parse(localStorage.getItem("TtaskInWaitting")).processInstanceId //终审
+		    } else if (this.judgeFlag.flag == '08') {
+		        this.processInstanceId = JSON.parse(localStorage.getItem("TtaskInWaitting")).processInstanceId //终审
 		    }
 
 			//this.processInstanceId=JSON.parse(localStorage.getItem('taskInWaitting')).processInstanceId;
@@ -105,7 +109,7 @@
 
 			},
 			request(){
-				this.post('/creauditInfo/getProcessTraceList', {
+				this.get('/creauditInfo/getProcessTraceList', {
 			        processInstanceId: this.processInstanceId
 			      }).then(res => {
 			        console.log(res);
