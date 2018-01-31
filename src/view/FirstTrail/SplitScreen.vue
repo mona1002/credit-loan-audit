@@ -266,7 +266,6 @@
       }
     },
     mounted() {
-      console.log("分屏");
       this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.applyId,
