@@ -343,7 +343,7 @@
             <li>
               <i class="hint"> </i>
               <label class="WorkInfs_left_label">所属行业：</label>
-              <el-select v-model="checkData.hirecomKind" placeholder="请选择">
+              <el-select ref='industry' v-model="checkData.hirecomKindCode" placeholder="请选择">
                 <el-option v-for="item in	hirecomKind" :key="item.value" :label="item.text" :value="item.code">
                 </el-option>
               </el-select>
@@ -1940,8 +1940,6 @@
         }
       },
       setProvince(item) {
-        console.log(this.checkData.workProvinceName)
-        console.log(item)
         this.checkData.workProvince = item;
         this.checkData.workCity = "";
         this.checkData.workCityName = "";
@@ -1949,7 +1947,6 @@
         this.checkData.workCountyName = "";
       },
       getCity() {
-        console.log("省：", this.checkData.workProvince)
         this.get("/credit/queryCityCounty", {
           parentCode: this.checkData.workProvince,
         }).then(res => {
@@ -1964,7 +1961,6 @@
         })
       },
       setCity(item) {
-        console.log(item)
         this.checkData.workCity = item;
         console.log("市", this.checkData.workCity)
       },
@@ -1982,7 +1978,6 @@
       },
       setCountry(item) {
         this.checkData.workCounty = item;
-        console.log(this.checkData)
       },
       makeSureBtn() {
         this.Confirm = true;
@@ -1994,9 +1989,7 @@
         this.Confirm = false;
       },
       CFsave() {
-        console.log("保存修改")
-        // console.log(this.checkData.workProvinceName)
-        // console.log(this.checkData.workProvince)
+        // console.log("保存修改")
         this.$validator.validateAll().then((result) => {
           if (result) {
             this.checkData.selfpremisesArea = this.acreage;
@@ -2005,6 +1998,7 @@
             this.checkData.workProvinceName = this.$refs.province.selectedLabel;
             this.checkData.workCityName = this.$refs.city.selectedLabel;
             this.checkData.workCountyName = this.$refs.country.selectedLabel;
+        this.checkData.hirecomKind=this.$refs.industry.selectedLabel;            
             this.btnnn();
             this.post("/creauditInfo/addOrUpdate", this.checkData).then(res => {
               if (res.statusCode == 200) {
@@ -2149,7 +2143,6 @@
       //   this.Percent = this.checkData.selfhasProportion.slice(0, -1);
       // },
       businessSC(el) {
-        console.log(el)
         switch (el) {
           case "营业面积":
             if (this.checkData.selfpremisesArea.indexOf('m²')!=-1) {
@@ -2400,10 +2393,6 @@
             this.checkData.applyId = this.getParams.applyId;
             this.mountM();
             this.AreaNPercent();
-            // console.log(this.checkData.hirecomKind)
-            // console.log(this.checkData.hirecomKindCode)
-            // console.log(this.checkData.selfcompanyScale)
-            // console.log(this.checkData.hirecomKind)
               this.checkData.aaddress?this.checkData.aaddress=this.checkData.aaddress.replace(/null/g,''):  this.checkData.aaddress;
             this.mountJ(0, res.data.wbeexEcuted);
             this.mountJ(1, res.data.wnetHirecom);
@@ -2473,12 +2462,10 @@
       // 省    
       this.get("/credit/queryProvince", {}).then(res => {
         this.hirecomAddress = res.data;
-        // console.log(res);
       });
       // 所属行业 
       this.get("/credit/industry", {}).then(res => {
         this.hirecomKind = res.data;
-        // console.log(this.hirecomKind)
       })
       this.Pwidth = document.getElementsByClassName("el-input")
       this.Txawidth = document.getElementsByClassName("el-textarea")
@@ -2486,7 +2473,6 @@
       this.inputWidth = document.getElementsByClassName("specialInput")
       this.comaddressb = document.getElementsByClassName("comaddressb")
       this.Alertbtn = document.getElementsByClassName("btn")
-      // console.log(this.Txawidth)
       if (this.myWatch) {
         this.ElInputStyle(this.myWatch)
       } else {

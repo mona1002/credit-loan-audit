@@ -6,15 +6,33 @@
       <div class="main_left">
         <h2>
           <i class="el-icon-edit"> </i>常用 </h2>
-          <router-link to="/processMoni?creditApp00"><el-button type="primary">信审未分配监控</el-button></router-link>
-          <router-link to="/processMoni?creditApp01"><el-button type="primary">信审已分配监控</el-button></router-link>
-          <router-link to="/processMoni?creditApp03"><el-button type="primary">信审已完成监控</el-button></router-link>
-          <router-link to="/processMoni?reconsiderApp00"><el-button type="primary">复议未分配监控</el-button></router-link>
-          <router-link to="/processMoni?reconsiderApp01"><el-button type="primary">复议已分配监控</el-button></router-link>
-          <router-link to="/processMoni?reconsiderApp03"><el-button type="primary">复议已完成监控</el-button></router-link>
-          <router-link to="/processMoni?antiFraudApp00"><el-button type="primary">反欺诈未分配监控</el-button></router-link>
-          <router-link to="/processMoni?antiFraudApp01"><el-button type="primary">反欺诈已分配监控</el-button></router-link>
-          <router-link to="/processMoni?antiFraudApp03"><el-button type="primary">反欺诈已完成监控</el-button></router-link>
+        <router-link to="/processMoni?creditApp00">
+          <el-button type="primary">信审未分配监控</el-button>
+        </router-link>
+        <router-link to="/processMoni?creditApp01">
+          <el-button type="primary">信审已分配监控</el-button>
+        </router-link>
+        <router-link to="/processMoni?creditApp03">
+          <el-button type="primary">信审已完成监控</el-button>
+        </router-link>
+        <router-link to="/processMoni?reconsiderApp00">
+          <el-button type="primary">复议未分配监控</el-button>
+        </router-link>
+        <router-link to="/processMoni?reconsiderApp01">
+          <el-button type="primary">复议已分配监控</el-button>
+        </router-link>
+        <router-link to="/processMoni?reconsiderApp03">
+          <el-button type="primary">复议已完成监控</el-button>
+        </router-link>
+        <router-link to="/processMoni?antiFraudApp00">
+          <el-button type="primary">反欺诈未分配监控</el-button>
+        </router-link>
+        <router-link to="/processMoni?antiFraudApp01">
+          <el-button type="primary">反欺诈已分配监控</el-button>
+        </router-link>
+        <router-link to="/processMoni?antiFraudApp03">
+          <el-button type="primary">反欺诈已完成监控</el-button>
+        </router-link>
       </div>
       <div class="main_right">
         <!-- 中间 -->
@@ -159,6 +177,10 @@
           this.$router.push({
             path: '/taskInWaitting',
           });
+          // this.$store.commit("ADD_VISITED_VIEWS", {
+          //   name: "初审审批",
+          //   path: '/taskInWaitting'
+          // })
         } else if (val.taskNodeName == "creditApp_finalTrial_one" || val.taskNodeName == "creditApp_finalTrial_two" ||
           val.taskNodeName == "creditApp_finalTrial_three" || val.taskNodeName == "creditApp_finalTrial_four" || val.taskNodeName ==
           "creditApp_finalTrial_five") {
@@ -197,7 +219,7 @@
           this.$router.push({
             path: '/reconsiderList',
           });
-        } 
+        }
         // else if (val.taskNodeName == "antiFraudApp_commissioner") { //复议反欺诈专员 
         //   this.judge.flag = "07";
         //   localStorage.setItem("ReAntiWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
@@ -217,12 +239,17 @@
     },
     computed: {
       taskCount() {
-         this.TaskCount=null;
+        this.TaskCount = null;
         console.log(this.tableData)
-        for (var i = 0; i < this.tableData.length; i++) {
-          this.TaskCount += this.tableData[i].count;
+        if (this.tableData.length == 0) {
+          return this.TaskCount = 0;
+        } else {
+          for (var i = 0; i < this.tableData.length; i++) {
+            this.TaskCount += this.tableData[i].count;
+          }
+          return this.TaskCount;
         }
-        return this.TaskCount;
+
       }
     },
     mounted() {
@@ -287,6 +314,7 @@
     text-align: center;
     padding-top: 10px;
   }
+
   /* 大框  */
 
   .workbench {
@@ -304,12 +332,14 @@
     overflow: hidden;
     background: #ededed;
   }
+
   /* main */
 
   .main .main_left,
   .main .main_right {
     float: left;
   }
+
   /* 左边-常用 */
 
   .main .main_left {
@@ -323,12 +353,14 @@
     font-size: 16.5px;
     margin-top: 3px;
   }
+
   /* 右边-折叠面板 */
 
   .main .main_right {
     width: calc( 100% - 148px);
     background: white;
   }
+
   /* 代办任务 */
 
   .main_right .main_right_task,
@@ -375,6 +407,7 @@
   .border_top_bottom {
     border-top: 1px solid gray;
   }
+
   /* 大框  */
 
   .workbench {
@@ -392,12 +425,14 @@
     overflow: hidden;
     background: #ededed;
   }
+
   /* main */
 
   .main .main_left,
   .main .main_right {
     float: left;
   }
+
   /* 左边-常用 */
 
   .main .main_left {
@@ -411,12 +446,14 @@
     font-size: 16.5px;
     margin-top: 3px;
   }
+
   /* 右边-折叠面板 */
 
   .main .main_right {
     width: calc( 100% - 148px);
     background: white;
   }
+
   /* 代办任务 */
 
   .main_right .main_right_task,

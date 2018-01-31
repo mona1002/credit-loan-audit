@@ -338,6 +338,10 @@
         this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
       } else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
         this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议主管+专员
+      }else if (this.judgeFlag.flag == '07') {
+        this.localInf = JSON.parse(localStorage.getItem("TtaskInWaitting")) //审批已办-任务
+      }else if (this.judgeFlag.flag == '08') {
+        this.localInf = JSON.parse(localStorage.getItem("TtaskInWaitting")) //审批历史-任务
       }
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
