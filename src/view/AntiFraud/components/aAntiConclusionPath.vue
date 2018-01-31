@@ -10,9 +10,9 @@
       </el-table-column>
       <el-table-column prop="riskSectionTxt" label="风险项" min-width="35">
       </el-table-column>
-      <el-table-column prop="auditDesc" label="审批描述" min-width="35">
+      <el-table-column prop="auditDesc" label="审批描述" >
       </el-table-column>
-      <el-table-column prop="auditTime" label="审批时间" align="center">
+      <el-table-column prop="auditTime" label="审批时间" min-width="35" align="center">
       </el-table-column>
     </el-table>
   </div>
