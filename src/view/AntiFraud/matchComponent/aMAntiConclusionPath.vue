@@ -1,6 +1,6 @@
 <template>
   <div date="aAntiConclusionPath">
-    <!-- 反欺诈审批结论轨迹=========================默认显示1-条？分页？ -->
+    <!-- 反欺诈审批结论轨迹=====匹配查看页面，没有此组件 - 待删除====================默认显示1-条？分页？ -->
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="auditResultTxt" label="审批结果" min-width="35">
       </el-table-column>

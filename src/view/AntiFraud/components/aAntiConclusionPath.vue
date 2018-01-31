@@ -34,7 +34,7 @@
       }
       console.log(this.tastwaitingPass)
       this.post("/fraudAuditOpinion/getApproveConclusionTrack", {
-        appinfoId: this.tastwaitingPass.applyId,
+        appinfoId: this.tastwaitingPass.businessId,
         // appinfoId: "00542",
       }).then(res => {
         if (res.statusCode == 200) {
