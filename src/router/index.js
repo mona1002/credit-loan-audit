@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 // 头部导航
 import myHead from '@/view/header'
-import test from '@/view/test'
 
 import HelloWorld from '@/view/HelloWorld'
 /*初审审批*/
@@ -98,10 +97,6 @@ const routes = [{
 {
   path: '/workbench',
   component: login,
-},
-{
-  path: '/test',
-  component: test
 },
 /*初审审批*/
 {
