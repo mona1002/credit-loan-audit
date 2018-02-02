@@ -1998,7 +1998,8 @@
             this.checkData.workProvinceName = this.$refs.province.selectedLabel;
             this.checkData.workCityName = this.$refs.city.selectedLabel;
             this.checkData.workCountyName = this.$refs.country.selectedLabel;
-        this.checkData.hirecomKind=this.$refs.industry.selectedLabel;            
+            this.checkData.hirecomKind = this.$refs.industry.selectedLabel;
+            // console.log(this.checkData.oneYearProfitamt)
             this.btnnn();
             this.post("/creauditInfo/addOrUpdate", this.checkData).then(res => {
               if (res.statusCode == 200) {
@@ -2145,14 +2146,14 @@
       businessSC(el) {
         switch (el) {
           case "营业面积":
-            if (this.checkData.selfpremisesArea.indexOf('m²')!=-1) {
+            if (this.checkData.selfpremisesArea.indexOf('m²') != -1) {
               this.checkData.selfpremisesArea = this.checkData.selfpremisesArea.slice(0, -2);
             }
             this.checkData.selfpremisesArea = this.formatNumber(this.checkData.selfpremisesArea, 2, 0) + 'm²';
             this.acreage = this.checkData.selfpremisesArea.slice(0, -2).split(",").join('');
             break;
           case "占股比例":
-            if (this.checkData.selfhasProportion.indexOf('%')!=-1) {
+            if (this.checkData.selfhasProportion.indexOf('%') != -1) {
               this.checkData.selfhasProportion = this.checkData.selfhasProportion.slice(0, -1);
             }
             this.checkData.selfhasProportion = this.formatNumber(this.checkData.selfhasProportion, 2, 0) + '%';
@@ -2284,27 +2285,28 @@
         }
       },
       btnnn() {
-        this.checkData.fbalance != null && this.checkData.fbalance.indexOf(',')!=-1 ? this.checkData.fbalance = this.checkData
+        this.checkData.fbalance != null && this.checkData.fbalance.toString().indexOf(',') != -1 ? this.checkData.fbalance = this.checkData
           .fbalance.split(",").join('') : this.checkData.fbalance;
-        this.checkData.iloanAmt != null && this.checkData.iloanAmt.indexOf(',')!=-1 ? this.checkData.iloanAmt = this.checkData
+        this.checkData.iloanAmt != null && this.checkData.iloanAmt.toString().indexOf(',') != -1 ? this.checkData.iloanAmt = this.checkData
           .iloanAmt.split(",").join('') : this.checkData.iloanAmt;
-        this.checkData.avgsalaryamt != null && this.checkData.avgsalaryamt.indexOf(',')!=-1 ? this.checkData.avgsalaryamt =
+        this.checkData.avgsalaryamt != null && this.checkData.avgsalaryamt.toString().indexOf(',') != -1 ? this.checkData.avgsalaryamt =
           this.checkData.avgsalaryamt.split(",").join('') : this.checkData.avgsalaryamt;
-        this.checkData.regcapitalamt != null && this.checkData.regcapitalamt.indexOf(',')!=-1 ? this.checkData.regcapitalamt =
+        this.checkData.regcapitalamt != null && this.checkData.regcapitalamt.toString().indexOf(',') != -1 ? this.checkData.regcapitalamt =
           this.checkData.regcapitalamt.split(",").join('') : this.checkData.regcapitalamt;
-        this.checkData.thiprofitamountmamt != null && this.checkData.thiprofitamountmamt.indexOf(',')!=-1 ? this.checkData.thiprofitamountmamt =
+        this.checkData.thiprofitamountmamt != null && this.checkData.thiprofitamountmamt.toString().indexOf(',') != -1 ? this.checkData
+          .thiprofitamountmamt =
           this.checkData.thiprofitamountmamt.split(",").join('') : this.checkData.thiprofitamountmamt;
-        this.checkData.monthrentamt != null && this.checkData.monthrentamt.indexOf(',')!=-1 ? this.checkData.monthrentamt =
+        this.checkData.monthrentamt != null && this.checkData.monthrentamt.toString().indexOf(',') != -1 ? this.checkData.monthrentamt =
           this.checkData.monthrentamt.split(",").join('') : this.checkData.monthrentamt;
-        this.checkData.oneYearProfitamt != null && this.checkData.oneYearProfitamt.indexOf(',')!=-1 ? this.checkData.oneYearProfitamt =
+        this.checkData.oneYearProfitamt != null && this.checkData.oneYearProfitamt.toString().indexOf(',') != -1 ? this.checkData.oneYearProfitamt =
           this.checkData.oneYearProfitamt.split(",").join('') : this.checkData.oneYearProfitamt;
-        this.checkData.spouseIncome != null && this.checkData.spouseIncome.indexOf(',')!=-1 ? this.checkData.spouseIncome =
+        this.checkData.spouseIncome != null && this.checkData.spouseIncome.toString().indexOf(',') != -1 ? this.checkData.spouseIncome =
           this.checkData.spouseIncome.split(",").join('') : this.checkData.spouseIncome;
-        this.checkData.childPaycostamt != null && this.checkData.childPaycostamt.indexOf(',')!=-1 ? this.checkData.childPaycostamt =
+        this.checkData.childPaycostamt != null && this.checkData.childPaycostamt.toString().indexOf(',') != -1 ? this.checkData.childPaycostamt =
           this.checkData.childPaycostamt.split(",").join('') : this.checkData.childPaycostamt;
-        this.checkData.parentIncome != null && this.checkData.parentIncome.indexOf(',')!=-1 ? this.checkData.parentIncome =
+        this.checkData.parentIncome != null && this.checkData.parentIncome.toString().indexOf(',') != -1 ? this.checkData.parentIncome =
           this.checkData.parentIncome.split(",").join('') : this.checkData.parentIncome;
-        this.checkData.fconsumption != null && this.checkData.fconsumption.indexOf(',')!=-1 ? this.checkData.fconsumption =
+        this.checkData.fconsumption != null && this.checkData.fconsumption.toString().indexOf(',') != -1 ? this.checkData.fconsumption =
           this.checkData.fconsumption.split(",").join('') : this.checkData.fconsumption;
         // this.checkData. != null && this.checkData.selfpremisesArea.indexOf(',') ? this.checkData.selfpremisesArea =
         //   this.checkData.selfpremisesArea.split(",").join('') : this.checkData.selfpremisesArea;
@@ -2375,9 +2377,11 @@
           this.checkData.parentIncome;
         this.checkData.fconsumption ? this.checkData.fconsumption = this.formatNumber(this.checkData.fconsumption, 2, 0) :
           this.checkData.fconsumption;
-            this.checkData.selfpremisesArea ? this.checkData.selfpremisesArea = this.formatNumber(this.checkData.selfpremisesArea, 2, 0) :
+        this.checkData.selfpremisesArea ? this.checkData.selfpremisesArea = this.formatNumber(this.checkData.selfpremisesArea,
+            2, 0) :
           this.checkData.selfpremisesArea;
-            this.checkData.selfhasProportion ? this.checkData.selfhasProportion = this.formatNumber(this.checkData.selfhasProportion, 2, 0) :
+        this.checkData.selfhasProportion ? this.checkData.selfhasProportion = this.formatNumber(this.checkData.selfhasProportion,
+            2, 0) :
           this.checkData.selfhasProportion;
       },
       mountC() {
@@ -2393,7 +2397,8 @@
             this.checkData.applyId = this.getParams.applyId;
             this.mountM();
             this.AreaNPercent();
-              this.checkData.aaddress?this.checkData.aaddress=this.checkData.aaddress.replace(/null/g,''):  this.checkData.aaddress;
+            this.checkData.aaddress ? this.checkData.aaddress = this.checkData.aaddress.replace(/null/g, '') : this
+              .checkData.aaddress;
             this.mountJ(0, res.data.wbeexEcuted);
             this.mountJ(1, res.data.wnetHirecom);
             this.mountJ(2, res.data.wnetEcutedBrea);
@@ -2503,25 +2508,25 @@
     color: #5a5e66;
   }
 
-   ::-webkit-input-placeholder {
+  ::-webkit-input-placeholder {
     /* WebKit browsers */
     color: #b4bccc;
     font-size: 14px;
   }
 
-   :-moz-placeholder {
+  :-moz-placeholder {
     /* Mozilla Firefox 4 to 18 */
     color: #b4bccc;
     font-size: 14px;
   }
 
-   ::-moz-placeholder {
+  ::-moz-placeholder {
     /* Mozilla Firefox 19+ */
     color: #b4bccc;
     font-size: 14px;
   }
 
-   :-ms-input-placeholder {
+  :-ms-input-placeholder {
     /* Internet Explorer 10+ */
     color: #b4bccc;
     font-size: 14px;
@@ -2558,18 +2563,22 @@
   .bottom {
     margin-bottom: 20px;
   }
+
   /* 最下面的 弹窗样式 */
+
   /* add class */
 
   .mWidth {
     width: 100%;
   }
+
   /* content下边距+左边距 */
 
   .padd {
     /* margin: 0 0 20px 21px; */
     padding: 0 0 20px 21px;
   }
+
   /* 上网信息-两行select下拉 居中 */
 
   .internet_top {
@@ -2628,6 +2637,7 @@
     top: 12px;
     left: 14px
   }
+
   /* 上网查询左侧label */
 
   .InternetInf_left_label {
@@ -2651,6 +2661,7 @@
     width: 182px;
     /* width: 200px; */
   }
+
   /* 工作信息 */
 
   .Working_input {
@@ -2675,6 +2686,7 @@
   .result_textarea {
     padding-left: 212px;
   }
+
   /* public */
 
   .CreditForm {
@@ -2699,7 +2711,9 @@
     text-align: right;
     margin-right: 10px;
   }
+
   /* 各自 */
+
   /* ------------------------------上网查询 +核实身份--------------------------- */
 
   .CreditForm_InternetInf li,
@@ -2707,7 +2721,7 @@
   .CreditForm_FamilyInf li
   /* 家庭信息 */
 
-  {
+    {
     /* border: 1px solid yellowgreen; */
     clear: both;
     vertical-align: middle;
@@ -2727,7 +2741,7 @@
   .CreditForm_live_ul_left li
   /* 居住情况 */
 
-  {
+    {
     /* border: 1px solid blue; */
     float: left;
     width: 33.3%;
@@ -2751,13 +2765,15 @@
   .CreditForm_FamilyInf li p:nth-of-type(even)
   /* 家庭信息 */
 
-  {
+    {
     /* background: red; */
     width: 66.6%
   }
+
   /* .CreditForm_CheckId p:nth-of-type(odd) {
     padding-top: 18px;
   } */
+
   /* --------------------------工作信息 + 私营企业--------------------- */
 
   .WorkInfs_left_label {
@@ -2773,7 +2789,7 @@
   .CreditForm_CompanyInfs_ul_right
   /* 私营企业 */
 
-  {
+    {
     float: left;
     width: 33.3%;
   }
@@ -2784,7 +2800,7 @@
   .CreditForm_CompanyInfs_ul_left
   /* 私营企业 */
 
-  {
+    {
     width: 66.6%;
     float: left;
   }
@@ -2792,7 +2808,7 @@
   .CheckId_right_label
   /* 第三列里---即：第二列ul */
 
-  {
+    {
     width: 140px;
   }
 
@@ -2813,17 +2829,20 @@
     margin-top: 20px;
     /* border: 1px solid; */
   }
+
   /* -----------------------家庭信息--------------------- */
 
   .CreditForm_FamilyInf li {
     /* border: 1px solid yellowgreen; */
   }
+
   /*-------------------- 核对现住址-------------------------- */
 
   .CreditForm_check_reside li,
   .CreditForm_check_reside p {
     margin-bottom: 20px;
   }
+
   /* 初审结果评价 */
 
   .CreditForm_result {
