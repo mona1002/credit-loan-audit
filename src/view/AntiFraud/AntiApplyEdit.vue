@@ -594,6 +594,7 @@ export default {
   height: 30px;
   line-height: 30px;
   text-align: left;
+  font-size: 14px;
 }
 
 .anti-apply-edit-class li .textarea-class {

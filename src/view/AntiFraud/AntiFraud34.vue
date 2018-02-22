@@ -91,7 +91,7 @@
         <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">反欺诈审批任务列表 </span>
       </div>
-      <el-table :data="directorTableData" style="width: 100%" height="480" border stripe fit highlight-current-row @row-dblclick="rowDbClick" v-show="antiFlag=='03'||antiFlag=='04'" class="director-table">
+      <el-table :data="directorTableData" style="width: 100%" height="480" border stripe fit highlight-current-row @row-click="rowDbClick" v-show="antiFlag=='03'||antiFlag=='04'" class="director-table">
         <el-table-column type="index" :index="1" label="序号">
         </el-table-column>
         <el-table-column prop="taskTypeTxt" label="任务类型">

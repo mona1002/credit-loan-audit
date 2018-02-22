@@ -7,14 +7,14 @@
     </div>
     <ul class="form-ul" style="padding-left:30px;width:100%;">
       <li class="item-column3">
-        <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:40px;top:5px;font-weight:bold;">*</span>
+        <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:40px;top:10px;font-weight:bold;">*</span>
         <div class="left-title">
           审核结论：
         </div>
         <div>
           <el-select v-model="auditResult" @change="selectChangeMain">
-            <el-option label="风险拒贷[黑名单]" value="08"></el-option>
-            <el-option label="风险拒贷[灰名单]" value="09"></el-option>
+            <el-option label="风险拒贷[黑名单]" value="00"></el-option>
+            <el-option label="风险拒贷[灰名单]" value="01"></el-option>
             <el-option label="风险排除" value="02"></el-option>
           </el-select>
         </div>
@@ -30,7 +30,7 @@
         </div>
       </li>
       <li class="item-column3">
-        <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:5px;font-weight:bold;">*</span>
+        <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:10px;font-weight:bold;">*</span>
         <div class="left-title">
           主原因：
         </div>
@@ -42,7 +42,7 @@
         </div>
       </li>
       <li class="item-column3">
-        <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:5px;font-weight:bold;">*</span>
+        <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:10px;font-weight:bold;">*</span>
         <div class="left-title">
           子原因：
         </div>
@@ -63,34 +63,28 @@
       </li>
       <!-- item-column3-2 -->
       <li class="item-column1 ">
-        <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:5px;font-weight:bold;">*</span>
+        <!-- <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:5px;font-weight:bold;">*</span> -->
         <div class="left-title">
           风险项：
         </div>
         <div>
           <!-- @change="selectChangeRisk" multiple    class="muti-select"   -->
           <!-- <el-select v-model="riskSection" multiple collapse-tags class="muti-select"> -->
-          <el-select 
-            v-model="riskSection" 
-            multiple 
-            collapse-tags 
-            placeholder="请选择"
-            class="muti-select"
-            >
-              <el-option v-for="item in riskSections" :key="item.enumCode" :label="item.showMsg" :value="item.showMsg">
-              </el-option>
-            </el-select>
+          <el-select v-model="riskSection" multiple collapse-tags placeholder="请选择" class="muti-select">
+            <el-option v-for="item in riskSections" :key="item.enumCode" :label="item.showMsg" :value="item.showMsg">
+            </el-option>
+          </el-select>
         </div>
       </li>
       <li class="item-column1 item-column3-2">
-        <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:0px;top:5px;font-weight:bold;">*</span>
+        <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:0px;top:10px;font-weight:bold;">*</span>
         <div class="left-title">反欺诈决策反馈：</div>
         <div class="textarea-class2">
           <el-input v-model="auditDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
         </div>
       </li>
       <li class="item-column1 item-column3-2">
-        <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:5px;font-weight:bold;">*</span>
+        <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:10px;font-weight:bold;">*</span>
         <div class="left-title">
           案件编号
         </div>
@@ -134,7 +128,7 @@
             </el-select>
           </el-form-item>
         </div>
-          <!-- 回退主原因输入 02 -->
+        <!-- 回退主原因输入 02 -->
         <!-- <div class="back-form-li">
           <span style="color:red;display:inline-block;width:0px;float:left;position: relative;left:15px;">*</span>
           <el-form-item label="主原因:" class="item-column2" v-show="showFlag=='02'">
@@ -396,6 +390,10 @@ export default {
         "value": "antiFraudApp_commissioner",
         "type": ''
       }]
+
+
+      // 反欺诈主管 请求 反欺诈专员信息
+      this.queryCreauditOpinionObj();
     }
 
     // 请求风险项
@@ -445,7 +443,7 @@ export default {
           type: 'success',
           message: '挂起成功'
         });
-        this.$router.push('/AntiFraud');
+        this.$router.push('/AntiFraud34');
       });
     },
     // 请求系统时间
@@ -482,7 +480,7 @@ export default {
     // 审批
     insert() {
       // 判断必填项
-      if (!this.auditResult || !this.mainReason || !this.secondReason || !this.riskSectionArr || !this.auditDesc || !this.caseDesc) {
+      if (!this.auditResult || !this.mainReason || !this.secondReason || !this.auditDesc || !this.caseDesc) {
         this.$message({
           showClose: true,
           message: '请输入必填项',
@@ -691,7 +689,7 @@ export default {
       // 判断终审的 opinionFlag 
       console.log(this.opinionFlag)
       // 点击 确认 提交 方法
-      this.post("/creauditInfo/approval", {
+      this.post("/fraudAuditOpinion/approval", {
         // 挂起 taskId 任务id
         taskId: this.taskId,
         custName: this.custName, // 客户名称
@@ -1062,6 +1060,14 @@ export default {
           }
         })
       }
+    },
+    // 反欺诈主管 申请 反欺诈专员信息
+    queryCreauditOpinionObj: function() {
+      this.get('/fraudAuditOpinion/queryCreauditOpinionObj?applyId=' + this.applyId).then(res => {
+        if (res.statusCode == 200) {
+          console.log(res);
+        }
+      })
     }
   },
   watch: {
@@ -1140,6 +1146,7 @@ export default {
 
 
 
+
 /* 折叠面板头部背景色和icon */
 
 .approval-colun .icon_hat {
@@ -1150,6 +1157,7 @@ export default {
 .approval-colun .headFont {
   font-size: 16px;
 }
+
 
 
 
@@ -1231,6 +1239,7 @@ export default {
 
 
 
+
 /* 两列 */
 
 .approval-colun .item-column2 {
@@ -1238,6 +1247,7 @@ export default {
   float: left;
   margin: 0;
 }
+
 
 
 
@@ -1334,6 +1344,7 @@ export default {
 
 
 
+
 /* 3列 空位 */
 
 .approval-colun .item-column3-null {
@@ -1348,6 +1359,7 @@ export default {
   height: 30px;
   line-height: 30px;
 }
+
 
 
 
@@ -1427,6 +1439,7 @@ export default {
 
 
 
+
 /* 按钮集合控件 */
 
 .approval-colun .btn-div {
@@ -1434,6 +1447,7 @@ export default {
   width: 80%;
   float: left;
 }
+
 
 
 
@@ -1479,6 +1493,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -1573,6 +1588,7 @@ export default {
 
 
 
+
 /*拒绝*/
 
 .approval-colun .el-icon-check-reject {
@@ -1585,6 +1601,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -1679,6 +1696,7 @@ export default {
 
 
 
+
 /*审批*/
 
 .approval-colun .el-icon-check-appro {
@@ -1691,6 +1709,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -1759,6 +1778,7 @@ export default {
 
 
 
+
 /* 反欺诈 审批结论 - btn*/
 
 .approval-colun .credit-btn {
@@ -1767,6 +1787,7 @@ export default {
   color: #333;
   border: none;
 }
+
 
 
 
@@ -1821,6 +1842,7 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
 
 
 
@@ -1946,11 +1968,13 @@ export default {
 
 
 
+
 /* textarea */
 
 .approval-colun .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
 
 
 
@@ -1996,6 +2020,7 @@ export default {
   right: 0px;
   top: 5px;
 }
+
 
 
 
@@ -2082,6 +2107,7 @@ export default {
 
 
 
+
 /*.approval-colun .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -2089,6 +2115,7 @@ export default {
 .approval-colun .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
 
 
 
@@ -2173,11 +2200,13 @@ export default {
 
 
 
+
 /* 反欺诈 -- 审批结论 */
 
 .approval-colun .form-ul {
   padding-left: 30px;
 }
+
 
 
 
@@ -2253,11 +2282,13 @@ export default {
 
 
 
+
 /* 审批 label*/
 
 .approval-colun .appro-form .back-form-edit-li .el-form-item__label {
   width: 120px;
 }
+
 
 
 
@@ -2325,11 +2356,13 @@ export default {
 
 
 
+
 /* 两行文字 样式 */
 
 .approval-colun .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
 
 
 
@@ -2382,6 +2415,7 @@ export default {
 
 
 
+
 /* 详细 信息按钮*/
 
 .approval-colun .btn-detail {
@@ -2390,6 +2424,7 @@ export default {
   margin-top: 35px;
   margin-left: 10px;
 }
+
 
 
 
@@ -2429,6 +2464,7 @@ export default {
 
 
 
+
 /* 分页 */
 
 .approval-colun .tool-bar {
@@ -2436,6 +2472,7 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
 
 
 
@@ -2456,6 +2493,7 @@ export default {
 
 
 
+
 /*多选下拉*/
 
 .approval-colun .form-ul .muti-select {
@@ -2466,8 +2504,8 @@ export default {
   line-height: normal;
   width: normal;
   /*height: 100px;*/
-    /*border: 1px solid;*/
-    line-height: 100%;
+  /*border: 1px solid;*/
+  line-height: 100%;
 }
 
 .approval-colun .muti-select .el-select__tags {
@@ -2480,15 +2518,15 @@ export default {
   transform: translateY(-50%);
 }
 
-.approval-colun .muti-select .el-select__tags>span{
-width: 100%;
-    height: auto;
-    white-space: nowrap;
-    display: inline-grid;
-    width: 100%;
-    height: 100%;
-    white-space: nowrap;
-    display: inline-grid
+.approval-colun .muti-select .el-select__tags>span {
+  width: 100%;
+  height: auto;
+  white-space: nowrap;
+  display: inline-grid;
+  width: 100%;
+  height: 100%;
+  white-space: nowrap;
+  display: inline-grid
 }
 
 .approval-colun .muti-select .el-tag {
@@ -2499,7 +2537,7 @@ width: 100%;
   right: 0;
   position: relative;
   height: auto;
-  width:min-content;
+  width: min-content;
 }
 
 .approval-colun .muti-select>.el-input {
@@ -2519,7 +2557,5 @@ width: 100%;
   height: auto;
   /*height: 100px;*/
 }
-
-
 
 </style>

@@ -16,7 +16,7 @@
         <div class="left-title">电话类型：</div>
         <div>
           <el-select v-model="phoneType" disabled>
-            <el-option label="紧急联系人" value="04"></el-option>
+            <el-option label="其他联系人" value="04"></el-option>
           </el-select>
         </div>
       </li>
