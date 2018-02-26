@@ -853,7 +853,8 @@ height: 40px;
  }
  /* 信审表-去掉所有重复paddingbottom值 */
 
- .CreditForm .el-collapse-item__content {
+ .CreditForm .el-collapse-item__content,
+ .tb  .el-collapse-item__content  {
    padding-bottom: 0;
  }
  /* 信审表+反欺诈结论-上网查询等-content 左边距*/
@@ -870,7 +871,8 @@ height: 40px;
  /* 信审表+反欺诈结论（初审+终审） ----各个  title 一行 */
 
  .CreditForm .el-collapse-item__header,
- .aAntiApplyInf .el-collapse-item__header {
+ .aAntiApplyInf .el-collapse-item__header,
+ .tb .el-collapse-item__header {
    border: 1px solid silver;
    background: #eef0f9;
    border: 1px solid #e6eaee;
@@ -883,7 +885,8 @@ height: 40px;
  /* 信审表 ----各个  title 小帽子部分 */
 
  .CreditForm .el-collapse-item,
- .aAntiApplyInf .el-collapse-item {
+ .aAntiApplyInf .el-collapse-item,
+ .tb .el-collapse-item {
    position: relative
  }
  /* 信审表-textarea 文本域上下居中对齐 统一宽度，覆盖掉width：100%会掉下来的问题 */

@@ -85,8 +85,8 @@ import aHistoryTask from'../view/TaskManagement/antiTaskManagment/aHistoryTask.v
 import TaskManagementSplit from'../view/TaskManagement/reconsider/TaskManagementSplit.vue'//
 import doTheTask from'../view/TaskManagement/examineAndApprove/doTheTask.vue'//审批任务管理——已办任务
 import historicalTask from'../view/TaskManagement/examineAndApprove/historicalTask.vue'//审批任务管理——历史任务
-
-
+//  -----------------------质检----------------------
+import tb from'../view/QualityTesting/roles/tb.vue'
 
 Vue.use(Router)
 
@@ -297,12 +297,6 @@ const routes = [{
   path:'/ReconjingliConclusion',
   component:ReconjingliConclusion
 },
-
-
-// {
-//   path:'/ReconsiderAntiSplit',
-//   component:ReconsiderAntiSplit
-// },
 // ---------------------流程监控---------
 {
   path: '/processMoni',
@@ -337,7 +331,12 @@ const routes = [{
 {
   path: '/historicalTask',
   component: historicalTask
-}
+},
+// ---------------质检--------------------
+{
+  path:'/tb',
+  component:tb
+},
 ];
 
 const router = new Router({
