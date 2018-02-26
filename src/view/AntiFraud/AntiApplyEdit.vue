@@ -56,6 +56,7 @@
     <ul style="padding-left:20px;">
       <li class="item-column3">
         <div class="left-title left-title2">
+          <span class="require-icon" style="left:0px;top:-5px;">*</span>
           反欺诈申请类型主原因：
         </div>
         <div>

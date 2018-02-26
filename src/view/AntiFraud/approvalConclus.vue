@@ -29,7 +29,7 @@
         <div class="">
         </div>
       </li>
-      <li class="item-column3">
+      <li class="item-column3" v-show="auditResult!='02'">
         <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:10px;font-weight:bold;">*</span>
         <div class="left-title">
           主原因：
@@ -41,7 +41,7 @@
           </el-select>
         </div>
       </li>
-      <li class="item-column3">
+      <li class="item-column3" v-show="auditResult!='02'">
         <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:10px;font-weight:bold;">*</span>
         <div class="left-title">
           子原因：
@@ -86,7 +86,7 @@
       <li class="item-column1 item-column3-2">
         <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:10px;font-weight:bold;">*</span>
         <div class="left-title">
-          案件编号
+          案件编号：
         </div>
         <div>
           <el-select v-model="caseNum">
@@ -480,13 +480,31 @@ export default {
     // 审批
     insert() {
       // 判断必填项
-      if (!this.auditResult || !this.mainReason || !this.secondReason || !this.auditDesc || !this.caseDesc) {
-        this.$message({
-          showClose: true,
-          message: '请输入必填项',
-          type: 'warning'
-        });
-        return;
+
+
+      if (!this.auditResult) {
+        if (!this.mainReason || !this.secondReason || !this.auditDesc) {
+
+          this.$message({
+            showClose: true,
+            message: '请输入必填项',
+            type: 'warning'
+          });
+          return;
+        }
+      }
+      // v-show="auditResult!='02'"
+      console.log(this.auditResult);
+      if (this.auditResult == '02') {
+        if (!this.auditDesc) {
+          console.log.log('风险项')
+          this.$message({
+            showClose: true,
+            message: '请输入必填项',
+            type: 'warning'
+          });
+          return;
+        }
       }
 
       if (this.riskSection) {
@@ -561,12 +579,11 @@ export default {
           }
         }
       }).then(action => {
-        instance.confirmButtonText = '';
-        instance.confirmButtonLoading = false;
         this.$message({
           type: 'success',
-          message: res.msg
+          message: '反欺诈审批成功!'
         });
+        this.$router.push('/AntiFraud34');
       });
     },
     coverFn(flag) {
@@ -1147,6 +1164,10 @@ export default {
 
 
 
+
+
+
+
 /* 折叠面板头部背景色和icon */
 
 .approval-colun .icon_hat {
@@ -1157,6 +1178,10 @@ export default {
 .approval-colun .headFont {
   font-size: 16px;
 }
+
+
+
+
 
 
 
@@ -1240,6 +1265,10 @@ export default {
 
 
 
+
+
+
+
 /* 两列 */
 
 .approval-colun .item-column2 {
@@ -1247,6 +1276,10 @@ export default {
   float: left;
   margin: 0;
 }
+
+
+
+
 
 
 
@@ -1345,6 +1378,10 @@ export default {
 
 
 
+
+
+
+
 /* 3列 空位 */
 
 .approval-colun .item-column3-null {
@@ -1359,6 +1396,10 @@ export default {
   height: 30px;
   line-height: 30px;
 }
+
+
+
+
 
 
 
@@ -1440,6 +1481,10 @@ export default {
 
 
 
+
+
+
+
 /* 按钮集合控件 */
 
 .approval-colun .btn-div {
@@ -1447,6 +1492,10 @@ export default {
   width: 80%;
   float: left;
 }
+
+
+
+
 
 
 
@@ -1493,6 +1542,10 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
 
 
 
@@ -1589,6 +1642,10 @@ export default {
 
 
 
+
+
+
+
 /*拒绝*/
 
 .approval-colun .el-icon-check-reject {
@@ -1601,6 +1658,10 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
 
 
 
@@ -1697,6 +1758,10 @@ export default {
 
 
 
+
+
+
+
 /*审批*/
 
 .approval-colun .el-icon-check-appro {
@@ -1709,6 +1774,10 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
 
 
 
@@ -1779,6 +1848,10 @@ export default {
 
 
 
+
+
+
+
 /* 反欺诈 审批结论 - btn*/
 
 .approval-colun .credit-btn {
@@ -1787,6 +1860,10 @@ export default {
   color: #333;
   border: none;
 }
+
+
+
+
 
 
 
@@ -1842,6 +1919,10 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
+
+
+
 
 
 
@@ -1969,11 +2050,19 @@ export default {
 
 
 
+
+
+
+
 /* textarea */
 
 .approval-colun .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
+
+
+
 
 
 
@@ -2020,6 +2109,10 @@ export default {
   right: 0px;
   top: 5px;
 }
+
+
+
+
 
 
 
@@ -2108,6 +2201,10 @@ export default {
 
 
 
+
+
+
+
 /*.approval-colun .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -2115,6 +2212,10 @@ export default {
 .approval-colun .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
+
+
+
 
 
 
@@ -2201,11 +2302,19 @@ export default {
 
 
 
+
+
+
+
 /* 反欺诈 -- 审批结论 */
 
 .approval-colun .form-ul {
   padding-left: 30px;
 }
+
+
+
+
 
 
 
@@ -2283,11 +2392,19 @@ export default {
 
 
 
+
+
+
+
 /* 审批 label*/
 
 .approval-colun .appro-form .back-form-edit-li .el-form-item__label {
   width: 120px;
 }
+
+
+
+
 
 
 
@@ -2357,11 +2474,19 @@ export default {
 
 
 
+
+
+
+
 /* 两行文字 样式 */
 
 .approval-colun .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
+
+
+
 
 
 
@@ -2416,6 +2541,10 @@ export default {
 
 
 
+
+
+
+
 /* 详细 信息按钮*/
 
 .approval-colun .btn-detail {
@@ -2424,6 +2553,10 @@ export default {
   margin-top: 35px;
   margin-left: 10px;
 }
+
+
+
+
 
 
 
@@ -2465,6 +2598,10 @@ export default {
 
 
 
+
+
+
+
 /* 分页 */
 
 .approval-colun .tool-bar {
@@ -2482,11 +2619,19 @@ export default {
 
 
 
+
+
+
+
 /* 隐藏分页 */
 
 .approval-colun .el-pagination__jump {
   display: none;
 }
+
+
+
+
 
 
 

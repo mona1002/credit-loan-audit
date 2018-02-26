@@ -48,7 +48,7 @@
           <span class="icon-add"></span> 添加
         </span>
       </div>
-      <el-table :data="antiTableData" style="width: 100%" height="480" border stripe fit highlight-current-row class="anti-table" v-show="antiFlag!='03'&& antiFlag!='04'">
+      <el-table :data="antiTableData.taskDetailList" style="width: 100%" height="300" border stripe fit highlight-current-row class="anti-table" v-show="antiFlag!='03'&& antiFlag!='04'">
         <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column prop="applySubno" label="进件编号">
@@ -86,12 +86,13 @@
           </template>
         </el-table-column>
       </el-table>
+
       <!-- 反欺诈专员审批  反欺诈主管审批 -->
       <div class="address-title" v-show="antiFlag=='03'||antiFlag=='04'">
         <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">反欺诈审批任务列表 </span>
       </div>
-      <el-table :data="directorTableData" style="width: 100%" height="480" border stripe fit highlight-current-row @row-click="rowDbClick" v-show="antiFlag=='03'||antiFlag=='04'" class="director-table">
+      <el-table :data="directorTableData.taskDetailList" style="width: 100%" height="300" border stripe fit highlight-current-row @row-click="rowDbClick" v-show="antiFlag=='03'||antiFlag=='04'" class="director-table">
         <el-table-column type="index" :index="1" label="序号">
         </el-table-column>
         <el-table-column prop="taskTypeTxt" label="任务类型">
@@ -113,6 +114,8 @@
         <el-table-column prop="activationTime" label="进入本环节时间">
         </el-table-column>
       </el-table>
+      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 15, 20]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="directorTableData.totalNum" >
+      </el-pagination>
     </div>
   </div>
   </div>
@@ -233,7 +236,7 @@ export default {
         this.taskNodeName = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskNodeName;
         this.taskStatus = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskStatus;
       }
-      
+
       // 登录 单独存  userCode  orgCode 
       this.userCode = JSON.parse(localStorage.getItem('userInf')).userCode;
       this.orgCode = JSON.parse(localStorage.getItem('userInf')).orgCode;
@@ -253,7 +256,7 @@ export default {
         applySubno: this.applySubno, // 进件编号
         applyCustName: this.applyCustName, // 客户名称
         applyCustNo: this.applyCustNo, // 客户编号
-        applyCode:this.userCode
+        applyCode: this.userCode
       }).then(res => {
         console.log(res);
         console.log(res.statusCode);
@@ -279,7 +282,7 @@ export default {
         certCode: this.applyCustNo,
       }).then(res => {
         if (res.statusCode == 200) {
-          this.directorTableData = res.data.taskDetailList;
+          this.directorTableData = res.data;
         } else {
           this.directorTableData = [];
         }
@@ -326,7 +329,7 @@ export default {
             id: row.id
           }
         });
-      }else{ // 否则是新增
+      } else { // 否则是新增
         this.$router.push({
           name: 'AntiApplyAdd',
           params: {
@@ -363,7 +366,19 @@ export default {
         // 反欺诈  分屏
         this.$router.push('AntiAudit')
       }
-    }
+    },
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+      this.pageSize = val;
+      this.pageNum = 1;
+      this.request();
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+      this.pageNum = val;
+      // this.pageSize=5;
+      this.request();
+    },
   }
 }
 
@@ -372,6 +387,7 @@ export default {
 /* 反欺诈 查询 */
 
 .anti-fraud {}
+
 
 
 
@@ -405,6 +421,7 @@ export default {
 
 
 
+
 /* 一列 */
 
 .anti-fraud .item-column1 {
@@ -412,6 +429,7 @@ export default {
   float: left;
   margin: 0;
 }
+
 
 
 
@@ -430,6 +448,7 @@ export default {
 
 
 
+
 /* 三列 */
 
 .anti-fraud .item-column3 {
@@ -438,6 +457,7 @@ export default {
   margin: 0;
   margin-bottom: 10px;
 }
+
 
 
 
@@ -459,6 +479,11 @@ export default {
   padding-right: 10px;
   text-align: right;
   font-size: 14px;
+}
+
+/* 列表内容区域 */
+.anti-fraud .content{
+  width: 100%;
 }
 
 .anti-fraud .item-content {
@@ -496,6 +521,7 @@ export default {
 
 
 
+
 /* 折叠面板头部背景色和icon */
 
 .anti-fraud .icon_hat {
@@ -506,6 +532,7 @@ export default {
 .anti-fraud .headFont {
   font-size: 16px;
 }
+
 
 
 
@@ -548,6 +575,7 @@ export default {
 
 
 
+
 /* 反欺诈 添加 提交 作废 */
 
 .anti-fraud .btn-div {
@@ -573,6 +601,7 @@ export default {
 
 
 
+
 /* 添加按钮 */
 
 .anti-fraud .btn-add {
@@ -587,6 +616,7 @@ export default {
 
 
 
+
 /* 头部 */
 
 .anti-fraud .title-bar {
@@ -596,6 +626,25 @@ export default {
   background: #eef0f9;
   border: 1px solid #e6eaee;
   /*text-indent: 10px;*/
+}
+
+/* 分页 */
+.anti-fraud .el-pagination{
+  text-align: center;
+}
+.anti-fraud .el-pagination .el-input{
+  width: auto;
+}
+.anti-fraud .el-pagination .el-input__inner{
+  width: 50px;
+}
+.anti-fraud .el-pagination button,.anti-fraud .el-pagination span:not([class*=suffix]){
+  line-height: 50px;
+  height: 50px;
+}
+.anti-fraud .el-pagination .el-pager li{
+  height: 50px;
+  line-height: 50px;
 }
 
 </style>
