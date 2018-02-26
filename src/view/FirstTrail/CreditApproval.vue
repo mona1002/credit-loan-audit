@@ -1691,12 +1691,14 @@ export default {
         // this.opinionFlag = ''; // 标志任务类型
         // this.mainReason = ''; // 回退主原因
         // this.secondaryReason = ''; // 回退子原因
-        // this.reasonRemark = ''; // 意见描述/原因说明
+        // reasonRemark
+        this.reasonRemark = ''; // 意见描述/原因说明
         // this.appOrgId = ''; // 进件机构id
         // this.applyId = ''; // 申请单id
         // this.rollbackNodeName = ''; // 回退节点名称
         // this.dealroperDate = ''; // 经办时间
         // this.creauditAppOperate = ''; // 操作类型
+        
       }
     },
     // 监听 输入请求
