@@ -101,6 +101,7 @@
 </template>
 <script>
   import myHead from "../header.vue";
+  import UserURL from "../../util/constantUser";
   export default {
     data() {
       return {
@@ -254,7 +255,9 @@
     },
     mounted() {
       // 统一登录平台  调试   start 
-      this.get("http://testplatform.nuoyuan.com.cn/remote/user/getUserInfo").then(response => {
+      // console.log(UserURL)
+      // this.get("http://testplatform.nuoyuan.com.cn/remote/user/getUserInfo").then(response => {
+      this.get( UserURL).then(response => {
         console.info(response.data);
         this.userInf = {
           userCode: response.data.userCode,
