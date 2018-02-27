@@ -459,6 +459,13 @@ export default {
     console.log(this.SplitS);
 
 
+    var judgeFlag = JSON.parse(localStorage.getItem('judge'));
+    // 复议不显示添加
+    if(judgeFlag =='04' || judgeFlag =='05'){
+      this.addBtnShow = false;
+    }
+
+
   },
   watch: {
     // 监听属性  电话类型
