@@ -894,16 +894,16 @@ export default {
           console.log(res);
           // 先赋值,直接点审批
           
-          this.mainReason.id = res.data.mainreasonId; // 欺诈主原因id
-          this.secondId.id = res.data.subreasonId; // 欺诈子原因id
-          this.mainReason.reasonName = res.data.mainreaName; // 欺诈主原因名称
-          this.secondReason.reasonName = res.data.subreaName;  // 欺诈子原因名称
-          this.riskSectionArr = res.data.riskSection; // 风险项
-          this.auditDesc = res.data.auditDesc; // 反欺诈决策反馈
-          this.auditResult = res.data.auditResult; // 审核结论
-          this.caseNum = res.data.caseNum; // 案件编号 caseNum
-          this.caseDesc = res.data.caseDesc; // 案件描述
+          // this.mainReason.id = res.data.mainreasonId; // 欺诈主原因id
+          // this.secondId.id = res.data.subreasonId; // 欺诈子原因id
+          // this.mainReason.reasonName = res.data.mainreaName; // 欺诈主原因名称
+          // this.secondReason.reasonName = res.data.subreaName;  // 欺诈子原因名称
+          // this.riskSectionArr = res.data.riskSection; // 风险项
+          // this.auditDesc = res.data.auditDesc; // 反欺诈决策反馈
+          // this.caseNum = res.data.caseNum; // 案件编号 caseNum
+          // this.caseDesc = res.data.caseDesc; // 案件描述
 
+          this.auditResult = res.data.auditResult; // 审核结论
           // 请求主原因
           if(this.auditResult){
             this.getReason('main', res.data.auditResult);
