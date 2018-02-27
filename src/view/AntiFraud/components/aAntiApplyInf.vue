@@ -49,10 +49,6 @@
               <p>
                 <label>借欺诈申请类型主原因： </label>
                 <span>{{this.conclu.fraudApplyInfo.mainreaName}} </span>
-                <!-- <el-select v-model="value" placeholder="请选择">
-                <el-option v-for="item in mainReason" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select> -->
               </p>
               <p>
                 <label>子原因： </label>
@@ -77,7 +73,6 @@
               <p>
                 <label>反欺诈申请机构： </label>
                 <span>{{this.conclu.fraudApplyInfo.appOrgName}} </span>
-                <!-- appOrgCode -->
               </p>
             </li>
           </ul>
@@ -120,7 +115,9 @@
         this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
       } else if (this.judgeFlag.flag == '02') {
         this.tastwaitingPass = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-      }
+      } else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议申请专员+主管
+      } 
       this.post("/fraudApplyInfoController/getRecentFraudApplyInfoWithOpinion", {
         applyId: this.tastwaitingPass.applyId,
       }).then(res => {

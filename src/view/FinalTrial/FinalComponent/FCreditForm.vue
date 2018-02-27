@@ -940,10 +940,10 @@
           this.FormData.fconsumption;
         this.FormData.selfpremisesArea = this.FormData.selfpremisesArea.slice(0, -2);
         this.FormData.selfhasProportion = this.FormData.selfhasProportion.slice(0, -1);
-        this.checkData.selfpremisesArea ? this.checkData.selfpremisesArea = this.formatNumber(this.checkData.selfpremisesArea,
-          2, 0) + 'm²' : this.checkData.selfpremisesArea;
-        this.checkData.selfhasProportion ? this.checkData.selfhasProportion = this.formatNumber(this.checkData.selfhasProportion,
-          2, 0) + '%' : this.checkData.selfhasProportion;
+        this.FormData.selfpremisesArea ? this.FormData.selfpremisesArea = this.formatNumber(this.FormData.selfpremisesArea,
+          2, 0) + 'm²' : this.FormData.selfpremisesArea;
+        this.FormData.selfhasProportion ? this.FormData.selfhasProportion = this.formatNumber(this.FormData.selfhasProportion,
+          2, 0) + '%' : this.FormData.selfhasProportion;
       },
       formatNumber(num, cent, isThousand) {
         num = num.toString().replace(/\$|\,/g, '');

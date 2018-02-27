@@ -18,12 +18,12 @@
 				</ul>
 				<ul>
 					<li>
-						<label>进件渠道：</label><span>{{datas.sourcesChanTxt}}</span>
+						<label>获客渠道：</label><span>{{datas.sourcesChanTxt}}</span>
 					</li>
-					<li>
-						<label>获客渠道：</label><span>{{datas.sourcesChan}}</span><!-- 0线下、1线下转线上、2考拉、3H5、4诺优贷、5APP -->
+					<li class="qudaoexplain" v-if="datas.sourcesChanTxt == '其他'">
+						<label>获客渠道说明：</label><span>{{datas.sourcesChanRemark}}</span>
 					</li>
-					<li></li>
+					<li v-if="datas.sourcesChanTxt != '其他'"></li>
 				</ul>
 				<ul>
 					<li>
@@ -71,7 +71,20 @@
 			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
 			      <span class="headFont">您的借款需求</span>
 				</template>
-				<ul class="firstUl">
+				<ul class="firstUl qitaexplain" v-if="accepApplyLoan.loanPurposeTxt == '其他消费'">
+					<li>
+						<label>借款用途：</label>
+						<span>{{accepApplyLoan.loanPurposeTxt}}</span>
+					</li>
+					<li>
+						<label>借款用途说明：</label>
+						<!-- <span>{{accepApplyLoan.loanPurposeNote}}</span> -->
+						<el-tooltip class="item" effect="dark" :content="accepApplyLoan.loanPurposeNote" :disabled="accepApplyLoan.loanPurposeNote==null" placement="top-start">
+					      <div>{{accepApplyLoan.loanPurposeNote}}</div>
+					    </el-tooltip>
+					</li>
+				</ul>
+				<ul class="firstUl" v-if="accepApplyLoan.loanPurposeTxt != '其他消费'">
 					<li>
 						<label>借款用途：</label>
 						<span>{{accepApplyLoan.loanPurposeTxt}}</span>
@@ -149,6 +162,12 @@
 						<span>{{accepCusBasicInfo.age}}</span>
 					</li>
 				</ul>
+				<ul class="illustration">
+					<li>
+						<label>借款人其他联系方式：</label>
+						<div>{{qitaphone}}</div>
+					</li>
+				</ul>
 				<ul>
 					<li>
 						<label>婚姻状况：</label>
@@ -183,54 +202,56 @@
 						<el-tooltip class="item" effect="dark" :content="accepCusBasicInfo.homeDetailAddr" :disabled="accepCusBasicInfo.homeDetailAddr==null" placement="top-start">
 					      <div class="textBox">{{accepCusBasicInfo.homeDetailAddr}}</div>
 					    </el-tooltip>
-						
-						<!-- <span class="spans">{{accepCusBasicInfo.homeProvinceName}}</span>
-						<span class="spans">南平市{{accepCusBasicInfo.homeCityName}}</span>
-						<span class="spans">察布查尔锡伯自治县{{accepCusBasicInfo.homeCountyName}}</span>
-						<span>{{accepCusBasicInfo.homeAddress}}</span> -->
 					</li>
-					<li>
+					<!-- <li>
 						<label>户口所在地邮编：</label>
 						<span>{{accepCusBasicInfo.homeZip}}</span>
+					</li> -->
+					<li>
+						<label>是否与户口地一致：</label>
+						<span>{{hukoudi}}</span>
 					</li>
 				</ul>
 				<ul>
 					<li class="province" style="width:66.6%">
 						<label class="ellipsis">现住宅地址：</label>
-						<!-- <span class="spans">{{accepCusBasicInfo.liveProvinceName}}</span>
-						<span class="spans">{{accepCusBasicInfo.liveCityName}}</span>
-						<span class="spans">察布查尔锡伯自治县{{accepCusBasicInfo.liveCountyName}}</span>
-						<span>{{accepCusBasicInfo.liveAddress}}</span> -->
 						<el-tooltip class="item" effect="dark" :content="accepCusBasicInfo.liveAddr" :disabled="accepCusBasicInfo.liveAddr==null" placement="top-start">
 					      <div class="textBox">{{accepCusBasicInfo.liveAddr}}</div>
 					    </el-tooltip>
 						
 					</li>
-					<li>
+					<!-- <li>
 						<label>住宅地邮编：</label>
 						<span>{{accepCusBasicInfo.liveZip}}</span>
+					</li> -->
+					<li>
+						<label>优先联系地址：</label>
+						<span>{{youxianlianxi}}</span>
 					</li>
 				</ul>
 				<ul>
-					<li style="width:66.6%">
-						<label>收入来源：</label>
-						<div class="channel2">
-							{{accepCusBasicInfo.incomeSource}}<!-- </textarea><textarea> -->
-						</div>
-					</li>
 					<li>
 						<label>借款人职业情况：</label>
 						<span>{{accepCusBasicInfo.professionTxt}}</span>
 					</li>
-				</ul>
-				<ul>
-					<li style="width:66.6%">
-						<label>其他收入：</label>
-						<div class="channel2">
-							{{accepCusBasicInfo.otherIncome}}<!-- <textarea></textarea> -->
-						</div>
-					</li>
 					<li></li>
+					<li></li>
+				</ul>
+				<ul class="illustration">
+					<li>
+						<label>收入来源：</label>
+						<el-tooltip class="item" effect="dark" :content="accepCusBasicInfo.incomeSource" :disabled="accepCusBasicInfo.incomeSource==null" placement="top-start">
+					      <div>{{accepCusBasicInfo.incomeSource}}</div>
+					    </el-tooltip>
+					</li>
+				</ul>
+				<ul class="illustration">
+					<li>
+						<label>其他收入：</label>
+						<el-tooltip class="item" effect="dark" :content="accepCusBasicInfo.otherIncome" :disabled="accepCusBasicInfo.otherIncome==null" placement="top-start">
+					      <div>{{accepCusBasicInfo.otherIncome}}</div>
+					    </el-tooltip>
+					</li>
 				</ul>
 				<ul>
 					<li>
@@ -262,15 +283,33 @@
 				</ul>
 				<ul>
 					<li>
+						<label>银行开户名称：</label>
+						<span>{{yinhangmingcheng}}</span>
+					</li>
+					<li>
+						<label>银行卡所属分行：</label>
+						<span>{{suoshufenhang}}</span>
+					</li>
+					<li>
+						<label>常用储蓄卡卡号：</label>
+						<span>{{chuxukakahao}}</span>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<label>网查征信用户名：</label>
+						<span>{{wangchayonghuming}}</span>
+					</li>
+					<li>
+						<label>网查征信用户密码：</label>
+						<span>{{wangchamima}}</span>
+					</li>
+					<li>
 						<label>是否缴纳商业保险：</label>
 						<span>{{accepCusBasicInfo.isPayInsuranceTxt}}</span>
 					</li>
-					<li>						
-					</li>
-					<li>
-					</li>
 				</ul>
-				<div v-if="accepCusBasicInfo.isPayInsurance=='1'">
+				<!-- <div v-if="accepCusBasicInfo.isPayInsurance=='1'">
 					<ul>
 						<li>
 							<label>保险公司名称：</label>
@@ -285,14 +324,10 @@
 					</ul>
 					<ul>
 						<li class="province" style="width:66.6%">
-						<label class="ellipsis">投保地点：</label>
-						<el-tooltip class="item" effect="dark" :content="insurAddr" :disabled="insurAddr==null" placement="top-start">
-					      <div class="textBox">{{insurAddr}}</div>
-					    </el-tooltip>
-						<!-- <span>{{accepCusBasicInfo.insurProvinceName}}</span>
-						<span>{{accepCusBasicInfo.insurCityName}}</span>
-						<span>{{accepCusBasicInfo.insurCountyName}}</span>
-						<span>{{accepCusBasicInfo.insurAddress}}</span> -->
+							<label class="ellipsis">投保地点：</label>
+							<el-tooltip class="item" effect="dark" :content="insurAddr" :disabled="insurAddr==null" placement="top-start">
+						      <div class="textBox">{{insurAddr}}</div>
+						    </el-tooltip>
 						</li>
 						<li>	
 						</li>
@@ -336,13 +371,16 @@
 							<span>{{accepCusBasicInfo.insurEffectDate}}</span>	
 						</li>
 					</ul>
-				</div>
+				</div> -->
 				<ul>
 					<li>
 						<label>是否是私营业主：</label>
 						<span>{{accepCusBasicInfo.privateOwnerFlagTxt}}</span>
 					</li>
-					<li></li>
+					<li>
+						<label>是否同业贷：</label>
+						<span>{{tongyedai}}</span>
+					</li>
 					<li></li>
 				</ul>
 		  	</el-collapse-item>
@@ -445,7 +483,7 @@
 				</ul>
 				<ul>
 					<li>
-						<label>企业近一年利润[万元]：</label>
+						<label>企业近利润[万元]：</label>
 						<span>{{accepCusPrivate.oneYearProfitAmt}}</span>
 					</li>
 					<li>
@@ -501,6 +539,96 @@
 				</ul>
 			</el-collapse-item>
 			<el-collapse-item name="5">
+		  		<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">同业贷情况</span>
+				</template>
+				<ul class="firstUl">
+					<li>
+						<label>同业机构名称：</label>
+						<span>{{jigoumingcheng}}</span>
+					</li>
+					<li>
+						<label>贷款产品：</label>
+						<span>{{daikuanchanpin}}</span>
+					</li>
+					<li>
+						<label>贷款额度[元]：</label>
+						<span>{{daikuanedu}}</span>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<label>贷款生效日期：</label>
+						<span>{{daikuanriqi}}</span>
+					</li>
+					<li>
+						<label>贷款总期限[月]：</label>
+						<span>{{daikuanzongqixian}}</span>
+					</li>
+					<li>
+						<label>每月还款日：</label>
+						<span>{{huankuanri}}</span>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<label>还款额度[元]：</label>
+						<span>{{huankuanedu}}</span>
+					</li>
+					<li>						
+					</li>
+					<li>						
+					</li>
+				</ul>
+			</el-collapse-item>
+			<el-collapse-item name="6">
+		  		<template slot="title">
+			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+			      <span class="headFont">保险信息</span>
+				</template>
+				<ul>
+						<li style="width:100%;">
+							<label>保险公司：</label>
+							<span>{{accepCusBasicInfo.insurCompanyName}}</span>
+						</li>
+						
+					</ul>
+					<ul>
+						<li>
+							<label class="selLabel">保险类型：</label>
+							<span>{{accepCusBasicInfo.insurTypeTxt}}</span>				
+						</li>
+						<li>
+							<label>缴费方式：</label>
+							<span>{{accepCusBasicInfo.insurPayWayTxt}}</span>
+						</li>
+						<li></li>
+					</ul>
+					<ul>
+						<li>
+							<label>期缴保费金额[元]：</label>
+							<span>{{accepCusBasicInfo.eachPayAmt}}</span>
+						</li>
+						<li>
+							<label>保单总额[元]：</label>
+							<span>{{accepCusBasicInfo.totalPayAmt}}</span>				
+						</li>
+						<li>
+							<label>缴纳年限[月]：</label>
+							<span>{{nianxian}}</span>
+						</li>
+					</ul>
+					<ul>
+						<li>
+							<label>生效日期：</label>
+							<span>{{shengxiaoriqi}}</span>	
+						</li>
+						<li></li>
+						<li></li>
+					</ul>
+			</el-collapse-item>
+			<el-collapse-item name="7">
 				<template slot="title">
 			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
 			      <span class="headFont">房产信息</span>
@@ -519,12 +647,12 @@
 				      <el-table-column
 				        prop="estateTypeTxt"
 				        label="房产类型"
-				        min-width="110">
+				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
 				        prop="propertyTypeTxt"
 				        label="产权性质"
-				        min-width="100">
+				        min-width="80">
 				      </el-table-column>
 				      <el-table-column
 				        prop="coveredArea"
@@ -545,12 +673,12 @@
 				      <el-table-column
 				        prop="estateZip"
 				        label="邮政编码"
-				        min-width="80">
+				        min-width="70">
 				      </el-table-column>
 				      <el-table-column
 				        prop="equityRatio"
-				        label="产权比例"
-				        min-width="80">
+				        label="产权比例[%]"
+				        min-width="70">
 				      </el-table-column>
 				      <el-table-column
 				        prop="loanPeriod"
@@ -560,7 +688,7 @@
 				      <el-table-column
 				        prop="mortgageStatusTxt"
 				        label="抵押状况"
-				        min-width="100">
+				        min-width="80">
 				      </el-table-column>
 				      <el-table-column
 				        prop="monthlyPay"
@@ -572,9 +700,14 @@
 				        label="贷款余额[元]"
 				        min-width="120">
 				      </el-table-column>
+				      <el-table-column
+				        prop="restLoans"
+				        label="房产是否共有"
+				        min-width="120">
+				      </el-table-column>
 			    </el-table>
 		  	</el-collapse-item>
-		  	<el-collapse-item name="6">
+		  	<el-collapse-item name="8">
 		  		<template slot="title">
 			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
 			      <span class="headFont">车辆信息</span>
@@ -645,9 +778,19 @@
 				        label="购买时间"
 				        min-width="120">
 				      </el-table-column>
+				      <el-table-column
+				        prop="buyDate"
+				        label="车产是否共有"
+				        min-width="100">
+				      </el-table-column>
+				      <el-table-column
+				        prop="buyDate"
+				        label="车产是否抵押"
+				        min-width="100">
+				      </el-table-column>
 			    </el-table>
 		  	</el-collapse-item>
-		  	<el-collapse-item name="7">
+		  	<el-collapse-item name="9">
 		  		<template slot="title">
 			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
 			      <span class="headFont">您的工作信息</span>
@@ -763,7 +906,7 @@
 					</li>
 				</ul>
 		  	</el-collapse-item>
-		  	<el-collapse-item name="8">
+		  	<el-collapse-item name="10">
 		  		<template slot="title">
 			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
 			      <span class="headFont">联系人信息</span>
@@ -877,6 +1020,26 @@
 				judgeFlag:'',
 				//您的个人信息 投保地点
 				insurAddr:'',
+				//借款人其他联系方式
+				qitaphone:'',
+				hukoudi:'',
+				youxianlianxi:'',
+				yinhangmingcheng:'',
+				suoshufenhang:'',
+				chuxukakahao:'',
+				wangchayonghuming:'',
+				wangchamima:'',
+				tongyedai:'',
+				jigoumingcheng:'',
+				daikuanchanpin:'',
+				daikuanedu:'',
+				daikuanriqi:'',
+				daikuanzongqixian:'',
+				huankuanri:'',
+				huankuanedu:'',
+				nianxian:'',
+				shengxiaoriqi:'',
+
 			};
 		},
 		mounted(){
@@ -899,6 +1062,12 @@
 		        this.applyId=this.taskInWaitting.applyId;
 		    }else if (this.judgeFlag.flag == '06') {
 		        this.taskInWaitting = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议经理
+		        this.applyId=this.taskInWaitting.applyId;
+		    }else if (this.judgeFlag.flag == '07') {
+		        this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //审批已办任务
+		        this.applyId=this.taskInWaitting.applyId;
+		    }else if (this.judgeFlag.flag == '08') {
+		        this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //审批历史任务
 		        this.applyId=this.taskInWaitting.applyId;
 		    }
 
@@ -932,11 +1101,11 @@
 			        };
 			        //产权比例 保留两位小数点+%
 			        if(this.accepCusEstates[i].equityRatio != null){
-			        	this.accepCusEstates[i].equityRatio = this.formatNumber(this.accepCusEstates[i].equityRatio,2,0).replace(/,/g,'')+'%';
+			        	this.accepCusEstates[i].equityRatio = this.formatNumber(this.accepCusEstates[i].equityRatio,2,0).replace(/,/g,'');
 			        };
 			        //建筑面积
 		        	if(this.accepCusEstates[i].coveredArea != null){
-		        		this.accepCusEstates[i].coveredArea = this.formatNumber(this.accepCusEstates[i].coveredArea,2,0).replace(/,/g,'')+'㎡';
+		        		this.accepCusEstates[i].coveredArea = this.formatNumber(this.accepCusEstates[i].coveredArea,2,0).replace(/,/g,'');
 		        	};
 		        	//console.log(this.accepCusEstates[i].monthlyPay);
 		        };
@@ -1314,5 +1483,44 @@
     	padding: 5px;
     	display:inline-block;
     	overflow:auto;
+	}
+	/* 渠道说明 */
+	.applicationInformationDetail ul li.qudaoexplain{
+		width: 66.6%;
+	}
+	.qudaoexplain label{
+		float: left;
+	}
+	.qudaoexplain span{
+		display: inline-block;
+		width: calc( 100% - 166px );
+		height: 24px;
+		padding-left: 5px;
+	}
+	.applicationInformationDetail ul.qitaexplain{
+		height: 75px;
+		margin-bottom: 10px;
+	}
+	.applicationInformationDetail ul.qitaexplain li:nth-of-type(1){
+		height: 75px;
+		line-height: 75px;
+	}
+	.applicationInformationDetail ul.qitaexplain li:nth-of-type(2){
+		width: 66.6%;
+		height: 75px;
+	}
+	.applicationInformationDetail ul.qitaexplain li:nth-of-type(2) label{
+		display: inline-block;
+	    float: left;
+	    height: 75px;
+	    line-height: 75px;
+	}
+	.applicationInformationDetail ul.qitaexplain li:nth-of-type(2) div{
+		height: 100%;
+	    width: calc( 100% - 166px );
+	    border: 1px solid #d8dce5;
+	    padding: 5px;
+	    display: inline-block;
+	    overflow: auto;
 	}
 </style>

@@ -26,9 +26,9 @@
             <p>
               <!-- 一级节点 -->
               <span style="position:relative;">{{item.arcName}}
-                <img src="../../../../static/images/918FE1E0-6EEB-4642-A5E6-253AC973FF41@1x.png" style="position:absolute;top:12px;left:26px"
+                <img src="../../../../static/images/918FE1E0-6EEB-4642-A5E6-253AC973FF41@1x.png" style="position:absolute;top:12px;left:10px"
                   v-show="opendImg[ind]">
-                <img src="../../../../static/images/5530D698-2823-417F-B8BC-8DC9037BC848@1x.png" style="position:absolute;top:14px;left:26px"
+                <img src="../../../../static/images/5530D698-2823-417F-B8BC-8DC9037BC848@1x.png" style="position:absolute;top:14px;left:10px"
                   v-show="closedImg[ind]">
               </span>
               <span>{{item.arcNum}}</span>
@@ -178,7 +178,8 @@
           if (this.smallPicInd < 0) {
             this.smallPicInd = this.$refs.small_pic_ref.length - 1;
           }
-        }        this.defaultBigPicCss();
+        }
+        this.defaultBigPicCss();
       },
       next() {
         this.smallPicInd++;
@@ -186,18 +187,21 @@
           if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
             this.smallPicInd = 0;
           }
-        }        this.defaultBigPicCss();
+        }
+        this.defaultBigPicCss();
       },
       larger() {
         if (this.$refs.Big_pic_ref) {
           this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
-            100 + "px"; this.$refs.Big_pic_ref[0].style.width = "auto";
+            100 + "px";
+          this.$refs.Big_pic_ref[0].style.width = "auto";
         }
       },
       smaller() {
         if (this.$refs.Big_pic_ref) {
           this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
-            100 + "px"; this.$refs.Big_pic_ref[0].style.width = "auto";
+            100 + "px";
+          this.$refs.Big_pic_ref[0].style.width = "auto";
         }
       },
       clockWise() {
@@ -290,9 +294,11 @@
             if (event.wheelDelta < 0) {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
                 100 + "px";
+              this.$refs.Big_pic_ref[0].style.width = 'auto';
             } else {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
                 100 + "px";
+              this.$refs.Big_pic_ref[0].style.width = 'auto';
             }
           };
           this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => {
@@ -301,10 +307,12 @@
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
                   .height) -
                 100 + "px";
+              this.$refs.Big_pic_ref[0].style.width = 'auto';
             } else {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
                   .height) +
                 100 + "px";
+              this.$refs.Big_pic_ref[0].style.width = 'auto';
             }
           });
         }
@@ -330,6 +338,10 @@
         this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
       } else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
         this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议主管+专员
+      }else if (this.judgeFlag.flag == '07') {
+        this.localInf = JSON.parse(localStorage.getItem("TtaskInWaitting")) //审批已办-任务
+      }else if (this.judgeFlag.flag == '08') {
+        this.localInf = JSON.parse(localStorage.getItem("TtaskInWaitting")) //审批历史-任务
       }
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {

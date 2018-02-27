@@ -27,16 +27,6 @@ axios.interceptors.response.use(  response => {    
   return Promise.reject(error);  
 });
 
-axios.interceptors.request.use((config) => {
-  if (config.url.indexOf("api") >= 0) {
-    config.url = config.url.replace('/api', "");
-    config.baseURL = 'http://10.1.26.200/20717 ';
-  }
-  return config;
-}, (error) => {
-  return Promise.reject(error);
-});
-
 export default {
   install(Vue, options) {
     Vue.prototype.get = function (url, params = {}) {

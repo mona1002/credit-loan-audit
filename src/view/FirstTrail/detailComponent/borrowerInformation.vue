@@ -107,7 +107,7 @@
 					      </el-table-column>
 					      <el-table-column
 					        prop="equityRatio"
-					        label="产权比例"
+					        label="产权比例[%]"
 					        min-width="100">
 					        <template slot-scope="scope">
 						        <el-input v-model="scope.row.equityRatio" v-on:blur="postcode(scope.row,'equityRatio')" placeholder="请输入内容"></el-input>
@@ -1396,11 +1396,11 @@
 				        };
 				        //产权比例 保留两位小数点+%
 				        if(this.accepCusEstates[i].equityRatio != null){
-				        	this.accepCusEstates[i].equityRatio = this.formatNumber(this.accepCusEstates[i].equityRatio,2,0).replace(/,/g,'')+'%';
+				        	this.accepCusEstates[i].equityRatio = this.formatNumber(this.accepCusEstates[i].equityRatio,2,0).replace(/,/g,'');
 				        };
 				        //建筑面积
 			        	if(this.borestateList[i].coveredArea != null){
-			        		this.borestateList[i].coveredArea = this.formatNumber(this.borestateList[i].coveredArea,2,0).replace(/,/g,'')+'㎡';
+			        		this.borestateList[i].coveredArea = this.formatNumber(this.borestateList[i].coveredArea,2,0).replace(/,/g,'');
 			        	};
 			        	//console.log(this.borestateList[i].monthlyPay);
 			        }

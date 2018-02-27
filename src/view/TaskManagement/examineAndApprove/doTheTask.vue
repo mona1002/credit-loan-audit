@@ -19,12 +19,12 @@
 		      <el-row class="row row1"  type="flex">
 			        <el-col :span="8" :offset="0">
 			          <span class="keywordText">产品名称</span>
-			          <el-select v-model="proName" placeholder="请选择">
+			          <el-select v-model="proCode" placeholder="请选择">
 					    <el-option
 					      v-for="item in productNames"
-					      :key="item.value"
-					      :label="item.label"
-					      :value="item.value">
+					      :key="item.id"
+					      :label="item.proName"
+					      :value="item.proCode">
 					    </el-option>
 					  </el-select>
 			        </el-col>
@@ -68,7 +68,7 @@
 		      </el-row>
 		    </div>
 		    <div class="taskWhead">
-				<p>信审任务列表</p>
+				<p>审批-已办任务列表</p>
 			</div>
 			<div class="taskWtable">
 				<el-table :data="datas" style="width: 100%" height="500" @row-click='goDetail' border>
@@ -159,42 +159,42 @@
 				activeNames:['1'],
 				totals:{},
 				currentPage:1,// 默认显示的当前页
-				//data:[],
+				setPageSize:10,
 				datas:[],
-				applySubNo : '',
-		        custName_la : '',
-		        certCode : '',
-				//pageNum:1,
-		        //pageSize:20,
-		        setPageSize:10,
+				applySubNo : '',//进件编号-查询
+		        custName_la : '',//客户名称模糊-查询
+		        certCode : '',////证件号码-查询
+		        proCode : '',//产品code-查询
+		        emerType : '',//紧急程度-查询
+		        appDate_ge:'',//申请日期[大于等于]-查询
+		        appDate_le:'',//申请日期[小于等于]-查询
+		        completeTime_ge:'',//本环节处理时间[大于等于]-查询
+		        completeTime_le:'', //本环节处理时间[小于等于]-查询
 			    queryParam: {
-			        processTemplateId :'',
-		            taskNodeName : '',
-		            taskStatus : '',
-		            userCode : '',
-		            orgCode : '',
-		            pageNum : 1,
-		            pageSize : 10,
-		            applySubNo : '',
-		            custName_la : '',
-		            certCode : ''
+			        processTemplateId :'creditApp',//流程模板
+		            taskNodeName : '',//任务名称
+		            taskStatus : '03',//任务状态(代办01、已办03、历史不用传)
+		            userCode : '',//用户编码
+		            orgCode : '',//机构编码
+		            pageNum : 1,//页数（第几页）
+		            pageSize : 10,//页面显示行数
+		            applySubNo : '',//进件编号
+		            custName_la : '',//客户名称模糊
+		            certCode : '',//证件号码
+		            //紧急程度
+			        emerType:'',
+			        //产品code
+			        proCode:'',
+			        //申请日期[大于等于]
+			        appDate_ge:'',
+			        //申请日期[小于等于]
+			        appDate_le:'',
+			        //本环节处理时间[大于等于]
+			        completeTime_ge:'',
+			        //本环节处理时间[小于等于]
+			        completeTime_le:''
 			      },
-		      	productNames: [{
-		          value: '选项1',
-		          label: '黄金糕'
-		        }, {
-		          value: '选项2',
-		          label: '双皮奶'
-		        }, {
-		          value: '选项3',
-		          label: '蚵仔煎'
-		        }, {
-		          value: '选项4',
-		          label: '龙须面'
-		        }, {
-		          value: '选项5',
-		          label: '北京烤鸭'
-		        }],
+		      	productNames: [],
 		        //紧急程度
 		        UrgencyDegree:[{
 		        	value: '00',
@@ -208,14 +208,11 @@
 		        	value: '02',
 		            label: '收费加急'
 		        }],
+		        //申请信息 时间 数组
 		        applicationDate:'',
+		        //本环节处理时间 时间 数组
 		        processingTime:'',
-		        //紧急程度
-		        emerType:'',
-		        //产品名称
-		        proName:'',
-		        //taskType:'',
-		        // timeColor:false,
+		        judge:'',
 			}
 		},
 		components: {
@@ -223,21 +220,20 @@
 	    },
 		mounted(){
 			//一进入页面就发送请求
-			//this.queryParam = JSON.parse(localStorage.getItem('workbenchPass'));
-			console.log(JSON.parse(localStorage.getItem('workbenchPass')))
-			this.queryParam.processTemplateId=JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
-			this.queryParam.taskNodeName=JSON.parse(localStorage.getItem('workbenchPass')).taskNodeName;
-			this.queryParam.taskStatus=JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
-			//this.queryParam.userCode=JSON.parse(localStorage.getItem('userInf')).userCode;
-			//this.queryParam.orgCode=JSON.parse(localStorage.getItem('userInf')).orgCode;
-			// 登录 单独存  userCode  orgCode 
-			 this.queryParam.userCode=JSON.parse(localStorage.getItem('userCode'));
-			 this.queryParam.orgCode=JSON.parse(localStorage.getItem('orgCode'));
-			console.log(this.processTemplateId+'...'+this.taskNodeName+'...'+this.taskStatus+'...'+this.userCode+'...'+this.orgCode);
-			
+			this.queryParam.userCode=JSON.parse(localStorage.getItem('userInf')).userCode;
+			this.queryParam.orgCode=JSON.parse(localStorage.getItem('userInf')).orgCode;
+			//请求产品
+			this.product();
 			this.request(this.queryParam);	
 		},
 		methods:{
+			product(){
+				this.get("/credit/product").then(res => {
+					if(res.statusCode == 200){
+						this.productNames = res.data;
+					}
+				});
+			},
 		    request(param){
 		    	console.log(this.queryParam);
 		    	this.post('/workFlowTaskQuery/getTaskToDoList',
@@ -272,16 +268,81 @@
 		    	this.applySubNo = '';
 	            this.custName_la = '';
 	            this.certCode = '';
+	            this.proCode = '';//产品code-查询
+		        this.emerType = '';//紧急程度-查询
+		        /*this.appDate_ge = '';//申请日期[大于等于]-查询
+		        this.appDate_le = '';//申请日期[小于等于]-查询
+		        this.completeTime_ge = '';//本环节处理时间[大于等于]-查询
+		        this.completeTime_le = '';//本环节处理时间[小于等于]-查询*/
+		        //申请信息 时间 数组
+		        this.applicationDate = '',
+		        //本环节处理时间 时间 数组
+		        this.processingTime = '',
+
 	            this.queryParam.applySubNo = '';
 			    this.queryParam.custName_la = '';
 			    this.queryParam.certCode = '';
+			    this.queryParam.proCode = '';//产品code-查询
+		        this.queryParam.emerType = '';//紧急程度-查询
+		        this.queryParam.appDate_ge = '';//申请日期[大于等于]-查询
+		        this.queryParam.appDate_le = '';//申请日期[小于等于]-查询
+		        this.queryParam.completeTime_ge = '';//本环节处理时间[大于等于]-查询
+		        this.queryParam.completeTime_le = '';//本环节处理时间[小于等于]-查询
 			    this.request(this.queryParam);
 		    },
 		    /*查询*/
 		    search(){
+		    	//申请日期[大于等于]-查询
+		    	if(this.applicationDate){
+			    	var appge = new Date(this.applicationDate[0]),
+			    		appgey = appge.getFullYear(),
+			    		appgem = appge.getMonth() + 1;
+			    		appgem = appgem < 10 ? ('0' + appgem) : appgem;
+			    	var appged = appge.getDate();
+			    		appged = appged < 10 ? ('0' + appged) : appged;
+			    	this.queryParam.appDate_ge = appgey+'-'+appgem+'-'+appged;
+			    	//申请日期[小于等于]-查询
+			    	var apple = new Date(this.applicationDate[1]),
+			    		appley = apple.getFullYear(),
+			    		applem = apple.getMonth() + 1;
+			    		applem = applem < 10 ? ('0' + applem) : applem;
+			    	var appled = apple.getDate();
+		    			appled = appled < 10 ? ('0' + appled) : appled;
+		    			this.queryParam.appDate_le = appley+'-'+applem+'-'+appled;
+		    	}else{
+		    		this.queryParam.appDate_ge = '';
+		    		this.queryParam.appDate_le = '';
+		    	};
+		    	if(this.processingTime){
+			    	//本环节处理时间[大于等于]-查询
+			    	var comge = new Date(this.processingTime[0]),
+			    		comgey = comge.getFullYear(),
+			    		comgem = comge.getMonth() + 1;
+			    		comgem = comgem < 10 ? ('0' + comgem) : comgem;
+			    	var comged = comge.getDate();
+			    		comged = comged < 10 ? ('0' + comged) : comged;
+			    	this.queryParam.completeTime_ge = comgey+'-'+comgem+'-'+comged;
+			    	//本环节处理时间[小于等于]-查询
+			    	var comle = new Date(this.processingTime[1]),
+			    		comley = comle.getFullYear(),
+			    		comlem = comle.getMonth() + 1;
+			    		comlem = comlem < 10 ? ('0' + comlem) : comlem;
+			    	var comled = comle.getDate();
+			    		comled = comled < 10 ? ('0' + comled) : comled;
+			    	this.queryParam.completeTime_le = comley+'-'+comlem+'-'+comled;
+		    	}else{
+		    		this.queryParam.completeTime_ge = '';
+		    		this.queryParam.completeTime_le = '';
+		    	}
 		    	this.queryParam.applySubNo = this.applySubNo;
 			    this.queryParam.custName_la = this.custName_la;
 			    this.queryParam.certCode = this.certCode;
+			    this.queryParam.proCode = this.proCode;//产品code-查询
+		        this.queryParam.emerType = this.emerType;//紧急程度-查询
+		        //this.queryParam.appDate_ge = appgey+'-'+appgem+'-'+appged;//申请日期[大于等于]-查询
+		        //this.queryParam.appDate_le = appley+'-'+applem+'-'+appled;//申请日期[小于等于]-查询
+		        //this.queryParam.completeTime_ge = comgey+'-'+comgem+'-'+comged;//本环节处理时间[大于等于]-查询
+		        //this.queryParam.completeTime_le = comley+'-'+comlem+'-'+comled; //本环节处理时间[小于等于]-查询
 			    this.request(this.queryParam);
 			    console.log(this.queryParam);
 		    },
@@ -289,8 +350,12 @@
 			goDetail(row, event, column) {
 				console.log(row);
 					// this.$router.push({path:'/SplitScreen',query:row});
-		      this.$router.push({path:'/SplitScreen'});
-		      localStorage.setItem("taskInWaitting",JSON.stringify(row));
+		      this.$router.push({path:'/TaskManagementSplit'});
+		      localStorage.setItem("TtaskInWaitting",JSON.stringify(row));
+		      this.judge = {
+		      	flag:'07'
+		      };
+		      localStorage.setItem("TtaskInWaitting",JSON.stringify(judge));
 		    },
 		    handleSizeChange(val) {
 		      console.log('每页 ${val} 条');

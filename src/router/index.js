@@ -1,11 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import {
-//   getCookie
-// } from '@/util/util'
 // 头部导航
 import myHead from '@/view/header'
-import test from '@/view/test'
 
 import HelloWorld from '@/view/HelloWorld'
 /*初审审批*/
@@ -29,13 +25,10 @@ import CreditForm from '@/view/FirstTrail/detailComponent/CreditForm'
 // 登录页
 import login from '@/view/login/login'
 import cCreditForm from '@/view/FirstTrail/checkComponent/cCreditForm'
-
-// import cCreditForm from '@/view/FirstTrail/checkComponent/cCreditForm'
 // 内部匹配
 import InternalMatch from '@/view/FirstTrail/InternalMatch'
 // 电话征信
 import PhoneCredit from '@/view/FirstTrail/PhoneCredit'
-
 // 信审审批
 import CreditApproval from '@/view/FirstTrail/CreditApproval'
 //----- 匹配查询页面--------
@@ -44,8 +37,6 @@ import MatchingInf from '@/view/FirstTrail/MatchingInf'
 import RApprovalConclusion from '@/view/FirstTrail/ReadComponent/RApprovalConclusion'
 // 放账信息（部分）
 import RFinanceInformation from '@/view/FirstTrail/ReadComponent/RFinanceInformation'
-
-
 // ----------终审-------------------------
 import FSplitScreen from '@/view/FinalTrial/FSplitScreen'
 import FcCreditForm from '@/view/FinalTrial/FinalComponent/FcCreditForm'
@@ -54,8 +45,6 @@ import FtaskInWaitting from '@/view/FinalTrial/FtaskInWaitting'
 import FMCreditForm from '@/view/FinalTrial/FinalMatchComponent/FMCreditForm'
 import FMatchingInf from '@/view/FinalTrial/FMatchingInf'
 import FCreditForm from '../view/FinalTrial/FinalComponent/FCreditForm'
-
-
 // ------------反欺诈------------------
 import AntiAudit from '@/view/AntiFraud/AntiAudit.vue'//反欺诈分屏
 import AntiRules from '../view/AntiFraud/AntiRules.vue'//反欺诈规则设定
@@ -70,7 +59,6 @@ import AntiApplyEdit from '@/view/AntiFraud/AntiApplyEdit.vue'
 import AntiApplyInf from '@/view/AntiFraud/AntiApplyInf.vue'
 import AntiApplyAdd from '@/view/AntiFraud/AntiApplyAdd.vue'
 import aAntiApplyInf from '@/view/AntiFraud/components/aAntiApplyInf.vue'
-
 //反欺诈调查
 import aAntiFraudInvestigation from '@/view/AntiFraud/components/aAntiFraudInvestigation.vue'
 // 审批结论
@@ -79,7 +67,6 @@ import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
 import AborrowerInformationDetail from '@/view/AntiFraud/components/AborrowerInformationDetail.vue'
 // 反欺诈、复议（内匹）借款人资料
 import MborrowerInformationSetail from '@/view/AntiFraud/matchComponent/MborrowerInformationSetail.vue'
-
 // -------------------------复议---------------------
 import ReconsiderApply from '../view/Reconsider/ReconsiderComponents/ReconsiderApply.vue'//复议申请
 import reconsiderList from '../view/Reconsider/reconsiderList.vue'//复议申请任务列表
@@ -88,18 +75,18 @@ import ReconsiderSplit from '../view/Reconsider/ReconsiderSplit.vue'//复议专�
 //复议结论
 import ReconsiderationConclusion from '../view/Reconsider/ReconsiderComponents/ReconsiderationConclusion.vue'//复议专员
 import ReconjingliConclusion from '../view/Reconsider/ReconsiderComponents/ReconjingliConclusion.vue'//复议经理
-
-
 // -------------------------流程监控---------------------
 import processMoni from '../view/processMoni/processMoni.vue'
 // -----------------------任务管理----------------------
 import DoneTask from'../view/TaskManagement/reconsider/DoneTask.vue'//
 import HistoryTask from'../view/TaskManagement/reconsider/HistoryTask.vue'//
+import aDoneTask from'../view/TaskManagement/antiTaskManagment/aDoneTask.vue'//
+import aHistoryTask from'../view/TaskManagement/antiTaskManagment/aHistoryTask.vue'//
 import TaskManagementSplit from'../view/TaskManagement/reconsider/TaskManagementSplit.vue'//
 import doTheTask from'../view/TaskManagement/examineAndApprove/doTheTask.vue'//审批任务管理——已办任务
 import historicalTask from'../view/TaskManagement/examineAndApprove/historicalTask.vue'//审批任务管理——历史任务
-
-
+//  -----------------------质检----------------------
+import tb from'../view/QualityTesting/roles/tb.vue'
 
 Vue.use(Router)
 
@@ -110,10 +97,6 @@ const routes = [{
 {
   path: '/workbench',
   component: login,
-},
-{
-  path: '/test',
-  component: test
 },
 /*初审审批*/
 {
@@ -314,12 +297,6 @@ const routes = [{
   path:'/ReconjingliConclusion',
   component:ReconjingliConclusion
 },
-
-
-// {
-//   path:'/ReconsiderAntiSplit',
-//   component:ReconsiderAntiSplit
-// },
 // ---------------------流程监控---------
 {
   path: '/processMoni',
@@ -331,8 +308,17 @@ const routes = [{
   component: DoneTask
 },
 {
+  path: '/aDoneTask',
+  component: aDoneTask
+},
+{
   path: '/HistoryTask',
   component: HistoryTask
+  
+},
+{
+  path: '/aHistoryTask',
+  component: aHistoryTask
 },
 {
   path: '/TaskManagementSplit',
@@ -345,7 +331,12 @@ const routes = [{
 {
   path: '/historicalTask',
   component: historicalTask
-}
+},
+// ---------------质检--------------------
+{
+  path:'/tb',
+  component:tb
+},
 ];
 
 const router = new Router({
