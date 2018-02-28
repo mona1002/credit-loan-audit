@@ -460,8 +460,8 @@ export default {
 
 
     var judgeFlag = JSON.parse(localStorage.getItem('judge'));
-    // 复议不显示添加
-    if(judgeFlag =='04' || judgeFlag =='05'){
+    // 复议不显示添加  05 专员   06 主管
+    if(judgeFlag.flag =='05' || judgeFlag.flag =='06'){
       this.addBtnShow = false;
     }
 
