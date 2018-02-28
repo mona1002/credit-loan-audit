@@ -13,7 +13,7 @@
         </div>
         <div>
           <!-- @change="selectChangeMain" -->
-          <el-select v-model="auditResult" >
+          <el-select v-model="auditResult">
             <el-option label="风险拒贷[黑名单]" value="00"></el-option>
             <el-option label="风险拒贷[灰名单]" value="01"></el-option>
             <el-option label="风险排除" value="02"></el-option>
@@ -37,8 +37,8 @@
         </div>
         <div>
           <!-- @change="selectChange" -->
-          <el-select  v-model="mainReason">
-            <el-option v-for="item in mainReasons" :label="item.reasonName" :value="item">
+          <el-select v-model="mainReason">
+            <el-option v-for="item in mainReasons" :label="item.reasonName" :value="item.id">
             </el-option>
           </el-select>
         </div>
@@ -50,7 +50,7 @@
         </div>
         <div>
           <el-select v-model="secondReason">
-            <el-option v-for="item in secondReasons" :label="item.reasonName" :value="item">
+            <el-option v-for="item in secondReasons" :label="item.reasonName" :value="item.id">
             </el-option>
           </el-select>
         </div>
@@ -130,7 +130,6 @@
             </el-select>
           </el-form-item>
         </div>
-        
         <div class="back-form-li" style="height:60px;line-height: 60px;padding-top:5px;">
           <span style="color:red;display:inline-block;width:0px;float:left;position:relative;top:-8px;">*</span>
           <el-form-item label="原因说明 :">
@@ -255,8 +254,12 @@ export default {
       taskStatus: '',
       lcgjLoading: '',
       mainReason: '', // 主原因
+      mainReasonT: '', // 主管临时变量
       mainReasons: [],
+      mainReasonName: '', // 主原因name
       secondReason: '', // 子原因
+      secondReasonT: '', //  主管临时变量
+      secondReasonName: '', // 子原因name
       secondReasons: [],
       secondaryReason: '',
       reasonRemark: '',
@@ -384,7 +387,7 @@ export default {
     }
 
     // 请求风险项
-    this.getRiskItems();
+    this.getRiskItems(false);
     // 请求  案件编号
     this.queryCaseNumList();
 
@@ -444,7 +447,7 @@ export default {
       })
     },
     // 请求风险项
-    getRiskItems() {
+    getRiskItems(TF) {
       this.get('/credit/getRiskItems?applyId=' + this.applyId).then(res => {
 
         if (res.statusCode == 200) {
@@ -452,6 +455,24 @@ export default {
           console.log(res)
           this.riskSections = res.data;
           console.log(this.riskSections)
+          // 主管 
+          // if (TF == true) {
+          //   for (var i = 0; i < this.riskSection.length; i++) {
+          //     // 请求回来的列表值
+          //     for (var j = 0; j < this.riskSections.length; j++) {
+          //       // 判断页面的每个值 是否 == 列表的选项
+          //       if (this.riskSection[i] == this.riskSections[j].showMsg) {
+          //         // 赋值给对象 
+          //         this.riskSectionArr.push({
+          //           'showMsg': this.riskSections[j].showMsg,
+          //           'enumCode': this.riskSections[j].enumCode,
+          //           'returnMsg': this.riskSections[j].returnMsg
+          //         });
+          //         continue;
+          //       }
+          //     }
+          //   }
+          // }
         }
       })
     },
@@ -504,9 +525,9 @@ export default {
             if (this.riskSection[i] == this.riskSections[j].showMsg) {
               // 赋值给对象 
               this.riskSectionArr.push({
-                'showMsg':this.riskSections[j].showMsg,
-                'enumCode':this.riskSections[j].enumCode,
-                'returnMsg':this.riskSections[j].returnMsg
+                'showMsg': this.riskSections[j].showMsg,
+                'enumCode': this.riskSections[j].enumCode,
+                'returnMsg': this.riskSections[j].returnMsg
               });
               continue;
             }
@@ -514,6 +535,23 @@ export default {
         }
         console.log(this.riskSectionArr)
         // return;
+      }
+      // 取出主原因name
+      if (this.mainReason) {
+        for (let i = 0; i < this.mainReasons.lenth; i++) {
+          if (this.mainReasons[i].id == this.mainReason) {
+            this.mainReasonName = this.mainReasons[i].reasonName;
+          }
+        }
+      }
+
+      // 取出子原因name
+      if (this.secondReason) {
+        for (let i = 0; i < this.secondReasons.length; i++) {
+          if (this.secondReasons[i].id == this.secondReason) {
+            this.secondReasonName = this.secondReasons[i].reasonName;
+          }
+        }
       }
 
       const h = this.$createElement;
@@ -532,10 +570,10 @@ export default {
 
             this.post('/fraudAuditOpinion/insert', {
               applyId: this.applyId, // 申请单id
-              mainreasonId: this.mainReason.id, // 欺诈主原因id
-              subreasonId: this.secondId.id, // 欺诈子原因id
-              mainreaName: this.mainReason.reasonName, // 欺诈主原因名称
-              subreaName: this.secondReason.reasonName, // 欺诈子原因名称
+              mainreasonId: this.mainReason, // 欺诈主原因id
+              subreasonId: this.secondReason, // 欺诈子原因id
+              mainreaName: this.mainReasonName, // 欺诈主原因名称
+              subreaName: this.secondReasonName, // 欺诈子原因名称
               riskSection: this.riskSectionArr, // 风险项
               auditDesc: this.auditDesc, // 反欺诈决策反馈
               auditResult: this.auditResult, // 审核结论
@@ -816,12 +854,12 @@ export default {
       console.log(val)
       this.secondReason = '';
       // 在主原因改变的时候请求子原因
-      this.getReason('main', val);
+      this.getReason('main', val, false);
 
       if (val == '00') {
-        this.getReason('main', '08');
+        this.getReason('main', '08', false);
       } else if (val == '01') {
-        this.getReason('main', '09');
+        this.getReason('main', '09', false);
       } else if (val == '02') {
         console.log('风险排除 不请求 原因')
       }
@@ -835,7 +873,7 @@ export default {
       // this.mainReason = val.reasonName;
 
       // 在主原因改变的时候请求子原因
-      this.getReason('second', this.mainReason);
+      this.getReason('second', this.mainReason, false);
     },
     // 取子原因的 id
     selectChangeSccond: function(val) {
@@ -857,7 +895,10 @@ export default {
       console.log('====================================')
     },
     // 通过监听请求主原因
-    getReason(flag, type) {
+    // flag 主/子
+    // type 类型
+    // true 真 主管 false 假 专员
+    getReason(flag, type, TF) {
       var mainType;
       if (flag == 'main') {
         if (type == '00') {
@@ -871,7 +912,10 @@ export default {
           console.log(res);
           if (res.statusCode == '200') {
             this.mainReasons = res.data;
-
+            if (TF == true) {
+              console.log('主管 主原因');
+              this.mainReason = this.mainReasonT;
+            }
             console.log(this.mainReason);
           }
         })
@@ -883,6 +927,11 @@ export default {
             this.secondReasons = res.data;
 
             console.log(this.secondReason);
+            if (TF == true) {
+              console.log('主管 子原因')
+              this.secondReason = this.secondReasonT;
+            }
+            console.log(this.secondReason);
           }
         })
       }
@@ -893,7 +942,7 @@ export default {
         if (res.statusCode == 200) {
           console.log(res);
           // 先赋值,直接点审批
-          
+
           // this.mainReason.id = res.data.mainreasonId; // 欺诈主原因id
           // this.secondId.id = res.data.subreasonId; // 欺诈子原因id
           // this.mainReason.reasonName = res.data.mainreaName; // 欺诈主原因名称
@@ -905,18 +954,22 @@ export default {
 
           this.auditResult = res.data.auditResult; // 审核结论
           // 请求主原因
-          if(this.auditResult){
-            this.getReason('main', res.data.auditResult);
+          this.mainReasonT = res.data.mainreasonId;
+          if (this.auditResult) {
+            this.getReason('main', this.auditResult, true);
+            // 赋值主原因
           }
+          this.mainReasonName = res.data.mainreaName;
           // 主原因
           // this.mainReason = res.data.mainreasonId;
           // 请求子原因
-          if(this.mainReason){
-            this.getReason('second', this.mainReason.id);
+          this.secondReasonT = res.data.subreasonId;
+          if (res.data.mainreasonId) {
+            this.getReason('second', this.mainReasonT, true);
           }
-          // 子原因
-          this.secondReason = res.data.subreasonId;
-          // 风险项
+          this.subreaName = res.data.subreaName;
+
+          // 风险项 riskSection
           this.riskSection = res.data.riskSection;
           // 反欺诈决策反馈
           this.auditDesc = res.data.auditDesc;
@@ -925,7 +978,8 @@ export default {
           // 案件描述
           this.caseDesc = res.data.caseDesc;
 
-
+          // 请求风险项
+          this.getRiskItems(true);
         }
       })
     }
@@ -939,14 +993,14 @@ export default {
       this.mainId = '';
       this.secondReason = '';
 
-      this.getReason('main', val);
-      
+      this.getReason('main', val, false);
+
 
     },
     // // 通过主原因  请求 子原因
     mainReason: function(val) {
       this.secondReason = '';
-      this.getReason('second', val.id);
+      this.getReason('second', val, false);
     }
   }
 }
@@ -969,6 +1023,7 @@ export default {
   overflow: hidden;
 }
 
+
 /* 折叠面板头部背景色和icon */
 
 .approval-colun .icon_hat {
@@ -980,6 +1035,7 @@ export default {
   font-size: 16px;
 }
 
+
 /* 一列 */
 
 .approval-colun .item-column1 {
@@ -989,6 +1045,7 @@ export default {
   margin-bottom: 10px;
 }
 
+
 /* 两列 */
 
 .approval-colun .item-column2 {
@@ -996,6 +1053,7 @@ export default {
   float: left;
   margin: 0;
 }
+
 
 /* 三列 */
 
@@ -1016,6 +1074,7 @@ export default {
   font-size: 14px;
 }
 
+
 /* 3列 空位 */
 
 .approval-colun .item-column3-null {
@@ -1030,6 +1089,7 @@ export default {
   height: 30px;
   line-height: 30px;
 }
+
 
 /* input hover 样式 */
 
@@ -1046,6 +1106,7 @@ export default {
   float: left;
 }
 
+
 /* 按钮集合控件 */
 
 .approval-colun .btn-div {
@@ -1053,6 +1114,7 @@ export default {
   width: 80%;
   float: left;
 }
+
 
 /*挂起*/
 
@@ -1067,6 +1129,7 @@ export default {
   display: inline-block;
 }
 
+
 /*回退*/
 
 .approval-colun .el-icon-check-back {
@@ -1079,6 +1142,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 /*拒绝*/
 
@@ -1093,6 +1157,7 @@ export default {
   display: inline-block;
 }
 
+
 /*放弃*/
 
 .approval-colun .el-icon-check-giveup {
@@ -1105,6 +1170,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 /*审批*/
 
@@ -1119,6 +1185,7 @@ export default {
   display: inline-block;
 }
 
+
 /*流程轨迹*/
 
 .approval-colun .el-icon-check-lcgj {
@@ -1132,6 +1199,7 @@ export default {
   display: inline-block;
 }
 
+
 /* 反欺诈 审批结论 - btn*/
 
 .approval-colun .credit-btn {
@@ -1140,6 +1208,7 @@ export default {
   color: #333;
   border: none;
 }
+
 
 /* 反欺诈 审批结论  - - 弹窗*/
 
@@ -1166,6 +1235,7 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
 
 /* form-title */
 
@@ -1207,11 +1277,13 @@ export default {
   padding: 2px 10px 0 10px;
 }
 
+
 /* textarea */
 
 .approval-colun .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
 
 /* 弹窗页面 关闭按钮*/
 
@@ -1230,6 +1302,7 @@ export default {
   top: 5px;
 }
 
+
 /* 审批 表单 */
 
 .approval-colun .appro-form {
@@ -1243,6 +1316,7 @@ export default {
   overflow: hidden;
 }
 
+
 /*.approval-colun .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -1250,6 +1324,7 @@ export default {
 .approval-colun .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
 
 /* 流程轨迹 */
 
@@ -1279,11 +1354,13 @@ export default {
   /*width:300px;*/
 }
 
+
 /* 反欺诈 -- 审批结论 */
 
 .approval-colun .form-ul {
   padding-left: 30px;
 }
+
 
 /* 默认显示样式 */
 
@@ -1308,11 +1385,13 @@ export default {
   width: 100%;
 }
 
+
 /* 审批 label*/
 
 .approval-colun .appro-form .back-form-edit-li .el-form-item__label {
   width: 120px;
 }
+
 
 /* 结论  同意 */
 
@@ -1324,11 +1403,13 @@ export default {
   width: 120px;
 }
 
+
 /* 两行文字 样式 */
 
 .approval-colun .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
 
 /* 回退样式 */
 
@@ -1341,6 +1422,7 @@ export default {
 
 .approval-colun .jujue-class {}
 
+
 /* 详细 信息按钮*/
 
 .approval-colun .btn-detail {
@@ -1349,6 +1431,7 @@ export default {
   margin-top: 35px;
   margin-left: 10px;
 }
+
 
 /* 审批结论 详细信息 */
 
@@ -1364,6 +1447,7 @@ export default {
   border-radius: 5px;
 }
 
+
 /* 分页 */
 
 .approval-colun .tool-bar {
@@ -1372,13 +1456,16 @@ export default {
   padding: 10px 0 0 10px;
 }
 
+
 /* 隐藏分页 */
 
 .approval-colun .el-pagination__jump {
   display: none;
 }
 
+
 /*多选下拉*/
+
 .approval-colun .form-ul .muti-select {
   display: flex;
   position: relative;

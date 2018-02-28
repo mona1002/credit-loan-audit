@@ -7,6 +7,9 @@
     <!-- ================================= -->
     <!-- 左侧 折叠面板 -->
     <div class="AudioVisual_List" ref="AudioVisual_List_ref" v-show="showListDiv">
+      <p>{{this.mwidth}}
+      </p>
+      {{mheight}}
       <!-- 折叠面板title -->
       <img class="hidBtn" src="../../../../static/images/Shape Copy.png" @click="hid">
       <!-- 折叠面板-手风琴List -->
@@ -51,7 +54,7 @@
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
-      <div ref="img_wrap" style="position:absolute; left:0; top:0;" :id='msg'>
+      <div ref="img_wrap" style="position:relative;" :id='msg'>
         <!-- <div id="aaaaa"> </div> -->
         <img ref="Big_pic_ref" v-for="(val,key) in imgPath" style="width:auto;height:auto;" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath"
           v-if="key==smallPicInd" />
@@ -138,6 +141,9 @@
   export default {
     data() {
       return {
+        mwidth: '',
+        mheight: '',
+        // =============
         perfBtn: false,
         judgeFlag: '',
         opendImg: [],
@@ -266,7 +272,25 @@
         console.log('img2')
         this.smallPicInd = 0;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
+        this.$refs.img_wrap.style.left=0;
+        this.$refs.img_wrap.style.top=0;
+        // this.mwidth = '';
+        // this.mheight = '';
         this.defaultBigPicCss();
+        // var heightCss = 
+        // console.log(arguments.callee)
+        // ==========================================
+        // 新添加-待测试，解决第一次取不到数值问题
+        // var count = 0;
+        // if (this.count == 0) {
+        // console.log("进入0")
+        // this.count++; 
+        // this.smallPicInd = 0;
+        // this.defaultBigPicCss();
+        // this.imgPath = this.ListDetails[ind].applyArchiveInfos; 
+        // this.getImg();
+        // }
+        // ------------------------------------------------------ 
       },
       hid() {
         this.showListDiv = false;
@@ -319,6 +343,9 @@
             100 + "px";
           this.$refs.Big_pic_ref[0].style.width = "auto";
         }
+        console.log(this.$refs.img_wrap)
+        this.$refs.img_wrap.scrollIntoView()
+
       },
       clockWise() {
         if (this.$refs.Big_pic_ref) {
@@ -349,8 +376,16 @@
       },
       defaultBigPicCss() {
         this.$nextTick(() => {
-          console.log("nextTick")
-          //  console.log(this.$refs.Big_pic_ref)
+          console.log("图片片片")
+          console.log(this.$refs.Big_pic_ref)
+          console.log(this.$refs.Big_pic_ref[0].offsetHeight)
+          console.log('---------------------------------------')
+          console.log(this.$refs.Big_pic_ref[0].height)
+          console.log(this.$refs.Big_pic_ref[0].width)
+          console.log('---------------------------------------')
+          // console.log(document.defaultView.getComputedStyle(this.$refs.Big_pic_ref[0]).height)
+          // console.log(document.defaultView.getComputedStyle(this.$refs.Big_pic_ref[0],null).height)
+          // ------------------------------------------------------------
           if (this.$refs.Big_pic_ref) {
             this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
             var outsideH = this.$refs.AudioVisual_Img_ref.offsetHeight;
@@ -367,11 +402,18 @@
               // console.log("高")
               this.$refs.Big_pic_ref[0].style.width = 'auto';
               this.$refs.Big_pic_ref[0].style.height = (outsideH - 10) + "px";
+              // this.$refs.Big_pic_ref[0].style.height ="100%";
+
               // console.log(this.$refs.Big_pic_ref[0].style.height)
               // console.log(this.$refs.Big_pic_ref[0].style.width)
             }
 
           }
+          console.log(this.$refs.Big_pic_ref[0].height)
+
+          console.log(this.$refs.Big_pic_ref[0].width)
+          // ------------------------------------------------------------------
+
         })
         // console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).height)
         // console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
@@ -403,19 +445,24 @@
         }
       },
       odivMove(id) {
+// console.log($event)
         var disX = 0;
         var disY = 0;
         var oDiv = document.getElementById(id);
         oDiv.onmousedown = function (ev) {
+          console.log('down')
           var oEvent = ev || event;
           disX = oEvent.clientX - oDiv.offsetLeft;
           disY = oEvent.clientY - oDiv.offsetTop;
           document.onmousemove = function (ev) {
+            console.log('move')
             var oEvent = ev || event;
+             oEvent.stopPropagation();
             oDiv.style.left = oEvent.clientX - disX + "px";
             oDiv.style.top = oEvent.clientY - disY + "px";
           }
           document.onmouseup = function (ev) {
+            console.log('up')
             document.onmousemove = null;
             document.onmouseup = null;
           }
@@ -464,6 +511,7 @@
       }
     },
     mounted() {
+      this.odivMove(this.msg);
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '01') {
         this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
@@ -502,6 +550,7 @@
   .AudioVisualLeft {
     height: 100%;
   }
+
   /* public */
 
   .small_pic_close {
@@ -509,6 +558,7 @@
     right: 18px;
     top: 13px;
   }
+
   /* 图片功能按钮 */
 
   .showBtn {
@@ -537,15 +587,17 @@
     position: relative;
     z-index: 2;
   }
+
   /* 对比-按钮 */
-  .btn_wrap{
-  /* background:red; */
-   position: absolute;
+
+  .btn_wrap {
+    /* background:red; */
+    position: absolute;
     bottom: 18px;
-right:5px;
-    width:170px;
+    right: 5px;
+    width: 170px;
     /* margin:0 auto; */
-}
+  }
 
   .compareBtn {
     /* position: absolute;
@@ -555,6 +607,7 @@ right:5px;
     border: 1px solid #0077ff;
     background: #eef0f9;
   }
+
   /* 缩略图-按钮 */
 
   .checkDetailBtn {
@@ -566,6 +619,7 @@ right:5px;
   .showHidIcons {
     display: none;
   }
+
   /*  放大、缩小 按钮 wrap */
 
   .BtnIcons {
@@ -616,6 +670,7 @@ right:5px;
   .AudioVisualLeft .AudioVisual_Img {
     width: calc( 100% - 214px);
   }
+
   /*  css */
 
   .AudioVisualLeft .AudioVisual_List {
@@ -625,8 +680,11 @@ right:5px;
     /* border-radius: 6px 6px 0 0; */
     margin-right: 11px;
   }
+
   /* ----------------------------------- */
+
   /* 左侧折叠面板 */
+
   /* 折叠面板上面的四个 th 表头 */
 
   .AudioVisualLeft .list_title {
@@ -672,6 +730,7 @@ right:5px;
     border-right: none;
     border-left: none;
   }
+
   /* 缩略图最外侧div */
 
   .AudioVisualLeft .Small_pic_div {
@@ -687,6 +746,7 @@ right:5px;
     /* background: #000; */
     border-radius: 4px;
   }
+
   /* 缩略图 p 标签  title */
 
   .AudioVisualLeft .Small_pic_title {
@@ -703,6 +763,7 @@ right:5px;
     overflow: hidden;
     position: relative;
   }
+
   /* 缩略图 content */
 
   .AudioVisualLeft .small_pic_content {
@@ -711,6 +772,7 @@ right:5px;
     overflow: auto;
     padding-top: 30px;
   }
+
   /* 缩略图片-figure-wrap */
 
   .AudioVisualLeft .small_pic_figure {
@@ -720,6 +782,7 @@ right:5px;
     margin: 15px 0 0 2%;
     /* margin: 0 0 0 23px; */
   }
+
   /*  缩略图 figure 内 图片名字 p 标签 */
 
   .AudioVisualLeft .small_pic_figure p {
@@ -736,6 +799,7 @@ right:5px;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
   /* 缩略图 各个 img 图片 */
 
   .AudioVisualLeft .Small_pic {
@@ -745,6 +809,7 @@ right:5px;
     border: 2px solid #bfcbd9;
     box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
   }
+
   /* --------------------------- */
 
   .NamParentNode {
@@ -756,6 +821,7 @@ right:5px;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
   /* ----------------------------- */
 
   .posi {

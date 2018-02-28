@@ -193,6 +193,13 @@ export default {
         // AntiManagertaskInWaitting
         this.creditappTaskid = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
       }
+
+      // 05 复议专员  06 复议主管
+      if(this.antiFlag == '05' || this.antiFlag == '06'){
+        this.creditappTaskid = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
+      }
+
+
     //   this.getFraudApplyInfoWithOpinionById();
     // }
 
@@ -365,6 +372,8 @@ export default {
                     this.$router.push('/FtaskInWaitting');
                   } else if (this.antiFlag == '03' || this.antiFlag == '04') {
                     this.$router.push('/AntiFraud');
+                  }else if(this.antiFlag == '05' || this.antiFlag == '06'){
+                    this.$router.push('/reconsiderList');
                   }
                 } else {
                   if (res.msg) {

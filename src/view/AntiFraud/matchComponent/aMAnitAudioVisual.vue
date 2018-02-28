@@ -55,14 +55,14 @@
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
-      <div style="position:absolute; left:0; top:0;" id='MAntiFirstAud'>
+      <div ref="img_wrap" style="position:relative; left:0; top:0;" id='MAntiFirstAud'>
         <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
         />
       </div>
     </div>
-    <img src="../../../../static/images/left.png" class="icon_pre "  ref="preBtn" v-show="perfBtn" @mouseenter='PerBtn' @click="pre">
+    <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" v-show="perfBtn" @mouseenter='PerBtn' @click="pre">
     <img src="../../../../static/images/pc1.png" class="icon_next" v-show="perfBtn" @mouseenter='PerBtn' @click="next">
-    <div class="BtnIcons" v-show="perfBtn" @mouseenter='PerBtn'  ref="PbtnIcons">
+    <div class="BtnIcons" v-show="perfBtn" @mouseenter='PerBtn' ref="PbtnIcons">
       <img src="../../../../static/images/efw.png" @click="smaller ">
       <img src="../../../../static/images/net.png" @click="larger">
       <img src="../../../../static/images/daf.png" @click="AclockWise ">
@@ -92,7 +92,7 @@
         // picData: [],
         perfBtn: false,
         MatchInf: '',
-             opendImg: [], 
+        opendImg: [],
         closedImg: [],
         showListDiv: true,
         show: true,
@@ -129,43 +129,44 @@
         this.closeImg = ind;
         this.openImg = ind
         // 二级（子）节点
-        console.log("获取子节点");
         this.post("/productArchive/getProductArchiveChildList", {
           applyId: this.localInf.applyId,
           pid: id
         }).then(res => {
           if (res.statusCode == 200) {
             this.ListDetails = res.data;
-                if (this.ListDetails) {
-            var MChiDate=null;
-            for (var i = 0; i < this.ListDetails.length; i++) {
-               var MChiDate = new Date(this.ListDetails[i].uploadDate);
-              this.ListDetails[i].uploadDate = this.comput(MChiDate)
+            if (this.ListDetails) {
+              var MChiDate = null;
+              for (var i = 0; i < this.ListDetails.length; i++) {
+                var MChiDate = new Date(this.ListDetails[i].uploadDate);
+                this.ListDetails[i].uploadDate = this.comput(MChiDate)
+              }
             }
-          }
           } else {
             this.$message.error(res.msg);
           }
         });
       },
       getImg(ind) {
-           this.smallPicInd = 0;
+        this.smallPicInd = 0;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
+        this.$refs.img_wrap.style.left = 0;
+        this.$refs.img_wrap.style.top = 0;
         this.defaultBigPicCss();
       },
       hid() {
         this.showListDiv = false;
-          this.$refs.preBtn.style.left=37+'px';
-        this.$refs.PbtnIcons.style.right='calc( 50% - 97px)';
+        this.$refs.preBtn.style.left = 37 + 'px';
+        this.$refs.PbtnIcons.style.right = 'calc( 50% - 97px)';
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
-          this.defaultBigPicCss();
+        this.defaultBigPicCss();
       },
       showList() {
         this.showListDiv = true;
-                this.$refs.preBtn.style.left=417+'px';
-        this.$refs.PbtnIcons.style.right='calc( 50% - 303px)';
+        this.$refs.preBtn.style.left = 417 + 'px';
+        this.$refs.PbtnIcons.style.right = 'calc( 50% - 303px)';
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 412px)";
-          this.defaultBigPicCss();
+        this.defaultBigPicCss();
       },
       SmallpicClose() {
         this.SmallPicShow = false;
@@ -179,7 +180,8 @@
           if (this.smallPicInd < 0) {
             this.smallPicInd = this.$refs.small_pic_ref.length - 1;
           }
-        }       this.defaultBigPicCss();
+        }
+        this.defaultBigPicCss();
       },
       next() {
         this.smallPicInd++;
@@ -187,18 +189,21 @@
           if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
             this.smallPicInd = 0;
           }
-        }        this.defaultBigPicCss();
+        }
+        this.defaultBigPicCss();
       },
       larger() {
         if (this.$refs.Big_pic_ref) {
           this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
-            100 + "px"; this.$refs.Big_pic_ref[0].style.width = "auto";
+            100 + "px";
+          this.$refs.Big_pic_ref[0].style.width = "auto";
         }
       },
       smaller() {
         if (this.$refs.Big_pic_ref) {
           this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
-            100 + "px"; this.$refs.Big_pic_ref[0].style.width = "auto";
+            100 + "px";
+          this.$refs.Big_pic_ref[0].style.width = "auto";
         }
       },
       clockWise() {
@@ -231,10 +236,10 @@
       smallPic(ev, ind) {
         this.smallPicInd = ind;
         this.SmallPicShow = false;
-                this.defaultBigPicCss();        
+        this.defaultBigPicCss();
       },
       defaultBigPicCss() {
-                this.$nextTick(() => {
+        this.$nextTick(() => {
           if (this.$refs.Big_pic_ref) {
             this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
             var outsideH = this.$refs.AudioVisual_Img_ref.offsetHeight;
@@ -250,11 +255,11 @@
           }
         })
       },
-            comput(val) {
-        val = val.getFullYear()+"-"+ (val.getMonth() + 1)+"-"+val.getDate()+" "+(val.toString().split(' ')[4]);
+      comput(val) {
+        val = val.getFullYear() + "-" + (val.getMonth() + 1) + "-" + val.getDate() + " " + (val.toString().split(' ')[4]);
         return val;
       },
-      changeSmallPicCss(ind) { // （重复代码）通用方法： 遍历所有小图片，恢复默认（初始时）设置的css样式--------- click时改变显示大图和选中小图的 高度 + 透明度
+      changeSmallPicCss(ind) { //  遍历所有小图片，恢复默认（初始时）设置的css样式
         for (var i = 0; i < this.$refs.small_pic_ref.length; i++) {
           this.$refs.small_pic_ref[i].style.opacity = 1;
         }
@@ -291,12 +296,12 @@
             if (event.wheelDelta < 0) {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
                 100 + "px";
-                 this.$refs.Big_pic_ref[0].style.width='auto';
+              this.$refs.Big_pic_ref[0].style.width = 'auto';
             } else {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
                 100 + "px";
-                 this.$refs.Big_pic_ref[0].style.width='auto';
-                
+              this.$refs.Big_pic_ref[0].style.width = 'auto';
+
             }
           };
           this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => {
@@ -305,12 +310,12 @@
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
                   .height) -
                 100 + "px";
-                 this.$refs.Big_pic_ref[0].style.width='auto';
+              this.$refs.Big_pic_ref[0].style.width = 'auto';
             } else {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
                   .height) +
                 100 + "px";
-                 this.$refs.Big_pic_ref[0].style.width='auto';
+              this.$refs.Big_pic_ref[0].style.width = 'auto';
             }
           });
         }
@@ -327,9 +332,8 @@
       }
     },
     mounted() {
-      console.log("影音资料右")
       this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //反欺诈专员-匹配查看 + 主管
-      // this.odivMove("MAntiFirstAud");
+      this.odivMove("MAntiFirstAud");
       //需要做判读的时候打开
       // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       // if (this.judgeFlag.flag == '03') {
@@ -343,13 +347,14 @@
       }).then(res => {
         if (res.statusCode == 200) {
           this.ListParent = res.data;
-                   if (this.ListParent) {
-            var c=null,MDate=null;
+          if (this.ListParent) {
+            var c = null,
+              MDate = null;
             for (var i = 0; i < this.ListParent.length; i++) {
-               var MDate = new Date(this.ListParent[i].uploadDate);
+              var MDate = new Date(this.ListParent[i].uploadDate);
               this.ListParent[i].uploadDate = this.comput(MDate)
             }
-               for (var i = 0; i < this.ListParent.length; i++) {
+            for (var i = 0; i < this.ListParent.length; i++) {
               this.opendImg[i] = true;
               this.closedImg[i] = false;
             }
@@ -363,11 +368,10 @@
 
 </script>
 <style scoped>
-  /* css */
-
   .AudioVisual {
     height: 100%;
   }
+
   /* public */
 
   .small_pic_close {
@@ -375,6 +379,7 @@
     right: 18px;
     top: 13px;
   }
+
   /* 图片功能按钮 */
 
   .showBtn {
@@ -398,10 +403,10 @@
     background: #eef0f9;
     margin-right: 11px;
     border: 1px solid #bfcbd9;
-    /* border-radius: 0 6px 6px 0; */
     position: relative;
     z-index: 2;
   }
+
   /* 缩略图-按钮 */
 
   .checkDetailBtn {
@@ -413,6 +418,7 @@
   .showHidIcons {
     display: none;
   }
+
   /*  放大、缩小 按钮 wrap */
 
   .BtnIcons {
@@ -469,22 +475,20 @@
     overflow: auto;
     position: relative;
   }
-  /*  css */
 
   .AudioVisual .AudioVisual_Img {
     width: calc( 100% - 412px);
   }
-  /*  css */
 
   .AudioVisual .AudioVisual_List {
     width: 401px;
     background: #eef0f9;
     border: 1px solid #bfcbd9;
-    /* border-radius: 6px 6px 0 0; */
     margin-right: 11px;
   }
-  /* ----------------------------------- */
+
   /* 左侧折叠面板 */
+
   /* 折叠面板上面的四个 th 表头 */
 
   .AudioVisual .list_title {
@@ -500,7 +504,6 @@
     float: left;
     border: 1px solid #e6ebf5;
     border-bottom: none;
-    /* border: 1px solid black; */
     text-align: center;
     position: relative;
   }
@@ -537,10 +540,10 @@
 
   .AudioVisual .list_title span:nth-of-type(4),
   .AudioVisual .list_title_div p span:nth-of-type(4) {
-      width: calc(100% - 255px );
+    width: calc(100% - 255px);
     border-left: none;
   }
-  /* ------------------------------- */
+
   /* 缩略图最外侧div */
 
   .AudioVisual .Small_pic_div {
@@ -553,25 +556,22 @@
     overflow: auto;
     border: 1px solid #bfcbd9;
     background: #ffffff;
-    /* background: #000; */
     border-radius: 4px;
   }
+
   /* 缩略图 p 标签  title */
 
   .AudioVisual .Small_pic_title {
     font-size: 16px;
     text-align: center;
     background: rgba(0, 119, 255, 0.75);
-    /* opacity: 0.75; */
-    /* background: #0077ff; */
     height: 48px;
     line-height: 48px;
     color: #f8f9fd;
-    /* 不换行 */
-    /* white-space:nowrap; */
     overflow: hidden;
     position: relative;
   }
+
   /* 缩略图 content */
 
   .AudioVisual .small_pic_content {
@@ -580,17 +580,16 @@
     overflow: auto;
     padding-top: 30px;
   }
+
   /* 缩略图片-figure-wrap */
 
   .AudioVisual .small_pic_figure {
     float: left;
     width: 187px;
     height: 200px;
-    /* margin: 30px 0 30px 23px; */
     margin: 0 0 0 18px;
-
-    /* margin-left:40px;  */
   }
+
   /*  缩略图 figure 内 图片名字 p 标签 */
 
   .AudioVisual .small_pic_figure p {
@@ -607,6 +606,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
   /* 缩略图 各个 img 图片 */
 
   .AudioVisual .Small_pic {

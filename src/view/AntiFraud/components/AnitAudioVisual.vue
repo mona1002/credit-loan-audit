@@ -54,7 +54,7 @@
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
-      <div style="position:absolute; left:0; top:0;" id='AntiFirstAud'>
+      <div ref="img_wrap"  style="position:relative; left:0; top:0;" id='AntiFirstAud'>
         <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
         />
       </div>
@@ -128,7 +128,6 @@
         this.closeImg = ind;
         this.openImg = ind
         // 二级（子）节点
-        console.log("获取子节点");
         this.post("/productArchive/getProductArchiveChildList", {
           applyId: this.localInf.applyId,
           pid: id
@@ -150,6 +149,8 @@
       getImg(ind) {
         this.smallPicInd = 0;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
+                 this.$refs.img_wrap.style.left=0;
+        this.$refs.img_wrap.style.top=0;
         this.defaultBigPicCss();
       },
       hid() {
@@ -206,7 +207,7 @@
       },
       clockWise() {
         if (this.$refs.Big_pic_ref) {
-          if (this.$refs.Big_pic_ref[0].style.transform == "") { // 输出结果为： rotate(900deg) 每次加 90度
+          if (this.$refs.Big_pic_ref[0].style.transform == "") {
             this.$refs.Big_pic_ref[0].style.transform += "rotate(90deg)";
           } else {
             this.$refs.Big_pic_ref[0].style.transform = this.$refs.Big_pic_ref[0].style.transform.slice(0, 7) + (
@@ -257,7 +258,7 @@
         val = val.getFullYear() + "-" + (val.getMonth() + 1) + "-" + val.getDate() + " " + (val.toString().split(' ')[4]);
         return val;
       },
-      changeSmallPicCss(ind) { // （重复代码）通用方法： 遍历所有小图片，恢复默认（初始时）设置的css样式--------- click时改变显示大图和选中小图的 高度 + 透明度
+      changeSmallPicCss(ind) { 
         for (var i = 0; i < this.$refs.small_pic_ref.length; i++) {
           this.$refs.small_pic_ref[i].style.opacity = 1;
         }
@@ -329,8 +330,7 @@
       }
     },
     mounted() {
-      console.log("影音资料右")
-      // this.odivMove("AntiFirstAud");
+      this.odivMove("AntiFirstAud");
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '03') {
         this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
@@ -370,7 +370,6 @@
 
 </script>
 <style scoped>
-  /* css */
 
   .AudioVisual {
     height: 100%;
@@ -405,7 +404,6 @@
     background: #eef0f9;
     margin-right: 11px;
     border: 1px solid #bfcbd9;
-    /* border-radius: 0 6px 6px 0; */
     position: relative;
     z-index: 2;
   }
@@ -466,21 +464,17 @@
     overflow: auto;
     position: relative;
   }
-  /*  css */
 
   .AudioVisual .AudioVisual_Img {
     width: calc( 100% - 412px);
   }
-  /*  css */
 
   .AudioVisual .AudioVisual_List {
     width: 401px;
     background: #eef0f9;
     border: 1px solid #bfcbd9;
-    /* border-radius: 6px 6px 0 0; */
     margin-right: 11px;
   }
-  /* ----------------------------------- */
   /* 左侧折叠面板 */
   /* 折叠面板上面的四个 th 表头 */
 
@@ -497,7 +491,6 @@
     float: left;
     border: 1px solid #e6ebf5;
     border-bottom: none;
-    /* border: 1px solid black; */
     text-align: center;
     position: relative;
   }
@@ -550,7 +543,6 @@
     overflow: auto;
     border: 1px solid #bfcbd9;
     background: #ffffff;
-    /* background: #000; */
     border-radius: 4px;
   }
   /* 缩略图 p 标签  title */
@@ -559,13 +551,9 @@
     font-size: 16px;
     text-align: center;
     background: rgba(0, 119, 255, 0.75);
-    /* opacity: 0.75; */
-    /* background: #0077ff; */
     height: 48px;
     line-height: 48px;
     color: #f8f9fd;
-    /* 不换行 */
-    /* white-space:nowrap; */
     overflow: hidden;
     position: relative;
   }
@@ -583,10 +571,7 @@
     float: left;
     width: 187px;
     height: 200px;
-    /* margin: 30px 0 30px 23px; */
     margin: 0 0 0 18px;
-
-    /* margin-left:40px;  */
   }
   /*  缩略图 figure 内 图片名字 p 标签 */
 
