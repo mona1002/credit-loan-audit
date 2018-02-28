@@ -817,7 +817,9 @@ height: 40px;
  }
  /* 信审表-折叠面板title 后面的icon倾斜 */
 
- .CreditForm .el-collapse-item__arrow {
+ .CreditForm .el-collapse-item__arrow,
+ .tb .el-collapse-item__arrow, 
+ .SSComp .el-collapse-item__arrow {
    line-height: 40px;
  }
  /* 解决测试环境宽高不生效问题 */
@@ -854,7 +856,8 @@ height: 40px;
  /* 信审表-去掉所有重复paddingbottom值 */
 
  .CreditForm .el-collapse-item__content,
- .tb  .el-collapse-item__content  {
+ .tb .el-collapse-item__content,
+ .SSComp .el-collapse-item__content{
    padding-bottom: 0;
  }
  /* 信审表+反欺诈结论-上网查询等-content 左边距*/
@@ -872,7 +875,8 @@ height: 40px;
 
  .CreditForm .el-collapse-item__header,
  .aAntiApplyInf .el-collapse-item__header,
- .tb .el-collapse-item__header {
+ .tb .el-collapse-item__header,
+ .SSComp .el-collapse-item__header{
    border: 1px solid silver;
    background: #eef0f9;
    border: 1px solid #e6eaee;
@@ -886,7 +890,8 @@ height: 40px;
 
  .CreditForm .el-collapse-item,
  .aAntiApplyInf .el-collapse-item,
- .tb .el-collapse-item {
+ .tb .el-collapse-item,
+ .SSComp .el-collapse-item {
    position: relative
  }
  /* 信审表-textarea 文本域上下居中对齐 统一宽度，覆盖掉width：100%会掉下来的问题 */

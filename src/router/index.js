@@ -90,7 +90,7 @@ import tb from'../view/QualityTesting/roles/tb.vue'
 import tes from'../view/QualityTesting/roles/tes.vue'
 //  -----------------------大数据风控+社保公积金----------------------
 import PneCtrl from'../view/SocialSeAndPneCtrl/PneCtrl.vue'//大数据
-import SocialSe from'../view/SocialSeAndPneCtrl/SocialSe.vue  '//社保公积金
+import SocialSe from'../view/SocialSeAndPneCtrl/SocialSe.vue'//社保公积金
 
 //  -----------------------质检----------------------
 
