@@ -87,6 +87,8 @@ import doTheTask from'../view/TaskManagement/examineAndApprove/doTheTask.vue'//�
 import historicalTask from'../view/TaskManagement/examineAndApprove/historicalTask.vue'//审批任务管理——历史任务
 //  -----------------------质检----------------------
 import tb from'../view/QualityTesting/roles/tb.vue'
+import tes from'../view/QualityTesting/roles/tes.vue'
+
 
 Vue.use(Router)
 
@@ -336,6 +338,10 @@ const routes = [{
 {
   path:'/tb',
   component:tb
+},
+{
+  path:'/tes',
+  component:tes
 },
 ];
 
