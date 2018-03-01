@@ -736,6 +736,7 @@
 		        proId: this.proId, //产品id
 		        taskId: this.taskId, // 任务id
 		        opinionFlag:'00', // 任务类型  初审 00 
+		        busiState:'21'//复议审批
 		      }).then(res => {
 		        if (res.statusCode != '200') {
 		          	this.$message({
@@ -909,7 +910,8 @@
 		        applyId: this.applyId, // 申请单id
 		        rollbackNodeName: '', // 回退节点名称(没有回退节点) 
 		        dealroperDate: this.jdealroperDate, // 经办时间
-		        creauditAppOperate: 'check_Refuse' // 复议专员 拒绝
+		        creauditAppOperate: 'check_Refuse', // 复议专员 拒绝
+		        busiState:'22'//复议拒绝
 		      }).then(res => {
 		        console.log(res);
 		        if (res.statusCode != '200') {
@@ -973,7 +975,8 @@
 			        applyId: this.applyId, // 申请单id
 			        rollbackNodeName: this.values, // 回退节点名称 
 			        dealroperDate: this.dealroperDate, // 经办时间
-			        creauditAppOperate: 'check_Back' // 复议专员 回退
+			        creauditAppOperate: 'check_Back',// 复议专员 回退
+			        busiState:'20'//复议审批中（回退）
 			      }).then(res => {
 			        console.log(res);
 			        if (res.statusCode != '200') {
@@ -1069,10 +1072,11 @@
 		    //反欺诈申请
 		    AntiFraudApplication(){
 		    	this.$router.push({
-		            name: 'AntiApplyEdit',
+		            name: 'AntiApplyEditf',
 		            params: {
 		              id: this.applyId,
-		              flag: 'start'
+		              flag: 'start',
+		              busiState:'20'
 		            }
 		          });
 		    },

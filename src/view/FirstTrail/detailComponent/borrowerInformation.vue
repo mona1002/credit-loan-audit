@@ -2062,6 +2062,52 @@
 				this.borDebt.applyId=this.applyId;
 				this.rptInfo.applyId=this.applyId;
 				this.otherInfo.applyId=this.applyId;
+				/*保存信息时，将千分位的逗号去掉*/
+				/*信用卡使用明细*/
+				if(this.cardDetList.length>0){
+					for(var i=0;i<this.cardDetList.length;i++){
+						var regs=/\,/g;
+						this.cardDetList[i].cardAmt=this.cardDetList[i].cardAmt.replace(regs,'');
+						this.cardDetList[i].usedAmt=this.cardDetList[i].usedAmt.replace(regs,'');
+						this.cardDetList[i].actRepaymentAmt=this.cardDetList[i].actRepaymentAmt.replace(regs,'');
+						this.cardDetList[i].realRepaymentAmt=this.cardDetList[i].realRepaymentAmt.replace(regs,'');
+					}
+				};
+				/*贷款明细*/
+				if(this.loanDetailList.length>0){
+					for(var i=0;i<this.loanDetailList.length;i++){
+						var regs=/\,/g;
+						this.loanDetailList[i].loanContValue=this.loanDetailList[i].loanContValue.replace(regs,'');
+						this.loanDetailList[i].loanBal=this.loanDetailList[i].loanBal.replace(regs,'');
+						this.loanDetailList[i].presentRepayAmt=this.loanDetailList[i].presentRepayAmt.replace(regs,'');
+						this.loanDetailList[i].curMonthRepayAmt=this.loanDetailList[i].curMonthRepayAmt.replace(regs,'');
+						this.loanDetailList[i].presentOverAmt=this.loanDetailList[i].presentOverAmt.replace(regs,'');
+					}
+				};
+				/*负债信息*/
+				if(this.borDebt){
+					var regs=/\,/g;
+					this.borDebt.monthRepayAmt=this.borDebt.monthRepayAmt.replace(regs,'');
+					this.borDebt.studentLoanAmt=this.borDebt.studentLoanAmt.replace(regs,'');
+					this.borDebt.houseLoanAmt=this.borDebt.houseLoanAmt.replace(regs,'');
+					this.borDebt.carLoanAmt=this.borDebt.carLoanAmt.replace(regs,'');
+					this.borDebt.otherLoanAmt=this.borDebt.otherLoanAmt.replace(regs,'');
+					this.borDebt.totalLoan=this.borDebt.totalLoan.replace(regs,'');
+				};
+				/*流水明细*/
+				if(this.incomeList.length>0){
+					for(var i=0;i<this.incomeList.length;i++){
+						var regs=/\,/g;
+						this.incomeList[i].n=this.incomeList[i].n.replace(regs,'');
+						this.incomeList[i].n1=this.incomeList[i].n1.replace(regs,'');
+						this.incomeList[i].n2=this.incomeList[i].n2.replace(regs,'');
+						this.incomeList[i].n3=this.incomeList[i].n3.replace(regs,'');
+						this.incomeList[i].n4=this.incomeList[i].n4.replace(regs,'');
+						this.incomeList[i].n5=this.incomeList[i].n5.replace(regs,'');
+						this.incomeList[i].avgIncome=this.incomeList[i].avgIncome.replace(regs,'');
+					}
+				};
+				
 				/*if(this.borestateList.length>0){
 					for(var i=0;i<this.borestateList.length;i++){
 						var regs=/\㎡/;

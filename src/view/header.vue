@@ -33,7 +33,7 @@
 
 <script>
 import NavItem from '@/view/navItem'
-import UserURL from "../../util/constantUser";
+import UserURL from "../util/constantUser";
   export default {
     data() {
       return {
