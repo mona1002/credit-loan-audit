@@ -71,7 +71,8 @@
 					        label="建筑面积[m²]"
 					        min-width="110">
 					        <template slot-scope="scope">
-						        <el-input v-model="scope.row.coveredArea" @blur="postcode(scope.row,'coveredArea')" placeholder="请输入内容"></el-input>
+						        <!-- <el-input v-model="scope.row.coveredArea" @blur="postcode(scope.row,'coveredArea')" placeholder="请输入内容"></el-input> -->
+						        <el-input v-model="scope.row.coveredArea" placeholder="请输入内容"></el-input>
 					        </template>
 					      </el-table-column>
 					      <el-table-column
@@ -110,7 +111,8 @@
 					        label="产权比例[%]"
 					        min-width="100">
 					        <template slot-scope="scope">
-						        <el-input v-model="scope.row.equityRatio" v-on:blur="postcode(scope.row,'equityRatio')" placeholder="请输入内容"></el-input>
+						        <!-- <el-input v-model="scope.row.equityRatio" v-on:blur="postcode(scope.row,'equityRatio')" placeholder="请输入内容"></el-input> -->
+						        <el-input v-model="scope.row.equityRatio" placeholder="请输入内容"></el-input>
 					        </template>
 					      </el-table-column>
 					      <el-table-column
@@ -1395,14 +1397,15 @@
 				        	this.borestateList[i].monthlyPay = this.formatNumber(this.borestateList[i].monthlyPay,2,0);
 				        };
 				        //产权比例 保留两位小数点+%
-				        if(this.accepCusEstates[i].equityRatio != null){
-				        	this.accepCusEstates[i].equityRatio = this.formatNumber(this.accepCusEstates[i].equityRatio,2,0).replace(/,/g,'');
+				        if(this.borestateList[i].equityRatio != null){
+				        	this.borestateList[i].equityRatio = this.formatNumber(this.borestateList[i].equityRatio,2,0).replace(/,/g,'');
 				        };
+				        console.log(this.borestateList[i].equityRatio);
 				        //建筑面积
 			        	if(this.borestateList[i].coveredArea != null){
 			        		this.borestateList[i].coveredArea = this.formatNumber(this.borestateList[i].coveredArea,2,0).replace(/,/g,'');
 			        	};
-			        	//console.log(this.borestateList[i].monthlyPay);
+			        	console.log(typeof(this.borestateList[i].coveredArea));
 			        }
 		        }else if(res.data.borestateList == '' && JSON.parse(localStorage.getItem('house'))){
 		        	this.borestateList = JSON.parse(localStorage.getItem('house'));
@@ -1846,9 +1849,12 @@
 				event.stopPropagation();
 				console.log(this.currentRow);
 				for(var i=0;i<this.borestateList.length;i++){
+					console.log(this.currentRow);
 					if(this.borestateList[i]==this.currentRow){
 						this.borestateList.splice(i,1);
+						console.log('jklk');
 					}
+					console.log(888);
 				}
 			},
 			delet_vehicle(event){
@@ -2056,6 +2062,15 @@
 				this.borDebt.applyId=this.applyId;
 				this.rptInfo.applyId=this.applyId;
 				this.otherInfo.applyId=this.applyId;
+				/*if(this.borestateList.length>0){
+					for(var i=0;i<this.borestateList.length;i++){
+						var regs=/\㎡/;
+						var regs2=/\%/
+						this.borestateList[i].coveredArea=this.borestateList[i].coveredArea.replace(regs,'');
+						this.borestateList[i].equityRatio=this.borestateList[i].equityRatio.replace(regs2,'');
+					}
+				}*/
+				
 				
 				this.post("/borrower/saveBorrowerInfo", {
 			        "applyId":this.applyId,
@@ -2499,13 +2514,13 @@
 							}
 						};
 						break;
-					case 'equityRatio':
+					/*case 'equityRatio':
 					console.log(row.equityRatio);
 						row.equityRatio = this.formatNumber(row.equityRatio,2,0).replace(/,/g,'')+'%';
 						break;
 					case 'coveredArea':
 						row.coveredArea = this.formatNumber(row.coveredArea,2,0).replace(/,/g,'')+'㎡';
-						break;
+						break;*/
 				};
 			},
 	    },
