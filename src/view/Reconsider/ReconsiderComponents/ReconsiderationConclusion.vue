@@ -614,7 +614,7 @@
 		         	case 'refuse':
 					this.jdialogVisible = true;
 					this.get('system/getSystemDate').then(res => {
-			            console.log('回退', res)
+			            console.log('拒绝', res)
 			            // 请求系统时间
 			            this.jdealroperDate = res.data;
 			            console.log('this.', this.jdealroperDate);
