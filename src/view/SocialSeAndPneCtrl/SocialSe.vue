@@ -1,17 +1,17 @@
 <template>
   <div class="SocialSe">
-    <!-- 社保公积金 -->
+      <!-- 大数据风控 -->
     <myHead></myHead>
     <div class="outside">
       <div class="title">
         <ul>
-          <li v-for="(item,index) in titles" class="tabdefault" :key='index' :class="{tab:ind==index}" @click="swiching($event,index,val)">{{item}} </li>
+          <li v-for="(item,index) in titles" class="tabdefault" :key='index' :class="{tab:ind==index}" @click="swiching(index)">{{item}} </li>
         </ul>
       </div>
       <div class="wrap">
         <div class="content">
-          <BaiRongData v-if="ind==0"></BaiRongData>
-          <RiskDecision v-if="ind==1"></RiskDecision>
+          <SocialSeComponents v-if="ind==0"></SocialSeComponents>
+          <AccumulationFund v-if="ind==1"></AccumulationFund>
         </div>
       </div>
     </div>
@@ -19,24 +19,24 @@
 </template>
 <script>
   import myHead from '../header.vue'
-  import BaiRongData from './SocialSeComponents/BaiRongData.vue'
-  import RiskDecision from './SocialSeComponents/RiskDecision.vue'
+  import SocialSeComponents from './SocialSeComponents/SocialSecurity.vue'
+  import AccumulationFund from './SocialSeComponents/AccumulationFund.vue'
   export default {
     data() {
       return {
         ind: 0,
-        titles: ['同盾风险决策', '百融数据']
+        titles: ['社保详情', '公积金详情']
       }
     },
     methods: {
-      swiching(e, index, val) {
+      swiching(index) {
         this.ind = index;
       }
     },
     components: {
       myHead,
-      BaiRongData,
-      RiskDecision
+      SocialSeComponents,
+      AccumulationFund
     }
 
   }
@@ -59,9 +59,9 @@
   }
 
   .outside {
-    margin: 9px 13px;
-    height: calc(100% - 88px);
-    width: calc(100% - 26px);
+    margin: 13px 9px;
+    height: calc(100% - 96px);
+    width: calc(100% - 18px);
     border: 1px solid #bfcbd9;
     border-radius: 4px;
   }
@@ -84,9 +84,11 @@
   .title li:hover {
     cursor: pointer;
   }
-
+.wrap{
+    height: calc(100% - 48px);  
+}
   .content {
-    height: calc( 100% - 48px);
+    height: 100%;
     overflow: auto;
   }
 
