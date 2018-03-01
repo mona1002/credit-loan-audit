@@ -70,7 +70,7 @@
 				      min-width="170">
 				    </el-table-column>
 				    <el-table-column
-				      prop="appOrgCode"
+				      prop="appOrgName"
 				      label="进件机构"
 				      min-width="100">
 				    </el-table-column>

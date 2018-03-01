@@ -203,6 +203,21 @@ height: 40px;
    font-size: 14px;
    padding-bottom: 0px;
  }
+
+ /*申请信息详情 维护日志弹窗 */
+ .applicationInformationDetail .weihurizhi .el-dialog__body{
+   padding: 0 20px;
+ }
+ .applicationInformationDetail .weihurizhi .el-dialog__body .el-table th{
+   padding: 6px 5px;
+ }
+ .applicationInformationDetail .weihurizhi .el-table__header-wrapper .el-table__header th{
+   text-align: center;
+ }
+ .applicationInformationDetail .weihurizhi .el-table__body-wrapper .el-table__body td{
+   text-align: center;
+ }
+
  /*借款人资料 折叠面板头部背景色 */
 
  .borrowerInformation .el-collapse-item__header {
@@ -1498,6 +1513,17 @@ height: 40px;
  .mheader .el-menu--horizontal {
    border-bottom: none;
  }
+/* 如果没有子集，只有一级导航的情况下 */
+ .mheader .el-menu--horizontal .el-menu-item{
+   height: 70px;
+   line-height: 70px;
+   color: #fff;
+   font-size: 15px;
+ }
+ .mheader .el-menu--horizontal .el-menu-item:hover{
+   background: rgba(31, 45, 61, .6);
+   box-shadow: 0 10px 20px 0 #475669;
+ }
 
  .mheader .el-menu--horizontal .el-submenu {
    height: 70px;
@@ -1505,7 +1531,8 @@ height: 40px;
 
  .mheader .el-menu--horizontal .el-submenu .el-submenu__title {
    font-size: 15px;
-   color: #bfcbd9;
+   /* color: #bfcbd9; */
+   color: #fff;
    height: 60px;
    line-height: 70px;
    margin: 0 41px;
