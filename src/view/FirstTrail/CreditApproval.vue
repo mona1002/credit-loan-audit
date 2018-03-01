@@ -868,7 +868,7 @@ export default {
           // 查询反欺诈信息
           // this.$router.push('AntiApplyEdit')
           this.$router.push({
-            name: 'AntiApplyEdit',
+            name: 'AntiApplyEditf',
             params: {
               id: this.applyId,
               flag: 'start'
