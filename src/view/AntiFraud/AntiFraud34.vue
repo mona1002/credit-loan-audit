@@ -50,7 +50,7 @@
           <span class="icon-add"></span> 添加
           </span>
         </div>
-        <el-table :data="antiTableData.taskDetailList" style="width: 100%" height="300" border stripe fit highlight-current-row class="anti-table" v-show="antiFlag!='03'&& antiFlag!='04'">
+        <el-table :data="antiTableData.taskDetailList" style="width: 100%" height="350" border stripe fit highlight-current-row class="anti-table" v-show="antiFlag!='03'&& antiFlag!='04'">
           <el-table-column type="index" label="序号" width="50">
           </el-table-column>
           <el-table-column prop="applySubno" label="进件编号">
