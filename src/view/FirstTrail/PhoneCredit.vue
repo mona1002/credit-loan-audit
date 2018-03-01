@@ -459,6 +459,13 @@ export default {
     console.log(this.SplitS);
 
 
+    var judgeFlag = JSON.parse(localStorage.getItem('judge'));
+    // 复议不显示添加  05 专员   06 主管
+    if(judgeFlag.flag =='05' || judgeFlag.flag =='06'){
+      this.addBtnShow = false;
+    }
+
+
   },
   watch: {
     // 监听属性  电话类型

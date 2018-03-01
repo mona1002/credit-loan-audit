@@ -56,17 +56,7 @@
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
-      <!-- <div class="showHidIcons" ref="showHidIcons">
-        <img src="../../../../static/images/left.png" class="icon_pre " @click="pre">
-        <img src="../../../../static/images/pc1.png" class="icon_next" @click="next">
-        <div class="BtnIcons">
-          <img src="../../../../static/images/efw.png" @click="smaller ">
-          <img src="../../../../static/images/net.png" @click="larger">
-          <img src="../../../../static/images/daf.png" @click="AclockWise ">
-          <img src="../../../../static/images/dasf.png" @click="clockWise ">
-        </div>
-      </div> -->
-      <div style="position:absolute; left:0; top:0;" id='FirstAud'>
+      <div ref="img_wrap" style="position:relative; left:0; top:0;" id='FirstAud'>
         <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
         />
       </div>
@@ -162,6 +152,8 @@
       getImg(ind) {
                 this.smallPicInd = 0;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
+         this.$refs.img_wrap.style.left=0;
+        this.$refs.img_wrap.style.top=0;
         this.defaultBigPicCss();
       },
       hid() {
@@ -215,7 +207,7 @@
       },
       clockWise() {
         if (this.$refs.Big_pic_ref) {
-          if (this.$refs.Big_pic_ref[0].style.transform == "") { // 输出结果为： rotate(900deg) 每次加 90度
+          if (this.$refs.Big_pic_ref[0].style.transform == "") { 
             this.$refs.Big_pic_ref[0].style.transform += "rotate(90deg)";
           } else {
             this.$refs.Big_pic_ref[0].style.transform = this.$refs.Big_pic_ref[0].style.transform.slice(0, 7) + (
@@ -266,7 +258,7 @@
         val = val.getFullYear() + "-" + (val.getMonth() + 1) + "-" + val.getDate() + " " + (val.toString().split(' ')[4]);
         return val;
       },
-      changeSmallPicCss(ind) { // （重复代码）通用方法： 遍历所有小图片，恢复默认（初始时）设置的css样式--------- click时改变显示大图和选中小图的 高度 + 透明度
+      changeSmallPicCss(ind) {
         for (var i = 0; i < this.$refs.small_pic_ref.length; i++) {
           this.$refs.small_pic_ref[i].style.opacity = 1;
         }
@@ -295,22 +287,21 @@
         };
       },
       Imgscroll() {
-        // this.$refs.showHidIcons.style.display = "block";
         this.perfBtn = true;
         if (this.$refs.Big_pic_ref) {
           this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {
             event = event || window.event;
-            // this.$refs.AudioVisual_Img_ref.scrollTop = 0;
             if (event.wheelDelta < 0) {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
                 100 + "px";
+                 this.$refs.Big_pic_ref[0].style.width = "auto"
             } else {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
                 100 + "px";
+                 this.$refs.Big_pic_ref[0].style.width = "auto"
             }
           };
           this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => {
-            // this.$refs.AudioVisual_Img_ref.scrollTop = 0;
             if (event.detail > 0) {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
                   .height) -
@@ -324,7 +315,6 @@
         }
       },
       ImgScrollRemove() {
-        // this.$refs.showHidIcons.style.display = "none";
         this.perfBtn = false;
         this.$refs.AudioVisual_Img_ref.onmousewheel = "";
         this.$refs.AudioVisual_Img_ref.removeEventListener('DOMMouseScroll', (event) => {
@@ -336,8 +326,7 @@
       },
     },
     mounted() {
-      console.log("影音资料右")
-      // this.odivMove("FirstAud");
+      this.odivMove("FirstAud");
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '01') {
         this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
@@ -375,7 +364,6 @@
 
 </script>
 <style scoped>
-  /* css */
 
   .AudioVisual {
     height: 100%;
@@ -410,7 +398,6 @@
     background: #eef0f9;
     margin-right: 11px;
     border: 1px solid #bfcbd9;
-    /* border-radius: 0 6px 6px 0; */
     position: relative;
     z-index: 2;
   }
@@ -489,21 +476,17 @@
     overflow: auto;
     position: relative;
   }
-  /*  css */
 
   .AudioVisual .AudioVisual_Img {
     width: calc( 100% - 412px);
   }
-  /*  css */
 
   .AudioVisual .AudioVisual_List {
     width: 401px;
     background: #eef0f9;
     border: 1px solid #bfcbd9;
-    /* border-radius: 6px 6px 0 0; */
     margin-right: 11px;
   }
-  /* ----------------------------------- */
   /* 左侧折叠面板 */
   /* 折叠面板上面的四个 th 表头 */
 
@@ -520,7 +503,6 @@
     float: left;
     border: 1px solid #e6ebf5;
     border-bottom: none;
-    /* border: 1px solid black; */
     text-align: center;
     position: relative;
   }
@@ -537,7 +519,6 @@
   .AudioVisual .list_title span:nth-of-type(1),
   .AudioVisual .list_title_div p span:nth-of-type(1) {
     width: 135px;
-    /* 省略号 */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -560,7 +541,6 @@
     width: calc(100% - 255px);
     border-left: none;
   }
-  /* ------------------------------- */
   /* 缩略图最外侧div */
 
   .AudioVisual .Small_pic_div {
@@ -573,7 +553,6 @@
     overflow: auto;
     border: 1px solid #bfcbd9;
     background: #ffffff;
-    /* background: #000; */
     border-radius: 4px;
   }
   /* 缩略图 p 标签  title */
@@ -582,13 +561,9 @@
     font-size: 16px;
     text-align: center;
     background: rgba(0, 119, 255, 0.75);
-    /* opacity: 0.75; */
-    /* background: #0077ff; */
     height: 48px;
     line-height: 48px;
     color: #f8f9fd;
-    /* 不换行 */
-    /* white-space:nowrap; */
     overflow: hidden;
     position: relative;
   }
@@ -606,10 +581,7 @@
     float: left;
     width: 187px;
     height: 200px;
-    /* margin: 30px 0 30px 23px; */
     margin: 0 0 0 18px;
-
-    /* margin-left:40px;  */
   }
   /*  缩略图 figure 内 图片名字 p 标签 */
 

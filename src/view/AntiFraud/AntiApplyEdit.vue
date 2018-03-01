@@ -56,6 +56,7 @@
     <ul style="padding-left:20px;">
       <li class="item-column3">
         <div class="left-title left-title2">
+          <span class="require-icon" style="left:0px;top:-5px;">*</span>
           反欺诈申请类型主原因：
         </div>
         <div>
@@ -192,6 +193,13 @@ export default {
         // AntiManagertaskInWaitting
         this.creditappTaskid = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
       }
+
+      // 05 复议专员  06 复议主管
+      if(this.antiFlag == '05' || this.antiFlag == '06'){
+        this.creditappTaskid = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
+      }
+
+
     //   this.getFraudApplyInfoWithOpinionById();
     // }
 
@@ -364,6 +372,8 @@ export default {
                     this.$router.push('/FtaskInWaitting');
                   } else if (this.antiFlag == '03' || this.antiFlag == '04') {
                     this.$router.push('/AntiFraud');
+                  }else if(this.antiFlag == '05' || this.antiFlag == '06'){
+                    this.$router.push('/reconsiderList');
                   }
                 } else {
                   if (res.msg) {
@@ -594,6 +604,7 @@ export default {
   height: 30px;
   line-height: 30px;
   text-align: left;
+  font-size: 14px;
 }
 
 .anti-apply-edit-class li .textarea-class {

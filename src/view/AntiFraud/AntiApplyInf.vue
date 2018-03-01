@@ -20,7 +20,7 @@
           客户名称：
         </div>
         <div class="item-content">
-          {{applyCustName}}
+          {{custName}}
         </div>
       </li>
       <li class="item-column3">
@@ -44,7 +44,7 @@
           移动电话：
         </div>
         <div class="item-content">
-          212121
+          {{mobile}}
         </div>
       </li>
     </div>
@@ -59,15 +59,15 @@
           反欺诈申请类型主原因：
         </div>
         <div class="item-content">
-          反欺诈申请类型主原因：
+          {{mainreaName}}
         </div>
       </li>
       <li class="item-column3">
-        <div class="left-title">
-          子原因：
+        <div class="left-title left-title2">
+          反欺诈申请类型主原因：
         </div>
         <div class="item-content">
-          子原因：
+          {{subreaName}}
         </div>
       </li>
       <li class="item-column1">
@@ -93,7 +93,7 @@
       <li class="item-column3">
         <div class="left-title ">反欺诈申请机构：</div>
         <div class="item-content">
-          {{appSuborgName}}
+          {{appOrgName}}
         </div>
       </li>
     </ul>
@@ -109,6 +109,17 @@ export default {
       // id: '', // 主管/专员 用 列表id
 
       antiFlag: '', // 标志
+      applySubno:'',
+      custName:'',
+      certTypeTxt:'',
+      certCode:'',
+      mobile:'',
+      mainreaName:'',
+      subreaName:'',
+      applyDesc:'',
+      applyPersonName:'',
+      appDate:'',
+      appOrgName:'',
     }
   },
   mounted() {
@@ -126,17 +137,17 @@ export default {
     //   // FtaskInWaitting
     //   // var FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
     //   this.id = JSON.parse(localStorage.getItem('FtaskInWaitting')).applyId;
-    // } else if (this.antiFlag == '03') { // 其他取 列表id 取本地
-    //   console.log(' 专员 ');
+    // } else 
+    if (this.antiFlag == '03') { // 其他取 列表id 取本地
+      console.log(' 专员 ');
 
-    //   this.id = JSON.parse(localStorage.getItem('AntitaskInWaitting')).applyId;
-    // } else if (this.antiFlag == '04') {
-    //   console.log(' 主管 ');
-    //   this.id = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).applyId;
-    // }
+      this.applyId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).applyId;
+    } else if (this.antiFlag == '04') {
+      console.log(' 主管 ');
+      this.applyId = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).applyId;
+    }
 
-    // 查询页面全部 用列表的 id
-    this.id = this.$route.params.id;
+    
 
     // 经办人 登录用户名
     var userInfo = JSON.parse(localStorage.getItem('userInf'));
@@ -153,47 +164,23 @@ export default {
       // 测试 id
       // this.id = 'ed353288-758d-4699-bec7-094bd6444556';
 
-      this.post('/fraudApplyInfoController/getFraudApplyInfoWithOpinionById', {
-          applyId: this.id
+      this.post('/fraudApplyInfoController/getFraudApplyInfo', {
+          applyId: this.applyId
         })
         .then(res => {
           if (res.statusCode == 200) {
-            // 任务id
-            this.creditappTaskid = res.data.fraudApplyInfo.creditappTaskid;
-            // 进件编号
-            this.applySubno = res.data.fraudApplyInfo.applySubno;
-            // 申请人code
-            this.applyCode = res.data.fraudApplyInfo.applyCode;
-            // 申请人姓名
-            this.applyPersonName = res.data.fraudApplyInfo.applyPersonName;
-            // 申请机构 code
-            this.appOrgCode = res.data.fraudApplyInfo.appOrgCode;
-            // 申请机构名称
-            this.appOrgName = res.data.fraudApplyInfo.appOrgName;
-            // 申请机构 id
-            this.appOrgId = res.data.fraudApplyInfo.appOrgId;
-            // 申请机构科室id
-            this.appSuborgId = res.data.fraudApplyInfo.appSuborgId;
-            // 申请机构科室code
-            this.appSuborgCode = res.data.fraudApplyInfo.appSuborgCode;
-            // 申请机构科室名称
-            this.appSuborgName = res.data.fraudApplyInfo.appSuborgName;
-            // 产品 id
-            this.proId = res.data.applyInfoPool.proId;
-            // 产品 code
-            this.proCode = res.data.applyInfoPool.proCode;
-            // 客户id
-            this.applyCustId = res.data.fraudApplyInfo.applyCustId;
-            // 客户姓名
-            this.applyCustName = res.data.fraudApplyInfo.applyCustName;
-            // 客户编号
-            this.applyCustNo = res.data.fraudApplyInfo.applyCustNo;
-            // 渠道
-            this.channel = res.data.applyInfoPool.channel;
-            // 证件号码
+            this.applySubno = res.data.applyInfoPool.applySubno;
+            this.custName = res.data.applyInfoPool.custName;
+            this.certTypeTxt = res.data.applyInfoPool.certTypeTxt;
             this.certCode = res.data.applyInfoPool.certCode;
-            // 证件类型
-            this.certTypeTxt = res.data.applyInfoPool.certTypeTxt
+            this.mobile = res.data.applyInfoPool.mobile;
+            this.mainreaName = res.data.fraudApplyInfo.mainreaName;
+            this.subreaName = res.data.fraudApplyInfo.subreaName;
+            this.applyDesc = res.data.fraudApplyInfo.applyDesc;
+            this.applyPersonName = res.data.fraudApplyInfo.applyPersonName;
+            this.appDate = res.data.fraudApplyInfo.appDate;
+            this.appOrgName = res.data.fraudApplyInfo.appOrgName;
+
           }
         })
     }

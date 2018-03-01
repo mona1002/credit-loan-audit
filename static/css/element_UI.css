@@ -780,7 +780,7 @@ height: 40px;
  }
  /* 工作通知 下边距 */
 
- .workbench .el-collapse {
+ .workbench .el-collapse{
    margin-bottom: 10px;
  }
  /* 工作通知title颜色 */
@@ -832,7 +832,9 @@ height: 40px;
  }
  /* 信审表-折叠面板title 后面的icon倾斜 */
 
- .CreditForm .el-collapse-item__arrow {
+ .CreditForm .el-collapse-item__arrow,
+ .tb .el-collapse-item__arrow, 
+ .SSComp .el-collapse-item__arrow {
    line-height: 40px;
  }
  /* 解决测试环境宽高不生效问题 */
@@ -868,7 +870,9 @@ height: 40px;
  }
  /* 信审表-去掉所有重复paddingbottom值 */
 
- .CreditForm .el-collapse-item__content {
+ .CreditForm .el-collapse-item__content,
+ .tb .el-collapse-item__content,
+ .SSComp .el-collapse-item__content{
    padding-bottom: 0;
  }
  /* 信审表+反欺诈结论-上网查询等-content 左边距*/
@@ -885,7 +889,9 @@ height: 40px;
  /* 信审表+反欺诈结论（初审+终审） ----各个  title 一行 */
 
  .CreditForm .el-collapse-item__header,
- .aAntiApplyInf .el-collapse-item__header {
+ .aAntiApplyInf .el-collapse-item__header,
+ .tb .el-collapse-item__header,
+ .SSComp .el-collapse-item__header{
    border: 1px solid silver;
    background: #eef0f9;
    border: 1px solid #e6eaee;
@@ -898,9 +904,23 @@ height: 40px;
  /* 信审表 ----各个  title 小帽子部分 */
 
  .CreditForm .el-collapse-item,
- .aAntiApplyInf .el-collapse-item {
+ .aAntiApplyInf .el-collapse-item,
+ .tb .el-collapse-item,
+ .SSComp .el-collapse-item {
    position: relative
  }
+ /* 去掉div wrap的下边框 */
+ .SSComp .el-collapse{
+   border-bottom: none;
+ }
+ /* 表格x轴滚动条 */
+ .SSComp .el-table__body-wrapper{
+  overflow-x: hidden;
+ }
+  .SSComp .el-collapse-item__wrap {
+    width: 100%;
+    border-bottom: none;
+  }
  /* 信审表-textarea 文本域上下居中对齐 统一宽度，覆盖掉width：100%会掉下来的问题 */
 
  .CreditForm .el-textarea {
@@ -1049,7 +1069,7 @@ height: 40px;
  /* 影音列表-左侧列表--内容title-最外侧包裹层 */
 
  .AudioVisual .el-collapse-item__wrap,
- .AudioVisualLeft .el-collapse-item__wrap {
+ .AudioVisualLeft .el-collapse-item__wrap{
    width: 100%;
    color: #666666;
    background: #f8f9fd;
@@ -2026,7 +2046,7 @@ height: 40px;
  .el-table th div,
  .el-table--border td:first-child .cell,
  .el-table--border th:first-child .cell {
-   padding: 0;
+   /* padding: 0; */
  }
  /* 复议结论 */
 

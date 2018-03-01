@@ -44,7 +44,6 @@
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <!-- √ -->
             <AborrowerInformationDetail v-if=" this.tabContent2==4"></AborrowerInformationDetail>
-
             <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
             <!-- √ 内部匹配中信审表 -->
             <FMCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></FMCreditForm>
