@@ -6,7 +6,7 @@
       <div class="main_left">
         <h2>
           <i class="el-icon-edit"> </i>常用 </h2>
-        <router-link to="/processMoni?creditApp00">
+        <!-- <router-link to="/processMoni?creditApp00">
           <el-button type="primary">信审未分配监控</el-button>
         </router-link>
         <router-link to="/processMoni?creditApp01">
@@ -32,7 +32,7 @@
         </router-link>
         <router-link to="/processMoni?antiFraudApp03">
           <el-button type="primary">反欺诈已完成监控</el-button>
-        </router-link>
+        </router-link> -->
       </div>
       <div class="main_right">
         <!-- 中间 -->
