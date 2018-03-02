@@ -7,21 +7,23 @@
     </div> 
     <!-- 导航内容 -->
     <div class="navContain">
-      <el-menu 
-        router 
-        unique-opened 
-        mode="horizontal"  
-        ref="navbar"
-        active-text-color="#ffd04b"
-        :default-active="onRoutes"
-        @select="selectMenu">
-        <nav-item 
-            v-for="(item, n) in datas" 
-            :item="item" 
-            :navIndex="String(n)" 
-            :key="n">
-        </nav-item>
-      </el-menu>
+      <div>
+        <el-menu 
+          router 
+          unique-opened 
+          mode="horizontal"
+          ref="navbar"
+          active-text-color="#ffd04b"
+          :default-active="onRoutes"
+          @select="selectMenu">
+          <nav-item 
+              v-for="(item, n) in datas" 
+              :item="item" 
+              :navIndex="String(n)" 
+              :key="n">
+          </nav-item>
+        </el-menu>
+      </div>
     </div>
     <div class="backIcon">
       <img @click="backLoin" src="/static/images/backLoin.png">
@@ -31,6 +33,7 @@
 
 <script>
 import NavItem from '@/view/navItem'
+import UserURL from "../util/constantUser";
   export default {
     data() {
       return {
@@ -72,7 +75,7 @@ import NavItem from '@/view/navItem'
             })
         },
         backLoin(){
-          window.location.href="http://testplatform.nuoyuan.com.cn/#/workbench";
+           window.location.href=UserURL+"#/workbench";
         },
 
     },
@@ -117,10 +120,23 @@ import NavItem from '@/view/navItem'
   }
   /* 导航内容 */
   .mheader .navContain{
-    width: calc( 100% - 305px );
+   width: calc( 100% - 305px );
     float: left;
     height: 70px;
+    /* position: relative;
+    overflow: hidden; */
   }
+  /* .mheader .navContain:after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #e4e7ed;
+    z-index: 1;
+    width: 100%;
+  } */
   .mheader .backIcon{
     width: 60px;
     padding: 0 16px;

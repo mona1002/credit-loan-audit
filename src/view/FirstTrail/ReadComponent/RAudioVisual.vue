@@ -56,7 +56,7 @@
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
-      <div style="position:absolute; left:0; top:0;" id='RFirstAud'>
+      <div ref="img_wrap" style="position:relative; left:0; top:0;" id='RFirstAud'>
         <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
         />
       </div>
@@ -107,9 +107,6 @@
       }
     },
     methods: {
-      opend(vv) {
-        console.log(vv)
-      },
       PerBtn() {
         this.perfBtn = true;
       },
@@ -129,7 +126,6 @@
         this.closeImg = ind;
         this.openImg = ind
         // 二级（子）节点
-        console.log("获取子节点");
         this.post("/productArchive/getProductArchiveChildList", {
           applyId: this.localInf.applyId,
           pid: id
@@ -151,6 +147,8 @@
       getImg(ind) {
         this.smallPicInd = 0;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
+        this.$refs.img_wrap.style.left = 0;
+        this.$refs.img_wrap.style.top = 0;
         this.defaultBigPicCss();
       },
       hid() {
@@ -326,7 +324,6 @@
       }
     },
     mounted() {
-      console.log("匹配-影音右")
       // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       // if (this.judgeFlag.flag == '01') {
       //   this.localInf = JSON.parse(localStorage.getItem("internalObj")) //初审-匹配查看
@@ -339,6 +336,7 @@
       // }
       // this.odivMove("RFirstAud");
       this.localInf = JSON.parse(localStorage.getItem("internalObj")) //初审-匹配查看
+      this.odivMove("RFirstAud");
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.matchApplyId,
         // applyId: this.localInf.applyId,
@@ -373,6 +371,7 @@
   .AudioVisual {
     height: 100%;
   }
+
   /* public */
 
   .small_pic_close {
@@ -380,6 +379,7 @@
     right: 18px;
     top: 13px;
   }
+
   /* 图片功能按钮 */
 
   .showBtn {
@@ -407,6 +407,7 @@
     position: relative;
     z-index: 2;
   }
+
   /* 对比-按钮 */
 
   .compareBtn {
@@ -417,6 +418,7 @@
     border: 1px solid #0077ff;
     background: #eef0f9;
   }
+
   /* 缩略图-按钮 */
 
   .checkDetailBtn {
@@ -428,6 +430,7 @@
   .showHidIcons {
     display: none;
   }
+
   /*  放大、缩小 按钮 wrap */
 
   .BtnIcons {
@@ -484,11 +487,13 @@
     overflow: auto;
     position: relative;
   }
+
   /*  css */
 
   .AudioVisual .AudioVisual_Img {
     width: calc( 100% - 412px);
   }
+
   /*  css */
 
   .AudioVisual .AudioVisual_List {
@@ -498,8 +503,11 @@
     /* border-radius: 6px 6px 0 0; */
     margin-right: 11px;
   }
+
   /* ----------------------------------- */
+
   /* 左侧折叠面板 */
+
   /* 折叠面板上面的四个 th 表头 */
 
   .AudioVisual .list_title {
@@ -555,7 +563,9 @@
     width: calc(100% - 255px);
     border-left: none;
   }
+
   /* ------------------------------- */
+
   /* 缩略图最外侧div */
 
   .AudioVisual .Small_pic_div {
@@ -571,6 +581,7 @@
     /* background: #000; */
     border-radius: 4px;
   }
+
   /* 缩略图 p 标签  title */
 
   .AudioVisual .Small_pic_title {
@@ -587,6 +598,7 @@
     overflow: hidden;
     position: relative;
   }
+
   /* 缩略图 content */
 
   .AudioVisual .small_pic_content {
@@ -595,6 +607,7 @@
     overflow: auto;
     padding-top: 30px;
   }
+
   /* 缩略图片-figure-wrap */
 
   .AudioVisual .small_pic_figure {
@@ -606,6 +619,7 @@
 
     /* margin-left:40px;  */
   }
+
   /*  缩略图 figure 内 图片名字 p 标签 */
 
   .AudioVisual .small_pic_figure p {
@@ -622,6 +636,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
   /* 缩略图 各个 img 图片 */
 
   .AudioVisual .Small_pic {

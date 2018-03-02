@@ -171,7 +171,7 @@
         this.currentRow = val;
         this.workbenchPass.processTemplateId = val.processTemplateId;
         this.workbenchPass.taskNodeName = val.taskNodeName;
-        if (val.taskNodeName == "creditApp_firstTrial") {
+        if (val.taskNodeName == "creditApp_firstTrial") {       // 初审
           this.judge.flag = "01";
           localStorage.setItem("workbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识
@@ -184,39 +184,39 @@
           // })
         } else if (val.taskNodeName == "creditApp_finalTrial_one" || val.taskNodeName == "creditApp_finalTrial_two" ||
           val.taskNodeName == "creditApp_finalTrial_three" || val.taskNodeName == "creditApp_finalTrial_four" || val.taskNodeName ==
-          "creditApp_finalTrial_five") {
+          "creditApp_finalTrial_five") {                    // 终审
           this.judge.flag = "02";
-          localStorage.setItem("FinalWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
-          localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
+          localStorage.setItem("FinalWorkbenchPass", JSON.stringify(this.workbenchPass)); 
+          localStorage.setItem("judge", JSON.stringify(this.judge));         
           this.$router.push({
             path: '/FtaskInWaitting',
           });
         } else if (val.taskNodeName == "antiFraudApp_commissioner") { //反欺诈专员 
           this.judge.flag = "03";
-          localStorage.setItem("AntiWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
-          localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识  
+          localStorage.setItem("AntiWorkbenchPass", JSON.stringify(this.workbenchPass)); 
+          localStorage.setItem("judge", JSON.stringify(this.judge));  
           this.$router.push({
             path: '/AntiFraud34',
           });
         } else if (val.taskNodeName == "antiFraudApp_manager") { // 反欺诈主管 
           this.judge.flag = "04";
-          localStorage.setItem("AntiManagerWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
-          localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
+          localStorage.setItem("AntiManagerWorkbenchPass", JSON.stringify(this.workbenchPass)); 
+          localStorage.setItem("judge", JSON.stringify(this.judge));         
           this.$router.push({
             path: '/AntiFraud34',
           });
         } else if (val.taskNodeName == "reconsiderApp_commissioner") { // 复议专员 
           this.judge.flag = "05";
-          localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
-          localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
+          localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass)); 
+          localStorage.setItem("judge", JSON.stringify(this.judge));         
           this.$router.push({
             path: '/reconsiderList',
           });
         } else if (val.taskNodeName == "reconsiderApp_manager") { // 复议经理
           this.judge.flag = "06";
-          localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass          
+          localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass));           
           // localStorage.setItem("ReManagerWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
-          localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
+          localStorage.setItem("judge", JSON.stringify(this.judge));         
           this.$router.push({
             path: '/reconsiderList',
           });
@@ -257,7 +257,7 @@
       // 统一登录平台  调试   start 
       // console.log(UserURL)
       // this.get("http://testplatform.nuoyuan.com.cn/remote/user/getUserInfo").then(response => {
-      this.get( UserURL).then(response => {
+      this.get( UserURL+'remote/user/getUserInfo').then(response => {
         console.info(response.data);
         this.userInf = {
           userCode: response.data.userCode,
@@ -391,7 +391,7 @@
     padding-left: 20px;
     padding-right: 20px;
     height: 25px;
-    display: inline-block;
+    /* display: inline-block; */
     background-color: #f3f3f3;
     color: #3b5469;
     font-size: 13px;

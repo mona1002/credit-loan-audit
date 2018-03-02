@@ -89,6 +89,12 @@ import doTheTask from'../view/TaskManagement/examineAndApprove/doTheTask.vue'//�
 import historicalTask from'../view/TaskManagement/examineAndApprove/historicalTask.vue'//审批任务管理——历史任务
 //  -----------------------质检----------------------
 import tb from'../view/QualityTesting/roles/tb.vue'
+import tes from'../view/QualityTesting/roles/tes.vue'
+//  -----------------------大数据风控+社保公积金----------------------
+import PneCtrl from'../view/SocialSeAndPneCtrl/PneCtrl.vue'//大数据
+import SocialSe from'../view/SocialSeAndPneCtrl/SocialSe.vue'//社保公积金
+
+//  -----------------------质检----------------------
 
 Vue.use(Router)
 
@@ -344,6 +350,19 @@ const routes = [{
 {
   path:'/tb',
   component:tb
+},
+{
+  path:'/tes',
+  component:tes
+},
+// ---------------大数据+社保--------------------
+{
+  path:'/PneCtrl',
+  component:PneCtrl
+},
+{
+  path:'/SocialSe',
+  component:SocialSe
 },
 ];
 
