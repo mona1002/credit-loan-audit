@@ -1,4 +1,4 @@
-<!-- 反欺诈申请 - - 详情编辑页面 -->
+<!-- 反欺诈申请 - - 详情编辑页面  菜单进入 -->
 <template>
   <div date="AntiApplyInf" class="anti-apply-edit-class">
     <myHead class="top"></myHead>

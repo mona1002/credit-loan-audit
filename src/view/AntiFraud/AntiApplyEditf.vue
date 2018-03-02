@@ -1,4 +1,4 @@
-<!-- 反欺诈申请 - - 详情编辑页面 -->
+<!-- 反欺诈申请 - - 详情编辑页面 初审/终审 发起反欺诈-->
 <template>
   <div date="AntiApplyInf" class="anti-apply-edit-class">
     <myHead class="top"></myHead>
@@ -145,17 +145,16 @@ export default {
       applyCustId: '', // 客户id
       applyCustName: '', // 客户姓名
       applyCustNo: '', // 客户编号
-      channel: '', // 渠道
+      channel: '00', // 渠道
       certCode: '', // 证件号码
       proName: '', // 产品名称
       mobile: '', // 移动电话
       dealroperDate: '', // 反欺诈申请日期
-
-
       certTypeTxt: '', // 证件类型
       mainReasons: [],
       secondReasons: [],
       antiFlag: '', // 标志
+      busiState:'', // 状态
     }
   },
   mounted() {
@@ -179,7 +178,6 @@ export default {
     //   this.getFraudApplyInfo();
 
     if (this.antiFlag == '01') {
-
       // taskInWaitting
       this.creditappTaskid = JSON.parse(localStorage.getItem('taskInWaitting')).taskId;
     } else if (this.antiFlag == '02') {
@@ -205,7 +203,6 @@ export default {
       this.creditappTaskid = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
     }
 
-
     //   this.getFraudApplyInfoWithOpinionById();
     // }
 
@@ -219,12 +216,15 @@ export default {
      */
     this.flag = this.$route.params.flag;
     console.log(this.flag);
+    // 拿到状态
+    this.busiState = this.$route.params.busiState;
 
     if (this.flag == 'start') {
       this.getFraudApplyInfo();
-    } else if (this.flag == 'edit' || this.flag == 'add') {
-      this.getFraudApplyInfoWithOpinionById();
     }
+    //  else if (this.flag == 'edit' || this.flag == 'add') {
+    //   this.getFraudApplyInfoWithOpinionById();
+    // }
 
     // 请求系统时间
     this.getSystemDate();
@@ -297,7 +297,7 @@ export default {
             // 客户编号
             this.applyCustNo = res.data.applyInfoPool.applyCustNo;
             // 渠道
-            this.channel = res.data.applyInfoPool.channel;
+            // this.channel = res.data.applyInfoPool.channel;
             // 证件号码
             this.certCode = res.data.applyInfoPool.certCode;
             // 证件类型
@@ -310,15 +310,15 @@ export default {
         })
     },
     // 查询 反欺诈信息  , 从列表过来 , 根据列表 id 查询
-    getFraudApplyInfoWithOpinionById() {
-      this.post('/fraudApplyInfoController/getFraudApplyInfoWithOpinionById', {
-        // id: this.id
-        // id:'201506260173032182'
-      }).then(res => {
-        console.log(res);
+    // getFraudApplyInfoWithOpinionById() {
+    //   this.post('/fraudApplyInfoController/getFraudApplyInfoWithOpinionById', {
+    //     // id: this.id
+    //     // id:'201506260173032182'
+    //   }).then(res => {
+    //     console.log(res);
 
-      })
-    },
+    //   })
+    // },
     submitForm() {
       console.log('提交反欺诈')
       const h = this.$createElement;
@@ -364,6 +364,7 @@ export default {
                   channel: this.channel, // 渠道
                   certCode: this.certCode, // 证件号码
                   proName: this.proName, // 产品名称
+                  busiState:this.busiState, // 状态
                 }
               })
               .then(res => {
