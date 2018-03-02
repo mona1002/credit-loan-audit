@@ -6,18 +6,18 @@
     <div class="keywordContainer">
       <el-row class="row row1"  type="flex">
         <el-col :span="8" :offset="0">
-          <span class="keywordText">客户姓名</span><el-input class="" v-model="queryParam.custName_la" placeholder="请输入客户姓名"></el-input>
+          <span class="keywordText">客户姓名</span><el-input @keyup.enter.native="getByKey" v-model.trim="queryParam.custName_la" placeholder="请输入客户姓名"></el-input>
         </el-col>
         <el-col :span="8">
-          <span class="keywordText">证件号码</span><el-input class="" v-model="queryParam.certCode" placeholder="请输入证件号码"></el-input>
+          <span class="keywordText">证件号码</span><el-input @keyup.enter.native="getByKey" v-model.trim="queryParam.certCode" placeholder="请输入证件号码"></el-input>
         </el-col>
         <el-col :span="8">
-          <span class="keywordText">进件编号</span><el-input class="" v-model="queryParam.applySubNo" placeholder="请输入进价编号"></el-input>
+          <span class="keywordText">进件编号</span><el-input @keyup.enter.native="getByKey" v-model.trim="queryParam.applySubNo" placeholder="请输入进价编号"></el-input>
         </el-col>
       </el-row>
       <el-row class="row row2"  type="flex">
         <el-col :span="8">
-          <span class="keywordText">进件机构</span><el-input class="" v-model="queryParam.appOrgCode" placeholder="请输入进件机构"></el-input>
+          <span class="keywordText">进件机构</span><el-input @keyup.enter.native="getByKey" v-model.trim="queryParam.appOrgCode" placeholder="请输入进件机构"></el-input>
         </el-col>
         <el-col :span="8">
           <span class="keywordText">产品名称</span><el-select v-model="queryParam.proId" placeholder="请选择产品名称">
@@ -57,7 +57,7 @@
           </el-select>
         </el-col>
         <el-col :span="8">
-          <span class="keywordText">当前处理人员</span><el-input class="" v-model="queryParam.operatorCode" placeholder="请输入当前处理人员"></el-input>
+          <span class="keywordText">当前处理人员</span><el-input @keyup.enter.native="getByKey" v-model.trim="queryParam.operatorCode" placeholder="请输入当前处理人员"></el-input>
         </el-col>
         <el-col :span="8" v-if="routerState!=='03'">
           <el-button class="btn reset" @click="reset">重置</el-button><el-button class="btn query" type="primary" @click="getByKey">查询</el-button>
