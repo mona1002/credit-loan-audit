@@ -691,6 +691,11 @@ export default {
         if (res.statusCode == '200')
           // 点击提交之后 重新请求 电话树
           this.fetchData();
+        else
+          this.$message({
+            type: 'warning',
+            message: res.msg
+          });
       })
 
     },
@@ -1159,7 +1164,7 @@ export default {
 
 .phone-credit .item-column1 {
   width: 100%;
-  min-width: 1366px;
+  /*min-width: 1366px;*/
   float: left;
   margin: 0;
 }
@@ -1495,6 +1500,8 @@ export default {
 .phone-credit .content-ul {
   width: 100%;
   /*height: 100%;*/
+  height: auto;
+  overflow: auto;
 }
 
 
