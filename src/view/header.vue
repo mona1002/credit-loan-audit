@@ -33,6 +33,7 @@
 
 <script>
 import NavItem from '@/view/navItem'
+import UserURL from "../util/constantUser";
   export default {
     data() {
       return {
@@ -74,7 +75,7 @@ import NavItem from '@/view/navItem'
             })
         },
         backLoin(){
-          window.location.href="http://testplatform.nuoyuan.com.cn/#/workbench";
+           window.location.href=UserURL+"#/workbench";
         },
 
     },

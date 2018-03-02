@@ -6,18 +6,18 @@
     <div class="keywordContainer">
       <el-row class="row row1"  type="flex">
         <el-col :span="8" :offset="0">
-          <span class="keywordText">客户姓名</span><el-input class="" v-model="queryParam.custName_la" placeholder="请输入客户姓名"></el-input>
+          <span class="keywordText">客户姓名</span><el-input @keyup.enter.native="getByKey" v-model.trim="queryParam.custName_la" placeholder="请输入客户姓名"></el-input>
         </el-col>
         <el-col :span="8">
-          <span class="keywordText">证件号码</span><el-input class="" v-model="queryParam.certCode" placeholder="请输入证件号码"></el-input>
+          <span class="keywordText">证件号码</span><el-input @keyup.enter.native="getByKey" v-model.trim="queryParam.certCode" placeholder="请输入证件号码"></el-input>
         </el-col>
         <el-col :span="8">
-          <span class="keywordText">进件编号</span><el-input class="" v-model="queryParam.applySubNo" placeholder="请输入进价编号"></el-input>
+          <span class="keywordText">进件编号</span><el-input @keyup.enter.native="getByKey" v-model.trim="queryParam.applySubNo" placeholder="请输入进价编号"></el-input>
         </el-col>
       </el-row>
       <el-row class="row row2"  type="flex">
         <el-col :span="8">
-          <span class="keywordText">进件机构</span><el-input class="" v-model="queryParam.appOrgCode_lb" placeholder="请输入进件机构"></el-input>
+          <span class="keywordText">进件机构</span><el-input @keyup.enter.native="getByKey" v-model.trim="queryParam.appOrgCode" placeholder="请输入进件机构"></el-input>
         </el-col>
         <el-col :span="8">
           <span class="keywordText">产品名称</span><el-select v-model="queryParam.proId" placeholder="请选择产品名称">
@@ -57,7 +57,7 @@
           </el-select>
         </el-col>
         <el-col :span="8">
-          <span class="keywordText">当前处理人员</span><el-input class="" v-model="queryParam.operatorCode" placeholder="请输入当前处理人员"></el-input>
+          <span class="keywordText">当前处理人员</span><el-input @keyup.enter.native="getByKey" v-model.trim="queryParam.operatorCode" placeholder="请输入当前处理人员"></el-input>
         </el-col>
         <el-col :span="8" v-if="routerState!=='03'">
           <el-button class="btn reset" @click="reset">重置</el-button><el-button class="btn query" type="primary" @click="getByKey">查询</el-button>
@@ -242,15 +242,15 @@
           <el-form-item class="fr" label="处理人员" prop="toUser" :label-width="formLabelWidth">
             <el-select v-model="itemOfLists.toUser" placeholder="请选择处理人员">
               <p style="height: 34px;line-height: 34px;padding: 0 20px;font-size: 14px;background: #eee;">
-                <span style="width:66px;display:inline-block;">用户名称</span><span style="margin-left: 20px">用户编号</span>
+                <span style="width:66px;display:inline-block;">用户名称</span><span style="margin-left: 55px">用户编号</span>
               </p>
               <el-option
                 v-for="item in flowRoleIds"
                 :key="item.userCode"
                 :label="item.userName"
                 :value="item.userCode">
-                <span style="float: left;width:66px;height: 34px">{{ item.userName }}</span>
-                <span style="float: left; color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.userCode }}</span>
+                <span style="float: left;width:101px;height: 34px">{{ item.userName }}</span>
+                <span style="float: right; color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.userCode }}</span>
               </el-option>
             </el-select>
           </el-form-item>
@@ -324,16 +324,7 @@ import processMoniSer from "./processMoniSer.js";
 export default {
   data() {
     return {
-      taskNodes: [
-        {value: 'creditApp_apply',label: '申请登记'},
-        {value: 'creditApp_check',label: '质检复核'},
-        {value: 'creditApp_firstTrial',label: '初审审批'},
-        {value: 'creditApp_finalTrial_one',label: '终审一级审批'},
-        {value: 'creditApp_finalTrial_two',label: '终审二级审批'},
-        {value: 'creditApp_finalTrial_three',label: '信审经理审批'},
-        {value: 'creditApp_finalTrial_four',label: '信审高级经理审批'},
-        {value: 'creditApp_finalTrial_five',label: '信审总监审批'}
-      ],
+      taskNodes: [],
 
       taskTypes: [
         {value: '00',label: '新任务'},
@@ -420,6 +411,29 @@ export default {
       this.userInf = JSON.parse(localStorage.getItem("userInf"));
       this.queryParam.userCode = this.userInf.userCode;
       this.queryParam.orgCode = this.userInf.orgCode;
+
+      if(this.routerPath === "creditApp"){
+        this.taskNodes = [
+          {value: 'creditApp_firstTrial',label: '初审审批'},
+          {value: 'creditApp_finalTrial_one',label: '终审一级审批'},
+          {value: 'creditApp_finalTrial_two',label: '终审二级审批'},
+          {value: 'creditApp_finalTrial_three',label: '信审经理审批'},
+          {value: 'creditApp_finalTrial_four',label: '信审高级经理审批'},
+          {value: 'creditApp_finalTrial_five',label: '信审总监审批'}
+        ];
+      }else if(this.routerPath === "reconsiderApp"){
+        this.taskNodes = [
+          {value: 'reconsiderApp_apply',label: '复议申请'},
+          {value: 'reconsiderApp_commissioner',label: '复议专员审批'},
+          {value: 'reconsiderApp_manager',label: '复议经理审批'}
+        ];
+      }else if(this.routerPath === "antiFraudApp"){
+        this.taskNodes = [
+          {value: 'antiFraudApp_apply',label: '反欺诈申请'},
+          {value: 'antiFraudApp_commissioner',label: '反欺诈专员审批'},
+          {value: 'antiFraudApp_manager',label: '反欺诈主管审批'}
+        ];
+      }
     },
 
     // 查询经营产品
@@ -497,7 +511,7 @@ export default {
       this.queryParam.custName_la = '';
       this.queryParam.certCode = '';
       this.queryParam.applySubNo = '';
-      this.queryParam.appOrgCode_lb = '';
+      this.queryParam.appOrgCode = '';
       this.queryParam.proId = '';
       this.queryParam.taskNodeName = '';
       this.queryParam.taskType = '';
