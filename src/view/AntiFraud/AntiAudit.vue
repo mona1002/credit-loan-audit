@@ -56,7 +56,7 @@
             <!-- 反欺诈审批结论轨迹 -->
             <aAntiConclusionPath v-if=" this.tabContent2==9"></aAntiConclusionPath>
             <!-- √ -->
-            <AntiApplyInf v-if=" this.tabContent2==10">反欺诈申请信息</AntiApplyInf>
+            <AntiApplyInf v-if=" this.tabContent2==10" :isAntiDetail="true">反欺诈申请信息</AntiApplyInf>
             <!-- √ -->
             <aAntiFraudInvestigation v-if=" this.tabContent2==11">反欺诈调查</aAntiFraudInvestigation>
             <!-- √ -->

@@ -130,11 +130,11 @@
 			//this.queryParam = JSON.parse(localStorage.getItem('workbenchPass'));
 			//console.log(JSON.parse(localStorage.getItem('workbenchPass')))
 			this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-			if(this.judgeFlag.flag == '05'){
+			if(this.judgeFlag.flag == '05'){//复议专员
 				this.queryParam.processTemplateId=JSON.parse(localStorage.getItem('ReWorkbenchPass')).processTemplateId;
 				this.queryParam.taskNodeName=JSON.parse(localStorage.getItem('ReWorkbenchPass')).taskNodeName;
 				this.queryParam.taskStatus=JSON.parse(localStorage.getItem('ReWorkbenchPass')).taskStatus;
-			}else if(this.judgeFlag.flag == '06'){
+			}else if(this.judgeFlag.flag == '06'){//复议经理
 				this.queryParam.processTemplateId=JSON.parse(localStorage.getItem('ReWorkbenchPass')).processTemplateId;
 				this.queryParam.taskNodeName=JSON.parse(localStorage.getItem('ReWorkbenchPass')).taskNodeName;
 				this.queryParam.taskStatus=JSON.parse(localStorage.getItem('ReWorkbenchPass')).taskStatus;

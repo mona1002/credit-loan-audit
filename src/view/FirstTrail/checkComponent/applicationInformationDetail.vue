@@ -956,7 +956,7 @@
 				      <el-table-column
 				        prop="certTypeTxt"
 				        label="证件类型"
-				        min-width="100">
+				        min-width="110">
 				      </el-table-column>
 				      <el-table-column
 				        prop="certCode"
@@ -985,6 +985,129 @@
 			    </el-table>
 		  	</el-collapse-item>
 		</el-collapse>
+		<div class="weihuButton" v-show="this.judgeFlag.flag == '01' || this.judgeFlag.flag == '02'">
+	    	<el-button type="primary" @click="maintenanceLog">维护日志</el-button>
+	    </div>
+	    <!-- 维护日志弹框 -->
+	    <div class="weihurizhi">
+	    	<el-dialog
+	    			  title='维护日志'
+	    			  :visible.sync="sldialogVisible"
+	    			  width="860px"
+	    			  top="20vh">
+	    			   <p class="freshen">
+	    				 <!-- <i class="el-icon-refresh"></i> -->
+	    				 <label @click="renovate">
+	    				 	<img src="/static/images/dasf.png">
+	    				 	<span>刷新</span>
+	    				 </label>
+	    			  </p>
+	    			  <div class="splcBody">
+	    			  	<el-table
+	    			      :data="logDatas.rows"
+	    			      style="width: 100%"
+	    			      height="296"
+	    			      border>
+	    			      <el-table-column
+	    			        type="index"
+	    			        label="序号"
+	    			        min-width="50">
+	    			      </el-table-column>
+	    			      <el-table-column
+	    			        prop="count"
+	    			        label="修改个数"
+	    			        min-width="80">
+	    			      </el-table-column>
+	    			      <el-table-column
+	    			        prop="operTime"
+	    			        label="操作时间"
+	    			        min-width="120">
+	    			      </el-table-column>
+	    			      <el-table-column
+	    			        prop="operId"
+	    			        label="操作人员"
+	    			        min-width="120">
+	    			      </el-table-column>
+	    			      <el-table-column
+	    			        prop="operOrgId"
+	    			        label="操作人员机构"
+	    			        min-width="120">
+	    			      </el-table-column>
+	    			      <el-table-column
+	    			        label="操作"
+	    			        min-width="80">
+	    			        <template slot-scope="scope">
+	    				        <el-button
+	    				          size="mini"
+	    				          @click="handlDetail(scope.$index, scope.row)">详情
+	    				      	</el-button>
+	    				    </template>
+	    			      </el-table-column>
+	    			    </el-table>
+	    			    <!-- 分页 -->
+	    				<div class="page">
+	    					<el-pagination
+	    				      @size-change="handleSizeChange"
+	    				      @current-change="handleCurrentChange"
+	    				      :current-page="currentPage"
+	    				      :page-sizes="[10, 50, 80, 100]"
+	    				      :page-size=setPageSize
+	    				      layout="total, sizes, prev, pager, next, jumper"
+	    				      :total="logDatas.total">
+	    				    </el-pagination>
+	    			    </div>
+	    			  </div>
+	    			</el-dialog>
+	    </div>
+	    <!-- 维护日志-详情 弹框 -->
+	    <div class="weihurizhi">
+	    	<el-dialog
+	    			  title='浏览日志明细信息'
+	    			  :visible.sync="detailLogVisible"
+	    			  width="860px"
+	    			  top="20vh">
+	    			  <div class="splcBody">
+	    			  	<el-table
+	    			      :data="detailLogDatas.rows"
+	    			      style="width: 100%"
+	    			      height="296"
+	    			      border>
+	    			      <el-table-column
+	    			        type="index"
+	    			        label="序号"
+	    			        min-width="50">
+	    			      </el-table-column>
+	    			      <el-table-column
+	    			        prop="propertyNameCN"
+	    			        label="字段名"
+	    			        min-width="120">
+	    			      </el-table-column>
+	    			      <el-table-column
+	    			        prop="propertyOlderValue"
+	    			        label="变更前"
+	    			        min-width="100">
+	    			      </el-table-column>
+	    			      <el-table-column
+	    			        prop="propertyNewerValue"
+	    			        label="变更后"
+	    			        min-width="120">
+	    			      </el-table-column>
+	    			    </el-table>
+	    			    <!-- 分页 -->
+	    				<div class="page">
+	    					<el-pagination
+	    				      @size-change="dhandleSizeChange"
+	    				      @current-change="dhandleCurrentChange"
+	    				      :current-page="currentPage"
+	    				      :page-sizes="[10, 50, 80, 100]"
+	    				      :page-size=setPageSize
+	    				      layout="total, sizes, prev, pager, next, jumper"
+	    				      :total="detailLogDatas.total">
+	    				    </el-pagination>
+	    			    </div>
+	    			  </div>
+	    			</el-dialog>
+	    </div>
 	</div>
 </template>
 <script type="text/javascript">
@@ -1039,7 +1162,25 @@
 				huankuanedu:'',
 				nianxian:'',
 				shengxiaoriqi:'',
-
+				/*维护日志*/
+				sldialogVisible:false,
+				logDatas:'',
+				currentPage:1,// 默认显示的当前页
+				setPageSize:10,
+				queryParam: {
+			        businessId :'',//申请单基本信息id
+		            rows : '',//每页条数
+		            page : '',//页数
+		            sort : '',//排序字段
+		            order : '',//排序方式
+			      },
+				detailLogVisible:false,
+				detailLogDatas:'',
+				detailParam: {
+			        logId :'',//日志id
+		            rows : '',//每页条数
+		            page : '',//页数
+			      },
 			};
 		},
 		mounted(){
@@ -1048,9 +1189,11 @@
 		    if (this.judgeFlag.flag == '01') {
 		        this.taskInWaitting = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
 		        this.applyId=this.taskInWaitting.applyId;
+		        this.queryParam.businessId = this.taskInWaitting.applyId;
 		    } else if (this.judgeFlag.flag == '02') {
 		        this.taskInWaitting = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
 		        this.applyId=this.taskInWaitting.applyId;
+		        this.queryParam.businessId = this.taskInWaitting.applyId;
 		    }else if (this.judgeFlag.flag == '03') {
 		        this.taskInWaitting = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
 		        this.applyId=this.taskInWaitting.applyId;
@@ -1377,6 +1520,97 @@
 				    }
 				//};
 			},
+			/*维护日志*/
+			comrequest(param){
+				console.log(param);
+				this.post("/queryOperLogDetail/queryLogRecords", param).then(res => {
+					//console.log('333');
+		      	if(res.statusCode==200){
+		      		if(res.data){
+		      			this.logDatas=res.data;
+		      		}else{
+		      			this.logDatas='';
+		      		};
+		        	this.$message({
+						message:"查询成功！",
+						type:'success'
+					})
+		        }else{
+		        	this.$message({
+		              message:"查询失败！",
+		              type: 'error'
+		            })
+		        }
+		      })
+			},
+	    	maintenanceLog(){
+	    		this.sldialogVisible = true;
+	    		this.comrequest(this.queryParam);
+				
+	    	},
+	    	/*维护日志 刷新按钮*/
+			renovate(){
+				this.comrequest(this.queryParam);
+			},
+	    	handleSizeChange(val) {
+		      console.log('每页 ${val} 条');
+		      this.queryParam.rows = val;
+		      this.queryParam.page = 1;
+		      if (this.currentPage !== 1 || this.setPageSize !== 10) {
+		        this.currentPage = 1;
+		        this.setPageSize = 10;
+		      } else {
+		        this.comrequest(this.queryParam);
+		      };
+		    },
+		    handleCurrentChange(val) {
+		      console.log('当前页: ${val}');
+		      this.queryParam.page = val;
+      		  this.comrequest(this.queryParam);
+		    },
+	    	/*维护日志详情*/
+	    	handlDetail(index, row) {
+	        	console.log(index, row);
+	        	this.detailLogVisible = true;
+	        	this.detailParam.logId = row.id;
+	        	this.detailRequest(this.detailParam);
+	      	},
+	      	detailRequest(param){
+				this.post("/queryOperLogDetail/queryOperLogDetails", param).then(res => {
+		      	if(res.statusCode==200){
+		      		if(res.data){
+		      			this.detailLogDatas=res.data;
+		      		}else{
+		      			this.detailLogDatas='';
+		      		};
+		        	this.$message({
+						message:"查询成功！",
+						type:'success'
+					})
+		        }else{
+		        	this.$message({
+		              message:"查询失败！",
+		              type: 'error'
+		            })
+		        }
+		      })
+			},
+	      	dhandleSizeChange(val) {
+		      console.log('每页 ${val} 条');
+		      this.detailParam.rows = val;
+		      this.detailParam.page = 1;
+		      if (this.currentPage !== 1 || this.setPageSize !== 10) {
+		        this.currentPage = 1;
+		        this.setPageSize = 10;
+		      } else {
+		        this.detailRequest(this.detailParam);
+		      };
+		    },
+		    dhandleCurrentChange(val) {
+		      console.log('当前页: ${val}');
+		      this.detailParam.page = val;
+      		  this.detailRequest(this.detailParam);
+		    },
 		},
 	}
 </script>
@@ -1522,5 +1756,28 @@
 	    padding: 5px;
 	    display: inline-block;
 	    overflow: auto;
+	}
+	/* 维护日志 */
+	.weihurizhi .freshen{
+		background:#ccc;
+		height: 30px;
+    	line-height: 30px;
+	}
+	.weihurizhi .freshen img{
+		width: 15px;
+		height: 15px;
+		margin: 7px 0 0 5px;
+	}
+	.weihurizhi .page{
+		text-align: center;
+    	padding: 10px 0;
+	}
+	.weihuButton{
+		float: right;
+		margin: 20px 10px;
+	}
+	.weihurizhi td button{
+		background: #0077FF;
+		color: #fff;
 	}
 </style>

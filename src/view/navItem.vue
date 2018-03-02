@@ -27,7 +27,154 @@
         },
         methods:{
             clickMenu(e){
-                console.log(e);
+                console.log(e.resUrl);
+                if(e.resUrl.indexOf('?') !=-1 ){
+                    var str = e.resUrl(1);//得到？后面的字符串
+                    var strs = str.split('&');//将得到的参数分隔成数组[]
+                    //for(var i=0;i<strs.length;i++){
+                        //初审
+                        if(strs[0].split('=')[0] == 'creditApp_firstTrial' && strs[1].split('=')[0] == '01'){
+                            var row ={
+                                "processTemplateId":"",
+                                "taskStatus":"",
+                                "taskNodeName":"creditApp_firstTrial"
+                            };
+                            var judge ={
+                                "flag":"01"
+                            };
+                            localStorage.setItem("workbenchPass",JSON.stringify(row));
+                            localStorage.setItem("judge",JSON.stringify(judge));
+                        };
+                        //终审一级
+                        if(strs[0].split('=')[0] == 'creditApp_finalTrial_one' && strs[1].split('=')[0] == '02'){
+                            var row ={
+                                "processTemplateId":"",
+                                "taskStatus":"",
+                                "taskNodeName":"ccreditApp_finalTrial_one"
+                            };
+                            var judge ={
+                                "flag":"02"
+                            };
+                            localStorage.setItem("FinalWorkbenchPass",JSON.stringify(row));
+                            localStorage.setItem("judge",JSON.stringify(judge));
+                        };
+                        //终审二级
+                        if(strs[0].split('=')[0] == 'creditApp_finalTrial_two' && strs[1].split('=')[0] == '02'){
+                            var row ={
+                                "processTemplateId":"",
+                                "taskStatus":"",
+                                "taskNodeName":"creditApp_finalTrial_two"
+                            };
+                            var judge ={
+                                "flag":"02"
+                            };
+                            localStorage.setItem("FinalWorkbenchPass",JSON.stringify(row));
+                            localStorage.setItem("judge",JSON.stringify(judge));
+                        };
+                        //信审经理
+                        if(strs[0].split('=')[0] == 'creditApp_finalTrial_three' && strs[1].split('=')[0] == '02'){
+                            var row ={
+                                "processTemplateId":"",
+                                "taskStatus":"",
+                                "taskNodeName":"creditApp_finalTrial_three"
+                            };
+                            var judge ={
+                                "flag":"02"
+                            };
+                            localStorage.setItem("FinalWorkbenchPass",JSON.stringify(row));
+                            localStorage.setItem("judge",JSON.stringify(judge));
+                        };
+                        //信审高级经理
+                        if(strs[0].split('=')[0] == 'creditApp_finalTrial_four' && strs[1].split('=')[0] == '02'){
+                            var row ={
+                                "processTemplateId":"",
+                                "taskStatus":"",
+                                "taskNodeName":"creditApp_finalTrial_four"
+                            };
+                            var judge ={
+                                "flag":"02"
+                            };
+                            localStorage.setItem("FinalWorkbenchPass",JSON.stringify(row));
+                            localStorage.setItem("judge",JSON.stringify(judge));
+                        };
+                        //信审总监
+                        if(strs[0].split('=')[0] == 'creditApp_finalTrial_five' && strs[1].split('=')[0] == '02'){
+                            var row ={
+                                "processTemplateId":"",
+                                "taskStatus":"",
+                                "taskNodeName":"creditApp_finalTrial_five"
+                            };
+                            var judge ={
+                                "flag":"02"
+                            };
+                            localStorage.setItem("FinalWorkbenchPass",JSON.stringify(row));
+                            localStorage.setItem("judge",JSON.stringify(judge));
+                        };
+                        //反欺诈专员
+                        if(strs[0].split('=')[0] == 'antiFraudApp_commissioner' && strs[1].split('=')[0] == '03'){
+                            var row ={
+                                "processTemplateId":"",
+                                "taskStatus":"",
+                                "taskNodeName":"antiFraudApp_commissioner"
+                            };
+                            var judge ={
+                                "flag":"03"
+                            };
+                            localStorage.setItem("AntiWorkbenchPass",JSON.stringify(row));
+                            localStorage.setItem("judge",JSON.stringify(judge));
+                        };
+                        //反欺诈主管
+                        if(strs[0].split('=')[0] == 'antiFraudApp_manager' && strs[1].split('=')[0] == '04'){
+                            var row ={
+                                "processTemplateId":"",
+                                "taskStatus":"",
+                                "taskNodeName":"antiFraudApp_manager"
+                            };
+                            var judge ={
+                                "flag":"04"
+                            };
+                            localStorage.setItem("AntiManagerWorkbenchPass",JSON.stringify(row));
+                            localStorage.setItem("judge",JSON.stringify(judge));
+                        };
+                        //反欺诈申请
+                        if(strs[0].split('=')[0] == 'antiFraudApp_apply'){
+                            var row ={
+                                "processTemplateId":"",
+                                "taskStatus":"",
+                                "taskNodeName":"antiFraudApp_apply"
+                            };
+                            localStorage.setItem("FinalWorkbenchPass",JSON.stringify(row));
+                            localStorage.setItem("judge",JSON.stringify(judge));
+                        };
+                        //复议专员
+                        if(strs[0].split('=')[0] == 'reconsiderApp_commissioner' && strs[1].split('=')[0] == '05'){
+                            var row ={
+                                "processTemplateId":"",
+                                "taskStatus":"",
+                                "taskNodeName":"reconsiderApp_commissioner"
+                            };
+                            var judge ={
+                                "flag":"05"
+                            };
+                            localStorage.setItem("ReWorkbenchPass",JSON.stringify(row));
+                            localStorage.setItem("judge",JSON.stringify(judge));
+                        };
+                        //复议经理
+                        if(strs[0].split('=')[0] == 'reconsiderApp_manager' && strs[1].split('=')[0] == '06'){
+                            var row ={
+                                "processTemplateId":"",
+                                "taskStatus":"",
+                                "taskNodeName":"reconsiderApp_manager"
+                            };
+                            var judge ={
+                                "flag":"06"
+                            };
+                            localStorage.setItem("ReWorkbenchPass",JSON.stringify(row));
+                            localStorage.setItem("judge",JSON.stringify(judge));
+                        };
+
+                   // }
+                }
             },
         },
         props: ['item','navIndex']
