@@ -5,7 +5,7 @@
       <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
       <span class="headFont">概要信息</span>
     </div>
-    <ul class="form-ul" style="padding-left:30px;width:100%;">
+    <ul class="form-ul" style="width:100%;height:auto;overflow:hidden;">
       <li class="item-column3">
         <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:40px;top:10px;font-weight:bold;">*</span>
         <div class="left-title">
@@ -110,8 +110,12 @@
     <div class="btn-div">
       <el-button icon="el-icon-check-hang" class="credit-btn" @click="open">挂起</el-button>
       <el-button v-show="judgeFlag != '03'" icon="el-icon-check-back" class="credit-btn" @click="coverFn('02')">回退</el-button>
-      <el-button icon="el-icon-check-appro" class="credit-btn" @click="insert">审批</el-button>
+      <!-- 专员 多一个审批 -->
+      <el-button v-show="judgeFlag == '03'" icon="el-icon-check-appro" class="credit-btn" @click="insert('submit')">审批</el-button>
+      <!-- 原审批改为提交 -->
+      <el-button icon="el-icon-check-appro" class="credit-btn" @click="insert()">提交</el-button>
       <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('lcgj')">流程轨迹</el-button>
+      <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('save')">保存</el-button>
     </div>
     <!-- 弹窗 -->
     <el-dialog :visible.sync="coverShow">
@@ -391,6 +395,31 @@ export default {
     // 请求  案件编号
     this.queryCaseNumList();
 
+    // 先取 保存的信息
+    var insertObj = localStorage.getItem('saveInsertObj');
+    if (insertObj != undefined) {
+      this.auditResult = insertObj.auditResult; // 审核结论
+      this.mainreasonT = insertObj.mainReason; // 欺诈主原因id
+      this.subreasonT = insertObj.secondReason; // 欺诈子原因id
+      this.riskSection = insertObj.riskSection; // 风险项
+      this.auditDesc = insertObj.auditDesc; // 反欺诈决策反馈
+      this.caseNum = insertObj.caseNum; // 案件编号 caseNum
+      this.caseDesc = insertObj.caseDesc; // 案件描述
+      // 请求主原因
+      if (this.auditResult) {
+        this.getReason('main', this.auditResult, true);
+        // 赋值主原因
+      }
+      // 请求子原因
+      this.secondReasonT = res.data.subreasonId;
+      if (res.data.mainreasonId) {
+        this.getReason('second', this.mainReasonT, true);
+      }
+
+      // 请求风险项
+      this.getRiskItems(true);
+    }
+
   },
   methods: {
     // open 打开 自定义 弹窗   挂起
@@ -410,9 +439,13 @@ export default {
             instance.confirmButtonLoading = true;
             instance.confirmButtonText = '执行中...';
             console.log(this.taskId)
+
+            this.busiState = '30'
             // 点击 确认 提交 方法
             this.post("/creauditInfo/approveHang ", {
-              taskId: this.taskId
+              taskId: this.taskId,
+              busiState: this.busiState,
+              applyId: this.applyId, // 申请单id
             }).then(res => {
               console.log(res);
               console.log(res.statusCode);
@@ -486,10 +519,21 @@ export default {
       })
     },
     // 审批
-    insert() {
+    insert(val) {
+      // 反欺诈专员
+      if (val == 'submit') {
+        // 判断 审批结论 不为 风险排除 就弹窗
+        if (this.auditResult != '02' && this.judgeFlag == '03') {
+          this.$message({
+            showClose: true,
+            message: '您只能审批“风险排除”的进件！',
+            type: 'warning'
+          });
+          return;
+        }
+      }
+
       // 判断必填项
-
-
       if (!this.auditResult) {
         if (!this.mainReason || !this.secondReason || !this.auditDesc) {
 
@@ -502,6 +546,7 @@ export default {
         }
       }
       // v-show="auditResult!='02'"
+      // 风险项 为 排除风险 判断 必填
       console.log(this.auditResult);
       if (this.auditResult == '02') {
         if (!this.auditDesc) {
@@ -567,7 +612,6 @@ export default {
           if (action === 'confirm') {
             instance.confirmButtonLoading = true;
             instance.confirmButtonText = '执行中...';
-
             this.post('/fraudAuditOpinion/insert', {
               applyId: this.applyId, // 申请单id
               mainreasonId: this.mainReason, // 欺诈主原因id
@@ -577,12 +621,13 @@ export default {
               riskSection: this.riskSectionArr, // 风险项
               auditDesc: this.auditDesc, // 反欺诈决策反馈
               auditResult: this.auditResult, // 审核结论
-              auditType: '01', // 审批类型
-              caseNum: this.caseNum, // 案件编号 caseNum
               caseDesc: this.caseDesc, // 案件描述
+              caseNum: this.caseNum, // 案件编号 caseNum
+              auditType: '01', // 审批类型
               taskNodeName: this.taskNodeName, // 任务节点
               taskId: this.taskId,
               processInstanceId: this.processInstanceId, // 流程实例Id
+              busiState: this.busiState, //  状态
             }).then(res => {
               if (res.statusCode == '200') {
                 done();
@@ -595,12 +640,13 @@ export default {
                   });
                   instance.confirmButtonText = '';
                   instance.confirmButtonLoading = false;
-                }
-                this.$message({
-                  type: 'warning',
-                  message: res.msg
-                });
+                } else {
 
+                  this.$message({
+                    type: 'warning',
+                    message: res.msg
+                  });
+                }
               }
               instance.confirmButtonText = '';
               instance.confirmButtonLoading = false;
@@ -661,6 +707,21 @@ export default {
           this.showFlag = 'showDetail';
           this.queryDetailList();
           break;
+        case 'save':
+          // 点击保存 
+          var tempObj = {
+            auditResult: this.auditResult, // 审核结论
+            mainreasonId: this.mainReason, // 欺诈主原因id
+            // mainreaName: this.mainReasonName, // 欺诈主原因名称
+            subreasonId: this.secondReason, // 欺诈子原因id
+            // subreaName: this.secondReasonName, // 欺诈子原因名称
+            riskSection: this.riskSection, // 风险项
+            auditDesc: this.auditDesc, // 反欺诈决策反馈
+            caseNum: this.caseNum, // 案件编号 caseNum
+            caseDesc: this.caseDesc, // 案件描述
+          }
+          // 点击保存 存本地
+          localStorage.setItem('saveInsertObj', tempObj);
       }
     },
     // 获取显示详情信息  
@@ -1024,6 +1085,12 @@ export default {
 }
 
 
+
+
+
+
+
+
 /* 折叠面板头部背景色和icon */
 
 .approval-colun .icon_hat {
@@ -1036,6 +1103,12 @@ export default {
 }
 
 
+
+
+
+
+
+
 /* 一列 */
 
 .approval-colun .item-column1 {
@@ -1046,6 +1119,12 @@ export default {
 }
 
 
+
+
+
+
+
+
 /* 两列 */
 
 .approval-colun .item-column2 {
@@ -1053,6 +1132,12 @@ export default {
   float: left;
   margin: 0;
 }
+
+
+
+
+
+
 
 
 /* 三列 */
@@ -1075,6 +1160,12 @@ export default {
 }
 
 
+
+
+
+
+
+
 /* 3列 空位 */
 
 .approval-colun .item-column3-null {
@@ -1089,6 +1180,12 @@ export default {
   height: 30px;
   line-height: 30px;
 }
+
+
+
+
+
+
 
 
 /* input hover 样式 */
@@ -1107,6 +1204,12 @@ export default {
 }
 
 
+
+
+
+
+
+
 /* 按钮集合控件 */
 
 .approval-colun .btn-div {
@@ -1114,6 +1217,12 @@ export default {
   width: 80%;
   float: left;
 }
+
+
+
+
+
+
 
 
 /*挂起*/
@@ -1130,6 +1239,12 @@ export default {
 }
 
 
+
+
+
+
+
+
 /*回退*/
 
 .approval-colun .el-icon-check-back {
@@ -1142,6 +1257,12 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
+
+
 
 
 /*拒绝*/
@@ -1158,6 +1279,12 @@ export default {
 }
 
 
+
+
+
+
+
+
 /*放弃*/
 
 .approval-colun .el-icon-check-giveup {
@@ -1170,6 +1297,12 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
+
+
 
 
 /*审批*/
@@ -1186,6 +1319,12 @@ export default {
 }
 
 
+
+
+
+
+
+
 /*流程轨迹*/
 
 .approval-colun .el-icon-check-lcgj {
@@ -1200,6 +1339,12 @@ export default {
 }
 
 
+
+
+
+
+
+
 /* 反欺诈 审批结论 - btn*/
 
 .approval-colun .credit-btn {
@@ -1208,6 +1353,12 @@ export default {
   color: #333;
   border: none;
 }
+
+
+
+
+
+
 
 
 /* 反欺诈 审批结论  - - 弹窗*/
@@ -1235,6 +1386,12 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
+
+
+
+
+
 
 
 /* form-title */
@@ -1278,11 +1435,23 @@ export default {
 }
 
 
+
+
+
+
+
+
 /* textarea */
 
 .approval-colun .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
+
+
+
+
+
 
 
 /* 弹窗页面 关闭按钮*/
@@ -1303,6 +1472,12 @@ export default {
 }
 
 
+
+
+
+
+
+
 /* 审批 表单 */
 
 .approval-colun .appro-form {
@@ -1317,6 +1492,12 @@ export default {
 }
 
 
+
+
+
+
+
+
 /*.approval-colun .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -1324,6 +1505,12 @@ export default {
 .approval-colun .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
+
+
+
+
+
 
 
 /* 流程轨迹 */
@@ -1355,6 +1542,12 @@ export default {
 }
 
 
+
+
+
+
+
+
 /* 反欺诈 -- 审批结论 */
 
 .approval-colun .form-ul {
@@ -1362,10 +1555,17 @@ export default {
 }
 
 
+
+
+
+
+
+
 /* 默认显示样式 */
 
 .approval-colun .form-ul .el-select {
   width: 300px;
+  width: calc( 100% - 130px);
 }
 
 .approval-colun .el-input--suffix .el-input__inner {
@@ -1386,11 +1586,23 @@ export default {
 }
 
 
+
+
+
+
+
+
 /* 审批 label*/
 
 .approval-colun .appro-form .back-form-edit-li .el-form-item__label {
   width: 120px;
 }
+
+
+
+
+
+
 
 
 /* 结论  同意 */
@@ -1404,11 +1616,23 @@ export default {
 }
 
 
+
+
+
+
+
+
 /* 两行文字 样式 */
 
 .approval-colun .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
+
+
+
+
+
 
 
 /* 回退样式 */
@@ -1423,6 +1647,12 @@ export default {
 .approval-colun .jujue-class {}
 
 
+
+
+
+
+
+
 /* 详细 信息按钮*/
 
 .approval-colun .btn-detail {
@@ -1431,6 +1661,12 @@ export default {
   margin-top: 35px;
   margin-left: 10px;
 }
+
+
+
+
+
+
 
 
 /* 审批结论 详细信息 */
@@ -1448,6 +1684,12 @@ export default {
 }
 
 
+
+
+
+
+
+
 /* 分页 */
 
 .approval-colun .tool-bar {
@@ -1457,11 +1699,23 @@ export default {
 }
 
 
+
+
+
+
+
+
 /* 隐藏分页 */
 
 .approval-colun .el-pagination__jump {
   display: none;
 }
+
+
+
+
+
+
 
 
 /*多选下拉*/

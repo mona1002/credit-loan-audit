@@ -78,7 +78,7 @@
 		      </el-row>
 		    </div>
 		    <div class="taskWhead">
-				<p>审批-已办任务列表</p>
+				<p>审批-历史任务列表</p>
 			</div>
 			<div class="taskWtable">
 				<el-table :data="datas" style="width: 100%" height="500" @row-click='goDetail' border>

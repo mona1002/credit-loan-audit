@@ -272,8 +272,8 @@
           <div class="back-form-li radio-li">
             <el-form-item label="结论：">
               <!-- <el-radio-group v-model="applyConclusion"> -->
-              <el-radio label="00" v-model="applyConclusion">同意</el-radio>
-              <el-radio label="03" v-model="applyConclusion" v-show="judgeFlag=='02'">请求更高级审批</el-radio>
+              <el-radio label="00" value='00' v-model="applyConclusion">同意</el-radio>
+              <el-radio label="03" value='03' v-model="applyConclusion" v-show="judgeFlag=='02'">请求更高级审批</el-radio>
               <!-- </el-radio-group> -->
             </el-form-item>
           </div>
@@ -713,21 +713,38 @@ export default {
             instance.confirmButtonLoading = true;
             instance.confirmButtonText = '执行中...';
             console.log(this.taskId)
+            // 区分初审/终审
+            if (this.judgeFlag == '01') {
+              this.busiState = '01';
+            } else if (this.judgeFlag == '02') {
+              this.busiState = '11'
+            }
             // 点击 确认 提交 方法
             this.post("/creauditInfo/approveHang ", {
-              taskId: this.taskId
+              taskId: this.taskId,
+              busiState: this.busiState,
+              applyId: this.applyId, // 申请单id
             }).then(res => {
               console.log(res);
               console.log(res.statusCode);
               if (res.statusCode == '200') {
                 done();
               } else {
-                this.$message({
-                  type: 'warning',
-                  message: '网络异常,请重试!'
-                });
-                instance.confirmButtonText = '';
+                if (res.statusCode == 500) {
+                  this.$message({
+                    type: 'warning',
+                    message: '网络异常,请重试!'
+                  });
+                  instance.confirmButtonText = '';
+                  instance.confirmButtonLoading = false;
+                } else {
+                  this.$message({
+                    type: 'warning',
+                    message: res.msg
+                  });
+                }
               }
+              instance.confirmButtonText = '';
               instance.confirmButtonLoading = false;
             });
           } else {
@@ -739,7 +756,12 @@ export default {
           type: 'success',
           message: '挂起成功'
         });
-        this.$router.push('/taskInWaitting');
+        // 初审
+        if (this.judgeFlag == '01')
+          this.$router.push('/taskInWaitting');
+        // 终审
+        if (this.judgeFlag == '02')
+          this.$router.push('/FtaskInWaitting');
       });
     },
     coverFn(flag) {
@@ -868,10 +890,11 @@ export default {
           // 查询反欺诈信息
           // this.$router.push('AntiApplyEdit')
           this.$router.push({
-            name: 'AntiApplyEdit',
+            name: 'AntiApplyEditf',
             params: {
               id: this.applyId,
-              flag: 'start'
+              flag: 'start',
+              busiState: '30'
             }
           });
           break;
@@ -1032,6 +1055,12 @@ export default {
           // this.mainReason = this.mainReason; // 主原因同理
           this.creauditAppOperate = 'check_Refuse';
           // this.taskId = '180074';
+          // 区分初审/终审
+          if (this.judgeFlag == '01') {
+            this.busiState = '02';
+          } else if (this.judgeFlag == '02') {
+            this.busiState = '12'
+          }
           this.approvalFn();
           break;
         case '02':
@@ -1069,7 +1098,12 @@ export default {
           // this.mainReason = this.mainReason; // 主原因同理
           this.creauditAppOperate = 'check_Back';
           // this.taskId = '180049';
-
+          // 区分初审/终审
+          if (this.judgeFlag == '01') {
+            this.busiState = '00';
+          } else if (this.judgeFlag == '02') {
+            this.busiState = '10'
+          }
           this.approvalFn();
           break;
 
@@ -1096,6 +1130,12 @@ export default {
           // 放弃测试数据
           // this.taskId = '177524';
           this.creauditAppOperate = 'check_Abandon';
+          // 区分初审/终审
+          if (this.judgeFlag == '01') {
+            this.busiState = '03';
+          } else if (this.judgeFlag == '02') {
+            this.busiState = '13'
+          }
           this.approvalFn();
           break;
         case '03':
@@ -1157,6 +1197,12 @@ export default {
           this.showFlag = 0;
           // this.taskId = '182525';
           this.opinionFlag = '00';
+          // 区分初审/终审
+          if (this.judgeFlag == '01') {
+            this.busiState = '04';
+          } else if (this.judgeFlag == '02') {
+            this.busiState = '14'
+          }
           // 保存审批信息
           this.saveCreaduit();
           break;
@@ -1187,7 +1233,8 @@ export default {
         applyId: this.applyId, // 申请单id
         rollbackNodeName: this.rollbackNodeName, // 回退节点名称
         dealroperDate: this.dealroperDate, // 经办时间
-        creauditAppOperate: this.creauditAppOperate // 操作类型
+        creauditAppOperate: this.creauditAppOperate, // 操作类型
+        busiState: this.busiState
       }).then(res => {
         console.log(res);
         console.log(this);
@@ -1230,7 +1277,7 @@ export default {
       });
     },
     // 保存审批信息
-    saveCreaduit() {
+    saveCreaduit(val) {
       console.log("保存审批信息");
 
       let verIncome2 = 0;
@@ -1278,6 +1325,7 @@ export default {
         proId: this.proId, //产品id
         taskId: this.taskId, // 任务id
         opinionFlag: this.opinionFlag, // 任务类型  初审 00 
+        busiState: this.busiState
       }).then(res => {
         console.log(res);
         if (res.statusCode != '200') {
@@ -1695,10 +1743,10 @@ export default {
         this.reasonRemark = ''; // 意见描述/原因说明
         // this.appOrgId = ''; // 进件机构id
         // this.applyId = ''; // 申请单id
-        // this.rollbackNodeName = ''; // 回退节点名称
+        this.rollbackNodeName = ''; // 回退节点名称
         // this.dealroperDate = ''; // 经办时间
         // this.creauditAppOperate = ''; // 操作类型
-        
+
       }
     },
     // 监听 输入请求
@@ -1798,6 +1846,9 @@ export default {
 
 
 
+
+
+
 /* 三列 */
 
 .creditApproval-class .item-column3 {
@@ -1813,6 +1864,9 @@ export default {
   margin: 0;
   padding: 0;
 }
+
+
+
 
 
 
@@ -1902,6 +1956,9 @@ export default {
 
 
 
+
+
+
 /* 信审审批 - btn*/
 
 .creditApproval-class .credit-btn {
@@ -1910,6 +1967,9 @@ export default {
   color: #333;
   border: none;
 }
+
+
+
 
 
 
@@ -2015,6 +2075,9 @@ export default {
 
 
 
+
+
+
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -2022,6 +2085,9 @@ export default {
   float: left;
   margin: 0;
 }
+
+
+
 
 
 
@@ -2075,6 +2141,9 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
+
+
 
 
 
@@ -2208,11 +2277,17 @@ export default {
 
 
 
+
+
+
 /* textarea */
 
 .creditApproval-class .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
+
+
 
 
 
@@ -2320,6 +2395,9 @@ export default {
 
 
 
+
+
+
 /* 审批 表单 */
 
 .creditApproval-class .appro-form {
@@ -2373,6 +2451,9 @@ export default {
 
 
 
+
+
+
 /*.creditApproval-class .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -2380,6 +2461,9 @@ export default {
 .creditApproval-class .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
+
+
 
 
 
@@ -2480,6 +2564,9 @@ export default {
 
 
 
+
+
+
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -2487,6 +2574,9 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
+
+
 
 
 
@@ -2604,6 +2694,9 @@ export default {
 
 
 
+
+
+
 /* 申请信息 */
 
 .creditApproval-class .info .el-form-item__content {
@@ -2613,6 +2706,9 @@ export default {
 .creditApproval-class .info .el-form-item__label {
   width: 120px;
 }
+
+
+
 
 
 
@@ -2701,11 +2797,17 @@ export default {
 
 
 
+
+
+
 /* 有编辑框的 提示信息*/
 
 .creditApproval-class .back-form .back-form-edit-li {
   margin-top: 25px !important;
 }
+
+
+
 
 
 
@@ -2803,6 +2905,9 @@ export default {
 
 
 
+
+
+
 /*回退*/
 
 .creditApproval-class .el-icon-check-back {
@@ -2815,6 +2920,9 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
 
 
 
@@ -2909,6 +3017,9 @@ export default {
 
 
 
+
+
+
 /*放弃*/
 
 .creditApproval-class .el-icon-check-giveup {
@@ -2921,6 +3032,9 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
 
 
 
@@ -3015,6 +3129,9 @@ export default {
 
 
 
+
+
+
 /*发起反欺诈*/
 
 .creditApproval-class .el-icon-check-start {
@@ -3027,6 +3144,9 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
 
 
 
@@ -3121,6 +3241,9 @@ export default {
 
 
 
+
+
+
 /*流程轨迹*/
 
 .creditApproval-class .el-icon-check-lcgj {
@@ -3174,6 +3297,9 @@ export default {
 
 
 
+
+
+
 /* 折叠面板头部背景色和icon */
 
 .creditApproval-class .icon_hat {
@@ -3184,6 +3310,9 @@ export default {
 .creditApproval-class .headFont {
   font-size: 16px;
 }
+
+
+
 
 
 
@@ -3280,11 +3409,17 @@ export default {
 
 
 
+
+
+
 /* 信审审批  - 审批  编辑部分 */
 
 .creditApproval-class .appro-form .back-form-edit-li .el-form-item__label {
   /*width: 120px;*/
 }
+
+
+
 
 
 
@@ -3387,11 +3522,17 @@ export default {
 
 
 
+
+
+
 /* 两行文字 样式 */
 
 .creditApproval-class .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
+
+
 
 
 
@@ -3478,6 +3619,9 @@ export default {
 
 
 
+
+
+
 /* label 文字样式 */
 
 .creditApproval-class .huitui-class .el-form-item__label {
@@ -3485,6 +3629,9 @@ export default {
 }
 
 .creditApproval-class .jujue-class {}
+
+
+
 
 
 
@@ -3592,11 +3739,17 @@ export default {
 
 
 
+
+
+
 /* 审批信息  */
 
 .creditApproval-class .el-form-item__content .el-select .el-input {
   width: 100%;
 }
+
+
+
 
 
 
