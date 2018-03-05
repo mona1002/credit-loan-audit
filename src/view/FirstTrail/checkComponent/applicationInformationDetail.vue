@@ -165,7 +165,7 @@
 				<ul class="illustration">
 					<li>
 						<label>借款人其他联系方式：</label>
-						<div>{{qitaphone}}</div>
+						<div>{{accepCusBasicInfo.otherContacts}}</div>
 					</li>
 				</ul>
 				<ul>
@@ -209,7 +209,7 @@
 					</li> -->
 					<li>
 						<label>是否与户口地一致：</label>
-						<span>{{hukoudi}}</span>
+						<span>{{accepCusBasicInfo.homeAddressSameTxt}}</span>
 					</li>
 				</ul>
 				<ul>
@@ -226,7 +226,7 @@
 					</li> -->
 					<li>
 						<label>优先联系地址：</label>
-						<span>{{youxianlianxi}}</span>
+						<span>{{accepCusBasicInfo.priorityContactAddress}}</span>
 					</li>
 				</ul>
 				<ul>
@@ -284,25 +284,25 @@
 				<ul>
 					<li>
 						<label>银行开户名称：</label>
-						<span>{{yinhangmingcheng}}</span>
+						<span>{{accepCusBasicInfo.bankName}}</span>
 					</li>
 					<li>
 						<label>银行卡所属分行：</label>
-						<span>{{suoshufenhang}}</span>
+						<span>{{accepCusBasicInfo.bankBranch}}</span>
 					</li>
 					<li>
 						<label>常用储蓄卡卡号：</label>
-						<span>{{chuxukakahao}}</span>
+						<span>{{accepCusBasicInfo.accountCode}}</span>
 					</li>
 				</ul>
 				<ul>
 					<li>
 						<label>网查征信用户名：</label>
-						<span>{{wangchayonghuming}}</span>
+						<span>{{accepCusBasicInfo.netCreditUsername}}</span>
 					</li>
 					<li>
 						<label>网查征信用户密码：</label>
-						<span>{{wangchamima}}</span>
+						<span>{{accepCusBasicInfo.netCreditPassword}}</span>
 					</li>
 					<li>
 						<label>是否缴纳商业保险：</label>
@@ -546,35 +546,35 @@
 				<ul class="firstUl">
 					<li>
 						<label>同业机构名称：</label>
-						<span>{{jigoumingcheng}}</span>
+						<span>{{accepCusInterBankLoan.interBankTxt}}</span>
 					</li>
 					<li>
 						<label>贷款产品：</label>
-						<span>{{daikuanchanpin}}</span>
+						<span>{{accepCusInterBankLoan.loanPro}}</span>
 					</li>
 					<li>
 						<label>贷款额度[元]：</label>
-						<span>{{daikuanedu}}</span>
+						<span>{{accepCusInterBankLoan.loanTotalAmt}}</span>
 					</li>
 				</ul>
 				<ul>
 					<li>
 						<label>贷款生效日期：</label>
-						<span>{{daikuanriqi}}</span>
+						<span>{{accepCusInterBankLoan.loanEffectDate}}</span>
 					</li>
 					<li>
 						<label>贷款总期限[月]：</label>
-						<span>{{daikuanzongqixian}}</span>
+						<span>{{accepCusInterBankLoan.loanPeriod}}</span>
 					</li>
 					<li>
 						<label>每月还款日：</label>
-						<span>{{huankuanri}}</span>
+						<span>{{accepCusInterBankLoan.eachPayDay}}</span>
 					</li>
 				</ul>
 				<ul>
 					<li>
 						<label>还款额度[元]：</label>
-						<span>{{huankuanedu}}</span>
+						<span>{{accepCusInterBankLoan.repayAmt}}</span>
 					</li>
 					<li>						
 					</li>
@@ -616,13 +616,13 @@
 						</li>
 						<li>
 							<label>缴纳年限[月]：</label>
-							<span>{{nianxian}}</span>
+							<span>{{accepCusBasicInfo.payPeriod}}</span>
 						</li>
 					</ul>
 					<ul>
 						<li>
 							<label>生效日期：</label>
-							<span>{{shengxiaoriqi}}</span>	
+							<span>{{accepCusBasicInfo.insurEffectDate}}</span>	
 						</li>
 						<li></li>
 						<li></li>
@@ -701,7 +701,7 @@
 				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
-				        prop="restLoans"
+				        prop="estateShare"
 				        label="房产是否共有"
 				        min-width="120">
 				      </el-table-column>
@@ -779,12 +779,12 @@
 				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
-				        prop="buyDate"
+				        prop="carShare"
 				        label="车产是否共有"
 				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
-				        prop="buyDate"
+				        prop="carMortgage"
 				        label="车产是否抵押"
 				        min-width="100">
 				      </el-table-column>
@@ -1131,6 +1131,9 @@
 				/*私人业主信息*/
 				accepCusPrivate:'',
 
+				/*同业贷情况*/
+				accepCusInterBankLoan:'',
+
 				/*您的工作信息*/
 				accepCusWorkInfo:'',
 
@@ -1143,25 +1146,7 @@
 				judgeFlag:'',
 				//您的个人信息 投保地点
 				insurAddr:'',
-				//借款人其他联系方式
-				qitaphone:'',
-				hukoudi:'',
-				youxianlianxi:'',
-				yinhangmingcheng:'',
-				suoshufenhang:'',
-				chuxukakahao:'',
-				wangchayonghuming:'',
-				wangchamima:'',
 				tongyedai:'',
-				jigoumingcheng:'',
-				daikuanchanpin:'',
-				daikuanedu:'',
-				daikuanriqi:'',
-				daikuanzongqixian:'',
-				huankuanri:'',
-				huankuanedu:'',
-				nianxian:'',
-				shengxiaoriqi:'',
 				/*维护日志*/
 				sldialogVisible:false,
 				logDatas:'',
@@ -1250,6 +1235,13 @@
 		        	if(this.accepCusEstates[i].coveredArea != null){
 		        		this.accepCusEstates[i].coveredArea = this.formatNumber(this.accepCusEstates[i].coveredArea,2,0).replace(/,/g,'');
 		        	};
+		        	if(this.accepCusEstates[i].estateShare != null){
+		        		if(this.accepCusEstates[i].estateShare == '0'){
+		        			this.accepCusEstates[i].estateShare = '否'
+		        		}else if(this.accepCusEstates[i].estateShare == '1'){
+		        			this.accepCusEstates[i].estateShare = '是'
+		        		}
+		        	};
 		        	//console.log(this.accepCusEstates[i].monthlyPay);
 		        };
 
@@ -1268,6 +1260,20 @@
 		        	if(this.accepCusCarInfos[i].restLoans != null){
 			        	this.accepCusCarInfos[i].restLoans = this.formatNumber(this.accepCusCarInfos[i].restLoans,2,0);
 			        };
+			        if(this.accepCusCarInfos[i].carShare != null){
+		        		if(this.accepCusCarInfos[i].carShare == '0'){
+		        			this.accepCusCarInfos[i].carShare = '否'
+		        		}else if(this.accepCusCarInfos[i].carShare == '1'){
+		        			this.accepCusCarInfos[i].carShare = '是'
+		        		}
+		        	};
+		        	if(this.accepCusCarInfos[i].carMortgage != null){
+		        		if(this.accepCusCarInfos[i].carMortgage == '0'){
+		        			this.accepCusCarInfos[i].carMortgage = '否'
+		        		}else if(this.accepCusCarInfos[i].carMortgage == '1'){
+		        			this.accepCusCarInfos[i].carMortgage = '是'
+		        		}
+		        	};
 		        }
 
 		        /*您的借款需求*/

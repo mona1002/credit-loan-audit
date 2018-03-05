@@ -524,6 +524,7 @@
 		        appOrgCode:'', // 门店代码 空
 		        proCode:'',
 		        applyCustId:'',
+		        processInstanceId:'',//流程实例id
 			}
 		},
 		mounted(){
@@ -544,6 +545,8 @@
 		    this.sproId = this.applicationInformationDetail.proId;
            	//流程模版ID
            	this.processTemplateId = JSON.parse(localStorage.getItem('ReWorkbenchPass')).processTemplateId;
+           	//流程实例ID
+           	this.processInstanceId = JSON.parse(localStorage.getItem('ReWorkbenchPass')).processInstanceId;
            	//任务id
            	this.taskId = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
            	this.proCode = this.applicationInformationDetail.proCode;
@@ -890,9 +893,10 @@
 				console.log(this.$refs.rmainReasonName);
 				console.log(this.$refs.rmainReasonName.selectedLabel);
 				console.log(this.$refs.rmainReasonName.selectedLabel);
-				this.post("/creauditInfo/approval", {
+				this.post("/creauditOpinion/approval", {
 		        // 挂起 taskId 任务id
 		        taskId: this.taskId,
+		        processInstanceId:this.processInstanceId,//流程模版ID
 		        custName: this.datas.custName, // 客户名称
 		        custNo: this.custNo, // 客户code
 		        certType: this.certType, // 证件类型
@@ -904,14 +908,16 @@
 		        proId: this.sproId, // 产品id     //"d7fa0628-791d-4cc5-b854-aa8bef9340a6"
 		        opinionFlag: '01', // 标志任务类型(复议专员 拒绝)
 		        mainReasonName: this.$refs.rmainReasonName.selectedLabel, // 回退主原因
-		        secondaryReason: this.$refs.rsubReasonName.selectedLabel, // 回退子原因
+		        subReasonName: this.$refs.rsubReasonName.selectedLabel, // 回退子原因
 		        reasonRemark: this.rreasonRemark, // 意见描述/原因说明
 		        appOrgId: this.appOrgId, // 进件机构id
 		        applyId: this.applyId, // 申请单id
 		        rollbackNodeName: '', // 回退节点名称(没有回退节点) 
 		        dealroperDate: this.jdealroperDate, // 经办时间
-		        creauditAppOperate: 'check_Refuse', // 复议专员 拒绝
-		        busiState:'22'//复议拒绝
+		        creauditAppOperate: '01', // 复议专员 拒绝
+		        busiState:'22',//复议拒
+		        dealroperCode:this.dealroperCode,//经办人
+		        applySubNo:this.datas.applySubNo,//复议申请单ID
 		      }).then(res => {
 		        console.log(res);
 		        if (res.statusCode != '200') {
@@ -938,6 +944,7 @@
 		          this.appOrgId = ''; // 进件机构id
 		          this.rollbackNodeName = ''; // 回退节点名称
 		          this.dealroperDate = ''; // 经办时间
+		          this.dealroperCode = '';//经办人
 		          this.creauditAppOperate = ''; // 操作类型
 
 		          this.$message({
@@ -955,9 +962,10 @@
 				console.log(this.$refs.mainReasonName);
 				console.log(this.$refs.mainReasonName.selectedLabel);
 				console.log(this.values);
-				this.post("/creauditInfo/approval", {
+				this.post("/creauditOpinion/approval", {
 			        // 挂起 taskId 任务id
 			        taskId: this.taskId,
+			        processInstanceId:this.processInstanceId,//流程模版ID
 			        custName: this.datas.custName, // 客户名称
 			        custNo: this.custNo, // 客户code
 			        certType: this.certType, // 证件类型
@@ -969,14 +977,16 @@
 			        proId: this.sproId, // 产品id     //"d7fa0628-791d-4cc5-b854-aa8bef9340a6"
 			        opinionFlag: '02', // 标志任务类型(复议专员 回退)
 			        mainReasonName: this.$refs.mainReasonName.selectedLabel, // 回退主原因
-			        secondaryReason: this.$refs.subReasonName.selectedLabel, // 回退子原因
+			        subReasonName: this.$refs.subReasonName.selectedLabel, // 回退子原因
 			        reasonRemark: this.reasonRemark, // 意见描述/原因说明
 			        appOrgId: this.appOrgId, // 进件机构id
 			        applyId: this.applyId, // 申请单id
-			        rollbackNodeName: this.values, // 回退节点名称 
+			        rollbackNodeName: 'reconsiderApp_apply', // 回退节点名称 
 			        dealroperDate: this.dealroperDate, // 经办时间
-			        creauditAppOperate: 'check_Back',// 复议专员 回退
-			        busiState:'20'//复议审批中（回退）
+			        creauditAppOperate: '02',// 复议专员 回退
+			        busiState:'20',
+		        	dealroperCode:this.dealroperCode,//经办人*//复议审批中（回退）
+		        	applySubNo:this.datas.applySubNo,//复议申请单ID
 			      }).then(res => {
 			        console.log(res);
 			        if (res.statusCode != '200') {
@@ -1003,6 +1013,7 @@
 			          this.appOrgId = ''; // 进件机构id
 			          this.rollbackNodeName = ''; // 回退节点名称
 			          this.dealroperDate = ''; // 经办时间
+			          this.dealroperCode = '';//经办人
 			          this.creauditAppOperate = ''; // 操作类型
 
 			          this.$message({
@@ -1102,7 +1113,7 @@
 		    // 流程轨迹
 		    getLcgjList() {
   			  this.lcdialogVisible = true;
-		      this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processTemplateId)
+		      this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processInstanceId)
 		        .then(res => {
 		          console.log(res);
 		          if (res.statusCode == '200') {
