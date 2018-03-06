@@ -12,8 +12,8 @@
             </nav-item>
         </el-submenu>
 
-        <el-menu-item @click="clickMenu(item.resUrl)" v-else :index="item.resUrl">{{ item.resName }}</el-menu-item>
-    <!-- <div>{{navIndex}}</div> -->
+       <!--  <el-menu-item @click="clickMenu(item.resUrl)" v-else :index="item.resUrl">{{ item.resName }}</el-menu-item> -->
+        <el-menu-item @click="clickMenu(item.resUrl)" v-else :index="item.resUrl ? item.resUrl : '#'">{{ item.resName }}</el-menu-item>
     </div>
 </template>
 <script>

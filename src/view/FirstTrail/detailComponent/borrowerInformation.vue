@@ -777,7 +777,7 @@
 
 				    		<label>文字说明：</label>
 				    		<div  class="require">
-				    			<span v-show="borDebt.remark.length==200">
+				    			<span v-show="borDebt.remark != null && borDebt.remark.length==200">
 				    				<i>*</i>输入长度不能超过200
 				    			</span>
 				    			<el-input
@@ -804,7 +804,7 @@
 				    	<li class="liDiv">
 				    		<label>报告来源：</label>
 				    		<div  class="require" style="display:inline-block">
-				    			<span v-if="rptInfo.crSource.length==50"><i>*</i>输入长度不能超过50</span>
+				    			<span v-if="rptInfo.crSource != null && rptInfo.crSource.length==50"><i>*</i>输入长度不能超过50</span>
 				    			<el-input
 								  :rows="1"
 								  placeholder="请输入内容"
@@ -840,7 +840,7 @@
 				    	<li>
 				    		<label class="reportLabel">报告描述：</label>
 				    		<div  class="require">
-				    			<span v-show="rptInfo.crContent.length==500"><i>*</i>输入长度不能超过500</span>
+				    			<span v-show="rptInfo.crContent != null && rptInfo.crContent.length==500"><i>*</i>输入长度不能超过500</span>
 				    			<el-input
 								  type="textarea"
 								  :rows="3"
@@ -985,7 +985,7 @@
 				    	<li>
 				    		<label>其他：</label>
 				    		<div  class="require">
-				    			<span v-if="otherInfo.content.length==500"><i>*</i>输入长度不能超过500</span>
+				    			<span v-if="otherInfo.content != null && otherInfo.content.length==500"><i>*</i>输入长度不能超过500</span>
 				    			<el-input
 								  type="textarea"
 								  :rows="5"
@@ -1381,6 +1381,7 @@
 		        /*房产信息*/
 		        if(res.data.borestateList != ''){
 		        	this.borestateList=res.data.borestateList;
+		        	console.log(this.borestateList.length);
 		        	for(var i=0;i<this.borestateList.length;i++){
 			        	//console.log(this.borestateList[i].monthlyPay);
 			        	//建筑单价 保留两位小数点
@@ -1439,25 +1440,27 @@
 		        
 		        
 		        /*信用卡使用明细*/
-		        this.cardDetList=res.data.cardDetList;
-		        for(var i=0;i<this.cardDetList.length;i++){
-		        	//信用卡使用明细 信用额度 保留两位小数点
-		        	if(this.cardDetList[i].cardAmt != null){
-			        	this.cardDetList[i].cardAmt = this.formatNumber(this.cardDetList[i].cardAmt,2,0);
-			        };
-			        //信用卡使用明细 已使用额度 保留两位小数点
-		        	if(this.cardDetList[i].usedAmt != null){
-			        	this.cardDetList[i].usedAmt = this.formatNumber(this.cardDetList[i].usedAmt,2,0);
-			        };
-			        //信用卡使用明细 本期应还款金额 保留两位小数点
-		        	if(this.cardDetList[i].actRepaymentAmt != null){
-			        	this.cardDetList[i].actRepaymentAmt = this.formatNumber(this.cardDetList[i].actRepaymentAmt,2,0);
-			        };
-			        //信用卡使用明细 本期实际还款金额 保留两位小数点
-		        	if(this.cardDetList[i].realRepaymentAmt != null){
-			        	this.cardDetList[i].realRepaymentAmt = this.formatNumber(this.cardDetList[i].realRepaymentAmt,2,0);
-			        };
-		        }
+		        if(res.data.cardDetList != ''){
+			        this.cardDetList=res.data.cardDetList;
+			        for(var i=0;i<this.cardDetList.length;i++){
+			        	//信用卡使用明细 信用额度 保留两位小数点
+			        	if(this.cardDetList[i].cardAmt != null){
+				        	this.cardDetList[i].cardAmt = this.formatNumber(this.cardDetList[i].cardAmt,2,0);
+				        };
+				        //信用卡使用明细 已使用额度 保留两位小数点
+			        	if(this.cardDetList[i].usedAmt != null){
+				        	this.cardDetList[i].usedAmt = this.formatNumber(this.cardDetList[i].usedAmt,2,0);
+				        };
+				        //信用卡使用明细 本期应还款金额 保留两位小数点
+			        	if(this.cardDetList[i].actRepaymentAmt != null){
+				        	this.cardDetList[i].actRepaymentAmt = this.formatNumber(this.cardDetList[i].actRepaymentAmt,2,0);
+				        };
+				        //信用卡使用明细 本期实际还款金额 保留两位小数点
+			        	if(this.cardDetList[i].realRepaymentAmt != null){
+				        	this.cardDetList[i].realRepaymentAmt = this.formatNumber(this.cardDetList[i].realRepaymentAmt,2,0);
+				        };
+			        }
+			    };
 		        /*信用卡使用总况*/
 		        if(res.data.borCard==null){
 		        	this.borCard=this.borCard
@@ -1467,29 +1470,31 @@
 		        }
 		        
 		        /*贷款明细*/
-		        this.loanDetailList=res.data.loanDetailList;
-		        for(var i=0;i<this.loanDetailList.length;i++){
-		        	//贷款明细 贷款合同金额 保留两位小数点
-		        	if(this.loanDetailList[i].loanContValue != null){
-			        	this.loanDetailList[i].loanContValue = this.formatNumber(this.loanDetailList[i].loanContValue,2,0);
-			        };
-			        //贷款明细 贷款余额 保留两位小数点
-		        	if(this.loanDetailList[i].loanBal != null){
-			        	this.loanDetailList[i].loanBal = this.formatNumber(this.loanDetailList[i].loanBal,2,0);
-			        };
-			        //贷款明细 本期应还款金额 保留两位小数点
-		        	if(this.loanDetailList[i].presentRepayAmt != null){
-			        	this.loanDetailList[i].presentRepayAmt = this.formatNumber(this.loanDetailList[i].presentRepayAmt,2,0);
-			        };
-			        //贷款明细 本期实际还款金额 保留两位小数点
-		        	if(this.loanDetailList[i].curMonthRepayAmt != null){
-			        	this.loanDetailList[i].curMonthRepayAmt = this.formatNumber(this.loanDetailList[i].curMonthRepayAmt,2,0);
-			        };
-			        //贷款明细 当前逾期金额 保留两位小数点
-		        	if(this.loanDetailList[i].presentOverAmt != null){
-			        	this.loanDetailList[i].presentOverAmt = this.formatNumber(this.loanDetailList[i].presentOverAmt,2,0);
-			        };
-		        }
+		        if(res.data.loanDetailList != ''){
+			        this.loanDetailList=res.data.loanDetailList;
+			        for(var i=0;i<this.loanDetailList.length;i++){
+			        	//贷款明细 贷款合同金额 保留两位小数点
+			        	if(this.loanDetailList[i].loanContValue != null){
+				        	this.loanDetailList[i].loanContValue = this.formatNumber(this.loanDetailList[i].loanContValue,2,0);
+				        };
+				        //贷款明细 贷款余额 保留两位小数点
+			        	if(this.loanDetailList[i].loanBal != null){
+				        	this.loanDetailList[i].loanBal = this.formatNumber(this.loanDetailList[i].loanBal,2,0);
+				        };
+				        //贷款明细 本期应还款金额 保留两位小数点
+			        	if(this.loanDetailList[i].presentRepayAmt != null){
+				        	this.loanDetailList[i].presentRepayAmt = this.formatNumber(this.loanDetailList[i].presentRepayAmt,2,0);
+				        };
+				        //贷款明细 本期实际还款金额 保留两位小数点
+			        	if(this.loanDetailList[i].curMonthRepayAmt != null){
+				        	this.loanDetailList[i].curMonthRepayAmt = this.formatNumber(this.loanDetailList[i].curMonthRepayAmt,2,0);
+				        };
+				        //贷款明细 当前逾期金额 保留两位小数点
+			        	if(this.loanDetailList[i].presentOverAmt != null){
+				        	this.loanDetailList[i].presentOverAmt = this.formatNumber(this.loanDetailList[i].presentOverAmt,2,0);
+				        };
+			        }
+			    };
 		        /*贷款总况*/
 		        if(res.data.loanInfo==null){
 		        	this.loanInfo=this.loanInfo
@@ -1503,6 +1508,7 @@
 		        	this.borDebt=this.borDebt
 		        }else{
 		        	this.borDebt=res.data.borDebt;
+		        	console.log(this.borDebt);
 		        	this.borDebt.id=this.borDebt.id;
 		        	//console.log(this.borDebt.houseLoanAmt);
 		        	//console.log(typeof(this.borDebt.houseLoanAmt));
@@ -1543,7 +1549,6 @@
 		        	if(this.borDebt.totalLoan != null){
 		        		this.borDebt.totalLoan = this.formatNumber(this.borDebt.totalLoan,2,0);
 		        	};
-		        	//console.log(this.arr);
 		        }
 		        /*征询报告*/
 		        if(res.data.rptInfo==null){
@@ -1553,37 +1558,39 @@
 		        	this.rptInfo.id=res.data.rptInfo.id;
 		        }
 		        /*流水明细*/
-		        this.incomeList=res.data.incomeList;
-		        for(var i=0;i<this.incomeList.length;i++){
-		        	//流水明细 n 保留两位小数点
-		        	if(this.incomeList[i].n != null){
-			        	this.incomeList[i].n = this.formatNumber(this.incomeList[i].n,2,0);
-			        };
-			        //流水明细 n1 保留两位小数点
-		        	if(this.incomeList[i].n1 != null){
-			        	this.incomeList[i].n1 = this.formatNumber(this.incomeList[i].n1,2,0);
-			        };
-			        //流水明细 n2 保留两位小数点
-		        	if(this.incomeList[i].n2 != null){
-			        	this.incomeList[i].n2 = this.formatNumber(this.incomeList[i].n2,2,0);
-			        };
-			        //流水明细 n3 保留两位小数点
-		        	if(this.incomeList[i].n3 != null){
-			        	this.incomeList[i].n3 = this.formatNumber(this.incomeList[i].n3,2,0);
-			        };
-			        //流水明细 n4 保留两位小数点
-		        	if(this.incomeList[i].n4 != null){
-			        	this.incomeList[i].n4 = this.formatNumber(this.incomeList[i].n4,2,0);
-			        };
-			        //流水明细 n5 保留两位小数点
-		        	if(this.incomeList[i].n5 != null){
-			        	this.incomeList[i].n5 = this.formatNumber(this.incomeList[i].n5,2,0);
-			        };
-			        //流水明细 avgIncome 保留两位小数点
-		        	if(this.incomeList[i].avgIncome != null){
-			        	this.incomeList[i].avgIncome = this.formatNumber(this.incomeList[i].avgIncome,2,0);
-			        };
-		        }
+		        if(res.data.incomeList != ''){
+			        this.incomeList=res.data.incomeList;
+			        for(var i=0;i<this.incomeList.length;i++){
+			        	//流水明细 n 保留两位小数点
+			        	if(this.incomeList[i].n != null){
+				        	this.incomeList[i].n = this.formatNumber(this.incomeList[i].n,2,0);
+				        };
+				        //流水明细 n1 保留两位小数点
+			        	if(this.incomeList[i].n1 != null){
+				        	this.incomeList[i].n1 = this.formatNumber(this.incomeList[i].n1,2,0);
+				        };
+				        //流水明细 n2 保留两位小数点
+			        	if(this.incomeList[i].n2 != null){
+				        	this.incomeList[i].n2 = this.formatNumber(this.incomeList[i].n2,2,0);
+				        };
+				        //流水明细 n3 保留两位小数点
+			        	if(this.incomeList[i].n3 != null){
+				        	this.incomeList[i].n3 = this.formatNumber(this.incomeList[i].n3,2,0);
+				        };
+				        //流水明细 n4 保留两位小数点
+			        	if(this.incomeList[i].n4 != null){
+				        	this.incomeList[i].n4 = this.formatNumber(this.incomeList[i].n4,2,0);
+				        };
+				        //流水明细 n5 保留两位小数点
+			        	if(this.incomeList[i].n5 != null){
+				        	this.incomeList[i].n5 = this.formatNumber(this.incomeList[i].n5,2,0);
+				        };
+				        //流水明细 avgIncome 保留两位小数点
+			        	if(this.incomeList[i].avgIncome != null){
+				        	this.incomeList[i].avgIncome = this.formatNumber(this.incomeList[i].avgIncome,2,0);
+				        };
+			        }
+			    };
 		        /*其他信息*/
 		        if(res.data.otherInfo==null){
 		        	this.otherInfo=this.otherInfo
