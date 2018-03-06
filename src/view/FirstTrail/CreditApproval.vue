@@ -231,7 +231,7 @@
           审批信息
           <el-tag closable @close="coverShow=false;showFlag='';proName='';" style="position:absolute;"></el-tag>
         </div>
-        <div style="padding:5px;padding-top:0;height:300px;overflow:auto;">
+        <div style="padding:5px;padding-top:0;height:720px;overflow:auto;">
           <div class="form-title">
             申请信息
           </div>
@@ -2402,10 +2402,10 @@ export default {
 
 .creditApproval-class .appro-form {
   /*width: 80%;*/
-  height: 600px;
+  height: 880px;
   min-width: 685px;
   margin-top: 100px !important;
-  height: auto;
+  /*height: auto;*/
   margin: 0 auto;
   padding: 10px;
   overflow: hidden;
@@ -3358,7 +3358,7 @@ export default {
 
 .creditApproval-class .el-dialog {
   width: 600px;
-  margin-top: 30vh !important;
+  margin-top: 1vh !important;
 }
 
 .creditApproval-class .el-dialog__header {
