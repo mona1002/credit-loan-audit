@@ -2087,12 +2087,24 @@
 				/*负债信息*/
 				if(this.borDebt){
 					var regs=/\,/g;
-					this.borDebt.monthRepayAmt=this.borDebt.monthRepayAmt.replace(regs,'');
-					this.borDebt.studentLoanAmt=this.borDebt.studentLoanAmt.replace(regs,'');
-					this.borDebt.houseLoanAmt=this.borDebt.houseLoanAmt.replace(regs,'');
-					this.borDebt.carLoanAmt=this.borDebt.carLoanAmt.replace(regs,'');
-					this.borDebt.otherLoanAmt=this.borDebt.otherLoanAmt.replace(regs,'');
-					this.borDebt.totalLoan=this.borDebt.totalLoan.replace(regs,'');
+					if(this.borDebt.monthRepayAmt){
+						this.borDebt.monthRepayAmt=this.borDebt.monthRepayAmt.replace(regs,'');
+					};
+					if(this.borDebt.studentLoanAmt){
+						this.borDebt.studentLoanAmt=this.borDebt.studentLoanAmt.replace(regs,'');
+					};
+					if(this.borDebt.houseLoanAmt){
+						this.borDebt.houseLoanAmt=this.borDebt.houseLoanAmt.replace(regs,'');
+					};
+					if(this.borDebt.carLoanAmt){
+						this.borDebt.carLoanAmt=this.borDebt.carLoanAmt.replace(regs,'');
+					};
+					if(this.borDebt.otherLoanAmt){
+						this.borDebt.otherLoanAmt=this.borDebt.otherLoanAmt.replace(regs,'');
+					};
+					if(this.borDebt.totalLoan){
+						this.borDebt.totalLoan=this.borDebt.totalLoan.replace(regs,'');
+					};	
 				};
 				/*流水明细*/
 				if(this.incomeList.length>0){
@@ -2107,17 +2119,6 @@
 						this.incomeList[i].avgIncome=this.incomeList[i].avgIncome.replace(regs,'');
 					}
 				};
-				
-				/*if(this.borestateList.length>0){
-					for(var i=0;i<this.borestateList.length;i++){
-						var regs=/\㎡/;
-						var regs2=/\%/
-						this.borestateList[i].coveredArea=this.borestateList[i].coveredArea.replace(regs,'');
-						this.borestateList[i].equityRatio=this.borestateList[i].equityRatio.replace(regs2,'');
-					}
-				}*/
-				
-				
 				this.post("/borrower/saveBorrowerInfo", {
 			        "applyId":this.applyId,
 			        "borestateList":this.borestateList,
