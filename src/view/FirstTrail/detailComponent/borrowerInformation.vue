@@ -2074,21 +2074,39 @@
 				if(this.cardDetList.length>0){
 					for(var i=0;i<this.cardDetList.length;i++){
 						var regs=/\,/g;
-						this.cardDetList[i].cardAmt=this.cardDetList[i].cardAmt.replace(regs,'');
-						this.cardDetList[i].usedAmt=this.cardDetList[i].usedAmt.replace(regs,'');
-						this.cardDetList[i].actRepaymentAmt=this.cardDetList[i].actRepaymentAmt.replace(regs,'');
-						this.cardDetList[i].realRepaymentAmt=this.cardDetList[i].realRepaymentAmt.replace(regs,'');
+						if(this.cardDetList[i].cardAmt){
+							this.cardDetList[i].cardAmt=this.cardDetList[i].cardAmt.replace(regs,'');
+						};
+						if(this.cardDetList[i].usedAmt){
+							this.cardDetList[i].usedAmt=this.cardDetList[i].usedAmt.replace(regs,'');
+						};
+						if(this.cardDetList[i].actRepaymentAmt){
+							this.cardDetList[i].actRepaymentAmt=this.cardDetList[i].actRepaymentAmt.replace(regs,'');
+						};
+						if(this.cardDetList[i].realRepaymentAmt){
+							this.cardDetList[i].realRepaymentAmt=this.cardDetList[i].realRepaymentAmt.replace(regs,'');
+						};
 					}
 				};
 				/*贷款明细*/
 				if(this.loanDetailList.length>0){
 					for(var i=0;i<this.loanDetailList.length;i++){
 						var regs=/\,/g;
-						this.loanDetailList[i].loanContValue=this.loanDetailList[i].loanContValue.replace(regs,'');
-						this.loanDetailList[i].loanBal=this.loanDetailList[i].loanBal.replace(regs,'');
-						this.loanDetailList[i].presentRepayAmt=this.loanDetailList[i].presentRepayAmt.replace(regs,'');
-						this.loanDetailList[i].curMonthRepayAmt=this.loanDetailList[i].curMonthRepayAmt.replace(regs,'');
-						this.loanDetailList[i].presentOverAmt=this.loanDetailList[i].presentOverAmt.replace(regs,'');
+						if(this.loanDetailList[i].loanContValue){
+							this.loanDetailList[i].loanContValue=this.loanDetailList[i].loanContValue.replace(regs,'');
+						};
+						if(this.loanDetailList[i].loanBal){
+							this.loanDetailList[i].loanBal=this.loanDetailList[i].loanBal.replace(regs,'');
+						};
+						if(this.loanDetailList[i].presentRepayAmt){
+							this.loanDetailList[i].presentRepayAmt=this.loanDetailList[i].presentRepayAmt.replace(regs,'');
+						};
+						if(this.loanDetailList[i].curMonthRepayAmt){
+							this.loanDetailList[i].curMonthRepayAmt=this.loanDetailList[i].curMonthRepayAmt.replace(regs,'');
+						};
+						if(this.loanDetailList[i].presentOverAmt){
+							this.loanDetailList[i].presentOverAmt=this.loanDetailList[i].presentOverAmt.replace(regs,'');
+						};
 					}
 				};
 				/*负债信息*/
@@ -2117,13 +2135,27 @@
 				if(this.incomeList.length>0){
 					for(var i=0;i<this.incomeList.length;i++){
 						var regs=/\,/g;
-						this.incomeList[i].n=this.incomeList[i].n.replace(regs,'');
-						this.incomeList[i].n1=this.incomeList[i].n1.replace(regs,'');
-						this.incomeList[i].n2=this.incomeList[i].n2.replace(regs,'');
-						this.incomeList[i].n3=this.incomeList[i].n3.replace(regs,'');
-						this.incomeList[i].n4=this.incomeList[i].n4.replace(regs,'');
-						this.incomeList[i].n5=this.incomeList[i].n5.replace(regs,'');
-						this.incomeList[i].avgIncome=this.incomeList[i].avgIncome.replace(regs,'');
+						if(this.incomeList[i].n){
+							this.incomeList[i].n=this.incomeList[i].n.replace(regs,'');
+						};
+						if(this.incomeList[i].n1){
+							this.incomeList[i].n1=this.incomeList[i].n1.replace(regs,'');
+						};
+						if(this.incomeList[i].n2){
+							this.incomeList[i].n2=this.incomeList[i].n2.replace(regs,'');
+						};
+						if(this.incomeList[i].n3){
+							this.incomeList[i].n3=this.incomeList[i].n3.replace(regs,'');
+						};
+						if(this.incomeList[i].n4){
+							this.incomeList[i].n4=this.incomeList[i].n4.replace(regs,'');
+						};
+						if(this.incomeList[i].n5){
+							this.incomeList[i].n5=this.incomeList[i].n5.replace(regs,'');
+						};
+						if(this.incomeList[i].avgIncome){
+							this.incomeList[i].avgIncome=this.incomeList[i].avgIncome.replace(regs,'');
+						};
 					}
 				};
 				this.post("/borrower/saveBorrowerInfo", {
