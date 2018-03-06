@@ -7,7 +7,7 @@
     </div> 
     <!-- 导航内容 -->
     <div class="navContain">
-      <div>
+      
         <el-menu 
           router 
           unique-opened 
@@ -23,7 +23,7 @@
               :key="n">
           </nav-item>
         </el-menu>
-      </div>
+      
     </div>
     <div class="backIcon">
       <img @click="backLoin" src="/static/images/backLoin.png">

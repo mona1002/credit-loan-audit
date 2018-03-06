@@ -396,7 +396,7 @@ export default {
     this.queryCaseNumList();
 
     // 先取 保存的信息
-    var insertObj = localStorage.getItem('saveInsertObj', tempObj);
+    var insertObj = localStorage.getItem('saveInsertObj');
     if (insertObj != undefined) {
       this.auditResult = insertObj.auditResult; // 审核结论
       this.mainreasonT = insertObj.mainReason; // 欺诈主原因id

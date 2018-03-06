@@ -231,7 +231,7 @@
           审批信息
           <el-tag closable @close="coverShow=false;showFlag='';proName='';" style="position:absolute;"></el-tag>
         </div>
-        <div style="padding:5px;padding-top:0;height:300px;overflow:auto;">
+        <div style="padding:5px;padding-top:0;height:720px;overflow:auto;">
           <div class="form-title">
             申请信息
           </div>
@@ -1743,7 +1743,7 @@ export default {
         this.reasonRemark = ''; // 意见描述/原因说明
         // this.appOrgId = ''; // 进件机构id
         // this.applyId = ''; // 申请单id
-        // this.rollbackNodeName = ''; // 回退节点名称
+        this.rollbackNodeName = ''; // 回退节点名称
         // this.dealroperDate = ''; // 经办时间
         // this.creauditAppOperate = ''; // 操作类型
 
@@ -2402,10 +2402,10 @@ export default {
 
 .creditApproval-class .appro-form {
   /*width: 80%;*/
-  height: 600px;
+  height: 880px;
   min-width: 685px;
   margin-top: 100px !important;
-  height: auto;
+  /*height: auto;*/
   margin: 0 auto;
   padding: 10px;
   overflow: hidden;
@@ -3358,7 +3358,7 @@ export default {
 
 .creditApproval-class .el-dialog {
   width: 600px;
-  margin-top: 30vh !important;
+  margin-top: 1vh !important;
 }
 
 .creditApproval-class .el-dialog__header {
