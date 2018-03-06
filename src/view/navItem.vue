@@ -12,7 +12,7 @@
             </nav-item>
         </el-submenu>
 
-        <el-menu-item @click="clickMenu(item)" v-else :index="item.resUrl">{{ item.resName }}</el-menu-item>
+        <el-menu-item @click="clickMenu(item.resUrl)" v-else :index="item.resUrl">{{ item.resName }}</el-menu-item>
     <!-- <div>{{navIndex}}</div> -->
     </div>
 </template>
@@ -26,17 +26,24 @@
             }
         },
         methods:{
-            clickMenu(e){
-                console.log(e.resUrl);
-                if(e.resUrl.indexOf('?') !=-1 ){
-                    var str = e.resUrl(1);//得到？后面的字符串
+            clickMenu(item){
+                console.log(item);
+                console.log(typeof(item));
+                if(item.indexOf('?') !=-1 ){
+                    var num = item.indexOf('?');
+                    var str = item.substr(num+1);//得到？后面的字符串
+                    //console.log(str);
                     var strs = str.split('&');//将得到的参数分隔成数组[]
+                    //console.log(strs);
                     //for(var i=0;i<strs.length;i++){
                         //初审
-                        if(strs[0].split('=')[0] == 'creditApp_firstTrial' && strs[1].split('=')[0] == '01'){
+                        /*console.log(strs[0].split('='));
+                        console.log(strs[0].split('=')[1]);
+                        console.log(strs[0].split('=')[1] == "'creditApp_firstTrial'" );*/
+                        if(strs[0].split('=')[1] == "'creditApp_firstTrial'" && strs[1].split('=')[1] == "'01'"){
                             var row ={
                                 "processTemplateId":"",
-                                "taskStatus":"",
+                                "taskStatus":"01",
                                 "taskNodeName":"creditApp_firstTrial"
                             };
                             var judge ={
@@ -46,10 +53,10 @@
                             localStorage.setItem("judge",JSON.stringify(judge));
                         };
                         //终审一级
-                        if(strs[0].split('=')[0] == 'creditApp_finalTrial_one' && strs[1].split('=')[0] == '02'){
+                        if(strs[0].split('=')[1] == "'creditApp_finalTrial_one'" && strs[1].split('=')[1] == "'02'"){
                             var row ={
                                 "processTemplateId":"",
-                                "taskStatus":"",
+                                "taskStatus":"01",
                                 "taskNodeName":"ccreditApp_finalTrial_one"
                             };
                             var judge ={
@@ -59,10 +66,10 @@
                             localStorage.setItem("judge",JSON.stringify(judge));
                         };
                         //终审二级
-                        if(strs[0].split('=')[0] == 'creditApp_finalTrial_two' && strs[1].split('=')[0] == '02'){
+                        if(strs[0].split('=')[1] == "'creditApp_finalTrial_two'" && strs[1].split('=')[1] == "'02'"){
                             var row ={
                                 "processTemplateId":"",
-                                "taskStatus":"",
+                                "taskStatus":"01",
                                 "taskNodeName":"creditApp_finalTrial_two"
                             };
                             var judge ={
@@ -72,10 +79,10 @@
                             localStorage.setItem("judge",JSON.stringify(judge));
                         };
                         //信审经理
-                        if(strs[0].split('=')[0] == 'creditApp_finalTrial_three' && strs[1].split('=')[0] == '02'){
+                        if(strs[0].split('=')[1] == "'creditApp_finalTrial_three'" && strs[1].split('=')[1] == "'02'"){
                             var row ={
                                 "processTemplateId":"",
-                                "taskStatus":"",
+                                "taskStatus":"01",
                                 "taskNodeName":"creditApp_finalTrial_three"
                             };
                             var judge ={
@@ -85,10 +92,10 @@
                             localStorage.setItem("judge",JSON.stringify(judge));
                         };
                         //信审高级经理
-                        if(strs[0].split('=')[0] == 'creditApp_finalTrial_four' && strs[1].split('=')[0] == '02'){
+                        if(strs[0].split('=')[1] == "'creditApp_finalTrial_four'" && strs[1].split('=')[1] == "'02'"){
                             var row ={
                                 "processTemplateId":"",
-                                "taskStatus":"",
+                                "taskStatus":"01",
                                 "taskNodeName":"creditApp_finalTrial_four"
                             };
                             var judge ={
@@ -98,10 +105,10 @@
                             localStorage.setItem("judge",JSON.stringify(judge));
                         };
                         //信审总监
-                        if(strs[0].split('=')[0] == 'creditApp_finalTrial_five' && strs[1].split('=')[0] == '02'){
+                        if(strs[0].split('=')[1] == "'creditApp_finalTrial_five'" && strs[1].split('=')[1] == "'02'"){
                             var row ={
                                 "processTemplateId":"",
-                                "taskStatus":"",
+                                "taskStatus":"01",
                                 "taskNodeName":"creditApp_finalTrial_five"
                             };
                             var judge ={
@@ -111,10 +118,10 @@
                             localStorage.setItem("judge",JSON.stringify(judge));
                         };
                         //反欺诈专员
-                        if(strs[0].split('=')[0] == 'antiFraudApp_commissioner' && strs[1].split('=')[0] == '03'){
+                        if(strs[0].split('=')[1] == "'antiFraudApp_commissioner'" && strs[1].split('=')[1] == "'03'"){
                             var row ={
                                 "processTemplateId":"",
-                                "taskStatus":"",
+                                "taskStatus":"01",
                                 "taskNodeName":"antiFraudApp_commissioner"
                             };
                             var judge ={
@@ -124,10 +131,10 @@
                             localStorage.setItem("judge",JSON.stringify(judge));
                         };
                         //反欺诈主管
-                        if(strs[0].split('=')[0] == 'antiFraudApp_manager' && strs[1].split('=')[0] == '04'){
+                        if(strs[0].split('=')[1] == "'antiFraudApp_manager'" && strs[1].split('=')[1] == "'04'"){
                             var row ={
                                 "processTemplateId":"",
-                                "taskStatus":"",
+                                "taskStatus":"01",
                                 "taskNodeName":"antiFraudApp_manager"
                             };
                             var judge ={
@@ -137,20 +144,20 @@
                             localStorage.setItem("judge",JSON.stringify(judge));
                         };
                         //反欺诈申请
-                        if(strs[0].split('=')[0] == 'antiFraudApp_apply'){
+                        if(strs[0].split('=')[1] == "'antiFraudApp_apply'"){
                             var row ={
                                 "processTemplateId":"",
-                                "taskStatus":"",
+                                "taskStatus":"01",
                                 "taskNodeName":"antiFraudApp_apply"
                             };
                             localStorage.setItem("FinalWorkbenchPass",JSON.stringify(row));
                             localStorage.setItem("judge",JSON.stringify(judge));
                         };
                         //复议专员
-                        if(strs[0].split('=')[0] == 'reconsiderApp_commissioner' && strs[1].split('=')[0] == '05'){
+                        if(strs[0].split('=')[1] == "'reconsiderApp_commissioner'" && strs[1].split('=')[1] == "'05'"){
                             var row ={
                                 "processTemplateId":"",
-                                "taskStatus":"",
+                                "taskStatus":"01",
                                 "taskNodeName":"reconsiderApp_commissioner"
                             };
                             var judge ={
@@ -160,10 +167,10 @@
                             localStorage.setItem("judge",JSON.stringify(judge));
                         };
                         //复议经理
-                        if(strs[0].split('=')[0] == 'reconsiderApp_manager' && strs[1].split('=')[0] == '06'){
+                        if(strs[0].split('=')[1] == "'reconsiderApp_manager'" && strs[1].split('=')[1] == "'06'"){
                             var row ={
                                 "processTemplateId":"",
-                                "taskStatus":"",
+                                "taskStatus":"01",
                                 "taskNodeName":"reconsiderApp_manager"
                             };
                             var judge ={
