@@ -12,7 +12,6 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import $ from 'jquery'
 
-
 Vue.config.productionTip = false;
 Vue.use(ElementUI)
 Vue.use(http)
@@ -21,11 +20,10 @@ Vue.use(http)
 new Vue({
   el: '#app',
   router,
-  // store,
+//   store,
   template: '<App/>',
   components: { App }
 })
-
 // 定义全局 过滤器
 // 日期过滤器
 Vue.filter('dateFilter',function(value){
@@ -40,7 +38,6 @@ Vue.filter('formatValue',function(value){
 	console.log(value);
 	if(Number(value)>0)
 	return Math.round(Number(value)*10000)/100 +'%';
-	
 })
 // 金额过滤
 Vue.filter('formatMoney',function(value){
@@ -50,9 +47,6 @@ Vue.filter('formatMoney',function(value){
 })
 // 精度问题
 Vue.filter('formatAppmult',function(value){
-	
-	
 	if(!value) return ''
-
 	return Math.ceil(Number(value))
 })
