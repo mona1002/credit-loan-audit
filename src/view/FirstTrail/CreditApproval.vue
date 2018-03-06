@@ -1196,7 +1196,7 @@ export default {
           this.coverShow = false;
           this.showFlag = 0;
           // this.taskId = '182525';
-          this.opinionFlag = '00';
+          // this.opinionFlag = '00';
           // 区分初审/终审
           if (this.judgeFlag == '01') {
             this.busiState = '04';
@@ -3358,7 +3358,7 @@ export default {
 
 .creditApproval-class .el-dialog {
   width: 600px;
-  margin-top: 1vh !important;
+  /*margin-top: 1vh !important;*/
 }
 
 .creditApproval-class .el-dialog__header {
