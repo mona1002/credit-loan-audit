@@ -50,6 +50,14 @@
 	    		<img src="/static/images/liucheng.png">
 	    		<label class="labelTxt">流程轨迹</label>
 	    	</el-button>
+	    	<el-button @click="tobigData">
+	    		<img src="/static/images/liucheng.png">
+	    		<label class="labelTxt">大数据风控</label>
+	    	</el-button>
+	    	<el-button @click="roSocialSecurity">
+	    		<img src="/static/images/liucheng.png">
+	    		<label class="labelTxt">社保/公积金</label>
+	    	</el-button>
 	    </div>
 	    <!-- 回退 -->
 	    <div class="huitui">
@@ -1123,6 +1131,14 @@
 		          }
 		        })
 		    },
+		    //大数据风控
+		    tobigData(){
+		    	
+		    },
+		    //社保/公积金
+			roSocialSecurity(){
+
+			},
 		    
 		},
 		watch:{
