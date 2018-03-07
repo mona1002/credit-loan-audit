@@ -124,6 +124,16 @@ height: 40px;
    text-align: center;
  }
 
+ /* 保险信息 */
+
+ .applicationInformationDetail .insur.el-table th:nth-of-type(1) {
+   text-align: center;
+ }
+
+ .applicationInformationDetail .insur .el-table__body-wrapper .el-table__body td:nth-of-type(1){
+   text-align: center;
+ }
+
  .applicationInformationDetail .el-table th:nth-of-type(1) .cell {
    padding-left: 0 !important;
    padding-right: 0 !important;
