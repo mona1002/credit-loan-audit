@@ -60,7 +60,6 @@
           v-if="key==smallPicInd" />
         <!-- <img ref="Big_pic_ref" v-for="(val,key) in imgPathDetail" style="width:auto;height:auto;" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath"
           />  -->
-
         <!-- v-if="key==smallPicInd" -->
         <!-- <img ref="Big_pic_ref" id='abcd'  style="width:auto;height:auto;" :src="uurl" /> -->
       </div>
@@ -410,7 +409,6 @@
 
           }
           console.log(this.$refs.Big_pic_ref[0].height)
-
           console.log(this.$refs.Big_pic_ref[0].width)
           // ------------------------------------------------------------------
 
@@ -511,17 +509,18 @@
       }
     },
     mounted() {
-      this.odivMove(this.msg);
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '01') {
         this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
       } else if (this.judgeFlag.flag == '02') {
         this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
       } else if (this.judgeFlag.flag == '03') {
-        this.localInf = JSON.parse(localStorage.getItem("AntiWorkbenchPass")) //反欺诈专员
+        this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
       } else if (this.judgeFlag.flag == '04') {
-        this.localInf = JSON.parse(localStorage.getItem("AntiManagerWorkbenchPass")) //反欺诈主管
+        this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
       }
+      console.log( this.judgeFlag)
+      console.log(this.localInf )
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.applyId,
@@ -540,6 +539,7 @@
           this.$message.error(res.msg);
         }
       });
+      this.odivMove(this.msg);      
     }
   }
 

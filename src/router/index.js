@@ -18,7 +18,7 @@ import applicationInformation from '@/view/FirstTrail/detailComponent/applicatio
 import workbench from '@/view/FirstTrail/workbench'
 // 分屏
 import SplitScreen from '@/view/FirstTrail/SplitScreen'
-// 影音资料
+// 影像资料
 import AudioVisual from '@/view/FirstTrail/detailComponent/AudioVisual'
 // 信审表
 import CreditForm from '@/view/FirstTrail/detailComponent/CreditForm'
@@ -145,7 +145,7 @@ const routes = [{
   path: '/MatchingInf',
   component: MatchingInf
 },
-// 影音资料
+// 影像资料
 {
   path: '/AudioVisual',
   component: AudioVisual

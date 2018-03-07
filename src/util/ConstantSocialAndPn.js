@@ -1,6 +1,6 @@
 // 一些全局公用变量
 
-var appConstant = {};
+var appConstantSP = {};
 
 // url 配置
 var host = location.hostname,
@@ -19,6 +19,6 @@ if (host === productionEnv) {
 } else {
   host = developmentEnv;
 }
-appConstantUser.BaseUrl=host;
+appConstantSP.BaseUrl=host;
 
-export default appConstantUser.BaseUrl
+export default appConstantSP.BaseUrl

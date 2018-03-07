@@ -16,7 +16,7 @@
         <!-- 左侧分屏部分 -->
         <div class="left" ref="rLeft">
           <div ref="Left_title" class="Left_ul" @mouseenter="showList" @mouseleave="hid">
-            <!-- 左侧 title列表 == 影音资料等 ==================弹出列表============ -->
+            <!-- 左侧 title列表 == 影像资料等 ==================弹出列表============ -->
             <ul>
               <li ref="tabOne" class="tab1Default" v-for="(val,index) in items1" :key="index" @mousedown="flag1[index] &&  tab1($event,index,val)"
                 :class="{tab1Act:tab1Index==index}">
@@ -34,7 +34,7 @@
               </span>
             </p>
             <div class="Left_right_BigImg ">
-              <AudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></AudioVisualLeft>
+              <AudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0"  msg="FspLone" v-on:CompareShow="compBtnS"></AudioVisualLeft>
               <!-- √ -->
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
               <!-- √ -->
@@ -105,7 +105,7 @@
           <p>影像资料</p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <AudioVisualLeft :custom="customInf.applyId "></AudioVisualLeft>
+            <AudioVisualLeft :custom="customInf.applyId "  msg="FspLtwo"></AudioVisualLeft>
           </div>
         </div>
         <!-- 弹出层右侧 div -->
@@ -119,7 +119,7 @@
           </p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <AudioVisualLeft :custom="customInf.applyId " ref="audioChild" v-on:inputInf="inputInner"></AudioVisualLeft>
+            <AudioVisualLeft :custom="customInf.applyId " ref="audioChild" v-on:inputInf="inputInner"  msg="FspLthree"></AudioVisualLeft>
           </div>
         </div>
       </div>
@@ -174,8 +174,8 @@
         tabContent2: 3,
         tabActiveInd1: 0,
         tabActiveInd2: 3,
-        items1: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹"],
-        items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "审核结论"],
+        items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹"],
+        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "审核结论"],
         tab1Index: 0,
         tab2Index: 3,
         flag1: [true, true, true, false, true, true, true, true, true],
@@ -287,7 +287,7 @@
           this.$message.error(res.msg);
         }
       });
-      this.title = "影音资料";
+      this.title = "影像资料";
     },
     components: {
       myHead,
@@ -438,7 +438,7 @@
     margin-right: 2px;
   }
   /* 左屏 */
-  /* 左侧列表  影音资料等 ul 外包   流 */
+  /* 左侧列表  影像资料等 ul 外包   流 */
 
   .left .Left_ul {
     width: 110px;

@@ -165,7 +165,7 @@
 				<ul class="illustration">
 					<li>
 						<label>借款人其他联系方式：</label>
-						<div>{{qitaphone}}</div>
+						<div>{{accepCusBasicInfo.otherContacts}}</div>
 					</li>
 				</ul>
 				<ul>
@@ -203,13 +203,9 @@
 					      <div class="textBox">{{accepCusBasicInfo.homeDetailAddr}}</div>
 					    </el-tooltip>
 					</li>
-					<!-- <li>
-						<label>户口所在地邮编：</label>
-						<span>{{accepCusBasicInfo.homeZip}}</span>
-					</li> -->
 					<li>
 						<label>是否与户口地一致：</label>
-						<span>{{hukoudi}}</span>
+						<span>{{accepCusBasicInfo.homeAddressSameTxt}}</span>
 					</li>
 				</ul>
 				<ul>
@@ -220,13 +216,9 @@
 					    </el-tooltip>
 						
 					</li>
-					<!-- <li>
-						<label>住宅地邮编：</label>
-						<span>{{accepCusBasicInfo.liveZip}}</span>
-					</li> -->
 					<li>
 						<label>优先联系地址：</label>
-						<span>{{youxianlianxi}}</span>
+						<span>{{accepCusBasicInfo.priorityContactAddressTxt}}</span>
 					</li>
 				</ul>
 				<ul>
@@ -281,98 +273,31 @@
 				<ul>
 					<li>
 						<label>银行开户名称：</label>
-						<span>{{yinhangmingcheng}}</span>
+						<span>{{accepCusBasicInfo.bankName}}</span>
 					</li>
 					<li>
 						<label>银行卡所属分行：</label>
-						<span>{{suoshufenhang}}</span>
+						<span>{{accepCusBasicInfo.bankBranch}}</span>
 					</li>
 					<li>
 						<label>常用储蓄卡卡号：</label>
-						<span>{{chuxukakahao}}</span>
+						<span>{{accepCusBasicInfo.accountCode}}</span>
 					</li>
 				</ul>
 				<ul>
 					<li>
 						<label>网查征信用户名：</label>
-						<span>{{wangchayonghuming}}</span>
+						<span>{{accepCusBasicInfo.netCreditUsername}}</span>
 					</li>
 					<li>
 						<label>网查征信用户密码：</label>
-						<span>{{wangchamima}}</span>
+						<span>{{accepCusBasicInfo.netCreditPassword}}</span>
 					</li>
 					<li>
 						<label>是否缴纳商业保险：</label>
 						<span>{{accepCusBasicInfo.isPayInsuranceTxt}}</span>
 					</li>
 				</ul>
-				<!-- <div v-if="accepCusBasicInfo.isPayInsurance=='1'">
-					<ul>
-						<li>
-							<label>保险公司名称：</label>
-							<span>{{accepCusBasicInfo.insurCompanyName}}</span>
-						</li>
-						<li>
-							<label class="selLabel">险种类型：</label>
-							<span>{{accepCusBasicInfo.insurTypeTxt}}</span>				
-						</li>
-						<li>
-						</li>
-					</ul>
-					<ul>
-						<li class="province" style="width:66.6%">
-						<label class="ellipsis">投保地点：</label>
-						<el-tooltip class="item" effect="dark" :content="insurAddr" :disabled="insurAddr==null" placement="top-start">
-					      <div class="textBox">{{insurAddr}}</div>
-					    </el-tooltip>
-						<span>{{accepCusBasicInfo.insurProvinceName}}</span>
-						<span>{{accepCusBasicInfo.insurCityName}}</span>
-						<span>{{accepCusBasicInfo.insurCountyName}}</span>
-						<span>{{accepCusBasicInfo.insurAddress}}</span>
-						</li>
-						<li>	
-						</li>
-					</ul>
-					<ul>
-						<li>
-							<label>缴费方式：</label>
-							<span>{{accepCusBasicInfo.insurPayWayTxt}}</span>
-						</li>
-						<li>		
-							<label>缴费类别：</label>
-							<span>{{accepCusBasicInfo.insurPayCateTxt}}</span>	
-						</li>
-						<li></li>
-					</ul>
-					<ul>
-						<li>
-							<label>期缴保费[元]：</label>
-							<span>{{accepCusBasicInfo.eachPayAmt}}</span>
-						</li>
-						<li>
-							<label>总保额：</label>
-							<span>{{accepCusBasicInfo.totalPayAmt}}</span>				
-						</li>
-						<li>
-							<label>需缴费年数[月]：</label>
-							<span>{{accepCusBasicInfo.payPeriod}}</span>
-						</li>
-					</ul>
-					<ul>
-						<li>
-							<label>被保人姓名：</label>
-							<span>{{accepCusBasicInfo.insurerName}}</span>
-						</li>
-						<li>
-							<label>被保人联系电话：</label>
-							<span>{{accepCusBasicInfo.insurerTel}}</span>			
-						</li>
-						<li>
-							<label>生效日期：</label>
-							<span>{{accepCusBasicInfo.insurEffectDate}}</span>	
-						</li>
-					</ul>
-				</div> -->
 				<ul>
 					<li>
 						<label>是否是私营业主：</label>
@@ -547,35 +472,35 @@
 				<ul class="firstUl">
 					<li>
 						<label>同业机构名称：</label>
-						<span>{{jigoumingcheng}}</span>
+						<span>{{accepCusInterBankLoan.interBankTxt}}</span>
 					</li>
 					<li>
 						<label>贷款产品：</label>
-						<span>{{daikuanchanpin}}</span>
+						<span>{{accepCusInterBankLoan.loanPro}}</span>
 					</li>
 					<li>
 						<label>贷款额度[元]：</label>
-						<span>{{daikuanedu}}</span>
+						<span>{{accepCusInterBankLoan.loanTotalAmt}}</span>
 					</li>
 				</ul>
 				<ul>
 					<li>
 						<label>贷款生效日期：</label>
-						<span>{{daikuanriqi}}</span>
+						<span>{{accepCusInterBankLoan.loanEffectDate}}</span>
 					</li>
 					<li>
 						<label>贷款总期限[月]：</label>
-						<span>{{daikuanzongqixian}}</span>
+						<span>{{accepCusInterBankLoan.loanPeriod}}</span>
 					</li>
 					<li>
 						<label>每月还款日：</label>
-						<span>{{huankuanri}}</span>
+						<span>{{accepCusInterBankLoan.eachPayDay}}</span>
 					</li>
 				</ul>
 				<ul>
 					<li>
 						<label>还款额度[元]：</label>
-						<span>{{huankuanedu}}</span>
+						<span>{{accepCusInterBankLoan.repayAmt}}</span>
 					</li>
 					<li>						
 					</li>
@@ -588,46 +513,53 @@
 			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
 			      <span class="headFont">保险信息</span>
 				</template>
-				<ul>
-						<li style="width:100%;">
-							<label>保险公司：</label>
-							<span>{{accepCusBasicInfo.insurCompanyName}}</span>
-						</li>
-						
-					</ul>
-					<ul>
-						<li>
-							<label class="selLabel">保险类型：</label>
-							<span>{{accepCusBasicInfo.insurTypeTxt}}</span>				
-						</li>
-						<li>
-							<label>缴费方式：</label>
-							<span>{{accepCusBasicInfo.insurPayWayTxt}}</span>
-						</li>
-						<li></li>
-					</ul>
-					<ul>
-						<li>
-							<label>期缴保费金额[元]：</label>
-							<span>{{accepCusBasicInfo.eachPayAmt}}</span>
-						</li>
-						<li>
-							<label>保单总额[元]：</label>
-							<span>{{accepCusBasicInfo.totalPayAmt}}</span>				
-						</li>
-						<li>
-							<label>缴纳年限[月]：</label>
-							<span>{{nianxian}}</span>
-						</li>
-					</ul>
-					<ul>
-						<li>
-							<label>生效日期：</label>
-							<span>{{shengxiaoriqi}}</span>	
-						</li>
-						<li></li>
-						<li></li>
-					</ul>
+				<el-table
+			      :data="accepCusInsurances"
+			      style="width: 100%"
+			      border
+			      class="insur">
+			      <el-table-column
+			        type="index"
+			      	:index='1'
+			      	label="序号"
+			      	min-width="50" >
+			      </el-table-column>
+			      <el-table-column
+			        prop="insurCompanyName"
+			        label="保险公司"
+			        min-width="120">
+			      </el-table-column>
+			      <el-table-column
+			        prop="insurTypeTxt"
+			        label="保险类型"
+			        min-width="120">
+			      </el-table-column>
+			      <el-table-column
+			        prop="insurPayWayTxt"
+			        label="缴费方式"
+			        min-width="100">
+			      </el-table-column>
+			      <el-table-column
+			        prop="eachPayAmt"
+			        label="期缴保费金额[元]"
+			        min-width="120">
+			      </el-table-column>
+			      <el-table-column
+			        prop="totalPayAmt"
+			        label="保单总额[元]"
+			        min-width="120">
+			      </el-table-column>
+			      <el-table-column
+			        prop="payPeriod"
+			        label="缴纳年限[月]"
+			        min-width="120">
+			      </el-table-column>
+			      <el-table-column
+			        prop="insurEffectDate"
+			        label="生效日期"
+			        min-width="120">
+			      </el-table-column>
+			    </el-table>	
 			</el-collapse-item>
 			<el-collapse-item name="7">
 				<template slot="title">
@@ -702,7 +634,7 @@
 				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
-				        prop="restLoans"
+				        prop="estateShare"
 				        label="房产是否共有"
 				        min-width="120">
 				      </el-table-column>
@@ -780,12 +712,12 @@
 				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
-				        prop="buyDate"
+				        prop="carShare"
 				        label="车产是否共有"
 				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
-				        prop="buyDate"
+				        prop="carMortgage"
 				        label="车产是否抵押"
 				        min-width="100">
 				      </el-table-column>
@@ -1009,6 +941,12 @@
 				/*私人业主信息*/
 				accepCusPrivate:'',
 
+				/*同业贷情况*/
+				accepCusInterBankLoan:'',
+
+				/*保险信息*/
+				accepCusInsurances:[],
+
 				/*您的工作信息*/
 				accepCusWorkInfo:'',
 
@@ -1021,25 +959,8 @@
 				judgeFlag:'',
 				//您的个人信息 投保地点
 				insurAddr:'',
-				//借款人其他联系方式
-				qitaphone:'',
-				hukoudi:'',
-				youxianlianxi:'',
-				yinhangmingcheng:'',
-				suoshufenhang:'',
-				chuxukakahao:'',
-				wangchayonghuming:'',
-				wangchamima:'',
-				tongyedai:'',
-				jigoumingcheng:'',
-				daikuanchanpin:'',
-				daikuanedu:'',
-				daikuanriqi:'',
-				daikuanzongqixian:'',
-				huankuanri:'',
-				huankuanedu:'',
-				nianxian:'',
-				shengxiaoriqi:'',
+				//同业贷
+				tongyedai:''
 			};
 		},
 		mounted(){
@@ -1136,14 +1057,6 @@
 		        	if(this.accepCusBasicInfo.cardMaxAmt != null){
 			        	this.accepCusBasicInfo.cardMaxAmt = this.formatNumber(this.accepCusBasicInfo.cardMaxAmt,2,0);
 			        };
-		        	//期缴保费
-		        	if(this.accepCusBasicInfo.eachPayAmt != null){
-			        	this.accepCusBasicInfo.eachPayAmt = this.formatNumber(this.accepCusBasicInfo.eachPayAmt,2,0);
-			        };
-		        	//总保额
-		        	if(this.accepCusBasicInfo.totalPayAmt != null){
-		        		this.accepCusBasicInfo.totalPayAmt = this.formatNumber(this.accepCusBasicInfo.totalPayAmt,2,0);	
-		        	};
 		        	//户口所在地
 		        	this.accepCusBasicInfo.homeDetailAddr = this.accepCusBasicInfo.homeDetailAddr.replace(reg,'');
 		        	//现住宅地址
@@ -1216,6 +1129,26 @@
 			        	this.accepCusPrivate.busiArea = this.formatNumber(this.accepCusPrivate.busiArea,2,0)+"㎡";	
 			    	};
 		    	};
+
+		    	//同业贷情况
+		    	if(res.data.accepCusInterBankLoan){
+		    		this.accepCusInterBankLoan = res.data.accepCusInterBankLoan; 
+		    	};
+		    	//保险信息
+		    	if(res.data.accepCusInsurances){
+		    		this.accepCusInsurances = res.data.accepCusInsurances; 
+		    		//期缴保费
+		        	if(this.accepCusInsurances.eachPayAmt != null){
+			        	this.accepCusInsurances.eachPayAmt = this.formatNumber(this.accepCusInsurances.eachPayAmt,2,0);
+			        };
+		        	//总保额
+		        	if(this.accepCusInsurances.totalPayAmt != null){
+		        		this.accepCusInsurances.totalPayAmt = this.formatNumber(this.accepCusInsurances.totalPayAmt,2,0);	
+		        	};
+		    	}else{
+		    		this.accepCusInsurances = this.accepCusInsurances;
+		    	};
+
 		        /*您的工作信息*/
 		        if(res.data.accepCusWorkInfo==null){
 		        	this.accepCusWorkInfo=this.accepCusWorkInfo
@@ -1240,10 +1173,15 @@
 			        //单位地址
 			        var reg = /null/g;
 			        this.accepCusWorkInfo.workAddr = this.accepCusWorkInfo.workAddr.replace(reg,'');
-		        }
+		        };
 
 		        /*联系人信息*/
-		        this.accepCusRelations=res.data.accepCusRelations;
+		        if(res.data.accepCusRelations){
+		        	this.accepCusRelations=res.data.accepCusRelations;
+		        }else{
+		        	this.accepCusRelations=this.accepCusRelations;
+		        };
+		        
 
 		        if(this.datas.sourcesChan=='00'){//00
 		            this.datas.sourcesChan="电销";
