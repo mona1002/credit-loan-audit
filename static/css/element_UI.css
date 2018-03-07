@@ -989,8 +989,8 @@ height: 40px;
  .CreditForm .el-dialog__footer {
    padding: 5px 15px 10px;
  }
- /* 影音列表----缩略图按钮 */
- /* 影音资料-左侧列表 */
+ /* 影像列表----缩略图按钮 */
+ /* 影像资料-左侧列表 */
 
  .AudioVisual .el-collapse-item__header,
  .AudioVisualLeft .el-collapse-item__header {
@@ -1006,17 +1006,17 @@ height: 40px;
    height: calc( 100% - 100px);
    overflow: auto;
  }
- /* 影音列表-对比弹出层-右侧-折叠面板-title */
+ /* 影像列表-对比弹出层-右侧-折叠面板-title */
 
  .AudioVisual .posiiiii .el-collapse-item__header,
  .AudioVisualLeft .posiiiii .el-collapse-item__header,
  .AudioVisualLeft .posi .el-collapse-item__header
- /* 影音列表-左-内匹配客户查询列表-表头-左间距 */
+ /* 影像列表-左-内匹配客户查询列表-表头-左间距 */
 
  {
    padding: 0 10px;
  }
- /* 影音列表-左侧列表-title表头  */
+ /* 影像列表-左侧列表-title表头  */
 
  .AudioVisual .el-collapse-item__header p span,
  .AudioVisualLeft .el-collapse-item__header p span {
@@ -1061,14 +1061,14 @@ height: 40px;
    width: calc(100% - 255px);
    border-left: none;
  }
- /* 影音列表-左侧列表-折叠小箭头 */
+ /* 影像列表-左侧列表-折叠小箭头 */
 
  .AudioVisual .el-collapse-item__header .el-collapse-item__arrow,
  .AudioVisualLeft .el-collapse-item__header .el-collapse-item__arrow {
    /* line-height: 30px; */
    display: none;
  }
- /* 影音列表-左侧列表--内容title-最外侧包裹层 */
+ /* 影像列表-左侧列表--内容title-最外侧包裹层 */
 
  .AudioVisual .el-collapse-item__wrap,
  .AudioVisualLeft .el-collapse-item__wrap{
@@ -1076,7 +1076,7 @@ height: 40px;
    color: #666666;
    background: #f8f9fd;
  }
- /* 影音列表-左侧列表--内容下边距 */
+ /* 影像列表-左侧列表--内容下边距 */
 
  .AudioVisual .AudioVisual_wrap_compare_right .el-collapse-item__content,
  .AudioVisualLeft .AudioVisual_wrap_compare_right .el-collapse-item__content {
@@ -1088,7 +1088,7 @@ height: 40px;
    /* background: red; */
    height: 355px;
  }
- /* 影音列表- 对比弹出层-select-搜索框-wrap */
+ /* 影像列表- 对比弹出层-select-搜索框-wrap */
 
  .SplitScreen .AudioVisual_wrap_compare_right .el-select>.el-input,
  .SplitScreen .AudioVisual_wrap_compare_right .el-input__inner,

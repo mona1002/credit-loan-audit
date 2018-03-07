@@ -333,9 +333,9 @@
       } else if (this.judgeFlag.flag == '02') {
         this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
       } else if (this.judgeFlag.flag == '03') {
-        this.localInf = JSON.parse(localStorage.getItem("AntiWorkbenchPass")) //反欺诈专员
+        this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
       } else if (this.judgeFlag.flag == '04') {
-        this.localInf = JSON.parse(localStorage.getItem("AntiManagerWorkbenchPass")) //反欺诈主管
+        this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
       }
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
