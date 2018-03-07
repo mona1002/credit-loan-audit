@@ -103,7 +103,7 @@
           </div>
         </li>
         <li class="item-column1 submit-class">
-          <el-button plain @click="submitForm('form')">确定</el-button>
+          <el-button plain @click="backRoute()">取消</el-button>
           <el-button type="primary" @click="submitForm('form')">提交</el-button>
         </li>
       </ul>
@@ -430,6 +430,10 @@ export default {
         });
 
       });
+    },
+    // 返回  上级路由
+    backRoute(){
+      window.history.go(-1);
     },
     // 主原因改变
     mainselectChange(val) {
