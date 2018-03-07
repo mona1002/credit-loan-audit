@@ -12,7 +12,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
-    "element-ui": "^2.0.4",
+    "element-ui": "^2.2.1",
     "es6-promise-promise": "^1.0.0",
     "jquery": "^3.2.1",
     "vee-validate": "^2.0.0-rc.25",

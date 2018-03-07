@@ -1261,7 +1261,7 @@ export default {
   width: 140px;
   line-height: 30px;
   min-height: 30px;
-  padding-right: 10px;
+  padding-right: 5px;
   text-align: right;
   /* 配合必选 */
   position: relative;

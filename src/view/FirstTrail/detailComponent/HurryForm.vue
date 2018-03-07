@@ -87,7 +87,7 @@
       </div>
       <div class="content-ul">
         <li class="item-column3">
-          <div class="left-title"><span class="require-icon" style="left:-5px;">*</span>三方查询是否异常：</div>
+          <div class="left-title"><span class="require-icon" style="left:0px;">*</span>三方查询是否异常：</div>
           <!-- <div> -->
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <el-select v-model="threeQueries" placeholder="请选择调查情况">
@@ -98,7 +98,7 @@
           <!-- </div> -->
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="threeQueries =='1'"><span class="require-icon" style="left:90px;">*</span>说明：</div>
+          <div class="left-title" v-show="threeQueries =='1'"><span class="require-icon" style="left:80px;">*</span>说明：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <div class="textarea-class2" v-show="threeQueries =='1'">
               <el-input v-model="threeQueriestxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
