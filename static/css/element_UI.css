@@ -964,7 +964,9 @@ height: 40px;
  .el-tooltip__popper {
    width: auto;
    max-width: 400px;
+   overflow-wrap: break-word;
  }
+
  /* 信审表-终审-终审评价textarea */
 
  .CreditForm .FinalConclution .el-textarea {
