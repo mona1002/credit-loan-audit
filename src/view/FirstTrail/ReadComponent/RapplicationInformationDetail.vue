@@ -1057,14 +1057,6 @@
 		        	if(this.accepCusBasicInfo.cardMaxAmt != null){
 			        	this.accepCusBasicInfo.cardMaxAmt = this.formatNumber(this.accepCusBasicInfo.cardMaxAmt,2,0);
 			        };
-		        	//期缴保费
-		        	if(this.accepCusBasicInfo.eachPayAmt != null){
-			        	this.accepCusBasicInfo.eachPayAmt = this.formatNumber(this.accepCusBasicInfo.eachPayAmt,2,0);
-			        };
-		        	//总保额
-		        	if(this.accepCusBasicInfo.totalPayAmt != null){
-		        		this.accepCusBasicInfo.totalPayAmt = this.formatNumber(this.accepCusBasicInfo.totalPayAmt,2,0);	
-		        	};
 		        	//户口所在地
 		        	this.accepCusBasicInfo.homeDetailAddr = this.accepCusBasicInfo.homeDetailAddr.replace(reg,'');
 		        	//现住宅地址
@@ -1145,6 +1137,14 @@
 		    	//保险信息
 		    	if(res.data.accepCusInsurances){
 		    		this.accepCusInsurances = res.data.accepCusInsurances; 
+		    		//期缴保费
+		        	if(this.accepCusInsurances.eachPayAmt != null){
+			        	this.accepCusInsurances.eachPayAmt = this.formatNumber(this.accepCusInsurances.eachPayAmt,2,0);
+			        };
+		        	//总保额
+		        	if(this.accepCusInsurances.totalPayAmt != null){
+		        		this.accepCusInsurances.totalPayAmt = this.formatNumber(this.accepCusInsurances.totalPayAmt,2,0);	
+		        	};
 		    	}else{
 		    		this.accepCusInsurances = this.accepCusInsurances;
 		    	};
