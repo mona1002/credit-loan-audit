@@ -554,7 +554,7 @@
            	//流程模版ID
            	this.processTemplateId = JSON.parse(localStorage.getItem('ReWorkbenchPass')).processTemplateId;
            	//流程实例ID
-           	this.processInstanceId = JSON.parse(localStorage.getItem('ReWorkbenchPass')).processInstanceId;
+           	this.processInstanceId = JSON.parse(localStorage.getItem('RtaskInWaitting')).processInstanceId;
            	//任务id
            	this.taskId = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
            	this.proCode = this.applicationInformationDetail.proCode;
