@@ -600,7 +600,7 @@ export default {
             }
           }
         }
-      } else if(this.auditResult =='02') {
+      } else if (this.auditResult == '02') {
         // 假如是风险排除,不传 主原因 子原因 风险项
         this.mainReason = '';
         this.mainReasonName = '';
@@ -611,70 +611,142 @@ export default {
         this.busiState = '31';
       }
 
-      const h = this.$createElement;
-      this.$msgbox({
-        title: '提示',
-        message: h('p', null, [
-          h('span', null, '确定操作? '),
-        ]),
-        showCancelButton: true,
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        beforeClose: (action, instance, done) => {
-          if (action === 'confirm') {
-            instance.confirmButtonLoading = true;
-            instance.confirmButtonText = '执行中...';
-            this.post('/fraudAuditOpinion/insert', {
-              applyId: this.applyId, // 申请单id
-              mainreasonId: this.mainReason, // 欺诈主原因id
-              subreasonId: this.secondReason, // 欺诈子原因id
-              mainreaName: this.mainReasonName, // 欺诈主原因名称
-              subreaName: this.secondReasonName, // 欺诈子原因名称
-              riskSection: this.riskSectionArr, // 风险项
-              auditDesc: this.auditDesc, // 反欺诈决策反馈
-              auditResult: this.auditResult, // 审核结论
-              caseDesc: this.caseDesc, // 案件描述
-              caseNum: this.caseNum, // 案件编号 caseNum
-              auditType: '01', // 审批类型
-              taskNodeName: this.taskNodeName, // 任务节点
-              taskId: this.taskId,
-              processInstanceId: this.processInstanceId, // 流程实例Id
-              busiState: this.busiState, //  状态
-            }).then(res => {
-              if (res.statusCode == '200') {
-                this.resMsg = res.msg;
-                done();
-              } else {
-                
-                if (res.statusCode == 500) {
-                  this.$message({
-                    type: 'warning',
-                    message: '网络异常,请重试!'
-                  });
-                  instance.confirmButtonText = '';
-                  instance.confirmButtonLoading = false;
+      // 专员的审批 相当于是主管的视频
+      if (val == 'submit') {
+        // 原来主管的审批 不变
+        const h = this.$createElement;
+        this.$msgbox({
+          title: '提示',
+          message: h('p', null, [
+            h('span', null, '确定操作? '),
+          ]),
+          showCancelButton: true,
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          beforeClose: (action, instance, done) => {
+            if (action === 'confirm') {
+              instance.confirmButtonLoading = true;
+              instance.confirmButtonText = '执行中...';
+              this.post('/fraudAuditOpinion/opinionInsert', {
+                applyId: this.applyId, // 申请单id
+                mainreasonId: this.mainReason, // 欺诈主原因id
+                subreasonId: this.secondReason, // 欺诈子原因id
+                mainreaName: this.mainReasonName, // 欺诈主原因名称
+                subreaName: this.secondReasonName, // 欺诈子原因名称
+                riskSection: this.riskSectionArr, // 风险项
+                auditDesc: this.auditDesc, // 反欺诈决策反馈
+                auditResult: this.auditResult, // 审核结论
+                caseDesc: this.caseDesc, // 案件描述
+                caseNum: this.caseNum, // 案件编号 caseNum
+                auditType: '01', // 审批类型
+                taskNodeName: this.taskNodeName, // 任务节点
+                taskId: this.taskId,
+                processInstanceId: this.processInstanceId, // 流程实例Id
+                busiState: this.busiState, //  状态
+              }).then(res => {
+                if (res.statusCode == '200') {
+                  this.resMsg = res.msg;
+                  done();
                 } else {
 
-                  this.$message({
-                    type: 'warning',
-                    message: res.msg
-                  });
+                  if (res.statusCode == 500) {
+                    this.$message({
+                      type: 'warning',
+                      message: '网络异常,请重试!'
+                    });
+                    instance.confirmButtonText = '';
+                    instance.confirmButtonLoading = false;
+                  } else {
+
+                    this.$message({
+                      type: 'warning',
+                      message: res.msg
+                    });
+                  }
                 }
-              }
-              instance.confirmButtonText = '';
-              instance.confirmButtonLoading = false;
-            })
-          } else {
-            done();
+                instance.confirmButtonText = '';
+                instance.confirmButtonLoading = false;
+              })
+            } else {
+              done();
+            }
           }
-        }
-      }).then(action => {
-        this.$message({
-          type: 'success',
-          message: '反欺诈审批成功!'
+        }).then(action => {
+          this.$message({
+            type: 'success',
+            message: '反欺诈审批成功!'
+          });
+          this.$router.push('/AntiFraud34');
         });
-        this.$router.push('/AntiFraud34');
-      });
+      } else {
+        // 原来主管的审批 不变
+        const h = this.$createElement;
+        this.$msgbox({
+          title: '提示',
+          message: h('p', null, [
+            h('span', null, '确定操作? '),
+          ]),
+          showCancelButton: true,
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          beforeClose: (action, instance, done) => {
+            if (action === 'confirm') {
+              instance.confirmButtonLoading = true;
+              instance.confirmButtonText = '执行中...';
+              this.post('/fraudAuditOpinion/insert', {
+                applyId: this.applyId, // 申请单id
+                mainreasonId: this.mainReason, // 欺诈主原因id
+                subreasonId: this.secondReason, // 欺诈子原因id
+                mainreaName: this.mainReasonName, // 欺诈主原因名称
+                subreaName: this.secondReasonName, // 欺诈子原因名称
+                riskSection: this.riskSectionArr, // 风险项
+                auditDesc: this.auditDesc, // 反欺诈决策反馈
+                auditResult: this.auditResult, // 审核结论
+                caseDesc: this.caseDesc, // 案件描述
+                caseNum: this.caseNum, // 案件编号 caseNum
+                auditType: '01', // 审批类型
+                taskNodeName: this.taskNodeName, // 任务节点
+                taskId: this.taskId,
+                processInstanceId: this.processInstanceId, // 流程实例Id
+                busiState: this.busiState, //  状态
+              }).then(res => {
+                if (res.statusCode == '200') {
+                  this.resMsg = res.msg;
+                  done();
+                } else {
+
+                  if (res.statusCode == 500) {
+                    this.$message({
+                      type: 'warning',
+                      message: '网络异常,请重试!'
+                    });
+                    instance.confirmButtonText = '';
+                    instance.confirmButtonLoading = false;
+                  } else {
+
+                    this.$message({
+                      type: 'warning',
+                      message: res.msg
+                    });
+                  }
+                }
+                instance.confirmButtonText = '';
+                instance.confirmButtonLoading = false;
+              })
+            } else {
+              done();
+            }
+          }
+        }).then(action => {
+          this.$message({
+            type: 'success',
+            message: '反欺诈审批成功!'
+          });
+          this.$router.push('/AntiFraud34');
+        });
+      }
+
+
     },
     coverFn(flag) {
       // 页面点击按钮出现 的 对应 弹窗
@@ -1114,6 +1186,8 @@ export default {
 
 
 
+
+
 /* 折叠面板头部背景色和icon */
 
 .approval-colun .icon_hat {
@@ -1124,6 +1198,8 @@ export default {
 .approval-colun .headFont {
   font-size: 16px;
 }
+
+
 
 
 
@@ -1150,6 +1226,8 @@ export default {
 
 
 
+
+
 /* 两列 */
 
 .approval-colun .item-column2 {
@@ -1157,6 +1235,8 @@ export default {
   float: left;
   margin: 0;
 }
+
+
 
 
 
@@ -1193,6 +1273,8 @@ export default {
 
 
 
+
+
 /* 3列 空位 */
 
 .approval-colun .item-column3-null {
@@ -1207,6 +1289,8 @@ export default {
   height: 30px;
   line-height: 30px;
 }
+
+
 
 
 
@@ -1239,6 +1323,8 @@ export default {
 
 
 
+
+
 /* 按钮集合控件 */
 
 .approval-colun .btn-div {
@@ -1246,6 +1332,8 @@ export default {
   width: 80%;
   float: left;
 }
+
+
 
 
 
@@ -1276,6 +1364,8 @@ export default {
 
 
 
+
+
 /*回退*/
 
 .approval-colun .el-icon-check-back {
@@ -1288,6 +1378,8 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
 
 
 
@@ -1318,6 +1410,8 @@ export default {
 
 
 
+
+
 /*放弃*/
 
 .approval-colun .el-icon-check-giveup {
@@ -1330,6 +1424,8 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
 
 
 
@@ -1360,6 +1456,8 @@ export default {
 
 
 
+
+
 /*流程轨迹*/
 
 .approval-colun .el-icon-check-lcgj {
@@ -1381,6 +1479,8 @@ export default {
 
 
 
+
+
 /* 反欺诈 审批结论 - btn*/
 
 .approval-colun .credit-btn {
@@ -1389,6 +1489,8 @@ export default {
   color: #333;
   border: none;
 }
+
+
 
 
 
@@ -1423,6 +1525,8 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
+
 
 
 
@@ -1480,11 +1584,15 @@ export default {
 
 
 
+
+
 /* textarea */
 
 .approval-colun .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
+
 
 
 
@@ -1519,6 +1627,8 @@ export default {
 
 
 
+
+
 /* 审批 表单 */
 
 .approval-colun .appro-form {
@@ -1540,6 +1650,8 @@ export default {
 
 
 
+
+
 /*.approval-colun .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -1547,6 +1659,8 @@ export default {
 .approval-colun .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
+
 
 
 
@@ -1592,11 +1706,15 @@ export default {
 
 
 
+
+
 /* 反欺诈 -- 审批结论 */
 
 .approval-colun .form-ul {
   padding-left: 30px;
 }
+
+
 
 
 
@@ -1638,11 +1756,15 @@ export default {
 
 
 
+
+
 /* 审批 label*/
 
 .approval-colun .appro-form .back-form-edit-li .el-form-item__label {
   width: 120px;
 }
+
+
 
 
 
@@ -1670,11 +1792,15 @@ export default {
 
 
 
+
+
 /* 两行文字 样式 */
 
 .approval-colun .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
+
 
 
 
@@ -1703,6 +1829,8 @@ export default {
 
 
 
+
+
 /* 详细 信息按钮*/
 
 .approval-colun .btn-detail {
@@ -1711,6 +1839,8 @@ export default {
   margin-top: 35px;
   margin-left: 10px;
 }
+
+
 
 
 
@@ -1742,6 +1872,8 @@ export default {
 
 
 
+
+
 /* 分页 */
 
 .approval-colun .tool-bar {
@@ -1758,11 +1890,15 @@ export default {
 
 
 
+
+
 /* 隐藏分页 */
 
 .approval-colun .el-pagination__jump {
   display: none;
 }
+
+
 
 
 
