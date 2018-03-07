@@ -1,17 +1,17 @@
 <template>
   <div class="PneCtrl">
       <!-- 大数据风控 -->
-    <myHead></myHead>
+    <!-- <myHead></myHead> -->
     <div class="outside">
       <div class="title">
         <ul>
-          <li v-for="(item,index) in titles" class="tabdefault" :key='index' :class="{tab:ind==index}" @click="swiching($event,index,val)">{{item}} </li>
+          <li v-for="(item,index) in titles" class="tabdefault" :key='index' :class="{tab:ind==index}" @click="swiching($event,index,item)">{{item}} </li>
         </ul>
       </div>
       <div class="wrap">
         <div class="content">
-          <BaiRongData v-if="ind==0"></BaiRongData>
-          <RiskDecision v-if="ind==1"></RiskDecision>
+          <RiskDecision v-if="ind==0"></RiskDecision>          
+          <BaiRongData v-if="ind==1"></BaiRongData>
         </div>
       </div>
     </div>

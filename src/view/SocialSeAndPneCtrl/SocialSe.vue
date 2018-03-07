@@ -1,7 +1,7 @@
 <template>
   <div class="SocialSe">
       <!-- 大数据风控 -->
-    <myHead></myHead>
+    <!-- <myHead></myHead> -->
     <div class="outside">
       <div class="title">
         <ul>
