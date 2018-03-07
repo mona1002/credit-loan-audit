@@ -64,7 +64,7 @@
         </div>
       </li>
       <!-- item-column3-2 -->
-      <li class="item-column1 ">
+      <li class="item-column1 item-column3-2" v-show="auditResult!='02'">
         <!-- <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:5px;font-weight:bold;">*</span> -->
         <div class="left-title">
           风险项：
@@ -72,7 +72,7 @@
         <div>
           <!-- @change="selectChangeRisk" multiple    class="muti-select"   -->
           <!-- <el-select v-model="riskSection" multiple collapse-tags class="muti-select"> -->
-          <el-select v-model="riskSection" multiple collapse-tags placeholder="请选择" class="muti-select">
+          <el-select v-model="riskSection" multiple placeholder="请选择" class="muti-select">
             <el-option v-for="item in riskSections" :key="item.enumCode" :label="item.showMsg" :value="item.showMsg">
             </el-option>
           </el-select>
@@ -86,7 +86,7 @@
         </div>
       </li>
       <li class="item-column1 item-column3-2">
-        <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:40px;top:10px;font-weight:bold;">*</span>
+        <!-- <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:40px;top:10px;font-weight:bold;">*</span> -->
         <div class="left-title">
           案件编号：
         </div>
@@ -396,11 +396,11 @@ export default {
     this.queryCaseNumList();
 
     // 先取 保存的信息
-    var insertObj = localStorage.getItem('saveInsertObj');
+    var insertObj = JSON.parse(localStorage.getItem('saveInsertObj'));
     if (insertObj != undefined) {
       this.auditResult = insertObj.auditResult; // 审核结论
-      this.mainreasonT = insertObj.mainReason; // 欺诈主原因id
-      this.subreasonT = insertObj.secondReason; // 欺诈子原因id
+      this.mainReasonT = insertObj.mainreasonId; // 欺诈主原因id
+      this.subReasonT = insertObj.subreasonId; // 欺诈子原因id
       this.riskSection = insertObj.riskSection; // 风险项
       this.auditDesc = insertObj.auditDesc; // 反欺诈决策反馈
       this.caseNum = insertObj.caseNum; // 案件编号 caseNum
@@ -411,8 +411,8 @@ export default {
         // 赋值主原因
       }
       // 请求子原因
-      this.secondReasonT = res.data.subreasonId;
-      if (res.data.mainreasonId) {
+      this.subReasonT = insertObj.subreasonId;
+      if (insertObj.mainreasonId) {
         this.getReason('second', this.mainReasonT, true);
       }
 
@@ -559,44 +559,56 @@ export default {
           return;
         }
       }
-
-      if (this.riskSection) {
-        console.log(this.riskSection);
-        // 页面的选项值
-        for (var i = 0; i < this.riskSection.length; i++) {
-          // 请求回来的列表值
-          for (var j = 0; j < this.riskSections.length; j++) {
-            // 判断页面的每个值 是否 == 列表的选项
-            if (this.riskSection[i] == this.riskSections[j].showMsg) {
-              // 赋值给对象 
-              this.riskSectionArr.push({
-                'showMsg': this.riskSections[j].showMsg,
-                'enumCode': this.riskSections[j].enumCode,
-                'returnMsg': this.riskSections[j].returnMsg
-              });
-              continue;
+      // 处理风险项
+      if (this.auditResult != '02') {
+        if (this.riskSection) {
+          console.log(this.riskSection);
+          // 页面的选项值
+          for (var i = 0; i < this.riskSection.length; i++) {
+            // 请求回来的列表值
+            for (var j = 0; j < this.riskSections.length; j++) {
+              // 判断页面的每个值 是否 == 列表的选项
+              if (this.riskSection[i] == this.riskSections[j].showMsg) {
+                // 赋值给对象 
+                this.riskSectionArr.push({
+                  'showMsg': this.riskSections[j].showMsg,
+                  'enumCode': this.riskSections[j].enumCode,
+                  'returnMsg': this.riskSections[j].returnMsg
+                });
+                continue;
+              }
+            }
+          }
+          console.log(this.riskSectionArr)
+          // return;
+        }
+        // 取出主原因name
+        if (this.mainReason) {
+          for (let i = 0; i < this.mainReasons.lenth; i++) {
+            if (this.mainReasons[i].id == this.mainReason) {
+              this.mainReasonName = this.mainReasons[i].reasonName;
             }
           }
         }
-        console.log(this.riskSectionArr)
-        // return;
-      }
-      // 取出主原因name
-      if (this.mainReason) {
-        for (let i = 0; i < this.mainReasons.lenth; i++) {
-          if (this.mainReasons[i].id == this.mainReason) {
-            this.mainReasonName = this.mainReasons[i].reasonName;
-          }
-        }
-      }
 
-      // 取出子原因name
-      if (this.secondReason) {
-        for (let i = 0; i < this.secondReasons.length; i++) {
-          if (this.secondReasons[i].id == this.secondReason) {
-            this.secondReasonName = this.secondReasons[i].reasonName;
+
+        // 取出子原因name
+        if (this.secondReason) {
+          for (let i = 0; i < this.secondReasons.length; i++) {
+            if (this.secondReasons[i].id == this.secondReason) {
+              this.secondReasonName = this.secondReasons[i].reasonName;
+            }
           }
         }
+      } else if(this.auditResult =='02') {
+        // 假如是风险排除,不传 主原因 子原因 风险项
+        this.mainReason = '';
+        this.mainReasonName = '';
+        this.secondReason = '';
+        this.secondReasonName = '';
+        this.riskSectionArr = '';
+        // 31 风险拒绝
+        this.busiState = '31';
       }
 
       const h = this.$createElement;
@@ -630,9 +642,10 @@ export default {
               busiState: this.busiState, //  状态
             }).then(res => {
               if (res.statusCode == '200') {
+                this.resMsg = res.msg;
                 done();
               } else {
-                done();
+                
                 if (res.statusCode == 500) {
                   this.$message({
                     type: 'warning',
@@ -721,7 +734,15 @@ export default {
             caseDesc: this.caseDesc, // 案件描述
           }
           // 点击保存 存本地
-          localStorage.setItem('saveInsertObj', tempObj);
+          localStorage.setItem('saveInsertObj', JSON.stringify(tempObj));
+          // 保存 成功
+          if (localStorage.getItem('saveInsertObj') != undefined) {
+            this.$message({
+              message: "保存成功!",
+              type: 'success'
+            });
+            return;
+          }
       }
     },
     // 获取显示详情信息  
@@ -990,7 +1011,8 @@ export default {
             console.log(this.secondReason);
             if (TF == true) {
               console.log('主管 子原因')
-              this.secondReason = this.secondReasonT;
+
+              this.secondReason = this.subReasonT;
             }
             console.log(this.secondReason);
           }
@@ -1091,6 +1113,7 @@ export default {
 
 
 
+
 /* 折叠面板头部背景色和icon */
 
 .approval-colun .icon_hat {
@@ -1101,6 +1124,7 @@ export default {
 .approval-colun .headFont {
   font-size: 16px;
 }
+
 
 
 
@@ -1125,6 +1149,7 @@ export default {
 
 
 
+
 /* 两列 */
 
 .approval-colun .item-column2 {
@@ -1132,6 +1157,7 @@ export default {
   float: left;
   margin: 0;
 }
+
 
 
 
@@ -1166,6 +1192,7 @@ export default {
 
 
 
+
 /* 3列 空位 */
 
 .approval-colun .item-column3-null {
@@ -1180,6 +1207,7 @@ export default {
   height: 30px;
   line-height: 30px;
 }
+
 
 
 
@@ -1210,6 +1238,7 @@ export default {
 
 
 
+
 /* 按钮集合控件 */
 
 .approval-colun .btn-div {
@@ -1217,6 +1246,7 @@ export default {
   width: 80%;
   float: left;
 }
+
 
 
 
@@ -1245,6 +1275,7 @@ export default {
 
 
 
+
 /*回退*/
 
 .approval-colun .el-icon-check-back {
@@ -1257,6 +1288,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -1285,6 +1317,7 @@ export default {
 
 
 
+
 /*放弃*/
 
 .approval-colun .el-icon-check-giveup {
@@ -1297,6 +1330,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -1325,6 +1359,7 @@ export default {
 
 
 
+
 /*流程轨迹*/
 
 .approval-colun .el-icon-check-lcgj {
@@ -1345,6 +1380,7 @@ export default {
 
 
 
+
 /* 反欺诈 审批结论 - btn*/
 
 .approval-colun .credit-btn {
@@ -1353,6 +1389,7 @@ export default {
   color: #333;
   border: none;
 }
+
 
 
 
@@ -1386,6 +1423,7 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
 
 
 
@@ -1441,11 +1479,13 @@ export default {
 
 
 
+
 /* textarea */
 
 .approval-colun .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
 
 
 
@@ -1478,6 +1518,7 @@ export default {
 
 
 
+
 /* 审批 表单 */
 
 .approval-colun .appro-form {
@@ -1498,6 +1539,7 @@ export default {
 
 
 
+
 /*.approval-colun .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -1505,6 +1547,7 @@ export default {
 .approval-colun .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
 
 
 
@@ -1529,8 +1572,8 @@ export default {
 }
 
 .approval-colun .el-input {
-  width: calc( 100% - 120px);
-  /*width: 100%;*/
+  /*width: calc( 100% - 120px);*/
+  width: 100%;
   height: 35px;
   line-height: 35px;
 }
@@ -1540,6 +1583,7 @@ export default {
   line-height: 100%;
   /*width:300px;*/
 }
+
 
 
 
@@ -1561,10 +1605,11 @@ export default {
 
 
 
+
 /* 默认显示样式 */
 
 .approval-colun .form-ul .el-select {
-  width: 300px;
+  /*width: 300px;*/
   width: calc( 100% - 130px);
 }
 
@@ -1592,11 +1637,13 @@ export default {
 
 
 
+
 /* 审批 label*/
 
 .approval-colun .appro-form .back-form-edit-li .el-form-item__label {
   width: 120px;
 }
+
 
 
 
@@ -1622,11 +1669,13 @@ export default {
 
 
 
+
 /* 两行文字 样式 */
 
 .approval-colun .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
 
 
 
@@ -1653,6 +1702,7 @@ export default {
 
 
 
+
 /* 详细 信息按钮*/
 
 .approval-colun .btn-detail {
@@ -1661,6 +1711,7 @@ export default {
   margin-top: 35px;
   margin-left: 10px;
 }
+
 
 
 
@@ -1690,6 +1741,7 @@ export default {
 
 
 
+
 /* 分页 */
 
 .approval-colun .tool-bar {
@@ -1697,6 +1749,7 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
 
 
 
@@ -1718,12 +1771,13 @@ export default {
 
 
 
+
 /*多选下拉*/
 
 .approval-colun .form-ul .muti-select {
   display: flex;
   position: relative;
-  width: 400px;
+  /*width: 400px;*/
   height: normal;
   line-height: normal;
   width: normal;
