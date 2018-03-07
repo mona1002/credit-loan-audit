@@ -162,7 +162,7 @@
 				        label="手机号码"
 				        min-width="110">
 				        <template slot-scope="scope">
-				        	<el-input v-model="scope.row.phoneNum" placeholder="请输入内容" @blur="regPhone(scope.row)"></el-input>
+				        	<el-input v-model="scope.row.phoneNum" placeholder="请输入内容" @blur="regPhone(scope.row)" :disabled="scope.row.isInitFlag=='0'"></el-input>
 				        </template>
 				      </el-table-column>
 				      <el-table-column
@@ -170,7 +170,7 @@
 				        label="关系"
 				        min-width="100">
 				        <template slot-scope="scope">
-				        	<el-input v-model="scope.row.relation" placeholder="请输入内容"></el-input>
+				        	<el-input v-model="scope.row.relation" placeholder="请输入内容" :disabled="scope.row.isInitFlag=='0'"></el-input>
 				        </template>
 				      </el-table-column>
 				      <el-table-column
@@ -320,6 +320,7 @@
 				recordList:[],
 		      /*反欺诈申请ID*/
 		      appinfoId:'',
+		      applyId:'',
 		      /*命中规则列表参数*/
 		      ruleId:'',
 		      pageParam:{
@@ -345,8 +346,11 @@
 			this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
 			if(this.judgeFlag.flag == '03'){
 				this.appinfoId=JSON.parse(localStorage.getItem('AntitaskInWaitting')).businessId;//反欺诈专员
+				this.applyId=JSON.parse(localStorage.getItem('AntitaskInWaitting')).applyId;//反欺诈专员
+				console.log(this.applyId);
 			}else if (this.judgeFlag.flag == '04') {
 		        this.appinfoId = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")).businessId; //反欺诈主管
+		        this.applyId = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")).applyId; //反欺诈主管
 		    }
 
 			this.request(this.appinfoId);
@@ -375,11 +379,10 @@
 	          				this.reason = '';
 	          			}else{
 	          				this.reason = this.fraudApplyInfo.mainreaName+this.fraudApplyInfo.subreaName+this.fraudApplyInfo.applyDesc;
-	          			var reg = /null/g;
-	          			//var string = 'hdksjkdjnullfhdlfjl';
-	          			this.reason = this.reason.replace(reg,'');
-	          		};
-	          			
+		          			var reg = /null/g;
+		          			//var string = 'hdksjkdjnullfhdlfjl';
+		          			this.reason = this.reason.replace(reg,'');
+	          			};
 	          		};
 
 	          		//命中规则
@@ -413,6 +416,7 @@
 				console.log("aksdf"+this.fraudAuditInfo.auditName)
 				//this.fraudTelCheckList.appinfoId=this.appinfoId;
 				this.post('antiFraud/saveAntiFraudSurveyInfo',{
+					"appinfoId":this.appinfoId,//'1', // 反欺诈申请id
 					"fraudAuditInfo":{
 						"appinfoId":this.appinfoId,//'1', // 反欺诈申请id
 			            "netCheck":this.fraudAuditInfo.netCheck, // 网查
@@ -455,7 +459,8 @@
 					                "appinfoId":this.appinfoId, // 反欺诈申请id
 					                "phoneNum":"",// 号码
 					                "relation":"", // 关系
-					                "record":"" // 记录录入
+					                "record":"" ,// 记录录入
+					                "applyId":this.applyId,
 								}); 
 		 	},
 		 	delet:function(event){
