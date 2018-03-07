@@ -16,7 +16,7 @@
         <!-- 左侧分屏部分 -->
         <div class="left" ref="rLeft">
           <div ref="Left_title" class="Left_ul" @mouseenter="showList" @mouseleave="hid">
-            <!-- 左侧 title列表 == 影音资料等 ==================弹出列表============ -->
+            <!-- 左侧 title列表 == 影像资料等 ==================弹出列表============ -->
             <ul>
               <li ref="tabOne" class="tab1Default" v-for="(val,index) in items1" :key="index" @mousedown="flag1[index] &&  tab1($event,index,val)"
                 :class="{tab1Act:tab1Index==index}">
@@ -119,7 +119,6 @@
 </template>
 <script>
   import myHead from "../header.vue"
-  import aut from "./checkComponent/aut"
   // 编辑
   // import AudioVisual from "./detailComponent/AudioVisual";
   import RAudioVisual from "./ReadComponent/RAudioVisual";
@@ -159,10 +158,10 @@
         tabContent2: 3,
         tabActiveInd1: 0,
         tabActiveInd2: 3,
-        items1: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹", "反欺诈结论", "财务信息", "流程轨迹",
+        items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹", "反欺诈结论", "财务信息", "流程轨迹",
           "审批结论轨迹"
         ],
-        items2: ["影音资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹", "反欺诈结论", "财务信息", "流程轨迹",
+        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹", "反欺诈结论", "财务信息", "流程轨迹",
           "审批结论轨迹"
         ],
         tab1Index: 0,
@@ -276,11 +275,10 @@
           this.$message.error(res.msg);
         }
       });
-      this.title = "影音资料";
+      this.title = "影像资料";
     },
     components: {
       myHead,
-
       // 编辑
       RAudioVisual,
       RAudioVisualLeft,
@@ -298,7 +296,6 @@
       // 信审审批
       CreditApproval,
       // 查询
-      aut,
       // cremarkDetail, 
       RprocessTrajectory
     }
@@ -428,7 +425,7 @@
     margin-right: 2px;
   }
   /* 左屏 */
-  /* 左侧列表  影音资料等 ul 外包   流 */
+  /* 左侧列表  影像资料等 ul 外包   流 */
 
   .left .Left_ul {
     width: 128px;

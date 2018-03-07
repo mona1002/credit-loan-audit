@@ -5,13 +5,13 @@
     <div class="outside">
       <div class="title">
         <ul>
-          <li v-for="(item,index) in titles" class="tabdefault" :key='index' :class="{tab:ind==index}" @click="swiching($event,index,val)">{{item}} </li>
+          <li v-for="(item,index) in titles" class="tabdefault" :key='index' :class="{tab:ind==index}" @click="swiching($event,index,item)">{{item}} </li>
         </ul>
       </div>
       <div class="wrap">
         <div class="content">
-          <BaiRongData v-if="ind==0"></BaiRongData>
-          <RiskDecision v-if="ind==1"></RiskDecision>
+          <!-- <RiskDecision v-if="ind==0"></RiskDecision>           -->
+          <!-- <BaiRongData v-if="ind==1"></BaiRongData> -->
         </div>
       </div>
     </div>
@@ -19,8 +19,8 @@
 </template>
 <script>
   import myHead from '../header.vue'
-  import BaiRongData from './PneCtrl/BaiRongData.vue'
-  import RiskDecision from './PneCtrl/RiskDecision.vue'
+  // import BaiRongData from './PneCtrl/BaiRongData.vue'
+  // import RiskDecision from './PneCtrl/RiskDecision.vue'
   export default {
     data() {
       return {
@@ -35,8 +35,8 @@
     },
     components: {
       myHead,
-      BaiRongData,
-      RiskDecision
+      // BaiRongData,
+      // RiskDecision
     }
 
   }
