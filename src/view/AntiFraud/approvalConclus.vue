@@ -385,9 +385,9 @@ export default {
         "type": ''
       }]
 
-
-      // 反欺诈主管 请求 反欺诈专员信息
+      // 反欺诈主管 请求 反欺诈历史信息
       this.queryCreauditOpinionObj();
+
     }
 
     // 请求风险项
@@ -611,7 +611,7 @@ export default {
         this.busiState = '31';
       }
 
-      // 专员的审批 相当于是主管的视频
+      // 专员的审批 相当于是主管的审批
       if (val == 'submit') {
         // 原来主管的审批 不变
         const h = this.$createElement;
@@ -679,6 +679,8 @@ export default {
           this.$router.push('/AntiFraud34');
         });
       } else {
+        // 专员的 提交  
+        this.busiState = '30';
         // 原来主管的审批 不变
         const h = this.$createElement;
         this.$msgbox({
@@ -1125,7 +1127,8 @@ export default {
           this.subreaName = res.data.subreaName;
 
           // 风险项 riskSection
-          this.riskSection = res.data.riskSection;
+          this.riskSection = res.data.riskSectionArr;
+
           // 反欺诈决策反馈
           this.auditDesc = res.data.auditDesc;
           // 案件编号
