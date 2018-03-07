@@ -1,4 +1,4 @@
-<!-- 历史任务 -->
+<!-- 审批-历史任务 -->
 <template>
 	<div class="taskWatting historicalTask">
 		<myHead class="top"></myHead>
@@ -140,17 +140,17 @@
 				      min-width="170">
 				    </el-table-column>
 				    <el-table-column
-				      prop="activationTime"
+				      prop="completeTime"
 				      label="本环节处理时间"
 				      min-width="170">
 				    </el-table-column>
 				    <el-table-column
-				      prop="activationTime"
+				      prop="processStartDate"
 				      label="流程发起时间"
 				      min-width="170">
 				    </el-table-column>
 				    <el-table-column
-				      prop="activationTime"
+				      prop="processEndDate"
 				      label="流程结束时间"
 				      min-width="170">
 				    </el-table-column>
