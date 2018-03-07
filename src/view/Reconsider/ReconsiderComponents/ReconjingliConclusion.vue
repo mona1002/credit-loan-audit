@@ -50,6 +50,14 @@
 	    		<img src="/static/images/liucheng.png">
 	    		<label class="labelTxt">流程轨迹</label>
 	    	</el-button>
+	    	<el-button @click="tobigData">
+	    		<img src="/static/images/liucheng.png">
+	    		<label class="labelTxt">大数据风控</label>
+	    	</el-button>
+	    	<el-button @click="roSocialSecurity">
+	    		<img src="/static/images/liucheng.png">
+	    		<label class="labelTxt">社保/公积金</label>
+	    	</el-button>
 	    </div>
 	    <!-- 回退 -->
 	    <div class="huitui">
@@ -546,7 +554,7 @@
            	//流程模版ID
            	this.processTemplateId = JSON.parse(localStorage.getItem('ReWorkbenchPass')).processTemplateId;
            	//流程实例id
-           	this.processInstanceId = JSON.parse(localStorage.getItem('ReWorkbenchPass')).processInstanceId;
+           	this.processInstanceId = JSON.parse(localStorage.getItem('RtaskInWaitting')).processInstanceId;
            	//任务id
            	this.taskId = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
            	this.proCode = this.applicationInformationDetail.proCode;
@@ -1120,6 +1128,14 @@
 		          }
 		        })
 		    },
+		    //大数据风控
+		    tobigData(){
+		    	
+		    },
+		    //社保/公积金
+			roSocialSecurity(){
+
+			},
 		    
 		},
 		watch:{

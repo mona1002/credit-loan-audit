@@ -226,7 +226,7 @@
 					</li> -->
 					<li>
 						<label>优先联系地址：</label>
-						<span>{{accepCusBasicInfo.priorityContactAddress}}</span>
+						<span>{{accepCusBasicInfo.priorityContactAddressTxt}}</span>
 					</li>
 				</ul>
 				<ul>

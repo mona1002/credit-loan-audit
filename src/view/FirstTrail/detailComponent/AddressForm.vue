@@ -89,7 +89,7 @@
       </div>
       <div class="content-ul">
         <li class="item-column3">
-          <div class="left-title"><span class="require-icon" style="left:-5px;">*</span>三方查询是否异常：</div>
+          <div class="left-title"><span class="require-icon" style="left:0px;">*</span>三方查询是否异常：</div>
           <!-- <div> -->
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <el-select v-model="threeQueries">

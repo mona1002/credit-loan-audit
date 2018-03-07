@@ -38,6 +38,8 @@
       <el-button icon="el-icon-check-start" class="credit-btn" @click="coverFn('fqz')">发起反欺诈</el-button>
       <el-button icon="el-icon-check-spjl" class="credit-btn" @click="coverFn('spjl')">审批结论轨迹</el-button>
       <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('lcgj')">流程轨迹</el-button>
+      <el-button icon="el-icon-check-big-data" class="credit-btn" @click="">大数据风控</el-button>
+      <el-button icon="el-icon-check-social" class="credit-btn" @click="">社保公积金</el-button>
     </div>
     <!-- 弹窗 -->
     <!-- <div class="cover-view" v-show="coverShow"> -->
@@ -385,6 +387,9 @@
           <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalRecord">
           </el-pagination>
         </div>
+        <div class="back-form-li" style="text-align:right;padding:10px;">
+          <el-button plain @click="showFlag=0,coverShow=false;">返回</el-button>
+        </div>
       </div>
       <!-- 流程轨迹 -->
       <div v-show=" showFlag=='lcgj'" class="lcgj-div">
@@ -413,7 +418,7 @@
             </el-table-column>
             <el-table-column prop="approvalOpinionTxt" label="处理结论" min-width="100">
             </el-table-column>
-            <el-table-column prop="opinionExplain" label="意见说明" min-width="100" show-overflow-tooltip>
+            <el-table-column prop="opinionExplain" label="意见说明" min-width="200" show-overflow-tooltip>
             </el-table-column>
           </el-table>
         </div>
@@ -1196,7 +1201,7 @@ export default {
           this.coverShow = false;
           this.showFlag = 0;
           // this.taskId = '182525';
-          this.opinionFlag = '00';
+          // this.opinionFlag = '00';
           // 区分初审/终审
           if (this.judgeFlag == '01') {
             this.busiState = '04';
@@ -2510,11 +2515,12 @@ export default {
 .creditApproval-class .spjl-div {
   /*width: 80%;*/
   min-width: 500px;
-  height: 400px;
+  /*height: 400px;*/
+
   margin: 0 auto;
   /*margin-top: 250px;*/
   overflow: hidden;
-  padding: 10px;
+  /*padding: 10px;*/
   background: #fff;
   border-radius: 5px;
 }
@@ -2625,7 +2631,7 @@ export default {
   width: auto;
   height: 400px;
   margin: 0 auto;
-  margin-top: 250px;
+  margin-top: 200px;
   overflow: hidden;
 
   background: #fff;
@@ -3258,7 +3264,28 @@ export default {
 }
 
 
-
+/*大数据风控*/
+.creditApproval-class .el-icon-check-big-data {
+  background: url(../../../static/images/bigdata.png);
+  width: 30px;
+  height: 30px;
+  background-size: 30px;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
+  display: inline-block;
+}
+/*社保公积金*/
+.creditApproval-class .el-icon-check-social {
+  background: url(../../../static/images/social.png);
+  width: 30px;
+  height: 30px;
+  background-size: 30px;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
+  display: inline-block;
+}
 
 
 
@@ -3358,7 +3385,7 @@ export default {
 
 .creditApproval-class .el-dialog {
   width: 600px;
-  margin-top: 1vh !important;
+  /*margin-top: 1vh !important;*/
 }
 
 .creditApproval-class .el-dialog__header {
