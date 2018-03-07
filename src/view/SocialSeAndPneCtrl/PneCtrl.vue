@@ -1,7 +1,7 @@
 <template>
   <div class="PneCtrl">
       <!-- 大数据风控 -->
-    <!-- <myHead></myHead> -->
+    <myHead></myHead>
     <div class="outside">
       <div class="title">
         <ul>
@@ -10,8 +10,8 @@
       </div>
       <div class="wrap">
         <div class="content">
-          <RiskDecision v-if="ind==0"></RiskDecision>          
-          <BaiRongData v-if="ind==1"></BaiRongData>
+          <!-- <RiskDecision v-if="ind==0"></RiskDecision>           -->
+          <!-- <BaiRongData v-if="ind==1"></BaiRongData> -->
         </div>
       </div>
     </div>
@@ -19,8 +19,8 @@
 </template>
 <script>
   import myHead from '../header.vue'
-  import BaiRongData from './PneCtrl/BaiRongData.vue'
-  import RiskDecision from './PneCtrl/RiskDecision.vue'
+  // import BaiRongData from './PneCtrl/BaiRongData.vue'
+  // import RiskDecision from './PneCtrl/RiskDecision.vue'
   export default {
     data() {
       return {
@@ -35,8 +35,8 @@
     },
     components: {
       myHead,
-      BaiRongData,
-      RiskDecision
+      // BaiRongData,
+      // RiskDecision
     }
 
   }
