@@ -1239,7 +1239,8 @@ export default {
         rollbackNodeName: this.rollbackNodeName, // 回退节点名称
         dealroperDate: this.dealroperDate, // 经办时间
         creauditAppOperate: this.creauditAppOperate, // 操作类型
-        busiState: this.busiState
+        busiState: this.busiState,
+        applySubNo:this.applySubNo
       }).then(res => {
         console.log(res);
         console.log(this);
