@@ -1544,6 +1544,7 @@ height: 40px;
 
  .mheader .el-menu--horizontal {
    border-bottom: none;
+   /* background: pink; */
  }
 /* 如果没有子集，只有一级导航的情况下 */
  .mheader .el-menu--horizontal .el-menu-item{
@@ -1920,6 +1921,12 @@ height: 40px;
    line-height: 40px;
  }
 
+ .aAntiFraudInvestigation .el-table th{
+   font-weight: 400;
+   color: #1f2d3d;
+   font-size: 14px;
+ }
+
  .aAntiFraudInvestigation .el-collapse-item__arrow {
    line-height: 38px;
    margin-right: 14px;
@@ -1941,21 +1948,38 @@ height: 40px;
    overflow-x: hidden;
  }
 
- .aAntiFraudInvestigation .ElectroNuclear .el-table__body-wrapper .el-table__body td:nth-of-type(1),
- .aAntiFraudInvestigation .ElectroNuclear .el-table__body-wrapper .el-table__body td:nth-of-type(2) {
-   text-align: center;
+ .aAntiFraudInvestigation .el-collapse-item__header {
+   color: #1f2d3d;
+ }
+ 
+ .aAntiFraudInvestigation .ElectroNuclear .el-table__header-wrapper .el-table__header th:nth-of-type(1) .cell {
+   padding-left: 0 !important;
+   padding-right: 0 !important;
  }
 
+ .aAntiFraudInvestigation .tableDiv .el-table__header-wrapper .el-table__header th:nth-of-type(1) .cell {
+   padding-left: 0 !important;
+   padding-right: 0 !important;
+ }
+
+ .aAntiFraudInvestigation .ElectroNuclear .el-table__body-wrapper .el-table__body td:nth-of-type(1),
+ .aAntiFraudInvestigation .ElectroNuclear .el-table__body-wrapper .el-table__body td:nth-of-type(2) input{
+   text-align: center;
+ }
  .aAntiFraudInvestigation .ElectroNuclear .el-table__header-wrapper .el-table__header th:nth-of-type(1),
  .aAntiFraudInvestigation .ElectroNuclear .el-table__header-wrapper .el-table__header th:nth-of-type(2) {
    text-align: center;
  }
 
+ .aAntiFraudInvestigation .ElectroNuclear .el-table__header-wrapper .el-table__header th:nth-of-type(3) .cell,
+ .aAntiFraudInvestigation .ElectroNuclear .el-table__header-wrapper .el-table__header th:nth-of-type(4) .cell{
+   padding-left: 25px;
+ }
+
  .aAntiFraudInvestigation .tableDiv .el-table__body-wrapper .el-table__body td:nth-of-type(1) {
    text-align: center;
  }
-
- .aAntiFraudInvestigation .tableDiv .el-table__header-wrapper .el-table__header th:nth-of-type(1) {
+ .aAntiFraudInvestigation .tableDiv .el-table__header-wrapper .el-table__header th:nth-of-type(1){
    text-align: center;
  }
 

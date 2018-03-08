@@ -305,7 +305,7 @@
 					</li>
 					<li>
 						<label>是否同业贷：</label>
-						<span>{{tongyedai}}</span>
+						<span>{{accepCusBasicInfo.isInterBankLoanTxt}}</span>
 					</li>
 					<li></li>
 				</ul>
@@ -464,7 +464,7 @@
 					</li>
 				</ul>
 			</el-collapse-item>
-			<el-collapse-item name="5" v-if="accepCusBasicInfo.privateOwnerFlag=='1'">
+			<el-collapse-item name="5" v-if="accepCusBasicInfo.isInterBankLoan=='1'">
 		  		<template slot="title">
 			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
 			      <span class="headFont">同业贷情况</span>
@@ -959,8 +959,6 @@
 				judgeFlag:'',
 				//您的个人信息 投保地点
 				insurAddr:'',
-				//同业贷
-				tongyedai:''
 			};
 		},
 		mounted(){

@@ -18,14 +18,14 @@ axios.defaults.baseURL = appConstant.baseUrl_common;
 
 axios.defaults.withCredentials = true;
 
-axios.interceptors.response.use(  response => {    
+/*axios.interceptors.response.use(  response => {    
   if (response.data.statusCode == 900) {
     window.location.href = "http://testplatform.nuoyuan.com.cn/#/";    
   };    
   return response;  
 },   error => {
   return Promise.reject(error);  
-});
+});*/
 
 export default {
   install(Vue, options) {
