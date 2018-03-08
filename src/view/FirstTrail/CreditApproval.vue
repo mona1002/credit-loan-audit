@@ -1311,7 +1311,7 @@ export default {
       }
       this.post('/creauditOpinion/add', {
         applyId: this.applyId,
-        auditType: '00',
+        auditType: this.judgeFlag=='01'?'00':'01',
         proCode: this.proCode,
         verIncome: verIncome2,
         ploanAmt: ploanAmt2,
