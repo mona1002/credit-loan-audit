@@ -385,9 +385,9 @@ export default {
         "type": ''
       }]
 
-
-      // 反欺诈主管 请求 反欺诈专员信息
+      // 反欺诈主管 请求 反欺诈历史信息
       this.queryCreauditOpinionObj();
+
     }
 
     // 请求风险项
@@ -534,8 +534,7 @@ export default {
       }
 
       // 判断必填项
-      if (!this.auditResult) {
-        if (!this.mainReason || !this.secondReason || !this.auditDesc) {
+      if (!this.auditResult || !this.mainReason || !this.secondReason || !this.auditDesc) {
 
           this.$message({
             showClose: true,
@@ -543,7 +542,6 @@ export default {
             type: 'warning'
           });
           return;
-        }
       }
       // v-show="auditResult!='02'"
       // 风险项 为 排除风险 判断 必填
@@ -559,9 +557,13 @@ export default {
           return;
         }
       }
+
+      console.log('审批结论',this.auditResult)
+      console.log(this.auditResult);
       // 处理风险项
       if (this.auditResult != '02') {
-        if (this.riskSection) {
+        
+        if (this.riskSection.length>0) {
           console.log(this.riskSection);
           // 页面的选项值
           for (var i = 0; i < this.riskSection.length; i++) {
@@ -582,9 +584,14 @@ export default {
           console.log(this.riskSectionArr)
           // return;
         }
+
+
+        console.log('进入信息化')
         // 取出主原因name
         if (this.mainReason) {
-          for (let i = 0; i < this.mainReasons.lenth; i++) {
+          for (var i = 0; i < this.mainReasons.length; i++) {
+            console.log(this.mainReasons);
+            console.log(this.mainReasons[i].id,this.mainReason)
             if (this.mainReasons[i].id == this.mainReason) {
               this.mainReasonName = this.mainReasons[i].reasonName;
             }
@@ -611,7 +618,7 @@ export default {
         this.busiState = '31';
       }
 
-      // 专员的审批 相当于是主管的视频
+      // 专员的审批 相当于是主管的审批
       if (val == 'submit') {
         // 原来主管的审批 不变
         const h = this.$createElement;
@@ -672,6 +679,7 @@ export default {
             }
           }
         }).then(action => {
+          instance.confirmButtonLoading = false;
           this.$message({
             type: 'success',
             message: '反欺诈审批成功!'
@@ -679,6 +687,8 @@ export default {
           this.$router.push('/AntiFraud34');
         });
       } else {
+        // 专员的 提交  
+        this.busiState = '30';
         // 原来主管的审批 不变
         const h = this.$createElement;
         this.$msgbox({
@@ -1066,6 +1076,7 @@ export default {
           console.log(res);
           if (res.statusCode == '200') {
             this.mainReasons = res.data;
+            console.log
             if (TF == true) {
               console.log('主管 主原因');
               this.mainReason = this.mainReasonT;
@@ -1125,7 +1136,8 @@ export default {
           this.subreaName = res.data.subreaName;
 
           // 风险项 riskSection
-          this.riskSection = res.data.riskSection;
+          this.riskSection = res.data.riskSectionArr;
+
           // 反欺诈决策反馈
           this.auditDesc = res.data.auditDesc;
           // 案件编号

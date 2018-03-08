@@ -484,7 +484,7 @@ export default {
       processMoniSer
         .getProcessTraceList({
           processInstanceId: id,
-          processStatus: "01"
+          processStatus: this.routerState==="03"?"02":"01"
         })
         .then(res => {
           this.traceList = res.data.taskDetailList;

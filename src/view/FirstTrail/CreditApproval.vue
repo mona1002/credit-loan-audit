@@ -1239,7 +1239,8 @@ export default {
         rollbackNodeName: this.rollbackNodeName, // 回退节点名称
         dealroperDate: this.dealroperDate, // 经办时间
         creauditAppOperate: this.creauditAppOperate, // 操作类型
-        busiState: this.busiState
+        busiState: this.busiState,
+        applySubNo:this.applySubNo
       }).then(res => {
         console.log(res);
         console.log(this);
@@ -1284,7 +1285,10 @@ export default {
     // 保存审批信息
     saveCreaduit(val) {
       console.log("保存审批信息");
-
+      // 假如是终审 1
+      if(this.judgeFlag == '02'){
+        this.auditFlag = '1';
+      }
       let verIncome2 = 0;
       let ploanAmt2 = 0;
       if (/,/.test(this.verIncome))

@@ -309,69 +309,6 @@
 						<span>{{accepCusBasicInfo.isPayInsuranceTxt}}</span>
 					</li>
 				</ul>
-				<!-- <div v-if="accepCusBasicInfo.isPayInsurance=='1'">
-					<ul>
-						<li>
-							<label>保险公司名称：</label>
-							<span>{{accepCusBasicInfo.insurCompanyName}}</span>
-						</li>
-						<li>
-							<label class="selLabel">险种类型：</label>
-							<span>{{accepCusBasicInfo.insurTypeTxt}}</span>				
-						</li>
-						<li>
-						</li>
-					</ul>
-					<ul>
-						<li class="province" style="width:66.6%">
-							<label class="ellipsis">投保地点：</label>
-							<el-tooltip class="item" effect="dark" :content="insurAddr" :disabled="insurAddr==null" placement="top-start">
-						      <div class="textBox">{{insurAddr}}</div>
-						    </el-tooltip>
-						</li>
-						<li>	
-						</li>
-					</ul>
-					<ul>
-						<li>
-							<label>缴费方式：</label>
-							<span>{{accepCusBasicInfo.insurPayWayTxt}}</span>
-						</li>
-						<li>		
-							<label>缴费类别：</label>
-							<span>{{accepCusBasicInfo.insurPayCateTxt}}</span>	
-						</li>
-						<li></li>
-					</ul>
-					<ul>
-						<li>
-							<label>期缴保费[元]：</label>
-							<span>{{accepCusBasicInfo.eachPayAmt}}</span>
-						</li>
-						<li>
-							<label>总保额：</label>
-							<span>{{accepCusBasicInfo.totalPayAmt}}</span>				
-						</li>
-						<li>
-							<label>需缴费年数[月]：</label>
-							<span>{{accepCusBasicInfo.payPeriod}}</span>
-						</li>
-					</ul>
-					<ul>
-						<li>
-							<label>被保人姓名：</label>
-							<span>{{accepCusBasicInfo.insurerName}}</span>
-						</li>
-						<li>
-							<label>被保人联系电话：</label>
-							<span>{{accepCusBasicInfo.insurerTel}}</span>			
-						</li>
-						<li>
-							<label>生效日期：</label>
-							<span>{{accepCusBasicInfo.insurEffectDate}}</span>	
-						</li>
-					</ul>
-				</div> -->
 				<ul>
 					<li>
 						<label>是否是私营业主：</label>
@@ -587,46 +524,53 @@
 			      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
 			      <span class="headFont">保险信息</span>
 				</template>
-				<ul>
-						<li style="width:100%;">
-							<label>保险公司：</label>
-							<span>{{accepCusBasicInfo.insurCompanyName}}</span>
-						</li>
-						
-					</ul>
-					<ul>
-						<li>
-							<label class="selLabel">保险类型：</label>
-							<span>{{accepCusBasicInfo.insurTypeTxt}}</span>				
-						</li>
-						<li>
-							<label>缴费方式：</label>
-							<span>{{accepCusBasicInfo.insurPayWayTxt}}</span>
-						</li>
-						<li></li>
-					</ul>
-					<ul>
-						<li>
-							<label>期缴保费金额[元]：</label>
-							<span>{{accepCusBasicInfo.eachPayAmt}}</span>
-						</li>
-						<li>
-							<label>保单总额[元]：</label>
-							<span>{{accepCusBasicInfo.totalPayAmt}}</span>				
-						</li>
-						<li>
-							<label>缴纳年限[月]：</label>
-							<span>{{accepCusBasicInfo.payPeriod}}</span>
-						</li>
-					</ul>
-					<ul>
-						<li>
-							<label>生效日期：</label>
-							<span>{{accepCusBasicInfo.insurEffectDate}}</span>	
-						</li>
-						<li></li>
-						<li></li>
-					</ul>
+				<el-table
+			      :data="accepCusInsurances"
+			      style="width: 100%"
+			      border
+			      class="insur">
+			      <el-table-column
+			        type="index"
+			      	:index='1'
+			      	label="序号"
+			      	min-width="50" >
+			      </el-table-column>
+			      <el-table-column
+			        prop="insurCompanyName"
+			        label="保险公司"
+			        min-width="120">
+			      </el-table-column>
+			      <el-table-column
+			        prop="insurTypeTxt"
+			        label="保险类型"
+			        min-width="120">
+			      </el-table-column>
+			      <el-table-column
+			        prop="insurPayWayTxt"
+			        label="缴费方式"
+			        min-width="100">
+			      </el-table-column>
+			      <el-table-column
+			        prop="eachPayAmt"
+			        label="期缴保费金额[元]"
+			        min-width="120">
+			      </el-table-column>
+			      <el-table-column
+			        prop="totalPayAmt"
+			        label="保单总额[元]"
+			        min-width="120">
+			      </el-table-column>
+			      <el-table-column
+			        prop="payPeriod"
+			        label="缴纳年限[月]"
+			        min-width="120">
+			      </el-table-column>
+			      <el-table-column
+			        prop="insurEffectDate"
+			        label="生效日期"
+			        min-width="120">
+			      </el-table-column>
+			    </el-table>	
 			</el-collapse-item>
 			<el-collapse-item name="7">
 				<template slot="title">
@@ -1134,6 +1078,9 @@
 				/*同业贷情况*/
 				accepCusInterBankLoan:'',
 
+				/*保险信息*/
+				accepCusInsurances:[],
+
 				/*您的工作信息*/
 				accepCusWorkInfo:'',
 
@@ -1307,14 +1254,6 @@
 		        	if(this.accepCusBasicInfo.cardMaxAmt != null){
 			        	this.accepCusBasicInfo.cardMaxAmt = this.formatNumber(this.accepCusBasicInfo.cardMaxAmt,2,0);
 			        };
-		        	//期缴保费
-		        	if(this.accepCusBasicInfo.eachPayAmt != null){
-			        	this.accepCusBasicInfo.eachPayAmt = this.formatNumber(this.accepCusBasicInfo.eachPayAmt,2,0);
-			        };
-		        	//总保额
-		        	if(this.accepCusBasicInfo.totalPayAmt != null){
-		        		this.accepCusBasicInfo.totalPayAmt = this.formatNumber(this.accepCusBasicInfo.totalPayAmt,2,0);	
-		        	};
 		        	//户口所在地
 		        	this.accepCusBasicInfo.homeDetailAddr = this.accepCusBasicInfo.homeDetailAddr.replace(reg,'');
 		        	//现住宅地址
@@ -1391,6 +1330,24 @@
 			    	
 			    	
 		    	};
+		    	//同业贷情况
+		    	if(res.data.accepCusInterBankLoan){
+		    		this.accepCusInterBankLoan = res.data.accepCusInterBankLoan; 
+		    	};
+		    	//保险信息
+		    	if(res.data.accepCusInsurances){
+		    		this.accepCusInsurances = res.data.accepCusInsurances; 
+		    		//期缴保费
+		        	if(this.accepCusInsurances.eachPayAmt != null){
+			        	this.accepCusInsurances.eachPayAmt = this.formatNumber(this.accepCusInsurances.eachPayAmt,2,0);
+			        };
+		        	//总保额
+		        	if(this.accepCusInsurances.totalPayAmt != null){
+		        		this.accepCusInsurances.totalPayAmt = this.formatNumber(this.accepCusInsurances.totalPayAmt,2,0);	
+		        	};
+		    	}else{
+		    		this.accepCusInsurances = this.accepCusInsurances;
+		    	}
 		        /*您的工作信息*/
 		        if(res.data.accepCusWorkInfo==null){
 		        	this.accepCusWorkInfo=this.accepCusWorkInfo
@@ -1418,7 +1375,12 @@
 		        }
 
 		        /*联系人信息*/
-		        this.accepCusRelations=res.data.accepCusRelations;
+		        if(res.data.accepCusRelations){
+		        	this.accepCusRelations=res.data.accepCusRelations;
+		        }else{
+		        	this.accepCusRelations=this.accepCusRelations;
+		        };
+		        
 
 		        if(this.datas.sourcesChan=='00'){//00
 		            this.datas.sourcesChan="电销";
