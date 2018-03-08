@@ -557,24 +557,25 @@ export default {
           });
           return;
         }
+        // 专员 风险排除 审批 必填
+        if (this.auditResult == '02' && this.judgeFlag == '03') {
+          // 判断必填项  
+          if (!this.auditResult || !this.auditDesc) {
+
+            this.$message({
+              showClose: true,
+              message: '请输入必填项',
+              type: 'warning'
+            });
+            return;
+          }
+        }
       }
 
-      // 判断必填项
-      if (!this.auditResult || !this.mainReason || !this.secondReason || !this.auditDesc) {
+      if (this.auditResult != '02') {
+        // 判断必填项
+        if (!this.auditResult || !this.mainReason || !this.secondReason || !this.auditDesc) {
 
-        this.$message({
-          showClose: true,
-          message: '请输入必填项',
-          type: 'warning'
-        });
-        return;
-      }
-      // v-show="auditResult!='02'"
-      // 风险项 为 排除风险 判断 必填
-      console.log(this.auditResult);
-      if (this.auditResult == '02') {
-        if (!this.auditDesc) {
-          console.log.log('风险项')
           this.$message({
             showClose: true,
             message: '请输入必填项',
@@ -583,6 +584,7 @@ export default {
           return;
         }
       }
+      
 
       console.log('审批结论', this.auditResult)
       console.log(this.auditResult);
@@ -1228,6 +1230,8 @@ export default {
 
 
 
+
+
 /* 折叠面板头部背景色和icon */
 
 .approval-colun .icon_hat {
@@ -1238,6 +1242,8 @@ export default {
 .approval-colun .headFont {
   font-size: 16px;
 }
+
+
 
 
 
@@ -1270,6 +1276,8 @@ export default {
 
 
 
+
+
 /* 两列 */
 
 .approval-colun .item-column2 {
@@ -1277,6 +1285,8 @@ export default {
   float: left;
   margin: 0;
 }
+
+
 
 
 
@@ -1319,6 +1329,8 @@ export default {
 
 
 
+
+
 /* 3列 空位 */
 
 .approval-colun .item-column3-null {
@@ -1333,6 +1345,8 @@ export default {
   height: 30px;
   line-height: 30px;
 }
+
+
 
 
 
@@ -1371,6 +1385,8 @@ export default {
 
 
 
+
+
 /* 按钮集合控件 */
 
 .approval-colun .btn-div {
@@ -1378,6 +1394,8 @@ export default {
   width: 80%;
   float: left;
 }
+
+
 
 
 
@@ -1414,6 +1432,8 @@ export default {
 
 
 
+
+
 /*回退*/
 
 .approval-colun .el-icon-check-back {
@@ -1426,6 +1446,8 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
 
 
 
@@ -1462,6 +1484,8 @@ export default {
 
 
 
+
+
 /*放弃*/
 
 .approval-colun .el-icon-check-giveup {
@@ -1474,6 +1498,8 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
 
 
 
@@ -1510,6 +1536,8 @@ export default {
 
 
 
+
+
 /*流程轨迹*/
 
 .approval-colun .el-icon-check-lcgj {
@@ -1534,6 +1562,8 @@ export default {
 
 
 
+
+
 /* 反欺诈 审批结论 - btn*/
 
 .approval-colun .credit-btn {
@@ -1542,6 +1572,8 @@ export default {
   color: #333;
   border: none;
 }
+
+
 
 
 
@@ -1579,6 +1611,8 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
+
 
 
 
@@ -1642,11 +1676,15 @@ export default {
 
 
 
+
+
 /* textarea */
 
 .approval-colun .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
+
 
 
 
@@ -1687,6 +1725,8 @@ export default {
 
 
 
+
+
 /* 审批 表单 */
 
 .approval-colun .appro-form {
@@ -1711,6 +1751,8 @@ export default {
 
 
 
+
+
 /*.approval-colun .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -1718,6 +1760,8 @@ export default {
 .approval-colun .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
+
 
 
 
@@ -1769,11 +1813,15 @@ export default {
 
 
 
+
+
 /* 反欺诈 -- 审批结论 */
 
 .approval-colun .form-ul {
   padding-left: 30px;
 }
+
+
 
 
 
@@ -1821,11 +1869,15 @@ export default {
 
 
 
+
+
 /* 审批 label*/
 
 .approval-colun .appro-form .back-form-edit-li .el-form-item__label {
   width: 120px;
 }
+
+
 
 
 
@@ -1859,11 +1911,15 @@ export default {
 
 
 
+
+
 /* 两行文字 样式 */
 
 .approval-colun .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
+
 
 
 
@@ -1898,6 +1954,8 @@ export default {
 
 
 
+
+
 /* 详细 信息按钮*/
 
 .approval-colun .btn-detail {
@@ -1906,6 +1964,8 @@ export default {
   margin-top: 35px;
   margin-left: 10px;
 }
+
+
 
 
 
@@ -1943,6 +2003,8 @@ export default {
 
 
 
+
+
 /* 分页 */
 
 .approval-colun .tool-bar {
@@ -1962,11 +2024,15 @@ export default {
 
 
 
+
+
 /* 隐藏分页 */
 
 .approval-colun .el-pagination__jump {
   display: none;
 }
+
+
 
 
 
