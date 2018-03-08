@@ -12,21 +12,21 @@
             <li>
               <p>
                 <label>身份证：</label>
-                <!-- <b>{{parmaAndRisk.certCode}}</b> -->
+                <b>{{parmaAndRisk.certCode}}</b>
               </p>
               <p>
                 <label>手机号：</label>
-                <!-- <b>{{parmaAndRisk.mobile }}</b> -->
+                <b>{{parmaAndRisk.mobile }}</b>
               </p>
               <p>
                 <label>姓名：</label>
-                <!-- <b>{{parmaAndRisk.custName }}</b> -->
+                <b>{{parmaAndRisk.custName }}</b>
               </p>
             </li>
             <li>
               <p>
                 <label>联系人手机号：</label>
-                <!-- <b>{{parmaAndRisk.linkmanMobile }}</b> -->
+                <b>{{parmaAndRisk.linkmanMobile }}</b>
               </p>
             </li>
           </ul>
@@ -44,15 +44,15 @@
             <li>
               <p>
                 <label>策略集：</label>
-                <!-- <b>{{parmaAndRisk.policy_set_name }}</b> -->
+                <b>{{parmaAndRisk.policy_set_name }}</b>
               </p>
               <p>
                 <label>风险状态：</label>
-                <!-- <b>{{parmaAndRisk.final_decision }}</b> -->
+                <b>{{parmaAndRisk.final_decision }}</b>
               </p>
               <p>
                 <label>风险系数：</label>
-                <!-- <b>{{parmaAndRisk.final_score }}</b> -->
+                <b>{{parmaAndRisk.final_score }}</b>
               </p>
             </li>
           </ul>
@@ -91,83 +91,9 @@
     data() {
       return {
         localInf: null,
-        productID: null,
-        caseID: null,
-        parmaAndRisk: null,
+        parmaAndRisk: {},
         activeNames: ['1', "2", "3"],
-        tableData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }]
+        tableData: []
       }
     },
     mounted() {
@@ -185,77 +111,17 @@
       } else if (this.judgeFlag.flag == '06') {
         this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议经理
       }
-      // console.log(this.localInf)
-      // 
-      //  this.post(baseurl + '/rmCreAuditOpinionAction!notSession_getBrTabInfo.action', {
-       this.post('http://10.1.26.10:8080/baseCredit/rm/rmCreAuditOpinionAction!notSession_getBrTabInfo.action?applyId=a75f1934-bf4b-435a-bcbd-454cf94442ce', {
-         
-                   applyId:this.localInf.applyId
-                  }).then(res => {
-                    console.log(res)
-                    // if (res.success == true) {
-                    //   this.tableData = res.obj.rows;
-                    //   console.log( this.tableData )
-                    // }
-                  });
-
-
-//       // “百融记录调用查询接口”
-//       this.post(baseurl +
-//         '/rmCreAuditOpinionAction!notSession_getBrRecord.action?applyId=b14455f1-5531-4cf2-883b-f6dc0049e3bb', {
-//           // applyId: this.localInf.applyId,     
-//           // applyId:'b14455f1-5531-4cf2-883b-f6dc0049e3bb'   
-//         }).then(res => {
-//         console.log(res)
-//         if (res.success == true) {
-//           this.productID = res.obj;
-//           // console.log( this.productID )
-//           if (this.productID) {
-//             // =======================================================
-//             console.log("同盾风险决策服务响应数据查询--输入参数+风险详情")
-//             this.post(baseurl + '/rmCreAuditOpinionAction!notSession_getTdFraudApiResponse.action?requestId=e6e78dcb-0752-4e2d-b9b3-42d1d7535b44', {
-//               // requestId: this.productID,
-//               // requestId: "e6e78dcb-0752-4e2d-b9b3-42d1d7535b44"
-//             }).then(res => {
-//               console.log(res)
-//               if (res.success == true) {
-//                 this.parmaAndRisk = res.obj;
-//                 this.caseID = res.obj.id
-// //  if (this.caseID) {
-//                   // ------------------------------------------
-//                   console.log("同盾命中规则查询")
-//                   this.post(baseurl + '/rmCreAuditOpinionAction!notSession_getTdPolicyRules.action?tdResponseId=1517881314275724T0B55168A3596131', {
-//                     // tdResponseId: this.caseID,
-//                     // tdResponseId:"1477532710850326F313512DA9061430",
-//                   }).then(res => {
-//                     console.log(res)
-//                     if (res.success == true) {
-//                       this.tableData = res.obj.rows;
-//                       console.log( this.tableData )
-//                     }
-//                   });
-//                   // -----------------------------------------------------
-// //  }
-//               } else {
-//                 this.$message.error(res.msg);
-//               }
-//             });
-//             // ================================================================
-//           }
-//         } else {
-//           this.$message.error(res.msg);
-//         }
-//       });
-
-      //     this.get("/credit/queryCityCounty", {
-      //   parentCode: this.checkData.workProvince,
-      // }).then(res => {
-      //   if (res.statusCode == 200) {
-
-      //   } else {
-      //     this.$message.error('查询失败');
-      //   }
-      // })
+      this.post(baseurl + '/rmCreAuditOpinionAction!notSession_getTdTabInfo.action', {
+        //  applyId:'b14455f1-5531-4cf2-883b-f6dc0049e3bb'
+        applyId: this.localInf.applyId
+      }).then(res => {
+        if (res.success) {
+          this.parmaAndRisk = res.obj.tdResponsec;
+          this.tableData = res.obj.rules.rows;
+        } else {
+          this.$message.error(res.msg);
+        }
+      });
     }
   }
 
@@ -288,17 +154,15 @@
     text-align: right;
   }
 
+  .SSComp b {
+    display: inline-block;
+    width: calc(100% - 120px);
+  }
+
   .tab_wrap {
     margin: 10px;
     border-radius: 4px;
-
     overflow-x: hidden;
-    /* border: 1px solid red; */
-  }
-
-  .tes {
-    /* max-height: 500px; */
-    /* border: 3px solid green; */
   }
 
 </style>
