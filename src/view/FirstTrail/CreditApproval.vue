@@ -1285,7 +1285,10 @@ export default {
     // 保存审批信息
     saveCreaduit(val) {
       console.log("保存审批信息");
-
+      // 假如是终审 1
+      if(this.judgeFlag == '02'){
+        this.auditFlag = '1';
+      }
       let verIncome2 = 0;
       let ploanAmt2 = 0;
       if (/,/.test(this.verIncome))
