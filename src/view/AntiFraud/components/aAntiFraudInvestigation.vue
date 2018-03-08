@@ -160,7 +160,7 @@
 				      <el-table-column
 				        prop="phoneNum"
 				        label="手机号码"
-				        min-width="110">
+				        min-width="80">
 				        <template slot-scope="scope">
 				        	<el-input v-model="scope.row.phoneNum" placeholder="请输入内容" @blur="regPhone(scope.row)" :disabled="scope.row.isInitFlag=='0'"></el-input>
 				        </template>
@@ -168,7 +168,7 @@
 				      <el-table-column
 				        prop="relation"
 				        label="关系"
-				        min-width="100">
+				        min-width="80">
 				        <template slot-scope="scope">
 				        	<el-input v-model="scope.row.relation" placeholder="请输入内容" :disabled="scope.row.isInitFlag=='0'"></el-input>
 				        </template>
@@ -176,7 +176,7 @@
 				      <el-table-column
 				        prop="record"
 				        label="记录录入"
-				        min-width="100">
+				        min-width="150">
 				        <template slot-scope="scope">
 				        	<el-input v-model="scope.row.record" placeholder="请输入内容"></el-input>
 				        </template>
@@ -467,7 +467,7 @@
 		 		event.stopPropagation();
 		 		console.log(this.currentRow);
 				for(var i=0;i<this.fraudTelCheckList.length;i++){
-					if(this.fraudTelCheckList[i]==this.currentRow){
+					if(this.fraudTelCheckList[i]==this.currentRow && this.fraudTelCheckList[i].isInitFlag == '1'){
 						this.fraudTelCheckList.splice(i,1);
 					}
 				}
@@ -721,6 +721,7 @@
 		width: 150px;
 		display: inline-block;
 		float: left;
+		height: 75px;
 		line-height: 75px;
 		text-align: right;
 		padding-top: 20px;

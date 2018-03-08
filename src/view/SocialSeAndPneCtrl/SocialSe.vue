@@ -1,6 +1,6 @@
 <template>
   <div class="SocialSe">
-      <!-- 大数据风控 -->
+    <!-- 大数据风控 -->
     <myHead></myHead>
     <div class="outside">
       <div class="title">
@@ -10,8 +10,8 @@
       </div>
       <div class="wrap">
         <div class="content">
-          <!-- <SocialSeComponents v-if="ind==0"></SocialSeComponents> -->
-          <!-- <AccumulationFund v-if="ind==1"></AccumulationFund> -->
+          <SocialSeComponents v-if="ind==0"></SocialSeComponents>
+          <AccumulationFund v-if="ind==1"></AccumulationFund>
         </div>
       </div>
     </div>
@@ -19,8 +19,8 @@
 </template>
 <script>
   import myHead from '../header.vue'
-  // import SocialSeComponents from './SocialSeComponents/SocialSecurity.vue'
-  // import AccumulationFund from './SocialSeComponents/AccumulationFund.vue'
+  import SocialSeComponents from './SocialSeComponents/SocialSecurity.vue'
+  import AccumulationFund from './SocialSeComponents/AccumulationFund.vue'
   export default {
     data() {
       return {
@@ -35,8 +35,8 @@
     },
     components: {
       myHead,
-      // SocialSeComponents,
-      // AccumulationFund
+      SocialSeComponents,
+      AccumulationFund
     }
 
   }
@@ -84,9 +84,11 @@
   .title li:hover {
     cursor: pointer;
   }
-.wrap{
-    height: calc(100% - 48px);  
-}
+
+  .wrap {
+    height: calc(100% - 48px);
+  }
+
   .content {
     height: 100%;
     overflow: auto;

@@ -740,7 +740,7 @@
 		        approvalFlag: '0', // 终审通过标志  0 未
 		        ploanDate: '', // 批准日期
 		        auditDate: '', // 批准时间
-		        auditFlag: '0', // 终审结束标识 0 初审 1终审 , 只有 终审 点审批的时候 才变为1 , 同 approvalFlag 字段
+		        auditFlag: '1', // 终审结束标识 0 初审 1终审 , 只有 终审 点审批的时候 才变为1 , 同 approvalFlag 字段
 		        proId: this.proId, //产品id
 		        taskId: this.taskId, // 任务id
 		        opinionFlag:'00', // 任务类型  初审 00 
