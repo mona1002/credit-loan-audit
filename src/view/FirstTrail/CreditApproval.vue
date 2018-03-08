@@ -520,7 +520,7 @@ export default {
       taskInWaitting: '', // 
       userInfo: '', // 登录信息
       // 审批
-      loanAmt: '', // 批准金额
+      loanAmt: '', // 申请金额
       loanTerm: '', // 申请期限
       sqproName: '', // 申请信息-申请产品
       eachTermAmt: '', // 可接受最高每期还款额
@@ -1684,8 +1684,9 @@ export default {
             this.ploanAmt = '';
             return;
           }
+
           // 大于申请金额
-          if (this.ploanAmt2 > this.loanAmt) {
+          if (this.ploanAmt2 > Number(this.loanAmt.split('.')[0].replace(',',''))) {
             // this.ploanAmtError = true;
             this.$message({
               showClose: true,
