@@ -274,8 +274,8 @@
           <div class="back-form-li radio-li">
             <el-form-item label="结论：">
               <!-- <el-radio-group v-model="applyConclusion"> -->
-              <el-radio label="00" value='00' v-model="applyConclusion">同意</el-radio>
-              <el-radio label="03" value='03' v-model="applyConclusion" v-show="judgeFlag=='02'">请求更高级审批</el-radio>
+              <el-radio label="00" value='00' v-model="opinionFlag">同意</el-radio>
+              <el-radio label="03" value='03' v-model="opinionFlag" v-show="judgeFlag=='02'">请求更高级审批</el-radio>
               <!-- </el-radio-group> -->
             </el-form-item>
           </div>
@@ -520,7 +520,7 @@ export default {
       taskInWaitting: '', // 
       userInfo: '', // 登录信息
       // 审批
-      loanAmt: '', // 批准金额
+      loanAmt: '', // 申请金额
       loanTerm: '', // 申请期限
       sqproName: '', // 申请信息-申请产品
       eachTermAmt: '', // 可接受最高每期还款额
@@ -668,14 +668,14 @@ export default {
     this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
     //  this.opinionFlag  初审终审标志  
     if (this.judgeFlag == '01') {
-      this.opinionFlag = '01';
+      // this.opinionFlag = '01';
       this.options = [{
         "label": "申请登记",
         "value": "creditApp_apply",
         "type": "01"
       }]
     } else if (this.judgeFlag == '02') {
-      this.opinionFlag = '02'; // 终审
+      // this.opinionFlag = '02'; // 终审
       this.options = [{
           "label": "申请登记",
           "value": "creditApp_apply",
@@ -1036,6 +1036,8 @@ export default {
       this.dealroperCode = this.dealroperCode;
       switch (flag) {
         case '01':
+          // 人工拒绝 01
+          // this.opinionFlag = '01';
           console.log("拒绝");
           // 必填校验
           // 主原因
@@ -1069,6 +1071,8 @@ export default {
           this.approvalFn();
           break;
         case '02':
+          // 人工回退 02
+          // this.opinionFlag = '02';
           console.log("回退");
           // 进行必填校验
           // 回退节点
@@ -1114,6 +1118,8 @@ export default {
 
         case '07':
           console.log("放弃");
+          // 客户放弃  07
+          // this.opinionFlag = '07';
           // 主原因
           if (!this.mainReason) {
             this.$message({
@@ -1145,6 +1151,7 @@ export default {
           break;
         case '03':
           console.log("审批");
+
           // 校验必填项
           // 假如没有  核实可接受最高每期还款额 , 提示
           console.log(this.quotaData.fbalance);
@@ -1239,7 +1246,8 @@ export default {
         rollbackNodeName: this.rollbackNodeName, // 回退节点名称
         dealroperDate: this.dealroperDate, // 经办时间
         creauditAppOperate: this.creauditAppOperate, // 操作类型
-        busiState: this.busiState
+        busiState: this.busiState,
+        applySubNo:this.applySubNo
       }).then(res => {
         console.log(res);
         console.log(this);
@@ -1284,7 +1292,10 @@ export default {
     // 保存审批信息
     saveCreaduit(val) {
       console.log("保存审批信息");
-
+      // 假如是终审 1
+      if(this.judgeFlag == '02'){
+        this.auditFlag = '1';
+      }
       let verIncome2 = 0;
       let ploanAmt2 = 0;
       if (/,/.test(this.verIncome))
@@ -1673,8 +1684,9 @@ export default {
             this.ploanAmt = '';
             return;
           }
+
           // 大于申请金额
-          if (this.ploanAmt2 > this.loanAmt) {
+          if (this.ploanAmt2 > Number(this.loanAmt.split('.')[0].replace(',',''))) {
             // this.ploanAmtError = true;
             this.$message({
               showClose: true,

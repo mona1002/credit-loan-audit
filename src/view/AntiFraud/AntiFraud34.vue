@@ -226,6 +226,9 @@ export default {
     var judgeFlag = JSON.parse(localStorage.getItem('judge'));
     this.antiFlag = judgeFlag.flag;
     console.log(this.antiFlag);
+
+    // 删除 审批结论存到本地的数据
+    localStorage.removeItem('saveInsertObj');
     // 根据  antiFlag 判断
     // 初审-信审审批-发起反欺诈
     if (this.antiFlag == '03' || this.antiFlag == '04') {
