@@ -6,21 +6,21 @@
     <div class="keywordContainer">
       <el-row class="row row1"  type="flex">
         <el-col :span="8" :offset="0">
-          <span class="keywordText">客户姓名</span><el-input @keyup.enter.native="getByKey" v-model.trim="queryParam.custName_la" placeholder="请输入客户姓名"></el-input>
+          <span class="keywordText">客户姓名</span><el-input @keyup.enter.native="getByKey" v-model.trim="custName_la" placeholder="请输入客户姓名"></el-input>
         </el-col>
         <el-col :span="8">
-          <span class="keywordText">证件号码</span><el-input @keyup.enter.native="getByKey" v-model.trim="queryParam.certCode" placeholder="请输入证件号码"></el-input>
+          <span class="keywordText">证件号码</span><el-input @keyup.enter.native="getByKey" v-model.trim="certCode" placeholder="请输入证件号码"></el-input>
         </el-col>
         <el-col :span="8">
-          <span class="keywordText">进件编号</span><el-input @keyup.enter.native="getByKey" v-model.trim="queryParam.applySubNo" placeholder="请输入进价编号"></el-input>
+          <span class="keywordText">进件编号</span><el-input @keyup.enter.native="getByKey" v-model.trim="applySubNo" placeholder="请输入进价编号"></el-input>
         </el-col>
       </el-row>
       <el-row class="row row2"  type="flex">
         <el-col :span="8">
-          <span class="keywordText">进件机构</span><el-input @keyup.enter.native="getByKey" v-model.trim="queryParam.appOrgCode" placeholder="请输入进件机构"></el-input>
+          <span class="keywordText">进件机构</span><el-input @keyup.enter.native="getByKey" v-model.trim="appOrgCode" placeholder="请输入进件机构"></el-input>
         </el-col>
         <el-col :span="8">
-          <span class="keywordText">产品名称</span><el-select v-model="queryParam.proId" placeholder="请选择产品名称">
+          <span class="keywordText">产品名称</span><el-select v-model="proId" placeholder="请选择产品名称">
             <p style="height: 34px;line-height: 34px;padding: 0 20px;font-size: 14px;background: #eee;">
               <span style="width:66px;display:inline-block;">产品代码</span><span style="margin-left: 20px">产品名称</span>
             </p>
@@ -35,7 +35,7 @@
           </el-select>
         </el-col>
         <el-col :span="8">
-          <span class="keywordText">任务节点</span><el-select v-model="queryParam.taskNodeName" placeholder="请选择">
+          <span class="keywordText">任务节点</span><el-select v-model="taskNodeName" placeholder="请选择">
             <el-option
               v-for="item in taskNodes"
               :key="item.value"
@@ -47,7 +47,7 @@
       </el-row>
       <el-row class="row row3"  type="flex">
         <el-col :span="8" v-if="routerState!=='03'">
-          <span class="keywordText">任务类型</span><el-select v-model="queryParam.taskType" placeholder="请选择">
+          <span class="keywordText">任务类型</span><el-select v-model="taskType" placeholder="请选择">
             <el-option
               v-for="item in taskTypes"
               :key="item.value"
@@ -57,7 +57,7 @@
           </el-select>
         </el-col>
         <el-col :span="8">
-          <span class="keywordText">当前处理人员</span><el-input @keyup.enter.native="getByKey" v-model.trim="queryParam.operatorCode" placeholder="请输入当前处理人员"></el-input>
+          <span class="keywordText">当前处理人员</span><el-input @keyup.enter.native="getByKey" v-model.trim="operatorCode" placeholder="请输入当前处理人员"></el-input>
         </el-col>
         <el-col :span="8" v-if="routerState!=='03'">
           <el-button class="btn reset" @click="reset">重置</el-button><el-button class="btn query" type="primary" @click="getByKey">查询</el-button>
@@ -362,6 +362,15 @@ export default {
         pageSize: 10,
       },
 
+      custName_la: '',
+      certCode: '',
+      applySubNo: '',
+      appOrgCode: '',
+      proId: '',
+      taskNodeName: '',
+      taskType: '',
+      operatorCode: '',
+
 
       dialogTraceVisible: false,//流程轨迹
       dialogAssignVisible: false,//任务分派
@@ -438,11 +447,13 @@ export default {
 
     // 查询经营产品
     getProductForUser(orgId){
-      this.post('http://10.1.26.200:20717/base/product/getProductForUser',{
-        orgId: this.userInf.orgId,
-        validFlag: '1'
+      this.post('http://10.1.26.200:20717/remote/product/getProductForUser',{
+        data:{
+          orgId: this.userInf.orgId,
+          validFlag: '1'
+        }
       }).then(res => {
-        this.products = res.data;
+        this.proNames = res.data;
       })
     },
 
@@ -472,6 +483,16 @@ export default {
 
     //查询流程监控
     getProcessMonitorList(){
+
+      this.queryParam.custName_la = this.custName_la;
+      this.queryParam.certCode = this.certCode;
+      this.queryParam.applySubNo = this.applySubNo;
+      this.queryParam.appOrgCode = this.appOrgCode;
+      this.queryParam.proId = this.proId;
+      this.queryParam.taskNodeName = this.taskNodeName;
+      this.queryParam.taskType = this.taskType;
+      this.queryParam.operatorCode = this.operatorCode;
+
       processMoniSer
         .getProcessMonitorList(this.queryParam)
         .then(res => {
@@ -503,20 +524,34 @@ export default {
 
     // 查询按钮
     getByKey() {
+
       this.getProcessMonitorList(this.queryParam);
     },
 
     // 重置按钮
     reset() {
-      this.queryParam.custName_la = '';
-      this.queryParam.certCode = '';
-      this.queryParam.applySubNo = '';
-      this.queryParam.appOrgCode = '';
-      this.queryParam.proId = '';
-      this.queryParam.taskNodeName = '';
-      this.queryParam.taskType = '';
-      this.queryParam.operatorCode = '';
-      this.getProcessMonitorList(this.queryParam);
+      this.custName_la = '';
+      this.certCode = '';
+      this.applySubNo = '';
+      this.appOrgCode = '';
+      this.proId = '';
+      this.taskNodeName = '';
+      this.taskType = '';
+      this.operatorCode = '';
+      this.queryParam.custName_la = "";
+      this.queryParam.certCode = "";
+      this.queryParam.applySubNo = "";
+      this.queryParam.appOrgCode = "";
+      this.queryParam.proId = "";
+      this.queryParam.taskNodeName = "";
+      this.queryParam.taskType = "";
+      this.queryParam.operatorCode = "";
+      processMoniSer
+        .getProcessMonitorList(this.queryParam)
+        .then(res => {
+          this.responseDatas = res.data;
+          this.moniList = this.responseDatas.taskDetailList;
+        })
     },
 
     // 每页条数变化时，重新请求
@@ -834,7 +869,7 @@ export default {
   padding: 0;
 }
 .processMoni .keywordContainer .el-input{
-  width: initial;
+  width: 258px;
 }
 
 /* 必填项小星星上下居中对齐 */
