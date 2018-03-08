@@ -47,7 +47,7 @@
             <el-option label="拒接" value="01"></el-option>
             <el-option label="停机" value="02"></el-option>
             <el-option label="空号" value="03"></el-option>
-            <el-option label="接通" value="4"></el-option>
+            <el-option label="接通" value="04"></el-option>
           </el-select>
         </el-tooltip>
         <!-- </div> -->

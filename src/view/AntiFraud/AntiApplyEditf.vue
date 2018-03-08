@@ -154,7 +154,7 @@ export default {
       mainReasons: [],
       secondReasons: [],
       antiFlag: '', // 标志
-      busiState:'', // 状态
+      busiState: '', // 状态
     }
   },
   mounted() {
@@ -321,6 +321,21 @@ export default {
     // },
     submitForm() {
       console.log('提交反欺诈')
+
+      if (!this.mainId || !this.mainReason) {
+        this.$message({
+          message: "提示：请选择主原因!",
+          type: 'warning'
+        });
+        return;
+      }
+      if(!this.applyDesc){
+        this.$message({
+          message:"提示：请填写欺诈上报描述!",
+          type:'warning'
+        });
+        return;
+      }
       const h = this.$createElement;
       this.$msgbox({
         title: '提示',
@@ -364,7 +379,7 @@ export default {
                   channel: this.channel, // 渠道
                   certCode: this.certCode, // 证件号码
                   proName: this.proName, // 产品名称
-                  busiState:this.busiState, // 状态
+                  busiState: this.busiState, // 状态
                 }
               })
               .then(res => {
@@ -411,7 +426,7 @@ export default {
       });
     },
     // 返回  上级路由
-    backRoute(){
+    backRoute() {
       window.history.go(-1);
     },
     // 主原因改变
@@ -470,6 +485,7 @@ export default {
 
 
 
+
 /* 一列 */
 
 .anti-apply-edit-class .item-column1 {
@@ -478,6 +494,7 @@ export default {
   float: left;
   /*max-width: 1366px;*/
 }
+
 
 
 
@@ -530,6 +547,7 @@ export default {
 
 
 
+
 /* 三列 */
 
 .anti-apply-edit-class .item-column3 {
@@ -541,6 +559,7 @@ export default {
   /*border: 1px solid;*/
   /*min-width: 300px;*/
 }
+
 
 
 
@@ -652,6 +671,7 @@ export default {
 
 
 
+
 /* 必填 * */
 
 .anti-apply-edit-class .require-icon {
@@ -684,6 +704,7 @@ export default {
 
 
 
+
 /* 提交按钮 */
 
 .anti-apply-edit-class .submit-class {
@@ -692,6 +713,7 @@ export default {
   width: calc(66% - 500px);
   text-align: right;
 }
+
 
 
 

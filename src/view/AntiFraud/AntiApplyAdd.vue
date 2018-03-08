@@ -394,14 +394,29 @@ export default {
       console.log('提交反欺诈')
 
       // 判断必填
-      if(!this.mainReason || !this.secondReason || !this.applyDesc){
+      if(!this.applySubno){
         this.$message({
-            showClose: true,
-            message: '请输入必填项',
-            type: 'warning'
-          });
-          return;
+          message:"提示：请选择进件!",
+          type:'warning'
+        })
+        return;
       }
+      if (!this.mainId || !this.mainReason) {
+        this.$message({
+          message: "提示：请选择主原因！",
+          type: 'warning'
+        });
+        return;
+      }
+      if(!this.applyDesc){
+        this.$message({
+          message:"提示：请填写欺诈上报描述!",
+          type:'warning'
+        });
+        return;
+      }
+
+
 
       const h = this.$createElement;
       this.$msgbox({
