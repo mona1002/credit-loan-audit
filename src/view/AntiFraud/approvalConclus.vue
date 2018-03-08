@@ -64,7 +64,7 @@
         </div>
       </li>
       <!-- item-column3-2 -->
-      <li class="item-column1 item-column3-2" v-show="auditResult!='02'">
+      <li class="item-column1 item-column3-2 risk-select" v-show="auditResult!='02' && riskSection.length>1">
         <!-- <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:5px;font-weight:bold;">*</span> -->
         <div class="left-title">
           风险项：
@@ -72,7 +72,21 @@
         <div>
           <!-- @change="selectChangeRisk" multiple    class="muti-select"   -->
           <!-- <el-select v-model="riskSection" multiple collapse-tags class="muti-select"> -->
-          <el-select v-model="riskSection" multiple placeholder="请选择" class="muti-select">
+          <el-select v-model="riskSection" multiple collapse-tags placeholder="请选择" class="muti-select">
+            <el-option v-for="item in riskSections" :key="item.enumCode" :label="item.showMsg" :value="item.showMsg">
+            </el-option>
+          </el-select>
+        </div>
+      </li>
+      <li class="item-column1 item-column3-2" v-show="auditResult!='02' && riskSection.length<2">
+        <!-- <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:5px;font-weight:bold;">*</span> -->
+        <div class="left-title">
+          风险项：
+        </div>
+        <div>
+          <!-- @change="selectChangeRisk" multiple    class="muti-select"   -->
+          <!-- <el-select v-model="riskSection" multiple collapse-tags class="muti-select"> -->
+          <el-select v-model="riskSection" multiple collapse-tags placeholder="请选择" class="muti-select">
             <el-option v-for="item in riskSections" :key="item.enumCode" :label="item.showMsg" :value="item.showMsg">
             </el-option>
           </el-select>
@@ -306,9 +320,12 @@ export default {
       }], // 查看详情 数据
       pageNum: 1, // 页码
       pageSize: 10, // 每页容量
+      
     }
   },
   mounted() {
+
+
     // 取出  申请信息   applicationInformationDetail
     this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
     console.log(this.applicationInformationDetail);
@@ -584,7 +601,7 @@ export default {
           return;
         }
       }
-      
+
 
       console.log('审批结论', this.auditResult)
       console.log(this.auditResult);
@@ -1704,7 +1721,7 @@ export default {
   height: 0;
   color: none;
   border: none;
-  position: absolute;
+  /*position: absolute;*/
   right: 20px;
   top: 0;
 }
@@ -2086,9 +2103,13 @@ export default {
   margin: 3px 0 3px 6px;
   background-color: #f0f2f5;
   right: 0;
-  position: relative;
+  /*position: relative;*/
   height: auto;
   width: min-content;
+  width: ;
+}
+.approval-colun .muti-select .el-tag:nth-child(2){
+  width:30px;
 }
 
 .approval-colun .muti-select>.el-input {
@@ -2107,6 +2128,10 @@ export default {
 .approval-colun .muti-select .el-input--suffix .el-input__inner {
   height: auto;
   /*height: 100px;*/
+}
+
+.approval-colun .risk-select .el-input--suffix .el-input__inner {
+  height: 60px;
 }
 
 </style>
