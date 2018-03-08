@@ -1980,7 +1980,13 @@
         this.checkData.workCounty = item;
       },
       makeSureBtn() {
-        this.Confirm = true;
+        this.$validator.validateAll().then((result) => {
+          if (result) {
+            this.Confirm = true;
+          } else {
+            this.$message.error('提交失败，有必填项未填写！');
+          }
+        });
       },
       canc() {
         this.Confirm = false;
@@ -2285,28 +2291,39 @@
         }
       },
       btnnn() {
-        this.checkData.fbalance != null && this.checkData.fbalance.toString().indexOf(',') != -1 ? this.checkData.fbalance = this.checkData
+        this.checkData.fbalance != null && this.checkData.fbalance.toString().indexOf(',') != -1 ? this.checkData.fbalance =
+          this.checkData
           .fbalance.split(",").join('') : this.checkData.fbalance;
-        this.checkData.iloanAmt != null && this.checkData.iloanAmt.toString().indexOf(',') != -1 ? this.checkData.iloanAmt = this.checkData
+        this.checkData.iloanAmt != null && this.checkData.iloanAmt.toString().indexOf(',') != -1 ? this.checkData.iloanAmt =
+          this.checkData
           .iloanAmt.split(",").join('') : this.checkData.iloanAmt;
-        this.checkData.avgsalaryamt != null && this.checkData.avgsalaryamt.toString().indexOf(',') != -1 ? this.checkData.avgsalaryamt =
+        this.checkData.avgsalaryamt != null && this.checkData.avgsalaryamt.toString().indexOf(',') != -1 ? this.checkData
+          .avgsalaryamt =
           this.checkData.avgsalaryamt.split(",").join('') : this.checkData.avgsalaryamt;
-        this.checkData.regcapitalamt != null && this.checkData.regcapitalamt.toString().indexOf(',') != -1 ? this.checkData.regcapitalamt =
+        this.checkData.regcapitalamt != null && this.checkData.regcapitalamt.toString().indexOf(',') != -1 ? this.checkData
+          .regcapitalamt =
           this.checkData.regcapitalamt.split(",").join('') : this.checkData.regcapitalamt;
-        this.checkData.thiprofitamountmamt != null && this.checkData.thiprofitamountmamt.toString().indexOf(',') != -1 ? this.checkData
+        this.checkData.thiprofitamountmamt != null && this.checkData.thiprofitamountmamt.toString().indexOf(',') != -1 ?
+          this.checkData
           .thiprofitamountmamt =
           this.checkData.thiprofitamountmamt.split(",").join('') : this.checkData.thiprofitamountmamt;
-        this.checkData.monthrentamt != null && this.checkData.monthrentamt.toString().indexOf(',') != -1 ? this.checkData.monthrentamt =
+        this.checkData.monthrentamt != null && this.checkData.monthrentamt.toString().indexOf(',') != -1 ? this.checkData
+          .monthrentamt =
           this.checkData.monthrentamt.split(",").join('') : this.checkData.monthrentamt;
-        this.checkData.oneYearProfitamt != null && this.checkData.oneYearProfitamt.toString().indexOf(',') != -1 ? this.checkData.oneYearProfitamt =
+        this.checkData.oneYearProfitamt != null && this.checkData.oneYearProfitamt.toString().indexOf(',') != -1 ? this
+          .checkData.oneYearProfitamt =
           this.checkData.oneYearProfitamt.split(",").join('') : this.checkData.oneYearProfitamt;
-        this.checkData.spouseIncome != null && this.checkData.spouseIncome.toString().indexOf(',') != -1 ? this.checkData.spouseIncome =
+        this.checkData.spouseIncome != null && this.checkData.spouseIncome.toString().indexOf(',') != -1 ? this.checkData
+          .spouseIncome =
           this.checkData.spouseIncome.split(",").join('') : this.checkData.spouseIncome;
-        this.checkData.childPaycostamt != null && this.checkData.childPaycostamt.toString().indexOf(',') != -1 ? this.checkData.childPaycostamt =
+        this.checkData.childPaycostamt != null && this.checkData.childPaycostamt.toString().indexOf(',') != -1 ? this.checkData
+          .childPaycostamt =
           this.checkData.childPaycostamt.split(",").join('') : this.checkData.childPaycostamt;
-        this.checkData.parentIncome != null && this.checkData.parentIncome.toString().indexOf(',') != -1 ? this.checkData.parentIncome =
+        this.checkData.parentIncome != null && this.checkData.parentIncome.toString().indexOf(',') != -1 ? this.checkData
+          .parentIncome =
           this.checkData.parentIncome.split(",").join('') : this.checkData.parentIncome;
-        this.checkData.fconsumption != null && this.checkData.fconsumption.toString().indexOf(',') != -1 ? this.checkData.fconsumption =
+        this.checkData.fconsumption != null && this.checkData.fconsumption.toString().indexOf(',') != -1 ? this.checkData
+          .fconsumption =
           this.checkData.fconsumption.split(",").join('') : this.checkData.fconsumption;
         // this.checkData. != null && this.checkData.selfpremisesArea.indexOf(',') ? this.checkData.selfpremisesArea =
         //   this.checkData.selfpremisesArea.split(",").join('') : this.checkData.selfpremisesArea;
