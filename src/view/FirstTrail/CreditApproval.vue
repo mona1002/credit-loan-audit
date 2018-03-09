@@ -45,9 +45,10 @@
     <!-- <div class="cover-view" v-show="coverShow"> -->
     <!-- 回退 -->
     <div>
-      <el-dialog :visible.sync="huiTuiShow">
+      <el-dialog :visible.sync="huiTuiShow" width="600px" top="30vh">
         <el-form class="back-form huitui-class">
-          <div class="form-title" style="position:relative;" v-show="showFlag=='02'">
+          <!-- v-show="showFlag=='02'" -->
+          <div class="form-title" style="position:relative;" >
             回退信息
             <el-tag closable @close="coverShow=false;showFlag='';huiTuiShow=false;" style="position:absolute;"></el-tag>
           </div>
@@ -116,7 +117,8 @@
       <el-dialog :visible.sync="juJueShow">
         <!-- v-show="showFlag=='01'" -->
         <el-form class="back-form jujue-class">
-          <div class="form-title" style="position:relative;" v-show="showFlag=='01'">
+          <!-- v-show="showFlag=='01'" -->
+          <div class="form-title" style="position:relative;" >
             拒绝原因
             <el-tag closable @close="coverShow=false;showFlag='';juJueShow=false;" style="position:absolute;"></el-tag>
           </div>
@@ -177,7 +179,8 @@
     <div>
       <el-dialog :visible.sync="fangQiShow">
         <el-form class="back-form fangqi-class">
-          <div class="form-title" style="position:relative;" v-show="showFlag=='07'">
+          <!-- v-show="showFlag=='07'" -->
+          <div class="form-title" style="position:relative;" >
             放弃原因
             <el-tag closable @close="coverShow=false;showFlag='';fangQiShow=false;" style="position:absolute;"></el-tag>
           </div>
@@ -242,7 +245,8 @@
           审批信息
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
         </div> -->
-          <div class="form-title" style="position:relative;" v-show=" showFlag=='03'">
+        <!-- v-show=" showFlag=='03'" -->
+          <div class="form-title" style="position:relative;" >
             审批信息
             <el-tag closable @close="coverShow=false;showFlag='';shenPiShow=false;proName='';" style="position:absolute;"></el-tag>
           </div>
@@ -365,7 +369,7 @@
     </div>
     <!-- 审批结论轨迹 -->
     <div>
-      <el-dialog :visible.sync="spjlShow">
+      <el-dialog :visible.sync="spjlShow" width="1000px" top="30vh">
         <div class="spjl-div">
           <div class="form-title" style="position:relative;">
             信审审批结论轨迹
@@ -409,7 +413,7 @@
     </div>
     <!-- 流程轨迹 -->
     <div>
-      <el-dialog :visible.sync="lcgjShow">
+      <el-dialog :visible.sync="lcgjShow" width="1000px" top="30vh">
         <div class="lcgj-div">
           <div class="form-title" style="position:relative;">
             流程轨迹
@@ -1331,7 +1335,7 @@ export default {
         proId: this.proId, // 产品id
         opinionFlag: this.opinionFlag, // 标志任务类型
         mainReasonName: this.mainReason, // 回退主原因
-        secondaryReason: this.secondaryReason, // 回退子原因
+        subReasonName: this.secondaryReason, // 回退子原因
         reasonRemark: this.reasonRemark, // 意见描述/原因说明
         appOrgId: this.appOrgId, // 进件机构id
         applyId: this.applyId, // 申请单id
