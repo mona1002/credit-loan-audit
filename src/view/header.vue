@@ -48,7 +48,22 @@ import UserURL from "../util/constantUser";
       request(){
           this.post('/smUser/getResTree').then(res => {
               this.datas = res.data;
-              //console.log(this.datas);  
+              //console.log(this.datas);
+              /*for(var i=0;i<this.datas.length;i++){
+                if(this.datas[i]);
+              } */ 
+              //var arr = [];
+              //arr.push($(".el-menu--horizontal")[0].children)
+             //console.log(arr.push($(".el-menu--horizontal")[0].children));
+             /*for(var i=0;i<$(".el-menu--horizontal").length;i++){
+              console.log($(".el-menu--horizontal")[i]);
+             }*/
+             //var sum;
+             /*for(var i=0;i<$(".el-menu--horizontal").length;i++){
+                if(){
+                  sum+=$(".el-menu--horizontal")[i];
+                }
+             }*/
           })
         },
       selectMenu(index, indexPath){

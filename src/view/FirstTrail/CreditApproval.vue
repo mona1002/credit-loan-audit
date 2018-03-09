@@ -38,8 +38,8 @@
       <el-button icon="el-icon-check-start" class="credit-btn" @click="coverFn('fqz')">发起反欺诈</el-button>
       <el-button icon="el-icon-check-spjl" class="credit-btn" @click="coverFn('spjl')">审批结论轨迹</el-button>
       <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('lcgj')">流程轨迹</el-button>
-      <el-button icon="el-icon-check-big-data" class="credit-btn" @click="">大数据风控</el-button>
-      <el-button icon="el-icon-check-social" class="credit-btn" @click="">社保公积金</el-button>
+      <el-button icon="el-icon-check-big-data" class="credit-btn" @click="tobigData">大数据风控</el-button>
+      <el-button icon="el-icon-check-social" class="credit-btn" @click="roSocialSecurity">社保公积金{{social}}</el-button>
     </div>
     <!-- 弹窗 -->
     <!-- <div class="cover-view" v-show="coverShow"> -->
@@ -275,7 +275,7 @@
             <el-form-item label="结论：">
               <!-- <el-radio-group v-model="applyConclusion"> -->
               <el-radio label="00" value='00' v-model="opinionFlag">同意</el-radio>
-              <el-radio label="03" value='03' v-model="opinionFlag" v-show="judgeFlag=='02'">请求更高级审批</el-radio>
+              <el-radio label="03" value='03' v-model="opinionFlag" v-show="taskNodeName!='creditApp_finalTrial_five' && judgeFlag=='02'">请求更高级审批</el-radio>
               <!-- </el-radio-group> -->
             </el-form-item>
           </div>
@@ -450,7 +450,26 @@
           <el-button plain @click="showFlag=0,coverShow=false;">返回</el-button>
         </div>
       </div>
+      
     </el-dialog>
+    <!-- 大数据风控 -->
+      <div class="bigDataLog">
+        <el-dialog title="提示" :visible.sync="bigDataLogVisible" width="420px" top="35vh">
+          <span>此进件不存在大数据风控明细！</span>
+          <span slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="infoSure">确定</el-button>
+        </span>
+        </el-dialog>
+      </div>
+      <!-- 社保公积金 -->
+      <div class="bigDataLog">
+        <el-dialog title="提示" :visible.sync="socialLogVisible" width="420px" top="35vh">
+          <span>客户社保公积金未授权！</span>
+          <span slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="socialSure">确定</el-button>
+        </span>
+        </el-dialog>
+      </div>
     <!-- </div> -->
     <!-- <el-alert title=warnMsg type="warning" v-show="warnShow"> -->
     <!-- </el-alert> -->
@@ -458,6 +477,7 @@
   <!-- </div> -->
 </template>
 <script>
+import baseurl from '../.././util/ConstantSocialAndPn';
 export default {
   data() {
     return {
@@ -588,9 +608,17 @@ export default {
       ploanAmt2: 0, // 批准的金额
       options: [], // 回退节点的数组
       repayWay: '', // 审批  计算审批结论数据  还款方式
+      taskNodeName: '', // 角色标志
+      social: '', // 社保/公积金  授权标志
+      bigDataLogVisible:false,//大数据风控弹框
+      socialLogVisible:false,//社保公积金
     }
   },
   mounted() {
+    this.Social();
+    // 取出标志taskNodeName
+    // creditApp_finalTrial_five   信审总监审批 最高级不需要 更高级审批
+    this.taskNodeName = localStorage.getItem('taskNodeName');
     // 页面创建的时候  找数据 
     // 这里的数据是 申请信息 中存到本地的信息
     // var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
@@ -1247,7 +1275,7 @@ export default {
         dealroperDate: this.dealroperDate, // 经办时间
         creauditAppOperate: this.creauditAppOperate, // 操作类型
         busiState: this.busiState,
-        applySubNo:this.applySubNo
+        applySubNo: this.applySubNo
       }).then(res => {
         console.log(res);
         console.log(this);
@@ -1293,7 +1321,7 @@ export default {
     saveCreaduit(val) {
       console.log("保存审批信息");
       // 假如是终审 1
-      if(this.judgeFlag == '02'){
+      if (this.judgeFlag == '02') {
         this.auditFlag = '1';
       }
       let verIncome2 = 0;
@@ -1311,7 +1339,7 @@ export default {
       }
       this.post('/creauditOpinion/add', {
         applyId: this.applyId,
-        auditType: '00',
+        auditType: this.judgeFlag == '01' ? '00' : '01',
         proCode: this.proCode,
         verIncome: verIncome2,
         ploanAmt: ploanAmt2,
@@ -1686,7 +1714,7 @@ export default {
           }
 
           // 大于申请金额
-          if (this.ploanAmt2 > Number(this.loanAmt.split('.')[0].replace(',',''))) {
+          if (this.ploanAmt2 > Number(this.loanAmt.split('.')[0].replace(',', ''))) {
             // this.ploanAmtError = true;
             this.$message({
               showClose: true,
@@ -1713,6 +1741,50 @@ export default {
           return '';
         }
       }
+    },
+    //大数据风控
+    tobigData() {
+      this.post(baseurl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
+        applyId: this.applyId
+      }).then(res => {
+        //console.log(res.data);
+        if (res.obj == null) {
+        // alert('社保')
+          this.bigDataLogVisible = true;
+          // alert(this.bigDataLogVisible)
+        } else if (res.obj) {
+          this.$router.push({ path: '/PneCtrl' });
+        }
+      });
+    },
+    //大数据风控 提示弹框关闭
+    infoSure() {
+      this.bigDataLogVisible = false;
+    },
+    //社保/公积金
+    Social() {
+      this.post(baseurl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {
+        certCode: this.certCode,
+        custName: this.custName
+      }).then(res => {
+        if (res.obj == null) {
+          this.social = "(未授权)";
+        } else if (res.obj) {
+          this.social = "(已授权)";
+        }
+      });
+    },
+    roSocialSecurity() {
+      // alert('社保')
+      if (this.social == "(未授权)") {
+        this.socialLogVisible = true;
+      } else if (this.social == "(已授权)") {
+        this.$router.push({ path: '/SocialSe' });
+      }
+    },
+    //社保公积金 弹窗关闭
+    socialSure() {
+      this.socialLogVisible = false;
     },
   },
   // 监听器
@@ -1866,6 +1938,8 @@ export default {
 
 
 
+
+
 /* 三列 */
 
 .creditApproval-class .item-column3 {
@@ -1881,6 +1955,8 @@ export default {
   margin: 0;
   padding: 0;
 }
+
+
 
 
 
@@ -1976,6 +2052,8 @@ export default {
 
 
 
+
+
 /* 信审审批 - btn*/
 
 .creditApproval-class .credit-btn {
@@ -1984,6 +2062,8 @@ export default {
   color: #333;
   border: none;
 }
+
+
 
 
 
@@ -2095,6 +2175,8 @@ export default {
 
 
 
+
+
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -2102,6 +2184,8 @@ export default {
   float: left;
   margin: 0;
 }
+
+
 
 
 
@@ -2158,6 +2242,8 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
+
 
 
 
@@ -2297,11 +2383,15 @@ export default {
 
 
 
+
+
 /* textarea */
 
 .creditApproval-class .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
+
 
 
 
@@ -2415,6 +2505,8 @@ export default {
 
 
 
+
+
 /* 审批 表单 */
 
 .creditApproval-class .appro-form {
@@ -2427,6 +2519,8 @@ export default {
   padding: 10px;
   overflow: hidden;
 }
+
+
 
 
 
@@ -2522,13 +2616,14 @@ export default {
 
 
 
+
+
 /* 审批结论轨迹 */
 
 .creditApproval-class .spjl-div {
   /*width: 80%;*/
   min-width: 500px;
   /*height: 400px;*/
-
   margin: 0 auto;
   /*margin-top: 250px;*/
   overflow: hidden;
@@ -2585,6 +2680,8 @@ export default {
 
 
 
+
+
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -2592,6 +2689,8 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
+
 
 
 
@@ -2715,6 +2814,8 @@ export default {
 
 
 
+
+
 /* 申请信息 */
 
 .creditApproval-class .info .el-form-item__content {
@@ -2724,6 +2825,8 @@ export default {
 .creditApproval-class .info .el-form-item__label {
   width: 120px;
 }
+
+
 
 
 
@@ -2818,11 +2921,15 @@ export default {
 
 
 
+
+
 /* 有编辑框的 提示信息*/
 
 .creditApproval-class .back-form .back-form-edit-li {
   margin-top: 25px !important;
 }
+
+
 
 
 
@@ -2926,6 +3033,8 @@ export default {
 
 
 
+
+
 /*回退*/
 
 .creditApproval-class .el-icon-check-back {
@@ -2938,6 +3047,8 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
 
 
 
@@ -3038,6 +3149,8 @@ export default {
 
 
 
+
+
 /*放弃*/
 
 .creditApproval-class .el-icon-check-giveup {
@@ -3050,6 +3163,8 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
 
 
 
@@ -3150,6 +3265,8 @@ export default {
 
 
 
+
+
 /*发起反欺诈*/
 
 .creditApproval-class .el-icon-check-start {
@@ -3162,6 +3279,8 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
 
 
 
@@ -3262,6 +3381,8 @@ export default {
 
 
 
+
+
 /*流程轨迹*/
 
 .creditApproval-class .el-icon-check-lcgj {
@@ -3276,7 +3397,10 @@ export default {
 }
 
 
+
+
 /*大数据风控*/
+
 .creditApproval-class .el-icon-check-big-data {
   background: url(../../../static/images/bigdata.png);
   width: 30px;
@@ -3287,7 +3411,11 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
 /*社保公积金*/
+
 .creditApproval-class .el-icon-check-social {
   background: url(../../../static/images/social.png);
   width: 30px;
@@ -3298,6 +3426,8 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
 
 
 
@@ -3393,6 +3523,8 @@ export default {
 
 
 
+
+
 /* 信审审批  - - 弹窗*/
 
 .creditApproval-class .el-dialog {
@@ -3404,9 +3536,12 @@ export default {
   display: none;
 }
 
+
 .creditApproval-class .el-dialog__body {
   padding: 0;
 }
+
+
 
 
 
@@ -3456,6 +3591,8 @@ export default {
 .creditApproval-class .appro-form .back-form-edit-li .el-form-item__label {
   /*width: 120px;*/
 }
+
+
 
 
 
@@ -3564,11 +3701,15 @@ export default {
 
 
 
+
+
 /* 两行文字 样式 */
 
 .creditApproval-class .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
+
 
 
 
@@ -3661,6 +3802,8 @@ export default {
 
 
 
+
+
 /* label 文字样式 */
 
 .creditApproval-class .huitui-class .el-form-item__label {
@@ -3668,6 +3811,8 @@ export default {
 }
 
 .creditApproval-class .jujue-class {}
+
+
 
 
 
@@ -3781,11 +3926,15 @@ export default {
 
 
 
+
+
 /* 审批信息  */
 
 .creditApproval-class .el-form-item__content .el-select .el-input {
   width: 100%;
 }
+
+
 
 
 
@@ -3841,6 +3990,24 @@ export default {
   margin: 0 auto;
   padding: 10px;
   overflow: auto;
+}
+
+
+/*大数据*/
+.creditApproval-class .bigDataLog .el-dialog__header{
+  display: block;
+}
+.creditApproval-class .bigDataLog .el-dialog__body{
+  padding: 20px 30px;
+}
+
+/*社保/公积金*/
+/*大数据*/
+.creditApproval-class .bigDataLog .el-dialog__header{
+  display: block;
+}
+.creditApproval-class .bigDataLog .el-dialog__body{
+  padding: 20px 30px;
 }
 
 </style>

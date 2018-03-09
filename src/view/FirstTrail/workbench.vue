@@ -171,6 +171,8 @@
         this.currentRow = val;
         this.workbenchPass.processTemplateId = val.processTemplateId;
         this.workbenchPass.taskNodeName = val.taskNodeName;
+        // 列表 存储  taskNodeName
+        localStorage.setItem('taskNodeName',val.taskNodeName);
         if (val.taskNodeName == "creditApp_firstTrial") {       // 初审
           this.judge.flag = "01";
           localStorage.setItem("workbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
