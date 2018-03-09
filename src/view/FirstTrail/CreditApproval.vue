@@ -114,7 +114,7 @@
     </div>
     <!-- 拒绝 -->
     <div>
-      <el-dialog :visible.sync="juJueShow">
+      <el-dialog :visible.sync="juJueShow" width="600px" top="30vh">
         <!-- v-show="showFlag=='01'" -->
         <el-form class="back-form jujue-class">
           <!-- v-show="showFlag=='01'" -->
@@ -177,7 +177,7 @@
     </div>
     <!-- 放弃 -->
     <div>
-      <el-dialog :visible.sync="fangQiShow">
+      <el-dialog :visible.sync="fangQiShow" width="600px" top="30vh">
         <el-form class="back-form fangqi-class">
           <!-- v-show="showFlag=='07'" -->
           <div class="form-title" style="position:relative;" >
@@ -239,7 +239,7 @@
     </div>
     <!-- 审批 -->
     <div>
-      <el-dialog :visible.sync="shenPiShow">
+      <el-dialog :visible.sync="shenPiShow" width="800px" top="0vh">
         <el-form class="back-form appro-form">
           <!-- <div class="form-title" style="position:relative;" >
           审批信息
