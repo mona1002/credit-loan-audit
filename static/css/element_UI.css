@@ -1750,11 +1750,11 @@ height: 40px;
  }
 
  .mheader .el-menu--horizontal .el-menu--horizontal .el-menu--horizontal .el-menu .el-menu--horizontal{
-   min-width: 0;
+   min-width: 0 !important;
  }
 
  .mheader .el-menu--horizontal .el-menu--horizontal .el-menu--horizontal .el-menu .el-menu--horizontal .el-menu{
-   min-width: 0;
+   min-width: 0 !important;
    border-radius: 0;
  }
 
