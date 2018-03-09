@@ -1128,7 +1128,9 @@ export default {
             console.log
             if (TF == true) {
               console.log('主管 主原因');
-              this.mainReason = this.mainReasonT;
+              setTimeout(function(){
+                this.mainReason = this.mainReasonT;
+              },1000)
             }
             console.log(this.mainReason);
           }
@@ -1142,7 +1144,9 @@ export default {
             console.log(111111111111111)
             if (TF == true) {
               console.log('主管 子原因')
-              this.secondReason = this.secondReasonT;
+              setTimeout(function(){
+                this.secondReason = this.secondReasonT;
+              },1000)
               console.log(this.secondReason);
               console.log('子原因 赋值')
             }
