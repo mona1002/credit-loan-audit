@@ -132,109 +132,87 @@
       <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('save')">保存</el-button>
     </div>
     <!-- 弹窗 -->
-    <el-dialog :visible.sync="coverShow">
-      <!-- 回退 -->
-      <el-form v-show="showFlag=='02'" class="back-form huitui-class">
-        <div class="form-title" style="position:relative;" v-show="showFlag=='02'">
-          回退信息
-          <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
+    <div>
+      <el-dialog :visible.sync="huiTuiShow">
+        <!-- 回退 -->
+        <el-form v-show="showFlag=='02'" class="back-form huitui-class">
+          <div class="form-title" style="position:relative;" v-show="showFlag=='02'">
+            回退信息
+            <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
+          </div>
+          <div class="back-form-li" v-show="showFlag=='02'">
+            <span style="color:red;display:inline-block;width:0px;float:left;">*</span>
+            <el-form-item label="回退节点: ">
+              <el-select @change="backSelectChange" v-model="rollbackNodeName">
+                <el-option v-for="item in options" :label="item.label" :value="item">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </div>
+          <div class="back-form-li" style="height:60px;line-height: 60px;padding-top:5px;">
+            <span style="color:red;display:inline-block;width:0px;float:left;position:relative;top:-8px;">*</span>
+            <el-form-item label="原因说明 :">
+              <!--             <span style="color:red;display:inline-block;width:0px;float:right;margin-right: 25px;">*</span> -->
+              <el-input type="textarea" :row="2" resize="none" v-model="reasonRemark"></el-input>
+            </el-form-item>
+          </div>
+          <div class="back-form-li">
+            <el-form-item label="经办人 :" class="item-column2">
+              <!-- 取登录用户 -->
+              {{dealroperCode}}
+            </el-form-item>
+            <el-form-item label="经办时间 :" class="item-column2">
+              <!-- {{2017-12-1}} -->
+              {{dealroperDate | dateFilter}}
+            </el-form-item>
+          </div>
+          <div class="back-form-li" style="text-align:right;">
+            <el-button plain @click="showFlag=0,coverShow=false;">返回</el-button>
+            <!-- 回退 -->
+            <el-button type="primary" v-show="showFlag=='02'" @click="submitFn('02')">提交</el-button>
+          </div>
+        </el-form>
+      </el-dialog>
+    </div>
+    <!-- 流程轨迹 -->
+    <div>
+      <el-dialog :visible.sync="lcgjShow" width="1000px" top="10vh">
+        <div class="lcgj-div">
+          <div class="form-title" style="position:relative;">
+            流程轨迹
+            <el-tag closable @close="coverShow=false;showFlag='';lcgjShow=false;" style="position:absolute;"></el-tag>
+          </div>
+          <div class="xllcgj-div">
+            <!-- <div class="form-title2" style="position:relative;">
+            信审流程轨迹
+          </div> -->
+            <el-table :data="lcgjData" height="250" border style="width: 100%" highlight-current-row v-loading="lcgjLoading" center>
+              <el-table-column type="index" label="序号" min-width="50">
+              </el-table-column>
+              <el-table-column prop="taskNameTxt" label="任务节点" min-width="100">
+              </el-table-column>
+              <el-table-column prop="taskTypeTxt" label="任务类型" min-width="100">
+              </el-table-column>
+              <el-table-column prop="activationTime" label="进入本环节时间" min-width="150">
+              </el-table-column>
+              <el-table-column prop="taskStatusTxt" label="任务状态" min-width="100">
+              </el-table-column>
+              <el-table-column prop="operatorCode" label="处理人" min-width="80">
+              </el-table-column>
+              <el-table-column prop="completeTime" label="处理时间" min-width="150">
+              </el-table-column>
+              <el-table-column prop="approvalOpinionTxt" label="处理结论" min-width="100">
+              </el-table-column>
+              <el-table-column prop="opinionExplain" label="意见说明" min-width="200" show-overflow-tooltip>
+              </el-table-column>
+            </el-table>
+          </div>
+          <div class="back-form-li" style="text-align:right;padding:10px;">
+            <el-button plain @click="showFlag=0,coverShow=false;lcgjShow=false;">返回</el-button>
+          </div>
         </div>
-        <div class="back-form-li" v-show="showFlag=='02'">
-          <span style="color:red;display:inline-block;width:0px;float:left;">*</span>
-          <el-form-item label="回退节点: ">
-            <el-select @change="backSelectChange" v-model="rollbackNodeName">
-              <el-option v-for="item in options" :label="item.label" :value="item">
-              </el-option>
-            </el-select>
-          </el-form-item>
-        </div>
-        <div class="back-form-li" style="height:60px;line-height: 60px;padding-top:5px;">
-          <span style="color:red;display:inline-block;width:0px;float:left;position:relative;top:-8px;">*</span>
-          <el-form-item label="原因说明 :">
-            <!--             <span style="color:red;display:inline-block;width:0px;float:right;margin-right: 25px;">*</span> -->
-            <el-input type="textarea" :row="2" resize="none" v-model="reasonRemark"></el-input>
-          </el-form-item>
-        </div>
-        <div class="back-form-li">
-          <el-form-item label="经办人 :" class="item-column2">
-            <!-- 取登录用户 -->
-            {{dealroperCode}}
-          </el-form-item>
-          <el-form-item label="经办时间 :" class="item-column2">
-            <!-- {{2017-12-1}} -->
-            {{dealroperDate | dateFilter}}
-          </el-form-item>
-        </div>
-        <div class="back-form-li" style="text-align:right;">
-          <el-button plain @click="showFlag=0,coverShow=false;">返回</el-button>
-          <!-- 回退 -->
-          <el-button type="primary" v-show="showFlag=='02'" @click="submitFn('02')">提交</el-button>
-        </div>
-      </el-form>
-      <!-- 流程轨迹 -->
-      <div v-show=" showFlag=='lcgj'" class="lcgj-div">
-        <div class="form-title" style="position:relative;">
-          流程轨迹
-          <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
-        </div>
-        <div class="xllcgj-div">
-          <el-table :data="lcgjData" height="250" border style="width: 100%" highlight-current-row v-loading="lcgjLoading" center>
-            <el-table-column type="index" label="序号" min-width="50">
-            </el-table-column>
-            <el-table-column prop="taskNameTxt" label="任务节点" min-width="100">
-            </el-table-column>
-            <el-table-column prop="taskTypeTxt" label="任务类型" min-width="100">
-            </el-table-column>
-            <el-table-column prop="activationTime" label="进入本环节时间" min-width="150">
-            </el-table-column>
-            <el-table-column prop="taskStatusTxt" label="任务状态" min-width="100">
-            </el-table-column>
-            <el-table-column prop="operatorCode" label="处理人" min-width="80">
-            </el-table-column>
-            <el-table-column prop="completeTime" label="处理时间" min-width="150">
-            </el-table-column>
-            <el-table-column prop="approvalOpinionTxt" label="处理结论" min-width="100">
-            </el-table-column>
-            <el-table-column prop="opinionExplain" label="意见说明" min-width="100" show-overflow-tooltip>
-            </el-table-column>
-          </el-table>
-        </div>
-        <div class="back-form-li" style="text-align:right;padding:10px;">
-          <el-button plain @click="showFlag=0,coverShow=false;">返回</el-button>
-        </div>
-      </div>
-      <!-- 审批结论轨迹 lcgj-div -->
-      <div v-show=" showFlag=='showDetail'" class="spjl-div">
-        <div class="form-title" style="position:relative;">
-          详情信息
-          <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
-        </div>
-        <div style="line-height:30px;">
-          <span>
-          案件编号：
-          </span>
-          <span>
-            {{caseNum}}
-          </span>
-        </div>
-        <el-table :data="detailData.recordList" height="250" border style="width: 100%" highlight-current-row>
-          <el-table-column type="index" label="序号" min-width="50">
-          </el-table-column>
-          <el-table-column prop="applySubno" label="进件编号" min-width="100">
-          </el-table-column>
-          <el-table-column prop="applyCustName" label="客户名称" min-width="150">
-          </el-table-column>
-          <el-table-column prop="auditTime" label="创建时间" min-width="100">
-          </el-table-column>
-          <el-table-column prop="caseDesc" label="案件描述" min-width="150">
-          </el-table-column>
-        </el-table>
-        <div class="block tool-bar">
-          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="detailData.totalRecord" v-show="detailData.totalRecord > 0">
-          </el-pagination>
-        </div>
-      </div>
-    </el-dialog>
+      </el-dialog>
+    </div>
   </div>
 </template>
 <script>
@@ -293,7 +271,7 @@ export default {
       ploanTerm: '',
       ploanTerms: '',
       ploanAmt: '',
-      lcgjData: '',
+      lcgjData: [],
       auditResult: '', // 审核结论
       mainId: '', // 主原因 id
       secondId: '', // 子原因id
@@ -320,7 +298,8 @@ export default {
       }], // 查看详情 数据
       pageNum: 1, // 页码
       pageSize: 10, // 每页容量
-      
+      huiTuiShow: false, // 回退信息
+      lcgjShow: false, // 流程轨迹
     }
   },
   mounted() {
@@ -697,7 +676,7 @@ export default {
                 taskId: this.taskId,
                 processInstanceId: this.processInstanceId, // 流程实例Id
                 busiState: this.busiState, //  状态
-                processTemplateId:this.processTemplateId // 流程模版Id
+                processTemplateId: this.processTemplateId // 流程模版Id
               }).then(res => {
                 if (res.statusCode == '200') {
                   this.resMsg = res.msg;
@@ -767,7 +746,7 @@ export default {
                 taskId: this.taskId,
                 processInstanceId: this.processInstanceId, // 流程实例Id
                 busiState: this.busiState, //  状态
-                processTemplateId:this.processTemplateId, // 流程模版Id
+                processTemplateId: this.processTemplateId, // 流程模版Id
               }).then(res => {
                 if (res.statusCode == '200') {
                   this.resMsg = res.msg;
@@ -813,7 +792,8 @@ export default {
 
       switch (flag) {
         case '02':
-          this.coverShow = true;
+          // this.coverShow = true;
+          this.huiTuiShow = true;
           console.log('020202020202020202')
           console.log(this.showFlag);
           this.showFlag = '02';
@@ -827,9 +807,10 @@ export default {
           break;
 
         case 'lcgj':
-          this.coverShow = true;
+          // this.coverShow = true;
           console.log('lclclcllclclclclcllclcl')
-          this.showFlag = 'lcgj';
+          // this.showFlag = 'lcgj';
+          this.lcgjShow = true;
           // 取本地的 流程模版id
           // this.processTemplateId = JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
           // console.log(this.processTemplateId);
@@ -1128,9 +1109,9 @@ export default {
             console.log
             if (TF == true) {
               console.log('主管 主原因');
-              setTimeout(function(){
+              setTimeout(function() {
                 this.mainReason = this.mainReasonT;
-              },1000)
+              }, 1000)
             }
             console.log(this.mainReason);
           }
@@ -1144,9 +1125,9 @@ export default {
             console.log(111111111111111)
             if (TF == true) {
               console.log('主管 子原因')
-              setTimeout(function(){
+              setTimeout(function() {
                 this.secondReason = this.secondReasonT;
-              },1000)
+              }, 1000)
               console.log(this.secondReason);
               console.log('子原因 赋值')
             }
@@ -1255,6 +1236,8 @@ export default {
 
 
 
+
+
 /* 折叠面板头部背景色和icon */
 
 .approval-colun .icon_hat {
@@ -1265,6 +1248,8 @@ export default {
 .approval-colun .headFont {
   font-size: 16px;
 }
+
+
 
 
 
@@ -1301,6 +1286,8 @@ export default {
 
 
 
+
+
 /* 两列 */
 
 .approval-colun .item-column2 {
@@ -1308,6 +1295,8 @@ export default {
   float: left;
   margin: 0;
 }
+
+
 
 
 
@@ -1354,6 +1343,8 @@ export default {
 
 
 
+
+
 /* 3列 空位 */
 
 .approval-colun .item-column3-null {
@@ -1368,6 +1359,8 @@ export default {
   height: 30px;
   line-height: 30px;
 }
+
+
 
 
 
@@ -1410,6 +1403,8 @@ export default {
 
 
 
+
+
 /* 按钮集合控件 */
 
 .approval-colun .btn-div {
@@ -1417,6 +1412,8 @@ export default {
   width: 80%;
   float: left;
 }
+
+
 
 
 
@@ -1457,6 +1454,8 @@ export default {
 
 
 
+
+
 /*回退*/
 
 .approval-colun .el-icon-check-back {
@@ -1469,6 +1468,8 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
 
 
 
@@ -1509,6 +1510,8 @@ export default {
 
 
 
+
+
 /*放弃*/
 
 .approval-colun .el-icon-check-giveup {
@@ -1521,6 +1524,8 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
 
 
 
@@ -1561,6 +1566,8 @@ export default {
 
 
 
+
+
 /*流程轨迹*/
 
 .approval-colun .el-icon-check-lcgj {
@@ -1587,6 +1594,8 @@ export default {
 
 
 
+
+
 /* 反欺诈 审批结论 - btn*/
 
 .approval-colun .credit-btn {
@@ -1595,6 +1604,8 @@ export default {
   color: #333;
   border: none;
 }
+
+
 
 
 
@@ -1634,6 +1645,8 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
+
 
 
 
@@ -1701,11 +1714,15 @@ export default {
 
 
 
+
+
 /* textarea */
 
 .approval-colun .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
+
 
 
 
@@ -1750,6 +1767,8 @@ export default {
 
 
 
+
+
 /* 审批 表单 */
 
 .approval-colun .appro-form {
@@ -1776,6 +1795,8 @@ export default {
 
 
 
+
+
 /*.approval-colun .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -1783,6 +1804,8 @@ export default {
 .approval-colun .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
+
 
 
 
@@ -1838,11 +1861,15 @@ export default {
 
 
 
+
+
 /* 反欺诈 -- 审批结论 */
 
 .approval-colun .form-ul {
   padding-left: 30px;
 }
+
+
 
 
 
@@ -1894,11 +1921,15 @@ export default {
 
 
 
+
+
 /* 审批 label*/
 
 .approval-colun .appro-form .back-form-edit-li .el-form-item__label {
   width: 120px;
 }
+
+
 
 
 
@@ -1936,11 +1967,15 @@ export default {
 
 
 
+
+
 /* 两行文字 样式 */
 
 .approval-colun .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
+
 
 
 
@@ -1979,6 +2014,8 @@ export default {
 
 
 
+
+
 /* 详细 信息按钮*/
 
 .approval-colun .btn-detail {
@@ -1987,6 +2024,8 @@ export default {
   margin-top: 35px;
   margin-left: 10px;
 }
+
+
 
 
 
@@ -2028,6 +2067,8 @@ export default {
 
 
 
+
+
 /* 分页 */
 
 .approval-colun .tool-bar {
@@ -2049,11 +2090,15 @@ export default {
 
 
 
+
+
 /* 隐藏分页 */
 
 .approval-colun .el-pagination__jump {
   display: none;
 }
+
+
 
 
 
@@ -2114,8 +2159,9 @@ export default {
   width: min-content;
   width: 640px;
 }
-.approval-colun .muti-select .el-tag:nth-child(2){
-  width:30px;
+
+.approval-colun .muti-select .el-tag:nth-child(2) {
+  width: 30px;
 }
 
 .approval-colun .muti-select>.el-input {
