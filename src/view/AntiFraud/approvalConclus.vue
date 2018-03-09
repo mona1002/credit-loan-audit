@@ -2219,6 +2219,7 @@ export default {
 .approval-colun .muti-select .el-input--suffix .el-input__inner {
   height: auto;
   /*height: 100px;*/
+  min-height: 30px;
 }
 
 .approval-colun .risk-select .el-input--suffix .el-input__inner {
