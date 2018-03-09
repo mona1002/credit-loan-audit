@@ -1730,6 +1730,12 @@ height: 40px;
    top: 60px !important;
    left: -4px !important;
    padding: 5px 0;
+   min-width: 100% !important;
+ }
+ 
+ .mheader .el-menu--horizontal .el-menu--horizontal .el-menu{
+   min-width: 100% !important;
+   border-radius: 0;
  }
 
  .mheader .el-menu--horizontal .el-menu--horizontal .el-menu--horizontal{
@@ -1740,13 +1746,6 @@ height: 40px;
     left: calc(100% - 5px ) !important;
     top: 7px !important;
     margin-top: -7px;
-    /* display: none; */
-    min-width: 100% !important;
- }
-
- .mheader .el-menu--horizontal .el-menu--horizontal .el-menu{
-   min-width: 100% !important;
-   border-radius: 0;
  }
 
  .mheader .el-menu--horizontal .el-menu--horizontal .el-menu--horizontal{
