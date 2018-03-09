@@ -1947,6 +1947,7 @@ export default {
   float: left;
   margin: 0;
   margin-bottom: 10px;
+  min-width: 300px;
 }
 
 .creditApproval-class .el-form-item {
