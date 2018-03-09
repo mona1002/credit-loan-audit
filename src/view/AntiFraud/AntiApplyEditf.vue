@@ -155,6 +155,7 @@ export default {
       secondReasons: [],
       antiFlag: '', // 标志
       busiState: '', // 状态
+      currentTemplateId:'', // 复议模版id
     }
   },
   mounted() {
@@ -201,6 +202,7 @@ export default {
     // 05 复议专员  06 复议主管
     if (this.antiFlag == '05' || this.antiFlag == '06') {
       this.creditappTaskid = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
+      this.currentTemplateId = 'reconsiderApp';
     }
 
     //   this.getFraudApplyInfoWithOpinionById();
@@ -219,7 +221,7 @@ export default {
     // 拿到状态
     this.busiState = this.$route.params.busiState;
 
-    if (this.flag == 'start') {
+    if (this.flag == 'start' || this.flag == 'fuyi') {
       this.getFraudApplyInfo();
     }
     //  else if (this.flag == 'edit' || this.flag == 'add') {
@@ -380,6 +382,7 @@ export default {
                   certCode: this.certCode, // 证件号码
                   proName: this.proName, // 产品名称
                   busiState: this.busiState, // 状态
+                  currentTemplateId: this.currentTemplateId, // 流程模版id
                 }
               })
               .then(res => {
