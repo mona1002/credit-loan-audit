@@ -325,6 +325,8 @@ export default {
   },
   mounted() {
 
+    // 取出 流程模版id
+    this.processTemplateId = JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
 
     // 取出  申请信息   applicationInformationDetail
     this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
@@ -695,6 +697,7 @@ export default {
                 taskId: this.taskId,
                 processInstanceId: this.processInstanceId, // 流程实例Id
                 busiState: this.busiState, //  状态
+                processTemplateId:this.processTemplateId // 流程模版Id
               }).then(res => {
                 if (res.statusCode == '200') {
                   this.resMsg = res.msg;
@@ -764,6 +767,7 @@ export default {
                 taskId: this.taskId,
                 processInstanceId: this.processInstanceId, // 流程实例Id
                 busiState: this.busiState, //  状态
+                processTemplateId:this.processTemplateId, // 流程模版Id
               }).then(res => {
                 if (res.statusCode == '200') {
                   this.resMsg = res.msg;
