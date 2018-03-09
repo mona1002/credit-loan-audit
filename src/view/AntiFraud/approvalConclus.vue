@@ -701,7 +701,7 @@ export default {
                   done();
                 } else {
 
-                  if (res.statusCode == 500) {
+                  if (res.statusCode == '500') {
                     this.$message({
                       type: 'warning',
                       message: '网络异常,请重试!'
@@ -724,11 +724,11 @@ export default {
             }
           }
         }).then(action => {
-          instance.confirmButtonLoading = false;
           this.$message({
             type: 'success',
             message: '反欺诈审批成功!'
           });
+          console.log('准备走成功的路由 ')
           this.$router.push('/AntiFraud34');
         });
       } else {
@@ -770,7 +770,7 @@ export default {
                   done();
                 } else {
 
-                  if (res.statusCode == 500) {
+                  if (res.statusCode == '500') {
                     this.$message({
                       type: 'warning',
                       message: '网络异常,请重试!'
@@ -1135,15 +1135,13 @@ export default {
           console.log(res);
           if (res.statusCode == '200') {
             this.secondReasons = res.data;
-
-            console.log(this.secondReason);
-            console.log(this.secondReasonT)
             console.log(111111111111111)
             if (TF == true) {
               console.log('主管 子原因')
               this.secondReason = this.secondReasonT;
+              console.log(this.secondReason);
+              console.log('子原因 赋值')
             }
-            console.log(this.secondReason);
           }
         })
       }
@@ -2106,7 +2104,7 @@ export default {
   /*position: relative;*/
   height: auto;
   width: min-content;
-  width: ;
+  width: 640px;
 }
 .approval-colun .muti-select .el-tag:nth-child(2){
   width:30px;

@@ -478,6 +478,8 @@
 </template>
 <script>
 import baseurl from '../.././util/ConstantSocialAndPn';
+// 用户接口
+import userBaseUrl from '../.././util/constantUser';
 export default {
   data() {
     return {
@@ -612,6 +614,7 @@ export default {
       social: '', // 社保/公积金  授权标志
       bigDataLogVisible:false,//大数据风控弹框
       socialLogVisible:false,//社保公积金
+      orgId:'' ,// 用来请求产品  用户id
     }
   },
   mounted() {
@@ -645,6 +648,8 @@ export default {
     // 经办人 登录用户名
     this.userInfo = JSON.parse(localStorage.getItem('userInf'));
     this.dealroperCode = this.userInfo.userCode;
+    // 用户id
+    this.orgId = this.userInfo.orgId;
     // this.dealroperCode = userInfo.userCode;
     console.log(this.dealroperCode);
     // 经办时间
@@ -958,8 +963,10 @@ export default {
               产品
             */
       // 产品
-      this.get('/credit/product').then(res => {
-        console.log(res);
+      this.post(userBaseUrl+'base/product/getProductForUser',{
+        "orgId":"f542358d-14c9-4c63-a299-39d3654751a2",
+        "validFlag":"1"// 有效标志
+      }).then(res=>{
         if (res.statusCode == '200') {
           // 假如没有  核实可接受最高每期还款额 
           // if(res.)  提交的时候也要判断
@@ -973,6 +980,21 @@ export default {
           }
         }
       })
+      // this.get('/credit/product').then(res => {
+      //   console.log(res);
+      //   if (res.statusCode == '200') {
+      //     // 假如没有  核实可接受最高每期还款额 
+      //     // if(res.)  提交的时候也要判断
+      //     // this.$message("提示：请完善信审表中可承受的月还款金额");
+      //     this.products = res.data;
+      //     console.log('请求完产品了')
+      //     if (res.statusCode == '200') {
+      //       if (this.judgeFlag == '02') { // 终审
+      //         this.queryCreauditOpinionObj();
+      //       }
+      //     }
+      //   }
+      // })
     },
     // 根据id 请求信息  终审 - 审批
     queryCreauditOpinionObj() {
@@ -1947,6 +1969,7 @@ export default {
   float: left;
   margin: 0;
   margin-bottom: 10px;
+  min-width: 300px;
 }
 
 .creditApproval-class .el-form-item {
