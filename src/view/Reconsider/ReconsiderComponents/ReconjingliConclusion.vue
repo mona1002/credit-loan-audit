@@ -1122,7 +1122,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 		            name: 'AntiApplyEditf',
 		            params: {
 		              id: this.applyId,
-		              flag: 'start',
+		              flag: 'fuyi',
 		              busiState:'20'
 		            }
 		          });

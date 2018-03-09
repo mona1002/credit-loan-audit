@@ -1125,8 +1125,8 @@
 		            name: 'AntiApplyEditf',
 		            params: {
 		              id: this.applyId,
-		              flag: 'start',
-		              busiState:'20'
+		              flag: 'fuyi',
+		              busiState:'20',
 		            }
 		          });
 		    },
