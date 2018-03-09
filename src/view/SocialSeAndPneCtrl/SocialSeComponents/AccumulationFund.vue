@@ -28,7 +28,7 @@
                 <label>密码：</label>
                 <b>{{InputParameter.password}}</b>
               </p>
-              <p>
+              <p style="marginBottom:15px;"> 
                 <label>省市：</label>
                 <b>{{InputParameter.area_code}}</b>
               </p>
@@ -234,7 +234,6 @@
       } else if (this.judgeFlag.flag == '06') {
         this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议经理
       }
-      console.log(baseurl + "/rmMxSecFundQryAction!notSession_getMxFundInfo.action" )
       this.post(baseurl + "/rmMxSecFundQryAction!notSession_getMxFundInfo.action", {
         custName: this.localInf.custName,
         certCode: this.localInf.certCode
@@ -243,26 +242,29 @@
           // 输入参数
           this.InputParameter = res.obj.inParam;
           // 基本信息
-          this.baseInf = JSON.parse(res.obj.baseInfo);
-          this.base = JSON.parse(this.baseInf.user_info); //	基本信息
-          this.bills = JSON.parse(this.baseInf.bill_record); //账单记录
-          this.loan = JSON.parse(this.baseInf.loan_info); //贷款信息
-          this.repay = JSON.parse(this.baseInf.loan_repay_record); ////还款记录 
+          if (res.obj.baseInfo != "") {
+            this.baseInf = JSON.parse(res.obj.baseInfo);
+            this.base = JSON.parse(this.baseInf.user_info); //	基本信息
+            this.bills = JSON.parse(this.baseInf.bill_record); //账单记录
+            this.loan = JSON.parse(this.baseInf.loan_info); //贷款信息
+            this.repay = JSON.parse(this.baseInf.loan_repay_record); //还款记录 
+            this.base ? this.FOREACH(this.base) : this.base;
+            this.bills ? this.FOREACHarray(this.bills) : this.bills;
+            this.loan ? this.FOREACHarray(this.loan) : this.loan;
+            this.repay ? this.FOREACHarray(this.repay) : this.repay;
+          }
           // 报告信息
-          this.reportInf = JSON.parse(res.obj.reportInfo);
-          this.ReportBase = this.reportInf.user_basic_info_check; //		用户及账户基本信息
-          this.ReportBaseCheck = this.reportInf.user_basic_info_check; //用户基本信息校验
-          this.ReportAccountBase = this.reportInf.fund_basic_info //账户基本信息
-          this.Reportpayment = this.reportInf.payment_info //缴纳信息
-          this.ReportRepay = this.reportInf.repay_info //还款信息
-          console.log(this.ReportRepay)
-          this.base ? this.FOREACH(this.base) : this.base;
-          this.bills ? this.FOREACHarray(this.bills) : this.bills;
-          this.loan ? this.FOREACHarray(this.loan) : this.loan;
-          this.repay ? this.FOREACHarray(this.repay) : this.repay;
-          this.ReportAccountBase ? this.FOREACH(this.ReportAccountBase) : this.ReportAccountBase;
-          this.Reportpayment ? this.FOREACH(this.Reportpayment) : this.Reportpayment; //缴纳信息
-          this.ReportRepay ? this.FOREACH(this.ReportRepay) : this.ReportRepay; //还款信息
+          if (res.obj.reportInfo != "") {
+            this.reportInf = JSON.parse(res.obj.reportInfo);
+            this.ReportBase = this.reportInf.user_basic_info_check; //		用户及账户基本信息
+            this.ReportBaseCheck = this.reportInf.user_basic_info_check; //用户基本信息校验
+            this.ReportAccountBase = this.reportInf.fund_basic_info //账户基本信息
+            this.Reportpayment = this.reportInf.payment_info //缴纳信息
+            this.ReportRepay = this.reportInf.repay_info //还款信息
+            this.ReportAccountBase ? this.FOREACH(this.ReportAccountBase) : this.ReportAccountBase;
+            this.Reportpayment ? this.FOREACH(this.Reportpayment) : this.Reportpayment; //缴纳信息
+            this.ReportRepay ? this.FOREACH(this.ReportRepay) : this.ReportRepay; //还款信息
+          }
         } else {
           this.$message.error(res.msg);
         }
@@ -325,7 +327,6 @@
   }
 
   .inputPar p {
-    border: 1px solid;
     float: left;
   }
 
