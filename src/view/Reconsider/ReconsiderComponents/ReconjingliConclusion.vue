@@ -56,7 +56,7 @@
 	    	</el-button>
 	    	<el-button @click="roSocialSecurity">
 	    		<img src="/static/images/liucheng.png">
-	    		<label class="labelTxt">社保/公积金</label>
+	    		<label class="labelTxt">社保/公积金{{social}}</label>
 	    	</el-button>
 	    </div>
 	    <!-- 回退 -->
@@ -449,9 +449,36 @@
 			  </span>
 			</el-dialog>
 	    </div>
+	    <!-- 大数据风控 -->
+	    <div class="bigDataLog">
+			<el-dialog
+			  title="提示"
+			  :visible.sync="bigDataLogVisible"
+			  width="420px"
+			  top="35vh">
+			  <span>此进件不存在大数据风控明细！</span>
+			  <span slot="footer" class="dialog-footer">
+			  	<el-button type="primary" @click="infoSure">确定</el-button>
+			  </span>
+			</el-dialog>
+		</div>
+		<!-- 社保公积金 -->
+	    <div class="bigDataLog">
+			<el-dialog
+			  title="提示"
+			  :visible.sync="socialLogVisible"
+			  width="420px"
+			  top="35vh">
+			  <span>客户社保公积金未授权！</span>
+			  <span slot="footer" class="dialog-footer">
+			  	<el-button type="primary" @click="socialSure">确定</el-button>
+			  </span>
+			</el-dialog>
+		</div>
 	</div>
 </template>
 <script type="text/javascript">
+import baseurl from '../../../util/ConstantSocialAndPn';
 	export default{
 		data(){
 			return{
@@ -533,12 +560,16 @@
 		        proCode:'',
 		        applyCustId:'',
 		        processInstanceId:'',//流程实例id
+		        bigDataLogVisible:false,//大数据风控弹框
+		        socialLogVisible:false,//社保公积金
+		        social:'',//社保公积金 已绑定 未绑定
 			}
 		},
 		mounted(){
 			//申请单ID
 			this.id = JSON.parse(localStorage.getItem('RtaskInWaitting')).applyId;
 			this.request();
+			this.Social();
 			//经办人
 			this.dealroperCode = JSON.parse(localStorage.getItem('userInf')).userCode;
 			this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
@@ -1128,13 +1159,46 @@
 		          }
 		        })
 		    },
-		    //大数据风控
+		    		    //大数据风控
 		    tobigData(){
-		    	
+		    	this.post(baseurl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
+		        	applyId: this.applyId
+			    }).then(res => {
+			      	//console.log(res.data);
+			      	if(res.obj == null){
+			      		this.bigDataLogVisible = true;
+			      	}else if(res.obj){
+			      		this.$router.push({path:'/PneCtrl'});
+			      	}
+			    });
 		    },
+		    //大数据风控 提示弹框关闭
+			infoSure(){
+				this.bigDataLogVisible = false;
+			},
 		    //社保/公积金
+		    Social(){
+		    	this.post(baseurl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action',{
+					certCode:this.datas.certCode,
+					custName:this.datas.custName
+				}).then(res =>{
+					if(res.obj == null){
+			      		this.social = "(未授权)";
+			      	}else if(res.obj){
+			      		this.social = "(已授权)";
+			      	}
+				});
+		    },
 			roSocialSecurity(){
-
+				if(this.social == "(未授权)"){
+					this.socialLogVisible = true;
+				}else if(this.social == "(已授权)"){
+					this.$router.push({path:'/SocialSe'});
+				}
+			},
+			//社保公积金 弹窗关闭
+			socialSure(){
+				this.socialLogVisible = false;
 			},
 		    
 		},

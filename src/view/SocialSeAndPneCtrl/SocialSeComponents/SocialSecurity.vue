@@ -196,6 +196,54 @@
         ReportSocialSec: null,
       }
     },
+    methods: {
+      formatNumber(num, cent, isThousand) {
+        num = num.toString().replace(/\$|\,/g, '');
+        if (isNaN(num)) {
+          num = "0";
+        }
+        let sign = (num == (num = Math.abs(num)));
+        num = Math.floor(num * Math.pow(10, cent) + 0.50000000001);
+        let cents = num % Math.pow(10, cent);
+        num = Math.floor(num / Math.pow(10, cent)).toString();
+        cents = cents.toString();
+        while (cents.length < cent)
+          cents = "0" + cents;
+        for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++) {
+          num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
+        }
+        if (cent > 0) {
+          return (((sign) ? '' : '-') + num + '.' + cents);
+        } else {
+          return (((sign) ? '' : '-') + num);
+        }
+      },
+      FOREACH(item) {
+        for (var k in item) {
+          if (k.indexOf("[元]") != -1) {
+            item[k] = this.formatNumber(item[k] / 100, 2, 0)
+          }
+        }
+      },
+      FOREACHarray(item) {
+        for (var i = 0; i < item.length; i++) {
+          for (var k in item[i]) {
+            if (k.indexOf("[元]") != -1) {
+              item[i][k] = this.formatNumber(item[i][k] / 100, 2, 0)
+            }
+          }
+        }
+      },
+      FOREACHobj(item) {
+        for (var k in item) {
+          if (k.indexOf("[元]") != -1) {
+            for (var j in item[k]) {
+              item[k][j] != '-' ? item[k][j] = this.formatNumber(item[k][j] / 100, 2, 0) : item[k][j]
+            }
+          }
+        }
+      }
+    },
     mounted() {
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '01') {
@@ -233,6 +281,16 @@
           this.ReportMedInsu = this.reportInf.medical_insurance_bill.medical_insurance_pay; //医疗保险缴存信息
           this.ReportExpenseDet = this.reportInf.medical_consumption_details.medical_consumption_basic //医保消费明细
           this.ReportSecRecord = this.reportInf.medical_consumption_details.medical_consumption_record.securities_report; //医保卡消费记录
+          this.FOREACH(this.base)
+          this.FOREACHarray(this.insurances)
+          this.FOREACHarray(this.insurance_record)
+          this.FOREACHarray(this.medical_insurance_record)
+          this.FOREACH(this.ReportBase)
+          this.FOREACH(this.ReportBaseCheck)
+          this.FOREACHarray(this.ReportSocialSec)
+          this.FOREACHobj(this.ReportMedInsu)
+          this.FOREACHobj(this.ReportExpenseDet)
+          this.FOREACHarray(this.ReportSecRecord)
         } else {
           this.$message.error(res.msg);
         }

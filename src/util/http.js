@@ -1,6 +1,8 @@
 import axios from 'axios'
 import router from '../router/index'
 import appConstant from './constant'
+import platforUrl from'./constantUser'
+
 // axios 配置
 axios.defaults.timeout = 5000;
 //数据接口
@@ -18,14 +20,14 @@ axios.defaults.baseURL = appConstant.baseUrl_common;
 
 axios.defaults.withCredentials = true;
 
-/*axios.interceptors.response.use(  response => {    
+axios.interceptors.response.use(  response => {    
   if (response.data.statusCode == 900) {
-    window.location.href = "http://testplatform.nuoyuan.com.cn/#/";    
+    window.location.href = platforUrl+"#/";    
   };    
   return response;  
 },   error => {
   return Promise.reject(error);  
-});*/
+});
 
 export default {
   install(Vue, options) {

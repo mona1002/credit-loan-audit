@@ -12,27 +12,27 @@
             <li>
               <p>
                 <label>进件编号： </label>
-                <span>{{this.conclu.applyInfoPool.applySubno}} </span>
+                <span>{{applyInfoPool.applySubno}} </span>
               </p>
               <p>
                 <label>证件号码： </label>
-                <span>{{this.conclu.applyInfoPool.certCode}} </span>
+                <span>{{applyInfoPool.certCode}} </span>
               </p>
             </li>
             <li>
               <p>
                 <label>客户名称： </label>
-                <span>{{this.conclu.applyInfoPool.custName}} </span>
+                <span>{{applyInfoPool.custName}} </span>
               </p>
               <p>
                 <label>移动电话： </label>
-                <span>{{this.conclu.applyInfoPool.mobile}} </span>
+                <span>{{applyInfoPool.mobile}} </span>
               </p>
             </li>
             <li>
               <p>
                 <label>证件类型： </label>
-                <span>{{this.conclu.applyInfoPool.certTypeTxt}} </span>
+                <span>{{applyInfoPool.certTypeTxt}} </span>
               </p>
             </li>
           </ul>
@@ -48,31 +48,31 @@
             <li>
               <p>
                 <label>借欺诈申请类型主原因： </label>
-                <span>{{this.conclu.fraudApplyInfo.mainreaName}} </span>
+                <span>{{fraudApplyInfo.mainreaName}} </span>
               </p>
               <p>
                 <label>子原因： </label>
-                <span>{{this.conclu.fraudApplyInfo.subreaName}} </span>
+                <span>{{fraudApplyInfo.subreaName}} </span>
               </p>
             </li>
             <li>
               <p class="description">
                 <label>欺诈上报描述：</label>
-                <span class="textA"> {{this.conclu.fraudApplyInfo.applyDesc}}</span>
+                <span class="textA"> {{fraudApplyInfo.applyDesc}}</span>
               </p>
             </li>
             <li>
               <p>
                 <label>反欺诈申请人： </label>
-                <span>{{this.conclu.fraudApplyInfo.applyPersonName}} </span>
+                <span>{{fraudApplyInfo.applyPersonName}} </span>
               </p>
               <p>
                 <label>反欺诈申请日期： </label>
-                <span>{{this.conclu.fraudApplyInfo.appDate}} </span>
+                <span>{{fraudApplyInfo.appDate}} </span>
               </p>
               <p>
                 <label>反欺诈申请机构： </label>
-                <span>{{this.conclu.fraudApplyInfo.appOrgName}} </span>
+                <span>{{fraudApplyInfo.appOrgName}} </span>
               </p>
             </li>
           </ul>
@@ -88,7 +88,7 @@
             <li>
               <p class="description">
                 <label>反欺诈决策反馈： </label>
-                <span class="textA"> {{this.conclu.fraudAuditOpinion.auditDesc}}</span>
+                <span class="textA"> {{fraudAuditOpinion.auditDesc}}</span>
               </p>
             </li>
           </ul>
@@ -102,7 +102,9 @@
     data() {
       return {
         activeNames: ['1', '2', '3'],
-        conclu: '',
+        applyInfoPool: {},
+        fraudApplyInfo: {},
+        fraudAuditOpinion: {},
         tastwaitingPass: '',
       }
     },
@@ -117,13 +119,14 @@
         this.tastwaitingPass = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
       } else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
         this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议申请专员+主管
-      } 
+      }
       this.post("/fraudApplyInfoController/getRecentFraudApplyInfoWithOpinion", {
         applyId: this.tastwaitingPass.applyId,
       }).then(res => {
         if (res.statusCode == 200) {
-          console.log(res.data)
-          this.conclu = res.data;
+          this.applyInfoPool = res.data.applyInfoPool;
+          this.fraudApplyInfo = res.data.fraudApplyInfo;
+          this.fraudAuditOpinion = res.data.fraudAuditOpinion;
         } else {
           this.$message.error(res.msg);
         }
