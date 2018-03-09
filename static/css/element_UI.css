@@ -1560,6 +1560,8 @@ height: 40px;
 
  .mheader .el-menu--horizontal .el-submenu {
    height: 70px;
+   float: left;
+   position: relative;
  }
 
  .mheader .el-menu--horizontal .el-submenu .el-submenu__title {
@@ -1722,6 +1724,39 @@ height: 40px;
  .mheader .el-menu--horizontal .el-submenu>.el-menu {
    border-radius: 0;
  }
+   
+  /* 新改的样式 */
+  .mheader .el-menu--horizontal .el-menu--horizontal {
+   top: 60px !important;
+   left: -4px !important;
+   padding: 5px 0;
+   min-width: 100% !important;
+ }
+ 
+ .mheader .el-menu--horizontal .el-menu--horizontal .el-menu{
+   min-width: 100% !important;
+   border-radius: 0;
+ }
+
+ .mheader .el-menu--horizontal .el-menu--horizontal .el-menu--horizontal{
+    z-index: 10000;
+    background: rgba(31, 45, 61, .6);
+    box-shadow: 0 10px 20px 0 #475669;
+    position: absolute;
+    left: calc(100% - 5px ) !important;
+    top: 7px !important;
+    margin-top: -7px;
+ }
+
+ .mheader .el-menu--horizontal .el-menu--horizontal .el-menu--horizontal{
+   min-width: 0 !important;
+ }
+
+ .mheader .el-menu--horizontal .el-menu--horizontal .el-menu--horizontal .el-menu{
+   min-width: 0 !important;
+   border-radius: 0;
+ }
+
  /*流程轨迹查询 表格 */
 
  @media screen and (min-width: 1327px) {
