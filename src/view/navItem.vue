@@ -57,7 +57,7 @@
                             var row ={
                                 "processTemplateId":"",
                                 "taskStatus":"01",
-                                "taskNodeName":"ccreditApp_finalTrial_one"
+                                "taskNodeName":"creditApp_finalTrial_one"
                             };
                             var judge ={
                                 "flag":"02"
