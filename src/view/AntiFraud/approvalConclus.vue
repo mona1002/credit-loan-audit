@@ -213,6 +213,43 @@
         </div>
       </el-dialog>
     </div>
+
+    <!-- 审批结论轨迹 -->
+    <div>
+      <el-dialog :visible.sync="shenPiShow" width="1000px" top="30vh">
+      <!-- 审批结论轨迹 lcgj-div -->
+      <div class="spjl-div">
+        <div class="form-title" style="position:relative;">
+          详情信息
+          <el-tag closable @close="coverShow=false;showFlag='';shenPiShow=false;" style="position:absolute;"></el-tag>
+        </div>
+        <div style="line-height:30px;">
+          <span>
+          案件编号：
+          </span>
+          <span>
+            {{caseNum}}
+          </span>
+        </div>
+        <el-table :data="detailData.recordList" height="250" border style="width: 100%" highlight-current-row>
+          <el-table-column type="index" label="序号" min-width="50">
+          </el-table-column>
+          <el-table-column prop="applySubno" label="进件编号" min-width="100">
+          </el-table-column>
+          <el-table-column prop="applyCustName" label="客户名称" min-width="150">
+          </el-table-column>
+          <el-table-column prop="auditTime" label="创建时间" min-width="100">
+          </el-table-column>
+          <el-table-column prop="caseDesc" label="案件描述" min-width="150">
+          </el-table-column>
+        </el-table>
+        <div class="block tool-bar">
+          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="detailData.totalRecord" v-show="detailData.totalRecord > 0">
+          </el-pagination>
+        </div>
+      </div>
+      </el-dialog>
+    </div>
   </div>
 </template>
 <script>
@@ -300,6 +337,7 @@ export default {
       pageSize: 10, // 每页容量
       huiTuiShow: false, // 回退信息
       lcgjShow: false, // 流程轨迹
+      shenPiShow:false, // 审批结论轨迹
     }
   },
   mounted() {
@@ -829,7 +867,8 @@ export default {
             return;
           }
           this.coverShow = true;
-          this.showFlag = 'showDetail';
+          // this.showFlag = 'showDetail';
+          this.shenPiShow = true;
           this.queryDetailList();
           break;
         case 'save':
