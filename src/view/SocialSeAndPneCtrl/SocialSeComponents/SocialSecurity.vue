@@ -28,7 +28,7 @@
                 <label>密码：</label>
                 <b>{{InputParameter.password}}</b>
               </p>
-              <p>
+              <p style="marginBottom:15px;">
                 <label>省市：</label>
                 <b>{{InputParameter.area_code}}</b>
               </p>
@@ -263,34 +263,37 @@
         custName: this.localInf.custName,
         certCode: this.localInf.certCode
       }).then(res => {
-        // console.log(res)
         if (res.success) {
           // 输入参数
           this.InputParameter = res.obj.inParam;
-          // 基本信息          
-          this.baseInf = JSON.parse(res.obj.baseInfo);
-          this.base = JSON.parse(this.baseInf.base_info); //基本信息-基本信息
-          this.insurances = JSON.parse(this.baseInf.insurances); //基本信息-保险费用
-          this.insurance_record = JSON.parse(this.baseInf.insurance_record); //基本信息-医疗保险记录
-          this.medical_insurance_record = JSON.parse(this.baseInf.medical_insurance_record); //基本信息-医疗保险记录
+          // 基本信息 
+          if (res.obj.baseInfo != '') {
+            this.baseInf = JSON.parse(res.obj.baseInfo);
+            this.base = JSON.parse(this.baseInf.base_info); //基本信息-基本信息
+            this.insurances = JSON.parse(this.baseInf.insurances); //基本信息-保险费用
+            this.insurance_record = JSON.parse(this.baseInf.insurance_record); //基本信息-医疗保险记录
+            this.medical_insurance_record = JSON.parse(this.baseInf.medical_insurance_record); //基本信息-医疗保险记录
+            this.FOREACH(this.base)
+            this.FOREACHarray(this.insurances)
+            this.FOREACHarray(this.insurance_record)
+            this.FOREACHarray(this.medical_insurance_record)
+          }
           // 报告信息
-          this.reportInf = JSON.parse(res.obj.reportInfo);
-          this.ReportBase = this.reportInf.basic_info.user_basic_info; //用户及账户基本信息
-          this.ReportBaseCheck = this.reportInf.basic_info.user_basic_info_check; //用户基本信息效验
-          this.ReportSocialSec = this.reportInf.social_insurance_summary.society_detail //社保信息
-          this.ReportMedInsu = this.reportInf.medical_insurance_bill.medical_insurance_pay; //医疗保险缴存信息
-          this.ReportExpenseDet = this.reportInf.medical_consumption_details.medical_consumption_basic //医保消费明细
-          this.ReportSecRecord = this.reportInf.medical_consumption_details.medical_consumption_record.securities_report; //医保卡消费记录
-          this.FOREACH(this.base)
-          this.FOREACHarray(this.insurances)
-          this.FOREACHarray(this.insurance_record)
-          this.FOREACHarray(this.medical_insurance_record)
-          this.FOREACH(this.ReportBase)
-          this.FOREACH(this.ReportBaseCheck)
-          this.FOREACHarray(this.ReportSocialSec)
-          this.FOREACHobj(this.ReportMedInsu)
-          this.FOREACHobj(this.ReportExpenseDet)
-          this.FOREACHarray(this.ReportSecRecord)
+          if (res.obj.reportInfo != '') {
+            this.reportInf = JSON.parse(res.obj.reportInfo);
+            this.ReportBase = this.reportInf.basic_info.user_basic_info; //用户及账户基本信息
+            this.ReportBaseCheck = this.reportInf.basic_info.user_basic_info_check; //用户基本信息效验
+            this.ReportSocialSec = this.reportInf.social_insurance_summary.society_detail //社保信息
+            this.ReportMedInsu = this.reportInf.medical_insurance_bill.medical_insurance_pay; //医疗保险缴存信息
+            this.ReportExpenseDet = this.reportInf.medical_consumption_details.medical_consumption_basic //医保消费明细
+            this.ReportSecRecord = this.reportInf.medical_consumption_details.medical_consumption_record.securities_report; //医保卡消费记录
+            this.FOREACH(this.ReportBase)
+            this.FOREACH(this.ReportBaseCheck)
+            this.FOREACHarray(this.ReportSocialSec)
+            this.FOREACHobj(this.ReportMedInsu)
+            this.FOREACHobj(this.ReportExpenseDet)
+            this.FOREACHarray(this.ReportSecRecord)
+          }
         } else {
           this.$message.error(res.msg);
         }
