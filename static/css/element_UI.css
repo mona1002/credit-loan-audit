@@ -1744,16 +1744,16 @@ height: 40px;
     min-width: 100% !important;
  }
 
- .mheader .el-menu--horizontal .el-menu--horizontal .el-menu--horizontal .el-menu{
+ .mheader .el-menu--horizontal .el-menu--horizontal .el-menu{
    min-width: 100% !important;
    border-radius: 0;
  }
 
- .mheader .el-menu--horizontal .el-menu--horizontal .el-menu--horizontal .el-menu .el-menu--horizontal{
+ .mheader .el-menu--horizontal .el-menu--horizontal .el-menu--horizontal{
    min-width: 0 !important;
  }
 
- .mheader .el-menu--horizontal .el-menu--horizontal .el-menu--horizontal .el-menu .el-menu--horizontal .el-menu{
+ .mheader .el-menu--horizontal .el-menu--horizontal .el-menu--horizontal .el-menu{
    min-width: 0 !important;
    border-radius: 0;
  }
