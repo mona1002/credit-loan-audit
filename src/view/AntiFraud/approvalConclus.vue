@@ -2104,7 +2104,7 @@ export default {
   /*position: relative;*/
   height: auto;
   width: min-content;
-  width: ;
+  width: 640px;
 }
 .approval-colun .muti-select .el-tag:nth-child(2){
   width:30px;
