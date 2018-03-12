@@ -1,623 +1,128 @@
 <template>
-<!-- 初审-信审表-分屏-查看页面-更改为右屏样式之前的最后样式的备份 -->
-  <div class="CreditForm">
-    <el-collapse v-model="activeNames">
-      <!-- 网上查询信息 -->
-      <el-collapse-item name="1">
-        <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">网上查询信息</span>
-        </template>
-        <div class="CreditForm_InternetInf up_padding">
-          <ul>
-            <li>
-              <p>
-                <label class="InternetInf_left_label blueC" @click="NewPage(0)">客户在法网是否有被执行信息：</label>
-                <span class="detail_inf">{{this.FormData.wbeexEcutedtext}} </span>
-              </p>
-              <p v-show="this.InternetShow.commentS">
-                <label class="InternetInf_right_label"> 执行信息说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wbeexEcutedtxt==null||this.FormData.wbeexEcutedtxt==''" :content="this.FormData.wbeexEcutedtxt"
-                  placement="top-start">
-                  <span class="detail_inf">{{this.FormData.wbeexEcutedtxt}} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label blueC" @click="NewPage(0)">单位在法网是否有被执行信息：</label>
-                <span class="detail_inf">{{this.FormData.wnetHirecomtext}} </span>
-              </p>
-              <p v-show="this.InternetShow.commentS1">
-                <label class="InternetInf_right_label"> 单位执行信息说明：</label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetHirecomtxt==null||this.FormData.wnetHirecomtxt==''" :content="this.FormData.wnetHirecomtxt"
-                  placement="top-start">
-                  <span class="detail_inf">{{this.FormData.wnetHirecomtxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label blueC" @click="NewPage(1)">客户在失信网是否有失信记录：</label>
-                <span class="detail_inf">{{this.FormData.wnetEcutedBreatext }} </span>
-              </p>
-              <p v-show="this.InternetShow.commentS2">
-                <label class="InternetInf_right_label"> 失信记录说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetEcutedBreatxt==null||this.FormData.wnetEcutedBreatxt==''" :content="this.FormData.wnetEcutedBreatxt"
-                  placement="top-start">
-                  <span class="detail_inf">{{this.FormData.wnetEcutedBreatxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label blueC" @click="NewPage(1)">单位在失信网是否有失信记录：</label>
-                <span class="detail_inf">{{this.FormData.wnetHirecomBreatext }} </span>
-              </p>
-              <p v-show="this.InternetShow.commentS3">
-                <label class="InternetInf_right_label"> 单位失信记录说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetHirecomBreatxt==null||this.FormData.wnetHirecomBreatxt==''" :content="this.FormData.wnetHirecomBreatxt"
-                  placement="top-start">
-                  <span class="detail_inf">{{this.FormData.wnetHirecomBreatxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label blueC" @click="NewPage(2)">网上搜索借款人手机是否有异常：</label>
-                <span class="detail_inf">{{this.FormData.wnetPhonetext }} </span>
-              </p>
-              <p v-show="this.InternetShow.commentS4">
-                <label class="InternetInf_right_label"> 手机异常信息说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetPhonetxt==null||this.FormData.wnetPhonetxt==''" :content="this.FormData.wnetPhonetxt" placement="top-start">
-                  <span class="detail_inf">{{this.FormData.wnetPhonetxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label blueC" @click="NewPage(2)">网搜单位名称是否有异常：</label>
-                <span class="detail_inf">{{this.FormData.wnetHirecomNametext }} </span>
-              </p>
-              <p v-show="this.InternetShow.commentS5">
-                <label class="InternetInf_right_label"> 单位名称异常信息说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetHirecomNametxt==null||this.FormData.wnetHirecomNametxt==''" :content="this.FormData.wnetHirecomNametxt"
-                  placement="top-start">
-                  <span class="detail_inf">{{this.FormData.wnetHirecomNametxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label blueC" @click="NewPage(2)">网搜单位电话是否有异常：</label>
-                <span class="detail_inf">{{this.FormData.wnetHirecomPhonetext }} </span>
-              </p>
-              <p v-show="this.InternetShow.commentS6">
-                <label class="InternetInf_right_label"> 单位电话异常信息说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetHirecomPhonetxt==null||this.FormData.wnetHirecomPhonetxt==''" :content="this.FormData.wnetHirecomPhonetxt"
-                  placement="top-start">
-                  <span class="detail_inf">{{this.FormData.wnetHirecomPhonetxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label blueC" @click="NewPage(2)">网上搜索借款人现居住地址和房产地址是否有异常：</label>
-                <span class="detail_inf">{{this.FormData.wnetAddrandEstatetext }} </span>
-              </p>
-              <p v-show="this.InternetShow.commentS7">
-                <label class="InternetInf_right_label"> 地址异常信息说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetAddrandEstatetxt==null||this.FormData.wnetAddrandEstatetxt==''" :content="this.FormData.wnetAddrandEstatetxt"
-                  placement="top-start">
-                  <span class="detail_inf">{{this.FormData.wnetAddrandEstatetxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label blueC" @click="NewPage(2)">网搜单位地址是否有异常：</label>
-                <span class="detail_inf">{{this.FormData.wnetHirecomAddresstext }} </span>
-              </p>
-              <p v-show="this.InternetShow.commentS8">
-                <label class="InternetInf_right_label"> 单位地址异常信息说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetHirecomAddresstxt==null||this.FormData.wnetHirecomAddresstxt==''" :content="this.FormData.wnetHirecomAddresstxt"
-                  placement="top-start">
-                  <span class="detail_inf">{{this.FormData.wnetHirecomAddresstxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label blueC" @click="NewPage(3)">当地工商网查询企业基本信息中是否有登记：</label>
-                <span class="detail_inf">{{this.FormData.wnetCompanytext }} </span>
-              </p>
-              <p v-show="this.InternetShow.commentS9">
-                <label class="InternetInf_right_label"> 工商登记信息说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetCompanytxt==null||this.FormData.wnetCompanytxt==''" :content="this.FormData.wnetCompanytxt"
-                  placement="top-start">
-                  <span class="detail_inf">{{this.FormData.wnetCompanytxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label blueC" @click="NewPage(4)">客户工作单位在全国组织代码查询中是否存在：</label>
-                <span class="detail_inf">{{this.FormData.wnetAddrstatetext }} </span>
-              </p>
-              <p v-show="this.InternetShow.commentS10">
-                <label class="InternetInf_right_label"> 组织机构代码信息说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetAddrstatetxt==null||this.FormData.wnetAddrstatetxt==''" :content="this.FormData.wnetAddrstatetxt"
-                  placement="top-start">
-                  <span class="detail_inf">{{this.FormData.wnetAddrstatetxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-          </ul>
-        </div>
-      </el-collapse-item>
-      <!-- 核实身份 -->
-      <el-collapse-item name="2">
-        <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">核实身份</span>
-        </template>
-        <div class="CreditForm_CheckId up_padding">
-          <ul class="CreditForm_CheckId_ul_left">
-            <li>
-              <p>
-                <label class="InternetInf_left_label">接听者是否是借款人本人：</label>
-                <span class="detail_inf">{{this.FormData.iisselftext }} </span>
-              </p>
-              <p v-show="this.checkId.declearNloaned">
-                <label class=" InternetInf_right_label "> 接听说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.iisselftxt==null||this.FormData.iisselftxt==''" :content="this.FormData.iisselftxt" placement="top-start">
-                  <span class="detail_inf">{{this.FormData.iisselftxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li>
-              <p v-show="this.checkId.declearNloaned">
-                <label class="InternetInf_left_label">是否在我司申请借款：</label>
-                <span class="detail_inf">{{this.FormData.iloanBeforetext }} </span>
-              </p>
-              <p v-show="this.checkId.loanNot">
-                <label class=" InternetInf_right_label "> 说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.iloanBeforetxt==null||this.FormData.iloanBeforetxt==''" :content="this.FormData.iloanBeforetxt"
-                  placement="top-start">
-                  <span class="detail_inf">{{this.FormData.iloanBeforetxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li>
-              <p v-show="this.checkId.loanNot">
-                <label class="InternetInf_left_label">借款金额[元]：</label>
-                <span class="detail_inf">{{this.FormData.iloanAmt }} </span>
-              </p>
-              <p v-show="this.checkId.loanNot">
-                <label class=" InternetInf_right_label "> 借款期限[月]： </label>
-                <span class="detail_inf">{{this.FormData.iloanTerm }} </span>
-              </p>
-            </li>
-            <li>
-              <p v-show="this.checkId.loanNot">
-                <label class="InternetInf_left_label">借款用途：</label>
-                <span class="detail_inf">{{this.FormData.iloanPurposetext }} </span>
-              </p>
-              <p v-show="this.checkId.loanNot">
-                <label class=" InternetInf_right_label "> 借款用途详细说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.iloanPurposetxt==null||this.FormData.iloanPurposetxt==''" :content="this.FormData.iloanPurposetxt"
-                  placement="top-start">
-                  <span class="detail_inf">{{this.FormData.iloanPurposetxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-          </ul>
-        </div>
-      </el-collapse-item>
-      <!-- 工作信息  -->
-      <el-collapse-item name="3">
-        <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">工作信息</span>
-        </template>
-        <div class="CreditForm_WorkInfs up_padding">
-          <ul>
-            <li style="width:100%">
-              <label class="InternetInf_left_label">工作单位：</label>
-              <span class="detail_inf">{{this.FormData.hirecomName }} </span>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label">单位性质：</label>
-                <span class="detail_inf">{{this.FormData.hirecomSigntext }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label">所属行业：</label>
-                <span class="detail_inf">{{this.FormData.hirecomKind}} </span>
-              </p>
-              <p>
-                <label class=" CheckId_right_label ">所在部门： </label>
-                <span class="detail_inf">{{this.FormData.hiredepartment }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label "> 职位级别： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.workPost==null||this.FormData.workPost==''" :content="this.FormData.workPost" placement="top-start">
-                  <span class="detail_inf ComAddr">{{this.FormData.workPost }} </span>
-                </el-tooltip>
-              </p>
-              <p>
-                <label class="InternetInf_right_label">单位电话：</label>
-                <span class="detail_inf">{{this.FormData.workTel }} </span>
-              </p>
-              <p>
-                <label class=" CheckId_right_label "> 入职时间： </label>
-                <span class="detail_inf">{{this.FormData.entryDate }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label">月均工资[元]：</label>
-                <span class="detail_inf">{{this.FormData.avgsalaryamt }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label">每月发薪日：</label>
-                <span class="detail_inf">{{this.FormData.payDay }} </span>
-              </p>
-              <p>
-                <label class=" CheckId_right_label ">工资发放形式： </label>
-                <span class="detail_inf">{{this.FormData.hirecomPaymentTypetext }} </span>
-              </p>
-            </li>
-            <li class="company_address_select">
-              <p style="width:66%">
-                <label class="InternetInf_left_label ">单位地址 ：</label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.addressMsg==null||this.FormData.addressMsg==''" :content="this.FormData.addressMsg" placement="top-start">
-                  <span class="detail_inf ComAddr">{{this.FormData.addressMsg}} </span>
-                </el-tooltip>
-              </p>
-              <p>
-                <label class=" CheckId_right_label "> 单位地址邮编： </label>
-                <span class="detail_inf">{{this.FormData.workZip }} </span>
-              </p>
-            </li>
-            <li>
-              <p style="width: 66%;">
-                <label class="InternetInf_left_label">前单位名称：</label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.hirelastComname==null||this.FormData.hirelastComname==''" :content="this.FormData.hirelastComname"
-                  placement="top-start">
-                  <span class="detail_inf ComAddr">{{this.FormData.hirelastComname }} </span>
-                </el-tooltip>
-              </p>
-              <p>
-                <label class=" CheckId_right_label "> 是否为私营业主： </label>
-                <span class="detail_inf">{{this.FormData.privateOwnerFlagtext}} </span>
-              </p>
-            </li>
-          </ul>
-        </div>
-      </el-collapse-item>
-      <!-- 私营企业信息 -->
-      <el-collapse-item name="4">
-        <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">私营企业信息</span>
-        </template>
-        <div class="CreditForm_CompanyInfs up_padding" v-show="this.workInf.private">
-          <ul>
-            <li>
-              <p>
-                <label class="InternetInf_left_label ">企业类型：</label>
-                <span class="detail_inf">{{this.FormData.selfTypetext }} </span>
-              </p>
-              <p>
-                <label class=" InternetInf_right_label "> 公司注册时间： </label>
-                <span class="detail_inf">{{this.FormData.compegDate }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label ">注册资金[万元]：</label>
-                <span class="detail_inf">{{this.FormData.regcapitalamt }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label">占股比例：</label>
-                <span class="detail_inf">{{this.FormData.selfhasProportion }} </span>
-              </p>
-              <p>
-                <label class=" CheckId_right_label "> 经营场所：</label>
-                <span class="detail_inf">{{this.FormData.selfpremisestext }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label ">月还款额/租金[万元]：</label>
-                <span class="detail_inf">{{this.FormData.monthrentamt }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label">营业面积：</label>
-                <span class="detail_inf">{{this.FormData.selfpremisesArea }} </span>
-              </p>
-              <p>
-                <label class=" CheckId_right_label "> 员工人数： </label>
-                <span class="detail_inf">{{this.FormData.selfempCount }} </span>
-              </p>
-            </li>
-            <li>
-              <p style="width:66%">
-                <label class=" InternetInf_left_label">企业经营项目：</label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.projectManage==null||this.FormData.projectManage==''" :content="this.FormData.projectManage"
-                  placement="top-start">
-                  <span class="detail_inf ComAddr">{{this.FormData.projectManage }} </span>
-                </el-tooltip>
-              </p>
-              <p>
-                <label class=" CheckId_right_label "> 每月净利润额[万元]：</label>
-                <span class="detail_inf">{{this.FormData.profitamountmamt }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label ">近一年利润[万元]：</label>
-                <span class="detail_inf">{{this.FormData.oneYearProfitamt }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label">第一供销商：</label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.firstSuppliers==null||this.FormData.firstSuppliers==''" :content="this.FormData.firstSuppliers"
-                  placement="top-start">
-                  <span class="detail_inf ComAddr">{{this.FormData.firstSuppliers }} </span>
-                </el-tooltip>
-              </p>
-              <p>
-                <label class="CheckId_right_label "> 第一分销商： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.firstDistributor==null||this.FormData.firstDistributor==''" :content="this.FormData.firstDistributor"
-                  placement="top-start">
-                  <span class="detail_inf distributor">{{this.FormData.firstDistributor }} </span>
-
-                </el-tooltip>
-              </p>
-            </li>
-          </ul>
-        </div>
-      </el-collapse-item>
-      <!-- 家庭信息 -->
-      <el-collapse-item name="5">
-        <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">家庭信息</span>
-        </template>
-        <div class="CreditForm_FamilyInf up_padding">
-          <ul>
-            <li>
-              <p>
-                <label class="InternetInf_left_label ">婚姻状况：</label>
-                <span class="detail_inf">{{this.FormData.fmarrflagtext }} </span>
-              </p>
-            </li>
-            <li v-show=" this.marriage.couple">
-              <p>
-                <label class="InternetInf_left_label ">配偶工作情况：</label>
-                <span class="detail_inf">{{this.FormData.spouseWorktext }} </span>
-              </p>
-            </li>
-            <li v-show=" this.marriage.workingCondition">
-              <p>
-                <label class="InternetInf_left_label ">配偶工作类型：</label>
-                <span class="detail_inf">{{this.FormData.spouseWorktypetext }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label"> 配偶收入情况[月/元]： </label>
-                <span class="detail_inf" style="border:none;height:auto;">{{this.FormData.spouseIncome }} </span>
-              </p>
-            </li>
-            <li v-show=" this.marriage.couple">
-              <p>
-                <label class=" InternetInf_left_label">是否在同一个城市工作生活：</label>
-                <span class="detail_inf">{{this.FormData.spouseSamecitytext }} </span>
-              </p>
-              <p v-show="this.marriage.workingLivingInf">
-                <label class="InternetInf_right_label"> 在同一个城市工作生活信息： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.spouseSamecitytxt==null||this.FormData.spouseSamecitytxt==''" :content="this.FormData.spouseSamecitytxt"
-                  placement="top-start">
-                  <span class="detail_inf family">{{this.FormData.spouseSamecitytxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label ">是否有子女：</label>
-                <span class="detail_inf">{{this.FormData.childFlagtext }} </span>
-              </p>
-            </li>
-            <li v-show="this.Children.ChildrenOrNot">
-              <p>
-                <label class="InternetInf_left_label ">子女数量：</label>
-                <span class="detail_inf">{{this.FormData.childCount }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label"> 子女数量备注： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.childCounttxt==null||this.FormData.childCounttxt==''" :content="this.FormData.childCounttxt"
-                  placement="top-start">
-                  <span class="detail_inf family">{{this.FormData.childCounttxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li v-show="this.Children.ChildrenOrNot">
-              <p>
-                <label class="InternetInf_left_label ">子女现状：</label>
-                <span class="detail_inf">{{this.FormData.childStatustext }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label"> 子女现状备注： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.childStatustxt==null||this.FormData.childStatustxt==''" :content="this.FormData.childStatustxt"
-                  placement="top-start">
-                  <span class="detail_inf">{{this.FormData.childStatustxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li v-show="this.Children.ChildrenOrNot">
-              <p>
-                <label class="InternetInf_left_label ">子女是否在身边：</label>
-                <span class="detail_inf">{{this.FormData.childTogethertext }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label"> 是否支付其生活费： </label>
-                <span class="detail_inf" style="border:none;height:auto;">{{this.FormData.childIspaycosttext }} </span>
-              </p>
-            </li>
-            <li v-show="this.Children.PayAlimony">
-              <p>
-                <label class="InternetInf_left_label "> 生活费支付额度[元]： </label>
-                <span class="detail_inf">{{this.FormData.childPaycostamt }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label ">父母是否在世：</label>
-                <span class="detail_inf">{{this.FormData.parentIslivingtext }} </span>
-              </p>
-              <p v-show="this.parent.livingOrNot">
-                <label class="InternetInf_right_label"> 父母备注： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.parentIslivingtxt==null||this.FormData.parentIslivingtxt==''" :content="this.FormData.parentIslivingtxt"
-                  placement="top-start">
-                  <span class="detail_inf family">{{this.FormData.parentIslivingtxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li v-show="this.parent.livingOrNot">
-              <p>
-                <label class="InternetInf_left_label ">父母身体状况：</label>
-                <span class="detail_inf">{{this.FormData.parentHealthtext }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label"> 父母身体状况备注： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.parentHealthtxt==null||this.FormData.parentHealthtxt==''" :content="this.FormData.parentHealthtxt"
-                  placement="top-start">
-                  <span class="detail_inf family">{{this.FormData.parentHealthtxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li v-show="this.parent.livingOrNot">
-              <p>
-                <label class="InternetInf_left_label ">父母是否需要赡养：</label>
-                <span class="detail_inf">{{this.FormData.parentPayalimonytext }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label"> 父母是否需要赡养备注： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.parentPayalimonytxt==null||this.FormData.parentPayalimonytxt==''" :content="this.FormData.parentPayalimonytxt"
-                  placement="top-start">
-                  <span class="detail_inf family">{{this.FormData.parentPayalimonytxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li v-show="this.parent.livingOrNot">
-              <p>
-                <label class="InternetInf_left_label ">父母工作情况：</label>
-                <span class="detail_inf">{{this.FormData.parentWorktext }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label"> 父母收入[元]： </label>
-                <!-- <span class="detail_inf">{{this.FormData.parentIncome }} </span> -->
-                <span style="border:none;">{{this.FormData.parentIncome }} </span>
-                
-              </p>
-            </li>
-            <li v-show="this.parent.livingOrNot">
-              <p>
-                <label class="InternetInf_left_label ">父母是否知情：</label>
-                <span class="detail_inf">{{this.FormData.parentInformedtext }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label ">是否有兄弟姐妹：</label>
-                <span class="detail_inf">{{this.FormData.brothersIfhastext }} </span>
-              </p>
-              <p v-show="this.siblings.siblingsOrNot">
-                <label class="InternetInf_right_label"> 是否有兄弟姐妹备注： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.brothersIfhastxt==null||this.FormData.brothersIfhastxt==''" :content="this.FormData.brothersIfhastxt"
-                  placement="top-start">
-                  <span class="detail_inf">{{this.FormData.brothersIfhastxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label ">个人/家庭月开销[元]：</label>
-                <span class="detail_inf">{{this.FormData.fconsumption }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label">可以承受的月还款[元]： </label>
-                <span class="detail_inf" style="border:none;height:auto;">{{this.FormData.fbalance }} </span>
-              </p>
-            </li>
-          </ul>
-        </div>
-      </el-collapse-item>
-      <!-- 居住情况 -->
-      <el-collapse-item name="6">
-        <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">居住情况</span>
-        </template>
-        <div class="CreditForm_live up_padding">
-          <ul>
-            <li>
-              <p>
-                <label class="InternetInf_left_label ">同住者关系：</label>
-                <span class="detail_inf">{{this.FormData.livingHouseHoldstext }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label">居住房产所属情况：</label>
-                <span class="detail_inf">{{this.FormData.livingEstateBelongstext }} </span>
-              </p>
-            </li>
-          </ul>
-        </div>
-      </el-collapse-item>
-      <!-- 核对现住址 -->
-      <el-collapse-item name="7">
-        <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">核对现住址</span>
-        </template>
-        <div class="CreditForm_check_reside up_padding">
-          <ul class="CreditForm_check_reside_ul_left">
-            <li>
-              <label class="InternetInf_left_label ">现住址：</label>
-              <span class="detail_inf oneline">{{this.FormData.aaddress}}</span>
-            </li>
-            <li>
-              <label class="InternetInf_left_label ">现住地址是否为常住地址 ：</label>
-              <span class="detail_inf">{{this.FormData.aisresidenttext}} </span>
-            </li>
-          </ul>
-          <p v-show="this.address.permanent" style="clear:both;width:100%">
-            <label class="InternetInf_left_label ">常住地址 ：</label>
-            <el-tooltip class="item" effect="dark" :disabled="this.FormData.aisresidenttxt==''" :content="this.FormData.aisresidenttxt"
-              placement="top-start">
-              <span class="detail_inf ComAddr">{{this.FormData.aisresidenttxt}} </span>
-            </el-tooltip>
-          </p>
-        </div>
-      </el-collapse-item>
-      <!-- 初审结论 -->
-      <el-collapse-item name="8">
-        <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">初审结论</span>
-        </template>
-        <div class=" CreditForm_result up_padding">
-          <div style="width:66%;">
-            <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
-            <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==''" :content="this.FormData.oother" placement="top-start">
-              <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
-            </el-tooltip>
+  <div class="AudioVisualLeft">
+    <!-- RAudioVisualLeft.vue   全部被AudioVisualLeft.vue替换前备份 -->
+    <!-- 左侧list隐藏时显示的div     在根元素下面，与left right 平级-->
+    <div class="hidDiv" v-show="!showListDiv" ref="hidDiv_ref">
+      <img class="showBtn" src="../../../../static/images/Shape Copy.png" @click="showList" style="transform: rotate(180deg)">
+    </div>
+    <!-- ================================= -->
+    <!-- 左侧 折叠面板 -->
+    <div class="AudioVisual_List" ref="AudioVisual_List_ref" v-show="showListDiv">
+      <!-- 折叠面板title -->
+      <img class="hidBtn" src="../../../../static/images/Shape Copy.png" @click="hid">
+      <!-- 折叠面板-手风琴List -->
+      <p class="list_title clearFix">
+        <span>影像名称
+          <img src="../../../../static/images/BAA30772-8C58-4169-9CF3-C1ACA1DB9C62@1x.png" style="position:absolute;top:12px;right:17px">
+          <img src="../../../../static/images/693BC9A6-4912-42DA-A313-32E8E75CD126@1x.png" style="position:absolute;top:19px;right:17px">
+        </span>
+        <span>页数</span>
+      </p>
+      <el-collapse accordion>
+        <el-collapse-item v-for="(item,ind) in ListParent" :key="ind" @click.native="getChildrenList(item.id,ind,item)">
+          <template slot="title">
+            <p>
+              <!-- 一级节点 -->
+              <span style="position:relative;">
+                <b class="NamParentNode"> {{item.arcName}}</b>
+                <img src="../../../../static/images/918FE1E0-6EEB-4642-A5E6-253AC973FF41@1x.png" style="position:absolute;top:12px;left:10px"
+                  v-show="opendImg[ind]">
+                <img src="../../../../static/images/5530D698-2823-417F-B8BC-8DC9037BC848@1x.png" style="position:absolute;top:14px;left:10px"
+                  v-show="closedImg[ind]">
+              </span>
+              <span>{{item.imageCount}}</span>
+            </p>
+          </template>
+          <div class="list_title_div">
+            <!--  二级 内容 节点 -->
+            <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind)">
+              <el-tooltip class="item" effect="dark" :content="item.arcName" placement="right-end">
+                <span style="width:105px;marginLeft:20px;">{{item.arcName}}</span>
+              </el-tooltip>
+              <span>{{item.imageCount}}</span>
+            </p>
           </div>
-        </div>
-      </el-collapse-item>
-    </el-collapse>
+        </el-collapse-item>
+      </el-collapse>
+      <!-- 按钮 : 缩略图 对比  -->
+      <el-button @click="SmallpicAlert" class="compareBtn">缩略图</el-button>
+      <el-button type="primary" @click="compBtnShow" class="checkDetailBtn">对比</el-button>
+    </div>
+    <!-- 右侧 图片 -->
+    <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
+      <div style="position:absolute; left:0; top:0;" :id='msg'>
+        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
+        />
+      </div>
+    </div>
+    <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" v-show="perfBtn" @click="pre" @mouseenter='PerBtn'>
+    <img src="../../../../static/images/pc1.png" class="icon_next" v-show="perfBtn" @click="next" @mouseenter='PerBtn'>
+    <div class="BtnIcons" v-show="perfBtn" @mouseenter='PerBtn' ref="PbtnIcons">
+      <img src="../../../../static/images/efw.png" @click="smaller ">
+      <img src="../../../../static/images/net.png" @click="larger">
+      <img src="../../../../static/images/daf.png" @click="AclockWise ">
+      <img src="../../../../static/images/dasf.png" @click="clockWise ">
+    </div>
+    <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
+    <div class="Small_pic_div" v-show="SmallPicShow">
+      <p class="Small_pic_title"> 缩略图-申请信息
+        <img src="../../../../static/images/D625BA67-2F56-42C1-9E9D-A47AE03BA028@1x.png" class="small_pic_close" @click="SmallpicClose">
+      </p>
+      <div class="small_pic_content">
+        <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
+          <img class="Small_pic" :src="'http://10.1.26.6:8080'+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
+            ref="small_pic_ref" />
+          <p> {{val.arcSubType}} </p>
+        </figure>
+      </div>
+    </div>
+    <!--=================================  查询弹出层 ================================= -->
+    <div v-show="dataa" class="posi">
+      <!-- 折叠 -->
+      <p>内匹配客户查询列表
+        <i class="el-icon-close" style="color:white;fontSize:18px;right:13px;top:16px" @click="closeAlertSearch"></i>
+      </p>
+      <div class="posi_content">
+        <el-collapse v-model="activeNames">
+          <el-collapse-item title="本人进件列表" name="1">
+            <div>
+              <el-table :data="personal" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
+                style="width: 100%">
+                <el-table-column property="matchApplyCustName" label="客户名称">
+                </el-table-column>
+                <el-table-column property="matchApplySubNo" label="进件编号">
+                </el-table-column>
+                <el-table-column property="matchApplyDate" label="申请时间">
+                </el-table-column>
+                <el-table-column prop="matchApplyDate" label="业务状态">
+                </el-table-column>
+              </el-table>
+            </div>
+          </el-collapse-item>
+          <!-- 折叠2 -->
+          <el-collapse-item title="内匹客户进件" name="2">
+            <div>
+              <el-table :data="others" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
+                style="width: 100%">
+                <el-table-column property="matchApplyCustName" label="客户名称">
+                </el-table-column>
+                <el-table-column property="matchApplySubNo" label="进件编号">
+                </el-table-column>
+                <el-table-column property="matchApplyDate" label="申请时间">
+                </el-table-column>
+                <el-table-column prop="matchApplyDate" label="业务状态">
+                </el-table-column>
+              </el-table>
+            </div>
+            <!-- 确认  取消 按钮 -->
+            <div style="margin-top: 20px">
+            </div>
+          </el-collapse-item>
+        </el-collapse>
+      </div>
+
+    </div>
+    <!-- ================================= 结束================================= -->
   </div>
 </template>
 
@@ -625,526 +130,598 @@
   export default {
     data() {
       return {
-        FormData: [],
-        Pwidth: [],
-        CFwidth: [],
-        inputWidth: [],
-        textareaPpraProj: [],
-        shotInputL: 10,
-        longInputL: 10,
-        longLongInputL: 10,
-        shotTextareaL: 10,
-        textareaL: 10,
-        acreage: '',
-        Percent: '',
-        Wordhint: {
-          Internet: {
-            excude: false,
-            comExcude: false,
-            looseCreSel: false,
-            looseCre: false,
-            comLooseCre: false,
-            phoneOUtSSel: false,
-            phoneOUtS: false,
-            comphoneOUtS: false,
-            ComName: false,
-            address: false,
-            comAddress: false,
-            loginOrNotSel: false,
-            loginOrNot: false,
-            institutionCode: false
-          },
-          checkID: {
-            answerDec: false,
-            Declear: false,
-            loanPurposed: false,
-          },
-          Working: {
-            address: false,
-            level: false,
-            preComName: false,
-            ComAdr: false,
-            department: false,
-          },
-          company: {
-            manage: false,
-            Supplier: false,
-            distributor: false,
-          },
-          family: {
-            SameCity: false,
-            ChildCondition: false,
-            ChildCt: false,
-            ParentRemark: false,
-            ParentHealth: false,
-            Payalimony: false,
-            siblings: false,
-          },
-          address: {
-            permanentAddress: false,
-          },
-          result: false,
-        },
-        getParams: [], //获取taskwaitting里面的 查询入参 applyId
-        pickerOptions1: {
-          disabledDate(time) {
-            return time.getTime() > Date.now();
-          }
-        },
-        Confirm: false,
-        reg: {
-          payDay: false,
-          mMontyP: false,
-          mpostCode: false,
-          mphoneM: false,
-          mphoneR: false,
-        },
-        reqd: '',
-        addressOne: '',
-        InternetShow: {
-          commentS: true,
-          commentS1: true,
-          commentS2: true,
-          commentS3: true,
-          commentS4: true,
-          commentS5: true,
-          commentS6: true,
-          commentS7: true,
-          commentS8: true,
-          commentS9: true,
-          commentS10: true,
-        },
-        checkId: {
-          declearNloaned: false,
-          loanNot: false,
-        },
-        workInf: {
-          private: false,
-          empNumber: false,
-        },
-        marriage: {
-          couple: true,
-          workingCondition: false,
-          workingLivingInf: false,
-        },
-        Children: {
-          ChildrenOrNot: false,
-          PayAlimony: false,
-          ChildCount: false,
-        },
-        parent: {
-          livingOrNot: false,
-        },
-        siblings: {
-          siblingsOrNot: false,
-        },
-        address: {
-          permanent: false,
-        },
-        Internet: ["客户执行", "单位执行", "客户失信", "单位失信", "客户手机", "单位名称", "单位电话", "客户住址房产", "单位地址", "企业登记", "单位组织代码",
-          "接听是否本人", "是否申请借款", "是否私营业主", "婚姻状况", "配偶工作情况", "同城工作生活", "是否有子女", "是否支付生活费", "父母是否在世", "是否有兄弟姐妹",
-          "是否为常住地址"
-        ],
-        activeNames: ['1', "2", "3", "4", "5", "6", "7", "8"],
-        checkData: [],
+        // props:[smallPicDivClose],
+        // picData: [],
+        perfBtn: false,
+        judgeFlag: '',
+        opendImg: [true, true, true, true],
+        closedImg: [false, false, false, false],
+        localInf: [], //初始化的时候，根据传进来的applyId获取初始化数据
+        showListDiv: true,
+        show: true,
+        smallPicInd: 0, // 未知
+        SmallPicShow: false,
+        CompareAlert: true,
+        ListParent: [],
+        ListDetails: [],
+        applyId: '', //入参
+        imgPath: [],
+        // ----------------------------------
+        activeNames: ['1', '2'], //查询弹出框 默认展开选项
+        dataa: false,
+        personal: [], // 匹配查询-个人
+        others: [], // 匹配查询-他人
+        currentRow: null,
+        custName: '',
+        custmatchApplySubNo: '',
       }
     },
+    props: ['msg'],
     methods: {
-      NewPage(ind) {
-        console.log(ind);
-        switch (ind) {
-          case 0:
-            window.open("http://zhixing.court.gov.cn/search/");
-            break;
-          case 1:
-            window.open("http://shixin.court.gov.cn/");
-            break;
-          case 2:
-            window.open("https://www.baidu.com");
-            break;
-          case 3:
-            window.open("http://www.nacao.org.cn/portal/publish/index.html");
-            break;
-          case 4:
-            window.open("https://www.tianyancha.com/");
-            break;
-        }
+      closeAlertSearch() {
+        this.dataa = false;
       },
-      AreaNPercent() {
-        if (this.checkData.selfpremisesArea) {
-          this.checkData.selfpremisesArea += "m²";
+      handleCurrentChange(val) {
+        this.currentRow = val;
+      },
+      PerBtn() {
+        this.perfBtn = true;
+      },
+      personalNunPerson() {
+        this.dataa = true;
+        // 个人进件        
+        this.post("/internalMatch/getPersonalInternalMatchList", {
+          // applySubNo: "201504130173041858",
+          // certCode: "341422198409070094",
+          applySubNo: this.localInf.applySubNo,
+          certCode: this.localInf.certCode,
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.personal = res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+        // //他人进件（ 不包含个人）
+        this.post("/internalMatch/getNonPersonalInternalMatch", {
+          pageParam: {
+            pageNum: "1", //当前页
+            pageSize: '1000' //每页的显示数量
+          },
+          //  applySubNo: "201504130173041858",
+          // certCode: "341422198409070094",
+          applySubNo: this.localInf.applySubNo,
+          certCode: this.localInf.certCode,
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.others = res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      },
+      getParentList(id) { //  未写 -----未对
+        console.log("table选中-获取父节点")
+        this.post("/productArchive/getProductArchiveParentList", {
+          applyId: id, //上面删除后 此处打开
+          // a2b23bbf-46ef-4d94-9872-322843cebb7d matchApplyId
+          // applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",//上面删除后 此处打开
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.ListParent = res.data;
+            this.localInf.applyId = id;
+            this.dataa = false;
+            this.custName = this.currentRow.matchApplyCustName;
+            this.custmatchApplySubNo = this.currentRow.matchApplySubNo;
+            this.$emit('inputInf', this.custName, this.custmatchApplySubNo);
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      },
+      getChildrenList(id, ind, item) {
+        if (this.opendImg[ind] == false) {
+          this.opendImg[ind] = true;
+          this.closedImg[ind] = false;
         } else {
-          this.checkData.selfpremisesArea = "";
+          for (var i = 0; i < this.opendImg.length; i++) {
+            this.opendImg[i] = true;
+            this.closedImg[i] = false;
+          }
+          this.opendImg[ind] = false;
+          this.closedImg[ind] = true;
         }
-        if (this.checkData.selfhasProportion) {
-          this.checkData.selfhasProportion += "%";
-        } else {
-          this.checkData.selfhasProportion = "";
+        this.closeImg = ind;
+        this.openImg = ind
+        // 二级（子）节点
+        this.post("/productArchive/getProductArchiveChildList", {
+          applyId: this.localInf.applyId,
+          pid: id
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.ListDetails = res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      },
+      getImg(ind) {
+        this.imgPath = this.ListDetails[ind].applyArchiveInfos;
+      },
+      hid() {
+        this.showListDiv = false;
+                this.$refs.preBtn.style.left = 37 + 'px';
+             this.$refs.PbtnIcons.style.left = 'calc( 50% - 97px)';
+        this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
+      },
+      showList() {
+        this.showListDiv = true;
+         this.$refs.preBtn.style.left = 223 + 'px';
+        this.$refs.PbtnIcons.style.left = ' calc( 50% + 9px)';
+        this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 214px)";
+      },
+      SmallpicClose() {
+        this.SmallPicShow = false;
+      },
+      SmallpicAlert() {
+        this.SmallPicShow = true;
+      },
+      pre() {
+        this.smallPicInd--;
+        this.defaultBigPicCss();
+        if (this.$refs.small_pic_ref) {
+          if (this.smallPicInd < 0) {
+            this.smallPicInd = this.$refs.small_pic_ref.length - 1;
+          }
         }
       },
-      mountJ(code, val) {
-        switch (code) {
-          case 0:
-            val == 0 ? this.InternetShow.commentS = false : this.InternetShow.commentS = true;
-            break;
-          case 1:
-            val == 0 ? this.InternetShow.commentS1 = false : this.InternetShow.commentS1 = true;
-            break;
-          case 2:
-            val == 0 ? this.InternetShow.commentS2 = false : this.InternetShow.commentS2 = true;
-            break;
-          case 3:
-            val == 0 ? this.InternetShow.commentS3 = false : this.InternetShow.commentS3 = true;
-            break;
-          case 4:
-            val == 0 ? this.InternetShow.commentS4 = false : this.InternetShow.commentS4 = true;
-            break;
-          case 5:
-            val == 0 ? this.InternetShow.commentS5 = false : this.InternetShow.commentS5 = true;
-            break;
-          case 6:
-            val == 0 ? this.InternetShow.commentS6 = false : this.InternetShow.commentS6 = true;
-            break;
-          case 7:
-            val == 0 ? this.InternetShow.commentS7 = false : this.InternetShow.commentS7 = true;
-            break;
-          case 8:
-            val == 0 ? this.InternetShow.commentS8 = false : this.InternetShow.commentS8 = true;
-            break;
-          case 9:
-            val == 0 ? this.InternetShow.commentS9 = false : this.InternetShow.commentS9 = true;
-            break;
-          case 10:
-            val == 0 ? this.InternetShow.commentS10 = false : this.InternetShow.commentS10 = true;
-            break;
-          case 11:
-            val == 0 ? this.checkId.declearNloaned = false : this.checkId.declearNloaned = true;
-            break;
-          case 12:
-            val == 0 || val == null ? this.workInf.private = false : this.workInf.private = true;
-            break;
-          case 13:
-            val == "01" || val == "04" || val == null ? this.marriage.couple = false : this.marriage.couple = true;
-            break;
-          case 14:
-            val == "00" || val == "03" ? this.marriage.workingCondition = true : this.marriage.workingCondition = false;
-            break;
-          case 15:
-            val == 0 || val == null ? this.marriage.workingLivingInf = false : this.marriage.workingLivingInf = true;
-            break;
-          case 16:
-            val == 0 || val == null ? this.Children.ChildrenOrNot = false : this.Children.ChildrenOrNot = true;
-            break;
-          case 17:
-            val == 0 || val == null ? this.Children.PayAlimony = false : this.Children.PayAlimony = true;
-            break;
-          case 18:
-            val == 0 || val == null ? this.parent.livingOrNot = false : this.parent.livingOrNot = true;
-            break;
-          case 19:
-            val == 0 || val == null ? this.siblings.siblingsOrNot = false : this.siblings.siblingsOrNot = true;
-            break;
-          case 20:
-            val == 0 ? this.address.permanent = true : this.address.permanent = false;
-            break;
-
-          case 21:
-            val == 0 || val == null ? this.checkId.loanNot = false : this.checkId.loanNot = true;
-            break;
+      next() {
+        this.smallPicInd++;
+        this.defaultBigPicCss();
+        if (this.$refs.small_pic_ref) {
+          if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
+            this.smallPicInd = 0;
+          }
         }
       },
+      larger() {
+        if (this.$refs.Big_pic_ref) {
+          this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
+            100 + "px";
+        }
+      },
+      smaller() {
+        if (this.$refs.Big_pic_ref) {
+          this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
+            100 + "px";
+        }
+      },
+      clockWise() {
+        if (this.$refs.Big_pic_ref) {
+          if (this.$refs.Big_pic_ref[0].style.transform == "") {
+            this.$refs.Big_pic_ref[0].style.transform += "rotate(90deg)";
+          } else {
+            this.$refs.Big_pic_ref[0].style.transform = this.$refs.Big_pic_ref[0].style.transform.slice(0, 7) + (
+              parseFloat(this.$refs
+                .Big_pic_ref[0]
+                .style.transform.slice(7, -4)) + 90) + this.$refs.Big_pic_ref[0].style.transform.slice(-4);
+          }
+        }
+      },
+      AclockWise() {
+        if (this.$refs.Big_pic_ref) {
+          if (this.$refs.Big_pic_ref[0].style.transform == "") {
+            this.$refs.Big_pic_ref[0].style.transform += "rotate(-90deg)";
+          } else {
+            this.$refs.Big_pic_ref[0].style.transform = this.$refs.Big_pic_ref[0].style.transform.slice(0, 7) + (
+              parseFloat(this.$refs
+                .Big_pic_ref[0]
+                .style.transform.slice(7, -4)) - 90) + this.$refs.Big_pic_ref[0].style.transform.slice(-4);
+          }
+        }
+      },
+      ChangeCss(ind) {
+        this.changeSmallPicCss(ind);
+      },
+      smallPic(ev, ind) {
+        this.smallPicInd = ind;
+        this.defaultBigPicCss();
+        this.SmallPicShow = false;
+      },
+      // 公共
+      defaultBigPicCss() {
+        console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).height)
+        console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
+        console.log(typeof (getComputedStyle(this.$refs.Big_pic_ref[0], false).width))
+        // if (getComputedStyle(this.$refs.Big_pic_ref[0], false).width > getComputedStyle(this.$refs.Big_pic_ref[0], //判断宽度>高度  按宽度100%显示
+        //     false).height) { // 点击切换图片时，让显示的大图宽高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
+        //   this.$refs.Big_pic_ref[0].style.width = "100%";//calc( 100% - 202px)
+        //   console.log("默认大图css样式if width >>>>>>>>>>> height" + this.$refs.Big_pic_ref[0].style.width)
+        // } else {
+        //   this.$refs.Big_pic_ref[0].style.height = "100%";
+        //   console.log("默认大图css样式else  width <<<<<<  height")
+        //   console.log(this.$refs.Big_pic_ref[0])
+        //   console.log(this.$refs.Big_pic_ref[0].style.height)
+        // }
+        // this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
+        //  this.$refs.big_pic[0].style.height = "100%"; // 点击切换图片时，让显示的大图高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
+        // this.$refs.big_pic[0].style.transform = "rotate(0deg)"
+      },
+      changeSmallPicCss(ind) {
+        for (var i = 0; i < this.$refs.small_pic_ref.length; i++) {
+          this.$refs.small_pic_ref[i].style.opacity = 1;
+        }
+        if (ind || ind == 0) {
+          this.$refs.small_pic_ref[ind].style.opacity = 0.8;
+        }
+      },
+      odivMove(id) {
+        var disX = 0;
+        var disY = 0;
+        var oDiv = document.getElementById(id);
+        oDiv.onmousedown = function (ev) {
+          var oEvent = ev || event;
+          disX = oEvent.clientX - oDiv.offsetLeft;
+          disY = oEvent.clientY - oDiv.offsetTop;
+          document.onmousemove = function (ev) {
+            var oEvent = ev || event;
+            oDiv.style.left = oEvent.clientX - disX + "px";
+            oDiv.style.top = oEvent.clientY - disY + "px";
+          }
+          document.onmouseup = function (ev) {
+            document.onmousemove = null;
+            document.onmouseup = null;
+          }
+          return false;
+        };
+      },
+      Imgscroll() {
+        this.perfBtn = true;
+        if (this.$refs.Big_pic_ref) {
+          this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {
+            event = event || window.event;
+            this.$refs.AudioVisual_Img_ref.scrollTop = 0;
+            if (event.wheelDelta < 0) {
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
+                100 + "px";
+            } else {
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
+                100 + "px";
+            }
+          };
+          this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => {
+            this.$refs.AudioVisual_Img_ref.scrollTop = 0;
+            if (event.detail > 0) {
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
+                  .height) -
+                100 + "px";
+            } else {
+              this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
+                  .height) +
+                100 + "px";
+            }
+          });
+        }
+      },
+      ImgScrollRemove() {
+        this.perfBtn = false;
+        this.$refs.AudioVisual_Img_ref.onmousewheel = "";
+        this.$refs.AudioVisual_Img_ref.removeEventListener('DOMMouseScroll', (event) => {
+          event.preventDefault();
+        }, false);
+      },
+      compBtnShow() {
+        this.$emit('CompareShow')
+      }
     },
     mounted() {
-      console.log(null=='')
-      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '01') {
-        this.getParams = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
-      } else if (this.judgeFlag.flag == '03') {
-        this.getParams = JSON.parse(localStorage.getItem("AntiWorkbenchPass")) //反欺诈专员
-      } else if (this.judgeFlag.flag == '04') {
-        this.getParams = JSON.parse(localStorage.getItem("AntiManagerWorkbenchPass")) //反欺诈主管
-      }
-      // 获取查询列表数据
-      this.post("/creauditInfo/queryCreauditInfoObj", {
-        applyId: this.getParams.applyId,
-        // applyId: "00542",
+      console.log("匹配-影像左")
+      // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      // if (this.judgeFlag.flag == '01') {
+      //   this.localInf = JSON.parse(localStorage.getItem("internalObj")) //初审-匹配查看
+      // } else if (this.judgeFlag.flag == '02') {
+      //   this.localInf = JSON.parse(localStorage.getItem("FinalinternalObj")) //终审-匹配查看
+      // } else if (this.judgeFlag.flag == '03') {
+      //   this.localInf = JSON.parse(localStorage.getItem("AntiinternalId")) //反欺诈专员-匹配查看
+      // } else if (this.judgeFlag.flag == '04') {
+      //   this.localInf = JSON.parse(localStorage.getItem("AntiManagerinternalId")) //反欺诈主管-匹配查看
+      // }
+      // this.odivMove(this.msg);
+      this.localInf = JSON.parse(localStorage.getItem("internalObj")) //初审-匹配查看
+      this.post("/productArchive/getProductArchiveParentList", {
+        applyId: this.localInf.matchApplyId,
+        // applyId: this.localInf.applyId,
+        // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
+        //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
       }).then(res => {
-        this.FormData = res.data;
-        console.log(this.FormData)
-        this.AreaNPercent();
-        this.mountJ(0, res.data.wbeexEcuted);
-        this.mountJ(1, res.data.wnetHirecom);
-        this.mountJ(2, res.data.wnetEcutedBrea);
-        this.mountJ(3, res.data.wnetHirecomBrea);
-        this.mountJ(4, res.data.wnetPhone);
-        this.mountJ(5, res.data.wnetHirecomName);
-        this.mountJ(6, res.data.wnetHirecomPhone);
-        this.mountJ(7, res.data.wnetAddrandEstate);
-        this.mountJ(8, res.data.wnetHirecomAddress);
-        this.mountJ(9, res.data.wnetCompany);
-        this.mountJ(10, res.data.wnetAddrstate);
-        this.mountJ(11, res.data.iisself);
-        this.mountJ(12, res.data.privateOwnerFlag);
-        this.mountJ(13, res.data.fmarrflag);
-        this.mountJ(14, res.data.spouseWork);
-        this.mountJ(15, res.data.spouseSamecity);
-        this.mountJ(16, res.data.childFlag);
-        this.mountJ(17, res.data.childIspaycost);
-        this.mountJ(18, res.data.parentIsliving);
-        this.mountJ(19, res.data.brothersIfhas);
-        this.mountJ(20, res.data.aisresident);
-        this.mountJ(21, res.data.iloanBefore);
+        if (res.statusCode == 200) {
+          this.ListParent = res.data;
+        } else {
+          this.$message.error(res.msg);
+        }
       });
-      // 省    
-      // this.get("/credit/queryProvince", {}).then(res => {
-      //   this.hirecomAddress = res.data;
-      // });
-      // // 所属行业 
-      // this.get("/credit/industry", {}).then(res => {
-      //   this.hirecomKind = res.data;
-      // })
-    },
+    }
   }
 
 </script>
-
 <style scoped>
-  .detail_inf {
-    display: inline-block;
-  }
+  /* css */
 
-  .InternetInf_left_label {
-    display: inline-block;
-    width: 182px;
-  }
-  /* ------------------------------------------------ */
-  /* 最下面的 弹窗样式 */
-  /* 上网信息-两行select下拉 居中 */
-
-  .btn {
-    margin: 20px 0 0 80%;
-  }
-
-  .icon_hat {
-    position: absolute;
-    top: 12px;
-    left: 14px
-  }
-   .blueC:hover {
-    color: rgba(0, 119, 255, 0.75);
-    /* color: #0077ff;
-    opacity:0.75; */
-    cursor: pointer;
-  }
-  /* 上网查询 */
-
-  .InternetInf_right_label {
-    width: 182px;
-    margin-right: 10px;
+  .AudioVisualLeft {
+    height: 100%;
   }
   /* public */
 
-  .CreditForm {
-    /* min-width: 1140px; */
-    /* min-width: 1420px; */
-    /* min-width: 1592px; */
-    overflow: auto;
-    overflow-x: hidden;
-    min-width: 1272px;
+  .small_pic_close {
+    position: absolute;
+    right: 18px;
+    top: 13px;
+  }
+  /* 图片功能按钮 */
+
+  .showBtn {
+    position: absolute;
+    top: 11px;
+    right: 2px;
   }
 
-  .up_padding {
-    padding-top: 10px;
+  .hidBtn {
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    z-index: 2;
   }
 
-  .CreditForm li {
-    color: #475669;
-    font-size: 14px;
-    vertical-align: middle;
-    position: relative;
-    clear: both;
-  }
-
-  .CreditForm p {
-    padding-top: 10px;
-  }
-
-  .CreditForm label {
-    display: inline-block;
-    text-align: right;
-  }
-  /*------------------------------------------- */
-  /* 各自 */
-  /* ------------------------------上网查询 +核实身份--------------------------- */
-
-  .CreditForm_InternetInf p,
-  /*  上网查询 */
-
-  .CreditForm_CheckId p,
-  /* 核实信息 ul */
-
-  .CreditForm_WorkInfs p,
-  /* 工作信息 */
-
-  .CreditForm_CompanyInfs p,
-  /* 私营企业 */
-
-  .CreditForm_FamilyInf p,
-  /* 家庭信息 */
-
-  .CreditForm_live p {
+  .hidDiv {
     float: left;
-    width: 33%;
-    vertical-align: middle;
-  }
-  /* --------------------------工作信息 + 私营企业--------------------- */
-
-  .CheckId_right_label
-  /* 第三列p */
-
-  {
-    width: 140px;
-  }
-
-  .layer {
-    width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, .4);
-    position: fixed;
+    overflow: auto;
+
+    width: 20px;
+    background: #eef0f9;
+    margin-right: 11px;
+    border: 1px solid #bfcbd9;
+    /* border-radius: 0 6px 6px 0; */
+    position: relative;
+    z-index: 2;
+  }
+  /* 对比-按钮 */
+
+  .compareBtn {
+    position: absolute;
+    bottom: 18px;
+    right: 98px;
+    color: #0077ff;
+    border: 1px solid #0077ff;
+    background: #eef0f9;
+  }
+  /* 缩略图-按钮 */
+
+  .checkDetailBtn {
+    position: absolute;
+    bottom: 18px;
+    right: 17px;
+  }
+
+  .showHidIcons {
+    display: none;
+  }
+  /*  放大、缩小 按钮 wrap */
+
+  .BtnIcons {
+    position: absolute;
+    z-index: 2;
+    left: calc( 50% + 9px);
+    top: calc( 100% - 110px);
+    width: 193px;
+    height: 52px;
+    background: rgba(71, 86, 105, 0.6);
+    box-shadow: 0 10px 20px 0 #47566942;
+    border-radius: 6px;
+    padding: 12px 0 11px 19px;
+  }
+
+  .BtnIcons img {
+    margin-right: 10px
+  }
+
+  .position_and_size {
+    position: absolute;
+    font-size: 30px;
+    z-index: 10;
+  }
+
+  .icon_pre {
+    position: absolute;
+    left: 223px;
+    top: 50%;
+    z-index: 2;
+  }
+
+  .icon_next {
+    position: absolute;
+    right: 24px;
+    z-index: 2;
+    top: 50%;
+  }
+
+  .NamParentNode {
+    margin-left: 20px;
+    display: block;
+    font-style: normal;
+    width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .AudioVisualLeft .AudioVisual_List,
+  .AudioVisualLeft .AudioVisual_Img {
+    float: left;
+    height: 100%;
+    overflow: auto;
+    position: relative;
+  }
+
+  .AudioVisualLeft .AudioVisual_Img {
+    width: calc( 100% - 214px);
+    /* background: yellowgreen; */
+  }
+  /*  css */
+
+  .AudioVisualLeft .AudioVisual_List {
+    width: 203px;
+    background: #eef0f9;
+    border: 1px solid #bfcbd9;
+    /* border-radius: 6px 6px 0 0; */
+    margin-right: 11px;
+  }
+  /* ----------------------------------- */
+  /* 左侧折叠面板 */
+  /* 折叠面板上面的四个 th 表头 */
+
+  .AudioVisualLeft .list_title {
+    line-height: 27px;
+    font-weight: bold;
+  }
+
+  .AudioVisualLeft .list_title span,
+  .AudioVisualLeft .list_title_div p span {
+    height: 35px;
+    line-height: 35px;
+    display: block;
+    float: left;
+    border: 1px solid #e6ebf5;
+    /* border: 1px solid black; */
+    border-bottom: none;
+    text-align: center;
+    position: relative;
+  }
+
+  .AudioVisualLeft .list_title span {
+    font-size: 14px;
+  }
+
+  .AudioVisualLeft .list_title_div p span {
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  .AudioVisualLeft .list_title span:nth-of-type(1),
+  .AudioVisualLeft .list_title_div p span:nth-of-type(1) {
+    width: 125px;
+    /* 省略号 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-left: none;
+  }
+
+  .AudioVisualLeft .list_title span:nth-of-type(2),
+  .AudioVisualLeft .list_title_div p span:nth-of-type(2) {
+    width: 70px;
+    border-right: none;
+    border-left: none;
+  }
+  /* 缩略图最外侧div */
+
+  .AudioVisualLeft .Small_pic_div {
+    position: absolute;
     left: 0;
     top: 0;
-    z-index: 1000;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    overflow: auto;
+    border: 1px solid #bfcbd9;
+    background: #ffffff;
+    /* background: #000; */
+    border-radius: 4px;
   }
+  /* 缩略图 p 标签  title */
 
-  .layer .layerbox {
-    width: 338px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -169px;
-    margin-top: -80px;
-    border: 1px solid #ccc;
-    background-color: #eee;
-    z-index: 10000;
-  }
-
-  .layer .layerbox p {
-    width: 100%;
-    height: 30px;
-    font-size: 14px;
-    line-height: 30px;
-    padding-left: 10px;
-    color: #475669;
-  }
-
-  .layer .layerbox p.choces {
+  .AudioVisualLeft .Small_pic_title {
+    font-size: 16px;
     text-align: center;
+    background: rgba(0, 119, 255, 0.75);
+    /* opacity: 0.75; */
+    /* background: #0077ff; */
+    height: 48px;
+    line-height: 48px;
+    color: #f8f9fd;
+    /* 不换行 */
+    /* white-space:nowrap; */
+    overflow: hidden;
+    position: relative;
   }
+  /* 缩略图 content */
 
-  .layer p i {
-    float: right;
-    font-size: 20px;
-    color: #0077ff;
-    padding: 5px 10px 0 0;
+  .AudioVisualLeft .small_pic_content {
+    position: relative;
+    height: calc( 100% - 48px);
+    overflow: auto;
+    padding-top: 30px;
   }
+  /* 缩略图片-figure-wrap */
 
-  .layer .layerbox div {
-    background-color: #fff;
-    height: 100px;
-    padding: 10px 10px;
-    width: 96%;
-    margin: auto;
-    margin-bottom: 8px;
-  }
-
-  .layer .layerbox .buttonDiv {
-    width: 100%;
-    height: 50px;
-    margin-top: 10px;
-  }
-
-  .layer .layerbox .buttonDiv button {
+  .AudioVisualLeft .small_pic_figure {
     float: left;
-    margin: 0 0 0 50px;
+    width: 30%;
+    height: 200px;
+    margin: 15px 0 0 2%;
+    /* margin: 0 0 0 23px; */
+  }
+  /*  缩略图 figure 内 图片名字 p 标签 */
+
+  .AudioVisualLeft .small_pic_figure p {
+    height: 22px;
+    width: 186px;
+    line-height: 22px;
+    margin-top: 15px;
+    text-align: center;
+    font-size: 16px;
+    color: #475669;
+    letter-spacing: 0.11px;
+    /* 超出 省略号显示 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  /* 缩略图 各个 img 图片 */
+
+  .AudioVisualLeft .Small_pic {
+    height: calc( 100% - 60px);
+    /* UI设计部分 */
+    border-radius: 5px;
+    border: 2px solid #bfcbd9;
+    box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
+  }
+  /* --------------------------- */
+
+  .posi {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+    z-index: 28;
   }
 
-  .layer .layerbox .infoButton {
-    height: auto;
+  .posi p {
+    font-size: 16px;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 20px;
+    background: rgba(0, 119, 255, 0.75);
+
+    color: #f8f9fd;
+    text-align: center
   }
 
-  .layer .layerbox .infoButton button {
-    float: right;
-  }
-  /* ========================================================================= */
-
-  .CreditForm_InternetInf p:nth-of-type(odd),
-  .CreditForm_CheckId p:nth-of-type(odd),
-  .CreditForm_FamilyInf li p:nth-of-type(1) {
-    width: 22%;
-  }
-
-  .CreditForm_InternetInf p:nth-of-type(even),
-  .CreditForm_CheckId p:nth-of-type(even),
-  .CreditForm_FamilyInf p:nth-of-type(even)
-  /* 家庭信息 */
-
-  {
-    width: 66%;
-  }
-
-  .CreditForm_InternetInf p:nth-of-type(even) span,
-  /* 上网查询 */
-
-  .CreditForm_CheckId p:nth-of-type(even) span,
-  /* 核实身份-右侧span width */
-
-  .CreditForm_FamilyInf p:nth-of-type(even) span
-  /* 家庭信息 */
-
-  {
-    width: calc( 100% - 197px);
-    height: 60px;
-    vertical-align: top;
+  .posi_content {
+    height: calc(100% - 48px);
     overflow: auto;
-    border: 1px solid #d8dce5;
-    padding: 5px 10px;
-    border-radius: 4px;
-  }
-  /* 工作信息-单位地址 + 私营企业-企业经营项目-------------label 为 182 px */
-
-  .ComAddr {
-    width: calc( 100% - 197px);
-    vertical-align: top;
-    height: 60px;
-    overflow: auto;
-    border: 1px solid #d8dce5;
-    padding: 5px 10px;
-    border-radius: 4px;
-  }
-  /* 私营企业-第一分销商 --------------------------------label 为 140 px */
-
-  .distributor {
-    width: calc( 100% - 155px);
-    vertical-align: top;
-    height: 60px;
-    overflow: auto;
-    border: 1px solid #d8dce5;
-    padding: 5px 10px;
-    border-radius: 4px;
-  }
-  /* 初审结果div */
-
-  .CreditForm_result {
-    /* width: calc( 66% - 197px); */
-    /* width:80%; */
-    padding: 15px 0 30px 0;
-  }
-  /* ------------测试-------------- */
-
-  .CreditForm_InternetInf p:nth-of-type(even) i {
-    background: red;
-    display: inline-block;
-    width: 66%
   }
 
 </style>
