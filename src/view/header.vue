@@ -131,6 +131,7 @@
     line-height: 70px;
     font-size: 30px;
     color: white;
+    position: relative;
   }
 
   .mheader .logoDiv {
