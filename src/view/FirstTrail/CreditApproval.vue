@@ -32,7 +32,8 @@
     <div class="btn-div">
       <el-button icon="el-icon-check-hang" class="credit-btn" @click="open">挂起</el-button>
       <el-button icon="el-icon-check-back" class="credit-btn" @click="coverFn('02')">回退</el-button>
-      <el-button icon="el-icon-check-reject" class="credit-btn" @click="coverFn('01')">拒绝</el-button>
+      <!-- BX20 根据角色 -->
+      <el-button icon="el-icon-check-reject" class="credit-btn" v-show="jujueShow" @click="coverFn('01')">拒绝</el-button>
       <el-button icon="el-icon-check-giveup" class="credit-btn" @click="coverFn('07')">放弃</el-button>
       <el-button icon="el-icon-check-appro" class="credit-btn" @click="coverFn('03')">审批</el-button>
       <el-button icon="el-icon-check-start" class="credit-btn" @click="coverFn('fqz')">发起反欺诈</el-button>
@@ -48,7 +49,7 @@
       <el-dialog :visible.sync="huiTuiShow" width="600px" top="30vh">
         <el-form class="back-form huitui-class">
           <!-- v-show="showFlag=='02'" -->
-          <div class="form-title" style="position:relative;" >
+          <div class="form-title" style="position:relative;">
             回退信息
             <el-tag closable @close="coverShow=false;showFlag='';huiTuiShow=false;" style="position:absolute;"></el-tag>
           </div>
@@ -118,7 +119,7 @@
         <!-- v-show="showFlag=='01'" -->
         <el-form class="back-form jujue-class">
           <!-- v-show="showFlag=='01'" -->
-          <div class="form-title" style="position:relative;" >
+          <div class="form-title" style="position:relative;">
             拒绝原因
             <el-tag closable @close="coverShow=false;showFlag='';juJueShow=false;" style="position:absolute;"></el-tag>
           </div>
@@ -180,7 +181,7 @@
       <el-dialog :visible.sync="fangQiShow" width="600px" top="30vh">
         <el-form class="back-form fangqi-class">
           <!-- v-show="showFlag=='07'" -->
-          <div class="form-title" style="position:relative;" >
+          <div class="form-title" style="position:relative;">
             放弃原因
             <el-tag closable @close="coverShow=false;showFlag='';fangQiShow=false;" style="position:absolute;"></el-tag>
           </div>
@@ -245,8 +246,8 @@
           审批信息
           <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
         </div> -->
-        <!-- v-show=" showFlag=='03'" -->
-          <div class="form-title" style="position:relative;" >
+          <!-- v-show=" showFlag=='03'" -->
+          <div class="form-title" style="position:relative;">
             审批信息
             <el-tag closable @close="coverShow=false;showFlag='';shenPiShow=false;proName='';" style="position:absolute;"></el-tag>
           </div>
@@ -655,10 +656,12 @@ export default {
       shenPiShow: false,
       spjlShow: false,
       lcgjShow: false,
+      jujueShow: false, // 拒绝 按钮 BX02
     }
   },
   mounted() {
     this.Social();
+
     // 取出标志taskNodeName
     // creditApp_finalTrial_five   信审总监审批 最高级不需要 更高级审批
     this.taskNodeName = localStorage.getItem('taskNodeName');
@@ -699,6 +702,12 @@ export default {
     //   .match(/\d{4}\-\d{2}\-\d{1,2}/)[0]
     // console.log(this.dealroperDate);
 
+    // 拒绝按钮根据 角色判断 BX20
+    if (this.userInfo.roleCodesList) {
+      for (var i = 0; i < this.userInfo.roleCodesList.length; i++)
+        if (this.this.userInfo.roleCodesList[i] == 'BX20')
+          this.jujueShow = true;
+    }
 
     // applyId
     // this.applyId = '00542';
@@ -2021,6 +2030,7 @@ export default {
 
 
 
+
 /* 三列 */
 
 .creditApproval-class .item-column3 {
@@ -2037,6 +2047,7 @@ export default {
   margin: 0;
   padding: 0;
 }
+
 
 
 
@@ -2148,6 +2159,7 @@ export default {
 
 
 
+
 /* 信审审批 - btn*/
 
 .creditApproval-class .credit-btn {
@@ -2156,6 +2168,7 @@ export default {
   color: #333;
   border: none;
 }
+
 
 
 
@@ -2283,6 +2296,7 @@ export default {
 
 
 
+
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -2290,6 +2304,7 @@ export default {
   float: left;
   margin: 0;
 }
+
 
 
 
@@ -2354,6 +2369,7 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
 
 
 
@@ -2509,11 +2525,13 @@ export default {
 
 
 
+
 /* textarea */
 
 .creditApproval-class .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
 
 
 
@@ -2643,6 +2661,7 @@ export default {
 
 
 
+
 /* 审批 表单 */
 
 .creditApproval-class .appro-form {
@@ -2707,6 +2726,7 @@ export default {
 
 
 
+
 /*.creditApproval-class .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -2714,6 +2734,7 @@ export default {
 .creditApproval-class .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
 
 
 
@@ -2836,6 +2857,7 @@ export default {
 
 
 
+
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -2843,6 +2865,7 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
 
 
 
@@ -2982,6 +3005,7 @@ export default {
 
 
 
+
 /* 申请信息 */
 
 .creditApproval-class .info .el-form-item__content {
@@ -2991,6 +3015,7 @@ export default {
 .creditApproval-class .info .el-form-item__label {
   width: 120px;
 }
+
 
 
 
@@ -3101,11 +3126,13 @@ export default {
 
 
 
+
 /* 有编辑框的 提示信息*/
 
 .creditApproval-class .back-form .back-form-edit-li {
   margin-top: 25px !important;
 }
+
 
 
 
@@ -3225,6 +3252,7 @@ export default {
 
 
 
+
 /*回退*/
 
 .creditApproval-class .el-icon-check-back {
@@ -3237,6 +3265,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -3353,6 +3382,7 @@ export default {
 
 
 
+
 /*放弃*/
 
 .creditApproval-class .el-icon-check-giveup {
@@ -3365,6 +3395,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -3481,6 +3512,7 @@ export default {
 
 
 
+
 /*发起反欺诈*/
 
 .creditApproval-class .el-icon-check-start {
@@ -3493,6 +3525,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -3609,6 +3642,7 @@ export default {
 
 
 
+
 /*流程轨迹*/
 
 .creditApproval-class .el-icon-check-lcgj {
@@ -3631,6 +3665,7 @@ export default {
 
 
 
+
 /*大数据风控*/
 
 .creditApproval-class .el-icon-check-big-data {
@@ -3643,6 +3678,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -3713,6 +3749,7 @@ export default {
 
 
 
+
 /* 折叠面板头部背景色和icon */
 
 .creditApproval-class .icon_hat {
@@ -3723,6 +3760,7 @@ export default {
 .creditApproval-class .headFont {
   font-size: 16px;
 }
+
 
 
 
@@ -3842,11 +3880,13 @@ export default {
 
 
 
+
 /* 信审审批  - 审批  编辑部分 */
 
 .creditApproval-class .appro-form .back-form-edit-li .el-form-item__label {
   /*width: 120px;*/
 }
+
 
 
 
@@ -3971,11 +4011,13 @@ export default {
 
 
 
+
 /* 两行文字 样式 */
 
 .creditApproval-class .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
 
 
 
@@ -4084,6 +4126,7 @@ export default {
 
 
 
+
 /* label 文字样式 */
 
 .creditApproval-class .huitui-class .el-form-item__label {
@@ -4091,6 +4134,7 @@ export default {
 }
 
 .creditApproval-class .jujue-class {}
+
 
 
 
@@ -4220,11 +4264,13 @@ export default {
 
 
 
+
 /* 审批信息  */
 
 .creditApproval-class .el-form-item__content .el-select .el-input {
   width: 100%;
 }
+
 
 
 
@@ -4297,6 +4343,7 @@ export default {
 
 
 
+
 /*大数据*/
 
 .creditApproval-class .bigDataLog .el-dialog__header {
@@ -4306,6 +4353,7 @@ export default {
 .creditApproval-class .bigDataLog .el-dialog__body {
   padding: 20px 30px;
 }
+
 
 
 
