@@ -191,7 +191,7 @@
 			  :visible.sync="sdialogVisible"
 			  width="860px"
 			  height="860px"
-			  top="20vh">
+			  top="16vh">
 			  <div class="shenpiBody">
 			  	<el-collapse v-model="activeNames" @change="handleChange">
 			  		<el-collapse-item title="申请信息" name="1">
