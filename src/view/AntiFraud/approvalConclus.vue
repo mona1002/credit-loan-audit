@@ -37,7 +37,7 @@
         </div>
         <div>
           <!-- @change="selectChange" -->
-          <el-select v-model="mainReason">
+          <el-select v-model="mainReason" @change="mainReasonChange">
             <el-option v-for="item in mainReasons" :label="item.reasonName" :value="item.id">
             </el-option>
           </el-select>
@@ -125,15 +125,17 @@
       <el-button icon="el-icon-check-hang" class="credit-btn" @click="open">挂起</el-button>
       <el-button v-show="judgeFlag != '03'" icon="el-icon-check-back" class="credit-btn" @click="coverFn('02')">回退</el-button>
       <!-- 专员 多一个审批 -->
-      <el-button v-show="judgeFlag == '03'" icon="el-icon-check-appro" class="credit-btn" @click="insert('submit')">审批</el-button>
+      <el-button v-show="judgeFlag == '03' && shenPiBtnShow" icon="el-icon-check-appro" class="credit-btn" @click="insert('submit')">审批</el-button>
       <!-- 原审批改为提交 -->
       <el-button icon="el-icon-check-appro" class="credit-btn" @click="insert()">提交</el-button>
       <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('lcgj')">流程轨迹</el-button>
       <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('save')">保存</el-button>
+      <el-button icon="el-icon-check-big-data" class="credit-btn" @click="tobigData">大数据风控</el-button>
+      <el-button icon="el-icon-check-social" class="credit-btn" @click="roSocialSecurity">社保公积金{{social}}</el-button>
     </div>
     <!-- 弹窗 -->
     <div>
-      <el-dialog :visible.sync="huiTuiShow">
+      <el-dialog :visible.sync="huiTuiShow" top="30vh">
         <!-- 回退 -->
         <el-form v-show="showFlag=='02'" class="back-form huitui-class">
           <div class="form-title" style="position:relative;" v-show="showFlag=='02'">
@@ -249,9 +251,27 @@
         </div>
       </el-dialog>
     </div>
+    <div class="bigDataLog">
+      <el-dialog title="提示" :visible.sync="bigDataLogVisible" width="420px" top="35vh">
+        <span>此进件不存在大数据风控明细！</span>
+        <span slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="infoSure">确定</el-button>
+        </span>
+      </el-dialog>
+    </div>
+    <!-- 社保公积金 -->
+    <div class="bigDataLog">
+      <el-dialog title="提示" :visible.sync="socialLogVisible" width="420px" top="35vh">
+        <span>客户社保公积金未授权！</span>
+        <span slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="socialSure">确定</el-button>
+        </span>
+      </el-dialog>
+    </div>
   </div>
 </template>
 <script>
+import baseurl from '../.././util/ConstantSocialAndPn';
 export default {
   data() {
     return {
@@ -337,9 +357,14 @@ export default {
       huiTuiShow: false, // 回退信息
       lcgjShow: false, // 流程轨迹
       shenPiShow: false, // 审批结论轨迹
+      shenPiBtnShow:false,  // 审批 专员 BX22
+      social: '', // 社保/公积金  授权标志
+      bigDataLogVisible: false, //大数据风控弹框
+      socialLogVisible: false, //社保公积金
     }
   },
   mounted() {
+    this.Social();
 
     // 取出 流程模版id
     this.processTemplateId = JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
@@ -388,6 +413,13 @@ export default {
         }
       ]
     } else if (this.judgeFlag == '03') {
+      // 反欺诈专员审批按钮，要判断下，功能角色号有配BX22的
+    if (this.userInfo.roleCodesList) {
+      for (var i = 0; i < this.userInfo.roleCodesList.length; i++)
+        if (this.this.userInfo.roleCodesList[i] == 'BX22')
+          if (this.judgeFlag == '03')
+            this.shenPiBtnShow = true;
+    }
       // 审批 专员 AntiWorkbenchPass
       this.taskId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
       // // 反欺诈申请id
@@ -402,6 +434,29 @@ export default {
       // 任务状态
       this.taskStatus = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskStatus;
 
+      // 先取 保存的信息
+      var insertObj = JSON.parse(localStorage.getItem('saveInsertObj'));
+      if (insertObj != undefined) {
+        this.auditResult = insertObj.auditResult; // 审核结论
+        this.mainReasonT = insertObj.mainreasonId; // 欺诈主原因id
+        this.secondReasonT = insertObj.subreasonId; // 欺诈子原因id
+        this.riskSection = insertObj.riskSection; // 风险项
+        this.auditDesc = insertObj.auditDesc; // 反欺诈决策反馈
+        this.caseNum = insertObj.caseNum; // 案件编号 caseNum
+        this.caseDesc = insertObj.caseDesc; // 案件描述
+        // 请求主原因
+        if (this.auditResult) {
+          this.getReason('main', this.auditResult, true);
+          // 赋值主原因
+        }
+        // 请求子原因
+        // this.secondReasonT = insertObj.subreasonId;
+        if (insertObj.mainreasonId) {
+          this.getReason('second', this.mainReasonT, true);
+        }
+        // 请求风险项
+        // this.getRiskItems();
+      }
     } else if (this.judgeFlag == '04') {
       // 审批主管
       this.taskId = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
@@ -440,46 +495,22 @@ export default {
         if (insertObj.mainreasonId) {
           this.getReason('second', this.mainReasonT, true);
         }
-
-        // 请求风险项
-        this.getRiskItems(true);
       } else {
-
         // 反欺诈主管 请求 反欺诈历史信息
         this.queryCreauditOpinionObj();
       }
-
-    }
-
-    // 请求风险项
-    this.getRiskItems(false);
-    // 请求  案件编号
-    this.queryCaseNumList();
-
-    // 先取 保存的信息
-    var insertObj = JSON.parse(localStorage.getItem('saveInsertObj'));
-    if (insertObj != undefined) {
-      this.auditResult = insertObj.auditResult; // 审核结论
-      this.mainReasonT = insertObj.mainreasonId; // 欺诈主原因id
-      this.secondReasonT = insertObj.subreasonId; // 欺诈子原因id
-      this.riskSection = insertObj.riskSection; // 风险项
-      this.auditDesc = insertObj.auditDesc; // 反欺诈决策反馈
-      this.caseNum = insertObj.caseNum; // 案件编号 caseNum
-      this.caseDesc = insertObj.caseDesc; // 案件描述
-      // 请求主原因
-      if (this.auditResult) {
-        this.getReason('main', this.auditResult, true);
-        // 赋值主原因
-      }
-      // 请求子原因
-      // this.secondReasonT = insertObj.subreasonId;
-      if (insertObj.mainreasonId) {
-        this.getReason('second', this.mainReasonT, true);
-      }
-
       // 请求风险项
-      this.getRiskItems(true);
+      // this.getRiskItems();
+
     }
+
+    // 将这里的 请求风险项 转移到 专员/主管内
+    // 请求风险项
+    // this.getRiskItems();
+    // 请求  案件编号
+    // this.queryCaseNumList();
+
+
 
   },
   methods: {
@@ -541,7 +572,7 @@ export default {
       })
     },
     // 请求风险项
-    getRiskItems(TF) {
+    getRiskItems() {
       this.get('/credit/getRiskItems?applyId=' + this.applyId).then(res => {
 
         if (res.statusCode == 200) {
@@ -1144,10 +1175,15 @@ export default {
           console.log(res);
           if (res.statusCode == '200') {
             this.mainReasons = res.data;
-            console.log
             if (TF == true) {
               console.log('主管 主原因');
               this.mainReason = this.mainReasonT;
+            }else if(TF ==false){
+              console.log('主管 主原因 false');
+              this.mainReason = '';
+              this.secondReason = '';
+            }else{
+              console.log('主管 主原因改变');
             }
             console.log(this.mainReason);
           }
@@ -1164,6 +1200,12 @@ export default {
               this.secondReason = this.secondReasonT;
               console.log(this.secondReason);
               console.log('子原因 赋值')
+            }else if(TF == false){
+
+            }else{
+              console.log('主管 子原因 false');
+              this.secondReason = '';
+              console.log('主管 主原因 改变')
             }
           }
         })
@@ -1197,7 +1239,7 @@ export default {
           // this.mainReason = res.data.mainreasonId;
           // 请求子原因   subreasonId
           this.secondReasonT = res.data.subreasonId;
-          if (res.data.mainreasonId) {
+          if (res.data.mainreasonId) {  
             this.getReason('second', this.mainReasonT, true);
           }
           this.subreaName = res.data.subreaName;
@@ -1213,10 +1255,61 @@ export default {
           this.caseDesc = res.data.caseDesc;
 
           // 请求风险项
-          this.getRiskItems(true);
+          this.getRiskItems();
+          // 请求案件编号
+          this.queryCaseNumList();
         }
       })
-    }
+    },
+    mainReasonChange(val){
+    //   console.log(val);
+    //   // 主原因改变 请求子原因
+    //   this.getReason('second',val,false)
+    },
+//大数据风控
+    tobigData() {
+      this.post(baseurl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
+        applyId: this.applyId
+      }).then(res => {
+        //console.log(res.data);
+        if (res.obj == null) {
+          // alert('社保')
+          this.bigDataLogVisible = true;
+          // alert(this.bigDataLogVisible)
+        } else if (res.obj) {
+          this.$router.push({ path: '/PneCtrl' });
+        }
+      });
+    },
+    //大数据风控 提示弹框关闭
+    infoSure() {
+      this.bigDataLogVisible = false;
+    },
+    //社保/公积金
+    Social() {
+      this.post(baseurl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {
+        certCode: this.certCode,
+        custName: this.custName
+      }).then(res => {
+        if (res.obj == null) {
+          this.social = "(未授权)";
+        } else if (res.obj) {
+          this.social = "(已授权)";
+        }
+      });
+    },
+    roSocialSecurity() {
+      // alert('社保')
+      if (this.social == "(未授权)") {
+        this.socialLogVisible = true;
+      } else if (this.social == "(已授权)") {
+        this.$router.push({ path: '/SocialSe' });
+      }
+    },
+    //社保公积金 弹窗关闭
+    socialSure() {
+      this.socialLogVisible = false;
+    },
   },
   watch: {
     // 审核结论 改变请求主原因
@@ -1224,16 +1317,16 @@ export default {
       console.log(this.auditResult);
       // 审核结论改变 , 主原因 子原因 都清空
       this.mainReason = '';
+      // this.mainReasonName = '';
       this.mainId = '';
       this.secondReason = '';
-
-      this.getReason('main', val, false);
-
-
+      // this.secondReasonName = '';
+      this.getReason('main', val);
     },
     // // 通过主原因  请求 子原因
     mainReason: function(val) {
       this.secondReason = '';
+      // this.secondReasonName = '';
       this.getReason('second', val, false);
     }
   }
@@ -1256,6 +1349,7 @@ export default {
   /*margin-top: 20px;*/
   overflow: hidden;
 }
+
 
 
 
@@ -1300,6 +1394,7 @@ export default {
 
 
 
+
 /* 一列 */
 
 .approval-colun .item-column1 {
@@ -1325,6 +1420,7 @@ export default {
 
 
 
+
 /* 两列 */
 
 .approval-colun .item-column2 {
@@ -1332,6 +1428,7 @@ export default {
   float: left;
   margin: 0;
 }
+
 
 
 
@@ -1384,6 +1481,7 @@ export default {
 
 
 
+
 /* 3列 空位 */
 
 .approval-colun .item-column3-null {
@@ -1398,6 +1496,7 @@ export default {
   height: 30px;
   line-height: 30px;
 }
+
 
 
 
@@ -1446,6 +1545,7 @@ export default {
 
 
 
+
 /* 按钮集合控件 */
 
 .approval-colun .btn-div {
@@ -1453,6 +1553,7 @@ export default {
   width: 80%;
   float: left;
 }
+
 
 
 
@@ -1499,6 +1600,7 @@ export default {
 
 
 
+
 /*回退*/
 
 .approval-colun .el-icon-check-back {
@@ -1511,6 +1613,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -1557,6 +1660,7 @@ export default {
 
 
 
+
 /*放弃*/
 
 .approval-colun .el-icon-check-giveup {
@@ -1569,6 +1673,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -1615,6 +1720,7 @@ export default {
 
 
 
+
 /*流程轨迹*/
 
 .approval-colun .el-icon-check-lcgj {
@@ -1627,6 +1733,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -1669,17 +1776,17 @@ export default {
 
 
 
+
 /* 反欺诈 审批结论  - - 弹窗*/
 
 .approval-colun .el-dialog {
   width: 600px;
-  margin-top: 30vh !important;
+  margin-top: 30vh;
 }
 
 .approval-colun .el-dialog__header {
   display: none;
 }
-
 .approval-colun .el-dialog__body {
   padding: 0;
 }
@@ -1694,6 +1801,7 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
 
 
 
@@ -1767,11 +1875,13 @@ export default {
 
 
 
+
 /* textarea */
 
 .approval-colun .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
 
 
 
@@ -1822,6 +1932,7 @@ export default {
 
 
 
+
 /* 审批 表单 */
 
 .approval-colun .appro-form {
@@ -1851,6 +1962,7 @@ export default {
 
 
 
+
 /*.approval-colun .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -1858,6 +1970,7 @@ export default {
 .approval-colun .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
 
 
 
@@ -1919,11 +2032,13 @@ export default {
 
 
 
+
 /* 反欺诈 -- 审批结论 */
 
 .approval-colun .form-ul {
   padding-left: 30px;
 }
+
 
 
 
@@ -1981,11 +2096,13 @@ export default {
 
 
 
+
 /* 审批 label*/
 
 .approval-colun .appro-form .back-form-edit-li .el-form-item__label {
   width: 120px;
 }
+
 
 
 
@@ -2029,11 +2146,13 @@ export default {
 
 
 
+
 /* 两行文字 样式 */
 
 .approval-colun .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
 
 
 
@@ -2078,6 +2197,7 @@ export default {
 
 
 
+
 /* 详细 信息按钮*/
 
 .approval-colun .btn-detail {
@@ -2086,6 +2206,7 @@ export default {
   margin-top: 35px;
   margin-left: 10px;
 }
+
 
 
 
@@ -2133,6 +2254,7 @@ export default {
 
 
 
+
 /* 分页 */
 
 .approval-colun .tool-bar {
@@ -2157,11 +2279,13 @@ export default {
 
 
 
+
 /* 隐藏分页 */
 
 .approval-colun .el-pagination__jump {
   display: none;
 }
+
 
 
 
@@ -2251,6 +2375,39 @@ export default {
 
 .approval-colun .risk-select .el-input--suffix .el-input__inner {
   height: 60px;
+}
+
+
+
+
+/*大数据风控*/
+
+.approval-colun .el-icon-check-big-data {
+  background: url(../../../static/images/bigdata.png);
+  width: 30px;
+  height: 30px;
+  background-size: 30px;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+/*社保公积金*/
+
+.approval-colun .el-icon-check-social {
+  background: url(../../../static/images/social.png);
+  width: 30px;
+  height: 30px;
+  background-size: 30px;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.approval-colun .bigDataLog .el-dialog__body{
+  padding: 30px 20px;
 }
 
 </style>

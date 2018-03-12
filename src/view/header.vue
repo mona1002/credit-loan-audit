@@ -5,8 +5,8 @@
       <!-- <img class="logo" src="/static/images/logo.png"> -->
       风控管理系统
     </div>
-      <div class="icon" style="left:198px;" @click="le" id="iconl"><</div>
-    <div class="icon" style="right:100px;" @click="ri" id="iconr">></div>
+      <div class="icon" style="left:198px;background:#2ea8e0;" @click="le" id="iconl"><</div>
+    <div class="icon" style="right:100px;background:#4fc9ed" @click="ri" id="iconr">></div>
     <!-- 导航内容 -->
     <div class="navContain"  ref="kkkkk" style="left:230px" >
       <!-- <div class="contain"> -->
@@ -87,19 +87,25 @@
           window.location.href = UserURL + "#/workbench";
         },
         le(){
-          if(this.$refs.kkkkk.style.left == 'calc( -100% - 135px )'){
-            $('#iconl').attr("disabled",true);  
-           }else{
-            this.$refs.kkkkk.style.left = parseFloat(this.$refs.kkkkk.style.left) - 150 + "px";
-           };
+          //console.log(parseInt(this.$refs.kkkkk.style.left));
+          if($('.navContain').width()<=$('.mheader').width()){
+            $('#iconl').attr("disabled",true);
+          }else{
+            //console.log('yyyy');
+            if(parseInt(this.$refs.kkkkk.style.left) == ($('.mheader').width()-130-$('.navContain').width()) || parseInt(this.$refs.kkkkk.style.left) < ($('.mheader').width()-130-$('.navContain').width()) ){
+              //console.log('yyyy2');
+              $('#iconl').attr("disabled",true);
+            }else{
+              this.$refs.kkkkk.style.left = parseFloat(this.$refs.kkkkk.style.left) - 150 + "px";
+              //console.log('yyyy3');
+            }
+            
+          }
         },
        ri(){
-        console.log('lll');
         if(this.$refs.kkkkk.style.left == '230px'){
-          console.log('lll2');
           $('#iconr').attr("disabled",true);  
          }else{
-          console.log('lll3');
           this.$refs.kkkkk.style.left = parseFloat(this.$refs.kkkkk.style.left) + 150 + "px";
          };
         },
@@ -139,13 +145,13 @@
     float: left;
     height: 70px;
     border-right: 1px solid #bfcbd9;
-    background: rgba(69, 115, 227, .2);
+   /*  background: rgba(69, 115, 227, .2); */
+    background: rgb(51, 158, 225);
     font-size: 20px;
     color: #fff;
     padding: 0 33px;
     line-height: 70px;
     letter-spacing: 2px;
-    background: red;
     position: absolute;
     z-index: 200;
   }
@@ -153,17 +159,17 @@
   /* 导航内容 */
 
   .mheader .navContain {
-    width: calc( 100% - 360px);
+    /* width: calc( 100% - 360px); */
     height: 70px;
     position: absolute;
-    background: pink;
+    /* background: pink; */
   }
 
   .mheader .backIcon {
     width: 60px;
     padding: 0 16px;
     line-height: 70px;
-    background: green;
+    background: #4fc9ed;
     position: absolute;
     right: 0px;
     width: 100px;
@@ -173,7 +179,6 @@
   .icon {
     width: 30px;
     height: 70px;
-    background: purple;
     position: absolute;
     color: blue;
     z-index: 210;

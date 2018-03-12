@@ -10,7 +10,7 @@
         <!-- {{title1}} -->
       </div>
       <!-- 移动电话 -->
-      <el-table  :data="mobileData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickMobiel" highlight-current-row v-loading="mobileLoading">
+      <el-table :data="mobileData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickMobiel" highlight-current-row v-loading="mobileLoading">
         <el-table-column prop="targetCustName" label="命中号码姓名" min-width="150">
         </el-table-column>
         <el-table-column prop="applyTelTypeTxt" label="电话类型" min-width="100">
@@ -40,7 +40,7 @@
         <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">固定电话类(家电、单电)</span>
       </div>
-      <el-table  :data="fixTelData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickFixTel" highlight-current-row v-loading="fixTelLoading">
+      <el-table :data="fixTelData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickFixTel" highlight-current-row v-loading="fixTelLoading">
         <el-table-column prop="targetCustName" label="命中号码姓名" min-width="150">
         </el-table-column>
         <el-table-column prop="applyTelTypeTxt" label="电话类型" min-width="100">
@@ -70,7 +70,7 @@
         <span class="headFont">单位名称</span>
       </div>
       <!-- 单位名称 -->
-      <el-table  :data="workData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickCompany" highlight-current-row v-loading="companyLoading">
+      <el-table :data="workData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickCompany" highlight-current-row v-loading="companyLoading">
         <el-table-column prop="targetCustName" label="命中号码姓名" min-width="150">
         </el-table-column>
         <el-table-column prop="applyTelTypeTxt" label="电话类型" min-width="100">
@@ -445,6 +445,19 @@ export default {
 
           });
         }
+      },
+      watch: {
+        // 匹配结论输入
+        audit_desc: function(val) {
+          // console.log(val);
+          if (val.length >= 500) {
+            this.$message({
+              type: 'warning',
+              message: '请输入500字以内的结论！'
+            });
+          }
+        }
+
       }
     },
     // 匹配结论查看
@@ -546,6 +559,9 @@ export default {
 
 
 
+
+
+
 /* 分页 */
 
 .internalMatch-class .tool-bar {
@@ -554,6 +570,9 @@ export default {
   padding: 10px 0 0 10px;
   margin-bottom: 10px;
 }
+
+
+
 
 
 
@@ -634,6 +653,9 @@ export default {
 
 
 
+
+
+
 /* 确认按钮 */
 
 .internalMatch-class .mark-button {
@@ -671,11 +693,17 @@ export default {
 
 
 
+
+
+
 /* 行高 */
 
 .internalMatch-class thead tr {
   height: 40px;
 }
+
+
+
 
 
 
@@ -740,6 +768,9 @@ export default {
 
 
 
+
+
+
 /* 备注 width*/
 
 .internalMatch-class .mark-cell {
@@ -774,12 +805,18 @@ export default {
 
 
 
+
+
+
 /* tr */
 
 .internalMatch-class .el-table tr {
   height: 35px;
   background: #ffffff;
 }
+
+
+
 
 
 
