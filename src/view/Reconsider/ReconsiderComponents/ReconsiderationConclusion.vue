@@ -569,7 +569,7 @@
 			//申请单ID
 			this.id = JSON.parse(localStorage.getItem('RtaskInWaitting')).applyId;
 			this.request();
-			this.Social();
+			
 			//经办人
 			this.dealroperCode = JSON.parse(localStorage.getItem('userInf')).userCode;
 			this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
@@ -602,6 +602,7 @@
 			      		this.datas=res.data;
 			      		this.datas.eachTermAmt = this.formatNumber(this.datas.eachTermAmt,2,0);
 			      		this.datas.loanAmt = this.formatNumber(this.datas.loanAmt,2,0);
+			      		this.Social();
 			      	}	
 			      })
 			},
@@ -1181,11 +1182,12 @@
 			},
 		    //社保/公积金
 		    Social(){
+		    	console.log(this.datas);
 		    	this.post(baseurl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action',{
 					certCode:this.datas.certCode,
 					custName:this.datas.custName
 				}).then(res =>{
-					if(res.obj == null){
+					if(res.obj == null || res.obj == ''){
 			      		this.social = "(未授权)";
 			      	}else if(res.obj){
 			      		this.social = "(已授权)";
