@@ -759,7 +759,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 		        appConclusion: this.appConclusion,//审批结论内容（文本框）
 		        newOldMainnos: '', //借新还旧进件编号集合
 		        applyMainNo: '', //主进件编号
-		        applySubNo: '', //从进件编号
+		        applySubNo: this.datas.applySubNo, //从进件编号
 		        appOrgId: this.appOrgId, //进件机构ID
 		        appOrgCode: this.appOrgCode, //进件机构代码
 		        applyType: '', //申请类型[“00”:”非循环贷”,”01”:”循环贷(借新还旧)”,”02”:”循环贷(非借新还旧)”]
