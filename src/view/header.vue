@@ -5,18 +5,18 @@
       <!-- <img class="logo" src="/static/images/logo.png"> -->
       风控管理系统
     </div>
-    <div class="icon" style="left:150px;" @click="le">aaa</div>
-    <div class="icon" style="right:200px;" @click="ri">bbb</div>
+      <div class="icon" style="left:198px;" @click="le" id="iconl"><</div>
+    <div class="icon" style="right:100px;" @click="ri" id="iconr">></div>
     <!-- 导航内容 -->
-    <div class="navContain" ref="kkkkk" style="left:200px">
-      <div class="contain">
+    <div class="navContain"  ref="kkkkk" style="left:230px" >
+      <!-- <div class="contain"> -->
         <nobr>
           <el-menu router unique-opened mode="horizontal" ref="navbar" active-text-color="#ffd04b" :default-active="onRoutes" @select="selectMenu">
             <nav-item v-for="(item, n) in datas" :item="item" :navIndex="String(n)" :key="n">
             </nav-item>
           </el-menu>
         </nobr>
-      </div>
+      <!-- </div> -->
     </div>
     <div class="backIcon">
       <img @click="backLoin" src="/static/images/backLoin.png">
@@ -38,7 +38,7 @@
       this.request();
     },
     methods: {
-      request() {
+        request() {
         this.post('/smUser/getResTree').then(res => {
           this.datas = res.data;
           //console.log(this.datas);
@@ -58,8 +58,8 @@
              }
           }*/
         })
-      },
-      selectMenu(index, indexPath) {
+        },
+        selectMenu(index, indexPath) {
         //console.log(indexPath);
         /**
          * 在选择父级菜单时自动关闭其下所有子菜单
@@ -81,17 +81,28 @@
         openMenu.forEach((ele) => {
           this.$refs.navbar.closeMenu(ele)
         })
-      },
-      backLoin() {
-        window.location.href = UserURL + "#/workbench";
-      },
-      le() {
-        this.$refs.kkkkk.style.left = parseFloat(this.$refs.kkkkk.style.left) - 100 + "px";
 
-      },
-      ri() {
-        this.$refs.kkkkk.style.left = parseFloat(this.$refs.kkkkk.style.left) + 100 + "px";
-      },
+        },
+        backLoin() {
+          window.location.href = UserURL + "#/workbench";
+        },
+        le(){
+          if(this.$refs.kkkkk.style.left == 'calc( -100% - 135px )'){
+            $('#iconl').attr("disabled",true);  
+           }else{
+            this.$refs.kkkkk.style.left = parseFloat(this.$refs.kkkkk.style.left) - 150 + "px";
+           };
+        },
+       ri(){
+        console.log('lll');
+        if(this.$refs.kkkkk.style.left == '230px'){
+          console.log('lll2');
+          $('#iconr').attr("disabled",true);  
+         }else{
+          console.log('lll3');
+          this.$refs.kkkkk.style.left = parseFloat(this.$refs.kkkkk.style.left) + 150 + "px";
+         };
+        },
     },
     computed: {
       onRoutes() {
@@ -142,31 +153,16 @@
   /* 导航内容 */
 
   .mheader .navContain {
-    width: calc( 100% - 305px);
+    width: calc( 100% - 360px);
     height: 70px;
     position: absolute;
     background: pink;
-    /* position: relative;
-    overflow: hidden; */
   }
-
-  /* .mheader .navContain:after{
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 2px;
-    background-color: #e4e7ed;
-    z-index: 1;
-    width: 100%;
-  } */
 
   .mheader .backIcon {
     width: 60px;
     padding: 0 16px;
     line-height: 70px;
-    /* float: right; */
     background: green;
     position: absolute;
     right: 0px;
@@ -175,10 +171,11 @@
   }
 
   .icon {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 70px;
     background: purple;
     position: absolute;
+    color: blue;
     z-index: 210;
   }
 
