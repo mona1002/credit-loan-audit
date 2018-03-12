@@ -171,6 +171,7 @@
     width: auto;
     display: inline-block;
     height: 70px;
+    float: left;
   }
 
 </style>
