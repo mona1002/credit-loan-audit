@@ -71,16 +71,16 @@
 <style>
   @import "../static/css/common.css";
   @import "../static/css/element_UI.css";
-  .main{
+  /* .main{
   height: 800px;
   overflow: hidden;
   background: #000;
-}
+} */
 
-  .fottt {
+  /* .fottt {
     position: absolute;
     bottom: 0;
-  }
+  } */
 #app{
   overflow-x: hidden;
   min-width: 1366px;
