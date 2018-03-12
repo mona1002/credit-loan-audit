@@ -401,6 +401,16 @@ export default {
     };
   },
 
+  watch: {
+    '$route'(to,from){
+      if(to.fullPath !== from.fullPath){
+        this.getUserInf();
+        this.getProcessMonitorList();
+        this.getProductForUser();    
+      }
+    }
+  },
+
   mounted() {
     this.getUserInf();
     this.getProcessMonitorList();

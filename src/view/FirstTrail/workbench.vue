@@ -6,33 +6,6 @@
       <div class="main_left">
         <h2>
           <i class="el-icon-edit"> </i>常用 </h2>
-        <router-link to="/processMoni?creditApp00">
-          <el-button type="primary">信审未分配监控</el-button>
-        </router-link>
-        <router-link to="/processMoni?creditApp01">
-          <el-button type="primary">信审已分配监控</el-button>
-        </router-link>
-        <router-link to="/processMoni?creditApp03">
-          <el-button type="primary">信审已完成监控</el-button>
-        </router-link>
-        <router-link to="/processMoni?reconsiderApp00">
-          <el-button type="primary">复议未分配监控</el-button>
-        </router-link>
-        <router-link to="/processMoni?reconsiderApp01">
-          <el-button type="primary">复议已分配监控</el-button>
-        </router-link>
-        <router-link to="/processMoni?reconsiderApp03">
-          <el-button type="primary">复议已完成监控</el-button>
-        </router-link>
-        <router-link to="/processMoni?antiFraudApp00">
-          <el-button type="primary">反欺诈未分配监控</el-button>
-        </router-link>
-        <router-link to="/processMoni?antiFraudApp01">
-          <el-button type="primary">反欺诈已分配监控</el-button>
-        </router-link>
-        <router-link to="/processMoni?antiFraudApp03">
-          <el-button type="primary">反欺诈已完成监控</el-button>
-        </router-link>
       </div>
       <div class="main_right">
         <!-- 中间 -->
@@ -265,7 +238,8 @@
           userCode: response.data.userCode,
           orgCode: response.data.orgCode,
           orgId: response.data.orgId,
-          userName: response.data.userName
+          userName: response.data.userName,
+          roleCodesList: response.data.roleCodesList, // 初审拒绝按钮
         }
         localStorage.setItem("userInf", JSON.stringify(this.userInf));
         this.post("/workFlowTaskQuery/getTaskProfile", {

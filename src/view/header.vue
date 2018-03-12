@@ -81,6 +81,7 @@
         openMenu.forEach((ele) => {
           this.$refs.navbar.closeMenu(ele)
         })
+
         },
         backLoin() {
           window.location.href = UserURL + "#/workbench";
@@ -174,6 +175,7 @@
     width: 100px;
     z-index: 200;
   }
+
   .icon {
     width: 30px;
     height: 70px;
@@ -181,6 +183,7 @@
     color: blue;
     z-index: 210;
   }
+
   .mheader .navContain .el-menu div {
     width: auto;
     display: inline-block;
