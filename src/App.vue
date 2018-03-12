@@ -1,11 +1,8 @@
 <template>
-<div id="app">
-  <!-- <div id="aaa"> -->
+  <div id="app">
     <router-view class="Abody main" @onbeforeunload="aaa "></router-view>
     <!-- <tag class="fottt"></tag> -->
-  <!-- </div> -->
-</div>
-
+  </div>
 
 </template>
 
@@ -74,17 +71,18 @@
 <style>
   @import "../static/css/common.css";
   @import "../static/css/element_UI.css";
-  /* .main{
+  .main{
   height: 800px;
   overflow: hidden;
-} */
+  background: #000;
+}
 
-  /* .fottt {
+  .fottt {
     position: absolute;
     bottom: 0;
-  } */
+  }
 #app{
-  min-width: 1366px;
   overflow-x: hidden;
+  min-width: 1366px;
 }
 </style>
