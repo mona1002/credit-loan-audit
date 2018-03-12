@@ -705,7 +705,7 @@ export default {
     // 拒绝按钮根据 角色判断 BX20
     if (this.userInfo.roleCodesList) {
       for (var i = 0; i < this.userInfo.roleCodesList.length; i++)
-        if (this.this.userInfo.roleCodesList[i] == 'BX20')
+        if (this.userInfo.roleCodesList[i] == 'BX20')
           if (this.judgeFlag == '01')
             this.jujueBtnShow = true;
     }
