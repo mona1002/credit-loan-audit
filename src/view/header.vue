@@ -5,10 +5,10 @@
       <!-- <img class="logo" src="/static/images/logo.png"> -->
       风控管理系统
     </div>
-      <div class="icon" style="left:150px;" @click="le">aaa</div>
+    <div class="icon" style="left:150px;" @click="le">aaa</div>
     <div class="icon" style="right:200px;" @click="ri">bbb</div>
     <!-- 导航内容 -->
-    <div class="navContain"  ref="kkkkk" style="left:200px" >
+    <div class="navContain" ref="kkkkk" style="left:200px">
       <div class="contain">
         <nobr>
           <el-menu router unique-opened mode="horizontal" ref="navbar" active-text-color="#ffd04b" :default-active="onRoutes" @select="selectMenu">
@@ -85,13 +85,13 @@
       backLoin() {
         window.location.href = UserURL + "#/workbench";
       },
- le(){
-   this.$refs.kkkkk.style.left = parseFloat(this.$refs.kkkkk.style.left) - 100 + "px";
+      le() {
+        this.$refs.kkkkk.style.left = parseFloat(this.$refs.kkkkk.style.left) - 100 + "px";
 
       },
-ri(){
-   this.$refs.kkkkk.style.left = parseFloat(this.$refs.kkkkk.style.left) + 100 + "px";
-},
+      ri() {
+        this.$refs.kkkkk.style.left = parseFloat(this.$refs.kkkkk.style.left) + 100 + "px";
+      },
     },
     computed: {
       onRoutes() {
@@ -173,6 +173,7 @@ ri(){
     width: 100px;
     z-index: 200;
   }
+
   .icon {
     width: 50px;
     height: 50px;
@@ -180,6 +181,7 @@ ri(){
     position: absolute;
     z-index: 210;
   }
+
   .mheader .navContain .el-menu div {
     width: auto;
     display: inline-block;
