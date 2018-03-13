@@ -370,7 +370,7 @@
           <el-table :data="tableData.recordList" height="280" border style="width: 100%" highlight-current-row v-loading="loading">
             <el-table-column prop="verIncome" label="核实收入[元]" min-width="100">
             </el-table-column>
-            <el-table-column prop="proCode" label="批准产品" min-width="80">
+            <el-table-column prop="proName" label="批准产品" min-width="80">
             </el-table-column>
             <el-table-column prop="ploanAmt" label="批准金额[元]" min-width="100">
             </el-table-column>
