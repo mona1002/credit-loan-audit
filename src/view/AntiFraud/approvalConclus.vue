@@ -416,7 +416,7 @@ export default {
       // 反欺诈专员审批按钮，要判断下，功能角色号有配BX22的
     if (this.userInfo.roleCodesList) {
       for (var i = 0; i < this.userInfo.roleCodesList.length; i++)
-        if (this.this.userInfo.roleCodesList[i] == 'BX22')
+        if (this.userInfo.roleCodesList[i] == 'BX22')
           if (this.judgeFlag == '03')
             this.shenPiBtnShow = true;
     }
@@ -1197,11 +1197,10 @@ export default {
             console.log(111111111111111)
             if (TF == true) {
               console.log('主管 子原因')
+              console.log(this.secondReasonT);
               this.secondReason = this.secondReasonT;
               console.log(this.secondReason);
               console.log('子原因 赋值')
-            }else if(TF == false){
-
             }else{
               console.log('主管 子原因 false');
               this.secondReason = '';
