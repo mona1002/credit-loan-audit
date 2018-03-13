@@ -382,8 +382,8 @@ export default {
                   certCode: this.certCode, // 证件号码
                   proName: this.proName, // 产品名称
                   busiState: this.busiState, // 状态
-                  currentTemplateId: this.currentTemplateId, // 流程模版id
-                }
+                },
+                currentTemplateId: this.currentTemplateId, // 流程模版id
               })
               .then(res => {
                 if (res.statusCode == '200') {
