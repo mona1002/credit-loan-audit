@@ -221,43 +221,53 @@ export default {
   },
   props: ['applyId'], // 申请单id
   mounted() {
-    // 先取到 标志
-    // 反欺诈申请 / 反欺诈专员审批 / 反欺诈主管审批
-    var judgeFlag = JSON.parse(localStorage.getItem('judge'));
-    this.antiFlag = judgeFlag.flag;
-    console.log(this.antiFlag);
-
-    // 删除 审批结论存到本地的数据
-    localStorage.removeItem('saveInsertObj');
-    // 根据  antiFlag 判断
-    // 初审-信审审批-发起反欺诈
-    if (this.antiFlag == '03' || this.antiFlag == '04') {
-      if (this.antiFlag == '03') {
-        this.processTemplateId = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).processTemplateId;
-
-        this.taskNodeName = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskNodeName;
-        this.taskStatus = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskStatus;
-      }
-      if (this.antiFlag == '04') {
-        this.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
-
-        this.taskNodeName = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskNodeName;
-        this.taskStatus = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskStatus;
-      }
-
-      // 登录 单独存  userCode  orgCode 
-      this.userCode = JSON.parse(localStorage.getItem('userInf')).userCode;
-      this.orgCode = JSON.parse(localStorage.getItem('userInf')).orgCode;
-
-      this.request();
-
-      // this.queryList();
-    } else {
-      // 反欺诈申请 - 列表
-      this.queryList();
-    }
+    this.toinner();
   },
+  watch:{
+        '$route'(to,from){
+          if(to.fullPath !== from.fullPath){
+            this.toinner();
+          }
+        }
+      },
   methods: {
+    toinner(){
+      // 先取到 标志
+      // 反欺诈申请 / 反欺诈专员审批 / 反欺诈主管审批
+      var judgeFlag = JSON.parse(localStorage.getItem('judge'));
+      this.antiFlag = judgeFlag.flag;
+      console.log(this.antiFlag);
+
+      // 删除 审批结论存到本地的数据
+      localStorage.removeItem('saveInsertObj');
+      // 根据  antiFlag 判断
+      // 初审-信审审批-发起反欺诈
+      if (this.antiFlag == '03' || this.antiFlag == '04') {
+        if (this.antiFlag == '03') {
+          this.processTemplateId = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).processTemplateId;
+
+          this.taskNodeName = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskNodeName;
+          this.taskStatus = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskStatus;
+        }
+        if (this.antiFlag == '04') {
+          this.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
+
+          this.taskNodeName = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskNodeName;
+          this.taskStatus = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskStatus;
+        }
+
+        // 登录 单独存  userCode  orgCode 
+        this.userCode = JSON.parse(localStorage.getItem('userInf')).userCode;
+        this.orgCode = JSON.parse(localStorage.getItem('userInf')).orgCode;
+
+        this.request();
+
+        // this.queryList();
+      } else {
+        // 反欺诈申请 - 列表
+        this.queryList();
+      }
+    },
     // 请求列表
     queryList() {
       this.post('/fraudApplyInfoController/getFraudApplyInfoList', {

@@ -441,11 +441,11 @@
 				    </ol>
 		  		</div> 
 		  	</el-collapse-item>
-		  	<el-collapse-item title="征询报告" name="8">
+		  	<el-collapse-item title="征信报告" name="8">
 				<template slot="title">
 					<div class="left">
 				      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-				      <span class="headFont">征询报告</span>
+				      <span class="headFont">征信报告</span>
 				    </div>
 			    </template>
 		  		<div class="fuzhaixinxi zhengxunbaogao">

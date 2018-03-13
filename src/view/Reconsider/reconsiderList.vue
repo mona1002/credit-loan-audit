@@ -127,30 +127,33 @@
 	    },
 		mounted(){
 			//一进入页面就发送请求
-			//this.queryParam = JSON.parse(localStorage.getItem('workbenchPass'));
-			//console.log(JSON.parse(localStorage.getItem('workbenchPass')))
-			this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-			if(this.judgeFlag.flag == '05'){//复议专员
-				this.queryParam.processTemplateId=JSON.parse(localStorage.getItem('ReWorkbenchPass')).processTemplateId;
-				this.queryParam.taskNodeName=JSON.parse(localStorage.getItem('ReWorkbenchPass')).taskNodeName;
-				this.queryParam.taskStatus=JSON.parse(localStorage.getItem('ReWorkbenchPass')).taskStatus;
-			}else if(this.judgeFlag.flag == '06'){//复议经理
-				this.queryParam.processTemplateId=JSON.parse(localStorage.getItem('ReWorkbenchPass')).processTemplateId;
-				this.queryParam.taskNodeName=JSON.parse(localStorage.getItem('ReWorkbenchPass')).taskNodeName;
-				this.queryParam.taskStatus=JSON.parse(localStorage.getItem('ReWorkbenchPass')).taskStatus;
-			}
-			//this.queryParam.userCode=JSON.parse(localStorage.getItem('userInf')).userCode;
-			//this.queryParam.orgCode=JSON.parse(localStorage.getItem('userInf')).orgCode;
-			// 登录 单独存  userCode  orgCode 
-			 this.queryParam.userCode=JSON.parse(localStorage.getItem('userCode'));
-			 this.queryParam.orgCode=JSON.parse(localStorage.getItem('orgCode'));
-			console.log(this.processTemplateId+'...'+this.taskNodeName+'...'+this.taskStatus+'...'+this.userCode+'...'+this.orgCode);
-			
-			this.request(this.queryParam);	
+			this.oninner();	
 			localStorage.removeItem("house");
 			localStorage.removeItem("car");
 		},
+		watch:{
+	    	'$route'(to,from){
+	    		if(to.fullPath !== from.fullPath){
+	    			this.oninner();
+	    		}
+	    	}
+	    },
 		methods:{
+			oninner(){
+				this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+				if(this.judgeFlag.flag == '05'){//复议专员
+						this.queryParam.processTemplateId=JSON.parse(localStorage.getItem('ReWorkbenchPass')).processTemplateId;
+						this.queryParam.taskNodeName=JSON.parse(localStorage.getItem('ReWorkbenchPass')).taskNodeName;
+						this.queryParam.taskStatus=JSON.parse(localStorage.getItem('ReWorkbenchPass')).taskStatus;
+					}else if(this.judgeFlag.flag == '06'){//复议经理
+						this.queryParam.processTemplateId=JSON.parse(localStorage.getItem('ReWorkbenchPass')).processTemplateId;
+						this.queryParam.taskNodeName=JSON.parse(localStorage.getItem('ReWorkbenchPass')).taskNodeName;
+						this.queryParam.taskStatus=JSON.parse(localStorage.getItem('ReWorkbenchPass')).taskStatus;
+					};
+					this.queryParam.userCode=JSON.parse(localStorage.getItem('userInf')).userCode;
+			 		this.queryParam.orgCode=JSON.parse(localStorage.getItem('userInf')).orgCode;
+			 		this.request(this.queryParam);
+			},
 		    request(param){
 		    	console.log(this.queryParam);
 		    	this.post('/workFlowTaskQuery/getTaskToDoList',

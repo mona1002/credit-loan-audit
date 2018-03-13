@@ -69,6 +69,7 @@
         },
         backLoin() {
           window.location.href = UserURL + "#/workbench";
+          localStorage.clear();
         },
         le(){
           if($('.navContain').width()<=($('.mheader').width()-358)){
