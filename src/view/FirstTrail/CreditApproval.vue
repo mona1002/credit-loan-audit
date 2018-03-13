@@ -1656,6 +1656,9 @@ export default {
     },
     // 批准产品 更改
     proSlelecChange: function(val) {
+      this.ploanTerm = '';
+      this.ploanAmt = '';
+      
       console.log(val);
       // id val.id  产品id
       this.proId = val.id;
