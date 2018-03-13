@@ -6,7 +6,7 @@
 	      <span class="headFont">概要信息</span>
 	    </div>
 	    <div class="main">
-	    	<ul>
+	    	<ul class="mainUl">
 	    		<li><label>客户名称：</label><span>{{datas.custName}}</span></li>
 	    		<li><label>证件类型：</label><span>{{datas.certTypeTxt}}</span></li>
 	    		<li><label>产品名称：</label><span>{{datas.proName}}</span></li>
@@ -15,7 +15,7 @@
 	    		<li><label>客户来源渠道：</label><span>{{datas.sourcesChanTxt}}</span></li>
 	    		<li><label>进件机构：</label><span>{{datas.appOrgName}}</span></li>
 	    	</ul>
-	    	<ul class="secondUl">
+	    	<ul class="mainUl secondUl">
 	    		<li><label>申请类型：</label><span>{{datas.appTypeTxt}}</span></li>
 	    		<li><label>证件号码：</label><span>{{datas.certCode}}</span></li>
 	    		<li><label>最高月还款额：</label><span>{{datas.eachTermAmt}}</span></li>
@@ -1252,7 +1252,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 		width: 100%;
 		height: 290px;
 	}
-	.main ul{
+	.main ul.mainUl{
 		width: 40%;
 		float: left;
 	}
@@ -1260,18 +1260,18 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 		width: 60%;
 		text-align: left;
 	}
-	.main ul li{
+	.main ul.mainUl li{
 		width: 100%;
 		height: 36px;
 		line-height: 36px;
 		padding-left: 150px;
 	}
-	.main ul li label{
+	.main ul.mainUl li label{
 		display: inline-block;
 		width: 130px;
 		text-align: right;
 	}
-	.main ul li span{
+	.main ul.mainUl li span{
 		text-align: left;
 		display: inline-block;
 	}
