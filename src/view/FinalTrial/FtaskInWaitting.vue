@@ -143,20 +143,29 @@
 	    },
 		mounted(){
 			//一进入页面就发送请求
-			//console.log(JSON.parse(localStorage.getItem('workbenchPass')))
-			this.queryParam.processTemplateId=JSON.parse(localStorage.getItem('FinalWorkbenchPass')).processTemplateId;
-			this.queryParam.taskNodeName=JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskNodeName;
-			this.queryParam.taskStatus=JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskStatus;
-			//this.queryParam.userCode=JSON.parse(localStorage.getItem('userInf')).userCode;
-			//this.queryParam.orgCode=JSON.parse(localStorage.getItem('userInf')).orgCode;
-			// 登录 单独存  userCode  orgCode 
-			 this.queryParam.userCode=JSON.parse(localStorage.getItem('userCode'));
-			 this.queryParam.orgCode=JSON.parse(localStorage.getItem('orgCode'));
-			console.log(this.processTemplateId+'...'+this.taskNodeName+'...'+this.taskStatus+'...'+this.userCode+'...'+this.orgCode);
-			
-			this.request(this.queryParam);	
+			this.toinner();	
 		},
+		watch:{
+	    	'$route'(to,from){
+	    		if(to.fullPath !== from.fullPath){
+	    			this.toinner();
+	    		}
+	    	}
+	    },
 		methods:{
+			toinner(){
+				this.queryParam.processTemplateId=JSON.parse(localStorage.getItem('FinalWorkbenchPass')).processTemplateId;
+				this.queryParam.taskNodeName=JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskNodeName;
+				this.queryParam.taskStatus=JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskStatus;
+				//this.queryParam.userCode=JSON.parse(localStorage.getItem('userInf')).userCode;
+				//this.queryParam.orgCode=JSON.parse(localStorage.getItem('userInf')).orgCode;
+				// 登录 单独存  userCode  orgCode 
+				 this.queryParam.userCode=JSON.parse(localStorage.getItem('userInf')).userCode;
+				 this.queryParam.orgCode=JSON.parse(localStorage.getItem('userInf')).orgCode;
+				//console.log(this.processTemplateId+'...'+this.taskNodeName+'...'+this.taskStatus+'...'+this.userCode+'...'+this.orgCode);
+				
+				this.request(this.queryParam);
+			},
 		    request(param){
 		    	console.log(this.queryParam);
 		    	this.post('/workFlowTaskQuery/getTaskToDoList',

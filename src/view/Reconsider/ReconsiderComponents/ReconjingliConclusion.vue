@@ -1316,7 +1316,11 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 		float: left;
 		width: 50%;
 	}
-	.bodyP2{
+	.huituiBody  .bodyP2{
+		padding-right: calc( 50% - 305px );
+		height: 75px;
+	}
+	.shenpi  .bodyP2{
 		padding-right: calc( 50% - 305px );
 		height: 75px;
 	}

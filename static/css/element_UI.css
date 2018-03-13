@@ -1552,6 +1552,7 @@ height: 40px;
    line-height: 70px;
    color: #fff;
    font-size: 15px;
+   float: left;
  }
  .mheader .el-menu--horizontal .el-menu-item:hover{
    background: rgba(31, 45, 61, .6);

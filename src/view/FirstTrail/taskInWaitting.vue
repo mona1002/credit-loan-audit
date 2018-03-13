@@ -151,8 +151,8 @@
 			//this.queryParam.userCode=JSON.parse(localStorage.getItem('userInf')).userCode;
 			//this.queryParam.orgCode=JSON.parse(localStorage.getItem('userInf')).orgCode;
 			// 登录 单独存  userCode  orgCode 
-			 this.queryParam.userCode=JSON.parse(localStorage.getItem('userCode'));
-			 this.queryParam.orgCode=JSON.parse(localStorage.getItem('orgCode'));
+			 this.queryParam.userCode=JSON.parse(localStorage.getItem('userInf')).userCode;
+				 this.queryParam.orgCode=JSON.parse(localStorage.getItem('userInf')).orgCode;
 			console.log(this.processTemplateId+'...'+this.taskNodeName+'...'+this.taskStatus+'...'+this.userCode+'...'+this.orgCode);
 			
 			this.request(this.queryParam);	
