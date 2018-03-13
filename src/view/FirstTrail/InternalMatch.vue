@@ -244,7 +244,7 @@ export default {
       // id: 客户id     orgCate
       // isInterFlag  标志是否是  内部匹配跳转的  查看
       localStorage.setItem("internalObj", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: this.isInterFlag }));
-      this.$router.go('/MatchingInf');
+      this.$router.push('/MatchingInf');
     },
     itemDbclickFixTel(row, event) {
       // 行被双击 事件  固定电话
@@ -253,7 +253,7 @@ export default {
       this.isInterFlag = true;
       // localStorage.setItem("internalObj", JSON.stringify(row.id));
       localStorage.setItem("internalObj", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: this.isInterFlag }));
-      this.$router.go('/MatchingInf');
+      this.$router.push('/MatchingInf');
     },
     itemDbclickCompany(row, event) {
       // 行被双击 事件  单位名称
@@ -263,7 +263,7 @@ export default {
       this.isInterFlag = true;
       // localStorage.setItem("internalObj", JSON.stringify(row.id));
       localStorage.setItem("internalObj", JSON.stringify({ id: row.id, matchApplyId: row.matchApplyId, isInterFlag: this.isInterFlag }));
-      this.$router.go('/MatchingInf ');
+      this.$router.push('/MatchingInf');
     },
     // cellHover(row, column, cell, event) {
     //   // cell hover 事件
