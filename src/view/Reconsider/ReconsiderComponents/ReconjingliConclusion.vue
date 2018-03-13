@@ -999,7 +999,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 				//console.log(this.$refs.mainReasonName);
 				//console.log(this.$refs.mainReasonName.selectedLabel);
 				//console.log(this.values);
-				this.post("/creauditInfo/approval", {
+				this.post("/creauditOpinion/approval", {
 			        // 挂起 taskId 任务id
 			        taskId: this.taskId,
 			        processInstanceId:this.processInstanceId,//流程实例ID
