@@ -44,7 +44,9 @@
           <span class="headFont">基本信息 </span>
         </template>
         <div class="lists">
+          <hr>
           <h4>基本信息 </h4>
+          <hr>
           <ul>
             <li>
               <p v-for="(value,name) in base" :key="name">
@@ -54,7 +56,9 @@
               </p>
             </li>
           </ul>
+          <hr>
           <h4>保险费用 </h4>
+          <hr>
           <ul>
             <li v-for="(value,index) in insurances" :key="index">
               <p v-for="(item,name) in value" :key="name">
@@ -64,7 +68,9 @@
               </p>
             </li>
           </ul>
+          <hr>
           <h4>保险费用记录 </h4>
+          <hr>
           <ul>
             <li v-for="(value,index) in insurance_record" :key="index">
               <p v-for="(item,name) in value" :key="name">
@@ -74,7 +80,9 @@
               </p>
             </li>
           </ul>
+          <hr>
           <h4>医疗保险记录</h4>
+          <hr>
           <ul>
             <li v-for="(value,index) in medical_insurance_record" :key="index">
               <p v-for="(item,name) in value" :key="name">
@@ -94,7 +102,9 @@
           <span class="headFont">报告信息</span>
         </template>
         <div class="lists">
+          <hr>
           <h4>用户及账户基本信息</h4>
+          <hr>
           <ul>
             <li>
               <p v-for="(value,name) in ReportBase" :key="name">
@@ -104,7 +114,9 @@
               </p>
             </li>
           </ul>
+          <hr>
           <h4>用户基本信息校验</h4>
+          <hr>
           <ul>
             <li>
               <p v-for="(value,name) in ReportBaseCheck" :key="name">
@@ -114,7 +126,9 @@
               </p>
             </li>
           </ul>
+          <hr>
           <h4>社保信息 </h4>
+          <hr>
           <li v-for="(value,index) in ReportSocialSec" :key="index">
             <p v-for="(item,name) in value" :key="name" width:>
               <label>{{name}}</label>
@@ -122,7 +136,9 @@
               <span>{{item}}</span>
             </p>
           </li>
+          <hr>
           <h4>医疗保险缴存信息 </h4>
+          <hr>
           <ul>
             <li v-for="(value,name) in ReportMedInsu" :key="name">
               <div>{{name}}
@@ -136,7 +152,9 @@
               </div>
             </li>
           </ul>
+          <hr>
           <h4>医保消费明细</h4>
+          <hr>
           <ul>
             <li v-for="(value,name) in ReportExpenseDet" :key="name">
               <div>{{name}}
@@ -150,7 +168,9 @@
               </div>
             </li>
           </ul>
+          <hr>
           <h4>医保卡消费记录 </h4>
+          <hr>
           <ul>
             <li v-for="(value,index) in ReportSecRecord" :key="index">
               <p v-for="(item,name) in value" :key="name" width:>
@@ -194,6 +214,28 @@
         ReportExpenseDet: null,
         ReportSecRecord: null,
         ReportSocialSec: null,
+        ccc: {
+          "保险名称": {
+            'name': "askdf",
+            age: 989
+          },
+          "缴存基数": {
+            'name': "askdf",
+            age: 989
+          },
+          "单位缴存金额": {
+            'name': "askdf",
+            age: 989
+          },
+          "个人缴存金额": {
+            'name': "askdf",
+            age: 989
+          },
+          "缴存状态标记": {
+            'name': "askdf",
+            age: 989
+          },
+        }
       }
     },
     methods: {
@@ -220,6 +262,16 @@
       },
       FOREACH(item) {
         for (var k in item) {
+          // console.log(k)
+          //  if (k.indexOf("用户信息Id") != -1) {
+          //   //  console.log(item[k])
+          // console.log(k)
+          //    delete item.k;
+          //   //  k=null;
+          //   //  item[k]=null;
+          //   //  console.log(item[k])
+          // }
+
           if (k.indexOf("[元]") != -1) {
             item[k] = this.formatNumber(item[k] / 100, 2, 0)
           }
@@ -240,6 +292,39 @@
             for (var j in item[k]) {
               item[k][j] != '-' ? item[k][j] = this.formatNumber(item[k][j] / 100, 2, 0) : item[k][j]
             }
+          }
+        }
+      },
+      delBase() {
+        this.base['用户信息Id'] ? delete this.base['用户信息Id'] : this.base;
+        this.base['保险Id(险种)'] ? delete this.base['保险Id(险种)'] : this.base;
+        this.delArray(this.insurances)
+        this.delArray(this.insurance_record)
+        this.delArray(this.medical_insurance_record)
+      },
+      delReport() {
+        this.ReportBase['用户信息Id'] ? delete this.ReportBase['用户信息Id'] : this.ReportBase;
+        this.ReportBase['保险Id(险种)'] ? delete this.ReportBase['保险Id(险种)'] : this.ReportBase;
+        this.ReportBaseCheck['用户信息Id'] ? delete this.ReportBaseCheck['用户信息Id'] : this.ReportBaseCheck;
+        this.ReportBaseCheck['保险Id(险种)'] ? delete this.ReportBaseCheck['保险Id(险种)'] : this.ReportBaseCheck;
+        this.delArray(this.ReportSocialSec)
+        this.delArray(this.ReportSecRecord)
+        this.delObj(this.ReportMedInsu)
+        this.delObj(this.ReportExpenseDet)
+      },
+      delArray(item) {
+        if (item) {
+          for (var i = 0; i < item.length; i++) {
+            item[i]['用户信息Id'] ? delete item[i]['用户信息Id'] : item[i];
+            item[i]['保险Id(险种)'] ? delete item[i]['保险Id(险种)'] : item[i];
+          }
+        }
+      },
+      delObj(item) {
+        if (item) {
+          for (var k in item) {
+            item[k]['用户信息Id'] ? delete item[k]['用户信息Id'] : item[k];
+            item[k]['保险Id(险种)'] ? delete item[k]['保险Id(险种)'] : item[k];
           }
         }
       }
@@ -273,10 +358,11 @@
             this.insurances = JSON.parse(this.baseInf.insurances); //基本信息-保险费用
             this.insurance_record = JSON.parse(this.baseInf.insurance_record); //基本信息-医疗保险记录
             this.medical_insurance_record = JSON.parse(this.baseInf.medical_insurance_record); //基本信息-医疗保险记录
-            this.FOREACH(this.base)
-            this.FOREACHarray(this.insurances)
-            this.FOREACHarray(this.insurance_record)
-            this.FOREACHarray(this.medical_insurance_record)
+            this.base ? this.FOREACH(this.base) : this.base;
+            this.insurances ? this.FOREACHarray(this.insurances) : this.insurances;
+            this.insurance_record ? this.FOREACHarray(this.insurance_record) : this.insurance_record;
+            this.medical_insurance_record ? this.FOREACHarray(this.medical_insurance_record) : this.medical_insurance_record;
+            this.delBase();
           }
           // 报告信息
           if (res.obj.reportInfo != '') {
@@ -287,12 +373,13 @@
             this.ReportMedInsu = this.reportInf.medical_insurance_bill.medical_insurance_pay; //医疗保险缴存信息
             this.ReportExpenseDet = this.reportInf.medical_consumption_details.medical_consumption_basic //医保消费明细
             this.ReportSecRecord = this.reportInf.medical_consumption_details.medical_consumption_record.securities_report; //医保卡消费记录
-            this.FOREACH(this.ReportBase)
-            this.FOREACH(this.ReportBaseCheck)
-            this.FOREACHarray(this.ReportSocialSec)
-            this.FOREACHobj(this.ReportMedInsu)
-            this.FOREACHobj(this.ReportExpenseDet)
-            this.FOREACHarray(this.ReportSecRecord)
+            this.ReportBase ? this.FOREACH(this.ReportBase) : this.ReportBase;
+            this.ReportBaseCheck ? this.FOREACH(this.ReportBaseCheckCheck) : this.ReportBase;
+            this.ReportSocialSec ? this.FOREACHarray(this.ReportSocialSec) : this.ReportSocialSec;
+            this.ReportMedInsu ? this.FOREACHobj(this.ReportMedInsu) : this.ReportMedInsu;
+            this.ReportExpenseDet ? this.FOREACHobj(this.ReportExpenseDet) : this.ReportExpenseDet;
+            this.ReportSecRecord ? this.FOREACHarray(this.ReportSecRecord) : this.ReportSecRecord;
+            this.delReport();
           }
         } else {
           this.$message.error(res.msg);
@@ -351,6 +438,10 @@
 
   .SSComp li b {
     vertical-align: top
+  }
+
+  hr {
+    clear: both;
   }
 
 </style>

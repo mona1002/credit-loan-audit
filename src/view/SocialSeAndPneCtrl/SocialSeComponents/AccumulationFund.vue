@@ -44,7 +44,9 @@
           <span class="headFont">基本信息</span>
         </template>
         <div class="lists">
+          <hr>
           <h4>基本信息 </h4>
+           <hr>
           <ul>
             <li>
               <p v-for="(value,name) in base" :key="name">
@@ -54,7 +56,9 @@
               </p>
             </li>
           </ul>
+           <hr>
           <h4>账单记录 </h4>
+           <hr>
           <ul>
             <li v-for="(value,index) in bills" :key="index">
               <p v-for="(item,name) in value" :key="name">
@@ -64,7 +68,9 @@
               </p>
             </li>
           </ul>
+           <hr>
           <h4>贷款记录 </h4>
+           <hr>
           <ul>
             <li v-for="(value,index) in loan" :key="index">
               <p v-for="(item,name) in value" :key="name">
@@ -74,7 +80,9 @@
               </p>
             </li>
           </ul>
+           <hr>
           <h4>还款记录 </h4>
+           <hr>
           <ul>
             <li v-for="(value,index) in repay" :key="index">
               <p v-for="(item,name) in value" :key="name">
@@ -94,7 +102,9 @@
           <span class="headFont">报告信息</span>
         </template>
         <div class="lists">
+           <hr>
           <h4>用户及账户基本信息 </h4>
+           <hr>
           <ul>
             <li>
               <p v-for="(value,name) in ReportBase" :key="name">
@@ -104,7 +114,9 @@
               </p>
             </li>
           </ul>
+           <hr>
           <h4>用户基本信息校验 </h4>
+           <hr>
           <ul>
             <li>
               <p v-for="(value,name) in ReportBaseCheck" :key="name">
@@ -114,7 +126,9 @@
               </p>
             </li>
           </ul>
+           <hr>
           <h4>账户基本信息</h4>
+           <hr>
           <ul>
             <li>
               <p v-for="(value,name) in ReportAccountBase" :key="name">
@@ -124,7 +138,9 @@
               </p>
             </li>
           </ul>
+           <hr>
           <h4>缴纳信息</h4>
+           <hr>
           <ul>
             <li>
               <p v-for="(value,name) in Reportpayment" :key="name">
@@ -134,8 +150,9 @@
               </p>
             </li>
           </ul>
-
+ <hr>
           <h4>还款信息</h4>
+           <hr>
           <ul>
             <li>
               <p v-for="(value,name) in ReportRepay" :key="name">
@@ -217,6 +234,39 @@
             }
           }
         }
+      },
+        delBase() {
+        this.base['用户信息Id'] ? delete this.base['用户信息Id'] : this.base;
+        this.base['保险Id(险种)'] ? delete this.base['保险Id(险种)'] : this.base;
+        this.delArray(this.insurances)
+        this.delArray(this.insurance_record)
+        this.delArray(this.medical_insurance_record)
+      },
+      delReport() {
+        this.ReportBase['用户信息Id'] ? delete this.ReportBase['用户信息Id'] : this.ReportBase;
+        this.ReportBase['保险Id(险种)'] ? delete this.ReportBase['保险Id(险种)'] : this.ReportBase;
+        this.ReportBaseCheck['用户信息Id'] ? delete this.ReportBaseCheck['用户信息Id'] : this.ReportBaseCheck;
+        this.ReportBaseCheck['保险Id(险种)'] ? delete this.ReportBaseCheck['保险Id(险种)'] : this.ReportBaseCheck;
+        this.delArray(this.ReportSocialSec)
+        this.delArray(this.ReportSecRecord)
+        this.delObj(this.ReportMedInsu)
+        this.delObj(this.ReportExpenseDet)
+      },
+      delArray(item) {
+        if (item) {
+          for (var i = 0; i < item.length; i++) {
+            item[i]['用户信息Id'] ? delete item[i]['用户信息Id'] : item[i];
+            item[i]['保险Id(险种)'] ? delete item[i]['保险Id(险种)'] : item[i];
+          }
+        }
+      },
+      delObj(item) {
+        if (item) {
+          for (var k in item) {
+              item[k]['用户信息Id'] ? delete item[k]['用户信息Id'] :item[k];
+              item[k]['保险Id(险种)'] ? delete item[k]['保险Id(险种)'] :item[k];
+          }
+        }
       }
     },
     mounted() {
@@ -252,6 +302,7 @@
             this.bills ? this.FOREACHarray(this.bills) : this.bills;
             this.loan ? this.FOREACHarray(this.loan) : this.loan;
             this.repay ? this.FOREACHarray(this.repay) : this.repay;
+            this.delBase();
           }
           // 报告信息
           if (res.obj.reportInfo != "") {
@@ -264,6 +315,7 @@
             this.ReportAccountBase ? this.FOREACH(this.ReportAccountBase) : this.ReportAccountBase;
             this.Reportpayment ? this.FOREACH(this.Reportpayment) : this.Reportpayment; //缴纳信息
             this.ReportRepay ? this.FOREACH(this.ReportRepay) : this.ReportRepay; //还款信息
+            this.delReport();
           }
         } else {
           this.$message.error(res.msg);
