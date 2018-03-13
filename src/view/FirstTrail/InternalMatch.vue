@@ -13,6 +13,8 @@
       <el-table :data="mobileData.recordList" height="250" border style="width: 100%" @row-click="itemDbclickMobiel" highlight-current-row v-loading="mobileLoading">
         <el-table-column prop="targetCustName" label="命中号码姓名" min-width="150">
         </el-table-column>
+        <el-table-column prop="matchTel" label="命中号码" min-width="150">
+        </el-table-column>
         <el-table-column prop="applyTelTypeTxt" label="电话类型" min-width="100">
         </el-table-column>
         <el-table-column prop="matchApplySubNo" label="进件编号" min-width="180">
@@ -42,6 +44,8 @@
       </div>
       <el-table :data="fixTelData.recordList" height="250" border style="width: 100%" @row-click="itemDbclickFixTel" highlight-current-row v-loading="fixTelLoading">
         <el-table-column prop="targetCustName" label="命中号码姓名" min-width="150">
+        </el-table-column>
+        <el-table-column prop="matchTel" label="命中号码" min-width="150">
         </el-table-column>
         <el-table-column prop="applyTelTypeTxt" label="电话类型" min-width="100">
         </el-table-column>
