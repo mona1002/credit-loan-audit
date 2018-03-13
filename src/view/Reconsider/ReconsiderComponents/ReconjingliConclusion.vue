@@ -6,7 +6,7 @@
 	      <span class="headFont">概要信息</span>
 	    </div>
 	    <div class="main">
-	    	<ul>
+	    	<ul class="mainUl">
 	    		<li><label>客户名称：</label><span>{{datas.custName}}</span></li>
 	    		<li><label>证件类型：</label><span>{{datas.certTypeTxt}}</span></li>
 	    		<li><label>产品名称：</label><span>{{datas.proName}}</span></li>
@@ -15,7 +15,7 @@
 	    		<li><label>客户来源渠道：</label><span>{{datas.sourcesChanTxt}}</span></li>
 	    		<li><label>进件机构：</label><span>{{datas.appOrgName}}</span></li>
 	    	</ul>
-	    	<ul class="secondUl">
+	    	<ul class="mainUl secondUl">
 	    		<li><label>申请类型：</label><span>{{datas.appTypeTxt}}</span></li>
 	    		<li><label>证件号码：</label><span>{{datas.certCode}}</span></li>
 	    		<li><label>最高月还款额：</label><span>{{datas.eachTermAmt}}</span></li>
@@ -569,7 +569,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 			//申请单ID
 			this.id = JSON.parse(localStorage.getItem('RtaskInWaitting')).applyId;
 			this.request();
-			this.Social();
+			
 			//经办人
 			this.dealroperCode = JSON.parse(localStorage.getItem('userInf')).userCode;
 			this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
@@ -602,6 +602,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 			      		this.datas=res.data;
 			      		this.datas.eachTermAmt = this.formatNumber(this.datas.eachTermAmt,2,0);
 			      		this.datas.loanAmt = this.formatNumber(this.datas.loanAmt,2,0);
+			      		this.Social();
 			      	}	
 			      })
 			},
@@ -758,7 +759,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 		        appConclusion: this.appConclusion,//审批结论内容（文本框）
 		        newOldMainnos: '', //借新还旧进件编号集合
 		        applyMainNo: '', //主进件编号
-		        applySubNo: '', //从进件编号
+		        applySubNo: this.datas.applySubNo, //从进件编号
 		        appOrgId: this.appOrgId, //进件机构ID
 		        appOrgCode: this.appOrgCode, //进件机构代码
 		        applyType: '', //申请类型[“00”:”非循环贷”,”01”:”循环贷(借新还旧)”,”02”:”循环贷(非借新还旧)”]
@@ -1182,7 +1183,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 					certCode:this.datas.certCode,
 					custName:this.datas.custName
 				}).then(res =>{
-					if(res.obj == null){
+					if(res.obj == null || res.obj == ''){
 			      		this.social = "(未授权)";
 			      	}else if(res.obj){
 			      		this.social = "(已授权)";
@@ -1251,7 +1252,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 		width: 100%;
 		height: 290px;
 	}
-	.main ul{
+	.main ul.mainUl{
 		width: 40%;
 		float: left;
 	}
@@ -1259,18 +1260,18 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 		width: 60%;
 		text-align: left;
 	}
-	.main ul li{
+	.main ul.mainUl li{
 		width: 100%;
 		height: 36px;
 		line-height: 36px;
 		padding-left: 150px;
 	}
-	.main ul li label{
+	.main ul.mainUl li label{
 		display: inline-block;
 		width: 130px;
 		text-align: right;
 	}
-	.main ul li span{
+	.main ul.mainUl li span{
 		text-align: left;
 		display: inline-block;
 	}
@@ -1315,7 +1316,11 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 		float: left;
 		width: 50%;
 	}
-	.bodyP2{
+	.huituiBody  .bodyP2{
+		padding-right: calc( 50% - 305px );
+		height: 75px;
+	}
+	.shenpi  .bodyP2{
 		padding-right: calc( 50% - 305px );
 		height: 75px;
 	}

@@ -39,25 +39,9 @@
     },
     methods: {
         request() {
-        this.post('/smUser/getResTree').then(res => {
-          this.datas = res.data;
-          //console.log(this.datas);
-          /*for(var i=0;i<this.datas.length;i++){
-            if(this.datas[i]);
-          } */
-          //var arr = [];
-          //arr.push($(".el-menu--horizontal")[0].children)
-          //console.log(arr.push($(".el-menu--horizontal")[0].children));
-          /*for(var i=0;i<$(".el-menu--horizontal").length;i++){
-           console.log($(".el-menu--horizontal")[i]);
-          }*/
-          //var sum;
-          /*for(var i=0;i<$(".el-menu--horizontal").length;i++){
-             if(){
-               sum+=$(".el-menu--horizontal")[i];
-             }
-          }*/
-        })
+          this.post('/smUser/getResTree').then(res => {
+            this.datas = res.data;
+          })
         },
         selectMenu(index, indexPath) {
         //console.log(indexPath);
@@ -85,29 +69,29 @@
         },
         backLoin() {
           window.location.href = UserURL + "#/workbench";
+          localStorage.clear();
         },
         le(){
-          //console.log(parseInt(this.$refs.kkkkk.style.left));
-          if($('.navContain').width()<=$('.mheader').width()){
+          if($('.navContain').width()<=($('.mheader').width()-358)){
             $('#iconl').attr("disabled",true);
           }else{
-            //console.log('yyyy');
             if(parseInt(this.$refs.kkkkk.style.left) == ($('.mheader').width()-130-$('.navContain').width()) || parseInt(this.$refs.kkkkk.style.left) < ($('.mheader').width()-130-$('.navContain').width()) ){
-              //console.log('yyyy2');
               $('#iconl').attr("disabled",true);
             }else{
               this.$refs.kkkkk.style.left = parseFloat(this.$refs.kkkkk.style.left) - 150 + "px";
-              //console.log('yyyy3');
             }
-            
           }
         },
        ri(){
-        if(this.$refs.kkkkk.style.left == '230px'){
-          $('#iconr').attr("disabled",true);  
-         }else{
-          this.$refs.kkkkk.style.left = parseFloat(this.$refs.kkkkk.style.left) + 150 + "px";
-         };
+        if($('.navContain').width()<=($('.mheader').width()-358)){
+            $('#iconl').attr("disabled",true);
+          }else{
+            if(this.$refs.kkkkk.style.left == '230px'){
+              $('#iconr').attr("disabled",true);  
+             }else{
+              this.$refs.kkkkk.style.left = parseFloat(this.$refs.kkkkk.style.left) + 150 + "px";
+             }
+          }
         },
     },
     computed: {
@@ -188,6 +172,7 @@
     width: auto;
     display: inline-block;
     height: 70px;
+    /* float: left; */
   }
 
 </style>

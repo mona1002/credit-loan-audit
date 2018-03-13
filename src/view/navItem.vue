@@ -32,14 +32,7 @@
                 if(item.indexOf('?') !=-1 ){
                     var num = item.indexOf('?');
                     var str = item.substr(num+1);//得到？后面的字符串
-                    //console.log(str);
                     var strs = str.split('&');//将得到的参数分隔成数组[]
-                    //console.log(strs);
-                    //for(var i=0;i<strs.length;i++){
-                        //初审
-                        /*console.log(strs[0].split('='));
-                        console.log(strs[0].split('=')[1]);
-                        console.log(strs[0].split('=')[1] == "'creditApp_firstTrial'" );*/
                         if(strs[0].split('=')[1] == "'creditApp_firstTrial'" && strs[1].split('=')[1] == "'01'"){
                             var row ={
                                 "processTemplateId":"",
