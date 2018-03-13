@@ -5,10 +5,14 @@
       <!-- <img class="logo" src="/static/images/logo.png"> -->
       风控管理系统
     </div>
-      <div class="icon" style="left:198px;background:#2ea8e0;" @click="le" id="iconl"><</div>
-    <div class="icon" style="right:100px;background:#4fc9ed" @click="ri" id="iconr">></div>
+      <div class="icon" style="left:198px;background:#2ea8e0;" @click="le" id="iconl" v-if="aaa">
+        <img src="/static/images/leftjt.png">
+      </div>
+      <div class="icon" style="right:100px;background:#4fc9ed" @click="ri" id="iconr" v-if="aaa">
+        <img src="/static/images/rightjt.png">
+      </div>
     <!-- 导航内容 -->
-    <div class="navContain"  ref="kkkkk" style="left:230px" >
+    <div class="navContain"  ref="contains" >
       <!-- <div class="contain"> -->
         <nobr>
           <el-menu router unique-opened mode="horizontal" ref="navbar" active-text-color="#ffd04b" :default-active="onRoutes" @select="selectMenu">
@@ -18,8 +22,9 @@
         </nobr>
       <!-- </div> -->
     </div>
-    <div class="backIcon">
-      <img @click="backLoin" src="/static/images/backLoin.png">
+    <div class="backIcon" @click="backLoin" >
+      <img src="/static/images/backLoin.png">
+      <span>返回首页</span>
     </div>
   </div>
 </template>
@@ -31,11 +36,19 @@
     data() {
       return {
         datas: [],
+        aaa:false,
       };
     },
     created() {
       //一进入页面就发送请求  
       this.request();
+      if($('.navContain').width()>($('.mheader').width()-324)){
+          this.aaa = true;
+          console.log(document.getElementsByClassName('navContain')[0]);
+          document.getElementsByClassName('navContain')[0].style.left=600+"px"
+          //$(".navContain").eq(0).css('background','red');
+          // $('li').eq(2).css('background-color', 'red');
+      }
     },
     methods: {
         request() {
@@ -75,10 +88,10 @@
           if($('.navContain').width()<=($('.mheader').width()-358)){
             $('#iconl').attr("disabled",true);
           }else{
-            if(parseInt(this.$refs.kkkkk.style.left) == ($('.mheader').width()-130-$('.navContain').width()) || parseInt(this.$refs.kkkkk.style.left) < ($('.mheader').width()-130-$('.navContain').width()) ){
+            if(parseInt(this.$refs.contains.style.left) == ($('.mheader').width()-130-$('.navContain').width()) || parseInt(this.$refs.contains.style.left) < ($('.mheader').width()-130-$('.navContain').width()) ){
               $('#iconl').attr("disabled",true);
             }else{
-              this.$refs.kkkkk.style.left = parseFloat(this.$refs.kkkkk.style.left) - 150 + "px";
+              this.$refs.contains.style.left = parseFloat(this.$refs.contains.style.left) - 150 + "px";
             }
           }
         },
@@ -86,10 +99,10 @@
         if($('.navContain').width()<=($('.mheader').width()-358)){
             $('#iconl').attr("disabled",true);
           }else{
-            if(this.$refs.kkkkk.style.left == '230px'){
+            if(this.$refs.contains.style.left == '230px'){
               $('#iconr').attr("disabled",true);  
              }else{
-              this.$refs.kkkkk.style.left = parseFloat(this.$refs.kkkkk.style.left) + 150 + "px";
+              this.$refs.contains.style.left = parseFloat(this.$refs.contains.style.left) + 150 + "px";
              }
           }
         },
@@ -146,18 +159,24 @@
     /* width: calc( 100% - 360px); */
     height: 70px;
     position: absolute;
+    left: 200px;
     /* background: pink; */
   }
 
   .mheader .backIcon {
     width: 60px;
     padding: 0 16px;
+    height: 70px;
     line-height: 70px;
     background: #4fc9ed;
     position: absolute;
     right: 0px;
-    width: 100px;
+    width: 124px;
     z-index: 200;
+    cursor: pointer;
+  }
+  .mheader .backIcon span{
+    font-size: 14px;
   }
 
   .icon {
