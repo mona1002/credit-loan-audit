@@ -589,12 +589,12 @@
 				      	min-width="50">
 				      </el-table-column>
 				      <el-table-column
-				        prop="estateTypeTxt"
+				        prop="estateType"
 				        label="房产类型"
 				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
-				        prop="propertyTypeTxt"
+				        prop="propertyType"
 				        label="产权性质"
 				        min-width="80">
 				      </el-table-column>
@@ -630,7 +630,7 @@
 				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
-				        prop="mortgageStatusTxt"
+				        prop="mortgageStatus"
 				        label="抵押状况"
 				        min-width="80">
 				      </el-table-column>
@@ -1159,6 +1159,43 @@
 		        /*房产信息*/
 		        this.accepCusEstates=res.data.accepCusEstates;
 		        for(var i=0;i<this.accepCusEstates.length;i++){
+		        	if(this.accepCusEstates[i].mortgageStatus =='0'){
+		        		this.accepCusEstates[i].mortgageStatus = '已抵押'
+		        	}else if(this.accepCusEstates[i].mortgageStatus	=='1'){
+		        		this.accepCusEstates[i].mortgageStatus = '未抵押'
+		        	};
+			        if(this.accepCusEstates[i].estateType=='01'){
+			        		this.accepCusEstates[i].estateType = '租用'
+			        	}else if(this.accepCusEstates[i].estateType=='02'){
+			        		this.accepCusEstates[i].estateType = '商业按揭购房'
+			        	}else if(this.accepCusEstates[i].estateType=='03'){
+			        		this.accepCusEstates[i].estateType = '公积金按揭购房'
+			        	}else if(this.accepCusEstates[i].estateType=='04'){
+			        		this.accepCusEstates[i].estateType = '无按揭购房'
+			        	}else if(this.accepCusEstates[i].estateType=='05'){
+			        		this.accepCusEstates[i].estateType = '自建房'
+			        	}else if(this.accepCusEstates[i].estateType=='06'){
+			        		this.accepCusEstates[i].estateType = '亲属住房'
+			        	}else if(this.accepCusEstates[i].estateType=='07'){
+			        		this.accepCusEstates[i].estateType = '单位宿舍'
+			        	};
+			        	if(this.accepCusEstates[i].propertyType =='01'){
+			        		this.accepCusEstates[i].propertyType = '宅基地'
+			        	}else if(this.accepCusEstates[i].propertyType	=='02'){
+			        		this.accepCusEstates[i].propertyType = '自建房'
+			        	}else if(this.accepCusEstates[i].propertyType	=='03'){
+			        		this.accepCusEstates[i].propertyType = '小产权'
+			        	}else if(this.accepCusEstates[i].propertyType	=='04'){
+			        		this.accepCusEstates[i].propertyType = '期房'
+			        	}else if(this.accepCusEstates[i].propertyType	=='05'){
+			        		this.accepCusEstates[i].propertyType = '公租房'
+			        	}else if(this.accepCusEstates[i].propertyType	=='06'){
+			        		this.accepCusEstates[i].propertyType = '经济适用房'
+			        	}else if(this.accepCusEstates[i].propertyType	=='07'){
+			        		this.accepCusEstates[i].propertyType = '土地证'
+			        	}else if(this.accepCusEstates[i].propertyType	=='08'){
+			        		this.accepCusEstates[i].propertyType = '大产权'
+			        	};
 		        	//console.log(this.accepCusEstates[i].monthlyPay);
 		        	//建筑单价 保留两位小数点
 		        	if(this.accepCusEstates[i].unitPrice != null){
@@ -1335,18 +1372,21 @@
 		    	};
 		    	//保险信息
 		    	if(res.data.accepCusInsurances){
-		    		this.accepCusInsurances = res.data.accepCusInsurances; 
-		    		//期缴保费
-		        	if(this.accepCusInsurances.eachPayAmt != null){
-			        	this.accepCusInsurances.eachPayAmt = this.formatNumber(this.accepCusInsurances.eachPayAmt,2,0);
-			        };
-		        	//总保额
-		        	if(this.accepCusInsurances.totalPayAmt != null){
-		        		this.accepCusInsurances.totalPayAmt = this.formatNumber(this.accepCusInsurances.totalPayAmt,2,0);	
-		        	};
+		    		this.accepCusInsurances = res.data.accepCusInsurances;
+		    		for(var i=0;i<this.accepCusInsurances.length;i++){
+		    			//期缴保费
+			        	if(this.accepCusInsurances[i].eachPayAmt != null){
+			        		//alert('hhh');
+				        	this.accepCusInsurances[i].eachPayAmt = this.formatNumber(this.accepCusInsurances[i].eachPayAmt,2,0);
+				        };
+			        	//总保额
+			        	if(this.accepCusInsurances[i].totalPayAmt != null){
+			        		this.accepCusInsurances[i].totalPayAmt = this.formatNumber(this.accepCusInsurances[i].totalPayAmt,2,0);	
+			        	};
+		    		}
 		    	}else{
 		    		this.accepCusInsurances = this.accepCusInsurances;
-		    	}
+		    	};
 		        /*您的工作信息*/
 		        if(res.data.accepCusWorkInfo==null){
 		        	this.accepCusWorkInfo=this.accepCusWorkInfo
