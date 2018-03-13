@@ -8,12 +8,14 @@
     <ul class="form-ul" style="width:100%;height:auto;overflow:hidden;">
       <li class="item-column3">
         <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:40px;top:10px;font-weight:bold;">*</span>
-        <div class="left-title">
+        <div class="left-title item-label-show">
           审核结论：
         </div>
-        <div>
-          <!-- @change="selectChangeMain" -->
-          <el-select v-model="auditResult">
+        <div class="item-label-show" v-show="!isEdit">
+          {{auditResulttext}}
+        </div>
+        <div v-show="isEdit">
+          <el-select v-model="auditResult" @change="auditResultChange">
             <el-option label="风险拒贷[黑名单]" value="00"></el-option>
             <el-option label="风险拒贷[灰名单]" value="01"></el-option>
             <el-option label="风险排除" value="02"></el-option>
@@ -32,11 +34,13 @@
       </li>
       <li class="item-column3" v-show="auditResult!='02'">
         <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:10px;font-weight:bold;">*</span>
-        <div class="left-title">
+        <div class="left-title item-label-show">
           主原因：
         </div>
-        <div>
-          <!-- @change="selectChange" -->
+        <div class="item-label-show" v-show="!isEdit" v-model="mainReason">
+          {{mainReasonName}}
+        </div>
+        <div v-show="isEdit">
           <el-select v-model="mainReason" @change="mainReasonChange">
             <el-option v-for="item in mainReasons" :label="item.reasonName" :value="item.id">
             </el-option>
@@ -45,15 +49,21 @@
       </li>
       <li class="item-column3" v-show="auditResult!='02'">
         <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:10px;font-weight:bold;">*</span>
-        <div class="left-title">
+        <div class="left-title item-label-show">
           子原因：
         </div>
-        <div>
+        <div class="item-label-show" v-show="!isEdit" v-model="secondReason">
+          {{subreaName}}
+        </div>
+        <div v-show="isEdit">
           <el-select v-model="secondReason">
             <el-option v-for="item in secondReasons" :label="item.reasonName" :value="item.id">
             </el-option>
           </el-select>
         </div>
+      </li>
+      <li v-if="auditResult !='02'">
+        <el-button icon="el-icon-change-hang" class="credit-btn" @click="editFn">修改</el-button>
       </li>
       <li class="item-column1">
         <div class="left-title item-label-show">
@@ -137,12 +147,12 @@
     <div>
       <el-dialog :visible.sync="huiTuiShow" top="30vh">
         <!-- 回退 -->
-        <el-form v-show="showFlag=='02'" class="back-form huitui-class">
+        <el-form class="back-form huitui-class">
           <div class="form-title" style="position:relative;" v-show="showFlag=='02'">
             回退信息
             <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
           </div>
-          <div class="back-form-li" v-show="showFlag=='02'">
+          <div class="back-form-li">
             <span style="color:red;display:inline-block;width:0px;float:left;">*</span>
             <el-form-item label="回退节点: ">
               <el-select @change="backSelectChange" v-model="rollbackNodeName">
@@ -171,7 +181,7 @@
           <div class="back-form-li" style="text-align:right;">
             <el-button plain @click="showFlag=0,coverShow=false;">返回</el-button>
             <!-- 回退 -->
-            <el-button type="primary" v-show="showFlag=='02'" @click="submitFn('02')">提交</el-button>
+            <el-button type="primary" @click="submitFn('02')">提交</el-button>
           </div>
         </el-form>
       </el-dialog>
@@ -305,15 +315,7 @@ export default {
       processTemplateId: '',
       taskStatus: '',
       lcgjLoading: '',
-      mainReason: '', // 主原因
-      mainReasonT: '', // 主管临时变量
-      mainReasons: [],
-      mainReasonName: '', // 主原因name
-      secondReason: '', // 子原因
-      secondReasonT: '', //  主管临时变量
-      secondReasonName: '', // 子原因name
-      secondReasons: [],
-      secondaryReason: '',
+
       reasonRemark: '',
       issameFamtxt: '', // 风险项
       relBorrowertxt: '', // 案件描述,
@@ -329,6 +331,7 @@ export default {
       ploanAmt: '',
       lcgjData: [],
       auditResult: '', // 审核结论
+      auditResulttext: '',
       mainId: '', // 主原因 id
       secondId: '', // 子原因id
       // appinfoId:'', // 反欺诈申请id
@@ -357,17 +360,26 @@ export default {
       huiTuiShow: false, // 回退信息
       lcgjShow: false, // 流程轨迹
       shenPiShow: false, // 审批结论轨迹
-      shenPiBtnShow:false,  // 审批 专员 BX22
+      shenPiBtnShow: false, // 审批 专员 BX22
       social: '', // 社保/公积金  授权标志
       bigDataLogVisible: false, //大数据风控弹框
       socialLogVisible: false, //社保公积金
+      isEdit: false,
+      mainReason: '', // 主原因
+      mainReasonT: '', // 主管临时变量
+      mainReasons: [], // 主原因数组
+      mainReasonName: '', // 主原因name
+      secondReason: '', // 子原因
+      secondReasonT: '', //  主管临时变量
+      subreaName: '', // 子原因name
+      secondReasons: [],
+      secondaryReason: '',
     }
   },
   mounted() {
     this.Social();
 
-    // 取出 流程模版id
-    this.processTemplateId = JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
+
 
     // 取出  申请信息   applicationInformationDetail
     this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
@@ -413,13 +425,16 @@ export default {
         }
       ]
     } else if (this.judgeFlag == '03') {
+      // 取出 流程模版id  processTemplateId
+      this.processTemplateId = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).processTemplateId;
+      this.isEdit = true;
       // 反欺诈专员审批按钮，要判断下，功能角色号有配BX22的
-    if (this.userInfo.roleCodesList) {
-      for (var i = 0; i < this.userInfo.roleCodesList.length; i++)
-        if (this.userInfo.roleCodesList[i] == 'BX22')
-          if (this.judgeFlag == '03')
-            this.shenPiBtnShow = true;
-    }
+      if (this.userInfo.roleCodesList) {
+        for (var i = 0; i < this.userInfo.roleCodesList.length; i++)
+          if (this.userInfo.roleCodesList[i] == 'BX22')
+            if (this.judgeFlag == '03')
+              this.shenPiBtnShow = true;
+      }
       // 审批 专员 AntiWorkbenchPass
       this.taskId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
       // // 反欺诈申请id
@@ -438,26 +453,31 @@ export default {
       var insertObj = JSON.parse(localStorage.getItem('saveInsertObj'));
       if (insertObj != undefined) {
         this.auditResult = insertObj.auditResult; // 审核结论
-        this.mainReasonT = insertObj.mainreasonId; // 欺诈主原因id
-        this.secondReasonT = insertObj.subreasonId; // 欺诈子原因id
-        this.riskSection = insertObj.riskSection; // 风险项
+        this.auditResulttext = insertObj.auditResulttext; // 审核结论 名称
+        this.mainReason = insertObj.mainreasonId; // 欺诈主原因id
+        this.mainreaName = insertObj.mainReasonName, // 欺诈主原因名称
+          this.secondReason = insertObj.subreasonId; // 欺诈子原因id
+        this.subreaName = insertObj.subreaName, // 欺诈子原因名称
+          this.riskSection = insertObj.riskSection; // 风险项
         this.auditDesc = insertObj.auditDesc; // 反欺诈决策反馈
         this.caseNum = insertObj.caseNum; // 案件编号 caseNum
         this.caseDesc = insertObj.caseDesc; // 案件描述
         // 请求主原因
-        if (this.auditResult) {
-          this.getReason('main', this.auditResult, true);
-          // 赋值主原因
-        }
+        // if (this.auditResult) {
+        //   this.getReason('main', this.auditResult, true);
+        //   // 赋值主原因
+        // }
         // 请求子原因
         // this.secondReasonT = insertObj.subreasonId;
-        if (insertObj.mainreasonId) {
-          this.getReason('second', this.mainReasonT, true);
-        }
+        // if (insertObj.mainreasonId) {
+        //   this.getReason('second', this.mainReasonT, true);
+        // }
         // 请求风险项
         // this.getRiskItems();
       }
     } else if (this.judgeFlag == '04') {
+      // 取出 流程模版id  processTemplateId
+      this.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
       // 审批主管
       this.taskId = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
       this.applyId = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).applyId;
@@ -479,22 +499,25 @@ export default {
       var insertObj = JSON.parse(localStorage.getItem('saveInsertObj'));
       if (insertObj != undefined) {
         this.auditResult = insertObj.auditResult; // 审核结论
-        this.mainReasonT = insertObj.mainreasonId; // 欺诈主原因id
-        this.secondReasonT = insertObj.subreasonId; // 欺诈子原因id
-        this.riskSection = insertObj.riskSection; // 风险项
+        this.auditResulttext = insertObj.auditResulttext; // 审核结论 名称
+        this.mainReason = insertObj.mainreasonId; // 欺诈主原因id
+        this.mainreaName = insertObj.mainReasonName, // 欺诈主原因名称
+          this.secondReason = insertObj.subreasonId; // 欺诈子原因id
+        this.subreaName = insertObj.subreaName, // 欺诈子原因名称
+          this.riskSection = insertObj.riskSection; // 风险项
         this.auditDesc = insertObj.auditDesc; // 反欺诈决策反馈
         this.caseNum = insertObj.caseNum; // 案件编号 caseNum
         this.caseDesc = insertObj.caseDesc; // 案件描述
         // 请求主原因
-        if (this.auditResult) {
-          this.getReason('main', this.auditResult, true);
-          // 赋值主原因
-        }
+        // if (this.auditResult) {
+        //   this.getReason('main', this.auditResult, true);
+        //   // 赋值主原因
+        // }
         // 请求子原因
         // this.secondReasonT = insertObj.subreasonId;
-        if (insertObj.mainreasonId) {
-          this.getReason('second', this.mainReasonT, true);
-        }
+        // if (insertObj.mainreasonId) {
+        //   this.getReason('second', this.mainReasonT, true);
+        // }
       } else {
         // 反欺诈主管 请求 反欺诈历史信息
         this.queryCreauditOpinionObj();
@@ -639,6 +662,12 @@ export default {
       }
 
       if (this.auditResult != '02') {
+        console.log(this.auditResult)
+        console.log(this.mainReason)
+        console.log(this.mainReasonName)
+        console.log(this.secondReason)
+        console.log(this.subreaName)
+        console.log(this.auditDesc)
         // 判断必填项
         if (!this.auditResult || !this.mainReason || !this.secondReason || !this.auditDesc) {
 
@@ -697,7 +726,7 @@ export default {
         if (this.secondReason) {
           for (let i = 0; i < this.secondReasons.length; i++) {
             if (this.secondReasons[i].id == this.secondReason) {
-              this.secondReasonName = this.secondReasons[i].reasonName;
+              this.subreaName = this.secondReasons[i].reasonName;
             }
           }
         }
@@ -706,7 +735,7 @@ export default {
         this.mainReason = '';
         this.mainReasonName = '';
         this.secondReason = '';
-        this.secondReasonName = '';
+        this.subreaName = '';
         this.riskSectionArr = '';
         // 31 风险拒绝
         this.busiState = '31';
@@ -733,7 +762,7 @@ export default {
                 mainreasonId: this.mainReason, // 欺诈主原因id
                 subreasonId: this.secondReason, // 欺诈子原因id
                 mainreaName: this.mainReasonName, // 欺诈主原因名称
-                subreaName: this.secondReasonName, // 欺诈子原因名称
+                subreaName: this.subreaName, // 欺诈子原因名称
                 riskSection: this.riskSectionArr, // 风险项
                 auditDesc: this.auditDesc, // 反欺诈决策反馈
                 auditResult: this.auditResult, // 审核结论
@@ -803,7 +832,7 @@ export default {
                 mainreasonId: this.mainReason, // 欺诈主原因id
                 subreasonId: this.secondReason, // 欺诈子原因id
                 mainreaName: this.mainReasonName, // 欺诈主原因名称
-                subreaName: this.secondReasonName, // 欺诈子原因名称
+                subreaName: this.subreaName, // 欺诈子原因名称
                 riskSection: this.riskSectionArr, // 风险项
                 auditDesc: this.auditDesc, // 反欺诈决策反馈
                 auditResult: this.auditResult, // 审核结论
@@ -905,10 +934,11 @@ export default {
           // 点击保存 
           var tempObj = {
             auditResult: this.auditResult, // 审核结论
+            auditResulttext: this.auditResulttext, // 审核结论 名称
             mainreasonId: this.mainReason, // 欺诈主原因id
-            // mainreaName: this.mainReasonName, // 欺诈主原因名称
+            mainreaName: this.mainReasonName, // 欺诈主原因名称
             subreasonId: this.secondReason, // 欺诈子原因id
-            // subreaName: this.secondReasonName, // 欺诈子原因名称
+            subreaName: this.subreaName, // 欺诈子原因名称
             riskSection: this.riskSection, // 风险项
             auditDesc: this.auditDesc, // 反欺诈决策反馈
             caseNum: this.caseNum, // 案件编号 caseNum
@@ -1177,15 +1207,19 @@ export default {
             this.mainReasons = res.data;
             if (TF == true) {
               console.log('主管 主原因');
-              this.mainReason = this.mainReasonT;
-            }else if(TF ==false){
+              // this.mainReason = this.mainReasonT;
+              this.mainReason = '';
+              this.mainReasonName = '';
+              this.secondReason = '';
+              this.subreaName = '';
+            } else {
               console.log('主管 主原因 false');
               this.mainReason = '';
+              this.mainReasonName = '';
               this.secondReason = '';
-            }else{
+              this.subreaName = '';
               console.log('主管 主原因改变');
             }
-            console.log(this.mainReason);
           }
         })
       } else if (flag == 'second') {
@@ -1197,13 +1231,13 @@ export default {
             console.log(111111111111111)
             if (TF == true) {
               console.log('主管 子原因')
-              console.log(this.secondReasonT);
-              this.secondReason = this.secondReasonT;
-              console.log(this.secondReason);
+              this.secondReason = '';
+              this.subreaName = '';
               console.log('子原因 赋值')
-            }else{
+            } else {
               console.log('主管 子原因 false');
               this.secondReason = '';
+              this.subreaName = '';
               console.log('主管 主原因 改变')
             }
           }
@@ -1226,22 +1260,33 @@ export default {
           // this.caseNum = res.data.caseNum; // 案件编号 caseNum
           // this.caseDesc = res.data.caseDesc; // 案件描述
 
-          this.auditResult = res.data.auditResult; // 审核结论
+          // 审核结论
+          this.auditResult = res.data.auditResult;
+          this.auditResulttext = res.data.auditResulttext; // 审核结论  txt
           // 请求主原因
-          this.mainReasonT = res.data.mainreasonId;
-          if (this.auditResult) {
-            this.getReason('main', this.auditResult, true);
-            // 赋值主原因
-          }
+          // this.mainReasonT = res.data.mainreasonId;
+          this.mainReason = res.data.mainreasonId;
+          // 主原因name
           this.mainReasonName = res.data.mainreaName;
+          console.log(this.mainReason);
+          console.log(this.mainReasonName);
+          // if (this.auditResult) {
+          // this.getReason('main', this.auditResult, true);
+          // 赋值主原因
+          // }
           // 主原因
           // this.mainReason = res.data.mainreasonId;
           // 请求子原因   subreasonId
-          this.secondReasonT = res.data.subreasonId;
-          if (res.data.mainreasonId) {  
-            this.getReason('second', this.mainReasonT, true);
-          }
+          // this.secondReasonT = res.data.subreasonId;
+          // 子原因 id
+          this.secondReason = res.data.subreasonId;
+          // 子原因 name
           this.subreaName = res.data.subreaName;
+          console.log(this.secondReason);
+          console.log(this.subreaName);
+          // if (res.data.mainreasonId) {
+          // this.getReason('second', this.mainReasonT, true);
+          // }
 
           // 风险项 riskSection
           this.riskSection = res.data.riskSectionArr;
@@ -1260,12 +1305,12 @@ export default {
         }
       })
     },
-    mainReasonChange(val){
-    //   console.log(val);
-    //   // 主原因改变 请求子原因
-    //   this.getReason('second',val,false)
+    mainReasonChange(val) {
+      //   console.log(val);
+      //   // 主原因改变 请求子原因
+      //   this.getReason('second',val,false)
     },
-//大数据风控
+    //大数据风控
     tobigData() {
       this.post(baseurl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
         applyId: this.applyId
@@ -1309,25 +1354,43 @@ export default {
     socialSure() {
       this.socialLogVisible = false;
     },
+    // 修改 按钮
+    editFn() {
+      this.isEdit = true;
+      this.auditResult = '';
+      this.mainReason = '';
+      this.mainReasonName = '';
+      this.secondReason = '';
+      this.subreaName = '';
+    },
+    // 审核结论  更改
+    auditResultChange(val) {
+      this.getReason('main', val, true);
+    },
+    // 主原因更改
+    mainReasonChange(val) {
+      this.getReason('second', val, true);
+    }
+
   },
   watch: {
     // 审核结论 改变请求主原因
-    auditResult: function(val) {
-      console.log(this.auditResult);
-      // 审核结论改变 , 主原因 子原因 都清空
-      this.mainReason = '';
-      // this.mainReasonName = '';
-      this.mainId = '';
-      this.secondReason = '';
-      // this.secondReasonName = '';
-      this.getReason('main', val);
-    },
-    // // 通过主原因  请求 子原因
-    mainReason: function(val) {
-      this.secondReason = '';
-      // this.secondReasonName = '';
-      this.getReason('second', val, false);
-    }
+    //   auditResult: function(val) {
+    //     console.log(this.auditResult);
+    //     // 审核结论改变 , 主原因 子原因 都清空
+    //     this.mainReason = '';
+    //     // this.mainReasonName = '';
+    //     this.mainId = '';
+    //     this.secondReason = '';
+    //     // this.subreaName = '';
+    //     this.getReason('main', val);
+    //   },
+    //   // 通过主原因  请求 子原因
+    //   mainReason: function(val) {
+    //     this.secondReason = '';
+    //     // this.subreaName = '';
+    //     this.getReason('second', val, false);
+    //   }
   }
 }
 
@@ -1348,6 +1411,10 @@ export default {
   /*margin-top: 20px;*/
   overflow: hidden;
 }
+
+
+
+
 
 
 
@@ -1394,6 +1461,10 @@ export default {
 
 
 
+
+
+
+
 /* 一列 */
 
 .approval-colun .item-column1 {
@@ -1402,6 +1473,10 @@ export default {
   margin: 0;
   margin-bottom: 10px;
 }
+
+
+
+
 
 
 
@@ -1445,6 +1520,10 @@ export default {
 
 
 
+
+
+
+
 /* 三列 */
 
 .approval-colun .item-column3 {
@@ -1462,7 +1541,12 @@ export default {
   padding-right: 10px;
   text-align: right;
   font-size: 14px;
+  margin-right: 0px;
 }
+
+
+
+
 
 
 
@@ -1513,6 +1597,10 @@ export default {
 
 
 
+
+
+
+
 /* input hover 样式 */
 
 .approval-colun .el-select:hover .el-input__inner {
@@ -1545,6 +1633,10 @@ export default {
 
 
 
+
+
+
+
 /* 按钮集合控件 */
 
 .approval-colun .btn-div {
@@ -1552,6 +1644,10 @@ export default {
   width: 80%;
   float: left;
 }
+
+
+
+
 
 
 
@@ -1600,6 +1696,10 @@ export default {
 
 
 
+
+
+
+
 /*回退*/
 
 .approval-colun .el-icon-check-back {
@@ -1612,6 +1712,10 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
 
 
 
@@ -1660,6 +1764,10 @@ export default {
 
 
 
+
+
+
+
 /*放弃*/
 
 .approval-colun .el-icon-check-giveup {
@@ -1672,6 +1780,10 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
 
 
 
@@ -1720,6 +1832,10 @@ export default {
 
 
 
+
+
+
+
 /*流程轨迹*/
 
 .approval-colun .el-icon-check-lcgj {
@@ -1732,6 +1848,10 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
 
 
 
@@ -1776,6 +1896,10 @@ export default {
 
 
 
+
+
+
+
 /* 反欺诈 审批结论  - - 弹窗*/
 
 .approval-colun .el-dialog {
@@ -1786,6 +1910,7 @@ export default {
 .approval-colun .el-dialog__header {
   display: none;
 }
+
 .approval-colun .el-dialog__body {
   padding: 0;
 }
@@ -1800,6 +1925,10 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
+
+
+
 
 
 
@@ -1875,11 +2004,19 @@ export default {
 
 
 
+
+
+
+
 /* textarea */
 
 .approval-colun .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
+
+
+
 
 
 
@@ -1932,6 +2069,10 @@ export default {
 
 
 
+
+
+
+
 /* 审批 表单 */
 
 .approval-colun .appro-form {
@@ -1962,6 +2103,10 @@ export default {
 
 
 
+
+
+
+
 /*.approval-colun .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -1969,6 +2114,10 @@ export default {
 .approval-colun .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
+
+
+
 
 
 
@@ -2032,11 +2181,19 @@ export default {
 
 
 
+
+
+
+
 /* 反欺诈 -- 审批结论 */
 
 .approval-colun .form-ul {
   padding-left: 30px;
 }
+
+
+
+
 
 
 
@@ -2070,7 +2227,7 @@ export default {
 }
 
 .approval-colun .item-label-show {
-  margin-right: 15px;
+  margin-right: 0px;
   font-size: 14px;
   line-height: 30px;
 }
@@ -2096,11 +2253,19 @@ export default {
 
 
 
+
+
+
+
 /* 审批 label*/
 
 .approval-colun .appro-form .back-form-edit-li .el-form-item__label {
   width: 120px;
 }
+
+
+
+
 
 
 
@@ -2146,11 +2311,19 @@ export default {
 
 
 
+
+
+
+
 /* 两行文字 样式 */
 
 .approval-colun .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
+
+
+
 
 
 
@@ -2197,6 +2370,10 @@ export default {
 
 
 
+
+
+
+
 /* 详细 信息按钮*/
 
 .approval-colun .btn-detail {
@@ -2205,6 +2382,10 @@ export default {
   margin-top: 35px;
   margin-left: 10px;
 }
+
+
+
+
 
 
 
@@ -2254,6 +2435,10 @@ export default {
 
 
 
+
+
+
+
 /* 分页 */
 
 .approval-colun .tool-bar {
@@ -2279,11 +2464,19 @@ export default {
 
 
 
+
+
+
+
 /* 隐藏分页 */
 
 .approval-colun .el-pagination__jump {
   display: none;
 }
+
+
+
+
 
 
 
@@ -2379,6 +2572,10 @@ export default {
 
 
 
+
+
+
+
 /*大数据风控*/
 
 .approval-colun .el-icon-check-big-data {
@@ -2391,6 +2588,10 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
+
+
+
 
 /*社保公积金*/
 
@@ -2405,7 +2606,23 @@ export default {
   display: inline-block;
 }
 
-.approval-colun .bigDataLog .el-dialog__body{
+
+
+
+/*修改信息*/
+
+.approval-colun .el-icon-change-hang {
+  background: url(../../../static/images/change.png);
+  width: 30px;
+  height: 30px;
+  background-size: 30px;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.approval-colun .bigDataLog .el-dialog__body {
   padding: 30px 20px;
 }
 
