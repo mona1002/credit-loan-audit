@@ -69,7 +69,6 @@
           </div>
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
-            <!-- <HelloWorld :myWatch="watchData" v-if=" this.tabContent2==0"></HelloWorld> -->
             <!-- <CreditFormKeydownEvent :myWatch="watchData" v-if=" this.tabContent2==3"></CreditFormKeydownEvent> -->
             <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
             <remark v-if=" this.tabContent2==1"></remark>
@@ -139,9 +138,6 @@
   import cborrowerInformationDetail from "./checkComponent/borrowerInformationDetail"; //借款人资料
   import capplicationInformationDetail from "./checkComponent/applicationInformationDetail"; //申请信息
   import processTrajectory from "./checkComponent/processTrajectory"; //流程轨迹
-
-
-  import HelloWorld from "../HelloWorld.vue"
   // import CreditFormKeydownEvent from './detailComponent/CreditFormKeydownEvent.vue'
   export default {
     data() {
@@ -280,7 +276,6 @@
     },
     components: {
       myHead,
-      // 编辑
       AudioVisual,
       AudioVisualLeft,
       remark,
@@ -290,17 +285,13 @@
       PhoneCredit,
       CreditForm,
       creditInvestigation,
-      // 信审审批
       CreditApproval,
-      // 查询
       cCreditForm,
-      cremarkDetail, //
+      cremarkDetail, 
       cborrowerInformationDetail,
       capplicationInformationDetail,
       processTrajectory,
       aAntiApplyInf,
-      HelloWorld,
-      // CreditFormKeydownEvent
     }
   }
 
@@ -310,6 +301,7 @@
     height: 100%;
     /* min-width: 1366; */
   }
+
   /* 激活样式 流-css */
 
   .tab1Default {
@@ -332,6 +324,7 @@
   .setGray {
     color: #bfcbd9;
   }
+
   /* 对比弹出层关闭按钮 */
 
   .compareClose {
@@ -340,6 +333,7 @@
     bottom: 19px;
     z-index: 1;
   }
+
   /* 全屏  --  分屏 图标 */
 
   .icon_showHalf {
@@ -365,7 +359,6 @@
     left: 0;
     top: 0;
   }
-  /*-------------------------------- */
 
   .SplitScreen_content {
     border: 1px solid #0077ff;
@@ -373,6 +366,7 @@
     overflow: auto;
     padding: 13px 9px;
   }
+
   /* 借款人详情 */
 
   .PerDtl {
@@ -393,6 +387,7 @@
   .PerDtl span:nth-of-type(7) {
     width: 105px;
   }
+
   /* 切换按钮 */
 
   .stretch {
@@ -401,6 +396,7 @@
     top: 2px;
     z-index: 1;
   }
+
   /* 左右分屏 */
 
   .SplitScreen_wrap {
@@ -427,7 +423,9 @@
   .AudioVisual_wrap_compare_left {
     margin-right: 2px;
   }
+
   /* 左屏 */
+
   /* 左侧列表  影像资料等 ul 外包   流 */
 
   .left .Left_ul {
@@ -453,11 +451,13 @@
   .Right_tab_ul_wrap ul li:hover {
     cursor: pointer;
   }
+
   /* 左侧详情 div   流 */
 
   .Left_detail_div {
     height: 100%;
   }
+
   /* 左侧详情 p标签   流-css */
 
   .Left_right_Title,
@@ -478,6 +478,7 @@
     text-align: right;
     padding-right: 40px;
   }
+
   /* 左侧详情 content div 内容   流-css */
 
   .Left_right_BigImg {
@@ -485,7 +486,9 @@
     height: calc( 100% - 48px);
     overflow: auto;
   }
+
   /* 右屏 */
+
   /* 右侧tab切换头外的ul   流 */
 
   .Right_tab_ul_wrap {
@@ -509,13 +512,13 @@
     height: 38px;
     line-height: 38px;
   }
-  /* ======================================================================================================= */
 
   .tab2_Content {
     /*background: purple;*/
     height: calc( 100% - 48px);
     overflow: auto;
   }
+
   /* 右侧tab切换头 左右滑动图标  流  */
 
   .pre_next_btn_wrap {
@@ -531,6 +534,7 @@
   .pre_next_btn_wrap:nth-of-type(2) {
     right: 10px;
   }
+
   /*  对比弹出层 外包 div 流 */
 
   .AudioVisual_wrap_compare {
@@ -541,6 +545,7 @@
     z-index: 22;
     min-width: 1306px;
   }
+
   /* 弹出层 - 两侧组件 content  流 */
 
   .AlertContent {
