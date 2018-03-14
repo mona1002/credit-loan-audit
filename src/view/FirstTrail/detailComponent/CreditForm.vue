@@ -927,15 +927,13 @@
     <div class="btn_wrap">
       <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
     </div>
-    <!-- <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button> -->
-    <!-- <el-button type="primary" @click="CFsave">确定</el-button> -->
-
     <!-- ==============================点击确认时提示弹框=================================== -->
     <el-dialog title="提示" :visible.sync="Confirm" top="43vh" width="420px">
       <span>确定操作？</span>
       <span slot="footer" class="dialog-footer">
-        <button class="calbtn" @click="canc">取消</button>
-        <button class="subtn" type="primary" @click="CFsave">确定</button>
+        <el-button class="calbtn" @click="canc">取消</el-button>
+        <el-button class="subtn" type="primary" :loading="loadsitu" @click="CFsave">{{adbtn}}</el-button>
+
       </span>
     </el-dialog>
   </div>
@@ -944,6 +942,10 @@
   export default {
     data() {
       return {
+        adbtn: '确认',
+        loadsitu: false,
+        surbtn: true,
+        loadbtn: false,
         Pwidth: [],
         CFwidth: [],
         inputWidth: [],
@@ -1978,6 +1980,8 @@
         this.checkData.workCounty = item;
       },
       makeSureBtn() {
+        this.loadsitu = false;
+        this.adbtn = '确定';
         this.$validator.validateAll().then((result) => {
           if (result) {
             this.Confirm = true;
@@ -1993,6 +1997,8 @@
         this.Confirm = false;
       },
       CFsave() {
+        this.loadsitu = true;
+        this.adbtn = '保存中';
         this.$validator.validateAll().then((result) => {
           if (result) {
             this.checkData.selfpremisesArea = this.acreage;
@@ -2510,6 +2516,7 @@
     font-size: 14px;
   }
 
+  
   .subtn {
     background: #66b1ff;
     border-color: #66b1ff;
