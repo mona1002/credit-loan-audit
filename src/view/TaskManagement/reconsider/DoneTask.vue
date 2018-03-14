@@ -157,7 +157,6 @@
         return val;
       },
       num(val,el) {
-        console.log(val)
         switch (el) {
           case 'code':
             isNaN(val) ? this.params.applySubNo = val = '' : this.params.applySubNo = val;
@@ -168,13 +167,13 @@
         }
       },
       handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
+        // console.log(`每页 ${val} 条`);
          this.params.pageSize = val;
          this.params.pageNum=1;
         this.getInf(this.params);
       },
       handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
+        // console.log(`当前页: ${val}`);
           this.params.pageNum = val;
            this.getInf(this.params);
       },
@@ -203,7 +202,6 @@
       getInf(pam) { 
         this.post("/workFlowTaskQuery/getTaskToDoList", pam).then(res => {
           if (res.statusCode == 200 && res.data.taskDetailList != null) {
-            console.log(res);
             this.tableData = res.data.taskDetailList;
             this.totalRecord = res.data.totalNum; // 总数
             this.changeColor();
@@ -219,10 +217,8 @@
             validFlag:'1'
            }
           }).then(res => {
-            console.log(res)
           if (res.statusCode == 200) {
             this.production = res.data
-             this.$message.error(res.msg);
           }else {
             this.$message.error(res.msg);
           }
@@ -242,9 +238,7 @@
       }
     },
     mounted() {
-      console.log(baseU)
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
-      console.log( this.userInf )
       this.params.orgCode = this.userInf.orgCode;
       this.params.userCode = this.userInf.userCode;
       this.params.pageNum = this.currentPage, //页数（第几页）

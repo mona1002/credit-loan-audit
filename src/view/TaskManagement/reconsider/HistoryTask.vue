@@ -161,7 +161,6 @@
         return val;
       },
       num(val, el) {
-        console.log(val)
         switch (el) {
           case 'code':
             isNaN(val) ? this.params.applySubNo = val = '' : this.params.applySubNo = val;
@@ -172,13 +171,11 @@
         }
       },
       handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
         this.params.pageSize = val;
         this.params.pageNum = 1;
         this.getInf(this.params);
       },
       handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
         this.params.pageNum = val;
         this.getInf(this.params);
       },
@@ -196,7 +193,6 @@
         this.dealDate = '';
       },
       Rsearch() {
-        console.log(this.currentPage)
         this.params.appDate_ge = this.DateF(this.applyData[0]);
         this.params.appDate_le = this.DateF(this.applyData[1]);
         this.params.completeTime_ge = this.DateF(this.dealDate[0]);
@@ -207,7 +203,6 @@
       getInf(pam) {
         this.post("/workFlowTaskQuery/getTaskHistoryList", pam).then(res => {
           if (res.statusCode == 200 && res.data.taskDetailList != null) {
-            console.log(res);
             this.tableData = res.data.taskDetailList;
             this.totalRecord = res.data.totalNum; // 总数
             this.changeColor();

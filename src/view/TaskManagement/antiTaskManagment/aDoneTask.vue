@@ -135,7 +135,6 @@
         return val;
       },
       num(val, el) {
-        console.log(val)
         switch (el) {
           case 'code':
             isNaN(val) ? this.params.applySubNo = val = '' : this.params.applySubNo = val;
@@ -146,13 +145,11 @@
         }
       },
       handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
         this.params.pageSize = val;
         this.params.pageNum = 1;
         this.getInf(this.params);
       },
       handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
         this.params.pageNum = val;
         this.getInf(this.params);
       },
