@@ -504,7 +504,7 @@
 <script>
 import baseurl from '../.././util/ConstantSocialAndPn';
 // 用户接口
-import userBaseUrl from '../.././util/constantUser';
+import userBaseUrl from '../.././util/constant';
 export default {
   data() {
     return {
@@ -1029,8 +1029,8 @@ export default {
               产品
             */
       // 产品
-      // this.post(userBaseUrl + 'base/product/getProductForUser', {
-      this.post('http://10.1.26.200:20717/remote/product/getProductForUser', {
+      this.post(userBaseUrl.baseUrl_user + 'remote/product/getProductForUser', {
+      // this.post('http://10.1.26.200:20717/remote/product/getProductForUser', {
         data: {
           "orgId": "f542358d-14c9-4c63-a299-39d3654751a2",
           "validFlag": "1" // 有效标志
