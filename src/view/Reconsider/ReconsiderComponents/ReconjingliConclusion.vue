@@ -479,6 +479,7 @@
 </template>
 <script type="text/javascript">
 import baseurl from '../../../util/ConstantSocialAndPn';
+import baseU from'../../../util/ConstantProduct';
 	export default{
 		data(){
 			return{
@@ -563,6 +564,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 		        bigDataLogVisible:false,//大数据风控弹框
 		        socialLogVisible:false,//社保公积金
 		        social:'',//社保公积金 已绑定 未绑定
+		        orgId:'',
 			}
 		},
 		mounted(){
@@ -573,6 +575,9 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 			//经办人
 			this.dealroperCode = JSON.parse(localStorage.getItem('userInf')).userCode;
 			this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
+
+			//登陆人id
+			this.orgId=JSON.parse(localStorage.getItem('userInf')).orgId;
 
 		    this.applyId = this.applicationInformationDetail.applyId;
 		  	//console.log(this.applyId);
@@ -697,15 +702,18 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 			        }
 		        });
 		        //请求产品
-		        this.get('/credit/product').then(res => {
-			       //console.log(res);
-			        if (res.statusCode == '200') {
-			          // 假如没有  核实可接受最高每期还款额 
-			          // if(res.)  提交的时候也要判断
-			          // this.$message("提示：请完善信审表中可承受的月还款金额");
-			          this.products = res.data;
-			        }
-			      });
+		        this.post(baseU,{
+		           data:{
+		              orgId:this.orgId,
+		              validFlag:'1'
+		           }
+		          }).then(res => {
+		          	if(res.statusCode == 200){
+						this.products = res.data;
+					}else {
+			            this.$message.error(res.msg);
+			          }
+	            });
 			},
 			//审批提交按钮
 		    spsure(){
