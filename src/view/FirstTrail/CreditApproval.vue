@@ -36,7 +36,7 @@
       <el-button icon="el-icon-check-reject" class="credit-btn" v-show="judgeFlag == '01' && jujueBtnShow" @click="coverFn('01')">拒绝</el-button>
       <el-button icon="el-icon-check-reject" class="credit-btn" v-show="judgeFlag!='01'" @click="coverFn('01')">拒绝</el-button>
       <el-button icon="el-icon-check-giveup" class="credit-btn" @click="coverFn('07')">放弃</el-button>
-      <el-button icon="el-icon-check-appro" class="credit-btn" @click="coverFn('03')">审批</el-button>
+      <el-button icon="el-icon-check-appro" class="credit-btn" v-show="shenPiBtnShow" @click="coverFn('03')">审批</el-button>
       <el-button icon="el-icon-check-start" class="credit-btn" @click="coverFn('fqz')">发起反欺诈</el-button>
       <el-button icon="el-icon-check-spjl" class="credit-btn" @click="coverFn('spjl')">审批结论轨迹</el-button>
       <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('lcgj')">流程轨迹</el-button>
@@ -353,7 +353,7 @@
           </div>
           <div class="back-form-li" style="text-align:right;padding:10px;">
             <el-button plain @click="showFlag=0,coverShow=false;shenPiShow=false;">返回</el-button>
-            <el-button type="primary" @click="submitFn('03')">提交</el-button>
+            <el-button type="primary" @click="submitFn('03')" :loading="isLoading">{{loadingTitle}}</el-button>
           </div>
         </el-form>
       </el-dialog>
@@ -648,10 +648,14 @@ export default {
       lcgjShow: false,
       jujueBtnShow: false, // 拒绝 按钮 BX02
       activeNames: ['applyMsg'], // 更改 审批 为折叠面板
+      isLoading: false, // 审批按钮 是否加载状态
+      loadingTitle: '提交', // 默认btn title
+      shenPiBtnShow:false, // 初审 审批按钮  BX21
     }
   },
   mounted() {
-    this.Social();
+
+
 
     // 取出标志taskNodeName
     // creditApp_finalTrial_five   信审总监审批 最高级不需要 更高级审批
@@ -669,6 +673,14 @@ export default {
       this.processInstanceId = this.taskInWaitting.processInstanceId;
       // 任务状态
       this.taskStatus = JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
+
+      // 反欺诈专员审批按钮，要判断下，功能角色号有配BX22的
+      if (this.userInfo.roleCodesList) {
+        for (var i = 0; i < this.userInfo.roleCodesList.length; i++)
+          if (this.userInfo.roleCodesList[i] == 'BX21')
+            if (this.judgeFlag == '01')
+              this.shenPiBtnShow = true;
+      }
 
     } else if (this.judgeFlag == '02') { // 终审取终审  taskId
       this.FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
@@ -741,6 +753,10 @@ export default {
     // 申请信息 带过来的 产品名称
     this.baseProName = this.applicationInformationDetail.proName;
 
+
+    this.certCode = this.applicationInformationDetail.certCode;
+
+    this.Social();
 
     // 初审 / 终审
     this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
@@ -1401,6 +1417,8 @@ export default {
     },
     // 保存审批信息
     saveCreaduit(val) {
+      this.isLoading = true;
+      this.loadingTitle = '提交中';
       console.log("保存审批信息");
       // 假如是终审 1
       if (this.judgeFlag == '02') {
@@ -1419,8 +1437,8 @@ export default {
         console.log('==========================================')
         ploanAmt2 = Number(this.ploanAmt)
       }
-      this.post('/creauditOpinion/add', {
-        // this.post("http://10.1.26.47:8080/riskManagement/creauditOpinion/add", {
+      // this.post('/creauditOpinion/add', {
+      this.post("http://10.1.26.47:8080/riskManagement/creauditOpinion/add", {
         applyId: this.applyId,
         auditType: this.judgeFlag == '01' ? '00' : '01',
         proCode: this.proCode,
@@ -1454,6 +1472,8 @@ export default {
         opinionFlag: this.opinionFlag, // 任务类型  初审 00 
         busiState: this.busiState
       }).then(res => {
+        this.isLoading = false;
+        this.loadingTitle = '提交';
         // 更改显示
         this.shenPiShow = false;
         console.log(res);
@@ -1858,10 +1878,10 @@ export default {
         certCode: this.certCode,
         custName: this.custName
       }).then(res => {
-        if (res.obj == null) {
-          this.social = "(未授权)";
-        } else if (res.obj) {
+        if (res.obj) {
           this.social = "(已授权)";
+        } else {
+          this.social = "(未授权)";
         }
       });
     },
@@ -2047,6 +2067,7 @@ export default {
 
 
 
+
 /* 三列 */
 
 .creditApproval-class .item-column3 {
@@ -2063,6 +2084,7 @@ export default {
   margin: 0;
   padding: 0;
 }
+
 
 
 
@@ -2194,6 +2216,7 @@ export default {
 
 
 
+
 /* 信审审批 - btn*/
 
 .creditApproval-class .credit-btn {
@@ -2202,6 +2225,7 @@ export default {
   color: #333;
   border: none;
 }
+
 
 
 
@@ -2349,6 +2373,7 @@ export default {
 
 
 
+
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -2356,6 +2381,7 @@ export default {
   float: left;
   margin: 0;
 }
+
 
 
 
@@ -2430,6 +2456,7 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
 
 
 
@@ -2620,11 +2647,13 @@ export default {
 
 
 
+
 /* textarea */
 
 .creditApproval-class .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
 
 
 
@@ -2774,6 +2803,7 @@ export default {
 
 
 
+
 /* 审批 表单 */
 
 .creditApproval-class .appro-form {
@@ -2848,6 +2878,7 @@ export default {
 
 
 
+
 /*.creditApproval-class .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -2855,6 +2886,7 @@ export default {
 .creditApproval-class .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
 
 
 
@@ -2997,6 +3029,7 @@ export default {
 
 
 
+
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -3004,6 +3037,7 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
 
 
 
@@ -3163,6 +3197,7 @@ export default {
 
 
 
+
 /* 申请信息 */
 
 .creditApproval-class .info .el-form-item__content {
@@ -3172,6 +3207,7 @@ export default {
 .creditApproval-class .info .el-form-item__label {
   width: 120px;
 }
+
 
 
 
@@ -3302,11 +3338,13 @@ export default {
 
 
 
+
 /* 有编辑框的 提示信息*/
 
 .creditApproval-class .back-form .back-form-edit-li {
   margin-top: 25px !important;
 }
+
 
 
 
@@ -3446,6 +3484,7 @@ export default {
 
 
 
+
 /*回退*/
 
 .creditApproval-class .el-icon-check-back {
@@ -3458,6 +3497,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -3594,6 +3634,7 @@ export default {
 
 
 
+
 /*放弃*/
 
 .creditApproval-class .el-icon-check-giveup {
@@ -3606,6 +3647,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -3742,6 +3784,7 @@ export default {
 
 
 
+
 /*发起反欺诈*/
 
 .creditApproval-class .el-icon-check-start {
@@ -3754,6 +3797,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -3890,6 +3934,7 @@ export default {
 
 
 
+
 /*流程轨迹*/
 
 .creditApproval-class .el-icon-check-lcgj {
@@ -3922,6 +3967,7 @@ export default {
 
 
 
+
 /*大数据风控*/
 
 .creditApproval-class .el-icon-check-big-data {
@@ -3934,6 +3980,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -4024,6 +4071,7 @@ export default {
 
 
 
+
 /* 折叠面板头部背景色和icon */
 
 .creditApproval-class .icon_hat {
@@ -4034,6 +4082,7 @@ export default {
 .creditApproval-class .headFont {
   font-size: 16px;
 }
+
 
 
 
@@ -4173,11 +4222,13 @@ export default {
 
 
 
+
 /* 信审审批  - 审批  编辑部分 */
 
 .creditApproval-class .appro-form .back-form-edit-li .el-form-item__label {
   /*width: 120px;*/
 }
+
 
 
 
@@ -4322,11 +4373,13 @@ export default {
 
 
 
+
 /* 两行文字 样式 */
 
 .creditApproval-class .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
 
 
 
@@ -4455,6 +4508,7 @@ export default {
 
 
 
+
 /* label 文字样式 */
 
 .creditApproval-class .huitui-class .el-form-item__label {
@@ -4462,6 +4516,7 @@ export default {
 }
 
 .creditApproval-class .jujue-class {}
+
 
 
 
@@ -4611,11 +4666,13 @@ export default {
 
 
 
+
 /* 审批信息  */
 
 .creditApproval-class .el-form-item__content .el-select .el-input {
   width: 100%;
 }
+
 
 
 
@@ -4708,6 +4765,7 @@ export default {
 
 
 
+
 /*大数据*/
 
 .creditApproval-class .bigDataLog .el-dialog__header {
@@ -4717,6 +4775,7 @@ export default {
 .creditApproval-class .bigDataLog .el-dialog__body {
   padding: 20px 30px;
 }
+
 
 
 

@@ -380,15 +380,17 @@ export default {
     }
   },
   mounted() {
-    this.Social();
+    
 
 
 
     // 取出  申请信息   applicationInformationDetail
     this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
+    console.log(1111111111111111111111111)
     console.log(this.applicationInformationDetail);
     this.custName = this.applicationInformationDetail.custName;
-
+    this.certCode = this.applicationInformationDetail.certCode;
+    this.Social();
     // 取出 审批结论 所需数据
     this.auditCode = JSON.parse(localStorage.getItem('userInf')).userCode;
 
@@ -1334,14 +1336,15 @@ export default {
     },
     //社保/公积金
     Social() {
+      console.log('第一次调用')
       this.post(baseurl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {
         certCode: this.certCode,
         custName: this.custName
       }).then(res => {
-        if (res.obj == null) {
-          this.social = "(未授权)";
-        } else if (res.obj) {
+        if (res.obj) {
           this.social = "(已授权)";
+        } else {
+          this.social = "(未授权)";
         }
       });
     },
