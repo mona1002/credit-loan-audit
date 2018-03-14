@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view class="Abody main" @onbeforeunload="aaa "></router-view>
+    <router-view class="Abody main"></router-view>
   </div>
 
 </template>

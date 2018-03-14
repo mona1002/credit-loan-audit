@@ -13,9 +13,8 @@ var host = location.hostname,
   // testEnv = "coderiskmgt.nuoyuan.com.cn", // 测试环境
   releaseEnv = "preriskmgt.nuoyuan.com.cn", // 准生产环境
   productionEnv = "riskmgt.nuoyuan.com.cn"; // 生产环境
-  console.log('host'+host)
-  console.log('location.hostname'+location.hostname)
-  
+  // console.log('host'+host)
+  // console.log('location.hostname'+location.hostname)
 if (host === productionEnv) {
   host = productionEnv;
 } else if (host === releaseEnv) {
@@ -28,6 +27,7 @@ if (host === productionEnv) {
 
 // appConstant.baseUrl_user = "http://" + host + (80 === port ? '' : (':' + port)) + "/";
 appConstant.baseUrl_common = "http://" + host + (80 === port ? '' : (':' + port)) + "/riskManagement";
+//任务管理-产品名称接口
 appConstant.path= "http://" + host + (80 === port ? '' : (':' + port));
 // 工作流接口
 appConstant.baseUrl_common2 = "http://" + host + "/bpm-service/";

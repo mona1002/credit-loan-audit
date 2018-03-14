@@ -212,10 +212,8 @@
     },
     mounted() {
       // 统一登录平台  调试   start 
-      console.log( UserURL)
       // this.get("http://testplatform.nuoyuan.com.cn/remote/user/getUserInfo").then(response => {
       this.get( UserURL+'remote/user/getUserInfo').then(response => {
-        console.info(response.data);
         this.userInf = {
           userCode: response.data.userCode,
           orgCode: response.data.orgCode,

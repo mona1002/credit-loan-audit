@@ -90,7 +90,7 @@
 </template>
 <script>
   import myHead from '../../header.vue';
-      import baseU from'../../../util/ConstantProduct';
+      import baseU from'../../../util/constant';
 
   export default {
     data() {
@@ -185,7 +185,7 @@
         });
       },
       getProducts() {
-          this.post(baseU,{
+          this.post(baseU.path+'/remote/product/getProductForUser',{
            data:{
               orgId:this.userInf.orgId,
             validFlag:'1'
@@ -200,6 +200,7 @@
       },
     },
     mounted() {
+      console.log(baseU.path+'/remote/product/getProductForUser')
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
       this.params.orgCode = this.userInf.orgCode;
       this.params.userCode = this.userInf.userCode;

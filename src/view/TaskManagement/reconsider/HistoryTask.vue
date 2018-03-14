@@ -105,7 +105,7 @@
 </template>
 <script>
   import myHead from '../../header.vue';
-    import baseU from'../../../util/ConstantProduct';
+    import baseU from'../../../util/constant';
   export default {
     data() {
       return {
@@ -212,7 +212,7 @@
         });
       },
       getProducts() {
-          this.post(baseU,{
+          this.post(baseU.path+'/remote/product/getProductForUser',{
            data:{
               orgId:this.userInf.orgId,
             validFlag:'1'

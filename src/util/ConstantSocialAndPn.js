@@ -7,19 +7,19 @@ var host = location.hostname,
   // port = 80,
   // developmentEnv = "http://10.1.26.10:8080/baseCredit/rm", // 开发环境-本地
   // testEnv = "http://10.1.26.10:8080/baseCredit/rm", // 测试环境-本地
-  developmentEnv = "http://10.1.26.6:8080/ptopCredit/rm", // 开发环境
-  testEnv = "http://10.1.26.6:8080/ptopCredit/rm", // 测试环境
-  releaseEnv = "http://120.26.131.205:8081/ptopCredit/", // 准生产环境
-  productionEnv = "http://nyph-credit.nuoyuan.com.cn/ptopCredit/"; // 生产环境
-
+  developmentEnv = "testriskmgt.nuoyuan.com.cn", // 开发环境
+  testEnv = "testriskmgt.nuoyuan.com.cn", // 测试环境
+  releaseEnv = "preriskmgt.nuoyuan.com.cn", // 准生产环境
+  productionEnv = "riskmgt.nuoyuan.com.cn"; // 生产环境
+  
 if (host === productionEnv) {
-  host = productionEnv;
+  host = "http://nyph-credit.nuoyuan.com.cn/ptopCredit/";
 } else if (host === releaseEnv) {
-  host = releaseEnv;
+  host = "http://120.26.131.205:8081/ptopCredit/";
 } else if (host === testEnv) {
-  host = testEnv;
+  host = "http://10.1.26.6:8080/ptopCredit/rm";
 } else {
-  host = developmentEnv;
+  host = "http://10.1.26.6:8080/ptopCredit/rm";
 }
 appConstantSP.BaseUrl=host;
 
