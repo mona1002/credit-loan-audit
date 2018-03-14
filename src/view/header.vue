@@ -64,14 +64,9 @@
         bbb(){
           setTimeout(function(){
             if($('.navContain').width()>$('.wrap').width()){
-              //console.log($('.wrap').width());
-              //this.aaa = true;
               $('.icon').css('display','block');
-              //console.log(this.aaa);
               $('.wrap').width($('.wrap').width()-60);
               $('.wrap').css('left','229px');
-              //console.log(this.aaa);
-              //console.log($('.wrap').width());
             }else{
               this.aaa = false;
             }
@@ -108,29 +103,22 @@
         le(){
           if($('.navContain').width()<=$('.wrap').width()){
             $('#iconl').attr("disabled",true);
-            //alert('kkk2');
           }else{
-            //alert('kkk3');
             if(parseInt(this.$refs.contains.style.left) == ($('.wrap').width()-$('.navContain').width()) || parseInt(this.$refs.contains.style.left) < ($('.wrap').width()-$('.navContain').width()) ){
               $('#iconl').attr("disabled",true);
-              //alert('kkk4');
             }else{
               this.$refs.contains.style.left = parseFloat(this.$refs.contains.style.left) - 150 + "px";
-              //alert('kkk5');
             }
           }
         },
        ri(){
         console.log(this.$refs.contains.style.left);
         if($('.navContain').width()<=$('.wrap').width()){
-         // alert('yyy1');
             $('#iconr').attr("disabled",true);
           }else if($('.navContain').width()>$('.wrap').width()){
             if(this.$refs.contains.style.left == '0px' || this.$refs.contains.style.left > '0px'){
-              //alert('yyy2');
               $('#iconr').attr("disabled",true);  
              }else{
-              //alert('yyy3');
               this.$refs.contains.style.left = parseFloat(this.$refs.contains.style.left) + 150 + "px";
              }
           }
