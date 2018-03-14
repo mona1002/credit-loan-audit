@@ -673,7 +673,6 @@
 			},
 			//审批
 			shenpi(){
-				this.sdialogVisible = true;
 				//请求评分
 				this.post('/credit/quotaScoring', {
 		            applyId: this.applyId,
@@ -687,7 +686,14 @@
 		              //console.log(res.data.creditScore);
 		              this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
 		              //console.log(this.creditScore);
-		            }
+		              this.sdialogVisible = true;
+		            }else if (res.statusCode == '700'){
+			        	this.$message({
+			              message:res.msg,
+			              type: 'error'
+			            });
+			           this.sdialogVisible = false; 
+			        }
 		          });
 		        //请求产品
 		        this.get('/credit/product').then(res => {

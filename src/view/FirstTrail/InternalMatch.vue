@@ -7,11 +7,13 @@
       <div class="title-bar">
         <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">移动号码类(手机号和联系人)</span>
-        <!-- {{title1}} -->
+        <span class="head-tab">{{mobileTab}}</span>
       </div>
       <!-- 移动电话 -->
       <el-table :data="mobileData.recordList" height="250" border style="width: 100%" @row-click="itemDbclickMobiel" highlight-current-row v-loading="mobileLoading">
         <el-table-column prop="targetCustName" label="命中号码姓名" min-width="150">
+        </el-table-column>
+        <el-table-column prop="matchTel" label="命中号码" min-width="150">
         </el-table-column>
         <el-table-column prop="applyTelTypeTxt" label="电话类型" min-width="100">
         </el-table-column>
@@ -39,9 +41,12 @@
         <!-- {{title2}} -->
         <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">固定电话类(家电、单电)</span>
+        <span class="head-tab">{{fixTelTab}}</span>
       </div>
       <el-table :data="fixTelData.recordList" height="250" border style="width: 100%" @row-click="itemDbclickFixTel" highlight-current-row v-loading="fixTelLoading">
         <el-table-column prop="targetCustName" label="命中号码姓名" min-width="150">
+        </el-table-column>
+        <el-table-column prop="matchTel" label="命中号码" min-width="150">
         </el-table-column>
         <el-table-column prop="applyTelTypeTxt" label="电话类型" min-width="100">
         </el-table-column>
@@ -68,6 +73,7 @@
         <!-- {{title3}} -->
         <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">单位名称</span>
+        <span class="head-tab">{{workName}}</span>
       </div>
       <!-- 单位名称 -->
       <el-table :data="workData.recordList" height="250" border style="width: 100%" @row-click="itemDbclickCompany" highlight-current-row v-loading="companyLoading">
@@ -123,7 +129,10 @@ export default {
       fixTelLoading: true,
       companyLoading: true,
       auditId: '', // 匹配结论id
-      isInterFlag: false
+      isInterFlag: false,
+      fixTelTab:'',// 固定电话标签
+      mobileTab:'',// 移动电话标签
+
     };
   },
   props: ['isFull', 'SplitS'],
@@ -184,9 +193,11 @@ export default {
       switch (type) {
         case 'mobile':
           this.getListByMobile();
+          this.getTabByMobile();
           break;
         case 'fixed':
           this.getListByFixTel();
+          this.getTabByFixTel();
           break;
         case 'company':
           this.getListByWorkName();
@@ -207,6 +218,16 @@ export default {
         this.mobileLoading = false;
       });
     },
+    getTabByMobile(){
+      // 获取移动电话类标签
+      this.post('internalMatch/getTabByMobile',{
+        applySubNo:this.applySubNo
+        // applySubNo:'2015041301730418582'
+      }).then(res=>{
+        console.log('移动电话类标签')
+        this.mobileTab = res.data;
+      })
+    },
     getListByFixTel() {
       // 固定电话类
       this.post('internalMatch/getInternalMatchListByFixTel', {
@@ -219,6 +240,16 @@ export default {
         this.fixTelData = res.data;
         this.fixTelLoading = false;
       });
+    },
+    getTabByFixTel(){
+      // 获取固定电话类标签
+      this.post('internalMatch/getTabByFixTel',{
+        applySubNo:this.applySubNo
+        // applySubNo:'2015041301730418582'
+      }).then(res=>{
+        console.log('固定电话类标签')
+        this.fixTelTab = res.data;
+      })
     },
     getListByWorkName() {
       // 单位名称类
@@ -853,6 +884,11 @@ export default {
 
 .internalMatch-class .el-table th>.cell {
   text-align: center;
+}
+
+.internalMatch-class .head-tab {
+  font-size: 14px;
+  color:#2DA8E1;
 }
 
 </style>

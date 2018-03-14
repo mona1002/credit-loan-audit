@@ -379,8 +379,7 @@ export default {
   mounted() {
     this.Social();
 
-    // 取出 流程模版id
-    this.processTemplateId = JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
+
 
     // 取出  申请信息   applicationInformationDetail
     this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
@@ -426,6 +425,9 @@ export default {
         }
       ]
     } else if (this.judgeFlag == '03') {
+      // 取出 流程模版id  processTemplateId
+      this.processTemplateId = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).processTemplateId;
+      this.isEdit = true;
       // 反欺诈专员审批按钮，要判断下，功能角色号有配BX22的
       if (this.userInfo.roleCodesList) {
         for (var i = 0; i < this.userInfo.roleCodesList.length; i++)
@@ -474,6 +476,8 @@ export default {
         // this.getRiskItems();
       }
     } else if (this.judgeFlag == '04') {
+      // 取出 流程模版id  processTemplateId
+      this.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
       // 审批主管
       this.taskId = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
       this.applyId = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).applyId;
@@ -1228,12 +1232,12 @@ export default {
             if (TF == true) {
               console.log('主管 子原因')
               this.secondReason = '';
-              this.subreaName = '';              
+              this.subreaName = '';
               console.log('子原因 赋值')
             } else {
               console.log('主管 子原因 false');
               this.secondReason = '';
-              this.subreaName = '';      
+              this.subreaName = '';
               console.log('主管 主原因 改变')
             }
           }
@@ -1428,6 +1432,7 @@ export default {
 
 
 
+
 /* 折叠面板头部背景色和icon */
 
 .approval-colun .icon_hat {
@@ -1438,6 +1443,7 @@ export default {
 .approval-colun .headFont {
   font-size: 16px;
 }
+
 
 
 
@@ -1488,6 +1494,7 @@ export default {
 
 
 
+
 /* 两列 */
 
 .approval-colun .item-column2 {
@@ -1495,6 +1502,7 @@ export default {
   float: left;
   margin: 0;
 }
+
 
 
 
@@ -1556,6 +1564,7 @@ export default {
 
 
 
+
 /* 3列 空位 */
 
 .approval-colun .item-column3-null {
@@ -1570,6 +1579,7 @@ export default {
   height: 30px;
   line-height: 30px;
 }
+
 
 
 
@@ -1626,6 +1636,7 @@ export default {
 
 
 
+
 /* 按钮集合控件 */
 
 .approval-colun .btn-div {
@@ -1633,6 +1644,7 @@ export default {
   width: 80%;
   float: left;
 }
+
 
 
 
@@ -1687,6 +1699,7 @@ export default {
 
 
 
+
 /*回退*/
 
 .approval-colun .el-icon-check-back {
@@ -1699,6 +1712,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -1753,6 +1767,7 @@ export default {
 
 
 
+
 /*放弃*/
 
 .approval-colun .el-icon-check-giveup {
@@ -1765,6 +1780,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -1819,6 +1835,7 @@ export default {
 
 
 
+
 /*流程轨迹*/
 
 .approval-colun .el-icon-check-lcgj {
@@ -1831,6 +1848,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -1881,6 +1899,7 @@ export default {
 
 
 
+
 /* 反欺诈 审批结论  - - 弹窗*/
 
 .approval-colun .el-dialog {
@@ -1906,6 +1925,7 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
 
 
 
@@ -1987,11 +2007,13 @@ export default {
 
 
 
+
 /* textarea */
 
 .approval-colun .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
 
 
 
@@ -2050,6 +2072,7 @@ export default {
 
 
 
+
 /* 审批 表单 */
 
 .approval-colun .appro-form {
@@ -2083,6 +2106,7 @@ export default {
 
 
 
+
 /*.approval-colun .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -2090,6 +2114,7 @@ export default {
 .approval-colun .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
 
 
 
@@ -2159,11 +2184,13 @@ export default {
 
 
 
+
 /* 反欺诈 -- 审批结论 */
 
 .approval-colun .form-ul {
   padding-left: 30px;
 }
+
 
 
 
@@ -2229,11 +2256,13 @@ export default {
 
 
 
+
 /* 审批 label*/
 
 .approval-colun .appro-form .back-form-edit-li .el-form-item__label {
   width: 120px;
 }
+
 
 
 
@@ -2285,11 +2314,13 @@ export default {
 
 
 
+
 /* 两行文字 样式 */
 
 .approval-colun .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
 
 
 
@@ -2342,6 +2373,7 @@ export default {
 
 
 
+
 /* 详细 信息按钮*/
 
 .approval-colun .btn-detail {
@@ -2350,6 +2382,7 @@ export default {
   margin-top: 35px;
   margin-left: 10px;
 }
+
 
 
 
@@ -2405,6 +2438,7 @@ export default {
 
 
 
+
 /* 分页 */
 
 .approval-colun .tool-bar {
@@ -2433,11 +2467,13 @@ export default {
 
 
 
+
 /* 隐藏分页 */
 
 .approval-colun .el-pagination__jump {
   display: none;
 }
+
 
 
 
@@ -2539,6 +2575,7 @@ export default {
 
 
 
+
 /*大数据风控*/
 
 .approval-colun .el-icon-check-big-data {
@@ -2555,6 +2592,7 @@ export default {
 
 
 
+
 /*社保公积金*/
 
 .approval-colun .el-icon-check-social {
@@ -2567,6 +2605,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 

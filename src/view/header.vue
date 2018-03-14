@@ -5,21 +5,30 @@
       <!-- <img class="logo" src="/static/images/logo.png"> -->
       风控管理系统
     </div>
-      <div class="icon" style="left:198px;background:#2ea8e0;" @click="le" id="iconl"><</div>
-    <div class="icon" style="right:100px;background:#4fc9ed" @click="ri" id="iconr">></div>
     <!-- 导航内容 -->
-    <div class="navContain"  ref="kkkkk" style="left:230px" >
-      <!-- <div class="contain"> -->
-        <nobr>
-          <el-menu router unique-opened mode="horizontal" ref="navbar" active-text-color="#ffd04b" :default-active="onRoutes" @select="selectMenu">
-            <nav-item v-for="(item, n) in datas" :item="item" :navIndex="String(n)" :key="n">
-            </nav-item>
-          </el-menu>
-        </nobr>
-      <!-- </div> -->
+    <div class="wrap" style="position:relative">
+      <!-- 左右按钮 -->
+      <div class="icon" style="left:0px;background:#2ea8e0;" @click="le" id="iconl" v-if="aaa">
+        <img src="/static/images/leftjt.png">
+      </div>
+      <div class="icon" style="left:calc( 100% - 30px );background:#4fc9ed" @click="ri" id="iconr" v-if="aaa">
+        <img src="/static/images/rightjt.png">
+      </div>
+      <!-- 具体菜单内容 -->
+      <div class="navContain"  ref="contains" style="left:0px;">
+        <!-- <div class="contain"> -->
+          <nobr>
+            <el-menu router unique-opened mode="horizontal" ref="navbar" active-text-color="#ffd04b" :default-active="onRoutes" @select="selectMenu">
+              <nav-item v-for="(item, n) in datas" :item="item" :navIndex="String(n)" :key="n">
+              </nav-item>
+            </el-menu>
+          </nobr>
+        <!-- </div> -->
+      </div>
     </div>
-    <div class="backIcon">
-      <img @click="backLoin" src="/static/images/backLoin.png">
+    <div class="backIcon" @click="backLoin" >
+      <img src="/static/images/backLoin.png">
+      <span>返回首页</span>
     </div>
   </div>
 </template>
@@ -31,65 +40,87 @@
     data() {
       return {
         datas: [],
+        aaa:true,
       };
     },
-    created() {
+    mounted(){
       //一进入页面就发送请求  
       this.request();
     },
     methods: {
         request() {
           this.post('/smUser/getResTree').then(res => {
-            this.datas = res.data;
+            if(res.statusCode == 200){
+              this.datas = res.data;
+              if(res.data){
+                this.bbb();
+              }
+            }
+            
           })
         },
-        selectMenu(index, indexPath) {
-        //console.log(indexPath);
-        /**
-         * 在选择父级菜单时自动关闭其下所有子菜单
-         * 选择时获取点击菜单的父级index，并计算得到该index在已打开菜单中的索引值，
-         * 关闭位于当前打开菜单中该索引值之后的全部菜单
-         */
-        // 获取当前打开的所有菜单
-        let openMenu = this.$refs.navbar.openedMenus.concat([])
-        //console.log(openMenu);
-        // 获取点击菜单的父级index，如果当前点击的是根节点，则直接关闭所有打开菜单
-        let nowMenuPath = indexPath.length > 1 ? indexPath[indexPath.length - 2] : ""
-        //console.log(nowMenuPath);
-        if (nowMenuPath) {
-          // 获取父级index在数组中索引，关闭其后所有的菜单
-          let menuIndex = openMenu.indexOf(nowMenuPath)
-          openMenu = openMenu.slice(menuIndex + 1)
-        }
-        openMenu = openMenu.reverse()
-        openMenu.forEach((ele) => {
-          this.$refs.navbar.closeMenu(ele)
-        })
+        bbb(){
+          setTimeout(function(){
+            if($('.navContain').width()>($('.mheader').width()-324)){
+              //alert('hhh');
+              console.log(this.aaa);
+              this.aaa = true;
+            }
+          },100);
 
+        },
+        selectMenu(index, indexPath) {
+          //console.log(indexPath);
+          /**
+           * 在选择父级菜单时自动关闭其下所有子菜单
+           * 选择时获取点击菜单的父级index，并计算得到该index在已打开菜单中的索引值，
+           * 关闭位于当前打开菜单中该索引值之后的全部菜单
+           */
+          // 获取当前打开的所有菜单
+          let openMenu = this.$refs.navbar.openedMenus.concat([])
+          //console.log(openMenu);
+          // 获取点击菜单的父级index，如果当前点击的是根节点，则直接关闭所有打开菜单
+          let nowMenuPath = indexPath.length > 1 ? indexPath[indexPath.length - 2] : ""
+          //console.log(nowMenuPath);
+          if (nowMenuPath) {
+            // 获取父级index在数组中索引，关闭其后所有的菜单
+            let menuIndex = openMenu.indexOf(nowMenuPath)
+            openMenu = openMenu.slice(menuIndex + 1)
+          }
+          openMenu = openMenu.reverse()
+          openMenu.forEach((ele) => {
+            this.$refs.navbar.closeMenu(ele)
+          })
         },
         backLoin() {
           window.location.href = UserURL + "#/workbench";
           localStorage.clear();
         },
         le(){
+          //alert('kkk1');
+          console.log($('.navContain').width());
           if($('.navContain').width()<=($('.mheader').width()-358)){
             $('#iconl').attr("disabled",true);
+            //alert('kkk2');
           }else{
-            if(parseInt(this.$refs.kkkkk.style.left) == ($('.mheader').width()-130-$('.navContain').width()) || parseInt(this.$refs.kkkkk.style.left) < ($('.mheader').width()-130-$('.navContain').width()) ){
+            //alert('kkk3');
+            if(parseInt(this.$refs.contains.style.left) == ($('.mheader').width()-130-$('.navContain').width()) || parseInt(this.$refs.contains.style.left) < ($('.mheader').width()-130-$('.navContain').width()) ){
               $('#iconl').attr("disabled",true);
+              //alert('kkk4');
             }else{
-              this.$refs.kkkkk.style.left = parseFloat(this.$refs.kkkkk.style.left) - 150 + "px";
+              this.$refs.contains.style.left = parseFloat(this.$refs.contains.style.left) - 150 + "px";
+              //alert('kkk5');
             }
           }
         },
        ri(){
         if($('.navContain').width()<=($('.mheader').width()-358)){
-            $('#iconl').attr("disabled",true);
+            $('#iconr').attr("disabled",true);
           }else{
-            if(this.$refs.kkkkk.style.left == '230px'){
+            if(this.$refs.contains.style.left == '230px'){
               $('#iconr').attr("disabled",true);  
              }else{
-              this.$refs.kkkkk.style.left = parseFloat(this.$refs.kkkkk.style.left) + 150 + "px";
+              this.$refs.contains.style.left = parseFloat(this.$refs.contains.style.left) + 150 + "px";
              }
           }
         },
@@ -136,28 +167,41 @@
     padding: 0 33px;
     line-height: 70px;
     letter-spacing: 2px;
-    position: absolute;
+    /* position: absolute; */
     z-index: 200;
   }
 
   /* 导航内容 */
 
+  .wrap{
+    width: calc( 100% - 324px );
+    height: 100%;
+    float: left;
+    /* background: pink; */
+  }
+
   .mheader .navContain {
     /* width: calc( 100% - 360px); */
     height: 70px;
     position: absolute;
+    /* left: 200px; */
     /* background: pink; */
   }
 
   .mheader .backIcon {
     width: 60px;
     padding: 0 16px;
+    height: 70px;
     line-height: 70px;
     background: #4fc9ed;
     position: absolute;
     right: 0px;
-    width: 100px;
+    width: 124px;
     z-index: 200;
+    cursor: pointer;
+  }
+  .mheader .backIcon span{
+    font-size: 14px;
   }
 
   .icon {
