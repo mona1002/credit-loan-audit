@@ -5,15 +5,15 @@
       <!-- <img class="logo" src="/static/images/logo.png"> -->
       风控管理系统
     </div>
+    <!-- 左右按钮 -->
+      <div class="icon" style="left:199px;background:#2ea8e0;" @click="le" id="iconl" v-if="aaa">
+         <img src="/static/images/leftjt.png">
+      </div>
+      <div class="icon" style="right:124px;background:#4fc9ed" @click="ri" id="iconr" v-if="aaa">
+         <img src="/static/images/rightjt.png">
+      </div>
     <!-- 导航内容 -->
     <div class="wrap" style="position:relative">
-      <!-- 左右按钮 -->
-      <div class="icon" style="left:0px;background:#2ea8e0;" @click="le" id="iconl" v-if="aaa">
-        <img src="/static/images/leftjt.png">
-      </div>
-      <div class="icon" style="left:calc( 100% - 30px );background:#4fc9ed" @click="ri" id="iconr" v-if="aaa">
-        <img src="/static/images/rightjt.png">
-      </div>
       <!-- 具体菜单内容 -->
       <div class="navContain"  ref="contains" style="left:0px;">
         <!-- <div class="contain"> -->
@@ -62,9 +62,11 @@
         bbb(){
           setTimeout(function(){
             if($('.navContain').width()>($('.mheader').width()-324)){
-              //alert('hhh');
-              console.log(this.aaa);
+              console.log($('.wrap').width());
               this.aaa = true;
+              $('.wrap').width($('.wrap').width()-60);
+              console.log(this.aaa);
+              console.log($('.wrap').width());
             }
           },100);
 
