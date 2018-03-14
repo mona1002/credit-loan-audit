@@ -46,7 +46,7 @@
         <div class="lists">
           <div id="sec_responseBaseInfoParams" class="easyui-panel" data-options="title:'基本信息',border:false,collapsible:true">
             <table id="t_01" class="table">
-              <tr style="border:1px solid #ebeef5;">
+              <tr>
                 <th style="width:15%;text-align:left">基本信息</th>
                 <td style="width:15%"></td>
                 <th style="width:25%"></th>
@@ -136,7 +136,7 @@
               </tr>
             </table>
             <table id="t_4" class="table">
-              <tr style="text-align:left;border-bottom:1px solid #ebeef5">
+              <tr style="text-align:left">
                 <th style="text-align:left;">医疗保险缴存信息</th>
                 <td style="width:15%"></td>
                 <td style="width:15%"></td>
@@ -176,7 +176,7 @@
   </div>
 </template>
 <script>
-  import baseurl from '../../../util/ConstantSocialAndPn'
+  import baseurl from '../../../util/ConstantSocialAndPn';
   export default {
     data() {
       return {

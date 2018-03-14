@@ -4,9 +4,7 @@ var appConstantSP = {};
 
 // url 配置
 var host = location.hostname,
-  // port = 80,
-  // developmentEnv = "http://10.1.26.10:8080/baseCredit/rm", // 开发环境-本地
-  // testEnv = "http://10.1.26.10:8080/baseCredit/rm", // 测试环境-本地
+  port = 80,
   developmentEnv = "testriskmgt.nuoyuan.com.cn", // 开发环境
   testEnv = "testriskmgt.nuoyuan.com.cn", // 测试环境
   releaseEnv = "preriskmgt.nuoyuan.com.cn", // 准生产环境
@@ -18,8 +16,11 @@ if (host === productionEnv) {
   host = "http://120.26.131.205:8081/ptopCredit/";
 } else if (host === testEnv) {
   host = "http://10.1.26.6:8080/ptopCredit/rm";
+  // host="http://10.1.26.10:8080/baseCredit/rm" //本地
+  
 } else {
   host = "http://10.1.26.6:8080/ptopCredit/rm";
+  // host="http://10.1.26.10:8080/baseCredit/rm"//本地
 }
 appConstantSP.BaseUrl=host;
 
