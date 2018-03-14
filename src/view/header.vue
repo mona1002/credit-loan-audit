@@ -203,7 +203,7 @@
     width: 60px;
     padding: 0 16px;
     height: 70px;
-    line-height: 70px;
+    line-height: 60px;
     background: #4fc9ed;
     position: absolute;
     right: 0px;
