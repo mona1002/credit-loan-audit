@@ -2050,6 +2050,8 @@
 				
 				//this.layer=true;
 				//document.getElementsByTagName('body')[0].style.overflow='hidden';
+				this.jiekrloading = false;
+      		    this.jiekrSure = '确定';
 				this.dialogVisible = true;
 			},
 			//弹框取消
@@ -2177,8 +2179,6 @@
 			        "incomeList":this.incomeList,
 			        "otherInfo":this.otherInfo
 			      }).then(res => {
-			      	this.jiekrloading = false;
-      		    	this.jiekrSure = '确定';
 			        if(res.statusCode==200){
 			        	this.request(this.applyId);
 			        	this.$message({
