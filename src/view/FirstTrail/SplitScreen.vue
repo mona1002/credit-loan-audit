@@ -69,7 +69,6 @@
           </div>
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
-            <!-- <HelloWorld :myWatch="watchData" v-if=" this.tabContent2==0"></HelloWorld> -->
             <!-- <CreditFormKeydownEvent :myWatch="watchData" v-if=" this.tabContent2==3"></CreditFormKeydownEvent> -->
             <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
             <remark v-if=" this.tabContent2==1"></remark>
@@ -139,9 +138,6 @@
   import cborrowerInformationDetail from "./checkComponent/borrowerInformationDetail"; //借款人资料
   import capplicationInformationDetail from "./checkComponent/applicationInformationDetail"; //申请信息
   import processTrajectory from "./checkComponent/processTrajectory"; //流程轨迹
-
-
-  import HelloWorld from "../HelloWorld.vue"
   // import CreditFormKeydownEvent from './detailComponent/CreditFormKeydownEvent.vue'
   export default {
     data() {
@@ -296,7 +292,6 @@
       capplicationInformationDetail,
       processTrajectory,
       aAntiApplyInf,
-      HelloWorld,
     }
   }
 
@@ -364,8 +359,6 @@
     left: 0;
     top: 0;
   }
-
-  /*-------------------------------- */
 
   .SplitScreen_content {
     border: 1px solid #0077ff;
@@ -519,8 +512,6 @@
     height: 38px;
     line-height: 38px;
   }
-
-  /* ======================================================================================================= */
 
   .tab2_Content {
     /*background: purple;*/

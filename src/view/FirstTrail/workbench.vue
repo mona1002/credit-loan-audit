@@ -122,7 +122,6 @@
           taskStatus: "01",
         }).then(res => {
           if (res.statusCode == 200) {
-            console.log(res.data)
             this.tableData = res.data;
           } else {
             this.$message.error(res.msg);
@@ -130,7 +129,6 @@
         });
       },
       handleCurrentChange(val) {
-        console.log(val)
         //         creditApp_antiFraud_commissioner 和 creditApp_antiFraud_manager
         // 其中第一个是 反欺诈专员审批，第二个是 反欺诈主管审批
         // reconsiderApp_apply  复议申请
@@ -201,7 +199,6 @@
     computed: {
       taskCount() {
         this.TaskCount = null;
-        console.log(this.tableData)
         if (this.tableData.length == 0) {
           return this.TaskCount = 0;
         } else {
@@ -217,7 +214,6 @@
       // 统一登录平台  调试   start 
       // this.get("http://testplatform.nuoyuan.com.cn/remote/user/getUserInfo").then(response => {
       this.get( UserURL+'remote/user/getUserInfo').then(response => {
-        console.info(response.data);
         this.userInf = {
           userCode: response.data.userCode,
           orgCode: response.data.orgCode,
@@ -229,7 +225,6 @@
         this.post("/workFlowTaskQuery/getTaskProfile", {
           taskStatus: "01",
         }).then(res => {
-          console.log(res)
           if (res.statusCode == 200) {
             this.tableData = res.data;
           } else {
