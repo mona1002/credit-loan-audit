@@ -167,7 +167,7 @@
     line-height: 70px;
     letter-spacing: 2px;
     position: absolute;
-    z-index: 2100;
+    z-index: 2000;
   }
 
   /* 导航内容 */
