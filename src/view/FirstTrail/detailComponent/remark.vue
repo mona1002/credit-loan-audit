@@ -216,8 +216,12 @@
 			add(){
 				this.dialogVisible=true;
 				this.remark='';
+				this.addSure ='确定';
+		   		this.addLodaing = false;
 			},
 			change(){
+				this.changeLoading = false;
+				this.chSure = '确定';
 				if(this.isChecked==''){
 					this.isdialogVisible = true;
 				}else{
@@ -257,8 +261,6 @@
 					remarker:this.remarker
 				})
 				.then(res => {
-		   			console.log(res);
-		   			this.addLodaing = false;
 		   			this.addSure = "确定";
 		   			 if(res.statusCode==200){
 						this.request(this.applyId);
@@ -285,8 +287,6 @@
 					remark:this.changeRemarks
 				})
 				.then(res => {
-					this.changeLoading = false;
-					this.chSure = '确定';
 					if(res.statusCode==200){
 						this.request(this.applyId);
 						this.$message({
