@@ -380,7 +380,7 @@ export default {
     }
   },
   mounted() {
-    
+
 
 
 
@@ -480,6 +480,9 @@ export default {
         // 请求风险项
         // this.getRiskItems();
       }
+      // 请求风险项
+      this.getRiskItems();
+
     } else if (this.judgeFlag == '04') {
       // 取出 流程模版id  processTemplateId
       this.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
@@ -528,7 +531,7 @@ export default {
         this.queryCreauditOpinionObj();
       }
       // 请求风险项
-      // this.getRiskItems();
+      this.getRiskItems();
 
     }
 
@@ -1418,27 +1421,6 @@ export default {
   overflow: hidden;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 折叠面板头部背景色和icon */
 
 .approval-colun .icon_hat {
@@ -1450,27 +1432,6 @@ export default {
   font-size: 16px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 一列 */
 
 .approval-colun .item-column1 {
@@ -1480,27 +1441,6 @@ export default {
   margin-bottom: 10px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 两列 */
 
 .approval-colun .item-column2 {
@@ -1508,27 +1448,6 @@ export default {
   float: left;
   margin: 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* 三列 */
 
@@ -1550,27 +1469,6 @@ export default {
   margin-right: 0px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 3列 空位 */
 
 .approval-colun .item-column3-null {
@@ -1585,27 +1483,6 @@ export default {
   height: 30px;
   line-height: 30px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* input hover 样式 */
 
@@ -1622,27 +1499,6 @@ export default {
   float: left;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 按钮集合控件 */
 
 .approval-colun .btn-div {
@@ -1650,27 +1506,6 @@ export default {
   width: 80%;
   float: left;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*挂起*/
 
@@ -1685,27 +1520,6 @@ export default {
   display: inline-block;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*回退*/
 
 .approval-colun .el-icon-check-back {
@@ -1718,27 +1532,6 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*拒绝*/
 
@@ -1753,27 +1546,6 @@ export default {
   display: inline-block;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*放弃*/
 
 .approval-colun .el-icon-check-giveup {
@@ -1786,27 +1558,6 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*审批*/
 
@@ -1821,27 +1572,6 @@ export default {
   display: inline-block;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*流程轨迹*/
 
 .approval-colun .el-icon-check-lcgj {
@@ -1855,27 +1585,6 @@ export default {
   display: inline-block;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 反欺诈 审批结论 - btn*/
 
 .approval-colun .credit-btn {
@@ -1885,27 +1594,6 @@ export default {
   border: none;
   padding-top: 0px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* 反欺诈 审批结论  - - 弹窗*/
 
@@ -1932,27 +1620,6 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* form-title */
 
@@ -1994,53 +1661,11 @@ export default {
   padding: 2px 10px 0 10px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* textarea */
 
 .approval-colun .back-form .back-form-li .el-textarea {
   width: 80%;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* 弹窗页面 关闭按钮*/
 
@@ -2059,27 +1684,6 @@ export default {
   top: 5px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 审批 表单 */
 
 .approval-colun .appro-form {
@@ -2093,27 +1697,6 @@ export default {
   overflow: hidden;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*.approval-colun .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -2121,27 +1704,6 @@ export default {
 .approval-colun .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* 流程轨迹 */
 
@@ -2171,53 +1733,11 @@ export default {
   /*width:300px;*/
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 反欺诈 -- 审批结论 */
 
 .approval-colun .form-ul {
   padding-left: 30px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* 默认显示样式 */
 
@@ -2243,53 +1763,11 @@ export default {
   width: 100%;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 审批 label*/
 
 .approval-colun .appro-form .back-form-edit-li .el-form-item__label {
   width: 120px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* 结论  同意 */
 
@@ -2301,56 +1779,13 @@ export default {
   width: 120px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 两行文字 样式 */
 
 .approval-colun .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 回退样式 */
-
 
 /* label 文字样式 */
 
@@ -2360,27 +1795,6 @@ export default {
 
 .approval-colun .jujue-class {}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 详细 信息按钮*/
 
 .approval-colun .btn-detail {
@@ -2389,27 +1803,6 @@ export default {
   margin-top: 35px;
   margin-left: 10px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* 审批结论 详细信息 */
 
@@ -2425,27 +1818,6 @@ export default {
   border-radius: 5px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 分页 */
 
 .approval-colun .tool-bar {
@@ -2454,53 +1826,11 @@ export default {
   padding: 10px 0 0 10px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 隐藏分页 */
 
 .approval-colun .el-pagination__jump {
   display: none;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*多选下拉*/
 
@@ -2576,13 +1906,6 @@ export default {
   height: 60px;
 }
 
-
-
-
-
-
-
-
 /*大数据风控*/
 
 .approval-colun .el-icon-check-big-data {
@@ -2596,10 +1919,6 @@ export default {
   display: inline-block;
 }
 
-
-
-
-
 /*社保公积金*/
 
 .approval-colun .el-icon-check-social {
@@ -2612,9 +1931,6 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
-
-
-
 
 /*修改信息*/
 
