@@ -173,7 +173,7 @@
 </template>
 <script type="text/javascript">
 	import myHead from "../../header.vue"
-	import baseU from'../../../util/ConstantProduct';
+	import baseU from'../../../util/constant';
 	export default{
 		data(){
 			return{
@@ -254,7 +254,7 @@
 						this.productNames = res.data;
 					}
 				});*/
-				this.post(baseU,{
+				this.post(baseU.path+'/remote/product/getProductForUser',{
 		           data:{
 		              orgId:this.orgId,
 		              validFlag:'1'
