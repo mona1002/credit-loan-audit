@@ -1437,8 +1437,8 @@ export default {
         console.log('==========================================')
         ploanAmt2 = Number(this.ploanAmt)
       }
-      // this.post('/creauditOpinion/add', {
-      this.post("http://10.1.26.47:8080/riskManagement/creauditOpinion/add", {
+      this.post('/creauditOpinion/add', {
+      // this.post("http://10.1.26.47:8080/riskManagement/creauditOpinion/add", {
         applyId: this.applyId,
         auditType: this.judgeFlag == '01' ? '00' : '01',
         proCode: this.proCode,
