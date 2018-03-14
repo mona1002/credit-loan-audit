@@ -1027,7 +1027,7 @@
 			  <span>您确定已填写好各项内容并提交？</span>
 			  <span slot="footer" class="dialog-footer">
 			  	<el-button type="primary" @click="Cancle">取消</el-button>
-				<el-button type="primary" @click="trueSure">确定</el-button>
+				<el-button type="primary" :loading=jiekrloading  @click="trueSure">{{jiekrSure}}</el-button>
 			  </span>
 			</el-dialog>
 		</div>
@@ -1305,6 +1305,9 @@
       		ifFull:'', // 标志是否全屏
       		//负债信息 负债合计
       		arr:[],
+      		jiekrloading:false,
+      		jiekrSure:'确定',
+
 	      };
 	    },
 		props:['isFull'],
@@ -2062,7 +2065,9 @@
 				};
 				
 				//this.layer=false;
-				//document.getElementsByTagName('body')[0].style.overflow='';	
+				//document.getElementsByTagName('body')[0].style.overflow='';
+				this.jiekrloading = true;
+      		    this.jiekrSure = '保存中';	
 				this.dialogVisible = false;
 				this.loanInfo.applyId=this.applyId;
 				this.borCard.applyId=this.applyId;
@@ -2158,6 +2163,7 @@
 						};
 					}
 				};
+
 				this.post("/borrower/saveBorrowerInfo", {
 			        "applyId":this.applyId,
 			        "borestateList":this.borestateList,
@@ -2171,6 +2177,8 @@
 			        "incomeList":this.incomeList,
 			        "otherInfo":this.otherInfo
 			      }).then(res => {
+			      	this.jiekrloading = false;
+      		    	this.jiekrSure = '确定';
 			        if(res.statusCode==200){
 			        	this.request(this.applyId);
 			        	this.$message({
