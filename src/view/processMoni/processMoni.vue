@@ -458,7 +458,7 @@ export default {
 
     // 查询经营产品
     getProductForUser(orgId){
-      this.post('http://' + constant.baseUrl_user +'remote/product/getProductForUser',{
+      this.post(constant.baseUrl_user +'remote/product/getProductForUser',{
         data:{
           orgId: this.userInf.orgId,
           validFlag: '1'
@@ -470,7 +470,7 @@ export default {
 
     // 根据任务角色 code 查询 Name
     getFlowRoleName(roleCode){
-      this.post('http://' + constant.baseUrl_user +'remote/flowRole/getByFlowRoleCode',{
+      this.post(constant.baseUrl_user +'remote/flowRole/getByFlowRoleCode',{
         data: {
           flowRoleCode: roleCode
         }
@@ -481,7 +481,7 @@ export default {
 
     // 下拉框获取流程角色
     getCurrentUserFlowRole(){
-      this.post('http://' + constant.baseUrl_user +'remote/user/getBpmUser',{
+      this.post(constant.baseUrl_user +'remote/user/getBpmUser',{
         data:{
           flowRoleCode: this.multipleSelection[0].flowRoleCode,
           orgCode: this.multipleSelection[0].orgCode,

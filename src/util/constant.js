@@ -5,7 +5,7 @@ var appConstant = {};
 // url 配置
 var host = location.hostname,
   port = 80,
-  developmentEnv = "coderiskmgt.nuoyuan.com.cn", // 开发环境
+  developmentEnv = "testriskmgt.nuoyuan.com.cn", // 开发环境
   // developmentEnv = "codeplatform.nuoyuan.com.cn", // 开发环境-用户
   // developmentEnv = "10.1.26.50", // 刘礼飞本地环境
   testEnv = "testriskmgt.nuoyuan.com.cn", // 测试环境
@@ -20,7 +20,7 @@ if (host === productionEnv) {
 } else if (host === testEnv) {
   host = testEnv;
 } else {
-  host = testEnv;
+  host = developmentEnv;
 }
 
 // appConstant.baseUrl_user = "http://" + host + (80 === port ? '' : (':' + port)) + "/";
