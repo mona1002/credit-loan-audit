@@ -22,12 +22,15 @@
           </el-select>
         </div>
       </li>
-      <li class="item-column3 item-column3-null">
+      <li>
+        <el-button icon="el-icon-change-hang" class="credit-btn" @click="editFn" v-if="auditResult=='02'">修改</el-button>
+      </li>
+      <li class="item-column3 item-column3-null" v-if="auditResult!='02'">
         <div class="left-title"></div>
         <div class="">
         </div>
       </li>
-      <li class="item-column3 item-column3-null">
+      <li class="item-column3 item-column3-null" v-if="auditResult!='02'">
         <div class="left-title"></div>
         <div class="">
         </div>
@@ -62,8 +65,8 @@
           </el-select>
         </div>
       </li>
-      <li v-if="auditResult !='02'">
-        <el-button icon="el-icon-change-hang" class="credit-btn" @click="editFn">修改</el-button>
+      <li>
+        <el-button icon="el-icon-change-hang" class="credit-btn" @click="editFn" v-if="auditResult!='02'">修改</el-button>
       </li>
       <li class="item-column1">
         <div class="left-title item-label-show">
@@ -1877,6 +1880,7 @@ export default {
   background: none;
   color: #333;
   border: none;
+  padding-top: 0px;
 }
 
 
