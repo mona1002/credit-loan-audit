@@ -88,6 +88,8 @@
 </template>
 <script>
   import myHead from '../../header.vue';
+      import baseU from'../../../util/ConstantProduct';
+
   export default {
     data() {
       return {
@@ -184,13 +186,18 @@
         });
       },
       getProducts() {
-        this.get('/credit/product').then(res => {
-          if (res.statusCode == 200) {
+         this.post(baseU,{
+           data:{
+              orgId:this.userInf.orgId,
+            validFlag:'1'
+           }
+          }).then(res => {
+         if (res.statusCode == 200) {
             this.production = res.data
           } else {
             this.$message.error(res.msg);
           }
-        })
+        });
       },
     },
     mounted() {

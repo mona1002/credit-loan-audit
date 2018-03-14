@@ -4,6 +4,7 @@ var appConstant = {};
 
 // url 配置
 var host = location.hostname,
+ host2,
   port = 80,
   developmentEnv = "coderiskmgt.nuoyuan.com.cn", // 开发环境
   // developmentEnv = "codeplatform.nuoyuan.com.cn", // 开发环境-用户
@@ -15,15 +16,16 @@ var host = location.hostname,
 
 if (host === productionEnv) {
   host = productionEnv;
+  host2=''
 } else if (host === releaseEnv) {
   host = releaseEnv;
+  host2='http://120.26.131.205/bpm-service/'
 } else if (host === testEnv) {
   host = testEnv;
-  //port = 20716;
+  host2='http://10.1.26.200:9480/bpm-service/'
 } else {
   host = testEnv;
-  // host = testEnv;// 开发 改测试环境接口
-  // port = 20717;
+  host2='http://10.1.26.200:9480/bpm-service/'
 }
 
 // appConstant.baseUrl_user = "http://" + host + (80 === port ? '' : (':' + port)) + "/";
@@ -31,6 +33,8 @@ appConstant.baseUrl_common = "http://" + host + (80 === port ? '' : (':' + port)
 appConstant.path= "http://" + host + (80 === port ? '' : (':' + port));
 // 工作流接口
 // appConstant.baseUrl_common2 = "http://" + host + ":9480/bpm-service/";
-appConstant.baseUrl_common2 = "http://10.1.26.200:9480/bpm-service/";
+appConstant.baseUrl_common2 =host2;
+
+
 
 export default appConstant

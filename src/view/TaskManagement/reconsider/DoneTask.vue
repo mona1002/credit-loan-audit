@@ -101,6 +101,7 @@
 </template>
 <script>
   import myHead from '../../header.vue';
+  import baseU from'../../../util/ConstantProduct';
   export default {
     data() {
       return {
@@ -212,14 +213,20 @@
         });
       },
       getProducts() { 
-        this.get('/credit/product').then(res => {
+          this.post(baseU,{
+           data:{
+              orgId:this.userInf.orgId,
+            validFlag:'1'
+           }
+          }).then(res => {
+            console.log(res)
           if (res.statusCode == 200) {
             this.production = res.data
              this.$message.error(res.msg);
           }else {
             this.$message.error(res.msg);
           }
-        })
+        });
       },
       changeColor() { 
         for (var i = 0; i < this.tableData.length; i++) {
@@ -235,7 +242,9 @@
       }
     },
     mounted() {
+      console.log(baseU)
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
+      console.log( this.userInf )
       this.params.orgCode = this.userInf.orgCode;
       this.params.userCode = this.userInf.userCode;
       this.params.pageNum = this.currentPage, //页数（第几页）
