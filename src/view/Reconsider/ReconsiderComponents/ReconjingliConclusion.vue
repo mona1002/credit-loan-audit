@@ -1175,7 +1175,7 @@ import baseU from'../../../util/ConstantProduct';
 		          }
 		        })
 		    },
-		    		    //大数据风控
+		    //大数据风控
 		    tobigData(){
 		    	this.post(baseurl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
 		        	applyId: this.applyId
