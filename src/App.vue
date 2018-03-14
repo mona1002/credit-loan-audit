@@ -8,7 +8,6 @@
 <script>
 
   export default {
-   
   }
 
 </script>
@@ -17,9 +16,8 @@
   @import "../static/css/common.css";
   @import "../static/css/element_UI.css";
 
-  #app {
-    overflow-x: hidden;
-    min-width: 1366px;
-  }
-
+#app{
+  overflow-x: hidden;
+  min-width: 1366px;
+}
 </style>

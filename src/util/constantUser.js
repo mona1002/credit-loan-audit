@@ -16,22 +16,12 @@ if (host === productionEnv) {
   host = releaseEnv;
 } else if (host === testEnv) {
   host = testEnv;
-  //port = 20716;
 } else {
   host = developmentEnv;
-  // host = testEnv;// 开发 改测试环境接口
-  // port = 20717;
+
 }
 
-// appConstantUser.baseUrl_user = "http://" + host + (80 === port ? '' : (':' + port)) + "/";
-// appConstantUser.baseUrl_common = "http://" + host + (80 === port ? '' : (':' + port)) + "/riskManagement";
-// appConstantUser.path= "http://" + host + (80 === port ? '' : (':' + port));
 appConstantUser.path=host;
 
-// 工作流接口
-// appConstantUser.baseUrl_common2 = "http://" + host + ":9480/bpm-service/";
-// appConstantUser.baseUrl_common2 = "http://10.1.26.200:9480/bpm-service/";
-
-// export default appConstantUser
 export default appConstantUser.path
 

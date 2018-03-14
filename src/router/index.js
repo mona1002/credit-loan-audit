@@ -2,8 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 // 头部导航
 import myHead from '@/view/header'
-
-import HelloWorld from '@/view/HelloWorld'
 /*初审审批*/
 import taskInWaitting from '@/view/FirstTrail/taskInWaitting'
 /*备注信息*/
@@ -130,10 +128,6 @@ const routes = [{
 {
   path: '/applicationInformation',
   component: applicationInformation
-},
-{
-  path: '/HelloWorld',
-  component: HelloWorld,
 },
 // 分屏
 {
