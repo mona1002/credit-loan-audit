@@ -5,15 +5,12 @@
       <!-- <img class="logo" src="/static/images/logo.png"> -->
       风控管理系统
     </div>
-    <!-- 左右按钮 -->
+    <!-- 左按钮 -->
       <div class="icon" style="left:199px;background:#2ea8e0;" @click="le" id="iconl" v-if="aaa">
          <img src="/static/images/leftjt.png">
       </div>
-      <div class="icon" style="right:124px;background:#4fc9ed" @click="ri" id="iconr" v-if="aaa">
-         <img src="/static/images/rightjt.png">
-      </div>
     <!-- 导航内容 -->
-    <div class="wrap" style="position:relative">
+    <div class="wrap" style="position:relative;left:198px;">
       <!-- 具体菜单内容 -->
       <div class="navContain"  ref="contains" style="left:0px;">
         <!-- <div class="contain"> -->
@@ -26,6 +23,11 @@
         <!-- </div> -->
       </div>
     </div>
+    <!-- 右按钮 -->
+    <div class="icon" style="right:124px;background:#4fc9ed" @click="ri" id="iconr" v-if="aaa">
+       <img src="/static/images/rightjt.png">
+    </div>
+    <!-- 返回按钮 -->
     <div class="backIcon" @click="backLoin" >
       <img src="/static/images/backLoin.png">
       <span>返回首页</span>
@@ -65,6 +67,7 @@
               console.log($('.wrap').width());
               this.aaa = true;
               $('.wrap').width($('.wrap').width()-60);
+              $('.wrap').style.left='229px';
               console.log(this.aaa);
               console.log($('.wrap').width());
             }
@@ -169,8 +172,8 @@
     padding: 0 33px;
     line-height: 70px;
     letter-spacing: 2px;
-    /* position: absolute; */
-    z-index: 200;
+    position: absolute;
+    z-index: 2100;
   }
 
   /* 导航内容 */
@@ -209,9 +212,10 @@
   .icon {
     width: 30px;
     height: 70px;
-    position: absolute;
+   /*  position: absolute; */
     color: blue;
     z-index: 210;
+    float: left;
   }
 
   .mheader .navContain .el-menu div {
