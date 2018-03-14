@@ -86,23 +86,12 @@
 				  resize="none"
 				  >
 				</el-input>
-			  	<!-- <textarea v-model="remark" maxlength="600" placeholder="最多600字"></textarea> -->
 			  </div>
 			  <span slot="footer" class="dialog-footer">
-			    <el-button type="primary" @click="sure">确定</el-button>
+			    <el-button type="primary" :loading=addLodaing @click="sure">{{addSure}}</el-button>
 			  </span>
 			</el-dialog>
 		</div>
-
-
-		<!-- 修改弹层 -->
-		<!-- <div class="layer" v-show="changeLayer">@touchmove.prevent
-			<div class="layerbox">
-				<p><span>请输入您要修改的备注信息</span><i class="el-icon-close" @click="changeClose"></i></p>
-				<div><label>备注</label><textarea maxlength="600" placeholder="最多600字" v-model="changeRemarks">{{changeRemarks}}</textarea></div>
-				<el-button type="primary" @click="changeSure">确定</el-button>
-			</div>
-		</div> -->
 		
 		<div class="changeLog">
 			<el-dialog
@@ -124,25 +113,12 @@
 				  resize="none"
 				  >
 				</el-input>
-			  	<!-- <textarea maxlength="600" placeholder="最多600字" v-model="changeRemarks">{{changeRemarks}}</textarea> -->
 			  </div>
 			  <span slot="footer" class="dialog-footer">
-			    <el-button type="primary" @click="changeSure">确定</el-button>
+			    <el-button type="primary" :loading=changeLoading @click="changeSure">{{chSure}}</el-button>
 			  </span>
 			</el-dialog>
 		</div>
-
-		<!-- 修改和删除没有选中时提示弹框 -->
-		<!-- <div class="promptLayer" v-show="promptLayer">@touchmove.prevent
-			<div class="layerbox">
-				<p><span>提示</span><i class="el-icon-close" @click="promptClose"></i></p>
-				<div>
-					<p class="choces">请选择一条记录！</p>
-					<el-button type="primary" @click="promptSure">确定</el-button>
-				</div>		
-			</div>
-		</div> -->
-		
 		<div class="isLog">
 			<el-dialog
 			  title="提示"
@@ -155,21 +131,6 @@
 			  </span>
 			</el-dialog>
 		</div>
-
-		<!-- 删除时提示弹框 -->
-		<!-- <div class="deletLayer" v-show="deletLayer">@touchmove.prevent
-			<div class="layerbox">
-				<p><span>提示</span><i class="el-icon-close" @click="deletClose"></i></p>
-				<div>
-					<p class="choces">您要删除该备注吗？</p>
-					<div class=buttonDiv>
-						<el-button type="primary" @click="deletCancle">取消</el-button>
-						<el-button type="primary" @click="deletSure">确定</el-button>
-					</div>
-				</div>		
-			</div>
-		</div> -->
-
 		<div class="deletLog">
 			<el-dialog
 			  title="提示"
@@ -221,6 +182,10 @@
 		        dedialogVisible: false,
 		        //根据judgeFlag判断是初审还是终审
 		        judgeFlag:'',
+		        addLodaing:false,
+		        addSure:'确定',
+		        changeLoading:false,
+		        chSurechSure:'确定',
 			}
 		},
 		mounted(){
@@ -281,6 +246,9 @@
 			sure(){
 				//this.ok=false;
 				//document.getElementsByTagName('body')[0].style.overflow='';
+				this.addLodaing = true;
+				this.addSure = "添加中";
+				//debug;
 				this.dialogVisible = false;
 				this.post('/applyRemark/addApplyRemark',{
 					applyId:this.applyId,
@@ -290,6 +258,8 @@
 				})
 				.then(res => {
 		   			console.log(res);
+		   			this.addLodaing = false;
+		   			this.addSure = "确定";
 		   			 if(res.statusCode==200){
 						this.request(this.applyId);
 						this.$message({
@@ -306,8 +276,8 @@
 		          });
 			},
 			changeSure(){
-				//this.changeLayer=false;
-				//document.getElementsByTagName('body')[0].style.overflow='';
+				this.changeLoading = true;
+				this.chSure = '修改中';
 				this.chdialogVisible = false;
 				//console.log(12345);
 				this.post('/applyRemark/modifyApplyRemark',{
@@ -315,6 +285,8 @@
 					remark:this.changeRemarks
 				})
 				.then(res => {
+					this.changeLoading = false;
+					this.chSure = '确定';
 					if(res.statusCode==200){
 						this.request(this.applyId);
 						this.$message({
