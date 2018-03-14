@@ -1962,10 +1962,8 @@
       },
       setCity(item) {
         this.checkData.workCity = item;
-        console.log("市", this.checkData.workCity)
       },
       getCountry() {
-        console.log("市", this.checkData.workCity)
         this.get("/credit/queryCityCounty", {
           parentCode: this.checkData.workCity,
         }).then(res => {
@@ -1995,17 +1993,14 @@
         this.Confirm = false;
       },
       CFsave() {
-        // console.log("保存修改")
         this.$validator.validateAll().then((result) => {
           if (result) {
             this.checkData.selfpremisesArea = this.acreage;
             this.checkData.selfhasProportion = this.Percent;
-            // console.log(this.$refs.province)
             this.checkData.workProvinceName = this.$refs.province.selectedLabel;
             this.checkData.workCityName = this.$refs.city.selectedLabel;
             this.checkData.workCountyName = this.$refs.country.selectedLabel;
             this.checkData.hirecomKind = this.$refs.industry.selectedLabel;
-            // console.log(this.checkData.oneYearProfitamt)
             this.btnnn();
             this.post("/creauditInfo/addOrUpdate", this.checkData).then(res => {
               if (res.statusCode == 200) {
@@ -2027,6 +2022,7 @@
             this.$message.error('提交失败，有必填项未填写！');
           }
         });
+
       },
       AreaNPercent() {
         if (this.checkData.selfpremisesArea) {
@@ -2406,7 +2402,6 @@
         this.post("/creauditInfo/queryCreauditInfoObj", {
           applyId: this.getParams.applyId,
         }).then(res => {
-          console.log(res);
           if (res.statusCode == 200) {
             this.checkData = res.data;
             this.Percent = this.checkData.selfhasProportion
@@ -2447,40 +2442,6 @@
     mounted() {
       this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
       this.mountC();
-      // // 获取查询列表数据
-      // this.post("/creauditInfo/queryCreauditInfoObj", {
-      //   applyId: this.getParams.applyId,
-      // }).then(res => {
-      //   console.log(res.data);
-      //   this.checkData = res.data;
-      //   this.checkData.applyId = this.getParams.applyId;
-      //   this.AreaNPercent(this.checkData.fbalance);
-      //   this.mountM();
-      //   console.log(this.checkData.fbalance);
-      //   console.log(this.checkData.fbalance);
-      //   this.mountJ(0, res.data.wbeexEcuted);
-      //   this.mountJ(1, res.data.wnetHirecom);
-      //   this.mountJ(2, res.data.wnetEcutedBrea);
-      //   this.mountJ(3, res.data.wnetHirecomBrea);
-      //   this.mountJ(4, res.data.wnetPhone);
-      //   this.mountJ(5, res.data.wnetHirecomName);
-      //   this.mountJ(6, res.data.wnetHirecomPhone);
-      //   this.mountJ(7, res.data.wnetAddrandEstate);
-      //   this.mountJ(8, res.data.wnetHirecomAddress);
-      //   this.mountJ(9, res.data.wnetCompany);
-      //   this.mountJ(10, res.data.wnetAddrstate);
-      //   this.mountJ(11, res.data.iisself);
-      //   this.mountJ(12, res.data.privateOwnerFlag);
-      //   this.mountJ(13, res.data.fmarrflag);
-      //   this.mountJ(14, res.data.spouseWork);
-      //   this.mountJ(15, res.data.spouseSamecity);
-      //   this.mountJ(16, res.data.childFlag);
-      //   this.mountJ(17, res.data.childIspaycost);
-      //   this.mountJ(18, res.data.parentIsliving);
-      //   this.mountJ(19, res.data.brothersIfhas);
-      //   this.mountJ(20, res.data.aisresident);
-      //   this.mountJ(21, res.data.iloanBefore);
-      // });
       // 省    
       this.get("/credit/queryProvince", {}).then(res => {
         this.hirecomAddress = res.data;

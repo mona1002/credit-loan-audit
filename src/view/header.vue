@@ -5,15 +5,12 @@
       <!-- <img class="logo" src="/static/images/logo.png"> -->
       风控管理系统
     </div>
+    <!-- 左按钮 -->
+      <div class="icon" style="left:199px;background:#2ea8e0;display:none;" @click="le" id="iconl">
+         <img src="/static/images/leftjt.png">
+      </div>
     <!-- 导航内容 -->
-    <div class="wrap" style="position:relative">
-      <!-- 左右按钮 -->
-      <div class="icon" style="left:0px;background:#2ea8e0;" @click="le" id="iconl" v-if="aaa">
-        <img src="/static/images/leftjt.png">
-      </div>
-      <div class="icon" style="left:calc( 100% - 30px );background:#4fc9ed" @click="ri" id="iconr" v-if="aaa">
-        <img src="/static/images/rightjt.png">
-      </div>
+    <div class="wrap" ref="wrapRef" style="position:relative;left:198px;">
       <!-- 具体菜单内容 -->
       <div class="navContain"  ref="contains" style="left:0px;">
         <!-- <div class="contain"> -->
@@ -26,6 +23,11 @@
         <!-- </div> -->
       </div>
     </div>
+    <!-- 右按钮 -->
+    <div class="icon" style="right:124px;background:#4fc9ed;display:none;" @click="ri" id="iconr">
+       <img src="/static/images/rightjt.png">
+    </div>
+    <!-- 返回按钮 -->
     <div class="backIcon" @click="backLoin" >
       <img src="/static/images/backLoin.png">
       <span>返回首页</span>
@@ -40,7 +42,7 @@
     data() {
       return {
         datas: [],
-        aaa:true,
+        //aaa:false,
       };
     },
     mounted(){
@@ -61,10 +63,12 @@
         },
         bbb(){
           setTimeout(function(){
-            if($('.navContain').width()>($('.mheader').width()-324)){
-              //alert('hhh');
-              console.log(this.aaa);
-              this.aaa = true;
+            if($('.navContain').width()>$('.wrap').width()){
+              $('.icon').css('display','block');
+              $('.wrap').width($('.wrap').width()-60);
+              $('.wrap').css('left','229px');
+            }else{
+              this.aaa = false;
             }
           },100);
 
@@ -97,27 +101,22 @@
           localStorage.clear();
         },
         le(){
-          //alert('kkk1');
-          console.log($('.navContain').width());
-          if($('.navContain').width()<=($('.mheader').width()-358)){
+          if($('.navContain').width()<=$('.wrap').width()){
             $('#iconl').attr("disabled",true);
-            //alert('kkk2');
           }else{
-            //alert('kkk3');
-            if(parseInt(this.$refs.contains.style.left) == ($('.mheader').width()-130-$('.navContain').width()) || parseInt(this.$refs.contains.style.left) < ($('.mheader').width()-130-$('.navContain').width()) ){
+            if(parseInt(this.$refs.contains.style.left) == ($('.wrap').width()-$('.navContain').width()) || parseInt(this.$refs.contains.style.left) < ($('.wrap').width()-$('.navContain').width()) ){
               $('#iconl').attr("disabled",true);
-              //alert('kkk4');
             }else{
               this.$refs.contains.style.left = parseFloat(this.$refs.contains.style.left) - 150 + "px";
-              //alert('kkk5');
             }
           }
         },
        ri(){
-        if($('.navContain').width()<=($('.mheader').width()-358)){
+        console.log(this.$refs.contains.style.left);
+        if($('.navContain').width()<=$('.wrap').width()){
             $('#iconr').attr("disabled",true);
-          }else{
-            if(this.$refs.contains.style.left == '230px'){
+          }else if($('.navContain').width()>$('.wrap').width()){
+            if(this.$refs.contains.style.left == '0px' || this.$refs.contains.style.left > '0px'){
               $('#iconr').attr("disabled",true);  
              }else{
               this.$refs.contains.style.left = parseFloat(this.$refs.contains.style.left) + 150 + "px";
@@ -167,8 +166,8 @@
     padding: 0 33px;
     line-height: 70px;
     letter-spacing: 2px;
-    /* position: absolute; */
-    z-index: 200;
+    position: absolute;
+    z-index: 2000;
   }
 
   /* 导航内容 */
@@ -192,13 +191,17 @@
     width: 60px;
     padding: 0 16px;
     height: 70px;
-    line-height: 70px;
+    line-height: 60px;
     background: #4fc9ed;
     position: absolute;
     right: 0px;
     width: 124px;
     z-index: 200;
     cursor: pointer;
+  }
+  .mheader .backIcon img{
+    float: left;
+    padding: 24px 5px 0 0;
   }
   .mheader .backIcon span{
     font-size: 14px;
@@ -210,6 +213,9 @@
     position: absolute;
     color: blue;
     z-index: 210;
+    line-height: 60px;
+    text-align: center;
+    /* float: left; */
   }
 
   .mheader .navContain .el-menu div {

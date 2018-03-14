@@ -196,21 +196,6 @@
             path: '/reconsiderList',
           });
         }
-        // else if (val.taskNodeName == "antiFraudApp_commissioner") { //复议反欺诈专员 
-        //   this.judge.flag = "07";
-        //   localStorage.setItem("ReAntiWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
-        //   localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
-        //   this.$router.push({
-        //     // path: '/AntiFraud',
-        //   });
-        // } else if (val.taskNodeName == "antiFraudApp_commissioner") { //复议反欺诈主管 
-        //   this.judge.flag = "08";
-        //   localStorage.setItem("ReAntiManagerWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
-        //   localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识         
-        //   this.$router.push({
-        //     // path: '/AntiFraud',
-        //   });
-        // }
       },
     },
     computed: {
@@ -230,7 +215,6 @@
     },
     mounted() {
       // 统一登录平台  调试   start 
-      // console.log(UserURL)
       // this.get("http://testplatform.nuoyuan.com.cn/remote/user/getUserInfo").then(response => {
       this.get( UserURL+'remote/user/getUserInfo').then(response => {
         console.info(response.data);
@@ -253,16 +237,6 @@
           }
         });
       });
-      // 统一登录 平台  调测 end
-
-      //   // 取登陆信息 
-      //   localStorage.setItem("userInf", JSON.stringify(this.userInf));
-      //   this.post("/workFlowTaskQuery/getTaskProfile", {
-      //     taskStatus: "01",
-      //   }).then(res => {
-      //     this.tableData = res.data;
-      //   });
-      // }
     },
   }
 

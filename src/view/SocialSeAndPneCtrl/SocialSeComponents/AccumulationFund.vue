@@ -28,7 +28,7 @@
                 <label>密码：</label>
                 <b>{{InputParameter.password}}</b>
               </p>
-              <p style="marginBottom:15px;"> 
+              <p style="marginBottom:15px;">
                 <label>省市：</label>
                 <b>{{InputParameter.area_code}}</b>
               </p>
@@ -44,54 +44,60 @@
           <span class="headFont">基本信息</span>
         </template>
         <div class="lists">
-          <hr>
-          <h4>基本信息 </h4>
-           <hr>
-          <ul>
-            <li>
-              <p v-for="(value,name) in base" :key="name">
-                <label>{{name}}</label>
-                <b>：</b>
-                <span>{{value}}</span>
-              </p>
-            </li>
-          </ul>
-           <hr>
-          <h4>账单记录 </h4>
-           <hr>
-          <ul>
-            <li v-for="(value,index) in bills" :key="index">
-              <p v-for="(item,name) in value" :key="name">
-                <label>{{name}}</label>
-                <b>：</b>
-                <span>{{item}}</span>
-              </p>
-            </li>
-          </ul>
-           <hr>
-          <h4>贷款记录 </h4>
-           <hr>
-          <ul>
-            <li v-for="(value,index) in loan" :key="index">
-              <p v-for="(item,name) in value" :key="name">
-                <label>{{name}}</label>
-                <b>：</b>
-                <span>{{item}}</span>
-              </p>
-            </li>
-          </ul>
-           <hr>
-          <h4>还款记录 </h4>
-           <hr>
-          <ul>
-            <li v-for="(value,index) in repay" :key="index">
-              <p v-for="(item,name) in value" :key="name">
-                <label>{{name}}</label>
-                <b>：</b>
-                <span>{{item}}</span>
-              </p>
-            </li>
-          </ul>
+          <div id="responseBaseInfoParams" class="easyui-panel" data-options="title:'基本信息',border:false,collapsible:true">
+            <table id="t_01" class="table">
+              <tr>
+                <th style="width:15%;text-align:left">基本信息</th>
+                <td style="width:15%"></td>
+                <th style="width:25%"></th>
+                <td style="width:12%"></td>
+                <th style="width:18%"></th>
+                <td style="width:15%"></td>
+              </tr>
+            </table>
+            <table id="t_02" class="table">
+              <tr>
+                <th style="width:10%;text-align:left">账单记录</th>
+                <td style="width:18%">
+                  <th style="width:8%"></th>
+                  <td style="width:8%"></td>
+                  <th style="width:8%"></th>
+                  <td style="width:8%;"></td>
+                  <th style="width:8%"></th>
+                  <td style="width:8%"></td>
+                  <th style="width:8%"></th>
+                  <td style="width:8%"></td>
+              </tr>
+            </table>
+            <table id="t_03" class="table">
+              <tr>
+                <th style="width:10%;text-align:left">贷款信息</th>
+                <td style="width:18%">
+                  <th style="width:8%"></th>
+                  <td style="width:8%"></td>
+                  <th style="width:8%"></th>
+                  <td style="width:8%"></td>
+                  <th style="width:8%"></th>
+                  <td style="width:8%"></td>
+                  <th style="width:8%"></th>
+                  <td style="width:8%"></td>
+              </tr>
+            </table>
+            <table id="t_04" class="table">
+              <tr>
+                <th style="width:10%;text-align:left">还款记录</th>
+                <td style="width:18%"></td>
+                <th style="width:8%"></th>
+                <td style="width:8%"></td>
+                <th style="width:8%"></th>
+                <td style="width:8%"></td>
+                <th style="width:8%"></th>
+                <td style="width:8%"></td>
+                <th style="width:8%"></th>
+                <td style="width:8%"></td>
+              </tr>
+            </table>
+          </div>
         </div>
       </el-collapse-item>
     </el-collapse>
@@ -101,67 +107,59 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">报告信息</span>
         </template>
-        <div class="lists">
-           <hr>
-          <h4>用户及账户基本信息 </h4>
-           <hr>
-          <ul>
-            <li>
-              <p v-for="(value,name) in ReportBase" :key="name">
-                <label>{{name}}</label>
-                <b>：</b>
-                <span>{{value}}</span>
-              </p>
-            </li>
-          </ul>
-           <hr>
-          <h4>用户基本信息校验 </h4>
-           <hr>
-          <ul>
-            <li>
-              <p v-for="(value,name) in ReportBaseCheck" :key="name">
-                <label>{{name}}</label>
-                <b>：</b>
-                <span>{{value}}</span>
-              </p>
-            </li>
-          </ul>
-           <hr>
-          <h4>账户基本信息</h4>
-           <hr>
-          <ul>
-            <li>
-              <p v-for="(value,name) in ReportAccountBase" :key="name">
-                <label>{{name}}</label>
-                <b>：</b>
-                <span>{{value}}</span>
-              </p>
-            </li>
-          </ul>
-           <hr>
-          <h4>缴纳信息</h4>
-           <hr>
-          <ul>
-            <li>
-              <p v-for="(value,name) in Reportpayment" :key="name">
-                <label>{{name}}</label>
-                <b>：</b>
-                <span>{{value}}</span>
-              </p>
-            </li>
-          </ul>
- <hr>
-          <h4>还款信息</h4>
-           <hr>
-          <ul>
-            <li>
-              <p v-for="(value,name) in ReportRepay" :key="name">
-                <label>{{name}}</label>
-                <b>：</b>
-                <span>{{value}}</span>
-              </p>
-            </li>
-          </ul>
+        <div class="lsits">
+          <div id="responseParams" class="easyui-panel" data-options="title:'报告信息',border:false,collapsible:true">
+            <table id="t_1" class="table">
+              <tr>
+                <th style="width:15%;text-align:left;padding:10px 3px;">用户及账户基本信息</th>
+                <td style="width:15%"></td>
+                <th style="width:20%"></th>
+                <td style="width:12%"></td>
+                <th style="width:20%"></th>
+                <td style="width:15%"></td>
+              </tr>
+            </table>
+            <table id="t_2" class="table">
+              <tr>
+                <th style="width:15%;text-align:left;padding:10px 3px;">用户基本信息效验</th>
+                <td style="width:15%"></td>
+                <th style="width:20%"></th>
+                <td style="width:12%"></td>
+                <th style="width:20%"></th>
+                <td style="width:15%"></td>
+              </tr>
+            </table>
+            <table id="t_3" class="table">
+              <tr>
+                <th style="width:15%;text-align:left;padding:10px 3px;">账户基本信息</th>
+                <td style="width:15%"></td>
+                <th style="width:20%"></th>
+                <td style="width:12%"></td>
+                <th style="width:20%"></th>
+                <td style="width:15%"></td>
+              </tr>
+            </table>
+            <table id="t_4" class="table">
+              <tr>
+                <th style="text-align:left;width:15%;padding:10px 3px;">缴纳信息</th>
+                <td style="width:15%"></td>
+                <th style="width:20%"></th>
+                <td style="width:12%"></td>
+                <th style="width:20%"></th>
+                <td style="width:15%"></td>
+              </tr>
+            </table>
+            <table id="t_5" class="table">
+              <tr>
+                <th style="text-align:left;width:15%;padding:10px 3px;">还款信息</th>
+                <td style="width:15%"></td>
+                <th style="width:20%"></th>
+                <td style="width:12%"></td>
+                <th style="width:20%"></th>
+                <td style="width:15%"></td>
+              </tr>
+            </table>
+          </div>
         </div>
       </el-collapse-item>
     </el-collapse>
@@ -189,53 +187,79 @@
       }
     },
     methods: {
-      formatNumber(num, cent, isThousand) {
-        num = num.toString().replace(/\$|\,/g, '');
-        if (isNaN(num)) {
-          num = "0";
+      formatMoney(val, row) {
+        var t = "";
+        var i;
+        if (!$.isNumeric(val)) {
+          return val;
         }
-        let sign = (num == (num = Math.abs(num)));
-        num = Math.floor(num * Math.pow(10, cent) + 0.50000000001);
-        let cents = num % Math.pow(10, cent);
-        num = Math.floor(num / Math.pow(10, cent)).toString();
-        cents = cents.toString();
-        while (cents.length < cent)
-          cents = "0" + cents;
-        for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++) {
-          num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
+        //if(val!=null && val!=undefined){
+        var n = 2;
+        val = parseFloat((val + "").replace(/[^\d\.-]/g, "")).toFixed(n) + "";
+        var l = val.split(".")[0].split("").reverse(),
+          r = val.split(".")[1];
+
+        for (i = 0; i < l.length; i++) {
+          t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");
         }
-        if (cent > 0) {
-          return (((sign) ? '' : '-') + num + '.' + cents);
-        } else {
-          return (((sign) ? '' : '-') + num);
-        }
+        return t.split("").reverse().join("") + "." + r;
+        //}
       },
-      FOREACH(item) {
-        for (var k in item) {
-          if (k.indexOf("[元]") != -1) {
-            item[k] = this.formatNumber(item[k] / 100, 2, 0)
-          }
-        }
-      },
-      FOREACHarray(item) {
-        for (var i = 0; i < item.length; i++) {
-          for (var k in item[i]) {
-            if (k.indexOf("[元]") != -1) {
-              item[i][k] = this.formatNumber(item[i][k] / 100, 2, 0)
+      addTrThTd(jsonObj, $table, rownum, isAllFormat) {
+        var i = 1;
+        $.each(jsonObj, (name, value) => {
+          if (name.indexOf('Id') != -1) return;
+          if (value == null) value = '';
+          //金额字符串格式化
+          if (isAllFormat) {
+            if (!isNaN(value)) {
+              value = this.formatMoney(value / 100);
+            }
+          } else {
+            if (name.match(/\[元\]$/)) {
+              if (!isNaN(value)) {
+                value = this.formatMoney(value / 100);
+              }
             }
           }
+          var index = i % rownum;
+          var tr;
+          if (index == 1) {
+            $table.append("<tr style='border-bottom:1px solid #ebeef5;'><th style='text-align:right'>" + name +
+              "：</th><td style='text-align:left;padding:0 0 0 10px;'>" + value + '</td></tr>');
+          } else {
+            $table.find('tr:last').append("<th style='text-align:right'>" + name + '：</th><td>' + value +
+              '</td></tr>');
+          }
+          i++;
+        });
+        //补全一行
+        var n = (i - 1) % rownum;
+        if (n == 0) return;
+        for (var m = 0; m < rownum - n; m++) {
+          $table.find('tr:last').append("<th></th><td></td>");
         }
       },
-      FOREACHobj(item) {
-        for (var k in item) {
-          if (k.indexOf("[元]") != -1) {
-            for (var j in item[k]) {
-              item[k][j] != '-' ? item[k][j] = this.formatNumber(item[k][j] / 100, 2, 0) : item[k][j]
+      addTd(jsonObj, $tr, isAllFormat) {
+        $.each(jsonObj, (name, value) => {
+          if (name.indexOf('Id') != -1) return;
+          if (value == null) value = '';
+          //金额字符串格式化
+          if (isAllFormat) {
+            if (!isNaN(value)) {
+              value = this.formatMoney(value / 100);
+            }
+          } else {
+            if (name.match(/\[元\]$/)) {
+              if (!isNaN(value)) {
+                value = this.formatMoney(value / 100);
+              }
             }
           }
-        }
+          $tr.append("<td>" + name + '：' + value + '</td>');
+        });
       },
-        delBase() {
+      delBase() {
         this.base['用户信息Id'] ? delete this.base['用户信息Id'] : this.base;
         this.base['保险Id(险种)'] ? delete this.base['保险Id(险种)'] : this.base;
         this.delArray(this.insurances)
@@ -263,8 +287,8 @@
       delObj(item) {
         if (item) {
           for (var k in item) {
-              item[k]['用户信息Id'] ? delete item[k]['用户信息Id'] :item[k];
-              item[k]['保险Id(险种)'] ? delete item[k]['保险Id(险种)'] :item[k];
+            item[k]['用户信息Id'] ? delete item[k]['用户信息Id'] : item[k];
+            item[k]['保险Id(险种)'] ? delete item[k]['保险Id(险种)'] : item[k];
           }
         }
       }
@@ -298,23 +322,58 @@
             this.bills = JSON.parse(this.baseInf.bill_record); //账单记录
             this.loan = JSON.parse(this.baseInf.loan_info); //贷款信息
             this.repay = JSON.parse(this.baseInf.loan_repay_record); //还款记录 
-            this.base ? this.FOREACH(this.base) : this.base;
-            this.bills ? this.FOREACHarray(this.bills) : this.bills;
-            this.loan ? this.FOREACHarray(this.loan) : this.loan;
-            this.repay ? this.FOREACHarray(this.repay) : this.repay;
+            //基本信息
+            if (this.base) {
+              this.addTrThTd(this.base, $('#responseBaseInfoParams #t_01'), 3);
+            }
+            //账单记录
+            if (this.bills) {
+              $.each(this.bills, (index, each) => {
+                this.addTrThTd(each, $('#responseBaseInfoParams #t_02'), 5);
+              });
+            }
+            //贷款信息
+            if (this.loan) {
+              $.each(this.loan, (index, each) => {
+                this.addTrThTd(each, $('#responseBaseInfoParams #t_03'), 5);
+              });
+            }
+            //还款记录
+            if (this.repay) {
+              $.each(this.repay, (index, each) => {
+                this.addTrThTd(each, $('#responseBaseInfoParams #t_04'), 5);
+              });
+            }
             this.delBase();
           }
           // 报告信息
           if (res.obj.reportInfo != "") {
             this.reportInf = JSON.parse(res.obj.reportInfo);
-            this.ReportBase = this.reportInf.user_basic_info_check; //		用户及账户基本信息
+            this.ReportBase = this.reportInf.user_basic_info; //		用户及账户基本信息
             this.ReportBaseCheck = this.reportInf.user_basic_info_check; //用户基本信息校验
             this.ReportAccountBase = this.reportInf.fund_basic_info //账户基本信息
             this.Reportpayment = this.reportInf.payment_info //缴纳信息
             this.ReportRepay = this.reportInf.repay_info //还款信息
-            this.ReportAccountBase ? this.FOREACH(this.ReportAccountBase) : this.ReportAccountBase;
-            this.Reportpayment ? this.FOREACH(this.Reportpayment) : this.Reportpayment; //缴纳信息
-            this.ReportRepay ? this.FOREACH(this.ReportRepay) : this.ReportRepay; //还款信息
+            //用户及账户基本信息
+            if (this.ReportBase != undefined) {
+              this.addTrThTd(this.ReportBase, $('#responseParams #t_1'), 3);
+            }
+            //用户基本信息校验
+            if (this.ReportBaseCheck != undefined) {
+              this.addTrThTd(this.ReportBaseCheck, $('#responseParams #t_2'), 3);
+            }
+            //账户基本信息
+            if (this.ReportAccountBase != undefined) {
+              this.addTrThTd(this.ReportAccountBase, $('#responseParams #t_3'), 3);
+            }
+            //缴纳信息
+            if (this.Reportpayment != undefined) {
+              this.addTrThTd(this.Reportpayment, $('#responseParams #t_4'), 3);
+            }
+            //还款信息
+            if (this.ReportRepay != undefined) {
+              this.addTrThTd(this.ReportRepay, $('#responseParams #t_5'), 3);
+            }
             this.delReport();
           }
         } else {
@@ -344,20 +403,16 @@
   .SSComp h4 {
     clear: both;
     font-weight: bold;
-    /* border: 1px solid yellowgreen; */
   }
 
   .SSComp li {
-    /* border: 1px solid blue; */
     clear: both;
   }
 
   .SSComp p {
     display: inline-block;
-    /* float: left; */
     width: 33.3%;
     margin-top: 5px;
-    /* border: 1px solid red; */
   }
 
   .SSComp label {
@@ -365,7 +420,6 @@
     width: 260px;
     text-align: right;
     vertical-align: top;
-    /* border: 1px solid pink; */
   }
 
   .SSComp li span {
@@ -382,4 +436,7 @@
     float: left;
   }
 
+  .table {
+    width: 100%;
+  }
 </style>

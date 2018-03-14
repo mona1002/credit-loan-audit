@@ -44,54 +44,56 @@
           <span class="headFont">基本信息 </span>
         </template>
         <div class="lists">
-          <hr>
-          <h4>基本信息 </h4>
-          <hr>
-          <ul>
-            <li>
-              <p v-for="(value,name) in base" :key="name">
-                <label>{{name}}</label>
-                <b>：</b>
-                <span>{{value}}</span>
-              </p>
-            </li>
-          </ul>
-          <hr>
-          <h4>保险费用 </h4>
-          <hr>
-          <ul>
-            <li v-for="(value,index) in insurances" :key="index">
-              <p v-for="(item,name) in value" :key="name">
-                <label>{{name}}</label>
-                <b>：</b>
-                <span>{{item}}</span>
-              </p>
-            </li>
-          </ul>
-          <hr>
-          <h4>保险费用记录 </h4>
-          <hr>
-          <ul>
-            <li v-for="(value,index) in insurance_record" :key="index">
-              <p v-for="(item,name) in value" :key="name">
-                <label>{{name}}</label>
-                <b>：</b>
-                <span>{{item}}</span>
-              </p>
-            </li>
-          </ul>
-          <hr>
-          <h4>医疗保险记录</h4>
-          <hr>
-          <ul>
-            <li v-for="(value,index) in medical_insurance_record" :key="index">
-              <p v-for="(item,name) in value" :key="name">
-                <label>{{name}}</label>
-                <b>：</b>
-                <span>{{item}}</span>
-              </p>
-            </li>
-          </ul>
+          <div id="sec_responseBaseInfoParams" class="easyui-panel" data-options="title:'基本信息',border:false,collapsible:true">
+            <table id="t_01" class="table">
+              <tr style="border:1px solid #ebeef5;">
+                <th style="width:15%;text-align:left">基本信息</th>
+                <td style="width:15%"></td>
+                <th style="width:25%"></th>
+                <td style="width:12%"></td>
+                <th style="width:18%"></th>
+                <td style="width:15%"></td>
+              </tr>
+            </table>
+            <table id="t_02" class="table">
+              <tr>
+                <th style="width:15%;text-align:left">保险费用</th>
+                <td style="width:15%;text-align:right;bgcolor:#ebeef5;"></td>
+                <th style="width:25%"></th>
+                <td style="width:12%"></td>
+                <th style="width:18%"></th>
+                <td style="width:15%"></td>
+              </tr>
+            </table>
+            <table id="t_03" class="table">
+              <tr>
+                <th style="width:10%;text-align:left">保险费用记录</th>
+                <td style="width:8%;">
+                  <th style="width:8%"></th>
+                  <td style="width:8%"></td>
+                  <th style="width:12%"></th>
+                  <td style="width:8%"></td>
+                  <th style="width:8%"></th>
+                  <td style="width:8%"></td>
+                  <th style="width:8%"></th>
+                  <td style="width:8%"></td>
+                  <th style="width:8%"></th>
+                  <td style="width:8%"></td>
+              </tr>
+            </table>
+            <table id="t_04" class="table">
+              <tr>
+                <th style="width:10%;text-align:left">医疗保险记录</th>
+                <td style="width:10%"></td>
+                <th></th>
+                <td></td>
+                <th></th>
+                <td></td>
+                <th></th>
+                <td></td>
+              </tr>
+            </table>
+          </div>
         </div>
       </el-collapse-item>
     </el-collapse>
@@ -102,84 +104,72 @@
           <span class="headFont">报告信息</span>
         </template>
         <div class="lists">
-          <hr>
-          <h4>用户及账户基本信息</h4>
-          <hr>
-          <ul>
-            <li>
-              <p v-for="(value,name) in ReportBase" :key="name">
-                <label>{{name}}</label>
-                <b>：</b>
-                <span>{{value}}</span>
-              </p>
-            </li>
-          </ul>
-          <hr>
-          <h4>用户基本信息校验</h4>
-          <hr>
-          <ul>
-            <li>
-              <p v-for="(value,name) in ReportBaseCheck" :key="name">
-                <label>{{name}}</label>
-                <b>：</b>
-                <span>{{value}}</span>
-              </p>
-            </li>
-          </ul>
-          <hr>
-          <h4>社保信息 </h4>
-          <hr>
-          <li v-for="(value,index) in ReportSocialSec" :key="index">
-            <p v-for="(item,name) in value" :key="name" width:>
-              <label>{{name}}</label>
-              <b>：</b>
-              <span>{{item}}</span>
-            </p>
-          </li>
-          <hr>
-          <h4>医疗保险缴存信息 </h4>
-          <hr>
-          <ul>
-            <li v-for="(value,name) in ReportMedInsu" :key="name">
-              <div>{{name}}
-                <b>：</b>
-              </div>
-              <div>
-                <p v-for="(title,item) in value" :key="title">
-                  <label>{{item}}</label>:
-                  <span>{{title}}</span>
-                </p>
-              </div>
-            </li>
-          </ul>
-          <hr>
-          <h4>医保消费明细</h4>
-          <hr>
-          <ul>
-            <li v-for="(value,name) in ReportExpenseDet" :key="name">
-              <div>{{name}}
-                <b>：</b>
-              </div>
-              <div>
-                <p v-for="(title,item) in value" :key="title">
-                  <label>{{item}}</label>:
-                  <span>{{title}}</span>
-                </p>
-              </div>
-            </li>
-          </ul>
-          <hr>
-          <h4>医保卡消费记录 </h4>
-          <hr>
-          <ul>
-            <li v-for="(value,index) in ReportSecRecord" :key="index">
-              <p v-for="(item,name) in value" :key="name" width:>
-                <label>{{name}}</label>
-                <b>：</b>
-                <span>{{item}}</span>
-              </p>
-            </li>
-          </ul>
+          <div id="sec_responseParams" class="easyui-panel" data-options="title:'报告信息',border:false,collapsible:true">
+            <table id="t_1" class="table">
+              <tr>
+                <th style="width:15%;text-align:left">用户及账户基本信息</th>
+                <td style="width:15%"></td>
+                <th style="width:25%"></th>
+                <td style="width:12%"></td>
+                <th style="width:18%"></th>
+                <td style="width:15%"></td>
+              </tr>
+            </table>
+            <table id="t_2" class="table">
+              <tr>
+                <th style="width:15%;text-align:left">用户基本信息效验</th>
+                <td style="width:15%"></td>
+                <th style="width:25%"></th>
+                <td style="width:12%"></td>
+                <th style="width:18%"></th>
+                <td style="width:15%"></td>
+              </tr>
+            </table>
+            <table id="t_3" class="table">
+              <tr>
+                <th style="width:15%;text-align:left">社保信息</th>
+                <td style="width:15%"></td>
+                <th style="width:25%"></th>
+                <td style="width:12%"></td>
+                <th style="width:18%"></th>
+                <td style="width:15%"></td>
+              </tr>
+            </table>
+            <table id="t_4" class="table">
+              <tr style="text-align:left;border-bottom:1px solid #ebeef5">
+                <th style="text-align:left;">医疗保险缴存信息</th>
+                <td style="width:15%"></td>
+                <td style="width:15%"></td>
+                <td style="width:15%"></td>
+                <td style="width:15%"></td>
+                <td style="width:15%"></td>
+                <td style="width:15%"></td>
+              </tr>
+            </table>
+            <table id="t_5" class="table">
+              <tr>
+                <th style="text-align:left">医保消费明细</th>
+                <td style="width:15%"></td>
+                <td style="width:15%"></td>
+                <td style="width:15%"></td>
+                <td style="width:15%"></td>
+                <td style="width:15%"></td>
+                <td style="width:15%"></td>
+              </tr>
+            </table>
+            <table id="t_6" class="table">
+              <tr>
+                <th style="text-align:left;width:12%">医保卡消费记录</th>
+                <td style="width:15%"></td>
+                <th style="width:15%"></th>
+                <td style="width:10%"></td>
+                <th style="width:8%"></th>
+                <td style="width:10%"></td>
+                <th style="width:8%"></th>
+                <td style="width:10%"></td>
+              </tr>
+            </table>
+          </div>
         </div>
       </el-collapse-item>
     </el-collapse>
@@ -194,13 +184,6 @@
         userInf: null,
         localInf: null,
         InputParameter: {},
-        // InputParameter: {
-        // custName: null,
-        // certCode: null,
-        // account: null,
-        // password: null,
-        // area_code: null,
-        // },
         parameterID: null,
         baseInf: null,
         base: null, //基本信息-基本信息
@@ -214,86 +197,26 @@
         ReportExpenseDet: null,
         ReportSecRecord: null,
         ReportSocialSec: null,
-        ccc: {
-          "保险名称": {
-            'name': "askdf",
-            age: 989
-          },
-          "缴存基数": {
-            'name': "askdf",
-            age: 989
-          },
-          "单位缴存金额": {
-            'name': "askdf",
-            age: 989
-          },
-          "个人缴存金额": {
-            'name': "askdf",
-            age: 989
-          },
-          "缴存状态标记": {
-            'name': "askdf",
-            age: 989
-          },
-        }
       }
     },
     methods: {
-      formatNumber(num, cent, isThousand) {
-        num = num.toString().replace(/\$|\,/g, '');
-        if (isNaN(num)) {
-          num = "0";
+      formatMoney(val, row) {
+        var t = "";
+        var i;
+        if (!$.isNumeric(val)) {
+          return val;
         }
-        let sign = (num == (num = Math.abs(num)));
-        num = Math.floor(num * Math.pow(10, cent) + 0.50000000001);
-        let cents = num % Math.pow(10, cent);
-        num = Math.floor(num / Math.pow(10, cent)).toString();
-        cents = cents.toString();
-        while (cents.length < cent)
-          cents = "0" + cents;
-        for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++) {
-          num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
-        }
-        if (cent > 0) {
-          return (((sign) ? '' : '-') + num + '.' + cents);
-        } else {
-          return (((sign) ? '' : '-') + num);
-        }
-      },
-      FOREACH(item) {
-        for (var k in item) {
-          // console.log(k)
-          //  if (k.indexOf("用户信息Id") != -1) {
-          //   //  console.log(item[k])
-          // console.log(k)
-          //    delete item.k;
-          //   //  k=null;
-          //   //  item[k]=null;
-          //   //  console.log(item[k])
-          // }
+        //if(val!=null && val!=undefined){
+        var n = 2;
+        val = parseFloat((val + "").replace(/[^\d\.-]/g, "")).toFixed(n) + "";
+        var l = val.split(".")[0].split("").reverse(),
+          r = val.split(".")[1];
 
-          if (k.indexOf("[元]") != -1) {
-            item[k] = this.formatNumber(item[k] / 100, 2, 0)
-          }
+        for (i = 0; i < l.length; i++) {
+          t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");
         }
-      },
-      FOREACHarray(item) {
-        for (var i = 0; i < item.length; i++) {
-          for (var k in item[i]) {
-            if (k.indexOf("[元]") != -1) {
-              item[i][k] = this.formatNumber(item[i][k] / 100, 2, 0)
-            }
-          }
-        }
-      },
-      FOREACHobj(item) {
-        for (var k in item) {
-          if (k.indexOf("[元]") != -1) {
-            for (var j in item[k]) {
-              item[k][j] != '-' ? item[k][j] = this.formatNumber(item[k][j] / 100, 2, 0) : item[k][j]
-            }
-          }
-        }
+        return t.split("").reverse().join("") + "." + r;
+        //}
       },
       delBase() {
         this.base['用户信息Id'] ? delete this.base['用户信息Id'] : this.base;
@@ -327,6 +250,60 @@
             item[k]['保险Id(险种)'] ? delete item[k]['保险Id(险种)'] : item[k];
           }
         }
+      },
+      addTrThTd(jsonObj, $table, rownum, isAllFormat) {
+        var i = 1;
+        $.each(jsonObj, (name, value) => {
+          if (name.indexOf('Id') != -1) return;
+          if (value == null) value = '';
+          //金额字符串格式化
+          if (isAllFormat) {
+            if (!isNaN(value)) {
+              value = this.formatMoney(value / 100);
+            }
+          } else {
+            if (name.match(/\[元\]$/)) {
+              if (!isNaN(value)) {
+                value = this.formatMoney(value / 100);
+              }
+            }
+          }
+          var index = i % rownum;
+          var tr;
+          if (index == 1) {
+            $table.append("<tr style='border-bottom:1px solid #ebeef5;'><th style='text-align:right'>" + name +
+              "：</th><td style='text-align:left;padding:0 0 0 10px;'>" + value + '</td></tr>');
+          } else {
+            $table.find('tr:last').append("<th style='text-align:right'>" + name + '：</th><td>' + value +
+              '</td></tr>');
+          }
+          i++;
+        });
+        //补全一行
+        var n = (i - 1) % rownum;
+        if (n == 0) return;
+        for (var m = 0; m < rownum - n; m++) {
+          $table.find('tr:last').append("<th></th><td></td>");
+        }
+      },
+      addTd(jsonObj, $tr, isAllFormat) {
+        $.each(jsonObj, (name, value) => {
+          if (name.indexOf('Id') != -1) return;
+          if (value == null) value = '';
+          //金额字符串格式化
+          if (isAllFormat) {
+            if (!isNaN(value)) {
+              value = this.formatMoney(value / 100);
+            }
+          } else {
+            if (name.match(/\[元\]$/)) {
+              if (!isNaN(value)) {
+                value = this.formatMoney(value / 100);
+              }
+            }
+          }
+          $tr.append("<td>" + name + '：' + value + '</td>');
+        });
       }
     },
     mounted() {
@@ -356,13 +333,27 @@
             this.baseInf = JSON.parse(res.obj.baseInfo);
             this.base = JSON.parse(this.baseInf.base_info); //基本信息-基本信息
             this.insurances = JSON.parse(this.baseInf.insurances); //基本信息-保险费用
-            this.insurance_record = JSON.parse(this.baseInf.insurance_record); //基本信息-医疗保险记录
+            this.insurance_record = JSON.parse(this.baseInf.insurance_record); //基本信息-保险费用记录
             this.medical_insurance_record = JSON.parse(this.baseInf.medical_insurance_record); //基本信息-医疗保险记录
-            this.base ? this.FOREACH(this.base) : this.base;
-            this.insurances ? this.FOREACHarray(this.insurances) : this.insurances;
-            this.insurance_record ? this.FOREACHarray(this.insurance_record) : this.insurance_record;
-            this.medical_insurance_record ? this.FOREACHarray(this.medical_insurance_record) : this.medical_insurance_record;
             this.delBase();
+            if (this.base != undefined) { //基本信息-基本信息
+              this.addTrThTd(this.base, $('#sec_responseBaseInfoParams #t_01'), 3);
+            };
+            if (this.insurances) { //基本信息-保险费用
+              $.each(this.insurances, (index, each) => {
+                this.addTrThTd(each, $('#sec_responseBaseInfoParams #t_02'), 3);
+              });
+            }
+            if (this.insurance_record) { //基本信息-保险费用记录
+              $.each(this.insurance_record, (index, each) => {
+                this.addTrThTd(each, $('#sec_responseBaseInfoParams #t_03'), 6);
+              });
+            }
+            if (this.medical_insurance_record) { //基本信息-医疗保险记录
+              $.each(this.medical_insurance_record, (index, each) => {
+                this.addTrThTd(each, $('#sec_responseBaseInfoParams #t_04'), 4);
+              });
+            }
           }
           // 报告信息
           if (res.obj.reportInfo != '') {
@@ -373,12 +364,74 @@
             this.ReportMedInsu = this.reportInf.medical_insurance_bill.medical_insurance_pay; //医疗保险缴存信息
             this.ReportExpenseDet = this.reportInf.medical_consumption_details.medical_consumption_basic //医保消费明细
             this.ReportSecRecord = this.reportInf.medical_consumption_details.medical_consumption_record.securities_report; //医保卡消费记录
-            this.ReportBase ? this.FOREACH(this.ReportBase) : this.ReportBase;
-            this.ReportBaseCheck ? this.FOREACH(this.ReportBaseCheckCheck) : this.ReportBase;
-            this.ReportSocialSec ? this.FOREACHarray(this.ReportSocialSec) : this.ReportSocialSec;
-            this.ReportMedInsu ? this.FOREACHobj(this.ReportMedInsu) : this.ReportMedInsu;
-            this.ReportExpenseDet ? this.FOREACHobj(this.ReportExpenseDet) : this.ReportExpenseDet;
-            this.ReportSecRecord ? this.FOREACHarray(this.ReportSecRecord) : this.ReportSecRecord;
+            //用户及账户基本信息
+            if (this.ReportBase != undefined) {
+              this.addTrThTd(this.ReportBase, $('#sec_responseParams #t_1'), 3);
+            }
+            //用户基本信息效验
+            if (this.ReportBaseCheck != undefined) {
+              this.addTrThTd(this.ReportBaseCheck, $('#sec_responseParams #t_2'), 3);
+            }
+            //社保保险信息摘要
+            if (this.ReportSocialSec != undefined) {
+              $.each(this.ReportSocialSec, (index, each) => {
+                if (each == undefined) return;
+                this.addTrThTd(each, $('#sec_responseParams #t_3'), 3);
+              });
+            }
+            //医疗保险缴存信息
+            if (this.ReportMedInsu.保险名称 != undefined) {
+              $('#sec_responseParams #t_4').append("<tr style='border-bottom:1px solid #ebeef5'><th>保险名称</th></tr>");
+              this.addTd(this.ReportMedInsu.保险名称, $('#sec_responseParams #t_4').find('tr:last'), true);
+              // this.addTrThTd(this.ReportMedInsu.保险名称, $('#sec_responseParams #t_4'), 3, true);
+            }
+            if (this.ReportMedInsu['缴存基数[元]'] != undefined) {
+              $('#sec_responseParams #t_4').append("<tr style='border-bottom:1px solid #ebeef5'><th>缴存基数</th></tr>");
+              this.addTd(this.ReportMedInsu['缴存基数[元]'], $('#sec_responseParams #t_4').find('tr:last'), true);
+              // this.addTrThTd(this.ReportMedInsu['缴存基数[元]'], $('#sec_responseParams #t_4'), 3, true);
+            }
+            if (this.ReportMedInsu['单位缴存金额[元]']) {
+              $('#sec_responseParams #t_4').append(
+                "<tr style='border-bottom:1px solid #ebeef5'><th>单位缴存金额</th></tr>");
+              this.addTd(this.ReportMedInsu['单位缴存金额[元]'], $('#sec_responseParams #t_4').find('tr:last'), true);
+              // this.addTrThTd(this.ReportMedInsu['单位缴存金额[元]'], $('#sec_responseParams #t_4'), 3, true);
+            }
+            if (this.ReportMedInsu['个人缴存金额[元]']) {
+              $('#sec_responseParams #t_4').append(
+                "<tr style='border-bottom:1px solid #ebeef5'><th>个人缴存金额</th></tr>");
+              this.addTd(this.ReportMedInsu['个人缴存金额[元]'], $('#sec_responseParams #t_4').find('tr:last'), true);
+              // this.addTrThTd(this.ReportMedInsu['个人缴存金额[元]'], $('#sec_responseParams #t_4'), 3, true);
+            }
+            if (this.ReportMedInsu.缴存状态标记) {
+              $('#sec_responseParams #t_4').append(
+                "<tr  style='border-bottom:1px solid #ebeef5'><th>缴存状态标记</th></tr>");
+              this.addTd(this.ReportMedInsu.缴存状态标记, $('#sec_responseParams #t_4').find('tr:last'), true);
+              // this.addTrThTd(this.ReportMedInsu.缴存状态标记, $('#sec_responseParams #t_4'), 3, true);
+            }
+            //医保消费明细
+            if (this.ReportExpenseDet["消费金额[元]"] != undefined) {
+              $('#sec_responseParams #t_5').append("<tr style='border-bottom:1px solid #ebeef5'><th>消费金额</th></tr>");
+              this.addTd(this.ReportExpenseDet["消费金额[元]"], $('#sec_responseParams #t_5').find('tr:last'), true);
+              // this.addTrThTd(this.ReportExpenseDet["消费金额[元]"], $('#sec_responseParams #t_5'), 3, true);
+            }
+            if (this.ReportExpenseDet.消费次数 != undefined) {
+              $('#sec_responseParams #t_5').append("<tr style='border-bottom:1px solid #ebeef5'><th>消费次数</th></tr>");
+              this.addTd(this.ReportExpenseDet.消费次数, $('#sec_responseParams #t_5').find('tr:last'), true);
+              // this.addTrThTd(this.ReportExpenseDet.消费次数, $('#sec_responseParams #t_5'), 3, true);
+            }
+            if (this.ReportExpenseDet['每月最大单笔消费[元]'] != undefined) {
+              $('#sec_responseParams #t_5').append(
+                "<tr style='border-bottom:1px solid #ebeef5'><th>每月最大单笔消费</th></tr>");
+              this.addTd(this.ReportExpenseDet['每月最大单笔消费[元]'], $('#sec_responseParams #t_5').find('tr:last'), true);
+              // this.addTrThTd(this.ReportExpenseDet['每月最大单笔消费[元]'], $('#sec_responseParams #t_5'), 3, true);
+            }
+            //医保卡消费记录
+            if (this.ReportSecRecord != undefined) {
+              $.each(this.ReportSecRecord, (index, each) => {
+                if (each == undefined) return;
+                this.addTrThTd(each, $('#sec_responseParams #t_6'), 4);
+              });
+            }
             this.delReport();
           }
         } else {
@@ -395,6 +448,10 @@
     height: 100%;
   }
 
+  /* .bor{
+    border-bottom: 1px solid #ebeef5;
+} */
+
   .icon_hat {
     position: absolute;
     top: 12px;
@@ -408,11 +465,9 @@
   .SSComp h4 {
     clear: both;
     font-weight: bold;
-    /* border: 1px solid yellowgreen; */
   }
 
   .SSComp li {
-    /* border: 1px solid blue; */
     clear: both;
   }
 
@@ -420,14 +475,12 @@
     float: left;
     width: 33.3%;
     margin-top: 5px;
-    /* border: 1px solid red; */
   }
 
   .SSComp label {
     display: inline-block;
     width: 180px;
     text-align: right;
-    /* border: 1px solid pink; */
   }
 
   .SSComp li span {
@@ -440,8 +493,8 @@
     vertical-align: top
   }
 
-  hr {
-    clear: both;
+  .table {
+    width: 100%;
   }
 
 </style>

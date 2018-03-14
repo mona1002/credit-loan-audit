@@ -320,6 +320,7 @@
 <script>
 import myHead from "@/view/header";
 import processMoniSer from "./processMoniSer.js";
+import constant from "@/util/constant";
 
 export default {
   data() {
@@ -457,7 +458,7 @@ export default {
 
     // 查询经营产品
     getProductForUser(orgId){
-      this.post('http://10.1.26.200:20717/remote/product/getProductForUser',{
+      this.post(constant.baseUrl_user +'remote/product/getProductForUser',{
         data:{
           orgId: this.userInf.orgId,
           validFlag: '1'
@@ -469,7 +470,7 @@ export default {
 
     // 根据任务角色 code 查询 Name
     getFlowRoleName(roleCode){
-      this.post('http://10.1.26.200:20717/remote/flowRole/getByFlowRoleCode',{
+      this.post(constant.baseUrl_user +'remote/flowRole/getByFlowRoleCode',{
         data: {
           flowRoleCode: roleCode
         }
@@ -480,7 +481,7 @@ export default {
 
     // 下拉框获取流程角色
     getCurrentUserFlowRole(){
-      this.post('http://10.1.26.200:20717/remote/user/getBpmUser',{
+      this.post(constant.baseUrl_user +'remote/user/getBpmUser',{
         data:{
           flowRoleCode: this.multipleSelection[0].flowRoleCode,
           orgCode: this.multipleSelection[0].orgCode,
