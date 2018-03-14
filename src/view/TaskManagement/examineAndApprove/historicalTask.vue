@@ -173,6 +173,7 @@
 </template>
 <script type="text/javascript">
 	import myHead from "../../header.vue"
+	import baseU from'../../../util/ConstantProduct';
 	export default{
 		data(){
 			return{
@@ -231,6 +232,7 @@
 		        //流程结束 时间 数组
 		        ProcessEndTime:'',
 		        judge:'',
+		        orgId:'',
 			}
 		},
 		components: {
@@ -240,17 +242,30 @@
 			//一进入页面就发送请求
 			this.queryParam.userCode=JSON.parse(localStorage.getItem('userInf')).userCode;
 			this.queryParam.orgCode=JSON.parse(localStorage.getItem('userInf')).orgCode;
+			this.orgId=JSON.parse(localStorage.getItem('userInf')).orgId;
 			//请求产品
 			this.product();
 			this.request(this.queryParam);	
 		},
 		methods:{
 			product(){
-				this.get("/credit/product").then(res => {
+				/*this.get("/credit/product").then(res => {
 					if(res.statusCode == 200){
 						this.productNames = res.data;
 					}
-				});
+				});*/
+				this.post(baseU,{
+		           data:{
+		              orgId:this.orgId,
+		              validFlag:'1'
+		           }
+		          }).then(res => {
+		          	if(res.statusCode == 200){
+						this.productNames = res.data;
+					}else {
+			            this.$message.error(res.msg);
+			          }
+	            });
 			},
 		    request(param){
 		    	console.log(this.queryParam);
