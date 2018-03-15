@@ -185,18 +185,13 @@
         });
       },
       getProducts() {
-          this.post(baseU.path+'/remote/product/getProductForUser',{
-           data:{
-              orgId:this.userInf.orgId,
-            validFlag:'1'
-           }
-          }).then(res => {
-             if (res.statusCode == 200) {
+        this.get("/credit/product").then(res => {
+       if (res.statusCode == 200) {
             this.production = res.data
           } else {
             this.$message.error(res.msg);
           }
-        });
+        })
       },
     },
     mounted() {

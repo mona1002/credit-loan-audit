@@ -173,7 +173,7 @@
 </template>
 <script type="text/javascript">
 	import myHead from "../../header.vue"
-	import baseU from'../../../util/constant';
+	//import baseU from'../../../util/constant';
 	export default{
 		data(){
 			return{
@@ -249,12 +249,12 @@
 		},
 		methods:{
 			product(){
-				/*this.get("/credit/product").then(res => {
+				this.get("/credit/product").then(res => {
 					if(res.statusCode == 200){
 						this.productNames = res.data;
 					}
-				});*/
-				this.post(baseU.path+'/remote/product/getProductForUser',{
+				});
+				/*this.post(baseU.path+'/remote/product/getProductForUser',{
 		           data:{
 		              orgId:this.orgId,
 		              validFlag:'1'
@@ -265,7 +265,7 @@
 					}else {
 			            this.$message.error(res.msg);
 			          }
-	            });
+	            });*/
 			},
 		    request(param){
 		    	console.log(this.queryParam);
