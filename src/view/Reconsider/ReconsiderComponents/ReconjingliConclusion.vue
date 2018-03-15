@@ -313,7 +313,7 @@
 			        min-width="120">
 			      </el-table-column>
 			      <el-table-column
-			        prop="proCode"
+			        prop="proName"
 			        label="批准产品"
 			        min-width="100">
 			      </el-table-column>
