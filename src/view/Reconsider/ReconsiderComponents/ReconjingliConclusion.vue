@@ -738,6 +738,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 				        		// 批准产品
 				        		if(res.data.proId){
 				        			//alert('lll');
+				        			this.proId = res.data.proId;
 					        		for(var i=0;i<this.products.length;i++){
 					        			if(res.data.proId == this.products[i].id){
 					        				this.proName = this.products[i].proName;
