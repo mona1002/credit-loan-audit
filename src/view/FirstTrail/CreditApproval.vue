@@ -128,14 +128,6 @@
             <!-- 回退主原因输入 02 -->
             <!-- 拒绝主原因选择 01 -->
             <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:10px;font-weight:bold;">*</span>
-            <el-form-item label="主原因：" class="item-column2">
-              <!-- <el-input v-model="mainReason"></el-input> -->
-              <!-- 改成后台获取   filter-method     visible-change 下拉框 出现/隐藏时触发-->
-              <el-select @change="selectChange" v-model="mainReason">
-                <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
-                </el-option>
-              </el-select>
-            </el-form-item>
             <!-- 拒绝主原因选择 01 -->
             <el-form-item label="主原因：" class="item-column2">
               <el-select @change="selectChange" v-model="mainReason">
