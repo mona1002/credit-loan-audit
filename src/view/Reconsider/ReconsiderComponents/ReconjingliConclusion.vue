@@ -313,7 +313,7 @@
 			        min-width="120">
 			      </el-table-column>
 			      <el-table-column
-			        prop="proCode"
+			        prop="proName"
 			        label="批准产品"
 			        min-width="100">
 			      </el-table-column>
@@ -714,6 +714,68 @@ import baseU from'../../../util/constant';
 			            this.$message.error(res.msg);
 			          }
 	            });
+		        //请求复议专员带过来的审批信息
+		        this.post('/creauditOpinion/queryCreauditOpinionObj',{
+		        	applyId: this.applyId
+		        }).then(res => {
+		        	console.log(res.data);
+		        	if(res.statusCode == 200){
+		        		// 核实收入
+		        		if(res.data.verIncome){
+		        			this.verIncome = this.formatNumber(res.data.verIncome,2,0);
+		        		}else{
+		        			this.verIncome = this.verIncome;
+		        		};
+		        		// 批准金额
+		        		if(res.data.ploanAmt){
+		        			this.ploanAmt = this.formatNumber(res.data.ploanAmt,2,0);
+		        		}else{
+		        			this.ploanAmt = this.ploanAmt;
+		        		};
+		        		// 批准产品
+		        		if(res.data.proId){
+			        		for(var i=0;i<this.products.length;i++){
+			        			if(res.data.proId == this.products[i].id){
+			        				this.proName = this.products[i].proName;
+			        			}
+			        		};
+			        		//批准期限[月]的列表
+			        		this.get('/credit/ploanTermByPro?proId='+res.data.proId).then(res => {
+						        console.log(res.data);
+						        if (res.statusCode == '200')
+						          this.ploanTerms = res.data;
+						    });
+		        		}else{
+		        			this.proName = this.proName;
+		        		};
+		        		//批准期限[月]
+		        		if(res.data.ploanTerm){
+		        			this.ploanTerm = res.data.ploanTerm;
+		        		}else{
+		        			this.ploanTerm = this.ploanTerm;
+		        		};
+		        		
+				        //审批结论数据
+				        //审批倍数
+				        if(res.data.appmult){
+				        	this.caculData.appmult = this.formatNumber(res.data.appmult,2,0);
+				        };
+				        //内部负债率
+				        if(res.data.inteDebitrate){
+				        	this.caculData.inteDebitrate = (res.data.inteDebitrate*100).toFixed(2)+"%";
+				        };
+				        //总负债率
+				        if(res.data.totalRate){
+				        	this.caculData.totalRate = (res.data.totalRate*100).toFixed(2)+"%";
+				        };
+				        //月还款额
+				        if(res.data.eachTermamt){
+				        	this.caculData.eachTermamt = this.formatNumber(res.data.eachTermamt,2,0);
+				        };
+				        //意见说明
+				        this.appConclusion = res.data.appConclusion;
+		        	}
+		        })
 			},
 			//审批提交按钮
 		    spsure(){
@@ -881,8 +943,19 @@ import baseU from'../../../util/constant';
 		    },
 			//根据产品 请求 月份数
 			proSlelecChange(val){
+				//批准金额、批准期限清空
+				this.ploanAmt = '';
+				this.ploanTerm = '';
+				//审批倍数、月还款额、内部负债率、总负债率 清空
+				this.caculData.appmult = '';
+				this.caculData.inteDebitrate = '';
+				this.caculData.totalRate = '';
+				this.caculData.eachTermamt = '';
+
 				console.log(val);
 				this.proId = val;
+				//console.log(this.products);
+				//console.log(this.products.length);
 				for(var i=0;i<this.products.length;i++){
 					if(this.products[i].id==val){
 						// 最大金额
@@ -905,6 +978,7 @@ import baseU from'../../../util/constant';
 			// 批准期限更改
 		    ploanTermChange: function(val) {
 		      console.log('批准期限更改!');
+		      console.log(val);
 		      // 批准期限
 		      this.ploanTerm = val.appDuration;
 		      // 综合费率
@@ -1234,8 +1308,9 @@ import baseU from'../../../util/constant';
 		    proId: function() {
 		      console.log('产品id');
 		      console.log(this.proId.length);
-		      //console.log(this.verIncome+'###'+this.proId.length+'###'+this.ploanTerm+"###"+this.ploanAmt);
-		      if (this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.verIncome.length > 0 && this.eachTermamt.length > 0)
+		      console.log(this.verIncome+'###'+this.proId.length+'###'+this.ploanTerm+"###"+this.ploanAmt);
+		      //月核实收入+产品id+批准期限+批准金额[元]
+		      if (this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.verIncome.length > 0)
 		        this.calculateByAuditInfo();
 		    },
 		}
