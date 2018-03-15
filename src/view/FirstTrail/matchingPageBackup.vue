@@ -51,7 +51,7 @@
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div style="position:absolute; left:0; top:0;" :id='msg'>
-        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="this.imgBaseUrl+val.imagePath" v-if="key==smallPicInd"
+        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd"
         />
       </div>
     </div>

@@ -56,9 +56,9 @@
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative;" :id='msg'>
         <!-- <div id="aaaaa"> </div> -->
-        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" style="width:auto;height:auto;" :key="key" :src="this.imgBaseUrl+val.imagePath"
+        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath"
           v-if="key==smallPicInd" />
-        <!-- <img ref="Big_pic_ref" v-for="(val,key) in imgPathDetail" style="width:auto;height:auto;" :key="key" :src="this.imgBaseUrl+val.imagePath"
+        <!-- <img ref="Big_pic_ref" v-for="(val,key) in imgPathDetail" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath"
           />  -->
         <!-- v-if="key==smallPicInd" -->
         <!-- <img ref="Big_pic_ref" id='abcd'  style="width:auto;height:auto;" :src="uurl" /> -->
@@ -79,7 +79,7 @@
       </p>
       <div class="small_pic_content">
         <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
-          <img class="Small_pic" :src="this.imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
+          <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
             ref="small_pic_ref" />
           <p> {{val.arcSubType}} </p>
         </figure>
@@ -376,12 +376,12 @@
       defaultBigPicCss() {
         this.$nextTick(() => {
           console.log("图片片片")
-          console.log(this.$refs.Big_pic_ref)
-          console.log(this.$refs.Big_pic_ref[0].offsetHeight)
-          console.log('---------------------------------------')
-          console.log(this.$refs.Big_pic_ref[0].height)
-          console.log(this.$refs.Big_pic_ref[0].width)
-          console.log('---------------------------------------')
+          // console.log(this.$refs.Big_pic_ref)
+          // console.log(this.$refs.Big_pic_ref[0].offsetHeight)
+          // console.log('---------------------------------------')
+          // console.log(this.$refs.Big_pic_ref[0].height)
+          // console.log(this.$refs.Big_pic_ref[0].width)
+          // console.log('---------------------------------------')
           // console.log(document.defaultView.getComputedStyle(this.$refs.Big_pic_ref[0]).height)
           // console.log(document.defaultView.getComputedStyle(this.$refs.Big_pic_ref[0],null).height)
           // ------------------------------------------------------------

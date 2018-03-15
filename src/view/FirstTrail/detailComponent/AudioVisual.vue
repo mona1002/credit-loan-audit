@@ -57,7 +57,7 @@
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative; left:0; top:0;" id='FirstAud'>
-        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src=" this.imgBaseUrl+val.imagePath" v-if="key==smallPicInd"
+        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd"
         />
       </div>
     </div>
@@ -76,7 +76,7 @@
       </p>
       <div class="small_pic_content">
         <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
-          <img class="Small_pic" :src=" this.imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
+          <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
             ref="small_pic_ref" />
           <p>{{val.arcSubType}} </p>
         </figure>
@@ -84,7 +84,7 @@
         <!-- <div v-for="(val,index) in litimg" :key="index" style="background:black; border:4px solid red;float:left;">
           <figure v-for="(value,ind) in val" :key="ind" class="small_pic_figure" style="float:left;background:blue;border:5px solid yellow;"
             @click='ttttt(index,ind)'>
-            <img class="Small_pic" :src=" this.imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
+            <img class="Small_pic" :src=" imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
             ref="small_pic_ref" />
           <p>{{val.arcSubType}} </p>
           </figure>
@@ -97,7 +97,7 @@
 </template>
 
 <script>
-import imgUrl from'../../../util/ConstantSocialAndPn../../../../static/json/img.json'
+import imgUrl from'../../../util/ConstantSocialAndPn'
   export default {
     data() {
       return {
@@ -158,8 +158,8 @@ import imgUrl from'../../../util/ConstantSocialAndPn../../../../static/json/img.
         // 二级（子）节点
         console.log("获取子节点");
         this.post("/productArchive/getProductArchiveChildList", {
-          // applyId: this.localInf.applyId,
-          applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
+          applyId: this.localInf.applyId,
+          // applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
           pid: id
         }).then(res => {
           if (res.statusCode == 200) {
@@ -368,21 +368,21 @@ import imgUrl from'../../../util/ConstantSocialAndPn../../../../static/json/img.
     },
     mounted() {
       this.odivMove("FirstAud");
-      // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      // if (this.judgeFlag.flag == '01') {
-      //   this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
-      // } else if (this.judgeFlag.flag == '02') {
-      //   this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-      // } else if (this.judgeFlag.flag == '03') {
-      //   this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
-      // } else if (this.judgeFlag.flag == '04') {
-      //   this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
-      // }
+      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      if (this.judgeFlag.flag == '01') {
+        this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
+      } else if (this.judgeFlag.flag == '02') {
+        this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
+      } else if (this.judgeFlag.flag == '03') {
+        this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
+      } else if (this.judgeFlag.flag == '04') {
+        this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
+      }
         this.imgBaseUrl=imgUrl.imgBaseUrl;
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
-        // applyId: this.localInf.applyId,
-        applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
+        applyId: this.localInf.applyId,
+        // applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
       }).then(res => {
         if (res.statusCode == 200) {
           this.ListParent = res.data;
