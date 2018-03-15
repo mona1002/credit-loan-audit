@@ -9,7 +9,7 @@
     <div class="AudioVisual_List" ref="AudioVisual_List_ref" v-show="showListDiv">
       <p>{{this.mwidth}}
       </p>
-      {{mheight}}
+      <!-- {{imgUrl}} -->
       <!-- 折叠面板title -->
       <img class="hidBtn" src="../../../../static/images/Shape Copy.png" @click="hid">
       <!-- 折叠面板-手风琴List -->
@@ -56,9 +56,9 @@
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative;" :id='msg'>
         <!-- <div id="aaaaa"> </div> -->
-        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" style="width:auto;height:auto;" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath"
+        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" style="width:auto;height:auto;" :key="key" :src="this.imgBaseUrl+val.imagePath"
           v-if="key==smallPicInd" />
-        <!-- <img ref="Big_pic_ref" v-for="(val,key) in imgPathDetail" style="width:auto;height:auto;" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath"
+        <!-- <img ref="Big_pic_ref" v-for="(val,key) in imgPathDetail" style="width:auto;height:auto;" :key="key" :src="this.imgBaseUrl+val.imagePath"
           />  -->
         <!-- v-if="key==smallPicInd" -->
         <!-- <img ref="Big_pic_ref" id='abcd'  style="width:auto;height:auto;" :src="uurl" /> -->
@@ -79,7 +79,7 @@
       </p>
       <div class="small_pic_content">
         <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
-          <img class="Small_pic" :src="'http://10.1.26.6:8080'+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
+          <img class="Small_pic" :src="this.imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
             ref="small_pic_ref" />
           <p> {{val.arcSubType}} </p>
         </figure>
@@ -88,7 +88,7 @@
     <!--=================================  查询弹出层 ================================= -->
     <div v-show="dataa" class="posi">
       <!-- 折叠 -->
-      <p>内匹配客户查询列表
+      <p>内部匹配客户查询列表
         <i class="el-icon-close" style="color:white;fontSize:18px;right:13px;top:16px" @click="closeAlertSearch"></i>
       </p>
       <div class="posi_content">
@@ -136,7 +136,7 @@
 </template>
 
 <script>
-  // import {drag} from '../../../../static/js/public'
+  import imgUrl  from '../../../util/ConstantSocialAndPn'
   export default {
     data() {
       return {
@@ -148,7 +148,7 @@
         opendImg: [],
         closedImg: [],
         uurl: '',
-        imgBaseUrl: 'http://10.1.26.6:8080',
+        imgBaseUrl: '',
         localInf: [], //初始化的时候，根据传进来的applyId获取初始化数据
         showListDiv: true,
         show: true,
@@ -443,7 +443,6 @@
         }
       },
       odivMove(id) {
-// console.log($event)
         var disX = 0;
         var disY = 0;
         var oDiv = document.getElementById(id);
@@ -519,8 +518,7 @@
       } else if (this.judgeFlag.flag == '04') {
         this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
       }
-      console.log( this.judgeFlag)
-      console.log(this.localInf )
+      this.imgBaseUrl=imgUrl.imgBaseUrl;
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.applyId,

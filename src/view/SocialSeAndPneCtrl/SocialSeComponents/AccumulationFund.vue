@@ -308,7 +308,7 @@
       } else if (this.judgeFlag.flag == '06') {
         this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议经理
       }
-      this.post(baseurl + "/rmMxSecFundQryAction!notSession_getMxFundInfo.action", {
+      this.post(baseurl.BaseUrl + "/rmMxSecFundQryAction!notSession_getMxFundInfo.action", {
         custName: this.localInf.custName,
         certCode: this.localInf.certCode
       }).then(res => {

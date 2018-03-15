@@ -51,7 +51,7 @@
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div style="position:absolute; left:0; top:0;" :id='msg'>
-        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
+        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="this.imgBaseUrl+val.imagePath" v-if="key==smallPicInd"
         />
       </div>
     </div>
@@ -70,7 +70,7 @@
       </p>
       <div class="small_pic_content">
         <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
-          <img class="Small_pic" :src="'http://10.1.26.6:8080'+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
+          <img class="Small_pic" :src="this.imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
             ref="small_pic_ref" />
           <p> {{val.arcSubType}} </p>
         </figure>
@@ -79,7 +79,7 @@
     <!--=================================  查询弹出层 ================================= -->
     <div v-show="dataa" class="posi">
       <!-- 折叠 -->
-      <p>内匹配客户查询列表
+      <p>内部匹配客户查询列表
         <i class="el-icon-close" style="color:white;fontSize:18px;right:13px;top:16px" @click="closeAlertSearch"></i>
       </p>
       <div class="posi_content">
@@ -127,11 +127,13 @@
 </template>
 
 <script>
+import imgUrl from'../../util/ConstantSocialAndPn'
   export default {
     data() {
       return {
         // props:[smallPicDivClose],
         // picData: [],
+         imgBaseUrl:'',
         perfBtn: false,
         judgeFlag: '',
         opendImg: [true, true, true, true],
@@ -428,6 +430,7 @@
       // }
       // this.odivMove(this.msg);
       this.localInf = JSON.parse(localStorage.getItem("internalObj")) //初审-匹配查看
+     this.imgBaseUrl=imgUrl.imgBaseUrl; 
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.matchApplyId,
         // applyId: this.localInf.applyId,
