@@ -15,12 +15,8 @@ if (host === productionEnv) {
   host = "nyph-credit.nuoyuan.com.cn";
   postfix = '/ptopCredit/';
 } else if (host === releaseEnv) {
-<<<<<<< HEAD
-  host = "http://120.26.131.205:8081/ptopCredit/rm";
-=======
   host = "120.26.131.205:8081";
   postfix = '/ptopCredit/';
->>>>>>> dev
 } else if (host === testEnv) {
   host = "10.1.26.6:8080";
   testU="http://10.1.26.10:8080/baseCredit/rm" //本地
