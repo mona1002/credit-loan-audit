@@ -1860,7 +1860,7 @@ export default {
     },
     //大数据风控
     tobigData() {
-      this.post(baseurl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
+      this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
         applyId: this.applyId
       }).then(res => {
         //console.log(res.data);
