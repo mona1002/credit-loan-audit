@@ -79,7 +79,7 @@
     <!--=================================  查询弹出层 ================================= -->
     <div v-show="dataa" class="posi">
       <!-- 折叠 -->
-      <p>内匹配客户查询列表
+      <p>内部匹配客户查询列表
         <i class="el-icon-close" style="color:white;fontSize:18px;right:13px;top:16px" @click="closeAlertSearch"></i>
       </p>
       <div class="posi_content">
