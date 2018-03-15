@@ -1203,8 +1203,7 @@
       } else if (this.judgeFlag.flag == '06') {
         this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议经理
       }
-
-      this.post(baseurl + '/rmCreAuditOpinionAction!notSession_getBrTabInfo.action', {
+      this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrTabInfo.action', {
         // applyId: 'b14455f1-5531-4cf2-883b-f6dc0049e3bb'
         applyId: this.localInf.applyId
       }).then(res => {
