@@ -1028,29 +1028,14 @@ export default {
       /* 请求 
               产品
             */
-      // 产品
-      this.post(userBaseUrl.baseUrl_user + 'remote/product/getProductForUser', {
-      // this.post('http://10.1.26.200:20717/remote/product/getProductForUser', {
-        data: {
-          "orgId": "f542358d-14c9-4c63-a299-39d3654751a2",
-          "validFlag": "1" // 有效标志
-        }
-      }).then(res => {
-        if (res.statusCode == '200') {
-          // 假如没有  核实可接受最高每期还款额 
-          // if(res.)  提交的时候也要判断
-          // this.$message("提示：请完善信审表中可承受的月还款金额");
-          this.products = res.data;
-          console.log('请求完产品了')
-          if (res.statusCode == '200') {
-            if (this.judgeFlag == '02') { // 终审
-              this.queryCreauditOpinionObj();
-            }
-          }
-        }
-      })
-      // this.get('/credit/product').then(res => {
-      //   console.log(res);
+      // 产品  调用户
+      // this.post(userBaseUrl.baseUrl_user + 'remote/product/getProductForUser', {
+      // // this.post('http://10.1.26.200:20717/remote/product/getProductForUser', {
+      //   data: {
+      //     "orgId": "f542358d-14c9-4c63-a299-39d3654751a2",
+      //     "validFlag": "1" // 有效标志
+      //   }
+      // }).then(res => {
       //   if (res.statusCode == '200') {
       //     // 假如没有  核实可接受最高每期还款额 
       //     // if(res.)  提交的时候也要判断
@@ -1064,6 +1049,22 @@ export default {
       //     }
       //   }
       // })
+
+      this.get('/credit/product').then(res => {
+        console.log(res);
+        if (res.statusCode == '200') {
+          // 假如没有  核实可接受最高每期还款额 
+          // if(res.)  提交的时候也要判断
+          // this.$message("提示：请完善信审表中可承受的月还款金额");
+          this.products = res.data;
+          console.log('请求完产品了')
+          if (res.statusCode == '200') {
+            if (this.judgeFlag == '02') { // 终审
+              this.queryCreauditOpinionObj();
+            }
+          }
+        }
+      })
     },
     // 根据id 请求信息  终审 - 审批
     queryCreauditOpinionObj() {
@@ -1477,6 +1478,14 @@ export default {
         // 更改显示
         this.shenPiShow = false;
         console.log(res);
+        // 判断 500
+        if(res.statusCode == '500'){
+          this.$message({
+            message: '网络异常,请重试!',
+            type: 'warning'
+          })
+          return;
+        }
         if (res.statusCode != '200') {
           this.$message({
             message: res.msg,
