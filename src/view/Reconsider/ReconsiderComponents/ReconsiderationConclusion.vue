@@ -479,7 +479,7 @@
 </template>
 <script type="text/javascript">
  import baseurl from '../../../util/ConstantSocialAndPn';
- import baseU from'../../../util/constant';
+ //import baseU from'../../../util/constant';
 	export default{
 		data(){
 			return{
@@ -700,7 +700,7 @@
 			        }
 		          });
 		        //请求产品
-		        this.post(baseU.path+'/remote/product/getProductForUser',{
+		        /*this.post(baseU.path+'/remote/product/getProductForUser',{
 		           data:{
 		              orgId:this.orgId,
 		              validFlag:'1'
@@ -711,7 +711,12 @@
 					}else {
 			            this.$message.error(res.msg);
 			          }
-	            });
+	            });*/
+	            this.get("/credit/product").then(res => {
+					if(res.statusCode == 200){
+						this.productNames = res.data;
+					}
+				});
 			},
 			//审批提交按钮
 		    spsure(){
