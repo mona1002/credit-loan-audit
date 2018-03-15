@@ -284,7 +284,7 @@
   </div>
 </template>
 <script>
-import baseurl from '../.././util/ConstantSocialAndPn';
+import baseurl from '../../util/ConstantSocialAndPn';
 export default {
   data() {
     return {
