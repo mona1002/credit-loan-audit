@@ -111,7 +111,7 @@
           <div id="responseParams" class="easyui-panel" data-options="title:'报告信息',border:false,collapsible:true">
             <table id="t_1" class="table">
               <tr>
-                <th style="width:15%;text-align:left;padding:10px 3px;">用户及账户基本信息</th>
+                <th style="width:15%;text-align:left;padding:10px 19px;">用户及账户基本信息</th>
                 <td style="width:15%"></td>
                 <th style="width:20%"></th>
                 <td style="width:12%"></td>
@@ -121,7 +121,7 @@
             </table>
             <table id="t_2" class="table">
               <tr>
-                <th style="width:15%;text-align:left;padding:10px 3px;">用户基本信息效验</th>
+                <th style="width:15%;text-align:left;padding:10px 19px;">用户基本信息效验</th>
                 <td style="width:15%"></td>
                 <th style="width:20%"></th>
                 <td style="width:12%"></td>
@@ -131,7 +131,7 @@
             </table>
             <table id="t_3" class="table">
               <tr>
-                <th style="width:15%;text-align:left;padding:10px 3px;">账户基本信息</th>
+                <th style="width:15%;text-align:left;padding:10px 19px;">账户基本信息</th>
                 <td style="width:15%"></td>
                 <th style="width:20%"></th>
                 <td style="width:12%"></td>
@@ -141,7 +141,7 @@
             </table>
             <table id="t_4" class="table">
               <tr>
-                <th style="text-align:left;width:15%;padding:10px 3px;">缴纳信息</th>
+                <th style="text-align:left;width:15%;padding:10px 19px;">缴纳信息</th>
                 <td style="width:15%"></td>
                 <th style="width:20%"></th>
                 <td style="width:12%"></td>
@@ -151,7 +151,7 @@
             </table>
             <table id="t_5" class="table">
               <tr>
-                <th style="text-align:left;width:15%;padding:10px 3px;">还款信息</th>
+                <th style="text-align:left;width:15%;padding:10px 19px;">还款信息</th>
                 <td style="width:15%"></td>
                 <th style="width:20%"></th>
                 <td style="width:12%"></td>

@@ -479,7 +479,7 @@
 </template>
 <script type="text/javascript">
 import baseurl from '../../../util/ConstantSocialAndPn';
-import baseU from'../../../util/ConstantProduct';
+import baseU from'../../../util/constant';
 	export default{
 		data(){
 			return{
@@ -702,7 +702,7 @@ import baseU from'../../../util/ConstantProduct';
 			        }
 		        });
 		        //请求产品
-		        this.post(baseU,{
+		        this.post(baseU.path+'/remote/product/getProductForUser',{
 		           data:{
 		              orgId:this.orgId,
 		              validFlag:'1'

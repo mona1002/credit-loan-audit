@@ -78,7 +78,7 @@
       </li>
       <!-- item-column3-2 -->
       <li class="item-column1 item-column3-2 risk-select" v-show="auditResult!='02' && riskSection.length>1">
-        <!-- <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:5px;font-weight:bold;">*</span> -->
+        <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:10px;font-weight:bold;" v-show="auditResult=='00'&& judgeFlag=='04'">*</span>
         <div class="left-title">
           风险项：
         </div>
@@ -92,7 +92,7 @@
         </div>
       </li>
       <li class="item-column1 item-column3-2" v-show="auditResult!='02' && riskSection.length<2">
-        <!-- <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:5px;font-weight:bold;">*</span> -->
+        <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:10px;font-weight:bold;" v-show="auditResult=='00'&& judgeFlag=='04'">*</span>
         <div class="left-title">
           风险项：
         </div>
@@ -380,7 +380,7 @@ export default {
     }
   },
   mounted() {
-    
+
 
 
 
@@ -480,6 +480,9 @@ export default {
         // 请求风险项
         // this.getRiskItems();
       }
+      // 请求风险项
+      this.getRiskItems();
+
     } else if (this.judgeFlag == '04') {
       // 取出 流程模版id  processTemplateId
       this.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
@@ -528,7 +531,7 @@ export default {
         this.queryCreauditOpinionObj();
       }
       // 请求风险项
-      // this.getRiskItems();
+      this.getRiskItems();
 
     }
 
@@ -685,11 +688,22 @@ export default {
         }
       }
 
+      // 主管  黑名单 , 风险项必填
+      if (this.auditResult == '00' && this.judgeFlag == '04') {
+        if (!this.riskSection.length > 0) {
+
+          this.$message({
+            showClose: true,
+            message: '请选择风险项!',
+            type: 'warning'
+          });
+          return;
+        }
+      }
 
       console.log('审批结论', this.auditResult)
-      console.log(this.auditResult);
       // 处理风险项
-      if (this.auditResult != '02') {
+      if (this.auditResult != '02' || this.auditResult != '01') {
 
         if (this.riskSection.length > 0) {
           console.log(this.riskSection);
@@ -712,6 +726,8 @@ export default {
           console.log(this.riskSectionArr)
           // return;
         }
+
+
 
 
         console.log('进入信息化')
@@ -1422,23 +1438,6 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 折叠面板头部背景色和icon */
 
 .approval-colun .icon_hat {
@@ -1449,23 +1448,6 @@ export default {
 .approval-colun .headFont {
   font-size: 16px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1484,23 +1466,6 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 两列 */
 
 .approval-colun .item-column2 {
@@ -1508,23 +1473,6 @@ export default {
   float: left;
   margin: 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1554,23 +1502,6 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 3列 空位 */
 
 .approval-colun .item-column3-null {
@@ -1585,23 +1516,6 @@ export default {
   height: 30px;
   line-height: 30px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1626,23 +1540,6 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 按钮集合控件 */
 
 .approval-colun .btn-div {
@@ -1650,23 +1547,6 @@ export default {
   width: 80%;
   float: left;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1689,23 +1569,6 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*回退*/
 
 .approval-colun .el-icon-check-back {
@@ -1718,23 +1581,6 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1757,23 +1603,6 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*放弃*/
 
 .approval-colun .el-icon-check-giveup {
@@ -1786,23 +1615,6 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1825,23 +1637,6 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*流程轨迹*/
 
 .approval-colun .el-icon-check-lcgj {
@@ -1859,23 +1654,6 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 反欺诈 审批结论 - btn*/
 
 .approval-colun .credit-btn {
@@ -1885,23 +1663,6 @@ export default {
   border: none;
   padding-top: 0px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1932,23 +1693,6 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1998,45 +1742,11 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* textarea */
 
 .approval-colun .back-form .back-form-li .el-textarea {
   width: 80%;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2063,23 +1773,6 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 审批 表单 */
 
 .approval-colun .appro-form {
@@ -2097,23 +1790,6 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*.approval-colun .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -2121,23 +1797,6 @@ export default {
 .approval-colun .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2175,45 +1834,11 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 反欺诈 -- 审批结论 */
 
 .approval-colun .form-ul {
   padding-left: 30px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2247,45 +1872,11 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 审批 label*/
 
 .approval-colun .appro-form .back-form-edit-li .el-form-item__label {
   width: 120px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2305,45 +1896,11 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 两行文字 样式 */
 
 .approval-colun .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2364,23 +1921,6 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 详细 信息按钮*/
 
 .approval-colun .btn-detail {
@@ -2389,23 +1929,6 @@ export default {
   margin-top: 35px;
   margin-left: 10px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2429,23 +1952,6 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 分页 */
 
 .approval-colun .tool-bar {
@@ -2458,45 +1964,11 @@ export default {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 隐藏分页 */
 
 .approval-colun .el-pagination__jump {
   display: none;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2580,9 +2052,6 @@ export default {
 
 
 
-
-
-
 /*大数据风控*/
 
 .approval-colun .el-icon-check-big-data {
@@ -2612,6 +2081,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 

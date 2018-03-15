@@ -36,7 +36,7 @@
       <el-button icon="el-icon-check-reject" class="credit-btn" v-show="judgeFlag == '01' && jujueBtnShow" @click="coverFn('01')">拒绝</el-button>
       <el-button icon="el-icon-check-reject" class="credit-btn" v-show="judgeFlag!='01'" @click="coverFn('01')">拒绝</el-button>
       <el-button icon="el-icon-check-giveup" class="credit-btn" @click="coverFn('07')">放弃</el-button>
-      <el-button icon="el-icon-check-appro" class="credit-btn" v-show="shenPiBtnShow" @click="coverFn('03')">审批</el-button>
+      <el-button icon="el-icon-check-appro" class="credit-btn" @click="coverFn('03')">审批</el-button>
       <el-button icon="el-icon-check-start" class="credit-btn" @click="coverFn('fqz')">发起反欺诈</el-button>
       <el-button icon="el-icon-check-spjl" class="credit-btn" @click="coverFn('spjl')">审批结论轨迹</el-button>
       <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('lcgj')">流程轨迹</el-button>
@@ -504,7 +504,7 @@
 <script>
 import baseurl from '../.././util/ConstantSocialAndPn';
 // 用户接口
-import userBaseUrl from '../.././util/constantUser';
+import userBaseUrl from '../.././util/constant';
 export default {
   data() {
     return {
@@ -1029,8 +1029,8 @@ export default {
               产品
             */
       // 产品
-      // this.post(userBaseUrl + 'base/product/getProductForUser', {
-      this.post('http://10.1.26.200:20717/remote/product/getProductForUser', {
+      this.post(userBaseUrl.baseUrl_user + 'remote/product/getProductForUser', {
+      // this.post('http://10.1.26.200:20717/remote/product/getProductForUser', {
         data: {
           "orgId": "f542358d-14c9-4c63-a299-39d3654751a2",
           "validFlag": "1" // 有效标志
@@ -1437,8 +1437,8 @@ export default {
         console.log('==========================================')
         ploanAmt2 = Number(this.ploanAmt)
       }
-      // this.post('/creauditOpinion/add', {
-      this.post("http://10.1.26.47:8080/riskManagement/creauditOpinion/add", {
+      this.post('/creauditOpinion/add', {
+      // this.post("http://10.1.26.47:8080/riskManagement/creauditOpinion/add", {
         applyId: this.applyId,
         auditType: this.judgeFlag == '01' ? '00' : '01',
         proCode: this.proCode,
