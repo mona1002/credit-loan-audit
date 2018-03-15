@@ -13,7 +13,7 @@ var host = location.hostname,
 if (host === productionEnv) {
   host = "http://nyph-credit.nuoyuan.com.cn/ptopCredit/";
 } else if (host === releaseEnv) {
-  host = "http://120.26.131.205:8081/ptopCredit/";
+  host = "http://120.26.131.205:8081/ptopCredit/rm";
 } else if (host === testEnv) {
   host = "http://10.1.26.6:8080/ptopCredit/rm";
   // host="http://10.1.26.10:8080/baseCredit/rm" //本地
