@@ -56,7 +56,7 @@
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative; left:0; top:0;" id='MAntiFirstAud'>
-        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
+        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="this.imgBaseUrl+val.imagePath" v-if="key==smallPicInd"
         />
       </div>
     </div>
@@ -75,7 +75,7 @@
       </p>
       <div class="small_pic_content">
         <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
-          <img class="Small_pic" :src="'http://10.1.26.6:8080'+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
+          <img class="Small_pic" :src="this.imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
             ref="small_pic_ref" />
           <p>{{val.arcSubType}} </p>
         </figure>
@@ -86,10 +86,12 @@
 </template>
 
 <script>
+import imgUrl  from '../../../util/ConstantSocialAndPn'
   export default {
     data() {
       return {
         // picData: [],
+        imgBaseUrl:'',
         perfBtn: false,
         MatchInf: '',
         opendImg: [],
@@ -341,6 +343,7 @@
       // } else if (this.judgeFlag.flag == '04') {
       //   this.MatchInf = JSON.parse(localStorage.getItem("AntiManagerinternalObj")); //反欺诈主管-匹配查看
       // }
+        this.imgBaseUrl=imgUrl.imgBaseUrl;
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.MatchInf.matchApplyId,

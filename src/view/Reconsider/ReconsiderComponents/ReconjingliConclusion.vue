@@ -1256,7 +1256,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 		    },
 		    //大数据风控
 		    tobigData(){
-		    	this.post(baseurl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
+		    	this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
 		        	applyId: this.applyId
 			    }).then(res => {
 			      	//console.log(res.data);
@@ -1273,7 +1273,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 			},
 		    //社保/公积金
 		    Social(){
-		    	this.post(baseurl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action',{
+		    	this.post(baseurl.BaseUrl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action',{
 					certCode:this.datas.certCode,
 					custName:this.datas.custName
 				}).then(res =>{
