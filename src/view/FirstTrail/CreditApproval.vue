@@ -495,10 +495,6 @@
 </template>
 <script>
 import baseurl from '../../util/ConstantSocialAndPn';
-<<<<<<< HEAD
-=======
-
->>>>>>> 3be02b9f9100762ba30edcc4f8ead231cfd3dc4b
 // 用户接口
 // import userBaseUrl from '../.././util/constant';
 export default {
