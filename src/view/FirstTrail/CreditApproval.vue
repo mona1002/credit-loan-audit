@@ -497,7 +497,7 @@
 import baseurl from '../../util/ConstantSocialAndPn';
 
 // 用户接口
-import userBaseUrl from '../.././util/constant';
+// import userBaseUrl from '../.././util/constant';
 export default {
   data() {
     return {
