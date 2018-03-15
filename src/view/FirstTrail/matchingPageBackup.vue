@@ -79,7 +79,7 @@
     <!--=================================  查询弹出层 ================================= -->
     <div v-show="dataa" class="posi">
       <!-- 折叠 -->
-      <p>内匹配客户查询列表
+      <p>内部匹配客户查询列表
         <i class="el-icon-close" style="color:white;fontSize:18px;right:13px;top:16px" @click="closeAlertSearch"></i>
       </p>
       <div class="posi_content">
@@ -94,7 +94,7 @@
                 </el-table-column>
                 <el-table-column property="matchApplyDate" label="申请时间">
                 </el-table-column>
-                <el-table-column prop="matchApplyDate" label="业务状态">
+                <el-table-column prop="matchApplyStateTxt" label="业务状态">
                 </el-table-column>
               </el-table>
             </div>
@@ -110,7 +110,7 @@
                 </el-table-column>
                 <el-table-column property="matchApplyDate" label="申请时间">
                 </el-table-column>
-                <el-table-column prop="matchApplyDate" label="业务状态">
+                <el-table-column prop="matchApplyStateTxt" label="业务状态">
                 </el-table-column>
               </el-table>
             </div>
