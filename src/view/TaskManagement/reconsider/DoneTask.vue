@@ -63,7 +63,7 @@
       </div>
       <div class="table_wrap">
         <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%"  height="100%" border>
+        <el-table :data="tableData" style="width: 100%" height="100%" border>
           <el-table-column type="index" align='center' label=序号 width="45">
           </el-table-column>
           <el-table-column label="紧急程度" align='center' min-width="70">
@@ -101,7 +101,7 @@
 </template>
 <script>
   import myHead from '../../header.vue';
-  import baseU from'../../../util/constant';
+  import baseU from '../../../util/constant';
   export default {
     data() {
       return {
@@ -152,11 +152,11 @@
       }
     },
     methods: {
-      DateF(val) { 
-        val?val = val.getFullYear() + '-' + (val.getMonth() + 1) + '-' + val.getDate():'';
+      DateF(val) {
+        val ? val = val.getFullYear() + '-' + (val.getMonth() + 1) + '-' + val.getDate() : '';
         return val;
       },
-      num(val,el) {
+      num(val, el) {
         switch (el) {
           case 'code':
             isNaN(val) ? this.params.applySubNo = val = '' : this.params.applySubNo = val;
@@ -168,16 +168,16 @@
       },
       handleSizeChange(val) {
         // console.log(`每页 ${val} 条`);
-         this.params.pageSize = val;
-         this.params.pageNum=1;
+        this.params.pageSize = val;
+        this.params.pageNum = 1;
         this.getInf(this.params);
       },
       handleCurrentChange(val) {
         // console.log(`当前页: ${val}`);
-          this.params.pageNum = val;
-           this.getInf(this.params);
+        this.params.pageNum = val;
+        this.getInf(this.params);
       },
-      Rreset() { 
+      Rreset() {
         this.params.applySubNo = '';
         this.params.custName_la = '';
         this.params.certCode = '';
@@ -195,11 +195,11 @@
         this.params.appDate_le = this.DateF(this.applyData[1]);
         this.params.completeTime_ge = this.DateF(this.dealDate[0]);
         this.params.completeTime_le = this.DateF(this.dealDate[1]);
- this.params.pageNum=this.currentPage =1;
+        this.params.pageNum = this.currentPage = 1;
         this.getInf(this.params);
       },
 
-      getInf(pam) { 
+      getInf(pam) {
         this.post("/workFlowTaskQuery/getTaskToDoList", pam).then(res => {
           if (res.statusCode == 200 && res.data.taskDetailList != null) {
             this.tableData = res.data.taskDetailList;
@@ -210,21 +210,16 @@
           }
         });
       },
-      getProducts() { 
-          this.post(baseU.path+'/remote/product/getProductForUser',{
-           data:{
-              orgId:this.userInf.orgId,
-            validFlag:'1'
-           }
-          }).then(res => {
+      getProducts() {
+        this.get( "/credit/product").then(res => {
           if (res.statusCode == 200) {
             this.production = res.data
-          }else {
+          } else {
             this.$message.error(res.msg);
           }
-        });
+        })
       },
-      changeColor() { 
+      changeColor() {
         for (var i = 0; i < this.tableData.length; i++) {
           this.tableData[i].completeTime * 1 >= 48 ? this.tableData[i].isEmer = true : this.tableData[i].isEmer = false;
           if (this.tableData[i].emerType == '00') {
@@ -233,7 +228,7 @@
             this.tableData[i].emerType = "免费加急";
           } else if (this.tableData[i].emerType == '02') {
             this.tableData[i].emerType = "收费加急";
-          }; 
+          };
         }
       }
     },

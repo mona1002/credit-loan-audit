@@ -35,7 +35,7 @@
                     var strs = str.split('&');//将得到的参数分隔成数组[]
                         if(strs[0].split('=')[1] == "'creditApp_firstTrial'" && strs[1].split('=')[1] == "'01'"){
                             var row ={
-                                "processTemplateId":"",
+                                "processTemplateId":"creditApp",
                                 "taskStatus":"01",
                                 "taskNodeName":"creditApp_firstTrial"
                             };
@@ -48,7 +48,7 @@
                         //终审一级
                         if(strs[0].split('=')[1] == "'creditApp_finalTrial_one'" && strs[1].split('=')[1] == "'02'"){
                             var row ={
-                                "processTemplateId":"",
+                                "processTemplateId":"creditApp",
                                 "taskStatus":"01",
                                 "taskNodeName":"creditApp_finalTrial_one"
                             };
@@ -61,7 +61,7 @@
                         //终审二级
                         if(strs[0].split('=')[1] == "'creditApp_finalTrial_two'" && strs[1].split('=')[1] == "'02'"){
                             var row ={
-                                "processTemplateId":"",
+                                "processTemplateId":"creditApp",
                                 "taskStatus":"01",
                                 "taskNodeName":"creditApp_finalTrial_two"
                             };
@@ -74,7 +74,7 @@
                         //信审经理
                         if(strs[0].split('=')[1] == "'creditApp_finalTrial_three'" && strs[1].split('=')[1] == "'02'"){
                             var row ={
-                                "processTemplateId":"",
+                                "processTemplateId":"creditApp",
                                 "taskStatus":"01",
                                 "taskNodeName":"creditApp_finalTrial_three"
                             };
@@ -87,7 +87,7 @@
                         //信审高级经理
                         if(strs[0].split('=')[1] == "'creditApp_finalTrial_four'" && strs[1].split('=')[1] == "'02'"){
                             var row ={
-                                "processTemplateId":"",
+                                "processTemplateId":"creditApp",
                                 "taskStatus":"01",
                                 "taskNodeName":"creditApp_finalTrial_four"
                             };
@@ -100,7 +100,7 @@
                         //信审总监
                         if(strs[0].split('=')[1] == "'creditApp_finalTrial_five'" && strs[1].split('=')[1] == "'02'"){
                             var row ={
-                                "processTemplateId":"",
+                                "processTemplateId":"creditApp",
                                 "taskStatus":"01",
                                 "taskNodeName":"creditApp_finalTrial_five"
                             };

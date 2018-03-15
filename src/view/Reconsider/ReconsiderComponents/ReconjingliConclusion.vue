@@ -479,7 +479,7 @@
 </template>
 <script type="text/javascript">
 import baseurl from '../../../util/ConstantSocialAndPn';
-import baseU from'../../../util/constant';
+//import baseU from'../../../util/constant';
 	export default{
 		data(){
 			return{
@@ -702,7 +702,7 @@ import baseU from'../../../util/constant';
 			        }
 		        });
 		        //请求产品
-		        this.post(baseU.path+'/remote/product/getProductForUser',{
+		        /*this.post(baseU.path+'/remote/product/getProductForUser',{
 		           data:{
 		              orgId:this.orgId,
 		              validFlag:'1'
@@ -713,7 +713,12 @@ import baseU from'../../../util/constant';
 					}else {
 			            this.$message.error(res.msg);
 			          }
-	            });
+	            });*/
+	            this.get("/credit/product").then(res => {
+					if(res.statusCode == 200){
+						this.productNames = res.data;
+					}
+				});
 		        //请求复议专员带过来的审批信息
 		        this.post('/creauditOpinion/queryCreauditOpinionObj',{
 		        	applyId: this.applyId

@@ -94,7 +94,7 @@
                 </el-table-column>
                 <el-table-column property="matchApplyDate" label="申请时间">
                 </el-table-column>
-                <el-table-column prop="matchApplyDate" label="业务状态">
+                <el-table-column prop="matchApplyStateTxt" label="业务状态">
                 </el-table-column>
               </el-table>
             </div>
@@ -110,7 +110,7 @@
                 </el-table-column>
                 <el-table-column property="matchApplyDate" label="申请时间">
                 </el-table-column>
-                <el-table-column prop="matchApplyDate" label="业务状态">
+                <el-table-column prop="matchApplyStateTxt" label="业务状态">
                 </el-table-column>
               </el-table>
             </div>
