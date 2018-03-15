@@ -128,14 +128,6 @@
             <!-- 回退主原因输入 02 -->
             <!-- 拒绝主原因选择 01 -->
             <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:10px;font-weight:bold;">*</span>
-            <el-form-item label="主原因：" class="item-column2">
-              <!-- <el-input v-model="mainReason"></el-input> -->
-              <!-- 改成后台获取   filter-method     visible-change 下拉框 出现/隐藏时触发-->
-              <el-select @change="selectChange" v-model="mainReason">
-                <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
-                </el-option>
-              </el-select>
-            </el-form-item>
             <!-- 拒绝主原因选择 01 -->
             <el-form-item label="主原因：" class="item-column2">
               <el-select @change="selectChange" v-model="mainReason">
@@ -503,6 +495,10 @@
 </template>
 <script>
 import baseurl from '../../util/ConstantSocialAndPn';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3be02b9f9100762ba30edcc4f8ead231cfd3dc4b
 // 用户接口
 // import userBaseUrl from '../.././util/constant';
 export default {
@@ -650,7 +646,7 @@ export default {
       activeNames: ['applyMsg'], // 更改 审批 为折叠面板
       isLoading: false, // 审批按钮 是否加载状态
       loadingTitle: '提交', // 默认btn title
-      shenPiBtnShow:false, // 初审 审批按钮  BX21
+      shenPiBtnShow: false, // 初审 审批按钮  BX21
     }
   },
   mounted() {
@@ -1260,6 +1256,7 @@ export default {
           }
           this.coverShow = false;
           this.showFlag = 0;
+          this.fangQiShow = false;
           // 放弃测试数据
           // this.taskId = '177524';
           this.creauditAppOperate = 'check_Abandon';
@@ -1412,7 +1409,10 @@ export default {
             type: 'success'
           })
 
-          this.$router.push('/taskInWaitting');
+          if (this.judgeFlag == '01')
+            this.$router.push('/taskInWaitting');
+          if (this.judgeFlag == '02')
+            this.$router.push('/FtaskInWaitting');
         }
       });
     },
@@ -1439,7 +1439,7 @@ export default {
         ploanAmt2 = Number(this.ploanAmt)
       }
       this.post('/creauditOpinion/add', {
-      // this.post("http://10.1.26.47:8080/riskManagement/creauditOpinion/add", {
+        // this.post("http://10.1.26.47:8080/riskManagement/creauditOpinion/add", {
         applyId: this.applyId,
         auditType: this.judgeFlag == '01' ? '00' : '01',
         proCode: this.proCode,
@@ -1479,7 +1479,7 @@ export default {
         this.shenPiShow = false;
         console.log(res);
         // 判断 500
-        if(res.statusCode == '500'){
+        if (res.statusCode == '500') {
           this.$message({
             message: '网络异常,请重试!',
             type: 'warning'
@@ -2077,6 +2077,7 @@ export default {
 
 
 
+
 /* 三列 */
 
 .creditApproval-class .item-column3 {
@@ -2093,6 +2094,7 @@ export default {
   margin: 0;
   padding: 0;
 }
+
 
 
 
@@ -2226,6 +2228,7 @@ export default {
 
 
 
+
 /* 信审审批 - btn*/
 
 .creditApproval-class .credit-btn {
@@ -2234,6 +2237,7 @@ export default {
   color: #333;
   border: none;
 }
+
 
 
 
@@ -2383,6 +2387,7 @@ export default {
 
 
 
+
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -2390,6 +2395,7 @@ export default {
   float: left;
   margin: 0;
 }
+
 
 
 
@@ -2465,6 +2471,7 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
+
 
 
 
@@ -2657,11 +2664,13 @@ export default {
 
 
 
+
 /* textarea */
 
 .creditApproval-class .back-form .back-form-li .el-textarea {
   width: 80%;
 }
+
 
 
 
@@ -2813,6 +2822,7 @@ export default {
 
 
 
+
 /* 审批 表单 */
 
 .creditApproval-class .appro-form {
@@ -2888,6 +2898,7 @@ export default {
 
 
 
+
 /*.creditApproval-class .appro-form .el-form-item__label {
   width: 220px;
 }*/
@@ -2895,6 +2906,7 @@ export default {
 .creditApproval-class .appro-form .back-form-li .el-textarea {
   width: 60%;
 }
+
 
 
 
@@ -3039,6 +3051,7 @@ export default {
 
 
 
+
 /* 分页 */
 
 .creditApproval-class .tool-bar {
@@ -3046,6 +3059,7 @@ export default {
   text-align: center;
   padding: 10px 0 0 10px;
 }
+
 
 
 
@@ -3207,6 +3221,7 @@ export default {
 
 
 
+
 /* 申请信息 */
 
 .creditApproval-class .info .el-form-item__content {
@@ -3216,6 +3231,7 @@ export default {
 .creditApproval-class .info .el-form-item__label {
   width: 120px;
 }
+
 
 
 
@@ -3348,11 +3364,13 @@ export default {
 
 
 
+
 /* 有编辑框的 提示信息*/
 
 .creditApproval-class .back-form .back-form-edit-li {
   margin-top: 25px !important;
 }
+
 
 
 
@@ -3494,6 +3512,7 @@ export default {
 
 
 
+
 /*回退*/
 
 .creditApproval-class .el-icon-check-back {
@@ -3506,6 +3525,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -3644,6 +3664,7 @@ export default {
 
 
 
+
 /*放弃*/
 
 .creditApproval-class .el-icon-check-giveup {
@@ -3656,6 +3677,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -3794,6 +3816,7 @@ export default {
 
 
 
+
 /*发起反欺诈*/
 
 .creditApproval-class .el-icon-check-start {
@@ -3806,6 +3829,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -3944,6 +3968,7 @@ export default {
 
 
 
+
 /*流程轨迹*/
 
 .creditApproval-class .el-icon-check-lcgj {
@@ -3977,6 +4002,7 @@ export default {
 
 
 
+
 /*大数据风控*/
 
 .creditApproval-class .el-icon-check-big-data {
@@ -3989,6 +4015,7 @@ export default {
   vertical-align: middle;
   display: inline-block;
 }
+
 
 
 
@@ -4081,6 +4108,7 @@ export default {
 
 
 
+
 /* 折叠面板头部背景色和icon */
 
 .creditApproval-class .icon_hat {
@@ -4091,6 +4119,7 @@ export default {
 .creditApproval-class .headFont {
   font-size: 16px;
 }
+
 
 
 
@@ -4232,11 +4261,13 @@ export default {
 
 
 
+
 /* 信审审批  - 审批  编辑部分 */
 
 .creditApproval-class .appro-form .back-form-edit-li .el-form-item__label {
   /*width: 120px;*/
 }
+
 
 
 
@@ -4383,11 +4414,13 @@ export default {
 
 
 
+
 /* 两行文字 样式 */
 
 .creditApproval-class .back-form .line-height2 .el-form-item__label {
   line-height: 20px;
 }
+
 
 
 
@@ -4518,6 +4551,7 @@ export default {
 
 
 
+
 /* label 文字样式 */
 
 .creditApproval-class .huitui-class .el-form-item__label {
@@ -4525,6 +4559,7 @@ export default {
 }
 
 .creditApproval-class .jujue-class {}
+
 
 
 
@@ -4676,11 +4711,13 @@ export default {
 
 
 
+
 /* 审批信息  */
 
 .creditApproval-class .el-form-item__content .el-select .el-input {
   width: 100%;
 }
+
 
 
 
@@ -4775,6 +4812,7 @@ export default {
 
 
 
+
 /*大数据*/
 
 .creditApproval-class .bigDataLog .el-dialog__header {
@@ -4784,6 +4822,7 @@ export default {
 .creditApproval-class .bigDataLog .el-dialog__body {
   padding: 20px 30px;
 }
+
 
 
 
