@@ -714,7 +714,7 @@
 	            });*/
 	            this.get("/credit/product").then(res => {
 					if(res.statusCode == 200){
-						this.productNames = res.data;
+						this.products = res.data;
 					}
 				});
 			},
