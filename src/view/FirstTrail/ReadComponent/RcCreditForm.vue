@@ -815,7 +815,6 @@
         this.acquire(this.FormData.iloanAmt, '借款金额');
       },
       NewPage(ind) {
-        console.log(ind);
         switch (ind) {
           case 0:
             window.open("http://zhixing.court.gov.cn/search/");

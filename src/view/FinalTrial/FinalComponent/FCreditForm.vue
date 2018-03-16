@@ -542,7 +542,6 @@
               </p>
               <p>
                 <label class="InternetInf_right_label"> 父母收入[元]： </label>
-                <!-- <span class="detail_inf">{{this.FormData.parentIncome }} </span> -->
                 <span style="border:none;">{{this.FormData.parentIncome }} </span>
 
               </p>
@@ -690,21 +689,6 @@
           </ul>
         </div>
       </el-collapse-item>
-      <!-- 审批结论 -->
-      <!-- <el-collapse-item name="10">
-        <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">审批结论</span>
-        </template>
-        <div class=" CreditForm_result up_padding">
-          <div style="width:66.6%;" class="bottom">
-            <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
-            <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==''" :content="this.FormData.oother" placement="top-start">
-              <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
-            </el-tooltip>
-          </div>
-        </div>
-      </el-collapse-item> -->
       <el-collapse-item name="10">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
@@ -887,7 +871,6 @@
         this.Confirm = false;
       },
       CFsave() {
-        console.log(this.FormData)
         this.$validator.validateAll().then((result) => {
           if (result) {
             this.post("/creauditInfo/updateOtherfinalByPK", {
@@ -966,74 +949,6 @@
           return (((sign) ? '' : '-') + num);
         }
       },
-      // formatSC(el, val) {
-      //   switch (el) {
-      //     case "月还款":
-      //       this.FormData.fbalance = val;
-      //       break;
-      //     case "借款金额":
-      //       this.FormData.iloanAmt = val;
-      //       break;
-      //     case "月均工资":
-      //       this.FormData.avgsalaryamt = val;
-      //       break;
-      //     case "注册资金":
-      //       this.FormData.regcapitalamt = val;
-      //       break;
-      //     case "月利润":
-      //       this.FormData.profitamountmamt = val;
-      //       break;
-      //     case "月还款/租金":
-      //       this.FormData.monthrentamt = val;
-      //       break;
-      //     case "近一年利润":
-      //       this.FormData.oneYearProfitamt = val;
-      //       break;
-      //     case "配偶收入":
-      //       this.FormData.spouseIncome = val;
-      //       break;
-      //     case "生活费支付":
-      //       this.FormData.childPaycostamt = val;
-      //       break;
-      //     case "父母收入":
-      //       this.FormData.parentIncome = val;
-      //       break;
-      //     case "开销":
-      //       this.FormData.fconsumption = val;
-      //       break;
-      //   }
-      // },
-      // acquire(val, name) {
-      //   if (val == null || val == '') {
-      //     return
-      //   } else {
-      //     if (val.toString().indexOf('.') == -1) {
-      //       val = val + "." + "0" + '0';
-      //       this.formatSC(name, val);
-      //     } else if (val.toString().indexOf('.') != -1) {
-      //       if (val.toString().split(".")[1].length < 2) {
-      //         val = val + "0";
-      //         this.formatSC(name, val);
-      //       } else {
-      //         val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
-      //         this.formatSC(name, val);
-      //       }
-      //     }
-      //   }
-      // },
-      // mountM() {
-      //   this.acquire(this.FormData.fbalance, '月还款');
-      //   this.acquire(this.FormData.regcapitalamt, '注册资金');
-      //   this.acquire(this.FormData.monthrentamt, '月还款/租金');
-      //   this.acquire(this.FormData.oneYearProfitamt, '近一年利润');
-      //   this.acquire(this.FormData.profitamountmamt, '月利润');
-      //   this.acquire(this.FormData.spouseIncome, '配偶收入');
-      //   this.acquire(this.FormData.parentIncome, '父母收入');
-      //   this.acquire(this.FormData.fconsumption, '开销');
-      //   this.acquire(this.FormData.childPaycostamt, '生活费支付');
-      //   this.acquire(this.FormData.avgsalaryamt, '月均工资');
-      //   this.acquire(this.FormData.iloanAmt, '借款金额');
-      // },
       NewPage(ind) {
         switch (ind) {
           case 0:
@@ -1080,13 +995,10 @@
           // applyId: "00542",
         }).then(res => {
           if (res.statusCode == 200) {
-            console.log(res.data)
             this.FormData = res.data;
             this.FormData.applyId = this.getParams.applyId;
             this.AreaNPercent();
-            // this.mountM();
             this.formatSC();
-            // this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, '')
              this.FormData.aaddress ? this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, ''):this.FormData.aaddress ;
             this.mountJ(0, res.data.wbeexEcuted);
             this.mountJ(1, res.data.wnetHirecom);
@@ -1189,44 +1101,8 @@
     },
     mounted() {
       this.getParams = JSON.parse(localStorage.getItem("FtaskInWaitting")); // 终审工作台
-      // console.log(this.getParams.applyId)
       // // 获取查询列表数据
       this.mountC();
-      // this.post("/creauditInfo/queryCreauditInfoObj", {
-      //   applyId: this.getParams.applyId,
-      //   // applyId: "00542",
-      // }).then(res => {
-      //   if (res.statusCode == 200) {
-      //     console.log(res.data)
-      //     this.FormData = res.data;
-      //     this.FormData.applyId = this.getParams.applyId;
-      //     this.AreaNPercent();
-      //     this.mountJ(0, res.data.wbeexEcuted);
-      //     this.mountJ(1, res.data.wnetHirecom);
-      //     this.mountJ(2, res.data.wnetEcutedBrea);
-      //     this.mountJ(3, res.data.wnetHirecomBrea);
-      //     this.mountJ(4, res.data.wnetPhone);
-      //     this.mountJ(5, res.data.wnetHirecomName);
-      //     this.mountJ(6, res.data.wnetHirecomPhone);
-      //     this.mountJ(7, res.data.wnetAddrandEstate);
-      //     this.mountJ(8, res.data.wnetHirecomAddress);
-      //     this.mountJ(9, res.data.wnetCompany);
-      //     this.mountJ(10, res.data.wnetAddrstate);
-      //     this.mountJ(11, res.data.iisself);
-      //     this.mountJ(12, res.data.privateOwnerFlag);
-      //     this.mountJ(13, res.data.fmarrflag);
-      //     this.mountJ(14, res.data.spouseWork);
-      //     this.mountJ(15, res.data.spouseSamecity);
-      //     this.mountJ(16, res.data.childFlag);
-      //     this.mountJ(17, res.data.childIspaycost);
-      //     this.mountJ(18, res.data.parentIsliving);
-      //     this.mountJ(19, res.data.brothersIfhas);
-      //     this.mountJ(20, res.data.aisresident);
-      //     this.mountJ(21, res.data.iloanBefore);
-      //   } else {
-      //  this.$message.error(res.msg);
-      //   }
-      // });
     },
   }
 

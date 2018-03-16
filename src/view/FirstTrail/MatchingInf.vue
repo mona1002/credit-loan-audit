@@ -263,9 +263,7 @@
       }
     },
     mounted() {
-      console.log("匹配查看");
       this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
-      console.log(this.tastwaitingPass)
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.matchApplyId,
       }).then(res => {

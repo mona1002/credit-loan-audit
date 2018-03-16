@@ -109,7 +109,6 @@ import imgUrl from'../../../util/ConstantSocialAndPn'
     },
     methods: {
       opend(vv) {
-        console.log(vv)
       },
       PerBtn() {
         this.perfBtn = true;

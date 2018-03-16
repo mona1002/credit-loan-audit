@@ -7,8 +7,6 @@
         <p>
           <label> 案件编号</label>
           <el-input v-model="caseNumInput" placeholder="请输入案件编号"></el-input>
-          <!-- {{this.form.caseNum}} {{this.form.caseDesc}} -->
-
         </p>
         <p class="btn_wrap">
           <el-button class="btn" style="marginLeft:20px" type="primary" @click="Rsearch">查询</el-button>
@@ -96,13 +94,9 @@
         currentRow: null,
         currentPage: 1, //分页选中页
         pageCount: 10, // 每页显示条数
-        // totalPage:0,//总页数
         totalRecord: 0, //总条数
-
         form: {
           caseNum: '',
-          // creatorCode: 'adf s',
-          // creatorOrgCode: 'adsf ds ',
           caseDesc: '',
         },
         tableData: [],
@@ -110,43 +104,22 @@
     },
     methods: {
       handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
         this.pageCount = val;
-        console.log(this.pageCount)
       },
       handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
-        console.log(val)
-        console.log(typeof (val))
         if (typeof (val) === 'number') {
           this.currentPage = val;
           this.getInf(this.currentPage, this.pageCount, this.caseNumInput);
         } else {
           this.currentRow = val;
         }
-        // console.log(this.currentPage)
       },
       Rreset() {
         this.caseNumInput = '';
       },
       Rsearch() {
-        console.log(this.pageCount)
-        console.log(this.currentPage)
         this.getInf(this.currentPage, this.pageCount, this.caseNumInput);
         this.caseNumInput = '';
-        // this.post("/caseInfoController/getCaseInfoList", {
-        //   "pageParam": {
-        //     "pageNum": 1,
-        //     "pageSize": this.pageCount
-        //   },
-        //   "param": {
-        //     'caseNum': this.caseNumInput
-        //   }
-        // }).then(res => {
-        //   console.log(res);
-        //   this.tableData = res.data.recordList;
-        //   this.currentPage = 1; //从第一页显示
-        // });
       },
       delList() {
         if (this.currentRow == '' || this.currentRow == null) {
@@ -156,7 +129,6 @@
           this.post("/caseInfoController/deleteCaseInfo", {
             id: this.currentRow.id
           }).then(res => {
-            console.log(res);
             if (res.statusCode == 200) {
               this.$message({
                 message: '删除成功',
@@ -164,18 +136,6 @@
               });
               // 查询信息
               this.getInf(this.currentPage, this.pageCount, this.caseNumInput);
-              // this.post("/caseInfoController/getCaseInfoList", {
-              //   "pageParam": {
-              //     "pageNum": this.currentPage,
-              //     "pageSize": this.pageCount
-              //   },
-              //   "param": {
-              //     'caseNum': ''
-              //   }
-              // }).then(res => {
-              //   console.log(res);
-              //   this.tableData = res.data.recordList;
-              // });
             } else {
               this.$message.error('删除失败');
             }
@@ -196,48 +156,18 @@
           return
         }
         this.dialogFormVisible = false;
-        console.log(this.form.caseNum)
-        console.log(this.form)
-        console.log(this.form.caseDesc)
         this.post("/caseInfoController/insert", {
-          // "param" :this.form
           "param": {
             "caseNum": this.form.caseNum,
             "caseDesc": this.form.caseDesc
           },
         }).then(res => {
-          console.log(res);
           if (res.statusCode == 200) {
             this.$message({
               message: '提交成功',
               type: 'success'
             });
-            //   查询接口
-            // this.post("/caseInfoController/getCaseInfoList", {
-            //   "pageParam": {
-            //     "pageNum": this.currentPage,
-            //     "pageSize": this.pageCount
-            //   },
-            //   "param": {
-            //     "caseNum": "",
-            //   }
-            // }).then(res => {
-            //   console.log(res.data.recordList);
-            //   this.tableData = res.data.recordList;
-            // });
             this.getInf(this.currentPage, this.pageCount, this.caseNumInput);
-            // this.post("/caseInfoController/getCaseInfoList", {
-            //    "pageParam": {
-            //       "pageNum": this.currentPage,
-            //       "pageSize": this.pageCount
-            //     },
-            //     "param": {
-            //       'caseNum': ''
-            //     }
-            // }).then(res => {
-            //   console.log(res);
-            //   this.tableData = res.data.recordList;
-            // });
           } else {
             this.$message.error('提交失败，请稍后再试！');
           }
@@ -249,7 +179,6 @@
         val.length >= 500 ? this.desc = true : this.desc = false;
       },
       inputCase(val) {
-        console.log(val)
         if (isNaN(val) || val == '') {
           this.form.caseNum = '';
           this.casNumAlert = true;
@@ -270,7 +199,6 @@
           }
         }).then(res => {
           if (res.statusCode == 200) {
-            console.log(res.data.recordList);
             this.totalRecord = res.data.totalRecord;
             this.tableData = res.data.recordList;
           } else {
@@ -281,20 +209,6 @@
     },
     mounted() {
       this.getInf(this.currentPage, this.pageCount, this.caseNumInput);
-      // this.post("/caseInfoController/getCaseInfoList", {
-      //   "pageParam": {
-      //     "pageNum": 1,
-      //     "pageSize": 10
-      //   },
-      //   "param": {
-      //     "caseNum": "",
-      //   }
-      // }).then(res => {
-      //   console.log(res);
-      //   this.totalRecord = res.data.totalRecord;
-      //   // this.totalPage=res.data.totalPage;
-      //   this.tableData = res.data.recordList;
-      // });
     },
     components: {
       myHead
