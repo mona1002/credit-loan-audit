@@ -224,7 +224,7 @@
     </div>
     <!-- 审批 -->
     <div>
-      <el-dialog :visible.sync="shenPiShow" width="800px" top="0vh">
+      <el-dialog :visible.sync="shenPiShow" width="800px" top="0vh" style="margin-top:100px;">
         <el-form class="back-form appro-form">
           <div class="form-title" style="position:relative;">
             审批信息
@@ -1459,7 +1459,7 @@ export default {
         applyConclusion: this.applyConclusion,
         ploanOperId: '', // 批准人员
         srcPloanAmt: this.srcPloanAmt, // 信审批准额度
-        creditDebitRate: this.creditDebitRate, // 信用负债率
+        creditDebitRate: this.caculData.creditDebitRate, // 信用负债率
         approvalFlag: this.approvalFlag, // 终审通过标志  0 未
         ploanDate: '', // 批准日期
         auditDate: '', // 批准时间
@@ -1879,7 +1879,7 @@ export default {
     },
     //社保/公积金
     Social() {
-      this.post(baseurl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {
+      this.post(baseurl.BaseUrl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {
         certCode: this.certCode,
         custName: this.custName
       }).then(res => {
