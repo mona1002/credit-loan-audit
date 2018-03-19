@@ -119,7 +119,6 @@
   </div>
 </template>
 <script>
-  // -----------------------------------protect---------------------------
   import myHead from "../header"
   import FcCreditForm from './FinalComponent/FcCreditForm';
   import RAudioVisual from "../FirstTrail/ReadComponent/RAudioVisual";
@@ -266,8 +265,6 @@
       }
     },
     mounted() {
-      console.log("匹配查看");
-      // this.tastwaitingPass = JSON.parse(localStorage.getItem("FinalinternalObj"));//用终审 初审判断时打开
       this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.matchApplyId,
@@ -279,16 +276,10 @@
     components: {
       myHead,
       FcCreditForm,
-      // AudioVisual,
-      // AudioVisualLeft,
          RAudioVisual,
       RAudioVisualLeft,
       RApprovalConclusion, //信审审批结论归结
       RFinanceInformation, //账务信息
-      
-    //   ------------------------------------------
-      // 编辑
-   
       RapplicationInformationDetail,
       RborrowerInformationSetail, //借款人资料
       aMAntiApplyInf, //反欺诈结论
@@ -296,14 +287,9 @@
       InternalMatch,
       borrowerInformation,
       PhoneCredit,
-
       creditInvestigation,
-      // 信审审批
       CreditApproval,
-      // 查询
-      // aut,
       cremarkDetail,
-
       cborrowerInformationDetail,
       processTrajectory
     }
@@ -313,7 +299,6 @@
 <style scoped>
   .SplitScreen {
     height: 100%;
-    /* min-width: 1366; */
   }
   /* 激活样式 流-css */
 

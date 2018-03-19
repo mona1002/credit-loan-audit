@@ -168,7 +168,6 @@
       }
     },
     mounted() {
-      console.log("反欺诈分屏");
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '03') {
         this.tastwaitingPass = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈专员-匹配查看
@@ -181,7 +180,6 @@
         if (res.statusCode == 200) {
            this.custName=res.data.accepCusBasicInfo.custName;
           this.customInf = res.data;
-          console.log(this.customInf)
         } else {
           this.$message.error(res.msg);
         }

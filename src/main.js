@@ -38,8 +38,7 @@ Vue.filter('dateFilter',function(value){
 Vue.filter('formatValue',function(value){
 	if(!value) return ''
 	console.log(value);
-	if(Number(value)>0)
-	return Math.round(Number(value)*10000)/100 +'%';
+	return Number(value)>0?Math.round(Number(value)*10000)/100 +'%':'0.00%';
 })
 // 金额过滤
 Vue.filter('formatMoney',function(value){

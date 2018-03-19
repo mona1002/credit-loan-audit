@@ -119,14 +119,12 @@
   </div>
 </template>
 <script>
-  // -----------------------------------protect---------------------------
   import myHead from "../header"
   import FcCreditForm from './FinalComponent/FcCreditForm';
   import RAudioVisual from "../FirstTrail/ReadComponent/RAudioVisual";
   import RAudioVisualLeft from '../FirstTrail/ReadComponent/RAudioVisualLeft';
   import RApprovalConclusion from'../FirstTrail/ReadComponent/RApprovalConclusion'; //信审审批结论轨迹--lastOne
   import RFinanceInformation from'../FirstTrail/ReadComponent/RFinanceInformation';//账务信息
-  // ---------------------------------------------------------------------
   // 编辑
   import RborrowerInformationSetail from "../FirstTrail/ReadComponent/RborrowerInformationSetail.vue"; //借款人资料
   import RapplicationInformationDetail from "../FirstTrail/ReadComponent/RapplicationInformationDetail.vue"; //申请信息
@@ -137,7 +135,6 @@
   import PhoneCredit from "../FirstTrail/PhoneCredit.vue"; //电话征信
   import CreditForm from "../FirstTrail/detailComponent/CreditForm.vue";
   import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信
-  // 信审审批写此处
   import CreditApproval from "../FirstTrail/CreditApproval.vue";
   // 查询
   import cremarkDetail from "../FirstTrail/checkComponent/remarkDetail.vue"; //备注信息
@@ -148,10 +145,8 @@
       return {
         watchData: '',
         originLeft: '',
-        // 进件人信息
         customInf: [], //申请信息页local字段
         tastwaitingPass: [], //详情列表页信息--(含)取applyId
-        // -------------------------------结束
         showHalfBtn: false,
         CompareAlert: false,
         title: "",
@@ -266,8 +261,6 @@
       }
     },
     mounted() {
-      console.log("匹配查看");
-      // this.tastwaitingPass = JSON.parse(localStorage.getItem("FinalinternalObj"));//用终审 初审判断时打开
       this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.matchApplyId,
@@ -279,16 +272,10 @@
     components: {
       myHead,
       FcCreditForm,
-      // AudioVisual,
-      // AudioVisualLeft,
          RAudioVisual,
       RAudioVisualLeft,
       RApprovalConclusion, //信审审批结论归结
       RFinanceInformation, //账务信息
-      
-    //   ------------------------------------------
-      // 编辑
-   
       RapplicationInformationDetail,
       RborrowerInformationSetail, //借款人资料
       aMAntiApplyInf, //反欺诈结论
@@ -296,14 +283,9 @@
       InternalMatch,
       borrowerInformation,
       PhoneCredit,
-
       creditInvestigation,
-      // 信审审批
       CreditApproval,
-      // 查询
-      // aut,
       cremarkDetail,
-
       cborrowerInformationDetail,
       processTrajectory
     }
@@ -313,7 +295,6 @@
 <style scoped>
   .SplitScreen {
     height: 100%;
-    /* min-width: 1366; */
   }
   /* 激活样式 流-css */
 
