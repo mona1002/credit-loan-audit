@@ -47,9 +47,9 @@
         </el-collapse-item>
       </el-collapse>
       <!-- 按钮 : 缩略图 对比  -->
-      <div class="btn_wrap">
-        <el-button @click="SmallpicAlert" class="compareBtn">缩略图</el-button>
-        <el-button type="primary" @click="compBtnShow" class="checkDetailBtn">对比</el-button>
+      <div class="AudioVisualLeft_btn_wrap">
+        <el-button @click="SmallpicAlert" class="AudioVisualLeft_compareBtn">缩略图</el-button>
+        <el-button type="primary" @click="compBtnShow"  v-if="this.comBtn">对比</el-button>
       </div>
     </div>
     <!-- 右侧 图片 -->
@@ -170,7 +170,7 @@
         custmatchApplySubNo: '',
       }
     },
-    props: ['msg'],
+  props: ['msg', 'comBtn'],
     methods: {
       closeAlertSearch() {
         this.dataa = false;
@@ -519,34 +519,6 @@
     /* border-radius: 0 6px 6px 0; */
     position: relative;
     z-index: 2;
-  }
-
-  /* 对比-按钮 */
-
-  .btn_wrap {
-    /* background:red; */
-    position: absolute;
-    bottom: 18px;
-    right: 5px;
-    width: 170px;
-    /* margin:0 auto; */
-  }
-
-  .compareBtn {
-    /* position: absolute;
-    bottom: 18px;
-    right: 98px; */
-    color: #0077ff;
-    border: 1px solid #0077ff;
-    background: #eef0f9;
-  }
-
-  /* 缩略图-按钮 */
-
-  .checkDetailBtn {
-    /* position: absolute;
-    bottom: 18px;
-    right: 17px; */
   }
 
   .showHidIcons {

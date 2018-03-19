@@ -34,7 +34,7 @@
               </span>
             </p>
             <div class="Left_right_BigImg ">
-              <AudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0"  msg="FspLone" v-on:CompareShow="compBtnS"></AudioVisualLeft>
+              <AudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0"  msg="FspLone" v-on:CompareShow="compBtnS"  :comBtn.sync='comBtn'></AudioVisualLeft>
               <!-- √ -->
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
               <!-- √ -->
@@ -113,7 +113,7 @@
           <!-- 搜索框 -->
           <p class="customName">客户名称：
             <el-input v-model="AlertSearch" :disabled="true" style="display:inline;"></el-input>
-            <el-button type="primary" @click="compareProps">
+            <el-button type="primary" @click="compareProps" class="AudioVisualLeft_compareIcon">
               <i class="el-icon-search" style="fontSize:16px"></i>
             </el-button>
           </p>
@@ -185,6 +185,8 @@
           label: '内匹客户姓名'
         }],
         isFull: false,
+            comBtn:true,
+        alertComBtn:false,
       }
     },
     methods: {

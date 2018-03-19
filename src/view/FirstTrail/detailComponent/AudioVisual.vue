@@ -51,8 +51,9 @@
         </el-collapse-item>
       </el-collapse>
       <!-- 按钮 : 缩略图 对比  -->
-      <el-button @click="SmallpicAlert" class="compareBtn">缩略图</el-button>
-      <el-button type="primary" @click="compBtnShow" class="checkDetailBtn">对比</el-button>
+      <div class="AudioVisualLeft_btn_wrap">
+      <el-button @click="SmallpicAlert" class="AudioVisualLeft_compareBtn">缩略图</el-button>        
+      </div>
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
@@ -444,26 +445,6 @@ import imgUrl from'../../../util/ConstantSocialAndPn'
     position: relative;
     z-index: 2;
   }
-
-  /* 对比-按钮 */
-
-  .compareBtn {
-    position: absolute;
-    bottom: 18px;
-    right: 98px;
-    color: #0077ff;
-    border: 1px solid #0077ff;
-    background: #eef0f9;
-  }
-
-  /* 缩略图-按钮 */
-
-  .checkDetailBtn {
-    position: absolute;
-    bottom: 18px;
-    right: 17px;
-  }
-
   /*  放大、缩小 按钮 wrap */
 
   .BtnIcons {

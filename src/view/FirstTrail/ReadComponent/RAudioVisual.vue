@@ -51,14 +51,14 @@
         </el-collapse-item>
       </el-collapse>
       <!-- 按钮 : 缩略图 对比  -->
-      <el-button @click="SmallpicAlert" class="compareBtn">缩略图</el-button>
-      <el-button type="primary" @click="compBtnShow" class="checkDetailBtn">对比</el-button>
+      <div class="AudioVisualLeft_btn_wrap">
+        <el-button @click="SmallpicAlert" class="AudioVisualLeft_compareBtn">缩略图</el-button>
+      </div>
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative; left:0; top:0;" id='RFirstAud'>
-        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd"
-        />
+        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" />
       </div>
     </div>
     <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" v-show="perfBtn" @click="pre" @mouseenter='PerBtn'>
@@ -76,8 +76,8 @@
       </p>
       <div class="small_pic_content">
         <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
-          <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
-            ref="small_pic_ref" />
+          <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref"
+          />
           <p>{{val.arcSubType}} </p>
         </figure>
       </div>
@@ -87,12 +87,12 @@
 </template>
 
 <script>
-import imgUrl from'../../../util/ConstantSocialAndPn'
+  import imgUrl from '../../../util/ConstantSocialAndPn'
   export default {
     data() {
       return {
         // picData: [],
-         imgBaseUrl:'',
+        imgBaseUrl: '',
         perfBtn: false,
         opendImg: [],
         closedImg: [],
@@ -326,23 +326,12 @@ import imgUrl from'../../../util/ConstantSocialAndPn'
       }
     },
     mounted() {
-      // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      // if (this.judgeFlag.flag == '01') {
-      //   this.localInf = JSON.parse(localStorage.getItem("internalObj")) //初审-匹配查看
-      // } else if (this.judgeFlag.flag == '02') {
-      //   this.localInf = JSON.parse(localStorage.getItem("FinalinternalObj")) //终审-匹配查看
-      // } else if (this.judgeFlag.flag == '03') {
-      //   this.localInf = JSON.parse(localStorage.getItem("AntiinternalObj")) //反欺诈专员-匹配查看
-      // } else if (this.judgeFlag.flag == '04') {
-      //   this.localInf = JSON.parse(localStorage.getItem("AntiManagerinternalObj")) //反欺诈主管-匹配查看
-      // }
       // this.odivMove("RFirstAud");
       this.localInf = JSON.parse(localStorage.getItem("internalObj")) //初审-匹配查看
-        this.imgBaseUrl=imgUrl.imgBaseUrl;
+      this.imgBaseUrl = imgUrl.imgBaseUrl;
       this.odivMove("RFirstAud");
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.matchApplyId,
-        // applyId: this.localInf.applyId,
         // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
         //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
       }).then(res => {
@@ -369,13 +358,9 @@ import imgUrl from'../../../util/ConstantSocialAndPn'
 
 </script>
 <style scoped>
-  /* css */
-
   .AudioVisual {
     height: 100%;
   }
-
-  /* public */
 
   .small_pic_close {
     position: absolute;
@@ -406,20 +391,8 @@ import imgUrl from'../../../util/ConstantSocialAndPn'
     background: #eef0f9;
     margin-right: 11px;
     border: 1px solid #bfcbd9;
-    /* border-radius: 0 6px 6px 0; */
     position: relative;
     z-index: 2;
-  }
-
-  /* 对比-按钮 */
-
-  .compareBtn {
-    position: absolute;
-    bottom: 18px;
-    right: 98px;
-    color: #0077ff;
-    border: 1px solid #0077ff;
-    background: #eef0f9;
   }
 
   /* 缩略图-按钮 */
@@ -491,23 +464,16 @@ import imgUrl from'../../../util/ConstantSocialAndPn'
     position: relative;
   }
 
-  /*  css */
-
   .AudioVisual .AudioVisual_Img {
     width: calc( 100% - 412px);
   }
-
-  /*  css */
 
   .AudioVisual .AudioVisual_List {
     width: 401px;
     background: #eef0f9;
     border: 1px solid #bfcbd9;
-    /* border-radius: 6px 6px 0 0; */
     margin-right: 11px;
   }
-
-  /* ----------------------------------- */
 
   /* 左侧折叠面板 */
 
@@ -526,7 +492,6 @@ import imgUrl from'../../../util/ConstantSocialAndPn'
     float: left;
     border: 1px solid #e6ebf5;
     border-bottom: none;
-    /* border: 1px solid black; */
     text-align: center;
     position: relative;
   }
@@ -567,8 +532,6 @@ import imgUrl from'../../../util/ConstantSocialAndPn'
     border-left: none;
   }
 
-  /* ------------------------------- */
-
   /* 缩略图最外侧div */
 
   .AudioVisual .Small_pic_div {
@@ -581,7 +544,6 @@ import imgUrl from'../../../util/ConstantSocialAndPn'
     overflow: auto;
     border: 1px solid #bfcbd9;
     background: #ffffff;
-    /* background: #000; */
     border-radius: 4px;
   }
 
@@ -591,13 +553,9 @@ import imgUrl from'../../../util/ConstantSocialAndPn'
     font-size: 16px;
     text-align: center;
     background: rgba(0, 119, 255, 0.75);
-    /* opacity: 0.75; */
-    /* background: #0077ff; */
     height: 48px;
     line-height: 48px;
     color: #f8f9fd;
-    /* 不换行 */
-    /* white-space:nowrap; */
     overflow: hidden;
     position: relative;
   }
@@ -617,10 +575,7 @@ import imgUrl from'../../../util/ConstantSocialAndPn'
     float: left;
     width: 187px;
     height: 200px;
-    /* margin: 30px 0 30px 23px; */
     margin: 0 0 0 18px;
-
-    /* margin-left:40px;  */
   }
 
   /*  缩略图 figure 内 图片名字 p 标签 */
@@ -641,10 +596,8 @@ import imgUrl from'../../../util/ConstantSocialAndPn'
   }
 
   /* 缩略图 各个 img 图片 */
-
   .AudioVisual .Small_pic {
     height: calc( 100% - 60px);
-    /* UI设计部分 */
     border-radius: 5px;
     border: 2px solid #bfcbd9;
     box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
