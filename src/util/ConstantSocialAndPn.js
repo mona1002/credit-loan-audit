@@ -16,7 +16,7 @@ if (host === productionEnv) {
   postfix = '/ptopCredit/';
 } else if (host === releaseEnv) {
   host = "120.26.131.205:8081";
-  postfix = '/ptopCredit/';
+  postfix = '/ptopCredit/rm';
 } else if (host === testEnv) {
   host = "10.1.26.6:8080";
   testU = "http://10.1.26.10:8080/baseCredit/rm" //本地
