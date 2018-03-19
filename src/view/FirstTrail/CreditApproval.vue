@@ -1879,7 +1879,7 @@ export default {
     },
     //社保/公积金
     Social() {
-      this.post(baseurl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {
+      this.post(baseurl.BaseUrl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {
         certCode: this.certCode,
         custName: this.custName
       }).then(res => {
