@@ -406,7 +406,9 @@ export default {
     '$route'(to,from){
       if(to.fullPath !== from.fullPath){
         this.getUserInf();
-        this.getProcessMonitorList();
+        // this.getProcessMonitorList();
+        this.responseDatas.totalNum = 0;
+        this.moniList = [];
         this.getProductForUser();    
       }
     }
@@ -414,7 +416,7 @@ export default {
 
   mounted() {
     this.getUserInf();
-    this.getProcessMonitorList();
+    // this.getProcessMonitorList();
     this.getProductForUser();
   },
 
