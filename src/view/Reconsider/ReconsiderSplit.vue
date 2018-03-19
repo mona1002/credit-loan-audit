@@ -16,7 +16,6 @@
       <div class="SplitScreen_wrap">
         <!-- 右侧分屏部分 -->
         <div class="right" ref="rRight">
-          <!-- <img src="../../../static/images/backcopy.png" class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen"> -->
           <!-- 右屏tab 表头 -->
           <div class="Right_tab_title_div">
             <!-- 左右滑动 图标  -->
@@ -79,8 +78,7 @@
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf.vue' //反欺诈结论
   import ReconsiderationConclusion from './ReconsiderComponents/ReconsiderationConclusion.vue' //复议结论 - 专员
   import ReconjingliConclusion from './ReconsiderComponents/ReconjingliConclusion.vue' //复议结论 - 经理
-  // --------------------------------------------------------------------------------------------
-  // 编辑（含有-未更新）
+  // 编辑
   import InternalMatch from "../FirstTrail/InternalMatch.vue";
   import PhoneCredit from "../FirstTrail/PhoneCredit.vue";
 
@@ -96,7 +94,6 @@
         // 进件人信息
         customInf: [], //申请信息页local字段
         tastwaitingPass: [], //详情列表页信息--(含)取applyId
-        // -------------------------------结束
         CompareAlert: false,
         title: "",
         isShow: false,
@@ -144,7 +141,6 @@
       }
     },
     mounted() {
-      console.log("分屏");
       // 复议不用flag判断，列表页专员、主管存的同一个字段
       this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting"));
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
@@ -158,7 +154,6 @@
       }).then(res => {
         if (res.statusCode == 200) {
           this.custName = res.data.accepCusBasicInfo.custName;
-          //     this.customInf = res.data;
         } else {
           this.$message.error(res.msg);
         }
@@ -185,7 +180,6 @@
 <style scoped>
   .SplitScreen {
     height: 100%;
-    /* min-width: 1366; */
   }
   /* 激活样式 流-css */
 

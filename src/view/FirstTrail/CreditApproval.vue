@@ -1459,7 +1459,7 @@ export default {
         applyConclusion: this.applyConclusion,
         ploanOperId: '', // 批准人员
         srcPloanAmt: this.srcPloanAmt, // 信审批准额度
-        creditDebitRate: this.creditDebitRate, // 信用负债率
+        creditDebitRate: this.caculData.creditDebitRate, // 信用负债率
         approvalFlag: this.approvalFlag, // 终审通过标志  0 未
         ploanDate: '', // 批准日期
         auditDate: '', // 批准时间

@@ -1,6 +1,6 @@
 <template>
   <div class="aAntiApplyInf">
-    <!-- 反欺诈结论======================= -->
+    <!-- 反欺诈结论 -->
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
@@ -49,10 +49,6 @@
               <p>
                 <label>借欺诈申请类型主原因： </label>
                 <span>{{this.conclu.certType}} </span>
-                <!-- <el-select v-model="value" placeholder="请选择">
-                <el-option v-for="item in mainReason" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select> -->
               </p>
               <p>
                 <label>子原因： </label>
@@ -112,20 +108,10 @@
     },
     mounted() {
       this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //反欺诈专员-匹配查看 + 主管
-      //需要做判读的时候打开
-      // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      // if (this.judgeFlag.flag == '03') {
-      //   this.MatchInf = JSON.parse(localStorage.getItem("AntiinternalObj")); //反欺诈专员-匹配查看
-      // } else if (this.judgeFlag.flag == '04') {
-      //   this.MatchInf = JSON.parse(localStorage.getItem("AntiManagerinternalObj")); //反欺诈主管-匹配查看
-      // }
       this.post("/creauditOpinion/queryByPage", {
-        // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
-        // applyId:"00542",
         applyId: this.MatchInf.matchApplyId,
       }).then(res => {
         if (res.statusCode == 200) {
-          console.log(res.data)
           this.ConclutionInf = res.data.recordList;
         } else {
           this.$message.error(res.msg);

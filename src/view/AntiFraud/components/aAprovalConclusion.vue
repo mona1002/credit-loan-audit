@@ -1,6 +1,6 @@
 <template>
   <div class="ApprovalConclusion">
-    <!-- 信审审批结论轨迹====反欺诈分屏=====================默认显示1-条？分页？ -->
+    <!-- 信审审批结论轨迹====反欺诈分屏 -->
     <!-- 信审审批结论轨迹 -->
     <el-table :data="ConclutionInf" border>
       <el-table-column prop="verIncome" label="核实收入[元]" min-width="35" align="right">
@@ -37,7 +37,6 @@
       }
     },
     mounted() {
-      // this.localInf = JSON.parse(localStorage.getItem("taskInWaitting"))
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '03') {
         this.tastwaitingPass = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈专员-列表
@@ -45,12 +44,9 @@
         this.tastwaitingPass = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管-列表
       }
       this.post("/creauditOpinion/queryByPage", {
-        // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
-        // applyId:"00542",
         applyId: this.tastwaitingPass.applyId,
       }).then(res => {
         if (res.statusCode == 200) {
-          console.log(res.data)
           this.ConclutionInf = res.data.recordList;
         } else {
           this.$message.error(res.msg);
