@@ -50,7 +50,7 @@
           </div>
         </el-collapse-item>
       </el-collapse>
-      <!-- 按钮 : 缩略图 对比  -->
+      <!-- 按钮 : 缩略图  -->
       <el-button @click="SmallpicAlert" type="primary" class="checkDetailBtn">缩略图</el-button>
     </div>
     <!-- 右侧 图片 -->

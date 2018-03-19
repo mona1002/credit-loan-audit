@@ -41,7 +41,6 @@ import FcCreditForm from '@/view/FinalTrial/FinalComponent/FcCreditForm'
 //列表页
 import FtaskInWaitting from '@/view/FinalTrial/FtaskInWaitting'
 import FMCreditForm from '@/view/FinalTrial/FinalMatchComponent/FMCreditForm'
-import FMatchingInf from '@/view/FinalTrial/FMatchingInf'
 import FCreditForm from '../view/FinalTrial/FinalComponent/FCreditForm'
 // ------------反欺诈------------------
 import AntiAudit from '@/view/AntiFraud/AntiAudit.vue'//反欺诈分屏
@@ -193,10 +192,6 @@ const routes = [{
 {
   path: '/FSplitScreen',
   component: FSplitScreen
-},
-{
-  path: '/FMatchingInf',
-  component: FMatchingInf
 },
 {
   path: '/FcCreditForm',

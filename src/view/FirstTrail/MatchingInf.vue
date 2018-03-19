@@ -16,7 +16,7 @@
         <!-- 左侧分屏部分 -->
         <div class="left" ref="rLeft">
           <div ref="Left_title" class="Left_ul" @mouseenter="showList" @mouseleave="hid">
-            <!-- 左侧 title列表 == 影像资料等 ==================弹出列表============ -->
+            <!-- 左侧 title列表 -->
             <ul>
               <li ref="tabOne" class="tab1Default" v-for="(val,index) in items1" :key="index" @mousedown="flag1[index] &&  tab1($event,index,val)"
                 :class="{tab1Act:tab1Index==index}">
@@ -34,7 +34,7 @@
               </span>
             </p>
             <div class="Left_right_BigImg ">
-              <RAudioVisualLeft msg="MspLone" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></RAudioVisualLeft>
+              <RAudioVisualLeft msg="MspLone" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></RAudioVisualLeft>
               <Rremark v-if=" this.tabContent1==1"></Rremark>
               <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
               <RapplicationInformationDetail v-if=" this.tabContent1==3">申请信息</RapplicationInformationDetail>
@@ -61,7 +61,7 @@
             <span class="pre_next_btn_wrap" style="color:red;" @click="rightMovingBtn">
               <img src="../../../static/images/Shaperight@1x.png">
             </span>
-            <!-- tab 2 -=====================tab2里面的ul-->
+            <!-- tab 2 -->
             <div class="Right_tab_ul_wrap">
               <ul ref="right_tab_ul" style="left:0;right:0;">
                 <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="flag2[index] &&  tab2($event,index,val)"
@@ -72,7 +72,7 @@
           </div>
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
-            <RAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></RAudioVisual>
+            <RAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn' ></RAudioVisual>
             <Rremark v-if=" this.tabContent2==1"></Rremark>
             <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
             <RapplicationInformationDetail v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
@@ -87,7 +87,7 @@
           </div>
         </div>
       </div>
-      <!-- 对比弹出层   不在右侧div里面，再 wrap 里面  可以用fixed定位-->
+      <!-- 对比弹出层 -->
       <div class="AudioVisual_wrap_compare" v-show="CompareAlert" v-on:CompareShow="compBtnS">
         <el-button type="primary compareClose" @click="closeCompareBtn">关闭</el-button>
         <!-- 弹出层左侧 div -->
@@ -95,7 +95,7 @@
           <p>影像资料</p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <RAudioVisualLeft msg="MspLtwo"></RAudioVisualLeft>
+            <RAudioVisualLeft msg="MspLtwo"  :comBtn.sync='alertComBtn'></RAudioVisualLeft>
           </div>
         </div>
         <!-- 弹出层右侧 div -->
@@ -103,13 +103,13 @@
           <!-- 搜索框 -->
           <p class="customName">客户名称：
             <el-input v-model="AlertSearch" :disabled="true" style="display:inline;"></el-input>
-            <el-button type="primary" @click="compareProps">
+            <el-button type="primary" @click="compareProps" class="AudioVisualLeft_compareIcon">
               <i class="el-icon-search" style="fontSize:16px"></i>
             </el-button>
           </p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <RAudioVisualLeft msg="MspLthree" ref="audioChild" v-on:inputInf="inputInner"></RAudioVisualLeft>
+            <RAudioVisualLeft msg="MspLthree" ref="audioChild"  :comBtn.sync='alertComBtn' v-on:inputInf="inputInner"></RAudioVisualLeft>
           </div>
         </div>
       </div>
@@ -120,7 +120,6 @@
 <script>
   import myHead from "../header.vue"
   // 编辑
-  // import AudioVisual from "./detailComponent/AudioVisual";
   import RAudioVisual from "./ReadComponent/RAudioVisual";
   import RAudioVisualLeft from "./ReadComponent/RAudioVisualLeft.vue";
   import FMCreditForm from "../FinalTrial/FinalMatchComponent/FMCreditForm.vue"; //信审表-终审查看-del初审人员-第一个
@@ -132,23 +131,17 @@
   import RprocessTrajectory from "./ReadComponent/RprocessTrajectory"; //流程轨迹
   import RcreditInvestigation from "./ReadComponent/RcreditInvestigation"; //实地征信
   import aMAntiApplyInf from '../AntiFraud/matchComponent/aMAntiApplyInf.vue' //反欺诈结论
-
-
-
   import InternalMatch from "./InternalMatch";
   import borrowerInformation from "./detailComponent/borrowerInformation";
   import PhoneCredit from "./PhoneCredit"; //电话征信
-  // 信审审批写此处
   import CreditApproval from "./CreditApproval";
   export default {
     data() {
       return {
         watchData: '',
         originLeft: '',
-        // 进件人信息
-        customInf: [], //申请信息页local字段
-        tastwaitingPass: [], //详情列表页信息--(含)取applyId
-        // -------------------------------结束
+        customInf: [], 
+        tastwaitingPass: [], 
         showHalfBtn: false,
         CompareAlert: false,
         title: "",
@@ -180,6 +173,8 @@
           label: '内匹客户姓名'
         }],
         isFull: false,
+        comBtn:true,
+        alertComBtn:false,
       }
     },
     methods: {
@@ -277,7 +272,6 @@
     },
     components: {
       myHead,
-      // 编辑
       RAudioVisual,
       RAudioVisualLeft,
       FMCreditForm,
@@ -291,10 +285,7 @@
       InternalMatch,
       borrowerInformation,
       PhoneCredit,
-      // 信审审批
       CreditApproval,
-      // 查询
-      // cremarkDetail, 
       RprocessTrajectory
     }
   }
@@ -305,7 +296,6 @@
     height: 100%;
     /* min-width: 1366; */
   }
-  /* 激活样式 流-css */
 
   .tab1Default {
     color: #bfcbd9;
@@ -349,7 +339,6 @@
     position: absolute;
     top: 7px;
     right: 17px;
-    /* right: 0; */
   }
 
   .showAllList {
@@ -360,7 +349,6 @@
     left: 0;
     top: 0;
   }
-  /*-------------------------------- */
 
   .SplitScreen_content {
     border: 1px solid #0077ff;
@@ -504,10 +492,8 @@
     height: 38px;
     line-height: 38px;
   }
-  /* ======================================================================================================= */
 
   .tab2_Content {
-    /*background: purple;*/
     height: calc( 100% - 48px);
     overflow: auto;
   }
