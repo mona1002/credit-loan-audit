@@ -1337,6 +1337,8 @@ export default {
     },
     // 回退/拒绝/放弃
     approvalFn() {
+      this.isLoading = true;
+      this.loadingTitle = '提交中';
       // 判断终审的 opinionFlag 
       console.log(this.opinionFlag)
       // 点击 确认 提交 方法
@@ -1366,6 +1368,8 @@ export default {
       }).then(res => {
         console.log(res);
         console.log(this);
+        this.isLoading = false;
+        this.loadingTitle = '提交';
 
         // 返回结果 处理所有的控制显示
         this.huiTuiShow = false;
