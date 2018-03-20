@@ -4,7 +4,7 @@ import appConstant from './constant'
 import platforUrl from'./constantUser'
 
 // axios 配置
-axios.defaults.timeout = 5000;
+axios.defaults.timeout = 10000;
 //数据接口
  
 axios.defaults.baseURL = appConstant.baseUrl_common;
