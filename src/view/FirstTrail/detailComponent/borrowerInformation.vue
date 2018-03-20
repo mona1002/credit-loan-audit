@@ -2790,17 +2790,21 @@
 	}
 	.right .rightSpan{
 		margin-left: 10px;
+	    width: 70px;
+	    height: 100%;
+	    display: inline-block;
+	    float: left;
 	}
 	.right .rightSpan img{
 		padding-top: 5px;
 		float: left;
 	}
-	.right .rightSpan:nth-of-type(2) img{
+	/* .right .rightSpan:nth-of-type(2) img{
 		padding-left: 24px;
-	}
-	.right .rightSpan:nth-of-type(3) img{
+	} */
+	/* .right .rightSpan:nth-of-type(3) img{
 		padding-left: 24px;
-	}
+	} */
 	.right .rightSpan span{
 		margin-left: 10px;
 		float: left;
