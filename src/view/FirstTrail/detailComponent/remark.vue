@@ -185,7 +185,7 @@
 		        addLodaing:false,
 		        addSure:'确定',
 		        changeLoading:false,
-		        chSurechSure:'确定',
+		        chSure:'确定',
 			}
 		},
 		mounted(){
