@@ -66,7 +66,7 @@
         </li>
         <li class="item-column3">
           <div class="left-title left-title2">
-            反欺诈申请类型主原因：
+            反欺诈申请类型子原因：
           </div>
           <div class="item-content">
             {{subreaName}}
