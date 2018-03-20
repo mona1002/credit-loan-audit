@@ -16,7 +16,7 @@
         <!-- 左侧分屏部分 -->
         <div class="left" ref="rLeft">
           <div ref="Left_title" class="Left_ul" @mouseenter="showList" @mouseleave="hid">
-            <!-- 左侧 title列表 == 影像资料等 ==================弹出列表============ -->
+            <!-- 左侧 title列表 -->
             <ul>
               <li ref="tabOne" class="tab1Default" v-for="(val,index) in items1" :key="index" @mousedown="flag1[index] &&  tab1($event,index,val)"
                 :class="{tab1Act:tab1Index==index}">
@@ -34,7 +34,7 @@
               </span>
             </p>
             <div class="Left_right_BigImg ">
-              <AudioVisualLeft msg="spLone" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></AudioVisualLeft>
+              <AudioVisualLeft msg="spLone" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn' ></AudioVisualLeft>
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
               <InternalMatch v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
               <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
@@ -58,7 +58,7 @@
             <span class="pre_next_btn_wrap" style="color:red;" @click="rightMovingBtn">
               <img src="../../../static/images/Shaperight@1x.png">
             </span>
-            <!-- tab 2 -=====================tab2里面的ul-->
+            <!-- tab 2 -->
             <div class="Right_tab_ul_wrap">
               <ul ref="right_tab_ul" style="left:0;right:0;">
                 <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="flag2[index] &&  tab2($event,index,val)"
@@ -69,7 +69,6 @@
           </div>
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
-            <!-- <CreditFormKeydownEvent :myWatch="watchData" v-if=" this.tabContent2==3"></CreditFormKeydownEvent> -->
             <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
             <remark v-if=" this.tabContent2==1"></remark>
             <InternalMatch v-if=" this.tabContent2==2" :SplitS="SplitRight" :isFull.sync="isFull"></InternalMatch>
@@ -78,9 +77,7 @@
             <PhoneCredit v-if=" this.tabContent2==5" :SplitS="SplitRight" :isFull.sync="isFull"></PhoneCredit>
             <CreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></CreditForm>
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
-            <!-- 反欺诈结论 空白 -->
             <aAntiApplyInf v-if=" this.tabContent2==8"></aAntiApplyInf>
-            <!-- 信审审批 空白 -->
             <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>
           </div>
         </div>
@@ -93,7 +90,7 @@
           <p>影像资料</p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <AudioVisualLeft msg="spLtwo" v-if="CompareAlert"></AudioVisualLeft>
+            <AudioVisualLeft msg="spLtwo" v-if="CompareAlert" :comBtn.sync='alertComBtn'></AudioVisualLeft>
           </div>
         </div>
         <!-- 弹出层右侧 div -->
@@ -101,13 +98,13 @@
           <!-- 搜索框 -->
           <p class="customName">客户名称：
             <el-input v-model="AlertSearch" :disabled="true" style="display:inline;"></el-input>
-            <el-button type="primary" @click="compareProps" class="compareIcon">
+            <el-button type="primary" @click="compareProps" class="AudioVisualLeft_compareIcon">
               <i class="el-icon-search" style="fontSize:16px"></i>
             </el-button>
           </p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <AudioVisualLeft msg="spLthree" ref="audioChild" v-on:inputInf="inputInner"></AudioVisualLeft>
+            <AudioVisualLeft msg="spLthree" ref="audioChild" v-on:inputInf="inputInner" :comBtn.sync='alertComBtn'></AudioVisualLeft>
           </div>
         </div>
       </div>
@@ -120,7 +117,6 @@
   // 编辑
   import AudioVisual from "./detailComponent/AudioVisual";
   import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
-
   import remark from "./detailComponent/remark";
   import InternalMatch from "./InternalMatch";
   import applicationInformation from "./detailComponent/applicationInformation";
@@ -129,7 +125,6 @@
   import CreditForm from "./detailComponent/CreditForm";
   import creditInvestigation from "./detailComponent/creditInvestigation"; //实地征信
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf' //反欺诈结论  
-  // 信审审批写此处
   import CreditApproval from "./CreditApproval";
   // 查询
   import cCreditForm from "./checkComponent/cCreditForm";
@@ -138,7 +133,6 @@
   import cborrowerInformationDetail from "./checkComponent/borrowerInformationDetail"; //借款人资料
   import capplicationInformationDetail from "./checkComponent/applicationInformationDetail"; //申请信息
   import processTrajectory from "./checkComponent/processTrajectory"; //流程轨迹
-  // import CreditFormKeydownEvent from './detailComponent/CreditFormKeydownEvent.vue'
   export default {
     data() {
       return {
@@ -147,10 +141,8 @@
         SplitRight: "right",
         watchData: '',
         originLeft: '',
-        // 进件人信息
         customInf: [], //申请信息页local字段
         tastwaitingPass: [], //详情列表页信息--(含)取applyId
-        // -------------------------------结束
         showHalfBtn: false,
         CompareAlert: false,
         title: "",
@@ -178,6 +170,8 @@
           label: '内匹客户姓名'
         }],
         isFull: false,
+         comBtn:true,
+        alertComBtn:false,
       }
     },
     methods: {
@@ -302,8 +296,6 @@
     /* min-width: 1366; */
   }
 
-  /* 激活样式 流-css */
-
   .tab1Default {
     color: #bfcbd9;
   }
@@ -348,7 +340,6 @@
     position: absolute;
     top: 7px;
     right: 17px;
-    /* right: 0; */
   }
 
   .showAllList {
@@ -552,15 +543,4 @@
     height: calc( 100% - 48px);
     overflow: auto;
   }
-
-  .compareIcon {
-    background: white;
-    color: #0077ff;
-    padding: 0;
-    height: 38px;
-    width: 38px;
-    float: right;
-    margin: 5px 0 0 2px;
-  }
-
 </style>

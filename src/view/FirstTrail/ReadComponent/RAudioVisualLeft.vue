@@ -44,13 +44,15 @@
         </el-collapse-item>
       </el-collapse>
       <!-- 按钮 : 缩略图 对比  -->
-      <el-button @click="SmallpicAlert" class="compareBtn">缩略图</el-button>
-      <el-button type="primary" @click="compBtnShow" class="checkDetailBtn">对比</el-button>
+      <div class="AudioVisualLeft_btn_wrap">
+        <el-button @click="SmallpicAlert" class="AudioVisualLeft_compareBtn">缩略图</el-button>
+        <el-button type="primary" @click="compBtnShow" v-if="this.comBtn">对比</el-button>
+      </div>
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative; left:0; top:0;" :id='msg'>
-        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" style="width:auto;height:auto;" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath"
+        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath"
           v-if="key==smallPicInd" />
       </div>
     </div>
@@ -69,8 +71,8 @@
       </p>
       <div class="small_pic_content">
         <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
-          <img class="Small_pic" :src="'http://10.1.26.6:8080'+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
-            ref="small_pic_ref" />
+          <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref"
+          />
           <p> {{val.arcSubType}} </p>
         </figure>
       </div>
@@ -126,18 +128,18 @@
 </template>
 
 <script>
-  // import {drag} from '../../../../static/js/public'
+  import imgUrl from '../../../util/ConstantSocialAndPn'
   export default {
     data() {
       return {
         perfBtn: false,
         judgeFlag: '',
         opendImg: [],
+        imgBaseUrl: '',
         // opendImg: [true, true, true, true],
         // closedImg: [false, false, false, false],
         closedImg: [],
         uurl: '',
-        imgBaseUrl: 'http://10.1.26.6:8080',
         localInf: [], //初始化的时候，根据传进来的applyId获取初始化数据
         showListDiv: true,
         show: true,
@@ -159,7 +161,7 @@
         custmatchApplySubNo: '',
       }
     },
-    props: ['msg'],
+    props: ['msg', 'comBtn'],
     methods: {
       closeAlertSearch() {
         this.dataa = false;
@@ -423,7 +425,9 @@
       }
     },
     mounted() {
+      console.log(this.comBtn)
       this.localInf = JSON.parse(localStorage.getItem("internalObj")) //初审-匹配查看
+      this.imgBaseUrl = imgUrl.imgBaseUrl;
       this.odivMove(this.msg);
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.matchApplyId,
@@ -487,29 +491,11 @@
     background: #eef0f9;
     margin-right: 11px;
     border: 1px solid #bfcbd9;
-    /* border-radius: 0 6px 6px 0; */
     position: relative;
     z-index: 2;
   }
 
   /* 对比-按钮 */
-
-  .compareBtn {
-    position: absolute;
-    bottom: 18px;
-    right: 98px;
-    color: #0077ff;
-    border: 1px solid #0077ff;
-    background: #eef0f9;
-  }
-
-  /* 缩略图-按钮 */
-
-  .checkDetailBtn {
-    position: absolute;
-    bottom: 18px;
-    right: 17px;
-  }
 
   .showHidIcons {
     display: none;
@@ -566,17 +552,12 @@
     width: calc( 100% - 214px);
   }
 
-  /*  css */
-
   .AudioVisualLeft .AudioVisual_List {
     width: 203px;
     background: #eef0f9;
     border: 1px solid #bfcbd9;
-    /* border-radius: 6px 6px 0 0; */
     margin-right: 11px;
   }
-
-  /* ----------------------------------- */
 
   /* 左侧折叠面板 */
 
@@ -594,7 +575,6 @@
     display: block;
     float: left;
     border: 1px solid #e6ebf5;
-    /* border: 1px solid black; */
     border-bottom: none;
     text-align: center;
     position: relative;
@@ -638,7 +618,6 @@
     overflow: auto;
     border: 1px solid #bfcbd9;
     background: #ffffff;
-    /* background: #000; */
     border-radius: 4px;
   }
 
@@ -648,13 +627,9 @@
     font-size: 16px;
     text-align: center;
     background: rgba(0, 119, 255, 0.75);
-    /* opacity: 0.75; */
-    /* background: #0077ff; */
     height: 48px;
     line-height: 48px;
     color: #f8f9fd;
-    /* 不换行 */
-    /* white-space:nowrap; */
     overflow: hidden;
     position: relative;
   }
@@ -675,7 +650,6 @@
     width: 30%;
     height: 200px;
     margin: 15px 0 0 2%;
-    /* margin: 0 0 0 23px; */
   }
 
   /*  缩略图 figure 内 图片名字 p 标签 */
@@ -689,7 +663,6 @@
     font-size: 16px;
     color: #475669;
     letter-spacing: 0.11px;
-    /* 超出 省略号显示 */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -704,9 +677,6 @@
     border: 2px solid #bfcbd9;
     box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
   }
-
-  /* --------------------------- */
-
   .NamParentNode {
     margin-left: 20px;
     display: block;
@@ -716,8 +686,6 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-
-  /* ----------------------------- */
 
   .posi {
     position: absolute;

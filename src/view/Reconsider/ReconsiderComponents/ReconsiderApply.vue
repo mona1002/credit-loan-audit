@@ -109,12 +109,10 @@
     mounted() {
       // 复议不用flag判断，列表页专员、主管存的同一个字段
        this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting")); //复议申请专员+主管
-       
       this.post("/accepApplyReconController/getAccepApplyReconByProcessId", {
         processInstanceId: this.tastwaitingPass.processInstanceId,
         // id:'500001'
       }).then(res => {
-        console.log(res)
         this.conclu = res.data;
       });
     },

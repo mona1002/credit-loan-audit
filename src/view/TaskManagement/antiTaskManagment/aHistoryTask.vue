@@ -8,7 +8,6 @@
           <li>
             <p>
               <label> 进件编号 </label>
-              <!-- <el-input v-model="params.applySubNo" placeholder="请输入进件编号" @blur="num(params.applySubNo,'code')"></el-input> -->
               <el-input v-model="params.applySubNo" placeholder="请输入进件编号"></el-input>
             </p>
             <p>
@@ -35,8 +34,6 @@
               </el-date-picker>
             </p>
             <p>
-              <!-- <el-button class="btn" style="marginLeft:228px" @click="Rreset">重置</el-button>
-              <el-button class="btn" type="primary" @click="Rsearch">查询</el-button> -->
             </p>
           </li>
           <li>
@@ -123,12 +120,9 @@
         currentRow: null,
         currentPage: 1, //分页选中页
         pageCount: 10, // 每页显示条数
-        // pageCount: 1, // 每页显示条数
-        // totalPage:0,//总页数
         totalRecord: 0, //总条数
         tableData: [],
         production: null,
-        // value: ''
       }
     },
     methods: {
@@ -195,7 +189,6 @@
       },
     },
     mounted() {
-      console.log(baseU.path+'/remote/product/getProductForUser')
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
       this.params.orgCode = this.userInf.orgCode;
       this.params.userCode = this.userInf.userCode;

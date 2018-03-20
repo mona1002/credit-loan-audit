@@ -1,8 +1,7 @@
 @charset "utf-8";
-
 @media screen and (max-width: 1366px) {
   .Abody {
-    min-width:1366px;
+    min-width: 1366px;
   }
   html {
     width: 1366px;
@@ -13,8 +12,8 @@
   html {
     width: 100%;
   }
-  .Abody{       
-    min-width: 1366px; 
+  .Abody {
+    min-width: 1366px;
   }
 }
 
@@ -220,4 +219,26 @@ table {
   clear: both;
   height: 0;
   visibility: hidden;
+}
+
+.AudioVisualLeft_btn_wrap {
+  position: absolute;
+  bottom: 18px;
+  right: 17px;
+}
+
+.AudioVisualLeft_compareBtn {
+  color: #0077ff;
+  border: 1px solid #0077ff;
+  background: #eef0f9;
+}
+
+.AudioVisualLeft_compareIcon {
+  background: white;
+  color: #0077ff;
+  padding: 0;
+  height: 38px;
+  width: 38px;
+  float: right;
+  margin: 5px 0 0 2px;
 }

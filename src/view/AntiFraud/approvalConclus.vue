@@ -284,7 +284,7 @@
   </div>
 </template>
 <script>
-import baseurl from '../.././util/ConstantSocialAndPn';
+import baseurl from '../../util/ConstantSocialAndPn';
 export default {
   data() {
     return {
@@ -1333,7 +1333,7 @@ export default {
     },
     //大数据风控
     tobigData() {
-      this.post(baseurl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
+      this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
         applyId: this.applyId
       }).then(res => {
         //console.log(res.data);
@@ -1353,7 +1353,7 @@ export default {
     //社保/公积金
     Social() {
       console.log('第一次调用')
-      this.post(baseurl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {
+      this.post(baseurl.BaseUrl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {
         certCode: this.certCode,
         custName: this.custName
       }).then(res => {

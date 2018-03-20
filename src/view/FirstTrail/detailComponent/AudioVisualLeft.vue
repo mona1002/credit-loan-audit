@@ -9,7 +9,7 @@
     <div class="AudioVisual_List" ref="AudioVisual_List_ref" v-show="showListDiv">
       <p>{{this.mwidth}}
       </p>
-      {{mheight}}
+      <!-- {{imgUrl}} -->
       <!-- 折叠面板title -->
       <img class="hidBtn" src="../../../../static/images/Shape Copy.png" @click="hid">
       <!-- 折叠面板-手风琴List -->
@@ -47,18 +47,18 @@
         </el-collapse-item>
       </el-collapse>
       <!-- 按钮 : 缩略图 对比  -->
-      <div class="btn_wrap">
-        <el-button @click="SmallpicAlert" class="compareBtn">缩略图</el-button>
-        <el-button type="primary" @click="compBtnShow" class="checkDetailBtn">对比</el-button>
+      <div class="AudioVisualLeft_btn_wrap">
+        <el-button @click="SmallpicAlert" class="AudioVisualLeft_compareBtn">缩略图</el-button>
+        <el-button type="primary" @click="compBtnShow"  v-if="this.comBtn">对比</el-button>
       </div>
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative;" :id='msg'>
         <!-- <div id="aaaaa"> </div> -->
-        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" style="width:auto;height:auto;" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath"
+        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath"
           v-if="key==smallPicInd" />
-        <!-- <img ref="Big_pic_ref" v-for="(val,key) in imgPathDetail" style="width:auto;height:auto;" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath"
+        <!-- <img ref="Big_pic_ref" v-for="(val,key) in imgPathDetail" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath"
           />  -->
         <!-- v-if="key==smallPicInd" -->
         <!-- <img ref="Big_pic_ref" id='abcd'  style="width:auto;height:auto;" :src="uurl" /> -->
@@ -79,7 +79,7 @@
       </p>
       <div class="small_pic_content">
         <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
-          <img class="Small_pic" :src="'http://10.1.26.6:8080'+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
+          <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
             ref="small_pic_ref" />
           <p> {{val.arcSubType}} </p>
         </figure>
@@ -136,7 +136,7 @@
 </template>
 
 <script>
-  // import {drag} from '../../../../static/js/public'
+  import imgUrl  from '../../../util/ConstantSocialAndPn'
   export default {
     data() {
       return {
@@ -148,7 +148,7 @@
         opendImg: [],
         closedImg: [],
         uurl: '',
-        imgBaseUrl: 'http://10.1.26.6:8080',
+        imgBaseUrl: '',
         localInf: [], //初始化的时候，根据传进来的applyId获取初始化数据
         showListDiv: true,
         show: true,
@@ -170,7 +170,7 @@
         custmatchApplySubNo: '',
       }
     },
-    props: ['msg'],
+  props: ['msg', 'comBtn'],
     methods: {
       closeAlertSearch() {
         this.dataa = false;
@@ -262,34 +262,16 @@
         });
       },
       smallPic(ev, ind) {
-        console.log("smalllpic")
         this.smallPicInd = ind;
         this.SmallPicShow = false;
         this.defaultBigPicCss();
       },
       getImg(ind) {
-        console.log('img2')
         this.smallPicInd = 0;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
         this.$refs.img_wrap.style.left=0;
         this.$refs.img_wrap.style.top=0;
-        // this.mwidth = '';
-        // this.mheight = '';
         this.defaultBigPicCss();
-        // var heightCss = 
-        // console.log(arguments.callee)
-        // ==========================================
-        // 新添加-待测试，解决第一次取不到数值问题
-        // var count = 0;
-        // if (this.count == 0) {
-        // console.log("进入0")
-        // this.count++; 
-        // this.smallPicInd = 0;
-        // this.defaultBigPicCss();
-        // this.imgPath = this.ListDetails[ind].applyArchiveInfos; 
-        // this.getImg();
-        // }
-        // ------------------------------------------------------ 
       },
       hid() {
         this.showListDiv = false;
@@ -342,7 +324,6 @@
             100 + "px";
           this.$refs.Big_pic_ref[0].style.width = "auto";
         }
-        console.log(this.$refs.img_wrap)
         this.$refs.img_wrap.scrollIntoView()
 
       },
@@ -375,64 +356,21 @@
       },
       defaultBigPicCss() {
         this.$nextTick(() => {
-          console.log("图片片片")
-          console.log(this.$refs.Big_pic_ref)
-          console.log(this.$refs.Big_pic_ref[0].offsetHeight)
-          console.log('---------------------------------------')
-          console.log(this.$refs.Big_pic_ref[0].height)
-          console.log(this.$refs.Big_pic_ref[0].width)
-          console.log('---------------------------------------')
-          // console.log(document.defaultView.getComputedStyle(this.$refs.Big_pic_ref[0]).height)
-          // console.log(document.defaultView.getComputedStyle(this.$refs.Big_pic_ref[0],null).height)
-          // ------------------------------------------------------------
           if (this.$refs.Big_pic_ref) {
             this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
             var outsideH = this.$refs.AudioVisual_Img_ref.offsetHeight;
             var widthReduce = this.$refs.AudioVisual_Img_ref.offsetWidth - this.$refs.Big_pic_ref[0].offsetWidth;
             var heightReduce = this.$refs.AudioVisual_Img_ref.offsetHeight - this.$refs.Big_pic_ref[0].offsetHeight;
-            // console.log(widthReduce, '--------', heightReduce)
             if (widthReduce < heightReduce) {
-              // console.log("宽")
               this.$refs.Big_pic_ref[0].style.width = '100%'; //calc( 100% - 202px)
               this.$refs.Big_pic_ref[0].style.height = 'auto'; //calc( 100% - 202px)
-              // console.log(this.$refs.Big_pic_ref[0].style.height)
-              // console.log(this.$refs.Big_pic_ref[0].style.width)
             } else {
-              // console.log("高")
               this.$refs.Big_pic_ref[0].style.width = 'auto';
               this.$refs.Big_pic_ref[0].style.height = (outsideH - 10) + "px";
-              // this.$refs.Big_pic_ref[0].style.height ="100%";
-
-              // console.log(this.$refs.Big_pic_ref[0].style.height)
-              // console.log(this.$refs.Big_pic_ref[0].style.width)
             }
 
           }
-          console.log(this.$refs.Big_pic_ref[0].height)
-          console.log(this.$refs.Big_pic_ref[0].width)
-          // ------------------------------------------------------------------
-
         })
-        // console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).height)
-        // console.log(getComputedStyle(this.$refs.Big_pic_ref[0], false).width)
-        // console.log(typeof (getComputedStyle(this.$refs.Big_pic_ref[0], false).width))
-        // if (getComputedStyle(this.$refs.Big_pic_ref[0], false).width > getComputedStyle(this.$refs.Big_pic_ref[0], //判断宽度>高度  按宽度100%显示
-        //     false).height) { // 点击切换图片时，让显示的大图宽高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
-        //   this.$refs.Big_pic_ref[0].style.width = "100%";//calc( 100% - 202px)
-        //   console.log("默认大图css样式if width >>>>>>>>>>> height" + this.$refs.Big_pic_ref[0].style.width)
-        // } else {
-        //   this.$refs.Big_pic_ref[0].style.height = "100%";
-        //   console.log("默认大图css样式else  width <<<<<<  height")
-        //   console.log(this.$refs.Big_pic_ref[0])
-        //   console.log(this.$refs.Big_pic_ref[0].style.height)
-        // }
-        // this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
-        //  this.$refs.big_pic[0].style.height = "100%"; // 点击切换图片时，让显示的大图高度重新为100%。 作用 ：避免点击放大缩小之后，切换图片会保留上一张图片缩放的大小比例
-        // this.$refs.big_pic[0].style.transform = "rotate(0deg)"
-        //    if (this.$refs.Big_pic_ref) {
-        //     this.$refs.Big_pic_ref[0].style.width = '100%'; //calc( 100% - 202px)
-        //     this.$refs.Big_pic_ref[0].style.height = 'auto'; //calc( 100% - 202px)
-        // }
       },
       changeSmallPicCss(ind) {
         for (var i = 0; i < this.$refs.small_pic_ref.length; i++) {
@@ -443,24 +381,20 @@
         }
       },
       odivMove(id) {
-// console.log($event)
         var disX = 0;
         var disY = 0;
         var oDiv = document.getElementById(id);
         oDiv.onmousedown = function (ev) {
-          console.log('down')
           var oEvent = ev || event;
           disX = oEvent.clientX - oDiv.offsetLeft;
           disY = oEvent.clientY - oDiv.offsetTop;
           document.onmousemove = function (ev) {
-            console.log('move')
             var oEvent = ev || event;
              oEvent.stopPropagation();
             oDiv.style.left = oEvent.clientX - disX + "px";
             oDiv.style.top = oEvent.clientY - disY + "px";
           }
           document.onmouseup = function (ev) {
-            console.log('up')
             document.onmousemove = null;
             document.onmouseup = null;
           }
@@ -519,8 +453,7 @@
       } else if (this.judgeFlag.flag == '04') {
         this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
       }
-      console.log( this.judgeFlag)
-      console.log(this.localInf )
+      this.imgBaseUrl=imgUrl.imgBaseUrl;
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.applyId,
@@ -586,34 +519,6 @@
     /* border-radius: 0 6px 6px 0; */
     position: relative;
     z-index: 2;
-  }
-
-  /* 对比-按钮 */
-
-  .btn_wrap {
-    /* background:red; */
-    position: absolute;
-    bottom: 18px;
-    right: 5px;
-    width: 170px;
-    /* margin:0 auto; */
-  }
-
-  .compareBtn {
-    /* position: absolute;
-    bottom: 18px;
-    right: 98px; */
-    color: #0077ff;
-    border: 1px solid #0077ff;
-    background: #eef0f9;
-  }
-
-  /* 缩略图-按钮 */
-
-  .checkDetailBtn {
-    /* position: absolute;
-    bottom: 18px;
-    right: 17px; */
   }
 
   .showHidIcons {
