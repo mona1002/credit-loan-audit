@@ -133,8 +133,6 @@
         currentRow: null,
         currentPage: 1, //分页选中页
         pageCount: 10, // 每页显示条数
-        // pageCount: 1, // 每页显示条数
-        // totalPage:0,//总页数
         totalRecord: 0, //总条数
         tableData: [],
         production: null,
@@ -167,13 +165,11 @@
         }
       },
       handleSizeChange(val) {
-        // console.log(`每页 ${val} 条`);
         this.params.pageSize = val;
         this.params.pageNum = 1;
         this.getInf(this.params);
       },
       handleCurrentChange(val) {
-        // console.log(`当前页: ${val}`);
         this.params.pageNum = val;
         this.getInf(this.params);
       },

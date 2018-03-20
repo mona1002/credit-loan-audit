@@ -525,7 +525,6 @@
               </p>
               <p>
                 <label class="InternetInf_right_label"> 父母收入[元]： </label>
-                <!-- <span class="detail_inf">{{this.FormData.parentIncome }} </span> -->
                 <span style="border:none;">{{this.FormData.parentIncome }} </span>
 
               </p>
@@ -803,39 +802,7 @@
           return (((sign) ? '' : '-') + num);
         }
       },
-      // acquire(val, name) {
-      //   if (val == null || val == '') {
-      //     return
-      //   } else {
-      //     if (val.toString().indexOf('.') == -1) {
-      //       val = val + "." + "0" + '0';
-      //       this.formatSC(name, val);
-      //     } else if (val.toString().indexOf('.') != -1) {
-      //       if (val.toString().split(".")[1].length < 2) {
-      //         val = val + "0";
-      //         this.formatSC(name, val);
-      //       } else {
-      //         val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
-      //         this.formatSC(name, val);
-      //       }
-      //     }
-      //   }
-      // },
-      // mountM() {
-      //   this.acquire(this.FormData.fbalance, '月还款');
-      //   this.acquire(this.FormData.regcapitalamt, '注册资金');
-      //   this.acquire(this.FormData.monthrentamt, '月还款/租金');
-      //   this.acquire(this.FormData.oneYearProfitamt, '近一年利润');
-      //   this.acquire(this.FormData.profitamountmamt, '月利润');
-      //   this.acquire(this.FormData.spouseIncome, '配偶收入');
-      //   this.acquire(this.FormData.parentIncome, '父母收入');
-      //   this.acquire(this.FormData.fconsumption, '开销');
-      //   this.acquire(this.FormData.childPaycostamt, '生活费支付');
-      //   this.acquire(this.FormData.avgsalaryamt, '月均工资');
-      //   this.acquire(this.FormData.iloanAmt, '借款金额');
-      // },
       NewPage(ind) {
-        console.log(ind);
         switch (ind) {
           case 0:
             window.open("http://zhixing.court.gov.cn/search/");
@@ -954,11 +921,8 @@
       }).then(res => {
         if (res.statusCode == 200) {
           this.FormData = res.data;
-          // console.log(this.FormData)
           this.AreaNPercent();
-          // this.mountM();
           this.formatSC();
-          // this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, '');
            this.FormData.aaddress ? this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, ''):this.FormData.aaddress ;
           this.mountJ(0, res.data.wbeexEcuted);
           this.mountJ(1, res.data.wnetHirecom);

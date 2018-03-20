@@ -877,7 +877,6 @@
         }
       },
       NewPage(ind) {
-        console.log(ind);
         switch (ind) {
           case 0:
             window.open("http://zhixing.court.gov.cn/search/");
@@ -961,7 +960,6 @@
             break;
           case 16:
             val == 0 || val == null ? this.Children.ChildrenOrNot = false : this.Children.ChildrenOrNot = true;
-            // console.log(this.Children.ChildrenOrNot )
             break;
           case 17:
             val == 0 || val == null ? this.Children.PayAlimony = false : this.Children.PayAlimony = true;
@@ -991,18 +989,15 @@
       } else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
         this.getParams = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议主管+专员
       }
-      console.log(this.getParams)
       // 获取查询列表数据
       this.post("/creauditInfo/queryCreauditInfoObj", {
         applyId: this.getParams.applyId,
         // applyId: "00542",
       }).then(res => {
         if (res.statusCode == 200) {
-          console.log(res.data)
           this.FormData = res.data;
           this.formatSC();
           // this.AreaNPercent();
-          // this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, '')
           this.FormData.aaddress ? this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, '') : this.FormData
             .aaddress;
           this.mountJ(0, res.data.wbeexEcuted);

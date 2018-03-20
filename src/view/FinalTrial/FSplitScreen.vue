@@ -34,7 +34,7 @@
               </span>
             </p>
             <div class="Left_right_BigImg ">
-              <AudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0"  msg="FspLone" v-on:CompareShow="compBtnS"></AudioVisualLeft>
+              <AudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0"  msg="FspLone" v-on:CompareShow="compBtnS"  :comBtn.sync='comBtn'></AudioVisualLeft>
               <!-- √ -->
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
               <!-- √ -->
@@ -113,7 +113,7 @@
           <!-- 搜索框 -->
           <p class="customName">客户名称：
             <el-input v-model="AlertSearch" :disabled="true" style="display:inline;"></el-input>
-            <el-button type="primary" @click="compareProps">
+            <el-button type="primary" @click="compareProps" class="AudioVisualLeft_compareIcon">
               <i class="el-icon-search" style="fontSize:16px"></i>
             </el-button>
           </p>
@@ -128,7 +128,6 @@
   </div>
 </template>
 <script>
-  // -----------------------------------protect---------------------------
   import myHead from "../header"
   import FcCreditForm from './FinalComponent/FcCreditForm'; //左侧
   import FCreditForm from './FinalComponent/FCreditForm'; //右侧
@@ -141,18 +140,12 @@
   import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信（左右）
   import processTrajectory from "../FirstTrail/checkComponent/processTrajectory.vue"; //流程轨迹（左）
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf.vue' //反欺诈结论
-  // ----------------------------------------------------------
   // 编辑
   import InternalMatch from "../FirstTrail/InternalMatch.vue";
   import applicationInformation from "../FirstTrail/detailComponent/applicationInformation.vue";
   import borrowerInformation from "../FirstTrail/detailComponent/borrowerInformation.vue";
   import PhoneCredit from "../FirstTrail/PhoneCredit.vue";
-  // import s from "./detailComponent/remark";
-  // 反欺诈结论 写此处
-  // 信审审批写此处
   import CreditApproval from "../FirstTrail/CreditApproval.vue";
-  // 查询
-  // import cFinanceInformation from "./checkComponent/FinanceInformation";
   export default {
     data() {
       return {
@@ -192,6 +185,8 @@
           label: '内匹客户姓名'
         }],
         isFull: false,
+            comBtn:true,
+        alertComBtn:false,
       }
     },
     methods: {
@@ -275,7 +270,6 @@
       }
     },
     mounted() {
-      console.log("分屏");
       this.tastwaitingPass = JSON.parse(localStorage.getItem("FtaskInWaitting"));
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.applyId,
@@ -291,7 +285,6 @@
     },
     components: {
       myHead,
-      //更改后的引入
       FcCreditForm,
       FCreditForm,
       AudioVisualLeft,
@@ -303,13 +296,10 @@
       cremarkDetail, //备注信息-左
       processTrajectory,
       aAntiApplyInf,
-      // -----------------------------------------
-      // 编辑
       InternalMatch,
       applicationInformation,
       borrowerInformation,
       PhoneCredit,
-      // 信审审批
       CreditApproval,
     }
   }
@@ -318,7 +308,6 @@
 <style scoped>
   .SplitScreen {
     height: 100%;
-    /* min-width: 1366; */
   }
   /* 激活样式 流-css */
 

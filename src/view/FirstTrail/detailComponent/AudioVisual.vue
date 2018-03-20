@@ -51,13 +51,14 @@
         </el-collapse-item>
       </el-collapse>
       <!-- 按钮 : 缩略图 对比  -->
-      <el-button @click="SmallpicAlert" class="compareBtn">缩略图</el-button>
-      <el-button type="primary" @click="compBtnShow" class="checkDetailBtn">对比</el-button>
+      <div class="AudioVisualLeft_btn_wrap">
+      <el-button @click="SmallpicAlert" class="AudioVisualLeft_compareBtn">缩略图</el-button>        
+      </div>
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative; left:0; top:0;" id='FirstAud'>
-        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="'http://10.1.26.6:8080'+val.imagePath" v-if="key==smallPicInd"
+        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd"
         />
       </div>
     </div>
@@ -76,10 +77,20 @@
       </p>
       <div class="small_pic_content">
         <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
-          <img class="Small_pic" :src="'http://10.1.26.6:8080'+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
+          <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
             ref="small_pic_ref" />
           <p>{{val.arcSubType}} </p>
         </figure>
+        <!-- this.litimg -->
+        <!-- <div v-for="(val,index) in litimg" :key="index" style="background:black; border:4px solid red;float:left;">
+          <figure v-for="(value,ind) in val" :key="ind" class="small_pic_figure" style="float:left;background:blue;border:5px solid yellow;"
+            @click='ttttt(index,ind)'>
+            <img class="Small_pic" :src=" imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
+            ref="small_pic_ref" />
+          <p>{{val.arcSubType}} </p>
+          </figure>
+        </div> -->
+
       </div>
     </div>
     <!-- </div> -->
@@ -87,10 +98,15 @@
 </template>
 
 <script>
+import imgUrl from'../../../util/ConstantSocialAndPn'
   export default {
     data() {
       return {
         // picData: [],
+         imgBaseUrl:'',
+        litimg: [],
+        litimgIndex: -1,
+        litimgInd: -1,
         perfBtn: false, //功能按钮
         opendImg: [],
         closedImg: [],
@@ -103,10 +119,22 @@
         ListDetails: [],
         applyId: '', //入参
         imgPath: [],
-        localInf: [] //localstorage 接收的所有参数
+        localInf: [], //localstorage 接收的所有参数,
       }
     },
     methods: {
+      ttttt(index, ind) {
+        // console.log(index)
+        this.litimgIndex = index;
+        this.litimgInd = ind;
+        this.smallPicInd = ind;
+        this.SmallPicShow = false;
+        this.defaultBigPicCss();
+        // this.getImg();
+        console.log(this.ListDetails[index])
+        // this.imgPath=  this.ListDetails[index][ind].applyArchiveInfos;
+        // console.log(ind)
+      },
       opend(vv) {
         console.log(vv)
       },
@@ -139,7 +167,18 @@
             this.ListDetails = res.data;
             if (this.ListDetails) {
               var MChiDate = null;
+              // this.litimg = [];
               for (var i = 0; i < this.ListDetails.length; i++) {
+                // console.log( this.ListDetails[i].applyArchiveInfos)
+                // this.litimg.length=this.ListDetails[i].applyArchiveInfos.length;
+                // console.log(this.ListDetails[i].applyArchiveInfos)
+                // this.litimg[i] = [];
+                // for (var j = 0; j < this.ListDetails[i].applyArchiveInfos.length; j++) {
+                //   console.log(this.ListDetails[i].applyArchiveInfos[j])
+                //   this.litimg[i][j] = this.ListDetails[i].applyArchiveInfos[j]
+                //   // this.litimg[j].push(this.ListDetails[i].applyArchiveInfos[j])
+                //   console.log(this.litimg)
+                // }
                 var MChiDate = new Date(this.ListDetails[i].uploadDate);
                 this.ListDetails[i].uploadDate = this.comput(MChiDate)
               }
@@ -150,10 +189,10 @@
         });
       },
       getImg(ind) {
-                this.smallPicInd = 0;
+        this.smallPicInd = 0;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
-         this.$refs.img_wrap.style.left=0;
-        this.$refs.img_wrap.style.top=0;
+        this.$refs.img_wrap.style.left = 0;
+        this.$refs.img_wrap.style.top = 0;
         this.defaultBigPicCss();
       },
       hid() {
@@ -161,14 +200,14 @@
         this.$refs.preBtn.style.left = 37 + 'px';
         this.$refs.PbtnIcons.style.right = 'calc( 50% - 97px)';
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
-          this.defaultBigPicCss();
+        this.defaultBigPicCss();
       },
       showList() {
         this.showListDiv = true;
         this.$refs.preBtn.style.left = 417 + 'px';
         this.$refs.PbtnIcons.style.right = 'calc( 50% - 303px)';
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 412px)";
-          this.defaultBigPicCss();
+        this.defaultBigPicCss();
       },
       SmallpicClose() {
         this.SmallPicShow = false;
@@ -182,7 +221,8 @@
           if (this.smallPicInd < 0) {
             this.smallPicInd = this.$refs.small_pic_ref.length - 1;
           }
-        }       this.defaultBigPicCss();
+        }
+        this.defaultBigPicCss();
       },
       next() {
         this.smallPicInd++;
@@ -190,24 +230,26 @@
           if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
             this.smallPicInd = 0;
           }
-        } this.defaultBigPicCss();
+        }
+        this.defaultBigPicCss();
       },
       larger() {
         if (this.$refs.Big_pic_ref) {
           this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
             100 + "px";
-             this.$refs.Big_pic_ref[0].style.width = "auto";
+          this.$refs.Big_pic_ref[0].style.width = "auto";
         }
       },
       smaller() {
         if (this.$refs.Big_pic_ref) {
           this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
-            100 + "px"; this.$refs.Big_pic_ref[0].style.width = "auto";
+            100 + "px";
+          this.$refs.Big_pic_ref[0].style.width = "auto";
         }
       },
       clockWise() {
         if (this.$refs.Big_pic_ref) {
-          if (this.$refs.Big_pic_ref[0].style.transform == "") { 
+          if (this.$refs.Big_pic_ref[0].style.transform == "") {
             this.$refs.Big_pic_ref[0].style.transform += "rotate(90deg)";
           } else {
             this.$refs.Big_pic_ref[0].style.transform = this.$refs.Big_pic_ref[0].style.transform.slice(0, 7) + (
@@ -235,7 +277,7 @@
       smallPic(ev, ind) {
         this.smallPicInd = ind;
         this.SmallPicShow = false;
-        this.defaultBigPicCss();        
+        this.defaultBigPicCss();
       },
       defaultBigPicCss() {
         this.$nextTick(() => {
@@ -294,11 +336,11 @@
             if (event.wheelDelta < 0) {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
                 100 + "px";
-                 this.$refs.Big_pic_ref[0].style.width = "auto"
+              this.$refs.Big_pic_ref[0].style.width = "auto"
             } else {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
                 100 + "px";
-                 this.$refs.Big_pic_ref[0].style.width = "auto"
+              this.$refs.Big_pic_ref[0].style.width = "auto"
             }
           };
           this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => {
@@ -337,6 +379,7 @@
       } else if (this.judgeFlag.flag == '04') {
         this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
       }
+        this.imgBaseUrl=imgUrl.imgBaseUrl;
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.applyId,
@@ -364,10 +407,10 @@
 
 </script>
 <style scoped>
-
   .AudioVisual {
     height: 100%;
   }
+
   /* public */
 
   .small_pic_close {
@@ -375,6 +418,7 @@
     right: 18px;
     top: 13px;
   }
+
   /* 图片功能按钮 */
 
   .showBtn {
@@ -400,23 +444,6 @@
     border: 1px solid #bfcbd9;
     position: relative;
     z-index: 2;
-  }
-  /* 对比-按钮 */
-
-  .compareBtn {
-    position: absolute;
-    bottom: 18px;
-    right: 98px;
-    color: #0077ff;
-    border: 1px solid #0077ff;
-    background: #eef0f9;
-  }
-  /* 缩略图-按钮 */
-
-  .checkDetailBtn {
-    position: absolute;
-    bottom: 18px;
-    right: 17px;
   }
   /*  放大、缩小 按钮 wrap */
 
@@ -487,7 +514,9 @@
     border: 1px solid #bfcbd9;
     margin-right: 11px;
   }
+
   /* 左侧折叠面板 */
+
   /* 折叠面板上面的四个 th 表头 */
 
   .AudioVisual .list_title {
@@ -541,6 +570,7 @@
     width: calc(100% - 255px);
     border-left: none;
   }
+
   /* 缩略图最外侧div */
 
   .AudioVisual .Small_pic_div {
@@ -555,6 +585,7 @@
     background: #ffffff;
     border-radius: 4px;
   }
+
   /* 缩略图 p 标签  title */
 
   .AudioVisual .Small_pic_title {
@@ -567,6 +598,7 @@
     overflow: hidden;
     position: relative;
   }
+
   /* 缩略图 content */
 
   .AudioVisual .small_pic_content {
@@ -575,6 +607,7 @@
     overflow: auto;
     padding-top: 30px;
   }
+
   /* 缩略图片-figure-wrap */
 
   .AudioVisual .small_pic_figure {
@@ -583,6 +616,7 @@
     height: 200px;
     margin: 0 0 0 18px;
   }
+
   /*  缩略图 figure 内 图片名字 p 标签 */
 
   .AudioVisual .small_pic_figure p {
@@ -599,6 +633,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
   /* 缩略图 各个 img 图片 */
 
   .AudioVisual .Small_pic {

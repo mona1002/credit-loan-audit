@@ -4,7 +4,7 @@ import appConstant from './constant'
 import platforUrl from'./constantUser'
 
 // axios 配置
-axios.defaults.timeout = 5000;
+axios.defaults.timeout = 10000;
 //数据接口
  
 axios.defaults.baseURL = appConstant.baseUrl_common;
@@ -23,7 +23,6 @@ axios.defaults.withCredentials = true;
 axios.interceptors.response.use(  response => {    
   if (response.data.statusCode == 900) {
     window.location.href = platforUrl+"#/";  
-    // console.log( platforUrl)  
   };    
   return response;  
 },   error => {
