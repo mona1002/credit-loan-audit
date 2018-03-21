@@ -841,7 +841,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 	        	//按钮加“加载中”
 	            this.shenpiLoading = true;
 				this.shenpiFont = '提交中';
-				this.sdialogVisible = false; 
+				//this.sdialogVisible = false; 
 
 	           var reg = /,/;
 
@@ -878,6 +878,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 		        opinionFlag:'00', // 任务类型  初审 00 
 		        busiState:'21'//复议审批
 		      }).then(res => {
+		      	this.sdialogVisible = false; 
 		        if (res.statusCode != '200') {
 		          	this.$message({
 			            message: res.msg,
@@ -1044,7 +1045,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 				//console.log(this.$refs.rmainReasonName.selectedLabel);
 				this.jujueLoading = true;
 				this.jujueFont = '提交中';
-				this.jdialogVisible = false;
+				//this.jdialogVisible = false;
 				this.post("/creauditOpinion/approval", {
 		        // 挂起 taskId 任务id
 		        taskId: this.taskId,
@@ -1071,6 +1072,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 		        dealroperCode:this.dealroperCode,//经办人
 		        applySubNo:this.datas.applySubNo,//复议申请单ID
 		      }).then(res => {
+		      	this.jdialogVisible = false;
 		        console.log(res);
 		        if (res.statusCode != '200') {
 		          this.$message({
@@ -1116,7 +1118,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 				//console.log(this.values);
 				this.huituiLoading = true;
 				this.huituiFont = '提交中';
-				this.dialogVisible = false;
+				//this.dialogVisible = false;
 				this.post("/creauditOpinion/approval", {
 			        // 挂起 taskId 任务id
 			        taskId: this.taskId,
@@ -1143,6 +1145,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 			        applySubNo:this.datas.applySubNo,//复议申请单ID
 		        	dealroperCode:this.dealroperCode,//经办人
 			      }).then(res => {
+			      	this.dialogVisible = false;
 			        console.log(res);
 			        if (res.statusCode != '200') {
 			          this.$message({

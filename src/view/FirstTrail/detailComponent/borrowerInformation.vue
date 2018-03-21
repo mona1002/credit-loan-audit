@@ -71,7 +71,8 @@
 					        label="建筑面积[m²]"
 					        min-width="110">
 					        <template slot-scope="scope">
-						        <span class="regSpan" v-show="(scope.row.coveredArea != '' && scope.row.coveredArea*1 > 300) || (scope.row.coveredArea != '' && scope.row.coveredArea*1 < 10)">
+					        	<!-- (scope.row.coveredArea != '' && scope.row.coveredArea*1 > 300) || (scope.row.coveredArea != '' && scope.row.coveredArea*1 < 10) -->
+						        <span class="regSpan" v-show="scope.row.isShow">
 				    				<i>*</i>建筑面积应在10-300之间
 				    			</span>
 						        <el-input v-model="scope.row.coveredArea" @blur="postcode(scope.row,'coveredArea')" placeholder="请输入内容"></el-input>
@@ -1316,7 +1317,7 @@
       		arr:[],
       		jiekrloading:false,
       		jiekrSure:'确定',
-
+      		// isShow:false
 	      };
 	    },
 		props:['isFull'],
@@ -2627,12 +2628,12 @@
 					case 'coveredArea':
 						if(row.coveredArea == ''){
 							row.coveredArea = '';
-							//this.postcodes=false;
 						}else{
 							if(row.coveredArea*1 > 300 || row.coveredArea*1 < 10){
-								//this.postcodes=true;
+								row.isShow = true;
 								row.coveredArea = '';
 							}else{
+								row.isShow = false;
 								row.coveredArea = this.formatNumber(row.coveredArea,2,0).replace(/,/g,'');
 							}
 						};
@@ -2641,10 +2642,8 @@
 					case 'estateAddress':
 						if(row.estateAddress == ''){
 							row.estateAddress = '';
-							//this.postcodes=false;
 						}else{
 							if(row.estateAddress.length > 100){
-								//this.postcodes=true;
 								row.estateAddress = '';
 							}
 						};
