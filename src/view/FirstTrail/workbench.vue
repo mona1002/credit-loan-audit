@@ -117,6 +117,8 @@
       refresh() {
         this.rot += 200;
         // this.$refs.worktask.style = "transform: rotate(" + this.rot + "deg)";
+        this.$refs.worktask.style.transform = "rotate(" + this.rot + "deg)";
+        
         // this.$refs.worktask.style = " -ms-transform: rotate("+this.rot+"deg)"; IE9
         this.post("/workFlowTaskQuery/getTaskProfile", {
           taskStatus: "01",
