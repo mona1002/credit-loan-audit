@@ -138,9 +138,9 @@
       <el-button icon="el-icon-check-hang" class="credit-btn" @click="open">挂起</el-button>
       <el-button v-show="judgeFlag != '03'" icon="el-icon-check-back" class="credit-btn" @click="coverFn('02')">回退</el-button>
       <!-- 专员 多一个审批 -->
-      <el-button v-show="judgeFlag == '03' && shenPiBtnShow" icon="el-icon-check-appro" class="credit-btn" @click="insert('submit')">审批</el-button>
+      <el-button v-show="judgeFlag == '03' && shenPiBtnShow" icon="el-icon-check-appro" class="credit-btn" @click="insert('submit')" :loading="isLoading">审批</el-button>
       <!-- 原审批改为提交 -->
-      <el-button icon="el-icon-check-appro" class="credit-btn" @click="insert()">提交</el-button>
+      <el-button icon="el-icon-check-appro" class="credit-btn" @click="insert()" :loading="isLoading">提交</el-button>
       <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('lcgj')">流程轨迹</el-button>
       <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('save')">保存</el-button>
       <el-button icon="el-icon-check-big-data" class="credit-btn" @click="tobigData">大数据风控</el-button>
@@ -184,7 +184,7 @@
           <div class="back-form-li" style="text-align:right;">
             <el-button plain @click="showFlag=0,coverShow=false;">返回</el-button>
             <!-- 回退 -->
-            <el-button type="primary" @click="submitFn('02')">提交</el-button>
+            <el-button type="primary" @click="submitFn('02')" :loading="isLoading">{{loadingTitle}}</el-button>
           </div>
         </el-form>
       </el-dialog>
