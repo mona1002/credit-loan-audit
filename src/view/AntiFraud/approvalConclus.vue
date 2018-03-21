@@ -377,6 +377,8 @@ export default {
       subreaName: '', // 子原因name
       secondReasons: [],
       secondaryReason: '',
+      isLoading: false, // 审批按钮 是否加载状态
+      loadingTitle: '提交', // 默认btn title
     }
   },
   mounted() {
