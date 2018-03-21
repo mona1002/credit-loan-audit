@@ -123,10 +123,8 @@
         }).then(res => {
           if (res.statusCode == 200) {
             this.tableData = res.data;
-            console.log('200成功')
           } else {
             this.$message.error(res.msg);
-            console.log('else失败')
             
           }
         });
