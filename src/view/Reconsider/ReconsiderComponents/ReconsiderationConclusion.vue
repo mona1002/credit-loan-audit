@@ -123,7 +123,7 @@
 				</p>
 			  </div>
 			  <span slot="footer" class="dialog-footer">
-			    <el-button type="primary" @click="hsure">提交</el-button>
+			    <el-button type="primary" :loading=huituiLoading @click="hsure">{{huituiFont}}</el-button>
 			    <el-button type="primary" @click="dialogVisible = false">返回</el-button>
 			  </span>
 			</el-dialog>
@@ -180,7 +180,7 @@
 				</p>
 			  </div>
 			  <span slot="footer" class="dialog-footer">
-			    <el-button type="primary" @click="jSure">提交</el-button>
+			    <el-button type="primary" :loading=jujueLoading @click="jSure">{{jujueFont}}</el-button>
 			    <el-button type="primary" @click="jdialogVisible = false">返回</el-button>
 			  </span>
 			</el-dialog>
@@ -284,7 +284,7 @@
 			  	</el-collapse>
 			  </div>
 			  <span slot="footer" class="dialog-footer">
-			    <el-button type="primary" @click="spsure">提交</el-button>
+			    <el-button type="primary" :loading=shenpiLoading @click="spsure">{{shenpiFont}}</el-button>
 			    <el-button type="primary" @click="sdialogVisible = false">返回</el-button>
 			  </span>
 			</el-dialog>
@@ -565,6 +565,12 @@
 		        socialLogVisible:false,//社保公积金
 		        social:'',//社保公积金 已绑定 未绑定
 		        orgId:'',
+		        huituiFont:'提交',
+		        huituiLoading:false,
+		        jujueLoading:false,
+				jujueFont:'提交',
+				shenpiLoading:false,
+				shenpiFont:'提交',
 			}
 		},
 		mounted(){
@@ -650,15 +656,19 @@
 			coverFn(flag){
 				switch (flag){
 					case 'back':
+					this.huituiLoading = false;
+					this.huituiFont = '提交';
 					this.dialogVisible = true;
-					this.get('system/getSystemDate').then(res => {
-			            console.log('回退', res)
-			            // 请求系统时间
+						this.get('system/getSystemDate').then(res => {
+				            console.log('回退', res)
+				            // 请求系统时间
 			            this.dealroperDate = res.data;
 			            console.log('this.', this.dealroperDate);
 			          })
 		         	break;
 		         	case 'refuse':
+		         	this.jujueLoading = false;
+					this.jujueFont = '提交';
 					this.jdialogVisible = true;
 					this.get('system/getSystemDate').then(res => {
 			            console.log('拒绝', res)
@@ -677,6 +687,9 @@
 			},
 			//审批
 			shenpi(){
+				this.shenpiLoading = false;
+				this.shenpiFont = '提交';
+				this.sdialogVisible = true;
 				//请求评分
 				this.post('/credit/quotaScoring', {
 		            applyId: this.applyId,
@@ -690,13 +703,13 @@
 		              //console.log(res.data.creditScore);
 		              this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
 		              //console.log(this.creditScore);
-		              this.sdialogVisible = true;
+		              //this.sdialogVisible = true;
 		            }else if (res.statusCode == '700'){
 			        	this.$message({
 			              message:res.msg,
 			              type: 'error'
 			            });
-			           this.sdialogVisible = false; 
+			           //this.sdialogVisible = false; 
 			        }
 		          });
 		        //请求产品
@@ -760,6 +773,10 @@
 	            })
 	            return;
 	          };
+	          //按钮加“加载中”
+	            this.shenpiLoading = true;
+				this.shenpiFont = '提交中';
+				//this.sdialogVisible = false;
 
 	           var reg = /,/;
 	           
@@ -799,6 +816,7 @@
 		        opinionFlag:'00', // 任务类型  初审 00 
 		        busiState:'21'//复议审批
 		      }).then(res => {
+		      	this.sdialogVisible = false;
 		        if (res.statusCode != '200') {
 		          	this.$message({
 			            message: res.msg,
@@ -947,10 +965,13 @@
 		    },
 		    //拒绝提交按钮
 			jSure(){
-				console.log(this.rmainReasonName);
-				console.log(this.$refs.rmainReasonName);
-				console.log(this.$refs.rmainReasonName.selectedLabel);
-				console.log(this.$refs.rmainReasonName.selectedLabel);
+				//console.log(this.rmainReasonName);
+				//console.log(this.$refs.rmainReasonName);
+				//console.log(this.$refs.rmainReasonName.selectedLabel);
+				//console.log(this.$refs.rmainReasonName.selectedLabel);
+				this.jujueLoading = true;
+				this.jujueFont = '提交中';
+				//this.jdialogVisible = false;
 				this.post("/creauditOpinion/approval", {
 		        // 挂起 taskId 任务id
 		        taskId: this.taskId,
@@ -977,6 +998,7 @@
 		        dealroperCode:this.dealroperCode,//经办人
 		        applySubNo:this.datas.applySubNo,//复议申请单ID
 		      }).then(res => {
+		      	this.jdialogVisible = false;
 		        console.log(res);
 		        if (res.statusCode != '200') {
 		          this.$message({
@@ -1016,10 +1038,13 @@
 			},
 			//回退提交按钮
 			hsure(){
-				console.log(this.mainReasonName);
-				console.log(this.$refs.mainReasonName);
-				console.log(this.$refs.mainReasonName.selectedLabel);
-				console.log(this.values);
+				//console.log(this.mainReasonName);
+				//console.log(this.$refs.mainReasonName);
+				//console.log(this.$refs.mainReasonName.selectedLabel);
+				//console.log(this.values);
+				this.huituiLoading = true;
+				this.huituiFont = '提交中';
+				//this.dialogVisible = false;
 				this.post("/creauditOpinion/approval", {
 			        // 挂起 taskId 任务id
 			        taskId: this.taskId,
@@ -1047,6 +1072,7 @@
 		        	applySubNo:this.datas.applySubNo,//复议申请单ID
 			      }).then(res => {
 			        console.log(res);
+			        this.dialogVisible = false;
 			        if (res.statusCode != '200') {
 			          this.$message({
 			            message: res.msg,

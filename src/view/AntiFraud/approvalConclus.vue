@@ -138,9 +138,9 @@
       <el-button icon="el-icon-check-hang" class="credit-btn" @click="open">挂起</el-button>
       <el-button v-show="judgeFlag != '03'" icon="el-icon-check-back" class="credit-btn" @click="coverFn('02')">回退</el-button>
       <!-- 专员 多一个审批 -->
-      <el-button v-show="judgeFlag == '03' && shenPiBtnShow" icon="el-icon-check-appro" class="credit-btn" @click="insert('submit')">审批</el-button>
+      <el-button v-show="judgeFlag == '03' && shenPiBtnShow" icon="el-icon-check-appro" class="credit-btn" @click="insert('submit')" :loading="isLoading">审批</el-button>
       <!-- 原审批改为提交 -->
-      <el-button icon="el-icon-check-appro" class="credit-btn" @click="insert()">提交</el-button>
+      <el-button icon="el-icon-check-appro" class="credit-btn" @click="insert()" :loading="isLoading">提交</el-button>
       <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('lcgj')">流程轨迹</el-button>
       <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('save')">保存</el-button>
       <el-button icon="el-icon-check-big-data" class="credit-btn" @click="tobigData">大数据风控</el-button>
@@ -153,7 +153,8 @@
         <el-form class="back-form huitui-class">
           <div class="form-title" style="position:relative;" v-show="showFlag=='02'">
             回退信息
-            <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
+            <!-- coverShow=false;showFlag=''; -->
+            <el-tag closable @close="huiTuiShow=false;" style="position:absolute;"></el-tag>
           </div>
           <div class="back-form-li">
             <span style="color:red;display:inline-block;width:0px;float:left;">*</span>
@@ -182,9 +183,10 @@
             </el-form-item>
           </div>
           <div class="back-form-li" style="text-align:right;">
-            <el-button plain @click="showFlag=0,coverShow=false;">返回</el-button>
+            <!-- showFlag=0,coverShow=false; -->
+            <el-button plain @click="huiTuiShow=false;">返回</el-button>
             <!-- 回退 -->
-            <el-button type="primary" @click="submitFn('02')">提交</el-button>
+            <el-button type="primary" @click="submitFn('02')" :loading="isLoading">{{loadingTitle}}</el-button>
           </div>
         </el-form>
       </el-dialog>
@@ -195,7 +197,8 @@
         <div class="lcgj-div">
           <div class="form-title" style="position:relative;">
             流程轨迹
-            <el-tag closable @close="coverShow=false;showFlag='';lcgjShow=false;" style="position:absolute;"></el-tag>
+            <!-- coverShow=false;showFlag=''; -->
+            <el-tag closable @close="lcgjShow=false;" style="position:absolute;"></el-tag>
           </div>
           <div class="xllcgj-div">
             <!-- <div class="form-title2" style="position:relative;">
@@ -223,7 +226,8 @@
             </el-table>
           </div>
           <div class="back-form-li" style="text-align:right;padding:10px;">
-            <el-button plain @click="showFlag=0,coverShow=false;lcgjShow=false;">返回</el-button>
+            <!-- showFlag=0,coverShow=false; -->
+            <el-button plain @click="lcgjShow=false;">返回</el-button>
           </div>
         </div>
       </el-dialog>
@@ -235,7 +239,8 @@
         <div class="spjl-div">
           <div class="form-title" style="position:relative;">
             详情信息
-            <el-tag closable @close="coverShow=false;showFlag='';shenPiShow=false;" style="position:absolute;"></el-tag>
+            <!-- coverShow=false;showFlag=''; -->
+            <el-tag closable @close="shenPiShow=false;" style="position:absolute;"></el-tag>
           </div>
           <div style="line-height:30px;">
             <span>
@@ -377,6 +382,8 @@ export default {
       subreaName: '', // 子原因name
       secondReasons: [],
       secondaryReason: '',
+      isLoading: false, // 审批按钮 是否加载状态
+      loadingTitle: '提交', // 默认btn title
     }
   },
   mounted() {
@@ -1048,6 +1055,8 @@ export default {
     },
     // 回退/拒绝/放弃
     approvalFn() {
+      this.isLoading = true;
+      this.loadingTitle = '提交中';
       // 判断终审的 opinionFlag 
       console.log(this.opinionFlag)
       // 点击 确认 提交 方法
@@ -1075,6 +1084,7 @@ export default {
       }).then(res => {
         console.log(res);
         console.log(this);
+        this.huiTuiShow = false;
 
         if (res.statusCode != '200') {
           this.$message({
@@ -1353,7 +1363,7 @@ export default {
     //社保/公积金
     Social() {
       console.log('第一次调用')
-      this.post(baseurl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {
+      this.post(baseurl.BaseUrl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {
         certCode: this.certCode,
         custName: this.custName
       }).then(res => {

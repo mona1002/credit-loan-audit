@@ -202,7 +202,7 @@
       <div slot="footer" class="dialog-footer">
         <!-- <el-button @click="dialogFormVisible = false">取 消</el-button> -->
         <!-- <el-button type="primary" @click.native="append">确 定</el-button> -->
-        <el-button @click.native="append" type="primary" v-show="active">确认</el-button>
+        <el-button @click.native="append" type="primary" v-show="active" :loading="isLoading">{{loadingTitle}}</el-button>
         <el-button type="primary" disabled v-show="active==false">确认</el-button>
       </div>
     </el-dialog>
@@ -238,7 +238,7 @@
             <el-input type="text" name="" v-model="addTelNum" value=""></el-input>
           </li>
           <li>
-            <el-button @click.native="append" type="primary" v-show="active">确认</el-button>
+            <el-button @click.native="append" type="primary" v-show="active" :loading="isLoading">{{loadingTitle}}</el-button>
             <el-button type="primary" disabled v-show="active==false">确认</el-button>
           </li>
         </ul>
@@ -421,6 +421,8 @@ export default {
       isInterFlag: false, // 是否是内匹跳转的查看详情
       activeTrees: ["1", "2", "3", "4", "5"],
       addBtnShow: true, // 标志 添加电话按钮是否显示
+      isLoading: false, // 审批按钮 是否加载状态
+      loadingTitle: '确认', // 默认btn title
     }
   },
   props: ['isFull', 'SplitS'],
@@ -429,12 +431,23 @@ export default {
     // 此时 data 已经被 observed 了
     // 测试数据
     // 调用历史数据
-    var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-    this.applyId = taskInWaitting.applyId;
-    // 进件编号
-    console.log(this.applyId);
-    this.applySubNo = taskInWaitting.applySubNo;
-    console.log(this.applySubNo);
+    if (this.judgeFlag == '01') {
+
+      var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+      this.applyId = taskInWaitting.applyId;
+      // 进件编号
+      console.log(this.applyId);
+      this.applySubNo = taskInWaitting.applySubNo;
+      console.log(this.applySubNo);
+    }
+    if (this.judgeFlag == '02') {
+      var FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
+      this.applyId = FtaskInWaitting.applyId;
+      // 进件编号
+      console.log(this.applyId);
+      this.applySubNo = FtaskInWaitting.applySubNo;
+      console.log(this.applySubNo);
+    }
 
     // this.phoneNum = '11111';
     // this.phoneType = '00';
@@ -461,7 +474,7 @@ export default {
 
     var judgeFlag = JSON.parse(localStorage.getItem('judge'));
     // 复议不显示添加  05 专员   06 主管
-    if(judgeFlag.flag =='05' || judgeFlag.flag =='06'){
+    if (judgeFlag.flag == '05' || judgeFlag.flag == '06') {
       this.addBtnShow = false;
     }
 
@@ -663,11 +676,13 @@ export default {
     //   })
     // },
     append(data) {
+      this.isLoading = true;
+      this.loadingTitle = '提交中';
+
       // 点击添加方法,用过 key 来判断 添加的哪项.
       console.log('append');
       // this.coverShow = false;
-      // 关闭 弹窗
-      this.dialogFormVisible = false;
+
       // 点击添加 提交数据 
 
       // 判断必填
@@ -686,12 +701,19 @@ export default {
         // "applySubNo": '201504130173041858'
         "applySubNo": this.applySubNo
       }).then(res => {
+        // 关闭 弹窗
+        this.dialogFormVisible = false;
+        this.isLoading = false;
+        this.loadingTitle = '确认';
         console.log(res);
-
-        if (res.statusCode == '200')
+        if (res.statusCode == '200') {
+          this.$message({
+            type: 'success',
+            message: res.msg
+          });
           // 点击提交之后 重新请求 电话树
           this.fetchData();
-        else
+        } else
           this.$message({
             type: 'warning',
             message: res.msg
@@ -873,6 +895,8 @@ export default {
 
 
 
+
+
 /* 添加电话 按钮 */
 
 .phone-credit .el-aside .el-button {
@@ -886,6 +910,8 @@ export default {
   background-color: #0077FF;
   border-color: #0077FF;*/
 }
+
+
 
 
 
@@ -906,6 +932,8 @@ export default {
   overflow: auto;
   z-index: 101;
 }
+
+
 
 
 
@@ -931,11 +959,15 @@ export default {
 
 
 
+
+
 /* title */
 
 .phone-credit .cover-content .add-title {
   text-align: left;
 }
+
+
 
 
 
@@ -967,11 +999,15 @@ export default {
 
 
 
+
+
 /* 添加电话  input 样式*/
 
 .phone-credit .add-content .el-input {
   width: inherit;
 }
+
+
 
 
 
@@ -984,6 +1020,8 @@ export default {
   /*margin-top: 10px;*/
   /*margin-right: 10px;*/
 }
+
+
 
 
 
@@ -1003,6 +1041,8 @@ export default {
 .phone-credit .el-tag .el-icon-close {
   right: 0px;
 }
+
+
 
 
 
@@ -1058,6 +1098,8 @@ export default {
 
 
 
+
+
 /* 表格分页 */
 
 .phone-credit .el-pagination {
@@ -1065,6 +1107,8 @@ export default {
   width: 100%;
   text-align: center;
 }
+
+
 
 
 
@@ -1080,12 +1124,16 @@ export default {
 
 
 
+
+
 /* 添加申请单电话 label*/
 
 .phone-credit .add-label {
   display: inline-block;
   width: 70px;
 }
+
+
 
 
 
@@ -1125,6 +1173,8 @@ export default {
 
 
 
+
+
 /* label */
 
 .phone-credit .el-form-item__label {
@@ -1138,6 +1188,8 @@ export default {
 
 
 
+
+
 /* 三列 */
 
 .phone-credit .item-column3 {
@@ -1147,6 +1199,8 @@ export default {
   margin: 0;
   margin-bottom: 10px;
 }
+
+
 
 
 
@@ -1172,6 +1226,8 @@ export default {
 
 
 
+
+
 /*.phone-credit .item-column1 textarea {
   margin-left: 20px;
 }*/
@@ -1192,6 +1248,8 @@ export default {
 
 
 
+
+
 /* input 不可编辑状态*/
 
 .dis-input {}
@@ -1203,6 +1261,8 @@ export default {
 .phone-credit .el-input__inner {
   height: 30px !important;
 }
+
+
 
 
 
@@ -1219,11 +1279,15 @@ export default {
 
 
 
+
+
 /* 表格头 */
 
 .phone-credit .el-header {
   padding: 0;
 }
+
+
 
 
 
@@ -1245,11 +1309,15 @@ export default {
 
 
 
+
+
 /* 折叠 头 箭头样式*/
 
 .phone-credit .el-collapse-item__header .el-collapse-item__arrow {
   padding-right: 20px;
 }
+
+
 
 
 
@@ -1301,12 +1369,16 @@ export default {
 
 
 
+
+
 /* 提交按钮 */
 
 .phone-credit .submit-class {
   text-align: left;
   margin-left: 570px;
 }
+
+
 
 
 
@@ -1329,6 +1401,8 @@ export default {
   /*width: 258px;*/
   height: 33px;
 }
+
+
 
 
 
@@ -1360,6 +1434,8 @@ export default {
 
 
 
+
+
 /*add-content*/
 
 
@@ -1373,11 +1449,15 @@ export default {
 
 
 
+
+
 /* 关闭按钮 */
 
 .phone-credit .el-dialog__headerbtn {
   font-size: 20px;
 }
+
+
 
 
 
@@ -1392,11 +1472,15 @@ export default {
 
 
 
+
+
 /* 更改 电话征信 -- 添加电话 */
 
 .phone-credit .el-dialog__wrapper .el-form-item__label {
   width: 100px;
 }
+
+
 
 
 
@@ -1408,11 +1492,15 @@ export default {
 
 
 
+
+
 /* 添加申请单电话信息 必填 * */
 
 .phone-credit .left-title2 {
   line-height: 20px;
 }
+
+
 
 
 
@@ -1437,6 +1525,8 @@ export default {
 
 
 
+
+
 /* 电话树  选中的  字体样式*/
 
 .phone-credit .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content .el-tree-node__label {
@@ -1448,6 +1538,8 @@ export default {
 .phone-credit .el-tree-node__content {
   height: 32px;
 }
+
+
 
 
 
@@ -1468,11 +1560,15 @@ export default {
 
 
 
+
+
 /* 两行  数据*/
 
 .phone-credit .line2-class label {
   line-height: 20px;
 }
+
+
 
 
 
@@ -1486,6 +1582,8 @@ export default {
 .phone-credit .el-collapse-item__arrow {
   line-height: 40px
 }
+
+
 
 
 
@@ -1507,12 +1605,16 @@ export default {
 
 
 
+
+
 /* 后面是 textarea 样式*/
 
 .phone-credit .item-column3-2 {
   width: 66%;
   /*border: 1px solid;*/
 }
+
+
 
 
 
@@ -1526,12 +1628,16 @@ export default {
 
 
 
+
+
 /* 气泡 */
 
 .el-tooltip__popper {
   max-width: 400px;
   height: auto;
 }
+
+
 
 
 
@@ -1563,6 +1669,8 @@ export default {
 
 
 
+
+
 /* 两行  空  */
 
 .phone-credit .item-column3-2-normal .el-form-item__content {
@@ -1579,11 +1687,15 @@ export default {
 
 
 
+
+
 /* 3列 空位 */
 
 .item-column3-null {
   min-height: 50px;
 }
+
+
 
 
 
@@ -1601,11 +1713,15 @@ export default {
 
 
 
+
+
 /* 默认隐藏 三级  树*/
 
 .phone-credit .el-tree-node.is-expanded .el-tree-node__children .el-tree-node .el-tree-node__children .el-tree-node {
   /*display: none;*/
 }
+
+
 
 
 
@@ -1619,11 +1735,15 @@ export default {
 
 
 
+
+
 /*二级hover改三级*/
 
 .phone-credit .el-tree--highlight-current .el-tree-node>.el-tree-node__children:hover .phone-credit .el-tree--highlight-current .el-tree-node>.el-tree-node__children .el-tree-node__children .el-tree-node__content {
   color: red;
 }
+
+
 
 
 

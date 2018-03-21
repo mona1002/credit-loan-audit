@@ -116,7 +116,7 @@
       },
       refresh() {
         this.rot += 360;
-        this.$refs.worktask.style = "transform: rotate(" + this.rot + "deg)";
+        this.$refs.worktask.style.transform = "rotate(" + this.rot + "deg)";
         // this.$refs.worktask.style = " -ms-transform: rotate("+this.rot+"deg)"; IE9
         this.post("/workFlowTaskQuery/getTaskProfile", {
           taskStatus: "01",
@@ -125,6 +125,7 @@
             this.tableData = res.data;
           } else {
             this.$message.error(res.msg);
+            
           }
         });
       },

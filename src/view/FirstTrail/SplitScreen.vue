@@ -77,9 +77,7 @@
             <PhoneCredit v-if=" this.tabContent2==5" :SplitS="SplitRight" :isFull.sync="isFull"></PhoneCredit>
             <CreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></CreditForm>
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
-            <!-- 反欺诈结论 空白 -->
             <aAntiApplyInf v-if=" this.tabContent2==8"></aAntiApplyInf>
-            <!-- 信审审批 空白 -->
             <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>
           </div>
         </div>
@@ -119,7 +117,6 @@
   // 编辑
   import AudioVisual from "./detailComponent/AudioVisual";
   import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
-
   import remark from "./detailComponent/remark";
   import InternalMatch from "./InternalMatch";
   import applicationInformation from "./detailComponent/applicationInformation";
@@ -128,7 +125,6 @@
   import CreditForm from "./detailComponent/CreditForm";
   import creditInvestigation from "./detailComponent/creditInvestigation"; //实地征信
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf' //反欺诈结论  
-  // 信审审批写此处
   import CreditApproval from "./CreditApproval";
   // 查询
   import cCreditForm from "./checkComponent/cCreditForm";
@@ -137,7 +133,6 @@
   import cborrowerInformationDetail from "./checkComponent/borrowerInformationDetail"; //借款人资料
   import capplicationInformationDetail from "./checkComponent/applicationInformationDetail"; //申请信息
   import processTrajectory from "./checkComponent/processTrajectory"; //流程轨迹
-  // import CreditFormKeydownEvent from './detailComponent/CreditFormKeydownEvent.vue'
   export default {
     data() {
       return {
@@ -146,10 +141,8 @@
         SplitRight: "right",
         watchData: '',
         originLeft: '',
-        // 进件人信息
         customInf: [], //申请信息页local字段
         tastwaitingPass: [], //详情列表页信息--(含)取applyId
-        // -------------------------------结束
         showHalfBtn: false,
         CompareAlert: false,
         title: "",
@@ -303,8 +296,6 @@
     /* min-width: 1366; */
   }
 
-  /* 激活样式 流-css */
-
   .tab1Default {
     color: #bfcbd9;
   }
@@ -349,7 +340,6 @@
     position: absolute;
     top: 7px;
     right: 17px;
-    /* right: 0; */
   }
 
   .showAllList {
