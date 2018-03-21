@@ -52,7 +52,8 @@
           <!-- v-show="showFlag=='02'" -->
           <div class="form-title" style="position:relative;">
             回退信息
-            <el-tag closable @close="coverShow=false;showFlag='';huiTuiShow=false;" style="position:absolute;"></el-tag>
+            <!-- coverShow=false;showFlag=''; -->
+            <el-tag closable @close="huiTuiShow=false;" style="position:absolute;"></el-tag>
           </div>
           <div class="back-form-li">
             <!-- <span style="color:red;display:inline-block;width:0px;float:left;">*</span> -->
@@ -107,9 +108,10 @@
             </el-form-item>
           </div>
           <div class="back-form-li" style="text-align:right;">
-            <el-button plain @click="showFlag=0,coverShow=false;huiTuiShow=false;">返回</el-button>
+            <!-- showFlag=0,coverShow=false; -->
+            <el-button plain @click="huiTuiShow=false;">返回</el-button>
             <!-- 回退 -->
-            <el-button type="primary" @click="submitFn('02')">提交</el-button>
+            <el-button type="primary" @click="submitFn('02')" :loading="isLoading">{{loadingTitle}}</el-button>
           </div>
         </el-form>
       </el-dialog>
@@ -122,7 +124,8 @@
           <!-- v-show="showFlag=='01'" -->
           <div class="form-title" style="position:relative;">
             拒绝原因
-            <el-tag closable @close="coverShow=false;showFlag='';juJueShow=false;" style="position:absolute;"></el-tag>
+            <!-- coverShow=false;showFlag=''; -->
+            <el-tag closable @close="juJueShow=false;" style="position:absolute;"></el-tag>
           </div>
           <div class="back-form-li">
             <!-- 回退主原因输入 02 -->
@@ -162,9 +165,10 @@
             </el-form-item>
           </div>
           <div class="back-form-li" style="text-align:right;">
-            <el-button plain @click="showFlag=0,coverShow=false;juJueShow=false;">返回</el-button>
+            <!-- showFlag=0,coverShow=false; -->
+            <el-button plain @click="juJueShow=false;">返回</el-button>
             <!-- 拒绝 -->
-            <el-button type="primary" @click="submitFn('01')">提交</el-button>
+            <el-button type="primary" @click="submitFn('01')" :loading="isLoading">{{loadingTitle}}</el-button>
           </div>
         </el-form>
       </el-dialog>
@@ -176,7 +180,8 @@
           <!-- v-show="showFlag=='07'" -->
           <div class="form-title" style="position:relative;">
             放弃原因
-            <el-tag closable @close="coverShow=false;showFlag='';fangQiShow=false;" style="position:absolute;"></el-tag>
+            <!-- coverShow=false;showFlag=''; -->
+            <el-tag closable @close="fangQiShow=false;" style="position:absolute;"></el-tag>
           </div>
           <div class="back-form-li">
             <!-- 回退主原因输入 02 -->
@@ -215,9 +220,10 @@
             </el-form-item>
           </div>
           <div class="back-form-li" style="text-align:right;">
-            <el-button plain @click="showFlag=0,coverShow=false;fangQiShow=false;">返回</el-button>
+            <!-- showFlag=0,coverShow=false; -->
+            <el-button plain @click="fangQiShow=false;">返回</el-button>
             <!-- 放弃 -->
-            <el-button type="primary" @click="submitFn('07')">提交</el-button>
+            <el-button type="primary" @click="submitFn('07')" :loading="isLoading">{{loadingTitle}}</el-button>
           </div>
         </el-form>
       </el-dialog>
@@ -228,7 +234,8 @@
         <el-form class="back-form appro-form">
           <div class="form-title" style="position:relative;">
             审批信息
-            <el-tag closable @close="coverShow=false;showFlag='';shenPiShow=false;proName='';" style="position:absolute;"></el-tag>
+            <!-- coverShow=false;showFlag=''; -->
+            <el-tag closable @close="shenPiShow=false;proName='';" style="position:absolute;"></el-tag>
           </div>
           <div style="padding:5px;padding-top:0;height:400px;overflow:auto;">
             <el-collapse v-model="activeNames">
@@ -344,7 +351,8 @@
             </el-collapse>
           </div>
           <div class="back-form-li" style="text-align:right;padding:10px;">
-            <el-button plain @click="showFlag=0,coverShow=false;shenPiShow=false;">返回</el-button>
+            <!-- showFlag=0,coverShow=false; -->
+            <el-button plain @click="shenPiShow=false;">返回</el-button>
             <el-button type="primary" @click="submitFn('03')" :loading="isLoading">{{loadingTitle}}</el-button>
           </div>
         </el-form>
@@ -357,7 +365,8 @@
           <div class="form-title" style="position:relative;">
             信审审批结论轨迹
             <!-- <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag> -->
-            <el-tag closable @close="coverShow=false;showFlag='';spjlShow=false;" style="position:absolute;"></el-tag>
+            <!-- coverShow=false;showFlag=''; -->
+            <el-tag closable @close="spjlShow=false;" style="position:absolute;"></el-tag>
           </div>
           <el-table :data="tableData.recordList" height="280" border style="width: 100%" highlight-current-row v-loading="loading">
             <el-table-column prop="verIncome" label="核实收入[元]" min-width="100">
@@ -389,7 +398,8 @@
             </el-pagination>
           </div>
           <div class="back-form-li" style="text-align:right;padding:10px;">
-            <el-button plain @click="showFlag=0,coverShow=false;spjlShow=false;">返回</el-button>
+            <!-- showFlag=0,coverShow=false; -->
+            <el-button plain @click="spjlShow=false;">返回</el-button>
           </div>
         </div>
       </el-dialog>
@@ -400,7 +410,8 @@
         <div class="lcgj-div">
           <div class="form-title" style="position:relative;">
             流程轨迹
-            <el-tag closable @close="coverShow=false;showFlag='';lcgjShow=false;" style="position:absolute;"></el-tag>
+            <!-- coverShow=false;showFlag=''; -->
+            <el-tag closable @close="lcgjShow=false;" style="position:absolute;"></el-tag>
           </div>
           <div class="xllcgj-div">
             <!-- <div class="form-title2" style="position:relative;">
@@ -427,48 +438,13 @@
               </el-table-column>
             </el-table>
           </div>
-          <!-- 反欺诈流程 -->
-          <!-- <div>
-          <div style="position:relative;">
-            反欺诈流程
-          </div>
-          <el-table :data="tableData" height="250" border style="width: 100%" @row-dblclick="itemDbclick" @cell-mouse-enter="cellHover">
-            <el-table-column prop="verIncome" label="任务节点">
-            </el-table-column>
-            <el-table-column prop="proCode" label="任务类型">
-            </el-table-column>
-            <el-table-column prop="ploanAmt" label="进入本环节时间">
-            </el-table-column>
-            <el-table-column prop="ploanTerm" label="任务状态">
-            </el-table-column>
-            <el-table-column prop="appmult" label="处理人">
-            </el-table-column>
-            <el-table-column prop="eachTermamt" label="处理时间">
-            </el-table-column>
-            <el-table-column prop="inteDebitrate" label="处理结论">
-            </el-table-column>
-            <el-table-column prop="address" label="意见说明">
-            </el-table-column>
-          </el-table>
-        </div> -->
           <div class="back-form-li" style="text-align:right;padding:10px;">
-            <el-button plain @click="showFlag=0,coverShow=false;lcgjShow=false;">返回</el-button>
+            <!-- showFlag=0,coverShow=false; -->
+            <el-button plain @click="lcgjShow=false;">返回</el-button>
           </div>
         </div>
       </el-dialog>
     </div>
-    <!-- <el-dialog :visible.sync="coverShow"> -->
-    <!-- 回退 -->
-    <!-- 拒绝 -->
-    <!-- 放弃 -->
-    <!-- 审批 03-->
-    <!-- :model="spruleForm" :rules="sprules" ref="spruleForm" -->
-    <!-- 反欺诈 -->
-    <!-- <div v-show="showFlag=='fqz'"></div> -->
-    <!-- 反欺诈显示 -->
-    <!-- 审批结论轨迹 -->
-    <!-- 流程轨迹 -->
-    <!-- </el-dialog> -->
     <!-- 大数据风控 -->
     <div class="bigDataLog">
       <el-dialog title="提示" :visible.sync="bigDataLogVisible" width="420px" top="35vh">
@@ -501,8 +477,8 @@ export default {
   data() {
     return {
       // 挂起
-      coverShow: false, // 弹窗
-      showFlag: 0, // 要显示的 模块,默认给0
+      // coverShow: false, // 弹窗
+      // showFlag: 0, // 要显示的 模块,默认给0
       tableData: [{
         verIncome: 'verIncome',
         proCode: 'proCode',
@@ -861,13 +837,13 @@ export default {
       this.secondaryReason = '';
       // 页面点击按钮出现 的 对应 弹窗
       // 统一处理    回退 02 ,拒绝 01, 放弃  07, 审批 03, 审批结论 spjl, 流程轨迹 lcgj
-      this.coverShow = true;
+      // this.coverShow = true;
       switch (flag) {
         case '02':
 
           console.log('020202020202020202')
-          console.log(this.showFlag);
-          this.showFlag = '02';
+          // console.log(this.showFlag);
+          // this.showFlag = '02';
           this.huiTuiShow = true;
           // 获取系统时间
           this.get('system/getSystemDate').then(res => {
@@ -881,7 +857,7 @@ export default {
           break;
         case '01':
           console.log('01010101010101')
-          this.showFlag = '01';
+          // this.showFlag = '01';
           this.juJueShow = true;
           this.get('system/getSystemDate').then(res => {
             console.log(res)
@@ -893,7 +869,7 @@ export default {
           break;
         case '07':
           console.log('070707007')
-          this.showFlag = '07';
+          // this.showFlag = '07';
           this.fangQiShow = true;
           this.get('system/getSystemDate').then(res => {
             console.log(res)
@@ -905,7 +881,7 @@ export default {
           break;
         case '03':
           console.log('030303003030300330')
-          this.showFlag = '03';
+          // this.showFlag = '03';
           this.shenPiShow = true;
           // this.get('system/getSystemDate').then(res => {})
           // console.log(res)
@@ -981,7 +957,7 @@ export default {
           // console.log(this.showFqz);
           // this.showFqz = true;
           console.log(this.showFqz);
-          this.showFlag = 'fqz';
+          // this.showFlag = 'fqz';
           // 查询反欺诈信息
           // this.$router.push('AntiApplyEdit')
           this.$router.push({
@@ -1169,8 +1145,8 @@ export default {
             });
             return;
           }
-          this.coverShow = false;
-          this.showFlag = 0;
+          // this.coverShow = false;
+          // this.showFlag = 0;
           // this.mainReason = this.mainReason; // 主原因同理
           this.creauditAppOperate = 'check_Refuse';
           // this.taskId = '180074';
@@ -1212,11 +1188,11 @@ export default {
             return;
           }
 
-          this.coverShow = false;
-          this.showFlag = 0;
-          this.huiTuiShow = false;
+          // this.coverShow = false;
+          // this.showFlag = 0;
+          // this.huiTuiShow = false;
           // 回退节点 使用了监听,所以单独赋值
-          this.rollbackNodeName = this.rollbackNodeName.value;
+          // this.rollbackNodeName = this.rollbackNodeName.value;
           // this.mainReason = this.mainReason; // 主原因同理
           this.creauditAppOperate = 'check_Back';
           // this.taskId = '180049';
@@ -1250,9 +1226,9 @@ export default {
             });
             return;
           }
-          this.coverShow = false;
-          this.showFlag = 0;
-          this.fangQiShow = false;
+          // this.coverShow = false;
+          // this.showFlag = 0;
+          // this.fangQiShow = false;
           // 放弃测试数据
           // this.taskId = '177524';
           this.creauditAppOperate = 'check_Abandon';
@@ -1320,8 +1296,8 @@ export default {
             })
             return;
           }
-          this.coverShow = false;
-          this.showFlag = 0;
+          // this.coverShow = false;
+          // this.showFlag = 0;
           // this.taskId = '182525';
           // this.opinionFlag = '00';
           // 区分初审/终审
@@ -1337,6 +1313,8 @@ export default {
     },
     // 回退/拒绝/放弃
     approvalFn() {
+      this.isLoading = true;
+      this.loadingTitle = '提交中';
       // 判断终审的 opinionFlag 
       console.log(this.opinionFlag)
       // 点击 确认 提交 方法
@@ -1358,7 +1336,7 @@ export default {
         reasonRemark: this.reasonRemark, // 意见描述/原因说明
         appOrgId: this.appOrgId, // 进件机构id
         applyId: this.applyId, // 申请单id
-        rollbackNodeName: this.rollbackNodeName, // 回退节点名称
+        rollbackNodeName: this.rollbackNodeName.value, // 回退节点名称
         dealroperDate: this.dealroperDate, // 经办时间
         creauditAppOperate: this.creauditAppOperate, // 操作类型
         busiState: this.busiState,
@@ -1366,11 +1344,14 @@ export default {
       }).then(res => {
         console.log(res);
         console.log(this);
+        this.isLoading = false;
+        this.loadingTitle = '提交';
 
         // 返回结果 处理所有的控制显示
         this.huiTuiShow = false;
         this.juJueShow = false;
         this.fangQiShow = false;
+
 
         if (res.statusCode != '200') {
           this.$message({
@@ -1409,6 +1390,11 @@ export default {
             this.$router.push('/taskInWaitting');
           if (this.judgeFlag == '02')
             this.$router.push('/FtaskInWaitting');
+        }else{
+          this.$message({
+            message: res.msg?res.msg:'网络异常,请重试',
+            type: 'success'
+          })
         }
       });
     },

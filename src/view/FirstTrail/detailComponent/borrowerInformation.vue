@@ -71,8 +71,11 @@
 					        label="建筑面积[m²]"
 					        min-width="110">
 					        <template slot-scope="scope">
-						        <!-- <el-input v-model="scope.row.coveredArea" @blur="postcode(scope.row,'coveredArea')" placeholder="请输入内容"></el-input> -->
-						        <el-input v-model="scope.row.coveredArea" placeholder="请输入内容"></el-input>
+					        	<!-- (scope.row.coveredArea != '' && scope.row.coveredArea*1 > 300) || (scope.row.coveredArea != '' && scope.row.coveredArea*1 < 10) -->
+						        <span class="regSpan" v-show="scope.row.isShow">
+				    				<i>*</i>建筑面积应在10-300之间
+				    			</span>
+						        <el-input v-model="scope.row.coveredArea" @blur="postcode(scope.row,'coveredArea')" placeholder="请输入内容"></el-input>
 					        </template>
 					      </el-table-column>
 					      <el-table-column
@@ -80,6 +83,9 @@
 					        label="建筑单价[元]"
 					        min-width="100">
 					         <template slot-scope="scope">
+					         	<span class="regSpan" v-show="(scope.row.unitPrice != '' && scope.row.unitPrice*1 > 1000000) || (scope.row.unitPrice != '' && scope.row.unitPrice*1 < 100)">
+				    				<i>*</i>建筑单价应在100-1000000之间
+				    			</span>
 						        <el-input v-model="scope.row.unitPrice" @blur="moneyBlur(scope.row,'unitPrice')" placeholder="请输入内容"></el-input>
 					        </template>
 					      </el-table-column>
@@ -89,10 +95,11 @@
 					        min-width="200"
 					        show-overflow-tooltip>
 					        <template slot-scope="scope">
-					        	<!-- <el-tooltip el-tooltip class="item" effect="dark" content="scope.row.estateAddress" placement="top"> -->
-							        <el-input v-model="scope.row.estateAddress" placeholder="请输入内容">
-							        </el-input>
-						    <!-- </el-tooltip> -->
+					        	<span class="regSpan" v-show="scope.row.estateAddress != '' && scope.row.estateAddress.length > 100">
+				    				<i>*</i>房产地址应小于100字
+				    			</span>
+						        <el-input v-model="scope.row.estateAddress" @blur="postcode(scope.row,'estateAddress')" placeholder="请输入内容">
+						        </el-input>
 					        </template>
 					      </el-table-column>
 					      <el-table-column
@@ -103,6 +110,9 @@
 					        	<!-- <el-tooltip class="item" effect="dark" content="邮政编码格式不正确" :disabled="postcodes==false" placement="top">
 					        	 						      		<el-input v-model="scope.row.estateZip" placeholder="请输入内容" v-on:blur="postcode(scope.row)" v-on:focus = "postcodes=false"></el-input>
 					        	 						    	</el-tooltip> --> 
+					        	<span class="regSpan" v-show="scope.row.estateZip != '' && (!/^[0-9][0-9]{5}$/.test(scope.row.estateZip))">
+				    				<i>*</i>邮政编码格式不正确
+				    			</span>
 					        	<el-input v-model="scope.row.estateZip" placeholder="请输入内容" v-on:blur="postcode(scope.row,'estateZip')"></el-input>
 					        </template>
 					      </el-table-column>
@@ -1307,7 +1317,7 @@
       		arr:[],
       		jiekrloading:false,
       		jiekrSure:'确定',
-
+      		// isShow:false
 	      };
 	    },
 		props:['isFull'],
@@ -2528,7 +2538,12 @@
 			            	value.n5 =this.formatNumber(value.n5,2,0);
 			                break;  
 			            case 'unitPrice':
-			            	value.unitPrice =this.formatNumber(value.unitPrice,2,0);
+				            if(value.unitPrice*1 > 1000000 || value.unitPrice*1 < 100){
+									//this.postcodes=true;
+									value.unitPrice = '';
+								}else{
+									value.unitPrice =this.formatNumber(value.unitPrice,2,0);
+							}
 			                break;
 			            case 'monthlyPay':
 			            	value.monthlyPay =this.formatNumber(value.monthlyPay,2,0);
@@ -2596,6 +2611,8 @@
 			//邮政编码验证
 			postcode(row,flage){
 				console.log(row);
+				console.log(row.coveredArea);
+				console.log(row.estateAddress.length);
 				switch (flage){
 					case 'estateZip':
 						if(row.estateZip == ''){
@@ -2605,6 +2622,29 @@
 							if(!/^[0-9][0-9]{5}$/.test(row.estateZip)){
 								//this.postcodes=true;
 								row.estateZip = '';
+							}
+						};
+						break;
+					case 'coveredArea':
+						if(row.coveredArea == ''){
+							row.coveredArea = '';
+						}else{
+							if(row.coveredArea*1 > 300 || row.coveredArea*1 < 10){
+								row.isShow = true;
+								row.coveredArea = '';
+							}else{
+								row.isShow = false;
+								row.coveredArea = this.formatNumber(row.coveredArea,2,0).replace(/,/g,'');
+							}
+						};
+						break;
+					//房产地址
+					case 'estateAddress':
+						if(row.estateAddress == ''){
+							row.estateAddress = '';
+						}else{
+							if(row.estateAddress.length > 100){
+								row.estateAddress = '';
 							}
 						};
 						break;
@@ -2790,17 +2830,21 @@
 	}
 	.right .rightSpan{
 		margin-left: 10px;
+	    width: 70px;
+	    height: 100%;
+	    display: inline-block;
+	    float: left;
 	}
 	.right .rightSpan img{
 		padding-top: 5px;
 		float: left;
 	}
-	.right .rightSpan:nth-of-type(2) img{
+	/* .right .rightSpan:nth-of-type(2) img{
 		padding-left: 24px;
-	}
-	.right .rightSpan:nth-of-type(3) img{
+	} */
+	/* .right .rightSpan:nth-of-type(3) img{
 		padding-left: 24px;
-	}
+	} */
 	.right .rightSpan span{
 		margin-left: 10px;
 		float: left;
@@ -3128,5 +3172,19 @@
 	.require span i{
 		padding-right: 2px;
 		font-style: normal;
+	}
+	/* 校验提示 */
+	.regSpan{
+		position: absolute;
+		left: 0px;
+	    top: -4px;
+	    font-size: 12px;
+	    color: #ff7676;
+	    z-index: 20;
+	    white-space: nowrap;
+	}
+	.regSpan i{
+		padding-right: 2px;
+    	font-style: normal;
 	}
 </style>
