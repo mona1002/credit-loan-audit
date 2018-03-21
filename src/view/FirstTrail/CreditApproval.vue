@@ -365,7 +365,8 @@
           <div class="form-title" style="position:relative;">
             信审审批结论轨迹
             <!-- <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag> -->
-            <el-tag closable @close="coverShow=false;showFlag='';spjlShow=false;" style="position:absolute;"></el-tag>
+            <!-- coverShow=false;showFlag=''; -->
+            <el-tag closable @close="spjlShow=false;" style="position:absolute;"></el-tag>
           </div>
           <el-table :data="tableData.recordList" height="280" border style="width: 100%" highlight-current-row v-loading="loading">
             <el-table-column prop="verIncome" label="核实收入[元]" min-width="100">
@@ -841,7 +842,7 @@ export default {
         case '02':
 
           console.log('020202020202020202')
-          console.log(this.showFlag);
+          // console.log(this.showFlag);
           // this.showFlag = '02';
           this.huiTuiShow = true;
           // 获取系统时间
@@ -856,7 +857,7 @@ export default {
           break;
         case '01':
           console.log('01010101010101')
-          this.showFlag = '01';
+          // this.showFlag = '01';
           this.juJueShow = true;
           this.get('system/getSystemDate').then(res => {
             console.log(res)
@@ -868,7 +869,7 @@ export default {
           break;
         case '07':
           console.log('070707007')
-          this.showFlag = '07';
+          // this.showFlag = '07';
           this.fangQiShow = true;
           this.get('system/getSystemDate').then(res => {
             console.log(res)
@@ -880,7 +881,7 @@ export default {
           break;
         case '03':
           console.log('030303003030300330')
-          this.showFlag = '03';
+          // this.showFlag = '03';
           this.shenPiShow = true;
           // this.get('system/getSystemDate').then(res => {})
           // console.log(res)
@@ -956,7 +957,7 @@ export default {
           // console.log(this.showFqz);
           // this.showFqz = true;
           console.log(this.showFqz);
-          this.showFlag = 'fqz';
+          // this.showFlag = 'fqz';
           // 查询反欺诈信息
           // this.$router.push('AntiApplyEdit')
           this.$router.push({
@@ -1145,7 +1146,7 @@ export default {
             return;
           }
           // this.coverShow = false;
-          this.showFlag = 0;
+          // this.showFlag = 0;
           // this.mainReason = this.mainReason; // 主原因同理
           this.creauditAppOperate = 'check_Refuse';
           // this.taskId = '180074';
@@ -1188,7 +1189,7 @@ export default {
           }
 
           // this.coverShow = false;
-          this.showFlag = 0;
+          // this.showFlag = 0;
           // this.huiTuiShow = false;
           // 回退节点 使用了监听,所以单独赋值
           // this.rollbackNodeName = this.rollbackNodeName.value;
@@ -1226,7 +1227,7 @@ export default {
             return;
           }
           // this.coverShow = false;
-          this.showFlag = 0;
+          // this.showFlag = 0;
           // this.fangQiShow = false;
           // 放弃测试数据
           // this.taskId = '177524';
@@ -1296,7 +1297,7 @@ export default {
             return;
           }
           // this.coverShow = false;
-          this.showFlag = 0;
+          // this.showFlag = 0;
           // this.taskId = '182525';
           // this.opinionFlag = '00';
           // 区分初审/终审
