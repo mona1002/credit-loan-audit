@@ -115,7 +115,9 @@
         })
       },
       refresh() {
-        this.rot += 360;
+        this.rot += 200;
+        console.log( this.$refs.worktask )
+        console.log( this.$refs.worktask.style )
         this.$refs.worktask.style = "transform: rotate(" + this.rot + "deg)";
         // this.$refs.worktask.style = " -ms-transform: rotate("+this.rot+"deg)"; IE9
         this.post("/workFlowTaskQuery/getTaskProfile", {
@@ -123,8 +125,11 @@
         }).then(res => {
           if (res.statusCode == 200) {
             this.tableData = res.data;
+            console.log('200成功')
           } else {
             this.$message.error(res.msg);
+            console.log('else失败')
+            
           }
         });
       },
