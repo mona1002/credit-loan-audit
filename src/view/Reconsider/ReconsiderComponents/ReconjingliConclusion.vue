@@ -123,7 +123,7 @@
 				</p>
 			  </div>
 			  <span slot="footer" class="dialog-footer">
-			    <el-button type="primary" @click="hsure">提交</el-button>
+			    <el-button type="primary" :loading=huituiLoading @click="hsure">{{huituiFont}}</el-button>
 			    <el-button type="primary" @click="dialogVisible = false">返回</el-button>
 			  </span>
 			</el-dialog>
@@ -180,7 +180,7 @@
 				</p>
 			  </div>
 			  <span slot="footer" class="dialog-footer">
-			    <el-button type="primary" @click="jSure">提交</el-button>
+			    <el-button type="primary" :loading=jujueLoading @click="jSure">{{jujueFont}}</el-button>
 			    <el-button type="primary" @click="jdialogVisible = false">返回</el-button>
 			  </span>
 			</el-dialog>
@@ -284,7 +284,7 @@
 			  	</el-collapse>
 			  </div>
 			  <span slot="footer" class="dialog-footer">
-			    <el-button type="primary" @click="spsure">提交</el-button>
+			    <el-button type="primary" :loading=shenpiLoading @click="spsure">{{shenpiFont}}</el-button>
 			    <el-button type="primary" @click="sdialogVisible = false">返回</el-button>
 			  </span>
 			</el-dialog>
@@ -565,6 +565,12 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 		        socialLogVisible:false,//社保公积金
 		        social:'',//社保公积金 已绑定 未绑定
 		        orgId:'',
+		        huituiFont:'提交',
+		        huituiLoading:false,
+		        jujueLoading:false,
+				jujueFont:'提交',
+				shenpiLoading:false,
+				shenpiFont:'提交',
 			}
 		},
 		mounted(){
@@ -651,6 +657,8 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 			coverFn(flag){
 				switch (flag){
 					case 'back':
+					//this.huituiLoading = false;
+					this.huituiFont = '提交';
 					this.dialogVisible = true;
 					this.get('system/getSystemDate').then(res => {
 			            //console.log('回退', res)
@@ -660,6 +668,8 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 			          })
 		         	break;
 		         	case 'refuse':
+		         	this.jujueLoading = false;
+					this.jujueFont = '提交';
 					this.jdialogVisible = true;
 					this.get('system/getSystemDate').then(res => {
 			            //console.log('回退', res)
@@ -678,7 +688,9 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 			},
 			//审批
 			shenpi(){
-				
+				this.shenpiLoading = false;
+				this.shenpiFont = '提交';
+				this.sdialogVisible = true;
 				//请求评分
 				this.post('/credit/quotaScoring', {
 		            applyId: this.applyId,
@@ -692,13 +704,13 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 		              //console.log(res.data.creditScore);
 		              this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
 		              //console.log(this.creditScore);
-		              this.sdialogVisible = true;
+		              //this.sdialogVisible = true;
 		            }else if (res.statusCode == '700'){
 			        	this.$message({
 			              message:res.msg,
 			              type: 'error'
 			            });
-			           this.sdialogVisible = false; 
+			           //this.sdialogVisible = false; 
 			        }
 		        });
 		        //请求产品
@@ -826,7 +838,11 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 	            })
 	            return;
 	          };
-	        
+	        	//按钮加“加载中”
+	            this.shenpiLoading = true;
+				this.shenpiFont = '提交中';
+				this.sdialogVisible = false; 
+
 	           var reg = /,/;
 
 	           this.post('/creauditOpinion/add', {
@@ -1022,10 +1038,13 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 		    },
 		    //拒绝提交按钮
 			jSure(){
-				console.log(this.rmainReasonName);
-				console.log(this.$refs.rmainReasonName);
-				console.log(this.$refs.rmainReasonName.selectedLabel);
-				console.log(this.$refs.rmainReasonName.selectedLabel);
+				//console.log(this.rmainReasonName);
+				//console.log(this.$refs.rmainReasonName);
+				//console.log(this.$refs.rmainReasonName.selectedLabel);
+				//console.log(this.$refs.rmainReasonName.selectedLabel);
+				this.jujueLoading = true;
+				this.jujueFont = '提交中';
+				this.jdialogVisible = false;
 				this.post("/creauditOpinion/approval", {
 		        // 挂起 taskId 任务id
 		        taskId: this.taskId,
@@ -1095,6 +1114,9 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 				//console.log(this.$refs.mainReasonName);
 				//console.log(this.$refs.mainReasonName.selectedLabel);
 				//console.log(this.values);
+				this.huituiLoading = true;
+				this.huituiFont = '提交中';
+				this.dialogVisible = false;
 				this.post("/creauditOpinion/approval", {
 			        // 挂起 taskId 任务id
 			        taskId: this.taskId,
