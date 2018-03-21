@@ -153,7 +153,8 @@
         <el-form class="back-form huitui-class">
           <div class="form-title" style="position:relative;" v-show="showFlag=='02'">
             回退信息
-            <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag>
+            <!-- coverShow=false;showFlag=''; -->
+            <el-tag closable @close="huiTuiShow=false;" style="position:absolute;"></el-tag>
           </div>
           <div class="back-form-li">
             <span style="color:red;display:inline-block;width:0px;float:left;">*</span>
@@ -182,7 +183,8 @@
             </el-form-item>
           </div>
           <div class="back-form-li" style="text-align:right;">
-            <el-button plain @click="showFlag=0,coverShow=false;">返回</el-button>
+            <!-- showFlag=0,coverShow=false; -->
+            <el-button plain @click="huiTuiShow=false;">返回</el-button>
             <!-- 回退 -->
             <el-button type="primary" @click="submitFn('02')" :loading="isLoading">{{loadingTitle}}</el-button>
           </div>
@@ -195,7 +197,8 @@
         <div class="lcgj-div">
           <div class="form-title" style="position:relative;">
             流程轨迹
-            <el-tag closable @close="coverShow=false;showFlag='';lcgjShow=false;" style="position:absolute;"></el-tag>
+            <!-- coverShow=false;showFlag=''; -->
+            <el-tag closable @close="lcgjShow=false;" style="position:absolute;"></el-tag>
           </div>
           <div class="xllcgj-div">
             <!-- <div class="form-title2" style="position:relative;">
@@ -223,7 +226,8 @@
             </el-table>
           </div>
           <div class="back-form-li" style="text-align:right;padding:10px;">
-            <el-button plain @click="showFlag=0,coverShow=false;lcgjShow=false;">返回</el-button>
+            <!-- showFlag=0,coverShow=false; -->
+            <el-button plain @click="lcgjShow=false;">返回</el-button>
           </div>
         </div>
       </el-dialog>
@@ -235,7 +239,8 @@
         <div class="spjl-div">
           <div class="form-title" style="position:relative;">
             详情信息
-            <el-tag closable @close="coverShow=false;showFlag='';shenPiShow=false;" style="position:absolute;"></el-tag>
+            <!-- coverShow=false;showFlag=''; -->
+            <el-tag closable @close="shenPiShow=false;" style="position:absolute;"></el-tag>
           </div>
           <div style="line-height:30px;">
             <span>
@@ -1050,6 +1055,8 @@ export default {
     },
     // 回退/拒绝/放弃
     approvalFn() {
+      this.isLoading = true;
+      this.loadingTitle = '提交中';
       // 判断终审的 opinionFlag 
       console.log(this.opinionFlag)
       // 点击 确认 提交 方法
@@ -1077,6 +1084,7 @@ export default {
       }).then(res => {
         console.log(res);
         console.log(this);
+        this.huiTuiShow = false;
 
         if (res.statusCode != '200') {
           this.$message({
