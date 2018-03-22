@@ -420,9 +420,9 @@ height: 40px;
  }
  /* 借款人资料 房产信息 表格内容居中 */
 
- .borrowerInformationSetail .house .el-table__body-wrapper {
+ /* .borrowerInformationSetail .house .el-table__body-wrapper {
    overflow: hidden;
- }
+ } */
 
  .borrowerInformationSetail .house.el-table th:nth-of-type(1),
  .borrowerInformationSetail .house.el-table th:nth-of-type(7),
@@ -437,9 +437,9 @@ height: 40px;
  }
  /* 借款人资料 车辆信息 表格内容居中 */
 
- .borrowerInformationSetail .car .el-table__body-wrapper {
-   overflow: hidden;
- }
+/*  .borrowerInformationSetail .car .el-table__body-wrapper {
+  overflow: hidden;
+} */
 
  .borrowerInformationSetail .car.el-table th:nth-of-type(1),
  .borrowerInformationSetail .car.el-table th:nth-of-type(12) {
@@ -496,7 +496,7 @@ height: 40px;
  /* 借款人资料 房产类型 */
 
  .borrowerInformation .house .el-table__body-wrapper {
-   overflow: hidden;
+   /* overflow: hidden; */
  }
 
  .borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(2) .el-input__inner {
@@ -513,6 +513,10 @@ height: 40px;
 
  .borrowerInformation .containDiv .el-table__body-wrapper tbody tr td:nth-of-type(2) .cell {
    padding-right: 0;
+ }
+
+ .borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(14) .el-input__inner {
+    padding-left: 30px;
  }
  /* 借款人资料 产权性质 */
 
@@ -561,9 +565,9 @@ height: 40px;
  }
  /* 借款人资料 车辆信息 去掉滚动条 */
 
- .borrowerInformation .car .el-table__body-wrapper {
+ /* .borrowerInformation .car .el-table__body-wrapper {
    overflow: hidden;
- }
+ } */
  /* 借款人资料 车辆信息 */
 
  .borrowerInformation .car .el-table__body-wrapper .el-table__body td:nth-of-type(6) .el-input__inner {
