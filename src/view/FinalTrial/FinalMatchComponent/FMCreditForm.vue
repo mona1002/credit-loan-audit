@@ -1,7 +1,7 @@
 <template>
   <div class="CreditForm">
     <el-collapse v-model="activeNames">
-s      <el-collapse-item name="1">
+      <el-collapse-item name="1">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">网上查询信息</span>
@@ -848,7 +848,7 @@ s      <el-collapse-item name="1">
           this.FormData.parentIncome;
         this.FormData.fconsumption ? this.FormData.fconsumption = this.formatNumber(this.FormData.fconsumption, 2, 0) :
           this.FormData.fconsumption;
-          this.FormData.selfpremisesArea ? this.FormData.selfpremisesArea = this.formatNumber(this.FormData.selfpremisesArea,
+        this.FormData.selfpremisesArea ? this.FormData.selfpremisesArea = this.formatNumber(this.FormData.selfpremisesArea,
           2, 0) + 'm²' : this.FormData.selfpremisesArea;
         this.FormData.selfhasProportion ? this.FormData.selfhasProportion = this.formatNumber(this.FormData.selfhasProportion,
           2, 0) + '%' : this.FormData.selfhasProportion;
@@ -988,7 +988,8 @@ s      <el-collapse-item name="1">
           this.FormData = res.data;
           this.AreaNPercent();
           this.formatSC();
-           this.FormData.aaddress ? this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, ''):this.FormData.aaddress ;
+          this.FormData.aaddress ? this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, '') : this.FormData
+            .aaddress;
           this.mountJ(0, res.data.wbeexEcuted);
           this.mountJ(1, res.data.wnetHirecom);
           this.mountJ(2, res.data.wnetEcutedBrea);
@@ -1027,10 +1028,9 @@ s      <el-collapse-item name="1">
 
   .InternetInf_left_label {
     display: inline-block;
-    width: 182px;
+    width: 210px;
   }
-  /* ------------------------------------------------ */
-  /* 最下面的 弹窗样式 */
+
   /* 上网信息-两行select下拉 居中 */
 
   .icon_hat {
@@ -1041,37 +1041,23 @@ s      <el-collapse-item name="1">
 
   .blueC:hover {
     color: rgba(0, 119, 255, 0.75);
-    /* color: #0077ff;
-    opacity:0.75; */
     cursor: pointer;
   }
+
   /* 上网查询 */
 
   .InternetInf_right_label {
-    width: 182px;
-    /* margin-right: 10px; */
+    width: 210px;
   }
-  /* public */
 
   .CreditForm {
-    /* min-width: 1140px; */
-    /* min-width: 1420px; */
-    /* min-width: 1592px; */
     overflow: auto;
     overflow-x: hidden;
-    min-width: 1272px;
-  }
-
-  .up_padding {
-    /* padding-top: 10px; */
+    min-width: 1665px;
   }
 
   .top {
     margin-top: 20px;
-  }
-
-  .bottom {
-    /* margin-bottom: 20px; */
   }
 
   .CreditForm li {
@@ -1083,7 +1069,6 @@ s      <el-collapse-item name="1">
   }
 
   .CreditForm p {
-    /* padding-top: 10px; */
     padding-bottom: 20px;
   }
 
@@ -1091,8 +1076,7 @@ s      <el-collapse-item name="1">
     display: inline-block;
     text-align: right;
   }
-  /*------------------------------------------- */
-  /* 各自 */
+
   /* ------------------------------上网查询 +核实身份--------------------------- */
 
   .CreditForm_InternetInf p,
@@ -1115,14 +1099,16 @@ s      <el-collapse-item name="1">
     width: 33.3%;
     vertical-align: middle;
   }
+
   /* --------------------------工作信息 + 私营企业--------------------- */
 
   .CheckId_right_label
   /* 第三列p */
 
-  {
+    {
     width: 140px;
   }
+
   /* .CreditForm_InternetInf p:nth-of-type(odd),
   .CreditForm_CheckId p:nth-of-type(odd),
   .CreditForm_FamilyInf li p:nth-of-type(1) {
@@ -1134,7 +1120,7 @@ s      <el-collapse-item name="1">
   .CreditForm_FamilyInf p:nth-of-type(even)
   /* 家庭信息 */
 
-  {
+    {
     width: 66.6%;
   }
 
@@ -1147,8 +1133,8 @@ s      <el-collapse-item name="1">
   .CreditForm_FamilyInf p:nth-of-type(even) span
   /* 家庭信息 */
 
-  {
-    width: calc( 100% - 197px);
+    {
+    width: calc( 100% - 225px);
     height: 60px;
     vertical-align: top;
     overflow: auto;
@@ -1156,10 +1142,11 @@ s      <el-collapse-item name="1">
     padding: 5px 10px;
     border-radius: 4px;
   }
+
   /* 工作信息-单位地址 + 私营企业-企业经营项目-------------label 为 182 px */
 
   .ComAddr {
-    width: calc( 100% - 197px);
+    width: calc( 100% - 225px);
     vertical-align: top;
     height: 60px;
     overflow: auto;
@@ -1167,20 +1154,23 @@ s      <el-collapse-item name="1">
     padding: 5px 10px;
     border-radius: 4px;
   }
+
   /* 省略号 */
 
   .elips {
-    width: calc( 100% - 197px);
+    width: calc( 100% - 225px);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     vertical-align: middle;
   }
+
   /* 第一经销商 */
 
   .Suppliers {
     width: calc( 100% - 205px);
   }
+
   /* 私营企业-第一分销商 --------------------------------label 为 140 px */
 
   .distributor {
@@ -1190,6 +1180,7 @@ s      <el-collapse-item name="1">
     white-space: nowrap;
     vertical-align: middle;
   }
+
   /*-------------------- 核对现住址-------------------------- */
 
   .CreditForm_check_reside li,
@@ -1200,6 +1191,7 @@ s      <el-collapse-item name="1">
     padding: 0;
     margin-bottom: 20px;
   }
+
   /*  */
 
   .interMath li,
@@ -1207,10 +1199,11 @@ s      <el-collapse-item name="1">
     margin-bottom: 20px;
     width: 66.6%;
   }
+
   /* 初审结果div */
 
   .CreditForm_result {
-    /* width: calc( 66.6% - 197px); */
+    /* width: calc( 66.6% - 225px); */
     /* width:80%; */
     padding: 20px 0 30px 0;
   }

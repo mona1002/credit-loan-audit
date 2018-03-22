@@ -712,7 +712,7 @@
                   </i>
                   <label class="InternetInf_left_label" style="textAlign:right">
                     <span style="color:#ff7676;"> * </span>终审结果评价：</label>
-                  <el-input type="textarea" :rows="5" resize="none" :maxlength="500" placeholder="请输入内容" @compositionend.native="wordarea(FormData.ootherfinal)"
+                  <el-input type="textarea" :rows="5" resize="none" :maxlength="400" placeholder="请输入内容" @compositionend.native="wordarea(FormData.ootherfinal)"
                     @keyup.native="wordarea(FormData.ootherfinal)" v-model="FormData.ootherfinal" name="Finalconclusion" v-validate="'required'">
                   </el-input>
                 </p>
@@ -1115,7 +1115,7 @@
 
   .InternetInf_left_label {
     display: inline-block;
-    width: 182px;
+    width: 210px;
   }
   /* ------------------------------------------------ */
   /* 最下面的 弹窗样式 */
@@ -1177,30 +1177,10 @@
   /* 上网查询 */
 
   .InternetInf_right_label {
-    width: 182px;
-    /* margin-right: 10px; */
+    width: 210px;
   }
-  /* public */
-
-  .CreditForm {
-    /* min-width: 1140px; */
-    /* min-width: 1420px; */
-    /* min-width: 1592px; */
-    overflow: auto;
-    overflow-x: hidden;
-    min-width: 1272px;
-  }
-
-  .up_padding {
-    /* padding-top: 10px; */
-  }
-
   .top {
     margin-top: 20px;
-  }
-
-  .bottom {
-    /* margin-bottom: 20px; */
   }
 
   .CreditForm li {
@@ -1212,7 +1192,6 @@
   }
 
   .CreditForm p {
-    /* padding-top: 10px; */
     padding-bottom: 20px;
   }
 
@@ -1220,8 +1199,6 @@
     display: inline-block;
     text-align: right;
   }
-  /*------------------------------------------- */
-  /* 各自 */
   /* ------------------------------上网查询 +核实身份--------------------------- */
 
   .CreditForm_InternetInf p,
@@ -1252,11 +1229,6 @@
   {
     width: 140px;
   }
-  /* .CreditForm_InternetInf p:nth-of-type(odd),
-  .CreditForm_CheckId p:nth-of-type(odd),
-  .CreditForm_FamilyInf li p:nth-of-type(1) {
-    width: 22%;
-  } */
 
   .CreditForm_InternetInf p:nth-of-type(even),
   .CreditForm_CheckId p:nth-of-type(even),
@@ -1277,7 +1249,7 @@
   /* 家庭信息 */
 
   {
-    width: calc( 100% - 197px);
+    width: calc( 100% - 225px);
     height: 60px;
     vertical-align: top;
     overflow: auto;
@@ -1285,10 +1257,10 @@
     padding: 5px 10px;
     border-radius: 4px;
   }
-  /* 工作信息-单位地址 + 私营企业-企业经营项目-------------label 为 182 px */
+  /* 工作信息-单位地址 + 私营企业-企业经营项目 */
 
   .ComAddr {
-    width: calc( 100% - 197px);
+    width: calc( 100% - 225px);
     vertical-align: top;
     height: 60px;
     overflow: auto;
@@ -1296,10 +1268,9 @@
     padding: 5px 10px;
     border-radius: 4px;
   }
-  /* 省略号 */
 
   .elips {
-    width: calc( 100% - 197px);
+    width: calc( 100% - 225px);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -1323,26 +1294,17 @@
 
   .CreditForm_check_reside li,
   .CreditForm_check_reside p {
-    /* width:66.6.6%; */
     width: 100%;
     clear: both;
     padding: 0;
     margin-bottom: 20px;
   }
-  /*  */
 
   .interMath li,
   .PhontConclution li,
   .CreditForm_result li {
     margin-bottom: 20px;
     width: 66.6%;
-    /* background: red; */
   }
-  /* 初审结果div */
-  /* .CreditForm_result { */
-  /* width: calc( 66.6% - 197px); */
-  /* width:80%; */
-  /* padding: 20px 0 30px 0; */
-  /* } */
 
 </style>

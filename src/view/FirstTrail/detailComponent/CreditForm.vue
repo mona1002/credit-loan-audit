@@ -836,7 +836,6 @@
                 <!-- <el-input type="text" placeholder="请输入内容" v-model="checkData.fbalance" @blur="formatMoney(checkData.fbalance,$event,'月还款')"
                   name="Paymonth" v-validate="'required'">
                 </el-input> -->
-                <!-- formatSC -->
                 <el-input type="text" placeholder="请输入内容" v-model="checkData.fbalance" @blur="formatSC('月还款')" name="Paymonth" v-validate="'required'">
                 </el-input>
               </p>
@@ -884,7 +883,7 @@
             <li style="marginTop:20px;">
               <i class="hint"></i>
               <label class="InternetInf_left_label ">现住址：</label>
-              <span class="detail_inf oneline"> </span> {{this.checkData.aaddress}}</span>
+              <span class="detail_inf oneline"> {{this.checkData.aaddress}}</span>
             </li>
             <li>
               <i class="hint"></i>
@@ -933,7 +932,6 @@
       <span slot="footer" class="dialog-footer">
         <el-button class="calbtn" @click="canc">取消</el-button>
         <el-button class="subtn" type="primary" :loading="loadsitu" @click="CFsave">{{adbtn}}</el-button>
-
       </span>
     </el-dialog>
   </div>
@@ -951,11 +949,11 @@
         inputWidth: [],
         textareaPpraProj: [],
         comaddressb: [],
-        shotInputL: 20, //20
-        longInputL: 50, //50
-        longLongInputL: 100, //10
-        shotTextareaL: 200, //200
-        textareaL: 500, //500
+        shotInputL: 20, 
+        longInputL: 50, 
+        longLongInputL: 100,
+        shotTextareaL: 200, 
+        textareaL: 500, 
         acreage: '',
         Percent: '',
         Wordhint: {
@@ -1007,7 +1005,7 @@
           },
           result: false,
         },
-        getParams: [], //获取taskwaitting里面的 查询入参 applyId
+        getParams: [],
         pickerOptions1: {
           disabledDate(time) {
             return time.getTime() > Date.now();
@@ -1068,8 +1066,8 @@
           "接听是否本人", "是否申请借款", "是否私营业主", "婚姻状况", "配偶工作情况", "同城工作生活", "是否有子女", "是否支付生活费", "父母是否在世", "是否有兄弟姐妹",
           "是否为常住地址"
         ],
-        activeNames: ['1', "2", "3", "4", "5", "6", "7", "8"], //折叠面板 默认显示下标
-        checkData: [], // 查询接口回来的数据
+        activeNames: ['1', "2", "3", "4", "5", "6", "7", "8"], 
+        checkData: [],
         // -------网上查询信息------------
         beexEcuted: [{ //（网上查询信息）客户在人法网是否有被执行信
           value: '1',
@@ -1873,7 +1871,6 @@
               break;
             case "是否申请借款":
               this.checkId.loanNot = true;
-
               break;
             case "是否私营业主":
               this.workInf.private = true;
@@ -2028,7 +2025,6 @@
             this.$message.error('提交失败，有必填项未填写！');
           }
         });
-
       },
       AreaNPercent() {
         if (this.checkData.selfpremisesArea) {
@@ -2125,32 +2121,6 @@
           this.reg.mpostCode = true;
         }
       },
-      // businessArea(val, e, el, unit) {
-      //   val = parseFloat(val);
-      //   if (isNaN(val)) {
-      //     val = e.target.value = "";
-      //     this.businessSC(val, el);
-      //   } else if (val <= 0) {
-      //     val = e.target.value = "0.00" + unit;
-      //     this.businessSC(val, el);
-      //   } else if (val > 0) {
-      //     if (val.toString().indexOf('.') == -1) {
-      //       e.target.value = val = val + "." + "0" + '0' + unit;
-      //       this.businessSC(val, el);
-      //     } else if (val.toString().indexOf('.') != -1) {
-      //       if (val.toString().split(".")[1].length < 2) {
-      //         e.target.value = val = val + "0" + unit;
-      //         this.businessSC(val, el);
-      //       } else {
-      //         e.target.value = val = val.toString().split(".")[0] + "." + val.toString()
-      //           .split(".")[1].slice(0, 2) + unit;
-      //         this.businessSC(val, el);
-      //       }
-      //     }
-      //   }
-      //   this.acreage = this.checkData.selfpremisesArea.slice(0, -2);
-      //   this.Percent = this.checkData.selfhasProportion.slice(0, -1);
-      // },
       businessSC(el) {
         switch (el) {
           case "营业面积":
@@ -2232,20 +2202,16 @@
       },
       formatNumber(num, cent, isThousand) {
         num = num.toString().replace(/\$|\,/g, '');
-        // 检查传入数值为数值类型
         if (isNaN(num)) {
           num = "0";
         }
-        // 获取符号(正/负数)
         let sign = (num == (num = Math.abs(num)));
-        num = Math.floor(num * Math.pow(10, cent) + 0.50000000001); // 把指定的小数位先转换成整数.多余的小数位四舍五入
-        let cents = num % Math.pow(10, cent); // 求出小数位数值
-        num = Math.floor(num / Math.pow(10, cent)).toString(); // 求出整数位数值
-        cents = cents.toString(); // 把小数位转换成字符串,以便求小数位长度
-        // 补足小数位到指定的位数
+        num = Math.floor(num * Math.pow(10, cent) + 0.50000000001); 
+        let cents = num % Math.pow(10, cent); 
+        num = Math.floor(num / Math.pow(10, cent)).toString(); 
+        cents = cents.toString(); 
         while (cents.length < cent)
           cents = "0" + cents;
-        // 对整数部分进行千分位格式化.
         for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++) {
           num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
         }
@@ -2327,10 +2293,6 @@
         this.checkData.fconsumption != null && this.checkData.fconsumption.toString().indexOf(',') != -1 ? this.checkData
           .fconsumption =
           this.checkData.fconsumption.split(",").join('') : this.checkData.fconsumption;
-        // this.checkData. != null && this.checkData.selfpremisesArea.indexOf(',') ? this.checkData.selfpremisesArea =
-        //   this.checkData.selfpremisesArea.split(",").join('') : this.checkData.selfpremisesArea;
-        // this.checkData.selfhasProportion != null && this.checkData.selfhasProportion.indexOf(',') ? this.checkData.selfhasProportion =
-        //   this.checkData.selfhasProportion.split(",").join('') : this.checkData.selfhasProportion;
       },
       ElInputStyle(val) {
         if (val == "50%") {
@@ -2338,28 +2300,21 @@
             this.Pwidth[i].style.width = 150 + "px";
           };
           for (var i = 0; i < this.inputWidth.length; i++) {
-            // this.inputWidth[i].style.width = 515 + "px"; //原来142px
-            this.inputWidth[i].style.width = 553 + "px"; //改后182px
+            this.inputWidth[i].style.width = 553 + "px";
           };
           for (var i = 0; i < this.Txawidth.length; i++) {
-            // this.Txawidth[i].style.width = 'calc( 50% + 104px )';
             this.Txawidth[i].style.width = 'calc( 100% - 295px)';
           };
-          // this.Txawidth[14].style.width = 'calc( 50% + 150px )';
           this.Txawidth[14].style.width = 'calc( 100% - 260px)';
           this.Txawidth[22].style.width = 'calc( 100% - 260px)';
-          this.CFwidth[0].style.minWidth = 1272 + "px";
+          this.CFwidth[0].style.minWidth = 1665 + "px";
           this.comaddressb[0].style.paddingLeft = 674 + "px";
           this.Alertbtn[0].style.marginLeft = " calc( 100% - 148px)";
-          //  this.Alertbtn[0].style.margin ="20px 0 0 716px";
         } else if (val == "100%") {
           for (var i = 0; i < this.Pwidth.length; i++) {
             this.Pwidth[i].style.width = 200 + "px";
           };
           for (var i = 0; i < this.inputWidth.length; i++) {
-            // 原来142宽度
-            // this.inputWidth[i].style.width = "calc( 50% + 160px )"
-            // 改为 182 对齐宽度
             this.inputWidth[i].style.width = "calc( 50% + 200px )";
           };
           for (var i = 0; i < this.Txawidth.length; i++) {
@@ -2368,7 +2323,6 @@
           this.Txawidth[14].style.width = "calc( 50% + 200px )";
           this.Txawidth[22].style.width = "calc( 50% + 200px )";
           this.CFwidth[0].style.minWidth = 1592 + "px";
-          // this.CFwidth[0].style.minWidth = 1366 + "px";          
           this.comaddressb[0].style.paddingLeft = 826 + "px";
           this.Alertbtn[0].style.marginLeft = "calc( 50% + 329px )";
         }
@@ -2493,29 +2447,24 @@
   }
 
   ::-webkit-input-placeholder {
-    /* WebKit browsers */
     color: #b4bccc;
     font-size: 14px;
   }
 
   :-moz-placeholder {
-    /* Mozilla Firefox 4 to 18 */
     color: #b4bccc;
     font-size: 14px;
   }
 
   ::-moz-placeholder {
-    /* Mozilla Firefox 19+ */
     color: #b4bccc;
     font-size: 14px;
   }
 
   :-ms-input-placeholder {
-    /* Internet Explorer 10+ */
     color: #b4bccc;
     font-size: 14px;
   }
-
   
   .subtn {
     background: #66b1ff;
@@ -2540,8 +2489,6 @@
 
   .blueC:hover {
     color: rgba(0, 119, 255, 0.75);
-    /* color: #0077ff;
-    opacity:0.75; */
     cursor: pointer;
   }
 
@@ -2551,8 +2498,6 @@
 
   /* 最下面的 弹窗样式 */
 
-  /* add class */
-
   .mWidth {
     width: 100%;
   }
@@ -2560,7 +2505,6 @@
   /* content下边距+左边距 */
 
   .padd {
-    /* margin: 0 0 20px 21px; */
     padding: 0 0 20px 21px;
   }
 
@@ -2578,8 +2522,6 @@
     font-style: normal;
     position: absolute;
     top: -20px;
-    /* background: black; */
-    /* height: 20px; */
   }
 
   .red {
@@ -2595,8 +2537,6 @@
   }
 
   .btn {
-    /* margin: 20px 0 0 844px; */
-    /* margin: 20px 0 0 756px; */
     margin-left: calc( 100% - 148px);
     margin-top: 20px;
   }
@@ -2611,9 +2551,6 @@
   }
 
   .internet_textarea {
-    /* 上网查询 原来155px*/
-    /* padding-left: 185px; */
-    /* 上网查询 现在182px   */
     padding-left: 211px;
   }
 
@@ -2627,24 +2564,19 @@
 
   .InternetInf_left_label {
     display: inline-block;
-    width: 182px;
-    /* width: 200px; */
+    width: 223px;
     margin-right: 10px;
     font-size: 14px;
     font-weight: normal;
   }
 
   .InternetInf_right_label {
-    /* 原来的 */
-    /* width: 155px; */
-    /* UI设计的 */
-    width: 182px;
+    width: 223px;
     margin-right: 10px;
   }
 
   .Family_right_label {
-    width: 182px;
-    /* width: 200px; */
+    width: 223px;
   }
 
   /* 工作信息 */
@@ -2654,9 +2586,6 @@
   }
 
   .Working_middle {
-    /* 原来的 142px; */
-    /* padding-left: 170px; */
-    /* 现在的 182px */
     padding-left: 211px;
   }
 
@@ -2672,21 +2601,9 @@
     padding-left: 212px;
   }
 
-  /* public */
-
-  .CreditForm {
-    /* min-width: 1140px; */
-    /* min-width: 1420px; */
-    /* min-width: 1592px; */
-    overflow: auto;
-    min-width: 1272px;
-    /* overflow-x: hidden; */
-  }
-
   .CreditForm li {
     color: #475669;
     font-size: 14px;
-    /* border: 1px solid yellowgreen; */
     vertical-align: middle;
     position: relative;
   }
@@ -2697,8 +2614,6 @@
     margin-right: 10px;
   }
 
-  /* 各自 */
-
   /* ------------------------------上网查询 +核实身份--------------------------- */
 
   .CreditForm_InternetInf li,
@@ -2707,11 +2622,8 @@
   /* 家庭信息 */
 
     {
-    /* border: 1px solid yellowgreen; */
     clear: both;
     vertical-align: middle;
-    /* margin-top: 10px; */
-    /* margin:20px; */
   }
 
   .CreditForm_InternetInf li p,
@@ -2727,12 +2639,10 @@
   /* 居住情况 */
 
     {
-    /* border: 1px solid blue; */
     float: left;
     width: 33.3%;
     position: relative;
     vertical-align: middle;
-    /* vertical-align:bottom; */
     margin-top: 20px;
   }
 
@@ -2751,21 +2661,13 @@
   /* 家庭信息 */
 
     {
-    /* background: red; */
     width: 66.6%
   }
-
-  /* .CreditForm_CheckId p:nth-of-type(odd) {
-    padding-top: 18px;
-  } */
 
   /* --------------------------工作信息 + 私营企业--------------------- */
 
   .WorkInfs_left_label {
-    /* 原来的 */
-    /* width: 142px; */
-    /* UI图的 */
-    width: 182px;
+    width: 223px;
   }
 
   .CreditForm_WorkInfs_ul_right,
@@ -2799,12 +2701,9 @@
 
   .CreditForm_WorkInfs_ul_left li,
   .CreditForm_CompanyInfs_ul_left li {
-    /* clear:both; */
     float: left;
     width: 50%;
-    /* border: 1px solid; */
     margin-top: 20px;
-    /* height: 65px; */
   }
 
   .CreditForm_WorkInfs_ul_right li,
@@ -2812,13 +2711,6 @@
 
   .CreditForm_CompanyInfs_ul_right li {
     margin-top: 20px;
-    /* border: 1px solid; */
-  }
-
-  /* -----------------------家庭信息--------------------- */
-
-  .CreditForm_FamilyInf li {
-    /* border: 1px solid yellowgreen; */
   }
 
   /*-------------------- 核对现住址-------------------------- */
@@ -2834,7 +2726,6 @@
     width: 66.6%;
     position: relative;
     margin-top: 20px;
-    /* background: #ff7676; */
   }
 
 </style>

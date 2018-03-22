@@ -985,7 +985,7 @@ height: 40px;
  /* 信审表-终审-终审评价textarea */
 
  .CreditForm .FinalConclution .el-textarea {
-   width: calc( 100% - 197px);
+   width: calc( 100% - 225px);
  }
 
  .CreditForm .FinalConclution .el-textarea__inner {
