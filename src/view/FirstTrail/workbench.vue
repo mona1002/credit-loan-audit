@@ -125,7 +125,6 @@
             this.tableData = res.data;
           } else {
             this.$message.error(res.msg);
-            
           }
         });
       },

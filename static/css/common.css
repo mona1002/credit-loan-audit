@@ -242,3 +242,9 @@ table {
   float: right;
   margin: 5px 0 0 2px;
 }
+
+.CreditForm {
+  overflow: auto;
+  overflow-x: hidden;
+  min-width: 1665px;
+}

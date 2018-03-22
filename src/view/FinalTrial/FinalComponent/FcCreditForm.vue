@@ -1052,7 +1052,7 @@
 
   .InternetInf_left_label {
     display: inline-block;
-    width: 182px;
+    width: 210px;
   }
   /* ------------------------------------------------ */
   /* 最下面的 弹窗样式 */
@@ -1073,30 +1073,11 @@
   /* 上网查询 */
 
   .InternetInf_right_label {
-    width: 182px;
-    /* margin-right: 10px; */
-  }
-  /* public */
-
-  .CreditForm {
-    /* min-width: 1140px; */
-    /* min-width: 1420px; */
-    /* min-width: 1592px; */
-    overflow: auto;
-    overflow-x: hidden;
-    min-width: 1272px;
-  }
-
-  .up_padding {
-    /* padding-top: 10px; */
+    width: 210px;
   }
 
   .top {
     margin-top: 20px;
-  }
-
-  .bottom {
-    /* margin-bottom: 20px; */
   }
 
   .CreditForm li {
@@ -1108,7 +1089,6 @@
   }
 
   .CreditForm p {
-    /* padding-top: 10px; */
     padding-bottom: 20px;
   }
 
@@ -1116,8 +1096,6 @@
     display: inline-block;
     text-align: right;
   }
-  /*------------------------------------------- */
-  /* 各自 */
   /* ------------------------------上网查询 +核实身份--------------------------- */
 
   .CreditForm_InternetInf p,
@@ -1173,7 +1151,7 @@
   /* 家庭信息 */
 
   {
-    width: calc( 100% - 197px);
+    width: calc( 100% - 225px);
     height: 60px;
     vertical-align: top;
     overflow: auto;
@@ -1184,7 +1162,7 @@
   /* 工作信息-单位地址 + 私营企业-企业经营项目-------------label 为 182 px */
 
   .ComAddr {
-    width: calc( 100% - 197px);
+    width: calc( 100% - 225px);
     vertical-align: top;
     height: 60px;
     overflow: auto;
@@ -1195,7 +1173,7 @@
   /* 省略号 */
 
   .elips {
-    width: calc( 100% - 197px);
+    width: calc( 100% - 225px);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -1235,7 +1213,7 @@
   /* 初审结果div */
 
   .CreditForm_result {
-    /* width: calc( 66.6% - 197px); */
+    /* width: calc( 66.6% - 225px); */
     /* width:80%; */
     padding: 20px 0 30px 0;
   }
