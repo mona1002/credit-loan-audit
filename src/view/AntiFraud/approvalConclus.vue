@@ -489,6 +489,7 @@ export default {
       }
       // 请求风险项
       this.getRiskItems();
+      this.queryCaseNumList();
 
     } else if (this.judgeFlag == '04') {
       // 取出 流程模版id  processTemplateId
