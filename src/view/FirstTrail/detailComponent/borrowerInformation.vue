@@ -2696,13 +2696,13 @@
 							}
 			                break;
 			            case 'monthlyPay':
-				            if(value.monthlyPay*1 > 500000 || value.monthlyPay*1 < 500){
+		            		if(value.monthlyPay*1 > 500000 || value.monthlyPay*1 < 500){
 				            	value.monthShow = true;
 				            	value.monthlyPay = '';
 				            }else{
 				            	value.monthShow = false;
 								value.monthlyPay =this.formatNumber(value.monthlyPay,2,0);
-				            }
+				            };
 			                break;
 			            case 'restLoans':
 			            	//console.log(value.restLoans*1 > ((value.monthlyPay*1)*(value.loanPeriod*1)));
@@ -2826,17 +2826,25 @@
 								value.loanPeriod = '';
 							}else{
 								value.loanPeriodShow = false;
-							}
+							};
+							if(value.monthlyPay && value.loanPeriod){
+								var regs=/\,/g;
+								value.restLoans = value.restLoans.replace(regs,'');
+								if(value.restLoans*1 < 0 || value.restLoans*1 > ((value.monthlyPay*1)*(value.loanPeriod*1))){
+									value.restShow = true;
+									value.restLoans = '';
+								};
+							};
 							break;
 			        } 
 			    }
 			},
 			//邮政编码验证
 			postcode(row,flage){
-				console.log(row);
-				console.log(row.estateZip);
+				//console.log(row);
+				//console.log(row.estateZip);
 				//console.log(row.estateAddress.length);
-				console.log(row.monthlyPay);
+				//console.log(row.monthlyPay);
 				switch (flage){
 					case 'estateZip':
 						if(row.estateZip == ''){
@@ -2915,9 +2923,26 @@
 								row.monthlyPay = "99,999,999.00";
 							}else{
 								row.monthlyPay = this.formatNumber(row.monthlyPay,2,0);
-							}
+							};
+							if(row.monthlyPay && row.loanPeriod){
+								alert('kk');
+								var regs=/\,/g;
+								row.restLoans = row.restLoans.replace(regs,'');
+								if(row.restLoans*1 < 0 || row.restLoans*1 > ((row.monthlyPay*1)*(row.loanPeriod*1))){
+									//alert('uu');
+									row.restShow = true;
+									//console.log(row.restShow);
+									row.restLoans = '';
+								};
+							};
 						};
 						break;
+						/*if(value.monthlyPay && value.loanPeriod){
+			            		if(value.restLoans*1 < 0 || value.restLoans*1 > ((value.monthlyPay*1)*(value.loanPeriod*1))){
+			            			value.restShow = true;
+				            		value.restLoans = '';
+			            		}
+			            	}else{*/
 					//月供(贷款余额)
 					case 'restLoans':
 						if(row.restLoans == ''){
