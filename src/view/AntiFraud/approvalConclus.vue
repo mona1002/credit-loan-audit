@@ -66,7 +66,7 @@
         </div>
       </li>
       <li>
-        <el-button icon="el-icon-change-hang" class="credit-btn" @click="editFn" v-if="auditResult!='02'">修改</el-button>
+        <el-button icon="el-icon-change-hang" class="credit-btn" @click="editFn" v-if="auditResult!='02' && judgeFlag!='03'">修改</el-button>
       </li>
       <li class="item-column1">
         <div class="left-title item-label-show">
