@@ -3,7 +3,6 @@ import router from '../router/index'
 import appConstant from './constant'
 import platforUrl from'./constantUser'
 
-
 //数据接口
 axios.defaults.baseURL = appConstant.baseUrl_common;
 //  axios.defaults.baseURL = 'http://10.1.26.203:20716/riskManagement';
