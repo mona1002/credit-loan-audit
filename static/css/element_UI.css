@@ -1,4 +1,3 @@
- 公共部分 */
  /* .Abody 部分 */
 
  .Abody .el-button {
@@ -11,30 +10,12 @@
    padding: 9px 22px;
    font-size: 16px;
  }
- /* .Abody el-select-dropdown__item{
-float:none;
-}
-.Abody .el-select-dropdown__item{
-float:none;
-} */
- /* 公用 表格 表头 th */
- /* 放款信息 信审审结论轨迹  */
- /* .FinanceInformation .el-table__header-wrapper tr{
-height: 40px;
-}
-.FinanceInformation .el-table .cell{
-      line-height: 23px;
-} */
 
  .FinanceInformation .el-table .cell,
  .ApprovalConclusion .el-table .cell {
    /* line-height: 23px; */
    /* text-align: center; */
  }
-/* 信审审批结论轨迹 th全部居中 */
-/* .ApprovalConclusion .el-table th.is-center {
-   text-align: center;
- } */
 
  .FinanceInformation .el-table,
  .ApprovalConclusion .el-table {
@@ -92,9 +73,6 @@ height: 40px;
    margin-right: 12px;
  }
 
- .applicationInformationDetail .el-table__body-wrapper {
-   /* overflow: hidden; */
- }
  /*申请信息详情 表格 */
 
  .applicationInformationDetail .el-table th {
@@ -151,11 +129,7 @@ height: 40px;
  .applicationInformationDetail .house .el-table__body-wrapper {
    overflow: hidden;
  }
- /* @media screen and (min-width: 1327px){
-    .applicationInformationDetail .house .el-table__body-wrapper{
-      overflow: hidden;
-    }
-  } */
+
  /* 车辆信息 序号、购买时间 居中 */
 
  .applicationInformationDetail .car.el-table th:nth-of-type(1),
@@ -196,11 +170,7 @@ height: 40px;
  .applicationInformationDetail .people .el-table__body-wrapper {
    overflow: hidden;
  }
- /* @media screen and (min-width: 1327px){
-    .applicationInformationDetail .people .el-table__body-wrapper{
-      overflow: hidden;
-    }
-  } */
+
  /*申请信息 表格去掉overflow:hidden; */
 
  .applicationInformationDetail .el-collapse-item__wrap {
@@ -357,7 +327,6 @@ height: 40px;
  .borrowerInformationSetail .el-collapse-item__header {
    background: #eef0f9;
    border: 1px solid #e6eaee;
-   /* border-radius:23px; */
    width: 100%;
    height: 40px;
    line-height: 40px;
@@ -420,10 +389,6 @@ height: 40px;
  }
  /* 借款人资料 房产信息 表格内容居中 */
 
- /* .borrowerInformationSetail .house .el-table__body-wrapper {
-   overflow: hidden;
- } */
-
  .borrowerInformationSetail .house.el-table th:nth-of-type(1),
  .borrowerInformationSetail .house.el-table th:nth-of-type(7),
  .borrowerInformationSetail .house.el-table th:nth-of-type(8) {
@@ -436,10 +401,6 @@ height: 40px;
    text-align: center;
  }
  /* 借款人资料 车辆信息 表格内容居中 */
-
-/*  .borrowerInformationSetail .car .el-table__body-wrapper {
-  overflow: hidden;
-} */
 
  .borrowerInformationSetail .car.el-table th:nth-of-type(1),
  .borrowerInformationSetail .car.el-table th:nth-of-type(12) {
@@ -490,14 +451,8 @@ height: 40px;
    text-align: center;
  }
  /* 借款人资料 */
- /* .borrowerInformation .el-table__body-wrapper .el-select>.el-input .el-input__inner {
-  border: none;
-} */
- /* 借款人资料 房产类型 */
 
- .borrowerInformation .house .el-table__body-wrapper {
-   /* overflow: hidden; */
- }
+ /* 借款人资料 房产类型 */
 
  .borrowerInformation .house .el-table__body-wrapper .el-table__body td:nth-of-type(2) .el-input__inner {
    width: 126px;
@@ -563,11 +518,6 @@ height: 40px;
  .borrowerInformation .el-table__body-wrapper .el-table__body td:nth-of-type(1) {
    text-align: center;
  }
- /* 借款人资料 车辆信息 去掉滚动条 */
-
- /* .borrowerInformation .car .el-table__body-wrapper {
-   overflow: hidden;
- } */
  /* 借款人资料 车辆信息 */
 
  .borrowerInformation .car .el-table__body-wrapper .el-table__body td:nth-of-type(6) .el-input__inner {
@@ -766,13 +716,13 @@ height: 40px;
  }
  /* 各自部分 */
  /* 工作台部分修改 */
- /* .workbench .el-icon-arrow-right:before {
-  content: "";
-} */
  /* 工作台 待办任务 hover 小手 */
 
  .workbench .el-table tr:hover {
    cursor: pointer;
+ }
+ .workbench .el-collapse-item:last-child{
+height: 100%;
  }
  /* 工作台 折叠面板 头部 箭头 */
 
@@ -785,6 +735,8 @@ height: 40px;
  .workbench .el-collapse-item__wrap {
    border: 1px solid #D5D5D5;
    width: 100%;
+   height: calc( 100% - 48px);
+
  }
  /* 工作台 - 刷新（refresh）- 按钮  */
 
@@ -797,11 +749,11 @@ height: 40px;
 
  .workbench .el-collapse{
    margin-bottom: 10px;
+   height: calc( 100% - 15px);
  }
  /* 工作通知title颜色 */
 
  .workbench .el-collapse-item__header {
-   /* background: #f5f7fa; */
    background: white;
    border: 1px solid #D5D5D5;
    height: 48px;
@@ -815,13 +767,12 @@ height: 40px;
 
  .workbench .el-collapse-item__content {
    padding: 10px;
-   /* margin-bottom: 10px; */
    height: 38.8vh;
  }
- /* 代办任务下面div高度   #f3f3f3  */
+ /* 代办任务下面  */
 
  .workbench .main_right_task .el-collapse-item__content {
-   height: 84vh;
+    height: calc( 100% - 40px);
    overflow: auto;
  }
  /* 待办任务下面 table 表头颜色 */
@@ -871,10 +822,6 @@ height: 40px;
    border: 1px solid rgb(229, 229, 229);
    border-radius: 4px;
    height: 36px;
-   /* 改后 */
-   /* border-radius:6px;
-  width:258px;
-  height:50px */
  }
  /* 个别特殊input宽度 */
 
@@ -898,7 +845,6 @@ height: 40px;
  }
 
  .CreditForm .el-collapse-item:nth-of-type(4) .el-collapse-item__wrap {
-   /* background: red; */
    padding: 0;
  }
  /* 信审表+反欺诈结论（初审+终审） ----各个  title 一行 */
@@ -957,7 +903,6 @@ height: 40px;
 
  .CreditForm .CreditForm_CompanyInfs_ul_left .el-textarea {
    width: calc( 100% - 260px);
-   /* width: 67%; */
  }
  /* 信审表-工作信息+私营企业信息-入职时间-日历图标位置 */
 
@@ -1038,7 +983,6 @@ height: 40px;
    display: block;
    float: left;
    border: 1px solid #e6ebf5;
-   /* border-top: none; */
    border-bottom: none;
    text-align: center;
    font-size: 13px;
@@ -1080,7 +1024,6 @@ height: 40px;
 
  .AudioVisual .el-collapse-item__header .el-collapse-item__arrow,
  .AudioVisualLeft .el-collapse-item__header .el-collapse-item__arrow {
-   /* line-height: 30px; */
    display: none;
  }
  /* 影像列表-左侧列表--内容title-最外侧包裹层 */
@@ -1100,7 +1043,6 @@ height: 40px;
 
  .AudioVisualLeft .posi .el-collapse-item__content,
  .MatchingInf .posi .el-collapse-item__content {
-   /* background: red; */
    height: 355px;
  }
  /* 影像列表- 对比弹出层-select-搜索框-wrap */
@@ -1123,11 +1065,9 @@ height: 40px;
  .AntiRules .el-input,
  .AntiCaseNum .el-input,
  .HistoryTask .el-input {
-   /* display: inline-block; */
    width: auto;
  }
  /* 气泡宽度 */
- /* .AntiRules .el-popover */
 
  .AntiCaseNum .el-popover,
  .HistoryTask .el-popover {
@@ -1170,7 +1110,6 @@ height: 40px;
  .AntiCaseNum .el-table,
  .HistoryTask .el-table {
    height: 100%;
-   /* background: red; */
  }
 
  .AntiRules .el-table__body-wrapper,
@@ -1181,9 +1120,7 @@ height: 40px;
 
  .AntiRules .redact .el-dialog,
  .AntiCaseNum .redact .el-dialog {
-   /* min-width:620px; */
    width: 620px;
-   /* background: #000; */
  }
  /* 弹框内自带padding  去掉 */
 
@@ -1215,14 +1152,12 @@ height: 40px;
  /* 借款人资料表格内容居中 */
 
  .borrowerInformationSetail .el-table th {
-   /* text-align: center; */
    font-weight: 400;
    color: #1f2d3d;
    font-size: 14px;
  }
 
  .borrowerInformationSetail .el-table__body-wrapper .el-table__body td {
-   /* text-align: center; */
    font-weight: 400;
    color: #666666;
    font-size: 14px;
@@ -1365,7 +1300,6 @@ height: 40px;
  }
 
  .remarkDetial .el-table__body-wrapper .el-table__body td {
-   /* text-align: center; */
    font-weight: 400;
    color: #666666;
    font-size: 14px;
@@ -1419,14 +1353,12 @@ height: 40px;
  }
 
  .taskWatting .el-table th {
-   /* padding-left: 10px; */
    font-weight: 400;
    color: #1f2d3d;
    font-size: 14px;
  }
 
  .taskWatting .el-table__body-wrapper .el-table__body td {
-   /* padding-left: 10px; */
    font-weight: 400;
    color: #666666;
    font-size: 14px;
@@ -1549,7 +1481,6 @@ height: 40px;
 
  .mheader .el-menu--horizontal {
    border-bottom: none;
-   /* background: pink; */
  }
 /* 如果没有子集，只有一级导航的情况下 */
  .mheader .el-menu--horizontal .el-menu-item{
@@ -1572,7 +1503,6 @@ height: 40px;
 
  .mheader .el-menu--horizontal .el-submenu .el-submenu__title {
    font-size: 15px;
-   /* color: #bfcbd9; */
    color: #fff;
    height: 60px;
    line-height: 70px;
@@ -1830,7 +1760,6 @@ height: 40px;
  /*内容*/
 
  .el-tree .el-tree-node .el-tree-node__content {
-   /*background: #f8f9fd;*/
    background: #fff;
    box-shadow: 0 0 1px 0 rgba(151, 151, 151, .3);
  }
@@ -2051,10 +1980,6 @@ height: 40px;
  .aAntiFraudInvestigation .numBody .el-table__body-wrapper .el-table__body td:nth-of-type(1) {
    text-align: center;
  }
- /* .aAntiFraudInvestigation .numBody .el-table__body-wrapper .el-table__body td:nth-of-type(6) button{
-  background:#0077FF;
-  color: #fff;
-} */
 
  .aAntiFraudInvestigation .numBody .el-table th:nth-of-type(6) {
    text-align: center;
@@ -2102,9 +2027,6 @@ height: 40px;
  .anti-fraud .anti-table .el-table__body-wrapper .el-table__body td:nth-of-type(16) {
    text-align: center;
  }
- /*.el-table--border .has-gutter td:nth-last-of-type(2), .el-table--border .has-gutter th:nth-last-of-type(2){
-  text-align: center;
-}*/
  /* 审批结论 下拉框 padding*/
 
  .creditApproval-class .el-select .el-input.is-focus .el-input__inner {
@@ -2114,10 +2036,6 @@ height: 40px;
  .creditApproval-class .el-input--suffix .el-input__inner {
    padding-left: 10px;
  }
- /*
-.creditApproval-class .el-form-item__label{
-  padding: 0;
-}*/
 
  .el-table .cell,
  .el-table th div,
