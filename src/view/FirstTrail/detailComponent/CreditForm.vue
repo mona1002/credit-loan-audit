@@ -949,11 +949,11 @@
         inputWidth: [],
         textareaPpraProj: [],
         comaddressb: [],
-        shotInputL: 20, 
-        longInputL: 50, 
+        shotInputL: 20,
+        longInputL: 50,
         longLongInputL: 100,
-        shotTextareaL: 200, 
-        textareaL: 500, 
+        shotTextareaL: 200,
+        textareaL: 500,
         acreage: '',
         Percent: '',
         Wordhint: {
@@ -1066,7 +1066,7 @@
           "接听是否本人", "是否申请借款", "是否私营业主", "婚姻状况", "配偶工作情况", "同城工作生活", "是否有子女", "是否支付生活费", "父母是否在世", "是否有兄弟姐妹",
           "是否为常住地址"
         ],
-        activeNames: ['1', "2", "3", "4", "5", "6", "7", "8"], 
+        activeNames: ['1', "2", "3", "4", "5", "6", "7", "8"],
         checkData: [],
         // -------网上查询信息------------
         beexEcuted: [{ //（网上查询信息）客户在人法网是否有被执行信
@@ -2206,10 +2206,10 @@
           num = "0";
         }
         let sign = (num == (num = Math.abs(num)));
-        num = Math.floor(num * Math.pow(10, cent) + 0.50000000001); 
-        let cents = num % Math.pow(10, cent); 
-        num = Math.floor(num / Math.pow(10, cent)).toString(); 
-        cents = cents.toString(); 
+        num = Math.floor(num * Math.pow(10, cent) + 0.50000000001);
+        let cents = num % Math.pow(10, cent);
+        num = Math.floor(num / Math.pow(10, cent)).toString();
+        cents = cents.toString();
         while (cents.length < cent)
           cents = "0" + cents;
         for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++) {
@@ -2260,21 +2260,17 @@
       },
       btnnn() {
         this.checkData.fbalance != null && this.checkData.fbalance.toString().indexOf(',') != -1 ? this.checkData.fbalance =
-          this.checkData
-          .fbalance.split(",").join('') : this.checkData.fbalance;
+          this.checkData.fbalance.split(",").join('') : this.checkData.fbalance;
         this.checkData.iloanAmt != null && this.checkData.iloanAmt.toString().indexOf(',') != -1 ? this.checkData.iloanAmt =
-          this.checkData
-          .iloanAmt.split(",").join('') : this.checkData.iloanAmt;
-        this.checkData.avgsalaryamt != null && this.checkData.avgsalaryamt.toString().indexOf(',') != -1 ? this.checkData
-          .avgsalaryamt =
-          this.checkData.avgsalaryamt.split(",").join('') : this.checkData.avgsalaryamt;
+          this.checkData.iloanAmt.split(",").join('') : this.checkData.iloanAmt;
+        this.checkData.avgsalaryamt != null && this.checkData.avgsalaryamt.toString().indexOf(',') != -1 ? this.checkData.avgsalaryamt =this.checkData.avgsalaryamt.split(",").join('') : this.checkData.avgsalaryamt;
         this.checkData.regcapitalamt != null && this.checkData.regcapitalamt.toString().indexOf(',') != -1 ? this.checkData
           .regcapitalamt =
           this.checkData.regcapitalamt.split(",").join('') : this.checkData.regcapitalamt;
-        this.checkData.thiprofitamountmamt != null && this.checkData.thiprofitamountmamt.toString().indexOf(',') != -1 ?
+        this.checkData.profitamountmamt != null && this.checkData.profitamountmamt.toString().indexOf(',') != -1 ?
           this.checkData
-          .thiprofitamountmamt =
-          this.checkData.thiprofitamountmamt.split(",").join('') : this.checkData.thiprofitamountmamt;
+          .profitamountmamt =
+          this.checkData.profitamountmamt.split(",").join('') : this.checkData.profitamountmamt;
         this.checkData.monthrentamt != null && this.checkData.monthrentamt.toString().indexOf(',') != -1 ? this.checkData
           .monthrentamt =
           this.checkData.monthrentamt.split(",").join('') : this.checkData.monthrentamt;
@@ -2465,7 +2461,7 @@
     color: #b4bccc;
     font-size: 14px;
   }
-  
+
   .subtn {
     background: #66b1ff;
     border-color: #66b1ff;
