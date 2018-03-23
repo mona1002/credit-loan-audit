@@ -2322,7 +2322,7 @@
           };
           this.Txawidth[14].style.width = "calc( 50% + 200px )";
           this.Txawidth[22].style.width = "calc( 50% + 200px )";
-          this.CFwidth[0].style.minWidth = 1592 + "px";
+          this.CFwidth[0].style.minWidth = 1665 + "px";
           this.comaddressb[0].style.paddingLeft = 826 + "px";
           this.Alertbtn[0].style.marginLeft = "calc( 50% + 329px )";
         }
