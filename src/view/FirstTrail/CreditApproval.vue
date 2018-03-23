@@ -1067,7 +1067,6 @@ export default {
           // opinionFlag: this.opinionFlag, // 任务类型  初审 00 
 
           // 根据产品id  取到  批准期限
-          alert(this.proId);
           this.get('/credit/ploanTermByPro?proId=' + this.proId).then(res => {
             //console.log(res.data);
             //console.log('// 根据产品id  取到  批准期限')
