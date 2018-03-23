@@ -841,26 +841,26 @@ export default {
       switch (flag) {
         case '02':
 
-          console.log('020202020202020202')
+          //console.log('020202020202020202')
           // console.log(this.showFlag);
           // this.showFlag = '02';
           this.huiTuiShow = true;
           // 获取系统时间
           this.get('system/getSystemDate').then(res => {
-            console.log('回退', res)
+            //console.log('回退', res)
             // 请求系统时间
             this.dealroperDate = res.data;
-            console.log('this.', this.dealroperDate);
+            //console.log('this.', this.dealroperDate);
           })
           // 回退 01 new  根据节点 请求
           // getReason('main', '01')
           break;
         case '01':
-          console.log('01010101010101')
+          //console.log('01010101010101')
           // this.showFlag = '01';
           this.juJueShow = true;
           this.get('system/getSystemDate').then(res => {
-            console.log(res)
+            //console.log(res)
             // 请求系统时间
             this.dealroperDate = res.data;
           })
@@ -868,11 +868,11 @@ export default {
           this.getReason('main', '03')
           break;
         case '07':
-          console.log('070707007')
+         // console.log('070707007')
           // this.showFlag = '07';
           this.fangQiShow = true;
           this.get('system/getSystemDate').then(res => {
-            console.log(res)
+            //console.log(res)
             // 请求系统时间
             this.dealroperDate = res.data;
           })
@@ -880,7 +880,7 @@ export default {
           this.getReason('main', '05')
           break;
         case '03':
-          console.log('030303003030300330')
+          //console.log('030303003030300330')
           // this.showFlag = '03';
           this.shenPiShow = true;
           // this.get('system/getSystemDate').then(res => {})
@@ -898,8 +898,8 @@ export default {
           this.eachTermAmt = this.applicationInformationDetail.eachTermAmt;
           // 申请类型/借款类型
           this.loanType = this.applicationInformationDetail.loanTypeTxt;
-          console.log(this.proId)
-          console.log('++++++++++++++++++++++++++++++')
+          //console.log(this.proId)
+          //console.log('++++++++++++++++++++++++++++++')
 
           // 信用评分  核实可接受最高还款额
           this.post('/credit/quotaScoring', {
@@ -907,21 +907,21 @@ export default {
             proId: this.sproId,
             appOrgId: this.appOrgId
           }).then(res => {
-            console.log(res);
+            //console.log(res);
             if (res.statusCode == '200') {
               this.quotaData = res.data;
               // 单独处理 评分   =>  "评分:51.6"
-              console.log(res.data.creditScore);
+              //console.log(res.data.creditScore);
               this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
-              console.log(this.creditScore);
+              //console.log(this.creditScore);
               this.fbalance = res.data.fbalance;
               if (res.data.creditScore.split(',')[1]) {
                 this.fbalance2 = Number(res.data.fbalance).toLocaleString() + res.data.creditScore.split(',')[1];
               } else {
                 this.fbalance2 = Number(res.data.fbalance).toLocaleString() + '.00'
               }
-              console.log(this.fbalance);
-              console.log(this.fbalance2);
+              //console.log(this.fbalance);
+              //console.log(this.fbalance2);
             }
           })
 
@@ -944,7 +944,7 @@ export default {
           // })
           // } else 
           if (this.judgeFlag == '02') { // 终审
-            console.log(222222222222222222222222)
+            //console.log(222222222222222222222222)
             // 请求产品  初审-审批结论 / 终审-审核结论
           }
           this.getProducts();
@@ -953,10 +953,10 @@ export default {
           break;
 
         case 'fqz':
-          console.log('点击发起反欺诈');
+          //console.log('点击发起反欺诈');
           // console.log(this.showFqz);
           // this.showFqz = true;
-          console.log(this.showFqz);
+          //console.log(this.showFqz);
           // this.showFlag = 'fqz';
           // 查询反欺诈信息
           // this.$router.push('AntiApplyEdit')
@@ -970,13 +970,13 @@ export default {
           });
           break;
         case 'spjl':
-          console.log('spspspspsppspspspspsp')
+          //console.log('spspspspsppspspspspsp')
           // this.showFlag = 'spjl';
           this.spjlShow = true;
           this.getSpjlList();
           break;
         case 'lcgj':
-          console.log('lclclcllclclclclcllclcl')
+          //console.log('lclclcllclclclclcllclcl')
           // this.showFlag = 'lcgj';
           this.lcgjShow = true;
           // 取本地的 流程模版id
@@ -1019,13 +1019,13 @@ export default {
       // })
 
       this.get('/credit/product').then(res => {
-        console.log(res);
+        //console.log(res);
         if (res.statusCode == '200') {
           // 假如没有  核实可接受最高每期还款额 
           // if(res.)  提交的时候也要判断
           // this.$message("提示：请完善信审表中可承受的月还款金额");
           this.products = res.data;
-          console.log('请求完产品了')
+          //console.log('请求完产品了')
           if (res.statusCode == '200') {
             if (this.judgeFlag == '02') { // 终审
               this.queryCreauditOpinionObj();
@@ -1039,7 +1039,7 @@ export default {
       this.post('/creauditOpinion/queryCreauditOpinionObj', {
         applyId: this.applyId
       }).then(res => {
-        console.log(res);
+        //console.log(res);
         if (res.statusCode == '200') {
 
           // applyId: this.applyId,
@@ -1068,13 +1068,13 @@ export default {
 
           // 根据产品id  取到  批准期限
           this.get('/credit/ploanTermByPro?proId=' + this.proId).then(res => {
-            console.log(res.data);
-            console.log('// 根据产品id  取到  批准期限')
+            //console.log(res.data);
+            //console.log('// 根据产品id  取到  批准期限')
             if (res.statusCode == '200') {
               this.ploanTerms = res.data;
               for (var i = 0; i < this.ploanTerms.length; i++) {
-                console.log(this.ploanTerm);
-                console.log(this.ploanTerms[i].appDuration)
+                //console.log(this.ploanTerm);
+                //console.log(this.ploanTerms[i].appDuration)
                 if (this.ploanTerms[i].appDuration == this.ploanTerm) {
                   // 批准期限
                   this.ploanTerm = this.ploanTerms[i].appDuration;
@@ -1084,22 +1084,22 @@ export default {
                   this.loanRateYr = this.ploanTerms[i].loanRateYr;
                   // 还款方式  
                   this.repayWay = this.ploanTerms[i].repayWay;
-                  console.log('批准期限', this.ploanTerm, '综合费率', this.synthesisRateM, '借款利率', this.loanRateYr, '还款方式', this.repayWay)
+                  //console.log('批准期限', this.ploanTerm, '综合费率', this.synthesisRateM, '借款利率', this.loanRateYr, '还款方式', this.repayWay)
                   // 取到  产品 id 产品 code , 从请求回来的列表数据中找到对应的产品名
                   if (this.proId && this.products) {
-                    console.log('遍历产品')
-                    console.log(this.proId);
-                    console.log(this.products.length);
+                    //console.log('遍历产品')
+                    //console.log(this.proId);
+                    //console.log(this.products.length);
 
                     for (var i = 0; i < this.products.length; i++) {
-                      console.log(this.products[i]);
-                      console.log('ttttttt', this.proId);
-                      console.log('xxxxxxx', this.products[i].id);
+                      //console.log(this.products[i]);
+                      //console.log('ttttttt', this.proId);
+                      //console.log('xxxxxxx', this.products[i].id);
                       if (this.proId == this.products[i].id) {
 
                         this.proName = this.products[i].proName;
 
-                        console.log(this.products[i].proName, '++++++++++++', this.proName);
+                        //console.log(this.products[i].proName, '++++++++++++', this.proName);
                         // 最大
                         this.maxAmounnt = this.products[i].maxAmounnt;
                         // 最小
@@ -1126,7 +1126,7 @@ export default {
         case '01':
           // 人工拒绝 01
           // this.opinionFlag = '01';
-          console.log("拒绝");
+          //console.log("拒绝");
           // 必填校验
           // 主原因
           if (!this.mainReason) {
@@ -1161,7 +1161,7 @@ export default {
         case '02':
           // 人工回退 02
           // this.opinionFlag = '02';
-          console.log("回退");
+          //console.log("回退");
           // 进行必填校验
           // 回退节点
           if (this.rollbackNodeName.length == 0) {
@@ -1207,7 +1207,7 @@ export default {
           break;
 
         case '07':
-          console.log("放弃");
+          //console.log("放弃");
           // 客户放弃  07
           // this.opinionFlag = '07';
           // 主原因
@@ -1241,11 +1241,11 @@ export default {
           this.approvalFn();
           break;
         case '03':
-          console.log("审批");
+          //console.log("审批");
 
           // 校验必填项
           // 假如没有  核实可接受最高每期还款额 , 提示
-          console.log(this.quotaData.fbalance);
+          //console.log(this.quotaData.fbalance);
           if (!this.quotaData.fbalance) {
             this.$message({
               message: "提示：请完善信审表中可承受的月还款金额",
@@ -1316,7 +1316,7 @@ export default {
       this.isLoading = true;
       this.loadingTitle = '提交中';
       // 判断终审的 opinionFlag 
-      console.log(this.opinionFlag)
+     // console.log(this.opinionFlag)
       // 点击 确认 提交 方法
       this.post("/creauditInfo/approval", {
         // 挂起 taskId 任务id
@@ -1342,8 +1342,8 @@ export default {
         busiState: this.busiState,
         applySubNo: this.applySubNo
       }).then(res => {
-        console.log(res);
-        console.log(this);
+        //console.log(res);
+        //console.log(this);
         this.isLoading = false;
         this.loadingTitle = '提交';
 
@@ -1402,7 +1402,7 @@ export default {
     saveCreaduit(val) {
       this.isLoading = true;
       this.loadingTitle = '提交中';
-      console.log("保存审批信息");
+      //console.log("保存审批信息");
       // 假如是终审 1
       if (this.judgeFlag == '02') {
         this.auditFlag = '1';
@@ -1414,10 +1414,10 @@ export default {
       else
         verIncome2 = Number(this.verIncome);
       if (/,/.test(this.ploanAmt)) {
-        console.log('-------------------------------------------------')
+       // console.log('-------------------------------------------------')
         ploanAmt2 = Number(this.ploanAmt.replace(/,/g, ''));
       } else {
-        console.log('==========================================')
+        //console.log('==========================================')
         ploanAmt2 = Number(this.ploanAmt)
       }
       this.post('/creauditOpinion/add', {
@@ -1459,7 +1459,7 @@ export default {
         this.loadingTitle = '提交';
         // 更改显示
         this.shenPiShow = false;
-        console.log(res);
+        //console.log(res);
         // 判断 500
         if (res.statusCode == '500') {
           this.$message({
@@ -1523,10 +1523,10 @@ export default {
     },
     // 获取主次原因
     getReason(flag, type) {
-      console.log('获取主次原因');
+      //console.log('获取主次原因');
       // flag 标志是 主/次   main/second
       // type 标志原因类型   02 回退  01 拒绝
-      console.log(flag, '==============', type);
+      //console.log(flag, '==============', type);
       // if (type == '02') {
       //   // 回退
       //   this.reasonType = '01';
@@ -1540,16 +1540,16 @@ export default {
       if (flag == 'main') {
         // 请求主原因
         this.get('/credit/firstNodeReason?reasonType=' + type).then(res => {
-          console.log(res);
+          //console.log(res);
           if (res.statusCode == '200') {
             this.mainReasons = res.data;
           }
         })
       } else if (flag == 'second') {
-        console.log(this.mainReasonName);
+        //console.log(this.mainReasonName);
         // 请求子原因
         this.get('/credit/findNodeFirstChildren?id=' + this.mainId).then(res => {
-          console.log(res);
+          //console.log(res);
           if (res.statusCode == '200') {
             this.secondeReasons = res.data;
           }
@@ -1558,25 +1558,25 @@ export default {
     },
     itemDbclick(row, event) {
       // 行被双击 事件
-      console.log('row dbclick');
-      console.log(row.name);
+      //console.log('row dbclick');
+     // console.log(row.name);
     },
     cellHover(row, column, cell, event) {
       // cell hover 事件
-      console.log(row);
-      console.log(column);
-      console.log(event);
-      console.log(cell.innerText); // 备注
-      console.log(column.label);
+      //console.log(row);
+      //console.log(column);
+      //console.log(event);
+      //console.log(cell.innerText); // 备注
+      //console.log(column.label);
       // this.tableData[]
     },
     handleSizeChange(val) {
-      console.log("每页 ${val}条", val);
+      //console.log("每页 ${val}条", val);
       this.pageSize = val;
       this.getSpjlList();
     },
     handleCurrentChange(val) {
-      console.log("当前页: ${val}", val);
+      //console.log("当前页: ${val}", val);
       this.pageNum = val;
       this.getSpjlList();
     },
@@ -1587,8 +1587,8 @@ export default {
         pageNum: this.pageNum, // 页码
         pageSize: this.pageSize // 每页条数
       }).then(res => {
-        console.log('审批结论轨迹');
-        console.log(res);
+        //console.log('审批结论轨迹');
+        //console.log(res);
         if (res.statusCode == '200') {
           this.loading = false;
           this.tableData = res.data;
@@ -1640,7 +1640,7 @@ export default {
 
       this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processInstanceId)
         .then(res => {
-          console.log(res);
+          //console.log(res);
           if (res.statusCode == '200') {
             this.lcgjLoading = false;
             this.lcgjData = res.data;
@@ -1653,10 +1653,10 @@ export default {
     },
     // 回退节点改变 请求主原因
     backSelectChange: function(val) {
-      console.log('====================================')
-      console.log('回退节点改变 ====', val);
+      //console.log('====================================')
+      //console.log('回退节点改变 ====', val);
       this.getReason('main', val.type);
-      console.log('====================================')
+      //console.log('====================================')
       // 清空主原因 子原因
       this.mainReason = '';
       this.mainId = '';
@@ -1665,8 +1665,8 @@ export default {
     },
     // 回退/拒绝 主原因 select - change
     selectChange: function(val) {
-      console.log(val)
-      console.log('回退/拒绝主原因  select - change')
+      //console.log(val)
+      //console.log('回退/拒绝主原因  select - change')
       var id = val.id; // 主原因的 id
       // this.reasonName = val.reasonName;
       this.mainReason = val.reasonName;
@@ -1680,23 +1680,23 @@ export default {
       this.ploanTerm = '';
       this.ploanAmt = '';
 
-      console.log(val);
+      //console.log(val);
       // id val.id  产品id
       this.proId = val.id;
-      console.log('=========================')
-      console.log(this.proId);
-      console.log('=========================')
+      //console.log('=========================')
+      //console.log(this.proId);
+      //console.log('=========================')
       // proCode  产品code
       this.proCode = val.proCode;
-      console.log(this.proCode);
+     // console.log(this.proCode);
       this.proName = val.proName;
       // 最大金额
       this.maxAmounnt = val.maxAmounnt;
       // 最小金额
       this.minAmount = val.minAmount;
-      console.log('批准产品更改');
+      //console.log('批准产品更改');
       this.get('/credit/ploanTermByPro?proId=' + this.proId).then(res => {
-        console.log(res.data);
+        //console.log(res.data);
         if (res.statusCode == '200')
           this.ploanTerms = res.data;
       })
@@ -1704,7 +1704,7 @@ export default {
     },
     // 批准期限更改
     ploanTermChange: function(val) {
-      console.log('批准期限更改!');
+      //console.log('批准期限更改!');
       // 批准期限
       this.ploanTerm = val.appDuration;
       // 综合费率
@@ -1716,7 +1716,7 @@ export default {
     },
     // 计算审批结论数据
     calculateByAuditInfo: function() {
-      console.log('计算审批结论数据')
+      //console.log('计算审批结论数据')
       this.post('/creauditOpinion/calculateByAuditInfo', {
         applyId: this.applyId,
         proId: this.proId,
@@ -1759,8 +1759,8 @@ export default {
               this.verIncome = Number(val).toLocaleString() + '.00';
             }
           } else {
-            console.log('--++++++++++++++++', val)
-            console.log(typeof val)
+            //console.log('--++++++++++++++++', val)
+            //console.log(typeof val)
             this.verIncome2 = Number(val);
             if (/\./.test(val)) { // 有小数
               // 页面值
@@ -1831,7 +1831,7 @@ export default {
             this.calculateByAuditInfo();
           }
         } else {
-          console.log('错误提示')
+          //console.log('错误提示')
           // 显示错误提示
           if (flag == "verIncome") {
             this.verIncome = '';
@@ -1892,7 +1892,7 @@ export default {
   // 监听器
   watch: {
     rollbackNodeName: function(newValue) {
-      console.log(this.rollbackNodeName);
+      //console.log(this.rollbackNodeName);
       // 在回退节点改变的时候 请求主原因
       // 回退 01 new
       // this.getReason('main', '01');
@@ -1951,13 +1951,13 @@ export default {
     // },
     // 批准期限
     ploanTerm: function() {
-      console.log('批准期限');
-      console.log(this.judgeFlag)
-      console.log(this.ploanTerm);
+      //console.log('批准期限');
+      //console.log(this.judgeFlag)
+      //console.log(this.ploanTerm);
       // 计算 审批记录数据
 
       if (this.judgeFlag == '01' && this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0) {
-        console.log('初审', this.judgeFlag)
+        //console.log('初审', this.judgeFlag)
         this.calculateByAuditInfo();
       }
     },
@@ -1974,7 +1974,7 @@ export default {
     // },
     // 产品 id
     proId: function() {
-      console.log('产品id');
+      //console.log('产品id');
       if (this.judgeFlag == '01' && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.verIncome.length > 0 && this.eachTermamt.length > 0)
         this.calculateByAuditInfo();
     }
