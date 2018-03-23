@@ -1050,12 +1050,6 @@
     width: 210px;
   }
 
-  .CreditForm {
-    overflow: auto;
-    overflow-x: hidden;
-    min-width: 1665px;
-  }
-
   .top {
     margin-top: 20px;
   }
