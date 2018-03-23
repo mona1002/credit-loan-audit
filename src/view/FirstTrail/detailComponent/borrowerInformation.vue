@@ -72,7 +72,7 @@
 					        min-width="110">
 					        <template slot-scope="scope">
 						        <span class="regSpan" v-show="scope.row.isShow">
-				    				<i>*</i>建筑面积应在10-300之间
+				    				<i>*</i>请输入10-300
 				    			</span>
 						        <el-input v-model="scope.row.coveredArea" @blur="postcode(scope.row,'coveredArea')" placeholder="请输入内容"></el-input>
 					        </template>
@@ -83,7 +83,7 @@
 					        min-width="120">
 					         <template slot-scope="scope">
 					         	<span class="regSpan" v-show="scope.row.priceShow">
-				    				<i>*</i>建筑单价应在100-1000000之间
+				    				<i>*</i>请输入100-1000000
 				    			</span>
 						        <el-input v-model="scope.row.unitPrice" @blur="moneyBlur(scope.row,'unitPrice')" placeholder="请输入内容"></el-input>
 					        </template>
@@ -95,7 +95,7 @@
 					        show-overflow-tooltip>
 					        <template slot-scope="scope">
 					        	<span class="regSpan" v-show="scope.row.estateShow">
-				    				<i>*</i>房产地址应小于100字
+				    				<i>*</i>100字以内
 				    			</span>
 						        <el-input v-model="scope.row.estateAddress" @blur="postcode(scope.row,'estateAddress')" @focus="falseShow(scope.row,'estateAddress')" placeholder="请输入内容">
 						        </el-input>
@@ -107,7 +107,7 @@
 					        min-width="80">
 					        <template slot-scope="scope">
 					        	<span class="regSpan" v-show="scope.row.zipShow">
-				    				<i>*</i>邮政编码格式不正确
+				    				<i>*</i>格式不正确
 				    			</span>
 					        	<el-input v-model="scope.row.estateZip" placeholder="请输入内容" @focus="falseShow(scope.row,'estateZip')" v-on:blur="postcode(scope.row,'estateZip')"></el-input>
 					        </template>
@@ -118,7 +118,7 @@
 					        min-width="100">
 					        <template slot-scope="scope">
 						        <span class="regSpan" v-show="scope.row.ratioShow">
-				    				<i>*</i>产权比例应在0%-100%之间
+				    				<i>*</i>请输入0%-100%
 				    			</span>
 						        <el-input v-model="scope.row.equityRatio" v-on:blur="postcode(scope.row,'equityRatio')" placeholder="请输入内容"></el-input>
 					        </template>
@@ -129,7 +129,7 @@
 					        min-width="110">
 					        <template slot-scope="scope">
 					        	<span class="regSpan" v-show="scope.row.loanShow">
-				    				<i>*</i>贷款期限应在1-360之间
+				    				<i>*</i>请输入1-360
 				    			</span>
 						        <el-input v-model="scope.row.loanPeriod" @focus="falseShow(scope.row,'loanPeriod')" v-on:blur="postcode(scope.row,'loanPeriod')" placeholder="请输入内容"></el-input>
 					        </template>
@@ -155,7 +155,7 @@
 					        min-width="80">
 					        <template slot-scope="scope">
 					        	<span class="regSpan" v-show="scope.row.monthShow">
-				    				<i>*</i>月供应在500-500000之间
+				    				<i>*</i>请输入500-500000
 				    			</span>
 						        <el-input v-model="scope.row.monthlyPay" @blur="moneyBlur(scope.row,'monthlyPay')" placeholder="请输入内容"></el-input>
 					        </template>
@@ -166,7 +166,7 @@
 					        min-width="102">
 					        <template slot-scope="scope">
 					        	<span class="regSpan" v-show="scope.row.restShow">
-				    				<i>*</i>贷款余额应在0-{{(scope.row.monthlyPay*1)*(scope.row.loanPeriod*1)}}之间
+				    				<i>*</i>请输入0-{{(scope.row.monthlyPay*1)*(scope.row.loanPeriod*1)}}
 				    			</span>
 						        <el-input v-model="scope.row.restLoans" @blur="moneyBlur(scope.row,'restLoans')" placeholder="请输入内容"></el-input>
 					        </template>
@@ -236,7 +236,7 @@
 				        min-width="120">
 				        <template slot-scope="scope">
 				        	<span class="regSpan" v-show="scope.row.carShow">
-			    				<i>*</i>车辆购置价应在10000-10000000之间
+			    				<i>*</i>请输入10000-10000000
 			    			</span>
 					        <el-input v-model="scope.row.carPrice" @blur="moneyBlur(scope.row,'carPrice')" placeholder="请输入内容"></el-input>
 				        </template>
@@ -277,7 +277,7 @@
 				        min-width="100">
 				        <template slot-scope="scope">
 				        	<span class="regSpan" v-show="scope.row.carModelShow">
-			    				<i>*</i>车辆型号应为数字和字母，且小于40字
+			    				<i>*</i>请输入数字、字母，且小于40字
 			    			</span>
 					        <el-input v-model="scope.row.carModel" @focus="falseShow(scope.row,'carModel')" v-on:blur="moneyBlur(scope.row,'carModel')" placeholder="请输入内容"></el-input>
 				        </template>
@@ -306,7 +306,7 @@
 				        min-width="120">
 				        <template slot-scope="scope">
 				        	<span class="regSpan" v-show="scope.row.loanPeriodShow">
-			    				<i>*</i>贷款期限应为1-60之间
+			    				<i>*</i>请输入1-60
 			    			</span>
 					        <el-input v-model="scope.row.loanPeriod" @focus="falseShow(scope.row,'loanPeriods')" @blur="moneyBlur(scope.row,'loanPeriod')" placeholder="请输入内容"></el-input>
 				        </template>
@@ -325,7 +325,7 @@
 				        min-width="120">
 				        <template slot-scope="scope">
 				        	<span class="regSpan" v-show="scope.row.restLoansShow">
-			    				<i>*</i>贷款余额应为0-{{(scope.row.monthlyPay*1)*(scope.row.loanPeriod*1)}}之间
+			    				<i>*</i>请输入0-{{(scope.row.monthlyPay*1)*(scope.row.loanPeriod*1)}}
 			    			</span>
 					        <el-input v-model="scope.row.restLoans" @blur="postcode(scope.row,'restLoans')" placeholder="请输入内容"></el-input>
 				        </template>
@@ -496,7 +496,7 @@
 				        min-width="140">
 				        <template slot-scope="scope">
 				        	<span class="regSpan" v-show="scope.row.actRepaymentAmtShow">
-			    				<i>*</i>不应大于本期应还款金额
+			    				<i>*</i>应小于本期应还款金额
 			    			</span>
   							<el-input v-model="scope.row.actRepaymentAmt" @blur="moneyBlur(scope.row,'actRepaymentAmt')" placeholder="请输入内容"></el-input>
 						</template>
@@ -2925,7 +2925,7 @@
 								row.monthlyPay = this.formatNumber(row.monthlyPay,2,0);
 							};
 							if(row.monthlyPay && row.loanPeriod){
-								alert('kk');
+								//alert('kk');
 								var regs=/\,/g;
 								row.restLoans = row.restLoans.replace(regs,'');
 								if(row.restLoans*1 < 0 || row.restLoans*1 > ((row.monthlyPay*1)*(row.loanPeriod*1))){
