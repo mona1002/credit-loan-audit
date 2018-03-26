@@ -2773,6 +2773,8 @@
 			            			value.realRepaymentAmt = '99,999,999,999,999.98'; 
 			            		}else if(!value.actRepaymentAmt && value.realRepaymentAmt*1 < 99999999999999.98){
 			            			value.realRepaymentAmt =this.formatNumber(value.realRepaymentAmt,2,0);
+			            		}else if(!value.actRepaymentAmt && value.realRepaymentAmt*1 == 99999999999999.98){
+			            			value.realRepaymentAmt = '99,999,999,999,999.98';
 			            		};
 		            		};
 			                break;
