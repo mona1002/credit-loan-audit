@@ -2704,7 +2704,11 @@
 								}else{
 									value.priceShow = false;
 									value.unitPrice =this.formatNumber(value.unitPrice,2,0);
-							}
+							};
+							if(value.unitPrice == '0.00'){
+								value.priceShow = true;
+								value.unitPrice = '';
+							};
 			                break;
 			            case 'monthlyPay':
 			            	value.monthlyPay = value.monthlyPay.replace(regs,'');

@@ -371,7 +371,7 @@
 		      this.judge = {
 		      	flag:'07'
 		      };
-		      localStorage.setItem("judge",JSON.stringify(judge));
+		      localStorage.setItem("judge",JSON.stringify(this.judge));
 		    },
 		    handleSizeChange(val) {
 		      console.log('每页 ${val} 条');
