@@ -410,7 +410,7 @@
 		      this.judge = {
 		      	flag:'08'
 		      };
-		      localStorage.setItem("TtaskInWaitting",JSON.stringify(judge));
+		      localStorage.setItem("judge",JSON.stringify(judge));
 		    },
 		    handleSizeChange(val) {
 		      console.log('每页 ${val} 条');
