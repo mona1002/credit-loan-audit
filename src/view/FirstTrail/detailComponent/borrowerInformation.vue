@@ -1502,11 +1502,14 @@
 			        		}
 			        	};
 			        }
-		        }else if(res.data.borestateList == '' && JSON.parse(localStorage.getItem('house'))){
+		        }else if(res.data.borestateList == ''){
+		        	this.borestateList = this.borestateList;
+		        };
+		        /*if(res.data.borestateList == '' && JSON.parse(localStorage.getItem('house'))){
 		        	this.borestateList = JSON.parse(localStorage.getItem('house'));
 		        } else if(res.data.borestateList == '' && !JSON.parse(localStorage.getItem('house'))){
 		        	this.borestateList = this.borestateList;
-		        };
+		        };*/
 		        
 		        
 		        /*车辆信息*/
@@ -1526,11 +1529,13 @@
 				        	this.carInfoList[i].restLoans = this.formatNumber(this.carInfoList[i].restLoans,2,0);
 				        };
 			        }
-		        }else if(res.data.carInfoList == '' && JSON.parse(localStorage.getItem('car'))){
+		        }else if(res.data.carInfoList == ''){
+		        	this.carInfoList = this.carInfoList;
+		        };/* if(res.data.carInfoList == '' && JSON.parse(localStorage.getItem('car'))){
 		        	this.carInfoList = JSON.parse(localStorage.getItem('car'));
 		        }else if(res.data.carInfoList == '' && !JSON.parse(localStorage.getItem('car'))){
 		        	this.carInfoList = this.carInfoList;
-		        };
+		        };*/
 		        
 		        
 		        /*信用卡使用明细*/
@@ -1609,35 +1614,28 @@
 		        	//负债信息 信用卡每月还款 保留两位小数点
 		        	if(this.borDebt.monthRepayAmt != null){
 		        		this.borDebt.monthRepayAmt = this.formatNumber(this.borDebt.monthRepayAmt,2,0);
+		        		this.arr.push(this.borDebt.monthRepayAmt.split(',').join("")*1);
 		        	};
-
-		        	this.arr.push(this.borDebt.monthRepayAmt.split(',').join("")*1);
-		        	
 		        	//负债信息 助学贷每月还款额 保留两位小数点
 		        	if(this.borDebt.studentLoanAmt != null){
 		        		this.borDebt.studentLoanAmt = this.formatNumber(this.borDebt.studentLoanAmt,2,0);
-		        	};
-		        	this.arr.push(this.borDebt.studentLoanAmt.split(',').join("")*1);
+		        		this.arr.push(this.borDebt.studentLoanAmt.split(',').join("")*1);
+		        	};	
 		        	//负债信息 房贷每月还款额 保留两位小数点
 		        	if(this.borDebt.houseLoanAmt != null){
 		        		this.borDebt.houseLoanAmt = this.formatNumber(this.borDebt.houseLoanAmt,2,0);
+		        		this.arr.push(this.borDebt.houseLoanAmt.split(',').join("")*1*0.6);
 		        	};
-
-		        	this.arr.push(this.borDebt.houseLoanAmt.split(',').join("")*1*0.6);
-		        	
 		        	//负债信息 车贷每月还款额 保留两位小数点
 		        	if(this.borDebt.carLoanAmt != null){
 		        		this.borDebt.carLoanAmt = this.formatNumber(this.borDebt.carLoanAmt,2,0);
+		        		this.arr.push(this.borDebt.carLoanAmt.split(',').join("")*1*0.6);
 		        	};
-
-		        	this.arr.push(this.borDebt.carLoanAmt.split(',').join("")*1*0.6);
-		        	
 		        	//负债信息 其他贷款每月还款额 保留两位小数点
 		        	if(this.borDebt.otherLoanAmt != null){
 		        		this.borDebt.otherLoanAmt = this.formatNumber(this.borDebt.otherLoanAmt,2,0);
+		        		this.arr.push(this.borDebt.otherLoanAmt.split(',').join("")*1*0.5);
 		        	};
-
-		        	this.arr.push(this.borDebt.otherLoanAmt.split(',').join("")*1*0.5);
 		        	//console.log(this.aaa);
 		        	//负债信息 负债合计 保留两位小数点
 		        	if(this.borDebt.totalLoan != null){

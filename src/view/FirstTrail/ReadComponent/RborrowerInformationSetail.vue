@@ -729,11 +729,13 @@
 			        	};
 
 			        }
-			       }else if(res.data.borestateList == '' && JSON.parse(localStorage.getItem('house'))){
+			       }else if(res.data.borestateList == ''){
+			       		this.borestateList = this.borestateList;
+			       };/* if(res.data.borestateList == '' && JSON.parse(localStorage.getItem('house'))){
 			       		this.borestateList=JSON.parse(localStorage.getItem('house'));
 			       }else if(res.data.borestateList == '' && !JSON.parse(localStorage.getItem('house'))){
 			       		this.borestateList = this.borestateList;
-			       }
+			       }*/
 		        /*车辆信息*/
 		        if(res.data.carInfoList != ''){
 		        	this.carInfoList=res.data.carInfoList;
@@ -783,11 +785,13 @@
 				        	this.carInfoList[i].restLoans = this.formatNumber(this.carInfoList[i].restLoans,2,0);
 				        };
 			        }
-		        }else if(res.data.carInfoList == '' && JSON.parse(localStorage.getItem('car'))){
+		        }else if(res.data.carInfoList == ''){
+		        	this.carInfoList = this.carInfoList;
+		        };/* if(res.data.carInfoList == '' && JSON.parse(localStorage.getItem('car'))){
 		        	this.carInfoList=JSON.parse(localStorage.getItem('car'));
 		        }else if(res.data.carInfoList == '' && !JSON.parse(localStorage.getItem('car'))){
 		        	this.carInfoList = this.carInfoList;
-		        }
+		        }*/
 		        /*信用卡使用明细*/
 		        this.cardDetList=res.data.cardDetList;
 		        for(var i=0;i<this.cardDetList.length;i++){
