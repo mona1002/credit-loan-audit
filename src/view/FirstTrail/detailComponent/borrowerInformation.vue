@@ -85,7 +85,7 @@
 					         	<span class="regSpan" v-show="scope.row.priceShow">
 				    				<i>*</i>请输入100-1000000
 				    			</span>
-						        <el-input v-model="scope.row.unitPrice" @blur="moneyBlur(scope.row,'unitPrice')" placeholder="请输入内容"></el-input>
+						        <el-input v-model="scope.row.unitPrice" @focus="falseShow(scope.row,'unitPrice')"  @blur="moneyBlur(scope.row,'unitPrice')" placeholder="请输入内容"></el-input>
 					        </template>
 					      </el-table-column>
 					      <el-table-column
@@ -277,7 +277,7 @@
 				        min-width="100">
 				        <template slot-scope="scope">
 				        	<span class="regSpan" v-show="scope.row.carModelShow">
-			    				<i>*</i>请输入数字、字母，且小于40字
+			    				<i>*</i>请输入数字和字母，且小于40字
 			    			</span>
 					        <el-input v-model="scope.row.carModel" @focus="falseShow(scope.row,'carModel')" v-on:blur="moneyBlur(scope.row,'carModel')" placeholder="请输入内容"></el-input>
 				        </template>
@@ -2554,13 +2554,14 @@
 			    this.borDebt.totalLoan=this.formatNumber(this.borDebt.totalLoan,2,0);
 	        },
 			moneyBlur(value, flag) {
-				console.log(value);
-				console.log(value.n);
+				//console.log(value);
+				//console.log(value.n);
+				var regs=/\,/g;
 
 			    // 无数据
 			    if(!value.n){
 			    	value.n = '';
-			    	console.log(value.n);
+			    	//console.log(value.n);
 			    };
 			    if(!value.n1){
 			    	value.n1 = '';
@@ -2687,7 +2688,10 @@
 			            	};
 			                break;
 			            case 'unitPrice':
+							value.unitPrice = value.unitPrice.replace(regs,'');
+			            	//console.log(value.unitPrice*1);
 				            if(value.unitPrice*1 > 1000000 || value.unitPrice*1 < 100){
+				            	//alert("uuu");
 									value.priceShow = true;
 									value.unitPrice = '';
 								}else{
@@ -2696,6 +2700,8 @@
 							}
 			                break;
 			            case 'monthlyPay':
+			            	value.monthlyPay = value.monthlyPay.replace(regs,'');
+			            	//console.log(value.monthlyPay*1);
 		            		if(value.monthlyPay*1 > 500000 || value.monthlyPay*1 < 500){
 				            	value.monthShow = true;
 				            	value.monthlyPay = '';
@@ -2705,8 +2711,7 @@
 				            };
 			                break;
 			            case 'restLoans':
-			            	//console.log(value.restLoans*1 > ((value.monthlyPay*1)*(value.loanPeriod*1)));
-			            	//console.log(value.restLoans*1);
+			            	value.restLoans = value.restLoans.replace(regs,'');
 			            	if(value.restLoans && value.monthlyPay){
 				            	if(value.restLoans*1 < 0 || value.restLoans*1 > ((value.monthlyPay*1)*(value.loanPeriod*1))){
 				            		value.restShow = true;
@@ -2724,6 +2729,7 @@
 			            	}
 			                break; 
 			            case 'carPrice':
+			            	value.carPrice = value.carPrice.replace(regs,'');
 			            	if(value.carPrice*1 < 10000 || value.carPrice*1 > 10000000){
 			            		value.carShow = true;
 			            		value.carPrice = "";
@@ -2813,7 +2819,8 @@
 			            case 'carModel':
 			            //console.log(value.carModel);
 			            //console.log(typeof(value.carModel));
-				            if(!/^[A-Za-z0-9]+$/.test(value.carModel) || value.carModel.length > 40){
+			            //^[A-Za-z0-9]+$
+				            if(!/^(?=.*[0-9])(?=.*[a-zA-Z])(.{1,40})$/.test(value.carModel) || value.carModel.length > 40){
 								value.carModelShow = true;
 								value.carModel = '';
 							}else{
@@ -2828,7 +2835,7 @@
 								value.loanPeriodShow = false;
 							};
 							if(value.monthlyPay && value.loanPeriod){
-								var regs=/\,/g;
+								//var regs=/\,/g;
 								value.restLoans = value.restLoans.replace(regs,'');
 								if(value.restLoans*1 < 0 || value.restLoans*1 > ((value.monthlyPay*1)*(value.loanPeriod*1))){
 									value.restShow = true;
@@ -2845,6 +2852,7 @@
 				//console.log(row.estateZip);
 				//console.log(row.estateAddress.length);
 				//console.log(row.monthlyPay);
+				var regs=/\,/g;
 				switch (flage){
 					case 'estateZip':
 						if(row.estateZip == ''){
@@ -2919,6 +2927,7 @@
 						if(row.monthlyPay == ''){
 							row.monthlyPay = '';
 						}else{
+							row.monthlyPay = row.monthlyPay.replace(regs,'');
 							if(row.monthlyPay*1>99999999){
 								row.monthlyPay = "99,999,999.00";
 							}else{
