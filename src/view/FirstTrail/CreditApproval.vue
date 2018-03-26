@@ -318,8 +318,11 @@
                   </el-form-item>
                 </div>
                 <div class="back-form-li">
-                  <el-form-item label="审批倍数：" class="item-column2 width-120 item-label-show">
+                  <!-- <el-form-item label="审批倍数：" class="item-column2 width-120 item-label-show">
                     {{caculData.appmult | formatAppmult}}
+                  </el-form-item> -->
+                  <el-form-item label="审批倍数：" class="item-column2 width-120 item-label-show">
+                    {{caculData.appmult}}
                   </el-form-item>
                   <el-form-item label="月还款额[元]：" class="item-column2 width-120 item-label-show">
                     {{caculData.eachTermamt | formatMoney}}

@@ -27,7 +27,7 @@
 					      </el-table-column>
 					      <el-table-column
 					        label="任务节点" 
-					        prop="taskName"
+					        prop="taskNameTxt"
 					        min-width="170">
 					      </el-table-column>
 					      <el-table-column

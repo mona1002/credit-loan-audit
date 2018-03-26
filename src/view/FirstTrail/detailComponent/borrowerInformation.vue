@@ -85,7 +85,7 @@
 					         	<span class="regSpan" v-show="scope.row.priceShow">
 				    				<i>*</i>请输入100-1000000
 				    			</span>
-						        <el-input v-model="scope.row.unitPrice" @blur="moneyBlur(scope.row,'unitPrice')" placeholder="请输入内容"></el-input>
+						        <el-input v-model="scope.row.unitPrice" @focus="falseShow(scope.row,'unitPrice')"  @blur="moneyBlur(scope.row,'unitPrice')" placeholder="请输入内容"></el-input>
 					        </template>
 					      </el-table-column>
 					      <el-table-column
@@ -277,7 +277,7 @@
 				        min-width="100">
 				        <template slot-scope="scope">
 				        	<span class="regSpan" v-show="scope.row.carModelShow">
-			    				<i>*</i>请输入数字、字母，且小于40字
+			    				<i>*</i>车牌型号应小于40字
 			    			</span>
 					        <el-input v-model="scope.row.carModel" @focus="falseShow(scope.row,'carModel')" v-on:blur="moneyBlur(scope.row,'carModel')" placeholder="请输入内容"></el-input>
 				        </template>
@@ -483,22 +483,22 @@
 			            </template>
 				      </el-table-column>
 				      <el-table-column
-				        prop="realRepaymentAmt"
+				        prop="actRepaymentAmt"
 				        label="本期应还款金额"
 				        min-width="120">
 				        <template slot-scope="scope">
-  							<el-input v-model="scope.row.realRepaymentAmt" @blur="moneyBlur(scope.row,'realRepaymentAmt')" placeholder="请输入内容"></el-input>
+  							<el-input v-model="scope.row.actRepaymentAmt" @blur="moneyBlur(scope.row,'actRepaymentAmt')" placeholder="请输入内容"></el-input>
 						</template>
 				      </el-table-column>
 				      <el-table-column
-				        prop="actRepaymentAmt"
+				        prop="realRepaymentAmt"
 				        label="本期实际还款金额"
 				        min-width="140">
 				        <template slot-scope="scope">
-				        	<span class="regSpan" v-show="scope.row.actRepaymentAmtShow">
+				        	<span class="regSpan" v-show="scope.row.realRepaymentAmtShow">
 			    				<i>*</i>应小于本期应还款金额
 			    			</span>
-  							<el-input v-model="scope.row.actRepaymentAmt" @blur="moneyBlur(scope.row,'actRepaymentAmt')" placeholder="请输入内容"></el-input>
+  							<el-input v-model="scope.row.realRepaymentAmt" @blur="moneyBlur(scope.row,'realRepaymentAmt')" placeholder="请输入内容"></el-input>
 						</template>
 				      </el-table-column>
 				      <el-table-column
@@ -1502,11 +1502,14 @@
 			        		}
 			        	};
 			        }
-		        }else if(res.data.borestateList == '' && JSON.parse(localStorage.getItem('house'))){
+		        }else if(res.data.borestateList == ''){
+		        	this.borestateList = this.borestateList;
+		        };
+		        /*if(res.data.borestateList == '' && JSON.parse(localStorage.getItem('house'))){
 		        	this.borestateList = JSON.parse(localStorage.getItem('house'));
 		        } else if(res.data.borestateList == '' && !JSON.parse(localStorage.getItem('house'))){
 		        	this.borestateList = this.borestateList;
-		        };
+		        };*/
 		        
 		        
 		        /*车辆信息*/
@@ -1526,11 +1529,13 @@
 				        	this.carInfoList[i].restLoans = this.formatNumber(this.carInfoList[i].restLoans,2,0);
 				        };
 			        }
-		        }else if(res.data.carInfoList == '' && JSON.parse(localStorage.getItem('car'))){
+		        }else if(res.data.carInfoList == ''){
+		        	this.carInfoList = this.carInfoList;
+		        };/* if(res.data.carInfoList == '' && JSON.parse(localStorage.getItem('car'))){
 		        	this.carInfoList = JSON.parse(localStorage.getItem('car'));
 		        }else if(res.data.carInfoList == '' && !JSON.parse(localStorage.getItem('car'))){
 		        	this.carInfoList = this.carInfoList;
-		        };
+		        };*/
 		        
 		        
 		        /*信用卡使用明细*/
@@ -1609,35 +1614,28 @@
 		        	//负债信息 信用卡每月还款 保留两位小数点
 		        	if(this.borDebt.monthRepayAmt != null){
 		        		this.borDebt.monthRepayAmt = this.formatNumber(this.borDebt.monthRepayAmt,2,0);
+		        		this.arr.push(this.borDebt.monthRepayAmt.split(',').join("")*1);
 		        	};
-
-		        	this.arr.push(this.borDebt.monthRepayAmt.split(',').join("")*1);
-		        	
 		        	//负债信息 助学贷每月还款额 保留两位小数点
 		        	if(this.borDebt.studentLoanAmt != null){
 		        		this.borDebt.studentLoanAmt = this.formatNumber(this.borDebt.studentLoanAmt,2,0);
-		        	};
-		        	this.arr.push(this.borDebt.studentLoanAmt.split(',').join("")*1);
+		        		this.arr.push(this.borDebt.studentLoanAmt.split(',').join("")*1);
+		        	};	
 		        	//负债信息 房贷每月还款额 保留两位小数点
 		        	if(this.borDebt.houseLoanAmt != null){
 		        		this.borDebt.houseLoanAmt = this.formatNumber(this.borDebt.houseLoanAmt,2,0);
+		        		this.arr.push(this.borDebt.houseLoanAmt.split(',').join("")*1*0.6);
 		        	};
-
-		        	this.arr.push(this.borDebt.houseLoanAmt.split(',').join("")*1*0.6);
-		        	
 		        	//负债信息 车贷每月还款额 保留两位小数点
 		        	if(this.borDebt.carLoanAmt != null){
 		        		this.borDebt.carLoanAmt = this.formatNumber(this.borDebt.carLoanAmt,2,0);
+		        		this.arr.push(this.borDebt.carLoanAmt.split(',').join("")*1*0.6);
 		        	};
-
-		        	this.arr.push(this.borDebt.carLoanAmt.split(',').join("")*1*0.6);
-		        	
 		        	//负债信息 其他贷款每月还款额 保留两位小数点
 		        	if(this.borDebt.otherLoanAmt != null){
 		        		this.borDebt.otherLoanAmt = this.formatNumber(this.borDebt.otherLoanAmt,2,0);
+		        		this.arr.push(this.borDebt.otherLoanAmt.split(',').join("")*1*0.5);
 		        	};
-
-		        	this.arr.push(this.borDebt.otherLoanAmt.split(',').join("")*1*0.5);
 		        	//console.log(this.aaa);
 		        	//负债信息 负债合计 保留两位小数点
 		        	if(this.borDebt.totalLoan != null){
@@ -2466,13 +2464,15 @@
 			    	return (((sign)?'':'-') + num);
 			    }
 			},
-			debtTotal(val,flag){	
+			debtTotal(val,flag){
+			var regs=/\,/g;	
 	        	switch (flag) {
 	        		// 信用卡每月还款
 		            case 'monthRepayAmt':
 		            	if(!this.borDebt.monthRepayAmt){
 		            		 this.borDebt.monthRepayAmt = this.formatNumber('0',2,0);
 	            		}else if(this.borDebt.monthRepayAmt){
+	            			this.borDebt.monthRepayAmt = this.borDebt.monthRepayAmt.replace(regs,'');
 	            			if(this.borDebt.monthRepayAmt*1 > 99999999999999.98){
 	            				this.borDebt.monthRepayAmt = '99,999,999,999,999.98';
 	            			}else{
@@ -2488,6 +2488,7 @@
 		            	if(!this.borDebt.studentLoanAmt){
 		            		this.borDebt.studentLoanAmt = this.formatNumber('0',2,0);
 		            	}else if(this.borDebt.studentLoanAmt){
+		            		this.borDebt.studentLoanAmt = this.borDebt.studentLoanAmt.replace(regs,'');
 		            		if(this.borDebt.studentLoanAmt*1 > 99999999999999.98){
 	            				this.borDebt.studentLoanAmt = '99,999,999,999,999.98';
 	            			}else{
@@ -2502,6 +2503,7 @@
 		            		if(!this.borDebt.houseLoanAmt){
 		            			this.borDebt.houseLoanAmt = this.formatNumber('0',2,0);
 		            		}else if(this.borDebt.houseLoanAmt){
+		            			this.borDebt.houseLoanAmt = this.borDebt.houseLoanAmt.replace(regs,'');
 		            			if(this.borDebt.houseLoanAmt*1 > 99999999999999.98){
 	            					this.borDebt.houseLoanAmt = '99,999,999,999,999.98';
 		            			}else{
@@ -2516,6 +2518,7 @@
 		            		if(!this.borDebt.carLoanAmt){
 		            			this.borDebt.carLoanAmt = this.formatNumber('0',2,0);
 		            		}else if(this.borDebt.carLoanAmt){
+		            			this.borDebt.carLoanAmt = this.borDebt.carLoanAmt.replace(regs,'');
 		            			if(this.borDebt.carLoanAmt*1 > 99999999999999.98){
 	            					this.borDebt.carLoanAmt = '99,999,999,999,999.98';
 		            			}else{
@@ -2530,6 +2533,7 @@
 		            		if(!this.borDebt.otherLoanAmt){
 		            			this.borDebt.otherLoanAmt = this.formatNumber('0',2,0);
 		            		}else if(this.borDebt.otherLoanAmt){
+		            			this.borDebt.otherLoanAmt = this.borDebt.otherLoanAmt.replace(regs,'');
 		            			if(this.borDebt.otherLoanAmt*1 > 99999999999999.98){
 	            					this.borDebt.otherLoanAmt = '99,999,999,999,999.98';
 		            			}else{
@@ -2554,13 +2558,10 @@
 			    this.borDebt.totalLoan=this.formatNumber(this.borDebt.totalLoan,2,0);
 	        },
 			moneyBlur(value, flag) {
-				console.log(value);
-				console.log(value.n);
-
+				var regs=/\,/g;
 			    // 无数据
 			    if(!value.n){
 			    	value.n = '';
-			    	console.log(value.n);
 			    };
 			    if(!value.n1){
 			    	value.n1 = '';
@@ -2638,6 +2639,7 @@
 			    if (value) {
 		        	switch (flag) {
 			            case 'n':
+			            	value.n = value.n.replace(regs,'');
 			            	if(value.n*1 > 99999999999999.98){
 			            		value.n = '99,999,999,999,999.98';
 			            	}else{
@@ -2645,6 +2647,7 @@
 			            	};
 			                break;
 			            case 'n1':
+			            	value.n1 = value.n1.replace(regs,'');
 			            	if(value.n1*1 > 99999999999999.98){
 			            		value.n1 = '99,999,999,999,999.98';
 			            	}else{
@@ -2652,6 +2655,7 @@
 			            	};
 			                break;
 			            case 'n2':
+			            	value.n2 = value.n2.replace(regs,'');
 			            	if(value.n2*1 > 99999999999999.98){
 			            		value.n2 = '99,999,999,999,999.98';
 			            	}else{
@@ -2659,6 +2663,7 @@
 			            	};
 			                break;
 			            case 'n3':
+			            	value.n3 = value.n3.replace(regs,'');
 			            	if(value.n3*1 > 99999999999999.98){
 			            		value.n3 = '99,999,999,999,999.98';
 			            	}else{
@@ -2666,6 +2671,7 @@
 			            	};
 			                break;
 			            case 'n4':
+			            	value.n4 = value.n4.replace(regs,'');
 			            	if(value.n4*1 > 99999999999999.98){
 			            		value.n4 = '99,999,999,999,999.98';
 			            	}else{
@@ -2673,6 +2679,7 @@
 			            	};
 			                break;
 			            case 'n5':
+			            	value.n5 = value.n5.replace(regs,'');
 			            	if(value.n5*1 > 99999999999999.98){
 			            		value.n5 = '99,999,999,999,999.98';
 			            	}else{
@@ -2680,6 +2687,7 @@
 			            	};
 			                break;  
 			            case 'avgIncome':
+			            	value.avgIncome = value.avgIncome.replace(regs,'');
 			            	if(value.avgIncome*1 > 99999999999999.98){
 			            		value.avgIncome = '99,999,999,999,999.98';
 			            	}else{
@@ -2687,15 +2695,24 @@
 			            	};
 			                break;
 			            case 'unitPrice':
+							value.unitPrice = value.unitPrice.replace(regs,'');
+			            	//console.log(value.unitPrice*1);
 				            if(value.unitPrice*1 > 1000000 || value.unitPrice*1 < 100){
+				            	//alert("uuu");
 									value.priceShow = true;
 									value.unitPrice = '';
 								}else{
 									value.priceShow = false;
 									value.unitPrice =this.formatNumber(value.unitPrice,2,0);
-							}
+							};
+							if(value.unitPrice == '0.00'){
+								//value.priceShow = true;
+								value.unitPrice = '';
+							};
 			                break;
 			            case 'monthlyPay':
+			            	value.monthlyPay = value.monthlyPay.replace(regs,'');
+			            	//console.log(value.monthlyPay*1);
 		            		if(value.monthlyPay*1 > 500000 || value.monthlyPay*1 < 500){
 				            	value.monthShow = true;
 				            	value.monthlyPay = '';
@@ -2705,8 +2722,7 @@
 				            };
 			                break;
 			            case 'restLoans':
-			            	//console.log(value.restLoans*1 > ((value.monthlyPay*1)*(value.loanPeriod*1)));
-			            	//console.log(value.restLoans*1);
+			            	value.restLoans = value.restLoans.replace(regs,'');
 			            	if(value.restLoans && value.monthlyPay){
 				            	if(value.restLoans*1 < 0 || value.restLoans*1 > ((value.monthlyPay*1)*(value.loanPeriod*1))){
 				            		value.restShow = true;
@@ -2724,6 +2740,7 @@
 			            	}
 			                break; 
 			            case 'carPrice':
+			            	value.carPrice = value.carPrice.replace(regs,'');
 			            	if(value.carPrice*1 < 10000 || value.carPrice*1 > 10000000){
 			            		value.carShow = true;
 			            		value.carPrice = "";
@@ -2733,28 +2750,36 @@
 			            	}
 			                break; 
 			            //本期应还款金额
-			            case 'realRepaymentAmt':
-			            	if(value.realRepaymentAmt*1 > 99999999999999.98){
-								value.realRepaymentAmt = '99,999,999,999,999.98';
+			            case 'actRepaymentAmt':
+			            	value.actRepaymentAmt = value.actRepaymentAmt.replace(regs,'');
+			            	if(value.actRepaymentAmt*1 > 99999999999999.98){
+								value.actRepaymentAmt = '99,999,999,999,999.98';
 							}else{
-								value.realRepaymentAmt =this.formatNumber(value.realRepaymentAmt,2,0);
+								value.actRepaymentAmt =this.formatNumber(value.actRepaymentAmt,2,0);
 							};
 			                break;
 			            //本期实际还款金额(信用卡使用明细)
-			            case 'actRepaymentAmt':
-			            	if(value.realRepaymentAmt && value.actRepaymentAmt*1>value.realRepaymentAmt*1){
-			            		value.actRepaymentAmtShow = true;
-			            		value.actRepaymentAmt = '' 
+			            case 'realRepaymentAmt':
+			            	value.realRepaymentAmt = value.realRepaymentAmt.replace(regs,'');
+			            	if(value.actRepaymentAmt && value.realRepaymentAmt*1>value.actRepaymentAmt*1){
+			            		value.realRepaymentAmtShow = true;
+			            		value.realRepaymentAmt = '' 
 			            	}else{
-			            		value.actRepaymentAmtShow = false;
-			            		if(!value.realRepaymentAmt && value.actRepaymentAmt*1 > 99999999999999.98){
-			            			value.actRepaymentAmt = '99,999,999,999,999.98'; 
-			            		}else{
-			            			value.actRepaymentAmt =this.formatNumber(value.actRepaymentAmt,2,0);
-			            		}
-			            	}
+			            		value.realRepaymentAmtShow = false;
+			            		//value.realRepaymentAmt =this.formatNumber(value.realRepaymentAmt,2,0);
+			            	
+			            		if(!value.actRepaymentAmt && value.realRepaymentAmt*1 > 99999999999999.98){
+			            			//console.log('ii');
+			            			value.realRepaymentAmt = '99,999,999,999,999.98'; 
+			            		}else if(!value.actRepaymentAmt && value.realRepaymentAmt*1 < 99999999999999.98){
+			            			value.realRepaymentAmt =this.formatNumber(value.realRepaymentAmt,2,0);
+			            		}else if(!value.actRepaymentAmt && value.realRepaymentAmt*1 == 99999999999999.98){
+			            			value.realRepaymentAmt = '99,999,999,999,999.98';
+			            		};
+		            		};
 			                break;
 			            case 'loanContValue':
+			            	value.loanContValue = value.loanContValue.replace(regs,'');
 			            	if(value.loanContValue*1 > 99999999999999.98){
 			            		value.loanContValue = '99,999,999,999,999.98';
 			            	}else{
@@ -2763,6 +2788,7 @@
 			                break;
 			            //贷款余额
 			            case 'loanBal':
+			            	value.loanBal = value.loanBal.replace(regs,'');
 			            	if(value.loanBal*1 > 99999999999999.98){
 			            		value.loanBal = '99,999,999,999,999.98';
 			            	}else{
@@ -2771,6 +2797,7 @@
 			                break;
 			            //本期应还款金额  
 			            case 'presentRepayAmt':
+			            	value.presentRepayAmt = value.presentRepayAmt.replace(regs,'');
 			            	if(value.presentRepayAmt*1 > 99999999999999.98){
 			            		value.presentRepayAmt = '99,999,999,999,999.98';
 			            	}else{
@@ -2779,6 +2806,7 @@
 			                break;
 			            //本期实际还款金额
 			            case 'curMonthRepayAmt':
+			            	value.curMonthRepayAmt = value.curMonthRepayAmt.replace(regs,'');
 			            	if(value.curMonthRepayAmt*1 > 99999999999999.98){
 			            		value.curMonthRepayAmt = '99,999,999,999,999.98';
 			            	}else{
@@ -2787,6 +2815,7 @@
 			                break;
 			            //当前逾期金额
 			            case 'presentOverAmt':
+			            	value.presentOverAmt = value.presentOverAmt.replace(regs,'');
 			            	if(value.presentOverAmt*1 > 99999999999999.98){
 			            		value.presentOverAmt = '99,999,999,999,999.98';
 			            	}else{
@@ -2795,6 +2824,7 @@
 			                break;
 			            //信用卡使用额度 信用额度
 			            case 'cardAmt':
+			            	value.cardAmt = value.cardAmt.replace(regs,'');
 			            	if(value.cardAmt*1 > 99999999999999.98){
 								value.cardAmt = '99,999,999,999,999.98';
 							}else{
@@ -2803,6 +2833,7 @@
 			                break;
 			            //信用卡使用额度 已使用额度
 			            case 'usedAmt':
+			            	value.usedAmt = value.usedAmt.replace(regs,'');
 			            	if(value.usedAmt*1 > 99999999999999.98){
 								value.usedAmt = '99,999,999,999,999.98';
 							}else{
@@ -2813,7 +2844,14 @@
 			            case 'carModel':
 			            //console.log(value.carModel);
 			            //console.log(typeof(value.carModel));
-				            if(!/^[A-Za-z0-9]+$/.test(value.carModel) || value.carModel.length > 40){
+			            //^[A-Za-z0-9]+$
+				            /*if(!/^(?=.*[0-9])(?=.*[a-zA-Z])(.{1,40})$/.test(value.carModel) || value.carModel.length > 40){
+								value.carModelShow = true;
+								value.carModel = '';
+							}else{
+								value.carModelShow = false;
+							}*/
+							if(value.carModel.length > 40){
 								value.carModelShow = true;
 								value.carModel = '';
 							}else{
@@ -2828,7 +2866,7 @@
 								value.loanPeriodShow = false;
 							};
 							if(value.monthlyPay && value.loanPeriod){
-								var regs=/\,/g;
+								//var regs=/\,/g;
 								value.restLoans = value.restLoans.replace(regs,'');
 								if(value.restLoans*1 < 0 || value.restLoans*1 > ((value.monthlyPay*1)*(value.loanPeriod*1))){
 									value.restShow = true;
@@ -2845,6 +2883,7 @@
 				//console.log(row.estateZip);
 				//console.log(row.estateAddress.length);
 				//console.log(row.monthlyPay);
+				var regs=/\,/g;
 				switch (flage){
 					case 'estateZip':
 						if(row.estateZip == ''){
@@ -2919,6 +2958,7 @@
 						if(row.monthlyPay == ''){
 							row.monthlyPay = '';
 						}else{
+							row.monthlyPay = row.monthlyPay.replace(regs,'');
 							if(row.monthlyPay*1>99999999){
 								row.monthlyPay = "99,999,999.00";
 							}else{
@@ -2943,11 +2983,12 @@
 				            		value.restLoans = '';
 			            		}
 			            	}else{*/
-					//月供(贷款余额)
+					//贷款余额(车辆信息)
 					case 'restLoans':
 						if(row.restLoans == ''){
 							row.restLoans = '';
 						}else{
+							row.restLoans = row.restLoans.replace(regs,'');
 							if(row.monthlyPay && row.loanPeriod){
 								if(row.restLoans*1 < 0 || row.restLoans*1 > ((row.monthlyPay*1)*(row.loanPeriod*1))){
 									row.restLoansShow = true;
