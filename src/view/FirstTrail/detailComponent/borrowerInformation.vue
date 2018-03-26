@@ -2740,6 +2740,7 @@
 			                break; 
 			            //本期应还款金额
 			            case 'realRepaymentAmt':
+			            	value.realRepaymentAmt = value.realRepaymentAmt.replace(regs,'');
 			            	if(value.realRepaymentAmt*1 > 99999999999999.98){
 								value.realRepaymentAmt = '99,999,999,999,999.98';
 							}else{
@@ -2748,6 +2749,7 @@
 			                break;
 			            //本期实际还款金额(信用卡使用明细)
 			            case 'actRepaymentAmt':
+			            	value.actRepaymentAmt = value.actRepaymentAmt.replace(regs,'');
 			            	if(value.realRepaymentAmt && value.actRepaymentAmt*1>value.realRepaymentAmt*1){
 			            		value.actRepaymentAmtShow = true;
 			            		value.actRepaymentAmt = '' 
@@ -2761,6 +2763,7 @@
 			            	}
 			                break;
 			            case 'loanContValue':
+			            	value.loanContValue = value.loanContValue.replace(regs,'');
 			            	if(value.loanContValue*1 > 99999999999999.98){
 			            		value.loanContValue = '99,999,999,999,999.98';
 			            	}else{
@@ -2769,6 +2772,7 @@
 			                break;
 			            //贷款余额
 			            case 'loanBal':
+			            	value.loanBal = value.loanBal.replace(regs,'');
 			            	if(value.loanBal*1 > 99999999999999.98){
 			            		value.loanBal = '99,999,999,999,999.98';
 			            	}else{
@@ -2777,6 +2781,7 @@
 			                break;
 			            //本期应还款金额  
 			            case 'presentRepayAmt':
+			            	value.presentRepayAmt = value.presentRepayAmt.replace(regs,'');
 			            	if(value.presentRepayAmt*1 > 99999999999999.98){
 			            		value.presentRepayAmt = '99,999,999,999,999.98';
 			            	}else{
@@ -2785,6 +2790,7 @@
 			                break;
 			            //本期实际还款金额
 			            case 'curMonthRepayAmt':
+			            	value.curMonthRepayAmt = value.curMonthRepayAmt.replace(regs,'');
 			            	if(value.curMonthRepayAmt*1 > 99999999999999.98){
 			            		value.curMonthRepayAmt = '99,999,999,999,999.98';
 			            	}else{
@@ -2801,6 +2807,7 @@
 			                break;
 			            //信用卡使用额度 信用额度
 			            case 'cardAmt':
+			            	value.cardAmt = value.cardAmt.replace(regs,'');
 			            	if(value.cardAmt*1 > 99999999999999.98){
 								value.cardAmt = '99,999,999,999,999.98';
 							}else{
@@ -2809,6 +2816,7 @@
 			                break;
 			            //信用卡使用额度 已使用额度
 			            case 'usedAmt':
+			            	value.usedAmt = value.usedAmt.replace(regs,'');
 			            	if(value.usedAmt*1 > 99999999999999.98){
 								value.usedAmt = '99,999,999,999,999.98';
 							}else{
@@ -2952,11 +2960,12 @@
 				            		value.restLoans = '';
 			            		}
 			            	}else{*/
-					//月供(贷款余额)
+					//贷款余额(车辆信息)
 					case 'restLoans':
 						if(row.restLoans == ''){
 							row.restLoans = '';
 						}else{
+							row.restLoans = row.restLoans.replace(regs,'');
 							if(row.monthlyPay && row.loanPeriod){
 								if(row.restLoans*1 < 0 || row.restLoans*1 > ((row.monthlyPay*1)*(row.loanPeriod*1))){
 									row.restLoansShow = true;
