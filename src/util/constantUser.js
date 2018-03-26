@@ -11,7 +11,7 @@ var host = location.hostname,
   productionEnv = "riskmgt.nuoyuan.com.cn"; // 生产环境
 
 if (host === productionEnv) {
-  host = "riskmgt.nuoyuan.com.cn";
+  host = "http://platform.nuoyuan.com.cn/";
 } else if (host === releaseEnv) {
   host = "http://preplatform.nuoyuan.com.cn/";
 } else if (host === testEnv) {
