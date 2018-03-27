@@ -185,6 +185,7 @@
         this.params.completeTime_le = '';
         this.applyData = '';
         this.dealDate = '';
+            this.getInf(this.params);
       },
       Rsearch() {
         this.params.appDate_ge = this.DateF(this.applyData[0]);
