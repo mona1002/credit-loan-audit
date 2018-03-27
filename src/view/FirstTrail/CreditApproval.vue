@@ -285,7 +285,7 @@
                   <el-form-item label="结论：">
                     <!-- <el-radio-group v-model="applyConclusion"> -->
                     <el-radio label="00" value='00' v-model="opinionFlag">同意</el-radio>
-                    <el-radio label="03" value='03' v-model="opinionFlag" v-show="taskNodeName!='creditApp_finalTrial_five' && judgeFlag=='02'">请求更高级审批</el-radio>
+                    <el-radio label="03" value='03' v-model="opinionFlag" v-show="taskName!='creditApp_finalTrial_five' && judgeFlag=='02'">请求更高级审批</el-radio>
                     <!-- </el-radio-group> -->
                   </el-form-item>
                 </div>
@@ -606,7 +606,7 @@ export default {
       ploanAmt2: 0, // 批准的金额
       options: [], // 回退节点的数组
       repayWay: '', // 审批  计算审批结论数据  还款方式
-      taskNodeName: '', // 角色标志
+      taskName: '', // 角色标志
       social: '', // 社保/公积金  授权标志
       bigDataLogVisible: false, //大数据风控弹框
       socialLogVisible: false, //社保公积金
@@ -630,7 +630,7 @@ export default {
 
     // 取出标志taskNodeName
     // creditApp_finalTrial_five   信审总监审批 最高级不需要 更高级审批
-    this.taskNodeName = localStorage.getItem('taskNodeName');
+    //this.taskNodeName = localStorage.getItem('taskNodeName');
     // 页面创建的时候  找数据 
     // 这里的数据是 申请信息 中存到本地的信息
     // var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
@@ -661,6 +661,7 @@ export default {
       this.processInstanceId = this.FtaskInWaitting.processInstanceId;
       // 任务状态
       this.taskStatus = JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskStatus;
+      this.taskName = this.FtaskInWaitting.taskName;
     }
     console.log(this.taskId);
 
@@ -1021,7 +1022,8 @@ export default {
       //   }
       // })
 
-      this.get('/credit/product').then(res => {
+      this.post('/credit/product').then(res => {
+       /* this.get('/credit/product').then(res => {*/
         //console.log(res);
         if (res.statusCode == '200') {
           // 假如没有  核实可接受最高每期还款额 
@@ -1070,7 +1072,10 @@ export default {
           // opinionFlag: this.opinionFlag, // 任务类型  初审 00 
 
           // 根据产品id  取到  批准期限
-          this.get('/credit/ploanTermByPro?proId=' + this.proId).then(res => {
+          this.post('/credit/ploanTermByPro',{
+            proId : this.proId
+          }).then(res => {
+            /*this.get('/credit/ploanTermByPro?proId='+this.proId).then(res => {*/
             //console.log(res.data);
             //console.log('// 根据产品id  取到  批准期限')
             if (res.statusCode == '200') {
@@ -1698,7 +1703,8 @@ export default {
       // 最小金额
       this.minAmount = val.minAmount;
       //console.log('批准产品更改');
-      this.get('/credit/ploanTermByPro?proId=' + this.proId).then(res => {
+      this.post('/credit/ploanTermByPro',{proId : this.proId}).then(res => {
+        /*this.get('/credit/ploanTermByPro?proId='+this.proId).then(res => {*/
         //console.log(res.data);
         if (res.statusCode == '200')
           this.ploanTerms = res.data;

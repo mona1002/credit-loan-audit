@@ -231,7 +231,7 @@
 		},
 		methods:{
 			product(){
-				this.get("/credit/product").then(res => {
+				this.post("/credit/product").then(res => {
 					if(res.statusCode == 200){
 						this.productNames = res.data;
 					}

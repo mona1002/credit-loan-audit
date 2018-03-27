@@ -726,7 +726,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 			            this.$message.error(res.msg);
 			          }
 	            });*/
-	            this.get("/credit/product").then(res => {
+	            this.post("/credit/product").then(res => {
 					if(res.statusCode == 200){
 						this.products = res.data;
 						//请求复议专员带过来的审批信息
@@ -757,7 +757,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 					        			}
 					        		};
 					        		//批准期限[月]的列表
-					        		this.get('/credit/ploanTermByPro?proId='+res.data.proId).then(res => {
+					        		this.post('/credit/ploanTermByPro',{proId : res.data.proId}).then(res => {
 								        console.log(res.data);
 								        if (res.statusCode == '200')
 								          this.ploanTerms = res.data;
@@ -993,7 +993,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 		      	// 最小金额
 		      	//this.minAmount = val.minAmount;
 		      	console.log(this.maxAmounnt+"#########"+this.minAmount);
-				this.get('/credit/ploanTermByPro?proId=' + this.proId).then(res => {
+				this.post('/credit/ploanTermByPro',{proId : this.proId}).then(res => {
 			        //console.log(res.data);
 			        if (res.statusCode == '200')
 			          this.ploanTerms = res.data;
