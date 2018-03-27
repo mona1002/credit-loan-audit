@@ -166,7 +166,7 @@
 					        min-width="102">
 					        <template slot-scope="scope">
 					        	<span class="regSpan" v-show="scope.row.restShow">
-				    				<i>*</i>请输入0-{{(scope.row.monthlyPay*1)*(scope.row.loanPeriod*1)}}
+				    				<i>*</i>请输入0-{{hLimit}}
 				    			</span>
 						        <el-input v-model="scope.row.restLoans" @blur="moneyBlur(scope.row,'restLoans')" placeholder="请输入内容"></el-input>
 					        </template>
@@ -325,7 +325,7 @@
 				        min-width="120">
 				        <template slot-scope="scope">
 				        	<span class="regSpan" v-show="scope.row.restLoansShow">
-			    				<i>*</i>请输入0-{{(scope.row.monthlyPay*1)*(scope.row.loanPeriod*1)}}
+			    				<i>*</i>请输入0-{{limit}}
 			    			</span>
 					        <el-input v-model="scope.row.restLoans" @blur="postcode(scope.row,'restLoans')" placeholder="请输入内容"></el-input>
 				        </template>
@@ -1391,6 +1391,8 @@
       		arr:[],
       		jiekrloading:false,
       		jiekrSure:'确定',
+      		limit:'',//车辆信息 贷款期限*月供
+      		hLimit:'',//房产信息 贷款期限*月供
 	      };
 	    },
 		props:['isFull'],
@@ -2720,9 +2722,32 @@
 				            	value.monthShow = false;
 								value.monthlyPay =this.formatNumber(value.monthlyPay,2,0);
 				            };
+				            //贷款期限、贷款余额存在 
+							if(value.monthlyPay && value.loanPeriod && value.restLoans){
+								//alert('kk');
+								//var regs=/\,/g;
+								value.monthlyPay = value.monthlyPay.replace(regs,'');
+								value.restLoans = value.restLoans.replace(regs,'');
+								//console.log(value.monthlyPay+"...."+value.loanPeriod);
+								//console.log((value.monthlyPay*1)+"...."+(value.loanPeriod*1));
+								//console.log((value.monthlyPay*1)*(value.loanPeriod*1));
+								if(value.restLoans*1 > ((value.monthlyPay*1)*(value.loanPeriod*1))){
+									this.hLimit = (value.monthlyPay*1)*(value.loanPeriod*1);
+									value.restShow = true;
+									value.restLoans = "";
+									value.monthlyPay = this.formatNumber(value.monthlyPay,2,0);
+									//value.restLoans = this.formatNumber(value.restLoans,2,0);
+								}else{
+									value.restShow = false;
+									this.hLimit = '';
+									value.monthlyPay = this.formatNumber(value.monthlyPay,2,0);
+									value.restLoans = this.formatNumber(value.restLoans,2,0);
+								};
+							};
 			                break;
+			            //贷款余额（房产信息）
 			            case 'restLoans':
-			            	value.restLoans = value.restLoans.replace(regs,'');
+			            	/*value.restLoans = value.restLoans.replace(regs,'');
 			            	if(value.restLoans && value.monthlyPay){
 				            	if(value.restLoans*1 < 0 || value.restLoans*1 > ((value.monthlyPay*1)*(value.loanPeriod*1))){
 				            		value.restShow = true;
@@ -2737,7 +2762,30 @@
 								}else{
 									value.restLoans = this.formatNumber(value.restLoans,2,0);
 								}
-			            	}
+			            	}*/
+			            	//贷款期限、月供存在
+			            	if(value.monthlyPay && value.loanPeriod){
+								value.monthlyPay = value.monthlyPay.replace(regs,'');
+								value.restLoans = value.restLoans.replace(regs,'');
+								if(value.restLoans*1 < 0 || value.restLoans*1 > ((value.monthlyPay*1)*(value.loanPeriod*1))){
+									this.hLimit = (value.monthlyPay*1)*(value.loanPeriod*1);
+									value.restShow = true;
+									value.restLoans = "";
+									value.monthlyPay = this.formatNumber(value.monthlyPay,2,0);
+								}else{
+									value.restShow = false;
+									this.hLimit = '';
+									value.restLoans = this.formatNumber(value.restLoans,2,0);
+									value.monthlyPay = this.formatNumber(value.monthlyPay,2,0);
+								}
+							}else if(!value.monthlyPay || !value.loanPeriod){
+								value.restLoans = value.restLoans.replace(regs,'');
+								if(value.restLoans*1>99999999){
+									value.restLoans = "99,999,999.00";
+								}else{
+									value.restLoans = this.formatNumber(value.restLoans,2,0);
+								}
+							}
 			                break; 
 			            case 'carPrice':
 			            	value.carPrice = value.carPrice.replace(regs,'');
@@ -2752,30 +2800,52 @@
 			            //本期应还款金额
 			            case 'actRepaymentAmt':
 			            	value.actRepaymentAmt = value.actRepaymentAmt.replace(regs,'');
+			            	//console.log('kkk');
 			            	if(value.actRepaymentAmt*1 > 99999999999999.98){
 								value.actRepaymentAmt = '99,999,999,999,999.98';
 							}else{
+								//console.log('kkk2');
 								value.actRepaymentAmt =this.formatNumber(value.actRepaymentAmt,2,0);
+							};
+			            	//如果实际还款金额存在
+							if(value.actRepaymentAmt && value.realRepaymentAmt){
+								value.actRepaymentAmt = value.actRepaymentAmt.replace(regs,'');
+								value.realRepaymentAmt = value.realRepaymentAmt.replace(regs,'');
+								//console.log(value.realRepaymentAmt+"*******"+value.actRepaymentAmt);
+								if(value.realRepaymentAmt*1>value.actRepaymentAmt*1){
+									value.realRepaymentAmtShow = true;
+			            			value.realRepaymentAmt = '';
+			            			value.actRepaymentAmt =this.formatNumber(value.actRepaymentAmt,2,0);
+								}else{
+									value.actRepaymentAmt =this.formatNumber(value.actRepaymentAmt,2,0);
+									value.realRepaymentAmt =this.formatNumber(value.realRepaymentAmt,2,0);
+								};
 							};
 			                break;
 			            //本期实际还款金额(信用卡使用明细)
 			            case 'realRepaymentAmt':
-			            	value.realRepaymentAmt = value.realRepaymentAmt.replace(regs,'');
-			            	if(value.actRepaymentAmt && value.realRepaymentAmt*1>value.actRepaymentAmt*1){
-			            		value.realRepaymentAmtShow = true;
-			            		value.realRepaymentAmt = '' 
-			            	}else{
-			            		value.realRepaymentAmtShow = false;
-			            		//value.realRepaymentAmt =this.formatNumber(value.realRepaymentAmt,2,0);
-			            	
-			            		if(!value.actRepaymentAmt && value.realRepaymentAmt*1 > 99999999999999.98){
-			            			//console.log('ii');
-			            			value.realRepaymentAmt = '99,999,999,999,999.98'; 
-			            		}else if(!value.actRepaymentAmt && value.realRepaymentAmt*1 < 99999999999999.98){
-			            			value.realRepaymentAmt =this.formatNumber(value.realRepaymentAmt,2,0);
-			            		}else if(!value.actRepaymentAmt && value.realRepaymentAmt*1 == 99999999999999.98){
-			            			value.realRepaymentAmt = '99,999,999,999,999.98';
+			            	if(value.actRepaymentAmt){
+			            		value.realRepaymentAmt = value.realRepaymentAmt.replace(regs,'');
+			            		value.actRepaymentAmt = value.actRepaymentAmt.replace(regs,'');
+			            		if(value.realRepaymentAmt*1>value.actRepaymentAmt*1){
+				            		value.realRepaymentAmtShow = true;
+				            		value.realRepaymentAmt = ''; 
+				            		value.actRepaymentAmt =this.formatNumber(value.actRepaymentAmt,2,0);
+				            	}else{
+				            		value.realRepaymentAmtShow = false;
+				            		value.realRepaymentAmt =this.formatNumber(value.realRepaymentAmt,2,0);
+				            		value.actRepaymentAmt =this.formatNumber(value.actRepaymentAmt,2,0);
 			            		};
+			            	};
+		            		if(!value.actRepaymentAmt){
+		            			value.realRepaymentAmt = value.realRepaymentAmt.replace(regs,'');
+		            			if(value.realRepaymentAmt*1 > 99999999999999.98){
+		            				value.realRepaymentAmt = '99,999,999,999,999.98'; 
+		            			}else if(value.realRepaymentAmt*1 < 99999999999999.98){
+		            				alue.realRepaymentAmt =this.formatNumber(value.realRepaymentAmt,2,0);
+		            			}else if(value.realRepaymentAmt*1 == 99999999999999.98){
+		            				value.realRepaymentAmt = '99,999,999,999,999.98';
+		            			}
 		            		};
 			                break;
 			            case 'loanContValue':
@@ -2858,6 +2928,7 @@
 								value.carModelShow = false;
 							}
 							break;
+						//贷款期限（车辆信息）
 						case 'loanPeriod':
 							if(value.loanPeriod*1 > 60 || value.loanPeriod*1 < 1){
 								value.loanPeriodShow = true;
@@ -2865,14 +2936,20 @@
 							}else{
 								value.loanPeriodShow = false;
 							};
+							//月供和贷款余额都存在
 							if(value.monthlyPay && value.loanPeriod){
-								//var regs=/\,/g;
 								value.restLoans = value.restLoans.replace(regs,'');
 								value.monthlyPay = value.monthlyPay.replace(regs,'');
-								value.loanPeriod = value.loanPeriod.replace(regs,'');
-								if(value.restLoans*1 < 0 || value.restLoans*1 > ((value.monthlyPay*1)*(value.loanPeriod*1))){
-									value.restShow = true;
+								if(value.restLoans*1 > ((value.monthlyPay*1)*(value.loanPeriod*1))){
+									this.limit = (value.monthlyPay*1)*(value.loanPeriod*1);
+									value.restLoansShow = true;
 									value.restLoans = '';
+									value.monthlyPay =this.formatNumber(value.monthlyPay,2,0);
+								}else{
+									value.restLoansShow = false;
+									this.limit = '';
+									value.restLoans = this.formatNumber(value.restLoans,2,0);;
+									value.monthlyPay =this.formatNumber(value.monthlyPay,2,0);
 								};
 							};
 							break;
@@ -2941,7 +3018,7 @@
 							}
 						};
 						break;
-					//贷款期限
+					//贷款期限(房产信息)
 					case 'loanPeriod':
 						if(row.loanPeriod == ''){
 							row.loanPeriod = '';
@@ -2951,7 +3028,22 @@
 								row.loanPeriod = '';
 							}else{
 								row.loanShow = false;
-								//row.loanPeriod = this.formatNumber(row.loanPeriod,2,0);
+							};
+							//月供、贷款余额存在
+							if(row.monthlyPay && row.restLoans){
+								row.restLoans = row.restLoans.replace(regs,'');
+								row.monthlyPay = row.monthlyPay.replace(regs,'');
+								if(row.restLoans*1 > ((row.monthlyPay*1)*(row.loanPeriod*1))){
+									this.hLimit = (row.monthlyPay*1)*(row.loanPeriod*1);
+									row.restShow = true;
+									row.restLoans = '';
+									row.monthlyPay =this.formatNumber(row.monthlyPay,2,0);
+								}else{
+									row.restShow = false;
+									this.hLimit = '';
+									row.restLoans = this.formatNumber(row.restLoans,2,0);;
+									row.monthlyPay =this.formatNumber(row.monthlyPay,2,0);
+								};
 							}
 						};
 						break;
@@ -2960,56 +3052,63 @@
 						if(row.monthlyPay == ''){
 							row.monthlyPay = '';
 						}else{
+							//console.log(row.monthlyPay.length);
+							//if(row.monthlyPay.length>=4){
 							row.monthlyPay = row.monthlyPay.replace(regs,'');
 							if(row.monthlyPay*1>99999999){
 								row.monthlyPay = "99,999,999.00";
 							}else{
 								row.monthlyPay = this.formatNumber(row.monthlyPay,2,0);
 							};
-							if(row.monthlyPay && row.loanPeriod){
+							//};
+							//贷款期限、贷款余额存在 
+							if(row.monthlyPay && row.loanPeriod && row.restLoans){
 								//alert('kk');
 								//var regs=/\,/g;
 								row.monthlyPay = row.monthlyPay.replace(regs,'');
 								row.restLoans = row.restLoans.replace(regs,'');
-								console.log(row.monthlyPay+"...."+row.loanPeriod);
-								console.log((row.monthlyPay*1)+"...."+(row.loanPeriod*1));
-								console.log((row.monthlyPay*1)*(row.loanPeriod*1));
-								if(row.restLoans*1 < 0 || row.restLoans*1 > ((row.monthlyPay*1)*(row.loanPeriod*1))){
-									//alert('uu');
-									row.restShow = true;
-									//console.log(row.restShow);
-									row.restLoans = '';
+								//console.log(row.monthlyPay+"...."+row.loanPeriod);
+								//console.log((row.monthlyPay*1)+"...."+(row.loanPeriod*1));
+								//console.log((row.monthlyPay*1)*(row.loanPeriod*1));
+								if(row.restLoans*1 > ((row.monthlyPay*1)*(row.loanPeriod*1))){
+									this.limit = (row.monthlyPay*1)*(row.loanPeriod*1);
+									row.restLoansShow = true;
+									row.restLoans = "";
 									row.monthlyPay = this.formatNumber(row.monthlyPay,2,0);
+									//row.restLoans = this.formatNumber(row.restLoans,2,0);
+								}else{
+									row.restLoansShow = false;
+									this.limit = '';
+									row.monthlyPay = this.formatNumber(row.monthlyPay,2,0);
+									row.restLoans = this.formatNumber(row.restLoans,2,0);
 								};
 							};
 						};
 						break;
-						/*if(value.monthlyPay && value.loanPeriod){
-			            		if(value.restLoans*1 < 0 || value.restLoans*1 > ((value.monthlyPay*1)*(value.loanPeriod*1))){
-			            			value.restShow = true;
-				            		value.restLoans = '';
-			            		}
-			            	}else{*/
 					//贷款余额(车辆信息)
 					case 'restLoans':
 						if(row.restLoans == ''){
 							row.restLoans = '';
 						}else{
-							row.restLoans = row.restLoans.replace(regs,'');
-							console.log(row.monthlyPay+"...."+row.loanPeriod);
-							console.log((row.monthlyPay*1)+"...."+(row.loanPeriod*1));
-							console.log((row.monthlyPay*1)*(row.loanPeriod*1));
 							if(row.monthlyPay && row.loanPeriod){
 								row.monthlyPay = row.monthlyPay.replace(regs,'');
-								row.loanPeriod = row.loanPeriod.replace(regs,'');
+								row.restLoans = row.restLoans.replace(regs,'');
+								//console.log(row.monthlyPay+"...."+row.loanPeriod);
+								//console.log((row.monthlyPay*1)+"...."+(row.loanPeriod*1));
+								//console.log((row.monthlyPay*1)*(row.loanPeriod*1));
 								if(row.restLoans*1 < 0 || row.restLoans*1 > ((row.monthlyPay*1)*(row.loanPeriod*1))){
+									this.limit = (row.monthlyPay*1)*(row.loanPeriod*1);
 									row.restLoansShow = true;
 									row.restLoans = "";
+									row.monthlyPay = this.formatNumber(row.monthlyPay,2,0);
 								}else{
 									row.restLoansShow = false;
+									this.limit = '';
 									row.restLoans = this.formatNumber(row.restLoans,2,0);
+									row.monthlyPay = this.formatNumber(row.monthlyPay,2,0);
 								}
 							}else if(!row.monthlyPay || !row.loanPeriod){
+								row.restLoans = row.restLoans.replace(regs,'');
 								if(row.restLoans*1>99999999){
 									row.restLoans = "99,999,999.00";
 								}else{
