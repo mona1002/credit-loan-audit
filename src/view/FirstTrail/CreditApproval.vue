@@ -1700,7 +1700,7 @@ export default {
       // 最小金额
       this.minAmount = val.minAmount;
       //console.log('批准产品更改');
-      this.get('/credit/ploanTermByPro?proId=' + this.proId).then(res => {
+      this.post('/credit/ploanTermByPro',{proId : this.proId}).then(res => {
         //console.log(res.data);
         if (res.statusCode == '200')
           this.ploanTerms = res.data;
