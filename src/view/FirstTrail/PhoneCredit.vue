@@ -423,6 +423,7 @@ export default {
       addBtnShow: true, // 标志 添加电话按钮是否显示
       isLoading: false, // 审批按钮 是否加载状态
       loadingTitle: '确认', // 默认btn title
+      judgeFlag:'',
     }
   },
   props: ['isFull', 'SplitS'],
@@ -431,6 +432,7 @@ export default {
     // 此时 data 已经被 observed 了
     // 测试数据
     // 调用历史数据
+    this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
     if (this.judgeFlag == '01') {
 
       var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
@@ -472,9 +474,9 @@ export default {
     console.log(this.SplitS);
 
 
-    var judgeFlag = JSON.parse(localStorage.getItem('judge'));
-    // 复议不显示添加  05 专员   06 主管
-    if (judgeFlag.flag == '05' || judgeFlag.flag == '06') {
+    
+    // 复议不显示添加  05 专员   06 主管 03反欺诈专员 04反欺诈主管
+    if (this.judgeFlag == '05' || this.judgeFlag == '06' || this.judgeFlag == '03' || this.judgeFlag == '04') {
       this.addBtnShow = false;
     }
 

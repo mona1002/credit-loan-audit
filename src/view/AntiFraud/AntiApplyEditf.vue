@@ -409,7 +409,7 @@ export default {
                   } else {
                     this.$message({
                       type: 'warning',
-                      message: '网络异常,请重试!'
+                      message: '您无此操作权限！'
                     });
                   }
                   instance.confirmButtonText = '';
