@@ -248,3 +248,14 @@ table {
   overflow-x: hidden;
   min-width: 1665px;
 }
+.SP_middle {
+  width: 2px;
+  float: left;
+  height: 100%;
+  cursor: e-resize;
+  background: lightblue;
+  background: white;
+  position: absolute;
+  left: calc(50% - 2px);
+  z-index: 400;
+}
