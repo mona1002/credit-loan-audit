@@ -2868,6 +2868,8 @@
 							if(value.monthlyPay && value.loanPeriod){
 								//var regs=/\,/g;
 								value.restLoans = value.restLoans.replace(regs,'');
+								value.monthlyPay = value.monthlyPay.replace(regs,'');
+								value.loanPeriod = value.loanPeriod.replace(regs,'');
 								if(value.restLoans*1 < 0 || value.restLoans*1 > ((value.monthlyPay*1)*(value.loanPeriod*1))){
 									value.restShow = true;
 									value.restLoans = '';
@@ -2966,13 +2968,18 @@
 							};
 							if(row.monthlyPay && row.loanPeriod){
 								//alert('kk');
-								var regs=/\,/g;
+								//var regs=/\,/g;
+								row.monthlyPay = row.monthlyPay.replace(regs,'');
 								row.restLoans = row.restLoans.replace(regs,'');
+								console.log(row.monthlyPay+"...."+row.loanPeriod);
+								console.log((row.monthlyPay*1)+"...."+(row.loanPeriod*1));
+								console.log((row.monthlyPay*1)*(row.loanPeriod*1));
 								if(row.restLoans*1 < 0 || row.restLoans*1 > ((row.monthlyPay*1)*(row.loanPeriod*1))){
 									//alert('uu');
 									row.restShow = true;
 									//console.log(row.restShow);
 									row.restLoans = '';
+									row.monthlyPay = this.formatNumber(row.monthlyPay,2,0);
 								};
 							};
 						};
@@ -2989,8 +2996,12 @@
 							row.restLoans = '';
 						}else{
 							row.restLoans = row.restLoans.replace(regs,'');
-							console.log(row.monthlyPay*1+"//////"+row.loanPeriod*1);
+							console.log(row.monthlyPay+"...."+row.loanPeriod);
+							console.log((row.monthlyPay*1)+"...."+(row.loanPeriod*1));
+							console.log((row.monthlyPay*1)*(row.loanPeriod*1));
 							if(row.monthlyPay && row.loanPeriod){
+								row.monthlyPay = row.monthlyPay.replace(regs,'');
+								row.loanPeriod = row.loanPeriod.replace(regs,'');
 								if(row.restLoans*1 < 0 || row.restLoans*1 > ((row.monthlyPay*1)*(row.loanPeriod*1))){
 									row.restLoansShow = true;
 									row.restLoans = "";
