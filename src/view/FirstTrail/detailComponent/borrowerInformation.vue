@@ -2989,6 +2989,7 @@
 							row.restLoans = '';
 						}else{
 							row.restLoans = row.restLoans.replace(regs,'');
+							console.log(row.monthlyPay*1+"//////"+row.loanPeriod*1);
 							if(row.monthlyPay && row.loanPeriod){
 								if(row.restLoans*1 < 0 || row.restLoans*1 > ((row.monthlyPay*1)*(row.loanPeriod*1))){
 									row.restLoansShow = true;
