@@ -1072,10 +1072,10 @@ export default {
           // opinionFlag: this.opinionFlag, // 任务类型  初审 00 
 
           // 根据产品id  取到  批准期限
-          /*this.post('/credit/ploanTermByPro',{
+          this.post('/credit/ploanTermByPro',{
             proId : this.proId
-          }).then(res => {*/
-            this.post('/credit/ploanTermByPro?proId='+this.proId).then(res => {
+          }).then(res => {
+            /*this.post('/credit/ploanTermByPro?proId='+this.proId).then(res => {*/
             //console.log(res.data);
             //console.log('// 根据产品id  取到  批准期限')
             if (res.statusCode == '200') {
@@ -1703,8 +1703,8 @@ export default {
       // 最小金额
       this.minAmount = val.minAmount;
       //console.log('批准产品更改');
-      /*this.post('/credit/ploanTermByPro',{proId : this.proId}).then(res => {*/
-        this.post('/credit/ploanTermByPro?proId='+this.proId).then(res => {
+      this.post('/credit/ploanTermByPro',{proId : this.proId}).then(res => {
+        /*this.post('/credit/ploanTermByPro?proId='+this.proId).then(res => {*/
         //console.log(res.data);
         if (res.statusCode == '200')
           this.ploanTerms = res.data;
