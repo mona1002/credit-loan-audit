@@ -1083,44 +1083,6 @@ export default {
           }).then(res => {
             /*this.post('/credit/ploanTermByPro?proId='+this.proId).then(res => {*/
             if (res.statusCode == '200') {
-
-
-
-              /*this.ploanTerms = res.data;*/
-              /*for (var i = 0; i < this.ploanTerms.length; i++) {
-                if (this.ploanTerms[i].appDuration == this.ploanTerm) {
-                  // 批准期限
-                  this.ploanTerm = this.ploanTerms[i].appDuration;
-                  // 综合费率
-                  this.synthesisRateM = this.ploanTerms[i].synthesisRateM;
-                  // 借款利率
-                  this.loanRateYr = this.ploanTerms[i].loanRateYr;
-                  // 还款方式  
-                  this.repayWay = this.ploanTerms[i].repayWay;
-                  //console.log('批准期限', this.ploanTerm, '综合费率', this.synthesisRateM, '借款利率', this.loanRateYr, '还款方式', this.repayWay)
-                  // 取到  产品 id 产品 code , 从请求回来的列表数据中找到对应的产品名
-                  if (this.proId && this.products) {
-                    //console.log('遍历产品')
-                    //console.log(this.proId);
-                    //console.log(this.products.length);
-
-                    for (var i = 0; i < this.products.length; i++) {
-                      if (this.proId == this.products[i].id) {
-                        this.proName = this.products[i].proName;
-                        // 最大
-                        this.maxAmounnt = this.products[i].maxAmounnt;
-                        // 最小
-                        this.minAmount = this.products[i].minAmount;
-                        //this.calculateByAuditInfo();
-                      }
-                    }
-                  }
-                }
-              }*/
-
-
-
-
               //获取评分、核实可接受最高月每期还款额
               this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
               this.fbalance = res.data.fbalance;
@@ -1287,8 +1249,8 @@ export default {
 
           // 校验必填项
           // 假如没有  核实可接受最高每期还款额 , 提示
-          //console.log(this.quotaData.fbalance);
-          if (!this.quotaData.fbalance) {
+          //console.log(this.fbalance2);
+          if (!this.fbalance2) {
             this.$message({
               message: "提示：请完善信审表中可承受的月还款金额",
               type: 'warning'
