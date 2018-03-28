@@ -2399,11 +2399,11 @@
       this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
       this.mountC();
       // 省    
-      this.get("/credit/queryProvince", {}).then(res => {
+      this.post("/credit/queryProvince").then(res => {
         this.hirecomAddress = res.data;
       });
       // 所属行业 
-      this.get("/credit/industry", {}).then(res => {
+      this.post("/credit/industry").then(res => {
         this.hirecomKind = res.data;
       })
       this.Pwidth = document.getElementsByClassName("el-input")
