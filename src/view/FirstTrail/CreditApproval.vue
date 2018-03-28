@@ -883,6 +883,8 @@ export default {
           // 放弃 05 new
           this.getReason('main', '05')
           break;
+
+        //审批按钮
         case '03':
           //console.log('030303003030300330')
           // this.showFlag = '03';
@@ -905,29 +907,30 @@ export default {
           //console.log(this.proId)
           //console.log('++++++++++++++++++++++++++++++')
 
-          // 信用评分  核实可接受最高还款额
-          this.post('/credit/quotaScoring', {
-            applyId: this.applyId,
-            proId: this.sproId,
-            appOrgId: this.appOrgId
-          }).then(res => {
-            //console.log(res);
-            if (res.statusCode == '200') {
-              this.quotaData = res.data;
-              // 单独处理 评分   =>  "评分:51.6"
-              //console.log(res.data.creditScore);
-              this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
-              //console.log(this.creditScore);
-              this.fbalance = res.data.fbalance;
-              if (res.data.creditScore.split(',')[1]) {
-                this.fbalance2 = Number(res.data.fbalance).toLocaleString() + res.data.creditScore.split(',')[1];
-              } else {
-                this.fbalance2 = Number(res.data.fbalance).toLocaleString() + '.00'
+          //初审的时候调用评分接口
+          if (this.judgeFlag == '01'){
+            // 信用评分  核实可接受最高还款额
+            this.post('/credit/quotaScoring', {
+              applyId: this.applyId,
+              proId: this.sproId,
+              appOrgId: this.appOrgId
+            }).then(res => {
+              if (res.statusCode == '200') {
+                this.quotaData = res.data;
+                // 单独处理 评分   =>  "评分:51.6"
+                this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
+                this.fbalance = res.data.fbalance;
+                if (res.data.creditScore.split(',')[1]) {
+                  this.fbalance2 = Number(res.data.fbalance).toLocaleString() + res.data.creditScore.split(',')[1];
+                } else {
+                  this.fbalance2 = Number(res.data.fbalance).toLocaleString() + '.00'
+                }
               }
-              //console.log(this.fbalance);
-              //console.log(this.fbalance2);
-            }
-          })
+            });
+            this.getProducts();
+          }else if(this.judgeFlag == '02'){
+            this.queryCreauditOpinionObj();
+          }
 
 
 
@@ -947,11 +950,11 @@ export default {
           //   }
           // })
           // } else 
-          if (this.judgeFlag == '02') { // 终审
+          //if (this.judgeFlag == '02') { // 终审
             //console.log(222222222222222222222222)
             // 请求产品  初审-审批结论 / 终审-审核结论
-          }
-          this.getProducts();
+          //}
+          
 
 
           break;
@@ -1031,11 +1034,11 @@ export default {
           // this.$message("提示：请完善信审表中可承受的月还款金额");
           this.products = res.data;
           //console.log('请求完产品了')
-          if (res.statusCode == '200') {
+          /*if (res.statusCode == '200') {
             if (this.judgeFlag == '02') { // 终审
               this.queryCreauditOpinionObj();
             }
-          }
+          }*/
         }
       })
     },
@@ -1067,57 +1070,50 @@ export default {
           this.applyConclusion = res.data.applyConclusion;
           this.srcPloanAmt = res.data.srcPloanAmt; // 信审批准额度
           this.creditDebitRate = res.data.creditDebitRate; // 信用负债率
-          this.proId = res.data.proId; //产品id
+          this.proId = res.data.proId; //获取产品期限产品id
           // this.taskId = res.data.taskId; // 任务id
           // opinionFlag: this.opinionFlag, // 任务类型  初审 00 
 
-          // 根据产品id  取到  批准期限
-          /*this.post('/credit/ploanTermByPro',{
-            proId : this.proId
-          }).then(res => {*/
-            this.post('/credit/ploanTermByPro?proId='+this.proId).then(res => {
-            //console.log(res.data);
-            //console.log('// 根据产品id  取到  批准期限')
+          // 整合接口
+          this.post('/credit/initPage',{
+            proId : this.sproId,//产品id
+            applyId : this.applyId,//申请单id
+            appOrgId : this.appOrgId,//进件机构id
+            ploanTermByProId : this.proId,//获取产品期限产品id
+          }).then(res => {
+            /*this.post('/credit/ploanTermByPro?proId='+this.proId).then(res => {*/
             if (res.statusCode == '200') {
-              this.ploanTerms = res.data;
-              for (var i = 0; i < this.ploanTerms.length; i++) {
-                //console.log(this.ploanTerm);
-                //console.log(this.ploanTerms[i].appDuration)
-                if (this.ploanTerms[i].appDuration == this.ploanTerm) {
-                  // 批准期限
-                  this.ploanTerm = this.ploanTerms[i].appDuration;
-                  // 综合费率
-                  this.synthesisRateM = this.ploanTerms[i].synthesisRateM;
-                  // 借款利率
-                  this.loanRateYr = this.ploanTerms[i].loanRateYr;
-                  // 还款方式  
-                  this.repayWay = this.ploanTerms[i].repayWay;
-                  //console.log('批准期限', this.ploanTerm, '综合费率', this.synthesisRateM, '借款利率', this.loanRateYr, '还款方式', this.repayWay)
-                  // 取到  产品 id 产品 code , 从请求回来的列表数据中找到对应的产品名
-                  if (this.proId && this.products) {
-                    //console.log('遍历产品')
-                    //console.log(this.proId);
-                    //console.log(this.products.length);
-
-                    for (var i = 0; i < this.products.length; i++) {
-                      //console.log(this.products[i]);
-                      //console.log('ttttttt', this.proId);
-                      //console.log('xxxxxxx', this.products[i].id);
-                      if (this.proId == this.products[i].id) {
-
-                        this.proName = this.products[i].proName;
-
-                        //console.log(this.products[i].proName, '++++++++++++', this.proName);
-                        // 最大
-                        this.maxAmounnt = this.products[i].maxAmounnt;
-                        // 最小
-                        this.minAmount = this.products[i].minAmount;
-                        this.calculateByAuditInfo();
-                      }
-                    }
+              //获取评分、核实可接受最高月每期还款额
+              this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
+              this.fbalance = res.data.fbalance;
+              if (res.data.creditScore.split(',')[1]) {
+                this.fbalance2 = Number(res.data.fbalance).toLocaleString() + res.data.creditScore.split(',')[1];
+              } else {
+                this.fbalance2 = Number(res.data.fbalance).toLocaleString() + '.00'
+              };
+              //获取产品列表
+              if(res.data.product){
+                this.products = res.data.product;
+                for (var i = 0; i < this.products.length; i++) {
+                  if (this.proId == this.products[i].id) {
+                    this.proName = this.products[i].proName;
+                    // 最大
+                    this.maxAmounnt = this.products[i].maxAmounnt;
+                    // 最小
+                    this.minAmount = this.products[i].minAmount;
+                    //this.calculateByAuditInfo();
                   }
+                };
+              };
+              
+              //根据产品id获取批准期限
+              if(res.data.ploanTermByPo){
+                for(var i=0;i<res.data.ploanTermByPo.length;i++){
+                  this.ploanTerms.push(res.data.ploanTermByPo[i].appDuration);
                 }
-              }
+              };
+              console.log(this.ploanTerms);
+              
             }
 
           })
@@ -1253,8 +1249,8 @@ export default {
 
           // 校验必填项
           // 假如没有  核实可接受最高每期还款额 , 提示
-          //console.log(this.quotaData.fbalance);
-          if (!this.quotaData.fbalance) {
+          //console.log(this.fbalance2);
+          if (!this.fbalance2) {
             this.$message({
               message: "提示：请完善信审表中可承受的月还款金额",
               type: 'warning'
