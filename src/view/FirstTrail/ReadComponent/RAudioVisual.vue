@@ -129,7 +129,7 @@
         this.openImg = ind
         // 二级（子）节点
         this.post("/productArchive/getProductArchiveChildList", {
-          applyId: this.localInf.applyId,
+          applyId: this.localInf.matchApplyId,
           pid: id
         }).then(res => {
           if (res.statusCode == 200) {

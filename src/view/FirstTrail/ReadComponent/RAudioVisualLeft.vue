@@ -239,7 +239,7 @@
         this.openImg = ind
         // 二级（子）节点
         this.post("/productArchive/getProductArchiveChildList", {
-          applyId: this.localInf.applyId,
+          applyId: this.localInf.matchApplyId,
           // applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
           pid: id
         }).then(res => {
