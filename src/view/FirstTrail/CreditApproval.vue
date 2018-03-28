@@ -1249,7 +1249,7 @@ export default {
 
           // 校验必填项
           // 假如没有  核实可接受最高每期还款额 , 提示
-          //console.log(this.fbalance2);
+          console.log(this.fbalance2);
           if (!this.fbalance2) {
             this.$message({
               message: "提示：请完善信审表中可承受的月还款金额",
@@ -1424,6 +1424,8 @@ export default {
         //console.log('==========================================')
         ploanAmt2 = Number(this.ploanAmt)
       }
+      alert('kkk');
+      return;
       this.post('/creauditOpinion/add', {
         // this.post("http://10.1.26.47:8080/riskManagement/creauditOpinion/add", {
         applyId: this.applyId,
