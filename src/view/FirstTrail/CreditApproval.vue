@@ -1424,8 +1424,8 @@ export default {
         //console.log('==========================================')
         ploanAmt2 = Number(this.ploanAmt)
       }
-      alert('kkk');
-      return;
+      //alert('kkk');
+      //return;
       this.post('/creauditOpinion/add', {
         // this.post("http://10.1.26.47:8080/riskManagement/creauditOpinion/add", {
         applyId: this.applyId,
