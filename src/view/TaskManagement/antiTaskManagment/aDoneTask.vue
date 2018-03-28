@@ -184,7 +184,7 @@
         });
       },
       getProducts() {
-        this.post("/credit/product").then(res => {
+        this.post("/credit/productAll").then(res => {
           if (res.statusCode == 200) {
             this.production = res.data
           } else {
