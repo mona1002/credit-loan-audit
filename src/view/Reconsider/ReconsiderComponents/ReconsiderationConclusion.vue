@@ -920,7 +920,8 @@
 		      	// 最小金额
 		      	//this.minAmount = val.minAmount;
 		      	console.log(this.maxAmounnt+"#########"+this.minAmount);
-				this.post('/credit/ploanTermByPro',{proId : this.proId}).then(res => {
+				/*this.post('/credit/ploanTermByPro',{proId : this.proId}).then(res => {*/
+				this.post('/credit/ploanTermByPro?proId='+this.proId).then(res => {
 			        //console.log(res.data);
 			        if (res.statusCode == '200')
 			          this.ploanTerms = res.data;
