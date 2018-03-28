@@ -76,15 +76,15 @@
             <li>
               <p>
                 <label>申请产品： </label>
-                <span>{{this.conclu.dealOperDate}} </span>
+                <span>{{this.conclu.appProName}} </span>
               </p>
               <p>
                 <label>申请期限[月]： </label>
-                <span>{{this.conclu.dealOrgCode}} </span>
+                <span>{{this.conclu.appTerm}} </span>
               </p>
               <p>
                 <label>申请金额[元]： </label>
-                <span>{{this.conclu.applyConclusion}} </span>
+                <span>{{this.conclu.appAmt}} </span>
               </p>
             </li>
             <li>
