@@ -357,24 +357,24 @@ export default {
                 console.log(this.phoneId);
 
                 // 清数据
-                // this.source = '';
-                // this.answer = '';
-                // this.checkStage = '';
-                // this.sourceDesc = '';
-                // this.thirdResult = '';
-                // this.relBorrower = '';
-                // this.relBorrowertxt = '';
-                // this.checkWork = '';
-                // this.checkWorktxt = '';
-                // this.mobilepayment = '';
-                // this.mobilepaymenttxt = '';
-                // this.threeQueries = '';
-                // this.threeQueriestxt = '';
-                // this.maritalStatus = '';
-                // this.maritalStatustxt = '';
-                // this.contactfre = '';
-                // this.contactfretxt = '';
-                // this.conclusion = '';
+                 this.source = '';
+                 this.answer = '';
+                 this.checkStage = '';
+                 this.sourceDesc = '';
+                 this.thirdResult = '';
+                 this.relBorrower = '';
+                 this.relBorrowertxt = '';
+                 this.checkWork = '';
+                 this.checkWorktxt = '';
+                 this.mobilepayment = '';
+                 this.mobilepaymenttxt = '';
+                 this.threeQueries = '';
+                 this.threeQueriestxt = '';
+                 this.maritalStatus = '';
+                 this.maritalStatustxt = '';
+                 this.contactfre = '';
+                 this.contactfretxt = '';
+                 this.conclusion = '';
 
                 // 提交数据成功,广播事件 重新刷新列表
                 this.$emit('updateList');
