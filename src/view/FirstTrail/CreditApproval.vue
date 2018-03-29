@@ -1074,6 +1074,7 @@ export default {
           // this.taskId = res.data.taskId; // 任务id
           // opinionFlag: this.opinionFlag, // 任务类型  初审 00 
 
+          this.ploanTerms = [];
           // 整合接口
           this.post('/credit/initPage',{
             proId : this.sproId,//产品id
@@ -1107,12 +1108,8 @@ export default {
               };
               
               //根据产品id获取批准期限
-              if(res.data.ploanTermByPo){
-                for(var i=0;i<res.data.ploanTermByPo.length;i++){
-                  this.ploanTerms.push(res.data.ploanTermByPo[i].appDuration);
-                }
-              };
-              console.log(this.ploanTerms);
+              this.ploanTerms = res.data.ploanTermByPo;
+              //console.log(this.ploanTerms);
               
             }
 
@@ -1711,8 +1708,8 @@ export default {
     },
     // 批准期限更改
     ploanTermChange: function(val) {
-      console.log(val);
-      console.log(val.appDuration);
+      //console.log(val);
+      //console.log(val.appDuration+'ttt');
       // 批准期限
       this.ploanTerm = val.appDuration;
       // 综合费率
