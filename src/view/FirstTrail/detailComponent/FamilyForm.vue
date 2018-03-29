@@ -425,32 +425,32 @@ export default {
               if (res.statusCode == '200') {
                 this.phoneId = res.data.id;
                 // 清数据
-                // this.source = '';
-                // this.answer = '';
-                // this.sourceDesc = '';
-                // this.checkStage = '';
-                // this.thirdResult = '';
-                // this.threeQueries = '';
-                // this.threeQueriestxt = '';
-                // this.issameFam = '';
-                // this.issameFamtxt = '';
-                // this.wetherThirdAbnormal = '';
-                // this.wetherThirdAbnormaltxt = '';
-                // this.mobilepayment = '';
-                // this.mobilepaymenttxt = '';
-                // this.relBorrower = '';
-                // this.relBorrowertxt = '';
-                // this.checkWork = '';
-                // this.checkWorktxt = '';
-                // this.maritalStatus = '';
-                // this.maritalStatustxt = '';
-                // this.checkAddr = '';
-                // this.checkAddrtxt = '';
-                // this.checkEstate = '';
-                // this.checkEstatetxt = '';
-                // this.otherIncome = '';
-                // this.otherIncometxt = '';
-                // this.conclusion = '';
+                 this.source = '';
+                 this.answer = '';
+                 this.sourceDesc = '';
+                 this.checkStage = '';
+                 this.thirdResult = '';
+                 this.threeQueries = '';
+                 this.threeQueriestxt = '';
+                 this.issameFam = '';
+                 this.issameFamtxt = '';
+                 this.wetherThirdAbnormal = '';
+                 this.wetherThirdAbnormaltxt = '';
+                 this.mobilepayment = '';
+                 this.mobilepaymenttxt = '';
+                 this.relBorrower = '';
+                 this.relBorrowertxt = '';
+                 this.checkWork = '';
+                 this.checkWorktxt = '';
+                 this.maritalStatus = '';
+                 this.maritalStatustxt = '';
+                 this.checkAddr = '';
+                 this.checkAddrtxt = '';
+                 this.checkEstate = '';
+                 this.checkEstatetxt = '';
+                 this.otherIncome = '';
+                 this.otherIncometxt = '';
+                 this.conclusion = '';
 
 
                 // 提交数据成功,广播事件 重新刷新列表

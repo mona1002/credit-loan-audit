@@ -260,17 +260,17 @@ export default {
                 this.phoneId = res.data.id;
 
                 // 清数据
-                // this.source = '';
-                // this.answer = '';
-                // this.checkStage = '';
-                // this.sourceDesc = '';
-                // this.answerIdentity = '';
-                // this.answertxt = '';
-                // this.checkJob = '';
-                // this.checkJobtxt = '';
-                // this.mobilepayment = '';
-                // this.mobilepaymenttxt = '';
-                // this.conclusion = '';
+                 this.source = '';
+                 this.answer = '';
+                 this.checkStage = '';
+                 this.sourceDesc = '';
+                 this.answerIdentity = '';
+                 this.answertxt = '';
+                 this.checkJob = '';
+                 this.checkJobtxt = '';
+                 this.mobilepayment = '';
+                 this.mobilepaymenttxt = '';
+                 this.conclusion = '';
 
                 // 提交数据成功,广播事件 重新刷新列表
                 this.$emit('updateList');
