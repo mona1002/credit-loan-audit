@@ -1839,7 +1839,7 @@ export default {
             this.ploanAmt2 = '';
             return;
           }
-          if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0) {
+          if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.loanRateYr && this.repayWay && this.synthesisRateM) {
             this.calculateByAuditInfo();
           }
         } else {
@@ -1968,7 +1968,7 @@ export default {
       //console.log(this.ploanTerm);
       // 计算 审批记录数据
 
-      if (this.judgeFlag == '01' && this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0) {
+      if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.loanRateYr && this.repayWay && this.synthesisRateM) {
         //console.log('初审', this.judgeFlag)
         this.calculateByAuditInfo();
       }
@@ -1987,9 +1987,15 @@ export default {
     // 产品 id
     proId: function() {
       //console.log('产品id');
-      if (this.judgeFlag == '01' && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.verIncome.length > 0 && this.eachTermamt.length > 0)
+      if (this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.verIncome.length > 0 && this.eachTermamt.length > 0 && this.loanRateYr && this.repayWay && this.synthesisRateM)
         this.calculateByAuditInfo();
-    }
+    },
+    /*ploanAmt:function(){
+      if (this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.verIncome.length > 0 && this.eachTermamt.length > 0 && this.loanRateYr && this.repayWay && this.synthesisRateM)
+        console.log(this.ploanAmt)
+      console.log(this.ploanAmt.length)
+        this.calculateByAuditInfo();
+    }*/
   }
 }
 
@@ -2009,69 +2015,6 @@ export default {
   overflow: hidden;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 三列 */
 
 .creditApproval-class .item-column3 {
@@ -2089,69 +2032,6 @@ export default {
   padding: 0;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 按钮集合控件 */
 
 .creditApproval-class .btn-div {
@@ -2159,70 +2039,6 @@ export default {
   width: 80%;
   float: left;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 信审审批 - btn*/
 
 .creditApproval-class .credit-btn {
@@ -2231,70 +2047,6 @@ export default {
   color: #333;
   border: none;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 弹窗背景 */
 
 .creditApproval-class .cover-view {
@@ -2319,69 +2071,6 @@ export default {
     text-align: center;*/
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 两列 */
 
 .creditApproval-class .item-column2 {
@@ -2389,69 +2078,6 @@ export default {
   float: left;
   margin: 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* 回退 拒绝 放弃 表单*/
 
@@ -2465,81 +2091,6 @@ export default {
   overflow: hidden;
   padding-bottom: 10px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* form-title */
 
