@@ -1054,9 +1054,9 @@ export default {
           // auditType: '00',
           this.proCode = res.data.proCode;
           this.verIncome2 = res.data.verIncome; // 月核实收入
-          this.verIncome = Number(res.data.verIncome).toLocaleString();
+          this.verIncome = Number(res.data.verIncome).toLocaleString()+'.00';
           this.ploanAmt2 = res.data.ploanAmt; // 批准金额 
-          this.ploanAmt = Number(res.data.ploanAmt).toLocaleString();
+          this.ploanAmt = Number(res.data.ploanAmt).toLocaleString()+'.00';
           this.caculData.ploanTerm = res.data.ploanTerm; //批准期限
           this.ploanTerm = res.data.ploanTerm;
           this.caculData.appmult = res.data.appmult; // 审批倍数
@@ -1249,7 +1249,7 @@ export default {
 
           // 校验必填项
           // 假如没有  核实可接受最高每期还款额 , 提示
-          //console.log(this.fbalance2);
+          console.log(this.fbalance2);
           if (!this.fbalance2) {
             this.$message({
               message: "提示：请完善信审表中可承受的月还款金额",
@@ -1424,6 +1424,8 @@ export default {
         //console.log('==========================================')
         ploanAmt2 = Number(this.ploanAmt)
       }
+      //alert('kkk');
+      //return;
       this.post('/creauditOpinion/add', {
         // this.post("http://10.1.26.47:8080/riskManagement/creauditOpinion/add", {
         applyId: this.applyId,
@@ -1709,7 +1711,8 @@ export default {
     },
     // 批准期限更改
     ploanTermChange: function(val) {
-      //console.log('批准期限更改!');
+      console.log(val);
+      console.log(val.appDuration);
       // 批准期限
       this.ploanTerm = val.appDuration;
       // 综合费率
@@ -1753,12 +1756,16 @@ export default {
       // 有数据
       if (val) {
         if (flag == 'verIncome') {
+          //console.log(this.verIncome);
           if (/,/.test(val)) {
+            //console.log(val);
             if (/\./.test(val)) { // 有小数
+              //console.log(val);
               this.verIncome2 = Number(val.split('.')[0].replace(/,/g, '')) +
                 Number('0.' + val.split('.')[1]);
               // 页面值
               this.verIncome = Number(val.split('.')[0].replace(/,/g, '')).toLocaleString() + '.' + val.split('.')[1];
+              //console.log(this.verIncome2 +'kkkk'+this.verIncome);
             } else {
               this.verIncome2 = Number(val.replace(/,/g, ''));
               this.verIncome = Number(val).toLocaleString() + '.00';
