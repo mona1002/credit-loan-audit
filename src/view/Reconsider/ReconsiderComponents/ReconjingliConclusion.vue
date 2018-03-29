@@ -907,7 +907,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 		            		 console.log(this.verIncome);
 		            		}else if( this.verIncome){
 		            			this.verIncome =this.formatNumber(this.verIncome,2,0);
-		            			if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0) {
+		            			if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.repayWay && this.synthesisRateM && this.loanRateYr) {
 					            this.calculateByAuditInfo();
 					          };
 		            		}
@@ -916,10 +916,10 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 		            	if(!this.ploanAmt){
 		            		this.ploanAmt = this.formatNumber('0',2,0);
 		            	}else if(this.ploanAmt){
-		            		console.log(this.ploanAmt*1);
-		            		console.log(typeof(this.ploanAmt*1));
-		            		console.log("$$$$$"+this.maxAmounnt);
-		            		console.log(typeof(this.maxAmounnt));
+		            		//console.log(this.ploanAmt*1);
+		            		//console.log(typeof(this.ploanAmt*1));
+		            		//console.log("$$$$$"+this.maxAmounnt);
+		            		//console.log(typeof(this.maxAmounnt));
 		            		 // 大于最大
 					        if (this.ploanAmt*1 > this.maxAmounnt) {
 					          // this.ploanAmtError = true;
@@ -954,7 +954,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 					          return;
 					        };
 					        this.ploanAmt =this.formatNumber(this.ploanAmt,2,0);
-					        if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0) {
+					        if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.repayWay && this.synthesisRateM && this.loanRateYr) {
 					            this.calculateByAuditInfo();
 					          };
 				        }
