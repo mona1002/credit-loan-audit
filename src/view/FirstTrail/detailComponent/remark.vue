@@ -172,6 +172,7 @@
 		        applyId:'',
 		        userInf:'',
 		        remarker:'',
+		        remarkType:'',
 		        //添加的弹层
 		        dialogVisible: false,
 		        //是否有数据的弹层
@@ -194,9 +195,11 @@
 			if (this.judgeFlag.flag == '01') {
 			    this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));// 初审
 				this.applyId=this.taskInWaitting.applyId; 
+				this.remarkType='03'; 
 			} else if (this.judgeFlag.flag == '02') {
 				this.taskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));// 终审
 				this.applyId=this.taskInWaitting.applyId;
+				this.remarkType='04';
 			  }
 			//获取当前登陆人的用户名
 			this.userInf=JSON.parse(localStorage.getItem('userInf'));
@@ -256,7 +259,7 @@
 				this.dialogVisible = false;
 				this.post('/applyRemark/addApplyRemark',{
 					applyId:this.applyId,
-					remarkType:'03',
+					remarkType:this.remarkType,
 					remark:this.remark,
 					remarker:this.remarker
 				})

@@ -460,14 +460,19 @@ export default {
 
     // 查询经营产品
     getProductForUser(orgId){
-      this.post(constant.baseUrl_user +'remote/product/getProductForUser',{
+      /*this.post(constant.baseUrl_user +'remote/product/getProductForUser',{
         data:{
           orgId: this.userInf.orgId,
           validFlag: '1'
         }
       }).then(res => {
         this.proNames = res.data;
-      })
+      })*/
+      this.post("/credit/productAll").then(res => {
+        if(res.statusCode == 200){
+            this.proNames = res.data;
+          }
+        });
     },
 
     // 根据任务角色 code 查询 Name

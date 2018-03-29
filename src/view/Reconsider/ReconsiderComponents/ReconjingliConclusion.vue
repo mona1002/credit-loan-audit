@@ -735,17 +735,11 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 				        }).then(res => {
 				        	console.log(res.data);
 				        	if(res.statusCode == 200){
-				        		// 核实收入
-				        		if(res.data.verIncome){
-				        			this.verIncome = this.formatNumber(res.data.verIncome,2,0);
+				        		//批准期限[月]
+				        		if(res.data.ploanTerm){
+				        			this.ploanTerm = res.data.ploanTerm;
 				        		}else{
-				        			this.verIncome = this.verIncome;
-				        		};
-				        		// 批准金额
-				        		if(res.data.ploanAmt){
-				        			this.ploanAmt = this.formatNumber(res.data.ploanAmt,2,0);
-				        		}else{
-				        			this.ploanAmt = this.ploanAmt;
+				        			this.ploanTerm = this.ploanTerm;
 				        		};
 				        		// 批准产品
 				        		if(res.data.proId){
@@ -766,13 +760,20 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 				        		}else{
 				        			this.proName = this.proName;
 				        		};
-				        		//批准期限[月]
-				        		if(res.data.ploanTerm){
-				        			this.ploanTerm = res.data.ploanTerm;
+
+				        		// 核实收入
+				        		if(res.data.verIncome){
+				        			this.verIncome = this.formatNumber(res.data.verIncome,2,0);
 				        		}else{
-				        			this.ploanTerm = this.ploanTerm;
+				        			this.verIncome = this.verIncome;
 				        		};
-				        		
+				        		// 批准金额
+				        		if(res.data.ploanAmt){
+				        			this.ploanAmt = this.formatNumber(res.data.ploanAmt,2,0);
+				        		}else{
+				        			this.ploanAmt = this.ploanAmt;
+				        		};
+
 						        //审批结论数据
 						        //审批倍数
 						        if(res.data.appmult){
@@ -1332,11 +1333,10 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 		      console.log('批准期限');
 		      //console.log(this.verIncome+'###'+this.proId.length+'###'+this.ploanTerm+"###"+this.ploanAmt);
 		      // 计算 审批记录数据
-		      if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0){
+		      if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.repayWay && this.synthesisRateM && this.loanRateYr){
 		      	console.log(1111);
 		      	this.calculateByAuditInfo();
 		      }
-		        
 		    },
 		    // 产品 id
 		    proId: function() {
@@ -1344,7 +1344,7 @@ import baseurl from '../../../util/ConstantSocialAndPn';
 		      console.log(this.proId.length);
 		      console.log(this.verIncome+'###'+this.proId.length+'###'+this.ploanTerm+"###"+this.ploanAmt);
 		      //月核实收入+产品id+批准期限+批准金额[元]
-		      if (this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.verIncome.length > 0)
+		      if (this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.verIncome.length > 0 && this.repayWay && this.synthesisRateM && this.loanRateYr)
 		        this.calculateByAuditInfo();
 		    },
 		}
