@@ -46,8 +46,8 @@
                     <img src="../../../static/images/shuaxin.png" class="moreCIcon">
                   </span>
                 </template>
-                <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-                <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+                <div>  </div>
+                <div>   </div>
               </el-collapse-item>
             </el-collapse>
           </div>
@@ -62,8 +62,8 @@
                     <img src="../../../static/images/shuaxin.png" class="moreCIcon">
                   </span>
                 </template>
-                <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-                <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+                <div>    </div>
+                <div>   </div>
               </el-collapse-item>
             </el-collapse>
           </div>
@@ -143,8 +143,8 @@
         this.workbenchPass.processTemplateId = val.processTemplateId;
         this.workbenchPass.taskNodeName = val.taskNodeName;
         // 列表 存储  taskNodeName
-        localStorage.setItem('taskNodeName',val.taskNodeName);
-        if (val.taskNodeName == "creditApp_firstTrial") {       // 初审
+        localStorage.setItem('taskNodeName', val.taskNodeName);
+        if (val.taskNodeName == "creditApp_firstTrial") { // 初审
           this.judge.flag = "01";
           localStorage.setItem("workbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识
@@ -157,39 +157,39 @@
           // })
         } else if (val.taskNodeName == "creditApp_finalTrial_one" || val.taskNodeName == "creditApp_finalTrial_two" ||
           val.taskNodeName == "creditApp_finalTrial_three" || val.taskNodeName == "creditApp_finalTrial_four" || val.taskNodeName ==
-          "creditApp_finalTrial_five") {                    // 终审
+          "creditApp_finalTrial_five") { // 终审
           this.judge.flag = "02";
-          localStorage.setItem("FinalWorkbenchPass", JSON.stringify(this.workbenchPass)); 
-          localStorage.setItem("judge", JSON.stringify(this.judge));         
+          localStorage.setItem("FinalWorkbenchPass", JSON.stringify(this.workbenchPass));
+          localStorage.setItem("judge", JSON.stringify(this.judge));
           this.$router.push({
             path: '/FtaskInWaitting',
           });
         } else if (val.taskNodeName == "antiFraudApp_commissioner") { //反欺诈专员 
           this.judge.flag = "03";
-          localStorage.setItem("AntiWorkbenchPass", JSON.stringify(this.workbenchPass)); 
-          localStorage.setItem("judge", JSON.stringify(this.judge));  
+          localStorage.setItem("AntiWorkbenchPass", JSON.stringify(this.workbenchPass));
+          localStorage.setItem("judge", JSON.stringify(this.judge));
           this.$router.push({
             path: '/AntiFraud34',
           });
         } else if (val.taskNodeName == "antiFraudApp_manager") { // 反欺诈主管 
           this.judge.flag = "04";
-          localStorage.setItem("AntiManagerWorkbenchPass", JSON.stringify(this.workbenchPass)); 
-          localStorage.setItem("judge", JSON.stringify(this.judge));         
+          localStorage.setItem("AntiManagerWorkbenchPass", JSON.stringify(this.workbenchPass));
+          localStorage.setItem("judge", JSON.stringify(this.judge));
           this.$router.push({
             path: '/AntiFraud34',
           });
         } else if (val.taskNodeName == "reconsiderApp_commissioner") { // 复议专员 
           this.judge.flag = "05";
-          localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass)); 
-          localStorage.setItem("judge", JSON.stringify(this.judge));         
+          localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass));
+          localStorage.setItem("judge", JSON.stringify(this.judge));
           this.$router.push({
             path: '/reconsiderList',
           });
         } else if (val.taskNodeName == "reconsiderApp_manager") { // 复议经理
           this.judge.flag = "06";
-          localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass));           
+          localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass));
           // localStorage.setItem("ReManagerWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
-          localStorage.setItem("judge", JSON.stringify(this.judge));         
+          localStorage.setItem("judge", JSON.stringify(this.judge));
           this.$router.push({
             path: '/reconsiderList',
           });
@@ -213,7 +213,7 @@
     mounted() {
       // 统一登录平台  调试   start 
       // this.get("http://testplatform.nuoyuan.com.cn/remote/user/getUserInfo").then(response => {
-      this.get( UserURL+'remote/user/getUserInfo').then(response => {
+      this.get(UserURL + 'remote/user/getUserInfo').then(response => {
         this.userInf = {
           userCode: response.data.userCode,
           orgCode: response.data.orgCode,
@@ -246,21 +246,8 @@
     -o-transition: All 0.4s ease-in-out;
   }
 
-  .moreC {
-    float: right;
-    margin-right: 35px;
-  }
-
   .border_top_bottom {
     border-top: 1px solid gray;
-  }
-
-  .main .main_left {
-    height: 100%;
-    width: 148px;
-    background: white;
-    text-align: center;
-    padding-top: 10px;
   }
 
   /* 大框  */
@@ -268,6 +255,7 @@
   .workbench {
     background: #ededed;
     width: 100%;
+    /* height: calc( 100% - 40px); */
     height: 100%;
   }
 
@@ -276,12 +264,10 @@
   }
 
   .workbench .main {
-    height: calc( 100% - 70px);
+    height: calc( 100% - 110px);
     overflow: hidden;
     background: #ededed;
   }
-
-  /* main */
 
   .main .main_left,
   .main .main_right {
@@ -295,6 +281,7 @@
     width: 148px;
     background: white;
     text-align: center;
+    padding-top: 10px;
   }
 
   .main .main_left h2 {
@@ -307,6 +294,7 @@
   .main .main_right {
     width: calc( 100% - 148px);
     background: white;
+    height:100%;
   }
 
   /* 代办任务 */
@@ -315,7 +303,9 @@
   .main_right .main_right_work {
     float: left;
     width: 50%;
-    height: 100vh;
+    /* height: 100vh; */
+    /* height: calc( 100% - 40px); */
+    height:100%;
     padding: 19px 20px 0 20px;
     /* background: black; */
     background: #ededed;
@@ -323,11 +313,6 @@
 
   .main_right .main_right_work {
     padding-left: 0;
-  }
-
-  .waitting {
-    /* height:800px; */
-    background: red;
   }
 
   .moreC {
@@ -351,76 +336,8 @@
   .moreCIcon {
     margin-top: 6px;
   }
-
-  .border_top_bottom {
-    border-top: 1px solid gray;
-  }
-
-  /* 大框  */
-
-  .workbench {
-    background: #ededed;
-    width: 100%;
-    height: 100%;
-  }
-
-  .workbench .top {
-    height: 70px;
-  }
-
-  .workbench .main {
-    height: calc( 100% - 70px);
-    overflow: hidden;
-    background: #ededed;
-  }
-
-  /* main */
-
-  .main .main_left,
-  .main .main_right {
-    float: left;
-  }
-
-  /* 左边-常用 */
-
-  .main .main_left {
-    height: 100%;
-    width: 148px;
-    background: white;
-    text-align: center;
-  }
-
-  .main .main_left h2 {
-    font-size: 16.5px;
-    margin-top: 3px;
-  }
-
-  /* 右边-折叠面板 */
-
-  .main .main_right {
-    width: calc( 100% - 148px);
-    background: white;
-  }
-
-  /* 代办任务 */
-
-  .main_right .main_right_task,
-  .main_right .main_right_work {
-    float: left;
-    width: 50%;
-    height: 100vh;
-    padding: 19px 20px 0 20px;
-    /* background: black; */
-    background: #ededed;
-  }
-
-  .main_right .main_right_work {
-    padding-left: 0;
-  }
-
-  .waitting {
-    /* height:800px; */
-    background: red;
-  }
-
+.workbench_right_top,
+.workbench_right_bottom{
+    height: 50%;
+}
 </style>

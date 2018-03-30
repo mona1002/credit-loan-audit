@@ -59,9 +59,9 @@
           </el-table-column>
           <el-table-column prop="applyCustName" label="客户名称">
           </el-table-column>
-          <el-table-column prop="address" label="证件类型">
+          <el-table-column prop="certType" label="证件类型">
           </el-table-column>
-          <el-table-column prop="address" label="证件号码">
+          <el-table-column prop="certCode" label="证件号码">
           </el-table-column>
           <el-table-column prop="mainreaName" label="欺诈类型主原因" width="120">
           </el-table-column>
