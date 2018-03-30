@@ -34,9 +34,9 @@
               </ul>
             </div>
           </div>
-          <!-- 右侧 tab 内容 -->
+          <!-- 右侧 tab 内容  AntiFirstAud-->
           <div class="tab2_Content">
-            <AnitAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AnitAudioVisual>
+            <AnitAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" ></AnitAudioVisual>
             <!-- √ -->
             <cremark v-if=" this.tabContent2==1"></cremark>
             <!-- √ -->
