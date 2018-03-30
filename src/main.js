@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import "babel-polyfill"
-// import store from './store/store'
+import store from './store/store'
 import qs from 'qs'
 import http from '@/util/http' 
 import validation from '@/util/validation' 
@@ -20,7 +20,7 @@ Vue.use(http)
 new Vue({
   el: '#app',
   router,
-//   store,
+  store,
   template: '<App/>',
   components: { App }
 })
