@@ -23,7 +23,7 @@
         </el-table-column>
         <el-table-column prop="certCode" label="身份证号" min-width="180">
         </el-table-column>
-        <el-table-column prop="matchApplyCustComName" label="进件单位" min-width="180">
+        <el-table-column prop="matchApplyWorkName" label="进件单位" min-width="180">
         </el-table-column>
         <el-table-column prop="matchApplyStateTxt" label="业务状态" min-width="100">
         </el-table-column>
@@ -56,7 +56,7 @@
         </el-table-column>
         <el-table-column prop="certCode" label="身份证号" min-width="180">
         </el-table-column>
-        <el-table-column prop="matchApplyCustComName" label="进件单位" min-width="180">
+        <el-table-column prop="matchApplyWorkName" label="进件单位" min-width="180">
         </el-table-column>
         <el-table-column prop="matchApplyStateTxt" label="业务状态" min-width="100">
         </el-table-column>
@@ -87,7 +87,7 @@
         </el-table-column>
         <el-table-column prop="certCode" label="身份证号" min-width="180">
         </el-table-column>
-        <el-table-column prop="matchApplyCustComName" label="进件单位" min-width="180">
+        <el-table-column prop="matchApplyWorkName" label="进件单位" min-width="180">
         </el-table-column>
         <el-table-column prop="matchApplyStateTxt" label="业务状态" min-width="100">
         </el-table-column>
