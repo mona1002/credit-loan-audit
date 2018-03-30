@@ -12,7 +12,7 @@
         <span> 业务员入职时间：{{customInf.salPerEmployDate}}</span>
         <span>{{customInf.adminIntroduce}}</span>
       </p>
-      <div class="SplitScreen_wrap">
+      <div class="SplitScreen_wrap" id="rWrap" ref="rWrap">
         <!-- 左侧分屏部分 -->
         <div class="left" ref="rLeft">
           <div ref="Left_title" class="Left_ul" @mouseenter="showList" @mouseleave="hid">
@@ -33,8 +33,8 @@
                 <img src="../../../static/images/icon-02.png">
               </span>
             </p>
-            <div class="Left_right_BigImg ">
-              <AudioVisualLeft msg="spLone" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn' ></AudioVisualLeft>
+            <div class="Left_right_BigImg">
+              <AudioVisualLeft msg="spLone" ref="AULeft" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn' :AUpreWidth.sync='preWidth'></AudioVisualLeft>
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
               <InternalMatch v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
               <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
@@ -46,6 +46,8 @@
             </div>
           </div>
         </div>
+        <!-- 中间 -->
+        <div class="SP_middle" ref="RM" id="RM" v-show="midShow" @mousedown="abcd"></div>
         <!-- 右侧分屏部分 -->
         <div class="right" ref="rRight">
           <img src="../../../static/images/backcopy.png" class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen">
@@ -170,8 +172,11 @@
           label: '内匹客户姓名'
         }],
         isFull: false,
-         comBtn:true,
-        alertComBtn:false,
+        comBtn: true,
+        alertComBtn: false,
+        midShow: true,
+        preWidth:null,
+        
       }
     },
     methods: {
@@ -185,7 +190,7 @@
         this.CompareAlert = true;
       },
       closeCompareBtn() {
-        this.CompareAlert = false;
+        this.CompareAlert = false; 
       },
       leftMovingBtn() {
         if (parseFloat(this.$refs.right_tab_ul.style.left) >= 0) {
@@ -211,20 +216,27 @@
       },
       FullScreen() {
         this.showHalfBtn = true;
-        this.originLeft = this.$refs.right_tab_ul.style.left;
+        // this.originLeft = this.$refs.right_tab_ul.style.left;
         this.$refs.right_tab_ul.style.left = "0";
         this.$refs.rLeft.style.display = "none";
         this.$refs.rRight.style.width = "100%";
         this.watchData = this.$refs.rRight.style.width;
         this.isFull = true;
+        this.midShow = false;
       },
       DblScreen() {
         this.showHalfBtn = false;
-        this.$refs.right_tab_ul.style.left = this.originLeft;
+        // this.$refs.right_tab_ul.style.left = this.originLeft;
+        // this.$refs.right_tab_ul.style.left = this.originLeft;
         this.$refs.rLeft.style.display = "block";
         this.$refs.rRight.style.width = "50%";
+        this.$refs.rLeft.style.width = "calc(50% - 2px)";
+        console.log(this.$refs.rRight.style.width)
+        console.log(this.$refs.rLeft.style.width)
+        this.$refs.RM.style.left = "calc(50% - 2px)";
         this.watchData = this.$refs.rRight.style.width;
         this.isFull = false;
+        this.midShow = true;
       },
       tab1(ev, ind, val) {
         this.title = val;
@@ -252,9 +264,156 @@
         if (ind != 0 && ind != 8) {
           this.flag1[ind] = false;
         }
-      }
+      },
+      // MyMove() {
+      //   var clickX, leftOffset, inx, nextW2, nextW;
+      //   var dragging = false;
+      //   var doc = document;
+      //   var labBtn = $("#RM");
+      //   var wrapWidth = $("#rWrap").width();
+      //   var Pre=this.$refs.rLeft;
+      //   var Nex=this.$refs.rRight;
+      //   labBtn.bind('mousedown', function () {
+      //     dragging = true;
+      //     leftOffset = $("#rWrap").offset().left;
+      //   });
+      //   doc.onmousemove = function (e) {
+      //     if (dragging) {
+      //       clickX = e.pageX;
+      //         if (clickX > leftOffset+10) {
+      //           labBtn.eq(0).css('left', clickX - leftOffset+2 + 'px'); //按钮移动
+      //           labBtn.eq(0).prev().width(clickX - leftOffset + 'px'); //前一个div宽度变化
+      //           nextW2 = clickX - leftOffset;
+      //           labBtn.eq(0).next().width(wrapWidth - nextW2-6 + 'px');//减多少宽地待算
+      //         } else {
+      //           labBtn.eq(0).css('left', '0px');
+      //            labBtn.eq(0).prev().width('0px');
+      //            labBtn.eq(0).next().width(wrapWidth-6 + 'px');//减多少宽地待算
+      //         }
+      //         // console.log(clickX+"========="+wrapWidth)
+      //         if (clickX > (wrapWidth)) {
+      //           labBtn.eq(0).css('left', parseFloat(wrapWidth) - 11 + 'px');
+      //           labBtn.eq(0).prev().width(wrapWidth-13 + 'px');
+      //           labBtn.eq(0).next().width('0px');
+      //         }
+      //     }
+      //   };
+      //   $(doc).mouseup(function (e) {
+      //     dragging = false;
+      //     e.cancelBubble = true;
+      //   })
+
+      // },
+      abcd(){
+        console.log('abcd触发')
+// this.$refs.AULeft.$emit('childc');
+// this.$refs.AULeft.childc();
+
+
+
+      },
+      MyMove() {
+        console.log("移动")
+        var clickX, leftOffset, inx, nextW2, nextW;
+        var recordMoving;
+        var dragging = false;
+        var doc = document;
+        var labBtn = $("#RM");
+        var wrapWidth = $("#rWrap").width();
+        // var Pre = this.$refs.rLeft;
+        // var Nex = this.$refs.rRight;
+
+        labBtn.bind('mousedown', ()=> {
+          dragging = true;
+          leftOffset = $("#rWrap").offset().left;
+          // doc.onmousemove = function (e) {
+          doc.onmousemove =  (e)=> {
+            // console.log(e)
+          if (dragging) {
+            clickX = e.pageX;
+            console.log(clickX+"========="+leftOffset)
+            
+            if (clickX > leftOffset + 10 &&clickX < (wrapWidth-5)) {
+              nextW2 = clickX - leftOffset;
+              
+              labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px'); //按钮移动
+              labBtn.eq(0).prev().width(clickX - leftOffset + 'px'); //前一个div宽度变化
+            // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
+              labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px'); //减多少宽地待算
+
+              // console.log(this.AUpreWidth)
+             
+              console.log(111)
+              
+            } else if(clickX < leftOffset + 10 &&clickX < (wrapWidth-5)) {
+              labBtn.eq(0).css('left', '0px');
+              labBtn.eq(0).prev().width('0px');
+              labBtn.eq(0).next().width(wrapWidth - 6 + 'px'); //减多少宽地待算
+            // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
+              console.log(222)
+            
+              
+            }
+            console.log(clickX+"------------------"+wrapWidth)
+            if (clickX > (wrapWidth-5)) {
+              console.log(333)
+              labBtn.eq(0).css('left', parseFloat(wrapWidth) - 11 + 'px');
+              labBtn.eq(0).prev().width(wrapWidth - 11 + 'px');
+              labBtn.eq(0).next().width('0px');
+            // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
+              //  console.log(this.preWidth)
+            }
+              // recordMoving=labBtn.eq(0).prev().width();            
+        //  this.preWidth =recordMoving
+// this.$refs.AULeft.MyMove();
+
+            // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+            // console.log( recordMoving)
+          
+          }
+        };
+        
+     
+        });
+           $(doc).mouseup((e)=> {
+            // console.log( this.preWidth)
+        //  this.preWidth =recordMoving
+          dragging = false;
+          e.cancelBubble = true;
+        });
+        // doc.onmousemove = function (e) {
+        //   if (dragging) {
+        //     clickX = e.pageX;
+        //     if (clickX > leftOffset + 10) {
+        //       labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px'); //按钮移动
+        //       labBtn.eq(0).prev().width(clickX - leftOffset + 'px'); //前一个div宽度变化
+        //       nextW2 = clickX - leftOffset;
+        //       labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px'); //减多少宽地待算
+        //     } else {
+        //       labBtn.eq(0).css('left', '0px');
+        //       labBtn.eq(0).prev().width('0px');
+        //       labBtn.eq(0).next().width(wrapWidth - 6 + 'px'); //减多少宽地待算
+        //     }
+        //     // console.log(clickX+"========="+wrapWidth)
+        //     if (clickX > (wrapWidth)) {
+        //       labBtn.eq(0).css('left', parseFloat(wrapWidth) - 11 + 'px');
+        //       labBtn.eq(0).prev().width(wrapWidth - 13 + 'px');
+        //       labBtn.eq(0).next().width('0px');
+        //     }
+        //   }
+        // };
+        // $(doc).mouseup(function (e) {
+        //   dragging = false;
+        //   e.cancelBubble = true;
+        // });
+
+      },
     },
     mounted() {
+      // console.log(this.$refs.rWrap.offsetLeft);
+      // console.log(this.$refs.rWrap.width);      
+      // console.log($("#rWrap").offset().left);
+      // this.MyMove();
       this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.applyId,
@@ -262,6 +421,7 @@
         if (res.statusCode == 200) {
           this.custName = res.data.accepCusBasicInfo.custName;
           this.customInf = res.data;
+          console.log(this.customInf )
         } else {
           this.$message.error(res.msg);
         }
@@ -281,7 +441,7 @@
       creditInvestigation,
       CreditApproval,
       cCreditForm,
-      cremarkDetail, 
+      cremarkDetail,
       cborrowerInformationDetail,
       capplicationInformationDetail,
       processTrajectory,
@@ -353,7 +513,7 @@
 
   .SplitScreen_content {
     border: 1px solid #0077ff;
-    height: calc(100% - 70px);
+    height: calc(100% - 100px);
     overflow: auto;
     padding: 13px 9px;
   }
@@ -394,6 +554,7 @@
     width: 100%;
     height: calc( 100% - 33px);
     min-width: 1306px;
+    position: relative;
   }
 
   .left,
@@ -443,13 +604,13 @@
     cursor: pointer;
   }
 
-  /* 左侧详情 div   流 */
+  /* 左侧详情 div  */
 
   .Left_detail_div {
     height: 100%;
   }
 
-  /* 左侧详情 p标签   流-css */
+  /* 左侧详情 p标签  */
 
   .Left_right_Title,
   .right .Right_tab_title_div,
@@ -470,7 +631,7 @@
     padding-right: 40px;
   }
 
-  /* 左侧详情 content div 内容   流-css */
+  /* 左侧详情 content div 内容  */
 
   .Left_right_BigImg {
     background: white;
@@ -478,9 +639,7 @@
     overflow: auto;
   }
 
-  /* 右屏 */
-
-  /* 右侧tab切换头外的ul   流 */
+  /* 右侧tab切换头外的ul  */
 
   .Right_tab_ul_wrap {
     overflow: hidden;
@@ -505,7 +664,6 @@
   }
 
   .tab2_Content {
-    /*background: purple;*/
     height: calc( 100% - 48px);
     overflow: auto;
   }
@@ -543,4 +701,5 @@
     height: calc( 100% - 48px);
     overflow: auto;
   }
+
 </style>

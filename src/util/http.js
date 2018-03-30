@@ -46,7 +46,6 @@ export default {
           }, err => {        
             reject(err);      
           })
-            
         })
       }
 

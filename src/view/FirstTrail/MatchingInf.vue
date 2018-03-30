@@ -353,7 +353,7 @@
 
   .SplitScreen_content {
     border: 1px solid #0077ff;
-    height: calc(100% - 70px);
+    height: calc(100% - 100px);
     overflow: auto;
     padding: 13px 9px;
   }
