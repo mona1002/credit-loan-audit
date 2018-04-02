@@ -1481,6 +1481,7 @@ height: 100%;
 
  .mheader .el-menu--horizontal {
    border-bottom: none;
+   /* top: 0 !important; */
  }
 /* 如果没有子集，只有一级导航的情况下 */
  .mheader .el-menu--horizontal .el-menu-item{
@@ -1537,6 +1538,7 @@ height: 100%;
  .mheader .el-menu .el-menu {
    background: rgba(31, 45, 61, .6);
    margin-top: 5px;
+  /*  padding:0 0 !important; */
  }
  /* 解决 测试环境二级无背景 */
 
@@ -1692,6 +1694,74 @@ height: 100%;
    min-width: 0 !important;
    border-radius: 0;
  }
+
+ /* 生产导航样式修改 */
+
+ /* body .el-menu--horizontal{
+   top: 60px !important;
+ }
+ 
+ body .el-menu--horizontal .el-menu--popup{
+   padding: 5px 20px !important;
+   background: rgba(31, 45, 61, .6);
+   margin-top: 5px;
+   min-width: 142px;
+ }
+ 
+ body .el-menu--horizontal .el-menu .el-menu-item{
+   background-color: transparent;
+   color: #bfcbd9;
+ }
+ 
+ body .el-menu--horizontal .el-menu .el-menu-item:hover{
+   background-color: transparent;
+   color: #fff;
+   border-bottom: none;
+ }
+ 
+ 二级三角样式设置
+ 
+ body .el-menu--horizontal .el-menu .el-submenu .el-submenu__icon-arrow {
+   display: block;
+   width: 0;
+   height: 0;
+   border-top: 5px solid transparent;
+   border-left: 5px solid #bfcbd9;
+   border-bottom: 5px solid transparent;
+   margin-top: -4px;
+   margin-right: -9px;
+   -webkit-transform: rotateZ(0deg);
+   transform: rotateZ(0deg);
+ }
+ 
+ body .el-menu--horizontal .el-menu .el-submenu .el-submenu__icon-arrow {
+   position: absolute;
+ }
+ 二级三角before样式设置
+ 
+ body .el-menu--horizontal .el-menu .el-submenu .el-submenu__icon-arrow:before {
+   display: none;
+ }
+ 
+ 三级
+ body .el-menu--horizontal .el-menu--popup .el-submenu .el-menu--horizontal .el-menu--popup{
+   padding: 5px 0px !important;
+   background: rgba(31, 45, 61, .6);
+   margin-top: 5px;
+ }
+ 
+ body .el-menu--horizontal .el-menu .el-menu-item{
+   background-color: transparent;
+   color: #bfcbd9;
+ }
+ 
+ body .el-menu--horizontal .el-menu .el-menu-item:hover{
+   background-color: transparent;
+   color: #fff;
+   border-bottom: none;
+ }
+  */
+
 
  /*流程轨迹查询 表格 */
 
