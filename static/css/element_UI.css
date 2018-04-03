@@ -304,6 +304,12 @@ height: 40px;
   font-size: 13px;
 }
 
+.borrowerInformation .el-input__inner {
+  font-weight: 400;
+  color: #909399;
+  font-size: 13px;
+}
+
 .borrowerInformation .el-table__body-wrapper .el-table__body td{
   color: #909399;
   font-size: 13px;
