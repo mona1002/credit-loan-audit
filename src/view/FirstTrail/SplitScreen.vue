@@ -34,7 +34,7 @@
               </span>
             </p>
             <div class="Left_right_BigImg">
-              <AudioVisualLeft msg="spLone" ref="AULeft" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn' :AUpreWidth.sync='preWidth'></AudioVisualLeft>
+              <AudioVisualLeft msg="spLone" ref="AULeft" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn' :AUpreWidth.sync='preWidth' :AUobj='AULobj'></AudioVisualLeft>
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
               <InternalMatch v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
               <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
@@ -71,7 +71,7 @@
           </div>
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
-            <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
+            <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :AURpreWidth.sync='RpreWidth'></AudioVisual>
             <remark v-if=" this.tabContent2==1"></remark>
             <InternalMatch v-if=" this.tabContent2==2" :SplitS="SplitRight" :isFull.sync="isFull"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
@@ -176,12 +176,22 @@
         alertComBtn: false,
         midShow: true,
         preWidth:null,
+        RpreWidth:null,
+        AULobj:{
+          BTN:'#MID',
+          WRAP:'#AUL',
+          CLIENTX:'AUclickX',
+          OFFSET:'AUleftOffset',
+          VA:'bbr',
+          NUM:10
+        },
         
       }
     },
     methods: {
       compareProps() {
         this.$refs.audioChild.personalNunPerson()
+        // comJs.MyMove('#MID', '#AUL', this.AUpreWidth, 'AUclickX', 'AUleftOffset', 'bbr', 10);
       },
       inputInner(a, b) {
         this.AlertSearch = a + " " + b;
@@ -302,15 +312,9 @@
       //     dragging = false;
       //     e.cancelBubble = true;
       //   })
-
       // },
       abcd(){
         console.log('abcd触发')
-// this.$refs.AULeft.$emit('childc');
-// this.$refs.AULeft.childc();
-
-
-
       },
       MyMove() {
         console.log("移动")
@@ -322,7 +326,6 @@
         var wrapWidth = $("#rWrap").width();
         // var Pre = this.$refs.rLeft;
         // var Nex = this.$refs.rRight;
-
         labBtn.bind('mousedown', ()=> {
           dragging = true;
           leftOffset = $("#rWrap").offset().left;
@@ -332,27 +335,20 @@
           if (dragging) {
             clickX = e.pageX;
             console.log(clickX+"========="+leftOffset)
-            
             if (clickX > leftOffset + 10 &&clickX < (wrapWidth-5)) {
               nextW2 = clickX - leftOffset;
-              
               labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px'); //按钮移动
               labBtn.eq(0).prev().width(clickX - leftOffset + 'px'); //前一个div宽度变化
             // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
               labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px'); //减多少宽地待算
-
               // console.log(this.AUpreWidth)
-             
               console.log(111)
-              
             } else if(clickX < leftOffset + 10 &&clickX < (wrapWidth-5)) {
               labBtn.eq(0).css('left', '0px');
               labBtn.eq(0).prev().width('0px');
               labBtn.eq(0).next().width(wrapWidth - 6 + 'px'); //减多少宽地待算
             // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
               console.log(222)
-            
-              
             }
             console.log(clickX+"------------------"+wrapWidth)
             if (clickX > (wrapWidth-5)) {
@@ -369,11 +365,8 @@
 
             // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
             // console.log( recordMoving)
-          
           }
         };
-        
-     
         });
            $(doc).mouseup((e)=> {
             // console.log( this.preWidth)
@@ -406,9 +399,11 @@
         //   dragging = false;
         //   e.cancelBubble = true;
         // });
-
       },
     },
+//     created(){
+// this.$route.name='第二条'
+//     },
     mounted() {
       // console.log(this.$refs.rWrap.offsetLeft);
       // console.log(this.$refs.rWrap.width);      
@@ -690,7 +685,7 @@
     position: absolute;
     top: 117px;
     width: calc( 100% - 18px);
-    height: calc( 100% - 130px);
+    height: calc( 100% - 161px);
     z-index: 22;
     min-width: 1306px;
   }

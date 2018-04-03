@@ -2,12 +2,11 @@
 .Abody .el-button {
   border-radius: 8px;
   padding: 9px 22px;
+  color:#409EFF;
+  border:1px solid #409EFF;
 }
-
-.Abody .el-button el-button--primary {
-  border-radius: 8px;
-  padding: 9px 22px;
-  font-size: 16px;
+.Abody .el-button--primary{
+  color:white;;
 }
 /* .Abody el-select-dropdown__item{
 float:none;
@@ -2371,4 +2370,12 @@ body .el-submenu .el-menu-item{
 
 .taskWatting.doTheTask .el-table__body-wrapper .el-table__body td:nth-of-type(9) {
   text-align: center;
+}
+
+
+
+
+.el-button.is-plain:focus, .el-button.is-plain:hover{
+  color: white;
+
 }
