@@ -394,7 +394,7 @@ export default {
     // 取出  申请信息   applicationInformationDetail
     this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
     console.log(1111111111111111111111111)
-    console.log(this.applicationInformationDetail);
+    //console.log(this.applicationInformationDetail);
     this.custName = this.applicationInformationDetail.custName;
     this.certCode = this.applicationInformationDetail.certCode;
     this.Social();
@@ -458,6 +458,7 @@ export default {
 
       // 流程实例id
       this.processInstanceId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).processInstanceId;
+      console.log(this.processInstanceId);
       // 任务状态
       this.taskStatus = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskStatus;
 
