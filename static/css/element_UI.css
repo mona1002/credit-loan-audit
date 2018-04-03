@@ -1782,13 +1782,14 @@ height: 40px;
 /* 生产导航样式修改 */
 
 body .el-menu--horizontal{
-  top: 65px !important;
+  /* top: 65px !important; */
   border-bottom: none !important;
+  background: rgba(31, 45, 61, .6);
 }
 
 body .el-menu--horizontal .el-menu--popup{
   /* padding: 5px 20px !important; */
-  background: rgba(31, 45, 61, .6);
+  background:transparent;
   margin-top: 5px;
   /* min-width: 142px; */
   min-width: 148px;
@@ -1842,14 +1843,13 @@ body .el-menu--horizontal .el-menu .el-submenu .el-submenu__icon-arrow:before {
 
 /* 三级 */
 body .el-menu--horizontal .el-menu--popup .el-submenu .el-menu--horizontal{
-  top:0px !important;
+  /* top:5px !important; */
   /* left: 137px !important; */
-  left: 143px !important;
+  left: 148px !important;
 }
 
 body .el-menu--horizontal .el-menu--popup .el-submenu .el-menu--horizontal .el-menu--popup{
   padding: 5px 0px !important;
-  background: rgba(31, 45, 61, .6);
   margin-top: 5px;
 }
 
