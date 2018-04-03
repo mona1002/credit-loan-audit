@@ -7,7 +7,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">基本信息 </span>
         </template>
-        <div class="baseInf">
+        <div class="baseInf baseTop">
           <ul>
             <li>
               <p>
@@ -162,13 +162,21 @@
     margin: 10px 0;
   }
 
-  .baseInf li p,
   .AntiInf li:nth-of-type(1) p,
   .AntiInf li:nth-of-type(3) p {
     width: 33.3%;
     float: left;
     margin: 10px 0;
   }
+
+  .baseTop li{
+    width: 33.3%;
+    float: left;
+  } 
+
+  .baseTop li p{
+    margin: 10px 0;
+  } 
 
   .aAntiApplyInf label {
     width: 145px;
