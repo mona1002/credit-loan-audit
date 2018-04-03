@@ -304,6 +304,12 @@ height: 40px;
   font-size: 13px;
 }
 
+.borrowerInformation .el-input__inner {
+  font-weight: 400;
+  color: #909399;
+  font-size: 13px;
+}
+
 .borrowerInformation .el-table__body-wrapper .el-table__body td{
   color: #909399;
   font-size: 13px;
@@ -2412,6 +2418,17 @@ body .el-submenu .el-menu-item{
 
 .ReconsiderationConclusion .shenpiBody .bodyP2 .el-textarea.is-disabled .el-textarea__inner {
   background-color: #fff;
+}
+
+.ReconsiderationConclusion .el-table th .cell{
+  font-weight: 800;
+  color: #909399;
+  font-size: 13px;
+}
+
+.ReconsiderationConclusion .el-table__body-wrapper .el-table__body td{
+  color: #909399;
+  font-size: 13px;
 }
 
 .ReconsiderationConclusio .shenpiliucheng .el-table td,
