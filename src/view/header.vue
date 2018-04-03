@@ -14,9 +14,9 @@
       <!-- 具体菜单内容 -->
       <div class="navContain"  ref="contains" style="left:0px;">
         <!-- <div class="contain"> -->
-          <nobr class="aaaaaa">
+          <nobr>
             <el-menu router unique-opened mode="horizontal" ref="navbar" active-text-color="#ffd04b" :default-active="onRoutes" @select="selectMenu">
-              <el-menu-item is="nav-item" v-for="(item, n) in datas" :item="item" :navIndex="String(n)" :key="n" id="dddfff">
+              <el-menu-item is="nav-item" v-for="(item, n) in datas" :item="item" :navIndex="String(n)" :key="n">
                 <!-- <nav-item v-for="(item, n) in datas" :item="item" :navIndex="String(n)" :key="n" id="dddfff">
                 </nav-item> -->
               </el-menu-item>
