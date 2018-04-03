@@ -682,7 +682,11 @@ export default {
 }
 
 .anti-fraud .el-pagination .el-input__inner {
-  width: 50px;
+  width: 100px;
+}
+
+.anti-fraud .el-pagination .is-in-pagination .el-input__inner {
+  width: 46px;
 }
 
 .anti-fraud .el-pagination button,
