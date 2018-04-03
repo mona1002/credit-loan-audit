@@ -9,8 +9,9 @@
           <el-input v-model="rules" placeholder="请输入规则编号"></el-input>
         </p>
         <p class="btn_wrap">
-          <el-button class="btn" style="marginLeft:20px" type="primary" @click="Rsearch">查询</el-button>
-          <el-button class="btn" @click="Rreset">重置</el-button>
+          <el-button class="btn"  style="marginLeft:20px" type="primary"  @click="Rreset">重置</el-button>
+          <el-button class="btn" type="primary" @click="Rsearch">查询</el-button>
+          
         </p>
       </div>
       <div class="title">

@@ -519,7 +519,7 @@
     position: absolute;
     top: 117px;
     width: calc( 100% - 18px);
-    height: calc( 100% - 130px);
+    height: calc( 100% - 161px);
     z-index: 22;
     min-width: 1306px;
   }

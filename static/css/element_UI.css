@@ -2,12 +2,11 @@
 .Abody .el-button {
   border-radius: 8px;
   padding: 9px 22px;
+  color:#409EFF;
+  border:1px solid #409EFF;
 }
-
-.Abody .el-button el-button--primary {
-  border-radius: 8px;
-  padding: 9px 22px;
-  font-size: 16px;
+.Abody .el-button--primary{
+  color:white;;
 }
 /* .Abody el-select-dropdown__item{
 float:none;
@@ -2525,10 +2524,14 @@ body .el-submenu .el-menu-item{
   text-align: center;
 }
 
-
+.el-button.is-plain:focus, .el-button.is-plain:hover{
+  color: white;
+}
 /* 内部匹配表格字体字号修改 */
 .internalMatch-class .el-table th .cell{
   font-weight: 800;
+  color: #909399;
+  font-size: 13px;
 }
 
 .internalMatch-class .el-table__body-wrapper .el-table__body td{
