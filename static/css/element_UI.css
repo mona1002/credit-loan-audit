@@ -2415,6 +2415,17 @@ body .el-submenu .el-menu-item{
   background-color: #fff;
 }
 
+.ReconsiderationConclusion .el-table th .cell{
+  font-weight: 800;
+  color: #909399;
+  font-size: 13px;
+}
+
+.ReconsiderationConclusion .el-table__body-wrapper .el-table__body td{
+  color: #909399;
+  font-size: 13px;
+}
+
 .ReconsiderationConclusio .shenpiliucheng .el-table td,
 .el-table th {
   padding: 6px 0;
