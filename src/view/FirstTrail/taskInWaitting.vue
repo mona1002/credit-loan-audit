@@ -2,7 +2,6 @@
 	<div class="taskWatting">
 		<myHead class="top"></myHead>
 		<div class="taskWattingContain">
-			
 		  	<div class="taskWinput">
 		      <el-row class="row row1"  type="flex">
 		        <el-col :span="8" :offset="0">
@@ -17,8 +16,8 @@
 		      </el-row>
 		      <el-row class="row row1"  type="flex">
 			       <el-col :span="22">  
+			         <el-button class="btn reset" type="primary" @click="reset">重置</el-button>
 			         <el-button class="btn query" type="primary" @click="search">查询</el-button>
-			         <el-button class="btn reset" @click="reset">重置</el-button>
 			       </el-col>
 		      </el-row>
 		    </div>
@@ -292,10 +291,10 @@
 	  float: right;
 	}
 	.taskWinput .query {
-	  margin-left: 20px;
+	  margin-left: 214px;
 	}
 	.taskWinput .reset {
-	  margin-left: 214px;
+	  margin-left: 20px;
 	}
 	/* 信审任务列表*/
 	.taskWatting .taskWhead{

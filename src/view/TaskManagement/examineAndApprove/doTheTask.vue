@@ -62,8 +62,8 @@
 					    </el-date-picker>
 			        </el-col>
 			        <el-col :span="16">  
+			              <el-button class="btn reset" type="primary" @click="reset">重置</el-button>								
 			              <el-button class="btn query" type="primary" @click="search">查询</el-button>
-			              <el-button class="btn reset" @click="reset">重置</el-button>
 			        </el-col>
 		      </el-row>
 		    </div>
@@ -442,11 +442,11 @@
 	  float: right;
 	}
 	.taskWinput .query {
-	  margin-left: 20px;
-	  margin-right: calc( 50% - 394px );
+	  margin-left: 214px;
 	}
 	.taskWinput .reset {
-	  margin-left: 214px;
+		 margin-left: 20px;
+	  margin-right: calc( 50% - 394px );
 	}
 	/* 信审任务列表*/
 	.taskWatting .taskWhead{

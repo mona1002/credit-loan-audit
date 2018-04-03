@@ -60,10 +60,10 @@
           <span class="keywordText">当前处理人员</span><el-input @keyup.enter.native="getByKey" v-model.trim="operatorCode" placeholder="请输入当前处理人员"></el-input>
         </el-col>
         <el-col :span="8" v-if="routerState!=='03'">
-          <el-button class="btn reset" @click="reset">重置</el-button><el-button class="btn query" type="primary" @click="getByKey">查询</el-button>
+          <el-button class="btn query" type="primary" @click="getByKey">查询</el-button><el-button  type="primary" class="btn reset" @click="reset">重置</el-button>
         </el-col>
         <el-col :span="8" :offset="8" v-else>
-          <el-button class="btn reset" @click="reset">重置</el-button><el-button class="btn query" type="primary" @click="getByKey">查询</el-button>
+         <el-button class="btn query" type="primary" @click="getByKey">查询</el-button> <el-button  type="primary" class="btn reset" @click="reset">重置</el-button>
         </el-col>
       </el-row>
     </div>
@@ -798,10 +798,10 @@ export default {
   padding: 0;
 }
 .processMoni .query {
-  margin-left: 20px;
+  margin-left: 214px;
 }
 .processMoni .reset {
-  margin-left: 214px;
+  margin-left: 20px;  
 }
 
 .processMoni .listContainer {

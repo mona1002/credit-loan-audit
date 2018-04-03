@@ -52,8 +52,8 @@
             <p>
             </p>
             <p class="btn_wrap">
-              <el-button class="btn" style="marginLeft:228px" @click="Rreset">重置</el-button>
-              <el-button class="btn" type="primary" @click="Rsearch">查询</el-button>
+              <el-button class="btn" type="primary" style="marginLeft:228px"  @click="Rsearch">查询</el-button>
+              <el-button class="btn"  type="primary"  @click="Rreset">重置</el-button>
             </p>
           </li>
         </ul>

@@ -150,7 +150,7 @@
               </li>
               <li class="item-column1 submit-class-list">
                 <el-button type="primary" @click="request">查询</el-button>
-                <el-button @click="resetQuery">重置</el-button>
+                <el-button type="primary" @click="resetQuery">重置</el-button>
               </li>
             </div>
             <el-table :data="tableData.recordList" height="250" border style="width: 100%" highlight-current-row center @row-click="itemClick">
