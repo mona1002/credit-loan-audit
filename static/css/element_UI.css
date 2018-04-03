@@ -1607,7 +1607,7 @@ height: 40px;
 /* 二级 */
 
 .mheader .el-menu .el-menu {
-  background: rgba(31, 45, 61, .6);
+  margin-left: 0;
   margin-top: 5px;
 }
 /* 解决 测试环境二级无背景 */
@@ -1663,11 +1663,6 @@ height: 40px;
   /* background: rgba(31, 45, 61, .6); */
   border-bottom: none;
   width: 100%;
-}
-
-.mheader .el-menu--horizontal .el-submenu .el-menu-item {
-  /* background-color: transparent; 
-  background: rgba(31, 45, 61, .6);*/
 }
 
 .mheader .el-menu .el-menu .el-menu-item:hover {
@@ -1750,10 +1745,12 @@ height: 40px;
   
  /* 新改的样式 */
  .mheader .el-menu--horizontal .el-menu--horizontal {
-  top: 60px !important;
-  left: -4px !important;
+  /* top: 60px !important;
+  left: -4px !important; */
   padding: 5px 0;
   min-width: 100% !important;
+  top: 70px !important;
+  left: 0px !important;
 }
 
 .mheader .el-menu--horizontal .el-menu--horizontal .el-menu{
