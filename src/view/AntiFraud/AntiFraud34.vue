@@ -35,7 +35,7 @@
         </li>
         <li class="item-column1 submit-class">
           <el-button type="primary" @click="resetQueryList">查询</el-button>
-          <el-button @click="resetQuery">重置</el-button>
+          <el-button type="primary" @click="resetQuery">重置</el-button>
         </li>
       </div>
       <!-- </el-collapse-item> -->

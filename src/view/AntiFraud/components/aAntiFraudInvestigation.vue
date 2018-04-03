@@ -686,7 +686,9 @@
 		width: 100%;
 	}
 	.table th {
-		color: #1f2d3d;
+		/* color: #1f2d3d; */
+		color: #909399;
+		font-weight: 800;
 		height: 48px;
 		line-height: 48px;
 		border:1px solid #e6ebf5;

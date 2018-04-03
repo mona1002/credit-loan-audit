@@ -33,11 +33,33 @@ height: 40px;
   text-align: center;
 } */
 
+.ApprovalConclusion .el-table th .cell{
+  font-weight: 800;
+  color: #909399;
+  font-size: 13px;
+}
+
+.ApprovalConclusion .el-table__body-wrapper .el-table__body td{
+  color: #909399;
+  font-size: 13px;
+}
+
 .FinanceInformation .el-table,
 .ApprovalConclusion .el-table {
   font-size: 13px;
 }
 /* 表格的x 滚动条 ...+反欺诈审批结论轨迹 */
+
+.aAntiConclusionPath .el-table th .cell{
+  font-weight: 800;
+  color: #909399;
+  font-size: 13px;
+}
+
+.aAntiConclusionPath .el-table__body-wrapper .el-table__body td{
+  color: #909399;
+  font-size: 13px;
+}
 
 .FinanceInformation .el-table__body-wrapper,
 .ApprovalConclusion .el-table__body-wrapper,
@@ -101,11 +123,17 @@ height: 40px;
   font-size: 14px;
 }
 
+.applicationInformationDetail .el-table th .cell{
+  font-weight: 800;
+  color: #909399;
+  font-size: 13px;
+}
+
 .applicationInformationDetail .el-table__body-wrapper .el-table__body td {
   /* text-align: center; */
   font-weight: 400;
-  color: #666666;
-  font-size: 14px;
+  color: #909399;
+  font-size: 13px;
 }
 /* 房产信息 邮政编码、产权比例 居中 */
 
@@ -268,6 +296,17 @@ height: 40px;
   font-weight: 400;
   color: #1f2d3d;
   font-size: 14px;
+}
+
+.borrowerInformation .el-table th .cell{
+  font-weight: 800;
+  color: #909399;
+  font-size: 13px;
+}
+
+.borrowerInformation .el-table__body-wrapper .el-table__body td{
+  color: #909399;
+  font-size: 13px;
 }
 
 .borrowerInformation .el-table__body-wrapper .el-table__body td {
@@ -1112,9 +1151,39 @@ height: 40px;
 }
 /* 反欺诈-案件编号列表页+反欺诈规则设定 */
 
+/* 发欺诈任务列表表头加粗 */
+.AntiCaseNum .el-table th .cell{
+  font-weight: 800;
+}
+
+.AntiCaseNum .el-table__body-wrapper .el-table__body td{
+  color: #909399;
+  font-size: 13px;
+}
+/* 复议任务列表表头加粗 */
+.HistoryTask .el-table th .cell{
+  font-weight: 800;
+}
+
+.HistoryTask .el-table__body-wrapper .el-table__body td{
+  color: #909399;
+  font-size: 13px;
+}
+
 .AntiCaseNum .cell:hover,
 .HistoryTask .cell:hover {
   cursor: default;
+}
+
+.AntiRules .el-table th .cell{
+  font-weight: 800;
+  color: #909399;
+  font-size: 13px;
+}
+
+.AntiRules .el-table__body-wrapper .el-table__body td{
+  color: #909399;
+  font-size: 13px;
 }
 
 .AntiRules .el-input,
@@ -1218,6 +1287,17 @@ height: 40px;
   font-size: 14px;
 }
 
+.borrowerInformationSetail .el-table th .cell{
+  font-weight: 800;
+  color: #909399;
+  font-size: 13px;
+}
+
+.borrowerInformationSetail .el-table__body-wrapper .el-table__body td{
+  color: #909399;
+  font-size: 13px;
+}
+
 .borrowerInformationSetail .el-table__body-wrapper .el-table__body td {
   /* text-align: center; */
   font-weight: 400;
@@ -1271,6 +1351,11 @@ height: 40px;
   background-color: #fff;
 }
 /* 备注信息表格内容居中 */
+.remark .el-table th .cell{
+  font-weight: 800;
+  color: #909399;
+  font-size: 13px;
+}
 
 .remark .el-table__body-wrapper {
   overflow: hidden;
@@ -1284,8 +1369,8 @@ height: 40px;
 
 .remark .el-table__body-wrapper .el-table__body td {
   font-weight: 400;
-  color: #666666;
-  font-size: 14px;
+  color: #909399;
+  font-size: 13px;
   padding-left: 10px;
 }
 
@@ -1350,6 +1435,11 @@ height: 40px;
   padding: 0 0;
 }
 /* 备注信息表格内容居中 */
+.remarkDetial .el-table th .cell{
+  font-weight: 800;
+  color: #909399;
+  font-size: 13px;
+}
 
 .remarkDetial .el-table__body-wrapper {
   overflow: hidden;
@@ -1364,8 +1454,8 @@ height: 40px;
 .remarkDetial .el-table__body-wrapper .el-table__body td {
   /* text-align: center; */
   font-weight: 400;
-  color: #666666;
-  font-size: 14px;
+  color: #909399;
+  font-size: 13px;
   padding-left: 10px;
 }
 
@@ -1417,16 +1507,20 @@ height: 40px;
 
 .taskWatting .el-table th {
   /* padding-left: 10px; */
-  font-weight: 400;
-  color: #1f2d3d;
-  font-size: 14px;
+  font-weight: 800;
+  color: #909399;
+  font-size: 13px;
+}
+
+.taskWatting .el-table th .cell{
+  font-weight: 800;
 }
 
 .taskWatting .el-table__body-wrapper .el-table__body td {
   /* padding-left: 10px; */
   font-weight: 400;
-  color: #666666;
-  font-size: 14px;
+  color: #909399;
+  font-size: 13px;
 }
 
 .taskWatting .el-table th:nth-of-type(1) {
@@ -1872,6 +1966,17 @@ body .el-submenu .el-menu-item{
   }
 }
 
+.processTrajectory .el-table th .cell{
+  font-weight: 800;
+  color: #909399;
+  font-size: 13px;
+}
+
+.processTrajectory .el-table__body-wrapper .el-table__body td{
+  color: #909399;
+  font-size: 13px;
+} 
+
 .processTrajectory .el-collapse-item__header {
   background: #eef0f9;
   border: 1px solid #e6eaee;
@@ -1971,11 +2076,17 @@ body .el-submenu .el-menu-item{
   font-size: 14px;
 }
 
+.phone-credit .el-table th .cell{
+  font-weight: 800;
+  color: #909399;
+  font-size: 13px;
+}
+
 .phone-credit .el-table__body-wrapper .el-table__body td {
   /* text-align: center; */
   font-weight: 400;
-  color: #666666;
-  font-size: 14px;
+  color: #909399;
+  font-size: 13px;
 }
 /* 序号 时间  居中*/
 
@@ -1998,6 +2109,17 @@ body .el-submenu .el-menu-item{
   text-align: left;
 }
 /* 信审审批   */
+.creditApproval-class .el-table th .cell{
+  font-weight: 800;
+  color: #909399;
+  font-size: 13px;
+}
+
+.creditApproval-class .el-table__body-wrapper .el-table__body td{
+  color: #909399;
+  font-size: 13px;
+}
+
 /* 金额右*/
 
 .creditApproval-class .spjl-div .el-table th:nth-of-type(1),
@@ -2067,6 +2189,17 @@ body .el-submenu .el-menu-item{
   font-weight: 400;
   color: #1f2d3d;
   font-size: 14px;
+}
+
+.aAntiFraudInvestigation .el-table th .cell{
+  font-weight: 800;
+  color: #909399;
+  font-size: 13px;
+}
+
+.aAntiFraudInvestigation .el-table__body-wrapper .el-table__body td{
+  color: #909399;
+  font-size: 13px;
 }
 
 .aAntiFraudInvestigation .el-collapse-item__arrow {
@@ -2187,6 +2320,14 @@ body .el-submenu .el-menu-item{
 }
 /* 反欺诈 */
 /* 反欺诈 申请 列表 */
+.anti-fraud .el-table th .cell{
+  font-weight: 800;
+}
+
+.anti-fraud .el-table__body-wrapper .el-table__body td{
+  color: #909399;
+  font-size: 13px;
+}
 
 .anti-fraud .anti-table .el-table__header-wrapper .el-table__header th:last-child {
   text-align: center;
@@ -2372,10 +2513,29 @@ body .el-submenu .el-menu-item{
   text-align: center;
 }
 
-
-
-
 .el-button.is-plain:focus, .el-button.is-plain:hover{
   color: white;
+}
+/* 内部匹配表格字体字号修改 */
+.internalMatch-class .el-table th .cell{
+  font-weight: 800;
+  color: #909399;
+  font-size: 13px;
+}
 
+.internalMatch-class .el-table__body-wrapper .el-table__body td{
+  color: #909399;
+  font-size: 13px;
+}
+
+/* 反欺诈审批结论 流程轨迹 表格字号，颜色调整 */
+.approval-colun .xllcgj-div .el-table th .cell{
+  font-weight: 800;
+  color: #909399;
+  font-size: 13px;
+}
+
+.approval-colun .xllcgj-div .el-table__body-wrapper .el-table__body td{
+  color: #909399;
+  font-size: 13px;
 }

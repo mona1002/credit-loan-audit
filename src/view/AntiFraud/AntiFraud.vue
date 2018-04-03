@@ -34,8 +34,8 @@
           </div>
         </li>
         <li class="item-column1 submit-class">
-          <el-button type="primary" @click="resetQueryList">查询</el-button>
-          <el-button @click="resetQuery">重置</el-button>
+          <el-button type="primary" @click="resetQuery">重置</el-button>
+           <el-button type="primary" @click="resetQueryList">查询</el-button>
         </li>
       </div>
       <!-- </el-collapse-item> -->
@@ -86,8 +86,8 @@
             <el-button size="mini" @click="handleClickEdit(scope.row)">编辑</el-button>
           </template> -->
             <template slot-scope="scope">
-              <el-button size="mini" @click="handleClickInfo(scope.row)">查看</el-button>
               <el-button size="mini" @click="handleClickEdit(scope.row)">编辑</el-button>
+               <el-button size="mini" type="primary" @click="handleClickInfo(scope.row)">查看</el-button>
             </template>
           </el-table-column>
         </el-table>

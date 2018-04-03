@@ -285,7 +285,7 @@
 				      <el-table-column
 				        prop="carType"
 				        label="车辆类型"
-				        min-width="120">
+				        min-width="140">
 				        <template slot-scope="scope">
 				        	<span class="must">*</span>
 				        	<el-tooltip class="item" effect="dark" :disabled="scope.row.carType!=''" content="该项为必填项" placement="right">

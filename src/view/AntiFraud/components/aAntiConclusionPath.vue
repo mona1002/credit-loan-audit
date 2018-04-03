@@ -1,5 +1,5 @@
 <template>
-  <div date="aAntiConclusionPath">
+  <div class="aAntiConclusionPath">
     <!-- 反欺诈审批结论轨迹-->
     <el-table :data="tableData" style="width: 100%" border>
       <el-table-column prop="auditResultTxt" label="审批结果" min-width="35">
