@@ -2530,9 +2530,27 @@ body .el-submenu .el-menu-item{
   text-align: center;
 }
 
-.el-button.is-plain:focus, .el-button.is-plain:hover{
-  color: white;
+.el-button.is-plain:focus, .el-button.is-plain:hover,
+.el-button--default:hover{
+  border:1px solid #b4d9ff;
+  background: #ecf5ff;
 }
+
+.el-button--default,{
+  color:#409EFF;
+  border:1px solid #409EFF;
+}
+.calbtn{
+  color:#409EFF !important;
+  border:1px solid #409EFF !important;
+}
+.calbtn:hover{
+  border:1px solid #b4d9ff !important;
+  background: #ecf5ff !important;
+}
+.el-button--primary {
+  color:white;
+  }
 /* 内部匹配表格字体字号修改 */
 .internalMatch-class .el-table th .cell{
   font-weight: 800;
