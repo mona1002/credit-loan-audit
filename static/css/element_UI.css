@@ -2536,11 +2536,18 @@ body .el-submenu .el-menu-item{
   background: #ecf5ff;
 }
 
-.el-button--default{
+.el-button--default,{
   color:#409EFF;
   border:1px solid #409EFF;
 }
-
+.calbtn{
+  color:#409EFF !important;
+  border:1px solid #409EFF !important;
+}
+.calbtn:hover{
+  border:1px solid #b4d9ff !important;
+  background: #ecf5ff !important;
+}
 .el-button--primary {
   color:white;
   }
