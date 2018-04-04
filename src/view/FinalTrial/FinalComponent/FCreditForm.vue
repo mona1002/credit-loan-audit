@@ -861,34 +861,8 @@
       }
     },
     methods: {
-      open() {
-        //         const h = this.$createElement;
-        //  this.$msgbox({
-        //     title: '提示',
-        //     message: h('p', null, [
-        //       h('span', null, '确定操作？'),
-        //       // h('i', { style: 'color: teal' }, 'VNode')
-        //     ]),
-        //        showCancelButton: true,
-        //     confirmButtonText: '确定',
-        //     cancelButtonText: '取消',
-        //  }),
-        this.$alert('确定操作？', '标题名称', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          showCancelButton: true,
-          beforeClose: (action, instance, done) => {
-            if (action === 'confirm') {
-              this.CFsave(done());
-            } else {
-              done();
-            }
-          }
-        }).catch(() => {});;
-      },
       makeSureBtn() {
-        // this.Confirm = true;
-        this.open()
+        this.Confirm = true;
       },
       canc() {
         this.Confirm = false;
@@ -896,7 +870,7 @@
       closed() {
         this.Confirm = false;
       },
-      CFsave(don) {
+      CFsave() {
         this.$validator.validateAll().then((result) => {
           if (result) {
             this.post("/creauditInfo/updateOtherfinalByPK", {
@@ -907,7 +881,6 @@
               if (res.statusCode == 200) {
                 this.Confirm = false;
                 this.AreaNPercent();
-                don;
                 this.$message({
                   message: '提交成功!',
                   type: 'success'
@@ -1026,8 +999,7 @@
             this.FormData.applyId = this.getParams.applyId;
             this.AreaNPercent();
             this.formatSC();
-            this.FormData.aaddress ? this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, '') : this.FormData
-              .aaddress;
+             this.FormData.aaddress ? this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, ''):this.FormData.aaddress ;
             this.mountJ(0, res.data.wbeexEcuted);
             this.mountJ(1, res.data.wnetHirecom);
             this.mountJ(2, res.data.wnetEcutedBrea);
@@ -1145,11 +1117,8 @@
     display: inline-block;
     width: 210px;
   }
-
   /* ------------------------------------------------ */
-
   /* 最下面的 弹窗样式 */
-
   /* 上网信息-两行select下拉 居中 */
 
   .hint {
@@ -1205,13 +1174,11 @@
     opacity:0.75; */
     cursor: pointer;
   }
-
   /* 上网查询 */
 
   .InternetInf_right_label {
     width: 210px;
   }
-
   .top {
     margin-top: 20px;
   }
@@ -1232,7 +1199,6 @@
     display: inline-block;
     text-align: right;
   }
-
   /* ------------------------------上网查询 +核实身份--------------------------- */
 
   .CreditForm_InternetInf p,
@@ -1255,13 +1221,12 @@
     width: 33.3%;
     vertical-align: middle;
   }
-
   /* --------------------------工作信息 + 私营企业--------------------- */
 
   .CheckId_right_label
   /* 第三列p */
 
-    {
+  {
     width: 140px;
   }
 
@@ -1270,7 +1235,7 @@
   .CreditForm_FamilyInf p:nth-of-type(even)
   /* 家庭信息 */
 
-    {
+  {
     width: 66.6%;
   }
 
@@ -1283,7 +1248,7 @@
   .CreditForm_FamilyInf p:nth-of-type(even) span
   /* 家庭信息 */
 
-    {
+  {
     width: calc( 100% - 225px);
     height: 60px;
     vertical-align: top;
@@ -1292,7 +1257,6 @@
     padding: 5px 10px;
     border-radius: 4px;
   }
-
   /* 工作信息-单位地址 + 私营企业-企业经营项目 */
 
   .ComAddr {
@@ -1312,13 +1276,11 @@
     white-space: nowrap;
     vertical-align: middle;
   }
-
   /* 第一经销商 */
 
   .Suppliers {
     width: calc( 100% - 205px);
   }
-
   /* 私营企业-第一分销商 --------------------------------label 为 140 px */
 
   .distributor {
@@ -1328,7 +1290,6 @@
     white-space: nowrap;
     vertical-align: middle;
   }
-
   /*-------------------- 核对现住址-------------------------- */
 
   .CreditForm_check_reside li,
