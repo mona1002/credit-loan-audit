@@ -9,6 +9,7 @@ var host = location.hostname,
   testEnv = "testriskmgt.nuoyuan.com.cn", // 测试环境diao
   releaseEnv = "preriskmgt.nuoyuan.com.cn", // 准生产环境
   productionEnv = "riskmgt.nuoyuan.com.cn", // 生产环境
+  press = "ycriskmgt.nuoyuan.com.cn"; // 压测环境
   postfix = '',
   testU = '';
 if (host === productionEnv) {
@@ -20,6 +21,9 @@ if (host === productionEnv) {
 } else if (host === testEnv) {
   host = "10.1.26.6:8080";
   testU = "http://10.1.26.10:8080/basePtopCredit/rm" //本地
+  postfix = '/ptopCredit/rm';
+} else if (host === press) {
+  host = "10.20.20.38:8080";
   postfix = '/ptopCredit/rm';
 } else {
   host = "10.1.26.6:8080";

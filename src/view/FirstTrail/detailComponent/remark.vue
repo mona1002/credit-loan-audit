@@ -71,7 +71,8 @@
 			  title="请输入您要添加的备注信息"
 			  :visible.sync="dialogVisible"
 			  width="638px"
-			  top="35vh">
+			  top="35vh"
+			  >
 			  <div class="addBody">
 			  	<label>备注</label>
 			  	<span v-show="remark.length==600">
