@@ -567,7 +567,7 @@
 		  		<div class="qita">
 				    <ol>
 				    	<li>
-				    		<label>其他:</label>
+				    		<label>其他：</label>
 				    		<el-tooltip class="item" effect="dark" :content="otherInfo.content" :disabled="otherInfo.content==''" placement="top">
 						      <div>{{otherInfo.content}}</div>
 						    </el-tooltip>
