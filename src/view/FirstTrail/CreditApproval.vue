@@ -47,7 +47,7 @@
     <!-- <div class="cover-view" v-show="coverShow"> -->
     <!-- 回退 -->
     <div>
-      <el-dialog :visible.sync="huiTuiShow" width="600px" top="30vh" append-to-body>
+      <el-dialog :visible.sync="huiTuiShow" width="600px" top="30vh">
         <el-form class="back-form huitui-class">
           <!-- v-show="showFlag=='02'" -->
           <div class="form-title" style="position:relative;">
@@ -118,7 +118,7 @@
     </div>
     <!-- 拒绝 -->
     <div>
-      <el-dialog :visible.sync="juJueShow" width="600px" top="30vh" modal-append-to-body>
+      <el-dialog :visible.sync="juJueShow" width="600px" top="30vh">
         <!-- v-show="showFlag=='01'" -->
         <el-form class="back-form jujue-class">
           <!-- v-show="showFlag=='01'" -->
