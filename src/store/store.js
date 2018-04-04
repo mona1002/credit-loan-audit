@@ -61,6 +61,5 @@ let actions = {
 export default new Vuex.Store({
   state,
   mutations,
-  actions,
-  getters
+  actions
 });
