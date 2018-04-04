@@ -17,8 +17,8 @@
 		      </el-row>
 		      <el-row class="row row1"  type="flex">
 			       <el-col :span="22">  
-			         <el-button class="btn query" type="primary" @click="search">查询</el-button>
-			         <el-button class="btn reset" @click="reset">重置</el-button>
+			         <el-button class="btn reset" type="primary" @click="reset">重置</el-button>
+			         <el-button class="btn query " type="primary" @click="search">查询</el-button>
 			       </el-col>
 		      </el-row>
 		    </div>
@@ -154,8 +154,10 @@
 	    },
 		methods:{
 			toinner(){
+					var par=this.$route.fullPath.split('?')[1].split('=')[1];
 				this.queryParam.processTemplateId=JSON.parse(localStorage.getItem('FinalWorkbenchPass')).processTemplateId;
-				this.queryParam.taskNodeName=JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskNodeName;
+				// this.queryParam.taskNodeName=JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskNodeName;
+				this.queryParam.taskNodeName=par||JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskNodeName;
 				this.queryParam.taskStatus=JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskStatus;
 				//this.queryParam.userCode=JSON.parse(localStorage.getItem('userInf')).userCode;
 				//this.queryParam.orgCode=JSON.parse(localStorage.getItem('userInf')).orgCode;
@@ -167,14 +169,14 @@
 				this.request(this.queryParam);
 			},
 		    request(param){
-		    	console.log(this.queryParam);
+		    	// console.log(this.queryParam);
 		    	this.post('/workFlowTaskQuery/getTaskToDoList',
 		    		param
 	          ).then(res => {
 	            if(res.statusCode==200 &&　res.data.taskDetailList!=null){
 	            	this.totals=res.data;
 	            	this.datas=res.data.taskDetailList;
-	            	console.log(this.datas.length)
+	            	// console.log(this.datas.length)
 	            	for(var i=0;i<this.datas.length;i++){
 	            		if(this.datas[i].taskType=='00'){//00
 		            		this.datas[i].taskType="新任务";
@@ -227,7 +229,14 @@
 				console.log(row);
 					// this.$router.push({path:'/SplitScreen',query:row});
 		      this.$router.push({path:'/FSplitScreen'});
-		      localStorage.setItem("FtaskInWaitting",JSON.stringify(row));
+	      	localStorage.setItem("FtaskInWaitting",JSON.stringify(row));
+					 this.$store.dispatch('addVisitedViews', {
+            name:'分屏详情页',
+						path:'/FSplitScreen',
+						flag:'02',
+            params:'',
+            StatefullPath:'/FSplitScreen',
+          })
 		    },
 		    handleSizeChange(val) {
 		      console.log('每页 ${val} 条');
@@ -296,10 +305,10 @@
 	  float: right;
 	}
 	.taskWinput .query {
-	  margin-left: 20px;
+	  margin-left: 214px;
 	}
 	.taskWinput .reset {
-	  margin-left: 214px;
+		margin-left: 20px;		
 	}
 	/* 信审任务列表*/
 	.taskWatting .taskWhead{

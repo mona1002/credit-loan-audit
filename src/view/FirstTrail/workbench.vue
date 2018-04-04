@@ -46,8 +46,12 @@
                     <img src="../../../static/images/shuaxin.png" class="moreCIcon">
                   </span>
                 </template>
-                <div>  </div>
-                <div>   </div>
+                <div>
+                  <!-- <ul>
+                    <li  style="background:red;display:inline-block;height:30px;border:1px solid">dfadsfdafadsf adsf df af aafd</li>
+                  </ul> -->
+                </div>
+                <div> </div>
               </el-collapse-item>
             </el-collapse>
           </div>
@@ -62,8 +66,8 @@
                     <img src="../../../static/images/shuaxin.png" class="moreCIcon">
                   </span>
                 </template>
-                <div>    </div>
-                <div>   </div>
+                <div> </div>
+                <div> </div>
               </el-collapse-item>
             </el-collapse>
           </div>
@@ -129,7 +133,7 @@
         });
       },
       handleCurrentChange(val) {
-        //         creditApp_antiFraud_commissioner 和 creditApp_antiFraud_manager
+        // creditApp_antiFraud_commissioner 和 creditApp_antiFraud_manager
         // 其中第一个是 反欺诈专员审批，第二个是 反欺诈主管审批
         // reconsiderApp_apply  复议申请
         // reconsiderApp_credit_manager 信审经理审批
@@ -138,62 +142,95 @@
         // 这4个是 复议
         // localStorage.setItem("tableData", JSON.stringify(tableData));
         // this.$router.push({path:'/taskInWaitting',query:'123'})
-        //  console.log(111, this.$route.query.picName)   接参数
+        //   this.$route.query.picName   接参数
+         //  this.$router.push({
+          //   path: RoutePath+routeParams,
+          // });
+        // this.$store.commit("ADD_VISITED_VIEWS", {
+        //   name: "初审审批",
+        //   path: '/taskInWaitting',
+        // })
+        //  this.$store.dispatch('addVisitedViews', {
+        //     name:nodeName,
+        //     path:RoutePath,
+        //     flag:'02',
+        //     params:routeParams,
+        //     StatefullPath:RoutePath+routeParams
+        //     // flag: '01'
+        //   })  除工作台待办任务-终审，五个角色，都跳同一页面但打开五个页签显示不同数据（多个页签用相同路由）外，其他path==StatefullPath，都写相同的path路径
+        // 
         this.currentRow = val;
         this.workbenchPass.processTemplateId = val.processTemplateId;
         this.workbenchPass.taskNodeName = val.taskNodeName;
         // 列表 存储  taskNodeName
         localStorage.setItem('taskNodeName', val.taskNodeName);
+        var nodeName, RoutePath, taskNodeName, routeParams, pth, nodeFlag;
+        nodeName = RoutePath = routeParams = '';
         if (val.taskNodeName == "creditApp_firstTrial") { // 初审
-          this.judge.flag = "01";
+          this.judge.flag = nodeFlag = "01";
+          RoutePath = '/taskInWaitting';
+          nodeName = '初审审批';
           localStorage.setItem("workbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识
-          this.$router.push({
-            path: '/taskInWaitting',
-          });
-          // this.$store.commit("ADD_VISITED_VIEWS", {
-          //   name: "初审审批",
-          //   path: '/taskInWaitting'
-          // })
         } else if (val.taskNodeName == "creditApp_finalTrial_one" || val.taskNodeName == "creditApp_finalTrial_two" ||
           val.taskNodeName == "creditApp_finalTrial_three" || val.taskNodeName == "creditApp_finalTrial_four" || val.taskNodeName ==
           "creditApp_finalTrial_five") { // 终审
-          this.judge.flag = "02";
+          this.judge.flag = nodeFlag = "02";
+          RoutePath = '/FtaskInWaitting';
           localStorage.setItem("FinalWorkbenchPass", JSON.stringify(this.workbenchPass));
           localStorage.setItem("judge", JSON.stringify(this.judge));
-          this.$router.push({
-            path: '/FtaskInWaitting',
-          });
+          if (val.taskNodeName == "creditApp_finalTrial_one") {
+            nodeName = '终审一级审批';
+          }
+          if (val.taskNodeName == "creditApp_finalTrial_two") {
+            nodeName = '终审二级审批'
+          }
+          if (val.taskNodeName == "creditApp_finalTrial_three") {
+            nodeName = '信审经理审批';
+          }
+          if (val.taskNodeName == "creditApp_finalTrial_four") {
+            nodeName = '信审高级经理审批'
+          }
+          if (val.taskNodeName == "creditApp_finalTrial_five") {
+            nodeName = '信审总监审批审批'
+          }
+          routeParams = '?taskNodeName=' + val.taskNodeName
         } else if (val.taskNodeName == "antiFraudApp_commissioner") { //反欺诈专员 
-          this.judge.flag = "03";
+          this.judge.flag = nodeFlag = "03";
+          RoutePath = '/taskInWaitting';
+          nodeName = '反欺诈专员审批';
           localStorage.setItem("AntiWorkbenchPass", JSON.stringify(this.workbenchPass));
           localStorage.setItem("judge", JSON.stringify(this.judge));
-          this.$router.push({
-            path: '/AntiFraud34',
-          });
         } else if (val.taskNodeName == "antiFraudApp_manager") { // 反欺诈主管 
-          this.judge.flag = "04";
+          this.judge.flag = nodeFlag = "04";
+          RoutePath = '/taskInWaitting';
+          nodeName = ' 反欺诈主管审批';
           localStorage.setItem("AntiManagerWorkbenchPass", JSON.stringify(this.workbenchPass));
           localStorage.setItem("judge", JSON.stringify(this.judge));
-          this.$router.push({
-            path: '/AntiFraud34',
-          });
         } else if (val.taskNodeName == "reconsiderApp_commissioner") { // 复议专员 
-          this.judge.flag = "05";
+          this.judge.flag = nodeFlag = "05";
+          RoutePath = '/taskInWaitting';
+          nodeName = '复议专员审批';
           localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass));
           localStorage.setItem("judge", JSON.stringify(this.judge));
-          this.$router.push({
-            path: '/reconsiderList',
-          });
         } else if (val.taskNodeName == "reconsiderApp_manager") { // 复议经理
-          this.judge.flag = "06";
+          this.judge.flag = nodeFlag = "06";
+          nodeName = '复议经理审批';
+          RoutePath = '/reconsiderList'
           localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass));
           // localStorage.setItem("ReManagerWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge));
-          this.$router.push({
-            path: '/reconsiderList',
-          });
         }
+        this.$router.push({
+          path: RoutePath + routeParams,
+        });
+        this.$store.dispatch('addVisitedViews', {
+          name: nodeName,
+          path: RoutePath,
+          flag: nodeFlag,
+          params: routeParams,
+          StatefullPath: RoutePath + routeParams
+        })
       },
     },
     computed: {
@@ -211,6 +248,8 @@
       }
     },
     mounted() {
+      console.log(window.location)
+
       // 统一登录平台  调试   start 
       // this.get("http://testplatform.nuoyuan.com.cn/remote/user/getUserInfo").then(response => {
       this.get(UserURL + 'remote/user/getUserInfo').then(response => {
@@ -294,7 +333,7 @@
   .main .main_right {
     width: calc( 100% - 148px);
     background: white;
-    height:100%;
+    height: 100%;
   }
 
   /* 代办任务 */
@@ -305,7 +344,7 @@
     width: 50%;
     /* height: 100vh; */
     /* height: calc( 100% - 40px); */
-    height:100%;
+    height: 100%;
     padding: 19px 20px 0 20px;
     /* background: black; */
     background: #ededed;
@@ -336,8 +375,10 @@
   .moreCIcon {
     margin-top: 6px;
   }
-.workbench_right_top,
-.workbench_right_bottom{
+
+  .workbench_right_top,
+  .workbench_right_bottom {
     height: 50%;
-}
+  }
+
 </style>
