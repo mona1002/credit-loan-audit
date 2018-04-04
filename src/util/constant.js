@@ -7,10 +7,7 @@ var host = location.hostname,
 
   port = 80,
   developmentEnv = "testriskmgt.nuoyuan.com.cn", // 开发环境
-  // developmentEnv = "codeplatform.nuoyuan.com.cn", // 开发环境-用户
-  // developmentEnv = "10.1.26.50", // 刘礼飞本地环境
   testEnv = "testriskmgt.nuoyuan.com.cn", // 测试环境
-  // testEnv = "coderiskmgt.nuoyuan.com.cn", // 测试环境
   releaseEnv = "preriskmgt.nuoyuan.com.cn", // 准生产环境
   productionEnv = "riskmgt.nuoyuan.com.cn"; // 生产环境
   press = "ycriskmgt.nuoyuan.com.cn"; // 压测环境
