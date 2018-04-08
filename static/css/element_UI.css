@@ -8,7 +8,7 @@
 .Abody .el-button--primary{
   color:white;;
 }
-.el-dialog__wrapper{
+.Abody .el-dialog__wrapper{
   position: absolute;
   margin-top:15vh;
 }
