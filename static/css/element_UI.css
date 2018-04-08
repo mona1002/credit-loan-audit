@@ -8,6 +8,11 @@
 .Abody .el-button--primary{
   color:white;;
 }
+.el-dialog__wrapper{
+  position: absolute;
+  margin-top:15vh;
+}
+
 /* .Abody el-select-dropdown__item{
 float:none;
 }

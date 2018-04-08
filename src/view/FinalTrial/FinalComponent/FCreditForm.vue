@@ -726,7 +726,17 @@
       <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
     </div>
     <!-- ==============================点击确认时提示弹框=================================== -->
-    <el-dialog title="提示" :visible.sync="Confirm" top="43vh" width="420px">
+    <div class="SureAlert" v-if="Confirm">
+<div class="SureAlert_content">
+  <h3 class="SureAlert_content_title">提示 <i class="el-icon-close SureAlert_content_closeIcon" @click="canc"></i> </h3>
+   <h4 class="SureAlert_content_body">确定操作？</h4>
+      <h4  class="SureAlert_content_footer">
+        <button class="calbtn" @click="canc">取消</button>
+        <button class="subtn" type="primary" @click="CFsave">确定</button>
+      </h4>
+</div>
+    </div>
+    <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
       <span>确定操作？</span>
       <span slot="footer" class="dialog-footer">
         <button class="calbtn" @click="canc">取消</button>
@@ -1182,7 +1192,6 @@
   .top {
     margin-top: 20px;
   }
-
   .CreditForm li {
     color: #475669;
     font-size: 14px;
@@ -1306,5 +1315,15 @@
     margin-bottom: 20px;
     width: 66.6%;
   }
-
+/* .SureAlert{
+background: rgba(127, 127, 127, 0.5);
+position: absolute;
+top:48px;
+left: 0;
+right:0;
+bottom:0;
+} */
+.SureAlert_content{
+  
+}
 </style>
