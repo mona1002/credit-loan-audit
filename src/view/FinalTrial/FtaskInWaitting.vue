@@ -231,7 +231,7 @@
 		      this.$router.push({path:'/FSplitScreen'});
 	      	localStorage.setItem("FtaskInWaitting",JSON.stringify(row));
 					 this.$store.dispatch('addVisitedViews', {
-            name:'分屏详情页',
+            name:'信审详情',
 						path:'/FSplitScreen',
 						flag:'02',
             params:'',

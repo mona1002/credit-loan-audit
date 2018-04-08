@@ -199,24 +199,28 @@
           this.judge.flag = nodeFlag = "03";
           RoutePath = '/AntiFraud34';
           nodeName = '反欺诈专员审批';
+          routeParams = '?taskNodeName=' + val.taskNodeName
           localStorage.setItem("AntiWorkbenchPass", JSON.stringify(this.workbenchPass));
           localStorage.setItem("judge", JSON.stringify(this.judge));
         } else if (val.taskNodeName == "antiFraudApp_manager") { // 反欺诈主管 
           this.judge.flag = nodeFlag = "04";
           RoutePath = '/AntiFraud34';
           nodeName = ' 反欺诈主管审批';
+          routeParams = '?taskNodeName=' + val.taskNodeName
           localStorage.setItem("AntiManagerWorkbenchPass", JSON.stringify(this.workbenchPass));
           localStorage.setItem("judge", JSON.stringify(this.judge));
         } else if (val.taskNodeName == "reconsiderApp_commissioner") { // 复议专员 
           this.judge.flag = nodeFlag = "05";
           RoutePath = '/reconsiderList';
           nodeName = '复议专员审批';
+          routeParams = '?taskNodeName=' + val.taskNodeName          
           localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass));
           localStorage.setItem("judge", JSON.stringify(this.judge));
         } else if (val.taskNodeName == "reconsiderApp_manager") { // 复议经理
           this.judge.flag = nodeFlag = "06";
           nodeName = '复议经理审批';
           RoutePath = '/reconsiderList'
+          routeParams = '?taskNodeName=' + val.taskNodeName
           localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass));
           // localStorage.setItem("ReManagerWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge));

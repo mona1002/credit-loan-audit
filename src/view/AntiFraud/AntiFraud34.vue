@@ -393,6 +393,13 @@
           // 反欺诈  分屏
           this.$router.push('AntiAudit')
         }
+         this.$store.dispatch('addVisitedViews', {
+            name:'反欺诈详情',
+						path:'/AntiAudit',
+						flag:this.antiFlag,
+            params:'',
+            StatefullPath:'/AntiAudit',
+          })
       },
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
