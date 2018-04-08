@@ -47,7 +47,7 @@
     <!-- <div class="cover-view" v-show="coverShow"> -->
     <!-- 回退 -->
     <div>
-      <el-dialog :visible.sync="huiTuiShow" width="600px" top="30vh">
+      <el-dialog :visible.sync="huiTuiShow" :modal="false" width="600px" top="10vh">
         <el-form class="back-form huitui-class">
           <!-- v-show="showFlag=='02'" -->
           <div class="form-title" style="position:relative;">
@@ -118,7 +118,7 @@
     </div>
     <!-- 拒绝 -->
     <div>
-      <el-dialog :visible.sync="juJueShow" width="600px" top="30vh">
+      <el-dialog :visible.sync="juJueShow" :modal="false"  width="600px" top="10vh">
         <!-- v-show="showFlag=='01'" -->
         <el-form class="back-form jujue-class">
           <!-- v-show="showFlag=='01'" -->
@@ -175,7 +175,7 @@
     </div>
     <!-- 放弃 -->
     <div>
-      <el-dialog :visible.sync="fangQiShow" width="600px" top="30vh">
+      <el-dialog :visible.sync="fangQiShow" :modal="false" width="600px" top="10vh">
         <el-form class="back-form fangqi-class">
           <!-- v-show="showFlag=='07'" -->
           <div class="form-title" style="position:relative;">
@@ -230,7 +230,7 @@
     </div>
     <!-- 审批 -->
     <div>
-      <el-dialog :visible.sync="shenPiShow" width="800px" top="0vh" style="margin-top:100px;">
+      <el-dialog :visible.sync="shenPiShow" :modal="false"  width="800px" top="0vh" style="margin-top:100px;">
         <el-form class="back-form appro-form">
           <div class="form-title" style="position:relative;">
             审批信息
