@@ -70,8 +70,9 @@
 			<el-dialog
 			  title="请输入您要添加的备注信息"
 			  :visible.sync="dialogVisible"
+			   :modal="false"
 			  width="638px"
-			  top="35vh"
+			  top="5vh"
 			  >
 			  <div class="addBody">
 			  	<label>备注</label>
@@ -98,8 +99,9 @@
 			<el-dialog
 			  title="请输入您要修改的备注信息"
 			  :visible.sync="chdialogVisible"
+			   :modal="false"
 			  width="638px"
-			  top="35vh">
+			  top="5vh">
 			  <div class="changeBody">
 			  	<label>备注</label>
 			  	<span v-show="changeRemarks.length==600">
@@ -124,8 +126,8 @@
 			<el-dialog
 			  title="提示"
 			  :visible.sync="isdialogVisible"
-			  width="420px"
-			  top="35vh">
+			   :modal="false"
+			  width="420px">
 			  <span>请选择一条记录！</span>
 			  <span slot="footer" class="dialog-footer">
 			    <el-button type="primary" @click="promptSure">确定</el-button>
@@ -136,8 +138,8 @@
 			<el-dialog
 			  title="提示"
 			  :visible.sync="dedialogVisible"
-			  width="420px"
-			  top="35vh">
+			   :modal="false"
+			  width="420px">
 			  <span>您要删除该备注吗？</span>
 			  <span slot="footer" class="dialog-footer">
 			  	<el-button type="primary" @click="deletCancle">取消</el-button>

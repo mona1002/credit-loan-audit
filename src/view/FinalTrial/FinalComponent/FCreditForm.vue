@@ -726,16 +726,6 @@
       <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
     </div>
     <!-- ==============================点击确认时提示弹框=================================== -->
-    <div class="SureAlert" v-if="Confirm">
-<div class="SureAlert_content">
-  <h3 class="SureAlert_content_title">提示 <i class="el-icon-close SureAlert_content_closeIcon" @click="canc"></i> </h3>
-   <h4 class="SureAlert_content_body">确定操作？</h4>
-      <h4  class="SureAlert_content_footer">
-        <button class="calbtn" @click="canc">取消</button>
-        <button class="subtn" type="primary" @click="CFsave">确定</button>
-      </h4>
-</div>
-    </div>
     <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
       <span>确定操作？</span>
       <span slot="footer" class="dialog-footer">

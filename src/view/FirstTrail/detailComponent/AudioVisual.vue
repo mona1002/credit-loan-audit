@@ -201,14 +201,18 @@
         this.showListDiv = false;
         this.$refs.preBtn.style.left = 37 + 'px';
         this.$refs.PbtnIcons.style.right = 'calc( 50% - 97px)';
-        this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
+        // this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
+        this.$refs.AudioVisual_Img_ref.style.left = 0;
+        
         this.defaultBigPicCss();
       },
       showList() {
         this.showListDiv = true;
         this.$refs.preBtn.style.left = 417 + 'px';
         this.$refs.PbtnIcons.style.right = 'calc( 50% - 303px)';
-        this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 412px)";
+        // this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 412px)";
+        this.$refs.AudioVisual_Img_ref.style.left = 412+"px";
+        
         this.defaultBigPicCss();
       },
       SmallpicClose() {
@@ -427,8 +431,7 @@
       // comJs.MyMove('#auMID','#AU',this.AURpreWidth,'AURclickX','AURleftOffset','btvr',0);
       //  comJs.MyMove('#MID','#AUL',this.AUpreWidth,'AUclickX','AUleftOffset','bbr',10);
       // this.odivMove("FirstAud");
-      console.log(comJs.MyMove())
-      comJs.odivMove("FirstAud");
+      // comJs.odivMove("FirstAud");
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '01') {
         this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审

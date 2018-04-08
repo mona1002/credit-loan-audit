@@ -169,7 +169,7 @@
       </el-container>
     </el-container>
     <!-- 更改的 添加电话选项 -->
-    <el-dialog title="添加申请单电话信息" :visible.sync="dialogFormVisible">
+    <el-dialog title="添加申请单电话信息" :visible.sync="dialogFormVisible" :modal="false"  top="0">
       <el-form>
         <span class="require-icon" style="left:20px;line-height:45px;">*</span>
         <el-form-item label="电话类型:" :label-width="addTellFormLabelWidth" prop="addTelType">
@@ -1481,7 +1481,7 @@ export default {
 
 .phone-credit .el-dialog {
   width: 300px;
-  margin-top: 30vh !important;
+  margin-top: 15vh !important;
 }
 
 

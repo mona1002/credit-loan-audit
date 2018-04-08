@@ -281,14 +281,18 @@
         this.showListDiv = false;
         this.$refs.preBtn.style.left = 37 + 'px';
         this.$refs.PbtnIcons.style.left = 'calc( 50% - 97px)';
-        this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
+        // this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
+        this.$refs.AudioVisual_Img_ref.style.left = 0;
+        
         this.defaultBigPicCss();
       },
       showList() {
         this.showListDiv = true;
         this.$refs.preBtn.style.left = 223 + 'px';
         this.$refs.PbtnIcons.style.left = ' calc( 50% + 9px)';
-        this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 214px)";
+        // this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 214px)";
+        this.$refs.AudioVisual_Img_ref.style.left = "214px";
+        
         this.defaultBigPicCss();
       },
       SmallpicClose() {

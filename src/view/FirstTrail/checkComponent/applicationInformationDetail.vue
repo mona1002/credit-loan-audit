@@ -937,8 +937,9 @@
 	    	<el-dialog
 	    			  title='维护日志'
 	    			  :visible.sync="sldialogVisible"
+					   :modal="false"
 	    			  width="860px"
-	    			  top="20vh">
+	    			  top="5vh">
 	    			   <p class="freshen">
 	    				 <!-- <i class="el-icon-refresh"></i> -->
 	    				 <label @click="renovate">

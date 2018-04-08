@@ -1104,8 +1104,8 @@
 			<el-dialog
 			  title="询问"
 			  :visible.sync="dialogVisible"
-			  width="420px"
-			  top="35vh">
+			   :modal="false"
+			  width="420px">
 			  <span>您确定已填写好各项内容并提交？</span>
 			  <span slot="footer" class="dialog-footer">
 			  	<el-button type="primary" @click="Cancle">取消</el-button>
