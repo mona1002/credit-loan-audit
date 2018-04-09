@@ -85,8 +85,8 @@
           </el-table-column>
           <el-table-column label="操作" width="180">
             <template slot-scope="scope">
-              <el-button size="mini" @click="handleClickInfo(scope.row)">查看</el-button>
               <el-button size="mini" v-if="scope.row.fraudStateTxt=='反欺诈拒绝'||scope.row.fraudStateTxt=='反欺诈放弃'" @click="handleClickEdit(scope.row)">编辑</el-button>
+              <el-button size="mini" @click="handleClickInfo(scope.row)">查看</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -97,32 +97,32 @@
           <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">反欺诈审批任务列表 </span>
         </div>
-      <div class="tanb" >
-  <el-table :data="directorTableData.taskDetailList" style="width: 100%"border stripe fit highlight-current-row
-          @row-click="rowDbClick" v-show="antiFlag=='03'||antiFlag=='04'" class="director-table">
-          <el-table-column type="index" :index="1" label="序号">
-          </el-table-column>
-          <el-table-column prop="taskTypeTxt" label="任务类型">
-          </el-table-column>
-          <el-table-column prop="applySubNo" label="进件编号">
-          </el-table-column>
-          <el-table-column prop="appDate" label="申请日期">
-          </el-table-column>
-          <el-table-column prop="custName" label="客户名称">
-          </el-table-column>
-          <el-table-column prop="certType" label="证件类型">
-          </el-table-column>
-          <el-table-column prop="certCode" label="证件号码">
-          </el-table-column>
-          <el-table-column prop="appOrgCode" label="进件机构">
-          </el-table-column>
-          <el-table-column prop="proName" label="产品名称">
-          </el-table-column>
-          <el-table-column prop="activationTime" label="进入本环节时间">
-          </el-table-column>
-        </el-table>
-      </div>
-      
+        <div class="tanb">
+          <el-table :data="directorTableData.taskDetailList" style="width: 100%" border stripe fit highlight-current-row @row-click="rowDbClick"
+            v-show="antiFlag=='03'||antiFlag=='04'" class="director-table">
+            <el-table-column type="index" :index="1" label="序号">
+            </el-table-column>
+            <el-table-column prop="taskTypeTxt" label="任务类型">
+            </el-table-column>
+            <el-table-column prop="applySubNo" label="进件编号">
+            </el-table-column>
+            <el-table-column prop="appDate" label="申请日期">
+            </el-table-column>
+            <el-table-column prop="custName" label="客户名称">
+            </el-table-column>
+            <el-table-column prop="certType" label="证件类型">
+            </el-table-column>
+            <el-table-column prop="certCode" label="证件号码">
+            </el-table-column>
+            <el-table-column prop="appOrgCode" label="进件机构">
+            </el-table-column>
+            <el-table-column prop="proName" label="产品名称">
+            </el-table-column>
+            <el-table-column prop="activationTime" label="进入本环节时间">
+            </el-table-column>
+          </el-table>
+        </div>
+
         <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 15, 20]"
           :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="directorTableData.totalNum">
         </el-pagination>
@@ -393,13 +393,13 @@
           // 反欺诈  分屏
           this.$router.push('AntiAudit')
         }
-         this.$store.dispatch('addVisitedViews', {
-            name:'反欺诈详情',
-						path:'/AntiAudit',
-						flag:this.antiFlag,
-            params:'',
-            StatefullPath:'/AntiAudit',
-          })
+        this.$store.dispatch('addVisitedViews', {
+          name: '反欺诈详情',
+          path: '/AntiAudit',
+          flag: this.antiFlag,
+          params: '',
+          StatefullPath: '/AntiAudit',
+        })
       },
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
@@ -421,11 +421,11 @@
   /* 反欺诈 查询 */
 
   .anti-fraud {
-    height:100%;
+    height: 100%;
   }
 
   .tableList {
- height: calc( 100% - 70px);
+    height: calc( 100% - 70px);
   }
 
 
@@ -504,10 +504,11 @@
     margin: 0;
     margin-bottom: 10px;
   }
-.tanb{
-  height: calc( 100% - 105px);
-  overflow:auto;
-}
+
+  .tanb {
+    height: calc( 100% - 105px);
+    overflow: auto;
+  }
 
 
 

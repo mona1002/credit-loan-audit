@@ -2331,6 +2331,9 @@ body .el-submenu .el-menu-item{
 }
 /* 反欺诈 */
 /* 反欺诈 申请 列表 */
+.anti-fraud .el-table .cell{
+  text-align: right;
+}
 .anti-fraud .el-table th .cell{
   font-weight: 800;
 }
