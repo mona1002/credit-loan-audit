@@ -59,7 +59,7 @@
       </div>
       <!-- 添加 -->
       <div class="redact">
-        <el-dialog title="添加备案号" :before-close="cal" :visible.sync="dialogFormVisible" top="25vh">
+        <el-dialog title="添加备案号" :before-close="cal" :modal="false" :visible.sync="dialogFormVisible">
           <p style="position:relative">
             <b class="alertMsg" v-show="casNumAlert">*请输入数字</b>
             <label>

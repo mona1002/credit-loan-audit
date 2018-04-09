@@ -151,7 +151,7 @@
     </div>
     <!-- 弹窗 -->
     <div>
-      <el-dialog :visible.sync="huiTuiShow" top="30vh">
+      <el-dialog :visible.sync="huiTuiShow" :modal="false">
         <!-- 回退 -->
         <el-form class="back-form huitui-class">
           <div class="form-title" style="position:relative;" v-show="showFlag=='02'">
@@ -196,7 +196,7 @@
     </div>
     <!-- 流程轨迹 -->
     <div>
-      <el-dialog :visible.sync="lcgjShow" width="1000px" top="10vh">
+      <el-dialog :visible.sync="lcgjShow" :modal="false" width="1000px">
         <div class="lcgj-div">
           <div class="form-title" style="position:relative;">
             流程轨迹
@@ -237,7 +237,7 @@
     </div>
     <!-- 审批结论轨迹 -->
     <div>
-      <el-dialog :visible.sync="shenPiShow" width="1000px" top="30vh">
+      <el-dialog :visible.sync="shenPiShow" :modal="false" width="1000px">
         <!-- 审批结论轨迹 lcgj-div -->
         <div class="spjl-div">
           <div class="form-title" style="position:relative;">
@@ -1874,9 +1874,7 @@
     width: auto;
     height: 400px;
     margin: 0 auto;
-    margin-top: 250px;
     overflow: hidden;
-
     background: #fff;
     border-radius: 5px;
     height: auto;

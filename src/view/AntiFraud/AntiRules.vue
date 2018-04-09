@@ -49,7 +49,7 @@
     </div>
     <!-- 编辑 -->
     <div class="redact">
-      <el-dialog title="添加反欺诈规则" :visible.sync="dialogFormVisible" top="25vh">
+      <el-dialog title="添加反欺诈规则" :modal="false" :visible.sync="dialogFormVisible">
         <p>
           <label>规则编号：</label>
           <b>{{form.ruleNum}}</b>

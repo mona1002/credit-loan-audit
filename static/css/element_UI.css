@@ -6,8 +6,9 @@
   border:1px solid #409EFF;
 }
 .Abody .el-button--primary{
-  color:white;;
+  color:white;
 }
+
 .Abody .el-dialog__wrapper{
   position: absolute;
   margin-top:15vh;
@@ -2383,6 +2384,13 @@ body .el-submenu .el-menu-item{
 }
 /* 复议结论 */
 
+.ReconsiderationConclusion .el-dialog{
+  margin:0 auto;
+  }
+ .ReconsiderationConclusion .el-dialog__wrapper{
+    position: absolute;
+    margin-top:0;
+  }
 .ReconsiderationConclusion .el-dialog__header {
   background-color: #eef0f9;
   height: 40px;
