@@ -111,7 +111,7 @@
         </li>
       </ul>
       <!-- 弹窗 -->
-      <el-dialog :visible.sync="coverShow">
+      <el-dialog :visible.sync="coverShow" :modal="false" top="10vh" width='1130px'>
         <div class="detail-list">
           <div class="form-title" style="position:relative;">
             请选择一条信息
@@ -154,23 +154,23 @@
               </li>
             </div>
             <el-table :data="tableData.recordList" height="250" border style="width: 100%" highlight-current-row center @row-click="itemClick">
-              <el-table-column type="index" label="序号" min-width="50">
+              <el-table-column type="index" label="序号" align="center" width="60">
               </el-table-column>
-              <el-table-column prop="applySubno" label="进件编号" min-width="100">
+              <el-table-column prop="applySubno" label="进件编号" width="170">
               </el-table-column>
-              <el-table-column prop="appDate" label="申请日期" min-width="100">
+              <el-table-column prop="appDate" label="申请日期" width="170">
               </el-table-column>
-              <el-table-column prop="custName" label="客户名称" min-width="150">
+              <el-table-column prop="custName" label="客户名称" width="120">
               </el-table-column>
-              <el-table-column prop="certType" label="证件类型" min-width="100">
+              <el-table-column prop="certType" label="证件类型" width="80">
               </el-table-column>
-              <el-table-column prop="certCode" label="证件号码" min-width="80">
+              <el-table-column prop="certCode" label="证件号码" width="170">
               </el-table-column>
-              <el-table-column prop="operOrgName" label="进件机构名称" min-width="150">
+              <el-table-column prop="operOrgName" label="进件机构名称" width="130">
               </el-table-column>
-              <el-table-column prop="proName" label="产品名称" min-width="100">
+              <el-table-column prop="proName" label="产品名称" width="100">
               </el-table-column>
-              <el-table-column prop="operName" label="进件客服" min-width="100" show-overflow-tooltip>
+              <el-table-column prop="operName" label="进件客服" width="120" show-overflow-tooltip>
               </el-table-column>
             </el-table>
             <div class="block tool-bar">
@@ -1025,7 +1025,7 @@ export default {
 
 .anti-apply-add-class .el-dialog {
   width: 700px;
-  margin-top: 15vh !important;
+  /* margin-top: 15vh !important; */
 }
 
 .anti-apply-add-class .el-dialog__header {
