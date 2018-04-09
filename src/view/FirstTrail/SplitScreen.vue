@@ -401,13 +401,7 @@
         // });
       },
     },
-//     created(){
-// this.$route.name='第二条'
-//     },
     mounted() {
-      // console.log(this.$refs.rWrap.offsetLeft);
-      // console.log(this.$refs.rWrap.width);      
-      // console.log($("#rWrap").offset().left);
       // this.MyMove();
       this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {

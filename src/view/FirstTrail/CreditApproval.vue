@@ -230,7 +230,7 @@
     </div>
     <!-- 审批 -->
     <div>
-      <el-dialog :visible.sync="shenPiShow" :modal="false"  width="800px" top="0vh" style="margin-top:100px;">
+      <el-dialog :visible.sync="shenPiShow" :modal="false" width="800px" top="-8vh">
         <el-form class="back-form appro-form">
           <div class="form-title" style="position:relative;">
             审批信息
@@ -363,7 +363,7 @@
     </div>
     <!-- 审批结论轨迹 -->
     <div>
-      <el-dialog :visible.sync="spjlShow" width="1000px" top="30vh">
+      <el-dialog :visible.sync="spjlShow" :modal="false"  width="1000px" top="11vh">
         <div class="spjl-div">
           <div class="form-title" style="position:relative;">
             信审审批结论轨迹
@@ -409,7 +409,7 @@
     </div>
     <!-- 流程轨迹 -->
     <div>
-      <el-dialog :visible.sync="lcgjShow" width="1000px" top="30vh">
+      <el-dialog :visible.sync="lcgjShow" :modal="false" width="1000px" top="10vh">
         <div class="lcgj-div">
           <div class="form-title" style="position:relative;">
             流程轨迹
@@ -450,7 +450,7 @@
     </div>
     <!-- 大数据风控 -->
     <div class="bigDataLog">
-      <el-dialog title="提示" :visible.sync="bigDataLogVisible" width="420px" top="35vh">
+      <el-dialog title="提示" :visible.sync="bigDataLogVisible" :modal="false" width="420px" top="10vh">
         <span>此进件不存在大数据风控明细！</span>
         <span slot="footer" class="dialog-footer">
           <el-button type="primary" @click="infoSure">确定</el-button>
@@ -459,7 +459,7 @@
     </div>
     <!-- 社保公积金 -->
     <div class="bigDataLog">
-      <el-dialog title="提示" :visible.sync="socialLogVisible" width="420px" top="35vh">
+      <el-dialog title="提示" :visible.sync="socialLogVisible" :modal="false" width="420px" top="10vh">
         <span>客户社保公积金未授权！</span>
         <span slot="footer" class="dialog-footer">
           <el-button type="primary" @click="socialSure">确定</el-button>
@@ -975,6 +975,13 @@ export default {
               busiState: '30'
             }
           });
+           this.$store.dispatch('addVisitedViews', {
+            name:'反欺诈申请',
+						path:'/AntiApplyEditf',
+						flag:this.judgeFlag,
+            params:'',
+            StatefullPath:'/AntiApplyEditf',
+          })
           break;
         case 'spjl':
           //console.log('spspspspsppspspspspsp')
@@ -2672,9 +2679,7 @@ export default {
   width: auto;
   height: 400px;
   margin: 0 auto;
-  margin-top: 200px;
   overflow: hidden;
-
   background: #fff;
   border-radius: 5px;
   height: auto;
