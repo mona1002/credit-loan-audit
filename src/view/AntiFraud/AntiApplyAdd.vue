@@ -427,14 +427,15 @@ export default {
         showCancelButton: true,
         confirmButtonText: '确定',
         cancelButtonText: '取消',
+        modal:false,        
         beforeClose: (action, instance, done) => {
           if (action === 'confirm') {
             instance.confirmButtonLoading = true;
             instance.confirmButtonText = '执行中...';
-
             this.post('/fraudApplyInfoController/startAntiFraudApply', {
                 userCode: this.userCode, // 用户编号
                 orgCode: this.orgCode, // 机构编号
+                currentTemplateId:'',
                 fraudApplyInfo: {
                   creditappTaskid: this.creditappTaskid, // 任务id
                   applyId: this.applyId, // 申请单ID
@@ -475,10 +476,17 @@ export default {
                     this.$router.push('/AntiFraud');
                   // }
                 } else {
-                  this.$message({
-                    type: 'warning',
-                    message: '网络异常,请重试!'
-                  });
+                if (res.msg) {
+                    this.$message({
+                      type: 'warning',
+                      message: res.msg
+                    });
+                  } else {
+                    this.$message({
+                      type: 'warning',
+                      message: '您无此操作权限！'
+                    });
+                  }
                   instance.confirmButtonText = '';
                 }
                 instance.confirmButtonLoading = false;

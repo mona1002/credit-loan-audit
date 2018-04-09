@@ -347,11 +347,11 @@ export default {
         showCancelButton: true,
         confirmButtonText: '确定',
         cancelButtonText: '取消',
+        modal:false,
         beforeClose: (action, instance, done) => {
           if (action === 'confirm') {
             instance.confirmButtonLoading = true;
             instance.confirmButtonText = '执行中...';
-
             this.post('/fraudApplyInfoController/startAntiFraudApply', {
                 userCode: this.userCode, // 用户编号
                 orgCode: this.orgCode, // 机构编号
