@@ -578,13 +578,26 @@ export default {
 
       // })
       // 
-      // 请求列表
-      this.post('/applyInfoPool/queryByPage', {
-        applySubno: this.applySubNo, // 进件编号
-        applyId: '', // 申请单id
-        certCode: this.subCertCode, // 证件号码
-        custName: this.custName, // 客户名称
-        busiStateList: ["04", "14", "21", "42"],
+      // // 请求列表
+      // this.post('/applyInfoPool/queryByPage', {
+      //   applySubno: this.applySubNo, // 进件编号
+      //   applyId: '', // 申请单id
+      //   certCode: this.subCertCode, // 证件号码
+      //   custName: this.custName, // 客户名称
+      //   busiStateList: ["04", "14", "21", "42"],
+      //   pageNum: this.pageNum,
+      //   pageSize: this.pageSize
+      // }).then(res => {
+      //   if (res.statusCode == 200) {
+      //     this.tableData = res.data;
+      //   }
+      // })
+      // 查询图标弹出层
+     
+      this.post('/workFlowTaskQuery/getTaskToDoList', {
+        taskStatus:'01',
+        userCode: this.userCode,
+        orgCode: this.orgCode,
         pageNum: this.pageNum,
         pageSize: this.pageSize
       }).then(res => {
