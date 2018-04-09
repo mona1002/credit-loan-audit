@@ -85,9 +85,9 @@
             <el-button size="mini" @click="handleClickInfo(scope.row)">查看</el-button>
             <el-button size="mini" @click="handleClickEdit(scope.row)">编辑</el-button>
           </template> -->
-            <template slot-scope="scope">
-              <el-button size="mini" @click="handleClickEdit(scope.row)">编辑</el-button>
-               <el-button size="mini" type="primary" @click="handleClickInfo(scope.row)">查看</el-button>
+            <template slot-scope="scope"> <el-button size="mini" type="primary" @click="handleClickInfo(scope.row)">查看</el-button>
+              <el-button size="mini" v-if="scope.row.fraudStateTxt=='反欺诈拒绝'||scope.row.fraudStateTxt=='反欺诈放弃'" @click="handleClickEdit(scope.row)">编辑</el-button>
+              
             </template>
           </el-table-column>
         </el-table>
@@ -279,7 +279,7 @@ export default {
     handleClickEdit(row) {
       console.log('click the row in table');
       // row 有值, 跳编辑
-      console.log(row);
+      console.log(row.fraudStateTxt);
       if (row) {
         // 跳转到编辑
         this.$router.push({

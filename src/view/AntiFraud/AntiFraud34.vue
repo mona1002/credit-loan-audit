@@ -86,7 +86,7 @@
           <el-table-column label="操作" width="180">
             <template slot-scope="scope">
               <el-button size="mini" @click="handleClickInfo(scope.row)">查看</el-button>
-              <el-button size="mini" @click="handleClickEdit(scope.row)">编辑</el-button>
+              <el-button size="mini" v-if="scope.row.fraudStateTxt=='反欺诈拒绝'||scope.row.fraudStateTxt=='反欺诈放弃'" @click="handleClickEdit(scope.row)">编辑</el-button>
             </template>
           </el-table-column>
         </el-table>
