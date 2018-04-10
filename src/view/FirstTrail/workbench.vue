@@ -382,7 +382,7 @@
 
   .workbench_right_top,
   .workbench_right_bottom {
-    height: 50%;
+    height: 47.5%;
   }
 
 </style>

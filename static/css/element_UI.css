@@ -869,7 +869,7 @@ height: 40px;
 /* 代办任务下面div高度   #f3f3f3  */
 
 .workbench .main_right_task .el-collapse-item__content {
-  height: 84vh;
+  height: 80vh;
   overflow: auto;
 }
 /* 待办任务下面 table 表头颜色 */
