@@ -222,7 +222,7 @@
 		      this.$router.push({path:'/SplitScreen'});
 					localStorage.setItem("taskInWaitting",JSON.stringify(row));
 					this.$store.dispatch('addVisitedViews', {
-          name: '信审详情',
+          name: '初审详情',
           path: '/SplitScreen',
           flag: '01',
           params: '',

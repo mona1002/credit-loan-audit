@@ -166,7 +166,7 @@
               </el-table-column>
               <el-table-column prop="certCode" label="证件号码" width="170">
               </el-table-column>
-              <el-table-column prop="operOrgName" label="进件机构名称" width="130">
+              <el-table-column prop="appOrgName" label="进件机构名称" width="130">
               </el-table-column>
               <el-table-column prop="proName" label="产品名称" width="100">
               </el-table-column>
