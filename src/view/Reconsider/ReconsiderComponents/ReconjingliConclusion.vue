@@ -501,6 +501,8 @@
         jujueFont: '提交',
         shenpiLoading: false,
         shenpiFont: '提交',
+         nodeName: '',
+        routeParams: '',
       }
     },
     mounted() {
@@ -547,6 +549,16 @@
           }
         })
       },
+       GoPath(){
+        this.$router.push( '/reconsiderList?taskNodeName=reconsiderApp_manager');
+         this.$store.dispatch('addVisitedViews', {
+          name: '复议经理审批',
+          path: '/reconsiderList',
+          flag: '06',
+          params: '?taskNodeName=reconsiderApp_manager',    
+          StatefullPath: '/reconsiderList?taskNodeName=reconsiderApp_manager'
+        })
+       },
       //保留两位小数 整数千分位
       formatNumber(num, cent, isThousand) {
         num = num.toString().replace(/\$|\,/g, '');
@@ -826,7 +838,8 @@
               message: res.msg,
               type: 'success'
             })
-            this.$router.push('/reconsiderList');
+            // this.$router.push('/reconsiderList');
+            this.GoPath();
           };
         })
 
@@ -1044,7 +1057,8 @@
               type: 'success'
             })
 
-            this.$router.push('/reconsiderList');
+            // this.$router.push('/reconsiderList');
+             this.GoPath();
           }
         });
       },
@@ -1117,7 +1131,8 @@
               type: 'success'
             })
 
-            this.$router.push('/reconsiderList');
+            // this.$router.push('/reconsiderList');
+             this.GoPath();
           }
         });
       },
@@ -1178,6 +1193,7 @@
       },
       //反欺诈申请
       AntiFraudApplication() {
+          var  routeParms= 'id='+this.applyId+';flag=fuyi;busiState=20'
         this.$router.push({
           name: 'AntiApplyEditf',
           params: {
@@ -1186,6 +1202,14 @@
             busiState: '20'
           }
         });
+         localStorage.setItem("antiApplyFlag", JSON.stringify(routeParms));
+        this.$store.dispatch('addVisitedViews', {
+                name: '反欺诈申请',
+                path: '/AntiApplyEditf',
+                flag:'05',
+                params: '',
+                StatefullPath: '/AntiApplyEditf',
+              })
       },
       // 审批结论轨迹
       getSpjlList() {
@@ -1231,6 +1255,13 @@
             this.$router.push({
               path: '/PneCtrl'
             });
+             this.$store.dispatch('addVisitedViews', {
+                  name: '大数据风控',
+                  path: '/PneCtrl',
+                  flag: '06',
+                  params: '',
+                  StatefullPath: '/PneCtrl',
+                })
           }
         });
       },
@@ -1258,6 +1289,13 @@
           this.$router.push({
             path: '/SocialSe'
           });
+            this.$store.dispatch('addVisitedViews', {
+                name: '社保公积金',
+                path: '/SocialSe',
+                flag: '06',
+                params: '',
+                StatefullPath: '/SocialSe',
+              })
         }
       },
       //社保公积金 弹窗关闭
