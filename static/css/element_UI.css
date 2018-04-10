@@ -2335,6 +2335,9 @@ body .el-submenu .el-menu-item{
 .anti-fraud .el-table .cell{
   text-align: right;
 }
+.anti-fraud .el-table__body-wrapper{
+  height: calc( 100% - 50px)
+}
 .anti-fraud .el-table th .cell{
   font-weight: 800;
 }

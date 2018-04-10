@@ -3,7 +3,7 @@
   <div class="anti-fraud">
     <myHead class="top"></myHead>
     <!-- <el-collapse v-model="activeNames"> -->
-    <div>
+    <div class='tableList'>
       <div class="title-bar">
         <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">高级查询</span>
@@ -49,7 +49,7 @@
             <span class="icon-add"></span> 添加
           </span>
         </div>
-        <el-table :data="antiTableData.recordList" style="width: 100%" height="350" border stripe fit highlight-current-row class="anti-table">
+        <el-table :data="antiTableData.recordList" style="width: 100% ;height: calc( 100% - 105px);" border stripe fit highlight-current-row class="anti-table">
           <el-table-column type="index" label="序号" width="50">
           </el-table-column>
           <el-table-column prop="applySubno" label="进件编号">
@@ -388,12 +388,18 @@
 <style>
   /* 反欺诈 查询 */
 
-  .anti-fraud {}
-
+  .anti-fraud {
+    height: 100%;
+  }
+.tableList{
+      height: calc( 100% - 70px);
+}
   /* 容器 */
 
-  .anti-fraud .container {}
-
+  .anti-fraud .content {
+    width: 100%;
+    height: calc( 100% - 250px);
+  }
   /* 一列 */
 
   .anti-fraud .item-column1 {
@@ -422,9 +428,9 @@
   /* 搜索盒子 */
 
   .anti-fraud .search-box {
-    width: 100%;
-    padding-top: 10px;
-    height: 50px;
+  width: 100%;
+    padding: 10px;
+    height: 155px;
   }
 
 
