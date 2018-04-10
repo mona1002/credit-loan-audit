@@ -297,6 +297,9 @@
   export default {
     data() {
       return {
+        taskName: '',
+        nodeName: '',
+        routeParams: '',
         coverShow: false, // 弹窗
         products: [], // 审批产品
         dealroperDate: '',
@@ -397,7 +400,6 @@
 
       // 取出  申请信息   applicationInformationDetail
       this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
-      console.log(1111111111111111111111111)
       //console.log(this.applicationInformationDetail);
       this.custName = this.applicationInformationDetail.custName;
       this.certCode = this.applicationInformationDetail.certCode;
@@ -465,7 +467,8 @@
         console.log(this.processInstanceId);
         // 任务状态
         this.taskStatus = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskStatus;
-
+        this.taskName = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskName;
+        this.nodeName = '反欺诈专员审批';
         // 先取 保存的信息
         var insertObj = JSON.parse(localStorage.getItem('saveInsertObj'));
         if (insertObj != undefined) {
@@ -509,6 +512,8 @@
         this.processInstanceId = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).processInstanceId;
         // 任务状态
         this.taskStatus = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskStatus;
+        this.taskName = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskName;
+        this.nodeName = '反欺诈主管审批';
 
         this.options = [{
           "label": "反欺诈专员审批",
@@ -547,7 +552,7 @@
         this.getRiskItems();
 
       }
-
+      this.routeParams = '?taskNodeName=' + this.taskName
       // 将这里的 请求风险项 转移到 专员/主管内
       // 请求风险项
       // this.getRiskItems();
@@ -570,7 +575,7 @@
           showCancelButton: true,
           confirmButtonText: '确定',
           cancelButtonText: '取消',
-          modal:false,
+          modal: false,
           beforeClose: (action, instance, done) => {
             if (action === 'confirm') {
               instance.confirmButtonLoading = true;
@@ -603,14 +608,8 @@
             type: 'success',
             message: '挂起成功'
           });
-          this.$router.push('/AntiFraud34');
-          this.$store.dispatch('addVisitedViews', {
-            name: '反欺诈申请',
-            path: '/AntiFraud34',
-            flag: this.judgeFlag,
-            params: '',
-            StatefullPath: '/AntiFraud34',
-          })
+          // this.$router.push('/AntiFraud34');
+          this.goToPath()
         });
       },
       // 请求系统时间
@@ -850,14 +849,8 @@
               message: '反欺诈审批成功!'
             });
             console.log('准备走成功的路由 ')
-            this.$router.push('/AntiFraud34');
-            this.$store.dispatch('addVisitedViews', {
-              name: '反欺诈申请',
-                          path: '/AntiFraud34',
-                          flag: this.judgeFlag,
-              params: '',
-              StatefullPath: '/AntiFraud34',
-            })
+            // this.$router.push('/AntiFraud34');
+           this.goToPath();
           });
         } else {
           // 专员的 提交  
@@ -926,15 +919,8 @@
               type: 'success',
               message: '反欺诈审批成功!'
             });
-            this.$router.push('/AntiFraud34');
-            this.$store.dispatch('addVisitedViews', {
-              name: '反欺诈申请',
-              path: '/AntiFraud34',
-                flag: this.judgeFlag,
-              params: '',
-              StatefullPath: '/AntiFraud34',
-            })
-
+            // this.$router.push('/AntiFraud34');
+            this.goToPath();
           });
         }
 
@@ -1148,14 +1134,8 @@
               type: 'success'
             })
 
-            this.$router.push('/AntiFraud34');
-            this.$store.dispatch('addVisitedViews', {
-              name: '反欺诈申请',
-                          path: '/AntiFraud34',
-                          flag: this.judgeFlag,
-              params: '',
-              StatefullPath: '/AntiFraud34',
-            })
+            // this.$router.push('/AntiFraud34');
+            this.goToPath();
           }
         });
       },
@@ -1372,6 +1352,16 @@
           }
         })
       },
+      goToPath() {
+        this.$router.push('/AntiFraud34' +  this.routeParams);
+        this.$store.dispatch('addVisitedViews', {
+          name: this.nodeName,
+          path: '/AntiFraud34',
+          flag: this.judgeFlag,
+          params: this.routeParams,
+          StatefullPath: '/AntiFraud34' +  this.routeParams,
+        })
+      },
       mainReasonChange(val) {
         //   console.log(val);
         //   // 主原因改变 请求子原因
@@ -1388,9 +1378,9 @@
             this.bigDataLogVisible = true;
             // alert(this.bigDataLogVisible)
           } else if (res.obj) {
-            // this.$router.push({
-            //   path: '/PneCtrl'
-            // });
+            this.$router.push({
+              path: '/PneCtrl'
+            });
             console.log('大数据风控')
             this.$store.dispatch('addVisitedViews', {
               name: '大数据风控',
