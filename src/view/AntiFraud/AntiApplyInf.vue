@@ -131,7 +131,7 @@ export default {
   },
   props: ['isAntiDetail'],
   mounted() {
-    console.log(this.showFqz);
+    // console.log(this.showFqz);
     // 先判断是 初审 终审  /  专员  主管
     var judgeFlag = JSON.parse(localStorage.getItem('judge'));
     this.antiFlag = judgeFlag.flag;

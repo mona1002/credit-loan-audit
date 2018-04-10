@@ -220,10 +220,15 @@ export default {
      edit  编辑
      add   添加 
      */
+    // var pars='';
+    // var pars=this.$route.fullPath.split('?')[1].split('=')[1];
     this.flag = this.$route.params.flag;
     // 获取到 id
-    this.applyId = this.$route.params.id;
-    console.log(this.flag);
+    console.log(this.$route.fullPath)
+    // this.applyId =this.$route.params.id||pars;
+    this.applyId =this.$route.params.id;
+    
+    // console.log(this.flag);
 
     if (this.flag == 'start') {
       this.getFraudApplyInfo();
@@ -343,8 +348,9 @@ export default {
     },
     submitForm() {
       console.log('提交反欺诈')
-
-      if (!this.mainId || !this.mainReason) {
+      // if (!this.mainId || !this.mainReason) {
+      if ( !this.mainReason) {
+        
         this.$message({
           message: "提示：请选择主原因!",
           type: 'warning'

@@ -100,7 +100,7 @@
         </div>
           <el-table :data="directorTableData.taskDetailList" style="width: 100% ;height: calc( 100% - 105px);" border stripe fit highlight-current-row @row-click="rowDbClick"
             v-show="antiFlag=='03'||antiFlag=='04'" class="director-table">
-            <el-table-column type="index" :index="1" label="序号">
+            <el-table-column type="index" :index="1" label="序号" width='50'>
             </el-table-column>
             <el-table-column prop="taskTypeTxt" label="任务类型">
             </el-table-column>
