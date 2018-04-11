@@ -61,7 +61,7 @@
             </el-table-column>
             <el-table-column prop="applyCustName" label="客户名称">
             </el-table-column>
-            <el-table-column prop="certType" label="证件类型">
+            <el-table-column prop="certTypeTxt" label="证件类型">
             </el-table-column>
             <el-table-column prop="certCode" label="证件号码">
             </el-table-column>
@@ -110,11 +110,11 @@
             </el-table-column>
             <el-table-column prop="custName" label="客户名称">
             </el-table-column>
-            <el-table-column prop="certType" label="证件类型">
+            <el-table-column prop="certTypeTxt" label="证件类型">
             </el-table-column>
             <el-table-column prop="certCode" label="证件号码">
             </el-table-column>
-            <el-table-column prop="appOrgCode" label="进件机构">
+            <el-table-column prop="appOrgName" label="进件机构">
             </el-table-column>
             <el-table-column prop="proName" label="产品名称">
             </el-table-column>

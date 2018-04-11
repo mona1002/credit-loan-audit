@@ -182,7 +182,7 @@
       //   console.log(this.$route.params.id)
       //   // 查询反欺诈信息
       //   this.getFraudApplyInfo();
-
+console.log(  this.antiFlag  )
       if (this.antiFlag == '01') {
         // taskInWaitting
         this.creditappTaskid = JSON.parse(localStorage.getItem('taskInWaitting')).taskId;
@@ -224,7 +224,7 @@
       this.routeId = stateParms[0][1];
       this.routeFlag = stateParms[1][1];
       this.routeBusiState = stateParms[2][1];
-      
+
       //  JSON.stringify($scope.addalerts);
       // 获取到 id
       this.id = this.$route.params.id || this.routeId;

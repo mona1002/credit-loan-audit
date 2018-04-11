@@ -235,14 +235,19 @@ table {
 
 .AudioVisualLeft_compareIcon {
   background: white;
-  color: #0077ff;
-  padding: 0;
+  color: #0077ff !important;
+  padding: 0 !important;
   height: 38px;
   width: 38px;
   float: right;
-  margin: 5px 0 0 2px;
+  margin: 6px 0 0 2px !important;
 }
-
+.AudioVisualLeft_compareIcon:hover{
+  /* opacity: 0.4; */
+  background: rgba(255, 255, 255, .8) !important;
+  /* color: #0077ff !important; */
+  
+}
 .CreditForm {
   overflow: auto;
   overflow-x: hidden;
