@@ -15,7 +15,7 @@
             进件编号：
           </div>
           <div class="item-content">
-            {{applySubno}}
+            {{applySubNo}}
           </div>
           <el-button icon="el-icon-search" class="search-btn" @click="coverFn('shwoList')"></el-button>
         </li>
@@ -625,7 +625,7 @@ export default {
     btnClick(val) {
       // 确定
       if (val == 'sure') {
-        this.applySubno = this.rowObj.applySubno; // 进件编号
+        this.applySubNo = this.rowObj.applySubNo; // 进件编号
         this.applyCustName = this.rowObj.custName; // 客户名称
         this.certTypeTxt = this.rowObj.certTypeTxt; // 证件类型
         this.certType = this.rowObj.certType; // 证件类型
@@ -656,7 +656,9 @@ export default {
   background: #fff;
 }
 
-
+.anti-apply-add-class .el-table th .cell{
+    font-weight: 800;
+}
 
 
 

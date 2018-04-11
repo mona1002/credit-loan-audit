@@ -211,9 +211,15 @@ export default {
 
     //   this.getFraudApplyInfoWithOpinionById();
     // }
-
+   var stateParms = JSON.parse(localStorage.getItem('antiApplyFlagEdit')).split(';');
+      for (var i = 0; i < stateParms.length; i++) {
+        stateParms[i] = stateParms[i].split('=');
+      }
+      this.routeId = stateParms[0][1];
+      this.routeFlag = stateParms[1][1];
+      // this.routeBusiState = stateParms[2][1];//如需此入参
     // 获取到 id
-    this.id = this.$route.params.id;
+    this.id = this.$route.params.id || this.routeId;
     console.log(this.$route.params.id)
     /* 标志  
      start 发起反欺诈
@@ -222,11 +228,11 @@ export default {
      */
     // var pars='';
     // var pars=this.$route.fullPath.split('?')[1].split('=')[1];
-    this.flag = this.$route.params.flag;
+    this.flag = this.$route.params.flag|| this.routeFlag;
     // 获取到 id
     console.log(this.$route.fullPath)
     // this.applyId =this.$route.params.id||pars;
-    this.applyId =this.$route.params.id;
+    this.applyId =this.$route.params.id || this.routeId;
     
     // console.log(this.flag);
 

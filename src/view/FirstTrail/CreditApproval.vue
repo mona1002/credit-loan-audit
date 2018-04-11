@@ -685,6 +685,7 @@
         this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
         // 挂起 任务id
         this.taskId = this.taskInWaitting.taskId;
+        this.applyId= this.taskInWaitting.applyId;
         // 流程 实例id
         this.processInstanceId = this.taskInWaitting.processInstanceId;
         // 任务状态
@@ -746,7 +747,6 @@
         // applyId
         // this.applyId = '00542';
         // this.applyId = '00542';
-
         this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
         this.applyId = this.applicationInformationDetail.applyId;
         console.log(this.applyId);
@@ -1068,6 +1068,7 @@
             // this.showFlag = 'fqz';
             // 查询反欺诈信息
             // this.$router.push('AntiApplyEdit')
+            console.log( this.applyId )
             var routeParms = 'id=' + this.applyId + ';flag=start;busiState=30'
             this.$router.push({
               name: 'AntiApplyEditf',

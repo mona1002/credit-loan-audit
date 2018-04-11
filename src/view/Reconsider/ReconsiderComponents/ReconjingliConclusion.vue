@@ -1206,7 +1206,7 @@
         this.$store.dispatch('addVisitedViews', {
                 name: '反欺诈申请',
                 path: '/AntiApplyEditf',
-                flag:'05',
+                flag:'06',
                 params: '',
                 StatefullPath: '/AntiApplyEditf',
               })
