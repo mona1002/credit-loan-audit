@@ -681,25 +681,12 @@
       // var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
       // 取出存在本地当然 userInfo 
       this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
-      console.log( this.judgeFlag)
+      console.log(this.judgeFlag)
       if (this.judgeFlag == '01') { // 初审 任务 id  taskId
         this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-      console.log('初审')
-        
-        // 挂起 任务id
+        console.log('初审')
         this.taskId = this.taskInWaitting.taskId;
-        this.applyId= this.taskInWaitting.applyId;
-         this.sproId = this.taskInWaitting.proId;
-         this.appOrgId = this.taskInWaitting.appOrgId;
         this.processInstanceId = this.taskInWaitting.processInstanceId;
-        this.custName = this.taskInWaitting.custName;
-        this.appTypeTxt = this.taskInWaitting.appTypeTxt;
-        this.applySubNo = this.taskInWaitting.applySubNo;
-        this.certTypeTxt = this.taskInWaitting.certTypeTxt;
-        this.certCode = this.taskInWaitting.certCode;
-        this.loanTerm = this.taskInWaitting.loanTerm;
-        this.baseProName = this.taskInWaitting.proName;
-
         // 任务状态
         this.taskStatus = JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
 
@@ -712,10 +699,7 @@
         }
 
       } else if (this.judgeFlag == '02') { // 终审取终审  taskId
-      console.log('终审')
         this.FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
-      console.log( this.FtaskInWaitting )
-        console
         // 挂起 任务id
         this.taskId = this.FtaskInWaitting.taskId;
         // 流程 实例id
@@ -735,7 +719,7 @@
           this.nodeName = '信审总监审批审批'
         }
         this.routeParams = '?taskNodeName=' + this.taskName
-        console.log('taskId : '+this.taskId);
+        console.log('taskId : ' + this.taskId);
         // 回退 拒绝  审批
         // 经办人 登录用户名
         this.userInfo = JSON.parse(localStorage.getItem('userInf'));
@@ -743,7 +727,7 @@
         // 用户id
         this.orgId = this.userInfo.orgId;
         // this.dealroperCode = userInfo.userCode;
-        console.log('userCode : '+this.dealroperCode);
+        console.log('userCode : ' + this.dealroperCode);
         // 经办时间
         // this.dealroperDate =
         //   new Date().toLocaleString()
@@ -758,83 +742,80 @@
               if (this.judgeFlag == '01')
                 this.jujueBtnShow = true;
         }
-
-        // applyId
-        // this.applyId = '00542';
-        // this.applyId = '00542';
-        this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
-        this.applyId = this.applicationInformationDetail.applyId;
-        // console.log(this.applyId);
-        this.appOrgId = this.applicationInformationDetail.appOrgId;
-        // console.log(this.appOrgId);
-        this.appOrgCode = this.applicationInformationDetail.appOrgCode;
-        // 客户编号
-        this.custNo = this.applicationInformationDetail.custNo;
-
-
-        // 显示
-        // 审批人
-        // this.userName = this.userInfo.userName;
-        this.custName = this.applicationInformationDetail.custName;
-        // 申请类型
-        this.appTypeTxt = this.applicationInformationDetail.appTypeTxt;
-        // 进件编号
-        this.applySubNo = this.applicationInformationDetail.applySubNo;
-        // 证件类型
-        this.certTypeTxt = this.applicationInformationDetail.certTypeTxt;
-        // 证件号码
-        this.certCode = this.applicationInformationDetail.certCode;
-        // 产品名称
-        // this.proName = this.applicationInformationDetail.proName;
-        // 申请期限 
-        this.loanTerm = this.applicationInformationDetail.loanTerm;
-
-        this.sproId = this.applicationInformationDetail.proId;
-
-        // 申请信息 带过来的 产品名称
-        this.baseProName = this.applicationInformationDetail.proName;
+      }
+      // applyId
+      // this.applyId = '00542';
+      // this.applyId = '00542';
+      this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
+      this.applyId = this.applicationInformationDetail.applyId;
+      // console.log(this.applyId);
+      this.appOrgId = this.applicationInformationDetail.appOrgId;
+      // console.log(this.appOrgId);
+      this.appOrgCode = this.applicationInformationDetail.appOrgCode;
+      // 客户编号
+      this.custNo = this.applicationInformationDetail.custNo;
 
 
-        this.certCode = this.applicationInformationDetail.certCode;
+      // 显示
+      // 审批人
+      // this.userName = this.userInfo.userName;
+      this.custName = this.applicationInformationDetail.custName;
+      // 申请类型
+      this.appTypeTxt = this.applicationInformationDetail.appTypeTxt;
+      // 进件编号
+      this.applySubNo = this.applicationInformationDetail.applySubNo;
+      // 证件类型
+      this.certTypeTxt = this.applicationInformationDetail.certTypeTxt;
+      // 证件号码
+      this.certCode = this.applicationInformationDetail.certCode;
+      // 产品名称
+      // this.proName = this.applicationInformationDetail.proName;
+      // 申请期限 
+      this.loanTerm = this.applicationInformationDetail.loanTerm;
 
-        this.Social();
+      this.sproId = this.applicationInformationDetail.proId;
 
-        // 初审 / 终审
-        this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
-        //  this.opinionFlag  初审终审标志  
-        if (this.judgeFlag == '01') {
-          // this.opinionFlag = '01';
-          this.options = [{
+      // 申请信息 带过来的 产品名称
+      this.baseProName = this.applicationInformationDetail.proName;
+
+
+      this.certCode = this.applicationInformationDetail.certCode;
+
+      this.Social();
+
+      // 初审 / 终审
+      this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
+      //  this.opinionFlag  初审终审标志  
+      if (this.judgeFlag == '01') {
+        // this.opinionFlag = '01';
+        this.options = [{
+          "label": "申请登记",
+          "value": "creditApp_apply",
+          "type": "01"
+        }]
+      } else if (this.judgeFlag == '02') {
+        // this.opinionFlag = '02'; // 终审
+        this.options = [{
             "label": "申请登记",
             "value": "creditApp_apply",
             "type": "01"
-          }]
-        } else if (this.judgeFlag == '02') {
-          // this.opinionFlag = '02'; // 终审
-          this.options = [{
-              "label": "申请登记",
-              "value": "creditApp_apply",
-              "type": "01"
-            },
-            {
-              "label": "初审审批",
-              "value": "creditApp_firstTrial",
-              "type": "02"
-            }
-          ]
-        } else if (this.judgeFlag == '03') {
+          },
+          {
+            "label": "初审审批",
+            "value": "creditApp_firstTrial",
+            "type": "02"
+          }
+        ]
+      } else if (this.judgeFlag == '03') {
 
-        } else if (this.judgeFlag == '04') { // 主管
-          this.options = [{
-            "label": "反欺诈专员审批",
-            "value": "antiFraudApp_commissioner",
-            "type": ''
-          }]
-        }
-
-
+      } else if (this.judgeFlag == '04') { // 主管
+        this.options = [{
+          "label": "反欺诈专员审批",
+          "value": "antiFraudApp_commissioner",
+          "type": ''
+        }]
       }
-       console.log('applyId : '+ this.applyId)
+      console.log('applyId : ' + this.applyId)
     },
     methods: {
       hangOoutBtn() {
@@ -1084,7 +1065,7 @@
             // this.showFlag = 'fqz';
             // 查询反欺诈信息
             // this.$router.push('AntiApplyEdit')
-            console.log( this.applyId )
+            console.log(this.applyId)
             var routeParms = 'id=' + this.applyId + ';flag=start;busiState=30'
             this.$router.push({
               name: 'AntiApplyEditf',
