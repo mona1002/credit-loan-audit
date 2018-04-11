@@ -686,6 +686,8 @@
         // 挂起 任务id
         this.taskId = this.taskInWaitting.taskId;
         this.applyId= this.taskInWaitting.applyId;
+         this.sproId = this.taskInWaitting.proId;
+         this.appOrgId = this.taskInWaitting.appOrgId;
         // 流程 实例id
         this.processInstanceId = this.taskInWaitting.processInstanceId;
         // 任务状态
