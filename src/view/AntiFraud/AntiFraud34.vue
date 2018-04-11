@@ -347,14 +347,24 @@
       handleClickEdit(row) {
         console.log('click the row in table');
         // row 有值, 跳编辑
+        var  routeParms;
         if (row) {
           // 跳转到编辑
+          routeParms= 'id='+row.id+';flag=';
           this.$router.push({
             name: 'AntiApplyEdit',
             params: {
               id: row.id
             }
           });
+           localStorage.setItem("antiApplyFlagEdit", JSON.stringify(routeParms));
+          this.$store.dispatch('addVisitedViews', {
+            name: '反欺诈申请-编辑',
+            path: '/AntiApplyEdit',
+            flag: 'edit',
+            params: '',
+            StatefullPath: '/AntiApplyEdit'
+          })
         } else { // 否则是新增
           this.$router.push({
             name: 'AntiApplyAdd',
@@ -364,6 +374,7 @@
           });
 
         }
+         localStorage.setItem("antiApplyFlagEdit", JSON.stringify(routeParms));
       },
       // 反欺诈申请查看
       handleClickInfo(row) {
