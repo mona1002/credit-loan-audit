@@ -30,7 +30,8 @@
       </el-form-item>
     </el-form>
     <div class="btn-div">
-      <el-button icon="el-icon-check-hang" class="credit-btn" @click="open">挂起</el-button>
+      <!-- <el-button icon="el-icon-check-hang" class="credit-btn" @click="open">挂起</el-button> -->
+      <el-button icon="el-icon-check-hang" class="credit-btn" @click="hangOoutBtn">挂起</el-button>
       <el-button icon="el-icon-check-back" class="credit-btn" @click="coverFn('02')">回退</el-button>
       <!-- BX20 根据角色  -->
       <el-button icon="el-icon-check-reject" class="credit-btn" v-show="judgeFlag == '01' && jujueBtnShow" @click="coverFn('01')">拒绝</el-button>
@@ -45,6 +46,16 @@
     </div>
     <!-- 弹窗 -->
     <!-- <div class="cover-view" v-show="coverShow"> -->
+    <!-- 挂起 -->
+    <div class="hung_class">
+      <el-dialog title="提示" :modal="false" :visible.sync="hangOut" width="420px">
+        <span>确定操作？</span>
+        <span slot="footer" class="dialog-footer">
+          <el-button class="calbtn" @click="canc">取消</el-button>
+          <el-button class="subtn" type="primary" :loading="loadsitu" @click="Csave">{{adbtn}}</el-button>
+        </span>
+      </el-dialog>
+    </div>
     <!-- 回退 -->
     <div>
       <el-dialog :visible.sync="huiTuiShow" :modal="false" width="600px" top="10vh">
@@ -450,7 +461,7 @@
       </el-dialog>
     </div>
     <!-- 大数据风控 -->
-    <div class="bigDataLog">
+    <div class="hung_class">
       <el-dialog title="提示" :visible.sync="bigDataLogVisible" :modal="false" width="420px" top="10vh">
         <span>此进件不存在大数据风控明细！</span>
         <span slot="footer" class="dialog-footer">
@@ -459,7 +470,7 @@
       </el-dialog>
     </div>
     <!-- 社保公积金 -->
-    <div class="bigDataLog">
+    <div class="hung_class">
       <el-dialog title="提示" :visible.sync="socialLogVisible" :modal="false" width="420px" top="10vh">
         <span>客户社保公积金未授权！</span>
         <span slot="footer" class="dialog-footer">
@@ -574,6 +585,9 @@
         creditScore: '', // 单独处理的评分
         fbalance: '', // 核实每月可接受最高还款额
         fbalance2: '', // 
+        hangOut: false,
+        loadsitu: false,
+        adbtn: '确定',
         // 表单必填
         spruleForm: {
           verIncome: '',
@@ -807,7 +821,52 @@
       }
     },
     methods: {
-      // open 打开 自定义 弹窗   挂起
+      hangOoutBtn() {
+        this.loadsitu = false;
+        this.adbtn = '确定';
+        this.hangOut = true;
+      },
+      canc() {
+        this.hangOut = false;
+      },
+      Csave() {
+        this.loadsitu = true;
+        this.adbtn = '保存中';
+        // 区分初审/终审
+        if (this.judgeFlag == '01') {
+          this.busiState = '01';
+        } else if (this.judgeFlag == '02') {
+          this.busiState = '11'
+        }
+        // 点击 确认 提交 方法              
+        this.post("/creauditInfo/approveHang ", {
+          taskId: this.taskId,
+          busiState: this.busiState,
+          applyId: this.applyId, // 申请单id
+        }).then(res => {
+          // console.log(res);
+          // console.log(res.statusCode);
+          if (res.statusCode == '200') {
+            this.hangOut = false;
+            // done();
+          } else {
+            if (res.statusCode == 500) {
+              this.hangOut = false;
+              this.$message({
+                type: 'warning',
+                message: '网络异常,请重试!'
+              });
+            } else {
+              this.hangOut = false;
+              this.$message({
+                type: 'warning',
+                message: res.msg
+              });
+            }
+          }
+        });
+      },
+      // open 打开 自定义 弹窗   挂起      
       open() {
         const h = this.$createElement;
         this.$msgbox({
@@ -870,7 +929,7 @@
           });
           // 初审
           if (this.judgeFlag == '01')
-          this.goTPath();
+            this.goTPath();
           // 终审
           if (this.judgeFlag == '02')
             this.goFtPath();
@@ -1569,7 +1628,7 @@
             // proId: this.proId, //产品id
             // taskId: this.taskId, // 任务id
             if (this.judgeFlag == '01') { // 初审 
-             this.goTPath();
+              this.goTPath();
             } else if (this.judgeFlag == '02') { // 终审
               this.goFtPath();
             }
@@ -2060,15 +2119,15 @@
           StatefullPath: '/FtaskInWaitting' + this.routeParams,
         });
       },
-      goTPath(){
-      this.$router.push('/taskInWaitting');
-          this.$store.dispatch('addVisitedViews', {
-            name: '初审审批',
-            path: '/taskInWaitting',
-            flag: '01',
-            params: '',
-            StatefullPath: '/taskInWaitting',
-          })
+      goTPath() {
+        this.$router.push('/taskInWaitting');
+        this.$store.dispatch('addVisitedViews', {
+          name: '初审审批',
+          path: '/taskInWaitting',
+          flag: '01',
+          params: '',
+          StatefullPath: '/taskInWaitting',
+        })
       },
       // // // 批准金额
       // ploanAmt: function() {
@@ -3839,11 +3898,18 @@
     padding: 0;
   }
 
+  .creditApproval-class .hung_class .el-dialog__body {
+    padding: 10px 15px;
+  }
 
+  .creditApproval-class .hung_class .el-dialog__header {
+    display: block;
+    padding: 20px 20px 10px;
+  }
 
-
-
-
+  .creditApproval-class .hung_class .el-dialog__footer {
+    padding: 5px 15px 10px;
+  }
 
 
 
@@ -4455,7 +4521,7 @@
 
   /*大数据*/
 
-  .creditApproval-class .bigDataLog .el-dialog__header {
+  /* .creditApproval-class .bigDataLog .el-dialog__header {
     display: block;
   }
 
@@ -4463,34 +4529,18 @@
     padding: 20px 30px;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ */
 
   /*社保/公积金*/
 
   /*大数据*/
 
-  .creditApproval-class .bigDataLog .el-dialog__header {
+  /* .creditApproval-class .bigDataLog .el-dialog__header {
     display: block;
   }
 
   .creditApproval-class .bigDataLog .el-dialog__body {
     padding: 20px 30px;
-  }
+  } */
 
 </style>
