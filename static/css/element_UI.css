@@ -2332,9 +2332,6 @@ body .el-submenu .el-menu-item{
 }
 /* 反欺诈 */
 /* 反欺诈 申请 列表 */
-.anti-fraud .el-table .cell{
-  text-align: right;
-}
 .anti-fraud .el-table__body-wrapper{
   height: calc( 100% - 50px)
 }
@@ -2358,9 +2355,8 @@ body .el-submenu .el-menu-item{
 }
 /*序号*/
 
-.anti-fraud .anti-table .el-table__body-wrapper .el-table__body td:nth-of-type(1),
 .anti-fraud .anti-table .el-table__body-wrapper .el-table__body td:nth-of-type(16) {
-  text-align: center;
+  text-align: right;
 }
 /*.el-table--border .has-gutter td:nth-last-of-type(2), .el-table--border .has-gutter th:nth-last-of-type(2){
  text-align: center;

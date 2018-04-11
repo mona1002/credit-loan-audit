@@ -53,7 +53,7 @@
         <!-- <div class="table_list"> -->
           <el-table :data="antiTableData.taskDetailList" style="width: 100% ;height: calc( 100% - 105px);" border stripe fit highlight-current-row
             class="anti-table" v-show="antiFlag!='03'&& antiFlag!='04'">
-            <el-table-column type="index" label="序号" width="50">
+            <el-table-column type="index"  align="center" label="序号" width="50">
             </el-table-column>
             <el-table-column prop="applySubno" label="进件编号">
             </el-table-column>
