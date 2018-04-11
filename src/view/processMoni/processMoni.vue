@@ -168,8 +168,8 @@
 
     <!-- 流程轨迹 -->
     <el-dialog title="流程轨迹" custom-class="trace" :visible.sync="dialogTraceVisible">
-      <el-collapse v-model="activeNames">
-        <el-collapse-item title="信审流程轨迹" name="1">
+      <!-- <el-collapse v-model="activeNames">
+        <el-collapse-item title="信审流程轨迹" name="1"> -->
           <el-table
             :data="traceList"
             border
@@ -225,8 +225,8 @@
               min-width="100">
             </el-table-column>
           </el-table>
-        </el-collapse-item>
-      </el-collapse>
+        <!-- </el-collapse-item>
+      </el-collapse> -->
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="dialogTraceVisible = false">返 回</el-button>
       </div>
