@@ -392,9 +392,8 @@ export default {
     // },
     submitForm() {
       console.log('提交反欺诈')
-
       // 判断必填
-      if(!this.applySubno){
+      if(!this.applySubNo){
         this.$message({
           message:"提示：请选择进件!",
           type:'warning'

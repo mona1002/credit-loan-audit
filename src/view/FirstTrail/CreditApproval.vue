@@ -681,15 +681,25 @@
       // var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
       // 取出存在本地当然 userInfo 
       this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
+      console.log( this.judgeFlag)
       if (this.judgeFlag == '01') { // 初审 任务 id  taskId
         this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+      console.log('初审')
+        
         // 挂起 任务id
         this.taskId = this.taskInWaitting.taskId;
         this.applyId= this.taskInWaitting.applyId;
          this.sproId = this.taskInWaitting.proId;
          this.appOrgId = this.taskInWaitting.appOrgId;
-        // 流程 实例id
         this.processInstanceId = this.taskInWaitting.processInstanceId;
+        this.custName = this.taskInWaitting.custName;
+        this.appTypeTxt = this.taskInWaitting.appTypeTxt;
+        this.applySubNo = this.taskInWaitting.applySubNo;
+        this.certTypeTxt = this.taskInWaitting.certTypeTxt;
+        this.certCode = this.taskInWaitting.certCode;
+        this.loanTerm = this.taskInWaitting.loanTerm;
+        this.baseProName = this.taskInWaitting.proName;
+
         // 任务状态
         this.taskStatus = JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
 
@@ -702,7 +712,10 @@
         }
 
       } else if (this.judgeFlag == '02') { // 终审取终审  taskId
+      console.log('终审')
         this.FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
+      console.log( this.FtaskInWaitting )
+        console
         // 挂起 任务id
         this.taskId = this.FtaskInWaitting.taskId;
         // 流程 实例id
@@ -722,7 +735,7 @@
           this.nodeName = '信审总监审批审批'
         }
         this.routeParams = '?taskNodeName=' + this.taskName
-        console.log(this.taskId);
+        console.log('taskId : '+this.taskId);
         // 回退 拒绝  审批
         // 经办人 登录用户名
         this.userInfo = JSON.parse(localStorage.getItem('userInf'));
@@ -730,7 +743,7 @@
         // 用户id
         this.orgId = this.userInfo.orgId;
         // this.dealroperCode = userInfo.userCode;
-        console.log(this.dealroperCode);
+        console.log('userCode : '+this.dealroperCode);
         // 经办时间
         // this.dealroperDate =
         //   new Date().toLocaleString()
@@ -751,9 +764,9 @@
         // this.applyId = '00542';
         this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
         this.applyId = this.applicationInformationDetail.applyId;
-        console.log(this.applyId);
+        // console.log(this.applyId);
         this.appOrgId = this.applicationInformationDetail.appOrgId;
-        console.log(this.appOrgId);
+        // console.log(this.appOrgId);
         this.appOrgCode = this.applicationInformationDetail.appOrgCode;
         // 客户编号
         this.custNo = this.applicationInformationDetail.custNo;
@@ -821,6 +834,7 @@
 
 
       }
+       console.log('applyId : '+ this.applyId)
     },
     methods: {
       hangOoutBtn() {
