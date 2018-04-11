@@ -34,8 +34,8 @@
           </div>
         </li>
         <li class="item-column1 submit-class">
-          <el-button type="primary" @click="resetQuery">重置</el-button>
           <el-button type="primary" @click="resetQueryList">查询</el-button>
+            <el-button type="primary" @click="resetQuery">重置</el-button>
         </li>
       </div>
       <!-- </el-collapse-item> -->
@@ -80,7 +80,7 @@
           </el-table-column>
           <el-table-column prop="fraudStateTxt" label="反欺诈状态" width="120">
           </el-table-column>
-          <el-table-column label="操作" width="180">
+          <el-table-column label="操作" align="center" width="180">
             <!-- <template slot-scope="scope">
             <el-button size="mini" @click="handleClickInfo(scope.row)">查看</el-button>
             <el-button size="mini" @click="handleClickEdit(scope.row)">编辑</el-button>
