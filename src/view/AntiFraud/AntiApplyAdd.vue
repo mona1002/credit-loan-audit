@@ -153,7 +153,7 @@
                 <el-button type="primary" @click="resetQuery">重置</el-button>
               </li>
             </div>
-            <el-table :data="tableData.recordList" height="250" border style="width: 100%" highlight-current-row center @row-click="itemClick">
+            <el-table :data="tableData.taskDetailList" height="250" border style="width: 100%" highlight-current-row center @row-click="itemClick">
               <el-table-column type="index" label="序号" align="center" width="60">
               </el-table-column>
               <el-table-column prop="applySubno" label="进件编号" width="170">
