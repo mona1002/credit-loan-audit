@@ -304,7 +304,7 @@
             StatefullPath: '/AntiApplyEdit'
           })
         } else { // 否则是新增
-          routeParms = 'id=' + ';flag=add'
+          // routeParms = 'id=' + ';flag=add'
           console.log('新增')
           this.$router.push({
             name: 'AntiApplyAdd',
@@ -313,16 +313,14 @@
               flag: 'add'
             }
           });
-
-          // this.$store.dispatch('addVisitedViews', {
-          //   name: '反欺诈申请-新增',
-          //   path: '/AntiApplyAdd',
-          //   flag: 'add',
-          //   params: '',
-          //   StatefullPath: '/AntiApplyAdd'
-          // })
+          this.$store.dispatch('addVisitedViews', {
+            name: '反欺诈申请-新增',
+            path: '/AntiApplyAdd',
+            flag: '',
+            params: '',
+            StatefullPath: '/AntiApplyAdd'
+          })
         }
-
       },
       // 反欺诈申请查看
       handleClickInfo(row) {
