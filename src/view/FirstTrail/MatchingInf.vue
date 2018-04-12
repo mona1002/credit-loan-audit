@@ -4,13 +4,13 @@
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
       <p class="PerDtl">
-        <span> 借款人： {{custName}}</span>
+        <!-- <span> 借款人： {{custName}}</span>
         <span> 进件编号: {{customInf.applyMainNo}}</span>
         <span> 证件号码: {{customInf.accepCusBasicInfo.certCode}}</span>
         <span> 进件机构: {{customInf.appOrgName}}</span>
         <span> 门店成立时间: {{customInf.appOrgRegisterDate}}</span>
         <span> 业务员入职时间： {{customInf.salPerEmployDate}}</span>
-        <span>{{customInf.adminIntroduce}}</span>
+        <span>{{customInf.adminIntroduce}}</span> -->
       </p>
       <div class="SplitScreen_wrap" id="rWrap" ref="rWrap">
         <!-- 左侧分屏部分 -->
@@ -74,7 +74,7 @@
           </div>
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
-            <RAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn' ></RAudioVisual>
+            <!-- <RAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn' ></RAudioVisual>
             <Rremark v-if=" this.tabContent2==1"></Rremark>
             <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
             <RapplicationInformationDetail v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
@@ -85,7 +85,7 @@
             <aMAntiApplyInf v-if=" this.tabContent2==8">反欺诈结论</aMAntiApplyInf>
             <RFinanceInformation v-if=" this.tabContent2==9">财务信息</RFinanceInformation>
             <RprocessTrajectory v-if=" this.tabContent2==10">流程轨迹</RprocessTrajectory>
-            <RApprovalConclusion v-if=" this.tabContent2==11">审批结论轨迹</RApprovalConclusion>
+            <RApprovalConclusion v-if=" this.tabContent2==11">审批结论轨迹</RApprovalConclusion> -->
           </div>
         </div>
       </div>
@@ -321,7 +321,7 @@
           this.$message.error(res.msg);
         }
       });
-       this.MyMove();
+      //  this.MyMove();
       this.title = "影像资料";
     },
     components: {
