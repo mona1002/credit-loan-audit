@@ -12,7 +12,7 @@
         <span> 业务员入职时间： {{customInf.salPerEmployDate}}</span>
         <span>{{customInf.adminIntroduce}}</span>
       </p>
-      <div class="SplitScreen_wrap">
+      <div class="SplitScreen_wrap" id="rWrap" ref="rWrap">
         <!-- 左侧分屏部分 -->
         <div class="left" ref="rLeft">
           <div ref="Left_title" class="Left_ul" @mouseenter="showList" @mouseleave="hid">
@@ -321,6 +321,7 @@
           this.$message.error(res.msg);
         }
       });
+       this.MyMove();
       this.title = "影像资料";
     },
     components: {
@@ -443,6 +444,7 @@
     width: 100%;
     height: calc( 100% - 33px);
     min-width: 1306px;
+    position: relative;    
   }
 
   .left,
