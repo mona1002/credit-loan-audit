@@ -826,6 +826,26 @@
       canc() {
         this.hangOut = false;
       },
+      goTPath() {
+        this.$router.push('/taskInWaitting');
+        this.$store.dispatch('addVisitedViews', {
+          name: '初审审批',
+          path: '/taskInWaitting',
+          flag: '01',
+          params: '',
+          StatefullPath: '/taskInWaitting',
+        })
+      },
+      goFtPath() {
+        this.$router.push('/FtaskInWaitting' + this.routeParams);
+        this.$store.dispatch('addVisitedViews', {
+          name: this.nodeName,
+          path: '/FtaskInWaitting',
+          flag: '02',
+          params: this.routeParams,
+          StatefullPath: '/FtaskInWaitting' + this.routeParams,
+        });
+      },
       Csave() {
         this.loadsitu = true;
         this.adbtn = '保存中';
@@ -846,6 +866,13 @@
           if (res.statusCode == '200') {
             this.hangOut = false;
             // done();
+            if (this.judgeFlag == '01') {
+              this.goTPath();
+            }
+            // 终审
+            else if (this.judgeFlag == '02') {
+              this.goFtPath();
+            }
           } else {
             if (res.statusCode == 500) {
               this.hangOut = false;
@@ -854,6 +881,13 @@
                 message: '网络异常,请重试!'
               });
             } else {
+              if (this.judgeFlag == '01') {
+                this.goTPath();
+              }
+              // 终审
+              else if (this.judgeFlag == '02') {
+                this.goFtPath();
+              }
               this.hangOut = false;
               this.$message({
                 type: 'warning',
@@ -2106,26 +2140,6 @@
           //console.log('初审', this.judgeFlag)
           this.calculateByAuditInfo();
         }
-      },
-      goFtPath() {
-        this.$router.push('/FtaskInWaitting' + this.routeParams);
-        this.$store.dispatch('addVisitedViews', {
-          name: this.nodeName,
-          path: '/FtaskInWaitting',
-          flag: '02',
-          params: this.routeParams,
-          StatefullPath: '/FtaskInWaitting' + this.routeParams,
-        });
-      },
-      goTPath() {
-        this.$router.push('/taskInWaitting');
-        this.$store.dispatch('addVisitedViews', {
-          name: '初审审批',
-          path: '/taskInWaitting',
-          flag: '01',
-          params: '',
-          StatefullPath: '/taskInWaitting',
-        })
       },
       // // // 批准金额
       // ploanAmt: function() {
