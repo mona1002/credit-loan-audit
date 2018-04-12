@@ -241,7 +241,7 @@
     </div>
     <!-- 审批 -->
     <div>
-      <el-dialog :visible.sync="shenPiShow" :modal="false" width="800px" top="-8vh">
+      <el-dialog :visible.sync="shenPiShow" :modal="false" width="676px" top="-8vh">
         <el-form class="back-form appro-form">
           <div class="form-title" style="position:relative;">
             审批信息
