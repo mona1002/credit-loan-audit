@@ -40,7 +40,7 @@
       </div>
       <!-- </el-collapse-item> -->
       <!-- </el-collapse> -->
-      <div class="content">
+      <div>
         <!-- 反欺诈申请 -->
         <!-- v-show="antiFlag!='03'&& antiFlag!='04'" -->
         <div class="address-title" v-show="antiFlag!='03'&& antiFlag!='04'">
@@ -50,78 +50,98 @@
             <span class="icon-add"></span> 添加
           </span>
         </div>
-        <!-- <div class="table_list"> -->
-          <el-table :data="antiTableData.taskDetailList" style="width: 100% ;height: calc( 100% - 105px);" border stripe fit highlight-current-row
-            class="anti-table" v-show="antiFlag!='03'&& antiFlag!='04'">
-            <el-table-column type="index"  align="center" label="序号" width="50">
-            </el-table-column>
-            <el-table-column prop="applySubno" label="进件编号">
-            </el-table-column>
-            <el-table-column prop="appDate" label="申请日期">
-            </el-table-column>
-            <el-table-column prop="applyCustName" label="客户名称">
-            </el-table-column>
-            <el-table-column prop="certTypeTxt" label="证件类型">
-            </el-table-column>
-            <el-table-column prop="certCode" label="证件号码">
-            </el-table-column>
-            <el-table-column prop="mainreaName" label="欺诈类型主原因" width="120">
-            </el-table-column>
-            <el-table-column prop="subreaName" label="子原因">
-            </el-table-column>
-            <el-table-column prop="applyDesc" label="反欺诈上报描述" width="150">
-            </el-table-column>
-            <el-table-column prop="applyPersonName" label="申请人">
-            </el-table-column>
-            <el-table-column prop="appOrgCode" label="反欺诈申请机构" width="130">
-            </el-table-column>
-            <el-table-column prop="appOrgName" label="反欺诈申请机构名称" width="150">
-            </el-table-column>
-            <el-table-column prop="appSuborgCode" label="反欺诈申请机构科室" width="150">
-            </el-table-column>
-            <el-table-column prop="appSuborgName" label="反欺诈申请机构科室名称" width="180">
-            </el-table-column>
-            <el-table-column prop="fraudStateTxt" label="反欺诈状态" width="120">
-            </el-table-column>
-            <el-table-column label="操作" align="center" width="180">
-              <template slot-scope="scope">
-                <el-button size="mini" v-if="scope.row.fraudStateTxt=='反欺诈拒绝'||scope.row.fraudStateTxt=='反欺诈放弃'" @click="handleClickEdit(scope.row)">编辑</el-button>
-                <el-button size="mini" @click="handleClickInfo(scope.row)">查看</el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-
-        <!-- </div> -->
-
         <!-- 反欺诈专员审批  反欺诈主管审批 -->
         <div class="address-title" v-show="antiFlag=='03'||antiFlag=='04'">
           <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">反欺诈审批任务列表 </span>
         </div>
-          <el-table :data="directorTableData.taskDetailList" style="width: 100% ;height: calc( 100% - 105px);" border stripe fit highlight-current-row @row-click="rowDbClick"
-            v-show="antiFlag=='03'||antiFlag=='04'" class="director-table">
-            <el-table-column type="index" :index="1" label="序号" width='50'>
-            </el-table-column>
-            <el-table-column prop="taskTypeTxt" label="任务类型">
-            </el-table-column>
-            <el-table-column prop="applySubNo" label="进件编号">
-            </el-table-column>
-            <el-table-column prop="appDate" label="申请日期">
-            </el-table-column>
-            <el-table-column prop="custName" label="客户名称">
-            </el-table-column>
-            <el-table-column prop="certTypeTxt" label="证件类型">
-            </el-table-column>
-            <el-table-column prop="certCode" label="证件号码">
-            </el-table-column>
-            <el-table-column prop="appOrgName" label="进件机构">
-            </el-table-column>
-            <el-table-column prop="proName" label="产品名称">
-            </el-table-column>
-            <el-table-column prop="activationTime" label="进入本环节时间">
-            </el-table-column>
-          </el-table>
+      </div>
+      <div class="content">
+        <!-- 反欺诈申请 -->
+        <!-- v-show="antiFlag!='03'&& antiFlag!='04'" -->
+        <!-- <div class="address-title" v-show="antiFlag!='03'&& antiFlag!='04'">
+          <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+          <span class="headFont">反欺诈申请列表</span>
+          <span class="btn-add" @click="handleClickEdit()">
+            <span class="icon-add"></span> 添加
+          </span>
+        </div> -->
+        <!-- <div class="table_list"> -->
+        <el-table :data="antiTableData.taskDetailList" border stripe fit highlight-current-row class="anti-table" v-show="antiFlag!='03'&& antiFlag!='04'">
+          <el-table-column type="index" align="center" label="序号" width="50">
+          </el-table-column>
+          <el-table-column prop="applySubno" label="进件编号">
+          </el-table-column>
+          <el-table-column prop="appDate" label="申请日期">
+          </el-table-column>
+          <el-table-column prop="applyCustName" label="客户名称">
+          </el-table-column>
+          <el-table-column prop="certTypeTxt" label="证件类型">
+          </el-table-column>
+          <el-table-column prop="certCode" label="证件号码">
+          </el-table-column>
+          <el-table-column prop="mainreaName" label="欺诈类型主原因" width="120">
+          </el-table-column>
+          <el-table-column prop="subreaName" label="子原因">
+          </el-table-column>
+          <el-table-column prop="applyDesc" label="反欺诈上报描述" width="150">
+          </el-table-column>
+          <el-table-column prop="applyPersonName" label="申请人">
+          </el-table-column>
+          <el-table-column prop="appOrgCode" label="反欺诈申请机构" width="130">
+          </el-table-column>
+          <el-table-column prop="appOrgName" label="反欺诈申请机构名称" width="150">
+          </el-table-column>
+          <el-table-column prop="appSuborgCode" label="反欺诈申请机构科室" width="150">
+          </el-table-column>
+          <el-table-column prop="appSuborgName" label="反欺诈申请机构科室名称" width="180">
+          </el-table-column>
+          <el-table-column prop="fraudStateTxt" label="反欺诈状态" width="120">
+          </el-table-column>
+          <el-table-column label="操作" align="center" width="180">
+            <template slot-scope="scope">
+              <el-button size="mini" v-if="scope.row.fraudStateTxt=='反欺诈拒绝'||scope.row.fraudStateTxt=='反欺诈放弃'" @click="handleClickEdit(scope.row)">编辑</el-button>
+              <el-button size="mini" @click="handleClickInfo(scope.row)">查看</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
 
+        <!-- </div> -->
+
+        <!-- 反欺诈专员审批  反欺诈主管审批 -->
+        <!-- <div class="address-title" v-show="antiFlag=='03'||antiFlag=='04'">
+          <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+          <span class="headFont">反欺诈审批任务列表 </span>
+        </div> -->
+        <el-table :data="directorTableData.taskDetailList" border stripe fit highlight-current-row @row-click="rowDbClick" v-show="antiFlag=='03'||antiFlag=='04'"
+          class="director-table">
+          <el-table-column type="index" :index="1" label="序号" width='50'>
+          </el-table-column>
+          <el-table-column prop="taskTypeTxt" label="任务类型">
+          </el-table-column>
+          <el-table-column prop="applySubNo" label="进件编号">
+          </el-table-column>
+          <el-table-column prop="appDate" label="申请日期">
+          </el-table-column>
+          <el-table-column prop="custName" label="客户名称">
+          </el-table-column>
+          <el-table-column prop="certTypeTxt" label="证件类型">
+          </el-table-column>
+          <el-table-column prop="certCode" label="证件号码">
+          </el-table-column>
+          <el-table-column prop="appOrgName" label="进件机构">
+          </el-table-column>
+          <el-table-column prop="proName" label="产品名称">
+          </el-table-column>
+          <el-table-column prop="activationTime" label="进入本环节时间">
+          </el-table-column>
+        </el-table>
+
+        <!-- <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 15, 20]"
+          :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="directorTableData.totalNum">
+        </el-pagination> -->
+      </div>
+      <div>
         <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 15, 20]"
           :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="directorTableData.totalNum">
         </el-pagination>
@@ -347,17 +367,17 @@
       handleClickEdit(row) {
         console.log('click the row in table');
         // row 有值, 跳编辑
-        var  routeParms;
+        var routeParms;
         if (row) {
           // 跳转到编辑
-          routeParms= 'id='+row.id+';flag=';
+          routeParms = 'id=' + row.id + ';flag=';
           this.$router.push({
             name: 'AntiApplyEdit',
             params: {
               id: row.id
             }
           });
-           localStorage.setItem("antiApplyFlagEdit", JSON.stringify(routeParms));
+          localStorage.setItem("antiApplyFlagEdit", JSON.stringify(routeParms));
           this.$store.dispatch('addVisitedViews', {
             name: '反欺诈申请-编辑',
             path: '/AntiApplyEdit',
@@ -374,7 +394,7 @@
           });
 
         }
-         localStorage.setItem("antiApplyFlagEdit", JSON.stringify(routeParms));
+        localStorage.setItem("antiApplyFlagEdit", JSON.stringify(routeParms));
       },
       // 反欺诈申请查看
       handleClickInfo(row) {
@@ -547,8 +567,8 @@
 
   .anti-fraud .content {
     width: 100%;
-    height: calc( 100% - 250px);
-    overflow:auto;
+    height: calc( 100% - 344px);
+    overflow: auto;
     position: relative;
   }
 
@@ -625,22 +645,13 @@
   .anti-fraud .address-title {
     height: 40px;
     background: #ededed;
-    /* display: block; */
     margin-bottom: 10px;
-    overflow: hidden;
     background: #eef0f9;
     border: 1px solid #e6eaee;
     width: 100%;
     font-size: 16px;
     color: #1f2d3d;
-    text-align: left;
-    vertical-align: middle;
     line-height: 40px;
-    padding-right: 10px;
-    color:red;
-    position: absolute;
-    /* top:0; */
-    z-index: 12;
   }
 
 
