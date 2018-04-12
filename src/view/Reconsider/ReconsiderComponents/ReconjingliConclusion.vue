@@ -415,6 +415,7 @@
   export default {
     data() {
       return {
+        creditDebitRate:null,//信用负债率
         //申请单ID
         id: '',
         //初始化的页面数据
@@ -675,7 +676,7 @@
             this.post('/creauditOpinion/queryCreauditOpinionObj', {
               applyId: this.applyId
             }).then(res => {
-              console.log(res.data);
+              console.log(res.data.creditDebitRate);
               if (res.statusCode == 200) {
                 //批准期限[月]
                 if (res.data.ploanTerm) {
@@ -733,6 +734,8 @@
                 if (res.data.eachTermamt) {
                   this.caculData.eachTermamt = this.formatNumber(res.data.eachTermamt, 2, 0);
                 };
+                // 信用负债率
+                this.creditDebitRate= res.data.creditDebitRate;
                 //意见说明
                 this.appConclusion = res.data.appConclusion;
               }
@@ -742,6 +745,7 @@
       },
       //审批提交按钮
       spsure() {
+        console.log('haksdhfkljhfladsfhlkjdasf')
         // 月核实收入
         if (!this.verIncome) {
           this.$message({
@@ -788,7 +792,6 @@
         //this.sdialogVisible = false; 
 
         var reg = /,/;
-
         this.post('/creauditOpinion/add', {
           applyId: this.applyId,
           auditType: '02',
@@ -814,8 +817,9 @@
           applyCustId: this.applyCustId, //申请客户ID（申请登记-个人信息）
           applyConclusion: this.applyConclusion, //申请结论（00-通过）
           ploanOperId: '', // 批准人员
-          creditDebitRate: (this.caculData.creditDebitRate == 0 || this.caculData.creditDebitRate == '') ? 0 : this
-            .caculData.creditDebitRate.replace("%", "") / 100, // 信用负债率
+          // creditDebitRate: (this.caculData.creditDebitRate == 0 || this.caculData.creditDebitRate == '') ? 0 : this
+          //   .caculData.creditDebitRate.replace("%", "") / 100, // 信用负债率
+          creditDebitRate: (this.creditDebitRate == 0 || this.creditDebitRate == '') ? 0 : this.creditDebitRate.replace("%", "") / 100, // 信用负债率
           approvalFlag: '0', // 终审通过标志  0 未
           ploanDate: '', // 批准日期
           auditDate: '', // 批准时间
