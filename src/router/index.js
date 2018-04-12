@@ -83,7 +83,7 @@ import PneCtrl from'../view/SocialSeAndPneCtrl/PneCtrl.vue'//大数据
 import SocialSe from'../view/SocialSeAndPneCtrl/SocialSe.vue'//社保公积金
 
 //  -----------------------质检----------------------
-import exam from '../view/exam.vue'
+// import exam from '../view/exam.vue'
 import AudioVisualLeft from '../view/FirstTrail/detailComponent/AudioVisualLeft.vue'
 
 
@@ -93,10 +93,10 @@ const routes = [{
   path: '/',
   component: workbench
 },
-{
-  path:'/exam',
-  component:exam,
-},
+// {
+//   path:'/exam',
+//   component:exam,
+// },
 {
   path:'/AudioVisualLeft',
   component:AudioVisualLeft,
