@@ -49,6 +49,8 @@
             </div>
           </div>
         </div>
+        <!-- 中间 -->
+        <div class="SP_middle" ref="RM" id="RM" v-show="midShow"></div>
         <!-- 右侧分屏部分 -->
         <div class="right" ref="rRight">
           <img src="../../../static/images/backcopy.png" class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen">
@@ -175,6 +177,7 @@
         isFull: false,
         comBtn:true,
         alertComBtn:false,
+         midShow: true,
       }
     },
     methods: {
@@ -220,6 +223,7 @@
         this.$refs.rRight.style.width = "100%";
         this.watchData = this.$refs.rRight.style.width;
         this.isFull = true;
+          this.midShow = false;
       },
       DblScreen() {
         this.showHalfBtn = false;
@@ -228,6 +232,7 @@
         this.$refs.rRight.style.width = "50%";
         this.watchData = this.$refs.rRight.style.width;
         this.isFull = false;
+        this.midShow = true;        
       },
       tab1(ev, ind, val) {
         this.title = val;
@@ -255,6 +260,53 @@
         if (ind != 0 && ind != 8) {
           this.flag1[ind] = false;
         }
+      },
+       MyMove() {
+        console.log("移动")
+        var clickX, leftOffset, inx, nextW2, nextW;
+        var recordMoving;
+        var dragging = false;
+        var doc = document;
+        var labBtn = $("#RM");
+        var wrapWidth = $("#rWrap").width();
+        labBtn.bind('mousedown', () => {
+          dragging = true;
+          leftOffset = $("#rWrap").offset().left;
+          doc.onmousemove = (e) => {
+            if (dragging) {
+              clickX = e.pageX;
+              console.log(clickX + "=========" + leftOffset)
+              if (clickX > leftOffset + 10 && clickX < (wrapWidth - 5)) {
+                nextW2 = clickX - leftOffset;
+                labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px'); //按钮移动
+                labBtn.eq(0).prev().width(clickX - leftOffset + 'px'); //前一个div宽度变化
+                // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
+                labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px'); //减多少宽地待算
+                // console.log(this.AUpreWidth)
+                console.log(111)
+              } else if (clickX < leftOffset + 10 && clickX < (wrapWidth - 5)) {
+                labBtn.eq(0).css('left', '0px');
+                labBtn.eq(0).prev().width('0px');
+                labBtn.eq(0).next().width(wrapWidth - 6 + 'px'); //减多少宽地待算
+                // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
+                console.log(222)
+              }
+              console.log(clickX + "------------------" + wrapWidth)
+              if (clickX > (wrapWidth - 5)) {
+                console.log(333)
+                labBtn.eq(0).css('left', parseFloat(wrapWidth) - 11 + 'px');
+                labBtn.eq(0).prev().width(wrapWidth - 11 + 'px');
+                labBtn.eq(0).next().width('0px');
+                // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
+                //  console.log(this.preWidth)
+              }
+            }
+          };
+        });
+        $(doc).mouseup((e) => {
+          dragging = false;
+          e.cancelBubble = true;
+        });
       }
     },
     mounted() {

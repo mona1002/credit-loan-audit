@@ -34,7 +34,8 @@
               </span>
             </p>
             <div class="Left_right_BigImg">
-              <AudioVisualLeft msg="spLone" ref="AULeft" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn' :AUpreWidth.sync='preWidth' :AUobj='AULobj'></AudioVisualLeft>
+              <AudioVisualLeft msg="spLone" ref="AULeft" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'
+                :AUpreWidth.sync='preWidth' :AUobj='AULobj'></AudioVisualLeft>
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
               <InternalMatch v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
               <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
@@ -175,17 +176,17 @@
         comBtn: true,
         alertComBtn: false,
         midShow: true,
-        preWidth:null,
-        RpreWidth:null,
-        AULobj:{
-          BTN:'#MID',
-          WRAP:'#AUL',
-          CLIENTX:'AUclickX',
-          OFFSET:'AUleftOffset',
-          VA:'bbr',
-          NUM:10
+        preWidth: null,
+        RpreWidth: null,
+        AULobj: {
+          BTN: '#MID',
+          WRAP: '#AUL',
+          CLIENTX: 'AUclickX',
+          OFFSET: 'AUleftOffset',
+          VA: 'bbr',
+          NUM: 10
         },
-        
+
       }
     },
     methods: {
@@ -200,7 +201,7 @@
         this.CompareAlert = true;
       },
       closeCompareBtn() {
-        this.CompareAlert = false; 
+        this.CompareAlert = false;
       },
       leftMovingBtn() {
         if (parseFloat(this.$refs.right_tab_ul.style.left) >= 0) {
@@ -321,49 +322,49 @@
         var doc = document;
         var labBtn = $("#RM");
         var wrapWidth = $("#rWrap").width();
-        labBtn.bind('mousedown', ()=> {
+        labBtn.bind('mousedown', () => {
           dragging = true;
           leftOffset = $("#rWrap").offset().left;
-          doc.onmousemove =  (e)=> {
-          if (dragging) {
-            clickX = e.pageX;
-            console.log(clickX+"========="+leftOffset)
-            if (clickX > leftOffset + 10 &&clickX < (wrapWidth-5)) {
-              nextW2 = clickX - leftOffset;
-              labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px'); //按钮移动
-              labBtn.eq(0).prev().width(clickX - leftOffset + 'px'); //前一个div宽度变化
-            // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
-              labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px'); //减多少宽地待算
-              // console.log(this.AUpreWidth)
-              console.log(111)
-            } else if(clickX < leftOffset + 10 &&clickX < (wrapWidth-5)) {
-              labBtn.eq(0).css('left', '0px');
-              labBtn.eq(0).prev().width('0px');
-              labBtn.eq(0).next().width(wrapWidth - 6 + 'px'); //减多少宽地待算
-            // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
-              console.log(222)
-            }
-            console.log(clickX+"------------------"+wrapWidth)
-            if (clickX > (wrapWidth-5)) {
-              console.log(333)
-              labBtn.eq(0).css('left', parseFloat(wrapWidth) - 11 + 'px');
-              labBtn.eq(0).prev().width(wrapWidth - 11 + 'px');
-              labBtn.eq(0).next().width('0px');
-            // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
-              //  console.log(this.preWidth)
-            }
+          doc.onmousemove = (e) => {
+            if (dragging) {
+              clickX = e.pageX;
+              console.log(clickX + "=========" + leftOffset)
+              if (clickX > leftOffset + 10 && clickX < (wrapWidth - 5)) {
+                nextW2 = clickX - leftOffset;
+                labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px'); //按钮移动
+                labBtn.eq(0).prev().width(clickX - leftOffset + 'px'); //前一个div宽度变化
+                // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
+                labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px'); //减多少宽地待算
+                // console.log(this.AUpreWidth)
+                console.log(111)
+              } else if (clickX < leftOffset + 10 && clickX < (wrapWidth - 5)) {
+                labBtn.eq(0).css('left', '0px');
+                labBtn.eq(0).prev().width('0px');
+                labBtn.eq(0).next().width(wrapWidth - 6 + 'px'); //减多少宽地待算
+                // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
+                console.log(222)
+              }
+              console.log(clickX + "------------------" + wrapWidth)
+              if (clickX > (wrapWidth - 5)) {
+                console.log(333)
+                labBtn.eq(0).css('left', parseFloat(wrapWidth) - 11 + 'px');
+                labBtn.eq(0).prev().width(wrapWidth - 11 + 'px');
+                labBtn.eq(0).next().width('0px');
+                // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
+                //  console.log(this.preWidth)
+              }
               // recordMoving=labBtn.eq(0).prev().width();            
-        //  this.preWidth =recordMoving
-// this.$refs.AULeft.MyMove();
+              //  this.preWidth =recordMoving
+              // this.$refs.AULeft.MyMove();
 
-            // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-            // console.log( recordMoving)
-          }
-        };
+              // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+              // console.log( recordMoving)
+            }
+          };
         });
-           $(doc).mouseup((e)=> {
-            // console.log( this.preWidth)
-        //  this.preWidth =recordMoving
+        $(doc).mouseup((e) => {
+          // console.log( this.preWidth)
+          //  this.preWidth =recordMoving
           dragging = false;
           e.cancelBubble = true;
         });
@@ -395,7 +396,6 @@
       },
     },
     mounted() {
-      // this.MyMove();
       this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.applyId,
@@ -403,11 +403,12 @@
         if (res.statusCode == 200) {
           this.custName = res.data.accepCusBasicInfo.custName;
           this.customInf = res.data;
-          console.log(this.customInf )
+          console.log(this.customInf)
         } else {
           this.$message.error(res.msg);
         }
       });
+      // this.MyMove();      
       this.title = "影像资料";
     },
     components: {

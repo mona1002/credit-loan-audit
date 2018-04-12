@@ -54,7 +54,7 @@
           </div>
         </div>
         <!-- 中间 -->
-        <!-- <div class="SP_middle" ref="RM" id="RM" v-show="midShow"></div> -->
+        <div class="SP_middle" ref="RM" id="RM" v-show="midShow"></div>
         <!-- 右侧分屏部分 -->
         <div class="right" ref="rRight">
           <img src="../../../static/images/backcopy.png" class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen">
@@ -189,17 +189,7 @@
         isFull: false,
         comBtn: true,
         alertComBtn: false,
-          midShow: true,
-        //  preWidth:null,
-        // RpreWidth:null,
-        // AULobj:{
-        //   BTN:'#MID',
-        //   WRAP:'#AUL',
-        //   CLIENTX:'AUclickX',
-        //   OFFSET:'AUleftOffset',
-        //   VA:'bbr',
-        //   NUM:10
-        // },
+        midShow: true,
       }
     },
     methods: {
@@ -245,7 +235,7 @@
         this.$refs.rRight.style.width = "100%";
         this.watchData = this.$refs.rRight.style.width;
         this.isFull = true;
-         this.midShow = false;
+        this.midShow = false;
       },
       DblScreen() {
         this.showHalfBtn = false;
@@ -254,7 +244,7 @@
         this.$refs.rRight.style.width = "50%";
         this.watchData = this.$refs.rRight.style.width;
         this.isFull = false;
-         this.midShow = true;
+        this.midShow = true;
       },
       tab1(ev, ind, val) {
         this.title = val;
@@ -332,7 +322,6 @@
       }
     },
     mounted() {
-      //  this.MyMove();
       this.tastwaitingPass = JSON.parse(localStorage.getItem("FtaskInWaitting"));
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.applyId,
@@ -344,6 +333,7 @@
           this.$message.error(res.msg);
         }
       });
+      //  this.MyMove();
       this.title = "影像资料";
     },
     components: {
@@ -476,6 +466,7 @@
     width: 100%;
     height: calc( 100% - 33px);
     min-width: 1306px;
+    position: relative;
   }
 
   .left,
