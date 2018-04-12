@@ -35,12 +35,12 @@
         </li>
         <li class="item-column1 submit-class">
           <el-button type="primary" @click="resetQueryList">查询</el-button>
-            <el-button type="primary" @click="resetQuery">重置</el-button>
+          <el-button type="primary" @click="resetQuery">重置</el-button>
         </li>
       </div>
       <!-- </el-collapse-item> -->
       <!-- </el-collapse> -->
-      <div class="content">
+      <div>
         <!-- 反欺诈申请 -->
         <div class="address-title">
           <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
@@ -49,7 +49,9 @@
             <span class="icon-add"></span> 添加
           </span>
         </div>
-        <el-table :data="antiTableData.recordList" style="width: 100% ;height: calc( 100% - 105px);" border stripe fit highlight-current-row class="anti-table">
+      </div>
+      <div class="content">
+        <el-table :data="antiTableData.recordList" border stripe fit highlight-current-row class="anti-table">
           <el-table-column type="index" label="序号" align="center" width="50">
           </el-table-column>
           <el-table-column prop="applySubno" label="进件编号">
@@ -91,10 +93,11 @@
             </template>
           </el-table-column>
         </el-table>
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 15, 20]"
-          :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="antiTableData.totalRecord">
-        </el-pagination>
+     
       </div>
+      <div>   <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 15, 20]"
+          :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="antiTableData.totalRecord">
+        </el-pagination></div>
     </div>
   </div>
 </template>
@@ -280,10 +283,10 @@
       handleClickEdit(row) {
         console.log('click the row in table');
         // row 有值, 跳编辑
-         var  routeParms;
+        var routeParms;
         if (row) {
           // 跳转到编辑
-           routeParms= 'id='+row.id+';flag=edit'
+          routeParms = 'id=' + row.id + ';flag=edit'
           this.$router.push({
             name: 'AntiApplyEdit',
             params: {
@@ -292,7 +295,7 @@
             }
           });
           // console.log('编辑')
-           localStorage.setItem("antiApplyFlagEdit", JSON.stringify(routeParms));
+          localStorage.setItem("antiApplyFlagEdit", JSON.stringify(routeParms));
           this.$store.dispatch('addVisitedViews', {
             name: '反欺诈申请-编辑',
             path: '/AntiApplyEdit',
@@ -301,8 +304,8 @@
             StatefullPath: '/AntiApplyEdit'
           })
         } else { // 否则是新增
-         routeParms= 'id='+';flag=add'
-        console.log('新增')
+          // routeParms = 'id=' + ';flag=add'
+          console.log('新增')
           this.$router.push({
             name: 'AntiApplyAdd',
             params: {
@@ -310,16 +313,14 @@
               flag: 'add'
             }
           });
-        
-          // this.$store.dispatch('addVisitedViews', {
-          //   name: '反欺诈申请-新增',
-          //   path: '/AntiApplyAdd',
-          //   flag: 'add',
-          //   params: '',
-          //   StatefullPath: '/AntiApplyAdd'
-          // })
+          this.$store.dispatch('addVisitedViews', {
+            name: '反欺诈申请-新增',
+            path: '/AntiApplyAdd',
+            flag: '',
+            params: '',
+            StatefullPath: '/AntiApplyAdd'
+          })
         }
-         
       },
       // 反欺诈申请查看
       handleClickInfo(row) {
@@ -336,8 +337,8 @@
           name: '反欺诈申请-查看',
           path: '/AntiApplyInf',
           flag: '',
-          params: '?id='+ row.id,
-          StatefullPath:'/AntiApplyInf',
+          params: '?id=' + row.id,
+          StatefullPath: '/AntiApplyInf',
         })
       },
       // 主管/专员审批 跳分屏  
@@ -396,17 +397,20 @@
   .anti-fraud {
     height: 100%;
   }
-.tableList{
-      height: calc( 100% - 70px);
-}
+
+  .tableList {
+    height: calc( 100% - 70px);
+  }
+
   /* 容器 */
 
   .anti-fraud .content {
     width: 100%;
-    height: calc( 100% - 250px);
-    overflow:auto;
+    height: calc( 100% - 344px);
+    overflow: auto;
     position: relative;
   }
+
   /* 一列 */
 
   .anti-fraud .item-column1 {
@@ -435,7 +439,7 @@
   /* 搜索盒子 */
 
   .anti-fraud .search-box {
-  width: 100%;
+    width: 100%;
     padding: 10px;
     height: 155px;
   }
@@ -507,23 +511,15 @@
   }
 
   .anti-fraud .address-title {
-    width: 100%;
-    height: 40px;
-    font-size: 18px;
+ height: 40px;
     background: #ededed;
-    display: block;
     margin-bottom: 10px;
-    overflow: hidden;
     background: #eef0f9;
     border: 1px solid #e6eaee;
-
     width: 100%;
     font-size: 16px;
     color: #1f2d3d;
-    text-align: left;
-    vertical-align: middle;
     line-height: 40px;
-    padding-right: 10px;
   }
 
   /* 反欺诈 添加 提交 作废 */
