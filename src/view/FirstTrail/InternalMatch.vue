@@ -401,6 +401,7 @@
     components: {
       "internal-match-textarea": {
         template: '\
+        <div>\
             <el-form label-width="10px" class="demo-ruleForm">\
             <el-form-item  class="title-bar">\
             <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">\
@@ -408,9 +409,17 @@
             </el-form-item>\
             <el-input type="textarea" v-model="audit_desc" class="mark-textarea" resize="none" :rows="5" :maxlength="500"></el-input>\
             <el-form-item class="mark-button">\
-                <el-button type="primary" @click="submitForm()">确认</el-button>\
+                <el-button type="primary" @click="hangOoutBtn()">确认</el-button>\
             </el-form-item>\
             </el-form>\
+             <el-dialog title="提示" :modal="false" :visible.sync="hangOut" width="420px">\
+        <span>确定操作？</span>\
+        <span slot="footer" class="dialog-footer">\
+          <el-button class="calbtn" @click="canc">取消</el-button>\
+          <el-button class="subtn" type="primary" :loading="loadsitu" @click="Csave">{{adbtn}}</el-button>\
+        </span>\
+      </el-dialog>\
+        </div>\
             ',
         data() {
           return {
@@ -421,7 +430,10 @@
             applyId: '', // 申请单id
             audit_desc: '', //匹配结论
             creator_code: '', // 用户操作人编码 userCode
-            resMsg: ''
+            resMsg: '',
+            hangOut: false,
+            loadsitu: false,
+            adbtn: '确定',
           };
         },
         mounted() {
@@ -454,11 +466,47 @@
             })
 
           },
+          hangOoutBtn() {
+            this.loadsitu = false;
+            this.adbtn = '确定';
+            this.hangOut = true;
+          },
+          canc() {
+            this.hangOut = false;
+          },
+          Csave() {
+            this.loadsitu = true;
+            this.adbtn = '保存中';
+            // 提交 匹配结论
+            this.post('internalMatch/addInternalMatchOption', {
+              // 申请单id
+              applyId: this.applyId,
+              // 操作人用户编码  userCode
+              creator_code: this.creator_code,
+              // 匹配结论
+              audit_desc: this.audit_desc,
+              id: this.auditId
+            }).then(res => {
+              if (res.statusCode == '200') {
+                this.resMsg = '保存成功！';
+                this.$message({
+                  type: 'success',
+                  message: this.resMsg
+                });
+                 this.hangOut = false;
+              } else {
+                this.resMsg = '提交失败,请重试！';
+                instance.confirmButtonText = '';
+                 this.hangOut = false;
+              }
+              instance.confirmButtonLoading = false;
+            });
+          },
           submitForm: function () {
-            console.log('click button')
-            console.log('this.applyId:', this.applyId);
-            console.log('this.creator_code:', this.creator_code);
-            console.log('this.audit_desc:', this.audit_desc);
+            // console.log('click button')
+            // console.log('this.applyId:', this.applyId);
+            // console.log('this.creator_code:', this.creator_code);
+            // console.log('this.audit_desc:', this.audit_desc);
             this.open();
           },
           // open 打开 是否确认提交弹窗

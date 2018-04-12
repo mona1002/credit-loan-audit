@@ -1118,8 +1118,8 @@
 			<el-dialog
 			  title="提示"
 			  :visible.sync="tidialogVisible"
-			  width="420px"
-			  top="35vh">
+			  :modal="false"
+			  width="420px">
 			  <span>{{info}}</span>
 			  <span slot="footer" class="dialog-footer">
 			  	<el-button type="primary" @click="infoSure">确定</el-button>
