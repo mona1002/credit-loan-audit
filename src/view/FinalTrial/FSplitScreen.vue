@@ -12,7 +12,7 @@
         <span> 业务员入职时间：{{customInf.salPerEmployDate}}</span>
         <span>{{customInf.adminIntroduce}}</span>
       </p>
-      <div class="SplitScreen_wrap">
+      <div class="SplitScreen_wrap" id="rWrap" ref="rWrap">
         <!-- 左侧分屏部分 -->
         <div class="left" ref="rLeft">
           <div ref="Left_title" class="Left_ul" @mouseenter="showList" @mouseleave="hid">
@@ -34,7 +34,7 @@
               </span>
             </p>
             <div class="Left_right_BigImg ">
-              <AudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0"  msg="FspLone" v-on:CompareShow="compBtnS"  :comBtn.sync='comBtn'></AudioVisualLeft>
+              <AudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0" msg="FspLone" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></AudioVisualLeft>
               <!-- √ -->
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
               <!-- √ -->
@@ -53,6 +53,7 @@
             </div>
           </div>
         </div>
+        <div class="SP_middle" ref="RM" id="RM" v-show="midShow"></div>
         <!-- 右侧分屏部分 -->
         <div class="right" ref="rRight">
           <img src="../../../static/images/backcopy.png" class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen">
@@ -105,7 +106,7 @@
           <p>影像资料</p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <AudioVisualLeft :custom="customInf.applyId "  msg="FspLtwo"></AudioVisualLeft>
+            <AudioVisualLeft :custom="customInf.applyId " msg="FspLtwo"></AudioVisualLeft>
           </div>
         </div>
         <!-- 弹出层右侧 div -->
@@ -119,7 +120,7 @@
           </p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <AudioVisualLeft :custom="customInf.applyId " ref="audioChild" v-on:inputInf="inputInner"  msg="FspLthree"></AudioVisualLeft>
+            <AudioVisualLeft :custom="customInf.applyId " ref="audioChild" v-on:inputInf="inputInner" msg="FspLthree"></AudioVisualLeft>
           </div>
         </div>
       </div>
@@ -149,7 +150,7 @@
   export default {
     data() {
       return {
-        custName:'',
+        custName: '',
         SplitLeft: "left",
         SplitRight: "right",
         watchData: '',
@@ -185,8 +186,19 @@
           label: '内匹客户姓名'
         }],
         isFull: false,
-            comBtn:true,
-        alertComBtn:false,
+        comBtn: true,
+        alertComBtn: false,
+          midShow: true,
+        //  preWidth:null,
+        // RpreWidth:null,
+        // AULobj:{
+        //   BTN:'#MID',
+        //   WRAP:'#AUL',
+        //   CLIENTX:'AUclickX',
+        //   OFFSET:'AUleftOffset',
+        //   VA:'bbr',
+        //   NUM:10
+        // },
       }
     },
     methods: {
@@ -232,6 +244,7 @@
         this.$refs.rRight.style.width = "100%";
         this.watchData = this.$refs.rRight.style.width;
         this.isFull = true;
+         this.midShow = false;
       },
       DblScreen() {
         this.showHalfBtn = false;
@@ -240,6 +253,7 @@
         this.$refs.rRight.style.width = "50%";
         this.watchData = this.$refs.rRight.style.width;
         this.isFull = false;
+         this.midShow = true;
       },
       tab1(ev, ind, val) {
         this.title = val;
@@ -267,15 +281,63 @@
         if (ind != 0 && ind != 8) {
           this.flag1[ind] = false;
         }
+      },
+      MyMove() {
+        console.log("移动")
+        var clickX, leftOffset, inx, nextW2, nextW;
+        var recordMoving;
+        var dragging = false;
+        var doc = document;
+        var labBtn = $("#RM");
+        var wrapWidth = $("#rWrap").width();
+        labBtn.bind('mousedown', () => {
+          dragging = true;
+          leftOffset = $("#rWrap").offset().left;
+          doc.onmousemove = (e) => {
+            if (dragging) {
+              clickX = e.pageX;
+              console.log(clickX + "=========" + leftOffset)
+              if (clickX > leftOffset + 10 && clickX < (wrapWidth - 5)) {
+                nextW2 = clickX - leftOffset;
+                labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px'); //按钮移动
+                labBtn.eq(0).prev().width(clickX - leftOffset + 'px'); //前一个div宽度变化
+                // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
+                labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px'); //减多少宽地待算
+                // console.log(this.AUpreWidth)
+                console.log(111)
+              } else if (clickX < leftOffset + 10 && clickX < (wrapWidth - 5)) {
+                labBtn.eq(0).css('left', '0px');
+                labBtn.eq(0).prev().width('0px');
+                labBtn.eq(0).next().width(wrapWidth - 6 + 'px'); //减多少宽地待算
+                // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
+                console.log(222)
+              }
+              console.log(clickX + "------------------" + wrapWidth)
+              if (clickX > (wrapWidth - 5)) {
+                console.log(333)
+                labBtn.eq(0).css('left', parseFloat(wrapWidth) - 11 + 'px');
+                labBtn.eq(0).prev().width(wrapWidth - 11 + 'px');
+                labBtn.eq(0).next().width('0px');
+                // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
+                //  console.log(this.preWidth)
+              }
+            }
+          };
+        });
+        $(doc).mouseup((e) => {
+          dragging = false;
+          e.cancelBubble = true;
+        });
       }
     },
     mounted() {
+      //  this.MyMove();
       this.tastwaitingPass = JSON.parse(localStorage.getItem("FtaskInWaitting"));
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.applyId,
       }).then(res => {
         if (res.statusCode == 200) {
-           this.custName=res.data.accepCusBasicInfo.custName;
+          this.custName = res.data.accepCusBasicInfo.custName;
           this.customInf = res.data;
         } else {
           this.$message.error(res.msg);
@@ -309,6 +371,7 @@
   .SplitScreen {
     height: 100%;
   }
+
   /* 激活样式 流-css */
 
   .tab1Default {
@@ -331,6 +394,7 @@
   .setGray {
     color: #bfcbd9;
   }
+
   /* 对比弹出层关闭按钮 */
 
   .compareClose {
@@ -339,6 +403,7 @@
     bottom: 19px;
     z-index: 1;
   }
+
   /* 全屏  --  分屏 图标 */
 
   .icon_showHalf {
@@ -364,6 +429,7 @@
     left: 0;
     top: 0;
   }
+
   /*-------------------------------- */
 
   .SplitScreen_content {
@@ -372,6 +438,7 @@
     overflow: auto;
     padding: 13px 9px;
   }
+
   /* 借款人详情 */
 
   .PerDtl {
@@ -392,6 +459,7 @@
   .PerDtl span:nth-of-type(7) {
     width: 105px;
   }
+
   /* 切换按钮 */
 
   .stretch {
@@ -400,6 +468,7 @@
     top: 2px;
     z-index: 1;
   }
+
   /* 左右分屏 */
 
   .SplitScreen_wrap {
@@ -426,7 +495,9 @@
   .AudioVisual_wrap_compare_left {
     margin-right: 2px;
   }
+
   /* 左屏 */
+
   /* 左侧列表  影像资料等 ul 外包   流 */
 
   .left .Left_ul {
@@ -452,11 +523,13 @@
   .Right_tab_ul_wrap ul li:hover {
     cursor: pointer;
   }
+
   /* 左侧详情 div   流 */
 
   .Left_detail_div {
     height: 100%;
   }
+
   /* 左侧详情 p标签   流-css */
 
   .Left_right_Title,
@@ -477,6 +550,7 @@
     text-align: right;
     padding-right: 40px;
   }
+
   /* 左侧详情 content div 内容   流-css */
 
   .Left_right_BigImg {
@@ -484,7 +558,9 @@
     height: calc( 100% - 48px);
     overflow: auto;
   }
+
   /* 右屏 */
+
   /* 右侧tab切换头外的ul   流 */
 
   .Right_tab_ul_wrap {
@@ -508,6 +584,7 @@
     height: 38px;
     line-height: 38px;
   }
+
   /* ======================================================================================================= */
 
   .tab2_Content {
@@ -515,6 +592,7 @@
     height: calc( 100% - 48px);
     overflow: auto;
   }
+
   /* 右侧tab切换头 左右滑动图标  流  */
 
   .pre_next_btn_wrap {
@@ -530,6 +608,7 @@
   .pre_next_btn_wrap:nth-of-type(2) {
     right: 10px;
   }
+
   /*  对比弹出层 外包 div 流 */
 
   .AudioVisual_wrap_compare {
@@ -540,6 +619,7 @@
     z-index: 22;
     min-width: 1306px;
   }
+
   /* 弹出层 - 两侧组件 content  流 */
 
   .AlertContent {
