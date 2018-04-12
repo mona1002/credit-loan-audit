@@ -53,7 +53,8 @@
             </div>
           </div>
         </div>
-        <div class="SP_middle" ref="RM" id="RM" v-show="midShow"></div>
+        <!-- 中间 -->
+        <!-- <div class="SP_middle" ref="RM" id="RM" v-show="midShow"></div> -->
         <!-- 右侧分屏部分 -->
         <div class="right" ref="rRight">
           <img src="../../../static/images/backcopy.png" class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen">
