@@ -47,7 +47,7 @@
           </div>
         </div>
         <!-- 中间 -->
-        <div class="SP_middle" ref="RM" id="RM" v-show="midShow" @mousedown="abcd"></div>
+        <div class="SP_middle" ref="RM" id="RM" v-show="midShow"></div>
         <!-- 右侧分屏部分 -->
         <div class="right" ref="rRight">
           <img src="../../../static/images/backcopy.png" class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen">
@@ -313,9 +313,6 @@
       //     e.cancelBubble = true;
       //   })
       // },
-      abcd(){
-        console.log('abcd触发')
-      },
       MyMove() {
         console.log("移动")
         var clickX, leftOffset, inx, nextW2, nextW;
@@ -324,14 +321,10 @@
         var doc = document;
         var labBtn = $("#RM");
         var wrapWidth = $("#rWrap").width();
-        // var Pre = this.$refs.rLeft;
-        // var Nex = this.$refs.rRight;
         labBtn.bind('mousedown', ()=> {
           dragging = true;
           leftOffset = $("#rWrap").offset().left;
-          // doc.onmousemove = function (e) {
           doc.onmousemove =  (e)=> {
-            // console.log(e)
           if (dragging) {
             clickX = e.pageX;
             console.log(clickX+"========="+leftOffset)

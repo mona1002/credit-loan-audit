@@ -719,10 +719,20 @@
           this.nodeName = '信审总监审批审批'
         }
         this.routeParams = '?taskNodeName=' + this.taskName
-        console.log('taskId : ' + this.taskId);
+
+        // 拒绝按钮根据 角色判断 BX20
+        if (this.userInfo.roleCodesList) {
+          for (var i = 0; i < this.userInfo.roleCodesList.length; i++)
+            if (this.userInfo.roleCodesList[i] == 'BX20')
+              if (this.judgeFlag == '01')
+                this.jujueBtnShow = true;
+        }
+      }
+         console.log('taskId : ' + this.taskId);
         // 回退 拒绝  审批
         // 经办人 登录用户名
         this.userInfo = JSON.parse(localStorage.getItem('userInf'));
+        console.log( this.userInfo)
         this.dealroperCode = this.userInfo.userCode;
         // 用户id
         this.orgId = this.userInfo.orgId;
@@ -734,15 +744,6 @@
         //   .replace(/\//g, '-')
         //   .match(/\d{4}\-\d{2}\-\d{1,2}/)[0]
         // console.log(this.dealroperDate);
-
-        // 拒绝按钮根据 角色判断 BX20
-        if (this.userInfo.roleCodesList) {
-          for (var i = 0; i < this.userInfo.roleCodesList.length; i++)
-            if (this.userInfo.roleCodesList[i] == 'BX20')
-              if (this.judgeFlag == '01')
-                this.jujueBtnShow = true;
-        }
-      }
       // applyId
       // this.applyId = '00542';
       // this.applyId = '00542';

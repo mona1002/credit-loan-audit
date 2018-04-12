@@ -438,7 +438,7 @@ export default {
                 fraudApplyInfo: {
                   creditappTaskid: this.creditappTaskid, // 任务id
                   applyId: this.applyId, // 申请单ID
-                  applySubno: this.applySubno, // 进件编号
+                  applySubno: this.applySubNo, // 进件编号
                   // applyCode: this.applyCode, // 申请人code
                   // applyPersonName: this.applyPersonName, // 申请人姓名
                   // appOrgCode: this.appOrgCode, // 申请机构code
@@ -487,11 +487,13 @@ export default {
                     });
                   }
                   instance.confirmButtonText = '';
+                   instance.confirmButtonLoading = false;
                 }
                 instance.confirmButtonLoading = false;
               })
           } else {
             done();
+             instance.confirmButtonLoading = false;
           }
         }
       }).then(action => {
@@ -499,7 +501,7 @@ export default {
           type: 'success',
           message: this.resMsg
         });
-
+ instance.confirmButtonLoading = false;
       });
     },
     // 返回  上级路由
