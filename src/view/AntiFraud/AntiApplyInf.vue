@@ -66,7 +66,7 @@
         </li>
         <li class="item-column3">
           <div class="left-title left-title2">
-            反欺诈申请类型主原因：
+            反欺诈申请类型子原因：
           </div>
           <div class="item-content">
             {{subreaName}}
@@ -131,7 +131,7 @@ export default {
   },
   props: ['isAntiDetail'],
   mounted() {
-    console.log(this.showFqz);
+    // console.log(this.showFqz);
     // 先判断是 初审 终审  /  专员  主管
     var judgeFlag = JSON.parse(localStorage.getItem('judge'));
     this.antiFlag = judgeFlag.flag;

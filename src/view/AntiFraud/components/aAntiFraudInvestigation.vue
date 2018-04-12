@@ -136,10 +136,10 @@
 				      <span class="headFont">电核区</span>
 				    </div>
 			      	<div class="remarkIcon right">
-			      		<span @click="add" class="rightSpan">
+			      		<span @click="add" class="rightSpans">
 			      			<img src="../../../../static/images/add.png" class="icon"><span>添加</span>
 			      		</span>
-						<span @click="delet" class="rightSpan">
+						<span @click="delet" class="rightSpans">
 							<img src="../../../../static/images/delete.png" class="icon"><span>删除</span>
 						</span>
 					</div>
@@ -169,9 +169,19 @@
 				        prop="relation"
 				        label="关系"
 				        min-width="80">
-				        <template slot-scope="scope">
+				        <!-- <template slot-scope="scope">
 				        	<el-input v-model="scope.row.relation" placeholder="请输入内容" :disabled="scope.row.isInitFlag=='0'"></el-input>
-				        </template>
+				        </template> -->
+				        <template slot-scope="scope">
+					        <el-select v-model="scope.row.relation" placeholder="请选择" :disabled="scope.row.isInitFlag=='0'">
+							    <el-option
+							     v-for="item in relations"
+							     :key="item.value"
+							     :label="item.label"
+							     :value="item.value">
+							   </el-option>
+							</el-select>
+						</template>
 				      </el-table-column>
 				      <el-table-column
 				        prop="record"
@@ -305,6 +315,7 @@
 				fraudApplyInfo:'',
 				hitRuleList:[],
 				fraudTelCheckList:[],
+				createTime:'',
 				fraudAuditInfo:{
 					"appinfoId":"", // 反欺诈申请id
 		            "netCheck":"", // 网查
@@ -339,6 +350,20 @@
 			   reason:'',
 			   //恢复、解除的新数组
 			   newArray:[],
+			   relations:[
+					{'value': '01' ,'label': '夫妻'},
+					{'value': '02' ,'label': '父母'},
+					{'value': '03' ,'label': '子女'},
+					{'value': '04' ,'label': '兄弟'},
+					{'value': '05' ,'label': '姐妹'},
+					{'value': '06' ,'label': '兄妹'},
+					{'value': '07' ,'label': '姐弟'},
+					{'value': '08' ,'label': '朋友'},
+					{'value': '09' ,'label': '同事'},
+					{'value': '10' ,'label': '房东'},
+					{'value': '11' ,'label': '亲属'},
+					{'value': '12' ,'label': '其他'}
+	      		],
 			}
 		},
 		mounted(){
@@ -397,11 +422,17 @@
 	          		}else{
 	          			this.fraudAuditInfo = res.data.fraudAuditInfo;
 	          		};
-	          		
+	          		//电核区
 	          		if(res.data.fraudTelCheckList == null){
 	          			this.fraudTelCheckList = this.fraudTelCheckList;
 	          		}else{
 	          			this.fraudTelCheckList = res.data.fraudTelCheckList;
+	          			for(var i=0;i<res.data.fraudTelCheckList.legth;i++){
+	          				this.createTime = res.data.fraudTelCheckList[i].createTime; 
+	          			};
+	          			for(var i=0;i<this.fraudTelCheckList.legth;i++){
+	          				this.fraudTelCheckList[i].createTime = this.createTime;
+	          			};
 	          		};
 	          	}
 	          })
@@ -461,13 +492,23 @@
 					                "relation":"", // 关系
 					                "record":"" ,// 记录录入
 					                "applyId":this.applyId,
+					                "createTime":''//时间顺序 保证页面上的列表顺序不会乱
 								}); 
 		 	},
 		 	delet:function(event){
 		 		event.stopPropagation();
 		 		console.log(this.currentRow);
-				for(var i=0;i<this.fraudTelCheckList.length;i++){
+				/*for(var i=0;i<this.fraudTelCheckList.length;i++){
 					if(this.fraudTelCheckList[i]==this.currentRow && this.fraudTelCheckList[i].isInitFlag == '1'){
+						this.fraudTelCheckList.splice(i,1);
+					}
+				}*/
+				for(var i=0;i<this.fraudTelCheckList.length;i++){
+					if(this.fraudTelCheckList[i]==this.currentRow && this.fraudTelCheckList[i].isInitFlag == '0'){
+						return
+						//console.log('jjjjj');
+					}else if(this.fraudTelCheckList[i]==this.currentRow){
+						//console.log(9999);
 						this.fraudTelCheckList.splice(i,1);
 					}
 				}
@@ -645,7 +686,9 @@
 		width: 100%;
 	}
 	.table th {
-		color: #1f2d3d;
+		/* color: #1f2d3d; */
+		color: #909399;
+		font-weight: 800;
 		height: 48px;
 		line-height: 48px;
 		border:1px solid #e6ebf5;
@@ -742,24 +785,28 @@
 	.right{
 		float: right;
 	}
-	.right .rightSpan{
+	.right .rightSpans{
 		margin-left: 10px;
+		display: inline-block;
+	    width: 66px;
+	    height: 40px;
+	    float: left;
 	}
-	.right .rightSpan img{
+	.right .rightSpans img{
 		padding-top: 5px;
     	float: left;
 	}
-	.right .rightSpan span{
+	.right .rightSpans span{
 		margin-left: 10px;
     	float: left;
 	}
-	.right .rightSpan .icon{
+	.right .rightSpans .icon{
 		color: #20a0ff;
     	font-size: 20px;
 	}
-	.right .rightSpan:nth-of-type(2) img, .right .rightSpan:nth-of-type(3) img{
+	/* .right .rightSpan:nth-of-type(2) img, .right .rightSpan:nth-of-type(3) img{
 		padding-left:24px;
-	}
+	} */
 	/* 确定按钮 */
 	.button{
 		width: 100%;

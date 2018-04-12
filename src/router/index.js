@@ -41,38 +41,28 @@ import FcCreditForm from '@/view/FinalTrial/FinalComponent/FcCreditForm'
 //列表页
 import FtaskInWaitting from '@/view/FinalTrial/FtaskInWaitting'
 import FMCreditForm from '@/view/FinalTrial/FinalMatchComponent/FMCreditForm'
-import FMatchingInf from '@/view/FinalTrial/FMatchingInf'
 import FCreditForm from '../view/FinalTrial/FinalComponent/FCreditForm'
 // ------------反欺诈------------------
 import AntiAudit from '@/view/AntiFraud/AntiAudit.vue'//反欺诈分屏
 import AntiRules from '../view/AntiFraud/AntiRules.vue'//反欺诈规则设定
 import AntiCaseNum from '../view/AntiFraud/AntiCaseNum'// 案件编号维护
-import AnitAudioVisual from'../view/AntiFraud/components/AnitAudioVisual.vue'
-// 反欺诈 列表
-import AntiFraud from '@/view/AntiFraud/AntiFraud.vue'
-// 反欺诈 专员 / 主管
-import AntiFraud34 from '@/view/AntiFraud/AntiFraud34.vue'
-// 反欺诈 申请
-import AntiApplyEditf from '@/view/AntiFraud/AntiApplyEditf.vue'
-// 反欺诈申请列表
+import AnitAudioVisual from'../view/AntiFraud/components/AnitAudioVisual.vue'// 反欺诈 列表
+import AntiFraud from '@/view/AntiFraud/AntiFraud.vue'// 反欺诈 专员 / 主管
+import AntiFraud34 from '@/view/AntiFraud/AntiFraud34.vue'// 反欺诈 申请
+import AntiApplyEditf from '@/view/AntiFraud/AntiApplyEditf.vue'// 反欺诈申请列表
 import AntiApplyEdit from '@/view/AntiFraud/AntiApplyEdit.vue'
 import AntiApplyInf from '@/view/AntiFraud/AntiApplyInf.vue'
 import AntiApplyAdd from '@/view/AntiFraud/AntiApplyAdd.vue'
-import aAntiApplyInf from '@/view/AntiFraud/components/aAntiApplyInf.vue'
-//反欺诈调查
-import aAntiFraudInvestigation from '@/view/AntiFraud/components/aAntiFraudInvestigation.vue'
-// 审批结论
+import aAntiApplyInf from '@/view/AntiFraud/components/aAntiApplyInf.vue'//反欺诈调查
+import aAntiFraudInvestigation from '@/view/AntiFraud/components/aAntiFraudInvestigation.vue'// 审批结论
 import ApprovalConclus from '@/view/AntiFraud/approvalConclus.vue'
-// 反欺诈借款人资料
 import AborrowerInformationDetail from '@/view/AntiFraud/components/AborrowerInformationDetail.vue'
-// 反欺诈、复议（内匹）借款人资料
 import MborrowerInformationSetail from '@/view/AntiFraud/matchComponent/MborrowerInformationSetail.vue'
 // -------------------------复议---------------------
 import ReconsiderApply from '../view/Reconsider/ReconsiderComponents/ReconsiderApply.vue'//复议申请
 import reconsiderList from '../view/Reconsider/reconsiderList.vue'//复议申请任务列表
 import ReconsiderSplit from '../view/Reconsider/ReconsiderSplit.vue'//复议专员主管分屏
 // import ReconsiderAntiSplit from '../view/Reconsider/ReconsiderAntiSplit.vue'//复议反欺诈分屏
-//复议结论
 import ReconsiderationConclusion from '../view/Reconsider/ReconsiderComponents/ReconsiderationConclusion.vue'//复议专员
 import ReconjingliConclusion from '../view/Reconsider/ReconsiderComponents/ReconjingliConclusion.vue'//复议经理
 // -------------------------流程监控---------------------
@@ -93,12 +83,23 @@ import PneCtrl from'../view/SocialSeAndPneCtrl/PneCtrl.vue'//大数据
 import SocialSe from'../view/SocialSeAndPneCtrl/SocialSe.vue'//社保公积金
 
 //  -----------------------质检----------------------
+import exam from '../view/exam.vue'
+import AudioVisualLeft from '../view/FirstTrail/detailComponent/AudioVisualLeft.vue'
+
 
 Vue.use(Router)
 
 const routes = [{
   path: '/',
   component: workbench
+},
+{
+  path:'/exam',
+  component:exam,
+},
+{
+  path:'/AudioVisualLeft',
+  component:AudioVisualLeft,
 },
 {
   path: '/workbench',
@@ -195,16 +196,28 @@ const routes = [{
   component: FSplitScreen
 },
 {
-  path: '/FMatchingInf',
-  component: FMatchingInf
-},
-{
   path: '/FcCreditForm',
   component: FcCreditForm
 },
 {
   path: '/FtaskInWaitting',
   component: FtaskInWaitting
+},{
+  path: '/FtaskInWaitting',
+  component: FtaskInWaitting,
+  name:'终审二级'
+},{
+  path: '/FtaskInWaitting',
+  component: FtaskInWaitting,
+  name:'信审经理'
+},{
+  path: '/FtaskInWaitting',
+  component: FtaskInWaitting,
+  name:'信审高级经理'
+},{
+  path: '/FtaskInWaitting',
+  component: FtaskInWaitting,
+  name:'信审总监审批'
 },
 {
   path: '/FCreditForm',

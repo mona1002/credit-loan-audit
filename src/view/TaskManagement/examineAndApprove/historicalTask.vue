@@ -72,8 +72,8 @@
 					    </el-date-picker>
 			        </el-col>
 			        <el-col :span="8">  
+			              <el-button class="btn reset" type="primary"  @click="reset">重置</el-button>								
 			              <el-button class="btn query" type="primary" @click="search">查询</el-button>
-			              <el-button class="btn reset" @click="reset">重置</el-button>
 			        </el-col>
 		      </el-row>
 		    </div>
@@ -249,7 +249,7 @@
 		},
 		methods:{
 			product(){
-				this.get("/credit/product").then(res => {
+				this.post("/credit/productAll").then(res => {
 					if(res.statusCode == 200){
 						this.productNames = res.data;
 					}
@@ -410,7 +410,7 @@
 		      this.judge = {
 		      	flag:'08'
 		      };
-		      localStorage.setItem("TtaskInWaitting",JSON.stringify(judge));
+		      localStorage.setItem("judge",JSON.stringify(this.judge));
 		    },
 		    handleSizeChange(val) {
 		      console.log('每页 ${val} 条');
@@ -481,11 +481,11 @@
 	  float: right;
 	}
 	.taskWinput .query {
-	  margin-left: 20px;
-	  margin-right: calc( 100% - 394px );
+	  margin-left: 214px;
 	}
 	.taskWinput .reset {
-	  margin-left: 214px;
+		 margin-left: 20px;
+	  margin-right: calc( 100% - 394px );
 	}
 	/* 信审任务列表*/
 	.taskWatting .taskWhead{

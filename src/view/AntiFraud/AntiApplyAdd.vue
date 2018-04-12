@@ -15,7 +15,7 @@
             进件编号：
           </div>
           <div class="item-content">
-            {{applySubno}}
+            {{applySubNo}}
           </div>
           <el-button icon="el-icon-search" class="search-btn" @click="coverFn('shwoList')"></el-button>
         </li>
@@ -111,7 +111,7 @@
         </li>
       </ul>
       <!-- 弹窗 -->
-      <el-dialog :visible.sync="coverShow">
+      <el-dialog :visible.sync="coverShow" :modal="false" top="10vh" width='1130px'>
         <div class="detail-list">
           <div class="form-title" style="position:relative;">
             请选择一条信息
@@ -150,27 +150,27 @@
               </li>
               <li class="item-column1 submit-class-list">
                 <el-button type="primary" @click="request">查询</el-button>
-                <el-button @click="resetQuery">重置</el-button>
+                <el-button type="primary" @click="resetQuery">重置</el-button>
               </li>
             </div>
-            <el-table :data="tableData.recordList" height="250" border style="width: 100%" highlight-current-row center @row-click="itemClick">
-              <el-table-column type="index" label="序号" min-width="50">
+            <el-table :data="tableData.taskDetailList" height="250" border style="width: 100%" highlight-current-row center @row-click="itemClick">
+              <el-table-column type="index" label="序号" align="center" width="60">
               </el-table-column>
-              <el-table-column prop="applySubno" label="进件编号" min-width="100">
+              <el-table-column prop="applySubNo" label="进件编号" width="170">
               </el-table-column>
-              <el-table-column prop="appDate" label="申请日期" min-width="100">
+              <el-table-column prop="appDate" label="申请日期" width="170">
               </el-table-column>
-              <el-table-column prop="custName" label="客户名称" min-width="150">
+              <el-table-column prop="custName" label="客户名称" width="120">
               </el-table-column>
-              <el-table-column prop="certType" label="证件类型" min-width="100">
+              <el-table-column prop="certType" label="证件类型" width="80">
               </el-table-column>
-              <el-table-column prop="certCode" label="证件号码" min-width="80">
+              <el-table-column prop="certCode" label="证件号码" width="170">
               </el-table-column>
-              <el-table-column prop="operOrgName" label="进件机构名称" min-width="150">
+              <el-table-column prop="appOrgName" label="进件机构名称" width="130">
               </el-table-column>
-              <el-table-column prop="proName" label="产品名称" min-width="100">
+              <el-table-column prop="proName" label="产品名称" width="100">
               </el-table-column>
-              <el-table-column prop="operName" label="进件客服" min-width="100" show-overflow-tooltip>
+              <el-table-column prop="operName" label="进件客服" width="120" show-overflow-tooltip>
               </el-table-column>
             </el-table>
             <div class="block tool-bar">
@@ -392,9 +392,8 @@ export default {
     // },
     submitForm() {
       console.log('提交反欺诈')
-
       // 判断必填
-      if(!this.applySubno){
+      if(!this.applySubNo){
         this.$message({
           message:"提示：请选择进件!",
           type:'warning'
@@ -427,14 +426,15 @@ export default {
         showCancelButton: true,
         confirmButtonText: '确定',
         cancelButtonText: '取消',
+        modal:false,        
         beforeClose: (action, instance, done) => {
           if (action === 'confirm') {
             instance.confirmButtonLoading = true;
             instance.confirmButtonText = '执行中...';
-
             this.post('/fraudApplyInfoController/startAntiFraudApply', {
                 userCode: this.userCode, // 用户编号
                 orgCode: this.orgCode, // 机构编号
+                currentTemplateId:'',
                 fraudApplyInfo: {
                   creditappTaskid: this.creditappTaskid, // 任务id
                   applyId: this.applyId, // 申请单ID
@@ -475,10 +475,17 @@ export default {
                     this.$router.push('/AntiFraud');
                   // }
                 } else {
-                  this.$message({
-                    type: 'warning',
-                    message: '网络异常,请重试!'
-                  });
+                if (res.msg) {
+                    this.$message({
+                      type: 'warning',
+                      message: res.msg
+                    });
+                  } else {
+                    this.$message({
+                      type: 'warning',
+                      message: '您无此操作权限！'
+                    });
+                  }
                   instance.confirmButtonText = '';
                 }
                 instance.confirmButtonLoading = false;
@@ -570,13 +577,26 @@ export default {
 
       // })
       // 
-      // 请求列表
-      this.post('/applyInfoPool/queryByPage', {
-        applySubno: this.applySubNo, // 进件编号
-        applyId: '', // 申请单id
-        certCode: this.subCertCode, // 证件号码
-        custName: this.custName, // 客户名称
-        busiStateList: ["04", "14", "21", "42"],
+      // // 请求列表
+      // this.post('/applyInfoPool/queryByPage', {
+      //   applySubno: this.applySubNo, // 进件编号
+      //   applyId: '', // 申请单id
+      //   certCode: this.subCertCode, // 证件号码
+      //   custName: this.custName, // 客户名称
+      //   busiStateList: ["04", "14", "21", "42"],
+      //   pageNum: this.pageNum,
+      //   pageSize: this.pageSize
+      // }).then(res => {
+      //   if (res.statusCode == 200) {
+      //     this.tableData = res.data;
+      //   }
+      // })
+      // 查询图标弹出层
+     
+      this.post('/workFlowTaskQuery/getTaskToDoList', {
+        taskStatus:'01',
+        userCode: this.userCode,
+        orgCode: this.orgCode,
         pageNum: this.pageNum,
         pageSize: this.pageSize
       }).then(res => {
@@ -604,7 +624,7 @@ export default {
     btnClick(val) {
       // 确定
       if (val == 'sure') {
-        this.applySubno = this.rowObj.applySubno; // 进件编号
+        this.applySubNo = this.rowObj.applySubNo; // 进件编号
         this.applyCustName = this.rowObj.custName; // 客户名称
         this.certTypeTxt = this.rowObj.certTypeTxt; // 证件类型
         this.certType = this.rowObj.certType; // 证件类型
@@ -635,7 +655,9 @@ export default {
   background: #fff;
 }
 
-
+.anti-apply-add-class .el-table th .cell{
+    font-weight: 800;
+}
 
 
 
@@ -1025,7 +1047,7 @@ export default {
 
 .anti-apply-add-class .el-dialog {
   width: 700px;
-  margin-top: 15vh !important;
+  /* margin-top: 15vh !important; */
 }
 
 .anti-apply-add-class .el-dialog__header {

@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import "babel-polyfill"
-// import store from './store/store'
+import store from './store/store'
 import qs from 'qs'
 import http from '@/util/http' 
 import validation from '@/util/validation' 
@@ -20,7 +20,7 @@ Vue.use(http)
 new Vue({
   el: '#app',
   router,
-//   store,
+  store,
   template: '<App/>',
   components: { App }
 })
@@ -38,8 +38,7 @@ Vue.filter('dateFilter',function(value){
 Vue.filter('formatValue',function(value){
 	if(!value) return ''
 	console.log(value);
-	if(Number(value)>0)
-	return Math.round(Number(value)*10000)/100 +'%';
+	return Number(value)>0?Math.round(Number(value)*10000)/100 +'%':'0.00%';
 })
 // 金额过滤
 Vue.filter('formatMoney',function(value){

@@ -9,8 +9,8 @@
           <el-input v-model="rules" placeholder="请输入规则编号"></el-input>
         </p>
         <p class="btn_wrap">
-          <el-button class="btn" style="marginLeft:20px" type="primary" @click="Rsearch">查询</el-button>
-          <el-button class="btn" @click="Rreset">重置</el-button>
+          <el-button class="btn"  style="marginLeft:20px" type="primary"  @click="Rreset">重置</el-button>
+          <el-button class="btn" type="primary" @click="Rsearch">查询</el-button>
         </p>
       </div>
       <div class="title">
@@ -49,16 +49,14 @@
     </div>
     <!-- 编辑 -->
     <div class="redact">
-      <el-dialog title="添加反欺诈规则" :visible.sync="dialogFormVisible" top="25vh">
+      <el-dialog title="添加反欺诈规则" :modal="false" :visible.sync="dialogFormVisible">
         <p>
           <label>规则编号：</label>
           <b>{{form.ruleNum}}</b>
-          <!-- <el-input v-model="form.ruleNum" type="text" placeholder="请输入内容"></el-input> -->
         </p>
         <p>
           <label>内容规则：</label>
           <b class="rulesContent">{{form.ruleContent}}</b>
-          <!-- <el-input v-model="form.ruleContent" type='textarea' resize="none" :rows="2" placeholder="请输入内容"></el-input> -->
         </p>
         <p>
           <span>
@@ -107,44 +105,6 @@
           isValid: '',
         },
         tableData: [],
-        // tableData: [{
-        //   ruleNum: '2578688982',
-        //   ruleContent: '开了房间打死了打开放假啊是',
-        //   isGenTask: '1',
-        //   isDecReject: '0',
-        //   isValid: '3',
-        //   isGenTaskTxt: '是',
-        //   isDecRejectTxt: "否",
-        //   isValidTxt: "是",
-        //   test:'dkasflkdsjadddfdahf建街的就是水电费是事件爱神的街的就是水电费是事件爱神的街的就是水电费是事件爱神的街的就是水电费是事件爱神的华大街的就是水电费是事件爱神的箭三的吉安市数据是大花轿可视电话爱打架阿莎看的'
-        // }, {
-        //   ruleNum: '2578688984',
-        //   ruleContent: '开了房间打死了打开放假啊是',
-        //   isGenTask: '1',
-        //   isDecReject: '0',
-        //   isValid: '3',
-        //   isGenTaskTxt: '是',
-        //   isDecRejectTxt: "否",
-        //   isValidTxt: "是"
-        // }, {
-        //   ruleNum: '2578688981',
-        //   ruleContent: '开了房间打死了打开放假啊是',
-        //   isGenTask: '1',
-        //   isDecReject: '0',
-        //   isValid: '3',
-        //   isGenTaskTxt: '是',
-        //   isDecRejectTxt: "否",
-        //   isValidTxt: "是"
-        // }, {
-        //   ruleNum: '2578688983',
-        //   ruleContent: '开了房间打死了打开放假啊是',
-        //   isGenTask: '1',
-        //   isDecReject: '0',
-        //   isValid: '3',
-        //   isGenTaskTxt: '是',
-        //   isDecRejectTxt: "否",
-        //   isValidTxt: "是"
-        // }],
         isGenTask: [{
           value: '1',
           label: '是'
@@ -177,7 +137,6 @@
           ruleNum: this.rules
         }).then(res => {
           if (res.statusCode == 200) {
-            console.log(res);
             this.tableData = res.data;
           } else {
             this.$message.error(res.msg);
@@ -188,8 +147,6 @@
         this.rules = '';
       },
       handleEdit(index, row) {
-        console.log(index, row);
-        console.log(row.id);
         this.dialogFormVisible = true;
         this.form.id = row.id;
         this.form.ruleNum = row.ruleNum;
@@ -201,7 +158,6 @@
       sure() {
         this.dialogFormVisible = false;
         this.post("/antiFraud/updateAntiFraudRule", this.form).then(res => {
-          console.log(res);
           if (res.statusCode == 200) {
             this.$message({
               message: '修改成功',
@@ -210,7 +166,6 @@
             //   查询接口
             this.post("/antiFraud/getAntiFraudRuleList", {}).then(res => {
               if (res.statusCode == 200) {
-                console.log(res);
                 this.tableData = res.data;
               } else {
                 this.$message.error(res.msg);
@@ -225,7 +180,6 @@
     mounted() {
       this.post("/antiFraud/getAntiFraudRuleList", {}).then(res => {
         if (res.statusCode == 200) {
-          console.log(res);
           this.tableData = res.data;
         } else {
           this.$message.error(res.msg);

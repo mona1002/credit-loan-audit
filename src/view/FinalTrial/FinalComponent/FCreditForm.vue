@@ -542,7 +542,6 @@
               </p>
               <p>
                 <label class="InternetInf_right_label"> 父母收入[元]： </label>
-                <!-- <span class="detail_inf">{{this.FormData.parentIncome }} </span> -->
                 <span style="border:none;">{{this.FormData.parentIncome }} </span>
 
               </p>
@@ -690,21 +689,6 @@
           </ul>
         </div>
       </el-collapse-item>
-      <!-- 审批结论 -->
-      <!-- <el-collapse-item name="10">
-        <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">审批结论</span>
-        </template>
-        <div class=" CreditForm_result up_padding">
-          <div style="width:66.6%;" class="bottom">
-            <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
-            <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==''" :content="this.FormData.oother" placement="top-start">
-              <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
-            </el-tooltip>
-          </div>
-        </div>
-      </el-collapse-item> -->
       <el-collapse-item name="10">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
@@ -728,7 +712,7 @@
                   </i>
                   <label class="InternetInf_left_label" style="textAlign:right">
                     <span style="color:#ff7676;"> * </span>终审结果评价：</label>
-                  <el-input type="textarea" :rows="5" resize="none" :maxlength="500" placeholder="请输入内容" @compositionend.native="wordarea(FormData.ootherfinal)"
+                  <el-input type="textarea" :rows="5" resize="none" :maxlength="400" placeholder="请输入内容" @compositionend.native="wordarea(FormData.ootherfinal)"
                     @keyup.native="wordarea(FormData.ootherfinal)" v-model="FormData.ootherfinal" name="Finalconclusion" v-validate="'required'">
                   </el-input>
                 </p>
@@ -742,7 +726,7 @@
       <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
     </div>
     <!-- ==============================点击确认时提示弹框=================================== -->
-    <el-dialog title="提示" :visible.sync="Confirm" top="43vh" width="420px">
+    <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
       <span>确定操作？</span>
       <span slot="footer" class="dialog-footer">
         <button class="calbtn" @click="canc">取消</button>
@@ -887,7 +871,6 @@
         this.Confirm = false;
       },
       CFsave() {
-        console.log(this.FormData)
         this.$validator.validateAll().then((result) => {
           if (result) {
             this.post("/creauditInfo/updateOtherfinalByPK", {
@@ -966,74 +949,6 @@
           return (((sign) ? '' : '-') + num);
         }
       },
-      // formatSC(el, val) {
-      //   switch (el) {
-      //     case "月还款":
-      //       this.FormData.fbalance = val;
-      //       break;
-      //     case "借款金额":
-      //       this.FormData.iloanAmt = val;
-      //       break;
-      //     case "月均工资":
-      //       this.FormData.avgsalaryamt = val;
-      //       break;
-      //     case "注册资金":
-      //       this.FormData.regcapitalamt = val;
-      //       break;
-      //     case "月利润":
-      //       this.FormData.profitamountmamt = val;
-      //       break;
-      //     case "月还款/租金":
-      //       this.FormData.monthrentamt = val;
-      //       break;
-      //     case "近一年利润":
-      //       this.FormData.oneYearProfitamt = val;
-      //       break;
-      //     case "配偶收入":
-      //       this.FormData.spouseIncome = val;
-      //       break;
-      //     case "生活费支付":
-      //       this.FormData.childPaycostamt = val;
-      //       break;
-      //     case "父母收入":
-      //       this.FormData.parentIncome = val;
-      //       break;
-      //     case "开销":
-      //       this.FormData.fconsumption = val;
-      //       break;
-      //   }
-      // },
-      // acquire(val, name) {
-      //   if (val == null || val == '') {
-      //     return
-      //   } else {
-      //     if (val.toString().indexOf('.') == -1) {
-      //       val = val + "." + "0" + '0';
-      //       this.formatSC(name, val);
-      //     } else if (val.toString().indexOf('.') != -1) {
-      //       if (val.toString().split(".")[1].length < 2) {
-      //         val = val + "0";
-      //         this.formatSC(name, val);
-      //       } else {
-      //         val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
-      //         this.formatSC(name, val);
-      //       }
-      //     }
-      //   }
-      // },
-      // mountM() {
-      //   this.acquire(this.FormData.fbalance, '月还款');
-      //   this.acquire(this.FormData.regcapitalamt, '注册资金');
-      //   this.acquire(this.FormData.monthrentamt, '月还款/租金');
-      //   this.acquire(this.FormData.oneYearProfitamt, '近一年利润');
-      //   this.acquire(this.FormData.profitamountmamt, '月利润');
-      //   this.acquire(this.FormData.spouseIncome, '配偶收入');
-      //   this.acquire(this.FormData.parentIncome, '父母收入');
-      //   this.acquire(this.FormData.fconsumption, '开销');
-      //   this.acquire(this.FormData.childPaycostamt, '生活费支付');
-      //   this.acquire(this.FormData.avgsalaryamt, '月均工资');
-      //   this.acquire(this.FormData.iloanAmt, '借款金额');
-      // },
       NewPage(ind) {
         switch (ind) {
           case 0:
@@ -1080,13 +995,10 @@
           // applyId: "00542",
         }).then(res => {
           if (res.statusCode == 200) {
-            console.log(res.data)
             this.FormData = res.data;
             this.FormData.applyId = this.getParams.applyId;
             this.AreaNPercent();
-            // this.mountM();
             this.formatSC();
-            // this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, '')
              this.FormData.aaddress ? this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, ''):this.FormData.aaddress ;
             this.mountJ(0, res.data.wbeexEcuted);
             this.mountJ(1, res.data.wnetHirecom);
@@ -1189,44 +1101,8 @@
     },
     mounted() {
       this.getParams = JSON.parse(localStorage.getItem("FtaskInWaitting")); // 终审工作台
-      // console.log(this.getParams.applyId)
       // // 获取查询列表数据
       this.mountC();
-      // this.post("/creauditInfo/queryCreauditInfoObj", {
-      //   applyId: this.getParams.applyId,
-      //   // applyId: "00542",
-      // }).then(res => {
-      //   if (res.statusCode == 200) {
-      //     console.log(res.data)
-      //     this.FormData = res.data;
-      //     this.FormData.applyId = this.getParams.applyId;
-      //     this.AreaNPercent();
-      //     this.mountJ(0, res.data.wbeexEcuted);
-      //     this.mountJ(1, res.data.wnetHirecom);
-      //     this.mountJ(2, res.data.wnetEcutedBrea);
-      //     this.mountJ(3, res.data.wnetHirecomBrea);
-      //     this.mountJ(4, res.data.wnetPhone);
-      //     this.mountJ(5, res.data.wnetHirecomName);
-      //     this.mountJ(6, res.data.wnetHirecomPhone);
-      //     this.mountJ(7, res.data.wnetAddrandEstate);
-      //     this.mountJ(8, res.data.wnetHirecomAddress);
-      //     this.mountJ(9, res.data.wnetCompany);
-      //     this.mountJ(10, res.data.wnetAddrstate);
-      //     this.mountJ(11, res.data.iisself);
-      //     this.mountJ(12, res.data.privateOwnerFlag);
-      //     this.mountJ(13, res.data.fmarrflag);
-      //     this.mountJ(14, res.data.spouseWork);
-      //     this.mountJ(15, res.data.spouseSamecity);
-      //     this.mountJ(16, res.data.childFlag);
-      //     this.mountJ(17, res.data.childIspaycost);
-      //     this.mountJ(18, res.data.parentIsliving);
-      //     this.mountJ(19, res.data.brothersIfhas);
-      //     this.mountJ(20, res.data.aisresident);
-      //     this.mountJ(21, res.data.iloanBefore);
-      //   } else {
-      //  this.$message.error(res.msg);
-      //   }
-      // });
     },
   }
 
@@ -1239,7 +1115,7 @@
 
   .InternetInf_left_label {
     display: inline-block;
-    width: 182px;
+    width: 210px;
   }
   /* ------------------------------------------------ */
   /* 最下面的 弹窗样式 */
@@ -1301,32 +1177,11 @@
   /* 上网查询 */
 
   .InternetInf_right_label {
-    width: 182px;
-    /* margin-right: 10px; */
+    width: 210px;
   }
-  /* public */
-
-  .CreditForm {
-    /* min-width: 1140px; */
-    /* min-width: 1420px; */
-    /* min-width: 1592px; */
-    overflow: auto;
-    overflow-x: hidden;
-    min-width: 1272px;
-  }
-
-  .up_padding {
-    /* padding-top: 10px; */
-  }
-
   .top {
     margin-top: 20px;
   }
-
-  .bottom {
-    /* margin-bottom: 20px; */
-  }
-
   .CreditForm li {
     color: #475669;
     font-size: 14px;
@@ -1336,7 +1191,6 @@
   }
 
   .CreditForm p {
-    /* padding-top: 10px; */
     padding-bottom: 20px;
   }
 
@@ -1344,8 +1198,6 @@
     display: inline-block;
     text-align: right;
   }
-  /*------------------------------------------- */
-  /* 各自 */
   /* ------------------------------上网查询 +核实身份--------------------------- */
 
   .CreditForm_InternetInf p,
@@ -1376,11 +1228,6 @@
   {
     width: 140px;
   }
-  /* .CreditForm_InternetInf p:nth-of-type(odd),
-  .CreditForm_CheckId p:nth-of-type(odd),
-  .CreditForm_FamilyInf li p:nth-of-type(1) {
-    width: 22%;
-  } */
 
   .CreditForm_InternetInf p:nth-of-type(even),
   .CreditForm_CheckId p:nth-of-type(even),
@@ -1401,7 +1248,7 @@
   /* 家庭信息 */
 
   {
-    width: calc( 100% - 197px);
+    width: calc( 100% - 225px);
     height: 60px;
     vertical-align: top;
     overflow: auto;
@@ -1409,10 +1256,10 @@
     padding: 5px 10px;
     border-radius: 4px;
   }
-  /* 工作信息-单位地址 + 私营企业-企业经营项目-------------label 为 182 px */
+  /* 工作信息-单位地址 + 私营企业-企业经营项目 */
 
   .ComAddr {
-    width: calc( 100% - 197px);
+    width: calc( 100% - 225px);
     vertical-align: top;
     height: 60px;
     overflow: auto;
@@ -1420,10 +1267,9 @@
     padding: 5px 10px;
     border-radius: 4px;
   }
-  /* 省略号 */
 
   .elips {
-    width: calc( 100% - 197px);
+    width: calc( 100% - 225px);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -1447,26 +1293,27 @@
 
   .CreditForm_check_reside li,
   .CreditForm_check_reside p {
-    /* width:66.6.6%; */
     width: 100%;
     clear: both;
     padding: 0;
     margin-bottom: 20px;
   }
-  /*  */
 
   .interMath li,
   .PhontConclution li,
   .CreditForm_result li {
     margin-bottom: 20px;
     width: 66.6%;
-    /* background: red; */
   }
-  /* 初审结果div */
-  /* .CreditForm_result { */
-  /* width: calc( 66.6% - 197px); */
-  /* width:80%; */
-  /* padding: 20px 0 30px 0; */
-  /* } */
-
+/* .SureAlert{
+background: rgba(127, 127, 127, 0.5);
+position: absolute;
+top:48px;
+left: 0;
+right:0;
+bottom:0;
+} */
+.SureAlert_content{
+  
+}
 </style>

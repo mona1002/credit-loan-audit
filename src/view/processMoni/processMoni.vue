@@ -60,10 +60,10 @@
           <span class="keywordText">当前处理人员</span><el-input @keyup.enter.native="getByKey" v-model.trim="operatorCode" placeholder="请输入当前处理人员"></el-input>
         </el-col>
         <el-col :span="8" v-if="routerState!=='03'">
-          <el-button class="btn reset" @click="reset">重置</el-button><el-button class="btn query" type="primary" @click="getByKey">查询</el-button>
+          <el-button class="btn query" type="primary" @click="getByKey">查询</el-button><el-button  type="primary" class="btn reset" @click="reset">重置</el-button>
         </el-col>
         <el-col :span="8" :offset="8" v-else>
-          <el-button class="btn reset" @click="reset">重置</el-button><el-button class="btn query" type="primary" @click="getByKey">查询</el-button>
+         <el-button class="btn query" type="primary" @click="getByKey">查询</el-button> <el-button  type="primary" class="btn reset" @click="reset">重置</el-button>
         </el-col>
       </el-row>
     </div>
@@ -168,8 +168,8 @@
 
     <!-- 流程轨迹 -->
     <el-dialog title="流程轨迹" custom-class="trace" :visible.sync="dialogTraceVisible">
-      <el-collapse v-model="activeNames">
-        <el-collapse-item title="信审流程轨迹" name="1">
+      <!-- <el-collapse v-model="activeNames">
+        <el-collapse-item title="信审流程轨迹" name="1"> -->
           <el-table
             :data="traceList"
             border
@@ -225,8 +225,8 @@
               min-width="100">
             </el-table-column>
           </el-table>
-        </el-collapse-item>
-      </el-collapse>
+        <!-- </el-collapse-item>
+      </el-collapse> -->
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="dialogTraceVisible = false">返 回</el-button>
       </div>
@@ -406,7 +406,9 @@ export default {
     '$route'(to,from){
       if(to.fullPath !== from.fullPath){
         this.getUserInf();
-        this.getProcessMonitorList();
+        // this.getProcessMonitorList();
+        this.responseDatas.totalNum = 0;
+        this.moniList = [];
         this.getProductForUser();    
       }
     }
@@ -414,7 +416,7 @@ export default {
 
   mounted() {
     this.getUserInf();
-    this.getProcessMonitorList();
+    // this.getProcessMonitorList();
     this.getProductForUser();
   },
 
@@ -458,14 +460,19 @@ export default {
 
     // 查询经营产品
     getProductForUser(orgId){
-      this.post(constant.baseUrl_user +'remote/product/getProductForUser',{
+      /*this.post(constant.baseUrl_user +'remote/product/getProductForUser',{
         data:{
           orgId: this.userInf.orgId,
           validFlag: '1'
         }
       }).then(res => {
         this.proNames = res.data;
-      })
+      })*/
+      this.post("/credit/productAll").then(res => {
+        if(res.statusCode == 200){
+            this.proNames = res.data;
+          }
+        });
     },
 
     // 根据任务角色 code 查询 Name
@@ -791,10 +798,10 @@ export default {
   padding: 0;
 }
 .processMoni .query {
-  margin-left: 20px;
+  margin-left: 214px;
 }
 .processMoni .reset {
-  margin-left: 214px;
+  margin-left: 20px;  
 }
 
 .processMoni .listContainer {

@@ -1,6 +1,6 @@
 <template>
-  <div date="aAntiConclusionPath">
-    <!-- 反欺诈审批结论轨迹=========================默认显示1-条？分页？ -->
+  <div class="aAntiConclusionPath">
+    <!-- 反欺诈审批结论轨迹-->
     <el-table :data="tableData" style="width: 100%" border>
       <el-table-column prop="auditResultTxt" label="审批结果" min-width="35">
       </el-table-column>
@@ -32,13 +32,10 @@
       } else if (this.judgeFlag.flag == '04') {
         this.tastwaitingPass = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管-匹配查看
       }
-      console.log(this.tastwaitingPass)
       this.post("/fraudAuditOpinion/getApproveConclusionTrack", {
         appinfoId: this.tastwaitingPass.businessId,
-        // appinfoId: "00542",
       }).then(res => {
         if (res.statusCode == 200) {
-          console.log(res)
           this.tableData = res.data;
         } else {
           this.$message.error(res.msg);

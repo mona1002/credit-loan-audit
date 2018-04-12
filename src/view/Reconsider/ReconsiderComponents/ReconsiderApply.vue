@@ -74,6 +74,20 @@
         <div class="AntiConclution">
           <ul style="margin:20px 0;">
             <li>
+              <p>
+                <label>申请产品： </label>
+                <span>{{this.conclu.appProName}} </span>
+              </p>
+              <p>
+                <label>申请期限[月]： </label>
+                <span>{{this.conclu.appTerm}} </span>
+              </p>
+              <p>
+                <label>申请金额[元]： </label>
+                <span>{{this.conclu.appAmt}} </span>
+              </p>
+            </li>
+            <li>
               <p style="width:100%;">
                 <label>复议说明： </label>
                  <el-tooltip class="item" effect="dark" :disabled="this.conclu.reconRemark==null||this.conclu.reconRemark==''" :content="this.conclu.reconRemark" placement="top-start">
@@ -109,12 +123,10 @@
     mounted() {
       // 复议不用flag判断，列表页专员、主管存的同一个字段
        this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting")); //复议申请专员+主管
-       
       this.post("/accepApplyReconController/getAccepApplyReconByProcessId", {
         processInstanceId: this.tastwaitingPass.processInstanceId,
         // id:'500001'
       }).then(res => {
-        console.log(res)
         this.conclu = res.data;
       });
     },

@@ -12,11 +12,11 @@
         <span> 业务员入职时间：{{customInf.salPerEmployDate}}</span>
         <span>{{customInf.adminIntroduce}}</span>
       </p>
-      <div class="SplitScreen_wrap">
+      <div class="SplitScreen_wrap" id="rWrap" ref="rWrap">
         <!-- 左侧分屏部分 -->
         <div class="left" ref="rLeft">
           <div ref="Left_title" class="Left_ul" @mouseenter="showList" @mouseleave="hid">
-            <!-- 左侧 title列表 == 影像资料等 ==================弹出列表============ -->
+            <!-- 左侧 title列表 -->
             <ul>
               <li ref="tabOne" class="tab1Default" v-for="(val,index) in items1" :key="index" @mousedown="flag1[index] &&  tab1($event,index,val)"
                 :class="{tab1Act:tab1Index==index}">
@@ -33,8 +33,8 @@
                 <img src="../../../static/images/icon-02.png">
               </span>
             </p>
-            <div class="Left_right_BigImg ">
-              <AudioVisualLeft msg="spLone" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS"></AudioVisualLeft>
+            <div class="Left_right_BigImg">
+              <AudioVisualLeft msg="spLone" ref="AULeft" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn' :AUpreWidth.sync='preWidth' :AUobj='AULobj'></AudioVisualLeft>
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
               <InternalMatch v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
               <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
@@ -46,6 +46,8 @@
             </div>
           </div>
         </div>
+        <!-- 中间 -->
+        <div class="SP_middle" ref="RM" id="RM" v-show="midShow" @mousedown="abcd"></div>
         <!-- 右侧分屏部分 -->
         <div class="right" ref="rRight">
           <img src="../../../static/images/backcopy.png" class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen">
@@ -58,7 +60,7 @@
             <span class="pre_next_btn_wrap" style="color:red;" @click="rightMovingBtn">
               <img src="../../../static/images/Shaperight@1x.png">
             </span>
-            <!-- tab 2 -=====================tab2里面的ul-->
+            <!-- tab 2 -->
             <div class="Right_tab_ul_wrap">
               <ul ref="right_tab_ul" style="left:0;right:0;">
                 <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="flag2[index] &&  tab2($event,index,val)"
@@ -69,8 +71,7 @@
           </div>
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
-            <!-- <CreditFormKeydownEvent :myWatch="watchData" v-if=" this.tabContent2==3"></CreditFormKeydownEvent> -->
-            <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
+            <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :AURpreWidth.sync='RpreWidth'></AudioVisual>
             <remark v-if=" this.tabContent2==1"></remark>
             <InternalMatch v-if=" this.tabContent2==2" :SplitS="SplitRight" :isFull.sync="isFull"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
@@ -78,9 +79,7 @@
             <PhoneCredit v-if=" this.tabContent2==5" :SplitS="SplitRight" :isFull.sync="isFull"></PhoneCredit>
             <CreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></CreditForm>
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
-            <!-- 反欺诈结论 空白 -->
             <aAntiApplyInf v-if=" this.tabContent2==8"></aAntiApplyInf>
-            <!-- 信审审批 空白 -->
             <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>
           </div>
         </div>
@@ -93,7 +92,7 @@
           <p>影像资料</p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <AudioVisualLeft msg="spLtwo" v-if="CompareAlert"></AudioVisualLeft>
+            <AudioVisualLeft msg="spLtwo" v-if="CompareAlert" :comBtn.sync='alertComBtn'></AudioVisualLeft>
           </div>
         </div>
         <!-- 弹出层右侧 div -->
@@ -101,13 +100,13 @@
           <!-- 搜索框 -->
           <p class="customName">客户名称：
             <el-input v-model="AlertSearch" :disabled="true" style="display:inline;"></el-input>
-            <el-button type="primary" @click="compareProps" class="compareIcon">
+            <el-button type="primary" @click="compareProps" class="AudioVisualLeft_compareIcon">
               <i class="el-icon-search" style="fontSize:16px"></i>
             </el-button>
           </p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <AudioVisualLeft msg="spLthree" ref="audioChild" v-on:inputInf="inputInner"></AudioVisualLeft>
+            <AudioVisualLeft msg="spLthree" ref="audioChild" v-on:inputInf="inputInner" :comBtn.sync='alertComBtn'></AudioVisualLeft>
           </div>
         </div>
       </div>
@@ -120,7 +119,6 @@
   // 编辑
   import AudioVisual from "./detailComponent/AudioVisual";
   import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
-
   import remark from "./detailComponent/remark";
   import InternalMatch from "./InternalMatch";
   import applicationInformation from "./detailComponent/applicationInformation";
@@ -129,7 +127,6 @@
   import CreditForm from "./detailComponent/CreditForm";
   import creditInvestigation from "./detailComponent/creditInvestigation"; //实地征信
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf' //反欺诈结论  
-  // 信审审批写此处
   import CreditApproval from "./CreditApproval";
   // 查询
   import cCreditForm from "./checkComponent/cCreditForm";
@@ -138,7 +135,6 @@
   import cborrowerInformationDetail from "./checkComponent/borrowerInformationDetail"; //借款人资料
   import capplicationInformationDetail from "./checkComponent/applicationInformationDetail"; //申请信息
   import processTrajectory from "./checkComponent/processTrajectory"; //流程轨迹
-  // import CreditFormKeydownEvent from './detailComponent/CreditFormKeydownEvent.vue'
   export default {
     data() {
       return {
@@ -147,10 +143,8 @@
         SplitRight: "right",
         watchData: '',
         originLeft: '',
-        // 进件人信息
         customInf: [], //申请信息页local字段
         tastwaitingPass: [], //详情列表页信息--(含)取applyId
-        // -------------------------------结束
         showHalfBtn: false,
         CompareAlert: false,
         title: "",
@@ -178,11 +172,26 @@
           label: '内匹客户姓名'
         }],
         isFull: false,
+        comBtn: true,
+        alertComBtn: false,
+        midShow: true,
+        preWidth:null,
+        RpreWidth:null,
+        AULobj:{
+          BTN:'#MID',
+          WRAP:'#AUL',
+          CLIENTX:'AUclickX',
+          OFFSET:'AUleftOffset',
+          VA:'bbr',
+          NUM:10
+        },
+        
       }
     },
     methods: {
       compareProps() {
         this.$refs.audioChild.personalNunPerson()
+        // comJs.MyMove('#MID', '#AUL', this.AUpreWidth, 'AUclickX', 'AUleftOffset', 'bbr', 10);
       },
       inputInner(a, b) {
         this.AlertSearch = a + " " + b;
@@ -191,7 +200,7 @@
         this.CompareAlert = true;
       },
       closeCompareBtn() {
-        this.CompareAlert = false;
+        this.CompareAlert = false; 
       },
       leftMovingBtn() {
         if (parseFloat(this.$refs.right_tab_ul.style.left) >= 0) {
@@ -217,20 +226,27 @@
       },
       FullScreen() {
         this.showHalfBtn = true;
-        this.originLeft = this.$refs.right_tab_ul.style.left;
+        // this.originLeft = this.$refs.right_tab_ul.style.left;
         this.$refs.right_tab_ul.style.left = "0";
         this.$refs.rLeft.style.display = "none";
         this.$refs.rRight.style.width = "100%";
         this.watchData = this.$refs.rRight.style.width;
         this.isFull = true;
+        this.midShow = false;
       },
       DblScreen() {
         this.showHalfBtn = false;
-        this.$refs.right_tab_ul.style.left = this.originLeft;
+        // this.$refs.right_tab_ul.style.left = this.originLeft;
+        // this.$refs.right_tab_ul.style.left = this.originLeft;
         this.$refs.rLeft.style.display = "block";
         this.$refs.rRight.style.width = "50%";
+        this.$refs.rLeft.style.width = "calc(50% - 2px)";
+        console.log(this.$refs.rRight.style.width)
+        console.log(this.$refs.rLeft.style.width)
+        this.$refs.RM.style.left = "calc(50% - 2px)";
         this.watchData = this.$refs.rRight.style.width;
         this.isFull = false;
+        this.midShow = true;
       },
       tab1(ev, ind, val) {
         this.title = val;
@@ -258,9 +274,135 @@
         if (ind != 0 && ind != 8) {
           this.flag1[ind] = false;
         }
-      }
+      },
+      // MyMove() {
+      //   var clickX, leftOffset, inx, nextW2, nextW;
+      //   var dragging = false;
+      //   var doc = document;
+      //   var labBtn = $("#RM");
+      //   var wrapWidth = $("#rWrap").width();
+      //   var Pre=this.$refs.rLeft;
+      //   var Nex=this.$refs.rRight;
+      //   labBtn.bind('mousedown', function () {
+      //     dragging = true;
+      //     leftOffset = $("#rWrap").offset().left;
+      //   });
+      //   doc.onmousemove = function (e) {
+      //     if (dragging) {
+      //       clickX = e.pageX;
+      //         if (clickX > leftOffset+10) {
+      //           labBtn.eq(0).css('left', clickX - leftOffset+2 + 'px'); //按钮移动
+      //           labBtn.eq(0).prev().width(clickX - leftOffset + 'px'); //前一个div宽度变化
+      //           nextW2 = clickX - leftOffset;
+      //           labBtn.eq(0).next().width(wrapWidth - nextW2-6 + 'px');//减多少宽地待算
+      //         } else {
+      //           labBtn.eq(0).css('left', '0px');
+      //            labBtn.eq(0).prev().width('0px');
+      //            labBtn.eq(0).next().width(wrapWidth-6 + 'px');//减多少宽地待算
+      //         }
+      //         // console.log(clickX+"========="+wrapWidth)
+      //         if (clickX > (wrapWidth)) {
+      //           labBtn.eq(0).css('left', parseFloat(wrapWidth) - 11 + 'px');
+      //           labBtn.eq(0).prev().width(wrapWidth-13 + 'px');
+      //           labBtn.eq(0).next().width('0px');
+      //         }
+      //     }
+      //   };
+      //   $(doc).mouseup(function (e) {
+      //     dragging = false;
+      //     e.cancelBubble = true;
+      //   })
+      // },
+      abcd(){
+        console.log('abcd触发')
+      },
+      MyMove() {
+        console.log("移动")
+        var clickX, leftOffset, inx, nextW2, nextW;
+        var recordMoving;
+        var dragging = false;
+        var doc = document;
+        var labBtn = $("#RM");
+        var wrapWidth = $("#rWrap").width();
+        // var Pre = this.$refs.rLeft;
+        // var Nex = this.$refs.rRight;
+        labBtn.bind('mousedown', ()=> {
+          dragging = true;
+          leftOffset = $("#rWrap").offset().left;
+          // doc.onmousemove = function (e) {
+          doc.onmousemove =  (e)=> {
+            // console.log(e)
+          if (dragging) {
+            clickX = e.pageX;
+            console.log(clickX+"========="+leftOffset)
+            if (clickX > leftOffset + 10 &&clickX < (wrapWidth-5)) {
+              nextW2 = clickX - leftOffset;
+              labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px'); //按钮移动
+              labBtn.eq(0).prev().width(clickX - leftOffset + 'px'); //前一个div宽度变化
+            // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
+              labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px'); //减多少宽地待算
+              // console.log(this.AUpreWidth)
+              console.log(111)
+            } else if(clickX < leftOffset + 10 &&clickX < (wrapWidth-5)) {
+              labBtn.eq(0).css('left', '0px');
+              labBtn.eq(0).prev().width('0px');
+              labBtn.eq(0).next().width(wrapWidth - 6 + 'px'); //减多少宽地待算
+            // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
+              console.log(222)
+            }
+            console.log(clickX+"------------------"+wrapWidth)
+            if (clickX > (wrapWidth-5)) {
+              console.log(333)
+              labBtn.eq(0).css('left', parseFloat(wrapWidth) - 11 + 'px');
+              labBtn.eq(0).prev().width(wrapWidth - 11 + 'px');
+              labBtn.eq(0).next().width('0px');
+            // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
+              //  console.log(this.preWidth)
+            }
+              // recordMoving=labBtn.eq(0).prev().width();            
+        //  this.preWidth =recordMoving
+// this.$refs.AULeft.MyMove();
+
+            // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+            // console.log( recordMoving)
+          }
+        };
+        });
+           $(doc).mouseup((e)=> {
+            // console.log( this.preWidth)
+        //  this.preWidth =recordMoving
+          dragging = false;
+          e.cancelBubble = true;
+        });
+        // doc.onmousemove = function (e) {
+        //   if (dragging) {
+        //     clickX = e.pageX;
+        //     if (clickX > leftOffset + 10) {
+        //       labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px'); //按钮移动
+        //       labBtn.eq(0).prev().width(clickX - leftOffset + 'px'); //前一个div宽度变化
+        //       nextW2 = clickX - leftOffset;
+        //       labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px'); //减多少宽地待算
+        //     } else {
+        //       labBtn.eq(0).css('left', '0px');
+        //       labBtn.eq(0).prev().width('0px');
+        //       labBtn.eq(0).next().width(wrapWidth - 6 + 'px'); //减多少宽地待算
+        //     }
+        //     // console.log(clickX+"========="+wrapWidth)
+        //     if (clickX > (wrapWidth)) {
+        //       labBtn.eq(0).css('left', parseFloat(wrapWidth) - 11 + 'px');
+        //       labBtn.eq(0).prev().width(wrapWidth - 13 + 'px');
+        //       labBtn.eq(0).next().width('0px');
+        //     }
+        //   }
+        // };
+        // $(doc).mouseup(function (e) {
+        //   dragging = false;
+        //   e.cancelBubble = true;
+        // });
+      },
     },
     mounted() {
+      // this.MyMove();
       this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.applyId,
@@ -268,6 +410,7 @@
         if (res.statusCode == 200) {
           this.custName = res.data.accepCusBasicInfo.custName;
           this.customInf = res.data;
+          console.log(this.customInf )
         } else {
           this.$message.error(res.msg);
         }
@@ -287,7 +430,7 @@
       creditInvestigation,
       CreditApproval,
       cCreditForm,
-      cremarkDetail, 
+      cremarkDetail,
       cborrowerInformationDetail,
       capplicationInformationDetail,
       processTrajectory,
@@ -301,8 +444,6 @@
     height: 100%;
     /* min-width: 1366; */
   }
-
-  /* 激活样式 流-css */
 
   .tab1Default {
     color: #bfcbd9;
@@ -348,7 +489,6 @@
     position: absolute;
     top: 7px;
     right: 17px;
-    /* right: 0; */
   }
 
   .showAllList {
@@ -362,7 +502,7 @@
 
   .SplitScreen_content {
     border: 1px solid #0077ff;
-    height: calc(100% - 70px);
+    height: calc(100% - 100px);
     overflow: auto;
     padding: 13px 9px;
   }
@@ -403,6 +543,7 @@
     width: 100%;
     height: calc( 100% - 33px);
     min-width: 1306px;
+    position: relative;
   }
 
   .left,
@@ -452,13 +593,13 @@
     cursor: pointer;
   }
 
-  /* 左侧详情 div   流 */
+  /* 左侧详情 div  */
 
   .Left_detail_div {
     height: 100%;
   }
 
-  /* 左侧详情 p标签   流-css */
+  /* 左侧详情 p标签  */
 
   .Left_right_Title,
   .right .Right_tab_title_div,
@@ -479,7 +620,7 @@
     padding-right: 40px;
   }
 
-  /* 左侧详情 content div 内容   流-css */
+  /* 左侧详情 content div 内容  */
 
   .Left_right_BigImg {
     background: white;
@@ -487,9 +628,7 @@
     overflow: auto;
   }
 
-  /* 右屏 */
-
-  /* 右侧tab切换头外的ul   流 */
+  /* 右侧tab切换头外的ul  */
 
   .Right_tab_ul_wrap {
     overflow: hidden;
@@ -514,7 +653,6 @@
   }
 
   .tab2_Content {
-    /*background: purple;*/
     height: calc( 100% - 48px);
     overflow: auto;
   }
@@ -541,7 +679,7 @@
     position: absolute;
     top: 117px;
     width: calc( 100% - 18px);
-    height: calc( 100% - 130px);
+    height: calc( 100% - 161px);
     z-index: 22;
     min-width: 1306px;
   }
@@ -551,16 +689,6 @@
   .AlertContent {
     height: calc( 100% - 48px);
     overflow: auto;
-  }
-
-  .compareIcon {
-    background: white;
-    color: #0077ff;
-    padding: 0;
-    height: 38px;
-    width: 38px;
-    float: right;
-    margin: 5px 0 0 2px;
   }
 
 </style>

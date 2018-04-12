@@ -34,9 +34,9 @@
               </ul>
             </div>
           </div>
-          <!-- 右侧 tab 内容 -->
+          <!-- 右侧 tab 内容  AntiFirstAud-->
           <div class="tab2_Content">
-            <AnitAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AnitAudioVisual>
+            <AnitAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" ></AnitAudioVisual>
             <!-- √ -->
             <cremark v-if=" this.tabContent2==1"></cremark>
             <!-- √ -->
@@ -168,7 +168,6 @@
       }
     },
     mounted() {
-      console.log("反欺诈分屏");
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '03') {
         this.tastwaitingPass = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈专员-匹配查看
@@ -181,7 +180,6 @@
         if (res.statusCode == 200) {
            this.custName=res.data.accepCusBasicInfo.custName;
           this.customInf = res.data;
-          console.log(this.customInf)
         } else {
           this.$message.error(res.msg);
         }
@@ -243,7 +241,7 @@
 
   .SplitScreen_content {
     border: 1px solid #0077ff;
-    height: calc(100% - 70px);
+    height: calc(100% - 100px);
     overflow: auto;
     padding: 13px 9px;
   }

@@ -77,6 +77,16 @@
 				        label="贷款余额[元]"
 				        min-width="130">
 				      </el-table-column>
+				      <el-table-column
+				        prop="estateShare"
+				        label="房产是否共有"
+				        min-width="110">
+				      </el-table-column>
+				      <el-table-column
+				        prop="buyDate"
+				        label="购买时间"
+				        min-width="110">
+				      </el-table-column>
 			    </el-table>
 		  	</el-collapse-item>
 		  	<el-collapse-item title="车辆信息" name="2">
@@ -151,6 +161,16 @@
 				        prop="buyDate"
 				        label="购买时间"
 				        min-width="120">
+				      </el-table-column>
+				      <el-table-column
+				        prop="carShare"
+				        label="车产是否共有"
+				        min-width="110">
+				      </el-table-column>
+				      <el-table-column
+				        prop="carMortgage"
+				        label="车产是否抵押"
+				        min-width="110">
 				      </el-table-column>
 			    </el-table>
 		  	</el-collapse-item>
@@ -649,6 +669,11 @@
 			        	}else if(this.borestateList[i].mortgageStatus	=='1'){
 			        		this.borestateList[i].mortgageStatus = '未抵押'
 			        	};
+			        	if(this.borestateList[i].estateShare =='0'){
+			        		this.borestateList[i].estateShare = '否';
+			        	}else if(this.borestateList[i].estateShare	=='1'){
+			        		this.borestateList[i].estateShare = '是'
+			        	};
 			        	//建筑单价 保留两位小数点
 			        	if(this.borestateList[i].unitPrice != null){
 			        		this.borestateList[i].unitPrice = this.formatNumber(this.borestateList[i].unitPrice,2,0);
@@ -672,11 +697,13 @@
 			        	};
 
 			        }
-			       }else if(res.data.borestateList == '' && JSON.parse(localStorage.getItem('house'))){
+			       }else if(res.data.borestateList == ''){
+			       		this.borestateList = this.borestateList;
+			       };/* if(res.data.borestateList == '' && JSON.parse(localStorage.getItem('house'))){
 			       		this.borestateList=JSON.parse(localStorage.getItem('house'));
 			       }else if(res.data.borestateList == '' && !JSON.parse(localStorage.getItem('house'))){
 			       		this.borestateList = this.borestateList;
-			       };
+			       };*/
 		        /*车辆信息*/
 		        if(res.data.carInfoList != ''){
 		        	this.carInfoList=res.data.carInfoList;
@@ -703,6 +730,16 @@
 			        	}else if(this.carInfoList[i].buyInsur =='02'){
 			        		this.carInfoList[i].buyInsur = '车损险'
 			        	};
+			        	if(this.carInfoList[i].carShare =='0'){
+			        		this.carInfoList[i].carShare = '否'
+			        	}else if(this.carInfoList[i].carShare =='1'){
+			        		this.carInfoList[i].carShare = '是'
+			        	};
+			        	if(this.carInfoList[i].carMortgage =='0'){
+			        		this.carInfoList[i].carMortgage = '否'
+			        	}else if(this.carInfoList[i].carMortgage =='1'){
+			        		this.carInfoList[i].carMortgage = '是'
+			        	};
 			        	//车辆购置价 保留两位小数点
 			        	if(this.carInfoList[i].carPrice != null){
 				        	this.carInfoList[i].carPrice = this.formatNumber(this.carInfoList[i].carPrice,2,0);
@@ -716,11 +753,13 @@
 				        	this.carInfoList[i].restLoans = this.formatNumber(this.carInfoList[i].restLoans,2,0);
 				        };
 			        }
-		        }else if(res.data.carInfoList == '' && JSON.parse(localStorage.getItem('car'))){
+		        }else if(res.data.carInfoList == ''){
+		        	this.carInfoList = this.carInfoList;
+		        };/* if(res.data.carInfoList == '' && JSON.parse(localStorage.getItem('car'))){
 		        	this.carInfoList=JSON.parse(localStorage.getItem('car'));
 		        }else if(res.data.carInfoList == '' && !JSON.parse(localStorage.getItem('car'))){
 		        	this.carInfoList = this.carInfoList;
-		        };
+		        };*/
 		        /*信用卡使用明细*/
 		        this.cardDetList=res.data.cardDetList;
 		        for(var i=0;i<this.cardDetList.length;i++){

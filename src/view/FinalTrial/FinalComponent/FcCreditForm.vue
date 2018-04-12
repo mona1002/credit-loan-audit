@@ -899,76 +899,7 @@
           return (((sign) ? '' : '-') + num);
         }
       },
-      // formatSC(el, val) {
-      //   switch (el) {
-      //     case "月还款":
-      //       this.FormData.fbalance = val;
-      //       break;
-      //     case "借款金额":
-      //       this.FormData.iloanAmt = val;
-      //       break;
-      //     case "月均工资":
-      //       this.FormData.avgsalaryamt = val;
-      //       break;
-      //     case "注册资金":
-      //       this.FormData.regcapitalamt = val;
-      //       break;
-      //     case "月利润":
-      //       this.FormData.profitamountmamt = val;
-      //       break;
-      //     case "月还款/租金":
-      //       this.FormData.monthrentamt = val;
-      //       break;
-      //     case "近一年利润":
-      //       this.FormData.oneYearProfitamt = val;
-      //       break;
-      //     case "配偶收入":
-      //       this.FormData.spouseIncome = val;
-      //       break;
-      //     case "生活费支付":
-      //       this.FormData.childPaycostamt = val;
-      //       break;
-      //     case "父母收入":
-      //       this.FormData.parentIncome = val;
-      //       break;
-      //     case "开销":
-      //       this.FormData.fconsumption = val;
-      //       break;
-      //   }
-      // },
-      // acquire(val, name) {
-      //   if (val == null || val == '') {
-      //     return
-      //   } else {
-      //     if (val.toString().indexOf('.') == -1) {
-      //       val = val + "." + "0" + '0';
-      //       this.formatSC(name, val);
-      //     } else if (val.toString().indexOf('.') != -1) {
-      //       if (val.toString().split(".")[1].length < 2) {
-      //         val = val + "0";
-      //         this.formatSC(name, val);
-      //       } else {
-      //         val = val.toString().split(".")[0] + "." + val.toString().split(".")[1].slice(0, 2);
-      //         this.formatSC(name, val);
-      //       }
-      //     }
-      //   }
-      // },
-      // mountM() {
-      //   this.acquire(this.FormData.fbalance, '月还款');
-      //   this.acquire(this.FormData.regcapitalamt, '注册资金');
-      //   this.acquire(this.FormData.monthrentamt, '月还款/租金');
-      //   this.acquire(this.FormData.oneYearProfitamt, '近一年利润');
-      //   this.acquire(this.FormData.profitamountmamt, '月利润');
-      //   this.acquire(this.FormData.spouseIncome, '配偶收入');
-      //   this.acquire(this.FormData.parentIncome, '父母收入');
-      //   this.acquire(this.FormData.fconsumption, '开销');
-      //   this.acquire(this.FormData.childPaycostamt, '生活费支付');
-      //   this.acquire(this.FormData.avgsalaryamt, '月均工资');
-      //   this.acquire(this.FormData.iloanAmt, '借款金额');
-      // },
       NewPage(ind) {
-        console.log(ind);
         switch (ind) {
           case 0:
             window.open("http://zhixing.court.gov.cn/search/");
@@ -1073,18 +1004,14 @@
     },
     mounted() {
       this.getParams = JSON.parse(localStorage.getItem("FtaskInWaitting")); // 终审工作台
-      console.log(this.getParams.applyId)
       // 获取查询列表数据
       this.post("/creauditInfo/queryCreauditInfoObj", {
         applyId: this.getParams.applyId,
         // applyId: "00542",
       }).then(res => {
         if (res.statusCode == 200) {
-          console.log(res.data)
-          // console.log(res.data)
           this.FormData = res.data;
           this.AreaNPercent();
-          // this.mountM();
           this.formatSC();
           this.FormData.aaddress ? this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, ''):this.FormData.aaddress ;
           this.mountJ(0, res.data.wbeexEcuted);
@@ -1125,7 +1052,7 @@
 
   .InternetInf_left_label {
     display: inline-block;
-    width: 182px;
+    width: 210px;
   }
   /* ------------------------------------------------ */
   /* 最下面的 弹窗样式 */
@@ -1146,30 +1073,11 @@
   /* 上网查询 */
 
   .InternetInf_right_label {
-    width: 182px;
-    /* margin-right: 10px; */
-  }
-  /* public */
-
-  .CreditForm {
-    /* min-width: 1140px; */
-    /* min-width: 1420px; */
-    /* min-width: 1592px; */
-    overflow: auto;
-    overflow-x: hidden;
-    min-width: 1272px;
-  }
-
-  .up_padding {
-    /* padding-top: 10px; */
+    width: 210px;
   }
 
   .top {
     margin-top: 20px;
-  }
-
-  .bottom {
-    /* margin-bottom: 20px; */
   }
 
   .CreditForm li {
@@ -1181,7 +1089,6 @@
   }
 
   .CreditForm p {
-    /* padding-top: 10px; */
     padding-bottom: 20px;
   }
 
@@ -1189,8 +1096,6 @@
     display: inline-block;
     text-align: right;
   }
-  /*------------------------------------------- */
-  /* 各自 */
   /* ------------------------------上网查询 +核实身份--------------------------- */
 
   .CreditForm_InternetInf p,
@@ -1246,7 +1151,7 @@
   /* 家庭信息 */
 
   {
-    width: calc( 100% - 197px);
+    width: calc( 100% - 225px);
     height: 60px;
     vertical-align: top;
     overflow: auto;
@@ -1257,7 +1162,7 @@
   /* 工作信息-单位地址 + 私营企业-企业经营项目-------------label 为 182 px */
 
   .ComAddr {
-    width: calc( 100% - 197px);
+    width: calc( 100% - 225px);
     vertical-align: top;
     height: 60px;
     overflow: auto;
@@ -1268,7 +1173,7 @@
   /* 省略号 */
 
   .elips {
-    width: calc( 100% - 197px);
+    width: calc( 100% - 225px);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -1308,7 +1213,7 @@
   /* 初审结果div */
 
   .CreditForm_result {
-    /* width: calc( 66.6% - 197px); */
+    /* width: calc( 66.6% - 225px); */
     /* width:80%; */
     padding: 20px 0 30px 0;
   }

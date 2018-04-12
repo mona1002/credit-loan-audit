@@ -70,8 +70,10 @@
 			<el-dialog
 			  title="请输入您要添加的备注信息"
 			  :visible.sync="dialogVisible"
+			   :modal="false"
 			  width="638px"
-			  top="35vh">
+			  top="5vh"
+			  >
 			  <div class="addBody">
 			  	<label>备注</label>
 			  	<span v-show="remark.length==600">
@@ -97,8 +99,9 @@
 			<el-dialog
 			  title="请输入您要修改的备注信息"
 			  :visible.sync="chdialogVisible"
+			   :modal="false"
 			  width="638px"
-			  top="35vh">
+			  top="5vh">
 			  <div class="changeBody">
 			  	<label>备注</label>
 			  	<span v-show="changeRemarks.length==600">
@@ -123,8 +126,8 @@
 			<el-dialog
 			  title="提示"
 			  :visible.sync="isdialogVisible"
-			  width="420px"
-			  top="35vh">
+			   :modal="false"
+			  width="420px">
 			  <span>请选择一条记录！</span>
 			  <span slot="footer" class="dialog-footer">
 			    <el-button type="primary" @click="promptSure">确定</el-button>
@@ -135,8 +138,8 @@
 			<el-dialog
 			  title="提示"
 			  :visible.sync="dedialogVisible"
-			  width="420px"
-			  top="35vh">
+			   :modal="false"
+			  width="420px">
 			  <span>您要删除该备注吗？</span>
 			  <span slot="footer" class="dialog-footer">
 			  	<el-button type="primary" @click="deletCancle">取消</el-button>
@@ -172,6 +175,7 @@
 		        applyId:'',
 		        userInf:'',
 		        remarker:'',
+		        remarkType:'',
 		        //添加的弹层
 		        dialogVisible: false,
 		        //是否有数据的弹层
@@ -185,7 +189,7 @@
 		        addLodaing:false,
 		        addSure:'确定',
 		        changeLoading:false,
-		        chSurechSure:'确定',
+		        chSure:'确定',
 			}
 		},
 		mounted(){
@@ -194,9 +198,11 @@
 			if (this.judgeFlag.flag == '01') {
 			    this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));// 初审
 				this.applyId=this.taskInWaitting.applyId; 
+				this.remarkType='03'; 
 			} else if (this.judgeFlag.flag == '02') {
 				this.taskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));// 终审
 				this.applyId=this.taskInWaitting.applyId;
+				this.remarkType='04';
 			  }
 			//获取当前登陆人的用户名
 			this.userInf=JSON.parse(localStorage.getItem('userInf'));
@@ -256,7 +262,7 @@
 				this.dialogVisible = false;
 				this.post('/applyRemark/addApplyRemark',{
 					applyId:this.applyId,
-					remarkType:'03',
+					remarkType:this.remarkType,
 					remark:this.remark,
 					remarker:this.remarker
 				})

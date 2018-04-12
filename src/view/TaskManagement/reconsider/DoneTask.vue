@@ -52,8 +52,8 @@
             <p>
             </p>
             <p class="btn_wrap">
-              <el-button class="btn" style="marginLeft:228px" @click="Rreset">重置</el-button>
-              <el-button class="btn" type="primary" @click="Rsearch">查询</el-button>
+              <el-button class="btn" type="primary" style="marginLeft:228px"  @click="Rsearch">查询</el-button>
+              <el-button class="btn"  type="primary"  @click="Rreset">重置</el-button>
             </p>
           </li>
         </ul>
@@ -133,8 +133,6 @@
         currentRow: null,
         currentPage: 1, //分页选中页
         pageCount: 10, // 每页显示条数
-        // pageCount: 1, // 每页显示条数
-        // totalPage:0,//总页数
         totalRecord: 0, //总条数
         tableData: [],
         production: null,
@@ -167,13 +165,11 @@
         }
       },
       handleSizeChange(val) {
-        // console.log(`每页 ${val} 条`);
         this.params.pageSize = val;
         this.params.pageNum = 1;
         this.getInf(this.params);
       },
       handleCurrentChange(val) {
-        // console.log(`当前页: ${val}`);
         this.params.pageNum = val;
         this.getInf(this.params);
       },
@@ -189,6 +185,7 @@
         this.params.completeTime_le = '';
         this.applyData = '';
         this.dealDate = '';
+            this.getInf(this.params);
       },
       Rsearch() {
         this.params.appDate_ge = this.DateF(this.applyData[0]);
@@ -211,7 +208,7 @@
         });
       },
       getProducts() {
-        this.get( "/credit/product").then(res => {
+        this.post( "/credit/productAll").then(res => {
           if (res.statusCode == 200) {
             this.production = res.data
           } else {

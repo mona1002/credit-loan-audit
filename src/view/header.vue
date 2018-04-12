@@ -16,8 +16,10 @@
         <!-- <div class="contain"> -->
           <nobr>
             <el-menu router unique-opened mode="horizontal" ref="navbar" active-text-color="#ffd04b" :default-active="onRoutes" @select="selectMenu">
-              <nav-item v-for="(item, n) in datas" :item="item" :navIndex="String(n)" :key="n">
-              </nav-item>
+              <el-menu-item is="nav-item" v-for="(item, n) in datas" :item="item" :navIndex="String(n)" :key="n">
+                <!-- <nav-item v-for="(item, n) in datas" :item="item" :navIndex="String(n)" :key="n" id="dddfff">
+                </nav-item> -->
+              </el-menu-item>
             </el-menu>
           </nobr>
         <!-- </div> -->

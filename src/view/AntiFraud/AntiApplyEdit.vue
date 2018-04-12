@@ -211,19 +211,30 @@ export default {
 
     //   this.getFraudApplyInfoWithOpinionById();
     // }
-
+   var stateParms = JSON.parse(localStorage.getItem('antiApplyFlagEdit')).split(';');
+      for (var i = 0; i < stateParms.length; i++) {
+        stateParms[i] = stateParms[i].split('=');
+      }
+      this.routeId = stateParms[0][1];
+      this.routeFlag = stateParms[1][1];
+      // this.routeBusiState = stateParms[2][1];//如需此入参
     // 获取到 id
-    this.id = this.$route.params.id;
+    this.id = this.$route.params.id || this.routeId;
     console.log(this.$route.params.id)
     /* 标志  
      start 发起反欺诈
      edit  编辑
      add   添加 
      */
-    this.flag = this.$route.params.flag;
+    // var pars='';
+    // var pars=this.$route.fullPath.split('?')[1].split('=')[1];
+    this.flag = this.$route.params.flag|| this.routeFlag;
     // 获取到 id
-    this.applyId = this.$route.params.id;
-    console.log(this.flag);
+    console.log(this.$route.fullPath)
+    // this.applyId =this.$route.params.id||pars;
+    this.applyId =this.$route.params.id || this.routeId;
+    
+    // console.log(this.flag);
 
     if (this.flag == 'start') {
       this.getFraudApplyInfo();
@@ -343,8 +354,9 @@ export default {
     },
     submitForm() {
       console.log('提交反欺诈')
-
-      if (!this.mainId || !this.mainReason) {
+      // if (!this.mainId || !this.mainReason) {
+      if ( !this.mainReason) {
+        
         this.$message({
           message: "提示：请选择主原因!",
           type: 'warning'
@@ -367,6 +379,7 @@ export default {
         showCancelButton: true,
         confirmButtonText: '确定',
         cancelButtonText: '取消',
+        modal:false,        
         beforeClose: (action, instance, done) => {
           if (action === 'confirm') {
             instance.confirmButtonLoading = true;

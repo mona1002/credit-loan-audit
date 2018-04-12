@@ -1,8 +1,7 @@
 @charset "utf-8";
-
 @media screen and (max-width: 1366px) {
   .Abody {
-    min-width:1366px;
+    min-width: 1366px;
   }
   html {
     width: 1366px;
@@ -13,8 +12,8 @@
   html {
     width: 100%;
   }
-  .Abody{       
-    min-width: 1366px; 
+  .Abody {
+    min-width: 1366px;
   }
 }
 
@@ -220,4 +219,48 @@ table {
   clear: both;
   height: 0;
   visibility: hidden;
+}
+
+.AudioVisualLeft_btn_wrap {
+  position: absolute;
+  bottom: 18px;
+  right: 17px;
+}
+
+.AudioVisualLeft_compareBtn {
+  color: #0077ff;
+  border: 1px solid #0077ff;
+  background: #eef0f9;
+}
+
+.AudioVisualLeft_compareIcon {
+  background: white;
+  color: #0077ff !important;
+  padding: 0 !important;
+  height: 38px;
+  width: 38px;
+  float: right;
+  margin: 6px 0 0 2px !important;
+}
+.AudioVisualLeft_compareIcon:hover{
+  /* opacity: 0.4; */
+  background: rgba(255, 255, 255, .8) !important;
+  /* color: #0077ff !important; */
+  
+}
+.CreditForm {
+  overflow: auto;
+  overflow-x: hidden;
+  min-width: 1665px;
+}
+.SP_middle {
+  width: 2px;
+  float: left;
+  height: 100%;
+  cursor: e-resize;
+  /* background: lightblue; */
+  /* background: white; */
+  position: absolute;
+  left: calc(50% - 2px);
+  z-index: 400;
 }
