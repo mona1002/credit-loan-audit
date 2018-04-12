@@ -16,9 +16,31 @@ let state = {
 };
 let mutations = {
   ADD_VISITED_VIEWS: (state, view) => {
-    state.locFlag = JSON.parse(localStorage.getItem("judge")).flag;
-    view.flag ? view.flag : view.flag = state.locFlag;
-    if (state.visitedViews.some(v => v.name === view.name)) return //v,currentValue
+    // console.log(JSON.parse(localStorage.getItem("judge")).flag)
+    console.log('store')
+    // console.log(localStorage.getItem("judge"))
+    if (localStorage.getItem("judge") != 'undefined') {
+      state.locFlag = JSON.parse(localStorage.getItem("judge")).flag;
+      view.flag ? view.flag : view.flag = state.locFlag;
+    }
+    if (state.visitedViews.some(v => v.name === view.name))return;
+    // if (state.visitedViews.some(v => v.name === view.name)) {
+    //   if (view.name == '反欺诈申请') {
+    //     console.log("tag_____反欺诈申请")
+    //     // console.log(state.visitedViews )
+    //     // console.log(view )
+    //     state.visitedViews.some(CV => {
+    //       // console.log(CV)
+    //       if (CV.name == '反欺诈申请') {
+    //         CV.flag = view.flag;
+    //         return
+    //       }
+    //     })
+    //     // view.flag=v.flag
+    //   } else {
+    //     return //v,currentValue
+    //   }
+    // }
     state.visitedViews.push({
       name: view.name,
       path: view.path,

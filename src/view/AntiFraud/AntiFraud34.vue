@@ -548,6 +548,8 @@
   .anti-fraud .content {
     width: 100%;
     height: calc( 100% - 250px);
+    overflow:auto;
+    position: relative;
   }
 
   .anti-fraud .item-content {
@@ -621,16 +623,13 @@
   }
 
   .anti-fraud .address-title {
-    width: 100%;
     height: 40px;
-    font-size: 18px;
     background: #ededed;
-    display: block;
+    /* display: block; */
     margin-bottom: 10px;
     overflow: hidden;
     background: #eef0f9;
     border: 1px solid #e6eaee;
-
     width: 100%;
     font-size: 16px;
     color: #1f2d3d;
@@ -638,6 +637,10 @@
     vertical-align: middle;
     line-height: 40px;
     padding-right: 10px;
+    color:red;
+    position: absolute;
+    /* top:0; */
+    z-index: 12;
   }
 
 
