@@ -392,9 +392,14 @@
               id: ''
             }
           });
-
+          this.$store.dispatch('addVisitedViews', {
+            name: '反欺诈申请-新增',
+            path: '/AntiApplyAdd',
+            flag: '',
+            params: '',
+            StatefullPath: '/AntiApplyAdd'
+          })
         }
-        localStorage.setItem("antiApplyFlagEdit", JSON.stringify(routeParms));
       },
       // 反欺诈申请查看
       handleClickInfo(row) {
