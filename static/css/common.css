@@ -243,10 +243,7 @@ table {
   margin: 6px 0 0 2px !important;
 }
 .AudioVisualLeft_compareIcon:hover{
-  /* opacity: 0.4; */
   background: rgba(255, 255, 255, .8) !important;
-  /* color: #0077ff !important; */
-  
 }
 .CreditForm {
   overflow: auto;
