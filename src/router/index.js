@@ -202,22 +202,6 @@ const routes = [{
 {
   path: '/FtaskInWaitting',
   component: FtaskInWaitting
-},{
-  path: '/FtaskInWaitting',
-  component: FtaskInWaitting,
-  name:'终审二级'
-},{
-  path: '/FtaskInWaitting',
-  component: FtaskInWaitting,
-  name:'信审经理'
-},{
-  path: '/FtaskInWaitting',
-  component: FtaskInWaitting,
-  name:'信审高级经理'
-},{
-  path: '/FtaskInWaitting',
-  component: FtaskInWaitting,
-  name:'信审总监审批'
 },
 {
   path: '/FCreditForm',
