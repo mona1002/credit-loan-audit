@@ -1,12 +1,12 @@
 <template>
-  <div class="AudioVisualLeft">
+  <div class="AudioVisualLeft" id="AUL">
     <!-- 左侧list隐藏时显示的div     在根元素下面，与left right 平级-->
     <div class="hidDiv" v-show="!showListDiv" ref="hidDiv_ref">
       <img class="showBtn" src="../../../../static/images/Shape Copy.png" @click="showList" style="transform: rotate(180deg)">
     </div>
     <!-- ================================= -->
     <!-- 左侧 折叠面板 -->
-    <div class="AudioVisual_List" ref="AudioVisual_List_ref" v-show="showListDiv">
+    <div class="AudioVisual_List" ref="AudioVisual_List_ref" v-show="showListDiv" style="">
       <p>{{this.mwidth}}
       </p>
       <!-- {{imgUrl}} -->
@@ -48,10 +48,12 @@
       </el-collapse>
       <!-- 按钮 : 缩略图 对比  -->
       <div class="AudioVisualLeft_btn_wrap">
+        {{AUpreWidth}}
         <el-button @click="SmallpicAlert" class="AudioVisualLeft_compareBtn">缩略图</el-button>
-        <el-button type="primary" @click="compBtnShow"  v-if="this.comBtn">对比</el-button>
+        <el-button type="primary" @click="compBtnShow" v-if="this.comBtn">对比</el-button>
       </div>
     </div>
+    <!-- <div class="A_mid" id="MID"></div> -->
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative;" :id='msg'>
@@ -72,15 +74,15 @@
       <img src="../../../../static/images/daf.png" @click="AclockWise ">
       <img src="../../../../static/images/dasf.png" @click="clockWise ">
     </div>
-    <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
+    <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面  SmallPicShow-->
     <div class="Small_pic_div" v-show="SmallPicShow">
-      <p class="Small_pic_title"> 缩略图-申请信息
+      <p class="Small_pic_title"> 缩略图
         <img src="../../../../static/images/D625BA67-2F56-42C1-9E9D-A47AE03BA028@1x.png" class="small_pic_close" @click="SmallpicClose">
       </p>
       <div class="small_pic_content">
         <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
-          <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
-            ref="small_pic_ref" />
+          <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref"
+          />
           <p> {{val.arcSubType}} </p>
         </figure>
       </div>
@@ -136,7 +138,8 @@
 </template>
 
 <script>
-  import imgUrl  from '../../../util/ConstantSocialAndPn'
+  import imgUrl from '../../../util/ConstantSocialAndPn'
+  // import comJs from '../../../../static/js/common'
   export default {
     data() {
       return {
@@ -168,9 +171,10 @@
         currentRow: null,
         custName: '',
         custmatchApplySubNo: '',
+        AULwrapWidth: null,
       }
     },
-  props: ['msg', 'comBtn'],
+    props: ['msg', 'comBtn', 'AUpreWidth', 'AUobj'],
     methods: {
       closeAlertSearch() {
         this.dataa = false;
@@ -269,22 +273,26 @@
       getImg(ind) {
         this.smallPicInd = 0;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
-        this.$refs.img_wrap.style.left=0;
-        this.$refs.img_wrap.style.top=0;
+        this.$refs.img_wrap.style.left = 0;
+        this.$refs.img_wrap.style.top = 0;
         this.defaultBigPicCss();
       },
       hid() {
         this.showListDiv = false;
         this.$refs.preBtn.style.left = 37 + 'px';
         this.$refs.PbtnIcons.style.left = 'calc( 50% - 97px)';
-        this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
+        // this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
+        this.$refs.AudioVisual_Img_ref.style.left = 0;
+        
         this.defaultBigPicCss();
       },
       showList() {
         this.showListDiv = true;
         this.$refs.preBtn.style.left = 223 + 'px';
         this.$refs.PbtnIcons.style.left = ' calc( 50% + 9px)';
-        this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 214px)";
+        // this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 214px)";
+        this.$refs.AudioVisual_Img_ref.style.left = "214px";
+        
         this.defaultBigPicCss();
       },
       SmallpicClose() {
@@ -390,7 +398,7 @@
           disY = oEvent.clientY - oDiv.offsetTop;
           document.onmousemove = function (ev) {
             var oEvent = ev || event;
-             oEvent.stopPropagation();
+            oEvent.stopPropagation();
             oDiv.style.left = oEvent.clientX - disX + "px";
             oDiv.style.top = oEvent.clientY - disY + "px";
           }
@@ -440,7 +448,57 @@
       },
       compBtnShow() {
         this.$emit('CompareShow')
-      }
+      },
+      MyMove() {
+        console.log("移动left")
+        console.log(this.AUpreWidth)
+        var AUclickX, AUleftOffset, inx, AUnextW2, nextW, preLeft;
+        var moving = false;
+        var doc = document;
+        var bor = $("#MID");
+        var AUwrapWidth = this.AUpreWidth || $("#AUL").width();
+        var Pre = this.$refs.rLeft;
+        var Nex = this.$refs.rRight;
+        bor.bind('mousedown', () => {
+          moving = true;
+          AUleftOffset = $("#AUL").offset().left;
+          var AUwrapWidth = this.AUpreWidth || $("#AUL").width();
+          console.log("影音down");
+          doc.onmousemove = function (e) {
+            console.log("影音move")
+            if (moving) {
+              AUclickX = e.pageX;
+              if (AUclickX > AUleftOffset + 10 && AUclickX < (AUwrapWidth - 5)) {
+                bor.eq(0).css('left', AUclickX - AUleftOffset + 2 + 'px'); //按钮移动
+                bor.eq(0).prev().width(AUclickX - AUleftOffset + 'px'); //前一个div宽度变化
+                console.log(11111111111)
+                AUnextW2 = AUclickX - AUleftOffset;
+                // bor.eq(0).next().width(AUwrapWidth - AUnextW2 - 17 + 'px'); //减多少宽地待算
+                bor.eq(0).next().css('left', parseFloat(bor.eq(0).prev().width()) + 10 + 'px'); //减多少宽地待算
+                //  bor.eq(0).prev().width()
+              } else if (AUclickX < AUleftOffset + 10 && AUclickX < (AUwrapWidth - 5)) {
+                console.log(22222222222222)
+                bor.eq(0).css('left', '10px');
+                bor.eq(0).prev().width('10px');
+                // bor.eq(0).next().width(AUwrapWidth - 17 + 'px'); //减多少宽地待算
+                bor.eq(0).next().css('left', '20px');
+              }
+              console.log(AUclickX + "=========" + AUwrapWidth)
+              if (AUclickX > (AUwrapWidth - 10)) {
+                console.log(3333333333333)
+                // console.log(AUwrapWidth)
+                bor.eq(0).css('left', parseFloat(AUwrapWidth) - 18 + 'px');
+                bor.eq(0).prev().width(AUwrapWidth - 20 + 'px');
+
+              }
+            }
+          };
+        });
+        $(doc).mouseup(function (e) {
+          moving = false;
+          e.cancelBubble = true;
+        });
+      },
     },
     mounted() {
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
@@ -453,7 +511,7 @@
       } else if (this.judgeFlag.flag == '04') {
         this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
       }
-      this.imgBaseUrl=imgUrl.imgBaseUrl;
+      this.imgBaseUrl = imgUrl.imgBaseUrl;
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.applyId,
@@ -472,7 +530,10 @@
           this.$message.error(res.msg);
         }
       });
-      this.odivMove(this.msg);      
+      this.odivMove(this.msg);
+      // this.MyMove();
+      // comJs.odivMove(this.msg);
+      // comJs.MyMove( this.AUobj.BTN,this.AUobj.WRAP,this.AUpreWidth,this.AUobj.CLIENTX,this.AUobj.OFFSET,this.AUobj.VA,this.AUobj.NUM);
     }
   }
 
@@ -482,6 +543,8 @@
 
   .AudioVisualLeft {
     height: 100%;
+    width: 100%;
+    /* position: relative; */
   }
 
   /* public */
@@ -511,7 +574,6 @@
     float: left;
     height: 100%;
     overflow: auto;
-
     width: 20px;
     background: #eef0f9;
     margin-right: 11px;
@@ -564,6 +626,15 @@
     top: 50%;
   }
 
+  .A_mid {
+    background: lightblue;
+    height: 100%;
+    width: 5px;
+    position: absolute;
+    left: 203px;
+    cursor: e-resize;
+  }
+
   .AudioVisualLeft .AudioVisual_List,
   .AudioVisualLeft .AudioVisual_Img {
     float: left;
@@ -573,20 +644,19 @@
   }
 
   .AudioVisualLeft .AudioVisual_Img {
-    width: calc( 100% - 214px);
+    /* width: calc( 100% - 214px); */
+    position: absolute;
+    left: 214px;
+    right: 0;
+    height: calc( 100% - 48px);
   }
-
-  /*  css */
 
   .AudioVisualLeft .AudioVisual_List {
     width: 203px;
     background: #eef0f9;
     border: 1px solid #bfcbd9;
-    /* border-radius: 6px 6px 0 0; */
     margin-right: 11px;
   }
-
-  /* ----------------------------------- */
 
   /* 左侧折叠面板 */
 
@@ -648,7 +718,6 @@
     overflow: auto;
     border: 1px solid #bfcbd9;
     background: #ffffff;
-    /* background: #000; */
     border-radius: 4px;
   }
 
