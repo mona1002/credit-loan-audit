@@ -420,7 +420,7 @@
           // 反欺诈专员
           localStorage.setItem("AntitaskInWaitting", JSON.stringify(row))
           // 反欺诈  分屏
-        //   this.$router.push('AntiAudit')
+          this.$router.push('AntiAudit') 
         //    this.$store.dispatch('addVisitedViews', {
         //   name: '反欺诈专员详情',
         //   path: '/AntiAudit',

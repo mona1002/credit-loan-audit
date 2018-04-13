@@ -205,7 +205,9 @@
                               nodeName = '复议专员审批';
                                RoutePath = '/reconsiderList';
                               nodeFlag = "05";
-                               routeParams = '?taskNodeName=reconsiderApp_commissioner';
+                            //    routeParams = '?taskNodeName=reconsiderApp_commissioner';
+                               routeParams = '?taskNodeName=antiFraudApp_commissioner&flag=03';
+                               
                         };
                         //复议经理
                         if(strs[0].split('=')[1] == "'reconsiderApp_manager'" && strs[1].split('=')[1] == "'06'"){
@@ -222,11 +224,14 @@
                               nodeName = '复议经理审批';
                                RoutePath = '/reconsiderList';
                               nodeFlag = "06";
-                               routeParams = '?taskNodeName=reconsiderApp_manager';
+                            //    routeParams = '?taskNodeName=reconsiderApp_manager';
+                               routeParams = '?taskNodeName=antiFraudApp_manager&flag=04';
+                            
                         };
 
                    // }
                 //    反欺诈申请未添加 此方法的变量
+                console.log( nodeName)
                     this.$store.dispatch('addVisitedViews', {
                     name: nodeName,
                     path: RoutePath,
