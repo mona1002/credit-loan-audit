@@ -420,18 +420,33 @@
           // 反欺诈专员
           localStorage.setItem("AntitaskInWaitting", JSON.stringify(row))
           // 反欺诈  分屏
-          this.$router.push('AntiAudit')
+        //   this.$router.push('AntiAudit')
+        //    this.$store.dispatch('addVisitedViews', {
+        //   name: '反欺诈专员详情',
+        //   path: '/AntiAudit',
+        //   flag: '03',
+        //   params: '',
+        //   StatefullPath: '/AntiAudit',
+        // })
         }
         if (this.antiFlag == '04') {
           // 反欺诈主管
           localStorage.setItem("AntiManagertaskInWaitting", JSON.stringify(row))
           // 反欺诈  分屏
-          this.$router.push('AntiAudit')
+          this.$router.push('AntiAudit');
+        //    this.$store.dispatch('addVisitedViews', {
+        //   name: '反欺诈主管详情',
+        //   path: '/AntiAudit',
+        //   flag:'04',
+        //   params: '',
+        //   StatefullPath: '/AntiAudit',
+        // })
         }
+        //详情页跳转到同一个时用下面的方法，许调整反欺诈列表页存为一个字段，不用flag判断。
         this.$store.dispatch('addVisitedViews', {
           name: '反欺诈详情',
           path: '/AntiAudit',
-          flag: this.antiFlag,
+          flag: this.antiFlag,//此处带更新完列表后更改为固定值
           params: '',
           StatefullPath: '/AntiAudit',
         })
