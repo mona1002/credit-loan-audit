@@ -1346,7 +1346,12 @@
             if (this.judgeFlag == '01') {
               this.busiState = '00';
             } else if (this.judgeFlag == '02') {
-              this.busiState = '10'
+              // this.busiState = '10'
+              if( this.rollbackNodeName.value=='creditApp_apply'){//申请登记
+                this.busiState = '00'
+              }else if( this.rollbackNodeName.value=='creditApp_firstTrial'){//初审审批
+                this.busiState = '10'
+              }
             }
 
             this.approvalFn();
