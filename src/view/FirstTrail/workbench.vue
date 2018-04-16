@@ -213,7 +213,7 @@
         } else if (val.taskNodeName == "reconsiderApp_commissioner") { // 复议专员 
           this.judge.flag = nodeFlag = "05";
           RoutePath = '/reconsiderList';
-          nodeName = '复议专员审批';reconsiderApp_commissioner
+          nodeName = '复议专员审批';
           routeParams = '?taskNodeName=reconsiderApp_commissioner&flag=05'       
           localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass));
           localStorage.setItem("judge", JSON.stringify(this.judge));

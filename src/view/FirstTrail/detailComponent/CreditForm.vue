@@ -2393,19 +2393,45 @@
             this.$message.error(res.msg);
           }
         });
-      }
-    },
-    mounted() {
-      this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
-      this.mountC();
-      // 省    
-      this.post("/credit/queryProvince").then(res => {
+      },
+      pro(){
+         this.post("/credit/queryProvince").then(res => {
         this.hirecomAddress = res.data;
       });
-      // 所属行业 
-      this.post("/credit/industry").then(res => {
+      },
+      indus(){
+        this.post("/credit/industry").then(res => {
         this.hirecomKind = res.data;
       })
+      }
+    },
+    created(){
+ // 省    
+//  var pro,indus;
+//     pro=  this.post("/credit/queryProvince").then(res => {
+//         this.hirecomAddress = res.data;
+//       });
+    //   // 所属行业 
+    // indus=  this.post("/credit/industry").then(res => {
+    //     this.hirecomKind = res.data;
+    //   })
+      this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
+    this. pro();
+    this.indus();
+      this.mountC();
+      
+    },
+    mounted() {
+      // this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
+      // this.mountC();
+      // // 省    
+      // this.post("/credit/queryProvince").then(res => {
+      //   this.hirecomAddress = res.data;
+      // });
+      // // 所属行业 
+      // this.post("/credit/industry").then(res => {
+      //   this.hirecomKind = res.data;
+      // })
       this.Pwidth = document.getElementsByClassName("el-input")
       this.Txawidth = document.getElementsByClassName("el-textarea")
       this.CFwidth = document.getElementsByClassName("CreditForm")
