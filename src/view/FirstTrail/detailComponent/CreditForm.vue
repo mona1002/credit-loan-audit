@@ -1,933 +1,943 @@
 <template>
   <div class="CreditForm">
-    <el-collapse v-model="activeNames">
-      <!-- 网上查询信息 -->
-      <el-collapse-item name="1">
-        <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">网上查询信息</span>
-        </template>
-        <div class="CreditForm_InternetInf">
-          <ul>
-            <li>
-              <p>
-                <i class="hint"> </i>
-                <label class="InternetInf_left_label blueC" @click="NewPage(0)">客户在法网是否有被执行信息：</label>
-                <el-select class="internet_top" v-model="checkData.wbeexEcuted" placeholder="请选择" @change="commentShow1(checkData.wbeexEcuted,Internet[0])">
-                  <el-option v-for="item in beexEcuted" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-              <p v-show="this.InternetShow.commentS">
-                <i class="hint">
-                  <b v-show="this.Wordhint.Internet.excude" class="internet_textarea"> 输入长度不能超过500</b>
-                </i>
-                <label class="InternetInf_right_label"> 执行信息说明： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wbeexEcutedtxt"
-                  @compositionend.native="wordarea(checkData.wbeexEcutedtxt,'执行信息')" @keyup.native="wordarea(checkData.wbeexEcutedtxt,'执行信息')">
-                </el-input>
-              </p>
-            </li>
-            <li>
-              <p>
-                <i class="hint"> </i>
-                <label class="InternetInf_left_label blueC" @click="NewPage(0)">单位在法网是否有被执行信息：</label>
-                <el-select class="internet_top" v-model="checkData.wnetHirecom" placeholder="请选择" @change="commentShow1(checkData.wnetHirecom,Internet[1])">
-                  <el-option v-for="item in netHirecom" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-              <p v-show="this.InternetShow.commentS1">
-                <i class="hint">
-                  <b v-show="this.Wordhint.Internet.comExcude" class="internet_textarea"> 输入长度不能超过500</b>
-                </i>
-                <label class="InternetInf_right_label"> 单位执行信息说明：</label>
-                <el-input type="textarea" resize="none" :maxlength="this.textareaL" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomtxt"
-                  @compositionend.native="wordarea(checkData.wnetHirecomtxt,'单位执行信息')" @keyup.native="wordarea(checkData.wnetHirecomtxt,'单位执行信息')">
-                </el-input>
-              </p>
-            </li>
-            <li>
-              <p>
-                <i class="hint">
-                  <!-- <span v-show="errors.has('BrokenRecord')" class="internet_sel">{{ errors.first('BrokenRecord') }}</span> -->
-                </i>
-                <label class="InternetInf_left_label blueC" @click="NewPage(1)">
-                  <span class="red"> * </span>客户在失信网是否有失信记录：</label>
-                <el-select class="internet_top" v-model="checkData.wnetEcutedBrea" placeholder="请选择" name="BrokenRecord" v-validate="'required'"
-                  @change="commentShow1(checkData.wnetEcutedBrea,Internet[2])">
-                  <el-option v-for="item in netEcutedBrea" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-              <p v-show="this.InternetShow.commentS2">
-                <i class="hint">
-                  <b v-show="this.Wordhint.Internet.looseCre" class="internet_textarea"> 输入长度不能超过500</b>
-                </i>
-                <label class="InternetInf_right_label"> 失信记录说明： </label>
-                <el-input class="internet_top" type="textarea" resize="none" :maxlength="this.textareaL" :rows="2" placeholder="请输入内容" v-model="checkData.wnetEcutedBreatxt"
-                  @compositionend.native="wordarea(checkData.wnetEcutedBreatxt,'失信记录')" @keyup.native="wordarea(checkData.wnetEcutedBreatxt,'失信记录')">
-                </el-input>
-              </p>
-            </li>
-            <li>
-              <p>
-                <i class="hint"> </i>
-                <label class="InternetInf_left_label blueC" @click="NewPage(1)">单位在失信网是否有失信记录：</label>
-                <el-select class="internet_top" v-model="checkData.wnetHirecomBrea" placeholder="请选择" @change="commentShow1(checkData.wnetHirecomBrea,Internet[3])">
-                  <el-option v-for="item in netHirecomBrea" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-              <p v-show="this.InternetShow.commentS3">
-                <i class="hint">
-                  <b v-show="this.Wordhint.Internet.comLooseCre" class="internet_textarea"> 输入长度不能超过500</b>
-                </i>
-                <label class="InternetInf_right_label"> 单位失信记录说明： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetHirecomBreatxt"
-                  @compositionend.native="wordarea(checkData.wnetHirecomBreatxt,'单位失信')" @keyup.native="wordarea(checkData.wnetHirecomBreatxt,'单位失信')">
-                </el-input>
-              </p>
-            </li>
-            <li>
-              <p>
-                <i class="hint">
-                  <!-- <span v-show="errors.has('abnormalPhone')" class="internet_sel">{{ errors.first('abnormalPhone') }}</span> -->
-                </i>
-                <label class="InternetInf_left_label blueC" @click="NewPage(2)">
-                  <span class="red"> * </span>网上搜索借款人手机是否有异常：</label>
-                <el-select class="internet_top" v-model="checkData.wnetPhone" placeholder="请选择" @change="commentShow1(checkData.wnetPhone,Internet[4])"
-                  name="abnormalPhone" v-validate="'required'">
-                  <el-option v-for="item in netPhone" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-              <p v-show="this.InternetShow.commentS4">
-                <i class="hint">
-                  <b v-show="this.Wordhint.Internet.phoneOUtS" class="internet_textarea"> 输入长度不能超过500</b>
-                </i>
-                <label class="InternetInf_right_label"> 手机异常信息说明： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetPhonetxt"
-                  @compositionend.native="wordarea(checkData.wnetPhonetxt,'手机异常')" @keyup.native="wordarea(checkData.wnetPhonetxt,'手机异常')">
-                </el-input>
-              </p>
-            </li>
-            <li>
-              <p>
-                <i class="hint"></i>
-                <label class="InternetInf_left_label blueC" @click="NewPage(2)">网搜单位名称是否有异常：</label>
-                <el-select v-model="checkData.wnetHirecomName" placeholder="请选择" @change="commentShow1(checkData.wnetHirecomName,Internet[5])">
-                  <el-option v-for="item in netHirecomName" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-              <p v-show="this.InternetShow.commentS5">
-                <i class="hint">
-                  <b v-show="this.Wordhint.Internet.ComName" class="internet_textarea"> 输入长度不能超过500</b>
-                </i>
-                <label class="InternetInf_right_label"> 单位名称异常信息说明： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetHirecomNametxt"
-                  @compositionend.native="wordarea(checkData.wnetHirecomNametxt,'单位名称异常')" @keyup.native="wordarea(checkData.wnetHirecomNametxt,'单位名称异常')">
-                </el-input>
-              </p>
-            </li>
-            <li>
-              <p>
-                <i class="hint"></i>
-                <label class="InternetInf_left_label blueC" @click="NewPage(2)">网搜单位电话是否有异常：</label>
-                <el-select v-model="checkData.wnetHirecomPhone" placeholder="请选择" @change="commentShow1(checkData.wnetHirecomPhone,Internet[6])">
-                  <el-option v-for="item in netHirecomPhone" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-              <p v-show="this.InternetShow.commentS6">
-                <i class="hint">
-                  <b v-show="this.Wordhint.Internet.comphoneOUtS" class="internet_textarea"> 输入长度不能超过500</b>
-                </i>
-                <label class="InternetInf_right_label"> 单位电话异常信息说明： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetHirecomPhonetxt"
-                  @compositionend.native="wordarea(checkData.wnetHirecomPhonetxt,'单位电话异常')" @keyup.native="wordarea(checkData.wnetHirecomPhonetxt,'单位电话异常')">
-                </el-input>
-              </p>
-            </li>
-            <li>
-              <p>
-                <i class="hint"></i>
-                <label class="InternetInf_left_label blueC" @click="NewPage(2)">网上搜索借款人现居住地址和房产地址是否有异常：</label>
-                <el-select class="internet_top" v-model="checkData.wnetAddrandEstate" placeholder="请选择" @change="commentShow1(checkData.wnetAddrandEstate,Internet[7])">
-                  <el-option v-for="item in netAddrandEstate" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-              <p v-show="this.InternetShow.commentS7">
-                <i class="hint">
-                  <b v-show="this.Wordhint.Internet.address" class="internet_textarea"> 输入长度不能超过500</b>
-                </i>
-                <label class="InternetInf_right_label"> 地址异常信息说明： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetAddrandEstatetxt"
-                  @compositionend.native="wordarea(checkData.wnetAddrandEstatetxt,'地址异常')" @keyup.native="wordarea(checkData.wnetAddrandEstatetxt,'地址异常')">
-                </el-input>
-              </p>
-            </li>
-            <li>
-              <p>
-                <i class="hint"></i>
-                <label class="InternetInf_left_label blueC" @click="NewPage(2)">网搜单位地址是否有异常：</label>
-                <el-select v-model="checkData.wnetHirecomAddress" placeholder="请选择" @change="commentShow1(checkData.wnetHirecomAddress,Internet[8])">
-                  <el-option v-for="item in netHirecomAddress" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-              <p v-show="this.InternetShow.commentS8">
-                <i class="hint">
-                  <b v-show="this.Wordhint.Internet.comAddress" class="internet_textarea"> 输入长度不能超过500</b>
-                </i>
-                <label class="InternetInf_right_label"> 单位地址异常信息说明： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetHirecomAddresstxt"
-                  @compositionend.native="wordarea(checkData.wnetHirecomAddresstxt,'单位地址异常')" @keyup.native="wordarea(checkData.wnetHirecomAddresstxt,'单位地址异常')">
-                </el-input>
-              </p>
-            </li>
-            <li>
-              <p>
-                <i class="hint">
-                  <!-- <span v-show="errors.has('registerInfor')" class="internet_sel">{{ errors.first('registerInfor') }}</span> -->
-                </i>
-                <label class="InternetInf_left_label blueC" @click="NewPage(3)">
-                  <span class="red"> * </span>当地工商网查询企业基本信息中是否有登记：</label>
-                <el-select class="internet_top" v-model="checkData.wnetCompany" placeholder="请选择" @change="commentShow1(checkData.wnetCompany,Internet[9])"
-                  name="registerInfor" v-validate="'required'">
-                  <el-option v-for="item in netCompany" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-              <p v-show="this.InternetShow.commentS9">
-                <i class="hint">
-                  <b v-show="this.Wordhint.Internet.loginOrNot" class="internet_textarea"> 输入长度不能超过500</b>
-                </i>
-                <label class="InternetInf_right_label"> 工商登记信息说明： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetCompanytxt"
-                  @compositionend.native="wordarea(checkData.wnetCompanytxt,'工商登记')" @keyup.native="wordarea(checkData.wnetCompanytxt,'工商登记')">
-                </el-input>
-              </p>
-            </li>
-            <li>
-              <p>
-                <i class="hint"></i>
-                <label class="InternetInf_left_label blueC" @click="NewPage(4)">客户工作单位在全国组织代码查询中是否存在：</label>
-                <el-select class="internet_top" v-model="checkData.wnetAddrstate" placeholder="请选择" @change="commentShow1(checkData.wnetAddrstate,Internet[10])">
-                  <el-option v-for="item in netAddrstate" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-              <p v-show="this.InternetShow.commentS10" class="bottom">
-                <i class="hint">
-                  <b v-show="this.Wordhint.Internet.institutionCode" class="internet_textarea"> 输入长度不能超过500</b>
-                </i>
-                <label class="InternetInf_right_label"> 组织机构代码信息说明： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetAddrstatetxt"
-                  @compositionend.native="wordarea(checkData.wnetAddrstatetxt,'组织机构代码')" @keyup.native="wordarea(checkData.wnetAddrstatetxt,'组织机构代码')">
-                </el-input>
-              </p>
-            </li>
-          </ul>
-        </div>
-      </el-collapse-item>
-      <!-- 核实身份 -->
-      <el-collapse-item name="2">
-        <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">核实身份</span>
-        </template>
-        <div class="CreditForm_CheckId">
-          <ul class="CreditForm_CheckId_ul_left">
-            <li style="marginTop:20px;">
-              <p>
-                <i class="hint"> </i>
-                <label class="InternetInf_left_label">接听者是否是借款人本人：</label>
-                <el-select v-model="checkData.iisself" placeholder="请选择" @change="commentShow1(checkData.iisself,Internet[11])">
-                  <el-option v-for="item in isself" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-              <p v-show="this.checkId.declearNloaned">
-                <i class="hint">
-                  <b v-show="this.Wordhint.checkID.answerDec" class="internet_textarea"> 输入长度不能超过500</b>
-                </i>
-                <label class=" InternetInf_right_label "> 接听说明： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.iisselftxt"
-                  @compositionend.native="wordarea(checkData.iisselftxt,'接听说明')" @keyup.native="wordarea(checkData.iisselftxt,'接听说明')">
-                </el-input>
-              </p>
-            </li>
-            <li>
-              <p v-show="this.checkId.declearNloaned">
-                <i class="hint"> </i>
-                <label class="InternetInf_left_label">是否在我司申请借款：</label>
-                <el-select v-model="checkData.iloanBefore" placeholder="请选择" @change="commentShow1(checkData.iloanBefore,Internet[12])">
-                  <el-option v-for="item in loanBefore" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-              <p v-show="this.checkId.loanNot">
-                <i class="hint">
-                  <b v-show="this.Wordhint.checkID.Declear" class="internet_textarea"> 输入长度不能超过500</b>
-                </i>
-                <label class=" InternetInf_right_label "> 说明： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.iloanBeforetxt"
-                  @compositionend.native="wordarea(checkData.iloanBeforetxt,'说明')" @keyup.native="wordarea(checkData.iloanBeforetxt,'说明')">
-                </el-input>
-              </p>
-            </li>
-            <li>
-              <p v-show="this.checkId.loanNot">
-                <i class="hint"> </i>
-                <label class="InternetInf_left_label">借款金额[元]：</label>
-                <el-input type="text" placeholder="请输入内容" v-model="checkData.iloanAmt" @blur="formatSC('借款金额')">
-                </el-input>
-              </p>
-              <p v-show="this.checkId.loanNot">
-                <i class="hint"> </i>
-                <label class=" InternetInf_right_label "> 借款期限[月]： </label>
-                <el-input type="text" placeholder="请输入内容" v-model="checkData.iloanTerm" @blur="mMonth(checkData.iloanTerm,$event)">
-                </el-input>
-              </p>
-            </li>
-            <li>
-              <p v-show="this.checkId.loanNot">
-                <i class="hint"> </i>
-                <label class="InternetInf_left_label">借款用途：</label>
-                <el-select v-model="checkData.iloanPurpose" placeholder="请选择">
-                  <el-option v-for="item in loanPurpose" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-              <p v-show="this.checkId.loanNot" class="bottom">
-                <i class="hint">
-                  <b v-show="this.Wordhint.checkID.loanPurposed" class="internet_textarea"> 输入长度不能超过500</b>
-                </i>
-                <label class=" InternetInf_right_label "> 借款用途详细说明： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.iloanPurposetxt"
-                  @compositionend.native="wordarea(checkData.iloanPurposetxt,'详细用途')" @keyup.native="wordarea(checkData.iloanPurposetxt,'详细用途')">
-                </el-input>
-              </p>
-            </li>
-          </ul>
-        </div>
-      </el-collapse-item>
-      <!-- 工作信息  -->
-      <el-collapse-item name="3">
-        <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">工作信息</span>
-        </template>
-        <div class="CreditForm_WorkInfs">
-          <ul class="CreditForm_WorkInfs_ul_left">
-            <li style="width:100%">
-              <i class="hint">
-                <b v-show="this.Wordhint.Working.address" class="Working_input"> 输入长度不能超过50</b>
-              </i>
-              <label class="InternetInf_left_label">工作单位：</label>
-              <input type="text" class="specialInput" :maxlength="this.longInputL" placeholder="请输入内容" v-model="checkData.hirecomName"
-                @compositionend="wordInput50(checkData.hirecomName,'工作单位')" @keydown="wordInput50(checkData.hirecomName,'工作单位')"
-                @keyup="wordInput50(checkData.hirecomName,'工作单位')">
-            </li>
-            <li>
-              <i class="hint"> </i>
-              <label class="InternetInf_left_label">单位性质：</label>
-              <el-select v-model="checkData.hirecomSign" placeholder="请选择">
-                <el-option v-for="item in hirecomSign" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-            </li>
-            <li>
-              <i class="hint"> </i>
-              <label class="WorkInfs_left_label">所属行业：</label>
-              <el-select ref='industry' v-model="checkData.hirecomKindCode" placeholder="请选择">
-                <el-option v-for="item in	hirecomKind" :key="item.value" :label="item.text" :value="item.code">
-                </el-option>
-              </el-select>
-            </li>
-            <li>
-              <i class="hint">
-                <b v-show="this.Wordhint.Working.level" class="Working_input"> 输入长度不能超过20</b>
-              </i>
-              <label class="InternetInf_left_label "> 职位级别： </label>
-              <el-input type="text" :maxlength="this.shotInputL" placeholder="请输入内容" v-model="checkData.workPost" @compositionend.native="wordInput20(checkData.workPost,'职位级别')"
-                @keydown.native="wordInput20(checkData.workPost,'职位级别')" @keyup.native="wordInput20(checkData.workPost,'职位级别')">
-              </el-input>
-            </li>
-            <li>
-              <i class="hint">
-                <span class="Working_middle" v-show="this.reg.mphoneM">请输入：区号+5-8位数字</span>
-                <span class="Working_middle" v-show="this.reg.mphoneR">不可输入：11111，12345等</span>
-              </i>
-              <label class="WorkInfs_left_label">单位电话：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="checkData.workTel" @blur="mPhone(checkData.workTel,$event)">
-              </el-input>
-            </li>
-            <li>
-              <i class="hint">
-              </i>
-              <label class="InternetInf_left_label">月均工资[元]：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="checkData.avgsalaryamt" @blur="formatSC('月均工资')">
-              </el-input>
-            </li>
-            <li>
-              <i class="hint">
-                <span v-show="this.reg.mpayDay" class="Working_middle"> 请填入1-31之间的数字</span>
-              </i>
-              <label class="WorkInfs_left_label">每月发薪日：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="checkData.payDay" @blur="mday(checkData.payDay,$event)">
-              </el-input>
-            </li>
-            <li style="width:100%">
-              <i class="hint">
-                <b v-show="this.Wordhint.Working.ComAdr" class="comaddressb" style="paddingLeft:826px">输入长度不能超过100</b>
-              </i>
-              <label class="InternetInf_left_label ">单位地址 ：</label>
-              <!-- 一级 -->
-              <el-select ref="province" v-model="checkData.workProvinceName" placeholder="请选择" @change="setProvince">
-                <el-option v-for="item in	hirecomAddress" :key="item.id" :label="item.areaName" :value="item.id">
-                </el-option>
-              </el-select>
-              <!-- 二级 -->
-              <el-select ref="city" v-model="checkData.workCityName" placeholder="请选择" @visible-change="getCity" @change="setCity">
-                <el-option v-for="item in hireProvincd" :key="item.id" :label="item.areaName" :value="item.id">
-                </el-option>
-              </el-select>
-              <!-- 三级 -->
-              <el-select ref="country" v-model="checkData.workCountyName" placeholder="请选择" @visible-change="getCountry" @change="setCountry">
-                <el-option v-for="item in hireTown" :key="item.id" :label="item.areaName" :value="item.id">
-                </el-option>
-              </el-select>
-              <el-input type="text" :maxlength="this.longLongInputL" placeholder="请输入内容" v-model="checkData.workAddress" @compositionend.native="wordInput100(checkData.workAddress,'单位具体地址')"
-                @keyup.native="wordInput100(checkData.workAddress,'单位具体地址')">
-              </el-input>
-            </li>
-            <li style="width:100%" class="bottom">
-              <i class="hint">
-                <b v-show="this.Wordhint.Working.preComName" class="Working_input"> 输入长度不能超过50</b>
-              </i>
-              <label class="InternetInf_left_label">前单位名称：</label>
-              <input type="text" class="specialInput" :maxlength="this.longInputL" placeholder="请输入内容" v-model="checkData.hirelastComname"
-                @compositionend="wordInput50(checkData.hirelastComname,'前单位')" @keyup="wordInput50(checkData.hirelastComname,'前单位')">
-            </li>
-          </ul>
-          <ul class="CreditForm_WorkInfs_ul_right" style="paddingTop:58px">
-            <li>
-              <i class="hint">
-                <b v-show="this.Wordhint.Working.department" class="Working_middle Working_right">输入长度不能超过20</b>
-              </i>
-              <label class=" CheckId_right_label ">所在部门： </label>
-              <el-input type="text" placeholder="请输入内容" :maxlength="this.shotInputL" v-model="checkData.hiredepartment" @compositionend.native="wordInput20(checkData.hiredepartment,'部门')"
-                @keyup.native="wordInput20(checkData.hiredepartment,'部门')">
-              </el-input>
-            </li>
-            <li>
-              <i class="hint"></i>
-              <label class=" CheckId_right_label "> 入职时间： </label>
-              <el-date-picker v-model="checkData.entryDate" style="maxWidth:200px;minWidth:150px" type="date" placeholder="选择日期" :picker-options="pickerOptions1">
-              </el-date-picker>
-            </li>
-            <li>
-              <i class="hint"></i>
-              <label class=" CheckId_right_label ">工资发放形式： </label>
-              <el-select v-model="checkData.payForm" placeholder="请选择">
-                <el-option v-for="item in payForm" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-            </li>
-            <li>
-              <i class="hint">
-                <b v-show="this.reg.mpostCode" class="Working_middle Working_right">请输入6位邮编</b>
-              </i>
-              <label class=" CheckId_right_label "> 单位地址邮编： </label>
-              <el-input type="text" placeholder="请输入内容" v-model="checkData.workZip" @blur="postCode(checkData.workZip,$event)">
-              </el-input>
 
-            </li>
-            <li>
-              <i class="hint"></i>
-              <label class=" CheckId_right_label "> 是否为私营业主： </label>
-              <el-select v-model="checkData.privateOwnerFlag" placeholder="请选择" @change="commentShow1(checkData.privateOwnerFlag,Internet[13])">
-                <el-option v-for="item in privateOwnerFlag" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-            </li>
-          </ul>
-        </div>
-      </el-collapse-item>
-      <!-- 私营企业信息 -->
-      <el-collapse-item name="4">
-        <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">私营企业信息</span>
-        </template>
-        <div class="CreditForm_CompanyInfs" v-show="this.workInf.private" style="paddingLeft:21px;height:320px;">
-          <ul class="CreditForm_CompanyInfs_ul_left">
-            <li ref="compTypeDiv">
-              <i class="hint">
-                <!-- <span v-show="errors.has('companyType')" class="Working_input">{{ errors.first('companyType') }}</span> -->
-              </i>
-              <label class="InternetInf_left_label ">
-                <span class="red"> * </span>企业类型：</label>
-              <el-select v-model="checkData.compType" placeholder="请选择" ref="compTypes" name="companyType" v-validate="reqd">
-                <el-option v-for="item in compType" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-            </li>
-            <li>
-              <i class="hint">
-                <!-- <span v-show="errors.has('registerDate')" class="Working_middle">{{ errors.first('registerDate') }}</span> -->
-              </i>
-              <label class=" WorkInfs_left_label ">
-                <span class="red"> * </span> 公司注册时间： </label>
-              <el-date-picker style="maxWidth:200px;minWidth:150px" v-model="checkData.compegDate" type="date" placeholder="选择日期" :picker-options="pickerOptions1"
-                name="registerDate" v-validate="reqd">
-              </el-date-picker>
-            </li>
-            <li>
-              <i class="hint"> </i>
-              <label class="InternetInf_left_label ">注册资金[万元]：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="checkData.regcapitalamt" @blur="formatSC('注册资金')">
-              </el-input>
-            </li>
-            <li>
-              <i class="hint"> </i>
-              <label class="WorkInfs_left_label">占股比例：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="checkData.selfhasProportion" @blur="businessSC('占股比例')">
-              </el-input>
-            </li>
-            <li>
-              <i class="hint"> </i>
-              <label class="InternetInf_left_label ">月还款额/租金[万元]：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="checkData.monthrentamt" @blur="formatSC('月还款/租金')">
-              </el-input>
-            </li>
-            <li>
-              <i class="hint"> </i>
-              <label class="WorkInfs_left_label">营业面积：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="checkData.selfpremisesArea" @blur="businessSC('营业面积')">
-              </el-input>
-            </li>
-            <li style="width:100%;">
-              <i class="hint">
-                <b v-show="this.Wordhint.company.manage" class="Working_input">输入长度不能超过200</b>
-              </i>
-              <label class=" InternetInf_left_label">企业经营项目：</label>
-              <el-input class="opraProj" type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" v-model="checkData.projectManage"
-                @compositionend.native="wordarea200(checkData.projectManage,'经营项目')" @keydown.native="wordarea200(checkData.projectManage,'经营项目')"
-                @keyup.native="wordarea200(checkData.projectManage,'经营项目')">
-              </el-input>
-            </li>
-            <li>
-              <i class="hint"> </i>
-              <label class="InternetInf_left_label ">近一年利润[万元]：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="checkData.oneYearProfitamt" @blur="formatSC('近一年利润')">
-              </el-input>
-            </li>
-            <li>
-              <i class="hint">
-                <b v-show="this.Wordhint.company.Supplier" class="Working_middle">输入长度不能超过50</b>
-              </i>
-              <label class="WorkInfs_left_label">第一供销商：</label>
-              <el-input type="text" placeholder="请输入内容" :maxlength=" this.longInputL" v-model="checkData.firstSuppliers" @compositionend.native="wordInput50(checkData.firstSuppliers,'供销商')"
-                @keydown.native="wordInput50(checkData.firstSuppliers,'供销商')" @keyup.native="wordInput50(checkData.firstSuppliers,'供销商')">
-              </el-input>
-            </li>
-          </ul>
-          <ul class="CreditForm_CompanyInfs_ul_right" style="paddingTop:58px">
-            <li>
-              <i class="hint"> </i>
-              <label class=" CheckId_right_label "> 经营场所：</label>
-              <el-select v-model="checkData.selfpremises" placeholder="请选择">
-                <el-option v-for="item in selfpremises" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-            </li>
-            <li>
-              <i class="hint">
-                <b v-show="this.workInf.empNumber" class="Working_middle Working_right">输入内容不得大于5位数</b>
-              </i>
-              <label class=" CheckId_right_label "> 员工人数： </label>
-              <el-input type="text" placeholder="请输入内容" v-model="checkData.selfempCount" @blur="EmpNum(checkData.selfempCount)">
-              </el-input>
-            </li>
-            <li>
-              <i class="hint"> </i>
-              <label class=" CheckId_right_label "> 每月净利润额[万元]：</label>
-              <el-input type="text" placeholder="请输入内容" v-model="checkData.profitamountmamt" @blur="formatSC('月利润')">
-              </el-input>
-            </li>
-            <li style="marginTop:38px">
-              <i class="hint">
-                <b v-show="this.Wordhint.company.distributor" class="Working_middle Working_right">输入长度不能超过50</b>
-              </i>
-              <label class="CheckId_right_label "> 第一分销商： </label>
-              <el-input type="text" placeholder="请输入内容" :maxlength=" this.longInputL" v-model="checkData.firstDistributor" @compositionend.native="wordInput50(checkData.firstDistributor,'分销商')"
-                @keydown.native="wordInput50(checkData.firstDistributor,'分销商')" @keyup.native="wordInput50(checkData.firstDistributor,'分销商')">
-              </el-input>
-            </li>
-          </ul>
-        </div>
-      </el-collapse-item>
-      <!-- 家庭信息 -->
-      <el-collapse-item name="5">
-        <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">家庭信息</span>
-        </template>
-        <div class="CreditForm_FamilyInf">
-          <ul>
-            <li>
-              <p>
-                <i class="hint"> </i>
-                <label class="InternetInf_left_label ">婚姻状况：</label>
-                <el-select v-model="checkData.fmarrflag" placeholder="请选择" @change="commentShow1(checkData.fmarrflag,Internet[14])">
-                  <el-option v-for="item in fmarrflag" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-            </li>
-            <li v-show=" this.marriage.couple">
-              <p>
-                <i class="hint"> </i>
-                <label class="InternetInf_left_label ">配偶工作情况：</label>
-                <el-select v-model="checkData.spouseWork" placeholder="请选择" @change="commentShow1(checkData.spouseWork,Internet[15])">
-                  <el-option v-for="item in spouseWork" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-            </li>
-            <li v-show=" this.marriage.workingCondition">
-              <p>
-                <i class="hint"> </i>
-                <label class="InternetInf_left_label ">配偶工作类型：</label>
-                <el-select v-model="checkData.spouseWorktype" placeholder="请选择">
-                  <el-option v-for="item in spouseWorktype" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
+    <div>
+      <el-collapse v-model="activeNames">
+        <!-- <div v-if="this.PartOne" ref="CreditFormwwww" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove"> -->
+        <div v-if="this.PartOne">
+          <!-- 网上查询信息 -->
+          <el-collapse-item name="1">
+            <template slot="title">
+              <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+              <span class="headFont">网上查询信息</span>
+            </template>
+            <div class="CreditForm_InternetInf">
+              <ul>
+                <li>
+                  <p>
+                    <i class="hint"> </i>
+                    <label class="InternetInf_left_label blueC" @click="NewPage(0)">客户在法网是否有被执行信息：</label>
+                    <el-select class="internet_top" v-model="checkData.wbeexEcuted" placeholder="请选择" @change="commentShow1(checkData.wbeexEcuted,Internet[0])">
+                      <el-option v-for="item in beexEcuted" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                  <p v-show="this.InternetShow.commentS">
+                    <i class="hint">
+                      <b v-show="this.Wordhint.Internet.excude" class="internet_textarea"> 输入长度不能超过500</b>
+                    </i>
+                    <label class="InternetInf_right_label"> 执行信息说明： </label>
+                    <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wbeexEcutedtxt"
+                      @compositionend.native="wordarea(checkData.wbeexEcutedtxt,'执行信息')" @keyup.native="wordarea(checkData.wbeexEcutedtxt,'执行信息')">
+                    </el-input>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <i class="hint"> </i>
+                    <label class="InternetInf_left_label blueC" @click="NewPage(0)">单位在法网是否有被执行信息：</label>
+                    <el-select class="internet_top" v-model="checkData.wnetHirecom" placeholder="请选择" @change="commentShow1(checkData.wnetHirecom,Internet[1])">
+                      <el-option v-for="item in netHirecom" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                  <p v-show="this.InternetShow.commentS1">
+                    <i class="hint">
+                      <b v-show="this.Wordhint.Internet.comExcude" class="internet_textarea"> 输入长度不能超过500</b>
+                    </i>
+                    <label class="InternetInf_right_label"> 单位执行信息说明：</label>
+                    <el-input type="textarea" resize="none" :maxlength="this.textareaL" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomtxt"
+                      @compositionend.native="wordarea(checkData.wnetHirecomtxt,'单位执行信息')" @keyup.native="wordarea(checkData.wnetHirecomtxt,'单位执行信息')">
+                    </el-input>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <i class="hint">
+                      <!-- <span v-show="errors.has('BrokenRecord')" class="internet_sel">{{ errors.first('BrokenRecord') }}</span> -->
+                    </i>
+                    <label class="InternetInf_left_label blueC" @click="NewPage(1)">
+                      <span class="red"> * </span>客户在失信网是否有失信记录：</label>
+                    <el-select class="internet_top" v-model="checkData.wnetEcutedBrea" placeholder="请选择" name="BrokenRecord" v-validate="'required'"
+                      @change="commentShow1(checkData.wnetEcutedBrea,Internet[2])">
+                      <el-option v-for="item in netEcutedBrea" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                  <p v-show="this.InternetShow.commentS2">
+                    <i class="hint">
+                      <b v-show="this.Wordhint.Internet.looseCre" class="internet_textarea"> 输入长度不能超过500</b>
+                    </i>
+                    <label class="InternetInf_right_label"> 失信记录说明： </label>
+                    <el-input class="internet_top" type="textarea" resize="none" :maxlength="this.textareaL" :rows="2" placeholder="请输入内容" v-model="checkData.wnetEcutedBreatxt"
+                      @compositionend.native="wordarea(checkData.wnetEcutedBreatxt,'失信记录')" @keyup.native="wordarea(checkData.wnetEcutedBreatxt,'失信记录')">
+                    </el-input>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <i class="hint"> </i>
+                    <label class="InternetInf_left_label blueC" @click="NewPage(1)">单位在失信网是否有失信记录：</label>
+                    <el-select class="internet_top" v-model="checkData.wnetHirecomBrea" placeholder="请选择" @change="commentShow1(checkData.wnetHirecomBrea,Internet[3])">
+                      <el-option v-for="item in netHirecomBrea" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                  <p v-show="this.InternetShow.commentS3">
+                    <i class="hint">
+                      <b v-show="this.Wordhint.Internet.comLooseCre" class="internet_textarea"> 输入长度不能超过500</b>
+                    </i>
+                    <label class="InternetInf_right_label"> 单位失信记录说明： </label>
+                    <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetHirecomBreatxt"
+                      @compositionend.native="wordarea(checkData.wnetHirecomBreatxt,'单位失信')" @keyup.native="wordarea(checkData.wnetHirecomBreatxt,'单位失信')">
+                    </el-input>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <i class="hint">
+                      <!-- <span v-show="errors.has('abnormalPhone')" class="internet_sel">{{ errors.first('abnormalPhone') }}</span> -->
+                    </i>
+                    <label class="InternetInf_left_label blueC" @click="NewPage(2)">
+                      <span class="red"> * </span>网上搜索借款人手机是否有异常：</label>
+                    <el-select class="internet_top" v-model="checkData.wnetPhone" placeholder="请选择" @change="commentShow1(checkData.wnetPhone,Internet[4])"
+                      name="abnormalPhone" v-validate="'required'">
+                      <el-option v-for="item in netPhone" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                  <p v-show="this.InternetShow.commentS4">
+                    <i class="hint">
+                      <b v-show="this.Wordhint.Internet.phoneOUtS" class="internet_textarea"> 输入长度不能超过500</b>
+                    </i>
+                    <label class="InternetInf_right_label"> 手机异常信息说明： </label>
+                    <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetPhonetxt"
+                      @compositionend.native="wordarea(checkData.wnetPhonetxt,'手机异常')" @keyup.native="wordarea(checkData.wnetPhonetxt,'手机异常')">
+                    </el-input>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <i class="hint"></i>
+                    <label class="InternetInf_left_label blueC" @click="NewPage(2)">网搜单位名称是否有异常：</label>
+                    <el-select v-model="checkData.wnetHirecomName" placeholder="请选择" @change="commentShow1(checkData.wnetHirecomName,Internet[5])">
+                      <el-option v-for="item in netHirecomName" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                  <p v-show="this.InternetShow.commentS5">
+                    <i class="hint">
+                      <b v-show="this.Wordhint.Internet.ComName" class="internet_textarea"> 输入长度不能超过500</b>
+                    </i>
+                    <label class="InternetInf_right_label"> 单位名称异常信息说明： </label>
+                    <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetHirecomNametxt"
+                      @compositionend.native="wordarea(checkData.wnetHirecomNametxt,'单位名称异常')" @keyup.native="wordarea(checkData.wnetHirecomNametxt,'单位名称异常')">
+                    </el-input>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <i class="hint"></i>
+                    <label class="InternetInf_left_label blueC" @click="NewPage(2)">网搜单位电话是否有异常：</label>
+                    <el-select v-model="checkData.wnetHirecomPhone" placeholder="请选择" @change="commentShow1(checkData.wnetHirecomPhone,Internet[6])">
+                      <el-option v-for="item in netHirecomPhone" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                  <p v-show="this.InternetShow.commentS6">
+                    <i class="hint">
+                      <b v-show="this.Wordhint.Internet.comphoneOUtS" class="internet_textarea"> 输入长度不能超过500</b>
+                    </i>
+                    <label class="InternetInf_right_label"> 单位电话异常信息说明： </label>
+                    <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetHirecomPhonetxt"
+                      @compositionend.native="wordarea(checkData.wnetHirecomPhonetxt,'单位电话异常')" @keyup.native="wordarea(checkData.wnetHirecomPhonetxt,'单位电话异常')">
+                    </el-input>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <i class="hint"></i>
+                    <label class="InternetInf_left_label blueC" @click="NewPage(2)">网上搜索借款人现居住地址和房产地址是否有异常：</label>
+                    <el-select class="internet_top" v-model="checkData.wnetAddrandEstate" placeholder="请选择" @change="commentShow1(checkData.wnetAddrandEstate,Internet[7])">
+                      <el-option v-for="item in netAddrandEstate" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                  <p v-show="this.InternetShow.commentS7">
+                    <i class="hint">
+                      <b v-show="this.Wordhint.Internet.address" class="internet_textarea"> 输入长度不能超过500</b>
+                    </i>
+                    <label class="InternetInf_right_label"> 地址异常信息说明： </label>
+                    <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetAddrandEstatetxt"
+                      @compositionend.native="wordarea(checkData.wnetAddrandEstatetxt,'地址异常')" @keyup.native="wordarea(checkData.wnetAddrandEstatetxt,'地址异常')">
+                    </el-input>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <i class="hint"></i>
+                    <label class="InternetInf_left_label blueC" @click="NewPage(2)">网搜单位地址是否有异常：</label>
+                    <el-select v-model="checkData.wnetHirecomAddress" placeholder="请选择" @change="commentShow1(checkData.wnetHirecomAddress,Internet[8])">
+                      <el-option v-for="item in netHirecomAddress" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                  <p v-show="this.InternetShow.commentS8">
+                    <i class="hint">
+                      <b v-show="this.Wordhint.Internet.comAddress" class="internet_textarea"> 输入长度不能超过500</b>
+                    </i>
+                    <label class="InternetInf_right_label"> 单位地址异常信息说明： </label>
+                    <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetHirecomAddresstxt"
+                      @compositionend.native="wordarea(checkData.wnetHirecomAddresstxt,'单位地址异常')" @keyup.native="wordarea(checkData.wnetHirecomAddresstxt,'单位地址异常')">
+                    </el-input>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <i class="hint">
+                      <!-- <span v-show="errors.has('registerInfor')" class="internet_sel">{{ errors.first('registerInfor') }}</span> -->
+                    </i>
+                    <label class="InternetInf_left_label blueC" @click="NewPage(3)">
+                      <span class="red"> * </span>当地工商网查询企业基本信息中是否有登记：</label>
+                    <el-select class="internet_top" v-model="checkData.wnetCompany" placeholder="请选择" @change="commentShow1(checkData.wnetCompany,Internet[9])"
+                      name="registerInfor" v-validate="'required'">
+                      <el-option v-for="item in netCompany" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                  <p v-show="this.InternetShow.commentS9">
+                    <i class="hint">
+                      <b v-show="this.Wordhint.Internet.loginOrNot" class="internet_textarea"> 输入长度不能超过500</b>
+                    </i>
+                    <label class="InternetInf_right_label"> 工商登记信息说明： </label>
+                    <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetCompanytxt"
+                      @compositionend.native="wordarea(checkData.wnetCompanytxt,'工商登记')" @keyup.native="wordarea(checkData.wnetCompanytxt,'工商登记')">
+                    </el-input>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <i class="hint"></i>
+                    <label class="InternetInf_left_label blueC" @click="NewPage(4)">客户工作单位在全国组织代码查询中是否存在：</label>
+                    <el-select class="internet_top" v-model="checkData.wnetAddrstate" placeholder="请选择" @change="commentShow1(checkData.wnetAddrstate,Internet[10])">
+                      <el-option v-for="item in netAddrstate" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                  <p v-show="this.InternetShow.commentS10" class="bottom">
+                    <i class="hint">
+                      <b v-show="this.Wordhint.Internet.institutionCode" class="internet_textarea"> 输入长度不能超过500</b>
+                    </i>
+                    <label class="InternetInf_right_label"> 组织机构代码信息说明： </label>
+                    <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetAddrstatetxt"
+                      @compositionend.native="wordarea(checkData.wnetAddrstatetxt,'组织机构代码')" @keyup.native="wordarea(checkData.wnetAddrstatetxt,'组织机构代码')">
+                    </el-input>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </el-collapse-item>
+          <!-- 核实身份 -->
+          <el-collapse-item name="2">
+            <template slot="title">
+              <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+              <span class="headFont">核实身份</span>
+            </template>
+            <div class="CreditForm_CheckId">
+              <ul class="CreditForm_CheckId_ul_left">
+                <li style="marginTop:20px;">
+                  <p>
+                    <i class="hint"> </i>
+                    <label class="InternetInf_left_label">接听者是否是借款人本人：</label>
+                    <el-select v-model="checkData.iisself" placeholder="请选择" @change="commentShow1(checkData.iisself,Internet[11])">
+                      <el-option v-for="item in isself" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                  <p v-show="this.checkId.declearNloaned">
+                    <i class="hint">
+                      <b v-show="this.Wordhint.checkID.answerDec" class="internet_textarea"> 输入长度不能超过500</b>
+                    </i>
+                    <label class=" InternetInf_right_label "> 接听说明： </label>
+                    <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.iisselftxt"
+                      @compositionend.native="wordarea(checkData.iisselftxt,'接听说明')" @keyup.native="wordarea(checkData.iisselftxt,'接听说明')">
+                    </el-input>
+                  </p>
+                </li>
+                <li>
+                  <p v-show="this.checkId.declearNloaned">
+                    <i class="hint"> </i>
+                    <label class="InternetInf_left_label">是否在我司申请借款：</label>
+                    <el-select v-model="checkData.iloanBefore" placeholder="请选择" @change="commentShow1(checkData.iloanBefore,Internet[12])">
+                      <el-option v-for="item in loanBefore" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                  <p v-show="this.checkId.loanNot">
+                    <i class="hint">
+                      <b v-show="this.Wordhint.checkID.Declear" class="internet_textarea"> 输入长度不能超过500</b>
+                    </i>
+                    <label class=" InternetInf_right_label "> 说明： </label>
+                    <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.iloanBeforetxt"
+                      @compositionend.native="wordarea(checkData.iloanBeforetxt,'说明')" @keyup.native="wordarea(checkData.iloanBeforetxt,'说明')">
+                    </el-input>
+                  </p>
+                </li>
+                <li>
+                  <p v-show="this.checkId.loanNot">
+                    <i class="hint"> </i>
+                    <label class="InternetInf_left_label">借款金额[元]：</label>
+                    <el-input type="text" placeholder="请输入内容" v-model="checkData.iloanAmt" @blur="formatSC('借款金额')">
+                    </el-input>
+                  </p>
+                  <p v-show="this.checkId.loanNot">
+                    <i class="hint"> </i>
+                    <label class=" InternetInf_right_label "> 借款期限[月]： </label>
+                    <el-input type="text" placeholder="请输入内容" v-model="checkData.iloanTerm" @blur="mMonth(checkData.iloanTerm,$event)">
+                    </el-input>
+                  </p>
+                </li>
+                <li>
+                  <p v-show="this.checkId.loanNot">
+                    <i class="hint"> </i>
+                    <label class="InternetInf_left_label">借款用途：</label>
+                    <el-select v-model="checkData.iloanPurpose" placeholder="请选择">
+                      <el-option v-for="item in loanPurpose" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                  <p v-show="this.checkId.loanNot" class="bottom">
+                    <i class="hint">
+                      <b v-show="this.Wordhint.checkID.loanPurposed" class="internet_textarea"> 输入长度不能超过500</b>
+                    </i>
+                    <label class=" InternetInf_right_label "> 借款用途详细说明： </label>
+                    <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.iloanPurposetxt"
+                      @compositionend.native="wordarea(checkData.iloanPurposetxt,'详细用途')" @keyup.native="wordarea(checkData.iloanPurposetxt,'详细用途')">
+                    </el-input>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </el-collapse-item>
+          <!-- 工作信息  -->
+          <el-collapse-item name="3">
+            <template slot="title">
+              <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+              <span class="headFont">工作信息</span>
+            </template>
+            <div class="CreditForm_WorkInfs">
+              <ul class="CreditForm_WorkInfs_ul_left">
+                <li style="width:100%">
+                  <i class="hint">
+                    <b v-show="this.Wordhint.Working.address" class="Working_input"> 输入长度不能超过50</b>
+                  </i>
+                  <label class="InternetInf_left_label">工作单位：</label>
+                  <input type="text" class="specialInput" :maxlength="this.longInputL" placeholder="请输入内容" v-model="checkData.hirecomName"
+                    @compositionend="wordInput50(checkData.hirecomName,'工作单位')" @keydown="wordInput50(checkData.hirecomName,'工作单位')"
+                    @keyup="wordInput50(checkData.hirecomName,'工作单位')">
+                </li>
+                <li>
+                  <i class="hint"> </i>
+                  <label class="InternetInf_left_label">单位性质：</label>
+                  <el-select v-model="checkData.hirecomSign" placeholder="请选择">
+                    <el-option v-for="item in hirecomSign" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                  </el-select>
+                </li>
+                <li>
+                  <i class="hint"> </i>
+                  <label class="WorkInfs_left_label">所属行业：</label>
+                  <el-select ref='industry' v-model="checkData.hirecomKindCode" placeholder="请选择">
+                    <el-option v-for="item in	hirecomKind" :key="item.value" :label="item.text" :value="item.code">
+                    </el-option>
+                  </el-select>
+                </li>
+                <li>
+                  <i class="hint">
+                    <b v-show="this.Wordhint.Working.level" class="Working_input"> 输入长度不能超过20</b>
+                  </i>
+                  <label class="InternetInf_left_label "> 职位级别： </label>
+                  <el-input type="text" :maxlength="this.shotInputL" placeholder="请输入内容" v-model="checkData.workPost" @compositionend.native="wordInput20(checkData.workPost,'职位级别')"
+                    @keydown.native="wordInput20(checkData.workPost,'职位级别')" @keyup.native="wordInput20(checkData.workPost,'职位级别')">
+                  </el-input>
+                </li>
+                <li>
+                  <i class="hint">
+                    <span class="Working_middle" v-show="this.reg.mphoneM">请输入：区号+5-8位数字</span>
+                    <span class="Working_middle" v-show="this.reg.mphoneR">不可输入：11111，12345等</span>
+                  </i>
+                  <label class="WorkInfs_left_label">单位电话：</label>
+                  <el-input type="text" placeholder="请输入内容" v-model="checkData.workTel" @blur="mPhone(checkData.workTel,$event)">
+                  </el-input>
+                </li>
+                <li>
+                  <i class="hint">
+                  </i>
+                  <label class="InternetInf_left_label">月均工资[元]：</label>
+                  <el-input type="text" placeholder="请输入内容" v-model="checkData.avgsalaryamt" @blur="formatSC('月均工资')">
+                  </el-input>
+                </li>
+                <li>
+                  <i class="hint">
+                    <span v-show="this.reg.mpayDay" class="Working_middle"> 请填入1-31之间的数字</span>
+                  </i>
+                  <label class="WorkInfs_left_label">每月发薪日：</label>
+                  <el-input type="text" placeholder="请输入内容" v-model="checkData.payDay" @blur="mday(checkData.payDay,$event)">
+                  </el-input>
+                </li>
+                <li style="width:100%">
+                  <i class="hint">
+                    <b v-show="this.Wordhint.Working.ComAdr" class="comaddressb" style="paddingLeft:826px">输入长度不能超过100</b>
+                  </i>
+                  <label class="InternetInf_left_label ">单位地址 ：</label>
+                  <!-- 一级 -->
+                  <el-select ref="province" v-model="checkData.workProvinceName" placeholder="请选择" @change="setProvince">
+                    <el-option v-for="item in	hirecomAddress" :key="item.id" :label="item.areaName" :value="item.id">
+                    </el-option>
+                  </el-select>
+                  <!-- 二级 -->
+                  <el-select ref="city" v-model="checkData.workCityName" placeholder="请选择" @visible-change="getCity" @change="setCity">
+                    <el-option v-for="item in hireProvincd" :key="item.id" :label="item.areaName" :value="item.id">
+                    </el-option>
+                  </el-select>
+                  <!-- 三级 -->
+                  <el-select ref="country" v-model="checkData.workCountyName" placeholder="请选择" @visible-change="getCountry" @change="setCountry">
+                    <el-option v-for="item in hireTown" :key="item.id" :label="item.areaName" :value="item.id">
+                    </el-option>
+                  </el-select>
+                  <el-input type="text" :maxlength="this.longLongInputL" placeholder="请输入内容" v-model="checkData.workAddress" @compositionend.native="wordInput100(checkData.workAddress,'单位具体地址')"
+                    @keyup.native="wordInput100(checkData.workAddress,'单位具体地址')">
+                  </el-input>
+                </li>
+                <li style="width:100%" class="bottom">
+                  <i class="hint">
+                    <b v-show="this.Wordhint.Working.preComName" class="Working_input"> 输入长度不能超过50</b>
+                  </i>
+                  <label class="InternetInf_left_label">前单位名称：</label>
+                  <input type="text" class="specialInput" :maxlength="this.longInputL" placeholder="请输入内容" v-model="checkData.hirelastComname"
+                    @compositionend="wordInput50(checkData.hirelastComname,'前单位')" @keyup="wordInput50(checkData.hirelastComname,'前单位')">
+                </li>
+              </ul>
+              <ul class="CreditForm_WorkInfs_ul_right" style="paddingTop:58px">
+                <li>
+                  <i class="hint">
+                    <b v-show="this.Wordhint.Working.department" class="Working_middle Working_right">输入长度不能超过20</b>
+                  </i>
+                  <label class=" CheckId_right_label ">所在部门： </label>
+                  <el-input type="text" placeholder="请输入内容" :maxlength="this.shotInputL" v-model="checkData.hiredepartment" @compositionend.native="wordInput20(checkData.hiredepartment,'部门')"
+                    @keyup.native="wordInput20(checkData.hiredepartment,'部门')">
+                  </el-input>
+                </li>
+                <li>
+                  <i class="hint"></i>
+                  <label class=" CheckId_right_label "> 入职时间： </label>
+                  <el-date-picker v-model="checkData.entryDate" style="maxWidth:200px;minWidth:150px" type="date" placeholder="选择日期" :picker-options="pickerOptions1">
+                  </el-date-picker>
+                </li>
+                <li>
+                  <i class="hint"></i>
+                  <label class=" CheckId_right_label ">工资发放形式： </label>
+                  <el-select v-model="checkData.payForm" placeholder="请选择">
+                    <el-option v-for="item in payForm" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                  </el-select>
+                </li>
+                <li>
+                  <i class="hint">
+                    <b v-show="this.reg.mpostCode" class="Working_middle Working_right">请输入6位邮编</b>
+                  </i>
+                  <label class=" CheckId_right_label "> 单位地址邮编： </label>
+                  <el-input type="text" placeholder="请输入内容" v-model="checkData.workZip" @blur="postCode(checkData.workZip,$event)">
+                  </el-input>
 
-              <p>
-                <i class="hint"> </i>
-                <label class="Family_right_label"> 配偶收入情况[月/元]： </label>
-                <el-input type="text" placeholder="请输入内容" v-model="checkData.spouseIncome" @blur="formatSC('配偶收入')">
-                </el-input>
-              </p>
-            </li>
-            <li v-show=" this.marriage.couple">
-              <p>
-                <i class="hint"> </i>
-                <label class=" InternetInf_left_label">是否在同一个城市工作生活：</label>
-                <el-select v-model="checkData.spouseSamecity" placeholder="请选择" @change="commentShow1(checkData.spouseSamecity,Internet[16])">
-                  <el-option v-for="item in spouseSamecity" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-              <p v-show="this.marriage.workingLivingInf">
-                <i class="hint">
-                  <b v-show="this.Wordhint.family.SameCity" class="family_textarea"> 输入长度不能超过200</b>
-                </i>
-                <label class="Family_right_label"> 在同一个城市工作生活信息： </label>
-                <el-input type="textarea" placeholder="请输入内容" :rows="2" resize="none" :maxlength="this.shotTextareaL" v-model="checkData.spouseSamecitytxt"
-                  @compositionend.native="wordarea200(checkData.spouseSamecitytxt,'同城生活信息')" @keydown.native="wordarea200(checkData.spouseSamecitytxt,'同城生活信息')"
-                  @keyup.native="wordarea200(checkData.spouseSamecitytxt,'同城生活信息')">
-                </el-input>
-              </p>
-            </li>
-            <li>
-              <p>
-                <i class="hint"> </i>
-                <label class="InternetInf_left_label ">是否有子女：</label>
-                <el-select v-model="checkData.childFlag" placeholder="请选择" @change="commentShow1(checkData.childFlag,Internet[17])">
-                  <el-option v-for="item in childFlag" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-            </li>
-            <li v-show="this.Children.ChildrenOrNot">
-              <p>
-                <i class="hint">
-                  <span class="family_textarea" v-show="this.Children.ChildCount">请输入0-99之间的数 </span>
-                </i>
-                <label class="InternetInf_left_label ">子女数量：</label>
-                <el-input type="text" placeholder="请输入内容" v-model="checkData.childCount" @blur="childNumver(checkData.childCount)">
-                </el-input>
-              </p>
-              <p>
-                <i class="hint">
-                  <b v-show="this.Wordhint.family.ChildCt" class="family_textarea"> 输入长度不能超过200</b>
-                </i>
-                <label class="Family_right_label "> 子女数量备注： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" v-model="checkData.childCounttxt"
-                  @compositionend.native="wordarea200(checkData.childCounttxt,'子女备注')" @keydown.native="wordarea200(checkData.childCounttxt,'子女备注')"
-                  @keyup.native="wordarea200(checkData.childCounttxt,'子女备注')">
-                </el-input>
-              </p>
-            </li>
-            <li v-show="this.Children.ChildrenOrNot">
-              <p>
-                <i class="hint"> </i>
-                <label class="InternetInf_left_label ">子女现状：</label>
-                <el-select v-model="checkData.childStatus" placeholder="请选择">
-                  <el-option v-for="item in childStatus" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-              <p>
-                <i class="hint">
-                  <b v-show="this.Wordhint.family.ChildCondition" class="family_textarea"> 输入长度不能超过200</b>
-                </i>
-                <label class="Family_right_label"> 子女现状备注： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" v-model="checkData.childStatustxt"
-                  @compositionend.native="wordarea200(checkData.childStatustxt,'子女现状')" @keydown.native="wordarea200(checkData.childStatustxt,'子女现状')"
-                  @keyup.native="wordarea200(checkData.childStatustxt,'子女现状')">
-                </el-input>
-              </p>
-            </li>
-            <li v-show="this.Children.ChildrenOrNot">
-              <p>
-                <i class="hint"> </i>
-                <label class="InternetInf_left_label ">子女是否在身边：</label>
-                <el-select v-model="checkData.childTogether" placeholder="请选择">
-                  <el-option v-for="item in childTogether" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-              <p>
-                <i class="hint"> </i>
-                <label class="Family_right_label"> 是否支付其生活费： </label>
-                <el-select v-model="checkData.childIspaycost" placeholder="请选择" @change="commentShow1(checkData.childIspaycost,Internet[18])">
-                  <el-option v-for="item in childIspaycost" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-            </li>
-            <li v-show="this.Children.PayAlimony">
-              <p>
-                <i class="hint"> </i>
-                <label class="InternetInf_left_label "> 生活费支付额度[元]： </label>
-                <el-input type="text" placeholder="请输入内容" v-model="checkData.childPaycostamt" @blur="formatSC('生活费支付')">
-                </el-input>
-              </p>
-            </li>
-            <li>
-              <p>
-                <i class="hint"> </i>
-                <label class="InternetInf_left_label ">父母是否在世：</label>
-                <el-select v-model="checkData.parentIsliving" placeholder="请选择" @change="commentShow1(checkData.parentIsliving,Internet[19])">
-                  <el-option v-for="item in parentIsliving" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-              <p v-show="this.parent.livingOrNot">
-                <i class="hint">
-                  <b v-show="this.Wordhint.family.ParentRemark" class="family_textarea"> 输入长度不能超过200</b>
-                </i>
-                <label class="Family_right_label"> 父母备注： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" v-model="checkData.parentIslivingtxt"
-                  @compositionend.native="wordarea200(checkData.parentIslivingtxt,'父母备注')" @keydown.native="wordarea200(checkData.parentIslivingtxt,'父母备注')"
-                  @keyup.native="wordarea200(checkData.parentIslivingtxt,'父母备注')">
-                </el-input>
-              </p>
-            </li>
-            <li v-show="this.parent.livingOrNot">
-              <p>
-                <i class="hint"> </i>
-                <label class="InternetInf_left_label ">父母身体状况：</label>
-                <el-select v-model="checkData.parentHealth" placeholder="请选择">
-                  <el-option v-for="item in parentHealth" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-              <p>
-                <i class="hint">
-                  <b v-show="this.Wordhint.family.ParentHealth" class="family_textarea"> 输入长度不能超过200</b>
-                </i>
-                <label class="Family_right_label"> 父母身体状况备注： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" v-model="checkData.parentHealthtxt"
-                  @compositionend.native="wordarea200(checkData.parentHealthtxt,'父母健康')" @keydown.native="wordarea200(checkData.parentHealthtxt,'父母健康')"
-                  @keyup.native="wordarea200(checkData.parentHealthtxt,'父母健康')">
-                </el-input>
-              </p>
-            </li>
-            <li v-show="this.parent.livingOrNot">
-              <p>
-                <i class="hint"> </i>
-                <label class="InternetInf_left_label ">父母是否需要赡养：</label>
-                <el-select v-model="checkData.parentPayalimony" placeholder="请选择">
-                  <el-option v-for="item in parentPayalimony" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-              <p>
-                <i class="hint">
-                  <b v-show="this.Wordhint.family.Payalimony" class="family_textarea"> 输入长度不能超过200</b>
-                </i>
-                <label class="Family_right_label"> 父母是否需要赡养备注： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" v-model="checkData.parentPayalimonytxt"
-                  @compositionend.native="wordarea200(checkData.parentPayalimonytxt,'父母赡养')" @keydown.native="wordarea200(checkData.parentPayalimonytxt,'父母赡养')"
-                  @keyup.native="wordarea200(checkData.parentPayalimonytxt,'父母赡养')">
-                </el-input>
-              </p>
-            </li>
-            <li v-show="this.parent.livingOrNot">
-              <p>
-                <i class="hint"> </i>
-                <label class="InternetInf_left_label ">父母工作情况：</label>
-                <el-select v-model="checkData.parentWork" placeholder="请选择">
-                  <el-option v-for="item in parentWork" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-              <p>
-                <i class="hint"> </i>
-                <label class="Family_right_label"> 父母收入[元]： </label>
-                <el-input type="text" placeholder="请输入内容" v-model="checkData.parentIncome" @blur="formatSC('父母收入')">
-                </el-input>
-              </p>
-            </li>
-            <li v-show="this.parent.livingOrNot">
-              <p>
-                <i class="hint"> </i>
-                <label class="InternetInf_left_label ">父母是否知情：</label>
-                <el-select v-model="checkData.parentInformed" placeholder="请选择">
-                  <el-option v-for="item in parentInformed" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-            </li>
-            <li>
-              <p>
-                <i class="hint"> </i>
-                <label class="InternetInf_left_label ">是否有兄弟姐妹：</label>
-                <el-select v-model="checkData.brothersIfhas" placeholder="请选择" @change="commentShow1(checkData.brothersIfhas,Internet[20])">
-                  <el-option v-for="item in brothersIfhas" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </p>
-              <p v-show="this.siblings.siblingsOrNot">
-                <i class="hint">
-                  <b v-show="this.Wordhint.family.siblings" class="family_textarea"> 输入长度不能超过200</b>
-                </i>
-                <label class="Family_right_label"> 是否有兄弟姐妹备注： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" v-model="checkData.brothersIfhastxt"
-                  @compositionend.native="wordarea200(checkData.brothersIfhastxt,'兄弟姐妹备注')" @keydown.native="wordarea200(checkData.brothersIfhastxt,'兄弟姐妹备注')"
-                  @keyup.native="wordarea200(checkData.brothersIfhastxt,'兄弟姐妹备注')">
-                </el-input>
-              </p>
-            </li>
-            <li>
-              <p>
-                <i class="hint"> </i>
-                <label class="InternetInf_left_label ">个人/家庭月开销[元]：</label>
-                <el-input type="text" placeholder="请输入内容" v-model="checkData.fconsumption" @blur="formatSC('开销')">
-                </el-input>
-              </p>
-              <p class="bottom">
-                <i class="hint">
-                  <!-- <span v-show="errors.has('Paymonth')" class="family_textarea">{{ errors.first('Paymonth') }}</span> -->
-                  <span v-show="this.Wordhint.family.acount" class="family_textarea">请输入正确金额</span>
-                </i>
-                <label class="Family_right_label">
-                  <span class="red"> * </span> 可以承受的月还款[元]： </label>
-                <!-- <el-input type="text" placeholder="请输入内容" v-model="checkData.fbalance" @blur="formatMoney(checkData.fbalance,$event,'月还款')"
+                </li>
+                <li>
+                  <i class="hint"></i>
+                  <label class=" CheckId_right_label "> 是否为私营业主： </label>
+                  <el-select v-model="checkData.privateOwnerFlag" placeholder="请选择" @change="commentShow1(checkData.privateOwnerFlag,Internet[13])">
+                    <el-option v-for="item in privateOwnerFlag" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                  </el-select>
+                </li>
+              </ul>
+            </div>
+          </el-collapse-item>
+        </div>
+        <div class="loadMore" style="background:#eee;text-align:center;" v-show='showMe' @click="loadMore"> 点击此处，加载更多</div>
+        <div v-if="this.PartTwo">
+          <!-- 私营企业信息 -->
+          <el-collapse-item name="4">
+            <template slot="title">
+              <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+              <span class="headFont">私营企业信息</span>
+            </template>
+            <div class="CreditForm_CompanyInfs" v-show="this.workInf.private" style="paddingLeft:21px;height:320px;">
+              <ul class="CreditForm_CompanyInfs_ul_left">
+                <li ref="compTypeDiv">
+                  <i class="hint">
+                    <!-- <span v-show="errors.has('companyType')" class="Working_input">{{ errors.first('companyType') }}</span> -->
+                  </i>
+                  <label class="InternetInf_left_label ">
+                    <span class="red"> * </span>企业类型：</label>
+                  <el-select v-model="checkData.compType" placeholder="请选择" ref="compTypes" name="companyType" v-validate="reqd">
+                    <el-option v-for="item in compType" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                  </el-select>
+                </li>
+                <li>
+                  <i class="hint">
+                    <!-- <span v-show="errors.has('registerDate')" class="Working_middle">{{ errors.first('registerDate') }}</span> -->
+                  </i>
+                  <label class=" WorkInfs_left_label ">
+                    <span class="red"> * </span> 公司注册时间： </label>
+                  <el-date-picker style="maxWidth:200px;minWidth:150px" v-model="checkData.compegDate" type="date" placeholder="选择日期" :picker-options="pickerOptions1"
+                    name="registerDate" v-validate="reqd">
+                  </el-date-picker>
+                </li>
+                <li>
+                  <i class="hint"> </i>
+                  <label class="InternetInf_left_label ">注册资金[万元]：</label>
+                  <el-input type="text" placeholder="请输入内容" v-model="checkData.regcapitalamt" @blur="formatSC('注册资金')">
+                  </el-input>
+                </li>
+                <li>
+                  <i class="hint"> </i>
+                  <label class="WorkInfs_left_label">占股比例：</label>
+                  <el-input type="text" placeholder="请输入内容" v-model="checkData.selfhasProportion" @blur="businessSC('占股比例')">
+                  </el-input>
+                </li>
+                <li>
+                  <i class="hint"> </i>
+                  <label class="InternetInf_left_label ">月还款额/租金[万元]：</label>
+                  <el-input type="text" placeholder="请输入内容" v-model="checkData.monthrentamt" @blur="formatSC('月还款/租金')">
+                  </el-input>
+                </li>
+                <li>
+                  <i class="hint"> </i>
+                  <label class="WorkInfs_left_label">营业面积：</label>
+                  <el-input type="text" placeholder="请输入内容" v-model="checkData.selfpremisesArea" @blur="businessSC('营业面积')">
+                  </el-input>
+                </li>
+                <li style="width:100%;">
+                  <i class="hint">
+                    <b v-show="this.Wordhint.company.manage" class="Working_input">输入长度不能超过200</b>
+                  </i>
+                  <label class=" InternetInf_left_label">企业经营项目：</label>
+                  <el-input class="opraProj" type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" v-model="checkData.projectManage"
+                    @compositionend.native="wordarea200(checkData.projectManage,'经营项目')" @keydown.native="wordarea200(checkData.projectManage,'经营项目')"
+                    @keyup.native="wordarea200(checkData.projectManage,'经营项目')">
+                  </el-input>
+                </li>
+                <li>
+                  <i class="hint"> </i>
+                  <label class="InternetInf_left_label ">近一年利润[万元]：</label>
+                  <el-input type="text" placeholder="请输入内容" v-model="checkData.oneYearProfitamt" @blur="formatSC('近一年利润')">
+                  </el-input>
+                </li>
+                <li>
+                  <i class="hint">
+                    <b v-show="this.Wordhint.company.Supplier" class="Working_middle">输入长度不能超过50</b>
+                  </i>
+                  <label class="WorkInfs_left_label">第一供销商：</label>
+                  <el-input type="text" placeholder="请输入内容" :maxlength=" this.longInputL" v-model="checkData.firstSuppliers" @compositionend.native="wordInput50(checkData.firstSuppliers,'供销商')"
+                    @keydown.native="wordInput50(checkData.firstSuppliers,'供销商')" @keyup.native="wordInput50(checkData.firstSuppliers,'供销商')">
+                  </el-input>
+                </li>
+              </ul>
+              <ul class="CreditForm_CompanyInfs_ul_right" style="paddingTop:58px">
+                <li>
+                  <i class="hint"> </i>
+                  <label class=" CheckId_right_label "> 经营场所：</label>
+                  <el-select v-model="checkData.selfpremises" placeholder="请选择">
+                    <el-option v-for="item in selfpremises" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                  </el-select>
+                </li>
+                <li>
+                  <i class="hint">
+                    <b v-show="this.workInf.empNumber" class="Working_middle Working_right">输入内容不得大于5位数</b>
+                  </i>
+                  <label class=" CheckId_right_label "> 员工人数： </label>
+                  <el-input type="text" placeholder="请输入内容" v-model="checkData.selfempCount" @blur="EmpNum(checkData.selfempCount)">
+                  </el-input>
+                </li>
+                <li>
+                  <i class="hint"> </i>
+                  <label class=" CheckId_right_label "> 每月净利润额[万元]：</label>
+                  <el-input type="text" placeholder="请输入内容" v-model="checkData.profitamountmamt" @blur="formatSC('月利润')">
+                  </el-input>
+                </li>
+                <li style="marginTop:38px">
+                  <i class="hint">
+                    <b v-show="this.Wordhint.company.distributor" class="Working_middle Working_right">输入长度不能超过50</b>
+                  </i>
+                  <label class="CheckId_right_label "> 第一分销商： </label>
+                  <el-input type="text" placeholder="请输入内容" :maxlength=" this.longInputL" v-model="checkData.firstDistributor" @compositionend.native="wordInput50(checkData.firstDistributor,'分销商')"
+                    @keydown.native="wordInput50(checkData.firstDistributor,'分销商')" @keyup.native="wordInput50(checkData.firstDistributor,'分销商')">
+                  </el-input>
+                </li>
+              </ul>
+            </div>
+          </el-collapse-item>
+          <!-- 家庭信息 -->
+          <el-collapse-item name="5">
+            <template slot="title">
+              <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+              <span class="headFont">家庭信息</span>
+            </template>
+            <div class="CreditForm_FamilyInf">
+              <ul>
+                <li>
+                  <p>
+                    <i class="hint"> </i>
+                    <label class="InternetInf_left_label ">婚姻状况：</label>
+                    <el-select v-model="checkData.fmarrflag" placeholder="请选择" @change="commentShow1(checkData.fmarrflag,Internet[14])">
+                      <el-option v-for="item in fmarrflag" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                </li>
+                <li v-show=" this.marriage.couple">
+                  <p>
+                    <i class="hint"> </i>
+                    <label class="InternetInf_left_label ">配偶工作情况：</label>
+                    <el-select v-model="checkData.spouseWork" placeholder="请选择" @change="commentShow1(checkData.spouseWork,Internet[15])">
+                      <el-option v-for="item in spouseWork" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                </li>
+                <li v-show=" this.marriage.workingCondition">
+                  <p>
+                    <i class="hint"> </i>
+                    <label class="InternetInf_left_label ">配偶工作类型：</label>
+                    <el-select v-model="checkData.spouseWorktype" placeholder="请选择">
+                      <el-option v-for="item in spouseWorktype" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+
+                  <p>
+                    <i class="hint"> </i>
+                    <label class="Family_right_label"> 配偶收入情况[月/元]： </label>
+                    <el-input type="text" placeholder="请输入内容" v-model="checkData.spouseIncome" @blur="formatSC('配偶收入')">
+                    </el-input>
+                  </p>
+                </li>
+                <li v-show=" this.marriage.couple">
+                  <p>
+                    <i class="hint"> </i>
+                    <label class=" InternetInf_left_label">是否在同一个城市工作生活：</label>
+                    <el-select v-model="checkData.spouseSamecity" placeholder="请选择" @change="commentShow1(checkData.spouseSamecity,Internet[16])">
+                      <el-option v-for="item in spouseSamecity" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                  <p v-show="this.marriage.workingLivingInf">
+                    <i class="hint">
+                      <b v-show="this.Wordhint.family.SameCity" class="family_textarea"> 输入长度不能超过200</b>
+                    </i>
+                    <label class="Family_right_label"> 在同一个城市工作生活信息： </label>
+                    <el-input type="textarea" placeholder="请输入内容" :rows="2" resize="none" :maxlength="this.shotTextareaL" v-model="checkData.spouseSamecitytxt"
+                      @compositionend.native="wordarea200(checkData.spouseSamecitytxt,'同城生活信息')" @keydown.native="wordarea200(checkData.spouseSamecitytxt,'同城生活信息')"
+                      @keyup.native="wordarea200(checkData.spouseSamecitytxt,'同城生活信息')">
+                    </el-input>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <i class="hint"> </i>
+                    <label class="InternetInf_left_label ">是否有子女：</label>
+                    <el-select v-model="checkData.childFlag" placeholder="请选择" @change="commentShow1(checkData.childFlag,Internet[17])">
+                      <el-option v-for="item in childFlag" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                </li>
+                <li v-show="this.Children.ChildrenOrNot">
+                  <p>
+                    <i class="hint">
+                      <span class="family_textarea" v-show="this.Children.ChildCount">请输入0-99之间的数 </span>
+                    </i>
+                    <label class="InternetInf_left_label ">子女数量：</label>
+                    <el-input type="text" placeholder="请输入内容" v-model="checkData.childCount" @blur="childNumver(checkData.childCount)">
+                    </el-input>
+                  </p>
+                  <p>
+                    <i class="hint">
+                      <b v-show="this.Wordhint.family.ChildCt" class="family_textarea"> 输入长度不能超过200</b>
+                    </i>
+                    <label class="Family_right_label "> 子女数量备注： </label>
+                    <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" v-model="checkData.childCounttxt"
+                      @compositionend.native="wordarea200(checkData.childCounttxt,'子女备注')" @keydown.native="wordarea200(checkData.childCounttxt,'子女备注')"
+                      @keyup.native="wordarea200(checkData.childCounttxt,'子女备注')">
+                    </el-input>
+                  </p>
+                </li>
+                <li v-show="this.Children.ChildrenOrNot">
+                  <p>
+                    <i class="hint"> </i>
+                    <label class="InternetInf_left_label ">子女现状：</label>
+                    <el-select v-model="checkData.childStatus" placeholder="请选择">
+                      <el-option v-for="item in childStatus" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                  <p>
+                    <i class="hint">
+                      <b v-show="this.Wordhint.family.ChildCondition" class="family_textarea"> 输入长度不能超过200</b>
+                    </i>
+                    <label class="Family_right_label"> 子女现状备注： </label>
+                    <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" v-model="checkData.childStatustxt"
+                      @compositionend.native="wordarea200(checkData.childStatustxt,'子女现状')" @keydown.native="wordarea200(checkData.childStatustxt,'子女现状')"
+                      @keyup.native="wordarea200(checkData.childStatustxt,'子女现状')">
+                    </el-input>
+                  </p>
+                </li>
+                <li v-show="this.Children.ChildrenOrNot">
+                  <p>
+                    <i class="hint"> </i>
+                    <label class="InternetInf_left_label ">子女是否在身边：</label>
+                    <el-select v-model="checkData.childTogether" placeholder="请选择">
+                      <el-option v-for="item in childTogether" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                  <p>
+                    <i class="hint"> </i>
+                    <label class="Family_right_label"> 是否支付其生活费： </label>
+                    <el-select v-model="checkData.childIspaycost" placeholder="请选择" @change="commentShow1(checkData.childIspaycost,Internet[18])">
+                      <el-option v-for="item in childIspaycost" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                </li>
+                <li v-show="this.Children.PayAlimony">
+                  <p>
+                    <i class="hint"> </i>
+                    <label class="InternetInf_left_label "> 生活费支付额度[元]： </label>
+                    <el-input type="text" placeholder="请输入内容" v-model="checkData.childPaycostamt" @blur="formatSC('生活费支付')">
+                    </el-input>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <i class="hint"> </i>
+                    <label class="InternetInf_left_label ">父母是否在世：</label>
+                    <el-select v-model="checkData.parentIsliving" placeholder="请选择" @change="commentShow1(checkData.parentIsliving,Internet[19])">
+                      <el-option v-for="item in parentIsliving" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                  <p v-show="this.parent.livingOrNot">
+                    <i class="hint">
+                      <b v-show="this.Wordhint.family.ParentRemark" class="family_textarea"> 输入长度不能超过200</b>
+                    </i>
+                    <label class="Family_right_label"> 父母备注： </label>
+                    <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" v-model="checkData.parentIslivingtxt"
+                      @compositionend.native="wordarea200(checkData.parentIslivingtxt,'父母备注')" @keydown.native="wordarea200(checkData.parentIslivingtxt,'父母备注')"
+                      @keyup.native="wordarea200(checkData.parentIslivingtxt,'父母备注')">
+                    </el-input>
+                  </p>
+                </li>
+                <li v-show="this.parent.livingOrNot">
+                  <p>
+                    <i class="hint"> </i>
+                    <label class="InternetInf_left_label ">父母身体状况：</label>
+                    <el-select v-model="checkData.parentHealth" placeholder="请选择">
+                      <el-option v-for="item in parentHealth" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                  <p>
+                    <i class="hint">
+                      <b v-show="this.Wordhint.family.ParentHealth" class="family_textarea"> 输入长度不能超过200</b>
+                    </i>
+                    <label class="Family_right_label"> 父母身体状况备注： </label>
+                    <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" v-model="checkData.parentHealthtxt"
+                      @compositionend.native="wordarea200(checkData.parentHealthtxt,'父母健康')" @keydown.native="wordarea200(checkData.parentHealthtxt,'父母健康')"
+                      @keyup.native="wordarea200(checkData.parentHealthtxt,'父母健康')">
+                    </el-input>
+                  </p>
+                </li>
+                <li v-show="this.parent.livingOrNot">
+                  <p>
+                    <i class="hint"> </i>
+                    <label class="InternetInf_left_label ">父母是否需要赡养：</label>
+                    <el-select v-model="checkData.parentPayalimony" placeholder="请选择">
+                      <el-option v-for="item in parentPayalimony" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                  <p>
+                    <i class="hint">
+                      <b v-show="this.Wordhint.family.Payalimony" class="family_textarea"> 输入长度不能超过200</b>
+                    </i>
+                    <label class="Family_right_label"> 父母是否需要赡养备注： </label>
+                    <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" v-model="checkData.parentPayalimonytxt"
+                      @compositionend.native="wordarea200(checkData.parentPayalimonytxt,'父母赡养')" @keydown.native="wordarea200(checkData.parentPayalimonytxt,'父母赡养')"
+                      @keyup.native="wordarea200(checkData.parentPayalimonytxt,'父母赡养')">
+                    </el-input>
+                  </p>
+                </li>
+                <li v-show="this.parent.livingOrNot">
+                  <p>
+                    <i class="hint"> </i>
+                    <label class="InternetInf_left_label ">父母工作情况：</label>
+                    <el-select v-model="checkData.parentWork" placeholder="请选择">
+                      <el-option v-for="item in parentWork" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                  <p>
+                    <i class="hint"> </i>
+                    <label class="Family_right_label"> 父母收入[元]： </label>
+                    <el-input type="text" placeholder="请输入内容" v-model="checkData.parentIncome" @blur="formatSC('父母收入')">
+                    </el-input>
+                  </p>
+                </li>
+                <li v-show="this.parent.livingOrNot">
+                  <p>
+                    <i class="hint"> </i>
+                    <label class="InternetInf_left_label ">父母是否知情：</label>
+                    <el-select v-model="checkData.parentInformed" placeholder="请选择">
+                      <el-option v-for="item in parentInformed" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <i class="hint"> </i>
+                    <label class="InternetInf_left_label ">是否有兄弟姐妹：</label>
+                    <el-select v-model="checkData.brothersIfhas" placeholder="请选择" @change="commentShow1(checkData.brothersIfhas,Internet[20])">
+                      <el-option v-for="item in brothersIfhas" :key="item.value" :label="item.label" :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </p>
+                  <p v-show="this.siblings.siblingsOrNot">
+                    <i class="hint">
+                      <b v-show="this.Wordhint.family.siblings" class="family_textarea"> 输入长度不能超过200</b>
+                    </i>
+                    <label class="Family_right_label"> 是否有兄弟姐妹备注： </label>
+                    <el-input type="textarea" :rows="2" resize="none" :maxlength="this.shotTextareaL" placeholder="请输入内容" v-model="checkData.brothersIfhastxt"
+                      @compositionend.native="wordarea200(checkData.brothersIfhastxt,'兄弟姐妹备注')" @keydown.native="wordarea200(checkData.brothersIfhastxt,'兄弟姐妹备注')"
+                      @keyup.native="wordarea200(checkData.brothersIfhastxt,'兄弟姐妹备注')">
+                    </el-input>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <i class="hint"> </i>
+                    <label class="InternetInf_left_label ">个人/家庭月开销[元]：</label>
+                    <el-input type="text" placeholder="请输入内容" v-model="checkData.fconsumption" @blur="formatSC('开销')">
+                    </el-input>
+                  </p>
+                  <p class="bottom">
+                    <i class="hint">
+                      <!-- <span v-show="errors.has('Paymonth')" class="family_textarea">{{ errors.first('Paymonth') }}</span> -->
+                      <span v-show="this.Wordhint.family.acount" class="family_textarea">请输入正确金额</span>
+                    </i>
+                    <label class="Family_right_label">
+                      <span class="red"> * </span> 可以承受的月还款[元]： </label>
+                    <!-- <el-input type="text" placeholder="请输入内容" v-model="checkData.fbalance" @blur="formatMoney(checkData.fbalance,$event,'月还款')"
                   name="Paymonth" v-validate="'required'">
                 </el-input> -->
-                <el-input type="text" placeholder="请输入内容" v-model="checkData.fbalance" @blur="formatSC('月还款')" name="Paymonth" v-validate="'required'">
-                </el-input>
+                    <el-input type="text" placeholder="请输入内容" v-model="checkData.fbalance" @blur="formatSC('月还款')" name="Paymonth" v-validate="'required'">
+                    </el-input>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </el-collapse-item>
+          <!-- 居住情况 -->
+          <el-collapse-item name="6">
+            <template slot="title">
+              <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+              <span class="headFont">居住情况</span>
+            </template>
+            <div class="CreditForm_live">
+              <ul class="CreditForm_live_ul_left">
+                <li>
+                  <i class="hint"> </i>
+                  <label class="InternetInf_left_label ">同住者关系：</label>
+                  <el-select v-model="checkData.livingHouseHolds" placeholder="请选择">
+                    <el-option v-for="item in livingHouseHolds" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                  </el-select>
+                </li>
+              </ul>
+              <ul class="CreditForm_live_ul_left">
+                <li class="bottom">
+                  <i class="hint"> </i>
+                  <label class="Family_right_label ">居住房产所属情况：</label>
+                  <el-select v-model="checkData.livingEstateBelongs" placeholder="请选择">
+                    <el-option v-for="item in livingEstateBelongs" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                  </el-select>
+                </li>
+              </ul>
+            </div>
+          </el-collapse-item>
+          <!-- 核对现住址 -->
+          <el-collapse-item name="7">
+            <template slot="title">
+              <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+              <span class="headFont">核对现住址</span>
+            </template>
+            <div class="CreditForm_check_reside">
+              <ul class="CreditForm_check_reside_ul_left">
+                <li style="marginTop:20px;">
+                  <i class="hint"></i>
+                  <label class="InternetInf_left_label ">现住址：</label>
+                  <span class="detail_inf oneline"> {{this.checkData.aaddress}}</span>
+                </li>
+                <li>
+                  <i class="hint"></i>
+                  <label class="InternetInf_left_label ">现住地址是否为常住地址 ：</label>
+                  <el-select v-model="checkData.aisresident" placeholder="请选择" @change="commentShow1(checkData.aisresident,Internet[21])">
+                    <el-option v-for="item in aisresident" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                  </el-select>
+                </li>
+              </ul>
+              <p v-show="this.address.permanent" style="clear:both;width:66.6%;position:relative">
+                <i class="hint">
+                  <b v-show="this.Wordhint.address.permanentAddress" class="family_textarea"> 输入长度不能超过100</b>
+                </i>
+                <label class="InternetInf_left_label ">常住地址 ：</label>
+                <input class='specialInput' type="text" :maxlength="this.longLongInputL" placeholder="请输入内容" v-model="checkData.aisresidenttxt"
+                  @compositionend="wordInput100(checkData.aisresidenttxt,'常住地址')" @keyup="wordInput100(checkData.aisresidenttxt,'常住地址')">
               </p>
-            </li>
-          </ul>
+            </div>
+          </el-collapse-item>
+          <!-- 审批结论 -->
+          <el-collapse-item name="8">
+            <template slot="title">
+              <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+              <span class="headFont">审批结论</span>
+            </template>
+            <div class=" CreditForm_result">
+              <i class="hint">
+                <!-- <span v-show="errors.has('conclusion')" class="result_textarea">{{ errors.first('conclusion') }}</span> -->
+                <b v-show="this.Wordhint.result" class="result_textarea"> 输入长度不能超过500</b>
+              </i>
+              <p class="InternetInf_left_label" style="textAlign:right;">
+                <span class="red"> * </span>初审结果评价：</p>
+              <el-input type="textarea" :rows="5" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" @compositionend.native="wordarea(checkData.oother,'评价')"
+                @keyup.native="wordarea(checkData.oother,'评价')" v-model="checkData.oother" name="conclusion" v-validate="'required'">
+              </el-input>
+            </div>
+          </el-collapse-item>
         </div>
-      </el-collapse-item>
-      <!-- 居住情况 -->
-      <el-collapse-item name="6">
-        <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">居住情况</span>
-        </template>
-        <div class="CreditForm_live">
-          <ul class="CreditForm_live_ul_left">
-            <li>
-              <i class="hint"> </i>
-              <label class="InternetInf_left_label ">同住者关系：</label>
-              <el-select v-model="checkData.livingHouseHolds" placeholder="请选择">
-                <el-option v-for="item in livingHouseHolds" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-            </li>
-          </ul>
-          <ul class="CreditForm_live_ul_left">
-            <li class="bottom">
-              <i class="hint"> </i>
-              <label class="Family_right_label ">居住房产所属情况：</label>
-              <el-select v-model="checkData.livingEstateBelongs" placeholder="请选择">
-                <el-option v-for="item in livingEstateBelongs" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-            </li>
-          </ul>
-        </div>
-      </el-collapse-item>
-      <!-- 核对现住址 -->
-      <el-collapse-item name="7">
-        <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">核对现住址</span>
-        </template>
-        <div class="CreditForm_check_reside">
-          <ul class="CreditForm_check_reside_ul_left">
-            <li style="marginTop:20px;">
-              <i class="hint"></i>
-              <label class="InternetInf_left_label ">现住址：</label>
-              <span class="detail_inf oneline"> {{this.checkData.aaddress}}</span>
-            </li>
-            <li>
-              <i class="hint"></i>
-              <label class="InternetInf_left_label ">现住地址是否为常住地址 ：</label>
-              <el-select v-model="checkData.aisresident" placeholder="请选择" @change="commentShow1(checkData.aisresident,Internet[21])">
-                <el-option v-for="item in aisresident" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-            </li>
-          </ul>
-          <p v-show="this.address.permanent" style="clear:both;width:66.6%;position:relative">
-            <i class="hint">
-              <b v-show="this.Wordhint.address.permanentAddress" class="family_textarea"> 输入长度不能超过100</b>
-            </i>
-            <label class="InternetInf_left_label ">常住地址 ：</label>
-            <input class='specialInput' type="text" :maxlength="this.longLongInputL" placeholder="请输入内容" v-model="checkData.aisresidenttxt"
-              @compositionend="wordInput100(checkData.aisresidenttxt,'常住地址')" @keyup="wordInput100(checkData.aisresidenttxt,'常住地址')">
-          </p>
-        </div>
-      </el-collapse-item>
-      <!-- 审批结论 -->
-      <el-collapse-item name="8">
-        <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">审批结论</span>
-        </template>
-        <div class=" CreditForm_result">
-          <i class="hint">
-            <!-- <span v-show="errors.has('conclusion')" class="result_textarea">{{ errors.first('conclusion') }}</span> -->
-            <b v-show="this.Wordhint.result" class="result_textarea"> 输入长度不能超过500</b>
-          </i>
-          <p class="InternetInf_left_label" style="textAlign:right;">
-            <span class="red"> * </span>初审结果评价：</p>
-          <el-input type="textarea" :rows="5" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" @compositionend.native="wordarea(checkData.oother,'评价')"
-            @keyup.native="wordarea(checkData.oother,'评价')" v-model="checkData.oother" name="conclusion" v-validate="'required'">
-          </el-input>
-        </div>
-      </el-collapse-item>
-    </el-collapse>
+      </el-collapse>
+    </div>
+<!-- 确认按钮 -->
     <div class="btn_wrap">
       <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
     </div>
     <!-- ==============================点击确认时提示弹框=================================== -->
-    <el-dialog title="提示"  :modal="false" :visible.sync="Confirm" width="420px">
+    <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
       <span>确定操作？</span>
       <span slot="footer" class="dialog-footer">
         <el-button class="calbtn" @click="canc">取消</el-button>
@@ -940,6 +950,9 @@
   export default {
     data() {
       return {
+        showMe:true,
+        PartOne: true,
+        PartTwo: false,
         adbtn: '确认',
         loadsitu: false,
         surbtn: true,
@@ -2263,7 +2276,8 @@
           this.checkData.fbalance.split(",").join('') : this.checkData.fbalance;
         this.checkData.iloanAmt != null && this.checkData.iloanAmt.toString().indexOf(',') != -1 ? this.checkData.iloanAmt =
           this.checkData.iloanAmt.split(",").join('') : this.checkData.iloanAmt;
-        this.checkData.avgsalaryamt != null && this.checkData.avgsalaryamt.toString().indexOf(',') != -1 ? this.checkData.avgsalaryamt =this.checkData.avgsalaryamt.split(",").join('') : this.checkData.avgsalaryamt;
+        this.checkData.avgsalaryamt != null && this.checkData.avgsalaryamt.toString().indexOf(',') != -1 ? this.checkData
+          .avgsalaryamt = this.checkData.avgsalaryamt.split(",").join('') : this.checkData.avgsalaryamt;
         this.checkData.regcapitalamt != null && this.checkData.regcapitalamt.toString().indexOf(',') != -1 ? this.checkData
           .regcapitalamt =
           this.checkData.regcapitalamt.split(",").join('') : this.checkData.regcapitalamt;
@@ -2394,34 +2408,95 @@
           }
         });
       },
-      pro(){
-         this.post("/credit/queryProvince").then(res => {
-        this.hirecomAddress = res.data;
-      });
+      pro() {
+        this.post("/credit/queryProvince").then(res => {
+          this.hirecomAddress = res.data;
+        });
       },
-      indus(){
+      indus() {
         this.post("/credit/industry").then(res => {
-        this.hirecomKind = res.data;
-      })
+          this.hirecomKind = res.data;
+        })
+      },
+      Imgscroll() {
+        // this.perfBtn = true;
+        console.log(this.$refs.CreditFormwwww)
+        // if (this.$refs.Big_pic_ref) {
+        // this.$refs.CreditForm.onmousewheel = (event) => {
+        // this.$refs.CreditFormwwww.onmousewheel = function (event) {
+        this.$refs.CreditFormwwww.scroll = function (event) {
+          
+
+          event = event || window.event;
+          console.log(event)
+          // console.log(this.$refs.CreditForm.scrollTop)
+
+          console.log('scrollTop：' + this.scrollTop)
+          console.log('scrollHeight：' + this.scrollHeight)
+          console.log('clientX : ' + this.clientX)
+          console.log('clientY : ' + this.clientY)
+          console.log('offsetY : ' + this.offsetY)
+
+          console.log(document.documentElement.scrollTop)
+          // console.log(  this.$refs.CreditForm)
+          // this.$refs.AudioVisual_Img_ref.scrollTop = 0;
+          //   if (event.wheelDelta < 0) {
+          //     this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
+          //       100 + "px";
+          //     this.$refs.Big_pic_ref[0].style.width = 'auto';
+          //   } else {
+          //     this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) +
+          //       100 + "px";
+          //     this.$refs.Big_pic_ref[0].style.width = 'auto';
+          //   }
+          // };
+          // this.$refs.CreditForm.addEventListener("DOMMouseScroll", (event) => {
+          //   this.$refs.AudioVisual_Img_ref.scrollTop = 0;
+          //   if (event.detail > 0) {
+          //     this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
+          //         .height) -
+          //       100 + "px";
+          //     this.$refs.Big_pic_ref[0].style.width = 'auto';
+          //   } else {
+          //     this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
+          //         .height) +
+          //       100 + "px";
+          //     this.$refs.Big_pic_ref[0].style.width = 'auto';
+          //   }
+          // });
+        }
+      },
+      ImgScrollRemove() {
+        // this.perfBtn = false;
+        this.$refs.CreditFormwwww.onmousewheel = "";
+        // this.$refs.CreditForm.removeEventListener('DOMMouseScroll', (event) => {
+        //   event.preventDefault();
+        // }, false);
+      },
+      loadMore(){
+        this.showMe=false;
+        this.PartTwo=true;
       }
     },
-    created(){
- // 省    
-//  var pro,indus;
-//     pro=  this.post("/credit/queryProvince").then(res => {
-//         this.hirecomAddress = res.data;
-//       });
-    //   // 所属行业 
-    // indus=  this.post("/credit/industry").then(res => {
-    //     this.hirecomKind = res.data;
-    //   })
+
+    created() {
+      // 省    
+      //  var pro,indus;
+      //     pro=  this.post("/credit/queryProvince").then(res => {
+      //         this.hirecomAddress = res.data;
+      //       });
+      //   // 所属行业 
+      // indus=  this.post("/credit/industry").then(res => {
+      //     this.hirecomKind = res.data;
+      //   })
       this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
-    this. pro();
-    this.indus();
+      this.pro();
+      this.indus();
       this.mountC();
-      
+
     },
     mounted() {
+
       // this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
       // this.mountC();
       // // 省    
@@ -2432,20 +2507,22 @@
       // this.post("/credit/industry").then(res => {
       //   this.hirecomKind = res.data;
       // })
-      this.Pwidth = document.getElementsByClassName("el-input")
-      this.Txawidth = document.getElementsByClassName("el-textarea")
-      this.CFwidth = document.getElementsByClassName("CreditForm")
-      this.inputWidth = document.getElementsByClassName("specialInput")
-      this.comaddressb = document.getElementsByClassName("comaddressb")
-      this.Alertbtn = document.getElementsByClassName("btn")
-      if (this.myWatch) {
-        this.ElInputStyle(this.myWatch)
-      } else {
-        for (var i = 0; i < this.Pwidth.length; i++) {
-          this.Pwidth[i].style.width = 150 + "px";
-          this.comaddressb[0].style.paddingLeft = 674 + "px";
-        }
-      }
+      // console.log(docuemnt.body.scrollTop)
+      // console.log( document.documentElement.scrollTop)
+      // this.Pwidth = document.getElementsByClassName("el-input")
+      // this.Txawidth = document.getElementsByClassName("el-textarea")
+      // this.CFwidth = document.getElementsByClassName("CreditForm")
+      // this.inputWidth = document.getElementsByClassName("specialInput")
+      // this.comaddressb = document.getElementsByClassName("comaddressb")
+      // this.Alertbtn = document.getElementsByClassName("btn")
+      // if (this.myWatch) {
+      //   this.ElInputStyle(this.myWatch)
+      // } else {
+      //   for (var i = 0; i < this.Pwidth.length; i++) {
+      //     this.Pwidth[i].style.width = 150 + "px";
+      //     this.comaddressb[0].style.paddingLeft = 674 + "px";
+      //   }
+      // }
     },
     props: ["myWatch"],
     watch: {
@@ -2749,5 +2826,7 @@
     position: relative;
     margin-top: 20px;
   }
+.loadMore{
 
+}
 </style>
