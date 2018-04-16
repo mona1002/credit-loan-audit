@@ -20,6 +20,7 @@ import SplitScreen from '@/view/FirstTrail/SplitScreen'
 import AudioVisual from '@/view/FirstTrail/detailComponent/AudioVisual'
 // 信审表
 import CreditForm from '@/view/FirstTrail/detailComponent/CreditForm'
+import CreditForm2 from '@/view/FirstTrail/detailComponent/CreditForm2'
 // 登录页
 import login from '@/view/login/login'
 import cCreditForm from '@/view/FirstTrail/checkComponent/cCreditForm'
@@ -85,6 +86,7 @@ import SocialSe from'../view/SocialSeAndPneCtrl/SocialSe.vue'//社保公积金
 //  -----------------------质检----------------------
 // import exam from '../view/exam.vue'
 import AudioVisualLeft from '../view/FirstTrail/detailComponent/AudioVisualLeft.vue'
+import IntegratedQuery from '../view/QualityTesting/FunctionalityPages/IntegratedQuery.vue'
 
 
 Vue.use(Router)
@@ -97,6 +99,11 @@ const routes = [{
 //   path:'/exam',
 //   component:exam,
 // },
+
+{
+  path: '/CreditForm2',
+  component: CreditForm2
+},
 {
   path:'/AudioVisualLeft',
   component:AudioVisualLeft,
@@ -345,6 +352,10 @@ const routes = [{
 {
   path:'/tes',
   component:tes
+},
+{
+  path:'/IntegratedQuery',
+  component:IntegratedQuery 
 },
 // ---------------大数据+社保--------------------
 {
