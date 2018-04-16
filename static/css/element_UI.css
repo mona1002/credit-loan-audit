@@ -2589,3 +2589,7 @@ body .el-submenu .el-menu-item{
   color: #909399;
   font-size: 13px;
 }
+/* 综合查询 */
+.IntegratedQuery .el-table__body-wrapper{
+  overflow-x: auto;
+}
