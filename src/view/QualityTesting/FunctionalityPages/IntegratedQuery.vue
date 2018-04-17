@@ -54,27 +54,21 @@
         <el-table :data="tableData" style="width: 100%" height="100%" border>
           <el-table-column type="index" align='center' label=序号 width="55">
           </el-table-column>
-          <el-table-column prop="applySubNo" label="进件编号" align='center' min-width="180">
+          <el-table-column prop="applySubno" label="进件编号" align='center' min-width="180">
           </el-table-column>
-          <el-table-column prop="custName" label="客户名称" align='center' min-width="80">
+          <el-table-column prop="custName" label="客户名称" align='center' min-width="120">
           </el-table-column>
           <el-table-column prop="certCode" label="证件号码" align='center' min-width="180">
           </el-table-column>
-          <el-table-column prop="appDate" label="手机号码" align='center' min-width="180">
+          <el-table-column prop="mobile" label="手机号码" align='center' min-width="140">
           </el-table-column>
-          <el-table-column prop="appOrgCode" label="单位名称" align='center' min-width="100">
+          <el-table-column prop="appDate" label="申请日期" align='center' min-width="150">
           </el-table-column>
-          <el-table-column prop="proName" label="单位电话" align='center' min-width="100">
+          <el-table-column prop="proName" label="产品名称" align='center' min-width="100">
           </el-table-column>
-          <el-table-column prop="activationTime" label="家庭电话" align='center' min-width="100">
+          <el-table-column prop="busiStateTxt" label="业务状态" align='center' min-width="100">
           </el-table-column>
-          <el-table-column prop="completeTime" label="申请日期" align='center' min-width="150">
-          </el-table-column>
-          <el-table-column prop="appDate" label="产品名称" align='center' min-width="100">
-          </el-table-column>
-          <el-table-column prop="appDate" label="业务状态" align='center' min-width="100">
-          </el-table-column>
-          <el-table-column prop="appDate" label="进件机构" align='center' min-width="100">
+          <el-table-column prop="operOrgName" label="进件机构" align='center' min-width="120">
           </el-table-column>
         </el-table>
         <!-- 分页  -->
@@ -100,10 +94,10 @@
         reVal: '$1********$2',
         telVal: '$1****',
         params: {
-          applySubno: '123543654354365436',
+          applySubno: '',
           custName: '',
           certCode: '',
-          mobile: '13765635463',
+          mobile: '',
           //   pageNum: '', //页数（第几页）
           //   pageSize: '', //页面显示行数
         },
@@ -147,12 +141,7 @@
       },
       inquire(pam) {
         // 基础接口-综合查询
-        this.get("applyInfoPool/multipleQuery", {
-          applySubno: '123543654354365436',
-          custName: '34',
-          certCode: '234',
-          mobile: '13765635463',
-        }).then(res => {
+        this.post("applyInfoPool/multipleQuery",pam).then(res => {
           if (res.statusCode == 200) {
             for( var i=0; i<res.data.length;i++){
                 if(res.data[i].certCode){
@@ -278,10 +267,11 @@
     font-size: 30px;
   }
 
+/* 综合查询页面加上分页pad-bottom 改为20px*/
   .table_wrap {
     background-color: #ffffff;
     border: 1px solid #e6eaee;
-    padding: 25px 25px 60px 25px;
+    padding: 25px 25px 20px 25px;
     width: 100%;
     height: calc( 100% - 255px);
   }
