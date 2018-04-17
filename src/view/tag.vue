@@ -13,7 +13,6 @@
     <el-button class="bottom_sy" @click="adk"> 影像资料 </el-button>
     <button class="button_bottom">列表</button>
     <button class="button_bottom">列表2</button>
-    <!-- {{visitedViews }} -->
   </div>
 </template>
 
@@ -25,7 +24,6 @@
   }
 
   .button_bottom {
-    /* padding:9px 50px; */
     margin-right: 2px;
     padding: 9px;
     font-size: 14px;
@@ -34,29 +32,20 @@
     color: #ffffff;
     background: rgba(0, 119, 255, 0.5);
     box-shadow: 0 10px 20px 0 #b7d8ff;
-    /* float: left; */
   }
 
   .button_bottom:hover {
-    /* opacity:.6; */
     background: white;
     color: rgb(0, 119, 255)
   }
 
   .bottom_sy {
-    /* background:#0077ff; */
     border-radius: 3px;
-    /* height:52px; */
     color: #ffffff;
     background: rgba(0, 119, 255, 0.5);
     box-shadow: 0 10px 20px 0 #b7d8ff;
 
 
-  }
-
-  .bottom_sy:hover {
-    /* background: yellowgreen; */
-    /* background:#0077ff; */
   }
 
   .el-tag+.el-tag {
@@ -83,7 +72,6 @@
 
   .active {
     opacity: .6;
-    /* background: #000; */
   }
 
 </style>
