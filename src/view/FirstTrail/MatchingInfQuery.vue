@@ -12,7 +12,7 @@
         <span> 业务员入职时间： {{customInf.salPerEmployDate}}</span>
         <span>{{customInf.adminIntroduce}}</span>
       </p>
-      <div class="SplitScreen_wrap" id="rWrap" ref="rWrap">
+      <div class="SplitScreen_wrap" id="rWrapQ" ref="rWrapQ">
         <!-- 左侧分屏部分 -->
         <div class="left" ref="rLeft">
           <div ref="Left_title" class="Left_ul" @mouseenter="showList" @mouseleave="hid">
@@ -50,7 +50,7 @@
           </div>
         </div>
         <!-- 中间 -->
-        <div class="SP_middle" ref="RM" id="RM" v-show="midShow"></div>
+        <div class="SP_middle" ref="RMQ" id="RMQ" v-show="midShow"></div>
         <!-- 右侧分屏部分 -->
         <div class="right" ref="rRight">
           <img src="../../../static/images/backcopy.png" class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen">
@@ -267,11 +267,11 @@
         var recordMoving;
         var dragging = false;
         var doc = document;
-        var labBtn = $("#RM");
-        var wrapWidth = $("#rWrap").width();
+        var labBtn = $("#RMQ");
+        var wrapWidth = $("#rWrapQ").width();
         labBtn.bind('mousedown', () => {
           dragging = true;
-          leftOffset = $("#rWrap").offset().left;
+          leftOffset = $("#rWrapQ").offset().left;
           doc.onmousemove = (e) => {
             if (dragging) {
               clickX = e.pageX;
@@ -310,7 +310,8 @@
       }
     },
     mounted() {
-      this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
+      this.tastwaitingPass = JSON.parse(localStorage.getItem("query"));
+      console.log(this.tastwaitingPass.matchApplyId )
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.matchApplyId,
       }).then(res => {

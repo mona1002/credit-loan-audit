@@ -51,7 +51,7 @@
       </div>
       <div class="table_wrap">
         <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" height="100%" border>
+        <el-table :data="tableData" style="width: 100%" height="100%" @current-change="handleCurrentChange" border>
           <el-table-column type="index" align='center' label=序号 width="55">
           </el-table-column>
           <el-table-column prop="applySubno" label="进件编号" align='center' min-width="180">
@@ -87,8 +87,12 @@
   export default {
     data() {
       return {
+        query: {
+          id: '',
+          matchApplyId: "",
+        },
         userInf: null,
-         tableData: [],
+        tableData: [],
         reg: /(\w{6})\w*(\w{4})/,
         Telreg: /(\w{7})\w*/,
         reVal: '$1********$2',
@@ -118,16 +122,31 @@
             break;
         }
       },
+
       //   handleSizeChange(val) {
       //     this.params.pageSize = val;
       //     this.params.pageNum = 1;
       //     // this.getInf(this.params);
       //     this.inquire(this.params);
       //   },
-      //   handleCurrentChange(val) {
-      //     this.params.pageNum = val;
-      //     this.inquire(this.params);
-      //   },
+      gopath() {
+        this.$store.dispatch('addVisitedViews', {
+          name: '综合查询-查看',
+          path: '/MatchingInfQuery',
+          flag: '',
+          params: '',
+          StatefullPath: '/MatchingInfQuery',
+        })
+      },
+      handleCurrentChange(val) {
+        this.query.id = val.id;
+        this.query.matchApplyId = val.applyId;
+        localStorage.setItem("query", JSON.stringify(this.query));
+        this.$router.push('/MatchingInfQuery');
+        this.gopath();
+        // this.params.pageNum = val;
+        // this.inquire(this.params);
+      },
       Rreset() {
         this.params.applySubno = '';
         this.params.custName = '';
@@ -141,17 +160,17 @@
       },
       inquire(pam) {
         // 基础接口-综合查询
-        this.post("applyInfoPool/multipleQuery",pam).then(res => {
+        this.post("applyInfoPool/multipleQuery", pam).then(res => {
           if (res.statusCode == 200) {
-            for( var i=0; i<res.data.length;i++){
-                if(res.data[i].certCode){
-                    res.data[i].certCode= res.data[i].certCode.replace(this.reg, this.reVal);
-                }
-                if(res.data[i].mobile){
-                    res.data[i].mobile= res.data[i].mobile.replace(this.Telreg, this.telVal);
-                }
+            for (var i = 0; i < res.data.length; i++) {
+              if (res.data[i].certCode) {
+                res.data[i].certCode = res.data[i].certCode.replace(this.reg, this.reVal);
+              }
+              if (res.data[i].mobile) {
+                res.data[i].mobile = res.data[i].mobile.replace(this.Telreg, this.telVal);
+              }
             }
-            this.tableData = res.data;            
+            this.tableData = res.data;
           } else {
             this.$message.error(res.msg);
           }
@@ -159,12 +178,12 @@
       },
     },
     mounted() {
-    //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
-    //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
-    //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
+      //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
+      //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
+      //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
       //   this.params.pageNum = this.currentPage, //页数（第几页）
       //     this.params.pageSize = this.pageCount, //页面显示行数
-    //   this.inquire(this.params)
+      //   this.inquire(this.params)
     },
     components: {
       myHead
@@ -267,7 +286,8 @@
     font-size: 30px;
   }
 
-/* 综合查询页面加上分页pad-bottom 改为20px*/
+  /* 综合查询页面加上分页pad-bottom 改为20px*/
+
   .table_wrap {
     background-color: #ffffff;
     border: 1px solid #e6eaee;

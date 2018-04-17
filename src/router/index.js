@@ -84,6 +84,7 @@ import SocialSe from'../view/SocialSeAndPneCtrl/SocialSe.vue'//社保公积金
 
 //  -----------------------质检----------------------
 // import exam from '../view/exam.vue'
+import MatchingInfQuery from '../view/FirstTrail/MatchingInfQuery.vue'
 import AudioVisualLeft from '../view/FirstTrail/detailComponent/AudioVisualLeft.vue'
 import IntegratedQuery from '../view/QualityTesting/FunctionalityPages/IntegratedQuery.vue'
 
@@ -351,6 +352,10 @@ const routes = [{
 {
   path:'/IntegratedQuery',
   component:IntegratedQuery 
+},
+{
+  path:'/MatchingInfQuery',
+  component:MatchingInfQuery 
 },
 // ---------------大数据+社保--------------------
 {
