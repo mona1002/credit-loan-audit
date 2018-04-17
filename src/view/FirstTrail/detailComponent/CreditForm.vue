@@ -427,9 +427,11 @@
             <li>
               <i class="hint"></i>
               <label class=" CheckId_right_label "> 入职时间： </label>
-              <el-date-picker v-model="checkData.entryDate" style="maxWidth:200px;minWidth:150px" type="date" placeholder="选择日期" :picker-options="pickerOptions1">
+              <el-date-picker v-model="ccccc" style="maxWidth:200px;minWidth:150px" type="date" placeholder="选择日期" :picker-options="pickerOptions1">
               </el-date-picker>
               {{ checkData.entryDate}}
+              {{ typeof( checkData.entryDate )}}
+              {{ ccccc}}
             </li>
             <li>
               <i class="hint"></i>
@@ -941,6 +943,7 @@
   export default {
     data() {
       return {
+        ccc:null,
         adbtn: '确认',
         loadsitu: false,
         surbtn: true,
@@ -2361,7 +2364,9 @@
         }).then(res => {
           if (res.statusCode == 200) {
             this.checkData = res.data;
-this.checkData.entryDate=this.checkData.entryDate+'T00:00:00.000Z'
+this.checkData.entryDate=this.checkData.entryDate.split('-')
+ this.ccccc=new Date(this.checkData.entryDate[0],(this.checkData.entryDate[1]-1),this.checkData.entryDate[2] )
+ console.log(this.ccccc)
             // 2014-03-30T16:00:00.000Z
             this.Percent = this.checkData.selfhasProportion
             this.acreage = this.checkData.selfpremisesArea;
