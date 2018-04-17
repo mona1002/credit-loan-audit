@@ -11,11 +11,11 @@
           <li>
             <p>
               <label> 进件编号 </label>
-              <el-input v-model="params.applySubNo" placeholder="请输入进件编号"></el-input>
+              <el-input v-model="params.applySubno" @blur="num('Subno')" placeholder="请输入进件编号"></el-input>
             </p>
             <p>
               <label> 客户名称</label>
-              <el-input v-model="params.custName_la" placeholder="请输入客户名称"></el-input>
+              <el-input v-model="params.custName" placeholder="请输入客户名称"></el-input>
             </p>
             <p>
               <label> 证件号码</label>
@@ -25,31 +25,25 @@
           <li>
             <p>
               <label> 手机号码</label>
-              <el-input v-model="params.applySubNo" placeholder="请输入手机号码"></el-input>
+              <el-input v-model="params.mobile" @blur="num('mobile')" placeholder="请输入手机号码"></el-input>
             </p>
             <p>
-              <label> 单位名称</label>
-              <el-input v-model="params.applySubNo" placeholder="请输入单位名称"></el-input>
-            </p>
-            <p>
-              <label>单位电话</label>
-              <el-input v-model="params.applySubNo" placeholder="请输入单位电话"></el-input>
-            </p>
-          </li>
-          <li>
-            <p>
-              <label ref='dealtime'> 家庭电话</label>
-              <el-input v-model="params.applySubNo" placeholder="请输入家庭电话"></el-input>
-            </p>
-            <p>
-              <label> 联系人电话</label>
-              <el-input v-model="params.certCode" placeholder="请输入联系人电话"></el-input>
             </p>
             <p class="btn_wrap">
               <el-button class="btn" type="primary" style="marginLeft:228px" @click="Rsearch">查询</el-button>
               <el-button class="btn" type="primary" @click="Rreset">重置</el-button>
             </p>
           </li>
+          <!-- <li>
+            <p>
+            </p>
+            <p>
+            </p>
+            <p class="btn_wrap">
+              <el-button class="btn" type="primary" style="marginLeft:228px" @click="Rsearch">查询</el-button>
+              <el-button class="btn" type="primary" @click="Rreset">重置</el-button>
+            </p>
+          </li> -->
         </ul>
       </div>
       <div class="title">
@@ -84,11 +78,11 @@
           </el-table-column>
         </el-table>
         <!-- 分页  -->
-        <div class="paging">
+        <!-- <div class="paging">
           <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
             :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
           </el-pagination>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -100,137 +94,88 @@
     data() {
       return {
         userInf: null,
+         tableData: [],
+        reg: /(\w{6})\w*(\w{4})/,
+        Telreg: /(\w{7})\w*/,
+        reVal: '$1********$2',
+        telVal: '$1****',
         params: {
-          processTemplateId: 'reconsiderApp',
-          taskNodeName: '',
-          taskStatus: '03',
-          userCode: '',
-          orgCode: '',
-          pageNum: '', //页数（第几页）
-          pageSize: '', //页面显示行数
-          applySubNo: '',
-          custName_la: '',
+          applySubno: '123543654354365436',
+          custName: '',
           certCode: '',
-          proCode: '',
-          emerType: '',
-          appDate_ge: '',
-          appDate_le: '',
-          completeTime_ge: '',
-          completeTime_le: '',
+          mobile: '13765635463',
+          //   pageNum: '', //页数（第几页）
+          //   pageSize: '', //页面显示行数
         },
-        applyData: '',
-        dealDate: '',
-        desc: false,
-        casNumAlert: false,
-        caseNumInput: '',
-        dialogFormVisible: false,
-        currentRow: null,
-        currentPage: 1, //分页选中页
-        pageCount: 10, // 每页显示条数
-        totalRecord: 0, //总条数
-        tableData: [],
-        production: null,
-        options: [{
-          value: '00',
-          label: '普通'
-        }, {
-          value: '01',
-          label: '免费加急'
-        }, {
-          value: '02',
-          label: '收费加急'
-        }],
-        value: ''
+        // currentPage: 1, //分页选中页
+        // pageCount: 10, // 每页显示条数
+        // totalRecord: 0, //总条数
       }
     },
     methods: {
-      DateF(val) {
-        val ? val = val.getFullYear() + '-' + (val.getMonth() + 1) + '-' + val.getDate() : '';
-        return val;
-      },
-      num(val, el) {
+      num(el, val) {
+        console.log(el)
         switch (el) {
-          case 'code':
-            isNaN(val) ? this.params.applySubNo = val = '' : this.params.applySubNo = val;
+          case 'Subno':
+            isNaN(this.params.applySubno) ? this.params.applySubno = '' : this.params.applySubno;
             break;
-          case 'ID':
-            isNaN(val) ? this.params.certCode = val = '' : this.params.certCode = val;
+          case 'mobile':
+            isNaN(this.params.mobile) ? this.params.mobile = '' : this.params.mobile;
             break;
         }
       },
-      handleSizeChange(val) {
-        this.params.pageSize = val;
-        this.params.pageNum = 1;
-        this.getInf(this.params);
-      },
-      handleCurrentChange(val) {
-        this.params.pageNum = val;
-        this.getInf(this.params);
-      },
+      //   handleSizeChange(val) {
+      //     this.params.pageSize = val;
+      //     this.params.pageNum = 1;
+      //     // this.getInf(this.params);
+      //     this.inquire(this.params);
+      //   },
+      //   handleCurrentChange(val) {
+      //     this.params.pageNum = val;
+      //     this.inquire(this.params);
+      //   },
       Rreset() {
-        this.params.applySubNo = '';
-        this.params.custName_la = '';
+        this.params.applySubno = '';
+        this.params.custName = '';
         this.params.certCode = '';
-        this.params.proCode = '';
-        this.params.emerType = '';
-        this.params.appDate_ge = '';
-        this.params.appDate_le = '';
-        this.params.completeTime_ge = '';
-        this.params.completeTime_le = '';
-        this.applyData = '';
-        this.dealDate = '';
-        this.getInf(this.params);
+        this.params.mobile = '';
+        this.inquire(this.params);
       },
       Rsearch() {
-        this.params.appDate_ge = this.DateF(this.applyData[0]);
-        this.params.appDate_le = this.DateF(this.applyData[1]);
-        this.params.completeTime_ge = this.DateF(this.dealDate[0]);
-        this.params.completeTime_le = this.DateF(this.dealDate[1]);
-        this.params.pageNum = this.currentPage = 1;
-        this.getInf(this.params);
+        // this.params.pageNum = this.currentPage = 1;
+        this.inquire(this.params);
       },
-
-      getInf(pam) {
-        this.post("/workFlowTaskQuery/getTaskToDoList", pam).then(res => {
-          if (res.statusCode == 200 && res.data.taskDetailList != null) {
-            this.tableData = res.data.taskDetailList;
-            this.totalRecord = res.data.totalNum; // 总数
-            this.changeColor();
-          } else {
-            this.$message.error(res.msg);
-          }
-        });
-      },
-      getProducts() {
-        this.post("/credit/productAll").then(res => {
+      inquire(pam) {
+        // 基础接口-综合查询
+        this.get("applyInfoPool/multipleQuery", {
+          applySubno: '123543654354365436',
+          custName: '34',
+          certCode: '234',
+          mobile: '13765635463',
+        }).then(res => {
           if (res.statusCode == 200) {
-            this.production = res.data
+            for( var i=0; i<res.data.length;i++){
+                if(res.data[i].certCode){
+                    res.data[i].certCode= res.data[i].certCode.replace(this.reg, this.reVal);
+                }
+                if(res.data[i].mobile){
+                    res.data[i].mobile= res.data[i].mobile.replace(this.Telreg, this.telVal);
+                }
+            }
+            this.tableData = res.data;            
           } else {
             this.$message.error(res.msg);
           }
         })
       },
-      changeColor() {
-        for (var i = 0; i < this.tableData.length; i++) {
-          this.tableData[i].completeTime * 1 >= 48 ? this.tableData[i].isEmer = true : this.tableData[i].isEmer = false;
-          if (this.tableData[i].emerType == '00') {
-            this.tableData[i].emerType = "普通";
-          } else if (this.tableData[i].emerType == '01') {
-            this.tableData[i].emerType = "免费加急";
-          } else if (this.tableData[i].emerType == '02') {
-            this.tableData[i].emerType = "收费加急";
-          };
-        }
-      }
     },
     mounted() {
-      this.userInf = JSON.parse(localStorage.getItem('userInf'));
-      this.params.orgCode = this.userInf.orgCode;
-      this.params.userCode = this.userInf.userCode;
-      this.params.pageNum = this.currentPage, //页数（第几页）
-        this.params.pageSize = this.pageCount, //页面显示行数
-        this.getProducts();
-      this.getInf(this.params);
+    //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
+    //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
+    //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
+      //   this.params.pageNum = this.currentPage, //页数（第几页）
+      //     this.params.pageSize = this.pageCount, //页面显示行数
+    //   this.inquire(this.params)
     },
     components: {
       myHead
