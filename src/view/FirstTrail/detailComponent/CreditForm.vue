@@ -427,11 +427,10 @@
             <li>
               <i class="hint"></i>
               <label class=" CheckId_right_label "> 入职时间： </label>
-              <el-date-picker v-model="checkData.entryDate" value-format="yyyy-MM-dd" style="maxWidth:200px;minWidth:150px" type="date" placeholder="选择日期" :picker-options="pickerOptions1">
+              <!-- <span style="position:absolute;left:184px;top:6px;z-index:10;background:white;padding:0 2px;" > {{ checkData.entryDate}} </span> -->
+              <el-date-picker v-model="checkData.entryDate" value-format="yyyy-MM-dd" style="maxWidth:200px;minWidth:150px;opcity:0;" type="date"  :picker-options="pickerOptions1">
               </el-date-picker>
-              {{ checkData.entryDate}}
-              {{ typeof( ccccc )}}
-              {{ ccccc}}
+             {{ checkData.entryDate}}
             </li>
             <li>
               <i class="hint"></i>
