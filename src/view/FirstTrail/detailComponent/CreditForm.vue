@@ -2361,6 +2361,8 @@
         }).then(res => {
           if (res.statusCode == 200) {
             this.checkData = res.data;
+this.checkData.entryDate=this.checkData.entryDate+'T00:00:00.000Z'
+            // 2014-03-30T16:00:00.000Z
             this.Percent = this.checkData.selfhasProportion
             this.acreage = this.checkData.selfpremisesArea;
             this.checkData.applyId = this.getParams.applyId;
