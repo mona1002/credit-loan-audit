@@ -20,7 +20,6 @@ import SplitScreen from '@/view/FirstTrail/SplitScreen'
 import AudioVisual from '@/view/FirstTrail/detailComponent/AudioVisual'
 // 信审表
 import CreditForm from '@/view/FirstTrail/detailComponent/CreditForm'
-import CreditForm2 from '@/view/FirstTrail/detailComponent/CreditForm2'
 // 登录页
 import login from '@/view/login/login'
 import cCreditForm from '@/view/FirstTrail/checkComponent/cCreditForm'
@@ -100,10 +99,6 @@ const routes = [{
 //   component:exam,
 // },
 
-{
-  path: '/CreditForm2',
-  component: CreditForm2
-},
 {
   path:'/AudioVisualLeft',
   component:AudioVisualLeft,
