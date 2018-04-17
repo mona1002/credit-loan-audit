@@ -429,6 +429,7 @@
               <label class=" CheckId_right_label "> 入职时间： </label>
               <el-date-picker v-model="checkData.entryDate" style="maxWidth:200px;minWidth:150px" type="date" placeholder="选择日期" :picker-options="pickerOptions1">
               </el-date-picker>
+              {{ checkData.entryDate}}
             </li>
             <li>
               <i class="hint"></i>
