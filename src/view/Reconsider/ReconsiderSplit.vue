@@ -85,6 +85,7 @@
   export default {
     data() {
       return {
+        taskName:'',
         Rcon: 0,
         custName: "",
         SplitLeft: "left",
@@ -143,10 +144,11 @@
     mounted() {
       // 复议不用flag判断，列表页专员、主管存的同一个字段
       this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting"));
-      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '05') {
+      // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      this.taskName = JSON.parse(localStorage.getItem("RtaskInWaitting")).taskName;
+      if (this.taskName == 'reconsiderApp_commissioner') {//复议专员结论
         this.Rcon = 1;
-      } else if (this.judgeFlag.flag == '06') {
+      } else if (this.taskName == 'reconsiderApp_manager') {//复议经理结论
         this.Rcon = 2;
       }
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
