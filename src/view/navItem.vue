@@ -179,7 +179,7 @@
                                 "taskNodeName":"antiFraudApp_apply"
                             };
                             localStorage.setItem("FinalWorkbenchPass",JSON.stringify(row));
-                            localStorage.setItem("judge",JSON.stringify(judge));
+                            //localStorage.setItem("judge",JSON.stringify(judge));
                             //      nodeName = '反欺诈主管审批';
                             //    RoutePath = '/AntiFraud34';//待确认
                             //   nodeFlag = "";
@@ -231,14 +231,14 @@
 
                    // }
                 //    反欺诈申请未添加 此方法的变量
-                console.log( nodeName)
+                /*console.log( nodeName)
                     this.$store.dispatch('addVisitedViews', {
                     name: nodeName,
                     path: RoutePath,
                     flag: nodeFlag,
                     params: routeParams,
                     StatefullPath: RoutePath + routeParams
-                    })
+                    })*/
                 }
             },
         },
