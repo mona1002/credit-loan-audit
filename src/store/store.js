@@ -57,7 +57,7 @@ let mutations = {
   },
   HANDLE_CLOSE(state, tag) {
     state.visitedViews.splice(state.visitedViews.indexOf(tag), 1);
-    history.go(-1)
+    history.go(-1);
   },
   handleInputConfirm() {
     let inputValue = this.inputValue;
