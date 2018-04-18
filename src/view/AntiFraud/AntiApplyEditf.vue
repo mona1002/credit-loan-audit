@@ -410,49 +410,51 @@ console.log(  this.antiFlag  )
                     this.resMsg = res.msg;
                     done();
                     if (this.antiFlag == '01') {
-                      // this.$router.push('/taskInWaitting');
-                      RoutePath = '/taskInWaitting';
-                      nodeName = '初审审批';
+                      this.$router.push('/taskInWaitting');
+                      // RoutePath = '/taskInWaitting';
+                      // nodeName = '初审审批';
                     } else if (this.antiFlag == '02') {
-                      // this.$router.push('/FtaskInWaitting');
-                      if (this.taskName == "creditApp_finalTrial_one") {
-                        nodeName = '终审一级审批';
-                      } else if (this.taskName == "creditApp_finalTrial_two") {
-                        nodeName = '终审二级审批'
-                      } else if (this.taskName == "creditApp_finalTrial_three") {
-                        nodeName = '信审经理审批';
-                      } else if (this.taskName == "creditApp_finalTrial_four") {
-                        nodeName = '信审高级经理审批'
-                      } else if (this.taskName == "creditApp_finalTrial_five") {
-                        nodeName = '信审总监审批审批'
-                      }
-                      RoutePath = '/FtaskInWaitting';
+                      this.$router.push('/FtaskInWaitting');
+                      // if (this.taskName == "creditApp_finalTrial_one") {
+                      //   nodeName = '终审一级审批';
+                      // } else if (this.taskName == "creditApp_finalTrial_two") {
+                      //   nodeName = '终审二级审批'
+                      // } else if (this.taskName == "creditApp_finalTrial_three") {
+                      //   nodeName = '信审经理审批';
+                      // } else if (this.taskName == "creditApp_finalTrial_four") {
+                      //   nodeName = '信审高级经理审批'
+                      // } else if (this.taskName == "creditApp_finalTrial_five") {
+                      //   nodeName = '信审总监审批审批'
+                      // }
+                      // RoutePath = '/FtaskInWaitting';
                     } else if (this.antiFlag == '03') {
-                      // this.$router.push('/AntiFraud');
-                      RoutePath = '/AntiFraud';
-                      nodeName = '反欺诈专员审批';
+                      this.$router.push('/AntiFraud');
+                      // RoutePath = '/AntiFraud';
+                      // nodeName = '反欺诈专员审批';
                     } else if (this.antiFlag == '04') {
-                      RoutePath = '/AntiFraud';
-                      nodeName = '反欺诈主管审批';
-                      // this.$router.push('/reconsiderList');
+                      // RoutePath = '/AntiFraud';
+                      // nodeName = '反欺诈主管审批';
+                      this.$router.push('/AntiFraud');
                     } else if (this.antiFlag == '05') {
-                      RoutePath = '/reconsiderList';
-                      nodeName = '复议专员审批';
+                      // RoutePath = '/reconsiderList';
+                      // nodeName = '复议专员审批';
+                      this.$router.push('/reconsiderList');
                     } else if (this.antiFlag == '06') {
-                      RoutePath = '/reconsiderList';
-                      nodeName = '复议经理审批';
+                      // RoutePath = '/reconsiderList';
+                      // nodeName = '复议经理审批';
+                      this.$router.push('/reconsiderList');
                     }
-                    routeParams = '?taskNodeName=' + this.taskName
-                    this.$router.push({
-                      path: RoutePath + routeParams,
-                    });
-                    this.$store.dispatch('addVisitedViews', {
-                      name: nodeName,
-                      path: RoutePath,
-                      flag: this.antiFlag,
-                      params: routeParams,
-                      StatefullPath: RoutePath + routeParams
-                    })
+                    // routeParams = '?taskNodeName=' + this.taskName
+                    // this.$router.push({
+                    //   path: RoutePath + routeParams,
+                    // });
+                    // this.$store.dispatch('addVisitedViews', {
+                    //   name: nodeName,
+                    //   path: RoutePath,
+                    //   flag: this.antiFlag,
+                    //   params: routeParams,
+                    //   StatefullPath: RoutePath + routeParams
+                    // })
                   } else {
                     if (res.msg) {
                       this.$message({

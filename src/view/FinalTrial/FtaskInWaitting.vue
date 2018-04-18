@@ -196,13 +196,13 @@
           path: '/FSplitScreen'
         });
         localStorage.setItem("FtaskInWaitting", JSON.stringify(row));
-        this.$store.dispatch('addVisitedViews', {
-          name: '终审详情',
-          path: '/FSplitScreen',
-          flag: '02',
-          params: '',
-          StatefullPath: '/FSplitScreen',
-        })
+        // this.$store.dispatch('addVisitedViews', {
+        //   name: '终审详情',
+        //   path: '/FSplitScreen',
+        //   flag: '02',
+        //   params: '',
+        //   StatefullPath: '/FSplitScreen',
+        // })
       },
       handleSizeChange(val) {
         console.log('每页 ${val} 条');

@@ -707,18 +707,18 @@
         // 任务状态
         this.taskStatus = JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskStatus;
         this.taskName = this.FtaskInWaitting.taskName;
-        if (this.taskName == "creditApp_finalTrial_one") {
-          this.nodeName = '终审一级审批';
-        } else if (this.taskName == "creditApp_finalTrial_two") {
-          this.nodeName = '终审二级审批'
-        } else if (this.taskName == "creditApp_finalTrial_three") {
-          this.nodeName = '信审经理审批';
-        } else if (this.taskName == "creditApp_finalTrial_four") {
-          this.nodeName = '信审高级经理审批'
-        } else if (this.taskName == "creditApp_finalTrial_five") {
-          this.nodeName = '信审总监审批审批'
-        }
-        this.routeParams = '?taskNodeName=' + this.taskName
+        // if (this.taskName == "creditApp_finalTrial_one") {
+        //   this.nodeName = '终审一级审批';
+        // } else if (this.taskName == "creditApp_finalTrial_two") {
+        //   this.nodeName = '终审二级审批'
+        // } else if (this.taskName == "creditApp_finalTrial_three") {
+        //   this.nodeName = '信审经理审批';
+        // } else if (this.taskName == "creditApp_finalTrial_four") {
+        //   this.nodeName = '信审高级经理审批'
+        // } else if (this.taskName == "creditApp_finalTrial_five") {
+        //   this.nodeName = '信审总监审批审批'
+        // }
+        // this.routeParams = '?taskNodeName=' + this.taskName
 
         // 拒绝按钮根据 角色判断 BX20
         if (this.userInfo.roleCodesList) {
@@ -829,23 +829,23 @@
       },
       goTPath() {
         this.$router.push('/taskInWaitting');
-        this.$store.dispatch('addVisitedViews', {
-          name: '初审审批',
-          path: '/taskInWaitting',
-          flag: '01',
-          params: '',
-          StatefullPath: '/taskInWaitting',
-        })
+        // this.$store.dispatch('addVisitedViews', {
+        //   name: '初审审批',
+        //   path: '/taskInWaitting',
+        //   flag: '01',
+        //   params: '',
+        //   StatefullPath: '/taskInWaitting',
+        // })
       },
       goFtPath() {
         this.$router.push('/FtaskInWaitting' + this.routeParams);
-        this.$store.dispatch('addVisitedViews', {
-          name: this.nodeName,
-          path: '/FtaskInWaitting',
-          flag: '02',
-          params: this.routeParams,
-          StatefullPath: '/FtaskInWaitting' + this.routeParams,
-        });
+        // this.$store.dispatch('addVisitedViews', {
+        //   name: this.nodeName,
+        //   path: '/FtaskInWaitting',
+        //   flag: '02',
+        //   params: this.routeParams,
+        //   StatefullPath: '/FtaskInWaitting' + this.routeParams,
+        // });
       },
       Csave() {
         this.loadsitu = true;

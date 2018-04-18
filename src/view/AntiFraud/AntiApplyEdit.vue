@@ -426,8 +426,8 @@
                     done();
                     if (this.antiFlag == '01') {
                       this.$router.push('/taskInWaitting');
-                      nodeName = '初审审批';
-                      RoutePath = '/taskInWaitting';
+                      // nodeName = '初审审批';
+                      // RoutePath = '/taskInWaitting';
                       // routeParams = '?taskNodeName=antiFraudApp_manager';
                     } else if (this.antiFlag == '02') {
                       this.$router.push('/FtaskInWaitting');

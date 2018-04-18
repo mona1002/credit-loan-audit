@@ -212,13 +212,13 @@
 					// this.$router.push({path:'/SplitScreen',query:row});
 		      this.$router.push({path:'/ReconsiderSplit'});
 		      localStorage.setItem("RtaskInWaitting",JSON.stringify(row));
-					 this.$store.dispatch('addVisitedViews', {
-            name:'复议详情',
-						path:'/ReconsiderSplit',
-						flag:this.judgeFlag.flag,
-            params:'',
-            StatefullPath:'/ReconsiderSplit',
-          })
+					//  this.$store.dispatch('addVisitedViews', {
+          //   name:'复议详情',
+					// 	path:'/ReconsiderSplit',
+					// 	flag:this.judgeFlag.flag,
+          //   params:'',
+          //   StatefullPath:'/ReconsiderSplit',
+          // })
 		    },
 		    handleSizeChange(val) {
 		      console.log('每页 ${val} 条');

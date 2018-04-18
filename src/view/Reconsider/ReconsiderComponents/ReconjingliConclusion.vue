@@ -552,13 +552,13 @@
       },
        GoPath(){
         this.$router.push( '/reconsiderList?taskNodeName=reconsiderApp_manager');
-         this.$store.dispatch('addVisitedViews', {
-          name: '复议经理审批',
-          path: '/reconsiderList',
-          flag: '06',
-          params: '?taskNodeName=reconsiderApp_manager',    
-          StatefullPath: '/reconsiderList?taskNodeName=reconsiderApp_manager'
-        })
+        //  this.$store.dispatch('addVisitedViews', {
+        //   name: '复议经理审批',
+        //   path: '/reconsiderList',
+        //   flag: '06',
+        //   params: '?taskNodeName=reconsiderApp_manager',    
+        //   StatefullPath: '/reconsiderList?taskNodeName=reconsiderApp_manager'
+        // })
        },
       //保留两位小数 整数千分位
       formatNumber(num, cent, isThousand) {
