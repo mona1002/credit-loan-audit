@@ -209,6 +209,7 @@
                               nodeFlag = "05";
                                routeParams = '?taskNodeName=reconsiderApp_commissioner&flag=05';
                                
+
                         };
                         //复议经理
                         if(strs[0].split('=')[1] == "reconsiderApp_manager" && strs[1].split('=')[1] == "06"){
@@ -226,19 +227,17 @@
                                RoutePath = '/reconsiderList';
                               nodeFlag = "06";
                                routeParams = '?taskNodeName=reconsiderApp_manager&flag=06';
-                            
                         };
 
                    // }
                 //    反欺诈申请未添加 此方法的变量
-                console.log( nodeName)
-                    this.$store.dispatch('addVisitedViews', {
-                    name: nodeName,
-                    path: RoutePath,
-                    flag: nodeFlag,
-                    params: routeParams,
-                    StatefullPath: RoutePath + routeParams
-                    })
+                    // this.$store.dispatch('addVisitedViews', {
+                    // name: nodeName,
+                    // path: RoutePath,
+                    // flag: nodeFlag,
+                    // params: routeParams,
+                    // StatefullPath: RoutePath + routeParams
+                    // })
                 }
             },
         },
