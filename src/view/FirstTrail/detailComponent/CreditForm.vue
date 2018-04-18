@@ -427,10 +427,8 @@
             <li>
               <i class="hint"></i>
               <label class=" CheckId_right_label "> 入职时间： </label>
-              <!-- <span style="position:absolute;left:184px;top:6px;z-index:10;background:white;padding:0 2px;" > {{ checkData.entryDate}} </span> -->
               <el-date-picker v-model="checkData.entryDate" value-format="yyyy-MM-dd" style="maxWidth:200px;minWidth:150px;opcity:0;" type="date"  :picker-options="pickerOptions1">
               </el-date-picker>
-             {{ checkData.entryDate}}
             </li>
             <li>
               <i class="hint"></i>
@@ -2363,10 +2361,6 @@
         }).then(res => {
           if (res.statusCode == 200) {
             this.checkData = res.data;
-// this.checkData.entryDate=this.checkData.entryDate.split('-')
-//  this.ccccc=new Date(this.checkData.entryDate[0],(this.checkData.entryDate[1]-1),this.checkData.entryDate[2] )
-//  console.log(this.ccccc)
-            // 2014-03-30T16:00:00.000Z
             this.Percent = this.checkData.selfhasProportion
             this.acreage = this.checkData.selfpremisesArea;
             this.checkData.applyId = this.getParams.applyId;

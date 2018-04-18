@@ -242,8 +242,6 @@
         this.$refs.rLeft.style.display = "block";
         this.$refs.rRight.style.width = "50%";
         this.$refs.rLeft.style.width = "calc(50% - 2px)";
-        console.log(this.$refs.rRight.style.width)
-        console.log(this.$refs.rLeft.style.width)
         this.$refs.RM.style.left = "calc(50% - 2px)";
         this.watchData = this.$refs.rRight.style.width;
         this.isFull = false;
@@ -317,7 +315,6 @@
       MyMove() {
         console.log("移动")
         var clickX, leftOffset, inx, nextW2, nextW;
-        var recordMoving;
         var dragging = false;
         var doc = document;
         var labBtn = $("#RM");
@@ -328,7 +325,6 @@
           doc.onmousemove = (e) => {
             if (dragging) {
               clickX = e.pageX;
-              console.log(clickX + "=========" + leftOffset)
               if (clickX > leftOffset + 10 && clickX < (wrapWidth - 5)) {
                 nextW2 = clickX - leftOffset;
                 labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px'); //按钮移动
@@ -336,35 +332,22 @@
                 // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
                 labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px'); //减多少宽地待算
                 // console.log(this.AUpreWidth)
-                console.log(111)
               } else if (clickX < leftOffset + 10 && clickX < (wrapWidth - 5)) {
                 labBtn.eq(0).css('left', '0px');
                 labBtn.eq(0).prev().width('0px');
                 labBtn.eq(0).next().width(wrapWidth - 6 + 'px'); //减多少宽地待算
                 // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
-                console.log(222)
               }
-              console.log(clickX + "------------------" + wrapWidth)
               if (clickX > (wrapWidth - 5)) {
-                console.log(333)
                 labBtn.eq(0).css('left', parseFloat(wrapWidth) - 11 + 'px');
                 labBtn.eq(0).prev().width(wrapWidth - 11 + 'px');
                 labBtn.eq(0).next().width('0px');
                 // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
-                //  console.log(this.preWidth)
               }
-              // recordMoving=labBtn.eq(0).prev().width();            
-              //  this.preWidth =recordMoving
-              // this.$refs.AULeft.MyMove();
-
-              // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-              // console.log( recordMoving)
             }
           };
         });
         $(doc).mouseup((e) => {
-          // console.log( this.preWidth)
-          //  this.preWidth =recordMoving
           dragging = false;
           e.cancelBubble = true;
         });
@@ -403,7 +386,6 @@
         if (res.statusCode == 200) {
           this.custName = res.data.accepCusBasicInfo.custName;
           this.customInf = res.data;
-          console.log(this.customInf)
         } else {
           this.$message.error(res.msg);
         }

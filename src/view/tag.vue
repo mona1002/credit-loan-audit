@@ -1,12 +1,12 @@
 <template>
-  <div class="tag">
+  <div class="tag" ref='tag_ref'>
     <div :class="[isActive(tag)?'active':'','pai']" :key="ind" v-for="(tag,ind) in visitedViews" @click="changeFlag(tag)">
       <router-link :to='tag.path+tag.params'>
-        <!-- <el-tag closable :disable-transitions="false" @close.prevent="handleClose(tag)"> -->
-        <!-- <el-tag :key="tag" v-for="tag in dynamicTags" closable :disable-transitions="false" @close="handleClose(tag)"> -->
-        <!-- {{tag.name}}
-        </el-tag> -->
-        <button closable :disable-transitions="false" @close.prevent="handleClose(tag)" class="button_bottom"> {{tag.name}}</button>
+        <!-- <el-tag closable :disable-transitions="false" @close.prevent="handleClose(tag)" class="tag_bottom" :key="tag" > {{tag.name}} </el-tag> -->
+        <!-- <el-tag :key="tag" v-for="tag in dynamicTags" closable :disable-transitions="false" @close="handleClose(tag)">
+        {{tag.name}} -->
+        <!-- </el-tag> -->
+        <button closable :disable-transitions="false" @close.prevent="handleClose(tag)" class="button_bottom"><span v-show="tag.name!='工作台'" @click="handleClose(tag)" class="el-icon-close close_tag" > </span> {{tag.name}}</button>
       </router-link>
     </div>
     <el-button class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
@@ -25,6 +25,23 @@
 
   .button_bottom {
     margin-right: 2px;
+    padding: 9px 22px 9px 9px;
+    font-size: 14px;
+    border-radius: 3px;
+    cursor: pointer;
+    color: #ffffff;
+    background: rgba(0, 119, 255, 0.5);
+    box-shadow: 0 10px 20px 0 #b7d8ff;
+    position: relative;
+  }
+
+  .button_bottom:hover {
+    background: white;
+    color: rgb(0, 119, 255)
+  }
+
+  .tag_bottom {
+    margin-right: 2px;
     padding: 9px;
     font-size: 14px;
     border-radius: 3px;
@@ -34,7 +51,7 @@
     box-shadow: 0 10px 20px 0 #b7d8ff;
   }
 
-  .button_bottom:hover {
+  .tag_bottom:hover {
     background: white;
     color: rgb(0, 119, 255)
   }
@@ -73,7 +90,12 @@
   .active {
     opacity: .6;
   }
-
+.close_tag{
+  position: absolute;
+  right: 5px;
+  font-size: 12px;
+  top:5px;
+}
 </style>
 
 <script>
@@ -148,10 +170,14 @@
         }
         this.inputVisible = false;
         this.inputValue = '';
+      },
+      Width(){
+  console.log( this.$refs.tag_ref)
       }
     },
     mounted() {
       console.log(this.$store.state.visitedViews)
+      console.log( this.$refs.tag_ref)
     },
     computed: {
       visitedViews() {

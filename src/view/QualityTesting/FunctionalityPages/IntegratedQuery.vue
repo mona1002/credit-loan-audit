@@ -152,11 +152,15 @@
         this.params.custName = '';
         this.params.certCode = '';
         this.params.mobile = '';
-        this.inquire(this.params);
       },
       Rsearch() {
         // this.params.pageNum = this.currentPage = 1;
-        this.inquire(this.params);
+        if (this.params.applySubno != '' || this.params.custName != '' || this.params.certCode != '' || this.params.mobile !=
+          '') {
+          this.inquire(this.params);
+        } else {
+          this.$message.error('请输入查询条件')
+        }
       },
       inquire(pam) {
         // 基础接口-综合查询
@@ -183,7 +187,6 @@
       //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
       //   this.params.pageNum = this.currentPage, //页数（第几页）
       //     this.params.pageSize = this.pageCount, //页面显示行数
-      //   this.inquire(this.params)
     },
     components: {
       myHead
