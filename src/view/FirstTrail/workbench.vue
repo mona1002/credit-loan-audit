@@ -229,13 +229,13 @@
         this.$router.push({
           path: RoutePath + routeParams,
         });
-        this.$store.dispatch('addVisitedViews', {
-          name: nodeName,
-          path: RoutePath,
-          flag: nodeFlag,
-          params: routeParams,
-          StatefullPath: RoutePath + routeParams
-        })
+        // this.$store.dispatch('addVisitedViews', {
+        //   name: nodeName,
+        //   path: RoutePath,
+        //   flag: nodeFlag,
+        //   params: routeParams,
+        //   StatefullPath: RoutePath + routeParams
+        // })
       },
     },
     computed: {

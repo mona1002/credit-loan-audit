@@ -133,7 +133,7 @@ export default {
   mounted() {
     // console.log(this.showFqz);
     // 先判断是 初审 终审  /  专员  主管
-    var judgeFlag = JSON.parse(localStorage.getItem('judge'));
+    /*var judgeFlag = JSON.parse(localStorage.getItem('judge'));
     this.antiFlag = judgeFlag.flag;
 
     if (this.isAntiDetail == true) {
@@ -157,9 +157,9 @@ export default {
     } else {
       // 获取到 id
       this.applyId = this.$route.params.id;
-    }
+    }*/
 
-
+    this.applyId = this.$route.params.applyId;
     // 经办人 登录用户名
     var userInfo = JSON.parse(localStorage.getItem('userInf'));
     this.userCode = userInfo.userCode;

@@ -1,14 +1,20 @@
 <template>
   <div class="tag" ref='tag_ref'>
-    <div :class="[isActive(tag)?'active':'','pai']" :key="ind" v-for="(tag,ind) in visitedViews" @click="changeFlag(tag)">
+    <div :class="[isActive(tag)?'active':'','pai']" :key="ind" v-for="(tag,ind) in visitedViews" @click="changeFlag(tag)" @contextmenu.prevent.native="openMenu(tag,$event)">
       <router-link :to='tag.path+tag.params'>
         <!-- <el-tag closable :disable-transitions="false" @close.prevent="handleClose(tag)" class="tag_bottom" :key="tag" > {{tag.name}} </el-tag> -->
         <!-- <el-tag :key="tag" v-for="tag in dynamicTags" closable :disable-transitions="false" @close="handleClose(tag)">
         {{tag.name}} -->
         <!-- </el-tag> -->
-        <button closable :disable-transitions="false" @close.prevent="handleClose(tag)" class="button_bottom"><span v-show="tag.name!='工作台'" @click="handleClose(tag)" class="el-icon-close close_tag" > </span> {{tag.name}}</button>
+        <button closable :disable-transitions="false" @close.prevent="handleClose(tag)" class="button_bottom">
+          <span v-show="tag.name!='工作台'" @click="handleClose(tag)" class="el-icon-close close_tag"> </span> {{tag.name}}</button>
       </router-link>
     </div>
+    <!-- <ul class='contextmenu' v-show="visible" :style="{left:left+'px',top:top+'px'}">
+      <li @click="closeSelectedTag(selectedTag)">Close</li>
+      <li @click="closeOthersTags">Close Others</li>
+      <li @click="closeAllTags">Close All</li>
+    </ul> -->
     <el-button class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
     <el-button class="bottom_sy" @click="adk"> 影像资料 </el-button>
     <button class="button_bottom">列表</button>
@@ -61,8 +67,6 @@
     color: #ffffff;
     background: rgba(0, 119, 255, 0.5);
     box-shadow: 0 10px 20px 0 #b7d8ff;
-
-
   }
 
   .el-tag+.el-tag {
@@ -90,18 +94,47 @@
   .active {
     opacity: .6;
   }
-.close_tag{
-  position: absolute;
-  right: 5px;
-  font-size: 12px;
-  top:5px;
-}
+
+  .close_tag {
+    position: absolute;
+    right: 5px;
+    font-size: 12px;
+    top: 5px;
+  }
+
+  .contextmenu {
+    margin: 0;
+    background: #fff;
+    z-index: 2;
+    position: absolute;
+    list-style-type: none;
+    padding: 5px 0;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #333;
+    box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, .3);
+  }
+
 </style>
 
 <script>
   export default {
     data() {
       return {
+        nodeFlag: "",
+        RoutePath: '',
+        nodeName: '',
+        routeParams: '',
+        taskNodeName: '',
+        // pams: {
+        //  name:'',
+        //   path: route.path,
+        //   flag:'',
+        //   params: '',
+        //   StatefullPath: ''
+        // },
+        visible: false,
         judge: {
           flag: ''
         },
@@ -110,7 +143,190 @@
         inputValue: ''
       };
     },
+    computed: {
+      visitedViews() {
+        return this.$store.state.visitedViews
+      }
+    },
+    watch: {
+      $route() {
+        this.addViewTags()
+        // this.moveToCurrentTag()
+      },
+      visible(value) {
+        if (value) {
+          window.addEventListener('click', this.closeMenu)
+        } else {
+          window.removeEventListener('click', this.closeMenu)
+        }
+      }
+    },
     methods: {
+      addViewTags() {
+        const route = this.generateRoute();
+        console.log(route.fullPath)
+        route.fullPath.indexOf('?') != -1 ? this.taskNodeName = route.fullPath.split('?')[1].split('&')[0].split('=')[1] :
+          this.taskNodeName;
+        // const route =this.$route;
+        // console.log(route.path)
+        if (!route) {
+          return false
+        }
+        if (route.path == '/') {
+          return
+        }
+        if (route.path == '/taskInWaitting') {
+          console.log('初审审批')
+          this.nodeFlag = "01";
+          this.nodeName = "初审审批";
+          this.routeParams = '?taskNodeName=creditApp_firstTrial&flag=01';
+        } else if (route.path == '/SplitScreen') {
+          this.nodeFlag = "01";
+          this.nodeName = "初审详情";
+          this.routeParams = '';
+        } else if (route.path == '/FtaskInWaitting') {
+          // this.taskNodeName = route.fullPath.split('?')[1].split('&')[0].split('=')[1];
+          if (this.taskNodeName == "creditApp_finalTrial_one") {
+            this.nodeName = '终审一级审批';
+          } else if (this.taskNodeName == "creditApp_finalTrial_two") {
+            this.nodeName = '终审二级审批'
+          } else if (this.taskNodeName == "creditApp_finalTrial_three") {
+            this.nodeName = '信审经理审批';
+          } else if (this.taskNodeName == "creditApp_finalTrial_four") {
+            this.nodeName = '信审高级经理审批'
+          } else if (this.taskNodeName == "creditApp_finalTrial_five") {
+            this.nodeName = '信审总监审批审批'
+          }
+          this.nodeFlag = "02";
+          this.routeParams = '?taskNodeName=' + this.taskNodeName + "&flag=02";
+        } else if (route.path == '/FSplitScreen') {
+          this.nodeFlag = "02";
+          this.nodeName = "终审详情";
+          this.routeParams = '';
+        } else if (route.path == '/reconsiderList') {
+          if (this.taskNodeName == "reconsiderApp_commissioner") {
+            this.nodeName = '复议专员审批';
+            this.nodeFlag = "05";
+            this.routeParams = '?taskNodeName=reconsiderApp_commissioner&flag=05';
+          } else if (this.taskNodeName == "reconsiderApp_manager") {
+            this.nodeName = '复议经理审批';
+            this.nodeFlag = "06";
+            this.routeParams = '?taskNodeName=reconsiderApp_manager&flag=06';
+
+          }
+        } else if (route.path == '/ReconsiderSplit') {
+          this.nodeName = "复议详情";
+          this.nodeFlag = "05";
+          this.routeParams = '?taskNodeName=reconsiderApp_commissioner';
+        }
+        // else if (route.path == '/reconsiderList?taskNodeName=reconsiderApp_manager') {
+        //  this.nodeName = "复议经理审批";
+        //   this.nodeFlag = "06";
+        //           this.routeParams =  '?taskNodeName=reconsiderApp_manager';
+        //         } 
+        else if (route.path == '/SplitScreen') {
+
+        } else if (route.path == '/SplitScreen') {
+
+        } else if (route.path == '/SplitScreen') {
+
+        } else if (route.path == '/SplitScreen') {
+
+        } else if (route.path == '/SplitScreen') {
+
+        } else if (route.path == '/SplitScreen') {
+
+        } else if (route.path == '/SplitScreen') {
+
+        } else if (route.path == '/SplitScreen') {
+
+        } else if (route.path == '/SplitScreen') {
+
+        } else if (route.path == '/SplitScreen') {
+
+        } else if (route.path == '/SplitScreen') {
+
+        } else if (route.path == '/SplitScreen') {
+
+        } else if (route.path == '/SplitScreen') {
+
+        } else if (route.path == '/SplitScreen') {
+
+        } else if (route.path == '/SplitScreen') {
+
+        }
+
+        // ===========================================
+        this.RoutePath = route.path;
+        this.$store.dispatch('addVisitedViews', {
+          name: this.nodeName,
+          path: this.RoutePath,
+          flag: this.nodeFlag,
+          params: this.routeParams,
+          StatefullPath: this.RoutePath + this.routeParams
+        })
+        // this.$store.dispatch('addVisitedViews', route)
+      },
+      moveToCurrentTag() {
+        const tags = this.$refs.tagtag
+        this.$nextTick(() => {
+          for (const tag of tags) {
+            if (tag.to === this.$route.path) {
+              this.$refs.scrollPane.moveToTarget(tag.$el)
+              break
+            }
+          }
+        })
+      },
+      generateRoute() {
+        // console.log(this.$route)
+        if (this.$route.name) {
+          return this.$route
+        }
+        return false
+      },
+      isActive(route) {
+        // console.log(  route.StatefullPath == this.$route.fullPath)
+        // console.log(route.StatefullPath + '==============')
+        // console.log(this.$route.fullPath + '----------------')
+        // console.log(route)
+        // console.log(this.$store.state)
+        // return route.path === this.$route.path || route.name === this.$route.name
+        // return route.StatefullPath == this.$route.fullPath ||route.path === this.$route.path;
+        return route.StatefullPath == this.$route.fullPath;
+
+      },
+      closeSelectedTag(view) {
+        this.$store.dispatch('delVisitedViews', view).then((views) => {
+          if (this.isActive(view)) {
+            const latestView = views.slice(-1)[0]
+            if (latestView) {
+              this.$router.push(latestView.path)
+            } else {
+              this.$router.push('/')
+            }
+          }
+        })
+      },
+      closeOthersTags() {
+        this.$router.push(this.selectedTag.path)
+        this.$store.dispatch('delOthersViews', this.selectedTag).then(() => {
+          this.moveToCurrentTag()
+        })
+      },
+      openMenu(tag, e) {
+        this.visible = true
+        this.selectedTag = tag
+        // this.left = e.clientX
+        // this.top = e.clientY
+      },
+      closeAllTags() {
+        this.$store.dispatch('delAllViews')
+        this.$router.push('/')
+      },
+      closeMenu() {
+        this.visible = false
+      },
       adk() {
         //   console.log( this.$store)
         this.$store.commit("ADD_VISITED_VIEWS", {
@@ -149,20 +365,10 @@
           // console.log(tg.params)
           localStorage.setItem("judge", JSON.stringify(this.judge));
           // localStorage.setItem("antiApplyFlag", JSON.stringify(tg.params));
-          
+
         }
       },
-      isActive(route) {
-        // console.log(  route.StatefullPath == this.$route.fullPath)
-        // console.log(route.StatefullPath + '==============')
-        // console.log(this.$route.fullPath + '----------------')
-        // console.log(route)
-        // console.log(this.$store.state)
-        // return route.path === this.$route.path || route.name === this.$route.name
-        // return route.StatefullPath == this.$route.fullPath ||route.path === this.$route.path;
-        return route.StatefullPath == this.$route.fullPath;
 
-      },
       handleInputConfirm() {
         let inputValue = this.inputValue;
         if (inputValue) {
@@ -171,19 +377,19 @@
         this.inputVisible = false;
         this.inputValue = '';
       },
-      Width(){
-  console.log( this.$refs.tag_ref)
-      }
+      Width() {
+        console.log(this.$refs.tag_ref)
+      },
+
+
+
     },
     mounted() {
-      console.log(this.$store.state.visitedViews)
-      console.log( this.$refs.tag_ref)
+      // console.log(this.$store.state.visitedViews)
+      // console.log(this.$refs.tag_ref)
+      this.addViewTags()
     },
-    computed: {
-      visitedViews() {
-        return this.$store.state.visitedViews
-      }
-    }
+
   }
 
 </script>
