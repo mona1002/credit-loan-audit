@@ -66,9 +66,13 @@
           </el-table-column>
           <el-table-column prop="proName" label="产品名称" align='center' min-width="100">
           </el-table-column>
-          <el-table-column prop="busiStateTxt" label="业务状态" align='center' min-width="100">
-          </el-table-column>
           <el-table-column prop="operOrgName" label="进件机构" align='center' min-width="120">
+          </el-table-column>
+           <el-table-column prop="busiStateTxt" label="审批状态" align='center' min-width="100">
+          </el-table-column>
+           <el-table-column prop="reconStateTxt" label="复议状态" align='center' min-width="100">
+          </el-table-column>
+           <el-table-column prop="fraudStateTxt" label="反欺诈状态" align='center' min-width="100">
           </el-table-column>
         </el-table>
         <!-- 分页  -->
@@ -112,7 +116,6 @@
     },
     methods: {
       num(el, val) {
-        console.log(el)
         switch (el) {
           case 'Subno':
             isNaN(this.params.applySubno) ? this.params.applySubno = '' : this.params.applySubno;
