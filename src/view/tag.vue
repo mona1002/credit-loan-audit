@@ -1,24 +1,34 @@
 <template>
-  <div class="tag" ref='tag_ref'>
-    <div :class="[isActive(tag)?'active':'','pai']" :key="ind" v-for="(tag,ind) in visitedViews" @click="changeFlag(tag)" @contextmenu.prevent.native="openMenu(tag,$event)">
-      <router-link :to='tag.path+tag.params'>
-        <!-- <el-tag closable :disable-transitions="false" @close.prevent="handleClose(tag)" class="tag_bottom" :key="tag" > {{tag.name}} </el-tag> -->
-        <!-- <el-tag :key="tag" v-for="tag in dynamicTags" closable :disable-transitions="false" @close="handleClose(tag)">
+  <div class="tag" ref='tag_wrap'>
+    <div ref='tag_ref' class="tag_Ref" style="left:30px">
+      <nobr>
+        <div :class="[isActive(tag)?'active':'','pai']" :key="ind" v-for="(tag,ind) in visitedViews" @click="changeFlag(tag)" @contextmenu.prevent.native="openMenu(tag,$event)">
+          <router-link :to='tag.path+tag.params'>
+            <!-- <el-tag closable :disable-transitions="false" @close.prevent="handleClose(tag)" class="tag_bottom" :key="tag" > {{tag.name}} </el-tag> -->
+            <!-- <el-tag :key="tag" v-for="tag in dynamicTags" closable :disable-transitions="false" @close="handleClose(tag)">
         {{tag.name}} -->
-        <!-- </el-tag> -->
-        <button closable :disable-transitions="false" @close.prevent="handleClose(tag)" class="button_bottom">
-          <span v-show="tag.name!='工作台'" @click.prevent.stop="handleClose(tag)" class="el-icon-close close_tag"> </span> {{tag.name}}</button>
-      </router-link>
+            <!-- </el-tag> -->
+            <button closable :disable-transitions="false" class="button_bottom">
+              <span v-show="tag.name!='工作台'" @click.prevent.stop="handleClose(tag,$event)" class="el-icon-close close_tag"> </span> {{tag.name}}</button>
+          </router-link>
+        </div>
+      </nobr>
+    </div>
+    <div class="rightBtn Btn" @click="rightMove">
+      <i class="el-icon-arrow-right "></i>
+    </div>
+    <div class="leftBtn Btn" @click="leftMove">
+      <i class="el-icon-arrow-left "></i>
     </div>
     <!-- <ul class='contextmenu' v-show="visible" :style="{left:left+'px',top:top+'px'}">
       <li @click="closeSelectedTag(selectedTag)">Close</li>
       <li @click="closeOthersTags">Close Others</li>
       <li @click="closeAllTags">Close All</li>
     </ul> -->
-    <el-button class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
-    <el-button class="bottom_sy" @click="adk"> 影像资料 </el-button>
-    <button class="button_bottom">列表</button>
-    <button class="button_bottom">列表2</button>
+    <!-- <el-button class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+    <el-button class="bottom_sy" > 影像资料 </el-button>
+    <button class="button_bottom">列表</button> -->
+    <button class="button_bottom" @click="OneLine" style="top:-200px;">列表2</button>
   </div>
 </template>
 
@@ -27,6 +37,13 @@
     font-size: 16px;
     color: #ffffff;
     letter-spacing: 0.11px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .tag_Ref {
+    position: absolute;
+    left: 30px;
   }
 
   .button_bottom {
@@ -116,6 +133,26 @@
     box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, .3);
   }
 
+  .Btn {
+    color: #409EFF;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    line-height: 40px;
+    width: 25px;
+    text-align: center;
+    background: #e0eeff;
+    /* display: none; */
+  }
+
+  .rightBtn {
+    right: 0;
+  }
+
+  .leftBtn {
+    left: 0
+  }
+
 </style>
 
 <script>
@@ -127,15 +164,14 @@
         nodeName: '',
         routeParams: '',
         taskNodeName: '',
-        processMoniParams:'',
-        // pams: {
-        //  name:'',
-        //   path: route.path,
-        //   flag:'',
-        //   params: '',
-        //   StatefullPath: ''
-        // },
+        processMoniParams: '',
+        right: null,
+        left: null,
+        tagWidth: null,
+        tagWrapWidth: null,
+        antiNode: '',
         visible: false,
+        views: null,
         judge: {
           flag: ''
         },
@@ -153,6 +189,7 @@
       $route() {
         this.addViewTags()
         // this.moveToCurrentTag()
+        this.move();
       },
       visible(value) {
         if (value) {
@@ -166,11 +203,8 @@
       addViewTags() {
         // const route = this.generateRoute();
         const route = this.$route;
-        // console.log(route.fullPath)
         route.fullPath.indexOf('?') != -1 ? this.taskNodeName = route.fullPath.split('?')[1].split('&')[0].split('=')[1] :
           this.taskNodeName;
-        // const route =this.$route;
-        // console.log(route.path)
         if (!route) {
           return false
         }
@@ -204,6 +238,26 @@
           this.nodeFlag = "02";
           this.nodeName = "终审详情";
           this.routeParams = '';
+        } else if (route.path == '/AntiFraud34') { // 反欺诈审批
+          if (this.taskNodeName == "antiFraudApp_commissioner") { //反欺诈专员审批
+            this.nodeName = "反欺诈专员审批";
+            this.nodeFlag = "03";
+            this.routeParams = '?taskNodeName=antiFraudApp_commissioner&flag=03';
+          } else if (this.taskNodeName == "antiFraudApp_manager") { //反欺诈主管审批
+            this.nodeName = "反欺诈主管审批";
+            this.nodeFlag = "04";
+            this.routeParams = '?taskNodeName=antiFraudApp_manager&flag=04';
+          }
+        } else if (route.path == '/AntiFraud') { //反欺诈申请
+          this.nodeName = "反欺诈申请";
+          // this.nodeFlag = "03";
+          this.routeParams = '?taskNodeName=antiFraudApp_apply';
+        } else if (route.path == '/AntiApplyInf') { //反欺诈申请-查看
+          this.nodeName = "反欺诈申请-查看";
+        } else if (route.path == '/AntiApplyAdd') { //反欺诈申请-添加
+          this.nodeName = "反欺诈申请-添加";
+        } else if (route.path == '/AntiApplyEditf') { //反欺诈申请-编辑
+          this.nodeName = "反欺诈申请-编辑";
         } else if (route.path == '/reconsiderList') { //复议审批
           if (this.taskNodeName == "reconsiderApp_commissioner") {
             this.nodeName = '复议专员审批';
@@ -218,26 +272,20 @@
           this.nodeName = "复议详情";
           this.nodeFlag = "";
           this.routeParams = '';
-        }
-        // else if (route.path == '/reconsiderList?taskNodeName=reconsiderApp_manager') {
-        //  this.nodeName = "复议经理审批";
-        //   this.nodeFlag = "06";
-        //           this.routeParams =  '?taskNodeName=reconsiderApp_manager';
-        //         } 
-        else if (route.path == '/SplitScreen') {
-
-        } else if (route.path == '/SplitScreen') {
-
         } else if (route.path == '/historicalTask') { // 任务管理-信审历史任务
           this.nodeName = "信审历史任务";
+            this.routeParams = '';
         } else if (route.path == '/doTheTask') { // 任务管理- 信审已办任务
           this.nodeName = "信审已办任务";
+            this.routeParams = '';
         } else if (route.path == '/aDoneTask') { // 任务管理- 反欺诈已办任务
           this.nodeName = "反欺诈已办任务";
+            this.routeParams = '';
         } else if (route.path == '/aHistoryTask') { // 任务管理- 反欺诈历史任务
           this.nodeName = "反欺诈历史任务";
         } else if (route.path == '/HistoryTask') { // 任务管理- 复议历史任务
           this.nodeName = "复议历史任务";
+            this.routeParams = '';
         } else if (route.path == '/DoneTask') { // 任务管理- 复议已办任务
           this.nodeName = "复议已办任务";
         } else if (route.path == '/AntiCaseNum') { // 案件编号维护
@@ -251,48 +299,38 @@
           // this.nodeFlag = "";1          
           // this.routeParams = '';
         } else if (route.path == '/processMoni') { //  流程监控 - 
-        
-//           route.fullPath.indexOf('?') != -1 ? this.processMoniParams= route.fullPath.split('?')[1]: this.processMoniParams;
-// console.log(  this.processMoniParams)
-console.log( route.fullPath)
-console.log( typeof(route.fullPath))
-
-if(route.fullPath=='/processMoni?creditApp00'){
- this.nodeName = "信审未分配流程";
-   this.routeParams = '?creditApp00'; 
-}else if(route.fullPath=='/processMoni?creditApp01'){
- this.nodeName = "信审已分配流程";
-   this.routeParams = '?creditApp01';
-}else if(route.fullPath=='/processMoni?creditApp03'){
- this.nodeName = "信审已完成流程";
-   this.routeParams = '?creditApp03';
-}else if(route.fullPath=='/processMoni?reconsiderApp03'){
- this.nodeName = "复议已完成流程";
-   this.routeParams = '?reconsiderApp03'; 
-}else if(route.fullPath=='/processMoni?reconsiderApp01'){
- this.nodeName = "复议已分配流程";
-   this.routeParams = '?reconsiderApp01'; 
-}else if(route.fullPath=='/processMoni?reconsiderApp00'){
- this.nodeName = "复议未分配流程";
-   this.routeParams = '?reconsiderApp00'; 
-}else if(route.fullPath=='/processMoni?antiFraudApp01'){
- this.nodeName = "反欺诈已分配流程";
-   this.routeParams = '?antiFraudApp01'; 
-}else if(route.fullPath=='/processMoni?antiFraudApp00'){
- this.nodeName = "反欺诈未分配流程";
-   this.routeParams = '?antiFraudApp00'; 
-}else if(route.fullPath=='/processMoni?antiFraudApp03'){
- this.nodeName = "反欺诈已完成流程";
-   this.routeParams = '?antiFraudApp03'; 
-}
-        } else if (route.path == '/SplitScreen') {
-
-        } else if (route.path == '/SplitScreen') {
-
+          //           route.fullPath.indexOf('?') != -1 ? this.processMoniParams= route.fullPath.split('?')[1]: this.processMoniParams;
+          if (route.fullPath == '/processMoni?creditApp00') {
+            this.nodeName = "信审未分配流程";
+            this.routeParams = '?creditApp00';
+          } else if (route.fullPath == '/processMoni?creditApp01') {
+            this.nodeName = "信审已分配流程";
+            this.routeParams = '?creditApp01';
+          } else if (route.fullPath == '/processMoni?creditApp03') {
+            this.nodeName = "信审已完成流程";
+            this.routeParams = '?creditApp03';
+          } else if (route.fullPath == '/processMoni?reconsiderApp03') {
+            this.nodeName = "复议已完成流程";
+            this.routeParams = '?reconsiderApp03';
+          } else if (route.fullPath == '/processMoni?reconsiderApp01') {
+            this.nodeName = "复议已分配流程";
+            this.routeParams = '?reconsiderApp01';
+          } else if (route.fullPath == '/processMoni?reconsiderApp00') {
+            this.nodeName = "复议未分配流程";
+            this.routeParams = '?reconsiderApp00';
+          } else if (route.fullPath == '/processMoni?antiFraudApp01') {
+            this.nodeName = "反欺诈已分配流程";
+            this.routeParams = '?antiFraudApp01';
+          } else if (route.fullPath == '/processMoni?antiFraudApp00') {
+            this.nodeName = "反欺诈未分配流程";
+            this.routeParams = '?antiFraudApp00';
+          } else if (route.fullPath == '/processMoni?antiFraudApp03') {
+            this.nodeName = "反欺诈已完成流程";
+            this.routeParams = '?antiFraudApp03';
+          }
         } else if (route.path == '/IntegratedQuery') {
-this.nodeName = "综合查询-查看";
+          this.nodeName = "综合查询-查看";
         }
-
         // ===========================================
         this.RoutePath = route.path;
         this.$store.dispatch('addVisitedViews', {
@@ -305,15 +343,16 @@ this.nodeName = "综合查询-查看";
         // this.$store.dispatch('addVisitedViews', route)
       },
       moveToCurrentTag() {
-        const tags = this.$refs.tagtag
-        this.$nextTick(() => {
-          for (const tag of tags) {
-            if (tag.to === this.$route.path) {
-              this.$refs.scrollPane.moveToTarget(tag.$el)
-              break
-            }
-          }
-        })
+        // console.log()
+        // const tags = this.$refs.tagtag
+        // this.$nextTick(() => {
+        //   for (const tag of tags) {
+        //     if (tag.to === this.$route.path) {
+        //       this.$refs.scrollPane.moveToTarget(tag.$el)
+        //       break
+        //     }
+        //   }
+        // })
       },
       generateRoute() {
         // console.log(this.$route)
@@ -323,15 +362,9 @@ this.nodeName = "综合查询-查看";
         return false
       },
       isActive(route) {
-        // console.log(  route.StatefullPath == this.$route.fullPath)
-        // console.log(route.StatefullPath + '==============')
+        // console.log(route.StatefullPath )
         // console.log(this.$route.fullPath)
-        // console.log(route)
-        // console.log(this.$store.state)
-        // return route.path === this.$route.path || route.name === this.$route.name
-        // return route.StatefullPath == this.$route.fullPath ||route.path === this.$route.path;
         return route.StatefullPath == this.$route.fullPath;
-
       },
       closeSelectedTag(view) {
         this.$store.dispatch('delVisitedViews', view).then((views) => {
@@ -366,16 +399,28 @@ this.nodeName = "综合查询-查看";
       },
       adk() {
         //   console.log( this.$store)
-        this.$store.commit("ADD_VISITED_VIEWS", {
-          name: "第二条",
-          path: '/',
-          flag: '03'
-        })
+
       },
-      handleClose(view) {
-        // this.$store.commit('HANDLE_CLOSE',view)
-        this.$store.dispatch('handleClose', view)
-        console.log(view)
+      handleClose(view, ev) {
+        this.$store.dispatch('delVisitedViews', view).then((views) => {
+          console.log(views)
+          if (this.isActive(view)) {
+            const latestView = views.slice(-1)[0]
+            if (latestView) {
+              this.$router.push(latestView.StatefullPath);
+              // 页签left值改变，最后一个页签激活状态可以显示出来
+              // if ($('.tag_Ref').width() <= $('.tag').width() - 50) {
+              //   this.$refs.tag_ref.style.left = (ev.clientX - 100) + "px";
+              // } else {
+              //   this.$refs.tag_ref.style.left = '30px';
+              // }
+              // console.log(ev.clientX - 100)
+            } else {
+              this.$router.push('/')
+            }
+          }
+        })
+        // console.log(view)
         //   this.$store.dispatch('delVisitedViews', view).then((views) => {
         // if (this.isActive(view)) {
         //   console.log(view)
@@ -417,7 +462,6 @@ this.nodeName = "综合查询-查看";
 
         }
       },
-
       handleInputConfirm() {
         let inputValue = this.inputValue;
         if (inputValue) {
@@ -429,14 +473,53 @@ this.nodeName = "综合查询-查看";
       Width() {
         console.log(this.$refs.tag_ref)
       },
-
-
-
+      OneLine() {
+        console.log($('.tag_Ref').width())
+        console.log($('.tag').width())
+        // console.log( this.$refs.tag_ref.width)
+        // console.log( this.$refs.tag_wrap.Width)
+        if ($('.tag').width() > $('.tag_Ref').width()) {
+          $('.btn').css('display', 'block');
+          $('.tag_Ref').width($('.tag_Ref').width() - 80);
+          // $('.tag_Ref').css('left', '40px');
+        } else {
+          this.aaa = false;
+        }
+      },
+      move() {
+        this.right = parseFloat(this.$refs.tag_ref.style.left);
+        this.tagWidth = $('.tag_Ref').width();
+        this.tagWrapWidth = $('.tag').width();
+      },
+      rightMove() {
+        this.right = parseFloat(this.$refs.tag_ref.style.left);
+        this.tagWidth = $('.tag_Ref').width();
+        this.tagWrapWidth = $('.tag').width();
+        if (this.tagWidth <= this.tagWrapWidth - 50) {
+          this.$refs.tag_ref.style.left = '30px';
+        } else {
+          if (this.right <= (this.tagWidth - this.tagWrapWidth) * -1) {
+            this.$refs.tag_ref.style.left = (this.tagWidth - this.tagWrapWidth + 40) * -1 + 'px';
+          } else {
+            this.$refs.tag_ref.style.left = this.right - 50 + "px";
+          }
+        }
+      },
+      leftMove() {
+        console.log('le')
+        // this.right = parseFloat(this.$refs.tag_ref.style.left);
+        if (parseFloat(this.$refs.tag_ref.style.left) >= -20) {
+          this.$refs.tag_ref.style.left = '30px';
+        } else {
+          this.$refs.tag_ref.style.left = parseFloat(this.$refs.tag_ref.style.left) + 50 + "px";
+        }
+      }
     },
     mounted() {
       // console.log(this.$store.state.visitedViews)
       // console.log(this.$refs.tag_ref)
       this.addViewTags()
+      this.move();
     },
 
   }

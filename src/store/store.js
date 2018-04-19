@@ -44,8 +44,16 @@ let mutations = {
     // state.locFlag=view.flag;
   },
   HANDLE_CLOSE(state, tag) {
-    state.visitedViews.splice(state.visitedViews.indexOf(tag), 1);
-    history.go(-1);
+    for (const [i, v] of state.visitedViews.entries()) {
+      if (v.name === tag.name) {
+        state.visitedViews.splice(i, 1)
+        break
+      }
+    }
+    console.log("删除")
+    // console.log(window.location.hash)
+    // state.visitedViews.splice(state.visitedViews.indexOf(tag), 1);
+    // history.go(-1);
   },
   handleInputConfirm() {
     let inputValue = this.inputValue;
@@ -57,18 +65,18 @@ let mutations = {
   },
   DEL_VISITED_VIEWS: (state, view) => {
     for (const [i, v] of state.visitedViews.entries()) {
-      if (v.path === view.path) {
+      if (v.name === view.name) {
         state.visitedViews.splice(i, 1)
         break
       }
     }
-    for (const i of state.cachedViews) {
-      if (i === view.name) {
-        const index = state.cachedViews.indexOf(i)
-        state.cachedViews.splice(index, 1)
-        break
-      }
-    }
+    // for (const i of state.cachedViews) {
+    //   if (i === view.name) {
+    //     const index = state.cachedViews.indexOf(i)
+    //     state.cachedViews.splice(index, 1)
+    //     break
+    //   }
+    // }
   },
   DEL_OTHERS_VIEWS: (state, view) => {
     for (const [i, v] of state.visitedViews.entries()) {
