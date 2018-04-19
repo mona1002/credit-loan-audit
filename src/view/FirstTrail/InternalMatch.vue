@@ -371,13 +371,13 @@
         this.fetchData('company');
       },
       goPath() {
-        this.$store.dispatch('addVisitedViews', {
-          name: '匹配信息-查看',
-          path: '/MatchingInf',
-          flag: '',
-          params: '',
-          StatefullPath: '/MatchingInf',
-        })
+        // this.$store.dispatch('addVisitedViews', {
+        //   name: '匹配信息-查看',
+        //   path: '/MatchingInf',
+        //   flag: '',
+        //   params: '',
+        //   StatefullPath: '/MatchingInf',
+        // })
       }
     },
     watch: {

@@ -5,6 +5,7 @@
       <!-- 进件人详情 -->
       <p class="PerDtl">
         <span> 借款人： {{custName}}</span>
+        <!-- <span> 借款人： {{customInf.accepCusBasicInfo.custName}}</span> -->
         <span> 进件编号: {{customInf.applyMainNo}}</span>
         <span> 证件号码: {{customInf.accepCusBasicInfo.certCode}}</span>
         <span> 进件机构: {{customInf.appOrgName}}</span>

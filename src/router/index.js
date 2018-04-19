@@ -93,7 +93,8 @@ Vue.use(Router)
 
 const routes = [{
   path: '/',
-  component: workbench
+  component: workbench,
+  // name:workbench
 },
 // {
 //   path:'/exam',
@@ -111,7 +112,8 @@ const routes = [{
 /*初审审批*/
 {
   path: '/taskInWaitting',
-  component: taskInWaitting
+  component: taskInWaitting,
+  // name:taskInWaitting
 },
 /*备注信息*/
 {
@@ -136,12 +138,14 @@ const routes = [{
 // 分屏
 {
   path: '/SplitScreen',
-  component: SplitScreen
+  component: SplitScreen,
+  // name:SplitScreen
 },
 // 匹配查看-页面
 {
   path: '/MatchingInf',
-  component: MatchingInf
+  component: MatchingInf,
+  // name:MatchingInf
 },
 // 影像资料
 {
@@ -196,7 +200,8 @@ const routes = [{
 // ----------------终审----------------
 {
   path: '/FSplitScreen',
-  component: FSplitScreen
+  component: FSplitScreen,
+  // name:FSplitScreen
 },
 {
   path: '/FcCreditForm',
@@ -204,7 +209,8 @@ const routes = [{
 },
 {
   path: '/FtaskInWaitting',
-  component: FtaskInWaitting
+  component: FtaskInWaitting,
+  // name:FtaskInWaitting
 },
 {
   path: '/FCreditForm',
@@ -237,25 +243,25 @@ const routes = [{
 // 反欺诈申请 编辑
 {
   path:'/AntiApplyEditf',
-  name:'AntiApplyEditf',
+  // name:'AntiApplyEditf',
   component:AntiApplyEditf
 },
 // 反欺诈申请列表 编辑 导航
 {
   path:'/AntiApplyEdit',
-  name:'AntiApplyEdit',
+  // name:'AntiApplyEdit',
   component:AntiApplyEdit
 },
 // 反欺诈申请 查看
 {
   path:'/AntiApplyInf',
-  name:'AntiApplyInf',
+  // name:'AntiApplyInf',
   component:AntiApplyInf
 },
 // 反欺诈申请 添加
 {
   path:'/AntiApplyAdd',
-  name:'AntiApplyAdd',
+  // name:'AntiApplyAdd',
   component:AntiApplyAdd
 }, 
 {
@@ -275,12 +281,14 @@ const routes = [{
 // 反欺诈规则设定
 {
   path:'/AntiRules',
-  component:AntiRules
+  component:AntiRules,
+  // name:AntiRules
 },
 // 案件编号维护
 {
   path:'/AntiCaseNum',
-  component:AntiCaseNum
+  component:AntiCaseNum,
+  // name:AntiCaseNum
 },
 // ---------------------复议-------------
 {
@@ -289,11 +297,13 @@ const routes = [{
 },
 {
   path:'/reconsiderList',
-  component:reconsiderList
+  component:reconsiderList,
+  // name:reconsiderList
 },
 {
   path:'/ReconsiderSplit',
-  component:ReconsiderSplit
+  component:ReconsiderSplit,
+  // name:ReconsiderSplit
 },
 //复议结论（专员）
 {
@@ -313,32 +323,38 @@ const routes = [{
 // ------------------任务管理------------
 {
   path: '/DoneTask',
-  component: DoneTask
+  component: DoneTask,
+  // name:DoneTask
 },
 {
   path: '/aDoneTask',
-  component: aDoneTask
+  component: aDoneTask,
+  // name:aDoneTask
 },
 {
   path: '/HistoryTask',
-  component: HistoryTask
-  
+  component: HistoryTask,
+  // name:HistoryTask
 },
 {
   path: '/aHistoryTask',
-  component: aHistoryTask
+  component: aHistoryTask,
+  // name:aHistoryTask
 },
 {
   path: '/TaskManagementSplit',
-  component: TaskManagementSplit
+  component: TaskManagementSplit,
+  // name:TaskManagementSplit
 },
 {
   path: '/doTheTask',
-  component: doTheTask
+  component: doTheTask,
+  // name:doTheTask
 },
 {
   path: '/historicalTask',
-  component: historicalTask
+  component: historicalTask,
+  // name:historicalTask
 },
 // ---------------质检--------------------
 {
@@ -351,7 +367,8 @@ const routes = [{
 },
 {
   path:'/IntegratedQuery',
-  component:IntegratedQuery 
+  component:IntegratedQuery,
+  // name:IntegratedQuery 
 },
 {
   path:'/MatchingInfQuery',

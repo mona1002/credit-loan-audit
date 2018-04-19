@@ -253,8 +253,7 @@
       }
     },
     mounted() {
-      console.log(window.location)
-
+      // console.log(window.location)
       // 统一登录平台  调试   start 
       // this.get("http://testplatform.nuoyuan.com.cn/remote/user/getUserInfo").then(response => {
       this.get(UserURL + 'remote/user/getUserInfo').then(response => {

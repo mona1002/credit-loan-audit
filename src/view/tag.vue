@@ -7,7 +7,7 @@
         {{tag.name}} -->
         <!-- </el-tag> -->
         <button closable :disable-transitions="false" @close.prevent="handleClose(tag)" class="button_bottom">
-          <span v-show="tag.name!='工作台'" @click="handleClose(tag)" class="el-icon-close close_tag"> </span> {{tag.name}}</button>
+          <span v-show="tag.name!='工作台'" @click.prevent.stop="handleClose(tag)" class="el-icon-close close_tag"> </span> {{tag.name}}</button>
       </router-link>
     </div>
     <!-- <ul class='contextmenu' v-show="visible" :style="{left:left+'px',top:top+'px'}">
@@ -127,6 +127,7 @@
         nodeName: '',
         routeParams: '',
         taskNodeName: '',
+        processMoniParams:'',
         // pams: {
         //  name:'',
         //   path: route.path,
@@ -163,8 +164,9 @@
     },
     methods: {
       addViewTags() {
-        const route = this.generateRoute();
-        console.log(route.fullPath)
+        // const route = this.generateRoute();
+        const route = this.$route;
+        // console.log(route.fullPath)
         route.fullPath.indexOf('?') != -1 ? this.taskNodeName = route.fullPath.split('?')[1].split('&')[0].split('=')[1] :
           this.taskNodeName;
         // const route =this.$route;
@@ -175,16 +177,15 @@
         if (route.path == '/') {
           return
         }
-        if (route.path == '/taskInWaitting') {
-          console.log('初审审批')
+        if (route.path == '/taskInWaitting') { // 初审 审批
           this.nodeFlag = "01";
           this.nodeName = "初审审批";
           this.routeParams = '?taskNodeName=creditApp_firstTrial&flag=01';
-        } else if (route.path == '/SplitScreen') {
+        } else if (route.path == '/SplitScreen') { // 初审详情
           this.nodeFlag = "01";
           this.nodeName = "初审详情";
-          this.routeParams = '';
-        } else if (route.path == '/FtaskInWaitting') {
+          // this.routeParams = '';
+        } else if (route.path == '/FtaskInWaitting') { // 终审 审批
           // this.taskNodeName = route.fullPath.split('?')[1].split('&')[0].split('=')[1];
           if (this.taskNodeName == "creditApp_finalTrial_one") {
             this.nodeName = '终审一级审批';
@@ -199,11 +200,11 @@
           }
           this.nodeFlag = "02";
           this.routeParams = '?taskNodeName=' + this.taskNodeName + "&flag=02";
-        } else if (route.path == '/FSplitScreen') {
+        } else if (route.path == '/FSplitScreen') { //终审详情
           this.nodeFlag = "02";
           this.nodeName = "终审详情";
           this.routeParams = '';
-        } else if (route.path == '/reconsiderList') {
+        } else if (route.path == '/reconsiderList') { //复议审批
           if (this.taskNodeName == "reconsiderApp_commissioner") {
             this.nodeName = '复议专员审批';
             this.nodeFlag = "05";
@@ -212,12 +213,11 @@
             this.nodeName = '复议经理审批';
             this.nodeFlag = "06";
             this.routeParams = '?taskNodeName=reconsiderApp_manager&flag=06';
-
           }
-        } else if (route.path == '/ReconsiderSplit') {
+        } else if (route.path == '/ReconsiderSplit') { //复议详情
           this.nodeName = "复议详情";
-          this.nodeFlag = "05";
-          this.routeParams = '?taskNodeName=reconsiderApp_commissioner';
+          this.nodeFlag = "";
+          this.routeParams = '';
         }
         // else if (route.path == '/reconsiderList?taskNodeName=reconsiderApp_manager') {
         //  this.nodeName = "复议经理审批";
@@ -228,32 +228,69 @@
 
         } else if (route.path == '/SplitScreen') {
 
+        } else if (route.path == '/historicalTask') { // 任务管理-信审历史任务
+          this.nodeName = "信审历史任务";
+        } else if (route.path == '/doTheTask') { // 任务管理- 信审已办任务
+          this.nodeName = "信审已办任务";
+        } else if (route.path == '/aDoneTask') { // 任务管理- 反欺诈已办任务
+          this.nodeName = "反欺诈已办任务";
+        } else if (route.path == '/aHistoryTask') { // 任务管理- 反欺诈历史任务
+          this.nodeName = "反欺诈历史任务";
+        } else if (route.path == '/HistoryTask') { // 任务管理- 复议历史任务
+          this.nodeName = "复议历史任务";
+        } else if (route.path == '/DoneTask') { // 任务管理- 复议已办任务
+          this.nodeName = "复议已办任务";
+        } else if (route.path == '/AntiCaseNum') { // 案件编号维护
+          this.nodeName = "案件编号维护";
+
+        } else if (route.path == '/AntiRules') { // 反欺诈规则设定
+          this.nodeName = "反欺诈规则设定";
+
+        } else if (route.path == '/MatchingInf') { // 匹配信息-查看
+          this.nodeName = "匹配信息-查看";
+          // this.nodeFlag = "";1          
+          // this.routeParams = '';
+        } else if (route.path == '/processMoni') { //  流程监控 - 
+        
+//           route.fullPath.indexOf('?') != -1 ? this.processMoniParams= route.fullPath.split('?')[1]: this.processMoniParams;
+// console.log(  this.processMoniParams)
+console.log( route.fullPath)
+console.log( typeof(route.fullPath))
+
+if(route.fullPath=='/processMoni?creditApp00'){
+ this.nodeName = "信审未分配流程";
+   this.routeParams = '?creditApp00'; 
+}else if(route.fullPath=='/processMoni?creditApp01'){
+ this.nodeName = "信审已分配流程";
+   this.routeParams = '?creditApp01';
+}else if(route.fullPath=='/processMoni?creditApp03'){
+ this.nodeName = "信审已完成流程";
+   this.routeParams = '?creditApp03';
+}else if(route.fullPath=='/processMoni?reconsiderApp03'){
+ this.nodeName = "复议已完成流程";
+   this.routeParams = '?reconsiderApp03'; 
+}else if(route.fullPath=='/processMoni?reconsiderApp01'){
+ this.nodeName = "复议已分配流程";
+   this.routeParams = '?reconsiderApp01'; 
+}else if(route.fullPath=='/processMoni?reconsiderApp00'){
+ this.nodeName = "复议未分配流程";
+   this.routeParams = '?reconsiderApp00'; 
+}else if(route.fullPath=='/processMoni?antiFraudApp01'){
+ this.nodeName = "反欺诈已分配流程";
+   this.routeParams = '?antiFraudApp01'; 
+}else if(route.fullPath=='/processMoni?antiFraudApp00'){
+ this.nodeName = "反欺诈未分配流程";
+   this.routeParams = '?antiFraudApp00'; 
+}else if(route.fullPath=='/processMoni?antiFraudApp03'){
+ this.nodeName = "反欺诈已完成流程";
+   this.routeParams = '?antiFraudApp03'; 
+}
         } else if (route.path == '/SplitScreen') {
 
         } else if (route.path == '/SplitScreen') {
 
-        } else if (route.path == '/SplitScreen') {
-
-        } else if (route.path == '/SplitScreen') {
-
-        } else if (route.path == '/SplitScreen') {
-
-        } else if (route.path == '/SplitScreen') {
-
-        } else if (route.path == '/SplitScreen') {
-
-        } else if (route.path == '/SplitScreen') {
-
-        } else if (route.path == '/SplitScreen') {
-
-        } else if (route.path == '/SplitScreen') {
-
-        } else if (route.path == '/SplitScreen') {
-
-        } else if (route.path == '/SplitScreen') {
-
-        } else if (route.path == '/SplitScreen') {
-
+        } else if (route.path == '/IntegratedQuery') {
+this.nodeName = "综合查询-查看";
         }
 
         // ===========================================
@@ -288,7 +325,7 @@
       isActive(route) {
         // console.log(  route.StatefullPath == this.$route.fullPath)
         // console.log(route.StatefullPath + '==============')
-        // console.log(this.$route.fullPath + '----------------')
+        // console.log(this.$route.fullPath)
         // console.log(route)
         // console.log(this.$store.state)
         // return route.path === this.$route.path || route.name === this.$route.name
@@ -335,9 +372,21 @@
           flag: '03'
         })
       },
-      handleClose(tag) {
-        // this.$store.commit('HANDLE_CLOSE',tag)
-        this.$store.dispatch('handleClose', tag)
+      handleClose(view) {
+        // this.$store.commit('HANDLE_CLOSE',view)
+        this.$store.dispatch('handleClose', view)
+        console.log(view)
+        //   this.$store.dispatch('delVisitedViews', view).then((views) => {
+        // if (this.isActive(view)) {
+        //   console.log(view)
+        //   const latestView = views.slice(-1)[0]
+        //   if (latestView) {
+        //     this.$router.push(latestView.path)
+        //   } else {
+        //     this.$router.push('/')
+        //   }
+        // }
+        // })
       },
       handleClosed(tag) {
         this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);

@@ -16,31 +16,19 @@ let state = {
 };
 let mutations = {
   ADD_VISITED_VIEWS: (state, view) => {
+    // console.log( this.$route)
     // console.log(JSON.parse(localStorage.getItem("judge")).flag)
-    console.log('store')
     // console.log(localStorage.getItem("judge"))
     if (localStorage.getItem("judge") != 'undefined') {
       state.locFlag = JSON.parse(localStorage.getItem("judge")).flag;
       view.flag ? view.flag : view.flag = state.locFlag;
     }
-    if (state.visitedViews.some(v => v.name === view.name))return;
-    // if (state.visitedViews.some(v => v.name === view.name)) {
-    //   if (view.name == '反欺诈申请') {
-    //     console.log("tag_____反欺诈申请")
-    //     // console.log(state.visitedViews )
-    //     // console.log(view )
-    //     state.visitedViews.some(CV => {
-    //       // console.log(CV)
-    //       if (CV.name == '反欺诈申请') {
-    //         CV.flag = view.flag;
-    //         return
-    //       }
-    //     })
-    //     // view.flag=v.flag
-    //   } else {
-    //     return //v,currentValue
-    //   }
-    // }
+    if (state.visitedViews.some(v => v.name === view.name)) return;
+    // state.visitedViews.push({
+    //   name: view.name,
+    //   path: view.path,
+    //   title: view.meta.title || 'no-name'
+    // })
     state.visitedViews.push({
       name: view.name,
       path: view.path,
@@ -66,6 +54,40 @@ let mutations = {
     }
     this.inputVisible = false;
     this.inputValue = '';
+  },
+  DEL_VISITED_VIEWS: (state, view) => {
+    for (const [i, v] of state.visitedViews.entries()) {
+      if (v.path === view.path) {
+        state.visitedViews.splice(i, 1)
+        break
+      }
+    }
+    for (const i of state.cachedViews) {
+      if (i === view.name) {
+        const index = state.cachedViews.indexOf(i)
+        state.cachedViews.splice(index, 1)
+        break
+      }
+    }
+  },
+  DEL_OTHERS_VIEWS: (state, view) => {
+    for (const [i, v] of state.visitedViews.entries()) {
+      if (v.path === view.path) {
+        state.visitedViews = state.visitedViews.slice(i, i + 1)
+        break
+      }
+    }
+    for (const i of state.cachedViews) {
+      if (i === view.name) {
+        const index = state.cachedViews.indexOf(i)
+        state.cachedViews = state.cachedViews.slice(index, i + 1)
+        break
+      }
+    }
+  },
+  DEL_ALL_VIEWS: (state) => {
+    state.visitedViews = []
+    state.cachedViews = []
   }
 };
 let actions = {
@@ -78,6 +100,33 @@ let actions = {
     commit
   }, view) {
     commit('HANDLE_CLOSE', view)
+  },
+  delVisitedViews({
+    commit,
+    state
+  }, view) {
+    return new Promise((resolve) => {
+      commit('DEL_VISITED_VIEWS', view)
+      resolve([...state.visitedViews])
+    })
+  },
+  delOthersViews({
+    commit,
+    state
+  }, view) {
+    return new Promise((resolve) => {
+      commit('DEL_OTHERS_VIEWS', view)
+      resolve([...state.visitedViews])
+    })
+  },
+  delAllViews({
+    commit,
+    state
+  }) {
+    return new Promise((resolve) => {
+      commit('DEL_ALL_VIEWS')
+      resolve([...state.visitedViews])
+    })
   }
 };
 export default new Vuex.Store({
