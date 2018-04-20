@@ -1,18 +1,21 @@
 <template>
-  <div class="tag" ref='tag_wrap'>
-    <div ref='tag_ref' class="tag_Ref" style="left:30px">
-      <nobr>
-        <div :class="[isActive(tag)?'active':'','pai']" :key="ind" v-for="(tag,ind) in visitedViews" @click="changeFlag(tag)" @contextmenu.prevent.native="openMenu(tag,$event)">
-          <router-link :to='tag.path+tag.params'>
-            <!-- <el-tag closable :disable-transitions="false" @close.prevent="handleClose(tag)" class="tag_bottom" :key="tag" > {{tag.name}} </el-tag> -->
-            <!-- <el-tag :key="tag" v-for="tag in dynamicTags" closable :disable-transitions="false" @close="handleClose(tag)">
+  <div class="tag">
+    <div ref='tag_wrap' class="tagWrap">
+      <div ref='tag_ref' class="tag_Ref" :style="{left:activeLeft+'px'}">
+        <nobr>
+          <div :class="[isActive(tag)?'active':'','pai']" :key="ind" v-for="(tag,ind) in visitedViews" @click="changeFlag(tag)" >
+            <!-- <router-link :to='tag.path+tag.params' @contextmenu.prevent.native="openMenu(tag,$event)"> -->
+            <router-link :to='tag.StatefullPath' @contextmenu.prevent.native="openMenu(tag,$event)" ref="tag_self">
+              <!-- <el-tag closable :disable-transitions="false" @close.prevent="handleClose(tag)" class="tag_bottom" :key="tag" > {{tag.name}} </el-tag> -->
+              <!-- <el-tag :key="tag" v-for="tag in dynamicTags" closable :disable-transitions="false" @close="handleClose(tag)">
         {{tag.name}} -->
-            <!-- </el-tag> -->
-            <button closable :disable-transitions="false" class="button_bottom">
-              <span v-show="tag.name!='工作台'" @click.prevent.stop="handleClose(tag,$event)" class="el-icon-close close_tag"> </span> {{tag.name}}</button>
-          </router-link>
-        </div>
-      </nobr>
+              <!-- </el-tag> -->
+              <button closable :disable-transitions="false" class="button_bottom">
+                <span v-show="tag.name!='工作台'" @click.prevent.stop="handleClose(tag,$event)" class="el-icon-close close_tag"> </span> {{tag.name}}</button>
+            </router-link>
+          </div>
+        </nobr>
+      </div>
     </div>
     <div class="rightBtn Btn" @click="rightMove">
       <i class="el-icon-arrow-right "></i>
@@ -20,15 +23,18 @@
     <div class="leftBtn Btn" @click="leftMove">
       <i class="el-icon-arrow-left "></i>
     </div>
-    <!-- <ul class='contextmenu' v-show="visible" :style="{left:left+'px',top:top+'px'}">
-      <li @click="closeSelectedTag(selectedTag)">Close</li>
+    <ul class='contextmenu' v-show="visible" :style="{left:styleLeft+'px',top:'-30px'}">
+      <!-- <li @click="closeSelectedTag(selectedTag)">Close</li> -->
+      <li @click="handleClose(selectedTag)">Close</li>
+
       <li @click="closeOthersTags">Close Others</li>
       <li @click="closeAllTags">Close All</li>
-    </ul> -->
+    </ul>
+    <el-button class="button_bottom" @click='moveToCurrentTag' style="top:-200px;"> 影像资料 </el-button>
+    
     <!-- <el-button class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
-    <el-button class="bottom_sy" > 影像资料 </el-button>
     <button class="button_bottom">列表</button> -->
-    <button class="button_bottom" @click="OneLine" style="top:-200px;">列表2</button>
+    <!-- <button class="button_bottom" @click="OneLine" style="top:-200px;">列表2</button> -->
   </div>
 </template>
 
@@ -38,7 +44,15 @@
     color: #ffffff;
     letter-spacing: 0.11px;
     width: 100%;
-    overflow-x: hidden;
+  }
+
+  .tagWrap {
+    /* width:calc(  100% - 30px); */
+    width:100%;
+    height: 39px;
+    /* left:30px; */
+    position: absolute;
+    overflow: hidden;
   }
 
   .tag_Ref {
@@ -122,7 +136,7 @@
   .contextmenu {
     margin: 0;
     background: #fff;
-    z-index: 2;
+    z-index: 30;
     position: absolute;
     list-style-type: none;
     padding: 5px 0;
@@ -131,6 +145,12 @@
     font-weight: 400;
     color: #333;
     box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, .3);
+  }
+
+  .contextmenu li {
+    cursor: pointer;
+    border:2px solid green;
+    margin-top:4px;
   }
 
   .Btn {
@@ -156,6 +176,7 @@
 </style>
 
 <script>
+const padding = 0 // tag's padding
   export default {
     data() {
       return {
@@ -172,6 +193,9 @@
         antiNode: '',
         visible: false,
         views: null,
+        styleLeft: 0,
+        activeLeft:30,
+        // styleTop: 0,
         judge: {
           flag: ''
         },
@@ -188,8 +212,8 @@
     watch: {
       $route() {
         this.addViewTags()
-        // this.moveToCurrentTag()
-        this.move();
+        this.moveToCurrentTag()
+        // this.move();
       },
       visible(value) {
         if (value) {
@@ -199,12 +223,17 @@
         }
       }
     },
+    mounted() {
+      this.addViewTags()
+      // this.move();
+    },
     methods: {
       addViewTags() {
         // const route = this.generateRoute();
         const route = this.$route;
         route.fullPath.indexOf('?') != -1 ? this.taskNodeName = route.fullPath.split('?')[1].split('&')[0].split('=')[1] :
           this.taskNodeName;
+           this.routeParams = '';
         if (!route) {
           return false
         }
@@ -237,7 +266,7 @@
         } else if (route.path == '/FSplitScreen') { //终审详情
           this.nodeFlag = "02";
           this.nodeName = "终审详情";
-          this.routeParams = '';
+          // this.routeParams = '';
         } else if (route.path == '/AntiFraud34') { // 反欺诈审批
           if (this.taskNodeName == "antiFraudApp_commissioner") { //反欺诈专员审批
             this.nodeName = "反欺诈专员审批";
@@ -271,31 +300,34 @@
         } else if (route.path == '/ReconsiderSplit') { //复议详情
           this.nodeName = "复议详情";
           this.nodeFlag = "";
-          this.routeParams = '';
+          // this.routeParams = '';
         } else if (route.path == '/historicalTask') { // 任务管理-信审历史任务
           this.nodeName = "信审历史任务";
-            this.routeParams = '';
+          // this.routeParams = '';
         } else if (route.path == '/doTheTask') { // 任务管理- 信审已办任务
           this.nodeName = "信审已办任务";
-            this.routeParams = '';
+          // this.routeParams = '';
         } else if (route.path == '/aDoneTask') { // 任务管理- 反欺诈已办任务
           this.nodeName = "反欺诈已办任务";
-            this.routeParams = '';
+          // this.routeParams = '';
         } else if (route.path == '/aHistoryTask') { // 任务管理- 反欺诈历史任务
           this.nodeName = "反欺诈历史任务";
+          // this.routeParams = '';
         } else if (route.path == '/HistoryTask') { // 任务管理- 复议历史任务
           this.nodeName = "复议历史任务";
-            this.routeParams = '';
+          // this.routeParams = '';
         } else if (route.path == '/DoneTask') { // 任务管理- 复议已办任务
           this.nodeName = "复议已办任务";
+          // this.routeParams = '';
         } else if (route.path == '/AntiCaseNum') { // 案件编号维护
           this.nodeName = "案件编号维护";
-
+          // this.routeParams = '';
         } else if (route.path == '/AntiRules') { // 反欺诈规则设定
           this.nodeName = "反欺诈规则设定";
-
+          // this.routeParams = '';
         } else if (route.path == '/MatchingInf') { // 匹配信息-查看
           this.nodeName = "匹配信息-查看";
+          // this.routeParams = '';
           // this.nodeFlag = "";1          
           // this.routeParams = '';
         } else if (route.path == '/processMoni') { //  流程监控 - 
@@ -304,7 +336,9 @@
             this.nodeName = "信审未分配流程";
             this.routeParams = '?creditApp00';
           } else if (route.fullPath == '/processMoni?creditApp01') {
-            this.nodeName = "信审已分配流程";
+            // this.nodeName = "信审已分配流程";
+            this.nodeName = "信审已分配流程信审已分配流程信审已分配流程信审已分配流程信审已分配流程信审已分配流程信审已分配流程信审已分配流程信审已分配流程";
+
             this.routeParams = '?creditApp01';
           } else if (route.fullPath == '/processMoni?creditApp03') {
             this.nodeName = "信审已完成流程";
@@ -343,52 +377,82 @@
         // this.$store.dispatch('addVisitedViews', route)
       },
       moveToCurrentTag() {
-        // console.log()
-        // const tags = this.$refs.tagtag
-        // this.$nextTick(() => {
-        //   for (const tag of tags) {
-        //     if (tag.to === this.$route.path) {
-        //       this.$refs.scrollPane.moveToTarget(tag.$el)
-        //       break
-        //     }
-        //   }
-        // })
+        // console.log(this.$refs.tag_self)
+        // tag_self
+        const tags = this.$refs.tag_self
+        this.$nextTick(() => {
+          for (const tag of tags) {
+        // console.log(tag.$el)            
+            if (tag.to === this.$route.fullPath) {
+              // this.$refs.scrollPane.moveToTarget(tag.$el)
+            this.moveToTarget(tag.$el)
+              
+              break
+            }
+          }
+        })
       },
-      generateRoute() {
-        // console.log(this.$route)
-        if (this.$route.name) {
-          return this.$route
-        }
-        return false
-      },
+          moveToTarget($target) {
+      const $container = this.$refs.tag_wrap
+      const $containerWidth = $container.offsetWidth
+      const $targetLeft = $target.offsetLeft
+      const $targetWidth = $target.offsetWidth
+      console.log( $containerWidth)
+console.log($targetLeft)
+      if ($targetLeft <$containerWidth) {
+        // tag in the activeLeft
+        console.log('ddddddddddddd')
+        this.activeLeft = -$targetLeft + 100
+        // $targetLeft
+      } else if ($targetLeft + padding > -this.activeLeft && $targetLeft + $targetWidth < -this.activeLeft + $containerWidth - padding) {
+        // tag in the current view
+        // eslint-disable-line
+        console.log('22222222222222222222222')
+        
+      } else {
+        // tag in the right
+        console.log('33333333333333333333')
+        
+        this.activeLeft = -($targetLeft - ($containerWidth - $targetWidth) + 30)
+      }
+    },
+      // generateRoute() {
+      //   // console.log(this.$route)
+      //   if (this.$route.name) {
+      //     return this.$route
+      //   }
+      //   return false
+      // },
       isActive(route) {
         // console.log(route.StatefullPath )
         // console.log(this.$route.fullPath)
         return route.StatefullPath == this.$route.fullPath;
       },
-      closeSelectedTag(view) {
-        this.$store.dispatch('delVisitedViews', view).then((views) => {
-          if (this.isActive(view)) {
-            const latestView = views.slice(-1)[0]
-            if (latestView) {
-              this.$router.push(latestView.path)
-            } else {
-              this.$router.push('/')
-            }
-          }
-        })
-      },
+      // closeSelectedTag(view) {
+      //   console.log(view)
+      //   this.$store.dispatch('delVisitedViews', view).then((views) => {
+      //     if (this.isActive(view)) {
+      //       const latestView = views.slice(-1)[0]
+      //       if (latestView) {
+      //         this.$router.push(latestView.path)
+      //       } else {
+      //         this.$router.push('/')
+      //       }
+      //     }
+      //   })
+      // },
       closeOthersTags() {
-        this.$router.push(this.selectedTag.path)
+        // delOthersViews
+        console.log(this.selectedTag)
+        this.$router.push(this.selectedTag.StatefullPath)
         this.$store.dispatch('delOthersViews', this.selectedTag).then(() => {
-          this.moveToCurrentTag()
+          // this.moveToCurrentTag()
         })
       },
       openMenu(tag, e) {
         this.visible = true
         this.selectedTag = tag
-        // this.left = e.clientX
-        // this.top = e.clientY
+        this.styleLeft = e.clientX + 10
       },
       closeAllTags() {
         this.$store.dispatch('delAllViews')
@@ -396,10 +460,6 @@
       },
       closeMenu() {
         this.visible = false
-      },
-      adk() {
-        //   console.log( this.$store)
-
       },
       handleClose(view, ev) {
         this.$store.dispatch('delVisitedViews', view).then((views) => {
@@ -433,64 +493,6 @@
         // }
         // })
       },
-      handleClosed(tag) {
-        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
-      },
-      showInput() {
-        // this.$store.commit("ADD_VISITED_VIEWS", {
-        //   name: "kdl",
-        //   path: '/SplitScreen',
-        //   // flag: '01'
-        // })
-        this.$store.dispatch('addVisitedViews', {
-          name: "迪恩",
-          path: '/SplitScreen',
-          // flag: '01'
-        })
-        // this.inputVisible = true;
-        // this.$nextTick(_ => {
-        //   this.$refs.saveTagInput.$refs.input.focus();
-        // });
-      },
-      changeFlag(tg) {
-        // console.log(fg)
-        if (tg.flag != '' || tg.flag != undefined || tg.flag != 'undefined') {
-          this.judge.flag = tg.flag;
-          // console.log(tg.params)
-          localStorage.setItem("judge", JSON.stringify(this.judge));
-          // localStorage.setItem("antiApplyFlag", JSON.stringify(tg.params));
-
-        }
-      },
-      handleInputConfirm() {
-        let inputValue = this.inputValue;
-        if (inputValue) {
-          this.dynamicTags.push(inputValue);
-        }
-        this.inputVisible = false;
-        this.inputValue = '';
-      },
-      Width() {
-        console.log(this.$refs.tag_ref)
-      },
-      OneLine() {
-        console.log($('.tag_Ref').width())
-        console.log($('.tag').width())
-        // console.log( this.$refs.tag_ref.width)
-        // console.log( this.$refs.tag_wrap.Width)
-        if ($('.tag').width() > $('.tag_Ref').width()) {
-          $('.btn').css('display', 'block');
-          $('.tag_Ref').width($('.tag_Ref').width() - 80);
-          // $('.tag_Ref').css('left', '40px');
-        } else {
-          this.aaa = false;
-        }
-      },
-      move() {
-        this.right = parseFloat(this.$refs.tag_ref.style.left);
-        this.tagWidth = $('.tag_Ref').width();
-        this.tagWrapWidth = $('.tag').width();
-      },
       rightMove() {
         this.right = parseFloat(this.$refs.tag_ref.style.left);
         this.tagWidth = $('.tag_Ref').width();
@@ -513,15 +515,68 @@
         } else {
           this.$refs.tag_ref.style.left = parseFloat(this.$refs.tag_ref.style.left) + 50 + "px";
         }
-      }
-    },
-    mounted() {
-      // console.log(this.$store.state.visitedViews)
-      // console.log(this.$refs.tag_ref)
-      this.addViewTags()
-      this.move();
-    },
+      },
+      // adk() {
+      //   //   console.log( this.$store)
 
+      // },
+
+      // handleClosed(tag) {
+      //   this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+      // },
+      // showInput() {
+      //   // this.$store.commit("ADD_VISITED_VIEWS", {
+      //   //   name: "kdl",
+      //   //   path: '/SplitScreen',
+      //   //   // flag: '01'
+      //   // })
+      //   this.$store.dispatch('addVisitedViews', {
+      //     name: "迪恩",
+      //     path: '/SplitScreen',
+      //     // flag: '01'
+      //   })
+      //   // this.inputVisible = true;
+      //   // this.$nextTick(_ => {
+      //   //   this.$refs.saveTagInput.$refs.input.focus();
+      //   // });
+      // },
+      changeFlag(tg) {
+        // console.log(fg)
+        if (tg.flag != '' || tg.flag != undefined || tg.flag != 'undefined') {
+          this.judge.flag = tg.flag;
+          // console.log(tg.params)
+          localStorage.setItem("judge", JSON.stringify(this.judge));
+          // localStorage.setItem("antiApplyFlag", JSON.stringify(tg.params));
+        }
+      },
+      // handleInputConfirm() {
+      //   let inputValue = this.inputValue;
+      //   if (inputValue) {
+      //     this.dynamicTags.push(inputValue);
+      //   }
+      //   this.inputVisible = false;
+      //   this.inputValue = '';
+      // },
+      // OneLine() {
+      //   console.log($('.tag_Ref').width())
+      //   console.log($('.tag').width())
+      //   // console.log( this.$refs.tag_ref.width)
+      //   // console.log( this.$refs.tag_wrap.Width)
+      //   if ($('.tag').width() > $('.tag_Ref').width()) {
+      //     $('.btn').css('display', 'block');
+      //     $('.tag_Ref').width($('.tag_Ref').width() - 80);
+      //     // $('.tag_Ref').css('left', '40px');
+      //   } else {
+      //     this.aaa = false;
+      //   }
+      // },
+      // move() {
+      //   this.right = parseFloat(this.$refs.tag_ref.style.left);
+      //   this.tagWidth = $('.tag_Ref').width();
+      //   this.tagWrapWidth = $('.tag').width();
+      // },
+
+    },
   }
 
 </script>

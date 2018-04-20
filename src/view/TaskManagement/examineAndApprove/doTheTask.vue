@@ -404,6 +404,7 @@
 		padding: 30px 30px;
 		width: 100%;
 		height: calc( 100% - 70px );
+		overflow: hidden;
 	}
 	/* 高级查询下的input */
 	.taskWatting .row {
