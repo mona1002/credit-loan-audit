@@ -71,7 +71,13 @@ let mutations = {
     }
   },
   DEL_ALL_VIEWS: (state) => {
-    state.visitedViews = state.initial;
+    state.visitedViews =  [{
+      name: '工作台',
+      path: '/',
+      flag: '',
+      params: '',
+      StatefullPath: "/"
+    }];
   }
 };
 let actions = {
