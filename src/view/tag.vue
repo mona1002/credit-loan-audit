@@ -3,7 +3,7 @@
     <div ref='tag_wrap' class="tagWrap">
       <div ref='tag_ref' class="tag_Ref" :style="{left:activeLeft+'px'}">
         <nobr>
-          <div :class="[isActive(tag)?'active':'','pai']" :key="ind" v-for="(tag,ind) in visitedViews" @click="changeFlag(tag)" >
+          <div :class="[isActive(tag)?'active':'','pai']" :key="ind" v-for="(tag,ind) in visitedViews" @click="changeFlag(tag)">
             <!-- <router-link :to='tag.path+tag.params' @contextmenu.prevent.native="openMenu(tag,$event)"> -->
             <router-link :to='tag.StatefullPath' @contextmenu.prevent.native="openMenu(tag,$event)" ref="tag_self">
               <!-- <el-tag closable :disable-transitions="false" @close.prevent="handleClose(tag)" class="tag_bottom" :key="tag" > {{tag.name}} </el-tag> -->
@@ -23,7 +23,7 @@
     <div class="leftBtn Btn" @click="leftMove">
       <i class="el-icon-arrow-left "></i>
     </div>
-    <ul class='contextmenu' v-show="visible" :style="{left:styleLeft+'px',top:'-30px'}">
+    <ul class='contextmenu' v-show="visible" :style="{left:styleLeft+'px',top:'-80px'}">
       <!-- <li @click="closeSelectedTag(selectedTag)">Close</li> -->
       <li @click="handleClose(selectedTag)">Close</li>
 
@@ -31,7 +31,7 @@
       <li @click="closeAllTags">Close All</li>
     </ul>
     <el-button class="button_bottom" @click='moveToCurrentTag' style="top:-200px;"> 影像资料 </el-button>
-    
+
     <!-- <el-button class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
     <button class="button_bottom">列表</button> -->
     <!-- <button class="button_bottom" @click="OneLine" style="top:-200px;">列表2</button> -->
@@ -48,7 +48,7 @@
 
   .tagWrap {
     /* width:calc(  100% - 30px); */
-    width:100%;
+    width: 100%;
     height: 39px;
     /* left:30px; */
     position: absolute;
@@ -149,8 +149,8 @@
 
   .contextmenu li {
     cursor: pointer;
-    border:2px solid green;
-    margin-top:4px;
+    border: 2px solid green;
+    margin-top: 3px;
   }
 
   .Btn {
@@ -176,7 +176,7 @@
 </style>
 
 <script>
-const padding = 0 // tag's padding
+  const padding = 0 // tag's padding
   export default {
     data() {
       return {
@@ -194,7 +194,7 @@ const padding = 0 // tag's padding
         visible: false,
         views: null,
         styleLeft: 0,
-        activeLeft:30,
+        activeLeft: 30,
         // styleTop: 0,
         judge: {
           flag: ''
@@ -233,7 +233,7 @@ const padding = 0 // tag's padding
         const route = this.$route;
         route.fullPath.indexOf('?') != -1 ? this.taskNodeName = route.fullPath.split('?')[1].split('&')[0].split('=')[1] :
           this.taskNodeName;
-           this.routeParams = '';
+        this.routeParams = '';
         if (!route) {
           return false
         }
@@ -337,7 +337,7 @@ const padding = 0 // tag's padding
             this.routeParams = '?creditApp00';
           } else if (route.fullPath == '/processMoni?creditApp01') {
             // this.nodeName = "信审已分配流程";
-            this.nodeName = "信审已分配流程信审已分配流程信审已分配流程信审已分配流程信审已分配流程信审已分配流程信审已分配流程信审已分配流程信审已分配流程";
+            this.nodeName = "信审已分配流程信审已分配流程信审已分配流程信审已分配流程信审已分配流程信审已分配流程流程信审已分配流程信审已分配流程信信审已分配流程信审已分配流程信审已分配流程";
 
             this.routeParams = '?creditApp01';
           } else if (route.fullPath == '/processMoni?creditApp03') {
@@ -377,45 +377,46 @@ const padding = 0 // tag's padding
         // this.$store.dispatch('addVisitedViews', route)
       },
       moveToCurrentTag() {
-        // console.log(this.$refs.tag_self)
-        // tag_self
         const tags = this.$refs.tag_self
         this.$nextTick(() => {
           for (const tag of tags) {
-        // console.log(tag.$el)            
             if (tag.to === this.$route.fullPath) {
               // this.$refs.scrollPane.moveToTarget(tag.$el)
-            this.moveToTarget(tag.$el)
-              
+              this.moveToTarget(tag.$el)
+
               break
             }
           }
         })
       },
-          moveToTarget($target) {
-      const $container = this.$refs.tag_wrap
-      const $containerWidth = $container.offsetWidth
-      const $targetLeft = $target.offsetLeft
-      const $targetWidth = $target.offsetWidth
-      console.log( $containerWidth)
-console.log($targetLeft)
-      if ($targetLeft <$containerWidth) {
-        // tag in the activeLeft
-        console.log('ddddddddddddd')
-        this.activeLeft = -$targetLeft + 100
-        // $targetLeft
-      } else if ($targetLeft + padding > -this.activeLeft && $targetLeft + $targetWidth < -this.activeLeft + $containerWidth - padding) {
-        // tag in the current view
-        // eslint-disable-line
-        console.log('22222222222222222222222')
-        
-      } else {
-        // tag in the right
-        console.log('33333333333333333333')
-        
-        this.activeLeft = -($targetLeft - ($containerWidth - $targetWidth) + 30)
-      }
-    },
+      moveToTarget($target) {
+        const $container = this.$refs.tag_wrap
+        const $containerWidth = $container.offsetWidth
+        const $tag_refWidth = this.$refs.tag_ref.offsetWidth
+        const $tag_refLeft = Math.abs(this.$refs.tag_ref.offsetLeft)
+        const $targetLeft = $target.offsetLeft
+        const $targetWidth = $target.offsetWidth
+        console.log($tag_refLeft)
+        console.log($targetLeft)
+        console.log($containerWidth)
+        console.log($tag_refWidth)
+        // if( $tag_refWidth>= $containerWidth-50){
+        if ($targetLeft + $targetWidth < $tag_refLeft) {
+          console.log('111111111111111')
+          this.activeLeft = 30
+        }
+        // else if ($targetLeft + padding > -this.activeLeft && $targetLeft + $targetWidth < -this.activeLeft + $containerWidth - padding) {
+        //   // tag in the current view
+        //   // eslint-disable-line
+        //   console.log('22222222222222222222222')
+        // } 
+        else if ($targetLeft > $containerWidth) {
+          console.log('33333333333333333333')
+          this.activeLeft = $containerWidth - $targetLeft - $targetWidth - 30;
+        }
+        // }
+
+      },
       // generateRoute() {
       //   // console.log(this.$route)
       //   if (this.$route.name) {
