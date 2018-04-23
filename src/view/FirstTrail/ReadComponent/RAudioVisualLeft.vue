@@ -425,8 +425,15 @@
       }
     },
     mounted() {
-      console.log(this.comBtn)
-      this.localInf = JSON.parse(localStorage.getItem("internalObj")) //初审-匹配查看
+      // console.log(this.comBtn)
+      this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) //初审-匹配查看
+      if (this.MatchFlag.MatchFlag == 'internal') {
+        console.log("内部匹配")
+        this.localInf = JSON.parse(localStorage.getItem("internalObj")) //初审-匹配查看
+      } else if (this.MatchFlag.MatchFlag == 'Query') {
+        console.log("综合查询")
+        this.localInf = JSON.parse(localStorage.getItem("Query")) //初审-匹配查看
+      }
       this.imgBaseUrl = imgUrl.imgBaseUrl;
       this.odivMove(this.msg);
       this.post("/productArchive/getProductArchiveParentList", {
@@ -677,6 +684,7 @@
     border: 2px solid #bfcbd9;
     box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
   }
+
   .NamParentNode {
     margin-left: 20px;
     display: block;

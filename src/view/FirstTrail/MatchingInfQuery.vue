@@ -178,6 +178,7 @@
         comBtn:true,
         alertComBtn:false,
          midShow: true,
+         custName:'',
       }
     },
     methods: {
@@ -300,7 +301,8 @@
       }
     },
     mounted() {
-      this.tastwaitingPass = JSON.parse(localStorage.getItem("query"));
+      this.tastwaitingPass = JSON.parse(localStorage.getItem("Query"));
+      console.log(this.tastwaitingPass )
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.matchApplyId,
       }).then(res => {

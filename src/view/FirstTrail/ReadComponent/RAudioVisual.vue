@@ -105,7 +105,8 @@
         ListDetails: [],
         applyId: '', //入参
         imgPath: [],
-        localInf: [] //localstorage 接收的所有参数
+        localInf: [], //localstorage 接收的所有参数
+        MatchFlag: '',
       }
     },
     methods: {
@@ -327,7 +328,12 @@
     },
     mounted() {
       // this.odivMove("RFirstAud");
-      this.localInf = JSON.parse(localStorage.getItem("internalObj")) //初审-匹配查看
+      this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) //初审-匹配查看
+      if (this.MatchFlag.MatchFlag == 'internal') {
+        this.localInf = JSON.parse(localStorage.getItem("internalObj")) //初审-匹配查看
+      } else if (this.MatchFlag.MatchFlag == 'Query') {
+        this.localInf = JSON.parse(localStorage.getItem("Query")) //初审-匹配查看
+      }
       this.imgBaseUrl = imgUrl.imgBaseUrl;
       this.odivMove("RFirstAud");
       this.post("/productArchive/getProductArchiveParentList", {
@@ -596,6 +602,7 @@
   }
 
   /* 缩略图 各个 img 图片 */
+
   .AudioVisual .Small_pic {
     height: calc( 100% - 60px);
     border-radius: 5px;

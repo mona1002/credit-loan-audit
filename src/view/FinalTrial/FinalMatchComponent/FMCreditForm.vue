@@ -978,7 +978,13 @@
       },
     },
     mounted() {
+      
+       this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) //初审-匹配查看
+      if (this.MatchFlag.MatchFlag == 'internal') {
       this.getParams = JSON.parse(localStorage.getItem("internalObj")); // 终审内部匹配
+      } else if (this.MatchFlag.MatchFlag == 'Query') {
+        this.getParams = JSON.parse(localStorage.getItem("Query")) //初审-匹配查看
+      }
       // 获取查询列表数据
       this.post("/creauditInfo/queryCreauditInfoObj", {
         applyId: this.getParams.matchApplyId,

@@ -144,7 +144,8 @@
       handleCurrentChange(val) {
         this.query.id = val.id;
         this.query.matchApplyId = val.applyId;
-        localStorage.setItem("query", JSON.stringify(this.query));
+        localStorage.setItem("Query", JSON.stringify(this.query));
+        localStorage.setItem("MatchFlag", JSON.stringify({ MatchFlag:'Query' }));
         this.$router.push('/MatchingInfQuery');
         this.gopath();
         // this.params.pageNum = val;
