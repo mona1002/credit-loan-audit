@@ -30,8 +30,7 @@
       <li @click="closeOthersTags">Close Others</li>
       <li @click="closeAllTags">Close All</li>
     </ul>
-    <el-button class="button_bottom" @click='moveToCurrentTag' style="top:-200px;"> 影像资料 </el-button>
-
+    <!-- <el-button class="button_bottom" @click='moveToCurrentTag' style="top:-200px;"> 影像资料 </el-button> -->
     <!-- <el-button class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
     <button class="button_bottom">列表</button> -->
     <!-- <button class="button_bottom" @click="OneLine" style="top:-200px;">列表2</button> -->
@@ -176,7 +175,6 @@
 </style>
 
 <script>
-  const padding = 0 // tag's padding
   export default {
     data() {
       return {
@@ -364,8 +362,11 @@
           }
         } else if (route.path == '/IntegratedQuery') {
           this.nodeName = "综合查询-查看";
+        } else if (route.path == '/commissioner') {//质检专员审批
+          this.nodeName = "质检专员审批";
+        } else if (route.path == '/manager') {
+          this.nodeName = "质检";
         }
-        // ===========================================
         this.RoutePath = route.path;
         this.$store.dispatch('addVisitedViews', {
           name: this.nodeName,
@@ -415,7 +416,6 @@
           this.activeLeft = $containerWidth - $targetLeft - $targetWidth - 30;
         }
         // }
-
       },
       // generateRoute() {
       //   // console.log(this.$route)
