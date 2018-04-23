@@ -83,12 +83,19 @@
 				activeNames: ['1'],
 				//processTemplateId:'',
 				//taskStatus:'',
-				processInstanceId:'',
+				applyId:'',
 				taskDetailList:[],
 			}
 		},
 		mounted(){
-			this.processInstanceId=JSON.parse(localStorage.getItem('internalObj')).id;
+			// this.applyId=JSON.parse(localStorage.getItem('internalObj')).id;
+			  this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) 
+      if (this.MatchFlag.MatchFlag == 'internal') {
+      this.applyId=JSON.parse(localStorage.getItem('internalObj')).matchApplyId;//匹配查看
+      } else if (this.MatchFlag.MatchFlag == 'Query') {
+				console.log('综合查询')
+        this.applyId = JSON.parse(localStorage.getItem("Query")).matchApplyId; //初审-综合查询
+      }
 			this.request()
 		},
 		methods:{
@@ -96,15 +103,20 @@
 
 			},
 			request(){
-				this.post('/creauditInfo/getProcessTraceList', {
-			        processInstanceId: this.processInstanceId
-			      }).then(res => {
-			        console.log(res);
-			        if (res.statusCode == '200') {
-			          this.taskDetailList = res.data;
-			        }
-			      })
-
+				// this.post('/creauditInfo/getProcessTraceList', {
+			  //       applyId: this.applyId
+			  //     }).then(res => {
+			  //       console.log(res);
+			  //       if (res.statusCode == '200') {
+			  //         this.taskDetailList = res.data;
+			  //       }
+			  //     })
+       this.get("/creauditInfo/getProcessTraceListByApplyId", {
+          applyId: this.applyId,
+        }).then(res => {
+          console.log(res);
+          this.taskDetailList = res.data;
+        })
 			},
 			handleCurrentChange(){
 

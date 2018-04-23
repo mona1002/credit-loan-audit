@@ -84,7 +84,7 @@
 				activeNames: ['1'],
 				//processTemplateId:'',
 				//taskStatus:'',
-				processInstanceId:'',
+				applyId:'',
 				taskDetailList:[],
 				judgeFlag:'',
 			}
@@ -92,16 +92,16 @@
 		mounted(){
 			this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
 		    if (this.judgeFlag.flag == '01') {
-		        this.processInstanceId = JSON.parse(localStorage.getItem("taskInWaitting")).processInstanceId; // 初审
+		        this.applyId = JSON.parse(localStorage.getItem("taskInWaitting")).applyId; // 初审
 		    } else if (this.judgeFlag.flag == '02') {
-		        this.processInstanceId = JSON.parse(localStorage.getItem("FtaskInWaitting")).processInstanceId //终审
+		        this.applyId = JSON.parse(localStorage.getItem("FtaskInWaitting")).applyId //终审
 		    } else if (this.judgeFlag.flag == '07') {
-		        this.processInstanceId = JSON.parse(localStorage.getItem("TtaskInWaitting")).processInstanceId //终审
+		        this.applyId = JSON.parse(localStorage.getItem("TtaskInWaitting")).applyId //终审
 		    } else if (this.judgeFlag.flag == '08') {
-		        this.processInstanceId = JSON.parse(localStorage.getItem("TtaskInWaitting")).processInstanceId //终审
+		        this.applyId = JSON.parse(localStorage.getItem("TtaskInWaitting")).applyId //终审
 		    }
 
-			//this.processInstanceId=JSON.parse(localStorage.getItem('taskInWaitting')).processInstanceId;
+			//this.applyId=JSON.parse(localStorage.getItem('taskInWaitting')).applyId;
 			this.request()
 		},
 		methods:{
@@ -109,15 +109,20 @@
 
 			},
 			request(){
-				this.get('/creauditInfo/getProcessTraceList', {
-			        processInstanceId: this.processInstanceId
-			      }).then(res => {
-			        console.log(res);
-			        if (res.statusCode == '200') {
-			          this.taskDetailList = res.data;
-			        }
-			      })
-
+				// this.get('/creauditInfo/getProcessTraceList', {
+			  //       applyId: this.applyId
+			  //     }).then(res => {
+			  //       console.log(res);
+			  //       if (res.statusCode == '200') {
+			  //         this.taskDetailList = res.data;
+			  //       }
+			  //     })
+ this.get("/creauditInfo/getProcessTraceListByApplyId", {
+          applyId: this.applyId,
+        }).then(res => {
+          console.log(res);
+          this.taskDetailList = res.data;
+        })
 			},
 			handleCurrentChange(){
 
