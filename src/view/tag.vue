@@ -362,7 +362,9 @@
           }
         } else if (route.path == '/IntegratedQuery') {
           this.nodeName = "综合查询-查看";
-        } else if (route.path == '/commissioner') {//质检专员审批
+        } else if (route.path == '/MatchingInfQuery') {
+          this.nodeName = "综合查询-详情";
+        }else if (route.path == '/commissioner') {//质检专员审批
           this.nodeName = "质检专员审批";
         } else if (route.path == '/manager') {
           this.nodeName = "质检";
@@ -543,6 +545,7 @@
       // },
       changeFlag(tg) {
         // console.log(fg)
+        console.log('切换')
         if (tg.flag != '' || tg.flag != undefined || tg.flag != 'undefined') {
           this.judge.flag = tg.flag;
           // console.log(tg.params)
