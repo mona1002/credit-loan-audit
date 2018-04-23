@@ -287,13 +287,6 @@
           id: row.id,
           matchApplyId: row.matchApplyId,
           isInterFlag: this.isInterFlag,
-         
-        }));
-        localStorage.setItem("internalObj", JSON.stringify({
-          id: row.id,
-          matchApplyId: row.matchApplyId,
-          isInterFlag: this.isInterFlag,
-         
         }));
          localStorage.setItem("MatchFlag", JSON.stringify({ MatchFlag:'internal' }));
         this.$router.push('/MatchingInf');

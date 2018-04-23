@@ -1,6 +1,6 @@
 <template>
   <div class="aAntiApplyInf">
-    <!-- 反欺诈结论======================= -->
+    <!-- 反欺诈结论  ======================= -->
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">

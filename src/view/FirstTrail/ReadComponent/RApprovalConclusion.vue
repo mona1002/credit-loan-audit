@@ -36,7 +36,12 @@
       }
     },
     mounted() {
-      this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //初审-匹配查看
+        this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) //初审-匹配查看
+      if (this.MatchFlag.MatchFlag == 'internal') {
+        this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //初审-匹配查看
+      } else if (this.MatchFlag.MatchFlag == 'Query') {
+        this.MatchInf = JSON.parse(localStorage.getItem("Query")) //初审-匹配查看
+      }
       // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       // if (this.judgeFlag.flag == '01') {
       //   this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //初审-匹配查看

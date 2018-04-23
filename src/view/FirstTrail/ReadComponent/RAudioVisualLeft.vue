@@ -159,6 +159,7 @@
         currentRow: null,
         custName: '',
         custmatchApplySubNo: '',
+        MatchFlag:''
       }
     },
     props: ['msg', 'comBtn'],

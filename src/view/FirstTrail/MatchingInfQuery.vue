@@ -39,13 +39,14 @@
               <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
               <RapplicationInformationDetail v-if=" this.tabContent1==3">申请信息</RapplicationInformationDetail>
               <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail>
-              <PhoneCredit v-if=" this.tabContent1==5"> 电话征信</PhoneCredit>
+              <!-- <PhoneCredit v-if=" this.tabContent1==5"> 电话征信</PhoneCredit> -->
+              <RPhoneCredit v-if=" this.tabContent1==5"> 电话征信</RPhoneCredit>
               <FMCreditForm v-if=" this.tabContent1==6">信审表</FMCreditForm>
               <RcreditInvestigation v-if=" this.tabContent1==7">实地征信</RcreditInvestigation>
               <aMAntiApplyInf v-if=" this.tabContent1==8">反欺诈结论</aMAntiApplyInf>
-              <RFinanceInformation v-if=" this.tabContent1==9">财务信息</RFinanceInformation>
-              <RprocessTrajectory v-if=" this.tabContent1==10">流程轨迹</RprocessTrajectory>
-              <RApprovalConclusion v-if=" this.tabContent1==11">审批结论轨迹</RApprovalConclusion>
+              <!-- <RFinanceInformation v-if=" this.tabContent1==9">财务信息</RFinanceInformation> -->
+              <RprocessTrajectory v-if=" this.tabContent1==9">流程轨迹</RprocessTrajectory>
+              <RApprovalConclusion v-if=" this.tabContent1==10">审批结论轨迹</RApprovalConclusion>
             </div>
           </div>
         </div>
@@ -79,13 +80,14 @@
             <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
             <RapplicationInformationDetail v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
             <RborrowerInformationSetail v-if=" this.tabContent2==4" :isFull.sync="isFull">借款人资料</RborrowerInformationSetail>
-            <PhoneCredit v-if=" this.tabContent2==5"> 电话征信</PhoneCredit>
+            <!-- <PhoneCredit v-if=" this.tabContent2==5"> 电话征信</PhoneCredit>     -->
+              <RPhoneCredit v-if=" this.tabContent1==5"> 电话征信</RPhoneCredit>
             <FMCreditForm v-if=" this.tabContent2==6">信审表</FMCreditForm>
             <RcreditInvestigation v-if=" this.tabContent2==7">实地征信</RcreditInvestigation>
             <aMAntiApplyInf v-if=" this.tabContent2==8">反欺诈结论</aMAntiApplyInf>
-            <RFinanceInformation v-if=" this.tabContent2==9">财务信息</RFinanceInformation>
-            <RprocessTrajectory v-if=" this.tabContent2==10">流程轨迹</RprocessTrajectory>
-            <RApprovalConclusion v-if=" this.tabContent2==11">审批结论轨迹</RApprovalConclusion>
+            <!-- <RFinanceInformation v-if=" this.tabContent2==9">财务信息</RFinanceInformation> -->
+            <RprocessTrajectory v-if=" this.tabContent2==9">流程轨迹</RprocessTrajectory>
+            <RApprovalConclusion v-if=" this.tabContent2==10">审批结论轨迹</RApprovalConclusion>
           </div>
         </div>
       </div>
@@ -127,16 +129,15 @@
   import FMCreditForm from "../FinalTrial/FinalMatchComponent/FMCreditForm.vue"; //信审表-终审查看-del初审人员-第一个
   import RborrowerInformationSetail from "./ReadComponent/RborrowerInformationSetail.vue"; //借款人资料
   import RapplicationInformationDetail from "./ReadComponent/RapplicationInformationDetail"; //申请信息
-  import RFinanceInformation from "./ReadComponent/RFinanceInformation"; //账务信息
+  import RFinanceInformation from "./ReadComponent/RFinanceInformation.vue"; //账务信息
   import RApprovalConclusion from "./ReadComponent/RApprovalConclusion"; //信审审批结论轨迹
   import Rremark from "./ReadComponent/Rremark"; //备注信息
   import RprocessTrajectory from "./ReadComponent/RprocessTrajectory"; //流程轨迹
   import RcreditInvestigation from "./ReadComponent/RcreditInvestigation"; //实地征信
-  import aMAntiApplyInf from '../AntiFraud/matchComponent/aMAntiApplyInf.vue' //反欺诈结论
+  import aMAntiApplyInf from './ReadComponent/RaAntiApplyInf.vue' //反欺诈结论
   import InternalMatch from "./InternalMatch";
-  import borrowerInformation from "./detailComponent/borrowerInformation";
-  import PhoneCredit from "./PhoneCredit"; //电话征信
-  import CreditApproval from "./CreditApproval";
+  import PhoneCredit from "./PhoneCredit"; //电话征信---带删掉--初审终审用
+  import RPhoneCredit from "./ReadComponent/RPhoneCredit.vue"; //电话征信-综合查询页面用
   export default {
     data() {
       return {
@@ -153,11 +154,8 @@
         tabContent2: 3,
         tabActiveInd1: 0,
         tabActiveInd2: 3,
-        items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹", "反欺诈结论", "财务信息", "流程轨迹",
-          "审批结论轨迹"
-        ],
-        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹", "反欺诈结论", "财务信息", "流程轨迹",
-          "审批结论轨迹"
+        items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信",'反欺诈结论', "流程轨迹",'审批结论轨迹'],
+        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "流程轨迹","审批结论轨迹"
         ],
         tab1Index: 0,
         tab2Index: 3,
@@ -302,7 +300,6 @@
     },
     mounted() {
       this.tastwaitingPass = JSON.parse(localStorage.getItem("Query"));
-      console.log(this.tastwaitingPass )
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.matchApplyId,
       }).then(res => {
@@ -329,9 +326,8 @@
       RcreditInvestigation, //实地征信
       aMAntiApplyInf, //反欺诈结论
       InternalMatch,
-      borrowerInformation,
       PhoneCredit,
-      CreditApproval,
+      RPhoneCredit,
       RprocessTrajectory
     }
   }

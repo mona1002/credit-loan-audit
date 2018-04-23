@@ -94,6 +94,7 @@
         query: {
           id: '',
           matchApplyId: "",
+          applySubNo:''
         },
         userInf: null,
         tableData: [],
@@ -144,6 +145,7 @@
       handleCurrentChange(val) {
         this.query.id = val.id;
         this.query.matchApplyId = val.applyId;
+        this.query.applySubNo = val.applySubno;
         localStorage.setItem("Query", JSON.stringify(this.query));
         localStorage.setItem("MatchFlag", JSON.stringify({ MatchFlag:'Query' }));
         this.$router.push('/MatchingInfQuery');

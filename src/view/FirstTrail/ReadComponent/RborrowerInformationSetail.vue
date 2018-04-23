@@ -611,14 +611,20 @@
 	        /*其他信息*/
 	        otherInfo:'',
 
-	        taskInWaitting:'',
+					taskInWaitting:'',
+					MatchFlag:''
 	      };
 	    },
 	    props:['isFull'],
 	    judgeFlag:'',
 	    mounted(){
 		    //一进入页面就发送请求
-			this.taskInWaitting = JSON.parse(localStorage.getItem('internalObj'));
+			 this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) //初审-匹配查看
+      if (this.MatchFlag.MatchFlag == 'internal') {
+    	this.taskInWaitting = JSON.parse(localStorage.getItem('internalObj'));
+      } else if (this.MatchFlag.MatchFlag == 'Query') {
+      	this.taskInWaitting = JSON.parse(localStorage.getItem("Query")) //初审-匹配查看
+      }
 			this.request(this.taskInWaitting.matchApplyId);
 			console.log(this.isFull);
 	  		if(this.isFull == false){// 分屏
