@@ -155,12 +155,11 @@
         tabActiveInd1: 0,
         tabActiveInd2: 3,
         items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信",'反欺诈结论', "流程轨迹",'审批结论轨迹'],
-        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "流程轨迹","审批结论轨迹"
-        ],
+        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "流程轨迹","审批结论轨迹"],
         tab1Index: 0,
         tab2Index: 3,
-        flag1: [true, true, true, false, true, true, true, true, true],
-        flag2: [true, true, true, true, true, true, true, true, true, true],
+        flag1: [true, true, true, false, true, true, true, true, true,true,true],
+        flag2: [true, true, true, true, true, true, true, true, true, true,true],
         AlertSearch: "",
         AlertSearchCondition: [{
           value: '选项1',
@@ -521,7 +520,8 @@
   }
 
   .Right_tab_ul_wrap ul {
-    width: 1061px;
+    /* width: 1061px; */
+    width:1200px;
     height: 48px;
     position: relative;
     text-align: left;
