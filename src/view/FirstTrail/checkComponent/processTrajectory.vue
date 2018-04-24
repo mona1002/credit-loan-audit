@@ -27,7 +27,7 @@
 					      </el-table-column>
 					      <el-table-column
 					        label="任务节点" 
-					        prop="taskNameTxt"
+					        prop="taskNodeNameTxt"
 					        min-width="170">
 					      </el-table-column>
 					      <el-table-column
@@ -66,11 +66,11 @@
 					        show-overflow-tooltip
 					        min-width="170">
 					      </el-table-column>
-					      <el-table-column
+					      <!-- <el-table-column
 					        prop=""
 					        label="审批时间"
 					        min-width="160">
-					      </el-table-column>
+					      </el-table-column> -->
 				    </el-table>
 			    </div>
 		  	</el-collapse-item>
@@ -121,7 +121,7 @@
           applyId: this.applyId,
         }).then(res => {
           console.log(res);
-          this.taskDetailList = res.data;
+          this.taskDetailList = res.data.taskDetailList;
         })
 			},
 			handleCurrentChange(){
