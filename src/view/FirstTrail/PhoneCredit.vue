@@ -479,7 +479,7 @@ export default {
     }
     //复议经理
     if (this.judgeFlag == '06') {
-      var RtaskInWaitting = JSON.parse(localStorage.getItem('RtaskInWaitting'));
+      var RtaskInWaitting = JSON.parse(localStorage.getItem('RManagertaskInWaitting'));
       this.applyId = RtaskInWaitting.applyId;
       // 进件编号
       console.log(this.applyId);

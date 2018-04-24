@@ -670,9 +670,6 @@
       }
     },
     mounted() {
-
-
-
       // 取出标志taskNodeName
       // creditApp_finalTrial_five   信审总监审批 最高级不需要 更高级审批
       //this.taskNodeName = localStorage.getItem('taskNodeName');
@@ -689,7 +686,6 @@
         this.processInstanceId = this.taskInWaitting.processInstanceId;
         // 任务状态
         this.taskStatus = JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
-
         // 反欺诈专员审批按钮，要判断下，功能角色号有配BX22的
         if (this.userInfo.roleCodesList) {
           for (var i = 0; i < this.userInfo.roleCodesList.length; i++)
