@@ -234,7 +234,8 @@ const routes = [{
   //-------------------反欺诈------------
   {
     path: '/AntiAudit',
-    component: AntiAudit
+    component: AntiAudit,
+    name:'AntiAudit'
   },
   {
     path: '/AnitAudioVisual',
@@ -253,25 +254,25 @@ const routes = [{
   // 反欺诈申请 编辑
   {
     path: '/AntiApplyEditf',
-    // name:'AntiApplyEditf',
+    name:'AntiApplyEditf',
     component: AntiApplyEditf
   },
   // 反欺诈申请列表 编辑 导航
   {
     path: '/AntiApplyEdit',
-    // name:'AntiApplyEdit',
+    name:'AntiApplyEdit',
     component: AntiApplyEdit
   },
   // 反欺诈申请 查看
   {
     path: '/AntiApplyInf',
-    // name:'AntiApplyInf',
+    name:'AntiApplyInf',
     component: AntiApplyInf
   },
   // 反欺诈申请 添加
   {
     path: '/AntiApplyAdd',
-    // name:'AntiApplyAdd',
+    name:'AntiApplyAdd',
     component: AntiApplyAdd
   },
   {

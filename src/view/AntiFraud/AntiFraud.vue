@@ -328,7 +328,6 @@
         console.log(row);
         this.$router.push({
           name: 'AntiApplyInf',
-          // path:'/AntiApplyInf',
           params: {
             id: row.id,
             applyId:row.applyId
