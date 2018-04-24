@@ -44,7 +44,8 @@
           {{mainReasonName}}
         </div>
         <div v-show="isEdit">
-          <el-select v-model="mainReason" @change="mainReasonChange">
+          <!-- <el-select v-model="mainReason" @change="mainReasonChange" ref="mainReason"> -->
+          <el-select v-model="mainReasonName" @change="mainReasonChange" ref="mainReasonName">
             <el-option v-for="item in mainReasons" :label="item.reasonName" :value="item.id">
             </el-option>
           </el-select>
@@ -59,7 +60,8 @@
           {{subreaName}}
         </div>
         <div v-show="isEdit">
-          <el-select v-model="secondReason">
+          <!-- <el-select v-model="secondReason" ref="sencondReasonName"> -->
+          <el-select v-model="subreaName" ref="sencondReasonName" @change='getSecond'>
             <el-option v-for="item in secondReasons" :label="item.reasonName" :value="item.id">
             </el-option>
           </el-select>
@@ -391,6 +393,8 @@
         secondaryReason: '',
         isLoading: false, // 审批按钮 是否加载状态
         loadingTitle: '提交', // 默认btn title
+        // mainName:'',
+        // secondaryName:''
       }
     },
     mounted() {
@@ -475,9 +479,11 @@
           this.auditResult = insertObj.auditResult; // 审核结论
           this.auditResulttext = insertObj.auditResulttext; // 审核结论 名称
           this.mainReason = insertObj.mainreasonId; // 欺诈主原因id
-          this.mainreaName = insertObj.mainReasonName, // 欺诈主原因名称
+          // this.mainreaName = insertObj.mainReasonName, // 欺诈主原因名称
+          this.mainReasonName = insertObj.mainreaName, // 欺诈主原因名称
             this.secondReason = insertObj.subreasonId; // 欺诈子原因id
-          this.subreaName = insertObj.subreaName, // 欺诈子原因名称
+          // this.subreaName = insertObj.subreaName, // 欺诈子原因名称
+          this.subreaName = insertObj.subreaName, // 欺诈子原因名称    
             this.riskSection = insertObj.riskSection; // 风险项
           this.auditDesc = insertObj.auditDesc; // 反欺诈决策反馈
           this.caseNum = insertObj.caseNum; // 案件编号 caseNum
@@ -494,6 +500,7 @@
           // }
           // 请求风险项
           // this.getRiskItems();
+           console.log('顶顶顶顶顶顶顶顶顶顶')
         }
         // 请求风险项
         this.getRiskItems();
@@ -544,6 +551,8 @@
           // if (insertObj.mainreasonId) {
           //   this.getReason('second', this.mainReasonT, true);
           // }
+         
+          
         } else {
           // 反欺诈主管 请求 反欺诈历史信息
           this.queryCreauditOpinionObj();
@@ -975,18 +984,26 @@
             break;
           case 'save':
             // 点击保存 
+              this.mainReasonName=this.$refs.mainReasonName.selectedLabel;
+             this.subreaName=this.$refs.sencondReasonName.selectedLabel;
             var tempObj = {
               auditResult: this.auditResult, // 审核结论
               auditResulttext: this.auditResulttext, // 审核结论 名称
               mainreasonId: this.mainReason, // 欺诈主原因id
+              // mainreaName: this.mainReasonName, // 欺诈主原因名称
               mainreaName: this.mainReasonName, // 欺诈主原因名称
               subreasonId: this.secondReason, // 欺诈子原因id
+              // subreaName: this.subreaName, // 欺诈子原因名称
               subreaName: this.subreaName, // 欺诈子原因名称
               riskSection: this.riskSection, // 风险项
               auditDesc: this.auditDesc, // 反欺诈决策反馈
               caseNum: this.caseNum, // 案件编号 caseNum
               caseDesc: this.caseDesc, // 案件描述
             }
+            //  console.log(this.$refs.mainReasonName.selectedLabel)
+            //  this.mainName=this.$refs.mainReasonName.selectedLabel;
+            //  this.secondaryName=this.$refs.sencondReasonName.selectedLabel;
+             console.log(12343567890, this.mainName,this.secondaryName)
             // 点击保存 存本地
             localStorage.setItem('saveInsertObj', JSON.stringify(tempObj));
             // 保存 成功
@@ -1447,8 +1464,12 @@
       // 主原因更改
       mainReasonChange(val) {
         this.getReason('second', val, true);
+        this.mainReason=val;
+      },
+      getSecond(val){
+        console.log(val);
+        this.secondReason=val;
       }
-
     },
     watch: {
       // 审核结论 改变请求主原因
