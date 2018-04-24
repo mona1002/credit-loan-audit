@@ -222,7 +222,8 @@
           nodeName = '复议经理审批';
           RoutePath = '/reconsiderList'
           routeParams = '?taskNodeName=' + val.taskNodeName+"&flag=06";
-          localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass));
+          // localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass));
+          localStorage.setItem("ReManagerWorkbenchPass", JSON.stringify(this.workbenchPass));
           // localStorage.setItem("ReManagerWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge));
         }

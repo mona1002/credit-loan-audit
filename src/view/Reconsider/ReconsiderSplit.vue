@@ -85,7 +85,7 @@
   export default {
     data() {
       return {
-        taskName:'',
+        taskName: '',
         Rcon: 0,
         custName: "",
         SplitLeft: "left",
@@ -143,12 +143,16 @@
     },
     mounted() {
       // 复议不用flag判断，列表页专员、主管存的同一个字段
-      this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting"));
-      // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      if (this.judgeFlag.flag == '05') {
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
+      } else if (this.judgeFlag.flag == '06') {
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("RManagertaskInWaitting")) //复议经理
+      }
       this.taskName = JSON.parse(localStorage.getItem("RtaskInWaitting")).taskName;
-      if (this.taskName == 'reconsiderApp_commissioner') {//复议专员结论
+      if (this.taskName == 'reconsiderApp_commissioner') { //复议专员结论
         this.Rcon = 1;
-      } else if (this.taskName == 'reconsiderApp_manager') {//复议经理结论
+      } else if (this.taskName == 'reconsiderApp_manager') { //复议经理结论
         this.Rcon = 2;
       }
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
@@ -156,7 +160,7 @@
       }).then(res => {
         if (res.statusCode == 200) {
           this.custName = res.data.accepCusBasicInfo.custName;
-           this.customInf = res.data;
+          this.customInf = res.data;
         } else {
           this.$message.error(res.msg);
         }
@@ -184,6 +188,7 @@
   .SplitScreen {
     height: 100%;
   }
+
   /* 激活样式 流-css */
 
   .tab1Default {
@@ -210,6 +215,7 @@
   .setGray {
     color: #bfcbd9;
   }
+
   /*-------------------------------- */
 
   .SplitScreen_content {
@@ -218,6 +224,7 @@
     overflow: auto;
     padding: 13px 9px;
   }
+
   /* 借款人详情 */
 
   .PerDtl {
@@ -238,7 +245,9 @@
   .PerDtl span:nth-of-type(7) {
     width: 105px;
   }
+
   /* 切换按钮 */
+
   /* 左右分屏 */
 
   .SplitScreen_wrap {
@@ -257,7 +266,9 @@
     float: left;
     position: relative;
   }
+
   /* 左屏 */
+
   /* 左侧详情 p标签   流-css */
 
   .right .Right_tab_title_div,
@@ -276,6 +287,7 @@
     text-align: right;
     padding-right: 40px;
   }
+
   /* 左侧详情 content div 内容   流-css */
 
   .Left_right_BigImg {
@@ -283,7 +295,9 @@
     height: calc( 100% - 48px);
     overflow: auto;
   }
+
   /* 右屏 */
+
   /* 右侧tab切换头外的ul   流 */
 
   .Right_tab_ul_wrap {
@@ -307,6 +321,7 @@
     height: 38px;
     line-height: 38px;
   }
+
   /* ======================================================================================================= */
 
   .tab2_Content {
@@ -314,6 +329,7 @@
     height: calc( 100% - 48px);
     overflow: auto;
   }
+
   /* 右侧tab切换头 左右滑动图标  流  */
 
   .pre_next_btn_wrap {

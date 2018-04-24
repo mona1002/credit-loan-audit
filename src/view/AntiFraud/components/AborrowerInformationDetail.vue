@@ -628,7 +628,7 @@
 		        this.taskInWaitting = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
 		    }
 		    else if (this.judgeFlag.flag == '06') {
-		        this.taskInWaitting = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议经理
+		        this.taskInWaitting = JSON.parse(localStorage.getItem("RManagertaskInWaitting")) //复议经理
 		    }
 			this.request(this.taskInWaitting.applyId);
 		},

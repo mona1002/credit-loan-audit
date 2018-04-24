@@ -8,7 +8,6 @@
 					      <span class="headFont">信审流程轨迹</span>
 					    </div>
 				    </template>
-				
 				<div class="containDiv">
 				    <el-table
 				      :data="taskDetailList"

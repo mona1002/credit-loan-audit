@@ -146,9 +146,9 @@
 						this.queryParam.taskNodeName=JSON.parse(localStorage.getItem('ReWorkbenchPass')).taskNodeName;
 						this.queryParam.taskStatus=JSON.parse(localStorage.getItem('ReWorkbenchPass')).taskStatus;
 					}else if(this.judgeFlag.flag == '06'){//复议经理
-						this.queryParam.processTemplateId=JSON.parse(localStorage.getItem('ReWorkbenchPass')).processTemplateId;
-						this.queryParam.taskNodeName=JSON.parse(localStorage.getItem('ReWorkbenchPass')).taskNodeName;
-						this.queryParam.taskStatus=JSON.parse(localStorage.getItem('ReWorkbenchPass')).taskStatus;
+						this.queryParam.processTemplateId=JSON.parse(localStorage.getItem('ReManagerWorkbenchPass')).processTemplateId;
+						this.queryParam.taskNodeName=JSON.parse(localStorage.getItem('ReManagerWorkbenchPass')).taskNodeName;
+						this.queryParam.taskStatus=JSON.parse(localStorage.getItem('ReManagerWorkbenchPass')).taskStatus;
 					};
 					this.queryParam.userCode=JSON.parse(localStorage.getItem('userInf')).userCode;
 			 		this.queryParam.orgCode=JSON.parse(localStorage.getItem('userInf')).orgCode;
@@ -210,8 +210,12 @@
 			goDetail(row, event, column) {
 				console.log(row);
 					// this.$router.push({path:'/SplitScreen',query:row});
-		      this.$router.push({path:'/ReconsiderSplit'});
-		      localStorage.setItem("RtaskInWaitting",JSON.stringify(row));
+				if(this.judgeFlag.flag == '05'){
+ 						localStorage.setItem("RtaskInWaitting",JSON.stringify(row));
+				}else if(this.judgeFlag.flag == '06'){
+ 						localStorage.setItem("RManagertaskInWaitting",JSON.stringify(row));
+				}
+		     this.$router.push({path:'/ReconsiderSplit'});
 					//  this.$store.dispatch('addVisitedViews', {
           //   name:'复议详情',
 					// 	path:'/ReconsiderSplit',
