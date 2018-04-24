@@ -210,10 +210,13 @@ console.log(  this.antiFlag  )
 
       // 05 复议专员  06 复议主管
       if (this.antiFlag == '05') {
+        console.log('复议专员取值')
+        
         this.creditappTaskid = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
         this.taskName = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskName;
         this.currentTemplateId = 'reconsiderApp';
       } if ( this.antiFlag == '06') {
+        console.log('复议经理取值')
         this.creditappTaskid = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).taskId;
         this.taskName = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).taskName;
         this.currentTemplateId = 'reconsiderApp';
@@ -282,7 +285,7 @@ console.log(  this.antiFlag  )
       getFraudApplyInfo() {
         // 测试 id
         // this.id = 'ed353288-758d-4699-bec7-094bd6444556';
-
+console.log( '入参id'+ this.id)
         this.post('/fraudApplyInfoController/getFraudApplyInfo', {
             applyId: this.id
             // applyId:'201506260173032182'
