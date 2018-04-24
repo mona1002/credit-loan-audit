@@ -608,8 +608,8 @@
             type: 'success',
             message: '挂起成功'
           });
-          // this.$router.push('/AntiFraud34');
-          this.goToPath()
+          this.$router.push('/AntiFraud34');
+          // this.goToPath()
         });
       },
       // 请求系统时间
@@ -849,8 +849,8 @@
               message: '反欺诈审批成功!'
             });
             console.log('准备走成功的路由 ')
-            // this.$router.push('/AntiFraud34');
-           this.goToPath();
+            this.$router.push('/AntiFraud34');
+          //  this.goToPath();
           });
         } else {
           // 专员的 提交  
@@ -919,8 +919,8 @@
               type: 'success',
               message: '反欺诈审批成功!'
             });
-            // this.$router.push('/AntiFraud34');
-            this.goToPath();
+            this.$router.push('/AntiFraud34');
+            // this.goToPath();
           });
         }
 
@@ -1134,8 +1134,8 @@
               type: 'success'
             })
 
-            // this.$router.push('/AntiFraud34');
-            this.goToPath();
+            this.$router.push('/AntiFraud34');
+            // this.goToPath();
           }
         });
       },
@@ -1352,16 +1352,16 @@
           }
         })
       },
-      goToPath() {
-        this.$router.push('/AntiFraud34' +  this.routeParams);
-        this.$store.dispatch('addVisitedViews', {
-          name: this.nodeName,
-          path: '/AntiFraud34',
-          flag: this.judgeFlag,
-          params: this.routeParams,
-          StatefullPath: '/AntiFraud34' +  this.routeParams,
-        })
-      },
+      // goToPath() {
+      //   this.$router.push('/AntiFraud34' +  this.routeParams);
+      //   this.$store.dispatch('addVisitedViews', {
+      //     name: this.nodeName,
+      //     path: '/AntiFraud34',
+      //     flag: this.judgeFlag,
+      //     params: this.routeParams,
+      //     StatefullPath: '/AntiFraud34' +  this.routeParams,
+      //   })
+      // },
       mainReasonChange(val) {
         //   console.log(val);
         //   // 主原因改变 请求子原因
