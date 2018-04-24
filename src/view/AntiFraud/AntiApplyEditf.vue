@@ -164,7 +164,7 @@
       }
     },
     mounted() {
-      console.log(this.showFqz);
+      // console.log(this.showFqz);
       // 经办人 登录用户名
       var userInfo = JSON.parse(localStorage.getItem('userInf'));
       this.userCode = userInfo.userCode;
