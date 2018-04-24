@@ -224,13 +224,13 @@ console.log(  this.antiFlag  )
 
       //   this.getFraudApplyInfoWithOpinionById();
       // }
-      var stateParms = JSON.parse(localStorage.getItem('antiApplyFlag')).split(';');
-      for (var i = 0; i < stateParms.length; i++) {
-        stateParms[i] = stateParms[i].split('=');
-      }
-      this.routeId = stateParms[0][1];
-      this.routeFlag = stateParms[1][1];
-      this.routeBusiState = stateParms[2][1];
+      // var stateParms = JSON.parse(localStorage.getItem('antiApplyFlag')).split(';');
+      // for (var i = 0; i < stateParms.length; i++) {
+      //   stateParms[i] = stateParms[i].split('=');
+      // }
+      // this.routeId = stateParms[0][1];
+      // this.routeFlag = stateParms[1][1];
+      // this.routeBusiState = stateParms[2][1];
 
       //  JSON.stringify($scope.addalerts);
       // 获取到 id

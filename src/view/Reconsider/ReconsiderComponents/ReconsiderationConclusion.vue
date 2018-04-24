@@ -1115,7 +1115,7 @@
       },
       //反欺诈申请
       AntiFraudApplication() {
-        var  routeParms= 'id='+this.applyId+';flag=fuyi;busiState=20'
+        // var  routeParms= 'id='+this.applyId+';flag=fuyi;busiState=20'
         this.$router.push({
           name: 'AntiApplyEditf',
           params: {
@@ -1124,14 +1124,14 @@
             busiState: '20',
           }
         });
-        localStorage.setItem("antiApplyFlag", JSON.stringify(routeParms));
-        this.$store.dispatch('addVisitedViews', {
-                name: '反欺诈申请',
-                path: '/AntiApplyEditf',
-                flag:'05',
-                params: '',
-                StatefullPath: '/AntiApplyEditf',
-              })
+        // localStorage.setItem("antiApplyFlag", JSON.stringify(routeParms));
+        // this.$store.dispatch('addVisitedViews', {
+        //         name: '反欺诈申请',
+        //         path: '/AntiApplyEditf',
+        //         flag:'05',
+        //         params: '',
+        //         StatefullPath: '/AntiApplyEditf',
+        //       })
       },
       // 审批结论轨迹
       getSpjlList() {
@@ -1177,13 +1177,13 @@
             this.$router.push({
               path: '/PneCtrl'
             });
-             this.$store.dispatch('addVisitedViews', {
-                  name: '大数据风控',
-                  path: '/PneCtrl',
-                  flag: '05',
-                  params: '',
-                  StatefullPath: '/PneCtrl',
-                })
+            //  this.$store.dispatch('addVisitedViews', {
+            //       name: '大数据风控',
+            //       path: '/PneCtrl',
+            //       flag: '05',
+            //       params: '',
+            //       StatefullPath: '/PneCtrl',
+            //     })
           }
         });
       },
@@ -1212,13 +1212,13 @@
           this.$router.push({
             path: '/SocialSe'
           });
-            this.$store.dispatch('addVisitedViews', {
-                name: '社保公积金',
-                path: '/SocialSe',
-                flag: '05',
-                params: '',
-                StatefullPath: '/SocialSe',
-              })
+            // this.$store.dispatch('addVisitedViews', {
+            //     name: '社保公积金',
+            //     path: '/SocialSe',
+            //     flag: '05',
+            //     params: '',
+            //     StatefullPath: '/SocialSe',
+            //   })
         }
       },
       //社保公积金 弹窗关闭
