@@ -21,12 +21,12 @@
 				      	min-width="50" >
 				      </el-table-column>
 				      <el-table-column
-				        prop="estateTypeTxt"
+				        prop="estateType"
 				        label="房产类型"
 				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
-				        prop="propertyTypeTxt"
+				        prop="propertyType"
 				        label="产权性质"
 				        min-width="100">
 				      </el-table-column>
@@ -113,12 +113,12 @@
 				        min-width="120">
 				      </el-table-column>
 				      <el-table-column
-				        prop="isYearCheckTxt"
+				        prop="isYearCheck"
 				        label="是否年检"
 				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
-				        prop="isOperateTxt"
+				        prop="isOperate"
 				        label="是否非运营"
 				        min-width="100">
 				      </el-table-column>
@@ -128,7 +128,7 @@
 				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
-				        prop="carTypeTxt"
+				        prop="carType"
 				        label="车辆类型"
 				        min-width="100">
 				      </el-table-column>
@@ -153,7 +153,7 @@
 				        min-width="100">
 				      </el-table-column>
 				      <el-table-column
-				        prop="buyInsurTxt"
+				        prop="buyInsur"
 				        label="车辆已购保险"
 				        min-width="110">
 				      </el-table-column>
@@ -643,7 +643,7 @@
 		        /*console.log(res);*/
 		        /*房产信息*/
 		        if(res.data.borestateList != ''){
-		        	this.borestateList=res.data.borestateList;
+							this.borestateList=res.data.borestateList;
 			        for(var i=0;i<this.borestateList.length;i++){
 			        	if(this.borestateList[i].estateType=='01'){
 			        		this.borestateList[i].estateType = '租用'
