@@ -796,11 +796,12 @@
         }]
       } else if (this.judgeFlag == '02') {
         // this.opinionFlag = '02'; // 终审
-        this.options = [{
-            "label": "申请登记",
-            "value": "creditApp_apply",
-            "type": "01"
-          },
+        this.options = [
+          // {
+          //   "label": "申请登记",
+          //   "value": "creditApp_apply",
+          //   "type": "01"
+          // },
           {
             "label": "初审审批",
             "value": "creditApp_firstTrial",
