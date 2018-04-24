@@ -209,9 +209,13 @@ console.log(  this.antiFlag  )
       }
 
       // 05 复议专员  06 复议主管
-      if (this.antiFlag == '05' || this.antiFlag == '06') {
+      if (this.antiFlag == '05') {
         this.creditappTaskid = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
         this.taskName = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskName;
+        this.currentTemplateId = 'reconsiderApp';
+      } if ( this.antiFlag == '06') {
+        this.creditappTaskid = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).taskId;
+        this.taskName = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).taskName;
         this.currentTemplateId = 'reconsiderApp';
       }
 
