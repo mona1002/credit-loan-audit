@@ -165,7 +165,7 @@
 				<ul class="illustration">
 					<li>
 						<label>借款人其他联系方式：</label>
-						<div>{{accepCusBasicInfo.otherContacts}}</div>
+						<span>{{accepCusBasicInfo.otherContacts}}</span>
 					</li>
 				</ul>
 				<ul>
@@ -373,9 +373,9 @@
 				</ul>
 				<ul class="illustration">
 					<li>
-						<label>企业经营项目说明：</label>
+						<label >企业经营项目说明：</label>
 						<el-tooltip class="item" effect="dark" :content="accepCusPrivate.projectManage" :disabled="accepCusPrivate.projectManage==null" placement="top-start">
-					      <div>{{accepCusPrivate.projectManage}}</div>
+					      <span>{{accepCusPrivate.projectManage}}</span>
 					    </el-tooltip>
 					</li>
 				</ul>
