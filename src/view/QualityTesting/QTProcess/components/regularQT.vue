@@ -137,7 +137,7 @@
         // tab: ["客户本人", "单位电话", "家庭联系人", "工作证明人", "其他联系人"],
         regularInfo: [{
           title: '申请表是否符合要求',
-          conclution:data.isForm,
+          conclution:1,
           comment: ''
         }, {
           title: '身份证证明是否符合要求',
