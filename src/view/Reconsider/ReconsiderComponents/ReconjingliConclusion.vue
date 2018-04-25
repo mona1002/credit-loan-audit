@@ -606,7 +606,7 @@
       //流程实例id
 			this.processInstanceId = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).processInstanceId;
 			console.log(JSON.parse(localStorage.getItem('RManagertaskInWaitting')))
-			console.log(this.processTemplateId)
+			console.log(this.processInstanceId)
       //任务id
       this.taskId = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).taskId;
       this.proCode = this.applicationInformationDetail.proCode;
