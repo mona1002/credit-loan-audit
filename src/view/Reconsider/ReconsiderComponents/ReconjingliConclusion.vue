@@ -604,7 +604,9 @@
       //流程模版ID
       this.processTemplateId = JSON.parse(localStorage.getItem('ReWorkbenchPass')).processTemplateId;
       //流程实例id
-      this.processInstanceId = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).processInstanceId;
+			this.processInstanceId = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).processInstanceId;
+			console.log(JSON.parse(localStorage.getItem('RManagertaskInWaitting')))
+			console.log(this.processTemplateId)
       //任务id
       this.taskId = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).taskId;
       this.proCode = this.applicationInformationDetail.proCode;
@@ -1294,7 +1296,8 @@
 		    },
 		    // 流程轨迹
 		    getLcgjList() {
-  			  this.lcdialogVisible = true;
+					this.lcdialogVisible = true;
+					console.log(this.processInstanceId )
 		      this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processInstanceId)
 		        .then(res => {
 		          console.log(res);
