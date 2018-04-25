@@ -232,6 +232,7 @@
         route.fullPath.indexOf('?') != -1 ? this.taskNodeName = route.fullPath.split('?')[1].split('&')[0].split('=')[1] :
           this.taskNodeName;
         this.routeParams = '';
+        this.nodeFlag='';
         if (!route) {
           return false
         }
@@ -297,7 +298,7 @@
           }
         } else if (route.path == '/ReconsiderSplit') { //复议详情
           this.nodeName = "复议详情";
-          this.nodeFlag = "";
+          // this.nodeFlag = "";
           // this.routeParams = '';
         } else if (route.path == '/historicalTask') { // 任务管理-信审历史任务
           this.nodeName = "信审历史任务";

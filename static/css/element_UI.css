@@ -896,7 +896,7 @@ height: 40px;
 /* 信审表-折叠面板title 后面的icon倾斜 */
 
 .CreditForm .el-collapse-item__arrow,
-.tb .el-collapse-item__arrow, 
+.regularQT .el-collapse-item__arrow, 
 .SSComp .el-collapse-item__arrow {
   line-height: 40px;
 }
@@ -934,7 +934,7 @@ height: 40px;
 /* 信审表-去掉所有重复paddingbottom值 */
 
 .CreditForm .el-collapse-item__content,
-.tb .el-collapse-item__content,
+.regularQT .el-collapse-item__content,
 .SSComp .el-collapse-item__content{
   padding-bottom: 0;
 }
@@ -953,7 +953,7 @@ height: 40px;
 
 .CreditForm .el-collapse-item__header,
 .aAntiApplyInf .el-collapse-item__header,
-.tb .el-collapse-item__header,
+.regularQT .el-collapse-item__header,
 .SSComp .el-collapse-item__header{
   border: 1px solid silver;
   background: #eef0f9;
@@ -968,7 +968,7 @@ height: 40px;
 
 .CreditForm .el-collapse-item,
 .aAntiApplyInf .el-collapse-item,
-.tb .el-collapse-item,
+.regularQT .el-collapse-item,
 .SSComp .el-collapse-item {
   position: relative
 }

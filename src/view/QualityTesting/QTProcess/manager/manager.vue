@@ -46,27 +46,44 @@
       </div>
       <div class="table_wrap">
         <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" height="100%" @current-change="handleCurrentChange" border>
-          <el-table-column type="index" align='center' label=序号 width="55">
+         <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%"  height="100%" border @selection-change="handleSelectionChange">
+          <el-table-column type="selection" width="35">
           </el-table-column>
-          <el-table-column prop="applySubno" label="进件编号" align='center' min-width="180">
+           <el-table-column type="index" align='center' label=序号 width="55">
+          </el-table-column>
+            <el-table-column prop="applySubno" label="主进件编号" align='center' min-width="180">
+          </el-table-column>
+           <el-table-column prop="applySubno" label="进件编号" align='center' min-width="180">
           </el-table-column>
           <el-table-column prop="custName" label="客户名称" align='center' min-width="120">
           </el-table-column>
+              <el-table-column prop="certCode" label="证件类型" align='center' min-width="180">
+          </el-table-column>
           <el-table-column prop="certCode" label="证件号码" align='center' min-width="180">
           </el-table-column>
-          <el-table-column prop="mobile" label="初审姓名" align='center' min-width="130">
+           <el-table-column prop="mobile" label="产品名称" align='center' min-width="130">
           </el-table-column>
-          <el-table-column prop="appDate" label="终审姓名" align='center' min-width="130">
+          <el-table-column prop="appDate" label="初审姓名" align='center' min-width="130">
           </el-table-column>
-          <el-table-column prop="proName" label="进入本环节时间" align='center' min-width="180">
+          <el-table-column prop="proName" label="初审日期" align='center' min-width="180">
           </el-table-column>
-          <el-table-column prop="operOrgName" label="分派人员" align='center' min-width="120">
+          <el-table-column prop="operOrgName" label="终审姓名" align='center' min-width="120">
           </el-table-column>
-          <el-table-column prop="busiStateTxt" label="质检状态" align='center' min-width="100">
+          <el-table-column prop="busiStateTxt" label="终审日期" align='center' min-width="100">
           </el-table-column>
-          <el-table-column prop="reconStateTxt" label="任务类型" align='center' min-width="100">
+          <el-table-column prop="reconStateTxt" label="合规专员" align='center' min-width="100">
           </el-table-column>
+            <el-table-column prop="reconStateTxt" label="合规质检日期" align='center' min-width="130">
+          </el-table-column>
+            <el-table-column prop="reconStateTxt" label="质检状态" align='center' min-width="100">
+          </el-table-column>
+            <el-table-column prop="reconStateTxt" label="质检结果" align='center' min-width="100">
+          </el-table-column>
+               <el-table-column prop="reconStateTxt" label="任务类型" align='center' min-width="100">
+          </el-table-column>
+          <!-- <el-table-column label="日期" width="120">
+            <template slot-scope="scope">{{ scope.row.date }}</template>
+          </el-table-column> -->
         </el-table>
         <!-- 分页  -->
         <div class="paging">
@@ -79,8 +96,8 @@
   </div>
 </template>
 <script>
-  import myHead from '../../header.vue';
-  import baseU from '../../../util/constant';
+  import myHead from '../../../header.vue';
+  import baseU from '../../../../util/constant';
   export default {
     data() {
       return {
@@ -89,7 +106,7 @@
           matchApplyId: "",
         },
         userInf: null,
-        tableData: [],
+        // tableData: [],
         reg: /(\w{6})\w*(\w{4})/,
         Telreg: /(\w{7})\w*/,
         reVal: '$1********$2',
@@ -105,6 +122,36 @@
         // currentPage: 1, //分页选中页
         // pageCount: 10, // 每页显示条数
         // totalRecord: 0, //总条数
+         tableData: [{
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-08',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-06',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-07',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }],
+        multipleSelection: [],
         value:'',
 
     QTSituation:[{
@@ -142,6 +189,18 @@
       }
     },
     methods: {
+         toggleSelection(rows) {
+        if (rows) {
+          rows.forEach(row => {
+            this.$refs.multipleTable.toggleRowSelection(row);
+          });
+        } else {
+          this.$refs.multipleTable.clearSelection();
+        }
+      },
+      handleSelectionChange(val) {
+        this.multipleSelection = val;
+      },
       num(el, val) {
         switch (el) {
           case 'Subno':

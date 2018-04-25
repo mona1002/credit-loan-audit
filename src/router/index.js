@@ -87,13 +87,13 @@ import SocialSe from '../view/SocialSeAndPneCtrl/SocialSe.vue' //社保公积金
 import MatchingInfQuery from '../view/FirstTrail/MatchingInfQuery.vue'
 import AudioVisualLeft from '../view/FirstTrail/detailComponent/AudioVisualLeft.vue'
 import IntegratedQuery from '../view/QualityTesting/FunctionalityPages/IntegratedQuery.vue'
-import commissioner from '../view/QualityTesting/QTProcess/commissioner.vue'
-import manager from '../view/QualityTesting/QTProcess/manager.vue'
-// import manager from ''
-// import manager from ''
-// import manager from ''
-// import manager from ''
-// import manager from ''
+import commissioner from '../view/QualityTesting/QTProcess/commissioner/commissioner.vue'//质检专员任务列表
+import manager from '../view/QualityTesting/QTProcess/manager/manager.vue'//质检主管页面
+import regularQT from '../view/QualityTesting/QTProcess/components/regularQT.vue'//首次常规质检
+import specialQT from '../view/QualityTesting/QTProcess/components/specialQT.vue'//首次专纵向质检
+import regularANDspecialQT from '../view/QualityTesting/QTProcess/components/regularANDspecialQT.vue'//常规质检又抽中专纵向质检
+// import manager from ''//首次常规质检
+// import manager from ''//首次常规质检
 
 // commissioner//质检专员列表
 // manager//质检主管列表
@@ -392,17 +392,17 @@ const routes = [{
   {
     path: '/manager',
     component: manager
+  }, {
+    path: '/regularQT',
+    component: regularQT
+  }, {
+    path: '/specialQT',
+    component: specialQT
+  }, {
+    path: '/regularANDspecialQT',
+    component: regularANDspecialQT
   }, 
   // {
-  //   path: '/tes',
-  //   component: tes
-  // }, {
-  //   path: '/tes',
-  //   component: tes
-  // }, {
-  //   path: '/tes',
-  //   component: tes
-  // }, {
   //   path: '/tes',
   //   component: tes
   // }, {
