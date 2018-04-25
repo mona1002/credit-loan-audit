@@ -582,7 +582,7 @@
       }
     },
     mounted() {
-			alert(JSON.parse(localStorage.getItem('RManagertaskInWaitting')))
+			// alert(JSON.parse(localStorage.getItem('RManagertaskInWaitting')))
 			
       //申请单ID
       this.id = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).applyId;
@@ -608,7 +608,7 @@
       //流程实例id
 			this.processInstanceId = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).processInstanceId;
 			// console.log(this.processInstanceId)
-			alert(this.processInstanceId)
+			// alert(this.processInstanceId)
       //任务id
       this.taskId = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).taskId;
       this.proCode = this.applicationInformationDetail.proCode;
