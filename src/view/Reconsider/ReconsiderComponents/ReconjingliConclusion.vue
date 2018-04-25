@@ -64,6 +64,7 @@
 	    	<el-dialog
 			  title='回退信息'
 			  :visible.sync="dialogVisible"
+				 :modal="false"
 			  width="860px"
 			  top="20vh">
 			  <div class="huituiBody">
@@ -132,6 +133,7 @@
 	    	<el-dialog
 			  title='拒绝原因'
 			  :visible.sync="jdialogVisible"
+				 :modal="false"
 			  width="860px"
 			  top="20vh">
 			  <div class="huituiBody">
@@ -189,9 +191,10 @@
 	    	<el-dialog
 			  title='审批信息'
 			  :visible.sync="sdialogVisible"
+				 :modal="false"
 			  width="860px"
 			  height="860px"
-			  top="16vh">
+			  top="10vh">
 			  <div class="shenpiBody">
 			  	<el-collapse v-model="activeNames" @change="handleChange">
 			  		<el-collapse-item title="申请信息" name="1">
@@ -294,6 +297,7 @@
 	    	<el-dialog
 			  title='复议审批轨迹'
 			  :visible.sync="sldialogVisible"
+				 :modal="false"
 			  width="860px"
 			  top="20vh">
 			  <div class="splcBody">
@@ -382,6 +386,7 @@
 	    	<el-dialog
 			  title='流程轨迹'
 			  :visible.sync="lcdialogVisible"
+				 :modal="false"
 			  width="860px"
 			  top="20vh">
 			  <div class="splcBody">
@@ -454,6 +459,7 @@
 			<el-dialog
 			  title="提示"
 			  :visible.sync="bigDataLogVisible"
+				 :modal="false"
 			  width="420px"
 			  top="35vh">
 			  <span>此进件不存在大数据风控明细！</span>
@@ -467,6 +473,7 @@
 			<el-dialog
 			  title="提示"
 			  :visible.sync="socialLogVisible"
+				 :modal="false"
 			  width="420px"
 			  top="35vh">
 			  <span>客户社保公积金未授权！</span>
