@@ -25,6 +25,80 @@
         </div>
       </el-collapse-item>
     </el-collapse>
+        <!-- 资料核实 -->
+    <el-collapse v-model="activeNames">
+      <el-collapse-item name="2">
+        <template slot="title">
+          <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+          <span class="headFont">资料核实</span>
+        </template>
+        <div class="CreditForm_CheckId">
+          <el-table :data="tableData" border style="width: 100%">
+            <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
+            <el-table-column label="核实类型" align="left" width="220">
+              <template slot-scope="scope">
+                <span style="margin-left: 10px">
+                  <b style="color:red;fontWeight:700px"> * </b>{{ scope.row.title }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column label="核实结论" align="center" width="180">
+              <template slot-scope="scope">
+                <div slot="reference" class="name-wrapper">
+                  <el-radio-group v-model="scope.row.conclution" @change="clearContent(scope.row)">
+                    <el-radio :label="1">是</el-radio>
+                    <el-radio :label="2">否</el-radio>
+                  </el-radio-group>
+                </div>
+              </template>
+            </el-table-column>
+            <el-table-column label="备注（非必填）" align="center" min-width="180">
+              <template slot-scope="scope">
+                <el-input type="textarea" v-if="scope.row.conclution=='2'" :rows="2" resize="none" v-model="scope.row.comment" :maxlength="this.textareaL"
+                  placeholder="请输入内容">
+                </el-input>
+               </template>
+            </el-table-column>
+          </el-table>
+        </div>
+      </el-collapse-item>
+    </el-collapse>
+        <!-- 三方信息查询=====后两个选否弹出未改 -->
+    <el-collapse v-model="activeNames">
+      <el-collapse-item name="3">
+        <template slot="title">
+          <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+          <span class="headFont">三方信息查询</span>
+        </template>
+        <div class="CreditForm_CheckId">
+          <el-table :data="InforSearch" style="width: 100%">
+            <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
+            <el-table-column label="查询类型" align="left" width="350">
+              <template slot-scope="scope">
+                <span style="margin-left: 10px">
+                  <b style="color:red;fontWeight:700px"> * </b>{{ scope.row.title }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column label="查询结论" align="center" width="180">
+              <template slot-scope="scope">
+                <div slot="reference" class="name-wrapper">
+                  <el-radio-group v-model="scope.row.conclution" @change="clearContent(scope.row)">
+                    <el-radio :label="1">是</el-radio>
+                    <el-radio :label="2">否</el-radio>
+                  </el-radio-group>
+                </div>
+              </template>
+            </el-table-column>
+            <el-table-column label="备注（非必填）" align="center" min-width="180">
+              <template slot-scope="scope">
+                <el-input type="textarea" v-if="scope.row.conclution=='1'" :rows="2" resize="none" v-model="scope.row.comment" :maxlength="this.textareaL"
+                  placeholder="请输入内容">
+                </el-input>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+      </el-collapse-item>
+    </el-collapse>
   </div>
 </template>
 <script>
@@ -59,90 +133,90 @@
         // currentRow: null,
         activeNames: ['0', '1', "2", "3", "4", "5", "6", "7", "8"], //折叠面板 默认显示下标
         // tab: ["客户本人", "单位电话", "家庭联系人", "工作证明人", "其他联系人"],
-        // tableData: [{
-        //   title: '申请表是否符合要求',
-        //   conclution: 1,
-        //   comment: ''
-        // }, {
-        //   title: '身份证证明是否符合要求',
-        //   conclution: 1,
-        //   comment: ''
-        // }, {
-        //   title: '收入证明是否符合要求',
-        //   conclution: 1,
-        //   comment: ''
-        // }, {
-        //   title: '工作证明是否符合要求',
-        //   conclution: 1,
-        //   comment: ''
-        // }, {
-        //   title: '房产资料是否符合要求',
-        //   conclution: 1,
-        //   comment: ''
-        // }, {
-        //   title: '居住证明是否符合要求',
-        //   conclution: 1,
-        //   comment: ''
-        // }, {
-        //   title: '经营证明是否符合要求',
-        //   conclution: 1,
-        //   comment: ''
-        // }, {
-        //   title: '信用报告是否符合要求',
-        //   date: '2016-05-03',
-        //   conclution: 1,
-        //   comment: ''
-        // }, {
-        //   title: '客户流水是否符合要求',
-        //   conclution: 1,
-        //   comment: ''
-        // }, {
-        //   title: '客户其他资料是否符合要求',
-        //   date: '2016-05-03',
-        //   conclution: 1,
-        //   comment: ''
-        // }, {
-        //   title: '负债计算是否正确',
-        //   conclution: null,
-        //   comment: ''
-        // }, {
-        //   title: '流水计算是否正确',
-        //   conclution: null,
-        //   comment: ''
-        // }, {
-        //   title: '征信录入是否正确',
-        //   conclution: null,
-        //   comment: ''
-        // }],
-        // InforSearch: [{
-        //   title: '客户在人法网是否有被执行信息',
-        //   conclution: null,
-        //   comment: ''
-        // }, {
-        //   title: '客户在失信网是否有失信记录',
-        //   conclution: null,
-        //   comment: ''
-        // }, {
-        //   title: '网上搜索借款人的手机是否有异常',
-        //   conclution: null,
-        //   comment: ''
-        // }, {
-        //   title: '网上搜索借款人现居住地址和房产地址是否异常',
-        //   conclution: null,
-        //   comment: ''
-        // }, {
-        //   title: '当地工商网查询企业基本信息中是否有登记',
-        //   conclution: null,
-        //   comment: ''
-        // }, {
-        //   title: '客户工作单位在全国组织代码查询中是否存在',
-        //   conclution: null,
-        //   comment: ''
-        // }, {
-        //   title: '工商登记信息说明',
-        //   conclution: null,
-        //   comment: ''
-        // }],
+        tableData: [{
+          title: '申请表是否符合要求',
+          conclution: 1,
+          comment: ''
+        }, {
+          title: '身份证证明是否符合要求',
+          conclution: 1,
+          comment: ''
+        }, {
+          title: '收入证明是否符合要求',
+          conclution: 1,
+          comment: ''
+        }, {
+          title: '工作证明是否符合要求',
+          conclution: 1,
+          comment: ''
+        }, {
+          title: '房产资料是否符合要求',
+          conclution: 1,
+          comment: ''
+        }, {
+          title: '居住证明是否符合要求',
+          conclution: 1,
+          comment: ''
+        }, {
+          title: '经营证明是否符合要求',
+          conclution: 1,
+          comment: ''
+        }, {
+          title: '信用报告是否符合要求',
+          date: '2016-05-03',
+          conclution: 1,
+          comment: ''
+        }, {
+          title: '客户流水是否符合要求',
+          conclution: 1,
+          comment: ''
+        }, {
+          title: '客户其他资料是否符合要求',
+          date: '2016-05-03',
+          conclution: 1,
+          comment: ''
+        }, {
+          title: '负债计算是否正确',
+          conclution: null,
+          comment: ''
+        }, {
+          title: '流水计算是否正确',
+          conclution: null,
+          comment: ''
+        }, {
+          title: '征信录入是否正确',
+          conclution: null,
+          comment: ''
+        }],
+        InforSearch: [{
+          title: '客户在人法网是否有被执行信息',
+          conclution: null,
+          comment: ''
+        }, {
+          title: '客户在失信网是否有失信记录',
+          conclution: null,
+          comment: ''
+        }, {
+          title: '网上搜索借款人的手机是否有异常',
+          conclution: null,
+          comment: ''
+        }, {
+          title: '网上搜索借款人现居住地址和房产地址是否异常',
+          conclution: null,
+          comment: ''
+        }, {
+          title: '当地工商网查询企业基本信息中是否有登记',
+          conclution: null,
+          comment: ''
+        }, {
+          title: '客户工作单位在全国组织代码查询中是否存在',
+          conclution: null,
+          comment: ''
+        }, {
+          title: '工商登记信息说明',
+          conclution: null,
+          comment: ''
+        }],
         // Match: [{
         //   title: '内部匹配是否进行排查',
         //   conclution: null,
@@ -234,16 +308,15 @@
     //     console.log(this.qulityConclution)
     //     console.log(this.addTr)
     //   },
-    //   clearContent(sop) {
-    //     console.log(sop.title)
-    //     if (sop.title == '客户在人法网是否有被执行信息' || sop.title == '客户在失信网是否有失信记录' || sop.title == '网上搜索借款人的手机是否有异常' || sop.title ==
-    //       '网上搜索借款人现居住地址和房产地址是否异常') {
-    //       sop.conclution == '2' ? sop.comment = '' : '';
-    //     } else {
-    //       sop.conclution == '1' ? sop.comment = '' : '';
-    //     }
-
-    //   },
+      clearContent(sop) {
+        console.log(sop.title)
+        if (sop.title == '客户在人法网是否有被执行信息' || sop.title == '客户在失信网是否有失信记录' || sop.title == '网上搜索借款人的手机是否有异常' || sop.title ==
+          '网上搜索借款人现居住地址和房产地址是否异常') {
+          sop.conclution == '2' ? sop.comment = '' : '';
+        } else {
+          sop.conclution == '1' ? sop.comment = '' : '';
+        }
+      },
     //   add() {
     //     console.log('添加')
     //     var obj = [{

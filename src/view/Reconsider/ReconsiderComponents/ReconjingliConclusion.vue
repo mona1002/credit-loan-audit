@@ -3,7 +3,7 @@
 	<div  class="ReconsiderationConclusion">
 		<div class="header">
 	      <img src="/static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-	      <span class="headFont">概要信息</span>
+	      <span class="headFont">概要信息-复议经理</span>
 	    </div>
 	    <div class="main">
 	    	<ul class="mainUl">
@@ -582,6 +582,8 @@
       }
     },
     mounted() {
+			alert(JSON.parse(localStorage.getItem('RManagertaskInWaitting')))
+			
       //申请单ID
       this.id = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).applyId;
       this.request();
@@ -602,11 +604,11 @@
       //产品id
       this.sproId = this.applicationInformationDetail.proId;
       //流程模版ID
-      this.processTemplateId = JSON.parse(localStorage.getItem('ReWorkbenchPass')).processTemplateId;
+      this.processTemplateId = JSON.parse(localStorage.getItem('ReManagerWorkbenchPass')).processTemplateId;
       //流程实例id
 			this.processInstanceId = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).processInstanceId;
-			console.log(JSON.parse(localStorage.getItem('RManagertaskInWaitting')))
-			console.log(this.processInstanceId)
+			// console.log(this.processInstanceId)
+			alert(this.processInstanceId)
       //任务id
       this.taskId = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).taskId;
       this.proCode = this.applicationInformationDetail.proCode;
