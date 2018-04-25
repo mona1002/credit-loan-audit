@@ -10,16 +10,16 @@
         <div class="CreditForm_CheckId">
           <ul>
             <li>
-              <p>客户名称：{{ }} </p>
-              <p>产品名称： {{ }}</p>
+              <p>客户名称：{{baseInfo.custName }} </p>
+              <p>产品名称： {{baseInfo.proName }}</p>
             </li>
             <li>
-              <p>初审人员：{{ }} </p>
-              <p>初审日期：{{ }} </p>
+              <p>初审人员：{{baseInfo.auditNamec }} </p>
+              <p>初审日期：{{baseInfo.auditDatec }} </p>
             </li>
             <li>
-              <p>终审人员：{{ }} </p>
-              <p>终审日期：{{ }} </p>
+              <p>终审人员：{{baseInfo.auditNamez }} </p>
+              <p>终审日期：{{baseInfo.auditDatez }} </p>
             </li>
           </ul>
         </div>
@@ -33,7 +33,7 @@
           <span class="headFont">资料核实</span>
         </template>
         <div class="CreditForm_CheckId">
-          <el-table :data="tableData" border style="width: 100%">
+          <el-table :data="regularInfo" border style="width: 100%">
             <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
             <el-table-column label="核实类型" align="left" width="220">
               <template slot-scope="scope">
@@ -81,7 +81,7 @@
             <el-table-column label="查询结论" align="center" width="180">
               <template slot-scope="scope">
                 <div slot="reference" class="name-wrapper">
-                  <el-radio-group v-model="scope.row.conclution" @change="clearContent(scope.row)">
+                  <el-radio-group v-model="scope.row.conclution" @change="clearContent(scope.row,scope.value)">
                     <el-radio :label="1">是</el-radio>
                     <el-radio :label="2">否</el-radio>
                   </el-radio-group>
@@ -105,6 +105,8 @@
   export default {
     data() {
       return {
+        baseInfo:'',//基本信息
+        regularInfo:'',
         // tableData1: [{
         //   date: '2016-05-02',
         //   name: '王小虎',
@@ -133,9 +135,9 @@
         // currentRow: null,
         activeNames: ['0', '1', "2", "3", "4", "5", "6", "7", "8"], //折叠面板 默认显示下标
         // tab: ["客户本人", "单位电话", "家庭联系人", "工作证明人", "其他联系人"],
-        tableData: [{
+        regularInfo: [{
           title: '申请表是否符合要求',
-          conclution: 1,
+          conclution:data.isForm,
           comment: ''
         }, {
           title: '身份证证明是否符合要求',
@@ -290,7 +292,24 @@
 
       }
     },
+    props:['propApplyId'],
     methods: {
+      // 质检页面查询接口
+      referPort(){
+                this.get("/insConclusion/queryInsConclusionObj", {
+          applyId: this.propApplyId,//入参待更新+测试-------------------------------------------------------
+        }).then(res => {
+          if (res.statusCode == 200) {
+          
+          //  基本信息
+          this.baseInfo=  res.data.applyBaseInfo;
+          // 资料核实+三方信息查询+ 内部匹配核实
+        this.regularInfo= res.data.insRegularInfo;  
+          } else {
+           this.$message.error(res.msg);
+          }
+        });
+      },
     //   handleEdit(index, row) {
     //     console.log(index, row);
     //   },
@@ -369,6 +388,9 @@
     //       this.others = true;
     //     }
     //   }
+    },
+    mounted(){
+
     }
   }
 

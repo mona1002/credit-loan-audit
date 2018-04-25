@@ -4,7 +4,7 @@
     <!-- <router-view class="Abody" @onbeforeunload="aaa"></router-view> -->
     <router-view class="Abody"></router-view>
 
-    <!-- <tag class="fottt"></tag> -->
+    <tag class="fottt"></tag>
   </div>
 </template>
 <script>
@@ -17,6 +17,31 @@
       myHead
     },
     methods: {
+      addfdf(){
+        // get
+        this.get("/credit/queryCityCounty", {
+          parentCode: this.checkData.workProvince,
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.hireProvincd = res.data;
+            this.checkData.workCounty = "";
+            this.checkData.workCountyName = "";
+            this.hireTown = "";
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+        //post
+         this.post("/workFlowTaskQuery/getTaskProfile", {
+          taskStatus: "01",
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.tableData = res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      },
       aaa() {
         console.log("刷新");
         //  this.$created(function(){

@@ -87,13 +87,22 @@ import SocialSe from '../view/SocialSeAndPneCtrl/SocialSe.vue' //社保公积金
 import MatchingInfQuery from '../view/FirstTrail/MatchingInfQuery.vue'
 import AudioVisualLeft from '../view/FirstTrail/detailComponent/AudioVisualLeft.vue'
 import IntegratedQuery from '../view/QualityTesting/FunctionalityPages/IntegratedQuery.vue'
-import commissioner from '../view/QualityTesting/QTProcess/commissioner/commissioner.vue'//质检专员任务列表
-import manager from '../view/QualityTesting/QTProcess/manager/manager.vue'//质检主管页面
-import regularQT from '../view/QualityTesting/QTProcess/components/regularQT.vue'//首次常规质检
-import specialQT from '../view/QualityTesting/QTProcess/components/specialQT.vue'//首次专纵向质检
-import regularANDspecialQT from '../view/QualityTesting/QTProcess/components/regularANDspecialQT.vue'//常规质检又抽中专纵向质检
-// import manager from ''//首次常规质检
-// import manager from ''//首次常规质检
+import commissioner from '../view/QualityTesting/QTProcess/commissioner/commissioner.vue' //质检专员任务列表
+import manager from '../view/QualityTesting/QTProcess/manager/manager.vue' //质检主管页面
+import regularQT from '../view/QualityTesting/QTProcess/components/regularQT.vue' //首次常规质检
+import specialQT from '../view/QualityTesting/QTProcess/components/specialQT.vue' //首次专纵向质检
+import regularANDspecialQT from '../view/QualityTesting/QTProcess/components/regularANDspecialQT.vue' //常规质检又抽中专纵向质检
+import regularConfig from '../view/QualityTesting/FunctionalityPages/regularConfig.vue'//常规抽单配置功能
+import specialConfig from '../view/QualityTesting/FunctionalityPages/specialConfig.vue'//专纵项抽单配置功能
+import batchApportion from '../view/QualityTesting/FunctionalityPages/batchApportion.vue'//质检任务批量转分派功能
+import reconsiderResult from '../view/QualityTesting/FunctionalityPages/reconsiderResult.vue'//复议结果查询功能
+// import specialConfig from ''//首次常规质检
+// import specialConfig from ''//首次常规质检
+// import specialConfig from ''//首次常规质检
+// import specialConfig from ''//首次常规质检
+// import specialConfig from ''//首次常规质检
+// import specialConfig from ''//首次常规质检
+// import specialConfig from ''//首次常规质检
 
 // commissioner//质检专员列表
 // manager//质检主管列表
@@ -235,7 +244,7 @@ const routes = [{
   {
     path: '/AntiAudit',
     component: AntiAudit,
-    name:'AntiAudit'
+    name: 'AntiAudit'
   },
   {
     path: '/AnitAudioVisual',
@@ -254,25 +263,25 @@ const routes = [{
   // 反欺诈申请 编辑
   {
     path: '/AntiApplyEditf',
-    name:'AntiApplyEditf',
+    name: 'AntiApplyEditf',
     component: AntiApplyEditf
   },
   // 反欺诈申请列表 编辑 导航
   {
     path: '/AntiApplyEdit',
-    name:'AntiApplyEdit',
+    name: 'AntiApplyEdit',
     component: AntiApplyEdit
   },
   // 反欺诈申请 查看
   {
     path: '/AntiApplyInf',
-    name:'AntiApplyInf',
+    name: 'AntiApplyInf',
     component: AntiApplyInf
   },
   // 反欺诈申请 添加
   {
     path: '/AntiApplyAdd',
-    name:'AntiApplyAdd',
+    name: 'AntiApplyAdd',
     component: AntiApplyAdd
   },
   {
@@ -380,15 +389,13 @@ const routes = [{
     path: '/IntegratedQuery',
     component: IntegratedQuery,
     // name:IntegratedQuery 
-  },
-  {
+  }, {
     path: '/MatchingInfQuery',
     component: MatchingInfQuery
-  },
-  {
+  }, {
     path: '/commissioner',
     component: commissioner
-  }, 
+  },
   {
     path: '/manager',
     component: manager
@@ -401,20 +408,19 @@ const routes = [{
   }, {
     path: '/regularANDspecialQT',
     component: regularANDspecialQT
-  }, 
-  // {
-  //   path: '/tes',
-  //   component: tes
-  // }, {
-  //   path: '/tes',
-  //   component: tes
-  // }, {
-  //   path: '/tes',
-  //   component: tes
-  // }, {
-  //   path: '/tes',
-  //   component: tes
-  // },
+  }, {
+    path: '/regularConfig',
+    component: regularConfig
+  }, {
+    path: '/specialConfig',
+    component: specialConfig
+  }, {
+    path: '/batchApportion',
+    component: batchApportion
+  }, {
+    path: '/reconsiderResult',
+    component: reconsiderResult
+  },
   // ---------------大数据+社保--------------------
   {
     path: '/PneCtrl',

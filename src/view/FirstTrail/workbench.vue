@@ -226,6 +226,19 @@
           localStorage.setItem("ReManagerWorkbenchPass", JSON.stringify(this.workbenchPass));
           // localStorage.setItem("ReManagerWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge));
+        }else if (val.taskNodeName == "reconsiderApp_commissioner") { // 质检专员 
+          this.judge.flag = nodeFlag = "07";
+          RoutePath = '/reconsiderList';
+            
+          localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass));
+          localStorage.setItem("judge", JSON.stringify(this.judge));
+        }else if (val.taskNodeName == "reconsiderApp_commissioner") { // 质检经理 
+          this.judge.flag = nodeFlag = "08";
+          RoutePath = '/reconsiderList';
+          nodeName = '复议专员审批';
+          routeParams = '?taskNodeName=reconsiderApp_commissioner&flag=05'       
+          localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass));
+          localStorage.setItem("judge", JSON.stringify(this.judge));
         }
         this.$router.push({
           path: RoutePath + routeParams,
