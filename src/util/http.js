@@ -49,9 +49,9 @@ export default {
             reject(err);      
             console.log(err)
           })
-          // .catch(error=> {
-          //   console.log(error);
-          // })
+          .catch((error)=> {
+            console.log(error);
+          })
         })
       }
 
