@@ -141,7 +141,7 @@
         isInterFlag: false,
         fixTelTab: '', // 固定电话标签
         mobileTab: '', // 移动电话标签
-
+        // MatchFlag:'internal'
       };
     },
     props: ['isFull', 'SplitS'],
@@ -286,8 +286,9 @@
         localStorage.setItem("internalObj", JSON.stringify({
           id: row.id,
           matchApplyId: row.matchApplyId,
-          isInterFlag: this.isInterFlag
+          isInterFlag: this.isInterFlag,
         }));
+         localStorage.setItem("MatchFlag", JSON.stringify({ MatchFlag:'internal' }));
         this.$router.push('/MatchingInf');
         this.goPath();
       },
@@ -371,13 +372,13 @@
         this.fetchData('company');
       },
       goPath() {
-        this.$store.dispatch('addVisitedViews', {
-          name: '匹配信息-查看',
-          path: '/MatchingInf',
-          flag: '',
-          params: '',
-          StatefullPath: '/MatchingInf',
-        })
+        // this.$store.dispatch('addVisitedViews', {
+        //   name: '匹配信息-查看',
+        //   path: '/MatchingInf',
+        //   flag: '',
+        //   params: '',
+        //   StatefullPath: '/MatchingInf',
+        // })
       }
     },
     watch: {

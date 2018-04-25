@@ -4,13 +4,14 @@
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
       <p class="PerDtl">
-        <!-- <span> 借款人： {{custName}}</span>
+        <span> 借款人： {{custName}}</span>
+        <!-- <span> 借款人： {{customInf.accepCusBasicInfo.custName}}</span> -->
         <span> 进件编号: {{customInf.applyMainNo}}</span>
         <span> 证件号码: {{customInf.accepCusBasicInfo.certCode}}</span>
         <span> 进件机构: {{customInf.appOrgName}}</span>
         <span> 门店成立时间: {{customInf.appOrgRegisterDate}}</span>
         <span> 业务员入职时间： {{customInf.salPerEmployDate}}</span>
-        <span>{{customInf.adminIntroduce}}</span> -->
+        <span>{{customInf.adminIntroduce}}</span>
       </p>
       <div class="SplitScreen_wrap" id="rWrap" ref="rWrap">
         <!-- 左侧分屏部分 -->
@@ -43,9 +44,9 @@
               <FMCreditForm v-if=" this.tabContent1==6">信审表</FMCreditForm>
               <RcreditInvestigation v-if=" this.tabContent1==7">实地征信</RcreditInvestigation>
               <aMAntiApplyInf v-if=" this.tabContent1==8">反欺诈结论</aMAntiApplyInf>
-              <RFinanceInformation v-if=" this.tabContent1==9">财务信息</RFinanceInformation>
-              <RprocessTrajectory v-if=" this.tabContent1==10">流程轨迹</RprocessTrajectory>
-              <RApprovalConclusion v-if=" this.tabContent1==11">审批结论轨迹</RApprovalConclusion>
+              <!-- <RFinanceInformation v-if=" this.tabContent1==9">财务信息</RFinanceInformation> -->
+              <RprocessTrajectory v-if=" this.tabContent1==9">流程轨迹</RprocessTrajectory>
+              <RApprovalConclusion v-if=" this.tabContent1==10">审批结论轨迹</RApprovalConclusion>
             </div>
           </div>
         </div>
@@ -74,7 +75,7 @@
           </div>
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
-            <!-- <RAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn' ></RAudioVisual>
+            <RAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn' ></RAudioVisual>
             <Rremark v-if=" this.tabContent2==1"></Rremark>
             <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
             <RapplicationInformationDetail v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
@@ -83,9 +84,9 @@
             <FMCreditForm v-if=" this.tabContent2==6">信审表</FMCreditForm>
             <RcreditInvestigation v-if=" this.tabContent2==7">实地征信</RcreditInvestigation>
             <aMAntiApplyInf v-if=" this.tabContent2==8">反欺诈结论</aMAntiApplyInf>
-            <RFinanceInformation v-if=" this.tabContent2==9">财务信息</RFinanceInformation>
-            <RprocessTrajectory v-if=" this.tabContent2==10">流程轨迹</RprocessTrajectory>
-            <RApprovalConclusion v-if=" this.tabContent2==11">审批结论轨迹</RApprovalConclusion> -->
+            <!-- <RFinanceInformation v-if=" this.tabContent2==9">财务信息</RFinanceInformation> -->
+            <RprocessTrajectory v-if=" this.tabContent2==9">流程轨迹</RprocessTrajectory>
+            <RApprovalConclusion v-if=" this.tabContent2==10">审批结论轨迹</RApprovalConclusion>
           </div>
         </div>
       </div>
@@ -153,16 +154,12 @@
         tabContent2: 3,
         tabActiveInd1: 0,
         tabActiveInd2: 3,
-        items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹", "反欺诈结论", "财务信息", "流程轨迹",
-          "审批结论轨迹"
-        ],
-        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "流程轨迹", "反欺诈结论", "财务信息", "流程轨迹",
-          "审批结论轨迹"
-        ],
+       items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信",'反欺诈结论', "流程轨迹",'审批结论轨迹'],
+        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "流程轨迹","审批结论轨迹"],
         tab1Index: 0,
         tab2Index: 3,
-        flag1: [true, true, true, false, true, true, true, true, true],
-        flag2: [true, true, true, true, true, true, true, true, true, true],
+       flag1: [true, true, true, false, true, true, true, true, true,true,true],
+        flag2: [true, true, true, true, true, true, true, true, true, true,true],
         AlertSearch: "",
         AlertSearchCondition: [{
           value: '选项1',
@@ -262,7 +259,6 @@
         }
       },
        MyMove() {
-        console.log("移动")
         var clickX, leftOffset, inx, nextW2, nextW;
         var recordMoving;
         var dragging = false;
@@ -275,30 +271,21 @@
           doc.onmousemove = (e) => {
             if (dragging) {
               clickX = e.pageX;
-              console.log(clickX + "=========" + leftOffset)
               if (clickX > leftOffset + 10 && clickX < (wrapWidth - 5)) {
                 nextW2 = clickX - leftOffset;
                 labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px'); //按钮移动
                 labBtn.eq(0).prev().width(clickX - leftOffset + 'px'); //前一个div宽度变化
-                // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
                 labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px'); //减多少宽地待算
-                // console.log(this.AUpreWidth)
-                console.log(111)
               } else if (clickX < leftOffset + 10 && clickX < (wrapWidth - 5)) {
                 labBtn.eq(0).css('left', '0px');
                 labBtn.eq(0).prev().width('0px');
                 labBtn.eq(0).next().width(wrapWidth - 6 + 'px'); //减多少宽地待算
-                // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
-                console.log(222)
               }
-              console.log(clickX + "------------------" + wrapWidth)
               if (clickX > (wrapWidth - 5)) {
-                console.log(333)
                 labBtn.eq(0).css('left', parseFloat(wrapWidth) - 11 + 'px');
                 labBtn.eq(0).prev().width(wrapWidth - 11 + 'px');
                 labBtn.eq(0).next().width('0px');
-                // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
-                //  console.log(this.preWidth)
+               
               }
             }
           };

@@ -221,13 +221,13 @@
 					// this.$router.push({path:'/SplitScreen',query:row});
 		      this.$router.push({path:'/SplitScreen'});
 					localStorage.setItem("taskInWaitting",JSON.stringify(row));
-					this.$store.dispatch('addVisitedViews', {
-          name: '初审详情',
-          path: '/SplitScreen',
-          flag: '01',
-          params: '',
-          StatefullPath: '/SplitScreen'
-        })
+				// 	this.$store.dispatch('addVisitedViews', {
+        //   name: '初审详情',
+        //   path: '/SplitScreen',
+        //   flag: '01',
+        //   params: '',
+        //   StatefullPath: '/SplitScreen'
+        // })
 		    },
 		    handleSizeChange(val) {
 		      console.log('每页 ${val} 条');

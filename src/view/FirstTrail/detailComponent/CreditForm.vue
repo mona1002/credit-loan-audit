@@ -427,7 +427,7 @@
             <li>
               <i class="hint"></i>
               <label class=" CheckId_right_label "> 入职时间： </label>
-              <el-date-picker v-model="checkData.entryDate" style="maxWidth:200px;minWidth:150px" type="date" placeholder="选择日期" :picker-options="pickerOptions1">
+              <el-date-picker v-model="checkData.entryDate" value-format="yyyy-MM-dd" style="maxWidth:200px;minWidth:150px;opcity:0;" type="date"  :picker-options="pickerOptions1">
               </el-date-picker>
             </li>
             <li>
@@ -940,6 +940,7 @@
   export default {
     data() {
       return {
+        ccccc:null,
         adbtn: '确认',
         loadsitu: false,
         surbtn: true,

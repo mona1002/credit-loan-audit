@@ -115,9 +115,12 @@
     },
     methods: {
       toinner() {
-        if (this.$route.fullPath.indexOf('?') != -1 && this.$route.fullPath.indexOf('%') == -1) {var par = this.$route.fullPath.split('?')[1].split('=')[1];}
-        this.queryParam.taskNodeName = par || JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskNodeName;        
-        this.queryParam.processTemplateId = JSON.parse(localStorage.getItem('FinalWorkbenchPass')).processTemplateId;
+        // if (this.$route.fullPath.indexOf('?') != -1 && this.$route.fullPath.indexOf('%') == -1) {var par = this.$route.fullPath.split('?')[1].split('=')[1];}
+       var par='';
+       if (this.$route.fullPath.indexOf('?') != -1) { par = this.$route.fullPath.split('?')[1].split('&')[0].split('=')[1];}
+      this.queryParam.taskNodeName = par || JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskNodeName;        
+      // console.log(this.queryParam.taskNodeName )
+      this.queryParam.processTemplateId = JSON.parse(localStorage.getItem('FinalWorkbenchPass')).processTemplateId;
         // this.queryParam.taskNodeName = JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskNodeName;
         this.queryParam.taskStatus = JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskStatus;
         //this.queryParam.userCode=JSON.parse(localStorage.getItem('userInf')).userCode;
@@ -193,13 +196,13 @@
           path: '/FSplitScreen'
         });
         localStorage.setItem("FtaskInWaitting", JSON.stringify(row));
-        this.$store.dispatch('addVisitedViews', {
-          name: '终审详情',
-          path: '/FSplitScreen',
-          flag: '02',
-          params: '',
-          StatefullPath: '/FSplitScreen',
-        })
+        // this.$store.dispatch('addVisitedViews', {
+        //   name: '终审详情',
+        //   path: '/FSplitScreen',
+        //   flag: '02',
+        //   params: '',
+        //   StatefullPath: '/FSplitScreen',
+        // })
       },
       handleSizeChange(val) {
         console.log('每页 ${val} 条');

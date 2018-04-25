@@ -1,6 +1,6 @@
 <template>
   <div class="aAntiApplyInf">
-    <!-- 反欺诈结论======================= -->
+    <!-- 反欺诈结论  ======================= -->
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
@@ -117,8 +117,10 @@
         this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
       } else if (this.judgeFlag.flag == '02') {
         this.tastwaitingPass = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-      } else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议申请专员+主管
+      } else if (this.judgeFlag.flag == '05') {
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议申请专员
+      }else if (this.judgeFlag.flag == '06') {
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("RManagertaskInWaitting")) //复议申请主管
       }
       this.post("/fraudApplyInfoController/getRecentFraudApplyInfoWithOpinion", {
         applyId: this.tastwaitingPass.applyId,

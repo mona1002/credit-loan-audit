@@ -328,18 +328,18 @@
         console.log(row);
         this.$router.push({
           name: 'AntiApplyInf',
-          // path:'/AntiApplyInf',
           params: {
-            id: row.id
+            id: row.id,
+            applyId:row.applyId
           }
         });
-        this.$store.dispatch('addVisitedViews', {
+        /*this.$store.dispatch('addVisitedViews', {
           name: '反欺诈申请-查看',
           path: '/AntiApplyInf',
           flag: '',
           params: '?id=' + row.id,
           StatefullPath: '/AntiApplyInf',
-        })
+        })*/
       },
       // 主管/专员审批 跳分屏  
       // 反欺诈申请列表  没有详情

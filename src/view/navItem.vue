@@ -35,7 +35,7 @@
                     var num = item.indexOf('?');
                     var str = item.substr(num+1);//得到？后面的字符串
                     var strs = str.split('&');//将得到的参数分隔成数组[]
-                        if(strs[0].split('=')[1] == "'creditApp_firstTrial'" && strs[1].split('=')[1] == "'01'"){
+                        if(strs[0].split('=')[1] == "creditApp_firstTrial" && strs[1].split('=')[1] == "01"){
                             var row ={
                                 "processTemplateId":"creditApp",
                                 "taskStatus":"01",
@@ -49,9 +49,11 @@
                              nodeName = '初审审批';
                                RoutePath = '/taskInWaitting';
                               nodeFlag = "01";
+                               routeParams = '?taskNodeName=creditApp_firstTrial&flag=01';
+                             
                         };
                         //终审一级
-                        if(strs[0].split('=')[1] == "'creditApp_finalTrial_one'" && strs[1].split('=')[1] == "'02'"){
+                        if(strs[0].split('=')[1] == "creditApp_finalTrial_one" && strs[1].split('=')[1] == "02"){
                             var row ={
                                 "processTemplateId":"creditApp",
                                 "taskStatus":"01",
@@ -65,10 +67,10 @@
                              nodeName = '终审一级审批';
                              RoutePath = '/FtaskInWaitting';
                              nodeFlag = "02";
-                             routeParams = '?taskNodeName=creditApp_finalTrial_one';
+                             routeParams = '?taskNodeName=creditApp_finalTrial_one&flag=02';
                         };
                         //终审二级
-                        if(strs[0].split('=')[1] == "'creditApp_finalTrial_two'" && strs[1].split('=')[1] == "'02'"){
+                        if(strs[0].split('=')[1] == "creditApp_finalTrial_two" && strs[1].split('=')[1] == "02"){
                             var row ={
                                 "processTemplateId":"creditApp",
                                 "taskStatus":"01",
@@ -82,10 +84,10 @@
                             nodeName = '终审二级审批';
                              RoutePath = '/FtaskInWaitting';
                              nodeFlag = "02";
-                             routeParams = '?taskNodeName=creditApp_finalTrial_two';
+                             routeParams = '?taskNodeName=creditApp_finalTrial_two&flag=02';
                         };
                         //信审经理
-                        if(strs[0].split('=')[1] == "'creditApp_finalTrial_three'" && strs[1].split('=')[1] == "'02'"){
+                        if(strs[0].split('=')[1] == "creditApp_finalTrial_three" && strs[1].split('=')[1] == "02"){
                             var row ={
                                 "processTemplateId":"creditApp",
                                 "taskStatus":"01",
@@ -99,10 +101,10 @@
                             nodeName = '信审经理审批';
                              RoutePath = '/FtaskInWaitting';
                              nodeFlag = "02";
-                             routeParams = '?taskNodeName=creditApp_finalTrial_three';
+                             routeParams = '?taskNodeName=creditApp_finalTrial_three&flag=02';
                         };
                         //信审高级经理
-                        if(strs[0].split('=')[1] == "'creditApp_finalTrial_four'" && strs[1].split('=')[1] == "'02'"){
+                        if(strs[0].split('=')[1] == "creditApp_finalTrial_four" && strs[1].split('=')[1] == "02"){
                             var row ={
                                 "processTemplateId":"creditApp",
                                 "taskStatus":"01",
@@ -116,14 +118,14 @@
                             nodeName = '信审高级经理审批';
                              RoutePath = '/FtaskInWaitting';
                              nodeFlag = "02";
-                             routeParams = '?taskNodeName=creditApp_finalTrial_four';
+                             routeParams = '?taskNodeName=creditApp_finalTrial_four&flag=02';
                         };
                         //信审总监
-                        if(strs[0].split('=')[1] == "'creditApp_finalTrial_five'" && strs[1].split('=')[1] == "'02'"){
+                        if(strs[0].split('=')[1] == "creditApp_finalTrial_five" && strs[1].split('=')[1] == "02"){
                             var row ={
                                 "processTemplateId":"creditApp",
                                 "taskStatus":"01",
-                                "taskNodeName":"creditApp_finalTrial_five"
+                                "taskNodeName":"creditApp_finalTrial_five&flag=02"
                             };
                             var judge ={
                                 "flag":"02"
@@ -133,10 +135,10 @@
                             nodeName = '信审总监审批审批';
                              RoutePath = '/FtaskInWaitting';
                              nodeFlag = "02";
-                             routeParams = '?taskNodeName=creditApp_finalTrial_five';
+                             routeParams = '?taskNodeName=creditApp_finalTrial_five&flag=02';
                         };
                         //反欺诈专员
-                        if(strs[0].split('=')[1] == "'antiFraudApp_commissioner'" && strs[1].split('=')[1] == "'03'"){
+                        if(strs[0].split('=')[1] == "antiFraudApp_commissioner" && strs[1].split('=')[1] == "03"){
                             var row ={
                                 "processTemplateId":"",
                                 "taskStatus":"01",
@@ -150,10 +152,10 @@
                              nodeName = '反欺诈专员审批';
                                RoutePath = '/AntiFraud34';
                               nodeFlag = "03";
-                               routeParams = '?taskNodeName=antiFraudApp_commissioner';
+                               routeParams = '?taskNodeName=antiFraudApp_commissioner&flag=03';
                         };
                         //反欺诈主管
-                        if(strs[0].split('=')[1] == "'antiFraudApp_manager'" && strs[1].split('=')[1] == "'04'"){
+                        if(strs[0].split('=')[1] == "antiFraudApp_manager" && strs[1].split('=')[1] == "04"){
                             var row ={
                                 "processTemplateId":"",
                                 "taskStatus":"01",
@@ -167,7 +169,7 @@
                              nodeName = '反欺诈主管审批';
                                RoutePath = '/AntiFraud34';
                               nodeFlag = "04";
-                               routeParams = '?taskNodeName=antiFraudApp_manager';
+                               routeParams = '?taskNodeName=antiFraudApp_manager&flag=04';
                         };
                         //反欺诈申请
                         if(strs[0].split('=')[1] == "'antiFraudApp_apply'"){
@@ -177,7 +179,7 @@
                                 "taskNodeName":"antiFraudApp_apply"
                             };
                             localStorage.setItem("FinalWorkbenchPass",JSON.stringify(row));
-                            localStorage.setItem("judge",JSON.stringify(judge));
+                            //localStorage.setItem("judge",JSON.stringify(judge));
                             //      nodeName = '反欺诈主管审批';
                             //    RoutePath = '/AntiFraud34';//待确认
                             //   nodeFlag = "";
@@ -191,7 +193,7 @@
                     // })
                         };
                         //复议专员
-                        if(strs[0].split('=')[1] == "'reconsiderApp_commissioner'" && strs[1].split('=')[1] == "'05'"){
+                        if(strs[0].split('=')[1] == "reconsiderApp_commissioner" && strs[1].split('=')[1] == "05"){
                             var row ={
                                 "processTemplateId":"",
                                 "taskStatus":"01",
@@ -205,16 +207,16 @@
                               nodeName = '复议专员审批';
                                RoutePath = '/reconsiderList';
                               nodeFlag = "05";
-                            //    routeParams = '?taskNodeName=reconsiderApp_commissioner';
-                               routeParams = '?taskNodeName=antiFraudApp_commissioner&flag=03';
+                               routeParams = '?taskNodeName=reconsiderApp_commissioner&flag=05';
                                
+
                         };
                         //复议经理
-                        if(strs[0].split('=')[1] == "'reconsiderApp_manager'" && strs[1].split('=')[1] == "'06'"){
+                        if(strs[0].split('=')[1] == "reconsiderApp_manager" && strs[1].split('=')[1] == "06"){
                             var row ={
                                 "processTemplateId":"",
                                 "taskStatus":"01",
-                                "taskNodeName":"reconsiderApp_manager"
+                                "taskNodeName":"reconsiderApp_manager&flag=06"
                             };
                             var judge ={
                                 "flag":"06"
@@ -224,21 +226,19 @@
                               nodeName = '复议经理审批';
                                RoutePath = '/reconsiderList';
                               nodeFlag = "06";
-                            //    routeParams = '?taskNodeName=reconsiderApp_manager';
-                               routeParams = '?taskNodeName=antiFraudApp_manager&flag=04';
-                            
+                               routeParams = '?taskNodeName=reconsiderApp_manager&flag=06';
                         };
 
                    // }
                 //    反欺诈申请未添加 此方法的变量
-                console.log( nodeName)
-                    this.$store.dispatch('addVisitedViews', {
-                    name: nodeName,
-                    path: RoutePath,
-                    flag: nodeFlag,
-                    params: routeParams,
-                    StatefullPath: RoutePath + routeParams
-                    })
+                    // this.$store.dispatch('addVisitedViews', {
+                    // name: nodeName,
+                    // path: RoutePath,
+                    // flag: nodeFlag,
+                    // params: routeParams,
+                    // StatefullPath: RoutePath + routeParams
+                    // })
+
                 }
             },
         },

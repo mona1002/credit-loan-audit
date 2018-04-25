@@ -34,17 +34,23 @@ export default {
           })    .then(response => {      
             resolve(response.data);    
           })    .catch(err => {      
-            reject(err)    
+            reject(err)   
+            console.log(err) 
           })  
         })
       },
 
       Vue.prototype.post = function (url, data = {}) {
         return new Promise((resolve, reject) => {    
-          axios.post(url, data)      .then(response => {        
+          axios.post(url, data)     
+           .then(response => {        
             resolve(response.data);      
           }, err => {        
             reject(err);      
+            console.log(err)
+          })
+          .catch((error)=> {
+            console.log(error);
           })
         })
       }

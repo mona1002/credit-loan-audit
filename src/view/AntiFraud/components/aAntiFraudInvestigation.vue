@@ -527,7 +527,6 @@
 	        	console.log(index, row);
 	        	this.$router.push({path:'/MatchingInf'});
 	        	localStorage.setItem("internalObj", JSON.stringify({ id: row.id, matchApplyId: row.applyId, isInterFlag: false }));
-
 	      	},
 		    /*命中客户数 查询*/
 		    inquiry(row){

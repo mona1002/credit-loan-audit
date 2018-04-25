@@ -27,7 +27,7 @@
 					      </el-table-column>
 					      <el-table-column
 					        label="任务节点" 
-					        prop="taskNameTxt"
+					        prop="taskNodeNameTxt"
 					        min-width="170">
 					      </el-table-column>
 					      <el-table-column
@@ -66,11 +66,11 @@
 					        show-overflow-tooltip
 					        min-width="170">
 					      </el-table-column>
-					      <el-table-column
+					      <!-- <el-table-column
 					        prop=""
 					        label="审批时间"
 					        min-width="160">
-					      </el-table-column>
+					      </el-table-column> -->
 				    </el-table>
 			    </div>
 		  	</el-collapse-item>
@@ -84,7 +84,7 @@
 				activeNames: ['1'],
 				//processTemplateId:'',
 				//taskStatus:'',
-				processInstanceId:'',
+				applyId:'',
 				taskDetailList:[],
 				judgeFlag:'',
 			}
@@ -92,16 +92,16 @@
 		mounted(){
 			this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
 		    if (this.judgeFlag.flag == '01') {
-		        this.processInstanceId = JSON.parse(localStorage.getItem("taskInWaitting")).processInstanceId; // 初审
+		        this.applyId = JSON.parse(localStorage.getItem("taskInWaitting")).applyId; // 初审
 		    } else if (this.judgeFlag.flag == '02') {
-		        this.processInstanceId = JSON.parse(localStorage.getItem("FtaskInWaitting")).processInstanceId //终审
+		        this.applyId = JSON.parse(localStorage.getItem("FtaskInWaitting")).applyId //终审
 		    } else if (this.judgeFlag.flag == '07') {
-		        this.processInstanceId = JSON.parse(localStorage.getItem("TtaskInWaitting")).processInstanceId //终审
+		        this.applyId = JSON.parse(localStorage.getItem("TtaskInWaitting")).applyId //终审
 		    } else if (this.judgeFlag.flag == '08') {
-		        this.processInstanceId = JSON.parse(localStorage.getItem("TtaskInWaitting")).processInstanceId //终审
+		        this.applyId = JSON.parse(localStorage.getItem("TtaskInWaitting")).applyId //终审
 		    }
 
-			//this.processInstanceId=JSON.parse(localStorage.getItem('taskInWaitting')).processInstanceId;
+			//this.applyId=JSON.parse(localStorage.getItem('taskInWaitting')).applyId;
 			this.request()
 		},
 		methods:{
@@ -109,15 +109,20 @@
 
 			},
 			request(){
-				this.get('/creauditInfo/getProcessTraceList', {
-			        processInstanceId: this.processInstanceId
-			      }).then(res => {
-			        console.log(res);
-			        if (res.statusCode == '200') {
-			          this.taskDetailList = res.data;
-			        }
-			      })
-
+				// this.get('/creauditInfo/getProcessTraceList', {
+			  //       applyId: this.applyId
+			  //     }).then(res => {
+			  //       console.log(res);
+			  //       if (res.statusCode == '200') {
+			  //         this.taskDetailList = res.data;
+			  //       }
+			  //     })
+ this.get("/creauditInfo/getProcessTraceListByApplyId", {
+          applyId: this.applyId,
+        }).then(res => {
+          console.log(res);
+          this.taskDetailList = res.data.taskDetailList;
+        })
 			},
 			handleCurrentChange(){
 
