@@ -48,6 +48,8 @@ export default {
           }, err => {        
             reject(err);      
             console.log(err)
+          }).catch(error=> {
+            console.log(error);
           })
         })
       }
