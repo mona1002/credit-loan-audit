@@ -298,7 +298,7 @@
             this.routeParams = '?creditApp00';
           } else if (route.fullPath == '/processMoni?creditApp01') {
             // this.nodeName = "信审已分配流程";
-            this.nodeName = "信审已分配流程信审已分配流程信审已分配流程信审已分配流程信审已分配流程信审已分配流程流程信审已分配流程信审已分配流程信信审已分配流程信审已分配流程信审已分配流程";
+            this.nodeName = "信审已分配流程";
             this.routeParams = '?creditApp01';
           } else if (route.fullPath == '/processMoni?creditApp03') {
             this.nodeName = "信审已完成流程";
@@ -336,14 +336,14 @@
           this.nodeName = "质检主管审批";
         }else if (route.path == '/regularConfig') {// 质检功能 - 常规抽单配置功能
           this.nodeName = "常规抽单配置功能";
-        }else if (route.path == '/reconsiderResult') {
+        }else if (route.path == '/reconsiderResult') {// 质检功能 - 复议结果查询
           this.nodeName = "复议结果查询";
+        }else if (route.path == '/batchApportion') {
+          this.nodeName = "质检任务批量转分派";
+        }else if (route.path == '/specialConfig') {
+          this.nodeName = "专纵项抽单配置";
         }
         // else if (route.path == '/manager') {
-        //   this.nodeName = "质检";
-        // }else if (route.path == '/manager') {
-        //   this.nodeName = "质检";
-        // }else if (route.path == '/manager') {
         //   this.nodeName = "质检";
         // }
         this.RoutePath = route.path;
