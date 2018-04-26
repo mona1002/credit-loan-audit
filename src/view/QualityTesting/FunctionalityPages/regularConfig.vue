@@ -64,7 +64,7 @@
       </span>
     </el-dialog>
     <!-- ==============================添加=================================== -->
-    <el-dialog title="质检规则新增" :modal="false" :visible.sync="add" width="880px">
+    <el-dialog title="质检规则新增" :modal="false" :visible.sync="add" width="865px">
       <div class="newContent">
         <ul>
           <li>
@@ -136,8 +136,8 @@
       </span>
     </el-dialog>
     <!-- ==============================编辑=================================== -->
-    <el-dialog title="质检规则编辑" :modal="false" :visible.sync="Edit" width="420px">
-       <div class="newContent">
+    <el-dialog title="质检规则编辑" :modal="false" :visible.sync="Edit" width="865px">
+      <div class="newContent">
         <ul>
           <li>
             <p>
@@ -150,7 +150,6 @@
               <span></span>
             </p>
           </li>
-
           <li>
             <p>
               <label>抽单类型：</label>
@@ -193,11 +192,11 @@
           <li class="colorGray">
             <p>
               <label>创建人：</label>
-              <span>{{ addNew.creator }}</span>
+              <span>{{ updateInf.creator }}</span>
             </p>
             <p>
               <label>创建日期：</label>
-              <span>{{ addNew.createTime }}</span>
+              <span>{{ updateInf.createTime }}</span>
             </p>
           </li>
         </ul>
@@ -226,16 +225,7 @@
           creator: null,
           createTime: null,
         },
-        updateInf: {
-          id: null,
-          drawSheetType: null,
-          recentDays: null,
-          makeRatio: null,
-          passRatio: null,
-          minPassNum: null,
-          refuseRatio: null,
-          minRefuseNum: null
-        },
+        updateInf: {},
         Confirm: false,
         add: false,
         Edit: false,
@@ -267,7 +257,7 @@
         // totalRecord: 0, //总条数
         value: '',
 
-        QTSituation: [{
+        QTSituation: [{//抽单类型
           value: '选项1',
           label: '黄金糕'
         }, {
@@ -302,10 +292,21 @@
       }
     },
     methods: {
+      getListInf() {
+        // 质检-常规抽单配置—查询列表        
+        this.get("/insMakeRules/getInfoList").then(res => {
+          if (res.statusCode == 200) {
+            this.tableData = res.data.recordList;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      },
       //  编辑按钮-弹出弹窗
       handleEdit(index, row) {
         console.log(index, row);
         this.Edit = true;
+        this.updateInf = row;
       },
       addInf() { //添加 按钮弹窗
         console.log('tianjia')
@@ -338,11 +339,21 @@
             this.$message.error(res.msg);
           }
         });
+        this.getListInf();
       },
       SaveEdit() { //编辑  提交
         this.loadsitu = true;
         this.adbtn = '保存中';
-        this.post("/insMakeRules/updateInfo", this.updateInf).then(res => {
+        this.post("/insMakeRules/updateInfo", {
+          id: this.updateInf.id,
+          drawSheetType: this.updateInf.drawSheetType,
+          recentDays: this.updateInf.recentDays,
+          makeRatio: this.updateInf.makeRatio,
+          passRatio: this.updateInf.passRatio,
+          minPassNum: this.updateInf.minPassNum,
+          refuseRatio: this.updateInf.refuseRatio,
+          minRefuseNum: this.updateInf.minRefuseNum
+        }).then(res => {
           if (res.statusCode == 200) {
             this.$message({
               message: '提交成功!',
@@ -352,12 +363,13 @@
             this.$message.error(res.msg);
           }
         });
+        this.getListInf();
       },
       CFsave() { //分配  提交
         console.log('任务分配')
         this.loadsitu = true;
         this.adbtn = '保存中';
-        // 生成 质检任务接口------选中某一条还是全部生成--待确认
+        // 生成 质检任务接口------选中某一条还是全部生成--待确认---------接口未开发
         this.post("insMakeRules/addInfo", {
           drawSheetType: 'xx',
           recentDays: 10,
@@ -378,6 +390,7 @@
             this.$message.error(res.msg);
           }
         });
+        this.getListInf();
       },
       num(el, val) {
         switch (el) {
@@ -413,15 +426,7 @@
       //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
       //   this.params.pageNum = this.currentPage, //页数（第几页）
       //     this.params.pageSize = this.pageCount, //页面显示行数
-      // 质检-常规抽单配置—查询列表
-
-      this.get("/insMakeRules/getInfoList").then(res => {
-        if (res.statusCode == 200) {
-          this.tableData = res.data.recordList;
-        } else {
-          this.$message.error(res.msg);
-        }
-      });
+      this.getListInf();
     },
     components: {
       myHead
