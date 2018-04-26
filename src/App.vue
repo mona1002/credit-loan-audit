@@ -3,7 +3,7 @@
     <!-- <myHead></myHead> -->
     <!-- <router-view class="Abody" @onbeforeunload="aaa"></router-view> -->
     <router-view class="Abody"></router-view>
-    <!-- <tag class="fottt"></tag> -->
+    <tag class="fottt"></tag>
   </div>
 </template>
 <script>
@@ -31,7 +31,7 @@
           }
         });
         //post
-         this.post("/workFlowTaskQuery/getTaskProfile", {
+         this.post("/", {
           taskStatus: "01",
         }).then(res => {
           if (res.statusCode == 200) {
