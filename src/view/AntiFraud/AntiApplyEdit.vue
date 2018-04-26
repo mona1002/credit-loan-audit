@@ -257,7 +257,7 @@
       // 请求系统时间
       getSystemDate() {
         // 获取系统时间
-        this.get('system/getSystemDate').then(res => {
+        this.get('system/getSystemDate?'+Math.random()).then(res => {
           console.log('回退', res)
           // 请求系统时间
           this.dealroperDate = res.data;
@@ -266,7 +266,7 @@
       },
       // 反欺诈申请 获取 主原因子原因
       firstNodeReason() {
-        this.get('/credit/firstNodeReason?reasonType=' + '08,09').then(res => {
+        this.get('/credit/firstNodeReason?reasonType=' + '08,09'+'&'+Math.random()).then(res => {
           console.log(res);
           this.mainReasons = res.data;
           // 请求回来的 赋值
@@ -498,7 +498,7 @@
       // 获取子原因
       findNodeFirstChildren(val) {
         // 请求子原因
-        this.get('/credit/findNodeFirstChildren?id=' + val).then(res => {
+        this.get('/credit/findNodeFirstChildren?id=' + val+'&'+Math.random()).then(res => {
           console.log(res);
           if (res.statusCode == '200') {
             this.secondReasons = res.data;

@@ -624,7 +624,7 @@
       // 请求系统时间
       getSystemDate() {
         // 获取系统时间
-        this.get('system/getSystemDate').then(res => {
+        this.get('system/getSystemDate?'+Math.random()).then(res => {
           console.log('回退', res)
           // 请求系统时间
           this.dealroperDate = res.data;
@@ -633,7 +633,7 @@
       },
       // 请求风险项
       getRiskItems() {
-        this.get('/credit/getRiskItems?applyId=' + this.applyId).then(res => {
+        this.get('/credit/getRiskItems?applyId=' + this.applyId+'&'+Math.random()).then(res => {
 
           if (res.statusCode == 200) {
             // console.log('请求风险项成功')
@@ -663,7 +663,7 @@
       },
       // 请求案件编号 
       queryCaseNumList() {
-        this.get('/fraudAuditOpinion/queryCaseNumList').then(res => {
+        this.get('/fraudAuditOpinion/queryCaseNumList?'+Math.random()).then(res => {
           // console.log(res);
           if (res.statusCode == '200') {
             this.caseOptions = res.data;
@@ -947,7 +947,7 @@
             console.log(this.showFlag);
             this.showFlag = '02';
             // 获取系统时间
-            this.get('system/getSystemDate').then(res => {
+            this.get('system/getSystemDate?'+Math.random()).then(res => {
               console.log('回退', res)
               // 请求系统时间
               this.dealroperDate = res.data;
@@ -1170,7 +1170,7 @@
         //     this.$message(res.msg);
         //   }
         // })
-        this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processInstanceId)
+        this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processInstanceId+'&'+Math.random())
           .then(res => {
             console.log(res);
             if (res.statusCode == '200') {
@@ -1265,7 +1265,7 @@
           } else if (type == '02') {
             console.log('风险排除 不请求 原因')
           }
-          this.get('/credit/firstNodeReason?reasonType=' + mainType).then(res => {
+          this.get('/credit/firstNodeReason?reasonType=' + mainType+'&'+Math.random()).then(res => {
             console.log(res);
             if (res.statusCode == '200') {
               this.mainReasons = res.data;
@@ -1288,7 +1288,7 @@
           })
         } else if (flag == 'second') {
           // 请求子原因
-          this.get('/credit/findNodeFirstChildren?id=' + type).then(res => {
+          this.get('/credit/findNodeFirstChildren?id=' + type+'&'+Math.random()).then(res => {
             console.log(res);
             if (res.statusCode == '200') {
               this.secondReasons = res.data;
@@ -1310,7 +1310,7 @@
       },
       // 反欺诈主管 申请 反欺诈专员信息
       queryCreauditOpinionObj: function () {
-        this.get('/fraudAuditOpinion/queryCreauditOpinionObj?applyId=' + this.applyId).then(res => {
+        this.get('/fraudAuditOpinion/queryCreauditOpinionObj?applyId=' + this.applyId+'&'+Math.random()).then(res => {
           if (res.statusCode == 200) {
             console.log(res);
             // 先赋值,直接点审批

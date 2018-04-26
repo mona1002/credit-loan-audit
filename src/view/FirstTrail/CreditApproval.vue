@@ -979,7 +979,7 @@
             // this.showFlag = '02';
             this.huiTuiShow = true;
             // 获取系统时间
-            this.get('system/getSystemDate').then(res => {
+            this.get('system/getSystemDate?'+Math.random()).then(res => {
               //console.log('回退', res)
               // 请求系统时间
               this.dealroperDate = res.data;
@@ -992,7 +992,7 @@
             //console.log('01010101010101')
             // this.showFlag = '01';
             this.juJueShow = true;
-            this.get('system/getSystemDate').then(res => {
+            this.get('system/getSystemDate?'+Math.random()).then(res => {
               //console.log(res)
               // 请求系统时间
               this.dealroperDate = res.data;
@@ -1004,7 +1004,7 @@
             // console.log('070707007')
             // this.showFlag = '07';
             this.fangQiShow = true;
-            this.get('system/getSystemDate').then(res => {
+            this.get('system/getSystemDate?'+Math.random()).then(res => {
               //console.log(res)
               // 请求系统时间
               this.dealroperDate = res.data;
@@ -1688,7 +1688,7 @@
         // }
         if (flag == 'main') {
           // 请求主原因
-          this.get('/credit/firstNodeReason?reasonType=' + type).then(res => {
+          this.get('/credit/firstNodeReason?reasonType=' + type+'&'+Math.random()).then(res => {
             //console.log(res);
             if (res.statusCode == '200') {
               this.mainReasons = res.data;
@@ -1697,7 +1697,7 @@
         } else if (flag == 'second') {
           //console.log(this.mainReasonName);
           // 请求子原因
-          this.get('/credit/findNodeFirstChildren?id=' + this.mainId).then(res => {
+          this.get('/credit/findNodeFirstChildren?id=' + this.mainId+'&'+Math.random()).then(res => {
             //console.log(res);
             if (res.statusCode == '200') {
               this.secondeReasons = res.data;
