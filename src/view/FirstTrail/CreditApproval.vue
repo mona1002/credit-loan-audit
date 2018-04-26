@@ -1119,7 +1119,7 @@
           case 'spjl':
             //console.log('spspspspsppspspspspsp')
             // this.showFlag = 'spjl';
-            thisthis.spjlShow = true;
+            this.spjlShow = true;
             this.getSpjlList();
             break;
           case 'lcgj':
