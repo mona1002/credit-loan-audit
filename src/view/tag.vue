@@ -336,10 +336,10 @@
           this.nodeName = "质检主管审批";
         }else if (route.path == '/regularConfig') {// 质检功能 - 常规抽单配置功能
           this.nodeName = "常规抽单配置功能";
+        }else if (route.path == '/reconsiderResult') {
+          this.nodeName = "复议结果查询";
         }
         // else if (route.path == '/manager') {
-        //   this.nodeName = "质检";
-        // }else if (route.path == '/manager') {
         //   this.nodeName = "质检";
         // }else if (route.path == '/manager') {
         //   this.nodeName = "质检";
