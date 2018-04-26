@@ -836,7 +836,10 @@ export default {
   text-align: center;
   margin-top: 20px;
 }
-
+.processMoni .page .el-pagination .el-select .el-input .el-input__inner,
+.processMoni .page .el-pagination__editor.el-input .el-input__inner{
+  line-height:28px;
+}
 .processMoni .iconContainer {
   float: right;
   line-height: 50px;
