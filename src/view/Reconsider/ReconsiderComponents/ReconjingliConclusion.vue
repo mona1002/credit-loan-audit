@@ -682,7 +682,7 @@
             //this.huituiLoading = false;
             this.huituiFont = '提交';
             this.dialogVisible = true;
-            this.get('system/getSystemDate').then(res => {
+            this.get('system/getSystemDate?'+Math.random()).then(res => {
               //console.log('回退', res)
               // 请求系统时间
               this.dealroperDate = res.data;
@@ -693,13 +693,13 @@
             this.jujueLoading = false;
             this.jujueFont = '提交';
             this.jdialogVisible = true;
-            this.get('system/getSystemDate').then(res => {
+            this.get('system/getSystemDate?'+Math.random()).then(res => {
               //console.log('回退', res)
               // 请求系统时间
               this.jdealroperDate = res.data;
               //console.log('this.', this.jdealroperDate);
             });
-            this.get('/credit/firstNodeReason?reasonType=03').then(res => {
+            this.get('/credit/firstNodeReason?reasonType=03'+'&'+Math.random()).then(res => {
               console.log(res);
               if (res.statusCode == '200') {
                 this.rmainResions = res.data;
@@ -1213,7 +1213,7 @@
 			},
 			//回退节点
 			backNode(){
-				this.get('/credit/firstNodeReason?reasonType=01').then(res => {
+				this.get('/credit/firstNodeReason?reasonType=01'+'&'+Math.random()).then(res => {
 		          console.log(res);
 		          if (res.statusCode == '200') {
 		            this.mainResions = res.data;
@@ -1226,7 +1226,7 @@
 				//"mainrefuse":拒绝
 				if(flag == 'mainback'){
 					//console.log('回退555'+$event);
-					this.get('/credit/findNodeFirstChildren?id=' + $event).then(res => {
+					this.get('/credit/findNodeFirstChildren?id=' + $event+'&'+Math.random()).then(res => {
 			          //console.log('回退'+res);
 			          if (res.statusCode == '200') {
 			            this.childReasons = res.data;
@@ -1234,7 +1234,7 @@
 	    			})
 				}else if(flag == 'mainrefuse'){
 					console.log('拒绝'+$event);
-					this.get('/credit/findNodeFirstChildren?id=' + $event).then(res => {
+					this.get('/credit/findNodeFirstChildren?id=' + $event+'&'+Math.random()).then(res => {
 			          console.log(res);
 			          if (res.statusCode == '200') {
 			            this.rchildReasons = res.data;
@@ -1300,7 +1300,7 @@
 		    getLcgjList() {
 					this.lcdialogVisible = true;
 					console.log(this.processInstanceId )
-		      this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processInstanceId)
+		      this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processInstanceId+'&'+Math.random())
 		        .then(res => {
 		          console.log(res);
 		          if (res.statusCode == '200') {

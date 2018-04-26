@@ -483,7 +483,7 @@
               </i>
               <label class=" WorkInfs_left_label ">
                 <span class="red"> * </span> 公司注册时间： </label>
-              <el-date-picker style="maxWidth:200px;minWidth:150px" v-model="checkData.compegDate" type="date" placeholder="选择日期" :picker-options="pickerOptions1"
+              <el-date-picker style="maxWidth:200px;minWidth:150px" v-model="checkData.compegDate" type="date" :picker-options="pickerOptions1"
                 name="registerDate" v-validate="reqd">
               </el-date-picker>
             </li>
