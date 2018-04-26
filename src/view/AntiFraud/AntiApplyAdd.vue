@@ -476,13 +476,13 @@
                     // } else if (this.antiFlag == '03' || this.antiFlag == '04') {
                     this.$router.push('/AntiFraud');
                     // -----------------------待判断flag并更改----待检查测试-------------
-                    this.$store.dispatch('addVisitedViews', {
-                      name: '反欺诈申请',
-                      path: '/AntiFraud',
-                      flag: '',
-                      params: '',
-                      StatefullPath: '/AntiFraud'
-                    })
+                    // this.$store.dispatch('addVisitedViews', {
+                    //   name: '反欺诈申请',
+                    //   path: '/AntiFraud',
+                    //   flag: '',
+                    //   params: '',
+                    //   StatefullPath: '/AntiFraud'
+                    // })
                   } else {
                     if (res.msg) {
                       this.$message({

@@ -134,13 +134,13 @@
       //     this.inquire(this.params);
       //   },
       gopath() {
-        this.$store.dispatch('addVisitedViews', {
-          name: '综合查询-查看',
-          path: '/MatchingInfQuery',
-          flag: '',
-          params: '',
-          StatefullPath: '/MatchingInfQuery',
-        })
+        // this.$store.dispatch('addVisitedViews', {
+        //   name: '综合查询-查看',
+        //   path: '/MatchingInfQuery',
+        //   flag: '',
+        //   params: '',
+        //   StatefullPath: '/MatchingInfQuery',
+        // })
       },
       handleCurrentChange(val) {
         this.query.id = val.id;

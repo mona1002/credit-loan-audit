@@ -283,10 +283,10 @@
       handleClickEdit(row) {
         console.log('click the row in table');
         // row 有值, 跳编辑
-        var routeParms;
+        // var routeParms;
         if (row) {
           // 跳转到编辑
-          routeParms = 'id=' + row.id + ';flag=edit'
+          // routeParms = 'id=' + row.id + ';flag=edit'
           this.$router.push({
             name: 'AntiApplyEdit',
             params: {
@@ -295,14 +295,14 @@
             }
           });
           // console.log('编辑')
-          localStorage.setItem("antiApplyFlagEdit", JSON.stringify(routeParms));
-          this.$store.dispatch('addVisitedViews', {
-            name: '反欺诈申请-编辑',
-            path: '/AntiApplyEdit',
-            flag: 'edit',
-            params: '',
-            StatefullPath: '/AntiApplyEdit'
-          })
+          // localStorage.setItem("antiApplyFlagEdit", JSON.stringify(routeParms));
+          // this.$store.dispatch('addVisitedViews', {
+          //   name: '反欺诈申请-编辑',
+          //   path: '/AntiApplyEdit',
+          //   flag: 'edit',
+          //   params: '',
+          //   StatefullPath: '/AntiApplyEdit'
+          // })
         } else { // 否则是新增
           // routeParms = 'id=' + ';flag=add'
           console.log('新增')
@@ -313,13 +313,13 @@
               flag: 'add'
             }
           });
-          this.$store.dispatch('addVisitedViews', {
-            name: '反欺诈申请-新增',
-            path: '/AntiApplyAdd',
-            flag: '',
-            params: '',
-            StatefullPath: '/AntiApplyAdd'
-          })
+          // this.$store.dispatch('addVisitedViews', {
+          //   name: '反欺诈申请-新增',
+          //   path: '/AntiApplyAdd',
+          //   flag: '',
+          //   params: '',
+          //   StatefullPath: '/AntiApplyAdd'
+          // })
         }
       },
       // 反欺诈申请查看

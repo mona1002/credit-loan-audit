@@ -63,30 +63,71 @@
       </span>
     </el-dialog>
     <!-- ==============================添加=================================== -->
-    <el-dialog title="质检规则新增" :modal="false" :visible.sync="add" width="850px">
+    <el-dialog title="质检规则新增" :modal="false" :visible.sync="add" width="880px">
       <div class="newContent">
-       <ul>
-         <li>
-           <p><label>质检天数：</label><span><el-input v-model="value " placeholder="请输入质检天数"> </el-input>天</span></p>
-           <p><label></label> <span></span> </p>
-         </li>
+        <ul>
+          <li>
+            <p>
+              <label>质检天数：</label>
+              <span>
+                <el-input v-model="value " placeholder="请输入质检天数"> </el-input> 天</span>
+            </p>
+            <p>
+              <label></label>
+              <span></span>
+            </p>
+          </li>
 
           <li>
-           <p><label>抽单类型：</label><span><el-select  v-model="value" placeholder="请选择">
-             <el-option v-for=" item in QTSituation" :key="item.value" :label="item.label" :value="item.value"> </el-option>
-             </el-select></span></p>
-           <p><label>抽单比例[每人]：</label><span><el-input v-model="value " placeholder="请输入质检天数"> </el-input>天</span></p>
-         </li>  <li>
-           <p><label>通过比例[每人]：</label><span><el-input v-model="value " placeholder="请输入质检天数"> </el-input>天</span></p>
-           <p><label>通过件最低抽单件数[人·件]：</label><span><el-input v-model="value " placeholder="请输入质检天数"> </el-input>天</span></p>
-         </li>  <li>
-           <p><label>拒绝比例[每人]：</label><span><el-input v-model="value " placeholder="请输入质检天数"> </el-input>天</span></p>
-           <p><label>拒绝件最低抽单件数[人·件]</label><span><el-input v-model="value " placeholder="请输入质检天数"> </el-input>天</span></p>
-         </li>  <li>
-           <p><label>创建人:</label><span>{{ value }}</span></p>
-           <p><label>创建日期:</label><span>{{ value }}</span></p>
-         </li>
-       </ul>
+            <p>
+              <label>抽单类型：</label>
+              <span>
+                <el-select v-model="value" placeholder="请选择">
+                  <el-option v-for=" item in QTSituation" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+                </el-select>
+              </span>
+            </p>
+            <p>
+              <label>抽单比例[每人]：</label>
+              <span>
+                <el-input v-model="value " placeholder="请输入质检天数"> </el-input>  %</span>
+            </p>
+          </li>
+          <li>
+            <p>
+              <label>通过比例[每人]：</label>
+              <span>
+                <el-input v-model="value " placeholder="请输入质检天数"> </el-input> %</span>
+            </p>
+            <p>
+              <label>通过件最低抽单件数[人·件]：</label>
+              <span>
+                <el-input v-model="value " placeholder="请输入质检天数"> </el-input> 件</span>
+            </p>
+          </li>
+          <li>
+            <p>
+              <label>拒绝比例[每人]：</label>
+              <span>
+                <el-input v-model="value " placeholder="请输入质检天数"> </el-input> %</span>
+            </p>
+            <p>
+              <label>拒绝件最低抽单件数[人·件]：</label>
+              <span>
+                <el-input v-model="value " placeholder="请输入质检天数"> </el-input> 件</span>
+            </p>
+          </li>
+          <li class="colorGray">
+               <p>
+              <label>创建人：</label>
+              <span>{{ value }}</span>
+            </p>
+            <p>
+              <label>创建日期：</label>
+              <span >{{ value }}</span>
+            </p>
+          </li>
+        </ul>
       </div>
       <span slot="footer" class="dialog-footer">
         <el-button class="calbtn" @click="canc">取消</el-button>
@@ -338,9 +379,9 @@
     color: #475669;
     text-align: right;
     display: inline-block;
-    width: 126px;
-    height: 20px;
-    margin-right: 10px;
+    /* width: 126px; */
+    /* height: 20px; */
+    /* margin-right: 10px; */
   }
 
   .regularConfig i {
@@ -454,17 +495,27 @@
   .emerColor {
     color: #0077ff;
   }
-.newContent{
-  background:red;
-}
-.newContent p{
-  width:49%;
-  height: 43px;
-  float: left;
-  border: 1px solid pink;
-}
-.newContent label{
-width:160px;
-border: 1px solid green;
+
+  .newContent {
+    /* background:red; */
+    height: 230px;
+  }
+
+  .newContent p {
+    width: 49%;
+    height: 50px;
+    float: left;
+  }
+
+  .newContent p:nth-of-type(odd) label {
+  width: 115px;
+  }
+ .newContent p:nth-of-type(even) label {
+  width: 185px;
+  }
+.colorGray p label,
+.colorGray p span
+{
+  color:#AEAEAE;
 }
 </style>

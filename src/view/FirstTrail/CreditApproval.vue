@@ -1098,7 +1098,7 @@
             // 查询反欺诈信息
             // this.$router.push('AntiApplyEdit')
             console.log(this.applyId)
-            var routeParms = 'id=' + this.applyId + ';flag=start;busiState=30'
+            // var routeParms = 'id=' + this.applyId + ';flag=start;busiState=30'
             this.$router.push({
               name: 'AntiApplyEditf',
               params: {
@@ -1107,14 +1107,14 @@
                 busiState: '30'
               }
             });
-            localStorage.setItem("antiApplyFlag", JSON.stringify(routeParms));
-            this.$store.dispatch('addVisitedViews', {
-              name: '反欺诈申请',
-              path: '/AntiApplyEditf',
-              flag: this.judgeFlag,
-              params: '',
-              StatefullPath: '/AntiApplyEditf',
-            })
+            // localStorage.setItem("antiApplyFlag", JSON.stringify(routeParms));
+            // this.$store.dispatch('addVisitedViews', {
+            //   name: '反欺诈申请',
+            //   path: '/AntiApplyEditf',
+            //   flag: this.judgeFlag,
+            //   params: '',
+            //   StatefullPath: '/AntiApplyEditf',
+            // })
             break;
           case 'spjl':
             //console.log('spspspspsppspspspspsp')
@@ -1570,9 +1570,10 @@
         }
         //alert('kkk');
         //return;
+        console.log(this.applyId)
         this.post('/creauditOpinion/add', {
           // this.post("http://10.1.26.47:8080/riskManagement/creauditOpinion/add", {
-          applyId: this.applyId,
+          // applyId: this.applyId,
           auditType: this.judgeFlag == '01' ? '00' : '01',
           proCode: this.proCode,
           verIncome: verIncome2,
@@ -2023,13 +2024,13 @@
             this.$router.push({
               path: '/PneCtrl'
             });
-            this.$store.dispatch('addVisitedViews', {
-              name: '大数据风控',
-              path: '/PneCtrl',
-              flag: this.judgeFlag,
-              params: '',
-              StatefullPath: '/PneCtrl',
-            })
+            // this.$store.dispatch('addVisitedViews', {
+            //   name: '大数据风控',
+            //   path: '/PneCtrl',
+            //   flag: this.judgeFlag,
+            //   params: '',
+            //   StatefullPath: '/PneCtrl',
+            // })
           }
         });
       },
@@ -2058,13 +2059,13 @@
           this.$router.push({
             path: '/SocialSe'
           });
-          this.$store.dispatch('addVisitedViews', {
-            name: '社保公积金',
-            path: '/SocialSe',
-            flag: this.judgeFlag,
-            params: '',
-            StatefullPath: '/SocialSe',
-          })
+          // this.$store.dispatch('addVisitedViews', {
+          //   name: '社保公积金',
+          //   path: '/SocialSe',
+          //   flag: this.judgeFlag,
+          //   params: '',
+          //   StatefullPath: '/SocialSe',
+          // })
         }
       },
       //社保公积金 弹窗关闭

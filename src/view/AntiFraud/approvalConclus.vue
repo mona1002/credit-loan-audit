@@ -1398,14 +1398,14 @@
             this.$router.push({
               path: '/PneCtrl'
             });
-            console.log('大数据风控')
-            this.$store.dispatch('addVisitedViews', {
-              name: '大数据风控',
-              path: '/PneCtrl',
-              flag: this.judgeFlag,
-              params: '',
-              StatefullPath: '/PneCtrl',
-            })
+            // console.log('大数据风控')
+            // this.$store.dispatch('addVisitedViews', {
+            //   name: '大数据风控',
+            //   path: '/PneCtrl',
+            //   flag: this.judgeFlag,
+            //   params: '',
+            //   StatefullPath: '/PneCtrl',
+            // })
           }
         });
       },
@@ -1435,13 +1435,13 @@
           this.$router.push({
             path: '/SocialSe'
           });
-          this.$store.dispatch('addVisitedViews', {
-            name: '社保公积金',
-            path: '/SocialSe',
-            flag: this.judgeFlag,
-            params: '',
-            StatefullPath: '/SocialSe',
-          })
+          // this.$store.dispatch('addVisitedViews', {
+          //   name: '社保公积金',
+          //   path: '/SocialSe',
+          //   flag: this.judgeFlag,
+          //   params: '',
+          //   StatefullPath: '/SocialSe',
+          // })
         }
       },
       //社保公积金 弹窗关闭
