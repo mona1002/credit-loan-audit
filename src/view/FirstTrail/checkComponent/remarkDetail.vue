@@ -78,10 +78,10 @@
 		      }).then(res => {
 		        /*console.log(res);*/
 		        this.datas=res.data;
-		        this.datas.forEach(function(item){
-		        	item.remarkTime = new Date(item.remarkTime).toLocaleString().replace(/\//g, "-").replace(/上午|中午|下午/g, "");
-		        	console.log(item.remarkTime);
-		        });
+		        // this.datas.forEach(function(item){
+		        // 	// item.remarkTime = new Date(item.remarkTime).toLocaleString().replace(/\//g, "-").replace(/上午|中午|下午/g, "");
+		        // 	console.log(item.remarkTime);
+		        // });
 		      });
 		  },
 	    }
