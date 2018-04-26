@@ -31,7 +31,7 @@
           }
         });
         //post
-         this.post("/workFlowTaskQuery/getTaskProfile", {
+         this.post("/", {
           taskStatus: "01",
         }).then(res => {
           if (res.statusCode == 200) {
