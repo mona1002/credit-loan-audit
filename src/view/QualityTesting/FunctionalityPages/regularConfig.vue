@@ -22,7 +22,8 @@
         <el-table :data="tableData" style="width: 100%" height="100%" @current-change="handleCurrentChange" border>
           <el-table-column type="index" align='center' label=序号 width="55">
           </el-table-column>
-          <el-table-column prop="drawSheetTypeTxt" label="抽单类型" align='center' min-width="180">
+          <!-- drawSheetTypeTxt -->
+          <el-table-column prop="drawSheetType" label="抽单类型" align='center' min-width="180">
           </el-table-column>
           <el-table-column prop="recentDays" label="质检天数" align='center' min-width="120">
           </el-table-column>
@@ -70,7 +71,7 @@
             <p>
               <label>质检天数：</label>
               <span>
-                <el-input v-model="value " placeholder="请输入质检天数"> </el-input> 天</span>
+                <el-input v-model="addNew.recentDays " placeholder="请输入质检天数"> </el-input> 天</span>
             </p>
             <p>
               <label></label>
@@ -82,7 +83,7 @@
             <p>
               <label>抽单类型：</label>
               <span>
-                <el-select v-model="value" placeholder="请选择">
+                <el-select v-model="addNew.drawSheetType" placeholder="请选择">
                   <el-option v-for=" item in QTSituation" :key="item.value" :label="item.label" :value="item.value"> </el-option>
                 </el-select>
               </span>
@@ -90,41 +91,41 @@
             <p>
               <label>抽单比例[每人]：</label>
               <span>
-                <el-input v-model="value " placeholder="请输入质检天数"> </el-input>  %</span>
+                <el-input v-model="addNew.makeRatio " placeholder="请输入抽单比例"> </el-input> %</span>
             </p>
           </li>
           <li>
             <p>
               <label>通过比例[每人]：</label>
               <span>
-                <el-input v-model="value " placeholder="请输入质检天数"> </el-input> %</span>
+                <el-input v-model="addNew.passRatio " placeholder="请输入通过比例"> </el-input> %</span>
             </p>
             <p>
               <label>通过件最低抽单件数[人·件]：</label>
               <span>
-                <el-input v-model="value " placeholder="请输入质检天数"> </el-input> 件</span>
+                <el-input v-model="addNew.minPassNum " placeholder="请输入最低抽单件数"> </el-input> 件</span>
             </p>
           </li>
           <li>
             <p>
               <label>拒绝比例[每人]：</label>
               <span>
-                <el-input v-model="value " placeholder="请输入质检天数"> </el-input> %</span>
+                <el-input v-model="addNew.refuseRatio " placeholder="请输入拒绝比例"> </el-input> %</span>
             </p>
             <p>
               <label>拒绝件最低抽单件数[人·件]：</label>
               <span>
-                <el-input v-model="value " placeholder="请输入质检天数"> </el-input> 件</span>
+                <el-input v-model="addNew.minRefuseNum " placeholder="请输入最低抽单件数"> </el-input> 件</span>
             </p>
           </li>
           <li class="colorGray">
-               <p>
+            <p>
               <label>创建人：</label>
-              <span>{{ value }}</span>
+              <span>{{ addNew.creator }}</span>
             </p>
             <p>
               <label>创建日期：</label>
-              <span >{{ value }}</span>
+              <span>{{ addNew.createTime }}</span>
             </p>
           </li>
         </ul>
@@ -136,8 +137,70 @@
     </el-dialog>
     <!-- ==============================编辑=================================== -->
     <el-dialog title="质检规则编辑" :modal="false" :visible.sync="Edit" width="420px">
-      <div class="newContent">
-        content
+       <div class="newContent">
+        <ul>
+          <li>
+            <p>
+              <label>质检天数：</label>
+              <span>
+                <el-input v-model="updateInf.recentDays " placeholder="请输入质检天数"> </el-input> 天</span>
+            </p>
+            <p>
+              <label></label>
+              <span></span>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <label>抽单类型：</label>
+              <span>
+                <el-select v-model="updateInf.drawSheetType" placeholder="请选择">
+                  <el-option v-for=" item in QTSituation" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+                </el-select>
+              </span>
+            </p>
+            <p>
+              <label>抽单比例[每人]：</label>
+              <span>
+                <el-input v-model="updateInf.makeRatio " placeholder="请输入抽单比例"> </el-input> %</span>
+            </p>
+          </li>
+          <li>
+            <p>
+              <label>通过比例[每人]：</label>
+              <span>
+                <el-input v-model="updateInf.passRatio " placeholder="请输入通过比例"> </el-input> %</span>
+            </p>
+            <p>
+              <label>通过件最低抽单件数[人·件]：</label>
+              <span>
+                <el-input v-model="updateInf.minPassNum " placeholder="请输入最低抽单件数"> </el-input> 件</span>
+            </p>
+          </li>
+          <li>
+            <p>
+              <label>拒绝比例[每人]：</label>
+              <span>
+                <el-input v-model="updateInf.refuseRatio " placeholder="请输入拒绝比例"> </el-input> %</span>
+            </p>
+            <p>
+              <label>拒绝件最低抽单件数[人·件]：</label>
+              <span>
+                <el-input v-model="updateInf.minRefuseNum " placeholder="请输入最低抽单件数"> </el-input> 件</span>
+            </p>
+          </li>
+          <li class="colorGray">
+            <p>
+              <label>创建人：</label>
+              <span>{{ addNew.creator }}</span>
+            </p>
+            <p>
+              <label>创建日期：</label>
+              <span>{{ addNew.createTime }}</span>
+            </p>
+          </li>
+        </ul>
       </div>
       <span slot="footer" class="dialog-footer">
         <el-button class="calbtn" @click="canc">取消</el-button>
@@ -152,6 +215,27 @@
   export default {
     data() {
       return {
+        addNew: {
+          recentDays: null,
+          drawSheetType: null,
+          makeRatio: null,
+          passRatio: null,
+          minPassNum: null,
+          refuseRatio: null,
+          minRefuseNum: null,
+          creator: null,
+          createTime: null,
+        },
+        updateInf: {
+          id: null,
+          drawSheetType: null,
+          recentDays: null,
+          makeRatio: null,
+          passRatio: null,
+          minPassNum: null,
+          refuseRatio: null,
+          minRefuseNum: null
+        },
         Confirm: false,
         add: false,
         Edit: false,
@@ -244,17 +328,7 @@
       SaveAdd() { //添加  提交
         this.loadsitu = true;
         this.adbtn = '保存中';
-        this.post("/insMakeRules/addInfo", {
-          drawSheetType: 'xx',
-          recentDays: 10,
-          makeRatio: 0.3,
-          passRatio: 0.4,
-          minPassNum: 3,
-          refuseRatio: 0.2,
-          minRefuseNum: 3,
-          creator: 'xx',
-          createTime: 'xxx'
-        }).then(res => {
+        this.post("/insMakeRules/addInfo", this.addNew).then(res => {
           if (res.statusCode == 200) {
             this.$message({
               message: '提交成功!',
@@ -268,16 +342,7 @@
       SaveEdit() { //编辑  提交
         this.loadsitu = true;
         this.adbtn = '保存中';
-        this.post("/insMakeRules/updateInfo", {
-          id: 'xxx',
-          drawSheetType: 'xx',
-          recentDays: 10,
-          makeRatio: 0.3,
-          passRatio: 0.4,
-          minPassNum: 3,
-          refuseRatio: 0.2,
-          minRefuseNum: 3
-        }).then(res => {
+        this.post("/insMakeRules/updateInfo", this.updateInf).then(res => {
           if (res.statusCode == 200) {
             this.$message({
               message: '提交成功!',
@@ -508,14 +573,16 @@
   }
 
   .newContent p:nth-of-type(odd) label {
-  width: 115px;
+    width: 115px;
   }
- .newContent p:nth-of-type(even) label {
-  width: 185px;
+
+  .newContent p:nth-of-type(even) label {
+    width: 185px;
   }
-.colorGray p label,
-.colorGray p span
-{
-  color:#AEAEAE;
-}
+
+  .colorGray p label,
+  .colorGray p span {
+    color: #AEAEAE;
+  }
+
 </style>
