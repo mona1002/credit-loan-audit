@@ -1,10 +1,11 @@
 <template>
-  <div class="AntiCaseNum IntegratedQuery">
+  <!-- <div class="AntiCaseNum IntegratedQuery regularConfig"> -->
+  <div class="regularConfig">
     <!-- 质检  功能页面 常规抽单配置功能 -->
     <myHead></myHead>
     <div class="content">
       <div class="title">
-        <h1>质检信息</h1>
+        <h1>质检规则设置查询</h1>
         <div class="icon_wrap">
           <span class="icon" @click="addInf">
             <img src="../../../../static/images/add.png" style="margin:10px;">
@@ -53,6 +54,55 @@
         </div> -->
       </div>
     </div>
+    <!-- ==============================任务分配=================================== -->
+    <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
+      <span>您确定生成质检任务？</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button class="calbtn" @click="canc">取消</el-button>
+        <el-button class="subtn" type="primary" :loading="loadsitu" @click="CFsave">{{adbtn}}</el-button>
+      </span>
+    </el-dialog>
+    <!-- ==============================添加=================================== -->
+    <el-dialog title="质检规则新增" :modal="false" :visible.sync="add" width="850px">
+      <div class="newContent">
+       <ul>
+         <li>
+           <p><label>质检天数：</label><span><el-input v-model="value " placeholder="请输入质检天数"> </el-input>天</span></p>
+           <p><label></label> <span></span> </p>
+         </li>
+
+          <li>
+           <p><label>抽单类型：</label><span><el-select  v-model="value" placeholder="请选择">
+             <el-option v-for=" item in QTSituation" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+             </el-select></span></p>
+           <p><label>抽单比例[每人]：</label><span><el-input v-model="value " placeholder="请输入质检天数"> </el-input>天</span></p>
+         </li>  <li>
+           <p><label>通过比例[每人]：</label><span><el-input v-model="value " placeholder="请输入质检天数"> </el-input>天</span></p>
+           <p><label>通过件最低抽单件数[人·件]：</label><span><el-input v-model="value " placeholder="请输入质检天数"> </el-input>天</span></p>
+         </li>  <li>
+           <p><label>拒绝比例[每人]：</label><span><el-input v-model="value " placeholder="请输入质检天数"> </el-input>天</span></p>
+           <p><label>拒绝件最低抽单件数[人·件]</label><span><el-input v-model="value " placeholder="请输入质检天数"> </el-input>天</span></p>
+         </li>  <li>
+           <p><label>创建人:</label><span>{{ value }}</span></p>
+           <p><label>创建日期:</label><span>{{ value }}</span></p>
+         </li>
+       </ul>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button class="calbtn" @click="canc">取消</el-button>
+        <el-button class="subtn" type="primary" :loading="loadsitu" @click="SaveAdd">{{adbtn}}</el-button>
+      </span>
+    </el-dialog>
+    <!-- ==============================编辑=================================== -->
+    <el-dialog title="质检规则编辑" :modal="false" :visible.sync="Edit" width="420px">
+      <div class="newContent">
+        content
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button class="calbtn" @click="canc">取消</el-button>
+        <el-button class="subtn" type="primary" :loading="loadsitu" @click="SaveEdit">{{adbtn}}</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -61,12 +111,20 @@
   export default {
     data() {
       return {
+        Confirm: false,
+        add: false,
+        Edit: false,
+        adbtn: '确认',
+        loadsitu: false,
+
         query: {
           id: '',
           matchApplyId: "",
         },
         userInf: null,
-        tableData: [],
+        tableData: [{
+
+        }],
         reg: /(\w{6})\w*(\w{4})/,
         Telreg: /(\w{7})\w*/,
         reVal: '$1********$2',
@@ -119,12 +177,101 @@
       }
     },
     methods: {
-      //  编辑按钮
+      //  编辑按钮-弹出弹窗
       handleEdit(index, row) {
         console.log(index, row);
+        this.Edit = true;
       },
-      apportion(){
-
+      addInf() { //添加 按钮弹窗
+        console.log('tianjia')
+        this.add = true;
+        this.loadsitu = false;
+        this.adbtn = '确定';
+      },
+      apportion() { //分配 按钮弹窗
+        console.log('apportion')
+        this.Confirm = true;
+        this.loadsitu = false;
+        this.adbtn = '确定';
+      },
+      canc() { //弹窗 取消按钮关闭
+        console.log('取消任务分配')
+        this.Confirm = false;
+        this.add = false;
+        this.Edit = false;
+      },
+      SaveAdd() { //添加  提交
+        this.loadsitu = true;
+        this.adbtn = '保存中';
+        this.post("/insMakeRules/addInfo", {
+          drawSheetType: 'xx',
+          recentDays: 10,
+          makeRatio: 0.3,
+          passRatio: 0.4,
+          minPassNum: 3,
+          refuseRatio: 0.2,
+          minRefuseNum: 3,
+          creator: 'xx',
+          createTime: 'xxx'
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.$message({
+              message: '提交成功!',
+              type: 'success'
+            });
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      },
+      SaveEdit() { //编辑  提交
+        this.loadsitu = true;
+        this.adbtn = '保存中';
+        this.post("/insMakeRules/updateInfo", {
+          id: 'xxx',
+          drawSheetType: 'xx',
+          recentDays: 10,
+          makeRatio: 0.3,
+          passRatio: 0.4,
+          minPassNum: 3,
+          refuseRatio: 0.2,
+          minRefuseNum: 3
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.$message({
+              message: '提交成功!',
+              type: 'success'
+            });
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      },
+      CFsave() { //分配  提交
+        console.log('任务分配')
+        this.loadsitu = true;
+        this.adbtn = '保存中';
+        // 生成 质检任务接口------选中某一条还是全部生成--待确认
+        this.post("insMakeRules/addInfo", {
+          drawSheetType: 'xx',
+          recentDays: 10,
+          makeRatio: 0.3,
+          passRatio: 0.4,
+          minPassNum: 3,
+          refuseRatio: 0.2,
+          minRefuseNum: 3,
+          creator: xx,
+          createTime: 'xxx'
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.$message({
+              message: '提交成功!',
+              type: 'success'
+            });
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
       },
       num(el, val) {
         switch (el) {
@@ -143,56 +290,15 @@
       //     // this.getInf(this.params);
       //     this.inquire(this.params);
       //   },
-      gopath() {
-        this.$store.dispatch('addVisitedViews', {
-          name: '综合查询-查看',
-          path: '/MatchingInfQuery',
-          flag: '',
-          params: '',
-          StatefullPath: '/MatchingInfQuery',
-        })
-      },
+
       handleCurrentChange(val) {
-        this.query.id = val.id;
-        this.query.matchApplyId = val.applyId;
-        localStorage.setItem("query", JSON.stringify(this.query));
-        this.$router.push('/MatchingInfQuery');
-        this.gopath();
+        // this.query.id = val.id;
+        // this.query.matchApplyId = val.applyId;
+        // localStorage.setItem("query", JSON.stringify(this.query));
+        // this.$router.push('/MatchingInfQuery');
+
         // this.params.pageNum = val;
         // this.inquire(this.params);
-      },
-      Rreset() {
-        this.params.applySubno = '';
-        this.params.custName = '';
-        this.params.certCode = '';
-        this.params.mobile = '';
-      },
-      Rsearch() {
-        // this.params.pageNum = this.currentPage = 1;
-        if (this.params.applySubno != '' || this.params.custName != '' || this.params.certCode != '' || this.params.mobile !=
-          '') {
-          this.inquire(this.params);
-        } else {
-          this.$message.error('请输入查询条件')
-        }
-      },
-      inquire(pam) {
-        // 基础接口-综合查询
-        this.post("applyInfoPool/multipleQuery", pam).then(res => {
-          if (res.statusCode == 200) {
-            for (var i = 0; i < res.data.length; i++) {
-              if (res.data[i].certCode) {
-                res.data[i].certCode = res.data[i].certCode.replace(this.reg, this.reVal);
-              }
-              if (res.data[i].mobile) {
-                res.data[i].mobile = res.data[i].mobile.replace(this.Telreg, this.telVal);
-              }
-            }
-            this.tableData = res.data;
-          } else {
-            this.$message.error(res.msg);
-          }
-        })
       },
     },
     mounted() {
@@ -204,12 +310,12 @@
       // 质检-常规抽单配置—查询列表
 
       this.get("/insMakeRules/getInfoList").then(res => {
-          if (res.statusCode == 200) {
-            this.tableData = res.data.recordList;
-          } else {
-            this.$message.error(res.msg);
-          }
-        });
+        if (res.statusCode == 200) {
+          this.tableData = res.data.recordList;
+        } else {
+          this.$message.error(res.msg);
+        }
+      });
     },
     components: {
       myHead
@@ -218,7 +324,7 @@
 
 </script>
 <style scoped>
-  .AntiCaseNum {
+  .regularConfig {
     width: 100%;
     background-color: #fafbfc;
     overflow-y: auto;
@@ -227,7 +333,7 @@
     height: 100%;
   }
 
-  .AntiCaseNum label {
+  .regularConfig label {
     font-size: 14px;
     color: #475669;
     text-align: right;
@@ -237,7 +343,7 @@
     margin-right: 10px;
   }
 
-  .AntiCaseNum i {
+  .regularConfig i {
     color: #ff7676;
     font-weight: 700;
     font-size: 16px;
@@ -348,5 +454,17 @@
   .emerColor {
     color: #0077ff;
   }
-
+.newContent{
+  background:red;
+}
+.newContent p{
+  width:49%;
+  height: 43px;
+  float: left;
+  border: 1px solid pink;
+}
+.newContent label{
+width:160px;
+border: 1px solid green;
+}
 </style>

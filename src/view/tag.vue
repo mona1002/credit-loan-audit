@@ -333,8 +333,19 @@
         }else if (route.path == '/commissioner') {//质检专员审批
           this.nodeName = "质检专员审批";
         } else if (route.path == '/manager') {
-          this.nodeName = "质检";
+          this.nodeName = "质检主管审批";
+        }else if (route.path == '/regularConfig') {// 质检功能 - 常规抽单配置功能
+          this.nodeName = "常规抽单配置功能";
         }
+        // else if (route.path == '/manager') {
+        //   this.nodeName = "质检";
+        // }else if (route.path == '/manager') {
+        //   this.nodeName = "质检";
+        // }else if (route.path == '/manager') {
+        //   this.nodeName = "质检";
+        // }else if (route.path == '/manager') {
+        //   this.nodeName = "质检";
+        // }
         this.RoutePath = route.path;
         this.$store.dispatch('addVisitedViews', {
           name: this.nodeName,

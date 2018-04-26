@@ -13,7 +13,15 @@
   position: absolute;
   margin-top:15vh;
 }
-
+.Abody .el-table th .cell{
+  font-weight: 800;
+}
+.Abody .el-input{
+width:200px;
+}
+/* .Abody .el-input__inner{
+width:200px;
+} */
 /* .Abody el-select-dropdown__item{
 float:none;
 }
@@ -2592,4 +2600,11 @@ body .el-submenu .el-menu-item{
 /* 综合查询 */
 .IntegratedQuery .el-table__body-wrapper{
   overflow-x: auto;
+}
+.regularConfig .el-dialog__header{
+  padding-top:10px;
+  background: #eef0f9;
+}
+.regularConfig .el-dialog__headerbtn{
+top:10px;
 }
