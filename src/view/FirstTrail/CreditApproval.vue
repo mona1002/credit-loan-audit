@@ -1119,7 +1119,7 @@
           case 'spjl':
             //console.log('spspspspsppspspspspsp')
             // this.showFlag = 'spjl';
-            this.spjlShow = true;
+            thisthis.spjlShow = true;
             this.getSpjlList();
             break;
           case 'lcgj':
@@ -1795,6 +1795,7 @@
           .then(res => {
             //console.log(res);
             if (res.statusCode == '200') {
+              console.log('拼接书')
               this.lcgjLoading = false;
               this.lcgjData = res.data;
             } else {
