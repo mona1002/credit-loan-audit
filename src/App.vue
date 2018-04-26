@@ -3,7 +3,7 @@
     <!-- <myHead></myHead> -->
     <!-- <router-view class="Abody" @onbeforeunload="aaa"></router-view> -->
     <router-view class="Abody"></router-view>
-    <tag class="fottt"></tag>
+    <!-- <tag class="fottt"></tag> -->
   </div>
 </template>
 <script>
