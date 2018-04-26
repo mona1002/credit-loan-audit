@@ -1791,7 +1791,7 @@
         //   }
         // })
 
-        this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processInstanceId)
+        this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processInstanceId+'&'+Math.random())
           .then(res => {
             //console.log(res);
             if (res.statusCode == '200') {
