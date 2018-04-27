@@ -469,7 +469,7 @@ export default {
       console.log(this.applySubNo);
     }
     //复议专员
-    if (this.judgeFlag == '05') {
+    if (this.judgeFlag == '05' ||this.judgeFlag == '06') {
       var RtaskInWaitting = JSON.parse(localStorage.getItem('RtaskInWaitting'));
       this.applyId = RtaskInWaitting.applyId;
       // 进件编号
@@ -477,15 +477,15 @@ export default {
       this.applySubNo = RtaskInWaitting.applySubNo;
       console.log(this.applySubNo);
     }
-    //复议经理
-    if (this.judgeFlag == '06') {
-      var RtaskInWaitting = JSON.parse(localStorage.getItem('RManagertaskInWaitting'));
-      this.applyId = RtaskInWaitting.applyId;
-      // 进件编号
-      console.log(this.applyId);
-      this.applySubNo = RtaskInWaitting.applySubNo;
-      console.log(this.applySubNo);
-    }
+    // //复议经理
+    // if (this.judgeFlag == '06') {
+    //   var RtaskInWaitting = JSON.parse(localStorage.getItem('RManagertaskInWaitting'));
+    //   this.applyId = RtaskInWaitting.applyId;
+    //   // 进件编号
+    //   console.log(this.applyId);
+    //   this.applySubNo = RtaskInWaitting.applySubNo;
+    //   console.log(this.applySubNo);
+    // }
 
     // this.phoneNum = '11111';
     // this.phoneType = '00';

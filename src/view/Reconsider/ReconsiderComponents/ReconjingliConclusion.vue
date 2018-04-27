@@ -582,10 +582,10 @@
       }
     },
     mounted() {
-			// alert(JSON.parse(localStorage.getItem('RManagertaskInWaitting')))
+			// alert(JSON.parse(localStorage.getItem('RtaskInWaitting')))
 			
       //申请单ID
-      this.id = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).applyId;
+      this.id = JSON.parse(localStorage.getItem('RtaskInWaitting')).applyId;
       this.request();
 
       //经办人
@@ -606,11 +606,11 @@
       //流程模版ID
       this.processTemplateId = JSON.parse(localStorage.getItem('ReManagerWorkbenchPass')).processTemplateId;
       //流程实例id
-			this.processInstanceId = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).processInstanceId;
+			this.processInstanceId = JSON.parse(localStorage.getItem('RtaskInWaitting')).processInstanceId;
 			// console.log(this.processInstanceId)
 			// alert(this.processInstanceId)
       //任务id
-      this.taskId = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).taskId;
+      this.taskId = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
       this.proCode = this.applicationInformationDetail.proCode;
       this.appOrgCode = this.applicationInformationDetail.appOrgCode;
       this.applyCustId = this.applicationInformationDetail.applyCustId;

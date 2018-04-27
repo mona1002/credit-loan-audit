@@ -210,11 +210,11 @@
 			goDetail(row, event, column) {
 				console.log(row);
 					// this.$router.push({path:'/SplitScreen',query:row});
-				if(this.judgeFlag.flag == '05'){
+				// if(this.judgeFlag.flag == '05'){
  						localStorage.setItem("RtaskInWaitting",JSON.stringify(row));
-				}else if(this.judgeFlag.flag == '06'){
- 						localStorage.setItem("RManagertaskInWaitting",JSON.stringify(row));
-				}
+				// }else if(this.judgeFlag.flag == '06'){
+ 				// 		localStorage.setItem("RManagertaskInWaitting",JSON.stringify(row));
+				// }
 		     this.$router.push({path:'/ReconsiderSplit'});
 					//  this.$store.dispatch('addVisitedViews', {
           //   name:'复议详情',

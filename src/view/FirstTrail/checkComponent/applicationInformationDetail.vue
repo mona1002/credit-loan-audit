@@ -1132,13 +1132,16 @@
 		    }else if (this.judgeFlag.flag == '04') {
 		        this.taskInWaitting = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
 		        this.applyId=this.taskInWaitting.applyId;
-		    }else if (this.judgeFlag.flag == '05') {
+		    }else if (this.judgeFlag.flag == '05' ||this.judgeFlag.flag == '06') {
 		        this.taskInWaitting = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
 		        this.applyId=this.taskInWaitting.applyId;
-		    }else if (this.judgeFlag.flag == '06') {
-		        this.taskInWaitting = JSON.parse(localStorage.getItem("RManagertaskInWaitting")) //复议经理
-		        this.applyId=this.taskInWaitting.applyId;
-		    }else if (this.judgeFlag.flag == '07') {
+			}
+			// else if (this.judgeFlag.flag == '06') {
+		    //     // this.taskInWaitting = JSON.parse(localStorage.getItem("RManagertaskInWaitting")) //复议经理
+		    //     this.taskInWaitting = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议经理
+		    //     this.applyId=this.taskInWaitting.applyId;
+			// }
+			else if (this.judgeFlag.flag == '07') {
 		        this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //审批已办任务
 		        this.applyId=this.taskInWaitting.applyId;
 		    }else if (this.judgeFlag.flag == '08') {

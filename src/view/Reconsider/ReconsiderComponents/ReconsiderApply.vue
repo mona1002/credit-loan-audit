@@ -122,12 +122,13 @@
       }
     },
     mounted() {
-      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '05') {
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
-      } else if (this.judgeFlag.flag == '06') {
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("RManagertaskInWaitting")) //复议经理
-      }
+      // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      // if (this.judgeFlag.flag == '05') {
+      //   this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
+      // } else if (this.judgeFlag.flag == '06') {
+      //   this.tastwaitingPass = JSON.parse(localStorage.getItem("RManagertaskInWaitting")) //复议经理
+      // }
+         this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议
       this.post("/accepApplyReconController/getAccepApplyReconByProcessId", {
         processInstanceId: this.tastwaitingPass.processInstanceId,
         // id:'500001'
