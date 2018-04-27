@@ -724,22 +724,22 @@
                 this.jujueBtnShow = true;
         }
       }
-         console.log('taskId : ' + this.taskId);
-        // 回退 拒绝  审批
-        // 经办人 登录用户名
-        this.userInfo = JSON.parse(localStorage.getItem('userInf'));
-        console.log( this.userInfo)
-        this.dealroperCode = this.userInfo.userCode;
-        // 用户id
-        this.orgId = this.userInfo.orgId;
-        // this.dealroperCode = userInfo.userCode;
-        console.log('userCode : ' + this.dealroperCode);
-        // 经办时间
-        // this.dealroperDate =
-        //   new Date().toLocaleString()
-        //   .replace(/\//g, '-')
-        //   .match(/\d{4}\-\d{2}\-\d{1,2}/)[0]
-        // console.log(this.dealroperDate);
+      console.log('taskId : ' + this.taskId);
+      // 回退 拒绝  审批
+      // 经办人 登录用户名
+      this.userInfo = JSON.parse(localStorage.getItem('userInf'));
+      console.log(this.userInfo)
+      this.dealroperCode = this.userInfo.userCode;
+      // 用户id
+      this.orgId = this.userInfo.orgId;
+      // this.dealroperCode = userInfo.userCode;
+      console.log('userCode : ' + this.dealroperCode);
+      // 经办时间
+      // this.dealroperDate =
+      //   new Date().toLocaleString()
+      //   .replace(/\//g, '-')
+      //   .match(/\d{4}\-\d{2}\-\d{1,2}/)[0]
+      // console.log(this.dealroperDate);
       // applyId
       // this.applyId = '00542';
       // this.applyId = '00542';
@@ -979,7 +979,7 @@
             // this.showFlag = '02';
             this.huiTuiShow = true;
             // 获取系统时间
-            this.get('system/getSystemDate?'+Math.random()).then(res => {
+            this.get('system/getSystemDate?' + Math.random()).then(res => {
               //console.log('回退', res)
               // 请求系统时间
               this.dealroperDate = res.data;
@@ -992,7 +992,7 @@
             //console.log('01010101010101')
             // this.showFlag = '01';
             this.juJueShow = true;
-            this.get('system/getSystemDate?'+Math.random()).then(res => {
+            this.get('system/getSystemDate?' + Math.random()).then(res => {
               //console.log(res)
               // 请求系统时间
               this.dealroperDate = res.data;
@@ -1004,7 +1004,7 @@
             // console.log('070707007')
             // this.showFlag = '07';
             this.fangQiShow = true;
-            this.get('system/getSystemDate?'+Math.random()).then(res => {
+            this.get('system/getSystemDate?' + Math.random()).then(res => {
               //console.log(res)
               // 请求系统时间
               this.dealroperDate = res.data;
@@ -1344,9 +1344,9 @@
               this.busiState = '00';
             } else if (this.judgeFlag == '02') {
               // this.busiState = '10'
-              if( this.rollbackNodeName.value=='creditApp_apply'){//申请登记
+              if (this.rollbackNodeName.value == 'creditApp_apply') { //申请登记
                 this.busiState = '00'
-              }else if( this.rollbackNodeName.value=='creditApp_firstTrial'){//初审审批
+              } else if (this.rollbackNodeName.value == 'creditApp_firstTrial') { //初审审批
                 this.busiState = '10'
               }
             }
@@ -1553,6 +1553,11 @@
         //console.log("保存审批信息");
         // 假如是终审 1
         if (this.judgeFlag == '02') {
+          // if (this.taskName == 'creditApp_finalTrial_five') {
+          //   this.auditFlag = '1';
+          // } else {
+          //   this.auditFlag = '0';
+          // }
           this.auditFlag = '1';
         }
         let verIncome2 = 0;
@@ -1568,12 +1573,10 @@
           //console.log('==========================================')
           ploanAmt2 = Number(this.ploanAmt)
         }
-        //alert('kkk');
-        //return;
         console.log(this.applyId)
         this.post('/creauditOpinion/add', {
           // this.post("http://10.1.26.47:8080/riskManagement/creauditOpinion/add", {
-          applyId: this.applyId,
+          // applyId: this.applyId,
           auditType: this.judgeFlag == '01' ? '00' : '01',
           proCode: this.proCode,
           verIncome: verIncome2,
@@ -1689,7 +1692,7 @@
         // }
         if (flag == 'main') {
           // 请求主原因
-          this.get('/credit/firstNodeReason?reasonType=' + type+'&'+Math.random()).then(res => {
+          this.get('/credit/firstNodeReason?reasonType=' + type + '&' + Math.random()).then(res => {
             //console.log(res);
             if (res.statusCode == '200') {
               this.mainReasons = res.data;
@@ -1698,7 +1701,7 @@
         } else if (flag == 'second') {
           //console.log(this.mainReasonName);
           // 请求子原因
-          this.get('/credit/findNodeFirstChildren?id=' + this.mainId+'&'+Math.random()).then(res => {
+          this.get('/credit/findNodeFirstChildren?id=' + this.mainId + '&' + Math.random()).then(res => {
             //console.log(res);
             if (res.statusCode == '200') {
               this.secondeReasons = res.data;
@@ -1792,7 +1795,7 @@
         //   }
         // })
 
-        this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processInstanceId+'&'+Math.random())
+        this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processInstanceId + '&' + Math.random())
           .then(res => {
             //console.log(res);
             if (res.statusCode == '200') {
