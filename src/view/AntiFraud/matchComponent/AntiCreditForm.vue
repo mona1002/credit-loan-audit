@@ -982,11 +982,13 @@
     },
     mounted() {
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '03') {
+      if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
         this.getParams = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈专员-匹配查看
-      } else if (this.judgeFlag.flag == '04') {
-        this.getParams = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管-匹配查看
-      } else if (this.judgeFlag.flag == '05' ||this.judgeFlag.flag == '06') {
+      } 
+      // else if (this.judgeFlag.flag == '04') {
+      //   this.getParams = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管-匹配查看
+      // } 
+      else if (this.judgeFlag.flag == '05' ||this.judgeFlag.flag == '06') {
         this.getParams = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
       }
       // else if ( this.judgeFlag.flag == '06') {

@@ -59,11 +59,13 @@
 		        this.taskInWaitting = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
 		    } else if (this.judgeFlag.flag == '02') {
 		        this.taskInWaitting = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-		    }else if (this.judgeFlag.flag == '03') {
+		    }else if (this.judgeFlag.flag == '03'||this.judgeFlag.flag == '04') {
 		        this.taskInWaitting = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
-		    }else if (this.judgeFlag.flag == '04') {
-		        this.taskInWaitting = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
-		    }else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
+			}
+			// else if (this.judgeFlag.flag == '04') {
+		    //     this.taskInWaitting = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
+			// }
+			else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
 		        this.taskInWaitting = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
 			}
 			// else if (this.judgeFlag.flag == '06') {

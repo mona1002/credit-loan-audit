@@ -461,7 +461,7 @@ export default {
     }
     //反欺诈主管
     if (this.judgeFlag == '04') {
-      var AntiManagertaskInWaitting = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting'));
+      var AntiManagertaskInWaitting = JSON.parse(localStorage.getItem('AntitaskInWaitting'));
       this.applyId = AntiManagertaskInWaitting.applyId;
       // 进件编号
       console.log(this.applyId);

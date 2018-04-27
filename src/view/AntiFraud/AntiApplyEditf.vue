@@ -197,16 +197,17 @@ console.log(  this.antiFlag  )
       // else if (this.antiFlag == '03' || this.antiFlag == '04') { // 其他取 列表id
       //   console.log(' 主管/专员 ');
       //   this.id = this.$route.params.id;
-      if (this.antiFlag == '03') {
+      if (this.antiFlag == '03' ||this.antiFlag == '04') {
         // AntitaskInWaitting
         this.creditappTaskid = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
         this.taskName = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskName;
-        console.log('creditappTaskid===', this.creditappTaskid)
-      } else if (this.antiFlag == '04') {
-        // AntiManagertaskInWaitting
-        this.creditappTaskid = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
-        this.taskName = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskName;
-      }
+        // console.log('creditappTaskid===', this.creditappTaskid)
+      } 
+      // else if (this.antiFlag == '04') {
+      //   // AntiManagertaskInWaitting
+      //   this.creditappTaskid = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
+      //   this.taskName = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskName;
+      // }
 
       // 05 复议专员  06 复议主管
        if (this.antiFlag == '05' || this.antiFlag == '06') {
@@ -280,7 +281,7 @@ console.log(  this.antiFlag  )
       // 反欺诈申请 获取 主原因子原因
       firstNodeReason() {
         this.get('/credit/firstNodeReason?reasonType=' + '08,09'+'&'+Math.random()).then(res => {
-          console.log(res);
+          // console.log(res);
           this.mainReasons = res.data;
         })
       },
@@ -288,13 +289,13 @@ console.log(  this.antiFlag  )
       getFraudApplyInfo() {
         // 测试 id
         // this.id = 'ed353288-758d-4699-bec7-094bd6444556';
-console.log( '入参id'+ this.id)
+// console.log( '入参id'+ this.id)
         this.post('/fraudApplyInfoController/getFraudApplyInfo', {
             applyId: this.id
             // applyId:'201506260173032182'
           })
           .then(res => {
-            console.log(res.data.applyInfoPool);
+            // console.log(res.data.applyInfoPool);
             if (res.statusCode == 200) {
               // 任务id
               // this.creditappTaskid = res.data.applyInfoPool.id;
@@ -511,7 +512,7 @@ console.log( '入参id'+ this.id)
       findNodeFirstChildren(val) {
         // 请求子原因
         this.get('/credit/findNodeFirstChildren?id=' + this.mainId+'&'+Math.random()).then(res => {
-          console.log(res);
+          // console.log(res);
           if (res.statusCode == '200') {
             this.secondReasons = res.data;
           }

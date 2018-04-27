@@ -37,12 +37,13 @@
       }
     },
     mounted() {
-      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '03') {
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈专员-列表
-      } else if (this.judgeFlag.flag == '04') {
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管-列表
-      }
+      // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      // if (this.judgeFlag.flag == '03') {
+      //   this.tastwaitingPass = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈专员-列表
+      // } else if (this.judgeFlag.flag == '04') {
+      //   this.tastwaitingPass = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管-列表
+      // }
+       this.tastwaitingPass = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈专员+主管
       this.post("/creauditOpinion/queryByPage", {
         applyId: this.tastwaitingPass.applyId,
       }).then(res => {

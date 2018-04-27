@@ -403,7 +403,6 @@
       },
       // 反欺诈申请查看
       handleClickInfo(row) {
-        // 
         this.$router.push({
           name: 'AntiApplyInf',
           params: {
@@ -414,35 +413,35 @@
       },
       // 主管/专员审批 跳分屏
       rowDbClick(row) {
-        console.log(row);
-        console.log('主管/专员 跳分屏')
+        // console.log('主管/专员 跳分屏')
+         localStorage.setItem("AntitaskInWaitting", JSON.stringify(row))
         // this.$router.push({ path: '/FSplitScreen' });
-        if (this.antiFlag == '03') {
-          // 反欺诈专员
-          localStorage.setItem("AntitaskInWaitting", JSON.stringify(row))
-          // 反欺诈  分屏
-          // this.$router.push('AntiAudit')
-        //    this.$store.dispatch('addVisitedViews', {
-        //   name: '反欺诈专员详情',
-        //   path: '/AntiAudit',
-        //   flag: '03',
-        //   params: '',
-        //   StatefullPath: '/AntiAudit',
-        // })
-        }
-        if (this.antiFlag == '04') {
-          // 反欺诈主管
-          localStorage.setItem("AntiManagertaskInWaitting", JSON.stringify(row))
-          // 反欺诈  分屏
-          // this.$router.push('AntiAudit');
-        //    this.$store.dispatch('addVisitedViews', {
-        //   name: '反欺诈主管详情',
-        //   path: '/AntiAudit',
-        //   flag:'04',
-        //   params: '',
-        //   StatefullPath: '/AntiAudit',
-        // })
-        }
+        // if (this.antiFlag == '03' ||this.antiFlag == '04') {
+        //   // 反欺诈专员
+        //   localStorage.setItem("AntitaskInWaitting", JSON.stringify(row))
+        //   // 反欺诈  分屏
+        //   // this.$router.push('AntiAudit')
+        // //    this.$store.dispatch('addVisitedViews', {
+        // //   name: '反欺诈专员详情',
+        // //   path: '/AntiAudit',
+        // //   flag: '03',
+        // //   params: '',
+        // //   StatefullPath: '/AntiAudit',
+        // // })
+        // }
+        // if (this.antiFlag == '04') {
+        //   // 反欺诈主管
+        //   localStorage.setItem("AntiManagertaskInWaitting", JSON.stringify(row))
+        //   // 反欺诈  分屏
+        //   // this.$router.push('AntiAudit');
+        // //    this.$store.dispatch('addVisitedViews', {
+        // //   name: '反欺诈主管详情',
+        // //   path: '/AntiAudit',
+        // //   flag:'04',
+        // //   params: '',
+        // //   StatefullPath: '/AntiAudit',
+        // // })
+        // }
             this.$router.push({
           name: 'AntiAudit',
           params: {

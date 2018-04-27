@@ -300,8 +300,8 @@
     data() {
       return {
         taskName: '',
-        nodeName: '',
-        routeParams: '',
+        // nodeName: '',
+        // routeParams: '',
         coverShow: false, // 弹窗
         products: [], // 审批产品
         dealroperDate: '',
@@ -332,7 +332,6 @@
         processTemplateId: '',
         taskStatus: '',
         lcgjLoading: '',
-
         reasonRemark: '',
         issameFamtxt: '', // 风险项
         relBorrowertxt: '', // 案件描述,
@@ -393,12 +392,13 @@
         secondaryReason: '',
         isLoading: false, // 审批按钮 是否加载状态
         loadingTitle: '提交', // 默认btn title
+        taskwaitting: ''
         // mainName:'',
         // secondaryName:''
       }
     },
     mounted() {
-
+      console.log(JSON.parse(localStorage.getItem("AntitaskInWaitting")))
 
 
 
@@ -446,122 +446,167 @@
             "type": "02"
           }
         ]
-      } else if (this.judgeFlag == '03') {
-        // 取出 流程模版id  processTemplateId
-        this.processTemplateId = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).processTemplateId;
-        this.isEdit = true;
-        // 反欺诈专员审批按钮，要判断下，功能角色号有配BX22的
-        if (this.userInfo.roleCodesList) {
-          for (var i = 0; i < this.userInfo.roleCodesList.length; i++)
-            if (this.userInfo.roleCodesList[i] == 'BX22')
-              if (this.judgeFlag == '03')
-                this.shenPiBtnShow = true;
-        }
-        // 审批 专员 AntiWorkbenchPass
-        this.taskId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
-        // // 反欺诈申请id
-        // this.appinfoId = 
-        this.applyId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).applyId;
-        // 任务节点
-        this.taskNodeName = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskNodeName;
-        this.taskId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
-
-        // 流程实例id
-        this.processInstanceId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).processInstanceId;
-        console.log(this.processInstanceId);
-        // 任务状态
-        this.taskStatus = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskStatus;
-        this.taskName = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskName;
-        this.nodeName = '反欺诈专员审批';
-        // 先取 保存的信息
+      } else if (this.judgeFlag == '03' || this.judgeFlag == '04') {
+        this.taskwaitting = JSON.parse(localStorage.getItem('AntitaskInWaitting'));
+        this.taskName = this.taskwaitting.taskName;
+        this.taskId = this.taskwaitting.taskId;
+        this.applyId = this.taskwaitting.applyId;
+        this.processInstanceId = this.taskwaitting.processInstanceId;
+        this.taskNodeName = this.taskwaitting.taskNodeName;
+        this.taskStatus = this.taskwaitting.taskStatus;
         var insertObj = JSON.parse(localStorage.getItem('saveInsertObj'));
         if (insertObj != undefined) {
           this.auditResult = insertObj.auditResult; // 审核结论
           this.auditResulttext = insertObj.auditResulttext; // 审核结论 名称
           this.mainReason = insertObj.mainreasonId; // 欺诈主原因id
-          // this.mainreaName = insertObj.mainReasonName, // 欺诈主原因名称
           this.mainReasonName = insertObj.mainreaName, // 欺诈主原因名称
-            this.secondReason = insertObj.subreasonId; // 欺诈子原因id
-          // this.subreaName = insertObj.subreaName, // 欺诈子原因名称
-          this.subreaName = insertObj.subreaName, // 欺诈子原因名称    
-            this.riskSection = insertObj.riskSection; // 风险项
-          this.auditDesc = insertObj.auditDesc; // 反欺诈决策反馈
-          this.caseNum = insertObj.caseNum; // 案件编号 caseNum
-          this.caseDesc = insertObj.caseDesc; // 案件描述
-          // 请求主原因
-          // if (this.auditResult) {
-          //   this.getReason('main', this.auditResult, true);
-          //   // 赋值主原因
-          // }
-          // 请求子原因
-          // this.secondReasonT = insertObj.subreasonId;
-          // if (insertObj.mainreasonId) {
-          //   this.getReason('second', this.mainReasonT, true);
-          // }
-          // 请求风险项
-          // this.getRiskItems();
-           console.log('顶顶顶顶顶顶顶顶顶顶')
-        }
-        // 请求风险项
-        this.getRiskItems();
-        this.queryCaseNumList();
-
-      } else if (this.judgeFlag == '04') {
-        // 取出 流程模版id  processTemplateId
-        this.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
-        // 审批主管
-        this.taskId = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
-        this.applyId = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).applyId;
-        // 任务节点
-        this.taskNodeName = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskNodeName;
-        this.taskId = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
-        // 流程实例id
-        this.processInstanceId = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).processInstanceId;
-        // 任务状态
-        this.taskStatus = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskStatus;
-        this.taskName = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskName;
-        this.nodeName = '反欺诈主管审批';
-
-        this.options = [{
-          "label": "反欺诈专员审批",
-          "value": "antiFraudApp_commissioner",
-          "type": ''
-        }]
-
-        // 反欺诈主管 , 假如 本地存储了信息, 就不请求 了
-        var insertObj = JSON.parse(localStorage.getItem('saveInsertObj'));
-        if (insertObj != undefined) {
-          this.auditResult = insertObj.auditResult; // 审核结论
-          this.auditResulttext = insertObj.auditResulttext; // 审核结论 名称
-          this.mainReason = insertObj.mainreasonId; // 欺诈主原因id
-          this.mainreaName = insertObj.mainReasonName, // 欺诈主原因名称
             this.secondReason = insertObj.subreasonId; // 欺诈子原因id
           this.subreaName = insertObj.subreaName, // 欺诈子原因名称
             this.riskSection = insertObj.riskSection; // 风险项
           this.auditDesc = insertObj.auditDesc; // 反欺诈决策反馈
           this.caseNum = insertObj.caseNum; // 案件编号 caseNum
           this.caseDesc = insertObj.caseDesc; // 案件描述
-          // 请求主原因
-          // if (this.auditResult) {
-          //   this.getReason('main', this.auditResult, true);
-          //   // 赋值主原因
-          // }
-          // 请求子原因
-          // this.secondReasonT = insertObj.subreasonId;
-          // if (insertObj.mainreasonId) {
-          //   this.getReason('second', this.mainReasonT, true);
-          // }
-         
-          
-        } else {
-          // 反欺诈主管 请求 反欺诈历史信息
-          this.queryCreauditOpinionObj();
         }
         // 请求风险项
         this.getRiskItems();
-
+        // 专员主管区分
+        console.log(this.taskName )
+        if (this.taskName == 'antiFraudApp_commissioner') { // 专员
+        this.processTemplateId = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).processTemplateId;
+          this.isEdit = true;
+          if (this.userInfo.roleCodesList) {
+            for (var i = 0; i < this.userInfo.roleCodesList.length; i++)
+              if (this.userInfo.roleCodesList[i] == 'BX22')
+                if (this.judgeFlag == '03')
+                  this.shenPiBtnShow = true;
+          }
+          this.queryCaseNumList();
+        } else if (this.taskName == 'antiFraudApp_manager') { //主管
+        this.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
+          this.options = [{
+            "label": "反欺诈专员审批",
+            "value": "antiFraudApp_commissioner",
+            "type": ''
+          }]
+          if (!insertObj) {
+            // 反欺诈主管 请求 反欺诈历史信息
+            this.queryCreauditOpinionObj();
+          }
+        }
       }
-      this.routeParams = '?taskNodeName=' + this.taskName
+      // else if (this.judgeFlag == '03') {
+
+      //   // 取出 流程模版id  processTemplateId
+      //   // this.processTemplateId = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).processTemplateId;
+      //   this.isEdit = true;
+      //   // 反欺诈专员审批按钮，要判断下，功能角色号有配BX22的
+      //   if (this.userInfo.roleCodesList) {
+      //     for (var i = 0; i < this.userInfo.roleCodesList.length; i++)
+      //       if (this.userInfo.roleCodesList[i] == 'BX22')
+      //         if (this.judgeFlag == '03')
+      //           this.shenPiBtnShow = true;
+      //   }
+      //   // 审批 专员 AntiWorkbenchPass
+      //   // this.taskId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
+      //   // // 反欺诈申请id
+      //   // this.appinfoId = 
+      //   // this.applyId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).applyId;
+      //   // 任务节点
+      //   // this.taskNodeName = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskNodeName;
+      //   // this.taskId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
+      //   // 流程实例id
+      //   // this.processInstanceId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).processInstanceId;
+      //   // 任务状态
+      //   // this.taskStatus = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskStatus;
+      //   // this.taskName = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskName;
+      //   // this.nodeName = '反欺诈专员审批';
+      //   // 先取 保存的信息
+      //   // var insertObj = JSON.parse(localStorage.getItem('saveInsertObj'));
+      //   if (insertObj != undefined) {
+      //     this.auditResult = insertObj.auditResult; // 审核结论
+      //     this.auditResulttext = insertObj.auditResulttext; // 审核结论 名称
+      //     this.mainReason = insertObj.mainreasonId; // 欺诈主原因id
+      //     // this.mainreaName = insertObj.mainReasonName, // 欺诈主原因名称
+      //     this.mainReasonName = insertObj.mainreaName, // 欺诈主原因名称
+      //       this.secondReason = insertObj.subreasonId; // 欺诈子原因id
+      //     // this.subreaName = insertObj.subreaName, // 欺诈子原因名称
+      //     this.subreaName = insertObj.subreaName, // 欺诈子原因名称    
+      //       this.riskSection = insertObj.riskSection; // 风险项
+      //     this.auditDesc = insertObj.auditDesc; // 反欺诈决策反馈
+      //     this.caseNum = insertObj.caseNum; // 案件编号 caseNum
+      //     this.caseDesc = insertObj.caseDesc; // 案件描述
+      //     // 请求主原因
+      //     // if (this.auditResult) {
+      //     //   this.getReason('main', this.auditResult, true);
+      //     //   // 赋值主原因
+      //     // }
+      //     // 请求子原因
+      //     // this.secondReasonT = insertObj.subreasonId;
+      //     // if (insertObj.mainreasonId) {
+      //     //   this.getReason('second', this.mainReasonT, true);
+      //     // }
+      //     // 请求风险项
+      //     // this.getRiskItems();
+      //      console.log('顶顶顶顶顶顶顶顶顶顶')
+      //   }
+      //   // 请求风险项
+      //   this.getRiskItems();
+      //   this.queryCaseNumList();
+
+      // } else if (this.judgeFlag == '04') {
+      //   // 取出 流程模版id  processTemplateId
+      //   // this.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
+      //   // 审批主管
+      //   // this.taskId = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
+      //   // this.applyId = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).applyId;
+      //   // 任务节点
+      //   // this.taskNodeName = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskNodeName;
+      //   // this.taskId = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
+      //   // 流程实例id
+      //   // this.processInstanceId = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).processInstanceId;
+      //   // 任务状态
+      //   // this.taskStatus = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskStatus;
+      //   // this.taskName = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskName;
+      //   // this.nodeName = '反欺诈主管审批';
+
+      //   this.options = [{
+      //     "label": "反欺诈专员审批",
+      //     "value": "antiFraudApp_commissioner",
+      //     "type": ''
+      //   }]
+
+      //   // 反欺诈主管 , 假如 本地存储了信息, 就不请求 了
+      //   // var insertObj = JSON.parse(localStorage.getItem('saveInsertObj'));
+      //   if (insertObj != undefined) {
+      //     this.auditResult = insertObj.auditResult; // 审核结论
+      //     this.auditResulttext = insertObj.auditResulttext; // 审核结论 名称
+      //     this.mainReason = insertObj.mainreasonId; // 欺诈主原因id
+      //     this.mainreaName = insertObj.mainReasonName, // 欺诈主原因名称
+      //       this.secondReason = insertObj.subreasonId; // 欺诈子原因id
+      //     this.subreaName = insertObj.subreaName, // 欺诈子原因名称
+      //       this.riskSection = insertObj.riskSection; // 风险项
+      //     this.auditDesc = insertObj.auditDesc; // 反欺诈决策反馈
+      //     this.caseNum = insertObj.caseNum; // 案件编号 caseNum
+      //     this.caseDesc = insertObj.caseDesc; // 案件描述
+      //     // 请求主原因
+      //     // if (this.auditResult) {
+      //     //   this.getReason('main', this.auditResult, true);
+      //     //   // 赋值主原因
+      //     // }
+      //     // 请求子原因
+      //     // this.secondReasonT = insertObj.subreasonId;
+      //     // if (insertObj.mainreasonId) {
+      //     //   this.getReason('second', this.mainReasonT, true);
+      //     // }
+      //   } else {
+      //     // 反欺诈主管 请求 反欺诈历史信息
+      //     this.queryCreauditOpinionObj();
+      //   }
+      //   // 请求风险项
+      //   this.getRiskItems();
+
+      // }
+      // this.routeParams = '?taskNodeName=' + this.taskName
       // 将这里的 请求风险项 转移到 专员/主管内
       // 请求风险项
       // this.getRiskItems();
@@ -624,7 +669,7 @@
       // 请求系统时间
       getSystemDate() {
         // 获取系统时间
-        this.get('system/getSystemDate?'+Math.random()).then(res => {
+        this.get('system/getSystemDate?' + Math.random()).then(res => {
           console.log('回退', res)
           // 请求系统时间
           this.dealroperDate = res.data;
@@ -633,7 +678,7 @@
       },
       // 请求风险项
       getRiskItems() {
-        this.get('/credit/getRiskItems?applyId=' + this.applyId+'&'+Math.random()).then(res => {
+        this.get('/credit/getRiskItems?applyId=' + this.applyId + '&' + Math.random()).then(res => {
 
           if (res.statusCode == 200) {
             // console.log('请求风险项成功')
@@ -663,7 +708,7 @@
       },
       // 请求案件编号 
       queryCaseNumList() {
-        this.get('/fraudAuditOpinion/queryCaseNumList?'+Math.random()).then(res => {
+        this.get('/fraudAuditOpinion/queryCaseNumList?' + Math.random()).then(res => {
           // console.log(res);
           if (res.statusCode == '200') {
             this.caseOptions = res.data;
@@ -859,7 +904,7 @@
             });
             console.log('准备走成功的路由 ')
             this.$router.push('/AntiFraud34');
-          //  this.goToPath();
+            //  this.goToPath();
           });
         } else {
           // 专员的 提交  
@@ -947,7 +992,7 @@
             console.log(this.showFlag);
             this.showFlag = '02';
             // 获取系统时间
-            this.get('system/getSystemDate?'+Math.random()).then(res => {
+            this.get('system/getSystemDate?' + Math.random()).then(res => {
               console.log('回退', res)
               // 请求系统时间
               this.dealroperDate = res.data;
@@ -984,8 +1029,8 @@
             break;
           case 'save':
             // 点击保存 
-              this.mainReasonName=this.$refs.mainReasonName.selectedLabel;
-             this.subreaName=this.$refs.sencondReasonName.selectedLabel;
+            this.mainReasonName = this.$refs.mainReasonName.selectedLabel;
+            this.subreaName = this.$refs.sencondReasonName.selectedLabel;
             var tempObj = {
               auditResult: this.auditResult, // 审核结论
               auditResulttext: this.auditResulttext, // 审核结论 名称
@@ -1003,7 +1048,7 @@
             //  console.log(this.$refs.mainReasonName.selectedLabel)
             //  this.mainName=this.$refs.mainReasonName.selectedLabel;
             //  this.secondaryName=this.$refs.sencondReasonName.selectedLabel;
-             console.log(12343567890, this.mainName,this.secondaryName)
+            console.log(12343567890, this.mainName, this.secondaryName)
             // 点击保存 存本地
             localStorage.setItem('saveInsertObj', JSON.stringify(tempObj));
             // 保存 成功
@@ -1170,7 +1215,7 @@
         //     this.$message(res.msg);
         //   }
         // })
-        this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processInstanceId+'&'+Math.random())
+        this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processInstanceId + '&' + Math.random())
           .then(res => {
             console.log(res);
             if (res.statusCode == '200') {
@@ -1265,7 +1310,7 @@
           } else if (type == '02') {
             console.log('风险排除 不请求 原因')
           }
-          this.get('/credit/firstNodeReason?reasonType=' + mainType+'&'+Math.random()).then(res => {
+          this.get('/credit/firstNodeReason?reasonType=' + mainType + '&' + Math.random()).then(res => {
             console.log(res);
             if (res.statusCode == '200') {
               this.mainReasons = res.data;
@@ -1288,7 +1333,7 @@
           })
         } else if (flag == 'second') {
           // 请求子原因
-          this.get('/credit/findNodeFirstChildren?id=' + type+'&'+Math.random()).then(res => {
+          this.get('/credit/findNodeFirstChildren?id=' + type + '&' + Math.random()).then(res => {
             console.log(res);
             if (res.statusCode == '200') {
               this.secondReasons = res.data;
@@ -1310,7 +1355,7 @@
       },
       // 反欺诈主管 申请 反欺诈专员信息
       queryCreauditOpinionObj: function () {
-        this.get('/fraudAuditOpinion/queryCreauditOpinionObj?applyId=' + this.applyId+'&'+Math.random()).then(res => {
+        this.get('/fraudAuditOpinion/queryCreauditOpinionObj?applyId=' + this.applyId + '&' + Math.random()).then(res => {
           if (res.statusCode == 200) {
             console.log(res);
             // 先赋值,直接点审批
@@ -1464,11 +1509,11 @@
       // 主原因更改
       mainReasonChange(val) {
         this.getReason('second', val, true);
-        this.mainReason=val;
+        this.mainReason = val;
       },
-      getSecond(val){
+      getSecond(val) {
         console.log(val);
-        this.secondReason=val;
+        this.secondReason = val;
       }
     },
     watch: {
