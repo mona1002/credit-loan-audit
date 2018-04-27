@@ -4,9 +4,9 @@
       <div ref='tag_ref' class="tag_Ref" :style="{left:activeLeft+'px'}">
         <nobr>
           <div :class="[isActive(tag)?'active':'','pai']" :key="ind" v-for="(tag,ind) in visitedViews" @click="changeFlag(tag)">
-            <router-link :to='tag.StatefullPath' @contextmenu.prevent.native="openMenu(tag,$event)" ref="tag_self">
+            <router-link :to='tag.StatefullPath' @contextmenu.prevent="openMenu(tag,$event)" ref="tag_self">
               <button closable :disable-transitions="false" class="button_bottom">
-                <span v-show="tag.name!='工作台'" @click.prevent.stop="handleClose(tag,$event)" class="el-icon-close close_tag"> </span> {{tag.name}}</button>
+                <span v-show="tag.name!='工作台'" @click.stop.prevent="handleClose(tag,$event)" class="el-icon-close close_tag"> </span> {{tag.name}}</button>
             </router-link>
           </div>
         </nobr>
