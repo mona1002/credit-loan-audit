@@ -249,16 +249,19 @@
             this.nodeFlag = "04";
             this.routeParams = '?taskNodeName=antiFraudApp_manager&flag=04';
           }
-        } else if (route.path == '/AntiFraud') { //反欺诈申请
+        } else if (route.path == '/AntiAudit') { //反欺诈详情
+          this.nodeName = "反欺诈详情";
+        }else if (route.path == '/AntiFraud') { //反欺诈申请  
           this.nodeName = "反欺诈申请";
-          // this.nodeFlag = "03";
           this.routeParams = '?taskNodeName=antiFraudApp_apply';
         } else if (route.path == '/AntiApplyInf') { //反欺诈申请-查看
           this.nodeName = "反欺诈申请-查看";
         } else if (route.path == '/AntiApplyAdd') { //反欺诈申请-添加
           this.nodeName = "反欺诈申请-添加";
-        } else if (route.path == '/AntiApplyEditf') { //反欺诈申请-编辑
+        } else if (route.path == '/AntiApplyEditf') { //反欺诈申请-编辑  
           this.nodeName = "反欺诈申请-编辑";
+        }  else if (route.path == '/AntiApplyEdit') { //反欺诈申请列表-编辑  
+          this.nodeName = "反欺诈申请列表-编辑";
         } else if (route.path == '/reconsiderList') { //复议审批
           if (this.taskNodeName == "reconsiderApp_commissioner") {
             this.nodeName = '复议专员审批';
@@ -271,7 +274,6 @@
           }
         } else if (route.path == '/ReconsiderSplit') { //复议详情
           this.nodeName = "复议详情";
-          // this.nodeFlag = "";
         } else if (route.path == '/historicalTask') { // 任务管理-信审历史任务
           this.nodeName = "信审历史任务";
         } else if (route.path == '/doTheTask') { // 任务管理- 信审已办任务
@@ -290,14 +292,12 @@
           this.nodeName = "反欺诈规则设定";
         } else if (route.path == '/MatchingInf') { // 匹配信息-查看
           this.nodeName = "匹配信息-查看";
-          // this.nodeFlag = "";1          
         } else if (route.path == '/processMoni') { //  流程监控 - 
           //           route.fullPath.indexOf('?') != -1 ? this.processMoniParams= route.fullPath.split('?')[1]: this.processMoniParams;
           if (route.fullPath == '/processMoni?creditApp00') {
             this.nodeName = "信审未分配流程";
             this.routeParams = '?creditApp00';
           } else if (route.fullPath == '/processMoni?creditApp01') {
-            // this.nodeName = "信审已分配流程";
             this.nodeName = "信审已分配流程";
             this.routeParams = '?creditApp01';
           } else if (route.fullPath == '/processMoni?creditApp03') {
@@ -338,9 +338,9 @@
           this.nodeName = "常规抽单配置功能";
         }else if (route.path == '/reconsiderResult') {// 质检功能 - 复议结果查询
           this.nodeName = "复议结果查询";
-        }else if (route.path == '/batchApportion') {
+        }else if (route.path == '/batchApportion') {// 质检功能
           this.nodeName = "质检任务批量转分派";
-        }else if (route.path == '/specialConfig') {
+        }else if (route.path == '/specialConfig') {// 质检功能
           this.nodeName = "专纵项抽单配置";
         }
         // else if (route.path == '/manager') {
