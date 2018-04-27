@@ -5,8 +5,9 @@
         <nobr>
           <div :class="[isActive(tag)?'active':'','pai']" :key="ind" v-for="(tag,ind) in visitedViews" @click="changeFlag(tag)">
             <router-link :to='tag.StatefullPath' @contextmenu.prevent="openMenu(tag,$event)" ref="tag_self">
-              <button closable :disable-transitions="false" class="button_bottom">
-                <span v-show="tag.name!='工作台'" @click.stop.prevent="handleClose(tag,$event)" class="el-icon-close close_tag"> </span> {{tag.name}}</button>
+              <p class="button_bottom">
+                <span v-show="tag.name!='工作台'" @click.stop.prevent="handleClose(tag,$event)" class="el-icon-close close_tag"> </span> {{tag.name}}
+              </p>
             </router-link>
           </div>
         </nobr>
@@ -43,6 +44,7 @@
   }
 
   .button_bottom {
+    /* display: inline-block; */
     margin-right: 2px;
     padding: 9px 22px 9px 9px;
     font-size: 14px;
@@ -56,7 +58,12 @@
 
   .button_bottom:hover {
     background: white;
-    color: rgb(0, 119, 255)
+    color: rgb(0, 119, 255);
+
+  }
+
+  a:hover {
+    text-decoration: none;
   }
 
   .tag_bottom {
@@ -208,7 +215,7 @@
         route.fullPath.indexOf('?') != -1 ? this.taskNodeName = route.fullPath.split('?')[1].split('&')[0].split('=')[1] :
           this.taskNodeName;
         this.routeParams = '';
-        this.nodeFlag='';
+        this.nodeFlag = '';
         if (!route) {
           return false
         }
@@ -251,7 +258,7 @@
           }
         } else if (route.path == '/AntiAudit') { //反欺诈详情
           this.nodeName = "反欺诈详情";
-        }else if (route.path == '/AntiFraud') { //反欺诈申请  
+        } else if (route.path == '/AntiFraud') { //反欺诈申请  
           this.nodeName = "反欺诈申请";
           this.routeParams = '?taskNodeName=antiFraudApp_apply';
         } else if (route.path == '/AntiApplyInf') { //反欺诈申请-查看
@@ -260,7 +267,7 @@
           this.nodeName = "反欺诈申请-添加";
         } else if (route.path == '/AntiApplyEditf') { //反欺诈申请-编辑  
           this.nodeName = "反欺诈申请-编辑";
-        }  else if (route.path == '/AntiApplyEdit') { //反欺诈申请列表-编辑  
+        } else if (route.path == '/AntiApplyEdit') { //反欺诈申请列表-编辑  
           this.nodeName = "反欺诈申请列表-编辑";
         } else if (route.path == '/reconsiderList') { //复议审批
           if (this.taskNodeName == "reconsiderApp_commissioner") {
@@ -322,25 +329,25 @@
             this.nodeName = "反欺诈已完成流程";
             this.routeParams = '?antiFraudApp03';
           }
-        }else if (route.path == '/PneCtrl') {
+        } else if (route.path == '/PneCtrl') {
           this.nodeName = "大数据风控";
-        }else if (route.path == '/SocialSe') {
+        } else if (route.path == '/SocialSe') {
           this.nodeName = "社保公积金";
-        }else if (route.path == '/IntegratedQuery') {
+        } else if (route.path == '/IntegratedQuery') {
           this.nodeName = "综合查询-查看";
         } else if (route.path == '/MatchingInfQuery') {
           this.nodeName = "综合查询-详情";
-        }else if (route.path == '/commissioner') {//质检专员审批
+        } else if (route.path == '/commissioner') { //质检专员审批
           this.nodeName = "质检专员审批";
         } else if (route.path == '/manager') {
           this.nodeName = "质检主管审批";
-        }else if (route.path == '/regularConfig') {// 质检功能 - 常规抽单配置功能
+        } else if (route.path == '/regularConfig') { // 质检功能 - 常规抽单配置功能
           this.nodeName = "常规抽单配置功能";
-        }else if (route.path == '/reconsiderResult') {// 质检功能 - 复议结果查询
+        } else if (route.path == '/reconsiderResult') { // 质检功能 - 复议结果查询
           this.nodeName = "复议结果查询";
-        }else if (route.path == '/batchApportion') {// 质检功能
+        } else if (route.path == '/batchApportion') { // 质检功能
           this.nodeName = "质检任务批量转分派";
-        }else if (route.path == '/specialConfig') {// 质检功能
+        } else if (route.path == '/specialConfig') { // 质检功能
           this.nodeName = "专纵项抽单配置";
         }
         // else if (route.path == '/manager') {
@@ -375,8 +382,7 @@
         const $targetWidth = $target.offsetWidth
         if ($targetLeft + $targetWidth < $tag_refLeft) {
           this.activeLeft = 30
-        }
-        else if ($targetLeft > $containerWidth) {
+        } else if ($targetLeft > $containerWidth) {
           this.activeLeft = $containerWidth - $targetLeft - $targetWidth - 30;
         }
       },
@@ -392,7 +398,7 @@
         this.visible = false
       },
       handleClose(view, ev) {
-      console.log('关闭')        
+        console.log('关闭')
         this.$store.dispatch('delVisitedViews', view).then((views) => {
           if (this.isActive(view)) {
             const latestView = views.slice(-1)[0]
