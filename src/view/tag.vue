@@ -392,6 +392,7 @@
         this.visible = false
       },
       handleClose(view, ev) {
+      console.log('关闭')        
         this.$store.dispatch('delVisitedViews', view).then((views) => {
           if (this.isActive(view)) {
             const latestView = views.slice(-1)[0]
