@@ -1550,15 +1550,13 @@
       saveCreaduit(val) { //审批按钮  提交功能
         this.isLoading = true;
         this.loadingTitle = '提交中';
-        //console.log("保存审批信息");
-        // 假如是终审 1
+      //  终审5级为1，其他都为0
         if (this.judgeFlag == '02') {
-          // if (this.taskName == 'creditApp_finalTrial_five') {
-          //   this.auditFlag = '1';
-          // } else {
-          //   this.auditFlag = '0';
-          // }
-          this.auditFlag = '1';
+          if (this.taskName == 'creditApp_finalTrial_five') {
+            this.auditFlag = '1';
+          } else {
+            this.auditFlag = '0';
+          }
         }
         let verIncome2 = 0;
         let ploanAmt2 = 0;
