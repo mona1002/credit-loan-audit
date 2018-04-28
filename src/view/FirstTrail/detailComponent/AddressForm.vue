@@ -7,7 +7,7 @@
     </div>
     <ul class="content-ul" style="margin-left:15px;">
       <li class="item-column3">
-        <div class="left-title">客户名称：</div>
+        <div class="left-title">电话名称：</div>
         <div class="dis-input">
           <el-input v-model="custName" :disabled="true"></el-input>
         </div>
@@ -581,10 +581,10 @@ export default {
                 console.log(this.phoneId);
 
                 // 清数据
-                 this.source == '';
-                 this.answer == '';
-                 this.checkStage == '';
-                 this.sourceDesc == '';
+                 this.source = '';
+                 this.answer = '';
+                 this.checkStage = '';
+                 this.sourceDesc = '';
                  this.thirdResult = '';
                  this.issameFam = '';
                  this.relBorrower = '';

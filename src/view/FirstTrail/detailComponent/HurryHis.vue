@@ -9,7 +9,7 @@
         <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">新增调查日志</span>
       </div>
-      <el-form-item label="客户名称：" class="item-column3">
+      <el-form-item label="电话名称：" class="item-column3">
         {{hurryData.custName}}
       </el-form-item>
       <el-form-item label="电话类型：" class="item-column3">

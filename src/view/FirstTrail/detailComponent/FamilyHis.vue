@@ -10,7 +10,7 @@
         <span class="headFont">新增调查日志</span>
       </div>
       <div style="margin-left:30px;">
-        <el-form-item label="客户名称：" class="item-column3">
+        <el-form-item label="电话名称：" class="item-column3">
           {{familyData.custName}}
         </el-form-item>
         <el-form-item label="电话类型：" class="item-column3">
