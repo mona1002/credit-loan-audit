@@ -8,7 +8,6 @@
           <li>
             <p>
               <label> 进件编号 </label>
-              <!-- <el-input v-model="params.applySubNo" placeholder="请输入进件编号" @blur="num(params.applySubNo,'code')"></el-input> -->
               <el-input v-model="params.applySubNo" placeholder="请输入进件编号"></el-input>
             </p>
             <p>
@@ -133,16 +132,6 @@
       DateF(val) {
         val ? val = val.getFullYear() + '-' + (val.getMonth() + 1) + '-' + val.getDate() : '';
         return val;
-      },
-      num(val, el) {
-        switch (el) {
-          case 'code':
-            isNaN(val) ? this.params.applySubNo = val = '' : this.params.applySubNo = val;
-            break;
-          case 'ID':
-            isNaN(val) ? this.params.certCode = val = '' : this.params.certCode = val;
-            break;
-        }
       },
       handleSizeChange(val) {
         this.params.pageSize = val;

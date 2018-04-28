@@ -10,7 +10,7 @@
           <li>
             <p>
               <label> 进件编号 </label>
-              <el-input v-model="params.applySubNo" @blur="num('Subno')" placeholder="请输入进件编号"></el-input>
+              <el-input v-model="params.applySubNo" placeholder="请输入进件编号"></el-input>
             </p>
             <p>
               <label> 客户名称</label>
@@ -209,9 +209,6 @@
       }
     },
     methods: {
-      num(el, val) {
-        isNaN(this.params.applySubNo) ? this.params.applySubNo = '' : this.params.applySubNo;
-      },
       handleSizeChange(val) {
         this.params.pageParam.pageSize = val;
         this.inquire(this.params);

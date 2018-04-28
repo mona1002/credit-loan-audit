@@ -8,7 +8,7 @@
           <li>
             <p>
               <label> 进件编号 </label>
-              <el-input v-model="params.applySubno" @blur="num('Subno')" placeholder="请输入进件编号"></el-input>
+              <el-input v-model="params.applySubno" placeholder="请输入进件编号"></el-input>
             </p>
             <p>
               <label> 客户名称</label>
@@ -201,17 +201,6 @@
       handleSelectionChange(val) {
         this.multipleSelection = val;
       },
-      num(el, val) {
-        switch (el) {
-          case 'Subno':
-            isNaN(this.params.applySubno) ? this.params.applySubno = '' : this.params.applySubno;
-            break;
-          case 'mobile':
-            isNaN(this.params.mobile) ? this.params.mobile = '' : this.params.mobile;
-            break;
-        }
-      },
-
       //   handleSizeChange(val) {
       //     this.params.pageSize = val;
       //     this.params.pageNum = 1;

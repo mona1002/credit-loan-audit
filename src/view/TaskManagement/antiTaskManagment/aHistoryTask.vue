@@ -130,16 +130,6 @@
         val ? val = val.getFullYear() + '-' + (val.getMonth() + 1) + '-' + val.getDate() : '';
         return val;
       },
-      num(val, el) {
-        switch (el) {
-          case 'code':
-            isNaN(val) ? this.params.applySubNo = val = '' : this.params.applySubNo = val;
-            break;
-          case 'ID':
-            isNaN(val) ? this.params.certCode = val = '' : this.params.certCode = val;
-            break;
-        }
-      },
       handleSizeChange(val) {
         this.params.pageSize = val;
         this.params.pageNum = 1;

@@ -116,17 +116,6 @@
       }
     },
     methods: {
-      num(el, val) {
-        switch (el) {
-          case 'Subno':
-            isNaN(this.params.applySubno) ? this.params.applySubno = '' : this.params.applySubno;
-            break;
-          case 'mobile':
-            isNaN(this.params.mobile) ? this.params.mobile = '' : this.params.mobile;
-            break;
-        }
-      },
-
       //   handleSizeChange(val) {
       //     this.params.pageSize = val;
       //     this.params.pageNum = 1;
