@@ -11,7 +11,7 @@
           <li>
             <p>
               <label> 进件编号 </label>
-              <el-input v-model="params.applySubno" @blur="num('Subno')" placeholder="请输入进件编号"></el-input>
+              <el-input v-model="params.applySubno" placeholder="请输入进件编号"></el-input>
             </p>
             <p>
               <label> 客户名称</label>
@@ -25,7 +25,7 @@
           <li>
             <p>
               <label> 手机号码</label>
-              <el-input v-model="params.mobile" @blur="num('mobile')" placeholder="请输入手机号码"></el-input>
+              <el-input v-model="params.mobile" placeholder="请输入手机号码"></el-input>
             </p>
             <p>
             </p>
