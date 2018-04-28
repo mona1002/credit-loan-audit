@@ -365,7 +365,7 @@
           <span class="headFont">内部匹配核实</span>
         </template>
         <div class="material">
-    <table border="1" cellpadding='2' width='100%'>
+          <table border="1" cellpadding='2' width='100%'>
             <tr>
               <th width='40px'> 序号</th>
               <th width='290px'>核实类型 </th>
@@ -382,8 +382,8 @@
                 </el-radio-group>
               </td>
               <td>
-                <el-input type='textarea' v-if="regularInfo.isInmatch==0" v-model="regularInfo.isInmatchRemark" :rows="2" resize="none"
-                  :maxlength='arealength' placeholder="请输入内容">
+                <el-input type='textarea' v-if="regularInfo.isInmatch==0" v-model="regularInfo.isInmatchRemark" :rows="2" resize="none" :maxlength='arealength'
+                  placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -391,6 +391,104 @@
         </div>
       </el-collapse-item>
     </el-collapse>
+    <!-- phone -->
+    <!-- 质检结论 -->
+    <el-collapse v-model="activeNames">
+      <el-collapse-item name="6">
+        <template slot="title">
+          <div>
+            <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+            <p style="display:inline-block" class="headFont">质检结论</p>
+            <p style="float:right">
+              <span class="btn" @click.stop="addTr=true">
+                <img src='../../../../../static/images/add.png'> 添加 </span>
+              <span class="btn" @click.stop="delQTresult">
+                <img src="../../../../../static/images/delete.png"> 删除</span>
+            </p>
+          </div>
+        </template>
+        <div class="result_QT">
+          <table border="1" cellpadding='2' width='100%'>
+            <tr>
+              <th width='40px'> 序号</th>
+              <th width='230px'>质检结果 </th>
+              <th width='210px'>差错类型</th>
+              <th width='210px'>差错描述</th>
+              <th>备注（非必填）</th>
+              <th width='150px'>操作人员</th>
+              <th width='150px'>操作日期</th>
+            </tr>
+            <tr v-if="addTr">
+              <td> 1</td>
+              <td>
+                <el-select v-model="insConclusion.checkResult" placeholder="请选择">
+                  <el-option v-for="item in QTresult" :key="item.value" :label="item.label" :value="item.value">
+                  </el-option>
+                </el-select>
+              </td>
+              <td>
+                <el-tooltip class="item" effect="dark" :content="insConclusion.errorType" :disabled="!insConclusion.errorType" placement="top-start">
+                  <el-input v-model="insConclusion.errorType" :maxlength='fiftyWords' placeholder="请输入内容"></el-input>
+                </el-tooltip>
+              </td>
+              <td>
+                <el-tooltip class="item" effect="dark" :content="insConclusion.errorDescribe" :disabled="!insConclusion.errorDescribe" placement="top-start">
+                  <el-input v-model="insConclusion.errorDescribe" :maxlength='arealength' placeholder="请输入内容"></el-input>
+                </el-tooltip>
+
+              </td>
+              <td>
+                <el-tooltip class="item" effect="dark" :content="insConclusion.remark" :disabled="!insConclusion.remark" placement="top-start">
+                  <el-input type='textarea' v-model="insConclusion.remark" :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                  </el-input>
+                </el-tooltip>
+              </td>
+              <td>
+                {{ insConclusion.insMemberName}}
+              </td>
+              <td>
+                {{ insConclusion.insDate}}
+              </td>
+            </tr>
+          </table>
+        </div>
+      </el-collapse-item>
+    </el-collapse>
+    <!-- 底部按钮 -->
+    <div class="QT_btns_wrap">
+        <el-button @click="coverFn('back')">
+        <img src="/static/images/back.png">
+        <label class="labelTxt">回退</label>
+      </el-button>
+      <el-button @click="coverFn('refuse')">
+        <img src="/static/images/jujue.png">
+        <label class="labelTxt">拒绝</label>
+      </el-button>
+      <el-button @click="shenpi">
+        <img src="/static/images/back.png">
+        <label class="labelTxt">审批</label>
+      </el-button>
+      <el-button @click="AntiFraudApplication">
+        <img src="/static/images/faqi.png">
+        <label class="labelTxt">反欺诈申请</label>
+      </el-button>
+      <el-button @click="getSpjlList">
+        <img src="/static/images/jielun.png">
+        <label class="labelTxt">审批流程轨迹</label>
+      </el-button>
+      <el-button @click="getLcgjList">
+        <img src="/static/images/liucheng.png">
+        <label class="labelTxt">流程轨迹</label>
+      </el-button>
+      <el-button @click="tobigData">
+        <img src="/static/images/bigdata.png">
+        <label class="labelTxt">大数据风控</label>
+      </el-button>
+      <el-button @click="roSocialSecurity">
+        <img src="/static/images/social.png">
+        <label class="labelTxt">社保/公积金{{social}}</label>
+      </el-button>
+    </div>
   </div>
 </template>
 <script>
@@ -401,8 +499,9 @@
         radio: '1',
         baseInfo: '', //基本信息
         // regularInfo: '',
+        fiftyWords: 50,
         arealength: 300, //area长度
-        insConclusion: '',
+        insConclusion: {},
         insTelCustInfo: '', //客户拨打核实
         insWechatAlipay: '', //微信、支付宝
         //  regularInfo: {},//接口可调用时待测试默认选中值
@@ -443,38 +542,31 @@
         // payment: true,
         // custom: true,
         // others: false,
-        // addTr: true,
+        addTr: true,
         // currentRow: null,
         activeNames: ['0', '1', "2", "3", "4", "5", "6", "7", "8"], //折叠面板 默认显示下标
         // tab: ["客户本人", "单位电话", "家庭联系人", "工作证明人", "其他联系人"],
-        InforSearch: [{
-          title: '客户在人法网是否有被执行信息',
-          conclution: null,
-          comment: ''
+        QTresult: [{
+          value: '01',
+          label: '初审一般差错'
         }, {
-          title: '客户在失信网是否有失信记录',
-          conclution: null,
-          comment: ''
+          value: '02',
+          label: '初审重大差错'
         }, {
-          title: '网上搜索借款人的手机是否有异常',
-          conclution: null,
-          comment: ''
+          value: '03',
+          label: '终审一般差错'
         }, {
-          title: '网上搜索借款人现居住地址和房产地址是否异常',
-          conclution: null,
-          comment: ''
+          value: '044',
+          label: '终审重大差错'
         }, {
-          title: '当地工商网查询企业基本信息中是否有登记',
-          conclution: null,
-          comment: ''
+          value: '05',
+          label: '初审建议'
         }, {
-          title: '客户工作单位在全国组织代码查询中是否存在',
-          conclution: null,
-          comment: ''
+          value: '06',
+          label: '终审建议'
         }, {
-          title: '工商登记信息说明',
-          conclution: null,
-          comment: ''
+          value: '07',
+          label: '无'
         }],
         // Match: [{
         //   title: '内部匹配是否进行排查',
@@ -515,7 +607,7 @@
         //   conclution: null,
         //   comment: ''
         // }],
-        // qulityConclution: [{
+        // insConclusion: [{
         //   title: "",
         //   Self: '否',
         //   conclution: null,
@@ -574,6 +666,15 @@
           }
         });
       },
+      delQTresult() {
+        this.addTr = false;
+        this.insConclusion.checkResult = '';
+        this.insConclusion.errorType = '';
+        this.insConclusion.errorDescribe = '';
+        this.insConclusion.remark = '';
+        // this.insConclusion.insMemberName = '';--展示 不需要清空
+        // this.insConclusion.insDate = '';--展示 不需要清空
+      },
       InitialInfo() {
         this.regularInfo.isForm ? this.regularInfo.isForm : this.regularInfo.isForm = 1;
         this.regularInfo.isIdcard ? this.regularInfo.isIdcard : this.regularInfo.isIdcard = 1;
@@ -601,11 +702,11 @@
       //     this.currentRow = val;
       //     // this.currentRow!=''?this.addTr=true:this.addTr=false;
 
-      //     for (var i = 0; i < this.qulityConclution.length; i++) {
-      //       this.qulityConclution[i].result != '' ? this.addTr = true : this.addTr = false;
+      //     for (var i = 0; i < this.insConclusion.length; i++) {
+      //       this.insConclusion[i].result != '' ? this.addTr = true : this.addTr = false;
       //       console.log(this.addTr)
       //     }
-      //     console.log(this.qulityConclution)
+      //     console.log(this.insConclusion)
       //     console.log(this.addTr)
       //   },
       clearContent(el, val) {
@@ -668,10 +769,10 @@
           case '全国组织代码':
             val == 1 ? this.regularInfo.wnetAddrstatetxt = '' : this.regularInfo.wnetAddrstatetxt;
             break;
-               case '匹配排查':
+          case '匹配排查':
             val == 1 ? this.regularInfo.isInmatchRemark = '' : this.regularInfo.isInmatchRemark;
             break;
-            
+
         }
       },
       maxLength(el, val) {
@@ -738,8 +839,8 @@
       //       person: '吴彦祖',
       //       date: '2019-20-3'
       //     }];
-      //     this.qulityConclution = this.qulityConclution.concat(obj)
-      //     console.log(this.qulityConclution)
+      //     this.insConclusion = this.insConclusion.concat(obj)
+      //     console.log(this.insConclusion)
       //     //  <el-select v-model='value' placeholder='请选择'>
       //     //     <el-option
       //     //       v-for='item in options'
@@ -781,6 +882,14 @@
       //   }
     },
     mounted() {
+      // 质检结论枚举
+      //       ["01": "初审一般差错",
+      // "02": "初审重大差错",
+      // "03": "终审一般差错",
+      // "04":"终审重大差错",
+      // "05": "初审建议",
+      // "06": "终审建议","07":"无"]
+
       // this.referPort();
       // console.log(this.regularInfo)
       // this.InitialInfo();
@@ -800,32 +909,48 @@
     margin-top: 10px;
   }
 
-  table {
+  .regularQT table {
     border: 1px solid #ebeef5;
     /* vertical-align: middle; */
   }
 
-  tr {
+  .regularQT tr {
     height: 70px;
   }
 
-  tr:nth-of-type(1) {
+  .regularQT tr:nth-of-type(1) {
     height: 30px;
   }
 
-  td {
+  .regularQT td {
     text-align: center;
   }
 
-  td:nth-of-type(4) {
+  .regularQT .material td:nth-of-type(4) {
     vertical-align: bottom;
+  }
+
+  .result_QT td {
+    padding: 0 2px;
   }
 
   .material {
     padding: 10px;
   }
+.result_QT{
+  padding:10px;
+height:130px;
+/* background:red; */
+}
+  /* .btn {
+    vertical-align: top;
+    cursor: pointer;
+    margin-right: 10px;
+  }
 
-
+  .btn img {
+    vertical-align: middle;
+  } */
 
 
 
@@ -866,7 +991,7 @@
     font-size: 16px;
   }
 
-  .btn {
+  /* .btn {
     width: 100px;
     text-align: center;
     display: inline-block;
@@ -874,10 +999,12 @@
     background: #0077ff;
     color: white;
     border-radius: 4px;
-  }
+  } */
 
-  .btn:hover {
+
+
+  /* .btn:hover {
     cursor: pointer;
-  }
+  } */
 
 </style>

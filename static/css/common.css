@@ -261,3 +261,12 @@ table {
   left: calc(50% - 2px);
   z-index: 400;
 }
+.QT_btns_wrap{
+  vertical-align: top;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.QT_btns_wrap img {
+  vertical-align: middle;
+}

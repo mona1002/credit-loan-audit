@@ -2819,3 +2819,9 @@ body .el-submenu .el-menu-item {
 .el-dialog__footer{
 
 }
+.regularQT .el-button,
+.specialQT  .el-button{
+  border: none;
+  /* vertical-align: bottom; */
+  color: #666666
+}
