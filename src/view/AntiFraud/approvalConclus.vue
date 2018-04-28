@@ -864,7 +864,7 @@
                   caseDesc: this.caseDesc, // 案件描述
                   caseNum: this.caseNum, // 案件编号 caseNum
                   auditType: '01', // 审批类型
-                  taskNodeName: this.taskNodeName, // 任务节点
+                  taskNodeName: this.taskName, // 任务节点- 取列表taskName
                   taskId: this.taskId,
                   processInstanceId: this.processInstanceId, // 流程实例Id
                   busiState: this.busiState, //  状态
@@ -935,7 +935,7 @@
                   caseDesc: this.caseDesc, // 案件描述
                   caseNum: this.caseNum, // 案件编号 caseNum
                   auditType: '01', // 审批类型
-                  taskNodeName: this.taskNodeName, // 任务节点
+                  taskNodeName: this.taskName, // 任务节点- 取列表taskName
                   taskId: this.taskId,
                   processInstanceId: this.processInstanceId, // 流程实例Id
                   busiState: this.busiState, //  状态
