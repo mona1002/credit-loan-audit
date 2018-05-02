@@ -424,7 +424,7 @@ export default {
       isLoading: false, // 审批按钮 是否加载状态
       loadingTitle: '确认', // 默认btn title
       judgeFlag:'',
-      regNoR:  /^(0{7,11})|(1{7,11})|(2{7,11})|(3{7,11})|(4{7,11})|(5{7,11})|(6{7,11})|(7{7,11})|(8{7,11})|(9{7,11})$/,
+      regNoR:  /^(0{5,11})|(1{5,11})|(2{5,11})|(3{5,11})|(4{5,11})|(5{5,11})|(6{5,11})|(7{5,11})|(8{5,11})|(9{5,11})$/,
     }
   },
   props: ['isFull', 'SplitS'],
@@ -583,7 +583,7 @@ export default {
           if(this.addTelNum.length==7||this.addTelNum.length==8||this.addTelNum.length==11){
                if(this.regNoR.test(value) ) {
              this.$message({
-              message: '不能输入连续重复数字',
+              message: '请输入正确格式的电话号码！',
               type: 'warning'
             });
             return
