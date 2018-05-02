@@ -198,13 +198,6 @@
         this.addViewTags()
         this.moveToCurrentTag()
       },
-      visible(value) {
-        if (value) {
-          window.addEventListener('click', this.closeMenu)
-        } else {
-          window.removeEventListener('click', this.closeMenu)
-        }
-      }
     },
     mounted() {
       this.addViewTags()
@@ -388,14 +381,6 @@
       },
       isActive(route) {
         return route.StatefullPath == this.$route.fullPath;
-      },
-      openMenu(tag, e) {
-        this.visible = true
-        this.selectedTag = tag
-        this.styleLeft = e.clientX + 10
-      },
-      closeMenu() {
-        this.visible = false
       },
       handleClose(view, ev) {
         console.log('关闭')
