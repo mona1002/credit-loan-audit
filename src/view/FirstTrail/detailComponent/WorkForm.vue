@@ -256,9 +256,7 @@ export default {
               }
             }).then(res => {
               if (res.statusCode == '200') {
-
-                this.phoneId = res.data.id;
-
+                this.phoneId = '';
                 // 清数据
                  this.source = '';
                  this.answer = '';
@@ -271,11 +269,9 @@ export default {
                  this.mobilepayment = '';
                  this.mobilepaymenttxt = '';
                  this.conclusion = '';
-
                 // 提交数据成功,广播事件 重新刷新列表
                 this.$emit('updateList');
                 this.$emit('updateTree');
-
                 this.resMsg = res.msg;
                 done();
               } else {

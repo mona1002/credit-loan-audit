@@ -577,9 +577,7 @@ export default {
               console.log(res);
               console.log(res.statusCode);
               if (res.statusCode == '200') {
-                this.phoneId = res.data.id;
-                console.log(this.phoneId);
-
+                this.phoneId ='';
                 // 清数据
                  this.source = '';
                  this.answer = '';
@@ -615,7 +613,6 @@ export default {
                  this.brothertxt = '';
                  this.expensestxt = '';
                  this.checkHometeltxt = '';
-
                 // 提交数据成功,广播事件 重新刷新列表
                 this.$emit('updateList');
                 this.$emit('updateTree');

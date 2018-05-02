@@ -423,7 +423,7 @@ export default {
               }
             }).then(res => {
               if (res.statusCode == '200') {
-                this.phoneId = res.data.id;
+                this.phoneId ='';
                 // 清数据
                  this.source = '';
                  this.answer = '';
