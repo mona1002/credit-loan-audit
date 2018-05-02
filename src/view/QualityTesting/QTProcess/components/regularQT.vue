@@ -392,6 +392,136 @@
       </el-collapse-item>
     </el-collapse>
     <!-- phone -->
+        <!-- 电话征信 -->
+    <el-collapse v-model="activeNames">
+      <el-collapse-item name="5">
+        <template slot="title">
+          <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+          <span class="headFont">电话征信</span>
+        </template>
+        <div class="CreditForm_CheckId">
+          <!-- tab-title -->
+          <ul>
+            <li ref="tabOne" class="tab1Default" v-for="(val,index) in tabTitle" :key="index" @click="tabClick($event,index,val)" :class="{tabAct:tabIndex==index}">
+              {{val}}</li>
+          </ul>
+          <!-- pay-content -->
+          <div v-if="this.payment">
+            <p class="P_title">微信/支付宝核实</p>
+            <el-table :data="PhoneCre" style="width: 100%">
+              <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
+              <el-table-column label="核实类型" align="left" width="180">
+                <template slot-scope="scope">
+                  <span style="margin-left: 10px">
+                    <b style="color:red;fontWeight:700px"> * </b>{{ scope.row.title }}</span>
+                </template>
+              </el-table-column>
+              <el-table-column label="核实结论" align="center" width="180">
+                <template slot-scope="scope">
+                  <div slot="reference" class="name-wrapper">
+                    <el-radio-group v-model="scope.row.conclution" @change="clearContent(scope.row)">
+                      <el-radio :label="1">正常</el-radio>
+                      <el-radio :label="2">异常</el-radio>
+                    </el-radio-group>
+                  </div>
+                </template>
+              </el-table-column>
+              <el-table-column label="备注（非必填）" align="center" min-width="180">
+                <template slot-scope="scope">
+                  <el-input type="textarea" v-if="scope.row.conclution=='2'" :rows="2" resize="none" v-model="scope.row.comment" :maxlength="this.textareaL"
+                    placeholder="请输入内容">
+                  </el-input>
+                </template>
+              </el-table-column>
+            </el-table>
+          </div>
+          <!-- call-content 客户本人中  -->
+          <div v-show="this.custom">
+            <p class="P_title">电话拨打核实</p>
+            <el-table :data="PhoneCheck" style="width: 100%">
+              <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
+              <el-table-column label="电话号码" align="center" width="180">
+                <template slot-scope="scope">
+                  <span style="margin-left: 10px">
+                    <b style="color:red;fontWeight:700px"> * </b>{{ scope.row.title }}</span>
+                </template>
+              </el-table-column>
+              <el-table-column label="电话录音" align="center" width="100">
+                <template slot-scope="scope">
+                  <span style="margin-left: 10px">{{ scope.row.title }}</span>
+                </template>
+              </el-table-column>
+              <el-table-column prop="Self" label="接听人是否借款人本人" align="center" width="180">
+              </el-table-column>
+              <el-table-column prop="Self" label="接听说明" width="180" align="center">
+              </el-table-column>
+              <el-table-column label="质检结果（必填项）" align="center" width="180">
+                <template slot-scope="scope">
+                  <div slot="reference" class="name-wrapper">
+                    <el-radio-group v-model="scope.row.conclution" @change="clearContent(scope.row)">
+                      <el-radio :label="1">正常</el-radio>
+                      <el-radio :label="2">异常</el-radio>
+                    </el-radio-group>
+                  </div>
+                </template>
+              </el-table-column>
+              <el-table-column label="备注（非必填）" align="center" min-width="180">
+                <template slot-scope="scope">
+                  <el-input type="textarea" v-if="scope.row.conclution=='2'" :rows="2" resize="none" v-model="scope.row.comment" :maxlength="this.textareaL"
+                    placeholder="请输入内容">
+                  </el-input>
+                </template>
+              </el-table-column>
+            </el-table>
+          </div>
+          <!-- others-content 除客户本人的 电话拨打核实-->
+          <div v-show="this.others">
+            <p class="P_title">电话拨打核实</p>
+            <el-table :data="othersCheck" style="width: 100%">
+              <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
+              <el-table-column label="电话号码" align="center" width="180">
+                <template slot-scope="scope">
+                  <span style="margin-left: 10px">
+                    <b style="color:red;fontWeight:700px"> * </b>{{ scope.row.title }}</span>
+                </template>
+              </el-table-column>
+              <el-table-column label="电话录音" align="center" width="100">
+                <template slot-scope="scope">
+                  <span style="margin-left: 10px">{{ scope.row.title }}</span>
+                </template>
+              </el-table-column>
+              <el-table-column prop="title" label="来源" align="center" width="70">
+              </el-table-column>
+              <el-table-column prop="title" label="最新调查时间" align="center" width="180">
+              </el-table-column>
+              <el-table-column prop="title" label="最新接听情况" align="center" width="180">
+              </el-table-column>
+              <el-table-column prop="title" label="最新调查阶段" align="center" width="180">
+              </el-table-column>
+              <el-table-column prop="title" label="调查结论" align="center" width="180">
+              </el-table-column>
+              <el-table-column label="质检结果（必填项）" align="center" width="180">
+                <template slot-scope="scope">
+                  <div slot="reference" class="name-wrapper">
+                    <el-radio-group v-model="scope.row.conclution" @change="clearContent(scope.row)">
+                      <el-radio :label="1">正常</el-radio>
+                      <el-radio :label="2">异常</el-radio>
+                    </el-radio-group>
+                  </div>
+                </template>
+              </el-table-column>
+              <el-table-column label="备注（非必填）" align="center" min-width="180">
+                <template slot-scope="scope">
+                  <el-input type="textarea" v-if="scope.row.conclution=='2'" :rows="2" resize="none" v-model="scope.row.comment" :maxlength="this.textareaL"
+                    placeholder="请输入内容">
+                  </el-input>
+                </template>
+              </el-table-column>
+            </el-table>
+          </div>
+        </div>
+      </el-collapse-item>
+    </el-collapse>
     <!-- 质检结论 -->
     <el-collapse v-model="activeNames">
       <el-collapse-item name="6">
@@ -538,13 +668,14 @@
 
         // //   ---
         // textareaL: 300,
-        // tabIndex: 0,
+        tabIndex: 0,
         // payment: true,
         // custom: true,
         // others: false,
         addTr: true,
         // currentRow: null,
         activeNames: ['0', '1', "2", "3", "4", "5", "6", "7", "8"], //折叠面板 默认显示下标
+           tabTitle: ["客户本人", "单位电话", "家庭联系人", "工作证明人", "其他联系人"],
         // tab: ["客户本人", "单位电话", "家庭联系人", "工作证明人", "其他联系人"],
         QTresult: [{
           value: '01',
@@ -851,35 +982,35 @@
       //     //   </el-select>
       //     this.addTr = false;
       //   },
-      //   tabClick(ev, ind, val) {
-      //     //  this.title = val;
-      //     //         this.tabContent1 = ind;
-      //     this.tabIndex = ind;
-      //     if (ind == 0) {
-      //       this.payment = true;
-      //       this.custom = true;
-      //       this.others = false;
-      //     } else if (ind == 1) {
-      //       this.payment = false;
-      //       this.custom = false;
-      //       this.others = true;
-      //     } else if (ind == 2) {
-      //       this.payment = true;
-      //       this.custom = false;
-      //       this.others = true;
-      //       this.othersCheck = this.a
-      //     } else if (ind == 3) {
-      //       this.payment = true;
-      //       this.custom = false;
-      //       this.others = true;
-      //       this.othersCheck = this.b
+      tabClick(ev, ind, val) {
+        //  this.title = val;
+        //         this.tabContent1 = ind;
+        this.tabIndex = ind;
+        if (ind == 0) {
+          this.payment = true;
+          this.custom = true;
+          this.others = false;
+        } else if (ind == 1) {
+          this.payment = false;
+          this.custom = false;
+          this.others = true;
+        } else if (ind == 2) {
+          this.payment = true;
+          this.custom = false;
+          this.others = true;
+          this.othersCheck = this.a
+        } else if (ind == 3) {
+          this.payment = true;
+          this.custom = false;
+          this.others = true;
+          this.othersCheck = this.b
 
-      //     } else if (ind == 4) {
-      //       this.payment = true;
-      //       this.custom = false;
-      //       this.others = true;
-      //     }
-      //   }
+        } else if (ind == 4) {
+          this.payment = true;
+          this.custom = false;
+          this.others = true;
+        }
+      }
     },
     mounted() {
       // 质检结论枚举

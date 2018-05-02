@@ -28,7 +28,7 @@
               <td>{{fraudApplyInfo.applyCustName}}</td>
               <td>{{fraudApplyInfo.certCode}}</td>
               <td>{{fraudApplyInfo.proName}}</td>
-              <td>{{fraudApplyInfo.appOrgName}}</td>
+              <td>{{fraudApplyInfo.operOrgName}}</td>
               <td>{{fraudApplyInfo.salePersonName}}</td>
               <td>{{fraudApplyInfo.applyPersonName}}</td>
               <td>{{fraudApplyInfo.appOrgName}}</td>
@@ -266,6 +266,8 @@
         reason: '',
         //恢复、解除的新数组
         newArray: [],
+        isValidPhone: /^1[345789]\d{9}$/,
+        regLandlinePhone: /^(0[0-9]{2,3}-)?([0-9]{7,8})$/,
         relations: [{
             'value': '01',
             'label': '夫妻'
@@ -467,16 +469,10 @@
         }
       },
       regPhone(phone) {
-        console.log(phone.phoneNum);
-        var isValidPhone = /^1[345789]\d{9}$/;
-          var regPhone = /^(0[0-9]{2,3}-)?([0-9]{7,8})$/;
-          if( regPhone.test(phone.phoneNum)){
-            this.$message({
-              message:'正确',
-              type: 'warning'
-            });
-          }
-        if (!isValidPhone.test(phone.phoneNum) && !regPhone.test(phone.phoneNum) ) {
+        // console.log(phone.phoneNum);
+        // var isValidPhone = /^1[345789]\d{9}$/;
+        //   var regLandlinePhone = /^(0[0-9]{2,3}-)?([0-9]{7,8})$/;
+        if (!this.isValidPhone.test(phone.phoneNum) && !this.regLandlinePhone.test(phone.phoneNum) ) {
           phone.phoneNum = '';
         }
       },
