@@ -14,7 +14,7 @@
       myHead
     },
     methods: {
-      addfdf(){
+      addfdf() {
         // get    location.reload()
         this.get("/credit/queryCityCounty", {
           parentCode: this.checkData.workProvince,
@@ -29,7 +29,7 @@
           }
         });
         //post
-         this.post("/", {
+        this.post("/", {
           taskStatus: "01",
         }).then(res => {
           if (res.statusCode == 200) {
@@ -40,7 +40,13 @@
         });
       },
       loadpage() {
-        this.$store.dispatch('delAllViews')
+        this.$store.state.visitedViews = [{
+          name: '工作台',
+          path: '/',
+          flag: '',
+          params: '',
+          StatefullPath: "/"
+        }];
         this.$router.push({
           path: '/',
         });
@@ -59,6 +65,7 @@
    width: 100%;
     height: calc( 100% - 70px);
   } */
+
   .fottt {
     position: absolute;
     bottom: 0;
