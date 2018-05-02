@@ -424,7 +424,6 @@ export default {
       isLoading: false, // 审批按钮 是否加载状态
       loadingTitle: '确认', // 默认btn title
       judgeFlag:'',
-      regNoR:  /^(0{5,11})|(1{5,11})|(2{5,11})|(3{5,11})|(4{5,11})|(5{5,11})|(6{5,11})|(7{5,11})|(8{5,11})|(9{5,11})$/,
     }
   },
   props: ['isFull', 'SplitS'],
@@ -580,14 +579,13 @@ export default {
     // 添加电话  电话校验
     addTelNum: function(value) {
       console.log('监听 添加电话号码');
-          if(this.addTelNum.length==7||this.addTelNum.length==8||this.addTelNum.length==11){
-               if(this.regNoR.test(value) ) {
+          if( !(/^1[345789]\d{9}$/.test(value)) &&value.length==11){
              this.$message({
               message: '请输入正确格式的电话号码！',
               type: 'warning'
             });
+             this.active = false;
             return
-          }
           }
       this.addTelRex = /^(1)\d{10}$/i.test(value) || /^((\(\d{2,3}\))|(\d{3}\-))?(\(0\d{2,3}\)|0\d{2,3}-)?[1-9]\d{6,7}(\-\d{1,4})?$/i.test(value);
       console.log(this.addTelRex);

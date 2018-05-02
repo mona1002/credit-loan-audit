@@ -126,14 +126,14 @@
         </template>
         <div class="ElectroNuclear">
           <el-table :data="fraudTelCheckList" style="width: 100%" highlight-current-row border @current-change="handleCurrentChanges">
-            <el-table-column type="index" :index='1' label="序号" min-width="50">
+            <el-table-column type="index" :index='1' label="序号" width="50">
             </el-table-column>
-            <el-table-column prop="phoneNum" label="手机号码" min-width="80">
+            <el-table-column prop="phoneNum" label="手机号码" width="180">
               <template slot-scope="scope">
                 <el-input v-model="scope.row.phoneNum" placeholder="请输入内容" @blur="regPhone(scope.row)" :disabled="scope.row.isInitFlag=='0'"></el-input>
               </template>
             </el-table-column>
-            <el-table-column prop="relation" label="关系" min-width="80">
+            <el-table-column prop="relation" label="关系" width="180">
               <!-- <template slot-scope="scope">
 				        	<el-input v-model="scope.row.relation" placeholder="请输入内容" :disabled="scope.row.isInitFlag=='0'"></el-input>
 				        </template> -->
@@ -468,8 +468,15 @@
       },
       regPhone(phone) {
         console.log(phone.phoneNum);
-        var isValidPhone = /^1[34578]\d{9}$/;
-        if (!isValidPhone.test(phone.phoneNum)) {
+        var isValidPhone = /^1[345789]\d{9}$/;
+          var regPhone = /^(0[0-9]{2,3}-)?([0-9]{7,8})$/;
+          if( regPhone.test(phone.phoneNum)){
+            this.$message({
+              message:'正确',
+              type: 'warning'
+            });
+          }
+        if (!isValidPhone.test(phone.phoneNum) && !regPhone.test(phone.phoneNum) ) {
           phone.phoneNum = '';
         }
       },
@@ -756,10 +763,10 @@
 
   /* 电核*/
 
-  .ElectroNuclear {
+  /* .ElectroNuclear {
     width: 100%;
     padding-right: calc( 66.6% - 350px);
-  }
+  } */
 
   .left {
     float: left;
