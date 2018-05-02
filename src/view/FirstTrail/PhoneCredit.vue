@@ -424,6 +424,7 @@ export default {
       isLoading: false, // 审批按钮 是否加载状态
       loadingTitle: '确认', // 默认btn title
       judgeFlag:'',
+      regNoR:  /^(0{7,11})|(1{7,11})|(2{7,11})|(3{7,11})|(4{7,11})|(5{7,11})|(6{7,11})|(7{7,11})|(8{7,11})|(9{7,11})$/,
     }
   },
   props: ['isFull', 'SplitS'],
@@ -578,7 +579,16 @@ export default {
 
     // 添加电话  电话校验
     addTelNum: function(value) {
-      console.log('监听 添加电话号码')
+      console.log('监听 添加电话号码');
+          if(this.addTelNum.length==7||this.addTelNum.length==8||this.addTelNum.length==11){
+               if(this.regNoR.test(value) ) {
+             this.$message({
+              message: '不能输入连续重复数字',
+              type: 'warning'
+            });
+            return
+          }
+          }
       this.addTelRex = /^(1)\d{10}$/i.test(value) || /^((\(\d{2,3}\))|(\d{3}\-))?(\(0\d{2,3}\)|0\d{2,3}-)?[1-9]\d{6,7}(\-\d{1,4})?$/i.test(value);
       console.log(this.addTelRex);
       // 判断 显示 电话格式
