@@ -424,6 +424,10 @@ export default {
       isLoading: false, // 审批按钮 是否加载状态
       loadingTitle: '确认', // 默认btn title
       judgeFlag:'',
+      // landlinePhone:/^(0[0-9]{2,3}-?)([0-9]{7,8})$/,
+      landlinePhone:/^(0[0-9]{2}-?)([0-9]{8})$/,
+      landlinePhone1:/^(0[0-9]{3}-?)([0-9]{7})$/,
+      mobilePhone:/^1[345789]\d{9}$/,
     }
   },
   props: ['isFull', 'SplitS'],
@@ -506,7 +510,7 @@ export default {
       this.addBtnShow = false;
 
     }
-    console.log(" 判断电话添加 是否 ")
+    // console.log(" 判断电话添加 是否 ")
     console.log(this.SplitS);
 
 
@@ -578,47 +582,44 @@ export default {
 
     // 添加电话  电话校验
     addTelNum: function(value) {
-      console.log('监听 添加电话号码');
-          if( !(/^1[345789]\d{9}$/.test(value)) &&value.length==11){
-             this.$message({
-              message: '请输入正确格式的电话号码！',
-              type: 'warning'
-            });
-             this.active = false;
-            return
-          }
-      this.addTelRex = /^(1)\d{10}$/i.test(value) || /^((\(\d{2,3}\))|(\d{3}\-))?(\(0\d{2,3}\)|0\d{2,3}-)?[1-9]\d{6,7}(\-\d{1,4})?$/i.test(value);
+      // console.log('监听 添加电话号码');
+      // this.addTelRex = /^(1)\d{10}$/i.test(value) || /^((\(\d{2,3}\))|(\d{3}\-))?(\(0\d{2,3}\)|0\d{2,3}-)?[1-9]\d{6,7}(\-\d{1,4})?$/i.test(value);
+      this.addTelRex = this.mobilePhone.test(value)||this.landlinePhone.test(value)||this.landlinePhone1.test(value);
       console.log(this.addTelRex);
       // 判断 显示 电话格式
-      if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelNum.length >= 11 && !this.addTelRex) ||
+      // if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelNum.length >= 11 && !this.addTelRex) ||
+      //   ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelNum.length >= 11 && !this.addTelRex)
+      // ) {
+   if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelNum.length >= 11 && !this.addTelRex) ||
         ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelNum.length >= 11 && !this.addTelRex)
       ) {
-        console.log('选择了关系');
+        console.log('选择了关系');      
         this.active = false;
         this.$message({
-          message: '格式不正确,请使用下面的格式:区号-电话号码或者11位手机号',
+               message:'请输入正确的电话号码或座机号码（xxx-xxxxxxx）！',          
           type: 'warning'
         });
         return;
       }
-
-
       if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelRex) ||
         ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelRex)
       ) {
         this.active = true;
       } else {
         console.log('没选关系');
+     if(value.charAt(0)!=1 &&value.charAt(0)!=0&&value!=''){
+          this.$message({
+              message:'请输入正确的电话号码或座机号码（xxx-xxxxxxx）！',
+              type: 'warning'
+            }); 
+        }
         this.active = false;
       }
-
-
     },
     formShow: function() {
       console.log('formShow', this.formShow);
       if (this.formShow) {
         $('.el-main').css("overflow-y", 'auto');
-
       }
     }
   },
