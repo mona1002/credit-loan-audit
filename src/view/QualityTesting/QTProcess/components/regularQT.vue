@@ -438,7 +438,7 @@
           <!-- call-content 客户本人中  -->
           <div v-show="this.custom">
             <p class="P_title">电话拨打核实</p>
-            <el-table :data="insTelVerifyList" style="width: 100%">
+            <el-table :data="insTelCustInfo" style="width: 100%">
               <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
               <el-table-column label="电话号码" align="center" width="180">
                 <template slot-scope="scope">
@@ -566,7 +566,6 @@
                 <el-tooltip class="item" effect="dark" :content="insConclusion.errorDescribe" :disabled="!insConclusion.errorDescribe" placement="top-start">
                   <el-input v-model="insConclusion.errorDescribe" :maxlength='arealength' placeholder="请输入内容"></el-input>
                 </el-tooltip>
-
               </td>
               <td>
                 <el-tooltip class="item" effect="dark" :content="insConclusion.remark" :disabled="!insConclusion.remark" placement="top-start">
@@ -633,7 +632,7 @@
         fiftyWords: 50,
         arealength: 300, //area长度
         insConclusion: {},
-        insTelCustInfo: '', //客户拨打核实
+        insTelCustInfo: {}, //客户拨打核实
         insWechatAlipay: '', //微信、支付宝
         //  regularInfo: {},//接口可调用时待测试默认选中值
         regularInfo: {
@@ -771,7 +770,9 @@
         // }],
         // value: ''
 insTelVerifyList:'',
-insWechatAlipayList:''
+insWechatAlipayList:'',
+changeAlipay:'',
+// insTelCustInfo:{},//客户本人-拨打核实
       }
     },
     props: ['propApplyId'],
@@ -782,16 +783,16 @@ insWechatAlipayList:''
           applyId: this.propApplyId, //入参待更新+测试-------------------------------------------------------
         }).then(res => {
           if (res.statusCode == 200) {
-            //  基本信息
+            //  基本信息                                -Object
             this.baseInfo = res.data.applyBaseInfo;
-            // 资料核实+三方信息查询+ 内部匹配核实
+            // 资料核实+三方信息查询+ 内部匹配核实         -Object
             this.regularInfo = res.data.insRegularInfo;
-            // 质检结论
+            // 质检结论                                  -Object
             this.insConclusion = res.data.insConclusion;
 
-            // 电话征信：客户本人-电话拨打核实     
+            // 电话征信：客户本人-电话拨打核实             -object
             this.insTelCustInfo = res.data.insTelCustInfo;
-            //电话征信： 微信/支付宝核实     
+            //电话征信： 微信/支付宝核实                  -Array
             this.insWechatAlipay = res.data.insWechatAlipay;
           } else {
             this.$message.error(res.msg);
@@ -1002,6 +1003,7 @@ insWechatAlipayList:''
       //   },
       tabClick(ev, ind, val) {
         console.log(ind )
+
         // “01”:”住址电话”,”02”:,”03”:””,”04”:””,”05”:””
         //  this.title = val;
         //         this.tabContent1 = ind;
@@ -1012,6 +1014,7 @@ insWechatAlipayList:''
           this.payment = true;
           this.custom = true;
           this.others = false;
+          this.changeAlipay='';
         } else if (ind == 1) {
            // 单位电话
           this.telType='02'
