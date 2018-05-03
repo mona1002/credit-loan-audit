@@ -221,7 +221,7 @@
                             var judge ={
                                 "flag":"06"
                             };
-                            localStorage.setItem("ReWorkbenchPass",JSON.stringify(row));
+                            localStorage.setItem("ReManagerWorkbenchPass",JSON.stringify(row));
                             localStorage.setItem("judge",JSON.stringify(judge));
                               nodeName = '复议经理审批';
                                RoutePath = '/reconsiderList';
