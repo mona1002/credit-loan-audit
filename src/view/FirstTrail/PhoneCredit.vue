@@ -590,8 +590,8 @@ export default {
       // if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelNum.length >= 11 && !this.addTelRex) ||
       //   ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelNum.length >= 11 && !this.addTelRex)
       // ) {
-   if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelNum.length >= 11 && !this.addTelRex) ||
-        ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelNum.length >= 11 && !this.addTelRex)
+   if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelNum.length >= 12 && !this.addTelRex) ||
+        ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelNum.length >= 12 && !this.addTelRex)
       ) {
         console.log('选择了关系');      
         this.active = false;
@@ -607,11 +607,18 @@ export default {
         this.active = true;
       } else {
         console.log('没选关系');
+        console.log(value.charAt(1)*1 )
      if(value.charAt(0)!=1 &&value.charAt(0)!=0&&value!=''){
+       console.log('进入01判断')
           this.$message({
               message:'请输入正确的电话号码或座机号码（xxx-xxxxxxx）！',
               type: 'warning'
             }); 
+        }else if(value.charAt(0)==1 &&value.charAt(1)*1<3 &&value.charAt(1)!='' ){
+          this.$message({
+               message:'请输入正确的电话号码或座机号码（xxx-xxxxxxx）！',
+                type: 'warning'
+              }); 
         }
         this.active = false;
       }
