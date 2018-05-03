@@ -48,7 +48,7 @@
         <el-form-item label="拨打电话：" class="item-column3">
           {{comData.phoneDes}}
         </el-form-item>
-                <el-form-item label="说明：" class="item-column2" v-show="comData.phone=='01'">
+                <el-form-item label="说明：" class="item-column2" v-show="comData.phone!='01'">
           {{comData.phonetxt}}
         </el-form-item>
         <el-tooltip class="item" effect="dark" :content="comData.phonetxt" placement="top">
