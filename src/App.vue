@@ -2,7 +2,7 @@
   <div id="app">
     <!-- <myHead></myHead> -->
     <router-view class="Abody"></router-view>
-    <tag class="fottt"></tag>
+    <!-- <tag class="fottt"></tag> -->
   </div>
 </template>
 <script>
@@ -53,7 +53,7 @@
       },
     },
     mounted() {
-      window.onbeforeunload = this.loadpage(); //刷新跳转
+      // window.onbeforeunload = this.loadpage(); //刷新跳转
     }
   }
 

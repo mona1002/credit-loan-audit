@@ -427,7 +427,6 @@
     props: ['AURpreWidth'],
     mounted() {
       // comJs.AUMove();
-      this.MyMove();
       // comJs.MyMove('#auMID','#AU',this.AURpreWidth,'AURclickX','AURleftOffset','btvr',0);
       //  comJs.MyMove('#MID','#AUL',this.AUpreWidth,'AUclickX','AUleftOffset','bbr',10);
       // this.odivMove("FirstAud");
@@ -443,6 +442,8 @@
       // else if (this.judgeFlag.flag == '04') {
       //   this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
       // }
+      
+      // this.MyMove();
       this.imgBaseUrl = imgUrl.imgBaseUrl;
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
