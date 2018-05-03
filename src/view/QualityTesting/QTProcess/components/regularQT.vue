@@ -586,7 +586,7 @@
     </el-collapse>
     <!-- 底部按钮 -->
     <div class="QT_btns_wrap">
-        <el-button @click="coverFn('back')">
+        <!-- <el-button @click="coverFn('back')">
         <img src="/static/images/back.png">
         <label class="labelTxt">回退</label>
       </el-button>
@@ -617,7 +617,7 @@
       <el-button @click="roSocialSecurity">
         <img src="/static/images/social.png">
         <label class="labelTxt">社保/公积金{{social}}</label>
-      </el-button>
+      </el-button> -->
     </div>
   </div>
 </template>
@@ -669,11 +669,12 @@
         // //   ---
         // textareaL: 300,
         tabIndex: 0,
-        // payment: true,
-        // custom: true,
-        // others: false,
+        payment: true,
+        custom: true,
+        others: false,
         addTr: true,
         // currentRow: null,
+        telType:'06',//电话征信 电话类型入参
         activeNames: ['0', '1', "2", "3", "4", "5", "6", "7", "8"], //折叠面板 默认显示下标
            tabTitle: ["客户本人", "单位电话", "家庭联系人", "工作证明人", "其他联系人"],
         // tab: ["客户本人", "单位电话", "家庭联系人", "工作证明人", "其他联系人"],
@@ -792,6 +793,19 @@
             //电话征信： 微信/支付宝核实     
             this.insWechatAlipay = res.data.insWechatAlipay;
 
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      },
+      getTelAlipay(){
+        // 电话征信-微信支付宝 + 拨打核实接口
+         this.post("/", {
+         applyId:'申请单id',
+        telType: this.telType
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.tableData = res.data;
           } else {
             this.$message.error(res.msg);
           }
@@ -983,29 +997,41 @@
       //     this.addTr = false;
       //   },
       tabClick(ev, ind, val) {
+        console.log(ind )
+        // “01”:”住址电话”,”02”:,”03”:””,”04”:””,”05”:””
         //  this.title = val;
         //         this.tabContent1 = ind;
         this.tabIndex = ind;
         if (ind == 0) {
+          // 客户本人
+          this.telType='06'
           this.payment = true;
           this.custom = true;
           this.others = false;
         } else if (ind == 1) {
+           // 单位电话
+          this.telType='02'
           this.payment = false;
           this.custom = false;
           this.others = true;
         } else if (ind == 2) {
+            // 家庭联系人
+          this.telType='03'
           this.payment = true;
           this.custom = false;
           this.others = true;
           this.othersCheck = this.a
         } else if (ind == 3) {
+           // 工作证明人
+          this.telType='05'
           this.payment = true;
           this.custom = false;
           this.others = true;
           this.othersCheck = this.b
 
         } else if (ind == 4) {
+           // 其他联系人
+          this.telType='04'
           this.payment = true;
           this.custom = false;
           this.others = true;
