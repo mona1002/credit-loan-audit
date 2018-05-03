@@ -164,8 +164,8 @@
         this.workbenchPass.taskNodeName = val.taskNodeName;
         // 列表 存储  taskNodeName
         localStorage.setItem('taskNodeName', val.taskNodeName);
-        var nodeName, RoutePath, taskNodeName, routeParams, pth, nodeFlag;
-        nodeName = RoutePath = routeParams = '';
+        // var nodeName, RoutePath, taskNodeName, routeParams, pth, nodeFlag;
+        // nodeName = RoutePath = routeParams = '';
         if (val.taskNodeName == "creditApp_firstTrial") { // 初审
           this.judge.flag = nodeFlag = "01";
           RoutePath = '/taskInWaitting';
