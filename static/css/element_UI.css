@@ -1079,7 +1079,9 @@ height: 40px;
   overflow-x: hidden;
 }
 
-.SSComp .el-collapse-item__wrap {
+.SSComp .el-collapse-item__wrap,
+.regularQT .el-collapse-item__wrap
+ {
   width: 100%;
   border-bottom: none;
 }

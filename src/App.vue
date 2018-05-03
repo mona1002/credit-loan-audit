@@ -53,7 +53,7 @@
       },
     },
     mounted() {
-      window.onbeforeunload = this.loadpage(); //刷新跳转
+      // window.onbeforeunload = this.loadpage(); //刷新跳转
     }
   }
 

@@ -405,7 +405,7 @@
             <li ref="tabOne" class="tab1Default" v-for="(val,index) in tabTitle" :key="index" @click="tabClick($event,index,val)" :class="{tabAct:tabIndex==index}">
               {{val}}</li>
           </ul>
-          <!-- pay-content -->
+          <!-- pay-content 微信/支付宝核实==========待确认写死还是后台 返 -->
           <div v-if="this.payment">
             <p class="P_title">微信/支付宝核实</p>
             <el-table :data="PhoneCre" style="width: 100%">
@@ -438,36 +438,37 @@
           <!-- call-content 客户本人中  -->
           <div v-show="this.custom">
             <p class="P_title">电话拨打核实</p>
-            <el-table :data="PhoneCheck" style="width: 100%">
+            <el-table :data="insTelVerifyList" style="width: 100%">
               <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
               <el-table-column label="电话号码" align="center" width="180">
                 <template slot-scope="scope">
                   <span style="margin-left: 10px">
-                    <b style="color:red;fontWeight:700px"> * </b>{{ scope.row.title }}</span>
+                    <b style="color:red;fontWeight:700px"> * </b>{{ scope.row.telNum }}</span>
                 </template>
               </el-table-column>
               <el-table-column label="电话录音" align="center" width="100">
                 <template slot-scope="scope">
-                  <span style="margin-left: 10px">{{ scope.row.title }}</span>
+                  <span style="margin-left: 10px">{{ scope.row.telRecord }}</span>
                 </template>
               </el-table-column>
-              <el-table-column prop="Self" label="接听人是否借款人本人" align="center" width="180">
+              <!-- ================注释掉的地方  接口文档没有对应字段，待更新======================== -->
+              <!-- <el-table-column prop="Self" label="接听人是否借款人本人" align="center" width="180">
               </el-table-column>
               <el-table-column prop="Self" label="接听说明" width="180" align="center">
-              </el-table-column>
+              </el-table-column> -->
               <el-table-column label="质检结果（必填项）" align="center" width="180">
                 <template slot-scope="scope">
                   <div slot="reference" class="name-wrapper">
-                    <el-radio-group v-model="scope.row.conclution" @change="clearContent(scope.row)">
-                      <el-radio :label="1">正常</el-radio>
-                      <el-radio :label="2">异常</el-radio>
+                    <el-radio-group v-model="scope.row.insResult" @change="clearContent(scope.row)">
+                      <el-radio :label="'00'">正常</el-radio>
+                      <el-radio :label="'01'">异常</el-radio>
                     </el-radio-group>
                   </div>
                 </template>
               </el-table-column>
               <el-table-column label="备注（非必填）" align="center" min-width="180">
                 <template slot-scope="scope">
-                  <el-input type="textarea" v-if="scope.row.conclution=='2'" :rows="2" resize="none" v-model="scope.row.comment" :maxlength="this.textareaL"
+                  <el-input type="textarea" v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model="scope.row.remark" :maxlength="this.textareaL"
                     placeholder="请输入内容">
                   </el-input>
                 </template>
@@ -477,33 +478,33 @@
           <!-- others-content 除客户本人的 电话拨打核实-->
           <div v-show="this.others">
             <p class="P_title">电话拨打核实</p>
-            <el-table :data="othersCheck" style="width: 100%">
+            <el-table :data="insTelVerifyList" style="width: 100%">
               <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
               <el-table-column label="电话号码" align="center" width="180">
                 <template slot-scope="scope">
                   <span style="margin-left: 10px">
-                    <b style="color:red;fontWeight:700px"> * </b>{{ scope.row.title }}</span>
+                    <b style="color:red;fontWeight:700px"> * </b>{{ scope.row.telNum }}</span>
                 </template>
               </el-table-column>
               <el-table-column label="电话录音" align="center" width="100">
                 <template slot-scope="scope">
-                  <span style="margin-left: 10px">{{ scope.row.title }}</span>
+                  <span style="margin-left: 10px">{{ scope.row.telRecord }}</span>
                 </template>
               </el-table-column>
-              <el-table-column prop="title" label="来源" align="center" width="70">
+              <el-table-column prop="source" label="来源" align="center" width="70">
               </el-table-column>
-              <el-table-column prop="title" label="最新调查时间" align="center" width="180">
+              <el-table-column prop="checkTime" label="最新调查时间" align="center" width="180">
               </el-table-column>
-              <el-table-column prop="title" label="最新接听情况" align="center" width="180">
+              <el-table-column prop="answer" label="最新接听情况" align="center" width="180">
               </el-table-column>
-              <el-table-column prop="title" label="最新调查阶段" align="center" width="180">
+              <el-table-column prop="checkStage" label="最新调查阶段" align="center" width="180">
               </el-table-column>
-              <el-table-column prop="title" label="调查结论" align="center" width="180">
+              <el-table-column prop="conclusion" label="调查结论" align="center" width="180">
               </el-table-column>
               <el-table-column label="质检结果（必填项）" align="center" width="180">
                 <template slot-scope="scope">
                   <div slot="reference" class="name-wrapper">
-                    <el-radio-group v-model="scope.row.conclution" @change="clearContent(scope.row)">
+                    <el-radio-group v-model="scope.row.insResult" @change="clearContent(scope.row)">
                       <el-radio :label="1">正常</el-radio>
                       <el-radio :label="2">异常</el-radio>
                     </el-radio-group>
@@ -512,7 +513,7 @@
               </el-table-column>
               <el-table-column label="备注（非必填）" align="center" min-width="180">
                 <template slot-scope="scope">
-                  <el-input type="textarea" v-if="scope.row.conclution=='2'" :rows="2" resize="none" v-model="scope.row.comment" :maxlength="this.textareaL"
+                  <el-input type="textarea" v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model="scope.row.remark" :maxlength="this.textareaL"
                     placeholder="请输入内容">
                   </el-input>
                 </template>
@@ -769,8 +770,8 @@
         //   label: '北京烤鸭'
         // }],
         // value: ''
-
-
+insTelVerifyList:'',
+insWechatAlipayList:''
       }
     },
     props: ['propApplyId'],
@@ -792,20 +793,23 @@
             this.insTelCustInfo = res.data.insTelCustInfo;
             //电话征信： 微信/支付宝核实     
             this.insWechatAlipay = res.data.insWechatAlipay;
-
           } else {
             this.$message.error(res.msg);
           }
         });
       },
-      getTelAlipay(){
+      getTelAlipay(telTypeVal){
         // 电话征信-微信支付宝 + 拨打核实接口
-         this.post("/", {
+         this.post("/insConclusion/getTelVerifyWechatAlipay", {
          applyId:'申请单id',
-        telType: this.telType
+        // telType: this.telType,
+        telType: telTypeVal
         }).then(res => {
           if (res.statusCode == 200) {
-            this.tableData = res.data;
+            // 拨打核实  insTelVerify
+            this.insTelVerifyList = res.data.insTelVerifyList;
+            // 微信支付宝  insWechatAlipay
+            this.insWechatAlipayList = res.data.insWechatAlipayList;
           } else {
             this.$message.error(res.msg);
           }
@@ -1040,7 +1044,7 @@
     },
     mounted() {
       // 质检结论枚举
-      //       ["01": "初审一般差错",
+            // ["01": "初审一般差错",
       // "02": "初审重大差错",
       // "03": "终审一般差错",
       // "04":"终审重大差错",
@@ -1050,15 +1054,18 @@
       // this.referPort();
       // console.log(this.regularInfo)
       // this.InitialInfo();
+      // this.getTelAlipay('06')//电话征信-支付宝+电话核实接口
     }
   }
 
 </script>
 <style scoped>
   .baseInf {
-    background: red;
+    padding-left:10px;
   }
-
+.paddingleft{
+  padding-left: 10px;
+}
   .baseInf p {
     width: 50%;
     /* border:1px solid; */
@@ -1097,7 +1104,6 @@
 .result_QT{
   padding:10px;
 height:130px;
-/* background:red; */
 }
   /* .btn {
     vertical-align: top;
