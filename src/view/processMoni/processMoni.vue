@@ -441,13 +441,16 @@ export default {
           {value: 'creditApp_finalTrial_two',label: '终审二级审批'},
           {value: 'creditApp_finalTrial_three',label: '信审经理审批'},
           {value: 'creditApp_finalTrial_four',label: '信审高级经理审批'},
-          {value: 'creditApp_finalTrial_five',label: '信审总监审批'}
+          {value: 'creditApp_finalTrial_five',label: '信审总监审批'},
+          {value: 'creditApp_apply',label: '申请登记'},
+          {value: 'creditApp_antiFraud_app',label: '反欺诈申请'}
         ];
       }else if(this.routerPath === "reconsiderApp"){
         this.taskNodes = [
           {value: 'reconsiderApp_apply',label: '复议申请'},
           {value: 'reconsiderApp_commissioner',label: '复议专员审批'},
-          {value: 'reconsiderApp_manager',label: '复议经理审批'}
+          {value: 'reconsiderApp_manager',label: '复议经理审批'},
+          {value: 'reconsiderApp__antiFraud_app',label: '反欺诈申请'}
         ];
       }else if(this.routerPath === "antiFraudApp"){
         this.taskNodes = [
