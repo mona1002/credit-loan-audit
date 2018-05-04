@@ -5,6 +5,11 @@
               {{val}}</li>
           </ul>
     <div>
+       <el-radio-group :disabled='ddd' v-model="ccc">
+                  <el-radio :label="1">是</el-radio>
+                  <el-radio :label="0">否</el-radio>
+                </el-radio-group>
+                <p>{{ccc}}</p>
        <el-table
       :data="tableData"
       style="width: 100%">
@@ -30,6 +35,8 @@
 export default {
    data() {
         return {
+          ccc:'',
+          ddd:true,
            tabTitle: ["客户本人", "单位电话", "家庭联系人", "工作证明人", "其他联系人"],
           tableData: [{
             date: '2016-05-02',

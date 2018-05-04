@@ -1,7 +1,7 @@
 <template>
   <div class="regularQT">
     <!-- 审批信息 -->
-    <el-collapse v-model="activeNames">
+    <el-collapse v-model="activeNames" v-if='AprovalInfolShow'>
       <el-collapse-item name="0">
         <template slot="title">
           <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
@@ -26,7 +26,7 @@
       </el-collapse-item>
     </el-collapse>
     <!-- 资料核实 -->
-    <el-collapse v-model="activeNames">
+    <el-collapse v-model="activeNames" v-if='MaterialShow'>
       <el-collapse-item name="2">
         <template slot="title">
           <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
@@ -42,9 +42,9 @@
             </tr>
             <tr>
               <td> 1</td>
-              <td> 申请表是否符合要求</td>
+              <td> 申请单表是否符合要求</td>
               <td>
-                <el-radio-group v-model="regularInfo.isForm" @change='clearContent("申请表",regularInfo.isForm)'>
+                <el-radio-group :disabled='material' v-model="regularInfo.isForm" @change='clearContent("申请单表",regularInfo.isForm)'>
                   <el-radio :label="1">是</el-radio>
                   <el-radio :label="0">否</el-radio>
                 </el-radio-group>
@@ -59,7 +59,7 @@
               <td> 2</td>
               <td> 身份证证明是否符合要求</td>
               <td>
-                <el-radio-group v-model="regularInfo.isIdcard" @change='clearContent("身份证",regularInfo.isIdcard)'>
+                <el-radio-group :disabled='material' v-model="regularInfo.isIdcard" @change='clearContent("身份证",regularInfo.isIdcard)'>
                   <el-radio :label="1">是</el-radio>
                   <el-radio :label="0">否</el-radio>
                 </el-radio-group>
@@ -74,7 +74,7 @@
               <td> 3</td>
               <td> 收入证明是否符合要求</td>
               <td>
-                <el-radio-group v-model="regularInfo.isIncome" @change='clearContent(" 收入证明",regularInfo.isIncome)'>
+                <el-radio-group :disabled='material' v-model="regularInfo.isIncome" @change='clearContent(" 收入证明",regularInfo.isIncome)'>
                   <el-radio :label="1">是</el-radio>
                   <el-radio :label="0">否</el-radio>
                 </el-radio-group>
@@ -89,7 +89,7 @@
               <td> 4</td>
               <td> 工作证明是否符合要求</td>
               <td>
-                <el-radio-group v-model="regularInfo.isWork" @change='clearContent("工作证明",regularInfo.isWork)'>
+                <el-radio-group :disabled='material' v-model="regularInfo.isWork" @change='clearContent("工作证明",regularInfo.isWork)'>
                   <el-radio :label="1">是</el-radio>
                   <el-radio :label="0">否</el-radio>
                 </el-radio-group>
@@ -104,7 +104,7 @@
               <td> 5</td>
               <td> 房产资料是否符合要求</td>
               <td>
-                <el-radio-group v-model="regularInfo.isEstate" @change='clearContent("房产资料",regularInfo.isIdcard)'>
+                <el-radio-group :disabled='material' v-model="regularInfo.isEstate" @change='clearContent("房产资料",regularInfo.isIdcard)'>
                   <el-radio :label="1">是</el-radio>
                   <el-radio :label="0">否</el-radio>
                 </el-radio-group>
@@ -119,7 +119,7 @@
               <td> 6</td>
               <td> 居住证明是否符合要求</td>
               <td>
-                <el-radio-group v-model="regularInfo.isLive" @change='clearContent("居住证明",regularInfo.isLive)'>
+                <el-radio-group :disabled='material' v-model="regularInfo.isLive" @change='clearContent("居住证明",regularInfo.isLive)'>
                   <el-radio :label="1">是</el-radio>
                   <el-radio :label="0">否</el-radio>
                 </el-radio-group>
@@ -134,7 +134,7 @@
               <td> 7</td>
               <td> 经营证明是否符合要求</td>
               <td>
-                <el-radio-group v-model="regularInfo.isBusiness" @change='clearContent("经营证明",regularInfo.isBusiness)'>
+                <el-radio-group :disabled='material' v-model="regularInfo.isBusiness" @change='clearContent("经营证明",regularInfo.isBusiness)'>
                   <el-radio :label="1">是</el-radio>
                   <el-radio :label="0">否</el-radio>
                 </el-radio-group>
@@ -149,7 +149,7 @@
               <td> 8</td>
               <td> 信用报告是否符合要求</td>
               <td>
-                <el-radio-group v-model="regularInfo.isCredit" @change='clearContent("信用报告",regularInfo.isCredit)'>
+                <el-radio-group :disabled='material' v-model="regularInfo.isCredit" @change='clearContent("信用报告",regularInfo.isCredit)'>
                   <el-radio :label="1">是</el-radio>
                   <el-radio :label="0">否</el-radio>
                 </el-radio-group>
@@ -164,7 +164,7 @@
               <td> 9</td>
               <td> 客户流水是否符合要求</td>
               <td>
-                <el-radio-group v-model="regularInfo.isCustomerflow" @change='clearContent("客户流水",regularInfo.isCustomerflow)'>
+                <el-radio-group :disabled='material' v-model="regularInfo.isCustomerflow" @change='clearContent("客户流水",regularInfo.isCustomerflow)'>
                   <el-radio :label="1">是</el-radio>
                   <el-radio :label="0">否</el-radio>
                 </el-radio-group>
@@ -179,7 +179,7 @@
               <td> 10</td>
               <td> 客户其他资料是否符合要求</td>
               <td>
-                <el-radio-group v-model="regularInfo.isCustomerother" @change='clearContent("其他资料",regularInfo.isCustomerother)'>
+                <el-radio-group :disabled='material' v-model="regularInfo.isCustomerother" @change='clearContent("其他资料",regularInfo.isCustomerother)'>
                   <el-radio :label="1">是</el-radio>
                   <el-radio :label="0">否</el-radio>
                 </el-radio-group>
@@ -194,7 +194,7 @@
               <td> 11 </td>
               <td> 负债计算是否正确</td>
               <td>
-                <el-radio-group v-model="regularInfo.isLiabilities" @change='clearContent(" 负债计算",regularInfo.isLiabilities)'>
+                <el-radio-group :disabled='material' v-model="regularInfo.isLiabilities" @change='clearContent(" 负债计算",regularInfo.isLiabilities)'>
                   <el-radio :label="1">是</el-radio>
                   <el-radio :label="0">否</el-radio>
                 </el-radio-group>
@@ -209,7 +209,7 @@
               <td> 12 </td>
               <td> 流水计算是否正确</td>
               <td>
-                <el-radio-group v-model="regularInfo.isFlow" @change='clearContent("流水计算",regularInfo.isFlow)'>
+                <el-radio-group :disabled='material' v-model="regularInfo.isFlow" @change='clearContent("流水计算",regularInfo.isFlow)'>
                   <el-radio :label="1">是</el-radio>
                   <el-radio :label="0">否</el-radio>
                 </el-radio-group>
@@ -224,7 +224,7 @@
               <td> 13</td>
               <td> 征信录入是否正确</td>
               <td>
-                <el-radio-group v-model="regularInfo.isReference" @change='clearContent("征信录入",regularInfo.isReference)'>
+                <el-radio-group :disabled='material' v-model="regularInfo.isReference" @change='clearContent("征信录入",regularInfo.isReference)'>
                   <el-radio :label="1">是</el-radio>
                   <el-radio :label="0">否</el-radio>
                 </el-radio-group>
@@ -240,7 +240,7 @@
       </el-collapse-item>
     </el-collapse>
     <!-- 三方信息查询=====后两个选否弹出未改 -->
-    <el-collapse v-model="activeNames">
+    <el-collapse v-model="activeNames" v-if='InfoSearchShow'>
       <el-collapse-item name="3">
         <template slot="title">
           <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
@@ -258,7 +258,7 @@
               <td> 1</td>
               <td> 客户在人法网是否有被执行信息</td>
               <td>
-                <el-radio-group v-model="regularInfo.wbeexEcuted" @change='clearContent("被执行信息",regularInfo.wbeexEcuted)'>
+                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wbeexEcuted" @change='clearContent("被执行信息",regularInfo.wbeexEcuted)'>
                   <el-radio :label="1">是</el-radio>
                   <el-radio :label="0">否</el-radio>
                 </el-radio-group>
@@ -273,7 +273,7 @@
               <td> 2</td>
               <td> 客户在失信网是否有失信记录</td>
               <td>
-                <el-radio-group v-model="regularInfo.wnetEcutedBrea" @change='clearContent("失信记录",regularInfo.wnetEcutedBrea)'>
+                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetEcutedBrea" @change='clearContent("失信记录",regularInfo.wnetEcutedBrea)'>
                   <el-radio :label="1">是</el-radio>
                   <el-radio :label="0">否</el-radio>
                 </el-radio-group>
@@ -288,7 +288,7 @@
               <td> 3</td>
               <td> 网上搜索借款人的手机是否有异常</td>
               <td>
-                <el-radio-group v-model="regularInfo.wnetPhone" @change='clearContent("手机异常",regularInfo.wnetPhone)'>
+                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetPhone" @change='clearContent("手机异常",regularInfo.wnetPhone)'>
                   <el-radio :label="1">是</el-radio>
                   <el-radio :label="0">否</el-radio>
                 </el-radio-group>
@@ -303,7 +303,7 @@
               <td> 4</td>
               <td> 网上搜索借款人现居住地址和房产地址是否异常</td>
               <td>
-                <el-radio-group v-model="regularInfo.wnetAddrandEstate" @change='clearContent("居住房产异常",regularInfo.wnetAddrandEstate)'>
+                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetAddrandEstate" @change='clearContent("居住房产异常",regularInfo.wnetAddrandEstate)'>
                   <el-radio :label="1">是</el-radio>
                   <el-radio :label="0">否</el-radio>
                 </el-radio-group>
@@ -318,7 +318,7 @@
               <td> 5</td>
               <td> 当地工商网查询企业基本信息中是否有登记</td>
               <td>
-                <el-radio-group v-model="regularInfo.wnetCompany" @change='clearContent("工商登记",regularInfo.wnetCompany)'>
+                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetCompany" @change='clearContent("工商登记",regularInfo.wnetCompany)'>
                   <el-radio :label="1">是</el-radio>
                   <el-radio :label="0">否</el-radio>
                 </el-radio-group>
@@ -333,7 +333,7 @@
               <td> 6</td>
               <td> 客户工作单位在全国组织代码查询中是否存在</td>
               <td>
-                <el-radio-group v-model="regularInfo.wnetAddrstate" @change='clearContent("全国组织代码",regularInfo.wnetAddrstate)'>
+                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetAddrstate" @change='clearContent("全国组织代码",regularInfo.wnetAddrstate)'>
                   <el-radio :label="1">是</el-radio>
                   <el-radio :label="0">否</el-radio>
                 </el-radio-group>
@@ -358,7 +358,7 @@
       </el-collapse-item>
     </el-collapse>
     <!-- 内部匹配核实 -->
-    <el-collapse v-model="activeNames">
+    <el-collapse v-model="activeNames" v-if='MatchingShow'>
       <el-collapse-item name="4">
         <template slot="title">
           <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
@@ -376,7 +376,7 @@
               <td> 1</td>
               <td> 内部匹配是否进行排查</td>
               <td>
-                <el-radio-group v-model="regularInfo.isInmatch" @change='clearContent("匹配排查",regularInfo.isInmatch)'>
+                <el-radio-group :disabled='matching' v-model="regularInfo.isInmatch" @change='clearContent("匹配排查",regularInfo.isInmatch)'>
                   <el-radio :label="1">是</el-radio>
                   <el-radio :label="0">否</el-radio>
                 </el-radio-group>
@@ -392,7 +392,7 @@
       </el-collapse-item>
     </el-collapse>
     <!-- phone -->
-        <!-- 电话征信 -->
+    <!-- 电话征信 -->
     <el-collapse v-model="activeNames">
       <el-collapse-item name="5">
         <template slot="title">
@@ -412,15 +412,17 @@
               <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
               <el-table-column label="核实类型" align="left" width="180">
                 <template slot-scope="scope">
-                  <span style="margin-left: 10px">  <!-- <b style="color:red;fontWeight:700px"> * </b> -->
-                   <label v-if='scope.row.insVerifyType=="00"'> {{ '微信查询结果' }}</label>
-                   <label v-if='scope.row.insVerifyType=="01"'> {{ '支付宝查询结果' }}</label> </span>
+                  <span style="margin-left: 10px">
+                    <!-- <b style="color:red;fontWeight:700px"> * </b> -->
+                    <label v-if='scope.row.insVerifyType=="00"'> {{ '微信查询结果' }}</label>
+                    <label v-if='scope.row.insVerifyType=="01"'> {{ '支付宝查询结果' }}</label>
+                  </span>
                 </template>
               </el-table-column>
               <el-table-column label="核实结论" align="center" width="180">
                 <template slot-scope="scope">
                   <div slot="reference" class="name-wrapper">
-                    <el-radio-group v-model="scope.row.insResult" @change="clearContent(scope.row)">
+                    <el-radio-group :disabled='PhoneCredit' v-model="scope.row.insResult" @change="clearContent(scope.row)">
                       <el-radio :label="'00'">正常</el-radio>
                       <el-radio :label="'01'">异常</el-radio>
                     </el-radio-group>
@@ -429,8 +431,8 @@
               </el-table-column>
               <el-table-column label="备注（非必填）" align="center" min-width="180">
                 <template slot-scope="scope">
-                  <el-input type="textarea" v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model="scope.row.remark" :maxlength="this.textareaL"
-                    placeholder="请输入内容">
+                  <el-input type="textarea" :disabled='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model="scope.row.remark"
+                    :maxlength="this.textareaL" placeholder="请输入内容">
                   </el-input>
                 </template>
               </el-table-column>
@@ -454,7 +456,7 @@
                   <span style="margin-left: 10px">{{ scope.row.telRecord }}</span>
                 </template>
               </el-table-column> -->
-               <el-table-column prop="telRecord" label="电话录音" align="center" width="180">
+              <el-table-column prop="telRecord" label="电话录音" align="center" width="180">
               </el-table-column>
               <el-table-column prop="iisself" label="接听人是否借款人本人" align="center" width="180">
               </el-table-column>
@@ -463,7 +465,7 @@
               <el-table-column label="质检结果（必填项）" align="center" width="180">
                 <template slot-scope="scope">
                   <div slot="reference" class="name-wrapper">
-                    <el-radio-group v-model="scope.row.insResult" @change="clearContent(scope.row)">
+                    <el-radio-group :disabled='PhoneCredit' v-model="scope.row.insResult" @change="clearContent(scope.row)">
                       <el-radio :label="'00'">正常</el-radio>
                       <el-radio :label="'01'">异常</el-radio>
                     </el-radio-group>
@@ -472,8 +474,8 @@
               </el-table-column>
               <el-table-column label="备注（非必填）" align="center" min-width="180">
                 <template slot-scope="scope">
-                  <el-input type="textarea" v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model="scope.row.remark" :maxlength="this.textareaL"
-                    placeholder="请输入内容">
+                  <el-input type="textarea" :disabled='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model="scope.row.remark"
+                    :maxlength="this.textareaL" placeholder="请输入内容">
                   </el-input>
                 </template>
               </el-table-column>
@@ -490,14 +492,13 @@
                     <b style="color:red;fontWeight:700px"> * </b>{{ scope.row.telNum }}</span>
                 </template>
               </el-table-column> -->
-               <el-table-column prop="telNum" label="电话号码" align="center" width="70">
+              <el-table-column prop="telNum" label="电话号码" align="center" width="70">
               </el-table-column>
               <!-- <el-table-column label="电话录音" align="center" width="100">
                 <template slot-scope="scope">
                   <span style="margin-left: 10px">{{ scope.row.telRecord }}</span>
                 </template> -->
-                 <el-table-column prop="telRecord" label="电话录音来源" align="center" width="70">
-              </el-table-column>
+              <el-table-column prop="telRecord" label="电话录音来源" align="center" width="70">
               </el-table-column>
               <el-table-column prop="source" label="来源" align="center" width="70">
               </el-table-column>
@@ -512,7 +513,7 @@
               <el-table-column label="质检结果（必填项）" align="center" width="180">
                 <template slot-scope="scope">
                   <div slot="reference" class="name-wrapper">
-                    <el-radio-group v-model="scope.row.insResult" @change="clearContent(scope.row)">
+                    <el-radio-group :disabled='PhoneCredit' v-model="scope.row.insResult" @change="clearContent(scope.row)">
                       <el-radio :label="'00'">正常</el-radio>
                       <el-radio :label="'01'">异常</el-radio>
                     </el-radio-group>
@@ -521,8 +522,8 @@
               </el-table-column>
               <el-table-column label="备注（非必填）" align="center" min-width="180">
                 <template slot-scope="scope">
-                  <el-input type="textarea" v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model="scope.row.remark" :maxlength="this.textareaL"
-                    placeholder="请输入内容">
+                  <el-input type="textarea" :disabled='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model="scope.row.remark"
+                    :maxlength="this.textareaL" placeholder="请输入内容">
                   </el-input>
                 </template>
               </el-table-column>
@@ -560,24 +561,25 @@
             <tr v-if="addTr">
               <td> 1</td>
               <td>
-                <el-select v-model="insConclusion.checkResult" placeholder="请选择">
+                <el-select :disabled='QTConclution' v-model="insConclusion.checkResult" placeholder="请选择">
                   <el-option v-for="item in QTresult" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
               </td>
               <td>
                 <el-tooltip class="item" effect="dark" :content="insConclusion.errorType" :disabled="!insConclusion.errorType" placement="top-start">
-                  <el-input v-model="insConclusion.errorType" :maxlength='fiftyWords' placeholder="请输入内容"></el-input>
+                  <el-input :disabled='QTConclution' v-model="insConclusion.errorType" :maxlength='fiftyWords' placeholder="请输入内容"></el-input>
                 </el-tooltip>
               </td>
               <td>
                 <el-tooltip class="item" effect="dark" :content="insConclusion.errorDescribe" :disabled="!insConclusion.errorDescribe" placement="top-start">
-                  <el-input v-model="insConclusion.errorDescribe" :maxlength='arealength' placeholder="请输入内容"></el-input>
+                  <el-input :disabled='QTConclution' v-model="insConclusion.errorDescribe" :maxlength='arealength' placeholder="请输入内容"></el-input>
                 </el-tooltip>
               </td>
               <td>
                 <el-tooltip class="item" effect="dark" :content="insConclusion.remark" :disabled="!insConclusion.remark" placement="top-start">
-                  <el-input type='textarea' v-model="insConclusion.remark" :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                  <el-input type='textarea' :disabled='QTConclution' v-model="insConclusion.remark" :rows="2" resize="none" :maxlength='arealength'
+                    placeholder="请输入内容">
                   </el-input>
                 </el-tooltip>
               </td>
@@ -592,44 +594,157 @@
         </div>
       </el-collapse-item>
     </el-collapse>
+    <!-- 复核结论===显示框，无手风琴 -->
+    <div class="reResult" v-if='reResultShow'>
+      <label style="font-size:14px;">复核结论：</label>
+      <div>
+        <el-input type='textarea' resize='none' rows="2"></el-input>
+      </div>
+
+    </div>
     <!-- 底部按钮 -->
     <div class="QT_btns_wrap">
-        <!-- <el-button @click="coverFn('back')">
-        <img src="/static/images/back.png">
-        <label class="labelTxt">回退</label>
+      <el-button @click="SaveInf">
+        <img src="../../../../../static/images/relieve.png">
+        <label class="labelTxt">保存</label>
       </el-button>
-      <el-button @click="coverFn('refuse')">
-        <img src="/static/images/jujue.png">
-        <label class="labelTxt">拒绝</label>
+      <el-button @click="SaveInf">
+        <img src="../../../../../static/images/appro.png">
+        <label class="labelTxt">提交</label>
       </el-button>
-      <el-button @click="shenpi">
-        <img src="/static/images/back.png">
-        <label class="labelTxt">审批</label>
+      <el-button @click="NoReconsider">
+        <img src="../../../../../static/images/back.png">
+        <label class="labelTxt">无需复议</label>
+      </el-button>
+      <!-- <el-button @click="this.ReconsiderShow=true"> -->
+      <el-button @click="ReconsiderShow = true">
+        <img src="../../../../../static/images/appro.png">
+        <label class="labelTxt">发起复议</label>
+      </el-button>
+         <el-button @click="ReAprovalShow = true">
+        <img src="../../../../../static/images/appro.png">
+        <label class="labelTxt">复议审批</label>
       </el-button>
       <el-button @click="AntiApply">
         <img src="../../../../../static/images/faqi.png">
-        <label class="labelTxt">反欺诈申请</label>
-      </el-button>
-      <el-button @click="getSpjlList">
-        <img src="/static/images/jielun.png">
-        <label class="labelTxt">审批流程轨迹</label>
+        <label class="labelTxt">发起反欺诈</label>
       </el-button>
       <el-button @click="getLcgjList">
-        <img src="/static/images/liucheng.png">
+        <img src="../../../../../static/images/liucheng.png">
         <label class="labelTxt">流程轨迹</label>
       </el-button>
-      <el-button @click="tobigData">
-        <img src="/static/images/bigdata.png">
+      <el-button @click="RiskControl">
+        <img src="../../../../../static/images/bigdata.png">
         <label class="labelTxt">大数据风控</label>
       </el-button>
       <el-button @click="roSocialSecurity">
         <img src="/static/images/social.png">
         <label class="labelTxt">社保/公积金{{social}}</label>
-      </el-button> -->
+      </el-button>
+    </div>
+    <!-- =================================弹窗===================================== -->
+    <!-- 发起复议  -->
+    <el-dialog title='发起复议' :visible.sync="ReconsiderShow" :modal="false" width="620px" top="20vh">
+      <div>
+        <p>
+          <label>复议节点：</label>
+          <el-select v-model="value" placeholder="请选择">
+            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </p>
+        <p style="margin:10px 0;">
+          <label>复议说明：</label>
+          <el-input style="width:500px;vertical-align:top;" type="textarea" resize='none' rows="2"></el-input>
+        </p>
+        <p>
+          <span> 经办人：{{'dd' }}</span>
+          <span style="float:right;width:280px;"> 发起复议时间：{{'dd' }}</span>
+        </p>
+      </div>
+      <div style="text-align:right;">
+        <el-button type="primary" @click="ToReconsider">提交</el-button>
+      </div>
+    </el-dialog>
+    <!-- 复议审批  -->
+    <el-dialog title='复议审批' :visible.sync="ReAprovalShow" :modal="false" width="820px" top="20vh">
+      <!-- <div>
+        <p>
+          <label>复议节点：</label>
+          <el-select v-model="value" placeholder="请选择">
+            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </p>
+        <p style="margin:10px 0;">
+          <label>复议说明：</label>
+          <el-input style="width:500px;vertical-align:top;" type="textarea" resize='none' rows="2"></el-input>
+        </p>
+        <p>
+          <span> 经办人：{{'dd' }}</span>
+          <span style="float:right;width:280px;"> 发起复议时间：{{'dd' }}</span>
+        </p>
+      </div>
+      <div style="text-align:right;">
+        <el-button type="primary" @click="ToReconsider">提交</el-button>
+      </div> -->
+    </el-dialog>
+    <!-- 流程轨迹 -->
+    <div class="liuchenggj">
+      <el-dialog title='流程轨迹' :visible.sync="lcdialogVisible" :modal="false" width="860px" top="20vh">
+        <div class="splcBody">
+          <!-- <el-collapse v-model="activeNames2" @change="handleChange">
+			  		<el-collapse-item title="信审流程轨迹" name="1"> -->
+          <div class="first">
+            <el-table :data="lcgjData" style="width: 100%" height="296" border>
+              <el-table-column type="index" label="序号" min-width="50">
+              </el-table-column>
+              <el-table-column prop="taskNameTxt" label="任务节点" min-width="120">
+              </el-table-column>
+              <el-table-column prop="taskTypeTxt" label="任务类型" min-width="120">
+              </el-table-column>
+              <el-table-column prop="activationTime" label="进入本环节时间" min-width="180">
+              </el-table-column>
+              <el-table-column prop="taskStatusTxt" label="任务状态" min-width="100">
+              </el-table-column>
+              <el-table-column prop="operatorCode" label="处理人" min-width="120">
+              </el-table-column>
+              <el-table-column prop="completeTime" label="处理时间" min-width="180">
+              </el-table-column>
+              <el-table-column prop="approvalOpinionTxt" label="处理结论" min-width="120">
+              </el-table-column>
+              <el-table-column prop="opinionExplain" label="意见说明" min-width="200" show-overflow-tooltip>
+              </el-table-column>
+            </el-table>
+          </div>
+        </div>
+        <span slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="lcdialogVisible = false">返回</el-button>
+        </span>
+      </el-dialog>
+    </div>
+    <!-- 大数据风控 -->
+    <div class="bigDataLog">
+      <el-dialog title="提示" :visible.sync="bigDataLogVisible" :modal="false" width="420px" top="35vh">
+        <span>此进件不存在大数据风控明细！</span>
+        <span slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="this.bigDataLogVisible=false">确定</el-button>
+        </span>
+      </el-dialog>
+    </div>
+    <!-- 社保公积金 -->
+    <div class="bigDataLog">
+      <el-dialog title="提示" :visible.sync="socialLogVisible" :modal="false" width="420px" top="35vh">
+        <span>客户社保公积金未授权！</span>
+        <span slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="this.socialLogVisible=false">确定</el-button>
+        </span>
+      </el-dialog>
     </div>
   </div>
 </template>
 <script>
+  import baseurl from '../../../../util/ConstantSocialAndPn';
   export default {
     data() {
       return {
@@ -641,20 +756,20 @@
         arealength: 300, //area长度
         insConclusion: {},
         insWechatAlipay: '', //微信、支付宝
-        Alipay:'',//微信支付宝切换暂存
-        AlipayCus:'',//客户本人-微信
-        AlipayCompany:'',//单位电话-微信
-        AlipayFamily:'',//家庭联系人-微信
-        AlipayWork:'',//工作证明-微信
-        AlipayOthers:'',//其他联系人-微信
+        Alipay: [], //微信支付宝切换暂存
+        AlipayCus: '', //客户本人-微信
+        AlipayCompany: '', //单位电话-微信
+        AlipayFamily: '', //家庭联系人-微信
+        AlipayWork: '', //工作证明-微信
+        AlipayOthers: '', //其他联系人-微信
         insTelCustInfo: [], //客户本人-拨打核实
-        insTelVerifyList:[],//除客户本人以外-电话拨打核实-暂存
-        insTelVerifyListCompany:[],//单位电话-电话拨打核实
-        insTelVerifyListFamily:[],//家庭联系人-电话拨打核实
-        insTelVerifyListWork:[],//工作证明-电话拨打核实
-        insTelVerifyListOthers:[],//其他联系人-电话拨打核实
+        insTelVerifyList: [], //除客户本人以外-电话拨打核实-暂存
+        insTelVerifyListCompany: [], //单位电话-电话拨打核实
+        insTelVerifyListFamily: [], //家庭联系人-电话拨打核实
+        insTelVerifyListWork: [], //工作证明-电话拨打核实
+        insTelVerifyListOthers: [], //其他联系人-电话拨打核实
 
-        
+
         //  regularInfo: {},//接口可调用时待测试默认选中值
         regularInfo: {
           isForm: 1,
@@ -695,9 +810,9 @@
         others: false,
         addTr: true,
         // currentRow: null,
-        telType:'06',//电话征信 电话类型入参
+        telType: '06', //电话征信 电话类型入参
         activeNames: ['0', '1', "2", "3", "4", "5", "6", "7", "8"], //折叠面板 默认显示下标
-           tabTitle: ["客户本人", "单位电话", "家庭联系人", "工作证明人", "其他联系人"],
+        tabTitle: ["客户本人", "单位电话", "家庭联系人", "工作证明人", "其他联系人"],
         // tab: ["客户本人", "单位电话", "家庭联系人", "工作证明人", "其他联系人"],
         QTresult: [{
           value: '01',
@@ -790,13 +905,38 @@
         //   label: '北京烤鸭'
         // }],
         // value: ''
-// insWechatAlipayList:'',
-changeAlipay:'',
-// insTelCustInfo:{},//客户本人-拨打核实
+        // insWechatAlipayList:'',
+        processInstanceId: '',
+        changeAlipay: '',
+        // insTelCustInfo:{},//客户本人-拨打核实
+        // -----------弹窗---
+        ReconsiderShow: false,
+        ReAprovalShow:true,
+        lcdialogVisible: false,
+        lcgjData: [],
+        socialLogVisible: false,
+        bigDataLogVisible: false,
+        social: '', //社保公积金 已绑定 未绑定
+        // -------------------单选按钮 disabled-------------
+        material: false, //资料核实
+        InfoInquire: false, //三方信息查询
+        matching: false, //内部配核实
+        PhoneCredit: true, //电话征信
+        QTConclution: false, //质检结论
+        // -----------------手风琴显示项--------------------
+        AprovalInfolShow: true, //审批信息        
+        MaterialShow: true, //资料核实
+        InfoSearchShow: true, //三方信息查询
+        MatchingShow: true, //内部匹配核实
+        reResultShow: false, //复核结论-div 
       }
     },
-    props: ['propApplyId'],
+    props: ['propApplyId', 'pageType'],
     methods: {
+      show() {
+        console.log('furyi ')
+        this.ReconsiderShow = true;
+      },
       // 质检页面查询接口
       referPort() {
         this.get("/insConclusion/queryInsConclusionObj", {
@@ -811,10 +951,10 @@ changeAlipay:'',
             this.insConclusion = res.data.insConclusion;
 
             // 电话征信：客户本人-电话拨打核实             -object
-            this.insTelCustInfo[0] = res.data.insTelCustInfo;//this.insTelCustInfo 是array / 查询接口 -只返回客户本人-电话核实信息
+            this.insTelCustInfo[0] = res.data.insTelCustInfo; //this.insTelCustInfo 是array / 查询接口 -只返回客户本人-电话核实信息
             //电话征信： 微信/支付宝核实                  -Array
             // this.insWechatAlipayList = res.data.insWechatAlipayList;
-            this.AlipayCus= res.data.insWechatAlipayList;// 查询接口 -只返回客户本人-微信支付宝信息
+            this.AlipayCus = res.data.insWechatAlipayList; // 查询接口 -只返回客户本人-微信支付宝信息
             // for(var i=0;i<this.insWechatAlipayList.length;i++){
             //   switch(this.insWechatAlipayList[i].telType){
             //     case '06':this.AlipayCus=this.insWechatAlipayList[i];break;//客户本人-微信
@@ -829,15 +969,13 @@ changeAlipay:'',
           }
         });
       },
-SaveInf(){
-// this.insTelCustInfo[0]// 入参客户本人-电话拨打核实，转换为obj（原为array）
-},
-      getTelAlipay(telTypeVal){
+
+      getTelAlipay(telTypeVal) {
         // 电话征信-微信支付宝 + 拨打核实接口
-         this.post("/insConclusion/getTelVerifyWechatAlipay", {
-         applyId:'申请单id',
-        // telType: this.telType,
-        telType: telTypeVal
+        this.post("/insConclusion/getTelVerifyWechatAlipay", {
+          applyId: '申请单id',
+          // telType: this.telType,
+          telType: telTypeVal
         }).then(res => {
           if (res.statusCode == 200) {
             // 拨打核实  insTelVerify
@@ -849,20 +987,20 @@ SaveInf(){
             // telTypeVal=='03'? this.Alipay=this.AlipayFamily=res.data.insWechatAlipayList:this.Alipay;//家庭联系人-微信
             // telTypeVal=='04'? this.Alipay=this.AlipayOthers=res.data.insWechatAlipayList:this.Alipay;//其他联系人-微信
             // telTypeVal=='05'? this.Alipay=this.AlipayWork=res.data.insWechatAlipayList:this.Alipay;//工作证明人-微信
-         if( telTypeVal=='02' ){
-           this.Alipay=this.AlipayCompany=res.data.insWechatAlipayList;//单位联系人-微信
-this.insTelVerifyList=this.insTelVerifyListCompany= res.data.insTelVerifyList;//单位电话-电话拨打核实
-         }else if(telTypeVal=='03'){
-this.Alipay=this.AlipayFamily=res.data.insWechatAlipayList;//家庭联系人-微信
-this.insTelVerifyList=this.insTelVerifyListFamily= res.data.insTelVerifyList;//家庭联系人-电话拨打核实
-         }else if(telTypeVal=='04'){
-this.Alipay=this.AlipayOthers=res.data.insWechatAlipayList;//其他联系人-微信
-this.insTelVerifyList=this.insTelVerifyListOthers= res.data.insTelVerifyList;//其他联系人-电话拨打核实
-         }else if(telTypeVal=='05'){
-this.Alipay=this.AlipayWork=res.data.insWechatAlipayList;//工作证明人-微信
-this.insTelVerifyList=this.insTelVerifyListWork= res.data.insTelVerifyList;//工作证明-电话拨打核实
-         }
-         } else {
+            if (telTypeVal == '02') {
+              this.Alipay = this.AlipayCompany = res.data.insWechatAlipayList; //单位联系人-微信
+              this.insTelVerifyList = this.insTelVerifyListCompany = res.data.insTelVerifyList; //单位电话-电话拨打核实
+            } else if (telTypeVal == '03') {
+              this.Alipay = this.AlipayFamily = res.data.insWechatAlipayList; //家庭联系人-微信
+              this.insTelVerifyList = this.insTelVerifyListFamily = res.data.insTelVerifyList; //家庭联系人-电话拨打核实
+            } else if (telTypeVal == '04') {
+              this.Alipay = this.AlipayOthers = res.data.insWechatAlipayList; //其他联系人-微信
+              this.insTelVerifyList = this.insTelVerifyListOthers = res.data.insTelVerifyList; //其他联系人-电话拨打核实
+            } else if (telTypeVal == '05') {
+              this.Alipay = this.AlipayWork = res.data.insWechatAlipayList; //工作证明人-微信
+              this.insTelVerifyList = this.insTelVerifyListWork = res.data.insTelVerifyList; //工作证明-电话拨打核实
+            }
+          } else {
             this.$message.error(res.msg);
           }
         });
@@ -913,7 +1051,7 @@ this.insTelVerifyList=this.insTelVerifyListWork= res.data.insTelVerifyList;//工
       clearContent(el, val) {
         // console.log(val)regularInfo.
         switch (el) {
-          case '申请表':
+          case '申请单表':
             val == 1 ? this.regularInfo.isFormRemark = '' : this.regularInfo.isFormRemark;
             break;
           case '身份证':
@@ -980,7 +1118,7 @@ this.insTelVerifyList=this.insTelVerifyListWork= res.data.insTelVerifyList;//工
         console.log(val.length)
         // 长度判断 提示语 ----待确定
         switch (el) {
-          case '申请表':
+          case '申请单表':
             val > 300 ? this.regularInfo.isFormRemark = '' : this.regularInfo.isFormRemark;
             break;
           case '身份证':
@@ -1053,70 +1191,175 @@ this.insTelVerifyList=this.insTelVerifyListWork= res.data.insTelVerifyList;//工
       //     this.addTr = false;
       //   },
       tabClick(ev, ind, val) {
-        console.log(ind )
+        console.log(ind)
         //  this.title = val;
         //         this.tabContent1 = ind;
         this.tabIndex = ind;
         if (ind == 0) {
           // 客户本人
-          this.telType='06'
+          this.telType = '06'
           this.payment = true;
           this.custom = true;
           this.others = false;
-          this.changeAlipay='';
-          this.Alipay=this.AlipayCus;//微信支付宝内容
+          this.changeAlipay = '';
+          this.Alipay = this.AlipayCus; //微信支付宝内容
 
         } else if (ind == 1) {
-           // 单位电话
-          this.telType='02'
+          // 单位电话
+          this.telType = '02'
           this.payment = false;
           this.custom = false;
           this.others = true;
-          this.Alipay=this.AlipayCompany;//微信支付宝内容   
-          this.getTelAlipay('02');     //----调用查询微信信息接口  
+          this.Alipay = this.AlipayCompany; //微信支付宝内容   
+          this.getTelAlipay('02'); //----调用查询微信信息接口  
         } else if (ind == 2) {
-            // 家庭联系人
-          this.telType='03'
+          // 家庭联系人
+          this.telType = '03'
           this.payment = true;
           this.custom = false;
           this.others = true;
           this.othersCheck = this.a;
-           this.Alipay=this.AlipayFamily;//微信支付宝内容 
-            this.getTelAlipay('03');     //----调用查询微信信息接口  
+          this.Alipay = this.AlipayFamily; //微信支付宝内容 
+          this.getTelAlipay('03'); //----调用查询微信信息接口  
         } else if (ind == 3) {
-           // 工作证明人
-          this.telType='05'
+          // 工作证明人
+          this.telType = '05'
           this.payment = true;
           this.custom = false;
           this.others = true;
           this.othersCheck = this.b;
- this.Alipay=this.AlipayWork;//微信支付宝内容
-  this.getTelAlipay('05');     //----调用查询微信信息接口   
+          this.Alipay = this.AlipayWork; //微信支付宝内容
+          this.getTelAlipay('05'); //----调用查询微信信息接口   
         } else if (ind == 4) {
-           // 其他联系人
-          this.telType='04'
+          // 其他联系人
+          this.telType = '04'
           this.payment = true;
           this.custom = false;
           this.others = true;
-           this.Alipay=this.AlipayOthers;//微信支付宝内容 
-            this.getTelAlipay('04');     //----调用查询微信信息接口  
+          this.Alipay = this.AlipayOthers; //微信支付宝内容 
+          this.getTelAlipay('04'); //----调用查询微信信息接口  
         }
       },
-      // 按钮事件
-      	    AntiApply(){
-		    	this.$router.push({
-		            name: 'AntiApplyEditf',
-		            params: {
-		              // id: this.applyId,
-		              // flag: 'fuyi',
-		              // busiState:'20'
-		            }
-		          });
-		    },
+      // ---------------------------------按钮事件----------------
+      // 保存 或 提交
+      SaveInf() {
+        // this.insTelCustInfo[0]// 入参客户本人-电话拨打核实，转换为obj（原为array）
+        this.post("/insConclusion/addOrSubmit", {
+          taskId: "",
+          applyBaseInfo: {}, //基础信息
+          insConclusion: {}, //质检结论页-质检结论
+          insRegularInfo: {}, //常规质检
+          insTelCustInfo: {}, //电话征信-客户本人-电话拨打核实
+          insTelVerifyList: [], //:质检-电话征信-拨打核实
+          insWechatAlipayList: [], //电话征信-微信/支付宝核实
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.referPort()
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      },
+      // 无需复议
+      NoReconsider() {
+        console.log('发起复议')
+
+      },
+      // 发起复议
+      ToReconsider() {
+        console.log('发起复议')
+
+      },
+      // 发起反欺诈
+      AntiApply() {
+        console.log('反欺诈')
+        this.$router.push({
+          name: 'AntiApplyEditf',
+          params: {
+            // id: this.applyId,
+            // flag: 'fuyi',
+            // busiState:'20'
+          }
+        });
+      },
+      // 流程轨迹
+      getLcgjList() {
+        console.log('流程轨迹')
+        this.lcdialogVisible = true;
+        console.log(this.processInstanceId)
+        this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processInstanceId + '&' + Math.random())
+          .then(res => {
+            console.log(res);
+            if (res.statusCode == '200') {
+              this.lcgjData = res.data;
+            } else {
+              this.$message(res.msg);
+            }
+          })
+      },
+      //大数据风控
+      RiskControl() {
+        // console.log('大数据')
+        this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
+          // applyId: this.applyId
+          applyId: '申请单id'
+        }).then(res => {
+          //console.log(res.data);
+          if (res.obj == null) {
+            this.bigDataLogVisible = true;
+          } else if (res.obj) {
+            this.$router.push({
+              path: '/PneCtrl'
+            });
+          }
+        });
+      },
+      //社保/公积金
+      Social() {
+        this.post(baseurl.BaseUrl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {
+          certCode: this.baseInfo.certCode,
+          custName: this.baseInfo.custName
+        }).then(res => {
+          if (res.obj == null || res.obj == '') {
+            this.social = "(未授权)";
+          } else if (res.obj) {
+            this.social = "(已授权)";
+          }
+        });
+      },
+      roSocialSecurity() {
+        // console.log('社保')
+        if (this.social == "(未授权)") {
+          this.socialLogVisible = true;
+        } else if (this.social == "(已授权)") {
+          this.$router.push({
+            path: '/SocialSe'
+          });
+        }
+      },
+      showdiffer() {
+        if (this.pageType == '常规质检') {
+          AprovalInfolShow = true; //审批信息        
+          MaterialShow = true; //资料核实
+          InfoSearchShow = true; //三方信息查询
+          MatchingShow = true; //内部匹配核实
+          reResultShow = false; //复核结论-div 
+        } else if (this.pageType == '专纵质检') {
+          AprovalInfolShow = false; //审批信息        
+          MaterialShow = false; //资料核实
+          InfoSearchShow = false; //三方信息查询
+          MatchingShow = false; //内部匹配核实
+        } else if (this.pageType == '常规又专纵质检') {
+          reResultShow = true; //复核结论-div 
+        } else if (this.pageType == '复议') {
+
+        }
+      }
     },
     mounted() {
+      // this.processInstanceId = JSON.parse(localStorage.getItem('未存储，未确定，待更改-RtaskInWaitting')).processInstanceId;
       // 质检结论枚举
-            // ["01": "初审一般差错",
+      // ["01": "初审一般差错",
       // "02": "初审重大差错",
       // "03": "终审一般差错",
       // "04":"终审重大差错",
@@ -1127,19 +1370,22 @@ this.insTelVerifyList=this.insTelVerifyListWork= res.data.insTelVerifyList;//工
       // console.log(this.regularInfo)
       // this.InitialInfo();
       // this.getTelAlipay('06')//电话征信-支付宝+电话核实接口
+      // this.Social();//社保公积金接口
+      // this.Alipay = this.AlipayCus //初始状态取客户信息的支付宝数据-----带更改（解决异步数据不确定顺序问题）
 
-      this.Alipay=this.AlipayCus//初始状态取客户信息的支付宝数据-----带更改（解决异步数据不确定顺序问题）
     }
   }
 
 </script>
 <style scoped>
   .baseInf {
-    padding-left:10px;
+    padding-left: 10px;
   }
-.paddingleft{
-  padding-left: 10px;
-}
+
+  .paddingleft {
+    padding-left: 10px;
+  }
+
   .baseInf p {
     width: 50%;
     /* border:1px solid; */
@@ -1175,10 +1421,12 @@ this.insTelVerifyList=this.insTelVerifyListWork= res.data.insTelVerifyList;//工
   .material {
     padding: 10px;
   }
-.result_QT{
-  padding:10px;
-height:130px;
-}
+
+  .result_QT {
+    padding: 10px;
+    height: 130px;
+  }
+
   /* .btn {
     vertical-align: top;
     cursor: pointer;
@@ -1188,13 +1436,6 @@ height:130px;
   .btn img {
     vertical-align: middle;
   } */
-
-
-
-
-
-
-
 
   .icon_hat {
     position: absolute;
@@ -1228,6 +1469,17 @@ height:130px;
     font-size: 16px;
   }
 
+  .reResult {
+    padding: 10px;
+    margin: 30px 0;
+  }
+
+  .reResult div {
+    display: inline-block;
+    width: 900px;
+    vertical-align: top;
+  }
+
   /* .btn {
     width: 100px;
     text-align: center;
@@ -1237,8 +1489,6 @@ height:130px;
     color: white;
     border-radius: 4px;
   } */
-
-
 
   /* .btn:hover {
     cursor: pointer;
