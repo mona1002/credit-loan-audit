@@ -1,5 +1,9 @@
 <template>
   <div class="specialQT">
+     <ul>
+            <li ref="tabOne" class="tab1Default" v-for="(val,index) in tabTitle" :key="index" @click.once="tabClick($event,index,val)">
+              {{val}}</li>
+          </ul>
     <div>
        <el-table
       :data="tableData"
@@ -26,6 +30,7 @@
 export default {
    data() {
         return {
+           tabTitle: ["客户本人", "单位电话", "家庭联系人", "工作证明人", "其他联系人"],
           tableData: [{
             date: '2016-05-02',
             name: '王小虎',
@@ -57,6 +62,13 @@ export default {
         }
       }
     },
+
+methods:{
+     tabClick(ev, ind, val) {
+       console.log(ind)
+     }
+
+  }
 }
 </script>
 

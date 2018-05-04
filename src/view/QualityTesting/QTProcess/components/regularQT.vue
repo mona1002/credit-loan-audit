@@ -405,7 +405,7 @@
             <li ref="tabOne" class="tab1Default" v-for="(val,index) in tabTitle" :key="index" @click="tabClick($event,index,val)" :class="{tabAct:tabIndex==index}">
               {{val}}</li>
           </ul>
-          <!-- pay-content 微信/支付宝核实==========待确认写死还是后台 返 -->
+          <!-- pay-content 微信/支付宝核实 -->
           <div v-if="this.payment">
             <p class="P_title">微信/支付宝核实</p>
             <el-table :data="Alipay" style="width: 100%">
@@ -436,27 +436,30 @@
               </el-table-column>
             </el-table>
           </div>
-          <!-- call-content 客户本人中  -->
+          <!-- call-content 客户本人中-电话拨打核实  -->
           <div v-show="this.custom">
             <p class="P_title">电话拨打核实</p>
             <el-table :data="insTelCustInfo" style="width: 100%">
               <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
-              <el-table-column label="电话号码" align="center" width="180">
+              <!-- <el-table-column label="电话号码" align="center" width="180">
                 <template slot-scope="scope">
                   <span style="margin-left: 10px">
                     <b style="color:red;fontWeight:700px"> * </b>{{ scope.row.telNum }}</span>
                 </template>
+              </el-table-column> -->
+              <el-table-column prop="telNum" label="电话号码" align="center" width="180">
               </el-table-column>
-              <el-table-column label="电话录音" align="center" width="100">
+              <!-- <el-table-column label="电话录音" align="center" width="100">
                 <template slot-scope="scope">
                   <span style="margin-left: 10px">{{ scope.row.telRecord }}</span>
                 </template>
-              </el-table-column>
-              <!-- ================注释掉的地方  接口文档没有对应字段，待更新======================== -->
-              <!-- <el-table-column prop="Self" label="接听人是否借款人本人" align="center" width="180">
-              </el-table-column>
-              <el-table-column prop="Self" label="接听说明" width="180" align="center">
               </el-table-column> -->
+               <el-table-column prop="telRecord" label="电话录音" align="center" width="180">
+              </el-table-column>
+              <el-table-column prop="iisself" label="接听人是否借款人本人" align="center" width="180">
+              </el-table-column>
+              <el-table-column prop="iisselftxt" label="接听说明" width="180" align="center">
+              </el-table-column>
               <el-table-column label="质检结果（必填项）" align="center" width="180">
                 <template slot-scope="scope">
                   <div slot="reference" class="name-wrapper">
@@ -481,16 +484,20 @@
             <p class="P_title">电话拨打核实</p>
             <el-table :data="insTelVerifyList" style="width: 100%">
               <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
-              <el-table-column label="电话号码" align="center" width="180">
+              <!-- <el-table-column label="电话号码" align="center" width="180">
                 <template slot-scope="scope">
                   <span style="margin-left: 10px">
                     <b style="color:red;fontWeight:700px"> * </b>{{ scope.row.telNum }}</span>
                 </template>
+              </el-table-column> -->
+               <el-table-column prop="telNum" label="电话号码" align="center" width="70">
               </el-table-column>
-              <el-table-column label="电话录音" align="center" width="100">
+              <!-- <el-table-column label="电话录音" align="center" width="100">
                 <template slot-scope="scope">
                   <span style="margin-left: 10px">{{ scope.row.telRecord }}</span>
-                </template>
+                </template> -->
+                 <el-table-column prop="telRecord" label="电话录音来源" align="center" width="70">
+              </el-table-column>
               </el-table-column>
               <el-table-column prop="source" label="来源" align="center" width="70">
               </el-table-column>
@@ -506,8 +513,8 @@
                 <template slot-scope="scope">
                   <div slot="reference" class="name-wrapper">
                     <el-radio-group v-model="scope.row.insResult" @change="clearContent(scope.row)">
-                      <el-radio :label="1">正常</el-radio>
-                      <el-radio :label="2">异常</el-radio>
+                      <el-radio :label="'00'">正常</el-radio>
+                      <el-radio :label="'01'">异常</el-radio>
                     </el-radio-group>
                   </div>
                 </template>
@@ -599,8 +606,8 @@
         <img src="/static/images/back.png">
         <label class="labelTxt">审批</label>
       </el-button>
-      <el-button @click="AntiFraudApplication">
-        <img src="/static/images/faqi.png">
+      <el-button @click="AntiApply">
+        <img src="../../../../../static/images/faqi.png">
         <label class="labelTxt">反欺诈申请</label>
       </el-button>
       <el-button @click="getSpjlList">
@@ -633,14 +640,20 @@
         fiftyWords: 50,
         arealength: 300, //area长度
         insConclusion: {},
-        insTelCustInfo: [], //客户本人拨打核实
         insWechatAlipay: '', //微信、支付宝
         Alipay:'',//微信支付宝切换暂存
         AlipayCus:'',//客户本人-微信
-        AlipayCompany:'',//客户本人-微信
-        AlipayFamily:'',//客户本人-微信
-        AlipayWork:'',//客户本人-微信
-        AlipayOthers:'',//客户本人-微信
+        AlipayCompany:'',//单位电话-微信
+        AlipayFamily:'',//家庭联系人-微信
+        AlipayWork:'',//工作证明-微信
+        AlipayOthers:'',//其他联系人-微信
+        insTelCustInfo: [], //客户本人-拨打核实
+        insTelVerifyList:[],//除客户本人以外-电话拨打核实-暂存
+        insTelVerifyListCompany:[],//单位电话-电话拨打核实
+        insTelVerifyListFamily:[],//家庭联系人-电话拨打核实
+        insTelVerifyListWork:[],//工作证明-电话拨打核实
+        insTelVerifyListOthers:[],//其他联系人-电话拨打核实
+
         
         //  regularInfo: {},//接口可调用时待测试默认选中值
         regularInfo: {
@@ -777,8 +790,7 @@
         //   label: '北京烤鸭'
         // }],
         // value: ''
-insTelVerifyList:'',
-insWechatAlipayList:'',
+// insWechatAlipayList:'',
 changeAlipay:'',
 // insTelCustInfo:{},//客户本人-拨打核实
       }
@@ -799,18 +811,19 @@ changeAlipay:'',
             this.insConclusion = res.data.insConclusion;
 
             // 电话征信：客户本人-电话拨打核实             -object
-            this.insTelCustInfo[0] = res.data.insTelCustInfo;//this.insTelCustInfo 是array
+            this.insTelCustInfo[0] = res.data.insTelCustInfo;//this.insTelCustInfo 是array / 查询接口 -只返回客户本人-电话核实信息
             //电话征信： 微信/支付宝核实                  -Array
-            this.insWechatAlipayList = res.data.insWechatAlipayList;
-            for(var i=0;i<this.insWechatAlipayList.length;i++){
-              switch(this.insWechatAlipayList[i].telType){
-                case '06':this.AlipayCus=this.insWechatAlipayList[i];break;//客户本人-微信
-                case '02':this.AlipayCompany=this.insWechatAlipayList[i];break;//单位联系人-微信
-                case '03':this.AlipayFamily=this.insWechatAlipayList[i];break;//家庭联系人-微信
-                case '05':this.AlipayWork=this.insWechatAlipayList[i];break;//工作证明人-微信
-                case '04':this.AlipayOthers=this.insWechatAlipayList[i];break;//其他联系人-微信
-              }
-            }
+            // this.insWechatAlipayList = res.data.insWechatAlipayList;
+            this.AlipayCus= res.data.insWechatAlipayList;// 查询接口 -只返回客户本人-微信支付宝信息
+            // for(var i=0;i<this.insWechatAlipayList.length;i++){
+            //   switch(this.insWechatAlipayList[i].telType){
+            //     case '06':this.AlipayCus=this.insWechatAlipayList[i];break;//客户本人-微信
+            //     case '02':this.AlipayCompany=this.insWechatAlipayList[i];break;//单位联系人-微信
+            //     case '03':this.AlipayFamily=this.insWechatAlipayList[i];break;//家庭联系人-微信
+            //     case '05':this.AlipayWork=this.insWechatAlipayList[i];break;//工作证明人-微信
+            //     case '04':this.AlipayOthers=this.insWechatAlipayList[i];break;//其他联系人-微信
+            //   }
+            // }
           } else {
             this.$message.error(res.msg);
           }
@@ -828,10 +841,28 @@ SaveInf(){
         }).then(res => {
           if (res.statusCode == 200) {
             // 拨打核实  insTelVerify
-            this.insTelVerifyList = res.data.insTelVerifyList;
+            // this.insTelVerifyList = res.data.insTelVerifyList;
+
             // 微信支付宝  insWechatAlipay
-            this.insWechatAlipayList = res.data.insWechatAlipayList;
-          } else {
+            // this.insWechatAlipayList = res.data.insWechatAlipayList;
+            // telTypeVal=='02'? this.Alipay=this.AlipayCompany=res.data.insWechatAlipayList:this.Alipay;//单位联系人-微信
+            // telTypeVal=='03'? this.Alipay=this.AlipayFamily=res.data.insWechatAlipayList:this.Alipay;//家庭联系人-微信
+            // telTypeVal=='04'? this.Alipay=this.AlipayOthers=res.data.insWechatAlipayList:this.Alipay;//其他联系人-微信
+            // telTypeVal=='05'? this.Alipay=this.AlipayWork=res.data.insWechatAlipayList:this.Alipay;//工作证明人-微信
+         if( telTypeVal=='02' ){
+           this.Alipay=this.AlipayCompany=res.data.insWechatAlipayList;//单位联系人-微信
+this.insTelVerifyList=this.insTelVerifyListCompany= res.data.insTelVerifyList;//单位电话-电话拨打核实
+         }else if(telTypeVal=='03'){
+this.Alipay=this.AlipayFamily=res.data.insWechatAlipayList;//家庭联系人-微信
+this.insTelVerifyList=this.insTelVerifyListFamily= res.data.insTelVerifyList;//家庭联系人-电话拨打核实
+         }else if(telTypeVal=='04'){
+this.Alipay=this.AlipayOthers=res.data.insWechatAlipayList;//其他联系人-微信
+this.insTelVerifyList=this.insTelVerifyListOthers= res.data.insTelVerifyList;//其他联系人-电话拨打核实
+         }else if(telTypeVal=='05'){
+this.Alipay=this.AlipayWork=res.data.insWechatAlipayList;//工作证明人-微信
+this.insTelVerifyList=this.insTelVerifyListWork= res.data.insTelVerifyList;//工作证明-电话拨打核实
+         }
+         } else {
             this.$message.error(res.msg);
           }
         });
@@ -1041,7 +1072,8 @@ SaveInf(){
           this.payment = false;
           this.custom = false;
           this.others = true;
-          this.Alipay=this.AlipayCompany;//微信支付宝内容          
+          this.Alipay=this.AlipayCompany;//微信支付宝内容   
+          this.getTelAlipay('02');     //----调用查询微信信息接口  
         } else if (ind == 2) {
             // 家庭联系人
           this.telType='03'
@@ -1050,6 +1082,7 @@ SaveInf(){
           this.others = true;
           this.othersCheck = this.a;
            this.Alipay=this.AlipayFamily;//微信支付宝内容 
+            this.getTelAlipay('03');     //----调用查询微信信息接口  
         } else if (ind == 3) {
            // 工作证明人
           this.telType='05'
@@ -1057,7 +1090,8 @@ SaveInf(){
           this.custom = false;
           this.others = true;
           this.othersCheck = this.b;
- this.Alipay=this.AlipayWork;//微信支付宝内容 
+ this.Alipay=this.AlipayWork;//微信支付宝内容
+  this.getTelAlipay('05');     //----调用查询微信信息接口   
         } else if (ind == 4) {
            // 其他联系人
           this.telType='04'
@@ -1065,8 +1099,20 @@ SaveInf(){
           this.custom = false;
           this.others = true;
            this.Alipay=this.AlipayOthers;//微信支付宝内容 
+            this.getTelAlipay('04');     //----调用查询微信信息接口  
         }
-      }
+      },
+      // 按钮事件
+      	    AntiApply(){
+		    	this.$router.push({
+		            name: 'AntiApplyEditf',
+		            params: {
+		              // id: this.applyId,
+		              // flag: 'fuyi',
+		              // busiState:'20'
+		            }
+		          });
+		    },
     },
     mounted() {
       // 质检结论枚举
@@ -1082,7 +1128,7 @@ SaveInf(){
       // this.InitialInfo();
       // this.getTelAlipay('06')//电话征信-支付宝+电话核实接口
 
-      this.Alipay=this.insWechatAlipayList//初始状态取客户信息的支付宝数据-----带更改
+      this.Alipay=this.AlipayCus//初始状态取客户信息的支付宝数据-----带更改（解决异步数据不确定顺序问题）
     }
   }
 
