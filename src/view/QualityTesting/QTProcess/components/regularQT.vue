@@ -668,26 +668,51 @@
     </el-dialog>
     <!-- 复议审批  -->
     <el-dialog title='复议审批' :visible.sync="ReAprovalShow" :modal="false" width="820px" top="20vh">
-      <!-- <div>
+      <div class="reApproval">
         <p>
-          <label>复议节点：</label>
-          <el-select v-model="value" placeholder="请选择">
+          <span>
+              <label>复议节点：</label>
+ <el-select v-model="value" placeholder="请选择">
             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
+          </span>
+               <span>
+              <label>质检结果：</label>
+ <el-select v-model="value" placeholder="请选择">
+            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+          </span>
+        </p>
+               <p>
+          <span>
+              <label>质检员是否有差错：</label>
+ <el-select v-model="value" placeholder="请选择">
+            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+          </span>
+               <span>
+              <label>差错类型：</label>
+ <el-select v-model="value" placeholder="请选择">
+            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+          </span>
         </p>
         <p style="margin:10px 0;">
           <label>复议说明：</label>
           <el-input style="width:500px;vertical-align:top;" type="textarea" resize='none' rows="2"></el-input>
         </p>
         <p>
-          <span> 经办人：{{'dd' }}</span>
-          <span style="float:right;width:280px;"> 发起复议时间：{{'dd' }}</span>
+          <span> 审批人{{'dd' }}</span>
+          <span style="float:right;width:280px;"> 处理时间：s{{'dd' }}</span>
         </p>
       </div>
       <div style="text-align:right;">
         <el-button type="primary" @click="ToReconsider">提交</el-button>
-      </div> -->
+      </div>
     </el-dialog>
     <!-- 流程轨迹 -->
     <div class="liuchenggj">
@@ -1479,7 +1504,15 @@
     width: 900px;
     vertical-align: top;
   }
-
+.reApproval span{
+display: inline-block;
+width:49%;
+}
+.reApproval span:nth-of-type(1) label{
+  display: inline-block;
+  width:130px;
+  text-align: right;
+}
   /* .btn {
     width: 100px;
     text-align: center;
