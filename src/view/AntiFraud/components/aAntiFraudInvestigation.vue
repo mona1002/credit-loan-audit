@@ -267,7 +267,7 @@
         //恢复、解除的新数组
         newArray: [],
         isValidPhone: /^1[345789]\d{9}$/,
-        regLandlinePhone: /^(0[0-9]{2,3}-)?([0-9]{7,8})$/,
+        regLandlinePhone: /^(0[0-9]{2,3}-?)?([0-9]{7,8})$/,
         relations: [{
             'value': '01',
             'label': '夫妻'

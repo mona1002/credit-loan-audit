@@ -46,10 +46,10 @@
                             };
                             localStorage.setItem("workbenchPass",JSON.stringify(row));
                             localStorage.setItem("judge",JSON.stringify(judge));
-                             nodeName = '初审审批';
-                               RoutePath = '/taskInWaitting';
-                              nodeFlag = "01";
-                               routeParams = '?taskNodeName=creditApp_firstTrial&flag=01';
+                            //  nodeName = '初审审批';
+                            //    RoutePath = '/taskInWaitting';
+                            //   nodeFlag = "01";
+                            //    routeParams = '?taskNodeName=creditApp_firstTrial&flag=01';
                              
                         };
                         //终审一级
@@ -64,10 +64,10 @@
                             };
                             localStorage.setItem("FinalWorkbenchPass",JSON.stringify(row));
                             localStorage.setItem("judge",JSON.stringify(judge));
-                             nodeName = '终审一级审批';
-                             RoutePath = '/FtaskInWaitting';
-                             nodeFlag = "02";
-                             routeParams = '?taskNodeName=creditApp_finalTrial_one&flag=02';
+                            //  nodeName = '终审一级审批';
+                            //  RoutePath = '/FtaskInWaitting';
+                            //  nodeFlag = "02";
+                            //  routeParams = '?taskNodeName=creditApp_finalTrial_one&flag=02';
                         };
                         //终审二级
                         if(strs[0].split('=')[1] == "creditApp_finalTrial_two" && strs[1].split('=')[1] == "02"){
@@ -81,10 +81,10 @@
                             };
                             localStorage.setItem("FinalWorkbenchPass",JSON.stringify(row));
                             localStorage.setItem("judge",JSON.stringify(judge));
-                            nodeName = '终审二级审批';
-                             RoutePath = '/FtaskInWaitting';
-                             nodeFlag = "02";
-                             routeParams = '?taskNodeName=creditApp_finalTrial_two&flag=02';
+                            // nodeName = '终审二级审批';
+                            //  RoutePath = '/FtaskInWaitting';
+                            //  nodeFlag = "02";
+                            //  routeParams = '?taskNodeName=creditApp_finalTrial_two&flag=02';
                         };
                         //信审经理
                         if(strs[0].split('=')[1] == "creditApp_finalTrial_three" && strs[1].split('=')[1] == "02"){
@@ -98,10 +98,10 @@
                             };
                             localStorage.setItem("FinalWorkbenchPass",JSON.stringify(row));
                             localStorage.setItem("judge",JSON.stringify(judge));
-                            nodeName = '信审经理审批';
-                             RoutePath = '/FtaskInWaitting';
-                             nodeFlag = "02";
-                             routeParams = '?taskNodeName=creditApp_finalTrial_three&flag=02';
+                            // nodeName = '信审经理审批';
+                            //  RoutePath = '/FtaskInWaitting';
+                            //  nodeFlag = "02";
+                            //  routeParams = '?taskNodeName=creditApp_finalTrial_three&flag=02';
                         };
                         //信审高级经理
                         if(strs[0].split('=')[1] == "creditApp_finalTrial_four" && strs[1].split('=')[1] == "02"){
@@ -115,27 +115,28 @@
                             };
                             localStorage.setItem("FinalWorkbenchPass",JSON.stringify(row));
                             localStorage.setItem("judge",JSON.stringify(judge));
-                            nodeName = '信审高级经理审批';
-                             RoutePath = '/FtaskInWaitting';
-                             nodeFlag = "02";
-                             routeParams = '?taskNodeName=creditApp_finalTrial_four&flag=02';
+                            // nodeName = '信审高级经理审批';
+                            //  RoutePath = '/FtaskInWaitting';
+                            //  nodeFlag = "02";
+                            //  routeParams = '?taskNodeName=creditApp_finalTrial_four&flag=02';
                         };
                         //信审总监
                         if(strs[0].split('=')[1] == "creditApp_finalTrial_five" && strs[1].split('=')[1] == "02"){
                             var row ={
                                 "processTemplateId":"creditApp",
                                 "taskStatus":"01",
-                                "taskNodeName":"creditApp_finalTrial_five&flag=02"
+                                // "taskNodeName":"creditApp_finalTrial_five&flag=02"
+                                "taskNodeName":"creditApp_finalTrial_five"
                             };
                             var judge ={
                                 "flag":"02"
                             };
                             localStorage.setItem("FinalWorkbenchPass",JSON.stringify(row));
                             localStorage.setItem("judge",JSON.stringify(judge));
-                            nodeName = '信审总监审批审批';
-                             RoutePath = '/FtaskInWaitting';
-                             nodeFlag = "02";
-                             routeParams = '?taskNodeName=creditApp_finalTrial_five&flag=02';
+                            // nodeName = '信审总监审批审批';
+                            //  RoutePath = '/FtaskInWaitting';
+                            //  nodeFlag = "02";
+                            //  routeParams = '?taskNodeName=creditApp_finalTrial_five&flag=02';
                         };
                         //反欺诈专员
                         if(strs[0].split('=')[1] == "antiFraudApp_commissioner" && strs[1].split('=')[1] == "03"){
@@ -149,10 +150,10 @@
                             };
                             localStorage.setItem("AntiWorkbenchPass",JSON.stringify(row));
                             localStorage.setItem("judge",JSON.stringify(judge));
-                             nodeName = '反欺诈专员审批';
-                               RoutePath = '/AntiFraud34';
-                              nodeFlag = "03";
-                               routeParams = '?taskNodeName=antiFraudApp_commissioner&flag=03';
+                            //  nodeName = '反欺诈专员审批';
+                            //    RoutePath = '/AntiFraud34';
+                            //   nodeFlag = "03";
+                            //    routeParams = '?taskNodeName=antiFraudApp_commissioner&flag=03';
                         };
                         //反欺诈主管
                         if(strs[0].split('=')[1] == "antiFraudApp_manager" && strs[1].split('=')[1] == "04"){
@@ -166,10 +167,10 @@
                             };
                             localStorage.setItem("AntiManagerWorkbenchPass",JSON.stringify(row));
                             localStorage.setItem("judge",JSON.stringify(judge));
-                             nodeName = '反欺诈主管审批';
-                               RoutePath = '/AntiFraud34';
-                              nodeFlag = "04";
-                               routeParams = '?taskNodeName=antiFraudApp_manager&flag=04';
+                            //  nodeName = '反欺诈主管审批';
+                            //    RoutePath = '/AntiFraud34';
+                            //   nodeFlag = "04";
+                            //    routeParams = '?taskNodeName=antiFraudApp_manager&flag=04';
                         };
                         //反欺诈申请
                         if(strs[0].split('=')[1] == "'antiFraudApp_apply'"){
@@ -204,10 +205,10 @@
                             };
                             localStorage.setItem("ReWorkbenchPass",JSON.stringify(row));
                             localStorage.setItem("judge",JSON.stringify(judge));
-                              nodeName = '复议专员审批';
-                               RoutePath = '/reconsiderList';
-                              nodeFlag = "05";
-                               routeParams = '?taskNodeName=reconsiderApp_commissioner&flag=05';
+                            //   nodeName = '复议专员审批';
+                            //    RoutePath = '/reconsiderList';
+                            //   nodeFlag = "05";
+                            //    routeParams = '?taskNodeName=reconsiderApp_commissioner&flag=05';
                                
 
                         };
@@ -216,17 +217,18 @@
                             var row ={
                                 "processTemplateId":"",
                                 "taskStatus":"01",
-                                "taskNodeName":"reconsiderApp_manager&flag=06"
+                                // "taskNodeName":"reconsiderApp_manager&flag=06"// 原来的之前的
+                                "taskNodeName":"reconsiderApp_manager"
                             };
                             var judge ={
                                 "flag":"06"
                             };
-                            localStorage.setItem("ReWorkbenchPass",JSON.stringify(row));
+                            localStorage.setItem("ReManagerWorkbenchPass",JSON.stringify(row));
                             localStorage.setItem("judge",JSON.stringify(judge));
-                              nodeName = '复议经理审批';
-                               RoutePath = '/reconsiderList';
-                              nodeFlag = "06";
-                               routeParams = '?taskNodeName=reconsiderApp_manager&flag=06';
+                            //   nodeName = '复议经理审批';
+                            //    RoutePath = '/reconsiderList';
+                            //   nodeFlag = "06";
+                            //    routeParams = '?taskNodeName=reconsiderApp_manager&flag=06';
                         };
 
                    // }

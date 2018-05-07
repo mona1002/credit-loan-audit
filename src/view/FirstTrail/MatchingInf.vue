@@ -308,7 +308,7 @@
           this.$message.error(res.msg);
         }
       });
-       this.MyMove();
+      //  this.MyMove();
       this.title = "影像资料";
     },
     components: {

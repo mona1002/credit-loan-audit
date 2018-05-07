@@ -531,7 +531,8 @@
           this.$message.error(res.msg);
         }
       });
-      this.odivMove(this.msg);
+      this.odivMove(this.msg);//移动
+
       // this.MyMove();
       // comJs.odivMove(this.msg);
       // comJs.MyMove( this.AUobj.BTN,this.AUobj.WRAP,this.AUpreWidth,this.AUobj.CLIENTX,this.AUobj.OFFSET,this.AUobj.VA,this.AUobj.NUM);

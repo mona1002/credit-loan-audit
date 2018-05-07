@@ -326,7 +326,7 @@ export default {
   data() {
     return {
       taskNodes: [],
-
+userCode:'',
       taskTypes: [
         {value: '00',label: '新任务'},
         {value: '01',label: '回退任务'},
@@ -415,6 +415,7 @@ export default {
   },
 
   mounted() {
+   this.userCode=JSON.parse( localStorage.getItem('userInf')) .userCode
     this.getUserInf();
     // this.getProcessMonitorList();
     this.getProductForUser();
@@ -677,7 +678,8 @@ export default {
 
       processMoniSer
         .transmitTask({
-          assignor: this.multipleSelection[0].flowRoleCode,
+          // assignor: this.multipleSelection[0].flowRoleCode,
+          assignor: this.userCode,
           toUser: this.itemOfLists.toUser,
           taskIds: this.itemOfLists.taskIds
         })
