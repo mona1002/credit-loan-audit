@@ -23,7 +23,8 @@ let state = {
 };
 let mutations = {
   ADD_VISITED_VIEWS: (state, view) => {
-    if (localStorage.getItem("judge") != 'undefined') {
+    if (localStorage.getItem("judge") != undefined) {
+      console.log('flag不是undefined')
       state.locFlag = JSON.parse(localStorage.getItem("judge")).flag;
       view.flag ? view.flag : view.flag = state.locFlag;
     }

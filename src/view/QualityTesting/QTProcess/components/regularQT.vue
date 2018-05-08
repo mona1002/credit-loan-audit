@@ -532,6 +532,118 @@
         </div>
       </el-collapse-item>
     </el-collapse>
+    <!-- 初终审复议申请信息 -->
+    <el-collapse v-model="activeNames" v-if='ReApply'>
+      <el-collapse-item name="4">
+        <template slot="title">
+          <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+          <span class="headFont">初终审复议申请信息</span>
+        </template>
+        <div class="material">
+          <el-table :data="tableData" border style="width: 100%">
+            <el-table-column prop="name" label="复议申请人" width="100">
+            </el-table-column>
+            <el-table-column prop="address" width="180" label="复议申请日期">
+            </el-table-column>
+            <el-table-column label="复议说明" min-width="580">
+              <template slot-scope="scope">
+                <el-popover trigger="hover" placement="top-start">
+                  <p>{{ scope.row.address }}</p>
+                  <div slot="reference" class="name-wrapper">
+                    <span> {{ scope.row.address }}</span>
+                  </div>
+                </el-popover>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+      </el-collapse-item>
+    </el-collapse>
+    <!-- 审批主管第一次复议申请信息 -->
+    <el-collapse v-model="activeNames" v-if='SuperVisor'>
+      <el-collapse-item name="4">
+        <template slot="title">
+          <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+          <span class="headFont">审批主管第一次复议申请信息</span>
+        </template>
+        <div class="material">
+          <el-table :data="tableData" border style="width: 100%">
+            <el-table-column prop="name" label="经办人" width="100">
+            </el-table-column>
+            <el-table-column prop="address" width="180" label="发起复议时间">
+            </el-table-column>
+            <el-table-column label="复议说明" min-width="580">
+              <template slot-scope="scope">
+                <el-popover trigger="hover" placement="top-start">
+                  <p>{{ scope.row.address }}</p>
+                  <div slot="reference" class="name-wrapper">
+                    <span> {{ scope.row.address }}</span>
+                  </div>
+                </el-popover>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+      </el-collapse-item>
+    </el-collapse>
+    <!-- 第一次复议申请信息 -->
+    <el-collapse v-model="activeNames" v-if='SuperVisor'>
+      <el-collapse-item name="4">
+        <template slot="title">
+          <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+          <span class="headFont">审批主管第一次复议申请信息</span>
+        </template>
+        <div class="material">
+          <el-table :data="tableData" border style="width: 100%">
+            <el-table-column prop="name" label="复议结果" width="100">
+            </el-table-column>
+            <el-table-column prop="address" width="180" label="质检结果">
+            </el-table-column>
+            <el-table-column prop="address" width="180" label="审批人">
+            </el-table-column>
+            <el-table-column prop="address" width="180" label="审批时间">
+            </el-table-column>
+            <el-table-column label="复议说明" min-width="580">
+              <template slot-scope="scope">
+                <el-popover trigger="hover" placement="top-start">
+                  <p>{{ scope.row.address }}</p>
+                  <div slot="reference" class="name-wrapper">
+                    <span> {{ scope.row.address }}</span>
+                  </div>
+                </el-popover>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+      </el-collapse-item>
+    </el-collapse>
+    <!-- 审批主管第二次复议申请信息 -->
+    <el-collapse v-model="activeNames" v-if='SuperVisor'>
+      <el-collapse-item name="4">
+        <template slot="title">
+          <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
+          <span class="headFont">审批主管第二次复议申请信息</span>
+        </template>
+        <div class="material">
+          <el-table :data="tableData" border style="width: 100%">
+            <el-table-column prop="name" label="经办人" width="100">
+            </el-table-column>
+            <el-table-column prop="address" width="180" label="发起复议时间">
+            </el-table-column>
+            <el-table-column label="复议说明" min-width="580">
+              <template slot-scope="scope">
+                <el-popover trigger="hover" placement="top-start">
+                  <p>{{ scope.row.address }}</p>
+                  <div slot="reference" class="name-wrapper">
+                    <span> {{ scope.row.address }}</span>
+                  </div>
+                </el-popover>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+      </el-collapse-item>
+    </el-collapse>
     <!-- 质检结论 -->
     <el-collapse v-model="activeNames">
       <el-collapse-item name="6">
@@ -598,32 +710,36 @@
     <div class="reResult" v-if='reResultShow'>
       <label style="font-size:14px;">复核结论：</label>
       <div>
-        <el-input type='textarea' resize='none' rows="2"></el-input>
+        <el-input type='textarea' resize='none' :rows="2"></el-input>
       </div>
-
     </div>
     <!-- 底部按钮 -->
-    <div class="QT_btns_wrap">
-      <el-button @click="SaveInf">
+    <div class="QT_btns_wrap" v-if='BottomBtn'>
+      <el-button @click="SaveInf" v-if="saveBtn">
         <img src="../../../../../static/images/relieve.png">
         <label class="labelTxt">保存</label>
       </el-button>
-      <el-button @click="SaveInf">
+      <el-button @click="SaveInf" v-if="submitBtn">
         <img src="../../../../../static/images/appro.png">
         <label class="labelTxt">提交</label>
       </el-button>
-      <el-button @click="NoReconsider">
+      <el-button @click="NoReconsider" v-if="NoReconsiderBtn">
         <img src="../../../../../static/images/back.png">
         <label class="labelTxt">无需复议</label>
       </el-button>
       <!-- <el-button @click="this.ReconsiderShow=true"> -->
-      <el-button @click="ReconsiderShow = true">
+      <el-button @click="ReconsiderShow = true" v-if="ReconsiderBtn">
         <img src="../../../../../static/images/appro.png">
         <label class="labelTxt">发起复议</label>
       </el-button>
-         <el-button @click="ReAprovalShow = true">
+      <el-button @click="ReAprovalShow = true" v-if="ReAprovalBtn">
         <img src="../../../../../static/images/appro.png">
         <label class="labelTxt">复议审批</label>
+      </el-button>
+      <el-button @click="AprovalShow = true" v-if="AprovalBtn">
+        <!-- <el-button @click="ReAprovalShow = true" v-if="ReAprovalBtn"> -->
+        <img src="../../../../../static/images/appro.png">
+        <label class="labelTxt">审批</label>
       </el-button>
       <el-button @click="AntiApply">
         <img src="../../../../../static/images/faqi.png">
@@ -633,11 +749,11 @@
         <img src="../../../../../static/images/liucheng.png">
         <label class="labelTxt">流程轨迹</label>
       </el-button>
-      <el-button @click="RiskControl">
+      <el-button @click="RiskControl" v-if="RiskControlBtn">
         <img src="../../../../../static/images/bigdata.png">
         <label class="labelTxt">大数据风控</label>
       </el-button>
-      <el-button @click="roSocialSecurity">
+      <el-button @click="roSocialSecurity" v-if="SocialSecurityBtn">
         <img src="/static/images/social.png">
         <label class="labelTxt">社保/公积金{{social}}</label>
       </el-button>
@@ -655,7 +771,7 @@
         </p>
         <p style="margin:10px 0;">
           <label>复议说明：</label>
-          <el-input style="width:500px;vertical-align:top;" type="textarea" resize='none' rows="2"></el-input>
+          <el-input style="width:500px;vertical-align:top;" type="textarea" resize='none' :rows="2"></el-input>
         </p>
         <p>
           <span> 经办人：{{'dd' }}</span>
@@ -667,43 +783,44 @@
       </div>
     </el-dialog>
     <!-- 复议审批  -->
-    <el-dialog title='复议审批' :visible.sync="ReAprovalShow" :modal="false" width="820px" top="20vh">
+    <el-dialog title='复议审批' :visible.sync="ReAprovalShow" :modal="false" width="750px" top="20vh">
       <div class="reApproval">
         <p>
           <span>
-              <label>复议节点：</label>
- <el-select v-model="value" placeholder="请选择">
-            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-            </el-option>
-          </el-select>
+            <label>复议结果：</label>
+            <el-select v-model="value" placeholder="请选择">
+              <el-option v-for="item in RecResult" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
           </span>
-               <span>
-              <label>质检结果：</label>
- <el-select v-model="value" placeholder="请选择">
-            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-            </el-option>
-          </el-select>
+          <span>
+            <label>质检结果：</label>
+            <el-select v-model="value" placeholder="请选择">
+              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
           </span>
         </p>
-               <p>
+        <p>
           <span>
-              <label>质检员是否有差错：</label>
- <el-select v-model="value" placeholder="请选择">
-            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-            </el-option>
-          </el-select>
+            <label>质检员是否有差错：</label>
+            <el-select v-model="value" placeholder="请选择">
+              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
           </span>
-               <span>
-              <label>差错类型：</label>
- <el-select v-model="value" placeholder="请选择">
+          <span>
+            <label>差错类型：</label>
+            <!-- <el-select v-model="value" placeholder="请选择">
             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
-          </el-select>
+          </el-select> -->
+            <el-input :disabled='QTConclution' v-model="insConclusion.errorDescribe" :maxlength='arealength' placeholder="请输入内容"></el-input>
           </span>
         </p>
         <p style="margin:10px 0;">
-          <label>复议说明：</label>
-          <el-input style="width:500px;vertical-align:top;" type="textarea" resize='none' rows="2"></el-input>
+          <label class="aaaaaaa">复议说明：</label>
+          <el-input style="width:500px;vertical-align:top;" type="textarea" resize='none' :rows="2"></el-input>
         </p>
         <p>
           <span> 审批人{{'dd' }}</span>
@@ -809,24 +926,25 @@
           isCustomerother: 1,
         }, // // 资料核实+三方信息查询+ 内部匹配核实
         // insConclusion:'',
-        // tableData1: [{
-        //   date: '2016-05-02',
-        //   name: '王小虎',
-        //   address: '上海市普陀区金沙江路 1518 弄'
-        // }, {
-        //   date: '2016-05-04',
-        //   name: '王小虎',
-        //   address: '上海市普陀区金沙江路 1517 弄'
-        // }, {
-        //   date: '2016-05-01',
-        //   name: '王小虎',
-        //   address: '上海市普陀区金沙江路 1519 弄'
-        // }, {
-        //   date: '2016-05-03',
-        //   name: '王小虎',
-        //   address: '上海市普陀区金沙江路 1516 弄'
-        // }],
-
+        // ------------------------------------测试用--------------------
+        tableData: [{
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄'
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄'
+        }],
+        // ------------------------------------------------------------
         // //   ---
         // textareaL: 300,
         tabIndex: 0,
@@ -849,7 +967,7 @@
           value: '03',
           label: '终审一般差错'
         }, {
-          value: '044',
+          value: '04',
           label: '终审重大差错'
         }, {
           value: '05',
@@ -866,15 +984,13 @@
         //   conclution: null,
         //   comment: ''
         // }],
-        // PhoneCre: [{
-        //   title: '微信查询结果',
-        //   conclution: 1,
-        //   comment: ''
-        // }, {
-        //   title: '支付宝查询结果',
-        //   conclution: 1,
-        //   comment: ''
-        // }],
+        RecResult: [{
+          label: '审批拒绝',
+          value: '02',
+        }, {
+          label: '审批通过',
+          value: '01',
+        }],
         // PhoneCheck: [{
         //   title: '内部匹配是否进行排查',
         //   Self: '是',
@@ -918,25 +1034,27 @@
         //   date: '2019-20-3'
         // }],
 
-
-        // options: [{
-        //   value: '选项1',
-        //   label: '黄金糕'
-        // }, {
-        //   value: '选项2',
-        //   label: '双皮奶'
-        // }, {
-        //   value: '选项5',
-        //   label: '北京烤鸭'
-        // }],
-        // value: ''
+        // ----------------------------------------
+        options: [{
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        }],
+        value: '',
+        // --------------------------------
         // insWechatAlipayList:'',
         processInstanceId: '',
         changeAlipay: '',
         // insTelCustInfo:{},//客户本人-拨打核实
         // -----------弹窗---
         ReconsiderShow: false,
-        ReAprovalShow:true,
+        ReAprovalShow: false,
+        AprovalShow: false,
         lcdialogVisible: false,
         lcgjData: [],
         socialLogVisible: false,
@@ -954,6 +1072,17 @@
         InfoSearchShow: true, //三方信息查询
         MatchingShow: true, //内部匹配核实
         reResultShow: false, //复核结论-div 
+        ReApply: false, //初终审复议申请信息
+        SuperVisor: false, //审批主管第一次复议申请信息
+        BottomBtn: true, //底部按钮全部
+        saveBtn: true, //按钮 - 保存
+        submitBtn: true, //按钮 - 提交
+        NoReconsiderBtn: true, //按钮 - 无需复议
+        ReconsiderBtn: true, //按钮 - 发起复议
+        ReAprovalBtn: true, //按钮 - 复议审批
+        AprovalBtn: true, //按钮 - 审批
+        RiskControlBtn: true, //按钮 - 大数据风控
+        SocialSecurityBtn: true, //按钮 - 社保公积金
       }
     },
     props: ['propApplyId', 'pageType'],
@@ -1504,15 +1633,25 @@
     width: 900px;
     vertical-align: top;
   }
-.reApproval span{
-display: inline-block;
-width:49%;
-}
-.reApproval span:nth-of-type(1) label{
-  display: inline-block;
-  width:130px;
-  text-align: right;
-}
+
+  .reApproval span {
+    display: inline-block;
+    width: 49%;
+    margin-bottom: 10px;
+  }
+
+  .reApproval span:nth-of-type(1) label {
+    display: inline-block;
+    width: 130px;
+    text-align: right;
+  }
+
+  .aaaaaaa {
+    width: 126px;
+    display: inline-block;
+    text-align: right;
+  }
+
   /* .btn {
     width: 100px;
     text-align: center;

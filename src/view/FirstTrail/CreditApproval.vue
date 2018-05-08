@@ -1550,9 +1550,17 @@
       saveCreaduit(val) { //审批按钮  提交功能
         this.isLoading = true;
         this.loadingTitle = '提交中';
-        if (this.judgeFlag == '02') {
-        this.auditFlag = '1';
+        // if (this.judgeFlag == '02') {
+        // this.auditFlag = '1';
+        // }
+          if (this.judgeFlag == '02') {
+            if( this.opinionFlag=='00'){
+            this.auditFlag = '1';
+            }else if(this.opinionFlag=='03'){
+            this.auditFlag = '0';
+            }
         }
+     
         let verIncome2 = 0;
         let ploanAmt2 = 0;
         if (/,/.test(this.verIncome))

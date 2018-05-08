@@ -92,17 +92,22 @@ import manager from '../view/QualityTesting/QTProcess/manager/manager.vue' //质
 import regularQT from '../view/QualityTesting/QTProcess/components/regularQT.vue' //首次常规质检
 import specialQT from '../view/QualityTesting/QTProcess/components/specialQT.vue' //首次专纵向质检
 import regularANDspecialQT from '../view/QualityTesting/QTProcess/components/regularANDspecialQT.vue' //常规质检又抽中专纵向质检
-import regularConfig from '../view/QualityTesting/FunctionalityPages/regularConfig.vue'//常规抽单配置功能
-import specialConfig from '../view/QualityTesting/FunctionalityPages/specialConfig.vue'//专纵项抽单配置功能
-import batchApportion from '../view/QualityTesting/FunctionalityPages/batchApportion.vue'//质检任务批量转分派功能
-import reconsiderResult from '../view/QualityTesting/FunctionalityPages/reconsiderResult.vue'//复议结果查询功能
-// import specialConfig from ''//首次常规质检
-// import specialConfig from ''//首次常规质检
-// import specialConfig from ''//首次常规质检
-// import specialConfig from ''//首次常规质检
-// import specialConfig from ''//首次常规质检
-// import specialConfig from ''//首次常规质检
-// import specialConfig from ''//首次常规质检
+import regularConfig from '../view/QualityTesting/FunctionalityPages/regularConfig.vue' //常规抽单配置功能
+import specialConfig from '../view/QualityTesting/FunctionalityPages/specialConfig.vue' //专纵项抽单配置功能
+import batchApportion from '../view/QualityTesting/FunctionalityPages/batchApportion.vue' //质检任务批量转分派功能
+import reconsiderResult from '../view/QualityTesting/FunctionalityPages/reconsiderResult.vue' //复议结果查询功能
+import ReApply from '../view/QualityTesting/QTReconsiderProcess/page/ReApply.vue' //复议申请页面
+import SelfTaskList from '../view/QualityTesting/QTReconsiderProcess/page/SelfTaskList.vue' //质检复议-初终审本人任务列表
+import QTResultCheck from '../view/QualityTesting/QTReconsiderProcess/page/QTResultCheck.vue' //质检复议-初终审质检结论查看页
+import ManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/ManagerTaskList.vue'//质检复议-初终审主管任务列表
+import ACManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/ACManagerTaskList.vue'//质检复议流程-区域经理页面- 区域经理任务列表 + 质检复议流程-合规经理页面- 合规经理任务列表
+import ComplianceManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/ComplianceManagerTaskList.vue'//质检复议流程-合规经理页面- 合规经理任务列表
+import ComplianceProcess from '../view/QualityTesting/QTReconsiderProcess/components/ComplianceProcess.vue'//质检复议-
+import MatchingInfQT from '../view/FirstTrail/MatchingInfQT.vue'//质检复议-
+import MatchingInfQTProcess from '../view/FirstTrail/MatchingInfQTProcess.vue'//质检复议-
+// import ComplianceProcess from ''//质检复议-
+// import ComplianceProcess from ''//质检复议-
+// import ComplianceProcess from ''//质检复议-
 
 // commissioner//质检专员列表
 // manager//质检主管列表
@@ -115,10 +120,10 @@ const routes = [{
     component: workbench,
     // name:workbench
   },
-  // {
-  //   path:'/exam',
-  //   component:exam,
-  // },
+  {
+    path:'/ComplianceProcess',
+    component:ComplianceProcess,
+  },
 
   {
     path: '/AudioVisualLeft',
@@ -420,6 +425,31 @@ const routes = [{
   }, {
     path: '/reconsiderResult',
     component: reconsiderResult
+  }, {
+    path: "/ReApply",
+    component: ReApply
+  }, {
+    path: "/SelfTaskList",
+    component: SelfTaskList
+  }, {
+    path: "/QTResultCheck",
+    component: QTResultCheck
+  },{
+    path: "/ManagerTaskList",
+    component: ManagerTaskList
+  },{
+    path: "/ACManagerTaskList",
+    component: ACManagerTaskList
+  },{
+    path: "/ComplianceManagerTaskList",
+    component: ComplianceManagerTaskList
+  },
+  {
+    path: "/MatchingInfQT",
+    component: MatchingInfQT
+  },{
+    path: "/MatchingInfQTProcess",
+    component: MatchingInfQTProcess
   },
   // ---------------大数据+社保--------------------
   {

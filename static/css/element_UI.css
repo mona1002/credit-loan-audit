@@ -2799,7 +2799,10 @@ body .el-submenu .el-menu-item {
 .IntegratedQuery .el-table__body-wrapper {
   overflow-x: auto;
 }
-
+/* .IntegratedQuery .paging .el-pagination__jump .el-input{ */
+.IntegratedQuery .el-pagination__jump .el-input{
+width: 50px;
+}
 .regularConfig .el-dialog__header {
   padding-top: 10px;
   background: #eef0f9;
@@ -2826,4 +2829,11 @@ body .el-submenu .el-menu-item {
   border: none;
   /* vertical-align: bottom; */
   color: #666666
+}
+.regularQT .el-input{
+width:200px;
+}
+.aAntiApplyInf .ccccc {
+width:800px;
+vertical-align: top;
 }

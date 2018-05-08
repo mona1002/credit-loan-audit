@@ -270,3 +270,19 @@ table {
 .QT_btns_wrap img {
   vertical-align: middle;
 }
+.required_Red {
+  color: #ff7676;
+  font-weight: 700;
+  font-size: 16px;
+  vertical-align: middle;
+  font-style: normal;
+}
+.hint_word {
+  color: #ff7676;
+  font-size: 12px;
+  display: inline-block;
+  width: 100%;
+  font-style: normal;
+  position: absolute;
+  top: -20px;
+}

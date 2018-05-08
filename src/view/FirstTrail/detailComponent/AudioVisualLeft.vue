@@ -4,12 +4,10 @@
     <div class="hidDiv" v-show="!showListDiv" ref="hidDiv_ref">
       <img class="showBtn" src="../../../../static/images/Shape Copy.png" @click="showList" style="transform: rotate(180deg)">
     </div>
-    <!-- ================================= -->
     <!-- 左侧 折叠面板 -->
     <div class="AudioVisual_List" ref="AudioVisual_List_ref" v-show="showListDiv" style="">
       <p>{{this.mwidth}}
       </p>
-      <!-- {{imgUrl}} -->
       <!-- 折叠面板title -->
       <img class="hidBtn" src="../../../../static/images/Shape Copy.png" @click="hid">
       <!-- 折叠面板-手风琴List -->
@@ -53,17 +51,11 @@
         <el-button type="primary" @click="compBtnShow" v-if="this.comBtn">对比</el-button>
       </div>
     </div>
-    <!-- <div class="A_mid" id="MID"></div> -->
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative;" :id='msg'>
-        <!-- <div id="aaaaa"> </div> -->
         <img ref="Big_pic_ref" v-for="(val,key) in imgPath" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath"
           v-if="key==smallPicInd" />
-        <!-- <img ref="Big_pic_ref" v-for="(val,key) in imgPathDetail" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath"
-          />  -->
-        <!-- v-if="key==smallPicInd" -->
-        <!-- <img ref="Big_pic_ref" id='abcd'  style="width:auto;height:auto;" :src="uurl" /> -->
       </div>
     </div>
     <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" v-show="perfBtn" @click="pre" @mouseenter='PerBtn'>
@@ -139,7 +131,6 @@
 
 <script>
   import imgUrl from '../../../util/ConstantSocialAndPn'
-  // import comJs from '../../../../static/js/common'
   export default {
     data() {
       return {
@@ -189,8 +180,6 @@
         this.dataa = true;
         // 个人进件        
         this.post("/internalMatch/getPersonalInternalMatchList", {
-          // applySubNo: "201504130173041858",
-          // certCode: "341422198409070094",
           applySubNo: this.localInf.applySubNo,
           certCode: this.localInf.certCode,
         }).then(res => {
@@ -200,14 +189,12 @@
             this.$message.error(res.msg);
           }
         });
-        // //他人进件（ 不包含个人）
+        //他人进件（ 不包含个人）
         this.post("/internalMatch/getNonPersonalInternalMatch", {
           pageParam: {
             pageNum: "1", //当前页
             pageSize: '1000' //每页的显示数量
           },
-          //  applySubNo: "201504130173041858",
-          // certCode: "341422198409070094",
           applySubNo: this.localInf.applySubNo,
           certCode: this.localInf.certCode,
         }).then(res => {
@@ -222,8 +209,6 @@
         console.log("table选中-获取父节点")
         this.post("/productArchive/getProductArchiveParentList", {
           applyId: id, //上面删除后 此处打开
-          // a2b23bbf-46ef-4d94-9872-322843cebb7d matchApplyId
-          // applyId: "e0b51098-b24d-4211-8ae4-f08f657d7886",//上面删除后 此处打开
         }).then(res => {
           if (res.statusCode == 200) {
             this.ListParent = res.data;
@@ -255,7 +240,6 @@
         // 二级（子）节点
         this.post("/productArchive/getProductArchiveChildList", {
           applyId: this.localInf.applyId,
-          // applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
           pid: id
         }).then(res => {
           if (res.statusCode == 200) {
@@ -281,18 +265,14 @@
         this.showListDiv = false;
         this.$refs.preBtn.style.left = 37 + 'px';
         this.$refs.PbtnIcons.style.left = 'calc( 50% - 97px)';
-        // this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
         this.$refs.AudioVisual_Img_ref.style.left = 0;
-        
         this.defaultBigPicCss();
       },
       showList() {
         this.showListDiv = true;
         this.$refs.preBtn.style.left = 223 + 'px';
         this.$refs.PbtnIcons.style.left = ' calc( 50% + 9px)';
-        // this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 214px)";
         this.$refs.AudioVisual_Img_ref.style.left = "214px";
-        
         this.defaultBigPicCss();
       },
       SmallpicClose() {
@@ -376,7 +356,6 @@
               this.$refs.Big_pic_ref[0].style.width = 'auto';
               this.$refs.Big_pic_ref[0].style.height = (outsideH - 10) + "px";
             }
-
           }
         })
       },
@@ -449,56 +428,6 @@
       compBtnShow() {
         this.$emit('CompareShow')
       },
-      MyMove() {
-        console.log("移动left")
-        console.log(this.AUpreWidth)
-        var AUclickX, AUleftOffset, inx, AUnextW2, nextW, preLeft;
-        var moving = false;
-        var doc = document;
-        var bor = $("#MID");
-        var AUwrapWidth = this.AUpreWidth || $("#AUL").width();
-        var Pre = this.$refs.rLeft;
-        var Nex = this.$refs.rRight;
-        bor.bind('mousedown', () => {
-          moving = true;
-          AUleftOffset = $("#AUL").offset().left;
-          var AUwrapWidth = this.AUpreWidth || $("#AUL").width();
-          console.log("影音down");
-          doc.onmousemove = function (e) {
-            console.log("影音move")
-            if (moving) {
-              AUclickX = e.pageX;
-              if (AUclickX > AUleftOffset + 10 && AUclickX < (AUwrapWidth - 5)) {
-                bor.eq(0).css('left', AUclickX - AUleftOffset + 2 + 'px'); //按钮移动
-                bor.eq(0).prev().width(AUclickX - AUleftOffset + 'px'); //前一个div宽度变化
-                console.log(11111111111)
-                AUnextW2 = AUclickX - AUleftOffset;
-                // bor.eq(0).next().width(AUwrapWidth - AUnextW2 - 17 + 'px'); //减多少宽地待算
-                bor.eq(0).next().css('left', parseFloat(bor.eq(0).prev().width()) + 10 + 'px'); //减多少宽地待算
-                //  bor.eq(0).prev().width()
-              } else if (AUclickX < AUleftOffset + 10 && AUclickX < (AUwrapWidth - 5)) {
-                console.log(22222222222222)
-                bor.eq(0).css('left', '10px');
-                bor.eq(0).prev().width('10px');
-                // bor.eq(0).next().width(AUwrapWidth - 17 + 'px'); //减多少宽地待算
-                bor.eq(0).next().css('left', '20px');
-              }
-              console.log(AUclickX + "=========" + AUwrapWidth)
-              if (AUclickX > (AUwrapWidth - 10)) {
-                console.log(3333333333333)
-                // console.log(AUwrapWidth)
-                bor.eq(0).css('left', parseFloat(AUwrapWidth) - 18 + 'px');
-                bor.eq(0).prev().width(AUwrapWidth - 20 + 'px');
-
-              }
-            }
-          };
-        });
-        $(doc).mouseup(function (e) {
-          moving = false;
-          e.cancelBubble = true;
-        });
-      },
     },
     mounted() {
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
@@ -506,9 +435,9 @@
         this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
       } else if (this.judgeFlag.flag == '02') {
         this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-      } else if (this.judgeFlag.flag == '03' ||this.judgeFlag.flag == '04') {
+      } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
         this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员\主管
-      } 
+      }
       // else if (this.judgeFlag.flag == '04') {
       //   this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
       // }
@@ -516,8 +445,6 @@
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.applyId,
-        // applyId: "62fecf51-4839-4639-afe0-9b7cde722a5e",
-        //  applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
       }).then(res => {
         if (res.statusCode == 200) {
           this.ListParent = res.data;
@@ -531,22 +458,15 @@
           this.$message.error(res.msg);
         }
       });
-      this.odivMove(this.msg);//移动
-
-      // this.MyMove();
-      // comJs.odivMove(this.msg);
-      // comJs.MyMove( this.AUobj.BTN,this.AUobj.WRAP,this.AUpreWidth,this.AUobj.CLIENTX,this.AUobj.OFFSET,this.AUobj.VA,this.AUobj.NUM);
+      this.odivMove(this.msg); //移动
     }
   }
 
 </script>
 <style scoped>
-  /* css */
-
   .AudioVisualLeft {
     height: 100%;
     width: 100%;
-    /* position: relative; */
   }
 
   /* public */
@@ -580,7 +500,6 @@
     background: #eef0f9;
     margin-right: 11px;
     border: 1px solid #bfcbd9;
-    /* border-radius: 0 6px 6px 0; */
     position: relative;
     z-index: 2;
   }
@@ -628,15 +547,6 @@
     top: 50%;
   }
 
-  .A_mid {
-    background: lightblue;
-    height: 100%;
-    width: 5px;
-    position: absolute;
-    left: 203px;
-    cursor: e-resize;
-  }
-
   .AudioVisualLeft .AudioVisual_List,
   .AudioVisualLeft .AudioVisual_Img {
     float: left;
@@ -646,7 +556,6 @@
   }
 
   .AudioVisualLeft .AudioVisual_Img {
-    /* width: calc( 100% - 214px); */
     position: absolute;
     left: 214px;
     right: 0;
@@ -676,7 +585,6 @@
     display: block;
     float: left;
     border: 1px solid #e6ebf5;
-    /* border: 1px solid black; */
     border-bottom: none;
     text-align: center;
     position: relative;
@@ -694,7 +602,6 @@
   .AudioVisualLeft .list_title span:nth-of-type(1),
   .AudioVisualLeft .list_title_div p span:nth-of-type(1) {
     width: 125px;
-    /* 省略号 */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -729,13 +636,9 @@
     font-size: 16px;
     text-align: center;
     background: rgba(0, 119, 255, 0.75);
-    /* opacity: 0.75; */
-    /* background: #0077ff; */
     height: 48px;
     line-height: 48px;
     color: #f8f9fd;
-    /* 不换行 */
-    /* white-space:nowrap; */
     overflow: hidden;
     position: relative;
   }
@@ -756,7 +659,6 @@
     width: 30%;
     height: 200px;
     margin: 15px 0 0 2%;
-    /* margin: 0 0 0 23px; */
   }
 
   /*  缩略图 figure 内 图片名字 p 标签 */
@@ -770,7 +672,6 @@
     font-size: 16px;
     color: #475669;
     letter-spacing: 0.11px;
-    /* 超出 省略号显示 */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

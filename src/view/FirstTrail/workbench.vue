@@ -139,6 +139,14 @@
         // reconsiderApp_credit_manager 信审经理审批
         // reconsiderApp_credit_seniro_manager 信审高级经理审批
         // reconsiderApp_credit_director 信审总监审批
+        // ("checkApp_apply", "质检开始"),
+        // ("checkApp_check_manager", "质检主管复核"),
+        // ("checkApp_trial_self", "初终审本人复查"),
+        // ("checkApp_trial_manager","初终审主管复核异议"),
+        // ("checkApp_check_recon_manager", "质检主管复核异议"),
+        // ("checkApp_regional_manager", "区域经理复核"),
+        // ("checkApp_compliance_manager", "合规经理复核");
+
         // 这4个是 复议
         // localStorage.setItem("tableData", JSON.stringify(tableData));
         // this.$router.push({path:'/taskInWaitting',query:'123'})
@@ -167,76 +175,79 @@
         var nodeName, RoutePath, taskNodeName, routeParams, pth, nodeFlag;
         nodeName = RoutePath = routeParams = '';
         if (val.taskNodeName == "creditApp_firstTrial") { // 初审
-          this.judge.flag = nodeFlag = "01";
+          this.judge.flag = "01";
+          // this.judge.flag = nodeFlag = "01";
           RoutePath = '/taskInWaitting';
-          nodeName = '初审审批';
+          // nodeName = '初审审批';
           routeParams = '?taskNodeName=creditApp_firstTrial&flag=01';
           localStorage.setItem("workbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge)); //请求localstorage 标识
         } else if (val.taskNodeName == "creditApp_finalTrial_one" || val.taskNodeName == "creditApp_finalTrial_two" ||
           val.taskNodeName == "creditApp_finalTrial_three" || val.taskNodeName == "creditApp_finalTrial_four" || val.taskNodeName ==
           "creditApp_finalTrial_five") { // 终审
-          this.judge.flag = nodeFlag = "02";
+          // this.judge.flag = nodeFlag = "02";
+          this.judge.flag = "02";
           RoutePath = '/FtaskInWaitting';
+          routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=02";
           localStorage.setItem("FinalWorkbenchPass", JSON.stringify(this.workbenchPass));
           localStorage.setItem("judge", JSON.stringify(this.judge));
-          if (val.taskNodeName == "creditApp_finalTrial_one") {
-            nodeName = '终审一级审批';
-          }
-          if (val.taskNodeName == "creditApp_finalTrial_two") {
-            nodeName = '终审二级审批'
-          }
-          if (val.taskNodeName == "creditApp_finalTrial_three") {
-            nodeName = '信审经理审批';
-          }
-          if (val.taskNodeName == "creditApp_finalTrial_four") {
-            nodeName = '信审高级经理审批'
-          }
-          if (val.taskNodeName == "creditApp_finalTrial_five") {
-            nodeName = '信审总监审批审批'
-          }
-          routeParams = '?taskNodeName=' + val.taskNodeName+"&flag=02";
+          // if (val.taskNodeName == "creditApp_finalTrial_one") {
+          //   nodeName = '终审一级审批';
+          // }
+          // if (val.taskNodeName == "creditApp_finalTrial_two") {
+          //   nodeName = '终审二级审批'
+          // }
+          // if (val.taskNodeName == "creditApp_finalTrial_three") {
+          //   nodeName = '信审经理审批';
+          // }
+          // if (val.taskNodeName == "creditApp_finalTrial_four") {
+          //   nodeName = '信审高级经理审批'
+          // }
+          // if (val.taskNodeName == "creditApp_finalTrial_five") {
+          //   nodeName = '信审总监审批审批'
+          // }
         } else if (val.taskNodeName == "antiFraudApp_commissioner") { //反欺诈专员 
-          this.judge.flag = nodeFlag = "03";
+          // this.judge.flag = nodeFlag = "03";
+          this.judge.flag = "03";
           RoutePath = '/AntiFraud34';
-          nodeName = '反欺诈专员审批';
-          routeParams = '?taskNodeName=' + val.taskNodeName+"&flag=03";
+          // nodeName = '反欺诈专员审批';
+          routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=03";
           localStorage.setItem("AntiWorkbenchPass", JSON.stringify(this.workbenchPass));
           localStorage.setItem("judge", JSON.stringify(this.judge));
         } else if (val.taskNodeName == "antiFraudApp_manager") { // 反欺诈主管 
-          this.judge.flag = nodeFlag = "04";
+          // this.judge.flag = nodeFlag = "04";
+          this.judge.flag = "04";
           RoutePath = '/AntiFraud34';
-          nodeName = ' 反欺诈主管审批';
-          routeParams = '?taskNodeName=' + val.taskNodeName+"&flag=04";
+          // nodeName = ' 反欺诈主管审批';
+          routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=04";
           localStorage.setItem("AntiManagerWorkbenchPass", JSON.stringify(this.workbenchPass));
           localStorage.setItem("judge", JSON.stringify(this.judge));
         } else if (val.taskNodeName == "reconsiderApp_commissioner") { // 复议专员 
-          this.judge.flag = nodeFlag = "05";
+          this.judge.flag = "05";
           RoutePath = '/reconsiderList';
-          nodeName = '复议专员审批';
-          routeParams = '?taskNodeName=reconsiderApp_commissioner&flag=05'       
+          // nodeName = '复议专员审批';
+          routeParams = '?taskNodeName=reconsiderApp_commissioner&flag=05'
           localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass));
           localStorage.setItem("judge", JSON.stringify(this.judge));
         } else if (val.taskNodeName == "reconsiderApp_manager") { // 复议经理
-          this.judge.flag = nodeFlag = "06";
-          nodeName = '复议经理审批';
+          this.judge.flag = "06";
+          // nodeName = '复议经理审批';
           RoutePath = '/reconsiderList'
-          routeParams = '?taskNodeName=' + val.taskNodeName+"&flag=06";
+          routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=06";
           // localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass));
           localStorage.setItem("ReManagerWorkbenchPass", JSON.stringify(this.workbenchPass));
           // localStorage.setItem("ReManagerWorkbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
           localStorage.setItem("judge", JSON.stringify(this.judge));
-        }else if (val.taskNodeName == "reconsiderApp_commissioner") { // 质检专员 
+        } else if (val.taskNodeName == "reconsiderApp_commissioner") { // 质检专员 
           this.judge.flag = nodeFlag = "07";
           RoutePath = '/reconsiderList';
-            
           localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass));
           localStorage.setItem("judge", JSON.stringify(this.judge));
-        }else if (val.taskNodeName == "reconsiderApp_commissioner") { // 质检经理 
+        } else if (val.taskNodeName == "reconsiderApp_commissioner") { // 质检经理 
           this.judge.flag = nodeFlag = "08";
           RoutePath = '/reconsiderList';
-          nodeName = '复议专员审批';
-          routeParams = '?taskNodeName=reconsiderApp_commissioner&flag=05'       
+          // nodeName = '复议专员审批';
+          routeParams = '?taskNodeName=reconsiderApp_commissioner&flag=05'
           localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass));
           localStorage.setItem("judge", JSON.stringify(this.judge));
         }
@@ -270,7 +281,7 @@
       // console.log(window.location)
       // 统一登录平台  调试   start 
       // this.get("http://testplatform.nuoyuan.com.cn/remote/user/getUserInfo").then(response => {
-      this.get(UserURL + 'remote/user/getUserInfo?'+Math.random()).then(response => {
+      this.get(UserURL + 'remote/user/getUserInfo?' + Math.random()).then(response => {
         this.userInf = {
           userCode: response.data.userCode,
           orgCode: response.data.orgCode,
