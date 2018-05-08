@@ -177,7 +177,7 @@
         alertComBtn: false,
         midShow: true,
         custName: '',
-        certCode:''
+        certCode: ''
       }
     },
     methods: {
@@ -300,20 +300,20 @@
       }
     },
     mounted() {
+      this.title = "影像资料";
+      this.MyMove();
       this.tastwaitingPass = JSON.parse(localStorage.getItem("Query"));
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.matchApplyId,
       }).then(res => {
         if (res.statusCode == 200) {
           this.customInf = res.data;
-          this.certCode=res.data.accepCusBasicInfo.certCode
+          this.certCode = res.data.accepCusBasicInfo.certCode
           this.custName = res.data.accepCusBasicInfo.custName;
         } else {
           this.$message.error(res.msg);
         }
       });
-       this.MyMove();
-      this.title = "影像资料";
     },
     components: {
       myHead,

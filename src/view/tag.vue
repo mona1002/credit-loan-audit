@@ -332,19 +332,20 @@
           this.nodeName = "综合查询-查看";
         } else if (route.path == '/MatchingInfQuery') {
           this.nodeName = "综合查询-详情";
-        } else if (route.path == '/commissioner') { //质检专员审批
-          this.nodeName = "质检专员审批";
-        } else if (route.path == '/manager') {
-          this.nodeName = "质检主管审批";
-        } else if (route.path == '/regularConfig') { // 质检功能 - 常规抽单配置功能
-          this.nodeName = "常规抽单配置功能";
-        } else if (route.path == '/reconsiderResult') { // 质检功能 - 复议结果查询
-          this.nodeName = "复议结果查询";
-        } else if (route.path == '/batchApportion') { // 质检功能
-          this.nodeName = "质检任务批量转分派";
-        } else if (route.path == '/specialConfig') { // 质检功能
-          this.nodeName = "专纵项抽单配置";
         }
+        //  else if (route.path == '/commissioner') { //质检专员审批
+        //   this.nodeName = "质检专员审批";
+        // } else if (route.path == '/manager') {
+        //   this.nodeName = "质检主管审批";
+        // } else if (route.path == '/regularConfig') { // 质检功能 - 常规抽单配置功能
+        //   this.nodeName = "常规抽单配置功能";
+        // } else if (route.path == '/reconsiderResult') { // 质检功能 - 复议结果查询
+        //   this.nodeName = "复议结果查询";
+        // } else if (route.path == '/batchApportion') { // 质检功能
+        //   this.nodeName = "质检任务批量转分派";
+        // } else if (route.path == '/specialConfig') { // 质检功能
+        //   this.nodeName = "专纵项抽单配置";
+        // }
         // else if (route.path == '/manager') {
         //   this.nodeName = "质检";
         // }

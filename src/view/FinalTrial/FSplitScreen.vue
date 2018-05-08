@@ -311,6 +311,8 @@
       }
     },
     mounted() {
+      this.title = "影像资料";
+      this.MyMove();
       this.tastwaitingPass = JSON.parse(localStorage.getItem("FtaskInWaitting"));
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.applyId,
@@ -322,8 +324,7 @@
           this.$message.error(res.msg);
         }
       });
-       this.MyMove();
-      this.title = "影像资料";
+
     },
     components: {
       myHead,

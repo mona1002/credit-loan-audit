@@ -87,7 +87,6 @@
 
 <script>
   import imgUrl from '../../../util/ConstantSocialAndPn'
-  import comJs from '../../../../static/js/common'
   export default {
     data() {
       return {
