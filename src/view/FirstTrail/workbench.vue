@@ -178,7 +178,7 @@
         if (val.taskNodeName == "creditApp_firstTrial") { // 初审
           this.judge.flag = "01";
           RoutePath = '/taskInWaitting';
-          routeParams = '?taskNodeName=creditApp_firstTrial&flag=01';
+          // routeParams = '?taskNodeName=creditApp_firstTrial&flag=01';
           this.LSworkbench="workbenchPass";
           // localStorage.setItem("workbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
         } else if (val.taskNodeName == "creditApp_finalTrial_one" || val.taskNodeName == "creditApp_finalTrial_two" ||
@@ -186,45 +186,46 @@
           "creditApp_finalTrial_five") { // 终审
           this.judge.flag = "02";
           RoutePath = '/FtaskInWaitting';
-          routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=02";
+          // routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=02";
             this.LSworkbench="FinalWorkbenchPass";
           // localStorage.setItem("FinalWorkbenchPass", JSON.stringify(this.workbenchPass));
         } else if (val.taskNodeName == "antiFraudApp_commissioner") { //反欺诈专员 
           this.judge.flag = "03";
           RoutePath = '/AntiFraud34';
-          routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=03";
+          // routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=03";
             this.LSworkbench="AntiWorkbenchPass";
           // localStorage.setItem("AntiWorkbenchPass", JSON.stringify(this.workbenchPass));
         } else if (val.taskNodeName == "antiFraudApp_manager") { // 反欺诈主管 
           this.judge.flag = "04";
           RoutePath = '/AntiFraud34';
-          routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=04";
+          // routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=04";
           this.LSworkbench="AntiManagerWorkbenchPass";
           // localStorage.setItem("AntiManagerWorkbenchPass", JSON.stringify(this.workbenchPass));
         } else if (val.taskNodeName == "reconsiderApp_commissioner") { // 复议专员 
           this.judge.flag = "05";
           RoutePath = '/reconsiderList';
-          routeParams = '?taskNodeName=reconsiderApp_commissioner&flag=05'
+          // routeParams = '?taskNodeName=reconsiderApp_commissioner&flag=05'
           this.LSworkbench="ReWorkbenchPass";
           // localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass));
         } else if (val.taskNodeName == "reconsiderApp_manager") { // 复议经理
           this.judge.flag = "06";
           RoutePath = '/reconsiderList'
-          routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=06";
+          // routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=06";
           this.LSworkbench="ReManagerWorkbenchPass";
           // localStorage.setItem("ReManagerWorkbenchPass", JSON.stringify(this.workbenchPass));
         } 
         // else if (val.taskNodeName == "checkApp_apply") { //质检开始- 质检专员列表 
-        //   this.judge.flag="07";
-        //   RoutePath = '/reconsiderList';
-        //   localStorage.setItem("QTWorkbenchPass", JSON.stringify(this.workbenchPass));
+        //  this.judge.flag = "07";
+        //   RoutePath = '/'
+        //   routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=06";
+        //   this.LSworkbench="ReManagerWorkbenchPass";
         // } else if (val.taskNodeName == "reconsiderApp_commissioner") { // 质检经理 
-        //   this.judge.flag="08";
-        //   RoutePath = '/reconsiderList';
-        //   // nodeName = '复议专员审批';
-        //   routeParams = '?taskNodeName=reconsiderApp_commissioner&flag=05'
-        //   localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass));
+        //   this.judge.flag = "08";
+        //   RoutePath = '/'
+        //   routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=06";
+        //   this.LSworkbench="ReManagerWorkbenchPass";
         // }
+          routeParams = '?taskNodeName=' + val.taskNodeName + "&flag="+this.judge.flag;
         localStorage.setItem(this.LSworkbench, JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
          localStorage.setItem("judge", JSON.stringify(this.judge));
         this.$router.push({
