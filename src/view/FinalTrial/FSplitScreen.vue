@@ -192,9 +192,6 @@
         midShow: true,
         wrapWidth:Number,
         labBtn:Number,
-        clickX:Number,
-        leftOffset:Number,
-        nextW2:Number,
       }
     },
     methods: {
@@ -279,7 +276,7 @@
         }
       },
       MyMove() {
-        // var clickX, leftOffset, nextW2;
+        var clickX, leftOffset, nextW2;
         // var recordMoving;
         var dragging = false;
         // var doc = document;
@@ -290,21 +287,21 @@
         // var wrapWidth = $("#rWrap").width();
         this.labBtn.bind('mousedown', () => {
           dragging = true;
-          this.leftOffset = $("#rWrap").offset().left;
+          leftOffset = $("#rWrap").offset().left;
           document.onmousemove = (e) => {
             if (dragging) {
-              this.clickX = e.pageX;
-              if (this.clickX > this.leftOffset + 10 && this.clickX < (this.wrapWidth - 5)) {
-                this.nextW2 = this.clickX - this.leftOffset;
-                this.labBtn.eq(0).css('left', this.clickX - this.leftOffset + 2 + 'px');
-                this.labBtn.eq(0).prev().width(this.clickX - this.leftOffset + 'px');
-                this.labBtn.eq(0).next().width(this.wrapWidth - this.nextW2 - 10 + 'px'); 
-              } else if (this.clickX < this.leftOffset + 10 && this.clickX < (this.wrapWidth - 5)) {
+              clickX = e.pageX;
+              if (clickX > leftOffset + 10 && clickX < (this.wrapWidth - 5)) {
+                nextW2 = clickX - leftOffset;
+                this.labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px');
+                this.labBtn.eq(0).prev().width(clickX - leftOffset + 'px');
+                this.labBtn.eq(0).next().width(this.wrapWidth - nextW2 - 10 + 'px'); 
+              } else if (clickX < leftOffset + 10 && clickX < (this.wrapWidth - 5)) {
                 this.labBtn.eq(0).css('left', '0px');
                 this.labBtn.eq(0).prev().width('0px');
                 this.labBtn.eq(0).next().width(this.wrapWidth - 6 + 'px'); 
               }
-              if (this.clickX > (this.wrapWidth - 5)) {
+              if (clickX > (this.wrapWidth - 5)) {
                 this.labBtn.eq(0).css('left', parseFloat(this.wrapWidth) - 11 + 'px');
                 this.labBtn.eq(0).prev().width(this.wrapWidth - 11 + 'px');
                 this.labBtn.eq(0).next().width('0px');
