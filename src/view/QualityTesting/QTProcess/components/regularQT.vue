@@ -27,7 +27,7 @@
     </el-collapse>
     <!-- 资料核实 -->
     <el-collapse v-model="activeNames" v-if='MaterialShow'>
-      <el-collapse-item name="2">
+      <el-collapse-item name="1">
         <template slot="title">
           <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">资料核实</span>
@@ -241,7 +241,7 @@
     </el-collapse>
     <!-- 三方信息查询=====后两个选否弹出未改 -->
     <el-collapse v-model="activeNames" v-if='InfoSearchShow'>
-      <el-collapse-item name="3">
+      <el-collapse-item name="2">
         <template slot="title">
           <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">三方信息查询</span>
@@ -359,7 +359,7 @@
     </el-collapse>
     <!-- 内部匹配核实 -->
     <el-collapse v-model="activeNames" v-if='MatchingShow'>
-      <el-collapse-item name="4">
+      <el-collapse-item name="3">
         <template slot="title">
           <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">内部匹配核实</span>
@@ -394,7 +394,7 @@
     <!-- phone -->
     <!-- 电话征信 -->
     <el-collapse v-model="activeNames">
-      <el-collapse-item name="5">
+      <el-collapse-item name="4">
         <template slot="title">
           <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">电话征信</span>
@@ -534,7 +534,7 @@
     </el-collapse>
     <!-- 初终审复议申请信息 -->
     <el-collapse v-model="activeNames" v-if='ReApply'>
-      <el-collapse-item name="4">
+      <el-collapse-item name="5">
         <template slot="title">
           <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">初终审复议申请信息</span>
@@ -561,7 +561,7 @@
     </el-collapse>
     <!-- 审批主管第一次复议申请信息 -->
     <el-collapse v-model="activeNames" v-if='SuperVisor'>
-      <el-collapse-item name="4">
+      <el-collapse-item name="6">
         <template slot="title">
           <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">审批主管第一次复议申请信息</span>
@@ -588,7 +588,7 @@
     </el-collapse>
     <!-- 第一次复议申请信息 -->
     <el-collapse v-model="activeNames" v-if='SuperVisor'>
-      <el-collapse-item name="4">
+      <el-collapse-item name="7">
         <template slot="title">
           <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">审批主管第一次复议申请信息</span>
@@ -619,7 +619,7 @@
     </el-collapse>
     <!-- 审批主管第二次复议申请信息 -->
     <el-collapse v-model="activeNames" v-if='SuperVisor'>
-      <el-collapse-item name="4">
+      <el-collapse-item name="8">
         <template slot="title">
           <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">审批主管第二次复议申请信息</span>
@@ -646,13 +646,14 @@
     </el-collapse>
     <!-- 质检结论 -->
     <el-collapse v-model="activeNames">
-      <el-collapse-item name="6">
+      <el-collapse-item name="9">
         <template slot="title">
           <div>
             <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
             <p style="display:inline-block" class="headFont">质检结论</p>
             <p style="float:right">
-              <span class="btn" @click.stop="addTr=true">
+              <!-- <span class="btn" @click.stop="addTr=true"> -->
+              <span class="btn" @click.stop="addQTResult">
                 <img src='../../../../../static/images/add.png'> 添加 </span>
               <span class="btn" @click.stop="delQTresult">
                 <img src="../../../../../static/images/delete.png"> 删除</span>
@@ -660,7 +661,45 @@
           </div>
         </template>
         <div class="result_QT">
-          <table border="1" cellpadding='2' width='100%'>
+            <el-table :data="insConclusion" style="width: 100%" border min-width='1366px'>
+      <el-table-column label="质检结果" align="center" width="240">
+        <template slot-scope="scope">
+          <i class="required_Red"> * </i>
+            <el-select :disabled='QTConclution' v-model="scope.row.checkResult" placeholder="请选择">
+              <el-option v-for="item in QTresult" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+        </template>
+      </el-table-column>
+      <el-table-column label="差错类型" align="center"  width="230">
+        <template slot-scope="scope">
+            <el-tooltip class="item" effect="dark" :content="scope.row.errorType" :disabled="!scope.row.errorType" placement="top-start">
+              <el-input :disabled='QTConclution' v-model="scope.row.errorType" :maxlength='fiftyWords' placeholder="请输入内容"></el-input>
+            </el-tooltip>
+        </template>
+      </el-table-column>
+      <el-table-column label="差错描述" align="center"  width="230">
+        <template slot-scope="scope">
+            <el-tooltip class="item" effect="dark" :content="scope.row.errorDescribe" :disabled="!scope.row.errorDescribe" placement="top-start">
+              <el-input :disabled='QTConclution' v-model="scope.row.errorDescribe" :maxlength='arealength' placeholder="请输入内容"></el-input>
+            </el-tooltip>
+        </template>
+      </el-table-column>
+      <el-table-column label="备注（非必填）" align="center" min-width="200">
+        <template slot-scope="scope">
+            <el-tooltip class="item" effect="dark" :content="scope.row.remark" :disabled="!scope.row.remark" placement="top-start">
+              <el-input type='textarea' :disabled='QTConclution' v-model="scope.row.remark" :rows="2" resize="none" :maxlength='arealength'
+                placeholder="请输入内容">
+              </el-input>
+            </el-tooltip>
+        </template>
+      </el-table-column>
+      <el-table-column prop="insMemberName" label="操作人员" align="center"  width="120">
+      </el-table-column>
+      <el-table-column prop="insDate" label="质检日期" align="center"  width="180">
+      </el-table-column>
+    </el-table>
+          <!-- <table border="1" cellpadding='2' width='100%'>
             <tr>
               <th width='40px'> 序号</th>
               <th width='230px'>质检结果 </th>
@@ -702,7 +741,7 @@
                 {{ insConclusion.insDate}}
               </td>
             </tr>
-          </table>
+          </table> -->
         </div>
       </el-collapse-item>
     </el-collapse>
@@ -896,7 +935,7 @@
         // regularInfo: '',
         fiftyWords: 50,
         arealength: 300, //area长度
-        insConclusion: {},
+        insConclusion: [],
         insWechatAlipay: '', //微信、支付宝
         Alipay: [], //微信支付宝切换暂存
         AlipayCus: '', //客户本人-微信
@@ -954,7 +993,7 @@
         addTr: true,
         // currentRow: null,
         telType: '06', //电话征信 电话类型入参
-        activeNames: ['0', '1', "2", "3", "4", "5", "6", "7", "8"], //折叠面板 默认显示下标
+        activeNames: ['0', '1', "2", "3", "4", "5", "6", "7", "8","9",'10'], //折叠面板 默认显示下标
         tabTitle: ["客户本人", "单位电话", "家庭联系人", "工作证明人", "其他联系人"],
         // tab: ["客户本人", "单位电话", "家庭联系人", "工作证明人", "其他联系人"],
         QTresult: [{
@@ -1085,7 +1124,7 @@
         SocialSecurityBtn: true, //按钮 - 社保公积金
       }
     },
-    props: ['propApplyId', 'pageType'],
+    props: ['propQTconclution','propApplyId', 'pageType'],
     methods: {
       show() {
         console.log('furyi ')
@@ -1094,7 +1133,7 @@
       // 质检页面查询接口
       referPort() {
         this.get("/insConclusion/queryInsConclusionObj", {
-          applyId: this.propApplyId, //入参待更新+测试-------------------------------------------------------
+          applyId: this.propQTconclution.applyId, //入参待更新+测试-------------------------------------------------------
         }).then(res => {
           if (res.statusCode == 200) {
             //  基本信息                                -Object
@@ -1159,14 +1198,51 @@
           }
         });
       },
-      delQTresult() {
-        this.addTr = false;
-        this.insConclusion.checkResult = '';
-        this.insConclusion.errorType = '';
-        this.insConclusion.errorDescribe = '';
-        this.insConclusion.remark = '';
-        // this.insConclusion.insMemberName = '';--展示 不需要清空
-        // this.insConclusion.insDate = '';--展示 不需要清空
+             addQTResult: function() {
+		    	// event.stopPropagation();
+		    	if(this.insConclusion.length==0){
+		    		this.insConclusion.push({
+						            "applyId":this.applyId, // 质检结果
+						            "bankName":"", // 差错类型
+						            "cardUseDate":"", // 差错描述
+						            "cardAmt":"" ,// 备注（非必填）
+						            "usedAmt":"", // 操作人员
+						            "repayDay":"", // 质检日期
+						        });
+		    	}else{
+		    		// if(this.cardDetList[this.cardDetList.length-1].bankName=='' || this.cardDetList[this.cardDetList.length-1].accountStatus==''){
+            if(this.insConclusion[this.insConclusion.length-1].bankName==''){ //质检结果不能为空
+             this.$message.error('质检结果不能为空！');
+            return
+	    			}else{
+	    				this.insConclusion.push({
+						            "applyId":this.applyId, // 质检结果
+						            "bankName":"", // 差错类型
+						            "cardUseDate":"", // 差错描述
+						            "cardAmt":"" ,// 备注（非必填）
+						            "usedAmt":"", // 操作人员
+						            "repayDay":"", // 质检日期
+						        });
+	    			}
+		    	};
+		    },
+      delQTresult() { 
+        // this.addTr = false;
+        // this.insConclusion.checkResult = '';
+        // this.insConclusion.errorType = '';
+        // this.insConclusion.errorDescribe = '';
+        // this.insConclusion.remark = '';
+        // // this.insConclusion.insMemberName = '';--展示 不需要清空
+        // // this.insConclusion.insDate = '';--展示 不需要清空
+
+        // ---改需求之后
+				// event.stopPropagation();
+				console.log(this.currentRowLoan);
+				for(var i=0;i<this.loanDetailList.length;i++){
+					if(this.loanDetailList[i]==this.currentRowLoan){
+						this.loanDetailList.splice(i,1);
+					}
+				}
       },
       InitialInfo() {
         this.regularInfo.isForm ? this.regularInfo.isForm : this.regularInfo.isForm = 1;
@@ -1492,25 +1568,27 @@
         }
       },
       showdiffer() {
-        if (this.pageType == '常规质检') {
+        if (this.propQTconclution.pageType == '常规质检') {
           AprovalInfolShow = true; //审批信息        
           MaterialShow = true; //资料核实
           InfoSearchShow = true; //三方信息查询
           MatchingShow = true; //内部匹配核实
           reResultShow = false; //复核结论-div 
-        } else if (this.pageType == '专纵质检') {
+        } else if (this.propQTconclution.pageType == '专纵质检') {
           AprovalInfolShow = false; //审批信息        
           MaterialShow = false; //资料核实
           InfoSearchShow = false; //三方信息查询
           MatchingShow = false; //内部匹配核实
-        } else if (this.pageType == '常规又专纵质检') {
+        } else if (this.propQTconclution.pageType == '常规又专纵质检') {
           reResultShow = true; //复核结论-div 
-        } else if (this.pageType == '复议') {
+        } else if (this.propQTconclution.pageType == '复议') {
 
         }
-      }
+      },
+
     },
     mounted() {
+      // console.log(this.propQTconclution)
       // this.processInstanceId = JSON.parse(localStorage.getItem('未存储，未确定，待更改-RtaskInWaitting')).processInstanceId;
       // 质检结论枚举
       // ["01": "初审一般差错",
@@ -1534,6 +1612,7 @@
 <style scoped>
   .baseInf {
     padding-left: 10px;
+    height:110px;
   }
 
   .paddingleft {
@@ -1546,7 +1625,9 @@
     float: left;
     margin-top: 10px;
   }
-
+.regularQT{
+  overflow: hidden;
+}
   .regularQT table {
     border: 1px solid #ebeef5;
     /* vertical-align: middle; */
@@ -1570,6 +1651,7 @@
 
   .result_QT td {
     padding: 0 2px;
+    overflow-x: auto;
   }
 
   .material {
@@ -1581,15 +1663,24 @@
     height: 130px;
   }
 
-  /* .btn {
+  .btn {
     vertical-align: top;
     cursor: pointer;
-    margin-right: 10px;
+    width:80px;
+    display: inline-block;
+    /* margin-right: 10px; */
+    /* background:pink; */
+    position:relative;
   }
 
   .btn img {
-    vertical-align: middle;
-  } */
+    /* vertical-align: middle; */
+    position: absolute;
+    top:3px;
+    left:-35px;
+    /* margin-top:3px; */
+    /* background:red; */
+  }
 
   .icon_hat {
     position: absolute;

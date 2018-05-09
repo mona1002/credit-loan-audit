@@ -141,6 +141,7 @@
   export default {
     data() {
       return {
+        custName:'',
         watchData: '',
         originLeft: '',
         customInf: [], 

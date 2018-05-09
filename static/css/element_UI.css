@@ -2837,3 +2837,6 @@ width:200px;
 width:800px;
 vertical-align: top;
 }
+.regularQT .el-collapse-item__wrap{
+overflow: inherit;
+}
