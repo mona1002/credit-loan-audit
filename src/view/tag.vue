@@ -329,7 +329,7 @@
         } else if (route.path == '/SocialSe') {
           this.nodeName = "社保公积金";
         } else if (route.path == '/IntegratedQuery') {
-          this.nodeName = "综合查询-查看";
+          this.nodeName = "综合查询";
         } else if (route.path == '/MatchingInfQuery') {
           this.nodeName = "综合查询-详情";
         }

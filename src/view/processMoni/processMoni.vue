@@ -1,6 +1,6 @@
 <!-- 系统管理-流程角色管理-->
 <template>
-<div>
+<div class="Process">
   <my-head></my-head>
   <div class="processMoni">
     <div class="keywordContainer">
@@ -716,6 +716,11 @@ userCode:'',
 </script>
 
 <style>
+.Process{
+  height: 100%;
+  height: 100%;
+  overflow: auto;
+}
 .processMoni {
   padding: 15px 30px;
   /* width: 100%; */
