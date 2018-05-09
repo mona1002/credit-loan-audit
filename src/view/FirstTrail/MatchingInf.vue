@@ -7,7 +7,8 @@
         <span> 借款人： {{custName}}</span>
         <!-- <span> 借款人： {{customInf.accepCusBasicInfo.custName}}</span> -->
         <span> 进件编号: {{customInf.applyMainNo}}</span>
-        <span> 证件号码: {{customInf.accepCusBasicInfo.certCode}}</span>
+        <!-- <span> 证件号码: {{customInf.accepCusBasicInfo.certCode}}</span> -->
+        <span> 证件号码: {{certCode}}</span>
         <span> 进件机构: {{customInf.appOrgName}}</span>
         <span> 门店成立时间: {{customInf.appOrgRegisterDate}}</span>
         <span> 业务员入职时间： {{customInf.salPerEmployDate}}</span>
@@ -142,6 +143,7 @@
     data() {
       return {
         custName:'',
+        certCode:'',
         watchData: '',
         originLeft: '',
         customInf: [], 
@@ -227,8 +229,9 @@
         this.showHalfBtn = false;
         this.$refs.right_tab_ul.style.left = this.originLeft;
         this.$refs.rLeft.style.display = "block";
-        this.$refs.rRight.style.width = "50%";
-        this.watchData = this.$refs.rRight.style.width;
+        // this.$refs.rRight.style.width = "50%";
+        this.$refs.rRight.style.width=this.$refs.rLeft.style.width=this.$refs.RM.style.left = this.watchData = "calc(50% - 2px)";        
+        // this.watchData = this.$refs.rRight.style.width;
         this.isFull = false;
         this.midShow = true;        
       },
@@ -307,6 +310,7 @@
         if (res.statusCode == 200) {
           this.customInf = res.data;
            this.custName = res.data.accepCusBasicInfo.custName;
+           this.certCode= res.data.accepCusBasicInfo.certCode;
         } else {
           this.$message.error(res.msg);
         }

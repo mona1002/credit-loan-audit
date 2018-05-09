@@ -290,7 +290,7 @@
         }));
          localStorage.setItem("MatchFlag", JSON.stringify({ MatchFlag:'internal' }));
         this.$router.push('/MatchingInf');
-        this.goPath();
+        // this.goPath();
       },
       itemDbclickFixTel(row, event) {
         // 行被双击 事件  固定电话
@@ -303,8 +303,9 @@
           matchApplyId: row.matchApplyId,
           isInterFlag: this.isInterFlag
         }));
+          localStorage.setItem("MatchFlag", JSON.stringify({ MatchFlag:'internal' }));
         this.$router.push('/MatchingInf');
-        this.goPath();
+        // this.goPath();
       },
       itemDbclickCompany(row, event) {
         // 行被双击 事件  单位名称
@@ -318,8 +319,9 @@
           matchApplyId: row.matchApplyId,
           isInterFlag: this.isInterFlag
         }));
+          localStorage.setItem("MatchFlag", JSON.stringify({ MatchFlag:'internal' }));
         this.$router.push('/MatchingInf');
-        this.goPath();
+        // this.goPath();
       },
       // cellHover(row, column, cell, event) {
       //   // cell hover 事件
@@ -371,15 +373,15 @@
         this.CompanyPageNum = val;
         this.fetchData('company');
       },
-      goPath() {
-        // this.$store.dispatch('addVisitedViews', {
-        //   name: '匹配信息-查看',
-        //   path: '/MatchingInf',
-        //   flag: '',
-        //   params: '',
-        //   StatefullPath: '/MatchingInf',
-        // })
-      }
+      // goPath() {
+      //   // this.$store.dispatch('addVisitedViews', {
+      //   //   name: '匹配信息-查看',
+      //   //   path: '/MatchingInf',
+      //   //   flag: '',
+      //   //   params: '',
+      //   //   StatefullPath: '/MatchingInf',
+      //   // })
+      // }
     },
     watch: {
       isFull() {
