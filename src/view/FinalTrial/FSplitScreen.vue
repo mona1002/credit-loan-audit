@@ -191,7 +191,6 @@
         alertComBtn: false,
         midShow: true,
         wrapWidth:Number,
-        labBtn:Number,
       }
     },
     methods: {
@@ -276,40 +275,49 @@
         }
       },
       MyMove() {
-        var clickX, leftOffset, nextW2;
-        // var recordMoving;
+        var clickX, leftOffset, inx, nextW2, nextW;
+        var recordMoving;
         var dragging = false;
-        // var doc = document;
-        // var labBtn = $("#RM");
-        // console.log(labBtn)
-        console.log(this.labBtn)
-        
-        // var wrapWidth = $("#rWrap").width();
-        this.labBtn.bind('mousedown', () => {
+        var doc = document;
+        var labBtn = $("#RM");
+        var wrapWidth = $("#rWrap").width();
+        // this.wrapWidth=$("#rWrap").width();
+        labBtn.bind('mousedown', () => {
           dragging = true;
           leftOffset = $("#rWrap").offset().left;
-          document.onmousemove = (e) => {
+          doc.onmousemove = (e) => {
             if (dragging) {
               clickX = e.pageX;
-              if (clickX > leftOffset + 10 && clickX < (this.wrapWidth - 5)) {
+              if (clickX > leftOffset + 10 && clickX < (wrapWidth - 5)) {
+                console.log(1,wrapWidth)
+                // console.log(clickX)
                 nextW2 = clickX - leftOffset;
-                this.labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px');
-                this.labBtn.eq(0).prev().width(clickX - leftOffset + 'px');
-                this.labBtn.eq(0).next().width(this.wrapWidth - nextW2 - 10 + 'px'); 
-              } else if (clickX < leftOffset + 10 && clickX < (this.wrapWidth - 5)) {
-                this.labBtn.eq(0).css('left', '0px');
-                this.labBtn.eq(0).prev().width('0px');
-                this.labBtn.eq(0).next().width(this.wrapWidth - 6 + 'px'); 
+                console.log(2,nextW2)
+                
+                labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px');
+                labBtn.eq(0).prev().width(clickX - leftOffset + 'px');
+                 labBtn.eq(0).next().css('left',clickX - leftOffset+2 + 'px');
+                labBtn.eq(0).next().width(wrapWidth - nextW2 - 10 + 'px'); 
+                console.log(3, labBtn.eq(0).next().width())
+                console.log(4, labBtn.eq(0).prev().width())
+                
+              } else if (clickX < leftOffset + 10 && clickX < (wrapWidth - 5)) {
+                console.log( ' z')
+                labBtn.eq(0).css('left', '0px');
+                labBtn.eq(0).prev().width('0px');
+                labBtn.eq(0).next().css('left','2px');
+                labBtn.eq(0).next().width(wrapWidth - 6 + 'px'); 
               }
-              if (clickX > (this.wrapWidth - 5)) {
-                this.labBtn.eq(0).css('left', parseFloat(this.wrapWidth) - 11 + 'px');
-                this.labBtn.eq(0).prev().width(this.wrapWidth - 11 + 'px');
-                this.labBtn.eq(0).next().width('0px');
+              if (clickX > (wrapWidth - 5)) {
+                console.log('k')
+                labBtn.eq(0).css('left', parseFloat(wrapWidth) - 11 + 'px');
+                labBtn.eq(0).prev().width(wrapWidth - 11 + 'px');
+                labBtn.eq(0).next().width('0px');
               }
             }
           };
         });
-        $(document).mouseup((e) => {
+        $(doc).mouseup((e) => {
           dragging = false;
           e.cancelBubble = true;
         });
@@ -317,9 +325,6 @@
     },
     mounted() {
       this.title = "影像资料";
-        this.wrapWidth=$("#rWrap").width();  
-        this.labBtn= $("#RM");
-            
       this.MyMove();
       this.tastwaitingPass = JSON.parse(localStorage.getItem("FtaskInWaitting"));
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
@@ -479,12 +484,22 @@
     border-radius: 4px;
     float: left;
     position: relative;
+    
   }
+.left,
+.right{
+    position: absolute;
+  
+}
 
-  .left,
+.right{
+  /* left:  calc(50% - 2px); */
+  left:50%;
+}
+  /* .left,
   .AudioVisual_wrap_compare_left {
     margin-right: 2px;
-  }
+  } */
 
   /* 左屏 */
 
