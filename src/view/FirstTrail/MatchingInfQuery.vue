@@ -220,8 +220,9 @@
         this.originLeft = this.$refs.right_tab_ul.style.left;
         this.$refs.right_tab_ul.style.left = "0";
         this.$refs.rLeft.style.display = "none";
-        this.$refs.rRight.style.width = "100%";
-        this.watchData = this.$refs.rRight.style.width;
+        this.watchData = this.$refs.rRight.style.width = "100%";
+        this.$refs.rRight.style.left = '0';
+        // this.watchData = this.$refs.rRight.style.width;
         this.isFull = true;
         this.midShow = false;
       },
@@ -229,7 +230,9 @@
         this.showHalfBtn = false;
         this.$refs.right_tab_ul.style.left = this.originLeft;
         this.$refs.rLeft.style.display = "block";
-         this.$refs.rRight.style.width=this.$refs.rLeft.style.width=this.$refs.RMQ.style.left = this.watchData = "calc(50% - 2px)";     
+        this.$refs.rRight.style.width = this.$refs.rLeft.style.width = this.$refs.RMQ.style.left = this.watchData =
+          "calc(50% - 2px)";
+        this.$refs.rRight.style.left = '50%';
         this.isFull = false;
         this.midShow = true;
       },
@@ -274,20 +277,20 @@
               clickX = e.pageX;
               if (clickX > leftOffset + 10 && clickX < (wrapWidth - 5)) {
                 nextW2 = clickX - leftOffset;
-                labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px'); 
-                labBtn.eq(0).prev().width(clickX - leftOffset -2 + 'px'); 
-                labBtn.eq(0).next().css('left', clickX - leftOffset + 2 + 'px');                
-                labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px'); 
+                labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px');
+                labBtn.eq(0).prev().width(clickX - leftOffset - 2 + 'px');
+                labBtn.eq(0).next().css('left', clickX - leftOffset + 2 + 'px');
+                labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px');
               } else if (clickX < leftOffset + 10 && clickX < (wrapWidth - 5)) {
                 labBtn.eq(0).css('left', '0px');
                 labBtn.eq(0).prev().width('0px');
-                labBtn.eq(0).next().css('left', '2px');                
-                labBtn.eq(0).next().width(wrapWidth - 6 + 'px'); 
+                labBtn.eq(0).next().css('left', '2px');
+                labBtn.eq(0).next().width(wrapWidth - 6 + 'px');
               }
               if (clickX > (wrapWidth - 5)) {
                 labBtn.eq(0).css('left', parseFloat(wrapWidth) - 11 + 'px');
                 labBtn.eq(0).prev().width(wrapWidth - 11 + 'px');
-                labBtn.eq(0).next().css('left', wrapWidth - 9 + 'px');                
+                labBtn.eq(0).next().css('left', wrapWidth - 9 + 'px');
                 labBtn.eq(0).next().width('0px');
 
               }
@@ -457,11 +460,11 @@
     position: relative;
   }
 
- /* .left,
+  /* .left,
   .AudioVisual_wrap_compare_left {
     margin-right: 2px;
   } */
-  
+
   .left,
   .right {
     position: absolute;

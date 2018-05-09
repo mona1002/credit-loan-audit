@@ -230,20 +230,19 @@
         // this.originLeft = this.$refs.right_tab_ul.style.left;
         this.$refs.right_tab_ul.style.left = "0";
         this.$refs.rLeft.style.display = "none";
-        this.$refs.rRight.style.width = "100%";
-        this.watchData = this.$refs.rRight.style.width;
+       this.watchData =  this.$refs.rRight.style.width = "100%";
+       this.$refs.rRight.style.left='0';
+        // this.watchData = this.$refs.rRight.style.width;
         this.isFull = true;
         this.midShow = false;
       },
       DblScreen() {
         this.showHalfBtn = false;
         // this.$refs.right_tab_ul.style.left = this.originLeft;
-        // this.$refs.right_tab_ul.style.left = this.originLeft;
         this.$refs.rLeft.style.display = "block";
-        this.$refs.rRight.style.width = "50%";
-        this.$refs.rLeft.style.width = "calc(50% - 2px)";
-        this.$refs.RM.style.left = "calc(50% - 2px)";
-        this.watchData = this.$refs.rRight.style.width;
+        this.watchData = this.$refs.rRight.style.width= this.$refs.RM.style.left =  this.$refs.rLeft.style.width = "calc(50% - 2px)";
+         this.$refs.rRight.style.left='50%';   
+        // this.watchData = this.$refs.rRight.style.width;
         this.isFull = false;
         this.midShow = true;
       },
