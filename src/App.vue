@@ -39,7 +39,7 @@
   .fottt {
     position: absolute;
     left: 0;
-    bottom: 1;
+    bottom: 1px;
     background: #e0eeff;
     height: 39px;
   }
