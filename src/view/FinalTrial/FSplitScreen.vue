@@ -190,7 +190,6 @@
         comBtn: true,
         alertComBtn: false,
         midShow: true,
-        wrapWidth:Number,
       }
     },
     methods: {
@@ -242,7 +241,7 @@
         this.showHalfBtn = false;
         this.$refs.right_tab_ul.style.left = this.originLeft;
         this.$refs.rLeft.style.display = "block";
-        this.$refs.rRight.style.width=this.$refs.rLeft.style.width=this.$refs.RM.style.left  = "calc(50% - 2px)";
+        this.$refs.rRight.style.width = this.$refs.rLeft.style.width = this.$refs.RM.style.left = "calc(50% - 2px)";
         this.watchData = this.$refs.rRight.style.width;
         this.isFull = false;
         this.midShow = true;
@@ -275,13 +274,11 @@
         }
       },
       MyMove() {
-        var clickX, leftOffset, inx, nextW2, nextW;
-        var recordMoving;
+        var clickX, leftOffset, nextW2;
         var dragging = false;
         var doc = document;
         var labBtn = $("#RM");
         var wrapWidth = $("#rWrap").width();
-        // this.wrapWidth=$("#rWrap").width();
         labBtn.bind('mousedown', () => {
           dragging = true;
           leftOffset = $("#rWrap").offset().left;
@@ -289,31 +286,22 @@
             if (dragging) {
               clickX = e.pageX;
               if (clickX > leftOffset + 10 && clickX < (wrapWidth - 5)) {
-                console.log(1,wrapWidth)
-                // console.log(clickX)
                 nextW2 = clickX - leftOffset;
-                console.log(2,nextW2)
-                
                 labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px');
-                labBtn.eq(0).prev().width(clickX - leftOffset + 'px');
-                 labBtn.eq(0).next().css('left',clickX - leftOffset+2 + 'px');
-                labBtn.eq(0).next().width(wrapWidth - nextW2 - 10 + 'px'); 
-                console.log(3, labBtn.eq(0).next().width())
-                console.log(4, labBtn.eq(0).prev().width())
-                
+                labBtn.eq(0).prev().width(clickX - leftOffset - 2 + 'px');
+                labBtn.eq(0).next().css('left', clickX - leftOffset + 2 + 'px');
+                labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px');
               } else if (clickX < leftOffset + 10 && clickX < (wrapWidth - 5)) {
-                console.log( ' z')
                 labBtn.eq(0).css('left', '0px');
                 labBtn.eq(0).prev().width('0px');
-                labBtn.eq(0).next().css('left','2px');
-                labBtn.eq(0).next().width(wrapWidth - 6 + 'px'); 
+                labBtn.eq(0).next().css('left', '2px');
+                labBtn.eq(0).next().width(wrapWidth - 6 + 'px');
               }
               if (clickX > (wrapWidth - 5)) {
-                console.log('k')
                 // labBtn.eq(0).css('left', parseFloat(wrapWidth) - 11 + 'px');
                 labBtn.eq(0).css('left', wrapWidth - 11 + 'px');
                 labBtn.eq(0).prev().width(wrapWidth - 11 + 'px');
-                  labBtn.eq(0).next().css('left',wrapWidth - 9 + 'px');
+                labBtn.eq(0).next().css('left', wrapWidth - 9 + 'px');
                 labBtn.eq(0).next().width('0px');
               }
             }
@@ -486,18 +474,18 @@
     border-radius: 4px;
     float: left;
     position: relative;
-    
-  }
-.left,
-.right{
-    position: absolute;
-  
-}
 
-.right{
-  /* left:  calc(50% - 2px); */
-  left:50%;
-}
+  }
+
+  .left,
+  .right {
+    position: absolute;
+  }
+
+  .right {
+    left: 50%;
+  }
+
   /* .left,
   .AudioVisual_wrap_compare_left {
     margin-right: 2px;
