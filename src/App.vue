@@ -38,7 +38,8 @@
   @import "../static/css/element_UI.css";
   .fottt {
     position: absolute;
-    bottom: 0;
+    left: 0;
+    bottom: 1;
     background: #e0eeff;
     height: 39px;
   }

@@ -239,8 +239,9 @@ pageType:'',
         this.showHalfBtn = false;
         this.$refs.right_tab_ul.style.left = this.originLeft;
         this.$refs.rLeft.style.display = "block";
-        this.$refs.rRight.style.width = "50%";
-        this.watchData = this.$refs.rRight.style.width;
+        // this.$refs.rRight.style.width = "50%";
+        this.$refs.rRight.style.width=this.$refs.rLeft.style.width=this.$refs.RM.style.left = this.watchData = "calc(50% - 2px)";        
+        // this.watchData = this.$refs.rRight.style.width;
         this.isFull = false;
         this.midShow = true;
       },
