@@ -255,7 +255,7 @@ table {
   float: left;
   height: 100%;
   cursor: e-resize;
-  /* background: lightblue; */
+  background: lightblue;
   /* background: white; */
   position: absolute;
   left: calc(50% - 2px);
