@@ -310,8 +310,10 @@
               }
               if (clickX > (wrapWidth - 5)) {
                 console.log('k')
-                labBtn.eq(0).css('left', parseFloat(wrapWidth) - 11 + 'px');
+                // labBtn.eq(0).css('left', parseFloat(wrapWidth) - 11 + 'px');
+                labBtn.eq(0).css('left', wrapWidth - 11 + 'px');
                 labBtn.eq(0).prev().width(wrapWidth - 11 + 'px');
+                  labBtn.eq(0).next().css('left',wrapWidth - 9 + 'px');
                 labBtn.eq(0).next().width('0px');
               }
             }
