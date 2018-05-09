@@ -418,6 +418,7 @@
 <style scoped>
   .SplitScreen {
     height: 100%;
+    overflow-y: hidden;
     /* min-width: 1366; */
   }
 
