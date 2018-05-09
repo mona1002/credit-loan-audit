@@ -76,7 +76,7 @@
           </div>
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
-            <RAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn' ></RAudioVisual>
+            <RAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></RAudioVisual>
             <Rremark v-if=" this.tabContent2==1"></Rremark>
             <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
             <RapplicationInformationDetail v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
@@ -99,7 +99,7 @@
           <p>影像资料</p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <RAudioVisualLeft msg="MspLtwo"  :comBtn.sync='alertComBtn'></RAudioVisualLeft>
+            <RAudioVisualLeft msg="MspLtwo" :comBtn.sync='alertComBtn'></RAudioVisualLeft>
           </div>
         </div>
         <!-- 弹出层右侧 div -->
@@ -113,7 +113,7 @@
           </p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <RAudioVisualLeft msg="MspLthree" ref="audioChild"  :comBtn.sync='alertComBtn' v-on:inputInf="inputInner"></RAudioVisualLeft>
+            <RAudioVisualLeft msg="MspLthree" ref="audioChild" :comBtn.sync='alertComBtn' v-on:inputInf="inputInner"></RAudioVisualLeft>
           </div>
         </div>
       </div>
@@ -142,12 +142,12 @@
   export default {
     data() {
       return {
-        custName:'',
-        certCode:'',
+        custName: '',
+        certCode: '',
         watchData: '',
         originLeft: '',
-        customInf: [], 
-        tastwaitingPass: [], 
+        customInf: [],
+        tastwaitingPass: [],
         showHalfBtn: false,
         CompareAlert: false,
         title: "",
@@ -157,12 +157,12 @@
         tabContent2: 3,
         tabActiveInd1: 0,
         tabActiveInd2: 3,
-       items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信",'反欺诈结论', "流程轨迹",'信审审批结论轨迹'],
-        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "流程轨迹","信审审批结论轨迹"],
+        items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论', "流程轨迹", '信审审批结论轨迹'],
+        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "流程轨迹", "信审审批结论轨迹"],
         tab1Index: 0,
         tab2Index: 3,
-       flag1: [true, true, true, false, true, true, true, true, true,true,true],
-        flag2: [true, true, true, true, true, true, true, true, true, true,true],
+        flag1: [true, true, true, false, true, true, true, true, true, true, true],
+        flag2: [true, true, true, true, true, true, true, true, true, true, true],
         AlertSearch: "",
         AlertSearchCondition: [{
           value: '选项1',
@@ -175,9 +175,9 @@
           label: '内匹客户姓名'
         }],
         isFull: false,
-        comBtn:true,
-        alertComBtn:false,
-         midShow: true,
+        comBtn: true,
+        alertComBtn: false,
+        midShow: true,
       }
     },
     methods: {
@@ -223,17 +223,18 @@
         this.$refs.rRight.style.width = "100%";
         this.watchData = this.$refs.rRight.style.width;
         this.isFull = true;
-          this.midShow = false;
+        this.midShow = false;
       },
       DblScreen() {
         this.showHalfBtn = false;
         this.$refs.right_tab_ul.style.left = this.originLeft;
         this.$refs.rLeft.style.display = "block";
         // this.$refs.rRight.style.width = "50%";
-        this.$refs.rRight.style.width=this.$refs.rLeft.style.width=this.$refs.RM.style.left = this.watchData = "calc(50% - 2px)";        
+        this.$refs.rRight.style.width = this.$refs.rLeft.style.width = this.$refs.RM.style.left = this.watchData =
+          "calc(50% - 2px)";
         // this.watchData = this.$refs.rRight.style.width;
         this.isFull = false;
-        this.midShow = true;        
+        this.midShow = true;
       },
       tab1(ev, ind, val) {
         this.title = val;
@@ -262,9 +263,8 @@
           this.flag1[ind] = false;
         }
       },
-       MyMove() {
-        var clickX, leftOffset, inx, nextW2, nextW;
-        var recordMoving;
+      MyMove() {
+        var clickX, leftOffset, nextW2;
         var dragging = false;
         var doc = document;
         var labBtn = $("#RM");
@@ -277,19 +277,21 @@
               clickX = e.pageX;
               if (clickX > leftOffset + 10 && clickX < (wrapWidth - 5)) {
                 nextW2 = clickX - leftOffset;
-                labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px'); //按钮移动
-                labBtn.eq(0).prev().width(clickX - leftOffset + 'px'); //前一个div宽度变化
-                labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px'); //减多少宽地待算
+                labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px');
+                labBtn.eq(0).prev().width(clickX - leftOffset - 2 + 'px');
+                labBtn.eq(0).next().css('left', clickX - leftOffset + 2 + 'px');
+                labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px');
               } else if (clickX < leftOffset + 10 && clickX < (wrapWidth - 5)) {
                 labBtn.eq(0).css('left', '0px');
                 labBtn.eq(0).prev().width('0px');
-                labBtn.eq(0).next().width(wrapWidth - 6 + 'px'); //减多少宽地待算
+                labBtn.eq(0).next().css('left', '2px');
+                labBtn.eq(0).next().width(wrapWidth - 6 + 'px');
               }
               if (clickX > (wrapWidth - 5)) {
                 labBtn.eq(0).css('left', parseFloat(wrapWidth) - 11 + 'px');
                 labBtn.eq(0).prev().width(wrapWidth - 11 + 'px');
+                labBtn.eq(0).next().css('left', wrapWidth - 9 + 'px');
                 labBtn.eq(0).next().width('0px');
-               
               }
             }
           };
@@ -301,16 +303,16 @@
       }
     },
     mounted() {
-       this.title = "影像资料";
-       this.MyMove();       
+      this.title = "影像资料";
+      this.MyMove();
       this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.matchApplyId,
       }).then(res => {
         if (res.statusCode == 200) {
           this.customInf = res.data;
-           this.custName = res.data.accepCusBasicInfo.custName;
-           this.certCode= res.data.accepCusBasicInfo.certCode;
+          this.custName = res.data.accepCusBasicInfo.custName;
+          this.certCode = res.data.accepCusBasicInfo.certCode;
         } else {
           this.$message.error(res.msg);
         }
@@ -363,6 +365,7 @@
   .setGray {
     color: #bfcbd9;
   }
+
   /* 对比弹出层关闭按钮 */
 
   .compareClose {
@@ -371,6 +374,7 @@
     bottom: 19px;
     z-index: 1;
   }
+
   /* 全屏  --  分屏 图标 */
 
   .icon_showHalf {
@@ -402,6 +406,7 @@
     overflow: auto;
     padding: 13px 9px;
   }
+
   /* 借款人详情 */
 
   .PerDtl {
@@ -422,6 +427,7 @@
   .PerDtl span:nth-of-type(7) {
     width: 105px;
   }
+
   /* 切换按钮 */
 
   .stretch {
@@ -430,13 +436,14 @@
     top: 2px;
     z-index: 1;
   }
+
   /* 左右分屏 */
 
   .SplitScreen_wrap {
     width: 100%;
     height: calc( 100% - 33px);
     min-width: 1306px;
-    position: relative;    
+    position: relative;
   }
 
   .left,
@@ -453,11 +460,22 @@
     position: relative;
   }
 
-  .left,
+ /* .left,
   .AudioVisual_wrap_compare_left {
     margin-right: 2px;
+  } */
+
+  .left,
+  .right {
+    position: absolute;
   }
+
+  .right {
+    left: 50%;
+  }
+
   /* 左屏 */
+
   /* 左侧列表  影像资料等 ul 外包   流 */
 
   .left .Left_ul {
@@ -483,11 +501,13 @@
   .Right_tab_ul_wrap ul li:hover {
     cursor: pointer;
   }
+
   /* 左侧详情 div   流 */
 
   .Left_detail_div {
     height: 100%;
   }
+
   /* 左侧详情 p标签   流-css */
 
   .Left_right_Title,
@@ -508,6 +528,7 @@
     text-align: right;
     padding-right: 40px;
   }
+
   /* 左侧详情 content div 内容   流-css */
 
   .Left_right_BigImg {
@@ -515,7 +536,9 @@
     height: calc( 100% - 48px);
     overflow: auto;
   }
+
   /* 右屏 */
+
   /* 右侧tab切换头外的ul   流 */
 
   .Right_tab_ul_wrap {
@@ -544,6 +567,7 @@
     height: calc( 100% - 48px);
     overflow: auto;
   }
+
   /* 右侧tab切换头 左右滑动图标  流  */
 
   .pre_next_btn_wrap {
@@ -559,6 +583,7 @@
   .pre_next_btn_wrap:nth-of-type(2) {
     right: 10px;
   }
+
   /*  对比弹出层 外包 div 流 */
 
   .AudioVisual_wrap_compare {
@@ -569,6 +594,7 @@
     z-index: 22;
     min-width: 1306px;
   }
+
   /* 弹出层 - 两侧组件 content  流 */
 
   .AlertContent {

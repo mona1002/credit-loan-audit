@@ -313,8 +313,7 @@
       //   })
       // },
       MyMove() {
-        console.log("移动")
-        var clickX, leftOffset, inx, nextW2, nextW;
+        var clickX, leftOffset, nextW2;
         var dragging = false;
         var doc = document;
         var labBtn = $("#RM");
@@ -327,22 +326,21 @@
               clickX = e.pageX;
               if (clickX > leftOffset + 10 && clickX < (wrapWidth - 5)) {
                 nextW2 = clickX - leftOffset;
-                labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px'); //按钮移动
-                labBtn.eq(0).prev().width(clickX - leftOffset + 'px'); //前一个div宽度变化
-                // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
-                labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px'); //减多少宽地待算
-                // console.log(this.AUpreWidth)
+                labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px');
+                labBtn.eq(0).prev().width(clickX - leftOffset - 2 + 'px');
+                labBtn.eq(0).next().css('left', clickX - leftOffset + 2 + 'px');
+                labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px');
               } else if (clickX < leftOffset + 10 && clickX < (wrapWidth - 5)) {
                 labBtn.eq(0).css('left', '0px');
                 labBtn.eq(0).prev().width('0px');
-                labBtn.eq(0).next().width(wrapWidth - 6 + 'px'); //减多少宽地待算
-                // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
+                labBtn.eq(0).next().css('left', '2px');
+                labBtn.eq(0).next().width(wrapWidth - 6 + 'px');
               }
               if (clickX > (wrapWidth - 5)) {
                 labBtn.eq(0).css('left', parseFloat(wrapWidth) - 11 + 'px');
                 labBtn.eq(0).prev().width(wrapWidth - 11 + 'px');
+                labBtn.eq(0).next().css('left', wrapWidth - 9 + 'px');
                 labBtn.eq(0).next().width('0px');
-                // console.log( '影音资料宽度改变为'+labBtn.eq(0).prev().width() )
               }
             }
           };
@@ -537,9 +535,18 @@
     position: relative;
   }
 
-  .left,
+  /* .left,
   .AudioVisual_wrap_compare_left {
     margin-right: 2px;
+  } */
+
+  .left,
+  .right {
+    position: absolute;
+  }
+
+  .right {
+    left: 50%;
   }
 
   /* 左屏 */
