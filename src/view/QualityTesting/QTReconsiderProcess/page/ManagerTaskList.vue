@@ -1,6 +1,6 @@
 <template>
   <div class="AntiCaseNum IntegratedQuery">
-    <!-- 质检复议流程-质检主管页面- 复议任务列表（首次） -->
+    <!-- 质检复议流程-质检主管页面- 初终审主管任务列表 -->
     <myHead></myHead>
     <div class="content">
       <div class="search">
@@ -28,11 +28,6 @@
               </el-select>
             </p>
             <p>
-                 <label> 任务类型</label>
-              <el-select v-model="value" placeholder="请选择">
-                <el-option v-for="item in TaskType" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
             </p>
             <p class="btn_wrap">
               <el-button class="btn" type="primary" style="marginLeft:228px" @click="Rsearch">查询</el-button>
@@ -46,19 +41,13 @@
       </div>
       <div class="table_wrap">
         <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" height="100%" @current-change="handleCurrentChange" @selection-change="handleSelectionChange" border>
-             <el-table-column
-      type="selection" align="center"
-      width="55">    </el-table-column>
+        <el-table :data="tableData" style="width: 100%" height="100%" @current-change="handleCurrentChange" @selection-change="handleSelectionChange"
+          border>
           <el-table-column type="index" align='center' label=序号 width="55">
-          </el-table-column>
-          <el-table-column prop="applySubno" label="主进件编号" align='center' min-width="180">
           </el-table-column>
           <el-table-column prop="applySubno" label="进件编号" align='center' min-width="180">
           </el-table-column>
           <el-table-column prop="custName" label="客户名称" align='center' min-width="120">
-          </el-table-column>
-           <el-table-column prop="custName" label="证件类型" align='center' min-width="120">
           </el-table-column>
           <el-table-column prop="certCode" label="证件号码" align='center' min-width="180">
           </el-table-column>
@@ -66,21 +55,27 @@
           </el-table-column>
           <el-table-column prop="appDate" label="初审姓名" align='center' min-width="130">
           </el-table-column>
+          <el-table-column prop="appDate" label="初审所属科室" align='center' min-width="130">
+          </el-table-column>
           <el-table-column prop="operOrgName" label="初审日期" align='center' min-width="120">
           </el-table-column>
-           <el-table-column prop="operOrgName" label="终审姓名" align='center' min-width="120">
+          <el-table-column prop="operOrgName" label="终审姓名" align='center' min-width="120">
           </el-table-column>
-           <el-table-column prop="operOrgName" label="终审日期" align='center' min-width="120">
+          <el-table-column prop="appDate" label="终审所属科室" align='center' min-width="130">
           </el-table-column>
-               <el-table-column prop="operOrgName" label="合规专员" align='center' min-width="120">
+          <el-table-column prop="operOrgName" label="终审日期" align='center' min-width="120">
           </el-table-column>
-               <el-table-column prop="operOrgName" label="合规质检日期" align='center' min-width="120">
+          <el-table-column prop="operOrgName" label="业务状态" align='center' min-width="120">
           </el-table-column>
-               <el-table-column prop="operOrgName" label="质检状态" align='center' min-width="120">
+          <el-table-column prop="operOrgName" label="质检结果" align='center' min-width="120">
           </el-table-column>
-            <el-table-column prop="operOrgName" label="质检结果" align='center' min-width="120">
+          <el-table-column prop="operOrgName" label="差错类型" align='center' min-width="120">
           </el-table-column>
-            <el-table-column prop="operOrgName" label="任务类型" align='center' min-width="120">
+          <el-table-column prop="operOrgName" label="质检日期" align='center' min-width="120">
+          </el-table-column>
+          <el-table-column prop="operOrgName" label="复议申请日期" align='center' min-width="120">
+          </el-table-column>
+          <el-table-column prop="operOrgName" label="质检状态" align='center' min-width="120">
           </el-table-column>
         </el-table>
         <!-- 分页  -->
@@ -99,7 +94,7 @@
   export default {
     data() {
       return {
-        QTStates: [{//质检状态
+        QTStates: [{ //质检状态
           value: '选项1',
           label: '黄金糕'
         }, {
@@ -109,7 +104,7 @@
           value: '选项5',
           label: '北京烤鸭'
         }],
-        TaskType: [{//任务类型
+        TaskType: [{ //任务类型
           value: '选项1',
           label: '黄金糕'
         }, {
@@ -159,12 +154,12 @@
       handleCurrentChange(val) {
         this.query.id = val.id;
         this.query.matchApplyId = val.applyId;
-        localStorage.setItem("query", JSON.stringify(this.query));
-        this.$router.push('/');
+        localStorage.setItem("QTTrialManagerTW", JSON.stringify(this.query));
+        this.$router.push('/MatchingInfQT');
         // this.params.pageNum = val;
         // this.inquire(this.params);
       },
-      handleSelectionChange(){
+      handleSelectionChange() {
 
       },
       Rreset() {
@@ -202,6 +197,7 @@
       },
     },
     mounted() {
+      // QTReWorkbenchPass
       //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
       //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
       //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)

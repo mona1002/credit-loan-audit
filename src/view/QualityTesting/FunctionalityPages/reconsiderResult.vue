@@ -1,8 +1,7 @@
 <template>
-  <!-- 复议结果查询功能 -->
+  <!-- 复议结果查询功能==产品接口调信审审批的16. -->
   <!-- <div class="reconsiderResult"> -->
   <div class="AntiCaseNum IntegratedQuery">
-    <!-- 质检  专员列表 -->
     <myHead></myHead>
     <div class="content">
       <div class="search">
@@ -19,7 +18,7 @@
             <p>
               <label> 产品名称</label>
               <el-select v-model="params.proCode" placeholder="请选择">
-                <el-option v-for="item in ProductName" :key="item.value" :label="item.label" :value="item.value">
+                <el-option v-for="item in ProductName" :key="item.proCode" :label="item.proName" :value="item.proCode">
                 </el-option>
               </el-select>
             </p>
@@ -158,22 +157,15 @@
           reconState: ''
         },
         totalRecord: 0, //总条数
-        ProductName: [{ //产品名称
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
+        ProductName: [], //产品名称
+        
+        // ProductName: [{ //产品名称
+        //   value: '选项1',
+        //   label: '黄金糕'
+        // }, {
+        //   value: '选项2',
+        //   label: '双皮奶'
+        // }],
         QTSituation: [{ //质检状态
           value: '选项1',
           label: '黄金糕'
@@ -210,6 +202,7 @@
     },
     methods: {
       handleSizeChange(val) {
+        console.log(val)
         this.params.pageParam.pageSize = val;
         this.inquire(this.params);
       },
@@ -230,7 +223,7 @@
       },
       inquire(pam) {
         // 质检-复议结果查询功能----------------------------------------------------接口地址未添加
-        this.post("", pam).then(res => {
+        this.post("/insReconApply/getReviewResultQueryResponse", pam).then(res => {
           if (res.statusCode == 200) {
             // for (var i = 0; i < res.data.length; i++) {
             //   if (res.data[i].certCode) {
@@ -247,6 +240,13 @@
             this.$message.error(res.msg);
           }
         })
+      },
+      products(){
+        			this.post("/credit/productAll").then(res => {
+					if(res.statusCode == 200){
+						this.ProductName = res.data;
+					}
+				});
       },
       // 点击tab每一行数据切换 value 值
       handleCurrentChange(val) {
@@ -283,6 +283,7 @@
     overflow-x: hidden;
     /* 统一导航 --去掉高度*/
     height: 100%;
+    min-width:1366px;
   }
 
   .AntiCaseNum label {

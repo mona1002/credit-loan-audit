@@ -2,7 +2,6 @@
   <!-- 质检任务批量转分派功能 -->
   <!-- <div class="batchApportion"> -->
   <div class="AntiCaseNum IntegratedQuery">
-    <!-- 质检  专员列表 -->
     <myHead></myHead>
     <div class="content">
       <div class="search">

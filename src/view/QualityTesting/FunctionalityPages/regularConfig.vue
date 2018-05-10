@@ -1,7 +1,7 @@
 <template>
   <!-- <div class="AntiCaseNum IntegratedQuery regularConfig"> -->
   <div class="regularConfig">
-    <!-- 质检  功能页面 常规抽单配置功能 -->
+    <!-- 质检  功能页面 常规抽单配置功能===============出了任务分配按钮 -->
     <myHead></myHead>
     <div class="content">
       <div class="title">
@@ -131,7 +131,7 @@
         </ul>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button class="calbtn" @click="canc">取消</el-button>
+        <el-button class="calbtn" @click="calcAddinfo">取消</el-button>
         <el-button class="subtn" type="primary" :loading="loadsitu" @click="SaveAdd">{{adbtn}}</el-button>
       </span>
     </el-dialog>
@@ -257,7 +257,7 @@
         // totalRecord: 0, //总条数
         value: '',
 
-        QTSituation: [{//抽单类型
+        QTSituation: [{ //抽单类型
           value: '选项1',
           label: '黄金糕'
         }, {
@@ -294,7 +294,7 @@
     methods: {
       getListInf() {
         // 质检-常规抽单配置—查询列表        
-        this.get("/insMakeRules/getInfoList").then(res => {
+        this.get("/insMakeRules/getInfoList?" + Math.random()).then(res => {
           if (res.statusCode == 200) {
             this.tableData = res.data.recordList;
           } else {
@@ -323,93 +323,104 @@
       canc() { //弹窗 取消按钮关闭
         console.log('取消任务分配')
         this.Confirm = false;
-        this.add = false;
         this.Edit = false;
       },
-      SaveAdd() { //添加  提交
-        this.loadsitu = true;
-        this.adbtn = '保存中';
-        this.post("/insMakeRules/addInfo", this.addNew).then(res => {
-          if (res.statusCode == 200) {
-            this.$message({
-              message: '提交成功!',
-              type: 'success'
-            });
-          } else {
-            this.$message.error(res.msg);
-          }
-        });
-        this.getListInf();
-      },
-      SaveEdit() { //编辑  提交
-        this.loadsitu = true;
-        this.adbtn = '保存中';
-        this.post("/insMakeRules/updateInfo", {
-          id: this.updateInf.id,
-          drawSheetType: this.updateInf.drawSheetType,
-          recentDays: this.updateInf.recentDays,
-          makeRatio: this.updateInf.makeRatio,
-          passRatio: this.updateInf.passRatio,
-          minPassNum: this.updateInf.minPassNum,
-          refuseRatio: this.updateInf.refuseRatio,
-          minRefuseNum: this.updateInf.minRefuseNum
-        }).then(res => {
-          if (res.statusCode == 200) {
-            this.$message({
-              message: '提交成功!',
-              type: 'success'
-            });
-          } else {
-            this.$message.error(res.msg);
-          }
-        });
-        this.getListInf();
-      },
-      CFsave() { //分配  提交
-        console.log('任务分配')
-        this.loadsitu = true;
-        this.adbtn = '保存中';
-        // 生成 质检任务接口------选中某一条还是全部生成--待确认---------接口未开发
-        this.post("insMakeRules/addInfo", {
-          drawSheetType: 'xx',
-          recentDays: 10,
-          makeRatio: 0.3,
-          passRatio: 0.4,
-          minPassNum: 3,
-          refuseRatio: 0.2,
-          minRefuseNum: 3,
-          creator: xx,
-          createTime: 'xxx'
-        }).then(res => {
-          if (res.statusCode == 200) {
-            this.$message({
-              message: '提交成功!',
-              type: 'success'
-            });
-          } else {
-            this.$message.error(res.msg);
-          }
-        });
-        this.getListInf();
-      },
-      //   handleSizeChange(val) {
-      //     this.params.pageSize = val;
-      //     this.params.pageNum = 1;
-      //     // this.getInf(this.params);
-      //     this.inquire(this.params);
-      //   },
-
-      handleCurrentChange(val) {
-        // this.query.id = val.id;
-        // this.query.matchApplyId = val.applyId;
-        // localStorage.setItem("query", JSON.stringify(this.query));
-        // this.$router.push('/MatchingInfQuery');
-
-        // this.params.pageNum = val;
-        // this.inquire(this.params);
-      },
+      calcAddinfo() {
+        this.add = false;
+        this.addNew.recentDays = '';
+        this.addNew.drawSheetType = '';
+        this.addNew.makeRatio = '';
+        this.addNew.passRatio = '';
+        this.addNew.minPassNum = '';
+        this.addNew.refuseRatio = '';
+        this.addNew.minRefuseNum = '';
+        this.addNew.creator = '';
+        this.addNew.createTime = '';
     },
-    mounted() {
+    SaveAdd() { //添加  提交
+      this.loadsitu = true;
+      this.adbtn = '保存中';
+      this.post("/insMakeRules/addInfo", this.addNew).then(res => {
+        if (res.statusCode == 200) {
+          this.$message({
+            message: '提交成功!',
+            type: 'success'
+          });
+        } else {
+          this.$message.error(res.msg);
+        }
+      });
+      this.getListInf();
+    },
+    SaveEdit() { //编辑  提交
+      this.loadsitu = true;
+      this.adbtn = '保存中';
+      this.post("/insMakeRules/updateInfo", {
+        id: this.updateInf.id,
+        drawSheetType: this.updateInf.drawSheetType,
+        recentDays: this.updateInf.recentDays,
+        makeRatio: this.updateInf.makeRatio,
+        passRatio: this.updateInf.passRatio,
+        minPassNum: this.updateInf.minPassNum,
+        refuseRatio: this.updateInf.refuseRatio,
+        minRefuseNum: this.updateInf.minRefuseNum
+      }).then(res => {
+        if (res.statusCode == 200) {
+          this.$message({
+            message: '提交成功!',
+            type: 'success'
+          });
+        } else {
+          this.$message.error(res.msg);
+        }
+      });
+      this.getListInf();
+    },
+    CFsave() { //分配  提交
+      console.log('任务分配')
+      this.loadsitu = true;
+      this.adbtn = '保存中';
+      // 生成 质检任务接口------选中某一条还是全部生成--待确认---------接口未开发
+      this.post("insMakeRules/addInfo", {
+        drawSheetType: 'xx',
+        recentDays: 10,
+        makeRatio: 0.3,
+        passRatio: 0.4,
+        minPassNum: 3,
+        refuseRatio: 0.2,
+        minRefuseNum: 3,
+        creator: xx,
+        createTime: 'xxx'
+      }).then(res => {
+        if (res.statusCode == 200) {
+          this.$message({
+            message: '提交成功!',
+            type: 'success'
+          });
+        } else {
+          this.$message.error(res.msg);
+        }
+      });
+      this.getListInf();
+    },
+    //   handleSizeChange(val) {
+    //     this.params.pageSize = val;
+    //     this.params.pageNum = 1;
+    //     // this.getInf(this.params);
+    //     this.inquire(this.params);
+    //   },
+
+    handleCurrentChange(val) {
+      // this.query.id = val.id;
+      // this.query.matchApplyId = val.applyId;
+      // localStorage.setItem("query", JSON.stringify(this.query));
+      // this.$router.push('/MatchingInfQuery');
+
+      // this.params.pageNum = val;
+      // this.inquire(this.params);
+    },
+  },
+  mounted() {
       //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
       //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
       //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)

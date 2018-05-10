@@ -1,7 +1,12 @@
 <template>
   <div id="app">
     <!-- <myHead></myHead> -->
-    <router-view class="Abody"></router-view>
+    <router-view class="Abody"></router-view>    
+    <!-- {{ $route.meta.keepAlive}} -->
+    <!-- <keep-alive>
+      <router-view v-if="$route.meta.keepAlive" class="Abody"></router-view>
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive" class="ccc"> </router-view> -->
     <tag class="fottt"></tag>
   </div>
 </template>

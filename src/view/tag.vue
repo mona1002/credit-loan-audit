@@ -183,6 +183,7 @@
         styleLeft: 0,
         activeLeft: 30,
         // styleTop: 0,
+        fggggg: '',
         judge: {
           flag: ''
         },
@@ -194,9 +195,20 @@
       }
     },
     watch: {
-      $route() {
+      $route(to, from) {
+        // console.log(this.fggggg)
+        // if (this.fggggg == 'Noreload') {
+        //   console.log('不刷新')
+        //   to.meta.keepAlive = true;
+        //   from.meta.keepAlive = false;
+        // } else {
+        //   console.log('刷新')
+        //   // to.meta.keepAlive=false;
+        //   from.meta.keepAlive = false;
+        // }
         this.addViewTags()
         this.moveToCurrentTag()
+        // this.fggggg = 'reload';
       },
     },
     mounted() {
@@ -294,8 +306,8 @@
           this.nodeName = "匹配信息-查看";
         } else if (route.path == '/processMoni') { //  流程监控 - 
           //           route.fullPath.indexOf('?') != -1 ? this.processMoniParams= route.fullPath.split('?')[1]: this.processMoniParams;
-         console.log('流程监控')
-         if (route.fullPath == '/processMoni?creditApp00') {
+          console.log('流程监控')
+          if (route.fullPath == '/processMoni?creditApp00') {
             console.log('流程监控aaa')
             this.nodeName = "信审未分配流程";
             this.routeParams = '?creditApp00';
@@ -348,6 +360,9 @@
         // }
         // else if (route.path == '/manager') {
         //   this.nodeName = "质检";
+        // }
+        // else{
+        //   return
         // }
         this.RoutePath = route.path;
         this.$store.dispatch('addVisitedViews', {
@@ -420,12 +435,26 @@
         }
       },
       changeFlag(tg) {
+        // this.$route.meta.keepAlive=true
+        // this.fggggg = 'Noreload';
+        // console.log(this.$route)
+        // console.log(this.$router)
+        // console.log(this.router)
         if (tg.flag != '' || tg.flag != undefined || tg.flag != 'undefined') {
           this.judge.flag = tg.flag;
           localStorage.setItem("judge", JSON.stringify(this.judge));
         }
       },
     },
+    // beforeRouteLeave(to, from, next) {
+    //   console.log(to)
+    //   // if (to.path == "/") {  
+    //   //   to.meta.keepAlive = true;  
+    //   // } else {  
+    //   //   to.meta.keepAlive = false;  
+    //   // }  
+    //   next();
+    // }
   }
 
 </script>

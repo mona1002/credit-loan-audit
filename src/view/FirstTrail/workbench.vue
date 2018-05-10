@@ -216,14 +216,33 @@
         } 
         // else if (val.taskNodeName == "checkApp_apply") { //质检开始- 质检专员列表 
         //  this.judge.flag = "07";
-        //   RoutePath = '/'
-        //   routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=06";
-        //   this.LSworkbench="ReManagerWorkbenchPass";
-        // } else if (val.taskNodeName == "reconsiderApp_commissioner") { // 质检经理 
+        //   RoutePath = '/commissioner'
+        //   this.LSworkbench="QTWorkbenchPass";
+        // } else if (val.taskNodeName == "checkApp_check_manager") { // 质检主管复核--质检主管列表 
         //   this.judge.flag = "08";
-        //   RoutePath = '/'
-        //   routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=06";
-        //   this.LSworkbench="ReManagerWorkbenchPass";
+        //   RoutePath = '/manager'
+        //   this.LSworkbench="QTManagerWorkbenchPass";
+        // }    else if (val.taskNodeName == "checkApp_trial_self") { //初终审本人复查- 初终审本人任务列表 
+        //  this.judge.flag = "09";
+        //   RoutePath = '/SelfTaskList'
+        //   this.LSworkbench="QTTrialSelftWorkbenchPass";
+        // } else if (val.taskNodeName == "checkApp_trial_manager") { // 初终审主管复核异议--初终审主管任务列表 
+        //   this.judge.flag = "10";
+        //   RoutePath = '/ManagerTaskList'
+        //   this.LSworkbench="QTTrialManagerWorkbenchPass";
+        // }
+        // else if (val.taskNodeName == "checkApp_check_recon_manager") { // 质检主管复核异议--复议任务列表（首次） 
+        //   this.judge.flag = "11";
+        //   RoutePath = '/ReManagerTaskList'
+        //   this.LSworkbench="QTReWorkbenchPass";
+        // }else if (val.taskNodeName == "checkApp_regional_manager") { // 区域经理复核--区域经理任务列表 
+        //   this.judge.flag = "12";
+        //   RoutePath = '/ACManagerTaskList'
+        //   this.LSworkbench="QTAreaWorkbenchPass";
+        // }else if (val.taskNodeName == "checkApp_compliance_manager") { // 合规经理复核--合规经理任务列表 
+        //   this.judge.flag = "13";
+        //   RoutePath = '/ACManagerTaskList'
+        //   this.LSworkbench="QTComplianceWorkbenchPass";
         // }
           routeParams = '?taskNodeName=' + val.taskNodeName + "&flag="+this.judge.flag;
         localStorage.setItem(this.LSworkbench, JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass

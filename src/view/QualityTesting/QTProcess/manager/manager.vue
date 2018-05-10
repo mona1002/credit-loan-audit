@@ -46,7 +46,7 @@
       </div>
       <div class="table_wrap">
         <!-- 编辑table -->
-         <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%"  height="100%" border @selection-change="handleSelectionChange">
+         <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%"  height="100%" border @row-click="handleCurrentChange" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="35">
           </el-table-column>
            <el-table-column type="index" align='center' label=序号 width="55">
@@ -200,6 +200,8 @@
       },
       handleSelectionChange(val) {
         this.multipleSelection = val;
+        console.log('ddddcccc')
+        console.log(val)
       },
       //   handleSizeChange(val) {
       //     this.params.pageSize = val;
@@ -207,21 +209,12 @@
       //     // this.getInf(this.params);
       //     this.inquire(this.params);
       //   },
-      gopath() {
-        // this.$store.dispatch('addVisitedViews', {
-        //   name: '综合查询-查看',
-        //   path: '/MatchingInfQuery',
-        //   flag: '',
-        //   params: '',
-        //   StatefullPath: '/MatchingInfQuery',
-        // })
-      },
       handleCurrentChange(val) {
+        console.log('dddd')
         this.query.id = val.id;
         this.query.matchApplyId = val.applyId;
-        localStorage.setItem("query", JSON.stringify(this.query));
-        this.$router.push('/MatchingInfQuery');
-        this.gopath();
+        localStorage.setItem("QTManagerTW", JSON.stringify(this.query));
+        this.$router.push('/MatchingInfQT?checkApp_check_manager');
         // this.params.pageNum = val;
         // this.inquire(this.params);
       },
@@ -260,6 +253,7 @@
       },
     },
     mounted() {
+      // QTManagerWorkbenchPass
       //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
       //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
       //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)

@@ -161,8 +161,8 @@
       handleCurrentChange(val) {
         this.query.id = val.id;
         this.query.matchApplyId = val.applyId;
-        localStorage.setItem("query", JSON.stringify(this.query));
-        this.$router.push('/QTResultCheck');
+        localStorage.setItem("QTSelfTW", JSON.stringify(this.query));
+        this.$router.push('/MatchingInfQT');
         // this.params.pageNum = val;
         // this.inquire(this.params);
       },
@@ -201,6 +201,7 @@
       },
     },
     mounted() {
+      // QTTrialSelftWorkbenchPass
       //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
       //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
       //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)

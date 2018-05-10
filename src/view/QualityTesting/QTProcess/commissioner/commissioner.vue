@@ -149,21 +149,11 @@
       //     // this.getInf(this.params);
       //     this.inquire(this.params);
       //   },
-      gopath() {
-        // this.$store.dispatch('addVisitedViews', {
-        //   name: '综合查询-查看',
-        //   path: '/MatchingInfQuery',
-        //   flag: '',
-        //   params: '',
-        //   StatefullPath: '/MatchingInfQuery',
-        // })
-      },
       handleCurrentChange(val) {
         this.query.id = val.id;
         this.query.matchApplyId = val.applyId;
-        localStorage.setItem("query", JSON.stringify(this.query));
-        this.$router.push('/MatchingInfQuery');
-        this.gopath();
+        localStorage.setItem("QTTaskWait", JSON.stringify(this.query));
+        this.$router.push('/MatchingInfQT?checkApp_apply');
         // this.params.pageNum = val;
         // this.inquire(this.params);
       },
@@ -202,6 +192,7 @@
       },
     },
     mounted() {
+      // QTWorkbenchPass
       //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
       //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
       //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)

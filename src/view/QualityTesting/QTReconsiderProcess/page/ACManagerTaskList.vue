@@ -96,6 +96,7 @@
   export default {
     data() {
       return {
+        taskNodeName:'',
         QTStates: [{ //质检状态
           value: '选项1',
           label: '黄金糕'
@@ -147,8 +148,12 @@
       handleCurrentChange(val) {
         this.query.id = val.id;
         this.query.matchApplyId = val.applyId;
-        localStorage.setItem("query", JSON.stringify(this.query));
-        this.$router.push('/');
+        if(  this.taskNodeName=='checkApp_regional_manager'){ // 区域
+        localStorage.setItem("QTAreaTW", JSON.stringify(this.query));
+        }else if(this.taskNodeName=='checkApp_compliance_manager' ){ // 合规
+        localStorage.setItem("QTComplianceTW", JSON.stringify(this.query));
+        }
+        this.$router.push('/MatchingInfQT');
         // this.params.pageNum = val;
         // this.inquire(this.params);
       },
@@ -189,7 +194,16 @@
         })
       },
     },
+        watch: {
+      '$route' (to, from) {
+        if (to.fullPath !== from.fullPath) {
+          // this.toinner();
+        }
+      }
+    },
     mounted() {
+      // QTAreaWorkbenchPass 区域
+      // QTComplianceWorkbenchPass 合规
       //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
       //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
       //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
