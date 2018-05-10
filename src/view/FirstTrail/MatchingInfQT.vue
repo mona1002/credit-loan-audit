@@ -91,7 +91,7 @@
             <aAntiConclusionPath v-if=" this.tabContent2==9">反欺诈审批结论轨迹 </aAntiConclusionPath>
             <RApprovalConclusion v-if=" this.tabContent2==10">审批结论轨迹</RApprovalConclusion>
             <!-- <regularQT v-if=" this.tabContent2==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC' >质检结论</regularQT> -->
-            <regularQT v-if=" this.tabContent2==11" :propQTconclution='QTC' >质检结论</regularQT>
+            <regularQT v-if=" this.tabContent2==11" :propQTconclution='QTC'>质检结论</regularQT>
           </div>
         </div>
       </div>
@@ -149,8 +149,8 @@
   export default {
     data() {
       return {
-Nodename:'',
-QTConclutionMark:"",
+        Nodename: '',
+        QTConclutionMark: "",
         // /----------------上面为新加的
         watchData: '',
         originLeft: '',
@@ -188,9 +188,9 @@ QTConclutionMark:"",
         comBtn: true,
         alertComBtn: false,
         midShow: true,
-        QTC:{
-applyId:'',
-pageType:'',
+        QTC: {
+          applyId: '',
+          pageType: '',
         }
       }
     },
@@ -234,8 +234,8 @@ pageType:'',
         this.originLeft = this.$refs.right_tab_ul.style.left;
         this.$refs.right_tab_ul.style.left = "0";
         this.$refs.rLeft.style.display = "none";
-        this.watchData =this.$refs.rRight.style.width = "100%";
-         this.$refs.rRight.style.left = '0';
+        this.watchData = this.$refs.rRight.style.width = "100%";
+        this.$refs.rRight.style.left = '0';
         this.isFull = true;
         this.midShow = false;
       },
@@ -244,9 +244,10 @@ pageType:'',
         this.$refs.right_tab_ul.style.left = this.originLeft;
         this.$refs.rLeft.style.display = "block";
         // this.$refs.rRight.style.width = "50%";
-        this.$refs.rRight.style.width=this.$refs.rLeft.style.width=this.$refs.RM.style.left = this.watchData = "calc(50% - 2px)";        
+        this.$refs.rRight.style.width = this.$refs.rLeft.style.width = this.$refs.RM.style.left = this.watchData =
+          "calc(50% - 2px)";
         // this.watchData = this.$refs.rRight.style.width;
-         this.$refs.rRight.style.left = '50%';
+        this.$refs.rRight.style.left = '50%';
         this.isFull = false;
         this.midShow = true;
       },
@@ -291,20 +292,20 @@ pageType:'',
               clickX = e.pageX;
               if (clickX > leftOffset + 10 && clickX < (wrapWidth - 5)) {
                 nextW2 = clickX - leftOffset;
-                labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px'); 
-                labBtn.eq(0).prev().width(clickX - leftOffset-2 + 'px'); 
-                labBtn.eq(0).next().css('left', clickX - leftOffset + 2 + 'px');                
-                labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px'); 
+                labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px');
+                labBtn.eq(0).prev().width(clickX - leftOffset - 2 + 'px');
+                labBtn.eq(0).next().css('left', clickX - leftOffset + 2 + 'px');
+                labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px');
               } else if (clickX < leftOffset + 10 && clickX < (wrapWidth - 5)) {
                 labBtn.eq(0).css('left', '0px');
                 labBtn.eq(0).prev().width('0px');
-                labBtn.eq(0).next().css('left', '2px');                
-                labBtn.eq(0).next().width(wrapWidth - 6 + 'px'); 
+                labBtn.eq(0).next().css('left', '2px');
+                labBtn.eq(0).next().width(wrapWidth - 6 + 'px');
               }
               if (clickX > (wrapWidth - 5)) {
                 labBtn.eq(0).css('left', parseFloat(wrapWidth) - 11 + 'px');
                 labBtn.eq(0).prev().width(wrapWidth - 11 + 'px');
-                labBtn.eq(0).next().css('left', wrapWidth - 9 + 'px');                
+                labBtn.eq(0).next().css('left', wrapWidth - 9 + 'px');
                 labBtn.eq(0).next().width('0px');
 
               }
@@ -316,13 +317,13 @@ pageType:'',
           e.cancelBubble = true;
         });
       },
-      initialInfo(){
-        var Nodename= this.$route.fullPath.split('?')[1]
-      if(Nodename=='checkApp_apply'){
-        // 专员-编辑
-      }else if(Nodename=='checkApp_check_manager'){
-// 主管-编辑
-      }
+      initialInfo() {
+        var Nodename = this.$route.fullPath.split('?')[1]
+        if (Nodename == 'checkApp_apply') {
+          // 专员-编辑
+        } else if (Nodename == 'checkApp_check_manager') {
+          // 主管-编辑
+        }
 
       }
     },
@@ -331,19 +332,22 @@ pageType:'',
       // this.title = "影像资料";
       // console.log(window.location)
       // console.log(this.$route.fullPath)
-this.$route.fullPath.indexOf('?') != -1?this.Nodename=this.$route.fullPath.split('?')[1]:this.Nodename;
-// switch(this.this.Nodename){
-//   case'':
-// }
-if(this.Nodename==''){//专员-编辑
-this. QTC.pageType='commissioner'
-// this. QTC:{
-// applyId:'',
-// pageType:'',
-//         }
-}else if(this.Nodename=='e'){//主管-编辑
+      this.$route.fullPath.indexOf('?') != -1 ? this.Nodename = this.$route.fullPath.split('?')[1] : this.Nodename;
+      // switch(this.this.Nodename){
+      //   case'':
+      // }
+      this.$message.error(JSON.parse(localStorage.getItem('userInf')))
+       console.log(JSON.parse(localStorage.getItem('userInf')))
+      if (this.Nodename == '') { //专员-编辑
+      console.log(JSON.parse(localStorage.getItem('userInf')))
+        this.QTC.pageType = 'commissioner'
+        // this. QTC:{
+        // applyId:'',
+        // pageType:'',
+        //         }
+      } else if (this.Nodename == 'e') { //主管-编辑
 
-}
+      }
 
       // this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
       // this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
@@ -506,7 +510,8 @@ this. QTC.pageType='commissioner'
   .AudioVisual_wrap_compare_left {
     margin-right: 2px;
   } */
- .left,
+
+  .left,
   .right {
     position: absolute;
   }
@@ -514,6 +519,7 @@ this. QTC.pageType='commissioner'
   .right {
     left: 50%;
   }
+
   /* 左屏 */
 
   /* 左侧列表  影像资料等 ul 外包   流 */
