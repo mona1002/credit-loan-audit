@@ -90,7 +90,8 @@
             <!-- <RprocessTrajectory v-if=" this.tabContent2==9">流程轨迹</RprocessTrajectory> -->
             <aAntiConclusionPath v-if=" this.tabContent2==9">反欺诈审批结论轨迹 </aAntiConclusionPath>
             <RApprovalConclusion v-if=" this.tabContent2==10">审批结论轨迹</RApprovalConclusion>
-            <regularQT v-if=" this.tabContent2==11"  :propQTconclution='QTC' >质检结论</regularQT>
+            <!-- <regularQT v-if=" this.tabContent2==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC' >质检结论</regularQT> -->
+            <regularQT v-if=" this.tabContent2==11" :propQTconclution='QTC' >质检结论</regularQT>
           </div>
         </div>
       </div>
@@ -148,6 +149,9 @@
   export default {
     data() {
       return {
+Nodename:'',
+QTConclutionMark:"",
+        // /----------------上面为新加的
         watchData: '',
         originLeft: '',
         customInf: [],
@@ -230,8 +234,8 @@ pageType:'',
         this.originLeft = this.$refs.right_tab_ul.style.left;
         this.$refs.right_tab_ul.style.left = "0";
         this.$refs.rLeft.style.display = "none";
-        this.$refs.rRight.style.width = "100%";
-        this.watchData = this.$refs.rRight.style.width;
+        this.watchData =this.$refs.rRight.style.width = "100%";
+         this.$refs.rRight.style.left = '0';
         this.isFull = true;
         this.midShow = false;
       },
@@ -242,6 +246,7 @@ pageType:'',
         // this.$refs.rRight.style.width = "50%";
         this.$refs.rRight.style.width=this.$refs.rLeft.style.width=this.$refs.RM.style.left = this.watchData = "calc(50% - 2px)";        
         // this.watchData = this.$refs.rRight.style.width;
+         this.$refs.rRight.style.left = '50%';
         this.isFull = false;
         this.midShow = true;
       },
@@ -310,31 +315,48 @@ pageType:'',
           dragging = false;
           e.cancelBubble = true;
         });
+      },
+      initialInfo(){
+        var Nodename= this.$route.fullPath.split('?')[1]
+      if(Nodename=='checkApp_apply'){
+        // 专员-编辑
+      }else if(Nodename=='checkApp_check_manager'){
+// 主管-编辑
+      }
+
       }
     },
     mounted() {
-      this.title = "影像资料";
-      console.log(window.location)
-      console.log(this.$route.fullPath)
-      if (this.$route.fullPath.indexOf('?') != -1) {
+      // this.initialInfo();
+      // this.title = "影像资料";
+      // console.log(window.location)
+      // console.log(this.$route.fullPath)
+this.$route.fullPath.indexOf('?') != -1?this.Nodename=this.$route.fullPath.split('?')[1]:this.Nodename;
+// switch(this.this.Nodename){
+//   case'':
+// }
+if(this.Nodename==''){//专员-编辑
+this. QTC.pageType='commissioner'
+// this. QTC:{
+// applyId:'',
+// pageType:'',
+//         }
+}else if(this.Nodename=='e'){//主管-编辑
 
-      }
+}
 
-
-
-
-      this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
-      this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-        id: this.tastwaitingPass.matchApplyId,
-      }).then(res => {
-        if (res.statusCode == 200) {
-          this.customInf = res.data;
-          this.custName = res.data.accepCusBasicInfo.custName;
-        } else {
-          this.$message.error(res.msg);
-        }
-      });
-      this.MyMove();
+      // this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
+      // this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
+      //   id: this.tastwaitingPass.matchApplyId,
+      // }).then(res => {
+      //   if (res.statusCode == 200) {
+      //     this.customInf = res.data;
+      //     this.custName = res.data.accepCusBasicInfo.custName;
+      //   } else {
+      //     this.$message.error(res.msg);
+      //   }
+      // });
+      // this.MyMove();
     },
     components: {
       myHead,

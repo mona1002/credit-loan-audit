@@ -480,11 +480,11 @@
   /* 左侧列表  影像资料等 ul 外包   流 */
 
   .left .Left_ul {
-    width: 128px;
+    width: 155px;
     background: rgba(31, 45, 61, 0.59);
     box-shadow: 0 5px 20px 0 #475669;
     position: fixed;
-    left: -128px;
+    left: -200px;
     top: 165px;
     z-index: 10;
     padding-top: 24px;
@@ -549,7 +549,7 @@
   }
 
   .Right_tab_ul_wrap ul {
-    width: 1061px;
+    width: 1400px;
     height: 48px;
     position: relative;
     text-align: left;
