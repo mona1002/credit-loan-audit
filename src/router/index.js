@@ -98,7 +98,7 @@ import batchApportion from '../view/QualityTesting/FunctionalityPages/batchAppor
 import reconsiderResult from '../view/QualityTesting/FunctionalityPages/reconsiderResult.vue' //复议结果查询功能
 import ReApply from '../view/QualityTesting/QTReconsiderProcess/page/ReApply.vue' //复议申请页面
 import SelfTaskList from '../view/QualityTesting/QTReconsiderProcess/page/SelfTaskList.vue' //质检复议-初终审本人任务列表
-import QTResultCheck from '../view/QualityTesting/QTReconsiderProcess/page/QTResultCheck.vue' //质检复议-初终审质检结论查看页
+import QTResultCheck from '../view/QualityTesting/QTReconsiderProcess/components/QTResultCheck.vue' //质检复议-初终审质检结论查看页
 import ManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/ManagerTaskList.vue' //质检复议-初终审主管任务列表
 import ReManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/ReManagerTaskList.vue' //质检复议-复议任务列表（首次）
 import ACManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/ACManagerTaskList.vue' //质检复议流程-区域经理页面- 区域经理任务列表 + 质检复议流程-合规经理页面- 合规经理任务列表
@@ -456,7 +456,8 @@ const routes = [{
     component: reconsiderResult
   }, {
     path: "/ReApply",
-    component: ReApply
+    component: ReApply,
+    name:'ReApply'
   }, {
     path: "/SelfTaskList",
     component: SelfTaskList

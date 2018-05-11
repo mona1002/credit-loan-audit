@@ -2830,6 +2830,9 @@ width: 50px;
   /* vertical-align: bottom; */
   color: #666666
 }
+.regularQT .liuchenggj .el-button {
+  color:white;
+}
 .regularQT .el-input{
 width:200px;
 }
@@ -2839,4 +2842,7 @@ vertical-align: top;
 }
 .regularQT .el-collapse-item__wrap{
 overflow: inherit;
+}
+.ReApply .AntiInf .el-collapse-item__wrap{
+/* background: green; */
 }

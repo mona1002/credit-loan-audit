@@ -91,7 +91,10 @@
             <aAntiConclusionPath v-if=" this.tabContent2==9">反欺诈审批结论轨迹 </aAntiConclusionPath>
             <RApprovalConclusion v-if=" this.tabContent2==10">审批结论轨迹</RApprovalConclusion>
             <!-- <regularQT v-if=" this.tabContent2==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC' >质检结论</regularQT> -->
-            <regularQT v-if=" this.tabContent2==11" :propQTconclution='QTC'>质检结论</regularQT>
+            <regularQT v-if=" this.tabContent2==11&&this.QTConclutionMark==''" :propQTconclution='QTC'>质检结论</regularQT>
+            <QTResultCheck v-if=" this.tabContent2==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+
+
           </div>
         </div>
       </div>
@@ -141,6 +144,7 @@
   import aMAntiApplyInf from '../AntiFraud/matchComponent/aMAntiApplyInf.vue' //反欺诈结论
   import aAntiConclusionPath from "../AntiFraud/components/aAntiConclusionPath.vue"; //反欺诈审批结论轨迹
   import regularQT from "../QualityTesting/QTProcess/components/regularQT.vue"; //质检结论
+  import QTResultCheck from "../QualityTesting/QTReconsiderProcess/components/QTResultCheck.vue"; //质检结论-本人结论页
 
   import InternalMatch from "./InternalMatch";
   import borrowerInformation from "./detailComponent/borrowerInformation";
@@ -151,6 +155,8 @@
       return {
         Nodename: '',
         QTConclutionMark: "",
+        TaskList: '',
+        LocalList: '',
         // /----------------上面为新加的
         watchData: '',
         originLeft: '',
@@ -191,6 +197,7 @@
         QTC: {
           applyId: '',
           pageType: '',
+          EditType:'',
         }
       }
     },
@@ -321,10 +328,33 @@
         var Nodename = this.$route.fullPath.split('?')[1]
         if (Nodename == 'checkApp_apply') {
           // 专员-编辑
+          this.QTC.pageType = 'commissioner';
+          this.LocalList = 'QTTaskWait'; //取本地存储
         } else if (Nodename == 'checkApp_check_manager') {
           // 主管-编辑
+           this.QTC.pageType = 'manager';
+          this.LocalList = 'QTManagerTW'; 
+        }else if (Nodename == 'checkApp_trial_self') {  
+          // 本人
+           this.QTC.pageType = 'self';
+          this.LocalList = 'QTSelfTW'; 
+        }else if (Nodename == 'checkApp_trial_manager') {  
+          // 初终审主管
+           this.QTC.pageType = 'Supervisor';
+          this.LocalList = 'QTTrialManagerTW'; 
+        }else if (Nodename == 'checkApp_check_recon_manager') {  
+          // 质检主管复议（首次）
+           this.QTC.pageType = 'QTRe';
+          this.LocalList = 'QTReManagerTW'; 
+        }else if (Nodename == 'checkApp_regional_manager') {  
+          // 区域
+           this.QTC.pageType = 'Area';
+          this.LocalList = 'QTAreaTW'; 
+        }else if (Nodename == 'checkApp_compliance_manager') {  
+          // 合规
+           this.QTC.pageType = 'compliance';
+          this.LocalList = 'QTComplianceTW'; 
         }
-
       }
     },
     mounted() {
@@ -336,19 +366,27 @@
       // switch(this.this.Nodename){
       //   case'':
       // }
-      this.$message.error(JSON.parse(localStorage.getItem('userInf')))
-       console.log(JSON.parse(localStorage.getItem('userInf')))
-      if (this.Nodename == '') { //专员-编辑
-      console.log(JSON.parse(localStorage.getItem('userInf')))
-        this.QTC.pageType = 'commissioner'
-        // this. QTC:{
-        // applyId:'',
-        // pageType:'',
-        //         }
-      } else if (this.Nodename == 'e') { //主管-编辑
+      // if (this.Nodename == '') { //专员-编辑
+      //   this.QTC.pageType = 'commissioner';
+      //   this.LocalList='QTTaskWait';
+      //   // this. QTC:{
+      //   // applyId:'',
+      //   // pageType:'',
+      //   //         }
+      // } else if (this.Nodename == 'e') { //主管-编辑
 
+      // }
+      this.TaskList = JSON.parse(localStorage.getItem(this.LocalList));
+      if(this.TaskList==''){
+        this.EditType='常规质检'
+      }else if(this.TaskList==''){
+        this.EditType='专纵质检'
+      }else if(this.TaskList==''){
+        this.EditType='常规又专纵质检'
+      }else{
+        this.EditType='';
       }
-
+      this.QTC.applyId = this.TaskList.applyId;
       // this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
       // this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
       //   id: this.tastwaitingPass.matchApplyId,
@@ -380,6 +418,7 @@
       CreditApproval,
       aAntiConclusionPath, //反欺诈审批结论轨迹
       regularQT, //  质检结论
+      QTResultCheck,
       //   RprocessTrajectory,
     }
   }
