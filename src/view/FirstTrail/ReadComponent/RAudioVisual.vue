@@ -328,11 +328,11 @@
     },
     mounted() {
       // this.odivMove("RFirstAud");
-      this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) //初审-匹配查看
+      this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) 
       if (this.MatchFlag.MatchFlag == 'internal') {
-        this.localInf = JSON.parse(localStorage.getItem("internalObj")) //初审-匹配查看
+        this.localInf = JSON.parse(localStorage.getItem("internalObj")) //匹配查看
       } else if (this.MatchFlag.MatchFlag == 'Query') {
-        this.localInf = JSON.parse(localStorage.getItem("Query")) //初审-匹配查看
+        this.localInf = JSON.parse(localStorage.getItem("Query")) //综合查询
       }
       this.imgBaseUrl = imgUrl.imgBaseUrl;
       this.odivMove("RFirstAud");

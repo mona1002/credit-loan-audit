@@ -363,7 +363,7 @@
       // console.log(window.location)
       // console.log(this.$route.fullPath)
       this.MyMove();      
-      this.$route.fullPath.indexOf('?') != -1 ? this.Nodename = this.$route.fullPath.split('?')[1] : this.Nodename;
+      // this.$route.fullPath.indexOf('?') != -1 ? this.Nodename = this.$route.fullPath.split('?')[1] : this.Nodename;
       // switch(this.this.Nodename){
       //   case'':
       // }
