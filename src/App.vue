@@ -2,11 +2,14 @@
   <div id="app">
     <!-- <myHead></myHead> -->
     <router-view class="Abody"></router-view>    
-    <!-- {{ $route.meta.keepAlive}} -->
-    <!-- <keep-alive>
-      <router-view v-if="$route.meta.keepAlive" class="Abody"></router-view>
+    <!-- ======测试page================ -->
+    <!-- {{ $route.meta}}
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive" class="Abody"><slot>dafsdf</slot></router-view>
     </keep-alive>
+    <p v-if="!$route.meta.keepAlive" class="ccc"> 无内容 </p>
     <router-view v-if="!$route.meta.keepAlive" class="ccc"> </router-view> -->
+<!-- ================================================================================================== -->
     <tag class="fottt"></tag>
   </div>
 </template>
@@ -47,6 +50,7 @@
     bottom: 1px;
     background: #e0eeff;
     height: 39px;
+    z-index: 2;
   }
 
 </style>

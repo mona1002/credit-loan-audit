@@ -99,7 +99,7 @@
         processTemplateId: '', // 流程模板Id
         taskNodeName: '', // 任务节点名称
         tableData: [],
-        LSworkbench:'',
+        LSworkbench: '',
         currentRow: null,
         workbenchPass: {
           processTemplateId: '',
@@ -179,7 +179,7 @@
           this.judge.flag = "01";
           RoutePath = '/taskInWaitting';
           // routeParams = '?taskNodeName=creditApp_firstTrial&flag=01';
-          this.LSworkbench="workbenchPass";
+          this.LSworkbench = "workbenchPass";
           // localStorage.setItem("workbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
         } else if (val.taskNodeName == "creditApp_finalTrial_one" || val.taskNodeName == "creditApp_finalTrial_two" ||
           val.taskNodeName == "creditApp_finalTrial_three" || val.taskNodeName == "creditApp_finalTrial_four" || val.taskNodeName ==
@@ -187,33 +187,33 @@
           this.judge.flag = "02";
           RoutePath = '/FtaskInWaitting';
           // routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=02";
-            this.LSworkbench="FinalWorkbenchPass";
+          this.LSworkbench = "FinalWorkbenchPass";
           // localStorage.setItem("FinalWorkbenchPass", JSON.stringify(this.workbenchPass));
         } else if (val.taskNodeName == "antiFraudApp_commissioner") { //反欺诈专员 
           this.judge.flag = "03";
           RoutePath = '/AntiFraud34';
           // routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=03";
-            this.LSworkbench="AntiWorkbenchPass";
+          this.LSworkbench = "AntiWorkbenchPass";
           // localStorage.setItem("AntiWorkbenchPass", JSON.stringify(this.workbenchPass));
         } else if (val.taskNodeName == "antiFraudApp_manager") { // 反欺诈主管 
           this.judge.flag = "04";
           RoutePath = '/AntiFraud34';
           // routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=04";
-          this.LSworkbench="AntiManagerWorkbenchPass";
+          this.LSworkbench = "AntiManagerWorkbenchPass";
           // localStorage.setItem("AntiManagerWorkbenchPass", JSON.stringify(this.workbenchPass));
         } else if (val.taskNodeName == "reconsiderApp_commissioner") { // 复议专员 
           this.judge.flag = "05";
           RoutePath = '/reconsiderList';
           // routeParams = '?taskNodeName=reconsiderApp_commissioner&flag=05'
-          this.LSworkbench="ReWorkbenchPass";
+          this.LSworkbench = "ReWorkbenchPass";
           // localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass));
         } else if (val.taskNodeName == "reconsiderApp_manager") { // 复议经理
           this.judge.flag = "06";
           RoutePath = '/reconsiderList'
           // routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=06";
-          this.LSworkbench="ReManagerWorkbenchPass";
+          this.LSworkbench = "ReManagerWorkbenchPass";
           // localStorage.setItem("ReManagerWorkbenchPass", JSON.stringify(this.workbenchPass));
-        } 
+        }
         // else if (val.taskNodeName == "checkApp_apply") { //质检开始- 质检专员列表 
         //  this.judge.flag = "07";
         //   RoutePath = '/commissioner'
@@ -244,9 +244,9 @@
         //   RoutePath = '/ACManagerTaskList'
         //   this.LSworkbench="QTComplianceWorkbenchPass";
         // }
-          routeParams = '?taskNodeName=' + val.taskNodeName + "&flag="+this.judge.flag;
+        routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=" + this.judge.flag;
         localStorage.setItem(this.LSworkbench, JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
-         localStorage.setItem("judge", JSON.stringify(this.judge));
+        localStorage.setItem("judge", JSON.stringify(this.judge));
         this.$router.push({
           path: RoutePath + routeParams,
         });
@@ -259,6 +259,11 @@
         // })
       },
     },
+    //        beforeRouteLeave(to, from, next) {  
+    //     from.meta.keepAlive = ''; 
+    //       // this.$route.meta.keepAlive='' 
+    //     next();  
+    // }  ,
     computed: {
       taskCount() {
         this.TaskCount = null;

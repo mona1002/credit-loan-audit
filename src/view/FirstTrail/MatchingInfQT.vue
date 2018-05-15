@@ -299,7 +299,7 @@
               clickX = e.pageX;
               if (clickX > leftOffset + 10 && clickX < (wrapWidth - 5)) {
                 nextW2 = clickX - leftOffset;
-                labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px');
+                labBtn.eq(0).css('left', clickX - leftOffset + 'px');
                 labBtn.eq(0).prev().width(clickX - leftOffset - 2 + 'px');
                 labBtn.eq(0).next().css('left', clickX - leftOffset + 2 + 'px');
                 labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px');
@@ -362,6 +362,7 @@
       // this.title = "影像资料";
       // console.log(window.location)
       // console.log(this.$route.fullPath)
+      this.MyMove();      
       this.$route.fullPath.indexOf('?') != -1 ? this.Nodename = this.$route.fullPath.split('?')[1] : this.Nodename;
       // switch(this.this.Nodename){
       //   case'':
@@ -398,7 +399,6 @@
       //     this.$message.error(res.msg);
       //   }
       // });
-      // this.MyMove();
     },
     components: {
       myHead,

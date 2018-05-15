@@ -182,7 +182,8 @@ const routes = [{
     },
     meta: {
       pageTitle: '初审详情',
-      keepAlive: false
+      keepAlive: true,
+      refresh: false,
     }
     // name:SplitScreen
   },
@@ -405,7 +406,7 @@ const routes = [{
     },
     meta: {
       pageTitle: '综合查询',
-      keepAlive: false
+      keepAlive: true
     }
     // name:historicalTask
   },
@@ -457,7 +458,7 @@ const routes = [{
   }, {
     path: "/ReApply",
     component: ReApply,
-    name:'ReApply'
+    name: 'ReApply'
   }, {
     path: "/SelfTaskList",
     component: SelfTaskList

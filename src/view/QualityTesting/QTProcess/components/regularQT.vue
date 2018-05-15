@@ -1511,9 +1511,10 @@
         this.$router.push({
           name: 'AntiApplyEditf',
           params: {
-            // id: this.applyId,
-            // flag: 'fuyi',
-            // busiState:'20'
+            id: this.applyId,
+            flag: 'zhijian',
+            // busiState:'20',
+            wayOf:'02'//质检
           }
         });
       },

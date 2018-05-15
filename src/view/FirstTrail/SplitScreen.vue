@@ -186,6 +186,7 @@
           VA: 'bbr',
           NUM: 10
         },
+        destroyInf: ''
 
       }
     },
@@ -230,8 +231,8 @@
         // this.originLeft = this.$refs.right_tab_ul.style.left;
         this.$refs.right_tab_ul.style.left = "0";
         this.$refs.rLeft.style.display = "none";
-       this.watchData =  this.$refs.rRight.style.width = "100%";
-       this.$refs.rRight.style.left='0';
+        this.watchData = this.$refs.rRight.style.width = "100%";
+        this.$refs.rRight.style.left = '0';
         // this.watchData = this.$refs.rRight.style.width;
         this.isFull = true;
         this.midShow = false;
@@ -240,8 +241,9 @@
         this.showHalfBtn = false;
         // this.$refs.right_tab_ul.style.left = this.originLeft;
         this.$refs.rLeft.style.display = "block";
-        this.watchData = this.$refs.rRight.style.width= this.$refs.RM.style.left =  this.$refs.rLeft.style.width = "calc(50% - 2px)";
-         this.$refs.rRight.style.left='50%';   
+        this.watchData = this.$refs.rRight.style.width = this.$refs.RM.style.left = this.$refs.rLeft.style.width =
+          "calc(50% - 2px)";
+        this.$refs.rRight.style.left = '50%';
         // this.watchData = this.$refs.rRight.style.width;
         this.isFull = false;
         this.midShow = true;
@@ -374,21 +376,50 @@
         //   e.cancelBubble = true;
         // });
       },
+      mountedInf() {
+        this.title = "影像资料";
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
+        this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
+          id: this.tastwaitingPass.applyId,
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.custName = res.data.accepCusBasicInfo.custName;
+            this.customInf = res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      }
     },
+    //     beforeDestroy(){
+    // if(){
+    //   this.destroyInf
+    // }
+    //     },
+    //      activated() {
+    //    if(this.$route.meta.refresh){
+    //      this.mountedInf();
+    //    }
+    //   //  // 恢复成默认的false，避免isBack一直是true，导致下次无法获取数据
+    //   //  this.$route.meta.isBack=false
+    //   //  // 恢复成默认的false，避免isBack一直是true，导致每次都获取新数据
+    //   //  this.isFirstEnter=false;
+    //  },
     mounted() {
-      this.title = "影像资料";
       this.MyMove();
-      this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
-      this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-        id: this.tastwaitingPass.applyId,
-      }).then(res => {
-        if (res.statusCode == 200) {
-          this.custName = res.data.accepCusBasicInfo.custName;
-          this.customInf = res.data;
-        } else {
-          this.$message.error(res.msg);
-        }
-      });
+      this.mountedInf();
+      // this.title = "影像资料";
+      // this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
+      // this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
+      //   id: this.tastwaitingPass.applyId,
+      // }).then(res => {
+      //   if (res.statusCode == 200) {
+      //     this.custName = res.data.accepCusBasicInfo.custName;
+      //     this.customInf = res.data;
+      //   } else {
+      //     this.$message.error(res.msg);
+      //   }
+      // });
     },
     components: {
       myHead,

@@ -438,6 +438,7 @@
         // this.$route.meta.keepAlive=true
         // this.fggggg = 'Noreload';
         // console.log(this.$route)
+        this.$route.meta.refresh = false;
         // console.log(this.$router)
         // console.log(this.router)
         if (tg.flag != '' || tg.flag != undefined || tg.flag != 'undefined') {

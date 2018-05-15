@@ -160,7 +160,9 @@
         taskName: '',
         routeId: '',
         routeFlag: '',
-        routeBusiState: ''
+        routewayOf:"",
+        routeBusiState: '',
+        wayOf:''
       }
     },
     mounted() {
@@ -247,10 +249,11 @@ console.log(  this.antiFlag  )
        add   添加 
        */
       this.flag = this.$route.params.flag || this.routeFlag;
+      this.wayOf= this.$route.params.wayOf || this.routewayOf;
       // console.log(this.flag);
       // 拿到状态
       this.busiState = this.$route.params.busiState || this.routeBusiState;
-      if (this.flag == 'start' || this.flag == 'fuyi') {
+      if (this.flag == 'start' || this.flag == 'fuyi' ||this.flag == 'zhijian' ) {
         this.getFraudApplyInfo();
       }
       //  else if (this.flag == 'edit' || this.flag == 'add') {
@@ -411,6 +414,7 @@ console.log(  this.antiFlag  )
                     certCode: this.certCode, // 证件号码
                     proName: this.proName, // 产品名称
                     busiState: this.busiState, // 状态
+                    wayOf:this.wayOf//（00：审批，01：复议，02：质检）
                   },
                   currentTemplateId: this.currentTemplateId, // 流程模版id
                 })
