@@ -201,8 +201,8 @@
         }
       },
       rightMovingBtn() {
-        if (parseFloat(this.$refs.right_tab_ul.style.left) <= -500) {
-          this.$refs.right_tab_ul.style.left = "-500px";
+        if (parseFloat(this.$refs.right_tab_ul.style.left) <= -650) {
+          this.$refs.right_tab_ul.style.left = "-650px";
         } else {
           this.$refs.right_tab_ul.style.left = parseFloat(this.$refs.right_tab_ul.style.left) - 50 + "px";
         }

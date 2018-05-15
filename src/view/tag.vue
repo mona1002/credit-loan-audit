@@ -449,7 +449,7 @@
         // console.log(this.router)
         if (tg.flag != '' || tg.flag != undefined || tg.flag != 'undefined') {
           this.judge.flag = tg.flag;
-          this.MatchFlag.MatchFlag=tag.MatchFlag;
+          this.MatchFlag.MatchFlag=tg.MatchFlag;
           localStorage.setItem("judge", JSON.stringify(this.judge));
           localStorage.setItem("MatchFlag", JSON.stringify(this.MatchFlag));
         }
