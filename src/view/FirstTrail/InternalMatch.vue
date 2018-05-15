@@ -10,7 +10,7 @@
         <span class="head-tab">{{mobileTab}}</span>
       </div>
       <!-- 移动电话 -->
-      <el-table :data="mobileData.recordList" height="250" border style="width: 100%" @row-click="itemDbclickMobiel" highlight-current-row
+      <el-table :data="mobileData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickMobiel" highlight-current-row
         v-loading="mobileLoading">
         <el-table-column prop="targetCustName" label="命中号码姓名" min-width="150">
         </el-table-column>
@@ -46,7 +46,7 @@
         <span class="headFont">固定电话类(家电、单电)</span>
         <span class="head-tab">{{fixTelTab}}</span>
       </div>
-      <el-table :data="fixTelData.recordList" height="250" border style="width: 100%" @row-click="itemDbclickFixTel" highlight-current-row
+      <el-table :data="fixTelData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickFixTel" highlight-current-row
         v-loading="fixTelLoading">
         <el-table-column prop="targetCustName" label="命中号码姓名" min-width="150">
         </el-table-column>
@@ -82,7 +82,7 @@
         <span class="head-tab">{{workName}}</span>
       </div>
       <!-- 单位名称 -->
-      <el-table :data="workData.recordList" height="250" border style="width: 100%" @row-click="itemDbclickCompany" highlight-current-row
+      <el-table :data="workData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickCompany" highlight-current-row
         v-loading="companyLoading">
         <el-table-column prop="targetCustName" label="命中号码姓名" min-width="150">
         </el-table-column>
