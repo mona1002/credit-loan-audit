@@ -1205,28 +1205,37 @@
       },
       addQTResult: function () {
         // event.stopPropagation();
+        console.log(this.insConclusion.length)
         if (this.insConclusion.length == 0) {
           this.insConclusion.push({
-            "applyId": this.applyId, // 质检结果
-            "bankName": "", // 差错类型
-            "cardUseDate": "", // 差错描述
-            "cardAmt": "", // 备注（非必填）
-            "usedAmt": "", // 操作人员
-            "repayDay": "", // 质检日期
+            "applyId": this.propQTconclution.applyId, // 申请单id
+            "insMemberCode": "", // 质检员code
+            "checkResult": "", // 质检结果
+            "checkResult": "", // 质检结果
+            "checkResult": "", // 质检结果
+            
+            "checkResult": "", // 质检结果
+            "errorType": "", // 差错类型
+            "errorDescribe": "", // 差错描述
+            "remark": "", // 备注（非必填）
+            "insMemberName": "", // 操作人员-质检员name
+            "insDate": "", // 质检日期
           });
         } else {
+          console.log(this.insConclusion)
+          console.log(this.insConclusion[this.insConclusion.length - 1])
           // if(this.cardDetList[this.cardDetList.length-1].bankName=='' || this.cardDetList[this.cardDetList.length-1].accountStatus==''){
-          if (this.insConclusion[this.insConclusion.length - 1].bankName == '') { //质检结果不能为空
+          if (this.insConclusion[this.insConclusion.length - 1].checkResult == '') { //质检结果不能为空
             this.$message.error('质检结果不能为空！');
             return
           } else {
             this.insConclusion.push({
-              "applyId": this.applyId, // 质检结果
-              "bankName": "", // 差错类型
-              "cardUseDate": "", // 差错描述
-              "cardAmt": "", // 备注（非必填）
-              "usedAmt": "", // 操作人员
-              "repayDay": "", // 质检日期
+            "checkResult": "", // 质检结果
+            "errorType": "", // 差错类型
+            "errorDescribe": "", // 差错描述
+            "remark": "", // 备注（非必填）
+            "insMemberName": "", // 操作人员-质检员name
+            "insDate": "", // 质检日期
             });
           }
         };
@@ -1511,7 +1520,7 @@
         this.$router.push({
           name: 'AntiApplyEditf',
           params: {
-            id: this.applyId,
+            id: this.propQTconclution.applyId,
             flag: 'zhijian',
             // busiState:'20',
             wayOf:'02'//质检
@@ -1537,8 +1546,8 @@
       RiskControl() {
         // console.log('大数据')
         this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
-          // applyId: this.applyId
-          applyId: '申请单id'
+          applyId: this.propQTconclution.applyId
+          // applyId: '申请单id'
         }).then(res => {
           //console.log(res.data);
           if (res.obj == null) {

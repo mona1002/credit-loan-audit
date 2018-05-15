@@ -31,7 +31,7 @@
               <td>{{fraudApplyInfo.operOrgName}}</td>
               <td>{{fraudApplyInfo.salePersonName}}</td>
               <td>{{fraudApplyInfo.applyPersonName}}</td>
-              <td>{{fraudApplyInfo.appOrgName}}</td>
+              <td>{{fraudApplyInfo.appSuborgName}}</td>
             </tr>
           </tbody>
         </table>
