@@ -750,7 +750,7 @@
     <div class="reResult" v-if='reResultShow'>
       <label style="font-size:14px;">复核结论：</label>
       <div>
-        <el-input type='textarea' resize='none' :rows="2"></el-input>
+        <el-input type='textarea' resize='none' v-model="reviewConclusion" :rows="2"></el-input>
       </div>
     </div>
     <!-- 底部按钮 -->
@@ -790,7 +790,7 @@
         <label class="labelTxt">流程轨迹</label>
       </el-button>
       <el-button @click="RiskControl" v-if="RiskControlBtn">
-      <!-- <el-button @click="RiskControl"> -->
+        <!-- <el-button @click="RiskControl"> -->
         <img src="../../../../../static/images/bigdata.png">
         <label class="labelTxt">大数据风控</label>
       </el-button>
@@ -931,6 +931,11 @@
   export default {
     data() {
       return {
+        userInf: '',
+        SaveInfParams: '',
+        systermTime: Number,
+
+        reviewConclusion: '', //复核结论
         isForm: '',
         radio: '1',
         baseInfo: '', //基本信息
@@ -1127,10 +1132,20 @@
         AntiBtn: true, //发起反欺诈
         RiskControlBtn: true, //按钮 - 大数据风控
         SocialSecurityBtn: true, //按钮 - 社保公积金
+
       }
     },
     props: ['propQTconclution', 'propApplyId', 'pageType'],
     methods: {
+      getSystermTime() { // 获取系统时间-质检结论-质检日期取值---基础接口
+        this.get('system/getSystemDate?' + Math.random()).then(res => {
+          if (res.statusCode == 200) {
+            this.systermTime = new Date(res.data);
+            this.systermTime = this.systermTime.getFullYear() + '-' + this.systermTime.getMonth() + 1 + '-' + this.systermTime
+              .getDate()
+          }
+        })
+      },
       show() {
         console.log('furyi ')
         this.ReconsiderShow = true;
@@ -1205,21 +1220,23 @@
       },
       addQTResult: function () {
         // event.stopPropagation();
+        // 判断初终审标识-------------未填写------------初终检标志根据角色更改
+        this.propQTconclution.pageType == 'commissioner' //专员
+        // -----------------------------
         console.log(this.insConclusion.length)
         if (this.insConclusion.length == 0) {
           this.insConclusion.push({
             "applyId": this.propQTconclution.applyId, // 申请单id
-            "insMemberCode": "", // 质检员code
-            "checkResult": "", // 质检结果
-            "checkResult": "", // 质检结果
-            "checkResult": "", // 质检结果
-            
             "checkResult": "", // 质检结果
             "errorType": "", // 差错类型
             "errorDescribe": "", // 差错描述
             "remark": "", // 备注（非必填）
-            "insMemberName": "", // 操作人员-质检员name
-            "insDate": "", // 质检日期
+            "insMemberCode": this.userInf.userCode, // 操作人员-质检code            
+            "insMemberName": this.userInf.userName, // 操作人员-质检员name
+            "insDate": this.systermTime, // 质检日期
+            "checkType": "", // 初终检标志
+            "instaskType": "", //任务类型（00:常规质检，01:专项质检）
+            // "checkResult": "", // 任务类型（00:常规质检，01:专项质检）
           });
         } else {
           console.log(this.insConclusion)
@@ -1230,12 +1247,12 @@
             return
           } else {
             this.insConclusion.push({
-            "checkResult": "", // 质检结果
-            "errorType": "", // 差错类型
-            "errorDescribe": "", // 差错描述
-            "remark": "", // 备注（非必填）
-            "insMemberName": "", // 操作人员-质检员name
-            "insDate": "", // 质检日期
+              "checkResult": "", // 质检结果
+              "errorType": "", // 差错类型
+              "errorDescribe": "", // 差错描述
+              "remark": "", // 备注（非必填）
+              "insMemberName": "", // 操作人员-质检员name
+              "insDate": "", // 质检日期
             });
           }
         };
@@ -1487,16 +1504,33 @@
       // ---------------------------------按钮事件----------------
       // 保存 或 提交
       SaveInf() {
+        if (this.propQTconclution.EditType == '常规又专纵质检') {
+          this.SaveInfParams = {
+            reviewConclusion: this.reviewConclusion
+          }
+        } else {
+          this.SaveInfParams = {
+            taskId: "",
+            applyBaseInfo: {}, //基础信息
+            insConclusion: {}, //质检结论页-质检结论
+            insRegularInfo: {}, //常规质检
+            insTelCustInfo: {}, //电话征信-客户本人-电话拨打核实
+            insTelVerifyList: [], //:质检-电话征信-拨打核实
+            insWechatAlipayList: [], //电话征信-微信/支付宝核实
+          }
+        }
         // this.insTelCustInfo[0]// 入参客户本人-电话拨打核实，转换为obj（原为array）
-        this.post("/insConclusion/addOrSubmit", {
-          taskId: "",
-          applyBaseInfo: {}, //基础信息
-          insConclusion: {}, //质检结论页-质检结论
-          insRegularInfo: {}, //常规质检
-          insTelCustInfo: {}, //电话征信-客户本人-电话拨打核实
-          insTelVerifyList: [], //:质检-电话征信-拨打核实
-          insWechatAlipayList: [], //电话征信-微信/支付宝核实
-        }).then(res => {
+        this.post("/insConclusion/addOrSubmit", this.SaveInfParams
+          //  {
+          //   taskId: "",
+          //   applyBaseInfo: {}, //基础信息
+          //   insConclusion: {}, //质检结论页-质检结论
+          //   insRegularInfo: {}, //常规质检
+          //   insTelCustInfo: {}, //电话征信-客户本人-电话拨打核实
+          //   insTelVerifyList: [], //:质检-电话征信-拨打核实
+          //   insWechatAlipayList: [], //电话征信-微信/支付宝核实
+          // }
+        ).then(res => {
           if (res.statusCode == 200) {
             this.referPort()
           } else {
@@ -1523,7 +1557,7 @@
             id: this.propQTconclution.applyId,
             flag: 'zhijian',
             // busiState:'20',
-            wayOf:'02'//质检
+            wayOf: '02' //质检
           }
         });
       },
@@ -1582,14 +1616,14 @@
           });
         }
       },
-      areaAndComplianceBtn(){
-         this.onlyCheck();
-          this.ReApply = true; //初终审复议申请信息
-          this.SuperVisor = true; //审批主管第一次复议申请信息
-          this.FirstReconsider = true; //第一次复议审批信息
-          this.SuperVisorSecond = true; // 审批主管第二次复议申请信息
-          this.saveBtn=false;//保存
-           this.SocialSecurityBtn = false; //社保公积金          
+      areaAndComplianceBtn() {
+        this.onlyCheck();
+        this.ReApply = true; //初终审复议申请信息
+        this.SuperVisor = true; //审批主管第一次复议申请信息
+        this.FirstReconsider = true; //第一次复议审批信息
+        this.SuperVisorSecond = true; // 审批主管第二次复议申请信息
+        this.saveBtn = false; //保存
+        this.SocialSecurityBtn = false; //社保公积金          
       },
       onlyCheck() { //   查看页面，-编辑常规又质检
         this.material = true; //资料核实
@@ -1598,18 +1632,18 @@
         this.PhoneCredit = true; //电话征信
         this.QTConclution = true; //质检结论
       },
-      Special(){//this.propQTconclution.EditType == '专纵质检'
-  this.AprovalInfolShow = false; //审批信息        
-          this.MaterialShow = false; //资料核实
-          this.InfoSearchShow = false; //三方信息查询
-          this.MatchingShow = false; //内部匹配核实
-          this.submitBtn = false; //提交
+      Special() { //this.propQTconclution.EditType == '专纵质检'
+        this.AprovalInfolShow = false; //审批信息        
+        this.MaterialShow = false; //资料核实
+        this.InfoSearchShow = false; //三方信息查询
+        this.MatchingShow = false; //内部匹配核实
+        this.submitBtn = false; //提交
       },
-      regularAndSpecial(){//this.propQTconclution.EditType == '常规又专纵质检'
-  this.reResultShow = true; //复核结论-div 
-          this.AntiBtn = false; //发起反欺诈
-          this.SocialSecurityBtn = false; //社保公积金
-               this.onlyCheck();
+      regularAndSpecial() { //this.propQTconclution.EditType == '常规又专纵质检'
+        this.reResultShow = true; //复核结论-div 
+        this.AntiBtn = false; //发起反欺诈
+        this.SocialSecurityBtn = false; //社保公积金
+        this.onlyCheck();
       },
       showdiffer() {
         // ---------------------------------------
@@ -1637,17 +1671,17 @@
           // } else 
           if (this.propQTconclution.EditType == '专纵质检') {
             this.Special();
-          //   this.AprovalInfolShow = false; //审批信息        
-          //   this.MaterialShow = false; //资料核实
-          //   this.InfoSearchShow = false; //三方信息查询
-          //   this.MatchingShow = false; //内部匹配核实
-          //   this.submitBtn=false;//提交
+            //   this.AprovalInfolShow = false; //审批信息        
+            //   this.MaterialShow = false; //资料核实
+            //   this.InfoSearchShow = false; //三方信息查询
+            //   this.MatchingShow = false; //内部匹配核实
+            //   this.submitBtn=false;//提交
           } else if (this.propQTconclution.EditType == '常规又专纵质检') {
             this.regularAndSpecial();
-          //   this.reResultShow = true; //复核结论-div 
-          //   this.AntiBtn=false;//发起反欺诈
-          //   this.SocialSecurityBtn=false;//社保公积金
-          //   // reResultShow
+            //   this.reResultShow = true; //复核结论-div 
+            //   this.AntiBtn=false;//发起反欺诈
+            //   this.SocialSecurityBtn=false;//社保公积金
+            //   // reResultShow
           }
         } else if (this.propQTconclution.pageType == 'manager') { //主管-编辑 √
           if (this.propQTconclution.EditType == '常规质检') {
@@ -1671,11 +1705,11 @@
         } else if (this.propQTconclution.pageType == 'ReApply') { //初终审主管  √
           this.onlyCheck();
           this.ReApply = true; //初终审复议申请信息
-           this.NoReconsiderBtn=true;//无需复议
-            this.ReconsiderBtn=true;//发起复议
-          this.saveBtn=false;//保存            
-            this.submitBtn = false; //提交
-                  this.SocialSecurityBtn = false; //社保公积金
+          this.NoReconsiderBtn = true; //无需复议
+          this.ReconsiderBtn = true; //发起复议
+          this.saveBtn = false; //保存            
+          this.submitBtn = false; //提交
+          this.SocialSecurityBtn = false; //社保公积金
           if (this.propQTconclution.EditType == 'fristTime') {
             //首次复议
             // this.ReApply=true;//初终审复议申请信息
@@ -1686,9 +1720,9 @@
           this.onlyCheck();
           this.ReApply = true; //初终审复议申请信息
           this.SuperVisor = true; //审批主管第一次复议申请信息
-            this.submitBtn = false; //提交
-                  this.SocialSecurityBtn = false; //社保公积金
-          this.ReAprovalBtn=true;//复议审批
+          this.submitBtn = false; //提交
+          this.SocialSecurityBtn = false; //社保公积金
+          this.ReAprovalBtn = true; //复议审批
         } else if (this.propQTconclution.pageType == 'Area') { //区域 √
           // this.onlyCheck();
           // this.ReApply = true; //初终审复议申请信息
@@ -1696,10 +1730,10 @@
           // this.FirstReconsider = true; //第一次复议审批信息
           // this.SuperVisorSecond = true; // 审批主管第二次复议申请信息
           // this.saveBtn=false;//保存
-                 //  this.SocialSecurityBtn = false; //社保公积金
+          //  this.SocialSecurityBtn = false; //社保公积金
           this.areaAndComplianceBtn();
-          this.RiskControlBtn=false;//大数据风控
-           this.NoReconsiderBtn=true;//无需复议
+          this.RiskControlBtn = false; //大数据风控
+          this.NoReconsiderBtn = true; //无需复议
         } else if (this.propQTconclution.pageType == 'compliance') { //合规 √
           // this.onlyCheck();
           // this.ReApply = true; //初终审复议申请信息
@@ -1707,13 +1741,16 @@
           // this.FirstReconsider = true; //第一次复议审批信息
           // this.SuperVisorSecond = true; // 审批主管第二次复议申请信息
           // this.saveBtn=false;//保存
-            this.submitBtn = false; //提交
-            this.AprovalBtn=true;//审批
-        } 
+          this.submitBtn = false; //提交
+          this.AprovalBtn = true; //审批
+        }
       },
 
     },
     mounted() {
+      this.getSystermTime();
+      this.userInf = JSON.parse(localStorage.getItem('userInf'));
+      console.log(this.userInf)
       // console.log(this.propQTconclution)
       // this.processInstanceId = JSON.parse(localStorage.getItem('未存储，未确定，待更改-RtaskInWaitting')).processInstanceId;
       // 质检结论枚举
@@ -1823,17 +1860,22 @@
 
   .tab1Default {
     float: left;
-    width: 100px;
-    border-right: 1px solid;
+    color:#183a56;
+    padding:5px 20px;
+    border-radius:4px;
+    /* background:red; */
+    /* width: 100px; */
+    /* border-right: 1px solid; */
   }
 
   .tab1Default:hover {
     cursor: pointer;
+    opacity: .6;
   }
 
   .tabAct {
-    color: white;
-    background: #0077ff
+        color:#1387e6;
+    background:#e7e7e7;
   }
 
   .P_title {

@@ -140,6 +140,10 @@
 		components: {
 	      myHead
 			},
+			beforeRouteLeave(to, from, next) {
+				to.meta.refresh=true;
+				next();
+			},
 		// 	      beforeRouteEnter(to, from, next) {
 		// 		console.log('addddddzdzdzd')
 		// 		console.log(222222,from)
@@ -168,7 +172,7 @@
 			// 登录 单独存  userCode  orgCode 
 			 this.queryParam.userCode=JSON.parse(localStorage.getItem('userInf')).userCode;
 				 this.queryParam.orgCode=JSON.parse(localStorage.getItem('userInf')).orgCode;
-			console.log(this.processTemplateId+'...'+this.taskNodeName+'...'+this.taskStatus+'...'+this.userCode+'...'+this.orgCode);
+			// console.log(this.processTemplateId+'...'+this.taskNodeName+'...'+this.taskStatus+'...'+this.userCode+'...'+this.orgCode);
 			this.request(this.queryParam);	
 			localStorage.removeItem("house");
 			localStorage.removeItem("car");
@@ -194,7 +198,7 @@
 // this.str=this.$data;
 // 		},
 		    request(param){
-		    	console.log(this.queryParam);
+		    	// console.log(this.queryParam);
 		    	this.post('/workFlowTaskQuery/getTaskToDoList',
 		    		param
 	          ).then(res => {
@@ -251,7 +255,7 @@
 		    },
 		    //跳转到详情页
 			goDetail(row, event, column) {
-				console.log(row);
+				// console.log(row);
 				//  this.$route.meta.keepAlive=false;
 					// this.$router.push({path:'/SplitScreen',query:row});
 					this.$router.push({path:'/SplitScreen'});

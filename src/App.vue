@@ -6,8 +6,8 @@
     <!-- {{ $route.meta}}
     <keep-alive>
       <router-view v-if="$route.meta.keepAlive" class="Abody"><slot>dafsdf</slot></router-view>
-    </keep-alive>
-    <p v-if="!$route.meta.keepAlive" class="ccc"> 无内容 </p>
+    </keep-alive> 
+     <p v-if="!$route.meta.keepAlive" class="ccc"> 无内容 </p>
     <router-view v-if="!$route.meta.keepAlive" class="ccc"> </router-view> -->
 <!-- ================================================================================================== -->
     <tag class="fottt"></tag>
