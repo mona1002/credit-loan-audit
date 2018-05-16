@@ -159,7 +159,7 @@
         currentRow: null,
         custName: '',
         custmatchApplySubNo: '',
-        MatchFlag:''
+        MatchFlag: ''
       }
     },
     props: ['msg', 'comBtn'],
@@ -253,6 +253,7 @@
       },
       smallPic(ev, ind) {
         this.smallPicInd = ind;
+        this.SmallPicShow = false;
         this.defaultBigPicCss();
       },
       getImg(ind) {
