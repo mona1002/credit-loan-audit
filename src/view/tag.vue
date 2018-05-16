@@ -451,9 +451,9 @@
         console.log( tg)
         if (tg.flag != '' || tg.flag != undefined || tg.flag != 'undefined') {
           this.judge.flag = tg.flag;
-          this.MatchFlag.MatchFlag=tg.MatchFlag;
+          // this.MatchFlag.MatchFlag=tg.MatchFlag;
           localStorage.setItem("judge", JSON.stringify(this.judge));
-          localStorage.setItem("MatchFlag", JSON.stringify(this.MatchFlag));
+          // localStorage.setItem("MatchFlag", JSON.stringify(this.MatchFlag));
         }
       },
     },
