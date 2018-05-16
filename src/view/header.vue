@@ -99,6 +99,7 @@
           })
         },
         backLoin() {
+          console.log(UserURL)
           window.location.href = UserURL + "#/workbench";
           localStorage.clear();
         },
