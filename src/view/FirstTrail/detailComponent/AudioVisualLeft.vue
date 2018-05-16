@@ -65,6 +65,7 @@
       <img src="../../../../static/images/net.png" @click="larger">
       <img src="../../../../static/images/daf.png" @click="AclockWise ">
       <img src="../../../../static/images/dasf.png" @click="clockWise ">
+      <span>当前第{{smallPicInd}}页</span>
     </div>
     <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面  SmallPicShow-->
     <div class="Small_pic_div" v-show="SmallPicShow">
@@ -137,7 +138,7 @@
         mwidth: '',
         mheight: '',
         // =============
-        perfBtn: false,
+        perfBtn: true,
         judgeFlag: '',
         opendImg: [],
         closedImg: [],
@@ -515,18 +516,24 @@
     z-index: 2;
     left: calc( 50% + 9px);
     top: calc( 100% - 110px);
-    width: 193px;
+    width: 300px;
     height: 52px;
     background: rgba(71, 86, 105, 0.6);
     box-shadow: 0 10px 20px 0 #47566942;
     border-radius: 6px;
     padding: 12px 0 11px 19px;
+    font-size:16px;
   }
 
   .BtnIcons img {
     margin-right: 10px
   }
+  .BtnIcons span {
+display: inline-block;
+background:red;
+vertical-align: top;
 
+}
   .position_and_size {
     position: absolute;
     font-size: 30px;
