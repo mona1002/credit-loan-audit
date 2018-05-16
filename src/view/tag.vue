@@ -346,9 +346,9 @@
           this.nodeName = "社保公积金";
         } else if (route.path == '/IntegratedQuery') {
           this.nodeName = "综合查询";
-          this.nodeMatchFlag='Query'
         } else if (route.path == '/MatchingInfQuery') {
           this.nodeName = "综合查询-详情";
+          this.nodeMatchFlag='Query'          
         }
         //  else if (route.path == '/commissioner') { //质检专员审批
         //   this.nodeName = "质检专员审批";
@@ -369,6 +369,7 @@
         // else{
         //   return
         // }
+        console.log(this.nodeMatchFlag)
         this.RoutePath = route.path;
         this.$store.dispatch('addVisitedViews', {
           name: this.nodeName,
@@ -447,6 +448,7 @@
         // this.$route.meta.refresh = false;
         // console.log(this.$router)
         // console.log(this.router)
+        console.log( tg)
         if (tg.flag != '' || tg.flag != undefined || tg.flag != 'undefined') {
           this.judge.flag = tg.flag;
           this.MatchFlag.MatchFlag=tg.MatchFlag;

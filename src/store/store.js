@@ -6,6 +6,7 @@ let state = {
     name: '工作台',
     path: '/',
     flag: '',
+    matchflag:'',
     params: '',
     StatefullPath: "/"
   }],
@@ -13,6 +14,7 @@ let state = {
     name: '工作台',
     path: '/',
     flag: '',
+    matchflag:'',
     params: '',
     StatefullPath: "/"
   }],
@@ -23,6 +25,7 @@ let state = {
 };
 let mutations = {
   ADD_VISITED_VIEWS: (state, view) => {
+    console.log( view)
     if (localStorage.getItem("judge") != undefined) {
       state.locFlag = JSON.parse(localStorage.getItem("judge")).flag;
       view.flag ? view.flag : view.flag = state.locFlag;
@@ -32,6 +35,7 @@ let mutations = {
       name: view.name,
       path: view.path,
       flag: view.flag,
+      matchflag:view.matchflag,
       params: view.params,
       StatefullPath: view.StatefullPath
     })
