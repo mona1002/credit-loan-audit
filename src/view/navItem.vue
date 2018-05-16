@@ -46,6 +46,11 @@
                             };
                             localStorage.setItem("workbenchPass",JSON.stringify(row));
                             localStorage.setItem("judge",JSON.stringify(judge));
+                            // 导航进入的 标志 , 优先级最高
+                            var navJude = {
+                                "flag":"nav_first"
+                            }
+                            localStorage.setItem("navJude",JSON.stringify(navJude))
                             //  nodeName = '初审审批';
                             //    RoutePath = '/taskInWaitting';
                             //   nodeFlag = "01";

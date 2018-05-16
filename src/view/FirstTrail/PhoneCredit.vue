@@ -498,8 +498,18 @@ export default {
 
     // 取内匹存储的标志
     var internalObj = JSON.parse(localStorage.getItem('internalObj'))
-    if (internalObj) {
-      this.isInterFlag = internalObj.isInterFlag;
+
+    // 从导航进入时的 标志
+    // 导航假如是初审进入 那就是编辑状态 important
+    var navJudge = JSON.parse(localStorage.getItem('navJudge'));
+
+    // 假如 内匹标志和  导航进入标志都存在 , 导航标志优先
+    if (internalObj && navJudge) {
+      if(navJudge.flag == 'nav_first'){
+        this.isInterFlag = false;
+      }else{
+        this.isInterFlag = internalObj.isInterFlag;
+      }
 
     }
 
