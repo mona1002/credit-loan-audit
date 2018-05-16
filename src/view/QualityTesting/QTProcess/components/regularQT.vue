@@ -407,9 +407,10 @@
               {{val}}</li>
           </ul>
           <!-- pay-content 微信/支付宝核实 -->
-          <div v-if="this.payment">
-            <p class="P_title">微信/支付宝核实</p>
-            <el-table :data="Alipay" style="width: 100%">
+          <div v-show="this.payment">
+            <!-- <p class="P_title">微信/支付宝核实</p> -->
+           <p style='clear:both;padding:3px 0;'><el-tag>微信/支付宝核实</el-tag></p> 
+            <el-table :data="Alipay" border style="width: 100%">
               <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
               <el-table-column label="核实类型" align="left" width="180">
                 <template slot-scope="scope">
@@ -430,7 +431,7 @@
                   </div>
                 </template>
               </el-table-column>
-              <el-table-column label="备注（非必填）" align="center" min-width="180">
+              <el-table-column label="备注（非必填）" align="center" >
                 <template slot-scope="scope">
                   <el-input type="textarea" :disabled='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model="scope.row.remark"
                     :maxlength="this.textareaL" placeholder="请输入内容">
@@ -441,8 +442,9 @@
           </div>
           <!-- call-content 客户本人中-电话拨打核实  -->
           <div v-show="this.custom">
-            <p class="P_title">电话拨打核实</p>
-            <el-table :data="insTelCustInfo" style="width: 100%">
+            <!-- <p class="P_title">电话拨打核实</p> -->
+           <p style='clear:both;padding:3px 0;'><el-tag>电话拨打核实</el-tag></p> 
+            <el-table :data="insTelCustInfo" border style="width: 100%">
               <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
               <!-- <el-table-column label="电话号码" align="center" width="180">
                 <template slot-scope="scope">
@@ -484,8 +486,9 @@
           </div>
           <!-- others-content 除客户本人的 电话拨打核实-->
           <div v-show="this.others">
-            <p class="P_title">电话拨打核实</p>
-            <el-table :data="insTelVerifyList" style="width: 100%">
+            <!-- <p class="P_title">电话拨打核实</p> -->
+           <p style='clear:both;padding:3px 0;'><el-tag>电话拨打核实</el-tag></p>             
+            <el-table :data="insTelVerifyList" border style="width: 100%">
               <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
               <!-- <el-table-column label="电话号码" align="center" width="180">
                 <template slot-scope="scope">
@@ -1866,12 +1869,14 @@
     /* background:red; */
     /* width: 100px; */
     /* border-right: 1px solid; */
+    cursor: pointer;
+    
   }
 
-  .tab1Default:hover {
+  /* .tab1Default:hover {
     cursor: pointer;
     opacity: .6;
-  }
+  } */
 
   .tabAct {
         color:#1387e6;
