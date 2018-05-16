@@ -168,6 +168,7 @@
     data() {
       return {
         nodeFlag: "",
+        nodeMatchFlag:'',
         RoutePath: '',
         nodeName: '',
         routeParams: '',
@@ -187,6 +188,9 @@
         judge: {
           flag: ''
         },
+        MatchFlag:{
+          MatchFlag:''
+        }
       };
     },
     computed: {
@@ -219,8 +223,7 @@
         const route = this.$route;
         route.fullPath.indexOf('?') != -1 ? this.taskNodeName = route.fullPath.split('?')[1].split('&')[0].split('=')[1] :
           this.taskNodeName;
-        this.routeParams = '';
-        this.nodeFlag = '';
+      this.nodeFlag =  this.nodeMatchFlag= this.routeParams = '';
         if (!route) {
           return false
         }
@@ -304,6 +307,7 @@
           this.nodeName = "反欺诈规则设定";
         } else if (route.path == '/MatchingInf') { // 匹配信息-查看
           this.nodeName = "匹配信息-查看";
+          this.nodeMatchFlag='internal'
         } else if (route.path == '/processMoni') { //  流程监控 - 
           //           route.fullPath.indexOf('?') != -1 ? this.processMoniParams= route.fullPath.split('?')[1]: this.processMoniParams;
           console.log('流程监控')
@@ -342,6 +346,7 @@
           this.nodeName = "社保公积金";
         } else if (route.path == '/IntegratedQuery') {
           this.nodeName = "综合查询";
+          this.nodeMatchFlag='Query'
         } else if (route.path == '/MatchingInfQuery') {
           this.nodeName = "综合查询-详情";
         }
@@ -369,6 +374,7 @@
           name: this.nodeName,
           path: this.RoutePath,
           flag: this.nodeFlag,
+          matchflag:this.nodeMatchFlag,
           params: this.routeParams,
           StatefullPath: this.RoutePath + this.routeParams
         })
@@ -438,11 +444,14 @@
         // this.$route.meta.keepAlive=true
         // this.fggggg = 'Noreload';
         // console.log(this.$route)
+        // this.$route.meta.refresh = false;
         // console.log(this.$router)
         // console.log(this.router)
         if (tg.flag != '' || tg.flag != undefined || tg.flag != 'undefined') {
           this.judge.flag = tg.flag;
+          this.MatchFlag.MatchFlag=tg.MatchFlag;
           localStorage.setItem("judge", JSON.stringify(this.judge));
+          localStorage.setItem("MatchFlag", JSON.stringify(this.MatchFlag));
         }
       },
     },
