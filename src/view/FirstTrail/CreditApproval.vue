@@ -1919,8 +1919,8 @@
           // 审批结论数据
           if (res.statusCode == '200'){
              this.caculData = res.data;
-            console.log('总负债率：'+res.data.totalRate,res.data.totalRate)
-            console.log('内部负债率：'+res.data.inteDebitrate,res.data.inteDebitrate)
+            console.log('总负债率：'+(res.data.totalRate*100),res.data.totalRate*100)
+            console.log('内部负债率：'+(res.data.inteDebitrate*100),res.data.inteDebitrate*100)
             console.log('月还款额:'+res.data.eachTermamt,res.data.eachTermamt)
             console.log(this.fbalance2)
             console.log('可接受最高每期还款额:'+this.fbalance,this.fbalance)
