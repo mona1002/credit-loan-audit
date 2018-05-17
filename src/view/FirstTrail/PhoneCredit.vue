@@ -427,7 +427,8 @@ export default {
       // landlinePhone:/^(0[0-9]{2,3}-?)([0-9]{7,8})$/,
       landlinePhone:/^(0[0-9]{2}-?)([0-9]{8})$/,
       landlinePhone1:/^(0[0-9]{3}-?)([0-9]{7})$/,
-      landLinePhoneLength:/^[0-9]{13}$/,
+      // landLinePhoneLength:/^[0-9-]{0,13}$/,
+      landLinePhoneLength:/^[0-9\-]{0,13}$/,
       mobilePhone:/^1[345789]\d{9}$/,
     }
   },
@@ -596,9 +597,9 @@ export default {
       // console.log('监听 添加电话号码');
       // this.addTelRex = /^(1)\d{10}$/i.test(value) || /^((\(\d{2,3}\))|(\d{3}\-))?(\(0\d{2,3}\)|0\d{2,3}-)?[1-9]\d{6,7}(\-\d{1,4})?$/i.test(value);
       // this.addTelRex = this.mobilePhone.test(value)||this.landlinePhone.test(value)||this.landlinePhone1.test(value);
-  
-      this.landLinePhoneLength
-      this.addTelRex = this.mobilePhone.test(value)||this.landLinePhoneLength.test(value);
+
+      // this.addTelRex = this.mobilePhone.test(value)||this.landLinePhoneLength.test(value);
+      this.addTelRex = this.landLinePhoneLength.test(value);
           console.log(this.addTelRex);
       // 判断 显示 电话格式
       // if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelNum.length >= 11 && !this.addTelRex) ||
@@ -618,17 +619,52 @@ export default {
       if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelRex) ||
         ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelRex)
       ) {
+        console.log('111')
         this.active = true;
       } else {
         console.log('没选关系');
-    //     console.log(value.charAt(1)*1 )
+//     //     console.log(value.charAt(1)*1 )
+// // console.log('座机')
+// if( value.charAt(0)!=1){
+// if(!this.landLinePhoneLength.test(value)){
+//   console.log( "landline")
+  
+//   this.$message({
+//               message:'请输入正确的电话号码或座机号码（xxx-xxxxxxx）！',
+//               type: 'warning'
+//             }); 
+// }
+// }
+
+//     else if(value.charAt(0)==1 &&value.charAt(1)*1<3 &&value.charAt(1)!=''){
+
+//       // if( )
+//           this.$message({
+//                message:'请输入正确的电话号码或座机号码（xxx-xxxxxxx）！',
+//                 type: 'warning'
+//               }); 
+//         }
+// else if(value.charAt(0)==1){
+//   console.log( "tel")
+//   if(value.length==11){
+// if( !this.mobilePhone.test(value)){
+//     this.$message({
+//               message:'请输入正确的电话号码或座机号码（xxx-xxxxxxx）！',
+//               type: 'warning'
+//             }); 
+//   }
+//   }
+  
+// }
+ 
     //  if(value.charAt(0)!=1 &&value.charAt(0)!=0&&value!=''){
     //    console.log('进入01判断')
-          // this.$message({
-          //     message:'请输入正确的电话号码或座机号码（xxx-xxxxxxx）！',
-          //     type: 'warning'
-          //   }); 
-    //     }else if(value.charAt(0)==1 &&value.charAt(1)*1<3 &&value.charAt(1)!='' ){
+    //       this.$message({
+    //           message:'请输入正确的电话号码或座机号码（xxx-xxxxxxx）！',
+    //           type: 'warning'
+    //         }); 
+    //     }
+    // else if(value.charAt(0)==1 &&value.charAt(1)*1<3 &&value.charAt(1)!=''&&this.addTelNum.length ==11 ){
     //       this.$message({
     //            message:'请输入正确的电话号码或座机号码（xxx-xxxxxxx）！',
     //             type: 'warning'
