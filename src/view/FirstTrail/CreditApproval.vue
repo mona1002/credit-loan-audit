@@ -1265,6 +1265,7 @@
                       this.maxAmounnt = this.products[i].maxAmounnt;
                       // 最小
                       this.minAmount = this.products[i].minAmount;
+                      this.debtRate= this.products[i].debtRate;//产品负债率
                       //this.calculateByAuditInfo();
                     }
                   };
@@ -1938,8 +1939,10 @@
               return
             }
             if(this.opinionFlag=='00'&&this.judgeFlag == '02'){//选中同意
-            this.ploanAmtNum = Number(this.ploanAmt.split('.')[0].replace(/,/g, ''));//批准金额 number类型：ploanAmtNum
-              if(this.ploanAmtNum>this.maxAuditAmt ){//流程角色最高审批金额:maxAuditAmt
+            // this.ploanAmtNum = Number(this.ploanAmt.split('.')[0].replace(/,/g, ''));//批准金额 number类型：ploanAmtNum            
+            this.ploanAmt.indexOf(',')!=-1?  this.ploanAmtNum = this.ploanAmt.replace(/,/g, '')*1:this.ploanAmtNum = this.ploanAmt*1 ;
+             console.log('批准金额:'+this.ploanAmtNum,this.ploanAmtNum )
+            if(this.ploanAmtNum>this.maxAuditAmt ){//流程角色最高审批金额:maxAuditAmt
                 this.ploanAmt=''//批准金额
               this.$message.error('大于当前审批人最高审批金额权限，请选择请求更高级审批！')
               return 
@@ -1991,6 +1994,7 @@
                 this.verIncome = Number(val).toLocaleString() + '.00';
               }
             }
+             this.calculateByAuditInfo();
           } else if (flag == 'ploanAmt') {
             if (/,/.test(val)) {
               if (/./.test(val)) {
