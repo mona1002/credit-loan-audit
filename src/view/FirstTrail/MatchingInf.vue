@@ -45,9 +45,9 @@
               <FMCreditForm v-if=" this.tabContent1==6">信审表</FMCreditForm>
               <RcreditInvestigation v-if=" this.tabContent1==7">实地征信</RcreditInvestigation>
               <aMAntiApplyInf v-if=" this.tabContent1==8">反欺诈结论</aMAntiApplyInf>
-              <!-- <RFinanceInformation v-if=" this.tabContent1==9">财务信息</RFinanceInformation> -->
-              <RprocessTrajectory v-if=" this.tabContent1==9">流程轨迹</RprocessTrajectory>
-              <RApprovalConclusion v-if=" this.tabContent1==10">审批结论轨迹</RApprovalConclusion>
+              <RFinanceInformation v-if=" this.tabContent1==9">财务信息</RFinanceInformation>
+              <RprocessTrajectory v-if=" this.tabContent1==10">流程轨迹</RprocessTrajectory>
+              <RApprovalConclusion v-if=" this.tabContent1==11">审批结论轨迹</RApprovalConclusion>
             </div>
           </div>
         </div>
@@ -85,9 +85,9 @@
             <FMCreditForm v-if=" this.tabContent2==6">信审表</FMCreditForm>
             <RcreditInvestigation v-if=" this.tabContent2==7">实地征信</RcreditInvestigation>
             <aMAntiApplyInf v-if=" this.tabContent2==8">反欺诈结论</aMAntiApplyInf>
-            <!-- <RFinanceInformation v-if=" this.tabContent2==9">财务信息</RFinanceInformation> -->
-            <RprocessTrajectory v-if=" this.tabContent2==9">流程轨迹</RprocessTrajectory>
-            <RApprovalConclusion v-if=" this.tabContent2==10">审批结论轨迹</RApprovalConclusion>
+            <RFinanceInformation v-if=" this.tabContent2==9">财务信息</RFinanceInformation>
+            <RprocessTrajectory v-if=" this.tabContent2==10">流程轨迹</RprocessTrajectory>
+            <RApprovalConclusion v-if=" this.tabContent2==11">审批结论轨迹</RApprovalConclusion>
           </div>
         </div>
       </div>
@@ -157,12 +157,12 @@
         tabContent2: 3,
         tabActiveInd1: 0,
         tabActiveInd2: 3,
-        items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论', "流程轨迹", '信审审批结论轨迹'],
-        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "流程轨迹", "信审审批结论轨迹"],
+        items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论','账务信息', "流程轨迹", '信审审批结论轨迹'],
+        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论",'账务信息', "流程轨迹", "信审审批结论轨迹"],
         tab1Index: 0,
         tab2Index: 3,
-        flag1: [true, true, true, false, true, true, true, true, true, true, true],
-        flag2: [true, true, true, true, true, true, true, true, true, true, true],
+        flag1: [true, true, true, false, true, true, true, true, true, true, true,true],
+        flag2: [true, true, true, true, true, true, true, true, true, true, true,true],
         AlertSearch: "",
         AlertSearchCondition: [{
           value: '选项1',
@@ -201,8 +201,8 @@
         }
       },
       rightMovingBtn() {
-        if (parseFloat(this.$refs.right_tab_ul.style.left) <= -500) {
-          this.$refs.right_tab_ul.style.left = "-500px";
+        if (parseFloat(this.$refs.right_tab_ul.style.left) <= -750) {
+          this.$refs.right_tab_ul.style.left = "-750px";
         } else {
           this.$refs.right_tab_ul.style.left = parseFloat(this.$refs.right_tab_ul.style.left) - 50 + "px";
         }
@@ -554,6 +554,7 @@
     position: relative;
     text-align: left;
     z-index: 16;
+    background:red;
   }
 
   .Right_tab_ul_wrap ul li {
