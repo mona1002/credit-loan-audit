@@ -310,9 +310,7 @@
           this.nodeMatchFlag='internal'
         } else if (route.path == '/processMoni') { //  流程监控 - 
           //           route.fullPath.indexOf('?') != -1 ? this.processMoniParams= route.fullPath.split('?')[1]: this.processMoniParams;
-          console.log('流程监控')
           if (route.fullPath == '/processMoni?creditApp00') {
-            console.log('流程监控aaa')
             this.nodeName = "信审未分配流程";
             this.routeParams = '?creditApp00';
           } else if (route.fullPath == '/processMoni?creditApp01') {
@@ -348,7 +346,7 @@
           this.nodeName = "综合查询";
         } else if (route.path == '/MatchingInfQuery') {
           this.nodeName = "综合查询-详情";
-          this.nodeMatchFlag='Query'          
+          this.nodeMatchFlag='Query' 
         }
         //  else if (route.path == '/commissioner') { //质检专员审批
         //   this.nodeName = "质检专员审批";
@@ -369,7 +367,6 @@
         // else{
         //   return
         // }
-        console.log(this.nodeMatchFlag)
         this.RoutePath = route.path;
         this.$store.dispatch('addVisitedViews', {
           name: this.nodeName,
@@ -451,10 +448,10 @@
         console.log( tg)
         if (tg.flag != '' || tg.flag != undefined || tg.flag != 'undefined') {
           this.judge.flag = tg.flag;
-          // this.MatchFlag.MatchFlag=tg.MatchFlag;
           localStorage.setItem("judge", JSON.stringify(this.judge));
-          // localStorage.setItem("MatchFlag", JSON.stringify(this.MatchFlag));
         }
+           this.MatchFlag.MatchFlag=tg.matchflag;
+           localStorage.setItem("MatchFlag", JSON.stringify(this.MatchFlag));
       },
     },
     // beforeRouteLeave(to, from, next) {
