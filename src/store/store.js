@@ -6,6 +6,7 @@ let state = {
     name: '工作台',
     path: '/',
     flag: '',
+    matchflag:'',
     params: '',
     StatefullPath: "/"
   }],
@@ -14,6 +15,7 @@ let state = {
     path: '/',
     flag: '',
     params: '',
+    matchflag:'',
     StatefullPath: "/"
   }],
   locFlag: null,
@@ -33,6 +35,7 @@ let mutations = {
       path: view.path,
       flag: view.flag,
       params: view.params,
+      matchflag: view.matchflag,
       StatefullPath: view.StatefullPath
     })
     // 新添加部分，改变flag进行判断
