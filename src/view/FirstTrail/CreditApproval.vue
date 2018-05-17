@@ -1919,20 +1919,20 @@
           // 审批结论数据
           if (res.statusCode == '200'){
              this.caculData = res.data;
-            console.log('总负债率：'+res.data.totalRate)
-            console.log('内部负债率：'+res.data.inteDebitrate)
-            console.log('月还款额:'+res.data.eachTermamt)
+            console.log('总负债率：'+res.data.totalRate,res.data.totalRate)
+            console.log('内部负债率：'+res.data.inteDebitrate,res.data.inteDebitrate)
+            console.log('月还款额:'+res.data.eachTermamt,res.data.eachTermamt)
             console.log(this.fbalance2)
-            console.log('可接受最高每期还款额:'+this.fbalance)
-            console.log('产品负债率：'+this.debtRate)
-            console.log('流程角色最高审批金额:'+this.maxAuditAmt)
-           console.log('同意:'+this.opinionFlag)
-           console.log('终审'+this.judgeFlag )
+            console.log('可接受最高每期还款额:'+this.fbalance,this.fbalance)
+            console.log('产品负债率：'+this.debtRate,this.debtRate)
+            console.log('流程角色最高审批金额:'+this.maxAuditAmt,this.maxAuditAmt)
+           console.log('同意:'+this.opinionFlag,this.opinionFlag)
+           console.log('终审'+this.judgeFlag,this.judgeFlag )
             if(res.data.eachTermamt>this.fbalance){// fbalance 可接受最高每期还款额
               this.ploanAmt=''//批准金额
               this.$message.error('月还款额不能大于可接受最高每期还款额，请重新输入！')
               return
-            }else if(res.data.totalRate>this.debtRate||res.data.inteDebitrate>this.debtRate ){ //产品负债率:debtRate  内部负债率:inteDebitrate  总负债率：totalRate
+            }else if(res.data.totalRate*100>this.debtRate||res.data.inteDebitrate*100>this.debtRate ){ //产品负债率:debtRate  内部负债率:inteDebitrate  总负债率：totalRate
                 this.ploanAmt=''//批准金额
               this.$message.error('内部负载率/总负债率超过该产品对应的最大负债率！')
               return
