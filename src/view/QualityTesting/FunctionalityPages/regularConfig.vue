@@ -258,20 +258,11 @@
         value: '',
 
         QTSituation: [{ //抽单类型
-          value: '选项1',
-          label: '黄金糕'
+          value: '01',
+          label: '熟人'
         }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
+          value: '02',
+          label: '生人'
         }],
         RiskType: [{
           value: '选项1',
@@ -296,7 +287,7 @@
         // 质检-常规抽单配置—查询列表        
         this.get("/insMakeRules/getInfoList?" + Math.random()).then(res => {
           if (res.statusCode == 200) {
-            this.tableData = res.data.recordList;
+            this.tableData = res.data;
           } else {
             this.$message.error(res.msg);
           }
