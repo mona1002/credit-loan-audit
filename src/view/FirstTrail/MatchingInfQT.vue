@@ -7,12 +7,12 @@
       <p class="PerDtl">
         <!-- <span> 借款人： {{custName}}</span> -->
         <!-- <span> 借款人： {{customInf.accepCusBasicInfo.custName}}</span> -->
-        <!-- <span> 进件编号: {{customInf.applyMainNo}}</span>
-        <span> 证件号码: {{customInf.accepCusBasicInfo.certCode}}</span>
+        <span> 进件编号: {{customInf.applyMainNo}}</span>
+        <!-- <span> 证件号码: {{customInf.accepCusBasicInfo.certCode}}</span> -->
         <span> 进件机构: {{customInf.appOrgName}}</span>
         <span> 门店成立时间: {{customInf.appOrgRegisterDate}}</span>
         <span> 业务员入职时间： {{customInf.salPerEmployDate}}</span>
-        <span>{{customInf.adminIntroduce}}</span> -->
+        <span>{{customInf.adminIntroduce}}</span>
       </p>
       <div class="SplitScreen_wrap" id="rWrap" ref="rWrap">
         <!-- 左侧分屏部分 -->
@@ -201,6 +201,14 @@
         }
       }
     },
+    watch: {
+      '$route' (to, from) {
+        if (to.fullPath !== from.fullPath) {
+          // this.toinner();
+          console.log('路由刷新')
+        }
+      }
+    },
     methods: {
       compareProps() {
         this.$refs.audioChild.personalNunPerson()
@@ -325,7 +333,8 @@
         });
       },
       initialInfo() {
-        var Nodename = this.$route.fullPath.split('?')[1]
+        var Nodename = this.$route.fullPath.split('?')[1];
+        console.log( Nodename)
         if (Nodename == 'checkApp_apply') {
           // 专员-编辑
           this.QTC.pageType = 'commissioner';
@@ -358,7 +367,7 @@
       }
     },
     mounted() {
-      // this.initialInfo();
+      
       // this.title = "影像资料";
       // console.log(window.location)
       // console.log(this.$route.fullPath)
@@ -377,28 +386,32 @@
       // } else if (this.Nodename == 'e') { //主管-编辑
 
       // }
-      this.TaskList = JSON.parse(localStorage.getItem(this.LocalList));
-      if(this.TaskList==''){
+      this.initialInfo();//判断角色      
+      this.tastwaitingPass = JSON.parse(localStorage.getItem(this.LocalList));
+      console.log(this.tastwaitingPass)
+      console.log(  this.QTC.pageType)
+      console.log(  this.LocalList)
+      if(this.tastwaitingPass==''){
         this.EditType='常规质检'
-      }else if(this.TaskList==''){
+      }else if(this.tastwaitingPass==''){
         this.EditType='专纵质检'
-      }else if(this.TaskList==''){
+      }else if(this.tastwaitingPass==''){
         this.EditType='常规又专纵质检'
       }else{
         this.EditType='';
       }
-      this.QTC.applyId = this.TaskList.applyId;
+      this.QTC.applyId = this.tastwaitingPass.ApplyId;
       // this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
-      // this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-      //   id: this.tastwaitingPass.matchApplyId,
-      // }).then(res => {
-      //   if (res.statusCode == 200) {
-      //     this.customInf = res.data;
-      //     this.custName = res.data.accepCusBasicInfo.custName;
-      //   } else {
-      //     this.$message.error(res.msg);
-      //   }
-      // });
+      this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
+        id: this.tastwaitingPass.ApplyId,
+      }).then(res => {
+        if (res.statusCode == 200) {
+          this.customInf = res.data;
+          this.custName = res.data.accepCusBasicInfo.custName;
+        } else {
+          this.$message.error(res.msg);
+        }
+      });
     },
     components: {
       myHead,

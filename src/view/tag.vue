@@ -346,26 +346,46 @@
           this.nodeName = "社保公积金";
         } else if (route.path == '/IntegratedQuery') {
           this.nodeName = "综合查询";
-         
         } else if (route.path == '/MatchingInfQuery') {
-          this.nodeName = "综合查询-详情"; this.nodeMatchFlag='Query'
+          this.nodeName = "综合查询-详情"; 
+          this.nodeMatchFlag='Query';
         }
-        //  else if (route.path == '/commissioner') { //质检专员审批
-        //   this.nodeName = "质检专员审批";
-        // } else if (route.path == '/manager') {
+         else if (route.path == '/commissioner') { //质检专员审批
+          this.nodeName = "质检专员审批";
+          this.nodeFlag = "07";
+           this.routeParams = '?taskNodeName=' + this.taskNodeName + "&flag="+this.nodeFlag;
+        } else if (route.path == '/manager') {      //质检主管审批
+          this.nodeName = "质检主管审批";
+          this.nodeFlag = "08";          
+           this.routeParams = '?taskNodeName=' + this.taskNodeName + "&flag="+this.nodeFlag;
+        } else if (route.path == '/ACManagerTaskList') {   //质检主管审批
+          this.nodeName = "区域经理审批";
+           this.nodeFlag = "12";          
+           this.routeParams = '?taskNodeName=' + this.taskNodeName + "&flag="+this.nodeFlag;
+        } else if (route.path == '/ACManagerTaskList') {   //质检主管审批
+          this.nodeName = "合规经理审批";
+           this.nodeFlag = "13";          
+           this.routeParams = '?taskNodeName=' + this.taskNodeName + "&flag="+this.nodeFlag;
+        }
+        //  else if (route.path == '/manager') {
+        //   this.nodeName = "质检复议查询";
+        // }
+        //  else if (route.path == '/manager') {
         //   this.nodeName = "质检主管审批";
-        // } else if (route.path == '/regularConfig') { // 质检功能 - 常规抽单配置功能
-        //   this.nodeName = "常规抽单配置功能";
+        // } 
+        else if (route.path == '/regularConfig') { // 质检功能 - 常规抽单配置功能
+          this.nodeName = "质检常规抽单配置";
         // } else if (route.path == '/reconsiderResult') { // 质检功能 - 复议结果查询
         //   this.nodeName = "复议结果查询";
         // } else if (route.path == '/batchApportion') { // 质检功能
         //   this.nodeName = "质检任务批量转分派";
-        // } else if (route.path == '/specialConfig') { // 质检功能
-        //   this.nodeName = "专纵项抽单配置";
-        // }
-        // else if (route.path == '/manager') {
-        //   this.nodeName = "质检";
-        // }
+        } else if (route.path == '/specialConfig') { // 质检功能
+          this.nodeName = "专纵向抽单配置";
+        }
+        else if (route.path == '/MatchingInfQT') {
+          this.nodeName = "质检详情";
+           this.routeParams = '?checkApp_apply'//---------------------------做判断-----
+        }
         // else{
         //   return
         // }
