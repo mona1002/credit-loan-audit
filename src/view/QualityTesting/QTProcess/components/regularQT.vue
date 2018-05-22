@@ -1845,7 +1845,7 @@
           params: {
             id: this.propQTconclution.applyId,
             flag: 'zhijian',
-            // busiState:'20',
+            busiState:'30',
             wayOf: '02' //质检
           }
         });

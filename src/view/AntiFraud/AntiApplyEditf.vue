@@ -265,7 +265,7 @@ console.log(  this.antiFlag  )
 
       // 请求主原因
       this.firstNodeReason();
-
+      console.log('params:', this.$route.params)
 
 
 
