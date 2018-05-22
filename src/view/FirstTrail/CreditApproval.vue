@@ -585,6 +585,7 @@
         creditScore: '', // 单独处理的评分
         fbalance: '', // 核实每月可接受最高还款额
         fbalance2: '', // 
+        fbalance2Num:Number,
         hangOut: false,
         loadsitu: false,
         adbtn: '确定',
@@ -667,6 +668,10 @@
         isLoading: false, // 审批按钮 是否加载状态
         loadingTitle: '提交', // 默认btn title
         shenPiBtnShow: false, // 初审 审批按钮  BX21
+        debtRate:Number,//产品负债率
+        flowRoleCode:'',//	流程角色code
+        maxAuditAmt:Number,//流程角色-最高审批金额
+        ploanAmtNum:Number,//批准金额number类型
       }
     },
     mounted() {
@@ -696,6 +701,7 @@
 
       } else if (this.judgeFlag == '02') { // 终审取终审  taskId
         this.FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
+        this.flowRoleCode= this.FtaskInWaitting.flowRoleCode;//	流程角色code
         // 挂起 任务id
         this.taskId = this.FtaskInWaitting.taskId;
         // 流程 实例id
@@ -703,6 +709,7 @@
         // 任务状态
         this.taskStatus = JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskStatus;
         this.taskName = this.FtaskInWaitting.taskName;
+        this.findSmFlowRole();
         // if (this.taskName == "creditApp_finalTrial_one") {
         //   this.nodeName = '终审一级审批';
         // } else if (this.taskName == "creditApp_finalTrial_two") {
@@ -816,6 +823,20 @@
       console.log('applyId : ' + this.applyId)
     },
     methods: {
+      findSmFlowRole(){//信审审批-8.获取流程角色信息
+        this.get("/smFlowRoleAction/findSmFlowRole", {
+          flowRoleCode:  this.flowRoleCode,
+        }).then(res => {
+          if (res.statusCode == 200) {
+            console.log(res.data)
+            console.log(res.data.maxAuditAmt)
+            this.maxAuditAmt=res.data.maxAuditAmt;
+            // this.tableData = res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      },
       hangOoutBtn() {
         this.loadsitu = false;
         this.adbtn = '确定';
@@ -1048,7 +1069,7 @@
                   this.quotaData = res.data;
                   // 单独处理 评分   =>  "评分:51.6"
                   this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
-                  this.fbalance = res.data.fbalance;
+                 this.fbalance = res.data.fbalance;
                   if (res.data.creditScore.split(',')[1]) {
                     this.fbalance2 = Number(res.data.fbalance).toLocaleString() + res.data.creditScore.split(
                       ',')[1];
@@ -1290,6 +1311,7 @@
                       this.maxAmounnt = this.products[i].maxAmounnt;
                       // 最小
                       this.minAmount = this.products[i].minAmount;
+                      this.debtRate= this.products[i].debtRate;//产品负债率
                       //this.calculateByAuditInfo();
                     }
                   };
@@ -1297,13 +1319,18 @@
 
                 //根据产品id获取批准期限
                 this.ploanTerms = res.data.ploanTermByPo;
-                //console.log(this.ploanTerms);
-
+                // console.log(this.ploanTerms.length)
+                // console.log(this.ploanTerm)
+                for(var j=0;j<this.ploanTerms.length;j++){
+                  if(this.ploanTerms[j].appDuration==this.ploanTerm){
+                    this.loanRateYr =this.ploanTerms[j].loanRateYr
+                    this.repayWay =this.ploanTerms[j].repayWay
+                    this.synthesisRateM =this.ploanTerms[j].synthesisRateM
+                    break;
+                  }
+                }
               }
-
             })
-
-
           }
         })
       },
@@ -1884,7 +1911,7 @@
       proSlelecChange: function (val) {
         this.ploanTerm = '';
         this.ploanAmt = '';
-
+        this.debtRate=val.debtRate;//产品负债率
         //console.log(val);
         // id val.id  产品id
         this.proId = val.id;
@@ -1905,6 +1932,7 @@
           //console.log(res.data);
           if (res.statusCode == '200')
             this.ploanTerms = res.data;
+            console.log(this.ploanTerms)
         })
 
       },
@@ -1936,8 +1964,37 @@
           loanRateYr: this.loanRateYr, // 借款利率
         }).then(res => {
           // 审批结论数据
-          if (res.statusCode == '200')
-            this.caculData = res.data;
+          if (res.statusCode == '200'){
+             this.caculData = res.data;
+            console.log('总负债率：'+(res.data.totalRate*100),res.data.totalRate*100)
+            console.log('内部负债率：'+(res.data.inteDebitrate*100),res.data.inteDebitrate*100)
+            console.log('月还款额:'+res.data.eachTermamt,res.data.eachTermamt)
+            console.log(this.fbalance2)
+            console.log('可接受最高每期还款额:'+this.fbalance,this.fbalance)
+            console.log('产品负债率：'+this.debtRate,this.debtRate)
+            console.log('流程角色最高审批金额:'+this.maxAuditAmt,this.maxAuditAmt)
+           console.log('同意:'+this.opinionFlag,this.opinionFlag)
+           console.log('终审'+this.judgeFlag,this.judgeFlag )
+            if(res.data.eachTermamt>this.fbalance){// fbalance 可接受最高每期还款额
+              this.ploanAmt=''//批准金额
+              this.$message.error('月还款额不能大于可接受最高每期还款额，请重新输入！')
+              return
+            }else if(res.data.totalRate*100>this.debtRate||res.data.inteDebitrate*100>this.debtRate ){ //产品负债率:debtRate  内部负债率:inteDebitrate  总负债率：totalRate
+                this.ploanAmt=''//批准金额
+              this.$message.error('内部负载率/总负债率超过该产品对应的最大负债率！')
+              return
+            }
+            if(this.opinionFlag=='00'&&this.judgeFlag == '02'){//选中同意
+            // this.ploanAmtNum = Number(this.ploanAmt.split('.')[0].replace(/,/g, ''));//批准金额 number类型：ploanAmtNum            
+            this.ploanAmt.indexOf(',')!=-1?  this.ploanAmtNum = this.ploanAmt.replace(/,/g, '')*1:this.ploanAmtNum = this.ploanAmt*1 ;
+             console.log('批准金额:'+this.ploanAmtNum,this.ploanAmtNum )
+            if(this.ploanAmtNum>this.maxAuditAmt ){//流程角色最高审批金额:maxAuditAmt
+                this.ploanAmt=''//批准金额
+              this.$message.error('大于当前审批人最高审批金额权限，请选择请求更高级审批！')
+              return 
+            }
+            }
+          }
         })
       },
       // 月核实收入[元]
@@ -1983,6 +2040,7 @@
                 this.verIncome = Number(val).toLocaleString() + '.00';
               }
             }
+             this.calculateByAuditInfo();
           } else if (flag == 'ploanAmt') {
             if (/,/.test(val)) {
               if (/./.test(val)) {
@@ -2041,6 +2099,7 @@
               this.ploanAmt2 = '';
               return;
             }
+            console.log( this.loanRateYr, this.repayWay ,this.synthesisRateM)
             if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length >
               0 &&
               this.loanRateYr && this.repayWay && this.synthesisRateM) {
