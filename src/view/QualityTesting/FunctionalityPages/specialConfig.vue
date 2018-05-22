@@ -75,10 +75,9 @@
       </div>
       <div class="title">
         <h1>质检任务分派查询
-          <!-- <span @click="apportion"> -->
-          <span @click="allot">
-            
-            <img src="../../../../static/images/add.png" style=" vertical-align: middle;"> 任务分配
+          <span @click="apportion">
+          <!-- <span @click="allot"> -->
+            <img src="../../../../static/images/add.png" style=" vertical-align: middle;"> 任务分派
           </span>
         </h1>
       </div>
@@ -119,13 +118,13 @@
       </div>
     </div>
         <!-- ==============================任务分配=================================== -->
-    <!-- <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
+    <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
       <span>您确定生成质检任务？</span>
       <span slot="footer" class="dialog-footer">
-        <el-button class="calbtn" @click="canc">取消</el-button>
-        <el-button class="subtn" type="primary" :loading="loadsitu" @click="CFsave">{{adbtn}}</el-button>
+        <el-button class="calbtn" @click="Confirm=false">取消</el-button>
+        <el-button class="subtn" type="primary" :loading="loadsitu" @click="allot">{{adbtn}}</el-button>
       </span>
-    </el-dialog> -->
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -136,6 +135,8 @@
       return {
         // ploanDate: ['', ''],
         Confirm:false,
+        loadsitu:false,
+        adbtn:'确定',
         ploanDate: '',
         tableData: [],
         production: [],//产品下拉
@@ -211,6 +212,8 @@
         this.adbtn = '确定';
       },
       allot() { //批量转分派
+              this.loadsitu = true;
+        this.adbtn = '保存中';
         this.post("/insTask/addSpecialInsTask", this.allotParams).then(res => {
           if (res.statusCode == 200) {
             this.$message({
