@@ -1058,6 +1058,52 @@
                 }
               });
               this.getProducts();
+              //带回回退的信息
+              this.post('/creauditOpinion/queryCreauditOpinionObj', {
+                applyId: this.applyId
+              }).then(res => {
+                if (res.statusCode == '200') {
+                  if(res.data){
+                    this.verIncome = Number(res.data.verIncome).toLocaleString() + '.00';/*this.moneyBlur(res.data.verIncome,'verIncome')*/;//月核实收入[元];
+                    console.log( this.verIncome);
+                    //this.proName = '诺工贷';//批准产品;
+                    this.ploanTerm = res.data.ploanTerm;//批准期限[月];
+                    this.ploanAmt = Number(res.data.ploanAmt).toLocaleString() + '.00';/*this.moneyBlur(res.data.ploanAmt,'ploanAmt')*/;//批准金额[元];
+                    this.caculData.appmult = res.data.appmult;//审批倍数;
+                    this.caculData.eachTermamt = res.data.eachTermamt;//月还款额[元];
+                    this.caculData.inteDebitrate = res.data.inteDebitrate;//内部负债率;
+                    this.caculData.creditDebitRate = res.data.creditDebitRate;//总信用负债率;
+                    this.caculData.totalRate  = res.data.totalRate;//总负债率;
+                    this.appConclusion  = res.data.appConclusion;//意见说明;
+                    if(res.data.proId){
+                      //获取产品列表
+                      this.post('/credit/product').then(ress => {
+                        if (ress.statusCode == '200') {
+                          this.products = ress.data;
+                          //console.log(this.products.length);
+                          for (var i = 0; i < this.products.length; i++) {
+                            if (res.data.proId == this.products[i].id) {
+                              this.proName = this.products[i].proName;
+                              // 最大
+                              this.maxAmounnt = this.products[i].maxAmounnt;
+                              // 最小
+                              this.minAmount = this.products[i].minAmount;
+                            }
+                          };
+                        }
+                      });
+                      //获取批准期限
+                      this.post('/credit/ploanTermByPro?proId=' + res.data.proId).then(resp => {
+                        //console.log(res.data);
+                        if (resp.statusCode == '200')
+                          this.ploanTerms = resp.data;
+                      });
+                    }
+                  }else{
+                    return;
+                  }
+                }
+              });
             } else if (this.judgeFlag == '02') {
               this.queryCreauditOpinionObj();
             }

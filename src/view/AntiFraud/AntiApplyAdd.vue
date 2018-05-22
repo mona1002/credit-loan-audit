@@ -154,20 +154,20 @@
                 <el-button type="primary" @click="resetQuery">重置</el-button>
               </li>
             </div>
-            <el-table :data="tableData.taskDetailList" height="250" border style="width: 100%" highlight-current-row center @row-click="itemClick">
+            <el-table :data="tableData.recordList" height="250" border style="width: 100%" highlight-current-row center @row-click="itemClick">
               <el-table-column type="index" label="序号" align="center" width="60">
               </el-table-column>
-              <el-table-column prop="applySubNo" label="进件编号" width="170">
+              <el-table-column prop="applySubno" label="进件编号" width="170">
               </el-table-column>
               <el-table-column prop="appDate" label="申请日期" width="170">
               </el-table-column>
               <el-table-column prop="custName" label="客户名称" width="120">
               </el-table-column>
-              <el-table-column prop="certType" label="证件类型" width="80">
+              <el-table-column prop="certTypeTxt" label="证件类型" width="80">
               </el-table-column>
               <el-table-column prop="certCode" label="证件号码" width="170">
               </el-table-column>
-              <el-table-column prop="appOrgName" label="进件机构名称" width="130">
+              <el-table-column prop="operOrgName" label="进件机构名称" width="130"><!-- appOrgName -->
               </el-table-column>
               <el-table-column prop="proName" label="产品名称" width="100">
               </el-table-column>
@@ -176,7 +176,7 @@
             </el-table>
             <div class="block tool-bar">
               <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 20, 30]"
-                :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalNum" v-show="tableData.totalNum">
+                :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalRecord" v-show="tableData.totalRecord">
               </el-pagination>
             </div>
           </div>
@@ -204,12 +204,13 @@
         orgCode: '', // 机构编号
         applyId: '', // 申请单ID
         // id: '', // 主管/专员 用 列表id
-        applySubno: '', // 进件编号
+        applySubNo: '', // 进件编号
         applyCode: '', // 申请人code
         applyPersonName: '', // 申请人姓名
         appOrgCode: '', // 申请机构code
         appDate: '', // 申请日期
-        appOrgName: '', // 申请机构名称
+        //appOrgName: '', // 申请机构名称
+        operOrgName: '', // 申请机构名称
         mainId: '', // 欺诈主原因id
         secondId: '', // 欺诈子原因id
         applyDesc: '', // 反欺诈申请描述
@@ -244,7 +245,7 @@
         // orgCode: '',
         pageNum: 1, // 页码
         pageSize: 5, // 每页条数
-        applySubNo: '',
+        applySubno: '',
         custName_la: '',
         certCode: '',
         rowObj: '', // 点击的列表数据
@@ -546,7 +547,7 @@
           case 'shwoList':
             this.coverShow = true;
             // this.showFlag = 'shwoList';
-            this.request();
+            //this.request();
             break;
         }
       },
@@ -562,7 +563,7 @@
         console.log("当前页: ${val}", val);
         this.pageNum = val;
         // this.queryDetailList();
-        this.request();
+        //this.request();
       },
       // 请求列表
       request() {
@@ -603,12 +604,25 @@
         // })
         // 查询图标弹出层
 
-        this.post('/workFlowTaskQuery/getTaskToDoList', {
+        /*this.post('/workFlowTaskQuery/getTaskToDoList', {
           taskStatus: '01',
           userCode: this.userCode,
           orgCode: this.orgCode,
           pageNum: this.pageNum,
           pageSize: this.pageSize
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.tableData = res.data;
+          }
+        })*/
+        this.post('/applyInfoPool/queryListForFraud', {
+          pageParam:{
+            pageNum: this.pageNum,
+            pageSize: this.pageSize
+          },
+          applySubNo:this.applySubNo,
+          custName:this.custName_la,
+          certCode:this.subCertCode
         }).then(res => {
           if (res.statusCode == 200) {
             this.tableData = res.data;
@@ -622,7 +636,7 @@
         this.applySubNo = ''; // 进件编号
         this.custName_la = ''; // 客户名称
         this.subCertCode = ''; // 客户编号
-        this.request();
+        this.tableData='';
       },
       // 选中弹窗某行
       itemClick(row, event, column) {
@@ -634,7 +648,7 @@
       btnClick(val) {
         // 确定
         if (val == 'sure') {
-          this.applySubNo = this.rowObj.applySubNo; // 进件编号
+          this.applySubNo = this.rowObj.applySubno; // 进件编号
           this.applyCustName = this.rowObj.custName; // 客户名称
           this.certTypeTxt = this.rowObj.certTypeTxt; // 证件类型
           this.certType = this.rowObj.certType; // 证件类型

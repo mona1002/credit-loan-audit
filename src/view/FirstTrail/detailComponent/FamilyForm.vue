@@ -291,7 +291,7 @@ export default {
   data() {
     return {
       phoneType: '03',
-      source: '',
+      /*source: '',
       answer: '',
       sourceDesc: '',
       checkStage: '',
@@ -299,10 +299,10 @@ export default {
       threeQueries: '',
       threeQueriestxt: '',
       issameFam: '',
-      issameFamtxt: '',
+      issameFamtxt: '',*/
       wetherThirdAbnormal: '',
       wetherThirdAbnormaltxt: '',
-      mobilepayment: '',
+      /*mobilepayment: '',
       mobilepaymenttxt: '',
       relBorrower: '',
       relBorrowertxt: '',
@@ -316,12 +316,13 @@ export default {
       checkEstatetxt: '',
       otherIncome: '',
       otherIncometxt: '',
-      conclusion: '',
+      conclusion: '',*/
       phoneId: '',
-      resMsg:''
+      resMsg:'',
+      newLists:'',
     }
   },
-  props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull'],
+  props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull', 'source' , 'answer' , 'checkStage' , 'sourceDesc' , 'thirdResult' , 'threeQueries' , 'threeQueriestxt' , 'mobilepayment' , 'mobilepaymenttxt' , 'issameFam' , 'issameFamtxt' , 'relBorrower' , 'relBorrowertxt' , 'checkWork' , 'checkWorktxt' , 'maritalStatus' , 'maritalStatustxt' , 'checkAddr' , 'checkAddrtxt' , 'checkEstate' , 'checkEstatetxt' , 'otherIncome' , 'otherIncometxt' , 'conclusion'],
   mounted() {
     this.phoneType = '03'; // 住址电话
     if (this.isFull == true) { // 全屏
@@ -349,9 +350,43 @@ export default {
       })
       $('.item-column1 textarea').css("width", "300px")
       $('.item-column2 textarea').css("width", "300px")
-    }
+    };
+   /* this.request();*/
+    console.log("88888");
+    console.log(this.newList);
+    /*if(this.newList){
+      this.source = this.newList.sourceDes;
+      this.answer = this.newList.answerDes;
+      this.checkStage = this.newList.checkStageDes;
+      this.sourceDesc = this.newList.sourceDesc;
+      this.thirdResult = this.newList.thirdResult;
+      this.threeQueries = this.newList.threeQueriesDes;
+      this.threeQueriestxt = this.newList.threeQueriestxt;
+      this.mobilepayment = this.newList.mobilepaymentDes;
+      this.mobilepaymenttxt = this.newList.mobilepaymenttxt;
+      this.issameFam = this.newList.issameFamDes;
+      this.issameFamtxt = this.newList.issameFamtxt;
+      this.relBorrower = this.newList.relBorrowerDes;
+      this.relBorrowertxt = this.newList.relBorrowertxt;
+      this.checkWork = this.newList.checkWorkDes;
+      this.checkWorktxt = this.newList.checkWorktxt;
+      this.maritalStatus = this.newList.maritalStatusDes;
+      this.maritalStatustxt = this.newList.maritalStatustxt;
+      this.checkAddr = this.newList.checkAddrDes;
+      this.checkAddrtxt = this.newList.checkAddrtxt;
+      this.checkEstate = this.newList.checkEstateDes;
+      this.checkEstatetxt = this.newList.checkEstatetxt;
+      this.otherIncome = this.newList.otherIncomeDes;
+      this.otherIncometxt = this.newList.otherIncometxt;
+      this.conclusion = this.newList.conclusion;
+    }else{
+      return
+    };*/
   },
   methods: {
+   /* request(){
+
+    },*/
     submitForm() {
       console.log('submit!');
 
@@ -529,7 +564,7 @@ export default {
         $('.item-column2 textarea').css("width", "300px")
       }
     }
-  }
+  },
 }
 
 </script>

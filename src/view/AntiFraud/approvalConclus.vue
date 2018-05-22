@@ -122,11 +122,30 @@
           案件编号：
         </div>
         <div>
-          <el-select v-model="caseNum">
+          <!-- <el-select v-model="caseNum">
             <el-option v-for="item in caseOptions" :label="item.caseNum" :value="item.caseNum">
+            </el-option>
+          </el-select> -->
+          <el-select
+            v-model="caseNum"
+            clearable
+            filterable
+            remote
+            reserve-keyword
+            placeholder="请输入关键词"
+            :remote-method="remoteMethod"
+            :loading="loading">
+            <el-option
+              v-for="item in caseOptions"
+              :key="item.caseNum"
+              :label="item.caseNum"
+              :value="item.caseNum">
             </el-option>
           </el-select>
         </div>
+      </li>
+      <li>
+        <el-button class="btn-detail btn-detail2" @click="caseAdd">新增</el-button>
       </li>
       <li class="item-column1 item-column3-2">
         <div class="left-title">案件描述：</div>
@@ -292,6 +311,42 @@
         </span>
       </el-dialog>
     </div>
+    <!-- 案件编号-新增弹框 -->
+    <div class="bigDataLog addDataLog">
+      <el-dialog title="" :visible.sync="addLogVisible" width="430px">
+        <p class="addLogP">
+          <label><span class="xing">*</span>案件编号：</label>
+          <el-input
+            :rows="1"
+            placeholder="请输入内容"
+            v-model="caseNums"
+            :maxlength="50"
+            >
+          </el-input>
+          <span class="addWarimg" v-show="caseNums != null && caseNums.length==50">
+            输入长度不能超过50
+          </span>
+        </p>
+        <p class="addLogP addLogP2">
+          <label><span class="xing">*</span>案件描述：</label>
+          <span class="addWarimg" v-show="caseDescs != null && caseDescs.length==500">
+            输入长度不能超过500
+          </span>
+          <el-input
+          type="textarea"
+          :rows="5"
+          placeholder="请输入内容"
+          v-model="caseDescs"
+          :maxlength="500"
+          resize="none"
+          >
+        </el-input>
+        </p>
+        <span slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="addSure">确认</el-button>
+        </span>
+      </el-dialog>
+    </div>
   </div>
 </template>
 <script>
@@ -299,6 +354,27 @@
   export default {
     data() {
       return {
+        list: [],
+        loading: false,
+        states: ["Alabama", "Alaska", "Arizona",
+        "Arkansas", "California", "Colorado",
+        "Connecticut", "Delaware", "Florida",
+        "Georgia", "Hawaii", "Idaho", "Illinois",
+        "Indiana", "Iowa", "Kansas", "Kentucky",
+        "Louisiana", "Maine", "Maryland",
+        "Massachusetts", "Michigan", "Minnesota",
+        "Mississippi", "Missouri", "Montana",
+        "Nebraska", "Nevada", "New Hampshire",
+        "New Jersey", "New Mexico", "New York",
+        "North Carolina", "North Dakota", "Ohio",
+        "Oklahoma", "Oregon", "Pennsylvania",
+        "Rhode Island", "South Carolina",
+        "South Dakota", "Tennessee", "Texas",
+        "Utah", "Vermont", "Virginia",
+        "Washington", "West Virginia", "Wisconsin",
+        "Wyoming"],
+        caseNums:'',
+        caseDescs:'',
         taskName: '',
         // nodeName: '',
         // routeParams: '',
@@ -392,16 +468,16 @@
         secondaryReason: '',
         isLoading: false, // 审批按钮 是否加载状态
         loadingTitle: '提交', // 默认btn title
-        taskwaitting: ''
+        taskwaitting: '',
+        //案件编号-新增弹框
+        addLogVisible:false,
         // mainName:'',
         // secondaryName:''
       }
     },
     mounted() {
       console.log(JSON.parse(localStorage.getItem("AntitaskInWaitting")))
-
-
-
+      
       // 取出  申请信息   applicationInformationDetail
       this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
       //console.log(this.applicationInformationDetail);
@@ -711,7 +787,12 @@
         this.get('/fraudAuditOpinion/queryCaseNumList?' + Math.random()).then(res => {
           // console.log(res);
           if (res.statusCode == '200') {
-            this.caseOptions = res.data;
+            console.log('电话客户打款顶级联赛的就角度考虑附件'+res.data[0].caseNum);
+            this.list = res.data;
+           /* this.list = res.data.map(item => {
+            return { value: item.caseNum, label: item.caseNum };
+          });
+          console.log('*********'+this.list);*/
           }
         })
       },
@@ -1514,7 +1595,68 @@
       getSecond(val) {
         console.log(val);
         this.secondReason = val;
-      }
+      },
+      /*案件编号-新增按钮*/
+      caseAdd(){
+        this.addLogVisible = true;
+      },
+      /*案件编号-新增弹框-确认*/
+      addSure(){
+          if (!this.caseNums) {
+              this.$message({
+                showClose: true,
+                message: '请填写案件编号',
+                type: 'warning'
+              });
+              return;
+            }else if(!this.caseDescs){
+              this.$message({
+                showClose: true,
+                message: '请填写案件描述',
+                type: 'warning'
+              });
+              return;
+            };
+            if(this.caseNums && this.caseDescs){
+              this.post('/caseInfoController/insert', {
+                  param:{
+                    caseNum: this.caseNums,
+                    creatorCode:'',
+                    creatorOrgCode:'',
+                    caseDesc:this.caseDescs
+                  }
+                }).then(res => {
+                  if(res.statusCode != 200){
+                    this.$message({
+                    showClose: true,
+                    message: res.msg,
+                    type: 'warning'
+                  });
+                  return;
+                  }else{
+                    this.addLogVisible = false;
+                    this.caseNum = this.caseNums;
+                    this.queryCaseNumList();
+                  }
+                })
+            }
+      },
+      remoteMethod(query) {
+        if (query !== '') {
+          this.loading = true;
+          setTimeout(() => {
+            this.loading = false;
+            this.caseOptions = this.list.filter(item => {
+              return item.caseNum.toLowerCase()
+                .indexOf(query.toLowerCase()) > -1;
+            });
+          }, 200);
+          console.log(this.caseOptions);
+        } else {
+          this.caseOptions = [];
+          //this.caseNum = '';
+        }
+      },
     },
     watch: {
       // 审核结论 改变请求主原因
@@ -2044,8 +2186,11 @@
   .approval-colun .btn-detail {
     /*border: none;*/
     float: left;
-    margin-top: 35px;
+    margin-top: 20px;
     margin-left: 10px;
+  }
+  .approval-colun .btn-detail2 {
+    margin-top: 0px;
   }
 
 
@@ -2221,4 +2366,40 @@
     padding: 30px 20px;
   }
 
+  /* 必填 */
+  .xing{
+    color:#ff7676;
+    font-size: 14px;
+    position: relative;
+    top: 2px;
+    right: 2px;
+  }
+  .approval-colun .addLogP{
+    position: relative;
+  }
+  .approval-colun .addLogP .addWarimg{
+    position: absolute;
+    left: 85px;
+    top: -20px;
+    color:#ff7676;
+    font-size: 12px;
+  }
+  .approval-colun .addLogP label{
+    width: 80px;
+    text-align: right;
+    display: inline-block;
+  }
+  .approval-colun .addLogP div{
+    width: 280px;
+    display: inline-block;
+  }
+  .approval-colun .addLogP2{
+    margin-top: 15px;
+  }
+  .approval-colun .addLogP2 label{
+    float: left;
+    height: 114px;
+    line-height: 114px;
+    margin-right: 5px;
+  }
 </style>
