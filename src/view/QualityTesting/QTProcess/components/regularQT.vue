@@ -37,16 +37,17 @@
             <tr>
               <th width='40px'> 序号</th>
               <th width='200px'>核实类型 </th>
-              <th width='150px'>核实结论（必填）</th>
-              <th>备注（非必填）</th>
+              <th width='150px'>核实结论</th>
+              <th>备注</th>
             </tr>
             <tr>
               <td> 1</td>
-              <td> 申请单表是否符合要求</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isForm" @change='clearContent("申请单表",regularInfo.isForm)'>
-                  <el-radio :label="1">是</el-radio>
-                  <el-radio :label="0">否</el-radio>
+                <b class="required_Red"> * </b> 申请单表是否符合要求</td>
+              <td>
+                <el-radio-group :disabled='material' v-model="regularInfo.isForm" @change="regularInfo.isForm=='1'?regularInfo.isFormRemark='':regularInfo.isFormRemark">
+                  <el-radio label="1">是</el-radio>
+                  <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
@@ -57,11 +58,12 @@
             </tr>
             <tr>
               <td> 2</td>
-              <td> 身份证证明是否符合要求</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isIdcard" @change='clearContent("身份证",regularInfo.isIdcard)'>
-                  <el-radio :label="1">是</el-radio>
-                  <el-radio :label="0">否</el-radio>
+                <b class="required_Red"> * </b>身份证证明是否符合要求</td>
+              <td>
+                <el-radio-group :disabled='material' v-model="regularInfo.isIdcard" @change="regularInfo.isIdcard=='1'?regularInfo.isIdcardRemark='':regularInfo.isIdcardRemark">
+                  <el-radio label="1">是</el-radio>
+                  <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
@@ -72,11 +74,12 @@
             </tr>
             <tr>
               <td> 3</td>
-              <td> 收入证明是否符合要求</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isIncome" @change='clearContent(" 收入证明",regularInfo.isIncome)'>
-                  <el-radio :label="1">是</el-radio>
-                  <el-radio :label="0">否</el-radio>
+                <b class="required_Red"> * </b>收入证明是否符合要求</td>
+              <td>
+                <el-radio-group :disabled='material' v-model="regularInfo.isIncome" @change="regularInfo.isIncome=='1'?regularInfo.isIncomeRemark='':regularInfo.isIncomeRemark">
+                  <el-radio label="1">是</el-radio>
+                  <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
@@ -87,11 +90,12 @@
             </tr>
             <tr>
               <td> 4</td>
-              <td> 工作证明是否符合要求</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isWork" @change='clearContent("工作证明",regularInfo.isWork)'>
-                  <el-radio :label="1">是</el-radio>
-                  <el-radio :label="0">否</el-radio>
+                <b class="required_Red"> * </b>工作证明是否符合要求</td>
+              <td>
+                <el-radio-group :disabled='material' v-model="regularInfo.isWork" @change="regularInfo.isWork=='1'?regularInfo.isWorkRemark='':regularInfo.isWorkRemark">
+                  <el-radio label="1">是</el-radio>
+                  <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
@@ -102,11 +106,12 @@
             </tr>
             <tr>
               <td> 5</td>
-              <td> 房产资料是否符合要求</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isEstate" @change='clearContent("房产资料",regularInfo.isIdcard)'>
-                  <el-radio :label="1">是</el-radio>
-                  <el-radio :label="0">否</el-radio>
+                <b class="required_Red"> * </b>房产资料是否符合要求</td>
+              <td>
+                <el-radio-group :disabled='material' v-model="regularInfo.isEstate" @change="regularInfo.isEstate=='1'?regularInfo.isEstateRemark='':regularInfo.isEstateRemark">
+                  <el-radio label="1">是</el-radio>
+                  <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
@@ -117,11 +122,12 @@
             </tr>
             <tr>
               <td> 6</td>
-              <td> 居住证明是否符合要求</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isLive" @change='clearContent("居住证明",regularInfo.isLive)'>
-                  <el-radio :label="1">是</el-radio>
-                  <el-radio :label="0">否</el-radio>
+                <b class="required_Red"> * </b>居住证明是否符合要求</td>
+              <td>
+                <el-radio-group :disabled='material' v-model="regularInfo.isLive" @change="regularInfo.isLive=='1'?regularInfo.isLiveRemark='':regularInfo.isLiveRemark">
+                  <el-radio label="1">是</el-radio>
+                  <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
@@ -132,11 +138,12 @@
             </tr>
             <tr>
               <td> 7</td>
-              <td> 经营证明是否符合要求</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isBusiness" @change='clearContent("经营证明",regularInfo.isBusiness)'>
-                  <el-radio :label="1">是</el-radio>
-                  <el-radio :label="0">否</el-radio>
+                <b class="required_Red"> * </b> 经营证明是否符合要求</td>
+              <td>
+                <el-radio-group :disabled='material' v-model="regularInfo.isBusiness" @change="regularInfo.isBusiness=='1'?regularInfo.isBusinessRemark='':regularInfo.isBusinessRemark">
+                  <el-radio label="1">是</el-radio>
+                  <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
@@ -147,11 +154,12 @@
             </tr>
             <tr>
               <td> 8</td>
-              <td> 信用报告是否符合要求</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isCredit" @change='clearContent("信用报告",regularInfo.isCredit)'>
-                  <el-radio :label="1">是</el-radio>
-                  <el-radio :label="0">否</el-radio>
+                <b class="required_Red"> * </b>信用报告是否符合要求</td>
+              <td>
+                <el-radio-group :disabled='material' v-model="regularInfo.isCredit" @change="regularInfo.isCredit=='1'?regularInfo.isCreditRemark='':regularInfo.isCreditRemark">
+                  <el-radio label="1">是</el-radio>
+                  <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
@@ -162,11 +170,12 @@
             </tr>
             <tr>
               <td> 9</td>
-              <td> 客户流水是否符合要求</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isCustomerflow" @change='clearContent("客户流水",regularInfo.isCustomerflow)'>
-                  <el-radio :label="1">是</el-radio>
-                  <el-radio :label="0">否</el-radio>
+                <b class="required_Red"> * </b> 客户流水是否符合要求</td>
+              <td>
+                <el-radio-group :disabled='material' v-model="regularInfo.isCustomerflow" @change="regularInfo.isCustomerflow=='1'?regularInfo.isCustomerflowRemark='':regularInfo.isCustomerflowRemark">
+                  <el-radio label="1">是</el-radio>
+                  <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
@@ -177,11 +186,12 @@
             </tr>
             <tr>
               <td> 10</td>
-              <td> 客户其他资料是否符合要求</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isCustomerother" @change='clearContent("其他资料",regularInfo.isCustomerother)'>
-                  <el-radio :label="1">是</el-radio>
-                  <el-radio :label="0">否</el-radio>
+                <b class="required_Red"> * </b> 客户其他资料是否符合要求</td>
+              <td>
+                <el-radio-group :disabled='material' v-model="regularInfo.isCustomerother" @change="regularInfo.isCustomerother=='1'?regularInfo.isCustomerotherRemark='':regularInfo.isCustomerotherRemark">
+                  <el-radio label="1">是</el-radio>
+                  <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
@@ -192,11 +202,12 @@
             </tr>
             <tr>
               <td> 11 </td>
-              <td> 负债计算是否正确</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isLiabilities" @change='clearContent(" 负债计算",regularInfo.isLiabilities)'>
-                  <el-radio :label="1">是</el-radio>
-                  <el-radio :label="0">否</el-radio>
+                <b class="required_Red"> * </b> 负债计算是否正确</td>
+              <td>
+                <el-radio-group :disabled='material' v-model="regularInfo.isLiabilities" @change="regularInfo.isLiabilities=='1'?regularInfo.isLiabilitiesRemark='':regularInfo.isLiabilitiesRemark">
+                  <el-radio label="1">是</el-radio>
+                  <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
@@ -207,11 +218,12 @@
             </tr>
             <tr>
               <td> 12 </td>
-              <td> 流水计算是否正确</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isFlow" @change='clearContent("流水计算",regularInfo.isFlow)'>
-                  <el-radio :label="1">是</el-radio>
-                  <el-radio :label="0">否</el-radio>
+                <b class="required_Red"> * </b> 流水计算是否正确</td>
+              <td>
+                <el-radio-group :disabled='material' v-model="regularInfo.isFlow" @change="regularInfo.isFlow=='1'?regularInfo.isFlowRemark='':regularInfo.isFlowRemark">
+                  <el-radio label="1">是</el-radio>
+                  <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
@@ -222,11 +234,12 @@
             </tr>
             <tr>
               <td> 13</td>
-              <td> 征信录入是否正确</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isReference" @change='clearContent("征信录入",regularInfo.isReference)'>
-                  <el-radio :label="1">是</el-radio>
-                  <el-radio :label="0">否</el-radio>
+                <b class="required_Red"> * </b> 征信录入是否正确</td>
+              <td>
+                <el-radio-group :disabled='material' v-model="regularInfo.isReference" @change="regularInfo.isReference=='1'?regularInfo.isReferenceRemark='':regularInfo.isReferenceRemark">
+                  <el-radio label="1">是</el-radio>
+                  <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
@@ -251,16 +264,17 @@
             <tr>
               <th width='40px'> 序号</th>
               <th width='290px'>核实类型 </th>
-              <th width='150px'>核实结论（必填）</th>
-              <th>备注（非必填）</th>
+              <th width='150px'>核实结论</th>
+              <th>备注</th>
             </tr>
             <tr>
               <td> 1</td>
-              <td> 客户在人法网是否有被执行信息</td>
               <td>
-                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wbeexEcuted" @change='clearContent("被执行信息",regularInfo.wbeexEcuted)'>
-                  <el-radio :label="1">是</el-radio>
-                  <el-radio :label="0">否</el-radio>
+                <b class="required_Red"> * </b> 客户在人法网是否有被执行信息</td>
+              <td>
+                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wbeexEcuted" @change="regularInfo.wbeexEcuted=='0'?regularInfo.wbeexEcutedtxt='':regularInfo.wbeexEcutedtxt">
+                  <el-radio label="1">是</el-radio>
+                  <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
@@ -271,11 +285,12 @@
             </tr>
             <tr>
               <td> 2</td>
-              <td> 客户在失信网是否有失信记录</td>
               <td>
-                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetEcutedBrea" @change='clearContent("失信记录",regularInfo.wnetEcutedBrea)'>
-                  <el-radio :label="1">是</el-radio>
-                  <el-radio :label="0">否</el-radio>
+                <b class="required_Red"> * </b> 客户在失信网是否有失信记录</td>
+              <td>
+                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetEcutedBrea" @change="regularInfo.wnetEcutedBrea=='0'?regularInfo.wnetEcutedBreatxt='':regularInfo.wnetEcutedBreatxt">
+                  <el-radio label="1">是</el-radio>
+                  <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
@@ -286,11 +301,12 @@
             </tr>
             <tr>
               <td> 3</td>
-              <td> 网上搜索借款人的手机是否有异常</td>
               <td>
-                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetPhone" @change='clearContent("手机异常",regularInfo.wnetPhone)'>
-                  <el-radio :label="1">是</el-radio>
-                  <el-radio :label="0">否</el-radio>
+                <b class="required_Red"> * </b> 网上搜索借款人的手机是否有异常</td>
+              <td>
+                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetPhone" @change="regularInfo.wnetPhone=='0'?regularInfo.wnetPhonetxt='':regularInfo.wnetPhonetxt">
+                  <el-radio label="1">是</el-radio>
+                  <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
@@ -301,11 +317,12 @@
             </tr>
             <tr>
               <td> 4</td>
-              <td> 网上搜索借款人现居住地址和房产地址是否异常</td>
               <td>
-                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetAddrandEstate" @change='clearContent("居住房产异常",regularInfo.wnetAddrandEstate)'>
-                  <el-radio :label="1">是</el-radio>
-                  <el-radio :label="0">否</el-radio>
+                <b class="required_Red"> * </b> 网上搜索借款人现居住地址和房产地址是否异常</td>
+              <td>
+                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetAddrandEstate" @change="regularInfo.wnetAddrandEstate=='0'?regularInfo.wnetAddrandEstatetxt='':regularInfo.wnetAddrandEstatetxt">
+                  <el-radio label="1">是</el-radio>
+                  <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
@@ -316,11 +333,12 @@
             </tr>
             <tr>
               <td> 5</td>
-              <td> 当地工商网查询企业基本信息中是否有登记</td>
               <td>
-                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetCompany" @change='clearContent("工商登记",regularInfo.wnetCompany)'>
-                  <el-radio :label="1">是</el-radio>
-                  <el-radio :label="0">否</el-radio>
+                <b class="required_Red"> * </b> 当地工商网查询企业基本信息中是否有登记</td>
+              <td>
+                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetCompany" @change="regularInfo.wnetCompany=='1'?regularInfo.wnetCompanytxt='':regularInfo.wnetCompanytxt">
+                  <el-radio label="1">是</el-radio>
+                  <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
@@ -331,11 +349,12 @@
             </tr>
             <tr>
               <td> 6</td>
-              <td> 客户工作单位在全国组织代码查询中是否存在</td>
               <td>
-                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetAddrstate" @change='clearContent("全国组织代码",regularInfo.wnetAddrstate)'>
-                  <el-radio :label="1">是</el-radio>
-                  <el-radio :label="0">否</el-radio>
+                <b class="required_Red"> * </b> 客户工作单位在全国组织代码查询中是否存在</td>
+              <td>
+                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetAddrstate" @change="regularInfo.wnetAddrstate=='1'?regularInfo.wnetAddrstatetxt='':regularInfo.wnetAddrstatetxt">
+                  <el-radio label="1">是</el-radio>
+                  <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
@@ -370,16 +389,17 @@
             <tr>
               <th width='40px'> 序号</th>
               <th width='290px'>核实类型 </th>
-              <th width='150px'>核实结论（必填）</th>
-              <th>备注（非必填）</th>
+              <th width='150px'>核实结论</th>
+              <th>备注</th>
             </tr>
             <tr>
               <td> 1</td>
-              <td> 内部匹配是否进行排查</td>
               <td>
-                <el-radio-group :disabled='matching' v-model="regularInfo.isInmatch" @change='clearContent("匹配排查",regularInfo.isInmatch)'>
-                  <el-radio :label="1">是</el-radio>
-                  <el-radio :label="0">否</el-radio>
+                <b class="required_Red"> * </b> 内部匹配是否进行排查</td>
+              <td>
+                <el-radio-group :disabled='matching' v-model="regularInfo.isInmatch" @change="regularInfo.isInmatch=='1'?regularInfo.isInmatchRemark='':regularInfo.isInmatchRemark">
+                  <el-radio label="1">是</el-radio>
+                  <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
@@ -407,31 +427,32 @@
               {{val}}</li>
           </ul>
           <!-- pay-content 微信/支付宝核实 -->
-          <div v-show="this.payment">
+          <div v-show="this.payment" class="weChatNapliay">
             <!-- <p class="P_title">微信/支付宝核实</p> -->
-           <p style='clear:both;padding:3px 0;'><el-tag>微信/支付宝核实</el-tag></p> 
+            <p style='clear:both;padding:3px 0;'>
+              <el-tag>微信/支付宝核实</el-tag>
+            </p>
             <el-table :data="Alipay" border style="width: 100%">
               <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
-              <el-table-column label="核实类型" align="left" width="180">
-                <template slot-scope="scope">
+              <el-table-column label="核实类型" prop='insVerifyTypeTxt' align="left" width="180">
+                <!-- <template slot-scope="scope">
                   <span style="margin-left: 10px">
-                    <!-- <b style="color:red;fontWeight:700px"> * </b> -->
                     <label v-if='scope.row.insVerifyType=="00"'> {{ '微信查询结果' }}</label>
                     <label v-if='scope.row.insVerifyType=="01"'> {{ '支付宝查询结果' }}</label>
                   </span>
-                </template>
+                </template> -->
               </el-table-column>
               <el-table-column label="核实结论" align="center" width="180">
                 <template slot-scope="scope">
                   <div slot="reference" class="name-wrapper">
-                    <el-radio-group :disabled='PhoneCredit' v-model="scope.row.insResult" @change="clearContent(scope.row)">
-                      <el-radio :label="'00'">正常</el-radio>
-                      <el-radio :label="'01'">异常</el-radio>
+                    <el-radio-group :disabled='PhoneCredit' v-model="scope.row.insResult" @change="scope.row.insResult=='00'?scope.row.remark='':scope.row.remark">
+                      <el-radio label="00">正常</el-radio>
+                      <el-radio label="01">异常</el-radio>
                     </el-radio-group>
                   </div>
                 </template>
               </el-table-column>
-              <el-table-column label="备注（非必填）" align="center" >
+              <el-table-column label="备注" align="center">
                 <template slot-scope="scope">
                   <el-input type="textarea" :disabled='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model="scope.row.remark"
                     :maxlength="this.textareaL" placeholder="请输入内容">
@@ -441,25 +462,27 @@
             </el-table>
           </div>
           <!-- call-content 客户本人中-电话拨打核实  -->
-          <div v-show="this.custom">
+          <div v-show="custom">
             <!-- <p class="P_title">电话拨打核实</p> -->
-           <p style='clear:both;padding:3px 0;'><el-tag>电话拨打核实</el-tag></p> 
-            <el-table :data="insTelCustInfo" border style="width: 100%">
+            <p style='clear:both;padding:3px 0;'>
+              <el-tag>电话拨打核实</el-tag>
+            </p>
+            <!-- <el-table :data="insTelCustInfo" border style="width: 100%">
               <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
-              <!-- <el-table-column label="电话号码" align="center" width="180">
+              <el-table-column label="电话号码" align="center" width="180">
                 <template slot-scope="scope">
                   <span style="margin-left: 10px">
                     <b style="color:red;fontWeight:700px"> * </b>{{ scope.row.telNum }}</span>
                 </template>
-              </el-table-column> -->
+              </el-table-column>
               <el-table-column prop="telNum" label="电话号码" align="center" width="180">
               </el-table-column>
-              <!-- <el-table-column label="电话录音" align="center" width="100">
+              <el-table-column label="电话录音" align="center" width="100">
                 <template slot-scope="scope">
                   <span style="margin-left: 10px">{{ scope.row.telRecord }}</span>
                 </template>
-              </el-table-column> -->
-              <el-table-column prop="telRecord" label="电话录音" align="center" width="180">
+              </el-table-column>
+              <el-table-column prop="telRecord" label="电话录音aaaaa" align="center" width="180">
               </el-table-column>
               <el-table-column prop="iisself" label="接听人是否借款人本人" align="center" width="180">
               </el-table-column>
@@ -468,26 +491,67 @@
               <el-table-column label="质检结果（必填项）" align="center" width="180">
                 <template slot-scope="scope">
                   <div slot="reference" class="name-wrapper">
+                    <b class="required_Red"> * </b> 
                     <el-radio-group :disabled='PhoneCredit' v-model="scope.row.insResult" @change="clearContent(scope.row)">
-                      <el-radio :label="'00'">正常</el-radio>
-                      <el-radio :label="'01'">异常</el-radio>
+                      <el-radio label="00">正常</el-radio>
+                      <el-radio label="01">异常</el-radio>
                     </el-radio-group>
                   </div>
                 </template>
               </el-table-column>
-              <el-table-column label="备注（非必填）" align="center" min-width="180">
+              <el-table-column label="备注" align="center" min-width="180">
                 <template slot-scope="scope">
                   <el-input type="textarea" :disabled='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model="scope.row.remark"
                     :maxlength="this.textareaL" placeholder="请输入内容">
                   </el-input>
                 </template>
               </el-table-column>
-            </el-table>
+            </el-table> -->
+            <!-- ============对象形式============= -->
+            <table border="1" cellpadding='2' width='100%'>
+              <tr>
+                <th width='40px'> 序号</th>
+                <th width='160px'>电话号码 </th>
+                <th width='130px'>电话录音 </th>
+                <th width='160px'>接听人是否借款人本人 </th>
+                <th width='200px'>接听说明 </th>
+                <th width='150px'>
+                  <b class="required_Red"> * </b>质检结果</th>
+                <th>备注 </th>
+              </tr>
+              <tr>
+                <td> 1</td>
+                <!-- 电话号码 -->
+                <td> {{insTelCustInfo.telNum}}</td>
+                <!-- 电话录音-->
+                <td> {{insTelCustInfo.telRecord}}</td>
+                <!-- 接听人是否借款人本人 -->
+                <td> {{insTelCustInfo.iisself}}</td>
+                <!-- 接听说明 -->
+                <td> {{insTelCustInfo.iisselftxt}}</td>
+                <!-- 质检结果 -->
+                <td>
+                  <el-radio-group :disabled='PhoneCredit' v-model="insTelCustInfo.insResult" @change="insTelCustInfo.insResult=='00'?insTelCustInfo.remark='':insTelCustInfo.remark">
+                    <el-radio label="00">正常</el-radio>
+                    <el-radio label="01">异常</el-radio>
+                  </el-radio-group>
+                </td>
+                <!-- 备注 -->
+                <td>
+                  <el-input type='textarea' v-if="insTelCustInfo.insResult=='01'" v-model="insTelCustInfo.remark" :rows="2" resize="none" :maxlength='arealength'
+                    placeholder="请输入内容">
+                  </el-input>
+                </td>
+              </tr>
+            </table>
+            <!-- ====================== -->
           </div>
           <!-- others-content 除客户本人的 电话拨打核实-->
           <div v-show="this.others">
             <!-- <p class="P_title">电话拨打核实</p> -->
-           <p style='clear:both;padding:3px 0;'><el-tag>电话拨打核实</el-tag></p>             
+            <p style='clear:both;padding:3px 0;'>
+              <el-tag>电话拨打核实</el-tag>
+            </p>
             <el-table :data="insTelVerifyList" border style="width: 100%">
               <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
               <!-- <el-table-column label="电话号码" align="center" width="180">
@@ -517,14 +581,15 @@
               <el-table-column label="质检结果（必填项）" align="center" width="180">
                 <template slot-scope="scope">
                   <div slot="reference" class="name-wrapper">
+                    <b class="required_Red"> * </b>
                     <el-radio-group :disabled='PhoneCredit' v-model="scope.row.insResult" @change="clearContent(scope.row)">
-                      <el-radio :label="'00'">正常</el-radio>
-                      <el-radio :label="'01'">异常</el-radio>
+                      <el-radio label="00">正常</el-radio>
+                      <el-radio label="01">异常</el-radio>
                     </el-radio-group>
                   </div>
                 </template>
               </el-table-column>
-              <el-table-column label="备注（非必填）" align="center" min-width="180">
+              <el-table-column label="备注" align="center" min-width="180">
                 <template slot-scope="scope">
                   <el-input type="textarea" :disabled='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model="scope.row.remark"
                     :maxlength="this.textareaL" placeholder="请输入内容">
@@ -655,7 +720,7 @@
           <div>
             <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
             <p style="display:inline-block" class="headFont">质检结论</p>
-            <p style="float:right">
+            <p style="float:right" v-if='QTConclutionBtn'>
               <!-- <span class="btn" @click.stop="addTr=true"> -->
               <span class="btn" @click.stop="addQTResult">
                 <img src='../../../../../static/images/add.png'> 添加 </span>
@@ -665,7 +730,7 @@
           </div>
         </template>
         <div class="result_QT">
-          <el-table :data="insConclusion" style="width: 100%" border min-width='1366px'>
+          <el-table :data="insConclusion" style="width: 100%" @current-change='QTtableVal' border min-width='1366px'>
             <el-table-column label="质检结果" align="center" width="240">
               <template slot-scope="scope">
                 <i class="required_Red"> * </i>
@@ -689,7 +754,7 @@
                 </el-tooltip>
               </template>
             </el-table-column>
-            <el-table-column label="备注（非必填）" align="center" min-width="200">
+            <el-table-column label="备注" align="center" min-width="200">
               <template slot-scope="scope">
                 <el-tooltip class="item" effect="dark" :content="scope.row.remark" :disabled="!scope.row.remark" placement="top-start">
                   <el-input type='textarea' :disabled='QTConclution' v-model="scope.row.remark" :rows="2" resize="none" :maxlength='arealength'
@@ -709,7 +774,7 @@
               <th width='230px'>质检结果 </th>
               <th width='210px'>差错类型</th>
               <th width='210px'>差错描述</th>
-              <th>备注（非必填）</th>
+              <th>备注</th>
               <th width='150px'>操作人员</th>
               <th width='150px'>操作日期</th>
             </tr>
@@ -762,7 +827,7 @@
         <img src="../../../../../static/images/relieve.png">
         <label class="labelTxt">保存</label>
       </el-button>
-      <el-button @click="SaveInf" v-if="submitBtn">
+      <el-button @click="submitShow" v-if="submitBtn">
         <img src="../../../../../static/images/appro.png">
         <label class="labelTxt">提交</label>
       </el-button>
@@ -803,6 +868,14 @@
       </el-button>
     </div>
     <!-- =================================弹窗===================================== -->
+    <!-- 提交 -->
+    <el-dialog title="提示" :modal="false" :visible.sync="submitShow" width="420px">
+      <span>确定操作？</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button class="calbtn" @click="submitShow=false">取消</el-button>
+        <el-button class="subtn" type="primary" :loading="loadsitu" @click="SaveInf">{{adbtn}}</el-button>
+      </span>
+    </el-dialog>
     <!-- 发起复议  -->
     <el-dialog title='发起复议' :visible.sync="ReconsiderShow" :modal="false" width="620px" top="20vh">
       <div>
@@ -914,7 +987,7 @@
       <el-dialog title="提示" :visible.sync="bigDataLogVisible" :modal="false" width="420px" top="35vh">
         <span>此进件不存在大数据风控明细！</span>
         <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="this.bigDataLogVisible=false">确定</el-button>
+          <el-button type="primary" @click="bigDataLogVisible=false">确定</el-button>
         </span>
       </el-dialog>
     </div>
@@ -937,7 +1010,11 @@
         userInf: '',
         SaveInfParams: '',
         systermTime: Number,
-
+        submitShow: false, //提交弹框
+        loadsitu: false,
+        adbtn: '确认',
+        currentRow: null,
+        addId: '',
         reviewConclusion: '', //复核结论
         isForm: '',
         radio: '1',
@@ -947,32 +1024,161 @@
         arealength: 300, //area长度
         insConclusion: [],
         insWechatAlipay: '', //微信、支付宝
-        Alipay: [], //微信支付宝切换暂存
-        AlipayCus: '', //客户本人-微信
-        AlipayCompany: '', //单位电话-微信
-        AlipayFamily: '', //家庭联系人-微信
-        AlipayWork: '', //工作证明-微信
-        AlipayOthers: '', //其他联系人-微信
-        insTelCustInfo: [], //客户本人-拨打核实
+        AlipayConcat: [], //合并微信拨打核实
+        Alipay: [{ //微信支付宝切换暂存
+            applyId: "",
+            id: "",
+            insResult: "00",
+            insResultTxt: "正常",
+            insVerifyType: "00", //微信
+            insVerifyTypeTxt: "微信查询结果",
+            remark: "",
+            telType: "06" //默认客户本人type
+          },
+          {
+            applyId: "",
+            id: "",
+            insResult: "00",
+            insResultTxt: "正常",
+            insVerifyType: "01", //支付宝
+            insVerifyTypeTxt: "支付宝查询结果",
+            remark: "",
+            telType: "06" //默认客户本人type
+          }
+        ],
+        AlipayCus: [{ //客户本人-微信
+            applyId: "",
+            id: "",
+            insResult: "00",
+            insResultTxt: "正常",
+            insVerifyType: "00", //微信
+            insVerifyTypeTxt: "微信查询结果",
+            remark: "",
+            telType: "06" //默认客户本人type
+          },
+          {
+            applyId: "",
+            id: "",
+            insResult: "00",
+            insResultTxt: "正常",
+            insVerifyType: "01", //支付宝
+            insVerifyTypeTxt: "支付宝查询结果",
+            remark: "",
+            telType: "06" //默认客户本人type
+          }
+        ],
+        // AlipayCompany: [], //单位电话-微信
+        AlipayFamily: [{ //家庭联系人-微信
+            applyId: "",
+            id: "",
+            insResult: "00",
+            insResultTxt: "正常",
+            insVerifyType: "00", //微信
+            insVerifyTypeTxt: "微信查询结果",
+            remark: "",
+            telType: "03"
+          },
+          {
+            applyId: "",
+            id: "",
+            insResult: "00",
+            insResultTxt: "正常",
+            insVerifyType: "01", //支付宝
+            insVerifyTypeTxt: "支付宝查询结果",
+            remark: "",
+            telType: "03"
+          }
+        ],
+        AlipayWork: [{ //工作证明-微信
+            applyId: "",
+            id: "",
+            insResult: "00",
+            insResultTxt: "正常",
+            insVerifyType: "00", //微信
+            insVerifyTypeTxt: "微信查询结果",
+            remark: "",
+            telType: "05"
+          },
+          {
+            applyId: "",
+            id: "",
+            insResult: "00",
+            insResultTxt: "正常",
+            insVerifyType: "01", //支付宝
+            insVerifyTypeTxt: "支付宝查询结果",
+            remark: "",
+            telType: "05"
+          }
+        ],
+        AlipayOthers: [{ //其他联系人-微信
+            applyId: "",
+            id: "",
+            insResult: "00",
+            insResultTxt: "正常",
+            insVerifyType: "00", //微信
+            insVerifyTypeTxt: "微信查询结果",
+            remark: "",
+            telType: "04"
+          },
+          {
+            applyId: "",
+            id: "",
+            insResult: "00",
+            insResultTxt: "正常",
+            insVerifyType: "01", //支付宝
+            insVerifyTypeTxt: "支付宝查询结果",
+            remark: "",
+            telType: "04"
+          }
+        ],
+        // insTelCustInfo: [{
+        //   applyId:'',
+        //   id:'',
+        //   iisself:'',
+        //   iisselftxt:'',
+        //   insResult:'',
+        //   remark:'',
+        //   telNum:'',
+        //   telRecord:'',
+        // }], //客户本人-拨打核实-本人只有一条电话拨打核实记录----array
+        insTelCustInfo: {}, //客户本人-拨打核实-本人只有一条电话拨打核实记录---obj
         insTelVerifyList: [], //除客户本人以外-电话拨打核实-暂存
         insTelVerifyListCompany: [], //单位电话-电话拨打核实
         insTelVerifyListFamily: [], //家庭联系人-电话拨打核实
         insTelVerifyListWork: [], //工作证明-电话拨打核实
         insTelVerifyListOthers: [], //其他联系人-电话拨打核实
 
-
+        insTelVerifyListCompanyCount: 0, //单位电话-电话拨打核实
+        insTelVerifyListFamilyCount: 0, //家庭联系人-电话拨打核实
+        insTelVerifyListWorkCount: 0, //工作证明-电话拨打核实
+        insTelVerifyListOthersCount: 0, //其他联系人-电话拨打核实
+        insTelVerifyListConcat: [], //合并电话拨打核实-除客户本人
         //  regularInfo: {},//接口可调用时待测试默认选中值
         regularInfo: {
-          isForm: 1,
-          isIdcard: 1,
-          isIncome: 1,
-          isWork: 1,
-          isEstate: 1,
-          isLive: 1,
-          isBusiness: 1,
-          isCredit: 1,
-          isCustomerflow: 1,
-          isCustomerother: 1,
+          // 资料核实
+          isForm: '1', //申请单表是否符合要求
+          isIdcard: '1', //身份证证明是否符合要求
+          isIncome: '1', //收入证明是否符合要求
+          isWork: '1', //工作证明是否符合要求
+          isEstate: '1', //房产资料是否符合要求
+          isLive: '1', //居住证明是否符合要求
+          isBusiness: '1', //经营证明是否符合要求
+          isCredit: '1', //信用报告是否符合要求
+          isCustomerflow: '1', //客户流水是否符合要求
+          isCustomerother: '1', //客户其他资料是否符合要求
+          isLiabilities: null, //负债计算是否正确
+          isFlow: null, //流水计算是否正确
+          isReference: null, //征信录入是否正确
+          // 第三方信息查询 
+          wbeexEcuted: null, //客户在人法网是否有被执行信息
+          wnetEcutedBrea: null, //客户在失信网是否有失信记录
+          wnetPhone: null, //网上搜索借款人的手机是否有异常
+          wnetAddrandEstate: null, //网上搜索借款人现居住地址和房产地址是否异常
+          wnetCompany: null, //当地工商网查询企业基本信息中是否有登记
+          wnetAddrstate: null, //客户工作单位在全国组织代码查询中是否存在
+          icbcRegistrationInfo: null, //工商登记信息说明
+          // 内部匹配核实
+          isInmatch: null, //内部匹配是否进行排查
         }, // // 资料核实+三方信息查询+ 内部匹配核实
         // insConclusion:'',
         // ------------------------------------测试用--------------------
@@ -1028,11 +1234,6 @@
           value: '07',
           label: '无'
         }],
-        // Match: [{
-        //   title: '内部匹配是否进行排查',
-        //   conclution: null,
-        //   comment: ''
-        // }],
         RecResult: [{
           label: '审批拒绝',
           value: '02',
@@ -1040,48 +1241,6 @@
           label: '审批通过',
           value: '01',
         }],
-        // PhoneCheck: [{
-        //   title: '内部匹配是否进行排查',
-        //   Self: '是',
-        //   conclution: null,
-        //   comment: ''
-        // }],
-
-        // othersCheck: [{
-        //   title: '1242346956',
-        //   Self: '否',
-        //   conclution: null,
-        //   comment: ''
-        // }],
-        // a: [{
-        //   title: '4444444444',
-        //   Self: '否',
-        //   conclution: null,
-        //   comment: ''
-        // }],
-        // b: [{
-        //   title: '7777777777',
-        //   Self: '否',
-        //   conclution: null,
-        //   comment: ''
-        // }],
-        // insConclusion: [{
-        //   title: "",
-        //   Self: '否',
-        //   conclution: null,
-        //   comment: '',
-        //   result: '',
-        //   person: '吴彦祖',
-        //   date: '2019-20-3'
-        // }, {
-        //   title: "",
-        //   Self: '否',
-        //   conclution: null,
-        //   comment: '',
-        //   result: '',
-        //   person: '吴彦祖',
-        //   date: '2019-20-3'
-        // }],
 
         // ----------------------------------------
         options: [{
@@ -1097,8 +1256,6 @@
         value: '',
         // --------------------------------
         // insWechatAlipayList:'',
-        processInstanceId: '',
-        changeAlipay: '',
         // insTelCustInfo:{},//客户本人-拨打核实
         // -----------弹窗---
         ReconsiderShow: false,
@@ -1113,7 +1270,7 @@
         material: false, //资料核实
         InfoInquire: false, //三方信息查询
         matching: false, //内部配核实
-        PhoneCredit: true, //电话征信
+        PhoneCredit: false, //电话征信
         QTConclution: false, //质检结论
         // -----------------手风琴显示项--------------------
         AprovalInfolShow: true, //审批信息        
@@ -1125,6 +1282,8 @@
         SuperVisor: false, //审批主管第一次复议申请信息
         FirstReconsider: false, // 第一次复议申请信息
         SuperVisorSecond: false, // 审批主管第二次复议申请信息
+        // --------------------底部按钮全部+质检结论添加删除按钮-----------------
+        QTConclutionBtn: false,
         BottomBtn: true, //底部按钮全部
         saveBtn: true, //按钮 - 保存
         submitBtn: true, //按钮 - 提交
@@ -1153,24 +1312,41 @@
         console.log('furyi ')
         this.ReconsiderShow = true;
       },
-      // 质检页面查询接口
-      referPort() {
+      referPort() { // 质检页面查询接口
         this.get("/insConclusion/queryInsConclusionObj?" + Math.random(), {
           applyId: this.propQTconclution.applyId, //入参待更新+测试-------------------------------------------------------
         }).then(res => {
           if (res.statusCode == 200) {
+            console.log(this.AlipayCus)
+            // console.log(res.data.insTelCustInfo)
             //  基本信息                                -Object
             this.baseInfo = res.data.applyBaseInfo;
             // 资料核实+三方信息查询+ 内部匹配核实         -Object
-            this.regularInfo = res.data.insRegularInfo;
+            !res.data.insRegularInfo ? this.regularInfo : this.regularInfo = res.data.insRegularInfo;
             // 质检结论                                  -Object
-            this.insConclusion = res.data.insConclusion;
+            !res.data.insConclusionList ? this.insConclusion : this.insConclusion = res.data.insConclusionList;
+            this.insConclusion[0].id ? this.addId = this.insConclusion[0].id : this.addId = ''; //取添加质检结论时，id值
+            // 电话征信：客户本人-电话拨打核实 - 本人只有一条电话拨打核实记录            -object
+            this.insTelCustInfo = res.data.insTelCustInfo; //this.insTelCustInfo 是array / 查询接口 -只返回客户本人-电话核实信息
+            !this.insTelCustInfo.insResult ? this.insTelCustInfo.insResult = '00' : this.insTelCustInfo.insResult; //本人拨打电话核实-默认选00           
+            //电话征信： 微信/支付宝核实                    -Array
+            // this.insWechatAlipayList = res.data.insWechatAlipayList;//第一次进来默认显示客户
+            //          // this.Alipay= this.AlipayCus = res.data.insWechatAlipayList; // 查询接口 -只返回客户本人-微信支付宝信息
 
-            // 电话征信：客户本人-电话拨打核实             -object
-            this.insTelCustInfo[0] = res.data.insTelCustInfo; //this.insTelCustInfo 是array / 查询接口 -只返回客户本人-电话核实信息
-            //电话征信： 微信/支付宝核实                  -Array
-            // this.insWechatAlipayList = res.data.insWechatAlipayList;
-            this.AlipayCus = res.data.insWechatAlipayList; // 查询接口 -只返回客户本人-微信支付宝信息
+            res.data.insWechatAlipayList.length && res.data.insWechatAlipayList.length > 0 ? this.AlipayCus = this.Alipay =
+              res.data.insWechatAlipayList : this.AlipayCus[0].applyId = this.AlipayCus[1].applyId = this.Alipay[0]
+              .applyId = this.Alipay[1].applyId = this.propQTconclution.applyId; //微信支付宝applyid设置; // 查询接口 -只返回客户本人-微信支付宝信息
+            this.AlipayFamily[0].applyId = this.AlipayFamily[1].applyId = this.AlipayWork[0].applyId = this.AlipayWork[
+              1].applyId = this.AlipayOthers[0].applyId = this.AlipayOthers[1].applyId = this.propQTconclution.applyId; //mounted期间设置家庭联系人，工作证明人，其他联系人applyid
+            console.log(this.Alipay)
+
+
+            //           if(res.data.insWechatAlipayList.length>0){
+            // for(var i=0;i<res.data.insWechatAlipayList.length;i++){
+            // res.data.insWechatAlipayList[i].insVerifyType=='00'?this.Alipay[0]=res.data.insWechatAlipayList[i]:this.Alipay[0];//微信
+            // res.data.insWechatAlipayList[i].insVerifyType=='01'?this.Alipay[1]=res.data.insWechatAlipayList[i]:this.Alipay[1];//支付宝
+            // }
+            //  }
             // for(var i=0;i<this.insWechatAlipayList.length;i++){
             //   switch(this.insWechatAlipayList[i].telType){
             //     case '06':this.AlipayCus=this.insWechatAlipayList[i];break;//客户本人-微信
@@ -1185,15 +1361,15 @@
           }
         });
       },
-
-      getTelAlipay(telTypeVal) {
-        // 电话征信-微信支付宝 + 拨打核实接口
+      getTelAlipay(telTypeVal) { // 电话征信-微信支付宝 + 拨打核实接口------除客户本人 电话征信
         this.post("/insConclusion/getTelVerifyWechatAlipay", {
-          applyId: '申请单id',
+          applyId: this.propQTconclution.applyId,
           // telType: this.telType,
           telType: telTypeVal
         }).then(res => {
           if (res.statusCode == 200) {
+
+            // console.log(telTypeVal )
             // 拨打核实  insTelVerify
             // this.insTelVerifyList = res.data.insTelVerifyList;
 
@@ -1203,59 +1379,93 @@
             // telTypeVal=='03'? this.Alipay=this.AlipayFamily=res.data.insWechatAlipayList:this.Alipay;//家庭联系人-微信
             // telTypeVal=='04'? this.Alipay=this.AlipayOthers=res.data.insWechatAlipayList:this.Alipay;//其他联系人-微信
             // telTypeVal=='05'? this.Alipay=this.AlipayWork=res.data.insWechatAlipayList:this.Alipay;//工作证明人-微信
-            if (telTypeVal == '02') {
-              this.Alipay = this.AlipayCompany = res.data.insWechatAlipayList; //单位联系人-微信
-              this.insTelVerifyList = this.insTelVerifyListCompany = res.data.insTelVerifyList; //单位电话-电话拨打核实
-            } else if (telTypeVal == '03') {
-              this.Alipay = this.AlipayFamily = res.data.insWechatAlipayList; //家庭联系人-微信
-              this.insTelVerifyList = this.insTelVerifyListFamily = res.data.insTelVerifyList; //家庭联系人-电话拨打核实
-            } else if (telTypeVal == '04') {
-              this.Alipay = this.AlipayOthers = res.data.insWechatAlipayList; //其他联系人-微信
-              this.insTelVerifyList = this.insTelVerifyListOthers = res.data.insTelVerifyList; //其他联系人-电话拨打核实
-            } else if (telTypeVal == '05') {
-              this.Alipay = this.AlipayWork = res.data.insWechatAlipayList; //工作证明人-微信
-              this.insTelVerifyList = this.insTelVerifyListWork = res.data.insTelVerifyList; //工作证明-电话拨打核实
+            // if (telTypeVal == '02') {
+            //   this.Alipay = this.AlipayCompany = res.data.insWechatAlipayList; //单位联系人-微信
+            //   console.log(!this.insTelVerifyListCompany )
+            //   // this.insTelVerifyList = this.insTelVerifyListCompany = res.data.insTelVerifyList; //单位电话-电话拨打核实
+            //   this.insTelVerifyList =  res.data.insTelVerifyList; //单位电话-电话拨打核实
+            // } else if (telTypeVal == '03') {
+            //   this.Alipay = this.AlipayFamily = res.data.insWechatAlipayList; //家庭联系人-微信
+            //   this.insTelVerifyList = this.insTelVerifyListFamily = res.data.insTelVerifyList; //家庭联系人-电话拨打核实
+            // } else if (telTypeVal == '04') {
+            //   this.Alipay = this.AlipayOthers = res.data.insWechatAlipayList; //其他联系人-微信
+            //   this.insTelVerifyList = this.insTelVerifyListOthers = res.data.insTelVerifyList; //其他联系人-电话拨打核实
+            // } else if (telTypeVal == '05') {
+            //   this.Alipay = this.AlipayWork = res.data.insWechatAlipayList; //工作证明人-微信
+            //   this.insTelVerifyList = this.insTelVerifyListWork = res.data.insTelVerifyList; //工作证明-电话拨打核实
+            // }
+            console.log('请求电话征信')
+            if (telTypeVal != '02') {
+              console.log('除单位电话')
+              //  this.Alipay = res.data.insWechatAlipayList; //微信
+
+              // res.data.insWechatAlipayList.length &&  res.data.insWechatAlipayList.length>0?  this.Alipay= res.data.insWechatAlipayList: this.Alipay[0].applyId= this.Alipay[1].applyId=this.propQTconclution.applyId;//微信支付宝applyid设置; // 查询接口 -只返回客户本人-微信支付宝信息
+              if (res.data.insWechatAlipayList.length && res.data.insWechatAlipayList.length > 0) {
+                console.log('重置微信支付宝')
+                this.Alipay = res.data.insWechatAlipayList;
+              } else {
+                console.log('只设置微信支付宝applyid')
+                console.log(this.Alipay)
+                this.Alipay[0].applyId = this.Alipay[1].applyId = this.propQTconclution.applyId;
+              }
+              console.log(this.Alipay)
+              //             if(res.data.insWechatAlipayList.length>0){//有修改，取出对应修改后的值
+              // for(var i=0;i<res.data.insWechatAlipayList.length;i++){
+              // res.data.insWechatAlipayList[i].insVerifyType=='00'?this.Alipay[0]=res.data.insWechatAlipayList[i]:this.Alipay[0];//微信
+              // res.data.insWechatAlipayList[i].insVerifyType=='01'?this.Alipay[1]=res.data.insWechatAlipayList[i]:this.Alipay[1];//支付宝
+              // }}
             }
+            console.log(this.Alipay)
+            this.insTelVerifyList = res.data.insTelVerifyList; //电话拨打核实
           } else {
             this.$message.error(res.msg);
           }
         });
       },
-      addQTResult: function () {
+      addQTResult() {
         // event.stopPropagation();
         // 判断初终审标识-------------未填写------------初终检标志根据角色更改
-        this.propQTconclution.pageType == 'commissioner' //专员
+        // this.propQTconclution.pageType == 'commissioner' //专员
         // -----------------------------
-        console.log(this.insConclusion.length)
+        console.log('aaaaaaaaaaaaaa')
+
+        console.log(this.insConclusion)
         if (this.insConclusion.length == 0) {
           this.insConclusion.push({
-            "applyId": this.propQTconclution.applyId, // 申请单id
-            "checkResult": "", // 质检结果
-            "errorType": "", // 差错类型
-            "errorDescribe": "", // 差错描述
-            "remark": "", // 备注（非必填）
-            "insMemberCode": this.userInf.userCode, // 操作人员-质检code            
-            "insMemberName": this.userInf.userName, // 操作人员-质检员name
-            "insDate": this.systermTime, // 质检日期
-            "checkType": "", // 初终检标志
-            "instaskType": "", //任务类型（00:常规质检，01:专项质检）
+            applyId: this.propQTconclution.applyId, // 申请单id
+            checkResult: "", // 质检结果
+            errorType: "", // 差错类型
+            errorDescribe: "", // 差错描述
+            remark: "", // 备注
+            insMemberCode: this.userInf.userCode, // 操作人员-质检code            
+            insMemberName: this.userInf.userName, // 操作人员-质检员name
+            insDate: this.systermTime, // 质检日期
+            checkType: "", // 初终检标志
+            instaskType: "", //任务类型（00:常规质检，01:专项质检）
+            id: this.addId, // 专员或主管首次保存或提交不传
+            isSubmit: "0", // 0：保存 1：提交
             // "checkResult": "", // 任务类型（00:常规质检，01:专项质检）
           });
         } else {
-          console.log(this.insConclusion)
-          console.log(this.insConclusion[this.insConclusion.length - 1])
           // if(this.cardDetList[this.cardDetList.length-1].bankName=='' || this.cardDetList[this.cardDetList.length-1].accountStatus==''){
           if (this.insConclusion[this.insConclusion.length - 1].checkResult == '') { //质检结果不能为空
             this.$message.error('质检结果不能为空！');
             return
           } else {
             this.insConclusion.push({
-              "checkResult": "", // 质检结果
-              "errorType": "", // 差错类型
-              "errorDescribe": "", // 差错描述
-              "remark": "", // 备注（非必填）
-              "insMemberName": "", // 操作人员-质检员name
-              "insDate": "", // 质检日期
+              applyId: this.propQTconclution.applyId, // 申请单id
+              checkResult: "", // 质检结果
+              errorType: "", // 差错类型
+              errorDescribe: "", // 差错描述
+              remark: "", // 备注
+              insMemberCode: this.userInf.userCode, // 操作人员-质检code            
+              insMemberName: this.userInf.userName, // 操作人员-质检员name
+              insDate: this.systermTime, // 质检日期
+              checkType: "", // 初终检标志
+              instaskType: "", //任务类型（00:常规质检，01:专项质检）
+              id: this.addId, // 专员或主管首次保存或提交不传
+              isSubmit: "0", // 0：保存 1：提交
+              // "checkResult: "", // 任务类型（00:常规质检，01:专项质检）
             });
           }
         };
@@ -1268,15 +1478,18 @@
         // this.insConclusion.remark = '';
         // // this.insConclusion.insMemberName = '';--展示 不需要清空
         // // this.insConclusion.insDate = '';--展示 不需要清空
-
         // ---改需求之后
         // event.stopPropagation();
-        console.log(this.currentRowLoan);
-        for (var i = 0; i < this.loanDetailList.length; i++) {
-          if (this.loanDetailList[i] == this.currentRowLoan) {
-            this.loanDetailList.splice(i, 1);
+        console.log(this.currentRow);
+        for (var i = 0; i < this.insConclusion.length; i++) {
+          if (this.insConclusion[i] == this.currentRow) {
+            this.insConclusion.splice(i, 1);
           }
         }
+      },
+      QTtableVal(val) {
+        console.log(val)
+        this.currentRow = val
       },
       InitialInfo() {
         this.regularInfo.isForm ? this.regularInfo.isForm : this.regularInfo.isForm = 1;
@@ -1458,68 +1671,137 @@
         console.log(ind)
         //  this.title = val;
         //         this.tabContent1 = ind;
+        console.log(this.tabIndex)
+        //切换之前把电话拨打核实填过的信息赋值给对应的数组对象
+        if (this.tabIndex != ind) {
+          console.log('ccc')
+          //  ind==0? this.insTelVerifyList = this.insTelVerifyListCompany :this.insTelVerifyListCompany;      Alipay
+          //    AlipayCus: '', //客户本人-微信
+          // AlipayCompany: '', //单位电话-微信
+          // AlipayFamily: '', //家庭联系人-微信
+          // AlipayWork: '', //工作证明-微信
+          // AlipayOthers: '', //其他联系人-微信
+          //   insTelVerifyListCompany: [], //单位电话-电话拨打核实
+          // insTelVerifyListFamily: [], //家庭联系人-电话拨打核实
+          // insTelVerifyListWork: [], //工作证明-电话拨打核实
+          // insTelVerifyListOthers: [], //其他联系人-电话拨打核实
+
+          if (this.tabIndex == 0) { //切换之前先赋值到对应的数组里面    //客户本人
+            this.AlipayCus = this.Alipay;
+          } else if (this.tabIndex == 1) { //单位电话
+            // this.AlipayCompany=this.Alipay;
+            this.insTelVerifyListCompany = this.insTelVerifyList;
+          } else if (this.tabIndex == 2) { //家庭联系人
+            this.AlipayFamily = this.Alipay;
+            this.insTelVerifyListFamily = this.insTelVerifyList;
+          } else if (this.tabIndex == 3) { //工作证明
+            this.AlipayWork = this.Alipay;
+            this.insTelVerifyListWork = this.insTelVerifyList;
+          } else if (this.tabIndex == 3) { //其他联系人
+            this.AlipayOthers = this.Alipay;
+            this.insTelVerifyListOthers = this.insTelVerifyList;
+          }
+          //  ind==1?this.insTelVerifyListCompany= this.insTelVerifyList :this.insTelVerifyListCompany;
+          //  ind==2?this.insTelVerifyListCompany= this.insTelVerifyList :this.insTelVerifyListCompany;
+          //  ind==3?this.insTelVerifyListCompany= this.insTelVerifyList :this.insTelVerifyListCompany;
+          //  ind==4?this.insTelVerifyListCompany= this.insTelVerifyList :this.insTelVerifyListCompany;
+        }
         this.tabIndex = ind;
-        if (ind == 0) {
-          // 客户本人
+        console.log(this.tabIndex)
+        if (ind == 0) { // 客户本人
           this.telType = '06'
           this.payment = true;
           this.custom = true;
           this.others = false;
-          this.changeAlipay = '';
           this.Alipay = this.AlipayCus; //微信支付宝内容
-
-        } else if (ind == 1) {
-          // 单位电话
+        } else if (ind == 1) { // 单位电话
           this.telType = '02'
           this.payment = false;
           this.custom = false;
           this.others = true;
-          this.Alipay = this.AlipayCompany; //微信支付宝内容   
-          this.getTelAlipay('02'); //----调用查询微信信息接口  
-        } else if (ind == 2) {
-          // 家庭联系人
+          // this.Alipay = this.AlipayCompany; //微信支付宝内容   
+          this.insTelVerifyList = this.insTelVerifyListCompany; //电话核实
+          this.insTelVerifyListCompanyCount > 0 ? '' : this.getTelAlipay('02'); //----只有第一次点击调接口  
+          //  this. insTelVerifyListCompanyCount>0? '':this.getTelAlipay(); //----只有第一次点击调接口  
+          this.insTelVerifyListCompanyCount++;
+        } else if (ind == 2) { // 家庭联系人
           this.telType = '03'
           this.payment = true;
           this.custom = false;
           this.others = true;
           this.othersCheck = this.a;
           this.Alipay = this.AlipayFamily; //微信支付宝内容 
-          this.getTelAlipay('03'); //----调用查询微信信息接口  
-        } else if (ind == 3) {
-          // 工作证明人
+          this.insTelVerifyList = this.insTelVerifyListFamily; //电话核实
+          // this.getTelAlipay('03'); //----只有第一次点击调接口  
+          this.insTelVerifyListFamilyCount > 0 ? '' : this.getTelAlipay('03'); //----只有第一次点击调接口  
+          //  this. insTelVerifyListFamilyCount>0? '':this.getTelAlipay(); //----只有第一次点击调接口  
+          this.insTelVerifyListFamilyCount++;
+        } else if (ind == 3) { // 工作证明人
           this.telType = '05'
           this.payment = true;
           this.custom = false;
           this.others = true;
           this.othersCheck = this.b;
           this.Alipay = this.AlipayWork; //微信支付宝内容
-          this.getTelAlipay('05'); //----调用查询微信信息接口   
-        } else if (ind == 4) {
-          // 其他联系人
+          this.insTelVerifyList = this.insTelVerifyListWork; //电话核实
+          this.insTelVerifyListWorkCount > 0 ? '' : this.getTelAlipay('05'); //----只有第一次点击调接口  
+          // this. insTelVerifyListWorkCount>0? '':this.getTelAlipay(); //----只有第一次点击调接口  
+          this.insTelVerifyListWorkCount++;
+        } else if (ind == 4) { // 其他联系人
           this.telType = '04'
           this.payment = true;
           this.custom = false;
           this.others = true;
           this.Alipay = this.AlipayOthers; //微信支付宝内容 
-          this.getTelAlipay('04'); //----调用查询微信信息接口  
+          this.insTelVerifyList = this.insTelVerifyListOthers; //电话核实
+          this.insTelVerifyListOthersCount > 0 ? '' : this.getTelAlipay('04'); //----只有第一次点击调接口  
+          //  this. insTelVerifyListOthersCount>0? '':this.getTelAlipay(); //----只有第一次点击调接口  
+          this.insTelVerifyListOthersCount++;
         }
       },
       // ---------------------------------按钮事件----------------
       // 保存 或 提交
       SaveInf() {
-        if (this.propQTconclution.EditType == '常规又专纵质检') {
+        if (this.propQTconclution.EditType == '常规又专纵质检') { //只入结论
           this.SaveInfParams = {
             reviewConclusion: this.reviewConclusion
           }
         } else {
-          this.SaveInfParams = {
-            taskId: "",
-            applyBaseInfo: {}, //基础信息
-            insConclusion: {}, //质检结论页-质检结论
-            insRegularInfo: {}, //常规质检
-            insTelCustInfo: {}, //电话征信-客户本人-电话拨打核实
-            insTelVerifyList: [], //:质检-电话征信-拨打核实
-            insWechatAlipayList: [], //电话征信-微信/支付宝核实
+
+          this.insTelVerifyListConcat = this.insTelVerifyListCompany.concat(this.insTelVerifyListFamily).concat(this.insTelVerifyListWork)
+            .concat(this.insTelVerifyListOthers)
+
+          this.AlipayConcat = this.AlipayCus.concat(this.AlipayFamily).concat(this.AlipayWork).concat(this.AlipayOthers)
+          console.log(this.AlipayCus)
+          console.log(this.AlipayFamily)
+          console.log(this.AlipayWork)
+          console.log(this.AlipayOthers)
+
+
+          //      console.log('电话拨打核实-其他')
+          //  console.log(this.insTelVerifyListConcat)
+          //  console.log('微信')
+          console.log(this.AlipayConcat)
+          //  console.log('taskId:',this.propQTconclution.tastwaitingPass.taskId)
+          //  console.log(this.insConclusion)
+
+          for (var i = 0; i < this.insConclusion.length; i++) { // 质检结论 保存修改值更改为0-保存
+            console.log('isSubmit：', this.insConclusion[i].isSubmit)
+            console.log('isSubmit：', typeof (this.insConclusion[i].isSubmit))
+            this.insConclusion[i].isSubmit = '0'; //保存
+            this.insConclusion[i].checkType == '01' && this.insConclusion[i].id ? this.insConclusion[i].id = '' : this.insConclusion[
+              i].id; //主管首次保存或提交id设置为空
+          }
+          // if( this.QTC.pageType == 'commissioner'){//专员
+          // }
+          this.SaveInfParams = { //全入
+            taskId: this.propQTconclution.tastwaitingPass.taskId,
+            applyBaseInfo: this.baseInfo, //基础信息
+            insConclusion: this.insConclusion, //质检结论页-质检结论
+            insRegularInfo: this.regularInfo, //常规质检
+            insTelCustInfo: this.insTelCustInfo, //电话征信-客户本人-电话拨打核实
+            insTelVerifyList: this.insTelVerifyListConcat, //电话征信-拨打核实-除客户本人
+            insWechatAlipayList: this.AlipayConcat, //电话征信-微信/支付宝核实
           }
         }
         // this.insTelCustInfo[0]// 入参客户本人-电话拨打核实，转换为obj（原为array）
@@ -1535,6 +1817,10 @@
           // }
         ).then(res => {
           if (res.statusCode == 200) {
+            this.$message({
+              type: 'success',
+              message: '保存成功！'
+            })
             this.referPort()
           } else {
             this.$message.error(res.msg);
@@ -1568,8 +1854,7 @@
       getLcgjList() {
         console.log('流程轨迹')
         this.lcdialogVisible = true;
-        console.log(this.processInstanceId)
-        this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processInstanceId + '&' + Math.random())
+        this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.propQTconclution.tastwaitingPass.processInstanceId + '&' + Math.random())
           .then(res => {
             console.log(res);
             if (res.statusCode == '200') {
@@ -1686,6 +1971,7 @@
             //   this.SocialSecurityBtn=false;//社保公积金
             //   // reResultShow
           }
+          this.QTConclutionBtn = true;
         } else if (this.propQTconclution.pageType == 'manager') { //主管-编辑 √
           if (this.propQTconclution.EditType == '常规质检') {
             this.submitBtn = false; //提交
@@ -1751,9 +2037,10 @@
 
     },
     mounted() {
+      console.log(this.propQTconclution)
       this.getSystermTime();
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
-      console.log(this.userInf)
+      // console.log(this.userInf)
       // console.log(this.propQTconclution)
       // this.processInstanceId = JSON.parse(localStorage.getItem('未存储，未确定，待更改-RtaskInWaitting')).processInstanceId;
       // 质检结论枚举
@@ -1763,13 +2050,13 @@
       // "04":"终审重大差错",
       // "05": "初审建议",
       // "06": "终审建议","07":"无"]
-
-      // this.referPort();
-      // this.showdiffer();
+      // console.log(this.propQTconclution.applyId)
+      this.referPort(); //质检查询页面
+      this.showdiffer();
       // console.log(this.regularInfo)
       // this.InitialInfo();
       // this.getTelAlipay('06')//电话征信-支付宝+电话核实接口
-      // this.Social();//社保公积金接口
+      this.Social(); //社保公积金接口
       // this.Alipay = this.AlipayCus //初始状态取客户信息的支付宝数据-----带更改（解决异步数据不确定顺序问题）
 
     }
@@ -1829,7 +2116,6 @@
 
   .result_QT {
     padding: 10px;
-    height: 130px;
   }
 
   .btn {
@@ -1863,14 +2149,14 @@
 
   .tab1Default {
     float: left;
-    color:#183a56;
-    padding:5px 20px;
-    border-radius:4px;
+    color: #183a56;
+    padding: 5px 20px;
+    border-radius: 4px;
     /* background:red; */
     /* width: 100px; */
     /* border-right: 1px solid; */
     cursor: pointer;
-    
+
   }
 
   /* .tab1Default:hover {
@@ -1879,8 +2165,8 @@
   } */
 
   .tabAct {
-        color:#1387e6;
-    background:#e7e7e7;
+    color: #1387e6;
+    background: #e7e7e7;
   }
 
   .P_title {

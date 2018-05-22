@@ -197,7 +197,8 @@
         QTC: {
           applyId: '',
           pageType: '',
-          EditType:'',
+          EditType: '',
+          tastwaitingPass: {}
         }
       }
     },
@@ -334,44 +335,44 @@
       },
       initialInfo() {
         var Nodename = this.$route.fullPath.split('?')[1];
-        console.log( Nodename)
+        console.log(Nodename)
         if (Nodename == 'checkApp_apply') {
           // 专员-编辑
           this.QTC.pageType = 'commissioner';
           this.LocalList = 'QTTaskWait'; //取本地存储
         } else if (Nodename == 'checkApp_check_manager') {
           // 主管-编辑
-           this.QTC.pageType = 'manager';
-          this.LocalList = 'QTManagerTW'; 
-        }else if (Nodename == 'checkApp_trial_self') {  
+          this.QTC.pageType = 'manager';
+          this.LocalList = 'QTManagerTW';
+        } else if (Nodename == 'checkApp_trial_self') {
           // 本人
-           this.QTC.pageType = 'self';
-          this.LocalList = 'QTSelfTW'; 
-        }else if (Nodename == 'checkApp_trial_manager') {  
+          this.QTC.pageType = 'self';
+          this.LocalList = 'QTSelfTW';
+        } else if (Nodename == 'checkApp_trial_manager') {
           // 初终审主管
-           this.QTC.pageType = 'Supervisor';
-          this.LocalList = 'QTTrialManagerTW'; 
-        }else if (Nodename == 'checkApp_check_recon_manager') {  
+          this.QTC.pageType = 'Supervisor';
+          this.LocalList = 'QTTrialManagerTW';
+        } else if (Nodename == 'checkApp_check_recon_manager') {
           // 质检主管复议（首次）
-           this.QTC.pageType = 'QTRe';
-          this.LocalList = 'QTReManagerTW'; 
-        }else if (Nodename == 'checkApp_regional_manager') {  
+          this.QTC.pageType = 'QTRe';
+          this.LocalList = 'QTReManagerTW';
+        } else if (Nodename == 'checkApp_regional_manager') {
           // 区域
-           this.QTC.pageType = 'Area';
-          this.LocalList = 'QTAreaTW'; 
-        }else if (Nodename == 'checkApp_compliance_manager') {  
+          this.QTC.pageType = 'Area';
+          this.LocalList = 'QTAreaTW';
+        } else if (Nodename == 'checkApp_compliance_manager') {
           // 合规
-           this.QTC.pageType = 'compliance';
-          this.LocalList = 'QTComplianceTW'; 
+          this.QTC.pageType = 'compliance';
+          this.LocalList = 'QTComplianceTW';
         }
       }
     },
     mounted() {
-      
-      // this.title = "影像资料";
+
+      this.title = "影像资料";
       // console.log(window.location)
       // console.log(this.$route.fullPath)
-      this.MyMove();      
+      this.MyMove();
       // this.$route.fullPath.indexOf('?') != -1 ? this.Nodename = this.$route.fullPath.split('?')[1] : this.Nodename;
       // switch(this.this.Nodename){
       //   case'':
@@ -386,19 +387,19 @@
       // } else if (this.Nodename == 'e') { //主管-编辑
 
       // }
-      this.initialInfo();//判断角色      
-      this.tastwaitingPass = JSON.parse(localStorage.getItem(this.LocalList));
+      this.initialInfo(); //判断角色      
+      this.QTC.tastwaitingPass = this.tastwaitingPass = JSON.parse(localStorage.getItem(this.LocalList));
       console.log(this.tastwaitingPass)
-      console.log(  this.QTC.pageType)
-      console.log(  this.LocalList)
-      if(this.tastwaitingPass==''){
-        this.EditType='常规质检'
-      }else if(this.tastwaitingPass==''){
-        this.EditType='专纵质检'
-      }else if(this.tastwaitingPass==''){
-        this.EditType='常规又专纵质检'
-      }else{
-        this.EditType='';
+      console.log(this.QTC.pageType)
+      console.log(this.LocalList)
+      if (this.tastwaitingPass == '') {
+        this.EditType = '常规质检'
+      } else if (this.tastwaitingPass == '') {
+        this.EditType = '专纵质检'
+      } else if (this.tastwaitingPass == '') {
+        this.EditType = '常规又专纵质检'
+      } else {
+        this.EditType = '';
       }
       this.QTC.applyId = this.tastwaitingPass.ApplyId;
       // this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));

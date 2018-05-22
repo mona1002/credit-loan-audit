@@ -12,7 +12,7 @@
             </p>
             <p>
               <label> 客户名称</label>
-              <el-input v-model="params.custName" placeholder="请输入客户名称"></el-input>
+              <el-input v-model="params.custName_la" placeholder="请输入客户名称"></el-input>
             </p>
             <p>
               <label> 证件号码</label>
@@ -85,6 +85,8 @@
         query: {
           id: '',
           ApplyId: "",
+          taskId:'',
+          processInstanceId:''
         },
         taskList:'',
         tableData: [],
@@ -97,7 +99,7 @@
           taskNodeName:'',
           taskStatus:'',
           applySubno: '',
-          custName: '',
+          custName_la: '',
           certCode: '',
           instaskType: '',
           //   pageNum: '', //页数（第几页）
@@ -130,6 +132,8 @@
         console.log(val)
         this.query.id = val.id;
         this.query.ApplyId = val.applyId;
+        this.query.taskId = val.taskId;
+        this.query.processInstanceId = val.processInstanceId;
         localStorage.setItem("QTTaskWait", JSON.stringify(this.query));
         this.$router.push('/MatchingInfQT?checkApp_apply');
         // this.params.pageNum = val;
@@ -137,7 +141,7 @@
       },
       Rreset() {
         this.params.applySubno = '';
-        this.params.custName = '';
+        this.params.custName_la = '';
         this.params.certCode = '';
         this.params.instaskType = '';
          this.inquire(this.params);

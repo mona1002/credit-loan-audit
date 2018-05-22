@@ -1077,6 +1077,7 @@ height: 40px;
 
 .SSComp .el-table__body-wrapper {
   overflow-x: hidden;
+  height: auto !important;
 }
 
 .SSComp .el-collapse-item__wrap,
@@ -2842,6 +2843,15 @@ vertical-align: top;
 }
 .regularQT .el-collapse-item__wrap{
 overflow: inherit;
+}
+.regularQT .weChatNapliay .el-table__row{
+  height: 70px;
+}
+.regularQT .weChatNapliay .el-table td{
+  padding:0;
+}
+.regularQT .weChatNapliay .el-table td:nth-of-type(4){
+vertical-align: bottom;  
 }
 .ReApply .AntiInf .el-collapse-item__wrap{
 /* background: green; */
