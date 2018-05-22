@@ -63,7 +63,7 @@
           </el-table-column>
           <el-table-column prop="instaskTypeTxt" label="任务类型" align='center' min-width="100">
           </el-table-column>
-                  <el-table-column prop="remark" label="备注" align='center' min-width="150">
+          <el-table-column prop="remark" label="备注" align='center' min-width="150">
           </el-table-column>
         </el-table>
         <!-- 分页  -->
@@ -85,19 +85,20 @@
         query: {
           id: '',
           ApplyId: "",
-          taskId:'',
-          processInstanceId:''
+          taskId: '',
+          processInstanceId: '',
+          listType: '',
         },
-        taskList:'',
+        taskList: '',
         tableData: [],
         reg: /(\w{6})\w*(\w{4})/,
         Telreg: /(\w{7})\w*/,
         reVal: '$1********$2',
         telVal: '$1****',
         params: {
-          processTemplateId:'',
-          taskNodeName:'',
-          taskStatus:'',
+          processTemplateId: '',
+          taskNodeName: '',
+          taskStatus: '',
           applySubno: '',
           custName_la: '',
           certCode: '',
@@ -130,6 +131,18 @@
       //   },
       handleCurrentChange(val) {
         console.log(val)
+        // 根据两个条件去判断，首先根据 isSecondIns
+        // 如果是 1 ，显示常规又专项
+        // 如果不是： 根据instaskType 判断， instaskType=00 时：常规质检 ， instaskType=01 或 02：专项质检
+        if (val.isSecondIns == '1') {
+          this.query.listType = '常规质检';
+        } else if (val.isSecondIns == '0') {
+          if (val.instaskType == '00') {
+            this.query.listType = '专项质检';
+          } else if (val.instaskType == '01' || val.instaskType == '02') {
+            this.query.listType = '常规又专项质检';
+          }
+        }
         this.query.id = val.id;
         this.query.ApplyId = val.applyId;
         this.query.taskId = val.taskId;
@@ -144,7 +157,7 @@
         this.params.custName_la = '';
         this.params.certCode = '';
         this.params.instaskType = '';
-         this.inquire(this.params);
+        this.inquire(this.params);
       },
       Rsearch() { //  查询
         // this.params.pageNum = this.currentPage = 1;
@@ -154,7 +167,6 @@
         // 基础接口-综合查询
         this.post("insConclusion/queryZJZYTaskList", pam).then(res => {
           if (res.statusCode == 200) {
-            console.log(res.data)
             // for (var i = 0; i < res.data.length; i++) {
             //   if (res.data[i].certCode) {
             //     res.data[i].certCode = res.data[i].certCode.replace(this.reg, this.reVal);
@@ -171,10 +183,10 @@
       },
     },
     mounted() {
-      this.taskList=JSON.parse(localStorage.getItem('QTWorkbenchPass'))
-        this.params.processTemplateId=this.taskList.processTemplateId;
-        this.params.taskNodeName=this.taskList.taskNodeName;
-        this.params.taskStatus=this.taskList.taskStatus;
+      this.taskList = JSON.parse(localStorage.getItem('QTWorkbenchPass'))
+      this.params.processTemplateId = this.taskList.processTemplateId;
+      this.params.taskNodeName = this.taskList.taskNodeName;
+      this.params.taskStatus = this.taskList.taskStatus;
       this.inquire(this.params);
       // QTWorkbenchPass
       //   this.userInf = JSON.parse(localStorage.getItem('userInf'));

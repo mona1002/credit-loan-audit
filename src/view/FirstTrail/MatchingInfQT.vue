@@ -153,7 +153,6 @@
   export default {
     data() {
       return {
-        Nodename: '',
         QTConclutionMark: "",
         TaskList: '',
         LocalList: '',
@@ -338,11 +337,11 @@
         console.log(Nodename)
         if (Nodename == 'checkApp_apply') {
           // 专员-编辑
-          this.QTC.pageType = 'commissioner';
+          // this.QTC.pageType = 'commissioner';
           this.LocalList = 'QTTaskWait'; //取本地存储
         } else if (Nodename == 'checkApp_check_manager') {
           // 主管-编辑
-          this.QTC.pageType = 'manager';
+          // this.QTC.pageType = 'manager';
           this.LocalList = 'QTManagerTW';
         } else if (Nodename == 'checkApp_trial_self') {
           // 本人
@@ -365,6 +364,7 @@
           this.QTC.pageType = 'compliance';
           this.LocalList = 'QTComplianceTW';
         }
+         this.QTC.pageType =Nodename;
       }
     },
     mounted() {
@@ -392,15 +392,19 @@
       console.log(this.tastwaitingPass)
       console.log(this.QTC.pageType)
       console.log(this.LocalList)
-      if (this.tastwaitingPass == '') {
-        this.EditType = '常规质检'
-      } else if (this.tastwaitingPass == '') {
-        this.EditType = '专纵质检'
-      } else if (this.tastwaitingPass == '') {
-        this.EditType = '常规又专纵质检'
-      } else {
-        this.EditType = '';
-      }
+      // if (this.tastwaitingPass.listType == '') {
+      //   console.log(11111111111111)
+      //   this.EditType = '常规质检'
+      // } else if (this.tastwaitingPass.listType == '专项质检') {
+      //   console.log(22222222222222)
+      //   this.EditType = '专纵质检'
+      // } else if (this.tastwaitingPass.listType == '') {
+      //   console.log(3333333333)
+      //   this.EditType = '常规又专纵质检'
+      // } else {
+      //   console.log(44444444444)
+      //   this.EditType = '';
+      // }
       this.QTC.applyId = this.tastwaitingPass.ApplyId;
       // this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
