@@ -1104,7 +1104,8 @@
               params: {
                 id: this.applyId,
                 flag: 'start',
-                busiState: '30'
+                busiState: '30',
+                  wayOf: '00' //审批
               }
             });
             // localStorage.setItem("antiApplyFlag", JSON.stringify(routeParms));

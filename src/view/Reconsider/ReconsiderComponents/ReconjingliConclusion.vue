@@ -1273,7 +1273,8 @@
 		            params: {
 		              id: this.applyId,
 		              flag: 'fuyi',
-		              busiState:'20'
+									busiState:'20',
+									wayOf: '01' //复议
 		            }
 		          });
 		    },

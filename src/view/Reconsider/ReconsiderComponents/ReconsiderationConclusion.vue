@@ -1122,6 +1122,7 @@
             id: this.applyId,
             flag: 'fuyi',
             busiState: '20',
+            wayOf: '01' //复议
           }
         });
         // localStorage.setItem("antiApplyFlag", JSON.stringify(routeParms));
