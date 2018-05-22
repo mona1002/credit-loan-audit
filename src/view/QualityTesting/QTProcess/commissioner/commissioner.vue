@@ -164,7 +164,7 @@
         this.inquire(this.params);
       },
       inquire(pam) {
-        // 基础接口-综合查询
+        //查询列表
         this.post("insConclusion/queryZJZYTaskList", pam).then(res => {
           if (res.statusCode == 200) {
             // for (var i = 0; i < res.data.length; i++) {

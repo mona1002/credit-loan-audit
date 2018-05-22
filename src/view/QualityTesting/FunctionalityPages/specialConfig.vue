@@ -75,8 +75,10 @@
       </div>
       <div class="title">
         <h1>质检任务分派查询
+          <!-- <span @click="apportion"> -->
           <span @click="allot">
-            <img src="../../../../static/images/add.png" style=" vertical-align: middle;"> 批量转分派
+            
+            <img src="../../../../static/images/add.png" style=" vertical-align: middle;"> 任务分配
           </span>
         </h1>
       </div>
@@ -116,6 +118,14 @@
         </div> -->
       </div>
     </div>
+        <!-- ==============================任务分配=================================== -->
+    <!-- <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
+      <span>您确定生成质检任务？</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button class="calbtn" @click="canc">取消</el-button>
+        <el-button class="subtn" type="primary" :loading="loadsitu" @click="CFsave">{{adbtn}}</el-button>
+      </span>
+    </el-dialog> -->
   </div>
 </template>
 <script>
@@ -125,6 +135,7 @@
     data() {
       return {
         // ploanDate: ['', ''],
+        Confirm:false,
         ploanDate: '',
         tableData: [],
         production: [],//产品下拉
@@ -193,6 +204,12 @@
       }
     },
     methods: {
+           apportion() { //分配 按钮弹窗
+        console.log('apportion')
+        this.Confirm = true;
+        this.loadsitu = false;
+        this.adbtn = '确定';
+      },
       allot() { //批量转分派
         this.post("/insTask/addSpecialInsTask", this.allotParams).then(res => {
           if (res.statusCode == 200) {
