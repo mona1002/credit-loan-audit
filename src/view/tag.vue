@@ -424,7 +424,8 @@
         }
       },
       isActive(route) {
-        return route.StatefullPath == this.$route.fullPath;
+     return   route.path=='/MatchingInfQT'?route.path== this.$route.path:route.StatefullPath == this.$route.fullPath;
+        // return route.StatefullPath == this.$route.fullPath;
       },
       handleClose(view, ev) {
         console.log('关闭')
