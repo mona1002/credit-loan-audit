@@ -425,7 +425,7 @@
 export default {
   data() {
     return {
-      threeQueries: '',
+      //threeQueries: '',
       // custName: '',
       phoneType: '01',
       // phoneNum: '',

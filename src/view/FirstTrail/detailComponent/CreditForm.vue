@@ -913,12 +913,11 @@
         <div class=" CreditForm_result">
           <i class="hint">
             <!-- <span v-show="errors.has('conclusion')" class="result_textarea">{{ errors.first('conclusion') }}</span> -->
-            <b v-show="this.Wordhint.result" class="result_textarea"> 输入长度不能超过500</b>
+            <b v-show="checkData.oother.length>=1000" class="result_textarea"> 输入长度不能超过1000</b>
           </i>
           <p class="InternetInf_left_label" style="textAlign:right;">
             <span class="red"> * </span>初审结果评价：</p>
-          <el-input type="textarea" :rows="5" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" @compositionend.native="wordarea(checkData.oother,'评价')"
-            @keyup.native="wordarea(checkData.oother,'评价')" v-model="checkData.oother" name="conclusion" v-validate="'required'">
+          <el-input type="textarea" :rows="5" resize="none" :maxlength="1000" placeholder="请输入内容" v-model="checkData.oother" name="conclusion" v-validate="'required'">
           </el-input>
         </div>
       </el-collapse-item>

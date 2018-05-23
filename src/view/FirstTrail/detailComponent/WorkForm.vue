@@ -157,7 +157,7 @@ export default {
       // custName: '',
       phoneType: '05',
       // phoneNum: '',
-      source: '',
+      /*source: '',
       answer: '',
       checkStage: '',
       sourceDesc: '',
@@ -167,12 +167,12 @@ export default {
       checkJobtxt: '',
       mobilepayment: '',
       mobilepaymenttxt: '',
-      conclusion: '',
+      conclusion: '',*/
       phoneId: '',
       resMsg: ''
     }
   },
-  props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull'],
+  props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull', 'source' , 'answer' , 'checkStage' , 'sourceDesc' , 'mobilepayment' , 'checkJob' , 'checkJobtxt' , 'mobilepaymenttxt' , 'answerIdentity' , 'answertxt' , 'conclusion'],
   mounted() {
     this.phoneType = '05'; // 住址电话
     if (this.isFull == true) { // 全屏

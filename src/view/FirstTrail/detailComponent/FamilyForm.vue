@@ -90,7 +90,7 @@
           <div class="left-title"><span class="require-icon" style="left:0px;">*</span>三方查询是否异常：</div>
           <!-- <div> -->
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-            <el-select v-model="threeQueries">
+            <el-select v-model="threeQueries" @change="changes('threeQueries')">
               <el-option label="否" value="0"></el-option>
               <el-option label="是" value="1"></el-option>
             </el-select>
@@ -111,7 +111,7 @@
           <div class="left-title left-title2"><span class="require-icon" style="left:0px; top:-8px;">*</span>微信/支付宝是否异常：</div>
           <!-- <div> -->
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-            <el-select v-model="mobilepayment">
+            <el-select v-model="mobilepayment" @change="changes('mobilepayment')">
               <el-option label="否" value="0"></el-option>
               <el-option label="是" value="1"></el-option>
             </el-select>
@@ -131,7 +131,7 @@
         <li class="item-column3">
           <div class="left-title left-title2">是否与家庭联系人为同一接听人：</div>
           <div class="textarea-class2">
-            <el-select v-model="issameFam">
+            <el-select v-model="issameFam" @change="changes(issameFam)">
               <el-option label="否" value="0"></el-option>
               <el-option label="是" value="1"></el-option>
             </el-select>
@@ -148,7 +148,7 @@
         <li class="item-column3">
           <div class="left-title">与借款人关系：</div>
           <div>
-            <el-select v-model="relBorrower">
+            <el-select v-model="relBorrower" @change="changes('relBorrower')">
               <el-option label="父母" value="00"></el-option>
               <el-option label="爱人" value="01"></el-option>
               <el-option label="子女" value="02"></el-option>
@@ -167,7 +167,7 @@
         <li class="item-column3">
           <div class="left-title">核对工作情况：</div>
           <div>
-            <el-select v-model="checkWork">
+            <el-select v-model="checkWork" @change="changes('checkWork')">
               <el-option label="一致" value="00"></el-option>
               <el-option label="基本一致" value="01"></el-option>
               <el-option label="不一致" value="02"></el-option>
@@ -215,7 +215,7 @@
         <li class="item-column3">
           <div class="left-title">核实居住地址：</div>
           <div>
-            <el-select v-model="checkAddr">
+            <el-select v-model="checkAddr" @change="changes('checkAddr')">
               <el-option label="一致" value="00"></el-option>
               <el-option label="基本一致" value="01"></el-option>
               <el-option label="不一致" value="02"></el-option>
@@ -234,7 +234,7 @@
         <li class="item-column3">
           <div class="left-title">核对房产：</div>
           <div>
-            <el-select v-model="checkEstate">
+            <el-select v-model="checkEstate" @change="changes('checkEstate')">
               <el-option label="有" value="00"></el-option>
               <el-option label="无" value="01"></el-option>
               <el-option label="租房" value="02"></el-option>
@@ -254,7 +254,7 @@
         <li class="item-column3">
           <div class="left-title">其他收入：</div>
           <div>
-            <el-select v-model="otherIncome">
+            <el-select v-model="otherIncome" @change="changes('otherIncome')">
               <el-option label="有" value="00"></el-option>
               <el-option label="无" value="01"></el-option>
               <el-option label="被调查人不清楚" value="02"></el-option>
@@ -324,6 +324,7 @@ export default {
   },
   props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull', 'source' , 'answer' , 'checkStage' , 'sourceDesc' , 'thirdResult' , 'threeQueries' , 'threeQueriestxt' , 'mobilepayment' , 'mobilepaymenttxt' , 'issameFam' , 'issameFamtxt' , 'relBorrower' , 'relBorrowertxt' , 'checkWork' , 'checkWorktxt' , 'maritalStatus' , 'maritalStatustxt' , 'checkAddr' , 'checkAddrtxt' , 'checkEstate' , 'checkEstatetxt' , 'otherIncome' , 'otherIncometxt' , 'conclusion'],
   mounted() {
+    console.log(this.mobilepayment);
     this.phoneType = '03'; // 住址电话
     if (this.isFull == true) { // 全屏
       console.log('全屏');
@@ -513,29 +514,119 @@ export default {
 
       });
     },
+    changes(flage){
+      switch (flage){
+        case 'threeQueries':
+          if(this.threeQueries == '0'){
+            this.threeQueriestxt = '';
+          }
+        break;
+        case 'mobilepayment':
+          if(mobilepayment == '0'){
+          this.mobilepaymenttxt = '';
+        }
+        break;
+        case 'issameFam':
+          if(issameFam == '0'){
+          this.issameFamtxt = '';
+        }
+        break;
+        case 'relBorrower':
+          if(relBorrower!='03'){
+            this.relBorrowertxt = '';
+          } 
+        break;
+        case 'checkWork':
+          if(checkWork!='01'){
+          this.checkWorktxt = '';
+        }
+        break;
+        case 'checkAddr':
+          if(checkAddr!='01'){
+            this.checkAddrtxt = '';
+          }
+        break;
+        case 'otherIncome':
+          if(otherIncome!='00'){
+            this.otherIncometxt = '';
+          }
+        break;
+      }
+    }
   },
-  watch: {
-    threeQueries: function() {
-      this.threeQueriestxt = '';
+  /*computed:{
+    threeQueriestxt: function() {
+      if(this.threeQueries == '0'){
+        this.threeQueriestxt = '';
+      }
     },
     mobilepayment: function() {
-      this.mobilepaymenttxt = '';
+      if(mobilepayment == '0'){
+        this.mobilepaymenttxt = '';
+      }
     },
     issameFam: function() {
-      this.issameFamtxt = '';
+      if(issameFam=='0'){
+        this.issameFamtxt = '';
+      } 
     },
     relBorrower: function() {
-      this.relBorrowertxt = '';
+      if(relBorrower!='03'){
+        this.relBorrowertxt = '';
+      } 
     },
     checkWork: function() {
-      this.checkWorktxt = '';
+      if(checkWork!='01'){
+        this.checkWorktxt = '';
+      }
     },
     checkAddr: function() {
-      this.checkAddrtxt = '';
+      if(checkAddr!='01'){
+        this.checkAddrtxt = '';
+      }
     },
     otherIncome: function() {
-      this.otherIncometxt = '';
+      if(otherIncome!='00'){
+        this.otherIncometxt = '';
+      }
     },
+  },*/
+  watch: {
+    /*threeQueries: function() {
+      if(threeQueries == '0'){
+        this.threeQueriestxt = '';
+      }
+    },
+    mobilepayment: function() {
+      if(mobilepayment == '0'){
+        this.mobilepaymenttxt = '';
+      }
+    },
+    issameFam: function() {
+      if(issameFam=='0'){
+        this.issameFamtxt = '';
+      } 
+    },
+    relBorrower: function() {
+      if(relBorrower!='03'){
+        this.relBorrowertxt = '';
+      } 
+    },
+    checkWork: function() {
+      if(checkWork!='01'){
+        this.checkWorktxt = '';
+      }
+    },
+    checkAddr: function() {
+      if(checkAddr!='01'){
+        this.checkAddrtxt = '';
+      }
+    },
+    otherIncome: function() {
+      if(otherIncome!='00'){
+        this.otherIncometxt = '';
+      }
+    },*/
     // 判断全屏 , 更改样式
     isFull: function(val) {
       if (val == true) { // 全屏

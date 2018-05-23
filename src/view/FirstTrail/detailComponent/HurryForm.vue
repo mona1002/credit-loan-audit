@@ -237,7 +237,7 @@
 export default {
   data() {
     return {
-      source: '',
+      /*source: '',
       answer: '',
       checkStage: '',
       thirdResult: '',
@@ -252,15 +252,15 @@ export default {
       maritalStatustxt: '',
       contactfre: '',
       contactfretxt: '',
-      conclusion: '',
+      conclusion: '',*/
       phoneType: '04',
-      sourceDesc: '',
-      threeQueries: '',
+      /*sourceDesc: '',
+      threeQueries: '',*/
       phoneId: '',
       resMsg:''
     }
   },
-  props: ['custName', 'phoneNum', 'applyId', 'isFull'],
+  props: ['custName', 'phoneNum', 'applyId', 'isFull','source' , 'answer' , 'checkStage' , 'sourceDesc' , 'thirdResult' , 'threeQueries' , 'threeQueriestxt' , 'mobilepayment' , 'mobilepaymenttxt' , 'relBorrower' , 'relBorrowertxt' , 'contactfre' , 'checkWork' , 'checkWorktxt' , 'maritalStatus' , 'maritalStatustxt' , 'conclusion'],
   mounted() {
     this.phoneType = '04'; // 住址电话
     if (this.isFull == true) { // 全屏

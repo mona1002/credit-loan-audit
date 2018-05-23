@@ -1522,9 +1522,13 @@
             }
             // 批准金额 ploanAmt
             if (this.ploanAmt) {
-                this.ploanAmt = Number(this.ploanAmt.split('.')[0].replace(/,/g, '')) +
-                  Number('0.' + this.ploanAmt.split('.')[1]);
-               if(this.ploanAmt > this.maxAuditAmt){
+                var regs=/\,/g;
+                this.ploanAmt=this.ploanAmt.replace(regs,'')*1;
+                console.log(this.ploanAmt);
+                console.log(typeof(this.ploanAmt));
+                //this.ploanAmt = Number(this.ploanAmt.split('.')[0].replace(/,/g, '')) +
+                  //Number('0.' + this.ploanAmt.split('.')[1]);
+               if(this.ploanAmt > this.maxAuditAmt && this.opinionFlag=='00'){
                   this.$message({
                   message: "提示：大于当前审批人最高审批金额权限，请选择请求更高级审批!",
                   type: 'warning'

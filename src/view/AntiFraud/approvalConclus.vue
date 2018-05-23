@@ -1599,6 +1599,8 @@
       /*案件编号-新增按钮*/
       caseAdd(){
         this.addLogVisible = true;
+        this.caseNums = '';
+        this.caseDescs = '';
       },
       /*案件编号-新增弹框-确认*/
       addSure(){

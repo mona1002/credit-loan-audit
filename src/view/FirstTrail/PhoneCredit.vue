@@ -152,11 +152,11 @@
             <!-- 家庭联系人 - 历史 -->
             <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :familyData="familyData" :isFull.sync="isFull"></FamilyHis>
             <!-- 紧急联系人 - 表单 -->
-            <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull" v-bind:newList='newList'></HurryForm>
+            <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull" :source='source' :answer="answer" :checkStage="checkStage" :sourceDesc="sourceDesc" :thirdResult="thirdResult" :threeQueries="threeQueries" :threeQueriestxt="threeQueriestxt" :mobilepayment="mobilepayment" :mobilepaymenttxt="mobilepaymenttxt" :relBorrower="relBorrower" :relBorrowertxt="relBorrowertxt" :contactfre="contactfre" :checkWork="checkWork" :checkWorktxt="checkWorktxt" :maritalStatus="maritalStatus" :maritalStatustxt="maritalStatustxt" :conclusion="conclusion"></HurryForm>
             <!-- 紧急联系人 - 历史 -->
             <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :hurryData="hurryData" :isFull.sync="isFull"></HurryHis>
             <!-- 工作证明人 - 表单 -->
-            <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull" v-bind:newList='newList'></WorkForm>
+            <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull" :source='source' :answer="answer" :checkStage="checkStage" :sourceDesc="sourceDesc" :mobilepayment="mobilepayment" :checkJob="checkJob" :checkJobtxt="checkJobtxt" :mobilepaymenttxt="mobilepaymenttxt" :answerIdentity="answerIdentity" :answertxt="answertxt" :conclusion="conclusion"></WorkForm>
             <!-- 工作证明人 - 历史 -->
             <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="workData" :isFull.sync="isFull"></WorkHis>
             <!-- 子组件 -->
@@ -364,6 +364,12 @@ export default {
       housingFund:'',
       jobref1:'',
       jobref2:'',
+      companytxt:'',
+      //其他联系人
+      contactfre:'',
+      //工作证明人
+      checkJob:'',
+      checkJobtxt:'',
 
 
       // 添加界面
@@ -879,6 +885,11 @@ export default {
             this.housingFund= this.newList.housingFund;
             this.jobref1= this.newList.jobref1;
             this.jobref2= this.newList.jobref2;
+            //其他联系人
+            this.contactfre= this.newList.contactfre;
+            //工作证明人
+            this.checkJob= this.newList.checkJob;
+            this.checkJobtxt= this.newList.checkJobtxt;
           }else{
             this.newList = '';
             this.source ='';
@@ -932,6 +943,11 @@ export default {
             this.housingFund= '';
             this.jobref1= '';
             this.jobref2= '';
+            //其他联系人
+            this.contactfre= '';
+            //工作证明人
+            this.checkJob= '';
+            this.checkJobtxt= '';
           }
           
           
