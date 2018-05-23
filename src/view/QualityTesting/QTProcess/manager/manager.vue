@@ -132,6 +132,8 @@
         // pageCount: 10, // 每页显示条数
         // totalRecord: 0, //总条数
         tableData: [{
+          checkResult: '07',
+          isSecondIns: "1",
           appType: null,
           applyId: "879d8e00-6d3f-4e07-87f5-0f0c675c06e1",
           applyIdList: null,
@@ -158,7 +160,6 @@
           insMemberName: null,
           instaskType: "00",
           instaskTypeTxt: "常规质检",
-          isSecondIns: "0",
           lastModifyTime: null,
           mobile: null,
           proCode: null,
@@ -204,6 +205,7 @@
           });
       },
       btnParams() {
+        this.multipleSelectionParams = [];
         for (var i = 0; i < this.multipleSelection.length; i++) {
           var params = {
             applyId: '',
@@ -214,13 +216,27 @@
           this.multipleSelectionParams.push(params)
         }
       },
-      allotSubmit() {//批量提交
+      allotSubmit() { //批量提交
+        for (var i = 0; i < this.multipleSelection.length; i++) { //可以提交质检结果为初审一般差错、初审重大差错、终审一般差错、终审重大差错、初审建议优化、终审建议的单子
+          if (this.multipleSelection[i].checkResult != '01' && this.multipleSelection[i].checkResult != '02' && this.multipleSelection[
+              i].checkResult != '03' && this.multipleSelection[i].checkResult != '04' && this.multipleSelection[i].checkResult !=
+            '05' && this.multipleSelection[i].checkResult != '06') {
+            this.$message.error('质检结果不符！');
+            console.log(this.multipleSelection[i].checkResult)
+            return
+          } else if (this.multipleSelection[i].isSecondIns == 1) { //有质检二次标识的件，只能够批量完成，不能批量提交
+            console.log(this.multipleSelection[i].isSecondIns)
+
+            this.$message.error('有不符合批量提交状态的进件！');
+            return
+          }
+        }
         this.btnParams(); //提取入参 applyId taskId
         if (this.multipleSelectionParams == '') {
           this.$message.error('请选择一条数据！');
           return
         }
-        this.post("/insConclusion/submitList", this.multipleSelectionParams) 
+        this.post("/insConclusion/submitList", this.multipleSelectionParams)
           .then(res => {
             if (res.statusCode == 200) {
               this.$message({
@@ -232,9 +248,16 @@
               this.$message.error(res.msg);
             }
           });
-        this.multipleSelectionParams = [];
+        // this.multipleSelectionParams = [];
       },
       allotFinished() { //批量完成
+        for (var i = 0; i < this.multipleSelection.length; i++) { //可以提交质检结果为初审一般差错、初审重大差错、终审一般差错、终审重大差错、初审建议优化、终审建议的单子
+          if (this.multipleSelection[i].checkResult != '07' && this.multipleSelection[i].checkResult != '08' && this.multipleSelection[
+              i].checkResult != '09') {
+            this.$message.error('质检结果不符！');
+            return
+          }
+        }
         this.btnParams();
         if (this.multipleSelectionParams == '') {
           this.$message.error('请选择一条数据！');
@@ -251,7 +274,7 @@
             this.$message.error(res.msg);
           }
         });
-        this.multipleSelectionParams = [];
+        // this.multipleSelectionParams = [];
       },
       handleSelectionChange(val) { //列表勾选框
         this.multipleSelection = val;
@@ -321,7 +344,7 @@
       this.params.taskNodeName = this.taskList.taskNodeName;
       this.params.taskStatus = this.taskList.taskStatus;
       this.getQTsituation(); //质检状态下拉框
-      this.inquire(this.params);
+      // this.inquire(this.params);
       // QTManagerWorkbenchPass
       //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
       //   this.params.applySubNo = this.params.applySubNo.replace(this.reg, this.reVal)
