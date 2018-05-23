@@ -642,19 +642,24 @@
             this.tableData = res.data;
           }
         })*/
-        this.post('/applyInfoPool/queryListForFraud', {
-          pageParam:{
-            pageNum: this.pageNum,
-            pageSize: this.pageSize
-          },
-          applySubNo:this.applySubNo,
-          custName:this.custName_la,
-          certCode:this.subCertCode
-        }).then(res => {
-          if (res.statusCode == 200) {
-            this.tableData = res.data;
-          }
-        })
+        if(!this.applySubNo && !this.custName_la && !this.subCertCode){
+          return
+        }else{
+          this.post('/applyInfoPool/queryListForFraud', {
+            pageParam:{
+              pageNum: this.pageNum,
+              pageSize: this.pageSize
+            },
+            applySubNo:this.applySubNo,
+            custName:this.custName_la,
+            certCode:this.subCertCode
+          }).then(res => {
+            if (res.statusCode == 200) {
+              this.tableData = res.data;
+            }
+          })
+        }
+        
       },
       // 重置查询
       resetQuery() {
@@ -675,24 +680,33 @@
       btnClick(val) {
         // 确定
         if (val == 'sure') {
-          this.applySubNo = this.rowObj.applySubno; // 进件编号
-          this.applyCustName = this.rowObj.custName; // 客户名称
-          this.certTypeTxt = this.rowObj.certTypeTxt; // 证件类型
-          this.certType = this.rowObj.certType; // 证件类型
-          this.certCode = this.rowObj.certCode; // 证件号码
-          this.mobile = this.rowObj.mobile; // 移动电话
-          this.applyId = this.rowObj.applyId;
-          this.proId = this.rowObj.proId;
-          this.proCode = this.rowObj.proCode;
-          this.proName = this.rowObj.proName;
-          this.channel = this.rowObj.channel;
-          this.busiState = this.rowObj.busiState;
-          this.applyId = this.rowObj.applyId;
-          // this.applyCustNo = this.rowObj.custNo;
-          //??????????????
-          // this.applyCustId = this.rowObj.custNo;// 客户id
-          // 新增字段
-          this.processInstanceId = this.rowObj.processInstanceId;
+          if(this.rowObj.canStartAntiFraudFlag == '1'){
+            this.applySubNo = this.rowObj.applySubno; // 进件编号
+            this.applyCustName = this.rowObj.custName; // 客户名称
+            this.certTypeTxt = this.rowObj.certTypeTxt; // 证件类型
+            this.certType = this.rowObj.certType; // 证件类型
+            this.certCode = this.rowObj.certCode; // 证件号码
+            this.mobile = this.rowObj.mobile; // 移动电话
+            this.applyId = this.rowObj.applyId;
+            this.proId = this.rowObj.proId;
+            this.proCode = this.rowObj.proCode;
+            this.proName = this.rowObj.proName;
+            this.channel = this.rowObj.channel;
+            this.busiState = this.rowObj.busiState;
+            this.applyId = this.rowObj.applyId;
+            // this.applyCustNo = this.rowObj.custNo;
+            //??????????????
+            // this.applyCustId = this.rowObj.custNo;// 客户id
+            // 新增字段
+            this.processInstanceId = this.rowObj.processInstanceId;
+          }else if(this.rowObj.canStartAntiFraudFlag == '0'){
+            this.$message({
+                message: "提示：该件无法发起反欺诈!",
+                type: 'warning'
+              })
+              return;
+          }
+          
         }
         this.coverShow = false;
       }
