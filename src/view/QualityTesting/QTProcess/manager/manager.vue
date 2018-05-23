@@ -1,6 +1,6 @@
 <template>
   <div class="AntiCaseNum IntegratedQuery">
-    <!-- 质检  专员列表 -->
+    <!-- 质检  主管列表 -->
     <myHead></myHead>
     <div class="content">
       <div class="search">
@@ -43,8 +43,11 @@
       </div>
       <div class="title">
         <h1>质检信息
-          <span class='title_icon'>  <label> <img src='../../../../../static/images/faqi.png'>  批量完成</label> 
-          <label> <img src='../../../../../static/images/appro.png'>  批量提交</label> 
+          <span class='title_icon'>
+            <label @click='allotFinished'>
+              <img src='../../../../../static/images/faqi.png'> 批量完成</label>
+            <label @click='allotSubmit'>
+              <img src='../../../../../static/images/appro.png'> 批量提交</label>
           </span>
         </h1>
       </div>
@@ -101,14 +104,13 @@
     data() {
       return {
         taskList: '',
-         query: {
+        query: {
           id: '',
           ApplyId: "",
           taskId: '',
           processInstanceId: '',
           listType: '',
         },
-        userInf: null,
         // tableData: [],
         reg: /(\w{6})\w*(\w{4})/,
         Telreg: /(\w{7})\w*/,
@@ -130,41 +132,41 @@
         // pageCount: 10, // 每页显示条数
         // totalRecord: 0, //总条数
         tableData: [{
-         appType:null,
-applyId:"879d8e00-6d3f-4e07-87f5-0f0c675c06e1",
-applyIdList:null,
-applyMainNo:null,
-applySubNo:"201511190111013763",
-assignCode:null,
-assignName:"system",
-auditCodec:null,
-auditCodez:null,
-auditDatec:null,
-auditDatez:null,
-auditNamec:"李翠萍",
-auditNamez:"刘杰",
-certCode:"431129198001010178",
-checkState:"01",
-checkStateTxt:"待质检员审批",
-certType:null,
-createTime:null,
-custCode:null,
-custName:"0508测试D009",
-enterTime:"2018-05-23 11:06:25",
-id:"Fwn2yzQIZ1GS8Czoqf7g4MoF1TVEeSGB",
-insDate:null,
-insMemberName:null,
-instaskType:"00",
-instaskTypeTxt:"常规质检",
-isSecondIns:"0",
-lastModifyTime:null,
-mobile:null,
-proCode:null,
-proName:null,
-processInstanceId:null,
-processInstanceIdSecond:null,
-remark:null,
-taskId:null,
+          appType: null,
+          applyId: "879d8e00-6d3f-4e07-87f5-0f0c675c06e1",
+          applyIdList: null,
+          applyMainNo: null,
+          applySubNo: "201511190111013763",
+          assignCode: null,
+          assignName: "system",
+          auditCodec: null,
+          auditCodez: null,
+          auditDatec: null,
+          auditDatez: null,
+          auditNamec: "李翠萍",
+          auditNamez: "刘杰",
+          certCode: "431129198001010178",
+          checkState: "01",
+          checkStateTxt: "待质检员审批",
+          certType: null,
+          createTime: null,
+          custCode: null,
+          custName: "0508测试D009",
+          enterTime: "2018-05-23 11:06:25",
+          id: "Fwn2yzQIZ1GS8Czoqf7g4MoF1TVEeSGB",
+          insDate: null,
+          insMemberName: null,
+          instaskType: "00",
+          instaskTypeTxt: "常规质检",
+          isSecondIns: "0",
+          lastModifyTime: null,
+          mobile: null,
+          proCode: null,
+          proName: null,
+          processInstanceId: null,
+          processInstanceIdSecond: null,
+          remark: null,
+          taskId: '98988',
         }, {
           date: '2016-05-02',
           name: '王小虎',
@@ -173,26 +175,9 @@ taskId:null,
           date: '2016-05-04',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-08',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-06',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-07',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
         }],
-        multipleSelection: [],
-        value: '',
-
+        multipleSelection: [], //多选框
+        multipleSelectionParams: [], //多选框
         QTSituation: [], //质检状态
         TaskType: [{ //任务类型
           value: '00',
@@ -218,7 +203,57 @@ taskId:null,
             }
           });
       },
-      handleSelectionChange(val) {//列表勾选框
+      btnParams() {
+        for (var i = 0; i < this.multipleSelection.length; i++) {
+          var params = {
+            applyId: '',
+            taskId: '',
+          };
+          params.applyId = this.multipleSelection[i].applyId;
+          params.taskId = this.multipleSelection[i].taskId;
+          this.multipleSelectionParams.push(params)
+        }
+      },
+      allotSubmit() {//批量提交
+        this.btnParams(); //提取入参 applyId taskId
+        if (this.multipleSelectionParams == '') {
+          this.$message.error('请选择一条数据！');
+          return
+        }
+        this.post("/insConclusion/submitList", this.multipleSelectionParams) 
+          .then(res => {
+            if (res.statusCode == 200) {
+              this.$message({
+                type: "success",
+                message: '提交成功！'
+              })
+              this.inquire(this.params);
+            } else {
+              this.$message.error(res.msg);
+            }
+          });
+        this.multipleSelectionParams = [];
+      },
+      allotFinished() { //批量完成
+        this.btnParams();
+        if (this.multipleSelectionParams == '') {
+          this.$message.error('请选择一条数据！');
+          return
+        }
+        this.post("/insConclusion/addList", this.multipleSelectionParams).then(res => {
+          if (res.statusCode == 200) {
+            this.$message({
+              type: "success",
+              message: '提交成功！'
+            })
+            this.inquire(this.params);
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+        this.multipleSelectionParams = [];
+      },
+      handleSelectionChange(val) { //列表勾选框
         this.multipleSelection = val;
       },
       //   handleSizeChange(val) {
@@ -227,7 +262,7 @@ taskId:null,
       //     // this.getInf(this.params);
       //     this.inquire(this.params);
       //   },
-      handleCurrentChange(val) {//跳转页面
+      handleCurrentChange(val) { //跳转页面
         // 根据两个条件去判断，首先根据 isSecondIns
         // 如果是 1 ，显示常规又专项
         // 如果不是： 根据instaskType 判断， instaskType=00 时：常规质检 ， instaskType=01 或 02：专项质检
@@ -240,9 +275,7 @@ taskId:null,
             this.query.listType = '专项质检';
           }
         }
-       this.query.listType = '常规又专项质检';
-        
-       this.query.id = val.id;
+        this.query.id = val.id;
         this.query.ApplyId = val.applyId;
         this.query.taskId = val.taskId;
         this.query.processInstanceId = val.processInstanceId;
@@ -287,13 +320,8 @@ taskId:null,
       this.params.processTemplateId = this.taskList.processTemplateId;
       this.params.taskNodeName = this.taskList.taskNodeName;
       this.params.taskStatus = this.taskList.taskStatus;
-
-        //  this.params.processTemplateId = this.taskList.processTemplateId;
-      // this.params.taskNodeName = 'checkApp_check_manager';
       this.getQTsituation(); //质检状态下拉框
-      // this.inquire(this.params);
-
-
+      this.inquire(this.params);
       // QTManagerWorkbenchPass
       //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
       //   this.params.applySubNo = this.params.applySubNo.replace(this.reg, this.reVal)
@@ -342,9 +370,21 @@ taskId:null,
     /* 统一导航 */
     /* height: 100%; */
   }
-.title_icon{
-  background:red;
-}
+
+  .title_icon {
+    float: right;
+  }
+
+  .title_icon label {
+    height: 50px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .title_icon img {
+    vertical-align: middle;
+  }
+
   .search {
     background-color: #ffffff;
     border: 1px solid #e6eaee;
