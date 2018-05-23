@@ -135,12 +135,12 @@
         // 如果是 1 ，显示常规又专项
         // 如果不是： 根据instaskType 判断， instaskType=00 时：常规质检 ， instaskType=01 或 02：专项质检
         if (val.isSecondIns == '1') {
-          this.query.listType = '常规质检';
+          this.query.listType = '常规又专项质检';
         } else if (val.isSecondIns == '0') {
           if (val.instaskType == '00') {
-            this.query.listType = '专项质检';
+            this.query.listType = '常规质检';
           } else if (val.instaskType == '01' || val.instaskType == '02') {
-            this.query.listType = '常规又专项质检';
+            this.query.listType = '专项质检';
           }
         }
         this.query.id = val.id;

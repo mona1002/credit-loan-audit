@@ -221,9 +221,11 @@
               message: '提交成功！'
             })
             this.inquire();
+            this.Confirm=false;
           } else {
             this.$message.error('批量转分派失败');
             this.inquire();
+            this.Confirm=false;            
           }
         });
       },
