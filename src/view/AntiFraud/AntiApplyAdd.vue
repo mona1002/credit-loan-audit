@@ -250,7 +250,8 @@
         certCode: '',
         rowObj: '', // 点击的列表数据
         subCertCode: '', // 弹窗的证件号码
-        processInstanceId: ''
+        processInstanceId: '',
+        busiState:'',//业务状态
       }
     },
     mounted() {
@@ -317,10 +318,11 @@
       getSystemDate() {
         // 获取系统时间
         this.get('system/getSystemDate?'+Math.random()).then(res => {
-          console.log('回退', res)
+          //console.log('回退', res)
           // 请求系统时间
           this.dealroperDate = res.data;
-          console.log('this.', this.dealroperDate);
+          //console.log(this.dealroperDate);
+          //console.log('this.', this.dealroperDate);
         })
       },
       // 反欺诈申请 获取 主原因子原因
@@ -434,13 +436,16 @@
             if (action === 'confirm') {
               instance.confirmButtonLoading = true;
               instance.confirmButtonText = '执行中...';
-              this.post('/fraudApplyInfoController/startAntiFraudApply', {
-                  userCode: this.userCode, // 用户编号
+              //this.post('/fraudApplyInfoController/startAntiFraudApply', {
+              this.post('/fraudApplyInfoController/startAntiFraudForFinishedApply', {
+                  /*userCode: this.userCode, // 用户编号
                   orgCode: this.orgCode, // 机构编号
                   currentTemplateId: '',
                   fraudApplyInfo: {
                     creditappTaskid: this.creditappTaskid, // 任务id
+
                     applyId: this.applyId, // 申请单ID
+
                     applySubno: this.applySubNo, // 进件编号
                     // applyCode: this.applyCode, // 申请人code
                     // applyPersonName: this.applyPersonName, // 申请人姓名
@@ -448,7 +453,9 @@
                     // appOrgName: this.appOrgName, // 申请机构名称
                     mainreasonId: this.mainId, // 欺诈主原因id
                     subreasonId: this.secondId, // 欺诈子原因id
+
                     applyDesc: this.applyDesc, // 反欺诈申请描述
+
                     mainreaName: this.mainReason, // 欺诈主原因名称
                     subreaName: this.secondReason, // 欺诈子原因名称
                     // appOrgId: this.appOrgId, // 申请机构id
@@ -457,14 +464,34 @@
                     // appSuborgName: this.appSuborgName, // 申请机构科室名称
                     proId: this.proId, // 产品id
                     proCode: this.proCode, // 产品code
+
                     applyCustId: this.applyCustId, // 客户id
                     applyCustName: this.applyCustName, // 客户姓名
                     applyCustNo: this.applyCustNo, // 客户编号
+
                     channel: this.channel, // 渠道
                     certCode: this.certCode, // 证件号码
                     proName: this.proName, // 产品名称
-                    processInstanceId: this.processInstanceId
-                  }
+                    processInstanceId: this.processInstanceId*/
+                    fraudApplyInfo: {
+                      applyCustId: this.applyCustId, // 客户id
+                      applyCustName: this.applyCustName, // 客户姓名
+                      applyCustNo: this.applyCustNo, // 客户编号
+                      applyDesc: this.applyDesc, // 反欺诈申请描述applyId: this.applyId, // 申请单ID
+                      applyPersonName: this.applyPersonName, // 申请人姓名
+                      applySubno: this.applySubNo, // 进件编号
+                      channel: this.channel, // 渠道
+                      certCode: this.certCode, // 证件号码
+                      mainreasonId: this.mainId, // 欺诈主原因id
+                      mainreaName: this.mainReason, // 欺诈主原因名称
+                      proId: this.proId, // 产品id
+                      proCode: this.proCode, // 产品code
+                      proName: this.proName, // 产品名称
+                      subreaName: this.secondReason, // 欺诈子原因名称
+                      subreasonId: this.secondId, // 欺诈子原因id
+                      busiState:this.busiState,
+                      applyId : this.applyId
+                    }
                 })
                 .then(res => {
                   if (res.statusCode == '200') {
@@ -659,6 +686,8 @@
           this.proCode = this.rowObj.proCode;
           this.proName = this.rowObj.proName;
           this.channel = this.rowObj.channel;
+          this.busiState = this.rowObj.busiState;
+          this.applyId = this.rowObj.applyId;
           // this.applyCustNo = this.rowObj.custNo;
           //??????????????
           // this.applyCustId = this.rowObj.custNo;// 客户id

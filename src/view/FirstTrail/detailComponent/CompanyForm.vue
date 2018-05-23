@@ -268,7 +268,7 @@ export default {
       // custName: '',
       phoneType: '02',
       // phoneNum: '',
-      source: '',
+      /*source: '',
       answer: '',
       checkStage: '',
       sourceDesc: '',
@@ -291,12 +291,12 @@ export default {
       housingFund: '',
       jobref1: '',
       jobref2: '',
-      conclusion: '',
+      conclusion: '',*/
       phoneId: '',
       resMsg:''
     }
   },
-  props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull'],
+  props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull','source' , 'answer' , 'checkStage' , 'sourceDesc' , 'thirdResult' , 'phone' , 'phonetxt' , 'answerIdentity' , 'answertxt' , 'company' , 'companytxt' , 'checkTime' , 'checkTimetxt' , 'checkIncome' , 'checkIncometxt' , 'payrollSituation' , 'payrollSituationtxt' , 'pensionInsurance' , 'employmentmode' , 'employmentmodetxt' , 'housingFund' , 'jobref1' , 'jobref2' , 'conclusion'],
   mounted() {
     this.phoneType = '02'; // 单位电话
     if (this.isFull == true) { // 全屏

@@ -429,7 +429,7 @@ export default {
       // custName: '',
       phoneType: '01',
       // phoneNum: '',
-      source: '',
+     /* source: '',
       answer: '',
       checkStage: '',
       sourceDesc: '',
@@ -462,12 +462,12 @@ export default {
       parentsInfo: '',
       brothertxt: '',
       expensestxt: '',
-      checkHometeltxt: '',
+      checkHometeltxt: '',*/
       phoneId: '', // 用来区分是添加 还是 修改 
       resMsg:''
     }
   },
-  props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull'],
+  props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull','source', "answer", "checkStage", "sourceDesc", "thirdResult", "threeQueries", "exceptionState", "issameFam", "issameFamtxt", "relBorrower", "relBorrowertxt", "checkWork", "checkWorktxt", "maritalStatus", "maritalStatustxt", "checkAddr", "checkAddrtxt", "checkEstate", "checkEstatetxt", "otherIncome", "otherIncometxt", "recentLargespend", "recentlArgespendInfo", "parents", "parentsInfo", "brother", "brothertxt", "expenses", "expensestxt", "checkHometel", "checkHometeltxt", "hobbyandBehave", "conclusion"],
   mounted() {
     this.phoneType = '01'; // 住址电话
     if (this.isFull == true) { // 全屏
@@ -479,7 +479,7 @@ export default {
       $('.submit-class').css("margin-left", "calc( 66% - 140px)")
       // 显示 column2
       // $('.item-column3').css({
-      //   "min-height": "50px"
+      //   "min-height" :"50px"
       // })
       $('.item-column3-2 .textarea-class2').css("width", "calc( 100% - 211px )");
       $('.item-column2 textarea').css("width", "100%");
