@@ -344,7 +344,7 @@
       this.params.taskNodeName = this.taskList.taskNodeName;
       this.params.taskStatus = this.taskList.taskStatus;
       this.getQTsituation(); //质检状态下拉框
-      // this.inquire(this.params);
+      this.inquire(this.params);
       // QTManagerWorkbenchPass
       //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
       //   this.params.applySubNo = this.params.applySubNo.replace(this.reg, this.reVal)
