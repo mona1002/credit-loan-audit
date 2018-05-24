@@ -699,7 +699,7 @@
             this.proId = this.rowObj.proId;
             this.proCode = this.rowObj.proCode;
             this.proName = this.rowObj.proName;
-            this.channel = this.rowObj.channel;
+            this.channel = '99';
             this.busiState = this.rowObj.busiState;
             this.applyId = this.rowObj.applyId;
             // this.applyCustNo = this.rowObj.custNo;
