@@ -126,7 +126,7 @@
             <el-option v-for="item in caseOptions" :label="item.caseNum" :value="item.caseNum">
             </el-option>
           </el-select> -->
-          <el-select
+          <!-- <el-select
             v-model="caseNum"
             clearable
             filterable
@@ -141,7 +141,13 @@
               :label="item.caseNum"
               :value="item.caseNum">
             </el-option>
-          </el-select>
+          </el-select> -->
+          <el-autocomplete
+            v-model="caseNum"
+            :fetch-suggestions="querySearchAsync"
+            placeholder="请输入关键词"
+            @select="handleSelect"
+          ></el-autocomplete>
         </div>
       </li>
       <li>
@@ -354,25 +360,8 @@
   export default {
     data() {
       return {
-        list: [],
-        loading: false,
-        states: ["Alabama", "Alaska", "Arizona",
-        "Arkansas", "California", "Colorado",
-        "Connecticut", "Delaware", "Florida",
-        "Georgia", "Hawaii", "Idaho", "Illinois",
-        "Indiana", "Iowa", "Kansas", "Kentucky",
-        "Louisiana", "Maine", "Maryland",
-        "Massachusetts", "Michigan", "Minnesota",
-        "Mississippi", "Missouri", "Montana",
-        "Nebraska", "Nevada", "New Hampshire",
-        "New Jersey", "New Mexico", "New York",
-        "North Carolina", "North Dakota", "Ohio",
-        "Oklahoma", "Oregon", "Pennsylvania",
-        "Rhode Island", "South Carolina",
-        "South Dakota", "Tennessee", "Texas",
-        "Utah", "Vermont", "Virginia",
-        "Washington", "West Virginia", "Wisconsin",
-        "Wyoming"],
+        //list: [],
+        //loading: false,
         caseNums:'',
         caseDescs:'',
         taskName: '',
@@ -471,6 +460,9 @@
         taskwaitting: '',
         //案件编号-新增弹框
         addLogVisible:false,
+        //远程搜索案件编号
+        restaurants: [],
+        timeout:  null,
         // mainName:'',
         // secondaryName:''
       }
@@ -788,13 +780,44 @@
           // console.log(res);
           if (res.statusCode == '200') {
             console.log('电话客户打款顶级联赛的就角度考虑附件'+res.data[0].caseNum);
-            this.list = res.data;
+            //this.list = res.data;
+            this.restaurants = res.data;
+            console.log(this.restaurants);
+            console.log(typeof(this.restaurants));
+            console.log(this.restaurants instanceof Array); 
            /* this.list = res.data.map(item => {
             return { value: item.caseNum, label: item.caseNum };
           });
           console.log('*********'+this.list);*/
           }
         })
+      },
+      //请求远程搜索
+       querySearchAsync(queryString, cb) {
+        var restaurants = this.restaurants;
+        //console.log(restaurants);
+        //console.log(restaurants instanceof Array);
+        var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants;
+        //console.log(results instanceof Array +);
+        //console.log('********');
+        //console.log(Array.isArray(results));
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(() => {
+          cb(results);
+          //console.log(cb);
+          //console.log(cb(results));
+        }, 300 * Math.random());
+      },
+      createStateFilter(queryString) {
+        //console.log(queryString);
+
+        return (state) => {
+          //console.log(state.caseNum);
+          return (state.caseNum.toLowerCase().indexOf(queryString.toLowerCase()) ===0);
+        };
+      },
+      handleSelect(item) {
+        console.log(item);
       },
       // 审批
       insert(val) {
@@ -1643,7 +1666,7 @@
                 })
             }
       },
-      remoteMethod(query) {
+     /* remoteMethod(query) {
         if (query !== '') {
           this.loading = true;
           setTimeout(() => {
@@ -1658,7 +1681,7 @@
           this.caseOptions = [];
           //this.caseNum = '';
         }
-      },
+      },*/
     },
     watch: {
       // 审核结论 改变请求主原因
