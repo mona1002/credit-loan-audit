@@ -128,7 +128,7 @@
                   进件编号：
                 </div>
                 <div class="item-content-list">
-                  <el-input v-model="applySubNo"></el-input>
+                  <el-input v-model="applySubNos"></el-input>
                 </div>
               </li>
               <li class="item-column3-list">
@@ -252,6 +252,7 @@
         subCertCode: '', // 弹窗的证件号码
         processInstanceId: '',
         busiState:'',//业务状态
+        applySubNos:'',//弹框的案件编号
       }
     },
     mounted() {
@@ -573,8 +574,10 @@
         switch (flag) {
           case 'shwoList':
             this.coverShow = true;
-            // this.showFlag = 'shwoList';
-            //this.request();
+            this.applySubNos = ''; // 进件编号
+            this.custName_la = ''; // 客户名称
+            this.subCertCode = ''; // 客户编号
+            this.tableData='';
             break;
         }
       },
@@ -642,7 +645,7 @@
             this.tableData = res.data;
           }
         })*/
-        if(!this.applySubNo && !this.custName_la && !this.subCertCode){
+        if(!this.applySubNos && !this.custName_la && !this.subCertCode){
           return
         }else{
           this.post('/applyInfoPool/queryListForFraud', {
@@ -650,12 +653,17 @@
               pageNum: this.pageNum,
               pageSize: this.pageSize
             },
-            applySubNo:this.applySubNo,
+            applySubNo:this.applySubNos,
             custName:this.custName_la,
             certCode:this.subCertCode
           }).then(res => {
             if (res.statusCode == 200) {
               this.tableData = res.data;
+              for(var i=0;i<res.data.recordList.length;i++){
+                var regs = /\d{4}-\d{1,2}-\d{1,2}/g;
+                //this.appDate = res.data.recordList[i].appDate.replace(regs,'');
+                this.tableData.recordList[i].appDate = regs.exec(res.data.recordList[i].appDate)[0];
+              }
             }
           })
         }
@@ -665,7 +673,7 @@
       resetQuery() {
         // 清空数据 重新查询
         // 查询条件 初始化
-        this.applySubNo = ''; // 进件编号
+        this.applySubNos = ''; // 进件编号
         this.custName_la = ''; // 客户名称
         this.subCertCode = ''; // 客户编号
         this.tableData='';
@@ -700,6 +708,8 @@
             // 新增字段
             this.processInstanceId = this.rowObj.processInstanceId;
           }else if(this.rowObj.canStartAntiFraudFlag == '0'){
+            //alert('......')
+            this.applySubNo = ''; // 进件编号
             this.$message({
                 message: "提示：该件无法发起反欺诈!",
                 type: 'warning'
