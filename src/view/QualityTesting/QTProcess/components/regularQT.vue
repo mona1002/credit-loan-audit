@@ -1274,8 +1274,8 @@
             !res.data.insConclusionList ? this.insConclusion : this.insConclusion = res.data.insConclusionList;
             this.insConclusion[0] && this.insConclusion[0].id ? this.addId = this.insConclusion[0].id : this.addId =
               ''; //取添加质检结论时，id值
-              // 复核结论   -----obj
-              this.reviewConclusion=res.data.insReviewConclusion;
+            // 复核结论   -----obj
+            this.reviewConclusion = res.data.insReviewConclusion;
             // 电话征信：客户本人-电话拨打核实 - 本人只有一条电话拨打核实记录            -object
             this.insTelCustInfo = res.data.insTelCustInfo; //this.insTelCustInfo 是array / 查询接口 -只返回客户本人-电话核实信息
             !this.insTelCustInfo.insResult ? this.insTelCustInfo.insResult = '00' : this.insTelCustInfo.insResult; //本人拨打电话核实-默认选00           
@@ -1517,52 +1517,52 @@
       // 保存 或 提交
       SaveInf(type) { //质检主管不需要提交，只有质检专员 显示提交
         console.log(type)
-        console.log(this.insConclusion.length )
+        console.log(this.insConclusion.length)
         if (type == '提交') { //提交 加校验，保存无需校验必填---常规质检
-        if( this.propQTconclution.tastwaitingPass.listType == '常规质检' ){
- if (!this.regularInfo.isForm || !this.regularInfo.isIdcard || !this.regularInfo.isIncome || !this.regularInfo
-            .isWork ||
-            !this.regularInfo.isEstate || !this.regularInfo.isLive || !this.regularInfo.isBusiness || !this.regularInfo
-            .isCredit ||
-            !this.regularInfo.isCustomerflow || !this.regularInfo.isCustomerother || !this.regularInfo.isLiabilities ||
-            !this.regularInfo.isFlow ||
-            !this.regularInfo.isReference ||
-            !this.regularInfo.wbeexEcuted || !this.regularInfo.wnetEcutedBrea || !this.regularInfo.wnetPhone ||
-            !this.regularInfo.wnetAddrandEstate || !this.regularInfo.wnetCompany || !this.regularInfo.wnetAddrstate ||
-            !this.regularInfo.isInmatch) {
-            this.$message.error('请输入必填项！')
-            return
-          }else if(this.insConclusion.length==0){//必须添加一条质检结论校验
- this.$message.error('请至少添加一条质检结论！')
- return
-        }
-          
-        }else if( this.propQTconclution.tastwaitingPass.listType == '专项质检' ){
-          if(this.insConclusion.length==0){//必须添加一条质检结论校验
- this.$message.error('请至少添加一条质检结论！')
- return
-        }
-        }
+          if (this.propQTconclution.tastwaitingPass.listType == '常规质检') {
+            if (!this.regularInfo.isForm || !this.regularInfo.isIdcard || !this.regularInfo.isIncome || !this.regularInfo
+              .isWork ||
+              !this.regularInfo.isEstate || !this.regularInfo.isLive || !this.regularInfo.isBusiness || !this.regularInfo
+              .isCredit ||
+              !this.regularInfo.isCustomerflow || !this.regularInfo.isCustomerother || !this.regularInfo.isLiabilities ||
+              !this.regularInfo.isFlow ||
+              !this.regularInfo.isReference ||
+              !this.regularInfo.wbeexEcuted || !this.regularInfo.wnetEcutedBrea || !this.regularInfo.wnetPhone ||
+              !this.regularInfo.wnetAddrandEstate || !this.regularInfo.wnetCompany || !this.regularInfo.wnetAddrstate ||
+              !this.regularInfo.isInmatch) {
+              this.$message.error('请输入必填项！')
+              return
+            } else if (this.insConclusion.length == 0) { //必须添加一条质检结论校验
+              this.$message.error('请至少添加一条质检结论！')
+              return
+            }
+
+          } else if (this.propQTconclution.tastwaitingPass.listType == '专项质检') {
+            if (this.insConclusion.length == 0) { //必须添加一条质检结论校验
+              this.$message.error('请至少添加一条质检结论！')
+              return
+            }
+          }
         }
         // 提交 保存 
         if (this.propQTconclution.tastwaitingPass.listType == '常规又专项质检') { //常规又专项质检
-              this.post("/insConclusion/addReviewConclusion", {
-          id: this.reviewConclusion.id,
-          applyId:  this.reviewConclusion.applyId,
-          reviewConclusion: this.reviewConclusion.reviewConclusion,
-          checkType:this.reviewConclusion.checkType,
-        }).then(res => {
-          if (res.statusCode == 200) {
-            this.tableData = res.data;
+          this.post("/insConclusion/addReviewConclusion", {
+            id: this.reviewConclusion.id,
+            applyId: this.reviewConclusion.applyId,
+            reviewConclusion: this.reviewConclusion.reviewConclusion,
+            checkType: this.reviewConclusion.checkType,
+          }).then(res => {
+            if (res.statusCode == 200) {
+              this.tableData = res.data;
               this.$message({
                 type: 'success',
-                message:'添加复核结论成功！'
+                message: '添加复核结论成功！'
               })
-          } else {
-            this.$message.error(res.msg);
-          }
-        });
-        } else {                                                        //  常规质检、专纵质检
+            } else {
+              this.$message.error(res.msg);
+            }
+          });
+        } else { //  常规质检、专纵质检
           // 先校验-质检结论最后一条信息，质检结果如果为空，提示并return
           if (type == '提交' && this.insConclusion.length > 0 && this.insConclusion[this.insConclusion.length - 1].checkResult ==
             '') {
@@ -1585,32 +1585,33 @@
             this.insConclusion[i].checkType == '01' && this.insConclusion[i].id ? this.insConclusion[i].id = '' : this.insConclusion[
               i].id; //主管首次保存或提交id设置为空
           }
-            this.SaveInfParams = { //入参
-              taskId: this.propQTconclution.tastwaitingPass.taskId,
-              applyBaseInfo: this.baseInfo, //基础信息
-              insConclusion: this.insConclusion, //质检结论页-质检结论
-              insRegularInfo: this.regularInfo, //常规质检
-              insTelCustInfo: this.insTelCustInfo, //电话征信-客户本人-电话拨打核实
-              insTelVerifyList: this.insTelVerifyListConcat, //电话征信-拨打核实-除客户本人
-              insWechatAlipayList: this.AlipayConcat, //电话征信-微信/支付宝核实
-            }
-        this.post("/insConclusion/addOrSubmit", this.SaveInfParams)
-          .then(res => {
-            if (res.statusCode == 200) {
-              this.$message({
-                type: 'success',
-                message: type + '成功！'
-              })
-              // 保存获取最新信息，提交跳转
-              type == '保存' ? this.referPort() : ''; // 点保存重新获取信息
-              if (type == '提交') {
-                this.propQTconclution.pageType == 'checkApp_apply' ? this.$router.push(
-                  '/commissioner?taskNodeName=checkApp_apply&flag=07') : ''; //专员
+          this.SaveInfParams = { //入参
+            taskId: this.propQTconclution.tastwaitingPass.taskId,
+            applyBaseInfo: this.baseInfo, //基础信息
+            insConclusionList: this.insConclusion, //质检结论页-质检结论
+            insRegularInfo: this.regularInfo, //常规质检
+            insTelCustInfo: this.insTelCustInfo, //电话征信-客户本人-电话拨打核实
+            insTelVerifyList: this.insTelVerifyListConcat, //电话征信-拨打核实-除客户本人
+            insWechatAlipayList: this.AlipayConcat, //电话征信-微信/支付宝核实
+          }
+          this.post("/insConclusion/addOrSubmit", this.SaveInfParams)
+            .then(res => {
+              if (res.statusCode == 200) {
+                this.$message({
+                  type: 'success',
+                  message: type + '成功！'
+                })
+                // 保存获取最新信息，提交跳转
+                type == '保存' ? this.referPort() : ''; // 点保存重新获取信息
+                if (type == '提交') {
+                  this.propQTconclution.pageType == 'checkApp_apply' ? this.$router.push(
+                    '/commissioner?taskNodeName=checkApp_apply&flag=07') : ''; //专员
+                }
+              } else {
+                this.$message.error(res.msg);
               }
-            } else {
-              this.$message.error(res.msg);
-            }
-          });}
+            });
+        }
       },
       // 无需复议
       NoReconsider() {

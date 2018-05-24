@@ -14,7 +14,7 @@
               <li>
                 <p>
                   <label>进件编号： </label>
-                  <span>{{applyInfoPool.applySubno}} </span>
+                  <span>{{applyInfoPool.applySubNo}} </span>
                 </p>
                 <p>
                   <label>证件号码： </label>
@@ -34,7 +34,6 @@
               <li>
                 <p>
                   <label>证件类型： </label>
-                  <!-- <span>{{applyInfoPool.certTypeTxt}} </span> -->
                   <span>{{applyInfoPool.certTypeTxt}} </span>
                 </p>
                 <p>
@@ -55,7 +54,7 @@
               <el-table-column label='质检结果' prop="checkResult" width="120"></el-table-column>
               <el-table-column label='差错类型' prop="errorType" width="150"></el-table-column>
               <el-table-column label='差错描述' prop="errorDescribe" width="150"></el-table-column>
-              <el-table-column label='备注（非必填）' prop="errorDescribe"></el-table-column>
+              <el-table-column label='备注' prop="remark"></el-table-column>
             </el-table>
           </div>
         </el-collapse-item>
@@ -68,12 +67,12 @@
             <ul style="margin:20px 0;">
               <li>
                 <p class="description" style="position:relative;;">
-                  <i v-show="ReIllustrate" class="hint_word" style="left:165px">输入长度不能超过500</i>
+                  <i v-show="fraudAuditOpinion.auditDesc&&fraudAuditOpinion.auditDesc.length>=500" class="hint_word" style="left:165px">输入长度不能超过500</i>
                   <label>
                     <b class="required_Red" v-show="HintStar"> * </b> 复议说明： </label>
                   <!-- <span class="textA"> {{fraudAuditOpinion.auditDesc}}</span> -->
                   <el-input :disabled="manager" class="ccccc" type="textarea" :rows='3' resize='none' v-model='fraudAuditOpinion.auditDesc'
-                    :maxlength="500" @keyup.native='fraudAuditOpinion.auditDesc.length>=500?ReIllustrate=true:ReIllustrate=false;'></el-input>
+                    :maxlength="500"></el-input>
                 </p>
               </li>
               <li class="ApplyInf">
@@ -81,7 +80,7 @@
                   <label>复议申请人：</label>{{reApplyInf.userName }}
                 </p>
                 <p>
-                  <label>复议申请日期： </label>{{ reApplyInf.userName}}
+                  <label>复议申请日期： </label>{{ systermTime | dateFilter}}
                 </p>
               </li>
             </ul>
@@ -90,13 +89,13 @@
       </el-collapse>
       <div class="ReApply_btn" v-if="ManagerBtn">
         <el-button type="primary" @click="sumt">提交</el-button>
-        <el-button @click="backToQTResult">取消</el-button>
+        <el-button @click="$router.push('/SelfTaskList?taskNodeName=checkApp_apply&flag=09')">取消</el-button>
       </div>
       <!-- 弹窗 -->
       <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
         <span>确定操作？</span>
         <span slot="footer" class="dialog-footer">
-          <el-button class="calbtn" @click="confirm=false">取消</el-button>
+          <el-button class="calbtn" @click="Confirm=false">取消</el-button>
           <el-button class="subtn" type="primary" :loading="loadsitu" @click="SaveInf">{{adbtn}}</el-button>
         </span>
       </el-dialog>
@@ -109,8 +108,9 @@
   export default {
     data() {
       return {
+        systermTime: null,
         reApplyInf: {},
-        taskwaitting:{},
+        taskwaitting: {},
         manager: false,
         ManagerBtn: true,
         HintStar: true,
@@ -118,23 +118,24 @@
         adbtn: '确认',
         ReIllustrate: false,
         loadsitu: false,
-        tableData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }],
+        tableData: [],
+        // tableData: [{
+        //   date: '2016-05-02',
+        //   name: '王小虎',
+        //   address: '上海市普陀区金沙江路 1518 弄'
+        // }, {
+        //   date: '2016-05-04',
+        //   name: '王小虎',
+        //   address: '上海市普陀区金沙江路 1517 弄'
+        // }, {
+        //   date: '2016-05-01',
+        //   name: '王小虎',
+        //   address: '上海市普陀区金沙江路 1519 弄'
+        // }, {
+        //   date: '2016-05-03',
+        //   name: '王小虎',
+        //   address: '上海市普陀区金沙江路 1516 弄'
+        // }],
         activeNames: ['0', '1', "2", "3"], //折叠面板 默认显示下标
         applyInfoPool: {
           // applySubno: '',
@@ -149,67 +150,77 @@
       myHead
     },
     methods: {
-      getInf() {
+      getSystermTime() { // 获取系统时间-质检结论-质检日期取值---基础接口
+        this.get('system/getSystemDate?' + Math.random()).then(res => {
+          if (res.statusCode == 200) {
+            this.systermTime = res.data;
+          }
+        })
+      },
+      getInf() { //查询页面信息
         this.get('/insReconApply/queryInsConclusionInfo', {
-          applyId: this.taskwaitting.applyId,
+          applyId: this.taskwaitting.ApplyId,
         }).then(res => {
           this.applyInfoPool = res.data.applyBaseInfo; //基本信息
-          this.tableData = res.data.insConclusion; //-----------需要调接口查看返回对象，还是数组
+          this.tableData[0] = res.data.insConclusion; //-----------需要调接口查看返回对象，还是数组
         })
+        //  this.get('/insReconApply/queryInsConclusionInfo', {
+        //     applyId: this.taskwaitting.ApplyId,
+        //   }).then(res => {
+        //     this.baseInfo = res.data.applyBaseInfo; //基本信息
+        //     this.tableData = res.data.insConclusion; //-----------需要调接口查看返回对象，还是数组
+        //   })
       },
       sumt() {
         this.loadsitu = false;
         this.adbtn = '确定';
         if (this.fraudAuditOpinion.auditDesc == '') { //复议说明如果为空 不提交------复议说明自段待更改
-          this.$message.error('提交失败，有必填项未填写！');
+          this.$message.error('有必填项未填写！');
           this.confirm = false;
           return
         }
         this.Confirm = true;
       },
-      SaveInf() {
+      SaveInf() { //提交
         this.loadsitu = true;
         this.adbtn = '提交中';
         // 提交信息
-        this.post("/", {
-          applyId:  this.taskwaitting.applyId, //申请单id
+        this.post("/insReconApply/saveInsReconApply", {
+          applyId: this.taskwaitting.ApplyId, //申请单id
           // taskNode: '', //复议节点----暂时不入
           // taskNodeName: '', //复议节点名称----暂时不入
-          reviewRemark:this.fraudAuditOpinion.auditDesc, //复议说明
-          approverUserCode: this.reApplyInf.userName , //经办人
-          reconDate: '', //发起复议时间
-          reconType: '00', //复议类型(00:初终审本人，01:初终审主管首次，02:初终审主管二次)
-          taskId:  this.taskwaitting.taskId, //任务id
+          reviewRemark: this.fraudAuditOpinion.auditDesc, //复议说明
+          approverUserCode: this.reApplyInf.userCode, //经办人
+          reconDate: this.systermTime, //发起复议时间
+          reconType: this.taskwaitting.reconType, //复议类型(00:初终审本人，01:初终审主管首次，02:初终审主管二次)
+          taskId: this.taskwaitting.taskId, //任务id
         }).then(res => {
           if (res.statusCode == 200) {
-this.$message({
-  message:'发起复议成功',
-  type:'sucess'
-})
+            this.$message({
+              message: '发起复议成功',
+              type: 'sucess'
+            });
           } else {
             this.$message.error(res.msg);
           }
         });
-        this.confirm = false;
+        this.Confirm = false;
       },
-      backToQTResult() {
-        // 4、回到质检结论页
-      }
     },
-
     mounted() {
-      console.log(this.$route.params)
-      this.taskwaitting=this.$route.params
-      this.reApplyInf.userName = JSON.parse(localStorage.getItem('userInf')).userName
-      console.log(this.reApplyInf.userName)
-      this.getInf();
+      this.getSystermTime();
+      console.log(JSON.parse(localStorage.getItem('QTToReconsiderParams')));
+      this.taskwaitting = JSON.parse(localStorage.getItem('QTToReconsiderParams'));
+      this.reApplyInf = JSON.parse(localStorage.getItem('userInf'));
+      console.log(this.reApplyInf)
+      // this.getInf();
       //传入isManager判断是否可编辑
-      if (this.isManager == 'Manager') {
-        this.manager = true;
-        this.ReIllustrate = false;
-        this.ManagerBtn = false;
-        this.HintStar = false;
-      }
+      // if (this.isManager == 'Manager') {
+      //   this.manager = true;
+      //   this.ReIllustrate = false;
+      //   this.ManagerBtn = false;
+      //   this.HintStar = false;
+      // }
     }
   }
 
@@ -256,7 +267,6 @@ this.$message({
 
   .AntiInf {
     padding-top: 10px;
-    background: red;
   }
 
   .baseTop li {

@@ -8,33 +8,21 @@
           <li>
             <p>
               <label> 进件编号 </label>
-              <el-input v-model="params.applySubno" placeholder="请输入进件编号"></el-input>
+              <el-input v-model="params.applySubNo" placeholder="请输入进件编号"></el-input>
             </p>
             <p>
-              <label> 差错类型</label>
-               <el-select v-model="params.custName" placeholder="请选择">
-                <el-option v-for="item in QTresult" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
+              <label> 客户名称</label>
+                <el-input v-model="params.custName_la" placeholder="请输入客户名称"></el-input>
             </p>
             <p>
-              <label> 业务状态</label>
-               <el-select v-model="params.certCode" placeholder="请选择">
-                <el-option v-for="item in ServiceStates" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
+              <label> 证件号码</label>
+                <el-input v-model="params.certCode" placeholder="请输入证件号码"></el-input>
             </p>
           </li>
           <li>
             <p>
-              <label> 质检状态</label>
-              <el-select v-model="value" placeholder="请选择">
-                <el-option v-for="item in QTStates" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
             </p>
             <p>
-             
             </p>
             <p class="btn_wrap">
               <el-button class="btn" type="primary" style="marginLeft:228px" @click="Rsearch">查询</el-button>
@@ -67,11 +55,11 @@
           </el-table-column>
         </el-table>
         <!-- 分页  -->
-        <div class="paging">
+        <!-- <div class="paging">
           <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
             :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
           </el-pagination>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -82,76 +70,74 @@
   export default {
     data() {
       return {
- QTresult: [{
-          value: '01',
-          label: '初审一般差错'
-        }, {
-          value: '02',
-          label: '初审重大差错'
-        }, {
-          value: '03',
-          label: '终审一般差错'
-        }, {
-          value: '04',
-          label: '终审重大差错'
-        }, {
-          value: '07',
-          label: '专项'
-        }, {
-          value: '08',
-          label: '纵向'
-        }],
-   ServiceStates:[{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
-  QTStates:[{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
-
-
+        taskList:"",
         query: {
           id: '',
-          matchApplyId: "",
+          ApplyId: "",
+          taskId: '',
+          processInstanceId: '',
+          listType: '',
         },
         userInf: null,
-        tableData: [],
+        tableData:[],
+        // tableData: [{
+        //   checkResult: '01',
+        //   isSecondIns: "1",
+        //   appType: null,
+        //   applyId: "879d8e00-6d3f-4e07-87f5-0f0c675c06e1",
+        //   applyIdList: null,
+        //   applyMainNo: null,
+        //   applySubNo: "201511190111013763",
+        //   assignCode: null,
+        //   assignName: "system",
+        //   auditCodec: null,
+        //   auditCodez: null,
+        //   auditDatec: null,
+        //   auditDatez: null,
+        //   auditNamec: "李翠萍",
+        //   auditNamez: "刘杰",
+        //   certCode: "431129198001010178",
+        //   checkState: "01",
+        //   checkStateTxt: "待质检员审批",
+        //   certType: null,
+        //   createTime: null,
+        //   custCode: null,
+        //   custName: "0508测试D009",
+        //   enterTime: "2018-05-23 11:06:25",
+        //   id: "Fwn2yzQIZ1GS8Czoqf7g4MoF1TVEeSGB",
+        //   insDate: null,
+        //   insMemberName: null,
+        //   instaskType: "00",
+        //   instaskTypeTxt: "常规质检",
+        //   lastModifyTime: null,
+        //   mobile: null,
+        //   proCode: null,
+        //   proName: null,
+        //   processInstanceId: null,
+        //   processInstanceIdSecond: null,
+        //   remark: null,
+        //   taskId: '98988',
+        // }],
         reg: /(\w{6})\w*(\w{4})/,
         Telreg: /(\w{7})\w*/,
         reVal: '$1********$2',
         telVal: '$1****',
         params: {
-          applySubno: '',
-          custName: '',
+           processTemplateId: '',
+          taskNodeName: '',
+          taskStatus: '',
+          applySubNo: '',
+          custName_la: '',
           certCode: '',
-          mobile: '',
           //   pageNum: '', //页数（第几页）
           //   pageSize: '', //页面显示行数
         },
         // currentPage: 1, //分页选中页
         // pageCount: 10, // 每页显示条数
         // totalRecord: 0, //总条数
-        value:'',
-
- 
-          
       }
     },
     methods: {
-
       //   handleSizeChange(val) {
       //     this.params.pageSize = val;
       //     this.params.pageNum = 1;
@@ -159,40 +145,37 @@
       //     this.inquire(this.params);
       //   },
       handleCurrentChange(val) {
-        this.query.id = val.id;
-        this.query.matchApplyId = val.applyId;
-        localStorage.setItem("QTSelfTW", JSON.stringify(this.query));
-        this.$router.push('/MatchingInfQT');
         // this.params.pageNum = val;
         // this.inquire(this.params);
+         this.query.id = val.id;
+        this.query.ApplyId = val.applyId;
+        this.query.taskId = val.taskId;
+        this.query.processInstanceId = val.processInstanceId;
+        localStorage.setItem("QTSelfTW", JSON.stringify(this.query));
+        this.$router.push('/MatchingInfQT?checkApp_trial_self');
       },
       Rreset() {
-        this.params.applySubno = '';
-        this.params.custName = '';
+        this.params.applySubNo = '';
+        this.params.custName_la = '';
         this.params.certCode = '';
-        this.params.mobile = '';
+        this.inquire(this.params)
       },
       Rsearch() {
         // this.params.pageNum = this.currentPage = 1;
-        if (this.params.applySubno != '' || this.params.custName != '' || this.params.certCode != '' || this.params.mobile !=
-          '') {
-          this.inquire(this.params);
-        } else {
-          this.$message.error('请输入查询条件')
-        }
+        this.inquire(this.params)
       },
       inquire(pam) {
-        // 基础接口-综合查询
-        this.post("applyInfoPool/multipleQuery", pam).then(res => {
+        // 查询列表
+        this.post("insConclusion/queryCZSBRTaskList", pam).then(res => {
           if (res.statusCode == 200) {
-            for (var i = 0; i < res.data.length; i++) {
-              if (res.data[i].certCode) {
-                res.data[i].certCode = res.data[i].certCode.replace(this.reg, this.reVal);
-              }
-              if (res.data[i].mobile) {
-                res.data[i].mobile = res.data[i].mobile.replace(this.Telreg, this.telVal);
-              }
-            }
+            // for (var i = 0; i < res.data.length; i++) {
+            //   if (res.data[i].certCode) {
+            //     res.data[i].certCode = res.data[i].certCode.replace(this.reg, this.reVal);
+            //   }
+            //   if (res.data[i].mobile) {
+            //     res.data[i].mobile = res.data[i].mobile.replace(this.Telreg, this.telVal);
+            //   }
+            // }
             this.tableData = res.data;
           } else {
             this.$message.error(res.msg);
@@ -201,6 +184,11 @@
       },
     },
     mounted() {
+      this.taskList = JSON.parse(localStorage.getItem('QTTrialSelftWorkbenchPass'))
+      this.params.processTemplateId = this.taskList.processTemplateId;
+      this.params.taskNodeName = this.taskList.taskNodeName;
+      this.params.taskStatus = this.taskList.taskStatus;
+      this.inquire(this.params)
       // QTTrialSelftWorkbenchPass
       //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
       //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)

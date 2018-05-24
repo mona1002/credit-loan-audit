@@ -173,6 +173,7 @@
         nodeName: '',
         routeParams: '',
         taskNodeName: '',
+        taskNodeParams:'',
         processMoniParams: '',
         right: null,
         left: null,
@@ -358,6 +359,14 @@
           this.nodeName = "质检主管审批";
           this.nodeFlag = "08";          
            this.routeParams = '?taskNodeName=' + this.taskNodeName + "&flag="+this.nodeFlag;
+        } else if (route.path == '/SelfTaskList') {      //初终审本人
+          this.nodeName = "初终审本人审批";
+          this.nodeFlag = "09";          
+           this.routeParams = '?taskNodeName=' + this.taskNodeName + "&flag="+this.nodeFlag;
+        } else if (route.path == '/ManagerTaskList') {      //初终审主管
+          this.nodeName = "初终审主管审批";
+          this.nodeFlag = "10";          
+           this.routeParams = '?taskNodeName=' + this.taskNodeName + "&flag="+this.nodeFlag;
         } else if (route.path == '/ACManagerTaskList') {   //质检主管审批
           this.nodeName = "区域经理审批";
            this.nodeFlag = "12";          
@@ -373,6 +382,9 @@
         //  else if (route.path == '/manager') {
         //   this.nodeName = "质检主管审批";
         // } 
+             else if (route.path == '/ReApply') { // 质检功能
+          this.nodeName = "复议申请";
+        }
         else if (route.path == '/regularConfig') { // 质检功能 - 常规抽单配置功能
           this.nodeName = "质检常规抽单配置";
         // } else if (route.path == '/reconsiderResult') { // 质检功能 - 复议结果查询
@@ -383,8 +395,9 @@
           this.nodeName = "专纵向抽单配置";
         }
         else if (route.path == '/MatchingInfQT') {
+          this.taskNodeParams= route.fullPath.split('?')[1]
           this.nodeName = "质检详情";
-           this.routeParams = '?checkApp_apply'//---------------------------做判断-----
+           this.routeParams = '?'+this.taskNodeParams//---------------------------做判断-----
         }
         // else{
         //   return

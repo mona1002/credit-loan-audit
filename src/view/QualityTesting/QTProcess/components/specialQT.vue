@@ -47,11 +47,20 @@
 <script>
   export default {
     mounted(){
-this.kkk[0]=this.fff[0];
-console.log(this.kkk);
+      console.log(this.kdkdk )
+      
+      var j={
+        kkk:8374932
+      };
+      this.kdkdk[0]=j;
+      console.log(this.kdkdk )
+      
+// this.kkk[0]=this.fff[0];
+// console.log(this.kkk);
     },
     data() {
       return {
+        kdkdk:[],
         kkk:[{
           abc:'ddd',
           ddd:'idj'

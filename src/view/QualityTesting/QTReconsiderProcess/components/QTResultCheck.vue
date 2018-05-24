@@ -1,6 +1,6 @@
 <template>
   <div class="regularQT">
-    <!-- 质检复议流程  初终审质检结论查看页 -->    
+    <!-- 质检复议流程  初终审质检结论查看页 -->
     <!-- 审批信息 ============checked  待调试=一接口返回数据格式带确认-->
     <el-collapse v-model="activeNames">
       <el-collapse-item name="0">
@@ -37,7 +37,7 @@
         <img src="../../../../../static/images/back.png">
         <label class="labelTxt">无需复议</label>
       </el-button>
-      <el-button @click="$router.push({name:'ReApply',params:taskwaitting})">
+      <el-button @click="ToReconsider">
         <img src="../../../../../static/images/appro.png">
         <label class="labelTxt">发起复议</label>
       </el-button>
@@ -108,28 +108,47 @@
         lcdialogVisible: false,
         processInstanceId: '',
         bigDataLogVisible: false,
+        ToReconsiderParams: {
+          id: '',
+          taskId:'',
+          flag: 'zhijian',
+          busiState: '30',
+          wayOf: '02', //质检
+          reconType:'00'//复议类型(00:初终审本人，01:初终审主管首次，02:初终审主管二次)
+        }
       }
     },
-    props:['QTinf'],
+    props: ['QTinf'],
     methods: {
-      getInf() {
+      //     this.get('/insReconApply/queryInsConclusionInfo?applyId='+this.taskwaitting.ApplyId)      
+      getInf() { //查询信息
         this.get('/insReconApply/queryInsConclusionInfo', {
-          applyId: this.taskwaitting.applyId,
+          applyId: this.taskwaitting.ApplyId,
         }).then(res => {
           this.baseInfo = res.data.applyBaseInfo; //基本信息
           this.tableData = res.data.insConclusion; //-----------需要调接口查看返回对象，还是数组
         })
       },
+      ToReconsider() {
+       console.log(this.taskwaitting)
+      this.ToReconsiderParams.ApplyId=  this.taskwaitting.ApplyId;
+      this.ToReconsiderParams.taskId=  this.taskwaitting.taskId;
+      
+         localStorage.setItem('QTToReconsiderParams', JSON.stringify(this.ToReconsiderParams)); //工作台部分信息，带入workbenchPass
+         this.$router.push('/ReApply');
+      },
       NoReconsider() {
-        this.post('/insConclusion/noNeedReview', {
-          applyId: this.taskwaitting.applyId,
-          taskId: this.taskwaitting.taskId
+        this.post('/insReconApply/noNeedReview', {
+          applyId: this.taskwaitting.ApplyId,
+          taskId: this.taskwaitting.taskId,
+          reconType: '00' //复议类型(00:初终审本人，01:初终审主管首次，02:初终审主管二次)
         }).then(res => {
           if (res.statusCode == 200) {
             this.$message({
               message: '提交成功',
               type: 'success'
             })
+            this.$router.push('/SelfTaskList?taskNodeName=checkApp_apply&flag=09')
           } else {
             this.$message.error(res.msg)
           }
@@ -151,7 +170,7 @@
       //大数据风控
       RiskControl() {
         this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
-          applyId: this.taskwaitting.applyId
+          applyId: this.taskwaitting.ApplyId
         }).then(res => {
           if (res.obj == null) {
             this.bigDataLogVisible = true;
@@ -165,8 +184,10 @@
     },
     mounted() {
       this.taskwaitting = JSON.parse(localStorage.getItem('QTSelfTW'));
+      console.log(this.taskwaitting)
       //   this.processInstanceId =  this.taskwaitting.processInstanceId;
       this.getInf();
+
     }
   }
 
