@@ -218,13 +218,12 @@
         }
         // -----------------------------质检-------------------------------
         else if (val.taskNodeName == "checkApp_apply") { //质检开始- 质检专员列表 
-        //  this.judge.flag = "07";
-        //   RoutePath = '/commissioner'
-        //   this.LSworkbench="QTWorkbenchPass";
-
-          this.judge.flag = "08";
-          RoutePath = '/manager'
-          this.LSworkbench="QTManagerWorkbenchPass";
+         this.judge.flag = "07";
+          RoutePath = '/commissioner'
+          this.LSworkbench="QTWorkbenchPass";
+        //  this.judge.flag = "09";
+        //   RoutePath = '/SelfTaskList'
+        //   this.LSworkbench="QTTrialSelftWorkbenchPass";
         } 
         else if (val.taskNodeName == "checkApp_check_manager") { // 质检主管复核--质检主管列表 
           this.judge.flag = "08";
