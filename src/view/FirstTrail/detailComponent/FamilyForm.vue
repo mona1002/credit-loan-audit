@@ -30,7 +30,7 @@
         <div class="left-title"><span class="require-icon" style="left:80px;">*</span>来源：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-          <el-select v-model="source">
+          <el-select v-model="Fsource">
             <el-option label="申请表" value="00"></el-option>
             <el-option label="第三方查询" value="01"></el-option>
             <el-option label="其他" value="02"></el-option>
@@ -42,7 +42,7 @@
         <div class="left-title"><span class="require-icon" style="left:50px;">*</span>接听情况：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-          <el-select v-model="answer">
+          <el-select v-model="Fanswer">
             <el-option label="无人接" value="00"></el-option>
             <el-option label="拒接" value="01"></el-option>
             <el-option label="停机" value="02"></el-option>
@@ -56,7 +56,7 @@
         <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查阶段：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-          <el-select v-model="checkStage">
+          <el-select v-model="FcheckStage">
             <el-option label="正在调查" value="00"></el-option>
             <el-option label="完成调查" value="01"></el-option>
             <el-option label="调查失败" value="02"></el-option>
@@ -65,10 +65,10 @@
         </el-tooltip>
         <!-- </div> -->
       </li>
-      <li class="item-column1" v-show="source=='02'">
+      <li class="item-column1" v-show="Fsource=='02'">
         <div class="left-title">其他来源说明：</div>
         <div class="textarea-class">
-          <el-input v-model="sourceDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
+          <el-input v-model="FsourceDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
         </div>
       </li>
     </ul>
@@ -81,7 +81,7 @@
         <li class="item-column1">
           <div class="left-title">第三方查询信息：</div>
           <div class="textarea-class">
-            <el-input type="textarea" v-model="thirdResult" :rows="3" resize=none :maxlength="500"></el-input>
+            <el-input type="textarea" v-model="FthirdResult" :rows="3" resize=none :maxlength="500"></el-input>
           </div>
         </li>
       </div>
@@ -90,7 +90,7 @@
           <div class="left-title"><span class="require-icon" style="left:0px;">*</span>三方查询是否异常：</div>
           <!-- <div> -->
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-            <el-select v-model="threeQueries" @change="changes('threeQueries')">
+            <el-select v-model="FthreeQueries" @change="changes('FthreeQueries')">
               <el-option label="否" value="0"></el-option>
               <el-option label="是" value="1"></el-option>
             </el-select>
@@ -98,10 +98,10 @@
           <!-- </div> -->
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="threeQueries=='1'"><span class="require-icon" style="left:80px;">*</span>说明：</div>
+          <div class="left-title" v-show="FthreeQueries=='1'"><span class="require-icon" style="left:80px;">*</span>说明：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-            <div class="textarea-class2" v-show="threeQueries=='1'">
-              <el-input v-model="threeQueriestxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+            <div class="textarea-class2" v-show="FthreeQueries=='1'">
+              <el-input v-model="FthreeQueriestxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
             </div>
           </el-tooltip>
         </li>
@@ -111,7 +111,7 @@
           <div class="left-title left-title2"><span class="require-icon" style="left:0px; top:-8px;">*</span>微信/支付宝是否异常：</div>
           <!-- <div> -->
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-            <el-select v-model="mobilepayment" @change="changes('mobilepayment')">
+            <el-select v-model="Fmobilepayment" @change="changes('Fmobilepayment')">
               <el-option label="否" value="0"></el-option>
               <el-option label="是" value="1"></el-option>
             </el-select>
@@ -119,10 +119,10 @@
           <!-- </div> -->
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="mobilepayment=='1'"><span class="require-icon" style="left:80px;">*</span>说明：</div>
+          <div class="left-title" v-show="Fmobilepayment=='1'"><span class="require-icon" style="left:80px;">*</span>说明：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-            <div class="textarea-class2" v-show="mobilepayment=='1'">
-              <el-input v-model="mobilepaymenttxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+            <div class="textarea-class2" v-show="Fmobilepayment=='1'">
+              <el-input v-model="Fmobilepaymenttxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
             </div>
           </el-tooltip>
         </li>
@@ -131,16 +131,16 @@
         <li class="item-column3">
           <div class="left-title left-title2">是否与家庭联系人为同一接听人：</div>
           <div class="textarea-class2">
-            <el-select v-model="issameFam" @change="changes(issameFam)">
+            <el-select v-model="FissameFam" @change="changes(FissameFam)">
               <el-option label="否" value="0"></el-option>
               <el-option label="是" value="1"></el-option>
             </el-select>
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="issameFam=='0'">说明：</div>
-          <div class="textarea-class2" v-show="issameFam=='0'">
-            <el-input v-model="issameFamtxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <div class="left-title" v-show="FissameFam=='0'">说明：</div>
+          <div class="textarea-class2" v-show="FissameFam=='0'">
+            <el-input v-model="FissameFamtxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
         </li>
       </div>
@@ -148,7 +148,7 @@
         <li class="item-column3">
           <div class="left-title">与借款人关系：</div>
           <div>
-            <el-select v-model="relBorrower" @change="changes('relBorrower')">
+            <el-select v-model="FrelBorrower" @change="changes('FrelBorrower')">
               <el-option label="父母" value="00"></el-option>
               <el-option label="爱人" value="01"></el-option>
               <el-option label="子女" value="02"></el-option>
@@ -157,9 +157,9 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="relBorrower=='03'">说明：</div>
-          <div class="textarea-class2" v-show="relBorrower=='03'">
-            <el-input v-model="relBorrowertxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <div class="left-title" v-show="FrelBorrower=='03'">说明：</div>
+          <div class="textarea-class2" v-show="FrelBorrower=='03'">
+            <el-input v-model="FrelBorrowertxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
         </li>
       </div>
@@ -167,7 +167,7 @@
         <li class="item-column3">
           <div class="left-title">核对工作情况：</div>
           <div>
-            <el-select v-model="checkWork" @change="changes('checkWork')">
+            <el-select v-model="FcheckWork" @change="changes('FcheckWork')">
               <el-option label="一致" value="00"></el-option>
               <el-option label="基本一致" value="01"></el-option>
               <el-option label="不一致" value="02"></el-option>
@@ -176,9 +176,9 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="checkWork=='01'">说明：</div>
-          <div class="textarea-class2" v-show="checkWork=='01'">
-            <el-input v-model="checkWorktxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <div class="left-title" v-show="FcheckWork=='01'">说明：</div>
+          <div class="textarea-class2" v-show="FcheckWork=='01'">
+            <el-input v-model="FcheckWorktxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
         </li>
       </div>
@@ -186,7 +186,7 @@
         <li class="item-column3">
           <div class="left-title">核对婚姻情况：</div>
           <div>
-            <el-select v-model="maritalStatus">
+            <el-select v-model="FmaritalStatus">
               <el-option label="未婚" value="00"></el-option>
               <el-option label="已婚" value="01"></el-option>
               <el-option label="离异" value="02"></el-option>
@@ -199,7 +199,7 @@
         <li class="item-column3">
           <div class="left-title">核对子女情况：</div>
           <div>
-            <el-select v-model="maritalStatustxt">
+            <el-select v-model="FmaritalStatustxt">
               <el-option label="有子女" value="00"></el-option>
               <el-option label="无子女" value="01"></el-option>
             </el-select>
@@ -215,7 +215,7 @@
         <li class="item-column3">
           <div class="left-title">核实居住地址：</div>
           <div>
-            <el-select v-model="checkAddr" @change="changes('checkAddr')">
+            <el-select v-model="FcheckAddr" @change="changes('FcheckAddr')">
               <el-option label="一致" value="00"></el-option>
               <el-option label="基本一致" value="01"></el-option>
               <el-option label="不一致" value="02"></el-option>
@@ -224,9 +224,9 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="checkAddr=='01'">说明：</div>
-          <div class="textarea-class2" v-show="checkAddr=='01'">
-            <el-input v-model="checkAddrtxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <div class="left-title" v-show="FcheckAddr=='01'">说明：</div>
+          <div class="textarea-class2" v-show="FcheckAddr=='01'">
+            <el-input v-model="FcheckAddrtxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
         </li>
       </div>
@@ -234,7 +234,7 @@
         <li class="item-column3">
           <div class="left-title">核对房产：</div>
           <div>
-            <el-select v-model="checkEstate" @change="changes('checkEstate')">
+            <el-select v-model="FcheckEstate" @change="changes('FcheckEstate')">
               <el-option label="有" value="00"></el-option>
               <el-option label="无" value="01"></el-option>
               <el-option label="租房" value="02"></el-option>
@@ -244,9 +244,9 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="checkEstate=='00'">说明：</div>
-          <div class="textarea-class2" v-show="checkEstate=='00'">
-            <el-input v-model="checkEstatetxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <div class="left-title" v-show="FcheckEstate=='00'">说明：</div>
+          <div class="textarea-class2" v-show="FcheckEstate=='00'">
+            <el-input v-model="FcheckEstatetxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
         </li>
       </div>
@@ -254,7 +254,7 @@
         <li class="item-column3">
           <div class="left-title">其他收入：</div>
           <div>
-            <el-select v-model="otherIncome" @change="changes('otherIncome')">
+            <el-select v-model="FotherIncome" @change="changes('FotherIncome')">
               <el-option label="有" value="00"></el-option>
               <el-option label="无" value="01"></el-option>
               <el-option label="被调查人不清楚" value="02"></el-option>
@@ -262,9 +262,9 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="otherIncome=='00'">说明：</div>
-          <div class="textarea-class2" v-show="otherIncome=='00'">
-            <el-input v-model="otherIncometxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <div class="left-title" v-show="FotherIncome=='00'">说明：</div>
+          <div class="textarea-class2" v-show="FotherIncome=='00'">
+            <el-input v-model="FotherIncometxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
         </li>
       </div>
@@ -273,7 +273,7 @@
           <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查结果：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <div class="textarea-class">
-              <el-input type="textarea" v-model="conclusion" :rows="5" resize=none :maxlength="500"></el-input>
+              <el-input type="textarea" v-model="Fconclusion" :rows="5" resize=none :maxlength="500"></el-input>
             </div>
           </el-tooltip>
         </li>
@@ -291,38 +291,48 @@ export default {
   data() {
     return {
       phoneType: '03',
-      /*source: '',
-      answer: '',
-      sourceDesc: '',
-      checkStage: '',
-      thirdResult: '',
-      threeQueries: '',
-      threeQueriestxt: '',
-      issameFam: '',
-      issameFamtxt: '',*/
+
+
+      Fsource: this.familyList.source,
+      Fanswer: this.familyList.answer,
+      FsourceDesc: this.familyList.sourceDesc,
+      FcheckStage: this.familyList.checkStage,
+      FthirdResult: this.familyList.thirdResult,
+      FthreeQueries: this.familyList.threeQueries,
+      FthreeQueriestxt: this.familyList.threeQueriestxt,
+      FissameFam: this.familyList.issameFam,
+      FissameFamtxt: this.familyList.issameFamtxt,
+
+
       wetherThirdAbnormal: '',
       wetherThirdAbnormaltxt: '',
-      /*mobilepayment: '',
-      mobilepaymenttxt: '',
-      relBorrower: '',
-      relBorrowertxt: '',
-      checkWork: '',
-      checkWorktxt: '',
-      maritalStatus: '',
-      maritalStatustxt: '',
-      checkAddr: '',
-      checkAddrtxt: '',
-      checkEstate: '',
-      checkEstatetxt: '',
-      otherIncome: '',
-      otherIncometxt: '',
-      conclusion: '',*/
+
+
+      Fmobilepayment:this.familyList.mobilepayment,
+      Fmobilepaymenttxt:this.familyList.mobilepaymenttxt,
+      FrelBorrower:this.familyList.relBorrower,
+      FrelBorrowertxt:this.familyList.relBorrowertxt,
+      FcheckWork:this.familyList.checkWork,
+      FcheckWorktxt:this.familyList.checkWorktxt,
+      FmaritalStatus:this.familyList.maritalStatus,
+      FmaritalStatustxt:this.familyList.maritalStatustxt,
+      FcheckAddr:this.familyList.checkAddr,
+      FcheckAddrtxt:this.familyList.checkAddrtxt,
+      FcheckEstate:this.familyList.checkEstate,
+      FcheckEstatetxt:this.familyList.checkEstatetxt,
+      FotherIncome:this.familyList.otherIncome,
+      FotherIncometxt:this.familyList.otherIncometxt,
+      Fconclusion:this.familyList.conclusion,
+
+
+
       phoneId: '',
       resMsg:'',
       newLists:'',
     }
   },
-  props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull', 'source' , 'answer' , 'checkStage' , 'sourceDesc' , 'thirdResult' , 'threeQueries' , 'threeQueriestxt' , 'mobilepayment' , 'mobilepaymenttxt' , 'issameFam' , 'issameFamtxt' , 'relBorrower' , 'relBorrowertxt' , 'checkWork' , 'checkWorktxt' , 'maritalStatus' , 'maritalStatustxt' , 'checkAddr' , 'checkAddrtxt' , 'checkEstate' , 'checkEstatetxt' , 'otherIncome' , 'otherIncometxt' , 'conclusion'],
+ /* props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull', 'source' , 'answer' , 'checkStage' , 'sourceDesc' , 'thirdResult' , 'threeQueries' , 'threeQueriestxt' , 'mobilepayment' , 'mobilepaymenttxt' , 'issameFam' , 'issameFamtxt' , 'relBorrower' , 'relBorrowertxt' , 'checkWork' , 'checkWorktxt' , 'maritalStatus' , 'maritalStatustxt' , 'checkAddr' , 'checkAddrtxt' , 'checkEstate' , 'checkEstatetxt' , 'otherIncome' , 'otherIncometxt' , 'conclusion'],*/
+  props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull', 'familyList'],
   mounted() {
     console.log(this.mobilepayment);
     this.phoneType = '03'; // 住址电话
@@ -391,7 +401,7 @@ export default {
     submitForm() {
       console.log('submit!');
 
-      if (!this.source || !this.answer || !this.checkStage || !this.threeQueries || (this.threeQueries == '1' && !this.threeQueriestxt) || !this.mobilepayment || (this.mobilepayment == '1' && !this.mobilepaymenttxt) || !this.conclusion) {
+      if (!this.Fsource || !this.Fanswer || !this.FcheckStage || !this.FthreeQueries || (this.FthreeQueries == '1' && !this.FthreeQueriestxt) || !this.Fmobilepayment || (this.Fmobilepayment == '1' && !this.Fmobilepaymenttxt) || !this.Fconclusion) {
         this.$message({
           message: '请输入必填项!',
           type: 'warning'
@@ -424,44 +434,44 @@ export default {
                 custName: this.custName,
                 phoneType: this.phoneType,
                 phoneNum: this.phoneNum,
-                source: this.source,
-                answer: this.answer,
-                sourceDesc: this.sourceDesc,
-                checkStage: this.checkStage,
+                source: this.Fsource,
+                answer: this.Fanswer,
+                sourceDesc: this.FsourceDesc,
+                checkStage: this.FcheckStage,
                 applyId: this.applyId,
                 id: this.phoneId
               },
               cretelfcontact: {
                 applyId: this.applyId,
                 id: this.phoneId,
-                thirdResult: this.thirdResult, // 第三方查询信息
-                threeQueries: this.threeQueries, // 三方异常
-                threeQueriestxt: this.threeQueriestxt, // 三方异常说明
-                issameFam: this.issameFam,
-                issameFamtxt: this.issameFamtxt,
-                wetherThirdAbnormal: this.wetherThirdAbnormal,
-                wetherThirdAbnormaltxt: this.wetherThirdAbnormaltxt,
-                mobilepayment: this.mobilepayment,
-                mobilepaymenttxt: this.mobilepaymenttxt, // 微信/支付宝异常说明
-                relBorrower: this.relBorrower,
-                relBorrowertxt: this.relBorrowertxt,
-                checkWork: this.checkWork,
-                checkWorktxt: this.checkWorktxt,
-                maritalStatus: this.maritalStatus,
-                maritalStatustxt: this.maritalStatustxt,
-                checkAddr: this.checkAddr,
-                checkAddrtxt: this.checkAddrtxt,
-                checkEstate: this.checkEstate,
-                checkEstatetxt: this.checkEstatetxt,
-                otherIncome: this.otherIncome,
-                otherIncometxt: this.otherIncometxt,
-                conclusion: this.conclusion
+                thirdResult: this.FthirdResult, // 第三方查询信息
+                threeQueries: this.FthreeQueries, // 三方异常
+                threeQueriestxt: this.FthreeQueriestxt, // 三方异常说明
+                issameFam: this.FissameFam,
+                issameFamtxt: this.FissameFamtxt,
+                wetherThirdAbnormal: this.FwetherThirdAbnormal,
+                wetherThirdAbnormaltxt: this.FwetherThirdAbnormaltxt,
+                mobilepayment: this.Fmobilepayment,
+                mobilepaymenttxt: this.Fmobilepaymenttxt, // 微信/支付宝异常说明
+                relBorrower: this.FrelBorrower,
+                relBorrowertxt: this.FrelBorrowertxt,
+                checkWork: this.FcheckWork,
+                checkWorktxt: this.FcheckWorktxt,
+                maritalStatus: this.FmaritalStatus,
+                maritalStatustxt: this.FmaritalStatustxt,
+                checkAddr: this.FcheckAddr,
+                checkAddrtxt: this.FcheckAddrtxt,
+                checkEstate: this.FcheckEstate,
+                checkEstatetxt: this.FcheckEstatetxt,
+                otherIncome: this.FotherIncome,
+                otherIncometxt: this.FotherIncometxt,
+                conclusion: this.Fconclusion
               }
             }).then(res => {
               if (res.statusCode == '200') {
                 this.phoneId ='';
                 // 清数据
-                 this.source = '';
+                 /*this.source = '';
                  this.answer = '';
                  this.sourceDesc = '';
                  this.checkStage = '';
@@ -486,7 +496,7 @@ export default {
                  this.checkEstatetxt = '';
                  this.otherIncome = '';
                  this.otherIncometxt = '';
-                 this.conclusion = '';
+                 this.conclusion = '';*/
 
 
                 // 提交数据成功,广播事件 重新刷新列表
@@ -516,39 +526,39 @@ export default {
     },
     changes(flage){
       switch (flage){
-        case 'threeQueries':
-          if(this.threeQueries == '0'){
-            this.threeQueriestxt = '';
+        case 'FthreeQueries':
+          if(this.FthreeQueries == '0'){
+            this.FthreeQueriestxt = '';
           }
         break;
-        case 'mobilepayment':
-          if(mobilepayment == '0'){
-          this.mobilepaymenttxt = '';
+        case 'Fmobilepayment':
+          if(this.Fmobilepayment == '0'){
+          this.Fmobilepaymenttxt = '';
         }
         break;
-        case 'issameFam':
-          if(issameFam == '0'){
-          this.issameFamtxt = '';
+        case 'FissameFam':
+          if(this.FissameFam == '0'){
+          this.FissameFamtxt = '';
         }
         break;
-        case 'relBorrower':
-          if(relBorrower!='03'){
-            this.relBorrowertxt = '';
+        case 'FrelBorrower':
+          if(this.FrelBorrower!='03'){
+            this.FrelBorrowertxt = '';
           } 
         break;
-        case 'checkWork':
-          if(checkWork!='01'){
-          this.checkWorktxt = '';
+        case 'FcheckWork':
+          if(this.FcheckWork!='01'){
+          this.FcheckWorktxt = '';
         }
         break;
-        case 'checkAddr':
-          if(checkAddr!='01'){
-            this.checkAddrtxt = '';
+        case 'FcheckAddr':
+          if(this.FcheckAddr!='01'){
+            this.FcheckAddrtxt = '';
           }
         break;
-        case 'otherIncome':
-          if(otherIncome!='00'){
-            this.otherIncometxt = '';
+        case 'FotherIncome':
+          if(this.FotherIncome!='00'){
+            this.FotherIncometxt = '';
           }
         break;
       }
@@ -627,6 +637,33 @@ export default {
         this.otherIncometxt = '';
       }
     },*/
+    familyList(val){
+      console.log(val);
+      this.Fsource= val.source;
+      this.Fanswer= val.answer;
+      this.FsourceDesc= val.sourceDesc;
+      this.FcheckStage= val.checkStage;
+      this.FthirdResult= val.thirdResult;
+      this.FthreeQueries= val.threeQueries;
+      this.FthreeQueriestxt= val.threeQueriestxt;
+      this.FissameFam= val.issameFam;
+      this.FissameFamtxt= val.issameFamtxt;
+      this.Fmobilepayment=val.mobilepayment;
+      this.Fmobilepaymenttxt=val.mobilepaymenttxt;
+      this.FrelBorrower=val.relBorrower;
+      this.FrelBorrowertxt=val.relBorrowertxt;
+      this.FcheckWork=val.checkWork;
+      this.FcheckWorktxt=val.checkWorktxt;
+      this.FmaritalStatus=val.maritalStatus;
+      this.FmaritalStatustxt=val.maritalStatustxt;
+      this.FcheckAddr=val.checkAddr;
+      this.FcheckAddrtxt=val.checkAddrtxt;
+      this.FcheckEstate=val.checkEstate;
+      this.FcheckEstatetxt=val.checkEstatetxt;
+      this.FotherIncome=val.otherIncome;
+      this.FotherIncometxt=val.otherIncometxt;
+      this.Fconclusion=val.conclusion;
+    },
     // 判断全屏 , 更改样式
     isFull: function(val) {
       if (val == true) { // 全屏

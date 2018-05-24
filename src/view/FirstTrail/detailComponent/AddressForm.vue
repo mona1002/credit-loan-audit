@@ -30,7 +30,7 @@
         <div class="left-title"><span class="require-icon" style="left:80px;">*</span> 来源：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-          <el-select v-model="source">
+          <el-select v-model="Addsource" @change="changes('Addsource')">
             <el-option label="申请表" value="00"></el-option>
             <el-option label="第三方查询" value="01"></el-option>
             <el-option label="其他" value="02"></el-option>
@@ -44,7 +44,7 @@
         </div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-          <el-select v-model="answer">
+          <el-select v-model="Addanswer">
             <el-option label="无人接" value="00"></el-option>
             <el-option label="拒接" value="01"></el-option>
             <el-option label="停机" value="02"></el-option>
@@ -58,7 +58,7 @@
         <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查阶段：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-          <el-select v-model="checkStage">
+          <el-select v-model="AddcheckStage">
             <el-option label="正在调查" value="00"></el-option>
             <el-option label="完成调查" value="01"></el-option>
             <el-option label="调查失败" value="02"></el-option>
@@ -67,10 +67,10 @@
         </el-tooltip>
         <!-- </div> -->
       </li>
-      <li class="item-column1" v-show="source=='02'">
+      <li class="item-column1" v-show="Addsource=='02'">
         <div class="left-title">其他来源说明：</div>
         <div class="textarea-class">
-          <el-input v-model="sourceDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
+          <el-input v-model="AddsourceDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
         </div>
       </li>
     </ul>
@@ -83,7 +83,7 @@
         <li class="item-column1">
           <div class="left-title">第三方查询结果：</div>
           <div class="textarea-class">
-            <el-input v-model="thirdResult" type="textarea" :rows="3" resize=none :maxlength="500"></el-input>
+            <el-input v-model="AddthirdResult" type="textarea" :rows="3" resize=none :maxlength="500"></el-input>
           </div>
         </li>
       </div>
@@ -92,7 +92,7 @@
           <div class="left-title"><span class="require-icon" style="left:0px;">*</span>三方查询是否异常：</div>
           <!-- <div> -->
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-            <el-select v-model="threeQueries">
+            <el-select v-model="AddthreeQueries" @change="changes('AddthreeQueries')">
               <el-option label="否" value="0"></el-option>
               <el-option label="是" value="1"></el-option>
             </el-select>
@@ -100,10 +100,10 @@
           <!-- </div> -->
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="threeQueries=='1'"><span class="require-icon" style="left:80px;">*</span>说明：</div>
+          <div class="left-title" v-show="AddthreeQueries=='1'"><span class="require-icon" style="left:80px;">*</span>说明：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-            <div class="textarea-class2" v-show="threeQueries=='1'">
-              <el-input v-model="exceptionState" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+            <div class="textarea-class2" v-show="AddthreeQueries=='1'">
+              <el-input v-model="AddexceptionState" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
             </div>
           </el-tooltip>
         </li>
@@ -117,16 +117,16 @@
         <li class="item-column3">
           <div class="left-title left-title2">是否与家庭联系人为同一人接听：</div>
           <div>
-            <el-select v-model="issameFam">
+            <el-select v-model="AddissameFam" @change="changes('AddissameFam')">
               <el-option label="否" value="0"></el-option>
               <el-option label="是" value="1"></el-option>
             </el-select>
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="issameFam=='0'">说明：</div>
-          <div class="textarea-class2" v-show="issameFam=='0'">
-            <el-input v-model="issameFamtxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <div class="left-title" v-show="AddissameFam=='0'">说明：</div>
+          <div class="textarea-class2" v-show="AddissameFam=='0'">
+            <el-input v-model="AddissameFamtxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
         </li>
         <!-- <li class="item-column3">
@@ -139,7 +139,7 @@
         <li class="item-column3">
           <div class="left-title">与借款人关系：</div>
           <div>
-            <el-select v-model="relBorrower">
+            <el-select v-model="AddrelBorrower"  @change="changes('AddrelBorrower')">
               <el-option label="父母" value="00"></el-option>
               <el-option label="爱人" value="01"></el-option>
               <el-option label="子女" value="02"></el-option>
@@ -148,9 +148,9 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="relBorrower=='03'">说明：</div>
-          <div class="textarea-class2" v-show="relBorrower=='03'">
-            <el-input v-model="relBorrowertxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <div class="left-title" v-show="AddrelBorrower=='03'">说明：</div>
+          <div class="textarea-class2" v-show="AddrelBorrower=='03'">
+            <el-input v-model="AddrelBorrowertxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
         </li>
         <!-- <li class="item-column3">
@@ -163,7 +163,7 @@
         <li class="item-column3">
           <div class="left-title">核对工作情况：</div>
           <div>
-            <el-select v-model="checkWork">
+            <el-select v-model="AddcheckWork" @change="changes('AddcheckWork')">
               <el-option label="一致" value="00"></el-option>
               <el-option label="基本一致" value="01"></el-option>
               <el-option label="不一致" value="02"></el-option>
@@ -172,9 +172,9 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="checkWork=='01'">说明：</div>
-          <div class="textarea-class2" v-show="checkWork=='01'">
-            <el-input v-model="checkWorktxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <div class="left-title" v-show="AddcheckWork=='01'">说明：</div>
+          <div class="textarea-class2" v-show="AddcheckWork=='01'">
+            <el-input v-model="AddcheckWorktxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
         </li>
         <!-- <li class="item-column3">
@@ -187,7 +187,7 @@
         <li class="item-column3">
           <div class="left-title">核对婚姻情况：</div>
           <div>
-            <el-select v-model="maritalStatus">
+            <el-select v-model="AddmaritalStatus">
               <el-option label="未婚" value="00"></el-option>
               <el-option label="已婚" value="01"></el-option>
               <el-option label="离异" value="02"></el-option>
@@ -200,7 +200,7 @@
         <li class="item-column3">
           <div class="left-title">核对子女情况：</div>
           <div>
-            <el-select v-model="maritalStatustxt">
+            <el-select v-model="AddmaritalStatustxt">
               <el-option label="有子女" value="00"></el-option>
               <el-option label="无子女" value="01"></el-option>
             </el-select>
@@ -216,7 +216,7 @@
         <li class="item-column3">
           <div class="left-title">核对地址：</div>
           <div>
-            <el-select v-model="checkAddr">
+            <el-select v-model="AddcheckAddr" @change="changes('AddcheckAddr')">
               <el-option label="一致" value="00"></el-option>
               <el-option label="基本一致" value="01"></el-option>
               <el-option label="不一致" value="02"></el-option>
@@ -225,9 +225,9 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="checkAddr=='01'">说明：</div>
-          <div class="textarea-class2" v-show="checkAddr=='01'">
-            <el-input v-model="checkAddrtxt" type="textarea" resize=none :rows="2" :maxlength="500"></el-input>
+          <div class="left-title" v-show="AddcheckAddr=='01'">说明：</div>
+          <div class="textarea-class2" v-show="AddcheckAddr=='01'">
+            <el-input v-model="AddcheckAddrtxt" type="textarea" resize=none :rows="2" :maxlength="500"></el-input>
           </div>
         </li>
         <!-- <li class="item-column3">
@@ -240,7 +240,7 @@
         <li class="item-column3">
           <div class="left-title">核对房产：</div>
           <div>
-            <el-select v-model="checkEstate">
+            <el-select v-model="AddcheckEstate" @change="changes('AddcheckEstate')">
               <el-option label="有" value="00"></el-option>
               <el-option label="无" value="01"></el-option>
               <el-option label="租房" value="02"></el-option>
@@ -250,9 +250,9 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="checkEstate=='00'">说明：</div>
-          <div class="textarea-class2" v-show="checkEstate=='00'">
-            <el-input v-model="checkEstatetxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <div class="left-title" v-show="AddcheckEstate=='00'">说明：</div>
+          <div class="textarea-class2" v-show="AddcheckEstate=='00'">
+            <el-input v-model="AddcheckEstatetxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
         </li>
         <!-- <li class="item-column3">
@@ -265,7 +265,7 @@
         <li class="item-column3">
           <div class="left-title">其他收入：</div>
           <div>
-            <el-select v-model="otherIncome">
+            <el-select v-model="AddotherIncome" @change="changes('AddotherIncome')">
               <el-option label="有" value="00"></el-option>
               <el-option label="无" value="01"></el-option>
               <el-option label="被调查人不清楚" value="02"></el-option>
@@ -273,9 +273,9 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="otherIncome=='00'">说明：</div>
-          <div class="textarea-class2" v-show="otherIncome=='00'">
-            <el-input v-model="otherIncometxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <div class="left-title" v-show="AddotherIncome=='00'">说明：</div>
+          <div class="textarea-class2" v-show="AddotherIncome=='00'">
+            <el-input v-model="AddotherIncometxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
         </li>
         <!-- <li class="item-column3">
@@ -288,7 +288,7 @@
         <li class="item-column3">
           <div class="left-title">近期大项开销：</div>
           <div>
-            <el-select v-model="recentLargespend">
+            <el-select v-model="AddrecentLargespend">
               <el-option label="有" value="00"></el-option>
               <el-option label="无" value="01"></el-option>
               <el-option label="被调查人不清楚" value="02"></el-option>
@@ -296,9 +296,9 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="recentLargespend=='00'">说明：</div>
-          <div class="textarea-class2" v-show="recentLargespend=='00'">
-            <el-input v-model="recentlArgespendInfo" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <div class="left-title" v-show="AddrecentLargespend=='00'">说明：</div>
+          <div class="textarea-class2" v-show="AddrecentLargespend=='00'">
+            <el-input v-model="AddrecentlArgespendInfo" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
         </li>
         <!-- <li class="item-column3">
@@ -311,7 +311,7 @@
         <li class="item-column3">
           <div class="left-title">父母：</div>
           <div>
-            <el-select v-model="parents">
+            <el-select v-model="Addparents" @change="changes('Addparents')">
               <el-option label="退休" value="00"></el-option>
               <el-option label="在职" value="01"></el-option>
               <el-option label="务农" value="02"></el-option>
@@ -320,9 +320,9 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="parents=='01'">说明：</div>
-          <div class="textarea-class2" v-show="parents=='01'">
-            <el-input v-model="parentsInfo" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <div class="left-title" v-show="Addparents=='01'">说明：</div>
+          <div class="textarea-class2" v-show="Addparents=='01'">
+            <el-input v-model="AddparentsInfo" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
         </li>
         <!-- <li class="item-column3">
@@ -335,7 +335,7 @@
         <li class="item-column3">
           <div class="left-title">是否有兄弟姐妹：</div>
           <div>
-            <el-select v-model="brother">
+            <el-select v-model="Addbrother" @change="changes('Addbrother')">
               <el-option label="有" value="00"></el-option>
               <el-option label="无" value="01"></el-option>
               <el-option label="被调查人不清楚" value="02"></el-option>
@@ -343,9 +343,9 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="brother=='00'">说明：</div>
-          <div class="textarea-class2" v-show="brother=='00'">
-            <el-input v-model="brothertxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <div class="left-title" v-show="Addbrother=='00'">说明：</div>
+          <div class="textarea-class2" v-show="Addbrother=='00'">
+            <el-input v-model="Addbrothertxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
         </li>
         <!-- <li class="item-column3">
@@ -358,7 +358,7 @@
         <li class="item-column3">
           <div class="left-title">支付家庭生活费用：</div>
           <div>
-            <el-select v-model="expenses">
+            <el-select v-model="Addexpenses" @change="changes('Addexpenses')">
               <el-option label="需要" value="00"></el-option>
               <el-option label="不需要" value="01"></el-option>
               <el-option label="被调查人不清楚" value="02"></el-option>
@@ -366,9 +366,9 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="expenses=='00'">说明：</div>
-          <div class="textarea-class2" v-show="expenses=='00'">
-            <el-input v-model="expensestxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <div class="left-title" v-show="Addexpenses=='00'">说明：</div>
+          <div class="textarea-class2" v-show="Addexpenses=='00'">
+            <el-input v-model="Addexpensestxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
         </li>
         <!-- <li class="item-column3">
@@ -381,7 +381,7 @@
         <li class="item-column3">
           <div class="left-title">核对家庭固话：</div>
           <div>
-            <el-select v-model="checkHometel">
+            <el-select v-model="AddcheckHometel" @change="changes('AddcheckHometel')">
               <el-option label="一致" value="00"></el-option>
               <el-option label="基本一致" value="01"></el-option>
               <el-option label="不一致" value="02"></el-option>
@@ -390,9 +390,9 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="checkHometel=='01'">说明：</div>
-          <div class="textarea-class2" v-show="checkHometel=='01'">
-            <el-input v-model="checkHometeltxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <div class="left-title" v-show="AddcheckHometel=='01'">说明：</div>
+          <div class="textarea-class2" v-show="AddcheckHometel=='01'">
+            <el-input v-model="AddcheckHometeltxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
         </li>
         <!-- <li class="item-column3">
@@ -404,14 +404,14 @@
       <li class="item-column1">
         <div class="left-title">借款人爱好和品行：</div>
         <div class="textarea-class">
-          <el-input v-model="hobbyandBehave" type="textarea" :rows="3" resize=none :maxlength="500"></el-input>
+          <el-input v-model="AddhobbyandBehave" type="textarea" :rows="3" resize=none :maxlength="500"></el-input>
         </div>
       </li>
       <li class="item-column1">
         <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查结果：</div>
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <div class="textarea-class">
-            <el-input v-model="conclusion" type="textarea" :rows="5" resize=none :maxlength="500"></el-input>
+            <el-input v-model="Addconclusion" type="textarea" :rows="5" resize=none :maxlength="500"></el-input>
           </div>
         </el-tooltip>
       </li>
@@ -419,6 +419,7 @@
         <el-button type="primary" @click="submitForm('form')">确定</el-button>
       </li>
     </ul>
+    <p>{{Addlist}}</p>
   </div>
 </template>
 <script>
@@ -429,45 +430,49 @@ export default {
       // custName: '',
       phoneType: '01',
       // phoneNum: '',
-     /* source: '',
-      answer: '',
-      checkStage: '',
-      sourceDesc: '',
-      thirdResult: '',
-      issameFam: '',
-      relBorrower: '',
-      checkWork: '',
-      maritalStatustxt: '',
-      maritalStatus: '',
-      checkAddr: '',
-      checkEstate: '',
-      otherIncome: '',
-      recentLargespend: '',
-      parents: '',
-      brother: '',
-      threeQueries: '',
-      exceptionState: '',
-      expenses: '',
-      checkStage: '',
-      checkHometel: '',
-      hobbyandBehave: '',
-      conclusion: '',
-      issameFamtxt: '',
-      relBorrowertxt: '',
-      checkWorktxt: '',
-      checkAddrtxt: '',
-      checkEstatetxt: '',
-      otherIncometxt: '',
-      recentlArgespendInfo: '',
-      parentsInfo: '',
-      brothertxt: '',
-      expensestxt: '',
-      checkHometeltxt: '',*/
+
+
+      Addsource: this.Addlist.source,
+      Addanswer: this.Addlist.answer,
+      AddcheckStage: this.Addlist.checkStage,
+      AddsourceDesc: this.Addlist.sourceDesc,
+      AddthirdResult: this.Addlist.thirdResult,
+      AddissameFam: this.Addlist.issameFam,
+      AddrelBorrower: this.Addlist.relBorrower,
+      AddcheckWork: this.Addlist.checkWork,
+      AddmaritalStatustxt: this.Addlist.maritalStatustxt,
+      AddmaritalStatus: this.Addlist.maritalStatus,
+      AddcheckAddr: this.Addlist.checkAddr,
+      AddcheckEstate: this.Addlist.checkEstate,
+      AddotherIncome: this.Addlist.otherIncome,
+      AddrecentLargespend: this.Addlist.recentLargespend,
+      Addparents: this.Addlist.parents,
+      Addbrother: this.Addlist.brother,
+      AddthreeQueries: this.Addlist.threeQueries,
+      AddexceptionState: this.Addlist.exceptionState,
+      Addexpenses: this.Addlist.expenses,
+      AddcheckHometel: this.Addlist.checkHometel,
+      AddhobbyandBehave: this.Addlist.hobbyandBehave,
+      Addconclusion: this.Addlist.conclusion,
+      AddissameFamtxt: this.Addlist.issameFamtxt,
+      AddrelBorrowertxt: this.Addlist.relBorrowertxt,
+      AddcheckWorktxt: this.Addlist.checkWorktxt,
+      AddcheckAddrtxt: this.Addlist.checkAddrtxt,
+      AddcheckEstatetxt: this.Addlist.checkEstatetxt,
+      AddotherIncometxt: this.Addlist.otherIncometxt,
+      AddrecentlArgespendInfo: this.Addlist.recentlArgespendInfo,
+      AddparentsInfo: this.Addlist.parentsInfo,
+      Addbrothertxt: this.Addlist.brothertxt,
+      Addexpensestxt: this.Addlist.expensestxt,
+      AddcheckHometeltxt: this.Addlist.checkHometeltxt,
+
+
       phoneId: '', // 用来区分是添加 还是 修改 
       resMsg:''
     }
   },
-  props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull','source', "answer", "checkStage", "sourceDesc", "thirdResult", "threeQueries", "exceptionState", "issameFam", "issameFamtxt", "relBorrower", "relBorrowertxt", "checkWork", "checkWorktxt", "maritalStatus", "maritalStatustxt", "checkAddr", "checkAddrtxt", "checkEstate", "checkEstatetxt", "otherIncome", "otherIncometxt", "recentLargespend", "recentlArgespendInfo", "parents", "parentsInfo", "brother", "brothertxt", "expenses", "expensestxt", "checkHometel", "checkHometeltxt", "hobbyandBehave", "conclusion"],
+  /*props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull','source', "answer", "checkStage", "sourceDesc", "thirdResult", "threeQueries", "exceptionState", "issameFam", "issameFamtxt", "relBorrower", "relBorrowertxt", "checkWork", "checkWorktxt", "maritalStatus", "maritalStatustxt", "checkAddr", "checkAddrtxt", "checkEstate", "checkEstatetxt", "otherIncome", "otherIncometxt", "recentLargespend", "recentlArgespendInfo", "parents", "parentsInfo", "brother", "brothertxt", "expenses", "expensestxt", "checkHometel", "checkHometeltxt", "hobbyandBehave", "conclusion"],*/
+  props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull',"Addlist"],
   mounted() {
     this.phoneType = '01'; // 住址电话
     if (this.isFull == true) { // 全屏
@@ -501,7 +506,7 @@ export default {
     submitForm() {
       console.log('submit!');
       // 接听情况   三方查询是否异常/是  异常说明
-      if (!this.source || !this.answer || !this.checkStage || !this.threeQueries || (this.threeQueries == '1' && !this.exceptionState) || !this.conclusion) {
+      if (!this.Addsource || !this.Addanswer || !this.AddcheckStage || !this.AddthreeQueries || (this.AddthreeQueries == '1' && !this.AddexceptionState) || !this.Addconclusion) {
         this.$message({
           message: '请输入必填项!',
           type: 'warning'
@@ -532,46 +537,46 @@ export default {
                 custName: this.custName,
                 phoneType: this.phoneType,
                 phoneNum: this.phoneNum,
-                source: this.source,
-                answer: this.answer,
-                checkStage: this.checkStage,
-                sourceDesc: this.sourceDesc, // 其他来源说明
+                source: this.Addsource,
+                answer: this.Addanswer,
+                checkStage: this.AddcheckStage,
+                sourceDesc: this.AddsourceDesc, // 其他来源说明
                 applyId: this.applyId,
                 id: this.phoneId
               },
               cretelhometel: {
                 applyId: this.applyId,
                 id: this.phoneId,
-                thirdResult: this.thirdResult,
-                issameFam: this.issameFam,
-                relBorrower: this.relBorrower,
-                checkWork: this.checkWork,
-                maritalStatustxt: this.maritalStatustxt, // 核对子女情况说明
-                maritalStatus: this.maritalStatus,
-                checkAddr: this.checkAddr,
-                checkEstate: this.checkEstate, // 核对房产
-                otherIncome: this.otherIncome,
-                recentLargespend: this.recentLargespend,
-                parents: this.parents,
-                brother: this.brother,
-                threeQueries: this.threeQueries,
-                exceptionState: this.exceptionState, // 异常项说明
-                expenses: this.expenses, // 支付家庭费用
-                checkStage: this.checkStage,
-                checkHometel: this.checkHometel, // 核对家庭固话
-                hobbyandBehave: this.hobbyandBehave, // 借款人爱好和品行
-                conclusion: this.conclusion, // 调查结果
-                issameFamtxt: this.issameFamtxt, // 是否与家庭联系人为同一人接听说明
-                relBorrowertxt: this.relBorrowertxt, // 与借款人关系说明
-                checkWorktxt: this.checkWorktxt, // 工作情况说明
-                checkAddrtxt: this.checkAddrtxt, // 核对地址说明
-                checkEstatetxt: this.checkEstatetxt, // 核对房产说明
-                otherIncometxt: this.otherIncometxt, // 其他收入说明
-                recentlArgespendInfo: this.recentlArgespendInfo, // 近期大项开销说明
-                parentsInfo: this.parentsInfo, // 父母情况说明
-                brothertxt: this.brothertxt, // 兄弟姐妹情况说明
-                expensestxt: this.expensestxt, // 支付家庭费用说明
-                checkHometeltxt: this.checkHometeltxt, // 核对家庭固话说明
+                thirdResult: this.AddthirdResult,
+                issameFam: this.AddissameFam,
+                relBorrower: this.AddrelBorrower,
+                checkWork: this.AddcheckWork,
+                maritalStatustxt: this.AddmaritalStatustxt, // 核对子女情况说明
+                maritalStatus: this.AddmaritalStatus,
+                checkAddr: this.AddcheckAddr,
+                checkEstate: this.AddcheckEstate, // 核对房产
+                otherIncome: this.AddotherIncome,
+                recentLargespend: this.AddrecentLargespend,
+                parents: this.Addparents,
+                brother: this.Addbrother,
+                threeQueries: this.AddthreeQueries,
+                exceptionState: this.AddexceptionState, // 异常项说明
+                expenses: this.Addexpenses, // 支付家庭费用
+                checkStage: this.AddcheckStage,
+                checkHometel: this.AddcheckHometel, // 核对家庭固话
+                hobbyandBehave: this.AddhobbyandBehave, // 借款人爱好和品行
+                conclusion: this.Addconclusion, // 调查结果
+                issameFamtxt: this.AddissameFamtxt, // 是否与家庭联系人为同一人接听说明
+                relBorrowertxt: this.AddrelBorrowertxt, // 与借款人关系说明
+                checkWorktxt: this.AddcheckWorktxt, // 工作情况说明
+                checkAddrtxt: this.AddcheckAddrtxt, // 核对地址说明
+                checkEstatetxt: this.AddcheckEstatetxt, // 核对房产说明
+                otherIncometxt: this.AddotherIncometxt, // 其他收入说明
+                recentlArgespendInfo: this.AddrecentlArgespendInfo, // 近期大项开销说明
+                parentsInfo: this.AddparentsInfo, // 父母情况说明
+                brothertxt: this.Addbrothertxt, // 兄弟姐妹情况说明
+                expensestxt: this.Addexpensestxt, // 支付家庭费用说明
+                checkHometeltxt: this.AddcheckHometeltxt, // 核对家庭固话说明
               }
             }).then(res => {
               console.log(res);
@@ -579,10 +584,10 @@ export default {
               if (res.statusCode == '200') {
                 this.phoneId ='';
                 // 清数据
-                 this.source = '';
+                 /*this.Addsource = '';
                  this.answer = '';
                  this.checkStage = '';
-                 this.sourceDesc = '';
+                 this.AddsourceDesc = '';
                  this.thirdResult = '';
                  this.issameFam = '';
                  this.relBorrower = '';
@@ -612,7 +617,7 @@ export default {
                  this.parentsInfo = '';
                  this.brothertxt = '';
                  this.expensestxt = '';
-                 this.checkHometeltxt = '';
+                 this.checkHometeltxt = '';*/
                 // 提交数据成功,广播事件 重新刷新列表
                 this.$emit('updateList');
                 this.$emit('updateTree');
@@ -633,18 +638,310 @@ export default {
         this.$message({ type: 'success', message: this.resMsg });
 
       });
+    },
+    changes(flage){
+      switch (flage){
+        case 'Addsource':
+          if(this.Addsource != '02'){
+              this.AddsourceDesc  = '';
+            }
+        break;
+        // 三方查询异常
+        case 'AddthreeQueries':
+          if(this.AddthreeQueries == '0'){
+              this.AddexceptionState   = '';
+            }
+        break;
+        // 是否为同一接听人
+        case 'AddissameFam':
+          if(this.AddissameFam == '0'){
+              this.AddissameFamtxt = '';
+            }
+        break;
+        // 与借款人关系
+        case 'AddrelBorrower':
+          if(this.AddrelBorrower != '03'){
+              this.AddrelBorrowertxt = '';
+            }
+        break;
+        // 核对工作情况
+        case 'AddcheckWork':
+          if(this.AddcheckWork != '01'){
+              this.AddcheckWorktxt = '';
+            }
+        break;
+        // 核对地址
+        case 'AddcheckAddr':
+          if(this.AddcheckAddr != '01'){
+              this.AddcheckAddrtxt = '';
+            }
+        break;
+        // 核对房产
+        case 'AddcheckEstate':
+          if(this.AddcheckEstate != '00'){
+              this.AddcheckEstatetxt = '';
+            }
+        break;
+        // 其他收入
+        case 'AddotherIncome':
+          if(this.AddotherIncome != '00'){
+              this.AddotherIncometxt = '';
+            }
+        break;
+        // 父母
+        case 'Addparents':
+          if(this.Addparents != '01'){
+              this.AddparentsInfo = '';
+            }
+        break;
+        // 兄弟姐妹
+        case 'Addbrother':
+          if(this.Addbrother != '00'){
+              this.Addbrothertxt  = '';
+            }
+        break;
+        // 支付家庭生活费用
+        case 'Addexpenses':
+          if(this.Addexpenses != '00'){
+              this.Addexpensestxt = '';
+            }
+        break;
+        // 核对家庭固话
+        case 'AddcheckHometel':
+          if(this.AddcheckHometel != '01'){
+              this.AddcheckHometeltxt  = '';
+            }
+        break;
+      }
     }
   },
   watch: {
     // 监听  
     // 来源
-    source: function() {
-      console.log(this.source)
-      this.sourceDesc = '';
+    Addlist(val){
+      console.log(val);
+      this.Addsource= val.source;
+      this.Addanswer= val.answer;
+      this.AddcheckStage= val.checkStage;
+      this.AddsourceDesc= val.sourceDesc;
+      this.AddthirdResult= val.thirdResult;
+      this.AddissameFam= val.issameFam;
+      this.AddrelBorrower= val.relBorrower;
+      this.AddcheckWork= val.checkWork;
+      this.AddmaritalStatustxt= val.maritalStatustxt;
+      this.AddmaritalStatus= val.maritalStatus;
+      this.AddcheckAddr= val.checkAddr;
+      this.AddcheckEstate= val.checkEstate;
+      this.AddotherIncome= val.otherIncome;
+      this.AddrecentLargespend= val.recentLargespend;
+      this.Addparents= val.parents;
+      this.Addbrother= val.brother;
+      this.AddthreeQueries= val.threeQueries;
+      this.AddexceptionState= val.exceptionState;
+      this.Addexpenses= val.expenses;
+      this.AddcheckHometel= val.checkHometel;
+      this.AddhobbyandBehave= val.hobbyandBehave;
+      this.Addconclusion= val.conclusion;
+      this.AddissameFamtxt= val.issameFamtxt;
+      this.AddrelBorrowertxt= val.relBorrowertxt;
+      this.AddcheckWorktxt= val.checkWorktxt;
+      this.AddcheckAddrtxt= val.checkAddrtxt;
+      this.AddcheckEstatetxt= val.checkEstatetxt;
+      this.AddotherIncometxt= val.otherIncometxt;
+      this.AddrecentlArgespendInfo= val.recentlArgespendInfo;
+      this.AddparentsInfo= val.parentsInfo;
+      this.Addbrothertxt= val.brothertxt;
+      this.Addexpensestxt= val.expensestxt;
+      this.AddcheckHometeltxt= val.checkHometeltxt;
     },
+    /*source(val) {
+      console.log(val);
+        this.Addsource = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+    },*/
+    /*Addsource(val){
+        //xxcanghai 小小沧海 博客园
+        this.$emit("aaa",val);//③组件内对AddResult变更后向外部发送事件通知
+    },*/
+    /*sourceDesc(val) {
+      console.log(val);
+        this.AddsourceDesc = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+    },*/
+    /*AddsourceDesc(val){
+            //xxcanghai 小小沧海 博客园
+            this.$emit("on-sourceDesc-change",val);//③组件内对AddResult变更后向外部发送事件通知
+        },*/
+    /*checkStage(val) {
+      console.log(val);
+        this.AddcheckStage = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+    },*/
+    /*Addanswer(val){
+            //xxcanghai 小小沧海 博客园
+            this.$emit("on-answer-change",val);//③组件内对AddResult变更后向外部发送事件通知
+        },*/
+    // sourceDesc(val) {
+    //   console.log(val);
+    //     this.AddsourceDesc = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+    // },
+    /*AddcheckStage(val){
+            //xxcanghai 小小沧海 博客园
+            this.$emit("on-checkStage-change",val);//③组件内对AddResult变更后向外部发送事件通知
+        },*/
+    // thirdResult(val) {
+    //   console.log(val);
+    //     this.AddthirdResult = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+    // },
+    /*AddanswerIdentity(val){
+            //xxcanghai 小小沧海 博客园
+            this.$emit("on-answerIdentity-change",val);//③组件内对AddResult变更后向外部发送事件通知
+        },*/
+   //  issameFam(val) {
+   //    console.log(val);
+   //      this.AddissameFam = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   // /* Addanswertxt(val){
+   //          //xxcanghai 小小沧海 博客园
+   //          this.$emit("on-answertxt-change",val);//③组件内对AddResult变更后向外部发送事件通知
+   //      },*/
+   //  relBorrower(val) {
+   //    console.log(val);
+   //      this.AddrelBorrower = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  /*AddcheckJob(val){
+   //          //xxcanghai 小小沧海 博客园
+   //          this.$emit("on-checkJob-change",val);//③组件内对AddResult变更后向外部发送事件通知
+   //      },*/
+   //  checkWork(val) {
+   //    console.log(val);
+   //      this.AddcheckWork = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  /*AddcheckJobtxt(val){
+   //          //xxcanghai 小小沧海 博客园
+   //          this.$emit("on-checkJobtxt-change",val);//③组件内对AddResult变更后向外部发送事件通知
+   //      },*/
+   //  maritalStatustxt(val) {
+   //    console.log(val);
+   //      this.AddmaritalStatustxt = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  /*Addmobilepayment(val){
+   //          //xxcanghai 小小沧海 博客园
+   //          this.$emit("on-mobilepayment-change",val);//③组件内对AddResult变更后向外部发送事件通知
+   //      },*/
+   //  maritalStatus(val) {
+   //    console.log(val);
+   //      this.AddmaritalStatus = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  /*Addmobilepaymenttxt(val){
+   //          //xxcanghai 小小沧海 博客园
+   //          this.$emit("on-mobilepaymenttxt-change",val);//③组件内对AddResult变更后向外部发送事件通知
+   //      },*/
+   //  checkAddr(val) {
+   //    console.log(val);
+   //      this.AddcheckAddr = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   // /* Addconclusion(val){
+   //          //xxcanghai 小小沧海 博客园
+   //          this.$emit("on-conclusion-change",val);//③组件内对AddResult变更后向外部发送事件通知
+   //      },*/
+   //  checkEstate(val) {
+   //    console.log(val);
+   //      this.AddcheckEstate = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  otherIncome(val) {
+   //    console.log(val);
+   //      this.AddotherIncome = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  otherIncome(val) {
+   //    console.log(val);
+   //      this.AddotherIncome = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  recentLargespend(val) {
+   //    console.log(val);
+   //      this.AddrecentLargespend = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  parents(val) {
+   //    console.log(val);
+   //      this.Addparents = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  brother(val) {
+   //    console.log(val);
+   //      this.Addbrother = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  threeQueries(val) {
+   //    console.log(val);
+   //      this.AddthreeQueries = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+
+   //  exceptionState(val) {
+   //    console.log(val);
+   //      this.AddexceptionState = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  expenses(val) {
+   //    console.log(val);
+   //      this.Addexpenses = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  checkHometel(val) {
+   //    console.log(val);
+   //      this.AddcheckHometel = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  hobbyandBehave(val) {
+   //    console.log(val);
+   //      this.AddhobbyandBehave = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  conclusion(val) {
+   //    console.log(val);
+   //      this.Addconclusion = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  issameFamtxt(val) {
+   //    console.log(val);
+   //      this.AddissameFamtxt = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  conclusion(val) {
+   //    console.log(val);
+   //      this.Addconclusion = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  relBorrowertxt(val) {
+   //    console.log(val);
+   //      this.AddrelBorrowertxt = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  checkWorktxt(val) {
+   //    console.log(val);
+   //      this.AddcheckWorktxt = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  checkAddrtxt(val) {
+   //    console.log(val);
+   //      this.AddcheckAddrtxt = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  checkEstatetxt(val) {
+   //    console.log(val);
+   //      this.AddcheckEstatetxt = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  otherIncometxt(val) {
+   //    console.log(val);
+   //      this.AddotherIncometxt = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  recentlArgespendInfo(val) {
+   //    console.log(val);
+   //      this.AddrecentlArgespendInfo = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  parentsInfo(val) {
+   //    console.log(val);
+   //      this.AddparentsInfo = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  brothertxt(val) {
+   //    console.log(val);
+   //      this.Addbrothertxt = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  expensestxt(val) {
+   //    console.log(val);
+   //      this.Addexpensestxt = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
+   //  checkHometeltxt(val) {
+   //    console.log(val);
+   //      this.AddcheckHometeltxt = val;//②监听外部对props属性result的变更，并同步到组件内的data属性AddResult中
+   //  },
     // 其他来源说明
-    sourceDesc: function() {
-      if (this.sourceDesc.length == 100)
+    AddsourceDesc: function() {
+      if (this.AddsourceDesc && this.AddsourceDesc.length == 100)
         this.$message({
           message: '输入长度不能超出100',
           type: 'warning'
@@ -653,8 +950,8 @@ export default {
 
     },
     // 第三方查询结果
-    thirdResult: function() {
-      if (this.thirdResult.length == 500)
+    AddthirdResult: function() {
+      if (this.AddthirdResult && this.AddthirdResult.length == 500)
         this.$message({
           message: '输入长度不能超出100',
           type: 'warning'
@@ -663,12 +960,12 @@ export default {
 
     },
     // 三方查询异常
-    threeQueries: function() {
+    /*threeQueries: function() {
       this.exceptionState = '';
-    },
+    },*/
     // 三方查询异常说明
-    exceptionState: function() {
-      if (this.exceptionState.length == 100)
+    AddexceptionState: function() {
+      if (this.AddexceptionState && this.AddexceptionState.length == 100)
         this.$message({
           message: '输入长度不能超出100',
           type: 'warning'
@@ -676,12 +973,12 @@ export default {
       return;
     },
     // 是否为同一接听人
-    issameFam: function() {
+    /*issameFam: function() {
       this.issameFamtxt = '';
-    },
+    },*/
     // 是否为同一接听人异常说明
-    issameFamtxt: function() {
-      if (this.issameFamtxt.length == 100)
+    AddissameFamtxt: function() {
+      if (this.AddissameFamtxt && this.AddissameFamtxt.length == 100)
         this.$message({
           message: '输入长度不能超出100',
           type: 'warning'
@@ -689,12 +986,12 @@ export default {
       return;
     },
     // 与借款人关系
-    relBorrower: function() {
+    /*relBorrower: function() {
       this.relBorrowertxt = '';
-    },
+    },*/
     // 与借款人关系其他说明
-    relBorrowertxt: function() {
-      if (relBorrowertxt.length == 100)
+    AddrelBorrowertxt: function() {
+      if (this.AddrelBorrowertxt && this.AddrelBorrowertxt.length == 100)
         this.$message({
           message: '输入长度不能超出100',
           type: 'warning'
@@ -702,12 +999,12 @@ export default {
       return;
     },
     // 核对工作情况
-    checkWork: function() {
+    /*checkWork: function() {
       this.checkWorktxt = '';
-    },
+    },*/
     // 核对工作情况 其他说明
-    checkWorktxt: function() {
-      if (this.checkWorktxt.length == 100)
+    AddcheckWorktxt: function() {
+      if (this.AddcheckWorktxt && this.AddcheckWorktxt.length == 100)
         this.$message({
           message: '输入长度不能超出100',
           type: 'warning'
@@ -715,12 +1012,12 @@ export default {
       return;
     },
     // 核对地址
-    checkAddr: function() {
+    /*checkAddr: function() {
       this.checkAddrtxt = '';
-    },
+    },*/
     // 核对地址说明
-    checkAddrtxt: function() {
-      if (this.checkAddrtxt.length == 100)
+    AddcheckAddrtxt: function() {
+      if (this.AddcheckAddrtxt && this.AddcheckAddrtxt.length == 100)
         this.$message({
           message: '输入长度不能超出100',
           type: 'warning'
@@ -728,12 +1025,12 @@ export default {
       return;
     },
     // 核对房产
-    checkEstate: function() {
+    /*checkEstate: function() {
       this.checkEstatetxt = '';
-    },
+    },*/
     // 房产说明
-    checkEstatetxt: function() {
-      if (this.checkEstatetxt.length == 100)
+    AddcheckEstatetxt: function() {
+      if (this.AddcheckEstatetxt && this.AddcheckEstatetxt.length == 100)
         this.$message({
           message: '输入长度不能超出100',
           type: 'warning'
@@ -741,12 +1038,12 @@ export default {
       return;
     },
     // 其他收入
-    otherIncome: function() {
+    /*otherIncome: function() {
       this.otherIncometxt = '';
-    },
+    },*/
     // 其他收入说明
-    otherIncometxt: function() {
-      if (this.otherIncometxt.length == 100)
+    AddotherIncometxt: function() {
+      if (this.AddotherIncometxt && this.AddotherIncometxt.length == 100)
         this.$message({
           message: '输入长度不能超出100',
           type: 'warning'
@@ -754,12 +1051,12 @@ export default {
       return;
     },
     // 父母
-    parents: function() {
+    /*parents: function() {
       this.parentsInfo = '';
-    },
+    },*/
     // 父母说明
-    parentsInfo: function() {
-      if (this.parentsInfo.length == 100)
+    AddparentsInfo: function() {
+      if (this.AddparentsInfo && this.AddparentsInfo.length == 100)
         this.$message({
           message: '输入长度不能超出100',
           type: 'warning'
@@ -767,12 +1064,12 @@ export default {
       return;
     },
     // 兄弟姐妹
-    brother: function() {
+    /*brother: function() {
       this.brothertxt = '';
-    },
+    },*/
     // 兄弟姐妹说明
-    brothertxt: function() {
-      if (this.brothertxt.length == 100)
+    Addbrothertxt: function() {
+      if (this.Addbrothertxt && this.Addbrothertxt.length == 100)
         this.$message({
           message: '输入长度不能超出100',
           type: 'warning'
@@ -780,12 +1077,12 @@ export default {
       return;
     },
     // 支付家庭生活费用
-    expenses: function() {
+    /*expenses: function() {
       this.expensestxt = '';
-    },
+    },*/
     // 支付家庭生活费用说明
-    expensestxt: function() {
-      if (this.expensestxt.length == 100)
+    Addexpensestxt: function() {
+      if (this.Addexpensestxt && this.Addexpensestxt.length == 100)
         this.$message({
           message: '输入长度不能超出100',
           type: 'warning'
@@ -793,12 +1090,12 @@ export default {
       return;
     },
     // 核对家庭固话
-    checkHometel: function() {
+    /*checkHometel: function() {
       this.checkHometeltxt = '';
-    },
+    },*/
     // 核对家庭固话说明
-    checkHometeltxt: function() {
-      if (this.checkHometeltxt.length == 100)
+    AddcheckHometeltxt: function() {
+      if (this.AddcheckHometeltxt && this.AddcheckHometeltxt.length == 100)
         this.$message({
           message: '输入长度不能超出100',
           type: 'warning'
@@ -806,8 +1103,8 @@ export default {
       return;
     },
     // 借款人爱好和品行
-    hobbyandBehave: function() {
-      if (this.hobbyandBehave.length == 500) {
+    AddhobbyandBehave: function() {
+      if (this.AddhobbyandBehave && this.AddhobbyandBehave.length == 500) {
         this.$message({
           message: '输入长度不能超出500',
           type: 'warning'
@@ -816,8 +1113,8 @@ export default {
       }
     },
     // 调查结果
-    conclusion: function() {
-      if (this.conclusion.length == 500) {
+    Addconclusion: function() {
+      if (this.Addconclusion && this.Addconclusion.length == 500) {
         this.$message({
           message: '输入长度不能超出500',
           type: 'warning'

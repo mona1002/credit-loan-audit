@@ -30,7 +30,7 @@
         <div class="left-title"><span class="require-icon" style="left:80px;">*</span> 来源：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-          <el-select v-model="source">
+          <el-select v-model="mysource" @change="changes('mysource')">
             <el-option label="申请表" value="00"></el-option>
             <el-option label="第三方查询" value="01"></el-option>
             <el-option label="其他" value="02"></el-option>
@@ -42,7 +42,7 @@
         <div class="left-title"><span class="require-icon" style="left:50px;">*</span> 接听情况：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-          <el-select v-model="answer">
+          <el-select v-model="myanswer">
             <el-option label="无人接" value="00"></el-option>
             <el-option label="拒接" value="01"></el-option>
             <el-option label="停机" value="02"></el-option>
@@ -56,7 +56,7 @@
         <div class="left-title"><span class="require-icon" style="left:50px;">*</span> 调查阶段：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-          <el-select v-model="checkStage">
+          <el-select v-model="mycheckStage">
             <el-option label="正在调查" value="00"></el-option>
             <el-option label="完成调查" value="01"></el-option>
             <el-option label="调查失败" value="02"></el-option>
@@ -65,10 +65,10 @@
         </el-tooltip>
         <!-- </div> -->
       </li>
-      <li class="item-column1" v-show="source=='02'">
+      <li class="item-column1" v-show="mysource=='02'">
         <div class="left-title">其他来源说明：</div>
         <div class="textarea-class">
-          <el-input v-model="sourceDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
+          <el-input v-model="mysourceDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
         </div>
       </li>
     </ul>
@@ -82,7 +82,7 @@
           <div class="left-title left-title2"><span class="require-icon" style="left:0px;">*</span>微信/支付宝是否异常：</div>
           <!-- <div> -->
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-            <el-select v-model="mobilepayment" placeholder="请选择调查情况">
+            <el-select v-model="mymobilepayment" placeholder="请选择调查情况" @change="changes('mymobilepayment')">
               <el-option label="否" value="0"></el-option>
               <el-option label="是" value="1"></el-option>
             </el-select>
@@ -90,10 +90,10 @@
           <!-- </div> -->
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="mobilepayment=='1'"><span class="require-icon" style="left:80px;">*</span> 说明：</div>
+          <div class="left-title" v-show="mymobilepayment=='1'"><span class="require-icon" style="left:80px;">*</span> 说明：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-            <div class="textarea-class2" v-show="mobilepayment=='1'">
-              <el-input v-model="mobilepaymenttxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+            <div class="textarea-class2" v-show="mymobilepayment=='1'">
+              <el-input v-model="mymobilepaymenttxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
             </div>
           </el-tooltip>
         </li>
@@ -102,16 +102,16 @@
         <li class="item-column3">
           <div class="left-title">接电话人身份：</div>
           <div>
-            <el-select v-model="answerIdentity" placeholder="请选择调查情况">
+            <el-select v-model="myanswerIdentity" placeholder="请选择调查情况" @change="changes('myanswerIdentity')">
               <el-option label="同事" value="00"></el-option>
               <el-option label="本人" value="01"></el-option>
             </el-select>
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="answerIdentity=='00'">说明：</div>
-          <div class="textarea-class2" v-show="answerIdentity=='00'">
-            <el-input v-model="answertxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <div class="left-title" v-show="myanswerIdentity=='00'">说明：</div>
+          <div class="textarea-class2" v-show="myanswerIdentity=='00'">
+            <el-input v-model="myanswertxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
         </li>
       </div>
@@ -119,7 +119,7 @@
         <li class="item-column3">
           <div class="left-title">核对单位工作情况：</div>
           <div>
-            <el-select v-model="checkJob">
+            <el-select v-model="mycheckJob" @change="changes('mycheckJob')">
               <el-option label="一致" value="00"></el-option>
               <el-option label="基本一致" value="01"></el-option>
               <el-option label="不一致" value="02"></el-option>
@@ -128,9 +128,9 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="checkJob=='01'">说明：</div>
-          <div class="textarea-class2" v-show="checkJob=='01'">
-            <el-input v-model="checkJobtxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <div class="left-title" v-show="mycheckJob=='01'">说明：</div>
+          <div class="textarea-class2" v-show="mycheckJob=='01'">
+            <el-input v-model="mycheckJobtxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
         </li>
       </div>
@@ -139,7 +139,7 @@
           <div class="left-title"><span class="require-icon" style="left:50px;">*</span> 调查结果：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <div class="textarea-class">
-              <el-input v-model="conclusion" type="textarea" :rows="5" resize=none :maxlength="500"></el-input>
+              <el-input v-model="myconclusion" type="textarea" :rows="5" resize=none :maxlength="500"></el-input>
             </div>
           </el-tooltip>
         </li>
@@ -157,17 +157,21 @@ export default {
       // custName: '',
       phoneType: '05',
       // phoneNum: '',
-      /*source: '',
-      answer: '',
-      checkStage: '',
-      sourceDesc: '',
-      answerIdentity: '',
-      answertxt: '',
-      checkJob: '',
-      checkJobtxt: '',
-      mobilepayment: '',
-      mobilepaymenttxt: '',
-      conclusion: '',*/
+
+
+      mysource: this.source,
+      mysourceDesc: this.sourceDesc,
+      myanswer: this.answer,
+      mycheckStage: this.checkStage,
+      myanswerIdentity: this.answerIdentity,
+      myanswertxt: this.answertxt,
+      mycheckJob: this.checkJob,
+      mycheckJobtxt: this.checkJobtxt,
+      mymobilepayment: this.mobilepayment,
+      mymobilepaymenttxt: this.mobilepaymenttxt,
+      myconclusion: this.conclusion,
+
+
       phoneId: '',
       resMsg: ''
     }
@@ -205,7 +209,7 @@ export default {
     submitForm() {
       console.log('submit!');
       // 检测必填项
-      if (!this.source || !this.answer || !this.checkStage || !this.mobilepayment || (this.mobilepayment == '1' && !this.mobilepaymenttxt) || !this.conclusion) {
+      if (!this.mysource || !this.myanswer || !this.mycheckStage || !this.mymobilepayment || (this.mymobilepayment == '1' && !this.mymobilepaymenttxt) || !this.myconclusion) {
         this.$message({
           message: '请输入必填项!',
           type: 'warning'
@@ -236,39 +240,39 @@ export default {
                 custName: this.custName,
                 phoneType: this.phoneType,
                 phoneNum: this.phoneNum,
-                source: this.source,
-                answer: this.answer,
-                checkStage: this.checkStage,
-                sourceDesc: this.sourceDesc, // 其他来源说明
+                source: this.mysource,
+                answer: this.myanswer,
+                checkStage: this.mycheckStage,
+                sourceDesc: this.mysourceDesc, // 其他来源说明
                 applyId: this.applyId,
                 id: this.phoneId
               },
               creteljobref: {
                 applyId: this.applyId,
                 id: this.phoneId,
-                answer: this.answerIdentity, // 接电话人身份
-                answertxt: this.answertxt,
-                checkJob: this.checkJob,
-                checkJobtxt: this.checkJobtxt,
-                mobilepayment: this.mobilepayment,
-                mobilepaymenttxt: this.mobilepaymenttxt,
-                conclusion: this.conclusion
+                answer: this.myanswerIdentity, // 接电话人身份
+                answertxt: this.myanswertxt,
+                checkJob: this.mycheckJob,
+                checkJobtxt: this.mycheckJobtxt,
+                mobilepayment: this.mymobilepayment,
+                mobilepaymenttxt: this.mymobilepaymenttxt,
+                conclusion: this.myconclusion
               }
             }).then(res => {
               if (res.statusCode == '200') {
                 this.phoneId = '';
                 // 清数据
-                 this.source = '';
-                 this.answer = '';
-                 this.checkStage = '';
-                 this.sourceDesc = '';
-                 this.answerIdentity = '';
-                 this.answertxt = '';
-                 this.checkJob = '';
-                 this.checkJobtxt = '';
-                 this.mobilepayment = '';
-                 this.mobilepaymenttxt = '';
-                 this.conclusion = '';
+                 /*this.mysource = '';
+                 this.myanswer = '';
+                 this.mycheckStage = '';
+                 this.mysourceDesc = '';
+                 this.myanswerIdentity = '';
+                 this.myanswertxt = '';
+                 this.mycheckJob = '';
+                 this.mycheckJobtxt = '';
+                 this.mymobilepayment = '';
+                 this.mymobilepaymenttxt = '';
+                 this.myconclusion = '';*/
                 // 提交数据成功,广播事件 重新刷新列表
                 this.$emit('updateList');
                 this.$emit('updateTree');
@@ -292,9 +296,121 @@ export default {
 
       });
     },
+    changes(flage){
+      switch (flage){
+        case 'mysource':
+          if(this.mysource != '02'){
+            this.mysourceDesc = '';
+          }
+        break;
+        case 'myanswerIdentity':
+          if(this.myanswerIdentity == '01'){
+            this.myanswertxt  = '';
+          }
+        break;
+        case 'mymobilepayment':
+          if(this.mymobilepayment == '0'){
+          this.mymobilepaymenttxt = '';
+        }
+        break;
+        case 'mycheckJob':
+          if(this.mycheckJob!='01'){
+            this.mycheckJobtxt  = '';
+          } 
+        break;
+      }
+    }
   },
   watch: {
-    source: function() {
+    source(val) {
+      console.log(val);
+        this.mysource = val;//②监听外部对props属性result的变更，并同步到组件内的data属性myResult中
+    },
+    /*mysource(val){
+        //xxcanghai 小小沧海 博客园
+        this.$emit("on-source-change",val);//③组件内对myResult变更后向外部发送事件通知
+    },*/
+    sourceDesc(val) {
+      console.log(val);
+        this.mysourceDesc = val;//②监听外部对props属性result的变更，并同步到组件内的data属性myResult中
+    },
+    /*mysourceDesc(val){
+            //xxcanghai 小小沧海 博客园
+            this.$emit("on-sourceDesc-change",val);//③组件内对myResult变更后向外部发送事件通知
+        },*/
+    answer(val) {
+      console.log(val);
+        this.myanswer = val;//②监听外部对props属性result的变更，并同步到组件内的data属性myResult中
+    },
+    /*myanswer(val){
+            //xxcanghai 小小沧海 博客园
+            this.$emit("on-answer-change",val);//③组件内对myResult变更后向外部发送事件通知
+        },*/
+    checkStage(val) {
+      console.log(val);
+        this.mycheckStage = val;//②监听外部对props属性result的变更，并同步到组件内的data属性myResult中
+    },
+    /*mycheckStage(val){
+            //xxcanghai 小小沧海 博客园
+            this.$emit("on-checkStage-change",val);//③组件内对myResult变更后向外部发送事件通知
+        },*/
+    answerIdentity(val) {
+      console.log(val);
+        this.myanswerIdentity = val;//②监听外部对props属性result的变更，并同步到组件内的data属性myResult中
+    },
+    /*myanswerIdentity(val){
+            //xxcanghai 小小沧海 博客园
+            this.$emit("on-answerIdentity-change",val);//③组件内对myResult变更后向外部发送事件通知
+        },*/
+    answertxt(val) {
+      console.log(val);
+        this.myanswertxt = val;//②监听外部对props属性result的变更，并同步到组件内的data属性myResult中
+    },
+    /*myanswertxt(val){
+            //xxcanghai 小小沧海 博客园
+            this.$emit("on-answertxt-change",val);//③组件内对myResult变更后向外部发送事件通知
+        },*/
+    checkJob(val) {
+      console.log(val);
+        this.mycheckJob = val;//②监听外部对props属性result的变更，并同步到组件内的data属性myResult中
+    },
+   /* mycheckJob(val){
+            //xxcanghai 小小沧海 博客园
+            this.$emit("on-checkJob-change",val);//③组件内对myResult变更后向外部发送事件通知
+        },*/
+    checkJobtxt(val) {
+      console.log(val);
+        this.mycheckJobtxt = val;//②监听外部对props属性result的变更，并同步到组件内的data属性myResult中
+    },
+    /*mycheckJobtxt(val){
+            //xxcanghai 小小沧海 博客园
+            this.$emit("on-checkJobtxt-change",val);//③组件内对myResult变更后向外部发送事件通知
+        },*/
+    mobilepayment(val) {
+      console.log(val);
+        this.mymobilepayment = val;//②监听外部对props属性result的变更，并同步到组件内的data属性myResult中
+    },
+    /*mymobilepayment(val){
+            //xxcanghai 小小沧海 博客园
+            this.$emit("on-mobilepayment-change",val);//③组件内对myResult变更后向外部发送事件通知
+        },*/
+    mobilepaymenttxt(val) {
+      console.log(val);
+        this.mymobilepaymenttxt = val;//②监听外部对props属性result的变更，并同步到组件内的data属性myResult中
+    },
+   /* mymobilepaymenttxt(val){
+            //xxcanghai 小小沧海 博客园
+            this.$emit("on-mobilepaymenttxt-change",val);//③组件内对myResult变更后向外部发送事件通知
+        },*/
+    conclusion(val) {
+      console.log(val);
+        this.myconclusion = val;//②监听外部对props属性result的变更，并同步到组件内的data属性myResult中
+    },
+    /*myconclusion(val){
+            //xxcanghai 小小沧海 博客园
+            this.$emit("on-conclusion-change",val);//③组件内对myResult变更后向外部发送事件通知
+        },*/
+    /*source: function() {
       this.sourceDesc = '';
     },
     answerIdentity: function() {
@@ -302,7 +418,7 @@ export default {
     },
     checkJob: function() {
       this.checkJobtxt = '';
-    },
+    },*/
     // 判断全屏 , 更改样式
     isFull: function(val) {
       if (val == true) { // 全屏

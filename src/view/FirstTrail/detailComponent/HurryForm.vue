@@ -30,7 +30,7 @@
         <div class="left-title"><span class="require-icon" style="left:80px;">*</span>来源：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-          <el-select v-model="source" placeholder="请选择来源">
+          <el-select v-model="Hsource" placeholder="请选择来源" @change="changes('Hsource')">
             <el-option label="申请表" value="00"></el-option>
             <el-option label="第三方查询" value="01"></el-option>
             <el-option label="其他" value="02"></el-option>
@@ -42,7 +42,7 @@
         <div class="left-title"><span class="require-icon" style="left:50px;">*</span>接听情况：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-          <el-select v-model="answer" placeholder="请选择接听情况">
+          <el-select v-model="Hanswer" placeholder="请选择接听情况">
             <el-option label="无人接" value="00"></el-option>
             <el-option label="拒接" value="01"></el-option>
             <el-option label="停机" value="02"></el-option>
@@ -56,7 +56,7 @@
         <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查阶段：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-          <el-select v-model="checkStage" placeholder="请选择调查阶段">
+          <el-select v-model="HcheckStage" placeholder="请选择调查阶段">
             <el-option label="正在调查" value="00"></el-option>
             <el-option label="完成调查" value="01"></el-option>
             <el-option label="调查失败" value="02"></el-option>
@@ -65,10 +65,10 @@
         </el-tooltip>
         <!-- </div> -->
       </li>
-      <li class="item-column1" v-show="source=='02'">
+      <li class="item-column1" v-show="Hsource=='02'">
         <div class="left-title">其他来源说明：</div>
         <div class="textarea-class">
-          <el-input v-model="sourceDesc" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <el-input v-model="HsourceDesc" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
         </div>
       </li>
     </ul>
@@ -81,7 +81,7 @@
         <li class="item-column1">
           <div class="left-title">第三方查询信息：</div>
           <div class="textarea-class">
-            <el-input type="textarea" v-model="thirdResult" :row="2" resize=none></el-input>
+            <el-input type="textarea" v-model="HthirdResult" :row="2" resize=none></el-input>
           </div>
         </li>
       </div>
@@ -90,7 +90,7 @@
           <div class="left-title"><span class="require-icon" style="left:0px;">*</span>三方查询是否异常：</div>
           <!-- <div> -->
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-            <el-select v-model="threeQueries" placeholder="请选择调查情况">
+            <el-select v-model="HthreeQueries" placeholder="请选择调查情况" @change="changes('HthreeQueries')">
               <el-option label="否" value="0"></el-option>
               <el-option label="是" value="1"></el-option>
             </el-select>
@@ -98,10 +98,10 @@
           <!-- </div> -->
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="threeQueries =='1'"><span class="require-icon" style="left:80px;">*</span>说明：</div>
+          <div class="left-title" v-show="HthreeQueries =='1'"><span class="require-icon" style="left:80px;">*</span>说明：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-            <div class="textarea-class2" v-show="threeQueries =='1'">
-              <el-input v-model="threeQueriestxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+            <div class="textarea-class2" v-show="HthreeQueries =='1'">
+              <el-input v-model="HthreeQueriestxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
             </div>
           </el-tooltip>
         </li>
@@ -111,7 +111,7 @@
           <div class="left-title left-title2"><span class="require-icon" style="top:-5px;left:0px;">*</span>微信/支付宝是否异常：</div>
           <!-- <div> -->
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-            <el-select v-model="mobilepayment" placeholder="请选择调查情况">
+            <el-select v-model="Hmobilepayment" placeholder="请选择调查情况" @change="changes('Hmobilepayment')">
               <el-option label="否" value="0"></el-option>
               <el-option label="是" value="1"></el-option>
             </el-select>
@@ -119,10 +119,10 @@
           <!-- </div> -->
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="mobilepayment=='1'"><span class="require-icon" style="left:80px;">*</span>说明：</div>
+          <div class="left-title" v-show="Hmobilepayment=='1'"><span class="require-icon" style="left:80px;">*</span>说明：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-            <div class="textarea-class2" v-show="mobilepayment=='1'">
-              <el-input v-model="mobilepaymenttxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+            <div class="textarea-class2" v-show="Hmobilepayment=='1'">
+              <el-input v-model="Hmobilepaymenttxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
             </div>
           </el-tooltip>
         </li>
@@ -131,7 +131,7 @@
         <li class="item-column3">
           <div class="left-title">与借款人关系：</div>
           <div>
-            <el-select v-model="relBorrower" placeholder="请选择调查情况">
+            <el-select v-model="HrelBorrower" placeholder="请选择调查情况" @change="changes('HrelBorrower')">
               <el-option label="父母" value="00"></el-option>
               <el-option label="爱人" value="01"></el-option>
               <el-option label="子女" value="02"></el-option>
@@ -140,9 +140,9 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="relBorrower=='03'">说明：</div>
-          <div class="textarea-class2" v-show="relBorrower=='03'">
-            <el-input v-model="relBorrowertxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
+          <div class="left-title" v-show="HrelBorrower=='03'">说明：</div>
+          <div class="textarea-class2" v-show="HrelBorrower=='03'">
+            <el-input v-model="HrelBorrowertxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
           </div>
         </li>
       </div>
@@ -150,7 +150,7 @@
         <li class="item-column3">
           <div class="left-title left-title2">与借款人联系是否频繁：</div>
           <div>
-            <el-select v-model="contactfre" placeholder="请选择调查情况">
+            <el-select v-model="Hcontactfre" placeholder="请选择调查情况">
               <el-option label="频繁" value="00"></el-option>
               <el-option label="一般" value="01"></el-option>
               <el-option label="偶尔" value="02"></el-option>
@@ -173,7 +173,7 @@
         <li class="item-column3">
           <div class="left-title">核对工作情况：</div>
           <div>
-            <el-select v-model="checkWork" placeholder="请选择调查情况">
+            <el-select v-model="HcheckWork" placeholder="请选择调查情况" @change="changes('HcheckWork')">
               <el-option label="一致" value="00"></el-option>
               <el-option label="基本一致" value="01"></el-option>
               <el-option label="不一致" value="02"></el-option>
@@ -182,9 +182,9 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="checkWork=='01'">说明：</div>
-          <div class="textarea-class2" v-show="checkWork=='01'">
-            <el-input v-model="checkWorktxt" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
+          <div class="left-title" v-show="HcheckWork=='01'">说明：</div>
+          <div class="textarea-class2" v-show="HcheckWork=='01'">
+            <el-input v-model="HcheckWorktxt" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
           </div>
         </li>
       </div>
@@ -192,7 +192,7 @@
         <li class="item-column3">
           <div class="left-title">核对婚姻情况：</div>
           <div>
-            <el-select v-model="maritalStatus" placeholder="请选择调查情况">
+            <el-select v-model="HmaritalStatus" placeholder="请选择调查情况">
               <el-option label="未婚" value="00"></el-option>
               <el-option label="已婚" value="01"></el-option>
               <el-option label="离异" value="02"></el-option>
@@ -205,7 +205,7 @@
         <li class="item-column3">
           <div class="left-title">核对子女情况：</div>
           <div>
-            <el-select v-model="maritalStatustxt" placeholder="">
+            <el-select v-model="HmaritalStatustxt" placeholder="">
               <el-option label="有子女" value="00"></el-option>
               <el-option label="无子女" value="01"></el-option>
             </el-select>
@@ -222,7 +222,7 @@
           <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查结果：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <div class="textarea-class">
-              <el-input type="textarea" v-model="conclusion" :rows="5" resize=none :maxlength="500"></el-input>
+              <el-input type="textarea" v-model="Hconclusion" :rows="5" resize=none :maxlength="500"></el-input>
             </div>
           </el-tooltip>
         </li>
@@ -237,30 +237,38 @@
 export default {
   data() {
     return {
-      /*source: '',
-      answer: '',
-      checkStage: '',
-      thirdResult: '',
-      relBorrower: '',
-      relBorrowertxt: '',
-      checkWork: '',
-      checkWorktxt: '',
-      mobilepayment: '',
-      mobilepaymenttxt: '',
-      threeQueriestxt: '',
-      maritalStatus: '',
-      maritalStatustxt: '',
-      contactfre: '',
-      contactfretxt: '',
-      conclusion: '',*/
+
+      Hsource:this.hurryList.source,
+      Hanswer:this.hurryList.answer,
+      HcheckStage:this.hurryList.checkStage,
+      HthirdResult:this.hurryList.thirdResult,
+      HrelBorrower:this.hurryList.relBorrower,
+      HrelBorrowertxt:this.hurryList.relBorrowertxt,
+      HcheckWork:this.hurryList.checkWork,
+      HcheckWorktxt:this.hurryList.checkWorktxt,
+      Hmobilepayment:this.hurryList.mobilepayment,
+      Hmobilepaymenttxt:this.hurryList.mobilepaymenttxt,
+      HthreeQueriestxt:this.hurryList.threeQueriestxt,
+      HmaritalStatus:this.hurryList.maritalStatus,
+      HmaritalStatustxt:this.hurryList.maritalStatustxt,
+      Hcontactfre:this.hurryList.contactfre,
+      Hcontactfretxt:this.hurryList.contactfretxt,
+      Hconclusion:this.hurryList.conclusion,
+
+
       phoneType: '04',
-      /*sourceDesc: '',
-      threeQueries: '',*/
+
+
+      HsourceDesc:this.hurryList.sourceDesc,
+      HthreeQueries:this.hurryList.threeQueries,
+
+
       phoneId: '',
       resMsg:''
     }
   },
-  props: ['custName', 'phoneNum', 'applyId', 'isFull','source' , 'answer' , 'checkStage' , 'sourceDesc' , 'thirdResult' , 'threeQueries' , 'threeQueriestxt' , 'mobilepayment' , 'mobilepaymenttxt' , 'relBorrower' , 'relBorrowertxt' , 'contactfre' , 'checkWork' , 'checkWorktxt' , 'maritalStatus' , 'maritalStatustxt' , 'conclusion'],
+  /*props: ['custName', 'phoneNum', 'applyId', 'isFull','source' , 'answer' , 'checkStage' , 'sourceDesc' , 'thirdResult' , 'threeQueries' , 'threeQueriestxt' , 'mobilepayment' , 'mobilepaymenttxt' , 'relBorrower' , 'relBorrowertxt' , 'contactfre' , 'checkWork' , 'checkWorktxt' , 'maritalStatus' , 'maritalStatustxt' , 'conclusion'],*/
+  props: ['custName', 'phoneNum', 'applyId', 'isFull','hurryList'],
   mounted() {
     this.phoneType = '04'; // 住址电话
     if (this.isFull == true) { // 全屏
@@ -294,7 +302,7 @@ export default {
     submitForm() {
       console.log('submit!');
       // 检测必填项
-      if (!this.source || !this.answer || !this.checkStage || !this.threeQueries || (this.threeQueries == '1' && !this.threeQueriestxt) || !this.mobilepayment || (this.mobilepayment == '1' && !this.mobilepaymenttxt) || !this.conclusion) {
+      if (!this.Hsource || !this.Hanswer || !this.HcheckStage || !this.HthreeQueries || (this.HthreeQueries == '1' && !this.HthreeQueriestxt) || !this.Hmobilepayment || (this.Hmobilepayment == '1' && !this.Hmobilepaymenttxt) || !this.Hconclusion) {
         this.$message({
           message: '请输入必填项!',
           type: 'warning'
@@ -325,36 +333,36 @@ export default {
                 custName: this.custName,
                 phoneType: this.phoneType,
                 phoneNum: this.phoneNum,
-                source: this.source,
-                answer: this.answer,
-                checkStage: this.checkStage,
-                sourceDesc: this.sourceDesc, // 其他来源说明
+                source: this.Hsource,
+                answer: this.Hanswer,
+                checkStage: this.HcheckStage,
+                sourceDesc: this.HsourceDesc, // 其他来源说明
                 applyId: this.applyId,
                 id: this.phoneId
               },
               cretelecontact: {
                 applyId: this.applyId,
                 id: this.phoneId,
-                thirdResult: this.thirdResult,
-                relBorrower: this.relBorrower,
-                relBorrowertxt: this.relBorrowertxt,
-                checkWork: this.checkWork,
-                checkWorktxt: this.checkWorktxt,
-                mobilepayment: this.mobilepayment,
-                mobilepaymenttxt: this.mobilepaymenttxt,
-                threeQueries: this.threeQueries,
-                threeQueriestxt: this.threeQueriestxt,
-                maritalStatus: this.maritalStatus,
-                maritalStatustxt: this.maritalStatustxt,
-                contactfre: this.contactfre,
-                contactfretxt: this.contactfretxt,
-                conclusion: this.conclusion
+                thirdResult: this.HthirdResult,
+                relBorrower: this.HrelBorrower,
+                relBorrowertxt: this.HrelBorrowertxt,
+                checkWork: this.HcheckWork,
+                checkWorktxt: this.HcheckWorktxt,
+                mobilepayment: this.Hmobilepayment,
+                mobilepaymenttxt: this.Hmobilepaymenttxt,
+                threeQueries: this.HthreeQueries,
+                threeQueriestxt: this.HthreeQueriestxt,
+                maritalStatus: this.HmaritalStatus,
+                maritalStatustxt: this.HmaritalStatustxt,
+                contactfre: this.Hcontactfre,
+                contactfretxt: this.Hcontactfretxt,
+                conclusion: this.Hconclusion
               }
             }).then(res => {
               if (res.statusCode == '200') {
                 this.phoneId = '';
                 // 清数据
-                 this.source = '';
+                 /*this.source = '';
                  this.answer = '';
                  this.checkStage = '';
                  this.sourceDesc = '';
@@ -371,7 +379,7 @@ export default {
                  this.maritalStatustxt = '';
                  this.contactfre = '';
                  this.contactfretxt = '';
-                 this.conclusion = '';
+                 this.conclusion = '';*/
                 // 提交数据成功,广播事件 重新刷新列表
                 this.$emit('updateList');
                 this.$emit('updateTree');
@@ -395,9 +403,38 @@ export default {
 
       });
     },
+    changes(flage){
+      switch (flage){
+        case 'Hsource':
+          if(this.Hsource != '02'){
+            this.HsourceDesc = '';
+          }
+        break;
+        case 'HthreeQueries':
+          if(this.HthreeQueries == '0'){
+            this.threeQueriestxt = '';
+          }
+        break;
+        case 'Hmobilepayment':
+          if(this.Hmobilepayment == '0'){
+          this.Hmobilepaymenttxt = '';
+        }
+        break;
+        case 'HrelBorrower':
+          if(this.HrelBorrower!='03'){
+            this.HrelBorrowertxt = '';
+          } 
+        break;
+        case 'HcheckWork':
+          if(this.HcheckWork!='01'){
+          this.HcheckWorktxt = '';
+        }
+        break;
+      }
+    }
   },
   watch: {
-    source: function() {
+    /*source: function() {
       this.sourceDesc = '';
     },
     threeQueries: function() {
@@ -411,6 +448,27 @@ export default {
     },
     checkWork: function() {
       this.checkWorktxt = '';
+    },*/
+    hurryList(val){
+      console.log(val);
+      this.Hsource = val.source;
+      this.Hanswer = val.answer;
+      this.HcheckStage = val.checkStage;
+      this.HthirdResult = val.thirdResult;
+      this.HrelBorrower = val.relBorrower;
+      this.HrelBorrowertxt = val.relBorrowertxt;
+      this.HcheckWork = val.checkWork;
+      this.HcheckWorktxt = val.checkWorktxt;
+      this.Hmobilepayment = val.mobilepayment;
+      this.Hmobilepaymenttxt = val.mobilepaymenttxt;
+      this.HthreeQueriestxt = val.threeQueriestxt;
+      this.HmaritalStatus = val.maritalStatus;
+      this.HmaritalStatustxt = val.maritalStatustxt;
+      this.Hcontactfre = val.contactfre;
+      this.Hcontactfretxt = val.contactfretxt;
+      this.Hconclusion = val.conclusion;
+      this.HsourceDesc = val.sourceDesc;
+      this.HthreeQueries = val.threeQueries;
     },
     // 判断全屏 , 更改样式
     isFull: function(val) {
