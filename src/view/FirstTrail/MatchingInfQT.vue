@@ -91,8 +91,8 @@
             <aAntiConclusionPath v-if=" this.tabContent2==9">反欺诈审批结论轨迹 </aAntiConclusionPath>
             <RApprovalConclusion v-if=" this.tabContent2==10">审批结论轨迹</RApprovalConclusion>
             <!-- <regularQT v-if=" this.tabContent2==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC' >质检结论</regularQT> -->
-            <regularQT v-if=" this.tabContent2==11&&this.QTConclutionMark==''" :propQTconclution='QTC'>质检结论</regularQT>
-            <QTResultCheck v-if=" this.tabContent2==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+            <regularQT v-if=" this.tabContent2==11&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+            <QTResultCheck v-if=" this.tabContent2==11&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
 
 
           </div>
@@ -345,23 +345,23 @@
           this.LocalList = 'QTManagerTW';
         } else if (Nodename == 'checkApp_trial_self') {
           // 本人
-          this.QTC.pageType = 'self';
+          // this.QTC.pageType = 'self';
           this.LocalList = 'QTSelfTW';
         } else if (Nodename == 'checkApp_trial_manager') {
           // 初终审主管
-          this.QTC.pageType = 'Supervisor';
+          // this.QTC.pageType = 'Supervisor';
           this.LocalList = 'QTTrialManagerTW';
         } else if (Nodename == 'checkApp_check_recon_manager') {
           // 质检主管复议（首次）
-          this.QTC.pageType = 'QTRe';
+          // this.QTC.pageType = 'QTRe';
           this.LocalList = 'QTReManagerTW';
         } else if (Nodename == 'checkApp_regional_manager') {
           // 区域
-          this.QTC.pageType = 'Area';
+          // this.QTC.pageType = 'Area';
           this.LocalList = 'QTAreaTW';
         } else if (Nodename == 'checkApp_compliance_manager') {
           // 合规
-          this.QTC.pageType = 'compliance';
+          // this.QTC.pageType = 'compliance';
           this.LocalList = 'QTComplianceTW';
         }
          this.QTC.pageType =Nodename;
@@ -389,9 +389,10 @@
       // }
       this.initialInfo(); //判断角色      
       this.QTC.tastwaitingPass = this.tastwaitingPass = JSON.parse(localStorage.getItem(this.LocalList));
-      console.log(this.tastwaitingPass)
-      console.log(this.QTC.pageType)
-      console.log(this.LocalList)
+      console.log('tastwaitingPass：',this.tastwaitingPass)
+      console.log('QTC：',this.QTC)
+      console.log('pageType：',this.QTC.pageType)
+      console.log('LocalList：',this.LocalList)
       // if (this.tastwaitingPass.listType == '') {
       //   console.log(11111111111111)
       //   this.EditType = '常规质检'

@@ -1517,8 +1517,10 @@
       // 保存 或 提交
       SaveInf(type) { //质检主管不需要提交，只有质检专员 显示提交
         console.log(type)
-        if (type == '提交' && this.propQTconclution.tastwaitingPass.listType == '常规质检') { //提交 加校验，保存无需校验必填---常规质检
-          if (!this.regularInfo.isForm || !this.regularInfo.isIdcard || !this.regularInfo.isIncome || !this.regularInfo
+        console.log(this.insConclusion.length )
+        if (type == '提交') { //提交 加校验，保存无需校验必填---常规质检
+        if( this.propQTconclution.tastwaitingPass.listType == '常规质检' ){
+ if (!this.regularInfo.isForm || !this.regularInfo.isIdcard || !this.regularInfo.isIncome || !this.regularInfo
             .isWork ||
             !this.regularInfo.isEstate || !this.regularInfo.isLive || !this.regularInfo.isBusiness || !this.regularInfo
             .isCredit ||
@@ -1530,19 +1532,19 @@
             !this.regularInfo.isInmatch) {
             this.$message.error('请输入必填项！')
             return
-          }else
-           if(this.insConclusion.length==0){//必须添加一条质检结论校验
+          }else if(this.insConclusion.length==0){//必须添加一条质检结论校验
  this.$message.error('请至少添加一条质检结论！')
  return
-          }
-          // 微信支付宝+电话核实不需要做校验，默认选正常
-          // for( var m=0; m<= .length;m++){//微信支付宝
-
-          // }
-          //   for( var m=0; m<= .length;m++){
-
-          // }
         }
+          
+        }else if( this.propQTconclution.tastwaitingPass.listType == '专项质检' ){
+          if(this.insConclusion.length==0){//必须添加一条质检结论校验
+ this.$message.error('请至少添加一条质检结论！')
+ return
+        }
+        }
+        }
+        // 提交 保存 
         if (this.propQTconclution.tastwaitingPass.listType == '常规又专项质检') { //常规又专项质检
               this.post("/insConclusion/addReviewConclusion", {
           id: this.reviewConclusion.id,
@@ -1704,7 +1706,7 @@
         this.PhoneCredit = true; //电话征信
         this.QTConclution = true; //质检结论
       },
-      Special() { //this.propQTconclution.EditType == '专纵质检'
+      Special() { //this.propQTconclution.EditType == '项'
         this.AprovalInfolShow = false; //审批信息        
         this.MaterialShow = false; //资料核实
         this.InfoSearchShow = false; //三方信息查询
@@ -1719,7 +1721,7 @@
       },
       showdiffer() {
         // ---------------------------------------
-        // if (this.propQTconclution.EditType == '专纵质检') { //专员 ，主管     √
+        // if (this.propQTconclution.EditType == '项') { //专员 ，主管     √
         //   this.AprovalInfolShow = false; //审批信息        
         //   this.MaterialShow = false; //资料核实
         //   this.InfoSearchShow = false; //三方信息查询
