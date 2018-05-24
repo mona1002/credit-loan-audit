@@ -913,7 +913,7 @@
         <div class=" CreditForm_result">
           <i class="hint">
             <!-- <span v-show="errors.has('conclusion')" class="result_textarea">{{ errors.first('conclusion') }}</span> -->
-            <b v-show="checkData.oother.length>=1000" class="result_textarea"> 输入长度不能超过1000</b>
+            <b v-show="checkData.oother && checkData.oother.length>=1000" class="result_textarea"> 输入长度不能超过1000</b>
           </i>
           <p class="InternetInf_left_label" style="textAlign:right;">
             <span class="red"> * </span>初审结果评价：</p>
