@@ -1523,18 +1523,21 @@
             // 批准金额 ploanAmt
             if (this.ploanAmt) {
                 var regs=/\,/g;
-                this.ploanAmt=this.ploanAmt.replace(regs,'')*1;
-                console.log(this.ploanAmt);
-                console.log(typeof(this.ploanAmt));
+                var newPloanAmt = this.ploanAmt.replace(regs,'')*1;
+                //this.ploanAmt=this.ploanAmt.replace(regs,'')*1;
+                //console.log(this.newPloanAmt);
+                //console.log(typeof(this.newPloanAmt));
+                //return;
                 //this.ploanAmt = Number(this.ploanAmt.split('.')[0].replace(/,/g, '')) +
                   //Number('0.' + this.ploanAmt.split('.')[1]);
-               if(this.ploanAmt > this.maxAuditAmt && this.opinionFlag=='00'){
+               if(newPloanAmt > this.maxAuditAmt && this.opinionFlag=='00'){
                   this.$message({
                   message: "提示：大于当前审批人最高审批金额权限，请选择请求更高级审批!",
                   type: 'warning'
                 })
                 return;
-               }
+               };
+               //this.ploanAmt=Number(this.ploanAmt).toLocaleString() + '.00';
             };
             // 意见说明 appConclusion
             if (!this.appConclusion) {
@@ -1663,6 +1666,7 @@
      
         let verIncome2 = 0;
         let ploanAmt2 = 0;
+
         if (/,/.test(this.verIncome))
           verIncome2 = Number(this.verIncome.replace(/,/g, ''));
         else
@@ -1674,7 +1678,12 @@
           //console.log('==========================================')
           ploanAmt2 = Number(this.ploanAmt)
         }
-        console.log(this.applyId)
+        /*console.log('4444444444444444444');
+        console.log(this.ploanAmt);
+        console.log(this.ploanAmt2);
+        console.log(this.applyId);
+        alert('9999999999999999999999');
+        return;*/
         this.post('/creauditOpinion/add', {
           // this.post("http://10.1.26.47:8080/riskManagement/creauditOpinion/add", {
           applyId: this.applyId,
