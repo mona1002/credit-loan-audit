@@ -121,7 +121,7 @@
         <div class="left-title">
           案件编号：
         </div>
-        <div>
+        <div class="newLi">
           <!-- <el-select v-model="caseNum">
             <el-option v-for="item in caseOptions" :label="item.caseNum" :value="item.caseNum">
             </el-option>
@@ -326,11 +326,11 @@
             :rows="1"
             placeholder="请输入内容"
             v-model="caseNums"
-            :maxlength="50"
+            :maxlength="20"
             >
           </el-input>
-          <span class="addWarimg" v-show="caseNums != null && caseNums.length==50">
-            输入长度不能超过50
+          <span class="addWarimg" v-show="caseNums != null && caseNums.length==20">
+            输入长度不能超过20
           </span>
         </p>
         <p class="addLogP addLogP2">
@@ -2419,5 +2419,12 @@
     height: 114px;
     line-height: 114px;
     margin-right: 5px;
+  }
+  .newLi{
+    width: calc( 100% - 130px );
+    float: right;
+  }
+  .newLi div{
+    width: 100%;
   }
 </style>
