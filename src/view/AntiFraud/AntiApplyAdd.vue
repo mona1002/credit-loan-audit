@@ -128,7 +128,7 @@
                   进件编号：
                 </div>
                 <div class="item-content-list">
-                  <el-input v-model="applySubNo"></el-input>
+                  <el-input v-model="applySubNos"></el-input>
                 </div>
               </li>
               <li class="item-column3-list">
@@ -154,20 +154,20 @@
                 <el-button type="primary" @click="resetQuery">重置</el-button>
               </li>
             </div>
-            <el-table :data="tableData.taskDetailList" height="250" border style="width: 100%" highlight-current-row center @row-click="itemClick">
+            <el-table :data="tableData.recordList" height="250" border style="width: 100%" highlight-current-row center @row-click="itemClick">
               <el-table-column type="index" label="序号" align="center" width="60">
               </el-table-column>
-              <el-table-column prop="applySubNo" label="进件编号" width="170">
+              <el-table-column prop="applySubno" label="进件编号" width="170">
               </el-table-column>
               <el-table-column prop="appDate" label="申请日期" width="170">
               </el-table-column>
               <el-table-column prop="custName" label="客户名称" width="120">
               </el-table-column>
-              <el-table-column prop="certType" label="证件类型" width="80">
+              <el-table-column prop="certTypeTxt" label="证件类型" width="80">
               </el-table-column>
               <el-table-column prop="certCode" label="证件号码" width="170">
               </el-table-column>
-              <el-table-column prop="appOrgName" label="进件机构名称" width="130">
+              <el-table-column prop="operOrgName" label="进件机构名称" width="130"><!-- appOrgName -->
               </el-table-column>
               <el-table-column prop="proName" label="产品名称" width="100">
               </el-table-column>
@@ -176,7 +176,7 @@
             </el-table>
             <div class="block tool-bar">
               <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 20, 30]"
-                :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalNum" v-show="tableData.totalNum">
+                :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalRecord" v-show="tableData.totalRecord">
               </el-pagination>
             </div>
           </div>
@@ -204,12 +204,13 @@
         orgCode: '', // 机构编号
         applyId: '', // 申请单ID
         // id: '', // 主管/专员 用 列表id
-        applySubno: '', // 进件编号
+        applySubNo: '', // 进件编号
         applyCode: '', // 申请人code
         applyPersonName: '', // 申请人姓名
         appOrgCode: '', // 申请机构code
         appDate: '', // 申请日期
-        appOrgName: '', // 申请机构名称
+        //appOrgName: '', // 申请机构名称
+        operOrgName: '', // 申请机构名称
         mainId: '', // 欺诈主原因id
         secondId: '', // 欺诈子原因id
         applyDesc: '', // 反欺诈申请描述
@@ -244,12 +245,15 @@
         // orgCode: '',
         pageNum: 1, // 页码
         pageSize: 5, // 每页条数
-        applySubNo: '',
+        applySubno: '',
         custName_la: '',
         certCode: '',
         rowObj: '', // 点击的列表数据
         subCertCode: '', // 弹窗的证件号码
-        processInstanceId: ''
+        processInstanceId: '',
+        busiState:'',//业务状态
+        applySubNos:'',//弹框的案件编号
+        flowRoleCodesList:[],//用来判断channel的值
       }
     },
     mounted() {
@@ -258,6 +262,17 @@
       var userInfo = JSON.parse(localStorage.getItem('userInf'));
       this.userCode = userInfo.userCode;
       this.orgCode = userInfo.orgCode;
+      this.flowRoleCodesList = userInfo.flowRoleCodesList;
+      if(this.flowRoleCodesList){
+        for(var i=0;i<this.flowRoleCodesList.length;i++){
+            if(this.flowRoleCodesList[i] == 'BL12' || this.flowRoleCodesList[i] == 'BL108' || this.flowRoleCodesList[i] == 'BL07'){
+              this.channel = '06';
+            }else{
+              this.channel = '99';
+            }
+        }
+      }
+      
       // 先判断是 初审 终审  /  专员  主管
       // var judgeFlag = JSON.parse(localStorage.getItem('judge'));
       // this.antiFlag = judgeFlag.flag;
@@ -316,10 +331,11 @@
       getSystemDate() {
         // 获取系统时间
         this.get('system/getSystemDate?'+Math.random()).then(res => {
-          console.log('回退', res)
+          //console.log('回退', res)
           // 请求系统时间
           this.dealroperDate = res.data;
-          console.log('this.', this.dealroperDate);
+          //console.log(this.dealroperDate);
+          //console.log('this.', this.dealroperDate);
         })
       },
       // 反欺诈申请 获取 主原因子原因
@@ -433,13 +449,16 @@
             if (action === 'confirm') {
               instance.confirmButtonLoading = true;
               instance.confirmButtonText = '执行中...';
-              this.post('/fraudApplyInfoController/startAntiFraudApply', {
-                  userCode: this.userCode, // 用户编号
+              //this.post('/fraudApplyInfoController/startAntiFraudApply', {
+              this.post('/fraudApplyInfoController/startAntiFraudForFinishedApply', {
+                  /*userCode: this.userCode, // 用户编号
                   orgCode: this.orgCode, // 机构编号
                   currentTemplateId: '',
                   fraudApplyInfo: {
                     creditappTaskid: this.creditappTaskid, // 任务id
+
                     applyId: this.applyId, // 申请单ID
+
                     applySubno: this.applySubNo, // 进件编号
                     // applyCode: this.applyCode, // 申请人code
                     // applyPersonName: this.applyPersonName, // 申请人姓名
@@ -447,7 +466,9 @@
                     // appOrgName: this.appOrgName, // 申请机构名称
                     mainreasonId: this.mainId, // 欺诈主原因id
                     subreasonId: this.secondId, // 欺诈子原因id
+
                     applyDesc: this.applyDesc, // 反欺诈申请描述
+
                     mainreaName: this.mainReason, // 欺诈主原因名称
                     subreaName: this.secondReason, // 欺诈子原因名称
                     // appOrgId: this.appOrgId, // 申请机构id
@@ -456,14 +477,34 @@
                     // appSuborgName: this.appSuborgName, // 申请机构科室名称
                     proId: this.proId, // 产品id
                     proCode: this.proCode, // 产品code
+
                     applyCustId: this.applyCustId, // 客户id
                     applyCustName: this.applyCustName, // 客户姓名
                     applyCustNo: this.applyCustNo, // 客户编号
+
                     channel: this.channel, // 渠道
                     certCode: this.certCode, // 证件号码
                     proName: this.proName, // 产品名称
-                    processInstanceId: this.processInstanceId
-                  }
+                    processInstanceId: this.processInstanceId*/
+                    fraudApplyInfo: {
+                      applyCustId: this.applyCustId, // 客户id
+                      applyCustName: this.applyCustName, // 客户姓名
+                      applyCustNo: this.applyCustNo, // 客户编号
+                      applyDesc: this.applyDesc, // 反欺诈申请描述applyId: this.applyId, // 申请单ID
+                      applyPersonName: this.applyPersonName, // 申请人姓名
+                      applySubno: this.applySubNo, // 进件编号
+                      channel: this.channel, // 渠道
+                      certCode: this.certCode, // 证件号码
+                      mainreasonId: this.mainId, // 欺诈主原因id
+                      mainreaName: this.mainReason, // 欺诈主原因名称
+                      proId: this.proId, // 产品id
+                      proCode: this.proCode, // 产品code
+                      proName: this.proName, // 产品名称
+                      subreaName: this.secondReason, // 欺诈子原因名称
+                      subreasonId: this.secondId, // 欺诈子原因id
+                      busiState:this.busiState,
+                      applyId : this.applyId
+                    }
                 })
                 .then(res => {
                   if (res.statusCode == '200') {
@@ -545,8 +586,10 @@
         switch (flag) {
           case 'shwoList':
             this.coverShow = true;
-            // this.showFlag = 'shwoList';
-            this.request();
+            this.applySubNos = ''; // 进件编号
+            this.custName_la = ''; // 客户名称
+            this.subCertCode = ''; // 客户编号
+            this.tableData='';
             break;
         }
       },
@@ -562,7 +605,7 @@
         console.log("当前页: ${val}", val);
         this.pageNum = val;
         // this.queryDetailList();
-        this.request();
+        //this.request();
       },
       // 请求列表
       request() {
@@ -603,7 +646,7 @@
         // })
         // 查询图标弹出层
 
-        this.post('/workFlowTaskQuery/getTaskToDoList', {
+        /*this.post('/workFlowTaskQuery/getTaskToDoList', {
           taskStatus: '01',
           userCode: this.userCode,
           orgCode: this.orgCode,
@@ -613,16 +656,39 @@
           if (res.statusCode == 200) {
             this.tableData = res.data;
           }
-        })
+        })*/
+        if(!this.applySubNos && !this.custName_la && !this.subCertCode){
+          return
+        }else{
+          this.post('/applyInfoPool/queryListForFraud', {
+            pageParam:{
+              pageNum: this.pageNum,
+              pageSize: this.pageSize
+            },
+            applySubNo:this.applySubNos,
+            custName:this.custName_la,
+            certCode:this.subCertCode
+          }).then(res => {
+            if (res.statusCode == 200) {
+              this.tableData = res.data;
+              for(var i=0;i<res.data.recordList.length;i++){
+                var regs = /\d{4}-\d{1,2}-\d{1,2}/g;
+                //this.appDate = res.data.recordList[i].appDate.replace(regs,'');
+                this.tableData.recordList[i].appDate = regs.exec(res.data.recordList[i].appDate)[0];
+              }
+            }
+          })
+        }
+        
       },
       // 重置查询
       resetQuery() {
         // 清空数据 重新查询
         // 查询条件 初始化
-        this.applySubNo = ''; // 进件编号
+        this.applySubNos = ''; // 进件编号
         this.custName_la = ''; // 客户名称
         this.subCertCode = ''; // 客户编号
-        this.request();
+        this.tableData='';
       },
       // 选中弹窗某行
       itemClick(row, event, column) {
@@ -634,22 +700,35 @@
       btnClick(val) {
         // 确定
         if (val == 'sure') {
-          this.applySubNo = this.rowObj.applySubNo; // 进件编号
-          this.applyCustName = this.rowObj.custName; // 客户名称
-          this.certTypeTxt = this.rowObj.certTypeTxt; // 证件类型
-          this.certType = this.rowObj.certType; // 证件类型
-          this.certCode = this.rowObj.certCode; // 证件号码
-          this.mobile = this.rowObj.mobile; // 移动电话
-          this.applyId = this.rowObj.applyId;
-          this.proId = this.rowObj.proId;
-          this.proCode = this.rowObj.proCode;
-          this.proName = this.rowObj.proName;
-          this.channel = this.rowObj.channel;
-          // this.applyCustNo = this.rowObj.custNo;
-          //??????????????
-          // this.applyCustId = this.rowObj.custNo;// 客户id
-          // 新增字段
-          this.processInstanceId = this.rowObj.processInstanceId;
+          if(this.rowObj.canStartAntiFraudFlag == '1'){
+            this.applySubNo = this.rowObj.applySubno; // 进件编号
+            this.applyCustName = this.rowObj.custName; // 客户名称
+            this.certTypeTxt = this.rowObj.certTypeTxt; // 证件类型
+            this.certType = this.rowObj.certType; // 证件类型
+            this.certCode = this.rowObj.certCode; // 证件号码
+            this.mobile = this.rowObj.mobile; // 移动电话
+            this.applyId = this.rowObj.applyId;
+            this.proId = this.rowObj.proId;
+            this.proCode = this.rowObj.proCode;
+            this.proName = this.rowObj.proName;
+            //this.channel = '99';
+            this.busiState = this.rowObj.busiState;
+            this.applyId = this.rowObj.applyId;
+            // this.applyCustNo = this.rowObj.custNo;
+            //??????????????
+            // this.applyCustId = this.rowObj.custNo;// 客户id
+            // 新增字段
+            this.processInstanceId = this.rowObj.processInstanceId;
+          }else if(this.rowObj.canStartAntiFraudFlag == '0'){
+            //alert('......')
+            this.applySubNo = ''; // 进件编号
+            this.$message({
+                message: "提示：该件无法发起反欺诈!",
+                type: 'warning'
+              })
+              return;
+          }
+          
         }
         this.coverShow = false;
       }
