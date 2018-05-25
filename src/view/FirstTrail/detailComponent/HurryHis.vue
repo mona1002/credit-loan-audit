@@ -1,10 +1,10 @@
 <!-- 电话征信 - 紧急联系人 历史 -->
 <template>
   <div>
-    <el-form ref="form"  label-width="130px">
-      <!--       <div class="address-title">
+    <!-- <el-form ref="form"  label-width="130px">
+      <div class="address-title">
         新增调查日志
-      </div> -->
+      </div>
       <div class="address-title">
         <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">新增调查日志</span>
@@ -27,17 +27,17 @@
       <el-form-item label="调查阶段：" class="item-column3">
         {{hurryData.checkStage}}
       </el-form-item>
-      <!-- <el-form-item label="其他来源说明：" class="item-column2" v-show="hurryData.source=='02'">
+      <el-form-item label="其他来源说明：" class="item-column2" v-show="hurryData.source=='02'">
         {{hurryData.sourceDesc}}
-      </el-form-item> -->
+      </el-form-item>
       <el-tooltip class="item" effect="dark" :content="hurryData.sourceDesc" placement="top">
         <el-form-item label="其它来源情况说明：" class="item-column1" v-show="hurryData.source=='02'">
           {{hurryData.sourceDesc}}
         </el-form-item>
       </el-tooltip>
-      <!-- <div class="address-title">
+      <div class="address-title">
         录入紧急联系人调查信息
-      </div> -->
+      </div>
       <div class="address-title">
         <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">录入其他联系人调查信息</span>
@@ -49,9 +49,9 @@
         <el-form-item label="三方查询是否异常：" class="item-column3 line2-class">
           {{hurryData.threeQueriesDes}}
         </el-form-item>
-        <!-- <el-form-item label="异常说明：" class="item-column2" v-show="hurryData.threeQueries=='1'">
+        <el-form-item label="异常说明：" class="item-column2" v-show="hurryData.threeQueries=='1'">
           {{hurryData.threeQueriestxt}}
-        </el-form-item> -->
+        </el-form-item>
         <el-tooltip class="item" effect="dark" :content="hurryData.threeQueriestxt" placement="top">
           <el-form-item label="异常说明：" class="item-column2 item-column3-2" v-show="hurryData.threeQueries=='1'">
             {{hurryData.threeQueriestxt}}
@@ -62,9 +62,9 @@
         <el-form-item label="微信/支付宝是否异常：" class="item-column3 line2-class">
           {{hurryData.mobilepaymentDes}}
         </el-form-item>
-        <!-- <el-form-item label="异常项说明：" class="item-column2" v-show="hurryData.mobilepayment=='1'">
+        <el-form-item label="异常项说明：" class="item-column2" v-show="hurryData.mobilepayment=='1'">
           {{hurryData.mobilepaymenttxt}}
-        </el-form-item> -->
+        </el-form-item>
         <el-tooltip class="item" effect="dark" :content="hurryData.mobilepaymenttxt" placement="top">
           <el-form-item label="异常项说明：" class="item-column2 item-column3-2" v-show="hurryData.mobilepayment=='1'">
             {{hurryData.mobilepaymenttxt}}
@@ -75,10 +75,10 @@
         <el-form-item label="与借款人关系：" class="item-column3">
           {{hurryData.relBorrowerDes}}
         </el-form-item>
-        <!-- <el-form-item label="说明：" class="item-column2" v-shwo="relBorrower=='03'">
+        <el-form-item label="说明：" class="item-column2" v-shwo="relBorrower=='03'">
           {{hurryData.relBorrowertxt}}
-        </el-form-item> -->
-        <!-- v-show="relBorrower=='03'" -->
+        </el-form-item>
+        v-show="relBorrower=='03'"
         <el-tooltip class="item" effect="dark" :content="hurryData.relBorrowertxt" placement="top">
           <el-form-item label="说明：" class="item-column2 item-column3-2" v-show="hurryData.relBorrower=='03'">
             {{hurryData.relBorrowertxt}}
@@ -86,23 +86,23 @@
         </el-tooltip>
         <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="hurryData.relBorrower!='03'">
         </el-form-item>
-        <!-- =========================== -->
-        <!--         <el-form-item label="与借款人联系是否频繁：" class="item-column1 line2-class">
+        ===========================
+        <el-form-item label="与借款人联系是否频繁：" class="item-column1 line2-class">
           {{hurryData.contactfreDes}}
-        </el-form-item> -->
-        <!-- =========================== -->
-        <!-- <el-form-item label="" class="item-column3 item-column3-null">
+        </el-form-item>
+        ===========================
+        <el-form-item label="" class="item-column3 item-column3-null">
           
         </el-form-item>
         <el-form-item label="" class="item-column3 item-column3-null">
           
-        </el-form-item> -->
+        </el-form-item>
         <el-form-item label="核对工作情况：" class="item-column3">
           {{hurryData.checkWorkDes}}
         </el-form-item>
-        <!-- <el-form-item label="说明：" class="item-column2" v-show="hurryData.checkWork=='01'">
+        <el-form-item label="说明：" class="item-column2" v-show="hurryData.checkWork=='01'">
           {{hurryData.checkWorktxt}}
-        </el-form-item> -->
+        </el-form-item>
         <el-tooltip class="item" effect="dark" :content="hurryData.checkWorktxt" placement="top">
           <el-form-item label="异常项说明：" class="item-column2 item-column3-2" v-show="hurryData.checkWork=='01'">
             {{hurryData.checkWorktxt}}
@@ -118,16 +118,63 @@
         </el-form-item>
         <el-form-item label="" class="item-column3 item-column3-null">
         </el-form-item>
-        <!-- <el-form-item label="调查结果：" class="item-column1">
+        <el-form-item label="调查结果：" class="item-column1">
           {{hurryData.conclusion}}
-        </el-form-item> -->
+        </el-form-item>
         <el-tooltip class="item" effect="dark" :content="hurryData.conclusion" placement="top">
           <el-form-item label="调查结果：" class="item-column1">
             {{hurryData.conclusion}}
           </el-form-item>
         </el-tooltip>
       </div>
-    </el-form>
+    </el-form> -->
+    <el-form-item label="活动名称" prop="name">
+    <el-input v-model="ruleForm.name"></el-input>
+  </el-form-item>
+  <el-form-item label="活动区域" prop="region">
+    <el-select v-model="ruleForm.region" placeholder="请选择活动区域">
+      <el-option label="区域一" value="shanghai"></el-option>
+      <el-option label="区域二" value="beijing"></el-option>
+    </el-select>
+  </el-form-item>
+  <el-form-item label="活动时间" required>
+    <el-col :span="11">
+      <el-form-item prop="date1">
+        <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
+      </el-form-item>
+    </el-col>
+    <el-col class="line" :span="2">-</el-col>
+    <el-col :span="11">
+      <el-form-item prop="date2">
+        <el-time-picker type="fixed-time" placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
+      </el-form-item>
+    </el-col>
+  </el-form-item>
+  <el-form-item label="即时配送" prop="delivery">
+    <el-switch v-model="ruleForm.delivery"></el-switch>
+  </el-form-item>
+  <el-form-item label="活动性质" prop="type">
+    <el-checkbox-group v-model="ruleForm.type">
+      <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
+      <el-checkbox label="地推活动" name="type"></el-checkbox>
+      <el-checkbox label="线下主题活动" name="type"></el-checkbox>
+      <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
+    </el-checkbox-group>
+  </el-form-item>
+  <el-form-item label="特殊资源" prop="resource">
+    <el-radio-group v-model="ruleForm.resource">
+      <el-radio label="线上品牌商赞助"></el-radio>
+      <el-radio label="线下场地免费"></el-radio>
+    </el-radio-group>
+  </el-form-item>
+  <el-form-item label="活动形式" prop="desc">
+    <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+    <el-button @click="resetForm('ruleForm')">重置</el-button>
+  </el-form-item>
+</el-form>
   </div>
 </template>
 <script>
@@ -137,6 +184,40 @@ export default {
       // id:'',  // 住宅电话调查日志记录 id
       // phoneType:'', // 电话类型
       // hurryData: '' // 请求返回的数据
+       ruleForm: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        },
+        rules: {
+          name: [
+            { required: true, message: '请输入活动名称', trigger: 'blur' },
+            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+          ],
+          region: [
+            { required: true, message: '请选择活动区域', trigger: 'change' }
+          ],
+          date1: [
+            { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+          ],
+          date2: [
+            { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
+          ],
+          type: [
+            { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
+          ],
+          resource: [
+            { required: true, message: '请选择活动资源', trigger: 'change' }
+          ],
+          desc: [
+            { required: true, message: '请填写活动形式', trigger: 'blur' }
+          ]
+        }
     }
   },
   props: ['hurryData', 'isFull'],
@@ -166,6 +247,21 @@ export default {
       $(".item-column1 .el-form-item__content").css("width", "300px");
     }
   },
+   methods: {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      }
+    },
   watch: {
     // 判断全屏 , 更改样式
     isFull: function(val) {
