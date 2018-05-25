@@ -93,6 +93,7 @@
   export default {
     data() {
       return {
+        taskList:'',
         QTStates: [],
         query: {
           id: '',

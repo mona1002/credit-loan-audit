@@ -582,17 +582,17 @@
           <span class="headFont">审批主管第一次复议申请信息</span>
         </template>
         <div class="material">
-          <el-table :data="tableData" border style="width: 100%">
-            <el-table-column prop="name" label="经办人" width="100">
+          <el-table :data="ManagerFirstTableData" border style="width: 100%">
+            <el-table-column prop="approverUserCode" label="经办人" width="100">
             </el-table-column>
-            <el-table-column prop="address" width="180" label="发起复议时间">
+            <el-table-column prop="reconDate" width="180" label="发起复议时间">
             </el-table-column>
             <el-table-column label="复议说明" min-width="580">
               <template slot-scope="scope">
                 <el-popover trigger="hover" placement="top-start">
-                  <p>{{ scope.row.address }}</p>
+                  <p>{{ scope.row.reviewRemark }}</p>
                   <div slot="reference" class="name-wrapper">
-                    <span> {{ scope.row.address }}</span>
+                    <span> {{ scope.row.reviewRemark }}</span>
                   </div>
                 </el-popover>
               </template>
@@ -640,17 +640,17 @@
           <span class="headFont">审批主管第二次复议申请信息</span>
         </template>
         <div class="material">
-          <el-table :data="tableData" border style="width: 100%">
-            <el-table-column prop="name" label="经办人" width="100">
+          <el-table :data="ManagerSecondTableData" border style="width: 100%">
+            <el-table-column prop="approverUserCode" label="经办人" width="100">
             </el-table-column>
-            <el-table-column prop="address" width="180" label="发起复议时间">
+            <el-table-column prop="reconDate" width="180" label="发起复议时间">
             </el-table-column>
             <el-table-column label="复议说明" min-width="580">
               <template slot-scope="scope">
                 <el-popover trigger="hover" placement="top-start">
-                  <p>{{ scope.row.address }}</p>
+                  <p>{{ scope.row.reviewRemark }}</p>
                   <div slot="reference" class="name-wrapper">
-                    <span> {{ scope.row.address }}</span>
+                    <span> {{ scope.row.reviewRemark }}</span>
                   </div>
                 </el-popover>
               </template>
@@ -787,11 +787,11 @@
         <img src="../../../../../static/images/appro.png">
         <label class="labelTxt">发起复议</label>
       </el-button>
-      <el-button @click="ReAprovalShow = true" v-if="ReAprovalBtn">
+      <el-button @click="ReAprovalAlert" v-if="ReAprovalBtn">
         <img src="../../../../../static/images/appro.png">
         <label class="labelTxt">复议审批</label>
       </el-button>
-      <el-button @click="AprovalShow = true" v-if="AprovalBtn">
+      <el-button @click="AprovalAlert" v-if="AprovalBtn">
         <!-- <el-button @click="ReAprovalShow = true" v-if="ReAprovalBtn"> -->
         <img src="../../../../../static/images/appro.png">
         <label class="labelTxt">审批</label>
@@ -832,7 +832,7 @@
         </p>
         <p style="margin:10px 0;">
           <label>复议说明：</label>
-          <el-input  v-model="ReconsiderDes" style="width:500px;vertical-align:top;"  type="textarea" resize='none' :rows="2"></el-input>
+          <el-input  v-model="ReconsiderDes" style="width:520px;vertical-align:top;"  type="textarea" resize='none' :rows="2"></el-input>
         </p>
         <p>
           <span> 经办人：{{userInf. userName}}</span>
@@ -844,52 +844,53 @@
       </div>
     </el-dialog>
     <!-- 复议审批  -->
-    <el-dialog title='复议审批' :visible.sync="ReAprovalShow" :modal="false" width="750px" top="20vh">
+    <el-dialog title='复议审批' :visible.sync="ReAprovalShow" :modal="false" width="800px" top="20vh">
       <div class="reApproval">
         <p>
           <span>
-            <label>复议结果：</label>
-            <el-select v-model="value" placeholder="请选择">
+            <label><b class="required_Red"> * </b>复议结果：</label>
+            <el-select v-model="ToApprovalParams.reviewResult" placeholder="请选择">
               <el-option v-for="item in RecResult" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </span>
           <span>
             <label>质检结果：</label>
-            <el-select v-model="value" placeholder="请选择">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            <el-select v-model="ToApprovalParams.checkResult" placeholder="请选择">
+              <el-option v-for="item in QTresultAlert" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </span>
         </p>
         <p>
           <span>
-            <label>质检员是否有差错：</label>
-            <el-select v-model="value" placeholder="请选择">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            <label><b class="required_Red"> * </b>质检员是否有差错：</label>
+            <el-select v-model="ToApprovalParams.isError" placeholder="请选择">
+              <el-option v-for="item in ApprolisError" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </span>
           <span>
-            <label>差错类型：</label>
+            <label><b class="required_Red"> * </b>差错类型：</label>
             <!-- <el-select v-model="value" placeholder="请选择">
             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select> -->
-            <el-input :disabled='QTConclution' v-model="insConclusion.errorDescribe" :maxlength='arealength' placeholder="请输入内容"></el-input>
+          <!--  :disabled='QTConclution' -->
+            <el-input v-model="ToApprovalParams.errorType" :maxlength='arealength' placeholder="请输入内容"></el-input>
           </span>
         </p>
         <p style="margin:10px 0;">
-          <label class="aaaaaaa">复议说明：</label>
-          <el-input style="width:500px;vertical-align:top;" type="textarea" resize='none' :rows="2"></el-input>
+          <label class="ReDec"><b class="required_Red"> * </b>复议说明：</label>
+          <el-input v-model='ToApprovalParams.reviewRemark' style="width:500px;vertical-align:top;" type="textarea" resize='none' :rows="2"></el-input>
         </p>
         <p>
-          <span> 审批人{{'dd' }}</span>
-          <span style="float:right;width:280px;"> 处理时间：s{{'dd' }}</span>
+          <span> 审批人：{{userInf. userName }}</span>
+          <span style="float:right;width:280px;"> 处理时间：{{systermTime | dateFilter}}</span>
         </p>
       </div>
       <div style="text-align:right;">
-        <el-button type="primary" @click="ToReconsider">提交</el-button>
+        <el-button type="primary" @click="ToApproval" :loading="loadSub">{{ReconSubmit}}</el-button>
       </div>
     </el-dialog>
     <!-- 流程轨迹 -->
@@ -968,6 +969,24 @@
         reviewConclusion: {
           // this.propQTconclution.applyId
         }, //复核结论
+        ToApprovalParams:{//复议审批弹窗 
+          applyId: this.propQTconclution.applyId,
+            reviewResult:'',
+            checkResult:'',
+            isError:'',
+              errorType:'',
+            reviewRemark:'',
+            approverUserCode:'',
+            approverDate:'',
+            insState:'',
+              taskId:this.propQTconclution.tastwaitingPass.taskId,
+        },
+        AntiApplyParams:{
+             id: this.propQTconclution.applyId,
+            flag: 'zhijian',
+            busiState: '30',
+            channel:'00',
+        },
         isForm: '',
         radio: '1',
         baseInfo: '', //基本信息
@@ -1210,17 +1229,38 @@
           label: '审批通过',
           value: '01',
         }],
-
+        QTresultAlert: [{
+          value: '01',
+          label: '初审一般差错'
+        }, {
+          value: '02',
+          label: '初审重大差错'
+        }, {
+          value: '03',
+          label: '终审一般差错'
+        }, {
+          value: '04',
+          label: '终审重大差错'
+        }, {
+          value: '10',
+          label: '建议优化'
+        }, {
+          value: '07',
+          label: '专项'
+        }, {
+          value: '08',
+          label: '纵向'
+        }, {
+          value: '09',
+          label: '无'
+        }],
         // ----------------------------------------
-        options: [{
-          value: '选项1',
-          label: '黄金糕'
+        ApprolisError: [{
+          value: '1',
+          label: '是'
         }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
+          value: '0',
+          label: '否'
         }],
         value: '',
         // --------------------------------
@@ -1263,10 +1303,9 @@
         AntiBtn: true, //发起反欺诈
         RiskControlBtn: true, //按钮 - 大数据风控
         SocialSecurityBtn: true, //按钮 - 社保公积金
-
       }
     },
-    props: ['propQTconclution', 'propApplyId', 'pageType'],
+    props: ['propQTconclution'],
     methods: {
       getSystermTime() { // 获取系统时间-质检结论-质检日期取值---基础接口
         this.get('system/getSystemDate?' + Math.random()).then(res => {
@@ -1395,9 +1434,9 @@
                //insReconApplyList:复议申请表   insReconApproval ：复议审批表
           res.data.insReconApplyList?  this.insReconApply=res.data.insReconApplyList:'';
             for(var m=0;m< this.insReconApply.length;m++){
-this.insReconApply[m].reconType=='00'?this.TrilSelfTableData.push(this.insReconApply[m]):'';//00:初终审本人
-this.insReconApply[m].reconType=='01'?this.ManagerFirstTableData.push(this.insReconApply[m]):'';//01:初终审主管首次
-this.insReconApply[m].reconType=='02'?this.ManagerSecondTableData.push(this.insReconApply[m]):'';//02:初终审主管二次
+              this.insReconApply[m].reconType=='00'?this.TrilSelfTableData.push(this.insReconApply[m]):'';//00:初终审本人---初终审复议申请信息
+              this.insReconApply[m].reconType=='01'?this.ManagerFirstTableData.push(this.insReconApply[m]):'';//01:初终审主管首次----审批主管第一次复议申请信息
+              this.insReconApply[m].reconType=='02'?this.ManagerSecondTableData.push(this.insReconApply[m]):'';//02:初终审主管二次----审批主管第二次复议申请信息
             }
            res.data.insReconApproval&& res.data.insReconApproval.reviewRemark?this.insReconApproval[0]=res.data.insReconApproval:'';//复议申请表
             // res.data.insReconApproval.reviewRemark?this.insReconApproval.push(res.data.insReconApproval):'';//复议申请表
@@ -1478,23 +1517,6 @@ this.insReconApply[m].reconType=='02'?this.ManagerSecondTableData.push(this.insR
         // 三方信息查询
         // 内部匹配核实
       },
-      //   handleEdit(index, row) {
-      //     console.log(index, row);
-      //   },
-      //   handleDelete(index, row) {
-      //     console.log(index, row);
-      //   },
-      //   handleCurrentChange(val) {
-      //     this.currentRow = val;
-      //     // this.currentRow!=''?this.addTr=true:this.addTr=false;
-
-      //     for (var i = 0; i < this.insConclusion.length; i++) {
-      //       this.insConclusion[i].result != '' ? this.addTr = true : this.addTr = false;
-      //       console.log(this.addTr)
-      //     }
-      //     console.log(this.insConclusion)
-      //     console.log(this.addTr)
-      //   },
       WechatData(ind) {
         if (ind == 0) { //客户本人
           return this.AlipayCus;
@@ -1672,16 +1694,41 @@ this.insReconApply[m].reconType=='02'?this.ManagerSecondTableData.push(this.insR
               type:'success',
               message:'提交成功！'
             });
-            // this.$router.push('ManagerTaskList?taskNodeName=checkApp_trial_manager&flag=10');
+            this.propQTconclution.pageType=='checkApp_trial_manager'? this.$router.push('ManagerTaskList?taskNodeName=checkApp_trial_manager&flag=10'):'';
+            this.propQTconclution.pageType=='checkApp_regional_manager'? this.$router.push('ACManagerTaskList?taskNodeName=checkApp_regional_manager&flag=12'):'';
           } else {
             this.$message.error(res.msg);
           }
         });
       },
-      ToReconsiderAlert(){
+      ToReconsiderAlert(){//发起复议弹窗
         this.ReconsiderShow = true;
               this.loadSub=false;
        this. ReconSubmit='提交';
+      },
+      ReAprovalAlert (){//复议审批-弹窗-编辑
+        this.ReAprovalShow = true;
+        this. ReconSubmit='提交';
+         this. loadSub=false;
+      },
+      AprovalAlert (){//审批-弹窗-编辑
+        this.ReAprovalShow = true;
+        this. ReconSubmit='提交';
+         this. loadSub=false;
+        //  获取区域经理审批信息
+                 this.get("/insReconApply/getReconApprovalByState", {
+            applyId:this.propQTconclution.applyId,
+        }).then(res => {
+          if (res.statusCode == 200) {
+         this.ToApprovalParams.reviewResult=   res.data.reviewResult;
+         this.ToApprovalParams.checkResult=   res.data.checkResult;
+         this.ToApprovalParams.isError=   res.data.isError;
+         this.ToApprovalParams.errorType=   res.data.errorType;
+         this.ToApprovalParams.reviewRemark=   res.data.reviewRemark;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
       },
       // 发起复议
       ToReconsider() {
@@ -1713,15 +1760,36 @@ this.insReconApply[m].reconType=='02'?this.ManagerSecondTableData.push(this.insR
       // 发起反欺诈
       AntiApply() {
         console.log('反欺诈')
-        this.$router.push({
-          name: 'AntiApplyEditf',
-          params: {
-            id: this.propQTconclution.applyId,
-            flag: 'zhijian',
-            busiState: '30',
-            wayOf: '02' //质检
+        this.$router.push({name: 'AntiApplyEditf'});
+         localStorage.setItem("AntiApplyParams",JSON.stringify(this.AntiApplyParams));
+      },
+      ToApproval(){//复议审批、审批
+       if(this.ToApprovalParams.reviewRemark==''||this.ToApprovalParams.errorType==''||this.ToApprovalParams.isError==''||this.ToApprovalParams.reviewResult=='' ){
+         this.$message.error('有必填项未填写！');
+         return 
+        }
+        this. ReconSubmit='提交中';
+         this. loadSub=true;
+           this.ToApprovalParams.approverUserCode=this.userInf. userName;
+            this.ToApprovalParams.approverDate=this.systermTime;
+         this.post("/insReconApply/saveInsReconApproval",this.ToApprovalParams).then(res => {
+          if (res.statusCode == 200) {
+            this.$message({
+              type:'success',
+              message:'审批成功！'
+            })
+            // 清空已填数据
+             this.ToApprovalParams.reviewResult='';
+             this.ToApprovalParams.checkResult='';
+             this.ToApprovalParams.isError='';
+             this.ToApprovalParams.errorType='';
+             this.ToApprovalParams.reviewRemark='';
+            this.propQTconclution.pageType=='checkApp_compliance_manager'? this.$router.push('ACManagerTaskList?taskNodeName=checkApp_compliance_manager&flag=13'):'';//合规经理结论点击审批-成功跳转到列表页
+          } else {
+            this.$message.error(res.msg);
           }
         });
+        this.ReAprovalShow=false;
       },
       // 流程轨迹
       getLcgjList() {
@@ -1769,8 +1837,7 @@ this.insReconApply[m].reconType=='02'?this.ManagerSecondTableData.push(this.insR
           }
         });
       },
-      roSocialSecurity() {
-        // console.log('社保')
+      roSocialSecurity() {//社保/公积金-授权显示
         if (this.social == "(未授权)") {
           this.socialLogVisible = true;
         } else if (this.social == "(已授权)") {
@@ -1869,7 +1936,7 @@ this.insReconApply[m].reconType=='02'?this.ManagerSecondTableData.push(this.insR
           }
         } else if (this.propQTconclution.pageType == 'self') { //本人---单独页面
         } else if (this.propQTconclution.pageType == 'checkApp_trial_manager') { //初终审主管  √
-        console.log(this.propQTconclution.pageType )
+            console.log(this.propQTconclution.pageType )
           this.onlyCheck();
           this.getManagerList();
           this.ReApply = true; //初终审复议申请信息
@@ -1886,14 +1953,15 @@ this.insReconApply[m].reconType=='02'?this.ManagerSecondTableData.push(this.insR
             this.FirstReconsider = true; //第一次复议审批信息
              this.ReconsiderNode='区域经理';//复议弹窗-复议节点
           }
-        } else if (this.propQTconclution.pageType == 'QTRe') { //复议任务列表（首次） √
+        } else if (this.propQTconclution.pageType == 'checkApp_check_recon_manager') { //复议任务列表（首次） √
           this.onlyCheck();
+          this.ToApprovalParams.insState='00';//复议审批入参-状态(00:首次审批,01:二次区域经理审批，02:二次合规经理审批)
           this.ReApply = true; //初终审复议申请信息
           this.SuperVisor = true; //审批主管第一次复议申请信息
           this.submitBtn = false; //提交
           this.SocialSecurityBtn = false; //社保公积金
           this.ReAprovalBtn = true; //复议审批
-        } else if (this.propQTconclution.pageType == 'Area') { //区域 √
+        } else if (this.propQTconclution.pageType == 'checkApp_regional_manager') { //区域 √
           // this.onlyCheck();
           // this.ReApply = true; //初终审复议申请信息
           // this.SuperVisor = true; //审批主管第一次复议申请信息
@@ -1902,9 +1970,12 @@ this.insReconApply[m].reconType=='02'?this.ManagerSecondTableData.push(this.insR
           // this.saveBtn=false;//保存
           //  this.SocialSecurityBtn = false; //社保公积金
           this.areaAndComplianceBtn();
+           this.ToApprovalParams.insState='01';
           this.RiskControlBtn = false; //大数据风控
           this.NoReconsiderBtn = true; //无需复议
-        } else if (this.propQTconclution.pageType == 'compliance') { //合规 √
+        } else if (this.propQTconclution.pageType == 'checkApp_compliance_manager') { //合规 √
+            this.areaAndComplianceBtn();
+           this.ToApprovalParams.insState='02';        
           // this.onlyCheck();
           // this.ReApply = true; //初终审复议申请信息
           // this.SuperVisor = true; //审批主管第一次复议申请信息
@@ -2082,12 +2153,16 @@ this.insReconApply[m].reconType=='02'?this.ManagerSecondTableData.push(this.insR
 
   .reApproval span:nth-of-type(1) label {
     display: inline-block;
-    width: 130px;
+    width: 150px;
     text-align: right;
   }
-
-  .aaaaaaa {
-    width: 126px;
+ .reApproval span:nth-of-type(2) label{
+    width: 85px;
+    text-align:right;
+    display: inline-block;
+ }
+  .ReDec {
+    width: 150px;
     display: inline-block;
     text-align: right;
   }

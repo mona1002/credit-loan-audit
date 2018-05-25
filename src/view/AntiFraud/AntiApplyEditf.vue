@@ -414,7 +414,7 @@ console.log(  this.antiFlag  )
                     certCode: this.certCode, // 证件号码
                     proName: this.proName, // 产品名称
                     busiState: this.busiState, // 状态
-                    wayOf:this.wayOf//（00：审批，01：复议，02：质检）
+                    // wayOf:this.wayOf//（00：审批，01：复议，02：质检）--不入了
                   },
                   currentTemplateId: this.currentTemplateId, // 流程模版id
                 })

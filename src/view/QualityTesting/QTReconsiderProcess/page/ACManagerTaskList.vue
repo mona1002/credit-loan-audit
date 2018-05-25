@@ -9,24 +9,19 @@
           <li>
             <p>
               <label> 进件编号 </label>
-              <el-input v-model="params.applySubno" placeholder="请输入进件编号"></el-input>
+              <el-input v-model="params.applySubNo" placeholder="请输入进件编号"></el-input>
             </p>
             <p>
               <label> 客户名称</label>
-              <el-input v-model="params.applySubno" placeholder="请输入客户名称"></el-input>
+              <el-input v-model="params.custName_la" placeholder="请输入客户名称"></el-input>
             </p>
             <p>
               <label> 证件号码</label>
-              <el-input v-model="params.applySubno" placeholder="请输入证件号码"></el-input>
+              <el-input v-model="params.certCode" placeholder="请输入证件号码"></el-input>
             </p>
           </li>
           <li>
             <p>
-              <label> 质检状态</label>
-              <el-select v-model="value" placeholder="请选择">
-                <el-option v-for="item in QTStates" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
             </p>
             <p>
             </p>
@@ -38,54 +33,53 @@
         </ul>
       </div>
       <div class="title">
-        <h1>质检信息</h1>
+        <h1>进件列表</h1>
       </div>
       <div class="table_wrap">
         <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" height="100%" @current-change="handleCurrentChange" @selection-change="handleSelectionChange"
-          border>
-          <el-table-column type="selection" align="center" width="55"> </el-table-column>
+        <el-table :data="tableData" style="width: 100%" height="100%" @row-click="handleCurrentChange"          border>
+          <!-- <el-table-column type="selection" align="center" width="55"> </el-table-column> -->
           <el-table-column type="index" align='center' label=序号 width="55">
           </el-table-column>
-          <el-table-column prop="applySubno" label="进件编号" align='center' min-width="180">
+          <el-table-column prop="applySubNo" label="进件编号" align='center' min-width="180">
           </el-table-column>
           <el-table-column prop="custName" label="客户名称" align='center' min-width="120">
           </el-table-column>
           <el-table-column prop="certCode" label="证件号码" align='center' min-width="180">
           </el-table-column>
-          <el-table-column prop="mobile" label="产品名称" align='center' min-width="130">
+          <el-table-column prop="proName" label="产品名称" align='center' min-width="130">
           </el-table-column>
-          <el-table-column prop="appDate" label="初审姓名" align='center' min-width="130">
+          <el-table-column prop="auditNamec" label="初审姓名" align='center' min-width="130">
           </el-table-column>
-          <el-table-column prop="appDate" label="初审所属科室" align='center' min-width="130">
+          <el-table-column prop="subOrgNamec" label="初审所属科室" align='center' min-width="130">
           </el-table-column>
-          <el-table-column prop="operOrgName" label="初审日期" align='center' min-width="120">
+          <el-table-column prop="auditDatec" label="初审日期" align='center' min-width="120">
           </el-table-column>
-          <el-table-column prop="operOrgName" label="终审姓名" align='center' min-width="120">
+          <el-table-column prop="auditNamez" label="终审姓名" align='center' min-width="120">
           </el-table-column>
-          <el-table-column prop="appDate" label="终审所属科室" align='center' min-width="130">
+          <el-table-column prop="subOrgNamez" label="终审所属科室" align='center' min-width="130">
           </el-table-column>
-          <el-table-column prop="operOrgName" label="终审日期" align='center' min-width="120">
+          <el-table-column prop="auditDatez" label="终审日期" align='center' min-width="120">
           </el-table-column>
-          <el-table-column prop="operOrgName" label="业务状态" align='center' min-width="120">
+          <el-table-column prop="checkState" label="业务状态" align='center' min-width="120">
           </el-table-column>
-          <el-table-column prop="operOrgName" label="质检结果" align='center' min-width="120">
+          <el-table-column prop="checkResult" label="质检结果" align='center' min-width="120">
           </el-table-column>
-          <el-table-column prop="operOrgName" label="差错类型" align='center' min-width="120">
+          <el-table-column prop="errorType" label="差错类型" align='center' min-width="120">
           </el-table-column>
-          <el-table-column prop="operOrgName" label="差错描述" align='center' min-width="120">
+          <el-table-column prop="errorDescribe" label="差错描述" align='center' min-width="120">
           </el-table-column>
-          <el-table-column prop="operOrgName" label="质检日期" align='center' min-width="120">
+          <el-table-column prop="insDate" label="质检日期" align='center' min-width="120">
           </el-table-column>
-          <el-table-column prop="operOrgName" label="质检状态" align='center' min-width="120">
+          <el-table-column prop="checkStateTxt" label="质检状态" align='center' min-width="120">
           </el-table-column>
         </el-table>
         <!-- 分页  -->
-        <div class="paging">
+        <!-- <div class="paging">
           <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
             :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
           </el-pagination>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -97,33 +91,66 @@
     data() {
       return {
         taskNodeName:'',
-        QTStates: [{ //质检状态
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
-
-
         query: {
           id: '',
-          matchApplyId: "",
+          ApplyId: "",
+          taskId: '',
+          processInstanceId: '',
+          listType: '',
+          reconType: ''
         },
         userInf: null,
-        tableData: [],
+        // tableData: [],
+         tableData: [{
+          checkResult: '01',
+          isSecondIns: "1",
+          reconType: '02',
+          appType: null,
+          applyId: "879d8e00-6d3f-4e07-87f5-0f0c675c06e1",
+          applyIdList: null,
+          applyMainNo: null,
+          applySubNo: "201511190111013763",
+          assignCode: null,
+          assignName: "system",
+          auditCodec: null,
+          auditCodez: null,
+          auditDatec: null,
+          auditDatez: null,
+          auditNamec: "林丹勘定",
+          auditNamez: "刘杰",
+          certCode: "431129198001010178",
+          checkState: "01",
+          checkStateTxt: "待质检员审批",
+          certType: null,
+          createTime: null,
+          custCode: null,
+          custName: "0508测试D009",
+          enterTime: "2018-05-23 11:06:25",
+          id: "Fwn2yzQIZ1GS8Czoqf7g4MoF1TVEeSGB",
+          insDate: null,
+          insMemberName: null,
+          instaskType: "00",
+          instaskTypeTxt: "常规质检",
+          lastModifyTime: null,
+          mobile: null,
+          proCode: null,
+          proName: null,
+          processInstanceId: null,
+          processInstanceIdSecond: null,
+          remark: null,
+          taskId: '98988',
+        }],
         reg: /(\w{6})\w*(\w{4})/,
         Telreg: /(\w{7})\w*/,
         reVal: '$1********$2',
         telVal: '$1****',
         params: {
-          applySubno: '',
-          custName: '',
+                   processTemplateId: '',
+          taskNodeName: '',
+          taskStatus: '',
+          applySubNo: '',
+          custName_la: '',
           certCode: '',
-          mobile: '',
           //   pageNum: '', //页数（第几页）
           //   pageSize: '', //页面显示行数
         },
@@ -146,47 +173,45 @@
       //   },
 
       handleCurrentChange(val) {
+        console.log(val)
+        console.log( this.params.taskNodeName)
+        this.params.taskNodeName='checkApp_compliance_manager';
+        this.query.reconType = val.reconType;
         this.query.id = val.id;
-        this.query.matchApplyId = val.applyId;
-        if(  this.taskNodeName=='checkApp_regional_manager'){ // 区域
+        this.query.ApplyId = val.applyId;
+        this.query.taskId = val.taskId;
+        this.query.processInstanceId = val.processInstanceId;
+        if(   this.params.taskNodeName=='checkApp_regional_manager'){ // 区域
         localStorage.setItem("QTAreaTW", JSON.stringify(this.query));
-        }else if(this.taskNodeName=='checkApp_compliance_manager' ){ // 合规
+        }else if( this.params.taskNodeName=='checkApp_compliance_manager' ){ // 合规
         localStorage.setItem("QTComplianceTW", JSON.stringify(this.query));
         }
-        this.$router.push('/MatchingInfQT');
+        this.$router.push('/MatchingInfQT?'+ this.params.taskNodeName);
         // this.params.pageNum = val;
         // this.inquire(this.params);
       },
-      handleSelectionChange() {
-
-      },
       Rreset() {
-        this.params.applySubno = '';
-        this.params.custName = '';
+        this.params.applySubNo = '';
+        this.params.custName_la = '';
         this.params.certCode = '';
-        this.params.mobile = '';
+          this.inquire(this.params);        
       },
       Rsearch() {
         // this.params.pageNum = this.currentPage = 1;
-        if (this.params.applySubno != '' || this.params.custName != '' || this.params.certCode != '' || this.params.mobile !=
-          '') {
           this.inquire(this.params);
-        } else {
-          this.$message.error('请输入查询条件')
-        }
       },
       inquire(pam) {
         // 基础接口-综合查询
         this.post("applyInfoPool/multipleQuery", pam).then(res => {
           if (res.statusCode == 200) {
-            for (var i = 0; i < res.data.length; i++) {
-              if (res.data[i].certCode) {
-                res.data[i].certCode = res.data[i].certCode.replace(this.reg, this.reVal);
-              }
-              if (res.data[i].mobile) {
-                res.data[i].mobile = res.data[i].mobile.replace(this.Telreg, this.telVal);
-              }
-            }
+            // for (var i = 0; i < res.data.length; i++) {
+            //   if (res.data[i].certCode) {
+            //     res.data[i].certCode = res.data[i].certCode.replace(this.reg, this.reVal);
+            //   }
+            //   if (res.data[i].mobile) {
+            //     res.data[i].mobile = res.data[i].mobile.replace(this.Telreg, this.telVal);
+            //   }
+            // }
             this.tableData = res.data;
           } else {
             this.$message.error(res.msg);
@@ -197,11 +222,16 @@
         watch: {
       '$route' (to, from) {
         if (to.fullPath !== from.fullPath) {
-          // this.toinner();
+          //  this.inquire(this.params);
         }
       }
     },
     mounted() {
+      this.taskList = JSON.parse(localStorage.getItem('QTAreaWorkbenchPass'))
+      this.params.processTemplateId = this.taskList.processTemplateId;
+      this.params.taskNodeName = this.taskList.taskNodeName;
+      this.params.taskStatus = this.taskList.taskStatus;
+      // this.inquire(this.params);
       // QTAreaWorkbenchPass 区域
       // QTComplianceWorkbenchPass 合规
       //   this.userInf = JSON.parse(localStorage.getItem('userInf'));

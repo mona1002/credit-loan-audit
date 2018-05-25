@@ -90,7 +90,6 @@ import IntegratedQuery from '../view/QualityTesting/FunctionalityPages/Integrate
 import commissioner from '../view/QualityTesting/QTProcess/commissioner/commissioner.vue' //质检专员任务列表
 import manager from '../view/QualityTesting/QTProcess/manager/manager.vue' //质检主管页面
 import regularQT from '../view/QualityTesting/QTProcess/components/regularQT.vue' //首次常规质检
-import specialQT from '../view/QualityTesting/QTProcess/components/specialQT.vue' //首次专纵向质检
 import regularANDspecialQT from '../view/QualityTesting/QTProcess/components/regularANDspecialQT.vue' //常规质检又抽中专纵向质检
 import regularConfig from '../view/QualityTesting/FunctionalityPages/regularConfig.vue' //常规抽单配置功能
 import specialConfig from '../view/QualityTesting/FunctionalityPages/specialConfig.vue' //专纵项抽单配置功能
@@ -437,9 +436,6 @@ const routes = [{
     path: '/regularQT',
     component: regularQT,
     name: 'regularQT'
-  }, {
-    path: '/specialQT',
-    component: specialQT
   }, {
     path: '/regularANDspecialQT',
     component: regularANDspecialQT
