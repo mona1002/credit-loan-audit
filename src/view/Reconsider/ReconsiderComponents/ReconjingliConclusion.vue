@@ -869,9 +869,7 @@
 	            this.shenpiLoading = true;
 				this.shenpiFont = '提交中';
 				//this.sdialogVisible = false; 
-
 	           var reg = /,/;
-
 	           this.post('/creauditOpinion/add', {
 		        applyId: this.applyId,
 		        auditType: '02',
@@ -895,7 +893,7 @@
 		        applyCustId: this.applyCustId, //申请客户ID（申请登记-个人信息）
 		        applyConclusion: this.applyConclusion,//申请结论（00-通过）
 		        ploanOperId: '', // 批准人员
-		        creditDebitRate: (this.caculData.creditDebitRate == 0 || this.caculData.creditDebitRate == '') ? 0 : this.caculData.creditDebitRate.replace("%","")/100, // 信用负债率
+		        creditDebitRate: (this.caculData.creditDebitRate == 0 || this.caculData.creditDebitRate == '' || !this.caculData.creditDebitRate ) ? 0 : this.caculData.creditDebitRate.replace("%","")/100, // 信用负债率
 		        approvalFlag: '0', // 终审通过标志  0 未
 		        ploanDate: '', // 批准日期
 		        auditDate: '', // 批准时间
@@ -1268,15 +1266,14 @@
 		    },
 		    //反欺诈申请
 		    AntiFraudApplication(){
-		    	this.$router.push({
-		            name: 'AntiApplyEditf',
-		            params: {
-		              id: this.applyId,
+		    	this.$router.push({name: 'AntiApplyEditf'});
+	            this.params={
+	                  id: this.applyId,
 		              flag: 'fuyi',
-									busiState:'20',
-									wayOf: '01' //复议
-		            }
-		          });
+		              busiState:'20',
+		              channel:'04'
+	              }
+	            localStorage.setItem("AntiApplyParams",JSON.stringify(this.params));
 		    },
 		    // 审批结论轨迹
 		    getSpjlList() {

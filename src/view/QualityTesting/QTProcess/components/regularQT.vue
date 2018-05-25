@@ -832,7 +832,7 @@
         </p>
         <p style="margin:10px 0;">
           <label>复议说明：</label>
-          <el-input  v-model="ReconsiderDes" style="width:520px;vertical-align:top;"  type="textarea" resize='none' :rows="2"></el-input>
+          <el-input v-model="ReconsiderDes" style="width:520px;vertical-align:top;" type="textarea" resize='none' :rows="2"></el-input>
         </p>
         <p>
           <span> 经办人：{{userInf. userName}}</span>
@@ -848,7 +848,8 @@
       <div class="reApproval">
         <p>
           <span>
-            <label><b class="required_Red"> * </b>复议结果：</label>
+            <label>
+              <b class="required_Red"> * </b>复议结果：</label>
             <el-select v-model="ToApprovalParams.reviewResult" placeholder="请选择">
               <el-option v-for="item in RecResult" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
@@ -864,24 +865,27 @@
         </p>
         <p>
           <span>
-            <label><b class="required_Red"> * </b>质检员是否有差错：</label>
+            <label>
+              <b class="required_Red"> * </b>质检员是否有差错：</label>
             <el-select v-model="ToApprovalParams.isError" placeholder="请选择">
               <el-option v-for="item in ApprolisError" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </span>
           <span>
-            <label><b class="required_Red"> * </b>差错类型：</label>
+            <label>
+              <b class="required_Red"> * </b>差错类型：</label>
             <!-- <el-select v-model="value" placeholder="请选择">
             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select> -->
-          <!--  :disabled='QTConclution' -->
+            <!--  :disabled='QTConclution' -->
             <el-input v-model="ToApprovalParams.errorType" :maxlength='arealength' placeholder="请输入内容"></el-input>
           </span>
         </p>
         <p style="margin:10px 0;">
-          <label class="ReDec"><b class="required_Red"> * </b>复议说明：</label>
+          <label class="ReDec">
+            <b class="required_Red"> * </b>复议说明：</label>
           <el-input v-model='ToApprovalParams.reviewRemark' style="width:500px;vertical-align:top;" type="textarea" resize='none' :rows="2"></el-input>
         </p>
         <p>
@@ -957,35 +961,35 @@
         systermTime: Number,
         submitShow: false, //提交弹框
         loadsitu: false,
-        loadSub:false,
+        loadSub: false,
         adbtn: '确认',
-        ReconSubmit:'提交',
+        ReconSubmit: '提交',
         currentRow: null,
         addId: '',
         ind: 0,
-        insReconApply:[],//复议申请表
-        ReconsiderNode:'质检主管',//复议弹窗-复议节点
-        ReconsiderDes:'',//复议弹窗-复议说明
+        insReconApply: [], //复议申请表
+        ReconsiderNode: '质检主管', //复议弹窗-复议节点
+        ReconsiderDes: '', //复议弹窗-复议说明
         reviewConclusion: {
           // this.propQTconclution.applyId
         }, //复核结论
-        ToApprovalParams:{//复议审批弹窗 
+        ToApprovalParams: { //复议审批弹窗 
           applyId: this.propQTconclution.applyId,
-            reviewResult:'',
-            checkResult:'',
-            isError:'',
-              errorType:'',
-            reviewRemark:'',
-            approverUserCode:'',
-            approverDate:'',
-            insState:'',
-              taskId:this.propQTconclution.tastwaitingPass.taskId,
+          reviewResult: '',
+          checkResult: '',
+          isError: '',
+          errorType: '',
+          reviewRemark: '',
+          approverUserCode: '',
+          approverDate: '',
+          insState: '',
+          taskId: this.propQTconclution.tastwaitingPass.taskId,
         },
-        AntiApplyParams:{
-             id: this.propQTconclution.applyId,
-            flag: 'zhijian',
-            busiState: '30',
-            channel:'00',
+        AntiApplyParams: {
+          id: this.propQTconclution.applyId,
+          flag: 'zhijian',
+          busiState: '30',
+          channel: '00',
         },
         isForm: '',
         radio: '1',
@@ -1028,7 +1032,7 @@
             telType: "06" //默认客户本人type
           },
           {
-            applyId:this.propQTconclution.applyId,
+            applyId: this.propQTconclution.applyId,
             id: "",
             insResult: "00",
             insResultTxt: "正常",
@@ -1113,13 +1117,13 @@
         //   telRecord:'',
         // }], //客户本人-拨打核实-本人只有一条电话拨打核实记录----array
         insTelCustInfo: {
-          applyId:this.propQTconclution.applyId,
-          telNum:'',
-          telRecord:'',
-          iisself:'',
-          iisselftxt:'',
-        insResult:'00',// 质检结果(00:正常，01:异常)		
-        remark:'',
+          applyId: this.propQTconclution.applyId,
+          telNum: '',
+          telRecord: '',
+          iisself: '',
+          iisselftxt: '',
+          insResult: '00', // 质检结果(00:正常，01:异常)		
+          remark: '',
         }, //客户本人-拨打核实-本人只有一条电话拨打核实记录---obj
         // insTelVerifyList: [], //除客户本人以外-电话拨打核实-暂存
         insTelVerifyListCompany: [], //单位电话-电话拨打核实
@@ -1161,31 +1165,31 @@
         }, // // 资料核实+三方信息查询+ 内部匹配核实
         // insConclusion:'',
         // ------------------------各主管审批查询TableData---------------------------
-       TrilSelfTableData:[],//初终审本人
-        ManagerFirstTableData:[],//初终审主管首次
-        ManagerSecondTableData:[],//初终审主管二次
-        insReconApproval:[],//复议审批表
+        TrilSelfTableData: [], //初终审本人
+        ManagerFirstTableData: [], //初终审主管首次
+        ManagerSecondTableData: [], //初终审主管二次
+        insReconApproval: [], //复议审批表
         // ------------------------------------测试用--------------------
         tableData: [{
           reviewRemark: '2016-05-02',
           approverUserCode: '王小虎',
           reconDate: '上海市普陀区金沙江路 1518 弄',
-          reconType:'00'
-        }, {
-         reviewRemark: '2016-05-02',
-          approverUserCode: '王小虎',
-          reconDate: '上海市普陀区金沙江路 1518 弄',
-          reconType:'00'
-        }, {
-         reviewRemark: '2016-05-02',
-          approverUserCode: '王小虎',
-          reconDate: '上海市普陀区金沙江路 1518 弄',
-          reconType:'01'
+          reconType: '00'
         }, {
           reviewRemark: '2016-05-02',
           approverUserCode: '王小虎',
           reconDate: '上海市普陀区金沙江路 1518 弄',
-          reconType:'02'
+          reconType: '00'
+        }, {
+          reviewRemark: '2016-05-02',
+          approverUserCode: '王小虎',
+          reconDate: '上海市普陀区金沙江路 1518 弄',
+          reconType: '01'
+        }, {
+          reviewRemark: '2016-05-02',
+          approverUserCode: '王小虎',
+          reconDate: '上海市普陀区金沙江路 1518 弄',
+          reconType: '02'
         }],
         // ------------------------------------------------------------
         // //   ---
@@ -1310,7 +1314,7 @@
       getSystermTime() { // 获取系统时间-质检结论-质检日期取值---基础接口
         this.get('system/getSystemDate?' + Math.random()).then(res => {
           if (res.statusCode == 200) {
-            this.systermTime =res.data;
+            this.systermTime = res.data;
             // this.systermTime = new Date(res.data);
             // this.systermTime = this.systermTime.getFullYear() + '-' + (this.systermTime.getMonth() + 1) + '-' +
             //   this.systermTime
@@ -1332,15 +1336,20 @@
             //  基本信息                                -Object
             this.baseInfo = res.data.applyBaseInfo;
             // 资料核实+三方信息查询+ 内部匹配核实         -Object
-            !res.data.insRegularInfo ? this.regularInfo.applyId= this.propQTconclution.applyId : this.regularInfo = res.data.insRegularInfo;
+            !res.data.insRegularInfo ? this.regularInfo.applyId = this.propQTconclution.applyId : this.regularInfo =
+              res.data.insRegularInfo;
             // 质检结论                                  -Object
-            !res.data.insConclusionList ? this.insConclusion.applyId= this.propQTconclution.applyId : this.insConclusion = res.data.insConclusionList;
-            this.insConclusion[0] && this.insConclusion[0].id ? this.addId = this.insConclusion[0].id : this.addId = ''; //取添加质检结论时，id值
+            !res.data.insConclusionList ? this.insConclusion.applyId = this.propQTconclution.applyId : this.insConclusion =
+              res.data.insConclusionList;
+            this.insConclusion[0] && this.insConclusion[0].id ? this.addId = this.insConclusion[0].id : this.addId =
+              ''; //取添加质检结论时，id值
             // 复核结论   -----obj
-           !res.data.insReviewConclusion? this.reviewConclusion.applyId= this.propQTconclution.applyId : this.reviewConclusion = res.data.insReviewConclusion;
+            !res.data.insReviewConclusion ? this.reviewConclusion.applyId = this.propQTconclution.applyId : this.reviewConclusion =
+              res.data.insReviewConclusion;
             // 电话征信：客户本人-电话拨打核实 - 本人只有一条电话拨打核实记录            -object
-           !res.data.insTelCustInfo.applyId? this.insTelCustInfo.applyId =this.propQTconclution.applyId:this.insTelCustInfo=res.data.insTelCustInfo; //this.insTelCustInfo 是obj / 查询接口 -只返回客户本人-电话核实信息
-            !res.data.insTelCustInfo.insResult ? '': this.insTelCustInfo.insResult=res.data.insTelCustInf.insResult; //本人拨打电话核实-默认选00           
+            !res.data.insTelCustInfo.applyId ? this.insTelCustInfo.applyId = this.propQTconclution.applyId : this.insTelCustInfo =
+              res.data.insTelCustInfo; //this.insTelCustInfo 是obj / 查询接口 -只返回客户本人-电话核实信息
+            !res.data.insTelCustInfo.insResult ? '' : this.insTelCustInfo.insResult = res.data.insTelCustInf.insResult; //本人拨打电话核实-默认选00           
             // 电话征信：电话拨打核实-除客户本人
             for (var k = 0; k < res.data.insTelVerifyList.length; k++) {
               res.data.insTelVerifyList[k].insResult == '' ? res.data.insTelVerifyList[k].insResult = '00' : ''; //质检结果如果没有值，默认选00 正常
@@ -1423,22 +1432,24 @@
           }
         });
       },
-      getManagerList(){//获取各主管查看table信息
-         this.get("/insReconApply/getReconApplyReconApproval", {
+      getManagerList() { //获取各主管查看table信息
+        this.get("/insReconApply/getReconApplyReconApproval", {
           applyId: this.propQTconclution.applyId,
         }).then(res => {
           if (res.statusCode == 200) {
-        //    TrilSelfTableData:[],//初终审本人
-        // ManagerFirstTableData:[],//初终审主管首次
-        // ManagerSecondTableData:[],//初终审主管二次
-               //insReconApplyList:复议申请表   insReconApproval ：复议审批表
-          res.data.insReconApplyList?  this.insReconApply=res.data.insReconApplyList:'';
-            for(var m=0;m< this.insReconApply.length;m++){
-              this.insReconApply[m].reconType=='00'?this.TrilSelfTableData.push(this.insReconApply[m]):'';//00:初终审本人---初终审复议申请信息
-              this.insReconApply[m].reconType=='01'?this.ManagerFirstTableData.push(this.insReconApply[m]):'';//01:初终审主管首次----审批主管第一次复议申请信息
-              this.insReconApply[m].reconType=='02'?this.ManagerSecondTableData.push(this.insReconApply[m]):'';//02:初终审主管二次----审批主管第二次复议申请信息
+            //    TrilSelfTableData:[],//初终审本人
+            // ManagerFirstTableData:[],//初终审主管首次
+            // ManagerSecondTableData:[],//初终审主管二次
+            //insReconApplyList:复议申请表   insReconApproval ：复议审批表
+            res.data.insReconApplyList ? this.insReconApply = res.data.insReconApplyList : '';
+            for (var m = 0; m < this.insReconApply.length; m++) {
+              this.insReconApply[m].reconType == '00' ? this.TrilSelfTableData.push(this.insReconApply[m]) : ''; //00:初终审本人---初终审复议申请信息
+              this.insReconApply[m].reconType == '01' ? this.ManagerFirstTableData.push(this.insReconApply[m]) : ''; //01:初终审主管首次----审批主管第一次复议申请信息
+              this.insReconApply[m].reconType == '02' ? this.ManagerSecondTableData.push(this.insReconApply[m]) :
+                ''; //02:初终审主管二次----审批主管第二次复议申请信息
             }
-           res.data.insReconApproval&& res.data.insReconApproval.reviewRemark?this.insReconApproval[0]=res.data.insReconApproval:'';//复议申请表
+            res.data.insReconApproval && res.data.insReconApproval.reviewRemark ? this.insReconApproval[0] = res.data
+              .insReconApproval : ''; //复议申请表
             // res.data.insReconApproval.reviewRemark?this.insReconApproval.push(res.data.insReconApproval):'';//复议申请表
           } else {
             this.$message.error(res.msg);
@@ -1653,7 +1664,7 @@
               i].id; //主管首次保存或提交id设置为空
           }
           this.SaveInfParams = { //入参
-          applyId:this.propQTconclution.applyId,
+            applyId: this.propQTconclution.applyId,
             taskId: this.propQTconclution.tastwaitingPass.taskId,
             applyBaseInfo: this.baseInfo, //基础信息
             insConclusionList: this.insConclusion, //质检结论页-质检结论
@@ -1685,46 +1696,48 @@
       NoReconsider() {
         console.log('无需复议')
         this.post("/insReconApply/noNeedReview", {
-        applyId:this.propQTconclution.applyId,
-            taskId: this.propQTconclution.tastwaitingPass.taskId,
-          reconType:this.propQTconclution.tastwaitingPass.reconType,
+          applyId: this.propQTconclution.applyId,
+          taskId: this.propQTconclution.tastwaitingPass.taskId,
+          reconType: this.propQTconclution.tastwaitingPass.reconType,
         }).then(res => {
           if (res.statusCode == 200) {
             this.$message({
-              type:'success',
-              message:'提交成功！'
+              type: 'success',
+              message: '提交成功！'
             });
-            this.propQTconclution.pageType=='checkApp_trial_manager'? this.$router.push('ManagerTaskList?taskNodeName=checkApp_trial_manager&flag=10'):'';
-            this.propQTconclution.pageType=='checkApp_regional_manager'? this.$router.push('ACManagerTaskList?taskNodeName=checkApp_regional_manager&flag=12'):'';
+            this.propQTconclution.pageType == 'checkApp_trial_manager' ? this.$router.push(
+              'ManagerTaskList?taskNodeName=checkApp_trial_manager&flag=10') : '';
+            this.propQTconclution.pageType == 'checkApp_regional_manager' ? this.$router.push(
+              'ACManagerTaskList?taskNodeName=checkApp_regional_manager&flag=12') : '';
           } else {
             this.$message.error(res.msg);
           }
         });
       },
-      ToReconsiderAlert(){//发起复议弹窗
+      ToReconsiderAlert() { //发起复议弹窗
         this.ReconsiderShow = true;
-              this.loadSub=false;
-       this. ReconSubmit='提交';
+        this.loadSub = false;
+        this.ReconSubmit = '提交';
       },
-      ReAprovalAlert (){//复议审批-弹窗-编辑
+      ReAprovalAlert() { //复议审批-弹窗-编辑
         this.ReAprovalShow = true;
-        this. ReconSubmit='提交';
-         this. loadSub=false;
+        this.ReconSubmit = '提交';
+        this.loadSub = false;
       },
-      AprovalAlert (){//审批-弹窗-编辑
+      AprovalAlert() { //审批-弹窗-编辑
         this.ReAprovalShow = true;
-        this. ReconSubmit='提交';
-         this. loadSub=false;
+        this.ReconSubmit = '提交';
+        this.loadSub = false;
         //  获取区域经理审批信息
-                 this.get("/insReconApply/getReconApprovalByState", {
-            applyId:this.propQTconclution.applyId,
+        this.get("/insReconApply/getReconApprovalByState", {
+          applyId: this.propQTconclution.applyId,
         }).then(res => {
           if (res.statusCode == 200) {
-         this.ToApprovalParams.reviewResult=   res.data.reviewResult;
-         this.ToApprovalParams.checkResult=   res.data.checkResult;
-         this.ToApprovalParams.isError=   res.data.isError;
-         this.ToApprovalParams.errorType=   res.data.errorType;
-         this.ToApprovalParams.reviewRemark=   res.data.reviewRemark;
+            this.ToApprovalParams.reviewResult = res.data.reviewResult;
+            this.ToApprovalParams.checkResult = res.data.checkResult;
+            this.ToApprovalParams.isError = res.data.isError;
+            this.ToApprovalParams.errorType = res.data.errorType;
+            this.ToApprovalParams.reviewRemark = res.data.reviewRemark;
           } else {
             this.$message.error(res.msg);
           }
@@ -1733,63 +1746,67 @@
       // 发起复议
       ToReconsider() {
         console.log('发起复议')
-           this. loadSub=true;
-       this. ReconSubmit='提交中';
-                this.post("/insReconApply/saveInsReconApply", {
-           applyId:this.propQTconclution.applyId,
-            taskId: this.propQTconclution.tastwaitingPass.taskId,
-          taskNodeName:this.propQTconclution.pageType,
-          reviewRemark:this.ReconsiderDes ,//复议说明
-          approverUserCode:this.userInf. userName,
-          reconDate:this.systermTime,
-          reconType:this.propQTconclution.tastwaitingPass.reconType,
+        this.loadSub = true;
+        this.ReconSubmit = '提交中';
+        this.post("/insReconApply/saveInsReconApply", {
+          applyId: this.propQTconclution.applyId,
+          taskId: this.propQTconclution.tastwaitingPass.taskId,
+          taskNodeName: this.propQTconclution.pageType,
+          reviewRemark: this.ReconsiderDes, //复议说明
+          approverUserCode: this.userInf.userName,
+          reconDate: this.systermTime,
+          reconType: this.propQTconclution.tastwaitingPass.reconType,
           // taskNode:this.ReconsiderNode //不需要入
         }).then(res => {
           if (res.statusCode == 200) {
             this.$message({
-              type:'success',
-              message:'发起复议成功！'
+              type: 'success',
+              message: '发起复议成功！'
             })
-             this.this.ReconsiderDes='';//请空复议说明输入框
+            this.this.ReconsiderDes = ''; //请空复议说明输入框
           } else {
             this.$message.error(res.msg);
           }
         });
-          this.ReconsiderShow = false;
+        this.ReconsiderShow = false;
       },
       // 发起反欺诈
       AntiApply() {
         console.log('反欺诈')
-        this.$router.push({name: 'AntiApplyEditf'});
-         localStorage.setItem("AntiApplyParams",JSON.stringify(this.AntiApplyParams));
+        this.$router.push({
+          name: 'AntiApplyEditf'
+        });
+        localStorage.setItem("AntiApplyParams", JSON.stringify(this.AntiApplyParams));
       },
-      ToApproval(){//复议审批、审批
-       if(this.ToApprovalParams.reviewRemark==''||this.ToApprovalParams.errorType==''||this.ToApprovalParams.isError==''||this.ToApprovalParams.reviewResult=='' ){
-         this.$message.error('有必填项未填写！');
-         return 
+      ToApproval() { //复议审批、审批
+        if (this.ToApprovalParams.reviewRemark == '' || this.ToApprovalParams.errorType == '' || this.ToApprovalParams.isError ==
+          '' || this.ToApprovalParams.reviewResult == '') {
+          this.$message.error('有必填项未填写！');
+          return
         }
-        this. ReconSubmit='提交中';
-         this. loadSub=true;
-           this.ToApprovalParams.approverUserCode=this.userInf. userName;
-            this.ToApprovalParams.approverDate=this.systermTime;
-         this.post("/insReconApply/saveInsReconApproval",this.ToApprovalParams).then(res => {
+        this.ReconSubmit = '提交中';
+        this.loadSub = true;
+        this.ToApprovalParams.approverUserCode = this.userInf.userName;
+        this.ToApprovalParams.approverDate = this.systermTime;
+        this.post("/insReconApply/saveInsReconApproval", this.ToApprovalParams).then(res => {
           if (res.statusCode == 200) {
             this.$message({
-              type:'success',
-              message:'审批成功！'
+              type: 'success',
+              message: '审批成功！'
             })
             // 清空已填数据
-             this.ToApprovalParams.reviewResult='';
-             this.ToApprovalParams.checkResult='';
-             this.ToApprovalParams.isError='';
-             this.ToApprovalParams.errorType='';
-             this.ToApprovalParams.reviewRemark='';
-            this.propQTconclution.pageType=='checkApp_compliance_manager'? this.$router.push('ACManagerTaskList?taskNodeName=checkApp_compliance_manager&flag=13'):'';//合规经理结论点击审批-成功跳转到列表页
+            this.ToApprovalParams.reviewResult = '';
+            this.ToApprovalParams.checkResult = '';
+            this.ToApprovalParams.isError = '';
+            this.ToApprovalParams.errorType = '';
+            this.ToApprovalParams.reviewRemark = '';
+            this.propQTconclution.pageType == 'checkApp_compliance_manager' ? this.$router.push(
+              'ACManagerTaskList?taskNodeName=checkApp_compliance_manager&flag=13') : ''; //合规经理结论点击审批-成功跳转到列表页
           } else {
             this.$message.error(res.msg);
           }
         });
-        this.ReAprovalShow=false;
+        this.ReAprovalShow = false;
       },
       // 流程轨迹
       getLcgjList() {
@@ -1837,7 +1854,7 @@
           }
         });
       },
-      roSocialSecurity() {//社保/公积金-授权显示
+      roSocialSecurity() { //社保/公积金-授权显示
         if (this.social == "(未授权)") {
           this.socialLogVisible = true;
         } else if (this.social == "(已授权)") {
@@ -1936,7 +1953,7 @@
           }
         } else if (this.propQTconclution.pageType == 'self') { //本人---单独页面
         } else if (this.propQTconclution.pageType == 'checkApp_trial_manager') { //初终审主管  √
-            console.log(this.propQTconclution.pageType )
+          console.log(this.propQTconclution.pageType)
           this.onlyCheck();
           this.getManagerList();
           this.ReApply = true; //初终审复议申请信息
@@ -1948,14 +1965,14 @@
           if (this.propQTconclution.tastwaitingPass.reconType == '01') {
             //首次复议
             // this.ReApply=true;//初终审复议申请信息
-             this.ReconsiderNode='质检主管';//复议弹窗-复议节点
-          } else if (this.propQTconclution.tastwaitingPass.reconType== '02') {
+            this.ReconsiderNode = '质检主管'; //复议弹窗-复议节点
+          } else if (this.propQTconclution.tastwaitingPass.reconType == '02') {
             this.FirstReconsider = true; //第一次复议审批信息
-             this.ReconsiderNode='区域经理';//复议弹窗-复议节点
+            this.ReconsiderNode = '区域经理'; //复议弹窗-复议节点
           }
         } else if (this.propQTconclution.pageType == 'checkApp_check_recon_manager') { //复议任务列表（首次） √
           this.onlyCheck();
-          this.ToApprovalParams.insState='00';//复议审批入参-状态(00:首次审批,01:二次区域经理审批，02:二次合规经理审批)
+          this.ToApprovalParams.insState = '00'; //复议审批入参-状态(00:首次审批,01:二次区域经理审批，02:二次合规经理审批)
           this.ReApply = true; //初终审复议申请信息
           this.SuperVisor = true; //审批主管第一次复议申请信息
           this.submitBtn = false; //提交
@@ -1970,12 +1987,12 @@
           // this.saveBtn=false;//保存
           //  this.SocialSecurityBtn = false; //社保公积金
           this.areaAndComplianceBtn();
-           this.ToApprovalParams.insState='01';
+          this.ToApprovalParams.insState = '01';
           this.RiskControlBtn = false; //大数据风控
           this.NoReconsiderBtn = true; //无需复议
         } else if (this.propQTconclution.pageType == 'checkApp_compliance_manager') { //合规 √
-            this.areaAndComplianceBtn();
-           this.ToApprovalParams.insState='02';        
+          this.areaAndComplianceBtn();
+          this.ToApprovalParams.insState = '02';
           // this.onlyCheck();
           // this.ReApply = true; //初终审复议申请信息
           // this.SuperVisor = true; //审批主管第一次复议申请信息
@@ -1994,10 +2011,10 @@
       this.getSystermTime();
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
       // 初终审主管，复议首次审批，区域经理 合规经理 调审批信息列表接口
-//       if(this.propQTconclution.pageType=='checkApp_trial_manager'){
-//  this.getManagerList();
-//       }
-     
+      //       if(this.propQTconclution.pageType=='checkApp_trial_manager'){
+      //  this.getManagerList();
+      //       }
+
       // console.log(this.userInf)
       // console.log(this.propQTconclution)
       // this.processInstanceId = JSON.parse(localStorage.getItem('未存储，未确定，待更改-RtaskInWaitting')).processInstanceId;
@@ -2156,11 +2173,13 @@
     width: 150px;
     text-align: right;
   }
- .reApproval span:nth-of-type(2) label{
+
+  .reApproval span:nth-of-type(2) label {
     width: 85px;
-    text-align:right;
+    text-align: right;
     display: inline-block;
- }
+  }
+
   .ReDec {
     width: 150px;
     display: inline-block;

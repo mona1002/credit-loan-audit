@@ -140,25 +140,29 @@
           <div class="form-class" style="width:100%;height:auto;">
             <!-- 默认的新增表单 -->
             <!-- 住址电话 - 表单 -->
-            <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull"></AddressForm>
+            <!-- <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull" :source='source' :answer="answer" :checkStage="checkStage" :sourceDesc="sourceDesc" :thirdResult="thirdResult" :threeQueries="threeQueries" :exceptionState="exceptionState" :issameFam="issameFam" :issameFamtxt="issameFamtxt" :relBorrower="relBorrower" :relBorrowertxt="relBorrowertxt" :checkWork="checkWork" :checkWorktxt="checkWorktxt" :maritalStatus="maritalStatus" :maritalStatustxt="maritalStatustxt" :checkAddr="checkAddr" :checkAddrtxt="checkAddrtxt" :checkEstate="checkEstate" :checkEstatetxt="checkEstatetxt" :otherIncome="otherIncome" :otherIncometxt="otherIncometxt" :recentLargespend="recentLargespend" :recentlArgespendInfo="recentlArgespendInfo" :parents="parents" :parentsInfo="parentsInfo" :brother="brother" :brothertxt="brothertxt" :expenses="expenses" :expensestxt="expensestxt" :checkHometel="checkHometel" :checkHometeltxt="checkHometeltxt" :hobbyandBehave="hobbyandBehave" :conclusion="conclusion" @aaa="aaa"></AddressForm> -->
+            <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull" :Addlist="newList"></AddressForm>
             <!-- 住址电话 - 历史 -->
-            <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :mobileData="mobileData" :isFull.sync="isFull"></AddressHis>
+            <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :mobileData="newList?newList:mobileData" :isFull.sync="isFull"></AddressHis>
             <!-- 单位电话 - 表单 -->
-            <CompanyForm class="form-his" v-if="formShow && phoneType=='02'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull"></CompanyForm>
+            <!-- <CompanyForm class="form-his" v-if="formShow && phoneType=='02'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull" :source='source' :answer="answer" :checkStage="checkStage" :sourceDesc="sourceDesc" :phone="phone" :phonetxt="phonetxt" :answerIdentity="answerIdentity" :answertxt="answertxt" :company="company" :companytxt="companytxt" :checkTime="checkTime" :checkTimetxt="checkTimetxt" :checkIncome="checkIncome" :checkIncometxt="checkIncometxt" :employmentmode="employmentmode" :payrollSituation="payrollSituation" :payrollSituationtxt="payrollSituationtxt" :pensionInsurance="pensionInsurance" :housingFund="housingFund" :jobref1="jobref1" :jobref2="jobref2" :conclusion="conclusion"></CompanyForm> -->
+            <CompanyForm class="form-his" v-if="formShow && phoneType=='02'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull" :danweiList="newList"></CompanyForm>
             <!-- 单位电话 - 历史 -->
-            <CompanyHis class="form-his" v-if="hisShow && phoneType=='02'" :comData="comData" :isFull.sync="isFull"></CompanyHis>
+            <CompanyHis class="form-his" v-if="hisShow && phoneType=='02'" :comData="newList?newList:comData" :isFull.sync="isFull"></CompanyHis>
             <!-- 家庭联系人 - 表单 -->
-            <FamilyForm class="form-his" v-if="formShow && phoneType=='03'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull"></FamilyForm>
+            <!-- <FamilyForm class="form-his" v-if="formShow && phoneType=='03'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull" :source='source' :answer="answer" :checkStage="checkStage" :sourceDesc="sourceDesc" :thirdResult="thirdResult" :threeQueries="threeQueries" :threeQueriestxt="threeQueriestxt" :mobilepayment="mobilepayment" :mobilepaymenttxt="mobilepaymenttxt" :issameFam="issameFam" :issameFamtxt="issameFamtxt" :relBorrower="relBorrower" :relBorrowertxt="relBorrowertxt" :checkWork="checkWork" :checkWorktxt="checkWorktxt" :maritalStatus="maritalStatus" :maritalStatustxt="maritalStatustxt" :checkAddr="checkAddr" :checkAddrtxt="checkAddrtxt" :checkEstate="checkEstate" :checkEstatetxt="checkEstatetxt" :otherIncome="otherIncome" :otherIncometxt="otherIncometxt" :conclusion="conclusion"></FamilyForm> -->
+            <FamilyForm class="form-his" v-if="formShow && phoneType=='03'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull" :familyList="newList"></FamilyForm>
             <!-- 家庭联系人 - 历史 -->
-            <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :familyData="familyData" :isFull.sync="isFull"></FamilyHis>
+            <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :familyData="newList?newList:familyData" :isFull.sync="isFull"></FamilyHis>
             <!-- 紧急联系人 - 表单 -->
-            <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull"></HurryForm>
+            <!-- <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull" :source='source' :answer="answer" :checkStage="checkStage" :sourceDesc="sourceDesc" :thirdResult="thirdResult" :threeQueries="threeQueries" :threeQueriestxt="threeQueriestxt" :mobilepayment="mobilepayment" :mobilepaymenttxt="mobilepaymenttxt" :relBorrower="relBorrower" :relBorrowertxt="relBorrowertxt" :contactfre="contactfre" :checkWork="checkWork" :checkWorktxt="checkWorktxt" :maritalStatus="maritalStatus" :maritalStatustxt="maritalStatustxt" :conclusion="conclusion"></HurryForm> -->
+            <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull" :hurryList="newList"></HurryForm>
             <!-- 紧急联系人 - 历史 -->
-            <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :hurryData="hurryData" :isFull.sync="isFull"></HurryHis>
+            <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :hurryData="newList?newList:hurryData" :isFull.sync="isFull"></HurryHis>
             <!-- 工作证明人 - 表单 -->
-            <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull"></WorkForm>
+            <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull" :source='source' :answer="answer" :checkStage="checkStage" :sourceDesc="sourceDesc" :mobilepayment="mobilepayment" :checkJob="checkJob" :checkJobtxt="checkJobtxt" :mobilepaymenttxt="mobilepaymenttxt" :answerIdentity="answerIdentity" :answertxt="answertxt" :conclusion="conclusion" ></WorkForm><!-- @on-source-change="onSourceChange" @on-sourceDesc-change="onSourceDescChange" @on-answer-change="onAnswerChange" @on-checkStage-change="onCheckStageChange" @on-answerIdentity-change="onAnswerIdentityChange" @on-answertxt-change="onAnswertxtChange" @on-checkJob-change="onCheckJobChange" @on-checkJobtxt-change="onCheckJobtxtChange" @on-mobilepayment-change="onMobilepaymentChange" @on-mobilepaymenttxt-change="onMobilepaymenttxtChange" @on-conclusion-change="onConclusionChange" -->
             <!-- 工作证明人 - 历史 -->
-            <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="workData" :isFull.sync="isFull"></WorkHis>
+            <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="newList?newList:workData" :isFull.sync="isFull"></WorkHis>
             <!-- 子组件 -->
             <!-- <router-link to="/AddressForm/formTag='testtag'/id='123'/phoneType='01'">
             <el-button type="primary">住址电话</el-button>
@@ -305,6 +309,71 @@ export default {
       },
       // 历史列表数据
       listData: [],
+      //子组件获取最新一条数据
+      newList:'',
+      //家庭电话
+      source:'',
+      answer:'',  
+      checkStage:'',  
+      sourceDesc:'',  
+      thirdResult:'',   
+      threeQueries:'',   
+      threeQueriestxt:'', 
+      mobilepayment:'', 
+      mobilepaymenttxt:'',   
+      issameFam:'',  
+      issameFamtxt:'',  
+      relBorrower:'',  
+      relBorrowertxt:'',   
+      checkWork:'',  
+      checkWorktxt:'',   
+      maritalStatus:'',  
+      maritalStatustxt:'',   
+      checkAddr:'',   
+      checkAddrtxt:'',   
+      checkEstate:'', 
+      checkEstatetxt:'',   
+      otherIncome:'',   
+      otherIncometxt:'',   
+      conclusion:'', 
+      //住址电话
+      recentLargespend: '',
+      recentlArgespendInfo: '',
+      parents: '',
+      brothertxt: '',
+      expenses: '',
+      expensestxt: '',
+      checkHometel: '',
+      checkHometeltxt: '',
+      hobbyandBehave: '',
+      exceptionState:'',
+      parentsInfo:'',
+      brother:'',
+      checkHometeltxt:'',
+      expensestxt:'',
+      //单位电话
+      phone:'',
+      phonetxt:'',
+      answerIdentity:'',
+      answertxt:'',
+      company:'',
+      checkTime:'',
+      checkTimetxt:'',
+      checkIncome:'',
+      checkIncometxt:'',
+      employmentmode:'',
+      payrollSituation:'',
+      payrollSituationtxt:'',
+      pensionInsurance:'',
+      housingFund:'',
+      jobref1:'',
+      jobref2:'',
+      companytxt:'',
+      //其他联系人
+      contactfre:'',
+      //工作证明人
+      checkJob:'',
+      checkJobtxt:'',
 
 
       // 添加界面
@@ -427,6 +496,8 @@ export default {
       // landlinePhone:/^(0[0-9]{2,3}-?)([0-9]{7,8})$/,
       landlinePhone:/^(0[0-9]{2}-?)([0-9]{8})$/,
       landlinePhone1:/^(0[0-9]{3}-?)([0-9]{7})$/,
+      // landLinePhoneLength:/^[0-9-]{0,13}$/,
+      landLinePhoneLength:/^[0-9\-]{0,13}$/,
       mobilePhone:/^1[345789]\d{9}$/,
     }
   },
@@ -498,8 +569,18 @@ export default {
 
     // 取内匹存储的标志
     var internalObj = JSON.parse(localStorage.getItem('internalObj'))
-    if (internalObj) {
-      this.isInterFlag = internalObj.isInterFlag;
+
+    // 从导航进入时的 标志
+    // 导航假如是初审进入 那就是编辑状态 important
+    var navJudge = JSON.parse(localStorage.getItem('navJudge'));
+
+    // 假如 内匹标志和  导航进入标志都存在 , 导航标志优先
+    if (internalObj && navJudge) {
+      if(navJudge.flag == 'nav_first'){
+        this.isInterFlag = false;
+      }else{
+        this.isInterFlag = internalObj.isInterFlag;
+      }
 
     }
 
@@ -584,14 +665,17 @@ export default {
     addTelNum: function(value) {
       // console.log('监听 添加电话号码');
       // this.addTelRex = /^(1)\d{10}$/i.test(value) || /^((\(\d{2,3}\))|(\d{3}\-))?(\(0\d{2,3}\)|0\d{2,3}-)?[1-9]\d{6,7}(\-\d{1,4})?$/i.test(value);
-      this.addTelRex = this.mobilePhone.test(value)||this.landlinePhone.test(value)||this.landlinePhone1.test(value);
-      console.log(this.addTelRex);
+      // this.addTelRex = this.mobilePhone.test(value)||this.landlinePhone.test(value)||this.landlinePhone1.test(value);
+
+      // this.addTelRex = this.mobilePhone.test(value)||this.landLinePhoneLength.test(value);
+      this.addTelRex = this.landLinePhoneLength.test(value);
+          console.log(this.addTelRex);
       // 判断 显示 电话格式
       // if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelNum.length >= 11 && !this.addTelRex) ||
       //   ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelNum.length >= 11 && !this.addTelRex)
       // ) {
-   if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelNum.length >= 12 && !this.addTelRex) ||
-        ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelNum.length >= 12 && !this.addTelRex)
+   if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelNum.length >= 21 && !this.addTelRex) ||
+        ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelNum.length >= 14 && !this.addTelRex)
       ) {
         console.log('选择了关系');      
         this.active = false;
@@ -604,22 +688,57 @@ export default {
       if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelRex) ||
         ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelRex)
       ) {
+        console.log('111')
         this.active = true;
       } else {
         console.log('没选关系');
-        console.log(value.charAt(1)*1 )
-     if(value.charAt(0)!=1 &&value.charAt(0)!=0&&value!=''){
-       console.log('进入01判断')
-          this.$message({
-              message:'请输入正确的电话号码或座机号码（xxx-xxxxxxx）！',
-              type: 'warning'
-            }); 
-        }else if(value.charAt(0)==1 &&value.charAt(1)*1<3 &&value.charAt(1)!='' ){
-          this.$message({
-               message:'请输入正确的电话号码或座机号码（xxx-xxxxxxx）！',
-                type: 'warning'
-              }); 
-        }
+//     //     console.log(value.charAt(1)*1 )
+// // console.log('座机')
+// if( value.charAt(0)!=1){
+// if(!this.landLinePhoneLength.test(value)){
+//   console.log( "landline")
+  
+//   this.$message({
+//               message:'请输入正确的电话号码或座机号码（xxx-xxxxxxx）！',
+//               type: 'warning'
+//             }); 
+// }
+// }
+
+//     else if(value.charAt(0)==1 &&value.charAt(1)*1<3 &&value.charAt(1)!=''){
+
+//       // if( )
+//           this.$message({
+//                message:'请输入正确的电话号码或座机号码（xxx-xxxxxxx）！',
+//                 type: 'warning'
+//               }); 
+//         }
+// else if(value.charAt(0)==1){
+//   console.log( "tel")
+//   if(value.length==11){
+// if( !this.mobilePhone.test(value)){
+//     this.$message({
+//               message:'请输入正确的电话号码或座机号码（xxx-xxxxxxx）！',
+//               type: 'warning'
+//             }); 
+//   }
+//   }
+  
+// }
+ 
+    //  if(value.charAt(0)!=1 &&value.charAt(0)!=0&&value!=''){
+    //    console.log('进入01判断')
+    //       this.$message({
+    //           message:'请输入正确的电话号码或座机号码（xxx-xxxxxxx）！',
+    //           type: 'warning'
+    //         }); 
+    //     }
+    // else if(value.charAt(0)==1 &&value.charAt(1)*1<3 &&value.charAt(1)!=''&&this.addTelNum.length ==11 ){
+    //       this.$message({
+    //            message:'请输入正确的电话号码或座机号码（xxx-xxxxxxx）！',
+    //             type: 'warning'
+    //           }); 
+    //     }
         this.active = false;
       }
     },
@@ -714,7 +833,131 @@ export default {
         this.mobileLoading = false;
         console.log(res);
         //  历史table数据
-        this.listData = res.data;
+        //this.listData = res.data;
+        if(res.statusCode == 200){
+          this.listData = res.data.page;
+          if(res.data.message){
+            this.hisShow = true;
+            this.newList = res.data.message;
+            this.source = this.newList.source;
+            this.answer= this.newList.answer;  
+            this.checkStage= this.newList.checkStage;  
+            this.sourceDesc= this.newList.sourceDesc;  
+            this.thirdResult= this.newList.thirdResult;  
+            this.threeQueries= this.newList.threeQueries;  
+            this.threeQueriestxt= this.newList.threeQueriestxt;  
+            this.mobilepayment= this.newList.mobilepayment;  
+            this.mobilepaymenttxt= this.newList.mobilepaymenttxt;  
+            this.issameFam= this.newList.issameFam; 
+            this.issameFamtxt= this.newList.issameFamtxt; 
+            this.relBorrower= this.newList.relBorrower;  
+            this.relBorrowertxt= this.newList.relBorrowertxt;  
+            this.checkWork= this.newList.checkWork; 
+            this.checkWorktxt= this.newList.checkWorktxt;  
+            this.maritalStatus= this.newList.maritalStatus;  
+            this.maritalStatustxt= this.newList.maritalStatustxt;  
+            this.checkAddr= this.newList.checkAddr;  
+            this.checkAddrtxt= this.newList.checkAddrtxt;  
+            this.checkEstate= this.newList.checkEstate;  
+            this.checkEstatetxt= this.newList.checkEstatetxt;  
+            this.otherIncome= this.newList.otherIncome;  
+            this.otherIncometxt= this.newList.otherIncometxt;  
+            this.conclusion= this.newList.conclusion;
+            //住址电话
+            this.recentLargespend= this.newList.recentLargespend;
+            this.recentlArgespendInfo= this.newList.recentlArgespendInfo;
+            this.parents= this.newList.parents;
+            this.brothertxt= this.newList.brothertxt;
+            this.expenses= this.newList.expenses;
+            this.expensestxt= this.newList.expensestxt;
+            this.checkHometel= this.newList.checkHometel;
+            this.checkHometeltxt= this.newList.checkHometeltxt;
+            this.hobbyandBehave= this.newList.hobbyandBehave;
+            //单位电话
+            this.phone= this.newList.phone;
+            this.phonetxt= this.newList.phonetxt;
+            this.answerIdentity= this.newList.answerIdentity;
+            this.answertxt= this.newList.answertxt;
+            this.company= this.newList.company;
+            this.checkTime= this.newList.checkTime;
+            this.checkTimetxt= this.newList.checkTimetxt;
+            this.checkIncome= this.newList.checkIncome;
+            this.checkIncometxt= this.newList.checkIncometxt;
+            this.employmentmode= this.newList.employmentmode;
+            this.payrollSituation= this.newList.payrollSituation;
+            this.payrollSituationtxt= this.newList.payrollSituationtxt;
+            this.pensionInsurance= this.newList.pensionInsurance;
+            this.housingFund= this.newList.housingFund;
+            this.jobref1= this.newList.jobref1;
+            this.jobref2= this.newList.jobref2;
+            //其他联系人
+            this.contactfre= this.newList.contactfre;
+            //工作证明人
+            this.checkJob= this.newList.checkJob;
+            this.checkJobtxt= this.newList.checkJobtxt;
+          }else{
+            this.newList = '';
+            this.source ='';
+            this.answer= '';  
+            this.checkStage= '';  
+            this.sourceDesc= '';  
+            this.thirdResult= '';   
+            this.threeQueries= '';   
+            this.threeQueriestxt= ''; 
+            this.mobilepayment= ''; 
+            this.mobilepaymenttxt= '';   
+            this.issameFam= '';  
+            this.issameFamtxt= '';  
+            this.relBorrower= '';  
+            this.relBorrowertxt= '';   
+            this.checkWork= '';  
+            this.checkWorktxt= '';   
+            this.maritalStatus= '';  
+            this.maritalStatustxt= '';   
+            this.checkAddr= '';   
+            this.checkAddrtxt= '';   
+            this.checkEstate= ''; 
+            this.checkEstatetxt= '';   
+            this.otherIncome= '';   
+            this.otherIncometxt= '';   
+            this.conclusion= ''; 
+            //住址电话
+            this.recentLargespend= '';
+            this.recentlArgespendInfo= '';
+            this.parents= '';
+            this.brothertxt= '';
+            this.expenses= '';
+            this.expensestxt= '';
+            this.checkHometel= '';
+            this.checkHometeltxt= '';
+            this.hobbyandBehave= '';
+            //单位电话
+            this.phone= '';
+            this.phonetxt= '';
+            this.answerIdentity= '';
+            this.answertxt= '';
+            this.company= '';
+            this.checkTime= '';
+            this.checkTimetxt= '';
+            this.checkIncome= '';
+            this.checkIncometxt= '';
+            this.employmentmode= '';
+            this.payrollSituation= '';
+            this.payrollSituationtxt= '';
+            this.pensionInsurance= '';
+            this.housingFund= '';
+            this.jobref1= '';
+            this.jobref2= '';
+            //其他联系人
+            this.contactfre= '';
+            //工作证明人
+            this.checkJob= '';
+            this.checkJobtxt= '';
+          }
+          
+          
+        }
+        console.log(this.newList);
       })
     },
     // queryHisLog() {
@@ -836,6 +1079,7 @@ export default {
         phoneType: this.phoneType
       }).then(res => {
         console.log(res);
+        this.newList = '';
         this.mobileData = res.data;
         if (res.statusCode == '200')
           // 直接处理 显示  历史
@@ -850,6 +1094,7 @@ export default {
         phoneType: this.phoneType
       }).then(res => {
         console.log(res);
+        this.newList = '';
         this.comData = res.data;
         if (res.statusCode == '200')
           // 直接处理 显示  历史
@@ -863,6 +1108,7 @@ export default {
         phoneType: this.phoneType
       }).then(res => {
         console.log(res);
+        this.newList = '';
         this.familyData = res.data;
         if (res.statusCode == '200')
           // 直接处理 显示  历史
@@ -877,6 +1123,7 @@ export default {
         phoneType: this.phoneType
       }).then(res => {
         console.log(res);
+        this.newList = '';
         this.hurryData = res.data;
         if (res.statusCode == '200')
           // 直接处理 显示  历史
@@ -890,6 +1137,7 @@ export default {
         phoneType: this.phoneType
       }).then(res => {
         console.log(res);
+        this.newList = '';
         this.workData = res.data;
         if (res.statusCode == '200')
           // 直接处理 显示  历史
@@ -899,7 +1147,44 @@ export default {
     // 添加 电话 弹窗, 点击关闭的事件   无效?
     close() {
       console.log('点击了添加电话关闭按钮');
-    }
+    },
+    /*onSourceChange(val){
+        this.source=val;//④外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
+    },
+    aaa(val){
+        this.source=val;//④外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
+    },
+    onSourceDescChange(val){
+        this.sourceDesc=val;//④外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
+    },
+    onAnswerChange(val){
+        this.answer=val;//④外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
+    },
+    onCheckStageChange(val){
+        this.checkStage=val;//④外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
+    },
+    onAnswerIdentityChange(val){
+        this.answerIdentity=val;//④外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
+    },
+    onAnswertxtChange(val){
+        this.answertxt=val;//④外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
+    },
+    onCheckJobChange(val){
+        this.checkJob=val;//④外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
+    },
+    onCheckJobtxtChange(val){
+        this.checkJobtxt=val;//④外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
+    },
+    onMobilepaymentChange(val){
+        this.mobilepayment=val;//④外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
+    },
+    onMobilepaymenttxtChange(val){
+        this.mobilepaymenttxt=val;//④外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
+    },
+    onConclusionChange(val){
+        this.conclusion=val;//④外层调用组件方注册变更方法，将组件内的数据变更，同步到组件外的数据状态中
+    },*/
+
   },
   components: {
     AddressForm,

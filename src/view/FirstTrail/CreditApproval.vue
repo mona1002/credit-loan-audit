@@ -585,6 +585,7 @@
         creditScore: '', // 单独处理的评分
         fbalance: '', // 核实每月可接受最高还款额
         fbalance2: '', // 
+        fbalance2Num:Number,
         hangOut: false,
         loadsitu: false,
         adbtn: '确定',
@@ -667,6 +668,11 @@
         isLoading: false, // 审批按钮 是否加载状态
         loadingTitle: '提交', // 默认btn title
         shenPiBtnShow: false, // 初审 审批按钮  BX21
+        debtRate:Number,//产品负债率
+        flowRoleCode:'',//	流程角色code
+        maxAuditAmt:Number,//流程角色-最高审批金额
+        ploanAmtNum:Number,//批准金额number类型
+        params:'',
       }
     },
     mounted() {
@@ -696,6 +702,7 @@
 
       } else if (this.judgeFlag == '02') { // 终审取终审  taskId
         this.FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
+        this.flowRoleCode= this.FtaskInWaitting.flowRoleCode;//	流程角色code
         // 挂起 任务id
         this.taskId = this.FtaskInWaitting.taskId;
         // 流程 实例id
@@ -703,6 +710,7 @@
         // 任务状态
         this.taskStatus = JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskStatus;
         this.taskName = this.FtaskInWaitting.taskName;
+        this.findSmFlowRole();
         // if (this.taskName == "creditApp_finalTrial_one") {
         //   this.nodeName = '终审一级审批';
         // } else if (this.taskName == "creditApp_finalTrial_two") {
@@ -816,6 +824,20 @@
       console.log('applyId : ' + this.applyId)
     },
     methods: {
+      findSmFlowRole(){//信审审批-8.获取流程角色信息
+        this.get("/smFlowRoleAction/findSmFlowRole", {
+          flowRoleCode:  this.flowRoleCode,
+        }).then(res => {
+          if (res.statusCode == 200) {
+            console.log(res.data)
+            console.log(res.data.maxAuditAmt)
+            this.maxAuditAmt=res.data.maxAuditAmt;
+            // this.tableData = res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      },
       hangOoutBtn() {
         this.loadsitu = false;
         this.adbtn = '确定';
@@ -1048,7 +1070,7 @@
                   this.quotaData = res.data;
                   // 单独处理 评分   =>  "评分:51.6"
                   this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
-                  this.fbalance = res.data.fbalance;
+                 this.fbalance = res.data.fbalance;
                   if (res.data.creditScore.split(',')[1]) {
                     this.fbalance2 = Number(res.data.fbalance).toLocaleString() + res.data.creditScore.split(
                       ',')[1];
@@ -1058,6 +1080,63 @@
                 }
               });
               this.getProducts();
+              //带回回退的信息
+              this.post('/creauditOpinion/queryCreauditOpinionObj', {
+                applyId: this.applyId
+              }).then(res => {
+                if (res.statusCode == '200') {
+                  if(res.data){
+                    this.verIncome = Number(res.data.verIncome).toLocaleString() + '.00';//月核实收入[元];
+                    this.verIncome2 = Number(this.verIncome.split('.')[0].replace(/,/g, '')) +
+                  Number('0.' + this.verIncome.split('.')[1]);
+                    console.log( this.verIncome);
+                    this.proId = res.data.proId;//批准产品ID;
+                    this.ploanTerm = res.data.ploanTerm;//批准期限[月];
+                    this.ploanAmt = Number(res.data.ploanAmt).toLocaleString() + '.00';/*this.moneyBlur(res.data.ploanAmt,'ploanAmt')*/;//批准金额[元];
+                    this.caculData.appmult = res.data.appmult;//审批倍数;
+                    this.caculData.eachTermamt = res.data.eachTermamt;//月还款额[元];
+                    this.caculData.inteDebitrate = res.data.inteDebitrate;//内部负债率;
+                    this.caculData.creditDebitRate = res.data.creditDebitRate;//总信用负债率;
+                    this.caculData.totalRate  = res.data.totalRate;//总负债率;
+                    this.appConclusion  = res.data.appConclusion;//意见说明;
+                    if(res.data.proId){
+                      //获取产品列表
+                      this.post('/credit/product').then(ress => {
+                        if (ress.statusCode == '200') {
+                          this.products = ress.data;
+                          //console.log(this.products.length);
+                          for (var i = 0; i < this.products.length; i++) {
+                            if (res.data.proId == this.products[i].id) {
+                              this.proName = this.products[i].proName;
+                              // 最大
+                              this.maxAmounnt = this.products[i].maxAmounnt;
+                              // 最小
+                              this.minAmount = this.products[i].minAmount;
+                            }
+                          };
+                        }
+                      });
+                      //获取批准期限
+                      this.post('/credit/ploanTermByPro?proId=' + res.data.proId).then(resp => {
+                        //console.log(res.data);
+                        if (resp.statusCode == '200')
+                          this.ploanTerms = resp.data;
+                          for(var j=0;j<this.ploanTerms.length;j++){
+                            if(this.ploanTerms[j].appDuration==this.ploanTerm){
+                              this.loanRateYr =this.ploanTerms[j].loanRateYr
+                              this.repayWay =this.ploanTerms[j].repayWay
+                              this.synthesisRateM =this.ploanTerms[j].synthesisRateM
+                              break;
+                            }
+                          }
+                          //console.log( this.loanRateYr+"%%%%%%%"+this.repayWay+"%%%%%%%"+this.synthesisRateM);
+                      });
+                    }
+                  }else{
+                    return;
+                  }
+                }
+              });
             } else if (this.judgeFlag == '02') {
               this.queryCreauditOpinionObj();
             }
@@ -1099,15 +1178,14 @@
             // this.$router.push('AntiApplyEdit')
             console.log(this.applyId)
             // var routeParms = 'id=' + this.applyId + ';flag=start;busiState=30'
-            this.$router.push({
-              name: 'AntiApplyEditf',
-              params: {
+            this.$router.push({name: 'AntiApplyEditf'});
+            this.params={
                 id: this.applyId,
                 flag: 'start',
                 busiState: '30',
-                  wayOf: '00' //审批
+                channel:'00'
               }
-            });
+            localStorage.setItem("AntiApplyParams",JSON.stringify(this.params));
             // localStorage.setItem("antiApplyFlag", JSON.stringify(routeParms));
             // this.$store.dispatch('addVisitedViews', {
             //   name: '反欺诈申请',
@@ -1245,6 +1323,7 @@
                       this.maxAmounnt = this.products[i].maxAmounnt;
                       // 最小
                       this.minAmount = this.products[i].minAmount;
+                      this.debtRate= this.products[i].debtRate;//产品负债率
                       //this.calculateByAuditInfo();
                     }
                   };
@@ -1252,13 +1331,18 @@
 
                 //根据产品id获取批准期限
                 this.ploanTerms = res.data.ploanTermByPo;
-                //console.log(this.ploanTerms);
-
+                // console.log(this.ploanTerms.length)
+                // console.log(this.ploanTerm)
+                for(var j=0;j<this.ploanTerms.length;j++){
+                  if(this.ploanTerms[j].appDuration==this.ploanTerm){
+                    this.loanRateYr =this.ploanTerms[j].loanRateYr
+                    this.repayWay =this.ploanTerms[j].repayWay
+                    this.synthesisRateM =this.ploanTerms[j].synthesisRateM
+                    break;
+                  }
+                }
               }
-
             })
-
-
           }
         })
       },
@@ -1437,6 +1521,25 @@
               this.ploanAmtError = true;
               return;
             }
+            // 批准金额 ploanAmt
+            if (this.ploanAmt) {
+                var regs=/\,/g;
+                var newPloanAmt = this.ploanAmt.replace(regs,'')*1;
+                //this.ploanAmt=this.ploanAmt.replace(regs,'')*1;
+                //console.log(this.newPloanAmt);
+                //console.log(typeof(this.newPloanAmt));
+                //return;
+                //this.ploanAmt = Number(this.ploanAmt.split('.')[0].replace(/,/g, '')) +
+                  //Number('0.' + this.ploanAmt.split('.')[1]);
+               if(newPloanAmt > this.maxAuditAmt && this.opinionFlag=='00'){
+                  this.$message({
+                  message: "提示：大于当前审批人最高审批金额权限，请选择请求更高级审批!",
+                  type: 'warning'
+                })
+                return;
+               };
+               //this.ploanAmt=Number(this.ploanAmt).toLocaleString() + '.00';
+            };
             // 意见说明 appConclusion
             if (!this.appConclusion) {
               this.$message({
@@ -1564,6 +1667,7 @@
      
         let verIncome2 = 0;
         let ploanAmt2 = 0;
+
         if (/,/.test(this.verIncome))
           verIncome2 = Number(this.verIncome.replace(/,/g, ''));
         else
@@ -1575,7 +1679,12 @@
           //console.log('==========================================')
           ploanAmt2 = Number(this.ploanAmt)
         }
-        console.log(this.applyId)
+        /*console.log('4444444444444444444');
+        console.log(this.ploanAmt);
+        console.log(this.ploanAmt2);
+        console.log(this.applyId);
+        alert('9999999999999999999999');
+        return;*/
         this.post('/creauditOpinion/add', {
           // this.post("http://10.1.26.47:8080/riskManagement/creauditOpinion/add", {
           applyId: this.applyId,
@@ -1839,7 +1948,7 @@
       proSlelecChange: function (val) {
         this.ploanTerm = '';
         this.ploanAmt = '';
-
+        this.debtRate=val.debtRate;//产品负债率
         //console.log(val);
         // id val.id  产品id
         this.proId = val.id;
@@ -1860,6 +1969,7 @@
           //console.log(res.data);
           if (res.statusCode == '200')
             this.ploanTerms = res.data;
+            console.log(this.ploanTerms)
         })
 
       },
@@ -1891,8 +2001,37 @@
           loanRateYr: this.loanRateYr, // 借款利率
         }).then(res => {
           // 审批结论数据
-          if (res.statusCode == '200')
-            this.caculData = res.data;
+          if (res.statusCode == '200'){
+             this.caculData = res.data;
+            console.log('总负债率：'+(res.data.totalRate*100),res.data.totalRate*100)
+            console.log('内部负债率：'+(res.data.inteDebitrate*100),res.data.inteDebitrate*100)
+            console.log('月还款额:'+res.data.eachTermamt,res.data.eachTermamt)
+            console.log(this.fbalance2)
+            console.log('可接受最高每期还款额:'+this.fbalance,this.fbalance)
+            console.log('产品负债率：'+this.debtRate,this.debtRate)
+            console.log('流程角色最高审批金额:'+this.maxAuditAmt,this.maxAuditAmt)
+           console.log('同意:'+this.opinionFlag,this.opinionFlag)
+           console.log('终审'+this.judgeFlag,this.judgeFlag )
+            if(res.data.eachTermamt>this.fbalance){// fbalance 可接受最高每期还款额
+              this.ploanAmt=''//批准金额
+              this.$message.error('月还款额不能大于可接受最高每期还款额，请重新输入！')
+              return
+            }else if(res.data.totalRate*100>this.debtRate||res.data.inteDebitrate*100>this.debtRate ){ //产品负债率:debtRate  内部负债率:inteDebitrate  总负债率：totalRate
+                this.ploanAmt=''//批准金额
+              this.$message.error('内部负载率/总负债率超过该产品对应的最大负债率！')
+              return
+            }
+            if(this.opinionFlag=='00'&&this.judgeFlag == '02'){//选中同意
+            // this.ploanAmtNum = Number(this.ploanAmt.split('.')[0].replace(/,/g, ''));//批准金额 number类型：ploanAmtNum            
+            this.ploanAmt.indexOf(',')!=-1?  this.ploanAmtNum = this.ploanAmt.replace(/,/g, '')*1:this.ploanAmtNum = this.ploanAmt*1 ;
+             console.log('批准金额:'+this.ploanAmtNum,this.ploanAmtNum )
+            if(this.ploanAmtNum>this.maxAuditAmt ){//流程角色最高审批金额:maxAuditAmt
+                this.ploanAmt=''//批准金额
+              this.$message.error('大于当前审批人最高审批金额权限，请选择请求更高级审批！')
+              return 
+            }
+            }
+          }
         })
       },
       // 月核实收入[元]
@@ -1909,6 +2048,7 @@
         }
         // 有数据
         if (val) {
+          console.log('000000');
           if (flag == 'verIncome') {
             //console.log(this.verIncome);
             if (/,/.test(val)) {
@@ -1938,6 +2078,7 @@
                 this.verIncome = Number(val).toLocaleString() + '.00';
               }
             }
+             this.calculateByAuditInfo();
           } else if (flag == 'ploanAmt') {
             if (/,/.test(val)) {
               if (/./.test(val)) {
@@ -1996,9 +2137,12 @@
               this.ploanAmt2 = '';
               return;
             }
+            //console.log( this.loanRateYr, this.repayWay ,this.synthesisRateM)
+            console.log( this.verIncome+"*****"+ this.proId+"*****"+this.ploanTerm+"*****"+this.ploanAmt.length);
             if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length >
               0 &&
               this.loanRateYr && this.repayWay && this.synthesisRateM) {
+              //alert('oooo');
               this.calculateByAuditInfo();
             }
           } else {

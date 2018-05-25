@@ -1,7 +1,7 @@
 <template>
   <div class="AntiCaseNum IntegratedQuery">
     <!-- 质检复议流程-区域经理页面- 区域经理任务列表  +   -->
-     <!-- 质检复议流程-合规经理页面- 合规经理任务列表 -->
+    <!-- 质检复议流程-合规经理页面- 合规经理任务列表 -->
     <myHead></myHead>
     <div class="content">
       <div class="search">
@@ -37,7 +37,7 @@
       </div>
       <div class="table_wrap">
         <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" height="100%" @row-click="handleCurrentChange"          border>
+        <el-table :data="tableData" style="width: 100%" height="100%" @row-click="handleCurrentChange" border>
           <!-- <el-table-column type="selection" align="center" width="55"> </el-table-column> -->
           <el-table-column type="index" align='center' label=序号 width="55">
           </el-table-column>
@@ -90,7 +90,7 @@
   export default {
     data() {
       return {
-        taskNodeName:'',
+        taskNodeName: '',
         query: {
           id: '',
           ApplyId: "",
@@ -101,7 +101,7 @@
         },
         userInf: null,
         // tableData: [],
-         tableData: [{
+        tableData: [{
           checkResult: '01',
           isSecondIns: "1",
           reconType: '02',
@@ -145,7 +145,7 @@
         reVal: '$1********$2',
         telVal: '$1****',
         params: {
-                   processTemplateId: '',
+          processTemplateId: '',
           taskNodeName: '',
           taskStatus: '',
           applySubNo: '',
@@ -174,19 +174,19 @@
 
       handleCurrentChange(val) {
         console.log(val)
-        console.log( this.params.taskNodeName)
-        this.params.taskNodeName='checkApp_compliance_manager';
+        console.log(this.params.taskNodeName)
+        this.params.taskNodeName = 'checkApp_compliance_manager';
         this.query.reconType = val.reconType;
         this.query.id = val.id;
         this.query.ApplyId = val.applyId;
         this.query.taskId = val.taskId;
         this.query.processInstanceId = val.processInstanceId;
-        if(   this.params.taskNodeName=='checkApp_regional_manager'){ // 区域
-        localStorage.setItem("QTAreaTW", JSON.stringify(this.query));
-        }else if( this.params.taskNodeName=='checkApp_compliance_manager' ){ // 合规
-        localStorage.setItem("QTComplianceTW", JSON.stringify(this.query));
+        if (this.params.taskNodeName == 'checkApp_regional_manager') { // 区域
+          localStorage.setItem("QTAreaTW", JSON.stringify(this.query));
+        } else if (this.params.taskNodeName == 'checkApp_compliance_manager') { // 合规
+          localStorage.setItem("QTComplianceTW", JSON.stringify(this.query));
         }
-        this.$router.push('/MatchingInfQT?'+ this.params.taskNodeName);
+        this.$router.push('/MatchingInfQT?' + this.params.taskNodeName);
         // this.params.pageNum = val;
         // this.inquire(this.params);
       },
@@ -194,11 +194,11 @@
         this.params.applySubNo = '';
         this.params.custName_la = '';
         this.params.certCode = '';
-          this.inquire(this.params);        
+        this.inquire(this.params);
       },
       Rsearch() {
         // this.params.pageNum = this.currentPage = 1;
-          this.inquire(this.params);
+        this.inquire(this.params);
       },
       inquire(pam) {
         // 基础接口-综合查询
@@ -219,7 +219,7 @@
         })
       },
     },
-        watch: {
+    watch: {
       '$route' (to, from) {
         if (to.fullPath !== from.fullPath) {
           //  this.inquire(this.params);

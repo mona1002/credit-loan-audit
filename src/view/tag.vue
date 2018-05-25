@@ -474,13 +474,13 @@
         // this.$route.meta.refresh = false;
         // console.log(this.$router)
         // console.log(this.router)         
-        this.MatchFlag.MatchFlag = tg.MatchFlag;
         localStorage.setItem("MatchFlag", JSON.stringify(this.MatchFlag));
         if (tg.flag != '' || tg.flag != undefined || tg.flag != 'undefined') {
           this.judge.flag = tg.flag;
           localStorage.setItem("judge", JSON.stringify(this.judge));
         }
-        console.log(this.MatchFlag)
+           this.MatchFlag.MatchFlag=tg.matchflag;
+           localStorage.setItem("MatchFlag", JSON.stringify(this.MatchFlag));
       },
     },
     // beforeRouteLeave(to, from, next) {

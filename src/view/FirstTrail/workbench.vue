@@ -292,6 +292,7 @@
           orgId: response.data.orgId,
           userName: response.data.userName,
           roleCodesList: response.data.roleCodesList, // 初审拒绝按钮
+          flowRoleCodesList:response.data.flowRoleCodesList
         }
         localStorage.setItem("userInf", JSON.stringify(this.userInf));
         this.post("/workFlowTaskQuery/getTaskProfile", {

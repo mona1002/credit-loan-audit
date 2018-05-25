@@ -14,6 +14,7 @@ let state = {
     name: '工作台',
     path: '/',
     flag: '',
+    matchflag:'',
     params: '',
     matchflag:'',
     StatefullPath: "/"

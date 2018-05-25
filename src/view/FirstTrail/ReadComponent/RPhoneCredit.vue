@@ -653,7 +653,7 @@ export default {
         this.mobileLoading = false;
         console.log(res);
         //  历史table数据
-        this.listData = res.data;
+        this.listData = res.data.page;
       })
     },
     // queryHisLog() {

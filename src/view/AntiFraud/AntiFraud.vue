@@ -150,7 +150,7 @@
 
         applySubno: '', // 进件编号
         applyCustName: '', // 客户名称
-        applyCustNo: '', // 客户编号
+        applyCustNo: '', // 证件号码
 
         processTemplateId: '',
         taskNodeName: '',
@@ -214,7 +214,7 @@
           fraudApplyInfo: {
             applySubno: this.applySubno, // 进件编号
             applyCustName: this.applyCustName, // 客户名称
-            applyCustNo: this.applyCustNo, // 客户编号
+            certCode: this.applyCustNo, // 证件号码
             applyCode: this.userCode
           }
         }).then(res => {

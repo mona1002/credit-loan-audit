@@ -170,6 +170,11 @@
               }
             }
             this.tableData = res.data;
+            for(var i=0;i<res.data.length;i++){
+                var regs = /\d{4}-\d{1,2}-\d{1,2}/g;
+                //this.appDate = res.data.recordList[i].appDate.replace(regs,'');
+                this.tableData[i].appDate = regs.exec(res.data[i].appDate)[0];
+              }
           } else {
             this.$message.error(res.msg);
           }
