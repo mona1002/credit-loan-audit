@@ -28,7 +28,6 @@ new Vue({
 // 日期过滤器
 Vue.filter('dateFilter',function(value){
 	if(!value) return ''
-	console.log(value);
 	// console.log(new Date(value).toLocaleString().replace(/\//g,'-').match(/\d{4}\-\d{2}\-\d{1,2}/)[0])
 	// return new Date(value).toLocaleString().replace(/\//g,'-').match(/\d{4}\-\d{1,2}\-\d{1,2}/)[0]
 	return String(new Date(value).getFullYear()) + '-' + String(new Date(value).getMonth()+1)  + '-' + String(new Date(value).getDate());
