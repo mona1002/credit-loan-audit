@@ -75,9 +75,6 @@ import aHistoryTask from '../view/TaskManagement/antiTaskManagment/aHistoryTask.
 import TaskManagementSplit from '../view/TaskManagement/reconsider/TaskManagementSplit.vue' //
 import doTheTask from '../view/TaskManagement/examineAndApprove/doTheTask.vue' //审批任务管理——已办任务
 import historicalTask from '../view/TaskManagement/examineAndApprove/historicalTask.vue' //审批任务管理——历史任务
-//  -----------------------质检----------------------
-import tb from '../view/QualityTesting/roles/tb.vue'
-import tes from '../view/QualityTesting/roles/tes.vue'
 //  -----------------------大数据风控+社保公积金----------------------
 import PneCtrl from '../view/SocialSeAndPneCtrl/PneCtrl.vue' //大数据
 import SocialSe from '../view/SocialSeAndPneCtrl/SocialSe.vue' //社保公积金
@@ -90,7 +87,6 @@ import IntegratedQuery from '../view/QualityTesting/FunctionalityPages/Integrate
 import commissioner from '../view/QualityTesting/QTProcess/commissioner/commissioner.vue' //质检专员任务列表
 import manager from '../view/QualityTesting/QTProcess/manager/manager.vue' //质检主管页面
 import regularQT from '../view/QualityTesting/QTProcess/components/regularQT.vue' //首次常规质检
-import regularANDspecialQT from '../view/QualityTesting/QTProcess/components/regularANDspecialQT.vue' //常规质检又抽中专纵向质检
 import regularConfig from '../view/QualityTesting/FunctionalityPages/regularConfig.vue' //常规抽单配置功能
 import specialConfig from '../view/QualityTesting/FunctionalityPages/specialConfig.vue' //专纵项抽单配置功能
 import batchApportion from '../view/QualityTesting/FunctionalityPages/batchApportion.vue' //质检任务批量转分派功能
@@ -411,14 +407,6 @@ const routes = [{
   },
   // ---------------质检--------------------
   {
-    path: '/tb',
-    component: tb
-  },
-  {
-    path: '/tes',
-    component: tes
-  },
-  {
     path: '/IntegratedQuery',
     component: IntegratedQuery,
     // name:IntegratedQuery 
@@ -436,10 +424,7 @@ const routes = [{
     path: '/regularQT',
     component: regularQT,
     name: 'regularQT'
-  }, {
-    path: '/regularANDspecialQT',
-    component: regularANDspecialQT
-  }, {
+  },{
     path: '/regularConfig',
     component: regularConfig
   }, {
