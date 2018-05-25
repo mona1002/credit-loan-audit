@@ -146,7 +146,7 @@
         applyCustId: '', // 客户id
         applyCustName: '', // 客户姓名
         applyCustNo: '', // 客户编号
-        channel: '00', // 渠道
+        channel: '', // 渠道
         certCode: '', // 证件号码
         proName: '', // 产品名称
         mobile: '', // 移动电话
@@ -158,9 +158,7 @@
         busiState: '', // 状态
         currentTemplateId: '', // 复议模版id
         taskName: '',
-        routeId: '',
-        routeFlag: '',
-        routeBusiState: ''
+        AntiApplyParams:''
       }
     },
     mounted() {
@@ -172,6 +170,16 @@
       // 先判断是 初审 终审  /  专员  主管
       var judgeFlag = JSON.parse(localStorage.getItem('judge'));
       this.antiFlag = judgeFlag.flag;
+
+      this.AntiApplyParams = JSON.parse(localStorage.getItem('AntiApplyParams'));
+      // 获取到 id
+      this.id = this.AntiApplyParams.id;
+      this.flag = this.AntiApplyParams.flag;
+      this.channel = this.AntiApplyParams.channel;
+      this.busiState = this.AntiApplyParams.busiState;
+      if (this.flag == 'start' || this.flag == 'fuyi') {
+        this.getFraudApplyInfo();
+      }
 
       // 初审 终审 取 applyId
       // if (this.antiFlag == '01' || this.antiFlag == '02') {
@@ -240,19 +248,21 @@ console.log(  this.antiFlag  )
 
       //  JSON.stringify($scope.addalerts);
       // 获取到 id
-      this.id = this.$route.params.id || this.routeId;
+      //this.id = this.$route.params.id || this.routeId;
       /* 标志  
        start 发起反欺诈
        edit  编辑
        add   添加 
        */
-      this.flag = this.$route.params.flag || this.routeFlag;
+      //this.flag = this.$route.params.flag || this.routeFlag;
+
+      //this.channel = this.$route.params.channel;
       // console.log(this.flag);
       // 拿到状态
-      this.busiState = this.$route.params.busiState || this.routeBusiState;
-      if (this.flag == 'start' || this.flag == 'fuyi') {
-        this.getFraudApplyInfo();
-      }
+      // this.busiState = this.$route.params.busiState || this.routeBusiState;
+      // if (this.flag == 'start' || this.flag == 'fuyi') {
+      //   this.getFraudApplyInfo();
+      // }
       //  else if (this.flag == 'edit' || this.flag == 'add') {
       //   this.getFraudApplyInfoWithOpinionById();
       // }
