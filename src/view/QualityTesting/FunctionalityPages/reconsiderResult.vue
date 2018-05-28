@@ -27,7 +27,7 @@
             <p>
               <label> 质检状态</label>
               <el-select v-model="params.checkState" placeholder="请选择">
-                <el-option v-for="item in QTSituation" :key="item.value" :label="item.label" :value="item.value">
+                <el-option v-for="item in QTSituation" :key="item.code" :label="item.name" :value="item.code">
                 </el-option>
               </el-select>
             </p>
@@ -52,19 +52,6 @@
               </el-date-picker>
             </p>
             <p>
-              <label> 复议状态</label>
-              <el-select v-model="params.reconState" placeholder="请选择">
-                <el-option v-for="item in ReconsiderType" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-            </p>
-          </li>
-          <li>
-            <p>
-            </p>
-            <p>
-            </p>
-            <p class="btn_wrap">
               <el-button class="btn" type="primary" style="marginLeft:228px" @click="Rsearch">查询</el-button>
               <el-button class="btn" type="primary" @click="Rreset">重置</el-button>
             </p>
@@ -126,78 +113,25 @@
             pageNum: 1, //当前页
             pageSize: 10, //每页的显示数量
           },
-          applySubNo: '',
-          custName: '',
-          proCode: '',
-          checkState: '',
-          auditNamec: '',
-          auditNamez: '',
-          auditDatez: '',
-          insDateBegin: '',
-          insDateEnd: '',
-          reconState: ''
+          dataParam: {
+            applySubNo: '',
+            custName: '',
+            proCode: '',
+            checkState: '',
+            auditNamec: '',
+            auditNamez: '',
+            auditDatez: '',
+            insDateBegin: '',
+            insDateEnd: '',
+          }
         },
         QTtime: '',
         currentPage: 1, //分页选中页
         pageCount: 10, // 每页显示条数
-        RresetParams: {
-          pageParam: {
-            pageNum: 1, //当前页
-            pageSize: 10, //每页的显示数量
-          },
-          applySubNo: '',
-          custName: '',
-          proCode: '',
-          checkState: '',
-          auditNamec: '',
-          auditNamez: '',
-          auditDatez: '',
-          insDateBegin: '',
-          insDateEnd: '',
-          reconState: ''
-        },
         totalRecord: 0, //总条数
         ProductName: [], //产品名称
-        
-        // ProductName: [{ //产品名称
-        //   value: '选项1',
-        //   label: '黄金糕'
-        // }, {
-        //   value: '选项2',
-        //   label: '双皮奶'
-        // }],
-        QTSituation: [{ //质检状态
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
-        ReconsiderType: [{ //复议状态
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
+        QTSituation: [  ],//质检状态
+       
       }
     },
     methods: {
@@ -212,7 +146,15 @@
       },
 
       Rreset() {
-        this.params = this.RresetParams; //全部清空
+        this.params . dataParam. applySubNo= '';
+        this.params . dataParam. custName= '';
+        this.params . dataParam. proCode= '';
+        this.params . dataParam. checkState= '';
+        this.params . dataParam. auditNamec= '';
+        this.params . dataParam. auditNamez= '';
+        this.params . dataParam. auditDatez= '';
+        this.params . dataParam. insDateBegin= '';
+        this.params . dataParam. insDateEnd= '';
         this.inquire(this.params);
       },
       Rsearch() {
@@ -241,12 +183,21 @@
           }
         })
       },
-      products(){
-        			this.post("/credit/productAll").then(res => {
-					if(res.statusCode == 200){
-						this.ProductName = res.data;
-					}
-				});
+      products() {
+        this.post("/credit/productAll").then(res => {
+          if (res.statusCode == 200) {
+            this.ProductName = res.data;
+          }
+        });
+      },
+      getQTState(){//获取质检枚举
+        this.get("/system/getAllCheckState?"+Math.random()).then(res => {
+          if (res.statusCode == 200) {
+          this.QTSituation=res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
       },
       // 点击tab每一行数据切换 value 值
       handleCurrentChange(val) {
@@ -266,6 +217,8 @@
       //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
       //   this.params.pageNum = this.currentPage, //页数（第几页）
       this.inquire(this.params);
+      this.getQTState();
+      this.products();
       //  this.params.pageParam.pageNum = this.currentPage = 1;
       //     this.params.pageSize = this.pageCount, //页面显示行数
     },
@@ -283,7 +236,7 @@
     overflow-x: hidden;
     /* 统一导航 --去掉高度*/
     height: 100%;
-    min-width:1366px;
+    min-width: 1366px;
   }
 
   .AntiCaseNum label {
