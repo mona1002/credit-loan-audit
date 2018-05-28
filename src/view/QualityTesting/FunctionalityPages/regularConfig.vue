@@ -19,21 +19,29 @@
       </div>
       <div class="table_wrap">
         <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" height="100%" @row-dblclick="handleCurrentChange" border>
+        <el-table :data="tableData" style="width: 100%" height="100%" border>
           <el-table-column type="index" align='center' label=序号 width="55">
           </el-table-column>
-          <!-- drawSheetTypeTxt -->
           <el-table-column prop="drawSheetTypeTxt" label="抽单类型" align='center' min-width="180">
           </el-table-column>
           <el-table-column prop="recentDays" label="质检天数" align='center' min-width="120">
           </el-table-column>
-          <el-table-column prop="makeRatio" label="抽单比例[每人]" align='center' min-width="180">
+          <el-table-column label="抽单比例[每人]" align='center' min-width="180">
+            <template slot-scope='scope'>
+              <span>{{scope.row.makeRatio | percent}}</span>
+            </template>
           </el-table-column>
-          <el-table-column prop="passRatio" label="通过比例[每人]" align='center' min-width="130">
+          <el-table-column label="通过比例[每人]" align='center' min-width="130">
+            <template slot-scope='scope'>
+              <span>{{scope.row.passRatio | percent}}</span>
+            </template>
           </el-table-column>
           <el-table-column prop="minPassNum" label="通过件最低抽单件数[人·件]" align='center' min-width="130">
           </el-table-column>
           <el-table-column prop="refuseRatio" label="拒绝比例[每人]" align='center' min-width="180">
+            <template slot-scope='scope'>
+              <span> {{scope.row.refuseRatio | percent}}</span>
+            </template>
           </el-table-column>
           <el-table-column prop="minRefuseNum" label="拒绝件最低抽单件数[人·件]" align='center' min-width="120">
           </el-table-column>
@@ -43,6 +51,7 @@
             <template slot-scope='scope'>
               <span>{{scope.row.createTime | dateFilter}}</span>
             </template>
+            percent
           </el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
@@ -50,12 +59,6 @@
             </template>
           </el-table-column>
         </el-table>
-        <!-- 分页  -->
-        <!-- <div class="paging">
-          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
-            :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
-          </el-pagination>
-        </div> -->
       </div>
     </div>
     <!-- ==============================任务分配=================================== -->
@@ -272,12 +275,7 @@
           custName: '',
           certCode: '',
           mobile: '',
-          //   pageNum: '', //页数（第几页）
-          //   pageSize: '', //页面显示行数
         },
-        // currentPage: 1, //分页选中页
-        // pageCount: 10, // 每页显示条数
-        // totalRecord: 0, //总条数
         QTSituation: [{ //抽单类型
           value: '01',
           label: '熟练'
@@ -295,7 +293,6 @@
         // console.log(parseInt(val))
         // console.log(val === '')
         // console.log(val == null)
-        console.log(isNaN(val))
         val = val.replace(/\s/g, ''); //去空格，避免输入框出现NaN
         switch (el) {
           case '质检天数':
@@ -375,26 +372,22 @@
       },
       //  编辑按钮-弹出弹窗
       handleEdit(index, row) {
-        console.log(index, row);
         this.Edit = true;
         this.updateInf = row;
         this.loadsitu = false;
         this.adbtn = '确定';
       },
       addInf() { //添加 按钮弹窗
-        console.log('tianjia')
         this.add = true;
         this.loadsitu = false;
         this.adbtn = '确定';
       },
       apportion() { //分配 按钮弹窗
-        console.log('apportion')
         this.Confirm = true;
         this.loadsitu = false;
         this.adbtn = '确定';
       },
       canc() { //弹窗 取消按钮关闭
-        console.log('取消任务分配')
         this.Confirm = false;
         this.Edit = false;
       },
@@ -480,7 +473,6 @@
         this.Edit = false;
       },
       CFsave() { //任务分配
-        console.log('任务分配')
         this.loadsitu = true;
         this.adbtn = '保存中';
         // 生成 质检任务接口
@@ -498,29 +490,8 @@
         });
         this.Confirm = false;
       },
-      //   handleSizeChange(val) {
-      //     this.params.pageSize = val;
-      //     this.params.pageNum = 1;
-      //     // this.getInf(this.params);
-      //     this.inquire(this.params);
-      //   },
-
-      handleCurrentChange(val) {
-        // this.query.id = val.id;
-        // this.query.matchApplyId = val.applyId;
-        // localStorage.setItem("query", JSON.stringify(this.query));
-        // this.$router.push('/MatchingInfQuery');
-
-        // this.params.pageNum = val;
-        // this.inquire(this.params);
-      },
     },
     mounted() {
-      //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
-      //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
-      //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
-      //   this.params.pageNum = this.currentPage, //页数（第几页）
-      //     this.params.pageSize = this.pageCount, //页面显示行数
       this.addNew.creator = JSON.parse(localStorage.getItem('userInf')).userCode;
       this.getListInf(); //查询
       this.getSystemDate(); //调用系统时间

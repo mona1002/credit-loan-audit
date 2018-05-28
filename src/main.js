@@ -50,3 +50,6 @@ Vue.filter('formatAppmult',function(value){
 	if(!value) return ''
 	return Math.ceil(Number(value))
 })
+Vue.filter('percent',function(value){
+	return value!==''?value+'%':'';
+})
