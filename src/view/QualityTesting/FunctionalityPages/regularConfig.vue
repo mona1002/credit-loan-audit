@@ -67,7 +67,7 @@
       </span>
     </el-dialog>
     <!-- ==============================添加=================================== -->
-    <el-dialog title="质检规则新增" :modal="false" :visible.sync="add" width="890px">
+    <el-dialog title="质检规则新增" :modal="false" :visible.sync="add" width="920px">
       <div class="newContent">
         <ul>
           <li>
@@ -146,7 +146,7 @@
       </span>
     </el-dialog>
     <!-- ==============================编辑=================================== -->
-    <el-dialog title="质检规则编辑" :modal="false" :visible.sync="Edit" width="890px">
+    <el-dialog title="质检规则编辑" :modal="false" :visible.sync="Edit" width="920px">
       <div class="newContent">
         <ul>
           <li>
@@ -280,10 +280,10 @@
         // totalRecord: 0, //总条数
         QTSituation: [{ //抽单类型
           value: '01',
-          label: '熟人'
+          label: '熟练'
         }, {
           value: '02',
-          label: '生人'
+          label: '新人'
         }],
       }
     },
@@ -635,11 +635,11 @@
   }
 
   .newContent p:nth-of-type(odd) label {
-    width: 120px;
+    width: 130px;
   }
 
   .newContent p:nth-of-type(even) label {
-    width: 195px;
+    width: 210px;
   }
 
   .colorGray p label,
