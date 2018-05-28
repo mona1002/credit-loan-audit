@@ -48,8 +48,33 @@
               <aMAntiApplyInf v-if=" this.tabContent1==8">反欺诈结论</aMAntiApplyInf>
               <!-- <RFinanceInformation v-if=" this.tabContent1==9">财务信息</RFinanceInformation> -->
               <!-- <RprocessTrajectory v-if=" this.tabContent1==9">流程轨迹</RprocessTrajectory> -->
+              <div class='tab2_Content_show' v-if="this.RoleSHow='partOne'  ">
+                <!-- 专员部分 -->
+                <QTAprovalConclution v-if=" this.tabContent1==9 ">反欺诈审批结论轨迹 </QTAprovalConclution>
+                <RApprovalConclusion v-if=" this.tabContent1==10 ">审批结论轨迹</RApprovalConclusion>
+                <regularQT v-if=" this.tabContent1==11&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+                <QTResultCheck v-if=" this.tabContent1==11&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+              </div>
+                       <div class='tab2_Content_show' v-if="this.RoleSHow='partTwo'  ">
+              <!-- 主管部分 -->
+              <regularQT v-if=" this.tabContent1==9&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+              <QTResultCheck v-if=" this.tabContent1==9&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+
+            </div>
+                      <div class='tab2_Content_show' v-if="this.RoleSHow='parthrne'  ">
+              <!-- 质检部分 -->
               <QTAprovalConclution v-if=" this.tabContent1==9">反欺诈审批结论轨迹 </QTAprovalConclution>
               <RApprovalConclusion v-if=" this.tabContent1==10">审批结论轨迹</RApprovalConclusion>
+              <ComplianceProcess v-if=" this.tabContent1==11 && this.QTmark" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
+              <ReApply v-if=" this.tabContent1==12 && this.QTmark" :propReApply='ReApplyMark'>合规复议申请</ReApply>
+              <!-- <regularQT v-if=" this.tabContent1==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC' >质检结论</regularQT> -->
+              <regularQT v-if=" this.tabContent1==13&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+              <QTResultCheck v-if=" this.tabContent1==13&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+            </div>
+              <!-- <QTAprovalConclution v-if=" this.tabContent1==9&& this.Managermark">反欺诈审批结论轨迹 </QTAprovalConclution>
+              <RApprovalConclusion v-if=" this.tabContent1==10&& this.Managermark">审批结论轨迹</RApprovalConclusion>
+              <ComplianceProcess  v-if=" this.tabContent1==11 && this.QTmark" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
+              <ReApply  v-if=" this.tabContent1==12 && this.QTmark" :propReApply='ReApplyMark'>合规复议申请</ReApply> -->
             </div>
           </div>
         </div>
@@ -89,13 +114,30 @@
             <aMAntiApplyInf v-if=" this.tabContent2==8">反欺诈结论</aMAntiApplyInf>
             <!-- <RFinanceInformation v-if=" this.tabContent2==9">财务信息</RFinanceInformation> -->
             <!-- <RprocessTrajectory v-if=" this.tabContent2==9">流程轨迹</RprocessTrajectory> -->
-            <QTAprovalConclution v-if=" this.tabContent2==9">反欺诈审批结论轨迹 </QTAprovalConclution>
-            <RApprovalConclusion v-if=" this.tabContent2==10">审批结论轨迹</RApprovalConclusion>
-            <!-- <regularQT v-if=" this.tabContent2==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC' >质检结论</regularQT> -->
-            <regularQT v-if=" this.tabContent2==11&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
-            <QTResultCheck v-if=" this.tabContent2==11&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
 
+            <div class='tab2_Content_show' v-if="this.RoleSHow='partOne'  ">
+              <!-- 专员部分 -->
+              <QTAprovalConclution v-if=" this.tabContent2==9 ">反欺诈审批结论轨迹 </QTAprovalConclution>
+              <RApprovalConclusion v-if=" this.tabContent2==10 ">审批结论轨迹</RApprovalConclusion>
+              <regularQT v-if=" this.tabContent2==11&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+              <QTResultCheck v-if=" this.tabContent2==11&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+            </div>
+            <div class='tab2_Content_show' v-if="this.RoleSHow='partTwo'  ">
+              <!-- 主管部分 -->
+              <regularQT v-if=" this.tabContent2==9&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+              <QTResultCheck v-if=" this.tabContent2==9&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
 
+            </div>
+            <div class='tab2_Content_show' v-if="this.RoleSHow='parthrne'  ">
+              <!-- 质检部分 -->
+              <QTAprovalConclution v-if=" this.tabContent2==9">反欺诈审批结论轨迹 </QTAprovalConclution>
+              <RApprovalConclusion v-if=" this.tabContent2==10">审批结论轨迹</RApprovalConclusion>
+              <ComplianceProcess v-if=" this.tabContent2==11 && this.QTmark" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
+              <ReApply v-if=" this.tabContent2==12 && this.QTmark" :propReApply='ReApplyMark'>合规复议申请</ReApply>
+              <!-- <regularQT v-if=" this.tabContent2==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC' >质检结论</regularQT> -->
+              <regularQT v-if=" this.tabContent2==13&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+              <QTResultCheck v-if=" this.tabContent2==13&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+            </div>
           </div>
         </div>
       </div>
@@ -146,7 +188,9 @@
   import QTAprovalConclution from "../QualityTesting/QTReconsiderProcess/components/QTAprovalConclution.vue"; //反欺诈审批结论轨迹--新写页面
   import regularQT from "../QualityTesting/QTProcess/components/regularQT.vue"; //质检结论
   import QTResultCheck from "../QualityTesting/QTReconsiderProcess/components/QTResultCheck.vue"; //质检结论-本人结论页
-import ComplianceProcess from '../QualityTesting/QTReconsiderProcess/components/ComplianceProcess.vue';//合规质检结论轨迹
+  import ComplianceProcess from '../QualityTesting/QTReconsiderProcess/components/ComplianceProcess.vue'; //合规质检结论轨迹
+  import ReApply from '../QualityTesting/QTReconsiderProcess/page/ReApply.vue'; //合规复议申请
+
   import InternalMatch from "./InternalMatch";
   import PhoneCredit from "./PhoneCredit"; //电话征信
   export default {
@@ -156,6 +200,9 @@ import ComplianceProcess from '../QualityTesting/QTReconsiderProcess/components/
         QTConclutionMark: "",
         TaskList: '',
         LocalList: '',
+        Managermark: true,
+        QTmark: false,
+        RoleSHow: 'partOne',
         // /----------------上面为新加的
         watchData: '',
         originLeft: '',
@@ -170,14 +217,34 @@ import ComplianceProcess from '../QualityTesting/QTReconsiderProcess/components/
         tabContent2: 3,
         tabActiveInd1: 0,
         tabActiveInd2: 3,
-        items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论', "反欺诈审批结论轨迹", '信审审批结论轨迹'],
-        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "反欺诈审批结论轨迹", "信审审批结论轨迹",
+        // items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论', "反欺诈审批结论轨迹", '信审审批结论轨迹'],
+        // items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "反欺诈审批结论轨迹", "信审审批结论轨迹",
+        //   '质检结论'
+        // ],
+        items1: [],
+        items2: [],
+        itemsTrial1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论', "反欺诈审批结论轨迹", '信审审批结论轨迹'],
+        itemsTrial2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "反欺诈审批结论轨迹", "信审审批结论轨迹",
+          '质检结论'
+        ],
+        itemsManager1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论"],
+
+        itemsManager2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", '质检结论'],
+        itemsQT1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论', "反欺诈审批结论轨迹", '信审审批结论轨迹',
+          '合规质检结论轨迹', '合规复议申请'
+        ],
+        itemsQT2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "反欺诈审批结论轨迹", "信审审批结论轨迹",
+          '合规质检结论轨迹', '合规复议申请',
           '质检结论'
         ],
         tab1Index: 0,
         tab2Index: 3,
         flag1: [true, true, true, false, true, true, true, true, true, true, true],
-        flag2: [true, true, true, true, true, true, true, true, true, true, true, true],
+        flag2: [true, true, true, true, true, true, true, true, true, true, true, true], //12
+        flagManger1: [true, true, true, false, true, true, true, true, true],
+        flagManger2: [true, true, true, true, true, true, true, true, true, true], //10
+        flagQT1: [true, true, true, false, true, true, true, true, true, true, true, true, true],
+        flagQT: [true, true, true, true, true, true, true, true, true, true, true, true, true, true], //14
         AlertSearch: "",
         AlertSearchCondition: [{
           value: '选项1',
@@ -198,6 +265,9 @@ import ComplianceProcess from '../QualityTesting/QTReconsiderProcess/components/
           pageType: '',
           EditType: '',
           tastwaitingPass: {}
+        },
+        ReApplyMark: {
+          pageType: "ComponentPage"
         }
       }
     },
@@ -349,26 +419,56 @@ import ComplianceProcess from '../QualityTesting/QTReconsiderProcess/components/
         if (Nodename == 'checkApp_apply') {
           // 专员-编辑
           this.LocalList = 'QTTaskWait'; //取本地存储
+          items1 = itemsTrial1; //12
+          items2 = itemsTrial2;
         } else if (Nodename == 'checkApp_check_manager') {
           // 主管-编辑
           this.LocalList = 'QTManagerTW';
+          items1 = itemsTrial1; //12
+          items2 = itemsTrial2;
         } else if (Nodename == 'checkApp_trial_self') {
           // 本人
           this.LocalList = 'QTSelfTW';
+          items1 = itemsManager1; //10
+          items2 = itemsManager2;
+          flag1 = flagManger1;
+          falg2 = flagManger2;
+          this.Managermark = false; //
+          this.RoleSHow = 'partTwo'
         } else if (Nodename == 'checkApp_trial_manager') {
           // 初终审主管
           this.LocalList = 'QTTrialManagerTW';
+          this.QTComponentsShow();
+          this.RoleSHow = 'partThree'
         } else if (Nodename == 'checkApp_check_recon_manager') {
           // 质检主管复议（首次）
           this.LocalList = 'QTReManagerTW';
+          this.QTComponentsShow();
+          this.RoleSHow = 'partThree'
         } else if (Nodename == 'checkApp_regional_manager') {
           // 区域
           this.LocalList = 'QTAreaTW';
+          this.QTComponentsShow();
+          this.RoleSHow = 'partThree'
         } else if (Nodename == 'checkApp_compliance_manager') {
           // 合规
           this.LocalList = 'QTComplianceTW';
+          this.QTComponentsShow();
+          this.RoleSHow = 'partThree'
+          //  this. items1 = itemsQT1;//14
+          // this.  items2 = itemsQT2;
+          // this.  flag1 = flagQT1;
+          // this.  falg2 = flagQT2;
+          //   this.QTmark=true;
         }
         this.QTC.pageType = Nodename;
+      },
+      QTComponentsShow() {
+        this.items1 = itemsQT1; //14
+        this.items2 = itemsQT2;
+        this.flag1 = flagQT1;
+        this.falg2 = flagQT2;
+        this.QTmark = true;
       }
     },
     mounted() {
@@ -400,6 +500,8 @@ import ComplianceProcess from '../QualityTesting/QTReconsiderProcess/components/
       QTAprovalConclution, //反欺诈审批结论轨迹
       regularQT, //  质检结论
       QTResultCheck,
+      ComplianceProcess,
+      ReApply,
       //   RprocessTrajectory,
     }
   }
@@ -633,6 +735,11 @@ import ComplianceProcess from '../QualityTesting/QTReconsiderProcess/components/
   .tab2_Content {
     height: calc( 100% - 48px);
     overflow: auto;
+  }
+
+  .tab2_Content_show {
+    /* height: 100%;
+    width: 100%; */
   }
 
   /* 右侧tab切换头 左右滑动图标  流  */

@@ -145,7 +145,7 @@
         }
       }
     },
-    props: ['isManager'],
+    props: ['propReApply'],
     components: {
       myHead
     },
@@ -208,6 +208,7 @@
       },
     },
     mounted() {
+      this.propReApply.pageType='ComponentPage'?this.ManagerBtn=false;'';//是否显示提交按钮
       this.getSystermTime();
       console.log(JSON.parse(localStorage.getItem('QTToReconsiderParams')));
       this.taskwaitting = JSON.parse(localStorage.getItem('QTToReconsiderParams'));
