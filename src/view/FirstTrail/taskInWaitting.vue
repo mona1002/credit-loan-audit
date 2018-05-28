@@ -102,13 +102,11 @@
 				    </el-pagination>
 			    </div>
 			</div>
-			<!-- <newAa></newAa> -->
 		</div>
 	</div>	
 </template>
 <script type="text/javascript">
 	import myHead from "../header.vue"
-	//import newAa from "./newAa.vue"
 	export default{
 		data(){
 			return{
@@ -140,34 +138,8 @@
 			}
 		},
 		components: {
-<<<<<<< HEAD
 	      myHead
 			},
-			beforeRouteLeave(to, from, next) {
-				to.meta.refresh=true;
-				next();
-			},
-		// 	      beforeRouteEnter(to, from, next) {
-		// 		console.log('addddddzdzdzd')
-		// 		console.log(222222,from)
-		// 		console.log(33333333,to)
-    //   // 路由导航钩子，此时还不能获取组件实例 `this`，所以无法在data中定义变量（利用vm除外）
-    //   // 参考 https://router.vuejs.org/zh-cn/advanced/navigation-guards.html
-    //   // 所以，利用路由元信息中的meta字段设置变量，方便在各个位置获取。这就是为什么在meta中定义isBack
-    //   // 参考 https://router.vuejs.org/zh-cn/advanced/meta.html
-    //   if(to.meta.keepAlive!=''){
-    //       to.meta.isBack=true;
-    //       //判断是从哪个路由过来的，
-    //       //如果是page2过来的，表明当前页面不需要刷新获取新数据，直接用之前缓存的数据即可
-    //   }
-  
-    //   next();
-    // },
-=======
-	      myHead,
-	     // newAa
-	    },
->>>>>>> bugfixed
 		mounted(){
 			//一进入页面就发送请求			
 			//this.queryParam = JSON.parse(localStorage.getItem('workbenchPass'));
