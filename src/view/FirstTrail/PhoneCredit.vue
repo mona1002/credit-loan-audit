@@ -497,7 +497,7 @@ export default {
       landlinePhone:/^(0[0-9]{2}-?)([0-9]{8})$/,
       landlinePhone1:/^(0[0-9]{3}-?)([0-9]{7})$/,
       // landLinePhoneLength:/^[0-9-]{0,13}$/,
-      landLinePhoneLength:/^[0-9\-]{0,13}$/,
+      landLinePhoneLength:/^[0-9\-]{0,20}$/,
       mobilePhone:/^1[345789]\d{9}$/,
     }
   },
@@ -674,7 +674,7 @@ export default {
       // if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelNum.length >= 11 && !this.addTelRex) ||
       //   ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelNum.length >= 11 && !this.addTelRex)
       // ) {
-   if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelNum.length >= 14 && !this.addTelRex) ||
+   if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelNum.length >= 21 && !this.addTelRex) ||
         ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelNum.length >= 14 && !this.addTelRex)
       ) {
         console.log('选择了关系');      
