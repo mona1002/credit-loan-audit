@@ -2862,3 +2862,17 @@ overflow: inherit;
     line-height: 38px;
     margin-right: 12px;
 }
+
+/* .taskWatting .el-form-item__error{
+  top:30%;
+} */
+/*.taskWatting .el-form-item__error:after {
+  border: 6px solid transparent;
+border-top: 6px solid rgba(0,0,0,0.49);
+width: 0;
+height: 0;
+position: absolute;
+top: 22px;
+right: 50%;
+content: ' '
+} */
