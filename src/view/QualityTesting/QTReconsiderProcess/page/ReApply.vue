@@ -213,7 +213,7 @@
       this.taskwaitting = JSON.parse(localStorage.getItem('QTToReconsiderParams'));
       this.reApplyInf = JSON.parse(localStorage.getItem('userInf'));
       console.log(this.reApplyInf)
-      // this.getInf();
+      this.getInf();
       //传入isManager判断是否可编辑
       // if (this.isManager == 'Manager') {
       //   this.manager = true;

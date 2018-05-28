@@ -390,6 +390,7 @@
         } else if (route.path == '/MatchingInfQT') {
           this.taskNodeParams = route.fullPath.split('?')[1]
           this.nodeName = "质检详情";
+           this.nodeMatchFlag = 'QT';
           this.routeParams = '?' + this.taskNodeParams //---------------------------做判断-----
         }
         // else{

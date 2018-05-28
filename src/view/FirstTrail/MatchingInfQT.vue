@@ -48,7 +48,7 @@
               <aMAntiApplyInf v-if=" this.tabContent1==8">反欺诈结论</aMAntiApplyInf>
               <!-- <RFinanceInformation v-if=" this.tabContent1==9">财务信息</RFinanceInformation> -->
               <!-- <RprocessTrajectory v-if=" this.tabContent1==9">流程轨迹</RprocessTrajectory> -->
-              <aAntiConclusionPath v-if=" this.tabContent1==9">反欺诈审批结论轨迹 </aAntiConclusionPath>
+              <QTAprovalConclution v-if=" this.tabContent1==9">反欺诈审批结论轨迹 </QTAprovalConclution>
               <RApprovalConclusion v-if=" this.tabContent1==10">审批结论轨迹</RApprovalConclusion>
             </div>
           </div>
@@ -89,7 +89,7 @@
             <aMAntiApplyInf v-if=" this.tabContent2==8">反欺诈结论</aMAntiApplyInf>
             <!-- <RFinanceInformation v-if=" this.tabContent2==9">财务信息</RFinanceInformation> -->
             <!-- <RprocessTrajectory v-if=" this.tabContent2==9">流程轨迹</RprocessTrajectory> -->
-            <aAntiConclusionPath v-if=" this.tabContent2==9">反欺诈审批结论轨迹 </aAntiConclusionPath>
+            <QTAprovalConclution v-if=" this.tabContent2==9">反欺诈审批结论轨迹 </QTAprovalConclution>
             <RApprovalConclusion v-if=" this.tabContent2==10">审批结论轨迹</RApprovalConclusion>
             <!-- <regularQT v-if=" this.tabContent2==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC' >质检结论</regularQT> -->
             <regularQT v-if=" this.tabContent2==11&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
@@ -143,18 +143,16 @@
   //   import RprocessTrajectory from "./ReadComponent/RprocessTrajectory"; //流程轨迹
   import RcreditInvestigation from "./ReadComponent/RcreditInvestigation"; //实地征信
   import aMAntiApplyInf from '../AntiFraud/matchComponent/aMAntiApplyInf.vue' //反欺诈结论
-  import aAntiConclusionPath from "../AntiFraud/components/aAntiConclusionPath.vue"; //反欺诈审批结论轨迹
+  import QTAprovalConclution from "../QualityTesting/QTReconsiderProcess/components/QTAprovalConclution.vue"; //反欺诈审批结论轨迹--新写页面
   import regularQT from "../QualityTesting/QTProcess/components/regularQT.vue"; //质检结论
   import QTResultCheck from "../QualityTesting/QTReconsiderProcess/components/QTResultCheck.vue"; //质检结论-本人结论页
-
+import ComplianceProcess from '../QualityTesting/QTReconsiderProcess/components/ComplianceProcess.vue';//合规质检结论轨迹
   import InternalMatch from "./InternalMatch";
-  import borrowerInformation from "./detailComponent/borrowerInformation";
   import PhoneCredit from "./PhoneCredit"; //电话征信
-  import CreditApproval from "./CreditApproval";
   export default {
     data() {
       return {
-        accepCusBasicInfo:'',
+        accepCusBasicInfo: '',
         QTConclutionMark: "",
         TaskList: '',
         LocalList: '',
@@ -206,8 +204,9 @@
     watch: {
       '$route' (to, from) {
         if (to.fullPath !== from.fullPath) {
-          // this.toinner();
           console.log('路由刷新')
+          this.initialInfo();
+          this.getPageInf();
         }
       }
     },
@@ -324,7 +323,6 @@
                 labBtn.eq(0).prev().width(wrapWidth - 11 + 'px');
                 labBtn.eq(0).next().css('left', wrapWidth - 9 + 'px');
                 labBtn.eq(0).next().width('0px');
-
               }
             }
           };
@@ -334,92 +332,56 @@
           e.cancelBubble = true;
         });
       },
+      getPageInf() { //获取个人信息
+        this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
+          id: this.tastwaitingPass.ApplyId,
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.customInf = res.data;
+            this.custName = res.data.accepCusBasicInfo.custName;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      },
       initialInfo() {
         var Nodename = this.$route.fullPath.split('?')[1];
-        console.log(Nodename)
         if (Nodename == 'checkApp_apply') {
           // 专员-编辑
-          // this.QTC.pageType = 'commissioner';
           this.LocalList = 'QTTaskWait'; //取本地存储
         } else if (Nodename == 'checkApp_check_manager') {
           // 主管-编辑
-          // this.QTC.pageType = 'manager';
           this.LocalList = 'QTManagerTW';
         } else if (Nodename == 'checkApp_trial_self') {
           // 本人
-          // this.QTC.pageType = 'self';
           this.LocalList = 'QTSelfTW';
         } else if (Nodename == 'checkApp_trial_manager') {
           // 初终审主管
-          // this.QTC.pageType = 'Supervisor';
           this.LocalList = 'QTTrialManagerTW';
         } else if (Nodename == 'checkApp_check_recon_manager') {
           // 质检主管复议（首次）
-          // this.QTC.pageType = 'QTRe';
           this.LocalList = 'QTReManagerTW';
         } else if (Nodename == 'checkApp_regional_manager') {
           // 区域
-          // this.QTC.pageType = 'Area';
           this.LocalList = 'QTAreaTW';
         } else if (Nodename == 'checkApp_compliance_manager') {
           // 合规
-          // this.QTC.pageType = 'compliance';
           this.LocalList = 'QTComplianceTW';
         }
-         this.QTC.pageType =Nodename;
+        this.QTC.pageType = Nodename;
       }
     },
     mounted() {
-
       this.title = "影像资料";
-      // console.log(window.location)
-      // console.log(this.$route.fullPath)
       this.MyMove();
-      // this.$route.fullPath.indexOf('?') != -1 ? this.Nodename = this.$route.fullPath.split('?')[1] : this.Nodename;
-      // switch(this.this.Nodename){
-      //   case'':
-      // }
-      // if (this.Nodename == '') { //专员-编辑
-      //   this.QTC.pageType = 'commissioner';
-      //   this.LocalList='QTTaskWait';
-      //   // this. QTC:{
-      //   // applyId:'',
-      //   // pageType:'',
-      //   //         }
-      // } else if (this.Nodename == 'e') { //主管-编辑
-
-      // }
       this.initialInfo(); //判断角色      
       this.QTC.tastwaitingPass = this.tastwaitingPass = JSON.parse(localStorage.getItem(this.LocalList));
-      console.log('tastwaitingPass：',this.tastwaitingPass)
-      console.log('QTC：',this.QTC)
-      console.log('pageType：',this.QTC.pageType)
-      console.log('LocalList：',this.LocalList)
-      // if (this.tastwaitingPass.listType == '') {
-      //   console.log(11111111111111)
-      //   this.EditType = '常规质检'
-      // } else if (this.tastwaitingPass.listType == '专项质检') {
-      //   console.log(22222222222222)
-      //   this.EditType = '专纵质检'
-      // } else if (this.tastwaitingPass.listType == '') {
-      //   console.log(3333333333)
-      //   this.EditType = '常规又专纵质检'
-      // } else {
-      //   console.log(44444444444)
-      //   this.EditType = '';
-      // }
       this.QTC.applyId = this.tastwaitingPass.ApplyId;
-      // this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
-      this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-        id: this.tastwaitingPass.ApplyId,
-      }).then(res => {
-        if (res.statusCode == 200) {
-          this.customInf = res.data;
-          this.custName = res.data.accepCusBasicInfo.custName;
-        } else {
-          this.$message.error(res.msg);
-        }
-      });
+      this.getPageInf(); //获取页面个人信息
+      console.log('tastwaitingPass：', this.tastwaitingPass)
+      console.log('QTC：', this.QTC)
+      console.log('pageType：', this.QTC.pageType)
+      console.log('LocalList：', this.LocalList)
     },
     components: {
       myHead,
@@ -434,10 +396,8 @@
       RcreditInvestigation, //实地征信
       aMAntiApplyInf, //反欺诈结论
       InternalMatch,
-      borrowerInformation,
       PhoneCredit,
-      CreditApproval,
-      aAntiConclusionPath, //反欺诈审批结论轨迹
+      QTAprovalConclution, //反欺诈审批结论轨迹
       regularQT, //  质检结论
       QTResultCheck,
       //   RprocessTrajectory,

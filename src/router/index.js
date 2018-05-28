@@ -100,13 +100,6 @@ import ACManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/A
 import ComplianceManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/ComplianceManagerTaskList.vue' //质检复议流程-合规经理页面- 合规经理任务列表
 import ComplianceProcess from '../view/QualityTesting/QTReconsiderProcess/components/ComplianceProcess.vue' //质检复议-
 import MatchingInfQT from '../view/FirstTrail/MatchingInfQT.vue' //质检复议-
-import MatchingInfQTProcess from '../view/FirstTrail/MatchingInfQTProcess.vue' //质检复议-
-// import ComplianceProcess from ''//质检复议-
-// import ComplianceProcess from ''//质检复议-
-
-// commissioner//质检专员列表
-// manager//质检主管列表
-
 
 Vue.use(Router)
 
@@ -462,9 +455,6 @@ const routes = [{
   {
     path: "/MatchingInfQT",
     component: MatchingInfQT
-  }, {
-    path: "/MatchingInfQTProcess",
-    component: MatchingInfQTProcess
   },
   // ---------------大数据+社保--------------------
   {

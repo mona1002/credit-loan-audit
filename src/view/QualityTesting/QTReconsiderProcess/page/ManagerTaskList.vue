@@ -93,7 +93,7 @@
   export default {
     data() {
       return {
-        taskList:'',
+        taskList: '',
         QTStates: [],
         query: {
           id: '',
@@ -102,6 +102,11 @@
           processInstanceId: '',
           listType: '',
           reconType: ''
+        },
+        QTquery: {
+          id: '',
+          matchApplyId: "",
+          applySubNo: ''
         },
         userInf: null,
         // tableData: [],
@@ -194,12 +199,19 @@
           this.query.listType = '初终审主管二次';
         }
         this.query.reconType = val.reconType;
-        this.query.id = val.id;
-        this.query.ApplyId = val.applyId;
+        this.QTquery.id = this.query.id = val.id;
+        this.QTquery.matchApplyId = this.query.ApplyId = val.applyId;
+        this.QTquery.applySubNo = val.applySubno;
         this.query.taskId = val.taskId;
         this.query.processInstanceId = val.processInstanceId;
+        // 存储质检结论参数
         localStorage.setItem("QTTrialManagerTW", JSON.stringify(this.query));
         this.$router.push('/MatchingInfQT?checkApp_trial_manager');
+        // 存储components参数
+        localStorage.setItem("QT", JSON.stringify(this.QTquery));
+        localStorage.setItem("MatchFlag", JSON.stringify({
+          MatchFlag: 'QT'
+        }));
       },
       Rreset() {
         this.params.applySubNo = '';

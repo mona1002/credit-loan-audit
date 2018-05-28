@@ -435,6 +435,8 @@
       } else if (this.MatchFlag.MatchFlag == 'Query') {
         console.log("综合查询")
         this.localInf = JSON.parse(localStorage.getItem("Query")) //初审-匹配查看
+      }else if (this.MatchFlag.MatchFlag == 'QT') {
+        this.localInf = JSON.parse(localStorage.getItem("QT")) //综合查询
       }
       this.imgBaseUrl = imgUrl.imgBaseUrl;
       this.odivMove(this.msg);

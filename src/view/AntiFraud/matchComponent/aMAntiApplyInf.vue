@@ -104,10 +104,19 @@
         activeNames: ['1', '2', '3'],
         conclu: '',
         MatchInf: '',
+        MatchFlag:'',
       }
     },
     mounted() {
-      this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //反欺诈专员-匹配查看 + 主管
+       this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) //初审-匹配查看
+      this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); 
+       if (this.MatchFlag.MatchFlag == 'internal') {//反欺诈专员-匹配查看 + 主管
+       		this.MatchInf = JSON.parse(localStorage.getItem('internalObj'));
+      } else if (this.MatchFlag.MatchFlag == 'Query') {
+        this.MatchInf = JSON.parse(localStorage.getItem("Query")) //初审-匹配查看
+      }else if (this.MatchFlag.MatchFlag == 'QT') {
+        this.MatchInf = JSON.parse(localStorage.getItem("QT")) //综合查询
+      }
       this.post("/creauditOpinion/queryByPage", {
         applyId: this.MatchInf.matchApplyId,
       }).then(res => {

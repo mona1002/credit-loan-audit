@@ -41,6 +41,8 @@
         this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //初审-匹配查看
       } else if (this.MatchFlag.MatchFlag == 'Query') {
         this.MatchInf = JSON.parse(localStorage.getItem("Query")) //初审-匹配查看
+      }else if (this.MatchFlag.MatchFlag == 'QT') {
+        this.MatchInf = JSON.parse(localStorage.getItem("QT")) //综合查询
       }
       // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       // if (this.judgeFlag.flag == '01') {

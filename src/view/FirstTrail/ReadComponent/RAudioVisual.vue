@@ -333,6 +333,8 @@
         this.localInf = JSON.parse(localStorage.getItem("internalObj")) //匹配查看
       } else if (this.MatchFlag.MatchFlag == 'Query') {
         this.localInf = JSON.parse(localStorage.getItem("Query")) //综合查询
+      }else if (this.MatchFlag.MatchFlag == 'QT') {
+        this.localInf = JSON.parse(localStorage.getItem("QT")) //综合查询
       }
       this.imgBaseUrl = imgUrl.imgBaseUrl;
       this.odivMove("RFirstAud");

@@ -1,6 +1,6 @@
 <template>
   <div class="AntiCaseNum IntegratedQuery">
-<!-- 质检复议流程 初终审本人任务列表 -->
+    <!-- 质检复议流程 初终审本人任务列表 -->
     <myHead></myHead>
     <div class="content">
       <div class="search">
@@ -12,11 +12,11 @@
             </p>
             <p>
               <label> 客户名称</label>
-                <el-input v-model="params.custName_la" placeholder="请输入客户名称"></el-input>
+              <el-input v-model="params.custName_la" placeholder="请输入客户名称"></el-input>
             </p>
             <p>
               <label> 证件号码</label>
-                <el-input v-model="params.certCode" placeholder="请输入证件号码"></el-input>
+              <el-input v-model="params.certCode" placeholder="请输入证件号码"></el-input>
             </p>
           </li>
           <li>
@@ -65,12 +65,12 @@
   </div>
 </template>
 <script>
- import myHead from '../../../header.vue';
+  import myHead from '../../../header.vue';
   import baseU from '../../../../util/constant';
   export default {
     data() {
       return {
-        taskList:"",
+        taskList: "",
         query: {
           id: '',
           ApplyId: "",
@@ -78,8 +78,13 @@
           processInstanceId: '',
           listType: '',
         },
+        QTquery: {
+          id: '',
+          matchApplyId: "",
+          applySubNo: ''
+        },
         userInf: null,
-        tableData:[],
+        tableData: [],
         // tableData: [{
         //   checkResult: '01',
         //   isSecondIns: "1",
@@ -123,7 +128,7 @@
         reVal: '$1********$2',
         telVal: '$1****',
         params: {
-           processTemplateId: '',
+          processTemplateId: '',
           taskNodeName: '',
           taskStatus: '',
           applySubNo: '',
@@ -147,12 +152,19 @@
       handleCurrentChange(val) {
         // this.params.pageNum = val;
         // this.inquire(this.params);
-         this.query.id = val.id;
-        this.query.ApplyId = val.applyId;
+        this.QTquery.id = this.query.id = val.id;
+        this.QTquery.matchApplyId = this.query.ApplyId = val.applyId;
+        this.QTquery.applySubNo = val.applySubno;
         this.query.taskId = val.taskId;
         this.query.processInstanceId = val.processInstanceId;
+        // 存储质检结论参数
         localStorage.setItem("QTSelfTW", JSON.stringify(this.query));
         this.$router.push('/MatchingInfQT?checkApp_trial_self');
+        // 存储components参数
+        localStorage.setItem("QT", JSON.stringify(this.QTquery));
+        localStorage.setItem("MatchFlag", JSON.stringify({
+          MatchFlag: 'QT'
+        }));
       },
       Rreset() {
         this.params.applySubNo = '';
@@ -209,7 +221,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     /* 统一导航 --去掉高度*/
-    height: 100%;    
+    height: 100%;
   }
 
   .AntiCaseNum label {
@@ -313,7 +325,7 @@
   .paging {
     /* margin-top: 15px; */
     text-align: center;
-     /* 统一导航 */
+    /* 统一导航 */
     margin-top: 28px;
   }
 

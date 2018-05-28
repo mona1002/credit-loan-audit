@@ -99,6 +99,11 @@
           listType: '',
           reconType: ''
         },
+        QTquery: {
+          id: '',
+          matchApplyId: "",
+          applySubNo: ''
+        },
         userInf: null,
         // tableData: [],
         tableData: [{
@@ -157,35 +162,36 @@
         // currentPage: 1, //分页选中页
         // pageCount: 10, // 每页显示条数
         // totalRecord: 0, //总条数
-        value: '',
-
-
-
       }
     },
     methods: {
-
       //   handleSizeChange(val) {
       //     this.params.pageSize = val;
       //     this.params.pageNum = 1;
       //     // this.getInf(this.params);
       //     this.inquire(this.params);
       //   },
-
       handleCurrentChange(val) {
         console.log(val)
         console.log(this.params.taskNodeName)
         this.params.taskNodeName = 'checkApp_compliance_manager';
         this.query.reconType = val.reconType;
-        this.query.id = val.id;
-        this.query.ApplyId = val.applyId;
+        this.QTquery.id = this.query.id = val.id;
+        this.QTquery.matchApplyId = this.query.ApplyId = val.applyId;
+        this.QTquery.applySubNo = val.applySubno;
         this.query.taskId = val.taskId;
         this.query.processInstanceId = val.processInstanceId;
+        // 存储质检结论参数
         if (this.params.taskNodeName == 'checkApp_regional_manager') { // 区域
           localStorage.setItem("QTAreaTW", JSON.stringify(this.query));
         } else if (this.params.taskNodeName == 'checkApp_compliance_manager') { // 合规
           localStorage.setItem("QTComplianceTW", JSON.stringify(this.query));
         }
+        // 存储components参数
+        localStorage.setItem("QT", JSON.stringify(this.QTquery));
+        localStorage.setItem("MatchFlag", JSON.stringify({
+          MatchFlag: 'QT'
+        }));
         this.$router.push('/MatchingInfQT?' + this.params.taskNodeName);
         // this.params.pageNum = val;
         // this.inquire(this.params);
@@ -231,7 +237,7 @@
       this.params.processTemplateId = this.taskList.processTemplateId;
       this.params.taskNodeName = this.taskList.taskNodeName;
       this.params.taskStatus = this.taskList.taskStatus;
-      // this.inquire(this.params);
+      this.inquire(this.params);
       // QTAreaWorkbenchPass 区域
       // QTComplianceWorkbenchPass 合规
       //   this.userInf = JSON.parse(localStorage.getItem('userInf'));

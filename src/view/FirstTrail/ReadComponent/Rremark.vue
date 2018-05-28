@@ -58,6 +58,8 @@
        		this.taskInWaitting = JSON.parse(localStorage.getItem('internalObj'));
       } else if (this.MatchFlag.MatchFlag == 'Query') {
         this.taskInWaitting = JSON.parse(localStorage.getItem("Query")) //初审-匹配查看
+      }else if (this.MatchFlag.MatchFlag == 'QT') {
+        this.taskInWaitting = JSON.parse(localStorage.getItem("QT")) //质检
       }
 			this.request(this.taskInWaitting.matchApplyId);
 		},

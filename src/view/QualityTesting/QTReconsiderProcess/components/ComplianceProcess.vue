@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!--  质检复议流程- 合规质检流程轨迹 -->
+    <!--  质检复议流程- 合规质检结论轨迹 -->
     <el-table :data="tableData" border style="width: 100%">
       <el-table-column prop="date" label="任务节点" width="120">
       </el-table-column>

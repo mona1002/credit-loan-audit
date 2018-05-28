@@ -1,6 +1,6 @@
 <template>
   <div class="AntiCaseNum IntegratedQuery">
-<!-- 质检复议流程-质检主管页面- 复议任务列表（首次） -->
+    <!-- 质检复议流程-质检主管页面- 复议任务列表（首次） -->
     <myHead></myHead>
     <div class="content">
       <div class="search">
@@ -21,14 +21,14 @@
           </li>
           <li>
             <p>
-           <label> 任务类型</label>
+              <label> 任务类型</label>
               <el-select v-model="params.instaskType" placeholder="请选择">
                 <el-option v-for="item in TaskType" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </p>
             <p>
-   
+
             </p>
             <p class="btn_wrap">
               <el-button class="btn" type="primary" style="marginLeft:228px" @click="Rsearch">查询</el-button>
@@ -80,7 +80,7 @@
           </el-table-column>
           <el-table-column prop="checkStateTxt" label="质检状态" align='center' min-width="100">
           </el-table-column>
-                  <el-table-column prop="checkResult" label="质检结果" align='center' min-width="100">
+          <el-table-column prop="checkResult" label="质检结果" align='center' min-width="100">
           </el-table-column>
           <el-table-column prop="instaskTypeTxt" label="任务类型" align='center' min-width="100">
           </el-table-column>
@@ -108,6 +108,11 @@
           taskId: '',
           processInstanceId: '',
           listType: '',
+        },
+        QTquery: {
+          id: '',
+          matchApplyId: "",
+          applySubNo: ''
         },
         reg: /(\w{6})\w*(\w{4})/,
         Telreg: /(\w{7})\w*/,
@@ -186,12 +191,19 @@
       //     this.inquire(this.params);
       //   },
       handleCurrentChange(val) { //跳转页面
-        this.query.id = val.id;
-        this.query.ApplyId = val.applyId;
+        this.QTquery.id = this.query.id = val.id;
+        this.QTquery.matchApplyId = this.query.ApplyId = val.applyId;
+        this.QTquery.applySubNo = val.applySubno;
         this.query.taskId = val.taskId;
         this.query.processInstanceId = val.processInstanceId;
+        // 存储质检结论参数
         localStorage.setItem("QTReManagerTW", JSON.stringify(this.query));
         this.$router.push('/MatchingInfQT?checkApp_check_recon_manager');
+        // 存储components参数
+        localStorage.setItem("QT", JSON.stringify(this.QTquery));
+        localStorage.setItem("MatchFlag", JSON.stringify({
+          MatchFlag: 'QT'
+        }));
         // this.params.pageNum = val;
         // this.inquire(this.params);
       },
@@ -230,8 +242,7 @@
       this.params.processTemplateId = this.taskList.processTemplateId;
       this.params.taskNodeName = this.taskList.taskNodeName;
       this.params.taskStatus = this.taskList.taskStatus;
-      console.log(this.taskList)
-      // this.inquire(this.params);
+      this.inquire(this.params);
       // QTManagerWorkbenchPass
       //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
       //   this.params.applySubNo = this.params.applySubNo.replace(this.reg, this.reVal)
