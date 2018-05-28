@@ -65,7 +65,7 @@
       <img src="../../../../static/images/net.png" @click="larger">
       <img src="../../../../static/images/daf.png" @click="AclockWise ">
       <img src="../../../../static/images/dasf.png" @click="clockWise ">
-      <span>当前第{{smallPicInd}}页</span>
+      <!-- <span>当前第{{smallPicInd}}页</span> -->
     </div>
     <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面  SmallPicShow-->
     <div class="Small_pic_div" v-show="SmallPicShow">
@@ -517,6 +517,7 @@
     left: calc( 50% + 9px);
     top: calc( 100% - 110px);
     width: 300px;
+    width: 200px;
     height: 52px;
     background: rgba(71, 86, 105, 0.6);
     box-shadow: 0 10px 20px 0 #47566942;
@@ -530,7 +531,7 @@
   }
   .BtnIcons span {
 display: inline-block;
-background:red;
+/* background:red; */
 vertical-align: top;
 
 }
