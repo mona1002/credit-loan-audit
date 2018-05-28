@@ -283,6 +283,8 @@
           value: '02',
           label: '新人'
         }],
+        proficiency:0,
+        newOne:0,
       }
     },
     methods: {
@@ -355,6 +357,8 @@
               this.tableData[i].makeRatio = this.tableData[i].makeRatio * 100;
               this.tableData[i].passRatio = this.tableData[i].passRatio * 100;
               this.tableData[i].refuseRatio = this.tableData[i].refuseRatio * 100;
+              this.tableData[i].drawSheetType =='01'?this.proficiency.count++:'';//熟悉
+              this.tableData[i].drawSheetType =='02'?this.newOne.count++:'';//新人
             }
           } else {
             this.$message.error(res.msg);
@@ -410,6 +414,9 @@
           .creator === '' || this.addNew.createTime === '') {
           this.$message.error('请输入必填项！');
           return
+        }
+        if(this.proficiency.count>0||this.newOne.count>0){
+          this.$message.error(' 抽单类型设置重复！');
         }
         this.loadsitu = true;
         this.adbtn = '保存中';
