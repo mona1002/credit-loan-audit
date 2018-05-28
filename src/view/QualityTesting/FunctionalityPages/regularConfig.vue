@@ -23,7 +23,7 @@
           <el-table-column type="index" align='center' label=序号 width="55">
           </el-table-column>
           <!-- drawSheetTypeTxt -->
-          <el-table-column prop="drawSheetType" label="抽单类型" align='center' min-width="180">
+          <el-table-column prop="drawSheetTypeTxt" label="抽单类型" align='center' min-width="180">
           </el-table-column>
           <el-table-column prop="recentDays" label="质检天数" align='center' min-width="120">
           </el-table-column>
@@ -213,7 +213,7 @@
             </p>
             <p>
               <label>创建日期：</label>
-              <span>{{ createTime }}</span>
+              <span>{{ createTime| dateFilter }}</span>
             </p>
           </li>
         </ul>
@@ -242,7 +242,7 @@
           creator: '',
           createTime: '',
         },
-        updateInf:{},//编辑
+        updateInf: {}, //编辑
         // updateInf: {
         //   id: '',
         //   drawSheetType: '',
@@ -290,11 +290,13 @@
     methods: {
       Num(el, val) { //整数
         // console.log(el, val)
-        // console.log(!val)
+        // console.log(val=='')
+        // console.log(Number(val))
+        // console.log(parseInt(val))
         // console.log(val === '')
         // console.log(val == null)
-        // console.log(isNaN(val))
-        // console.log(this.updateInf.makeRatio)
+        console.log(isNaN(val))
+        val = val.replace(/\s/g, ''); //去空格，避免输入框出现NaN
         switch (el) {
           case '质检天数':
             val === '' || isNaN(val) || val < 0 ? this.addNew.recentDays = '' : this.addNew.recentDays = parseInt(this.addNew
@@ -362,10 +364,10 @@
           }
         });
       },
-      getSystemDate() {//获取系统时间
+      getSystemDate() { //获取系统时间
         this.get("/system/getSystemDate?" + Math.random()).then(res => {
           if (res.statusCode == 200) {
-            this.createTime = this.addNew.createTime = res.data;//createTime展示给用户看的日期格式，this.addNew.createTime 入参的时间戳格式
+            this.createTime = this.addNew.createTime = res.data; //createTime展示给用户看的日期格式，this.addNew.createTime 入参的时间戳格式
           } else {
             this.$message.error(res.msg);
           }
@@ -488,13 +490,13 @@
               message: '提交成功!',
               type: 'success'
             });
-              this.getListInf();
+            this.getListInf();
           } else {
             this.$message.error(res.msg);
-              this.getListInf();
+            this.getListInf();
           }
         });
-        this.Confirm=false;
+        this.Confirm = false;
       },
       //   handleSizeChange(val) {
       //     this.params.pageSize = val;
@@ -520,7 +522,7 @@
       //   this.params.pageNum = this.currentPage, //页数（第几页）
       //     this.params.pageSize = this.pageCount, //页面显示行数
       this.addNew.creator = JSON.parse(localStorage.getItem('userInf')).userCode;
-      this.getListInf();//查询
+      this.getListInf(); //查询
       this.getSystemDate(); //调用系统时间
     },
     components: {
