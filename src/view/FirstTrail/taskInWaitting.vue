@@ -25,7 +25,7 @@
 				<p>信审任务列表</p>
 			</div>
 			<div class="taskWtable">
-				<el-table :data="datas" style="width: 100%" height="500" @row-click='goDetail' border>
+				<el-table :data="datas" style="width: 100%" height="500" @row-dblclick='goDetail' border>
 				    <el-table-column
 				      type="index" 
 				     :index="1"
@@ -102,11 +102,13 @@
 				    </el-pagination>
 			    </div>
 			</div>
+			<!-- <newAa></newAa> -->
 		</div>
 	</div>	
 </template>
 <script type="text/javascript">
 	import myHead from "../header.vue"
+	//import newAa from "./newAa.vue"
 	export default{
 		data(){
 			return{
@@ -368,6 +370,9 @@
 		width: 100%;
 		/* height:calc( 100% - 232px ); */
 	}
+	/* .taskWatting .taskWtable tbody tr{
+		cursor: pointer;
+	} */
 	.taskWtable .el-table .cell {
 	  line-height: 23px;
 	}

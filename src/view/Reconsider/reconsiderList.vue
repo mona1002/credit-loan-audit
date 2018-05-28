@@ -27,7 +27,7 @@
 				<p>复议申请任务列表</p>
 			</div>
 			<div class="taskWtable">
-				<el-table :data="datas" style="width: 100%" height="500" @row-click='goDetail' border>
+				<el-table :data="datas" style="width: 100%" height="500" @row-dblclick='goDetail' border>
 				    <el-table-column
 				      type="index" 
 				     :index="1"
