@@ -102,13 +102,11 @@
 				    </el-pagination>
 			    </div>
 			</div>
-			<!-- <newAa></newAa> -->
 		</div>
 	</div>	
 </template>
 <script type="text/javascript">
 	import myHead from "../header.vue"
-	//import newAa from "./newAa.vue"
 	export default{
 		data(){
 			return{
