@@ -497,7 +497,7 @@ export default {
       landlinePhone:/^(0[0-9]{2}-?)([0-9]{8})$/,
       landlinePhone1:/^(0[0-9]{3}-?)([0-9]{7})$/,
       // landLinePhoneLength:/^[0-9-]{0,13}$/,
-      landLinePhoneLength:/^[0-9\-]{0,13}$/,
+      landLinePhoneLength:/^[0-9\-]{0,20}$/,
       mobilePhone:/^1[345789]\d{9}$/,
     }
   },

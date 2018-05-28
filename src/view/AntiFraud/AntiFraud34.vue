@@ -113,7 +113,8 @@
           <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">反欺诈审批任务列表 </span>
         </div> -->
-        <el-table :data="directorTableData.taskDetailList" border stripe fit highlight-current-row @row-click="rowDbClick" v-show="antiFlag=='03'||antiFlag=='04'"
+        <!-- 专员 -->
+        <el-table :data="directorTableData.taskDetailList" border stripe fit highlight-current-row @row-dblclick="rowDbClick" v-show="antiFlag=='03'||antiFlag=='04'"
           class="director-table">
           <el-table-column type="index" :index="1" label="序号" width='50'>
           </el-table-column>
