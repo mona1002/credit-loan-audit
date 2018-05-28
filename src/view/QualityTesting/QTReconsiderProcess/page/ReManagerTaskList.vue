@@ -49,7 +49,7 @@
       </div>
       <div class="table_wrap">
         <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" height="100%" border @row-click="handleCurrentChange">
+        <el-table :data="tableData" style="width: 100%" height="100%" border @row-dblclick="handleCurrentChange">
           <el-table-column type="selection" width="35">
           </el-table-column>
           <el-table-column type="index" align='center' label=序号 width="55">

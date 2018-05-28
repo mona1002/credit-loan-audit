@@ -19,7 +19,7 @@
       </div>
       <div class="table_wrap">
         <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" height="100%" @current-change="handleCurrentChange" border>
+        <el-table :data="tableData" style="width: 100%" height="100%" @row-dblclick="handleCurrentChange" border>
           <el-table-column type="index" align='center' label=序号 width="55">
           </el-table-column>
           <!-- drawSheetTypeTxt -->
