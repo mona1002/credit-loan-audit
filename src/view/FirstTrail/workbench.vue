@@ -6,8 +6,8 @@
       <div class="main_left">
         <h2>
           <i class="el-icon-edit"> </i>常用 </h2>
-             <router-link to='/regularConfig'>常规抽单-功能 </router-link></br>
-          <router-link to='/specialConfig'>专纵抽单-功能 </router-link>
+             <!-- <router-link to='/regularConfig'>常规抽单-功能 </router-link>
+          <router-link to='/specialConfig'>专纵抽单-功能 </router-link> -->
       </div>
       <div class="main_right">
         <!-- 中间 -->
