@@ -89,10 +89,10 @@
           processInstanceId: '',
           listType: '',
         },
-        QTquery:{
+        QTquery: {
           id: '',
           matchApplyId: "",
-          applySubNo:''
+          applySubNo: ''
         },
         taskList: '',
         tableData: [],
@@ -148,18 +148,21 @@
             this.query.listType = '专项质检';
           }
         }
-        this.QTquery.id=   this.query.id = val.id;
-        this.QTquery.matchApplyId=    this.query.ApplyId = val.applyId;
+        this.QTquery.id = this.query.id = val.id;
+        this.QTquery.matchApplyId = this.query.ApplyId = val.applyId;
         this.QTquery.applySubNo = val.applySubno;
         this.query.taskId = val.taskId;
         this.query.processInstanceId = val.processInstanceId;
         // 存储质检结论参数
+        console.log( this.query)
         localStorage.setItem("QTTaskWait", JSON.stringify(this.query));
         this.$router.push('/MatchingInfQT?checkApp_apply');
         // 存储components参数
         localStorage.setItem("QT", JSON.stringify(this.QTquery));
-        localStorage.setItem("MatchFlag", JSON.stringify({ MatchFlag:'QT' }));
-            // this.params.pageNum = val;
+        localStorage.setItem("MatchFlag", JSON.stringify({
+          MatchFlag: 'QT'
+        }));
+        // this.params.pageNum = val;
         // this.inquire(this.params);
       },
       Rreset() {

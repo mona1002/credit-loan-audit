@@ -5,10 +5,10 @@
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
       <p class="PerDtl">
-        <span> 借款人： {{customInf.accepCusBasicInfo.custName}}</span>
+        <span> 借款人： {{custName}}</span>
         <span> 进件编号: {{customInf.applyMainNo}}</span>
-        <span> 证件号码: {{customInf.accepCusBasicInfo.certCode}}</span>
-        <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
+        <span> 证件号码: {{certCode}}</span>
+        <span> 移动电话：{{mobile}}</span>
         <span> 进件机构: {{customInf.appOrgName}}</span>
         <span> 门店成立时间: {{customInf.appOrgRegisterDate}}</span>
         <span> 业务员入职时间： {{customInf.salPerEmployDate}}</span>
@@ -205,18 +205,10 @@
         // /----------------上面为新加的
         watchData: '',
         originLeft: '',
-        customInf: {
-          accepCusBasicInfo: {
-            custName: '',
-            certCode: '',
-            mobile: ''
-          },
-          applyMainNo: '',
-          appOrgName: '',
-          appOrgRegisterDate: '',
-          salPerEmployDate: '',
-          adminIntroduce: ''
-        },
+        custName:"",
+        certCode:'',
+        mobile:'',
+        customInf: {      },
         tastwaitingPass: [],
         showHalfBtn: false,
         CompareAlert: false,
@@ -414,10 +406,15 @@
       },
       getPageInf() { //获取个人信息
         this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-          id: this.tastwaitingPass.ApplyId,
+          id:this.tastwaitingPass.applyId,
         }).then(res => {
           if (res.statusCode == 200) {
             this.customInf = res.data;
+            if( res.data.accepCusBasicInfo){
+              this.custName=res.data.accepCusBasicInfo.custName;
+              this.certCode=res.data.accepCusBasicInfo.certCode;
+               this.mobile=res.data.accepCusBasicInfo.mobile;
+            }
           } else {
             this.$message.error(res.msg);
           }
@@ -425,23 +422,24 @@
       },
       initialInfo() {
         var Nodename = this.$route.fullPath.split('?')[1];
+        console.log( Nodename)
         if (Nodename == 'checkApp_apply') {
           // 专员-编辑
           this.LocalList = 'QTTaskWait'; //取本地存储
-          items1 = itemsTrial1; //12
-          items2 = itemsTrial2;
+          this.items1 = this.itemsTrial1; //12
+          this.items2 = this.itemsTrial2;
         } else if (Nodename == 'checkApp_check_manager') {
           // 主管-编辑
           this.LocalList = 'QTManagerTW';
-          items1 = itemsTrial1; //12
-          items2 = itemsTrial2;
+          this.items1 = this.itemsTrial1; //12
+          this.items2 = this.itemsTrial2;
         } else if (Nodename == 'checkApp_trial_self') {
           // 本人
           this.LocalList = 'QTSelfTW';
-          items1 = itemsManager1; //10
-          items2 = itemsManager2;
-          flag1 = flagManger1;
-          falg2 = flagManger2;
+          this.items1 = this.itemsManager1; //10
+          this.items2 = this.itemsManager2;
+          this.flag1 = this.flagManger1;
+          this.falg2 = this.flagManger2;
           this.Managermark = false; //
           this.RoleSHow = 'partTwo'
         } else if (Nodename == 'checkApp_trial_manager') {
@@ -483,11 +481,11 @@
     mounted() {
       this.title = "影像资料";
       this.MyMove();
+      this.initialInfo(); //判断角色   
       this.QTC.tastwaitingPass = this.tastwaitingPass = JSON.parse(localStorage.getItem(this.LocalList));
       this.QTC.applyId = this.tastwaitingPass.ApplyId;
-      console.log(this.QTC)
-      this.getPageInf(); //获取页面个人信息
-      this.initialInfo(); //判断角色   
+      this.getPageInf(); //获取页面个人信息      
+      // console.log(this.tastwaitingPass.applyId)
       // console.log('tastwaitingPass：', this.tastwaitingPass)
       // console.log('QTC：', this.QTC)
       // console.log('pageType：', this.QTC.pageType)
