@@ -836,12 +836,19 @@ export default {
         //this.listData = res.data;
         if(res.statusCode == 200){
           this.listData = res.data.page;
+          //console.log(res.data.message)
           if(res.data.message){
+           //console.log('kkkk');
             if(this.formShow == true){
+              //console.log('kkkk1');
               this.hisShow = false;
             }else{
+              //console.log('kkkk2');
               this.hisShow = true;
             };
+            //console.log(this.formShow);
+            //console.log(this.hisShow);
+
             this.newList = res.data.message;
             this.source = this.newList.source;
             this.answer= this.newList.answer;  
