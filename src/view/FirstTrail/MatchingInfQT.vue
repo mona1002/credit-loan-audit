@@ -5,8 +5,7 @@
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
       <p class="PerDtl">
-        <span> 借款人： {{custName}}</span>
-        <!-- <span> 借款人： {{customInf.accepCusBasicInfo.custName}}</span> -->
+        <span> 借款人： {{customInf.accepCusBasicInfo.custName}}</span>
         <span> 进件编号: {{customInf.applyMainNo}}</span>
         <span> 证件号码: {{customInf.accepCusBasicInfo.certCode}}</span>
         <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
@@ -55,22 +54,22 @@
                 <regularQT v-if=" this.tabContent1==11&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
                 <QTResultCheck v-if=" this.tabContent1==11&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
               </div>
-                       <div class='tab2_Content_show' v-if="this.RoleSHow='partTwo'  ">
-              <!-- 主管部分 -->
-              <regularQT v-if=" this.tabContent1==9&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
-              <QTResultCheck v-if=" this.tabContent1==9&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+              <div class='tab2_Content_show' v-if="this.RoleSHow='partTwo'  ">
+                <!-- 主管部分 -->
+                <regularQT v-if=" this.tabContent1==9&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+                <QTResultCheck v-if=" this.tabContent1==9&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
 
-            </div>
-                      <div class='tab2_Content_show' v-if="this.RoleSHow='parthrne'  ">
-              <!-- 质检部分 -->
-              <QTAprovalConclution v-if=" this.tabContent1==9">反欺诈审批结论轨迹 </QTAprovalConclution>
-              <RApprovalConclusion v-if=" this.tabContent1==10">审批结论轨迹</RApprovalConclusion>
-              <ComplianceProcess v-if=" this.tabContent1==11 && this.QTmark" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
-              <ReApply v-if=" this.tabContent1==12 && this.QTmark" :propReApply='ReApplyMark'>合规复议申请</ReApply>
-              <!-- <regularQT v-if=" this.tabContent1==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC' >质检结论</regularQT> -->
-              <regularQT v-if=" this.tabContent1==13&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
-              <QTResultCheck v-if=" this.tabContent1==13&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
-            </div>
+              </div>
+              <div class='tab2_Content_show' v-if="this.RoleSHow='parthrne'  ">
+                <!-- 质检部分 -->
+                <QTAprovalConclution v-if=" this.tabContent1==9">反欺诈审批结论轨迹 </QTAprovalConclution>
+                <RApprovalConclusion v-if=" this.tabContent1==10">审批结论轨迹</RApprovalConclusion>
+                <ComplianceProcess v-if=" this.tabContent1==11 && this.QTmark" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
+                <ReApply v-if=" this.tabContent1==12 && this.QTmark" :propReApply='ReApplyMark'>合规复议申请</ReApply>
+                <!-- <regularQT v-if=" this.tabContent1==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC' >质检结论</regularQT> -->
+                <regularQT v-if=" this.tabContent1==13&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+                <QTResultCheck v-if=" this.tabContent1==13&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+              </div>
               <!-- <QTAprovalConclution v-if=" this.tabContent1==9&& this.Managermark">反欺诈审批结论轨迹 </QTAprovalConclution>
               <RApprovalConclusion v-if=" this.tabContent1==10&& this.Managermark">审批结论轨迹</RApprovalConclusion>
               <ComplianceProcess  v-if=" this.tabContent1==11 && this.QTmark" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
@@ -206,7 +205,18 @@
         // /----------------上面为新加的
         watchData: '',
         originLeft: '',
-        customInf: [],
+        customInf: {
+          accepCusBasicInfo: {
+            custName: '',
+            certCode: '',
+            mobile: ''
+          },
+          applyMainNo: '',
+          appOrgName: '',
+          appOrgRegisterDate: '',
+          salPerEmployDate: '',
+          adminIntroduce: ''
+        },
         tastwaitingPass: [],
         showHalfBtn: false,
         CompareAlert: false,
@@ -408,7 +418,6 @@
         }).then(res => {
           if (res.statusCode == 200) {
             this.customInf = res.data;
-            this.custName = res.data.accepCusBasicInfo.custName;
           } else {
             this.$message.error(res.msg);
           }
@@ -474,14 +483,15 @@
     mounted() {
       this.title = "影像资料";
       this.MyMove();
-      this.initialInfo(); //判断角色      
       this.QTC.tastwaitingPass = this.tastwaitingPass = JSON.parse(localStorage.getItem(this.LocalList));
       this.QTC.applyId = this.tastwaitingPass.ApplyId;
+      console.log(this.QTC)
       this.getPageInf(); //获取页面个人信息
-      console.log('tastwaitingPass：', this.tastwaitingPass)
-      console.log('QTC：', this.QTC)
-      console.log('pageType：', this.QTC.pageType)
-      console.log('LocalList：', this.LocalList)
+      this.initialInfo(); //判断角色   
+      // console.log('tastwaitingPass：', this.tastwaitingPass)
+      // console.log('QTC：', this.QTC)
+      // console.log('pageType：', this.QTC.pageType)
+      // console.log('LocalList：', this.LocalList)
     },
     components: {
       myHead,
