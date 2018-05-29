@@ -51,7 +51,6 @@
             <template slot-scope='scope'>
               <span>{{scope.row.createTime | dateFilter}}</span>
             </template>
-            percent
           </el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
@@ -267,15 +266,8 @@
           matchApplyId: "",
         },
         userInf: null,
-        tableData: [{
-
-        }],
-        params: {
-          applySubno: '',
-          custName: '',
-          certCode: '',
-          mobile: '',
-        },
+        tableData: [],
+        tableDataTransform: [],
         QTSituation: [{ //抽单类型
           value: '01',
           label: '熟练'
@@ -283,8 +275,8 @@
           value: '02',
           label: '新人'
         }],
-        proficiency:0,
-        newOne:0,
+        proficiencyCount: 0,
+        newOneCount: 0,
       }
     },
     methods: {
@@ -352,14 +344,15 @@
         // 质检-常规抽单配置—查询列表        
         this.get("/insMakeRules/getInfoList?" + Math.random()).then(res => {
           if (res.statusCode == 200) {
-            this.tableData = res.data;
-            for (var i = 0; i < res.data.length; i++) {
-              this.tableData[i].makeRatio = this.tableData[i].makeRatio * 100;
-              this.tableData[i].passRatio = this.tableData[i].passRatio * 100;
-              this.tableData[i].refuseRatio = this.tableData[i].refuseRatio * 100;
-              this.tableData[i].drawSheetType =='01'?this.proficiency.count++:'';//熟悉
-              this.tableData[i].drawSheetType =='02'?this.newOne.count++:'';//新人
+            this.tableDataTransform = res.data;
+            for (var i = 0; i < this.tableDataTransform.length; i++) {
+              this.tableDataTransform[i].makeRatio = this.tableDataTransform[i].makeRatio * 100;
+              this.tableDataTransform[i].passRatio = this.tableDataTransform[i].passRatio * 100;
+              this.tableDataTransform[i].refuseRatio = this.tableDataTransform[i].refuseRatio * 100;
+              this.tableDataTransform[i].drawSheetType == '01' ? this.proficiencyCount++ : ''; //熟悉
+              this.tableDataTransform[i].drawSheetType == '02' ? this.newOneCount++ : ''; //新人
             }
+            this.tableData = this.tableDataTransform;
           } else {
             this.$message.error(res.msg);
           }
@@ -377,7 +370,8 @@
       //  编辑按钮-弹出弹窗
       handleEdit(index, row) {
         this.Edit = true;
-        this.updateInf = row;
+        // this.updateInf = row;
+        this.updateInf = Object.assign({}, row);
         this.loadsitu = false;
         this.adbtn = '确定';
       },
@@ -415,15 +409,23 @@
           this.$message.error('请输入必填项！');
           return
         }
-        if(this.proficiency.count>0||this.newOne.count>0){
+        if (this.proficiencyCount > 0 || this.newOneCount > 0) {
           this.$message.error(' 抽单类型设置重复！');
+          return
         }
         this.loadsitu = true;
         this.adbtn = '保存中';
-        this.addNew.makeRatio = this.addNew.makeRatio / 100;
-        this.addNew.passRatio = this.addNew.passRatio / 100;
-        this.addNew.refuseRatio = this.addNew.refuseRatio / 100;
-        this.post("/insMakeRules/addInfo", this.addNew).then(res => {
+        this.post("/insMakeRules/addInfo", {
+          drawSheetType: this.addNew.drawSheetType,
+          recentDays: this.addNew.recentDays,
+          makeRatio: this.addNew.makeRatio / 100,
+          passRatio: this.addNew.passRatio / 100,
+          minPassNum: this.addNew.minPassNum,
+          refuseRatio: this.addNew.refuseRatio / 100,
+          minRefuseNum: this.addNew.minRefuseNum,
+          creator: this.addNew.creator,
+          createTime: this.addNew.createTime
+        }).then(res => {
           if (res.statusCode == 200) {
             this.$message({
               message: '提交成功!',
@@ -445,25 +447,23 @@
           this.updateInf.passRatio === '' || this.updateInf.passRatio == null ||
           this.updateInf.minPassNum === '' || this.updateInf.minPassNum == null ||
           this.updateInf.refuseRatio === '' || this.updateInf.refuseRatio == null ||
-          this.updateInf.minRefuseNum === '' || this.updateInf.minRefuseNum == null ||
-          this.updateInf.creator === '' || this.updateInf.creator == null ||
-          this.updateInf.createTime === '' || this.updateInf.createTime == null) {
+          this.updateInf.minRefuseNum === '' || this.updateInf.minRefuseNum == null
+          // ||this.updateInf.creator === '' || this.updateInf.creator == null ||
+          // this.updateInf.createTime === '' || this.updateInf.createTime == null
+        ) {
           this.$message.error('请输入必填项！');
           return
         }
         this.loadsitu = true;
         this.adbtn = '保存中';
-        this.updateInf.makeRatio = this.updateInf.makeRatio / 100;
-        this.updateInf.passRatio = this.updateInf.passRatio / 100;
-        this.updateInf.refuseRatio = this.updateInf.refuseRatio / 100;
         this.post("/insMakeRules/updateInfo", {
           id: this.updateInf.id,
           drawSheetType: this.updateInf.drawSheetType,
           recentDays: this.updateInf.recentDays,
-          makeRatio: this.updateInf.makeRatio,
-          passRatio: this.updateInf.passRatio,
+          makeRatio: this.updateInf.makeRatio / 100,
+          passRatio: this.updateInf.passRatio / 100,
           minPassNum: this.updateInf.minPassNum,
-          refuseRatio: this.updateInf.refuseRatio,
+          refuseRatio: this.updateInf.refuseRatio / 100,
           minRefuseNum: this.updateInf.minRefuseNum
         }).then(res => {
           if (res.statusCode == 200) {
