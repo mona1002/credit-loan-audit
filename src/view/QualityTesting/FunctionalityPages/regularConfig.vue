@@ -7,11 +7,11 @@
       <div class="title">
         <h1>质检规则设置查询</h1>
         <div class="icon_wrap">
-          <span class="icon" @click="addInf">
+          <span  @click="addInf">
             <img src="../../../../static/images/add.png" style="margin:10px;">
             <span class="span-text">添加</span>
           </span>
-          <span class="icon" @click="apportion">
+          <span  @click="apportion">
             <img src="../../../../static/images/add.png">
             <span class="span-text">任务分派</span>
           </span>
@@ -412,7 +412,9 @@
           this.$message.error('请输入必填项！');
           return
         }
-        if (this.proficiencyCount > 0 || this.newOneCount > 0) {
+        //  this.addNew.drawSheetType == '01' ? this.proficiencyCount++ : ''; //熟悉
+        //     this.addNew.drawSheetType == '02' ? this.newOneCount++ : ''; //新人
+        if ( (this.addNew.drawSheetType == '01'&&this.proficiencyCount > 0)||(this.addNew.drawSheetType == '02'&&this.newOneCount > 0) ) {//熟悉
           this.$message.error(' 抽单类型设置重复！');
           return
         }
