@@ -22,7 +22,7 @@
         <el-table :data="tableData" style="width: 100%" height="100%" border>
           <el-table-column type="index" align='center' label=序号 width="55">
           </el-table-column>
-          <el-table-column prop="drawSheetTypeTxt" label="抽单类型" align='center' min-width="180">
+          <el-table-column prop="drawSheetTypeTxt" label="抽单类型" align='center' min-width="100">
           </el-table-column>
           <el-table-column prop="recentDays" label="质检天数" align='center' min-width="120">
           </el-table-column>
@@ -31,28 +31,28 @@
               <span>{{scope.row.makeRatio | percent}}</span>
             </template>
           </el-table-column>
-          <el-table-column label="通过比例[每人]" align='center' min-width="130">
+          <el-table-column label="通过比例[每人]" align='center' min-width="100">
             <template slot-scope='scope'>
               <span>{{scope.row.passRatio | percent}}</span>
             </template>
           </el-table-column>
           <el-table-column prop="minPassNum" label="通过件最低抽单件数[人·件]" align='center' min-width="130">
           </el-table-column>
-          <el-table-column prop="refuseRatio" label="拒绝比例[每人]" align='center' min-width="180">
+          <el-table-column prop="refuseRatio" label="拒绝比例[每人]" align='center' min-width="140">
             <template slot-scope='scope'>
               <span> {{scope.row.refuseRatio | percent}}</span>
             </template>
           </el-table-column>
-          <el-table-column prop="minRefuseNum" label="拒绝件最低抽单件数[人·件]" align='center' min-width="120">
+          <el-table-column prop="minRefuseNum" label="拒绝件最低抽单件数[人·件]" align='center' min-width="100">
           </el-table-column>
-          <el-table-column prop="creator" label="创建人" align='center' min-width="100">
+          <el-table-column prop="creator" label="创建人" align='center' min-width="120">
           </el-table-column>
           <el-table-column label="创建日期" align='center' min-width="100">
             <template slot-scope='scope'>
               <span>{{scope.row.createTime | dateFilter}}</span>
             </template>
           </el-table-column>
-          <el-table-column label="操作">
+          <el-table-column label="操作" align="center" min-width='120'>
             <template slot-scope="scope">
               <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
             </template>
@@ -157,6 +157,7 @@
                 <b class="required_Red"> * </b>质检天数：</label>
               <span>
                 <el-input v-model="updateInf.recentDays" placeholder="请输入质检天数" @blur="Num('质检天数-编辑',updateInf.recentDays)"> </el-input> 天</span>
+              <!-- <el-input v-model="recentDays" placeholder="请输入质检天数" @blur="Num('质检天数-编辑',updateInf.recentDays)"> </el-input> 天</span> -->
             </p>
             <p>
               <label></label>
@@ -245,6 +246,7 @@
           createTime: '',
         },
         updateInf: {}, //编辑
+        recentDays: "",
         // updateInf: {
         //   id: '',
         //   drawSheetType: '',
@@ -371,6 +373,7 @@
       handleEdit(index, row) {
         this.Edit = true;
         // this.updateInf = row;
+        // this.recentDays=row.recentDays;
         this.updateInf = Object.assign({}, row);
         this.loadsitu = false;
         this.adbtn = '确定';
