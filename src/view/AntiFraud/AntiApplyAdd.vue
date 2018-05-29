@@ -253,6 +253,7 @@
         processInstanceId: '',
         busiState:'',//业务状态
         applySubNos:'',//弹框的案件编号
+        flowRoleCodesList:[],//用来判断channel的值
       }
     },
     mounted() {
@@ -261,6 +262,17 @@
       var userInfo = JSON.parse(localStorage.getItem('userInf'));
       this.userCode = userInfo.userCode;
       this.orgCode = userInfo.orgCode;
+      this.flowRoleCodesList = userInfo.flowRoleCodesList;
+      if(this.flowRoleCodesList){
+        for(var i=0;i<this.flowRoleCodesList.length;i++){
+            if(this.flowRoleCodesList[i] == 'BL12' || this.flowRoleCodesList[i] == 'BL108' || this.flowRoleCodesList[i] == 'BL07'){
+              this.channel = '06';
+            }else{
+              this.channel = '99';
+            }
+        }
+      }
+      
       // 先判断是 初审 终审  /  专员  主管
       // var judgeFlag = JSON.parse(localStorage.getItem('judge'));
       // this.antiFlag = judgeFlag.flag;
@@ -699,7 +711,7 @@
             this.proId = this.rowObj.proId;
             this.proCode = this.rowObj.proCode;
             this.proName = this.rowObj.proName;
-            this.channel = '99';
+            //this.channel = '99';
             this.busiState = this.rowObj.busiState;
             this.applyId = this.rowObj.applyId;
             // this.applyCustNo = this.rowObj.custNo;

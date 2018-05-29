@@ -1116,22 +1116,24 @@
       //反欺诈申请
       AntiFraudApplication() {
         // var  routeParms= 'id='+this.applyId+';flag=fuyi;busiState=20'
-        this.$router.push({
+        /*this.$router.push({
           name: 'AntiApplyEditf',
           params: {
             id: this.applyId,
             flag: 'fuyi',
             busiState: '20',
+            channel:'04'
           }
-        });
-        // localStorage.setItem("antiApplyFlag", JSON.stringify(routeParms));
-        // this.$store.dispatch('addVisitedViews', {
-        //         name: '反欺诈申请',
-        //         path: '/AntiApplyEditf',
-        //         flag:'05',
-        //         params: '',
-        //         StatefullPath: '/AntiApplyEditf',
-        //       })
+        });*/
+          this.$router.push({name: 'AntiApplyEditf'});
+          this.params={
+              id: this.applyId,
+              flag: 'fuyi',
+              busiState:'20',
+              channel:'04'
+            }
+          localStorage.setItem("AntiApplyParams",JSON.stringify(this.params));
+        
       },
       // 审批结论轨迹
       getSpjlList() {

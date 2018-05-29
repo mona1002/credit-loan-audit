@@ -143,26 +143,26 @@
             <!-- <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull" :source='source' :answer="answer" :checkStage="checkStage" :sourceDesc="sourceDesc" :thirdResult="thirdResult" :threeQueries="threeQueries" :exceptionState="exceptionState" :issameFam="issameFam" :issameFamtxt="issameFamtxt" :relBorrower="relBorrower" :relBorrowertxt="relBorrowertxt" :checkWork="checkWork" :checkWorktxt="checkWorktxt" :maritalStatus="maritalStatus" :maritalStatustxt="maritalStatustxt" :checkAddr="checkAddr" :checkAddrtxt="checkAddrtxt" :checkEstate="checkEstate" :checkEstatetxt="checkEstatetxt" :otherIncome="otherIncome" :otherIncometxt="otherIncometxt" :recentLargespend="recentLargespend" :recentlArgespendInfo="recentlArgespendInfo" :parents="parents" :parentsInfo="parentsInfo" :brother="brother" :brothertxt="brothertxt" :expenses="expenses" :expensestxt="expensestxt" :checkHometel="checkHometel" :checkHometeltxt="checkHometeltxt" :hobbyandBehave="hobbyandBehave" :conclusion="conclusion" @aaa="aaa"></AddressForm> -->
             <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull" :Addlist="newList"></AddressForm>
             <!-- 住址电话 - 历史 -->
-            <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :mobileData="mobileData" :isFull.sync="isFull"></AddressHis>
+            <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :mobileData="newList?newList:mobileData" :isFull.sync="isFull"></AddressHis>
             <!-- 单位电话 - 表单 -->
             <!-- <CompanyForm class="form-his" v-if="formShow && phoneType=='02'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull" :source='source' :answer="answer" :checkStage="checkStage" :sourceDesc="sourceDesc" :phone="phone" :phonetxt="phonetxt" :answerIdentity="answerIdentity" :answertxt="answertxt" :company="company" :companytxt="companytxt" :checkTime="checkTime" :checkTimetxt="checkTimetxt" :checkIncome="checkIncome" :checkIncometxt="checkIncometxt" :employmentmode="employmentmode" :payrollSituation="payrollSituation" :payrollSituationtxt="payrollSituationtxt" :pensionInsurance="pensionInsurance" :housingFund="housingFund" :jobref1="jobref1" :jobref2="jobref2" :conclusion="conclusion"></CompanyForm> -->
             <CompanyForm class="form-his" v-if="formShow && phoneType=='02'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull" :danweiList="newList"></CompanyForm>
             <!-- 单位电话 - 历史 -->
-            <CompanyHis class="form-his" v-if="hisShow && phoneType=='02'" :comData="comData" :isFull.sync="isFull"></CompanyHis>
+            <CompanyHis class="form-his" v-if="hisShow && phoneType=='02'" :comData="newList?newList:comData" :isFull.sync="isFull"></CompanyHis>
             <!-- 家庭联系人 - 表单 -->
             <!-- <FamilyForm class="form-his" v-if="formShow && phoneType=='03'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull" :source='source' :answer="answer" :checkStage="checkStage" :sourceDesc="sourceDesc" :thirdResult="thirdResult" :threeQueries="threeQueries" :threeQueriestxt="threeQueriestxt" :mobilepayment="mobilepayment" :mobilepaymenttxt="mobilepaymenttxt" :issameFam="issameFam" :issameFamtxt="issameFamtxt" :relBorrower="relBorrower" :relBorrowertxt="relBorrowertxt" :checkWork="checkWork" :checkWorktxt="checkWorktxt" :maritalStatus="maritalStatus" :maritalStatustxt="maritalStatustxt" :checkAddr="checkAddr" :checkAddrtxt="checkAddrtxt" :checkEstate="checkEstate" :checkEstatetxt="checkEstatetxt" :otherIncome="otherIncome" :otherIncometxt="otherIncometxt" :conclusion="conclusion"></FamilyForm> -->
             <FamilyForm class="form-his" v-if="formShow && phoneType=='03'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull" :familyList="newList"></FamilyForm>
             <!-- 家庭联系人 - 历史 -->
-            <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :familyData="familyData" :isFull.sync="isFull"></FamilyHis>
+            <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :familyData="newList?newList:familyData" :isFull.sync="isFull"></FamilyHis>
             <!-- 紧急联系人 - 表单 -->
             <!-- <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull" :source='source' :answer="answer" :checkStage="checkStage" :sourceDesc="sourceDesc" :thirdResult="thirdResult" :threeQueries="threeQueries" :threeQueriestxt="threeQueriestxt" :mobilepayment="mobilepayment" :mobilepaymenttxt="mobilepaymenttxt" :relBorrower="relBorrower" :relBorrowertxt="relBorrowertxt" :contactfre="contactfre" :checkWork="checkWork" :checkWorktxt="checkWorktxt" :maritalStatus="maritalStatus" :maritalStatustxt="maritalStatustxt" :conclusion="conclusion"></HurryForm> -->
             <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull" :hurryList="newList"></HurryForm>
             <!-- 紧急联系人 - 历史 -->
-            <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :hurryData="hurryData" :isFull.sync="isFull"></HurryHis>
+            <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :hurryData="newList?newList:hurryData" :isFull.sync="isFull"></HurryHis>
             <!-- 工作证明人 - 表单 -->
             <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull" :source='source' :answer="answer" :checkStage="checkStage" :sourceDesc="sourceDesc" :mobilepayment="mobilepayment" :checkJob="checkJob" :checkJobtxt="checkJobtxt" :mobilepaymenttxt="mobilepaymenttxt" :answerIdentity="answerIdentity" :answertxt="answertxt" :conclusion="conclusion" ></WorkForm><!-- @on-source-change="onSourceChange" @on-sourceDesc-change="onSourceDescChange" @on-answer-change="onAnswerChange" @on-checkStage-change="onCheckStageChange" @on-answerIdentity-change="onAnswerIdentityChange" @on-answertxt-change="onAnswertxtChange" @on-checkJob-change="onCheckJobChange" @on-checkJobtxt-change="onCheckJobtxtChange" @on-mobilepayment-change="onMobilepaymentChange" @on-mobilepaymenttxt-change="onMobilepaymenttxtChange" @on-conclusion-change="onConclusionChange" -->
             <!-- 工作证明人 - 历史 -->
-            <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="workData" :isFull.sync="isFull"></WorkHis>
+            <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="newList?newList:workData" :isFull.sync="isFull"></WorkHis>
             <!-- 子组件 -->
             <!-- <router-link to="/AddressForm/formTag='testtag'/id='123'/phoneType='01'">
             <el-button type="primary">住址电话</el-button>
@@ -837,6 +837,7 @@ export default {
         if(res.statusCode == 200){
           this.listData = res.data.page;
           if(res.data.message){
+            this.hisShow = true;
             this.newList = res.data.message;
             this.source = this.newList.source;
             this.answer= this.newList.answer;  
@@ -1078,6 +1079,7 @@ export default {
         phoneType: this.phoneType
       }).then(res => {
         console.log(res);
+        this.newList = '';
         this.mobileData = res.data;
         if (res.statusCode == '200')
           // 直接处理 显示  历史
@@ -1092,6 +1094,7 @@ export default {
         phoneType: this.phoneType
       }).then(res => {
         console.log(res);
+        this.newList = '';
         this.comData = res.data;
         if (res.statusCode == '200')
           // 直接处理 显示  历史
@@ -1105,6 +1108,7 @@ export default {
         phoneType: this.phoneType
       }).then(res => {
         console.log(res);
+        this.newList = '';
         this.familyData = res.data;
         if (res.statusCode == '200')
           // 直接处理 显示  历史
@@ -1119,6 +1123,7 @@ export default {
         phoneType: this.phoneType
       }).then(res => {
         console.log(res);
+        this.newList = '';
         this.hurryData = res.data;
         if (res.statusCode == '200')
           // 直接处理 显示  历史
@@ -1132,6 +1137,7 @@ export default {
         phoneType: this.phoneType
       }).then(res => {
         console.log(res);
+        this.newList = '';
         this.workData = res.data;
         if (res.statusCode == '200')
           // 直接处理 显示  历史

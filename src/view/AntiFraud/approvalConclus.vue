@@ -126,22 +126,6 @@
             <el-option v-for="item in caseOptions" :label="item.caseNum" :value="item.caseNum">
             </el-option>
           </el-select> -->
-          <!-- <el-select
-            v-model="caseNum"
-            clearable
-            filterable
-            remote
-            reserve-keyword
-            placeholder="请输入关键词"
-            :remote-method="remoteMethod"
-            :loading="loading">
-            <el-option
-              v-for="item in caseOptions"
-              :key="item.caseNum"
-              :label="item.caseNum"
-              :value="item.caseNum">
-            </el-option>
-          </el-select> -->
           <el-autocomplete
             v-model="caseNum"
             :fetch-suggestions="querySearchAsync"
@@ -327,6 +311,7 @@
             placeholder="请输入内容"
             v-model="caseNums"
             :maxlength="20"
+            @keyup.native="trimFilter('caseNums')"
             >
           </el-input>
           <span class="addWarimg" v-show="caseNums != null && caseNums.length==20">
@@ -345,6 +330,7 @@
           v-model="caseDescs"
           :maxlength="500"
           resize="none"
+          @keyup.native="trimFilter('caseDescs')"
           >
         </el-input>
         </p>
@@ -1654,27 +1640,22 @@
                   }else{
                     this.addLogVisible = false;
                     this.caseNum = this.caseNums;
+                    this.caseDesc = this.caseDescs;
                     this.queryCaseNumList();
                   }
                 })
             }
       },
-     /* remoteMethod(query) {
-        if (query !== '') {
-          this.loading = true;
-          setTimeout(() => {
-            this.loading = false;
-            this.caseOptions = this.list.filter(item => {
-              return item.caseNum.toLowerCase()
-                .indexOf(query.toLowerCase()) > -1;
-            });
-          }, 200);
-          console.log(this.caseOptions);
-        } else {
-          this.caseOptions = [];
-          //this.caseNum = '';
+     trimFilter: function (value) { 
+        switch(value){
+          case 'caseNums':
+            return this.caseNums = this.caseNums.replace(/\s/g,'');
+            break;
+          case 'caseDescs':
+            return this.caseDescs = this.caseDescs.replace(/\s/g,'');
+            break;
         }
-      },*/
+      }, 
     },
     watch: {
       // 审核结论 改变请求主原因
@@ -1694,7 +1675,7 @@
       //     // this.subreaName = '';
       //     this.getReason('second', val, false);
       //   }
-    }
+    },
   }
 
 </script>

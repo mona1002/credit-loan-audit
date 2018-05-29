@@ -1266,14 +1266,23 @@
 		    },
 		    //反欺诈申请
 		    AntiFraudApplication(){
-		    	this.$router.push({
+		    	/*this.$router.push({
 		            name: 'AntiApplyEditf',
 		            params: {
 		              id: this.applyId,
 		              flag: 'fuyi',
-		              busiState:'20'
+		              busiState:'20',
+		              channel:'04'
 		            }
-		          });
+		          });*/
+		    	this.$router.push({name: 'AntiApplyEditf'});
+	            this.params={
+	                  id: this.applyId,
+		              flag: 'fuyi',
+		              busiState:'20',
+		              channel:'04'
+	              }
+	            localStorage.setItem("AntiApplyParams",JSON.stringify(this.params));
 		    },
 		    // 审批结论轨迹
 		    getSpjlList() {

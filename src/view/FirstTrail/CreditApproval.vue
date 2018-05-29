@@ -672,6 +672,7 @@
         flowRoleCode:'',//	流程角色code
         maxAuditAmt:Number,//流程角色-最高审批金额
         ploanAmtNum:Number,//批准金额number类型
+        params:'',
       }
     },
     mounted() {
@@ -1177,14 +1178,14 @@
             // this.$router.push('AntiApplyEdit')
             console.log(this.applyId)
             // var routeParms = 'id=' + this.applyId + ';flag=start;busiState=30'
-            this.$router.push({
-              name: 'AntiApplyEditf',
-              params: {
+            this.$router.push({name: 'AntiApplyEditf'});
+            this.params={
                 id: this.applyId,
                 flag: 'start',
-                busiState: '30'
+                busiState: '30',
+                channel:'00'
               }
-            });
+            localStorage.setItem("AntiApplyParams",JSON.stringify(this.params));
             // localStorage.setItem("antiApplyFlag", JSON.stringify(routeParms));
             // this.$store.dispatch('addVisitedViews', {
             //   name: '反欺诈申请',
