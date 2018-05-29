@@ -53,6 +53,7 @@
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
+      <!-- <div ref="img_wrap" style="position:relative;" :id='msg'  @dblclick="next"> -->
       <div ref="img_wrap" style="position:relative;" :id='msg'>
         <img ref="Big_pic_ref" v-for="(val,key) in imgPath" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath"
           v-if="key==smallPicInd" />
@@ -65,7 +66,7 @@
       <img src="../../../../static/images/net.png" @click="larger">
       <img src="../../../../static/images/daf.png" @click="AclockWise ">
       <img src="../../../../static/images/dasf.png" @click="clockWise ">
-      <!-- <span>当前第{{smallPicInd}}页</span> -->
+      <span>当前第{{pageShow}}页</span>
     </div>
     <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面  SmallPicShow-->
     <div class="Small_pic_div" v-show="SmallPicShow">
@@ -148,6 +149,7 @@
         showListDiv: true,
         show: true,
         smallPicInd: 0, // 未知
+        pageShow:0,//当前页
         SmallPicShow: false,
         CompareAlert: true,
         ListParent: [],
@@ -253,10 +255,12 @@
       smallPic(ev, ind) {
         this.smallPicInd = ind;
         this.SmallPicShow = false;
+        this.pageShow=ind+1;// 页码
         this.defaultBigPicCss();
       },
       getImg(ind) {
         this.smallPicInd = 0;
+         this.pageShow=1;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
         this.$refs.img_wrap.style.left = 0;
         this.$refs.img_wrap.style.top = 0;
@@ -344,9 +348,13 @@
         this.changeSmallPicCss(ind);
       },
       defaultBigPicCss() {
+        console.log('enter')
         this.$nextTick(() => {
+          console.log('mounted')
           if (this.$refs.Big_pic_ref) {
             this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
+            // this.$refs.img_wrap.style.left=0;//renew
+            // this.$refs.img_wrap.style.top=0;
             var outsideH = this.$refs.AudioVisual_Img_ref.offsetHeight;
             var widthReduce = this.$refs.AudioVisual_Img_ref.offsetWidth - this.$refs.Big_pic_ref[0].offsetWidth;
             var heightReduce = this.$refs.AudioVisual_Img_ref.offsetHeight - this.$refs.Big_pic_ref[0].offsetHeight;

@@ -187,10 +187,10 @@
   import QTAprovalConclution from "../QualityTesting/QTReconsiderProcess/components/QTAprovalConclution.vue"; //反欺诈审批结论轨迹--新写页面
   import regularQT from "../QualityTesting/QTProcess/components/regularQT.vue"; //质检结论
   import QTResultCheck from "../QualityTesting/QTReconsiderProcess/components/QTResultCheck.vue"; //质检结论-本人结论页
-  import ComplianceProcess from '../QualityTesting/QTReconsiderProcess/components/ComplianceProcess.vue'; //合规质检结论轨迹
+  import ComplianceProcess from '../QualityTesting/QTReconsiderProcess/components/ComplianceProcess.vue'; //合规质检结论轨迹-prop
   import ReApply from '../QualityTesting/QTReconsiderProcess/page/ReApply.vue'; //合规复议申请
 
-  import InternalMatch from "./InternalMatch";
+  import InternalMatch from "./InternalMatch";//获取-申请信息
   import PhoneCredit from "./PhoneCredit"; //电话征信
   export default {
     data() {

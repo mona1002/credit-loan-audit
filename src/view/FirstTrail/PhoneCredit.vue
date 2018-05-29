@@ -552,6 +552,13 @@ export default {
       this.applySubNo = RtaskInWaitting.applySubNo;
       console.log(this.applySubNo);
     }
+    //质检详情-部分
+      if (this.judgeFlag == '07'||this.judgeFlag == '08'||this.judgeFlag == '09'||this.judgeFlag == '10'||this.judgeFlag == '11'||this.judgeFlag == '12'||this.judgeFlag == '13') {
+      var RtaskInWaitting = JSON.parse(localStorage.getItem('QT'));
+      this.applyId = RtaskInWaitting.matchApplyId;
+      // 进件编号
+      this.applySubNo = RtaskInWaitting.applySubNo;
+    }
     // //复议经理
     // if (this.judgeFlag == '06') {
     //   var RtaskInWaitting = JSON.parse(localStorage.getItem('RManagertaskInWaitting'));

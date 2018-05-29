@@ -970,7 +970,9 @@
        					 this.taskInWaitting = JSON.parse(localStorage.getItem('internalObj'));
       			} else if (this.MatchFlag.MatchFlag == 'Query') {
    			   this.taskInWaitting = JSON.parse(localStorage.getItem("Query")) //初审-匹配查看
-    			  }
+    			  }else if (this.MatchFlag.MatchFlag == 'QT') {
+        this.taskInWaitting = JSON.parse(localStorage.getItem("QT")) //综合查询
+      }
 			this.applyId=this.taskInWaitting.matchApplyId;
 			this.request();
 		},
