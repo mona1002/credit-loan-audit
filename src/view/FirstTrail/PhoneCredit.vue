@@ -837,7 +837,11 @@ export default {
         if(res.statusCode == 200){
           this.listData = res.data.page;
           if(res.data.message){
-            this.hisShow = true;
+            if(this.formShow == true){
+              this.hisShow = false;
+            }else{
+              this.hisShow = true;
+            };
             this.newList = res.data.message;
             this.source = this.newList.source;
             this.answer= this.newList.answer;  
@@ -2105,7 +2109,7 @@ export default {
   width: 100%;
   height: 38px;
   line-height: 38px;
-  padding-left: 20px;
+  padding-left: 5px;
   border-bottom: 1px solid #d8dce5;
 }
 

@@ -449,6 +449,7 @@
         //远程搜索案件编号
         restaurants: [],
         timeout:  null,
+        channel:'',
         // mainName:'',
         // secondaryName:''
       }
@@ -482,6 +483,8 @@
           "value": "creditApp_apply",
           "type": "01"
         }]
+        //channel
+        this.channel = '00';
 
       } else if (this.judgeFlag == '02') { // 终审取终审  taskId
         this.FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
@@ -500,6 +503,8 @@
             "type": "02"
           }
         ]
+        //channel
+        this.channel = '00';
       } else if (this.judgeFlag == '03' || this.judgeFlag == '04') {
         this.taskwaitting = JSON.parse(localStorage.getItem('AntitaskInWaitting'));
         this.taskName = this.taskwaitting.taskName;
@@ -547,6 +552,12 @@
             this.queryCreauditOpinionObj();
           }
         }
+      }else if(this.judgeFlag == '05' || this.judgeFlag == '06'){
+        //channel
+        this.channel = '04';
+      }else if(this.judgeFlag == '07' || this.judgeFlag == '08' || this.judgeFlag == '10' || this.judgeFlag == '11' || this.judgeFlag == '12' || this.judgeFlag == '13'){
+        //channel
+        this.channel = '03';
       }
       // else if (this.judgeFlag == '03') {
 
@@ -1023,6 +1034,7 @@
                   processInstanceId: this.processInstanceId, // 流程实例Id
                   busiState: this.busiState, //  状态
                   processTemplateId: this.processTemplateId, // 流程模版Id
+                  channel:this.channel
                 }).then(res => {
                   if (res.statusCode == '200') {
                     this.resMsg = res.msg;
