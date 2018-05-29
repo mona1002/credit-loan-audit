@@ -401,8 +401,8 @@
         this.addNew.minPassNum = '';
         this.addNew.refuseRatio = '';
         this.addNew.minRefuseNum = '';
-        this.addNew.creator = '';
-        this.addNew.createTime = '';
+        // this.addNew.creator = '';
+        // this.addNew.createTime = '';
       },
       SaveAdd() { //添加  提交
         if (this.addNew.recentDays === '' || this.addNew.drawSheetType === '' || this.addNew.makeRatio === '' || this.addNew
