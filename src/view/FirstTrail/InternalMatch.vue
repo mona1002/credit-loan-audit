@@ -16,7 +16,7 @@
         </el-table-column>
         <el-table-column prop="matchTel" label="命中号码" min-width="150">
         </el-table-column>
-        <el-table-column prop="applyTelTypeTxt" label="电话类型" min-width="100">
+        <el-table-column prop="matchTelTypeTxt" label="电话类型" min-width="100">
         </el-table-column>
         <el-table-column prop="matchApplySubNo" label="进件编号" min-width="180">
         </el-table-column>
@@ -52,7 +52,7 @@
         </el-table-column>
         <el-table-column prop="matchTel" label="命中号码" min-width="150">
         </el-table-column>
-        <el-table-column prop="applyTelTypeTxt" label="电话类型" min-width="100">
+        <el-table-column prop="matchTelTypeTxt" label="电话类型" min-width="100">
         </el-table-column>
         <el-table-column prop="matchApplySubNo" label="进件编号" min-width="180">
         </el-table-column>
