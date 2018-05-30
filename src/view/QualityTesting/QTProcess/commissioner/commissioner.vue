@@ -92,7 +92,8 @@
         QTquery: {
           id: '',
           matchApplyId: "",
-          applySubNo: ''
+          applySubNo: '',
+          businessId:'',
         },
         taskList: '',
         tableData: [],
@@ -151,6 +152,7 @@
         this.QTquery.id = this.query.id = val.id;
         this.QTquery.matchApplyId = this.query.ApplyId = val.applyId;
         this.QTquery.applySubNo = val.applySubno;
+         this.QTquery.businessId = val.businessId;
         this.query.taskId = val.taskId;
         this.query.processInstanceId = val.processInstanceId;
         // 存储质检结论参数
