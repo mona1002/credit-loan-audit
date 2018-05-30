@@ -51,7 +51,7 @@
                 </el-radio-group>
               </td>
               <td>
-                <el-input type='textarea' v-if="regularInfo.isForm==0" v-model="regularInfo.isFormRemark" :rows="2" resize="none" :maxlength='arealength'
+                <el-input type='textarea' v-if="regularInfo.isForm==0" v-model.trim="regularInfo.isFormRemark" @keyup.native='ccc' :rows="2" resize="none" :maxlength='arealength'
                   placeholder="请输入内容">
                 </el-input>
               </td>
@@ -1311,6 +1311,10 @@
     },
     props: ['propQTconclution'],
     methods: {
+      ccc(){
+console.log( this.regularInfo.isFormRemark.length)
+console.log('a'+ this.regularInfo.isFormRemark+"b")
+      },
       getSystermTime() { // 获取系统时间-质检结论-质检日期取值---基础接口
         this.get('system/getSystemDate?' + Math.random()).then(res => {
           if (res.statusCode == 200) {
@@ -2074,6 +2078,7 @@
 
   .regularQT td {
     text-align: center;
+      border: 1px solid #ebeef5;
   }
 
   .regularQT .material td:nth-of-type(4) {

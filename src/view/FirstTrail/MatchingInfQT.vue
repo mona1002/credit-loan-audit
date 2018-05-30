@@ -410,8 +410,9 @@
         });
       },
       getPageInf() { //获取个人信息
+      console.log( 'id', this.tastwaitingPass)
         this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-          id: this.tastwaitingPass.applyId,
+          id: this.tastwaitingPass.ApplyId,
         }).then(res => {
           if (res.statusCode == 200) {
             this.customInf = res.data;
