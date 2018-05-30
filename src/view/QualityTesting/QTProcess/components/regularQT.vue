@@ -66,7 +66,7 @@
                 </el-radio-group>
               </td>
               <td>
-                <el-input type='textarea' v-if="regularInfo.isIdcard==0" v-model="regularInfo.isIdcardRemark" :rows="2" resize="none" :maxlength='arealength'
+                <el-input type='textarea' v-if="regularInfo.isIdcard=='0'" v-model="regularInfo.isIdcardRemark" :rows="2" resize="none" :maxlength='arealength'
                   placeholder="请输入内容">
                 </el-input>
               </td>
@@ -201,7 +201,7 @@
                 </el-radio-group>
               </td>
               <td>
-                <el-input type='textarea' v-if="regularInfo.isLiabilities==0" v-model="regularInfo.isLiabilitiesRemark" :rows="2" resize="none"
+                <el-input type='textarea' v-if="regularInfo.isLiabilities=='0'" v-model="regularInfo.isLiabilitiesRemark" :rows="2" resize="none"
                   :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -216,7 +216,7 @@
                 </el-radio-group>
               </td>
               <td>
-                <el-input type='textarea' v-if="regularInfo.isFlow==0" v-model="regularInfo.isFlowRemark" :rows="2" resize="none" :maxlength='arealength'
+                <el-input type='textarea' v-if="regularInfo.isFlow=='0'" v-model="regularInfo.isFlowRemark" :rows="2" resize="none" :maxlength='arealength'
                   placeholder="请输入内容">
                 </el-input>
               </td>
@@ -231,7 +231,7 @@
                 </el-radio-group>
               </td>
               <td>
-                <el-input type='textarea' v-if="regularInfo.isReference==0" v-model="regularInfo.isReferenceRemark" :rows="2" resize="none"
+                <el-input type='textarea' v-if="regularInfo.isReference=='0'" v-model="regularInfo.isReferenceRemark" :rows="2" resize="none"
                   :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -326,7 +326,7 @@
                 </el-radio-group>
               </td>
               <td>
-                <el-input type='textarea' :disabled='InfoInquire' v-if="regularInfo.wnetCompany==0" v-model="regularInfo.wnetCompanytxt"
+                <el-input type='textarea' :disabled='InfoInquire' v-if="regularInfo.wnetCompany=='0'" v-model="regularInfo.wnetCompanytxt"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -341,7 +341,7 @@
                 </el-radio-group>
               </td>
               <td>
-                <el-input type='textarea' :disabled='InfoInquire' v-if="regularInfo.wnetAddrstate==0" v-model="regularInfo.wnetAddrstatetxt"
+                <el-input type='textarea' :disabled='InfoInquire' v-if="regularInfo.wnetAddrstate=='0'" v-model="regularInfo.wnetAddrstatetxt"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -386,7 +386,7 @@
                 </el-radio-group>
               </td>
               <td>
-                <el-input type='textarea' v-if="regularInfo.isInmatch==0" v-model="regularInfo.isInmatchRemark" :rows="2" resize="none" :maxlength='arealength'
+                <el-input type='textarea' v-if="regularInfo.isInmatch=='0'" v-model="regularInfo.isInmatchRemark" :rows="2" resize="none" :maxlength='arealength'
                   placeholder="请输入内容">
                 </el-input>
               </td>
@@ -1499,7 +1499,7 @@ this.insTelCustInfo.remark =res.data.insTelCustInfo.remark;//备注
         });
         // 
       },
-      addQTResult() {
+      addQTResult() {//添加
         // event.stopPropagation();
         // 判断初终审标识-------------未填写------------初终检标志根据角色更改
         // this.propQTconclution.pageType == 'checkApp_apply' //专员
@@ -1514,7 +1514,7 @@ this.insTelCustInfo.remark =res.data.insTelCustInfo.remark;//备注
             insMemberCode: this.userInf.userCode, // 操作人员-质检code            
             insMemberName: this.userInf.userName, // 操作人员-质检员name
             insDate: this.systermTime, // 质检日期
-            checkType: "", // 初终检标志
+            checkType: this.propQTconclution.pageType=='checkApp_apply'?'01':'02', // 初终检标志01:初检，02：终检
             instaskType: "", //任务类型（00:常规质检，01:专项质检）
             id: this.addId, // 专员或主管首次保存或提交不传
             isSubmit: "0", // 0：保存 1：提交
