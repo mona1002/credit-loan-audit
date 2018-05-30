@@ -51,8 +51,8 @@
                 </el-radio-group>
               </td>
               <td>
-                <el-input type='textarea' v-if="regularInfo.isForm==0" v-model.trim="regularInfo.isFormRemark" @keyup.native='ccc' :rows="2" resize="none" :maxlength='arealength'
-                  placeholder="请输入内容">
+                <el-input type='textarea' v-if="regularInfo.isForm==0" v-model.trim="regularInfo.isFormRemark" @keyup.native='ccc' :rows="2"
+                  resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -386,8 +386,8 @@
                 </el-radio-group>
               </td>
               <td>
-                <el-input type='textarea' v-if="regularInfo.isInmatch=='0'" v-model="regularInfo.isInmatchRemark" :rows="2" resize="none" :maxlength='arealength'
-                  placeholder="请输入内容">
+                <el-input type='textarea' v-if="regularInfo.isInmatch=='0'" v-model="regularInfo.isInmatchRemark" :rows="2" resize="none"
+                  :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -714,7 +714,7 @@
             <el-table-column label="质检日期" align="center" width="180">
               <template slot-scope='scope'>
                 <span>{{scope.row.insDate | dateFilter}}</span>
-                </template>
+              </template>
             </el-table-column>
           </el-table>
           <!-- <table border="1" cellpadding='2' width='100%'>
@@ -1140,39 +1140,39 @@
         insTelVerifyListConcat: [], //合并电话拨打核实-除客户本人
         //  regularInfo: {},//接口可调用时待测试默认选中值
         regularInfo: {
-          applyId:this.propQTconclution.applyId,
+          applyId: this.propQTconclution.applyId,
           // 资料核实
           isForm: '1', //申请单表是否符合要求
-          isFormRemark:'',//申请表是否符合要求说明
+          isFormRemark: '', //申请表是否符合要求说明
           isIdcard: '1', //身份证证明是否符合要求
-          isIdcardRemark:'',//身份证证明是否符合要求说明
+          isIdcardRemark: '', //身份证证明是否符合要求说明
           isIncome: '1', //收入证明是否符合要求
-             isIncomeRemark:'',//收入证明是否符合要求说明
+          isIncomeRemark: '', //收入证明是否符合要求说明
           isWork: '1', //工作证明是否符合要求
-             isWorkRemark:'',//工作证明是否符合要求说明
+          isWorkRemark: '', //工作证明是否符合要求说明
           isEstate: '1', //房产资料是否符合要求
-             isEstateRemark:'',//房产资料是否符合要求说明
+          isEstateRemark: '', //房产资料是否符合要求说明
           isLive: '1', //居住证明是否符合要求
-             isLiveRemark:'',//房产资料是否符合要求说明
+          isLiveRemark: '', //房产资料是否符合要求说明
           isBusiness: '1', //经营证明是否符合要求
-             isBusinessRemark:'',//经营证明是否符合要求说明
+          isBusinessRemark: '', //经营证明是否符合要求说明
           isCredit: '1', //信用报告是否符合要求
-             isCreditRemark:'',//信用报告是否符合要求说明
+          isCreditRemark: '', //信用报告是否符合要求说明
           isCustomerflow: '1', //客户流水是否符合要求
-             isCustomerflowRemark:'',//客户流水是否符合要求说明
+          isCustomerflowRemark: '', //客户流水是否符合要求说明
           isCustomerother: '1', //客户其他资料是否符合要求
-             isCustomerotherRemark:'',//客户其他资料是否符合要求说明
+          isCustomerotherRemark: '', //客户其他资料是否符合要求说明
           isLiabilities: '', //负债计算是否正确
-             isLiabilitiesRemark:'',//负债计算是否正确说明
+          isLiabilitiesRemark: '', //负债计算是否正确说明
           isFlow: '', //流水计算是否正确
-          isFlowRemark:'',//负债计算是否正确说明
+          isFlowRemark: '', //负债计算是否正确说明
           isReference: '', //征信录入是否正确
-          isReferenceRemark:'',//征信录入是否正确说明
+          isReferenceRemark: '', //征信录入是否正确说明
           // 第三方信息查询 
           wbeexEcuted: '', //客户在人法网是否有被执行信息
-          wbeexEcutedtxt:'',//客户在人法网是否有被执行信息说明   
+          wbeexEcutedtxt: '', //客户在人法网是否有被执行信息说明   
           wnetEcutedBrea: '', //客户在失信网是否有失信记录
-               wnetEcutedBreatxt:'',//客户在失信网是否有失信记录说明                 
+          wnetEcutedBreatxt: '', //客户在失信网是否有失信记录说明                 
           wnetPhone: '', //网上搜索借款人的手机是否有异常
           wnetPhonetxt: '', //网上搜索借款人的手机是否有异常说明
           wnetAddrandEstate: '', //网上搜索借款人现居住地址和房产地址是否异常
@@ -1334,9 +1334,9 @@
     },
     props: ['propQTconclution'],
     methods: {
-      ccc(){
-console.log( this.regularInfo.isFormRemark.length)
-console.log('a'+ this.regularInfo.isFormRemark+"b")
+      ccc() {
+        console.log(this.regularInfo.isFormRemark.length)
+        console.log('a' + this.regularInfo.isFormRemark + "b")
       },
       getSystermTime() { // 获取系统时间-质检结论-质检日期取值---基础接口
         this.get('system/getSystemDate?' + Math.random()).then(res => {
@@ -1365,11 +1365,11 @@ console.log('a'+ this.regularInfo.isFormRemark+"b")
             // 资料核实+三方信息查询+ 内部匹配核实         -Object
             // !res.data.insRegularInfo ? this.regularInfo.applyId = this.propQTconclution.applyId : this.regularInfo =
             //   res.data.insRegularInfo;
-            !res.data.insRegularInfo ? this.regularInfo: this.regularInfo = res.data.insRegularInfo;
-            console.log( !res.data.insRegularInfo)
+            !res.data.insRegularInfo ? this.regularInfo : this.regularInfo = res.data.insRegularInfo;
+            console.log(!res.data.insRegularInfo)
             console.log(this.propQTconclution.applyId)
-            // 质检结论                                  -Object
-            !res.data.insConclusionList ? this.insConclusion.applyId = this.propQTconclution.applyId : this.insConclusion =
+              // 质检结论                                  -Object
+              !res.data.insConclusionList ? this.insConclusion.applyId = this.propQTconclution.applyId : this.insConclusion =
               res.data.insConclusionList;
             this.insConclusion[0] && this.insConclusion[0].id ? this.addId = this.insConclusion[0].id : this.addId =
               ''; //取添加质检结论时，id值
@@ -1378,20 +1378,21 @@ console.log('a'+ this.regularInfo.isFormRemark+"b")
               res.data.insReviewConclusion;
             // 电话征信：客户本人-电话拨打核实 - 本人只有一条电话拨打核实记录            -object
             // 专员第一次进，只返回电话号码-因为是从申请表取的。保存之后其他字段都会有，applyid也会被存入
-            if(  !res.data.insTelCustInfo.applyId ){//第一次进来，无数据（除电话号码），除默认选正常其他分别赋值进去
-this.insTelCustInfo.applyId = this.propQTconclution.applyId;
-this.insTelCustInfo.telNum =res.data.insTelCustInfo.telNum;//电话号码
-this.insTelCustInfo.telRecord =res.data.insTelCustInfo.telRecord;//电话录音
-this.insTelCustInfo.iisself =res.data.insTelCustInfo.iisself;//接听人是否借款人本人
-this.insTelCustInfo.iisselftxt =res.data.insTelCustInfo.iisselftxt;//接听说明
-this.insTelCustInfo.remark =res.data.insTelCustInfo.remark;//备注
-            }else{
-              this.insTelCustInfo =  res.data.insTelCustInfo;
+            if (!res.data.insTelCustInfo.applyId) { //第一次进来，无数据（除电话号码），除默认选正常其他分别赋值进去
+            // 质检结果不赋值，因为默认选正常-00
+              this.insTelCustInfo.applyId = this.propQTconclution.applyId;
+              this.insTelCustInfo.telNum = res.data.insTelCustInfo.telNum; //电话号码
+              this.insTelCustInfo.telRecord = res.data.insTelCustInfo.telRecord; //电话录音
+              this.insTelCustInfo.iisself = res.data.insTelCustInfo.iisself; //接听人是否借款人本人
+              this.insTelCustInfo.iisselftxt = res.data.insTelCustInfo.iisselftxt; //接听说明
+              this.insTelCustInfo.remark = res.data.insTelCustInfo.remark; //备注
+            } else {
+              this.insTelCustInfo = res.data.insTelCustInfo;
+              // this.insTelCustInfo.insResult = res.data.insTelCustInf.insResult//电话拨打核实-质检结果
             }
             // !res.data.insTelCustInfo.applyId ? this.insTelCustInfo.applyId = this.propQTconclution.applyId : this.insTelCustInfo =
             //   res.data.insTelCustInfo; //this.insTelCustInfo 是obj / 查询接口 -只返回客户本人-电话核实信息
-              console.log(11111,this.insTelCustInfo)
-            !res.data.insTelCustInfo.insResult ? '' : this.insTelCustInfo.insResult = res.data.insTelCustInf.insResult; //本人拨打电话核实-默认选00           
+            // !res.data.insTelCustInfo.insResult ? '' : this.insTelCustInfo.insResult = res.data.insTelCustInf.insResult; //本人拨打电话核实-默认选00           
             // 电话征信：电话拨打核实-除客户本人
             for (var k = 0; k < res.data.insTelVerifyList.length; k++) {
               res.data.insTelVerifyList[k].insResult == '' ? res.data.insTelVerifyList[k].insResult = '00' : ''; //质检结果如果没有值，默认选00 正常
@@ -1499,7 +1500,7 @@ this.insTelCustInfo.remark =res.data.insTelCustInfo.remark;//备注
         });
         // 
       },
-      addQTResult() {//添加
+      addQTResult() { //添加
         // event.stopPropagation();
         // 判断初终审标识-------------未填写------------初终检标志根据角色更改
         // this.propQTconclution.pageType == 'checkApp_apply' //专员
@@ -1514,7 +1515,7 @@ this.insTelCustInfo.remark =res.data.insTelCustInfo.remark;//备注
             insMemberCode: this.userInf.userCode, // 操作人员-质检code            
             insMemberName: this.userInf.userName, // 操作人员-质检员name
             insDate: this.systermTime, // 质检日期
-            checkType: this.propQTconclution.pageType=='checkApp_apply'?'01':'02', // 初终检标志01:初检，02：终检
+            checkType: this.propQTconclution.pageType == 'checkApp_apply' ? '01' : '02', // 初终检标志01:初检，02：终检
             instaskType: "", //任务类型（00:常规质检，01:专项质检）
             id: this.addId, // 专员或主管首次保存或提交不传
             isSubmit: "0", // 0：保存 1：提交
@@ -2114,9 +2115,10 @@ this.insTelCustInfo.remark =res.data.insTelCustInfo.remark;//备注
     height: 30px;
   }
 
-  .regularQT td,  .regularQT th {
+  .regularQT td,
+  .regularQT th {
     text-align: center;
-      border: 1px solid #ebeef5;
+    border: 1px solid #ebeef5;
   }
 
   .regularQT .material td:nth-of-type(4) {
