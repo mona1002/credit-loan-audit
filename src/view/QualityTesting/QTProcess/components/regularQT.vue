@@ -676,7 +676,7 @@
           </div>
         </template>
         <div class="result_QT">
-          <el-table :data="insConclusion" style="width: 100%" @current-change='QTtableVal' border min-width='1366px'>
+          <el-table :data="insConclusion" style="width: 100%" highlight-current-row @current-change='QTtableVal' border min-width='1366px'>
             <el-table-column label="质检结果" align="center" width="240">
               <template slot-scope="scope">
                 <i class="required_Red"> * </i>
@@ -711,7 +711,10 @@
             </el-table-column>
             <el-table-column prop="insMemberName" label="操作人员" align="center" width="120">
             </el-table-column>
-            <el-table-column prop="insDate" label="质检日期" align="center" width="180">
+            <el-table-column label="质检日期" align="center" width="180">
+              <template slot-scope='scope'>
+                <span>{{scope.row.insDate | dateFilter}}</span>
+                </template>
             </el-table-column>
           </el-table>
           <!-- <table border="1" cellpadding='2' width='100%'>
@@ -1374,8 +1377,20 @@ console.log('a'+ this.regularInfo.isFormRemark+"b")
             !res.data.insReviewConclusion ? this.reviewConclusion.applyId = this.propQTconclution.applyId : this.reviewConclusion =
               res.data.insReviewConclusion;
             // 电话征信：客户本人-电话拨打核实 - 本人只有一条电话拨打核实记录            -object
-            !res.data.insTelCustInfo.applyId ? this.insTelCustInfo.applyId = this.propQTconclution.applyId : this.insTelCustInfo =
-              res.data.insTelCustInfo; //this.insTelCustInfo 是obj / 查询接口 -只返回客户本人-电话核实信息
+            // 专员第一次进，只返回电话号码-因为是从申请表取的。保存之后其他字段都会有，applyid也会被存入
+            if(  !res.data.insTelCustInfo.applyId ){//第一次进来，无数据（除电话号码），除默认选正常其他分别赋值进去
+this.insTelCustInfo.applyId = this.propQTconclution.applyId;
+this.insTelCustInfo.telNum =res.data.insTelCustInfo.telNum;//电话号码
+this.insTelCustInfo.telRecord =res.data.insTelCustInfo.telRecord;//电话录音
+this.insTelCustInfo.iisself =res.data.insTelCustInfo.iisself;//接听人是否借款人本人
+this.insTelCustInfo.iisselftxt =res.data.insTelCustInfo.iisselftxt;//接听说明
+this.insTelCustInfo.remark =res.data.insTelCustInfo.remark;//备注
+            }else{
+              this.insTelCustInfo =  res.data.insTelCustInfo;
+            }
+            // !res.data.insTelCustInfo.applyId ? this.insTelCustInfo.applyId = this.propQTconclution.applyId : this.insTelCustInfo =
+            //   res.data.insTelCustInfo; //this.insTelCustInfo 是obj / 查询接口 -只返回客户本人-电话核实信息
+              console.log(11111,this.insTelCustInfo)
             !res.data.insTelCustInfo.insResult ? '' : this.insTelCustInfo.insResult = res.data.insTelCustInf.insResult; //本人拨打电话核实-默认选00           
             // 电话征信：电话拨打核实-除客户本人
             for (var k = 0; k < res.data.insTelVerifyList.length; k++) {
@@ -2099,7 +2114,7 @@ console.log('a'+ this.regularInfo.isFormRemark+"b")
     height: 30px;
   }
 
-  .regularQT td {
+  .regularQT td,  .regularQT th {
     text-align: center;
       border: 1px solid #ebeef5;
   }
