@@ -1130,7 +1130,6 @@
         insTelVerifyListFamily: [], //家庭联系人-电话拨打核实
         insTelVerifyListWork: [], //工作证明-电话拨打核实
         insTelVerifyListOthers: [], //其他联系人-电话拨打核实
-
         // insTelVerifyListCompanyCount: 0, //单位电话-电话拨打核实
         // insTelVerifyListFamilyCount: 0, //家庭联系人-电话拨打核实
         // insTelVerifyListWorkCount: 0, //工作证明-电话拨打核实
@@ -1138,30 +1137,51 @@
         insTelVerifyListConcat: [], //合并电话拨打核实-除客户本人
         //  regularInfo: {},//接口可调用时待测试默认选中值
         regularInfo: {
+          applyId:this.propQTconclution.applyId,
           // 资料核实
           isForm: '1', //申请单表是否符合要求
+          isFormRemark:'',//申请表是否符合要求说明
           isIdcard: '1', //身份证证明是否符合要求
+          isIdcardRemark:'',//身份证证明是否符合要求说明
           isIncome: '1', //收入证明是否符合要求
+             isIncomeRemark:'',//收入证明是否符合要求说明
           isWork: '1', //工作证明是否符合要求
+             isWorkRemark:'',//工作证明是否符合要求说明
           isEstate: '1', //房产资料是否符合要求
+             isEstateRemark:'',//房产资料是否符合要求说明
           isLive: '1', //居住证明是否符合要求
+             isLiveRemark:'',//房产资料是否符合要求说明
           isBusiness: '1', //经营证明是否符合要求
+             isBusinessRemark:'',//经营证明是否符合要求说明
           isCredit: '1', //信用报告是否符合要求
+             isCreditRemark:'',//信用报告是否符合要求说明
           isCustomerflow: '1', //客户流水是否符合要求
+             isCustomerflowRemark:'',//客户流水是否符合要求说明
           isCustomerother: '1', //客户其他资料是否符合要求
-          isLiabilities: null, //负债计算是否正确
-          isFlow: null, //流水计算是否正确
-          isReference: null, //征信录入是否正确
+             isCustomerotherRemark:'',//客户其他资料是否符合要求说明
+          isLiabilities: '', //负债计算是否正确
+             isLiabilitiesRemark:'',//负债计算是否正确说明
+          isFlow: '', //流水计算是否正确
+          isFlowRemark:'',//负债计算是否正确说明
+          isReference: '', //征信录入是否正确
+          isReferenceRemark:'',//征信录入是否正确说明
           // 第三方信息查询 
-          wbeexEcuted: null, //客户在人法网是否有被执行信息
-          wnetEcutedBrea: null, //客户在失信网是否有失信记录
-          wnetPhone: null, //网上搜索借款人的手机是否有异常
-          wnetAddrandEstate: null, //网上搜索借款人现居住地址和房产地址是否异常
-          wnetCompany: null, //当地工商网查询企业基本信息中是否有登记
-          wnetAddrstate: null, //客户工作单位在全国组织代码查询中是否存在
-          icbcRegistrationInfo: null, //工商登记信息说明
+          wbeexEcuted: '', //客户在人法网是否有被执行信息
+          wbeexEcutedtxt:'',//客户在人法网是否有被执行信息说明   
+          wnetEcutedBrea: '', //客户在失信网是否有失信记录
+               wnetEcutedBreatxt:'',//客户在失信网是否有失信记录说明                 
+          wnetPhone: '', //网上搜索借款人的手机是否有异常
+          wnetPhonetxt: '', //网上搜索借款人的手机是否有异常说明
+          wnetAddrandEstate: '', //网上搜索借款人现居住地址和房产地址是否异常
+          wnetAddrandEstatetxt: '', //当地工商网查询企业基本信息中是否有登记说明
+          wnetCompany: '', //当地工商网查询企业基本信息中是否有登记
+          wnetCompanytxt: '', //当地工商网查询企业基本信息中是否有登记
+          wnetAddrstate: '', //客户工作单位在全国组织代码查询中是否存在
+          wnetAddrstatetxt: '', //客户工作单位在全国组织代码查询中是否存在说明
+          icbcRegistrationInfo: '', //工商登记信息说明
           // 内部匹配核实
-          isInmatch: null, //内部匹配是否进行排查
+          isInmatch: '', //内部匹配是否进行排查
+          isInmatchRemark: '', //内部匹配是否进行排查说明
         }, // // 资料核实+三方信息查询+ 内部匹配核实
         // insConclusion:'',
         // ------------------------各主管审批查询TableData---------------------------
@@ -1340,8 +1360,11 @@ console.log('a'+ this.regularInfo.isFormRemark+"b")
             //  基本信息                                -Object
             this.baseInfo = res.data.applyBaseInfo;
             // 资料核实+三方信息查询+ 内部匹配核实         -Object
-            !res.data.insRegularInfo ? this.regularInfo.applyId = this.propQTconclution.applyId : this.regularInfo =
-              res.data.insRegularInfo;
+            // !res.data.insRegularInfo ? this.regularInfo.applyId = this.propQTconclution.applyId : this.regularInfo =
+            //   res.data.insRegularInfo;
+            !res.data.insRegularInfo ? this.regularInfo: this.regularInfo = res.data.insRegularInfo;
+            console.log( !res.data.insRegularInfo)
+            console.log(this.propQTconclution.applyId)
             // 质检结论                                  -Object
             !res.data.insConclusionList ? this.insConclusion.applyId = this.propQTconclution.applyId : this.insConclusion =
               res.data.insConclusionList;
