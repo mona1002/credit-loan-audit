@@ -16,7 +16,7 @@
             <p>
               <label> 进件机构</label>
               <el-select v-model="params.shopCodes" multiple placeholder="请选择">
-                <el-option v-for="item in shopCodesSelection" :key="item.value" :label="item.label" :value="item.value">
+                <el-option v-for="item in shopCodesSelection" :key="item.code" :label="item.name" :value="item.code">
                 </el-option>
               </el-select>
             </p>
@@ -35,9 +35,9 @@
                 </el-option>
               </el-select> -->
               <el-select v-model="params.proCodes" multiple placeholder="请选择">
-                <el-option v-for="item in production" :key="item.proCode" :label="item.proName" :value="item.proCode">
-                  <span style="float: left">{{ item.proName }}</span>
-                  <span style="float: right; color: #8492a6; font-size: 13px">{{ item.proCode }}</span>
+                <el-option v-for="item in production" :key="item.code" :label="item.name" :value="item.code">
+                  <span style="float: left">{{ item.name }}</span>
+                  <span style="float: right; color: #8492a6; font-size: 13px">{{ item.code }}</span>
                 </el-option>
               </el-select>
             </p>
@@ -50,8 +50,8 @@
             </p>
             <p>
               <label> 拒绝主原因</label>
-              <el-select v-model="params.mainReasonIds" multiple placeholder="请选择">
-                <el-option v-for="item in mainReason" :key="item.value" :label="item.label" :value="item.value">
+              <el-select v-model="params.mainReasonIds" placeholder="请选择" @change='selectSubRea(params.mainReasonIds)'>
+                <el-option v-for="item in mainReason" :key="item.code" :label="item.name" :value="item.code">
                 </el-option>
               </el-select>
             </p>
@@ -60,7 +60,7 @@
             <p>
               <label> 拒绝子原因 </label>
               <el-select v-model="params.subReasonIds" multiple placeholder="请选择">
-                <el-option v-for="item in secondReason" :key="item.value" :label="item.label" :value="item.value">
+                <el-option v-for="item in secondReason" :key="item.id" :label="item.reasonName" :value="item.id">
                 </el-option>
               </el-select>
             </p>
@@ -144,6 +144,7 @@
         secondReason:[],//拒绝子原因下拉
         shopCodesSelection:[],//进件机构下拉
         userInf: '',
+        mainReasonId:'',
         allotParams: {
           operCode: '',
           operName: '',
@@ -229,25 +230,25 @@
           }
         });
       },
-      getProducts() { //查询产品接口
-        this.post("/credit/productAll").then(res => {
-          if (res.statusCode == 200) {
-            this.production = res.data;
-          } else {
-            this.$message.error(res.msg);
-          }
-        })
-      },
+      // getProducts() { //查询产品接口
+      //   this.post("/credit/productAll").then(res => {
+      //     if (res.statusCode == 200) {
+      //       this.production = res.data;
+      //     } else {
+      //       this.$message.error(res.msg);
+      //     }
+      //   })
+      // },
       //基础接口-4.获取业务状态
-      getBusiState() {
-        this.get("/system/getAllBusiState?" + Math.random()).then(res => {
-          if (res.statusCode == 200) {
-            this.busiStateSelect = res.data
-          } else {
-            this.$message.error(res.msg);
-          }
-        });
-      },
+      // getBusiState() {
+      //   this.get("/system/getAllBusiState?" + Math.random()).then(res => {
+      //     if (res.statusCode == 200) {
+      //       this.busiStateSelect = res.data
+      //     } else {
+      //       this.$message.error(res.msg);
+      //     }
+      //   });
+      // },
       Rreset() { // 重置
         this.params.ploanDateBegin = ''; //审批结论开始时间
         this.params.ploanDateEnd = ''; //审批结论结束时间
@@ -293,6 +294,31 @@
           }
         })
       },
+      getSelection(){//查询所有下拉
+        this.get("/insTask/initSpecialInsTaskPage?"+Math.random()).then(res => {
+          if (res.statusCode == 200) {
+         this.busiStateSelect=res.data.busiStateList; // 业务状态
+         this.mainReason= res.data.mainReasonList ; // 拒绝主原因
+      this.shopCodesSelection=   res.data.orgList  ; // 进件机构
+           this.production=  res.data.proList  ; // 产品名称
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      },
+      selectSubRea(id){//查询子原因
+      console.log(id)
+ this.get("/credit/findNodeFirstChildren",{
+   id:id
+ }).then(res => {
+          if (res.statusCode == 200) {
+         this.secondReason=res.data;
+      
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      },
       handleSelectionChange(val) {
         // console.log(val)
         this.allotParams.list = val;
@@ -313,8 +339,9 @@
       this.allotParams.operCode = this.userInf.userCode;
       this.allotParams.operName = this.userInf.userName;
       this.inquire(this.params); //查询列表
-      this.getProducts(); //查询产品
-      this.getBusiState(); //获取业务状态下拉
+      // this.getProducts(); //查询产品
+      // this.getBusiState(); //获取业务状态下拉
+      this.getSelection();//获取所有下拉
       //   this.params.pageNum = this.currentPage, //页数（第几页）
       //  this.params.pageParam.pageNum = this.currentPage = 1;
       //     this.params.pageSize = this.pageCount, //页面显示行数
