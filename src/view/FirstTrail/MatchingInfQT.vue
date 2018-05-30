@@ -493,7 +493,7 @@
       this.initialInfo(); //判断角色   
       this.QTC.tastwaitingPass = this.tastwaitingPass = JSON.parse(localStorage.getItem(this.LocalList));
       this.QTC.applyId = this.tastwaitingPass.ApplyId;
-      // this.getPageInf(); //获取页面个人信息      
+      this.getPageInf(); //获取页面个人信息      
       // console.log(this.tastwaitingPass.applyId)
       // console.log('tastwaitingPass：', this.tastwaitingPass)
       // console.log('QTC：', this.QTC)

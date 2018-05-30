@@ -966,6 +966,7 @@
 			//一进入页面就发送请求
 			
 			  this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) //初审-匹配查看
+			  console.log(   this.MatchFlag)
       			if (this.MatchFlag.MatchFlag == 'internal') {
        					 this.taskInWaitting = JSON.parse(localStorage.getItem('internalObj'));
       			} else if (this.MatchFlag.MatchFlag == 'Query') {
