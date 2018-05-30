@@ -308,8 +308,8 @@
         }
       },
       rightMovingBtn() {
-        if (parseFloat(this.$refs.right_tab_ul.style.left) <= -850) {
-          this.$refs.right_tab_ul.style.left = "-850px";
+        if (parseFloat(this.$refs.right_tab_ul.style.left) <= -950) {
+          this.$refs.right_tab_ul.style.left = "-950px";
         } else {
           this.$refs.right_tab_ul.style.left = parseFloat(this.$refs.right_tab_ul.style.left) - 50 + "px";
         }
@@ -735,7 +735,7 @@
 
   .Right_tab_ul_wrap ul {
     /* width: 1061px; */
-    width: 1420px;
+    width: 1540px;
     height: 48px;
     position: relative;
     text-align: left;

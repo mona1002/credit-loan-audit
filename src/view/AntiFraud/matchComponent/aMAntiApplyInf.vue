@@ -12,27 +12,27 @@
             <li>
               <p>
                 <label>进件编号： </label>
-                <span>{{this.conclu.applySubno}} </span>
+                <span>{{this.applyInfoPool.applySubno}} </span>
               </p>
               <p>
                 <label>证件号码： </label>
-                <span>{{this.conclu.applySubno}} </span>
+                <span>{{this.applyInfoPool.certCode}} </span>
               </p>
             </li>
             <li>
               <p>
                 <label>客户名称： </label>
-                <span>{{this.conclu.custName}} </span>
+                <span>{{this.applyInfoPool.custName}} </span>
               </p>
               <p>
                 <label>移动电话： </label>
-                <span>{{this.conclu.applySubno}} </span>
+                <span>{{this.applyInfoPool.mobile}} </span>
               </p>
             </li>
             <li>
               <p>
                 <label>证件类型： </label>
-                <span>{{this.conclu.certType}} </span>
+                <span>{{this.applyInfoPool.certTypeTxt}} </span>
               </p>
             </li>
           </ul>
@@ -48,31 +48,31 @@
             <li>
               <p>
                 <label>借欺诈申请类型主原因： </label>
-                <span>{{this.conclu.certType}} </span>
+                <span>{{fraudApplyInfo.mainreaName}} </span>
               </p>
               <p>
                 <label>子原因： </label>
-                <span>{{this.conclu.certType}} </span>
+                <span>{{fraudApplyInfo.subreaName}} </span>
               </p>
             </li>
             <li>
               <p class="description">
                 <label>欺诈上报描述：</label>
-                <span class="textA"> </span>
+                <span class="textA">{{fraudApplyInfo.applyDesc}} </span>
               </p>
             </li>
             <li>
               <p>
                 <label>反欺诈申请人： </label>
-                <span>{{this.conclu.certType}} </span>
+                <span>{{fraudApplyInfo.applyPersonName}}  </span>
               </p>
               <p>
                 <label>反欺诈申请日期： </label>
-                <span>{{this.conclu.certType}} </span>
+                <span>{{fraudApplyInfo.appDate}} </span>
               </p>
               <p>
                 <label>反欺诈申请机构： </label>
-                <span>{{this.conclu.certType}} </span>
+                <span>{{fraudApplyInfo.appOrgName}} </span>
               </p>
             </li>
           </ul>
@@ -88,7 +88,7 @@
             <li>
               <p class="description">
                 <label>反欺诈决策反馈： </label>
-                <span class="textA"> </span>
+                <span class="textA">{{fraudAuditOpinion.auditDesc}} </span>
               </p>
             </li>
           </ul>
@@ -105,6 +105,9 @@
         conclu: '',
         MatchInf: '',
         MatchFlag:'',
+        applyInfoPool:'',
+        fraudApplyInfo:'',
+        fraudAuditOpinion:'',
       }
     },
     mounted() {
@@ -117,15 +120,19 @@
       }else if (this.MatchFlag.MatchFlag == 'QT') {
         this.MatchInf = JSON.parse(localStorage.getItem("QT")) //综合查询
       }
-      this.post("/creauditOpinion/queryByPage", {
+
+      this.post("/fraudApplyInfoController/getRecentFraudApplyInfoWithOpinion", {
         applyId: this.MatchInf.matchApplyId,
       }).then(res => {
         if (res.statusCode == 200) {
-          this.ConclutionInf = res.data.recordList;
+           this.applyInfoPool = res.data.applyInfoPool;//基本信息
+           this.fraudApplyInfo = res.data.fraudApplyInfo;//反欺诈申请信息
+          this.fraudAuditOpinion = res.data.fraudAuditOpinion;//反欺诈结论
         } else {
           this.$message.error(res.msg);
         }
       });
+
     },
   }
 
