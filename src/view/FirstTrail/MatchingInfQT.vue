@@ -45,31 +45,31 @@
               <FMCreditForm v-if=" this.tabContent1==6">信审表</FMCreditForm>
               <RcreditInvestigation v-if=" this.tabContent1==7">实地征信</RcreditInvestigation>
               <aMAntiApplyInf v-if=" this.tabContent1==8">反欺诈结论</aMAntiApplyInf>
-              <!-- <RFinanceInformation v-if=" this.tabContent1==9">财务信息</RFinanceInformation> -->
+              <RFinanceInformation v-if=" this.tabContent1==9">财务信息</RFinanceInformation>
               <!-- <RprocessTrajectory v-if=" this.tabContent1==9">流程轨迹</RprocessTrajectory> -->
               <div class='tab2_Content_show' v-if="RoleSHow=='partOne'">
                 <!-- 专员部分 -->
-                <QTAprovalConclution v-if=" this.tabContent1==9 ">反欺诈审批结论轨迹 </QTAprovalConclution>
-                <RApprovalConclusion v-if=" this.tabContent1==10 ">审批结论轨迹</RApprovalConclusion>
-                <regularQT v-if=" this.tabContent1==11&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
-                <QTResultCheck v-if=" this.tabContent1==11&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+                <QTAprovalConclution v-if=" this.tabContent1==10 ">反欺诈审批结论轨迹 </QTAprovalConclution>
+                <RApprovalConclusion v-if=" this.tabContent1==11 ">审批结论轨迹</RApprovalConclusion>
+                <regularQT v-if=" this.tabContent1==12&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+                <QTResultCheck v-if=" this.tabContent1==12&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
               </div>
               <div class='tab2_Content_show' v-if="RoleSHow=='partTwo'">
                 <!-- 主管部分 -->
-                <regularQT v-if=" this.tabContent1==9&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
-                <QTResultCheck v-if=" this.tabContent1==9&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+                <regularQT v-if=" this.tabContent1==10&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+                <QTResultCheck v-if=" this.tabContent1==10&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
               </div>
               <div class='tab2_Content_show' v-if="RoleSHow=='partThree'">
                 <!-- 质检部分 -->
-                <QTAprovalConclution v-if=" this.tabContent1==9">反欺诈审批结论轨迹 </QTAprovalConclution>
-                <RApprovalConclusion v-if=" this.tabContent1==10">审批结论轨迹</RApprovalConclusion>
+                <QTAprovalConclution v-if=" this.tabContent1==10">反欺诈审批结论轨迹 </QTAprovalConclution>
+                <RApprovalConclusion v-if=" this.tabContent1==11">审批结论轨迹</RApprovalConclusion>
                 <!-- <ComplianceProcess v-if=" this.tabContent1==11 && this.QTmark" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess> -->
                 <!-- <ReApply v-if=" this.tabContent1==12 && this.QTmark" :propReApply='ReApplyMark'>合规复议申请</ReApply> -->
-                <ComplianceProcess v-if=" this.tabContent1==11" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
-                <ReApply v-if=" this.tabContent1==12" :propReApply='ReApplyMark'>合规复议申请</ReApply>
+                <ComplianceProcess v-if=" this.tabContent1==12" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
+                <ReApply v-if=" this.tabContent1==13" :propReApply='ReApplyMark'>合规复议申请</ReApply>
                 <!-- <regularQT v-if=" this.tabContent1==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC' >质检结论</regularQT> -->
-                <regularQT v-if=" this.tabContent1==13&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
-                <QTResultCheck v-if=" this.tabContent1==13&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+                <regularQT v-if=" this.tabContent1==14&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+                <QTResultCheck v-if=" this.tabContent1==14&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
               </div>
               <!-- <QTAprovalConclution v-if=" this.tabContent1==9&& this.Managermark">反欺诈审批结论轨迹 </QTAprovalConclution>
               <RApprovalConclusion v-if=" this.tabContent1==10&& this.Managermark">审批结论轨迹</RApprovalConclusion>
@@ -112,20 +112,20 @@
             <FMCreditForm v-if=" this.tabContent2==6">信审表</FMCreditForm>
             <RcreditInvestigation v-if=" this.tabContent2==7">实地征信</RcreditInvestigation>
             <aMAntiApplyInf v-if=" this.tabContent2==8">反欺诈结论</aMAntiApplyInf>
-            <!-- <RFinanceInformation v-if=" this.tabContent2==9">财务信息</RFinanceInformation> -->
+            <RFinanceInformation v-if=" this.tabContent2==9">财务信息</RFinanceInformation>
             <!-- <RprocessTrajectory v-if=" this.tabContent2==9">流程轨迹</RprocessTrajectory> -->
 
             <div class='tab2_Content_show' v-if="this.RoleSHow=='partOne'">
               <!-- 专员部分 -->
-              <QTAprovalConclution v-if=" this.tabContent2==9 ">反欺诈审批结论轨迹 </QTAprovalConclution>
-              <RApprovalConclusion v-if=" this.tabContent2==10 ">审批结论轨迹</RApprovalConclusion>
-              <regularQT v-if=" this.tabContent2==11&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
-              <QTResultCheck v-if=" this.tabContent2==11&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+              <QTAprovalConclution v-if=" this.tabContent2==10 ">反欺诈审批结论轨迹 </QTAprovalConclution>
+              <RApprovalConclusion v-if=" this.tabContent2==11 ">审批结论轨迹</RApprovalConclusion>
+              <regularQT v-if=" this.tabContent2==12&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+              <QTResultCheck v-if=" this.tabContent2==12&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
             </div>
             <div class='tab2_Content_show' v-if="this.RoleSHow=='partTwo'">
               <!-- 主管部分 -->
-              <regularQT v-if=" this.tabContent2==9&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
-              <QTResultCheck v-if=" this.tabContent2==9&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+              <regularQT v-if=" this.tabContent2==10&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+              <QTResultCheck v-if=" this.tabContent2==10&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
 
             </div>
             <div class='tab2_Content_show' v-if="this.RoleSHow=='partThree'">
@@ -228,17 +228,17 @@
         // ],
         items1: [],
         items2: [],
-        itemsTrial1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论', "反欺诈审批结论轨迹", '信审审批结论轨迹'],
-        itemsTrial2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "反欺诈审批结论轨迹", "信审审批结论轨迹",
+        itemsTrial1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论','账务信息', "反欺诈审批结论轨迹", '信审审批结论轨迹'],
+        itemsTrial2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论",'账务信息', "反欺诈审批结论轨迹", "信审审批结论轨迹",
           '质检结论'
         ],
-        itemsManager1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论"],
+        itemsManager1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论",'账务信息'],
 
-        itemsManager2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", '质检结论'],
-        itemsQT1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论', "反欺诈审批结论轨迹", '信审审批结论轨迹',
+        itemsManager2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论",'账务信息', '质检结论'],
+        itemsQT1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论','账务信息', "反欺诈审批结论轨迹", '信审审批结论轨迹',
           '合规质检结论轨迹', '合规复议申请'
         ],
-        itemsQT2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "反欺诈审批结论轨迹", "信审审批结论轨迹",
+        itemsQT2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论",'账务信息', "反欺诈审批结论轨迹", "信审审批结论轨迹",
           '合规质检结论轨迹', '合规复议申请',
           '质检结论'
         ],
@@ -250,8 +250,8 @@
         // flagManger2: [true, true, true, true, true, true, true, true, true, true], //10
         // flagQT1: [true, true, true, false, true, true, true, true, true, true, true, true, true],
         // flagQT2: [true, true, true, true, true, true, true, true, true, true, true, true, true, true], //14
-        flag1: [true, true, true, false, true, true, true, true, true, true, true, true, true],
-        flag2: [true, true, true, true, true, true, true, true, true, true, true, true, true, true], //14
+        flag1: [true, true, true, false, true, true, true, true, true, true, true, true, true,true],
+        flag2: [true, true, true, true, true, true, true, true, true, true, true, true, true, true,true], //14
         AlertSearch: "",
         AlertSearchCondition: [{
           value: '选项1',
