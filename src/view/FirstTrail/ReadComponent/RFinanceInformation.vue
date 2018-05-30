@@ -133,8 +133,8 @@
       //   this.MatchInf = JSON.parse(localStorage.getItem("AntiManagerinternalObj")); //反欺诈主管-匹配查看
       // }
       this.post("/creAccountInfo/getAccountByApplyId", {
-        //applyId: this.MatchInf.matchApplyId,
-        applyId: "24667563-2ca2-4da6-8e02-4bf7d7c839b6",
+        applyId: this.MatchInf.matchApplyId,
+        //applyId: "24667563-2ca2-4da6-8e02-4bf7d7c839b6",
       }).then(res => {
         if (res.statusCode == 200) {
           this.FinanceInf = res.data;
