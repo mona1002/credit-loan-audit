@@ -59,7 +59,8 @@
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative; left:0; top:0;" id='FirstAud'>
         <img ref="Big_pic_ref" v-for="(val,key) in pngAyyr" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng"/>
-        <pdfDiv v-if="myPdf" v-for="(val,index) in pdfArry" :key="index" :val="val"></pdfDiv>
+        <!-- <pdfDiv v-if="myPdf" v-for="(val,index) in pdfArry" :key="index" :val="val"></pdfDiv> -->
+        <pdfDiv v-if="myPdf" :pdfArry="pdfArry"></pdfDiv>
       </div>
     </div>
     <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" @click="pre" v-show="perfBtn" @mouseenter='PerBtn'>
@@ -156,8 +157,8 @@
         });
       },
       getImg(ind) {
-        this.myPdf = false;
         //alert('ooo');
+         this.myPdf = false;
         this.pdfArry=[];
         this.pngAyyr=[];
         this.smallPicInd = 0;
@@ -172,8 +173,6 @@
           //console.log(this.imgPath[i].imagePath.substring(this.imgPath[i].imagePath.length-3));
           //console.log('ooooo');
           if(this.imgPath[i].imagePath.substring(this.imgPath[i].imagePath.length-3) == 'pdf'){
-            this.myPdf = true;
-            this.myPng = false;
             if(this.pdfArry.length>0){
               for(var j=0;j<this.pdfArry.length;j++){
               //alert('pp')
@@ -184,7 +183,8 @@
             }else{
               this.pdfArry.push(this.imgPath[i]);  
             }
-
+            this.myPdf = true;
+            this.myPng = false;
             /*if(this.imgPath[i].imagePath)
                 this.pdfArry.push(this.imgPath[i].imagePath);*/
             

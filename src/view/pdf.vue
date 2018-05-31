@@ -1,19 +1,20 @@
 <template>
 	<div>
-        <!-- <div v-for="(val,index) in pdfUrlArr" :key="index">
+        <div v-if="pdfUrlArr" v-for="(val,index) in pdfUrlArr" :key="index">
             <pdf-shower 
-            :pdfurl="imgBaseUrl+val" 
+            :pdfurl="imgBaseUrl+val.imagePath" 
             :scale="scale" 
             @onErr="onErr">  
             </pdf-shower>
-            <p>{{imgBaseUrl+val}}</p>
-        </div> -->
+            <p>{{imgBaseUrl+val.imagePath}}</p>
+        </div>
         <!-- <pdf-shower 
-            :pdfurl="imgBaseUrl+pdfurls2.imagePath" 
+            v-if="pdfurls2"
+            :pdfurl="imgBaseUrl+pdfurls2" 
             :scale="scale" 
             @onErr="onErr">  
         </pdf-shower>
-        <p>{{imgBaseUrl+pdfurls2[0].imagePath}}</p> -->
+        <p>{{imgBaseUrl+pdfurls2}}</p> -->
 	</div>
 </template>
 <script>
@@ -26,7 +27,7 @@ export default {
     },
     created(){
         console.log("created-------------------");
-        console.log(this.val);
+        console.log(this.pdfArry);
     },
     mounted(){
         // alert('pppjjjj');
@@ -53,12 +54,13 @@ export default {
             console.log('错误信息：', err);
         }
     },
-    /*props: ['pdfArry'],*/
-    props: ['val'],
+    props: ['pdfArry'],
+    /*props: ['val'],*/
     watch:{
-        /*pdfArry(value){
+        pdfArry(value){
             this.pdfUrlArr = value;
-            console.log(newValue,oldValue);
+            console.log(this.pdfUrlArr);
+            /*console.log(newValue,oldValue);
             if(newValue&&oldValue){
 
                 this.pdfUrlArr = value;
@@ -66,20 +68,21 @@ export default {
                 // 最终的pdf url
                 this.url = pdfUrl.imgBaseUrl+this.pdfUrlArr[0];
                 console.log(this.url)
-            }
+            }*/
         },
-        pdfUrlArr(newval){
+        /*pdfUrlArr(newval){
             for(var i=0;i<newval.length;i++){
                 this.val=newval[i]
             };
             console.log(this.val);
         },*/
-        val(value){
-            alert('ooooo');
+        /*val(value){
+            //alert('ooooo');
+            console.log("*************************");
             console.log(value);
             this.pdfurls2=value.imagePath;
             console.log(this.pdfurls2);
-        }
+        }*/
     }
 };
 
