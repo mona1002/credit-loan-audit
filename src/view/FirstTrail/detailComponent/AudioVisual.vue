@@ -37,7 +37,7 @@
           </template>
           <div class="list_title_div">
             <!--  二级 内容 节点 -->
-            <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind)" @mousedown="getImg(ind)">
+            <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind)">
               <el-tooltip class="item" effect="dark" :content="item.arcName" placement="right-end">
                 <span style="width:135px;paddingLeft:20px;">{{item.arcName}}</span>
               </el-tooltip>
@@ -59,7 +59,7 @@
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative; left:0; top:0;" id='FirstAud'>
         <img ref="Big_pic_ref" v-for="(val,key) in pngAyyr" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng"/>
-        <pdfDiv :pdfArry="pdfArry" :imgBaseUrl='imgBaseUrl' v-show="myPdf">www</pdfDiv>
+        <pdfDiv :pdfArry.sync="pdfArry"  v-if="myPdf"></pdfDiv>
       </div>
     </div>
     <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" @click="pre" v-show="perfBtn" @mouseenter='PerBtn'>
@@ -113,6 +113,7 @@
         pngAyyr:[],
         myPng:false,
         myPdf:false,
+        style:''
       }
     },
     methods: {
@@ -155,10 +156,14 @@
         });
       },
       getImg(ind) {
+        this.myPdf = false;
         //alert('ooo');
+        this.pdfArry=[];
+        this.pngAyyr=[];
         this.smallPicInd = 0;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
-        //console.log('mkkmkm');
+        console.log(this.imgPath);
+        console.log('mkkmkm');
         //console.log(this.imgPath);
         //var pdfArry=[];
         for(var i=0;i<this.imgPath.length;i++){
@@ -169,19 +174,24 @@
           if(this.imgPath[i].imagePath.substring(this.imgPath[i].imagePath.length-3) == 'pdf'){
             this.myPdf = true;
             this.myPng = false;
-            if(this.pdfArry.length>0){
-              for(var j=0;j<this.pdfArry.length;j++){
-              //alert('pp')
-                if(this.imgPath[i].imagePath!=this.pdfArry[j].imagePath){
-                    this.pdfArry.push(this.imgPath[i]);
-                }
-              }
-            }else{
-              this.pdfArry.push(this.imgPath[i]);
-            }
+            // if(this.pdfArry.length>0){
+              // for(var j=0;j<this.pdfArry.length;j++){
+              // //alert('pp')
+              //   if(this.imgPath[i].imagePath!=this.pdfArry[j].imagePath){
+              //       this.pdfArry.push(this.imgPath[i]);
+              //   }
+              // }
+            // }else{
+              // this.pdfArry.push(this.imgPath[i]);  
+            // }
+
+            if(this.imgPath[i].imagePath)
+                this.pdfArry.push(this.imgPath[i].imagePath);
             
-              
-              console.log(this.pdfArry);
+              console.log('---------------------------');
+              console.log(this.pdfArry[0]);
+              console.log('---------------------------');
+
               console.log('eeee');
           }else{
             this.myPng = true;

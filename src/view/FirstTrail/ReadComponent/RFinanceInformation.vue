@@ -81,7 +81,7 @@
                   min-width="120">
                 </el-table-column>
                 <el-table-column
-                  prop="loanReceiptPayAmt"
+                  prop="arrTermSum"
                   label="累计拖欠期数"
                   min-width="120">
                 </el-table-column>
@@ -147,7 +147,11 @@
           }
           
         } else {
-          this.$message.error(res.msg);
+          //this.$message.error(res.msg);
+          this.$message({
+            message:"该进件暂无账务信息数据！",
+            type: 'error'
+          })
         }
       });
     },

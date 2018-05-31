@@ -1,11 +1,12 @@
 <template>
 	<div>
-        <div v-for="(val,index) in pdfArry" >
+        <div v-for="(val,index) in pdfUrlArr" :key="index">
             <pdf-shower 
-            :pdfurl="imgBaseUrl+val.imagePath" 
+            :pdfurl="imgBaseUrl+val" 
             :scale="scale" 
             @onErr="onErr">  
             </pdf-shower>
+            <p>{{imgBaseUrl+val}}</p>
         </div>
         <!-- <pdf-shower 
             :pdfurl="pdfurls2" 
@@ -14,24 +15,33 @@
         </pdf-shower> -->
 	</div>
 </template>
-
 <script>
 import PdfShower from 'vue-pdf-shower';	
-
+import pdfUrl from '../util/ConstantSocialAndPn'
 export default {
     name: 'pdfshower',
     components: {
         'pdf-shower':PdfShower
     },
+    created(){
+        console.log("created-------------------");
+    },
     mounted(){
-        console.log(this.pdfArry[0].imagePath);
-        console.log(this.imgBaseUrl);
+        // alert('pppjjjj');
+        console.log('测试');
+        // console.log(this.imgBaseUrl + this.pdfArry[0]);
+        //this.testurl = 'http://10.1.26.6:8080/ptopCredit/download/downloadAction!download.action?filepath=/creditFile&filename=upload\\2015-11-19\\201511190111013967\\C2-1.pdf'
     },
     data() {
         return {
             pdfurls2:'/static/aaa.pdf',
             // 缩放 默认为1
-            scale: 1.2
+            scale: 1.2,
+            pdfUrlArr:[],
+            url:'',
+            imgBaseUrl:pdfUrl.imgBaseUrl,
+            val:''
+            //testurl:''
         };
     },
     methods: {
@@ -41,7 +51,28 @@ export default {
             console.log('错误信息：', err);
         }
     },
-    props: ['pdfArry','imgBaseUrl'],
+    props: ['pdfArry'],
+    watch:{
+        pdfArry(value){
+            this.pdfUrlArr = value;
+            /*console.log(newValue,oldValue);
+            if(newValue&&oldValue){
+
+                this.pdfUrlArr = value;
+                console.log(this.pdfUrlArr);
+                // 最终的pdf url
+                this.url = pdfUrl.imgBaseUrl+this.pdfUrlArr[0];
+                console.log(this.url)
+            }*/
+        },
+        pdfUrlArr(newval){
+            for(var i=0;i<newval.length;i++){
+                this.val=newval[i]
+            };
+            console.log(this.val);
+        },
+    }
 };
 
 </script>
+
