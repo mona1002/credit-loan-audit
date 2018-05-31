@@ -351,7 +351,8 @@
       handleSizeChangeFixTel(val) {
         // 每页 10条
         console.log("固定电话 每页 ${val}条", val);
-        this.FixTelPageNum = val;
+        this.FixTelPageSize = val;
+        console.log(this.FixTelPageNum)
         this.fetchData('fixed');
       },
       handleCurrentChangeFixTel(val) {
