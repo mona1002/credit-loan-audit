@@ -1,18 +1,19 @@
 <template>
 	<div>
-        <div v-for="(val,index) in pdfUrlArr" :key="index">
+        <!-- <div v-for="(val,index) in pdfUrlArr" :key="index">
             <pdf-shower 
             :pdfurl="imgBaseUrl+val" 
             :scale="scale" 
             @onErr="onErr">  
             </pdf-shower>
             <p>{{imgBaseUrl+val}}</p>
-        </div>
+        </div> -->
         <!-- <pdf-shower 
-            :pdfurl="pdfurls2" 
+            :pdfurl="imgBaseUrl+pdfurls2.imagePath" 
             :scale="scale" 
             @onErr="onErr">  
-        </pdf-shower> -->
+        </pdf-shower>
+        <p>{{imgBaseUrl+pdfurls2[0].imagePath}}</p> -->
 	</div>
 </template>
 <script>
@@ -25,6 +26,7 @@ export default {
     },
     created(){
         console.log("created-------------------");
+        console.log(this.val);
     },
     mounted(){
         // alert('pppjjjj');
@@ -34,13 +36,13 @@ export default {
     },
     data() {
         return {
-            pdfurls2:'/static/aaa.pdf',
+            pdfurls2:'',
             // 缩放 默认为1
             scale: 1.2,
             pdfUrlArr:[],
             url:'',
             imgBaseUrl:pdfUrl.imgBaseUrl,
-            val:''
+            //val:''
             //testurl:''
         };
     },
@@ -51,11 +53,12 @@ export default {
             console.log('错误信息：', err);
         }
     },
-    props: ['pdfArry'],
+    /*props: ['pdfArry'],*/
+    props: ['val'],
     watch:{
-        pdfArry(value){
+        /*pdfArry(value){
             this.pdfUrlArr = value;
-            /*console.log(newValue,oldValue);
+            console.log(newValue,oldValue);
             if(newValue&&oldValue){
 
                 this.pdfUrlArr = value;
@@ -63,14 +66,20 @@ export default {
                 // 最终的pdf url
                 this.url = pdfUrl.imgBaseUrl+this.pdfUrlArr[0];
                 console.log(this.url)
-            }*/
+            }
         },
         pdfUrlArr(newval){
             for(var i=0;i<newval.length;i++){
                 this.val=newval[i]
             };
             console.log(this.val);
-        },
+        },*/
+        val(value){
+            alert('ooooo');
+            console.log(value);
+            this.pdfurls2=value.imagePath;
+            console.log(this.pdfurls2);
+        }
     }
 };
 
