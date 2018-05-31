@@ -2133,4 +2133,7 @@ export default {
   color: #666666;
 }
 
+.phone-credit .el-input__inner{
+  line-height: 30px;
+}
 </style>

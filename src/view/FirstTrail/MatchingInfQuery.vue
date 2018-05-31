@@ -46,7 +46,7 @@
               <FMCreditForm v-if=" this.tabContent1==6">信审表</FMCreditForm>
               <RcreditInvestigation v-if=" this.tabContent1==7">实地征信</RcreditInvestigation>
               <aMAntiApplyInf v-if=" this.tabContent1==8">反欺诈结论</aMAntiApplyInf>
-              <RFinanceInformation v-if=" this.tabContent1==9">财务信息</RFinanceInformation>
+              <RFinanceInformation v-if=" this.tabContent1==9">账务信息</RFinanceInformation>
               <RprocessTrajectory v-if=" this.tabContent1==10">流程轨迹</RprocessTrajectory>
               <RApprovalConclusion v-if=" this.tabContent1==11">审批结论轨迹</RApprovalConclusion>
             </div>
@@ -87,7 +87,7 @@
             <FMCreditForm v-if=" this.tabContent2==6">信审表</FMCreditForm>
             <RcreditInvestigation v-if=" this.tabContent2==7">实地征信</RcreditInvestigation>
             <aMAntiApplyInf v-if=" this.tabContent2==8">反欺诈结论</aMAntiApplyInf>
-            <RFinanceInformation v-if=" this.tabContent2==9">财务信息</RFinanceInformation>
+            <RFinanceInformation v-if=" this.tabContent2==9">账务信息</RFinanceInformation>
             <RprocessTrajectory v-if=" this.tabContent2==10">流程轨迹</RprocessTrajectory>
             <RApprovalConclusion v-if=" this.tabContent2==11">审批结论轨迹</RApprovalConclusion>
           </div>
@@ -162,8 +162,8 @@
         items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "账务信息", "流程轨迹", "信审审批结论轨迹"],
         tab1Index: 0,
         tab2Index: 3,
-        flag1: [true, true, true, false, true, true, true, true, true, true, true],
-        flag2: [true, true, true, true, true, true, true, true, true, true, true],
+        flag1: [true, true, true, false, true, true, true, true, true, true, true, true],
+        flag2: [true, true, true, true, true, true, true, true, true, true, true, true],
         AlertSearch: "",
         AlertSearchCondition: [{
           value: '选项1',
@@ -554,7 +554,7 @@
 
   .Right_tab_ul_wrap ul {
     /* width: 1061px; */
-    width: 1240px;
+    width: 1400px;
     height: 48px;
     position: relative;
     text-align: left;
