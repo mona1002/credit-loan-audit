@@ -422,12 +422,12 @@
           id: this.tastwaitingPass.ApplyId,
         }).then(res => {
           if (res.statusCode == 200) {
-            // this.customInf = res.data;
-            // if (res.data.accepCusBasicInfo) {
-            //   this.custName = res.data.accepCusBasicInfo.custName;
-            //   this.certCode = res.data.accepCusBasicInfo.certCode;
-            //   this.mobile = res.data.accepCusBasicInfo.mobile;
-            // }
+            this.customInf = res.data;
+            if (res.data.accepCusBasicInfo) {
+              this.custName = res.data.accepCusBasicInfo.custName;
+              this.certCode = res.data.accepCusBasicInfo.certCode;
+              this.mobile = res.data.accepCusBasicInfo.mobile;
+            }
           } else {
             this.$message.error(res.msg);
           }
