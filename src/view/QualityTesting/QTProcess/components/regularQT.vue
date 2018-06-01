@@ -1330,6 +1330,14 @@
         AntiBtn: true, //发起反欺诈
         RiskControlBtn: true, //按钮 - 大数据风控
         SocialSecurityBtn: true, //按钮 - 社保公积金
+        // --------------------------------质检结论-质检结果-------------------
+        checkResultCount01:0,
+        checkResultCount02:0,
+        checkResultCount03:0,
+        checkResultCount04:0,
+        checkResultCount05:0,
+        checkResultCount06:0,
+        checkResultCount07:0
       }
     },
     props: ['propQTconclution'],
@@ -1366,8 +1374,7 @@
             // !res.data.insRegularInfo ? this.regularInfo.applyId = this.propQTconclution.applyId : this.regularInfo =
             //   res.data.insRegularInfo;
             !res.data.insRegularInfo ? this.regularInfo : this.regularInfo = res.data.insRegularInfo;
-            console.log(!res.data.insRegularInfo)
-            console.log(this.propQTconclution.applyId)
+            // console.log(this.propQTconclution.applyId)
               // 质检结论                                  -Object
               !res.data.insConclusionList ? this.insConclusion.applyId = this.propQTconclution.applyId : this.insConclusion =
               res.data.insConclusionList;
@@ -1378,6 +1385,7 @@
               res.data.insReviewConclusion;
             // 电话征信：客户本人-电话拨打核实 - 本人只有一条电话拨打核实记录            -object
             // 专员第一次进，只返回电话号码-因为是从申请表取的。保存之后其他字段都会有，applyid也会被存入
+            console.log(!res.data.insTelCustInfo.applyId )
             if (!res.data.insTelCustInfo.applyId) { //第一次进来，无数据（除电话号码），除默认选正常其他分别赋值进去
               // 质检结果不赋值，因为默认选正常-00
               this.insTelCustInfo.applyId = this.propQTconclution.applyId;
@@ -1642,6 +1650,13 @@
       SaveInf(type) { //质检主管不需要提交，只有质检专员 显示提交
         console.log(type)
         console.log(this.insConclusion.length)
+        this.checkResultCount01=0;
+        this.checkResultCount02=0;
+        this.checkResultCount03=0;
+        this.checkResultCount04=0;
+        this.checkResultCount05=0;
+        this.checkResultCount06=0;
+        this.checkResultCount07=0;
         if (type == '提交') { //提交 加校验，保存无需校验必填---常规质检
           if (this.propQTconclution.tastwaitingPass.listType == '常规质检') {
             if (!this.regularInfo.isForm || !this.regularInfo.isIdcard || !this.regularInfo.isIncome || !this.regularInfo
@@ -1653,7 +1668,9 @@
               !this.regularInfo.isReference ||
               !this.regularInfo.wbeexEcuted || !this.regularInfo.wnetEcutedBrea || !this.regularInfo.wnetPhone ||
               !this.regularInfo.wnetAddrandEstate || !this.regularInfo.wnetCompany || !this.regularInfo.wnetAddrstate ||
-              !this.regularInfo.isInmatch) {
+              !this.regularInfo.isInmatch||
+              this.insConclusion[this.insConclusion.length - 1].checkResult == ''//质检结论最后一条质检结果
+              ) {
               this.$message.error('请输入必填项！')
               return
             } else if (this.insConclusion.length == 0) { //必须添加一条质检结论校验
@@ -1662,11 +1679,26 @@
             }else if(this.insConclusion.length!==0){//质检结论中质检结果不能重复添加
 // console.log( )
 for(var n=0;n<this.insConclusion.length;n++){
-  console.log(this.insConclusion[n] )
-this.insConclusion[n].checkResult
+  console.log(555,this.insConclusion[n] )
+this.insConclusion[n].checkResult=='01'?  this.checkResultCount01++:'';
+this.insConclusion[n].checkResult=='02'?  this.checkResultCount02++:'';
+this.insConclusion[n].checkResult=='03'? this.checkResultCount03++:'';
+this.insConclusion[n].checkResult=='04'? this.checkResultCount04++:'';
+this.insConclusion[n].checkResult=='05'? this.checkResultCount05++:'';
+this.insConclusion[n].checkResult=='06'?  this.checkResultCount06++:'';
+this.insConclusion[n].checkResult=='07'? this.checkResultCount07++:'';     
 }
+console.log('1',this.checkResultCount01)
+console.log('2',this.checkResultCount02)
+console.log('3',this.checkResultCount03)
+console.log('4',this.checkResultCount04)
+console.log('5',this.checkResultCount05)
+console.log('6',this.checkResultCount06)
+console.log('7',this.checkResultCount07)
+if(this.checkResultCount01>1||this.checkResultCount02>1||this.checkResultCount03>1||this.checkResultCount04>1||this.checkResultCount05>1||this.checkResultCount06>1||this.checkResultCount07>1){
  this.$message.error('质检结论中质检结果重复添加！')
 return
+}
             }
 
           } else if (this.propQTconclution.tastwaitingPass.listType == '专项质检') {
@@ -1675,6 +1707,7 @@ return
               return
             }
           }
+
         }
         // 提交 保存 
         if (this.propQTconclution.tastwaitingPass.listType == '常规又专项质检') { //常规又专项质检
@@ -1718,6 +1751,9 @@ return
               i].id; //主管首次保存或提交id设置为空
           }
           // insResultTxt  入参去掉微信支付宝显示汉字字段
+          console.log('aaa')
+          console.log(this.insWechatAlipayList)
+          console.log(this.insWechatAlipayList.length)
              for (var k = 0; k < this.insWechatAlipayList.length; k++) {
                console.log(  this.insWechatAlipayList)
                console.log(111,  this.insWechatAlipayList[k])
@@ -2137,8 +2173,15 @@ return
   .regularQT th {
     text-align: center;
     border: 1px solid #ebeef5;
+    color:#909399;
+  }
+  .regularQT th{
+    font-weight: 800;
   }
 
+  .regularQT td{
+    color:#606266;
+}
   .regularQT .material td:nth-of-type(4) {
     vertical-align: bottom;
   }
