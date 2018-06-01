@@ -1,6 +1,7 @@
 <template>
   <div class="SplitScreen">
     <!-- 质检流程-编辑部分 -->
+    <!--反欺诈审批结论轨迹，质检部分调另一个新鞋的接口库== 反欺诈-8.反欺诈查询所有审批轨迹 -->
     <myHead></myHead>
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
@@ -211,7 +212,13 @@
         custName: "",
         certCode: '',
         mobile: '',
-        customInf: {},
+        customInf: {
+          applyMainNo:'',
+          appOrgName:'',
+          appOrgRegisterDate:'',
+          salPerEmployDate:'',
+          adminIntroduce:''
+        },
         tastwaitingPass: [],
         showHalfBtn: false,
         CompareAlert: false,
@@ -415,12 +422,12 @@
           id: this.tastwaitingPass.ApplyId,
         }).then(res => {
           if (res.statusCode == 200) {
-            this.customInf = res.data;
-            if (res.data.accepCusBasicInfo) {
-              this.custName = res.data.accepCusBasicInfo.custName;
-              this.certCode = res.data.accepCusBasicInfo.certCode;
-              this.mobile = res.data.accepCusBasicInfo.mobile;
-            }
+            // this.customInf = res.data;
+            // if (res.data.accepCusBasicInfo) {
+            //   this.custName = res.data.accepCusBasicInfo.custName;
+            //   this.certCode = res.data.accepCusBasicInfo.certCode;
+            //   this.mobile = res.data.accepCusBasicInfo.mobile;
+            // }
           } else {
             this.$message.error(res.msg);
           }

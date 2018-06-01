@@ -89,7 +89,7 @@ import manager from '../view/QualityTesting/QTProcess/manager/manager.vue' //质
 import regularQT from '../view/QualityTesting/QTProcess/components/regularQT.vue' //首次常规质检
 import regularConfig from '../view/QualityTesting/FunctionalityPages/regularConfig.vue' //常规抽单配置功能
 import specialConfig from '../view/QualityTesting/FunctionalityPages/specialConfig.vue' //专纵项抽单配置功能
-import batchApportion from '../view/QualityTesting/FunctionalityPages/batchApportion.vue' //质检任务批量转分派功能
+// import batchApportion from '../view/QualityTesting/FunctionalityPages/batchApportion.vue' //质检任务批量转分派功能
 import reconsiderResult from '../view/QualityTesting/FunctionalityPages/reconsiderResult.vue' //复议结果查询功能
 import ReApply from '../view/QualityTesting/QTReconsiderProcess/page/ReApply.vue' //复议申请页面
 import SelfTaskList from '../view/QualityTesting/QTReconsiderProcess/page/SelfTaskList.vue' //质检复议-初终审本人任务列表
@@ -423,10 +423,12 @@ const routes = [{
   }, {
     path: '/specialConfig',
     component: specialConfig
-  }, {
-    path: '/batchApportion',
-    component: batchApportion
-  }, {
+  }, 
+  // {
+  //   path: '/batchApportion',
+  //   component: batchApportion
+  // },
+   {
     path: '/reconsiderResult',
     component: reconsiderResult
   }, {

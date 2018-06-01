@@ -1078,7 +1078,7 @@
             telType: "05"
           },
           {
-            applyId: "",
+            applyId: this.propQTconclution.applyId,
             id: "",
             insResult: "00",
             insResultTxt: "正常",
@@ -1099,7 +1099,7 @@
             telType: "04"
           },
           {
-            applyId: "",
+            applyId: this.propQTconclution.applyId,
             id: "",
             insResult: "00",
             insResultTxt: "正常",
@@ -1379,7 +1379,7 @@
             // 电话征信：客户本人-电话拨打核实 - 本人只有一条电话拨打核实记录            -object
             // 专员第一次进，只返回电话号码-因为是从申请表取的。保存之后其他字段都会有，applyid也会被存入
             if (!res.data.insTelCustInfo.applyId) { //第一次进来，无数据（除电话号码），除默认选正常其他分别赋值进去
-            // 质检结果不赋值，因为默认选正常-00
+              // 质检结果不赋值，因为默认选正常-00
               this.insTelCustInfo.applyId = this.propQTconclution.applyId;
               this.insTelCustInfo.telNum = res.data.insTelCustInfo.telNum; //电话号码
               this.insTelCustInfo.telRecord = res.data.insTelCustInfo.telRecord; //电话录音
@@ -1419,6 +1419,9 @@
               // res.data.insWechatAlipayList[k].telType == '05' && res.data.insWechatAlipayList[k].insVerifyType ==
               //   '00' ? this.AlipayWork[0] = res.data.insWechatAlipayList[k] : this.AlipayWork[1] = res.data.insWechatAlipayList[
               //     k]; //工作证明
+              console.log(res.data.insWechatAlipayList[k].telType )
+              console.log(res.data.insWechatAlipayList[k] )
+              console.log(222,res.data.insWechatAlipayList)
               if (res.data.insWechatAlipayList[k].telType == '06') { //客户本人
                 if (res.data.insWechatAlipayList[k].insVerifyType == '00') {
                   this.AlipayCus[0] = res.data.insWechatAlipayList[k];
@@ -1653,12 +1656,14 @@
               !this.regularInfo.isInmatch) {
               this.$message.error('请输入必填项！')
               return
-            } else if (this.insConclusion.length == 0) { //必须添加一条质检结论校验
+            }
+             else if (this.insConclusion.length == 0) { //必须添加一条质检结论校验
               this.$message.error('请至少添加一条质检结论！')
               return
             }
 
-          } else if (this.propQTconclution.tastwaitingPass.listType == '专项质检') {
+
+          else if (this.propQTconclution.tastwaitingPass.listType == '专项质检') {
             if (this.insConclusion.length == 0) { //必须添加一条质检结论校验
               this.$message.error('请至少添加一条质检结论！')
               return
@@ -1706,6 +1711,12 @@
             this.insConclusion[i].checkType == '01' && this.insConclusion[i].id ? this.insConclusion[i].id = '' : this.insConclusion[
               i].id; //主管首次保存或提交id设置为空
           }
+          // insResultTxt  入参去掉微信支付宝显示汉字字段
+             for (var k = 0; k < this.insWechatAlipayList.length; k++) {
+               console.log(  this.insWechatAlipayList)
+               console.log(111,  this.insWechatAlipayList[k])
+           this.insWechatAlipayList[k].insResultTxt=null;
+          }
           this.SaveInfParams = { //入参
             applyId: this.propQTconclution.applyId,
             taskId: this.propQTconclution.tastwaitingPass.taskId,
@@ -1724,11 +1735,12 @@
                   message: type + '成功！'
                 })
                 // 保存获取最新信息，提交跳转
-                type == '保存' ? this.referPort() : ''; // 点保存重新获取信息
+                // type == '保存' ? this.referPort() : ''; // 点保存重新获取信息
                 if (type == '提交') {
                   this.propQTconclution.pageType == 'checkApp_apply' ? this.$router.push(
                     '/commissioner?taskNodeName=checkApp_apply&flag=07') : ''; //专员
                 }
+                this.referPort();
               } else {
                 this.$message.error(res.msg);
               }
