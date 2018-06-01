@@ -673,6 +673,9 @@
         maxAuditAmt:Number,//流程角色-最高审批金额
         ploanAmtNum:Number,//批准金额number类型
         params:'',
+        mainReasonId :'',//主原因id
+        subReasonId:'',//子原因id
+
       }
     },
     mounted() {
@@ -1567,9 +1570,21 @@
       approvalFn() {
         this.isLoading = true;
         this.loadingTitle = '提交中';
+
         // 判断终审的 opinionFlag 
         // console.log(this.opinionFlag)
         // 点击 确认 提交 方法
+        //获取主原因、子原因id
+        for(var i=0;i<this.mainReasons.length;i++){
+          if(this.mainReasons[i].reasonName == this.mainReason){
+            this.mainReasonId = this.mainReasons[i].id;
+          }
+        };
+        for(var i=0;i<this.secondeReasons.length;i++){
+          if(this.secondeReasons[i].reasonName == this.secondaryReason){
+            this.subReasonId = this.secondeReasons[i].id;
+          }
+        };
         this.post("/creauditInfo/approval", {
           // 挂起 taskId 任务id
           taskId: this.taskId,
@@ -1585,6 +1600,8 @@
           opinionFlag: this.opinionFlag, // 标志任务类型
           mainReasonName: this.mainReason, // 回退主原因
           subReasonName: this.secondaryReason, // 回退子原因
+          mainReasonId: this.mainReasonId, // 回退主原因id
+          subReasonId: this.subReasonId, // 回退子原因id
           reasonRemark: this.reasonRemark, // 意见描述/原因说明
           appOrgId: this.appOrgId, // 进件机构id
           applyId: this.applyId, // 申请单id

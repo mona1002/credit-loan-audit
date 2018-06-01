@@ -110,8 +110,7 @@ import MatchingInfQTProcess from '../view/FirstTrail/MatchingInfQTProcess.vue' /
 // import ComplianceProcess from ''//质检复议-
 
 // commissioner//质检专员列表
-// manager//质检主管列表
-
+// manager//质检主管列表 
 
 
 

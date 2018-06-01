@@ -266,7 +266,7 @@
       if(this.flowRoleCodesList){
         for(var i=0;i<this.flowRoleCodesList.length;i++){
             if(this.flowRoleCodesList[i] == 'BL12' || this.flowRoleCodesList[i] == 'BL108' || this.flowRoleCodesList[i] == 'BL07'){
-              this.channel = '06';
+              this.channel = '07';
             }else{
               this.channel = '99';
             }

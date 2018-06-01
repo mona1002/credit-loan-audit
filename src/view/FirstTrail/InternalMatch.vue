@@ -351,13 +351,14 @@
       handleSizeChangeFixTel(val) {
         // 每页 10条
         console.log("固定电话 每页 ${val}条", val);
-        this.MobilePageSize = val;
+        this.FixTelPageSize = val;
+        console.log(this.FixTelPageNum)
         this.fetchData('fixed');
       },
       handleCurrentChangeFixTel(val) {
         // 第几页
         console.log("固定电话 当前页: ${val}", val);
-        this.MobilePageNum = val;
+        this.FixTelPageNum = val;
         this.fetchData('fixed');
       },
       // 单位电话

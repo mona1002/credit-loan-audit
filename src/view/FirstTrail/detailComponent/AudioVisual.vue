@@ -37,7 +37,7 @@
           </template>
           <div class="list_title_div">
             <!--  二级 内容 节点 -->
-            <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind)" @mousedown="getImg(ind)">
+            <p v-for="(item,ind) in ListDetails" :key="ind" @click.stop="getImg(ind)">
               <el-tooltip class="item" effect="dark" :content="item.arcName" placement="right-end">
                 <span style="width:135px;paddingLeft:20px;">{{item.arcName}}</span>
               </el-tooltip>
@@ -58,7 +58,9 @@
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative; left:0; top:0;" id='FirstAud'>
-        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" />
+        <img ref="Big_pic_ref" v-for="(val,key) in pngAyyr" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng"/>
+        <!-- <pdfDiv v-if="myPdf" v-for="(val,index) in pdfArry" :key="index" :val="val"></pdfDiv> -->
+        <pdfDiv v-if="myPdf" :pdfArry="pdfArry"></pdfDiv>
       </div>
     </div>
     <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" @click="pre" v-show="perfBtn" @mouseenter='PerBtn'>
@@ -75,10 +77,10 @@
         <img src="../../../../static/images/D625BA67-2F56-42C1-9E9D-A47AE03BA028@1x.png" class="small_pic_close" @click="SmallpicClose">
       </p>
       <div class="small_pic_content">
-        <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
+        <figure v-for="(val,index) in pngAyyr" :key="index" class="small_pic_figure">
           <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref"
           />
-          <p>{{val.arcSubType}} </p>
+          <p>{{val.arcSubType}}</p>
         </figure>
       </div>
     </div>
@@ -87,6 +89,7 @@
 
 <script>
   import imgUrl from '../../../util/ConstantSocialAndPn'
+  import pdfDiv from '../../pdf'
   export default {
     data() {
       return {
@@ -107,6 +110,11 @@
         applyId: '', //入参
         imgPath: [],
         localInf: [], //localstorage 接收的所有参数,
+        pdfArry:[],
+        pngAyyr:[],
+        myPng:false,
+        myPdf:false,
+        style:''
       }
     },
     methods: {
@@ -149,8 +157,59 @@
         });
       },
       getImg(ind) {
+        //alert('ooo');
+         this.myPdf = false;
+        this.pdfArry=[];
+        this.pngAyyr=[];
         this.smallPicInd = 0;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
+        console.log(this.imgPath);
+        console.log('mkkmkm');
+        //console.log(this.imgPath);
+        //var pdfArry=[];
+        for(var i=0;i<this.imgPath.length;i++){
+          //console.log(this.imgPath[i]);
+          //console.log('pppp');
+          //console.log(this.imgPath[i].imagePath.substring(this.imgPath[i].imagePath.length-3));
+          //console.log('ooooo');
+          if(this.imgPath[i].imagePath.substring(this.imgPath[i].imagePath.length-3) == 'pdf'){
+            if(this.pdfArry.length>0){
+              for(var j=0;j<this.pdfArry.length;j++){
+              //alert('pp')
+                if(this.imgPath[i].imagePath!=this.pdfArry[j].imagePath){
+                    this.pdfArry.push(this.imgPath[i]);
+                }
+              }
+            }else{
+              this.pdfArry.push(this.imgPath[i]);  
+            }
+            this.myPdf = true;
+            this.myPng = false;
+            /*if(this.imgPath[i].imagePath)
+                this.pdfArry.push(this.imgPath[i].imagePath);*/
+            
+              console.log('---------------------------');
+              console.log(this.pdfArry[0]);
+              console.log('---------------------------');
+
+              console.log('eeee');
+          }else{
+            this.myPng = true;
+            this.myPdf = false;
+            if(this.pngAyyr.length>0){
+              for(var m=0;m<this.pngAyyr.length;m++){
+                if(this.imgPath[i].imagePath!=this.pngAyyr[m].imagePath){
+                    this.pngAyyr.push(this.imgPath[i]);
+                }
+              }
+            }else{
+              this.pngAyyr.push(this.imgPath[i]);
+            };
+            
+            console.log(this.pngAyyr[0]);
+            console.log('eeee2');
+          }
+        };
         this.$refs.img_wrap.style.left = 0;
         this.$refs.img_wrap.style.top = 0;
         this.defaultBigPicCss();
@@ -363,6 +422,9 @@
           this.$message.error(res.msg);
         }
       });
+    },
+    components: {
+      pdfDiv
     }
   }
 
