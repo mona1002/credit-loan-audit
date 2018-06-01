@@ -17,6 +17,7 @@
 <script>
 import PdfShower from 'vue-pdf-shower';	
 import pdfUrl from '../util/ConstantSocialAndPn'
+//import UniGB from '../../static/UniGB-UCS2-H'
 export default {
     name: 'pdfshower',
     components: {
