@@ -1669,7 +1669,7 @@
               !this.regularInfo.wbeexEcuted || !this.regularInfo.wnetEcutedBrea || !this.regularInfo.wnetPhone ||
               !this.regularInfo.wnetAddrandEstate || !this.regularInfo.wnetCompany || !this.regularInfo.wnetAddrstate ||
               !this.regularInfo.isInmatch||
-              this.insConclusion[this.insConclusion.length - 1].checkResult == ''//质检结论最后一条质检结果
+            ( this.insConclusion.length > 0 &&   this.insConclusion[this.insConclusion.length - 1].checkResult == '')//质检结论最后一条质检结果
               ) {
               this.$message.error('请输入必填项！')
               return
@@ -1729,11 +1729,11 @@ return
           });
         } else { //  常规质检、专纵质检
           // 先校验-质检结论最后一条信息，质检结果如果为空，提示并return
-          if (type == '提交' && this.insConclusion.length > 0 && this.insConclusion[this.insConclusion.length - 1].checkResult ==
-            '') {
-            this.$message.error('请输入必填项！');
-            return
-          }
+          // if (type == '提交' && this.insConclusion.length > 0 && this.insConclusion[this.insConclusion.length - 1].checkResult ==
+          //   '') {
+          //   this.$message.error('请输入必填项！');
+          //   return
+          // }
           // 微信支付宝+电话核实（除本人）合并为一个数组
           this.insTelVerifyListConcat = this.insTelVerifyListCompany.concat(this.insTelVerifyListFamily).concat(this.insTelVerifyListWork)
             .concat(this.insTelVerifyListOthers)
@@ -1752,12 +1752,12 @@ return
           }
           // insResultTxt  入参去掉微信支付宝显示汉字字段
           console.log('aaa')
-          console.log(this.insWechatAlipayList)
-          console.log(this.insWechatAlipayList.length)
-             for (var k = 0; k < this.insWechatAlipayList.length; k++) {
-               console.log(  this.insWechatAlipayList)
-               console.log(111,  this.insWechatAlipayList[k])
-           this.insWechatAlipayList[k].insResultTxt=null;
+          console.log(this.AlipayConcat)
+          console.log(this.AlipayConcat.length)
+             for (var k = 0; k < this.AlipayConcat.length; k++) {
+               console.log(  this.AlipayConcat)
+               console.log(111,  this.AlipayConcat[k])
+           this.AlipayConcat[k].insResultTxt=null;
           }
           this.SaveInfParams = { //入参
             applyId: this.propQTconclution.applyId,
