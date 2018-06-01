@@ -1656,14 +1656,20 @@
               !this.regularInfo.isInmatch) {
               this.$message.error('请输入必填项！')
               return
-            }
-             else if (this.insConclusion.length == 0) { //必须添加一条质检结论校验
+            } else if (this.insConclusion.length == 0) { //必须添加一条质检结论校验
               this.$message.error('请至少添加一条质检结论！')
               return
+            }else if(this.insConclusion.length!==0){//质检结论中质检结果不能重复添加
+// console.log( )
+for(var n=0;n<this.insConclusion.length;n++){
+  console.log(this.insConclusion[n] )
+this.insConclusion[n].checkResult
+}
+ this.$message.error('质检结论中质检结果重复添加！')
+return
             }
 
-
-          else if (this.propQTconclution.tastwaitingPass.listType == '专项质检') {
+          } else if (this.propQTconclution.tastwaitingPass.listType == '专项质检') {
             if (this.insConclusion.length == 0) { //必须添加一条质检结论校验
               this.$message.error('请至少添加一条质检结论！')
               return
