@@ -16,6 +16,7 @@ import vuePdfShower from 'vue-pdf-shower'
 import 'vue-pdf-shower/lib/dist/pdf.js'
 PDFJS.workerSrc = 'vue-pdf-shower/lib/dist/pdf.worker.js'
 PDFJS.cMapUrl = '/static/web/cmaps/'
+PDFJS.cMapPacked = true;
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI)
