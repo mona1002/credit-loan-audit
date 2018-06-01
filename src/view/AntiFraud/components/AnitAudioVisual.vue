@@ -55,8 +55,10 @@
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap"  style="position:relative; left:0; top:0;" id='AntiFirstAud'>
-        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd"
-        />
+        <!-- <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd"
+        /> -->
+        <img ref="Big_pic_ref" v-for="(val,key) in pngAyyr" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng"/>
+        <p v-if="myPdf" is="pdfDiv" v-bind:title="pdfArry"></p>
       </div>
     </div>
     <img src="../../../../static/images/left.png" class="icon_pre " v-show="perfBtn" ref="preBtn" @click="pre" @mouseenter='PerBtn'>
@@ -86,6 +88,7 @@
 
 <script>
 import imgUrl from'../../../util/ConstantSocialAndPn'
+import pdfDiv from '../../pdf'
   export default {
     data() {
       return {
@@ -104,7 +107,11 @@ import imgUrl from'../../../util/ConstantSocialAndPn'
         ListDetails: [],
         applyId: '', //入参
         imgPath: [],
-        localInf: [] //localstorage 接收的所有参数
+        localInf: [], //localstorage 接收的所有参数
+        pdfArry:[],
+        pngAyyr:[],
+        myPng:false,
+        myPdf:false,
       }
     },
     methods: {
@@ -148,10 +155,68 @@ import imgUrl from'../../../util/ConstantSocialAndPn'
         });
       },
       getImg(ind) {
-        this.smallPicInd = 0;
+        /*this.smallPicInd = 0;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
                  this.$refs.img_wrap.style.left=0;
         this.$refs.img_wrap.style.top=0;
+        this.defaultBigPicCss();*/
+        //alert('ooo');
+        //console.log(this.myPdf);
+         //this.myPdf = false;
+        this.pdfArry=[];
+        this.pngAyyr=[];
+        this.smallPicInd = 0;
+        this.imgPath = this.ListDetails[ind].applyArchiveInfos;
+        console.log(this.imgPath);
+        console.log('mkkmkm');
+        //console.log(this.imgPath);
+        //var pdfArry=[];
+        for(var i=0;i<this.imgPath.length;i++){
+          //console.log(this.imgPath[i]);
+          //console.log('pppp');
+          //console.log(this.imgPath[i].imagePath.substring(this.imgPath[i].imagePath.length-3));
+          //console.log('ooooo');
+          if(this.imgPath[i].imagePath.substring(this.imgPath[i].imagePath.length-3) == 'pdf'){
+            if(this.pdfArry.length>0){
+              for(var j=0;j<this.pdfArry.length;j++){
+              //alert('pp')
+                if(this.imgPath[i].imagePath!=this.pdfArry[j].imagePath){
+                    this.pdfArry.push(this.imgPath[i]);
+                }
+              }
+            }else{
+              this.pdfArry.push(this.imgPath[i]);  
+            }
+            this.myPdf = true;
+            this.myPng = false;
+            /*if(this.imgPath[i].imagePath)
+                this.pdfArry.push(this.imgPath[i].imagePath);*/
+            
+              console.log('---------------------------');
+              console.log(this.pdfArry[0]);
+              console.log('---------------------------');
+
+              console.log('eeee');
+              console.log(this.myPdf);
+          }else{
+            this.myPng = true;
+            this.myPdf = false;
+            if(this.pngAyyr.length>0){
+              for(var m=0;m<this.pngAyyr.length;m++){
+                if(this.imgPath[i].imagePath!=this.pngAyyr[m].imagePath){
+                    this.pngAyyr.push(this.imgPath[i]);
+                }
+              }
+            }else{
+              this.pngAyyr.push(this.imgPath[i]);
+            };
+            
+            console.log(this.pngAyyr[0]);
+            console.log('eeee2');
+          }
+        };
+        this.$refs.img_wrap.style.left = 0;
+        this.$refs.img_wrap.style.top = 0;
         this.defaultBigPicCss();
       },
       hid() {
@@ -373,6 +438,9 @@ import imgUrl from'../../../util/ConstantSocialAndPn'
           this.$message.error(res.msg);
         }
       });
+    },
+    components: {
+      pdfDiv
     }
   }
 
