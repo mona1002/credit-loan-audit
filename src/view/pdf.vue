@@ -8,7 +8,7 @@
            @onErr="onErr">  
        </pdf-shower> -->
        <pdf-shower 
-           :pdfurl="sss4" 
+           :pdfurl="sss5" 
            :scale="scale" 
            @onErr="onErr">  
        </pdf-shower>
