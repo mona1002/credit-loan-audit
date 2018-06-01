@@ -60,7 +60,9 @@
       <div ref="img_wrap" style="position:relative; left:0; top:0;" id='FirstAud'>
         <img ref="Big_pic_ref" v-for="(val,key) in pngAyyr" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng"/>
         <!-- <pdfDiv v-if="myPdf" v-for="(val,index) in pdfArry" :key="index" :val="val"></pdfDiv> -->
-        <pdfDiv v-if="myPdf" :pdfArry="pdfArry"></pdfDiv>
+        <!-- <pdfDiv v-if="myPdf" :pdfArry="pdfArry"></pdfDiv> -->
+        <!-- <p v-if="myPdf" v-for="(val,index) in pdfArry" is="pdfDiv" v-bind:title="val"></p> -->
+        <p v-if="myPdf" is="pdfDiv" v-bind:title="pdfArry"></p>
       </div>
     </div>
     <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" @click="pre" v-show="perfBtn" @mouseenter='PerBtn'>
@@ -158,7 +160,8 @@
       },
       getImg(ind) {
         //alert('ooo');
-         this.myPdf = false;
+        //console.log(this.myPdf);
+         //this.myPdf = false;
         this.pdfArry=[];
         this.pngAyyr=[];
         this.smallPicInd = 0;
@@ -193,6 +196,7 @@
               console.log('---------------------------');
 
               console.log('eeee');
+              console.log(this.myPdf);
           }else{
             this.myPng = true;
             this.myPdf = false;
