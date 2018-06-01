@@ -1,17 +1,17 @@
 <template>
 	<div>
-       <!-- <pdf-shower 
+       <pdf-shower 
             v-for="(val,index) in title"
             :key=Math.random()
            :pdfurl="imgBaseUrl+val.imagePath" 
            :scale="scale" 
            @onErr="onErr">  
-       </pdf-shower> -->
-       <pdf-shower 
-           :pdfurl="sss5" 
+       </pdf-shower>
+       <!-- <pdf-shower 
+           :pdfurl="sss4" 
            :scale="scale" 
            @onErr="onErr">  
-       </pdf-shower>
+       </pdf-shower> -->
 	</div>
 </template>
 <script>
