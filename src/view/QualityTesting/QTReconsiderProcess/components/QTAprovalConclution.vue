@@ -33,8 +33,9 @@
       //   this.tastwaitingPass = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管-匹配查看
       // }
        this.tastwaitingPass = JSON.parse(localStorage.getItem("QT")) //质检
-      this.post("/fraudAuditOpinion/getApproveConclusionTrack", {
-        appinfoId: this.tastwaitingPass.businessId,
+       console.log( this.tastwaitingPass )
+      this.post("/fraudAuditOpinion/getAllApproveConclusionTrack", {
+        applyId: this.tastwaitingPass.matchApplyId,
       }).then(res => {
         if (res.statusCode == 200) {
           this.tableData = res.data;
