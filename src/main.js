@@ -11,6 +11,7 @@ import validation from '@/util/validation'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import $ from 'jquery'
+import UniGB from './UniGB-UCS2-H.bcmap'
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI)
