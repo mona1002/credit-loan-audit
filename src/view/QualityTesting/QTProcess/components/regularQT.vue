@@ -415,16 +415,60 @@
             <p style='clear:both;padding:3px 0;'>
               <el-tag>微信/支付宝核实</el-tag>
             </p>
-            <!-- <el-table :data="Alipay" border style="width: 100%"> -->
-            <el-table :data="WechatData(this.ind)" border style="width: 100%">
+             <el-table :data="WechatData(this.ind)" border style="width: 100%">
               <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
               <el-table-column label="核实类型" prop='insVerifyTypeTxt' align="left" width="180">
-                <!-- <template slot-scope="scope">
-                  <span style="margin-left: 10px">
-                    <label v-if='scope.row.insVerifyType=="00"'> {{ '微信查询结果' }}</label>
-                    <label v-if='scope.row.insVerifyType=="01"'> {{ '支付宝查询结果' }}</label>
-                  </span>
-                </template> -->
+              </el-table-column>
+              <el-table-column label="核实结论" align="center" width="180">
+                <template slot-scope="scope">
+                  <div slot="reference" class="name-wrapper">
+                    <b class="required_Red"> * </b>
+                    <el-radio-group :disabled='PhoneCredit' v-model="scope.row.insResult" @change="scope.row.insResult=='00'?scope.row.remark='':scope.row.remark">
+                      <!-- <el-radio-group :disabled='PhoneCredit' v-model="scope.row.insResult" @change="scope.row.insResult=='00'?scope.row.remark='':scope.row.remark"> -->
+                      <el-radio label="00">正常</el-radio>
+                      <el-radio label="01">异常</el-radio>
+                    </el-radio-group>
+                  </div>
+                </template>
+              </el-table-column>
+              <el-table-column label="备注" align="center">
+                <template slot-scope="scope">
+                  <el-input type="textarea" :disabled='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model="scope.row.remark"
+                    :maxlength="this.textareaL" placeholder="请输入内容">
+                  </el-input>
+                  {{scope.row.insResult}}
+                </template>
+              </el-table-column>
+            </el-table>
+            <!-- 客户本人 -->
+            <!-- <el-table :data="AlipayCus" border style="width: 100%" v-show="ind===0">
+              <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
+              <el-table-column label="核实类型" prop='insVerifyTypeTxt' align="left" width="180">
+              </el-table-column>
+              <el-table-column label="核实结论" align="center" width="180">
+                <template slot-scope="scope">
+                  <div slot="reference" class="name-wrapper">
+                    <b class="required_Red"> * </b>
+                    <el-radio-group :disabled='PhoneCredit' v-model="scope.row.insResult" @change="scope.row.insResult=='00'?scope.row.remark='':scope.row.remark">
+                      <el-radio label="00">正常</el-radio>
+                      <el-radio label="01">异常</el-radio>
+                    </el-radio-group>
+                  </div>
+                </template>
+              </el-table-column>
+              <el-table-column label="备注" align="center">
+                <template slot-scope="scope">
+                  <el-input type="textarea" :disabled='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model="scope.row.remark"
+                    :maxlength="this.textareaL" placeholder="请输入内容">
+                  </el-input>
+                  {{scope.row.insResult}}
+                </template>
+              </el-table-column>
+            </el-table> -->
+            <!-- 家庭联系人 -->
+            <!-- <el-table :data="AlipayFamily" border style="width: 100%" v-show="ind===2">
+              <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
+              <el-table-column label="核实类型" prop='insVerifyTypeTxt' align="left" width="180">
               </el-table-column>
               <el-table-column label="核实结论" align="center" width="180">
                 <template slot-scope="scope">
@@ -444,7 +488,55 @@
                   </el-input>
                 </template>
               </el-table-column>
-            </el-table>
+            </el-table> -->
+            <!-- 工作证明人 -->
+            <!-- <el-table :data="AlipayWork" border style="width: 100%" v-show="ind===3">
+              <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
+              <el-table-column label="核实类型" prop='insVerifyTypeTxt' align="left" width="180">
+              </el-table-column>
+              <el-table-column label="核实结论" align="center" width="180">
+                <template slot-scope="scope">
+                  <div slot="reference" class="name-wrapper">
+                    <b class="required_Red"> * </b>
+                    <el-radio-group :disabled='PhoneCredit' v-model="scope.row.insResult" @change="scope.row.insResult=='00'?scope.row.remark='':scope.row.remark">
+                      <el-radio label="00">正常</el-radio>
+                      <el-radio label="01">异常</el-radio>
+                    </el-radio-group>
+                  </div>
+                </template>
+              </el-table-column>
+              <el-table-column label="备注" align="center">
+                <template slot-scope="scope">
+                  <el-input type="textarea" :disabled='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model="scope.row.remark"
+                    :maxlength="this.textareaL" placeholder="请输入内容">
+                  </el-input>
+                </template>
+              </el-table-column>
+            </el-table> -->
+            <!-- 其他联系人 -->
+            <!-- <el-table :data="AlipayOthers" border style="width: 100%" v-show="ind===4">
+              <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
+              <el-table-column label="核实类型" prop='insVerifyTypeTxt' align="left" width="180">
+              </el-table-column>
+              <el-table-column label="核实结论" align="center" width="180">
+                <template slot-scope="scope">
+                  <div slot="reference" class="name-wrapper">
+                    <b class="required_Red"> * </b>
+                    <el-radio-group :disabled='PhoneCredit' v-model="scope.row.insResult" @change="scope.row.insResult=='00'?scope.row.remark='':scope.row.remark">
+                      <el-radio label="00">正常</el-radio>
+                      <el-radio label="01">异常</el-radio>
+                    </el-radio-group>
+                  </div>
+                </template>
+              </el-table-column>
+              <el-table-column label="备注" align="center">
+                <template slot-scope="scope">
+                  <el-input type="textarea" :disabled='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model="scope.row.remark"
+                    :maxlength="this.textareaL" placeholder="请输入内容">
+                  </el-input>
+                </template>
+              </el-table-column>
+            </el-table> -->
           </div>
           <!-- call-content 客户本人中-电话拨打核实  -->
           <div v-show="custom">
@@ -973,9 +1065,13 @@
         insReconApply: [], //复议申请表
         ReconsiderNode: '质检主管', //复议弹窗-复议节点
         ReconsiderDes: '', //复议弹窗-复议说明
+        instaskType: '', //添加质检结论入参-任务类型（00:常规质检，01:专项质检）
         reviewConclusion: {
           // this.propQTconclution.applyId
         }, //复核结论
+        tablrf: [{
+          insResult: '01'
+        }],
         ToApprovalParams: { //复议审批弹窗 
           applyId: this.propQTconclution.applyId,
           reviewResult: '',
@@ -1193,30 +1289,28 @@
         ManagerSecondTableData: [], //初终审主管二次
         insReconApproval: [], //复议审批表
         // ------------------------------------测试用--------------------
-        tableData: [{
-          reviewRemark: '2016-05-02',
-          approverUserCode: '王小虎',
-          reconDate: '上海市普陀区金沙江路 1518 弄',
-          reconType: '00'
-        }, {
-          reviewRemark: '2016-05-02',
-          approverUserCode: '王小虎',
-          reconDate: '上海市普陀区金沙江路 1518 弄',
-          reconType: '00'
-        }, {
-          reviewRemark: '2016-05-02',
-          approverUserCode: '王小虎',
-          reconDate: '上海市普陀区金沙江路 1518 弄',
-          reconType: '01'
-        }, {
-          reviewRemark: '2016-05-02',
-          approverUserCode: '王小虎',
-          reconDate: '上海市普陀区金沙江路 1518 弄',
-          reconType: '02'
-        }],
+        // tableData: [{
+        //   reviewRemark: '2016-05-02',
+        //   approverUserCode: '王小虎',
+        //   reconDate: '上海市普陀区金沙江路 1518 弄',
+        //   reconType: '00'
+        // }, {
+        //   reviewRemark: '2016-05-02',
+        //   approverUserCode: '王小虎',
+        //   reconDate: '上海市普陀区金沙江路 1518 弄',
+        //   reconType: '00'
+        // }, {
+        //   reviewRemark: '2016-05-02',
+        //   approverUserCode: '王小虎',
+        //   reconDate: '上海市普陀区金沙江路 1518 弄',
+        //   reconType: '01'
+        // }, {
+        //   reviewRemark: '2016-05-02',
+        //   approverUserCode: '王小虎',
+        //   reconDate: '上海市普陀区金沙江路 1518 弄',
+        //   reconType: '02'
+        // }],
         // ------------------------------------------------------------
-        // //   ---
-        // textareaL: 300,
         tabIndex: 0,
         payment: true,
         custom: true,
@@ -1331,16 +1425,29 @@
         RiskControlBtn: true, //按钮 - 大数据风控
         SocialSecurityBtn: true, //按钮 - 社保公积金
         // --------------------------------质检结论-质检结果-------------------
-        checkResultCount01:0,
-        checkResultCount02:0,
-        checkResultCount03:0,
-        checkResultCount04:0,
-        checkResultCount05:0,
-        checkResultCount06:0,
-        checkResultCount07:0
+        checkResultCount01: 0,
+        checkResultCount02: 0,
+        checkResultCount03: 0,
+        checkResultCount04: 0,
+        checkResultCount05: 0,
+        checkResultCount06: 0,
+        checkResultCount07: 0
       }
     },
     props: ['propQTconclution'],
+    // watch:{
+    //     WechatData(ind) {
+    //     if (ind == 0) { //客户本人
+    //       return this.AlipayCus;
+    //     } else if (ind == 2) { //家庭联系人
+    //       return this.AlipayFamily;
+    //     } else if (ind == 3) { //工作证明
+    //       return this.AlipayWork;
+    //     } else if (ind == 4) { //其他联系人
+    //       return this.AlipayOthers;
+    //     }
+    //   },
+    // },
     methods: {
       ccc() {
         console.log(this.regularInfo.isFormRemark.length)
@@ -1375,8 +1482,8 @@
             //   res.data.insRegularInfo;
             !res.data.insRegularInfo ? this.regularInfo : this.regularInfo = res.data.insRegularInfo;
             // console.log(this.propQTconclution.applyId)
-              // 质检结论                                  -Object
-              !res.data.insConclusionList ? this.insConclusion.applyId = this.propQTconclution.applyId : this.insConclusion =
+            // 质检结论                                  -Object
+            !res.data.insConclusionList ? this.insConclusion.applyId = this.propQTconclution.applyId : this.insConclusion =
               res.data.insConclusionList;
             this.insConclusion[0] && this.insConclusion[0].id ? this.addId = this.insConclusion[0].id : this.addId =
               ''; //取添加质检结论时，id值
@@ -1385,7 +1492,7 @@
               res.data.insReviewConclusion;
             // 电话征信：客户本人-电话拨打核实 - 本人只有一条电话拨打核实记录            -object
             // 专员第一次进，只返回电话号码-因为是从申请表取的。保存之后其他字段都会有，applyid也会被存入
-            console.log(!res.data.insTelCustInfo.applyId )
+            console.log(!res.data.insTelCustInfo.applyId)
             if (!res.data.insTelCustInfo.applyId) { //第一次进来，无数据（除电话号码），除默认选正常其他分别赋值进去
               // 质检结果不赋值，因为默认选正常-00
               this.insTelCustInfo.applyId = this.propQTconclution.applyId;
@@ -1427,60 +1534,59 @@
               // res.data.insWechatAlipayList[k].telType == '05' && res.data.insWechatAlipayList[k].insVerifyType ==
               //   '00' ? this.AlipayWork[0] = res.data.insWechatAlipayList[k] : this.AlipayWork[1] = res.data.insWechatAlipayList[
               //     k]; //工作证明
-              console.log(res.data.insWechatAlipayList[k].telType )
-              console.log(res.data.insWechatAlipayList[k] )
-              console.log(222,res.data.insWechatAlipayList)
+              console.log(res.data.insWechatAlipayList[k].telType)
+              // console.log(res.data.insWechatAlipayList[k] )
+              // console.log(222,res.data.insWechatAlipayList)
               if (res.data.insWechatAlipayList[k].telType == '06') { //客户本人
                 if (res.data.insWechatAlipayList[k].insVerifyType == '00') {
-                  this.AlipayCus[0] = res.data.insWechatAlipayList[k];
+                  // this.AlipayCus[0] = res.data.insWechatAlipayList[k];
+                  // this.AlipayCus[0].insResult = res.data.insWechatAlipayList[k].insResult;
+                  this.AlipayCus.shift();
+                  this.AlipayCus.unshift(res.data.insWechatAlipayList[k]);
                 } else {
-                  this.AlipayCus[1] = res.data.insWechatAlipayList[k];
+                  // this.AlipayCus[1] = res.data.insWechatAlipayList[k];
+                  this.AlipayCus.pop();
+                  this.AlipayCus.push(res.data.insWechatAlipayList[k]);
                 }
               } else if (res.data.insWechatAlipayList[k].telType == '03') { //家庭联系人
                 if (res.data.insWechatAlipayList[k].insVerifyType == '00') {
-                  this.AlipayFamily[0] = res.data.insWechatAlipayList[k];
+                  // this.AlipayFamily[0] = res.data.insWechatAlipayList[k];
+                  this.AlipayFamily.shift();
+                  this.AlipayFamily.unshift(res.data.insWechatAlipayList[k]);
                 } else {
-                  this.AlipayFamily[1] = res.data.insWechatAlipayList[k];
+                  // this.AlipayFamily[1] = res.data.insWechatAlipayList[k];
+                  this.AlipayFamily.pop();
+                  this.AlipayFamily.push(res.data.insWechatAlipayList[k]);
                 }
               } else if (res.data.insWechatAlipayList[k].telType == '04') { //其他联系人
                 if (res.data.insWechatAlipayList[k].insVerifyType == '00') {
-                  this.AlipayOthers[0] = res.data.insWechatAlipayList[k];
+                  // this.AlipayOthers[0] = res.data.insWechatAlipayList[k];
+                  this.AlipayOthers.shift();
+                  this.AlipayOthers.unshift(res.data.insWechatAlipayList[k]);
                 } else {
-                  this.AlipayOthers[1] = res.data.insWechatAlipayList[k];
+                  // this.AlipayOthers[1] = res.data.insWechatAlipayList[k];
+                  this.AlipayOthers.pop();
+                  this.AlipayOthers.push(res.data.insWechatAlipayList[k]);
                 }
               } else if (res.data.insWechatAlipayList[k].telType == '05') { //工作证明
                 if (res.data.insWechatAlipayList[k].insVerifyType == '00') {
-                  this.AlipayWork[0] = res.data.insWechatAlipayList[k];
+                  // this.AlipayWork[0] = res.data.insWechatAlipayList[k];
+                  this.AlipayWork.shift();
+                  this.AlipayWork.unshift(res.data.insWechatAlipayList[k]);
                 } else {
-                  this.AlipayWork[1] = res.data.insWechatAlipayList[k];
+                  // this.AlipayWork[1] = res.data.insWechatAlipayList[k];
+                  this.AlipayWork.pop();
+                  this.AlipayWork.push(res.data.insWechatAlipayList[k]);
+
                 }
               }
-              //  res.data[k].telType=='03'? this.insTelVerifyListFamily.push(res.data[k] ):''; //
-              //     res.data[k].telType=='04'? this.insTelVerifyListOthers.push(res.data[k] ):''; //
-              //     res.data[k].telType=='05'? this.insTelVerifyListWork.push(res.data[k] ):''; //
             }
-            //    insTelCustInfo: {}, //客户本人-拨打核实-本人只有一条电话拨打核实记录---obj
-            // insTelVerifyList: [], //除客户本人以外-电话拨打核实-暂存
-            // insTelVerifyListCompany: [], //单位电话-电话拨打核实
-            // insTelVerifyListFamily: [], //家庭联系人-电话拨打核实
-            // insTelVerifyListWork: [], //工作证明-电话拨打核实
-            // insTelVerifyListOthers: [], //其他联系人-电话拨打核实
-
-            //           if(res.data.insWechatAlipayList.length>0){
-            // for(var i=0;i<res.data.insWechatAlipayList.length;i++){
-            // res.data.insWechatAlipayList[i].insVerifyType=='00'?this.Alipay[0]=res.data.insWechatAlipayList[i]:this.Alipay[0];//微信
-            // res.data.insWechatAlipayList[i].insVerifyType=='01'?this.Alipay[1]=res.data.insWechatAlipayList[i]:this.Alipay[1];//支付宝
-            // }
-            //  }
-            // for(var i=0;i<this.insWechatAlipayList.length;i++){
-            //   switch(this.insWechatAlipayList[i].telType){
-            //     case '06':this.AlipayCus=this.insWechatAlipayList[i];break;//客户本人-微信
-            //     case '02':this.AlipayCompany=this.insWechatAlipayList[i];break;//单位联系人-微信
-            //     case '03':this.AlipayFamily=this.insWechatAlipayList[i];break;//家庭联系人-微信
-            //     case '05':this.AlipayWork=this.insWechatAlipayList[i];break;//工作证明人-微信
-            //     case '04':this.AlipayOthers=this.insWechatAlipayList[i];break;//其他联系人-微信
-            //   }
-            // }
+            this.WechatData(0); //客户本人 微信支付宝赋值为客户本人AlipayCus
+            console.log(77777, this.WechatData(0))
+            console.log(this.AlipayCus)
+            console.log(this.AlipayFamily)
+            console.log(this.AlipayOthers)
+            console.log(this.AlipayWork)
           } else {
             this.$message.error(res.msg);
           }
@@ -1526,12 +1632,14 @@
             insMemberCode: this.userInf.userCode, // 操作人员-质检code            
             insMemberName: this.userInf.userName, // 操作人员-质检员name
             insDate: this.systermTime, // 质检日期
-            checkType: this.propQTconclution.pageType == 'checkApp_apply' ? '01' : '02', // 初终检标志01:初检，02：终检
-            instaskType: "", //任务类型（00:常规质检，01:专项质检）
-            id: this.addId, // 专员或主管首次保存或提交不传
+            checkType: '01', // 初终检标志01:初检，02：终检 ，终审点击保存的时候全部改为02（包括插过来的初审数据的CheckType）
+            instaskType: this.instaskType, //任务类型（00:常规质检，01:专项质检）
+            // id: this.addId, // 专员或主管首次保存或提交不传-checktype=01专员：新添加的都  CheckType=01主管：保存提交的时候id值不清空（不能新添加）
+            id: '', // 专员或主管首次保存或提交不传, -checktype=01专员：新添加的id都为空，已经添加保存过的id不清空，主管亦同  CheckType=01主管：保存提交的时候id值不清空（不能新添加）
             isSubmit: "0", // 0：保存 1：提交
             // "checkResult": "", // 任务类型（00:常规质检，01:专项质检）
           });
+          console.log(this.insConclusion)
         } else {
           // if(this.cardDetList[this.cardDetList.length-1].bankName=='' || this.cardDetList[this.cardDetList.length-1].accountStatus==''){
           if (this.insConclusion[this.insConclusion.length - 1].checkResult == '') { //质检结果不能为空
@@ -1547,9 +1655,11 @@
               insMemberCode: this.userInf.userCode, // 操作人员-质检code            
               insMemberName: this.userInf.userName, // 操作人员-质检员name
               insDate: this.systermTime, // 质检日期
-              checkType: "", // 初终检标志
-              instaskType: "", //任务类型（00:常规质检，01:专项质检）
-              id: this.addId, // 专员或主管首次保存或提交不传
+              // checkType: this.propQTconclution.pageType == 'checkApp_apply' ? '01' : '02', // 初终检标志01:初检，02：终检
+              checkType: '01', //  初终检标志01:初检，02：终检 ，终审点击保存的时候全部改为02（包括插过来的初审数据的CheckType）
+              instaskType: this.instaskType, //任务类型（00:常规质检，01:专项质检）
+              // id: this.addId, // 专员或主管首次保存或提交不传
+              id: '', // 专员或主管首次保存或提交不传, -checktype=01专员：新添加的id都为空，已经添加保存过的id不清空，主管亦同  CheckType=01主管：保存提交的时候id值不清空（不能新添加）              
               isSubmit: "0", // 0：保存 1：提交
               // "checkResult: "", // 任务类型（00:常规质检，01:专项质检）
             });
@@ -1650,13 +1760,13 @@
       SaveInf(type) { //质检主管不需要提交，只有质检专员 显示提交
         console.log(type)
         console.log(this.insConclusion.length)
-        this.checkResultCount01=0;
-        this.checkResultCount02=0;
-        this.checkResultCount03=0;
-        this.checkResultCount04=0;
-        this.checkResultCount05=0;
-        this.checkResultCount06=0;
-        this.checkResultCount07=0;
+        this.checkResultCount01 = 0;
+        this.checkResultCount02 = 0;
+        this.checkResultCount03 = 0;
+        this.checkResultCount04 = 0;
+        this.checkResultCount05 = 0;
+        this.checkResultCount06 = 0;
+        this.checkResultCount07 = 0;
         if (type == '提交') { //提交 加校验，保存无需校验必填---常规质检
           if (this.propQTconclution.tastwaitingPass.listType == '常规质检') {
             if (!this.regularInfo.isForm || !this.regularInfo.isIdcard || !this.regularInfo.isIncome || !this.regularInfo
@@ -1668,46 +1778,21 @@
               !this.regularInfo.isReference ||
               !this.regularInfo.wbeexEcuted || !this.regularInfo.wnetEcutedBrea || !this.regularInfo.wnetPhone ||
               !this.regularInfo.wnetAddrandEstate || !this.regularInfo.wnetCompany || !this.regularInfo.wnetAddrstate ||
-              !this.regularInfo.isInmatch||
-            ( this.insConclusion.length > 0 &&   this.insConclusion[this.insConclusion.length - 1].checkResult == '')//质检结论最后一条质检结果
-              ) {
+              !this.regularInfo.isInmatch ||
+              (this.insConclusion.length > 0 && this.insConclusion[this.insConclusion.length - 1].checkResult == '') //质检结论最后一条质检结果校验是否为空
+            ) {
               this.$message.error('请输入必填项！')
               return
             } else if (this.insConclusion.length == 0) { //必须添加一条质检结论校验
               this.$message.error('请至少添加一条质检结论！')
               return
-            }else if(this.insConclusion.length!==0){//质检结论中质检结果不能重复添加
-// console.log( )
-for(var n=0;n<this.insConclusion.length;n++){
-  console.log(555,this.insConclusion[n] )
-this.insConclusion[n].checkResult=='01'?  this.checkResultCount01++:'';
-this.insConclusion[n].checkResult=='02'?  this.checkResultCount02++:'';
-this.insConclusion[n].checkResult=='03'? this.checkResultCount03++:'';
-this.insConclusion[n].checkResult=='04'? this.checkResultCount04++:'';
-this.insConclusion[n].checkResult=='05'? this.checkResultCount05++:'';
-this.insConclusion[n].checkResult=='06'?  this.checkResultCount06++:'';
-this.insConclusion[n].checkResult=='07'? this.checkResultCount07++:'';     
-}
-console.log('1',this.checkResultCount01)
-console.log('2',this.checkResultCount02)
-console.log('3',this.checkResultCount03)
-console.log('4',this.checkResultCount04)
-console.log('5',this.checkResultCount05)
-console.log('6',this.checkResultCount06)
-console.log('7',this.checkResultCount07)
-if(this.checkResultCount01>1||this.checkResultCount02>1||this.checkResultCount03>1||this.checkResultCount04>1||this.checkResultCount05>1||this.checkResultCount06>1||this.checkResultCount07>1){
- this.$message.error('质检结论中质检结果重复添加！')
-return
-}
             }
-
           } else if (this.propQTconclution.tastwaitingPass.listType == '专项质检') {
             if (this.insConclusion.length == 0) { //必须添加一条质检结论校验
               this.$message.error('请至少添加一条质检结论！')
               return
             }
           }
-
         }
         // 提交 保存 
         if (this.propQTconclution.tastwaitingPass.listType == '常规又专项质检') { //常规又专项质检
@@ -1718,7 +1803,7 @@ return
             checkType: this.reviewConclusion.checkType,
           }).then(res => {
             if (res.statusCode == 200) {
-              this.tableData = res.data;
+              // this.tableData = res.data;
               this.$message({
                 type: 'success',
                 message: '添加复核结论成功！'
@@ -1728,12 +1813,33 @@ return
             }
           });
         } else { //  常规质检、专纵质检
-          // 先校验-质检结论最后一条信息，质检结果如果为空，提示并return
-          // if (type == '提交' && this.insConclusion.length > 0 && this.insConclusion[this.insConclusion.length - 1].checkResult ==
-          //   '') {
-          //   this.$message.error('请输入必填项！');
-          //   return
-          // }
+          // 保存、提交之前都要校验质检结论是否重复添加多条
+          if (this.insConclusion.length !== 0) { //质检结论中质检结果不能重复添加
+            // console.log( )
+            for (var n = 0; n < this.insConclusion.length; n++) {
+              // console.log(555,this.insConclusion[n] )
+              this.insConclusion[n].checkResult == '01' ? this.checkResultCount01++ : '';
+              this.insConclusion[n].checkResult == '02' ? this.checkResultCount02++ : '';
+              this.insConclusion[n].checkResult == '03' ? this.checkResultCount03++ : '';
+              this.insConclusion[n].checkResult == '04' ? this.checkResultCount04++ : '';
+              this.insConclusion[n].checkResult == '05' ? this.checkResultCount05++ : '';
+              this.insConclusion[n].checkResult == '06' ? this.checkResultCount06++ : '';
+              this.insConclusion[n].checkResult == '07' ? this.checkResultCount07++ : '';
+            }
+            console.log('1', this.checkResultCount01)
+            console.log('2', this.checkResultCount02)
+            console.log('3', this.checkResultCount03)
+            console.log('4', this.checkResultCount04)
+            console.log('5', this.checkResultCount05)
+            console.log('6', this.checkResultCount06)
+            console.log('7', this.checkResultCount07)
+            if (this.checkResultCount01 > 1 || this.checkResultCount02 > 1 || this.checkResultCount03 > 1 || this.checkResultCount04 >
+              1 || this.checkResultCount05 > 1 || this.checkResultCount06 > 1 || this.checkResultCount07 > 1) {
+              this.$message.error('质检结论中质检结果重复添加！')
+              return
+            }
+          }
+
           // 微信支付宝+电话核实（除本人）合并为一个数组
           this.insTelVerifyListConcat = this.insTelVerifyListCompany.concat(this.insTelVerifyListFamily).concat(this.insTelVerifyListWork)
             .concat(this.insTelVerifyListOthers)
@@ -1743,22 +1849,20 @@ return
           // console.log(this.insTelVerifyListOthers)
           // console.log(this.insTelVerifyListConcat)
           this.AlipayConcat = this.AlipayCus.concat(this.AlipayFamily).concat(this.AlipayWork).concat(this.AlipayOthers)
-          // 循环质检结论list 改变对应的值
+          // 循环质检结论list 改变对应的值-不能跟上面的循环校验一起，校验不过不用修改
           for (var i = 0; i < this.insConclusion.length; i++) {
             console.log('isSubmit：', this.insConclusion[i].isSubmit)
             type == '保存' ? this.insConclusion[i].isSubmit = '0' : this.insConclusion[i].isSubmit = '1'; // 质检结论 保存：0，修改：1
-            this.insConclusion[i].checkType == '01' && this.insConclusion[i].id ? this.insConclusion[i].id = '' : this.insConclusion[
-              i].id; //主管首次保存或提交id设置为空
+            this.propQTconclution.pageType !== 'checkApp_apply' ? this.insConclusion[m].checkType = '02' : ''; // 质检主管保存 质检结论 CheckType 改为02，初检依旧保持01
+            // this.insConclusion[i].checkType == '01' && this.insConclusion[i].id ? this.insConclusion[i].id = '' : this.insConclusion[
+            //   i].id; //主管首次保存或提交id设置为空
           }
           // insResultTxt  入参去掉微信支付宝显示汉字字段
-          console.log('aaa')
-          console.log(this.AlipayConcat)
-          console.log(this.AlipayConcat.length)
-             for (var k = 0; k < this.AlipayConcat.length; k++) {
-               console.log(  this.AlipayConcat)
-               console.log(111,  this.AlipayConcat[k])
-           this.AlipayConcat[k].insResultTxt=null;
-          }
+          // for (var k = 0; k < this.AlipayConcat.length; k++) {
+          //   console.log(this.AlipayConcat)
+          //   console.log(111, this.AlipayConcat[k])
+          //   this.AlipayConcat[k].insResultTxt = null;
+          // }
           this.SaveInfParams = { //入参
             applyId: this.propQTconclution.applyId,
             taskId: this.propQTconclution.tastwaitingPass.taskId,
@@ -2013,9 +2117,12 @@ return
         if (this.propQTconclution.pageType == 'checkApp_apply') { //专员-编辑  √
           console.log('专员')
           if (this.propQTconclution.tastwaitingPass.listType == '常规质检') {
+            this.instaskType = '00';
             this.QTConclutionBtn = true;
           } else
           if (this.propQTconclution.tastwaitingPass.listType == '专项质检') {
+            this.instaskType = '01';
+
             this.Special();
             //   this.AprovalInfolShow = false; //审批信息        
             //   this.MaterialShow = false; //资料核实
@@ -2173,15 +2280,17 @@ return
   .regularQT th {
     text-align: center;
     border: 1px solid #ebeef5;
-    color:#909399;
+    color: #909399;
   }
-  .regularQT th{
+
+  .regularQT th {
     font-weight: 800;
   }
 
-  .regularQT td{
-    color:#606266;
-}
+  .regularQT td {
+    color: #606266;
+  }
+
   .regularQT .material td:nth-of-type(4) {
     vertical-align: bottom;
   }
