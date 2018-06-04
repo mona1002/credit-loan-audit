@@ -622,13 +622,16 @@
                     <b style="color:red;fontWeight:700px"> * </b>{{ scope.row.telNum }}</span>
                 </template>
               </el-table-column> -->
-              <el-table-column prop="telNum" label="电话号码" align="center" width="70">
+              <el-table-column prop="telNum" label="电话号码" align="center" width="100">
               </el-table-column>
               <!-- <el-table-column label="电话录音" align="center" width="100">
                 <template slot-scope="scope">
                   <span style="margin-left: 10px">{{ scope.row.telRecord }}</span>
                 </template> -->
-              <el-table-column prop="telRecord" label="电话录音来源" align="center" width="70">
+              <el-table-column label="电话录音" align="center" width="100">
+               <template slot-scope="scope">
+                <span>{{ scope.row.telRecord}}</span>
+               </template>
               </el-table-column>
               <el-table-column prop="source" label="来源" align="center" width="70">
               </el-table-column>

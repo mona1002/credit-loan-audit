@@ -8,34 +8,34 @@
           <span class="headFont">基本信息</span>
         </template>
         <div class="baseInf">
-          <ul>
-            <li>
-              <p>
-                <label>进件编号： </label>
-                <span>{{this.applyInfoPool.applySubno}} </span>
-              </p>
-              <p>
-                <label>证件号码： </label>
-                <span>{{this.applyInfoPool.certCode}} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label>客户名称： </label>
-                <span>{{this.applyInfoPool.custName}} </span>
-              </p>
-              <p>
-                <label>移动电话： </label>
-                <span>{{this.applyInfoPool.mobile}} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label>证件类型： </label>
-                <span>{{this.applyInfoPool.certTypeTxt}} </span>
-              </p>
-            </li>
-          </ul>
+          <!-- <ul>
+            <li> -->
+          <p>
+            <label>进件编号： </label>
+            <span>{{this.applyInfoPool.applySubno}} </span>
+          </p>
+          <p>
+            <label>证件号码： </label>
+            <span>{{this.applyInfoPool.certCode}} </span>
+          </p>
+          <!-- </li>
+            <li> -->
+          <p>
+            <label>客户名称： </label>
+            <span>{{this.applyInfoPool.custName}} </span>
+          </p>
+          <p>
+            <label>移动电话： </label>
+            <span>{{this.applyInfoPool.mobile}} </span>
+          </p>
+          <!-- </li>
+            <li> -->
+          <p>
+            <label>证件类型： </label>
+            <span>{{this.applyInfoPool.certTypeTxt}} </span>
+          </p>
+          <!-- </li>
+          </ul> -->
         </div>
       </el-collapse-item>
       <el-collapse-item name="2">
@@ -64,7 +64,7 @@
             <li>
               <p>
                 <label>反欺诈申请人： </label>
-                <span>{{fraudApplyInfo.applyPersonName}}  </span>
+                <span>{{fraudApplyInfo.applyPersonName}} </span>
               </p>
               <p>
                 <label>反欺诈申请日期： </label>
@@ -104,20 +104,20 @@
         activeNames: ['1', '2', '3'],
         conclu: '',
         MatchInf: '',
-        MatchFlag:'',
-        applyInfoPool:'',
-        fraudApplyInfo:'',
-        fraudAuditOpinion:'',
+        MatchFlag: '',
+        applyInfoPool: '',
+        fraudApplyInfo: '',
+        fraudAuditOpinion: '',
       }
     },
     mounted() {
-       this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) //初审-匹配查看
-      this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); 
-       if (this.MatchFlag.MatchFlag == 'internal') {//反欺诈专员-匹配查看 + 主管
-       		this.MatchInf = JSON.parse(localStorage.getItem('internalObj'));
+      this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) //初审-匹配查看
+      this.MatchInf = JSON.parse(localStorage.getItem("internalObj"));
+      if (this.MatchFlag.MatchFlag == 'internal') { //反欺诈专员-匹配查看 + 主管
+        this.MatchInf = JSON.parse(localStorage.getItem('internalObj'));
       } else if (this.MatchFlag.MatchFlag == 'Query') {
         this.MatchInf = JSON.parse(localStorage.getItem("Query")) //初审-匹配查看
-      }else if (this.MatchFlag.MatchFlag == 'QT') {
+      } else if (this.MatchFlag.MatchFlag == 'QT') {
         this.MatchInf = JSON.parse(localStorage.getItem("QT")) //综合查询
       }
 
@@ -125,9 +125,9 @@
         applyId: this.MatchInf.matchApplyId,
       }).then(res => {
         if (res.statusCode == 200) {
-           this.applyInfoPool = res.data.applyInfoPool;//基本信息
-           this.fraudApplyInfo = res.data.fraudApplyInfo;//反欺诈申请信息
-          this.fraudAuditOpinion = res.data.fraudAuditOpinion;//反欺诈结论
+          this.applyInfoPool = res.data.applyInfoPool; //基本信息
+          this.fraudApplyInfo = res.data.fraudApplyInfo; //反欺诈申请信息
+          this.fraudAuditOpinion = res.data.fraudAuditOpinion; //反欺诈结论
         } else {
           this.$message.error(res.msg);
         }
@@ -164,12 +164,17 @@
     margin: 10px 0;
   }
 
-  .baseInf li p,
   .AntiInf li:nth-of-type(1) p,
   .AntiInf li:nth-of-type(3) p {
     width: 33.3%;
     float: left;
     margin: 10px 0;
+  }
+
+  .baseInf p {
+    width: 33%;
+    float: left;
+    margin-bottom: 5px;
   }
 
   .aAntiApplyInf label {

@@ -604,7 +604,7 @@ export default {
 
     
     // 复议不显示添加  05 专员   06 主管 03反欺诈专员 04反欺诈主管
-    if (this.judgeFlag == '05' || this.judgeFlag == '06' || this.judgeFlag == '03' || this.judgeFlag == '04') {
+    if (this.judgeFlag == '05' || this.judgeFlag == '06' || this.judgeFlag == '03' || this.judgeFlag == '04'||this.judgeFlag == '07'||this.judgeFlag == '08'||this.judgeFlag == '09'||this.judgeFlag == '10'||this.judgeFlag == '11'||this.judgeFlag == '12'||this.judgeFlag == '13') {
       this.addBtnShow = false;
     }
 
