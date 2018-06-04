@@ -174,6 +174,7 @@
   .baseInf p {
     width: 33%;
     float: left;
+    height: 20px;
     margin-bottom: 5px;
   }
 
