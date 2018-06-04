@@ -17,6 +17,8 @@
               <label> 进件机构</label>
               <el-select v-model="params.shopCodes" multiple placeholder="请选择">
                 <el-option v-for="item in shopCodesSelection" :key="item.code" :label="item.name" :value="item.code">
+               <span style="float: left">{{ item.name }}</span>
+                  <span style="float: right; color: #8492a6; font-size: 13px">{{ item.code }}</span>
                 </el-option>
               </el-select>
             </p>
