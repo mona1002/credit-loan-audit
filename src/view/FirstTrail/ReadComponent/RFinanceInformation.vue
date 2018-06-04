@@ -1,37 +1,5 @@
+<!-- 账务信息 -->
 <template>
-  <!-- <div class="FinanceInformation">
-    账务信息
-    <el-table :data="FinanceInf" border height="790">
-      <el-table-column prop="fhReceiptNo" label="进件编号" min-width="120">
-      </el-table-column>
-      <el-table-column prop="custName" label="客户姓名" min-width="80">
-      </el-table-column>
-      <el-table-column prop="proName" label="产品名称" min-width="80">
-      </el-table-column>
-      <el-table-column prop="loanDate" label="放款日期" min-width="120" align="center">
-      </el-table-column>
-      <el-table-column prop="loanReceiptPayAmt" label="放款金额[元]" min-width="80" align="right">
-      </el-table-column>
-      <el-table-column prop="loanReceiptPayAmt" label="借款期限[月]" min-width="80" align="right">
-      </el-table-column>
-      <el-table-column prop="loanReceiptPayAmt" label="每期还款额[元]" min-width="80" align="right">
-      </el-table-column>
-      <el-table-column prop="loanReceiptPayAmt" label="已还期数" min-width="80" align="right">
-      </el-table-column>
-      <el-table-column prop="loanReceiptPayAmt" label="账户状态" min-width="80" align="right">
-      </el-table-column>
-      <el-table-column prop="loanReceiptPayAmt" label="当前逾期天数" min-width="80" align="right">
-      </el-table-column>
-      <el-table-column prop="loanReceiptPayAmt" label="当前拖欠期数" min-width="80" align="right">
-      </el-table-column>
-      <el-table-column prop="loanReceiptPayAmt" label="累计拖欠期数" min-width="80" align="right">
-      </el-table-column>
-      <el-table-column prop="loanReceiptPayAmt" label="最高拖欠期数" min-width="80" align="right">
-      </el-table-column>
-      <el-table-column prop="loanReceiptPayAmt" label="结清标志" min-width="80" align="right">
-      </el-table-column>
-    </el-table>
-  </div> -->
   <div class="FinanceInformation">
     <el-collapse v-model="activeNames">
       <el-collapse-item title="账务信息" name="1">
@@ -58,21 +26,21 @@
                 </el-table-column>
                 <el-table-column
                   label="进件编号" 
-                  prop="loanReceiptPayAmt"
-                  min-width="120">
+                  prop="applySubNo"
+                  min-width="160">
                 </el-table-column>
                 <el-table-column
-                  prop="loanReceiptPayAmt"
+                  prop="custName"
                   label="客户姓名"
                   min-width="100">
                 </el-table-column>
                 <el-table-column
-                  prop="loanReceiptPayAmt" 
+                  prop="proName" 
                   label="产品名称"
                   min-width="100">
                 </el-table-column>
                 <el-table-column
-                  prop="loanReceiptPayAmt"
+                  prop="loanDate"
                   label="放款日期"
                   min-width="140">
                 </el-table-column>
@@ -82,48 +50,48 @@
                   min-width="120">
                 </el-table-column>
                 <el-table-column
-                  prop="loanReceiptPayAmt"
+                  prop="loanTerm"
                   label="借款期限[月]"
                   min-width="120">
                 </el-table-column>
                 <el-table-column
-                  prop="loanReceiptPayAmt"
+                  prop="eachTermAmt"
                   label="每期还款额[元]"
                   min-width="120">
                 </el-table-column>
                 <el-table-column
-                  prop="loanReceiptPayAmt"
+                  prop="returnedTerm"
                   label="已还期数"
                   show-overflow-tooltip
                   min-width="100">
                 </el-table-column>
                 <el-table-column
-                  prop="loanReceiptPayAmt"
+                  prop="accountStateTxt"
                   label="账户状态"
                   min-width="100">
                 </el-table-column>
                 <el-table-column
-                  prop="loanReceiptPayAmt"
+                  prop="overDueDayNum"
                   label="当前逾期天数"
                   min-width="120">
                 </el-table-column>
                 <el-table-column
-                  prop="loanReceiptPayAmt"
+                  prop="currArrTerm"
                   label="当前拖欠期数"
                   min-width="120">
                 </el-table-column>
                 <el-table-column
-                  prop="loanReceiptPayAmt"
+                  prop="arrTermSum"
                   label="累计拖欠期数"
                   min-width="120">
                 </el-table-column>
                 <el-table-column
-                  prop="loanReceiptPayAmt"
+                  prop="maxArrTerm"
                   label="最高拖欠期数"
                   min-width="120">
                 </el-table-column>
                 <el-table-column
-                  prop="loanReceiptPayAmt"
+                  prop="payOffFlagTxt"
                   label="结清标志"
                   min-width="100">
                 </el-table-column>
@@ -146,7 +114,7 @@
       }
     },
     mounted() {
-      this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) //初审-匹配查看
+      this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) 
       if (this.MatchFlag.MatchFlag == 'internal') {
         this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //初审-匹配查看
       } else if (this.MatchFlag.MatchFlag == 'Query') {
@@ -164,14 +132,37 @@
       // } else if (this.judgeFlag.flag == '02') {
       //   this.MatchInf = JSON.parse(localStorage.getItem("AntiManagerinternalObj")); //反欺诈主管-匹配查看
       // }
-      this.post("/creAccountInf·o/getAccountInfo", {
+      this.post("/creAccountInfo/getAccountByApplyId", {
         applyId: this.MatchInf.matchApplyId,
-        // applyId: "24667563-2ca2-4da6-8e02-4bf7d7c839b6",
+        //applyId: "24667563-2ca2-4da6-8e02-4bf7d7c839b6",
       }).then(res => {
         if (res.statusCode == 200) {
           this.FinanceInf = res.data;
+          if(this.FinanceInf){
+            var reg=/\./g;
+            for(var i=0;i<this.FinanceInf.length;i++){
+              if(reg.test(this.FinanceInf[i].loanReceiptPayAmt)){
+                this.FinanceInf[i].loanReceiptPayAmt = Number(this.FinanceInf[i].loanReceiptPayAmt).toLocaleString();//放款金额
+              }else{
+                this.FinanceInf[i].loanReceiptPayAmt = Number(this.FinanceInf[i].loanReceiptPayAmt).toLocaleString() + '.00';//放款金额
+              };
+              if(reg.test(this.FinanceInf[i].eachTermAmt)){
+                this.FinanceInf[i].eachTermAmt = Number(this.FinanceInf[i].eachTermAmt).toLocaleString();//放款金额
+              }else{
+                this.FinanceInf[i].eachTermAmt = Number(this.FinanceInf[i].eachTermAmt).toLocaleString() + '.00';
+              }
+              
+              
+            }
+            
+          }
+          
         } else {
-          this.$message.error(res.msg);
+          //this.$message.error(res.msg);
+          this.$message({
+            message:"该进件暂无账务信息数据！",
+            type: 'error'
+          })
         }
       });
     },

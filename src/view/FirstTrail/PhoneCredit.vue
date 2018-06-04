@@ -843,8 +843,19 @@ export default {
         //this.listData = res.data;
         if(res.statusCode == 200){
           this.listData = res.data.page;
+          //console.log(res.data.message)
           if(res.data.message){
-            this.hisShow = true;
+           //console.log('kkkk');
+            if(this.formShow == true){
+              //console.log('kkkk1');
+              this.hisShow = false;
+            }else{
+              //console.log('kkkk2');
+              this.hisShow = true;
+            };
+            //console.log(this.formShow);
+            //console.log(this.hisShow);
+
             this.newList = res.data.message;
             this.source = this.newList.source;
             this.answer= this.newList.answer;  
@@ -2112,7 +2123,7 @@ export default {
   width: 100%;
   height: 38px;
   line-height: 38px;
-  padding-left: 20px;
+  padding-left: 5px;
   border-bottom: 1px solid #d8dce5;
 }
 
@@ -2129,4 +2140,7 @@ export default {
   color: #666666;
 }
 
+.phone-credit .el-input__inner{
+  line-height: 30px;
+}
 </style>

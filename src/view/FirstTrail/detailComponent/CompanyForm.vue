@@ -78,6 +78,14 @@
     </div>
     <ul style="margin-left:15px;">
       <div class="content-ul">
+        <li class="item-column1">
+          <div class="left-title">第三方查询信息：</div>
+          <div class="textarea-class">
+            <el-input type="textarea" v-model="DanWthirdResult" :rows="3" resize=none :maxlength="500"></el-input>
+          </div>
+        </li>
+      </div>
+      <div class="content-ul">
         <li class="item-column3">
           <div class="left-title">拨打电话：</div>
           <div>

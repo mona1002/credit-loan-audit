@@ -45,6 +45,9 @@
         <span class="headFont">录入单位电话调查信息</span>
       </div>
       <div style="margin-left:30px;">
+        <el-form-item label="第三方查询信息：" class="item-column1">
+          {{comData.thirdResult}}
+        </el-form-item>
         <el-form-item label="拨打电话：" class="item-column3">
           {{comData.phoneDes}}
         </el-form-item>

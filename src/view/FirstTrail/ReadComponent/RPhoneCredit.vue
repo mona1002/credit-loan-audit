@@ -142,23 +142,23 @@
             <!-- 住址电话 - 表单 -->
             <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull"></AddressForm>
             <!-- 住址电话 - 历史 -->
-            <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :mobileData="mobileData" :isFull.sync="isFull"></AddressHis>
+            <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :mobileData="newList?newList:mobileData" :isFull.sync="isFull"></AddressHis>
             <!-- 单位电话 - 表单 -->
             <CompanyForm class="form-his" v-if="formShow && phoneType=='02'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull"></CompanyForm>
             <!-- 单位电话 - 历史 -->
-            <CompanyHis class="form-his" v-if="hisShow && phoneType=='02'" :comData="comData" :isFull.sync="isFull"></CompanyHis>
+            <CompanyHis class="form-his" v-if="hisShow && phoneType=='02'" :comData="newList?newList:comData" :isFull.sync="isFull"></CompanyHis>
             <!-- 家庭联系人 - 表单 -->
             <FamilyForm class="form-his" v-if="formShow && phoneType=='03'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull"></FamilyForm>
             <!-- 家庭联系人 - 历史 -->
-            <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :familyData="familyData" :isFull.sync="isFull"></FamilyHis>
+            <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :familyData="newList?newList:familyData" :isFull.sync="isFull"></FamilyHis>
             <!-- 紧急联系人 - 表单 -->
             <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull"></HurryForm>
             <!-- 紧急联系人 - 历史 -->
-            <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :hurryData="hurryData" :isFull.sync="isFull"></HurryHis>
+            <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :hurryData="newList?newList:hurryData" :isFull.sync="isFull"></HurryHis>
             <!-- 工作证明人 - 表单 -->
             <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull"></WorkForm>
             <!-- 工作证明人 - 历史 -->
-            <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="workData" :isFull.sync="isFull"></WorkHis>
+            <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="newList?newList:workData" :isFull.sync="isFull"></WorkHis>
             <!-- 子组件 -->
             <!-- <router-link to="/AddressForm/formTag='testtag'/id='123'/phoneType='01'">
             <el-button type="primary">住址电话</el-button>
@@ -305,7 +305,8 @@ export default {
       },
       // 历史列表数据
       listData: [],
-
+      //子组件获取最新一条数据
+      newList:'',
 
       // 添加界面
       coverShow: false,
@@ -652,8 +653,25 @@ export default {
         // 数据请求回来  加载圈 清空
         this.mobileLoading = false;
         console.log(res);
-        //  历史table数据
-        this.listData = res.data.page;
+        if(res.statusCode == 200){
+          this.listData = res.data.page;
+          //console.log(res.data.message)
+          if(res.data.message){
+           // console.log('kkkk');
+            if(this.formShow == true){
+              //console.log('kkkk1');
+              this.hisShow = false;
+            }else{
+              //console.log('kkkk2');
+              this.hisShow = true;
+            };
+            //console.log(this.formShow);
+            //console.log(this.hisShow);
+
+            this.newList = res.data.message;
+          }
+        }
+
       })
     },
     // queryHisLog() {
@@ -775,6 +793,7 @@ export default {
         phoneType: this.phoneType
       }).then(res => {
         console.log(res);
+        this.newList = '';
         this.mobileData = res.data;
         if (res.statusCode == '200')
           // 直接处理 显示  历史
@@ -789,6 +808,7 @@ export default {
         phoneType: this.phoneType
       }).then(res => {
         console.log(res);
+        this.newList = '';
         this.comData = res.data;
         if (res.statusCode == '200')
           // 直接处理 显示  历史
@@ -802,6 +822,7 @@ export default {
         phoneType: this.phoneType
       }).then(res => {
         console.log(res);
+        this.newList = '';
         this.familyData = res.data;
         if (res.statusCode == '200')
           // 直接处理 显示  历史
@@ -816,6 +837,7 @@ export default {
         phoneType: this.phoneType
       }).then(res => {
         console.log(res);
+        this.newList = '';
         this.hurryData = res.data;
         if (res.statusCode == '200')
           // 直接处理 显示  历史
@@ -829,6 +851,7 @@ export default {
         phoneType: this.phoneType
       }).then(res => {
         console.log(res);
+        this.newList = '';
         this.workData = res.data;
         if (res.statusCode == '200')
           // 直接处理 显示  历史
@@ -1759,7 +1782,7 @@ export default {
   width: 100%;
   height: 38px;
   line-height: 38px;
-  padding-left: 20px;
+  padding-left: 5px;
   border-bottom: 1px solid #d8dce5;
 }
 

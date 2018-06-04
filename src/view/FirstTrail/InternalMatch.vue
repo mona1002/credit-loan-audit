@@ -16,7 +16,7 @@
         </el-table-column>
         <el-table-column prop="matchTel" label="命中号码" min-width="150">
         </el-table-column>
-        <el-table-column prop="applyTelTypeTxt" label="电话类型" min-width="100">
+        <el-table-column prop="matchTelTypeTxt" label="电话类型" min-width="100">
         </el-table-column>
         <el-table-column prop="matchApplySubNo" label="进件编号" min-width="180">
         </el-table-column>
@@ -52,7 +52,7 @@
         </el-table-column>
         <el-table-column prop="matchTel" label="命中号码" min-width="150">
         </el-table-column>
-        <el-table-column prop="applyTelTypeTxt" label="电话类型" min-width="100">
+        <el-table-column prop="matchTelTypeTxt" label="电话类型" min-width="100">
         </el-table-column>
         <el-table-column prop="matchApplySubNo" label="进件编号" min-width="180">
         </el-table-column>
@@ -351,13 +351,14 @@
       handleSizeChangeFixTel(val) {
         // 每页 10条
         console.log("固定电话 每页 ${val}条", val);
-        this.MobilePageSize = val;
+        this.FixTelPageSize = val;
+        console.log(this.FixTelPageNum)
         this.fetchData('fixed');
       },
       handleCurrentChangeFixTel(val) {
         // 第几页
         console.log("固定电话 当前页: ${val}", val);
-        this.MobilePageNum = val;
+        this.FixTelPageNum = val;
         this.fetchData('fixed');
       },
       // 单位电话
