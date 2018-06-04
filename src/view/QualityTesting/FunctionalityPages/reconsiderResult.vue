@@ -37,7 +37,7 @@
             </p>
             <p>
               <label> 终审日期</label>
-              <el-date-picker v-model="params.auditDatez" type="date">
+              <el-date-picker v-model="params.auditDatez" type="date" value-format='timestamp'>
               </el-date-picker>
             </p>
           </li>
@@ -48,7 +48,7 @@
             </p>
             <p>
               <label> 质检日期</label>
-              <el-date-picker v-model="QTtime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+              <el-date-picker v-model="QTtime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" value-format='timestamp'>
               </el-date-picker>
             </p>
             <p>

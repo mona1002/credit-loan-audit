@@ -381,12 +381,12 @@
           this.nodeName = "复议申请";
         } else if (route.path == '/regularConfig') { // 质检功能 - 常规抽单配置功能
           this.nodeName = "质检常规抽单配置";
-          // } else if (route.path == '/reconsiderResult') { // 质检功能 - 复议结果查询
-          //   this.nodeName = "复议结果查询";
-          // } else if (route.path == '/batchApportion') { // 质检功能
+          } else if (route.path == '/reconsiderResult') { // 质检功能 - 复议结果查询
+            this.nodeName = "质检复议结果查询";
+          // }  else if (route.path == '/batchApportion') { // 质检功能
           //   this.nodeName = "质检任务批量转分派";
         } else if (route.path == '/specialConfig') { // 质检功能
-          this.nodeName = "专纵向抽单配置";
+          this.nodeName = "质检专纵向抽单配置";
         } else if (route.path == '/MatchingInfQT') {
           this.taskNodeParams = route.fullPath.split('?')[1]
           this.nodeName = "质检详情";
