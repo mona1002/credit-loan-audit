@@ -207,11 +207,11 @@
               type: 'success',
               message: '提交成功！'
             })
-            this.inquire();
+            this.inquire(this.params);
             this.Confirm=false;
           } else {
             this.$message.error('批量转分派失败');
-            this.inquire();
+            this.inquire(this.params);
             this.Confirm=false;            
           }
         });
