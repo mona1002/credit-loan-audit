@@ -899,8 +899,8 @@
         <img src="../../../../../static/images/relieve.png">
         <label class="labelTxt">保存</label>
       </el-button>
-      <!-- <el-button @click="submitShow" v-if="submitBtn"> -->
-      <el-button @click="SaveInf('提交')" v-if="submitBtn">
+      <el-button @click="submitShow=true" v-if="submitBtn">
+      <!-- <el-button @click="SaveInf('提交')" v-if="submitBtn"> -->
         <img src="../../../../../static/images/appro.png">
         <label class="labelTxt">提交</label>
       </el-button>
@@ -943,11 +943,13 @@
     <!-- =================================弹窗===================================== -->
     <!-- 提交 -->
     <el-dialog title="提示" :modal="false" :visible.sync="submitShow" width="420px">
-      <span>确定操作？</span>
+      <div class='alertBox'>
+       <span>确定操作？</span>
       <span slot="footer" class="dialog-footer">
         <el-button class="calbtn" @click="submitShow=false">取消</el-button>
-        <el-button class="subtn" type="primary" :loading="loadsitu" @click="SaveInf">{{adbtn}}</el-button>
+        <el-button class="subtn" type="primary" :loading="loadsitu" @click="SaveInf('提交')">{{adbtn}}</el-button>
       </span>
+      </div>
     </el-dialog>
     <!-- 发起复议  -->
     <el-dialog title='发起复议' :visible.sync="ReconsiderShow" :modal="false" width="620px" top="20vh">
