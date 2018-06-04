@@ -35,7 +35,6 @@
                     var num = item.indexOf('?');
                     var str = item.substr(num+1);//得到？后面的字符串
                     var strs = str.split('&');//将得到的参数分隔成数组[]
-                       console.log(333,strs[0] )
                         if(strs[0].split('=')[1] == "creditApp_firstTrial" && strs[1].split('=')[1] == "01"){
                             var row ={
                                 "processTemplateId":"creditApp",
@@ -195,10 +194,9 @@
                                 "flag":"07"
                             };
                             localStorage.setItem("QTWorkbenchPass",JSON.stringify(row));
-                             console.log(111,row)
                             localStorage.setItem("judge",JSON.stringify(judge));
                         };
- //质检 主管  
+                         //质检 主管  
                         if(strs[0].split('=')[1] == "checkApp_check_manager" && strs[1].split('=')[1] == "08"){
                             var row ={
                              "processTemplateId":"checkApp",
