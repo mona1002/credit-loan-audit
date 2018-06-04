@@ -1087,7 +1087,7 @@
         userInf: '',
         SaveInfParams: '',
         systermTime: Number,
-        submitShow: true, //提交弹框
+        submitShow: false, //提交弹框
         loadsitu: false,
         loadSub: false,
         adbtn: '确认',
