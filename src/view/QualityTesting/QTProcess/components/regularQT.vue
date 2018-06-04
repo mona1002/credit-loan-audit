@@ -570,12 +570,12 @@
             <!-- ============对象形式============= -->
             <table border="1" cellpadding='2' width='100%'>
               <tr>
-                <th width='40px'> 序号</th>
+                <th width='50px'> 序号</th>
                 <th width='160px'>电话号码 </th>
                 <th width='130px'>电话录音 </th>
                 <th width='160px'>接听人是否借款人本人 </th>
                 <th width='200px'>接听说明 </th>
-                <th width='150px'>质检结果</th>
+                <th width='180px'>质检结果</th>
                 <th>备注 </th>
               </tr>
               <tr>
@@ -597,7 +597,7 @@
                   </el-radio-group>
                 </td>
                 <!-- 备注 -->
-                <td>
+                <td style="vertical-align:bottom;">
                     <b class="hint_word" v-show="insTelCustInfo.remark&&insTelCustInfo.remark.length>=300"> 输入长度不能超过300</b>
                   <el-input type='textarea' v-if="insTelCustInfo.insResult=='01'" v-model="insTelCustInfo.remark" :rows="2" resize="none" :maxlength='arealength'
                     placeholder="请输入内容">
@@ -643,7 +643,7 @@
               </el-table-column>
               <el-table-column prop="conclusion" label="调查结论" align="center" width="180">
               </el-table-column>
-              <el-table-column label="质检结果（必填项）" align="center" width="180">
+              <el-table-column label="质检结果" align="center" width="180">
                 <template slot-scope="scope">
                   <div slot="reference" class="name-wrapper">
                     <b class="required_Red"> * </b>
@@ -1065,7 +1065,7 @@
           <el-button type="primary" @click="bigDataLogVisible=false">确定</el-button>
         </span>
       </el-dialog>
-    </div>s
+    </div>
     <!-- 社保公积金 -->
     <div class="bigDataLog">
       <el-dialog title="提示" :visible.sync="socialLogVisible" :modal="false" width="420px" top="35vh">
@@ -2325,6 +2325,7 @@
   .regularQT td {
     color: #606266;
     position:relative;
+    padding:0 10px;
   }
 
   .regularQT .material td:nth-of-type(4) {
