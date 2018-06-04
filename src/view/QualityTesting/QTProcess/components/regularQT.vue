@@ -942,15 +942,15 @@
     </div>
     <!-- =================================弹窗===================================== -->
     <!-- 提交 -->
+     <div class='alertBox'>
     <el-dialog title="提示" :modal="false" :visible.sync="submitShow" width="420px">
-      <div class='alertBox'>
        <span>确定操作？</span>
       <span slot="footer" class="dialog-footer">
         <el-button class="calbtn" @click="submitShow=false">取消</el-button>
         <el-button class="subtn" type="primary" :loading="loadsitu" @click="SaveInf('提交')">{{adbtn}}</el-button>
       </span>
-      </div>
     </el-dialog>
+      </div>    
     <!-- 发起复议  -->
     <el-dialog title='发起复议' :visible.sync="ReconsiderShow" :modal="false" width="620px" top="20vh">
       <div>
@@ -1087,7 +1087,7 @@
         userInf: '',
         SaveInfParams: '',
         systermTime: Number,
-        submitShow: false, //提交弹框
+        submitShow: true, //提交弹框
         loadsitu: false,
         loadSub: false,
         adbtn: '确认',
@@ -1890,7 +1890,7 @@
           for (var i = 0; i < this.insConclusion.length; i++) {
             console.log('isSubmit：', this.insConclusion[i].isSubmit)
             type == '保存' ? this.insConclusion[i].isSubmit = '0' : this.insConclusion[i].isSubmit = '1'; // 质检结论 保存：0，修改：1
-            this.propQTconclution.pageType !== 'checkApp_apply' ? this.insConclusion[m].checkType = '02' : ''; // 质检主管保存 质检结论 CheckType 改为02，初检依旧保持01
+            this.propQTconclution.pageType !== 'checkApp_apply' ? this.insConclusion[i].checkType = '02' : ''; // 质检主管保存 质检结论 CheckType 改为02，初检依旧保持01
             // this.insConclusion[i].checkType == '01' && this.insConclusion[i].id ? this.insConclusion[i].id = '' : this.insConclusion[
             //   i].id; //主管首次保存或提交id设置为空
           }
