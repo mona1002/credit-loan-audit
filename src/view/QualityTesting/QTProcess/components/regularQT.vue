@@ -942,7 +942,7 @@
     </div>
     <!-- =================================弹窗===================================== -->
     <!-- 提交 -->
-     <div class='alertBox'>
+   <div class='alertBox'>
     <el-dialog title="提示" :modal="false" :visible.sync="submitShow" width="420px">
        <span>确定操作？</span>
       <span slot="footer" class="dialog-footer">
@@ -950,84 +950,88 @@
         <el-button class="subtn" type="primary" :loading="loadsitu" @click="SaveInf('提交')">{{adbtn}}</el-button>
       </span>
     </el-dialog>
-      </div>    
+   </div>    
     <!-- 发起复议  -->
-    <el-dialog title='发起复议' :visible.sync="ReconsiderShow" :modal="false" width="620px" top="20vh">
-      <div>
-        <p>
-          <label>复议节点：</label>
-          <el-input disabled v-model="ReconsiderNode" placeholder="请选择"> </el-input>
-        </p>
-        <p style="margin:10px 0;">
-          <label>复议说明：</label>
-          <el-input v-model="ReconsiderDes" style="width:520px;vertical-align:top;" type="textarea" resize='none' :rows="2"></el-input>
-        </p>
-        <p>
-          <span> 经办人：{{userInf. userName}}</span>
-          <span style="float:right;width:280px;"> 发起复议时间：{{systermTime | dateFilter}}</span>
-        </p>
-      </div>
-      <div style="text-align:right;">
-        <el-button type="primary" @click="ToReconsider" :loading="loadSub">{{ReconSubmit}}</el-button>
-      </div>
-    </el-dialog>
+    <div class="alertBox">
+      <el-dialog title='发起复议' :visible.sync="ReconsiderShow" :modal="false" width="620px">
+        <div>
+          <p>
+            <label>复议节点：</label>
+            <el-input disabled v-model="ReconsiderNode" placeholder="请选择"> </el-input>
+          </p>
+          <p style="margin:10px 0;">
+            <label>复议说明：</label>
+            <el-input v-model="ReconsiderDes" style="width:500px;vertical-align:top;" type="textarea" resize='none' :rows="2"></el-input>
+          </p>
+          <p>
+            <span> 经办人：{{userInf. userName}}</span>
+            <span style="float:right;width:280px;"> 发起复议时间：{{systermTime | dateFilter}}</span>
+          </p>
+        </div>
+        <div style="text-align:right;">
+          <el-button type="primary" @click="ToReconsider" :loading="loadSub">{{ReconSubmit}}</el-button>
+        </div>
+      </el-dialog>
+    </div>
     <!-- 复议审批  -->
-    <el-dialog title='复议审批' :visible.sync="ReAprovalShow" :modal="false" width="800px" top="20vh">
-      <div class="reApproval">
-        <p>
-          <span>
-            <label>
-              <b class="required_Red"> * </b>复议结果：</label>
-            <el-select v-model="ToApprovalParams.reviewResult" placeholder="请选择">
-              <el-option v-for="item in RecResult" :key="item.value" :label="item.label" :value="item.value">
+    <div class="alertBox">
+      <el-dialog title='复议审批' :visible.sync="ReAprovalShow" :modal="false" width="800px">
+        <div class="reApproval">
+          <p>
+            <span>
+              <label>
+                <b class="required_Red"> * </b>复议结果：</label>
+              <el-select v-model="ToApprovalParams.reviewResult" placeholder="请选择">
+                <el-option v-for="item in RecResult" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
+            </span>
+            <span>
+              <label>质检结果：</label>
+              <el-select v-model="ToApprovalParams.checkResult" placeholder="请选择">
+                <el-option v-for="item in QTresultAlert" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
+            </span>
+          </p>
+          <p>
+            <span>
+              <label>
+                <b class="required_Red"> * </b>质检员是否有差错：</label>
+              <el-select v-model="ToApprovalParams.isError" placeholder="请选择">
+                <el-option v-for="item in ApprolisError" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
+            </span>
+            <span>
+              <label>
+                <b class="required_Red"> * </b>差错类型：</label>
+              <!-- <el-select v-model="value" placeholder="请选择">
+              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
-            </el-select>
-          </span>
-          <span>
-            <label>质检结果：</label>
-            <el-select v-model="ToApprovalParams.checkResult" placeholder="请选择">
-              <el-option v-for="item in QTresultAlert" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-          </span>
-        </p>
-        <p>
-          <span>
-            <label>
-              <b class="required_Red"> * </b>质检员是否有差错：</label>
-            <el-select v-model="ToApprovalParams.isError" placeholder="请选择">
-              <el-option v-for="item in ApprolisError" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-          </span>
-          <span>
-            <label>
-              <b class="required_Red"> * </b>差错类型：</label>
-            <!-- <el-select v-model="value" placeholder="请选择">
-            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-            </el-option>
-          </el-select> -->
-            <!--  :disabled='QTConclution' -->
-            <el-input v-model="ToApprovalParams.errorType" :maxlength='arealength' placeholder="请输入内容"></el-input>
-          </span>
-        </p>
-        <p style="margin:10px 0;">
-          <label class="ReDec">
-            <b class="required_Red"> * </b>复议说明：</label>
-          <el-input v-model='ToApprovalParams.reviewRemark' style="width:500px;vertical-align:top;" type="textarea" resize='none' :rows="2"></el-input>
-        </p>
-        <p>
-          <span> 审批人：{{userInf. userName }}</span>
-          <span style="float:right;width:280px;"> 处理时间：{{systermTime | dateFilter}}</span>
-        </p>
-      </div>
-      <div style="text-align:right;">
-        <el-button type="primary" @click="ToApproval" :loading="loadSub">{{ReconSubmit}}</el-button>
-      </div>
-    </el-dialog>
+            </el-select> -->
+              <!--  :disabled='QTConclution' -->
+              <el-input v-model="ToApprovalParams.errorType" :maxlength='arealength' placeholder="请输入内容"></el-input>
+            </span>
+          </p>
+          <p style="margin:10px 0;">
+            <label class="ReDec">
+              <b class="required_Red"> * </b>复议说明：</label>
+            <el-input v-model='ToApprovalParams.reviewRemark' style="width:510px;vertical-align:top;" type="textarea" resize='none' :rows="2"></el-input>
+          </p>
+          <p>
+            <span> 审批人：{{userInf. userName }}</span>
+            <span style="float:right;width:280px;"> 处理时间：{{systermTime | dateFilter}}</span>
+          </p>
+        </div>
+        <div style="text-align:right;">
+          <el-button type="primary" @click="ToApproval" :loading="loadSub">{{ReconSubmit}}</el-button>
+        </div>
+      </el-dialog>
+    </div>
     <!-- 流程轨迹 -->
-    <div class="liuchenggj">
-      <el-dialog title='流程轨迹' :visible.sync="lcdialogVisible" :modal="false" width="860px" top="20vh">
+    <div class="alertBox">
+      <el-dialog title='流程轨迹' :visible.sync="lcdialogVisible" :modal="false" width="860px" top="0">
         <div class="splcBody">
           <!-- <el-collapse v-model="activeNames2" @change="handleChange">
 			  		<el-collapse-item title="信审流程轨迹" name="1"> -->
@@ -1060,8 +1064,8 @@
       </el-dialog>
     </div>
     <!-- 大数据风控 -->
-    <div class="bigDataLog">
-      <el-dialog title="提示" :visible.sync="bigDataLogVisible" :modal="false" width="420px" top="35vh">
+    <div class="bigDataLog alertBox">
+      <el-dialog title="提示" :visible.sync="bigDataLogVisible" :modal="false" width="420px">
         <span>此进件不存在大数据风控明细！</span>
         <span slot="footer" class="dialog-footer">
           <el-button type="primary" @click="bigDataLogVisible=false">确定</el-button>
@@ -1069,8 +1073,8 @@
       </el-dialog>
     </div>
     <!-- 社保公积金 -->
-    <div class="bigDataLog">
-      <el-dialog title="提示" :visible.sync="socialLogVisible" :modal="false" width="420px" top="35vh">
+    <div class="bigDataLog alertBox">
+      <el-dialog title="提示" :visible.sync="socialLogVisible" :modal="false" width="420px">
         <span>客户社保公积金未授权！</span>
         <span slot="footer" class="dialog-footer">
           <el-button type="primary" @click="this.socialLogVisible=false">确定</el-button>
