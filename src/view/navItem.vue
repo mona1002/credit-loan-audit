@@ -35,6 +35,7 @@
                     var num = item.indexOf('?');
                     var str = item.substr(num+1);//得到？后面的字符串
                     var strs = str.split('&');//将得到的参数分隔成数组[]
+                       console.log(333,strs[0] )
                         if(strs[0].split('=')[1] == "creditApp_firstTrial" && strs[1].split('=')[1] == "01"){
                             var row ={
                                 "processTemplateId":"creditApp",
@@ -181,7 +182,9 @@
                             localStorage.setItem("judge",JSON.stringify(judge));
                         };
             //质检专员
-                        if(strs[0].split('=')[1] == "checkApp_apply" && strs[1].split('=')[1] == "06"){
+         
+                        if(strs[0].split('=')[1] == "checkApp_apply" && strs[1].split('=')[1] == "07"){
+                           
                             var row ={
                                 "processTemplateId":"checkApp",
                                 "taskStatus":"01",
@@ -192,10 +195,11 @@
                                 "flag":"07"
                             };
                             localStorage.setItem("QTWorkbenchPass",JSON.stringify(row));
+                             console.log(111,row)
                             localStorage.setItem("judge",JSON.stringify(judge));
                         };
  //质检 主管  
-                        if(strs[0].split('=')[1] == "checkApp_check_manager" && strs[1].split('=')[1] == "06"){
+                        if(strs[0].split('=')[1] == "checkApp_check_manager" && strs[1].split('=')[1] == "08"){
                             var row ={
                              "processTemplateId":"checkApp",
                                 "taskStatus":"01",
@@ -208,7 +212,7 @@
                             localStorage.setItem("judge",JSON.stringify(judge));
                         };
                          //质检 本人
-                        if(strs[0].split('=')[1] == "checkApp_trial_self" && strs[1].split('=')[1] == "06"){
+                        if(strs[0].split('=')[1] == "checkApp_trial_self" && strs[1].split('=')[1] == "09"){
                             var row ={
                              "processTemplateId":"checkApp",
                                 "taskStatus":"01",
@@ -221,7 +225,7 @@
                             localStorage.setItem("judge",JSON.stringify(judge));
                         };
                                 //质检 初终审主管
-                        if(strs[0].split('=')[1] == "checkApp_trial_manager" && strs[1].split('=')[1] == "06"){
+                        if(strs[0].split('=')[1] == "checkApp_trial_manager" && strs[1].split('=')[1] == "10"){
                             var row ={
                              "processTemplateId":"checkApp",
                                 "taskStatus":"01",
@@ -234,7 +238,7 @@
                             localStorage.setItem("judge",JSON.stringify(judge));
                         };
                           //质检-复议任务列表（首次） 
-                        if(strs[0].split('=')[1] == "checkApp_check_recon_manager" && strs[1].split('=')[1] == "06"){
+                        if(strs[0].split('=')[1] == "checkApp_check_recon_manager" && strs[1].split('=')[1] == "11"){
                             var row ={
                              "processTemplateId":"checkApp",
                                 "taskStatus":"01",
@@ -247,7 +251,7 @@
                             localStorage.setItem("judge",JSON.stringify(judge));
                         };
                                 //质检-区域经理
-                        if(strs[0].split('=')[1] == "checkApp_regional_manager" && strs[1].split('=')[1] == "06"){
+                        if(strs[0].split('=')[1] == "checkApp_regional_manager" && strs[1].split('=')[1] == "12"){
                             var row ={
                              "processTemplateId":"checkApp",
                                 "taskStatus":"01",
@@ -260,7 +264,7 @@
                             localStorage.setItem("judge",JSON.stringify(judge));
                         };
                           //质检-合规经理
-                        if(strs[0].split('=')[1] == "checkApp_compliance_manager" && strs[1].split('=')[1] == "06"){
+                        if(strs[0].split('=')[1] == "checkApp_compliance_manager" && strs[1].split('=')[1] == "13"){
                             var row ={
                              "processTemplateId":"checkApp",
                                 "taskStatus":"01",
