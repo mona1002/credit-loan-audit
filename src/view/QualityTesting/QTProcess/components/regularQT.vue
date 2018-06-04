@@ -1500,9 +1500,11 @@
         this.ReconsiderShow = true;
       },
       referPort() { // 质检页面查询接口
-        this.get("/insConclusion/queryInsConclusionObj", {
-          applyId: this.propQTconclution.applyId, //入参待更新+测试-------------------------------------------------------
-        }).then(res => {
+        this.get("/insConclusion/queryInsConclusionObj?applyId="+ this.propQTconclution.applyId+'&'+ Math.random()
+        // , {
+        //   applyId: this.propQTconclution.applyId, //入参待更新+测试-------------------------------------------------------
+        // }
+        ).then(res => {
           if (res.statusCode == 200) {
             // console.log(this.Alipay)
             // 除基本信息以外，专员获取都为空，applyid要一个个赋值进去
