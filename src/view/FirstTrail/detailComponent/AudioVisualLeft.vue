@@ -58,10 +58,10 @@
           v-if="key==smallPicInd" /> -->
 
           <img ref="Big_pic_ref" v-for="(val,key) in pngAyyr" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng"/>
-        <!-- <pdfDiv v-if="myPdf" v-for="(val,index) in pdfArry" :key="index" :val="val"></pdfDiv> -->
-        <!-- <pdfDiv v-if="myPdf" :pdfArry="pdfArry"></pdfDiv> -->
-        <!-- <p v-if="myPdf" v-for="(val,index) in pdfArry" is="pdfDiv" v-bind:title="val"></p> -->
-        <p v-if="myPdf" is="pdfDiv" v-bind:title="pdfArry"></p>
+        <!-- <pdfDivLeft v-if="myPdf" v-for="(val,index) in pdfArry" :key="index" :val="val"></pdfDivLeft> -->
+        <!-- <pdfDivLeft v-if="myPdf" :pdfArry="pdfArry"></pdfDivLeft> -->
+        <!-- <p v-if="myPdf" v-for="(val,index) in pdfArry" is="pdfDivLeft" v-bind:title="val"></p> -->
+        <p v-if="myPdf" is="pdfDivLeft" v-bind:title="pdfArry"></p>
       </div>
     </div>
     <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" v-show="perfBtn" @click="pre" @mouseenter='PerBtn'>
@@ -137,7 +137,7 @@
 
 <script>
   import imgUrl from '../../../util/ConstantSocialAndPn'
-  import pdfDiv from '../../pdf'
+  import pdfDivLeft from '../../pdfLeft'
   export default {
     data() {
       return {
@@ -266,66 +266,22 @@
         this.defaultBigPicCss();
       },
       getImg(ind) {
-        /*this.smallPicInd = 0;
-        this.imgPath = this.ListDetails[ind].applyArchiveInfos;
-        this.$refs.img_wrap.style.left = 0;
-        this.$refs.img_wrap.style.top = 0;
-        this.defaultBigPicCss();*/
-        //alert('ooo');
-        //console.log(this.myPdf);
-         //this.myPdf = false;
         this.pdfArry=[];
         this.pngAyyr=[];
         this.smallPicInd = 0;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
         console.log(this.imgPath);
         console.log('mkkmkm');
-        //console.log(this.imgPath);
-        //var pdfArry=[];
-        for(var i=0;i<this.imgPath.length;i++){
-          //console.log(this.imgPath[i]);
-          //console.log('pppp');
-          //console.log(this.imgPath[i].imagePath.substring(this.imgPath[i].imagePath.length-3));
-          //console.log('ooooo');
-          if(this.imgPath[i].imagePath.substring(this.imgPath[i].imagePath.length-3) == 'pdf'){
-            if(this.pdfArry.length>0){
-              for(var j=0;j<this.pdfArry.length;j++){
-              //alert('pp')
-                if(this.imgPath[i].imagePath!=this.pdfArry[j].imagePath){
-                    this.pdfArry.push(this.imgPath[i]);
-                }
-              }
-            }else{
-              this.pdfArry.push(this.imgPath[i]);  
-            }
+        if(this.imgPath[0].imagePath.substring(this.imgPath[0].imagePath.length-3) == 'pdf'){
+            this.pdfArry=this.imgPath;
             this.myPdf = true;
             this.myPng = false;
-            /*if(this.imgPath[i].imagePath)
-                this.pdfArry.push(this.imgPath[i].imagePath);*/
-            
-              console.log('---------------------------');
-              console.log(this.pdfArry[0]);
-              console.log('---------------------------');
-
-              console.log('eeee');
-              console.log(this.myPdf);
           }else{
             this.myPng = true;
             this.myPdf = false;
-            if(this.pngAyyr.length>0){
-              for(var m=0;m<this.pngAyyr.length;m++){
-                if(this.imgPath[i].imagePath!=this.pngAyyr[m].imagePath){
-                    this.pngAyyr.push(this.imgPath[i]);
-                }
-              }
-            }else{
-              this.pngAyyr.push(this.imgPath[i]);
-            };
-            
-            console.log(this.pngAyyr[0]);
-            console.log('eeee2');
-          }
-        };
+            this.pngAyyr=this.imgPath;
+            console.log(this.pngAyyr.length);
+          };
         this.$refs.img_wrap.style.left = 0;
         this.$refs.img_wrap.style.top = 0;
         this.defaultBigPicCss();
@@ -530,7 +486,7 @@
       this.odivMove(this.msg); //移动
     },
     components: {
-      pdfDiv
+      pdfDivLeft
     }
   }
 

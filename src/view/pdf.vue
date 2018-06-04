@@ -47,6 +47,7 @@ export default {
     props: ['title'],
     watch:{
         title(value){
+            console.log('我是pppppp');
             /*//alert('ooooo');
             console.log("*************************");
             console.log(value);
