@@ -1465,19 +1465,6 @@
       }
     },
     props: ['propQTconclution'],
-    // watch:{
-    //     WechatData(ind) {
-    //     if (ind == 0) { //客户本人
-    //       return this.AlipayCus;
-    //     } else if (ind == 2) { //家庭联系人
-    //       return this.AlipayFamily;
-    //     } else if (ind == 3) { //工作证明
-    //       return this.AlipayWork;
-    //     } else if (ind == 4) { //其他联系人
-    //       return this.AlipayOthers;
-    //     }
-    //   },
-    // },
     methods: {
       ccc() {
         console.log(this.regularInfo.isFormRemark.length)
@@ -1487,15 +1474,10 @@
         this.get('system/getSystemDate?' + Math.random()).then(res => {
           if (res.statusCode == 200) {
             this.systermTime = res.data;
-            // this.systermTime = new Date(res.data);
-            // this.systermTime = this.systermTime.getFullYear() + '-' + (this.systermTime.getMonth() + 1) + '-' +
-            //   this.systermTime
-            //   .getDate()
           }
         })
       },
       show() {
-        console.log('furyi ')
         this.ReconsiderShow = true;
       },
       referPort() { // 质检页面查询接口
@@ -1544,7 +1526,8 @@
             console.log(res.data.insWechatAlipayList.length)
             for (var k = 0; k < res.data.insTelVerifyList.length; k++) {
               res.data.insTelVerifyList[k].insResult == '' ||  res.data.insTelVerifyList[k].insResult == null ? res.data.insTelVerifyList[k].insResult = '00' : ''; //质检结果如果没有值，默认选00 正常
-              res.data.insTelVerifyList[k].telType == '02' ? this.insTelVerifyListCompany.push(res.data.insTelVerifyList[
+            !res.data.insTelVerifyList[k].applyId?res.data.insTelVerifyList[k].applyId = this.propQTconclution.applyId : ''; //质检结果如果没有值，默认选00 正常
+           res.data.insTelVerifyList[k].telType == '02' ? this.insTelVerifyListCompany.push(res.data.insTelVerifyList[
                 k]) : ''; //单位电话
               res.data.insTelVerifyList[k].telType == '03' ? this.insTelVerifyListFamily.push(res.data.insTelVerifyList[
                 k]) : ''; //家庭联系人
@@ -1615,11 +1598,11 @@
               }
             }
             this.WechatData(0); //客户本人 微信支付宝赋值为客户本人AlipayCus
-            console.log(77777, this.WechatData(0))
-            console.log(this.AlipayCus)
-            console.log(this.AlipayFamily)
-            console.log(this.AlipayOthers)
-            console.log(this.AlipayWork)
+            // console.log(77777, this.WechatData(0))
+            // console.log(this.AlipayCus)
+            // console.log(this.AlipayFamily)
+            // console.log(this.AlipayOthers)
+            // console.log(this.AlipayWork)
           } else {
             this.$message.error(res.msg);
           }
