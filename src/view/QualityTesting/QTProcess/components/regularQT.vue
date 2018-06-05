@@ -2285,6 +2285,7 @@
 
   .regularQT table {
     border: 1px solid #ebeef5;
+    font-size: 14px;
     /* vertical-align: middle; */
   }
 
@@ -2293,7 +2294,7 @@
   }
 
   .regularQT tr:nth-of-type(1) {
-     height: 38px;
+     height: 50px;
      vertical-align: middle;
   }
 

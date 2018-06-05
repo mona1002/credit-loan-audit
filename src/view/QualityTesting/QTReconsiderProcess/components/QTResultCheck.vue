@@ -23,7 +23,7 @@
         </template>
         <div class="result">
           <el-table :data="tableData" border>
-            <el-table-column prop="checkResult" label="质检结果" width="120"></el-table-column>
+            <el-table-column prop="checkResultTxt" label="质检结果" width="120"></el-table-column>
             <el-table-column prop="errorType" label="差错类型" width="150"></el-table-column>
             <el-table-column prop="errorDescribe" label="差错描述" width="150"></el-table-column>
             <el-table-column prop="remark" label="备注"></el-table-column>

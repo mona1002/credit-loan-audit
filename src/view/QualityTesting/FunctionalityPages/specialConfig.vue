@@ -15,9 +15,9 @@
             </p>
             <p>
               <label> 进件机构</label>
-              <el-select v-model="params.shopCodes" multiple placeholder="请选择">
+              <el-select v-model="params.operOrgCodes" multiple placeholder="请选择">
                 <el-option v-for="item in shopCodesSelection" :key="item.code" :label="item.name" :value="item.code">
-               <span style="float: left">{{ item.name }}</span>
+                  <span style="float: left">{{ item.name }}</span>
                   <span style="float: right; color: #8492a6; font-size: 13px">{{ item.code }}</span>
                 </el-option>
               </el-select>
@@ -78,7 +78,7 @@
       <div class="title">
         <h1>质检任务分派查询
           <span @click="apportion">
-          <!-- <span @click="allot"> -->
+            <!-- <span @click="allot"> -->
             <img src="../../../../static/images/add.png" style=" vertical-align: middle;"> 任务分派
           </span>
         </h1>
@@ -92,7 +92,7 @@
           </el-table-column>
           <el-table-column prop="ploanDate" label="审批结论时间" align='center' min-width="180">
           </el-table-column>
-          <el-table-column prop="shopCode" label="进件机构" align='center' min-width="180">
+          <el-table-column prop="operOrgName" label="进件机构" align='center' min-width="180">
           </el-table-column>
           <el-table-column prop="auditNamec" label="初审姓名" align='center' min-width="180">
           </el-table-column>
@@ -119,7 +119,7 @@
         </div> -->
       </div>
     </div>
-        <!-- ==============================任务分配=================================== -->
+    <!-- ==============================任务分配=================================== -->
     <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
       <span>您确定生成质检任务？</span>
       <span slot="footer" class="dialog-footer">
@@ -136,17 +136,17 @@
     data() {
       return {
         // ploanDate: ['', ''],
-        Confirm:false,
-        loadsitu:false,
-        adbtn:'确定',
+        Confirm: false,
+        loadsitu: false,
+        adbtn: '确定',
         ploanDate: '',
         tableData: [],
-        production: [],//产品下拉
-        mainReason:[],//拒绝主原因下拉
-        secondReason:[],//拒绝子原因下拉
-        shopCodesSelection:[],//进件机构下拉
+        production: [], //产品下拉
+        mainReason: [], //拒绝主原因下拉
+        secondReason: [], //拒绝子原因下拉
+        shopCodesSelection: [], //进件机构下拉
         userInf: '',
-        mainReasonId:'',
+        mainReasonId: '',
         allotParams: {
           operCode: '',
           operName: '',
@@ -163,7 +163,7 @@
           // },
           ploanDateBegin: '', //审批结论开始时间
           ploanDateEnd: '', //审批结论结束时间
-          shopCodes: '', //	进件机构       多选
+          operOrgCodes: '', //	进件机构       多选
           userCode: '', //	初终审编号
           proCodes: '', //	产品          多选
           busiState: '', //	业务状态     
@@ -180,7 +180,7 @@
         //   // },
         //   ploanDateBegin: '', //审批结论开始时间
         //   ploanDateEnd: '', //审批结论结束时间
-        //   shopCodes: '', //	进件机构
+        //   operOrgCodes: '', //	进件机构
         //   userCode: '', //	初终审编号
         //   proCodes: '', //	产品
         //   busiState: '', //	业务状态
@@ -192,14 +192,14 @@
       }
     },
     methods: {
-           apportion() { //分配 按钮弹窗
+      apportion() { //分配 按钮弹窗
         console.log('apportion')
         this.Confirm = true;
         this.loadsitu = false;
         this.adbtn = '确定';
       },
       allot() { //批量转分派
-              this.loadsitu = true;
+        this.loadsitu = true;
         this.adbtn = '保存中';
         this.post("/insTask/addSpecialInsTask", this.allotParams).then(res => {
           if (res.statusCode == 200) {
@@ -208,11 +208,11 @@
               message: '提交成功！'
             })
             this.inquire(this.params);
-            this.Confirm=false;
+            this.Confirm = false;
           } else {
             this.$message.error('批量转分派失败');
             this.inquire(this.params);
-            this.Confirm=false;            
+            this.Confirm = false;
           }
         });
       },
@@ -238,7 +238,7 @@
       Rreset() { // 重置
         this.params.ploanDateBegin = ''; //审批结论开始时间
         this.params.ploanDateEnd = ''; //审批结论结束时间
-        this.params.shopCodes = ''; //	进件机构       多选
+        this.params.operOrgCodes = ''; //	进件机构       多选
         this.params.userCode = ''; //	初终审编号
         this.params.proCodes = ''; //	产品          多选
         this.params.busiState = ''; //	业务状态     
@@ -251,7 +251,7 @@
         //   params: {
         //  ploanDateBegin: '', //审批结论开始时间
         //   ploanDateEnd: '', //审批结论结束时间
-        //   shopCodes: '', //	进件机构       多选
+        //   operOrgCodes: '', //	进件机构       多选
         //   userCode: '', //	初终审编号
         //   proCodes: '', //	产品          多选
         //   busiState: '', //	业务状态     
@@ -262,10 +262,10 @@
         console.log(this.params)
         this.params.ploanDateBegin = this.ploanDate[0];
         this.params.ploanDateEnd = this.ploanDate[1];
-        console.log( this.params.ploanDateBegin)
-        console.log( this.params.ploanDateEnd)
-        console.log( typeof( this.params.ploanDateBegin))
-        console.log( typeof( this.params.ploanDateEnd))
+        console.log(this.params.ploanDateBegin)
+        console.log(this.params.ploanDateEnd)
+        console.log(typeof (this.params.ploanDateBegin))
+        console.log(typeof (this.params.ploanDateEnd))
         this.inquire(this.params);
       },
       inquire(pam) { //查询列表     质检-复议结果查询功能
@@ -280,26 +280,26 @@
           }
         })
       },
-      getSelection(){//查询所有下拉
-        this.get("/insTask/initSpecialInsTaskPage?"+Math.random()).then(res => {
+      getSelection() { //查询所有下拉
+        this.get("/insTask/initSpecialInsTaskPage?" + Math.random()).then(res => {
           if (res.statusCode == 200) {
-         this.busiStateSelect=res.data.busiStateList; // 业务状态
-         this.mainReason= res.data.mainReasonList ; // 拒绝主原因
-      this.shopCodesSelection=   res.data.orgList  ; // 进件机构
-           this.production=  res.data.proList  ; // 产品名称
+            this.busiStateSelect = res.data.busiStateList; // 业务状态
+            this.mainReason = res.data.mainReasonList; // 拒绝主原因
+            this.shopCodesSelection = res.data.orgList; // 进件机构
+            this.production = res.data.proList; // 产品名称
           } else {
             this.$message.error(res.msg);
           }
         });
       },
-      selectSubRea(id){//查询子原因
-      console.log(id)
- this.get("/credit/findNodeFirstChildren",{
-   id:id
- }).then(res => {
+      selectSubRea(id) { //查询子原因
+        console.log(id)
+        this.get("/credit/findNodeFirstChildren", {
+          id: id
+        }).then(res => {
           if (res.statusCode == 200) {
-         this.secondReason=res.data;
-      
+            this.secondReason = res.data;
+
           } else {
             this.$message.error(res.msg);
           }
@@ -327,7 +327,7 @@
       this.inquire(this.params); //查询列表
       // this.getProducts(); //查询产品
       // this.getBusiState(); //获取业务状态下拉
-      this.getSelection();//获取所有下拉
+      this.getSelection(); //获取所有下拉
       //   this.params.pageNum = this.currentPage, //页数（第几页）
       //  this.params.pageParam.pageNum = this.currentPage = 1;
       //     this.params.pageSize = this.pageCount, //页面显示行数
