@@ -19,8 +19,10 @@ if (host === productionEnv) {
   host = "http://testplatform.nuoyuan.com.cn/";
 }else if (host === press) {
   host = "http://ycplatform.nuoyuan.com.cn/";
-} else {
+} else if (host === developmentEnv) {
   host = "http://codeplatform.nuoyuan.com.cn/";
+}else{
+  host = "http://testplatform.nuoyuan.com.cn/";
 }
 
 appConstantUser.path=host;

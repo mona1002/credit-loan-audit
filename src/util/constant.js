@@ -19,8 +19,9 @@ if (host === productionEnv) {
   host = testEnv;
 }else if (host === press) {
   host = press;
-} else {
-  // host = developmentEnv;
+} else if (host === developmentEnv){
+  host = developmentEnv;
+}else{
   host = testEnv;
 }
 
