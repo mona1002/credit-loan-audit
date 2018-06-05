@@ -26,7 +26,7 @@
             <el-table-column prop="checkResult" label="质检结果" width="120"></el-table-column>
             <el-table-column prop="errorType" label="差错类型" width="150"></el-table-column>
             <el-table-column prop="errorDescribe" label="差错描述" width="150"></el-table-column>
-            <el-table-column prop="remark" label="备注（非必填）"></el-table-column>
+            <el-table-column prop="remark" label="备注"></el-table-column>
           </el-table>
         </div>
       </el-collapse-item>
@@ -126,8 +126,9 @@
         this.get('/insReconApply/queryInsConclusionInfo', {
           applyId: this.taskwaitting.ApplyId,
         }).then(res => {
+          this.tableData=[];
           this.baseInfo = res.data.applyBaseInfo; //基本信息
-          this.tableData = res.data.insConclusion; //-----------需要调接口查看返回对象，还是数组
+          this.tableData.push( res.data.insConclusion ); //-----------需要调接口查看返回对象，还是数组
         })
       },
       ToReconsider() {
