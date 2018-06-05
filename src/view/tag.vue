@@ -339,15 +339,15 @@
           } else if (route.fullPath == '/processMoni?antiFraudApp03') {
             this.nodeName = "反欺诈已完成流程";
             this.routeParams = '?antiFraudApp03';
-          }else if (route.fullPath == '/processMoni?QT03') {
+          }else if (route.fullPath == '/processMoni?checkApp03') {
             this.nodeName = "质检已完成流程";
-            this.routeParams = '?QT03';
-          }else if (route.fullPath == '/processMoni?QT01') {
+            this.routeParams = '?checkApp03';
+          }else if (route.fullPath == '/processMoni?checkApp01') {
             this.nodeName = "质检已分配流程";
-            this.routeParams = '?QT01';
-          }else if (route.fullPath == '/processMoni?QT00') {
+            this.routeParams = '?checkApp01';
+          }else if (route.fullPath == '/processMoni?checkApp00') {
             this.nodeName = "质检未分配流程";
-            this.routeParams = '?QT00';
+            this.routeParams = '?checkApp00';
           }
         } else if (route.path == '/PneCtrl') {
           this.nodeName = "大数据风控";

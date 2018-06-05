@@ -458,7 +458,7 @@ userCode:'',
           {value: 'antiFraudApp_commissioner',label: '反欺诈专员审批'},
           {value: 'antiFraudApp_manager',label: '反欺诈主管审批'}
         ];
-      } else if(this.routerPath === "QT"){
+      } else if(this.routerPath === "checkApp"){
         this.taskNodes=[{value:"checkApp_apply", label: "质检开始"},
             {value:"checkApp_check_manager", label: "质检主管审批"},
             {value:"checkApp_trial_self", label: "初终审本人复查"},
