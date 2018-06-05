@@ -112,6 +112,7 @@ import MatchingInfQTProcess from '../view/FirstTrail/MatchingInfQTProcess.vue' /
 // commissioner//质检专员列表
 // manager//质检主管列表 
 import pdf from '../view/pdf.vue' //
+import RantiFraudInvestigation from '../view/FirstTrail/ReadComponent/RantiFraudInvestigation.vue' //
 
 
 Vue.use(Router)
@@ -496,6 +497,10 @@ const routes = [{
   {
     path: '/pdf',
     component: pdf
+  },
+  {
+    path: '/RantiFraudInvestigation',
+    component: RantiFraudInvestigation
   },
 ];
 
