@@ -39,19 +39,19 @@
         <el-table :data="tableData" style="width: 100%" height="100%" @row-dblclick="handleCurrentChange" border>
           <el-table-column type="index" align='center' label=序号 width="55">
           </el-table-column>
-          <el-table-column prop="applySubno" label="进件编号" align='center' min-width="180">
+          <el-table-column prop="applySubNo" label="进件编号" align='center' min-width="180">
           </el-table-column>
           <el-table-column prop="custName" label="客户名称" align='center' min-width="120">
           </el-table-column>
           <el-table-column prop="certCode" label="证件号码" align='center' min-width="180">
           </el-table-column>
-          <el-table-column prop="mobile" label="质检结果" align='center' min-width="130">
+          <el-table-column prop="checkResultTxt" label="质检结果" align='center' min-width="130">
           </el-table-column>
-          <el-table-column prop="appDate" label="差错类型" align='center' min-width="130">
+          <el-table-column prop="errorType" label="差错类型" align='center' min-width="130">
           </el-table-column>
-          <el-table-column prop="proName" label="差错描述" align='center' min-width="180">
+          <el-table-column prop="errorDescribe" label="差错描述" align='center' min-width="180">
           </el-table-column>
-          <el-table-column prop="operOrgName" label="备注" align='center' min-width="120">
+          <el-table-column prop="remark" label="备注" align='center' min-width="120">
           </el-table-column>
         </el-table>
         <!-- 分页  -->

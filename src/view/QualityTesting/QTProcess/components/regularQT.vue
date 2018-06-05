@@ -1522,8 +1522,11 @@
             // !res.data.insTelCustInfo.applyId ? this.insTelCustInfo.applyId = this.propQTconclution.applyId : this.insTelCustInfo =
             //   res.data.insTelCustInfo; //this.insTelCustInfo 是obj / 查询接口 -只返回客户本人-电话核实信息
             // !res.data.insTelCustInfo.insResult ? '' : this.insTelCustInfo.insResult = res.data.insTelCustInf.insResult; //本人拨打电话核实-默认选00           
-            // 电话征信：电话拨打核实-除客户本人
-            console.log(res.data.insWechatAlipayList.length)
+            // 电话征信：电话拨打核实-除客户本人,保存之后清空数组重新保存最新值
+            this.insTelVerifyListCompany=[];
+            this.insTelVerifyListFamily=[];
+             this.insTelVerifyListOthers=[];
+             this.insTelVerifyListWork=[];
             for (var k = 0; k < res.data.insTelVerifyList.length; k++) {
               res.data.insTelVerifyList[k].insResult == '' ||  res.data.insTelVerifyList[k].insResult == null ? res.data.insTelVerifyList[k].insResult = '00' : ''; //质检结果如果没有值，默认选00 正常
             !res.data.insTelVerifyList[k].applyId?res.data.insTelVerifyList[k].applyId = this.propQTconclution.applyId : ''; //质检结果如果没有值，默认选00 正常
@@ -1843,13 +1846,13 @@
               this.insConclusion[n].checkResult == '06' ? this.checkResultCount06++ : '';
               this.insConclusion[n].checkResult == '07' ? this.checkResultCount07++ : '';
             }
-            console.log('1', this.checkResultCount01)
-            console.log('2', this.checkResultCount02)
-            console.log('3', this.checkResultCount03)
-            console.log('4', this.checkResultCount04)
-            console.log('5', this.checkResultCount05)
-            console.log('6', this.checkResultCount06)
-            console.log('7', this.checkResultCount07)
+            // console.log('1', this.checkResultCount01)
+            // console.log('2', this.checkResultCount02)
+            // console.log('3', this.checkResultCount03)
+            // console.log('4', this.checkResultCount04)
+            // console.log('5', this.checkResultCount05)
+            // console.log('6', this.checkResultCount06)
+            // console.log('7', this.checkResultCount07)
             if (this.checkResultCount01 > 1 || this.checkResultCount02 > 1 || this.checkResultCount03 > 1 || this.checkResultCount04 >
               1 || this.checkResultCount05 > 1 || this.checkResultCount06 > 1 || this.checkResultCount07 > 1) {
               this.$message.error('质检结论中质检结果重复添加！')
@@ -2290,7 +2293,8 @@
   }
 
   .regularQT tr:nth-of-type(1) {
-    height: 30px;
+     height: 38px;
+     vertical-align: middle;
   }
 
   .regularQT td,
