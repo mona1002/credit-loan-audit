@@ -59,10 +59,7 @@
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative; left:0; top:0;" id='FirstAud'>
         <img ref="Big_pic_ref" v-for="(val,key) in pngAyyr" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng"/>
-        <!-- <pdfDiv v-if="myPdf" v-for="(val,index) in pdfArry" :key="index" :val="val"></pdfDiv> -->
-        <!-- <pdfDiv v-if="myPdf" :pdfArry="pdfArry"></pdfDiv> -->
-        <!-- <p v-if="myPdf" v-for="(val,index) in pdfArry" is="pdfDiv" v-bind:title="val"></p> -->
-        <p v-if="myPdf" is="pdfDiv" v-bind:title="pdfArry"></p>
+        <p v-show="myPdf" is="pdfDiv" v-bind:title="pdfArry"></p>
       </div>
     </div>
     <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" @click="pre" v-show="perfBtn" @mouseenter='PerBtn'>
@@ -168,52 +165,16 @@
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
         console.log(this.imgPath);
         console.log('mkkmkm');
-        //console.log(this.imgPath);
-        //var pdfArry=[];
-        for(var i=0;i<this.imgPath.length;i++){
-          //console.log(this.imgPath[i]);
-          //console.log('pppp');
-          //console.log(this.imgPath[i].imagePath.substring(this.imgPath[i].imagePath.length-3));
-          //console.log('ooooo');
-          if(this.imgPath[i].imagePath.substring(this.imgPath[i].imagePath.length-3) == 'pdf'){
-            if(this.pdfArry.length>0){
-              for(var j=0;j<this.pdfArry.length;j++){
-              //alert('pp')
-                if(this.imgPath[i].imagePath!=this.pdfArry[j].imagePath){
-                    this.pdfArry.push(this.imgPath[i]);
-                }
-              }
-            }else{
-              this.pdfArry.push(this.imgPath[i]);  
-            }
+        if(this.imgPath[0].imagePath.substring(this.imgPath[0].imagePath.length-3) == 'pdf'){
+            this.pdfArry=this.imgPath;
             this.myPdf = true;
             this.myPng = false;
-            /*if(this.imgPath[i].imagePath)
-                this.pdfArry.push(this.imgPath[i].imagePath);*/
-            
-              console.log('---------------------------');
-              console.log(this.pdfArry[0]);
-              console.log('---------------------------');
-
-              console.log('eeee');
-              console.log(this.myPdf);
           }else{
             this.myPng = true;
             this.myPdf = false;
-            if(this.pngAyyr.length>0){
-              for(var m=0;m<this.pngAyyr.length;m++){
-                if(this.imgPath[i].imagePath!=this.pngAyyr[m].imagePath){
-                    this.pngAyyr.push(this.imgPath[i]);
-                }
-              }
-            }else{
-              this.pngAyyr.push(this.imgPath[i]);
-            };
-            
-            console.log(this.pngAyyr[0]);
-            console.log('eeee2');
-          }
-        };
+            this.pngAyyr=this.imgPath;
+            console.log(this.pngAyyr.length);
+          };
         this.$refs.img_wrap.style.left = 0;
         this.$refs.img_wrap.style.top = 0;
         this.defaultBigPicCss();
@@ -682,4 +643,9 @@
     box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
   }
 
+  #FirstAud .pdf-wraper{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
 </style>

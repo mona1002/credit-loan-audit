@@ -2911,17 +2911,7 @@ body .el-submenu .el-menu-item {
   margin-right: 12px;
 }
 
-/* .taskWatting .el-form-item__error{
-  top:30%;
-} */
+.RaAntiFraudInvestigation .el-textarea.is-disabled .el-textarea__inner{
+  background: #fff;
+}
 
-/*.taskWatting .el-form-item__error:after {
-  border: 6px solid transparent;
-border-top: 6px solid rgba(0,0,0,0.49);
-width: 0;
-height: 0;
-position: absolute;
-top: 22px;
-right: 50%;
-content: ' '
-} */
