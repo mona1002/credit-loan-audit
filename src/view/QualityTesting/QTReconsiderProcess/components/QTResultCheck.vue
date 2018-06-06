@@ -134,7 +134,7 @@
       ToReconsider() {
        console.log(this.taskwaitting)
       this.ToReconsiderParams.ApplyId=  this.taskwaitting.ApplyId;
-      this.ToReconsiderParams.taskId=  this.taskwaitting.taskId
+      this.ToReconsiderParams.taskId=  this.taskwaitting.taskId;
          localStorage.setItem('QTToReconsiderParams', JSON.stringify(this.ToReconsiderParams)); //工作台部分信息，带入workbenchPass
          this.$router.push('/ReApply');
       },

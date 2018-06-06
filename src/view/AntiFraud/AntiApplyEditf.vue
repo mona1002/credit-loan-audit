@@ -223,7 +223,10 @@ console.log(  this.antiFlag  )
         this.taskName = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskName;
         this.currentTemplateId = 'reconsiderApp';
       }
-
+      // 质检各角色
+        if (this.antiFlag == '07' || this.antiFlag == '08'|| this.antiFlag == '10'|| this.antiFlag == '11'|| this.antiFlag == '12'|| this.antiFlag == '13') {
+        this.currentTemplateId = 'checkApp';
+        }
       // if (this.antiFlag == '05') {
       //   console.log('复议专员取值')
       //   this.creditappTaskid = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;

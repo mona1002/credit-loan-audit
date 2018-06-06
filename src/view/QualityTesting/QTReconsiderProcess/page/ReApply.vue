@@ -89,7 +89,8 @@
       </el-collapse>
       <div class="ReApply_btn" v-if="ManagerBtn">
         <el-button type="primary" @click="sumt">提交</el-button>
-        <el-button @click="$router.push('/SelfTaskList?taskNodeName=checkApp_apply&flag=09')">取消</el-button>
+        <el-button @click="$router.push('/SelfTaskList?taskNodeName=checkApp_trial_self&flag=09')">取消</el-button>
+        <!-- <el-button @click="cancle">取消</el-button> -->
       </div>
       <!-- 弹窗 -->
       <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
@@ -175,6 +176,10 @@
         //     this.tableData = res.data.insConclusion; //-----------需要调接口查看返回对象，还是数组
         //   })
       },
+//       cancle(){
+// this.$router.push('SelfTaskList?taskNodeName=checkApp_trial_self&flag=09');
+// // this.$router.push('SelfTaskList?taskNodeName='+this.taskwaitting+'&flag='+this.taskwaitting.mark);
+//       },
       sumt() {
         this.loadsitu = false;
         this.adbtn = '确定';
@@ -205,6 +210,7 @@
               message: '发起复议成功',
               type: 'success'
             });
+            this.$router.push('SelfTaskList?taskNodeName=checkApp_trial_self&flag=09');
           } else {
             this.$message.error(res.msg);
           }
@@ -215,13 +221,9 @@
     mounted() {
       console.log( this.propReApply )
       this.propReApply&& this.propReApply.pageType=='ComponentPage'?this.ManagerBtn=false:'';//是否显示提交按钮
-
-
       this.getSystermTime();
-      console.log(JSON.parse(localStorage.getItem('QTToReconsiderParams')));
       this.taskwaitting = JSON.parse(localStorage.getItem('QTToReconsiderParams'));
       this.reApplyInf = JSON.parse(localStorage.getItem('userInf'));
-      console.log(this.reApplyInf)
       this.getInf();
       //传入isManager判断是否可编辑
       // if (this.isManager == 'Manager') {
