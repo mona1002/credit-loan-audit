@@ -1824,17 +1824,24 @@
             id: this.reviewConclusion.id,
             applyId: this.reviewConclusion.applyId,
             reviewConclusion: this.reviewConclusion.reviewConclusion,
-            checkType: this.reviewConclusion.checkType,
+            checkType: this.propQTconclution.pageType == 'checkApp_apply' ? '01' : '02',
           }).then(res => {
             if (res.statusCode == 200) {
               // this.tableData = res.data;
               this.$message({
                 type: 'success',
-                message: '添加复核结论成功！'
+                message: type + '成功！'
               })
+                if (type == '提交') {
+                  this.propQTconclution.pageType == 'checkApp_apply' ? this.$router.push(
+                    '/commissioner?taskNodeName=checkApp_apply&flag=07') : ''; //专员
+                }
+                this.referPort();
+                // this.$message.error(res.msg);
             } else {
               this.$message.error(res.msg);
             }
+            this.submitShow=false;
           });
         } else { //  常规质检、专纵质检
           // 保存、提交之前都要校验质检结论是否重复添加多条
