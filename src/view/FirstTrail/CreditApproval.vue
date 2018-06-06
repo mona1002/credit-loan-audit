@@ -1709,7 +1709,7 @@
           proCode: this.proCode,
           verIncome: verIncome2,
           ploanAmt: ploanAmt2,
-          ploanTerm: this.caculData.ploanTerm, //批准期限
+          ploanTerm: this.ploanTerm, //批准期限
           appmult: this.caculData.appmult, // 审批倍数
           eachTermamt: this.caculData.eachTermamt, //每期还款额[元]
           inteDebitrate: this.caculData.inteDebitrate, //内部负债率
