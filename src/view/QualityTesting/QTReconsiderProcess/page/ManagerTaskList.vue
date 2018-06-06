@@ -56,13 +56,13 @@
           </el-table-column>
           <el-table-column prop="subOrgNamec" label="初审所属科室" align='center' min-width="130">
           </el-table-column>
-          <el-table-column prop="auditDatec" label="初审日期" align='center' min-width="120">
+          <el-table-column prop="auditDatec" label="初审日期" align='center' min-width="180">
           </el-table-column>
           <el-table-column prop="auditNamez" label="终审姓名" align='center' min-width="120">
           </el-table-column>
           <el-table-column prop="subOrgNamez" label="终审所属科室" align='center' min-width="130">
           </el-table-column>
-          <el-table-column prop="auditDatez" label="终审日期" align='center' min-width="120">
+          <el-table-column prop="auditDatez" label="终审日期" align='center' min-width="180">
           </el-table-column>
           <el-table-column prop="busiStateTxt" label="业务状态" align='center' min-width="120">
           </el-table-column>
@@ -70,9 +70,9 @@
           </el-table-column>
           <el-table-column prop="errorType" label="差错类型" align='center' min-width="120">
           </el-table-column>
-          <el-table-column prop="insDate" label="质检日期" align='center' min-width="120">
+          <el-table-column prop="insDate" label="质检日期" align='center' min-width="180">
           </el-table-column>
-          <el-table-column prop="reconDate" label="复议申请日期" align='center' min-width="120">
+          <el-table-column prop="reconDate" label="复议申请日期" align='center' min-width="180">
           </el-table-column>
           <el-table-column prop="checkStateTxt" label="质检状态" align='center' min-width="120">
           </el-table-column>

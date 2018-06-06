@@ -2914,4 +2914,6 @@ body .el-submenu .el-menu-item {
 .RaAntiFraudInvestigation .el-textarea.is-disabled .el-textarea__inner{
   background: #fff;
 }
-
+.RulesReApply .el-collapse{
+  overflow: hidden;
+}
