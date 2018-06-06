@@ -56,7 +56,7 @@
             <!-- 反欺诈结论 -->
             <aAntiApplyInf v-if=" this.tabContent2==9"></aAntiApplyInf>
             <!-- 反欺诈调查 -->
-            <RantiFraudInvestigation v-if=" this.tabContent2==10"></RantiFraudInvestigation>
+            <RantiFraudInvestigation v-if=" this.tabContent2==10"  :isShow='false' :applyId='tastwaitingPass.applyId'></RantiFraudInvestigation>
             <!-- √ -->
             <!-- 复议结论 -->
             <ReconsiderationConclusion v-if=" this.tabContent2==11 && this.Rcon==1"></ReconsiderationConclusion>
