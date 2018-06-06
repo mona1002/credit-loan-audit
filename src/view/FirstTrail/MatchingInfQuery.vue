@@ -47,7 +47,7 @@
               <FMCreditForm v-if=" this.tabContent1==6">信审表</FMCreditForm>
               <RcreditInvestigation v-if=" this.tabContent1==7">实地征信</RcreditInvestigation>
               <aMAntiApplyInf v-if=" this.tabContent1==8">反欺诈结论</aMAntiApplyInf>
-              <RantiFraudInvestigation v-if=" this.tabContent1==9">反欺诈调查</RantiFraudInvestigation>
+              <RantiFraudInvestigation v-if=" this.tabContent1==9" :isShow='true' :applyId='tastwaitingPass.matchApplyId'>反欺诈调查</RantiFraudInvestigation>
               <RFinanceInformation v-if=" this.tabContent1==10">账务信息</RFinanceInformation>
               <RprocessTrajectory v-if=" this.tabContent1==11">流程轨迹</RprocessTrajectory>
               <RApprovalConclusion v-if=" this.tabContent1==11">审批结论轨迹</RApprovalConclusion>
@@ -89,7 +89,7 @@
             <FMCreditForm v-if=" this.tabContent2==6">信审表</FMCreditForm>
             <RcreditInvestigation v-if=" this.tabContent2==7">实地征信</RcreditInvestigation>
             <aMAntiApplyInf v-if=" this.tabContent2==8">反欺诈结论</aMAntiApplyInf>
-            <RantiFraudInvestigation v-if=" this.tabContent2==9">反欺诈调查</RantiFraudInvestigation>
+            <RantiFraudInvestigation v-if=" this.tabContent2==9" :isShow='true' :applyId='tastwaitingPass.matchApplyId'>反欺诈调查</RantiFraudInvestigation>
             <RFinanceInformation v-if=" this.tabContent2==10">账务信息</RFinanceInformation>
             <RprocessTrajectory v-if=" this.tabContent2==11">流程轨迹</RprocessTrajectory>
             <RApprovalConclusion v-if=" this.tabContent2==12">审批结论轨迹</RApprovalConclusion>
@@ -344,7 +344,7 @@
       PhoneCredit,
       RPhoneCredit,
       RprocessTrajectory,
-      RantiFraudInvestigation//反欺诈调查
+      RantiFraudInvestigation,//反欺诈调查
     }
   }
 
