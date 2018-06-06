@@ -1,7 +1,7 @@
 <template>
   <div class="aAntiApplyInf ReApply">
     <!-- 复议申请页面 -->
-    <myHead></myHead>
+    <myHead v-if="ManagerBtn"></myHead>
     <div class="content">
       <el-collapse v-model="activeNames">
         <el-collapse-item name="1">
@@ -215,6 +215,8 @@
     mounted() {
       console.log( this.propReApply )
       this.propReApply&& this.propReApply.pageType=='ComponentPage'?this.ManagerBtn=false:'';//是否显示提交按钮
+
+
       this.getSystermTime();
       console.log(JSON.parse(localStorage.getItem('QTToReconsiderParams')));
       this.taskwaitting = JSON.parse(localStorage.getItem('QTToReconsiderParams'));
