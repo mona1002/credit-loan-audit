@@ -119,6 +119,7 @@
         ReIllustrate: false,
         loadsitu: false,
         tableData: [],
+        conclusionId:'',//提交入参
         // tableData: [{
         //   date: '2016-05-02',
         //   name: '王小虎',
@@ -164,6 +165,7 @@
            this.tableData=[];
           this.applyInfoPool = res.data.applyBaseInfo; //基本信息
           this.tableData.push(res.data.insConclusion); //-----------需要调接口查看返回对象，还是数组
+          this.conclusionId=res.data.insConclusion.id;
           console.log(  this.tableData)
         })
         //  this.get('/insReconApply/queryInsConclusionInfo', {
@@ -196,6 +198,7 @@
           reconDate: this.systermTime, //发起复议时间
           reconType: this.taskwaitting.reconType, //复议类型(00:初终审本人，01:初终审主管首次，02:初终审主管二次)
           taskId: this.taskwaitting.taskId, //任务id
+          conclusionId: this.conclusionId//质检结论id
         }).then(res => {
           if (res.statusCode == 200) {
             this.$message({
