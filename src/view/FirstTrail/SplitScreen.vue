@@ -501,9 +501,9 @@
     margin-right: 15px;
   }
 
-  .PerDtl span:nth-of-type(8) {
+  /* .PerDtl span:nth-of-type(8) {
     width: 105px;
-  }
+  } */
 
   /* 切换按钮 */
 

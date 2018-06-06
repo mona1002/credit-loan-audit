@@ -167,6 +167,7 @@
   export default {
     data() {
       return {
+        aa:'命中规则名称：',
         activeNames: ['1', '2', '3', '4', '5'],
         fraudApplyInfo: '',
         hitRuleList: [],
@@ -187,7 +188,6 @@
         recordList: [],
         /*反欺诈申请ID*/
         appinfoId: '',
-        applyId: '',
         /*命中规则列表参数*/
         ruleId: '',
         pageParam: {
@@ -263,6 +263,7 @@
     },
     props: ['applyId','isShow'],
     mounted() {
+      console.log(this.isShow);
       this.request(this.applyId);
     },
     methods: {
@@ -271,7 +272,7 @@
         this.post('antiFraud/getAntiFraudSurveyInfoByApplyId', {
           'applyId': val //'1',
         }).then(res => {
-          if (res.statusCode == 200 && 　res.data != null) {
+          if (res.statusCode == 200 && res.data != null) {
             //基本信息
             if (res.data.fraudApplyInfo == null) {
               this.fraudApplyInfo = this.fraudApplyInfo;
@@ -289,7 +290,6 @@
                 this.reason = this.reason.replace(reg, '');
               };
             };
-
             //命中规则
             if (res.data.hitRuleList == null) {
               this.hitRuleList = this.hitRuleList;
