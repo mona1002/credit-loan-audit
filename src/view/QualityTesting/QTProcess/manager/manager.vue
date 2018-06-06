@@ -76,13 +76,13 @@
           </el-table-column>
           <el-table-column prop="auditNamez" label="终审姓名" align='center' min-width="120">
           </el-table-column>
-          <el-table-column prop="auditDatez" label="终审日期" align='center' min-width="100">
+          <el-table-column prop="auditDatez" label="终审日期" align='center' min-width="180">
           </el-table-column>
           <el-table-column prop="insMemberName" label="合规专员" align='center' min-width="100">
           </el-table-column>
           <el-table-column prop="insDate" label="合规质检日期" align='center' min-width="130">
           </el-table-column>
-          <el-table-column prop="checkStateTxt" label="质检状态" align='center' min-width="100">
+          <el-table-column prop="checkStateTxt" label="质检状态" align='center' min-width="140">
           </el-table-column>
           <el-table-column prop="instaskTypeTxt" label="任务类型" align='center' min-width="100">
           </el-table-column>

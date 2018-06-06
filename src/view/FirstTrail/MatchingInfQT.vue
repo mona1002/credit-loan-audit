@@ -317,8 +317,8 @@
         }
       },
       rightMovingBtn() {
-        if (parseFloat(this.$refs.right_tab_ul.style.left) <= -1050) {
-          this.$refs.right_tab_ul.style.left = "-1050px";
+        if (parseFloat(this.$refs.right_tab_ul.style.left) <= -1350) {
+          this.$refs.right_tab_ul.style.left = "-1350px";
         } else {
           this.$refs.right_tab_ul.style.left = parseFloat(this.$refs.right_tab_ul.style.left) - 50 + "px";
         }
@@ -741,7 +741,7 @@
 
   .Right_tab_ul_wrap ul {
     /* width: 1061px; */
-    width: 1640px;
+    width: 1950px;
     height: 48px;
     position: relative;
     text-align: left;
