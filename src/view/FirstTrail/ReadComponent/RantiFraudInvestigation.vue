@@ -90,19 +90,16 @@
               <label>网查：</label>
               <el-input type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.netCheck" disabled>
               </el-input>
-              <!-- <textarea>{{fraudAuditInfo.netCheck}}</textarea> -->
             </li>
             <li>
               <label>114：</label>
               <el-input type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.oof" disabled>
               </el-input>
-              <!-- <textarea>{{fraudAuditInfo.oof}}</textarea> -->
             </li>
             <li>
               <label>其他：</label>
               <el-input type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.other" disabled>
               </el-input>
-              <!-- <textarea>{{fraudAuditInfo.other}}</textarea> -->
             </li>
           </ul>
         </div>
@@ -113,63 +110,25 @@
             <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
             <span class="headFont">电核区</span>
           </div>
-          <!-- <div class="remarkIcon right">
-            <span @click="add" class="rightSpans">
-              <img src="../../../../static/images/add.png" class="icon">
-              <span>添加</span>
-            </span>
-            <span @click="delet" class="rightSpans">
-              <img src="../../../../static/images/delete.png" class="icon">
-              <span>删除</span>
-            </span>
-          </div> -->
         </template>
         <div class="ElectroNuclear">
           <el-table :data="fraudTelCheckList" style="width: 100%" highlight-current-row border @current-change="handleCurrentChanges">
             <el-table-column type="index" :index='1' label="序号" width="50">
             </el-table-column>
             <el-table-column prop="phoneNum" label="手机号码" width="180">
-              <template slot-scope="scope">
-                <el-input v-model="scope.row.phoneNum" placeholder="请输入内容" @blur="regPhone(scope.row)" :disabled="scope.row.isInitFlag=='0'"></el-input>
-              </template>
             </el-table-column>
             <el-table-column prop="relation" label="关系" width="180">
-              <!-- <template slot-scope="scope">
-				        	<el-input v-model="scope.row.relation" placeholder="请输入内容" :disabled="scope.row.isInitFlag=='0'"></el-input>
-				        </template> -->
-              <template slot-scope="scope">
-                <el-select v-model="scope.row.relation" placeholder="请选择" :disabled="scope.row.isInitFlag=='0'">
-                  <el-option v-for="item in relations" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </template>
             </el-table-column>
             <el-table-column prop="record" label="记录录入" min-width="150">
-              <template slot-scope="scope">
-                <el-input v-model="scope.row.record" placeholder="请输入内容"></el-input>
-              </template>
             </el-table-column>
           </el-table>
         </div>
       </el-collapse-item>
     </el-collapse>
-    <div class="button">
-      <el-button type="primary" @click="bigSure">确认</el-button>
-    </div>
     <!-- 弹框 -->
     <div class="numLog">
       <el-dialog :title=aa :visible.sync="dialogVisible" width="860px" top="20vh">
         <div class="numBody">
-          <!-- <div class="markIcon">
-            <span @click="relieve">
-              <img src="../../../../static/images/relieve.png" class="icon">
-              <span>解除</span>
-            </span>
-            <span @click="recovery">
-              <img src="../../../../static/images/back.png" class="icon">
-              <span>恢复</span>
-            </span>
-          </div> -->
           <div>
             <el-table ref="multipleTable" :data="recordList" tooltip-effect="dark" style="width: 100%" height="259" border @selection-change="handleSelectionChange">
               <el-table-column type="index" :index='1' label="序号" min-width="50">
@@ -202,37 +161,15 @@
         </span>
       </el-dialog>
     </div>
-    <!-- 解除弹框 -->
-    <!-- <div class="delLog">
-      <el-dialog title="提示" :visible.sync="deldialogVisible" width="420px" top="35vh">
-        <span>只能针对未解除状态数据进行操作，请重新选择！</span>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="delSure">确定</el-button>
-        </span>
-      </el-dialog>
-    </div> -->
-    <!-- 恢复弹框 -->
-    <!-- <div class="backLog">
-      <el-dialog title="提示" :visible.sync="backdialogVisible" width="420px" top="35vh">
-        <span>只能针对已解除状态数据进行操作，请重新选择</span>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="backSure">确定</el-button>
-        </span>
-      </el-dialog>
-    </div> -->
   </div>
 </template>
 <script type="text/javascript">
   export default {
     data() {
       return {
-        aa: '命中规则名称：',
         activeNames: ['1', '2', '3', '4', '5'],
         fraudApplyInfo: '',
-        hitRuleList: [{
-          ruleContent:'aaa',
-          custCount:'2'
-        }],
+        hitRuleList: [],
         fraudTelCheckList: [],
         createTime: '',
         fraudAuditInfo: {
@@ -247,11 +184,7 @@
         totals: {},
         currentPage: 1, // 默认显示的当前页
         setPageSize: 10,
-        recordList: [{
-          applySubNo:"1122",
-          ruleContent:"1122",
-          statusTxt:"1122",
-        }],
+        recordList: [],
         /*反欺诈申请ID*/
         appinfoId: '',
         applyId: '',
@@ -263,18 +196,12 @@
         },
         /*存放多选时选中的数据*/
         multipleSelection: [],
-        /*解除弹框*/
-        deldialogVisible: false,
-        /*恢复弹框*/
-        backdialogVisible: false,
         //根据judgeFlag判断取 反欺诈专员 还是 反欺诈主管的申请ID
         judgeFlag: '',
         //理由：主原因+子原因+描述
         reason: '',
         //恢复、解除的新数组
         newArray: [],
-        isValidPhone: /^1[345789]\d{9}$/,
-        regLandlinePhone: /^(0[0-9]{2,3}-?)?([0-9]{7,8})$/,
         relations: [{
             'value': '01',
             'label': '夫妻'
@@ -334,32 +261,15 @@
         ],
       }
     },
+    props: ['applyId','isShow'],
     mounted() {
-      /*获取 反欺诈申请ID*/
-      // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      // if(this.judgeFlag.flag == '03'){
-      // 	this.appinfoId=JSON.parse(localStorage.getItem('AntitaskInWaitting')).businessId;//反欺诈专员
-      // 	this.applyId=JSON.parse(localStorage.getItem('AntitaskInWaitting')).applyId;//反欺诈专员
-      // 	console.log(this.applyId);
-      // }else if (this.judgeFlag.flag == '04') {
-      //     this.appinfoId = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")).businessId; //反欺诈主管
-      //     this.applyId = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")).applyId; //反欺诈主管
-      // }
-      this.appinfoId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).businessId; //反欺诈专员+主管
-      this.applyId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).applyId; //反欺诈专员+主管
-      this.request(this.appinfoId);
-      // //当前审核人编号 登陆人	
-      // this.fraudAuditInfo.auditCode=JSON.parse(localStorage.getItem('userInf')).userCode;
-      // //当前审核人姓名 登陆人
-      // this.fraudAuditInfo.auditName=JSON.parse(localStorage.getItem('userInf')).userName;
-      console.log(this.fraudAuditInfo.auditName + "...." + this.fraudAuditInfo.auditCode);
-      console.log(this.fraudAuditInfo)
+      this.request(this.applyId);
     },
     methods: {
       /*先查询列表*/
       request(val) {
-        this.post('antiFraud/getAntiFraudSurveyInfo', {
-          'appinfoId': val //'1',
+        this.post('antiFraud/getAntiFraudSurveyInfoByApplyId', {
+          'applyId': val //'1',
         }).then(res => {
           if (res.statusCode == 200 && 　res.data != null) {
             //基本信息
@@ -407,42 +317,6 @@
           }
         })
       },
-      /*保存*/
-      bigSure() {
-        //当前审核人编号 登陆人	
-        this.fraudAuditInfo.auditCode = JSON.parse(localStorage.getItem('userInf')).userCode;
-        //当前审核人姓名 登陆人
-        this.fraudAuditInfo.auditName = JSON.parse(localStorage.getItem('userInf')).userName;
-        console.log(this.fraudAuditInfo);
-        console.log("aksdf" + this.fraudAuditInfo.auditName)
-        //this.fraudTelCheckList.appinfoId=this.appinfoId;
-        this.post('antiFraud/saveAntiFraudSurveyInfo', {
-          "appinfoId": this.appinfoId, //'1', // 反欺诈申请id
-          "fraudAuditInfo": {
-            "appinfoId": this.appinfoId, //'1', // 反欺诈申请id
-            "netCheck": this.fraudAuditInfo.netCheck, // 网查
-            "oof": this.fraudAuditInfo.oof, // 114
-            "other": this.fraudAuditInfo.other, // 其他
-            "auditCode": this.fraudAuditInfo.auditCode, // 当前审核人编号
-            "auditName": this.fraudAuditInfo.auditName, // 当前审核人姓名
-            "id": this.fraudAuditInfo.id // 当前审核人姓名
-          },
-          "fraudTelCheckList": this.fraudTelCheckList
-        }).then(res => {
-          if (res.statusCode == 200) {
-            this.request(this.appinfoId);
-            this.$message({
-              message: "保存成功！",
-              type: 'success'
-            })
-          } else {
-            this.$message({
-              message: "保存失败！",
-              type: 'error'
-            })
-          }
-        })
-      },
       handleChange() {
 
       },
@@ -454,61 +328,38 @@
         };
         console.log(val);
       },
-      /*add: function (event) {
-        event.stopPropagation();
-        this.fraudTelCheckList.push({
-          "appinfoId": this.appinfoId, // 反欺诈申请id
-          "phoneNum": "", // 号码
-          "relation": "", // 关系
-          "record": "", // 记录录入
-          "applyId": this.applyId,
-          "createTime": '' //时间顺序 保证页面上的列表顺序不会乱
-        });
-      },
-      delet: function (event) {
-        event.stopPropagation();
-        console.log(this.currentRow);
-        for (var i = 0; i < this.fraudTelCheckList.length; i++) {
-          if (this.fraudTelCheckList[i] == this.currentRow && this.fraudTelCheckList[i].isInitFlag == '0') {
-            return
-            //console.log('jjjjj');
-          } else if (this.fraudTelCheckList[i] == this.currentRow) {
-            //console.log(9999);
-            this.fraudTelCheckList.splice(i, 1);
-          }
-        }
-      },*/
-      regPhone(phone) {
-        if (!this.isValidPhone.test(phone.phoneNum) && !this.regLandlinePhone.test(phone.phoneNum) ) {
-          phone.phoneNum = '';
-        }
-      },
       sure() {
         this.dialogVisible = false;
       },
       handlDetail(index, row) {
         console.log(index, row);
         this.$router.push({
-          path: '/MatchingInf'
+          path: '/MatchingInfQuery'
         });
-        localStorage.setItem("internalObj", JSON.stringify({
+        localStorage.setItem("Query", JSON.stringify({
           id: row.id,
           matchApplyId: row.applyId,
+          applySubNo:row.applySubNo,
           isInterFlag: false
         }));
       },
       /*命中客户数 查询*/
       inquiry(row) {
-        if (row) {
-          if (row.custCount == 0) {
-            return
-          }
-        };
+        if(this.isShow == false){
+          return
+        }else{
+          if (row) {
+            if (row.custCount == 0) {
+              return
+            }
+          };
 
-        this.dialogVisible = true;
-        console.log(row.ruleId);
-        this.ruleId = row.ruleId;
-        this.check(this.pageParam, this.ruleId);
+          this.dialogVisible = true;
+          console.log(row.ruleId);
+          this.ruleId = row.ruleId;
+          this.check(this.pageParam, this.ruleId);
+        }
+        
       },
       check(param, id) {
         this.post("antiFraud/getHitRuleCustList", {
@@ -543,87 +394,6 @@
         this.multipleSelection = val;
         console.log(this.multipleSelection);
       },
-      /*解除*/
-      /*relieve() {
-        if (this.multipleSelection.length == 0) return;
-        var fg = this.multipleSelection.every(function (item) {
-          return (item.statusTxt == '未解除')
-        });
-        if (!fg) {
-          this.deldialogVisible = true;
-        }
-        if (fg) {
-          this.newArray = [];
-          for (var i = 0; i < this.multipleSelection.length; i++) {
-            this.newArray.push({
-              'id': this.multipleSelection[i].id,
-              'status': '01'
-            });
-          };
-          console.log(this.newArray);
-          this.post("antiFraud/batchUpdateHitRule",
-            this.newArray
-          ).then(res => {
-            if (res.statusCode == 200) {
-              this.check(this.pageParam, this.ruleId);
-              this.$message({
-                message: "解除成功！",
-                type: 'success'
-              })
-            } else {
-              this.$message({
-                message: "解除失败！",
-                type: 'error'
-              })
-            }
-          })
-        }
-      },*/
-      /*解除 弹框按钮*/
-      /*delSure() {
-        this.deldialogVisible = false;
-      },*/
-      /*恢复*/
-      /*recovery() {
-        if (this.multipleSelection.length == 0) return;
-        var fg = this.multipleSelection.every(function (item) {
-          return (item.statusTxt == '已解除')
-        });
-        if (!fg) {
-          this.backdialogVisible = true;
-        }
-        if (fg) {
-          //console.log(this.multipleSelection);
-          this.newArray = [];
-          for (var i = 0; i < this.multipleSelection.length; i++) {
-            this.newArray.push({
-              'id': this.multipleSelection[i].id,
-              'status': '00'
-            });
-          };
-          console.log(this.newArray);
-          this.post("antiFraud/batchUpdateHitRule",
-            this.newArray
-          ).then(res => {
-            if (res.statusCode == 200) {
-              this.check(this.pageParam, this.ruleId);
-              this.$message({
-                message: "恢复成功！",
-                type: 'success'
-              })
-            } else {
-              this.$message({
-                message: "恢复失败！",
-                type: 'error'
-              })
-            }
-          })
-        }
-      },*/
-      /*恢复 弹框按钮*/
-      /*backSure() {
-        this.backdialogVisible = false;
-      },*/
     }
   }
 
