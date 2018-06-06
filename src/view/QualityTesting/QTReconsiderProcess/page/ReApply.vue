@@ -161,8 +161,10 @@
         this.get('/insReconApply/queryInsConclusionInfo', {
           applyId: this.taskwaitting.ApplyId,
         }).then(res => {
+           this.tableData=[];
           this.applyInfoPool = res.data.applyBaseInfo; //基本信息
-          this.tableData[0] = res.data.insConclusion; //-----------需要调接口查看返回对象，还是数组
+          this.tableData.push(res.data.insConclusion); //-----------需要调接口查看返回对象，还是数组
+          console.log(  this.tableData)
         })
         //  this.get('/insReconApply/queryInsConclusionInfo', {
         //     applyId: this.taskwaitting.ApplyId,

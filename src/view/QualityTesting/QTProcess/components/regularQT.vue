@@ -1885,6 +1885,8 @@
           // }
           this.SaveInfParams = { //入参
             applyId: this.propQTconclution.applyId,
+            checkType:this.propQTconclution.pageType == 'checkApp_apply'?'01':'02',//专员  01:初检，02：终检
+            isSubmit:type == '提交'?'1':'0',
             taskId: this.propQTconclution.tastwaitingPass.taskId,
             applyBaseInfo: this.baseInfo, //基础信息
             insConclusionList: this.insConclusion, //质检结论页-质检结论
