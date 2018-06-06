@@ -203,7 +203,7 @@
           if (res.statusCode == 200) {
             this.$message({
               message: '发起复议成功',
-              type: 'sucess'
+              type: 'success'
             });
           } else {
             this.$message.error(res.msg);

@@ -242,12 +242,12 @@
         }
         this.post("/insConclusion/submitList", this.multipleSelectionParams)
           .then(res => {
-            if (res.statusCode == 200) {
-              // this.$message({
-              //   type: "success",
-              //   message: '提交成功！'
-              // })
-               this.$message.error(res.msg);//前端不做是否可点击哪个按钮判断，后端做判断，不符合返回msg，前端展示出来即可
+            if (res.statusCode == 200) {//前端不做是否可点击哪个按钮判断，后端做判断，不符合返回msg，前端展示出来即可
+              this.$message({
+                type: "success",
+                message: res.msg
+              })
+              //  this.$message.error(res.msg);
               this.inquire(this.params);
             } else {
               this.$message.error(res.msg);
