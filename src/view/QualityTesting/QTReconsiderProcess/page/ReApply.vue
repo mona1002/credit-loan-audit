@@ -206,11 +206,11 @@
           conclusionId: this.conclusionId//质检结论id
         }).then(res => {
           if (res.statusCode == 200) {
+              this.$router.push('SelfTaskList?taskNodeName=checkApp_trial_self&flag=09');
             this.$message({
               message: '发起复议成功',
               type: 'success'
             });
-            this.$router.push('SelfTaskList?taskNodeName=checkApp_trial_self&flag=09');
           } else {
             this.$message.error(res.msg);
           }

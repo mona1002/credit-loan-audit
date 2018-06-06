@@ -1557,7 +1557,6 @@
               // res.data.insWechatAlipayList[k].telType == '05' && res.data.insWechatAlipayList[k].insVerifyType ==
               //   '00' ? this.AlipayWork[0] = res.data.insWechatAlipayList[k] : this.AlipayWork[1] = res.data.insWechatAlipayList[
               //     k]; //工作证明
-              console.log(res.data.insWechatAlipayList[k].telType)
               // console.log(res.data.insWechatAlipayList[k] )
               // console.log(222,res.data.insWechatAlipayList)
               if (res.data.insWechatAlipayList[k].telType == '06') { //客户本人
@@ -1620,13 +1619,15 @@
           applyId: this.propQTconclution.applyId,
         }).then(res => {
           if (res.statusCode == 200) {
-            //    TrilSelfTableData:[],//初终审本人
-            // ManagerFirstTableData:[],//初终审主管首次
-            // ManagerSecondTableData:[],//初终审主管二次
             //insReconApplyList:复议申请表   insReconApproval ：复议审批表
             res.data.insReconApplyList ? this.insReconApply = res.data.insReconApplyList : '';
+            // 清楚数据
+            this.TrilSelfTableData=[];//初终审本人
+            this.ManagerFirstTableData=[];//初终审主管首次
+            this.ManagerSecondTableData=[];//初终审主管二次
             // console.log(this.insReconApply )
             for (var m = 0; m < this.insReconApply.length; m++) {
+              console.log( this.insReconApply[m].reconType)
               this.insReconApply[m].reconType == '00' ? this.TrilSelfTableData.push(this.insReconApply[m]) : ''; //00:初终审本人---初终审复议申请信息
               this.insReconApply[m].reconType == '01' ? this.ManagerFirstTableData.push(this.insReconApply[m]) : ''; //01:初终审主管首次----审批主管第一次复议申请信息
               this.insReconApply[m].reconType == '02' ? this.ManagerSecondTableData.push(this.insReconApply[m]) :
