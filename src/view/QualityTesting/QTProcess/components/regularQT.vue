@@ -669,7 +669,7 @@
         </template>
         <div class="material">
           <el-table :data="TrilSelfTableData" border style="width: 100%">
-            <el-table-column prop="approverUserCode" label="复议申请人" width="100">
+            <el-table-column prop="approverUserCode" label="复议申请人" width="150">
             </el-table-column>
             <el-table-column prop="reconDate" width="180" label="复议申请日期">
             </el-table-column>
@@ -696,7 +696,7 @@
         </template>
         <div class="material">
           <el-table :data="ManagerFirstTableData" border style="width: 100%">
-            <el-table-column prop="approverUserCode" label="经办人" width="100">
+            <el-table-column prop="approverUserCode" label="经办人" width="150">
             </el-table-column>
             <el-table-column prop="reconDate" width="180" label="发起复议时间">
             </el-table-column>
@@ -723,7 +723,7 @@
         </template>
         <div class="material">
           <el-table :data="insReconApproval" border style="width: 100%">
-            <el-table-column prop="reviewResult" label="复议结果" width="100">
+            <el-table-column prop="reviewResult" label="复议结果" width="150">
             </el-table-column>
             <el-table-column prop="checkResult" width="180" label="质检结果">
             </el-table-column>
@@ -754,7 +754,7 @@
         </template>
         <div class="material">
           <el-table :data="ManagerSecondTableData" border style="width: 100%">
-            <el-table-column prop="approverUserCode" label="经办人" width="100">
+            <el-table-column prop="approverUserCode" label="经办人" width="150">
             </el-table-column>
             <el-table-column prop="reconDate" width="180" label="发起复议时间">
             </el-table-column>
@@ -2128,25 +2128,6 @@
         this.onlyCheck();
       },
       showdiffer() {
-        // ---------------------------------------
-        // if (this.propQTconclution.EditType == '项') { //专员 ，主管     √
-        //   this.AprovalInfolShow = false; //审批信息        
-        //   this.MaterialShow = false; //资料核实
-        //   this.InfoSearchShow = false; //三方信息查询
-        //   this.MatchingShow = false; //内部匹配核实
-        //   this.submitBtn = false; //提交
-        // } else if (this.propQTconclution.EditType == '常规又专项质检') {
-        //   this.reResultShow = true; //复核结论-div 
-        //   this.AntiBtn = false; //发起反欺诈
-        //   this.SocialSecurityBtn = false; //社保公积金
-        //   // -----------------------------------------------------------------查看disable---------------------------
-        //   // this.material=true;//资料核实
-        //   // this.InfoInquire=true;//三方信息查询
-        //   // this.matching=true;//内部匹配核实
-        //   // this.PhoneCredit=true;//电话征信
-        //   // this.QTConclution=true;//质检结论
-        //   this.onlyCheck();
-        // }
         // ----------------------角色------------------------------
         if (this.propQTconclution.pageType == 'checkApp_apply') { //专员-编辑  √
           console.log('专员')
@@ -2156,7 +2137,6 @@
           } else
           if (this.propQTconclution.tastwaitingPass.listType == '专项质检') {
             this.instaskType = '01';
-
             this.Special();
             //   this.AprovalInfolShow = false; //审批信息        
             //   this.MaterialShow = false; //资料核实
@@ -2210,6 +2190,7 @@
           }
         } else if (this.propQTconclution.pageType == 'checkApp_check_recon_manager') { //复议任务列表（首次） √
           this.onlyCheck();
+          this.getManagerList();
           this.ToApprovalParams.insState = '00'; //复议审批入参-状态(00:首次审批,01:二次区域经理审批，02:二次合规经理审批)
           this.ReApply = true; //初终审复议申请信息
           this.SuperVisor = true; //审批主管第一次复议申请信息
@@ -2225,11 +2206,13 @@
           // this.saveBtn=false;//保存
           //  this.SocialSecurityBtn = false; //社保公积金
           this.areaAndComplianceBtn();
+          this.getManagerList();
           this.ToApprovalParams.insState = '01';
           this.RiskControlBtn = false; //大数据风控
           this.NoReconsiderBtn = true; //无需复议
         } else if (this.propQTconclution.pageType == 'checkApp_compliance_manager') { //合规 √
           this.areaAndComplianceBtn();
+          this.getManagerList();
           this.ToApprovalParams.insState = '02';
           // this.onlyCheck();
           // this.ReApply = true; //初终审复议申请信息
@@ -2248,15 +2231,7 @@
       console.log(this.propQTconclution.tastwaitingPass.listType)
       this.getSystermTime();
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
-      // 初终审主管，复议首次审批，区域经理 合规经理 调审批信息列表接口
-      //       if(this.propQTconclution.pageType=='checkApp_trial_manager'){
-      //  this.getManagerList();
-      //       }
-
-      // console.log(this.userInf)
-      // console.log(this.propQTconclution)
-      // this.processInstanceId = JSON.parse(localStorage.getItem('未存储，未确定，待更改-RtaskInWaitting')).processInstanceId;
-      // 质检结论枚举
+    // 质检结论枚举
       // ["01": "初审一般差错",
       // "02": "初审重大差错",
       // "03": "终审一般差错",
@@ -2266,12 +2241,7 @@
       // console.log(this.propQTconclution.applyId)
       this.referPort(); //质检查询页面
       this.showdiffer();
-      // console.log(this.regularInfo)
-      // this.InitialInfo();
-      // this.getTelAlipay('06')//电话征信-支付宝+电话核实接口
       this.Social(); //社保公积金接口
-      // this.Alipay = this.AlipayCus //初始状态取客户信息的支付宝数据-----带更改（解决异步数据不确定顺序问题）
-
     }
   }
 

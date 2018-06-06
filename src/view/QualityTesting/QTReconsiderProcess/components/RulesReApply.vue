@@ -67,7 +67,7 @@
               <li>
                 <p class="description" style="position:relative;;">
                   <label>复议说明： </label>
-                    <span class="area">{{fraudAuditOpinion.auditDesc}} </span>
+                    <span class="area">{{auditDesc.reviewRemark}} </span>
                 </p>
               </li>
               <li class="ApplyInf">
@@ -106,9 +106,9 @@
         applyInfoPool: {
           // applySubno: '',
         },
-        fraudAuditOpinion: {
-          auditDesc: '',
-        }
+        auditDesc:{
+            reviewRemark:''
+        },
       }
     },
     props: ['propReApply','applyId'],
@@ -124,20 +124,31 @@
         })
       },
       getInf() { //查询页面信息
-        this.get('/insReconApply/queryInsConclusionInfo', {
-          applyId: this.applyId
-        }).then(res => {
+       
+      
+        // this.get('/insReconApply/queryInsConclusionInfo', {
+        //   applyId: this.applyId
+        // }
+         this.get('/insReconApply/queryInsConclusionInfo?applyId='+this.applyId+"&"+Math.random())
+         .then(res => {
            this.tableData=[];
           this.applyInfoPool = res.data.applyBaseInfo; //基本信息
           this.tableData.push(res.data.insConclusion); //-----------需要调接口查看返回对象，还是数组
           console.log(  this.tableData)
         })
       },
+      getDec(){//查询复议说明字段
+         this.get('/insReconApply/getReconApplyReconApproval?applyId='+this.applyId+"&"+Math.random())
+         .then(res => {
+          this.auditDesc=res.data.insReconApplyList[res.data.insReconApplyList.length-1];
+        })
+      }
     },
     mounted() {
       this.getSystermTime();
       this.reApplyInf = JSON.parse(localStorage.getItem('userInf'));
       this.getInf();
+      this.getDec();//查询复议说明字段
     }
   }
 
