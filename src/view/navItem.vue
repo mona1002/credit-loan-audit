@@ -180,7 +180,7 @@
                             localStorage.setItem("ReManagerWorkbenchPass",JSON.stringify(row));
                             localStorage.setItem("judge",JSON.stringify(judge));
                         };
-            //质检专员
+                        //质检专员
          
                         if(strs[0].split('=')[1] == "checkApp_apply" && strs[1].split('=')[1] == "07"){
                            
@@ -219,7 +219,7 @@
                             var judge ={
                                 "flag":"09"
                             };
-                            localStorage.setItem("QTManagerWorkbenchPass",JSON.stringify(row));
+                            localStorage.setItem("QTTrialSelftWorkbenchPass",JSON.stringify(row));
                             localStorage.setItem("judge",JSON.stringify(judge));
                         };
                                 //质检 初终审主管
