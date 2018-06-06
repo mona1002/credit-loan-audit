@@ -46,7 +46,7 @@
               <FMCreditForm v-if=" this.tabContent1==6">信审表</FMCreditForm>
               <RcreditInvestigation v-if=" this.tabContent1==7">实地征信</RcreditInvestigation>
               <aMAntiApplyInf v-if=" this.tabContent1==8">反欺诈结论</aMAntiApplyInf>
-              <RantiFraudInvestigation v-if=" this.tabContent1==9"> 反欺诈调查</RantiFraudInvestigation>
+              <RantiFraudInvestigation v-if=" this.tabContent1==9" :isShow='false' :applyId='tastwaitingPass.ApplyId'> 反欺诈调查</RantiFraudInvestigation>
               <RFinanceInformation v-if=" this.tabContent1==10">财务信息</RFinanceInformation>
               <!-- <RprocessTrajectory v-if=" this.tabContent1==9">流程轨迹</RprocessTrajectory> -->
               <div class='tab2_Content_show' v-if="RoleSHow=='partOne'">
@@ -114,7 +114,7 @@
             <FMCreditForm v-if=" this.tabContent2==6">信审表</FMCreditForm>
             <RcreditInvestigation v-if=" this.tabContent2==7">实地征信</RcreditInvestigation>
             <aMAntiApplyInf v-if=" this.tabContent2==8">反欺诈结论</aMAntiApplyInf>
-             <RantiFraudInvestigation v-if=" this.tabContent2==9"> 反欺诈调查</RantiFraudInvestigation>
+             <RantiFraudInvestigation v-if=" this.tabContent2==9" :isShow='false' :applyId='tastwaitingPass.ApplyId'> 反欺诈调查</RantiFraudInvestigation>
             <RFinanceInformation v-if=" this.tabContent2==10">财务信息</RFinanceInformation>
             <!-- <RprocessTrajectory v-if=" this.tabContent2==9">流程轨迹</RprocessTrajectory> -->
 
@@ -618,10 +618,6 @@
     letter-spacing: 0.1px;
     font-size: 12px;
     margin-right: 15px;
-  }
-
-  .PerDtl span:nth-of-type(7) {
-    width: 105px;
   }
 
   /* 切换按钮 */
