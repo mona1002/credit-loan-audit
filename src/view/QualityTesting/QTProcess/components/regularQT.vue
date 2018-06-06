@@ -1523,20 +1523,24 @@
             //   res.data.insTelCustInfo; //this.insTelCustInfo 是obj / 查询接口 -只返回客户本人-电话核实信息
             // !res.data.insTelCustInfo.insResult ? '' : this.insTelCustInfo.insResult = res.data.insTelCustInf.insResult; //本人拨打电话核实-默认选00           
             // 电话征信：电话拨打核实-除客户本人,保存之后清空数组重新保存最新值
-            this.insTelVerifyListCompany=[];
-            this.insTelVerifyListFamily=[];
-             this.insTelVerifyListOthers=[];
-             this.insTelVerifyListWork=[];
-            for (var k = 0; k < res.data.insTelVerifyList.length; k++) {
-              res.data.insTelVerifyList[k].insResult == '' ||  res.data.insTelVerifyList[k].insResult == null ? res.data.insTelVerifyList[k].insResult = '00' : ''; //质检结果如果没有值，默认选00 正常
-            !res.data.insTelVerifyList[k].applyId?res.data.insTelVerifyList[k].applyId = this.propQTconclution.applyId : ''; //质检结果如果没有值，默认选00 正常
-           res.data.insTelVerifyList[k].telType == '02' ? this.insTelVerifyListCompany.push(res.data.insTelVerifyList[
-                k]) : ''; //单位电话
-              res.data.insTelVerifyList[k].telType == '03' ? this.insTelVerifyListFamily.push(res.data.insTelVerifyList[
-                k]) : ''; //家庭联系人
-              res.data.insTelVerifyList[k].telType == '04' ? this.insTelVerifyListOthers.push(res.data.insTelVerifyList[
-                k]) : ''; //其他联系人
-              res.data.insTelVerifyList[k].telType == '05' ? this.insTelVerifyListWork.push(res.data[k]) : ''; //工作证明
+            this.insTelVerifyListCompany = [];
+            this.insTelVerifyListFamily = [];
+            this.insTelVerifyListOthers = [];
+            this.insTelVerifyListWork = [];
+            if (res.data.insTelVerifyList) {
+              for (var k = 0; k < res.data.insTelVerifyList.length; k++) {
+                res.data.insTelVerifyList[k].insResult == '' || res.data.insTelVerifyList[k].insResult == null ?
+                  res.data.insTelVerifyList[k].insResult = '00' : ''; //质检结果如果没有值，默认选00 正常
+                !res.data.insTelVerifyList[k].applyId ? res.data.insTelVerifyList[k].applyId = this.propQTconclution
+                  .applyId : ''; //质检结果如果没有值，默认选00 正常
+                res.data.insTelVerifyList[k].telType == '02' ? this.insTelVerifyListCompany.push(res.data.insTelVerifyList[
+                  k]) : ''; //单位电话
+                res.data.insTelVerifyList[k].telType == '03' ? this.insTelVerifyListFamily.push(res.data.insTelVerifyList[
+                  k]) : ''; //家庭联系人
+                res.data.insTelVerifyList[k].telType == '04' ? this.insTelVerifyListOthers.push(res.data.insTelVerifyList[
+                  k]) : ''; //其他联系人
+                res.data.insTelVerifyList[k].telType == '05' ? this.insTelVerifyListWork.push(res.data[k]) : ''; //工作证明
+              }
             }
             // 电话征信：微信/支付宝核实  ----  单位电话无微信支付宝--- -Array  (专员进来为空，提交/保存之后八条都会返回)
             for (var k = 0; k < res.data.insWechatAlipayList.length; k++) {
@@ -1877,16 +1881,17 @@
             // this.insConclusion[i].checkType == '01' && this.insConclusion[i].id ? this.insConclusion[i].id = '' : this.insConclusion[
             //   i].id; //主管首次保存或提交id设置为空
           }
-          // insResultTxt  入参去掉微信支付宝显示汉字字段
-          // for (var k = 0; k < this.AlipayConcat.length; k++) {
-          //   console.log(this.AlipayConcat)
-          //   console.log(111, this.AlipayConcat[k])
-          //   this.AlipayConcat[k].insResultTxt = null;
-          // }
+          // insResultTxt  更改微信支付宝显示汉字字段
+          for (var k = 0; k < this.AlipayConcat.length; k++) {
+            console.log(this.AlipayConcat)
+            console.log(111, this.AlipayConcat[k])
+            this.AlipayConcat[k].insResult === '01' ? this.AlipayConcat[k].insResultTxt = '异常' : this.AlipayConcat[k].insResultTxt =
+              '正常';
+          }
           this.SaveInfParams = { //入参
             applyId: this.propQTconclution.applyId,
-            checkType:this.propQTconclution.pageType == 'checkApp_apply'?'01':'02',//专员  01:初检，02：终检
-            isSubmit:type == '提交'?'1':'0',
+            checkType: this.propQTconclution.pageType == 'checkApp_apply' ? '01' : '02', //专员  01:初检，02：终检
+            isSubmit: type == '提交' ? '1' : '0',
             taskId: this.propQTconclution.tastwaitingPass.taskId,
             applyBaseInfo: this.baseInfo, //基础信息
             insConclusionList: this.insConclusion, //质检结论页-质检结论
@@ -2296,8 +2301,8 @@
   }
 
   .regularQT tr:nth-of-type(1) {
-     height: 50px;
-     vertical-align: middle;
+    height: 50px;
+    vertical-align: middle;
   }
 
   .regularQT td,

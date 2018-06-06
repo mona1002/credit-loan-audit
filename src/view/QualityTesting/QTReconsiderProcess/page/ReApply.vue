@@ -51,7 +51,7 @@
           </template>
           <div class="AntiInf">
             <el-table :data="tableData" border style="width: 100%">
-              <el-table-column label='质检结果' prop="checkResult" width="120"></el-table-column>
+              <el-table-column label='质检结果' prop="checkResultTxt" width="120"></el-table-column>
               <el-table-column label='差错类型' prop="errorType" width="150"></el-table-column>
               <el-table-column label='差错描述' prop="errorDescribe" width="150"></el-table-column>
               <el-table-column label='备注' prop="remark"></el-table-column>
