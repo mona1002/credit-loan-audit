@@ -8,34 +8,34 @@
           <span class="headFont">基本信息</span>
         </template>
         <div class="baseInf">
-          <ul>
-            <li>
-              <p>
-                <label>进件编号： </label>
-                <span>{{this.conclu.applySubno}} </span>
-              </p>
-              <p>
-                <label>证件号码： </label>
-                <span>{{this.conclu.applySubno}} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label>客户名称： </label>
-                <span>{{this.conclu.custName}} </span>
-              </p>
-              <p>
-                <label>移动电话： </label>
-                <span>{{this.conclu.applySubno}} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label>证件类型： </label>
-                <span>{{this.conclu.certType}} </span>
-              </p>
-            </li>
-          </ul>
+          <!-- <ul>
+            <li> -->
+          <p>
+            <label>进件编号： </label>
+            <span>{{applyInfoPool.applySubno}} </span>
+          </p>
+          <p>
+            <label>证件号码： </label>
+            <span>{{applyInfoPool.certCode}} </span>
+          </p>
+          <!-- </li>
+            <li> -->
+          <p>
+            <label>客户名称： </label>
+            <span>{{applyInfoPool.custName}} </span>
+          </p>
+          <p>
+            <label>移动电话： </label>
+            <span>{{applyInfoPool.mobile}} </span>
+          </p>
+          <!-- </li>
+            <li> -->
+          <p>
+            <label>证件类型： </label>
+            <span>{{applyInfoPool.certTypeTxt}} </span>
+          </p>
+          <!-- </li>
+          </ul> -->
         </div>
       </el-collapse-item>
       <el-collapse-item name="2">
@@ -48,31 +48,31 @@
             <li>
               <p>
                 <label>借欺诈申请类型主原因： </label>
-                <span>{{this.conclu.certType}} </span>
+                <span>{{fraudApplyInfo.mainreaName}} </span>
               </p>
               <p>
                 <label>子原因： </label>
-                <span>{{this.conclu.certType}} </span>
+                <span>{{fraudApplyInfo.subreaName}} </span>
               </p>
             </li>
             <li>
               <p class="description">
                 <label>欺诈上报描述：</label>
-                <span class="textA"> </span>
+                <span class="textA">{{fraudApplyInfo.applyDesc}} </span>
               </p>
             </li>
             <li>
               <p>
                 <label>反欺诈申请人： </label>
-                <span>{{this.conclu.certType}} </span>
+                <span>{{fraudApplyInfo.applyPersonName}} </span>
               </p>
               <p>
                 <label>反欺诈申请日期： </label>
-                <span>{{this.conclu.certType}} </span>
+                <span>{{fraudApplyInfo.appDate}} </span>
               </p>
               <p>
                 <label>反欺诈申请机构： </label>
-                <span>{{this.conclu.certType}} </span>
+                <span>{{fraudApplyInfo.appOrgName}} </span>
               </p>
             </li>
           </ul>
@@ -88,7 +88,7 @@
             <li>
               <p class="description">
                 <label>反欺诈决策反馈： </label>
-                <span class="textA"> </span>
+                <span class="textA">{{fraudAuditOpinion.auditDesc}} </span>
               </p>
             </li>
           </ul>
@@ -104,19 +104,35 @@
         activeNames: ['1', '2', '3'],
         conclu: '',
         MatchInf: '',
+        MatchFlag: '',
+        applyInfoPool: '',
+        fraudApplyInfo: '',
+        fraudAuditOpinion: '',
       }
     },
     mounted() {
-      this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //反欺诈专员-匹配查看 + 主管
+      this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) //初审-匹配查看
+      this.MatchInf = JSON.parse(localStorage.getItem("internalObj"));
+      if (this.MatchFlag.MatchFlag == 'internal') { //反欺诈专员-匹配查看 + 主管
+        this.MatchInf = JSON.parse(localStorage.getItem('internalObj'));
+      } else if (this.MatchFlag.MatchFlag == 'Query') {
+        this.MatchInf = JSON.parse(localStorage.getItem("Query")) //初审-匹配查看
+      } else if (this.MatchFlag.MatchFlag == 'QT') {
+        this.MatchInf = JSON.parse(localStorage.getItem("QT")) //综合查询
+      }
+
       this.post("/fraudApplyInfoController/getRecentFraudApplyInfoWithOpinion", {
         applyId: this.MatchInf.matchApplyId,
       }).then(res => {
         if (res.statusCode == 200) {
-          this.ConclutionInf = res.data.recordList;
+          this.applyInfoPool = res.data.applyInfoPool; //基本信息
+          this.fraudApplyInfo = res.data.fraudApplyInfo; //反欺诈申请信息
+          this.fraudAuditOpinion = res.data.fraudAuditOpinion; //反欺诈结论
         } else {
           this.$message.error(res.msg);
         }
       });
+
     },
   }
 
@@ -148,12 +164,18 @@
     margin: 10px 0;
   }
 
-  .baseInf li p,
   .AntiInf li:nth-of-type(1) p,
   .AntiInf li:nth-of-type(3) p {
     width: 33.3%;
     float: left;
     margin: 10px 0;
+  }
+
+  .baseInf p {
+    width: 33%;
+    float: left;
+    height: 20px;
+    margin-bottom: 5px;
   }
 
   .aAntiApplyInf label {
