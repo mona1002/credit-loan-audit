@@ -265,10 +265,7 @@
             <li>
               <p>
                 <label class="InternetInf_left_label "> 职位级别： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.workPost==null||this.FormData.workPost==''" :content="this.FormData.workPost"
-                  placement="top-start">
                   <span class="detail_inf elips">{{this.FormData.workPost }} </span>
-                </el-tooltip>
               </p>
               <p>
                 <label class="InternetInf_right_label">单位电话：</label>
@@ -636,38 +633,23 @@
           <ul>
             <li class="top">
               <label class="InternetInf_left_label ">住址电话调查结论：</label>
-              <el-tooltip class="item" effect="dark" :disabled="this.FormData.hometelConclusion==null||this.FormData.hometelConclusion==''"
-                :content="this.FormData.hometelConclusion" placement="top-start">
                 <span class="detail_inf ComAddr">{{this.FormData.hometelConclusion }} </span>
-              </el-tooltip>
             </li>
             <li>
               <label class="InternetInf_left_label">单位电话调查结论：</label>
-              <el-tooltip class="item" effect="dark" :disabled="this.FormData.companyConclusion==null||this.FormData.companyConclusion==''"
-                :content="this.FormData.companyConclusion" placement="top-start">
                 <span class="detail_inf ComAddr">{{this.FormData.companyConclusion }} </span>
-              </el-tooltip>
             </li>
             <li>
               <label class="InternetInf_left_label">家庭联系人调查结论：</label>
-              <el-tooltip class="item" effect="dark" :disabled="this.FormData.fContractConclusion==null||this.FormData.fContractConclusion==''"
-                :content="this.FormData.fContractConclusion" placement="top-start">
                 <span class="detail_inf ComAddr">{{this.FormData.fContractConclusion }} </span>
-              </el-tooltip>
             </li>
             <li>
               <label class="InternetInf_left_label">紧急联系人调查结论：</label>
-              <el-tooltip class="item" effect="dark" :disabled="this.FormData.eContractConclusion==null||this.FormData.eContractConclusion==''"
-                :content="this.FormData.eContractConclusion" placement="top-start">
                 <span class="detail_inf ComAddr">{{this.FormData.eContractConclusion }} </span>
-              </el-tooltip>
             </li>
             <li class="bottom">
               <label class="InternetInf_left_label">工作证明人调查结论：</label>
-              <el-tooltip class="item" effect="dark" :disabled="this.FormData.jobRefConclusion==null||this.FormData.jobRefConclusion==''"
-                :content="this.FormData.jobRefConclusion" placement="top-start">
                 <span class="detail_inf ComAddr">{{this.FormData.jobRefConclusion }} </span>
-              </el-tooltip>
             </li>
           </ul>
         </div>
@@ -700,17 +682,11 @@
           <ul>
             <li style="width:66.6%;">
               <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
-              <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==null||this.FormData.oother==''" :content="this.FormData.oother"
-                placement="top-start">
                 <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
-              </el-tooltip>
             </li>
             <li style="marginTop:20px;width:66.6%;">
               <p class="InternetInf_left_label" style="textAlign:right">终审结果评价：</p>
-              <el-tooltip class="item" effect="dark" :disabled="this.FormData.ootherfinal==null||this.FormData.ootherfinal==''" :content="this.FormData.ootherfinal"
-                placement="top-start">
                 <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.ootherfinal}} </span>
-              </el-tooltip>
             </li>
           </ul>
         </div>

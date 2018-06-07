@@ -199,9 +199,7 @@
 				<ul>
 					<li class="province" style="width:66.6%">
 						<label class="ellipsis">户口所在地：</label>
-						<el-tooltip class="item" effect="dark" :content="accepCusBasicInfo.homeDetailAddr" :disabled="accepCusBasicInfo.homeDetailAddr==null" placement="top-start">
 					      <div class="textBox">{{accepCusBasicInfo.homeDetailAddr}}</div>
-					    </el-tooltip>
 					</li>
 					<!-- <li>
 						<label>户口所在地邮编：</label>
@@ -215,10 +213,7 @@
 				<ul>
 					<li class="province" style="width:66.6%">
 						<label class="ellipsis">现住宅地址：</label>
-						<el-tooltip class="item" effect="dark" :content="accepCusBasicInfo.liveAddr" :disabled="accepCusBasicInfo.liveAddr==null" placement="top-start">
 					      <div class="textBox">{{accepCusBasicInfo.liveAddr}}</div>
-					    </el-tooltip>
-						
 					</li>
 					<!-- <li>
 						<label>住宅地邮编：</label>
@@ -240,17 +235,13 @@
 				<ul class="illustration">
 					<li>
 						<label>收入来源：</label>
-						<el-tooltip class="item" effect="dark" :content="accepCusBasicInfo.incomeSource" :disabled="accepCusBasicInfo.incomeSource==null" placement="top-start">
 					      <div>{{accepCusBasicInfo.incomeSource}}</div>
-					    </el-tooltip>
 					</li>
 				</ul>
 				<ul class="illustration">
 					<li>
 						<label>其他收入：</label>
-						<el-tooltip class="item" effect="dark" :content="accepCusBasicInfo.otherIncome" :disabled="accepCusBasicInfo.otherIncome==null" placement="top-start">
 					      <div>{{accepCusBasicInfo.otherIncome}}</div>
-					    </el-tooltip>
 					</li>
 				</ul>
 				<ul>
@@ -742,9 +733,7 @@
 				<ul class="firstUl">
 					<li style="width:66.6%;">
 						<label class="ellipsis">工作单位：</label>
-					    <el-tooltip class="item" effect="dark" :content="accepCusWorkInfo.workName" :disabled="accepCusWorkInfo.workName==null" placement="top-start">
 					      <div class="textBox">{{accepCusWorkInfo.workName}}</div>
-					    </el-tooltip>
 					</li>
 					<li>
 						<label>单位性质：</label>
@@ -758,9 +747,7 @@
 						<span class="spans">{{accepCusWorkInfo.workCityName}}</span>
 						<span class="spans">{{accepCusWorkInfo.workCountyName}}</span>
 						<span>{{accepCusWorkInfo.workAddress}}</span> -->
-						<el-tooltip class="item" effect="dark" :content="accepCusWorkInfo.workAddr" :disabled="accepCusWorkInfo.workAddr==null" placement="top-start">
 					      <div class="textBox">{{accepCusWorkInfo.workAddr}}</div>
-					    </el-tooltip>
 					</li>
 					<li>
 						<label>单位地址邮编：</label>

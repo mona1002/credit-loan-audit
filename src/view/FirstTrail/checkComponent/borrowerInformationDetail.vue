@@ -454,9 +454,7 @@
 				    	</li>
 				    	<li>
 				    		<label>文字说明：</label>
-				    		<el-tooltip class="item" effect="dark" :content="borDebt.remark" :disabled="borDebt.remark=='' || borDebt.remark== null" placement="top">
 						      <div>{{borDebt.remark}}</div>
-						    </el-tooltip>
 				    	</li>
 				    </ol>
 		  		</div> 

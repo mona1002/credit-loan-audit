@@ -161,11 +161,9 @@
         </el-tooltip>
         <el-form-item label="" class="item-column2 item-column3-2-normal" v-show="familyData.otherIncome!='00'">
         </el-form-item>
-        <el-tooltip class="item" effect="dark" :content="familyData.conclusion" placement="top">
           <el-form-item label="调查结果：" class="item-column1 ">
             {{familyData.conclusion}}
           </el-form-item>
-        </el-tooltip>
       </div>
     </el-form>
   </div>

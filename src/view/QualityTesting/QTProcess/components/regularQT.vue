@@ -461,105 +461,8 @@
                 </template>
               </el-table-column>
             </el-table>
-            <!-- 客户本人 -->
-            <!-- <el-table :data="AlipayCus" border style="width: 100%" v-show="ind===0">
-              <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
-              <el-table-column label="核实类型" prop='insVerifyTypeTxt' align="left" width="180">
-              </el-table-column>
-              <el-table-column label="核实结论" align="center" width="180">
-                <template slot-scope="scope">
-                  <div slot="reference" class="name-wrapper">
-                    <b class="required_Red"> * </b>
-                    <el-radio-group :disabled='PhoneCredit' v-model="scope.row.insResult" @change="scope.row.insResult=='00'?scope.row.remark='':scope.row.remark">
-                      <el-radio label="00">正常</el-radio>
-                      <el-radio label="01">异常</el-radio>
-                    </el-radio-group>
-                  </div>
-                </template>
-              </el-table-column>
-              <el-table-column label="备注" align="center">
-                <template slot-scope="scope">
-                  <el-input type="textarea" :disabled='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model="scope.row.remark"
-                    :maxlength="this.textareaL" placeholder="请输入内容">
-                  </el-input>
-                  {{scope.row.insResult}}
-                </template>
-              </el-table-column>
-            </el-table> -->
-            <!-- 家庭联系人 -->
-            <!-- <el-table :data="AlipayFamily" border style="width: 100%" v-show="ind===2">
-              <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
-              <el-table-column label="核实类型" prop='insVerifyTypeTxt' align="left" width="180">
-              </el-table-column>
-              <el-table-column label="核实结论" align="center" width="180">
-                <template slot-scope="scope">
-                  <div slot="reference" class="name-wrapper">
-                    <b class="required_Red"> * </b>
-                    <el-radio-group :disabled='PhoneCredit' v-model="scope.row.insResult" @change="scope.row.insResult=='00'?scope.row.remark='':scope.row.remark">
-                      <el-radio label="00">正常</el-radio>
-                      <el-radio label="01">异常</el-radio>
-                    </el-radio-group>
-                  </div>
-                </template>
-              </el-table-column>
-              <el-table-column label="备注" align="center">
-                <template slot-scope="scope">
-                  <el-input type="textarea" :disabled='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model="scope.row.remark"
-                    :maxlength="this.textareaL" placeholder="请输入内容">
-                  </el-input>
-                </template>
-              </el-table-column>
-            </el-table> -->
-            <!-- 工作证明人 -->
-            <!-- <el-table :data="AlipayWork" border style="width: 100%" v-show="ind===3">
-              <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
-              <el-table-column label="核实类型" prop='insVerifyTypeTxt' align="left" width="180">
-              </el-table-column>
-              <el-table-column label="核实结论" align="center" width="180">
-                <template slot-scope="scope">
-                  <div slot="reference" class="name-wrapper">
-                    <b class="required_Red"> * </b>
-                    <el-radio-group :disabled='PhoneCredit' v-model="scope.row.insResult" @change="scope.row.insResult=='00'?scope.row.remark='':scope.row.remark">
-                      <el-radio label="00">正常</el-radio>
-                      <el-radio label="01">异常</el-radio>
-                    </el-radio-group>
-                  </div>
-                </template>
-              </el-table-column>
-              <el-table-column label="备注" align="center">
-                <template slot-scope="scope">
-                  <el-input type="textarea" :disabled='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model="scope.row.remark"
-                    :maxlength="this.textareaL" placeholder="请输入内容">
-                  </el-input>
-                </template>
-              </el-table-column>
-            </el-table> -->
-            <!-- 其他联系人 -->
-            <!-- <el-table :data="AlipayOthers" border style="width: 100%" v-show="ind===4">
-              <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
-              <el-table-column label="核实类型" prop='insVerifyTypeTxt' align="left" width="180">
-              </el-table-column>
-              <el-table-column label="核实结论" align="center" width="180">
-                <template slot-scope="scope">
-                  <div slot="reference" class="name-wrapper">
-                    <b class="required_Red"> * </b>
-                    <el-radio-group :disabled='PhoneCredit' v-model="scope.row.insResult" @change="scope.row.insResult=='00'?scope.row.remark='':scope.row.remark">
-                      <el-radio label="00">正常</el-radio>
-                      <el-radio label="01">异常</el-radio>
-                    </el-radio-group>
-                  </div>
-                </template>
-              </el-table-column>
-              <el-table-column label="备注" align="center">
-                <template slot-scope="scope">
-                  <el-input type="textarea" :disabled='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model="scope.row.remark"
-                    :maxlength="this.textareaL" placeholder="请输入内容">
-                  </el-input>
-                </template>
-              </el-table-column>
-            </el-table> -->
           </div>
-          <!-- call-content 客户本人中-电话拨打核实  -->
+          <!-- 客户本人中-电话拨打核实  -->
           <div v-show="custom">
             <!-- <p class="P_title">电话拨打核实</p> -->
             <p style='clear:both;padding:3px 0;'>
@@ -605,9 +508,8 @@
             </table>
             <!-- ====================== -->
           </div>
-          <!-- others-content 除客户本人的 电话拨打核实-->
+          <!--  除客户本人的 电话拨打核实-->
           <div v-show="this.others">
-            <!-- <p class="P_title">电话拨打核实</p> -->
             <p style='clear:both;padding:3px 0;'>
               <el-tag>电话拨打核实</el-tag>
             </p>
@@ -672,12 +574,7 @@
             </el-table-column>
             <el-table-column prop="reconDate" width="180" label="复议申请日期">
             </el-table-column>
-            <el-table-column label="复议说明" min-width="580">
-              <template slot-scope="scope">
-                <el-tooltip  effect="dark" :content="scope.row.reviewRemark"  v-show='scope.row.reviewRemark' placement="top-start">
-                    <span> {{ scope.row.reviewRemark }}</span>
-                </el-tooltip>
-              </template>
+            <el-table-column prop="reviewRemark" label="复议说明" min-width="580">
             </el-table-column>
           </el-table>
         </div>
@@ -696,12 +593,7 @@
             </el-table-column>
             <el-table-column prop="reconDate" width="180" label="发起复议时间">
             </el-table-column>
-            <el-table-column label="复议说明" min-width="580">
-              <template slot-scope="scope">
-                <el-tooltip  effect="dark" :content="scope.row.reviewRemark"  v-show='scope.row.reviewRemark' placement="top-start">
-                    <span> {{ scope.row.reviewRemark }}</span>
-                </el-tooltip>
-              </template>
+            <el-table-column prop="reviewRemark" label="复议说明" min-width="580">
             </el-table-column>
           </el-table>
         </div>
@@ -724,12 +616,7 @@
             </el-table-column>
             <el-table-column prop="approverDate" width="180" label="审批时间">
             </el-table-column>
-            <el-table-column label="复议说明" min-width="580">
-              <template slot-scope="scope">
-                <el-tooltip  effect="dark" :content="scope.row.reviewRemark" v-show='scope.row.reviewRemark' placement="top-start">      
-                    <span> {{ scope.row.reviewRemark }}</span>
-                </el-tooltip>
-              </template>
+            <el-table-column prop="reviewRemark" label="复议说明" min-width="580">
             </el-table-column>
           </el-table>
         </div>
@@ -748,12 +635,7 @@
             </el-table-column>
             <el-table-column prop="reconDate" width="180" label="发起复议时间">
             </el-table-column>
-            <el-table-column label="复议说明" min-width="580">
-              <template slot-scope="scope">
-                <el-tooltip  effect="dark" :content="scope.row.reviewRemark"  v-show='scope.row.reviewRemark' placement="top-start">
-                    <span> {{ scope.row.reviewRemark }}</span>
-                </el-tooltip>
-              </template>
+            <el-table-column prop="reviewRemark" label="复议说明" min-width="580">
             </el-table-column>
           </el-table>
         </div>

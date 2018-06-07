@@ -244,11 +244,7 @@
             <li>
               <p>
                 <label class="InternetInf_left_label "> 职位级别： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.workPost==null||this.FormData.workPost==''" :content="this.FormData.workPost"
-                  placement="top-start">
-                  <!-- ComAddr -->
                   <span class="detail_inf elips">{{this.FormData.workPost }} </span>
-                </el-tooltip>
               </p>
               <p>
                 <label class="InternetInf_right_label">单位电话：</label>
@@ -617,9 +613,7 @@
         <div class=" CreditForm_result up_padding">
           <div style="width:66.6%;" class="bottom">
             <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
-            <el-tooltip class="item" effect="dark" :disabled="this.FormData.oother==''" :content="this.FormData.oother" placement="top-start">
               <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
-            </el-tooltip>
           </div>
         </div>
       </el-collapse-item>

@@ -121,11 +121,9 @@
         <!-- <el-form-item label="调查结果：" class="item-column1">
           {{hurryData.conclusion}}
         </el-form-item> -->
-        <el-tooltip class="item" effect="dark" :content="hurryData.conclusion" placement="top">
           <el-form-item label="调查结果：" class="item-column1">
             {{hurryData.conclusion}}
           </el-form-item>
-        </el-tooltip>
       </div>
     </el-form>
   </div>
