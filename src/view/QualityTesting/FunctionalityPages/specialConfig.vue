@@ -8,12 +8,9 @@
         <ul>
           <li>
             <p>
-              <!-- <label> 审批结论时间 </label>
+              <label> 审批结论时间 </label>
               <el-date-picker v-model="ploanDate"  value-format="yyyy-MM-dd"  type="daterange" range-separator="至" start-placeholder="开始日期"
                 end-placeholder="结束日期">
-              </el-date-picker> -->
-              <label> 本环节处理时间</label>
-              <el-date-picker v-model="ploanDate" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
               </el-date-picker>
             </p>
             <p>
@@ -33,12 +30,6 @@
           <li>
             <p>
               <label> 产品名称</label>
-              <!-- <el-select v-model="value6" placeholder="请选择">
-                <el-option v-for="item in cities" :key="item.value" :label="item.label" :value="item.value">
-                  <span style="float: left">{{ item.label }}</span>
-                  <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value }}</span>
-                </el-option>
-              </el-select> -->
               <el-select v-model="params.proCodes" multiple placeholder="请选择">
                 <el-option v-for="item in production" :key="item.code" :label="item.name" :value="item.code">
                   <span style="float: left">{{ item.name }}</span>
@@ -108,9 +99,9 @@
           </el-table-column>
           <el-table-column prop="busiStateTxt" label="业务状态" align='center' min-width="180">
           </el-table-column>
-          <el-table-column prop="mainReasonName" label="拒绝主原因" align='center' min-width="120">
+          <el-table-column prop="mainReasonName" label="拒绝主原因" align='center' min-width="220">
           </el-table-column>
-          <el-table-column prop="subReasonName" label="拒绝子原因" align='center' min-width="100">
+          <el-table-column prop="subReasonName" label="拒绝子原因" align='center' min-width="160">
           </el-table-column>
         </el-table>
         <!-- 分页  -->
@@ -137,7 +128,6 @@
   export default {
     data() {
       return {
-        // ploanDate: ['', ''],
         Confirm: false,
         loadsitu: false,
         adbtn: '确定',
@@ -175,31 +165,12 @@
         QTtime: '',
         currentPage: 1, //分页选中页
         pageCount: 10, // 每页显示条数
-        // RresetParams: {
-        //   // pageParam: {
-        //   //   pageNum: 1, //当前页
-        //   //   pageSize: 10, //每页的显示数量
-        //   // },
-        //   ploanDateBegin: '', //审批结论开始时间
-        //   ploanDateEnd: '', //审批结论结束时间
-        //   operOrgCodes: '', //	进件机构
-        //   userCode: '', //	初终审编号
-        //   proCodes: '', //	产品
-        //   busiState: '', //	业务状态
-        //   mainReasonIds: '', //	拒绝主原因
-        //   subReasonIds: '', //	拒绝子原因
-        // },
         totalRecord: 0, //总条数
         busiStateSelect: [],
       }
     },
     methods: {
-      DateF(val) {
-        val ? val = val.getFullYear() + '-' + (val.getMonth() + 1) + '-' + val.getDate() : '';
-        return val;
-      },
       apportion() { //分配 按钮弹窗
-        console.log('apportion')
         this.Confirm = true;
         this.loadsitu = false;
         this.adbtn = '确定';
@@ -222,25 +193,6 @@
           }
         });
       },
-      // getProducts() { //查询产品接口
-      //   this.post("/credit/productAll").then(res => {
-      //     if (res.statusCode == 200) {
-      //       this.production = res.data;
-      //     } else {
-      //       this.$message.error(res.msg);
-      //     }
-      //   })
-      // },
-      //基础接口-4.获取业务状态
-      // getBusiState() {
-      //   this.get("/system/getAllBusiState?" + Math.random()).then(res => {
-      //     if (res.statusCode == 200) {
-      //       this.busiStateSelect = res.data
-      //     } else {
-      //       this.$message.error(res.msg);
-      //     }
-      //   });
-      // },
       Rreset() { // 重置
         this.params.ploanDateBegin = ''; //审批结论开始时间
         this.params.ploanDateEnd = ''; //审批结论结束时间
@@ -254,31 +206,11 @@
         this.inquire(this.params);
       },
       Rsearch() { // 查询
-        //   params: {
-        //  ploanDateBegin: '', //审批结论开始时间
-        //   ploanDateEnd: '', //审批结论结束时间
-        //   operOrgCodes: '', //	进件机构       多选
-        //   userCode: '', //	初终审编号
-        //   proCodes: '', //	产品          多选
-        //   busiState: '', //	业务状态     
-        //   mainReasonIds: '', //	拒绝主原因      多选
-        //   subReasonIds: '', //	拒绝子原因      多选
-        // },
-        // this.params.pageParam.pageNum = this.currentPage = 1;        
-        console.log(this.params)
-    //    this.ploanDate[0]? this.params.ploanDateBegin = this.ploanDate[0]: this.params.ploanDateBegin = '';
-    //  this.ploanDate[1]?   this.params.ploanDateEnd = this.ploanDate[1]:  this.params.ploanDateEnd = '';
-       this.ploanDate[0]? this.params.ploanDateBegin = this.DateF(this.ploanDate[0]): this.params.ploanDateBegin = '';
-     this.ploanDate[1]?   this.params.ploanDateEnd = this.DateF(this.ploanDate[0]):  this.params.ploanDateEnd = '';
-        console.log(typeof(this.params.ploanDateBegin))
-        console.log(typeof(this.params.ploanDateEnd))
-        console.log(typeof (this.params.ploanDateBegin))
-        console.log(typeof (this.params.ploanDateEnd))
+       this.ploanDate[0]? this.params.ploanDateBegin = this.ploanDate[0]: this.params.ploanDateBegin = '';
+     this.ploanDate[1]?   this.params.ploanDateEnd = this.ploanDate[1]:  this.params.ploanDateEnd = '';
         this.inquire(this.params);
-        
       },
       inquire(pam) { //查询列表     质检-复议结果查询功能
-        console.log(pam)
         this.post("/insTask/getSpecialInsTaskList", pam).then(res => {
           if (res.statusCode == 200) {
             this.tableData = res.data;
@@ -302,7 +234,6 @@
         });
       },
       selectSubRea(id) { //查询子原因
-        console.log(id)
         this.get("/credit/findNodeFirstChildren", {
           id: id
         }).then(res => {
@@ -315,19 +246,8 @@
         });
       },
       handleSelectionChange(val) {
-        // console.log(val)
         this.allotParams.list = val;
       },
-      // ------------------分页---------------------
-      // handleSizeChange(val) {
-      //   this.params.pageParam.pageSize = val;
-      //   this.inquire(this.params);
-      // },
-      // handlePageChange(val) {
-      //   this.params.pageParam.pageNum = val;
-      //   this.inquire(this.params);
-      // },
-      // ----------------------------------
     },
     mounted() {
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
