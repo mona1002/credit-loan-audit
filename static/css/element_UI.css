@@ -2879,7 +2879,9 @@ body .el-submenu .el-menu-item {
 .regularQT .alertBox .el-button--primary {
   color: #ffffff;
 }
-
+.regularQT .el-radio__input.is-disabled.is-checked .el-radio__inner::after{
+  background-color: #80848c;
+}
 .ReApply .AntiInf .el-collapse-item__wrap {
   /* background: green; */
 }
