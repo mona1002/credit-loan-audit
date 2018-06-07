@@ -108,7 +108,7 @@
     },
     mounted() {
       this.MatchInf = JSON.parse(localStorage.getItem("internalObj")); //反欺诈专员-匹配查看 + 主管
-      this.post("/creauditOpinion/queryByPage", {
+      this.post("/fraudApplyInfoController/getRecentFraudApplyInfoWithOpinion", {
         applyId: this.MatchInf.matchApplyId,
       }).then(res => {
         if (res.statusCode == 200) {
