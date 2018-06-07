@@ -9,7 +9,7 @@
           <li>
             <p>
               <label> 审批结论时间 </label>
-              <el-date-picker v-model="ploanDate"  value-format="yyyy-MM-dd"  type="daterange" range-separator="至" start-placeholder="开始日期"
+              <el-date-picker v-model="ploanDate" value-format="yyyy-MM-dd" type="daterange" range-separator="至" start-placeholder="开始日期"
                 end-placeholder="结束日期">
               </el-date-picker>
             </p>
@@ -60,6 +60,7 @@
                 </el-option>
               </el-select>
             </p>
+            <p>
             </p>
             <p class="btn_wrap">
               <el-button class="btn" type="primary" style="marginLeft:228px" @click="Rsearch">查询</el-button>
@@ -78,7 +79,7 @@
       </div>
       <div class="table_wrap">
         <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" height="100%" @selection-change="handleSelectionChange" border>
+        <el-table :data="tableData" style="width: 100%" @selection-change="handleSelectionChange" border>
           <el-table-column type="selection" align='center' width="55">
           </el-table-column>
           <el-table-column type="index" align='center' label=序号 width="55">
@@ -198,16 +199,22 @@
         this.params.ploanDateEnd = ''; //审批结论结束时间
         this.params.operOrgCodes = []; //	进件机构       多选
         this.params.userCode = ''; //	初终审编号
-        this.params.proCodes =[]; //	产品          多选
+        this.params.proCodes = []; //	产品          多选
         this.params.busiState = ''; //	业务状态     
         this.params.mainReasonIds = ''; //	拒绝主原因     
-        this.params.subReasonIds = [];//	拒绝子原因      多选
+        this.params.subReasonIds = []; //	拒绝子原因      多选
+        this.secondReason = []; //	拒绝子原因     下拉内容
+
         this.ploanDate = ''; //审批结论时间数组
-        this.inquire(this.params);
       },
       Rsearch() { // 查询
-       this.ploanDate[0]? this.params.ploanDateBegin = this.ploanDate[0]: this.params.ploanDateBegin = '';
-     this.ploanDate[1]?   this.params.ploanDateEnd = this.ploanDate[1]:  this.params.ploanDateEnd = '';
+        if (this.ploanDate == '' && this.params.operOrgCodes == '' && this.params.userCode == '' && this.params.proCodes ==
+          '' && this.params.busiState == '' && this.params.mainReasonIds == '' && this.params.subReasonIds == '') {
+          this.$message.error('请输入查询条件')
+          return
+        }
+        this.ploanDate[0] ? this.params.ploanDateBegin = this.ploanDate[0] : this.params.ploanDateBegin = '';
+        this.ploanDate[1] ? this.params.ploanDateEnd = this.ploanDate[1] : this.params.ploanDateEnd = '';
         this.inquire(this.params);
       },
       inquire(pam) { //查询列表     质检-复议结果查询功能
@@ -370,8 +377,7 @@
     border: 1px solid #e6eaee;
     padding: 25px 25px 20px 25px;
     width: 100%;
-    /* height: calc( 100% - 370px); */
-    height: calc( 100% - 290px);
+    /* height: auto; */
   }
 
   .paging {
