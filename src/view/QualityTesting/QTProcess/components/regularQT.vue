@@ -675,12 +675,9 @@
             </el-table-column>
             <el-table-column label="复议说明" min-width="580">
               <template slot-scope="scope">
-                <el-popover trigger="hover" placement="top-start">
-                  <p>{{ scope.row.reviewRemark }}</p>
-                  <div slot="reference" class="name-wrapper">
+                <el-tooltip  effect="dark" :content="scope.row.reviewRemark"  v-show='scope.row.reviewRemark' placement="top-start">
                     <span> {{ scope.row.reviewRemark }}</span>
-                  </div>
-                </el-popover>
+                </el-tooltip>
               </template>
             </el-table-column>
           </el-table>
@@ -702,12 +699,9 @@
             </el-table-column>
             <el-table-column label="复议说明" min-width="580">
               <template slot-scope="scope">
-                <el-popover trigger="hover" placement="top-start">
-                  <p>{{ scope.row.reviewRemark }}</p>
-                  <div slot="reference" class="name-wrapper">
+                <el-tooltip  effect="dark" :content="scope.row.reviewRemark"  v-show='scope.row.reviewRemark' placement="top-start">
                     <span> {{ scope.row.reviewRemark }}</span>
-                  </div>
-                </el-popover>
+                </el-tooltip>
               </template>
             </el-table-column>
           </el-table>
@@ -733,12 +727,9 @@
             </el-table-column>
             <el-table-column label="复议说明" min-width="580">
               <template slot-scope="scope">
-                <el-popover trigger="hover" placement="top-start">
-                  <p>{{ scope.row.reviewRemark }}</p>
-                  <div slot="reference" class="name-wrapper">
+                <el-tooltip  effect="dark" :content="scope.row.reviewRemark" v-show='scope.row.reviewRemark' placement="top-start">      
                     <span> {{ scope.row.reviewRemark }}</span>
-                  </div>
-                </el-popover>
+                </el-tooltip>
               </template>
             </el-table-column>
           </el-table>
@@ -760,12 +751,9 @@
             </el-table-column>
             <el-table-column label="复议说明" min-width="580">
               <template slot-scope="scope">
-                <el-popover trigger="hover" placement="top-start">
-                  <p>{{ scope.row.reviewRemark }}</p>
-                  <div slot="reference" class="name-wrapper">
+                <el-tooltip  effect="dark" :content="scope.row.reviewRemark"  v-show='scope.row.reviewRemark' placement="top-start">
                     <span> {{ scope.row.reviewRemark }}</span>
-                  </div>
-                </el-popover>
+                </el-tooltip>
               </template>
             </el-table-column>
           </el-table>
@@ -903,18 +891,18 @@
     </div>
     <!-- 发起复议  -->
     <div class="alertBox">
-      <el-dialog title='发起复议' :visible.sync="ReconsiderShow" :modal="false" width="620px">
+      <el-dialog title='发起复议' :visible.sync="ReconsiderShow" :modal="false" width="630px">
         <div>
           <p>
-            <label>复议节点：</label>
+            <label class="reconsider_Alert_Label">复议节点：</label>
             <el-input disabled v-model="ReconsiderNode" placeholder="请选择"> </el-input>
           </p>
           <p style="margin:10px 0;">
-            <label>复议说明：</label>
+            <label class="reconsider_Alert_Label">   <b class="required_Red"> * </b>复议说明：</label>
             <el-input v-model="ReconsiderDes" style="width:500px;vertical-align:top;" type="textarea" resize='none' :rows="2"></el-input>
           </p>
           <p>
-            <span> 经办人：{{userInf. userName}}</span>
+            <span  class="reconsider_Alert_Label"> 经办人：</span><span>{{userInf. userName}}</span>
             <span style="float:right;width:280px;"> 发起复议时间：{{systermTime | dateFilter}}</span>
           </p>
         </div>
@@ -1917,6 +1905,10 @@
       // 发起复议
       ToReconsider() {
         console.log('发起复议')
+        if( this.ReconsiderDes == ''){
+           this.$message.error('复议说明不能为空！');
+          return
+        }
         this.loadSub = true;
         this.ReconSubmit = '提交中';
         console.log('reconType:',this.propQTconclution.tastwaitingPass.reconType)
@@ -1936,7 +1928,8 @@
               type: 'success',
               message: '发起复议成功！'
             })
-            this.this.ReconsiderDes = ''; //请空复议说明输入框
+            this.ReconsiderDes = ''; //请空复议说明输入框
+            this.$router.push('/ManagerTaskList?taskNodeName=checkApp_trial_manager&flag=10');
           } else {
             this.$message.error(res.msg);
           }
@@ -2355,19 +2348,9 @@
     text-align: left;
     padding-left: 20px;
   }
-
-  /* .btn {
-    width: 100px;
-    text-align: center;
-    display: inline-block;
-    border: 1px solid;
-    background: #0077ff;
-    color: white;
-    border-radius: 4px;
-  } */
-
-  /* .btn:hover {
-    cursor: pointer;
-  } */
-
+.reconsider_Alert_Label{
+  display: inline-block;
+  width:83px;
+  text-align: right;
+}
 </style>

@@ -12,7 +12,7 @@
       </el-table-column>
       <el-table-column prop="completeTime" label="任务完成时间" width="190">
       </el-table-column>
-      <el-table-column prop="approvalOpinion" label="复议结果" width="80">
+      <el-table-column prop="approvalOpinionTxt" label="复议结果" width="80">
       </el-table-column>
       <el-table-column prop="opinionExplain" label="备注" min-width="100">
       </el-table-column>
