@@ -416,7 +416,6 @@
         </div>
       </el-collapse-item>
     </el-collapse>
-    <!-- phone -->
     <!-- 电话征信 -->
     <el-collapse v-model="activeNames">
       <el-collapse-item name="4">
@@ -1042,7 +1041,7 @@
         reconTypeParams:'',//发起复议入参
         ReconsiderDes: '', //复议弹窗-复议说明
         instaskType: '', //添加质检结论入参-任务类型（00:常规质检，01:专项质检）
-        reviewConclusion: {        }, //复核结论
+        reviewConclusion: {}, //复核结论
         tablrf: [{
           insResult: '01'
         }],
@@ -1217,7 +1216,6 @@
           isInmatch: '', //内部匹配是否进行排查
           isInmatchRemark: '', //内部匹配是否进行排查说明
         }, // // 资料核实+三方信息查询+ 内部匹配核实
-        // insConclusion:'',
         // ------------------------各主管审批查询TableData---------------------------
         TrilSelfTableData: [], //初终审本人
         ManagerFirstTableData: [], //初终审主管首次
@@ -1255,8 +1253,7 @@
         telType: '06', //电话征信 电话类型入参
         activeNames: ['0', '1', "2", "3", "4", "5", "6", "7", "8", "9", '10'], //折叠面板 默认显示下标
         tabTitle: ["客户本人", '住址电话',"单位电话", "家庭联系人", "工作证明人", "其他联系人"],
-        // tab: ["客户本人", "单位电话", "家庭联系人", "工作证明人", "其他联系人"],
-        QTresult: [{
+        QTresult:[{
           value: '01',
           label: '初审一般差错'
         }, {
@@ -1269,13 +1266,26 @@
           value: '04',
           label: '终审重大差错'
         }, {
-          value: '05',
-          label: '初审建议'
-        }, {
-          value: '06',
-          label: '终审建议'
+          value: '10',
+          label: '建议优化'
         }, {
           value: '07',
+          label: '专项'
+        }, {
+          value: '08',
+          label: '纵向'
+        }, {
+          value: '09',
+          label: '无'
+        }],
+        QTresultSpecial: [{
+          value: '07',
+          label: '专项'
+        }, {
+          value: '08',
+          label: '纵向'
+        }, {
+          value: '09',
           label: '无'
         }],
         RecResult: [{
@@ -1589,20 +1599,6 @@
         console.log(val)
         this.currentRow = val
       },
-      InitialInfo() {
-        this.regularInfo.isForm ? this.regularInfo.isForm : this.regularInfo.isForm = 1;
-        this.regularInfo.isIdcard ? this.regularInfo.isIdcard : this.regularInfo.isIdcard = 1;
-        this.regularInfo.isIncome ? this.regularInfo.isIncome : this.regularInfo.isIncome = 1;
-        this.regularInfo.isWork ? this.regularInfo.isWork : this.regularInfo.isWork = 1;
-        this.regularInfo.isEstate ? this.regularInfo.isEstate : this.regularInfo.isEstate = 1;
-        this.regularInfo.isLive ? this.regularInfo.isLive : this.regularInfo.isLive = 1;
-        this.regularInfo.isBusiness ? this.regularInfo.isBusiness : this.regularInfo.isBusiness = 1;
-        this.regularInfo.isCredit ? this.regularInfo.isCredit : this.regularInfo.isCredit = 1;
-        this.regularInfo.isCustomerflow ? this.regularInfo.isCustomerflow : this.regularInfo.isCustomerflow = 1;
-        this.regularInfo.isCustomerother ? this.regularInfo.isCustomerother : this.regularInfo.isCustomerother = 1;
-        // 三方信息查询
-        // 内部匹配核实
-      },
       WechatData(ind) {
         if (ind == 0) { //客户本人
           return this.AlipayCus;
@@ -1628,7 +1624,6 @@
         }
       },
       tabClick(ev, ind, val) {
-        console.log(ind)
         this.tabIndex = this.ind = ind;
         if (ind == 0) { // 客户本人
           this.telType = '06'
@@ -2011,6 +2006,8 @@
           } else
           if (this.propQTconclution.tastwaitingPass.listType == '专项质检') {
             this.instaskType = '01';
+            this.QTresult=[];
+            this.QTresult=this.QTresultSpecial;
             this.Special();
             //   this.AprovalInfolShow = false; //审批信息        
             //   this.MaterialShow = false; //资料核实
@@ -2030,6 +2027,8 @@
             this.submitBtn = false; //提交
             this.SocialSecurityBtn = false; //社保公积金
           } else if (this.propQTconclution.tastwaitingPass.listType == '专项质检') {
+            this.QTresult=[];
+            this.QTresult=this.QTresultSpecial;
             this.Special();
             // this.AprovalInfolShow = false; //审批信息        
             // this.MaterialShow = false; //资料核实
@@ -2104,24 +2103,14 @@
 
     },
     mounted() {
-      console.log(this.propQTconclution)
-      console.log(this.propQTconclution.tastwaitingPass.listType)
+      console.log('propQTconclution:',this.propQTconclution)
       this.getSystermTime();
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
-    // 质检结论枚举
-      // ["01": "初审一般差错",
-      // "02": "初审重大差错",
-      // "03": 终"审一般差错",
-      // "04":"终审重大差错",
-      // "05": "初审建议",
-      // "06": "终审建议","07":"无"]
-      // console.log(this.propQTconclution.applyId)
       this.referPort(); //质检查询页面
       this.showdiffer();
       this.Social(); //社保公积金接口
     }
   }
-
 </script>
 <style scoped>
   .baseInf {
