@@ -1602,11 +1602,11 @@
       WechatData(ind) {
         if (ind == 0) { //客户本人
           return this.AlipayCus;
-        } else if (ind == 2) { //家庭联系人
+        } else if (ind == 3) { //家庭联系人
           return this.AlipayFamily;
-        } else if (ind == 3) { //工作证明
+        } else if (ind == 4) { //工作证明
           return this.AlipayWork;
-        } else if (ind == 4) { //其他联系人
+        } else if (ind == 5) { //其他联系人
           return this.AlipayOthers;
         }
       },
