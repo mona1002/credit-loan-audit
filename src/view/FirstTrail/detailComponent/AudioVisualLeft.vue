@@ -57,11 +57,8 @@
         <!-- <img ref="Big_pic_ref" v-for="(val,key) in imgPath" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath"
           v-if="key==smallPicInd" /> -->
 
-          <img ref="Big_pic_ref" v-for="(val,key) in pngAyyr" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng"/>
-        <!-- <pdfDivLeft v-if="myPdf" v-for="(val,index) in pdfArry" :key="index" :val="val"></pdfDivLeft> -->
-        <!-- <pdfDivLeft v-if="myPdf" :pdfArry="pdfArry"></pdfDivLeft> -->
-        <!-- <p v-if="myPdf" v-for="(val,index) in pdfArry" is="pdfDivLeft" v-bind:title="val"></p> -->
-        <p v-if="myPdf" is="pdfDivLeft" v-bind:title="pdfArry"></p>
+          <img ref="Big_pic_ref" v-for="(val,key) in pngAyyrs" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng"/>
+        <p v-show="myPdf" is="pdfDivLeft" v-bind:title="pdfArrys"></p>
       </div>
     </div>
     <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" v-show="perfBtn" @click="pre" @mouseenter='PerBtn'>
@@ -170,8 +167,8 @@
         custName: '',
         custmatchApplySubNo: '',
         AULwrapWidth: null,
-        pdfArry:[],
-        pngAyyr:[],
+        pdfArrys:[],
+        pngAyyrs:[],
         myPng:false,
         myPdf:false,
       }
@@ -266,21 +263,21 @@
         this.defaultBigPicCss();
       },
       getImg(ind) {
-        this.pdfArry=[];
-        this.pngAyyr=[];
+        this.pdfArrys=[];
+        this.pngAyyrs=[];
         this.smallPicInd = 0;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
         console.log(this.imgPath);
         console.log('mkkmkm');
         if(this.imgPath[0].imagePath.substring(this.imgPath[0].imagePath.length-3) == 'pdf'){
-            this.pdfArry=this.imgPath;
+            this.pdfArrys=this.imgPath;
             this.myPdf = true;
             this.myPng = false;
           }else{
             this.myPng = true;
             this.myPdf = false;
-            this.pngAyyr=this.imgPath;
-            console.log(this.pngAyyr.length);
+            this.pngAyyrs=this.imgPath;
+            console.log(this.pngAyyrs.length);
           };
         this.$refs.img_wrap.style.left = 0;
         this.$refs.img_wrap.style.top = 0;

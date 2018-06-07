@@ -11,8 +11,7 @@ import validation from '@/util/validation'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import $ from 'jquery'
-//import UniGB from './UniGB-UCS2-H.bcmap'
-import vuePdfShower from 'vue-pdf-shower'
+
 import 'vue-pdf-shower/lib/dist/pdf.js'
 PDFJS.workerSrc = 'vue-pdf-shower/lib/dist/pdf.worker.js'
 PDFJS.cMapUrl = '/static/web/cmaps/'
@@ -21,7 +20,7 @@ PDFJS.cMapPacked = true;
 Vue.config.productionTip = false;
 Vue.use(ElementUI)
 Vue.use(http)
-Vue.use(vuePdfShower)
+
 
 /* eslint-disable no-new */
 new Vue({

@@ -1,22 +1,25 @@
 <template>
 	<div>
-       <pdf-shower 
-            v-for="(val,index) in title"
+       <pdf-showers 
+            class="leftCav"
+            v-for="(val,index) in newArrys"
             :key=Math.random()
            :pdfurl="imgBaseUrl+val.imagePath" 
            :scale="scale" 
            @onErr="onErr">  
-       </pdf-shower>
+       </pdf-showers>
+       <!-- <p>{{newArrys[0].imagePath}}</p>
+       <test :title="title"></test> -->
 	</div>
 </template>
 <script>
-import PdfShower from 'vue-pdf-shower';	
+import PdfShowers from 'vue-pdf-shower';	
 import pdfUrl from '../util/ConstantSocialAndPn';
 
 export default {
-    name: 'pdfshower',
+    name: 'pdfshowers',
     components: {
-        'pdf-shower':PdfShower,
+        'pdf-showers':PdfShowers
     },
     data() {
         return {
@@ -24,6 +27,8 @@ export default {
             // 缩放 默认为1
             scale: 1.2,
             imgBaseUrl:pdfUrl.imgBaseUrl,
+            newArrys:[],
+            bbb:false,
             /*sss:'../static/C1-1.pdf',
             sss2:'../static/bbb.pdf',
             sss3:'../static/ccc.pdf',
@@ -42,7 +47,13 @@ export default {
     props: ['title'],
     watch:{
         title(value){
-          console.log("我是kkkkk");
+          console.log("我是左边");
+          this.newArrys = value;
+          this.bbb = true;
+          /*var cvs = $('.leftCav #cvsWraper').getElementsByTagName("canvas");
+          $('.leftCav #cvsWraper').append(cvs);
+          console.log("****************l");
+          console.log(cvs);*/
         }
     }
 };

@@ -59,7 +59,7 @@
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative; left:0; top:0;" id='FirstAud'>
         <img ref="Big_pic_ref" v-for="(val,key) in pngAyyr" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng"/>
-        <p v-if="myPdf" is="pdfDiv" v-bind:title="pdfArry"></p>
+        <p v-show="myPdf" is="pdfDiv" v-bind:title="pdfArry"></p>
       </div>
     </div>
     <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" @click="pre" v-show="perfBtn" @mouseenter='PerBtn'>
@@ -643,4 +643,9 @@
     box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
   }
 
+  #FirstAud .pdf-wraper{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
 </style>
