@@ -223,6 +223,7 @@
       this.propReApply&& this.propReApply.pageType=='ComponentPage'?this.ManagerBtn=false:'';//是否显示提交按钮
       this.getSystermTime();
       this.taskwaitting = JSON.parse(localStorage.getItem('QTToReconsiderParams'));
+      console.log('reconType:',this.taskwaitting.reconType)
       this.reApplyInf = JSON.parse(localStorage.getItem('userInf'));
       this.getInf();
       //传入isManager判断是否可编辑

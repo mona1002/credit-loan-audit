@@ -68,7 +68,7 @@
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isIdcardRemark && regularInfo.isIdcardRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' :disabled='material' v-if="regularInfo.isIdcard=='0'" v-model="regularInfo.isIdcardRemark" :rows="2" resize="none" :maxlength='arealength'
+                <el-input type='textarea' :disabled='material' v-if="regularInfo.isIdcard=='0'" v-model.trim="regularInfo.isIdcardRemark" :rows="2" resize="none" :maxlength='arealength'
                   placeholder="请输入内容">
                 </el-input>
               </td>
@@ -84,7 +84,7 @@
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isIncomeRemark && regularInfo.isIncomeRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' :disabled='material' v-if="regularInfo.isIncome==0" v-model="regularInfo.isIncomeRemark" :rows="2" resize="none" :maxlength='arealength'
+                <el-input type='textarea' :disabled='material' v-if="regularInfo.isIncome==0" v-model.trim="regularInfo.isIncomeRemark" :rows="2" resize="none" :maxlength='arealength'
                   placeholder="请输入内容">
                 </el-input>
               </td>
@@ -100,7 +100,7 @@
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isWorkRemark &&regularInfo.isWorkRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' :disabled='material' v-if="regularInfo.isWork==0" v-model="regularInfo.isWorkRemark" :rows="2" resize="none" :maxlength='arealength'
+                <el-input type='textarea' :disabled='material' v-if="regularInfo.isWork==0" v-model.trim="regularInfo.isWorkRemark" :rows="2" resize="none" :maxlength='arealength'
                   placeholder="请输入内容">
                 </el-input>
               </td>
@@ -116,7 +116,7 @@
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isEstateRemark && regularInfo.isEstateRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' :disabled='material' v-if="regularInfo.isEstate==0" v-model="regularInfo.isEstateRemark" :rows="2" resize="none" :maxlength='arealength'
+                <el-input type='textarea' :disabled='material' v-if="regularInfo.isEstate==0" v-model.trim="regularInfo.isEstateRemark" :rows="2" resize="none" :maxlength='arealength'
                   placeholder="请输入内容">
                 </el-input>
               </td>
@@ -132,7 +132,7 @@
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isLiveRemark && regularInfo.isLiveRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' :disabled='material' v-if="regularInfo.isLive==0" v-model="regularInfo.isLiveRemark" :rows="2" resize="none" :maxlength='arealength'
+                <el-input type='textarea' :disabled='material' v-if="regularInfo.isLive==0" v-model.trim="regularInfo.isLiveRemark" :rows="2" resize="none" :maxlength='arealength'
                   placeholder="请输入内容">
                 </el-input>
               </td>
@@ -148,7 +148,7 @@
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isBusinessRemark && regularInfo.isBusinessRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' :disabled='material' v-if="regularInfo.isBusiness==0" v-model="regularInfo.isBusinessRemark" :rows="2" resize="none"
+                <el-input type='textarea' :disabled='material' v-if="regularInfo.isBusiness==0" v-model.trim="regularInfo.isBusinessRemark" :rows="2" resize="none"
                   :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -164,7 +164,7 @@
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isCreditRemark && regularInfo.isCreditRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' :disabled='material' v-if="regularInfo.isCredit==0" v-model="regularInfo.isCreditRemark" :rows="2" resize="none" :maxlength='arealength'
+                <el-input type='textarea' :disabled='material' v-if="regularInfo.isCredit==0" v-model.trim="regularInfo.isCreditRemark" :rows="2" resize="none" :maxlength='arealength'
                   placeholder="请输入内容">
                 </el-input>
               </td>
@@ -180,7 +180,7 @@
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isCustomerflowRemark && regularInfo.isCustomerflowRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' :disabled='material' v-if="regularInfo.isCustomerflow==0" v-model="regularInfo.isCustomerflowRemark" :rows="2" resize="none"
+                <el-input type='textarea' :disabled='material' v-if="regularInfo.isCustomerflow==0" v-model.trim="regularInfo.isCustomerflowRemark" :rows="2" resize="none"
                   :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -196,7 +196,7 @@
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isCustomerotherRemark && regularInfo.isCustomerotherRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' :disabled='material' v-if="regularInfo.isCustomerother==0" v-model="regularInfo.isCustomerotherRemark" :rows="2" resize="none"
+                <el-input type='textarea' :disabled='material' v-if="regularInfo.isCustomerother==0" v-model.trim="regularInfo.isCustomerotherRemark" :rows="2" resize="none"
                   :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -212,7 +212,7 @@
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isLiabilitiesRemark && regularInfo.isLiabilitiesRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' :disabled='material' v-if="regularInfo.isLiabilities=='0'" v-model="regularInfo.isLiabilitiesRemark" :rows="2" resize="none"
+                <el-input type='textarea' :disabled='material' v-if="regularInfo.isLiabilities=='0'" v-model.trim="regularInfo.isLiabilitiesRemark" :rows="2" resize="none"
                   :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -228,7 +228,7 @@
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isFlowRemark && regularInfo.isFlowRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' :disabled='material' v-if="regularInfo.isFlow=='0'" v-model="regularInfo.isFlowRemark" :rows="2" resize="none" :maxlength='arealength'
+                <el-input type='textarea' :disabled='material' v-if="regularInfo.isFlow=='0'" v-model.trim="regularInfo.isFlowRemark" :rows="2" resize="none" :maxlength='arealength'
                   placeholder="请输入内容">
                 </el-input>
               </td>
@@ -244,7 +244,7 @@
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isReferenceRemark && regularInfo.isReferenceRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' :disabled='material' v-if="regularInfo.isReference=='0'" v-model="regularInfo.isReferenceRemark"
+                <el-input type='textarea' :disabled='material' v-if="regularInfo.isReference=='0'" v-model.trim="regularInfo.isReferenceRemark"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -280,7 +280,7 @@
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.wbeexEcutedtxt&&regularInfo.wbeexEcutedtxt.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' :disabled='InfoInquire' v-if="regularInfo.wbeexEcuted==1" v-model="regularInfo.wbeexEcutedtxt"
+                <el-input type='textarea' :disabled='InfoInquire' v-if="regularInfo.wbeexEcuted==1" v-model.trim="regularInfo.wbeexEcutedtxt"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -296,7 +296,7 @@
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.wnetEcutedBreatxt&&regularInfo.wnetEcutedBreatxt.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' :disabled='InfoInquire' v-if="regularInfo.wnetEcutedBrea==1" v-model="regularInfo.wnetEcutedBreatxt"
+                <el-input type='textarea' :disabled='InfoInquire' v-if="regularInfo.wnetEcutedBrea==1" v-model.trim="regularInfo.wnetEcutedBreatxt"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -312,7 +312,7 @@
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.wnetPhonetxt&&regularInfo.wnetPhonetxt.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' :disabled='InfoInquire' v-if="regularInfo.wnetPhone==1" v-model="regularInfo.wnetPhonetxt" :rows="2"
+                <el-input type='textarea' :disabled='InfoInquire' v-if="regularInfo.wnetPhone==1" v-model.trim="regularInfo.wnetPhonetxt" :rows="2"
                   resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -328,7 +328,7 @@
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.wnetAddrandEstatetxt&&regularInfo.wnetAddrandEstatetxt.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' :disabled='InfoInquire' v-if="regularInfo.wnetAddrandEstate==1" v-model="regularInfo.wnetAddrandEstatetxt"
+                <el-input type='textarea' :disabled='InfoInquire' v-if="regularInfo.wnetAddrandEstate==1" v-model.trim="regularInfo.wnetAddrandEstatetxt"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -344,7 +344,7 @@
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.wnetCompanytxt&&regularInfo.wnetCompanytxt.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' :disabled='InfoInquire' v-if="regularInfo.wnetCompany=='0'" v-model="regularInfo.wnetCompanytxt"
+                <el-input type='textarea' :disabled='InfoInquire' v-if="regularInfo.wnetCompany=='0'" v-model.trim="regularInfo.wnetCompanytxt"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -360,7 +360,7 @@
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.wnetAddrstatetxt && regularInfo.wnetAddrstatetxt.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' :disabled='InfoInquire' v-if="regularInfo.wnetAddrstate=='0'" v-model="regularInfo.wnetAddrstatetxt"
+                <el-input type='textarea' :disabled='InfoInquire' v-if="regularInfo.wnetAddrstate=='0'" v-model.trim="regularInfo.wnetAddrstatetxt"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -371,7 +371,7 @@
               <td>
                 <td>
                   <b class="hint_word" v-show="regularInfo.icbcRegistrationInfo && regularInfo.icbcRegistrationInfo.length>=300"> 输入长度不能超过300</b>
-                  <el-input type='textarea' :disabled='InfoInquire' v-model="regularInfo.icbcRegistrationInfo" :rows="2" resize="none" :maxlength='arealength'
+                  <el-input type='textarea' :disabled='InfoInquire' v-model.trim="regularInfo.icbcRegistrationInfo" :rows="2" resize="none" :maxlength='arealength'
                     placeholder="请输入内容">
                   </el-input>
                 </td>
@@ -407,7 +407,7 @@
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isInmatchRemark && regularInfo.isInmatchRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' :disabled='matching' v-if="regularInfo.isInmatch=='0'" v-model="regularInfo.isInmatchRemark" :rows="2"
+                <el-input type='textarea' :disabled='matching' v-if="regularInfo.isInmatch=='0'" v-model.trim="regularInfo.isInmatchRemark" :rows="2"
                   resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -455,7 +455,7 @@
               <el-table-column label="备注" align="center">
                 <template slot-scope="scope">
                   <b class="hint_word" v-show="scope.row.remark&&scope.row.remark.length>=300"> 输入长度不能超过300</b>
-                  <el-input type="textarea" :disabled='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model="scope.row.remark"
+                  <el-input type="textarea" :disabled='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model.trim="scope.row.remark"
                     :maxlength='arealength' placeholder="请输入内容">
                   </el-input>
                   <!-- {{scope.row.insResult}} -->
@@ -598,7 +598,7 @@
                 <!-- 备注 -->
                 <td style="vertical-align:bottom;">
                   <b class="hint_word" v-show="insTelCustInfo.remark&&insTelCustInfo.remark.length>=300"> 输入长度不能超过300</b>
-                  <el-input type='textarea' :disabled='PhoneCredit' v-if="insTelCustInfo.insResult=='01'" v-model="insTelCustInfo.remark" :rows="2" resize="none" :maxlength='arealength'
+                  <el-input type='textarea' :disabled='PhoneCredit' v-if="insTelCustInfo.insResult=='01'" v-model.trim="insTelCustInfo.remark" :rows="2" resize="none" :maxlength='arealength'
                     placeholder="请输入内容">
                   </el-input>
                 </td>
@@ -650,7 +650,7 @@
               <el-table-column label="备注" align="center" min-width="180">
                 <template slot-scope="scope">
                   <b class="hint_word" v-show="scope.row.remark&&scope.row.remark.length>=300"> 输入长度不能超过300</b>
-                  <el-input type="textarea" :disabled='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model="scope.row.remark"
+                  <el-input type="textarea" :disabled='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none" v-model.trim="scope.row.remark"
                     :maxlength="this.textareaL" placeholder="请输入内容">
                   </el-input>
                 </template>
@@ -803,7 +803,7 @@
               <template slot-scope="scope">
                 <b class="hint_word" v-show="scope.row.errorType&&scope.row.errorType.length>=50"> 输入长度不能超过50</b>
                 <el-tooltip class="item" effect="dark" :content="scope.row.errorType" :disabled="!scope.row.errorType" placement="top-start">
-                  <el-input :disabled='QTConclution' v-model="scope.row.errorType" :maxlength='fiftyWords' placeholder="请输入内容"></el-input>
+                  <el-input :disabled='QTConclution' v-model.trim="scope.row.errorType" :maxlength='fiftyWords' placeholder="请输入内容"></el-input>
                 </el-tooltip>
               </template>
             </el-table-column>
@@ -811,7 +811,7 @@
               <template slot-scope="scope">
                 <b class="hint_word" v-show="scope.row.errorDescribe&& scope.row.errorDescribe.length>=300"> 输入长度不能超过300</b>
                 <el-tooltip class="item" effect="dark" :content="scope.row.errorDescribe" :disabled="!scope.row.errorDescribe" placement="top-start">
-                  <el-input :disabled='QTConclution' v-model="scope.row.errorDescribe" :maxlength='arealength' placeholder="请输入内容"></el-input>
+                  <el-input :disabled='QTConclution' v-model.trim="scope.row.errorDescribe" :maxlength='arealength' placeholder="请输入内容"></el-input>
                 </el-tooltip>
               </template>
             </el-table-column>
@@ -819,7 +819,7 @@
               <template slot-scope="scope">
                 <b class="hint_word" v-show="scope.row.remark&&scope.row.remark.length>=300"> 输入长度不能超过300</b>
                 <el-tooltip class="item" effect="dark" :content="scope.row.remark" :disabled="!scope.row.remark" placement="top-start">
-                  <el-input type='textarea' :disabled='QTConclution' v-model="scope.row.remark" :rows="2" resize="none" :maxlength='arealength'
+                  <el-input type='textarea' :disabled='QTConclution' v-model.trim="scope.row.remark" :rows="2" resize="none" :maxlength='arealength'
                     placeholder="请输入内容">
                   </el-input>
                 </el-tooltip>
@@ -833,49 +833,7 @@
               </template>
             </el-table-column>
           </el-table>
-          <!-- <table border="1" cellpadding='2' width='100%'>
-            <tr>
-              <th width='40px'> 序号</th>
-              <th width='230px'>质检结果 </th>
-              <th width='210px'>差错类型</th>
-              <th width='210px'>差错描述</th>
-              <th>备注</th>
-              <th width='150px'>操作人员</th>
-              <th width='150px'>操作日期</th>
-            </tr>
-            <tr v-if="addTr">
-              <td> 1</td>
-              <td>
-                <el-select :disabled='QTConclution' v-model="insConclusion.checkResult" placeholder="请选择">
-                  <el-option v-for="item in QTresult" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
-                </el-select>
-              </td>
-              <td>
-                <el-tooltip class="item" effect="dark" :content="insConclusion.errorType" :disabled="!insConclusion.errorType" placement="top-start">
-                  <el-input :disabled='QTConclution' v-model="insConclusion.errorType" :maxlength='fiftyWords' placeholder="请输入内容"></el-input>
-                </el-tooltip>
-              </td>
-              <td>
-                <el-tooltip class="item" effect="dark" :content="insConclusion.errorDescribe" :disabled="!insConclusion.errorDescribe" placement="top-start">
-                  <el-input :disabled='QTConclution' v-model="insConclusion.errorDescribe" :maxlength='arealength' placeholder="请输入内容"></el-input>
-                </el-tooltip>
-              </td>
-              <td>
-                <el-tooltip class="item" effect="dark" :content="insConclusion.remark" :disabled="!insConclusion.remark" placement="top-start">
-                  <el-input type='textarea' :disabled='QTConclution' v-model="insConclusion.remark" :rows="2" resize="none" :maxlength='arealength'
-                    placeholder="请输入内容">
-                  </el-input>
-                </el-tooltip>
-              </td>
-              <td>
-                {{ insConclusion.insMemberName}}
-              </td>
-              <td>
-                {{ insConclusion.insDate}}
-              </td>
-            </tr>
-          </table> -->
+
         </div>
       </el-collapse-item>
     </el-collapse>
@@ -1094,6 +1052,7 @@
         ind: 0,
         insReconApply: [], //复议申请表
         ReconsiderNode: '质检主管', //复议弹窗-复议节点
+        reconTypeParams:'',//发起复议入参
         ReconsiderDes: '', //复议弹窗-复议说明
         instaskType: '', //添加质检结论入参-任务类型（00:常规质检，01:专项质检）
         reviewConclusion: {
@@ -1984,6 +1943,8 @@
         console.log('发起复议')
         this.loadSub = true;
         this.ReconSubmit = '提交中';
+        console.log('reconType:',this.propQTconclution.tastwaitingPass.reconType)
+        console.log('reconTypeParams:',this.reconTypeParams)
         this.post("/insReconApply/saveInsReconApply", {
           applyId: this.propQTconclution.applyId,
           taskId: this.propQTconclution.tastwaitingPass.taskId,
@@ -1991,7 +1952,7 @@
           reviewRemark: this.ReconsiderDes, //复议说明
           approverUserCode: this.userInf.userName,
           reconDate: this.systermTime,
-          reconType: this.propQTconclution.tastwaitingPass.reconType,
+          reconType:  this.reconTypeParams,
           // taskNode:this.ReconsiderNode //不需要入
         }).then(res => {
           if (res.statusCode == 200) {
@@ -2181,13 +2142,16 @@
           this.saveBtn = false; //保存            
           this.submitBtn = false; //提交
           this.SocialSecurityBtn = false; //社保公积金
-          if (this.propQTconclution.tastwaitingPass.reconType == '01') {
+          if (this.propQTconclution.tastwaitingPass.reconType == '00') {
             //首次复议
             // this.ReApply=true;//初终审复议申请信息
             this.ReconsiderNode = '质检主管'; //复议弹窗-复议节点
-          } else if (this.propQTconclution.tastwaitingPass.reconType == '02') {
+            this.reconTypeParams='01';//复议弹窗-入参reconType
+          } else if (this.propQTconclution.tastwaitingPass.reconType == '01') {
+            // 二次复议
             this.FirstReconsider = true; //第一次复议审批信息
             this.ReconsiderNode = '区域经理'; //复议弹窗-复议节点
+            this.reconTypeParams='02';//复议弹窗-入参reconType
           }
         } else if (this.propQTconclution.pageType == 'checkApp_check_recon_manager') { //复议任务列表（首次） √
           this.onlyCheck();

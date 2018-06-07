@@ -161,6 +161,7 @@
           custName_la: '',
           certCode: '',
           checkState: '',
+          isSend:'1',
           //   pageNum: '', //页数（第几页）
           //   pageSize: '', //页面显示行数
         },
@@ -193,9 +194,9 @@
       handleCurrentChange(val) {
         // this.params.pageNum = val;
         // this.inquire(this.params);reconType
-        if (val.reconType == '01') { //初终审主管首次
+        if (val.reconType == '00') { //初终审主管首次
           this.query.listType = '初终审主管首次';
-        } else if (val.reconType == '02') { //初终审主管二次
+        } else if (val.reconType == '01') { //初终审主管二次
           this.query.listType = '初终审主管二次';
         }
         this.query.reconType = val.reconType;

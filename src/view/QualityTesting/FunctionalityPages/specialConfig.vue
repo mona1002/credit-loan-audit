@@ -8,9 +8,12 @@
         <ul>
           <li>
             <p>
-              <label> 审批结论时间 </label>
-              <el-date-picker v-model="ploanDate" value-format="timestamp" type="daterange" range-separator="至" start-placeholder="开始日期"
+              <!-- <label> 审批结论时间 </label>
+              <el-date-picker v-model="ploanDate"  value-format="yyyy-MM-dd"  type="daterange" range-separator="至" start-placeholder="开始日期"
                 end-placeholder="结束日期">
+              </el-date-picker> -->
+              <label> 本环节处理时间</label>
+              <el-date-picker v-model="ploanDate" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
               </el-date-picker>
             </p>
             <p>
@@ -66,7 +69,6 @@
                 </el-option>
               </el-select>
             </p>
-            <p>{{ploanDate }}
             </p>
             <p class="btn_wrap">
               <el-button class="btn" type="primary" style="marginLeft:228px" @click="Rsearch">查询</el-button>
@@ -192,6 +194,10 @@
       }
     },
     methods: {
+      DateF(val) {
+        val ? val = val.getFullYear() + '-' + (val.getMonth() + 1) + '-' + val.getDate() : '';
+        return val;
+      },
       apportion() { //分配 按钮弹窗
         console.log('apportion')
         this.Confirm = true;
@@ -238,12 +244,12 @@
       Rreset() { // 重置
         this.params.ploanDateBegin = ''; //审批结论开始时间
         this.params.ploanDateEnd = ''; //审批结论结束时间
-        this.params.operOrgCodes = ''; //	进件机构       多选
+        this.params.operOrgCodes = []; //	进件机构       多选
         this.params.userCode = ''; //	初终审编号
-        this.params.proCodes = ''; //	产品          多选
+        this.params.proCodes =[]; //	产品          多选
         this.params.busiState = ''; //	业务状态     
-        this.params.mainReasonIds = ''; //	拒绝主原因      多选
-        this.params.subReasonIds = '';
+        this.params.mainReasonIds = ''; //	拒绝主原因     
+        this.params.subReasonIds = [];//	拒绝子原因      多选
         this.ploanDate = ''; //审批结论时间数组
         this.inquire(this.params);
       },
@@ -260,13 +266,16 @@
         // },
         // this.params.pageParam.pageNum = this.currentPage = 1;        
         console.log(this.params)
-        this.params.ploanDateBegin = this.ploanDate[0];
-        this.params.ploanDateEnd = this.ploanDate[1];
-        console.log(this.params.ploanDateBegin)
-        console.log(this.params.ploanDateEnd)
+    //    this.ploanDate[0]? this.params.ploanDateBegin = this.ploanDate[0]: this.params.ploanDateBegin = '';
+    //  this.ploanDate[1]?   this.params.ploanDateEnd = this.ploanDate[1]:  this.params.ploanDateEnd = '';
+       this.ploanDate[0]? this.params.ploanDateBegin = this.DateF(this.ploanDate[0]): this.params.ploanDateBegin = '';
+     this.ploanDate[1]?   this.params.ploanDateEnd = this.DateF(this.ploanDate[0]):  this.params.ploanDateEnd = '';
+        console.log(typeof(this.params.ploanDateBegin))
+        console.log(typeof(this.params.ploanDateEnd))
         console.log(typeof (this.params.ploanDateBegin))
         console.log(typeof (this.params.ploanDateEnd))
         this.inquire(this.params);
+        
       },
       inquire(pam) { //查询列表     质检-复议结果查询功能
         console.log(pam)
