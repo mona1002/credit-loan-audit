@@ -129,6 +129,7 @@
           certCode: '',
           instaskType: '',
           checkState: '',
+          isSend: '1',
           //   pageNum: '', //页数（第几页）
           //   pageSize: '', //页面显示行数
         },
@@ -222,12 +223,12 @@
       },
       allotSubmit() { //批量提交
         for (var i = 0; i < this.multipleSelection.length; i++) { //可以提交质检结果为初审一般差错、初审重大差错、终审一般差错、终审重大差错、初审建议优化、终审建议的单子
-        //   if (this.multipleSelection[i].checkResult != '01' && this.multipleSelection[i].checkResult != '02' && this.multipleSelection[
-        //       i].checkResult != '03' && this.multipleSelection[i].checkResult != '04' && this.multipleSelection[i].checkResult !=
-        //     '05' && this.multipleSelection[i].checkResult != '06') {
-        //     this.$message.error('质检结果不符！');
-        //     console.log(this.multipleSelection[i].checkResult)
-        //     return
+          //   if (this.multipleSelection[i].checkResult != '01' && this.multipleSelection[i].checkResult != '02' && this.multipleSelection[
+          //       i].checkResult != '03' && this.multipleSelection[i].checkResult != '04' && this.multipleSelection[i].checkResult !=
+          //     '05' && this.multipleSelection[i].checkResult != '06') {
+          //     this.$message.error('质检结果不符！');
+          //     console.log(this.multipleSelection[i].checkResult)
+          //     return
           // } else 
           if (this.multipleSelection[i].isSecondIns == 1) { //有质检二次标识的件(抽中常规又专纵)，只能够批量完成，不能批量提交
             console.log(this.multipleSelection[i].isSecondIns)
@@ -242,7 +243,7 @@
         }
         this.post("/insConclusion/submitList", this.multipleSelectionParams)
           .then(res => {
-            if (res.statusCode == 200) {//前端不做是否可点击哪个按钮判断，后端做判断，不符合返回msg，前端展示出来即可
+            if (res.statusCode == 200) { //前端不做是否可点击哪个按钮判断，后端做判断，不符合返回msg，前端展示出来即可
               this.$message({
                 type: "success",
                 message: res.msg
@@ -274,7 +275,7 @@
             //   type: "success",
             //   message: '提交成功！'
             // })
-             this.$message.error(res.msg);
+            this.$message.error(res.msg);
             this.inquire(this.params);
           } else {
             this.$message.error(res.msg);

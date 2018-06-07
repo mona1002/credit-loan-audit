@@ -1895,7 +1895,7 @@
         this.ReconSubmit = '提交';
         this.loadSub = false;
       },
-      AprovalAlert() { //审批-弹窗-编辑
+      AprovalAlert() { //审批-弹窗-编辑  合规经理-查询区域经理审批内容
         this.ReAprovalShow = true;
         this.ReconSubmit = '提交';
         this.loadSub = false;
