@@ -833,7 +833,6 @@
               </template>
             </el-table-column>
           </el-table>
-
         </div>
       </el-collapse-item>
     </el-collapse>
@@ -1744,13 +1743,7 @@
       SaveInf(type) { //质检主管不需要提交，只有质检专员 显示提交
         console.log(type)
         console.log(this.insConclusion.length)
-        this.checkResultCount01 = 0;
-        this.checkResultCount02 = 0;
-        this.checkResultCount03 = 0;
-        this.checkResultCount04 = 0;
-        this.checkResultCount05 = 0;
-        this.checkResultCount06 = 0;
-        this.checkResultCount07 = 0;
+        this.checkResultCount01 =  this.checkResultCount02 =this.checkResultCount03 =this.checkResultCount04 =this.checkResultCount05 =this.checkResultCount06 =this.checkResultCount07 =0;        
         if (type == '提交') { //提交 加校验，保存无需校验必填---常规质检
           if (this.propQTconclution.tastwaitingPass.listType == '常规质检') {
             if (!this.regularInfo.isForm || !this.regularInfo.isIdcard || !this.regularInfo.isIncome || !this.regularInfo
@@ -1785,9 +1778,10 @@
             applyId: this.reviewConclusion.applyId,
             reviewConclusion: this.reviewConclusion.reviewConclusion,
             checkType: this.propQTconclution.pageType == 'checkApp_apply' ? '01' : '02',
+            isSubmit: type == '提交' ? '1' : '0',
+            taskId: this.propQTconclution.tastwaitingPass.taskId,
           }).then(res => {
             if (res.statusCode == 200) {
-              // this.tableData = res.data;
               this.$message({
                 type: 'success',
                 message: type + '成功！'
@@ -1797,7 +1791,6 @@
                     '/commissioner?taskNodeName=checkApp_apply&flag=07') : ''; //专员
                 }
                 this.referPort();
-                // this.$message.error(res.msg);
             } else {
               this.$message.error(res.msg);
             }
@@ -1806,9 +1799,7 @@
         } else { //  常规质检、专纵质检
           // 保存、提交之前都要校验质检结论是否重复添加多条
           if (this.insConclusion.length !== 0) { //质检结论中质检结果不能重复添加
-            // console.log( )
             for (var n = 0; n < this.insConclusion.length; n++) {
-              // console.log(555,this.insConclusion[n] )
               this.insConclusion[n].checkResult == '01' ? this.checkResultCount01++ : '';
               this.insConclusion[n].checkResult == '02' ? this.checkResultCount02++ : '';
               this.insConclusion[n].checkResult == '03' ? this.checkResultCount03++ : '';
@@ -1817,28 +1808,15 @@
               this.insConclusion[n].checkResult == '06' ? this.checkResultCount06++ : '';
               this.insConclusion[n].checkResult == '07' ? this.checkResultCount07++ : '';
             }
-            // console.log('1', this.checkResultCount01)
-            // console.log('2', this.checkResultCount02)
-            // console.log('3', this.checkResultCount03)
-            // console.log('4', this.checkResultCount04)
-            // console.log('5', this.checkResultCount05)
-            // console.log('6', this.checkResultCount06)
-            // console.log('7', this.checkResultCount07)
             if (this.checkResultCount01 > 1 || this.checkResultCount02 > 1 || this.checkResultCount03 > 1 || this.checkResultCount04 >
               1 || this.checkResultCount05 > 1 || this.checkResultCount06 > 1 || this.checkResultCount07 > 1) {
               this.$message.error('质检结论中质检结果重复添加！')
               return
             }
           }
-
           // 微信支付宝+电话核实（除本人）合并为一个数组
           this.insTelVerifyListConcat = this.insTelVerifyListCompany.concat(this.insTelVerifyListFamily).concat(this.insTelVerifyListWork)
             .concat(this.insTelVerifyListOthers)
-          // console.log(this.insTelVerifyListCompany)
-          // console.log(this.insTelVerifyListFamily)
-          // console.log(this.insTelVerifyListWork)
-          // console.log(this.insTelVerifyListOthers)
-          // console.log(this.insTelVerifyListConcat)
           this.AlipayConcat = this.AlipayCus.concat(this.AlipayFamily).concat(this.AlipayWork).concat(this.AlipayOthers)
           // 循环质检结论list 改变对应的值-不能跟上面的循环校验一起，校验不过不用修改
           for (var i = 0; i < this.insConclusion.length; i++) {
@@ -1850,8 +1828,6 @@
           }
           // insResultTxt  更改微信支付宝显示汉字字段
           for (var k = 0; k < this.AlipayConcat.length; k++) {
-            console.log(this.AlipayConcat)
-            console.log(111, this.AlipayConcat[k])
             this.AlipayConcat[k].insResult === '01' ? this.AlipayConcat[k].insResultTxt = '异常' : this.AlipayConcat[k].insResultTxt =
               '正常';
           }
@@ -2199,7 +2175,7 @@
     // 质检结论枚举
       // ["01": "初审一般差错",
       // "02": "初审重大差错",
-      // "03": "终审一般差错",
+      // "03": 终"审一般差错",
       // "04":"终审重大差错",
       // "05": "初审建议",
       // "06": "终审建议","07":"无"]
