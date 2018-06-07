@@ -204,7 +204,6 @@
         this.params.mainReasonIds = ''; //	拒绝主原因     
         this.params.subReasonIds = []; //	拒绝子原因      多选
         this.secondReason = []; //	拒绝子原因     下拉内容
-
         this.ploanDate = ''; //审批结论时间数组
       },
       Rsearch() { // 查询

@@ -1,6 +1,6 @@
 <template>
   <div class="regularQT">
-    <!-- 质检复议流程  初终审质检结论查看页 -->
+    <!-- 质检复议流程  初终审本人质检结论查看页 -->
     <!-- 审批信息 ============checked  待调试=一接口返回数据格式带确认-->
     <el-collapse v-model="activeNames">
       <el-collapse-item name="0">
@@ -41,10 +41,10 @@
         <img src="../../../../../static/images/appro.png">
         <label class="labelTxt">发起复议</label>
       </el-button>
-      <el-button @click="getLcgjList">
+      <!-- <el-button @click="getLcgjList">
         <img src="../../../../../static/images/liucheng.png">
         <label class="labelTxt">流程轨迹</label>
-      </el-button>
+      </el-button> -->
       <el-button @click="RiskControl">
         <img src="../../../../../static/images/bigdata.png">
         <label class="labelTxt">大数据风控</label>
@@ -52,9 +52,8 @@
     </div>
     <!-- ===================================弹出层===================================== -->
     <!-- 流程轨迹 -->
-    <div class="liuchenggj">
+    <!-- <div class="liuchenggj">
       <el-dialog title='流程轨迹' :visible.sync="lcdialogVisible" :modal="false" width="860px" top="0">
-        <!-- <div class="splcBody"> -->
         <div class="first">
           <el-table :data="lcgjData" style="width: 100%" height="296" border>
             <el-table-column type="index" label="序号" min-width="50">
@@ -76,13 +75,12 @@
             <el-table-column prop="opinionExplain" label="意见说明" min-width="200" show-overflow-tooltip>
             </el-table-column>
           </el-table>
-          <!-- </div> -->
         </div>
         <span slot="footer" class="dialog-footer">
           <el-button type="primary" @click="lcdialogVisible = false">返回</el-button>
         </span>
       </el-dialog>
-    </div>
+    </div> -->
     <!-- 大数据风控 -->
     <!-- <div class="bigDataLog"> -->
     <div class="liuchenggj">
