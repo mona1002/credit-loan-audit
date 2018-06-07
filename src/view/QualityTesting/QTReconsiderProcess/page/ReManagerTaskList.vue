@@ -127,6 +127,7 @@
           certCode: '',
           instaskType: '',
           isSend:'1',
+          checkType:'02'
           //   pageNum: '', //页数（第几页）
           //   pageSize: '', //页面显示行数
         },
