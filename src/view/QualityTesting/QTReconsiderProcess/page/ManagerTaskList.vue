@@ -161,7 +161,6 @@
           custName_la: '',
           certCode: '',
           checkState: '',
-          isSend:'1',
           //   pageNum: '', //页数（第几页）
           //   pageSize: '', //页面显示行数
         },
