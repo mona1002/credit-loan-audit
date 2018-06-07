@@ -31,11 +31,9 @@
         <!-- <el-form-item label="其他来源说明：" class="item-column3" v-show="familyData.source=='02'">
         {{familyData.sourceDesc}}
       </el-form-item> -->
-        <el-tooltip class="item" effect="dark" :content="familyData.sourceDesc" placement="top">
           <el-form-item label="其它来源情况说明：" class="item-column1" v-show="familyData.source=='02'">
             {{familyData.sourceDesc}}
           </el-form-item>
-        </el-tooltip>
       </div>
       <!-- <div class="address-title">
         录入家庭联系人电话调查信息

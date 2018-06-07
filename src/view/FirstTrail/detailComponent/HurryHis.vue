@@ -30,11 +30,9 @@
       <!-- <el-form-item label="其他来源说明：" class="item-column2" v-show="hurryData.source=='02'">
         {{hurryData.sourceDesc}}
       </el-form-item> -->
-      <el-tooltip class="item" effect="dark" :content="hurryData.sourceDesc" placement="top">
         <el-form-item label="其它来源情况说明：" class="item-column1" v-show="hurryData.source=='02'">
           {{hurryData.sourceDesc}}
         </el-form-item>
-      </el-tooltip>
       <!-- <div class="address-title">
         录入紧急联系人调查信息
       </div> -->

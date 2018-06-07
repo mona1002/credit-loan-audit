@@ -492,9 +492,7 @@
 				    <ol>
 				    	<li>
 				    		<label>报告描述：</label>
-				    		<el-tooltip class="item" effect="dark" :content="rptInfo.crContent" :disabled="rptInfo.crContent==''" placement="top">
 						      <div>{{rptInfo.crContent}}</div>
-						    </el-tooltip>
 				    	</li>
 				    </ol>
 		  		</div> 

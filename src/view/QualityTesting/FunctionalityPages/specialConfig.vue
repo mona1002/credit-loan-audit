@@ -253,7 +253,6 @@
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
       this.allotParams.operCode = this.userInf.userCode;
       this.allotParams.operName = this.userInf.userName;
-      this.inquire(this.params); //查询列表
       // this.getProducts(); //查询产品
       // this.getBusiState(); //获取业务状态下拉
       this.getSelection(); //获取所有下拉

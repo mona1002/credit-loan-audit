@@ -31,11 +31,9 @@
         <!-- <el-form-item label="其他来源说明：" class="item-column3" v-show="workData.source=='02'">
         {{workData.sourceDesc}}
       </el-form-item> -->
-        <el-tooltip class="item" effect="dark" :content="workData.sourceDesc" placement="top">
           <el-form-item label="其他来源说明：" class="item-column1" v-show="workData.source=='02'">
             {{workData.sourceDesc}}
           </el-form-item>
-        </el-tooltip>
       </div>
       <!--  <div class="address-title">
         录入工作证明人调查信息

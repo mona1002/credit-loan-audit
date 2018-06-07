@@ -31,11 +31,9 @@
         <!-- <el-form-item label="其他来源说明：" class="item-column2" v-show="comData.source=='02'">
         {{comData.sourceDesc}}
       </el-form-item> -->
-        <el-tooltip class="item" effect="dark" :content="comData.sourceDesc" placement="top">
           <el-form-item label="其他来源说明：" class="item-column1" v-show="comData.source=='02'">
             {{comData.sourceDesc}}
           </el-form-item>
-        </el-tooltip>
       </div>
       <!-- <div class="address-title">
         录入单位电话调查信息
