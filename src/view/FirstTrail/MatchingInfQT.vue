@@ -471,10 +471,6 @@
     margin-right: 15px;
   }
 
-  .PerDtl span:nth-of-type(7) {
-    width: 105px;
-  }
-
   /* 切换按钮 */
 
   .stretch {

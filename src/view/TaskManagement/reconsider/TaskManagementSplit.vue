@@ -108,7 +108,7 @@
     /* min-width: 1366; */
   }
 
-  /* 激活样式 流-css */
+  /* 激活样式 */
 
   .tab1Default {
     color: #bfcbd9;
@@ -161,10 +161,6 @@
     margin-right: 15px;
   }
 
-  .PerDtl span:nth-of-type(7) {
-    width: 105px;
-  }
-
   /* 切换按钮 */
 
   /* 左右分屏 */
@@ -188,7 +184,7 @@
 
   /* 左屏 */
 
-  /* 左侧详情 p标签   流-css */
+  /* 左侧详情 p标签   */
 
   .right .Right_tab_title_div,
   .AudioVisual_wrap_compare_right p {
@@ -207,7 +203,7 @@
     padding-right: 40px;
   }
 
-  /* 左侧详情 content div 内容   流-css */
+  /* 左侧详情 content div 内容   */
 
   .Left_right_BigImg {
     background: white;

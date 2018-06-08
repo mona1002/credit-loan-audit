@@ -227,8 +227,6 @@
     color: #bfcbd9;
   }
 
-  /*-------------------------------- */
-
   .SplitScreen_content {
     border: 1px solid #0077ff;
     height: calc(100% - 100px);
@@ -251,10 +249,6 @@
     letter-spacing: 0.1px;
     font-size: 12px;
     margin-right: 15px;
-  }
-
-  .PerDtl span:nth-of-type(7) {
-    width: 105px;
   }
 
   /* 切换按钮 */

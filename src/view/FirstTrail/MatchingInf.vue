@@ -434,9 +434,9 @@
     margin-right: 15px;
   }
 
-  .PerDtl span:nth-of-type(7) {
+  /* .PerDtl span:nth-of-type(7) {
     width: 105px;
-  }
+  } */
 
   /* 切换按钮 */
 
@@ -469,11 +469,6 @@
     float: left;
     position: relative;
   }
-
-  /* .left,
-  .AudioVisual_wrap_compare_left {
-    margin-right: 2px;
-  } */
 
   .left,
   .right {
