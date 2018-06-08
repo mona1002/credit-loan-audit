@@ -924,6 +924,7 @@
         ReconsiderDes: '', //复议弹窗-复议说明
         instaskType: '', //添加质检结论入参-任务类型（00:常规质检，01:专项质检）
         reviewConclusion: {}, //复核结论
+        conclusionId:'',//发起复议-弹窗入参
         tablrf: [{
           insResult: '01'
         }],
@@ -1293,9 +1294,12 @@
             // 质检结论                                  -Object
             !res.data.insConclusionList ? this.insConclusion.applyId = this.propQTconclution.applyId : this.insConclusion =
               res.data.insConclusionList;
-            this.insConclusion[0] && this.insConclusion[0].id ? this.addId = this.insConclusion[0].id : this.addId =
-              ''; //取添加质检结论时，id值
-            // 复核结论   -----obj
+            this.insConclusion[0] && this.insConclusion[0].id ? this.addId=  this.insConclusion[0].id : this.addId = ''; //取添加质检结论时，id值 
+            // 循环质检结论，取issend为1的那条数据的id，作为发起复议弹窗入参
+            for( var n=0;n<this.insConclusion.length;n++){
+                this.insConclusion[n].isSend=='1'?this.conclusionId=this.insConclusion[n].id:'';
+              }
+           // 复核结论   -----obj
             !res.data.insReviewConclusion ? this.reviewConclusion.applyId = this.propQTconclution.applyId : this.reviewConclusion =
               res.data.insReviewConclusion;
             // 电话征信：客户本人-电话拨打核实 - 本人只有一条电话拨打核实记录            -object
@@ -1727,6 +1731,7 @@
           approverUserCode: this.userInf.userName,
           reconDate: this.systermTime,
           reconType:  this.reconTypeParams,
+          conclusionId:this.conclusionId
           // taskNode:this.ReconsiderNode //不需要入
         }).then(res => {
           if (res.statusCode == 200) {
@@ -1924,12 +1929,6 @@
           this.areaAndComplianceBtn();
           this.getManagerList();
           this.ToApprovalParams.insState = '02';
-          // this.onlyCheck();
-          // this.ReApply = true; //初终审复议申请信息
-          // this.SuperVisor = true; //审批主管第一次复议申请信息
-          // this.FirstReconsider = true; //第一次复议审批信息
-          // this.SuperVisorSecond = true; // 审批主管第二次复议申请信息
-          // this.saveBtn=false;//保存
           this.submitBtn = false; //提交
           this.AprovalBtn = true; //审批
         }
