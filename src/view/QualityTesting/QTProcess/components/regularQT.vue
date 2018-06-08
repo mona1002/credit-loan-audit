@@ -1771,6 +1771,9 @@
             this.ToApprovalParams.isError = '';
             this.ToApprovalParams.errorType = '';
             this.ToApprovalParams.reviewRemark = '';
+            // checkApp_check_recon_manager   复议首次
+            this.propQTconclution.pageType == 'checkApp_check_recon_manager' ? this.$router.push(
+             'ReManagerTaskList?taskNodeName=checkApp_check_recon_manager&flag=11') : ''; //复议首次-成功跳转到列表页
             this.propQTconclution.pageType == 'checkApp_compliance_manager' ? this.$router.push(
               'ACManagerTaskList?taskNodeName=checkApp_compliance_manager&flag=13') : ''; //合规经理结论点击审批-成功跳转到列表页
           } else {
