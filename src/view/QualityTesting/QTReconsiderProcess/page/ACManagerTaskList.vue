@@ -231,7 +231,9 @@
       }
     },
     mounted() {
-      this.taskList = JSON.parse(localStorage.getItem('QTAreaWorkbenchPass'))
+      //this.taskList = JSON.parse(localStorage.getItem('QTAreaWorkbenchPass'));
+      this.taskList = JSON.parse(localStorage.getItem('QTComplianceWorkbenchPass'));
+      //console.log(this.taskList);
       this.params.processTemplateId = this.taskList.processTemplateId;
       this.params.taskNodeName = this.taskList.taskNodeName;
       this.params.taskStatus = this.taskList.taskStatus;
