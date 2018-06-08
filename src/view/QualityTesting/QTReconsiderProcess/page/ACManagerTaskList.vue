@@ -99,6 +99,7 @@
           listType: '',
           reconType: ''
         },
+        falge:'',
         QTquery: {
           id: '',
           matchApplyId: "",
@@ -231,13 +232,24 @@
       }
     },
     mounted() {
-      //this.taskList = JSON.parse(localStorage.getItem('QTAreaWorkbenchPass'));
-      this.taskList = JSON.parse(localStorage.getItem('QTComplianceWorkbenchPass'));
-      //console.log(this.taskList);
-      this.params.processTemplateId = this.taskList.processTemplateId;
-      this.params.taskNodeName = this.taskList.taskNodeName;
-      this.params.taskStatus = this.taskList.taskStatus;
-      this.inquire(this.params);
+      this.falge = JSON.parse(localStorage.getItem('judge'));
+      if(this.falge.flag == '12'){
+        this.taskList = JSON.parse(localStorage.getItem('QTAreaWorkbenchPass'));
+        //console.log(this.taskList);
+        this.params.processTemplateId = this.taskList.processTemplateId;
+        this.params.taskNodeName = this.taskList.taskNodeName;
+        this.params.taskStatus = this.taskList.taskStatus;
+        this.inquire(this.params);
+      }else if(this.falge.flag == '13'){
+        //this.taskList = JSON.parse(localStorage.getItem('QTAreaWorkbenchPass'));
+        this.taskList = JSON.parse(localStorage.getItem('QTComplianceWorkbenchPass'));
+        //console.log(this.taskList);
+        this.params.processTemplateId = this.taskList.processTemplateId;
+        this.params.taskNodeName = this.taskList.taskNodeName;
+        this.params.taskStatus = this.taskList.taskStatus;
+        this.inquire(this.params);
+      }
+      
       // QTAreaWorkbenchPass 区域
       // QTComplianceWorkbenchPass 合规
       //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
