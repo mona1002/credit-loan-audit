@@ -202,7 +202,7 @@
         reason: '',
         //恢复、解除的新数组
         newArray: [],
-        relations: [{
+        /*relations: [{
             'value': '01',
             'label': '夫妻'
           },
@@ -258,7 +258,7 @@
             'value': '14',
             'label': '单位'
           }
-        ],
+        ],*/
       }
     },
     props: ['applyId','isShow'],
@@ -307,8 +307,39 @@
               this.fraudTelCheckList = this.fraudTelCheckList;
             } else {
               this.fraudTelCheckList = res.data.fraudTelCheckList;
-              for (var i = 0; i < res.data.fraudTelCheckList.legth; i++) {
-                this.createTime = res.data.fraudTelCheckList[i].createTime;
+              for (var i = 0; i < this.fraudTelCheckList.length; i++) {
+                this.createTime = this.fraudTelCheckList[i].createTime;
+                //console.log(this.fraudTelCheckList[i].relation == '01');
+                if(this.fraudTelCheckList[i].relation == '01'){
+                  //console.log("99999");
+                  this.fraudTelCheckList[i].relation = '夫妻';
+                }else if(this.fraudTelCheckList[i].relation == '02'){
+                  this.fraudTelCheckList[i].relation = '父母';
+                }else if(this.fraudTelCheckList[i].relation == '03'){
+                  this.fraudTelCheckList[i].relation = '子女';
+                }else if(this.fraudTelCheckList[i].relation == '04'){
+                  this.fraudTelCheckList[i].relation = '兄弟';
+                }else if(this.fraudTelCheckList[i].relation == '05'){
+                  this.fraudTelCheckList[i].relation = '姐妹';
+                }else if(this.fraudTelCheckList[i].relation == '06'){
+                  this.fraudTelCheckList[i].relation = '兄妹';
+                }else if(this.fraudTelCheckList[i].relation == '07'){
+                  this.fraudTelCheckList[i].relation = '姐弟';
+                }else if(this.fraudTelCheckList[i].relation == '08'){
+                  this.fraudTelCheckList[i].relation = '朋友';
+                }else if(this.fraudTelCheckList[i].relation == '09'){
+                  this.fraudTelCheckList[i].relation = '同事';
+                }else if(this.fraudTelCheckList[i].relation == '10'){
+                  this.fraudTelCheckList[i].relation = '房东';
+                }else if(this.fraudTelCheckList[i].relation == '11'){
+                  this.fraudTelCheckList[i].relation = '亲属';
+                }else if(this.fraudTelCheckList[i].relation == '12'){
+                  this.fraudTelCheckList[i].relation = '其他';
+                }else if(this.fraudTelCheckList[i].relation == '13'){
+                  this.fraudTelCheckList[i].relation = '本人';
+                }else if(this.fraudTelCheckList[i].relation == '14'){
+                  this.fraudTelCheckList[i].relation = '单位';
+                }
               };
               for (var i = 0; i < this.fraudTelCheckList.legth; i++) {
                 this.fraudTelCheckList[i].createTime = this.createTime;
