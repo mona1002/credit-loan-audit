@@ -17,17 +17,17 @@ if (host === productionEnv) {
   host = releaseEnv;
 } else if (host === testEnv) {
   host = testEnv;
-}else if (host === press) {
+} else if (host === press) {
   host = press;
-} else if (host === developmentEnv){
+} else if (host === developmentEnv) {
   host = developmentEnv;
-}else{
+} else {
   host = testEnv;
 }
 
 appConstant.baseUrl_common = "http://" + host + (80 === port ? '' : (':' + port)) + "/riskManagement";
 //任务管理-产品名称接口
-appConstant.path= "http://" + host + (80 === port ? '' : (':' + port));
+appConstant.path = "http://" + host + (80 === port ? '' : (':' + port));
 // 工作流接口
 appConstant.baseUrl_common2 = "http://" + host + "/bpm-service/";
 

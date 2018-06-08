@@ -1339,7 +1339,6 @@
                 res.data.insTelVerifyList[k].telType === '05' ? this.insTelVerifyListWork.push(res.data.insTelVerifyList[k]) : ''; //工作证明
               }
             }
-            console.log(333,this.insTelVerifyListAddress )
             // 电话征信：微信/支付宝核实  ----  单位电话无微信支付宝--- -Array  (专员进来为空，提交/保存之后八条都会返回)
             for (var k = 0; k < res.data.insWechatAlipayList.length; k++) {
               if (res.data.insWechatAlipayList[k].telType == '06') { //客户本人
@@ -1421,10 +1420,6 @@
         // 
       },
       addQTResult() { //添加
-        // event.stopPropagation();
-        // 判断初终审标识-------------未填写------------初终检标志根据角色更改
-        // this.propQTconclution.pageType == 'checkApp_apply' //专员
-        // -----------------------------
         if (this.insConclusion.length == 0) {
           this.insConclusion.push({
             applyId: this.propQTconclution.applyId, // 申请单id
@@ -1444,7 +1439,6 @@
           });
           console.log(this.insConclusion)
         } else {
-          // if(this.cardDetList[this.cardDetList.length-1].bankName=='' || this.cardDetList[this.cardDetList.length-1].accountStatus==''){
           if (this.insConclusion[this.insConclusion.length - 1].checkResult == '') { //质检结果不能为空
             this.$message.error('质检结果不能为空！');
             return
@@ -1470,7 +1464,6 @@
         };
       },
       delQTresult() {
-        console.log(this.currentRow);
         for (var i = 0; i < this.insConclusion.length; i++) {
           if (this.insConclusion[i] == this.currentRow) {
             this.insConclusion.splice(i, 1);
@@ -1478,7 +1471,6 @@
         }
       },
       QTtableVal(val) {
-        console.log(val)
         this.currentRow = val
       },
       WechatData(ind) {
@@ -1543,8 +1535,6 @@
       // ---------------------------------按钮事件----------------
       // 保存 或 提交
       SaveInf(type) { //质检主管不需要提交，只有质检专员 显示提交
-        console.log(type)
-        console.log(this.insConclusion.length)
          this.checkResultCount01 =0;
          this.checkResultCount02 =0;
          this.checkResultCount03 =0;
@@ -1673,7 +1663,6 @@
       },
       // 无需复议
       NoReconsider() {
-        console.log('无需复议')
         this.post("/insReconApply/noNeedReview", {
           applyId: this.propQTconclution.applyId,
           taskId: this.propQTconclution.tastwaitingPass.taskId,
@@ -1724,15 +1713,12 @@
       },
       // 发起复议
       ToReconsider() {
-        console.log('发起复议')
         if( this.ReconsiderDes == ''){
            this.$message.error('复议说明不能为空！');
           return
         }
         this.loadSub = true;
         this.ReconSubmit = '提交中';
-        console.log('reconType:',this.propQTconclution.tastwaitingPass.reconType)
-        console.log('reconTypeParams:',this.reconTypeParams)
         this.post("/insReconApply/saveInsReconApply", {
           applyId: this.propQTconclution.applyId,
           taskId: this.propQTconclution.tastwaitingPass.taskId,
@@ -1758,7 +1744,6 @@
       },
       // 发起反欺诈
       AntiApply() {
-        console.log('反欺诈')
         this.$router.push({
           name: 'AntiApplyEditf'
         });
@@ -1796,12 +1781,10 @@
       },
       // 流程轨迹
       getLcgjList() {
-        console.log('流程轨迹')
         this.lcdialogVisible = true;
         this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.propQTconclution.tastwaitingPass.processInstanceId +
             '&' + Math.random())
           .then(res => {
-            console.log(res);
             if (res.statusCode == '200') {
               this.lcgjData = res.data;
             } else {
@@ -1811,13 +1794,9 @@
       },
       //大数据风控
       RiskControl() {
-        // console.log('大数据')
-        console.log(this.propQTconclution.applyId)
         this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
           applyId: this.propQTconclution.applyId
-          // applyId: '申请单id'
         }).then(res => {
-          //console.log(res.data);
           if (res.obj == null) {
             this.bigDataLogVisible = true;
           } else if (res.obj) {
@@ -1855,8 +1834,7 @@
         this.SuperVisor = true; //审批主管第一次复议申请信息
         this.FirstReconsider = true; //第一次复议审批信息
         this.SuperVisorSecond = true; // 审批主管第二次复议申请信息
-        this.saveBtn = false; //保存
-        this.SocialSecurityBtn = false; //社保公积金          
+        this.saveBtn = false; //保存     
       },
       onlyCheck() { //   查看页面，-编辑常规又质检
         this.material = true; //资料核实
@@ -1865,23 +1843,21 @@
         this.PhoneCredit = true; //电话征信
         this.QTConclution = true; //质检结论
       },
-      Special() { //this.propQTconclution.EditType == '项'
+      Special() { //专项质检
         this.AprovalInfolShow = false; //审批信息        
         this.MaterialShow = false; //资料核实
         this.InfoSearchShow = false; //三方信息查询
         this.MatchingShow = false; //内部匹配核实
         this.submitBtn = false; //提交
       },
-      regularAndSpecial() { //this.propQTconclution.EditType == '常规又专项质检'
+      regularAndSpecial() { //'常规又专项质检'
         this.reResultShow = true; //复核结论-div 
         this.AntiBtn = false; //发起反欺诈
-        this.SocialSecurityBtn = false; //社保公积金
         this.onlyCheck();
       },
       showdiffer() {
         // ----------------------角色------------------------------
         if (this.propQTconclution.pageType == 'checkApp_apply') { //专员-编辑  √
-          console.log('专员')
           if (this.propQTconclution.tastwaitingPass.listType == '常规质检') {
             this.instaskType = '00';
             this.QTConclutionBtn = true;
@@ -1891,42 +1867,24 @@
             this.QTresult=[];
             this.QTresult=this.QTresultSpecial;
             this.Special();
-            //   this.AprovalInfolShow = false; //审批信息        
-            //   this.MaterialShow = false; //资料核实
-            //   this.InfoSearchShow = false; //三方信息查询
-            //   this.MatchingShow = false; //内部匹配核实
             this.submitBtn = true; //提交
             this.QTConclutionBtn = true;
           } else if (this.propQTconclution.tastwaitingPass.listType == '常规又专项质检') {
             this.regularAndSpecial();
-            //   this.reResultShow = true; //复核结论-div 
-            //   this.AntiBtn=false;//发起反欺诈
-            //   this.SocialSecurityBtn=false;//社保公积金
-            //   // reResultShow
           }
         } else if (this.propQTconclution.pageType == 'checkApp_check_manager') { //主管-编辑 √
           if (this.propQTconclution.tastwaitingPass.listType == '常规质检') {
             this.submitBtn = false; //提交
-            this.SocialSecurityBtn = false; //社保公积金
           } else if (this.propQTconclution.tastwaitingPass.listType == '专项质检') {
             this.QTresult=[];
             this.QTresult=this.QTresultSpecial;
             this.Special();
-            // this.AprovalInfolShow = false; //审批信息        
-            // this.MaterialShow = false; //资料核实
-            // this.InfoSearchShow = false; //三方信息查询
-            // this.MatchingShow = false; //内部匹配核实
-            // this.submitBtn=false;//提交
           } else if (this.propQTconclution.tastwaitingPass.listType == '常规又专项质检') {
             this.regularAndSpecial();
-            // this.reResultShow = true; //复核结论-div 
-            // this.AntiBtn=false;//发起反欺诈
-            // this.SocialSecurityBtn=false;//社保公积金
             this.submitBtn = false; //提交
           }
         } else if (this.propQTconclution.pageType == 'self') { //本人---单独页面
         } else if (this.propQTconclution.pageType == 'checkApp_trial_manager') { //初终审主管  √
-          console.log(this.propQTconclution.pageType)
           this.onlyCheck();
           this.getManagerList();
           this.ReApply = true; //初终审复议申请信息
@@ -1934,10 +1892,8 @@
           this.ReconsiderBtn = true; //发起复议
           this.saveBtn = false; //保存            
           this.submitBtn = false; //提交
-          this.SocialSecurityBtn = false; //社保公积金
           if (this.propQTconclution.tastwaitingPass.reconType == '00') {
             //首次复议
-            // this.ReApply=true;//初终审复议申请信息
             this.ReconsiderNode = '质检主管'; //复议弹窗-复议节点
             this.reconTypeParams='01';//复议弹窗-入参reconType
           } else if (this.propQTconclution.tastwaitingPass.reconType == '01') {
@@ -1953,16 +1909,9 @@
           this.ReApply = true; //初终审复议申请信息
           this.SuperVisor = true; //审批主管第一次复议申请信息
           this.submitBtn = false; //提交
-          this.SocialSecurityBtn = false; //社保公积金
           this.ReAprovalBtn = true; //复议审批
         } else if (this.propQTconclution.pageType == 'checkApp_regional_manager') { //区域 √
-          // this.onlyCheck();
-          // this.ReApply = true; //初终审复议申请信息
-          // this.SuperVisor = true; //审批主管第一次复议申请信息
-          // this.FirstReconsider = true; //第一次复议审批信息
-          // this.SuperVisorSecond = true; // 审批主管第二次复议申请信息
-          // this.saveBtn=false;//保存
-          //  this.SocialSecurityBtn = false; //社保公积金
+           this.SocialSecurityBtn = false; //社保公积金
           this.areaAndComplianceBtn();
           this.getManagerList();
           this.ToApprovalParams.insState = '01';
@@ -1982,7 +1931,6 @@
           this.AprovalBtn = true; //审批
         }
       },
-
     },
     mounted() {
       console.log('propQTconclution:',this.propQTconclution)

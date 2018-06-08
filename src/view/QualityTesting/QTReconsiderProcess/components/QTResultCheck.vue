@@ -186,7 +186,6 @@
       console.log(this.taskwaitting)
       //   this.processInstanceId =  this.taskwaitting.processInstanceId;
       this.getInf();
-
     }
   }
 
