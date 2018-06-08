@@ -535,7 +535,7 @@
               </el-table-column>
               <el-table-column prop="checkStage" label="最新调查阶段" align="center" width="180">
               </el-table-column>
-              <el-table-column prop="conclusion" label="调查结论" align="center" width="180">
+              <el-table-column prop="checkStageTxt" label="调查结论" align="center" width="180">
               </el-table-column>
               <el-table-column label="质检结果" align="center" width="180">
                 <template slot-scope="scope">
