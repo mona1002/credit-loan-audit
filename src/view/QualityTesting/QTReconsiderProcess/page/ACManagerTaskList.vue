@@ -53,13 +53,13 @@
           </el-table-column>
           <el-table-column prop="subOrgNamec" label="初审所属科室" align='center' min-width="130">
           </el-table-column>
-          <el-table-column prop="auditDatec" label="初审日期" align='center' min-width="120">
+          <el-table-column prop="auditDatec" label="初审日期" align='center' min-width="180">
           </el-table-column>
           <el-table-column prop="auditNamez" label="终审姓名" align='center' min-width="120">
           </el-table-column>
           <el-table-column prop="subOrgNamez" label="终审所属科室" align='center' min-width="130">
           </el-table-column>
-          <el-table-column prop="auditDatez" label="终审日期" align='center' min-width="120">
+          <el-table-column prop="auditDatez" label="终审日期" align='center' min-width="180">
           </el-table-column>
           <el-table-column prop="checkState" label="业务状态" align='center' min-width="120">
           </el-table-column>
@@ -69,9 +69,9 @@
           </el-table-column>
           <el-table-column prop="errorDescribe" label="差错描述" align='center' min-width="120">
           </el-table-column>
-          <el-table-column prop="insDate" label="质检日期" align='center' min-width="120">
+          <el-table-column prop="insDate" label="质检日期" align='center' min-width="180">
           </el-table-column>
-          <el-table-column prop="checkStateTxt" label="质检状态" align='center' min-width="120">
+          <el-table-column prop="checkStateTxt" label="质检状态" align='center' min-width="180">
           </el-table-column>
         </el-table>
         <!-- 分页  -->
@@ -207,8 +207,8 @@
         this.inquire(this.params);
       },
       inquire(pam) {
-        // 基础接口-综合查询
-        this.post("applyInfoPool/multipleQuery", pam).then(res => {
+        // 基础接口
+        this.post("/insConclusion/queryCZSZGTaskList", pam).then(res => {
           if (res.statusCode == 200) {
             // for (var i = 0; i < res.data.length; i++) {
             //   if (res.data[i].certCode) {
