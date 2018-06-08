@@ -470,11 +470,6 @@
     position: relative;
   }
 
-  /* .left,
-  .AudioVisual_wrap_compare_left {
-    margin-right: 2px;
-  } */
-
   .left,
   .right {
     position: absolute;
