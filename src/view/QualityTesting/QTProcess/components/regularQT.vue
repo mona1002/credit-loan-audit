@@ -518,13 +518,17 @@
               <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
               <el-table-column prop="telNum" label="电话号码" align="center" width="160">
               </el-table-column>
-              <!-- <el-table-column label="电话录音" align="center" width="100">
-                <template slot-scope="scope">
-                  <span style="margin-left: 10px">{{ scope.row.telRecord }}</span>
-                </template> -->
               <el-table-column label="电话录音" align="center" width="100">
                 <template slot-scope="scope">
                   <span>{{ scope.row.telRecord}}</span>
+                  <audio controls="controls" height="100" width="100">
+                    <!-- 多个source格式 -->
+                    <!-- <source :src="URL+scope.row.telRecord" type="audio/mp3" /> -->
+                    <source :src="URL+scope.row.telRecord" />
+                    <!-- <source src="song.ogg" type="audio/ogg" /> -->
+                    <embed height="100" width="100" :src="URL+scope.row.telRecord" />
+                    您的浏览器不支持该音频播放器格式
+                </audio>
                 </template>
               </el-table-column>
               <el-table-column prop="source" label="来源" align="center" width="70">
@@ -944,6 +948,7 @@
       return {
         userInf: '',
         SaveInfParams: '',
+        URL:'',//音频路径
         systermTime: Number,
         submitShow: false, //提交弹框
         loadsitu: false,
@@ -2017,6 +2022,7 @@
     },
     mounted() {
       console.log('propQTconclution:',this.propQTconclution)
+      this.URL=baseurl.imgBaseUrl;
       this.getSystermTime();
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
       this.referPort(); //质检查询页面
