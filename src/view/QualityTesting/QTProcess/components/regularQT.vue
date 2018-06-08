@@ -608,9 +608,9 @@
         </template>
         <div class="material">
           <el-table :data="insReconApproval" border style="width: 100%">
-            <el-table-column prop="reviewResult" label="复议结果" width="150">
+            <el-table-column prop="reviewResultTxt" label="复议结果" width="150">
             </el-table-column>
-            <el-table-column prop="checkResult" width="180" label="质检结果">
+            <el-table-column prop="checkResultTxt" width="180" label="质检结果">
             </el-table-column>
             <el-table-column prop="approverUserCode" width="180" label="审批人">
             </el-table-column>
