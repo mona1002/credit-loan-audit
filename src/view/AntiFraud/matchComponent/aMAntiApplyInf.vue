@@ -12,27 +12,27 @@
             <li> -->
           <p>
             <label>进件编号： </label>
-            <span>{{this.applyInfoPool.applySubno}} </span>
+            <span>{{applyInfoPool.applySubno}} </span>
           </p>
           <p>
             <label>证件号码： </label>
-            <span>{{this.applyInfoPool.certCode}} </span>
+            <span>{{applyInfoPool.certCode}} </span>
           </p>
           <!-- </li>
             <li> -->
           <p>
             <label>客户名称： </label>
-            <span>{{this.applyInfoPool.custName}} </span>
+            <span>{{applyInfoPool.custName}} </span>
           </p>
           <p>
             <label>移动电话： </label>
-            <span>{{this.applyInfoPool.mobile}} </span>
+            <span>{{applyInfoPool.mobile}} </span>
           </p>
           <!-- </li>
             <li> -->
           <p>
             <label>证件类型： </label>
-            <span>{{this.applyInfoPool.certTypeTxt}} </span>
+            <span>{{applyInfoPool.certTypeTxt}} </span>
           </p>
           <!-- </li>
           </ul> -->

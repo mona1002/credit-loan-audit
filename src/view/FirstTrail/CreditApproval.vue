@@ -1291,7 +1291,7 @@
             this.custNo = res.data.custNo; //客户编号
             this.applyConclusion = res.data.applyConclusion;
             this.srcPloanAmt = res.data.srcPloanAmt; // 信审批准额度
-            this.creditDebitRate = res.data.creditDebitRate; // 信用负债率
+            this.caculData.creditDebitRate = res.data.creditDebitRate; // 信用负债率
             this.proId = res.data.proId; //获取产品期限产品id
             // this.taskId = res.data.taskId; // 任务id
             // opinionFlag: this.opinionFlag, // 任务类型  初审 00 
@@ -1709,7 +1709,7 @@
           proCode: this.proCode,
           verIncome: verIncome2,
           ploanAmt: ploanAmt2,
-          ploanTerm: this.caculData.ploanTerm, //批准期限
+          ploanTerm: this.ploanTerm, //批准期限
           appmult: this.caculData.appmult, // 审批倍数
           eachTermamt: this.caculData.eachTermamt, //每期还款额[元]
           inteDebitrate: this.caculData.inteDebitrate, //内部负债率
@@ -1787,7 +1787,7 @@
             // applyConclusion: '00',
             // ploanOperId: '', // 批准人员
             this.srcPloanAmt = ''; // 信审批准额度
-            this.creditDebitRate = ''; // 信用负债率
+            this.caculData.creditDebitRate = ''; // 信用负债率
             // approvalFlag: '0', // 终审通过标志
             // ploanDate: '', // 批准日期
             // auditDate: '', // 批准时间

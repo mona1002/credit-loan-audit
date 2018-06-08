@@ -362,7 +362,7 @@
     height: 100%;
   }
 
-  /* 激活样式 流-css */
+  /* 激活样式 */
 
   .tab1Default {
     color: #bfcbd9;
@@ -408,7 +408,6 @@
     position: absolute;
     top: 7px;
     right: 17px;
-    /* right: 0; */
   }
 
   .showAllList {
@@ -419,8 +418,6 @@
     left: 0;
     top: 0;
   }
-
-  /*-------------------------------- */
 
   .SplitScreen_content {
     border: 1px solid #0077ff;
@@ -444,10 +441,6 @@
     letter-spacing: 0.1px;
     font-size: 12px;
     margin-right: 15px;
-  }
-
-  .PerDtl span:nth-of-type(7) {
-    width: 105px;
   }
 
   /* 切换按钮 */
@@ -492,11 +485,6 @@
     left: 50%;
   }
 
-  /* .left,
-  .AudioVisual_wrap_compare_left {
-    margin-right: 2px;
-  } */
-
   /* 左屏 */
 
   /* 左侧列表  影像资料等 ul 外包   流 */
@@ -531,7 +519,7 @@
     height: 100%;
   }
 
-  /* 左侧详情 p标签   流-css */
+  /* 左侧详情 p标签   */
 
   .Left_right_Title,
   .right .Right_tab_title_div,
@@ -552,7 +540,7 @@
     padding-right: 40px;
   }
 
-  /* 左侧详情 content div 内容   流-css */
+  /* 左侧详情 content div 内容   */
 
   .Left_right_BigImg {
     background: white;
@@ -562,7 +550,7 @@
 
   /* 右屏 */
 
-  /* 右侧tab切换头外的ul   流 */
+  /* 右侧tab切换头外的ul   */
 
   .Right_tab_ul_wrap {
     overflow: hidden;

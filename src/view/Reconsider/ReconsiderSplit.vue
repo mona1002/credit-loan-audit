@@ -56,7 +56,7 @@
             <!-- 反欺诈结论 -->
             <aAntiApplyInf v-if=" this.tabContent2==9"></aAntiApplyInf>
             <!-- 反欺诈调查 -->
-            <RantiFraudInvestigation v-if=" this.tabContent2==10"></RantiFraudInvestigation>
+            <RantiFraudInvestigation v-if=" this.tabContent2==10"  :isShow='false' :applyId='tastwaitingPass.applyId'></RantiFraudInvestigation>
             <!-- √ -->
             <!-- 复议结论 -->
             <ReconsiderationConclusion v-if=" this.tabContent2==11 && this.Rcon==1"></ReconsiderationConclusion>
@@ -227,8 +227,6 @@
     color: #bfcbd9;
   }
 
-  /*-------------------------------- */
-
   .SplitScreen_content {
     border: 1px solid #0077ff;
     height: calc(100% - 100px);
@@ -251,10 +249,6 @@
     letter-spacing: 0.1px;
     font-size: 12px;
     margin-right: 15px;
-  }
-
-  .PerDtl span:nth-of-type(7) {
-    width: 105px;
   }
 
   /* 切换按钮 */
