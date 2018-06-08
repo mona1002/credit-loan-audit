@@ -1414,8 +1414,11 @@
               this.insReconApply[m].reconType == '02' ? this.ManagerSecondTableData.push(this.insReconApply[m]) :
                 ''; //02:初终审主管二次----审批主管第二次复议申请信息
             }
-            res.data.insReconApproval && res.data.insReconApproval.reviewRemark ? this.insReconApproval[0] = res.data
-              .insReconApproval : ''; //复议申请表
+            // 第一次复议审批信息--审批信息取值-obj
+            this.insReconApproval=[];
+                      res.data.insReconApproval? this.insReconApproval.push(res.data.insReconApproval) : ''; 
+            // res.data.insReconApproval && res.data.insReconApproval.reviewRemark ? this.insReconApproval.push(res.data
+            //   .insReconApproval) : ''; //复议申请表
             // res.data.insReconApproval.reviewRemark?this.insReconApproval.push(res.data.insReconApproval):'';//复议申请表
           } else {
             this.$message.error(res.msg);
