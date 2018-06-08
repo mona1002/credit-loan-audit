@@ -173,8 +173,6 @@
       //   },
       handleCurrentChange(val) {
         console.log(val)
-        console.log(this.params.taskNodeName)
-        this.params.taskNodeName = 'checkApp_compliance_manager';
         this.query.reconType = val.reconType;
         this.QTquery.id = this.query.id = val.id;
         this.QTquery.matchApplyId = this.query.ApplyId = val.applyId;
