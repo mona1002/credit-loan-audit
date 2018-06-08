@@ -61,9 +61,9 @@
           </el-table-column>
           <el-table-column prop="auditDatez" label="终审日期" align='center' min-width="180">
           </el-table-column>
-          <el-table-column prop="checkState" label="业务状态" align='center' min-width="120">
+          <el-table-column prop="busiStateTxt" label="业务状态" align='center' min-width="120">
           </el-table-column>
-          <el-table-column prop="checkResult" label="质检结果" align='center' min-width="120">
+          <el-table-column prop="checkResultTxt" label="质检结果" align='center' min-width="120">
           </el-table-column>
           <el-table-column prop="errorType" label="差错类型" align='center' min-width="120">
           </el-table-column>
