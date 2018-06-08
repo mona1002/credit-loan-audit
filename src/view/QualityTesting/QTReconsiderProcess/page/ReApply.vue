@@ -201,7 +201,8 @@
           reviewRemark: this.fraudAuditOpinion.auditDesc, //复议说明
           approverUserCode: this.reApplyInf.userCode, //经办人
           reconDate: this.systermTime, //发起复议时间
-          reconType: this.taskwaitting.reconType, //复议类型(00:初终审本人，01:初终审主管首次，02:初终审主管二次)
+          // reconType: this.taskwaitting.reconType, //复议类型(00:初终审本人，01:初终审主管首次，02:初终审主管二次)
+          reconType: '00', //复议类型(00:初终审本人，01:初终审主管首次，02:初终审主管二次)
           taskId: this.taskwaitting.taskId, //任务id
           conclusionId: this.conclusionId//质检结论id
         }).then(res => {
