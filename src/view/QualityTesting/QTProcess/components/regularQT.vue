@@ -486,7 +486,7 @@
                 <!-- 电话录音-->
                 <td> {{insTelCustInfo.telRecord}}</td>
                 <!-- 接听人是否借款人本人 -->
-                <td> {{insTelCustInfo.iisself}}</td>
+                <td> {{insTelCustInfo.isSelfTxt}}</td>
                 <!-- 接听说明 -->
                 <td> {{insTelCustInfo.iisselftxt}}</td>
                 <!-- 质检结果 -->
@@ -1297,7 +1297,7 @@
             this.insConclusion[0] && this.insConclusion[0].id ? this.addId=  this.insConclusion[0].id : this.addId = ''; //取添加质检结论时，id值 
             // 循环质检结论，取issend为1的那条数据的id，作为发起复议弹窗入参
             for( var n=0;n<this.insConclusion.length;n++){
-                this.insConclusion[n].isSend=='1'?this.conclusionId=this.insConclusion[n].id:'';
+              this.insConclusion[n].isSend &&  this.insConclusion[n].isSend=='1'?this.conclusionId=this.insConclusion[n].id:'';
               }
            // 复核结论   -----obj
             !res.data.insReviewConclusion ? this.reviewConclusion.applyId = this.propQTconclution.applyId : this.reviewConclusion =
