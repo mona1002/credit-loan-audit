@@ -2004,7 +2004,6 @@
           this.areaAndComplianceBtn();
           this.getManagerList();
           this.RiskControlBtn = false; //大数据风控
-          this.NoReconsiderBtn = true; //无需复议
           this.AreaReconsiderBtn=true;//区域经理提交
           this.submitBtn=false;//提交
         } else if (this.propQTconclution.pageType == 'checkApp_compliance_manager') { //合规 √
