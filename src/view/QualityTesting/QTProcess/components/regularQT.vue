@@ -727,6 +727,11 @@
         <img src="../../../../../static/images/back.png">
         <label class="labelTxt">无需复议</label>
       </el-button>
+      <!-- 区域经理提交按钮 -->
+       <el-button @click="AreaToReconsiderAlert" v-if="AreaReconsiderBtn">
+        <img src="../../../../../static/images/appro.png">
+        <label class="labelTxt">提交</label>
+      </el-button>
       <!-- <el-button @click="this.ReconsiderShow=true"> -->
       <el-button @click="ToReconsiderAlert" v-if="ReconsiderBtn">
         <img src="../../../../../static/images/appro.png">
@@ -789,6 +794,36 @@
         </div>
         <div style="text-align:right;">
           <el-button type="primary" @click="ToReconsider" :loading="loadSub">{{ReconSubmit}}</el-button>
+        </div>
+      </el-dialog>
+    </div>
+    <!-- 区域经理-提交按钮-发起复议 -->
+    <div class="alertBox">
+      <el-dialog title='发起复议' :visible.sync="AreaReconsiderShow" :modal="false" width="630px">
+        <div>
+          <p>
+            <label class="reconsider_Alert_Label"> <b class="required_Red"> * </b>复议结果：</label>
+          <!-- xiala -->
+           <el-select v-model="ToAteaApprovalParams.reviewResult" placeholder="请选择">
+                <el-option
+                  v-for="item in RecResult"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+          </p>
+          <p style="margin:10px 0;">
+            <label class="reconsider_Alert_Label">   <b class="required_Red"> * </b>复议说明：</label>
+            <el-input v-model="ToAteaApprovalParams.reviewRemark" style="width:500px;vertical-align:top;" type="textarea" resize='none' :rows="2"></el-input>
+          </p>
+          <p>
+            <span  class="reconsider_Alert_Label"> 审批人：</span><span>{{userInf. userName}}</span>
+            <span style="float:right;width:280px;"> 审批时间：{{systermTime | dateFilter}}</span>
+          </p>
+        </div>
+        <div style="text-align:right;">
+          <el-button type="primary" @click="AreaToReconsider" :loading="loadSub">{{ReconSubmit}}</el-button>
         </div>
       </el-dialog>
     </div>
@@ -938,6 +973,18 @@
           approverUserCode: '',
           approverDate: '',
           insState: '',
+          taskId: this.propQTconclution.tastwaitingPass.taskId,
+        },
+      ToAteaApprovalParams: { //区域经理审批弹窗入参
+          applyId: this.propQTconclution.applyId,
+          reviewResult: '',
+          checkResult: '',
+          isError: '',
+          errorType: '',
+          reviewRemark: '',
+          approverUserCode: '',
+          approverDate: '',
+          insState: '01',
           taskId: this.propQTconclution.tastwaitingPass.taskId,
         },
         AntiApplyParams: {
@@ -1214,6 +1261,7 @@
         value: '',
         // -----------弹窗---
         ReconsiderShow: false,
+        AreaReconsiderShow:false,
         ReAprovalShow: false,
         AprovalShow: false,
         lcdialogVisible: false,
@@ -1244,6 +1292,7 @@
         submitBtn: true, //按钮 - 提交
         NoReconsiderBtn: false, //按钮 - 无需复议
         ReconsiderBtn: false, //按钮 - 发起复议
+        AreaReconsiderBtn:false,//按钮 - 区域经理提交
         ReAprovalBtn: false, //按钮 - 复议审批
         AprovalBtn: false, //按钮 - 审批
         AntiBtn: true, //发起反欺诈
@@ -1694,6 +1743,11 @@
         this.loadSub = false;
         this.ReconSubmit = '提交';
       },
+      AreaToReconsiderAlert(){
+        this.AreaReconsiderShow = true;
+        this.loadSub = false;
+        this.ReconSubmit = '提交';
+      },
       ReAprovalAlert() { //复议审批-弹窗-编辑
         this.ReAprovalShow = true;
         this.ReconSubmit = '提交';
@@ -1731,7 +1785,7 @@
           taskId: this.propQTconclution.tastwaitingPass.taskId,
           taskNodeName: this.propQTconclution.pageType,
           reviewRemark: this.ReconsiderDes, //复议说明
-          approverUserCode: this.userInf.userName,
+          approverUserCode: this.userInf.userCode,
           reconDate: this.systermTime,
           reconType:  this.reconTypeParams,
           conclusionId:this.conclusionId
@@ -1750,6 +1804,30 @@
         });
         this.ReconsiderShow = false;
       },
+      // 区域经理提交按钮-发起复议
+      AreaToReconsider() {
+        if( this.ToAteaApprovalParams.reviewResult == '' || this.ToAteaApprovalParams.reviewRemark=='' ){
+           this.$message.error('有必填项未填！');
+          return
+        }
+        this.loadSub = true;
+        this.ReconSubmit = '提交中';
+        this.post("/insReconApply/saveInsReconApproval", this.ToAteaApprovalParams).then(res => {
+          if (res.statusCode == 200) {
+            this.$message({
+              type: 'success',
+              message: '审批成功！'
+            })
+            // 清空已填数据
+          this.ToAteaApprovalParams.reviewResult='';//复议结果
+          this.ToAteaApprovalParams.reviewRemark  ='';//复议说明
+        this.$router.push('/ACManagerTaskList?taskNodeName=checkApp_regional_manager&flag=12'); //区域经理提交成功-成功跳转到列表页
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+        this.AreaReconsiderShow = false;
+      },
       // 发起反欺诈
       AntiApply() {
         this.$router.push({
@@ -1765,7 +1843,7 @@
         }
         this.ReconSubmit = '提交中';
         this.loadSub = true;
-        this.ToApprovalParams.approverUserCode = this.userInf.userName;
+        this.ToApprovalParams.approverUserCode = this.userInf.userCode;
         this.ToApprovalParams.approverDate = this.systermTime;
         this.post("/insReconApply/saveInsReconApproval", this.ToApprovalParams).then(res => {
           if (res.statusCode == 200) {
@@ -1925,9 +2003,10 @@
            this.SocialSecurityBtn = false; //社保公积金
           this.areaAndComplianceBtn();
           this.getManagerList();
-          this.ToApprovalParams.insState = '01';
           this.RiskControlBtn = false; //大数据风控
           this.NoReconsiderBtn = true; //无需复议
+          this.AreaReconsiderBtn=true;//区域经理提交
+          this.submitBtn=false;//提交
         } else if (this.propQTconclution.pageType == 'checkApp_compliance_manager') { //合规 √
           this.areaAndComplianceBtn();
           this.getManagerList();
