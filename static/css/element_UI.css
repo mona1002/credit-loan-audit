@@ -2919,3 +2919,13 @@ body .el-submenu .el-menu-item {
 .RulesReApply .el-collapse{
   overflow: hidden;
 }
+.AlertDialogBox .el-dialog{
+position: absolute;
+left: 0;
+top: 0;
+right: 0;
+bottom: 0;
+}
+.regularQT{
+  
+}

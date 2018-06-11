@@ -1,6 +1,6 @@
 <!-- 内匹-反欺诈调查 -->
 <template>
-  <div class="aAntiFraudInvestigation RaAntiFraudInvestigation">
+  <div class="aAntiFraudInvestigation RaAntiFraudInvestigation AlertDialogBox">
     <el-collapse v-model="activeNames" @change="handleChange">
       <el-collapse-item name="1">
         <template slot="title">
@@ -127,7 +127,7 @@
     </el-collapse>
     <!-- 弹框 -->
     <div class="numLog">
-      <el-dialog :title=aa :visible.sync="dialogVisible" width="860px" top="20vh">
+      <el-dialog :title='aa' :visible.sync="dialogVisible" width="860px" style="height:480px" top="0">
         <div class="numBody">
           <div>
             <el-table ref="multipleTable" :data="recordList" tooltip-effect="dark" style="width: 100%" height="259" border @selection-change="handleSelectionChange">
