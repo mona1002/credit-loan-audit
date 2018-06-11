@@ -157,6 +157,7 @@
         this.params.dataParam.auditDatez = '';
         this.params.dataParam.insDateBegin = '';
         this.params.dataParam.insDateEnd = '';
+        this.QTtime='';
         this.inquire(this.params);
       },
       Rsearch() {

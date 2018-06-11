@@ -36,7 +36,7 @@
             </p>
             <div class="Left_right_BigImg">
               <!--  :AUobj='AULobj'   :AUpreWidth.sync='preWidth' -->
-              <AudioVisualLeft msg="spLone" ref="AULeft" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS" :PropsApplyId='tastwaitingPass.applyId' :comBtn.sync='comBtn'></AudioVisualLeft>
+              <AudioVisualLeft msg="spLone" ref="AULeft" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></AudioVisualLeft>
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
               <InternalMatch v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
               <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
@@ -94,7 +94,7 @@
           <p>影像资料</p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <AudioVisualLeft msg="spLtwo" v-if="CompareAlert" :PropsApplyId='tastwaitingPass.applyId' :comBtn.sync='alertComBtn'></AudioVisualLeft>
+            <AudioVisualLeft msg="spLtwo" v-if="CompareAlert" :comBtn.sync='alertComBtn'></AudioVisualLeft>
           </div>
         </div>
         <!-- 弹出层右侧 div -->
@@ -108,7 +108,7 @@
           </p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <AudioVisualLeft msg="spLthree" ref="audioChild" :PropsApplyId='tastwaitingPass.applyId' v-on:inputInf="inputInner" :comBtn.sync='alertComBtn'></AudioVisualLeft>
+            <AudioVisualLeft msg="spLthree" ref="audioChild" v-on:inputInf="inputInner" :comBtn.sync='alertComBtn'></AudioVisualLeft>
           </div>
         </div>
       </div>
@@ -394,9 +394,7 @@
       },
       mountedInf() {
         this.title = "影像资料";
-        // this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
-        // console.log(this.tastwaitingPass.applyId)
-
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
         this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
           id: this.tastwaitingPass.applyId,
         }).then(res => {
@@ -409,9 +407,6 @@
           }
         });
       }
-    },
-    created(){
-    this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
     },
     activated() {
       console.log(this.$route.meta.refresh)
