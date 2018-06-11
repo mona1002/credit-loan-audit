@@ -84,6 +84,8 @@
           </el-table-column>
           <el-table-column prop="insDate" label="质检日期" align='center' min-width="100">
           </el-table-column>
+             <el-table-column prop="checkResultTxt" label="质检结果" align='center' min-width="100">
+          </el-table-column>
           <el-table-column prop="errorType" label="差错类型" align='center' min-width="100">
           </el-table-column>
           <el-table-column prop="errorDescribe" label="差错描述" align='center' min-width="100">
