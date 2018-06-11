@@ -522,8 +522,12 @@
                 <template slot-scope="scope">
                   <span>{{ scope.row.telRecord}}</span>
                   <audio controls="controls" height="100" width="100">
-                    <!-- 多个source格式 -->
                     <source :src="URL+scope.row.telRecord" type="audio/mp3" />
+                       <source :src="URL+scope.row.telRecord" type="audio/WAV" />
+                          <source :src="URL+scope.row.telRecord" type="audio/WMA" />
+                             <source :src="URL+scope.row.telRecord" type="audio/AMR" />
+                                <source :src="URL+scope.row.telRecord" type="audio/AVA" />
+                      <source :src="URL+scope.row.telRecord" type="audio/ACT" />
                     <source :src="URL+scope.row.telRecord" type="audio/ogg" />
                     <embed height="100" width="100" :src="URL+scope.row.telRecord" /> 您的浏览器不支持该音频播放器格式
                   </audio>
