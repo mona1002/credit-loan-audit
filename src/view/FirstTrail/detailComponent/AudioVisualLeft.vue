@@ -6,8 +6,6 @@
     </div>
     <!-- 左侧 折叠面板 -->
     <div class="AudioVisual_List" ref="AudioVisual_List_ref" v-show="showListDiv" style="">
-      <p>{{this.mwidth}}
-      </p>
       <!-- 折叠面板title -->
       <img class="hidBtn" src="../../../../static/images/Shape Copy.png" @click="hid">
       <!-- 折叠面板-手风琴List -->
@@ -46,7 +44,7 @@
       </el-collapse>
       <!-- 按钮 : 缩略图 对比  -->
       <div class="AudioVisualLeft_btn_wrap">
-        {{AUpreWidth}}
+        <!-- {{AUpreWidth}} -->
         <el-button @click="SmallpicAlert" class="AudioVisualLeft_compareBtn">缩略图</el-button>
         <el-button type="primary" @click="compBtnShow" v-if="this.comBtn">对比</el-button>
       </div>
@@ -140,9 +138,6 @@
   export default {
     data() {
       return {
-        mwidth: '',
-        mheight: '',
-        // =============
         perfBtn: true,
         judgeFlag: '',
         opendImg: [],
@@ -158,7 +153,7 @@
         CompareAlert: true,
         ListParent: [],
         ListDetails: [],
-        applyId: '', //入参
+        // applyId: '', //入参
         imgPath: [],
         imgPathDetail: [],
         // ----------------------------------
@@ -176,7 +171,7 @@
         myPdf:false,
       }
     },
-    props: ['msg', 'comBtn', 'AUpreWidth', 'AUobj'],
+    props: ['msg', 'comBtn','PropsApplyId'],
     methods: {
       closeAlertSearch() {
         this.dataa = false;
@@ -216,14 +211,15 @@
           }
         });
       },
-      getParentList(id) { //  未写 -----未对
+      getParentList(id) { 
         console.log("table选中-获取父节点")
         this.post("/productArchive/getProductArchiveParentList", {
           applyId: id, //上面删除后 此处打开
         }).then(res => {
           if (res.statusCode == 200) {
             this.ListParent = res.data;
-            this.localInf.applyId = id;
+            // this.localInf.applyId = id;
+           this.PropsApplyId=  id;
             this.dataa = false;
             this.custName = this.currentRow.matchApplyCustName;
             this.custmatchApplySubNo = this.currentRow.matchApplySubNo;
@@ -250,7 +246,8 @@
         this.openImg = ind
         // 二级（子）节点
         this.post("/productArchive/getProductArchiveChildList", {
-          applyId: this.localInf.applyId,
+          // applyId: this.localInf.applyId,
+           applyId:  this.PropsApplyId,
           pid: id
         }).then(res => {
           if (res.statusCode == 200) {
@@ -272,8 +269,6 @@
         this.smallPicInd = 0;
          this.pageShow=1;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
-        console.log(this.imgPath);
-        console.log('mkkmkm');
         if(this.imgPath[0].imagePath.substring(this.imgPath[0].imagePath.length-3) == 'pdf'){
             this.pdfArrys=this.imgPath;
             this.myPdf = true;
@@ -282,7 +277,6 @@
             this.myPng = true;
             this.myPdf = false;
             this.pngAyyrs=this.imgPath;
-            console.log(this.pngAyyrs.length);
           };
         this.$refs.img_wrap.style.left = 0;
         this.$refs.img_wrap.style.top = 0;
@@ -340,7 +334,6 @@
           this.$refs.Big_pic_ref[0].style.width = "auto";
         }
         this.$refs.img_wrap.scrollIntoView()
-
       },
       clockWise() {
         if (this.$refs.Big_pic_ref) {
@@ -370,9 +363,7 @@
         this.changeSmallPicCss(ind);
       },
       defaultBigPicCss() {
-        console.log('enter')
         this.$nextTick(() => {
-          console.log('mounted')
           if (this.$refs.Big_pic_ref) {
             this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
             // this.$refs.img_wrap.style.left=0;//renew
@@ -462,9 +453,10 @@
     },
     mounted() {
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '01') {
-        this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
-      } else if (this.judgeFlag.flag == '02') {
+      // if (this.judgeFlag.flag == '01') {
+      //   this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
+      // } else 
+      if (this.judgeFlag.flag == '02') {
         this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
       } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
         this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员\主管
@@ -473,9 +465,11 @@
       //   this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
       // }
       this.imgBaseUrl = imgUrl.imgBaseUrl;
+       console.log('PropsApplyId',this.PropsApplyId)
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
-        applyId: this.localInf.applyId,
+        // applyId: this.localInf.applyId,
+        applyId:  this.PropsApplyId,
       }).then(res => {
         if (res.statusCode == 200) {
           this.ListParent = res.data;
