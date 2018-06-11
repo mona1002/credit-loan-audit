@@ -9,15 +9,15 @@
           <li>
             <p>
               <label> 进件编号 </label>
-              <el-input v-model="params.applySubNo" placeholder="请输入进件编号"></el-input>
+              <el-input v-model="params.dataParam.applySubNo" placeholder="请输入进件编号"></el-input>
             </p>
             <p>
               <label> 客户名称</label>
-              <el-input v-model="params.custName" placeholder="请输入客户名称"></el-input>
+              <el-input v-model="params.dataParam.custName" placeholder="请输入客户名称"></el-input>
             </p>
             <p>
               <label> 产品名称</label>
-              <el-select v-model="params.proCode" placeholder="请选择">
+              <el-select v-model="params.dataParam.proCode" placeholder="请选择">
                 <el-option v-for="item in ProductName" :key="item.proCode" :label="item.proName" :value="item.proCode">
                 </el-option>
               </el-select>
@@ -26,25 +26,25 @@
           <li>
             <p>
               <label> 质检状态</label>
-              <el-select v-model="params.checkState" placeholder="请选择">
+              <el-select v-model="params.dataParam.checkState" placeholder="请选择">
                 <el-option v-for="item in QTSituation" :key="item.code" :label="item.name" :value="item.code">
                 </el-option>
               </el-select>
             </p>
             <p>
               <label> 初审人员</label>
-              <el-input v-model="params.auditNamec" placeholder="请输入初审人员"></el-input>
+              <el-input v-model="params.dataParam.auditNamec" placeholder="请输入初审人员"></el-input>
             </p>
             <p>
               <label> 终审日期</label>
-              <el-date-picker v-model="params.auditDatez" type="date" value-format='timestamp'>
+              <el-date-picker v-model="params.dataParam.auditDatez" type="date" value-format='timestamp'>
               </el-date-picker>
             </p>
           </li>
           <li>
             <p>
               <label> 终审人员 </label>
-              <el-input v-model="params.auditNamez" placeholder="请输入终审人员"></el-input>
+              <el-input v-model="params.dataParam.auditNamez" placeholder="请输入终审人员"></el-input>
             </p>
             <p>
               <label> 质检日期</label>
@@ -160,8 +160,8 @@
         this.inquire(this.params);
       },
       Rsearch() {
-        this.params.insDateBegin = this.QTtime[0];
-        this.params.insDateEnd = this.QTtime[1];
+        this.params.dataParam.insDateBegin = this.QTtime[0];
+        this.params.dataParam.insDateEnd = this.QTtime[1];
         this.params.pageParam.pageNum = this.currentPage = 1;
         this.inquire(this.params);
       },
