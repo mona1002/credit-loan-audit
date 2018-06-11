@@ -37,7 +37,7 @@
             </p>
             <p>
               <label> 终审日期</label>
-              <el-date-picker v-model="params.dataParam.auditDatez" type="date" value-format='timestamp'>
+              <el-date-picker v-model="params.dataParam.auditDatez"  type="date" value-format="yyyy-MM-dd">
               </el-date-picker>
             </p>
           </li>
@@ -48,7 +48,7 @@
             </p>
             <p>
               <label> 质检日期</label>
-              <el-date-picker v-model="QTtime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" value-format='timestamp'>
+              <el-date-picker v-model="QTtime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"  value-format="yyyy-MM-dd">
               </el-date-picker>
             </p>
             <p>
@@ -63,7 +63,7 @@
       </div>
       <div class="table_wrap">
         <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" height="100%" @row-dblclick="handleCurrentChange" border>
+        <el-table :data="tableData" style="width: 100%" @row-dblclick="handleCurrentChange" border>
           <!-- <el-table-column type="index" align='center' label=序号 width="55">
           </el-table-column> -->
           <el-table-column prop="applySubNo" label="进件编号" align='center' min-width="180">
@@ -337,9 +337,9 @@
   .table_wrap {
     background-color: #ffffff;
     border: 1px solid #e6eaee;
-    padding: 25px 25px 20px 25px;
+    padding: 25px 25px 40px 25px;
     width: 100%;
-    height: calc( 100% - 370px);
+    /* height: calc( 100% - 370px); */
   }
 
   .paging {
