@@ -109,10 +109,10 @@
         ToReconsiderParams: {
           id: '',
           taskId:'',
-          flag: 'zhijian',
-          busiState: '30',
-          wayOf: '02', //质检
-           channel:'00',
+          // flag: 'zhijian',
+          // busiState: '30',
+          // wayOf: '02', //质检
+          //  channel:'00',
           reconType:'00'//复议类型(00:初终审本人，01:初终审主管首次，02:初终审主管二次)
         }
       }

@@ -996,7 +996,7 @@
           id: this.propQTconclution.applyId,
           flag: 'zhijian',
           busiState: '30',
-          channel: '00',
+          channel: '03',//   ("00", "审批提报"), ("01", "前端提报"), ("02", "规则提报"), ("03","质检提报"), ("04","复议提报"), ("05","内匹关联"), ("06","反欺诈提报"), ("99","其他提报");
         },
         isForm: '',
         radio: '1',
