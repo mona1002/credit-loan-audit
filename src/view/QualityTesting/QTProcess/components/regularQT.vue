@@ -892,8 +892,8 @@
       </el-dialog>
     </div>
     <!-- 流程轨迹 -->
-    <div class="alertBox">
-      <el-dialog title='流程轨迹' :visible.sync="lcdialogVisible" :modal="false" width="860px" top="0">
+    <div class="alertBox pro_alert">
+      <el-dialog title='流程轨迹' :visible.sync="lcdialogVisible" :modal="false" width="860px" style='height:463px;positon:absolute;left:0;right:0;top:0;bottom:0;margin:auto;' top="0">
         <div class="splcBody">
           <!-- <el-collapse v-model="activeNames2" @change="handleChange">
 			  		<el-collapse-item title="信审流程轨迹" name="1"> -->
@@ -962,6 +962,8 @@
         currentRow: null,
         addId: '',
         ind: 0,
+        conclutionAlertMessage07:'',
+        conclutionAlertMessage08:'',
         insReconApply: [], //复议申请表
         ReconsiderNode: '质检主管', //复议弹窗-复议节点
         reconTypeParams: '', //发起复议入参
@@ -1314,7 +1316,10 @@
         checkResultCount04: 0,
         checkResultCount05: 0,
         checkResultCount06: 0,
-        checkResultCount07: 0
+        checkResultCount07: 0,
+        checkResultCount08:0,
+        checkResultCount09:0,
+        checkResultCount10:0,
       }
     },
     props: ['propQTconclution'],
@@ -1609,6 +1614,11 @@
         this.checkResultCount05 = 0;
         this.checkResultCount06 = 0;
         this.checkResultCount07 = 0;
+        this.checkResultCount08 = 0;
+        this.checkResultCount09 = 0;
+        this.checkResultCount10 = 0;
+        this.conclutionAlertMessage07='';//质检结论 07 08 分别提示标志
+        this.conclutionAlertMessage08='';//质检结论 07 08 分别提示标志
         if (type == '提交') { //提交 加校验，保存无需校验必填---常规质检
           if (this.propQTconclution.tastwaitingPass.listType == '常规质检') {
             if (!this.regularInfo.isForm || !this.regularInfo.isIdcard || !this.regularInfo.isIncome || !this.regularInfo
@@ -1672,13 +1682,52 @@
               this.insConclusion[n].checkResult == '05' ? this.checkResultCount05++ : '';
               this.insConclusion[n].checkResult == '06' ? this.checkResultCount06++ : '';
               this.insConclusion[n].checkResult == '07' ? this.checkResultCount07++ : '';
+              this.insConclusion[n].checkResult == '08' ? this.checkResultCount08++ : '';
+              this.insConclusion[n].checkResult == '09' ? this.checkResultCount09++ : '';
+              this.insConclusion[n].checkResult == '10' ? this.checkResultCount10++ : '';
             }
+this.checkResultCount07 > 0?this.conclutionAlertMessage07='07':'';
+this.checkResultCount08 > 0?this.conclutionAlertMessage08='08':'';
+            // 添加质检结论校验
+              // 01-09，都只能存在一个，即有01不能再次添加01
+              // 01和02互斥，有01无02，有02无01
+              // 03和04互斥，有03无04，有04无03
+              // 07和08互斥，有07无08，有08无07
+              // 09和01/02/03/04/07/08/10互斥，即在选择无以后，不可以再选其他选项。
             if (this.checkResultCount01 > 1 || this.checkResultCount02 > 1 || this.checkResultCount03 > 1 || this.checkResultCount04 >
-              1 || this.checkResultCount05 > 1 || this.checkResultCount06 > 1 || this.checkResultCount07 > 1) {
+              1 || this.checkResultCount05 > 1 || this.checkResultCount06 > 1 || this.checkResultCount07 > 1||this.checkResultCount08 > 1||this.checkResultCount09 > 1||this.checkResultCount10 > 1) {
               this.$message.error('质检结论中质检结果重复添加！')
+              return
+            }else if(this.checkResultCount01> 0 && this.checkResultCount02 > 0){
+              this.$message.error('初审差错重复！')
+              return
+            }else if(this.checkResultCount03 > 0 && this.checkResultCount04 >0){
+               this.$message.error('终审差错重复！')
+              return
+            }else if(this.checkResultCount07 > 0 && this.conclutionAlertMessage08==='08'){
+               this.$message.error('质检结果已经选择专项！')
+              return
+            }else if(this.checkResultCount08 > 0 && this.conclutionAlertMessage07==='07'){
+               this.$message.error('质检结果已经选择纵向！')
+              return
+            }else if(this.checkResultCount09 > 0 && (this.checkResultCount01 > 0 || this.checkResultCount02 > 0 || this.checkResultCount03 > 0 || this.checkResultCount04 >
+              0 || this.checkResultCount07 > 0||this.checkResultCount08 > 0||this.checkResultCount10 > 0)){
+               this.$message.error('质检结果已经选择无！')
               return
             }
           }
+          console.log( '01',      this.checkResultCount01)
+          console.log('02',       this.checkResultCount02)
+          console.log('03',       this.checkResultCount03)
+          console.log('04',       this.checkResultCount04)
+          console.log('05',       this.checkResultCount05)
+          console.log('06',       this.checkResultCount06)
+          console.log('07',       this.checkResultCount07)
+          console.log('08',       this.checkResultCount08)
+          console.log('09',       this.checkResultCount09)
+          console.log('10',       this.checkResultCount10)
+          // this.$message.error('return')
+          return 
           // 微信支付宝+电话核实（除本人）合并为一个数组
           this.insTelVerifyListConcat = this.insTelVerifyListAddress.concat(this.insTelVerifyListCompany).concat(this.insTelVerifyListFamily)
             .concat(this.insTelVerifyListWork)
