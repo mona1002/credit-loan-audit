@@ -55,8 +55,7 @@
       <div ref="img_wrap" style="position:relative;" :id='msg'>
         <!-- <img ref="Big_pic_ref" v-for="(val,key) in imgPath" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath"
           v-if="key==smallPicInd" /> -->
-
-          <img ref="Big_pic_ref" v-for="(val,key) in pngAyyrs" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng"/>
+          <img ref="Big_pic_ref" v-for="(val,key) in pngAyyrs" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng" @dblclick='next'/>
         <p v-show="myPdf" is="pdfDivLeft" v-bind:title="pdfArrys"></p>
       </div>
     </div>
@@ -67,7 +66,7 @@
       <img src="../../../../static/images/net.png" @click="larger">
       <img src="../../../../static/images/daf.png" @click="AclockWise ">
       <img src="../../../../static/images/dasf.png" @click="clockWise ">
-      <span>当前第{{pageShow}}页</span>
+   <span class="audioInd"> 第 {{showPage }} 页</span>
     </div>
     <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面  SmallPicShow-->
     <div class="Small_pic_div" v-show="SmallPicShow">
@@ -147,13 +146,13 @@
         localInf: [], //初始化的时候，根据传进来的applyId获取初始化数据
         showListDiv: true,
         show: true,
+         showPage: 0,
         smallPicInd: 0, // 未知
-        pageShow:0,//当前页
         SmallPicShow: false,
         CompareAlert: true,
         ListParent: [],
         ListDetails: [],
-        // applyId: '', //入参
+        applyId: '', //入参
         imgPath: [],
         imgPathDetail: [],
         // ----------------------------------
@@ -171,7 +170,7 @@
         myPdf:false,
       }
     },
-    props: ['msg', 'comBtn','PropsApplyId'],
+    props: ['msg', 'comBtn'],
     methods: {
       closeAlertSearch() {
         this.dataa = false;
@@ -218,8 +217,7 @@
         }).then(res => {
           if (res.statusCode == 200) {
             this.ListParent = res.data;
-            // this.localInf.applyId = id;
-           this.PropsApplyId=  id;
+            this.localInf.applyId = id;
             this.dataa = false;
             this.custName = this.currentRow.matchApplyCustName;
             this.custmatchApplySubNo = this.currentRow.matchApplySubNo;
@@ -246,8 +244,7 @@
         this.openImg = ind
         // 二级（子）节点
         this.post("/productArchive/getProductArchiveChildList", {
-          // applyId: this.localInf.applyId,
-           applyId:  this.PropsApplyId,
+          applyId: this.localInf.applyId,
           pid: id
         }).then(res => {
           if (res.statusCode == 200) {
@@ -260,14 +257,13 @@
       smallPic(ev, ind) {
         this.smallPicInd = ind;
         this.SmallPicShow = false;
-        this.pageShow=ind+1;// 页码
         this.defaultBigPicCss();
       },
       getImg(ind) {
         this.pdfArrys=[];
         this.pngAyyrs=[];
         this.smallPicInd = 0;
-         this.pageShow=1;
+        this.showPage = 1;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
         if(this.imgPath[0].imagePath.substring(this.imgPath[0].imagePath.length-3) == 'pdf'){
             this.pdfArrys=this.imgPath;
@@ -285,14 +281,17 @@
       hid() {
         this.showListDiv = false;
         this.$refs.preBtn.style.left = 37 + 'px';
-        this.$refs.PbtnIcons.style.left = 'calc( 50% - 97px)';
+        // this.$refs.PbtnIcons.style.left = 'calc( 50% - 97px)';
+        this.$refs.PbtnIcons.style.left = 'calc( 50% - 135px)';
+        //  left: calc( 50% - 34px);
         this.$refs.AudioVisual_Img_ref.style.left = 0;
         this.defaultBigPicCss();
       },
       showList() {
         this.showListDiv = true;
         this.$refs.preBtn.style.left = 223 + 'px';
-        this.$refs.PbtnIcons.style.left = ' calc( 50% + 9px)';
+        // this.$refs.PbtnIcons.style.left = ' calc( 50% + 9px)';
+        this.$refs.PbtnIcons.style.left = 'calc( 50% - 34px)';
         this.$refs.AudioVisual_Img_ref.style.left = "214px";
         this.defaultBigPicCss();
       },
@@ -304,18 +303,22 @@
       },
       pre() {
         this.smallPicInd--;
+          this.showPage--;
         if (this.$refs.small_pic_ref) {
           if (this.smallPicInd < 0) {
             this.smallPicInd = this.$refs.small_pic_ref.length - 1;
+              this.showPage = this.$refs.small_pic_ref.length;
           }
         }
         this.defaultBigPicCss();
       },
       next() {
         this.smallPicInd++;
+         this.showPage++;
         if (this.$refs.small_pic_ref) {
           if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
             this.smallPicInd = 0;
+             this.showPage = 1;
           }
         }
         this.defaultBigPicCss();
@@ -366,8 +369,8 @@
         this.$nextTick(() => {
           if (this.$refs.Big_pic_ref) {
             this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
-            // this.$refs.img_wrap.style.left=0;//renew
-            // this.$refs.img_wrap.style.top=0;
+            this.$refs.img_wrap.style.left = 0;
+            this.$refs.img_wrap.style.top = 0;
             var outsideH = this.$refs.AudioVisual_Img_ref.offsetHeight;
             var widthReduce = this.$refs.AudioVisual_Img_ref.offsetWidth - this.$refs.Big_pic_ref[0].offsetWidth;
             var heightReduce = this.$refs.AudioVisual_Img_ref.offsetHeight - this.$refs.Big_pic_ref[0].offsetHeight;
@@ -453,10 +456,9 @@
     },
     mounted() {
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      // if (this.judgeFlag.flag == '01') {
-      //   this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
-      // } else 
-      if (this.judgeFlag.flag == '02') {
+      if (this.judgeFlag.flag == '01') {
+        this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
+      } else if (this.judgeFlag.flag == '02') {
         this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
       } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
         this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员\主管
@@ -465,11 +467,9 @@
       //   this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
       // }
       this.imgBaseUrl = imgUrl.imgBaseUrl;
-       console.log('PropsApplyId',this.PropsApplyId)
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
-        // applyId: this.localInf.applyId,
-        applyId:  this.PropsApplyId,
+        applyId: this.localInf.applyId,
       }).then(res => {
         if (res.statusCode == 200) {
           this.ListParent = res.data;
@@ -541,27 +541,20 @@
   .BtnIcons {
     position: absolute;
     z-index: 2;
-    left: calc( 50% + 9px);
+    left: calc( 50% - 34px);
     top: calc( 100% - 110px);
-    width: 300px;
-    width: 200px;
+    width: 270px;
     height: 52px;
     background: rgba(71, 86, 105, 0.6);
     box-shadow: 0 10px 20px 0 #47566942;
     border-radius: 6px;
     padding: 12px 0 11px 19px;
-    font-size:16px;
   }
 
   .BtnIcons img {
     margin-right: 10px
   }
-  .BtnIcons span {
-display: inline-block;
-/* background:red; */
-vertical-align: top;
 
-}
   .position_and_size {
     position: absolute;
     font-size: 30px;

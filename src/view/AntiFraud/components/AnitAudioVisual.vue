@@ -57,7 +57,7 @@
       <div ref="img_wrap"  style="position:relative; left:0; top:0;" id='AntiFirstAud'>
         <!-- <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd"
         /> -->
-        <img ref="Big_pic_ref" v-for="(val,key) in pngAyyr" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng"/>
+        <img ref="Big_pic_ref" v-for="(val,key) in pngAyyr" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng"  @dblclick='next'/>
         <p v-if="myPdf" is="pdfDiv" v-bind:title="pdfArry"></p>
       </div>
     </div>
@@ -68,6 +68,7 @@
       <img src="../../../../static/images/net.png" @click="larger">
       <img src="../../../../static/images/daf.png" @click="AclockWise ">
       <img src="../../../../static/images/dasf.png" @click="clockWise ">
+       <span class="audioInd"> 第 {{showPage }} 页</span>
     </div>
     <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
     <div class="Small_pic_div" v-show="SmallPicShow">
@@ -100,6 +101,7 @@ import pdfDiv from '../../pdf'
         closedImg: [],
         showListDiv: true,
         show: true,
+         showPage: 0,
         smallPicInd: 0,
         SmallPicShow: false,
         CompareAlert: true,
@@ -158,9 +160,8 @@ import pdfDiv from '../../pdf'
         this.pdfArry=[];
         this.pngAyyr=[];
         this.smallPicInd = 0;
+        this.showPage = 1;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
-        console.log(this.imgPath);
-        console.log('mkkmkm');
         if(this.imgPath[0].imagePath.substring(this.imgPath[0].imagePath.length-3) == 'pdf'){
             this.pdfArry=this.imgPath;
             this.myPdf = true;
@@ -197,18 +198,22 @@ import pdfDiv from '../../pdf'
       },
       pre() {
         this.smallPicInd--;
+          this.showPage--;
         if (this.$refs.small_pic_ref) {
           if (this.smallPicInd < 0) {
             this.smallPicInd = this.$refs.small_pic_ref.length - 1;
+              this.showPage = this.$refs.small_pic_ref.length;
           }
         }
         this.defaultBigPicCss();
       },
       next() {
         this.smallPicInd++;
+         this.showPage++;
         if (this.$refs.small_pic_ref) {
           if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
             this.smallPicInd = 0;
+             this.showPage = 1;
           }
         }
         this.defaultBigPicCss();
@@ -263,6 +268,8 @@ import pdfDiv from '../../pdf'
         this.$nextTick(() => {
           if (this.$refs.Big_pic_ref) {
             this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
+              this.$refs.img_wrap.style.left = 0;
+            this.$refs.img_wrap.style.top = 0;
             var outsideH = this.$refs.AudioVisual_Img_ref.offsetHeight;
             var widthReduce = this.$refs.AudioVisual_Img_ref.offsetWidth - this.$refs.Big_pic_ref[0].offsetWidth;
             var heightReduce = this.$refs.AudioVisual_Img_ref.offsetHeight - this.$refs.Big_pic_ref[0].offsetHeight;
@@ -457,7 +464,7 @@ import pdfDiv from '../../pdf'
     z-index: 2;
     right: calc( 50% - 303px);
     top: calc( 100% - 110px);
-    width: 193px;
+   width: 270px;
     height: 52px;
     background: rgba(71, 86, 105, 0.6);
     box-shadow: 0 10px 20px 0 #47566942;
