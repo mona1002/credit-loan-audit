@@ -82,9 +82,11 @@
           </el-table-column>
           <el-table-column prop="checkStateTxt" label="质检状态" align='center' min-width="100">
           </el-table-column>
-          <el-table-column prop="reconStateTxt" label="复议状态" align='center' min-width="100">
-          </el-table-column>
           <el-table-column prop="insDate" label="质检日期" align='center' min-width="100">
+          </el-table-column>
+          <el-table-column prop="errorType" label="差错类型" align='center' min-width="100">
+          </el-table-column>
+          <el-table-column prop="errorDescribe" label="差错描述" align='center' min-width="100">
           </el-table-column>
         </el-table>
         <!-- 分页  -->
@@ -130,8 +132,8 @@
         pageCount: 10, // 每页显示条数
         totalRecord: 0, //总条数
         ProductName: [], //产品名称
-        QTSituation: [  ],//质检状态
-       
+        QTSituation: [], //质检状态
+
       }
     },
     methods: {
@@ -146,15 +148,15 @@
       },
 
       Rreset() {
-        this.params . dataParam. applySubNo= '';
-        this.params . dataParam. custName= '';
-        this.params . dataParam. proCode= '';
-        this.params . dataParam. checkState= '';
-        this.params . dataParam. auditNamec= '';
-        this.params . dataParam. auditNamez= '';
-        this.params . dataParam. auditDatez= '';
-        this.params . dataParam. insDateBegin= '';
-        this.params . dataParam. insDateEnd= '';
+        this.params.dataParam.applySubNo = '';
+        this.params.dataParam.custName = '';
+        this.params.dataParam.proCode = '';
+        this.params.dataParam.checkState = '';
+        this.params.dataParam.auditNamec = '';
+        this.params.dataParam.auditNamez = '';
+        this.params.dataParam.auditDatez = '';
+        this.params.dataParam.insDateBegin = '';
+        this.params.dataParam.insDateEnd = '';
         this.inquire(this.params);
       },
       Rsearch() {
@@ -190,10 +192,10 @@
           }
         });
       },
-      getQTState(){//获取质检枚举
-        this.get("/system/getAllCheckState?"+Math.random()).then(res => {
+      getQTState() { //获取质检枚举
+        this.get("/system/getAllCheckState?" + Math.random()).then(res => {
           if (res.statusCode == 200) {
-          this.QTSituation=res.data;
+            this.QTSituation = res.data;
           } else {
             this.$message.error(res.msg);
           }
