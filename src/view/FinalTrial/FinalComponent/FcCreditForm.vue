@@ -37,10 +37,7 @@
               </p>
               <p v-show="this.InternetShow.commentS">
                 <label class="InternetInf_right_label"> 执行信息说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wbeexEcutedtxt==null||this.FormData.wbeexEcutedtxt==''" :content="this.FormData.wbeexEcutedtxt"
-                  placement="top-start">
                   <span class="detail_inf">{{this.FormData.wbeexEcutedtxt}} </span>
-                </el-tooltip>
               </p>
             </li>
             <li>
@@ -50,10 +47,7 @@
               </p>
               <p v-show="this.InternetShow.commentS1">
                 <label class="InternetInf_right_label"> 单位执行信息说明：</label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetHirecomtxt==null||this.FormData.wnetHirecomtxt==''" :content="this.FormData.wnetHirecomtxt"
-                  placement="top-start">
                   <span class="detail_inf">{{this.FormData.wnetHirecomtxt }} </span>
-                </el-tooltip>
               </p>
             </li>
             <li>
@@ -63,10 +57,7 @@
               </p>
               <p v-show="this.InternetShow.commentS2">
                 <label class="InternetInf_right_label"> 失信记录说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetEcutedBreatxt==null||this.FormData.wnetEcutedBreatxt==''"
-                  :content="this.FormData.wnetEcutedBreatxt" placement="top-start">
                   <span class="detail_inf">{{this.FormData.wnetEcutedBreatxt }} </span>
-                </el-tooltip>
               </p>
             </li>
             <li>
@@ -76,10 +67,7 @@
               </p>
               <p v-show="this.InternetShow.commentS3">
                 <label class="InternetInf_right_label"> 单位失信记录说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetHirecomBreatxt==null||this.FormData.wnetHirecomBreatxt==''"
-                  :content="this.FormData.wnetHirecomBreatxt" placement="top-start">
                   <span class="detail_inf">{{this.FormData.wnetHirecomBreatxt }} </span>
-                </el-tooltip>
               </p>
             </li>
             <li>
@@ -89,10 +77,7 @@
               </p>
               <p v-show="this.InternetShow.commentS4">
                 <label class="InternetInf_right_label"> 手机异常信息说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetPhonetxt==null||this.FormData.wnetPhonetxt==''" :content="this.FormData.wnetPhonetxt"
-                  placement="top-start">
                   <span class="detail_inf">{{this.FormData.wnetPhonetxt }} </span>
-                </el-tooltip>
               </p>
             </li>
             <li>
@@ -102,10 +87,7 @@
               </p>
               <p v-show="this.InternetShow.commentS5">
                 <label class="InternetInf_right_label"> 单位名称异常信息说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetHirecomNametxt==null||this.FormData.wnetHirecomNametxt==''"
-                  :content="this.FormData.wnetHirecomNametxt" placement="top-start">
                   <span class="detail_inf">{{this.FormData.wnetHirecomNametxt }} </span>
-                </el-tooltip>
               </p>
             </li>
             <li>
@@ -115,10 +97,7 @@
               </p>
               <p v-show="this.InternetShow.commentS6">
                 <label class="InternetInf_right_label"> 单位电话异常信息说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetHirecomPhonetxt==null||this.FormData.wnetHirecomPhonetxt==''"
-                  :content="this.FormData.wnetHirecomPhonetxt" placement="top-start">
                   <span class="detail_inf">{{this.FormData.wnetHirecomPhonetxt }} </span>
-                </el-tooltip>
               </p>
             </li>
             <li>
@@ -128,10 +107,7 @@
               </p>
               <p v-show="this.InternetShow.commentS7">
                 <label class="InternetInf_right_label"> 地址异常信息说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetAddrandEstatetxt==null||this.FormData.wnetAddrandEstatetxt==''"
-                  :content="this.FormData.wnetAddrandEstatetxt" placement="top-start">
                   <span class="detail_inf">{{this.FormData.wnetAddrandEstatetxt }} </span>
-                </el-tooltip>
               </p>
             </li>
             <li>
@@ -141,10 +117,7 @@
               </p>
               <p v-show="this.InternetShow.commentS8">
                 <label class="InternetInf_right_label"> 单位地址异常信息说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetHirecomAddresstxt==null||this.FormData.wnetHirecomAddresstxt==''"
-                  :content="this.FormData.wnetHirecomAddresstxt" placement="top-start">
                   <span class="detail_inf">{{this.FormData.wnetHirecomAddresstxt }} </span>
-                </el-tooltip>
               </p>
             </li>
             <li>
@@ -154,10 +127,7 @@
               </p>
               <p v-show="this.InternetShow.commentS9">
                 <label class="InternetInf_right_label"> 工商登记信息说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetCompanytxt==null||this.FormData.wnetCompanytxt==''" :content="this.FormData.wnetCompanytxt"
-                  placement="top-start">
                   <span class="detail_inf">{{this.FormData.wnetCompanytxt }} </span>
-                </el-tooltip>
               </p>
             </li>
             <li>
@@ -167,10 +137,7 @@
               </p>
               <p v-show="this.InternetShow.commentS10" class="bottom">
                 <label class="InternetInf_right_label"> 组织机构代码信息说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wnetAddrstatetxt==null||this.FormData.wnetAddrstatetxt==''"
-                  :content="this.FormData.wnetAddrstatetxt" placement="top-start">
                   <span class="detail_inf">{{this.FormData.wnetAddrstatetxt }} </span>
-                </el-tooltip>
               </p>
             </li>
           </ul>
