@@ -844,7 +844,7 @@ export default {
         if(res.statusCode == 200){
           this.listData = res.data.page;
           //console.log(res.data.message)
-          if(res.data.message){
+          if(res.data.message&&this.listData.recordList&&this.listData.recordList.length>0){
            //console.log('kkkk');
             if(this.formShow == true){
               //console.log('kkkk1');
