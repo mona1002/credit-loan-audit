@@ -38,7 +38,7 @@
                 </p>
                 <p>
                   <label>申请类型： </label>
-                  <span>{{applyInfoPool.appType}} </span>
+                  <span>{{applyInfoPool.appTypeTxt}} </span>
                 </p>
               </li>
             </ul>
