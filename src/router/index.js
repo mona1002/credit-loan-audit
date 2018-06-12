@@ -75,9 +75,6 @@ import aHistoryTask from '../view/TaskManagement/antiTaskManagment/aHistoryTask.
 import TaskManagementSplit from '../view/TaskManagement/reconsider/TaskManagementSplit.vue' //
 import doTheTask from '../view/TaskManagement/examineAndApprove/doTheTask.vue' //审批任务管理——已办任务
 import historicalTask from '../view/TaskManagement/examineAndApprove/historicalTask.vue' //审批任务管理——历史任务
-//  -----------------------质检----------------------
-import tb from '../view/QualityTesting/roles/tb.vue'
-import tes from '../view/QualityTesting/roles/tes.vue'
 //  -----------------------大数据风控+社保公积金----------------------
 import PneCtrl from '../view/SocialSeAndPneCtrl/PneCtrl.vue' //大数据
 import SocialSe from '../view/SocialSeAndPneCtrl/SocialSe.vue' //社保公积金
@@ -90,22 +87,20 @@ import IntegratedQuery from '../view/QualityTesting/FunctionalityPages/Integrate
 import commissioner from '../view/QualityTesting/QTProcess/commissioner/commissioner.vue' //质检专员任务列表
 import manager from '../view/QualityTesting/QTProcess/manager/manager.vue' //质检主管页面
 import regularQT from '../view/QualityTesting/QTProcess/components/regularQT.vue' //首次常规质检
-import specialQT from '../view/QualityTesting/QTProcess/components/specialQT.vue' //首次专纵向质检
-import regularANDspecialQT from '../view/QualityTesting/QTProcess/components/regularANDspecialQT.vue' //常规质检又抽中专纵向质检
 import regularConfig from '../view/QualityTesting/FunctionalityPages/regularConfig.vue' //常规抽单配置功能
 import specialConfig from '../view/QualityTesting/FunctionalityPages/specialConfig.vue' //专纵项抽单配置功能
-import batchApportion from '../view/QualityTesting/FunctionalityPages/batchApportion.vue' //质检任务批量转分派功能
+// import batchApportion from '../view/QualityTesting/FunctionalityPages/batchApportion.vue' //质检任务批量转分派功能
 import reconsiderResult from '../view/QualityTesting/FunctionalityPages/reconsiderResult.vue' //复议结果查询功能
 import ReApply from '../view/QualityTesting/QTReconsiderProcess/page/ReApply.vue' //复议申请页面
 import SelfTaskList from '../view/QualityTesting/QTReconsiderProcess/page/SelfTaskList.vue' //质检复议-初终审本人任务列表
-import QTResultCheck from '../view/QualityTesting/QTReconsiderProcess/page/QTResultCheck.vue' //质检复议-初终审质检结论查看页
+import QTResultCheck from '../view/QualityTesting/QTReconsiderProcess/components/QTResultCheck.vue' //质检复议-初终审质检结论查看页
 import ManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/ManagerTaskList.vue' //质检复议-初终审主管任务列表
 import ReManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/ReManagerTaskList.vue' //质检复议-复议任务列表（首次）
 import ACManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/ACManagerTaskList.vue' //质检复议流程-区域经理页面- 区域经理任务列表 + 质检复议流程-合规经理页面- 合规经理任务列表
 import ComplianceManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/ComplianceManagerTaskList.vue' //质检复议流程-合规经理页面- 合规经理任务列表
 import ComplianceProcess from '../view/QualityTesting/QTReconsiderProcess/components/ComplianceProcess.vue' //质检复议-
 import MatchingInfQT from '../view/FirstTrail/MatchingInfQT.vue' //质检复议-
-import MatchingInfQTProcess from '../view/FirstTrail/MatchingInfQTProcess.vue' //质检复议-
+// import MatchingInfQTProcess from '../view/FirstTrail/MatchingInfQTProcess.vue' //质检复议-
 // import ComplianceProcess from ''//质检复议-
 // import ComplianceProcess from ''//质检复议-
 
@@ -184,7 +179,8 @@ const routes = [{
     },
     meta: {
       pageTitle: '初审详情',
-      keepAlive: false
+      keepAlive: true,
+      refresh: false,
     }
     // name:SplitScreen
   },
@@ -407,19 +403,11 @@ const routes = [{
     },
     meta: {
       pageTitle: '综合查询',
-      keepAlive: false
+      keepAlive: true
     }
     // name:historicalTask
   },
   // ---------------质检--------------------
-  {
-    path: '/tb',
-    component: tb
-  },
-  {
-    path: '/tes',
-    component: tes
-  },
   {
     path: '/IntegratedQuery',
     component: IntegratedQuery,
@@ -438,27 +426,24 @@ const routes = [{
     path: '/regularQT',
     component: regularQT,
     name: 'regularQT'
-  }, {
-    path: '/specialQT',
-    component: specialQT
-  }, {
-    path: '/regularANDspecialQT',
-    component: regularANDspecialQT
-  }, {
+  },{
     path: '/regularConfig',
     component: regularConfig
   }, {
     path: '/specialConfig',
     component: specialConfig
-  }, {
-    path: '/batchApportion',
-    component: batchApportion
-  }, {
+  }, 
+  // {
+  //   path: '/batchApportion',
+  //   component: batchApportion
+  // },
+   {
     path: '/reconsiderResult',
     component: reconsiderResult
   }, {
     path: "/ReApply",
-    component: ReApply
+    component: ReApply,
+    name: 'ReApply'
   }, {
     path: "/SelfTaskList",
     component: SelfTaskList
@@ -481,9 +466,6 @@ const routes = [{
   {
     path: "/MatchingInfQT",
     component: MatchingInfQT
-  }, {
-    path: "/MatchingInfQTProcess",
-    component: MatchingInfQTProcess
   },
   // ---------------大数据+社保--------------------
   {

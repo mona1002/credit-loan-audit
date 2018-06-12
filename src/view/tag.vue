@@ -168,11 +168,12 @@
     data() {
       return {
         nodeFlag: "",
-        nodeMatchFlag:'',
+        nodeMatchFlag: '',
         RoutePath: '',
         nodeName: '',
         routeParams: '',
         taskNodeName: '',
+        taskNodeParams: '',
         processMoniParams: '',
         right: null,
         left: null,
@@ -188,8 +189,8 @@
         judge: {
           flag: ''
         },
-        MatchFlag:{
-          MatchFlag:''
+        MatchFlag: {
+          MatchFlag: ''
         }
       };
     },
@@ -221,9 +222,10 @@
     methods: {
       addViewTags() {
         const route = this.$route;
+        // console.log(route.fullPath)
         route.fullPath.indexOf('?') != -1 ? this.taskNodeName = route.fullPath.split('?')[1].split('&')[0].split('=')[1] :
           this.taskNodeName;
-      this.nodeFlag =  this.nodeMatchFlag= this.routeParams = '';
+        this.nodeFlag = this.nodeMatchFlag = this.routeParams = '';
         if (!route) {
           return false
         }
@@ -307,7 +309,7 @@
           this.nodeName = "反欺诈规则设定";
         } else if (route.path == '/MatchingInf') { // 匹配信息-查看
           this.nodeName = "匹配信息-查看";
-          this.nodeMatchFlag='internal'
+          this.nodeMatchFlag = 'internal'
         } else if (route.path == '/processMoni') { //  流程监控 - 
           //           route.fullPath.indexOf('?') != -1 ? this.processMoniParams= route.fullPath.split('?')[1]: this.processMoniParams;
           if (route.fullPath == '/processMoni?creditApp00') {
@@ -337,6 +339,15 @@
           } else if (route.fullPath == '/processMoni?antiFraudApp03') {
             this.nodeName = "反欺诈已完成流程";
             this.routeParams = '?antiFraudApp03';
+          }else if (route.fullPath == '/processMoni?checkApp03') {
+            this.nodeName = "质检已完成流程";
+            this.routeParams = '?checkApp03';
+          }else if (route.fullPath == '/processMoni?checkApp01') {
+            this.nodeName = "质检已分配流程";
+            this.routeParams = '?checkApp01';
+          }else if (route.fullPath == '/processMoni?checkApp00') {
+            this.nodeName = "质检未分配流程";
+            this.routeParams = '?checkApp00';
           }
         } else if (route.path == '/PneCtrl') {
           this.nodeName = "大数据风控";
@@ -346,24 +357,51 @@
           this.nodeName = "综合查询";
         } else if (route.path == '/MatchingInfQuery') {
           this.nodeName = "综合查询-详情";
-          this.nodeMatchFlag='Query' 
+          this.nodeMatchFlag = 'Query';
+        } else if (route.path == '/commissioner') { //质检专员审批
+          this.nodeName = "质检专员审批";
+          this.nodeFlag = "07";
+          this.routeParams = '?taskNodeName=' + this.taskNodeName + "&flag=" + this.nodeFlag;
+        } else if (route.path == '/manager') { //质检主管审批
+          this.nodeName = "质检主管审批";
+          this.nodeFlag = "08";
+          this.routeParams = '?taskNodeName=' + this.taskNodeName + "&flag=" + this.nodeFlag;
+        } else if (route.path == '/SelfTaskList') { //初终审本人
+          this.nodeName = "初终审本人审批";
+          this.nodeFlag = "09";
+          this.routeParams = '?taskNodeName=' + this.taskNodeName + "&flag=" + this.nodeFlag;
+        } else if (route.path == '/ManagerTaskList') { //初终审主管
+          this.nodeName = "初终审主管审批";
+          this.nodeFlag = "10";
+          this.routeParams = '?taskNodeName=' + this.taskNodeName + "&flag=" + this.nodeFlag;
+        } else if (route.path == '/ReManagerTaskList') { //质检主管复议审批（首次）
+          this.nodeName = "质检主管复议审批（首次）";
+          this.nodeFlag = "11";
+          this.routeParams = '?taskNodeName=' + this.taskNodeName + "&flag=" + this.nodeFlag;
+        } else if (route.fullPath == '/ACManagerTaskList?taskNodeName=checkApp_regional_manager&flag=12') { //区域经理审批
+          this.nodeName = "区域经理审批";
+          this.nodeFlag = "12";
+          this.routeParams = '?taskNodeName=' + this.taskNodeName + "&flag=" + this.nodeFlag;
+        } else if (route.fullPath == '/ACManagerTaskList?taskNodeName=checkApp_compliance_manager&flag=13') { //合规经理审批
+          this.nodeName = "合规经理审批";
+          this.nodeFlag = "13";
+          this.routeParams = '?taskNodeName=' + this.taskNodeName + "&flag=" + this.nodeFlag;
+        } else if (route.path == '/ReApply') { // 质检功能
+          this.nodeName = "复议申请";
+        } else if (route.path == '/regularConfig') { // 质检功能 - 常规抽单配置功能
+          this.nodeName = "质检常规抽单配置";
+          } else if (route.path == '/reconsiderResult') { // 质检功能 - 复议结果查询
+            this.nodeName = "质检复议结果查询";
+          // }  else if (route.path == '/batchApportion') { // 质检功能
+          //   this.nodeName = "质检任务批量转分派";
+        } else if (route.path == '/specialConfig') { // 质检功能
+          this.nodeName = "质检专纵向抽单配置";
+        } else if (route.path == '/MatchingInfQT') {
+          this.taskNodeParams = route.fullPath.split('?')[1]
+          this.nodeName = "质检详情";
+           this.nodeMatchFlag = 'QT';
+          this.routeParams = '?' + this.taskNodeParams //---------------------------做判断-----
         }
-        //  else if (route.path == '/commissioner') { //质检专员审批
-        //   this.nodeName = "质检专员审批";
-        // } else if (route.path == '/manager') {
-        //   this.nodeName = "质检主管审批";
-        // } else if (route.path == '/regularConfig') { // 质检功能 - 常规抽单配置功能
-        //   this.nodeName = "常规抽单配置功能";
-        // } else if (route.path == '/reconsiderResult') { // 质检功能 - 复议结果查询
-        //   this.nodeName = "复议结果查询";
-        // } else if (route.path == '/batchApportion') { // 质检功能
-        //   this.nodeName = "质检任务批量转分派";
-        // } else if (route.path == '/specialConfig') { // 质检功能
-        //   this.nodeName = "专纵项抽单配置";
-        // }
-        // else if (route.path == '/manager') {
-        //   this.nodeName = "质检";
-        // }
         // else{
         //   return
         // }
@@ -372,7 +410,7 @@
           name: this.nodeName,
           path: this.RoutePath,
           flag: this.nodeFlag,
-          matchflag:this.nodeMatchFlag,
+          matchflag: this.nodeMatchFlag,
           params: this.routeParams,
           StatefullPath: this.RoutePath + this.routeParams
         })
@@ -402,7 +440,8 @@
         }
       },
       isActive(route) {
-        return route.StatefullPath == this.$route.fullPath;
+        return route.path == '/MatchingInfQT' ? route.path == this.$route.path : route.StatefullPath == this.$route.fullPath;
+        // return route.StatefullPath == this.$route.fullPath;
       },
       handleClose(view, ev) {
         console.log('关闭')
@@ -444,8 +483,8 @@
         // console.log(this.$route)
         // this.$route.meta.refresh = false;
         // console.log(this.$router)
-        // console.log(this.router)
-        console.log( tg)
+        // console.log(this.router)         
+        localStorage.setItem("MatchFlag", JSON.stringify(this.MatchFlag));
         if (tg.flag != '' || tg.flag != undefined || tg.flag != 'undefined') {
           this.judge.flag = tg.flag;
           localStorage.setItem("judge", JSON.stringify(this.judge));

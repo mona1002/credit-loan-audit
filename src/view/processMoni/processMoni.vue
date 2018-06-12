@@ -434,7 +434,6 @@ userCode:'',
       this.userInf = JSON.parse(localStorage.getItem("userInf"));
       this.queryParam.userCode = this.userInf.userCode;
       this.queryParam.orgCode = this.userInf.orgCode;
-
       if(this.routerPath === "creditApp"){
         this.taskNodes = [
           {value: 'creditApp_firstTrial',label: '初审审批'},
@@ -458,6 +457,15 @@ userCode:'',
           {value: 'antiFraudApp_apply',label: '反欺诈申请'},
           {value: 'antiFraudApp_commissioner',label: '反欺诈专员审批'},
           {value: 'antiFraudApp_manager',label: '反欺诈主管审批'}
+        ];
+      } else if(this.routerPath === "checkApp"){
+        this.taskNodes=[{value:"checkApp_apply", label: "质检开始"},
+            {value:"checkApp_check_manager", label: "质检主管审批"},
+            {value:"checkApp_trial_self", label: "初终审本人复查"},
+            {value:"checkApp_trial_manager",label: "初终审主管复核异议"},
+            {value:"checkApp_check_recon_manager", label: "质检主管复核"},
+            {value:"checkApp_regional_manager", label: "区域经理复核"},
+            {value:"checkApp_compliance_manager", label: "合规经理复核"}
         ];
       }
     },

@@ -7,11 +7,11 @@
       <div class="title">
         <h1>质检规则设置查询</h1>
         <div class="icon_wrap">
-          <span class="icon" @click="addInf">
+          <span  @click="addInf">
             <img src="../../../../static/images/add.png" style="margin:10px;">
             <span class="span-text">添加</span>
           </span>
-          <span class="icon" @click="apportion">
+          <span  @click="apportion">
             <img src="../../../../static/images/add.png">
             <span class="span-text">任务分派</span>
           </span>
@@ -19,40 +19,45 @@
       </div>
       <div class="table_wrap">
         <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" height="100%" @current-change="handleCurrentChange" border>
+        <el-table :data="tableData" style="width: 100%" height="100%" border>
           <el-table-column type="index" align='center' label=序号 width="55">
           </el-table-column>
-          <!-- drawSheetTypeTxt -->
-          <el-table-column prop="drawSheetType" label="抽单类型" align='center' min-width="180">
+          <el-table-column prop="drawSheetTypeTxt" label="抽单类型" align='center' min-width="100">
           </el-table-column>
           <el-table-column prop="recentDays" label="质检天数" align='center' min-width="120">
           </el-table-column>
-          <el-table-column prop="makeRatio" label="抽单比例[每人]" align='center' min-width="180">
+          <el-table-column label="抽单比例[每人]" align='center' min-width="180">
+            <template slot-scope='scope'>
+              <span>{{scope.row.makeRatio | percent}}</span>
+            </template>
           </el-table-column>
-          <el-table-column prop="passRatio" label="通过比例[每人]" align='center' min-width="130">
+          <el-table-column label="通过比例[每人]" align='center' min-width="100">
+            <template slot-scope='scope'>
+              <span>{{scope.row.passRatio | percent}}</span>
+            </template>
           </el-table-column>
           <el-table-column prop="minPassNum" label="通过件最低抽单件数[人·件]" align='center' min-width="130">
           </el-table-column>
-          <el-table-column prop="refuseRatio" label="拒绝比例[每人]" align='center' min-width="180">
+          <el-table-column prop="refuseRatio" label="拒绝比例[每人]" align='center' min-width="140">
+            <template slot-scope='scope'>
+              <span> {{scope.row.refuseRatio | percent}}</span>
+            </template>
           </el-table-column>
-          <el-table-column prop="minRefuseNum" label="拒绝件最低抽单件数[人·件]" align='center' min-width="120">
+          <el-table-column prop="minRefuseNum" label="拒绝件最低抽单件数[人·件]" align='center' min-width="100">
           </el-table-column>
-          <el-table-column prop="creator" label="创建人" align='center' min-width="100">
+          <el-table-column prop="creator" label="创建人" align='center' min-width="120">
           </el-table-column>
-          <el-table-column prop="creator" label="创建日期" align='center' min-width="100">
+          <el-table-column label="创建日期" align='center' min-width="100">
+            <template slot-scope='scope'>
+              <span>{{scope.row.createTime | dateFilter}}</span>
+            </template>
           </el-table-column>
-          <el-table-column label="操作">
+          <el-table-column label="操作" align="center" min-width='120'>
             <template slot-scope="scope">
               <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
             </template>
           </el-table-column>
         </el-table>
-        <!-- 分页  -->
-        <!-- <div class="paging">
-          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
-            :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
-          </el-pagination>
-        </div> -->
       </div>
     </div>
     <!-- ==============================任务分配=================================== -->
@@ -64,24 +69,25 @@
       </span>
     </el-dialog>
     <!-- ==============================添加=================================== -->
-    <el-dialog title="质检规则新增" :modal="false" :visible.sync="add" width="865px">
+    <el-dialog title="质检规则新增" :modal="false" :visible.sync="add" width="920px">
       <div class="newContent">
         <ul>
           <li>
             <p>
-              <label>质检天数：</label>
+              <label>
+                <b class="required_Red"> * </b>质检天数：</label>
               <span>
-                <el-input v-model="addNew.recentDays " placeholder="请输入质检天数"> </el-input> 天</span>
+                <el-input v-model="addNew.recentDays" placeholder="请输入质检天数" @blur="Num('质检天数',addNew.recentDays)"> </el-input> 天</span>
             </p>
             <p>
               <label></label>
               <span></span>
             </p>
           </li>
-
           <li>
             <p>
-              <label>抽单类型：</label>
+              <label>
+                <b class="required_Red"> * </b>抽单类型：</label>
               <span>
                 <el-select v-model="addNew.drawSheetType" placeholder="请选择">
                   <el-option v-for=" item in QTSituation" :key="item.value" :label="item.label" :value="item.value"> </el-option>
@@ -89,33 +95,38 @@
               </span>
             </p>
             <p>
-              <label>抽单比例[每人]：</label>
+              <label>
+                <b class="required_Red"> * </b>抽单比例[每人]：</label>
               <span>
-                <el-input v-model="addNew.makeRatio " placeholder="请输入抽单比例"> </el-input> %</span>
+                <el-input v-model="addNew.makeRatio" placeholder="请输入抽单比例" @blur="Num('抽单比例',addNew.makeRatio)"> </el-input> %</span>
             </p>
           </li>
           <li>
             <p>
-              <label>通过比例[每人]：</label>
+              <label>
+                <b class="required_Red"> * </b>通过比例[每人]：</label>
               <span>
-                <el-input v-model="addNew.passRatio " placeholder="请输入通过比例"> </el-input> %</span>
+                <el-input v-model="addNew.passRatio" placeholder="请输入通过比例" @blur="Num('通过比例',addNew.passRatio)"> </el-input> %</span>
             </p>
             <p>
-              <label>通过件最低抽单件数[人·件]：</label>
+              <label>
+                <b class="required_Red"> * </b>通过件最低抽单件数[人·件]：</label>
               <span>
-                <el-input v-model="addNew.minPassNum " placeholder="请输入最低抽单件数"> </el-input> 件</span>
+                <el-input v-model="addNew.minPassNum" placeholder="请输入最低抽单件数" @blur="Num('通过件最低抽单件数',addNew.minPassNum)"> </el-input> 件</span>
             </p>
           </li>
           <li>
             <p>
-              <label>拒绝比例[每人]：</label>
+              <label>
+                <b class="required_Red"> * </b>拒绝比例[每人]：</label>
               <span>
-                <el-input v-model="addNew.refuseRatio " placeholder="请输入拒绝比例"> </el-input> %</span>
+                <el-input v-model="addNew.refuseRatio" placeholder="请输入拒绝比例" @blur="Num('拒绝比例',addNew.refuseRatio)"> </el-input> %</span>
             </p>
             <p>
-              <label>拒绝件最低抽单件数[人·件]：</label>
+              <label>
+                <b class="required_Red"> * </b>拒绝件最低抽单件数[人·件]：</label>
               <span>
-                <el-input v-model="addNew.minRefuseNum " placeholder="请输入最低抽单件数"> </el-input> 件</span>
+                <el-input v-model="addNew.minRefuseNum" placeholder="请输入最低抽单件数" @blur="Num('拒绝件最低抽单件数',addNew.minRefuseNum)"> </el-input> 件</span>
             </p>
           </li>
           <li class="colorGray">
@@ -125,7 +136,8 @@
             </p>
             <p>
               <label>创建日期：</label>
-              <span>{{ addNew.createTime }}</span>
+              <!-- <span>{{ addNew.createTime }}</span> -->
+              <span>{{ addNew.createTime | dateFilter }}</span>
             </p>
           </li>
         </ul>
@@ -136,14 +148,16 @@
       </span>
     </el-dialog>
     <!-- ==============================编辑=================================== -->
-    <el-dialog title="质检规则编辑" :modal="false" :visible.sync="Edit" width="865px">
+    <el-dialog title="质检规则编辑" :modal="false" :visible.sync="Edit" width="920px">
       <div class="newContent">
         <ul>
           <li>
             <p>
-              <label>质检天数：</label>
+              <label>
+                <b class="required_Red"> * </b>质检天数：</label>
               <span>
-                <el-input v-model="updateInf.recentDays " placeholder="请输入质检天数"> </el-input> 天</span>
+                <el-input v-model="updateInf.recentDays" placeholder="请输入质检天数" @blur="Num('质检天数-编辑',updateInf.recentDays)"> </el-input> 天</span>
+              <!-- <el-input v-model="recentDays" placeholder="请输入质检天数" @blur="Num('质检天数-编辑',updateInf.recentDays)"> </el-input> 天</span> -->
             </p>
             <p>
               <label></label>
@@ -152,7 +166,8 @@
           </li>
           <li>
             <p>
-              <label>抽单类型：</label>
+              <label>
+                <b class="required_Red"> * </b>抽单类型：</label>
               <span>
                 <el-select v-model="updateInf.drawSheetType" placeholder="请选择">
                   <el-option v-for=" item in QTSituation" :key="item.value" :label="item.label" :value="item.value"> </el-option>
@@ -160,33 +175,38 @@
               </span>
             </p>
             <p>
-              <label>抽单比例[每人]：</label>
+              <label>
+                <b class="required_Red"> * </b>抽单比例[每人]：</label>
               <span>
-                <el-input v-model="updateInf.makeRatio " placeholder="请输入抽单比例"> </el-input> %</span>
+                <el-input v-model="updateInf.makeRatio" placeholder="请输入抽单比例" @blur="Num('抽单比例-编辑',updateInf.makeRatio)"> </el-input> %</span>
             </p>
           </li>
           <li>
             <p>
-              <label>通过比例[每人]：</label>
+              <label>
+                <b class="required_Red"> * </b>通过比例[每人]：</label>
               <span>
-                <el-input v-model="updateInf.passRatio " placeholder="请输入通过比例"> </el-input> %</span>
+                <el-input v-model="updateInf.passRatio" placeholder="请输入通过比例" @blur="Num('通过比例-编辑',updateInf.passRatio)"> </el-input> %</span>
             </p>
             <p>
-              <label>通过件最低抽单件数[人·件]：</label>
+              <label>
+                <b class="required_Red"> * </b>通过件最低抽单件数[人·件]：</label>
               <span>
-                <el-input v-model="updateInf.minPassNum " placeholder="请输入最低抽单件数"> </el-input> 件</span>
+                <el-input v-model="updateInf.minPassNum" placeholder="请输入最低抽单件数" @blur="Num('通过件最低抽单件数-编辑',updateInf.minPassNum)"> </el-input> 件</span>
             </p>
           </li>
           <li>
             <p>
-              <label>拒绝比例[每人]：</label>
+              <label>
+                <b class="required_Red"> * </b>拒绝比例[每人]：</label>
               <span>
-                <el-input v-model="updateInf.refuseRatio " placeholder="请输入拒绝比例"> </el-input> %</span>
+                <el-input v-model="updateInf.refuseRatio" placeholder="请输入拒绝比例" @blur="Num('拒绝比例-编辑',updateInf.refuseRatio)"> </el-input> %</span>
             </p>
             <p>
-              <label>拒绝件最低抽单件数[人·件]：</label>
+              <label>
+                <b class="required_Red"> * </b>拒绝件最低抽单件数[人·件]：</label>
               <span>
-                <el-input v-model="updateInf.minRefuseNum " placeholder="请输入最低抽单件数"> </el-input> 件</span>
+                <el-input v-model="updateInf.minRefuseNum" placeholder="请输入最低抽单件数" @blur="Num('拒绝件最低抽单件数-编辑',updateInf.minRefuseNum)"> </el-input> 件</span>
             </p>
           </li>
           <li class="colorGray">
@@ -196,7 +216,7 @@
             </p>
             <p>
               <label>创建日期：</label>
-              <span>{{ updateInf.createTime }}</span>
+              <span>{{ createTime| dateFilter }}</span>
             </p>
           </li>
         </ul>
@@ -214,89 +234,136 @@
   export default {
     data() {
       return {
-        addNew: {
-          recentDays: null,
-          drawSheetType: null,
-          makeRatio: null,
-          passRatio: null,
-          minPassNum: null,
-          refuseRatio: null,
-          minRefuseNum: null,
-          creator: null,
-          createTime: null,
+        addNew: { //添加
+          recentDays: '',
+          drawSheetType: '',
+          makeRatio: '',
+          passRatio: '',
+          minPassNum: '',
+          refuseRatio: '',
+          minRefuseNum: '',
+          creator: '',
+          createTime: '',
         },
-        updateInf: {},
+        updateInf: {}, //编辑
+        recentDays: "",
+        // updateInf: {
+        //   id: '',
+        //   drawSheetType: '',
+        //   recentDays: '',
+        //   makeRatio: '',
+        //   passRatio: '',
+        //   minPassNum: '',
+        //   refuseRatio: '',
+        //   minRefuseNum: ''
+        // }, 
         Confirm: false,
         add: false,
         Edit: false,
         adbtn: '确认',
         loadsitu: false,
-
+        createTime: '',
         query: {
           id: '',
           matchApplyId: "",
         },
         userInf: null,
-        tableData: [{
-
-        }],
-        reg: /(\w{6})\w*(\w{4})/,
-        Telreg: /(\w{7})\w*/,
-        reVal: '$1********$2',
-        telVal: '$1****',
-        params: {
-          applySubno: '',
-          custName: '',
-          certCode: '',
-          mobile: '',
-          //   pageNum: '', //页数（第几页）
-          //   pageSize: '', //页面显示行数
-        },
-        // currentPage: 1, //分页选中页
-        // pageCount: 10, // 每页显示条数
-        // totalRecord: 0, //总条数
-        value: '',
-
+        tableData: [],
+        tableDataTransform: [],
         QTSituation: [{ //抽单类型
-          value: '选项1',
-          label: '黄金糕'
+          value: '01',
+          label: '熟练'
         }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
+          value: '02',
+          label: '新人'
         }],
-        RiskType: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
+        proficiencyCount: 0,
+        newOneCount: 0,
       }
     },
     methods: {
+      Num(el, val) { //整数
+        // console.log(el, val)
+        // console.log(val=='')
+        // console.log(Number(val))
+        // console.log(parseInt(val))
+        // console.log(val === '')
+        // console.log(val == null)
+        val = val.replace(/\s/g, ''); //去空格，避免输入框出现NaN
+        switch (el) {
+          case '质检天数':
+            val === '' || isNaN(val) || val < 0 ? this.addNew.recentDays = '' : this.addNew.recentDays = parseInt(this.addNew
+              .recentDays);
+            break;
+          case '通过件最低抽单件数':
+            val === '' || isNaN(val) || val < 0 ? this.addNew.minPassNum = '' : this.addNew.minPassNum = parseInt(this.addNew
+              .minPassNum);
+            break;
+          case '拒绝件最低抽单件数':
+            val === '' || isNaN(val) || val < 0 ? this.addNew.minRefuseNum = '' : this.addNew.minRefuseNum = parseInt(
+              this.addNew.minRefuseNum);
+            break;
+          case '抽单比例':
+            val === '' || isNaN(val) || val > 100 || val < 0 ? this.addNew.makeRatio = '' : this.addNew.makeRatio =
+              parseFloat(this.addNew.makeRatio);
+            break;
+          case '通过比例':
+            val === '' || isNaN(val) || val > 100 || val < 0 ? this.addNew.passRatio = '' : this.addNew.passRatio =
+              parseFloat(this.addNew.passRatio);
+            break;
+          case '拒绝比例':
+            val === '' || isNaN(val) || val > 100 || val < 0 ? this.addNew.refuseRatio = '' : this.addNew.refuseRatio =
+              parseFloat(this.addNew.refuseRatio);
+            break;
+            // 编辑
+          case '质检天数-编辑':
+            val === '' || val == null || isNaN(val) || val < 0 ? this.updateInf.recentDays = '' : this.updateInf.recentDays =
+              parseInt(this.updateInf.recentDays);
+            break;
+          case '通过件最低抽单件数-编辑':
+            val === '' || val == null || isNaN(val) || val < 0 ? this.updateInf.minPassNum = '' : this.updateInf.minPassNum =
+              parseInt(this.updateInf.minPassNum);
+            break;
+          case '拒绝件最低抽单件数-编辑':
+            val === '' || val == null || isNaN(val) || val < 0 ? this.updateInf.minRefuseNum = '' : this.updateInf.minRefuseNum =
+              parseInt(this.updateInf.minRefuseNum);
+            break;
+          case '抽单比例-编辑':
+            val === '' || val == null || isNaN(val) || val > 100 || val < 0 ? this.updateInf.makeRatio = '' : this.updateInf
+              .makeRatio = parseFloat(this.updateInf.makeRatio);
+            break;
+          case '通过比例-编辑':
+            val === '' || val == null || isNaN(val) || val > 100 || val < 0 ? this.updateInf.passRatio = '' : this.updateInf
+              .passRatio = parseFloat(this.updateInf.passRatio);
+            break;
+          case '拒绝比例-编辑':
+            val === '' || val == null || isNaN(val) || val > 100 || val < 0 ? this.updateInf.refuseRatio = '' : this.updateInf
+              .refuseRatio = parseFloat(this.updateInf.refuseRatio);
+            break;
+        }
+      },
       getListInf() {
         // 质检-常规抽单配置—查询列表        
         this.get("/insMakeRules/getInfoList?" + Math.random()).then(res => {
           if (res.statusCode == 200) {
-            this.tableData = res.data.recordList;
+            this.tableDataTransform = res.data;
+            for (var i = 0; i < this.tableDataTransform.length; i++) {
+              this.tableDataTransform[i].makeRatio = this.tableDataTransform[i].makeRatio * 100;
+              this.tableDataTransform[i].passRatio = this.tableDataTransform[i].passRatio * 100;
+              this.tableDataTransform[i].refuseRatio = this.tableDataTransform[i].refuseRatio * 100;
+              this.tableDataTransform[i].drawSheetType == '01' ? this.proficiencyCount++ : ''; //熟悉
+              this.tableDataTransform[i].drawSheetType == '02' ? this.newOneCount++ : ''; //新人
+            }
+            this.tableData = this.tableDataTransform;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      },
+      getSystemDate() { //获取系统时间
+        this.get("/system/getSystemDate?" + Math.random()).then(res => {
+          if (res.statusCode == 200) {
+            this.createTime = this.addNew.createTime = res.data; //createTime展示给用户看的日期格式，this.addNew.createTime 入参的时间戳格式
           } else {
             this.$message.error(res.msg);
           }
@@ -304,24 +371,24 @@
       },
       //  编辑按钮-弹出弹窗
       handleEdit(index, row) {
-        console.log(index, row);
         this.Edit = true;
-        this.updateInf = row;
+        // this.updateInf = row;
+        // this.recentDays=row.recentDays;
+        this.updateInf = Object.assign({}, row);
+        this.loadsitu = false;
+        this.adbtn = '确定';
       },
       addInf() { //添加 按钮弹窗
-        console.log('tianjia')
         this.add = true;
         this.loadsitu = false;
         this.adbtn = '确定';
       },
       apportion() { //分配 按钮弹窗
-        console.log('apportion')
         this.Confirm = true;
         this.loadsitu = false;
         this.adbtn = '确定';
       },
       canc() { //弹窗 取消按钮关闭
-        console.log('取消任务分配')
         this.Confirm = false;
         this.Edit = false;
       },
@@ -334,99 +401,112 @@
         this.addNew.minPassNum = '';
         this.addNew.refuseRatio = '';
         this.addNew.minRefuseNum = '';
-        this.addNew.creator = '';
-        this.addNew.createTime = '';
-    },
-    SaveAdd() { //添加  提交
-      this.loadsitu = true;
-      this.adbtn = '保存中';
-      this.post("/insMakeRules/addInfo", this.addNew).then(res => {
-        if (res.statusCode == 200) {
-          this.$message({
-            message: '提交成功!',
-            type: 'success'
-          });
-        } else {
-          this.$message.error(res.msg);
+        // this.addNew.creator = '';
+        // this.addNew.createTime = '';
+      },
+      SaveAdd() { //添加  提交
+        if (this.addNew.recentDays === '' || this.addNew.drawSheetType === '' || this.addNew.makeRatio === '' || this.addNew
+          .passRatio === '' ||
+          this.addNew.minPassNum === '' || this.addNew.refuseRatio === '' || this.addNew.minRefuseNum === '' || this.addNew
+          .creator === '' || this.addNew.createTime === '') {
+          this.$message.error('请输入必填项！');
+          return
         }
-      });
-      this.getListInf();
-    },
-    SaveEdit() { //编辑  提交
-      this.loadsitu = true;
-      this.adbtn = '保存中';
-      this.post("/insMakeRules/updateInfo", {
-        id: this.updateInf.id,
-        drawSheetType: this.updateInf.drawSheetType,
-        recentDays: this.updateInf.recentDays,
-        makeRatio: this.updateInf.makeRatio,
-        passRatio: this.updateInf.passRatio,
-        minPassNum: this.updateInf.minPassNum,
-        refuseRatio: this.updateInf.refuseRatio,
-        minRefuseNum: this.updateInf.minRefuseNum
-      }).then(res => {
-        if (res.statusCode == 200) {
-          this.$message({
-            message: '提交成功!',
-            type: 'success'
-          });
-        } else {
-          this.$message.error(res.msg);
+        //  this.addNew.drawSheetType == '01' ? this.proficiencyCount++ : ''; //熟悉
+        //     this.addNew.drawSheetType == '02' ? this.newOneCount++ : ''; //新人
+        if ( (this.addNew.drawSheetType == '01'&&this.proficiencyCount > 0)||(this.addNew.drawSheetType == '02'&&this.newOneCount > 0) ) {//熟悉
+          this.$message.error(' 抽单类型设置重复！');
+          return
         }
-      });
-      this.getListInf();
-    },
-    CFsave() { //分配  提交
-      console.log('任务分配')
-      this.loadsitu = true;
-      this.adbtn = '保存中';
-      // 生成 质检任务接口------选中某一条还是全部生成--待确认---------接口未开发
-      this.post("insMakeRules/addInfo", {
-        drawSheetType: 'xx',
-        recentDays: 10,
-        makeRatio: 0.3,
-        passRatio: 0.4,
-        minPassNum: 3,
-        refuseRatio: 0.2,
-        minRefuseNum: 3,
-        creator: xx,
-        createTime: 'xxx'
-      }).then(res => {
-        if (res.statusCode == 200) {
-          this.$message({
-            message: '提交成功!',
-            type: 'success'
-          });
-        } else {
-          this.$message.error(res.msg);
+        this.loadsitu = true;
+        this.adbtn = '保存中';
+        this.post("/insMakeRules/addInfo", {
+          drawSheetType: this.addNew.drawSheetType,
+          recentDays: this.addNew.recentDays,
+          makeRatio: this.addNew.makeRatio / 100,
+          passRatio: this.addNew.passRatio / 100,
+          minPassNum: this.addNew.minPassNum,
+          refuseRatio: this.addNew.refuseRatio / 100,
+          minRefuseNum: this.addNew.minRefuseNum,
+          creator: this.addNew.creator,
+          createTime: this.addNew.createTime
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.$message({
+              message: '提交成功!',
+              type: 'success'
+            });
+            this.calcAddinfo();
+            this.getListInf();
+          } else {
+            this.$message.error('添加失败');
+            this.getListInf();
+          }
+        });
+        this.add = false;
+      },
+      SaveEdit() { //编辑  提交  
+        if (this.updateInf.recentDays === '' || this.updateInf.recentDays == null ||
+          this.updateInf.drawSheetType === '' || this.updateInf.drawSheetType == null ||
+          this.updateInf.makeRatio === '' || this.updateInf.makeRatio == null ||
+          this.updateInf.passRatio === '' || this.updateInf.passRatio == null ||
+          this.updateInf.minPassNum === '' || this.updateInf.minPassNum == null ||
+          this.updateInf.refuseRatio === '' || this.updateInf.refuseRatio == null ||
+          this.updateInf.minRefuseNum === '' || this.updateInf.minRefuseNum == null
+          // ||this.updateInf.creator === '' || this.updateInf.creator == null ||
+          // this.updateInf.createTime === '' || this.updateInf.createTime == null
+        ) {
+          this.$message.error('请输入必填项！');
+          return
         }
-      });
-      this.getListInf();
+        this.loadsitu = true;
+        this.adbtn = '保存中';
+        this.post("/insMakeRules/updateInfo", {
+          id: this.updateInf.id,
+          drawSheetType: this.updateInf.drawSheetType,
+          recentDays: this.updateInf.recentDays,
+          makeRatio: this.updateInf.makeRatio / 100,
+          passRatio: this.updateInf.passRatio / 100,
+          minPassNum: this.updateInf.minPassNum,
+          refuseRatio: this.updateInf.refuseRatio / 100,
+          minRefuseNum: this.updateInf.minRefuseNum
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.$message({
+              message: '提交成功!',
+              type: 'success'
+            });
+            this.getListInf();
+          } else {
+            this.$message.error(res.msg);
+            this.getListInf();
+          }
+        });
+        this.Edit = false;
+      },
+      CFsave() { //任务分配
+        this.loadsitu = true;
+        this.adbtn = '保存中';
+        // 生成 质检任务接口
+        this.post("insTask/addConventionalInsTaskByManual").then(res => {
+          if (res.statusCode == 200) {
+            this.$message({
+              message: '提交成功!',
+              type: 'success'
+            });
+            this.getListInf();
+          } else {
+            this.$message.error(res.msg);
+            this.getListInf();
+          }
+        });
+        this.Confirm = false;
+      },
     },
-    //   handleSizeChange(val) {
-    //     this.params.pageSize = val;
-    //     this.params.pageNum = 1;
-    //     // this.getInf(this.params);
-    //     this.inquire(this.params);
-    //   },
-
-    handleCurrentChange(val) {
-      // this.query.id = val.id;
-      // this.query.matchApplyId = val.applyId;
-      // localStorage.setItem("query", JSON.stringify(this.query));
-      // this.$router.push('/MatchingInfQuery');
-
-      // this.params.pageNum = val;
-      // this.inquire(this.params);
-    },
-  },
-  mounted() {
-      //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
-      //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
-      //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
-      //   this.params.pageNum = this.currentPage, //页数（第几页）
-      //     this.params.pageSize = this.pageCount, //页面显示行数
-      this.getListInf();
+    mounted() {
+      this.addNew.creator = JSON.parse(localStorage.getItem('userInf')).userCode;
+      this.getListInf(); //查询
+      this.getSystemDate(); //调用系统时间
     },
     components: {
       myHead
@@ -449,9 +529,6 @@
     color: #475669;
     text-align: right;
     display: inline-block;
-    /* width: 126px; */
-    /* height: 20px; */
-    /* margin-right: 10px; */
   }
 
   .regularConfig i {
@@ -469,39 +546,6 @@
     /* 统一导航 */
     /* height: 100%; */
   }
-
-  /* .search {
-    background-color: #ffffff;
-    border: 1px solid #e6eaee;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    height: auto;
-  } */
-
-  /* .search li {
-    clear: both;
-    height: 55px;
-  } */
-
-  /* .search li p {
-    width: 33.3%;
-    float: left;
-    margin-top: 20px;
-  } */
-
-  /* .btn_wrap {
-    margin-top: 20px;
-    height: 33px;
-    width: calc( 66.6% + 394px);
-  } */
-
-  /* .btn {
-    border-radius: 8px;
-    width: 79px;
-    font-size: 14px;
-    line-height: 33px;
-    padding: 0;
-  } */
 
   .noBk {
     overflow: hidden;
@@ -556,7 +600,6 @@
   }
 
   .paging {
-    /* margin-top: 15px; */
     text-align: center;
     /* 统一导航 */
     margin-top: 28px;
@@ -567,7 +610,6 @@
   }
 
   .newContent {
-    /* background:red; */
     height: 230px;
   }
 
@@ -578,11 +620,11 @@
   }
 
   .newContent p:nth-of-type(odd) label {
-    width: 115px;
+    width: 130px;
   }
 
   .newContent p:nth-of-type(even) label {
-    width: 185px;
+    width: 210px;
   }
 
   .colorGray p label,

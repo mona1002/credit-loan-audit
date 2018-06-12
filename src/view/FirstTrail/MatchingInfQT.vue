@@ -1,18 +1,19 @@
 <template>
   <div class="SplitScreen">
     <!-- 质检流程-编辑部分 -->
+    <!--反欺诈审批结论轨迹，质检部分调另一个新鞋的接口库== 反欺诈-8.反欺诈查询所有审批轨迹 -->
     <myHead></myHead>
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
       <p class="PerDtl">
-        <!-- <span> 借款人：{{accepCusBasicInfo.custName}}</span> -->
-        <!-- <span> 进件编号: {{customInf.applyMainNo}}</span>
-        <span> 证件号码: {{customInf.accepCusBasicInfo.certCode}}</span>
-        <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
+        <span> 借款人： {{custName}}</span>
+        <span> 进件编号: {{customInf.applyMainNo}}</span>
+        <span> 证件号码: {{certCode}}</span>
+        <span> 移动电话：{{mobile}}</span>
         <span> 进件机构: {{customInf.appOrgName}}</span>
         <span> 门店成立时间: {{customInf.appOrgRegisterDate}}</span>
         <span> 业务员入职时间： {{customInf.salPerEmployDate}}</span>
-        <span>{{customInf.adminIntroduce}}</span> -->
+        <span>{{customInf.adminIntroduce}}</span>
       </p>
       <div class="SplitScreen_wrap" id="rWrap" ref="rWrap">
         <!-- 左侧分屏部分 -->
@@ -45,10 +46,37 @@
               <FMCreditForm v-if=" this.tabContent1==6">信审表</FMCreditForm>
               <RcreditInvestigation v-if=" this.tabContent1==7">实地征信</RcreditInvestigation>
               <aMAntiApplyInf v-if=" this.tabContent1==8">反欺诈结论</aMAntiApplyInf>
-              <!-- <RFinanceInformation v-if=" this.tabContent1==9">财务信息</RFinanceInformation> -->
+              <RantiFraudInvestigation v-if=" this.tabContent1==9" :isShow='false' :applyId='tastwaitingPass.ApplyId'> 反欺诈调查</RantiFraudInvestigation>
+              <RFinanceInformation v-if=" this.tabContent1==10">财务信息</RFinanceInformation>
               <!-- <RprocessTrajectory v-if=" this.tabContent1==9">流程轨迹</RprocessTrajectory> -->
-              <aAntiConclusionPath v-if=" this.tabContent1==9">反欺诈审批结论轨迹 </aAntiConclusionPath>
-              <RApprovalConclusion v-if=" this.tabContent1==10">审批结论轨迹</RApprovalConclusion>
+              <div class='tab2_Content_show' v-if="RoleSHow=='partOne'">
+                <!-- 专员部分 -->
+                <QTAprovalConclution v-if=" this.tabContent1==11 ">反欺诈审批结论轨迹 </QTAprovalConclution>
+                <RApprovalConclusion v-if=" this.tabContent1==12 ">审批结论轨迹</RApprovalConclusion>
+                <regularQT v-if=" this.tabContent1==13&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+                <QTResultCheck v-if=" this.tabContent1==13&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+              </div>
+              <div class='tab2_Content_show' v-if="RoleSHow=='partTwo'">
+                <!-- 主管部分 -->
+                <regularQT v-if=" this.tabContent1==11&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+                <QTResultCheck v-if=" this.tabContent1==11&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+              </div>
+              <div class='tab2_Content_show' v-if="RoleSHow=='partThree'">
+                <!-- 质检部分 -->
+                <QTAprovalConclution v-if=" this.tabContent1==11">反欺诈审批结论轨迹 </QTAprovalConclution>
+                <RApprovalConclusion v-if=" this.tabContent1==12">审批结论轨迹</RApprovalConclusion>
+                <!-- <ComplianceProcess v-if=" this.tabContent1==11 && this.QTmark" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess> -->
+                <!-- <ReApply v-if=" this.tabContent1==12 && this.QTmark" :propReApply='ReApplyMark'>合规复议申请</ReApply> -->
+                <ComplianceProcess v-if=" this.tabContent1==13" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
+                <ReApply v-if=" this.tabContent1==14" :propReApply='ReApplyMark' :applyId='tastwaitingPass.ApplyId'>合规复议申请</ReApply>
+                <!-- <regularQT v-if=" this.tabContent1==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC' >质检结论</regularQT> -->
+                <regularQT v-if=" this.tabContent1==15&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+                <QTResultCheck v-if=" this.tabContent1==15&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+              </div>
+              <!-- <QTAprovalConclution v-if=" this.tabContent1==9&& this.Managermark">反欺诈审批结论轨迹 </QTAprovalConclution>
+              <RApprovalConclusion v-if=" this.tabContent1==10&& this.Managermark">审批结论轨迹</RApprovalConclusion>
+              <ComplianceProcess  v-if=" this.tabContent1==11 && this.QTmark" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
+              <ReApply  v-if=" this.tabContent1==12 && this.QTmark" :propReApply='ReApplyMark'>合规复议申请</ReApply> -->
             </div>
           </div>
         </div>
@@ -86,12 +114,35 @@
             <FMCreditForm v-if=" this.tabContent2==6">信审表</FMCreditForm>
             <RcreditInvestigation v-if=" this.tabContent2==7">实地征信</RcreditInvestigation>
             <aMAntiApplyInf v-if=" this.tabContent2==8">反欺诈结论</aMAntiApplyInf>
-            <!-- <RFinanceInformation v-if=" this.tabContent2==9">财务信息</RFinanceInformation> -->
+             <RantiFraudInvestigation v-if=" this.tabContent2==9" :isShow='false' :applyId='tastwaitingPass.ApplyId'> 反欺诈调查</RantiFraudInvestigation>
+            <RFinanceInformation v-if=" this.tabContent2==10">财务信息</RFinanceInformation>
             <!-- <RprocessTrajectory v-if=" this.tabContent2==9">流程轨迹</RprocessTrajectory> -->
-            <aAntiConclusionPath v-if=" this.tabContent2==9">反欺诈审批结论轨迹 </aAntiConclusionPath>
-            <RApprovalConclusion v-if=" this.tabContent2==10">审批结论轨迹</RApprovalConclusion>
-            <!-- <regularQT v-if=" this.tabContent2==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC' >质检结论</regularQT> -->
-            <regularQT v-if=" this.tabContent2==11" :propQTconclution='QTC'>质检结论</regularQT>
+
+            <div class='tab2_Content_show' v-if="this.RoleSHow=='partOne'">
+              <!-- 专员部分 -->
+              <QTAprovalConclution v-if=" this.tabContent2==11 ">反欺诈审批结论轨迹 </QTAprovalConclution>
+              <RApprovalConclusion v-if=" this.tabContent2==12 ">审批结论轨迹</RApprovalConclusion>
+              <regularQT v-if=" this.tabContent2==13&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+              <QTResultCheck v-if=" this.tabContent2==13&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+            </div>
+            <div class='tab2_Content_show' v-if="this.RoleSHow=='partTwo'">
+              <!-- 主管部分 -->
+              <regularQT v-if=" this.tabContent2==11&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+              <QTResultCheck v-if=" this.tabContent2==11&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+
+            </div>
+            <div class='tab2_Content_show' v-if="this.RoleSHow=='partThree'">
+              <!-- 质检部分 -->
+              <QTAprovalConclution v-if=" this.tabContent2==11">反欺诈审批结论轨迹 </QTAprovalConclution>
+              <RApprovalConclusion v-if=" this.tabContent2==12">审批结论轨迹</RApprovalConclusion>
+              <!-- <ComplianceProcess v-if=" this.tabContent2==11 && this.QTmark" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
+              <ReApply v-if=" this.tabContent2==12 && this.QTmark" :propReApply='ReApplyMark'>合规复议申请</ReApply> -->
+              <ComplianceProcess v-if=" this.tabContent2==13" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
+              <ReApply v-if=" this.tabContent2==14" :propReApply='ReApplyMark'  :applyId='tastwaitingPass.ApplyId'>合规复议申请</ReApply>
+              <!-- <regularQT v-if=" this.tabContent2==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC' >质检结论</regularQT> -->
+              <regularQT v-if=" this.tabContent2==15&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+              <QTResultCheck v-if=" this.tabContent2==15&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+            </div>
           </div>
         </div>
       </div>
@@ -139,23 +190,37 @@
   //   import RprocessTrajectory from "./ReadComponent/RprocessTrajectory"; //流程轨迹
   import RcreditInvestigation from "./ReadComponent/RcreditInvestigation"; //实地征信
   import aMAntiApplyInf from '../AntiFraud/matchComponent/aMAntiApplyInf.vue' //反欺诈结论
-  import aAntiConclusionPath from "../AntiFraud/components/aAntiConclusionPath.vue"; //反欺诈审批结论轨迹
+  import QTAprovalConclution from "../QualityTesting/QTReconsiderProcess/components/QTAprovalConclution.vue"; //反欺诈审批结论轨迹--新写页面
   import regularQT from "../QualityTesting/QTProcess/components/regularQT.vue"; //质检结论
-
-  import InternalMatch from "./InternalMatch";
-  import borrowerInformation from "./detailComponent/borrowerInformation";
+  import QTResultCheck from "../QualityTesting/QTReconsiderProcess/components/QTResultCheck.vue"; //质检结论-本人结论页
+  import ComplianceProcess from '../QualityTesting/QTReconsiderProcess/components/ComplianceProcess.vue'; //合规质检结论轨迹-prop
+  import ReApply from '../QualityTesting/QTReconsiderProcess/components/RulesReApply.vue'; //合规复议申请-RulesReApply
+  import RantiFraudInvestigation from '../FirstTrail/ReadComponent/RantiFraudInvestigation'; //反欺诈调查
+  import InternalMatch from "./InternalMatch"; //获取-申请信息
   import PhoneCredit from "./PhoneCredit"; //电话征信
-  import CreditApproval from "./CreditApproval";
   export default {
     data() {
       return {
-        Nodename: '',
-        accepCusBasicInfo:'',
+        accepCusBasicInfo: '',
         QTConclutionMark: "",
+        TaskList: '',
+        LocalList: '',
+        Managermark: true,
+        QTmark: false,
+        RoleSHow: 'partOne',
         // /----------------上面为新加的
         watchData: '',
         originLeft: '',
-        customInf: [],
+        custName: "",
+        certCode: '',
+        mobile: '',
+        customInf: {
+          applyMainNo:'',
+          appOrgName:'',
+          appOrgRegisterDate:'',
+          salPerEmployDate:'',
+          adminIntroduce:''
+        },
         tastwaitingPass: [],
         showHalfBtn: false,
         CompareAlert: false,
@@ -166,25 +231,47 @@
         tabContent2: 3,
         tabActiveInd1: 0,
         tabActiveInd2: 3,
-        items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论', "反欺诈审批结论轨迹", '信审审批结论轨迹'],
-        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "反欺诈审批结论轨迹", "信审审批结论轨迹",
+        // items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论', "反欺诈审批结论轨迹", '信审审批结论轨迹'],
+        // items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "反欺诈审批结论轨迹", "信审审批结论轨迹",
+        //   '质检结论'
+        // ],
+        items1: [],
+        items2: [],
+        itemsTrial1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论','反欺诈调查','账务信息', "反欺诈审批结论轨迹", '信审审批结论轨迹'],
+        itemsTrial2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论",'反欺诈调查','账务信息', "反欺诈审批结论轨迹", "信审审批结论轨迹",
+          '质检结论'
+        ],
+        itemsManager1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论",'反欺诈调查','账务信息'],
+
+        itemsManager2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论",'反欺诈调查','账务信息', '质检结论'],
+        itemsQT1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论','反欺诈调查','账务信息', "反欺诈审批结论轨迹", '信审审批结论轨迹',
+          '合规质检结论轨迹', '合规复议申请'
+        ],
+        itemsQT2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论",'反欺诈调查','账务信息', "反欺诈审批结论轨迹", "信审审批结论轨迹",
+          '合规质检结论轨迹', '合规复议申请',
           '质检结论'
         ],
         tab1Index: 0,
         tab2Index: 3,
-        flag1: [true, true, true, false, true, true, true, true, true, true, true],
-        flag2: [true, true, true, true, true, true, true, true, true, true, true, true],
+        // flag1: [true, true, true, false, true, true, true, true, true, true, true],
+        // flag2: [true, true, true, true, true, true, true, true, true, true, true, true], //12
+        // flagManger1: [true, true, true, false, true, true, true, true, true],
+        // flagManger2: [true, true, true, true, true, true, true, true, true, true], //10
+        // flagQT1: [true, true, true, false, true, true, true, true, true, true, true, true, true],
+        // flagQT2: [true, true, true, true, true, true, true, true, true, true, true, true, true, true], //14
+        flag1: [true, true, true, false, true, true, true, true, true, true, true, true, true,true,true],
+        flag2: [true, true, true, true, true, true, true, true, true, true, true, true, true, true,true,true], //15
         AlertSearch: "",
-        AlertSearchCondition: [{
-          value: '选项1',
-          label: '最近时间原则排列'
-        }, {
-          value: '选项2',
-          label: '内匹客户姓名+本人进件'
-        }, {
-          value: '选项3',
-          label: '内匹客户姓名'
-        }],
+        // AlertSearchCondition: [{
+        //   value: '选项1',
+        //   label: '最近时间原则排列'
+        // }, {
+        //   value: '选项2',
+        //   label: '内匹客户姓名+本人进件'
+        // }, {
+        //   value: '选项3',
+        //   label: '内匹客户姓名'
+        // }],
         isFull: false,
         comBtn: true,
         alertComBtn: false,
@@ -192,6 +279,20 @@
         QTC: {
           applyId: '',
           pageType: '',
+          EditType: '',
+          tastwaitingPass: {}
+        },
+        ReApplyMark: {
+          pageType: "ComponentPage"
+        }
+      }
+    },
+    watch: {
+      '$route' (to, from) {
+        if (to.fullPath !== from.fullPath) {
+          console.log('路由刷新')
+          this.initialInfo();
+          this.getPageInf();
         }
       }
     },
@@ -216,8 +317,8 @@
         }
       },
       rightMovingBtn() {
-        if (parseFloat(this.$refs.right_tab_ul.style.left) <= -850) {
-          this.$refs.right_tab_ul.style.left = "-850px";
+        if (parseFloat(this.$refs.right_tab_ul.style.left) <= -1350) {
+          this.$refs.right_tab_ul.style.left = "-1350px";
         } else {
           this.$refs.right_tab_ul.style.left = parseFloat(this.$refs.right_tab_ul.style.left) - 50 + "px";
         }
@@ -293,7 +394,7 @@
               clickX = e.pageX;
               if (clickX > leftOffset + 10 && clickX < (wrapWidth - 5)) {
                 nextW2 = clickX - leftOffset;
-                labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px');
+                labBtn.eq(0).css('left', clickX - leftOffset + 'px');
                 labBtn.eq(0).prev().width(clickX - leftOffset - 2 + 'px');
                 labBtn.eq(0).next().css('left', clickX - leftOffset + 2 + 'px');
                 labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px');
@@ -308,7 +409,6 @@
                 labBtn.eq(0).prev().width(wrapWidth - 11 + 'px');
                 labBtn.eq(0).next().css('left', wrapWidth - 9 + 'px');
                 labBtn.eq(0).next().width('0px');
-
               }
             }
           };
@@ -318,50 +418,97 @@
           e.cancelBubble = true;
         });
       },
+      getPageInf() { //获取个人信息
+      console.log( 'id', this.tastwaitingPass)
+        this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
+          id: this.tastwaitingPass.ApplyId,
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.customInf = res.data;
+            if (res.data.accepCusBasicInfo) {
+              this.custName = res.data.accepCusBasicInfo.custName;
+              this.certCode = res.data.accepCusBasicInfo.certCode;
+              this.mobile = res.data.accepCusBasicInfo.mobile;
+            }
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      },
       initialInfo() {
-        var Nodename = this.$route.fullPath.split('?')[1]
-        if (Nodename == 'checkApp_apply') {
+        var Nodename = this.$route.fullPath.split('?')[1];
+        console.log(Nodename)
+        if (Nodename === 'checkApp_apply') {
+          console.log('aaaaaaa')
           // 专员-编辑
-        } else if (Nodename == 'checkApp_check_manager') {
+          this.LocalList = 'QTTaskWait'; //取本地存储
+          this.items1 = this.itemsTrial1; //12
+          this.items2 = this.itemsTrial2;
+        } else if (Nodename === 'checkApp_check_manager') {
           // 主管-编辑
+          this.LocalList = 'QTManagerTW';
+          this.items1 = this.itemsTrial1; //12
+          this.items2 = this.itemsTrial2;
+        } else if (Nodename === 'checkApp_trial_self') {
+          // 本人
+          this.LocalList = 'QTSelfTW';
+          this.items1 = this.itemsManager1; //10
+          this.items2 = this.itemsManager2;
+          // this.flag1 = this.flagManger1;
+          // this.flag2 = this.flagManger2;
+          this.Managermark = false; //
+          this.RoleSHow = 'partTwo'
+        } else if (Nodename === 'checkApp_trial_manager') {
+          console.log('bbbbbbbbb')
+          
+          // 初终审主管
+          this.LocalList = 'QTTrialManagerTW';
+          this.QTComponentsShow();
+          this.RoleSHow = 'partThree'
+        } else if (Nodename === 'checkApp_check_recon_manager') {
+          // 质检主管复议（首次）
+          this.LocalList = 'QTReManagerTW';
+          this.QTComponentsShow();
+          this.RoleSHow = 'partThree'
+        } else if (Nodename === 'checkApp_regional_manager') {
+          // 区域
+          this.LocalList = 'QTAreaTW';
+          this.QTComponentsShow();
+          this.RoleSHow = 'partThree'
+        } else if (Nodename === 'checkApp_compliance_manager') {
+          // 合规
+          this.LocalList = 'QTComplianceTW';
+          this.QTComponentsShow();
+          this.RoleSHow = 'partThree'
+          //  this. items1 = itemsQT1;//14
+          // this.  items2 = itemsQT2;
+          // this.  flag1 = flagQT1;
+          // this.  flag2 = flagQT2;
+          //   this.QTmark=true;
         }
-
+        this.QTC.pageType = Nodename;
+        console.log(this.RoleSHow)
+      },
+      QTComponentsShow() {
+        this.items1 = this.itemsQT1; //14
+        this.items2 = this.itemsQT2;
+        // this.flag1 = this.flagQT1;
+        // this.flag2 = this.flagQT2;
+        // this.QTmark = true;
       }
     },
     mounted() {
-      // this.initialInfo();
-      // this.title = "影像资料";
-      // console.log(window.location)
-      // console.log(this.$route.fullPath)
-      this.$route.fullPath.indexOf('?') != -1 ? this.Nodename = this.$route.fullPath.split('?')[1] : this.Nodename;
-      // switch(this.this.Nodename){
-      //   case'':
-      // }
-      this.$message.error(JSON.parse(localStorage.getItem('userInf')))
-       console.log(JSON.parse(localStorage.getItem('userInf')))
-      if (this.Nodename == '') { //专员-编辑
-      console.log(JSON.parse(localStorage.getItem('userInf')))
-        this.QTC.pageType = 'commissioner'
-        // this. QTC:{
-        // applyId:'',
-        // pageType:'',
-        //         }
-      } else if (this.Nodename == 'e') { //主管-编辑
-
-      }
-
-      // this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
-      // this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-      //   id: this.tastwaitingPass.matchApplyId,
-      // }).then(res => {
-      //   if (res.statusCode == 200) {
-      //     this.customInf = res.data;
-      //     this.accepCusBasicInfo = res.data.accepCusBasicInfo;;
-      //   } else {
-      //     this.$message.error(res.msg);
-      //   }
-      // });
-      // this.MyMove();
+      this.title = "影像资料";
+      this.MyMove();
+      this.initialInfo(); //判断角色   
+      this.QTC.tastwaitingPass = this.tastwaitingPass = JSON.parse(localStorage.getItem(this.LocalList));
+      this.QTC.applyId = this.tastwaitingPass.ApplyId;
+      this.getPageInf(); //获取页面个人信息      
+      // console.log(this.tastwaitingPass.applyId)
+      // console.log('tastwaitingPass：', this.tastwaitingPass)
+      // console.log('QTC：', this.QTC)
+      // console.log('pageType：', this.QTC.pageType)
+      // console.log('LocalList：', this.LocalList)
     },
     components: {
       myHead,
@@ -376,11 +523,13 @@
       RcreditInvestigation, //实地征信
       aMAntiApplyInf, //反欺诈结论
       InternalMatch,
-      borrowerInformation,
       PhoneCredit,
-      CreditApproval,
-      aAntiConclusionPath, //反欺诈审批结论轨迹
+      QTAprovalConclution, //反欺诈审批结论轨迹
       regularQT, //  质检结论
+      QTResultCheck,
+      ComplianceProcess,
+      ReApply,
+      RantiFraudInvestigation
       //   RprocessTrajectory,
     }
   }
@@ -470,10 +619,6 @@
     font-size: 12px;
     margin-right: 15px;
   }
-
-  /* .PerDtl span:nth-of-type(7) {
-    width: 105px;
-  } */
 
   /* 切换按钮 */
 
@@ -596,7 +741,7 @@
 
   .Right_tab_ul_wrap ul {
     /* width: 1061px; */
-    width: 1420px;
+    width: 1950px;
     height: 48px;
     position: relative;
     text-align: left;
@@ -614,6 +759,11 @@
   .tab2_Content {
     height: calc( 100% - 48px);
     overflow: auto;
+  }
+
+  .tab2_Content_show {
+    /* height: 100%;
+    width: 100%; */
   }
 
   /* 右侧tab切换头 左右滑动图标  流  */

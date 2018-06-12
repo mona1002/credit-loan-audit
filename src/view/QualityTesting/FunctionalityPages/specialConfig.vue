@@ -9,13 +9,16 @@
           <li>
             <p>
               <label> 审批结论时间 </label>
-              <el-date-picker v-model="ploanDate" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+              <el-date-picker v-model="ploanDate" value-format="yyyy-MM-dd" type="daterange" range-separator="至" start-placeholder="开始日期"
+                end-placeholder="结束日期">
               </el-date-picker>
             </p>
             <p>
               <label> 进件机构</label>
-              <el-select v-model="params.shopCodes" placeholder="请选择">
-                <el-option v-for="item in ReconsiderType" :key="item.value" :label="item.label" :value="item.value">
+              <el-select v-model="params.operOrgCodes" multiple placeholder="请选择">
+                <el-option v-for="item in shopCodesSelection" :key="item.code" :label="item.name" :value="item.code">
+                  <span style="float: left">{{ item.name }}</span>
+                  <span style="float: right; color: #8492a6; font-size: 13px">{{ item.code }}</span>
                 </el-option>
               </el-select>
             </p>
@@ -28,7 +31,9 @@
             <p>
               <label> 产品名称</label>
               <el-select v-model="params.proCodes" multiple placeholder="请选择">
-                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                <el-option v-for="item in production" :key="item.code" :label="item.name" :value="item.code">
+                  <span style="float: left">{{ item.name }}</span>
+                  <span style="float: right; color: #8492a6; font-size: 13px">{{ item.code }}</span>
                 </el-option>
               </el-select>
             </p>
@@ -41,8 +46,8 @@
             </p>
             <p>
               <label> 拒绝主原因</label>
-              <el-select v-model="params.mainReasonIds" multiple placeholder="请选择">
-                <el-option v-for="item in ReconsiderType" :key="item.value" :label="item.label" :value="item.value">
+              <el-select v-model="params.mainReasonIds" placeholder="请选择" @change='selectSubRea(params.mainReasonIds)'>
+                <el-option v-for="item in mainReason" :key="item.code" :label="item.name" :value="item.code">
                 </el-option>
               </el-select>
             </p>
@@ -51,7 +56,7 @@
             <p>
               <label> 拒绝子原因 </label>
               <el-select v-model="params.subReasonIds" multiple placeholder="请选择">
-                <el-option v-for="item in ReconsiderType" :key="item.value" :label="item.label" :value="item.value">
+                <el-option v-for="item in secondReason" :key="item.id" :label="item.reasonName" :value="item.id">
                 </el-option>
               </el-select>
             </p>
@@ -66,47 +71,56 @@
       </div>
       <div class="title">
         <h1>质检任务分派查询
-          <span @click="allot">
-            <img src="../../../../static/images/add.png" style=" vertical-align: middle;"> 批量转分派
+          <span @click="apportion">
+            <!-- <span @click="allot"> -->
+            <img src="../../../../static/images/add.png" style=" vertical-align: middle;"> 任务分派
           </span>
         </h1>
       </div>
       <div class="table_wrap">
         <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" height="100%" @current-change="handleCurrentChange" border>
+        <el-table :data="tableData" style="width: 100%" @selection-change="handleSelectionChange" border>
           <el-table-column type="selection" align='center' width="55">
           </el-table-column>
           <el-table-column type="index" align='center' label=序号 width="55">
           </el-table-column>
-          <el-table-column prop="applySubNo" label="审批结论时间" align='center' min-width="180">
+          <el-table-column prop="ploanDate" label="审批结论时间" align='center' min-width="180">
           </el-table-column>
-          <el-table-column prop="applySubNo" label="进件编号" align='center' min-width="180">
+          <el-table-column prop="operOrgName" label="进件机构" align='center' min-width="180">
           </el-table-column>
-          <el-table-column prop="applySubNo" label="初审姓名" align='center' min-width="180">
+          <el-table-column prop="auditNamec" label="初审姓名" align='center' min-width="180">
           </el-table-column>
-          <el-table-column prop="custName" label="初审编号" align='center' min-width="120">
+          <el-table-column prop="auditCodec" label="初审编号" align='center' min-width="120">
           </el-table-column>
-          <el-table-column prop="certCode" label="终审姓名" align='center' min-width="180">
+          <el-table-column prop="auditNamez" label="终审姓名" align='center' min-width="180">
           </el-table-column>
-          <el-table-column prop="proName" label="终审编号" align='center' min-width="130">
+          <el-table-column prop="auditCodez" label="终审编号" align='center' min-width="130">
           </el-table-column>
-          <el-table-column prop="auditNamec" label="产品名称" align='center' min-width="130">
+          <el-table-column prop="proName" label="产品名称" align='center' min-width="130">
           </el-table-column>
-          <el-table-column prop="auditNamez" label="业务状态" align='center' min-width="180">
+          <el-table-column prop="busiStateTxt" label="业务状态" align='center' min-width="180">
           </el-table-column>
-          <el-table-column prop="auditDatez" label="拒绝主原因" align='center' min-width="120">
+          <el-table-column prop="mainReasonName" label="拒绝主原因" align='center' min-width="220">
           </el-table-column>
-          <el-table-column prop="checkStateTxt" label="拒绝子原因" align='center' min-width="100">
+          <el-table-column prop="subReasonName" label="拒绝子原因" align='center' min-width="160">
           </el-table-column>
         </el-table>
         <!-- 分页  -->
-        <div class="paging">
+        <!-- <div class="paging">
           <el-pagination @size-change="handleSizeChange" @current-change="handlePageChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
             :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
           </el-pagination>
-        </div>
+        </div> -->
       </div>
     </div>
+    <!-- ==============================任务分配=================================== -->
+    <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
+      <span>您确定生成质检任务？</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button class="calbtn" @click="Confirm=false">取消</el-button>
+        <el-button class="subtn" type="primary" :loading="loadsitu" @click="allot">{{adbtn}}</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -115,8 +129,22 @@
   export default {
     data() {
       return {
-        ploanDate: [],
+        Confirm: false,
+        loadsitu: false,
+        adbtn: '确定',
+        ploanDate: '',
         tableData: [],
+        production: [], //产品下拉
+        mainReason: [], //拒绝主原因下拉
+        secondReason: [], //拒绝子原因下拉
+        shopCodesSelection: [], //进件机构下拉
+        userInf: '',
+        mainReasonId: '',
+        allotParams: {
+          operCode: '',
+          operName: '',
+          list: []
+        },
         // reg: /(\w{6})\w*(\w{4})/,
         // Telreg: /(\w{7})\w*/,
         // reVal: '$1********$2',
@@ -128,154 +156,112 @@
           // },
           ploanDateBegin: '', //审批结论开始时间
           ploanDateEnd: '', //审批结论结束时间
-          shopCodes: '', //	进件机构
+          operOrgCodes: '', //	进件机构       多选
           userCode: '', //	初终审编号
-          proCodes: '', //	产品
-          busiState: '', //	业务状态
-          mainReasonIds: '', //	拒绝主原因
-          subReasonIds: '', //	拒绝子原因
+          proCodes: '', //	产品          多选
+          busiState: '', //	业务状态     
+          mainReasonIds: '', //	拒绝主原因      多选
+          subReasonIds: '', //	拒绝子原因      多选
         },
         QTtime: '',
         currentPage: 1, //分页选中页
         pageCount: 10, // 每页显示条数
-        RresetParams: {
-          // pageParam: {
-          //   pageNum: 1, //当前页
-          //   pageSize: 10, //每页的显示数量
-          // },
-         ploanDateBegin: '', //审批结论开始时间
-          ploanDateEnd: '', //审批结论结束时间
-          shopCodes: '', //	进件机构
-          userCode: '', //	初终审编号
-          proCodes: '', //	产品
-          busiState: '', //	业务状态
-          mainReasonIds: '', //	拒绝主原因
-          subReasonIds: '', //	拒绝子原因
-        },
         totalRecord: 0, //总条数
-        ProductName: [{ //产品名称
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
-        QTSituation: [{ //质检状态
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
-busiStateSelect:[],
-        ReconsiderType: [{ //复议状态
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
-        multipleSelection: []
+        busiStateSelect: [],
       }
     },
     methods: {
-      allot() {
-
+      apportion() { //分配 按钮弹窗
+        this.Confirm = true;
+        this.loadsitu = false;
+        this.adbtn = '确定';
       },
-      handleSizeChange(val) {
-        this.params.pageParam.pageSize = val;
-        this.inquire(this.params);
-      },
-      handlePageChange(val) {
-        this.params.pageParam.pageNum = val;
-        this.inquire(this.params);
-      },
-      Rreset() {
-        this.params = this.RresetParams; //全部清空
-        this.inquire(this.params);
-      },
-      Rsearch() {
-        this.params.ploanDateBegin = this.ploanDate[0];
-        this.params.ploanDateEnd = this.ploanDate[1];
-        // this.params.pageParam.pageNum = this.currentPage = 1;
-        this.inquire(this.params);
-      },
-      inquire(pam) {
-        // 质检-复议结果查询功能----------------------------------------------------接口地址未添加
-        this.post("", pam).then(res => {
+      allot() { //批量转分派
+        this.loadsitu = true;
+        this.adbtn = '保存中';
+        this.post("/insTask/addSpecialInsTask", this.allotParams).then(res => {
           if (res.statusCode == 200) {
-            // for (var i = 0; i < res.data.length; i++) {
-            //   if (res.data[i].certCode) {
-            //     res.data[i].certCode = res.data[i].certCode.replace(this.reg, this.reVal);
-            //   }
-            //   if (res.data[i].mobile) {
-            //     res.data[i].mobile = res.data[i].mobile.replace(this.Telreg, this.telVal);
-            //   }
-            // }
-            this.tableData = res.data.recordList;
-            this.totalRecord = res.data.totalRecord; //总记录数
+            this.$message({
+              type: 'success',
+              message: '提交成功！'
+            })
+            this.inquire(this.params);
+            this.Confirm = false;
+          } else {
+            this.$message.error('批量转分派失败');
+            this.inquire(this.params);
+            this.Confirm = false;
+          }
+        });
+      },
+      Rreset() { // 重置
+        this.params.ploanDateBegin = ''; //审批结论开始时间
+        this.params.ploanDateEnd = ''; //审批结论结束时间
+        this.params.operOrgCodes = []; //	进件机构       多选
+        this.params.userCode = ''; //	初终审编号
+        this.params.proCodes = []; //	产品          多选
+        this.params.busiState = ''; //	业务状态     
+        this.params.mainReasonIds = ''; //	拒绝主原因     
+        this.params.subReasonIds = []; //	拒绝子原因      多选
+        this.secondReason = []; //	拒绝子原因     下拉内容
+        this.ploanDate = ''; //审批结论时间数组
+      },
+      Rsearch() { // 查询
+        if (this.ploanDate == '' && this.params.operOrgCodes == '' && this.params.userCode == '' && this.params.proCodes ==
+          '' && this.params.busiState == '' && this.params.mainReasonIds == '' && this.params.subReasonIds == '') {
+          this.$message.error('请输入查询条件')
+          return
+        }
+        this.ploanDate[0] ? this.params.ploanDateBegin = this.ploanDate[0] : this.params.ploanDateBegin = '';
+        this.ploanDate[1] ? this.params.ploanDateEnd = this.ploanDate[1] : this.params.ploanDateEnd = '';
+        this.inquire(this.params);
+      },
+      inquire(pam) { //查询列表     质检-复议结果查询功能
+        this.post("/insTask/getSpecialInsTaskList", pam).then(res => {
+          if (res.statusCode == 200) {
+            this.tableData = res.data;
+            // this.totalRecord = res.data.totalRecord; //总记录数
             // res.data. totalPage // 总页数
           } else {
             this.$message.error(res.msg);
           }
         })
       },
-      getServiceStates() {
-        this.get('/system/getAllBusiState' + Math.random())
-          .then(res => {
-            console.log(res);
-            if (res.statusCode == '200') {
-              this.busiStateSelect = res.data;
-            } else {
-              this.$message(res.msg);
-            }
-          })
+      getSelection() { //查询所有下拉
+        this.get("/insTask/initSpecialInsTaskPage?" + Math.random()).then(res => {
+          if (res.statusCode == 200) {
+            this.busiStateSelect = res.data.busiStateList; // 业务状态
+            this.mainReason = res.data.mainReasonList; // 拒绝主原因
+            this.shopCodesSelection = res.data.orgList; // 进件机构
+            this.production = res.data.proList; // 产品名称
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
       },
-      // 点击tab每一行数据切换 value 值
-      handleCurrentChange(val) {
-        console.log(val)
-        // this.query.id = val.id;
-        // this.query.matchApplyId = val.applyId;
-        // localStorage.setItem("query", JSON.stringify(this.query));
-        // this.$router.push('/MatchingInfQuery');
-        // this.gopath();
-        // this.params.pageNum = val;
-        // this.inquire(this.params);
+      selectSubRea(id) { //查询子原因
+        this.get("/credit/findNodeFirstChildren", {
+          id: id
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.secondReason = res.data;
+
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      },
+      handleSelectionChange(val) {
+        this.allotParams.list = val;
       },
     },
     mounted() {
-      // this.inquire(this.params);
-
-      //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
-      //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
-      //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
+      this.userInf = JSON.parse(localStorage.getItem('userInf'));
+      this.allotParams.operCode = this.userInf.userCode;
+      this.allotParams.operName = this.userInf.userName;
+      // this.getProducts(); //查询产品
+      // this.getBusiState(); //获取业务状态下拉
+      this.getSelection(); //获取所有下拉
       //   this.params.pageNum = this.currentPage, //页数（第几页）
       //  this.params.pageParam.pageNum = this.currentPage = 1;
       //     this.params.pageSize = this.pageCount, //页面显示行数
@@ -390,11 +376,10 @@ busiStateSelect:[],
     border: 1px solid #e6eaee;
     padding: 25px 25px 20px 25px;
     width: 100%;
-    height: calc( 100% - 370px);
+    /* height: auto; */
   }
 
   .paging {
-    /* margin-top: 15px; */
     text-align: center;
     /* 统一导航 */
     margin-top: 28px;

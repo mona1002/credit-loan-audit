@@ -9,15 +9,15 @@
           <li>
             <p>
               <label> 进件编号 </label>
-              <el-input v-model="params.applySubNo" placeholder="请输入进件编号"></el-input>
+              <el-input v-model="params.dataParam.applySubNo" placeholder="请输入进件编号"></el-input>
             </p>
             <p>
               <label> 客户名称</label>
-              <el-input v-model="params.custName" placeholder="请输入客户名称"></el-input>
+              <el-input v-model="params.dataParam.custName" placeholder="请输入客户名称"></el-input>
             </p>
             <p>
               <label> 产品名称</label>
-              <el-select v-model="params.proCode" placeholder="请选择">
+              <el-select v-model="params.dataParam.proCode" placeholder="请选择">
                 <el-option v-for="item in ProductName" :key="item.proCode" :label="item.proName" :value="item.proCode">
                 </el-option>
               </el-select>
@@ -26,45 +26,32 @@
           <li>
             <p>
               <label> 质检状态</label>
-              <el-select v-model="params.checkState" placeholder="请选择">
-                <el-option v-for="item in QTSituation" :key="item.value" :label="item.label" :value="item.value">
+              <el-select v-model="params.dataParam.checkState" placeholder="请选择">
+                <el-option v-for="item in QTSituation" :key="item.code" :label="item.name" :value="item.code">
                 </el-option>
               </el-select>
             </p>
             <p>
               <label> 初审人员</label>
-              <el-input v-model="params.auditNamec" placeholder="请输入初审人员"></el-input>
+              <el-input v-model="params.dataParam.auditNamec" placeholder="请输入初审人员"></el-input>
             </p>
             <p>
               <label> 终审日期</label>
-              <el-date-picker v-model="params.auditDatez" type="date">
+              <el-date-picker v-model="params.dataParam.auditDatez"  type="date" value-format="yyyy-MM-dd">
               </el-date-picker>
             </p>
           </li>
           <li>
             <p>
               <label> 终审人员 </label>
-              <el-input v-model="params.auditNamez" placeholder="请输入终审人员"></el-input>
+              <el-input v-model="params.dataParam.auditNamez" placeholder="请输入终审人员"></el-input>
             </p>
             <p>
               <label> 质检日期</label>
-              <el-date-picker v-model="QTtime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+              <el-date-picker v-model="QTtime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"  value-format="yyyy-MM-dd">
               </el-date-picker>
             </p>
             <p>
-              <label> 复议状态</label>
-              <el-select v-model="params.reconState" placeholder="请选择">
-                <el-option v-for="item in ReconsiderType" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-            </p>
-          </li>
-          <li>
-            <p>
-            </p>
-            <p>
-            </p>
-            <p class="btn_wrap">
               <el-button class="btn" type="primary" style="marginLeft:228px" @click="Rsearch">查询</el-button>
               <el-button class="btn" type="primary" @click="Rreset">重置</el-button>
             </p>
@@ -76,7 +63,7 @@
       </div>
       <div class="table_wrap">
         <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" height="100%" @current-change="handleCurrentChange" border>
+        <el-table :data="tableData" style="width: 100%" @row-dblclick="handleCurrentChange" border>
           <!-- <el-table-column type="index" align='center' label=序号 width="55">
           </el-table-column> -->
           <el-table-column prop="applySubNo" label="进件编号" align='center' min-width="180">
@@ -95,9 +82,13 @@
           </el-table-column>
           <el-table-column prop="checkStateTxt" label="质检状态" align='center' min-width="100">
           </el-table-column>
-          <el-table-column prop="reconStateTxt" label="复议状态" align='center' min-width="100">
-          </el-table-column>
           <el-table-column prop="insDate" label="质检日期" align='center' min-width="100">
+          </el-table-column>
+             <el-table-column prop="checkResultTxt" label="质检结果" align='center' min-width="100">
+          </el-table-column>
+          <el-table-column prop="errorType" label="差错类型" align='center' min-width="100">
+          </el-table-column>
+          <el-table-column prop="errorDescribe" label="差错描述" align='center' min-width="100">
           </el-table-column>
         </el-table>
         <!-- 分页  -->
@@ -126,78 +117,25 @@
             pageNum: 1, //当前页
             pageSize: 10, //每页的显示数量
           },
-          applySubNo: '',
-          custName: '',
-          proCode: '',
-          checkState: '',
-          auditNamec: '',
-          auditNamez: '',
-          auditDatez: '',
-          insDateBegin: '',
-          insDateEnd: '',
-          reconState: ''
+          dataParam: {
+            applySubNo: '',
+            custName: '',
+            proCode: '',
+            checkState: '',
+            auditNamec: '',
+            auditNamez: '',
+            auditDatez: '',
+            insDateBegin: '',
+            insDateEnd: '',
+          }
         },
         QTtime: '',
         currentPage: 1, //分页选中页
         pageCount: 10, // 每页显示条数
-        RresetParams: {
-          pageParam: {
-            pageNum: 1, //当前页
-            pageSize: 10, //每页的显示数量
-          },
-          applySubNo: '',
-          custName: '',
-          proCode: '',
-          checkState: '',
-          auditNamec: '',
-          auditNamez: '',
-          auditDatez: '',
-          insDateBegin: '',
-          insDateEnd: '',
-          reconState: ''
-        },
         totalRecord: 0, //总条数
         ProductName: [], //产品名称
-        
-        // ProductName: [{ //产品名称
-        //   value: '选项1',
-        //   label: '黄金糕'
-        // }, {
-        //   value: '选项2',
-        //   label: '双皮奶'
-        // }],
-        QTSituation: [{ //质检状态
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
-        ReconsiderType: [{ //复议状态
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
+        QTSituation: [], //质检状态
+
       }
     },
     methods: {
@@ -212,12 +150,21 @@
       },
 
       Rreset() {
-        this.params = this.RresetParams; //全部清空
+        this.params.dataParam.applySubNo = '';
+        this.params.dataParam.custName = '';
+        this.params.dataParam.proCode = '';
+        this.params.dataParam.checkState = '';
+        this.params.dataParam.auditNamec = '';
+        this.params.dataParam.auditNamez = '';
+        this.params.dataParam.auditDatez = '';
+        this.params.dataParam.insDateBegin = '';
+        this.params.dataParam.insDateEnd = '';
+        this.QTtime='';
         this.inquire(this.params);
       },
       Rsearch() {
-        this.params.insDateBegin = this.QTtime[0];
-        this.params.insDateEnd = this.QTtime[1];
+        this.params.dataParam.insDateBegin = this.QTtime[0];
+        this.params.dataParam.insDateEnd = this.QTtime[1];
         this.params.pageParam.pageNum = this.currentPage = 1;
         this.inquire(this.params);
       },
@@ -241,12 +188,21 @@
           }
         })
       },
-      products(){
-        			this.post("/credit/productAll").then(res => {
-					if(res.statusCode == 200){
-						this.ProductName = res.data;
-					}
-				});
+      products() {
+        this.post("/credit/productAll").then(res => {
+          if (res.statusCode == 200) {
+            this.ProductName = res.data;
+          }
+        });
+      },
+      getQTState() { //获取质检枚举
+        this.get("/system/getAllCheckState?" + Math.random()).then(res => {
+          if (res.statusCode == 200) {
+            this.QTSituation = res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
       },
       // 点击tab每一行数据切换 value 值
       handleCurrentChange(val) {
@@ -266,6 +222,8 @@
       //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
       //   this.params.pageNum = this.currentPage, //页数（第几页）
       this.inquire(this.params);
+      this.getQTState();
+      this.products();
       //  this.params.pageParam.pageNum = this.currentPage = 1;
       //     this.params.pageSize = this.pageCount, //页面显示行数
     },
@@ -283,7 +241,7 @@
     overflow-x: hidden;
     /* 统一导航 --去掉高度*/
     height: 100%;
-    min-width:1366px;
+    min-width: 1366px;
   }
 
   .AntiCaseNum label {
@@ -379,9 +337,9 @@
   .table_wrap {
     background-color: #ffffff;
     border: 1px solid #e6eaee;
-    padding: 25px 25px 20px 25px;
+    padding: 25px 25px 40px 25px;
     width: 100%;
-    height: calc( 100% - 370px);
+    /* height: calc( 100% - 370px); */
   }
 
   .paging {

@@ -454,9 +454,7 @@
 				    	</li>
 				    	<li>
 				    		<label>文字说明：</label>
-				    		<el-tooltip class="item" effect="dark" :content="borDebt.remark" :disabled="borDebt.remark==''" placement="top">
 						      <div>{{borDebt.remark}}</div>
-						    </el-tooltip>
 				    	</li>
 				    </ol>
 		  		</div> 
@@ -494,9 +492,7 @@
 				    <ol>
 				    	<li>
 				    		<label>报告描述：</label>
-				    		<el-tooltip class="item" effect="dark" :content="rptInfo.crContent" :disabled="rptInfo.crContent==''" placement="top">
 						      <div>{{rptInfo.crContent}}</div>
-						    </el-tooltip>
 				    	</li>
 				    </ol>
 		  		</div> 
@@ -568,9 +564,7 @@
 				    <ol>
 				    	<li>
 				    		<label>其他：</label>
-				    		<el-tooltip class="item" effect="dark" :content="otherInfo.content" :disabled="otherInfo.content==null" placement="top">
 						      <div>{{otherInfo.content}}</div>
-						    </el-tooltip>
 				    	</li>
 				    </ol>
 		  		</div> 

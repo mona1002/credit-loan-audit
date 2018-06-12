@@ -6,6 +6,8 @@
       <div class="main_left">
         <h2>
           <i class="el-icon-edit"> </i>常用 </h2>
+             <!-- <router-link to='/regularConfig'>常规抽单-功能 </router-link>
+          <router-link to='/specialConfig'>专纵抽单-功能 </router-link> -->
       </div>
       <div class="main_right">
         <!-- 中间 -->
@@ -99,7 +101,7 @@
         processTemplateId: '', // 流程模板Id
         taskNodeName: '', // 任务节点名称
         tableData: [],
-        LSworkbench:'',
+        LSworkbench: '',
         currentRow: null,
         workbenchPass: {
           processTemplateId: '',
@@ -179,7 +181,7 @@
           this.judge.flag = "01";
           RoutePath = '/taskInWaitting';
           // routeParams = '?taskNodeName=creditApp_firstTrial&flag=01';
-          this.LSworkbench="workbenchPass";
+          this.LSworkbench = "workbenchPass";
           // localStorage.setItem("workbenchPass", JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
         } else if (val.taskNodeName == "creditApp_finalTrial_one" || val.taskNodeName == "creditApp_finalTrial_two" ||
           val.taskNodeName == "creditApp_finalTrial_three" || val.taskNodeName == "creditApp_finalTrial_four" || val.taskNodeName ==
@@ -187,66 +189,68 @@
           this.judge.flag = "02";
           RoutePath = '/FtaskInWaitting';
           // routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=02";
-            this.LSworkbench="FinalWorkbenchPass";
+          this.LSworkbench = "FinalWorkbenchPass";
           // localStorage.setItem("FinalWorkbenchPass", JSON.stringify(this.workbenchPass));
         } else if (val.taskNodeName == "antiFraudApp_commissioner") { //反欺诈专员 
           this.judge.flag = "03";
           RoutePath = '/AntiFraud34';
           // routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=03";
-            this.LSworkbench="AntiWorkbenchPass";
+          this.LSworkbench = "AntiWorkbenchPass";
           // localStorage.setItem("AntiWorkbenchPass", JSON.stringify(this.workbenchPass));
         } else if (val.taskNodeName == "antiFraudApp_manager") { // 反欺诈主管 
           this.judge.flag = "04";
           RoutePath = '/AntiFraud34';
           // routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=04";
-          this.LSworkbench="AntiManagerWorkbenchPass";
+          this.LSworkbench = "AntiManagerWorkbenchPass";
           // localStorage.setItem("AntiManagerWorkbenchPass", JSON.stringify(this.workbenchPass));
         } else if (val.taskNodeName == "reconsiderApp_commissioner") { // 复议专员 
           this.judge.flag = "05";
           RoutePath = '/reconsiderList';
           // routeParams = '?taskNodeName=reconsiderApp_commissioner&flag=05'
-          this.LSworkbench="ReWorkbenchPass";
+          this.LSworkbench = "ReWorkbenchPass";
           // localStorage.setItem("ReWorkbenchPass", JSON.stringify(this.workbenchPass));
         } else if (val.taskNodeName == "reconsiderApp_manager") { // 复议经理
           this.judge.flag = "06";
           RoutePath = '/reconsiderList'
           // routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=06";
-          this.LSworkbench="ReManagerWorkbenchPass";
+          this.LSworkbench = "ReManagerWorkbenchPass";
           // localStorage.setItem("ReManagerWorkbenchPass", JSON.stringify(this.workbenchPass));
+        }
+        // -----------------------------质检-------------------------------
+        else if (val.taskNodeName == "checkApp_apply") { //质检开始- 质检专员列表 
+         this.judge.flag = "07";
+          RoutePath = '/commissioner'
+          this.LSworkbench="QTWorkbenchPass";
         } 
-        // else if (val.taskNodeName == "checkApp_apply") { //质检开始- 质检专员列表 
-        //  this.judge.flag = "07";
-        //   RoutePath = '/commissioner'
-        //   this.LSworkbench="QTWorkbenchPass";
-        // } else if (val.taskNodeName == "checkApp_check_manager") { // 质检主管复核--质检主管列表 
-        //   this.judge.flag = "08";
-        //   RoutePath = '/manager'
-        //   this.LSworkbench="QTManagerWorkbenchPass";
-        // }    else if (val.taskNodeName == "checkApp_trial_self") { //初终审本人复查- 初终审本人任务列表 
-        //  this.judge.flag = "09";
-        //   RoutePath = '/SelfTaskList'
-        //   this.LSworkbench="QTTrialSelftWorkbenchPass";
-        // } else if (val.taskNodeName == "checkApp_trial_manager") { // 初终审主管复核异议--初终审主管任务列表 
-        //   this.judge.flag = "10";
-        //   RoutePath = '/ManagerTaskList'
-        //   this.LSworkbench="QTTrialManagerWorkbenchPass";
-        // }
-        // else if (val.taskNodeName == "checkApp_check_recon_manager") { // 质检主管复核异议--复议任务列表（首次） 
-        //   this.judge.flag = "11";
-        //   RoutePath = '/ReManagerTaskList'
-        //   this.LSworkbench="QTReWorkbenchPass";
-        // }else if (val.taskNodeName == "checkApp_regional_manager") { // 区域经理复核--区域经理任务列表 
-        //   this.judge.flag = "12";
-        //   RoutePath = '/ACManagerTaskList'
-        //   this.LSworkbench="QTAreaWorkbenchPass";
-        // }else if (val.taskNodeName == "checkApp_compliance_manager") { // 合规经理复核--合规经理任务列表 
-        //   this.judge.flag = "13";
-        //   RoutePath = '/ACManagerTaskList'
-        //   this.LSworkbench="QTComplianceWorkbenchPass";
-        // }
-          routeParams = '?taskNodeName=' + val.taskNodeName + "&flag="+this.judge.flag;
+        else if (val.taskNodeName == "checkApp_check_manager") { // 质检主管复核--质检主管列表 
+          this.judge.flag = "08";
+          RoutePath = '/manager'
+          this.LSworkbench="QTManagerWorkbenchPass";
+        }    else if (val.taskNodeName == "checkApp_trial_self") { //初终审本人复查- 初终审本人任务列表 
+         this.judge.flag = "09";
+          RoutePath = '/SelfTaskList'
+          this.LSworkbench="QTTrialSelftWorkbenchPass";
+        } else if (val.taskNodeName == "checkApp_trial_manager") { // 初终审主管复核异议--初终审主管任务列表 
+          this.judge.flag = "10";
+          RoutePath = '/ManagerTaskList'
+          this.LSworkbench="QTTrialManagerWorkbenchPass";
+        }
+        else if (val.taskNodeName == "checkApp_check_recon_manager") { // 质检主管复核异议--复议任务列表（首次） 
+          this.judge.flag = "11";
+          RoutePath = '/ReManagerTaskList'
+          this.LSworkbench="QTReWorkbenchPass";
+        }else if (val.taskNodeName == "checkApp_regional_manager") { // 区域经理复核--区域经理任务列表 
+          this.judge.flag = "12";
+          RoutePath = '/ACManagerTaskList'
+          this.LSworkbench="QTAreaWorkbenchPass";
+        }else if (val.taskNodeName == "checkApp_compliance_manager") { // 合规经理复核--合规经理任务列表 
+          this.judge.flag = "13";
+          RoutePath = '/ACManagerTaskList'
+          this.LSworkbench="QTComplianceWorkbenchPass";
+        }
+        routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=" + this.judge.flag;
         localStorage.setItem(this.LSworkbench, JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
-         localStorage.setItem("judge", JSON.stringify(this.judge));
+        localStorage.setItem("judge", JSON.stringify(this.judge));
         this.$router.push({
           path: RoutePath + routeParams,
         });
@@ -259,6 +263,11 @@
         // })
       },
     },
+    //        beforeRouteLeave(to, from, next) {  
+    //     from.meta.keepAlive = ''; 
+    //       // this.$route.meta.keepAlive='' 
+    //     next();  
+    // }  ,
     computed: {
       taskCount() {
         this.TaskCount = null;
@@ -274,7 +283,6 @@
       }
     },
     mounted() {
-      // console.log(window.location)
       // 统一登录平台  调试   start 
       // this.get("http://testplatform.nuoyuan.com.cn/remote/user/getUserInfo").then(response => {
       this.get(UserURL + 'remote/user/getUserInfo?' + Math.random()).then(response => {

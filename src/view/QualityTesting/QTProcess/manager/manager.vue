@@ -1,6 +1,6 @@
 <template>
   <div class="AntiCaseNum IntegratedQuery">
-    <!-- 质检  专员列表 -->
+    <!-- 质检  主管列表 -->
     <myHead></myHead>
     <div class="content">
       <div class="search">
@@ -8,11 +8,11 @@
           <li>
             <p>
               <label> 进件编号 </label>
-              <el-input v-model="params.applySubno" placeholder="请输入进件编号"></el-input>
+              <el-input v-model="params.applySubNo" placeholder="请输入进件编号"></el-input>
             </p>
             <p>
               <label> 客户名称</label>
-              <el-input v-model="params.custName" placeholder="请输入客户名称"></el-input>
+              <el-input v-model="params.custName_la" placeholder="请输入客户名称"></el-input>
             </p>
             <p>
               <label> 证件号码</label>
@@ -22,15 +22,15 @@
           <li>
             <p>
               <label> 质检状态</label>
-              <el-select v-model="value" placeholder="请选择">
-                <el-option v-for="item in QTSituation" :key="item.value" :label="item.label" :value="item.value">
+              <el-select v-model="params.checkState" placeholder="请选择">
+                <el-option v-for="item in QTSituation" :key="item.code" :label="item.name" :value="item.code">
                 </el-option>
               </el-select>
             </p>
             <p>
               <label> 任务类型</label>
-              <el-select v-model="value" placeholder="请选择">
-                <el-option v-for="item in RiskType" :key="item.value" :label="item.label" :value="item.value">
+              <el-select v-model="params.instaskType" placeholder="请选择">
+                <el-option v-for="item in TaskType" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </p>
@@ -42,55 +42,57 @@
         </ul>
       </div>
       <div class="title">
-        <h1>质检信息</h1>
+        <h1>质检信息
+          <span class='title_icon'>
+            <label @click='allotFinished'>
+              <img src='../../../../../static/images/faqi.png'> 批量完成</label>
+            <label @click='allotSubmit'>
+              <img src='../../../../../static/images/appro.png'> 批量提交</label>
+          </span>
+        </h1>
       </div>
       <div class="table_wrap">
         <!-- 编辑table -->
-         <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%"  height="100%" border @row-click="handleCurrentChange" @selection-change="handleSelectionChange">
+        <el-table :data="tableData" style="width: 100%" height="100%" border @row-dblclick="handleCurrentChange" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="35">
           </el-table-column>
-           <el-table-column type="index" align='center' label=序号 width="55">
+          <el-table-column type="index" align='center' label=序号 width="55">
           </el-table-column>
-            <el-table-column prop="applySubno" label="主进件编号" align='center' min-width="180">
+          <el-table-column prop="applyMainNo" label="主进件编号" align='center' min-width="180">
           </el-table-column>
-           <el-table-column prop="applySubno" label="进件编号" align='center' min-width="180">
+          <el-table-column prop="applySubNo" label="进件编号" align='center' min-width="180">
           </el-table-column>
           <el-table-column prop="custName" label="客户名称" align='center' min-width="120">
           </el-table-column>
-              <el-table-column prop="certCode" label="证件类型" align='center' min-width="180">
+          <el-table-column prop="certTypeTxt" label="证件类型" align='center' min-width="180">
           </el-table-column>
           <el-table-column prop="certCode" label="证件号码" align='center' min-width="180">
           </el-table-column>
-           <el-table-column prop="mobile" label="产品名称" align='center' min-width="130">
+          <el-table-column prop="proName" label="产品名称" align='center' min-width="130">
           </el-table-column>
-          <el-table-column prop="appDate" label="初审姓名" align='center' min-width="130">
+          <el-table-column prop="auditNamec" label="初审姓名" align='center' min-width="130">
           </el-table-column>
-          <el-table-column prop="proName" label="初审日期" align='center' min-width="180">
+          <el-table-column prop="auditDatec" label="初审日期" align='center' min-width="180">
           </el-table-column>
-          <el-table-column prop="operOrgName" label="终审姓名" align='center' min-width="120">
+          <el-table-column prop="auditNamez" label="终审姓名" align='center' min-width="120">
           </el-table-column>
-          <el-table-column prop="busiStateTxt" label="终审日期" align='center' min-width="100">
+          <el-table-column prop="auditDatez" label="终审日期" align='center' min-width="180">
           </el-table-column>
-          <el-table-column prop="reconStateTxt" label="合规专员" align='center' min-width="100">
+          <el-table-column prop="insMemberName" label="合规专员" align='center' min-width="100">
           </el-table-column>
-            <el-table-column prop="reconStateTxt" label="合规质检日期" align='center' min-width="130">
+          <el-table-column prop="insDate" label="合规质检日期" align='center' min-width="130">
           </el-table-column>
-            <el-table-column prop="reconStateTxt" label="质检状态" align='center' min-width="100">
+          <el-table-column prop="checkStateTxt" label="质检状态" align='center' min-width="140">
           </el-table-column>
-            <el-table-column prop="reconStateTxt" label="质检结果" align='center' min-width="100">
+          <el-table-column prop="instaskTypeTxt" label="任务类型" align='center' min-width="100">
           </el-table-column>
-               <el-table-column prop="reconStateTxt" label="任务类型" align='center' min-width="100">
-          </el-table-column>
-          <!-- <el-table-column label="日期" width="120">
-            <template slot-scope="scope">{{ scope.row.date }}</template>
-          </el-table-column> -->
         </el-table>
         <!-- 分页  -->
-        <div class="paging">
+        <!-- <div class="paging">
           <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
             :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
           </el-pagination>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -101,107 +103,188 @@
   export default {
     data() {
       return {
+        taskList: '',
         query: {
           id: '',
-          matchApplyId: "",
+          ApplyId: "",
+          taskId: '',
+          processInstanceId: '',
+          listType: '',
         },
-        userInf: null,
-        // tableData: [],
+        QTquery: {
+          id: '',
+          matchApplyId: "",
+          applySubNo: ''
+        },
         reg: /(\w{6})\w*(\w{4})/,
         Telreg: /(\w{7})\w*/,
         reVal: '$1********$2',
         telVal: '$1****',
         params: {
-          applySubno: '',
-          custName: '',
+          processTemplateId: '',
+          taskNodeName: '',
+          taskStatus: '',
+          applySubNo: '',
+          custName_la: '',
           certCode: '',
-          mobile: '',
+          instaskType: '',
+          checkState: '',
+          isSend: '1',
           //   pageNum: '', //页数（第几页）
           //   pageSize: '', //页面显示行数
         },
         // currentPage: 1, //分页选中页
         // pageCount: 10, // 每页显示条数
         // totalRecord: 0, //总条数
-         tableData: [{
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+        tableData: [],
+        // tableData: [{
+        //   checkResult: '07',
+        //   isSecondIns: "1",
+        //   appType: null,
+        //   applyId: "879d8e00-6d3f-4e07-87f5-0f0c675c06e1",
+        //   applyIdList: null,
+        //   applyMainNo: null,
+        //   applySubNo: "201511190111013763",
+        //   assignCode: null,
+        //   assignName: "system",
+        //   auditCodec: null,
+        //   auditCodez: null,
+        //   auditDatec: null,
+        //   auditDatez: null,
+        //   auditNamec: "李翠萍",
+        //   auditNamez: "刘杰",
+        //   certCode: "431129198001010178",
+        //   checkState: "01",
+        //   checkStateTxt: "待质检员审批",
+        //   certType: null,
+        //   createTime: null,
+        //   custCode: null,
+        //   custName: "0508测试D009",
+        //   enterTime: "2018-05-23 11:06:25",
+        //   id: "Fwn2yzQIZ1GS8Czoqf7g4MoF1TVEeSGB",
+        //   insDate: null,
+        //   insMemberName: null,
+        //   instaskType: "00",
+        //   instaskTypeTxt: "常规质检",
+        //   lastModifyTime: null,
+        //   mobile: null,
+        //   proCode: null,
+        //   proName: null,
+        //   processInstanceId: null,
+        //   processInstanceIdSecond: null,
+        //   remark: null,
+        //   taskId: '98988',
+        // }, {
+        //   date: '2016-05-02',
+        //   name: '王小虎',
+        //   address: '上海市普陀区金沙江路 1518 弄'
+        // }, {
+        //   date: '2016-05-04',
+        //   name: '王小虎',
+        //   address: '上海市普陀区金沙江路 1518 弄'
+        // }],
+        multipleSelection: [], //多选框
+        multipleSelectionParams: [], //多选框
+        QTSituation: [], //质检状态
+        TaskType: [{ //任务类型
+          value: '00',
+          label: '常规质检'
         }, {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          value: '01',
+          label: '专项质检'
         }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-08',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-06',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-07',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }],
-        multipleSelection: [],
-        value:'',
-
-    QTSituation:[{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
-            RiskType:[{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
+          value: '02',
+          label: '纵向质检'
         }],
       }
     },
     methods: {
-         toggleSelection(rows) {
-        if (rows) {
-          rows.forEach(row => {
-            this.$refs.multipleTable.toggleRowSelection(row);
+      getQTsituation() { //获取质检状态下拉
+        this.get("/system/getAllCheckState?" + Math.random())
+          .then(res => {
+            if (res.statusCode == 200) {
+              this.QTSituation = res.data;
+            } else {
+              this.$message.error(res.msg);
+            }
           });
-        } else {
-          this.$refs.multipleTable.clearSelection();
+      },
+      btnParams() {
+        this.multipleSelectionParams = [];
+        for (var i = 0; i < this.multipleSelection.length; i++) {
+          var params = {
+            applyId: '',
+            taskId: '',
+          };
+          params.applyId = this.multipleSelection[i].applyId;
+          params.taskId = this.multipleSelection[i].taskId;
+          this.multipleSelectionParams.push(params)
         }
       },
-      handleSelectionChange(val) {
+      allotSubmit() { //批量提交
+        for (var i = 0; i < this.multipleSelection.length; i++) { //可以提交质检结果为初审一般差错、初审重大差错、终审一般差错、终审重大差错、初审建议优化、终审建议的单子
+          //   if (this.multipleSelection[i].checkResult != '01' && this.multipleSelection[i].checkResult != '02' && this.multipleSelection[
+          //       i].checkResult != '03' && this.multipleSelection[i].checkResult != '04' && this.multipleSelection[i].checkResult !=
+          //     '05' && this.multipleSelection[i].checkResult != '06') {
+          //     this.$message.error('质检结果不符！');
+          //     console.log(this.multipleSelection[i].checkResult)
+          //     return
+          // } else 
+          if (this.multipleSelection[i].isSecondIns == 1) { //有质检二次标识的件(抽中常规又专纵)，只能够批量完成，不能批量提交
+            console.log(this.multipleSelection[i].isSecondIns)
+            this.$message.error('有不符合批量提交状态的进件！');
+            return
+          }
+        }
+        this.btnParams(); //提取入参 applyId taskId
+        if (this.multipleSelectionParams == '') {
+          this.$message.error('请选择一条数据！');
+          return
+        }
+        this.post("/insConclusion/submitList", this.multipleSelectionParams)
+          .then(res => {
+            if (res.statusCode == 200) { //前端不做是否可点击哪个按钮判断，后端做判断，不符合返回msg，前端展示出来即可
+              this.$message({
+                type: "success",
+                message: res.msg
+              })
+              //  this.$message.error(res.msg);
+              this.inquire(this.params);
+            } else {
+              this.$message.error(res.msg);
+            }
+          });
+        // this.multipleSelectionParams = [];
+      },
+      allotFinished() { //批量完成
+        // for (var i = 0; i < this.multipleSelection.length; i++) { //可以提交质检结果为初审一般差错、初审重大差错、终审一般差错、终审重大差错、初审建议优化、终审建议的单子
+        //   if (this.multipleSelection[i].checkResult != '07' && this.multipleSelection[i].checkResult != '08' && this.multipleSelection[
+        //       i].checkResult != '09') {
+        //     this.$message.error('质检结果不符！');
+        //     return
+        //   }
+        // }
+        this.btnParams();
+        if (this.multipleSelectionParams == '') {
+          this.$message.error('请选择一条数据！');
+          return
+        }
+        this.post("/insConclusion/addList", this.multipleSelectionParams).then(res => {
+          if (res.statusCode == 200) {
+            // this.$message({
+            //   type: "success",
+            //   message: '提交成功！'
+            // })
+            this.$message.error(res.msg);
+            this.inquire(this.params);
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+        // this.multipleSelectionParams = [];
+      },
+      handleSelectionChange(val) { //列表勾选框
         this.multipleSelection = val;
-        console.log('ddddcccc')
-        console.log(val)
       },
       //   handleSizeChange(val) {
       //     this.params.pageSize = val;
@@ -209,42 +292,58 @@
       //     // this.getInf(this.params);
       //     this.inquire(this.params);
       //   },
-      handleCurrentChange(val) {
-        console.log('dddd')
-        this.query.id = val.id;
-        this.query.matchApplyId = val.applyId;
+      handleCurrentChange(val) { //跳转页面
+        // 根据两个条件去判断，首先根据 isSecondIns
+        // 如果是 1 ，显示常规又专项
+        // 如果不是： 根据instaskType 判断， instaskType=00 时：常规质检 ， instaskType=01 或 02：专项质检
+        if (val.isSecondIns == '1') {
+          this.query.listType = '常规又专项质检';
+        } else if (val.isSecondIns == '0') {
+          if (val.instaskType == '00') {
+            this.query.listType = '常规质检';
+          } else if (val.instaskType == '01' || val.instaskType == '02') {
+            this.query.listType = '专项质检';
+          }
+        }
+        this.QTquery.id = this.query.id = val.id;
+        this.QTquery.matchApplyId = this.query.ApplyId = val.applyId;
+        this.QTquery.applySubNo = val.applySubno;
+        this.query.taskId = val.taskId;
+        this.query.processInstanceId = val.processInstanceId;
         localStorage.setItem("QTManagerTW", JSON.stringify(this.query));
         this.$router.push('/MatchingInfQT?checkApp_check_manager');
+        // 存储components参数
+        localStorage.setItem("QT", JSON.stringify(this.QTquery));
+        localStorage.setItem("MatchFlag", JSON.stringify({
+          MatchFlag: 'QT'
+        }));
         // this.params.pageNum = val;
         // this.inquire(this.params);
       },
       Rreset() {
-        this.params.applySubno = '';
-        this.params.custName = '';
+        this.params.applySubNo = '';
+        this.params.custName_la = '';
         this.params.certCode = '';
-        this.params.mobile = '';
+        this.params.instaskType = '';
+        this.params.checkState = '';
+        this.inquire(this.params);
       },
       Rsearch() {
         // this.params.pageNum = this.currentPage = 1;
-        if (this.params.applySubno != '' || this.params.custName != '' || this.params.certCode != '' || this.params.mobile !=
-          '') {
-          this.inquire(this.params);
-        } else {
-          this.$message.error('请输入查询条件')
-        }
+        this.inquire(this.params);
       },
       inquire(pam) {
-        // 基础接口-综合查询
-        this.post("applyInfoPool/multipleQuery", pam).then(res => {
+        // 查询列表
+        this.post("insConclusion/queryZJZGTaskList", pam).then(res => {
           if (res.statusCode == 200) {
-            for (var i = 0; i < res.data.length; i++) {
-              if (res.data[i].certCode) {
-                res.data[i].certCode = res.data[i].certCode.replace(this.reg, this.reVal);
-              }
-              if (res.data[i].mobile) {
-                res.data[i].mobile = res.data[i].mobile.replace(this.Telreg, this.telVal);
-              }
-            }
+            // for (var i = 0; i < res.data.length; i++) {
+            //   if (res.data[i].certCode) {
+            //     res.data[i].certCode = res.data[i].certCode.replace(this.reg, this.reVal);
+            //   }
+            //   if (res.data[i].mobile) {
+            //     res.data[i].mobile = res.data[i].mobile.replace(this.Telreg, this.telVal);
+            //   }
+            // }
             this.tableData = res.data;
           } else {
             this.$message.error(res.msg);
@@ -253,9 +352,15 @@
       },
     },
     mounted() {
+      this.taskList = JSON.parse(localStorage.getItem('QTManagerWorkbenchPass'))
+      this.params.processTemplateId = this.taskList.processTemplateId;
+      this.params.taskNodeName = this.taskList.taskNodeName;
+      this.params.taskStatus = this.taskList.taskStatus;
+      this.getQTsituation(); //质检状态下拉框
+      this.inquire(this.params);
       // QTManagerWorkbenchPass
       //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
-      //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
+      //   this.params.applySubNo = this.params.applySubNo.replace(this.reg, this.reVal)
       //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
       //   this.params.pageNum = this.currentPage, //页数（第几页）
       //     this.params.pageSize = this.pageCount, //页面显示行数
@@ -273,7 +378,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     /* 统一导航 --去掉高度*/
-    height: 100%;    
+    height: 100%;
   }
 
   .AntiCaseNum label {
@@ -300,6 +405,20 @@
     height: calc( 100% - 70px);
     /* 统一导航 */
     /* height: 100%; */
+  }
+
+  .title_icon {
+    float: right;
+  }
+
+  .title_icon label {
+    height: 50px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .title_icon img {
+    vertical-align: middle;
   }
 
   .search {
@@ -377,7 +496,7 @@
   .paging {
     /* margin-top: 15px; */
     text-align: center;
-     /* 统一导航 */
+    /* 统一导航 */
     margin-top: 28px;
   }
 

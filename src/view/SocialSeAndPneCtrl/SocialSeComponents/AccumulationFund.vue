@@ -107,11 +107,12 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">报告信息</span>
         </template>
-        <div class="lsits">
+        <div class="lists">
           <div id="responseParams" class="easyui-panel" data-options="title:'报告信息',border:false,collapsible:true">
             <table id="t_1" class="table">
               <tr>
-                <th style="width:15%;text-align:left;padding:10px 19px;">用户及账户基本信息</th>
+                <!-- th style:  padding:10px 19px; -->
+                <th style="width:15%;text-align:left;">用户及账户基本信息</th>
                 <td style="width:15%"></td>
                 <th style="width:20%"></th>
                 <td style="width:12%"></td>
@@ -121,7 +122,8 @@
             </table>
             <table id="t_2" class="table">
               <tr>
-                <th style="width:15%;text-align:left;padding:10px 19px;">用户基本信息效验</th>
+                <!-- th style:  padding:10px 19px; -->
+                <th style="width:15%;text-align:left;">用户基本信息效验</th>
                 <td style="width:15%"></td>
                 <th style="width:20%"></th>
                 <td style="width:12%"></td>
@@ -131,7 +133,8 @@
             </table>
             <table id="t_3" class="table">
               <tr>
-                <th style="width:15%;text-align:left;padding:10px 19px;">账户基本信息</th>
+                <!-- th style:  padding:10px 19px; -->
+                <th style="width:15%;text-align:left;">账户基本信息</th>
                 <td style="width:15%"></td>
                 <th style="width:20%"></th>
                 <td style="width:12%"></td>
@@ -141,7 +144,8 @@
             </table>
             <table id="t_4" class="table">
               <tr>
-                <th style="text-align:left;width:15%;padding:10px 19px;">缴纳信息</th>
+                <!-- th style:  padding:10px 19px; -->
+                <th style="text-align:left;width:15%;">缴纳信息</th>
                 <td style="width:15%"></td>
                 <th style="width:20%"></th>
                 <td style="width:12%"></td>
@@ -151,7 +155,8 @@
             </table>
             <table id="t_5" class="table">
               <tr>
-                <th style="text-align:left;width:15%;padding:10px 19px;">还款信息</th>
+                <!-- th style:  padding:10px 19px; -->
+                <th style="text-align:left;width:15%;">还款信息</th>
                 <td style="width:15%"></td>
                 <th style="width:20%"></th>
                 <td style="width:12%"></td>
@@ -420,7 +425,7 @@
 
   .SSComp label {
     display: inline-block;
-    width: 260px;
+    width:180px;
     text-align: right;
     vertical-align: top;
   }

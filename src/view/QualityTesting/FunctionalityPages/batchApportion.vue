@@ -1,5 +1,5 @@
 <template>
-  <!-- 质检任务批量转分派功能 -->
+  <!-- 质检任务批量转分派功能=======此页面暂时不要了，待需求确认添加与否 -->
   <!-- <div class="batchApportion"> -->
   <div class="AntiCaseNum IntegratedQuery">
     <myHead></myHead>
@@ -80,7 +80,7 @@
       </div>
       <div class="table_wrap">
         <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" height="100%" @current-change="handleCurrentChange" border>
+        <el-table :data="tableData" style="width: 100%" height="100%" @row-dblclick="handleCurrentChange" border>
           <el-table-column type="selection" align='center' width="55">
           </el-table-column>
           <!-- <el-table-column type="index" align='center' label=序号 width="55">

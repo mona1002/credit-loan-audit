@@ -286,3 +286,9 @@ table {
   position: absolute;
   top: -20px;
 }
+.audioInd{
+  color:white;
+  font-size:18px;
+  display:inline-block;
+  vertical-align:top;
+}

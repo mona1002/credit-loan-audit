@@ -4,7 +4,7 @@
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
       <p class="PerDtl">
-        <span> 借款人：{{accepCusBasicInfo.custName}}</span>
+        <span> 借款人：{{custName}}</span>
         <span> 进件编号：{{customInf.applyMainNo}}</span>
         <span> 证件号码：{{tastwaitingPass.certCode}}</span>
         <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
@@ -35,8 +35,8 @@
               </span>
             </p>
             <div class="Left_right_BigImg">
-              <AudioVisualLeft msg="spLone" ref="AULeft" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'
-                :AUpreWidth.sync='preWidth' :AUobj='AULobj'></AudioVisualLeft>
+              <!--  :AUobj='AULobj'   :AUpreWidth.sync='preWidth' -->
+              <AudioVisualLeft msg="spLone" ref="AULeft" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></AudioVisualLeft>
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
               <InternalMatch v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
               <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
@@ -140,7 +140,7 @@
   export default {
     data() {
       return {
-        //custName: '', //借款人
+        custName: '', //借款人
         SplitLeft: "left",
         SplitRight: "right",
         watchData: '',
@@ -178,19 +178,34 @@
         comBtn: true,
         alertComBtn: false,
         midShow: true,
-        preWidth: null,
+        // preWidth: null,
         RpreWidth: null,
-        AULobj: {
-          BTN: '#MID',
-          WRAP: '#AUL',
-          CLIENTX: 'AUclickX',
-          OFFSET: 'AUleftOffset',
-          VA: 'bbr',
-          NUM: 10
-        },
+        // AULobj: {
+        //   BTN: '#MID',
+        //   WRAP: '#AUL',
+        //   CLIENTX: 'AUclickX',
+        //   OFFSET: 'AUleftOffset',
+        //   VA: 'bbr',
+        //   NUM: 10
+        // },
+        destroyInf: ''
 
       }
     },
+    //     beforeDestroy: function () {
+    //   console.group('beforeDestroy 销毁前状态===============》');
+    //   console.log("%c%s", "color:red", "el     : " + this.$el);
+    //   console.log(this.$el);
+    //   console.log("%c%s", "color:red", "data   : " + this.$data);
+    //   console.log("%c%s", "color:red", "message: " + this.message);
+    // },
+    // destroyed: function () {
+    //   console.group('destroyed 销毁完成状态===============》');
+    //   console.log("%c%s", "color:red", "el     : " + this.$el);
+    //   console.log(this.$el);
+    //   console.log("%c%s", "color:red", "data   : " + this.$data);
+    //   console.log("%c%s", "color:red", "message: " + this.message)
+    // },
     methods: {
       compareProps() {
         this.$refs.audioChild.personalNunPerson()
@@ -232,8 +247,8 @@
         // this.originLeft = this.$refs.right_tab_ul.style.left;
         this.$refs.right_tab_ul.style.left = "0";
         this.$refs.rLeft.style.display = "none";
-       this.watchData =  this.$refs.rRight.style.width = "100%";
-       this.$refs.rRight.style.left='0';
+        this.watchData = this.$refs.rRight.style.width = "100%";
+        this.$refs.rRight.style.left = '0';
         // this.watchData = this.$refs.rRight.style.width;
         this.isFull = true;
         this.midShow = false;
@@ -242,8 +257,9 @@
         this.showHalfBtn = false;
         // this.$refs.right_tab_ul.style.left = this.originLeft;
         this.$refs.rLeft.style.display = "block";
-        this.watchData = this.$refs.rRight.style.width= this.$refs.RM.style.left =  this.$refs.rLeft.style.width = "calc(50% - 2px)";
-         this.$refs.rRight.style.left='50%';   
+        this.watchData = this.$refs.rRight.style.width = this.$refs.RM.style.left = this.$refs.rLeft.style.width =
+          "calc(50% - 2px)";
+        this.$refs.rRight.style.left = '50%';
         // this.watchData = this.$refs.rRight.style.width;
         this.isFull = false;
         this.midShow = true;
@@ -376,22 +392,62 @@
         //   e.cancelBubble = true;
         // });
       },
+      mountedInf() {
+        this.title = "影像资料";
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
+        this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
+          id: this.tastwaitingPass.applyId,
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.custName = res.data.accepCusBasicInfo.custName;
+            this.customInf = res.data;
+            this.accepCusBasicInfo = res.data.accepCusBasicInfo
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      }
     },
+    activated() {
+      console.log(this.$route.meta.refresh)
+      console.log('activated')
+      if (this.$route.meta.refresh) {
+        this.mountedInf();
+        this.tab1Index = this.tabActiveInd1 = this.tabContent1 = 0;
+        this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 3;
+        this.flag1 = [true, true, true, false, true, true, true, true, true];
+        this.flag2 = [true, true, true, true, true, true, true, true, true, true];
+      }
+      //  // 恢复成默认的false，避免isBack一直是true，导致下次无法获取数据
+      //  this.$route.meta.isBack=false
+      //  // 恢复成默认的false，避免isBack一直是true，导致每次都获取新数据
+      //  this.isFirstEnter=false;
+    },
+// deactivated(){
+// console.log('deactivated')
+// console.log( this.tabContent2)
+//   //  if( this.tabContent2==3){
+//   // //     // this.destroyInf=
+//   //     this.tabContent2=0;
+//   //   }
+//     // else{
+//     //   this.destroyInf=this.tabContent2;
+//     // }
+// },
+// beforeRouteLeave(to,from,next){
+// console.log( this.tabContent2)
+  
+//   //  this.tabContent2==3? this.tabContent2=0:this.tabContent2;
+// console.log(to)
+// console.log(from)
+// // from.meta.refresh=false;
+// next();
+// },
+
     mounted() {
-      this.title = "影像资料";
+      console.log('mounted')
       this.MyMove();
-      this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
-      this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-        id: this.tastwaitingPass.applyId,
-      }).then(res => {
-        if (res.statusCode == 200) {
-          //this.custName = res.data.accepCusBasicInfo.custName;
-          this.customInf = res.data;
-          this.accepCusBasicInfo = res.data.accepCusBasicInfo;
-        } else {
-          this.$message.error(res.msg);
-        }
-      });
+      this.mountedInf();
     },
     components: {
       myHead,
@@ -500,10 +556,6 @@
     font-size: 12px;
     margin-right: 15px;
   }
-
-  /* .PerDtl span:nth-of-type(8) {
-    width: 105px;
-  } */
 
   /* 切换按钮 */
 

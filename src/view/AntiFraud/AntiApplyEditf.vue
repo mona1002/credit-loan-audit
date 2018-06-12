@@ -177,7 +177,7 @@
       this.flag = this.AntiApplyParams.flag;
       this.channel = this.AntiApplyParams.channel;
       this.busiState = this.AntiApplyParams.busiState;
-      if (this.flag == 'start' || this.flag == 'fuyi') {
+      if (this.flag == 'start' || this.flag == 'fuyi' || this.flag == 'zhijian') {
         this.getFraudApplyInfo();
       }
 
@@ -223,7 +223,10 @@ console.log(  this.antiFlag  )
         this.taskName = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskName;
         this.currentTemplateId = 'reconsiderApp';
       }
-
+      // 质检各角色
+        if (this.antiFlag == '07' || this.antiFlag == '08'|| this.antiFlag == '10'|| this.antiFlag == '11'|| this.antiFlag == '12'|| this.antiFlag == '13') {
+        this.currentTemplateId = 'checkApp';
+        }
       // if (this.antiFlag == '05') {
       //   console.log('复议专员取值')
       //   this.creditappTaskid = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
@@ -254,6 +257,7 @@ console.log(  this.antiFlag  )
        edit  编辑
        add   添加 
        */
+
       //this.flag = this.$route.params.flag || this.routeFlag;
 
       //this.channel = this.$route.params.channel;
@@ -272,7 +276,7 @@ console.log(  this.antiFlag  )
 
       // 请求主原因
       this.firstNodeReason();
-
+      console.log('params:', this.$route.params)
 
 
 
@@ -421,6 +425,7 @@ console.log(  this.antiFlag  )
                     certCode: this.certCode, // 证件号码
                     proName: this.proName, // 产品名称
                     busiState: this.busiState, // 状态
+                    // wayOf:this.wayOf//（00：审批，01：复议，02：质检）--不入了
                   },
                   currentTemplateId: this.currentTemplateId, // 流程模版id
                 })
