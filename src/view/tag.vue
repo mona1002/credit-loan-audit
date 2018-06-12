@@ -249,7 +249,7 @@
           } else if (this.taskNodeName == "creditApp_finalTrial_four") {
             this.nodeName = '信审高级经理审批'
           } else if (this.taskNodeName == "creditApp_finalTrial_five") {
-            this.nodeName = '信审总监审批审批'
+            this.nodeName = '信审总监审批'
           }
           this.nodeFlag = "02";
           this.routeParams = '?taskNodeName=' + this.taskNodeName + "&flag=02";
