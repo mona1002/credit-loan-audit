@@ -4,9 +4,10 @@
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
       <p class="PerDtl">
-        <span> 借款人：{{custName}}</span>
+        <span> 借款人：{{accepCusBasicInfo.custName}}</span>
         <span> 进件编号：{{customInf.applyMainNo}}</span>
         <span> 证件号码：{{tastwaitingPass.certCode}}</span>
+        <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
         <span> 进件机构：{{customInf.appOrgName}}</span>
         <span> 门店成立时间：{{customInf.appOrgRegisterDate}}</span>
         <span> 业务员入职时间：{{customInf.salPerEmployDate}}</span>
@@ -139,13 +140,14 @@
   export default {
     data() {
       return {
-        custName: '', //借款人
+        //custName: '', //借款人
         SplitLeft: "left",
         SplitRight: "right",
         watchData: '',
         originLeft: '',
         customInf: [], //申请信息页local字段
         tastwaitingPass: [], //详情列表页信息--(含)取applyId
+        accepCusBasicInfo:'',
         showHalfBtn: false,
         CompareAlert: false,
         title: "",
@@ -383,8 +385,9 @@
         id: this.tastwaitingPass.applyId,
       }).then(res => {
         if (res.statusCode == 200) {
-          this.custName = res.data.accepCusBasicInfo.custName;
+          //this.custName = res.data.accepCusBasicInfo.custName;
           this.customInf = res.data;
+          this.accepCusBasicInfo = res.data.accepCusBasicInfo;
         } else {
           this.$message.error(res.msg);
         }
@@ -494,13 +497,13 @@
   .PerDtl span {
     display: inline-block;
     letter-spacing: 0.1px;
-    font-size: 14px;
+    font-size: 12px;
     margin-right: 15px;
   }
 
-  .PerDtl span:nth-of-type(7) {
+  /* .PerDtl span:nth-of-type(8) {
     width: 105px;
-  }
+  } */
 
   /* 切换按钮 */
 

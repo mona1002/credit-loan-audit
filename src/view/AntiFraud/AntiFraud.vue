@@ -51,7 +51,7 @@
         </div>
       </div>
       <div class="content">
-        <el-table :data="antiTableData.recordList" border stripe fit highlight-current-row class="anti-table">
+        <el-table :data="antiTableData.recordList" border stripe fit highlight-current-row class="anti-table" @row-dblclick='goDetail'>
           <el-table-column type="index" label="序号" align="center" width="50">
           </el-table-column>
           <el-table-column prop="applySubno" label="进件编号">
@@ -82,16 +82,12 @@
           </el-table-column>
           <el-table-column prop="fraudStateTxt" label="反欺诈状态" min-width="140">
           </el-table-column>
-          <el-table-column label="操作" align="center" width="180" class="aaaaaaaaaaaaa">
-            <!-- <template slot-scope="scope">
-            <el-button size="mini" @click="handleClickInfo(scope.row)">查看</el-button>
-            <el-button size="mini" @click="handleClickEdit(scope.row)">编辑</el-button>
-          </template> -->
+          <!-- <el-table-column label="操作" align="center" width="180" class="aaaaaaaaaaaaa">
             <template slot-scope="scope">
               <el-button size="mini" v-if="scope.row.fraudStateTxt=='反欺诈拒绝'||scope.row.fraudStateTxt=='反欺诈放弃'" @click="handleClickEdit(scope.row)">编辑</el-button>
               <el-button size="mini" type="primary" @click="handleClickInfo(scope.row)">查看</el-button>
             </template>
-          </el-table-column>
+          </el-table-column> -->
         </el-table>
      
       </div>
@@ -150,7 +146,7 @@
 
         applySubno: '', // 进件编号
         applyCustName: '', // 客户名称
-        applyCustNo: '', // 客户编号
+        applyCustNo: '', // 证件号码
 
         processTemplateId: '',
         taskNodeName: '',
@@ -214,7 +210,7 @@
           fraudApplyInfo: {
             applySubno: this.applySubno, // 进件编号
             applyCustName: this.applyCustName, // 客户名称
-            applyCustNo: this.applyCustNo, // 客户编号
+            certCode: this.applyCustNo, // 证件号码
             applyCode: this.userCode
           }
         }).then(res => {
@@ -323,7 +319,7 @@
         }
       },
       // 反欺诈申请查看
-      handleClickInfo(row) {
+     /* handleClickInfo(row) {
         // 
         console.log(row);
         this.$router.push({
@@ -332,48 +328,26 @@
             id: row.id,
             applyId:row.applyId
           }
-        });
+        });*/
         /*this.$store.dispatch('addVisitedViews', {
           name: '反欺诈申请-查看',
           path: '/AntiApplyInf',
           flag: '',
           params: '?id=' + row.id,
           StatefullPath: '/AntiApplyInf',
-        })*/
-      },
+        })
+      },*/
       // 主管/专员审批 跳分屏  
       // 反欺诈申请列表  没有详情
-      rowDbClick(row) {
-        console.log(row);
-        console.log('主管/专员 跳分屏')
-        // if (this.antiFlag == '01') {
-        //   // 反欺诈专员
-        //   localStorage.setItem("taskInWaitting", JSON.stringify(row))
-        //   // 反欺诈  分屏
-        //   // this.$router.push('AntiAudit')
-        //   this.$router.push('AntiApplyInf')
-        // }
-        // if (this.antiFlag == '02') {
-        //   // 反欺诈专员
-        //   localStorage.setItem("FtaskInWaitting", JSON.stringify(row))
-        //   // 反欺诈  分屏
-        //   // this.$router.push('AntiAudit')
-        //   this.$router.push('AntiApplyInf')
-        // }
-        // if (this.antiFlag == '03') {
-        //   // 反欺诈专员
-        //   localStorage.setItem("AntitaskInWaitting", JSON.stringify(row))
-        //   // // 反欺诈  分屏
-        //   // this.$router.push('AntiAudit')
-        //   this.$router.push('AntiApplyInf')
-        // }
-        // if (this.antiFlag == '04') {
-        //   // 反欺诈主管
-        //   localStorage.setItem("AntiManagertaskInWaitting", JSON.stringify(row))
-        //   // // 反欺诈  分屏
-        //   // this.$router.push('AntiAudit')
-        //   this.$router.push('AntiApplyInf')
-        // }
+      goDetail(row, event, column) {
+        localStorage.setItem("AtaskInWaitting",JSON.stringify(row));
+        this.$router.push({
+          name: 'AntiApplyInf',
+          params: {
+            id: row.id,
+            applyId:row.applyId
+          }
+        })
       },
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);

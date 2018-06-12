@@ -51,7 +51,7 @@
       </div>
       <div class="table_wrap">
         <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" height="100%" @current-change="handleCurrentChange" border>
+        <el-table :data="tableData" style="width: 100%" height="100%" @row-dblclick="handleCurrentChange" border>
           <el-table-column type="index" align='center' label=序号 width="55">
           </el-table-column>
           <el-table-column prop="applySubno" label="进件编号" align='center' min-width="180">
@@ -170,6 +170,11 @@
               }
             }
             this.tableData = res.data;
+            for(var i=0;i<res.data.length;i++){
+                var regs = /\d{4}-\d{1,2}-\d{1,2}/g;
+                //this.appDate = res.data.recordList[i].appDate.replace(regs,'');
+                this.tableData[i].appDate = regs.exec(res.data[i].appDate)[0];
+              }
           } else {
             this.$message.error(res.msg);
           }

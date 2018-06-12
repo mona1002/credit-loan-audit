@@ -12,9 +12,15 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import $ from 'jquery'
 
+import 'vue-pdf-shower/lib/dist/pdf.js'
+PDFJS.workerSrc = 'vue-pdf-shower/lib/dist/pdf.worker.js'
+PDFJS.cMapUrl = '/static/web/cmaps/'
+PDFJS.cMapPacked = true;
+
 Vue.config.productionTip = false;
 Vue.use(ElementUI)
 Vue.use(http)
+
 
 /* eslint-disable no-new */
 new Vue({

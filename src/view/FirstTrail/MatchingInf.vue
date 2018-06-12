@@ -4,11 +4,12 @@
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
       <p class="PerDtl">
-        <span> 借款人： {{custName}}</span>
+        <span> 借款人：{{accepCusBasicInfo.custName}}</span>
         <!-- <span> 借款人： {{customInf.accepCusBasicInfo.custName}}</span> -->
         <span> 进件编号: {{customInf.applyMainNo}}</span>
         <!-- <span> 证件号码: {{customInf.accepCusBasicInfo.certCode}}</span> -->
         <span> 证件号码: {{certCode}}</span>
+        <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
         <span> 进件机构: {{customInf.appOrgName}}</span>
         <span> 门店成立时间: {{customInf.appOrgRegisterDate}}</span>
         <span> 业务员入职时间： {{customInf.salPerEmployDate}}</span>
@@ -45,9 +46,10 @@
               <FMCreditForm v-if=" this.tabContent1==6">信审表</FMCreditForm>
               <RcreditInvestigation v-if=" this.tabContent1==7">实地征信</RcreditInvestigation>
               <aMAntiApplyInf v-if=" this.tabContent1==8">反欺诈结论</aMAntiApplyInf>
-              <!-- <RFinanceInformation v-if=" this.tabContent1==9">财务信息</RFinanceInformation> -->
-              <RprocessTrajectory v-if=" this.tabContent1==9">流程轨迹</RprocessTrajectory>
-              <RApprovalConclusion v-if=" this.tabContent1==10">审批结论轨迹</RApprovalConclusion>
+              <RantiFraudInvestigation v-if=" this.tabContent1==9" :isShow='false' :applyId='tastwaitingPass.matchApplyId'>反欺诈调查</RantiFraudInvestigation>
+              <RFinanceInformation v-if=" this.tabContent1==10">账务信息</RFinanceInformation>
+              <RprocessTrajectory v-if=" this.tabContent1==11">流程轨迹</RprocessTrajectory>
+              <RApprovalConclusion v-if=" this.tabContent1==12">审批结论轨迹</RApprovalConclusion>
             </div>
           </div>
         </div>
@@ -85,9 +87,10 @@
             <FMCreditForm v-if=" this.tabContent2==6">信审表</FMCreditForm>
             <RcreditInvestigation v-if=" this.tabContent2==7">实地征信</RcreditInvestigation>
             <aMAntiApplyInf v-if=" this.tabContent2==8">反欺诈结论</aMAntiApplyInf>
-            <!-- <RFinanceInformation v-if=" this.tabContent2==9">财务信息</RFinanceInformation> -->
-            <RprocessTrajectory v-if=" this.tabContent2==9">流程轨迹</RprocessTrajectory>
-            <RApprovalConclusion v-if=" this.tabContent2==10">审批结论轨迹</RApprovalConclusion>
+            <RantiFraudInvestigation v-if=" this.tabContent2==9" :isShow='false' :applyId='tastwaitingPass.matchApplyId'>反欺诈调查</RantiFraudInvestigation>
+            <RFinanceInformation v-if=" this.tabContent2==10">账务信息</RFinanceInformation>
+            <RprocessTrajectory v-if=" this.tabContent2==11">流程轨迹</RprocessTrajectory>
+            <RApprovalConclusion v-if=" this.tabContent2==12">审批结论轨迹</RApprovalConclusion>
           </div>
         </div>
       </div>
@@ -129,6 +132,7 @@
   import FMCreditForm from "../FinalTrial/FinalMatchComponent/FMCreditForm.vue"; //信审表-终审查看-del初审人员-第一个
   import RborrowerInformationSetail from "./ReadComponent/RborrowerInformationSetail.vue"; //借款人资料
   import RapplicationInformationDetail from "./ReadComponent/RapplicationInformationDetail"; //申请信息
+  import RantiFraudInvestigation from "./ReadComponent/RantiFraudInvestigation"; //反欺诈调查
   import RFinanceInformation from "./ReadComponent/RFinanceInformation"; //账务信息
   import RApprovalConclusion from "./ReadComponent/RApprovalConclusion"; //信审审批结论轨迹
   import Rremark from "./ReadComponent/Rremark"; //备注信息
@@ -142,7 +146,8 @@
   export default {
     data() {
       return {
-        custName: '',
+        //custName: '',
+        accepCusBasicInfo:'',
         certCode: '',
         watchData: '',
         originLeft: '',
@@ -157,14 +162,14 @@
         tabContent2: 3,
         tabActiveInd1: 0,
         tabActiveInd2: 3,
-        // items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论','账务信息', "流程轨迹", '信审审批结论轨迹'],
-        // items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论",'账务信息', "流程轨迹", "信审审批结论轨迹"],
-       items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论', "流程轨迹", '信审审批结论轨迹'],
-        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "流程轨迹", "信审审批结论轨迹"],
+        items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论','反欺诈调查','账务信息', "流程轨迹", '信审审批结论轨迹'],
+        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论",'反欺诈调查','账务信息', "流程轨迹", "信审审批结论轨迹"],
+       /*items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论', "流程轨迹", '信审审批结论轨迹'],
+        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "流程轨迹", "信审审批结论轨迹"],*/
         tab1Index: 0,
         tab2Index: 3,
-        flag1: [true, true, true, false, true, true, true, true, true, true, true,true],
-        flag2: [true, true, true, true, true, true, true, true, true, true, true,true],
+        flag1: [true, true, true, false, true, true, true, true, true, true, true,true,true],
+        flag2: [true, true, true, true, true, true, true, true, true, true, true,true,true],
         AlertSearch: "",
         AlertSearchCondition: [{
           value: '选项1',
@@ -203,8 +208,8 @@
         }
       },
       rightMovingBtn() {
-        if (parseFloat(this.$refs.right_tab_ul.style.left) <= -750) {
-          this.$refs.right_tab_ul.style.left = "-750px";
+        if (parseFloat(this.$refs.right_tab_ul.style.left) <= -850) {
+          this.$refs.right_tab_ul.style.left = "-850px";
         } else {
           this.$refs.right_tab_ul.style.left = parseFloat(this.$refs.right_tab_ul.style.left) - 50 + "px";
         }
@@ -314,8 +319,9 @@
       }).then(res => {
         if (res.statusCode == 200) {
           this.customInf = res.data;
-          this.custName = res.data.accepCusBasicInfo.custName;
+          //this.custName = res.data.accepCusBasicInfo.custName;
           this.certCode = res.data.accepCusBasicInfo.certCode;
+          this.accepCusBasicInfo = res.data.accepCusBasicInfo;
         } else {
           this.$message.error(res.msg);
         }
@@ -337,7 +343,8 @@
       borrowerInformation,
       PhoneCredit,
       CreditApproval,
-      RprocessTrajectory
+      RprocessTrajectory,
+      RantiFraudInvestigation,//反欺诈调查
     }
   }
 
@@ -423,13 +430,13 @@
   .PerDtl span {
     display: inline-block;
     letter-spacing: 0.1px;
-    font-size: 14px;
+    font-size: 12px;
     margin-right: 15px;
   }
 
-  .PerDtl span:nth-of-type(7) {
+  /* .PerDtl span:nth-of-type(7) {
     width: 105px;
-  }
+  } */
 
   /* 切换按钮 */
 
@@ -551,7 +558,7 @@
   }
 
   .Right_tab_ul_wrap ul {
-    width: 1400px;
+    width: 1500px;
     height: 48px;
     position: relative;
     text-align: left;

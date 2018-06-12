@@ -5,9 +5,10 @@
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
       <p class="PerDtl">
-        <span> 借款人：{{custName}}</span>
+        <span> 借款人：{{accepCusBasicInfo.custName}}</span>
         <span> 进件编号：{{customInf.applyMainNo}}</span>
         <span> 证件号码：{{tastwaitingPass.certCode}}</span>
+        <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
         <span> 进件机构：{{customInf.appOrgName}}</span>
         <span> 门店成立时间：{{customInf.appOrgRegisterDate}}</span>
         <span> 业务员入职时间：{{customInf.salPerEmployDate}}</span>
@@ -54,10 +55,12 @@
             <!-- √ -->
             <!-- 反欺诈结论 -->
             <aAntiApplyInf v-if=" this.tabContent2==9"></aAntiApplyInf>
+            <!-- 反欺诈调查 -->
+            <RantiFraudInvestigation v-if=" this.tabContent2==10"  :isShow='false' :applyId='tastwaitingPass.applyId'></RantiFraudInvestigation>
             <!-- √ -->
             <!-- 复议结论 -->
-            <ReconsiderationConclusion v-if=" this.tabContent2==10 && this.Rcon==1"></ReconsiderationConclusion>
-            <ReconjingliConclusion v-if=" this.tabContent2==10 && this.Rcon==2"></ReconjingliConclusion>
+            <ReconsiderationConclusion v-if=" this.tabContent2==11 && this.Rcon==1"></ReconsiderationConclusion>
+            <ReconjingliConclusion v-if=" this.tabContent2==12 && this.Rcon==2"></ReconjingliConclusion>
             <!-- √ -->
           </div>
         </div>
@@ -81,13 +84,15 @@
   // 编辑
   import InternalMatch from "../FirstTrail/InternalMatch.vue";
   import PhoneCredit from "../FirstTrail/PhoneCredit.vue";
+  import RantiFraudInvestigation from "../FirstTrail/ReadComponent/RantiFraudInvestigation"; //反欺诈调查
 
   export default {
     data() {
       return {
         taskName: '',
         Rcon: 0,
-        custName: "",
+        //custName: "",
+        accepCusBasicInfo:'',
         SplitLeft: "left",
         SplitRight: "right",
         watchData: '',
@@ -101,7 +106,7 @@
         flexible: true,
         tabContent2: 3,
         tabActiveInd2: 3,
-        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "复议申请", "反欺诈结论", "复议结论"],
+        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "复议申请", "反欺诈结论", "反欺诈调查","复议结论"],
         tab2Index: 3,
         AlertSearch: "",
       }
@@ -158,12 +163,14 @@
       } else if (this.taskName == 'reconsiderApp_manager') { //复议经理结论
          this.Rcon = 2;
       }
+
       this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
         id: this.tastwaitingPass.applyId,
       }).then(res => {
         if (res.statusCode == 200) {
-          this.custName = res.data.accepCusBasicInfo.custName;
+          //this.custName = res.data.accepCusBasicInfo.custName;
           this.customInf = res.data;
+          this.accepCusBasicInfo = res.data.accepCusBasicInfo;
         } else {
           this.$message.error(res.msg);
         }
@@ -183,6 +190,7 @@
       ReconjingliConclusion, //复议结论-经理
       InternalMatch,
       PhoneCredit,
+      RantiFraudInvestigation,//反欺诈调查
     }
   }
 
@@ -241,13 +249,13 @@
   .PerDtl span {
     display: inline-block;
     letter-spacing: 0.1px;
-    font-size: 14px;
+    font-size: 12px;
     margin-right: 15px;
   }
 
-  .PerDtl span:nth-of-type(7) {
+  /* .PerDtl span:nth-of-type(7) {
     width: 105px;
-  }
+  } */
 
   /* 切换按钮 */
 
