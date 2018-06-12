@@ -1762,6 +1762,7 @@
                 this.$message.error(res.msg);
               }
             });
+            this.submitShow=false;
         }
       },
       // 无需复议
