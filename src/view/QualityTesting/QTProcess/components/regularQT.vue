@@ -1724,9 +1724,8 @@
           for (var i = 0; i < this.insConclusion.length; i++) {
             console.log('isSubmit：', this.insConclusion[i].isSubmit)
             type == '保存' ? this.insConclusion[i].isSubmit = '0' : this.insConclusion[i].isSubmit = '1'; // 质检结论 保存：0，修改：1
-            this.propQTconclution.pageType !== 'checkApp_apply' ? this.insConclusion[i].checkType = '02' : ''; // 质检主管保存 质检结论 CheckType 改为02，初检依旧保持01
-            // this.insConclusion[i].checkType == '01' && this.insConclusion[i].id ? this.insConclusion[i].id = '' : this.insConclusion[
-            //   i].id; //主管首次保存或提交id设置为空
+           this.propQTconclution.pageType !== 'checkApp_apply' ? this.insConclusion[i].checkType = '02' : this.insConclusion[i].checkType = '01'; // 质检主管保存 质检结论 CheckType 改为02，初检01
+           this.propQTconclution.pageType !== 'checkApp_apply'&& this.insConclusion[i].checkType == '01'? this.insConclusion[i].id = '' : ''; //主管首次保存或提交id设置为空
           }
           // insResultTxt  更改微信支付宝显示汉字字段
           for (var k = 0; k < this.AlipayConcat.length; k++) {
