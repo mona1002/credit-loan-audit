@@ -1192,7 +1192,7 @@
         telType: '06', //电话征信 电话类型入参
         activeNames: ['0', '1', "2", "3", "4", "5", "6", "7", "8", "9", '10'], //折叠面板 默认显示下标
         tabTitle: ["客户本人", '住址电话', "单位电话", "家庭联系人", "工作证明人", "其他联系人"],
-        QTresult: [{
+        QTresult: [{//常规下拉
           value: '01',
           label: '初审一般差错'
         }, {
@@ -1207,17 +1207,8 @@
         }, {
           value: '10',
           label: '建议优化'
-        }, {
-          value: '07',
-          label: '专项'
-        }, {
-          value: '08',
-          label: '纵向'
-        }, {
-          value: '09',
-          label: '无'
         }],
-        QTresultSpecial: [{
+        QTresultSpecial: [{//专纵项下拉
           value: '07',
           label: '专项'
         }, {
@@ -2082,7 +2073,6 @@
       this.Social(); //社保公积金接口
     }
   }
-
 </script>
 <style scoped>
   .baseInf {
