@@ -17,10 +17,7 @@
               </p>
               <p v-show="this.InternetShow.commentS">
                 <label class="InternetInf_right_label"> 执行信息说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.wbeexEcutedtxt==null||this.FormData.wbeexEcutedtxt==''" :content="this.FormData.wbeexEcutedtxt"
-                  placement="top-start">
                   <span class="detail_inf">{{this.FormData.wbeexEcutedtxt}} </span>
-                </el-tooltip>
               </p>
             </li>
             <li>
