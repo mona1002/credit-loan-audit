@@ -77,6 +77,7 @@
         <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
           <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref"
           />
+           <!-- <p v-show="myPdf" is="pdfDivLeft" v-bind:title="pdfArrys"></p> -->
           <p> {{val.arcSubType}} </p>
         </figure>
       </div>
@@ -256,6 +257,7 @@
       },
       smallPic(ev, ind) {
         this.smallPicInd = ind;
+          this.showPage = ind+1;
         this.SmallPicShow = false;
         this.defaultBigPicCss();
       },

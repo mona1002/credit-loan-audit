@@ -262,6 +262,7 @@
       },
       smallPic(ev, ind) {
         this.smallPicInd = ind;
+         this.showPage = ind+1;
         this.SmallPicShow = false;
         this.defaultBigPicCss();
       },
