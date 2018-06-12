@@ -271,11 +271,11 @@
         }
         this.post("/insConclusion/addList", this.multipleSelectionParams).then(res => {
           if (res.statusCode == 200) {
-            // this.$message({
-            //   type: "success",
-            //   message: '提交成功！'
-            // })
-            this.$message.error(res.msg);
+            this.$message({
+              type: "success",
+              message: res.msg
+            })
+            // this.$message.error(res.msg);
             this.inquire(this.params);
           } else {
             this.$message.error(res.msg);
