@@ -1616,6 +1616,7 @@
         this.checkResultCount09 = 0;
         this.checkResultCount10 = 0;
         if (type == '提交') { //提交 加校验，保存无需校验必填---常规质检
+        // 保存、提交质检结论都校验
           if (this.propQTconclution.tastwaitingPass.listType == '常规质检') {
             if (!this.regularInfo.isForm || !this.regularInfo.isIdcard || !this.regularInfo.isIncome || !this.regularInfo
               .isWork ||
@@ -1641,6 +1642,12 @@
               return
             }
           }
+        }
+        if(type == '保存'){
+              if(this.insConclusion.length > 0 && this.insConclusion[this.insConclusion.length - 1].checkResult == ''){//质检结论最后一条质检结果校验是否为空
+                this.$message.error('请输入质检结论必填项！')
+                              return
+              } 
         }
         // 提交 保存 
         if (this.propQTconclution.tastwaitingPass.listType == '常规又专项质检') { //常规又专项质检
@@ -1700,6 +1707,9 @@
               return
             }else if(this.checkResultCount07 > 0 && this.checkResultCount08 > 0){
                this.$message.error('质检结果专项/纵向/无不能同时存在！')
+              return
+            }else if(this.checkResultCount09 > 0 && (this.checkResultCount01 > 0||this.checkResultCount02 > 0||this.checkResultCount03 > 0||this.checkResultCount04 > 0||this.checkResultCount07 > 0||this.checkResultCount08 > 0||this.checkResultCount10 > 0)){
+               this.$message.error('质检结果已经选择无！')
               return
             }
           }
