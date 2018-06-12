@@ -1,4 +1,4 @@
-<!-- 反欺诈调查 -->
+<!-- 反欺诈调查  -->
 <template>
   <div class="aAntiFraudInvestigation">
     <el-collapse v-model="activeNames" @change="handleChange">
@@ -802,10 +802,6 @@
     color: #20a0ff;
     font-size: 20px;
   }
-
-  /* .right .rightSpan:nth-of-type(2) img, .right .rightSpan:nth-of-type(3) img{
-		padding-left:24px;
-	} */
 
   /* 确定按钮 */
 
