@@ -88,7 +88,7 @@
           <!-- 右屏tab 表头 -->
           <div class="Right_tab_title_div">
             <!-- 左右滑动 图标  -->
-            <span class="pre_next_btn_wrap" @click="leftMovingBtn">
+            <span ref="leftBtn" class="pre_next_btn_wrap" @click="leftMovingBtn">
               <img src="../../../static/images/Shape@1x.png">
             </span>
             <span class="pre_next_btn_wrap" style="color:red;" @click="rightMovingBtn">
@@ -114,7 +114,7 @@
             <FMCreditForm v-if=" this.tabContent2==6">信审表</FMCreditForm>
             <RcreditInvestigation v-if=" this.tabContent2==7">实地征信</RcreditInvestigation>
             <aMAntiApplyInf v-if=" this.tabContent2==8">反欺诈结论</aMAntiApplyInf>
-             <RantiFraudInvestigation v-if=" this.tabContent2==9" :isShow='false' :applyId='tastwaitingPass.ApplyId'> 反欺诈调查</RantiFraudInvestigation>
+            <RantiFraudInvestigation v-if=" this.tabContent2==9" :isShow='false' :applyId='tastwaitingPass.ApplyId'> 反欺诈调查</RantiFraudInvestigation>
             <RFinanceInformation v-if=" this.tabContent2==10">财务信息</RFinanceInformation>
             <!-- <RprocessTrajectory v-if=" this.tabContent2==9">流程轨迹</RprocessTrajectory> -->
 
@@ -138,7 +138,7 @@
               <!-- <ComplianceProcess v-if=" this.tabContent2==11 && this.QTmark" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
               <RulesReApply v-if=" this.tabContent2==12 && this.QTmark" :propReApply='ReApplyMark'>合规复议申请</RulesReApply> -->
               <ComplianceProcess v-if=" this.tabContent2==13" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
-              <RulesReApply v-if=" this.tabContent2==14" :propReApply='ReApplyMark'  :applyId='tastwaitingPass.ApplyId'>合规复议申请</RulesReApply>
+              <RulesReApply v-if=" this.tabContent2==14" :propReApply='ReApplyMark' :applyId='tastwaitingPass.ApplyId'>合规复议申请</RulesReApply>
               <!-- <regularQT v-if=" this.tabContent2==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC' >质检结论</regularQT> -->
               <regularQT v-if=" this.tabContent2==15&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
               <QTResultCheck v-if=" this.tabContent2==15&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
@@ -207,6 +207,7 @@
         LocalList: '',
         Managermark: true,
         QTmark: false,
+        leftBtnMark: false,
         RoleSHow: 'partOne',
         // /----------------上面为新加的
         watchData: '',
@@ -215,11 +216,11 @@
         certCode: '',
         mobile: '',
         customInf: {
-          applyMainNo:'',
-          appOrgName:'',
-          appOrgRegisterDate:'',
-          salPerEmployDate:'',
-          adminIntroduce:''
+          applyMainNo: '',
+          appOrgName: '',
+          appOrgRegisterDate: '',
+          salPerEmployDate: '',
+          adminIntroduce: ''
         },
         tastwaitingPass: [],
         showHalfBtn: false,
@@ -237,17 +238,24 @@
         // ],
         items1: [],
         items2: [],
-        itemsTrial1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论','反欺诈调查','账务信息', "反欺诈审批结论轨迹", '信审审批结论轨迹'],
-        itemsTrial2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论",'反欺诈调查','账务信息', "反欺诈审批结论轨迹", "信审审批结论轨迹",
+        itemsTrial1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论', '反欺诈调查', '账务信息',
+          "反欺诈审批结论轨迹", '信审审批结论轨迹'
+        ],
+        itemsTrial2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", '反欺诈调查', '账务信息',
+          "反欺诈审批结论轨迹", "信审审批结论轨迹",
           '质检结论'
         ],
-        itemsManager1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论",'反欺诈调查','账务信息'],
+        itemsManager1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", '反欺诈调查', '账务信息'],
 
-        itemsManager2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论",'反欺诈调查','账务信息', '质检结论'],
-        itemsQT1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论','反欺诈调查','账务信息', "反欺诈审批结论轨迹", '信审审批结论轨迹',
+        itemsManager2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", '反欺诈调查', '账务信息',
+          '质检结论'
+        ],
+        itemsQT1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论', '反欺诈调查', '账务信息',
+          "反欺诈审批结论轨迹", '信审审批结论轨迹',
           '合规质检结论轨迹', '合规复议申请'
         ],
-        itemsQT2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论",'反欺诈调查','账务信息', "反欺诈审批结论轨迹", "信审审批结论轨迹",
+        itemsQT2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", '反欺诈调查', '账务信息',
+          "反欺诈审批结论轨迹", "信审审批结论轨迹",
           '合规质检结论轨迹', '合规复议申请',
           '质检结论'
         ],
@@ -259,8 +267,8 @@
         // flagManger2: [true, true, true, true, true, true, true, true, true, true], //10
         // flagQT1: [true, true, true, false, true, true, true, true, true, true, true, true, true],
         // flagQT2: [true, true, true, true, true, true, true, true, true, true, true, true, true, true], //14
-        flag1: [true, true, true, false, true, true, true, true, true, true, true, true, true,true,true],
-        flag2: [true, true, true, true, true, true, true, true, true, true, true, true, true, true,true,true], //15
+        flag1: [true, true, true, false, true, true, true, true, true, true, true, true, true, true, true],
+        flag2: [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true], //15
         AlertSearch: "",
         // AlertSearchCondition: [{
         //   value: '选项1',
@@ -311,14 +319,18 @@
       },
       leftMovingBtn() {
         if (parseFloat(this.$refs.right_tab_ul.style.left) >= 0) {
-          this.$refs.right_tab_ul.style.left = "0"
+          if (this.leftBtnMark) {
+            this.$refs.right_tab_ul.style.left = "25px";
+          } else {
+            this.$refs.right_tab_ul.style.left = "0"
+          };
         } else {
           this.$refs.right_tab_ul.style.left = parseFloat(this.$refs.right_tab_ul.style.left) + 50 + "px";
         }
       },
       rightMovingBtn() {
         if (parseFloat(this.$refs.right_tab_ul.style.left) <= -1350) {
-          this.$refs.right_tab_ul.style.left = "-1350px";
+          this.$refs.right_tab_ul.style.left = "-1400px";
         } else {
           this.$refs.right_tab_ul.style.left = parseFloat(this.$refs.right_tab_ul.style.left) - 50 + "px";
         }
@@ -334,12 +346,16 @@
       FullScreen() {
         this.showHalfBtn = true;
         this.originLeft = this.$refs.right_tab_ul.style.left;
-        this.$refs.right_tab_ul.style.left = "0";
+        this.$refs.right_tab_ul.style.left = "25px";
         this.$refs.rLeft.style.display = "none";
         this.watchData = this.$refs.rRight.style.width = "100%";
         this.$refs.rRight.style.left = '0';
         this.isFull = true;
         this.midShow = false;
+        console.log(this.$refs.leftBtn)
+        this.leftBtnMark = true;
+        this.$refs.leftBtn.style.left = '45px';
+        // this.$refs.leftBtn.style.background='green';
       },
       DblScreen() {
         this.showHalfBtn = false;
@@ -352,6 +368,8 @@
         this.$refs.rRight.style.left = '50%';
         this.isFull = false;
         this.midShow = true;
+        this.leftBtnMark = false;
+        this.$refs.leftBtn.style.left = '10px';
       },
       tab1(ev, ind, val) {
         this.title = val;
@@ -419,7 +437,7 @@
         });
       },
       getPageInf() { //获取个人信息
-      console.log( 'id', this.tastwaitingPass)
+        console.log('id', this.tastwaitingPass)
         this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
           id: this.tastwaitingPass.ApplyId,
         }).then(res => {
@@ -459,8 +477,6 @@
           this.Managermark = false; //
           this.RoleSHow = 'partTwo'
         } else if (Nodename === 'checkApp_trial_manager') {
-          console.log('bbbbbbbbb')
-          
           // 初终审主管
           this.LocalList = 'QTTrialManagerTW';
           this.QTComponentsShow();
@@ -770,8 +786,9 @@
 
   .pre_next_btn_wrap {
     position: absolute;
-    z-index: 2;
+    z-index: 18;
     width: 25px;
+    background: #4099ff;
   }
 
   .pre_next_btn_wrap:nth-of-type(1) {
