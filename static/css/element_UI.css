@@ -985,7 +985,8 @@ height: 40px;
 .CreditForm .el-collapse-item__arrow,
 .regularQT .el-collapse-item__arrow,
 .SSComp .el-collapse-item__arrow {
-  line-height: 40px;
+  /* line-height: 40px; */
+  line-height: 38px;
 }
 
 /* 解决测试环境宽高不生效问题 */
@@ -2936,4 +2937,18 @@ left: 0;
 top: 0;
 right: 0;
 bottom: 0;
+}
+.selfRegularQT .el-table td,.selfRegularQT .el-table th,
+.ListTable .el-table td{
+padding:0;
+}
+
+.selfRegularQT .el-table .cell{
+  padding-left: 5px;
+  padding-right:5px;
+font-size: 12px;
+}
+.ListTable .el-table .cell{
+  padding-left: 5px;
+  padding-right:5px;
 }

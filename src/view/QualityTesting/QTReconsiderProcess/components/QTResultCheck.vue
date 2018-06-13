@@ -1,5 +1,5 @@
 <template>
-  <div class="regularQT">
+  <div class="regularQT selfRegularQT">
     <!-- 质检复议流程  初终审本人质检结论查看页 -->
     <!-- 审批信息 ============checked  待调试=一接口返回数据格式带确认-->
     <el-collapse v-model="activeNames">
@@ -22,11 +22,11 @@
           <span class="headFont">质检结论</span>
         </template>
         <div class="result">
-          <el-table :data="tableData" border>
+          <el-table :data="tableData" style="width:100%;" border>
             <el-table-column prop="checkResultTxt" label="质检结果" width="120"></el-table-column>
-            <el-table-column prop="errorType" label="差错类型" width="150"></el-table-column>
-            <el-table-column prop="errorDescribe" label="差错描述" width="150"></el-table-column>
-            <el-table-column prop="remark" label="备注"></el-table-column>
+            <el-table-column prop="errorType" label="差错类型" width="252"> </el-table-column>
+            <el-table-column prop="errorDescribe" label="差错描述"> </el-table-column>
+            <el-table-column prop="remark" label="备注"> </el-table-column>
           </el-table>
         </div>
       </el-collapse-item>
@@ -108,12 +108,12 @@
         bigDataLogVisible: false,
         ToReconsiderParams: {
           id: '',
-          taskId:'',
+          taskId: '',
           // flag: 'zhijian',
           // busiState: '30',
           // wayOf: '02', //质检
           //  channel:'00',
-          reconType:'00'//复议类型(00:初终审本人，01:初终审主管首次，02:初终审主管二次)
+          reconType: '00' //复议类型(00:初终审本人，01:初终审主管首次，02:初终审主管二次)
         }
       }
     },
@@ -124,17 +124,17 @@
         this.get('/insReconApply/queryInsConclusionInfo', {
           applyId: this.taskwaitting.ApplyId,
         }).then(res => {
-          this.tableData=[];
+          this.tableData = [];
           this.baseInfo = res.data.applyBaseInfo; //基本信息
-          this.tableData.push( res.data.insConclusion ); //-----------需要调接口查看返回对象，还是数组
+          this.tableData.push(res.data.insConclusion); //-----------需要调接口查看返回对象，还是数组
         })
       },
       ToReconsider() {
-       console.log(this.taskwaitting)
-      this.ToReconsiderParams.ApplyId=  this.taskwaitting.ApplyId;
-      this.ToReconsiderParams.taskId=  this.taskwaitting.taskId;
-         localStorage.setItem('QTToReconsiderParams', JSON.stringify(this.ToReconsiderParams)); //工作台部分信息，带入workbenchPass
-         this.$router.push('/ReApply');
+        console.log(this.taskwaitting)
+        this.ToReconsiderParams.ApplyId = this.taskwaitting.ApplyId;
+        this.ToReconsiderParams.taskId = this.taskwaitting.taskId;
+        localStorage.setItem('QTToReconsiderParams', JSON.stringify(this.ToReconsiderParams)); //工作台部分信息，带入workbenchPass
+        this.$router.push('/ReApply');
       },
       NoReconsider() {
         this.post('/insReconApply/noNeedReview', {
