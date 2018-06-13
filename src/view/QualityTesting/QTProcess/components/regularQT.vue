@@ -1205,8 +1205,11 @@
           value: '04',
           label: '终审重大差错'
         }, {
-          value: '10',
-          label: '建议优化'
+          value: '05',
+          label: '初审建议优化'
+        }, {
+          value: '06',
+          label: '终审建议优化'
         }],
         QTresultSpecial: [{//专纵项下拉
           value: '07',
@@ -1699,7 +1702,7 @@
             }else if(this.checkResultCount07 > 0 && this.checkResultCount08 > 0){
                this.$message.error('质检结果专项/纵向/无不能同时存在！')
               return
-            }else if(this.checkResultCount09 > 0 && (this.checkResultCount01 > 0||this.checkResultCount02 > 0||this.checkResultCount03 > 0||this.checkResultCount04 > 0||this.checkResultCount07 > 0||this.checkResultCount08 > 0||this.checkResultCount10 > 0)){
+            }else if(this.checkResultCount09 > 0 && (this.checkResultCount01 > 0||this.checkResultCount02 > 0||this.checkResultCount03 > 0||this.checkResultCount04 > 0||this.checkResultCount07 > 0||this.checkResultCount08 > 0)){
                this.$message.error('质检结果已经选择无！')
               return
             }
