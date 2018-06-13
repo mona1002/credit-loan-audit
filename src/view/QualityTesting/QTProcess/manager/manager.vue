@@ -209,7 +209,7 @@
             }
           });
       },
-      btnParams() {
+      SubmitParams() {
         this.multipleSelectionParams = [];
         for (var i = 0; i < this.multipleSelection.length; i++) {
           var params = {
@@ -218,7 +218,21 @@
           };
           params.applyId = this.multipleSelection[i].applyId;
           params.taskId = this.multipleSelection[i].taskId;
-          this.multipleSelectionParams.push(params)
+          this.multipleSelectionParams.push(params);
+        }
+      },
+      saveParams() {
+        this.multipleSelectionParams = [];
+        for (var i = 0; i < this.multipleSelection.length; i++) {
+          var params = {
+            applyId: '',
+            taskId: '',
+            isSecondIns: ''
+          };
+          params.applyId = this.multipleSelection[i].applyId;
+          params.taskId = this.multipleSelection[i].taskId;
+          params.isSecondIns = this.multipleSelection[i].isSecondIns;
+          this.multipleSelectionParams.push(params);
         }
       },
       allotSubmit() { //批量提交
@@ -236,7 +250,7 @@
             return
           }
         }
-        this.btnParams(); //提取入参 applyId taskId
+        this.SubmitParams(); //提取入参 applyId taskId
         if (this.multipleSelectionParams == '') {
           this.$message.error('请选择一条数据！');
           return
@@ -248,7 +262,6 @@
                 type: "success",
                 message: res.msg
               })
-              //  this.$message.error(res.msg);
               this.inquire(this.params);
             } else {
               this.$message.error(res.msg);
@@ -264,7 +277,7 @@
         //     return
         //   }
         // }
-        this.btnParams();
+        this.saveParams();// 提取入参 applyId taskId isSecondIns
         if (this.multipleSelectionParams == '') {
           this.$message.error('请选择一条数据！');
           return
@@ -275,7 +288,6 @@
               type: "success",
               message: res.msg
             })
-            // this.$message.error(res.msg);
             this.inquire(this.params);
           } else {
             this.$message.error(res.msg);

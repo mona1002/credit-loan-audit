@@ -66,9 +66,9 @@
                 <QTAprovalConclution v-if=" this.tabContent1==11">反欺诈审批结论轨迹 </QTAprovalConclution>
                 <RApprovalConclusion v-if=" this.tabContent1==12">审批结论轨迹</RApprovalConclusion>
                 <!-- <ComplianceProcess v-if=" this.tabContent1==11 && this.QTmark" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess> -->
-                <!-- <ReApply v-if=" this.tabContent1==12 && this.QTmark" :propReApply='ReApplyMark'>合规复议申请</ReApply> -->
+                <!-- <RulesReApply v-if=" this.tabContent1==12 && this.QTmark" :propReApply='ReApplyMark'>合规复议申请</RulesReApply> -->
                 <ComplianceProcess v-if=" this.tabContent1==13" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
-                <ReApply v-if=" this.tabContent1==14" :propReApply='ReApplyMark' :applyId='tastwaitingPass.ApplyId'>合规复议申请</ReApply>
+                <RulesReApply v-if=" this.tabContent1==14" :propReApply='ReApplyMark' :applyId='tastwaitingPass.ApplyId'>合规复议申请</RulesReApply>
                 <!-- <regularQT v-if=" this.tabContent1==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC' >质检结论</regularQT> -->
                 <regularQT v-if=" this.tabContent1==15&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
                 <QTResultCheck v-if=" this.tabContent1==15&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
@@ -76,7 +76,7 @@
               <!-- <QTAprovalConclution v-if=" this.tabContent1==9&& this.Managermark">反欺诈审批结论轨迹 </QTAprovalConclution>
               <RApprovalConclusion v-if=" this.tabContent1==10&& this.Managermark">审批结论轨迹</RApprovalConclusion>
               <ComplianceProcess  v-if=" this.tabContent1==11 && this.QTmark" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
-              <ReApply  v-if=" this.tabContent1==12 && this.QTmark" :propReApply='ReApplyMark'>合规复议申请</ReApply> -->
+              <RulesReApply  v-if=" this.tabContent1==12 && this.QTmark" :propReApply='ReApplyMark'>合规复议申请</RulesReApply> -->
             </div>
           </div>
         </div>
@@ -136,9 +136,9 @@
               <QTAprovalConclution v-if=" this.tabContent2==11">反欺诈审批结论轨迹 </QTAprovalConclution>
               <RApprovalConclusion v-if=" this.tabContent2==12">审批结论轨迹</RApprovalConclusion>
               <!-- <ComplianceProcess v-if=" this.tabContent2==11 && this.QTmark" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
-              <ReApply v-if=" this.tabContent2==12 && this.QTmark" :propReApply='ReApplyMark'>合规复议申请</ReApply> -->
+              <RulesReApply v-if=" this.tabContent2==12 && this.QTmark" :propReApply='ReApplyMark'>合规复议申请</RulesReApply> -->
               <ComplianceProcess v-if=" this.tabContent2==13" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
-              <ReApply v-if=" this.tabContent2==14" :propReApply='ReApplyMark'  :applyId='tastwaitingPass.ApplyId'>合规复议申请</ReApply>
+              <RulesReApply v-if=" this.tabContent2==14" :propReApply='ReApplyMark'  :applyId='tastwaitingPass.ApplyId'>合规复议申请</RulesReApply>
               <!-- <regularQT v-if=" this.tabContent2==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC' >质检结论</regularQT> -->
               <regularQT v-if=" this.tabContent2==15&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
               <QTResultCheck v-if=" this.tabContent2==15&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
@@ -194,7 +194,7 @@
   import regularQT from "../QualityTesting/QTProcess/components/regularQT.vue"; //质检结论
   import QTResultCheck from "../QualityTesting/QTReconsiderProcess/components/QTResultCheck.vue"; //质检结论-本人结论页
   import ComplianceProcess from '../QualityTesting/QTReconsiderProcess/components/ComplianceProcess.vue'; //合规质检结论轨迹-prop
-  import ReApply from '../QualityTesting/QTReconsiderProcess/components/RulesReApply.vue'; //合规复议申请-RulesReApply
+  import RulesReApply from '../QualityTesting/QTReconsiderProcess/components/RulesReApply.vue'; //合规复议申请-RulesReApply
   import RantiFraudInvestigation from '../FirstTrail/ReadComponent/RantiFraudInvestigation'; //反欺诈调查
   import InternalMatch from "./InternalMatch"; //获取-申请信息
   import PhoneCredit from "./PhoneCredit"; //电话征信
@@ -528,7 +528,7 @@
       regularQT, //  质检结论
       QTResultCheck,
       ComplianceProcess,
-      ReApply,
+      RulesReApply,
       RantiFraudInvestigation
       //   RprocessTrajectory,
     }

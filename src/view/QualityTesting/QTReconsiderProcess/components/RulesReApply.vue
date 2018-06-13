@@ -1,6 +1,6 @@
 <template>
   <div class="aAntiApplyInf ReApply RulesReApply">
-    <!-- 复议申请页面 -->
+    <!-- 合规复议申请  -->
     <div class="content">
       <el-collapse v-model="activeNames">
         <el-collapse-item name="1">
@@ -37,7 +37,7 @@
                 </p>
                 <p>
                   <label>申请类型： </label>
-                  <span>{{applyInfoPool.appType}} </span>
+                  <span>{{applyInfoPool.appTypeTxt}} </span>
                 </p>
               </li>
             </ul>
@@ -72,7 +72,7 @@
               </li>
               <li class="ApplyInf">
                 <p>
-                  <label>复议申请人：</label>{{reApplyInf.userName }}
+                  <label>复议申请人：</label>{{auditDesc.approverUserCode}}
                 </p>
                 <p>
                   <label>复议申请日期： </label>{{ systermTime | dateFilter}}
@@ -124,8 +124,6 @@
         })
       },
       getInf() { //查询页面信息
-       
-      
         // this.get('/insReconApply/queryInsConclusionInfo', {
         //   applyId: this.applyId
         // }
