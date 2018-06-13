@@ -1192,7 +1192,7 @@
         telType: '06', //电话征信 电话类型入参
         activeNames: ['0', '1', "2", "3", "4", "5", "6", "7", "8", "9", '10'], //折叠面板 默认显示下标
         tabTitle: ["客户本人", '住址电话', "单位电话", "家庭联系人", "工作证明人", "其他联系人"],
-        QTresult: [{
+        QTresult: [{//常规下拉
           value: '01',
           label: '初审一般差错'
         }, {
@@ -1207,17 +1207,8 @@
         }, {
           value: '10',
           label: '建议优化'
-        }, {
-          value: '07',
-          label: '专项'
-        }, {
-          value: '08',
-          label: '纵向'
-        }, {
-          value: '09',
-          label: '无'
         }],
-        QTresultSpecial: [{
+        QTresultSpecial: [{//专纵项下拉
           value: '07',
           label: '专项'
         }, {
@@ -1733,9 +1724,8 @@
           for (var i = 0; i < this.insConclusion.length; i++) {
             console.log('isSubmit：', this.insConclusion[i].isSubmit)
             type == '保存' ? this.insConclusion[i].isSubmit = '0' : this.insConclusion[i].isSubmit = '1'; // 质检结论 保存：0，修改：1
-            this.propQTconclution.pageType !== 'checkApp_apply' ? this.insConclusion[i].checkType = '02' : ''; // 质检主管保存 质检结论 CheckType 改为02，初检依旧保持01
-            // this.insConclusion[i].checkType == '01' && this.insConclusion[i].id ? this.insConclusion[i].id = '' : this.insConclusion[
-            //   i].id; //主管首次保存或提交id设置为空
+           this.propQTconclution.pageType !== 'checkApp_apply' ? this.insConclusion[i].checkType = '02' : this.insConclusion[i].checkType = '01'; // 质检主管保存 质检结论 CheckType 改为02，初检01
+           this.propQTconclution.pageType !== 'checkApp_apply'&& this.insConclusion[i].checkType == '01'? this.insConclusion[i].id = '' : ''; //主管首次保存或提交id设置为空
           }
           // insResultTxt  更改微信支付宝显示汉字字段
           for (var k = 0; k < this.AlipayConcat.length; k++) {
@@ -1772,6 +1762,7 @@
                 this.$message.error(res.msg);
               }
             });
+            this.submitShow=false;
         }
       },
       // 无需复议
@@ -2082,7 +2073,6 @@
       this.Social(); //社保公积金接口
     }
   }
-
 </script>
 <style scoped>
   .baseInf {
