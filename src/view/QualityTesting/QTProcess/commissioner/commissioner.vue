@@ -42,7 +42,7 @@
       </div>
       <div class="table_wrap">
         <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" height="100%" @row-dblclick="handleCurrentChange" border>
+        <el-table :data="tableData" style="width: 100%" @row-dblclick="handleCurrentChange" border>
           <el-table-column type="index" align='center' label=序号 width="55">
           </el-table-column>
           <el-table-column prop="applySubNo" label="进件编号" align='center' min-width="180">
@@ -321,7 +321,8 @@
     border: 1px solid #e6eaee;
     padding: 25px 25px 20px 25px;
     width: 100%;
-    height: calc( 100% - 255px);
+    height: 100%;
+    /* height: calc( 100% - 255px); */
   }
 
   .paging {
