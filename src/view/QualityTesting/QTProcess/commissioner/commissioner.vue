@@ -245,7 +245,7 @@
   }
 
   .content {
-    padding: 30px 30px;
+    padding: 30px;
     width: 100%;
     height: calc( 100% - 70px);
     /* 统一导航 */
@@ -321,7 +321,8 @@
     border: 1px solid #e6eaee;
     padding: 25px 25px 20px 25px;
     width: 100%;
-    height: 100%;
+    margin-bottom: 40px;
+    /* height: 100%; */
     /* height: calc( 100% - 255px); */
   }
 
