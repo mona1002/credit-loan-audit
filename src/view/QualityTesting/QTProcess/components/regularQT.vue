@@ -509,7 +509,7 @@
             <!-- ====================== -->
           </div>
           <!--  除客户本人的 电话拨打核实-->
-          <div v-show="this.others">
+          <div v-show="this.others" class="MobileCheck">
             <p style='clear:both;padding:3px 0;'>
               <el-tag>电话拨打核实</el-tag>
             </p>
@@ -2149,18 +2149,13 @@
     cursor: pointer;
     width: 80px;
     display: inline-block;
-    /* margin-right: 10px; */
-    /* background:pink; */
     position: relative;
   }
 
   .btn img {
-    /* vertical-align: middle; */
     position: absolute;
     top: 3px;
     left: -35px;
-    /* margin-top:3px; */
-    /* background:red; */
   }
 
   .icon_hat {
@@ -2178,17 +2173,8 @@
     color: #183a56;
     padding: 5px 20px;
     border-radius: 4px;
-    /* background:red; */
-    /* width: 100px; */
-    /* border-right: 1px solid; */
     cursor: pointer;
-
   }
-
-  /* .tab1Default:hover {
-    cursor: pointer;
-    opacity: .6;
-  } */
 
   .tabAct {
     color: #1387e6;

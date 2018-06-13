@@ -2851,16 +2851,27 @@ body .el-submenu .el-menu-item {
   overflow: inherit;
 }
 
-.regularQT .weChatNapliay .el-table__row {
+.regularQT .weChatNapliay .el-table__row,
+.regularQT .MobileCheck .el-table__row,
+.regularQT .result_QT .el-table__row
+
+ {
   height: 70px;
 }
 
-.regularQT .weChatNapliay .el-table td {
+.regularQT .weChatNapliay .el-table td,
+.regularQT .MobileCheck .el-table td,
+.regularQT .result_QT .el-table td
+ {
   padding: 0;
 }
 
-.regularQT .weChatNapliay .el-table td:nth-of-type(4) {
+.regularQT .weChatNapliay .el-table td:nth-of-type(4),
+.regularQT .MobileCheck .el-table td:nth-of-type(10),
+.regularQT .result_QT .el-table td:nth-of-type(4)
+ {
   vertical-align: bottom;
+  /* background:red; */
 }
 
 .regularQT .alertBox .el-dialog__header {
