@@ -985,7 +985,8 @@ height: 40px;
 .CreditForm .el-collapse-item__arrow,
 .regularQT .el-collapse-item__arrow,
 .SSComp .el-collapse-item__arrow {
-  line-height: 40px;
+  /* line-height: 40px; */
+  line-height: 38px;
 }
 
 /* 解决测试环境宽高不生效问题 */
@@ -2851,16 +2852,27 @@ body .el-submenu .el-menu-item {
   overflow: inherit;
 }
 
-.regularQT .weChatNapliay .el-table__row {
+.regularQT .weChatNapliay .el-table__row,
+.regularQT .MobileCheck .el-table__row,
+.regularQT .result_QT .el-table__row
+
+ {
   height: 70px;
 }
 
-.regularQT .weChatNapliay .el-table td {
+.regularQT .weChatNapliay .el-table td,
+.regularQT .MobileCheck .el-table td,
+.regularQT .result_QT .el-table td
+ {
   padding: 0;
 }
 
-.regularQT .weChatNapliay .el-table td:nth-of-type(4) {
+.regularQT .weChatNapliay .el-table td:nth-of-type(4),
+.regularQT .MobileCheck .el-table td:nth-of-type(10),
+.regularQT .result_QT .el-table td:nth-of-type(4)
+ {
   vertical-align: bottom;
+  /* background:red; */
 }
 
 .regularQT .alertBox .el-dialog__header {
@@ -2925,4 +2937,18 @@ left: 0;
 top: 0;
 right: 0;
 bottom: 0;
+}
+.selfRegularQT .el-table td,.selfRegularQT .el-table th,
+.ListTable .el-table td{
+padding:0;
+}
+
+.selfRegularQT .el-table .cell{
+  padding-left: 5px;
+  padding-right:5px;
+font-size: 12px;
+}
+.ListTable .el-table .cell{
+  padding-left: 5px;
+  padding-right:5px;
 }

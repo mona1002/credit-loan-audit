@@ -783,7 +783,7 @@
   .right .rightSpans {
     margin-left: 10px;
     display: inline-block;
-    width: 66px;
+    width: 70px;
     height: 40px;
     float: left;
   }

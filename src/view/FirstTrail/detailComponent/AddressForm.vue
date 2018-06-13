@@ -419,7 +419,7 @@
         <el-button type="primary" @click="submitForm('form')">确定</el-button>
       </li>
     </ul>
-    <p>{{Addlist}}</p>
+    <!-- <p>{{Addlist}}</p> -->
   </div>
 </template>
 <script>

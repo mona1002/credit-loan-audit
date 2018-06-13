@@ -304,15 +304,27 @@
         this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
       } else if (this.judgeFlag.flag == '02') {
         this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-      } else if (this.judgeFlag.flag == '03' ||this.judgeFlag.flag == '04') {
+      } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
         this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
       }
       //  else if (this.judgeFlag.flag == '04') {
       //   this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
       // }
-       else if (this.judgeFlag.flag == '05'||this.judgeFlag.flag == '06') {
+      else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
         this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员 
-      } 
+      } else if (this.judgeFlag.flag == '07') {
+        this.localInf = JSON.parse(localStorage.getItem("QTTaskWait")) //质检 专员
+      } else if (this.judgeFlag.flag == '08') {
+        this.localInf = JSON.parse(localStorage.getItem("QTManagerTW")) //质检 主管
+      } else if (this.judgeFlag.flag == '09') {
+        this.localInf = JSON.parse(localStorage.getItem("QTSelfTW")) //质检 初终审本人任务列表 
+      } else if (this.judgeFlag.flag == '10') {
+        this.localInf = JSON.parse(localStorage.getItem("QTTrialManagerTW")) //质检 初终审主管
+      } else if (this.judgeFlag.flag == '11') {
+        this.localInf = JSON.parse(localStorage.getItem("QTReManagerTW")) //质检 复议任务列表（首次） ---区域无社保公积金按钮
+      } else if (this.judgeFlag.flag == '13') {
+        this.localInf = JSON.parse(localStorage.getItem("QTComplianceTW")) //质检 合规经理任务列表 
+      }
       // else if (this.judgeFlag.flag == '06') {
       //   this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议经理
       // }
@@ -425,7 +437,7 @@
 
   .SSComp label {
     display: inline-block;
-    width:180px;
+    width: 180px;
     text-align: right;
     vertical-align: top;
   }
@@ -447,4 +459,5 @@
   .table {
     width: 100%;
   }
+
 </style>

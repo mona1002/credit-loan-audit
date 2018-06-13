@@ -77,7 +77,7 @@
               </li>
               <li class="ApplyInf">
                 <p>
-                  <label>复议申请人：</label>{{reApplyInf.userName }}
+                  <label>复议申请人：</label>{{reApplyInf.userCode }}
                 </p>
                 <p>
                   <label>复议申请日期： </label>{{ systermTime | dateFilter}}
@@ -199,7 +199,8 @@
           // taskNode: '', //复议节点----暂时不入
           // taskNodeName: '', //复议节点名称----暂时不入
           reviewRemark: this.fraudAuditOpinion.auditDesc, //复议说明
-          approverUserCode: this.reApplyInf.userCode, //经办人
+          approverUserCode: this.reApplyInf.userCode, //经办人 code
+          approverUserName:this.reApplyInf.userName,//经办人
           reconDate: this.systermTime, //发起复议时间
           // reconType: this.taskwaitting.reconType, //复议类型(00:初终审本人，01:初终审主管首次，02:初终审主管二次)
           reconType: '00', //复议类型(00:初终审本人，01:初终审主管首次，02:初终审主管二次)
