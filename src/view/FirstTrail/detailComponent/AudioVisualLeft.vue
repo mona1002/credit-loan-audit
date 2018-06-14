@@ -55,8 +55,9 @@
       <div ref="img_wrap" style="position:relative;" :id='msg'>
         <!-- <img ref="Big_pic_ref" v-for="(val,key) in imgPath" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath"
           v-if="key==smallPicInd" /> -->
-          <img ref="Big_pic_ref" v-for="(val,key) in pngAyyrs" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng" @dblclick='next'/>
-        <p v-show="myPdf" is="pdfDivLeft" v-bind:title="pdfArrys"></p>
+        <img ref="Big_pic_ref" v-for="(val,key) in pngAyyrs" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath"
+          v-if="key==smallPicInd" v-show="myPng" @dblclick='next' />
+        <p v-show="myPdf" is="pdfDivLeft" ID='firstTirlLeft' v-bind:title="pdfArrys"></p>
       </div>
     </div>
     <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" v-show="perfBtn" @click="pre" @mouseenter='PerBtn'>
@@ -66,7 +67,7 @@
       <img src="../../../../static/images/net.png" @click="larger">
       <img src="../../../../static/images/daf.png" @click="AclockWise ">
       <img src="../../../../static/images/dasf.png" @click="clockWise ">
-   <span class="audioInd"> 第 {{showPage }} 页</span>
+      <span class="audioInd"> 第 {{showPage }} 页</span>
     </div>
     <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面  SmallPicShow-->
     <div class="Small_pic_div" v-show="SmallPicShow">
@@ -77,7 +78,7 @@
         <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
           <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref"
           />
-           <!-- <p v-show="myPdf" is="pdfDivLeft" v-bind:title="pdfArrys"></p> -->
+          <!-- <p v-show="myPdf" is="pdfDivLeft" v-bind:title="pdfArrys"></p> -->
           <p> {{val.arcSubType}} </p>
         </figure>
       </div>
@@ -134,7 +135,7 @@
 
 <script>
   import imgUrl from '../../../util/ConstantSocialAndPn'
-  import pdfDivLeft from '../../pdfLeft'
+  import pdfDivLeft from '../../pdf'
   export default {
     data() {
       return {
@@ -147,7 +148,7 @@
         localInf: [], //初始化的时候，根据传进来的applyId获取初始化数据
         showListDiv: true,
         show: true,
-         showPage: 0,
+        showPage: 0,
         smallPicInd: 0, // 未知
         SmallPicShow: false,
         CompareAlert: true,
@@ -165,10 +166,10 @@
         custName: '',
         custmatchApplySubNo: '',
         AULwrapWidth: null,
-        pdfArrys:[],
-        pngAyyrs:[],
-        myPng:false,
-        myPdf:false,
+        pdfArrys: [],
+        pngAyyrs: [],
+        myPng: false,
+        myPdf: false,
       }
     },
     props: ['msg', 'comBtn'],
@@ -211,7 +212,7 @@
           }
         });
       },
-      getParentList(id) { 
+      getParentList(id) {
         console.log("table选中-获取父节点")
         this.post("/productArchive/getProductArchiveParentList", {
           applyId: id, //上面删除后 此处打开
@@ -257,25 +258,25 @@
       },
       smallPic(ev, ind) {
         this.smallPicInd = ind;
-          this.showPage = ind+1;
+        this.showPage = ind + 1;
         this.SmallPicShow = false;
         this.defaultBigPicCss();
       },
       getImg(ind) {
-        this.pdfArrys=[];
-        this.pngAyyrs=[];
+        this.pdfArrys = [];
+        this.pngAyyrs = [];
         this.smallPicInd = 0;
         this.showPage = 1;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
-        if(this.imgPath[0].imagePath.substring(this.imgPath[0].imagePath.length-3) == 'pdf'){
-            this.pdfArrys=this.imgPath;
-            this.myPdf = true;
-            this.myPng = false;
-          }else{
-            this.myPng = true;
-            this.myPdf = false;
-            this.pngAyyrs=this.imgPath;
-          };
+        if (this.imgPath[0].imagePath.substring(this.imgPath[0].imagePath.length - 3) == 'pdf') {
+          this.pdfArrys = this.imgPath;
+          this.myPdf = true;
+          this.myPng = false;
+        } else {
+          this.myPng = true;
+          this.myPdf = false;
+          this.pngAyyrs = this.imgPath;
+        };
         this.$refs.img_wrap.style.left = 0;
         this.$refs.img_wrap.style.top = 0;
         this.defaultBigPicCss();
@@ -305,22 +306,22 @@
       },
       pre() {
         this.smallPicInd--;
-          this.showPage--;
+        this.showPage--;
         if (this.$refs.small_pic_ref) {
           if (this.smallPicInd < 0) {
             this.smallPicInd = this.$refs.small_pic_ref.length - 1;
-              this.showPage = this.$refs.small_pic_ref.length;
+            this.showPage = this.$refs.small_pic_ref.length;
           }
         }
         this.defaultBigPicCss();
       },
       next() {
         this.smallPicInd++;
-         this.showPage++;
+        this.showPage++;
         if (this.$refs.small_pic_ref) {
           if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
             this.smallPicInd = 0;
-             this.showPage = 1;
+            this.showPage = 1;
           }
         }
         this.defaultBigPicCss();
@@ -369,6 +370,11 @@
       },
       defaultBigPicCss() {
         this.$nextTick(() => {
+          if (this.myPdf) {
+            this.$refs.img_wrap.style.left = 0;
+            this.$refs.img_wrap.style.top = 0;
+            return
+          }
           if (this.$refs.Big_pic_ref) {
             this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
             this.$refs.img_wrap.style.left = 0;
@@ -416,6 +422,9 @@
         };
       },
       Imgscroll() {
+        if (this.myPdf) {
+          return
+        }
         this.perfBtn = true;
         if (this.$refs.Big_pic_ref) {
           this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {

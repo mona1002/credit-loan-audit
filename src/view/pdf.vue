@@ -6,10 +6,9 @@
             :key=Math.random()
            :pdfurl="imgBaseUrl+item.imagePath" 
            :scale="scale" 
+           :canvasId='id'
            @onErr="onErr">  
        </pdf-shower>
-       <!-- <p>{{newArry[0].imagePath}}</p> 
-       <test :title="title"></test>-->
 	</div>
 </template>
 <script>
@@ -27,8 +26,12 @@ export default {
             scale: 1.2,
             imgBaseUrl:pdfUrl.imgBaseUrl,
             newArry:[],
-            aaa:false,
+            id:this.ID
         };
+    },
+    mounted(){
+console.log( this.id)
+console.log( this.ID)
     },
     methods: {
         // 加载失败的callback
@@ -37,19 +40,10 @@ export default {
             console.log('错误信息：', err);
         },
     },
-    props: ['title'],
+    props: ['title','ID'],
     watch:{
-        title(value){
-            console.log('我是右边');
+        title(value){        
             this.newArry = value;
-            this.aaa = true;
-            /*var rightCav = document.getElementsByClassName('rightCav');
-            var cvsWraper = document.getElementById('cvsWraper');
-            console.log(cvsWraper);*/
-            // var cvs = cvsWraper.getElementsByTagName("canvas");
-            // $('.rightCav #cvsWraper').append(cvs);
-            console.log("+++++++++++++++++++r");
-            //console.log(cvs);
         }
     }
 };
