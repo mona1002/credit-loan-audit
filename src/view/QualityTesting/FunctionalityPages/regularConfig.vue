@@ -579,7 +579,7 @@
   }
 
   .icon_wrap span {
-    display: inline-block;
+    display: inline-block !important;
     margin-right: 5px;
     vertical-align: middle;
     cursor: pointer;
