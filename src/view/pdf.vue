@@ -7,6 +7,8 @@
            :pdfurl="imgBaseUrl+item.imagePath" 
            :scale="scale" 
            :canvasId='id'
+           :canvasWidth='pdfWidth'
+           :canvasHeight='pdfHeight'
            @onErr="onErr">  
        </pdf-shower>
 	</div>
@@ -26,12 +28,10 @@ export default {
             scale: 1.2,
             imgBaseUrl:pdfUrl.imgBaseUrl,
             newArry:[],
-            id:this.ID
+            id:this.ID,
+            pdfWidth:this.cvsWidth?this.cvsWidth:'',
+            pdfHeight:this.cvsHeight?this.cvsHeight:'',
         };
-    },
-    mounted(){
-console.log( this.id)
-console.log( this.ID)
     },
     methods: {
         // 加载失败的callback
@@ -40,7 +40,7 @@ console.log( this.ID)
             console.log('错误信息：', err);
         },
     },
-    props: ['title','ID'],
+    props: ['title','ID','cvsClass','cvsWidth','cvsHeight'],
     watch:{
         title(value){        
             this.newArry = value;

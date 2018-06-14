@@ -783,7 +783,7 @@
     </div>
     <!-- 发起复议  -->
     <div class="alertBox">
-      <el-dialog title='发起复议' :visible.sync="ReconsiderShow" :modal="false" width="630px">
+      <el-dialog title='发起复议' :visible.sync="ReconsiderShow" :modal="false" width="650px">
         <div>
           <p>
             <label class="reconsider_Alert_Label">复议节点：</label>
@@ -948,7 +948,6 @@
 <script>
   import baseurl from '../../../../util/ConstantSocialAndPn';
   import baseurlBPM from '../../../../util/constant';
-  
   export default {
     data() {
       return {
@@ -1163,35 +1162,11 @@
         ManagerFirstTableData: [], //初终审主管首次
         ManagerSecondTableData: [], //初终审主管二次
         insReconApproval: [], //复议审批表
-        // ------------------------------------测试用--------------------
-        // tableData: [{
-        //   reviewRemark: '2016-05-02',
-        //   approverUserCode: '王小虎',
-        //   reconDate: '上海市普陀区金沙江路 1518 弄',
-        //   reconType: '00'
-        // }, {
-        //   reviewRemark: '2016-05-02',
-        //   approverUserCode: '王小虎',
-        //   reconDate: '上海市普陀区金沙江路 1518 弄',
-        //   reconType: '00'
-        // }, {
-        //   reviewRemark: '2016-05-02',
-        //   approverUserCode: '王小虎',
-        //   reconDate: '上海市普陀区金沙江路 1518 弄',
-        //   reconType: '01'
-        // }, {
-        //   reviewRemark: '2016-05-02',
-        //   approverUserCode: '王小虎',
-        //   reconDate: '上海市普陀区金沙江路 1518 弄',
-        //   reconType: '02'
-        // }],
-        // ------------------------------------------------------------
         tabIndex: 0,
         payment: true,
         custom: true,
         others: false,
         addTr: true,
-        // currentRow: null,
         telType: '06', //电话征信 电话类型入参
         activeNames: ['0', '1', "2", "3", "4", "5", "6", "7", "8", "9", '10'], //折叠面板 默认显示下标
         tabTitle: ["客户本人", '住址电话', "单位电话", "家庭联系人", "工作证明人", "其他联系人"],
@@ -1266,7 +1241,7 @@
         }],
         value: '',
         // -----------弹窗---
-        ReconsiderShow: false,
+        ReconsiderShow: true,
         AreaReconsiderShow: false,
         ReAprovalShow: false,
         AprovalShow: false,
@@ -2088,13 +2063,11 @@
     },
     mounted() {
       console.log('propQTconclution:', this.propQTconclution)
-     console.log( baseurl)
       this.URL = baseurl.imgBaseUrl;
       this.getSystermTime();
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
       this.referPort(); //质检查询页面
       this.showdiffer();
-      // this.Social(); //社保公积金接口
     }
   }
 </script>
@@ -2255,7 +2228,7 @@
 
   .reconsider_Alert_Label {
     display: inline-block;
-    width: 83px;
+    width: 90px;
     text-align: right;
   }
 
