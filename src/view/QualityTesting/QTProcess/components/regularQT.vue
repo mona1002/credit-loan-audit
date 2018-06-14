@@ -1241,7 +1241,7 @@
         }],
         value: '',
         // -----------弹窗---
-        ReconsiderShow: true,
+        ReconsiderShow: false,
         AreaReconsiderShow: false,
         ReAprovalShow: false,
         AprovalShow: false,

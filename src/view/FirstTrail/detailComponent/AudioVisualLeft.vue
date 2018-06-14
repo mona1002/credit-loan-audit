@@ -75,11 +75,16 @@
         <img src="../../../../static/images/D625BA67-2F56-42C1-9E9D-A47AE03BA028@1x.png" class="small_pic_close" @click="SmallpicClose">
       </p>
       <div class="small_pic_content">
-        <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
+        <figure v-for="(val,index) in pngAyyrs" :key="index" class="small_pic_figure" v-show="SmallmyPic">
           <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref"
           />
-          <!-- <p v-show="myPdf" is="pdfDivLeft" v-bind:title="pdfArrys"></p> -->
-          <p> {{val.arcSubType}} </p>
+          <p v-if="SmallmyPic"> {{val.arcSubType}} </p>
+        </figure>
+        <figure class="small_pic_figure" v-show="SmallmyPdf"  @dblclick="pdfClose()">
+          <!-- <div class="Small_pic"  @dblclick="pdfClose()">
+             <p is="pdfDivLeft" ID='firstTirlLeftSmall' :cvsWidth='200' :cvsHeight='200'  v-bind:title="pdfArrys"  @dblclick="pdfClose()"></p> 
+             </div>
+          <p> {{pdfTitle}} </p> -->
         </figure>
       </div>
     </div>
@@ -170,6 +175,9 @@
         pngAyyrs: [],
         myPng: false,
         myPdf: false,
+        SmallmyPdf:false,
+        SmallmyPic:false,
+        pdfTitle:'',
       }
     },
     props: ['msg', 'comBtn'],
@@ -262,6 +270,12 @@
         this.SmallPicShow = false;
         this.defaultBigPicCss();
       },
+      pdfClose(){
+        console.log('ccc')
+     this.SmallPicShow = false;
+     this.showPage =  1;
+    //  this.defaultBigPicCss();
+      },
       getImg(ind) {
         this.pdfArrys = [];
         this.pngAyyrs = [];
@@ -300,9 +314,19 @@
       },
       SmallpicClose() {
         this.SmallPicShow = false;
+        this.SmallmyPdf=false;
+        this.SmallmyPic=false;
       },
       SmallpicAlert() {
         this.SmallPicShow = true;
+       if(this.myPdf){//显示pdf
+          this.SmallmyPdf=true;
+         this.SmallmyPic=false;
+         this.pdfTitle= this.pdfArrys[0].arcSubType;
+       }  else{//显示图片
+         this.SmallmyPic=true;
+         this.SmallmyPdf=false;
+       }
       },
       pre() {
         this.smallPicInd--;
@@ -725,7 +749,10 @@
     border: 2px solid #bfcbd9;
     box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
   }
-
+ .AudioVisualLeft .Small_pic div canvas{
+   width:140px;
+height: 140px !important;
+ }
   /* --------------------------- */
 
   .NamParentNode {

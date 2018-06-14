@@ -54,7 +54,8 @@
       <div ref="img_wrap" style="position:relative; left:0; top:0;" :id='msg'>
         <!-- <img ref="Big_pic_ref" v-for="(val,key) in imgPath" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath"
           v-if="key==smallPicInd" /> -->
-        <img ref="Big_pic_ref" v-for="(val,key) in pngAyyr" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng" @dblclick='next'/>
+        <img ref="Big_pic_ref" v-for="(val,key) in pngAyyr" style="width:auto;height:auto;" :key="key" :src="imgBaseUrl+val.imagePath"
+          v-if="key==smallPicInd" v-show="myPng" @dblclick='next' />
         <p v-if="myPdf" is="pdfDivLeft" v-bind:title="pdfArry"></p>
       </div>
     </div>
@@ -65,7 +66,7 @@
       <img src="../../../../static/images/net.png" @click="larger">
       <img src="../../../../static/images/daf.png" @click="AclockWise ">
       <img src="../../../../static/images/dasf.png" @click="clockWise ">
-       <span class="audioInd"> 第 {{showPage }} 页</span>
+      <span class="audioInd"> 第 {{showPage }} 页</span>
     </div>
     <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
     <div class="Small_pic_div" v-show="SmallPicShow">
@@ -147,7 +148,7 @@
         localInf: [], //初始化的时候，根据传进来的applyId获取初始化数据
         showListDiv: true,
         show: true,
-         showPage: 0,
+        showPage: 0,
         smallPicInd: 0, // 未知
         SmallPicShow: false,
         CompareAlert: true,
@@ -165,10 +166,10 @@
         custName: '',
         custmatchApplySubNo: '',
         MatchFlag: '',
-        pdfArry:[],
-        pngAyyr:[],
-        myPng:false,
-        myPdf:false,
+        pdfArry: [],
+        pngAyyr: [],
+        myPng: false,
+        myPdf: false,
       }
     },
     props: ['msg', 'comBtn'],
@@ -262,26 +263,26 @@
       },
       smallPic(ev, ind) {
         this.smallPicInd = ind;
-         this.showPage = ind+1;
+        this.showPage = ind + 1;
         this.SmallPicShow = false;
         this.defaultBigPicCss();
       },
       getImg(ind) {
-        this.pdfArry=[];
-        this.pngAyyr=[];
+        this.pdfArry = [];
+        this.pngAyyr = [];
         this.smallPicInd = 0;
         this.showPage = 1;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
-        if(this.imgPath[0].imagePath.substring(this.imgPath[0].imagePath.length-3) == 'pdf'){
-            this.pdfArry=this.imgPath;
-            this.myPdf = true;
-            this.myPng = false;
-          }else{
-            this.myPng = true;
-            this.myPdf = false;
-            this.pngAyyr=this.imgPath;
-            console.log(this.pngAyyr.length);
-          };
+        if (this.imgPath[0].imagePath.substring(this.imgPath[0].imagePath.length - 3) == 'pdf') {
+          this.pdfArry = this.imgPath;
+          this.myPdf = true;
+          this.myPng = false;
+        } else {
+          this.myPng = true;
+          this.myPdf = false;
+          this.pngAyyr = this.imgPath;
+          console.log(this.pngAyyr.length);
+        };
         this.$refs.img_wrap.style.left = 0;
         this.$refs.img_wrap.style.top = 0;
         this.defaultBigPicCss();
@@ -290,7 +291,7 @@
         this.showListDiv = false;
         this.$refs.preBtn.style.left = 37 + 'px';
         // this.$refs.PbtnIcons.style.left = 'calc( 50% - 97px)';
-         this.$refs.PbtnIcons.style.left = 'calc( 50% - 135px)';
+        this.$refs.PbtnIcons.style.left = 'calc( 50% - 135px)';
         this.$refs.AudioVisual_Img_ref.style.width = "calc( 100% - 31px)";
       },
       showList() {
@@ -308,23 +309,23 @@
       },
       pre() {
         this.smallPicInd--;
-          this.showPage--;
+        this.showPage--;
         this.defaultBigPicCss();
         if (this.$refs.small_pic_ref) {
           if (this.smallPicInd < 0) {
             this.smallPicInd = this.$refs.small_pic_ref.length - 1;
-              this.showPage = this.$refs.small_pic_ref.length;
+            this.showPage = this.$refs.small_pic_ref.length;
           }
         }
       },
       next() {
         this.smallPicInd++;
-         this.showPage++;
+        this.showPage++;
         this.defaultBigPicCss();
         if (this.$refs.small_pic_ref) {
           if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
             this.smallPicInd = 0;
-             this.showPage = 1;
+            this.showPage = 1;
           }
         }
       },
@@ -371,9 +372,14 @@
       },
       defaultBigPicCss() {
         this.$nextTick(() => {
+          if (this.myPdf) {
+            this.$refs.img_wrap.style.left = 0;
+            this.$refs.img_wrap.style.top = 0;
+            return
+          }
           if (this.$refs.Big_pic_ref) {
             this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
-              this.$refs.img_wrap.style.left = 0;
+            this.$refs.img_wrap.style.left = 0;
             this.$refs.img_wrap.style.top = 0;
             var outsideH = this.$refs.AudioVisual_Img_ref.offsetHeight;
             var widthReduce = this.$refs.AudioVisual_Img_ref.offsetWidth - this.$refs.Big_pic_ref[0].offsetWidth;
@@ -417,6 +423,9 @@
         };
       },
       Imgscroll() {
+        if (this.myPdf) {
+          return
+        }
         this.perfBtn = true;
         if (this.$refs.Big_pic_ref) {
           this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {
@@ -466,7 +475,7 @@
       } else if (this.MatchFlag.MatchFlag == 'Query') {
         console.log("综合查询")
         this.localInf = JSON.parse(localStorage.getItem("Query")) //初审-匹配查看
-      }else if (this.MatchFlag.MatchFlag == 'QT') {
+      } else if (this.MatchFlag.MatchFlag == 'QT') {
         this.localInf = JSON.parse(localStorage.getItem("QT")) //综合查询
       }
       this.imgBaseUrl = imgUrl.imgBaseUrl;
@@ -553,7 +562,7 @@
     z-index: 2;
     left: calc( 50% + 9px);
     top: calc( 100% - 110px);
-    width:270px;
+    width: 270px;
     height: 52px;
     background: rgba(71, 86, 105, 0.6);
     box-shadow: 0 10px 20px 0 #47566942;
