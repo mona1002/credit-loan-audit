@@ -369,9 +369,6 @@
       } else if (this.judgeFlag.flag == '03' ||this.judgeFlag.flag == '04') {
         this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
       } 
-      // else if (this.judgeFlag.flag == '04') {
-      //   this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
-      // }
       this.imgBaseUrl = imgUrl.imgBaseUrl;
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
@@ -446,7 +443,6 @@
   .BtnIcons {
     position: absolute;
     z-index: 2;
-    /* right: calc( 50% - 303px); */
     left: calc( 50% + 65px);
     top: calc( 100% - 110px);
     width: 270px;
@@ -455,9 +451,6 @@
     box-shadow: 0 10px 20px 0 #47566942;
     border-radius: 6px;
     padding: 12px 0 11px 19px;
-  /* left:0;
-  right:0; */
-  /* bottom:0; */
   }
 
   .BtnIcons img {
@@ -648,7 +641,6 @@
 
   .AudioVisual .Small_pic {
     height: calc( 100% - 60px);
-    /* UI设计部分 */
     border-radius: 5px;
     border: 2px solid #bfcbd9;
     box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
