@@ -1448,6 +1448,7 @@
               }
             }
             this.WechatData(0); //客户本人 微信支付宝赋值为客户本人AlipayCus
+                this.Social(); //社保公积金接口
           } else {
             this.$message.error(res.msg);
           }
@@ -1881,10 +1882,20 @@
       },
       // 发起反欺诈
       AntiApply() {
-        this.$router.push({
-          name: 'AntiApplyEditf'
+        this.post("/antiFraud/getAntiFraudSurveyInfoByApplyId", {
+          applyId: this.propQTconclution.applyId
+        }).then(res => {
+          if (res.statusCode == 200) {//200 可以发起
+          this.$router.push({
+            name: 'AntiApplyEditf'
+          });
+          localStorage.setItem("AntiApplyParams", JSON.stringify(this.AntiApplyParams));
+            } else {
+              if(res.statusCode !== 500){
+                this.$message.error('此进件正在发欺诈流程中，不能再次发起反欺诈！');
+              }
+          }
         });
-        localStorage.setItem("AntiApplyParams", JSON.stringify(this.AntiApplyParams));
       },
       ToApproval() { //复议审批、审批
         if (this.ToApprovalParams.reviewRemark == '' || this.ToApprovalParams.errorType == '' || this.ToApprovalParams.isError ==
@@ -1948,6 +1959,7 @@
       },
       //社保/公积金
       Social() {
+        console.log(this.baseInfo )
         this.post(baseurl.BaseUrl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {
           certCode: this.baseInfo.certCode,
           custName: this.baseInfo.custName
@@ -2073,7 +2085,7 @@
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
       this.referPort(); //质检查询页面
       this.showdiffer();
-      this.Social(); //社保公积金接口
+      // this.Social(); //社保公积金接口
     }
   }
 </script>
