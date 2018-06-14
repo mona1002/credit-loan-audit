@@ -783,7 +783,7 @@
     </div>
     <!-- 发起复议  -->
     <div class="alertBox">
-      <el-dialog title='发起复议' :visible.sync="ReconsiderShow" :modal="false" width="630px">
+      <el-dialog title='发起复议' :visible.sync="ReconsiderShow" :modal="false" width="650px">
         <div>
           <p>
             <label class="reconsider_Alert_Label">复议节点：</label>
@@ -901,7 +901,7 @@
             <el-table :data="lcgjData" style="width: 100%" height="296" border>
               <el-table-column type="index" label="序号" min-width="50">
               </el-table-column>
-              <el-table-column prop="taskNameTxt" label="任务节点" min-width="120">
+              <el-table-column prop="taskNodeNameTxt" label="任务节点" min-width="120">
               </el-table-column>
               <el-table-column prop="taskTypeTxt" label="任务类型" min-width="120">
               </el-table-column>
@@ -947,6 +947,7 @@
 </template>
 <script>
   import baseurl from '../../../../util/ConstantSocialAndPn';
+  import baseurlBPM from '../../../../util/constant';
   export default {
     data() {
       return {
@@ -969,6 +970,7 @@
         instaskType: '', //添加质检结论入参-任务类型（00:常规质检，01:专项质检）
         reviewConclusion: {}, //复核结论
         conclusionId: '', //发起复议-弹窗入参
+        processInstanceIdParams:'',// 查询流程轨迹入参
         tablrf: [{
           insResult: '01'
         }],
@@ -1160,35 +1162,11 @@
         ManagerFirstTableData: [], //初终审主管首次
         ManagerSecondTableData: [], //初终审主管二次
         insReconApproval: [], //复议审批表
-        // ------------------------------------测试用--------------------
-        // tableData: [{
-        //   reviewRemark: '2016-05-02',
-        //   approverUserCode: '王小虎',
-        //   reconDate: '上海市普陀区金沙江路 1518 弄',
-        //   reconType: '00'
-        // }, {
-        //   reviewRemark: '2016-05-02',
-        //   approverUserCode: '王小虎',
-        //   reconDate: '上海市普陀区金沙江路 1518 弄',
-        //   reconType: '00'
-        // }, {
-        //   reviewRemark: '2016-05-02',
-        //   approverUserCode: '王小虎',
-        //   reconDate: '上海市普陀区金沙江路 1518 弄',
-        //   reconType: '01'
-        // }, {
-        //   reviewRemark: '2016-05-02',
-        //   approverUserCode: '王小虎',
-        //   reconDate: '上海市普陀区金沙江路 1518 弄',
-        //   reconType: '02'
-        // }],
-        // ------------------------------------------------------------
         tabIndex: 0,
         payment: true,
         custom: true,
         others: false,
         addTr: true,
-        // currentRow: null,
         telType: '06', //电话征信 电话类型入参
         activeNames: ['0', '1', "2", "3", "4", "5", "6", "7", "8", "9", '10'], //折叠面板 默认显示下标
         tabTitle: ["客户本人", '住址电话', "单位电话", "家庭联系人", "工作证明人", "其他联系人"],
@@ -1341,6 +1319,8 @@
             // 除基本信息以外，专员获取都为空，applyid要一个个赋值进去
             //  基本信息                                -Object
             this.baseInfo = res.data.applyBaseInfo;
+            // 质检流程-质检页面查询接口-基本信息中取流程轨迹入参  processInstanceIdSecond不为空取 processInstanceIdSecond ，为空取processInstanceId
+         this.baseInfo&& this.baseInfo.processInstanceIdSecond? this.processInstanceIdParams= this.baseInfo.processInstanceIdSecond: this.processInstanceIdParams=this.baseInfo.processInstanceId;
             // 资料核实+三方信息查询+ 内部匹配核实         -Object
             // !res.data.insRegularInfo ? this.regularInfo.applyId = this.propQTconclution.applyId : this.regularInfo =
             //   res.data.insRegularInfo;
@@ -1930,17 +1910,20 @@
         });
         this.ReAprovalShow = false;
       },
-      // 流程轨迹
+      // 流程轨迹-工作流接口-查询流程轨迹
       getLcgjList() {
         this.lcdialogVisible = true;
-        this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.propQTconclution.tastwaitingPass.processInstanceId +
-            '&' + Math.random())
+        // POST
+        // {
+        //   processInstanceId:this.processInstanceIdParams,
+        //   processStatus:'01'
+        // }
+                this.post(baseurlBPM.baseUrl_common2+'/bpmService/getProcessTraceList',{
+                      processInstanceId:this.processInstanceIdParams,
+                      processStatus:'01'
+                })
           .then(res => {
-            if (res.statusCode == '200') {
-              this.lcgjData = res.data;
-            } else {
-              this.$message(res.msg);
-            }
+            this.lcgjData = res.taskDetailList;
           })
       },
       //大数据风控
@@ -2085,7 +2068,6 @@
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
       this.referPort(); //质检查询页面
       this.showdiffer();
-      // this.Social(); //社保公积金接口
     }
   }
 </script>
@@ -2246,7 +2228,7 @@
 
   .reconsider_Alert_Label {
     display: inline-block;
-    width: 83px;
+    width: 90px;
     text-align: right;
   }
 

@@ -6,10 +6,11 @@
             :key=Math.random()
            :pdfurl="imgBaseUrl+item.imagePath" 
            :scale="scale" 
+           :canvasId='id'
+           :canvasWidth='pdfWidth'
+           :canvasHeight='pdfHeight'
            @onErr="onErr">  
        </pdf-shower>
-       <!-- <p>{{newArry[0].imagePath}}</p> 
-       <test :title="title"></test>-->
 	</div>
 </template>
 <script>
@@ -27,7 +28,9 @@ export default {
             scale: 1.2,
             imgBaseUrl:pdfUrl.imgBaseUrl,
             newArry:[],
-            aaa:false,
+            id:this.ID,
+            pdfWidth:this.cvsWidth?this.cvsWidth:'',
+            pdfHeight:this.cvsHeight?this.cvsHeight:'',
         };
     },
     methods: {
@@ -37,19 +40,10 @@ export default {
             console.log('错误信息：', err);
         },
     },
-    props: ['title'],
+    props: ['title','ID','cvsClass','cvsWidth','cvsHeight'],
     watch:{
-        title(value){
-            console.log('我是右边');
+        title(value){        
             this.newArry = value;
-            this.aaa = true;
-            /*var rightCav = document.getElementsByClassName('rightCav');
-            var cvsWraper = document.getElementById('cvsWraper');
-            console.log(cvsWraper);*/
-            // var cvs = cvsWraper.getElementsByTagName("canvas");
-            // $('.rightCav #cvsWraper').append(cvs);
-            console.log("+++++++++++++++++++r");
-            //console.log(cvs);
         }
     }
 };

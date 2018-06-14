@@ -54,10 +54,11 @@
     </div>
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
-      <div ref="img_wrap"  style="position:relative; left:0; top:0;" id='AntiFirstAud'>
+      <div ref="img_wrap" style="position:relative; left:0; top:0;" id='AntiFirstAud'>
         <!-- <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd"
         /> -->
-        <img ref="Big_pic_ref" v-for="(val,key) in pngAyyr" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng"  @dblclick='next'/>
+        <img ref="Big_pic_ref" v-for="(val,key) in pngAyyr" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng"
+          @dblclick='next' />
         <p v-if="myPdf" is="pdfDiv" v-bind:title="pdfArry"></p>
       </div>
     </div>
@@ -68,7 +69,7 @@
       <img src="../../../../static/images/net.png" @click="larger">
       <img src="../../../../static/images/daf.png" @click="AclockWise ">
       <img src="../../../../static/images/dasf.png" @click="clockWise ">
-       <span class="audioInd"> 第 {{showPage }} 页</span>
+      <span class="audioInd"> 第 {{showPage }} 页</span>
     </div>
     <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
     <div class="Small_pic_div" v-show="SmallPicShow">
@@ -77,8 +78,8 @@
       </p>
       <div class="small_pic_content">
         <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
-          <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
-            ref="small_pic_ref" />
+          <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref"
+          />
           <p>{{val.arcSubType}} </p>
         </figure>
       </div>
@@ -88,20 +89,20 @@
 </template>
 
 <script>
-import imgUrl from'../../../util/ConstantSocialAndPn'
-import pdfDiv from '../../pdf'
+  import imgUrl from '../../../util/ConstantSocialAndPn'
+  import pdfDiv from '../../pdf'
   export default {
     data() {
       return {
         // picData: [],
-        imgBaseUrl:'',
+        imgBaseUrl: '',
         perfBtn: false,
         judgeFlag: '',
         opendImg: [],
         closedImg: [],
         showListDiv: true,
         show: true,
-         showPage: 0,
+        showPage: 0,
         smallPicInd: 0,
         SmallPicShow: false,
         CompareAlert: true,
@@ -110,15 +111,14 @@ import pdfDiv from '../../pdf'
         applyId: '', //入参
         imgPath: [],
         localInf: [], //localstorage 接收的所有参数
-        pdfArry:[],
-        pngAyyr:[],
-        myPng:false,
-        myPdf:false,
+        pdfArry: [],
+        pngAyyr: [],
+        myPng: false,
+        myPdf: false,
       }
     },
     methods: {
-      opend(vv) {
-      },
+      opend(vv) {},
       PerBtn() {
         this.perfBtn = true;
       },
@@ -157,21 +157,21 @@ import pdfDiv from '../../pdf'
         });
       },
       getImg(ind) {
-        this.pdfArry=[];
-        this.pngAyyr=[];
+        this.pdfArry = [];
+        this.pngAyyr = [];
         this.smallPicInd = 0;
         this.showPage = 1;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
-        if(this.imgPath[0].imagePath.substring(this.imgPath[0].imagePath.length-3) == 'pdf'){
-            this.pdfArry=this.imgPath;
-            this.myPdf = true;
-            this.myPng = false;
-          }else{
-            this.myPng = true;
-            this.myPdf = false;
-            this.pngAyyr=this.imgPath;
-            console.log(this.pngAyyr.length);
-          };
+        if (this.imgPath[0].imagePath.substring(this.imgPath[0].imagePath.length - 3) == 'pdf') {
+          this.pdfArry = this.imgPath;
+          this.myPdf = true;
+          this.myPng = false;
+        } else {
+          this.myPng = true;
+          this.myPdf = false;
+          this.pngAyyr = this.imgPath;
+          console.log(this.pngAyyr.length);
+        };
         this.$refs.img_wrap.style.left = 0;
         this.$refs.img_wrap.style.top = 0;
         this.defaultBigPicCss();
@@ -198,22 +198,22 @@ import pdfDiv from '../../pdf'
       },
       pre() {
         this.smallPicInd--;
-          this.showPage--;
+        this.showPage--;
         if (this.$refs.small_pic_ref) {
           if (this.smallPicInd < 0) {
             this.smallPicInd = this.$refs.small_pic_ref.length - 1;
-              this.showPage = this.$refs.small_pic_ref.length;
+            this.showPage = this.$refs.small_pic_ref.length;
           }
         }
         this.defaultBigPicCss();
       },
       next() {
         this.smallPicInd++;
-         this.showPage++;
+        this.showPage++;
         if (this.$refs.small_pic_ref) {
           if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
             this.smallPicInd = 0;
-             this.showPage = 1;
+            this.showPage = 1;
           }
         }
         this.defaultBigPicCss();
@@ -266,9 +266,14 @@ import pdfDiv from '../../pdf'
       },
       defaultBigPicCss() {
         this.$nextTick(() => {
+          if (this.myPdf) {
+            this.$refs.img_wrap.style.left = 0;
+            this.$refs.img_wrap.style.top = 0;
+            return
+          }
           if (this.$refs.Big_pic_ref) {
             this.$refs.Big_pic_ref[0].style.transform = "rotate(0deg)";
-              this.$refs.img_wrap.style.left = 0;
+            this.$refs.img_wrap.style.left = 0;
             this.$refs.img_wrap.style.top = 0;
             var outsideH = this.$refs.AudioVisual_Img_ref.offsetHeight;
             var widthReduce = this.$refs.AudioVisual_Img_ref.offsetWidth - this.$refs.Big_pic_ref[0].offsetWidth;
@@ -287,7 +292,7 @@ import pdfDiv from '../../pdf'
         val = val.getFullYear() + "-" + (val.getMonth() + 1) + "-" + val.getDate() + " " + (val.toString().split(' ')[4]);
         return val;
       },
-      changeSmallPicCss(ind) { 
+      changeSmallPicCss(ind) {
         for (var i = 0; i < this.$refs.small_pic_ref.length; i++) {
           this.$refs.small_pic_ref[i].style.opacity = 1;
         }
@@ -316,6 +321,9 @@ import pdfDiv from '../../pdf'
         };
       },
       Imgscroll() {
+        if (this.myPdf) {
+          return
+        }
         this.perfBtn = true;
         if (this.$refs.Big_pic_ref) {
           this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {
@@ -361,24 +369,24 @@ import pdfDiv from '../../pdf'
     mounted() {
       this.odivMove("AntiFirstAud");
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '03' ||this.judgeFlag.flag == '04') {
+      if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
         this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
-      } 
+      }
       // else if (this.judgeFlag.flag == '04') {
       //   this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
       // } 
-      else if (this.judgeFlag.flag == '05' ||this.judgeFlag.flag == '06') {
+      else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
         this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议主管+专员
-      } 
+      }
       // else if (this.judgeFlag.flag == '06') {
       //   this.localInf = JSON.parse(localStorage.getItem("RManagertaskInWaitting")) //复议主管+专员
       // }
       else if (this.judgeFlag.flag == '07') {
         this.localInf = JSON.parse(localStorage.getItem("TtaskInWaitting")) //审批已办-任务
-      }else if (this.judgeFlag.flag == '08') {
+      } else if (this.judgeFlag.flag == '08') {
         this.localInf = JSON.parse(localStorage.getItem("TtaskInWaitting")) //审批历史-任务
       }
-        this.imgBaseUrl=imgUrl.imgBaseUrl;
+      this.imgBaseUrl = imgUrl.imgBaseUrl;
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.localInf.applyId,
@@ -409,10 +417,10 @@ import pdfDiv from '../../pdf'
 
 </script>
 <style scoped>
-
   .AudioVisual {
     height: 100%;
   }
+
   /* public */
 
   .small_pic_close {
@@ -420,6 +428,7 @@ import pdfDiv from '../../pdf'
     right: 18px;
     top: 13px;
   }
+
   /* 图片功能按钮 */
 
   .showBtn {
@@ -446,6 +455,7 @@ import pdfDiv from '../../pdf'
     position: relative;
     z-index: 2;
   }
+
   /* 缩略图-按钮 */
 
   .checkDetailBtn {
@@ -457,6 +467,7 @@ import pdfDiv from '../../pdf'
   .showHidIcons {
     display: none;
   }
+
   /*  放大、缩小 按钮 wrap */
 
   .BtnIcons {
@@ -464,7 +475,7 @@ import pdfDiv from '../../pdf'
     z-index: 2;
     right: calc( 50% - 303px);
     top: calc( 100% - 110px);
-   width: 270px;
+    width: 270px;
     height: 52px;
     background: rgba(71, 86, 105, 0.6);
     box-shadow: 0 10px 20px 0 #47566942;
@@ -514,7 +525,9 @@ import pdfDiv from '../../pdf'
     border: 1px solid #bfcbd9;
     margin-right: 11px;
   }
+
   /* 左侧折叠面板 */
+
   /* 折叠面板上面的四个 th 表头 */
 
   .AudioVisual .list_title {
@@ -569,7 +582,9 @@ import pdfDiv from '../../pdf'
     width: calc(100% - 255px);
     border-left: none;
   }
+
   /* ------------------------------- */
+
   /* 缩略图最外侧div */
 
   .AudioVisual .Small_pic_div {
@@ -584,6 +599,7 @@ import pdfDiv from '../../pdf'
     background: #ffffff;
     border-radius: 4px;
   }
+
   /* 缩略图 p 标签  title */
 
   .AudioVisual .Small_pic_title {
@@ -596,6 +612,7 @@ import pdfDiv from '../../pdf'
     overflow: hidden;
     position: relative;
   }
+
   /* 缩略图 content */
 
   .AudioVisual .small_pic_content {
@@ -604,6 +621,7 @@ import pdfDiv from '../../pdf'
     overflow: auto;
     padding-top: 30px;
   }
+
   /* 缩略图片-figure-wrap */
 
   .AudioVisual .small_pic_figure {
@@ -612,6 +630,7 @@ import pdfDiv from '../../pdf'
     height: 200px;
     margin: 0 0 0 18px;
   }
+
   /*  缩略图 figure 内 图片名字 p 标签 */
 
   .AudioVisual .small_pic_figure p {
@@ -628,6 +647,7 @@ import pdfDiv from '../../pdf'
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
   /* 缩略图 各个 img 图片 */
 
   .AudioVisual .Small_pic {
