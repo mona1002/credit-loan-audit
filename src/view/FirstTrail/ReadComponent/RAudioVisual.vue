@@ -61,7 +61,7 @@
         <!-- <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" /> -->
         <img ref="Big_pic_ref" v-for="(val,key) in pngAyyr" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng"
           @dblclick='next' />
-        <p v-if="myPdf" is="pdfDiv" v-bind:title="pdfArry"></p>
+        <p v-if="myPdf" is="RpdfDiv" ID='ReadTril' v-bind:title="pdfArry"></p>
       </div>
     </div>
     <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" v-show="perfBtn" @click="pre" @mouseenter='PerBtn'>
@@ -92,7 +92,7 @@
 
 <script>
   import imgUrl from '../../../util/ConstantSocialAndPn'
-  import pdfDiv from '../../pdf'
+  import RpdfDiv from '../../pdf'
   export default {
     data() {
       return {
@@ -403,7 +403,7 @@
       });
     },
     components: {
-      pdfDiv
+      RpdfDiv
     }
   }
 
