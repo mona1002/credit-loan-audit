@@ -901,7 +901,7 @@
             <el-table :data="lcgjData" style="width: 100%" height="296" border>
               <el-table-column type="index" label="序号" min-width="50">
               </el-table-column>
-              <el-table-column prop="taskNameTxt" label="任务节点" min-width="120">
+              <el-table-column prop="taskNodeNameTxt" label="任务节点" min-width="120">
               </el-table-column>
               <el-table-column prop="taskTypeTxt" label="任务类型" min-width="120">
               </el-table-column>
@@ -947,6 +947,8 @@
 </template>
 <script>
   import baseurl from '../../../../util/ConstantSocialAndPn';
+  import baseurlBPM from '../../../../util/constant';
+  
   export default {
     data() {
       return {
@@ -969,6 +971,7 @@
         instaskType: '', //添加质检结论入参-任务类型（00:常规质检，01:专项质检）
         reviewConclusion: {}, //复核结论
         conclusionId: '', //发起复议-弹窗入参
+        processInstanceIdParams:'',// 查询流程轨迹入参
         tablrf: [{
           insResult: '01'
         }],
@@ -1341,6 +1344,8 @@
             // 除基本信息以外，专员获取都为空，applyid要一个个赋值进去
             //  基本信息                                -Object
             this.baseInfo = res.data.applyBaseInfo;
+            // 质检流程-质检页面查询接口-基本信息中取流程轨迹入参  processInstanceIdSecond不为空取 processInstanceIdSecond ，为空取processInstanceId
+         this.baseInfo&& this.baseInfo.processInstanceIdSecond? this.processInstanceIdParams= this.baseInfo.processInstanceIdSecond: this.processInstanceIdParams=this.baseInfo.processInstanceId;
             // 资料核实+三方信息查询+ 内部匹配核实         -Object
             // !res.data.insRegularInfo ? this.regularInfo.applyId = this.propQTconclution.applyId : this.regularInfo =
             //   res.data.insRegularInfo;
@@ -1930,17 +1935,20 @@
         });
         this.ReAprovalShow = false;
       },
-      // 流程轨迹
+      // 流程轨迹-工作流接口-查询流程轨迹
       getLcgjList() {
         this.lcdialogVisible = true;
-        this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.propQTconclution.tastwaitingPass.processInstanceId +
-            '&' + Math.random())
+        // POST
+        // {
+        //   processInstanceId:this.processInstanceIdParams,
+        //   processStatus:'01'
+        // }
+                this.post(baseurlBPM.baseUrl_common2+'/bpmService/getProcessTraceList',{
+                      processInstanceId:this.processInstanceIdParams,
+                      processStatus:'01'
+                })
           .then(res => {
-            if (res.statusCode == '200') {
-              this.lcgjData = res.data;
-            } else {
-              this.$message(res.msg);
-            }
+            this.lcgjData = res.taskDetailList;
           })
       },
       //大数据风控
@@ -2080,6 +2088,7 @@
     },
     mounted() {
       console.log('propQTconclution:', this.propQTconclution)
+     console.log( baseurl)
       this.URL = baseurl.imgBaseUrl;
       this.getSystermTime();
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
