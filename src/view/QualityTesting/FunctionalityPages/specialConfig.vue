@@ -376,7 +376,7 @@
     border: 1px solid #e6eaee;
     padding: 25px 25px 20px 25px;
     width: 100%;
-    /* height: auto; */
+    margin-bottom: 45px;
   }
 
   .paging {
