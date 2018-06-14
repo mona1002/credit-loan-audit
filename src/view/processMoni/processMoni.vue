@@ -429,8 +429,6 @@ userCode:'',
       this.routerState = str.slice(-2);
       this.queryParam.processTemplateId = this.routerPath;
       this.queryParam.taskStatus = this.routerState;
-      console.log(this.routerState)
-
       this.userInf = JSON.parse(localStorage.getItem("userInf"));
       this.queryParam.userCode = this.userInf.userCode;
       this.queryParam.orgCode = this.userInf.orgCode;
@@ -604,13 +602,11 @@ userCode:'',
 
     // 多选
     handleSelectionChange(val) {
-      console.log(val);
       this.multipleSelection= val;
     },
 
     // 选中某一行
     selectRow(row, event, column) {
-      console.log(row);
       this.currentRow = row;
     },
 
@@ -648,7 +644,6 @@ userCode:'',
         }
       }
 
-      console.log("可以操作");
       if(flag==='trace'){
         this.dialogTraceVisible = true;
         this.getProcessTraceList(this.multipleSelection[0].processInstanceId);
@@ -669,10 +664,8 @@ userCode:'',
       var checkFlag = '';
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          console.log('校验成功');
           checkFlag = true;
         } else {
-          console.log('校验失败');
           checkFlag = false;
         }
       });
