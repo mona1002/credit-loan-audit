@@ -50,18 +50,18 @@
           </el-table-column>
           <el-table-column type="index" align='center' label=序号 width="55">
           </el-table-column>
-          <el-table-column prop="applySubNo" label="进件编号" align='center' width="180">
+          <el-table-column prop="applySubNo" label="进件编号" align='center' min-width="180">
           </el-table-column>
           <el-table-column prop="date" label="最新发送时间" align='center' min-width="180">
           </el-table-column>
-          <el-table-column prop="num" label="发送次数" align='center' width="80">
+          <el-table-column prop="num" label="发送次数" align='center' min-width="80">
           </el-table-column>
-          <el-table-column prop="validateTxt" label="发送状态" align='center' width="80">
+          <el-table-column prop="validateTxt" label="发送状态" align='center' min-width="80">
           </el-table-column>
           <el-table-column prop="errorMsg" label="错误原因" align='center' min-width="130">
           </el-table-column>
         </el-table>
-        <!-- 分页  -->handlePageChange
+        <!-- 分页  -->
         <div class="paging">
           <el-pagination @size-change="handleSizeChange" @current-change="handlePageChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
             :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="totalRecord">
@@ -94,6 +94,7 @@
         sendDate: '', //发送日期
         tableData: [],
         selectedList: '', //手动发送请求入参
+        selectedListParams:[],
         DefaultTime: '',
         currentPage: 1, //分页选中页
         pageCount: 10, // 每页显示条数
@@ -149,7 +150,20 @@
           this.$message.error('请选择一条数据！');
           return
         }
-        this.post("/sendErrorController/sendErrorMsg", this.selectedList).then(res => {
+         var  obj={};
+        this.selectedListParams=[];
+        for(var i=0;i<this.selectedList.length;i++){
+           obj={};
+          obj.url=this.selectedList[i].url;
+          obj.sendMsg=this.selectedList[i].sendMsg;
+          obj.num=this.selectedList[i].num;
+          obj.errorMsg=this.selectedList[i].errorMsg;
+          obj.date=this.selectedList[i].date;
+          obj.validate=this.selectedList[i].validate;
+          obj.validateTxt=this.selectedList[i].validateTxt;
+          this.selectedListParams.push(obj)
+        }
+        this.post("/sendErrorController/sendErrorMsg", this.selectedListParams).then(res => {
           if (res.statusCode == 200) {
             this.$message({
               type: 'success',
@@ -159,7 +173,6 @@
             this.$message.error(res.msg);
           }
         })
-        // this.selectedList='';
       },
       handleSelectionChange(val) {
         this.selectedList = val;

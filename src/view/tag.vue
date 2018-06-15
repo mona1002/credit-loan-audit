@@ -401,10 +401,9 @@
           this.nodeName = "质检详情";
            this.nodeMatchFlag = 'QT';
           this.routeParams = '?' + this.taskNodeParams //---------------------------做判断-----
+        } else if (route.path == '/timedTask') { // 定时任务
+          this.nodeName = "自动通知查询";
         }
-        // else{
-        //   return
-        // }
         this.RoutePath = route.path;
         this.$store.dispatch('addVisitedViews', {
           name: this.nodeName,
