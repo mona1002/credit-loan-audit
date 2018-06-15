@@ -440,11 +440,9 @@ export default {
     	 this.taskInWaitting = JSON.parse(localStorage.getItem('internalObj'));
        
       } else if (this.MatchFlag.MatchFlag == 'Query') {
-    console.log( '综合页面——电话征信')        
         //  var taskInWaitting = JSON.parse(localStorage.getItem("Query")) //综合查询
          this.taskInWaitting = JSON.parse(localStorage.getItem("Query")) //综合查询
       }
-      console.log( )
        this.applyId = this.taskInWaitting.matchApplyId;
         this.applySubNo = this.taskInWaitting.applySubNo;
     
@@ -467,8 +465,6 @@ export default {
     //   this.addBtnShow = false;
 
     // }
-    console.log(" 判断电话添加 是否 ")
-    console.log(this.SplitS);
     // 复议不显示添加  05 专员   06 主管 03反欺诈专员 04反欺诈主管
     // if (this.judgeFlag == '05' || this.judgeFlag == '06' || this.judgeFlag == '03' || this.judgeFlag == '04') {
     //   this.addBtnShow = false;
@@ -534,14 +530,11 @@ export default {
 
     // 添加电话  电话校验
     addTelNum: function(value) {
-      console.log('监听 添加电话号码')
       this.addTelRex = /^(1)\d{10}$/i.test(value) || /^((\(\d{2,3}\))|(\d{3}\-))?(\(0\d{2,3}\)|0\d{2,3}-)?[1-9]\d{6,7}(\-\d{1,4})?$/i.test(value);
-      console.log(this.addTelRex);
       // 判断 显示 电话格式
       if (((this.addTelType == '01' || this.addTelType == '02') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addTelNum.length >= 11 && !this.addTelRex) ||
         ((this.addTelType == '03' || this.addTelType == '04' || this.addTelType == '05') && this.addTelType.length > 0 && this.addTelName.length > 0 && this.addRelationShip.length > 0 && this.addTelNum.length >= 11 && !this.addTelRex)
       ) {
-        console.log('选择了关系');
         this.active = false;
         this.$message({
           message: '格式不正确,请使用下面的格式:区号-电话号码或者11位手机号',
@@ -556,14 +549,12 @@ export default {
       ) {
         this.active = true;
       } else {
-        console.log('没选关系');
         this.active = false;
       }
 
 
     },
     formShow: function() {
-      console.log('formShow', this.formShow);
       if (this.formShow) {
         $('.el-main').css("overflow-y", 'auto');
 
@@ -575,13 +566,11 @@ export default {
       this.post("/creTelInfo/queryTels", {
         applyId: this.applyId
       }).then(res => {
-        console.log(res.data);
         if (res.statusCode == '200')
           this.treeData = res.data;
       });
     },
     handleNodeClick(data) {
-      console.log('handleNodeClick')
       if (this.isInterFlag == true || this.SplitS != 'right' || this.hisShow) {
         // 点击每条tree数据的事件
         this.treeId = data.id;
@@ -592,16 +581,11 @@ export default {
           this.hisShow = false;
           // 请求历史调查日志
           this.phoneType = data.telType;
-          console.log(this.phoneType);
 
-          console.log(data);
           // 客户姓名
           this.custName = data.telName;
           // 电话号码
           this.phoneNum = data.telNum;
-          // this.phoneNum = '010-001';
-          console.log(data.id.length);
-
           this.queryTelLogByPage();
           // this.formShow = false;
           // this.hisShow = true;
@@ -614,16 +598,10 @@ export default {
           this.hisListShow = true;
           // 请求历史调查日志
           this.phoneType = data.telType;
-          console.log(this.phoneType);
-
-          console.log(data);
           // 客户姓名
           this.custName = data.telName;
           // 电话号码
           this.phoneNum = data.telNum;
-          // this.phoneNum = '010-001';
-          console.log(data.id.length);
-
           this.queryTelLogByPage();
           this.formShow = true;
           this.hisShow = false;
@@ -652,22 +630,14 @@ export default {
       }).then(res => {
         // 数据请求回来  加载圈 清空
         this.mobileLoading = false;
-        console.log(res);
         if(res.statusCode == 200){
           this.listData = res.data.page;
-          //console.log(res.data.message)
           if(res.data.message){
-           // console.log('kkkk');
             if(this.formShow == true){
-              //console.log('kkkk1');
               this.hisShow = false;
             }else{
-              //console.log('kkkk2');
               this.hisShow = true;
             };
-            //console.log(this.formShow);
-            //console.log(this.hisShow);
-
             this.newList = res.data.message;
           }
         }
@@ -691,7 +661,6 @@ export default {
       this.loadingTitle = '提交中';
 
       // 点击添加方法,用过 key 来判断 添加的哪项.
-      console.log('append');
       // this.coverShow = false;
 
       // 点击添加 提交数据 
@@ -716,7 +685,6 @@ export default {
         this.dialogFormVisible = false;
         this.isLoading = false;
         this.loadingTitle = '确认';
-        console.log(res);
         if (res.statusCode == '200') {
           this.$message({
             type: 'success',
@@ -733,13 +701,13 @@ export default {
 
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
+      // console.log(`每页 ${val} 条`);
       this.pageSize = val;
       this.pageNum = 1;
       this.queryTelLogByPage();
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
+      // console.log(`当前页: ${val}`);
       this.pageNum = val;
       // this.pageSize=5;
       this.queryTelLogByPage();
@@ -749,14 +717,9 @@ export default {
       this.formShow = false;
       this.hisShow = false;
       // 历史列表  点击每一行
-      console.log('click row')
       this.id = row.id;
-
-      console.log(this.id);
-      console.log(this.phoneType);
       // 请求历史数据
       // this.queryHomeTel();
-
       // 点击行显示
       // 通过 电话类型来判断 显示哪个表单
       switch (this.phoneType) {
@@ -792,7 +755,6 @@ export default {
         id: this.id,
         phoneType: this.phoneType
       }).then(res => {
-        console.log(res);
         this.newList = '';
         this.mobileData = res.data;
         if (res.statusCode == '200')
@@ -807,7 +769,6 @@ export default {
         id: this.id,
         phoneType: this.phoneType
       }).then(res => {
-        console.log(res);
         this.newList = '';
         this.comData = res.data;
         if (res.statusCode == '200')
@@ -821,7 +782,6 @@ export default {
         id: this.id,
         phoneType: this.phoneType
       }).then(res => {
-        console.log(res);
         this.newList = '';
         this.familyData = res.data;
         if (res.statusCode == '200')
@@ -831,12 +791,10 @@ export default {
     },
     queryTeleContract() {
       // 紧急联系人历史
-      console.log('submit!');
       this.post('/creTelResearchHis/queryTeleContract', {
         id: this.id,
         phoneType: this.phoneType
       }).then(res => {
-        console.log(res);
         this.newList = '';
         this.hurryData = res.data;
         if (res.statusCode == '200')
@@ -850,7 +808,6 @@ export default {
         id: this.id,
         phoneType: this.phoneType
       }).then(res => {
-        console.log(res);
         this.newList = '';
         this.workData = res.data;
         if (res.statusCode == '200')
@@ -859,9 +816,6 @@ export default {
       })
     },
     // 添加 电话 弹窗, 点击关闭的事件   无效?
-    close() {
-      console.log('点击了添加电话关闭按钮');
-    }
   },
   components: {
     AddressForm,

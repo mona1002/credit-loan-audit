@@ -57,6 +57,7 @@ import ComplianceProcess from '../view/QualityTesting/QTReconsiderProcess/compon
 import MatchingInfQT from '../view/FirstTrail/MatchingInfQT.vue' //质检详情
 import pdf from '../view/pdf.vue' 
 import RantiFraudInvestigation from '../view/FirstTrail/ReadComponent/RantiFraudInvestigation.vue' //
+import timedTask from '../view/systermManagement/timedTask.vue' //定时任务
 
 Vue.use(Router)
 
@@ -70,6 +71,10 @@ const routes = [{
       pageTitle: '工作台',
       keepAlive: false
     }
+  },
+  {
+path:'/timedTask',
+component:timedTask
   },
   {
     path: '/ComplianceProcess',
