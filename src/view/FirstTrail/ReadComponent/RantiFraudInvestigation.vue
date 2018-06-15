@@ -115,6 +115,7 @@
           <el-table :data="fraudTelCheckList" style="width: 100%" highlight-current-row border @current-change="handleCurrentChanges">
             <el-table-column type="index" :index='1' label="序号" width="50">
             </el-table-column>
+            <el-table-column prop="name" label="姓名" width="120"></el-table-column>
             <el-table-column prop="phoneNum" label="手机号码" width="180">
             </el-table-column>
             <el-table-column prop="relation" label="关系" width="180">
