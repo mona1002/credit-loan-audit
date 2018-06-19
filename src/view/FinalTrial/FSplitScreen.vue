@@ -144,7 +144,7 @@
         watchData: '',
         originLeft: '',
         // 进件人信息
-        accepCusBasicInfo:'',
+        accepCusBasicInfo: '',
         customInf: [], //申请信息页local字段
         tastwaitingPass: [], //详情列表页信息--(含)取applyId
         // -------------------------------结束
@@ -180,13 +180,37 @@
         midShow: true,
       }
     },
-      watch: {
-          '$route' (to, from) {
+    watch: {
+      '$route' (to, from) {
         if (to.path === '/FSplitScreen' && this.$route.params.newOne) {
-
-        }}
-      },
+          this.mountedInf();
+          this.title = "影像资料";
+          this.tab1Index = this.tabContent1 = this.tabActiveInd1 = 0;
+          this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 3;
+          this.flag1 = [true, true, true, false, true, true, true, true, true];
+          this.flag2 = [true, true, true, true, true, true, true, true, true, true];
+          this.$refs.AudioLeft ? this.$refs.AudioLeft.mountedInf() : '';
+          this.$refs.AudioLeftCom ? this.$refs.AudioLeftCom.mountedInf() : '';
+          this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
+          this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
+        }
+      }
+    },
     methods: {
+      mountedInf() {
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("FtaskInWaitting"));
+        this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
+          id: this.tastwaitingPass.applyId,
+        }).then(res => {
+          if (res.statusCode == 200) {
+            //this.custName = res.data.accepCusBasicInfo.custName;
+            this.customInf = res.data;
+            this.accepCusBasicInfo = res.data.accepCusBasicInfo;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      },
       compareProps() {
         this.$refs.audioChild.personalNunPerson()
       },
@@ -313,19 +337,7 @@
     mounted() {
       this.title = "影像资料";
       this.MyMove();
-      this.tastwaitingPass = JSON.parse(localStorage.getItem("FtaskInWaitting"));
-      this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-        id: this.tastwaitingPass.applyId,
-      }).then(res => {
-        if (res.statusCode == 200) {
-          //this.custName = res.data.accepCusBasicInfo.custName;
-          this.customInf = res.data;
-          this.accepCusBasicInfo = res.data.accepCusBasicInfo;
-        } else {
-          this.$message.error(res.msg);
-        }
-      });
-
+      this.mountedInf();
     },
     components: {
       myHead,

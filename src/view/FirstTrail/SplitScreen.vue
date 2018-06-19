@@ -344,7 +344,6 @@
         });
       },
       mountedInf() {
-        // this.title = "影像资料";
         this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
         this.$message.error(this.tastwaitingPass.applyId)
         this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
@@ -396,7 +395,6 @@
     // next();
     // },
     mounted() {
-      console.log('挂载')
       this.title = "影像资料";
       this.MyMove();
       this.mountedInf();
