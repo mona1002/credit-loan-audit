@@ -1397,12 +1397,15 @@
 	    },
 		props:['isFull'],
 	    mounted(){
+			this.mountedInf();
+		},
+	    methods:{
+			mountedInf(){
 	    	//this.coming();
 			//一进入页面就发送请求
 			this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
 			this.applyId=this.taskInWaitting.applyId;
 			this.request(this.taskInWaitting.applyId);
-
 	  		if(this.isFull == false){// 分屏
 	  			//信用卡使用总况
 	  			$(".xinyongka").width('930px');
@@ -1429,8 +1432,6 @@
 	  			//确定按钮
 	  			$(".wattingButton").css({'width':'930'});
 	  			$(".wattingButton button").css({'margin-right':'calc( 49.9% - 155px )'});
-	  			
-	  			
 	  		}else if(this.isFull == true){// 全屏
 	  			$(".xinyongka").width('100%');
 	  			$(".xinyongka ul li div").width('200px');
@@ -1458,20 +1459,16 @@
 	  			$(".wattingButton").css({'width':'100%'});
 	  			$(".wattingButton button").css({'margin-right':'calc( 49.9% - 174px )'});
 	  		}
-		},
-	    methods:{
+			},
 	    	request(param){
 	    		this.post("/borrower/getBorrowerInfo", {
 		        'applyId':param
 		      }).then(res => {
-		        /*console.log(res);*/
 		        this.datas=res.data;
 		        /*房产信息*/
 		        if(res.data.borestateList != ''){
 		        	this.borestateList=res.data.borestateList;
-		        	console.log(this.borestateList.length);
 		        	for(var i=0;i<this.borestateList.length;i++){
-			        	//console.log(this.borestateList[i].monthlyPay);
 			        	//建筑单价 保留两位小数点
 			        	if(this.borestateList[i].unitPrice != null){
 			        		this.borestateList[i].unitPrice = this.formatNumber(this.borestateList[i].unitPrice,2,0);
@@ -1489,12 +1486,10 @@
 				        if(this.borestateList[i].equityRatio != null){
 				        	this.borestateList[i].equityRatio = this.formatNumber(this.borestateList[i].equityRatio,2,0).replace(/,/g,'');
 				        };
-				        console.log(this.borestateList[i].equityRatio);
 				        //建筑面积
 			        	if(this.borestateList[i].coveredArea != null){
 			        		this.borestateList[i].coveredArea = this.formatNumber(this.borestateList[i].coveredArea,2,0).replace(/,/g,'');
 			        	};
-			        	console.log(typeof(this.borestateList[i].coveredArea));
 			        	//房产是否共有
 			        	if(this.borestateList[i].estateShare != null){
 			        		if(this.borestateList[i].estateShare == '0'){
@@ -1609,10 +1604,7 @@
 		        	this.borDebt=this.borDebt
 		        }else{
 		        	this.borDebt=res.data.borDebt;
-		        	console.log(this.borDebt);
 		        	this.borDebt.id=this.borDebt.id;
-		        	//console.log(this.borDebt.houseLoanAmt);
-		        	//console.log(typeof(this.borDebt.houseLoanAmt));
 		        	//负债信息 信用卡每月还款 保留两位小数点
 		        	if(this.borDebt.monthRepayAmt != null){
 		        		this.borDebt.monthRepayAmt = this.formatNumber(this.borDebt.monthRepayAmt,2,0);
@@ -1638,7 +1630,6 @@
 		        		this.borDebt.otherLoanAmt = this.formatNumber(this.borDebt.otherLoanAmt,2,0);
 		        		this.arr.push(this.borDebt.otherLoanAmt.split(',').join("")*1*0.5);
 		        	};
-		        	//console.log(this.aaa);
 		        	//负债信息 负债合计 保留两位小数点
 		        	if(this.borDebt.totalLoan != null){
 		        		this.borDebt.totalLoan = this.formatNumber(this.borDebt.totalLoan,2,0);
@@ -1692,7 +1683,6 @@
 		        	this.otherInfo=res.data.otherInfo;
 		        	this.otherInfo.id=res.data.otherInfo.id;
 		        }
-		        //console.log(this.borCard);
 		      });
 		  },
 	    	handleChange(){
@@ -1912,7 +1902,6 @@
 				}else{
 					this.currentRow = val;
 				};  
-				console.log(val);
 			},
 			carCurrentChange(val){
 				//alert('车车');
@@ -1921,7 +1910,6 @@
 				}else{
 					this.currentRowCar = val;
 				};  
-				console.log(val);
 			},
 			cardCurrentChange(val){
 				//alert('信用卡使用明细');
@@ -1930,7 +1918,6 @@
 				}else{
 					this.currentRowCard = val;
 				};  
-				console.log(val);
 			},
 			loanCurrentChange(val){
 				//alert('贷款明细');
@@ -1939,7 +1926,6 @@
 				}else{
 					this.currentRowLoan = val;
 				};  
-				console.log(val);
 			},
 			incomeCurrentChange(val){
 				//alert('流水明细');
@@ -1948,23 +1934,17 @@
 				}else{
 					this.currentRowIncome = val;
 				};  
-				console.log(val);
 			},
 			delet_home(event){
 				event.stopPropagation();
-				console.log(this.currentRow);
 				for(var i=0;i<this.borestateList.length;i++){
-					console.log(this.currentRow);
 					if(this.borestateList[i]==this.currentRow){
 						this.borestateList.splice(i,1);
-						console.log('jklk');
 					}
-					console.log(888);
 				}
 			},
 			delet_vehicle(event){
 				event.stopPropagation();
-				console.log(this.currentRowCar);
 				for(var i=0;i<this.carInfoList.length;i++){
 					if(this.carInfoList[i]==this.currentRowCar){
 						this.carInfoList.splice(i,1);
@@ -1973,7 +1953,6 @@
 			},
 			delet_card(event){
 				event.stopPropagation();
-				console.log(this.currentRowCard);
 				for(var i=0;i<this.cardDetList.length;i++){
 					if(this.cardDetList[i]==this.currentRowCard){
 						this.cardDetList.splice(i,1);
@@ -1982,7 +1961,6 @@
 			},
 			delet_loanDetail(event){
 				event.stopPropagation();
-				console.log(this.currentRowLoan);
 				for(var i=0;i<this.loanDetailList.length;i++){
 					if(this.loanDetailList[i]==this.currentRowLoan){
 						this.loanDetailList.splice(i,1);
@@ -1992,7 +1970,6 @@
 			/*流水明细*/
 			delet_turnover(event){
 				event.stopPropagation();
-				console.log(this.currentRowIncome);
 				for(var i=0;i<this.incomeList.length;i++){
 					if(this.incomeList[i]==this.currentRowIncome){
 						this.incomeList.splice(i,1);
@@ -2019,57 +1996,44 @@
 				this.v=0;
 				this.w=0;
 				for(var i=0;i<this.loanDetailList.length;i++){
-					console.log(this.loanDetailList[i].loanType);
 					if(this.loanDetailList[i].loanType=='01'){
 						this.k+=1;
-						console.log(this.k);
 					}
 					if(this.loanDetailList[i].loanType=='01' && this.loanDetailList[i].accountStatus=='00'){
 						this.l+=1;
-						console.log(this.l);
 					}
 					if(this.loanDetailList[i].loanType=='01' && this.loanDetailList[i].accountStatus=='02'){
 						this.m+=1;
-						console.log(this.m);
 					}
 					//信用贷
 					if(this.loanDetailList[i].loanType=='03'){
 						this.n+=1;
-						console.log(this.n);
 					}
 					if(this.loanDetailList[i].loanType=='03' && this.loanDetailList[i].accountStatus=='00'){
 						this.o+=1;
-						console.log(this.o);
 					}
 					if(this.loanDetailList[i].loanType=='03' && this.loanDetailList[i].accountStatus=='02'){
 						this.p+=1;
-						console.log(this.p);
 					}
 					//房贷
 					if(this.loanDetailList[i].loanType=='02'){
 						this.q+=1;
-						console.log(this.q);
 					}
 					if(this.loanDetailList[i].loanType=='02' && this.loanDetailList[i].accountStatus=='00'){
 						this.r+=1;
-						console.log(this.r);
 					}
 					if(this.loanDetailList[i].loanType=='02' && this.loanDetailList[i].accountStatus=='02'){
 						this.s+=1;
-						console.log(this.s);
 					}
 					//其他贷
 					if(this.loanDetailList[i].loanType=='04'){
 						this.u+=1;
-						console.log(this.u);
 					}
 					if(this.loanDetailList[i].loanType=='04' && this.loanDetailList[i].accountStatus=='00'){
 						this.v+=1;
-						console.log(this.v);
 					}
 					if(this.loanDetailList[i].loanType=='04' && this.loanDetailList[i].accountStatus=='02'){
 						this.w+=1;
-						console.log(this.w);
 					}
 				};
 				//车贷
@@ -2094,16 +2058,10 @@
 				if(row.incomeType==''){
 					return
 				}else{
-					console.log(row);
-					//console.log(typeof(row.n+row.n1+row.n2+row.n3+row.n4+row.n5));
 					var totalNum=row.n.split(',').join("")*1+row.n1.split(',').join("")*1+row.n2.split(',').join("")*1+row.n3.split(',').join("")*1+row.n4.split(',').join("")*1+row.n5.split(',').join("")*1;
-					console.log(totalNum);
 					row.avgIncome=totalNum/6;
 					row.avgIncome = this.formatNumber(row.avgIncome,2,0);
-					console.log(row.avgIncome);
 				}
-				
-				
 			},
 			//确定按钮
 			sure(){
@@ -2301,22 +2259,17 @@
 			            case 'cardCount':
 			                if(isNaN(num)){
 								this.borCard.cardCount='';
-								//alert(num);
 							}else if(num<=0){
 								this.borCard.cardCount=0
 							}else if(num>0 && num<999){
-								//alert('oo1');
 								this.borCard.cardCount=Math.round(num);
 							}else if(num>=999){
-								//alert('oo');
 								this.borCard.cardCount=999;
-								//console.log(this.borCard.cardCount);
 							};
 			                break;
 			            case 'normalCount':
 			                if(isNaN(num)){
 								this.borCard.normalCount='';
-								//alert(num);
 							}else if(num<=0){
 								this.borCard.normalCount=0
 							}else if(num>0 && num<999){
@@ -2328,7 +2281,6 @@
 			            case 'badDebtCount':
 			                if(isNaN(num)){
 								this.borCard.badDebtCount='';
-								//alert(num);
 							}else if(num<=0){
 								this.borCard.badDebtCount=0
 							}else if(num>0 && num<999){
@@ -2399,8 +2351,6 @@
 			                break;
 			            //征询报告 近6个月内信用卡报告查询次数
 			            case 'crRecordTimes':
-			            //console.log(num);
-			            //console.log(typeof(num));
 			                if(isNaN(num)){
 								this.rptInfo.crRecordTimes='';
 								//alert(num);
@@ -2454,15 +2404,12 @@
 		      		num = num.substring(0,num.length-(4*i+3))+','+ num.substring(num.length-(4*i+3));
 			  
 			  	if (cent > 0){
-			  		//console.log(cent);
-			  		//console.log(((sign)?'':'-') + num + '.' + cents);
 			  		if(sign == true){
 			  			return (((sign)?'':'-') + num + '.' + cents);
 			  		}else if(sign == false){
 			  			return '0.00'
 			  		}
 			  	}else{
-			  		//console.log(((sign)?'':'-') + num);
 			    	return (((sign)?'':'-') + num);
 			    }
 			},
@@ -2548,7 +2495,6 @@
 		        }
 			},
 			totalNum(){
-				//console.log(this.arr);
 				this.borDebt.totalLoan=0;
 	        	for(var i=0;i<this.arr.length;i++){
 		            if(this.arr[i] == null){
@@ -2698,9 +2644,7 @@
 			                break;
 			            case 'unitPrice':
 							value.unitPrice = value.unitPrice.replace(regs,'');
-			            	//console.log(value.unitPrice*1);
 				            if(value.unitPrice*1 > 1000000 || value.unitPrice*1 < 100){
-				            	//alert("uuu");
 									value.priceShow = true;
 									value.unitPrice = '';
 								}else{
@@ -2708,13 +2652,11 @@
 									value.unitPrice =this.formatNumber(value.unitPrice,2,0);
 							};
 							if(value.unitPrice == '0.00'){
-								//value.priceShow = true;
 								value.unitPrice = '';
 							};
 			                break;
 			            case 'monthlyPay':
 			            	value.monthlyPay = value.monthlyPay.replace(regs,'');
-			            	//console.log(value.monthlyPay*1);
 		            		if(value.monthlyPay*1 > 500000 || value.monthlyPay*1 < 500){
 				            	value.monthShow = true;
 				            	value.monthlyPay = '';
@@ -2724,13 +2666,8 @@
 				            };
 				            //贷款期限、贷款余额存在 
 							if(value.monthlyPay && value.loanPeriod && value.restLoans){
-								//alert('kk');
-								//var regs=/\,/g;
 								value.monthlyPay = value.monthlyPay.replace(regs,'');
 								value.restLoans = value.restLoans.replace(regs,'');
-								//console.log(value.monthlyPay+"...."+value.loanPeriod);
-								//console.log((value.monthlyPay*1)+"...."+(value.loanPeriod*1));
-								//console.log((value.monthlyPay*1)*(value.loanPeriod*1));
 								if(value.restLoans*1 > ((value.monthlyPay*1)*(value.loanPeriod*1))){
 									this.hLimit = (value.monthlyPay*1)*(value.loanPeriod*1);
 									value.restShow = true;
@@ -2800,18 +2737,15 @@
 			            //本期应还款金额
 			            case 'actRepaymentAmt':
 			            	value.actRepaymentAmt = value.actRepaymentAmt.replace(regs,'');
-			            	//console.log('kkk');
 			            	if(value.actRepaymentAmt*1 > 99999999999999.98){
 								value.actRepaymentAmt = '99,999,999,999,999.98';
 							}else{
-								//console.log('kkk2');
 								value.actRepaymentAmt =this.formatNumber(value.actRepaymentAmt,2,0);
 							};
 			            	//如果实际还款金额存在
 							if(value.actRepaymentAmt && value.realRepaymentAmt){
 								value.actRepaymentAmt = value.actRepaymentAmt.replace(regs,'');
 								value.realRepaymentAmt = value.realRepaymentAmt.replace(regs,'');
-								//console.log(value.realRepaymentAmt+"*******"+value.actRepaymentAmt);
 								if(value.realRepaymentAmt*1>value.actRepaymentAmt*1){
 									value.realRepaymentAmtShow = true;
 			            			value.realRepaymentAmt = '';
@@ -2912,8 +2846,6 @@
 			                break;
 			            //车辆型号
 			            case 'carModel':
-			            //console.log(value.carModel);
-			            //console.log(typeof(value.carModel));
 			            //^[A-Za-z0-9]+$
 				            /*if(!/^(?=.*[0-9])(?=.*[a-zA-Z])(.{1,40})$/.test(value.carModel) || value.carModel.length > 40){
 								value.carModelShow = true;
@@ -2958,10 +2890,6 @@
 			},
 			//邮政编码验证
 			postcode(row,flage){
-				//console.log(row);
-				//console.log(row.estateZip);
-				//console.log(row.estateAddress.length);
-				//console.log(row.monthlyPay);
 				var regs=/\,/g;
 				switch (flage){
 					case 'estateZip':
@@ -2998,9 +2926,7 @@
 								row.estateShow = true;
 								row.estateAddress = '';
 							}else if(row.estateAddress.length < 100){
-								//alert(row.estateShow);
 								row.estateShow = false;
-								//alert(row.estateShow);
 							}
 						};
 						break;
@@ -3052,7 +2978,6 @@
 						if(row.monthlyPay == ''){
 							row.monthlyPay = '';
 						}else{
-							//console.log(row.monthlyPay.length);
 							//if(row.monthlyPay.length>=4){
 							row.monthlyPay = row.monthlyPay.replace(regs,'');
 							if(row.monthlyPay*1>99999999){
@@ -3063,13 +2988,8 @@
 							//};
 							//贷款期限、贷款余额存在 
 							if(row.monthlyPay && row.loanPeriod && row.restLoans){
-								//alert('kk');
-								//var regs=/\,/g;
 								row.monthlyPay = row.monthlyPay.replace(regs,'');
 								row.restLoans = row.restLoans.replace(regs,'');
-								//console.log(row.monthlyPay+"...."+row.loanPeriod);
-								//console.log((row.monthlyPay*1)+"...."+(row.loanPeriod*1));
-								//console.log((row.monthlyPay*1)*(row.loanPeriod*1));
 								if(row.restLoans*1 > ((row.monthlyPay*1)*(row.loanPeriod*1))){
 									this.limit = (row.monthlyPay*1)*(row.loanPeriod*1);
 									row.restLoansShow = true;
@@ -3093,9 +3013,6 @@
 							if(row.monthlyPay && row.loanPeriod){
 								row.monthlyPay = row.monthlyPay.replace(regs,'');
 								row.restLoans = row.restLoans.replace(regs,'');
-								//console.log(row.monthlyPay+"...."+row.loanPeriod);
-								//console.log((row.monthlyPay*1)+"...."+(row.loanPeriod*1));
-								//console.log((row.monthlyPay*1)*(row.loanPeriod*1));
 								if(row.restLoans*1 < 0 || row.restLoans*1 > ((row.monthlyPay*1)*(row.loanPeriod*1))){
 									this.limit = (row.monthlyPay*1)*(row.loanPeriod*1);
 									row.restLoansShow = true;
@@ -3139,11 +3056,7 @@
 								row.bankNameShow = true;
 								row.bankName = '';
 							}else{
-								//console.log(row.bankNameShow);
 								row.bankNameShow = false;
-								//console.log(row.bankNameShow);
-								//row.bankName = row.bankName;
-								//this.$set(row.bankNameShow,false); 
 							}
 						}
 						break;
@@ -3284,7 +3197,6 @@
 	    	 numbers:{
                 twoWay: true,
                 bind:function (el) {
-                    console.log(el);
                     el.handler = function(){
                     	let value;
                         function formatNumber(num,cent,isThousand) {
@@ -3317,14 +3229,11 @@
                             else
                                 return (((sign)?'':'-') + num);
                             };
-                        console.log(formatNumber(el.value,2,0));
                         (function(){
                             value = formatNumber(el.value,2,0)
-                            console.log(value);
                             return value
                         })()
                         el.value =value
-                         console.log(el.value);
                     };
                     el.addEventListener('blur', el.handler);
                     
@@ -3332,24 +3241,20 @@
                 update:function (el,binding,vnode) {
                     if(el.value !== ''){
                         el.value = el.value.replace(/[^0-9.]+/g, '');
-                        console.log(el.value);
                     }
                 },
             },
 			/*numberOnly: {
 	            bind: function(el) {
-	            	//console.log(el);
 	                el.handler = function() {
 	                	el.value = el.value.replace(/\D+/, '');
 	                	if(!isNaN(el.value)){
 	                		
 	                		el.value=Math.round(parseFloat(el.value)*100)/100;
-	                		console.log(el.value);
 							var xsd=el.value.toString().split(".");
 							
 							if(xsd.length==1){
 								el.value=el.value.toString()+".00";
-								console.log(el.value);
 								//return el.value;
 							}else if(xsd.length>1){
 								if(xsd[1].length<2){
@@ -3358,7 +3263,6 @@
 							//return el.value;
 							} 
 							 //return el.value;
-							console.log(el.value);
 	                	}    
 	                }
 	                el.addEventListener('input', el.handler)
@@ -3371,7 +3275,6 @@
 		},
 		watch:{
 		  	isFull:function(val){
-		  		console.log(this.isFull);
 		  		if(val == false){// 分屏
 		  			//信用卡使用总况
 		  			$(".xinyongka").width('930px');

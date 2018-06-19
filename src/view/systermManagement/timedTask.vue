@@ -167,8 +167,9 @@
           if (res.statusCode == 200) {
             this.$message({
               type: 'success',
-              message: '发送请求成功！'
+              message: res.msg
             })
+             this.inquire(this.params);
           } else {
             this.$message.error(res.msg);
           }

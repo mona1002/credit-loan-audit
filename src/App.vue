@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- <myHead></myHead> -->
-    <router-view class="Abody"></router-view>    
+   <keep-alive> <router-view class="Abody"></router-view>    </keep-alive>
     <!-- ======测试page================ -->
     <!-- {{ $route.meta}}
     <keep-alive>

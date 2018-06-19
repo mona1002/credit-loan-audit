@@ -146,35 +146,24 @@
     },
     props: ['isFull', 'SplitS'],
     mounted() {
-      console.log(this.SplitS);
+this.mountedInf();
+    },
+    methods: {
+      mountedInf(){
       //   // 组件歘估计完成后获取数据
       //   // 此时 data 已经被 observed 了
-
       // 获取到传进来的参数   进件编号
       // this.applySubNo = this.$route.query.applySubNo;
-
       var applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
-
       // 进件编号
       this.applySubNo = applicationInformationDetail.applySubNo;
-      console.log(this.applySubNo);
-
       this.workName = applicationInformationDetail.workName;
-      console.log(this.workName);
-
-      // 测试数据
-      // this.applySubNo = '111';
       // 公司名称
       // this.workName = this.$route.query.workName;
-
-
       // 测试数据
-      // this.workName = '阿里';
       this.fetchData('mobile');
       this.fetchData('fixed');
       this.fetchData('company');
-
-
       // 样式处理
       if (this.isFull == true) { // 全屏
         console.log('全屏');
@@ -189,8 +178,7 @@
         // 按钮
         $(".internalMatch-class .mark-button").css("margin-left", "580px")
       }
-    },
-    methods: {
+      },
       /*
         mobile: 移动电话
         fixed:  固定电话
@@ -233,7 +221,6 @@
           applySubNo: this.applySubNo
           // applySubNo:'2015041301730418582'
         }).then(res => {
-          console.log('移动电话类标签')
           this.mobileTab = res.data;
         })
       },
@@ -256,7 +243,6 @@
           applySubNo: this.applySubNo
           // applySubNo:'2015041301730418582'
         }).then(res => {
-          console.log('固定电话类标签')
           this.fixTelTab = res.data;
         })
       },
@@ -277,9 +263,6 @@
       },
       itemDbclickMobiel(row, event) {
         // 行被双击 事件  移动电话
-        console.log('mobile row dbclick');
-        console.log(row.id);
-        console.log(row);
         this.isInterFlag = true;
         // id: 客户id     orgCate
         // isInterFlag  标志是否是  内部匹配跳转的  查看
@@ -294,8 +277,6 @@
       },
       itemDbclickFixTel(row, event) {
         // 行被双击 事件  固定电话
-        console.log('fix tel row dbclick');
-        console.log(row.id);
         this.isInterFlag = true;
         // localStorage.setItem("internalObj", JSON.stringify(row.id));
         localStorage.setItem("internalObj", JSON.stringify({
@@ -309,9 +290,6 @@
       },
       itemDbclickCompany(row, event) {
         // 行被双击 事件  单位名称
-        console.log('company row dbclick');
-        console.log(row.id);
-
         this.isInterFlag = true;
         // localStorage.setItem("internalObj", JSON.stringify(row.id));
         localStorage.setItem("internalObj", JSON.stringify({
@@ -325,11 +303,6 @@
       },
       // cellHover(row, column, cell, event) {
       //   // cell hover 事件
-      //   console.log(row);
-      //   console.log(column);
-      //   console.log(event);
-      //   console.log(cell.innerText); // 备注
-      //   console.log(column.label);
       //   // this.tableData[]
 
       // },
@@ -337,52 +310,36 @@
       // 移动电话
       handleSizeChangeMobile(val) {
         // 每页 10条
-        console.log("移动电话 每页 ${val}条", val);
         this.MobilePageSize = val;
         this.fetchData('mobile');
       },
       handleCurrentChangeMobile(val) {
         // 第几页
-        console.log("移动电话 当前页: ${val}", val);
         this.MobilePageNum = val;
         this.fetchData('mobile');
       },
       // 固定电话
       handleSizeChangeFixTel(val) {
         // 每页 10条
-        console.log("固定电话 每页 ${val}条", val);
         this.FixTelPageSize = val;
-        console.log(this.FixTelPageNum)
         this.fetchData('fixed');
       },
       handleCurrentChangeFixTel(val) {
         // 第几页
-        console.log("固定电话 当前页: ${val}", val);
         this.FixTelPageNum = val;
         this.fetchData('fixed');
       },
       // 单位电话
       handleSizeChangeCompany(val) {
         // 每页 10条
-        console.log("公司电话 每页 ${val}条", val);
         this.CompanyPageSize = val;
         this.fetchData('company');
       },
       handleCurrentChangeCompany(val) {
         // 第几页
-        console.log("公司电话 当前页: ${val}", val);
         this.CompanyPageNum = val;
         this.fetchData('company');
       },
-      // goPath() {
-      //   // this.$store.dispatch('addVisitedViews', {
-      //   //   name: '匹配信息-查看',
-      //   //   path: '/MatchingInf',
-      //   //   flag: '',
-      //   //   params: '',
-      //   //   StatefullPath: '/MatchingInf',
-      //   // })
-      // }
     },
     watch: {
       isFull() {
@@ -441,6 +398,10 @@
           };
         },
         mounted() {
+         this.mountedf();
+        },
+        methods: {
+          mountedf(){
           // 获取到传进来的  applyId 申请单id
           // this.applyId = this.$route.query.applyId;
           // 获取传进来的 操作人用户编码
@@ -455,20 +416,15 @@
 
           // 获取匹配信息
           this.getOption();
-
-        },
-        methods: {
+          },
           getOption() {
-            console.log('匹配结论', this.applyId);
             // 获取匹配结论
             this.post('internalMatch/getInternalMatchOption', {
               applyId: this.applyId
             }).then(res => {
-              console.log(res);
               res.data != null ? this.audit_desc = res.data.auditDesc : '';
               res.data != null ? this.auditId = res.data.id : '';
             })
-
           },
           hangOoutBtn() {
             this.loadsitu = false;
@@ -507,10 +463,6 @@
             });
           },
           submitForm: function () {
-            // console.log('click button')
-            // console.log('this.applyId:', this.applyId);
-            // console.log('this.creator_code:', this.creator_code);
-            // console.log('this.audit_desc:', this.audit_desc);
             this.open();
           },
           // open 打开 是否确认提交弹窗
@@ -528,7 +480,6 @@
                 if (action === 'confirm') {
                   instance.confirmButtonLoading = true;
                   instance.confirmButtonText = '执行中...';
-                  console.log(this.taskId)
                   // 提交 匹配结论
                   this.post('internalMatch/addInternalMatchOption', {
                     // 申请单id
@@ -539,8 +490,6 @@
                     audit_desc: this.audit_desc,
                     id: this.auditId
                   }).then(res => {
-                    console.log(res);
-                    console.log(res.statusCode);
                     if (res.statusCode == '200') {
 
                       this.resMsg = '保存成功！';
@@ -561,14 +510,12 @@
                 type: 'success',
                 message: this.resMsg
               });
-
             });
           }
         },
         watch: {
           // 匹配结论输入
           audit_desc: function (val) {
-            // console.log(val);
             if (val.length >= 500) {
               this.$message({
                 type: 'warning',
@@ -576,7 +523,6 @@
               });
             }
           }
-
         }
       },
       // 匹配结论查看
@@ -602,6 +548,10 @@
           };
         },
         mounted() {
+            this.mountedC();
+        },
+        methods: {
+          mountedC(){
           // 获取到传进来的  applyId 申请单id
           // this.applyId = this.$route.query.applyId;
           // 获取传进来的 操作人用户编码
@@ -613,25 +563,19 @@
           this.applyId = applicationInformationDetail.applyId;
           var userInfo = JSON.parse(localStorage.getItem('userInf'));
           this.creator_code = userInfo.userCode;
-
           // 获取匹配信息
           this.getOption();
-
-        },
-        methods: {
+          },
           getOption() {
-            console.log('匹配结论', this.applyId);
             // 获取匹配结论
             this.post('internalMatch/getInternalMatchOption', {
               applyId: this.applyId
             }).then(res => {
-              console.log(res);
               res.data != null ? this.audit_desc = res.data.auditDesc : '';
               res.data != null ? this.auditId = res.data.id : '';
             })
 
           },
-
         }
       }
     }

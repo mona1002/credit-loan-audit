@@ -503,93 +503,7 @@ export default {
   },
   props: ['isFull', 'SplitS'],
   mounted() {
-    // 组件 创建 估计完成后获取数据
-    // 此时 data 已经被 observed 了
-    // 测试数据
-    // 调用历史数据
-    this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
-    if (this.judgeFlag == '01') {
-
-      var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-      this.applyId = taskInWaitting.applyId;
-      // 进件编号
-      this.applySubNo = taskInWaitting.applySubNo;
-    }
-    if (this.judgeFlag == '02') {
-      var FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
-      this.applyId = FtaskInWaitting.applyId;
-      // 进件编号
-      this.applySubNo = FtaskInWaitting.applySubNo;
-    }
-    //反欺诈专员
-    if (this.judgeFlag == '03') {
-      var AntitaskInWaitting = JSON.parse(localStorage.getItem('AntitaskInWaitting'));
-      this.applyId = AntitaskInWaitting.applyId;
-      // 进件编号
-      this.applySubNo = AntitaskInWaitting.applySubNo;
-    }
-    //反欺诈主管
-    if (this.judgeFlag == '04') {
-      var AntiManagertaskInWaitting = JSON.parse(localStorage.getItem('AntitaskInWaitting'));
-      this.applyId = AntiManagertaskInWaitting.applyId;
-      // 进件编号
-      this.applySubNo = AntiManagertaskInWaitting.applySubNo;
-    }
-    //复议专员
-    if (this.judgeFlag == '05' ||this.judgeFlag == '06') {
-      var RtaskInWaitting = JSON.parse(localStorage.getItem('RtaskInWaitting'));
-      this.applyId = RtaskInWaitting.applyId;
-      // 进件编号
-      this.applySubNo = RtaskInWaitting.applySubNo;
-    }
-    //质检详情-部分
-      if (this.judgeFlag == '07'||this.judgeFlag == '08'||this.judgeFlag == '09'||this.judgeFlag == '10'||this.judgeFlag == '11'||this.judgeFlag == '12'||this.judgeFlag == '13') {
-      var RtaskInWaitting = JSON.parse(localStorage.getItem('QT'));
-      this.applyId = RtaskInWaitting.matchApplyId;
-      // 进件编号
-      this.applySubNo = RtaskInWaitting.applySubNo;
-    }
-    // //复议经理
-    // if (this.judgeFlag == '06') {
-    //   var RtaskInWaitting = JSON.parse(localStorage.getItem('RManagertaskInWaitting'));
-    //   this.applyId = RtaskInWaitting.applyId;
-    //   // 进件编号
-    //   this.applySubNo = RtaskInWaitting.applySubNo;
-    // }
-
-    // this.phoneNum = '11111';
-    // this.phoneType = '00';
-    // 电话树数据
-    this.fetchData();
-
-    // 取内匹存储的标志
-    var internalObj = JSON.parse(localStorage.getItem('internalObj'))
-
-    // 从导航进入时的 标志
-    // 导航假如是初审进入 那就是编辑状态 important
-    var navJudge = JSON.parse(localStorage.getItem('navJudge'));
-
-    // 假如 内匹标志和  导航进入标志都存在 , 导航标志优先
-    if (internalObj && navJudge) {
-      if(navJudge.flag == 'nav_first'){
-        this.isInterFlag = false;
-      }else{
-        this.isInterFlag = internalObj.isInterFlag;
-      }
-
-    }
-
-    // 页面挂载 判断 电话树添加按钮 显示/隐藏
-    // 只处理隐藏的情况
-    // 内匹查看的时候   左分屏
-    if ((this.isInterFlag && this.isInterFlag == true) || this.SplitS == 'left') {
-      this.addBtnShow = false;
-
-    }
-    // 复议不显示添加  05 专员   06 主管 03反欺诈专员 04反欺诈主管
-    if (this.judgeFlag == '05' || this.judgeFlag == '06' || this.judgeFlag == '03' || this.judgeFlag == '04'||this.judgeFlag == '07'||this.judgeFlag == '08'||this.judgeFlag == '09'||this.judgeFlag == '10'||this.judgeFlag == '11'||this.judgeFlag == '12'||this.judgeFlag == '13') {
-      this.addBtnShow = false;
-    }
+    this.mountedInf();
   },
   watch: {
     // 监听属性  电话类型
@@ -727,6 +641,86 @@ export default {
     }
   },
   methods: {
+    mountedInf(){
+    // 组件 创建 估计完成后获取数据
+    // 此时 data 已经被 observed 了
+    // 测试数据
+    // 调用历史数据
+    this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
+    if (this.judgeFlag == '01') {
+      var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+      this.applyId = taskInWaitting.applyId;
+      // 进件编号
+      this.applySubNo = taskInWaitting.applySubNo;
+    }
+    if (this.judgeFlag == '02') {
+      var FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
+      this.applyId = FtaskInWaitting.applyId;
+      // 进件编号
+      this.applySubNo = FtaskInWaitting.applySubNo;
+    }
+    //反欺诈专员
+    if (this.judgeFlag == '03') {
+      var AntitaskInWaitting = JSON.parse(localStorage.getItem('AntitaskInWaitting'));
+      this.applyId = AntitaskInWaitting.applyId;
+      // 进件编号
+      this.applySubNo = AntitaskInWaitting.applySubNo;
+    }
+    //反欺诈主管
+    if (this.judgeFlag == '04') {
+      var AntiManagertaskInWaitting = JSON.parse(localStorage.getItem('AntitaskInWaitting'));
+      this.applyId = AntiManagertaskInWaitting.applyId;
+      // 进件编号
+      this.applySubNo = AntiManagertaskInWaitting.applySubNo;
+    }
+    //复议专员
+    if (this.judgeFlag == '05' ||this.judgeFlag == '06') {
+      var RtaskInWaitting = JSON.parse(localStorage.getItem('RtaskInWaitting'));
+      this.applyId = RtaskInWaitting.applyId;
+      // 进件编号
+      this.applySubNo = RtaskInWaitting.applySubNo;
+    }
+    //质检详情-部分
+      if (this.judgeFlag == '07'||this.judgeFlag == '08'||this.judgeFlag == '09'||this.judgeFlag == '10'||this.judgeFlag == '11'||this.judgeFlag == '12'||this.judgeFlag == '13') {
+      var RtaskInWaitting = JSON.parse(localStorage.getItem('QT'));
+      this.applyId = RtaskInWaitting.matchApplyId;
+      // 进件编号
+      this.applySubNo = RtaskInWaitting.applySubNo;
+    }
+    // //复议经理
+    // if (this.judgeFlag == '06') {
+    //   var RtaskInWaitting = JSON.parse(localStorage.getItem('RManagertaskInWaitting'));
+    //   this.applyId = RtaskInWaitting.applyId;
+    //   // 进件编号
+    //   this.applySubNo = RtaskInWaitting.applySubNo;
+    // }
+    // 电话树数据
+    this.fetchData();
+    // 取内匹存储的标志
+    var internalObj = JSON.parse(localStorage.getItem('internalObj'))
+    // 从导航进入时的 标志
+    // 导航假如是初审进入 那就是编辑状态 important
+    var navJudge = JSON.parse(localStorage.getItem('navJudge'));
+    // 假如 内匹标志和  导航进入标志都存在 , 导航标志优先
+    if (internalObj && navJudge) {
+      if(navJudge.flag == 'nav_first'){
+        this.isInterFlag = false;
+      }else{
+        this.isInterFlag = internalObj.isInterFlag;
+      }
+
+    }
+    // 页面挂载 判断 电话树添加按钮 显示/隐藏
+    // 只处理隐藏的情况
+    // 内匹查看的时候   左分屏
+    if ((this.isInterFlag && this.isInterFlag == true) || this.SplitS == 'left') {
+      this.addBtnShow = false;
+    }
+    // 复议不显示添加  05 专员   06 主管 03反欺诈专员 04反欺诈主管
+    if (this.judgeFlag == '05' || this.judgeFlag == '06' || this.judgeFlag == '03' || this.judgeFlag == '04'||this.judgeFlag == '07'||this.judgeFlag == '08'||this.judgeFlag == '09'||this.judgeFlag == '10'||this.judgeFlag == '11'||this.judgeFlag == '12'||this.judgeFlag == '13') {
+      this.addBtnShow = false;
+    }
+    },
     fetchData() {
       this.post("/creTelInfo/queryTels", {
         applyId: this.applyId

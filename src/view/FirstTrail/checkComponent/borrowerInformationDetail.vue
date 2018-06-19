@@ -611,17 +611,21 @@
 	    props:['isFull'],
 	    judgeFlag:'',
 	    mounted(){
-			//一进入页面就发送请求
+					this.mountedInf();
+		},
+	    methods:{
+	    	handleChange(){
+
+				},
+				mountedInf(){
+		//一进入页面就发送请求
 			this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
 		    if (this.judgeFlag.flag == '01') {
 		        this.taskInWaitting = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
 		    } else if (this.judgeFlag.flag == '02') {
 		        this.taskInWaitting = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
 		    }
-
-			//this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
 			this.request(this.taskInWaitting.applyId);
-
 	  		if(this.isFull == false){// 分屏
 	  			//信用卡使用总况
 	  			$(".xinyongka").width('930px');
@@ -651,11 +655,7 @@
 	  			$(".qita").width('100%');
 	  			$(".qita ol li").css({"padding-left":'calc( 16.6% - 174px )',"padding-right":'calc( 49.9% - 174px )'});
 	  		}
-		},
-	    methods:{
-	    	handleChange(){
-
-	    	},
+				},
 	    	request(param){
 	    		this.post("/borrower/getBorrowerInfo", {
 		        'applyId':param

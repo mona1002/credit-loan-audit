@@ -1458,6 +1458,32 @@
       }
     },
     methods: {
+      mountedInf(){
+      this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
+      this.mountC();
+      // // 省    
+      // this.post("/credit/queryProvince").then(res => {
+      //   this.hirecomAddress = res.data;
+      // });
+      // // 所属行业 
+      // this.post("/credit/industry").then(res => {
+      //   this.hirecomKind = res.data;
+      // })
+      this.Pwidth = document.getElementsByClassName("el-input")
+      this.Txawidth = document.getElementsByClassName("el-textarea")
+      this.CFwidth = document.getElementsByClassName("CreditForm")
+      this.inputWidth = document.getElementsByClassName("specialInput")
+      this.comaddressb = document.getElementsByClassName("comaddressb")
+      this.Alertbtn = document.getElementsByClassName("btn")
+      if (this.myWatch) {
+        this.ElInputStyle(this.myWatch)
+      } else {
+        for (var i = 0; i < this.Pwidth.length; i++) {
+          this.Pwidth[i].style.width = 150 + "px";
+          this.comaddressb[0].style.paddingLeft = 674 + "px";
+        }
+      }
+      },
       wordInput20(val, el) {
         if (val.length >= 20) {
           this.wordInput20SC(val, el);
@@ -2396,8 +2422,9 @@
       }
     },
     mounted() {
-      this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
-      this.mountC();
+      this.mountedInf();
+      // this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
+      // this.mountC();
       // 省    
       this.post("/credit/queryProvince").then(res => {
         this.hirecomAddress = res.data;
@@ -2406,20 +2433,20 @@
       this.post("/credit/industry").then(res => {
         this.hirecomKind = res.data;
       })
-      this.Pwidth = document.getElementsByClassName("el-input")
-      this.Txawidth = document.getElementsByClassName("el-textarea")
-      this.CFwidth = document.getElementsByClassName("CreditForm")
-      this.inputWidth = document.getElementsByClassName("specialInput")
-      this.comaddressb = document.getElementsByClassName("comaddressb")
-      this.Alertbtn = document.getElementsByClassName("btn")
-      if (this.myWatch) {
-        this.ElInputStyle(this.myWatch)
-      } else {
-        for (var i = 0; i < this.Pwidth.length; i++) {
-          this.Pwidth[i].style.width = 150 + "px";
-          this.comaddressb[0].style.paddingLeft = 674 + "px";
-        }
-      }
+      // this.Pwidth = document.getElementsByClassName("el-input")
+      // this.Txawidth = document.getElementsByClassName("el-textarea")
+      // this.CFwidth = document.getElementsByClassName("CreditForm")
+      // this.inputWidth = document.getElementsByClassName("specialInput")
+      // this.comaddressb = document.getElementsByClassName("comaddressb")
+      // this.Alertbtn = document.getElementsByClassName("btn")
+      // if (this.myWatch) {
+      //   this.ElInputStyle(this.myWatch)
+      // } else {
+      //   for (var i = 0; i < this.Pwidth.length; i++) {
+      //     this.Pwidth[i].style.width = 150 + "px";
+      //     this.comaddressb[0].style.paddingLeft = 674 + "px";
+      //   }
+      // }
     },
     props: ["myWatch"],
     watch: {

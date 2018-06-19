@@ -36,15 +36,15 @@
             </p>
             <div class="Left_right_BigImg">
               <!--  :AUobj='AULobj'   :AUpreWidth.sync='preWidth' -->
-              <AudioVisualLeft msg="spLone" ref="AULeft" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></AudioVisualLeft>
-              <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
-              <InternalMatch v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
-              <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
-              <cborrowerInformationDetail v-if=" this.tabContent1==4" :isFull.sync="isFull"></cborrowerInformationDetail>
-              <PhoneCredit v-if=" this.tabContent1==5" :SplitS="SplitLeft" :isFull.sync="isFull"></PhoneCredit>
-              <cCreditForm v-if=" this.tabContent1==6"></cCreditForm>
-              <creditInvestigation v-if=" this.tabContent1==7"></creditInvestigation>
-              <processTrajectory v-if=" this.tabContent1==8"></processTrajectory>
+              <AudioVisualLeft ref="AudioLeft" msg="spLone" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></AudioVisualLeft>
+              <cremarkDetail ref="markLeft" v-if=" this.tabContent1==1"></cremarkDetail>
+              <InternalMatch ref="InterLeft" v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
+              <capplicationInformationDetail ref="applicationLeft" v-if=" this.tabContent1==3"></capplicationInformationDetail>
+              <cborrowerInformationDetail ref="borrowLeft" v-if=" this.tabContent1==4" :isFull.sync="isFull"></cborrowerInformationDetail>
+              <PhoneCredit ref="phoneLeft" v-if=" this.tabContent1==5" :SplitS="SplitLeft" :isFull.sync="isFull"></PhoneCredit>
+              <cCreditForm ref="CreditFormLeft" v-if=" this.tabContent1==6"></cCreditForm>
+              <creditInvestigation ref="InvestigationLeft" v-if=" this.tabContent1==7"></creditInvestigation>
+              <processTrajectory ref="processLeft" v-if=" this.tabContent1==8"></processTrajectory>
             </div>
           </div>
         </div>
@@ -73,16 +73,16 @@
           </div>
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
-            <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :AURpreWidth.sync='RpreWidth'></AudioVisual>
+            <AudioVisual ref="Audio" :applyID='tastwaitingPass.applyId' v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :AURpreWidth.sync='RpreWidth'></AudioVisual>
             <remark v-if=" this.tabContent2==1"></remark>
             <InternalMatch v-if=" this.tabContent2==2" :SplitS="SplitRight" :isFull.sync="isFull"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
-            <borrowerInformation v-if=" this.tabContent2==4" :isFull.sync="isFull"></borrowerInformation>
-            <PhoneCredit v-if=" this.tabContent2==5" :SplitS="SplitRight" :isFull.sync="isFull"></PhoneCredit>
-            <CreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></CreditForm>
-            <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
-            <aAntiApplyInf v-if=" this.tabContent2==8"></aAntiApplyInf>
-            <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>
+            <borrowerInformation ref="borrow" v-if=" this.tabContent2==4" :isFull.sync="isFull"></borrowerInformation>
+            <PhoneCredit ref="phone" v-if=" this.tabContent2==5" :SplitS="SplitRight" :isFull.sync="isFull"></PhoneCredit>
+            <CreditForm ref="CreditForm" :myWatch="watchData" v-if=" this.tabContent2==6"></CreditForm>
+            <creditInvestigation ref="Investigation" v-if=" this.tabContent2==7"></creditInvestigation>
+            <aAntiApplyInf ref="AntiApply" v-if=" this.tabContent2==8"></aAntiApplyInf>
+            <CreditApproval ref="Approval" v-if=" this.tabContent2==9"></CreditApproval>
           </div>
         </div>
       </div>
@@ -94,7 +94,7 @@
           <p>影像资料</p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <AudioVisualLeft msg="spLtwo" v-if="CompareAlert" :comBtn.sync='alertComBtn'></AudioVisualLeft>
+            <AudioVisualLeft ref="AudioLeftCom" msg="spLtwo" v-if="CompareAlert" :comBtn.sync='alertComBtn'></AudioVisualLeft>
           </div>
         </div>
         <!-- 弹出层右侧 div -->
@@ -147,7 +147,7 @@
         originLeft: '',
         customInf: [], //申请信息页local字段
         tastwaitingPass: [], //详情列表页信息--(含)取applyId
-        accepCusBasicInfo:'',
+        accepCusBasicInfo: '',
         showHalfBtn: false,
         CompareAlert: false,
         title: "",
@@ -178,34 +178,48 @@
         comBtn: true,
         alertComBtn: false,
         midShow: true,
-        // preWidth: null,
         RpreWidth: null,
-        // AULobj: {
-        //   BTN: '#MID',
-        //   WRAP: '#AUL',
-        //   CLIENTX: 'AUclickX',
-        //   OFFSET: 'AUleftOffset',
-        //   VA: 'bbr',
-        //   NUM: 10
-        // },
         destroyInf: ''
-
       }
     },
-    //     beforeDestroy: function () {
-    //   console.group('beforeDestroy 销毁前状态===============》');
-    //   console.log("%c%s", "color:red", "el     : " + this.$el);
-    //   console.log(this.$el);
-    //   console.log("%c%s", "color:red", "data   : " + this.$data);
-    //   console.log("%c%s", "color:red", "message: " + this.message);
-    // },
-    // destroyed: function () {
-    //   console.group('destroyed 销毁完成状态===============》');
-    //   console.log("%c%s", "color:red", "el     : " + this.$el);
-    //   console.log(this.$el);
-    //   console.log("%c%s", "color:red", "data   : " + this.$data);
-    //   console.log("%c%s", "color:red", "message: " + this.message)
-    // },
+    watch: {
+      '$route' (to, from) {
+        if (to.path === '/SplitScreen' && this.$route.params.newOne) {
+          this.mountedInf();
+          // 信审审批要取申请信息值
+          this.title = "影像资料";
+          this.tab1Index = this.tabContent1 = this.tabActiveInd1 = 0;
+          this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 3;
+          this.flag1 = [true, true, true, false, true, true, true, true, true];
+          this.flag2 = [true, true, true, true, true, true, true, true, true, true];
+          this.$refs.AudioLeft ? this.$refs.AudioLeft.mountedInf() : '';
+          this.$refs.AudioLeftCom ? this.$refs.AudioLeftCom.mountedInf() : '';
+          this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
+          this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
+          // if (this.tabActiveInd1 === 0) {
+          //   this.$refs.AudioLeft.mountedInf();
+          //   this.$refs.AudioLeftCom ? this.$refs.AudioLeftCom.mountedInf() : '';
+          //   this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
+          // }
+          //         this.tabActiveInd1 === 1 ? this.$refs.markLeft.mountedInf() : '';
+          //          this.tabActiveInd1 === 2 ? this.$refs.InterLeft.mountedInf() : '';
+          //          this.tabActiveInd1 === 3 ? this.$refs.applicationLeft.mountedInf() : '';
+          //          this.tabActiveInd1 === 4 ? this.$refs.borrowLeft.mountedInf() : '';
+          //          this.tabActiveInd1 === 5 ? this.$refs.phoneLeft.mountedInf() : '';
+          //          this.tabActiveInd1 === 6 ? this.$refs.CreditFormLeft.mountedInf() : '';
+          //          this.tabActiveInd1 === 7 ? this.$refs.InvestigationLeft.mountedInf() : '';
+          //          this.tabActiveInd1 === 8 ? this.$refs.processLeft.mountedInf() : '';
+          //         this.tabActiveInd2 === 0 ? this.$refs.Audio.mountedInf() : '';
+          // this.tabActiveInd2 === 3 ? this.$refs.applicationInf.mountedInf() : '';
+          //          this.tabActiveInd2 === 4 ? this.$refs.borrow.mountedInf() : '';
+          // this.tabActiveInd2 === 5 ? this.$refs.phone.mountedInf() : '';
+          // this.tabActiveInd2 === 6 ? this.$refs.CreditForm.mountedInf() : '';
+          // this.tabActiveInd2 === 7 ? this.$refs.Investigation.mountedInf() : '';
+          // this.tabActiveInd2 === 8 ? this.$refs.AntiApply.mountedInf() : '';
+          // this.tabActiveInd2 === 9 ? this.$refs.Approval.mountedInf() : '';
+        }
+      }
+    },
     methods: {
       compareProps() {
         this.$refs.audioChild.personalNunPerson()
@@ -291,44 +305,6 @@
           this.flag1[ind] = false;
         }
       },
-      // MyMove() {
-      //   var clickX, leftOffset, inx, nextW2, nextW;
-      //   var dragging = false;
-      //   var doc = document;
-      //   var labBtn = $("#RM");
-      //   var wrapWidth = $("#rWrap").width();
-      //   var Pre=this.$refs.rLeft;
-      //   var Nex=this.$refs.rRight;
-      //   labBtn.bind('mousedown', function () {
-      //     dragging = true;
-      //     leftOffset = $("#rWrap").offset().left;
-      //   });
-      //   doc.onmousemove = function (e) {
-      //     if (dragging) {
-      //       clickX = e.pageX;
-      //         if (clickX > leftOffset+10) {
-      //           labBtn.eq(0).css('left', clickX - leftOffset+2 + 'px'); //按钮移动
-      //           labBtn.eq(0).prev().width(clickX - leftOffset + 'px'); //前一个div宽度变化
-      //           nextW2 = clickX - leftOffset;
-      //           labBtn.eq(0).next().width(wrapWidth - nextW2-6 + 'px');//减多少宽地待算
-      //         } else {
-      //           labBtn.eq(0).css('left', '0px');
-      //            labBtn.eq(0).prev().width('0px');
-      //            labBtn.eq(0).next().width(wrapWidth-6 + 'px');//减多少宽地待算
-      //         }
-      //         // console.log(clickX+"========="+wrapWidth)
-      //         if (clickX > (wrapWidth)) {
-      //           labBtn.eq(0).css('left', parseFloat(wrapWidth) - 11 + 'px');
-      //           labBtn.eq(0).prev().width(wrapWidth-13 + 'px');
-      //           labBtn.eq(0).next().width('0px');
-      //         }
-      //     }
-      //   };
-      //   $(doc).mouseup(function (e) {
-      //     dragging = false;
-      //     e.cancelBubble = true;
-      //   })
-      // },
       MyMove() {
         var clickX, leftOffset, nextW2;
         var dragging = false;
@@ -366,35 +342,11 @@
           dragging = false;
           e.cancelBubble = true;
         });
-        // doc.onmousemove = function (e) {
-        //   if (dragging) {
-        //     clickX = e.pageX;
-        //     if (clickX > leftOffset + 10) {
-        //       labBtn.eq(0).css('left', clickX - leftOffset + 2 + 'px'); //按钮移动
-        //       labBtn.eq(0).prev().width(clickX - leftOffset + 'px'); //前一个div宽度变化
-        //       nextW2 = clickX - leftOffset;
-        //       labBtn.eq(0).next().width(wrapWidth - nextW2 - 6 + 'px'); //减多少宽地待算
-        //     } else {
-        //       labBtn.eq(0).css('left', '0px');
-        //       labBtn.eq(0).prev().width('0px');
-        //       labBtn.eq(0).next().width(wrapWidth - 6 + 'px'); //减多少宽地待算
-        //     }
-        //     // console.log(clickX+"========="+wrapWidth)
-        //     if (clickX > (wrapWidth)) {
-        //       labBtn.eq(0).css('left', parseFloat(wrapWidth) - 11 + 'px');
-        //       labBtn.eq(0).prev().width(wrapWidth - 13 + 'px');
-        //       labBtn.eq(0).next().width('0px');
-        //     }
-        //   }
-        // };
-        // $(doc).mouseup(function (e) {
-        //   dragging = false;
-        //   e.cancelBubble = true;
-        // });
       },
       mountedInf() {
-        this.title = "影像资料";
+        // this.title = "影像资料";
         this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
+        this.$message.error(this.tastwaitingPass.applyId)
         this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
           id: this.tastwaitingPass.applyId,
         }).then(res => {
@@ -408,44 +360,44 @@
         });
       }
     },
-    activated() {
-      console.log(this.$route.meta.refresh)
-      console.log('activated')
-      if (this.$route.meta.refresh) {
-        this.mountedInf();
-        this.tab1Index = this.tabActiveInd1 = this.tabContent1 = 0;
-        this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 3;
-        this.flag1 = [true, true, true, false, true, true, true, true, true];
-        this.flag2 = [true, true, true, true, true, true, true, true, true, true];
-      }
-      //  // 恢复成默认的false，避免isBack一直是true，导致下次无法获取数据
-      //  this.$route.meta.isBack=false
-      //  // 恢复成默认的false，避免isBack一直是true，导致每次都获取新数据
-      //  this.isFirstEnter=false;
-    },
-// deactivated(){
-// console.log('deactivated')
-// console.log( this.tabContent2)
-//   //  if( this.tabContent2==3){
-//   // //     // this.destroyInf=
-//   //     this.tabContent2=0;
-//   //   }
-//     // else{
-//     //   this.destroyInf=this.tabContent2;
-//     // }
-// },
-// beforeRouteLeave(to,from,next){
-// console.log( this.tabContent2)
-  
-//   //  this.tabContent2==3? this.tabContent2=0:this.tabContent2;
-// console.log(to)
-// console.log(from)
-// // from.meta.refresh=false;
-// next();
-// },
+    // activated() {
+    //   console.log(this.$route.meta.refresh)
+    //   console.log('activated')
+    //   if (this.$route.meta.refresh) {
+    //     this.mountedInf();
+    //     this.tab1Index = this.tabActiveInd1 = this.tabContent1 = 0;
+    //     this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 3;
+    //     this.flag1 = [true, true, true, false, true, true, true, true, true];
+    //     this.flag2 = [true, true, true, true, true, true, true, true, true, true];
+    //   }
+    //   //  // 恢复成默认的false，避免isBack一直是true，导致下次无法获取数据
+    //   //  this.$route.meta.isBack=false
+    //   //  // 恢复成默认的false，避免isBack一直是true，导致每次都获取新数据
+    //   //  this.isFirstEnter=false;
+    // },
+    // deactivated(){
+    // console.log('deactivated')
+    // console.log( this.tabContent2)
+    //   //  if( this.tabContent2==3){
+    //   // //     // this.destroyInf=
+    //   //     this.tabContent2=0;
+    //   //   }
+    //     // else{
+    //     //   this.destroyInf=this.tabContent2;
+    //     // }
+    // },
+    // beforeRouteLeave(to,from,next){
+    // console.log( this.tabContent2)
 
+    //   //  this.tabContent2==3? this.tabContent2=0:this.tabContent2;
+    // console.log(to)
+    // console.log(from)
+    // // from.meta.refresh=false;
+    // next();
+    // },
     mounted() {
-      console.log('mounted')
+      console.log('挂载')
+      this.title = "影像资料";
       this.MyMove();
       this.mountedInf();
     },

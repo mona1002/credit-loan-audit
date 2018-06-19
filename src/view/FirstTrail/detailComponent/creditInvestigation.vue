@@ -224,6 +224,10 @@
 	      };
 	    },
 	    mounted(){
+				this.mountedInf();
+		},
+	    methods:{
+				mountedInf(){
 			//一进入页面就发送请求
 			this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
 		    if (this.judgeFlag.flag == '01') {
@@ -247,11 +251,8 @@
 		    }else if (this.judgeFlag.flag == '08') {
 		        this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //审批历史任务
 		    }
-
-			//this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
 			this.request(this.taskInWaitting.applyId);
-		},
-	    methods:{
+				},
 	    	handleChange(){
 
 	    	},

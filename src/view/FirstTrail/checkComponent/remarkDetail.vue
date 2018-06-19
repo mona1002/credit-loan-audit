@@ -46,13 +46,16 @@
 		data(){
 			return{
 				tableData:'',
-				//data:[],
 				datas:[],
 				taskInWaitting:'',
 				judgeFlag:'',
 			}
 		},
 		mounted(){
+			this.mountedInf();
+		},
+		methods:{
+			mountedInf(){
 			//一进入页面就发送请求
 			this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
 		    if (this.judgeFlag.flag == '01') {
@@ -71,20 +74,13 @@
 			// else if (this.judgeFlag.flag == '06') {
 		    //     this.taskInWaitting = JSON.parse(localStorage.getItem("RManagertaskInWaitting")) //复议经理
 		    // }
-			//this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
 			this.request(this.taskInWaitting.applyId);
-		},
-		methods:{
+			},
 	    	request(param){
 	    		this.post("/applyRemark/getApplyRemarkList", {
 		        'applyId':param
 		      }).then(res => {
-		        /*console.log(res);*/
 		        this.datas=res.data;
-		        // this.datas.forEach(function(item){
-		        // 	// item.remarkTime = new Date(item.remarkTime).toLocaleString().replace(/\//g, "-").replace(/上午|中午|下午/g, "");
-		        // 	console.log(item.remarkTime);
-		        // });
 		      });
 		  },
 	    }

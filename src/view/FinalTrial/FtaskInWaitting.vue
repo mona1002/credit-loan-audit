@@ -191,10 +191,15 @@
       //跳转到详情页
       goDetail(row, event, column) {
         console.log(row);
-        // this.$router.push({path:'/SplitScreen',query:row});
-        this.$router.push({
-          path: '/FSplitScreen'
-        });
+        // this.$router.push({
+        //   path: '/FSplitScreen'
+        // });
+        	this.$router.push({
+            name: 'FSplitScreen',
+            params: {
+              newOne: true,
+            }
+          });
         localStorage.setItem("FtaskInWaitting", JSON.stringify(row));
         // this.$store.dispatch('addVisitedViews', {
         //   name: '终审详情',

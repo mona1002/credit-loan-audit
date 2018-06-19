@@ -201,19 +201,8 @@
     },
     watch: {
       $route(to, from) {
-        // console.log(this.fggggg)
-        // if (this.fggggg == 'Noreload') {
-        //   console.log('不刷新')
-        //   to.meta.keepAlive = true;
-        //   from.meta.keepAlive = false;
-        // } else {
-        //   console.log('刷新')
-        //   // to.meta.keepAlive=false;
-        //   from.meta.keepAlive = false;
-        // }
         this.addViewTags()
         this.moveToCurrentTag()
-        // this.fggggg = 'reload';
       },
     },
     mounted() {
@@ -222,7 +211,6 @@
     methods: {
       addViewTags() {
         const route = this.$route;
-        // console.log(route.fullPath)
         route.fullPath.indexOf('?') != -1 ? this.taskNodeName = route.fullPath.split('?')[1].split('&')[0].split('=')[1] :
           this.taskNodeName;
         this.nodeFlag = this.nodeMatchFlag = this.routeParams = '';
@@ -477,12 +465,6 @@
         }
       },
       changeFlag(tg) {
-        // this.$route.meta.keepAlive=true
-        // this.fggggg = 'Noreload';
-        // console.log(this.$route)
-        // this.$route.meta.refresh = false;
-        // console.log(this.$router)
-        // console.log(this.router)         
         localStorage.setItem("MatchFlag", JSON.stringify(this.MatchFlag));
         if (tg.flag != '' || tg.flag != undefined || tg.flag != 'undefined') {
           this.judge.flag = tg.flag;

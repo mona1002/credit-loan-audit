@@ -137,13 +137,20 @@
 		        // timeColor:false,
 			}
 		},
+		    watch: {
+      '$route' (to, from) {
+        if (to.path === '/taskInWaitting') {
+          this.mountedInf();
+        }
+      }
+    },
 		components: {
 	      myHead
 			},
-			beforeRouteLeave(to, from, next) {
-				to.meta.refresh=true;
-				next();
-			},
+			// beforeRouteLeave(to, from, next) {
+			// 	to.meta.refresh=true;
+			// 	next();
+			// },
 		// 	      beforeRouteEnter(to, from, next) {
 		// 		console.log('addddddzdzdzd')
 		// 		console.log(222222,from)
@@ -157,55 +164,31 @@
     //       //判断是从哪个路由过来的，
     //       //如果是page2过来的，表明当前页面不需要刷新获取新数据，直接用之前缓存的数据即可
     //   }
-  
     //   next();
     // },
 		mounted(){
-			//一进入页面就发送请求			
-			//this.queryParam = JSON.parse(localStorage.getItem('workbenchPass'));
-			// console.log(JSON.parse(localStorage.getItem('workbenchPass')))
+			this.mountedInf();
+		},
+		methods:{
+			mountedInf(){
+							//一进入页面就发送请求			
 			this.queryParam.processTemplateId=JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
 			this.queryParam.taskNodeName=JSON.parse(localStorage.getItem('workbenchPass')).taskNodeName;
 			this.queryParam.taskStatus=JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
-			//this.queryParam.userCode=JSON.parse(localStorage.getItem('userInf')).userCode;
-			//this.queryParam.orgCode=JSON.parse(localStorage.getItem('userInf')).orgCode;
 			// 登录 单独存  userCode  orgCode 
 			 this.queryParam.userCode=JSON.parse(localStorage.getItem('userInf')).userCode;
 				 this.queryParam.orgCode=JSON.parse(localStorage.getItem('userInf')).orgCode;
-			// console.log(this.processTemplateId+'...'+this.taskNodeName+'...'+this.taskStatus+'...'+this.userCode+'...'+this.orgCode);
 			this.request(this.queryParam);	
 			localStorage.removeItem("house");
 			localStorage.removeItem("car");
-		},
-// 		activated() {
-// 					console.log(this.datas)	
-// 			console.log(this.$data)
-//  if(this.$route.meta.keepAlive!='' || this.isFirstEnter){
-// 	 console.log('缓存数据')
-//          // 如果isBack是false，表明需要获取新数据，否则就不再请求，直接使用缓存的数据
-//          // 如果isFirstEnter是true，表明是第一次进入此页面或用户刷新了页面，需获取新数据
-//         //  this.str=''// 把数据清空，可以稍微避免让用户看到之前缓存的数据
-// 				//  this.getData();
-// 				//  this.$data=this.str;
-//      }
-//      // 恢复成默认的false，避免isBack一直是true，导致下次无法获取数据
-//      this.$route.meta.keepAlive==''
-//      // 恢复成默认的false，避免isBack一直是true，导致每次都获取新数据
-//      this.isFirstEnter=false;
-//    },
-		methods:{
-// 		{getData(){
-// this.str=this.$data;
-// 		},
+			},
 		    request(param){
-		    	// console.log(this.queryParam);
 		    	this.post('/workFlowTaskQuery/getTaskToDoList',
 		    		param
 	          ).then(res => {
 	            if(res.statusCode==200 &&　res.data.taskDetailList!=null){
 	            	this.totals=res.data;
 	            	this.datas=res.data.taskDetailList;
-	            	console.log(this.datas.length)
 	            	for(var i=0;i<this.datas.length;i++){
 	            		if(this.datas[i].taskType=='00'){//00
 		            		this.datas[i].taskType="新任务";
@@ -232,7 +215,6 @@
 	            }else{
 	            	this.datas=[];
 	            }
-	           
 	          })
 		    },
 		    /*重置*/
@@ -251,25 +233,19 @@
 			    this.queryParam.custName_la = this.custName_la;
 			    this.queryParam.certCode = this.certCode;
 			    this.request(this.queryParam);
-			    console.log(this.queryParam);
 		    },
 		    //跳转到详情页
 			goDetail(row, event, column) {
-				// console.log(row);
-				//  this.$route.meta.keepAlive=false;
-					// this.$router.push({path:'/SplitScreen',query:row});
-					this.$router.push({path:'/SplitScreen'});
+					// this.$router.push({path:'/SplitScreen'});
+					 this.$router.push({
+            name: 'SplitScreen',
+            params: {
+              newOne: true,
+            }
+          });
 					localStorage.setItem("taskInWaitting",JSON.stringify(row));
-				// 	this.$store.dispatch('addVisitedViews', {
-        //   name: '初审详情',
-        //   path: '/SplitScreen',
-        //   flag: '01',
-        //   params: '',
-        //   StatefullPath: '/SplitScreen'
-        // })
 		    },
 		    handleSizeChange(val) {
-		      console.log('每页 ${val} 条');
 		      this.queryParam.pageSize = val;
 		      this.queryParam.pageNum = 1;
 		      if (this.currentPage !== 1 || this.setPageSize !== 10) {
@@ -280,7 +256,6 @@
 		      };
 		    },
 		    handleCurrentChange(val) {
-		      console.log('当前页: ${val}');
 		      this.queryParam.pageNum = val;
       		  this.request(this.queryParam);
 		    },

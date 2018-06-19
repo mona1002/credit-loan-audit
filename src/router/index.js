@@ -96,7 +96,7 @@ component:timedTask
   // 分屏
   {
     path: '/SplitScreen',
-    // component: SplitScreen,
+    name: 'SplitScreen',
     component(resolve) {
       require(['../view/FirstTrail/SplitScreen.vue'], resolve)
     },
@@ -115,6 +115,7 @@ component:timedTask
   // ----------------终审----------------
   {
     path: '/FSplitScreen',
+    name:'FSplitScreen',
     component: FSplitScreen,
   },
   {

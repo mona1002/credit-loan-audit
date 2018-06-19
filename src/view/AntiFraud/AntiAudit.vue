@@ -112,6 +112,12 @@
         AlertSearch: "",
       }
     },
+        watch: {
+          '$route' (to, from) {
+        if (to.path === '/AntiAudit' && this.$route.params.newOne) {
+
+        }}
+      },
     methods: {
       compBtnS() {
         this.CompareAlert = true;
@@ -141,32 +147,10 @@
         this.$refs.Left_title.style.left = "-200px";
         this.flexible = true;
       },
-      //   tab1(ev, ind, val) { 
-      //     this.title = val;
-      //     this.tabContent1 = ind;
-      //     this.tab1Index = ind; 
-      //     this.tabActiveInd1 = ind; 
-      //     for (var i = 0; i < this.$refs.tabTwo.length; i++) {
-      //       this.$refs.tabTwo[i].className = "tab2Default"; 
-      //       this.flag2[i] = true;
-      //     }
-      //     this.$refs.tabTwo[this.tabActiveInd2].className = "tab2Act"; 
-      //     if (ind != 0 && ind != 8) { 
-      //       this.flag2[ind] = false;
-      //     }
-      //   },
       tab(ev, ind, val) {
         this.tabContent2 = ind;
         this.tab2Index = ind;
         this.tabActiveInd2 = ind;
-        // for (var i = 0; i < this.$refs.tabOne.length; i++) {
-        //   this.$refs.tabOne[i].className = "tab1Default";
-        //   //   this.flag1[i] = true;
-        // }
-        // this.$refs.tabOne[this.tabActiveInd1].className = "tab1Act";
-        // if (ind != 0 && ind != 8) {
-        //   this.flag1[ind] = false;
-        // }
       }
     },
     mounted() {

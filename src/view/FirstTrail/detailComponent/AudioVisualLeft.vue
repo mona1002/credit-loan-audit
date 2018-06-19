@@ -182,6 +182,36 @@
     },
     props: ['msg', 'comBtn'],
     methods: {
+      mountedInf(){
+      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      if (this.judgeFlag.flag == '01') {
+        this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
+      } else if (this.judgeFlag.flag == '02') {
+        this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
+      } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
+        this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员\主管
+      }
+      // else if (this.judgeFlag.flag == '04') {
+      //   this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
+      // }
+      this.imgBaseUrl = imgUrl.imgBaseUrl;
+      // 父菜单
+      this.post("/productArchive/getProductArchiveParentList", {
+        applyId: this.localInf.applyId,
+      }).then(res => {
+        if (res.statusCode == 200) {
+          this.ListParent = res.data;
+          if (this.ListParent) {
+            for (var i = 0; i < this.ListParent.length; i++) {
+              this.opendImg[i] = true;
+              this.closedImg[i] = false;
+            }
+          }
+        } else {
+          this.$message.error(res.msg);
+        }
+      });
+      },
       closeAlertSearch() {
         this.dataa = false;
       },
@@ -490,35 +520,8 @@
       },
     },
     mounted() {
-      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '01') {
-        this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
-      } else if (this.judgeFlag.flag == '02') {
-        this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-      } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
-        this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员\主管
-      }
-      // else if (this.judgeFlag.flag == '04') {
-      //   this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
-      // }
-      this.imgBaseUrl = imgUrl.imgBaseUrl;
-      // 父菜单
-      this.post("/productArchive/getProductArchiveParentList", {
-        applyId: this.localInf.applyId,
-      }).then(res => {
-        if (res.statusCode == 200) {
-          this.ListParent = res.data;
-          if (this.ListParent) {
-            for (var i = 0; i < this.ListParent.length; i++) {
-              this.opendImg[i] = true;
-              this.closedImg[i] = false;
-            }
-          }
-        } else {
-          this.$message.error(res.msg);
-        }
-      });
       this.odivMove(this.msg); //移动
+      this.mountedInf();
     },
     components: {
       pdfDivLeft

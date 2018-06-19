@@ -36,21 +36,14 @@
             </p>
             <div class="Left_right_BigImg ">
               <AudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0" msg="FspLone" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></AudioVisualLeft>
-              <!-- √ -->
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
-              <!-- √ -->
               <InternalMatch v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
               <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
-              <!-- √ -->
               <cborrowerInformationDetail v-if=" this.tabContent1==4"></cborrowerInformationDetail>
-              <!-- √ -->
               <PhoneCredit v-if=" this.tabContent1==5" :SplitS="SplitLeft" :isFull.sync="isFull"></PhoneCredit>
               <FcCreditForm v-if=" this.tabContent1==6"></FcCreditForm>
-              <!-- √ -->
               <creditInvestigation v-if=" this.tabContent1==7"></creditInvestigation>
-              <!-- √ -->
               <processTrajectory v-if=" this.tabContent1==8"></processTrajectory>
-              <!-- √ -->
             </div>
           </div>
         </div>
@@ -80,21 +73,14 @@
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
             <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
-            <!-- √ -->
             <remark v-if=" this.tabContent2==1"></remark>
-            <!-- √ -->
             <InternalMatch v-if=" this.tabContent2==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
-            <!-- √ -->
             <cborrowerInformationDetail v-if=" this.tabContent2==4" :isFull.sync="isFull"></cborrowerInformationDetail>
-            <!-- √ -->
             <PhoneCredit v-if=" this.tabContent2==5" :SplitS="SplitLeft" :isFull.sync="isFull"></PhoneCredit>
             <FCreditForm v-if=" this.tabContent2==6"></FCreditForm>
-            <!-- √ -->
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
-            <!-- √ -->
             <aAntiApplyInf v-if=" this.tabContent2==8"></aAntiApplyInf>
-            <!-- √ -->
             <!-- 信审审批 空白 -->
             <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>
           </div>
@@ -194,6 +180,12 @@
         midShow: true,
       }
     },
+      watch: {
+          '$route' (to, from) {
+        if (to.path === '/FSplitScreen' && this.$route.params.newOne) {
+
+        }}
+      },
     methods: {
       compareProps() {
         this.$refs.audioChild.personalNunPerson()

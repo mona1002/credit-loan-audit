@@ -90,6 +90,13 @@
 			}
 		},
 		mounted(){
+this.mountedInf();
+		},
+		methods:{
+			handleChange(){
+
+			},
+			mountedInf(){
 			this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
 		    if (this.judgeFlag.flag == '01') {
 		        this.applyId = JSON.parse(localStorage.getItem("taskInWaitting")).applyId; // 初审
@@ -100,28 +107,26 @@
 		    } else if (this.judgeFlag.flag == '08') {
 		        this.applyId = JSON.parse(localStorage.getItem("TtaskInWaitting")).applyId //终审
 		    }
-
-			//this.applyId=JSON.parse(localStorage.getItem('taskInWaitting')).applyId;
 			this.request()
-		},
-		methods:{
-			handleChange(){
-
 			},
 			request(){
 				// this.get('/creauditInfo/getProcessTraceList', {
 			  //       applyId: this.applyId
 			  //     }).then(res => {
-			  //       console.log(res);
 			  //       if (res.statusCode == '200') {
 			  //         this.taskDetailList = res.data;
 			  //       }
 			  //     })
- this.get("/creauditInfo/getProcessTraceListByApplyId", {
+ 						this.get("/creauditInfo/getProcessTraceListByApplyId", {
           applyId: this.applyId,
         }).then(res => {
-          console.log(res);
-          this.taskDetailList = res.data.taskDetailList;
+					 if (res.statusCode == '200') {
+  					 this.taskDetailList = res.data.taskDetailList;
+					 }else{
+						 this.taskDetailList=[];
+						   this.$message.error(res.msg);
+					 }
+       
         })
 			},
 			handleCurrentChange(){

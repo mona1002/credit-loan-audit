@@ -116,10 +116,44 @@
         pngAyyr: [],
         myPng: false,
         myPdf: false,
-        style: ''
+        style: '',
+        
       }
     },
     methods: {
+      mountedInf(){
+      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      if (this.judgeFlag.flag == '01') {
+        this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
+      } else if (this.judgeFlag.flag == '02') {
+        this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
+      } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
+        this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
+      }
+      this.imgBaseUrl = imgUrl.imgBaseUrl;
+      // 父菜单
+      this.post("/productArchive/getProductArchiveParentList", {
+        applyId: this.localInf.applyId,
+      //  applyId:this. applyID
+      }).then(res => {
+        if (res.statusCode == 200) {
+          this.ListParent = res.data;
+          if (this.ListParent) {
+            var MDate = null;
+            for (var i = 0; i < this.ListParent.length; i++) {
+              var MDate = new Date(this.ListParent[i].uploadDate);
+              this.ListParent[i].uploadDate = this.comput(MDate)
+            }
+            for (var i = 0; i < this.ListParent.length; i++) {
+              this.opendImg[i] = true;
+              this.closedImg[i] = false;
+            }
+          }
+        } else {
+          this.$message.error(res.msg);
+        }
+      });
+      },
       PerBtn() {
         this.perfBtn = true;
       },
@@ -142,6 +176,7 @@
         console.log("获取子节点");
         this.post("/productArchive/getProductArchiveChildList", {
           applyId: this.localInf.applyId,
+          // applyId:this. applyID,
           pid: id
         }).then(res => {
           if (res.statusCode == 200) {
@@ -172,7 +207,6 @@
           this.myPng = true;
           this.myPdf = false;
           this.pngAyyr = this.imgPath;
-          console.log(this.pngAyyr.length);
         };
         this.$refs.img_wrap.style.left = 0;
         this.$refs.img_wrap.style.top = 0;
@@ -370,36 +404,7 @@
     props: ['AURpreWidth', 'applyID'],
     mounted() {
       this.odivMove("FirstAud");
-      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '01') {
-        this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
-      } else if (this.judgeFlag.flag == '02') {
-        this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-      } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
-        this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
-      }
-      this.imgBaseUrl = imgUrl.imgBaseUrl;
-      // 父菜单
-      this.post("/productArchive/getProductArchiveParentList", {
-        applyId: this.localInf.applyId,
-      }).then(res => {
-        if (res.statusCode == 200) {
-          this.ListParent = res.data;
-          if (this.ListParent) {
-            var MDate = null;
-            for (var i = 0; i < this.ListParent.length; i++) {
-              var MDate = new Date(this.ListParent[i].uploadDate);
-              this.ListParent[i].uploadDate = this.comput(MDate)
-            }
-            for (var i = 0; i < this.ListParent.length; i++) {
-              this.opendImg[i] = true;
-              this.closedImg[i] = false;
-            }
-          }
-        } else {
-          this.$message.error(res.msg);
-        }
-      });
+      this.mountedInf();
     },
     components: {
       pdfDiv
