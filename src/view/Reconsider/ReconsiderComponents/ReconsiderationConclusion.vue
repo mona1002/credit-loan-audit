@@ -515,9 +515,7 @@
       this.orgId = JSON.parse(localStorage.getItem('userInf')).orgId;
 
       this.applyId = this.applicationInformationDetail.applyId;
-      //console.log(this.applyId);
       this.appOrgId = this.applicationInformationDetail.appOrgId;
-      //console.log(this.appOrgId);
       // 客户编号
       this.custNo = this.applicationInformationDetail.custNo;
       //产品id
@@ -580,15 +578,12 @@
           num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
 
         if (cent > 0) {
-          //console.log(cent);
-          //console.log(((sign)?'':'-') + num + '.' + cents);
           if (sign == true) {
             return (((sign) ? '' : '-') + num + '.' + cents);
           } else if (sign == false) {
             return '0.00'
           }
         } else {
-          //console.log(((sign)?'':'-') + num);
           return (((sign) ? '' : '-') + num);
         }
       },
@@ -600,10 +595,8 @@
             this.huituiFont = '提交';
             this.dialogVisible = true;
             this.get('system/getSystemDate?' + Math.random()).then(res => {
-              console.log('回退', res)
               // 请求系统时间
               this.dealroperDate = res.data;
-              console.log('this.', this.dealroperDate);
             })
             break;
           case 'refuse':
@@ -611,13 +604,10 @@
             this.jujueFont = '提交';
             this.jdialogVisible = true;
             this.get('system/getSystemDate?' + Math.random()).then(res => {
-              console.log('拒绝', res)
               // 请求系统时间
               this.jdealroperDate = res.data;
-              console.log('this.', this.jdealroperDate);
             });
             this.get('/credit/firstNodeReason?reasonType=03' + '&' + Math.random()).then(res => {
-              console.log(res);
               if (res.statusCode == '200') {
                 this.rmainResions = res.data;
               }
@@ -636,13 +626,10 @@
           proId: this.sproId,
           appOrgId: this.appOrgId
         }).then(res => {
-          console.log(res);
           if (res.statusCode == '200') {
             this.quotaData = res.data;
             // 单独处理 评分   =>  "评分:51.6"
-            //console.log(res.data.creditScore);
             this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
-            //console.log(this.creditScore);
             //this.sdialogVisible = true;
           } else if (res.statusCode == '700') {
             this.$message({
@@ -1183,7 +1170,6 @@
       },
       //社保/公积金
       Social() {
-        console.log(this.datas);
         this.post(baseurl.BaseUrl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {
           certCode: this.datas.certCode,
           custName: this.datas.custName
@@ -1228,7 +1214,6 @@
         //console.log(this.verIncome+'###'+this.proId.length+'###'+this.ploanTerm+"###"+this.ploanAmt);
         // 计算 审批记录数据
         if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0) {
-          console.log(1111);
           this.calculateByAuditInfo();
         }
 
