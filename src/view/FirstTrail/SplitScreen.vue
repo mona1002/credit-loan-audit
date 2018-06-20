@@ -345,7 +345,6 @@
       },
       mountedInf() {
         this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
-        this.$message.error(this.tastwaitingPass.applyId)
         this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
           id: this.tastwaitingPass.applyId,
         }).then(res => {

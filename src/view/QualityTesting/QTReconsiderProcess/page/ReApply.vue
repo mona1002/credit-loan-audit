@@ -89,7 +89,7 @@
       </el-collapse>
       <div class="ReApply_btn" v-if="ManagerBtn">
         <el-button type="primary" @click="sumt">提交</el-button>
-        <el-button @click="$router.push('/SelfTaskList?taskNodeName=checkApp_trial_self&flag=09')">取消</el-button>
+        <el-button @click="calc">取消</el-button>
         <!-- <el-button @click="cancle">取消</el-button> -->
       </div>
       <!-- 弹窗 -->
@@ -229,12 +229,29 @@
               message: '发起复议成功',
               type: 'success'
             });
+            this.del();
           } else {
             this.$message.error(res.msg);
           }
         });
         this.Confirm = false;
       },
+      calc() {
+        this.$router.push('/SelfTaskList?taskNodeName=checkApp_trial_self&flag=09');
+        this.del();
+      },
+      del() {
+        this.$store.dispatch('delVisitedViews', {
+          name: '复议申请'
+        }).then((views) => {
+          const latestView = views.slice(-1)[0]
+          if (latestView) {
+            this.$router.push(latestView.StatefullPath);
+          } else {
+            this.$router.push('/')
+          }
+        })
+      }
     },
     mounted() {
       this.mountedInf();
