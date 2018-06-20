@@ -720,7 +720,6 @@
             message: '挂起成功'
           });
           this.$router.push('/AntiFraud34');
-          // this.goToPath()
         });
       },
       // 请求系统时间
@@ -965,7 +964,6 @@
               message: '反欺诈审批成功!'
             });
             this.$router.push('/AntiFraud34');
-            //  this.goToPath();
           });
         } else {
           // 专员的 提交  
@@ -1036,7 +1034,6 @@
               message: '反欺诈审批成功!'
             });
             this.$router.push('/AntiFraud34');
-            // this.goToPath();
           });
         }
 
@@ -1244,7 +1241,7 @@
             })
 
             this.$router.push('/AntiFraud34');
-            // this.goToPath();
+            this.del();
           }
         });
       },
@@ -1431,16 +1428,6 @@
           }
         })
       },
-      // goToPath() {
-      //   this.$router.push('/AntiFraud34' +  this.routeParams);
-      //   this.$store.dispatch('addVisitedViews', {
-      //     name: this.nodeName,
-      //     path: '/AntiFraud34',
-      //     flag: this.judgeFlag,
-      //     params: this.routeParams,
-      //     StatefullPath: '/AntiFraud34' +  this.routeParams,
-      //   })
-      // },
       mainReasonChange(val) {
         //   // 主原因改变 请求子原因
         //   this.getReason('second',val,false)
@@ -1585,6 +1572,16 @@
             break;
         }
       }, 
+      del(){
+           this.$store.dispatch('delVisitedViews', {name:'反欺诈详情'}).then((views) => {
+            const latestView = views.slice(-1)[0]
+            if (latestView) {
+              this.$router.push(latestView.StatefullPath);
+            } else {
+              this.$router.push('/')
+            }
+        })
+      }
     },
     watch: {
       // 审核结论 改变请求主原因

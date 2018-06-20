@@ -400,7 +400,7 @@
     </div>
     <!-- 社保公积金 -->
     <div class="bigDataLog">
-      <el-dialog title="提示" top='35vh'  :visible.sync="socialLogVisible" :modal="false" width="420px">
+      <el-dialog title="提示" top='35vh' :visible.sync="socialLogVisible" :modal="false" width="420px">
         <span>客户社保公积金未授权！</span>
         <span slot="footer" class="dialog-footer">
           <el-button type="primary" @click="socialSure">确定</el-button>
@@ -546,16 +546,16 @@
           }
         })
       },
-      GoPath(){
-        this.$router.push( '/reconsiderList?taskNodeName=reconsiderApp_commissioner');
-        //  this.$store.dispatch('addVisitedViews', {
-        //   name: '复议专员审批',
-        //   path: '/reconsiderList',
-        //   flag: '05',
-        //   params: '?taskNodeName=reconsiderApp_commissioner',    
-        //   StatefullPath: '/reconsiderList?taskNodeName=reconsiderApp_commissioner'
-        // })
-      },
+      // GoPath(){
+      //   this.$router.push( '/reconsiderList?taskNodeName=reconsiderApp_commissioner');
+      //   //  this.$store.dispatch('addVisitedViews', {
+      //   //   name: '复议专员审批',
+      //   //   path: '/reconsiderList',
+      //   //   flag: '05',
+      //   //   params: '?taskNodeName=reconsiderApp_commissioner',    
+      //   //   StatefullPath: '/reconsiderList?taskNodeName=reconsiderApp_commissioner'
+      //   // })
+      // },
       //保留两位小数 整数千分位
       formatNumber(num, cent, isThousand) {
         num = num.toString().replace(/\$|\,/g, '');
@@ -599,7 +599,7 @@
             this.huituiLoading = false;
             this.huituiFont = '提交';
             this.dialogVisible = true;
-            this.get('system/getSystemDate?'+Math.random()).then(res => {
+            this.get('system/getSystemDate?' + Math.random()).then(res => {
               console.log('回退', res)
               // 请求系统时间
               this.dealroperDate = res.data;
@@ -610,13 +610,13 @@
             this.jujueLoading = false;
             this.jujueFont = '提交';
             this.jdialogVisible = true;
-            this.get('system/getSystemDate?'+Math.random()).then(res => {
+            this.get('system/getSystemDate?' + Math.random()).then(res => {
               console.log('拒绝', res)
               // 请求系统时间
               this.jdealroperDate = res.data;
               console.log('this.', this.jdealroperDate);
             });
-            this.get('/credit/firstNodeReason?reasonType=03'+'&'+Math.random()).then(res => {
+            this.get('/credit/firstNodeReason?reasonType=03' + '&' + Math.random()).then(res => {
               console.log(res);
               if (res.statusCode == '200') {
                 this.rmainResions = res.data;
@@ -773,7 +773,8 @@
               type: 'success'
             })
             // this.$router.push('/reconsiderList');
-            this.GoPath();
+            this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_commissioner');
+            this.del();
           };
         })
 
@@ -980,7 +981,8 @@
             })
 
             // this.$router.push('/reconsiderList');
-            this.GoPath();
+            this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_commissioner');
+            this.del();
           }
         });
       },
@@ -1054,13 +1056,14 @@
             })
 
             // this.$router.push('/reconsiderList');
-            this.GoPath();
+            this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_commissioner');
+            this.del();
           }
         });
       },
       //回退节点
       backNode() {
-        this.get('/credit/firstNodeReason?reasonType=01'+'&'+Math.random()).then(res => {
+        this.get('/credit/firstNodeReason?reasonType=01' + '&' + Math.random()).then(res => {
           console.log(res);
           if (res.statusCode == '200') {
             this.mainResions = res.data;
@@ -1073,7 +1076,7 @@
         //"mainrefuse":拒绝
         if (flag == 'mainback') {
           console.log('回退555' + $event);
-          this.get('/credit/findNodeFirstChildren?id=' + $event+'&'+Math.random()).then(res => {
+          this.get('/credit/findNodeFirstChildren?id=' + $event + '&' + Math.random()).then(res => {
             console.log('回退' + res);
             if (res.statusCode == '200') {
               this.childReasons = res.data;
@@ -1081,7 +1084,7 @@
           })
         } else if (flag == 'mainrefuse') {
           console.log('拒绝' + $event);
-          this.get('/credit/findNodeFirstChildren?id=' + $event+'&'+Math.random()).then(res => {
+          this.get('/credit/findNodeFirstChildren?id=' + $event + '&' + Math.random()).then(res => {
             console.log(res);
             if (res.statusCode == '200') {
               this.rchildReasons = res.data;
@@ -1115,15 +1118,17 @@
       },
       //反欺诈申请
       AntiFraudApplication() {
-          this.$router.push({name: 'AntiApplyEditf'});
-          this.params={
-              id: this.applyId,
-              flag: 'fuyi',
-              busiState:'20',
-              channel:'04'
-            }
-          localStorage.setItem("AntiApplyParams",JSON.stringify(this.params));
-        
+        this.$router.push({
+          name: 'AntiApplyEditf'
+        });
+        this.params = {
+          id: this.applyId,
+          flag: 'fuyi',
+          busiState: '20',
+          channel: '04'
+        }
+        localStorage.setItem("AntiApplyParams", JSON.stringify(this.params));
+
       },
       // 审批结论轨迹
       getSpjlList() {
@@ -1147,7 +1152,7 @@
       // 流程轨迹
       getLcgjList() {
         this.lcdialogVisible = true;
-        this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processInstanceId+'&'+Math.random())
+        this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processInstanceId + '&' + Math.random())
           .then(res => {
             console.log(res);
             if (res.statusCode == '200') {
@@ -1169,13 +1174,6 @@
             this.$router.push({
               path: '/PneCtrl'
             });
-            //  this.$store.dispatch('addVisitedViews', {
-            //       name: '大数据风控',
-            //       path: '/PneCtrl',
-            //       flag: '05',
-            //       params: '',
-            //       StatefullPath: '/PneCtrl',
-            //     })
           }
         });
       },
@@ -1204,19 +1202,24 @@
           this.$router.push({
             path: '/SocialSe'
           });
-            // this.$store.dispatch('addVisitedViews', {
-            //     name: '社保公积金',
-            //     path: '/SocialSe',
-            //     flag: '05',
-            //     params: '',
-            //     StatefullPath: '/SocialSe',
-            //   })
         }
       },
       //社保公积金 弹窗关闭
       socialSure() {
         this.socialLogVisible = false;
       },
+      del() {
+        this.$store.dispatch('delVisitedViews', {
+          name: '复议详情'
+        }).then((views) => {
+          const latestView = views.slice(-1)[0]
+          if (latestView) {
+            this.$router.push(latestView.StatefullPath);
+          } else {
+            this.$router.push('/')
+          }
+        })
+      }
     },
     watch: {
       //审批 计算 审批倍数 等

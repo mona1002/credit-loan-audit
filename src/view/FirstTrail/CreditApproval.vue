@@ -842,6 +842,7 @@
             else if (this.judgeFlag == '02') {
               this.$router.push('/FtaskInWaitting' + this.routeParams);
             }
+            this.del();
           } else {
             if (res.statusCode == 500) {
               this.hangOut = false;
@@ -1548,6 +1549,7 @@
                     this.$router.push('/taskInWaitting');
             if (this.judgeFlag == '02')
               this.$router.push('/FtaskInWaitting' + this.routeParams);
+              this.del();
           } else {
             this.$message({
               message: res.msg ? res.msg : '网络异常,请重试',
@@ -1679,6 +1681,7 @@
             } else if (this.judgeFlag == '02') { // 终审
               this.$router.push('/FtaskInWaitting' + this.routeParams);
             }
+            this.del();
           }
         })
       },
@@ -2072,6 +2075,16 @@
       socialSure() {
         this.socialLogVisible = false;
       },
+      del(){
+           this.$store.dispatch('delVisitedViews', {name:'初审详情'}).then((views) => {
+            const latestView = views.slice(-1)[0]
+            if (latestView) {
+              this.$router.push(latestView.StatefullPath);
+            } else {
+              this.$router.push('/')
+            }
+        })
+      }
     },
     // 监听器
     watch: {
