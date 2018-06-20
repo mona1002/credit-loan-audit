@@ -167,7 +167,8 @@
               </el-table-column>
               <el-table-column prop="certCode" label="证件号码" width="170">
               </el-table-column>
-              <el-table-column prop="operOrgName" label="进件机构名称" width="130"><!-- appOrgName -->
+              <el-table-column prop="operOrgName" label="进件机构名称" width="130">
+                <!-- appOrgName -->
               </el-table-column>
               <el-table-column prop="proName" label="产品名称" width="100">
               </el-table-column>
@@ -251,12 +252,12 @@
         rowObj: '', // 点击的列表数据
         subCertCode: '', // 弹窗的证件号码
         processInstanceId: '',
-        busiState:'',//业务状态
-        applySubNos:'',//弹框的案件编号
-        flowRoleCodesList:[],//用来判断channel的值
+        busiState: '', //业务状态
+        applySubNos: '', //弹框的案件编号
+        flowRoleCodesList: [], //用来判断channel的值
       }
     },
-     watch: {
+    watch: {
       '$route' (to, from) {
         if (to.path === '/AntiApplyAdd' && this.$route.params.newOne) {
           this.mountedInf();
@@ -267,76 +268,77 @@
       this.mountedInf();
     },
     methods: {
-      mountedInf(){
-      // 经办人 登录用户名
-      var userInfo = JSON.parse(localStorage.getItem('userInf'));
-      this.userCode = userInfo.userCode;
-      this.orgCode = userInfo.orgCode;
-      this.flowRoleCodesList = userInfo.flowRoleCodesList;
-      if(this.flowRoleCodesList){
-        for(var i=0;i<this.flowRoleCodesList.length;i++){
-            if(this.flowRoleCodesList[i] == 'BL12' || this.flowRoleCodesList[i] == 'BL108' || this.flowRoleCodesList[i] == 'BL07'){
+      mountedInf() {
+        // 经办人 登录用户名
+        var userInfo = JSON.parse(localStorage.getItem('userInf'));
+        this.userCode = userInfo.userCode;
+        this.orgCode = userInfo.orgCode;
+        this.flowRoleCodesList = userInfo.flowRoleCodesList;
+        if (this.flowRoleCodesList) {
+          for (var i = 0; i < this.flowRoleCodesList.length; i++) {
+            if (this.flowRoleCodesList[i] == 'BL12' || this.flowRoleCodesList[i] == 'BL108' || this.flowRoleCodesList[i] ==
+              'BL07') {
               this.channel = '07';
-            }else{
+            } else {
               this.channel = '99';
             }
+          }
         }
-      }
-      
-      // 先判断是 初审 终审  /  专员  主管
-      // var judgeFlag = JSON.parse(localStorage.getItem('judge'));
-      // this.antiFlag = judgeFlag.flag;
 
-      // 初审 终审 取 applyId   
-      // if (this.antiFlag == '01') {
-      //   // taskInWaitting
-      //   this.creditappTaskid = JSON.parse(localStorage.getItem('taskInWaitting')).taskId;
-      //   this.taskNodeName = JSON.parse(localStorage.getItem('taskInWaitting')).taskNodeName;
-      //   this.taskStatus = JSON.parse(localStorage.getItem('taskInWaitting')).taskStatus;
-      //   this.processTemplateId = JSON.parse(localStorage.getItem('taskInWaitting')).processTemplateId;
-      // }
-      // if (this.antiFlag == '02') {
-      //   // FtaskInWaitting
-      //   this.creditappTaskid = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskId;
-      //   this.taskNodeName = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskNodeName;
-      //   this.taskStatus = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskStatus;
-      //   this.processTemplateId = JSON.parse(localStorage.getItem('FtaskInWaitting')).processTemplateId;
-      // }
-      // if (this.antiFlag == '03') {
-      //   this.creditappTaskid = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
-      //   this.processTemplateId = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).processTemplateId;
+        // 先判断是 初审 终审  /  专员  主管
+        // var judgeFlag = JSON.parse(localStorage.getItem('judge'));
+        // this.antiFlag = judgeFlag.flag;
 
-      //   this.taskNodeName = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskNodeName;
-      //   this.taskStatus = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskStatus;
-      // }
-      // if (this.antiFlag == '04') {
-      //   this.creditappTaskid = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
-      //   this.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
+        // 初审 终审 取 applyId   
+        // if (this.antiFlag == '01') {
+        //   // taskInWaitting
+        //   this.creditappTaskid = JSON.parse(localStorage.getItem('taskInWaitting')).taskId;
+        //   this.taskNodeName = JSON.parse(localStorage.getItem('taskInWaitting')).taskNodeName;
+        //   this.taskStatus = JSON.parse(localStorage.getItem('taskInWaitting')).taskStatus;
+        //   this.processTemplateId = JSON.parse(localStorage.getItem('taskInWaitting')).processTemplateId;
+        // }
+        // if (this.antiFlag == '02') {
+        //   // FtaskInWaitting
+        //   this.creditappTaskid = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskId;
+        //   this.taskNodeName = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskNodeName;
+        //   this.taskStatus = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskStatus;
+        //   this.processTemplateId = JSON.parse(localStorage.getItem('FtaskInWaitting')).processTemplateId;
+        // }
+        // if (this.antiFlag == '03') {
+        //   this.creditappTaskid = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
+        //   this.processTemplateId = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).processTemplateId;
 
-      //   this.taskNodeName = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskNodeName;
-      //   this.taskStatus = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskStatus;
-      // }
+        //   this.taskNodeName = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskNodeName;
+        //   this.taskStatus = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskStatus;
+        // }
+        // if (this.antiFlag == '04') {
+        //   this.creditappTaskid = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
+        //   this.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
 
-      // this.request();
+        //   this.taskNodeName = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskNodeName;
+        //   this.taskStatus = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskStatus;
+        // }
 
-      // this.queryList();
+        // this.request();
 
-      // 获取到 id  反欺诈申请列表
-      // this.id = this.$route.params.id;
+        // this.queryList();
 
-      // 请求系统时间
-      this.getSystemDate();
+        // 获取到 id  反欺诈申请列表
+        // this.id = this.$route.params.id;
 
-      // 请求主原因
-      this.firstNodeReason();
+        // 请求系统时间
+        this.getSystemDate();
 
-      // 查询反欺诈信息
-      // this.getFraudApplyInfo();
+        // 请求主原因
+        this.firstNodeReason();
+
+        // 查询反欺诈信息
+        // this.getFraudApplyInfo();
       },
       // 请求系统时间
       getSystemDate() {
         // 获取系统时间
-        this.get('system/getSystemDate?'+Math.random()).then(res => {
+        this.get('system/getSystemDate?' + Math.random()).then(res => {
           //console.log('回退', res)
           // 请求系统时间
           this.dealroperDate = res.data;
@@ -346,7 +348,7 @@
       },
       // 反欺诈申请 获取 主原因子原因
       firstNodeReason() {
-        this.get('/credit/firstNodeReason?reasonType=' + '08,09'+'&'+Math.random()).then(res => {
+        this.get('/credit/firstNodeReason?reasonType=' + '08,09' + '&' + Math.random()).then(res => {
           console.log(res);
           this.mainReasons = res.data;
         })
@@ -491,25 +493,25 @@
                     certCode: this.certCode, // 证件号码
                     proName: this.proName, // 产品名称
                     processInstanceId: this.processInstanceId*/
-                    fraudApplyInfo: {
-                      applyCustId: this.applyCustId, // 客户id
-                      applyCustName: this.applyCustName, // 客户姓名
-                      applyCustNo: this.applyCustNo, // 客户编号
-                      applyDesc: this.applyDesc, // 反欺诈申请描述applyId: this.applyId, // 申请单ID
-                      applyPersonName: this.applyPersonName, // 申请人姓名
-                      applySubno: this.applySubNo, // 进件编号
-                      channel: this.channel, // 渠道
-                      certCode: this.certCode, // 证件号码
-                      mainreasonId: this.mainId, // 欺诈主原因id
-                      mainreaName: this.mainReason, // 欺诈主原因名称
-                      proId: this.proId, // 产品id
-                      proCode: this.proCode, // 产品code
-                      proName: this.proName, // 产品名称
-                      subreaName: this.secondReason, // 欺诈子原因名称
-                      subreasonId: this.secondId, // 欺诈子原因id
-                      busiState:this.busiState,
-                      applyId : this.applyId
-                    }
+                  fraudApplyInfo: {
+                    applyCustId: this.applyCustId, // 客户id
+                    applyCustName: this.applyCustName, // 客户姓名
+                    applyCustNo: this.applyCustNo, // 客户编号
+                    applyDesc: this.applyDesc, // 反欺诈申请描述applyId: this.applyId, // 申请单ID
+                    applyPersonName: this.applyPersonName, // 申请人姓名
+                    applySubno: this.applySubNo, // 进件编号
+                    channel: this.channel, // 渠道
+                    certCode: this.certCode, // 证件号码
+                    mainreasonId: this.mainId, // 欺诈主原因id
+                    mainreaName: this.mainReason, // 欺诈主原因名称
+                    proId: this.proId, // 产品id
+                    proCode: this.proCode, // 产品code
+                    proName: this.proName, // 产品名称
+                    subreaName: this.secondReason, // 欺诈子原因名称
+                    subreasonId: this.secondId, // 欺诈子原因id
+                    busiState: this.busiState,
+                    applyId: this.applyId
+                  }
                 })
                 .then(res => {
                   if (res.statusCode == '200') {
@@ -521,14 +523,16 @@
                     //   this.$router.push('/FtaskInWaitting');
                     // } else if (this.antiFlag == '03' || this.antiFlag == '04') {
                     this.$router.push('/AntiFraud');
-                    // -----------------------待判断flag并更改----待检查测试-------------
-                    // this.$store.dispatch('addVisitedViews', {
-                    //   name: '反欺诈申请',
-                    //   path: '/AntiFraud',
-                    //   flag: '',
-                    //   params: '',
-                    //   StatefullPath: '/AntiFraud'
-                    // })
+                    this.$store.dispatch('delVisitedViews', {
+                      name: '反欺诈申请-添加'
+                    }).then((views) => {
+                      const latestView = views.slice(-1)[0]
+                      if (latestView) {
+                        this.$router.push(latestView.StatefullPath);
+                      } else {
+                        this.$router.push('/')
+                      }
+                    })
                   } else {
                     if (res.msg) {
                       this.$message({
@@ -548,7 +552,7 @@
             } else {
               // done();
             }
-              done();            
+            done();
           }
         }).then(action => {
           this.$message({
@@ -561,6 +565,16 @@
       // 返回  上级路由
       backRoute() {
         window.history.go(-1);
+        this.$store.dispatch('delVisitedViews', {
+          name: '反欺诈申请-添加'
+        }).then((views) => {
+          const latestView = views.slice(-1)[0]
+          if (latestView) {
+            this.$router.push(latestView.StatefullPath);
+          } else {
+            this.$router.push('/')
+          }
+        })
       },
       // 主原因改变
       mainselectChange(val) {
@@ -575,7 +589,7 @@
       // 获取子原因
       findNodeFirstChildren(val) {
         // 请求子原因
-        this.get('/credit/findNodeFirstChildren?id=' + this.mainId+'&'+Math.random()).then(res => {
+        this.get('/credit/findNodeFirstChildren?id=' + this.mainId + '&' + Math.random()).then(res => {
           console.log(res);
           if (res.statusCode == '200') {
             this.secondReasons = res.data;
@@ -594,7 +608,7 @@
             this.applySubNos = ''; // 进件编号
             this.custName_la = ''; // 客户名称
             this.subCertCode = ''; // 客户编号
-            this.tableData='';
+            this.tableData = '';
             break;
         }
       },
@@ -662,21 +676,21 @@
             this.tableData = res.data;
           }
         })*/
-        if(!this.applySubNos && !this.custName_la && !this.subCertCode){
+        if (!this.applySubNos && !this.custName_la && !this.subCertCode) {
           return
-        }else{
+        } else {
           this.post('/applyInfoPool/queryListForFraud', {
-            pageParam:{
+            pageParam: {
               pageNum: this.pageNum,
               pageSize: this.pageSize
             },
-            applySubNo:this.applySubNos,
-            custName:this.custName_la,
-            certCode:this.subCertCode
+            applySubNo: this.applySubNos,
+            custName: this.custName_la,
+            certCode: this.subCertCode
           }).then(res => {
             if (res.statusCode == 200) {
               this.tableData = res.data;
-              for(var i=0;i<res.data.recordList.length;i++){
+              for (var i = 0; i < res.data.recordList.length; i++) {
                 var regs = /\d{4}-\d{1,2}-\d{1,2}/g;
                 //this.appDate = res.data.recordList[i].appDate.replace(regs,'');
                 this.tableData.recordList[i].appDate = regs.exec(res.data.recordList[i].appDate)[0];
@@ -684,7 +698,7 @@
             }
           })
         }
-        
+
       },
       // 重置查询
       resetQuery() {
@@ -693,7 +707,7 @@
         this.applySubNos = ''; // 进件编号
         this.custName_la = ''; // 客户名称
         this.subCertCode = ''; // 客户编号
-        this.tableData='';
+        this.tableData = '';
       },
       // 选中弹窗某行
       itemClick(row, event, column) {
@@ -705,7 +719,7 @@
       btnClick(val) {
         // 确定
         if (val == 'sure') {
-          if(this.rowObj.canStartAntiFraudFlag == '1'){
+          if (this.rowObj.canStartAntiFraudFlag == '1') {
             this.applySubNo = this.rowObj.applySubno; // 进件编号
             this.applyCustName = this.rowObj.custName; // 客户名称
             this.certTypeTxt = this.rowObj.certTypeTxt; // 证件类型
@@ -724,16 +738,16 @@
             // this.applyCustId = this.rowObj.custNo;// 客户id
             // 新增字段
             this.processInstanceId = this.rowObj.processInstanceId;
-          }else if(this.rowObj.canStartAntiFraudFlag == '0'){
+          } else if (this.rowObj.canStartAntiFraudFlag == '0') {
             //alert('......')
             this.applySubNo = ''; // 进件编号
             this.$message({
-                message: "提示：该件无法发起反欺诈!",
-                type: 'warning'
-              })
-              return;
+              message: "提示：该件无法发起反欺诈!",
+              type: 'warning'
+            })
+            return;
           }
-          
+
         }
         this.coverShow = false;
       }

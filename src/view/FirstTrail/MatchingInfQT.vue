@@ -474,7 +474,7 @@
       },
       initialInfo() {
         var Nodename = this.$route.fullPath.split('?')[1];
-        console.log(555, Nodename)
+        // console.log(Nodename)
         if (Nodename === 'checkApp_apply') {
           // 专员-编辑
           this.LocalList = 'QTTaskWait'; //取本地存储
@@ -516,7 +516,7 @@
           this.RoleSHow = 'partThree'
         }
         this.QTC.pageType = Nodename;
-        console.log(this.RoleSHow)
+        // console.log(this.RoleSHow)
       },
       QTComponentsShow() {
         this.items1 = this.itemsQT1;

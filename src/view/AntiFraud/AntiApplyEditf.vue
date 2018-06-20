@@ -158,11 +158,10 @@
         busiState: '', // 状态
         currentTemplateId: '', // 复议模版id
         taskName: '',
-        AntiApplyParams:''
+        AntiApplyParams: ''
       }
     },
     mounted() {
-      // console.log(this.showFqz);
       // 经办人 登录用户名
       var userInfo = JSON.parse(localStorage.getItem('userInf'));
       this.userCode = userInfo.userCode;
@@ -187,10 +186,8 @@
       //   // var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
       //   // this.id = taskInWaitting.applyId;
       //   this.id = this.$route.params.id;
-      //   console.log(this.$route.params.id)
       //   // 查询反欺诈信息
       //   this.getFraudApplyInfo();
-console.log(  this.antiFlag  )
       if (this.antiFlag == '01') {
         // taskInWaitting
         this.creditappTaskid = JSON.parse(localStorage.getItem('taskInWaitting')).taskId;
@@ -203,14 +200,13 @@ console.log(  this.antiFlag  )
       // }
       // 专员/主管 不跳  反欺诈 编辑页面
       // else if (this.antiFlag == '03' || this.antiFlag == '04') { // 其他取 列表id
-      //   console.log(' 主管/专员 ');
+      //   (' 主管/专员 ');
       //   this.id = this.$route.params.id;
-      if (this.antiFlag == '03' ||this.antiFlag == '04') {
+      if (this.antiFlag == '03' || this.antiFlag == '04') {
         // AntitaskInWaitting
         this.creditappTaskid = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
         this.taskName = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskName;
-        // console.log('creditappTaskid===', this.creditappTaskid)
-      } 
+      }
       // else if (this.antiFlag == '04') {
       //   // AntiManagertaskInWaitting
       //   this.creditappTaskid = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
@@ -218,22 +214,21 @@ console.log(  this.antiFlag  )
       // }
 
       // 05 复议专员  06 复议主管
-       if (this.antiFlag == '05' || this.antiFlag == '06') {
+      if (this.antiFlag == '05' || this.antiFlag == '06') {
         this.creditappTaskid = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
         this.taskName = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskName;
         this.currentTemplateId = 'reconsiderApp';
       }
       // 质检各角色
-        if (this.antiFlag == '07' || this.antiFlag == '08'|| this.antiFlag == '10'|| this.antiFlag == '11'|| this.antiFlag == '12'|| this.antiFlag == '13') {
+      if (this.antiFlag == '07' || this.antiFlag == '08' || this.antiFlag == '10' || this.antiFlag == '11' || this.antiFlag ==
+        '12' || this.antiFlag == '13') {
         this.currentTemplateId = 'checkApp';
-        }
+      }
       // if (this.antiFlag == '05') {
-      //   console.log('复议专员取值')
       //   this.creditappTaskid = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
       //   this.taskName = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskName;
       //   this.currentTemplateId = 'reconsiderApp';
       // } if ( this.antiFlag == '06') {
-      //   console.log('复议经理取值')
       //   this.creditappTaskid = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).taskId;
       //   this.taskName = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).taskName;
       //   this.currentTemplateId = 'reconsiderApp';
@@ -261,7 +256,6 @@ console.log(  this.antiFlag  )
       //this.flag = this.$route.params.flag || this.routeFlag;
 
       //this.channel = this.$route.params.channel;
-      // console.log(this.flag);
       // 拿到状态
       // this.busiState = this.$route.params.busiState || this.routeBusiState;
       // if (this.flag == 'start' || this.flag == 'fuyi') {
@@ -276,7 +270,6 @@ console.log(  this.antiFlag  )
 
       // 请求主原因
       this.firstNodeReason();
-      console.log('params:', this.$route.params)
 
 
 
@@ -285,17 +278,14 @@ console.log(  this.antiFlag  )
       // 请求系统时间
       getSystemDate() {
         // 获取系统时间
-        this.get('system/getSystemDate?'+Math.random()).then(res => {
-          console.log('回退', res)
+        this.get('system/getSystemDate?' + Math.random()).then(res => {
           // 请求系统时间
           this.dealroperDate = res.data;
-          console.log('this.', this.dealroperDate);
         })
       },
       // 反欺诈申请 获取 主原因子原因
       firstNodeReason() {
-        this.get('/credit/firstNodeReason?reasonType=' + '08,09'+'&'+Math.random()).then(res => {
-          // console.log(res);
+        this.get('/credit/firstNodeReason?reasonType=' + '08,09' + '&' + Math.random()).then(res => {
           this.mainReasons = res.data;
         })
       },
@@ -303,13 +293,11 @@ console.log(  this.antiFlag  )
       getFraudApplyInfo() {
         // 测试 id
         // this.id = 'ed353288-758d-4699-bec7-094bd6444556';
-// console.log( '入参id'+ this.id)
         this.post('/fraudApplyInfoController/getFraudApplyInfo', {
             applyId: this.id
             // applyId:'201506260173032182'
           })
           .then(res => {
-            // console.log(res.data.applyInfoPool);
             if (res.statusCode == 200) {
               // 任务id
               // this.creditappTaskid = res.data.applyInfoPool.id;
@@ -360,13 +348,10 @@ console.log(  this.antiFlag  )
       //     // id: this.id
       //     // id:'201506260173032182'
       //   }).then(res => {
-      //     console.log(res);
-
       //   })
       // },
       submitForm() {
-        console.log('提交反欺诈')
-        var taskNodeName,nodeName,RoutePath,routeParams;
+        var taskNodeName, nodeName, RoutePath, routeParams;
         if (!this.mainId || !this.mainReason) {
           this.$message({
             message: "提示：请选择主原因!",
@@ -437,50 +422,27 @@ console.log(  this.antiFlag  )
                     done();
                     if (this.antiFlag == '01') {
                       this.$router.push('/taskInWaitting');
-                      // RoutePath = '/taskInWaitting';
-                      // nodeName = '初审审批';
                     } else if (this.antiFlag == '02') {
                       this.$router.push('/FtaskInWaitting');
-                      // if (this.taskName == "creditApp_finalTrial_one") {
-                      //   nodeName = '终审一级审批';
-                      // } else if (this.taskName == "creditApp_finalTrial_two") {
-                      //   nodeName = '终审二级审批'
-                      // } else if (this.taskName == "creditApp_finalTrial_three") {
-                      //   nodeName = '信审经理审批';
-                      // } else if (this.taskName == "creditApp_finalTrial_four") {
-                      //   nodeName = '信审高级经理审批'
-                      // } else if (this.taskName == "creditApp_finalTrial_five") {
-                      //   nodeName = '信审总监审批审批'
-                      // }
-                      // RoutePath = '/FtaskInWaitting';
                     } else if (this.antiFlag == '03') {
                       this.$router.push('/AntiFraud');
-                      // RoutePath = '/AntiFraud';
-                      // nodeName = '反欺诈专员审批';
                     } else if (this.antiFlag == '04') {
-                      // RoutePath = '/AntiFraud';
-                      // nodeName = '反欺诈主管审批';
                       this.$router.push('/AntiFraud');
                     } else if (this.antiFlag == '05') {
-                      // RoutePath = '/reconsiderList';
-                      // nodeName = '复议专员审批';
                       this.$router.push('/reconsiderList');
                     } else if (this.antiFlag == '06') {
-                      // RoutePath = '/reconsiderList';
-                      // nodeName = '复议经理审批';
                       this.$router.push('/reconsiderList');
                     }
-                    // routeParams = '?taskNodeName=' + this.taskName
-                    // this.$router.push({
-                    //   path: RoutePath + routeParams,
-                    // });
-                    // this.$store.dispatch('addVisitedViews', {
-                    //   name: nodeName,
-                    //   path: RoutePath,
-                    //   flag: this.antiFlag,
-                    //   params: routeParams,
-                    //   StatefullPath: RoutePath + routeParams
-                    // })
+                    this.$store.dispatch('delVisitedViews', {
+                      name: '反欺诈申请-编辑'
+                    }).then((views) => {
+                      const latestView = views.slice(-1)[0]
+                      if (latestView) {
+                        this.$router.push(latestView.StatefullPath);
+                      } else {
+                        this.$router.push('/')
+                      }
+                    })
                   } else {
                     if (res.msg) {
                       this.$message({
@@ -512,6 +474,16 @@ console.log(  this.antiFlag  )
       // 返回  上级路由
       backRoute() {
         window.history.go(-1);
+        this.$store.dispatch('delVisitedViews', {
+          name: '反欺诈申请-编辑'
+        }).then((views) => {
+          const latestView = views.slice(-1)[0]
+          if (latestView) {
+            this.$router.push(latestView.StatefullPath);
+          } else {
+            this.$router.push('/')
+          }
+        })
       },
       // 主原因改变
       mainselectChange(val) {
@@ -526,8 +498,7 @@ console.log(  this.antiFlag  )
       // 获取子原因
       findNodeFirstChildren(val) {
         // 请求子原因
-        this.get('/credit/findNodeFirstChildren?id=' + this.mainId+'&'+Math.random()).then(res => {
-          // console.log(res);
+        this.get('/credit/findNodeFirstChildren?id=' + this.mainId + '&' + Math.random()).then(res => {
           if (res.statusCode == '200') {
             this.secondReasons = res.data;
           }

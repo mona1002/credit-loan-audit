@@ -523,11 +523,11 @@
                   <span>{{ scope.row.telRecord}}</span>
                   <audio controls="controls" height="100" width="100">
                     <source :src="URL+scope.row.telRecord" type="audio/mp3" />
-                       <source :src="URL+scope.row.telRecord" type="audio/WAV" />
-                          <source :src="URL+scope.row.telRecord" type="audio/WMA" />
-                             <source :src="URL+scope.row.telRecord" type="audio/AMR" />
-                                <source :src="URL+scope.row.telRecord" type="audio/AVA" />
-                      <source :src="URL+scope.row.telRecord" type="audio/ACT" />
+                    <source :src="URL+scope.row.telRecord" type="audio/WAV" />
+                    <source :src="URL+scope.row.telRecord" type="audio/WMA" />
+                    <source :src="URL+scope.row.telRecord" type="audio/AMR" />
+                    <source :src="URL+scope.row.telRecord" type="audio/AVA" />
+                    <source :src="URL+scope.row.telRecord" type="audio/ACT" />
                     <source :src="URL+scope.row.telRecord" type="audio/ogg" />
                     <embed height="100" width="100" :src="URL+scope.row.telRecord" /> 您的浏览器不支持该音频播放器格式
                   </audio>
@@ -893,7 +893,8 @@
     </div>
     <!-- 流程轨迹 -->
     <div class="alertBox pro_alert">
-      <el-dialog title='流程轨迹' :visible.sync="lcdialogVisible" :modal="false" width="860px" style='height:463px;positon:absolute;left:0;right:0;top:0;bottom:0;margin:auto;' top="0">
+      <el-dialog title='流程轨迹' :visible.sync="lcdialogVisible" :modal="false" width="860px" style='height:463px;positon:absolute;left:0;right:0;top:0;bottom:0;margin:auto;'
+        top="0">
         <div class="splcBody">
           <!-- <el-collapse v-model="activeNames2" @change="handleChange">
 			  		<el-collapse-item title="信审流程轨迹" name="1"> -->
@@ -970,7 +971,7 @@
         instaskType: '', //添加质检结论入参-任务类型（00:常规质检，01:专项质检）
         reviewConclusion: {}, //复核结论
         conclusionId: '', //发起复议-弹窗入参
-        processInstanceIdParams:'',// 查询流程轨迹入参
+        processInstanceIdParams: '', // 查询流程轨迹入参
         tablrf: [{
           insResult: '01'
         }],
@@ -1002,7 +1003,7 @@
           id: this.propQTconclution.applyId,
           flag: 'zhijian',
           busiState: '30',
-          channel: '03',//   ("00", "审批提报"), ("01", "前端提报"), ("02", "规则提报"), ("03","质检提报"), ("04","复议提报"), ("05","内匹关联"), ("06","反欺诈提报"), ("99","其他提报");
+          channel: '03', //   ("00", "审批提报"), ("01", "前端提报"), ("02", "规则提报"), ("03","质检提报"), ("04","复议提报"), ("05","内匹关联"), ("06","反欺诈提报"), ("99","其他提报");
         },
         isForm: '',
         radio: '1',
@@ -1170,7 +1171,7 @@
         telType: '06', //电话征信 电话类型入参
         activeNames: ['0', '1', "2", "3", "4", "5", "6", "7", "8", "9", '10'], //折叠面板 默认显示下标
         tabTitle: ["客户本人", '住址电话', "单位电话", "家庭联系人", "工作证明人", "其他联系人"],
-        QTresult: [{//常规下拉
+        QTresult: [{ //常规下拉
           value: '01',
           label: '初审一般差错'
         }, {
@@ -1189,7 +1190,7 @@
           value: '06',
           label: '终审建议优化'
         }],
-        QTresultSpecial: [{//专纵项下拉
+        QTresultSpecial: [{ //专纵项下拉
           value: '07',
           label: '专项'
         }, {
@@ -1287,9 +1288,9 @@
         checkResultCount05: 0,
         checkResultCount06: 0,
         checkResultCount07: 0,
-        checkResultCount08:0,
-        checkResultCount09:0,
-        checkResultCount10:0,
+        checkResultCount08: 0,
+        checkResultCount09: 0,
+        checkResultCount10: 0,
       }
     },
     props: ['propQTconclution'],
@@ -1320,7 +1321,8 @@
             //  基本信息                                -Object
             this.baseInfo = res.data.applyBaseInfo;
             // 质检流程-质检页面查询接口-基本信息中取流程轨迹入参  processInstanceIdSecond不为空取 processInstanceIdSecond ，为空取processInstanceId
-         this.baseInfo&& this.baseInfo.processInstanceIdSecond? this.processInstanceIdParams= this.baseInfo.processInstanceIdSecond: this.processInstanceIdParams=this.baseInfo.processInstanceId;
+            this.baseInfo && this.baseInfo.processInstanceIdSecond ? this.processInstanceIdParams = this.baseInfo.processInstanceIdSecond :
+              this.processInstanceIdParams = this.baseInfo.processInstanceId;
             // 资料核实+三方信息查询+ 内部匹配核实         -Object
             // !res.data.insRegularInfo ? this.regularInfo.applyId = this.propQTconclution.applyId : this.regularInfo =
             //   res.data.insRegularInfo;
@@ -1341,7 +1343,6 @@
               res.data.insReviewConclusion;
             // 电话征信：客户本人-电话拨打核实 - 本人只有一条电话拨打核实记录            -object
             // 专员第一次进，只返回电话号码-因为是从申请表取的。保存之后其他字段都会有，applyid也会被存入
-            console.log(!res.data.insTelCustInfo.applyId)
             if (!res.data.insTelCustInfo.applyId) { //第一次进来，无数据（除电话号码），除默认选正常其他分别赋值进去
               // 质检结果不赋值，因为默认选正常-00
               this.insTelCustInfo.applyId = this.propQTconclution.applyId;
@@ -1428,7 +1429,7 @@
               }
             }
             this.WechatData(0); //客户本人 微信支付宝赋值为客户本人AlipayCus
-                this.Social(); //社保公积金接口
+            this.Social(); //社保公积金接口
           } else {
             this.$message.error(res.msg);
           }
@@ -1577,17 +1578,17 @@
           this.others = true;
         }
       },
-      SubmitAlert(){//提交弹窗
-        this.submitShow=true;
-        this.adbtn='确认';
-        this.loadsitu=false;
+      SubmitAlert() { //提交弹窗
+        this.submitShow = true;
+        this.adbtn = '确认';
+        this.loadsitu = false;
       },
       // ---------------------------------按钮事件----------------
       // 保存 或 提交
       SaveInf(type) { //质检主管不需要提交，只有质检专员 显示提交
-       this.loadsitu=true;
-        this.adbtn='提交中';
-        this.submitShow=false;
+        this.loadsitu = true;
+        this.adbtn = '提交中';
+        this.submitShow = false;
         this.checkResultCount01 = 0;
         this.checkResultCount02 = 0;
         this.checkResultCount03 = 0;
@@ -1599,7 +1600,7 @@
         this.checkResultCount09 = 0;
         this.checkResultCount10 = 0;
         if (type == '提交') { //提交 加校验，保存无需校验必填---常规质检
-        // 保存、提交质检结论都校验
+          // 保存、提交质检结论都校验
           if (this.propQTconclution.tastwaitingPass.listType == '常规质检') {
             if (!this.regularInfo.isForm || !this.regularInfo.isIdcard || !this.regularInfo.isIncome || !this.regularInfo
               .isWork ||
@@ -1626,11 +1627,11 @@
             }
           }
         }
-        if(type == '保存'){
-              if(this.insConclusion.length > 0 && this.insConclusion[this.insConclusion.length - 1].checkResult == ''){//质检结论最后一条质检结果校验是否为空
-                this.$message.error('请输入质检结论必填项！')
-                              return
-              } 
+        if (type == '保存') {
+          if (this.insConclusion.length > 0 && this.insConclusion[this.insConclusion.length - 1].checkResult == '') { //质检结论最后一条质检结果校验是否为空
+            this.$message.error('请输入质检结论必填项！')
+            return
+          }
         }
         // 提交 保存 
         if (this.propQTconclution.tastwaitingPass.listType == '常规又专项质检') { //常规又专项质检
@@ -1650,8 +1651,18 @@
               if (type == '提交') {
                 this.propQTconclution.pageType == 'checkApp_apply' ? this.$router.push(
                   '/commissioner?taskNodeName=checkApp_apply&flag=07') : ''; //专员
+                this.$store.dispatch('delVisitedViews', {
+                  name: '质检详情'
+                }).then((views) => {
+                  const latestView = views.slice(-1)[0]
+                  if (latestView) {
+                    this.$router.push(latestView.StatefullPath);
+                  } else {
+                    this.$router.push('/')
+                  }
+                })
               }
-              this.referPort();
+              // this.referPort();
             } else {
               this.$message.error(res.msg);
             }
@@ -1673,26 +1684,29 @@
               this.insConclusion[n].checkResult == '10' ? this.checkResultCount10++ : '';
             }
             // 添加质检结论校验
-              // 01-09，都只能存在一个，即有01不能再次添加01
-              // 01和02互斥，有01无02，有02无01
-              // 03和04互斥，有03无04，有04无03
-              // 07和08互斥，有07无08，有08无07
-              // 09和01/02/03/04/07/08/10互斥，即在选择无以后，不可以再选其他选项。
+            // 01-09，都只能存在一个，即有01不能再次添加01
+            // 01和02互斥，有01无02，有02无01
+            // 03和04互斥，有03无04，有04无03
+            // 07和08互斥，有07无08，有08无07
+            // 09和01/02/03/04/07/08/10互斥，即在选择无以后，不可以再选其他选项。
             if (this.checkResultCount01 > 1 || this.checkResultCount02 > 1 || this.checkResultCount03 > 1 || this.checkResultCount04 >
-              1 || this.checkResultCount05 > 1 || this.checkResultCount06 > 1 || this.checkResultCount07 > 1||this.checkResultCount08 > 1||this.checkResultCount09 > 1||this.checkResultCount10 > 1) {
+              1 || this.checkResultCount05 > 1 || this.checkResultCount06 > 1 || this.checkResultCount07 > 1 || this.checkResultCount08 >
+              1 || this.checkResultCount09 > 1 || this.checkResultCount10 > 1) {
               this.$message.error('质检结论中质检结果重复添加！')
               return
-            }else if(this.checkResultCount01> 0 && this.checkResultCount02 > 0){
+            } else if (this.checkResultCount01 > 0 && this.checkResultCount02 > 0) {
               this.$message.error('初审差错重复！')
               return
-            }else if(this.checkResultCount03 > 0 && this.checkResultCount04 >0){
-               this.$message.error('终审差错重复！')
+            } else if (this.checkResultCount03 > 0 && this.checkResultCount04 > 0) {
+              this.$message.error('终审差错重复！')
               return
-            }else if(this.checkResultCount07 > 0 && this.checkResultCount08 > 0){
-               this.$message.error('质检结果专项/纵向/无不能同时存在！')
+            } else if (this.checkResultCount07 > 0 && this.checkResultCount08 > 0) {
+              this.$message.error('质检结果专项/纵向/无不能同时存在！')
               return
-            }else if(this.checkResultCount09 > 0 && (this.checkResultCount01 > 0||this.checkResultCount02 > 0||this.checkResultCount03 > 0||this.checkResultCount04 > 0||this.checkResultCount07 > 0||this.checkResultCount08 > 0)){
-               this.$message.error('质检结果已经选择无！')
+            } else if (this.checkResultCount09 > 0 && (this.checkResultCount01 > 0 || this.checkResultCount02 > 0 ||
+                this.checkResultCount03 > 0 || this.checkResultCount04 > 0 || this.checkResultCount07 > 0 || this.checkResultCount08 >
+                0)) {
+              this.$message.error('质检结果已经选择无！')
               return
             }
           }
@@ -1716,8 +1730,10 @@
           for (var i = 0; i < this.insConclusion.length; i++) {
             console.log('isSubmit：', this.insConclusion[i].isSubmit)
             type == '保存' ? this.insConclusion[i].isSubmit = '0' : this.insConclusion[i].isSubmit = '1'; // 质检结论 保存：0，修改：1
-           this.propQTconclution.pageType !== 'checkApp_apply' ? this.insConclusion[i].checkType = '02' : this.insConclusion[i].checkType = '01'; // 质检主管保存 质检结论 CheckType 改为02，初检01
-           this.propQTconclution.pageType !== 'checkApp_apply'&& this.insConclusion[i].checkType == '01'? this.insConclusion[i].id = '' : ''; //主管首次保存或提交id设置为空
+            this.propQTconclution.pageType !== 'checkApp_apply' ? this.insConclusion[i].checkType = '02' : this.insConclusion[
+              i].checkType = '01'; // 质检主管保存 质检结论 CheckType 改为02，初检01
+            this.propQTconclution.pageType !== 'checkApp_apply' && this.insConclusion[i].checkType == '01' ? this.insConclusion[
+              i].id = '' : ''; //主管首次保存或提交id设置为空
           }
           // insResultTxt  更改微信支付宝显示汉字字段
           for (var k = 0; k < this.AlipayConcat.length; k++) {
@@ -1748,13 +1764,23 @@
                 if (type == '提交') {
                   this.propQTconclution.pageType == 'checkApp_apply' ? this.$router.push(
                     '/commissioner?taskNodeName=checkApp_apply&flag=07') : ''; //专员
+                  this.$store.dispatch('delVisitedViews', {
+                    name: '质检详情'
+                  }).then((views) => {
+                    const latestView = views.slice(-1)[0]
+                    if (latestView) {
+                      this.$router.push(latestView.StatefullPath);
+                    } else {
+                      this.$router.push('/')
+                    }
+                  })
                 }
-                this.referPort();
+                // this.referPort();
               } else {
                 this.$message.error(res.msg);
               }
             });
-            this.submitShow=false;
+          this.submitShow = false;
         }
       },
       // 无需复议
@@ -1773,6 +1799,16 @@
               'ManagerTaskList?taskNodeName=checkApp_trial_manager&flag=10') : '';
             this.propQTconclution.pageType == 'checkApp_regional_manager' ? this.$router.push(
               'ACManagerTaskList?taskNodeName=checkApp_regional_manager&flag=12') : '';
+            this.$store.dispatch('delVisitedViews', {
+              name: '质检详情'
+            }).then((views) => {
+              const latestView = views.slice(-1)[0]
+              if (latestView) {
+                this.$router.push(latestView.StatefullPath);
+              } else {
+                this.$router.push('/')
+              }
+            })
           } else {
             this.$message.error(res.msg);
           }
@@ -1838,6 +1874,16 @@
             })
             this.ReconsiderDes = ''; //请空复议说明输入框
             this.$router.push('/ManagerTaskList?taskNodeName=checkApp_trial_manager&flag=10');
+            this.$store.dispatch('delVisitedViews', {
+              name: '质检详情'
+            }).then((views) => {
+              const latestView = views.slice(-1)[0]
+              if (latestView) {
+                this.$router.push(latestView.StatefullPath);
+              } else {
+                this.$router.push('/')
+              }
+            })
           } else {
             this.$message.error(res.msg);
           }
@@ -1862,6 +1908,16 @@
             this.ToAteaApprovalParams.reviewResult = ''; //复议结果
             this.ToAteaApprovalParams.reviewRemark = ''; //复议说明
             this.$router.push('/ACManagerTaskList?taskNodeName=checkApp_regional_manager&flag=12'); //区域经理提交成功-成功跳转到列表页
+            this.$store.dispatch('delVisitedViews', {
+              name: '质检详情'
+            }).then((views) => {
+              const latestView = views.slice(-1)[0]
+              if (latestView) {
+                this.$router.push(latestView.StatefullPath);
+              } else {
+                this.$router.push('/')
+              }
+            })
           } else {
             this.$message.error(res.msg);
           }
@@ -1873,15 +1929,15 @@
         this.post("/antiFraud/getAntiFraudSurveyInfoByApplyId", {
           applyId: this.propQTconclution.applyId
         }).then(res => {
-          if (res.statusCode == 200) {//200 可以发起
-          this.$router.push({
-            name: 'AntiApplyEditf'
-          });
-          localStorage.setItem("AntiApplyParams", JSON.stringify(this.AntiApplyParams));
-            } else {
-              if(res.statusCode !== 500){
-                this.$message.error('此进件正在发欺诈流程中，不能再次发起反欺诈！');
-              }
+          if (res.statusCode == 200) { //200 可以发起
+            this.$router.push({
+              name: 'AntiApplyEditf'
+            });
+            localStorage.setItem("AntiApplyParams", JSON.stringify(this.AntiApplyParams));
+          } else {
+            if (res.statusCode !== 500) {
+              this.$message.error('此进件正在发欺诈流程中，不能再次发起反欺诈！');
+            }
           }
         });
       },
@@ -1912,6 +1968,16 @@
               'ReManagerTaskList?taskNodeName=checkApp_check_recon_manager&flag=11') : ''; //复议首次-成功跳转到列表页
             this.propQTconclution.pageType == 'checkApp_compliance_manager' ? this.$router.push(
               'ACManagerTaskList?taskNodeName=checkApp_compliance_manager&flag=13') : ''; //合规经理结论点击审批-成功跳转到列表页
+            this.$store.dispatch('delVisitedViews', {
+              name: '质检详情'
+            }).then((views) => {
+              const latestView = views.slice(-1)[0]
+              if (latestView) {
+                this.$router.push(latestView.StatefullPath);
+              } else {
+                this.$router.push('/')
+              }
+            })
           } else {
             this.$message.error(res.msg);
           }
@@ -1926,10 +1992,10 @@
         //   processInstanceId:this.processInstanceIdParams,
         //   processStatus:'01'
         // }
-                this.post(baseurlBPM.baseUrl_common2+'/bpmService/getProcessTraceList',{
-                      processInstanceId:this.processInstanceIdParams,
-                      processStatus:'01'
-                })
+        this.post(baseurlBPM.baseUrl_common2 + '/bpmService/getProcessTraceList', {
+            processInstanceId: this.processInstanceIdParams,
+            processStatus: '01'
+          })
           .then(res => {
             this.lcgjData = res.taskDetailList;
           })
@@ -1950,7 +2016,7 @@
       },
       //社保/公积金
       Social() {
-        console.log(this.baseInfo )
+        console.log(this.baseInfo)
         this.post(baseurl.BaseUrl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {
           certCode: this.baseInfo.certCode,
           custName: this.baseInfo.custName
@@ -2078,6 +2144,7 @@
       this.showdiffer();
     }
   }
+
 </script>
 <style scoped>
   .baseInf {
