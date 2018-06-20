@@ -37,7 +37,7 @@
               </span>
             </p>
             <div class="Left_right_BigImg ">
-              <RAudioVisualLeft msg="MspLone" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></RAudioVisualLeft>
+              <RAudioVisualLeft ref="AudioLeft" msg="MspLone" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></RAudioVisualLeft>
               <Rremark v-if=" this.tabContent1==1"></Rremark>
               <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
               <RapplicationInformationDetail v-if=" this.tabContent1==3">申请信息</RapplicationInformationDetail>
@@ -108,7 +108,7 @@
             <RAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></RAudioVisual>
             <Rremark v-if=" this.tabContent2==1"></Rremark>
             <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
-            <RapplicationInformationDetail v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
+            <RapplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
             <RborrowerInformationSetail v-if=" this.tabContent2==4" :isFull.sync="isFull">借款人资料</RborrowerInformationSetail>
             <PhoneCredit v-if=" this.tabContent2==5"> 电话征信</PhoneCredit>
             <FMCreditForm v-if=" this.tabContent2==6">信审表</FMCreditForm>
@@ -154,7 +154,7 @@
           <p>影像资料</p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <RAudioVisualLeft msg="MspLtwo" :comBtn.sync='alertComBtn'></RAudioVisualLeft>
+            <RAudioVisualLeft ref="AudioLeftCom" msg="MspLtwo" :comBtn.sync='alertComBtn'></RAudioVisualLeft>
           </div>
         </div>
         <!-- 弹出层右侧 div -->
@@ -297,14 +297,35 @@
     },
     watch: {
       '$route' (to, from) {
-        if (to.fullPath !== from.fullPath) {
-          console.log('路由刷新')
-          this.initialInfo();
-          this.getPageInf();
+        if (from.path === '/MatchingInfQT') {
+          from.meta.newOne = false;
+        }
+        if (to.path === '/MatchingInfQT' && this.$route.meta.newOne) {
+          this.mountedInf();
+          this.title = "影像资料";
+          this.tab1Index = this.tabContent1 = this.tabActiveInd1 = 0;
+          this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 3;
+          this.flag1 = [true, true, true, false, true, true, true, true, true, true, true, true, true, true, true];
+          this.flag2 = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
+          this.$refs.AudioLeft ? this.$refs.AudioLeft.mountedInf() : '';
+          this.$refs.AudioLeftCom ? this.$refs.AudioLeftCom.mountedInf() : '';
+          this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
+          this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
         }
       }
     },
     methods: {
+      mountedInf() {
+        this.initialInfo(); //判断角色   
+        this.QTC.tastwaitingPass = this.tastwaitingPass = JSON.parse(localStorage.getItem(this.LocalList));
+        this.QTC.applyId = this.tastwaitingPass.ApplyId;
+        this.getPageInf(); //获取页面个人信息      
+        // console.log(this.tastwaitingPass.applyId)
+        // console.log('tastwaitingPass：', this.tastwaitingPass)
+        // console.log('QTC：', this.QTC)
+        // console.log('pageType：', this.QTC.pageType)
+        // console.log('LocalList：', this.LocalList)
+      },
       compareProps() {
         this.$refs.audioChild.personalNunPerson()
       },
@@ -352,7 +373,6 @@
         this.$refs.rRight.style.left = '0';
         this.isFull = true;
         this.midShow = false;
-        console.log(this.$refs.leftBtn)
         this.leftBtnMark = true;
         this.$refs.leftBtn.style.left = '45px';
         // this.$refs.leftBtn.style.background='green';
@@ -437,7 +457,6 @@
         });
       },
       getPageInf() { //获取个人信息
-        console.log('id', this.tastwaitingPass)
         this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
           id: this.tastwaitingPass.ApplyId,
         }).then(res => {
@@ -455,9 +474,8 @@
       },
       initialInfo() {
         var Nodename = this.$route.fullPath.split('?')[1];
-        console.log(Nodename)
+        console.log(555, Nodename)
         if (Nodename === 'checkApp_apply') {
-          console.log('aaaaaaa')
           // 专员-编辑
           this.LocalList = 'QTTaskWait'; //取本地存储
           this.items1 = this.itemsTrial1; //12
@@ -496,35 +514,19 @@
           this.LocalList = 'QTComplianceTW';
           this.QTComponentsShow();
           this.RoleSHow = 'partThree'
-          //  this. items1 = itemsQT1;//14
-          // this.  items2 = itemsQT2;
-          // this.  flag1 = flagQT1;
-          // this.  flag2 = flagQT2;
-          //   this.QTmark=true;
         }
         this.QTC.pageType = Nodename;
         console.log(this.RoleSHow)
       },
       QTComponentsShow() {
-        this.items1 = this.itemsQT1; //14
+        this.items1 = this.itemsQT1;
         this.items2 = this.itemsQT2;
-        // this.flag1 = this.flagQT1;
-        // this.flag2 = this.flagQT2;
-        // this.QTmark = true;
       }
     },
     mounted() {
       this.title = "影像资料";
       this.MyMove();
-      this.initialInfo(); //判断角色   
-      this.QTC.tastwaitingPass = this.tastwaitingPass = JSON.parse(localStorage.getItem(this.LocalList));
-      this.QTC.applyId = this.tastwaitingPass.ApplyId;
-      this.getPageInf(); //获取页面个人信息      
-      // console.log(this.tastwaitingPass.applyId)
-      // console.log('tastwaitingPass：', this.tastwaitingPass)
-      // console.log('QTC：', this.QTC)
-      // console.log('pageType：', this.QTC.pageType)
-      // console.log('LocalList：', this.LocalList)
+      this.mountedInf();
     },
     components: {
       myHead,

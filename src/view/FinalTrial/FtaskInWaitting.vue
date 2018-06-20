@@ -108,7 +108,7 @@
     },
     watch: {
       '$route' (to, from) {
-        if (to.fullPath !== from.fullPath) {
+        if (to.path === '/FtaskInWaitting') {
           this.toinner();
         }
       }

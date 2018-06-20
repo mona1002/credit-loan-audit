@@ -35,7 +35,8 @@
               </span>
             </p>
             <div class="Left_right_BigImg ">
-              <AudioVisualLeft :custom="customInf.applyId " v-if=" this.tabContent1==0" msg="FspLone" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></AudioVisualLeft>
+              <AudioVisualLeft ref="AudioLeft" :custom="customInf.applyId " v-if=" this.tabContent1==0" msg="FspLone" v-on:CompareShow="compBtnS"
+                :comBtn.sync='comBtn'></AudioVisualLeft>
               <cremarkDetail v-if=" this.tabContent1==1"></cremarkDetail>
               <InternalMatch v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
               <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
@@ -94,7 +95,7 @@
           <p>影像资料</p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <AudioVisualLeft :custom="customInf.applyId " msg="FspLtwo"></AudioVisualLeft>
+            <AudioVisualLeft ref="AudioLeftCom" :custom="customInf.applyId " msg="FspLtwo"></AudioVisualLeft>
           </div>
         </div>
         <!-- 弹出层右侧 div -->

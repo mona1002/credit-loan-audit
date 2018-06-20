@@ -195,7 +195,7 @@
     /* min-width: 1366; */
   }
 
-  /* 激活样式 流-css */
+  /* 激活样式  */
 
   .tab1Default {
     color: #bfcbd9;
@@ -222,7 +222,6 @@
     color: #bfcbd9;
   }
 
-  /*-------------------------------- */
 
   .SplitScreen_content {
     border: 1px solid #0077ff;
@@ -271,7 +270,7 @@
 
   /* 左屏 */
 
-  /* 左侧详情 p标签   流-css */
+  /* 左侧详情 p标签    */
 
   .right .Right_tab_title_div,
   .AudioVisual_wrap_compare_right p {
@@ -290,7 +289,7 @@
     padding-right: 40px;
   }
 
-  /* 左侧详情 content div 内容   流-css */
+  /* 左侧详情 content div 内容    */
 
   .Left_right_BigImg {
     background: white;
@@ -325,7 +324,6 @@
   }
 
   .tab2_Content {
-    /*background: purple;*/
     height: calc( 100% - 48px);
     overflow: auto;
   }

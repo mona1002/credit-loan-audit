@@ -120,7 +120,7 @@
         ReIllustrate: false,
         loadsitu: false,
         tableData: [],
-        conclusionId:'',//提交入参
+        conclusionId: '', //提交入参
         // tableData: [{
         //   date: '2016-05-02',
         //   name: '王小虎',
@@ -151,7 +151,23 @@
     components: {
       myHead
     },
+    watch: {
+      '$route' (to, from) {
+        if (to.path === '/ReApply') {
+          this.mountedInf();
+        }
+      }
+    },
     methods: {
+      mountedInf() {
+        console.log(this.propReApply)
+        this.propReApply && this.propReApply.pageType == 'ComponentPage' ? this.ManagerBtn = false : ''; //是否显示提交按钮
+        this.getSystermTime();
+        this.taskwaitting = JSON.parse(localStorage.getItem('QTToReconsiderParams'));
+        console.log('reconType:', this.taskwaitting.reconType)
+        this.reApplyInf = JSON.parse(localStorage.getItem('userInf'));
+        this.getInf();
+      },
       getSystermTime() { // 获取系统时间-质检结论-质检日期取值---基础接口
         this.get('system/getSystemDate?' + Math.random()).then(res => {
           if (res.statusCode == 200) {
@@ -163,11 +179,11 @@
         this.get('/insReconApply/queryInsConclusionInfo', {
           applyId: this.taskwaitting.ApplyId,
         }).then(res => {
-           this.tableData=[];
+          this.tableData = [];
           this.applyInfoPool = res.data.applyBaseInfo; //基本信息
           this.tableData.push(res.data.insConclusion); //-----------需要调接口查看返回对象，还是数组
-          this.conclusionId=res.data.insConclusion.id;
-          console.log(  this.tableData)
+          this.conclusionId = res.data.insConclusion.id;
+          console.log(this.tableData)
         })
         //  this.get('/insReconApply/queryInsConclusionInfo', {
         //     applyId: this.taskwaitting.ApplyId,
@@ -176,10 +192,10 @@
         //     this.tableData = res.data.insConclusion; //-----------需要调接口查看返回对象，还是数组
         //   })
       },
-//       cancle(){
-// this.$router.push('SelfTaskList?taskNodeName=checkApp_trial_self&flag=09');
-// // this.$router.push('SelfTaskList?taskNodeName='+this.taskwaitting+'&flag='+this.taskwaitting.mark);
-//       },
+      //       cancle(){
+      // this.$router.push('SelfTaskList?taskNodeName=checkApp_trial_self&flag=09');
+      // // this.$router.push('SelfTaskList?taskNodeName='+this.taskwaitting+'&flag='+this.taskwaitting.mark);
+      //       },
       sumt() {
         this.loadsitu = false;
         this.adbtn = '确定';
@@ -200,15 +216,15 @@
           // taskNodeName: '', //复议节点名称----暂时不入
           reviewRemark: this.fraudAuditOpinion.auditDesc, //复议说明
           approverUserCode: this.reApplyInf.userCode, //经办人 code
-          approverUserName:this.reApplyInf.userName,//经办人
+          approverUserName: this.reApplyInf.userName, //经办人
           reconDate: this.systermTime, //发起复议时间
           // reconType: this.taskwaitting.reconType, //复议类型(00:初终审本人，01:初终审主管首次，02:初终审主管二次)
           reconType: '00', //复议类型(00:初终审本人，01:初终审主管首次，02:初终审主管二次)
           taskId: this.taskwaitting.taskId, //任务id
-          conclusionId: this.conclusionId//质检结论id
+          conclusionId: this.conclusionId //质检结论id
         }).then(res => {
           if (res.statusCode == 200) {
-              this.$router.push('SelfTaskList?taskNodeName=checkApp_trial_self&flag=09');
+            this.$router.push('SelfTaskList?taskNodeName=checkApp_trial_self&flag=09');
             this.$message({
               message: '发起复议成功',
               type: 'success'
@@ -221,20 +237,7 @@
       },
     },
     mounted() {
-      console.log( this.propReApply )
-      this.propReApply&& this.propReApply.pageType=='ComponentPage'?this.ManagerBtn=false:'';//是否显示提交按钮
-      this.getSystermTime();
-      this.taskwaitting = JSON.parse(localStorage.getItem('QTToReconsiderParams'));
-      console.log('reconType:',this.taskwaitting.reconType)
-      this.reApplyInf = JSON.parse(localStorage.getItem('userInf'));
-      this.getInf();
-      //传入isManager判断是否可编辑
-      // if (this.isManager == 'Manager') {
-      //   this.manager = true;
-      //   this.ReIllustrate = false;
-      //   this.ManagerBtn = false;
-      //   this.HintStar = false;
-      // }
+      this.mountedInf();
     }
   }
 

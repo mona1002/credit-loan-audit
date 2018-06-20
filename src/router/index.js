@@ -188,6 +188,7 @@ component:timedTask
   {
     path: '/ReconsiderSplit',
     component: ReconsiderSplit,
+    name:'ReconsiderSplit'
   },
   // ---------------------流程监控---------
   {
@@ -291,7 +292,10 @@ component:timedTask
   },
   {
     path: "/MatchingInfQT",
-    component: MatchingInfQT
+    component: MatchingInfQT,
+    meta: {
+      newOne:false,
+    }
   },
   // ---------------大数据+社保--------------------
   {

@@ -173,6 +173,13 @@
 
       }
     },
+    watch: {
+      '$route' (to, from) {
+        if (to.path === '/ManagerTaskList') {
+          this.mountedInf();
+        }
+      }
+    },
     methods: {
       //   handleSizeChange(val) {
       //     this.params.pageSize = val;
@@ -180,6 +187,20 @@
       //     // this.getInf(this.params);
       //     this.inquire(this.params);
       //   },
+      mountedInf() {
+        this.getQTsituation(); //获取质检下拉
+        this.taskList = JSON.parse(localStorage.getItem('QTTrialManagerWorkbenchPass'))
+        this.params.processTemplateId = this.taskList.processTemplateId;
+        this.params.taskNodeName = this.taskList.taskNodeName;
+        this.params.taskStatus = this.taskList.taskStatus;
+        this.inquire(this.params);
+        // QTTrialManagerWorkbenchPass
+        //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
+        //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
+        //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
+        //   this.params.pageNum = this.currentPage, //页数（第几页）
+        //     this.params.pageSize = this.pageCount, //页面显示行数
+      },
       getQTsituation() { //获取质检状态下拉
         this.get("/system/getAllCheckState?" + Math.random())
           .then(res => {
@@ -207,6 +228,7 @@
         // 存储质检结论参数
         localStorage.setItem("QTTrialManagerTW", JSON.stringify(this.query));
         this.$router.push('/MatchingInfQT?checkApp_trial_manager');
+        this.$route.meta.newOne = true;
         // 存储components参数
         localStorage.setItem("QT", JSON.stringify(this.QTquery));
         localStorage.setItem("MatchFlag", JSON.stringify({
@@ -244,18 +266,7 @@
       },
     },
     mounted() {
-      this.getQTsituation(); //获取质检下拉
-      this.taskList = JSON.parse(localStorage.getItem('QTTrialManagerWorkbenchPass'))
-      this.params.processTemplateId = this.taskList.processTemplateId;
-      this.params.taskNodeName = this.taskList.taskNodeName;
-      this.params.taskStatus = this.taskList.taskStatus;
-      this.inquire(this.params);
-      // QTTrialManagerWorkbenchPass
-      //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
-      //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
-      //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
-      //   this.params.pageNum = this.currentPage, //页数（第几页）
-      //     this.params.pageSize = this.pageCount, //页面显示行数
+      this.mountedInf();
     },
     components: {
       myHead

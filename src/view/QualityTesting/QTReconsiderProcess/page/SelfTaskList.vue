@@ -142,6 +142,13 @@
         // totalRecord: 0, //总条数
       }
     },
+        watch: {
+      '$route' (to, from) {
+        if (to.path === '/SelfTaskList') {
+          this.mountedInf();
+        }
+      }
+    },
     methods: {
       //   handleSizeChange(val) {
       //     this.params.pageSize = val;
@@ -149,6 +156,19 @@
       //     // this.getInf(this.params);
       //     this.inquire(this.params);
       //   },
+      mountedInf(){
+ this.taskList = JSON.parse(localStorage.getItem('QTTrialSelftWorkbenchPass'))
+      this.params.processTemplateId = this.taskList.processTemplateId;
+      this.params.taskNodeName = this.taskList.taskNodeName;
+      this.params.taskStatus = this.taskList.taskStatus;
+      this.inquire(this.params)
+      // QTTrialSelftWorkbenchPass
+      //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
+      //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
+      //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
+      //   this.params.pageNum = this.currentPage, //页数（第几页）
+      //     this.params.pageSize = this.pageCount, //页面显示行数
+      },
       handleCurrentChange(val) {
         // this.params.pageNum = val;
         // this.inquire(this.params);
@@ -160,6 +180,7 @@
         // 存储质检结论参数
         localStorage.setItem("QTSelfTW", JSON.stringify(this.query));
         this.$router.push('/MatchingInfQT?checkApp_trial_self');
+          this.$route.meta.newOne = true;
         // 存储components参数
         localStorage.setItem("QT", JSON.stringify(this.QTquery));
         localStorage.setItem("MatchFlag", JSON.stringify({
@@ -196,17 +217,7 @@
       },
     },
     mounted() {
-      this.taskList = JSON.parse(localStorage.getItem('QTTrialSelftWorkbenchPass'))
-      this.params.processTemplateId = this.taskList.processTemplateId;
-      this.params.taskNodeName = this.taskList.taskNodeName;
-      this.params.taskStatus = this.taskList.taskStatus;
-      this.inquire(this.params)
-      // QTTrialSelftWorkbenchPass
-      //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
-      //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
-      //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
-      //   this.params.pageNum = this.currentPage, //页数（第几页）
-      //     this.params.pageSize = this.pageCount, //页面显示行数
+      this.mountedInf();
     },
     components: {
       myHead

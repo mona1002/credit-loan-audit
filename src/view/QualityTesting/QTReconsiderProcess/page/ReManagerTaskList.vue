@@ -126,8 +126,8 @@
           custName_la: '',
           certCode: '',
           instaskType: '',
-          isSend:'1',
-          checkType:'02'
+          isSend: '1',
+          checkType: '02'
           //   pageNum: '', //页数（第几页）
           //   pageSize: '', //页面显示行数
         },
@@ -185,6 +185,13 @@
         }],
       }
     },
+    watch: {
+      '$route' (to, from) {
+        if (to.path === '/ReManagerTaskList') {
+          this.mountedInf();
+        }
+      }
+    },
     methods: {
       //   handleSizeChange(val) {
       //     this.params.pageSize = val;
@@ -192,6 +199,19 @@
       //     // this.getInf(this.params);
       //     this.inquire(this.params);
       //   },
+      mountedInf() {
+        this.taskList = JSON.parse(localStorage.getItem('QTReWorkbenchPass'))
+        this.params.processTemplateId = this.taskList.processTemplateId;
+        this.params.taskNodeName = this.taskList.taskNodeName;
+        this.params.taskStatus = this.taskList.taskStatus;
+        this.inquire(this.params);
+        // QTManagerWorkbenchPass
+        //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
+        //   this.params.applySubNo = this.params.applySubNo.replace(this.reg, this.reVal)
+        //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
+        //   this.params.pageNum = this.currentPage, //页数（第几页）
+        //     this.params.pageSize = this.pageCount, //页面显示行数
+      },
       handleCurrentChange(val) { //跳转页面
         this.QTquery.id = this.query.id = val.id;
         this.QTquery.matchApplyId = this.query.ApplyId = val.applyId;
@@ -201,6 +221,7 @@
         // 存储质检结论参数
         localStorage.setItem("QTReManagerTW", JSON.stringify(this.query));
         this.$router.push('/MatchingInfQT?checkApp_check_recon_manager');
+        this.$route.meta.newOne = true;
         // 存储components参数
         localStorage.setItem("QT", JSON.stringify(this.QTquery));
         localStorage.setItem("MatchFlag", JSON.stringify({
@@ -240,17 +261,7 @@
       },
     },
     mounted() {
-      this.taskList = JSON.parse(localStorage.getItem('QTReWorkbenchPass'))
-      this.params.processTemplateId = this.taskList.processTemplateId;
-      this.params.taskNodeName = this.taskList.taskNodeName;
-      this.params.taskStatus = this.taskList.taskStatus;
-      this.inquire(this.params);
-      // QTManagerWorkbenchPass
-      //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
-      //   this.params.applySubNo = this.params.applySubNo.replace(this.reg, this.reVal)
-      //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
-      //   this.params.pageNum = this.currentPage, //页数（第几页）
-      //     this.params.pageSize = this.pageCount, //页面显示行数
+      this.mountedInf();
     },
     components: {
       myHead

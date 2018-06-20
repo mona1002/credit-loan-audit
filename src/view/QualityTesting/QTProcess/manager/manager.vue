@@ -198,7 +198,28 @@
         }],
       }
     },
+    watch: {
+      '$route' (to, from) {
+        if (to.path === '/manager') {
+          this.mountedInf();
+        }
+      }
+    },
     methods: {
+      mountedInf() {
+        this.taskList = JSON.parse(localStorage.getItem('QTManagerWorkbenchPass'))
+        this.params.processTemplateId = this.taskList.processTemplateId;
+        this.params.taskNodeName = this.taskList.taskNodeName;
+        this.params.taskStatus = this.taskList.taskStatus;
+        this.getQTsituation(); //质检状态下拉框
+        this.inquire(this.params);
+        // QTManagerWorkbenchPass
+        //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
+        //   this.params.applySubNo = this.params.applySubNo.replace(this.reg, this.reVal)
+        //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
+        //   this.params.pageNum = this.currentPage, //页数（第几页）
+        //     this.params.pageSize = this.pageCount, //页面显示行数
+      },
       getQTsituation() { //获取质检状态下拉
         this.get("/system/getAllCheckState?" + Math.random())
           .then(res => {
@@ -277,7 +298,7 @@
         //     return
         //   }
         // }
-        this.saveParams();// 提取入参 applyId taskId isSecondIns
+        this.saveParams(); // 提取入参 applyId taskId isSecondIns
         if (this.multipleSelectionParams == '') {
           this.$message.error('请选择一条数据！');
           return
@@ -324,6 +345,7 @@
         this.query.processInstanceId = val.processInstanceId;
         localStorage.setItem("QTManagerTW", JSON.stringify(this.query));
         this.$router.push('/MatchingInfQT?checkApp_check_manager');
+        this.$route.meta.newOne = true;
         // 存储components参数
         localStorage.setItem("QT", JSON.stringify(this.QTquery));
         localStorage.setItem("MatchFlag", JSON.stringify({
@@ -364,18 +386,7 @@
       },
     },
     mounted() {
-      this.taskList = JSON.parse(localStorage.getItem('QTManagerWorkbenchPass'))
-      this.params.processTemplateId = this.taskList.processTemplateId;
-      this.params.taskNodeName = this.taskList.taskNodeName;
-      this.params.taskStatus = this.taskList.taskStatus;
-      this.getQTsituation(); //质检状态下拉框
-      this.inquire(this.params);
-      // QTManagerWorkbenchPass
-      //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
-      //   this.params.applySubNo = this.params.applySubNo.replace(this.reg, this.reVal)
-      //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
-      //   this.params.pageNum = this.currentPage, //页数（第几页）
-      //     this.params.pageSize = this.pageCount, //页面显示行数
+      this.mountedInf();
     },
     components: {
       myHead

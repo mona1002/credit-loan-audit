@@ -174,6 +174,39 @@
     },
     props: ['msg', 'comBtn'],
     methods: {
+      mountedInf() {
+        this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) //初审-匹配查看
+        if (this.MatchFlag.MatchFlag == 'internal') {
+          console.log("内部匹配")
+          this.localInf = JSON.parse(localStorage.getItem("internalObj")) //初审-匹配查看
+        } else if (this.MatchFlag.MatchFlag == 'Query') {
+          console.log("综合查询")
+          this.localInf = JSON.parse(localStorage.getItem("Query")) //初审-匹配查看
+        } else if (this.MatchFlag.MatchFlag == 'QT') {
+          this.localInf = JSON.parse(localStorage.getItem("QT")) //综合查询
+        }
+        this.imgBaseUrl = imgUrl.imgBaseUrl;
+
+        this.post("/productArchive/getProductArchiveParentList", {
+          applyId: this.localInf.matchApplyId,
+          // applyId: this.localInf.applyId,
+          // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
+          // applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.ListParent = res.data;
+            if (this.ListParent) {
+              for (var i = 0; i < this.ListParent.length; i++) {
+                this.opendImg[i] = true;
+                this.closedImg[i] = false;
+              }
+            }
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+
+      },
       closeAlertSearch() {
         this.dataa = false;
       },
@@ -467,38 +500,8 @@
       }
     },
     mounted() {
-      // console.log(this.comBtn)
-      this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) //初审-匹配查看
-      if (this.MatchFlag.MatchFlag == 'internal') {
-        console.log("内部匹配")
-        this.localInf = JSON.parse(localStorage.getItem("internalObj")) //初审-匹配查看
-      } else if (this.MatchFlag.MatchFlag == 'Query') {
-        console.log("综合查询")
-        this.localInf = JSON.parse(localStorage.getItem("Query")) //初审-匹配查看
-      } else if (this.MatchFlag.MatchFlag == 'QT') {
-        this.localInf = JSON.parse(localStorage.getItem("QT")) //综合查询
-      }
-      this.imgBaseUrl = imgUrl.imgBaseUrl;
       this.odivMove(this.msg);
-      this.post("/productArchive/getProductArchiveParentList", {
-        applyId: this.localInf.matchApplyId,
-        // applyId: this.localInf.applyId,
-        // applyId:"62fecf51-4839-4639-afe0-9b7cde722a5e",
-        // applyId:"e0b51098-b24d-4211-8ae4-f08f657d7886"
-      }).then(res => {
-        if (res.statusCode == 200) {
-          this.ListParent = res.data;
-          if (this.ListParent) {
-            for (var i = 0; i < this.ListParent.length; i++) {
-              this.opendImg[i] = true;
-              this.closedImg[i] = false;
-            }
-          }
-        } else {
-          this.$message.error(res.msg);
-        }
-      });
-
+      this.mountedInf();
     },
     components: {
       RpdfDivLeft

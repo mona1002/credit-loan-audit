@@ -28,7 +28,6 @@
               </el-select>
             </p>
             <p>
-
             </p>
             <p class="btn_wrap">
               <el-button class="btn" type="primary" style="marginLeft:228px" @click="Rsearch">查询</el-button>
@@ -93,7 +92,7 @@
           id: '',
           matchApplyId: "",
           applySubNo: '',
-          businessId:'',
+          businessId: '',
         },
         taskList: '',
         tableData: [],
@@ -127,16 +126,34 @@
         }],
       }
     },
+    watch: {
+      '$route' (to, from) {
+        if (to.path === '/commissioner') {
+          this.mountedInf();
+        }
+      }
+    },
     methods: {
-
       //   handleSizeChange(val) {
       //     this.params.pageSize = val;
       //     this.params.pageNum = 1;
       //     // this.getInf(this.params);
       //     this.inquire(this.params);
       //   },
+      mountedInf() {
+        this.taskList = JSON.parse(localStorage.getItem('QTWorkbenchPass'))
+        this.params.processTemplateId = this.taskList.processTemplateId;
+        this.params.taskNodeName = this.taskList.taskNodeName;
+        this.params.taskStatus = this.taskList.taskStatus;
+        this.inquire(this.params);
+        // QTWorkbenchPass
+        //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
+        //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
+        //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
+        //   this.params.pageNum = this.currentPage, //页数（第几页）
+        //     this.params.pageSize = this.pageCount, //页面显示行数
+      },
       handleCurrentChange(val) {
-        console.log(val)
         // 根据两个条件去判断，首先根据 isSecondIns
         // 如果是 1 ，显示常规又专项
         // 如果不是： 根据instaskType 判断， instaskType=00 时：常规质检 ， instaskType=01 或 02：专项质检
@@ -152,13 +169,13 @@
         this.QTquery.id = this.query.id = val.id;
         this.QTquery.matchApplyId = this.query.ApplyId = val.applyId;
         this.QTquery.applySubNo = val.applySubno;
-         this.QTquery.businessId = val.businessId;
+        this.QTquery.businessId = val.businessId;
         this.query.taskId = val.taskId;
         this.query.processInstanceId = val.processInstanceId;
         // 存储质检结论参数
-        console.log( this.query)
         localStorage.setItem("QTTaskWait", JSON.stringify(this.query));
         this.$router.push('/MatchingInfQT?checkApp_apply');
+        this.$route.meta.newOne = true;
         // 存储components参数
         localStorage.setItem("QT", JSON.stringify(this.QTquery));
         localStorage.setItem("MatchFlag", JSON.stringify({
@@ -198,17 +215,7 @@
       },
     },
     mounted() {
-      this.taskList = JSON.parse(localStorage.getItem('QTWorkbenchPass'))
-      this.params.processTemplateId = this.taskList.processTemplateId;
-      this.params.taskNodeName = this.taskList.taskNodeName;
-      this.params.taskStatus = this.taskList.taskStatus;
-      this.inquire(this.params);
-      // QTWorkbenchPass
-      //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
-      //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
-      //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
-      //   this.params.pageNum = this.currentPage, //页数（第几页）
-      //     this.params.pageSize = this.pageCount, //页面显示行数
+      this.mountedInf();
     },
     components: {
       myHead

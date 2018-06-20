@@ -99,7 +99,7 @@
           listType: '',
           reconType: ''
         },
-        falge:'',
+        flag: '',
         QTquery: {
           id: '',
           matchApplyId: "",
@@ -165,6 +165,13 @@
         // totalRecord: 0, //总条数
       }
     },
+    watch: {
+      '$route' (to, from) {
+        if (to.path === '/ACManagerTaskList') {
+          this.mountedInf();
+        }
+      }
+    },
     methods: {
       //   handleSizeChange(val) {
       //     this.params.pageSize = val;
@@ -172,6 +179,32 @@
       //     // this.getInf(this.params);
       //     this.inquire(this.params);
       //   },
+      mountedInf() {
+        this.flag = JSON.parse(localStorage.getItem('judge'));
+        if (this.flag.flag == '12') {
+          this.taskList = JSON.parse(localStorage.getItem('QTAreaWorkbenchPass'));
+          //console.log(this.taskList);
+          this.params.processTemplateId = this.taskList.processTemplateId;
+          this.params.taskNodeName = this.taskList.taskNodeName;
+          this.params.taskStatus = this.taskList.taskStatus;
+          this.inquire(this.params);
+        } else if (this.flag.flag == '13') {
+          //this.taskList = JSON.parse(localStorage.getItem('QTAreaWorkbenchPass'));
+          this.taskList = JSON.parse(localStorage.getItem('QTComplianceWorkbenchPass'));
+          //console.log(this.taskList);
+          this.params.processTemplateId = this.taskList.processTemplateId;
+          this.params.taskNodeName = this.taskList.taskNodeName;
+          this.params.taskStatus = this.taskList.taskStatus;
+          this.inquire(this.params);
+        }
+        // QTAreaWorkbenchPass 区域
+        // QTComplianceWorkbenchPass 合规
+        //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
+        //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
+        //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
+        //   this.params.pageNum = this.currentPage, //页数（第几页）
+        //     this.params.pageSize = this.pageCount, //页面显示行数
+      },
       handleCurrentChange(val) {
         console.log(val)
         this.query.reconType = val.reconType;
@@ -192,6 +225,7 @@
           MatchFlag: 'QT'
         }));
         this.$router.push('/MatchingInfQT?' + this.params.taskNodeName);
+        this.$route.meta.newOne = true;
         // this.params.pageNum = val;
         // this.inquire(this.params);
       },
@@ -232,31 +266,7 @@
       }
     },
     mounted() {
-      this.falge = JSON.parse(localStorage.getItem('judge'));
-      if(this.falge.flag == '12'){
-        this.taskList = JSON.parse(localStorage.getItem('QTAreaWorkbenchPass'));
-        //console.log(this.taskList);
-        this.params.processTemplateId = this.taskList.processTemplateId;
-        this.params.taskNodeName = this.taskList.taskNodeName;
-        this.params.taskStatus = this.taskList.taskStatus;
-        this.inquire(this.params);
-      }else if(this.falge.flag == '13'){
-        //this.taskList = JSON.parse(localStorage.getItem('QTAreaWorkbenchPass'));
-        this.taskList = JSON.parse(localStorage.getItem('QTComplianceWorkbenchPass'));
-        //console.log(this.taskList);
-        this.params.processTemplateId = this.taskList.processTemplateId;
-        this.params.taskNodeName = this.taskList.taskNodeName;
-        this.params.taskStatus = this.taskList.taskStatus;
-        this.inquire(this.params);
-      }
-      
-      // QTAreaWorkbenchPass 区域
-      // QTComplianceWorkbenchPass 合规
-      //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
-      //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
-      //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
-      //   this.params.pageNum = this.currentPage, //页数（第几页）
-      //     this.params.pageSize = this.pageCount, //页面显示行数
+      this.mountedInf();
     },
     components: {
       myHead

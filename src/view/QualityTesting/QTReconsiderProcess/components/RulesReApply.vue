@@ -67,7 +67,7 @@
               <li>
                 <p class="description" style="position:relative;;">
                   <label>复议说明： </label>
-                    <span class="area">{{auditDesc.reviewRemark}} </span>
+                  <span class="area">{{auditDesc.reviewRemark}} </span>
                 </p>
               </li>
               <li class="ApplyInf">
@@ -106,16 +106,29 @@
         applyInfoPool: {
           // applySubno: '',
         },
-        auditDesc:{
-            reviewRemark:''
+        auditDesc: {
+          reviewRemark: ''
         },
       }
     },
-    props: ['propReApply','applyId'],
+    props: ['propReApply', 'applyId'],
     components: {
       myHead
     },
+    watch: {
+      '$route' (to, from) {
+        if (to.path === '/RulesReApply') {
+          this.mountedInf();
+        }
+      }
+    },
     methods: {
+      mountedInf() {
+        this.getSystermTime();
+        this.reApplyInf = JSON.parse(localStorage.getItem('userInf'));
+        this.getInf();
+        this.getDec(); //查询复议说明字段
+      },
       getSystermTime() { // 获取系统时间-质检结论-质检日期取值---基础接口
         this.get('system/getSystemDate?' + Math.random()).then(res => {
           if (res.statusCode == 200) {
@@ -127,26 +140,22 @@
         // this.get('/insReconApply/queryInsConclusionInfo', {
         //   applyId: this.applyId
         // }
-         this.get('/insReconApply/queryInsConclusionInfo?applyId='+this.applyId+"&"+Math.random())
-         .then(res => {
-           this.tableData=[];
-          this.applyInfoPool = res.data.applyBaseInfo; //基本信息
-          this.tableData.push(res.data.insConclusion); //-----------需要调接口查看返回对象，还是数组
-          console.log(  this.tableData)
-        })
+        this.get('/insReconApply/queryInsConclusionInfo?applyId=' + this.applyId + "&" + Math.random())
+          .then(res => {
+            this.tableData = [];
+            this.applyInfoPool = res.data.applyBaseInfo; //基本信息
+            this.tableData.push(res.data.insConclusion); //-----------需要调接口查看返回对象，还是数组
+          })
       },
-      getDec(){//查询复议说明字段
-         this.get('/insReconApply/getReconApplyReconApproval?applyId='+this.applyId+"&"+Math.random())
-         .then(res => {
-          this.auditDesc=res.data.insReconApplyList[res.data.insReconApplyList.length-1];
-        })
+      getDec() { //查询复议说明字段
+        this.get('/insReconApply/getReconApplyReconApproval?applyId=' + this.applyId + "&" + Math.random())
+          .then(res => {
+            this.auditDesc = res.data.insReconApplyList[res.data.insReconApplyList.length - 1];
+          })
       }
     },
     mounted() {
-      this.getSystermTime();
-      this.reApplyInf = JSON.parse(localStorage.getItem('userInf'));
-      this.getInf();
-      this.getDec();//查询复议说明字段
+      this.mountedInf();
     }
   }
 
@@ -155,7 +164,7 @@
   .aAntiApplyInf {
     min-width: 1366px;
     height: 100%;
-    width:100%;
+    width: 100%;
     /* overflow-x: hidden; */
   }
 
@@ -185,14 +194,15 @@
     clear: both;
     margin: 10px 0;
   }
-.area{
-display: inline-block;
-border: 1px solid #ebeef5;
-height: 70px;
-width:800px;
-border-radius:4px;
-vertical-align: top;
-}
+
+  .area {
+    display: inline-block;
+    border: 1px solid #ebeef5;
+    height: 70px;
+    width: 800px;
+    border-radius: 4px;
+    vertical-align: top;
+  }
 
   .AntiInf {
     padding-top: 10px;
