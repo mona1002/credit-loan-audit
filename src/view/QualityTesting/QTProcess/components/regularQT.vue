@@ -724,7 +724,7 @@
         <img src="../../../../../static/images/relieve.png">
         <label class="labelTxt">保存</label>
       </el-button>
-      <el-button @click="submitShow=true" v-if="submitBtn">
+      <el-button @click="SubmitAlert" v-if="submitBtn">
         <!-- <el-button @click="SaveInf('提交')" v-if="submitBtn"> -->
         <img src="../../../../../static/images/appro.png">
         <label class="labelTxt">提交</label>
@@ -1577,9 +1577,17 @@
           this.others = true;
         }
       },
+      SubmitAlert(){//提交弹窗
+        this.submitShow=true;
+        this.adbtn='确认';
+        this.loadsitu=false;
+      },
       // ---------------------------------按钮事件----------------
       // 保存 或 提交
       SaveInf(type) { //质检主管不需要提交，只有质检专员 显示提交
+       this.loadsitu=true;
+        this.adbtn='提交中';
+        this.submitShow=false;
         this.checkResultCount01 = 0;
         this.checkResultCount02 = 0;
         this.checkResultCount03 = 0;

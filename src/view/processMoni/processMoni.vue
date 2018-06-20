@@ -160,7 +160,7 @@
           :page-size= setPageSize
           layout="total, sizes, prev, pager, next, jumper"
           :total=responseDatas.totalNum>
-        </el-pagination>
+        </el-pagination>f
       </div>
     </div>
 
@@ -326,7 +326,7 @@ export default {
   data() {
     return {
       taskNodes: [],
-userCode:'',
+      userCode:'',
       taskTypes: [
         {value: '00',label: '新任务'},
         {value: '01',label: '回退任务'},
@@ -405,6 +405,8 @@ userCode:'',
   watch: {
     '$route'(to,from){
       if(to.fullPath !== from.fullPath){
+        this.queryParam.pageNum=this.currentPage=1;
+        this.queryParam.pageSize=this.setPageSize=10;
         this.getUserInf();
         // this.getProcessMonitorList();
         this.responseDatas.totalNum = 0;

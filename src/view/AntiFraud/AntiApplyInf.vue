@@ -130,12 +130,21 @@ export default {
     }
   },
   props: ['isAntiDetail'],
+      watch: {
+      '$route' (to, from) {
+        if (to.path === '/AntiApplyInf' && this.$route.params.newOne) {
+          this.mountedInf();
+        }
+      }
+    },
   mounted() {
-    // console.log(this.showFqz);
+    this.mountedInf();
+  },
+  methods: {
+    mountedInf(){
     // 先判断是 初审 终审  /  专员  主管
     /*var judgeFlag = JSON.parse(localStorage.getItem('judge'));
     this.antiFlag = judgeFlag.flag;
-
     if (this.isAntiDetail == true) {
       // 初审 终审 取 applyId
       if (this.antiFlag == '01' || this.antiFlag == '02') {
@@ -158,19 +167,14 @@ export default {
       // 获取到 id
       this.applyId = this.$route.params.id;
     }*/
-
     this.applyId = this.$route.params.applyId;
-    console.log( this.$route.params)
     // 经办人 登录用户名
     var userInfo = JSON.parse(localStorage.getItem('userInf'));
     this.userCode = userInfo.userCode;
     this.orgCode = userInfo.orgCode;
-
     // 查询反欺诈信息
     this.getFraudApplyInfo();
-
-  },
-  methods: {
+    },
     // 查询 反欺诈信息
     getFraudApplyInfo() {
       // 测试 id

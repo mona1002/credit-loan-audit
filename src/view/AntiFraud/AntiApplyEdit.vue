@@ -162,9 +162,19 @@
         data: '', //请求回来的数据
       }
     },
+    watch: {
+      '$route' (to, from) {
+        if (to.path === '/AntiApplyEdit') {
+          this.mountedInf();
+        }
+      }
+    },
     mounted() {
-      console.log(this.showFqz);
-      // 经办人 登录用户名
+     this.mountedInf();
+    },
+    methods: {
+      mountedInf(){
+   // 经办人 登录用户名
       var userInfo = JSON.parse(localStorage.getItem('userInf'));
       this.userCode = userInfo.userCode;
       this.orgCode = userInfo.orgCode;
@@ -221,7 +231,6 @@
       // this.routeBusiState = stateParms[2][1];//如需此入参
       // 获取到 id
       this.id = this.$route.params.id || this.routeId;
-      console.log(this.$route.params.id)
       /* 标志  
        start 发起反欺诈
        edit  编辑
@@ -231,11 +240,8 @@
       // var pars=this.$route.fullPath.split('?')[1].split('=')[1];
       this.flag = this.$route.params.flag || this.routeFlag;
       // 获取到 id
-      console.log(this.$route.fullPath)
       // this.applyId =this.$route.params.id||pars;
       this.applyId = this.$route.params.id || this.routeId;
-
-      // console.log(this.flag);
 
       if (this.flag == 'start') {
         this.getFraudApplyInfo();
@@ -249,11 +255,7 @@
       // 请求主原因
       this.firstNodeReason();
 
-
-
-
-    },
-    methods: {
+      },
       // 请求系统时间
       getSystemDate() {
         // 获取系统时间
@@ -261,13 +263,11 @@
           console.log('回退', res)
           // 请求系统时间
           this.dealroperDate = res.data;
-          console.log('this.', this.dealroperDate);
         })
       },
       // 反欺诈申请 获取 主原因子原因
       firstNodeReason() {
         this.get('/credit/firstNodeReason?reasonType=' + '08,09'+'&'+Math.random()).then(res => {
-          console.log(res);
           this.mainReasons = res.data;
           // 请求回来的 赋值
           this.mainReason = this.mainReasonT;

@@ -214,9 +214,6 @@
             applyCode: this.userCode
           }
         }).then(res => {
-          console.log(res);
-          console.log(res.statusCode);
-          console.log(res.data);
           if (res.statusCode == '200') {
             this.antiTableData = res.data;
           }
@@ -277,7 +274,6 @@
       },
       // 反欺诈申请编辑
       handleClickEdit(row) {
-        console.log('click the row in table');
         // row 有值, 跳编辑
         // var routeParms;
         if (row) {
@@ -301,12 +297,12 @@
           // })
         } else { // 否则是新增
           // routeParms = 'id=' + ';flag=add'
-          console.log('新增')
           this.$router.push({
             name: 'AntiApplyAdd',
             params: {
               id: '',
-              flag: 'add'
+              flag: 'add',
+              newOne: true,
             }
           });
           // this.$store.dispatch('addVisitedViews', {
@@ -318,25 +314,6 @@
           // })
         }
       },
-      // 反欺诈申请查看
-     /* handleClickInfo(row) {
-        // 
-        console.log(row);
-        this.$router.push({
-          name: 'AntiApplyInf',
-          params: {
-            id: row.id,
-            applyId:row.applyId
-          }
-        });*/
-        /*this.$store.dispatch('addVisitedViews', {
-          name: '反欺诈申请-查看',
-          path: '/AntiApplyInf',
-          flag: '',
-          params: '?id=' + row.id,
-          StatefullPath: '/AntiApplyInf',
-        })
-      },*/
       // 主管/专员审批 跳分屏  
       // 反欺诈申请列表  没有详情
       goDetail(row, event, column) {
@@ -345,18 +322,17 @@
           name: 'AntiApplyInf',
           params: {
             id: row.id,
-            applyId:row.applyId
+            applyId:row.applyId,
+            newOne: true,
           }
         })
       },
       handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
         this.pageSize = val;
         this.pageNum = 1;
         this.queryList();
       },
       handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
         this.pageNum = val;
         // this.pageSize=5;
         this.queryList();

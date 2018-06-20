@@ -186,11 +186,9 @@
         this.queryParam.custName_la = this.custName_la;
         this.queryParam.certCode = this.certCode;
         this.request(this.queryParam);
-        console.log(this.queryParam);
       },
       //跳转到详情页
       goDetail(row, event, column) {
-        console.log(row);
         // this.$router.push({
         //   path: '/FSplitScreen'
         // });
@@ -201,13 +199,6 @@
             }
           });
         localStorage.setItem("FtaskInWaitting", JSON.stringify(row));
-        // this.$store.dispatch('addVisitedViews', {
-        //   name: '终审详情',
-        //   path: '/FSplitScreen',
-        //   flag: '02',
-        //   params: '',
-        //   StatefullPath: '/FSplitScreen',
-        // })
       },
       handleSizeChange(val) {
         console.log('每页 ${val} 条');

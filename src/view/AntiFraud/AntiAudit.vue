@@ -37,32 +37,21 @@
           </div>
           <!-- 右侧 tab 内容  AntiFirstAud-->
           <div class="tab2_Content">
-            <AnitAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" ></AnitAudioVisual>
-            <!-- √ -->
+            <AnitAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AnitAudioVisual>
             <cremark v-if=" this.tabContent2==1"></cremark>
-            <!-- √ -->
             <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
-            <!-- √ -->
             <AborrowerInformationDetail v-if=" this.tabContent2==4"></AborrowerInformationDetail>
-            <!-- √ -->
             <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
             <AntiCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></AntiCreditForm>
-            <!-- √ -->
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
-            <!-- √ -->
             <!-- 信审审批结论轨迹 -->
             <aAprovalConclusion v-if=" this.tabContent2==8"></aAprovalConclusion>
-            <!-- √ -->
             <!-- 反欺诈审批结论轨迹 -->
             <aAntiConclusionPath v-if=" this.tabContent2==9"></aAntiConclusionPath>
-            <!-- √ -->
             <AntiApplyInf v-if=" this.tabContent2==10" :isAntiDetail="true">反欺诈申请信息</AntiApplyInf>
-            <!-- √ -->
             <aAntiFraudInvestigation v-if=" this.tabContent2==11">反欺诈调查</aAntiFraudInvestigation>
-            <!-- √ -->
             <approvalConclus v-if=" this.tabContent2==12">审批结论</approvalConclus>
-            <!-- √ -->
           </div>
         </div>
       </div>
@@ -94,7 +83,7 @@
         SplitRight: "right",
         watchData: '',
         originLeft: '',
-        accepCusBasicInfo:'',
+        accepCusBasicInfo: '',
         // 进件人信息
         customInf: [], //申请信息页local字段
         tastwaitingPass: [], //详情列表页信息--(含)取applyId
@@ -112,13 +101,36 @@
         AlertSearch: "",
       }
     },
-        watch: {
-          '$route' (to, from) {
+    watch: {
+      '$route' (to, from) {
         if (to.path === '/AntiAudit' && this.$route.params.newOne) {
-
-        }}
-      },
+          this.mountedInf();
+          this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 3;
+          this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
+        }
+      }
+    },
     methods: {
+      mountedInf() {
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈
+        // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+        // if (this.judgeFlag.flag == '03') {
+        //   this.tastwaitingPass = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈专员
+        // } else if (this.judgeFlag.flag == '04') {
+        //   this.tastwaitingPass = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管
+        // }
+        this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
+          id: this.tastwaitingPass.applyId,
+        }).then(res => {
+          if (res.statusCode == 200) {
+            //this.custName=res.data.accepCusBasicInfo.custName;
+            this.customInf = res.data;
+            this.accepCusBasicInfo = res.data.accepCusBasicInfo;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      },
       compBtnS() {
         this.CompareAlert = true;
       },
@@ -154,24 +166,7 @@
       }
     },
     mounted() {
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈
-      // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      // if (this.judgeFlag.flag == '03') {
-      //   this.tastwaitingPass = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈专员
-      // } else if (this.judgeFlag.flag == '04') {
-      //   this.tastwaitingPass = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管
-      // }
-      this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-        id: this.tastwaitingPass.applyId,
-      }).then(res => {
-        if (res.statusCode == 200) {
-           //this.custName=res.data.accepCusBasicInfo.custName;
-          this.customInf = res.data;
-          this.accepCusBasicInfo = res.data.accepCusBasicInfo;
-        } else {
-          this.$message.error(res.msg);
-        }
-      });
+      this.mountedInf();
     },
     components: {
       myHead,
@@ -199,6 +194,7 @@
     height: 100%;
     /* min-width: 1366; */
   }
+
   /* 激活样式 流-css */
 
   .tab1Default {
@@ -225,6 +221,7 @@
   .setGray {
     color: #bfcbd9;
   }
+
   /*-------------------------------- */
 
   .SplitScreen_content {
@@ -233,6 +230,7 @@
     overflow: auto;
     padding: 13px 9px;
   }
+
   /* 借款人详情 */
 
   .PerDtl {
@@ -251,6 +249,7 @@
   }
 
   /* 切换按钮 */
+
   /* 左右分屏 */
 
   .SplitScreen_wrap {
@@ -269,7 +268,9 @@
     float: left;
     position: relative;
   }
+
   /* 左屏 */
+
   /* 左侧详情 p标签   流-css */
 
   .right .Right_tab_title_div,
@@ -288,6 +289,7 @@
     text-align: right;
     padding-right: 40px;
   }
+
   /* 左侧详情 content div 内容   流-css */
 
   .Left_right_BigImg {
@@ -295,7 +297,9 @@
     height: calc( 100% - 48px);
     overflow: auto;
   }
+
   /* 右屏 */
+
   /* 右侧tab切换头外的ul   流 */
 
   .Right_tab_ul_wrap {
@@ -319,13 +323,13 @@
     height: 38px;
     line-height: 38px;
   }
-  /* ======================================================================================================= */
 
   .tab2_Content {
     /*background: purple;*/
     height: calc( 100% - 48px);
     overflow: auto;
   }
+
   /* 右侧tab切换头 左右滑动图标  流  */
 
   .pre_next_btn_wrap {

@@ -256,8 +256,18 @@
         flowRoleCodesList:[],//用来判断channel的值
       }
     },
+     watch: {
+      '$route' (to, from) {
+        if (to.path === '/AntiApplyAdd' && this.$route.params.newOne) {
+          this.mountedInf();
+        }
+      }
+    },
     mounted() {
-      console.log(this.showFqz);
+      this.mountedInf();
+    },
+    methods: {
+      mountedInf(){
       // 经办人 登录用户名
       var userInfo = JSON.parse(localStorage.getItem('userInf'));
       this.userCode = userInfo.userCode;
@@ -322,11 +332,7 @@
 
       // 查询反欺诈信息
       // this.getFraudApplyInfo();
-
-
-
-    },
-    methods: {
+      },
       // 请求系统时间
       getSystemDate() {
         // 获取系统时间
@@ -409,7 +415,6 @@
       //   })
       // },
       submitForm() {
-        console.log('提交反欺诈')
         // 判断必填
         if (!this.applySubNo) {
           this.$message({

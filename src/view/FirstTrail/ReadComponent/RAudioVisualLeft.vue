@@ -70,7 +70,7 @@
     </div>
     <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面 -->
     <div class="Small_pic_div" v-show="SmallPicShow">
-      <p class="Small_pic_title"> 缩略图-申请信息
+      <p class="Small_pic_title"> 缩略图
         <img src="../../../../static/images/D625BA67-2F56-42C1-9E9D-A47AE03BA028@1x.png" class="small_pic_close" @click="SmallpicClose">
       </p>
       <div class="small_pic_content">

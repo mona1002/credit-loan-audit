@@ -254,7 +254,7 @@
     },
     watch: {
       '$route' (to, from) {
-        if (to.fullPath !== from.fullPath) {
+        if (to.path === '/AntiFraud34') {
           this.toinner();
         }
       }
@@ -265,8 +265,6 @@
         // 反欺诈申请 / 反欺诈专员审批 / 反欺诈主管审批
         var judgeFlag = JSON.parse(localStorage.getItem('judge'));
         this.antiFlag = judgeFlag.flag;
-        console.log(this.antiFlag);
-
         // 删除 审批结论存到本地的数据
         localStorage.removeItem('saveInsertObj');
         // 根据  antiFlag 判断
@@ -274,13 +272,11 @@
         if (this.antiFlag == '03' || this.antiFlag == '04') {
           if (this.antiFlag == '03') {
             this.processTemplateId = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).processTemplateId;
-
             this.taskNodeName = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskNodeName;
             this.taskStatus = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).taskStatus;
           }
           if (this.antiFlag == '04') {
             this.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
-
             this.taskNodeName = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskNodeName;
             this.taskStatus = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).taskStatus;
           }
@@ -288,9 +284,7 @@
           // 登录 单独存  userCode  orgCode 
           this.userCode = JSON.parse(localStorage.getItem('userInf')).userCode;
           this.orgCode = JSON.parse(localStorage.getItem('userInf')).orgCode;
-
           this.request();
-
           // this.queryList();
         } else {
           // 反欺诈申请 - 列表
@@ -305,17 +299,12 @@
           applyCustNo: this.applyCustNo, // 客户编号
           applyCode: this.userCode
         }).then(res => {
-          console.log(res);
-          console.log(res.statusCode);
-          console.log(res.data);
           if (res.statusCode == '200') {
             this.antiTableData = res.data;
           }
         })
       },
       request() {
-
-
         this.post('/workFlowTaskQuery/getTaskToDoList', {
           processTemplateId: this.processTemplateId,
           taskNodeName: this.taskNodeName,
@@ -333,7 +322,6 @@
           } else {
             this.directorTableData = [];
           }
-
         })
       },
       // 重置查询条件
@@ -366,7 +354,6 @@
       },
       // 反欺诈申请编辑
       handleClickEdit(row) {
-        console.log('click the row in table');
         // row 有值, 跳编辑
         // var routeParms;
         if (row) {
@@ -375,7 +362,7 @@
           this.$router.push({
             name: 'AntiApplyEdit',
             params: {
-              id: row.id
+              id: row.id,
             }
           });
           // localStorage.setItem("antiApplyFlagEdit", JSON.stringify(routeParms));
@@ -408,65 +395,29 @@
           name: 'AntiApplyInf',
           params: {
             id: row.id,
-             applyId:row.applyId
+            applyId: row.applyId
           }
         });
       },
       // 主管/专员审批 跳分屏
       rowDbClick(row) {
-        // console.log('主管/专员 跳分屏')
-         localStorage.setItem("AntitaskInWaitting", JSON.stringify(row))
-        // this.$router.push({ path: '/FSplitScreen' });
-        // if (this.antiFlag == '03' ||this.antiFlag == '04') {
-        //   // 反欺诈专员
-        //   localStorage.setItem("AntitaskInWaitting", JSON.stringify(row))
-        //   // 反欺诈  分屏
-        //   // this.$router.push('AntiAudit')
-        // //    this.$store.dispatch('addVisitedViews', {
-        // //   name: '反欺诈专员详情',
-        // //   path: '/AntiAudit',
-        // //   flag: '03',
-        // //   params: '',
-        // //   StatefullPath: '/AntiAudit',
-        // // })
-        // }
-        // if (this.antiFlag == '04') {
-        //   // 反欺诈主管
-        //   localStorage.setItem("AntiManagertaskInWaitting", JSON.stringify(row))
-        //   // 反欺诈  分屏
-        //   // this.$router.push('AntiAudit');
-        // //    this.$store.dispatch('addVisitedViews', {
-        // //   name: '反欺诈主管详情',
-        // //   path: '/AntiAudit',
-        // //   flag:'04',
-        // //   params: '',
-        // //   StatefullPath: '/AntiAudit',
-        // // })
-        // }
-            this.$router.push({
+        localStorage.setItem("AntitaskInWaitting", JSON.stringify(row))
+        this.$router.push({
           name: 'AntiAudit',
           params: {
             id: row.id,
-             applyId:row.applyId
+            applyId: row.applyId,
+             newOne: true,
           }
         });
-        //详情页跳转到同一个时用下面的方法，许调整反欺诈列表页存为一个字段，不用flag判断。
-        // this.$store.dispatch('addVisitedViews', {
-        //   name: '反欺诈详情',
-        //   path: '/AntiAudit',
-        //   flag: this.antiFlag,//此处带更新完列表后更改为固定值
-        //   params: '',
-        //   StatefullPath: '/AntiAudit',
-        // })
+        this.$message.error(row.applyId)
       },
       handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
         this.pageSize = val;
         this.pageNum = 1;
         this.request();
       },
       handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
         this.pageNum = val;
         // this.pageSize=5;
         this.request();

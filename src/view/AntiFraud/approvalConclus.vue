@@ -455,11 +455,8 @@
       }
     },
     mounted() {
-      console.log(JSON.parse(localStorage.getItem("AntitaskInWaitting")))
-      
       // 取出  申请信息   applicationInformationDetail
       this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
-      //console.log(this.applicationInformationDetail);
       this.custName = this.applicationInformationDetail.custName;
       this.certCode = this.applicationInformationDetail.certCode;
       this.Social();
@@ -529,7 +526,6 @@
         // 请求风险项
         this.getRiskItems();
         // 专员主管区分
-        console.log(this.taskName )
         if (this.taskName == 'antiFraudApp_commissioner') { // 专员
         this.processTemplateId = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).processTemplateId;
           this.isEdit = true;
@@ -612,7 +608,6 @@
       //     // }
       //     // 请求风险项
       //     // this.getRiskItems();
-      //      console.log('顶顶顶顶顶顶顶顶顶顶')
       //   }
       //   // 请求风险项
       //   this.getRiskItems();
@@ -699,7 +694,6 @@
             if (action === 'confirm') {
               instance.confirmButtonLoading = true;
               instance.confirmButtonText = '执行中...';
-              console.log(this.taskId)
 
               this.busiState = '30'
               // 点击 确认 提交 方法
@@ -708,8 +702,6 @@
                 busiState: this.busiState,
                 applyId: this.applyId, // 申请单id
               }).then(res => {
-                console.log(res);
-                console.log(res.statusCode);
                 if (res.statusCode == '200') {
                   done();
                 } else {
@@ -735,10 +727,8 @@
       getSystemDate() {
         // 获取系统时间
         this.get('system/getSystemDate?' + Math.random()).then(res => {
-          console.log('回退', res)
           // 请求系统时间
           this.dealroperDate = res.data;
-          console.log('this.', this.dealroperDate);
         })
       },
       // 请求风险项
@@ -746,10 +736,7 @@
         this.get('/credit/getRiskItems?applyId=' + this.applyId + '&' + Math.random()).then(res => {
 
           if (res.statusCode == 200) {
-            // console.log('请求风险项成功')
-            console.log(res)
             this.riskSections = res.data;
-            console.log(this.riskSections)
             // 主管 
             // if (TF == true) {
             //   for (var i = 0; i < this.riskSection.length; i++) {
@@ -774,18 +761,12 @@
       // 请求案件编号 
       queryCaseNumList() {
         this.get('/fraudAuditOpinion/queryCaseNumList?' + Math.random()).then(res => {
-          // console.log(res);
           if (res.statusCode == '200') {
-            console.log('电话客户打款顶级联赛的就角度考虑附件'+res.data[0].caseNum);
             //this.list = res.data;
             this.restaurants = res.data;
-            console.log(this.restaurants);
-            console.log(typeof(this.restaurants));
-            console.log(this.restaurants instanceof Array); 
            /* this.list = res.data.map(item => {
             return { value: item.caseNum, label: item.caseNum };
-          });
-          console.log('*********'+this.list);*/
+          });         */
           }
         })
       },
@@ -807,7 +788,6 @@
         };
       },
       handleSelect(item) {
-        console.log(item);
       },
       // 审批
       insert(val) {
@@ -838,12 +818,6 @@
         }
 
         if (this.auditResult != '02') {
-          console.log(this.auditResult)
-          console.log(this.mainReason)
-          console.log(this.mainReasonName)
-          console.log(this.secondReason)
-          console.log(this.subreaName)
-          console.log(this.auditDesc)
           // 判断必填项
           if (!this.auditResult || !this.mainReason || !this.secondReason || !this.auditDesc) {
 
@@ -869,12 +843,10 @@
           }
         }
 
-        console.log('审批结论', this.auditResult)
         // 处理风险项
         if (this.auditResult != '02' || this.auditResult != '01') {
 
           if (this.riskSection.length > 0) {
-            console.log(this.riskSection);
             // 页面的选项值
             for (var i = 0; i < this.riskSection.length; i++) {
               // 请求回来的列表值
@@ -891,19 +863,15 @@
                 }
               }
             }
-            console.log(this.riskSectionArr)
             // return;
           }
 
 
 
 
-          console.log('进入信息化')
           // 取出主原因name
           if (this.mainReason) {
             for (var i = 0; i < this.mainReasons.length; i++) {
-              console.log(this.mainReasons);
-              console.log(this.mainReasons[i].id, this.mainReason)
               if (this.mainReasons[i].id == this.mainReason) {
                 this.mainReasonName = this.mainReasons[i].reasonName;
               }
@@ -996,7 +964,6 @@
               type: 'success',
               message: '反欺诈审批成功!'
             });
-            console.log('准备走成功的路由 ')
             this.$router.push('/AntiFraud34');
             //  this.goToPath();
           });
@@ -1083,26 +1050,20 @@
           case '02':
             // this.coverShow = true;
             this.huiTuiShow = true;
-            console.log('020202020202020202')
-            console.log(this.showFlag);
             this.showFlag = '02';
             // 获取系统时间
             this.get('system/getSystemDate?' + Math.random()).then(res => {
-              console.log('回退', res)
               // 请求系统时间
               this.dealroperDate = res.data;
-              console.log('this.', this.dealroperDate);
             })
             break;
 
           case 'lcgj':
             // this.coverShow = true;
-            console.log('lclclcllclclclclcllclcl')
             // this.showFlag = 'lcgj';
             this.lcgjShow = true;
             // 取本地的 流程模版id
             // this.processTemplateId = JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
-            // console.log(this.processTemplateId);
 
             this.lcgjLoading = true;
             this.getLcgjList();
@@ -1140,10 +1101,8 @@
               caseNum: this.caseNum, // 案件编号 caseNum
               caseDesc: this.caseDesc, // 案件描述
             }
-            //  console.log(this.$refs.mainReasonName.selectedLabel)
             //  this.mainName=this.$refs.mainReasonName.selectedLabel;
             //  this.secondaryName=this.$refs.sencondReasonName.selectedLabel;
-            console.log(12343567890, this.mainName, this.secondaryName)
             // 点击保存 存本地
             localStorage.setItem('saveInsertObj', JSON.stringify(tempObj));
             // 保存 成功
@@ -1170,23 +1129,19 @@
       },
       // 每页条数
       handleSizeChange(val) {
-        console.log("每页 ${val}条", val);
         this.pageSize = val;
         this.queryDetailList();
       },
       // 页码
       handleCurrentChange(val) {
-        console.log("当前页: ${val}", val);
         this.pageNum = val;
         this.queryDetailList();
       },
       submitFn(flag) {
-        console.log(flag)
         // 手动赋值  经办人
         this.dealroperCode = this.dealroperCode;
         switch (flag) {
           case '02':
-            console.log("回退");
             // 进行必填校验
             // 回退节点
             if (this.rollbackNodeName.length == 0) {
@@ -1230,7 +1185,6 @@
         this.isLoading = true;
         this.loadingTitle = '提交中';
         // 判断终审的 opinionFlag 
-        console.log(this.opinionFlag)
         // 点击 确认 提交 方法
         this.post("/fraudAuditOpinion/approval", {
           // 挂起 taskId 任务id
@@ -1254,8 +1208,6 @@
           dealroperDate: this.dealroperDate, // 经办时间
           creauditAppOperate: this.creauditAppOperate // 操作类型
         }).then(res => {
-          console.log(res);
-          console.log(this);
           this.huiTuiShow = false;
 
           if (res.statusCode != '200') {
@@ -1302,7 +1254,6 @@
         //   processTemplateId: this.processTemplateId,
         //   taskStatus: this.taskStatus
         // }).then(res => {
-        //   console.log(res);
         //   if (res.statusCode == '200') {
         //     this.lcgjLoading = false;
         //     this.lcgjData = res.data;
@@ -1312,7 +1263,6 @@
         // })
         this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processInstanceId + '&' + Math.random())
           .then(res => {
-            console.log(res);
             if (res.statusCode == '200') {
               this.lcgjLoading = false;
               this.lcgjData = res.data;
@@ -1328,7 +1278,6 @@
       },
       // 风险项更改
       selectChangeRisk: function (val) {
-        console.log(val);
         if (val) {
           for (var i = 0; i < val.length; i++) {
             for (var j = 0; j < this.riskSections.length; j++) {
@@ -1338,7 +1287,6 @@
                 this.riskObj.enumCode = this.riskSections[j].enumCode;
                 this.riskObj.returnMsg = this.riskSections[j].returnMsg;
                 this.riskSectionArr.push(this.riskObj);
-                console.log(this.riskSectionArr);
                 return
               }
             }
@@ -1348,7 +1296,6 @@
       },
       // 获取主原因
       selectChangeMain: function (val) {
-        console.log(val)
         this.secondReason = '';
         // 在主原因改变的时候请求子原因
         this.getReason('main', val, false);
@@ -1358,12 +1305,9 @@
         } else if (val == '01') {
           this.getReason('main', '09', false);
         } else if (val == '02') {
-          console.log('风险排除 不请求 原因')
         }
       },
       selectChange: function (val) {
-        console.log(val)
-        console.log('========================')
         var id = val.id; // 主原因的 id
         // this.reasonName = val.reasonName;
         // 主原因
@@ -1374,22 +1318,16 @@
       },
       // 取子原因的 id
       selectChangeSccond: function (val) {
-        console.log(val)
-        console.log('========================')
         var id = val.id; // 主原因的 id
         // this.reasonName = val.reasonName;
         // 主原因
         // this.secondReason = val.reasonName;
 
         this.secondId = val.id;
-        console.log(val.id);
       },
       // 回退节点改变 请求主原因
       backSelectChange: function (val) {
-        console.log('====================================')
-        console.log('回退节点改变 ====', val);
         this.getReason('main', val.type);
-        console.log('====================================')
       },
       // 通过监听请求主原因
       // flag 主/子
@@ -1403,46 +1341,35 @@
           } else if (type == '01') {
             mainType = '09';
           } else if (type == '02') {
-            console.log('风险排除 不请求 原因')
           }
           this.get('/credit/firstNodeReason?reasonType=' + mainType + '&' + Math.random()).then(res => {
-            console.log(res);
             if (res.statusCode == '200') {
               this.mainReasons = res.data;
               if (TF == true) {
-                console.log('主管 主原因');
                 // this.mainReason = this.mainReasonT;
                 this.mainReason = '';
                 this.mainReasonName = '';
                 this.secondReason = '';
                 this.subreaName = '';
               } else {
-                console.log('主管 主原因 false');
                 this.mainReason = '';
                 this.mainReasonName = '';
                 this.secondReason = '';
                 this.subreaName = '';
-                console.log('主管 主原因改变');
               }
             }
           })
         } else if (flag == 'second') {
           // 请求子原因
           this.get('/credit/findNodeFirstChildren?id=' + type + '&' + Math.random()).then(res => {
-            console.log(res);
             if (res.statusCode == '200') {
               this.secondReasons = res.data;
-              console.log(111111111111111)
               if (TF == true) {
-                console.log('主管 子原因')
                 this.secondReason = '';
                 this.subreaName = '';
-                console.log('子原因 赋值')
               } else {
-                console.log('主管 子原因 false');
                 this.secondReason = '';
                 this.subreaName = '';
-                console.log('主管 主原因 改变')
               }
             }
           })
@@ -1452,7 +1379,6 @@
       queryCreauditOpinionObj: function () {
         this.get('/fraudAuditOpinion/queryCreauditOpinionObj?applyId=' + this.applyId + '&' + Math.random()).then(res => {
           if (res.statusCode == 200) {
-            console.log(res);
             // 先赋值,直接点审批
 
             // this.mainReason.id = res.data.mainreasonId; // 欺诈主原因id
@@ -1472,8 +1398,6 @@
             this.mainReason = res.data.mainreasonId;
             // 主原因name
             this.mainReasonName = res.data.mainreaName;
-            console.log(this.mainReason);
-            console.log(this.mainReasonName);
             // if (this.auditResult) {
             // this.getReason('main', this.auditResult, true);
             // 赋值主原因
@@ -1486,8 +1410,6 @@
             this.secondReason = res.data.subreasonId;
             // 子原因 name
             this.subreaName = res.data.subreaName;
-            console.log(this.secondReason);
-            console.log(this.subreaName);
             // if (res.data.mainreasonId) {
             // this.getReason('second', this.mainReasonT, true);
             // }
@@ -1520,7 +1442,6 @@
       //   })
       // },
       mainReasonChange(val) {
-        //   console.log(val);
         //   // 主原因改变 请求子原因
         //   this.getReason('second',val,false)
       },
@@ -1529,7 +1450,6 @@
         this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
           applyId: this.applyId
         }).then(res => {
-          //console.log(res.data);
           if (res.obj == null) {
             // alert('社保')
             this.bigDataLogVisible = true;
@@ -1538,7 +1458,6 @@
             this.$router.push({
               path: '/PneCtrl'
             });
-            // console.log('大数据风控')
             // this.$store.dispatch('addVisitedViews', {
             //   name: '大数据风控',
             //   path: '/PneCtrl',
@@ -1555,7 +1474,6 @@
       },
       //社保/公积金
       Social() {
-        console.log('第一次调用')
         this.post(baseurl.BaseUrl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {
           certCode: this.certCode,
           custName: this.custName
@@ -1607,7 +1525,6 @@
         this.mainReason = val;
       },
       getSecond(val) {
-        console.log(val);
         this.secondReason = val;
       },
       /*案件编号-新增按钮*/
@@ -1672,7 +1589,6 @@
     watch: {
       // 审核结论 改变请求主原因
       //   auditResult: function(val) {
-      //     console.log(this.auditResult);
       //     // 审核结论改变 , 主原因 子原因 都清空
       //     this.mainReason = '';
       //     // this.mainReasonName = '';

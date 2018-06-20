@@ -119,17 +119,19 @@
     methods: {
       mountedInf() {
         // 统一登录平台  
-        this.get(UserURL + 'remote/user/getUserInfo?' + Math.random()).then(response => {
-          this.userInf = {
-            userCode: response.data.userCode,
-            orgCode: response.data.orgCode,
-            orgId: response.data.orgId,
-            userName: response.data.userName,
-            roleCodesList: response.data.roleCodesList, // 初审拒绝按钮
-            flowRoleCodesList: response.data.flowRoleCodesList
-          }
-          localStorage.setItem("userInf", JSON.stringify(this.userInf));
-          this.post("/workFlowTaskQuery/getTaskProfile", {
+        // this.get(UserURL + 'remote/user/getUserInfo?' + Math.random()).then(response => {
+        //   this.userInf = {
+        //     userCode: response.data.userCode,
+        //     orgCode: response.data.orgCode,
+        //     orgId: response.data.orgId,
+        //     userName: response.data.userName,
+        //     roleCodesList: response.data.roleCodesList, // 初审拒绝按钮
+        //     flowRoleCodesList: response.data.flowRoleCodesList
+        //   }
+        //   localStorage.setItem("userInf", JSON.stringify(this.userInf));
+
+        // });
+                  this.post("/workFlowTaskQuery/getTaskProfile", {
             taskStatus: "01",
           }).then(res => {
             if (res.statusCode == 200) {
@@ -138,7 +140,6 @@
               this.$message.error(res.msg);
             }
           });
-        });
       },
       more() {
         this.$store.commit('workB', {
@@ -252,7 +253,27 @@
       }
     },
     mounted() {
-      this.mountedInf();
+        // 统一登录平台  
+        this.get(UserURL + 'remote/user/getUserInfo?' + Math.random()).then(response => {
+          this.userInf = {
+            userCode: response.data.userCode,
+            orgCode: response.data.orgCode,
+            orgId: response.data.orgId,
+            userName: response.data.userName,
+            roleCodesList: response.data.roleCodesList, // 初审拒绝按钮
+            flowRoleCodesList: response.data.flowRoleCodesList
+          }
+          localStorage.setItem("userInf", JSON.stringify(this.userInf));
+          this.post("/workFlowTaskQuery/getTaskProfile", {
+            taskStatus: "01",
+          }).then(res => {
+            if (res.statusCode == 200) {
+              this.tableData = res.data;
+            } else {
+              this.$message.error(res.msg);
+            }
+          });
+        });
     },
   }
 
