@@ -168,7 +168,7 @@
   export default {
     data() {
       return {
-        aa:'命中规则名称：',
+        aa: '命中规则名称：',
         activeNames: ['1', '2', '3', '4', '5'],
         fraudApplyInfo: '',
         hitRuleList: [],
@@ -262,7 +262,7 @@
         ],*/
       }
     },
-    props: ['applyId','isShow'],
+    props: ['applyId', 'isShow'],
     mounted() {
       console.log(this.isShow);
       this.request(this.applyId);
@@ -311,34 +311,34 @@
               for (var i = 0; i < this.fraudTelCheckList.length; i++) {
                 this.createTime = this.fraudTelCheckList[i].createTime;
                 //console.log(this.fraudTelCheckList[i].relation == '01');
-                if(this.fraudTelCheckList[i].relation == '01'){
+                if (this.fraudTelCheckList[i].relation == '01') {
                   //console.log("99999");
                   this.fraudTelCheckList[i].relation = '夫妻';
-                }else if(this.fraudTelCheckList[i].relation == '02'){
+                } else if (this.fraudTelCheckList[i].relation == '02') {
                   this.fraudTelCheckList[i].relation = '父母';
-                }else if(this.fraudTelCheckList[i].relation == '03'){
+                } else if (this.fraudTelCheckList[i].relation == '03') {
                   this.fraudTelCheckList[i].relation = '子女';
-                }else if(this.fraudTelCheckList[i].relation == '04'){
+                } else if (this.fraudTelCheckList[i].relation == '04') {
                   this.fraudTelCheckList[i].relation = '兄弟';
-                }else if(this.fraudTelCheckList[i].relation == '05'){
+                } else if (this.fraudTelCheckList[i].relation == '05') {
                   this.fraudTelCheckList[i].relation = '姐妹';
-                }else if(this.fraudTelCheckList[i].relation == '06'){
+                } else if (this.fraudTelCheckList[i].relation == '06') {
                   this.fraudTelCheckList[i].relation = '兄妹';
-                }else if(this.fraudTelCheckList[i].relation == '07'){
+                } else if (this.fraudTelCheckList[i].relation == '07') {
                   this.fraudTelCheckList[i].relation = '姐弟';
-                }else if(this.fraudTelCheckList[i].relation == '08'){
+                } else if (this.fraudTelCheckList[i].relation == '08') {
                   this.fraudTelCheckList[i].relation = '朋友';
-                }else if(this.fraudTelCheckList[i].relation == '09'){
+                } else if (this.fraudTelCheckList[i].relation == '09') {
                   this.fraudTelCheckList[i].relation = '同事';
-                }else if(this.fraudTelCheckList[i].relation == '10'){
+                } else if (this.fraudTelCheckList[i].relation == '10') {
                   this.fraudTelCheckList[i].relation = '房东';
-                }else if(this.fraudTelCheckList[i].relation == '11'){
+                } else if (this.fraudTelCheckList[i].relation == '11') {
                   this.fraudTelCheckList[i].relation = '亲属';
-                }else if(this.fraudTelCheckList[i].relation == '12'){
+                } else if (this.fraudTelCheckList[i].relation == '12') {
                   this.fraudTelCheckList[i].relation = '其他';
-                }else if(this.fraudTelCheckList[i].relation == '13'){
+                } else if (this.fraudTelCheckList[i].relation == '13') {
                   this.fraudTelCheckList[i].relation = '本人';
-                }else if(this.fraudTelCheckList[i].relation == '14'){
+                } else if (this.fraudTelCheckList[i].relation == '14') {
                   this.fraudTelCheckList[i].relation = '单位';
                 }
               };
@@ -364,22 +364,27 @@
         this.dialogVisible = false;
       },
       handlDetail(index, row) {
-        console.log(index, row);
+        // this.$router.push({
+        //   path: '/MatchingInfQuery'
+        // });
         this.$router.push({
-          path: '/MatchingInfQuery'
+          name: 'MatchingInfQuery',
+          params: {
+            newOne: true,
+          }
         });
         localStorage.setItem("Query", JSON.stringify({
           id: row.id,
           matchApplyId: row.applyId,
-          applySubNo:row.applySubNo,
+          applySubNo: row.applySubNo,
           isInterFlag: false
         }));
       },
       /*命中客户数 查询*/
       inquiry(row) {
-        if(this.isShow == false){
+        if (this.isShow == false) {
           return
-        }else{
+        } else {
           if (row) {
             if (row.custCount == 0) {
               return
@@ -391,7 +396,7 @@
           this.ruleId = row.ruleId;
           this.check(this.pageParam, this.ruleId);
         }
-        
+
       },
       check(param, id) {
         this.post("antiFraud/getHitRuleCustList", {

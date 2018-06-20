@@ -146,38 +146,38 @@
     },
     props: ['isFull', 'SplitS'],
     mounted() {
-this.mountedInf();
+      this.mountedInf();
     },
     methods: {
-      mountedInf(){
-      //   // 组件歘估计完成后获取数据
-      //   // 此时 data 已经被 observed 了
-      // 获取到传进来的参数   进件编号
-      // this.applySubNo = this.$route.query.applySubNo;
-      var applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
-      // 进件编号
-      this.applySubNo = applicationInformationDetail.applySubNo;
-      this.workName = applicationInformationDetail.workName;
-      // 公司名称
-      // this.workName = this.$route.query.workName;
-      // 测试数据
-      this.fetchData('mobile');
-      this.fetchData('fixed');
-      this.fetchData('company');
-      // 样式处理
-      if (this.isFull == true) { // 全屏
-        console.log('全屏');
-        $(".internalMatch-class .mark-textarea").css("width", "800px")
-        $(".internalMatch-class .mark-textarea textarea").css("width", "800px");
-        // 按钮
-        $(".internalMatch-class .mark-button").css("margin-left", "775px")
-      } else if (this.isFull == false) { // 分屏
-        console.log("分屏");
-        $(".internalMatch-class .mark-textarea").css("width", "600px")
-        $(".internalMatch-class .mark-textarea textarea").css("width", "600px");
-        // 按钮
-        $(".internalMatch-class .mark-button").css("margin-left", "580px")
-      }
+      mountedInf() {
+        //   // 组件歘估计完成后获取数据
+        //   // 此时 data 已经被 observed 了
+        // 获取到传进来的参数   进件编号
+        // this.applySubNo = this.$route.query.applySubNo;
+        var applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
+        // 进件编号
+        this.applySubNo = applicationInformationDetail.applySubNo;
+        this.workName = applicationInformationDetail.workName;
+        // 公司名称
+        // this.workName = this.$route.query.workName;
+        // 测试数据
+        this.fetchData('mobile');
+        this.fetchData('fixed');
+        this.fetchData('company');
+        // 样式处理
+        if (this.isFull == true) { // 全屏
+          console.log('全屏');
+          $(".internalMatch-class .mark-textarea").css("width", "800px")
+          $(".internalMatch-class .mark-textarea textarea").css("width", "800px");
+          // 按钮
+          $(".internalMatch-class .mark-button").css("margin-left", "775px")
+        } else if (this.isFull == false) { // 分屏
+          console.log("分屏");
+          $(".internalMatch-class .mark-textarea").css("width", "600px")
+          $(".internalMatch-class .mark-textarea textarea").css("width", "600px");
+          // 按钮
+          $(".internalMatch-class .mark-button").css("margin-left", "580px")
+        }
       },
       /*
         mobile: 移动电话
@@ -271,9 +271,16 @@ this.mountedInf();
           matchApplyId: row.matchApplyId,
           isInterFlag: this.isInterFlag,
         }));
-         localStorage.setItem("MatchFlag", JSON.stringify({ MatchFlag:'internal' }));
-        this.$router.push('/MatchingInf');
-        // this.goPath();
+        localStorage.setItem("MatchFlag", JSON.stringify({
+          MatchFlag: 'internal'
+        }));
+        // this.$router.push('/MatchingInf');
+        this.$router.push({
+          name: 'MatchingInf',
+          params: {
+            newOne: true,
+          }
+        });
       },
       itemDbclickFixTel(row, event) {
         // 行被双击 事件  固定电话
@@ -284,9 +291,16 @@ this.mountedInf();
           matchApplyId: row.matchApplyId,
           isInterFlag: this.isInterFlag
         }));
-          localStorage.setItem("MatchFlag", JSON.stringify({ MatchFlag:'internal' }));
-        this.$router.push('/MatchingInf');
-        // this.goPath();
+        localStorage.setItem("MatchFlag", JSON.stringify({
+          MatchFlag: 'internal'
+        }));
+        // this.$router.push('/MatchingInf');
+        this.$router.push({
+          name: 'MatchingInf',
+          params: {
+            newOne: true,
+          }
+        });
       },
       itemDbclickCompany(row, event) {
         // 行被双击 事件  单位名称
@@ -297,9 +311,16 @@ this.mountedInf();
           matchApplyId: row.matchApplyId,
           isInterFlag: this.isInterFlag
         }));
-          localStorage.setItem("MatchFlag", JSON.stringify({ MatchFlag:'internal' }));
-        this.$router.push('/MatchingInf');
-        // this.goPath();
+        localStorage.setItem("MatchFlag", JSON.stringify({
+          MatchFlag: 'internal'
+        }));
+        // this.$router.push('/MatchingInf');
+        this.$router.push({
+          name: 'MatchingInf',
+          params: {
+            newOne: true,
+          }
+        });
       },
       // cellHover(row, column, cell, event) {
       //   // cell hover 事件
@@ -398,24 +419,24 @@ this.mountedInf();
           };
         },
         mounted() {
-         this.mountedf();
+          this.mountedf();
         },
         methods: {
-          mountedf(){
-          // 获取到传进来的  applyId 申请单id
-          // this.applyId = this.$route.query.applyId;
-          // 获取传进来的 操作人用户编码
-          // this.creator_code = this.$route.query.userCode;
-          // 测试数据
-          // this.applyId = '111';
-          // this.creator_code = 'ddyy';
-          var applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
-          this.applyId = applicationInformationDetail.applyId;
-          var userInfo = JSON.parse(localStorage.getItem('userInf'));
-          this.creator_code = userInfo.userCode;
+          mountedf() {
+            // 获取到传进来的  applyId 申请单id
+            // this.applyId = this.$route.query.applyId;
+            // 获取传进来的 操作人用户编码
+            // this.creator_code = this.$route.query.userCode;
+            // 测试数据
+            // this.applyId = '111';
+            // this.creator_code = 'ddyy';
+            var applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
+            this.applyId = applicationInformationDetail.applyId;
+            var userInfo = JSON.parse(localStorage.getItem('userInf'));
+            this.creator_code = userInfo.userCode;
 
-          // 获取匹配信息
-          this.getOption();
+            // 获取匹配信息
+            this.getOption();
           },
           getOption() {
             // 获取匹配结论
@@ -453,11 +474,11 @@ this.mountedInf();
                   type: 'success',
                   message: this.resMsg
                 });
-                 this.hangOut = false;
+                this.hangOut = false;
               } else {
                 this.resMsg = '提交失败,请重试！';
                 instance.confirmButtonText = '';
-                 this.hangOut = false;
+                this.hangOut = false;
               }
               instance.confirmButtonLoading = false;
             });
@@ -548,23 +569,23 @@ this.mountedInf();
           };
         },
         mounted() {
-            this.mountedC();
+          this.mountedC();
         },
         methods: {
-          mountedC(){
-          // 获取到传进来的  applyId 申请单id
-          // this.applyId = this.$route.query.applyId;
-          // 获取传进来的 操作人用户编码
-          // this.creator_code = this.$route.query.userCode;
-          // 测试数据
-          // this.applyId = '111';
-          // this.creator_code = 'ddyy';
-          var applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
-          this.applyId = applicationInformationDetail.applyId;
-          var userInfo = JSON.parse(localStorage.getItem('userInf'));
-          this.creator_code = userInfo.userCode;
-          // 获取匹配信息
-          this.getOption();
+          mountedC() {
+            // 获取到传进来的  applyId 申请单id
+            // this.applyId = this.$route.query.applyId;
+            // 获取传进来的 操作人用户编码
+            // this.creator_code = this.$route.query.userCode;
+            // 测试数据
+            // this.applyId = '111';
+            // this.creator_code = 'ddyy';
+            var applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
+            this.applyId = applicationInformationDetail.applyId;
+            var userInfo = JSON.parse(localStorage.getItem('userInf'));
+            this.creator_code = userInfo.userCode;
+            // 获取匹配信息
+            this.getOption();
           },
           getOption() {
             // 获取匹配结论

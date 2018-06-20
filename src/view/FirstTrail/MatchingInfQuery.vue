@@ -37,7 +37,7 @@
               </span>
             </p>
             <div class="Left_right_BigImg ">
-              <RAudioVisualLeft msg="MspLone" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></RAudioVisualLeft>
+              <RAudioVisualLeft ref="AudioLeft" msg="MspLone" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></RAudioVisualLeft>
               <Rremark v-if=" this.tabContent1==1"></Rremark>
               <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
               <RapplicationInformationDetail v-if=" this.tabContent1==3">申请信息</RapplicationInformationDetail>
@@ -82,7 +82,7 @@
             <RAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></RAudioVisual>
             <Rremark v-if=" this.tabContent2==1"></Rremark>
             <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
-            <RapplicationInformationDetail v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
+            <RapplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
             <RborrowerInformationSetail v-if=" this.tabContent2==4" :isFull.sync="isFull">借款人资料</RborrowerInformationSetail>
             <!-- <PhoneCredit v-if=" this.tabContent2==5"> 电话征信</PhoneCredit>     -->
             <RPhoneCredit v-if=" this.tabContent2==5"> 电话征信</RPhoneCredit>
@@ -104,7 +104,7 @@
           <p>影像资料</p>
           <!-- h2 标题栏 -->
           <div class="AlertContent">
-            <RAudioVisualLeft msg="MspLtwo" :comBtn.sync='alertComBtn'></RAudioVisualLeft>
+            <RAudioVisualLeft ref="AudioLeftCom" msg="MspLtwo" :comBtn.sync='alertComBtn'></RAudioVisualLeft>
           </div>
         </div>
         <!-- 弹出层右侧 div -->
@@ -162,8 +162,12 @@
         tabActiveInd2: 3,
         /*items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论', "流程轨迹", '信审审批结论轨迹'],
         items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "流程轨迹", "信审审批结论轨迹"],*/
-        items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论', "反欺诈调查","账务信息", "流程轨迹", '信审审批结论轨迹'],
-        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "反欺诈调查","账务信息", "流程轨迹", "信审审批结论轨迹"],
+        items1: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", '反欺诈结论', "反欺诈调查", "账务信息", "流程轨迹",
+          '信审审批结论轨迹'
+        ],
+        items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "反欺诈结论", "反欺诈调查", "账务信息", "流程轨迹",
+          "信审审批结论轨迹"
+        ],
         tab1Index: 0,
         tab2Index: 3,
         flag1: [true, true, true, false, true, true, true, true, true, true, true, true, true],
@@ -184,11 +188,42 @@
         alertComBtn: false,
         midShow: true,
         //custName: '',
-        accepCusBasicInfo:'',
+        accepCusBasicInfo: '',
         certCode: ''
       }
     },
+    watch: {
+      '$route' (to, from) {
+        if (to.path === '/MatchingInfQuery' && this.$route.params.newOne) {
+          this.mountedInf();
+          this.title = "影像资料";
+          this.tab1Index = this.tabContent1 = this.tabActiveInd1 = 0;
+          this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 3;
+          this.flag1 = [true, true, true, false, true, true, true, true, true, true, true, true, true];
+          this.flag2 = [true, true, true, true, true, true, true, true, true, true, true, true, true];
+          this.$refs.AudioLeft ? this.$refs.AudioLeft.mountedInf() : '';
+          this.$refs.AudioLeftCom ? this.$refs.AudioLeftCom.mountedInf() : '';
+          this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
+          this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
+        }
+      }
+    },
     methods: {
+      mountedInf() {
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("Query"));
+        this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
+          id: this.tastwaitingPass.matchApplyId,
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.customInf = res.data;
+            this.certCode = res.data.accepCusBasicInfo.certCode
+            //this.custName = res.data.accepCusBasicInfo.custName;
+            this.accepCusBasicInfo = res.data.accepCusBasicInfo;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      },
       compareProps() {
         this.$refs.audioChild.personalNunPerson()
       },
@@ -314,19 +349,7 @@
     mounted() {
       this.title = "影像资料";
       this.MyMove();
-      this.tastwaitingPass = JSON.parse(localStorage.getItem("Query"));
-      this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-        id: this.tastwaitingPass.matchApplyId,
-      }).then(res => {
-        if (res.statusCode == 200) {
-          this.customInf = res.data;
-          this.certCode = res.data.accepCusBasicInfo.certCode
-          //this.custName = res.data.accepCusBasicInfo.custName;
-          this.accepCusBasicInfo = res.data.accepCusBasicInfo;
-        } else {
-          this.$message.error(res.msg);
-        }
-      });
+      this.mountedInf();
     },
     components: {
       myHead,
@@ -344,7 +367,7 @@
       PhoneCredit,
       RPhoneCredit,
       RprocessTrajectory,
-      RantiFraudInvestigation,//反欺诈调查
+      RantiFraudInvestigation, //反欺诈调查
     }
   }
 

@@ -129,8 +129,8 @@
             <el-table-column type="index" :index='1' label="序号" width="50">
             </el-table-column>
             <el-table-column label="姓名" width="120">
-             <template slot-scope="scope">
-                <el-input v-model="scope.row.name" placeholder="请输入姓名"  :disabled="scope.row.isInitFlag=='0'"></el-input>
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.name" placeholder="请输入姓名" :disabled="scope.row.isInitFlag=='0'"></el-input>
               </template>
             </el-table-column>
             <el-table-column prop="phoneNum" label="手机号码" width="180">
@@ -460,7 +460,7 @@
           "relation": "", // 关系
           "record": "", // 记录录入
           "applyId": this.applyId,
-          'name':'',//姓名
+          'name': '', //姓名
           "createTime": '' //时间顺序 保证页面上的列表顺序不会乱
         });
       },
@@ -494,9 +494,15 @@
         this.dialogVisible = false;
       },
       handlDetail(index, row) {
-        console.log(index, row);
+        // console.log(index, row);
+        // this.$router.push({
+        //   path: '/MatchingInf'
+        // });
         this.$router.push({
-          path: '/MatchingInf'
+          name: 'MatchingInf',
+          params: {
+            newOne: true,
+          }
         });
         localStorage.setItem("internalObj", JSON.stringify({
           id: row.id,

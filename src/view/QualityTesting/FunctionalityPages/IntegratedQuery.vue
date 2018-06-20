@@ -122,23 +122,19 @@
       //     // this.getInf(this.params);
       //     this.inquire(this.params);
       //   },
-      gopath() {
-        // this.$store.dispatch('addVisitedViews', {
-        //   name: '综合查询-查看',
-        //   path: '/MatchingInfQuery',
-        //   flag: '',
-        //   params: '',
-        //   StatefullPath: '/MatchingInfQuery',
-        // })
-      },
       handleCurrentChange(val) {
         this.query.id = val.id;
         this.query.matchApplyId = val.applyId;
         this.query.applySubNo = val.applySubno;
         localStorage.setItem("Query", JSON.stringify(this.query));
         localStorage.setItem("MatchFlag", JSON.stringify({ MatchFlag:'Query' }));
-        this.$router.push('/MatchingInfQuery');
-        this.gopath();
+        // this.$router.push('/MatchingInfQuery');
+          this.$router.push({
+            name: 'MatchingInfQuery',
+            params: {
+              newOne: true,
+            }
+          });
         // this.params.pageNum = val;
         // this.inquire(this.params);
       },
@@ -182,9 +178,6 @@
       },
     },
     mounted() {
-      //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
-      //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
-      //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
       //   this.params.pageNum = this.currentPage, //页数（第几页）
       //     this.params.pageSize = this.pageCount, //页面显示行数
     },

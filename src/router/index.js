@@ -110,7 +110,7 @@ component:timedTask
   {
     path: '/MatchingInf',
     component: MatchingInf,
-    // name:MatchingInf
+    name:'MatchingInf'
   },
   // ----------------终审----------------
   {
@@ -245,7 +245,8 @@ component:timedTask
     // name:IntegratedQuery 
   }, {
     path: '/MatchingInfQuery',
-    component: MatchingInfQuery
+    component: MatchingInfQuery,
+    name:'MatchingInfQuery'
   }, {
     path: '/commissioner',
     component: commissioner
