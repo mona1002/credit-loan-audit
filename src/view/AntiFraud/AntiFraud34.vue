@@ -410,7 +410,6 @@
              newOne: true,
           }
         });
-        this.$message.error(row.applyId)
       },
       handleSizeChange(val) {
         this.pageSize = val;

@@ -1190,10 +1190,14 @@
           value: '06',
           label: '终审建议优化'
         }],
-        QTresultSpecial: [{ //专纵项下拉
+        QTresultSpecial: [{ //专项下拉
           value: '07',
           label: '专项'
         }, {
+          value: '09',
+          label: '无'
+        }],
+        QTresultS: [{ //纵向下拉
           value: '08',
           label: '纵向'
         }, {
@@ -1424,7 +1428,6 @@
                   // this.AlipayWork[1] = res.data.insWechatAlipayList[k];
                   this.AlipayWork.pop();
                   this.AlipayWork.push(res.data.insWechatAlipayList[k]);
-
                 }
               }
             }
@@ -2016,7 +2019,6 @@
       },
       //社保/公积金
       Social() {
-        console.log(this.baseInfo)
         this.post(baseurl.BaseUrl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {
           certCode: this.baseInfo.certCode,
           custName: this.baseInfo.custName
@@ -2074,7 +2076,11 @@
           if (this.propQTconclution.tastwaitingPass.listType == '专项质检') {
             this.instaskType = '01';
             this.QTresult = [];
-            this.QTresult = this.QTresultSpecial;
+            if (this.propQTconclution.tastwaitingPass.instaskType == '01') { //专项   
+              this.QTresult = this.QTresultSpecial;
+            } else if (this.propQTconclution.tastwaitingPass.instaskType == '02') { // 纵向
+              this.QTresult = this.QTresultS;
+            }
             this.Special();
             this.submitBtn = true; //提交
             this.QTConclutionBtn = true;
@@ -2086,7 +2092,11 @@
             this.submitBtn = false; //提交
           } else if (this.propQTconclution.tastwaitingPass.listType == '专项质检') {
             this.QTresult = [];
-            this.QTresult = this.QTresultSpecial;
+            if (this.propQTconclution.tastwaitingPass.instaskType == '01') { //专项   
+              this.QTresult = this.QTresultSpecial;
+            } else if (this.propQTconclution.tastwaitingPass.instaskType == '02') { // 纵向
+              this.QTresult = this.QTresultS;
+            }
             this.Special();
           } else if (this.propQTconclution.tastwaitingPass.listType == '常规又专项质检') {
             this.regularAndSpecial();

@@ -504,15 +504,24 @@
         shenpiFont: '提交',
         nodeName: '',
         routeParams: '',
+        RtaskInWaitting: '',
       }
     },
     mounted() {
-      // alert(JSON.parse(localStorage.getItem('RtaskInWaitting')))
-
+      this.RtaskInWaitting = JSON.parse(localStorage.getItem('RtaskInWaitting'))
       //申请单ID
       this.id = JSON.parse(localStorage.getItem('RtaskInWaitting')).applyId;
       this.request();
-
+      this.applyId = this.RtaskInWaitting.applyId;
+      this.appOrgId = this.RtaskInWaitting.appOrgId;
+      // 客户编号
+      this.custNo = this.RtaskInWaitting.custNo;
+      //产品id
+      this.sproId = this.RtaskInWaitting.proId;
+      this.proCode = this.RtaskInWaitting.proCode;
+      this.appOrgCode = this.RtaskInWaitting.appOrgCode;
+      this.applyCustId = this.RtaskInWaitting.applyCustId;
+      this.certType = this.RtaskInWaitting.certType;
       //经办人
       this.dealroperCode = JSON.parse(localStorage.getItem('userInf')).userCode;
       this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
@@ -520,26 +529,22 @@
       //登陆人id
       this.orgId = JSON.parse(localStorage.getItem('userInf')).orgId;
 
-      this.applyId = this.applicationInformationDetail.applyId;
-      //console.log(this.applyId);
-      this.appOrgId = this.applicationInformationDetail.appOrgId;
-      //console.log(this.appOrgId);
-      // 客户编号
-      this.custNo = this.applicationInformationDetail.custNo;
-      //产品id
-      this.sproId = this.applicationInformationDetail.proId;
+      // this.applyId = this.applicationInformationDetail.applyId;
+      // this.appOrgId = this.applicationInformationDetail.appOrgId;
+      // // 客户编号
+      // this.custNo = this.applicationInformationDetail.custNo;
+      // //产品id
+      // this.sproId = this.applicationInformationDetail.proId;
       //流程模版ID
       this.processTemplateId = JSON.parse(localStorage.getItem('ReManagerWorkbenchPass')).processTemplateId;
       //流程实例id
       this.processInstanceId = JSON.parse(localStorage.getItem('RtaskInWaitting')).processInstanceId;
-      // console.log(this.processInstanceId)
-      // alert(this.processInstanceId)
       //任务id
       this.taskId = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
-      this.proCode = this.applicationInformationDetail.proCode;
-      this.appOrgCode = this.applicationInformationDetail.appOrgCode;
-      this.applyCustId = this.applicationInformationDetail.applyCustId;
-      this.certType = this.applicationInformationDetail.certType;
+      // this.proCode = this.applicationInformationDetail.proCode;
+      // this.appOrgCode = this.applicationInformationDetail.appOrgCode;
+      // this.applyCustId = this.applicationInformationDetail.applyCustId;
+      // this.certType = this.applicationInformationDetail.certType;
     },
     methods: {
       request() {
@@ -554,16 +559,6 @@
           }
         })
       },
-      //  GoPath(){
-      //   this.$router.push( '/reconsiderList?taskNodeName=reconsiderApp_manager');
-      //   //  this.$store.dispatch('addVisitedViews', {
-      //   //   name: '复议经理审批',
-      //   //   path: '/reconsiderList',
-      //   //   flag: '06',
-      //   //   params: '?taskNodeName=reconsiderApp_manager',    
-      //   //   StatefullPath: '/reconsiderList?taskNodeName=reconsiderApp_manager'
-      //   // })
-      //  },
       //保留两位小数 整数千分位
       formatNumber(num, cent, isThousand) {
         num = num.toString().replace(/\$|\,/g, '');

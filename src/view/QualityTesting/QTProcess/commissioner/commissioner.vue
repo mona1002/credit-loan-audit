@@ -87,6 +87,7 @@
           taskId: '',
           processInstanceId: '',
           listType: '',
+          instaskType:'',
         },
         QTquery: {
           id: '',
@@ -154,6 +155,7 @@
         //     this.params.pageSize = this.pageCount, //页面显示行数
       },
       handleCurrentChange(val) {
+        console.log(2,val)
         // 根据两个条件去判断，首先根据 isSecondIns
         // 如果是 1 ，显示常规又专项
         // 如果不是： 根据instaskType 判断， instaskType=00 时：常规质检 ， instaskType=01 或 02：专项质检
@@ -172,6 +174,7 @@
         this.QTquery.businessId = val.businessId;
         this.query.taskId = val.taskId;
         this.query.processInstanceId = val.processInstanceId;
+        this.query.instaskType = val.instaskType;
         // 存储质检结论参数
         localStorage.setItem("QTTaskWait", JSON.stringify(this.query));
         this.$router.push('/MatchingInfQT?checkApp_apply');
@@ -207,6 +210,7 @@
             //     res.data[i].mobile = res.data[i].mobile.replace(this.Telreg, this.telVal);
             //   }
             // }
+            console.log(this.tableData)
             this.tableData = res.data;
           } else {
             this.$message.error(res.msg);
