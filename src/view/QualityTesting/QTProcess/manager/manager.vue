@@ -110,6 +110,7 @@
           taskId: '',
           processInstanceId: '',
           listType: '',
+          instaskType:"",
         },
         QTquery: {
           id: '',
@@ -343,6 +344,7 @@
         this.QTquery.applySubNo = val.applySubno;
         this.query.taskId = val.taskId;
         this.query.processInstanceId = val.processInstanceId;
+        this.query.instaskType = val.instaskType;
         localStorage.setItem("QTManagerTW", JSON.stringify(this.query));
         this.$router.push('/MatchingInfQT?checkApp_check_manager');
         this.$route.meta.newOne = true;

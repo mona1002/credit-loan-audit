@@ -311,6 +311,7 @@
           this.$refs.AudioLeftCom ? this.$refs.AudioLeftCom.mountedInf() : '';
           this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
           this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
+          this.$refs.right_tab_ul.style.left = "0";
         }
       }
     },
@@ -319,6 +320,7 @@
         this.initialInfo(); //判断角色   
         this.QTC.tastwaitingPass = this.tastwaitingPass = JSON.parse(localStorage.getItem(this.LocalList));
         this.QTC.applyId = this.tastwaitingPass.ApplyId;
+        console.log( 1, this.QTC.tastwaitingPass)
         this.getPageInf(); //获取页面个人信息      
         // console.log(this.tastwaitingPass.applyId)
         // console.log('tastwaitingPass：', this.tastwaitingPass)
@@ -669,11 +671,6 @@
     float: left;
     position: relative;
   }
-
-  /* .left,
-  .AudioVisual_wrap_compare_left {
-    margin-right: 2px;
-  } */
 
   .left,
   .right {

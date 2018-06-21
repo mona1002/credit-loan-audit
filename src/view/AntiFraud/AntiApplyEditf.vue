@@ -162,119 +162,125 @@
       }
     },
     mounted() {
-      // 经办人 登录用户名
-      var userInfo = JSON.parse(localStorage.getItem('userInf'));
-      this.userCode = userInfo.userCode;
-      this.orgCode = userInfo.orgCode;
-      // 先判断是 初审 终审  /  专员  主管
-      var judgeFlag = JSON.parse(localStorage.getItem('judge'));
-      this.antiFlag = judgeFlag.flag;
-
-      this.AntiApplyParams = JSON.parse(localStorage.getItem('AntiApplyParams'));
-      // 获取到 id
-      this.id = this.AntiApplyParams.id;
-      this.flag = this.AntiApplyParams.flag;
-      this.channel = this.AntiApplyParams.channel;
-      this.busiState = this.AntiApplyParams.busiState;
-      if (this.flag == 'start' || this.flag == 'fuyi' || this.flag == 'zhijian') {
-        this.getFraudApplyInfo();
+      this.mountedInf();
+    },
+    watch: {
+      '$route' (to, from) {
+        if (to.path === '/AntiApplyEditf') {
+          this.mountedInf();
+        }
       }
-
-      // 初审 终审 取 applyId
-      // if (this.antiFlag == '01' || this.antiFlag == '02') {
-      //   // 先取到 id , 请求 反欺诈 页面信息
-      //   // var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-      //   // this.id = taskInWaitting.applyId;
-      //   this.id = this.$route.params.id;
-      //   // 查询反欺诈信息
-      //   this.getFraudApplyInfo();
-      if (this.antiFlag == '01') {
-        // taskInWaitting
-        this.creditappTaskid = JSON.parse(localStorage.getItem('taskInWaitting')).taskId;
-        this.taskName = JSON.parse(localStorage.getItem('taskInWaitting')).taskName;
-      } else if (this.antiFlag == '02') {
-        // FtaskInWaitting
-        this.creditappTaskid = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskId;
-        this.taskName = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskName;
-      }
-      // }
-      // 专员/主管 不跳  反欺诈 编辑页面
-      // else if (this.antiFlag == '03' || this.antiFlag == '04') { // 其他取 列表id
-      //   (' 主管/专员 ');
-      //   this.id = this.$route.params.id;
-      if (this.antiFlag == '03' || this.antiFlag == '04') {
-        // AntitaskInWaitting
-        this.creditappTaskid = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
-        this.taskName = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskName;
-      }
-      // else if (this.antiFlag == '04') {
-      //   // AntiManagertaskInWaitting
-      //   this.creditappTaskid = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
-      //   this.taskName = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskName;
-      // }
-
-      // 05 复议专员  06 复议主管
-      if (this.antiFlag == '05' || this.antiFlag == '06') {
-        this.creditappTaskid = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
-        this.taskName = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskName;
-        this.currentTemplateId = 'reconsiderApp';
-      }
-      // 质检各角色
-      if (this.antiFlag == '07' || this.antiFlag == '08' || this.antiFlag == '10' || this.antiFlag == '11' || this.antiFlag ==
-        '12' || this.antiFlag == '13') {
-        this.currentTemplateId = 'checkApp';
-      }
-      // if (this.antiFlag == '05') {
-      //   this.creditappTaskid = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
-      //   this.taskName = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskName;
-      //   this.currentTemplateId = 'reconsiderApp';
-      // } if ( this.antiFlag == '06') {
-      //   this.creditappTaskid = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).taskId;
-      //   this.taskName = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).taskName;
-      //   this.currentTemplateId = 'reconsiderApp';
-      // }
-
-      //   this.getFraudApplyInfoWithOpinionById();
-      // }
-      // var stateParms = JSON.parse(localStorage.getItem('antiApplyFlag')).split(';');
-      // for (var i = 0; i < stateParms.length; i++) {
-      //   stateParms[i] = stateParms[i].split('=');
-      // }
-      // this.routeId = stateParms[0][1];
-      // this.routeFlag = stateParms[1][1];
-      // this.routeBusiState = stateParms[2][1];
-
-      //  JSON.stringify($scope.addalerts);
-      // 获取到 id
-      //this.id = this.$route.params.id || this.routeId;
-      /* 标志  
-       start 发起反欺诈
-       edit  编辑
-       add   添加 
-       */
-
-      //this.flag = this.$route.params.flag || this.routeFlag;
-
-      //this.channel = this.$route.params.channel;
-      // 拿到状态
-      // this.busiState = this.$route.params.busiState || this.routeBusiState;
-      // if (this.flag == 'start' || this.flag == 'fuyi') {
-      //   this.getFraudApplyInfo();
-      // }
-      //  else if (this.flag == 'edit' || this.flag == 'add') {
-      //   this.getFraudApplyInfoWithOpinionById();
-      // }
-
-      // 请求系统时间
-      this.getSystemDate();
-
-      // 请求主原因
-      this.firstNodeReason();
-
-
-
     },
     methods: {
+      mountedInf() {
+        // 经办人 登录用户名
+        var userInfo = JSON.parse(localStorage.getItem('userInf'));
+        this.userCode = userInfo.userCode;
+        this.orgCode = userInfo.orgCode;
+        // 先判断是 初审 终审  /  专员  主管
+        var judgeFlag = JSON.parse(localStorage.getItem('judge'));
+        this.antiFlag = judgeFlag.flag;
+
+        this.AntiApplyParams = JSON.parse(localStorage.getItem('AntiApplyParams'));
+        // 获取到 id
+        this.id = this.AntiApplyParams.id;
+        this.flag = this.AntiApplyParams.flag;
+        this.channel = this.AntiApplyParams.channel;
+        this.busiState = this.AntiApplyParams.busiState;
+        if (this.flag == 'start' || this.flag == 'fuyi' || this.flag == 'zhijian') {
+          this.getFraudApplyInfo();
+        }
+
+        // 初审 终审 取 applyId
+        // if (this.antiFlag == '01' || this.antiFlag == '02') {
+        //   // 先取到 id , 请求 反欺诈 页面信息
+        //   // var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+        //   // this.id = taskInWaitting.applyId;
+        //   this.id = this.$route.params.id;
+        //   // 查询反欺诈信息
+        //   this.getFraudApplyInfo();
+        if (this.antiFlag == '01') {
+          // taskInWaitting
+          this.creditappTaskid = JSON.parse(localStorage.getItem('taskInWaitting')).taskId;
+          this.taskName = JSON.parse(localStorage.getItem('taskInWaitting')).taskName;
+        } else if (this.antiFlag == '02') {
+          // FtaskInWaitting
+          this.creditappTaskid = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskId;
+          this.taskName = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskName;
+        }
+        // }
+        // 专员/主管 不跳  反欺诈 编辑页面
+        // else if (this.antiFlag == '03' || this.antiFlag == '04') { // 其他取 列表id
+        //   (' 主管/专员 ');
+        //   this.id = this.$route.params.id;
+        if (this.antiFlag == '03' || this.antiFlag == '04') {
+          // AntitaskInWaitting
+          this.creditappTaskid = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
+          this.taskName = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskName;
+        }
+        // else if (this.antiFlag == '04') {
+        //   // AntiManagertaskInWaitting
+        //   this.creditappTaskid = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
+        //   this.taskName = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskName;
+        // }
+        // 05 复议专员  06 复议主管
+        if (this.antiFlag == '05' || this.antiFlag == '06') {
+          this.creditappTaskid = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
+          this.taskName = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskName;
+          this.currentTemplateId = 'reconsiderApp';
+        }
+        // 质检各角色
+        if (this.antiFlag == '07' || this.antiFlag == '08' || this.antiFlag == '10' || this.antiFlag == '11' || this.antiFlag ==
+          '12' || this.antiFlag == '13') {
+          this.currentTemplateId = 'checkApp';
+        }
+        // if (this.antiFlag == '05') {
+        //   this.creditappTaskid = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
+        //   this.taskName = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskName;
+        //   this.currentTemplateId = 'reconsiderApp';
+        // } if ( this.antiFlag == '06') {
+        //   this.creditappTaskid = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).taskId;
+        //   this.taskName = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).taskName;
+        //   this.currentTemplateId = 'reconsiderApp';
+        // }
+
+        //   this.getFraudApplyInfoWithOpinionById();
+        // }
+        // var stateParms = JSON.parse(localStorage.getItem('antiApplyFlag')).split(';');
+        // for (var i = 0; i < stateParms.length; i++) {
+        //   stateParms[i] = stateParms[i].split('=');
+        // }
+        // this.routeId = stateParms[0][1];
+        // this.routeFlag = stateParms[1][1];
+        // this.routeBusiState = stateParms[2][1];
+
+        //  JSON.stringify($scope.addalerts);
+        // 获取到 id
+        //this.id = this.$route.params.id || this.routeId;
+        /* 标志  
+         start 发起反欺诈
+         edit  编辑
+         add   添加 
+         */
+
+        //this.flag = this.$route.params.flag || this.routeFlag;
+
+        //this.channel = this.$route.params.channel;
+        // 拿到状态
+        // this.busiState = this.$route.params.busiState || this.routeBusiState;
+        // if (this.flag == 'start' || this.flag == 'fuyi') {
+        //   this.getFraudApplyInfo();
+        // }
+        //  else if (this.flag == 'edit' || this.flag == 'add') {
+        //   this.getFraudApplyInfoWithOpinionById();
+        // }
+
+        // 请求系统时间
+        this.getSystemDate();
+
+        // 请求主原因
+        this.firstNodeReason();
+      },
       // 请求系统时间
       getSystemDate() {
         // 获取系统时间

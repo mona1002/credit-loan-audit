@@ -118,6 +118,8 @@
     },
     methods: {
       mountedInf() {
+
+
         // 统一登录平台  
         // this.get(UserURL + 'remote/user/getUserInfo?' + Math.random()).then(response => {
         //   this.userInf = {
@@ -131,15 +133,15 @@
         //   localStorage.setItem("userInf", JSON.stringify(this.userInf));
 
         // });
-                  this.post("/workFlowTaskQuery/getTaskProfile", {
-            taskStatus: "01",
-          }).then(res => {
-            if (res.statusCode == 200) {
-              this.tableData = res.data;
-            } else {
-              this.$message.error(res.msg);
-            }
-          });
+        this.post("/workFlowTaskQuery/getTaskProfile", {
+          taskStatus: "01",
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.tableData = res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
       },
       more() {
         this.$store.commit('workB', {
@@ -163,7 +165,9 @@
       },
       handleCurrentChange(val) {
         this.currentRow = val;
-        this.workbenchPass.processTemplateId = val.processTemplateId;
+        console.log(val.processTemplateId)
+        console.log(this.workbenchPass.processTemplateId)
+        val.processTemplateId ? this.workbenchPass.processTemplateId = val.processTemplateId : '';
         this.workbenchPass.taskNodeName = val.taskNodeName;
         // 列表 存储  taskNodeName
         localStorage.setItem('taskNodeName', val.taskNodeName);
@@ -253,27 +257,27 @@
       }
     },
     mounted() {
-        // 统一登录平台  
-        this.get(UserURL + 'remote/user/getUserInfo?' + Math.random()).then(response => {
-          this.userInf = {
-            userCode: response.data.userCode,
-            orgCode: response.data.orgCode,
-            orgId: response.data.orgId,
-            userName: response.data.userName,
-            roleCodesList: response.data.roleCodesList, // 初审拒绝按钮
-            flowRoleCodesList: response.data.flowRoleCodesList
+      // 统一登录平台  
+      this.get(UserURL + 'remote/user/getUserInfo?' + Math.random()).then(response => {
+        this.userInf = {
+          userCode: response.data.userCode,
+          orgCode: response.data.orgCode,
+          orgId: response.data.orgId,
+          userName: response.data.userName,
+          roleCodesList: response.data.roleCodesList, // 初审拒绝按钮
+          flowRoleCodesList: response.data.flowRoleCodesList
+        }
+        localStorage.setItem("userInf", JSON.stringify(this.userInf));
+        this.post("/workFlowTaskQuery/getTaskProfile", {
+          taskStatus: "01",
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.tableData = res.data;
+          } else {
+            this.$message.error(res.msg);
           }
-          localStorage.setItem("userInf", JSON.stringify(this.userInf));
-          this.post("/workFlowTaskQuery/getTaskProfile", {
-            taskStatus: "01",
-          }).then(res => {
-            if (res.statusCode == 200) {
-              this.tableData = res.data;
-            } else {
-              this.$message.error(res.msg);
-            }
-          });
         });
+      });
     },
   }
 
