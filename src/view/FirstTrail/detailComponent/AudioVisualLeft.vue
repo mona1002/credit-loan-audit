@@ -81,10 +81,10 @@
           <p v-if="SmallmyPic"> {{val.arcSubType}} </p>
         </figure>
         <figure class="small_pic_figure" v-show="SmallmyPdf"  @dblclick="pdfClose()">
-          <!-- <div class="Small_pic"  @dblclick="pdfClose()">
-             <p is="pdfDivLeft" ID='firstTirlLeftSmall' :cvsWidth='200' :cvsHeight='200'  v-bind:title="pdfArrys"  @dblclick="pdfClose()"></p> 
+          <div class="Small_pic"  @dblclick="pdfClose()">
+             <p is="pdfDivLeft" ID='firstTirlLeftSmall' :cvsWidth='200' :cvsHeight='200' SmallClass="SmallWrap" v-bind:title="pdfArrys"  @dblclick="pdfClose()"></p> 
              </div>
-          <p> {{pdfTitle}} </p> -->
+          <p> {{pdfTitle}} </p>
         </figure>
       </div>
     </div>
@@ -350,6 +350,7 @@
       SmallpicAlert() {
         this.SmallPicShow = true;
        if(this.myPdf){//显示pdf
+        //alert("99999");
           this.SmallmyPdf=true;
          this.SmallmyPic=false;
          this.pdfTitle= this.pdfArrys[0].arcSubType;

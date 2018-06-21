@@ -58,9 +58,9 @@
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative; left:0; top:0;" id='FirstAud'>
-        <img ref="Big_pic_ref" v-for="(val,key) in pngAyyr" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng"
+        <img ref="Big_pic_ref" v-for="(val,key) in pngAyyrs" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng"
           @dblclick='next' />
-        <p v-show="myPdf" is="pdfDiv" ID='firstTirl' v-bind:title="pdfArry"></p>
+        <p v-show="myPdf" is="pdfDiv" ID='firstTirl' v-bind:title="pdfArrys"></p>
       </div>
     </div>
     <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" @click="pre" v-show="perfBtn" @mouseenter='PerBtn'>
@@ -78,11 +78,18 @@
         <img src="../../../../static/images/D625BA67-2F56-42C1-9E9D-A47AE03BA028@1x.png" class="small_pic_close" @click="SmallpicClose">
       </p>
       <div class="small_pic_content">
-        <figure v-for="(val,index) in pngAyyr" :key="index" class="small_pic_figure">
+        <figure v-for="(val,index) in pngAyyrs" :key="index" class="small_pic_figure" v-show="SmallmyPic">
           <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref"
           />
-          <p>{{val.arcSubType}}</p>
+          <p v-if="SmallmyPic">{{val.arcSubType}}</p>
         </figure>
+        <figure class="small_pic_figure" v-show="SmallmyPdf"  @dblclick="pdfClose()">
+          <div class="Small_pic"  @dblclick="pdfClose()">
+             <p is="pdfDiv" ID='firstTirlSmall' :cvsWidth='200' :cvsHeight='200' SmallClass="SmallWrap" v-bind:title="pdfArrys"  @dblclick="pdfClose()"></p> 
+             </div>
+          <p> {{pdfTitle}} </p>
+        </figure>
+
       </div>
     </div>
   </div>
@@ -112,11 +119,14 @@
         applyId: '', //入参
         imgPath: [],
         localInf: [], //localstorage 接收的所有参数,
-        pdfArry: [],
-        pngAyyr: [],
+        pdfArrys: [],
+        pngAyyrs: [],
         myPng: false,
         myPdf: false,
         style: '',
+        SmallmyPic:false,
+        SmallmyPdf:false,
+        pdfTitle:'',
         
       }
     },
@@ -193,20 +203,26 @@
           }
         });
       },
+      pdfClose(){
+        console.log('ccc')
+     this.SmallPicShow = false;
+     this.showPage =  1;
+    //  this.defaultBigPicCss();
+      },
       getImg(ind) {
-        this.pdfArry = [];
-        this.pngAyyr = [];
+        this.pdfArrys = [];
+        this.pngAyyrs = [];
         this.smallPicInd = 0;
         this.showPage = 1;
         this.imgPath = this.ListDetails[ind].applyArchiveInfos;
         if (this.imgPath[0].imagePath.substring(this.imgPath[0].imagePath.length - 3) == 'pdf') {
-          this.pdfArry = this.imgPath;
+          this.pdfArrys = this.imgPath;
           this.myPdf = true;
           this.myPng = false;
         } else {
           this.myPng = true;
           this.myPdf = false;
-          this.pngAyyr = this.imgPath;
+          this.pngAyyrs = this.imgPath;
         };
         this.$refs.img_wrap.style.left = 0;
         this.$refs.img_wrap.style.top = 0;
@@ -230,9 +246,19 @@
       },
       SmallpicClose() {
         this.SmallPicShow = false;
+        this.SmallmyPdf=false;
+        this.SmallmyPic=false;
       },
       SmallpicAlert() {
         this.SmallPicShow = true;
+        if(this.myPdf){//显示pdf
+          this.SmallmyPdf=true;
+         this.SmallmyPic=false;
+         this.pdfTitle= this.pdfArrys[0].arcSubType;
+       }  else{//显示图片
+         this.SmallmyPic=true;
+         this.SmallmyPdf=false;
+       }
       },
       pre() {
         this.smallPicInd--;
@@ -362,7 +388,7 @@
       Imgscroll() {
         if (this.myPdf) {
           return
-        }
+        };
         this.perfBtn = true;
         if (this.$refs.Big_pic_ref) {
           this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {
