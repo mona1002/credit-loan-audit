@@ -230,19 +230,40 @@
           this.currentTemplateId = 'reconsiderApp';
         }
         // 质检各角色
-        if (this.antiFlag == '07' || this.antiFlag == '08' || this.antiFlag == '10' || this.antiFlag == '11' || this.antiFlag ==
-          '12' || this.antiFlag == '13') {
+        // if (this.antiFlag == '07' || this.antiFlag == '08' || this.antiFlag == '10' || this.antiFlag == '11' || this.antiFlag ==
+        //   '12' || this.antiFlag == '13') {
+        //   this.currentTemplateId = 'checkApp';
+        // }
+        if (this.antiFlag == '07') { // 专员
+          this.creditappTaskid = JSON.parse(localStorage.getItem('QTTaskWait')).taskId;
+          this.taskName = JSON.parse(localStorage.getItem('QTTaskWait')).taskName;
           this.currentTemplateId = 'checkApp';
         }
-        // if (this.antiFlag == '05') {
-        //   this.creditappTaskid = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
-        //   this.taskName = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskName;
-        //   this.currentTemplateId = 'reconsiderApp';
-        // } if ( this.antiFlag == '06') {
-        //   this.creditappTaskid = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).taskId;
-        //   this.taskName = JSON.parse(localStorage.getItem('RManagertaskInWaitting')).taskName;
-        //   this.currentTemplateId = 'reconsiderApp';
-        // }
+        if (this.antiFlag == '08') { // 主管
+          this.creditappTaskid = JSON.parse(localStorage.getItem('QTManagerTW')).taskId;
+          this.taskName = JSON.parse(localStorage.getItem('QTManagerTW')).taskName;
+          this.currentTemplateId = 'checkApp';
+        }
+        if (this.antiFlag == '10') { // 初终审主管
+          this.creditappTaskid = JSON.parse(localStorage.getItem('QTTrialManagerTW')).taskId;
+          this.taskName = JSON.parse(localStorage.getItem('QTTrialManagerTW')).taskName;
+          this.currentTemplateId = 'checkApp';
+        }
+        if (this.antiFlag == '11') { // 质检主管复议（首次）
+          this.creditappTaskid = JSON.parse(localStorage.getItem('QTReManagerTW')).taskId;
+          this.taskName = JSON.parse(localStorage.getItem('QTReManagerTW')).taskName;
+          this.currentTemplateId = 'checkApp';
+        }
+        if (this.antiFlag == '12') { // 区域
+          this.creditappTaskid = JSON.parse(localStorage.getItem('QTAreaTW')).taskId;
+          this.taskName = JSON.parse(localStorage.getItem('QTAreaTW')).taskName;
+          this.currentTemplateId = 'checkApp';
+        }
+        if (this.antiFlag == '13') { // 合规
+          this.creditappTaskid = JSON.parse(localStorage.getItem('QTComplianceTW')).taskId;
+          this.taskName = JSON.parse(localStorage.getItem('QTComplianceTW')).taskName;
+          this.currentTemplateId = 'checkApp';
+        }
 
         //   this.getFraudApplyInfoWithOpinionById();
         // }
@@ -428,27 +449,27 @@
                     done();
                     if (this.antiFlag == '01') {
                       this.$router.push('/taskInWaitting');
+                      this.del('初审详情');
                     } else if (this.antiFlag == '02') {
                       this.$router.push('/FtaskInWaitting');
+                      this.del('终审详情');
                     } else if (this.antiFlag == '03') {
                       this.$router.push('/AntiFraud');
+                      this.del('反欺诈详情');
                     } else if (this.antiFlag == '04') {
                       this.$router.push('/AntiFraud');
+                      this.del('反欺诈详情');
                     } else if (this.antiFlag == '05') {
                       this.$router.push('/reconsiderList');
+                      this.del('复议详情');
                     } else if (this.antiFlag == '06') {
                       this.$router.push('/reconsiderList');
+                      this.del('复议详情');
+                    } else if (this.antiFlag == '07' || this.antiFlag == '08' || this.antiFlag == '10' || this.antiFlag ==
+                      '11' || this.antiFlag == '12' || this.antiFlag == '13') {
+                      this.del('质检详情');
                     }
-                    this.$store.dispatch('delVisitedViews', {
-                      name: '反欺诈申请-编辑'
-                    }).then((views) => {
-                      const latestView = views.slice(-1)[0]
-                      if (latestView) {
-                        this.$router.push(latestView.StatefullPath);
-                      } else {
-                        this.$router.push('/')
-                      }
-                    })
+                    this.del('反欺诈申请-编辑');
                   } else {
                     if (res.msg) {
                       this.$message({
@@ -480,16 +501,7 @@
       // 返回  上级路由
       backRoute() {
         window.history.go(-1);
-        this.$store.dispatch('delVisitedViews', {
-          name: '反欺诈申请-编辑'
-        }).then((views) => {
-          const latestView = views.slice(-1)[0]
-          if (latestView) {
-            this.$router.push(latestView.StatefullPath);
-          } else {
-            this.$router.push('/')
-          }
-        })
+        this.del('反欺诈申请-编辑');
       },
       // 主原因改变
       mainselectChange(val) {
@@ -514,6 +526,18 @@
       secondselectChange(val) {
         this.secondReason = val.reasonName;
         this.secondId = val.id
+      },
+      del(delname) {
+        this.$store.dispatch('delVisitedViews', {
+          name: delname
+        }).then((views) => {
+          const latestView = views.slice(-1)[0]
+          if (latestView) {
+            this.$router.push(latestView.StatefullPath);
+          } else {
+            this.$router.push('/')
+          }
+        })
       }
     }
   }
