@@ -261,6 +261,13 @@
       '$route' (to, from) {
         if (to.path === '/AntiApplyAdd' && this.$route.params.newOne) {
           this.mountedInf();
+          this.applySubNos='';
+          this.custName_la='';
+          this.subCertCode='';
+          this.applyDesc='';
+          this.mainReason='';
+          this.secondReason='';
+          this.applyDesc='';
         }
       }
     },

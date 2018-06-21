@@ -168,6 +168,10 @@
       '$route' (to, from) {
         if (to.path === '/AntiApplyEditf') {
           this.mountedInf();
+          //编辑部分清空
+          this.mainReason='';
+          this.secondReason='';
+          this.applyDesc='';
         }
       }
     },
