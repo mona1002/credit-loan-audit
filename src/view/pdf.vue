@@ -9,6 +9,7 @@
            :canvasId='id'
            :canvasWidth='pdfWidth'
            :canvasHeight='pdfHeight'
+           :SmallClass="SmallClass"
            @onErr="onErr">  
        </pdf-shower>
 	</div>
@@ -40,7 +41,7 @@ export default {
             console.log('错误信息：', err);
         },
     },
-    props: ['title','ID','cvsClass','cvsWidth','cvsHeight'],
+    props: ['title','ID','cvsClass','cvsWidth','cvsHeight','SmallClass'],
     watch:{
         title(value){        
             this.newArry = value;
