@@ -457,8 +457,8 @@
     mounted() {
       // 取出  申请信息   applicationInformationDetail
       this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
-      this.custName = this.applicationInformationDetail.custName;
-      this.certCode = this.applicationInformationDetail.certCode;
+      // this.custName = this.applicationInformationDetail.custName;
+      // this.certCode = this.applicationInformationDetail.certCode;
       this.Social();
       // 取出 审批结论 所需数据
       this.auditCode = JSON.parse(localStorage.getItem('userInf')).userCode;
@@ -471,6 +471,8 @@
       this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
       if (this.judgeFlag == '01') { // 初审 任务 id  taskId
         this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+           this.custName = this.taskInWaitting.custName;
+      this.certCode = this.taskInWaitting.certCode;
         // 挂起 任务id
         this.taskId = this.taskInWaitting.taskId;
 
@@ -485,6 +487,8 @@
 
       } else if (this.judgeFlag == '02') { // 终审取终审  taskId
         this.FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
+           this.custName = this.FtaskInWaitting.custName;
+      this.certCode = this.FtaskInWaitting.certCode;
         // 挂起 任务id
         this.taskId = this.FtaskInWaitting.taskId;
 
@@ -504,6 +508,8 @@
         this.channel = '00';
       } else if (this.judgeFlag == '03' || this.judgeFlag == '04') {
         this.taskwaitting = JSON.parse(localStorage.getItem('AntitaskInWaitting'));
+           this.custName = this.taskwaitting.custName;
+      this.certCode = this.taskwaitting.certCode;
         this.taskName = this.taskwaitting.taskName;
         this.taskId = this.taskwaitting.taskId;
         this.applyId = this.taskwaitting.applyId;

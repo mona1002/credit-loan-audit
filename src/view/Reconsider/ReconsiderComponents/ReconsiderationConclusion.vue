@@ -501,11 +501,23 @@
         jujueFont: '提交',
         shenpiLoading: false,
         shenpiFont: '提交',
+        RtaskInWaitting:'',
       }
     },
     mounted() {
+        this.RtaskInWaitting = JSON.parse(localStorage.getItem('RtaskInWaitting'));
       //申请单ID
       this.id = JSON.parse(localStorage.getItem('RtaskInWaitting')).applyId;
+      this.applyId = this.RtaskInWaitting.applyId;
+      this.appOrgId = this.RtaskInWaitting.appOrgId;
+      // 客户编号
+      this.custNo = this.RtaskInWaitting.custNo;
+      //产品id
+      this.sproId = this.RtaskInWaitting.proId;
+       this.proCode = this.RtaskInWaitting.proCode;
+      this.appOrgCode = this.RtaskInWaitting.appOrgCode;
+      this.applyCustId = this.RtaskInWaitting.applyCustId;
+      this.certType = this.RtaskInWaitting.certType;
       this.request();
 
       //经办人
@@ -514,22 +526,22 @@
       //登陆人id
       this.orgId = JSON.parse(localStorage.getItem('userInf')).orgId;
 
-      this.applyId = this.applicationInformationDetail.applyId;
-      this.appOrgId = this.applicationInformationDetail.appOrgId;
-      // 客户编号
-      this.custNo = this.applicationInformationDetail.custNo;
-      //产品id
-      this.sproId = this.applicationInformationDetail.proId;
+      // this.applyId = this.applicationInformationDetail.applyId;
+      // this.appOrgId = this.applicationInformationDetail.appOrgId;
+      // // 客户编号
+      // this.custNo = this.applicationInformationDetail.custNo;
+      // //产品id
+      // this.sproId = this.applicationInformationDetail.proId;
       //流程模版ID
       this.processTemplateId = JSON.parse(localStorage.getItem('ReWorkbenchPass')).processTemplateId;
       //流程实例ID
       this.processInstanceId = JSON.parse(localStorage.getItem('RtaskInWaitting')).processInstanceId;
       //任务id
       this.taskId = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
-      this.proCode = this.applicationInformationDetail.proCode;
-      this.appOrgCode = this.applicationInformationDetail.appOrgCode;
-      this.applyCustId = this.applicationInformationDetail.applyCustId;
-      this.certType = this.applicationInformationDetail.certType;
+      // this.proCode = this.applicationInformationDetail.proCode;
+      // this.appOrgCode = this.applicationInformationDetail.appOrgCode;
+      // this.applyCustId = this.applicationInformationDetail.applyCustId;
+      // this.certType = this.applicationInformationDetail.certType;
     },
     methods: {
       request() {

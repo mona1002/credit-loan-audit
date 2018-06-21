@@ -585,7 +585,7 @@
         creditScore: '', // 单独处理的评分
         fbalance: '', // 核实每月可接受最高还款额
         fbalance2: '', // 
-        fbalance2Num:Number,
+        fbalance2Num: Number,
         hangOut: false,
         loadsitu: false,
         adbtn: '确定',
@@ -668,13 +668,13 @@
         isLoading: false, // 审批按钮 是否加载状态
         loadingTitle: '提交', // 默认btn title
         shenPiBtnShow: false, // 初审 审批按钮  BX21
-        debtRate:Number,//产品负债率
-        flowRoleCode:'',//	流程角色code
-        maxAuditAmt:Number,//流程角色-最高审批金额
-        ploanAmtNum:Number,//批准金额number类型
-        params:'',
-        mainReasonId :'',//主原因id
-        subReasonId:'',//子原因id
+        debtRate: Number, //产品负债率
+        flowRoleCode: '', //	流程角色code
+        maxAuditAmt: Number, //流程角色-最高审批金额
+        ploanAmtNum: Number, //批准金额number类型
+        params: '',
+        mainReasonId: '', //主原因id
+        subReasonId: '', //子原因id
 
       }
     },
@@ -682,127 +682,165 @@
       this.mountedInf();
     },
     methods: {
-      mountedInf(){
-     // 取出标志taskNodeName
-      // creditApp_finalTrial_five   信审总监审批 最高级不需要 更高级审批
-      //this.taskNodeName = localStorage.getItem('taskNodeName');
-      // 页面创建的时候  找数据 
-      // 这里的数据是 申请信息 中存到本地的信息
-      // var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-      // 取出存在本地当然 userInfo 
-      this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
-      if (this.judgeFlag == '01') { // 初审 任务 id  taskId
-        this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-        this.taskId = this.taskInWaitting.taskId;
-        this.processInstanceId = this.taskInWaitting.processInstanceId;
-        // 任务状态
-        this.taskStatus = JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
-        // 反欺诈专员审批按钮，要判断下，功能角色号有配BX22的
-        if (this.userInfo.roleCodesList) {
-          for (var i = 0; i < this.userInfo.roleCodesList.length; i++)
-            if (this.userInfo.roleCodesList[i] == 'BX21')
-              if (this.judgeFlag == '01')
-                this.shenPiBtnShow = true;
-        }
-
-      } else if (this.judgeFlag == '02') { // 终审取终审  taskId
-        this.FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
-        this.flowRoleCode= this.FtaskInWaitting.flowRoleCode;//	流程角色code
-        // 挂起 任务id
-        this.taskId = this.FtaskInWaitting.taskId;
-        // 流程 实例id
-        this.processInstanceId = this.FtaskInWaitting.processInstanceId;
-        // 任务状态
-        this.taskStatus = JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskStatus;
-        this.taskName = this.FtaskInWaitting.taskName;
-        this.findSmFlowRole();
-        // 拒绝按钮根据 角色判断 BX20
-        if (this.userInfo.roleCodesList) {
-          for (var i = 0; i < this.userInfo.roleCodesList.length; i++)
-            if (this.userInfo.roleCodesList[i] == 'BX20')
-              if (this.judgeFlag == '01')
-                this.jujueBtnShow = true;
-        }
-      }
-      // 回退 拒绝  审批
-      // 经办人 登录用户名
-      this.userInfo = JSON.parse(localStorage.getItem('userInf'));
-      this.dealroperCode = this.userInfo.userCode;
-      // 用户id
-      this.orgId = this.userInfo.orgId;
-      // this.dealroperCode = userInfo.userCode;
-      // 经办时间
-      // this.dealroperDate =
-      //   new Date().toLocaleString()
-      //   .replace(/\//g, '-')
-      //   .match(/\d{4}\-\d{2}\-\d{1,2}/)[0]
-      this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
-      this.applyId = this.applicationInformationDetail.applyId;
-      this.appOrgId = this.applicationInformationDetail.appOrgId;
-      this.appOrgCode = this.applicationInformationDetail.appOrgCode;
-      // 客户编号
-      this.custNo = this.applicationInformationDetail.custNo;
-      // 显示
-      // 审批人
-      // this.userName = this.userInfo.userName;
-      this.custName = this.applicationInformationDetail.custName;
-      // 申请类型
-      this.appTypeTxt = this.applicationInformationDetail.appTypeTxt;
-      // 进件编号
-      this.applySubNo = this.applicationInformationDetail.applySubNo;
-      // 证件类型
-      this.certTypeTxt = this.applicationInformationDetail.certTypeTxt;
-      // 证件号码
-      this.certCode = this.applicationInformationDetail.certCode;
-      // 产品名称
-      // this.proName = this.applicationInformationDetail.proName;
-      // 申请期限 
-      this.loanTerm = this.applicationInformationDetail.loanTerm;
-      this.sproId = this.applicationInformationDetail.proId;
-      // 申请信息 带过来的 产品名称
-      this.baseProName = this.applicationInformationDetail.proName;
-      this.certCode = this.applicationInformationDetail.certCode;
-      this.Social();
-      // 初审 / 终审
-      this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
-      //  this.opinionFlag  初审终审标志  
-      if (this.judgeFlag == '01') {
-        // this.opinionFlag = '01';
-        this.options = [{
-          "label": "申请登记",
-          "value": "creditApp_apply",
-          "type": "01"
-        }]
-      } else if (this.judgeFlag == '02') {
-        // this.opinionFlag = '02'; // 终审
-        this.options = [
-          // {
-          //   "label": "申请登记",
-          //   "value": "creditApp_apply",
-          //   "type": "01"
-          // },
-          {
-            "label": "初审审批",
-            "value": "creditApp_firstTrial",
-            "type": "02"
+      mountedInf() {
+        // 取出标志taskNodeName
+        // creditApp_finalTrial_five   信审总监审批 最高级不需要 更高级审批
+        //this.taskNodeName = localStorage.getItem('taskNodeName');
+        // 页面创建的时候  找数据 
+        // 这里的数据是 申请信息 中存到本地的信息
+        // var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+        // 取出存在本地当然 userInfo 
+        this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
+        if (this.judgeFlag == '01') { // 初审 任务 id  taskId
+          this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+          this.taskId = this.taskInWaitting.taskId;
+          this.processInstanceId = this.taskInWaitting.processInstanceId;
+          this.applyId = this.taskInWaitting.applyId;
+          this.appOrgId = this.taskInWaitting.appOrgId;
+          this.appOrgCode = this.taskInWaitting.appOrgCode;
+          // 客户编号
+          this.custNo = this.taskInWaitting.custNo;
+          // 显示
+          this.custName = this.taskInWaitting.custName;
+          // 申请类型
+          // 进件编号
+          this.applySubNo = this.taskInWaitting.applySubNo;
+          // 证件类型
+          this.certTypeTxt = this.taskInWaitting.certTypeTxt;
+          // 证件号码
+          this.certCode = this.taskInWaitting.certCode;
+          // 申请期限 
+          this.sproId = this.taskInWaitting.proId;
+          // 申请信息 带过来的 产品名称
+          this.baseProName = this.taskInWaitting.proName;
+          this.certCode = this.taskInWaitting.certCode;
+          // 任务状态
+          this.taskStatus = JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
+          // 反欺诈专员审批按钮，要判断下，功能角色号有配BX22的
+          if (this.userInfo.roleCodesList) {
+            for (var i = 0; i < this.userInfo.roleCodesList.length; i++)
+              if (this.userInfo.roleCodesList[i] == 'BX21')
+                if (this.judgeFlag == '01')
+                  this.shenPiBtnShow = true;
           }
-        ]
-      } else if (this.judgeFlag == '03') {
 
-      } else if (this.judgeFlag == '04') { // 主管
-        this.options = [{
-          "label": "反欺诈专员审批",
-          "value": "antiFraudApp_commissioner",
-          "type": ''
-        }]
-      }
+        } else if (this.judgeFlag == '02') { // 终审取终审  taskId
+          this.FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
+          this.flowRoleCode = this.FtaskInWaitting.flowRoleCode; //	流程角色code
+          // 挂起 任务id
+          this.taskId = this.FtaskInWaitting.taskId;
+          // 流程 实例id
+          this.processInstanceId = this.FtaskInWaitting.processInstanceId;
+          this.applyId = this.FtaskInWaitting.applyId;
+          this.appOrgId = this.FtaskInWaitting.appOrgId;
+          this.appOrgCode = this.FtaskInWaitting.appOrgCode;
+          // 客户编号
+          this.custNo = this.FtaskInWaitting.custNo;
+          // 显示
+          this.custName = this.FtaskInWaitting.custName;
+          // 申请类型
+          // 进件编号
+          this.applySubNo = this.FtaskInWaitting.applySubNo;
+          // 证件类型
+          this.certTypeTxt = this.FtaskInWaitting.certTypeTxt;
+          // 证件号码
+          this.certCode = this.FtaskInWaitting.certCode;
+          // 申请期限 
+          this.sproId = this.FtaskInWaitting.proId;
+          // 申请信息 带过来的 产品名称
+          this.baseProName = this.FtaskInWaitting.proName;
+          this.certCode = this.FtaskInWaitting.certCode;
+          // 任务状态
+          this.taskStatus = JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskStatus;
+          this.taskName = this.FtaskInWaitting.taskName;
+          this.findSmFlowRole();
+          // 拒绝按钮根据 角色判断 BX20
+          if (this.userInfo.roleCodesList) {
+            for (var i = 0; i < this.userInfo.roleCodesList.length; i++)
+              if (this.userInfo.roleCodesList[i] == 'BX20')
+                if (this.judgeFlag == '01')
+                  this.jujueBtnShow = true;
+          }
+        }
+        // 回退 拒绝  审批
+        // 经办人 登录用户名
+        this.userInfo = JSON.parse(localStorage.getItem('userInf'));
+        this.dealroperCode = this.userInfo.userCode;
+        // 用户id
+        this.orgId = this.userInfo.orgId;
+        // this.dealroperCode = userInfo.userCode;
+        // 经办时间
+        // this.dealroperDate =
+        //   new Date().toLocaleString()
+        //   .replace(/\//g, '-')
+        //   .match(/\d{4}\-\d{2}\-\d{1,2}/)[0]
+        this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
+        // this.applyId = this.applicationInformationDetail.applyId;    
+        // this.appOrgId = this.applicationInformationDetail.appOrgId;
+        // this.appOrgCode = this.applicationInformationDetail.appOrgCode;
+        // // 客户编号
+        // this.custNo = this.applicationInformationDetail.custNo;
+        // // 显示
+        // // 审批人
+        // // this.userName = this.userInfo.userName;
+        // this.custName = this.applicationInformationDetail.custName;
+        // 申请类型
+        this.appTypeTxt = this.applicationInformationDetail.appTypeTxt; //...
+        // 进件编号
+        // this.applySubNo = this.applicationInformationDetail.applySubNo;
+        // // 证件类型
+        // this.certTypeTxt = this.applicationInformationDetail.certTypeTxt;
+        // // 证件号码
+        // this.certCode = this.applicationInformationDetail.certCode;
+        // // 产品名称
+        // // this.proName = this.applicationInformationDetail.proName;
+        // // 申请期限 
+        this.loanTerm = this.applicationInformationDetail.loanTerm; //...
+        // this.sproId = this.applicationInformationDetail.proId;
+        // // 申请信息 带过来的 产品名称
+        // this.baseProName = this.applicationInformationDetail.proName;
+        // this.certCode = this.applicationInformationDetail.certCode;
+        this.Social();
+        // 初审 / 终审
+        this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
+        //  this.opinionFlag  初审终审标志  
+        if (this.judgeFlag == '01') {
+          // this.opinionFlag = '01';
+          this.options = [{
+            "label": "申请登记",
+            "value": "creditApp_apply",
+            "type": "01"
+          }]
+        } else if (this.judgeFlag == '02') {
+          // this.opinionFlag = '02'; // 终审
+          this.options = [
+            // {
+            //   "label": "申请登记",
+            //   "value": "creditApp_apply",
+            //   "type": "01"
+            // },
+            {
+              "label": "初审审批",
+              "value": "creditApp_firstTrial",
+              "type": "02"
+            }
+          ]
+        } else if (this.judgeFlag == '03') {
+
+        } else if (this.judgeFlag == '04') { // 主管
+          this.options = [{
+            "label": "反欺诈专员审批",
+            "value": "antiFraudApp_commissioner",
+            "type": ''
+          }]
+        }
       },
-      findSmFlowRole(){//信审审批-8.获取流程角色信息
+      findSmFlowRole() { //信审审批-8.获取流程角色信息
         this.get("/smFlowRoleAction/findSmFlowRole", {
-          flowRoleCode:  this.flowRoleCode,
+          flowRoleCode: this.flowRoleCode,
         }).then(res => {
           if (res.statusCode == 200) {
-            this.maxAuditAmt=res.data.maxAuditAmt;
+            this.maxAuditAmt = res.data.maxAuditAmt;
             // this.tableData = res.data;
           } else {
             this.$message.error(res.msg);
@@ -836,7 +874,7 @@
             this.hangOut = false;
             // done();
             if (this.judgeFlag == '01') {
-                this.$router.push('/taskInWaitting');
+              this.$router.push('/taskInWaitting');
             }
             // 终审
             else if (this.judgeFlag == '02') {
@@ -852,7 +890,7 @@
               });
             } else {
               if (this.judgeFlag == '01') {
-                  this.$router.push('/taskInWaitting');
+                this.$router.push('/taskInWaitting');
               }
               // 终审
               else if (this.judgeFlag == '02') {
@@ -927,7 +965,7 @@
           });
           // 初审
           if (this.judgeFlag == '01')
-              this.$router.push('/taskInWaitting');
+            this.$router.push('/taskInWaitting');
           // 终审
           if (this.judgeFlag == '02')
             this.$router.push('/FtaskInWaitting' + this.routeParams);
@@ -1004,7 +1042,7 @@
                   this.quotaData = res.data;
                   // 单独处理 评分   =>  "评分:51.6"
                   this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
-                 this.fbalance = res.data.fbalance;
+                  this.fbalance = res.data.fbalance;
                   if (res.data.creditScore.split(',')[1]) {
                     this.fbalance2 = Number(res.data.fbalance).toLocaleString() + res.data.creditScore.split(
                       ',')[1];
@@ -1019,20 +1057,20 @@
                 applyId: this.applyId
               }).then(res => {
                 if (res.statusCode == '200') {
-                  if(res.data){
-                    this.verIncome = Number(res.data.verIncome).toLocaleString() + '.00';//月核实收入[元];
+                  if (res.data) {
+                    this.verIncome = Number(res.data.verIncome).toLocaleString() + '.00'; //月核实收入[元];
                     this.verIncome2 = Number(this.verIncome.split('.')[0].replace(/,/g, '')) +
-                  Number('0.' + this.verIncome.split('.')[1]);
-                    this.proId = res.data.proId;//批准产品ID;
-                    this.ploanTerm = res.data.ploanTerm;//批准期限[月];
-                    this.ploanAmt = Number(res.data.ploanAmt).toLocaleString() + '.00';/*this.moneyBlur(res.data.ploanAmt,'ploanAmt')*/;//批准金额[元];
-                    this.caculData.appmult = res.data.appmult;//审批倍数;
-                    this.caculData.eachTermamt = res.data.eachTermamt;//月还款额[元];
-                    this.caculData.inteDebitrate = res.data.inteDebitrate;//内部负债率;
-                    this.caculData.creditDebitRate = res.data.creditDebitRate;//总信用负债率;
-                    this.caculData.totalRate  = res.data.totalRate;//总负债率;
-                    this.appConclusion  = res.data.appConclusion;//意见说明;
-                    if(res.data.proId){
+                      Number('0.' + this.verIncome.split('.')[1]);
+                    this.proId = res.data.proId; //批准产品ID;
+                    this.ploanTerm = res.data.ploanTerm; //批准期限[月];
+                    this.ploanAmt = Number(res.data.ploanAmt).toLocaleString() + '.00'; /*this.moneyBlur(res.data.ploanAmt,'ploanAmt')*/ ; //批准金额[元];
+                    this.caculData.appmult = res.data.appmult; //审批倍数;
+                    this.caculData.eachTermamt = res.data.eachTermamt; //月还款额[元];
+                    this.caculData.inteDebitrate = res.data.inteDebitrate; //内部负债率;
+                    this.caculData.creditDebitRate = res.data.creditDebitRate; //总信用负债率;
+                    this.caculData.totalRate = res.data.totalRate; //总负债率;
+                    this.appConclusion = res.data.appConclusion; //意见说明;
+                    if (res.data.proId) {
                       //获取产品列表
                       this.post('/credit/product').then(ress => {
                         if (ress.statusCode == '200') {
@@ -1052,17 +1090,17 @@
                       this.post('/credit/ploanTermByPro?proId=' + res.data.proId).then(resp => {
                         if (resp.statusCode == '200')
                           this.ploanTerms = resp.data;
-                          for(var j=0;j<this.ploanTerms.length;j++){
-                            if(this.ploanTerms[j].appDuration==this.ploanTerm){
-                              this.loanRateYr =this.ploanTerms[j].loanRateYr
-                              this.repayWay =this.ploanTerms[j].repayWay
-                              this.synthesisRateM =this.ploanTerms[j].synthesisRateM
-                              break;
-                            }
+                        for (var j = 0; j < this.ploanTerms.length; j++) {
+                          if (this.ploanTerms[j].appDuration == this.ploanTerm) {
+                            this.loanRateYr = this.ploanTerms[j].loanRateYr
+                            this.repayWay = this.ploanTerms[j].repayWay
+                            this.synthesisRateM = this.ploanTerms[j].synthesisRateM
+                            break;
                           }
+                        }
                       });
                     }
-                  }else{
+                  } else {
                     return;
                   }
                 }
@@ -1095,14 +1133,16 @@
             // 查询反欺诈信息
             // this.$router.push('AntiApplyEdit')
             // var routeParms = 'id=' + this.applyId + ';flag=start;busiState=30'
-            this.$router.push({name: 'AntiApplyEditf'});
-            this.params={
-                id: this.applyId,
-                flag: 'start',
-                busiState: '30',
-                channel:'00'
-              }
-            localStorage.setItem("AntiApplyParams",JSON.stringify(this.params));
+            this.$router.push({
+              name: 'AntiApplyEditf'
+            });
+            this.params = {
+              id: this.applyId,
+              flag: 'start',
+              busiState: '30',
+              channel: '00'
+            }
+            localStorage.setItem("AntiApplyParams", JSON.stringify(this.params));
             // localStorage.setItem("antiApplyFlag", JSON.stringify(routeParms));
             // this.$store.dispatch('addVisitedViews', {
             //   name: '反欺诈申请',
@@ -1230,7 +1270,7 @@
                       this.maxAmounnt = this.products[i].maxAmounnt;
                       // 最小
                       this.minAmount = this.products[i].minAmount;
-                      this.debtRate= this.products[i].debtRate;//产品负债率
+                      this.debtRate = this.products[i].debtRate; //产品负债率
                       //this.calculateByAuditInfo();
                     }
                   };
@@ -1238,11 +1278,11 @@
 
                 //根据产品id获取批准期限
                 this.ploanTerms = res.data.ploanTermByPo;
-                for(var j=0;j<this.ploanTerms.length;j++){
-                  if(this.ploanTerms[j].appDuration==this.ploanTerm){
-                    this.loanRateYr =this.ploanTerms[j].loanRateYr
-                    this.repayWay =this.ploanTerms[j].repayWay
-                    this.synthesisRateM =this.ploanTerms[j].synthesisRateM
+                for (var j = 0; j < this.ploanTerms.length; j++) {
+                  if (this.ploanTerms[j].appDuration == this.ploanTerm) {
+                    this.loanRateYr = this.ploanTerms[j].loanRateYr
+                    this.repayWay = this.ploanTerms[j].repayWay
+                    this.synthesisRateM = this.ploanTerms[j].synthesisRateM
                     break;
                   }
                 }
@@ -1421,20 +1461,20 @@
             }
             // 批准金额 ploanAmt
             if (this.ploanAmt) {
-                var regs=/\,/g;
-                var newPloanAmt = this.ploanAmt.replace(regs,'')*1;
-                //this.ploanAmt=this.ploanAmt.replace(regs,'')*1;
-                //return;
-                //this.ploanAmt = Number(this.ploanAmt.split('.')[0].replace(/,/g, '')) +
-                  //Number('0.' + this.ploanAmt.split('.')[1]);
-               if(newPloanAmt > this.maxAuditAmt && this.opinionFlag=='00'){
-                  this.$message({
+              var regs = /\,/g;
+              var newPloanAmt = this.ploanAmt.replace(regs, '') * 1;
+              //this.ploanAmt=this.ploanAmt.replace(regs,'')*1;
+              //return;
+              //this.ploanAmt = Number(this.ploanAmt.split('.')[0].replace(/,/g, '')) +
+              //Number('0.' + this.ploanAmt.split('.')[1]);
+              if (newPloanAmt > this.maxAuditAmt && this.opinionFlag == '00') {
+                this.$message({
                   message: "提示：大于当前审批人最高审批金额权限，请选择请求更高级审批!",
                   type: 'warning'
                 })
                 return;
-               };
-               //this.ploanAmt=Number(this.ploanAmt).toLocaleString() + '.00';
+              };
+              //this.ploanAmt=Number(this.ploanAmt).toLocaleString() + '.00';
             };
             // 意见说明 appConclusion
             if (!this.appConclusion) {
@@ -1467,13 +1507,13 @@
         // 判断终审的 opinionFlag 
         // 点击 确认 提交 方法
         //获取主原因、子原因id
-        for(var i=0;i<this.mainReasons.length;i++){
-          if(this.mainReasons[i].reasonName == this.mainReason){
+        for (var i = 0; i < this.mainReasons.length; i++) {
+          if (this.mainReasons[i].reasonName == this.mainReason) {
             this.mainReasonId = this.mainReasons[i].id;
           }
         };
-        for(var i=0;i<this.secondeReasons.length;i++){
-          if(this.secondeReasons[i].reasonName == this.secondaryReason){
+        for (var i = 0; i < this.secondeReasons.length; i++) {
+          if (this.secondeReasons[i].reasonName == this.secondaryReason) {
             this.subReasonId = this.secondeReasons[i].id;
           }
         };
@@ -1546,10 +1586,10 @@
             })
 
             if (this.judgeFlag == '01')
-                    this.$router.push('/taskInWaitting');
+              this.$router.push('/taskInWaitting');
             if (this.judgeFlag == '02')
               this.$router.push('/FtaskInWaitting' + this.routeParams);
-              this.del();
+            this.del();
           } else {
             this.$message({
               message: res.msg ? res.msg : '网络异常,请重试',
@@ -1565,14 +1605,14 @@
         // if (this.judgeFlag == '02') {
         // this.auditFlag = '1';
         // }
-          if (this.judgeFlag == '02') {
-            if( this.opinionFlag=='00'){
+        if (this.judgeFlag == '02') {
+          if (this.opinionFlag == '00') {
             this.auditFlag = '1';
-            }else if(this.opinionFlag=='03'){
+          } else if (this.opinionFlag == '03') {
             this.auditFlag = '0';
-            }
+          }
         }
-     
+
         let verIncome2 = 0;
         let ploanAmt2 = 0;
 
@@ -1824,7 +1864,7 @@
       proSlelecChange: function (val) {
         this.ploanTerm = '';
         this.ploanAmt = '';
-        this.debtRate=val.debtRate;//产品负债率
+        this.debtRate = val.debtRate; //产品负债率
         // id val.id  产品id
         this.proId = val.id;
         // proCode  产品code
@@ -1866,35 +1906,36 @@
           loanRateYr: this.loanRateYr, // 借款利率
         }).then(res => {
           // 审批结论数据
-          if (res.statusCode == '200'){
-             this.caculData = res.data;
-            console.log('总负债率：'+(res.data.totalRate*100),res.data.totalRate*100)
-            console.log('内部负债率：'+(res.data.inteDebitrate*100),res.data.inteDebitrate*100)
-            console.log('月还款额:'+res.data.eachTermamt,res.data.eachTermamt)
+          if (res.statusCode == '200') {
+            this.caculData = res.data;
+            console.log('总负债率：' + (res.data.totalRate * 100), res.data.totalRate * 100)
+            console.log('内部负债率：' + (res.data.inteDebitrate * 100), res.data.inteDebitrate * 100)
+            console.log('月还款额:' + res.data.eachTermamt, res.data.eachTermamt)
             console.log(this.fbalance2)
-            console.log('可接受最高每期还款额:'+this.fbalance,this.fbalance)
-            console.log('产品负债率：'+this.debtRate,this.debtRate)
-            console.log('流程角色最高审批金额:'+this.maxAuditAmt,this.maxAuditAmt)
-           console.log('同意:'+this.opinionFlag,this.opinionFlag)
-           console.log('终审'+this.judgeFlag,this.judgeFlag )
-            if(res.data.eachTermamt>this.fbalance){// fbalance 可接受最高每期还款额
-              this.ploanAmt=''//批准金额
+            console.log('可接受最高每期还款额:' + this.fbalance, this.fbalance)
+            console.log('产品负债率：' + this.debtRate, this.debtRate)
+            console.log('流程角色最高审批金额:' + this.maxAuditAmt, this.maxAuditAmt)
+            console.log('同意:' + this.opinionFlag, this.opinionFlag)
+            console.log('终审' + this.judgeFlag, this.judgeFlag)
+            if (res.data.eachTermamt > this.fbalance) { // fbalance 可接受最高每期还款额
+              this.ploanAmt = '' //批准金额
               this.$message.error('月还款额不能大于可接受最高每期还款额，请重新输入！')
               return
-            }else if(res.data.totalRate*100>this.debtRate||res.data.inteDebitrate*100>this.debtRate ){ //产品负债率:debtRate  内部负债率:inteDebitrate  总负债率：totalRate
-                this.ploanAmt=''//批准金额
+            } else if (res.data.totalRate * 100 > this.debtRate || res.data.inteDebitrate * 100 > this.debtRate) { //产品负债率:debtRate  内部负债率:inteDebitrate  总负债率：totalRate
+              this.ploanAmt = '' //批准金额
               this.$message.error('内部负载率/总负债率超过该产品对应的最大负债率！')
               return
             }
-            if(this.opinionFlag=='00'&&this.judgeFlag == '02'){//选中同意
-            // this.ploanAmtNum = Number(this.ploanAmt.split('.')[0].replace(/,/g, ''));//批准金额 number类型：ploanAmtNum            
-            this.ploanAmt.indexOf(',')!=-1?  this.ploanAmtNum = this.ploanAmt.replace(/,/g, '')*1:this.ploanAmtNum = this.ploanAmt*1 ;
-             console.log('批准金额:'+this.ploanAmtNum,this.ploanAmtNum )
-            if(this.ploanAmtNum>this.maxAuditAmt ){//流程角色最高审批金额:maxAuditAmt
-                this.ploanAmt=''//批准金额
-              this.$message.error('大于当前审批人最高审批金额权限，请选择请求更高级审批！')
-              return 
-            }
+            if (this.opinionFlag == '00' && this.judgeFlag == '02') { //选中同意
+              // this.ploanAmtNum = Number(this.ploanAmt.split('.')[0].replace(/,/g, ''));//批准金额 number类型：ploanAmtNum            
+              this.ploanAmt.indexOf(',') != -1 ? this.ploanAmtNum = this.ploanAmt.replace(/,/g, '') * 1 : this.ploanAmtNum =
+                this.ploanAmt * 1;
+              console.log('批准金额:' + this.ploanAmtNum, this.ploanAmtNum)
+              if (this.ploanAmtNum > this.maxAuditAmt) { //流程角色最高审批金额:maxAuditAmt
+                this.ploanAmt = '' //批准金额
+                this.$message.error('大于当前审批人最高审批金额权限，请选择请求更高级审批！')
+                return
+              }
             }
           }
         })
@@ -1936,7 +1977,7 @@
                 this.verIncome = Number(val).toLocaleString() + '.00';
               }
             }
-             this.calculateByAuditInfo();
+            this.calculateByAuditInfo();
           } else if (flag == 'ploanAmt') {
             if (/,/.test(val)) {
               if (/./.test(val)) {
@@ -1995,7 +2036,7 @@
               this.ploanAmt2 = '';
               return;
             }
-            console.log( this.verIncome+"*****"+ this.proId+"*****"+this.ploanTerm+"*****"+this.ploanAmt.length);
+            console.log(this.verIncome + "*****" + this.proId + "*****" + this.ploanTerm + "*****" + this.ploanAmt.length);
             if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length >
               0 &&
               this.loanRateYr && this.repayWay && this.synthesisRateM) {
@@ -2075,14 +2116,16 @@
       socialSure() {
         this.socialLogVisible = false;
       },
-      del(){
-           this.$store.dispatch('delVisitedViews', {name:'初审详情'}).then((views) => {
-            const latestView = views.slice(-1)[0]
-            if (latestView) {
-              this.$router.push(latestView.StatefullPath);
-            } else {
-              this.$router.push('/')
-            }
+      del() {
+        this.$store.dispatch('delVisitedViews', {
+          name: '初审详情'
+        }).then((views) => {
+          const latestView = views.slice(-1)[0]
+          if (latestView) {
+            this.$router.push(latestView.StatefullPath);
+          } else {
+            this.$router.push('/')
+          }
         })
       }
     },
