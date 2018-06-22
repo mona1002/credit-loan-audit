@@ -16,7 +16,7 @@
         </span>
         <span>页数</span>
       </p>
-      <el-collapse accordion>
+      <el-collapse accordion v-model="activeName">
         <el-collapse-item v-for="(item,ind) in ListParent" :key="ind" @click.native="getChildrenList(item.id,ind,item)">
           <template slot="title">
             <p>
@@ -80,10 +80,11 @@
           />
           <p v-if="SmallmyPic"> {{val.arcSubType}} </p>
         </figure>
-        <figure class="small_pic_figure" v-show="SmallmyPdf"  @dblclick="pdfClose()">
-          <div class="Small_pic"  @dblclick="pdfClose()">
-             <p is="pdfDivLeft" ID='firstTirlLeftSmall' :cvsWidth='200' :cvsHeight='200' SmallClass="SmallWrap" v-bind:title="pdfArrys"  @dblclick="pdfClose()"></p> 
-             </div>
+        <figure class="small_pic_figure" v-show="SmallmyPdf" @dblclick="pdfClose()">
+          <div class="Small_pic" @dblclick="pdfClose()">
+            <p is="pdfDivLeft" ID='firstTirlLeftSmall' :cvsWidth='200' :cvsHeight='200' SmallClass="SmallWrap" v-bind:title="pdfArrys"
+              @dblclick="pdfClose()"></p>
+          </div>
           <p> {{pdfTitle}} </p>
         </figure>
       </div>
@@ -164,6 +165,7 @@
         imgPathDetail: [],
         // ----------------------------------
         activeNames: ['1', '2'], //查询弹出框 默认展开选项
+        activeName: [],
         dataa: false,
         personal: [], // 匹配查询-个人
         others: [], // 匹配查询-他人
@@ -175,42 +177,51 @@
         pngAyyrs: [],
         myPng: false,
         myPdf: false,
-        SmallmyPdf:false,
-        SmallmyPic:false,
-        pdfTitle:'',
+        SmallmyPdf: false,
+        SmallmyPic: false,
+        pdfTitle: '',
       }
     },
     props: ['msg', 'comBtn'],
     methods: {
-      mountedInf(){
-      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '01') {
-        this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
-      } else if (this.judgeFlag.flag == '02') {
-        this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-      } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
-        this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员\主管
-      }
-      // else if (this.judgeFlag.flag == '04') {
-      //   this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
-      // }
-      this.imgBaseUrl = imgUrl.imgBaseUrl;
-      // 父菜单
-      this.post("/productArchive/getProductArchiveParentList", {
-        applyId: this.localInf.applyId,
-      }).then(res => {
-        if (res.statusCode == 200) {
-          this.ListParent = res.data;
-          if (this.ListParent) {
-            for (var i = 0; i < this.ListParent.length; i++) {
-              this.opendImg[i] = true;
-              this.closedImg[i] = false;
-            }
-          }
-        } else {
-          this.$message.error(res.msg);
+      mountedInf() {
+        this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+        if (this.judgeFlag.flag == '01') {
+          this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
+        } else if (this.judgeFlag.flag == '02') {
+          this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
+        } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
+          this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员\主管
         }
-      });
+        // else if (this.judgeFlag.flag == '04') {
+        //   this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
+        // }
+        // 恢复到初始状态
+        this.ListDetails = [];
+        this.activeName = [];
+        this.pngAyyrs = [];
+        this.pdfArrys = [];
+        this.SmallmyPic = false;
+        this.SmallmyPdf = false;
+        this.myPdf=false;
+        this.SmallPicShow = false; //缩略图
+        this.imgBaseUrl = imgUrl.imgBaseUrl;
+        // 父菜单
+        this.post("/productArchive/getProductArchiveParentList", {
+          applyId: this.localInf.applyId,
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.ListParent = res.data;
+            if (this.ListParent) {
+              for (var i = 0; i < this.ListParent.length; i++) {
+                this.opendImg[i] = true;
+                this.closedImg[i] = false;
+              }
+            }
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
       },
       closeAlertSearch() {
         this.dataa = false;
@@ -300,11 +311,11 @@
         this.SmallPicShow = false;
         this.defaultBigPicCss();
       },
-      pdfClose(){
+      pdfClose() {
         console.log('ccc')
-     this.SmallPicShow = false;
-     this.showPage =  1;
-    //  this.defaultBigPicCss();
+        this.SmallPicShow = false;
+        this.showPage = 1;
+        //  this.defaultBigPicCss();
       },
       getImg(ind) {
         this.pdfArrys = [];
@@ -344,20 +355,23 @@
       },
       SmallpicClose() {
         this.SmallPicShow = false;
-        this.SmallmyPdf=false;
-        this.SmallmyPic=false;
+        this.SmallmyPdf = false;
+        this.SmallmyPic = false;
       },
       SmallpicAlert() {
         this.SmallPicShow = true;
-       if(this.myPdf){//显示pdf
-        //alert("99999");
-          this.SmallmyPdf=true;
-         this.SmallmyPic=false;
-         this.pdfTitle= this.pdfArrys[0].arcSubType;
-       }  else{//显示图片
-         this.SmallmyPic=true;
-         this.SmallmyPdf=false;
-       }
+        if (this.myPdf) { //显示pdf
+          //alert("99999");
+          this.SmallmyPdf = true;
+          this.SmallmyPic = false;
+          console.log( this.pdfArrys )
+          console.log( this.pdfArrys[0] )
+          console.log( this.pdfArrys[0].arcSubType)
+         this.pdfArrys[0].arcSubType?  this.pdfTitle = this.pdfArrys[0].arcSubType:'';
+        } else { //显示图片
+          this.SmallmyPic = true;
+          this.SmallmyPdf = false;
+        }
       },
       pre() {
         this.smallPicInd--;
@@ -752,11 +766,10 @@
     border-radius: 5px;
     border: 2px solid #bfcbd9;
     box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
+    overflow: hidden;    
   }
- .AudioVisualLeft .Small_pic div canvas{
-   width:140px;
-height: 140px !important;
- }
+
+
   /* --------------------------- */
 
   .NamParentNode {

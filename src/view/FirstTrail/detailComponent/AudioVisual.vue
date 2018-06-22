@@ -684,6 +684,7 @@
     border-radius: 5px;
     border: 2px solid #bfcbd9;
     box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
+    overflow: hidden;
   }
 
   #FirstAud .pdf-wraper {

@@ -194,6 +194,15 @@
         } else if (this.MatchFlag.MatchFlag == 'QT') {
           this.localInf = JSON.parse(localStorage.getItem("QT")) //综合查询
         }
+            // 恢复到初始状态
+         this.ListDetails = [];
+        this.activeName = [];
+        this.pngAyyrs = [];
+        this.pdfArrys = [];
+        this.SmallmyPic = false;
+        this.SmallmyPdf = false;
+        this.myPdf=false;
+        this.SmallPicShow = false; //缩略图
         this.imgBaseUrl = imgUrl.imgBaseUrl;
 
         this.post("/productArchive/getProductArchiveParentList", {
