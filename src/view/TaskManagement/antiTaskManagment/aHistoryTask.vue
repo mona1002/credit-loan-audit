@@ -62,7 +62,7 @@
           </el-table-column>
           <el-table-column prop="custName" label="客户名称" align='center' min-width="100">
           </el-table-column>
-          <el-table-column prop="certType" label="证件类型" align='center' min-width="100">
+          <el-table-column prop="certTypeTxt" label="证件类型" align='center' min-width="100">
           </el-table-column>
           <el-table-column prop="certCode" label="证件号码" align='center' min-width="180">
           </el-table-column>

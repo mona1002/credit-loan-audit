@@ -370,6 +370,8 @@
   .taskWatting {
     width: 100%;
     height: 100%;
+   height: calc( 100% - 45px);
+    
     background-color: #fafbfc;
     overflow-y: auto;
     overflow-x: hidden;
@@ -378,7 +380,7 @@
   .taskWattingContain {
     padding: 30px 30px;
     width: 100%;
-    height: calc( 100% - 70px);
+    /* height: calc( 100% - 70px); */
     overflow: hidden;
   }
 
@@ -455,8 +457,8 @@
   .taskWatting .taskWtable {
     background-color: #ffffff;
     border: 1px solid #e6eaee;
-    margin-bottom: 40px;
-    padding: 25px;
+    margin-bottom: 20px;
+    /* padding: 25px; */
     width: 100%;
     /* height:calc( 100% - 232px ); */
   }
