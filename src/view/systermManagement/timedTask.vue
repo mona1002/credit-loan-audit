@@ -85,10 +85,10 @@
     data() {
       return {
         sendStatus: [{
-          label: '未成功',
+          label: '请求失败',
           value: '00',
         }, {
-          label: '成功',
+          label: '请求成功',
           value: '01'
         }],
         sendDate: '', //发送日期

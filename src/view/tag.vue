@@ -293,7 +293,13 @@
           this.nodeName = "复议历史任务";
         } else if (route.path == '/DoneTask') { // 任务管理- 复议已办任务
           this.nodeName = "复议已办任务";
-        } else if (route.path == '/AntiCaseNum') { // 案件编号维护
+        } else if (route.path == '/QTDoneTask') { // 任务管理- 复议已办任务
+          this.nodeName = "质检已办任务";
+        } 
+         else if (route.path == '/QTHistoryTask') { // 任务管理- 复议已办任务
+          this.nodeName = "质检历史任务";
+        }  
+        else if (route.path == '/AntiCaseNum') { // 案件编号维护
           this.nodeName = "案件编号维护";
         } else if (route.path == '/AntiRules') { // 反欺诈规则设定
           this.nodeName = "反欺诈规则设定";

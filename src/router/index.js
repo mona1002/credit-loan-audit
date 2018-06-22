@@ -34,6 +34,9 @@ import aHistoryTask from '../view/TaskManagement/antiTaskManagment/aHistoryTask.
 import TaskManagementSplit from '../view/TaskManagement/reconsider/TaskManagementSplit.vue' //
 import doTheTask from '../view/TaskManagement/examineAndApprove/doTheTask.vue' //审批任务管理——已办任务
 import historicalTask from '../view/TaskManagement/examineAndApprove/historicalTask.vue' //审批任务管理——历史任务
+import QTDoneTask from '../view/TaskManagement/QualityT/QTDoneTask.vue' //质检-已办任务
+import QTHistoryTask from '../view/TaskManagement/QualityT/QTHistoryTask.vue' //质检-历史任务
+
 //  -----------------------大数据风控+社保公积金----------------------
 import PneCtrl from '../view/SocialSeAndPneCtrl/PneCtrl.vue' //大数据
 import SocialSe from '../view/SocialSeAndPneCtrl/SocialSe.vue' //社保公积金
@@ -228,15 +231,13 @@ component:timedTask
   },
   {
     path: '/historicalTask',
-    // component: historicalTask,
-    component(resolve) {
-      require(['../view/TaskManagement/examineAndApprove/historicalTask.vue'], resolve)
-    },
-    meta: {
-      pageTitle: '综合查询',
-      keepAlive: true
-    }
-    // name:historicalTask
+    component: historicalTask,
+  },  {
+    path: '/QTDoneTask',
+    component: QTDoneTask,
+  },  {
+    path: '/QTHistoryTask',
+    component: QTHistoryTask,
   },
   // ---------------质检--------------------
   {

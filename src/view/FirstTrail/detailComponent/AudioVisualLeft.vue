@@ -762,15 +762,12 @@
 
   .AudioVisualLeft .Small_pic {
     height: calc( 100% - 60px);
-    /* UI设计部分 */
     border-radius: 5px;
     border: 2px solid #bfcbd9;
     box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
     overflow: hidden;    
   }
 
-
-  /* --------------------------- */
 
   .NamParentNode {
     margin-left: 20px;
@@ -781,8 +778,6 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-
-  /* ----------------------------- */
 
   .posi {
     position: absolute;
@@ -800,7 +795,6 @@
     line-height: 48px;
     padding: 0 20px;
     background: rgba(0, 119, 255, 0.75);
-
     color: #f8f9fd;
     text-align: center
   }
