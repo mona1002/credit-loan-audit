@@ -875,12 +875,14 @@
             // done();
             if (this.judgeFlag == '01') {
               this.$router.push('/taskInWaitting');
+                  this.del('初审详情');
             }
             // 终审
             else if (this.judgeFlag == '02') {
               this.$router.push('/FtaskInWaitting' + this.routeParams);
+              this.del('终审详情');
             }
-            this.del();
+        
           } else {
             if (res.statusCode == 500) {
               this.hangOut = false;
@@ -1584,12 +1586,14 @@
               message: res.msg,
               type: 'success'
             })
-
-            if (this.judgeFlag == '01')
-              this.$router.push('/taskInWaitting');
-            if (this.judgeFlag == '02')
-              this.$router.push('/FtaskInWaitting' + this.routeParams);
-            this.del();
+            if (this.judgeFlag == '01'){
+               this.$router.push('/taskInWaitting');
+              this.del('初审详情');
+            }
+            if (this.judgeFlag == '02'){
+               this.$router.push('/FtaskInWaitting' + this.routeParams);
+           this.del('终审详情');
+            }
           } else {
             this.$message({
               message: res.msg ? res.msg : '网络异常,请重试',
@@ -1718,10 +1722,11 @@
             // taskId: this.taskId, // 任务id
             if (this.judgeFlag == '01') { // 初审 
               this.$router.push('/taskInWaitting');
+             this.del('初审详情');
             } else if (this.judgeFlag == '02') { // 终审
               this.$router.push('/FtaskInWaitting' + this.routeParams);
+              this.del('终审详情');
             }
-            this.del();
           }
         })
       },
@@ -2116,9 +2121,9 @@
       socialSure() {
         this.socialLogVisible = false;
       },
-      del() {
+      del(delname) {
         this.$store.dispatch('delVisitedViews', {
-          name: '初审详情'
+          name: delname
         }).then((views) => {
           const latestView = views.slice(-1)[0]
           if (latestView) {

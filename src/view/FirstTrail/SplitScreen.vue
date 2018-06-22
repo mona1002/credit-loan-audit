@@ -197,6 +197,7 @@
           this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
           this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
           this.$refs.right_tab_ul.style.left = "0";
+          this.DblScreen();
           // if (this.tabActiveInd1 === 0) {
           //   this.$refs.AudioLeft.mountedInf();
           //   this.$refs.AudioLeftCom ? this.$refs.AudioLeftCom.mountedInf() : '';
