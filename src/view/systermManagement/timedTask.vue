@@ -180,6 +180,7 @@
       },
       handleSizeChange(val) {
         this.pageCount = val;
+        this.Rsearch();
       },
       handlePageChange(val) {
         this.pageNum = this.currentPage = val;
