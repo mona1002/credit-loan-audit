@@ -219,7 +219,7 @@ component:timedTask
   {
     path: '/TaskManagementSplit',
     component: TaskManagementSplit,
-    // name:TaskManagementSplit
+    name:'TaskManagementSplit'
   },
   {
     path: '/doTheTask',

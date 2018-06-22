@@ -3,7 +3,6 @@
   <div class="SplitScreen">
     <myHead></myHead>
     <div class="SplitScreen_content">
-      <!-- 进件人详情 -->
       <p class="PerDtl">
         <span> 借款人：{{custName}}</span>
         <span> 进件编号：{{customInf.applyMainNo}}</span>
@@ -14,21 +13,14 @@
         <span>{{customInf.adminIntroduce}}</span>
       </p>
       <div class="SplitScreen_wrap">
-        <!-- 右侧分屏部分 -->
         <div class="right" ref="rRight">
-          <!-- <img src="../../../static/images/backcopy.png" class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen"> -->
-          <!-- 右屏tab 表头 -->
           <div class="Right_tab_title_div">
-            <!-- 左右滑动 图标  -->
-            <!-- @click="leftMovingBtn" -->
             <span class="pre_next_btn_wrap">
               <img src="../../../../static/images/Shape@1x.png">
             </span>
-            <!-- @click="rightMovingBtn" -->
             <span class="pre_next_btn_wrap" style="color:red;">
               <img src="../../../../static/images/Shaperight@1x.png">
             </span>
-            <!-- tab 2 -=====================tab2里面的ul-->
             <div class="Right_tab_ul_wrap">
               <ul ref="right_tab_ul" style="left:0;right:0;">
                 <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="tab($event,index,val)" :class="{tab2Act:tab2Index==index}">
@@ -36,16 +28,11 @@
               </ul>
             </div>
           </div>
-          <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
-            <capplicationInformationDetail v-if=" this.tabContent2==0"></capplicationInformationDetail>
-            <!-- √ -->
+            <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==0"></capplicationInformationDetail>
             <AnitAudioVisual v-if=" this.tabContent2==1"></AnitAudioVisual>
-            <!-- √ -->
             <creditInvestigation v-if=" this.tabContent2==2"></creditInvestigation>
-            <!-- √ -->
             <processTrajectory v-if=" this.tabContent2==3"></processTrajectory>
-            <!-- √ -->
           </div>
         </div>
       </div>
@@ -62,16 +49,37 @@
     data() {
       return {
         custName: '',
-        customInf: [], //申请信息页local字段
-        tastwaitingPass: [], //详情列表页信息--(含)取applyId
-        flexible: true,
+        customInf: [],
+        tastwaitingPass: [],
         tabContent2: 0,
         tabActiveInd2: 0,
         items2: ["申请信息", "影像资料", "实地征信", "流程轨迹"],
         tab2Index: 0,
       }
     },
+    watch: {
+      '$route' (to, from) {
+        if (to.path === '/TaskManagementSplit' && this.$route.params.newOne) {
+          this.mountedInf();
+          this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 0;
+          this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
+        }
+      }
+    },
     methods: {
+      mountedInf() {
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("TtaskInWaitting")); //任务管理
+        this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
+          id: this.tastwaitingPass.applyId,
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.custName = res.data.accepCusBasicInfo.custName;
+            this.customInf = res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      },
       tab(ev, ind, val) {
         this.tabContent2 = ind;
         this.tab2Index = ind;
@@ -79,22 +87,11 @@
       }
     },
     mounted() {
-      console.log("已办=历史-TaskManagementSplit");
-      this.tastwaitingPass = JSON.parse(localStorage.getItem("TtaskInWaitting")); //任务管理
-      this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-        id: this.tastwaitingPass.applyId,
-      }).then(res => {
-        if (res.statusCode == 200) {
-          this.custName = res.data.accepCusBasicInfo.custName;
-          this.customInf = res.data;
-        } else {
-          this.$message.error(res.msg);
-        }
-      });
+      this.mountedInf();
     },
     components: {
       myHead,
-      capplicationInformationDetail, //申请信息
+      capplicationInformationDetail,
       AnitAudioVisual,
       creditInvestigation,
       processTrajectory
@@ -105,10 +102,7 @@
 <style scoped>
   .SplitScreen {
     height: 100%;
-    /* min-width: 1366; */
   }
-
-  /* 激活样式 */
 
   .tab1Default {
     color: #bfcbd9;
@@ -135,8 +129,6 @@
     color: #bfcbd9;
   }
 
-  /*-------------------------------- */
-
   .SplitScreen_content {
     border: 1px solid #0077ff;
     height: calc(100% - 100px);
@@ -144,7 +136,6 @@
     padding: 13px 9px;
   }
 
-  /* 借款人详情 */
 
   .PerDtl {
     color: #0077ff;
@@ -160,10 +151,6 @@
     font-size: 14px;
     margin-right: 15px;
   }
-
-  /* 切换按钮 */
-
-  /* 左右分屏 */
 
   .SplitScreen_wrap {
     width: 100%;
@@ -182,10 +169,6 @@
     position: relative;
   }
 
-  /* 左屏 */
-
-  /* 左侧详情 p标签   */
-
   .right .Right_tab_title_div,
   .AudioVisual_wrap_compare_right p {
     font-size: 16px;
@@ -203,17 +186,11 @@
     padding-right: 40px;
   }
 
-  /* 左侧详情 content div 内容   */
-
   .Left_right_BigImg {
     background: white;
     height: calc( 100% - 48px);
     overflow: auto;
   }
-
-  /* 右屏 */
-
-  /* 右侧tab切换头外的ul   流 */
 
   .Right_tab_ul_wrap {
     overflow: hidden;
@@ -237,15 +214,11 @@
     line-height: 38px;
   }
 
-  /* ======================================================================================================= */
 
   .tab2_Content {
-    /*background: purple;*/
     height: calc( 100% - 48px);
     overflow: auto;
   }
-
-  /* 右侧tab切换头 左右滑动图标  流  */
 
   .pre_next_btn_wrap {
     position: absolute;
