@@ -160,7 +160,7 @@
           :page-size= setPageSize
           layout="total, sizes, prev, pager, next, jumper"
           :total=responseDatas.totalNum>
-        </el-pagination>f
+        </el-pagination>
       </div>
     </div>
 
