@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import myHead from '@/view/header'
-import taskInWaitting from '@/view/FirstTrail/taskInWaitting'//初审审批
+import taskInWaitting from '@/view/FirstTrail/taskInWaitting' //初审审批
 import workbench from '@/view/FirstTrail/workbench'
 import SplitScreen from '@/view/FirstTrail/SplitScreen'
-import MatchingInf from '@/view/FirstTrail/MatchingInf'// 匹配查询页面
+import MatchingInf from '@/view/FirstTrail/MatchingInf' // 匹配查询页面
 // ----------终审-------------------------
 import FSplitScreen from '@/view/FinalTrial/FSplitScreen'
 //列表页  
@@ -25,7 +25,19 @@ import ReconsiderApply from '../view/Reconsider/ReconsiderComponents/ReconsiderA
 import reconsiderList from '../view/Reconsider/reconsiderList.vue' //复议申请任务列表
 import ReconsiderSplit from '../view/Reconsider/ReconsiderSplit.vue' //复议专员主管分屏
 // -------------------------流程监控---------------------
-import processMoni from '../view/processMoni/processMoni.vue'
+import processMoni from '../view/processMoni/processMoni.vue' //
+import processMoniAntiDistributed from '../view/processMoni/processMoniAntiDistributed.vue' //流程监控-反欺诈已分配
+import processMoniAntiDone from '../view/processMoni/processMoniAntiDone.vue' //流程监控-反欺诈已完成
+import processMoniAntiUndistributed from '../view/processMoni/processMoniAntiUndistributed.vue' //流程监控-反欺诈未完成
+import processMoniQTUndistributed from '../view/processMoni/processMoniQTUndistributed.vue' //流程监控-质检未分配
+import processMoniQTDistributed from '../view/processMoni/processMoniQTDistributed.vue' //流程监控-质检已分配
+import processMoniQTDone from '../view/processMoni/processMoniQTDone.vue' //流程监控-质检已完成
+import processMoniReDistributed from '../view/processMoni/processMoniReDistributed.vue' //流程监控-复议已分配
+import processMoniReDone from '../view/processMoni/processMoniReDone.vue' //流程监控-复议已完成
+import processMoniReUndistributed from '../view/processMoni/processMoniReUndistributed.vue' //流程监控-复议未分配
+import processMoniTrilDistributed from '../view/processMoni/processMoniTrilDistributed.vue' //流程监控-信审已分配
+import processMoniTrilDone from '../view/processMoni/processMoniTrilDone.vue' //流程监控-信审已完成
+import processMoniTrilUndistributed from '../view/processMoni/processMoniTrilUndistributed.vue' //流程监控-信审未分配
 // -----------------------任务管理----------------------
 import DoneTask from '../view/TaskManagement/reconsider/DoneTask.vue' //
 import HistoryTask from '../view/TaskManagement/reconsider/HistoryTask.vue' //
@@ -58,7 +70,7 @@ import ACManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/A
 import ComplianceManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/ComplianceManagerTaskList.vue' //质检复议流程-合规经理页面- 合规经理任务列表
 import ComplianceProcess from '../view/QualityTesting/QTReconsiderProcess/components/ComplianceProcess.vue' //质检复议-
 import MatchingInfQT from '../view/FirstTrail/MatchingInfQT.vue' //质检详情
-import pdf from '../view/pdf.vue' 
+import pdf from '../view/pdf.vue'
 import RantiFraudInvestigation from '../view/FirstTrail/ReadComponent/RantiFraudInvestigation.vue' //
 import timedTask from '../view/systermManagement/timedTask.vue' //定时任务
 
@@ -70,14 +82,10 @@ const routes = [{
     component(resolve) {
       require(['../view/FirstTrail/workbench.vue'], resolve)
     },
-    meta: {
-      pageTitle: '工作台',
-      keepAlive: false
-    }
   },
   {
-path:'/timedTask',
-component:timedTask
+    path: '/timedTask',
+    component: timedTask
   },
   {
     path: '/ComplianceProcess',
@@ -90,10 +98,6 @@ component:timedTask
     component(resolve) {
       require(['../view/FirstTrail/taskInWaitting.vue'], resolve)
     },
-    meta: {
-      pageTitle: '初审审批',
-      keepAlive: false
-    }
     // name:taskInWaitting
   },
   // 分屏
@@ -103,22 +107,17 @@ component:timedTask
     component(resolve) {
       require(['../view/FirstTrail/SplitScreen.vue'], resolve)
     },
-    meta: {
-      pageTitle: '初审详情',
-      keepAlive: true,
-      refresh: false,
-    }
   },
   // 匹配查看-页面
   {
     path: '/MatchingInf',
     component: MatchingInf,
-    name:'MatchingInf'
+    name: 'MatchingInf'
   },
   // ----------------终审----------------
   {
     path: '/FSplitScreen',
-    name:'FSplitScreen',
+    name: 'FSplitScreen',
     component: FSplitScreen,
   },
   {
@@ -183,20 +182,55 @@ component:timedTask
   {
     path: '/ReconsiderApply',
     component: ReconsiderApply
-  },
-  {
+  },  {
     path: '/reconsiderList',
     component: reconsiderList,
-  },
-  {
+  }, {
     path: '/ReconsiderSplit',
     component: ReconsiderSplit,
-    name:'ReconsiderSplit'
+    name: 'ReconsiderSplit'
   },
   // ---------------------流程监控---------
   {
     path: '/processMoni',
-    component: processMoni
+    component: processMoni,
+  }, {
+    path: '/processMoniAntiDistributed',
+    component: processMoniAntiDistributed,
+  }, {
+    path: '/processMoniAntiDone',
+    component: processMoniAntiDone,
+  },  {
+    path: '/processMoniAntiUndistributed',
+    component: processMoniAntiUndistributed,
+  },  {
+    path: '/processMoniQTUndistributed',
+    component: processMoniQTUndistributed,
+  },
+  {
+    path: '/processMoniQTDistributed',
+    component: processMoniQTDistributed,
+  },{
+    path: '/processMoniQTDone',
+    component: processMoniQTDone,
+  }, {
+    path: '/processMoniReDistributed',
+    component: processMoniReDistributed,
+  }, {
+    path: '/processMoniReDone',
+    component: processMoniReDone,
+  }, {
+    path: '/processMoniReUndistributed',
+    component: processMoniReUndistributed,
+  },{
+    path: '/processMoniTrilUndistributed',
+    component: processMoniTrilUndistributed,
+  }, {
+    path: '/processMoniTrilDone',
+    component: processMoniTrilDone,
+  }, {
+    path: '/processMoniTrilDistributed',
+    component: processMoniTrilDistributed,
   },
   // ------------------任务管理------------
   {
@@ -222,7 +256,7 @@ component:timedTask
   {
     path: '/TaskManagementSplit',
     component: TaskManagementSplit,
-    name:'TaskManagementSplit'
+    name: 'TaskManagementSplit'
   },
   {
     path: '/doTheTask',
@@ -232,10 +266,10 @@ component:timedTask
   {
     path: '/historicalTask',
     component: historicalTask,
-  },  {
+  }, {
     path: '/QTDoneTask',
     component: QTDoneTask,
-  },  {
+  }, {
     path: '/QTHistoryTask',
     component: QTHistoryTask,
   },
@@ -247,7 +281,7 @@ component:timedTask
   }, {
     path: '/MatchingInfQuery',
     component: MatchingInfQuery,
-    name:'MatchingInfQuery'
+    name: 'MatchingInfQuery'
   }, {
     path: '/commissioner',
     component: commissioner
@@ -259,14 +293,14 @@ component:timedTask
     path: '/regularQT',
     component: regularQT,
     name: 'regularQT'
-  },{
+  }, {
     path: '/regularConfig',
     component: regularConfig
   }, {
     path: '/specialConfig',
     component: specialConfig
-  }, 
-   {
+  },
+  {
     path: '/reconsiderResult',
     component: reconsiderResult
   }, {
@@ -295,9 +329,9 @@ component:timedTask
   {
     path: "/MatchingInfQT",
     component: MatchingInfQT,
-    meta: {
-      newOne:false,
-    }
+    // meta: {
+    //   newOne: false,
+    // }
   },
   // ---------------大数据+社保--------------------
   {

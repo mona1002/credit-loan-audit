@@ -283,9 +283,9 @@
           this.nodeName = "信审历史任务";
         } else if (route.path == '/doTheTask') { // 任务管理- 信审已办任务
           this.nodeName = "信审已办任务";
-        }else if (route.path == '/TaskManagementSplit') { // 任务管理- 信审历史任务-详情
+        } else if (route.path == '/TaskManagementSplit') { // 任务管理- 信审历史任务-详情
           this.nodeName = "信审任务管理-详情";
-        }  else if (route.path == '/aDoneTask') { // 任务管理- 反欺诈已办任务
+        } else if (route.path == '/aDoneTask') { // 任务管理- 反欺诈已办任务
           this.nodeName = "反欺诈已办任务";
         } else if (route.path == '/aHistoryTask') { // 任务管理- 反欺诈历史任务
           this.nodeName = "反欺诈历史任务";
@@ -295,57 +295,81 @@
           this.nodeName = "复议已办任务";
         } else if (route.path == '/QTDoneTask') { // 任务管理- 复议已办任务
           this.nodeName = "质检已办任务";
-        } 
-         else if (route.path == '/QTHistoryTask') { // 任务管理- 复议已办任务
+        } else if (route.path == '/QTHistoryTask') { // 任务管理- 复议已办任务
           this.nodeName = "质检历史任务";
-        }  
-        else if (route.path == '/AntiCaseNum') { // 案件编号维护
+        } else if (route.path == '/AntiCaseNum') { // 案件编号维护
           this.nodeName = "案件编号维护";
         } else if (route.path == '/AntiRules') { // 反欺诈规则设定
           this.nodeName = "反欺诈规则设定";
         } else if (route.path == '/MatchingInf') { // 匹配信息-查看
           this.nodeName = "匹配信息-查看";
           this.nodeMatchFlag = 'internal'
-        } else if (route.path == '/processMoni') { //  流程监控 - 
-          //           route.fullPath.indexOf('?') != -1 ? this.processMoniParams= route.fullPath.split('?')[1]: this.processMoniParams;
-          if (route.fullPath == '/processMoni?creditApp00') {
-            this.nodeName = "信审未分配流程";
-            this.routeParams = '?creditApp00';
-          } else if (route.fullPath == '/processMoni?creditApp01') {
-            this.nodeName = "信审已分配流程";
-            this.routeParams = '?creditApp01';
-          } else if (route.fullPath == '/processMoni?creditApp03') {
-            this.nodeName = "信审已完成流程";
-            this.routeParams = '?creditApp03';
-          } else if (route.fullPath == '/processMoni?reconsiderApp03') {
-            this.nodeName = "复议已完成流程";
-            this.routeParams = '?reconsiderApp03';
-          } else if (route.fullPath == '/processMoni?reconsiderApp01') {
-            this.nodeName = "复议已分配流程";
-            this.routeParams = '?reconsiderApp01';
-          } else if (route.fullPath == '/processMoni?reconsiderApp00') {
-            this.nodeName = "复议未分配流程";
-            this.routeParams = '?reconsiderApp00';
-          } else if (route.fullPath == '/processMoni?antiFraudApp01') {
-            this.nodeName = "反欺诈已分配流程";
-            this.routeParams = '?antiFraudApp01';
-          } else if (route.fullPath == '/processMoni?antiFraudApp00') {
-            this.nodeName = "反欺诈未分配流程";
-            this.routeParams = '?antiFraudApp00';
-          } else if (route.fullPath == '/processMoni?antiFraudApp03') {
-            this.nodeName = "反欺诈已完成流程";
-            this.routeParams = '?antiFraudApp03';
-          }else if (route.fullPath == '/processMoni?checkApp03') {
-            this.nodeName = "质检已完成流程";
-            this.routeParams = '?checkApp03';
-          }else if (route.fullPath == '/processMoni?checkApp01') {
-            this.nodeName = "质检已分配流程";
-            this.routeParams = '?checkApp01';
-          }else if (route.fullPath == '/processMoni?checkApp00') {
-            this.nodeName = "质检未分配流程";
-            this.routeParams = '?checkApp00';
-          }
-        } else if (route.path == '/PneCtrl') {
+        } else if (route.fullPath == '/processMoniTrilUndistributed') {//流程监控
+          this.nodeName = "信审未分配流程";
+        } else if (route.fullPath == '/processMoniTrilDistributed') {
+          this.nodeName = "信审已分配流程";
+        } else if (route.fullPath == '/processMoniTrilDone') {
+          this.nodeName = "信审已完成流程";
+        } else if (route.fullPath == '/processMoniAntiDistributed') {
+          this.nodeName = "反欺诈已分配流程";
+        } else if (route.fullPath == '/processMoniAntiUndistributed') {
+          this.nodeName = "反欺诈未分配流程";
+        } else if (route.fullPath == '/processMoniAntiDone') {
+          this.nodeName = "反欺诈已完成流程";
+        } else if (route.fullPath == '/processMoniReDone') {
+          this.nodeName = "复议已完成流程";
+        } else if (route.fullPath == '/processMoniReDistributed') {
+          this.nodeName = "复议已分配流程";
+        } else if (route.fullPath == '/processMoniReUndistributed') {
+          this.nodeName = "复议未分配流程";
+        } else if (route.fullPath == '/processMoniQTDone') {
+          this.nodeName = "质检已完成流程";
+        } else if (route.fullPath == '/processMoniQTDistributed') {
+          this.nodeName = "质检已分配流程";
+        } else if (route.fullPath == '/processMoniQTUndistributed') {
+          this.nodeName = "质检未分配流程";
+        }
+        //  else if (route.path == '/processMoni') { //  流程监控 - 
+        //           route.fullPath.indexOf('?') != -1 ? this.processMoniParams= route.fullPath.split('?')[1]: this.processMoniParams;
+        // if (route.fullPath == '/processMoni?creditApp00') {
+        //   this.nodeName = "信审未分配流程";
+        //   this.routeParams = '?creditApp00';
+        // } else if (route.fullPath == '/processMoni?creditApp01') {
+        //   this.nodeName = "信审已分配流程";
+        //   this.routeParams = '?creditApp01';
+        // } else if (route.fullPath == '/processMoni?creditApp03') {
+        //   this.nodeName = "信审已完成流程";
+        //   this.routeParams = '?creditApp03';
+        // } else if (route.fullPath == '/processMoni?reconsiderApp03') {
+        //   this.nodeName = "复议已完成流程";
+        //   this.routeParams = '?reconsiderApp03';
+        // } else if (route.fullPath == '/processMoni?reconsiderApp01') {
+        //   this.nodeName = "复议已分配流程";
+        //   this.routeParams = '?reconsiderApp01';
+        // } else if (route.fullPath == '/processMoni?reconsiderApp00') {
+        //   this.nodeName = "复议未分配流程";
+        //   this.routeParams = '?reconsiderApp00';
+        // } else if (route.fullPath == '/processMoni?antiFraudApp01') {
+        //   this.nodeName = "反欺诈已分配流程";
+        //   this.routeParams = '?antiFraudApp01';
+        // } else if (route.fullPath == '/processMoni?antiFraudApp00') {
+        //   this.nodeName = "反欺诈未分配流程";
+        //   this.routeParams = '?antiFraudApp00';
+        // } else if (route.fullPath == '/processMoni?antiFraudApp03') {
+        //   this.nodeName = "反欺诈已完成流程";
+        //   this.routeParams = '?antiFraudApp03';
+        // }else if (route.fullPath == '/processMoni?checkApp03') {
+        //     this.nodeName = "质检已完成流程";
+        //     this.routeParams = '?checkApp03';
+        //   } else if (route.fullPath == '/processMoni?checkApp01') {
+        //     this.nodeName = "质检已分配流程";
+        //     this.routeParams = '?checkApp01';
+        //   } else if (route.fullPath == '/processMoni?checkApp00') {
+        //     this.nodeName = "质检未分配流程";
+        //     this.routeParams = '?checkApp00';
+        //   }
+        // } 
+        else if (route.path == '/PneCtrl') {
           this.nodeName = "大数据风控";
         } else if (route.path == '/SocialSe') {
           this.nodeName = "社保公积金";
@@ -386,8 +410,8 @@
           this.nodeName = "复议申请";
         } else if (route.path == '/regularConfig') { // 质检功能 - 常规抽单配置功能
           this.nodeName = "质检常规抽单配置";
-          } else if (route.path == '/reconsiderResult') { // 质检功能 - 复议结果查询
-            this.nodeName = "质检复议结果查询";
+        } else if (route.path == '/reconsiderResult') { // 质检功能 - 复议结果查询
+          this.nodeName = "质检复议结果查询";
           // }  else if (route.path == '/batchApportion') { // 质检功能
           //   this.nodeName = "质检任务批量转分派";
         } else if (route.path == '/specialConfig') { // 质检功能
@@ -395,7 +419,7 @@
         } else if (route.path == '/MatchingInfQT') {
           this.taskNodeParams = route.fullPath.split('?')[1]
           this.nodeName = "质检详情";
-           this.nodeMatchFlag = 'QT';
+          this.nodeMatchFlag = 'QT';
           this.routeParams = '?' + this.taskNodeParams //---------------------------做判断-----
         } else if (route.path == '/timedTask') { // 定时任务
           this.nodeName = "自动通知查询";
@@ -478,8 +502,8 @@
           this.judge.flag = tg.flag;
           localStorage.setItem("judge", JSON.stringify(this.judge));
         }
-           this.MatchFlag.MatchFlag=tg.matchflag;
-           localStorage.setItem("MatchFlag", JSON.stringify(this.MatchFlag));
+        this.MatchFlag.MatchFlag = tg.matchflag;
+        localStorage.setItem("MatchFlag", JSON.stringify(this.MatchFlag));
       },
     },
     // beforeRouteLeave(to, from, next) {

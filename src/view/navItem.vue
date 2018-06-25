@@ -27,8 +27,6 @@
         },
         methods:{
             clickMenu(item){
-                console.log(item);
-                console.log(typeof(item));
                 if(item.indexOf('?') !=-1 ){
                     var nodeName ,RoutePath ,nodeFlag ,routeParams;
                     nodeName = RoutePath = routeParams = '';

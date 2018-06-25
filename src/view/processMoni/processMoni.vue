@@ -430,7 +430,7 @@ export default {
       this.routerPath = str.slice(str.indexOf("?")+1,-2);
       this.routerState = str.slice(-2);
       this.queryParam.processTemplateId = this.routerPath;
-      this.queryParam.taskStatus = this.routerState;
+      this.queryParam.taskStatus = this.routerState;  
       this.userInf = JSON.parse(localStorage.getItem("userInf"));
       this.queryParam.userCode = this.userInf.userCode;
       this.queryParam.orgCode = this.userInf.orgCode;
