@@ -142,6 +142,7 @@
           this.sendDate[0] ? this.params.dateBegin = this.sendDate[0] : this.params.dateBegin = '';
           this.sendDate[1] ? this.params.dateEnd = this.sendDate[1] : this.params.dateEnd = '';
         }
+        // this.sendDate.push( )
         this.params.pageSize = this.pageCount; 
         this.inquire(this.params);
       },

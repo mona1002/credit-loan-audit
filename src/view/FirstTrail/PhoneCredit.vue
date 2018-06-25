@@ -122,7 +122,6 @@
                     </el-table-column>
                   </el-table>
                   <!-- 分页 -->
-                  <!-- v-show="listData.recordList.length" -->
                   <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 15, 20]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="listData.totalRecord" v-show="listData.totalRecord>0">
                   </el-pagination>
                 </div>
