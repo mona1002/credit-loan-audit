@@ -15,7 +15,6 @@
         <el-collapse class="phone-tree" v-model="activeTrees">
           <el-collapse-item :title="treeData[0].label" name="1">
             <div v-for="item in treeData[0].children">
-              <!-- :content="item.children[0].label+item.children[0].id" -->
               <el-tooltip effect="dark" placement="right-end">
                 <div slot="content">
                   {{item.children[0].label}}
@@ -138,6 +137,7 @@
           <!-- </el-header> -->
           <!-- 表单部分 -->
           <div class="form-class" style="width:100%;height:auto;">
+            {{hisShow}}
             <!-- 默认的新增表单 -->
             <!-- 住址电话 - 表单 -->
             <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull"></AddressForm>
@@ -445,9 +445,6 @@ export default {
       }
        this.applyId = this.taskInWaitting.matchApplyId;
         this.applySubNo = this.taskInWaitting.applySubNo;
-    
-    // this.phoneNum = '11111';
-    // this.phoneType = '00';
     // 电话树数据
     this.fetchData();
 
@@ -581,14 +578,11 @@ export default {
           this.hisShow = false;
           // 请求历史调查日志
           this.phoneType = data.telType;
-
           // 客户姓名
           this.custName = data.telName;
           // 电话号码
           this.phoneNum = data.telNum;
           this.queryTelLogByPage();
-          // this.formShow = false;
-          // this.hisShow = true;
         }
       } else if (this.isInterFlag == false || this.SplitS == 'right') {
         // 点击每条tree数据的事件
@@ -621,7 +615,6 @@ export default {
           applyId: this.applyId,
           phoneNum: this.phoneNum,
           phoneType: this.phoneType,
-          // phoneType: '00',
         },
         pageParam: {
           pageNum: this.pageNum,
@@ -632,7 +625,7 @@ export default {
         this.mobileLoading = false;
         if(res.statusCode == 200){
           this.listData = res.data.page;
-          if(res.data.message){
+          if(res.data.message&&res.data.page.recordList&&res.data.page.recordList.length>0){
             if(this.formShow == true){
               this.hisShow = false;
             }else{
@@ -644,18 +637,6 @@ export default {
 
       })
     },
-    // queryHisLog() {
-    //   // 获取历史数据
-    //   // id 日志记录 id
-    //   // phoneType 电话类型
-
-    // },
-    // queryHomeTelHis() {
-    //   // 查询住址电话日志
-    //   this.post('creTelResearchHis/queryHomeTel', {
-
-    //   })
-    // },
     append(data) {
       this.isLoading = true;
       this.loadingTitle = '提交中';
@@ -701,15 +682,12 @@ export default {
 
     },
     handleSizeChange(val) {
-      // console.log(`每页 ${val} 条`);
       this.pageSize = val;
       this.pageNum = 1;
       this.queryTelLogByPage();
     },
     handleCurrentChange(val) {
-      // console.log(`当前页: ${val}`);
       this.pageNum = val;
-      // this.pageSize=5;
       this.queryTelLogByPage();
     },
     rowDbClick(row) {

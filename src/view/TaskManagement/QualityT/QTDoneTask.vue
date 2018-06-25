@@ -59,12 +59,6 @@
         <el-table :data="datas" style="width: 100%" height="500" @row-click='goDetail' border>
           <el-table-column type="index" :index="1" label="序号" width="50">
           </el-table-column>
-          <!-- <el-table-column
-				      prop="taskType"
-				      label="任务类型"
-				      min-width="110"
-				      >
-				    </el-table-column> -->
           <el-table-column prop="emerType" label="紧急程度" min-width="80">
             <template slot-scope="scope">
               <span style="color:#0077ff" v-if="scope.row.timeColor">{{scope.row.emerType}}</span>
@@ -85,11 +79,6 @@
           </el-table-column>
           <el-table-column prop="activationTime" label="进入本环节时间" min-width="170">
           </el-table-column>
-          <!-- <el-table-column
-				      prop="approveTimeLong"
-				      label="进入本环节时长（小时）" 
-				      min-width="180">
-				    </el-table-column> -->
         </el-table>
         <!-- 分页 -->
         <div class="page">
@@ -103,7 +92,6 @@
 </template>
 <script type="text/javascript">
   import myHead from "../../header.vue"
-  //import baseU from'../../../util/constant';
   export default {
     data() {
       return {
@@ -173,8 +161,6 @@
     },
     mounted() {
       //一进入页面就发送请求
-      // alert("ddd")
-      console.log('dddadsaafa')
       this.queryParam.userCode = JSON.parse(localStorage.getItem('userInf')).userCode;
       this.queryParam.orgCode = JSON.parse(localStorage.getItem('userInf')).orgCode;
       this.orgId = JSON.parse(localStorage.getItem('userInf')).orgId;
@@ -189,23 +175,8 @@
             this.productNames = res.data;
           }
         });
-        /*this.post(baseU.path+'/remote/product/getProductForUser',{
-		           data:{
-		              orgId:this.orgId,
-		              validFlag:'1'
-		           }
-		          }).then(res => {
-		          	if(res.statusCode == 200){
-						this.productNames = res.data;
-					}else {
-			            this.$message.error(res.msg);
-			          }
-	            });*/
-
       },
       request(param) {
-        // alert("d")
-        this.$message.error("调动")
         this.post('/workFlowTaskQuery/getTaskToDoList',
           param
         ).then(res => {
@@ -358,7 +329,6 @@
   .taskWattingContain {
     padding: 30px 30px;
     width: 100%;
-    /* height: calc( 100% - 70px); */
     overflow: hidden;
   }
 
@@ -434,9 +404,7 @@
     background-color: #ffffff;
     border: 1px solid #e6eaee;
     margin-bottom: 20px;
-    /* padding: 25px; */
     width: 100%;
-    /* height:calc( 100% - 232px ); */
   }
 
   .taskWtable .el-table .cell {

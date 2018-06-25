@@ -84,12 +84,9 @@
         <!-- 更改电话树 end -->
         <!-- 备选  折叠面板- 手风琴效果 -->
         <el-button type="primary" @click.native="dialogFormVisible=true" v-show="addBtnShow">添加</el-button>
-        <!-- <el-button type="text" @click="open">添加</el-button> -->
       </el-aside>
       <!-- 右侧 表单内容 -->
       <el-container>
-        <!-- <el-header > -->
-        <!--  v-show="hisListShow" -->
         <!-- title="历史调查日志"  -->
         <el-main style="overflow-y: auto;overflow-x:hidden;font-size:14px;">
           <!-- 默认的背景 -->
@@ -164,10 +161,6 @@
             <!-- 工作证明人 - 历史 -->
             <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="newList?newList:workData" :isFull.sync="isFull"></WorkHis>
             <!-- 子组件 -->
-            <!-- <router-link to="/AddressForm/formTag='testtag'/id='123'/phoneType='01'">
-            <el-button type="primary">住址电话</el-button>
-          </router-link> -->
-            <!-- <router-view></router-view> -->
           </div>
         </el-main>
       </el-container>
@@ -641,7 +634,7 @@ export default {
     }
   },
   methods: {
-    mountedInf(){
+   mountedInf(){
     // 组件 创建 估计完成后获取数据
     // 此时 data 已经被 observed 了
     // 测试数据
@@ -744,10 +737,7 @@ export default {
           this.custName = data.telName;
           // 电话号码
           this.phoneNum = data.telNum;
-          // this.phoneNum = '010-001';
           this.queryTelLogByPage();
-          // this.formShow = false;
-          // this.hisShow = true;
         }
       } else if (this.isInterFlag == false || this.SplitS == 'right') {
         // 点击每条tree数据的事件
@@ -769,7 +759,6 @@ export default {
           this.activeNames = [];
         }
       }
-
       // 点击的时候清空  
       this.formId = '';
     },
@@ -791,7 +780,6 @@ export default {
         // 数据请求回来  加载圈 清空
         this.mobileLoading = false;
         //  历史table数据
-        //this.listData = res.data;
         if(res.statusCode == 200){
           this.listData = res.data.page;
           if(res.data.message&&this.listData.recordList&&this.listData.recordList.length>0){
@@ -919,18 +907,6 @@ export default {
         }
       })
     },
-    // queryHisLog() {
-    //   // 获取历史数据
-    //   // id 日志记录 id
-    //   // phoneType 电话类型
-
-    // },
-    // queryHomeTelHis() {
-    //   // 查询住址电话日志
-    //   this.post('creTelResearchHis/queryHomeTel', {
-
-    //   })
-    // },
     append(data) {
       this.isLoading = true;
       this.loadingTitle = '提交中';
@@ -971,15 +947,12 @@ export default {
 
     },
     handleSizeChange(val) {
-      // console.log(`每页 ${val} 条`);
       this.pageSize = val;
       this.pageNum = 1;
       this.queryTelLogByPage();
     },
     handleCurrentChange(val) {
-      // console.log(`当前页: ${val}`);
       this.pageNum = val;
-      // this.pageSize=5;
       this.queryTelLogByPage();
     },
     rowDbClick(row) {
@@ -990,7 +963,6 @@ export default {
       this.id = row.id;
       // 请求历史数据
       // this.queryHomeTel();
-
       // 点击行显示
       // 通过 电话类型来判断 显示哪个表单
       switch (this.phoneType) {
