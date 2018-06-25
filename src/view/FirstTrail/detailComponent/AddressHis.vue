@@ -223,13 +223,12 @@
             {{mobileData.checkHometeltxt}}
           </el-form-item>
         </el-tooltip>
-        <el-tooltip class="item" effect="dark" :content="mobileData.hobbyandBehave" placement="top">
           <el-form-item label="借款人爱好和品行：" class="item-column1">
             {{mobileData.hobbyandBehave}}
           </el-form-item>
-        </el-tooltip>
           <el-form-item label="调查结果：" class="item-column1">
             {{mobileData.conclusion}}
+            <!-- <div style="white-space: pre-wrap;">{{mobileData.conclusion}}</div> -->
           </el-form-item>
       </div>
     </el-form>

@@ -145,7 +145,7 @@
         this.params.pageSize = this.pageCount; 
         this.inquire(this.params);
       },
-      resend() {
+      resend() {//重新发送
         if (!this.selectedList) {
           this.$message.error('请选择一条数据！');
           return
