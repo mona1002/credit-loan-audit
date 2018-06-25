@@ -304,71 +304,72 @@
         } else if (route.path == '/MatchingInf') { // 匹配信息-查看
           this.nodeName = "匹配信息-查看";
           this.nodeMatchFlag = 'internal'
-        } else if (route.fullPath == '/processMoniTrilUndistributed') {//流程监控
-          this.nodeName = "信审未分配流程";
-        } else if (route.fullPath == '/processMoniTrilDistributed') {
-          this.nodeName = "信审已分配流程";
-        } else if (route.fullPath == '/processMoniTrilDone') {
-          this.nodeName = "信审已完成流程";
-        } else if (route.fullPath == '/processMoniAntiDistributed') {
-          this.nodeName = "反欺诈已分配流程";
-        } else if (route.fullPath == '/processMoniAntiUndistributed') {
-          this.nodeName = "反欺诈未分配流程";
-        } else if (route.fullPath == '/processMoniAntiDone') {
-          this.nodeName = "反欺诈已完成流程";
-        } else if (route.fullPath == '/processMoniReDone') {
-          this.nodeName = "复议已完成流程";
-        } else if (route.fullPath == '/processMoniReDistributed') {
-          this.nodeName = "复议已分配流程";
-        } else if (route.fullPath == '/processMoniReUndistributed') {
-          this.nodeName = "复议未分配流程";
-        } else if (route.fullPath == '/processMoniQTDone') {
-          this.nodeName = "质检已完成流程";
-        } else if (route.fullPath == '/processMoniQTDistributed') {
-          this.nodeName = "质检已分配流程";
-        } else if (route.fullPath == '/processMoniQTUndistributed') {
-          this.nodeName = "质检未分配流程";
-        }
-        //  else if (route.path == '/processMoni') { //  流程监控 - 
-        //           route.fullPath.indexOf('?') != -1 ? this.processMoniParams= route.fullPath.split('?')[1]: this.processMoniParams;
-        // if (route.fullPath == '/processMoni?creditApp00') {
+        } 
+        // else if (route.fullPath == '/processMoniTrilUndistributed') {//流程监控
         //   this.nodeName = "信审未分配流程";
-        //   this.routeParams = '?creditApp00';
-        // } else if (route.fullPath == '/processMoni?creditApp01') {
+        // } else if (route.fullPath == '/processMoniTrilDistributed') {
         //   this.nodeName = "信审已分配流程";
-        //   this.routeParams = '?creditApp01';
-        // } else if (route.fullPath == '/processMoni?creditApp03') {
+        // } else if (route.fullPath == '/processMoniTrilDone') {
         //   this.nodeName = "信审已完成流程";
-        //   this.routeParams = '?creditApp03';
-        // } else if (route.fullPath == '/processMoni?reconsiderApp03') {
-        //   this.nodeName = "复议已完成流程";
-        //   this.routeParams = '?reconsiderApp03';
-        // } else if (route.fullPath == '/processMoni?reconsiderApp01') {
-        //   this.nodeName = "复议已分配流程";
-        //   this.routeParams = '?reconsiderApp01';
-        // } else if (route.fullPath == '/processMoni?reconsiderApp00') {
-        //   this.nodeName = "复议未分配流程";
-        //   this.routeParams = '?reconsiderApp00';
-        // } else if (route.fullPath == '/processMoni?antiFraudApp01') {
+        // } else if (route.fullPath == '/processMoniAntiDistributed') {
         //   this.nodeName = "反欺诈已分配流程";
-        //   this.routeParams = '?antiFraudApp01';
-        // } else if (route.fullPath == '/processMoni?antiFraudApp00') {
+        // } else if (route.fullPath == '/processMoniAntiUndistributed') {
         //   this.nodeName = "反欺诈未分配流程";
-        //   this.routeParams = '?antiFraudApp00';
-        // } else if (route.fullPath == '/processMoni?antiFraudApp03') {
+        // } else if (route.fullPath == '/processMoniAntiDone') {
         //   this.nodeName = "反欺诈已完成流程";
-        //   this.routeParams = '?antiFraudApp03';
-        // }else if (route.fullPath == '/processMoni?checkApp03') {
-        //     this.nodeName = "质检已完成流程";
-        //     this.routeParams = '?checkApp03';
-        //   } else if (route.fullPath == '/processMoni?checkApp01') {
-        //     this.nodeName = "质检已分配流程";
-        //     this.routeParams = '?checkApp01';
-        //   } else if (route.fullPath == '/processMoni?checkApp00') {
-        //     this.nodeName = "质检未分配流程";
-        //     this.routeParams = '?checkApp00';
-        //   }
-        // } 
+        // } else if (route.fullPath == '/processMoniReDone') {
+        //   this.nodeName = "复议已完成流程";
+        // } else if (route.fullPath == '/processMoniReDistributed') {
+        //   this.nodeName = "复议已分配流程";
+        // } else if (route.fullPath == '/processMoniReUndistributed') {
+        //   this.nodeName = "复议未分配流程";
+        // } else if (route.fullPath == '/processMoniQTDone') {
+        //   this.nodeName = "质检已完成流程";
+        // } else if (route.fullPath == '/processMoniQTDistributed') {
+        //   this.nodeName = "质检已分配流程";
+        // } else if (route.fullPath == '/processMoniQTUndistributed') {
+        //   this.nodeName = "质检未分配流程";
+        // }
+         else if (route.path == '/processMoni') { //  流程监控 - 
+                  route.fullPath.indexOf('?') != -1 ? this.processMoniParams= route.fullPath.split('?')[1]: this.processMoniParams;
+        if (route.fullPath == '/processMoni?creditApp00') {
+          this.nodeName = "信审未分配流程";
+          this.routeParams = '?creditApp00';
+        } else if (route.fullPath == '/processMoni?creditApp01') {
+          this.nodeName = "信审已分配流程";
+          this.routeParams = '?creditApp01';
+        } else if (route.fullPath == '/processMoni?creditApp03') {
+          this.nodeName = "信审已完成流程";
+          this.routeParams = '?creditApp03';
+        } else if (route.fullPath == '/processMoni?reconsiderApp03') {
+          this.nodeName = "复议已完成流程";
+          this.routeParams = '?reconsiderApp03';
+        } else if (route.fullPath == '/processMoni?reconsiderApp01') {
+          this.nodeName = "复议已分配流程";
+          this.routeParams = '?reconsiderApp01';
+        } else if (route.fullPath == '/processMoni?reconsiderApp00') {
+          this.nodeName = "复议未分配流程";
+          this.routeParams = '?reconsiderApp00';
+        } else if (route.fullPath == '/processMoni?antiFraudApp01') {
+          this.nodeName = "反欺诈已分配流程";
+          this.routeParams = '?antiFraudApp01';
+        } else if (route.fullPath == '/processMoni?antiFraudApp00') {
+          this.nodeName = "反欺诈未分配流程";
+          this.routeParams = '?antiFraudApp00';
+        } else if (route.fullPath == '/processMoni?antiFraudApp03') {
+          this.nodeName = "反欺诈已完成流程";
+          this.routeParams = '?antiFraudApp03';
+        }else if (route.fullPath == '/processMoni?checkApp03') {
+            this.nodeName = "质检已完成流程";
+            this.routeParams = '?checkApp03';
+          } else if (route.fullPath == '/processMoni?checkApp01') {
+            this.nodeName = "质检已分配流程";
+            this.routeParams = '?checkApp01';
+          } else if (route.fullPath == '/processMoni?checkApp00') {
+            this.nodeName = "质检未分配流程";
+            this.routeParams = '?checkApp00';
+          }
+        } 
         else if (route.path == '/PneCtrl') {
           this.nodeName = "大数据风控";
         } else if (route.path == '/SocialSe') {
