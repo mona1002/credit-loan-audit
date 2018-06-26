@@ -383,11 +383,11 @@
     margin-right: 10px;
   }
 
-  .taskWatting .taskWinput .el-input__inner {
+  /* .taskWatting .taskWinput .el-input__inner {
     border-radius: 6px;
     height: 35px;
     width: 258px;
-  }
+  } */
 
 
   .taskWinput .btn {
