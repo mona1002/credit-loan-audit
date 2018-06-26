@@ -1,97 +1,101 @@
 <template>
-  <div class="AntiCaseNum IntegratedQuery">
+  <div class="taskWatting main-div">
     <!-- 质检复议流程-质检主管页面- 复议任务列表（首次） -->
-    <myHead></myHead>
-    <div class="content">
-      <div class="search">
-        <ul>
-          <li>
-            <p>
-              <label> 进件编号 </label>
-              <el-input v-model="params.applySubNo" placeholder="请输入进件编号"></el-input>
-            </p>
-            <p>
-              <label> 客户名称</label>
-              <el-input v-model="params.custName_la" placeholder="请输入客户名称"></el-input>
-            </p>
-            <p>
-              <label> 证件号码</label>
-              <el-input v-model="params.certCode" placeholder="请输入证件号码"></el-input>
-            </p>
-          </li>
-          <li>
-            <p>
-              <label> 任务类型</label>
-              <el-select v-model="params.instaskType" placeholder="请选择">
-                <el-option v-for="item in TaskType" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-            </p>
-            <p>
-
-            </p>
-            <p class="btn_wrap">
-              <el-button class="btn" type="primary" style="marginLeft:228px" @click="Rsearch">查询</el-button>
-              <el-button class="btn" type="primary" @click="Rreset">重置</el-button>
-            </p>
-          </li>
-        </ul>
-      </div>
-      <div class="title">
-        <h1>质检信息
-          <!-- <span class='title_icon'>
-            <label @click='allotFinished'>
-              <img src='../../../../../static/images/faqi.png'> 批量完成</label>
-            <label @click='allotSubmit'>
-              <img src='../../../../../static/images/appro.png'> 批量提交</label>
-          </span> -->
-        </h1>
-      </div>
-      <div class="table_wrap">
-        <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" height="100%" border @row-dblclick="handleCurrentChange">
-          <el-table-column type="selection" align='center' width="55">
-          </el-table-column>
-          <el-table-column type="index" align='center' label=序号 width="55">
-          </el-table-column>
-          <el-table-column prop="applyMainNo" label="主进件编号" align='center' min-width="180">
-          </el-table-column>
-          <el-table-column prop="applySubNo" label="进件编号" align='center' min-width="180">
-          </el-table-column>
-          <el-table-column prop="custName" label="客户名称" align='center' min-width="120">
-          </el-table-column>
-          <el-table-column prop="certTypeTxt" label="证件类型" align='center' min-width="180">
-          </el-table-column>
-          <el-table-column prop="certCode" label="证件号码" align='center' min-width="180">
-          </el-table-column>
-          <el-table-column prop="proName" label="产品名称" align='center' min-width="130">
-          </el-table-column>
-          <el-table-column prop="auditNamec" label="初审姓名" align='center' min-width="130">
-          </el-table-column>
-          <el-table-column prop="auditDatec" label="初审日期" align='center' min-width="180">
-          </el-table-column>
-          <el-table-column prop="auditNamez" label="终审姓名" align='center' min-width="120">
-          </el-table-column>
-          <el-table-column prop="auditDatez" label="终审日期" align='center' min-width="180">
-          </el-table-column>
-          <el-table-column prop="insMemberName" label="合规专员" align='center' min-width="100">
-          </el-table-column>
-          <el-table-column prop="insDate" label="合规质检日期" align='center' min-width="130">
-          </el-table-column>
-          <el-table-column prop="checkStateTxt" label="质检状态" align='center' min-width="220">
-          </el-table-column>
-          <el-table-column prop="checkResultTxt" label="质检结果" align='center' min-width="100">
-          </el-table-column>
-          <el-table-column prop="instaskTypeTxt" label="任务类型" align='center' min-width="100">
-          </el-table-column>
-        </el-table>
-        <!-- 分页  -->
-        <!-- <div class="paging">
+    <div class="taskWinput search-div">
+      <el-row class="row row1" type="flex">
+        <el-col :span="6" class="search-item" :offset="0">
+          <span class="keywordText">进件编号： </span>
+          <el-input v-model="params.applySubNo" placeholder="请输入进件编号"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">客户名称：</span>
+          <el-input v-model="params.custName_la" placeholder="请输入客户名称"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">证件号码：</span>
+          <el-input v-model="params.certCode" placeholder="请输入证件号码"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">任务类型：</span>
+          <el-select v-model="params.instaskType" placeholder="请选择">
+            <el-option v-for="item in TaskType" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </el-col>
+      </el-row>
+      <el-row class="row row2" type="flex">
+        <el-col :span="6" class="search-item">
+        </el-col>
+        <el-col :span="6" class="search-item">
+        </el-col>
+        <el-col :span="6" class="search-item">
+        </el-col>
+        <el-col :span="6" class="search-btn">
+          <el-button class="btn query" type="primary" @click="Rsearch">查询</el-button>
+          <el-button class="btn reset" @click="Rreset">重置</el-button>
+        </el-col>
+      </el-row>
+    </div>
+    <div class="title titleContainer edit-div">
+      <span class="titleText">
+        <i class="el-icon title-icon"></i>
+        质检信息
+      </span>
+      <!-- <span class="iconContainer">
+        <span class="icon-item" @click='allotFinished'>
+          <i class="el-icon faqi"></i>
+          <span class="el-icon-text">批量完成</span>
+        </span>
+        <span class="icon-item" @click='allotSubmit'>
+          <i class="el-icon appro"></i>
+          <span class="el-icon-text">批量提交</span>
+        </span>
+      </span> -->
+    </div>
+    <div class="listContainer">
+      <!-- 编辑table -->
+      <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row border @row-dblclick="handleCurrentChange">
+        <el-table-column type="selection" align='center' width="55">
+        </el-table-column>
+        <el-table-column type="index" align='center' label=序号 width="55">
+        </el-table-column>
+        <el-table-column prop="applyMainNo" label="主进件编号" align='center' min-width="180">
+        </el-table-column>
+        <el-table-column prop="applySubNo" label="进件编号" align='center' min-width="180">
+        </el-table-column>
+        <el-table-column prop="custName" label="客户名称" align='center' min-width="120">
+        </el-table-column>
+        <el-table-column prop="certTypeTxt" label="证件类型" align='center' min-width="180">
+        </el-table-column>
+        <el-table-column prop="certCode" label="证件号码" align='center' min-width="180">
+        </el-table-column>
+        <el-table-column prop="proName" label="产品名称" align='center' min-width="130">
+        </el-table-column>
+        <el-table-column prop="auditNamec" label="初审姓名" align='center' min-width="130">
+        </el-table-column>
+        <el-table-column prop="auditDatec" label="初审日期" align='center' min-width="180">
+        </el-table-column>
+        <el-table-column prop="auditNamez" label="终审姓名" align='center' min-width="120">
+        </el-table-column>
+        <el-table-column prop="auditDatez" label="终审日期" align='center' min-width="180">
+        </el-table-column>
+        <el-table-column prop="insMemberName" label="合规专员" align='center' min-width="100">
+        </el-table-column>
+        <el-table-column prop="insDate" label="合规质检日期" align='center' min-width="130">
+        </el-table-column>
+        <el-table-column prop="checkStateTxt" label="质检状态" align='center' min-width="220">
+        </el-table-column>
+        <el-table-column prop="checkResultTxt" label="质检结果" align='center' min-width="100">
+        </el-table-column>
+        <el-table-column prop="instaskTypeTxt" label="任务类型" align='center' min-width="100">
+        </el-table-column>
+      </el-table>
+      <!-- 分页  -->
+      <!-- <div class="paging">
           <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
             :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
           </el-pagination>
         </div> -->
-      </div>
     </div>
   </div>
 </template>
@@ -270,136 +274,16 @@
 
 </script>
 <style scoped>
-  .AntiCaseNum {
+  .taskWatting {
     width: 100%;
+    height: calc( 100% - 90px);
     background-color: #fafbfc;
     overflow-y: auto;
     overflow-x: hidden;
-    /* 统一导航 --去掉高度*/
-    height: 100%;
-  }
-
-  .AntiCaseNum label {
-    font-size: 14px;
-    color: #475669;
-    text-align: right;
-    display: inline-block;
-    width: 126px;
-    height: 20px;
-    margin-right: 10px;
-  }
-
-  .AntiCaseNum i {
-    color: #ff7676;
-    font-weight: 700;
-    font-size: 16px;
-    vertical-align: middle;
-    font-style: normal;
-  }
-
-  .content {
-    padding: 30px 30px;
-    width: 100%;
-    height: calc( 100% - 70px);
-    /* 统一导航 */
-    /* height: 100%; */
-  }
-
-  .title_icon {
-    float: right;
-  }
-
-  .title_icon label {
-    height: 50px;
-    text-align: center;
-    cursor: pointer;
-  }
-
-  .title_icon img {
-    vertical-align: middle;
-  }
-
-  .search {
-    background-color: #ffffff;
-    border: 1px solid #e6eaee;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    height: auto;
-  }
-
-  .search li {
-    clear: both;
-    height: 55px;
-  }
-
-  .search li p {
-    width: 33.3%;
-    float: left;
-    margin-top: 20px;
-  }
-
-  .btn_wrap {
-    margin-top: 20px;
-    height: 33px;
-    width: calc( 66.6% + 394px);
-  }
-
-  .btn {
-    border-radius: 8px;
-    width: 79px;
-    font-size: 14px;
-    line-height: 33px;
-    padding: 0;
-  }
-
-  .noBk {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .title {
-    opacity: 0.75;
-    background: #ebedf8;
-    border-radius: 6px;
-    width: 100%;
-    height: 50px;
-  }
-
-  .title h1 {
-    font-size: 16px;
-    color: #1f2d3d;
-    padding-left: 37px;
-    text-align: left;
-    line-height: 50px;
-    padding-right: 37px;
-  }
-
-  .icon {
-    margin-right: 5px;
-    vertical-align: middle;
-    font-size: 30px;
-  }
-
-  /* 综合查询页面加上分页pad-bottom 改为20px*/
-
-  .table_wrap {
-    background-color: #ffffff;
-    border: 1px solid #e6eaee;
-    padding: 25px 25px 20px 25px;
-    width: 100%;
-    height: calc( 100% - 255px);
   }
 
   .paging {
-    /* margin-top: 15px; */
-    text-align: center;
-    /* 统一导航 */
-    margin-top: 28px;
+    /* text-align: center; */
+    /* margin-top: 20px; */
   }
-
-  .emerColor {
-    color: #0077ff;
-  }
-
 </style>

@@ -1,89 +1,92 @@
 <template>
-  <div class="AntiCaseNum IntegratedQuery">
+  <div class="taskWatting main-div">
     <!-- 质检复议流程-质检主管页面- 初终审主管任务列表 -->
-    <myHead></myHead>
-    <div class="content">
-      <div class="search">
-        <ul>
-          <li>
-            <p>
-              <label> 进件编号 </label>
-              <el-input v-model="params.applySubNo" placeholder="请输入进件编号"></el-input>
-            </p>
-            <p>
-              <label> 客户名称</label>
-              <el-input v-model="params.custName_la" placeholder="请输入客户名称"></el-input>
-            </p>
-            <p>
-              <label> 证件号码</label>
-              <el-input v-model="params.certCode" placeholder="请输入证件号码"></el-input>
-            </p>
-          </li>
-          <li>
-            <p>
-              <label> 质检状态</label>
-              <el-select v-model="params.checkState" placeholder="请选择">
-                <el-option v-for="item in QTStates" :key="item.code" :label="item.name" :value="item.code">
-                </el-option>
-              </el-select>
-            </p>
-            <p>
-            </p>
-            <p class="btn_wrap">
-              <el-button class="btn" type="primary" style="marginLeft:228px" @click="Rsearch">查询</el-button>
-              <el-button class="btn" type="primary" @click="Rreset">重置</el-button>
-            </p>
-          </li>
-        </ul>
-      </div>
-      <div class="title">
-        <h1>质检信息</h1>
-      </div>
-      <div class="table_wrap">
-        <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" height="100%" @row-dblclick="handleCurrentChange" border>
-          <el-table-column type="index" align='center' label=序号 width="55">
-          </el-table-column>
-          <el-table-column prop="applySubNo" label="进件编号" align='center' min-width="180">
-          </el-table-column>
-          <el-table-column prop="custName" label="客户名称" align='center' min-width="120">
-          </el-table-column>
-          <el-table-column prop="certCode" label="证件号码" align='center' min-width="180">
-          </el-table-column>
-          <el-table-column prop="proName" label="产品名称" align='center' min-width="130">
-          </el-table-column>
-          <el-table-column prop="auditNamec" label="初审姓名" align='center' min-width="130">
-          </el-table-column>
-          <el-table-column prop="subOrgNamec" label="初审所属科室" align='center' min-width="130">
-          </el-table-column>
-          <el-table-column prop="auditDatec" label="初审日期" align='center' min-width="180">
-          </el-table-column>
-          <el-table-column prop="auditNamez" label="终审姓名" align='center' min-width="120">
-          </el-table-column>
-          <el-table-column prop="subOrgNamez" label="终审所属科室" align='center' min-width="130">
-          </el-table-column>
-          <el-table-column prop="auditDatez" label="终审日期" align='center' min-width="180">
-          </el-table-column>
-          <el-table-column prop="busiStateTxt" label="业务状态" align='center' min-width="120">
-          </el-table-column>
-          <el-table-column prop="checkResultTxt" label="质检结果" align='center' min-width="120">
-          </el-table-column>
-          <el-table-column prop="errorType" label="差错类型" align='center' min-width="120">
-          </el-table-column>
-          <el-table-column prop="insDate" label="质检日期" align='center' min-width="180">
-          </el-table-column>
-          <el-table-column prop="reconDate" label="复议申请日期" align='center' min-width="180">
-          </el-table-column>
-          <el-table-column prop="checkStateTxt" label="质检状态" align='center' min-width="120">
-          </el-table-column>
-        </el-table>
-        <!-- 分页  -->
-        <!-- <div class="paging">
+
+    <div class="taskWinput search-div">
+      <el-row class="row row1" type="flex">
+        <el-col :span="6" class="search-item" :offset="0">
+          <span class="keywordText">进件编号： </span>
+          <el-input v-model="params.applySubNo" placeholder="请输入进件编号"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">客户名称：</span>
+          <el-input v-model="params.custName_la" placeholder="请输入客户名称"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">证件号码：</span>
+          <el-input v-model="params.certCode" placeholder="请输入证件号码"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">质检状态：</span>
+          <el-select v-model="params.checkState" placeholder="请选择">
+            <el-option v-for="item in QTStates" :key="item.code" :label="item.name" :value="item.code">
+            </el-option>
+          </el-select>
+        </el-col>
+      </el-row>
+      <el-row class="row row2" type="flex">
+        <el-col :span="6" class="search-item">
+        </el-col>
+        <el-col :span="6" class="search-item">
+        </el-col>
+        <el-col :span="6" class="search-item">
+        </el-col>
+        <el-col :span="6" class="search-btn">
+          <el-button class="btn query" type="primary" @click="Rsearch">查询</el-button>
+          <el-button class="btn reset" @click="Rreset">重置</el-button>
+        </el-col>
+      </el-row>
+    </div>
+    <div class="title titleContainer edit-div">
+      <span class="titleText">
+        <i class="el-icon title-icon"></i>
+        质检信息
+      </span>
+    </div>
+    <div class="listContainer">
+      <!-- 编辑table -->
+      <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row @row-dblclick="handleCurrentChange" border>
+        <el-table-column type="index" align='center' label=序号 width="55">
+        </el-table-column>
+        <el-table-column prop="applySubNo" label="进件编号" align='center' min-width="180">
+        </el-table-column>
+        <el-table-column prop="custName" label="客户名称" align='center' min-width="120">
+        </el-table-column>
+        <el-table-column prop="certCode" label="证件号码" align='center' min-width="180">
+        </el-table-column>
+        <el-table-column prop="proName" label="产品名称" align='center' min-width="130">
+        </el-table-column>
+        <el-table-column prop="auditNamec" label="初审姓名" align='center' min-width="130">
+        </el-table-column>
+        <el-table-column prop="subOrgNamec" label="初审所属科室" align='center' min-width="130">
+        </el-table-column>
+        <el-table-column prop="auditDatec" label="初审日期" align='center' min-width="180">
+        </el-table-column>
+        <el-table-column prop="auditNamez" label="终审姓名" align='center' min-width="120">
+        </el-table-column>
+        <el-table-column prop="subOrgNamez" label="终审所属科室" align='center' min-width="130">
+        </el-table-column>
+        <el-table-column prop="auditDatez" label="终审日期" align='center' min-width="180">
+        </el-table-column>
+        <el-table-column prop="busiStateTxt" label="业务状态" align='center' min-width="120">
+        </el-table-column>
+        <el-table-column prop="checkResultTxt" label="质检结果" align='center' min-width="120">
+        </el-table-column>
+        <el-table-column prop="errorType" label="差错类型" align='center' min-width="120">
+        </el-table-column>
+        <el-table-column prop="insDate" label="质检日期" align='center' min-width="180">
+        </el-table-column>
+        <el-table-column prop="reconDate" label="复议申请日期" align='center' min-width="180">
+        </el-table-column>
+        <el-table-column prop="checkStateTxt" label="质检状态" align='center' min-width="120">
+        </el-table-column>
+      </el-table>
+      <!-- 分页  -->
+      <!-- <div class="paging">
           <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
             :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
           </el-pagination>
         </div> -->
-      </div>
     </div>
   </div>
 </template>
@@ -275,122 +278,17 @@
 
 </script>
 <style scoped>
-  .AntiCaseNum {
+   .taskWatting {
     width: 100%;
+    height: calc( 100% - 90px);
     background-color: #fafbfc;
     overflow-y: auto;
     overflow-x: hidden;
-    /* 统一导航 --去掉高度*/
-    height: 100%;
-  }
-
-  .AntiCaseNum label {
-    font-size: 14px;
-    color: #475669;
-    text-align: right;
-    display: inline-block;
-    width: 126px;
-    height: 20px;
-    margin-right: 10px;
-  }
-
-  .AntiCaseNum i {
-    color: #ff7676;
-    font-weight: 700;
-    font-size: 16px;
-    vertical-align: middle;
-    font-style: normal;
-  }
-
-  .content {
-    padding: 30px 30px;
-    width: 100%;
-    height: calc( 100% - 70px);
-    /* 统一导航 */
-    /* height: 100%; */
-  }
-
-  .search {
-    background-color: #ffffff;
-    border: 1px solid #e6eaee;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    height: auto;
-  }
-
-  .search li {
-    clear: both;
-    height: 55px;
-  }
-
-  .search li p {
-    width: 33.3%;
-    float: left;
-    margin-top: 20px;
-  }
-
-  .btn_wrap {
-    margin-top: 20px;
-    height: 33px;
-    width: calc( 66.6% + 394px);
-  }
-
-  .btn {
-    border-radius: 8px;
-    width: 79px;
-    font-size: 14px;
-    line-height: 33px;
-    padding: 0;
-  }
-
-  .noBk {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .title {
-    opacity: 0.75;
-    background: #ebedf8;
-    border-radius: 6px;
-    width: 100%;
-    height: 50px;
-  }
-
-  .title h1 {
-    font-size: 16px;
-    color: #1f2d3d;
-    padding-left: 37px;
-    text-align: left;
-    line-height: 50px;
-    padding-right: 37px;
-  }
-
-  .icon {
-    margin-right: 5px;
-    vertical-align: middle;
-    font-size: 30px;
-  }
-
-  /* 综合查询页面加上分页pad-bottom 改为20px*/
-
-  .table_wrap {
-    background-color: #ffffff;
-    border: 1px solid #e6eaee;
-    padding: 25px 25px 20px 25px;
-    width: 100%;
-    height: calc( 100% - 255px);
   }
 
   .paging {
-    /* margin-top: 15px; */
-    text-align: center;
-    /* 统一导航 */
-    margin-top: 28px;
-  }
-
-  .emerColor {
-    color: #0077ff;
+    /* text-align: center; */
+    /* margin-top: 20px; */
   }
 
 </style>

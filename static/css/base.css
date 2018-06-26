@@ -167,6 +167,14 @@
  .addIcon {
     background-image: url("../images/add.png");
   }
+  /* 红旗 */
+  .faqi{
+    background-image: url('../images/faqi.png')
+  }
+  /* 人像 */
+  .appro{
+    background-image: url('../images/appro.png')
+  }
   /* 停用 */
   .restIcon {
     /* background-image: url("../images/rest.png"); */

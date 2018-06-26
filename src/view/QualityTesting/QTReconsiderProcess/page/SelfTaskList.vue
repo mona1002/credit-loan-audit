@@ -1,66 +1,58 @@
 <template>
-  <div class="AntiCaseNum IntegratedQuery ListTable">
-    <!-- 质检复议流程 初终审本人任务列表 -->
-    <myHead></myHead>
-    <div class="content">
-      <div class="search">
-        <ul>
-          <li>
-            <p>
-              <label> 进件编号 </label>
-              <el-input v-model="params.applySubNo" placeholder="请输入进件编号"></el-input>
-            </p>
-            <p>
-              <label> 客户名称</label>
-              <el-input v-model="params.custName_la" placeholder="请输入客户名称"></el-input>
-            </p>
-            <p>
-              <label> 证件号码</label>
-              <el-input v-model="params.certCode" placeholder="请输入证件号码"></el-input>
-            </p>
-          </li>
-          <li>
-            <p>
-            </p>
-            <p>
-            </p>
-            <p class="btn_wrap">
-              <el-button class="btn" type="primary" style="marginLeft:228px" @click="Rsearch">查询</el-button>
-              <el-button class="btn" type="primary" @click="Rreset">重置</el-button>
-            </p>
-          </li>
-        </ul>
-      </div>
-      <div class="title">
-        <h1>进件列表</h1>
-      </div>
-      <div class="table_wrap">
-        <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" height="100%" @row-dblclick="handleCurrentChange" border>
-          <el-table-column type="index" align='center' label=序号 width="55">
-          </el-table-column>
-          <el-table-column prop="applySubNo" label="进件编号" align='center' width="165">
-          </el-table-column>
-          <el-table-column prop="custName" label="客户名称" align='center' width="140">
-          </el-table-column>
-          <el-table-column prop="certCode" label="证件号码" align='center' width="170">
-          </el-table-column>
-          <el-table-column prop="checkResultTxt" label="质检结果" align='center' width="115">
-          </el-table-column>
-          <el-table-column prop="errorType" label="差错类型" align='center' width="252">
-          </el-table-column>
-          <el-table-column prop="errorDescribe" label="差错描述" align='center' width="474">
-          </el-table-column>
-          <el-table-column prop="remark" label="备注" align='center' width="474">
-          </el-table-column>
-        </el-table>
-        <!-- 分页  -->
-        <!-- <div class="paging">
+  <!-- 质检复议流程 初终审本人任务列表 -->
+  <div class="taskWatting main-div">
+    <div class="taskWinput search-div">
+      <el-row class="row row1" type="flex">
+        <el-col :span="6" class="search-item" :offset="0">
+          <span class="keywordText">进件编号： </span>
+          <el-input v-model="params.applySubNo" placeholder="请输入进件编号"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">客户名称：</span>
+          <el-input v-model="params.custName_la" placeholder="请输入客户名称"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">证件号码：</span>
+          <el-input v-model="params.certCode" placeholder="请输入证件号码"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-btn">
+          <el-button class="btn query" type="primary" @click="Rsearch">查询</el-button>
+          <el-button class="btn reset" @click="Rreset">重置</el-button>
+        </el-col>
+      </el-row>
+    </div>
+    <div class="title titleContainer edit-div">
+      <span class="titleText">
+        <i class="el-icon title-icon"></i>
+        质检信息
+      </span>
+    </div>
+    <div class="listContainer">
+      <!-- 编辑table -->
+      <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row @row-dblclick="handleCurrentChange" border>
+        <el-table-column type="index" align='center' label=序号 width="55">
+        </el-table-column>
+        <el-table-column prop="applySubNo" label="进件编号" align='center' width="165">
+        </el-table-column>
+        <el-table-column prop="custName" label="客户名称" align='center' width="140">
+        </el-table-column>
+        <el-table-column prop="certCode" label="证件号码" align='center' width="170">
+        </el-table-column>
+        <el-table-column prop="checkResultTxt" label="质检结果" align='center' width="115">
+        </el-table-column>
+        <el-table-column prop="errorType" label="差错类型" align='center' width="252">
+        </el-table-column>
+        <el-table-column prop="errorDescribe" label="差错描述" align='center' width="474">
+        </el-table-column>
+        <el-table-column prop="remark" label="备注" align='center' width="474">
+        </el-table-column>
+      </el-table>
+      <!-- 分页  -->
+      <!-- <div class="paging">
           <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
             :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
           </el-pagination>
         </div> -->
-      </div>
     </div>
   </div>
 </template>
@@ -142,7 +134,7 @@
         // totalRecord: 0, //总条数
       }
     },
-        watch: {
+    watch: {
       '$route' (to, from) {
         if (to.path === '/SelfTaskList') {
           this.mountedInf();
@@ -156,18 +148,18 @@
       //     // this.getInf(this.params);
       //     this.inquire(this.params);
       //   },
-      mountedInf(){
- this.taskList = JSON.parse(localStorage.getItem('QTTrialSelftWorkbenchPass'))
-      this.params.processTemplateId = this.taskList.processTemplateId;
-      this.params.taskNodeName = this.taskList.taskNodeName;
-      this.params.taskStatus = this.taskList.taskStatus;
-      this.inquire(this.params)
-      // QTTrialSelftWorkbenchPass
-      //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
-      //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
-      //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
-      //   this.params.pageNum = this.currentPage, //页数（第几页）
-      //     this.params.pageSize = this.pageCount, //页面显示行数
+      mountedInf() {
+        this.taskList = JSON.parse(localStorage.getItem('QTTrialSelftWorkbenchPass'))
+        this.params.processTemplateId = this.taskList.processTemplateId;
+        this.params.taskNodeName = this.taskList.taskNodeName;
+        this.params.taskStatus = this.taskList.taskStatus;
+        this.inquire(this.params)
+        // QTTrialSelftWorkbenchPass
+        //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
+        //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
+        //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
+        //   this.params.pageNum = this.currentPage, //页数（第几页）
+        //     this.params.pageSize = this.pageCount, //页面显示行数
       },
       handleCurrentChange(val) {
         // this.params.pageNum = val;
@@ -180,7 +172,7 @@
         // 存储质检结论参数
         localStorage.setItem("QTSelfTW", JSON.stringify(this.query));
         this.$router.push('/MatchingInfQT?checkApp_trial_self');
-          this.$route.meta.newOne = true;
+        this.$route.meta.newOne = true;
         // 存储components参数
         localStorage.setItem("QT", JSON.stringify(this.QTquery));
         localStorage.setItem("MatchFlag", JSON.stringify({
@@ -226,122 +218,16 @@
 
 </script>
 <style scoped>
-  .AntiCaseNum {
+  .taskWatting {
     width: 100%;
+    height: calc( 100% - 90px);
     background-color: #fafbfc;
     overflow-y: auto;
     overflow-x: hidden;
-    /* 统一导航 --去掉高度*/
-    height: 100%;
-  }
-
-  .AntiCaseNum label {
-    font-size: 14px;
-    color: #475669;
-    text-align: right;
-    display: inline-block;
-    width: 126px;
-    height: 20px;
-    margin-right: 10px;
-  }
-
-  .AntiCaseNum i {
-    color: #ff7676;
-    font-weight: 700;
-    font-size: 16px;
-    vertical-align: middle;
-    font-style: normal;
-  }
-
-  .content {
-    padding: 30px 30px;
-    width: 100%;
-    height: calc( 100% - 70px);
-    /* 统一导航 */
-    /* height: 100%; */
-  }
-
-  .search {
-    background-color: #ffffff;
-    border: 1px solid #e6eaee;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    height: auto;
-  }
-
-  .search li {
-    clear: both;
-    height: 55px;
-  }
-
-  .search li p {
-    width: 33.3%;
-    float: left;
-    margin-top: 20px;
-  }
-
-  .btn_wrap {
-    margin-top: 20px;
-    height: 33px;
-    width: calc( 66.6% + 394px);
-  }
-
-  .btn {
-    border-radius: 8px;
-    width: 79px;
-    font-size: 14px;
-    line-height: 33px;
-    padding: 0;
-  }
-
-  .noBk {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .title {
-    opacity: 0.75;
-    background: #ebedf8;
-    border-radius: 6px;
-    width: 100%;
-    height: 50px;
-  }
-
-  .title h1 {
-    font-size: 16px;
-    color: #1f2d3d;
-    padding-left: 37px;
-    text-align: left;
-    line-height: 50px;
-    padding-right: 37px;
-  }
-
-  .icon {
-    margin-right: 5px;
-    vertical-align: middle;
-    font-size: 30px;
-  }
-
-  /* 综合查询页面加上分页pad-bottom 改为20px*/
-
-  .table_wrap {
-    background-color: #ffffff;
-    border: 1px solid #e6eaee;
-    padding: 25px 25px 20px 25px;
-    width: 100%;
-    height: calc( 100% - 255px);
   }
 
   .paging {
-    /* margin-top: 15px; */
-    text-align: center;
-    /* 统一导航 */
-    margin-top: 28px;
+    /* text-align: center; */
+    /* margin-top: 20px; */
   }
-
-  .emerColor {
-    color: #0077ff;
-  }
-
 </style>

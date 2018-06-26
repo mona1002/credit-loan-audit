@@ -28,7 +28,7 @@
         </span>
       </div>
       <div class="listContainer">
-        <el-table :data="datas" style="width: 100%" height="510" @row-dblclick='goDetail' border>
+        <el-table :data="datas" style="width: 100%" height="510" highlight-current-row @row-dblclick='goDetail' border>
           <el-table-column type="index" :index="1" label="序号" width="50">
           </el-table-column>
           <el-table-column prop="taskType" label="任务类型" min-width="110">

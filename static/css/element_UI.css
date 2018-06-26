@@ -2787,11 +2787,9 @@ body .el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu 
   overflow-x: auto;
 }
 
-/* .IntegratedQuery .paging .el-pagination__jump .el-input{ */
-
-.IntegratedQuery .el-pagination__jump .el-input {
+/* .IntegratedQuery .el-pagination__jump .el-input {
   width: 50px;
-}
+} */
 
 .regularConfig .el-dialog__header {
   padding-top: 10px;
