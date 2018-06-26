@@ -165,7 +165,7 @@
   }
   /* 添加 */
  .addIcon {
-    /* background-image: url("../images/add.png"); */
+    background-image: url("../images/add.png");
   }
   /* 停用 */
   .restIcon {
