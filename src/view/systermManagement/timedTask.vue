@@ -113,10 +113,13 @@
       }
     },
     methods: {
-      getDefaultTime() {
+      getDefaultTime() {//查询条件为诶空，默认查询当天件
         var MyDate = new Date();
         this.DefaultTime = MyDate.getFullYear() + '-' + (MyDate.getMonth() + 1) + '-' + MyDate.getDate()
         this.params.dateEnd = this.params.dateBegin = this.DefaultTime; //	默认请求当天数据
+        this.sendDate=[];
+        this.sendDate.push( this.params.dateBegin );
+        this.sendDate.push( this.params.dateEnd );
       },
       inquire(pam) { //查询列表    基础接口-5.分页查询请求错误数据
         this.post("/sendErrorController/querySendErrorByPage", pam).then(res => {
@@ -141,7 +144,9 @@
         } else {
           this.sendDate[0] ? this.params.dateBegin = this.sendDate[0] : this.params.dateBegin = '';
           this.sendDate[1] ? this.params.dateEnd = this.sendDate[1] : this.params.dateEnd = '';
+          
         }
+        console.log( )
         // this.sendDate.push( )
         this.params.pageSize = this.pageCount; 
         this.inquire(this.params);
