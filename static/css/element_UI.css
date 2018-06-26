@@ -1,12 +1,10 @@
 /* .Abody 部分 */
 
-.Abody .el-button {
+ .Abody .el-button {
   border-radius: 8px;
   padding: 9px 22px;
-  color: #409EFF;
-  border: 1px solid #409EFF;
 }
-
+/*
 .Abody .el-button--primary {
   color: white;
 }
@@ -18,45 +16,9 @@
 
 .Abody .el-table th .cell {
   font-weight: 800;
-}
-
-/* .Abody .el-input{
-width:200px;
 } */
-
-/* .Abody .el-input__inner{
-width:200px;
-} */
-
-/* .Abody el-select-dropdown__item{
-float:none;
-}
-.Abody .el-select-dropdown__item{
-float:none;
-} */
-
-/* 公用 表格 表头 th */
-
-/* 放款信息 信审审结论轨迹  */
-
-/* .FinanceInformation .el-table__header-wrapper tr{
-height: 40px;
-}
-.FinanceInformation .el-table .cell{
-     line-height: 23px;
-} */
-
-.FinanceInformation .el-table .cell,
-.ApprovalConclusion .el-table .cell {
-  /* line-height: 23px; */
-  /* text-align: center; */
-}
 
 /* 信审审批结论轨迹 th全部居中 */
-
-/* .ApprovalConclusion .el-table th.is-center {
-  text-align: center;
-} */
 
 .ApprovalConclusion .el-table th .cell {
   font-weight: 800;
@@ -1653,9 +1615,9 @@ height: 40px;
 }
 
 .taskWinput .el-input__inner {
-  height: 35px;
+  /* height: 35px;
   border-radius: 6px;
-  width: 258px;
+  width: 258px; */
 }
 
 .taskWatting .el-table__header-wrapper tr {
@@ -1664,9 +1626,9 @@ height: 40px;
 
 .taskWatting .el-table th {
   /* padding-left: 10px; */
-  font-weight: 800;
+  /* font-weight: 800;
   color: #909399;
-  font-size: 13px;
+  font-size: 13px; */
 }
 
 .taskWatting .el-table th .cell {
@@ -1675,9 +1637,9 @@ height: 40px;
 
 .taskWatting .el-table__body-wrapper .el-table__body td {
   /* padding-left: 10px; */
-  font-weight: 400;
+  /* font-weight: 400;
   color: #909399;
-  font-size: 13px;
+  font-size: 13px; */
 }
 
 .taskWatting .el-table th:nth-of-type(1) {

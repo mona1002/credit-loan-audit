@@ -294,7 +294,7 @@
   .workbench {
     background: #ededed;
     width: 100%;
-    height: calc( 100% - 50px);
+    height: calc( 100% -90px);
   }
 
   .workbench .top {
@@ -302,7 +302,8 @@
   }
 
   .workbench .main {
-    height: calc( 100% - 40px);
+    /* height: calc( 100% - 40px); */
+    height: 100%;
     overflow: hidden;
     background: #ededed;
   }

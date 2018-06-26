@@ -7,7 +7,9 @@
     background-color: #fafbfc;
   }
   /* 搜索区域的样式 */
- 
+  /* .Abody .hover-row{
+    background: lightskyblue !important;
+ } */
   .search-div {
     background-color: #ffffff;
     border: 1px solid #e6eaea !important;
@@ -68,27 +70,33 @@
  
   /* 搜索区  查询/重置 按钮 */
  
-  .search-item .btn {
+  /* .search-item .btn {
     height: 30px;
     border-radius: 8px;
     width: 65px;
     font-size: 14px;
     line-height: 30px;
     padding: 0;
-  }
+  } */
   /* 查询 */
  .search-btn{
      text-align: right;
  }
-  .search-item .btn.query {
+ .search-btn .el-button{
+  height: 30px;
+  width: 65px;
+  padding: 0 !important;
+ }
+  .search-item .btn .query {
     /*margin-left: 200px !important;*/
   }
   /* 重置 */
-  .search-item .btn.reset {
-    /*margin-left: 20px !important;*/
+  /* .search-item .btn.reset {
+    margin-right: 30px;
+  } */
+  .search-btn .btn.reset {
     margin-right: 30px;
   }
-  /* edit-div */
   /* 操作区域 */
   .edit-div {
     background-color: rgba(238, 240, 249, .75);
@@ -123,7 +131,7 @@
   }
   /* title-icon */
   .edit-div .title-icon {
-    /* background-image: url("../images/list-icon.png"); */
+    background-image: url("../images/list-icon.png");
   }
   /* 编辑区 按钮 */
   /* 新增/停用/启用 */
@@ -208,6 +216,8 @@
   }
   .Abody .el-table{
       font-size: 13px;
+      color: #606268;
+      
    height: 510px !important;
   }
   .Abody .el-table td {
