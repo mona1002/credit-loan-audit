@@ -48,7 +48,7 @@
       </div>
       <el-table :data="fixTelData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickFixTel" highlight-current-row
         v-loading="fixTelLoading">
-        <el-table-column prop="targetCustName" label="命中号码姓名" min-width="150">
+        <el-table-column prop="nameOfApplyTel" label="命中号码姓名" min-width="150">
         </el-table-column>
         <el-table-column prop="matchTel" label="命中号码" min-width="150">
         </el-table-column>

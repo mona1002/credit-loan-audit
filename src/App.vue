@@ -1,15 +1,7 @@
 <template>
   <div id="app">
-    <!-- <myHead></myHead> -->
-   <keep-alive> <router-view class="Abody"></router-view>    </keep-alive>
-    <!-- ======测试page================ -->
-    <!-- {{ $route.meta}}
-    <keep-alive>
-      <router-view v-if="$route.meta.keepAlive" class="Abody"><slot>dafsdf</slot></router-view>
-    </keep-alive> 
-     <p v-if="!$route.meta.keepAlive" class="ccc"> 无内容 </p>
-    <router-view v-if="!$route.meta.keepAlive" class="ccc"> </router-view> -->
-<!-- ================================================================================================== -->
+    <myHead></myHead>
+   <keep-alive> <router-view class="Abody"></router-view></keep-alive>
     <tag class="fottt"></tag>
   </div>
 </template>
@@ -42,6 +34,8 @@
 
 </script>
 <style>
+
+  @import "../static/css/base.css";
   @import "../static/css/common.css";
   @import "../static/css/element_UI.css";
   .fottt {

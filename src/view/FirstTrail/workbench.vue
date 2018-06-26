@@ -1,10 +1,9 @@
 <template>
   <div class="workbench">
-    <myHead class="top"></myHead>
     <div class="main">
       <!-- 左边 -->
       <div class="main_left">
-        <h2>
+        <h2 style="font-weight:bold;">
           <i class="el-icon-edit"> </i>常用 </h2>
       </div>
       <div class="main_right">
@@ -74,7 +73,6 @@
   </div>
 </template>
 <script>
-  import myHead from "../header.vue";
   import UserURL from "../../util/constantUser";
   export default {
     data() {
@@ -105,9 +103,6 @@
         },
         rot: 0,
       }
-    },
-    components: {
-      myHead
     },
     watch: {
       '$route' (to, from) {
@@ -299,8 +294,7 @@
   .workbench {
     background: #ededed;
     width: 100%;
-    /* height: calc( 100% - 40px); */
-    height: 100%;
+    height: calc( 100% - 50px);
   }
 
   .workbench .top {
@@ -308,7 +302,7 @@
   }
 
   .workbench .main {
-    height: calc( 100% - 110px);
+    height: calc( 100% - 40px);
     overflow: hidden;
     background: #ededed;
   }
@@ -384,6 +378,7 @@
   .workbench_right_top,
   .workbench_right_bottom {
     height: 47.5%;
+    height: 43vh;
   }
 
 </style>

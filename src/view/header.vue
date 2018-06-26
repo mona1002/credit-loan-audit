@@ -144,14 +144,11 @@
   .mheader {
     width: 100%;
     min-width: 1366px;
-    height: 70px;
-    line-height: 70px;
+    height: 50px;
+    line-height: 50px;
     background-image: url(/static/images/daoLogo.png);
     background-size: 100% 100%;
     background-repeat: repeat-y;
-    /* background-image:linear-gradient(-62deg, #3196e4 0%, #1f64b4 36%, #0f3889 100%); */
-    height: 70px;
-    line-height: 70px;
     font-size: 30px;
     color: white;
     position: relative;
@@ -159,14 +156,13 @@
 
   .mheader .logoDiv {
     float: left;
-    height: 70px;
+    height: 50px;
     border-right: 1px solid #bfcbd9;
-   /*  background: rgba(69, 115, 227, .2); */
     background: rgb(51, 158, 225);
-    font-size: 20px;
+    font-size: 18px;
     color: #fff;
     padding: 0 33px;
-    line-height: 70px;
+    line-height: 50px;
     letter-spacing: 2px;
     position: absolute;
     z-index: 2000;
@@ -178,22 +174,18 @@
     width: calc( 100% - 324px );
     height: 100%;
     float: left;
-    /* background: pink; */
   }
 
   .mheader .navContain {
-    /* width: calc( 100% - 360px); */
-    height: 70px;
+    height: 50px;
     position: absolute;
-    /* left: 200px; */
-    /* background: pink; */
   }
 
   .mheader .backIcon {
     width: 60px;
     padding: 0 16px;
-    height: 70px;
-    line-height: 60px;
+    height:50px;
+    line-height:40px;
     background: #4fc9ed;
     position: absolute;
     right: 0px;
@@ -203,7 +195,7 @@
   }
   .mheader .backIcon img{
     float: left;
-    padding: 24px 5px 0 0;
+    padding:14px 5px 0 0;
   }
   .mheader .backIcon span{
     font-size: 14px;
@@ -211,20 +203,18 @@
 
   .icon {
     width: 30px;
-    height: 70px;
+    height: 50px;
     position: absolute;
     color: blue;
     z-index: 210;
-    line-height: 60px;
+    line-height: 40px;
     text-align: center;
-    /* float: left; */
   }
 
   .mheader .navContain .el-menu div {
     width: auto;
     display: inline-block;
-    height: 70px;
-    /* float: left; */
+    height: 50px;
   }
 
 </style>

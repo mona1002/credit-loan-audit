@@ -951,7 +951,7 @@ height: 40px;
 /* 代办任务下面div高度   #f3f3f3  */
 
 .workbench .main_right_task .el-collapse-item__content {
-  height: 80vh;
+  height: 82vh;
   overflow: auto;
 }
 
@@ -1823,7 +1823,7 @@ height: 40px;
 }
 
 .mheader .el-menu--horizontal .el-submenu {
-  height: 70px;
+  height: 50px;
   float: left;
   position: relative;
 }
@@ -1831,13 +1831,15 @@ height: 40px;
 .mheader .el-menu--horizontal .el-submenu .el-submenu__title {
   font-size: 15px;
   /* color: #bfcbd9; */
-  color: #fff;
-  height: 60px;
-  line-height: 70px;
-  /* margin: 0 41px; */
-  margin: 0 44px;
+  color: #fff !important;
+  height: 40px;
+  line-height: 50px;
+  /* margin: 0 41px; 
+  margin: 0 44px;*/
+  margin: 0 50px 0 10px;
   padding: 0 0;
   padding-left: 0 !important;
+  font-weight: bold;
 }
 
 .mheader .el-menu .el-submenu.is-opened {
@@ -1866,7 +1868,7 @@ height: 40px;
 
 .mheader .el-menu .el-menu {
   margin-left: 0;
-  margin-top: 5px;
+  /* margin-top: 5px; */
 }
 
 /* 解决 测试环境二级无背景 */
@@ -1878,7 +1880,14 @@ height: 40px;
 
 .mheader .el-menu .el-menu div {
   height: 20px;
-  margin: 7px 0 10px 0;
+  /* margin: 7px 0 10px 0; */
+  margin: 5px 0;
+}
+.mheader .el-menu .el-menu div:nth-of-type(1) {
+  margin: 0 0 5px 0;
+}
+.mheader .el-menu .el-menu div:last-of-type{
+  /* margin-bottom: 0; */
 }
 
 .mheader .el-menu .el-submenu__title:hover {
@@ -2011,10 +2020,11 @@ height: 40px;
 
 .mheader .el-menu--horizontal .el-menu--horizontal {
   /* top: 60px !important;
-  left: -4px !important; */
-  padding: 5px 0;
+  left: -4px !important; 
+  padding: 5px 0;*/
   min-width: 100% !important;
-  top: 70px !important;
+  /* top: 70px !important; */
+  top: 50px !important;
   left: 0px !important;
 }
 
@@ -2043,9 +2053,8 @@ height: 40px;
 }
 
 /* 生产导航样式修改 */
-
+/* 导航一级背景色不变，二级三级背景色改变 */
 body .el-menu--horizontal {
-  /* top: 65px !important; */
   border-bottom: none !important;
   background: rgba(31, 45, 61, .6);
 }
@@ -2053,14 +2062,25 @@ body .el-menu--horizontal {
 body .el-menu--horizontal .el-menu--popup {
   /* padding: 5px 20px !important; */
   background: transparent;
-  margin-top: 5px;
+ /*  margin-top: 5px; */
   /* min-width: 142px; */
-  min-width: 148px;
+  min-width: 120px;
+  margin-top: 0;
 }
+
+body .el-menu--horizontal .el-menu--popup div{
+  margin: 5px 0;
+}
+body .el-menu--horizontal .el-menu--popup div:nth-of-type(1){
+  margin-top: 0;
+}
+/* body .el-menu--horizontal .el-menu--popup div:last-of-type{
+  margin-bottom: 0;
+} */
 
 body .el-menu--horizontal .el-menu .el-menu-item {
   background-color: transparent;
-  color: #bfcbd9;
+  color: #bfcbd9 !important;
 }
 
 body .el-menu--horizontal .el-menu .el-submenu__title {
@@ -2076,7 +2096,7 @@ body .el-menu--horizontal .el-menu .el-submenu__title:hover {
 
 body .el-menu--horizontal .el-menu .el-menu-item:hover {
   background-color: transparent;
-  color: #fff;
+  color: #fff !important;
   border-bottom: none;
 }
 
@@ -2131,6 +2151,10 @@ body .el-menu--horizontal .el-menu .el-menu-item:hover {
 
 body .el-submenu .el-menu-item {
   min-width: 0 !important;
+}
+body .el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu .el-submenu__title{
+  height: 20px;
+  line-height: 20px;
 }
 
 /*流程轨迹查询 表格 */

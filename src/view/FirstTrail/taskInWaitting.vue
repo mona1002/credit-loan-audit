@@ -1,6 +1,5 @@
 <template>
 	<div class="taskWatting">
-		<myHead class="top"></myHead>
 		<div class="taskWattingContain">
 		  	<div class="taskWinput">
 		      <el-row class="row row1"  type="flex">
@@ -106,7 +105,6 @@
 	</div>	
 </template>
 <script type="text/javascript">
-	import myHead from "../header.vue"
 	export default{
 		data(){
 			return{
@@ -144,9 +142,6 @@
         }
       }
     },
-		components: {
-	      myHead
-			},
 			// beforeRouteLeave(to, from, next) {
 			// 	to.meta.refresh=true;
 			// 	next();
