@@ -44,7 +44,6 @@
   }
 
   .button_bottom {
-    /* display: inline-block; */
     margin-right: 2px;
     padding: 9px 22px 9px 9px;
     font-size: 14px;
