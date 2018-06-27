@@ -56,7 +56,7 @@
         <p>质检-已办任务列表</p>
       </div>
       <div class="taskWtable">
-        <el-table :data="datas" style="width: 100%" height="500" @row-click='goDetail' border>
+        <el-table :data="datas" style="width: 100%" height="500" @row-dblclick='goDetail' border>
           <el-table-column type="index" :index="1" label="序号" width="50">
           </el-table-column>
           <el-table-column prop="emerType" label="紧急程度" min-width="80">
@@ -294,10 +294,10 @@
           }
         });
         localStorage.setItem("TtaskInWaitting", JSON.stringify(row));
-        this.judge = {
-          flag: '07'
-        };
-        localStorage.setItem("judge", JSON.stringify(this.judge));
+        // this.judge = {
+        //   flag: '07'
+        // };
+        // localStorage.setItem("judge", JSON.stringify(this.judge));
       },
       handleSizeChange(val) {
         this.queryParam.pageSize = val;
