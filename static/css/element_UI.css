@@ -2696,13 +2696,13 @@ body .el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu 
 
 /* 审批任务管理——待办任务 */
 
-.taskWatting .el-date-editor .el-range-separator {
+/* .taskWatting .el-date-editor .el-range-separator {
   width: 10%;
 }
 
 .taskWatting .el-date-editor .el-range-input {
   width: 35%;
-}
+} */
 
 .taskWatting.doTheTask .el-table th:nth-of-type(5) {
   text-align: left;
@@ -2783,20 +2783,16 @@ body .el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu 
 
 /* 综合查询 */
 
-.IntegratedQuery .el-table__body-wrapper {
+/* .IntegratedQuery .el-table__body-wrapper {
   overflow-x: auto;
 }
 
-/* .IntegratedQuery .el-pagination__jump .el-input {
-  width: 50px;
-} */
 
 .regularConfig .el-dialog__header {
   padding-top: 10px;
   background: #eef0f9;
 }
 
-/* .newContent  */
 
 .regularConfig .el-dialog__headerbtn {
   top: 10px;
@@ -2808,9 +2804,8 @@ body .el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu 
 
 .regularConfig .el-dialog__body {
   padding: 15px 15px 0 15px;
-}
+} */
 
-.el-dialog__footer {}
 
 .regularQT .el-button,
 .specialQT .el-button {

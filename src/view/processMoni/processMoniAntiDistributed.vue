@@ -56,9 +56,9 @@
           </el-col>
         </el-row>
         <el-row class="row row3" type="flex">
-   <el-col :span="6"> </el-col>
-   <el-col :span="6"> </el-col>
-   <el-col :span="6"> </el-col>
+          <el-col :span="6"> </el-col>
+          <el-col :span="6"> </el-col>
+          <el-col :span="6"> </el-col>
           <el-col :span="6" v-if="routerState!=='03'">
             <el-button class="btn query" type="primary" @click="getByKey">查询</el-button>
             <el-button type="primary" class="btn reset" @click="reset">重置</el-button>

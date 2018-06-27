@@ -1,26 +1,11 @@
 <template>
   <!-- 专纵项抽单配置功能===业务状态接口-基础接口4 -->
   <div class="taskWatting main-div">
-    <div class="search">
-      <ul>
-        <label> 审批结论时间 </label>
-        <label> 进件机构</label>
-        <label> 初终审编号</label>
-        <label> 产品名称</label>
-        <label> 业务状态</label>
-        <label> 拒绝主原因</label>
-        <label> 拒绝子原因 </label>
-        <p class="btn_wrap">
-          <el-button class="btn" type="primary" style="marginLeft:228px" @click="Rsearch">查询</el-button>
-          <el-button class="btn" type="primary" @click="Rreset">重置</el-button>
-        </p>
-      </ul>
-    </div>
     <div class="taskWinput search-div">
       <el-row class="row row1" type="flex">
-        <el-col :span="6" class="search-item" :offset="0">
+        <el-col :span="6" class="search-item date_picker" :offset="0">
           <span class="keywordText">审批结论时间： </span>
-          <el-date-picker v-model="ploanDate" value-format="yyyy-MM-dd" type="daterange" range-separator="至" start-placeholder="开始日期"
+          <el-date-picker class='date_picker' v-model="ploanDate" value-format="yyyy-MM-dd" type="daterange" range-separator="至" start-placeholder="开始日期"
             end-placeholder="结束日期">
           </el-date-picker>
         </el-col>
@@ -72,18 +57,9 @@
         <el-col :span="6" class="search-btn">
           <el-button class="btn query" type="primary" @click="Rsearch">查询</el-button>
           <el-button class="btn reset" @click="Rreset">重置</el-button>
-          <!-- <el-button class="btn" type="primary" style="marginLeft:228px" @click="Rsearch">查询</el-button> -->
-          <!-- <el-button class="btn" type="primary" @click="Rreset">重置</el-button> -->
         </el-col>
       </el-row>
     </div>
-    <!-- <div class="title">
-        <h1>质检任务分派查询
-          <span @click="apportion">
-            <img src="../../../../static/images/add.png" style=" vertical-align: middle;"> 任务分派
-          </span>
-        </h1>
-      </div> -->
     <div class="title titleContainer edit-div">
       <span class="titleText">
         <i class="el-icon title-icon"></i>

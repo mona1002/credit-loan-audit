@@ -1,21 +1,6 @@
 <template>
   <div class="taskWatting main-div">
     <!-- 质检  综合查询 -->
-    <div class="search">
-      <label> 进件编号 </label>
-
-      <label> 客户名称</label>
-
-      <label> 证件号码</label>
-
-      <label> 手机号码</label>
-
-      <p class="btn_wrap">
-        <el-button class="btn" type="primary" style="marginLeft:228px" @click="Rsearch">查询</el-button>
-        <el-button class="btn" type="primary" @click="Rreset">重置</el-button>
-      </p>
-    </div>
-
     <div class="taskWinput search-div">
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item" :offset="0">
@@ -45,14 +30,9 @@
         <el-col :span="6" class="search-btn">
           <el-button class="btn query" type="primary" @click="Rsearch">查询</el-button>
           <el-button class="btn reset" @click="Rreset">重置</el-button>
-          <!-- <el-button class="btn" type="primary" style="marginLeft:228px" @click="Rsearch">查询</el-button> -->
-          <!-- <el-button class="btn" type="primary" @click="Rreset">重置</el-button> -->
         </el-col>
       </el-row>
     </div>
-    <!-- <div class="title">
-        <h1>综合查询</h1>
-      </div> -->
     <div class="title titleContainer edit-div">
       <span class="titleText">
         <i class="el-icon title-icon"></i>
@@ -153,7 +133,7 @@
         this.params.custName = '';
         this.params.certCode = '';
         this.params.mobile = '';
-      },
+      }, 
       Rsearch() {
         // this.params.pageNum = this.currentPage = 1;
         if (this.params.applySubno != '' || this.params.custName != '' || this.params.certCode != '' || this.params.mobile !=
