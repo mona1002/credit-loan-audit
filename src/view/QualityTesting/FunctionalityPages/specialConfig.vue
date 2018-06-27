@@ -1,117 +1,136 @@
 <template>
   <!-- 专纵项抽单配置功能===业务状态接口-基础接口4 -->
-  <!-- <div class="batchApportion"> -->
-  <div class="AntiCaseNum IntegratedQuery">
-    <myHead></myHead>
-    <div class="content">
-      <div class="search">
-        <ul>
-          <li>
-            <p>
-              <label> 审批结论时间 </label>
-              <el-date-picker v-model="ploanDate" value-format="yyyy-MM-dd" type="daterange" range-separator="至" start-placeholder="开始日期"
-                end-placeholder="结束日期">
-              </el-date-picker>
-            </p>
-            <p>
-              <label> 进件机构</label>
-              <el-select v-model="params.operOrgCodes" multiple placeholder="请选择">
-                <el-option v-for="item in shopCodesSelection" :key="item.code" :label="item.name" :value="item.code">
-                  <span style="float: left">{{ item.name }}</span>
-                  <span style="float: right; color: #8492a6; font-size: 13px">{{ item.code }}</span>
-                </el-option>
-              </el-select>
-            </p>
-            <p>
-              <label> 初终审编号</label>
-              <el-input v-model="params.userCode" placeholder="请输入初审人员"></el-input>
-            </p>
-          </li>
-          <li>
-            <p>
-              <label> 产品名称</label>
-              <el-select v-model="params.proCodes" multiple placeholder="请选择">
-                <el-option v-for="item in production" :key="item.code" :label="item.name" :value="item.code">
-                  <span style="float: left">{{ item.name }}</span>
-                  <span style="float: right; color: #8492a6; font-size: 13px">{{ item.code }}</span>
-                </el-option>
-              </el-select>
-            </p>
-            <p>
-              <label> 业务状态</label>
-              <el-select v-model="params.busiState" placeholder="请选择">
-                <el-option v-for="item in busiStateSelect" :key="item.code" :label="item.name" :value="item.code">
-                </el-option>
-              </el-select>
-            </p>
-            <p>
-              <label> 拒绝主原因</label>
-              <el-select v-model="params.mainReasonIds" placeholder="请选择" @change='selectSubRea(params.mainReasonIds)'>
-                <el-option v-for="item in mainReason" :key="item.code" :label="item.name" :value="item.code">
-                </el-option>
-              </el-select>
-            </p>
-          </li>
-          <li>
-            <p>
-              <label> 拒绝子原因 </label>
-              <el-select v-model="params.subReasonIds" multiple placeholder="请选择">
-                <el-option v-for="item in secondReason" :key="item.id" :label="item.reasonName" :value="item.id">
-                </el-option>
-              </el-select>
-            </p>
-            <p>
-            </p>
-            <p class="btn_wrap">
-              <el-button class="btn" type="primary" style="marginLeft:228px" @click="Rsearch">查询</el-button>
-              <el-button class="btn" type="primary" @click="Rreset">重置</el-button>
-            </p>
-          </li>
-        </ul>
-      </div>
-      <div class="title">
+  <div class="taskWatting main-div">
+    <div class="search">
+      <ul>
+        <label> 审批结论时间 </label>
+        <label> 进件机构</label>
+        <label> 初终审编号</label>
+        <label> 产品名称</label>
+        <label> 业务状态</label>
+        <label> 拒绝主原因</label>
+        <label> 拒绝子原因 </label>
+        <p class="btn_wrap">
+          <el-button class="btn" type="primary" style="marginLeft:228px" @click="Rsearch">查询</el-button>
+          <el-button class="btn" type="primary" @click="Rreset">重置</el-button>
+        </p>
+      </ul>
+    </div>
+    <div class="taskWinput search-div">
+      <el-row class="row row1" type="flex">
+        <el-col :span="6" class="search-item" :offset="0">
+          <span class="keywordText">审批结论时间： </span>
+          <el-date-picker v-model="ploanDate" value-format="yyyy-MM-dd" type="daterange" range-separator="至" start-placeholder="开始日期"
+            end-placeholder="结束日期">
+          </el-date-picker>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">进件机构：</span>
+          <el-select v-model="params.operOrgCodes" multiple placeholder="请选择">
+            <el-option v-for="item in shopCodesSelection" :key="item.code" :label="item.name" :value="item.code">
+              <span style="float: left">{{ item.name }}</span>
+              <span style="float: right; color: #8492a6; font-size: 13px">{{ item.code }}</span>
+            </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">初终审编号：</span>
+          <el-input v-model="params.userCode" placeholder="请输入初审人员"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">产品名称：</span>
+          <el-select v-model="params.proCodes" multiple placeholder="请选择">
+            <el-option v-for="item in production" :key="item.code" :label="item.name" :value="item.code">
+              <span style="float: left">{{ item.name }}</span>
+              <span style="float: right; color: #8492a6; font-size: 13px">{{ item.code }}</span>
+            </el-option>
+          </el-select>
+        </el-col>
+      </el-row>
+      <el-row class="row row1" type="flex">
+        <el-col :span="6" class="search-item" :offset="0">
+          <span class="keywordText">业务状态： </span>
+          <el-select v-model="params.busiState" placeholder="请选择">
+            <el-option v-for="item in busiStateSelect" :key="item.code" :label="item.name" :value="item.code">
+            </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">拒绝主原因：</span>
+          <el-select v-model="params.mainReasonIds" placeholder="请选择" @change='selectSubRea(params.mainReasonIds)'>
+            <el-option v-for="item in mainReason" :key="item.code" :label="item.name" :value="item.code">
+            </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">拒绝子原因：</span>
+          <el-select v-model="params.subReasonIds" multiple placeholder="请选择">
+            <el-option v-for="item in secondReason" :key="item.id" :label="item.reasonName" :value="item.id">
+            </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="6" class="search-btn">
+          <el-button class="btn query" type="primary" @click="Rsearch">查询</el-button>
+          <el-button class="btn reset" @click="Rreset">重置</el-button>
+          <!-- <el-button class="btn" type="primary" style="marginLeft:228px" @click="Rsearch">查询</el-button> -->
+          <!-- <el-button class="btn" type="primary" @click="Rreset">重置</el-button> -->
+        </el-col>
+      </el-row>
+    </div>
+    <!-- <div class="title">
         <h1>质检任务分派查询
           <span @click="apportion">
-            <!-- <span @click="allot"> -->
             <img src="../../../../static/images/add.png" style=" vertical-align: middle;"> 任务分派
           </span>
         </h1>
-      </div>
-      <div class="table_wrap">
-        <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" @selection-change="handleSelectionChange" border>
-          <el-table-column type="selection" align='center' width="55">
-          </el-table-column>
-          <el-table-column type="index" align='center' label=序号 width="55">
-          </el-table-column>
-          <el-table-column prop="ploanDate" label="审批结论时间" align='center' min-width="180">
-          </el-table-column>
-          <el-table-column prop="operOrgName" label="进件机构" align='center' min-width="180">
-          </el-table-column>
-          <el-table-column prop="auditNamec" label="初审姓名" align='center' min-width="180">
-          </el-table-column>
-          <el-table-column prop="auditCodec" label="初审编号" align='center' min-width="120">
-          </el-table-column>
-          <el-table-column prop="auditNamez" label="终审姓名" align='center' min-width="180">
-          </el-table-column>
-          <el-table-column prop="auditCodez" label="终审编号" align='center' min-width="130">
-          </el-table-column>
-          <el-table-column prop="proName" label="产品名称" align='center' min-width="130">
-          </el-table-column>
-          <el-table-column prop="busiStateTxt" label="业务状态" align='center' min-width="180">
-          </el-table-column>
-          <el-table-column prop="mainReasonName" label="拒绝主原因" align='center' min-width="220">
-          </el-table-column>
-          <el-table-column prop="subReasonName" label="拒绝子原因" align='center' min-width="160">
-          </el-table-column>
-        </el-table>
-        <!-- 分页  -->
-        <!-- <div class="paging">
+      </div> -->
+    <div class="title titleContainer edit-div">
+      <span class="titleText">
+        <i class="el-icon title-icon"></i>
+        质检任务分派查询
+      </span>
+      <span class="iconContainer">
+        <span class="icon-item" @click='apportion'>
+          <i class="el-icon addIcon"></i>
+          <span class="el-icon-text">任务分派</span>
+        </span>
+      </span>
+    </div>
+    <div class="listContainer">
+      <!-- 编辑table -->
+      <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row @selection-change="handleSelectionChange"
+        border>
+        <el-table-column type="selection" align='center' width="55">
+        </el-table-column>
+        <el-table-column type="index" align='center' label=序号 width="55">
+        </el-table-column>
+        <el-table-column prop="ploanDate" label="审批结论时间" align='center' min-width="180">
+        </el-table-column>
+        <el-table-column prop="operOrgName" label="进件机构" align='center' min-width="180">
+        </el-table-column>
+        <el-table-column prop="auditNamec" label="初审姓名" align='center' min-width="180">
+        </el-table-column>
+        <el-table-column prop="auditCodec" label="初审编号" align='center' min-width="120">
+        </el-table-column>
+        <el-table-column prop="auditNamez" label="终审姓名" align='center' min-width="180">
+        </el-table-column>
+        <el-table-column prop="auditCodez" label="终审编号" align='center' min-width="130">
+        </el-table-column>
+        <el-table-column prop="proName" label="产品名称" align='center' min-width="130">
+        </el-table-column>
+        <el-table-column prop="busiStateTxt" label="业务状态" align='center' min-width="180">
+        </el-table-column>
+        <el-table-column prop="mainReasonName" label="拒绝主原因" align='center' min-width="220">
+        </el-table-column>
+        <el-table-column prop="subReasonName" label="拒绝子原因" align='center' min-width="160">
+        </el-table-column>
+      </el-table>
+      <!-- 分页  -->
+      <!-- <div class="paging">
           <el-pagination @size-change="handleSizeChange" @current-change="handlePageChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
             :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
           </el-pagination>
         </div> -->
-      </div>
     </div>
     <!-- ==============================任务分配=================================== -->
     <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
@@ -124,7 +143,6 @@
   </div>
 </template>
 <script>
-  import myHead from '../../header.vue';
   import baseU from '../../../util/constant';
   export default {
     data() {
@@ -266,127 +284,28 @@
       //  this.params.pageParam.pageNum = this.currentPage = 1;
       //     this.params.pageSize = this.pageCount, //页面显示行数
     },
-    components: {
-      myHead
-    }
   }
 
 </script>
 <style scoped>
-  .AntiCaseNum {
+  .taskWatting {
     width: 100%;
+    height: calc( 100% - 90px);
     background-color: #fafbfc;
     overflow-y: auto;
     overflow-x: hidden;
-    /* 统一导航 --去掉高度*/
-    height: 100%;
   }
-
-  .AntiCaseNum label {
-    font-size: 14px;
-    color: #475669;
-    text-align: right;
-    display: inline-block;
-    width: 126px;
-    height: 20px;
-    margin-right: 10px;
-  }
-
-  .AntiCaseNum i {
-    color: #ff7676;
-    font-weight: 700;
-    font-size: 16px;
-    vertical-align: middle;
-    font-style: normal;
-  }
-
-  .content {
-    padding: 30px 30px;
-    width: 100%;
-    height: calc( 100% - 70px);
-    /* 统一导航 */
-    /* height: 100%; */
-  }
-
-  .search {
+    .taskWatting .taskWinput {
     background-color: #ffffff;
     border: 1px solid #e6eaee;
     margin-bottom: 20px;
-    padding-bottom: 20px;
-    height: auto;
   }
 
-  .search li {
-    clear: both;
-    height: 55px;
-  }
+  /* 分页 */
 
-  .search li p {
-    width: 33.3%;
-    float: left;
-    margin-top: 20px;
-  }
-
-  .btn_wrap {
-    margin-top: 20px;
-    height: 33px;
-    width: calc( 66.6% + 394px);
-  }
-
-  .btn {
-    border-radius: 8px;
-    width: 79px;
-    font-size: 14px;
-    line-height: 33px;
-    padding: 0;
-  }
-
-  .noBk {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .title {
-    opacity: 0.75;
-    background: #ebedf8;
-    border-radius: 6px;
-    width: 100%;
-    height: 50px;
-  }
-
-  .title h1 {
-    font-size: 16px;
-    color: #1f2d3d;
-    padding-left: 37px;
-    text-align: left;
-    line-height: 50px;
-    padding-right: 37px;
-  }
-
-  .title span {
-    float: right;
-    cursor: pointer;
-  }
-
-  /* 综合查询页面加上分页pad-bottom 改为20px*/
-
-  .table_wrap {
-    background-color: #ffffff;
-    border: 1px solid #e6eaee;
-    padding: 25px 25px 20px 25px;
-    width: 100%;
-    margin-bottom: 45px;
-  }
-
-  .paging {
+  .page {
     text-align: center;
-    /* 统一导航 */
-    margin-top: 28px;
-  }
-
-  .emerColor {
-    color: #0077ff;
+    margin-top: 20px;
   }
 
 </style>

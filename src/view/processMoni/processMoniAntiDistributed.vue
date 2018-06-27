@@ -5,25 +5,25 @@
     <div class="processMoni">
       <div class="keywordContainer">
         <el-row class="row row1" type="flex">
-          <el-col :span="8" :offset="0">
+          <el-col :span="6" :offset="0">
             <span class="keywordText">客户姓名</span>
             <el-input @keyup.enter.native="getByKey" v-model.trim="custName_la" placeholder="请输入客户姓名"></el-input>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <span class="keywordText">证件号码</span>
             <el-input @keyup.enter.native="getByKey" v-model.trim="certCode" placeholder="请输入证件号码"></el-input>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <span class="keywordText">进件编号</span>
             <el-input @keyup.enter.native="getByKey" v-model.trim="applySubNo" placeholder="请输入进价编号"></el-input>
           </el-col>
-        </el-row>
-        <el-row class="row row2" type="flex">
-          <el-col :span="8">
+          <el-col :span="6">
             <span class="keywordText">进件机构</span>
             <el-input @keyup.enter.native="getByKey" v-model.trim="appOrgCode" placeholder="请输入进件机构"></el-input>
           </el-col>
-          <el-col :span="8">
+        </el-row>
+        <el-row class="row row2" type="flex">
+          <el-col :span="6">
             <span class="keywordText">产品名称</span>
             <el-select v-model="proId" placeholder="请选择产品名称">
               <p style="height: 34px;line-height: 34px;padding: 0 20px;font-size: 14px;background: #eee;">
@@ -36,38 +36,41 @@
               </el-option>
             </el-select>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <span class="keywordText">任务节点</span>
             <el-select v-model="taskNodeName" placeholder="请选择">
               <el-option v-for="item in taskNodes" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </el-col>
-        </el-row>
-        <el-row class="row row3" type="flex">
-          <el-col :span="8" v-if="routerState!=='03'">
+          <el-col :span="6" v-if="routerState!=='03'">
             <span class="keywordText">任务类型</span>
             <el-select v-model="taskType" placeholder="请选择">
               <el-option v-for="item in taskTypes" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <span class="keywordText">当前处理人员</span>
             <el-input @keyup.enter.native="getByKey" v-model.trim="operatorCode" placeholder="请输入当前处理人员"></el-input>
           </el-col>
-          <el-col :span="8" v-if="routerState!=='03'">
+        </el-row>
+        <el-row class="row row3" type="flex">
+   <el-col :span="6"> </el-col>
+   <el-col :span="6"> </el-col>
+   <el-col :span="6"> </el-col>
+          <el-col :span="6" v-if="routerState!=='03'">
             <el-button class="btn query" type="primary" @click="getByKey">查询</el-button>
             <el-button type="primary" class="btn reset" @click="reset">重置</el-button>
           </el-col>
-          <el-col :span="8" :offset="8" v-else>
+          <el-col :span="6" :offset="8" v-else>
             <el-button class="btn query" type="primary" @click="getByKey">查询</el-button>
             <el-button type="primary" class="btn reset" @click="reset">重置</el-button>
           </el-col>
         </el-row>
       </div>
       <!-- 列表 -->
-      <div class="title titleContainer">
+      <div class="title titleContainer edit-div">
         <span class="titleText">流程查询</span>
         <span class="iconContainer">
           <span class="icon-item" @click="handleItem('trace')">
@@ -85,7 +88,7 @@
         </span>
       </div>
       <div class="listContainer">
-        <el-table :data="moniList" height="400" border show-header highlight-current-row @selection-change="handleSelectionChange"
+        <el-table :data="moniList" height="510" border show-header highlight-current-row @selection-change="handleSelectionChange"
           @row-click="selectRow">
           <el-table-column type="index" label="序号" width="50">
           </el-table-column>

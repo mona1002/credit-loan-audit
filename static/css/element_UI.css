@@ -2936,3 +2936,7 @@ font-size: 12px;
   padding-left: 5px;
   padding-right:5px;
 }
+
+.newContent p span .el-input{
+  width:190px;
+}

@@ -1,64 +1,63 @@
 <template>
-  <!-- <div class="AntiCaseNum IntegratedQuery regularConfig"> -->
-  <div class="regularConfig">
+  <div class="taskWatting main-div">
     <!-- 质检  功能页面 常规抽单配置功能===============出了任务分配按钮 -->
-    <myHead></myHead>
-    <div class="content">
-      <div class="title">
-        <h1>质检规则设置查询</h1>
-        <div class="icon_wrap">
-          <span  @click="addInf">
-            <img src="../../../../static/images/add.png" style="margin:10px;">
-            <span class="span-text">添加</span>
-          </span>
-          <span  @click="apportion">
-            <img src="../../../../static/images/add.png">
-            <span class="span-text">任务分派</span>
-          </span>
-        </div>
-      </div>
-      <div class="table_wrap">
-        <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" height="100%" border>
-          <el-table-column type="index" align='center' label=序号 width="55">
-          </el-table-column>
-          <el-table-column prop="drawSheetTypeTxt" label="抽单类型" align='center' min-width="100">
-          </el-table-column>
-          <el-table-column prop="recentDays" label="质检天数" align='center' min-width="120">
-          </el-table-column>
-          <el-table-column label="抽单比例[每人]" align='center' min-width="180">
-            <template slot-scope='scope'>
-              <span>{{scope.row.makeRatio | percent}}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="通过比例[每人]" align='center' min-width="100">
-            <template slot-scope='scope'>
-              <span>{{scope.row.passRatio | percent}}</span>
-            </template>
-          </el-table-column>
-          <el-table-column prop="minPassNum" label="通过件最低抽单件数[人·件]" align='center' min-width="130">
-          </el-table-column>
-          <el-table-column prop="refuseRatio" label="拒绝比例[每人]" align='center' min-width="140">
-            <template slot-scope='scope'>
-              <span> {{scope.row.refuseRatio | percent}}</span>
-            </template>
-          </el-table-column>
-          <el-table-column prop="minRefuseNum" label="拒绝件最低抽单件数[人·件]" align='center' min-width="100">
-          </el-table-column>
-          <el-table-column prop="creator" label="创建人" align='center' min-width="120">
-          </el-table-column>
-          <el-table-column label="创建日期" align='center' min-width="100">
-            <template slot-scope='scope'>
-              <span>{{scope.row.createTime | dateFilter}}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="操作" align="center" min-width='120'>
-            <template slot-scope="scope">
-              <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
+    <div class="title titleContainer edit-div">
+      <span class="titleText">
+        <i class="el-icon title-icon"></i>
+        质检规则设置查询
+      </span>
+      <span class="iconContainer">
+        <span class="icon-item" @click='addInf'>
+          <i class="el-icon addIcon"></i>
+          <span class="el-icon-text">添加</span>
+        </span>
+        <span class="icon-item" @click='apportion'>
+          <i class="el-icon addIcon"></i>
+          <span class="el-icon-text">任务分派</span>
+        </span>
+      </span>
+    </div>
+    <div class="listContainer">
+      <!-- 编辑table -->
+      <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row border>
+        <el-table-column type="index" align='center' label=序号 width="55">
+        </el-table-column>
+        <el-table-column prop="drawSheetTypeTxt" label="抽单类型" align='center' min-width="100">
+        </el-table-column>
+        <el-table-column prop="recentDays" label="质检天数" align='center' min-width="120">
+        </el-table-column>
+        <el-table-column label="抽单比例[每人]" align='center' min-width="180">
+          <template slot-scope='scope'>
+            <span>{{scope.row.makeRatio | percent}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="通过比例[每人]" align='center' min-width="100">
+          <template slot-scope='scope'>
+            <span>{{scope.row.passRatio | percent}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="minPassNum" label="通过件最低抽单件数[人·件]" align='center' min-width="130">
+        </el-table-column>
+        <el-table-column prop="refuseRatio" label="拒绝比例[每人]" align='center' min-width="140">
+          <template slot-scope='scope'>
+            <span> {{scope.row.refuseRatio | percent}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="minRefuseNum" label="拒绝件最低抽单件数[人·件]" align='center' min-width="100">
+        </el-table-column>
+        <el-table-column prop="creator" label="创建人" align='center' min-width="120">
+        </el-table-column>
+        <el-table-column label="创建日期" align='center' min-width="100">
+          <template slot-scope='scope'>
+            <span>{{scope.row.createTime | dateFilter}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作" align="center" min-width='120' fixed="right">
+          <template slot-scope="scope">
+            <el-button class="btn-sm edit" size="small" type="text" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
     </div>
     <!-- ==============================任务分配=================================== -->
     <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
@@ -157,7 +156,6 @@
                 <b class="required_Red"> * </b>质检天数：</label>
               <span>
                 <el-input v-model="updateInf.recentDays" placeholder="请输入质检天数" @blur="Num('质检天数-编辑',updateInf.recentDays)"> </el-input> 天</span>
-              <!-- <el-input v-model="recentDays" placeholder="请输入质检天数" @blur="Num('质检天数-编辑',updateInf.recentDays)"> </el-input> 天</span> -->
             </p>
             <p>
               <label></label>
@@ -226,10 +224,87 @@
         <el-button class="subtn" type="primary" :loading="loadsitu" @click="SaveEdit">{{adbtn}}</el-button>
       </span>
     </el-dialog>
+    <!-- ==============================编辑=================================== -->
+    <!-- <el-dialog title="质检规则编辑" :modal="false" :visible.sync="Edit" width="920px">
+      <div class="newContent">
+        <ul>
+          <li>
+            <p>
+              <label>
+                <b class="required_Red"> * </b>质检天数：</label>
+              <span>
+                <el-input v-model="updateInf.recentDays" placeholder="请输入质检天数" @blur="Num('质检天数-编辑',updateInf.recentDays)"> </el-input> 天</span>
+            </p>
+            <p>
+              <label></label>
+              <span></span>
+            </p>
+          </li>
+          <li>
+            <p>
+              <label>
+                <b class="required_Red"> * </b>抽单类型：</label>
+              <span>
+                <el-select v-model="updateInf.drawSheetType" placeholder="请选择">
+                  <el-option v-for=" item in QTSituation" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+                </el-select>
+              </span>
+            </p>
+            <p>
+              <label>
+                <b class="required_Red"> * </b>抽单比例[每人]：</label>
+              <span>
+                <el-input v-model="updateInf.makeRatio" placeholder="请输入抽单比例" @blur="Num('抽单比例-编辑',updateInf.makeRatio)"> </el-input> %</span>
+            </p>
+          </li>
+          <li>
+            <p>
+              <label>
+                <b class="required_Red"> * </b>通过比例[每人]：</label>
+              <span>
+                <el-input v-model="updateInf.passRatio" placeholder="请输入通过比例" @blur="Num('通过比例-编辑',updateInf.passRatio)"> </el-input> %</span>
+            </p>
+            <p>
+              <label>
+                <b class="required_Red"> * </b>通过件最低抽单件数[人·件]：</label>
+              <span>
+                <el-input v-model="updateInf.minPassNum" placeholder="请输入最低抽单件数" @blur="Num('通过件最低抽单件数-编辑',updateInf.minPassNum)"> </el-input> 件</span>
+            </p>
+          </li>
+          <li>
+            <p>
+              <label>
+                <b class="required_Red"> * </b>拒绝比例[每人]：</label>
+              <span>
+                <el-input v-model="updateInf.refuseRatio" placeholder="请输入拒绝比例" @blur="Num('拒绝比例-编辑',updateInf.refuseRatio)"> </el-input> %</span>
+            </p>
+            <p>
+              <label>
+                <b class="required_Red"> * </b>拒绝件最低抽单件数[人·件]：</label>
+              <span>
+                <el-input v-model="updateInf.minRefuseNum" placeholder="请输入最低抽单件数" @blur="Num('拒绝件最低抽单件数-编辑',updateInf.minRefuseNum)"> </el-input> 件</span>
+            </p>
+          </li>
+          <li class="colorGray">
+            <p>
+              <label>创建人：</label>
+              <span>{{ updateInf.creator }}</span>
+            </p>
+            <p>
+              <label>创建日期：</label>
+              <span>{{ createTime| dateFilter }}</span>
+            </p>
+          </li>
+        </ul>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button class="calbtn" @click="canc">取消</el-button>
+        <el-button class="subtn" type="primary" :loading="loadsitu" @click="SaveEdit">{{adbtn}}</el-button>
+      </span>
+    </el-dialog> -->
   </div>
 </template>
 <script>
-  import myHead from '../../header.vue';
   import baseU from '../../../util/constant';
   export default {
     data() {
@@ -414,7 +489,8 @@
         }
         //  this.addNew.drawSheetType == '01' ? this.proficiencyCount++ : ''; //熟悉
         //     this.addNew.drawSheetType == '02' ? this.newOneCount++ : ''; //新人
-        if ( (this.addNew.drawSheetType == '01'&&this.proficiencyCount > 0)||(this.addNew.drawSheetType == '02'&&this.newOneCount > 0) ) {//熟悉
+        if ((this.addNew.drawSheetType == '01' && this.proficiencyCount > 0) || (this.addNew.drawSheetType == '02' &&
+            this.newOneCount > 0)) { //熟悉
           this.$message.error(' 抽单类型设置重复！');
           return
         }
@@ -508,14 +584,11 @@
       this.getListInf(); //查询
       this.getSystemDate(); //调用系统时间
     },
-    components: {
-      myHead
-    }
   }
 
 </script>
 <style scoped>
-  .regularConfig {
+  .taskWatting {
     width: 100%;
     background-color: #fafbfc;
     overflow-y: auto;
@@ -524,14 +597,14 @@
     height: 100%;
   }
 
-  .regularConfig label {
+  .taskWatting label {
     font-size: 14px;
     color: #475669;
     text-align: right;
     display: inline-block;
   }
 
-  .regularConfig i {
+  .taskWatting i {
     color: #ff7676;
     font-weight: 700;
     font-size: 16px;
@@ -539,75 +612,7 @@
     font-style: normal;
   }
 
-  .content {
-    padding: 30px 30px;
-    width: 100%;
-    height: calc( 100% - 100px);
-    /* 统一导航 */
-    /* height: 100%; */
-  }
-
-  .noBk {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .title {
-    opacity: 0.75;
-    background: #ebedf8;
-    border-radius: 6px;
-    width: 100%;
-    height: 50px;
-    font-size: 16px;
-  }
-
-  .title h1 {
-    color: #1f2d3d;
-    padding-left: 37px;
-    text-align: left;
-    line-height: 50px;
-    padding-right: 37px;
-    float: left;
-  }
-
-  .icon_wrap {
-    float: right;
-    height: 50px;
-    vertical-align: middle;
-    line-height: 50px;
-  }
-
-  .icon_wrap span {
-    display: inline-block !important;
-    margin-right: 5px;
-    vertical-align: middle;
-    cursor: pointer;
-  }
-
-  .icon_wrap span img {
-    vertical-align: middle;
-  }
-
   /* 综合查询页面加上分页pad-bottom 改为20px*/
-
-  .table_wrap {
-    background-color: #ffffff;
-    border: 1px solid #e6eaee;
-    padding: 25px 25px 20px 25px;
-    width: 100%;
-    height: calc( 100% - 50px);
-  }
-
-  .paging {
-    text-align: center;
-    /* 统一导航 */
-    margin-top: 28px;
-  }
-
-  .emerColor {
-    color: #0077ff;
-  }
 
   .newContent {
     height: 230px;
@@ -625,6 +630,11 @@
 
   .newContent p:nth-of-type(even) label {
     width: 210px;
+  }
+
+  .newContent p span {
+    width: 210px;
+    display: inline-block;
   }
 
   .colorGray p label,

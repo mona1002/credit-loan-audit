@@ -1,69 +1,102 @@
 <template>
   <!-- 复议结果查询功能==产品接口调信审审批的16. -->
   <!-- <div class="reconsiderResult"> -->
-  <div class="AntiCaseNum IntegratedQuery">
-    <myHead></myHead>
-    <div class="content">
+    <div class="taskWatting main-div">
       <div class="search">
-        <ul>
-          <li>
-            <p>
               <label> 进件编号 </label>
-              <el-input v-model="params.dataParam.applySubNo" placeholder="请输入进件编号"></el-input>
-            </p>
-            <p>
               <label> 客户名称</label>
-              <el-input v-model="params.dataParam.custName" placeholder="请输入客户名称"></el-input>
-            </p>
-            <p>
               <label> 产品名称</label>
-              <el-select v-model="params.dataParam.proCode" placeholder="请选择">
+              <label> 质检状态</label>
+              <label> 初审人员</label>
+              <label> 终审日期</label>
+              <label> 终审人员 </label>
+              <label> 质检日期</label>
+             
+              <el-button class="btn" type="primary" style="marginLeft:228px" @click="Rsearch">查询</el-button>
+              <el-button class="btn" type="primary" @click="Rreset">重置</el-button>
+      </div>
+
+
+<div class="taskWinput search-div">
+      <el-row class="row row1" type="flex">
+        <el-col :span="6" class="search-item" :offset="0">
+          <span class="keywordText">进件编号： </span>
+          <el-input v-model="params.dataParam.applySubNo" placeholder="请输入进件编号"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">客户名称：</span>
+           <el-input v-model="params.dataParam.custName" placeholder="请输入客户名称"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">产品名称：</span>
+        <el-select v-model="params.dataParam.proCode" placeholder="请选择">
                 <el-option v-for="item in ProductName" :key="item.proCode" :label="item.proName" :value="item.proCode">
                 </el-option>
               </el-select>
-            </p>
-          </li>
-          <li>
-            <p>
-              <label> 质检状态</label>
-              <el-select v-model="params.dataParam.checkState" placeholder="请选择">
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">质检状态：</span>
+          <el-select v-model="params.dataParam.checkState" placeholder="请选择">
                 <el-option v-for="item in QTSituation" :key="item.code" :label="item.name" :value="item.code">
                 </el-option>
               </el-select>
-            </p>
-            <p>
-              <label> 初审人员</label>
-              <el-input v-model="params.dataParam.auditNamec" placeholder="请输入初审人员"></el-input>
-            </p>
-            <p>
-              <label> 终审日期</label>
-              <el-date-picker v-model="params.dataParam.auditDatez"  type="date" value-format="yyyy-MM-dd">
+        </el-col>
+      </el-row>
+      <el-row class="row row2" type="flex">
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">初审人员：</span>
+         <el-input v-model="params.dataParam.auditNamec" placeholder="请输入初审人员"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">终审日期:</span>
+                <el-date-picker v-model="params.dataParam.auditDatez"  type="date" value-format="yyyy-MM-dd">
               </el-date-picker>
-            </p>
-          </li>
-          <li>
-            <p>
-              <label> 终审人员 </label>
+        </el-col>
+        <el-col :span="6" class="search-item">
+             <span class="keywordText">终审人员:</span>
               <el-input v-model="params.dataParam.auditNamez" placeholder="请输入终审人员"></el-input>
-            </p>
-            <p>
-              <label> 质检日期</label>
-              <el-date-picker v-model="QTtime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"  value-format="yyyy-MM-dd">
+        </el-col>
+    <el-col :span="6" class="search-item">
+             <span class="keywordText">质检日期:</span>
+               <el-date-picker v-model="QTtime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"  value-format="yyyy-MM-dd">
               </el-date-picker>
-            </p>
-            <p>
-              <el-button class="btn" type="primary" style="marginLeft:228px" @click="Rsearch">查询</el-button>
-              <el-button class="btn" type="primary" @click="Rreset">重置</el-button>
-            </p>
-          </li>
-        </ul>
-      </div>
-      <div class="title">
+        </el-col>
+        
+        <el-col :span="6" class="search-btn">
+          <el-button class="btn query" type="primary" @click="Rsearch">查询</el-button>
+          <el-button class="btn reset" @click="Rreset">重置</el-button>
+        </el-col>
+      </el-row>
+        
+      <el-row class="row row3" type="flex">
+        <el-col :span="6" class="search-item">
+        </el-col>
+        <el-col :span="6" class="search-item">
+        </el-col>
+        <el-col :span="6" class="search-item">
+        </el-col>
+        <el-col :span="6" class="search-btn">
+          <el-button class="btn query" type="primary" @click="Rsearch">查询</el-button>
+          <el-button class="btn reset" @click="Rreset">重置</el-button>
+        </el-col>
+</el-row>
+    </div>
+
+
+      <!-- <div class="title">
         <h1>复议结果查询</h1>
-      </div>
-      <div class="table_wrap">
+      </div> -->
+
+        <div class="title titleContainer edit-div">
+      <span class="titleText">
+        <i class="el-icon title-icon"></i>
+        复议结果查询
+      </span>
+    </div>
+
+      <div class="listContainer">
         <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" @row-dblclick="handleCurrentChange" border>
+        <el-table :data="tableData" style="width: 100%"  height="510"  highlight-current-row @row-dblclick="handleCurrentChange" border>
           <!-- <el-table-column type="index" align='center' label=序号 width="55">
           </el-table-column> -->
           <el-table-column prop="applySubNo" label="进件编号" align='center' min-width="180">
@@ -98,11 +131,9 @@
           </el-pagination>
         </div>
       </div>
-    </div>
   </div>
 </template>
 <script>
-  import myHead from '../../header.vue';
   import baseU from '../../../util/constant';
   export default {
     data() {
@@ -227,130 +258,28 @@
       //  this.params.pageParam.pageNum = this.currentPage = 1;
       //     this.params.pageSize = this.pageCount, //页面显示行数
     },
-    components: {
-      myHead
-    }
   }
 
 </script>
 <style scoped>
-  .AntiCaseNum {
+ .taskWatting {
     width: 100%;
+    height: calc( 100% - 90px);
     background-color: #fafbfc;
     overflow-y: auto;
     overflow-x: hidden;
-    /* 统一导航 --去掉高度*/
-    height: 100%;
-    min-width: 1366px;
   }
-
-  .AntiCaseNum label {
-    font-size: 14px;
-    color: #475669;
-    text-align: right;
-    display: inline-block;
-    width: 126px;
-    height: 20px;
-    margin-right: 10px;
-  }
-
-  .AntiCaseNum i {
-    color: #ff7676;
-    font-weight: 700;
-    font-size: 16px;
-    vertical-align: middle;
-    font-style: normal;
-  }
-
-  .content {
-    padding: 30px 30px;
-    width: 100%;
-    height: calc( 100% - 70px);
-    /* 统一导航 */
-    /* height: 100%; */
-  }
-
-  .search {
+    .taskWatting .taskWinput {
     background-color: #ffffff;
     border: 1px solid #e6eaee;
     margin-bottom: 20px;
-    padding-bottom: 20px;
-    height: auto;
   }
 
-  .search li {
-    clear: both;
-    height: 55px;
-  }
+  /* 分页 */
 
-  .search li p {
-    width: 33.3%;
-    float: left;
-    margin-top: 20px;
-  }
-
-  .btn_wrap {
-    margin-top: 20px;
-    height: 33px;
-    width: calc( 66.6% + 394px);
-  }
-
-  .btn {
-    border-radius: 8px;
-    width: 79px;
-    font-size: 14px;
-    line-height: 33px;
-    padding: 0;
-  }
-
-  .noBk {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .title {
-    opacity: 0.75;
-    background: #ebedf8;
-    border-radius: 6px;
-    width: 100%;
-    height: 50px;
-  }
-
-  .title h1 {
-    font-size: 16px;
-    color: #1f2d3d;
-    padding-left: 37px;
-    text-align: left;
-    line-height: 50px;
-    padding-right: 37px;
-  }
-
-  .icon {
-    margin-right: 5px;
-    vertical-align: middle;
-    font-size: 30px;
-  }
-
-  /* 综合查询页面加上分页pad-bottom 改为20px*/
-
-  .table_wrap {
-    background-color: #ffffff;
-    border: 1px solid #e6eaee;
-    padding: 25px 25px 40px 25px;
-    width: 100%;
-    /* height: calc( 100% - 370px); */
-  }
-
-  .paging {
-    /* margin-top: 15px; */
+  .page {
     text-align: center;
-    /* 统一导航 */
-    margin-top: 28px;
-  }
-
-  .emerColor {
-    color: #0077ff;
+    margin-top: 20px;
   }
 
 </style>
