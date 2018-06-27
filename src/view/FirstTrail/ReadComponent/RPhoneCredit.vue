@@ -137,7 +137,6 @@
           <!-- </el-header> -->
           <!-- 表单部分 -->
           <div class="form-class" style="width:100%;height:auto;">
-            {{hisShow}}
             <!-- 默认的新增表单 -->
             <!-- 住址电话 - 表单 -->
             <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull"></AddressForm>
