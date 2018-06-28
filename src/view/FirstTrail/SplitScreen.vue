@@ -197,6 +197,8 @@
           this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
           this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
           this.$refs.right_tab_ul.style.left = "0";
+          console.log(this.$refs.right_tab_ul.style.left)
+          console.log(this.$refs.right_tab_ul)
           this.DblScreen();
           // if (this.tabActiveInd1 === 0) {
           //   this.$refs.AudioLeft.mountedInf();
@@ -237,6 +239,8 @@
         this.CompareAlert = false;
       },
       leftMovingBtn() {
+        console.log('left')
+           console.log(this.$refs.right_tab_ul.style.left)
         if (parseFloat(this.$refs.right_tab_ul.style.left) >= 0) {
           this.$refs.right_tab_ul.style.left = "0"
         } else {
@@ -244,6 +248,7 @@
         }
       },
       rightMovingBtn() {
+        console.log('right')
         if (parseFloat(this.$refs.right_tab_ul.style.left) <= -500) {
           this.$refs.right_tab_ul.style.left = "-500px";
         } else {
@@ -361,40 +366,8 @@
       }
     },
     // activated() {
-    //   console.log(this.$route.meta.refresh)
-    //   console.log('activated')
-    //   if (this.$route.meta.refresh) {
-    //     this.mountedInf();
-    //     this.tab1Index = this.tabActiveInd1 = this.tabContent1 = 0;
-    //     this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 3;
-    //     this.flag1 = [true, true, true, false, true, true, true, true, true];
-    //     this.flag2 = [true, true, true, true, true, true, true, true, true, true];
-    //   }
-    //   //  // 恢复成默认的false，避免isBack一直是true，导致下次无法获取数据
-    //   //  this.$route.meta.isBack=false
-    //   //  // 恢复成默认的false，避免isBack一直是true，导致每次都获取新数据
-    //   //  this.isFirstEnter=false;
-    // },
     // deactivated(){
-    // console.log('deactivated')
-    // console.log( this.tabContent2)
-    //   //  if( this.tabContent2==3){
-    //   // //     // this.destroyInf=
-    //   //     this.tabContent2=0;
-    //   //   }
-    //     // else{
-    //     //   this.destroyInf=this.tabContent2;
-    //     // }
-    // },
     // beforeRouteLeave(to,from,next){
-    // console.log( this.tabContent2)
-
-    //   //  this.tabContent2==3? this.tabContent2=0:this.tabContent2;
-    // console.log(to)
-    // console.log(from)
-    // // from.meta.refresh=false;
-    // next();
-    // },
     mounted() {
       this.title = "影像资料";
       this.MyMove();
