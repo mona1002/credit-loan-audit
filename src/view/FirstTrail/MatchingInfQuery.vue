@@ -50,7 +50,7 @@
               <RantiFraudInvestigation v-if=" this.tabContent1==9" :isShow='true' :applyId='tastwaitingPass.matchApplyId'>反欺诈调查</RantiFraudInvestigation>
               <RFinanceInformation v-if=" this.tabContent1==10">账务信息</RFinanceInformation>
               <RprocessTrajectory v-if=" this.tabContent1==11">流程轨迹</RprocessTrajectory>
-              <RApprovalConclusion v-if=" this.tabContent1==11">审批结论轨迹</RApprovalConclusion>
+              <RApprovalConclusion v-if=" this.tabContent1==12">审批结论轨迹</RApprovalConclusion>
             </div>
           </div>
         </div>
