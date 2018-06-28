@@ -87,7 +87,7 @@
           </el-table-column>
         </el-table>
         <!-- 分页  -->
-        <div class="paging">
+        <div class="page">
           <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
             :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
           </el-pagination>
@@ -97,7 +97,6 @@
   </div>
 </template>
 <script>
-  import myHead from '../../header.vue';
   import baseU from '../../../util/constant';
   export default {
     data() {
@@ -225,122 +224,6 @@
         this.getProducts();
       this.getInf(this.params);
     },
-    components: {
-      myHead
-    }
   }
 
 </script>
-<style scoped>
-  .AntiCaseNum {
-    width: 100%;
-    height: 100%;
-    background-color: #fafbfc;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-
-  .AntiCaseNum label {
-    font-size: 14px;
-    color: #475669;
-    text-align: right;
-    display: inline-block;
-    width: 126px;
-    height: 20px;
-    margin-right: 10px;
-  }
-
-  .AntiCaseNum i {
-    color: #ff7676;
-    font-weight: 700;
-    font-size: 16px;
-    vertical-align: middle;
-    font-style: normal;
-  }
-
-  .content {
-    padding: 30px 30px;
-    width: 100%;
-    height: calc( 100% - 70px);
-  }
-
-  .search {
-    background-color: #ffffff;
-    border: 1px solid #e6eaee;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    height: auto;
-  }
-
-  .search li {
-    clear: both;
-    height: 55px;
-  }
-
-  .search li p {
-    width: 33.3%;
-    float: left;
-    margin-top: 20px;
-  }
-
-  .btn_wrap {
-    margin-top: 20px;
-    height: 33px;
-    width: calc( 66.6% + 394px);
-  }
-
-  .btn {
-    border-radius: 8px;
-    width: 79px;
-    font-size: 14px;
-    line-height: 33px;
-    padding: 0;
-  }
-
-  .noBk {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .title {
-    opacity: 0.75;
-    background: #ebedf8;
-    border-radius: 6px;
-    width: 100%;
-    height: 50px;
-  }
-
-  .title h1 {
-    font-size: 16px;
-    color: #1f2d3d;
-    padding-left: 37px;
-    text-align: left;
-    line-height: 50px;
-    padding-right: 37px;
-  }
-
-  .icon {
-    margin-right: 5px;
-    vertical-align: middle;
-    font-size: 30px;
-  }
-
-  .table_wrap {
-    background-color: #ffffff;
-    border: 1px solid #e6eaee;
-    padding: 25px 25px 60px 25px;
-    width: 100%;
-    height: calc( 100% - 255px);
-  }
-
-  .paging {
-    margin-top: 15px;
-    text-align: center;
-  }
-
-  .emerColor {
-    color: #0077ff;
-  }
-
-</style>

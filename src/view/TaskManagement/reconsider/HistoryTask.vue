@@ -42,12 +42,12 @@
           </el-date-picker>
         </el-col>
         <el-col :span="6" class="search-btn">
-          <el-button class="btn query" type="primary" @click="getByKey">查询</el-button>
-          <el-button class="btn reset" @click="reset">重置</el-button>
+          <el-button class="btn query" type="primary" @click="Rreset">查询</el-button>
+          <el-button class="btn reset" @click="Rsearch">重置</el-button>
         </el-col>
       </el-row>
     </div>
-           <div class="title titleContainer edit-div">
+    <div class="title titleContainer edit-div">
       <span class="titleText">
         <i class="el-icon title-icon"></i>
         复议-历史任务列表
@@ -55,7 +55,7 @@
     </div>
     <div class="listContainer">
       <!-- 编辑table -->
-      <el-table :data="tableData" style="width: 100%" height="510"  highlight-current-row border>
+      <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row border>
         <el-table-column type="index" align='center' label=序号 width="45">
         </el-table-column>
         <el-table-column label="紧急程度" align='center' min-width="70">
@@ -86,13 +86,12 @@
         </el-table-column>
       </el-table>
       <!-- 分页  -->
-      <div class="paging">
+      <div class="page">
         <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
           :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
         </el-pagination>
       </div>
     </div>
-  </div>
   </div>
 </template>
 <script>
