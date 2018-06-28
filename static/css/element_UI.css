@@ -20,44 +20,7 @@
   font-weight: 800;
 }
 
-/* .Abody .el-input{
-width:200px;
-} */
-
-/* .Abody .el-input__inner{
-width:200px;
-} */
-
-/* .Abody el-select-dropdown__item{
-float:none;
-}
-.Abody .el-select-dropdown__item{
-float:none;
-} */
-
-/* 公用 表格 表头 th */
-
-/* 放款信息 信审审结论轨迹  */
-
-/* .FinanceInformation .el-table__header-wrapper tr{
-height: 40px;
-}
-.FinanceInformation .el-table .cell{
-     line-height: 23px;
-} */
-
-.FinanceInformation .el-table .cell,
-.ApprovalConclusion .el-table .cell {
-  /* line-height: 23px; */
-  /* text-align: center; */
-}
-
 /* 信审审批结论轨迹 th全部居中 */
-
-/* .ApprovalConclusion .el-table th.is-center {
-  text-align: center;
-} */
-
 .ApprovalConclusion .el-table th .cell {
   font-weight: 800;
   color: #909399;
@@ -140,14 +103,9 @@ height: 40px;
   margin-right: 12px;
 }
 
-.applicationInformationDetail .el-table__body-wrapper {
-  /* overflow: hidden; */
-}
-
 /*申请信息详情 表格 */
 
 .applicationInformationDetail .el-table th {
-  /*  text-align: center; */
   font-weight: 400;
   color: #1f2d3d;
   font-size: 14px;
@@ -160,7 +118,6 @@ height: 40px;
 }
 
 .applicationInformationDetail .el-table__body-wrapper .el-table__body td {
-  /* text-align: center; */
   font-weight: 400;
   color: #909399;
   font-size: 13px;
@@ -208,11 +165,6 @@ height: 40px;
   overflow: hidden;
 }
 
-/* @media screen and (min-width: 1327px){
-   .applicationInformationDetail .house .el-table__body-wrapper{
-     overflow: hidden;
-   }
- } */
 
 /* 车辆信息 序号、购买时间 居中 */
 
@@ -255,12 +207,6 @@ height: 40px;
 .applicationInformationDetail .people .el-table__body-wrapper {
   overflow: hidden;
 }
-
-/* @media screen and (min-width: 1327px){
-   .applicationInformationDetail .people .el-table__body-wrapper{
-     overflow: hidden;
-   }
- } */
 
 /*申请信息 表格去掉overflow:hidden; */
 
@@ -335,7 +281,6 @@ height: 40px;
 /* 借款人资料表格内容居中 */
 
 .borrowerInformation .el-table th {
-  /* text-align: center; */
   font-weight: 400;
   color: #1f2d3d;
   font-size: 14px;
@@ -359,7 +304,6 @@ height: 40px;
 }
 
 .borrowerInformation .el-table__body-wrapper .el-table__body td {
-  /* text-align: center; */
   font-weight: 400;
   color: #666666;
   font-size: 14px;
@@ -2800,8 +2744,6 @@ body .el-submenu .el-menu-item {
 .IntegratedQuery .el-table__body-wrapper {
   overflow-x: auto;
 }
-
-/* .IntegratedQuery .paging .el-pagination__jump .el-input{ */
 
 .IntegratedQuery .el-pagination__jump .el-input {
   width: 50px;

@@ -1,6 +1,5 @@
 <template>
   <!-- 专纵项抽单配置功能===业务状态接口-基础接口4 -->
-  <!-- <div class="batchApportion"> -->
   <div class="AntiCaseNum IntegratedQuery">
     <myHead></myHead>
     <div class="content">
