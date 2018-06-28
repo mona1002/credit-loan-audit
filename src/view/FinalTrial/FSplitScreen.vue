@@ -192,10 +192,7 @@
           this.$refs.AudioLeftCom ? this.$refs.AudioLeftCom.mountedInf() : '';
           this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
           this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
-          // this.$refs.right_tab_ul.style.left = 0;
-        this.$refs.right_tab_ul.style.left = "0";
-          console.log( this.$refs.right_tab_ul.style.left )
-          console.log('new')
+          this.$refs.right_tab_ul.style.left='0';
            this.DblScreen();
         }
       }
@@ -259,7 +256,7 @@
       },
       FullScreen() {
         this.showHalfBtn = true;
-        this.originLeft = this.$refs.right_tab_ul.style.left;
+        // this.originLeft = this.$refs.right_tab_ul.style.left;
         this.$refs.right_tab_ul.style.left = "0";
         this.$refs.rLeft.style.display = "none";
         this.watchData = this.$refs.rRight.style.width = "100%";
@@ -270,7 +267,7 @@
       },
       DblScreen() {
         this.showHalfBtn = false;
-        this.$refs.right_tab_ul.style.left = this.originLeft;
+        // this.$refs.right_tab_ul.style.left = this.originLeft;
         this.$refs.rLeft.style.display = "block";
         this.watchData = this.$refs.rRight.style.width = this.$refs.rLeft.style.width = this.$refs.RM.style.left =
           "calc(50% - 2px)";

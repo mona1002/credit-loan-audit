@@ -262,7 +262,7 @@
       },
       FullScreen() {
         this.showHalfBtn = true;
-        this.originLeft = this.$refs.right_tab_ul.style.left;
+        // this.originLeft = this.$refs.right_tab_ul.style.left;
         this.$refs.right_tab_ul.style.left = "0";
         this.$refs.rLeft.style.display = "none";
         this.watchData = this.$refs.rRight.style.width = "100%";
@@ -273,7 +273,7 @@
       },
       DblScreen() {
         this.showHalfBtn = false;
-        this.$refs.right_tab_ul.style.left = this.originLeft;
+        // this.$refs.right_tab_ul.style.left = this.originLeft;
         this.$refs.rLeft.style.display = "block";
         this.$refs.rRight.style.width = this.$refs.rLeft.style.width = this.$refs.RMQ.style.left = this.watchData =
           "calc(50% - 2px)";

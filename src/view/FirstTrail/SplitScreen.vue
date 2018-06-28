@@ -197,30 +197,7 @@
           this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
           this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
           this.$refs.right_tab_ul.style.left = "0";
-          console.log(this.$refs.right_tab_ul.style.left)
-          console.log(this.$refs.right_tab_ul)
           this.DblScreen();
-          // if (this.tabActiveInd1 === 0) {
-          //   this.$refs.AudioLeft.mountedInf();
-          //   this.$refs.AudioLeftCom ? this.$refs.AudioLeftCom.mountedInf() : '';
-          //   this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
-          // }
-          //         this.tabActiveInd1 === 1 ? this.$refs.markLeft.mountedInf() : '';
-          //          this.tabActiveInd1 === 2 ? this.$refs.InterLeft.mountedInf() : '';
-          //          this.tabActiveInd1 === 3 ? this.$refs.applicationLeft.mountedInf() : '';
-          //          this.tabActiveInd1 === 4 ? this.$refs.borrowLeft.mountedInf() : '';
-          //          this.tabActiveInd1 === 5 ? this.$refs.phoneLeft.mountedInf() : '';
-          //          this.tabActiveInd1 === 6 ? this.$refs.CreditFormLeft.mountedInf() : '';
-          //          this.tabActiveInd1 === 7 ? this.$refs.InvestigationLeft.mountedInf() : '';
-          //          this.tabActiveInd1 === 8 ? this.$refs.processLeft.mountedInf() : '';
-          //         this.tabActiveInd2 === 0 ? this.$refs.Audio.mountedInf() : '';
-          // this.tabActiveInd2 === 3 ? this.$refs.applicationInf.mountedInf() : '';
-          //          this.tabActiveInd2 === 4 ? this.$refs.borrow.mountedInf() : '';
-          // this.tabActiveInd2 === 5 ? this.$refs.phone.mountedInf() : '';
-          // this.tabActiveInd2 === 6 ? this.$refs.CreditForm.mountedInf() : '';
-          // this.tabActiveInd2 === 7 ? this.$refs.Investigation.mountedInf() : '';
-          // this.tabActiveInd2 === 8 ? this.$refs.AntiApply.mountedInf() : '';
-          // this.tabActiveInd2 === 9 ? this.$refs.Approval.mountedInf() : '';
         }
       }
     },
@@ -239,8 +216,6 @@
         this.CompareAlert = false;
       },
       leftMovingBtn() {
-        console.log('left')
-           console.log(this.$refs.right_tab_ul.style.left)
         if (parseFloat(this.$refs.right_tab_ul.style.left) >= 0) {
           this.$refs.right_tab_ul.style.left = "0"
         } else {
@@ -248,7 +223,6 @@
         }
       },
       rightMovingBtn() {
-        console.log('right')
         if (parseFloat(this.$refs.right_tab_ul.style.left) <= -500) {
           this.$refs.right_tab_ul.style.left = "-500px";
         } else {
