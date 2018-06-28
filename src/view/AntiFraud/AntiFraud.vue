@@ -199,6 +199,13 @@
       // 反欺诈申请 - 列表
       this.queryList();
     },
+    watch: {
+      '$route' (to, from) {
+        if (to.path === '/AntiFraud') {
+          this.queryList();
+        }
+      }
+    },
     methods: {
       // 请求列表
       queryList() {
