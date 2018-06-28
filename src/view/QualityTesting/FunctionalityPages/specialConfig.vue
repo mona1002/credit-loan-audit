@@ -11,7 +11,7 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">进件机构：</span>
-          <el-select v-model="params.operOrgCodes" multiple placeholder="请选择">
+          <el-select v-model="params.operOrgCodes" multiple  collapse-tags placeholder="请选择">
             <el-option v-for="item in shopCodesSelection" :key="item.code" :label="item.name" :value="item.code">
               <span style="float: left">{{ item.name }}</span>
               <span style="float: right; color: #8492a6; font-size: 13px">{{ item.code }}</span>
@@ -24,7 +24,7 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称：</span>
-          <el-select v-model="params.proCodes" multiple placeholder="请选择">
+          <el-select v-model="params.proCodes" multiple  collapse-tags placeholder="请选择">
             <el-option v-for="item in production" :key="item.code" :label="item.name" :value="item.code">
               <span style="float: left">{{ item.name }}</span>
               <span style="float: right; color: #8492a6; font-size: 13px">{{ item.code }}</span>
@@ -49,7 +49,7 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">拒绝子原因：</span>
-          <el-select v-model="params.subReasonIds" multiple placeholder="请选择">
+          <el-select v-model="params.subReasonIds" multiple  collapse-tags placeholder="请选择">
             <el-option v-for="item in secondReason" :key="item.id" :label="item.reasonName" :value="item.id">
             </el-option>
           </el-select>

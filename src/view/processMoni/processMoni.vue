@@ -2,7 +2,6 @@
 <template>
 <div class="Process">
   <my-head></my-head>
-  <div class="processMoni">
     <div class="keywordContainer">
       <el-row class="row row1"  type="flex">
         <el-col :span="8" :offset="0">

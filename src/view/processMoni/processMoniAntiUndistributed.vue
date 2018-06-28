@@ -1,9 +1,8 @@
 <!-- 系统管理-流程角色管理-反欺诈未分配-->
 <template>
-  <div class="Process">
-    <my-head></my-head>
-    <div class="processMoni">
-      <div class="keywordContainer">
+   <div class="taskWatting main-div">
+    
+      <div class="taskWinput search-div">
         <el-row class="row row1" type="flex">
           <el-col :span="8" :offset="0">
             <span class="keywordText">客户姓名</span>
@@ -201,7 +200,6 @@
 </template>
 
 <script>
-  import myHead from "@/view/header";
   import processMoniSer from "./processMoniSer.js";
   import constant from "@/util/constant";
 
@@ -545,9 +543,6 @@
 
     },
 
-    components: {
-      myHead
-    }
   };
 
 </script>

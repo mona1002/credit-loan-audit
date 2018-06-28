@@ -96,7 +96,10 @@
    overflow: hidden;
    color: #606266;
  }
-
+/* 表格 */
+/* .Abody .el-table__header-wrapper {
+  overflow: auto;
+} */
  /* 查询 */
 
  .search-btn {
@@ -212,7 +215,10 @@
  .appro {
    background-image: url('../images/appro.png')
  }
-
+ /* 流程监控 */
+ .liuchengIcon{
+   background-image:url('../images/liucheng.png')
+ }
  /* 停用 */
 
  .restIcon {
@@ -273,6 +279,7 @@
  .Abody .el-table .el-table__body-wrapper {
    color: #475669;
    height: auto;
+   overflow: auto;
  }
 
  .Abody .el-table {
@@ -316,7 +323,8 @@
  }
 
  .Abody .el-dialog .el-dialog__body {
-   padding: 10px;
+   /* padding: 10px; el-form 弹窗时候用 */
+   padding: 10px 20px 20px;
    color: black;
    line-height: 24px;
    font-size: 14px;

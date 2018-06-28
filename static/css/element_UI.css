@@ -2783,30 +2783,6 @@ body .el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu 
 
 /* 综合查询 */
 
-/* .IntegratedQuery .el-table__body-wrapper {
-  overflow-x: auto;
-}
-
-
-.regularConfig .el-dialog__header {
-  padding-top: 10px;
-  background: #eef0f9;
-}
-
-
-.regularConfig .el-dialog__headerbtn {
-  top: 10px;
-}
-
-.regularConfig .el-input {
-  width: 200px;
-}
-
-.regularConfig .el-dialog__body {
-  padding: 15px 15px 0 15px;
-} */
-
-
 .regularQT .el-button,
 .specialQT .el-button {
   border: none;
