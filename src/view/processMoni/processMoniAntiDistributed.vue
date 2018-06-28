@@ -295,8 +295,6 @@
 
     methods: {
       getUserInf() {
-
-
         this.queryParam.processTemplateId = 'antiFraudApp';
         this.userInf = JSON.parse(localStorage.getItem("userInf"));
         this.queryParam.userCode = this.userInf.userCode;
