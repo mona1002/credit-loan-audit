@@ -481,7 +481,7 @@ export default {
       addTellFormLabelWidth: '80px', // 添加电话 表单 label-width
       isInterFlag: false, // 是否是内匹跳转的查看详情
       activeTrees: ["1", "2", "3", "4", "5"],
-      addBtnShow: true, // 标志 添加电话按钮是否显示
+      addBtnShow: this.addBtn==false?this.addBtn:true, // 标志 添加电话按钮是否显示
       isLoading: false, // 审批按钮 是否加载状态
       loadingTitle: '确认', // 默认btn title
       judgeFlag:'',
@@ -493,7 +493,7 @@ export default {
       mobilePhone:/^1[345789]\d{9}$/,
     }
   },
-  props: ['isFull', 'SplitS'],
+  props: ['isFull', 'SplitS','addBtn'],
   mounted() {
     this.mountedInf();
   },
@@ -705,13 +705,13 @@ export default {
     // 页面挂载 判断 电话树添加按钮 显示/隐藏
     // 只处理隐藏的情况
     // 内匹查看的时候   左分屏
-    if ((this.isInterFlag && this.isInterFlag == true) || this.SplitS == 'left') {
-      this.addBtnShow = false;
-    }
+    // if ((this.isInterFlag && this.isInterFlag == true) || this.SplitS == 'left') {
+    //   this.addBtnShow = false;
+    // }
     // 复议不显示添加  05 专员   06 主管 03反欺诈专员 04反欺诈主管
-    if (this.judgeFlag == '05' || this.judgeFlag == '06' || this.judgeFlag == '03' || this.judgeFlag == '04'||this.judgeFlag == '07'||this.judgeFlag == '08'||this.judgeFlag == '09'||this.judgeFlag == '10'||this.judgeFlag == '11'||this.judgeFlag == '12'||this.judgeFlag == '13') {
-      this.addBtnShow = false;
-    }
+    // if (this.judgeFlag == '05' || this.judgeFlag == '06' || this.judgeFlag == '03' || this.judgeFlag == '04'||this.judgeFlag == '07'||this.judgeFlag == '08'||this.judgeFlag == '09'||this.judgeFlag == '10'||this.judgeFlag == '11'||this.judgeFlag == '12'||this.judgeFlag == '13') {
+    //   this.addBtnShow = false;
+    // }
     },
     fetchData() {
       this.post("/creTelInfo/queryTels", {
