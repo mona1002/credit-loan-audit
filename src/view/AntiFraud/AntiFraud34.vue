@@ -1,7 +1,7 @@
 <!-- 反欺诈申请 - 列表页 -->
 <template>
-  <div class="anti-fraud main-div">
-    <div class="taskWattingContain">
+  <!-- <div class="anti-fraud main-div"> -->
+      <div class="taskWatting main-div">
       <div class="taskWinput search-div">
         <el-row class="row row1" type="flex">
           <el-col :span="6" class="search-item" :offset="0">
@@ -44,8 +44,8 @@
           </span>
         </div>
       </div>
-      <div class="content listContainer">
-        <el-table :data="antiTableData.taskDetailList" border stripe fit highlight-current-row class="anti-table" v-show="antiFlag!='03'&& antiFlag!='04'">
+      <div class="listContainer">
+        <el-table :data="antiTableData.taskDetailList" border stripe fit height="510"  highlight-current-row class="anti-table" v-show="antiFlag!='03'&& antiFlag!='04'">
           <el-table-column type="index" align="center" label="序号" width="50">
           </el-table-column>
           <el-table-column prop="applySubno" label="进件编号" min-width="170">
@@ -108,12 +108,11 @@
           </el-table-column>
         </el-table>
       </div>
-      <div>
+      <div class="page">
         <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 15, 20]"
           :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="directorTableData.totalNum">
         </el-pagination>
       </div>
-    </div>
   </div>
 </template>
 <script>
@@ -366,196 +365,3 @@
   }
 
 </script>
-<style>
-  /* 反欺诈 查询 */
-
-  .anti-fraud {
-    /* height: 100%; */
-    width: 100%;
-    height: calc( 100% - 90px);
-    background-color: #fafbfc;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-
-  .taskWattingContain {
-    width: 100%;
-  }
-
-  /* 一列 */
-
-  .anti-fraud .item-column1 {
-    width: 90%;
-    float: left;
-    margin: 0;
-  }
-
-  /* 两列 */
-
-  .anti-fraud .item-column2 {
-    width: 50%;
-    float: left;
-    margin: 0;
-  }
-
-  /* 三列 */
-
-  .anti-fraud .item-column3 {
-    width: 33%;
-    float: left;
-    margin: 0;
-    margin-bottom: 10px;
-  }
-
-  /* 搜索盒子 */
-
-  .anti-fraud .search-box {
-    width: 100%;
-    padding: 10px;
-    height: 155px;
-  }
-
-  .anti-fraud .left-title {
-    float: left;
-    width: 130px;
-    line-height: 40px;
-    min-height: 40px;
-    padding-right: 10px;
-    text-align: right;
-    font-size: 14px;
-  }
-
-  /* 列表内容区域 */
-
-  .anti-fraud .content {
-    width: 100%;
-    height: calc( 100% - 344px);
-    overflow: auto;
-    position: relative;
-  }
-
-  .anti-fraud .item-content {
-    float: left;
-    width: calc( 100% - 130px);
-
-    height: 40px;
-    line-height: 40px;
-    text-align: left;
-  }
-
-  .anti-fraud .el-input {
-    width: 200px;
-    height: 40px;
-    line-height: 40px;
-  }
-
-  .anti-fraud .item-content {
-    float: left;
-    width: calc( 100% - 130px);
-    height: 30px;
-    line-height: 30px;
-    text-align: left;
-  }
-
-  .anti-fraud .submit-class {
-    margin: 50px 10px 10px 0px;
-    width: 100%;
-    float: right;
-    text-align: right;
-  }
-
-  /* 折叠面板头部背景色和icon */
-
-  .anti-fraud .icon_hat {
-    padding: 10px 10px 10px 13px;
-    vertical-align: middle;
-  }
-
-  .anti-fraud .headFont {
-    font-size: 16px;
-  }
-
-  /* 反欺诈 收缩 title */
-
-  .anti-fraud .el-collapse-item__header {
-    background: #eef0f9 !important;
-    font-size: 16px;
-    color: #1f2d3d;
-    text-align: left;
-    height: 40px;
-    line-height: 40px;
-  }
-
-  /* 反欺诈 添加 提交 作废 */
-
-  .anti-fraud .btn-div {
-    padding: 10px;
-    background: none;
-    color: #333;
-    border: none;
-    text-align: right;
-  }
-
-  .anti-fraud .icon-add {
-    background: url(../../../static/images/add.png);
-    width: 30px;
-    height: 30px;
-    background-size: 30px;
-    padding: 0;
-    margin: 0;
-    vertical-align: middle;
-    display: inline-block;
-  }
-
-  /* 添加按钮 */
-
-  .anti-fraud .btn-add {
-    cursor: pointer;
-    display: inline-block;
-    height: 40px;
-    margin-right: 14px;
-    float: right;
-    line-height: 40px;
-    background: transparent;
-  }
-
-  /* 头部 */
-
-  .anti-fraud .title-bar {
-    width: 100%;
-    height: 40px;
-    line-height: 40px;
-    background: #eef0f9;
-    border: 1px solid #e6eaee;
-  }
-
-  /* 分页 */
-
-  .anti-fraud .el-pagination {
-    text-align: center;
-  }
-
-  .anti-fraud .el-pagination .el-input {
-    width: auto;
-  }
-
-  .anti-fraud .el-pagination .el-input__inner {
-    width: 100px;
-  }
-
-  .anti-fraud .el-pagination .is-in-pagination .el-input__inner {
-    width: 46px;
-  }
-
-  .anti-fraud .el-pagination button,
-  .anti-fraud .el-pagination span:not([class*=suffix]) {
-    line-height: 50px;
-    height: 50px;
-  }
-
-  .anti-fraud .el-pagination .el-pager li {
-    height: 50px;
-    line-height: 50px;
-  }
-
-</style>

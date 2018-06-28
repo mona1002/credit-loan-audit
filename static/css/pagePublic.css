@@ -11,10 +11,23 @@
     margin-bottom: 20px;
   }
 
+  .taskWattingContain {
+    width: 100%;
+  }
+
+  /* 高级查询下的input */
+
+  .taskWatting .row {
+    margin-bottom: 20px;
+  }
+
+  .taskWatting .row1 {
+    margin-top: 20px;
+  }
   /* 分页 */
 
   .page {
     text-align: center;
     margin-top: 20px;
-    background:red;
+    /* background:red; */
   }

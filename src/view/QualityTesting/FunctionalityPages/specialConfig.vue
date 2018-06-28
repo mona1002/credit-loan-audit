@@ -263,25 +263,4 @@
   }
 
 </script>
-<style scoped>
-  .taskWatting {
-    width: 100%;
-    height: calc( 100% - 90px);
-    background-color: #fafbfc;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-    .taskWatting .taskWinput {
-    background-color: #ffffff;
-    border: 1px solid #e6eaee;
-    margin-bottom: 20px;
-  }
 
-  /* 分页 */
-
-  .page {
-    text-align: center;
-    margin-top: 20px;
-  }
-
-</style>

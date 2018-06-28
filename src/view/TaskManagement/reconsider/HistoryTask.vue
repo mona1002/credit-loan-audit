@@ -24,7 +24,7 @@
         </el-col>
       </el-row>
       <el-row class="row row1" type="flex">
-        <el-col :span="6" class="search-item" :offset="0">
+        <el-col :span="6" class="search-item">
           <span class="keywordText">紧急程度： </span>
           <el-select v-model="params.emerType" placeholder="请选择">
             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
@@ -42,8 +42,8 @@
           </el-date-picker>
         </el-col>
         <el-col :span="6" class="search-btn">
-          <el-button class="btn query" type="primary" @click="Rreset">查询</el-button>
-          <el-button class="btn reset" @click="Rsearch">重置</el-button>
+          <el-button class="btn query" type="primary" @click="Rsearch">查询</el-button>
+          <el-button class="btn reset" @click="Rreset">重置</el-button>
         </el-col>
       </el-row>
     </div>

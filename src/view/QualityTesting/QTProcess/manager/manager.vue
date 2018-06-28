@@ -394,23 +394,3 @@
   }
 
 </script>
-<style scoped>
-  .taskWatting {
-    width: 100%;
-    height: calc( 100% - 90px);
-    background-color: #fafbfc;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-
-  .noBk {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .paging {
-    /* text-align: center;
-    margin-top: 20px; */
-  }
-</style>

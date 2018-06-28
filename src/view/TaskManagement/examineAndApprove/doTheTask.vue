@@ -1,108 +1,97 @@
 <!-- 已办任务 -->
 <template>
-  <div class="taskWatting doTheTask">
-    <myHead class="top"></myHead>
-    <div class="taskWattingContain">
-
-      <div class="taskWinput">
-        <el-row class="row row1" type="flex">
-          <el-col :span="8" :offset="0">
-            <span class="keywordText">进件编号</span>
-            <el-input class="" v-model="applySubNo" placeholder="请输入进件编号"></el-input>
-          </el-col>
-          <el-col :span="8">
-            <span class="keywordText">客户名称</span>
-            <el-input class="" v-model="custName_la" placeholder="请输入客户名称"></el-input>
-          </el-col>
-          <el-col :span="8">
-            <span class="keywordText">证件号码</span>
-            <el-input class="" v-model="certCode" placeholder="请输入证件号码"></el-input>
-          </el-col>
-        </el-row>
-        <el-row class="row row1" type="flex">
-          <el-col :span="8" :offset="0">
-            <span class="keywordText">产品名称</span>
-            <el-select v-model="proCode" placeholder="请选择">
-              <el-option v-for="item in productNames" :key="item.id" :label="item.proName" :value="item.proCode">
-              </el-option>
-            </el-select>
-          </el-col>
-          <el-col :span="8">
-            <span class="keywordText">紧急程度</span>
-            <el-select v-model="emerType" placeholder="请选择">
-              <el-option v-for="item in UrgencyDegree" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-          </el-col>
-          <el-col :span="8">
-            <span class="keywordText">申请日期</span>
-            <el-date-picker v-model="applicationDate" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
-            </el-date-picker>
-          </el-col>
-        </el-row>
-        <el-row class="row row1" type="flex">
-          <el-col :span="8">
-            <span class="keywordText">本环节处理时间</span>
-            <el-date-picker v-model="processingTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
-            </el-date-picker>
-          </el-col>
-          <el-col :span="16">
-            <el-button class="btn reset" type="primary" @click="reset">重置</el-button>
-            <el-button class="btn query" type="primary" @click="search">查询</el-button>
-          </el-col>
-        </el-row>
-      </div>
-      <div class="taskWhead">
-        <p>审批-已办任务列表</p>
-      </div>
-      <div class="taskWtable">
-        <el-table :data="datas" style="width: 100%" height="500" @row-dblclick='goDetail' border>
-          <el-table-column type="index" :index="1" label="序号" width="50">
-          </el-table-column>
-          <!-- <el-table-column
-				      prop="taskType"
-				      label="任务类型"
-				      min-width="110"
-				      >
-				    </el-table-column> -->
-          <el-table-column prop="emerType" label="紧急程度" min-width="80">
-            <template slot-scope="scope">
-              <span style="color:#0077ff" v-if="scope.row.timeColor">{{scope.row.emerType}}</span>
-              <span v-if="!scope.row.timeColor">{{scope.row.emerType}}</span>
-            </template>
-          </el-table-column>
-          <el-table-column prop="applySubNo" label="进件编号" min-width="170">
-          </el-table-column>
-          <el-table-column prop="appDate" label="申请日期" min-width="100">
-          </el-table-column>
-          <el-table-column prop="custName" label="客户名称" min-width="130">
-          </el-table-column>
-          <el-table-column prop="certCode" label="证件号码" min-width="170">
-          </el-table-column>
-          <el-table-column prop="appOrgCode" label="进件机构" min-width="120">
-          </el-table-column>
-          <el-table-column prop="proName" label="产品名称" width="120">
-          </el-table-column>
-          <el-table-column prop="activationTime" label="进入本环节时间" min-width="170">
-          </el-table-column>
-          <!-- <el-table-column
+  <div class="taskWatting main-div">
+    <div class="taskWinput search-div">
+      <el-row class="row row1" type="flex">
+        <el-col :span="6" class="search-item" :offset="0">
+          <span class="keywordText">进件编号： </span>
+          <el-input class="" v-model="applySubNo" placeholder="请输入进件编号"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">客户名称：</span>
+          <el-input class="" v-model="custName_la" placeholder="请输入客户名称"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">证件号码：</span>
+          <el-input class="" v-model="certCode" placeholder="请输入证件号码"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">产品名称：</span>
+          <el-select v-model="proCode" placeholder="请选择">
+            <el-option v-for="item in productNames" :key="item.id" :label="item.proName" :value="item.proCode">
+            </el-option>
+          </el-select>
+        </el-col>
+      </el-row>
+      <el-row class="row row2" type="flex">
+        <el-col :span="6" class="search-item" :offset="0">
+          <span class="keywordText">紧急程度： </span>
+          <el-select v-model="emerType" placeholder="请选择">
+            <el-option v-for="item in UrgencyDegree" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="6" class="search-item date_picker">
+          <span class="keywordText">申请日期：</span>
+          <el-date-picker v-model="applicationDate" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+          </el-date-picker>
+        </el-col>
+        <el-col :span="6" class="search-item date_picker">
+          <span class="keywordText">本环节处理时间：</span>
+          <el-date-picker v-model="processingTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+          </el-date-picker>
+        </el-col>
+        <el-col :span="6" class="search-btn">
+          <el-button class="btn query" type="primary" @click="search">查询</el-button>
+          <el-button class="btn reset" @click="reset">重置</el-button>
+        </el-col>
+      </el-row>
+    </div>
+    <div class="title titleContainer edit-div">
+      <span class="titleText">
+        <i class="el-icon title-icon"></i>
+        审批-已办任务列表 </span>
+    </div>
+    <div class="listContainer">
+      <el-table :data="datas" style="width: 100%" height="510" highlight-current-row @row-dblclick='goDetail' border>
+        <el-table-column type="index" :index="1" label="序号" width="50">
+        </el-table-column>
+        <el-table-column prop="emerType" label="紧急程度" min-width="80">
+          <template slot-scope="scope">
+            <span style="color:#0077ff" v-if="scope.row.timeColor">{{scope.row.emerType}}</span>
+            <span v-if="!scope.row.timeColor">{{scope.row.emerType}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="applySubNo" label="进件编号" min-width="170">
+        </el-table-column>
+        <el-table-column prop="appDate" label="申请日期" min-width="100">
+        </el-table-column>
+        <el-table-column prop="custName" label="客户名称" min-width="130">
+        </el-table-column>
+        <el-table-column prop="certCode" label="证件号码" min-width="170">
+        </el-table-column>
+        <el-table-column prop="appOrgCode" label="进件机构" min-width="120">
+        </el-table-column>
+        <el-table-column prop="proName" label="产品名称" width="120">
+        </el-table-column>
+        <el-table-column prop="activationTime" label="进入本环节时间" min-width="170">
+        </el-table-column>
+        <!-- <el-table-column
 				      prop="approveTimeLong"
 				      label="进入本环节时长（小时）" 
 				      min-width="180">
 				    </el-table-column> -->
-        </el-table>
-        <!-- 分页 -->
-        <div class="page">
-          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 50, 80, 100]"
-            :page-size=setPageSize layout="total, sizes, prev, pager, next, jumper" :total="totals.totalNum">
-          </el-pagination>
-        </div>
+      </el-table>
+      <!-- 分页 -->
+      <div class="page">
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 50, 80, 100]"
+          :page-size=setPageSize layout="total, sizes, prev, pager, next, jumper" :total="totals.totalNum">
+        </el-pagination>
       </div>
     </div>
   </div>
 </template>
 <script type="text/javascript">
-  import myHead from "../../header.vue"
   //import baseU from'../../../util/constant';
   export default {
     data() {
@@ -167,9 +156,6 @@
         judge: '',
         orgId: '',
       }
-    },
-    components: {
-      myHead
     },
     mounted() {
       //一进入页面就发送请求
@@ -342,118 +328,3 @@
   }
 
 </script>
-<style type="text/css" scoped>
-  .taskWatting {
-    width: 100%;
-    height: 100%;
-    background-color: #fafbfc;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-
-  .taskWattingContain {
-    padding: 30px 30px;
-    width: 100%;
-    /* height: calc( 100% - 70px); */
-    overflow: hidden;
-  }
-
-
-  .taskWatting .row {
-    margin-bottom: 20px;
-  }
-
-  .taskWatting .row1 {
-    margin-top: 21px;
-  }
-
-  .taskWatting .taskWinput {
-    background-color: #ffffff;
-    border: 1px solid #e6eaee;
-    margin-bottom: 20px;
-  }
-
-  .taskWatting .keywordText {
-    font-size: 14px;
-    color: #475669;
-    text-align: right;
-    display: inline-block;
-    width: 126px;
-    height: 20px;
-    margin-right: 10px;
-  }
-
-  /* .taskWatting .taskWinput .el-input__inner {
-    border-radius: 6px;
-    height: 35px;
-    width: 258px;
-  } */
-
-
-  .taskWinput .btn {
-    height: 33px;
-    border-radius: 8px;
-    width: 79px;
-    font-size: 14px;
-    line-height: 33px;
-    padding: 0;
-    float: right;
-  }
-
-  .taskWinput .query {
-    margin-left: 214px;
-  }
-
-  .taskWinput .reset {
-    margin-left: 20px;
-    margin-right: calc( 50% - 394px);
-  }
-
-  .taskWatting .taskWhead {
-    opacity: 0.75;
-    background: #ebedf8;
-    border-radius: 6px;
-    width: 100%;
-    height: 50px;
-  }
-
-  .taskWatting .taskWhead p {
-    font-size: 16px;
-    color: #1f2d3d;
-    padding-left: 37px;
-    text-align: left;
-    line-height: 50px;
-  }
-
-
-  .taskWatting .taskWtable {
-    background-color: #ffffff;
-    border: 1px solid #e6eaee;
-    margin-bottom: 20px;
-    /* padding: 25px; */
-    width: 100%;
-    /* height:calc( 100% - 232px ); */
-  }
-
-  .taskWtable .el-table .cell {
-    line-height: 23px;
-  }
-
-  .taskWtable .el-table {
-    font-size: 13px;
-  }
-
-  .taskWtable .el-table__header-wrapper tr {
-    height: 40px;
-  }
-
-  .taskWtable .el-table__body-wrapper tr {
-    height: 35px;
-  }
-
-  .page {
-    text-align: center;
-    margin-top: 20px;
-  }
-
-</style>
