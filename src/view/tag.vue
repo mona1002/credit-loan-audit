@@ -44,7 +44,6 @@
   }
 
   .button_bottom {
-    /* display: inline-block; */
     margin-right: 2px;
     padding: 9px 22px 9px 9px;
     font-size: 14px;
@@ -304,7 +303,7 @@
         } else if (route.path == '/MatchingInf') { // 匹配信息-查看
           this.nodeName = "匹配信息-查看";
           this.nodeMatchFlag = 'internal'
-        } else if (route.fullPath == '/processMoniTrilUndistributed') {//流程监控
+        } else if (route.fullPath == '/processMoniTrilUndistributed') { //流程监控
           this.nodeName = "信审未分配流程";
         } else if (route.fullPath == '/processMoniTrilDistributed') {
           this.nodeName = "信审已分配流程";
@@ -328,8 +327,7 @@
           this.nodeName = "质检已分配流程";
         } else if (route.fullPath == '/processMoniQTUndistributed') {
           this.nodeName = "质检未分配流程";
-        }
-        else if (route.path == '/PneCtrl') {
+        } else if (route.path == '/PneCtrl') {
           this.nodeName = "大数据风控";
         } else if (route.path == '/SocialSe') {
           this.nodeName = "社保公积金";
@@ -420,10 +418,8 @@
       },
       isActive(route) {
         return route.path == '/MatchingInfQT' ? route.path == this.$route.path : route.StatefullPath == this.$route.fullPath;
-        // return route.StatefullPath == this.$route.fullPath;
       },
       handleClose(view, ev) {
-        console.log('关闭')
         this.$store.dispatch('delVisitedViews', view).then((views) => {
           if (this.isActive(view)) {
             const latestView = views.slice(-1)[0]
