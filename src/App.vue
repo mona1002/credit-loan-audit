@@ -38,6 +38,8 @@
   @import "../static/css/base.css";
   @import "../static/css/common.css";
   @import "../static/css/element_UI.css";
+  @import "../static/css/pagePublic.css";
+  
   .fottt {
     position: absolute;
     left: 0;

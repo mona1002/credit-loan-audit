@@ -1,7 +1,6 @@
 <template>
-  <div class="AntiCaseNum">
+  <div class="taskWatting main-div">
     <!-- 复议已办任务 -->
-    <myHead></myHead>
     <div class="content">
       <div class="search">
         <ul>
