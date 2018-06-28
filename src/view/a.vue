@@ -215,33 +215,9 @@
 </script>
 <style type="text/css" scoped>
   
-  .taskWtable .el-table__header-wrapper tr {
-    height: 40px;
-  }
- 
-  .taskWtable .el-table__header-wrapper tr {
-    height: 40px;
-  }
- 
-  .taskWtable .el-table__header-wrapper tr {
-    height: 40px;
-  }
- 
-  .taskWtable .el-table__header-wrapper tr {
-    height: 40px;
-  }
- 
-  .taskWtable .el-table__header-wrapper tr {
-    height: 40px;
-  }
- 
-  .taskWtable .el-table__header-wrapper tr {
-    height: 40px;
-  }
-
-  .taskWtable .el-table__body-wrapper tr {
-    height: 35px;
-  }
+.a{
+  color:red;
+}
 
   /* 分页 */
 
