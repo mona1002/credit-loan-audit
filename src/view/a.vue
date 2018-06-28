@@ -4,7 +4,7 @@
     <myHead class="top"></myHead>
     <div class="taskWattingContain">
 
-      <!-- <div class="taskWinput">
+      <div class="taskWinput">
         <el-row class="row row1" type="flex">
           <el-col :span="8" :offset="0">
             <span class="keywordText">进件编号</span>
@@ -25,12 +25,12 @@
             <el-button class="btn query" type="primary" @click="search">查询</el-button>
           </el-col>
         </el-row>
-      </div> -->
+      </div>
       <div class="taskWhead">
         <p>复议申请任务列表</p>
       </div>
       <div class="taskWtable">
-        <el-table :data="datas" style="width: 100%" height="500" @row-dblclick='goDetail' border>
+        <!-- <el-table :data="datas" style="width: 100%" height="500" @row-dblclick='goDetail' border>
           <el-table-column type="index" :index="1" label="序号" width="50">
           </el-table-column>
           <el-table-column prop="taskType" label="任务类型" min-width="110">
@@ -47,7 +47,7 @@
           </el-table-column>
           <el-table-column prop="activationTime" label="进入本环节时间" min-width="170">
           </el-table-column>
-        </el-table>
+        </el-table> -->
         <!-- 分页 -->
         <div class="page">
           <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 50, 80, 100]"
@@ -215,6 +215,26 @@
 </script>
 <style type="text/css" scoped>
   
+  .taskWtable .el-table__header-wrapper tr {
+    height: 40px;
+  }
+ 
+  .taskWtable .el-table__header-wrapper tr {
+    height: 40px;
+  }
+ 
+  .taskWtable .el-table__header-wrapper tr {
+    height: 40px;
+  }
+ 
+  .taskWtable .el-table__header-wrapper tr {
+    height: 40px;
+  }
+ 
+  .taskWtable .el-table__header-wrapper tr {
+    height: 40px;
+  }
+ 
   .taskWtable .el-table__header-wrapper tr {
     height: 40px;
   }
