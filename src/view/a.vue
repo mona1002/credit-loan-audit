@@ -218,7 +218,9 @@
 .a{
   color:red;
 }
-
+.b{
+    color:red;  color:red;
+}
   /* 分页 */
 
   .page {
