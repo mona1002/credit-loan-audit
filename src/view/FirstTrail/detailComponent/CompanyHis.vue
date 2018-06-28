@@ -25,9 +25,9 @@
         <el-form-item label="调查阶段：" class="item-column3">
           {{comData.checkStageDes}}
         </el-form-item>
-          <el-form-item label="其他来源说明：" class="item-column1" v-show="comData.source=='02'">
-            {{comData.sourceDesc}}
-          </el-form-item>
+        <el-form-item label="其他来源说明：" class="item-column1" v-show="comData.source=='02'">
+          {{comData.sourceDesc}}
+        </el-form-item>
       </div>
       <div class="address-title">
         <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
@@ -40,7 +40,7 @@
         <el-form-item label="拨打电话：" class="item-column3">
           {{comData.phoneDes}}
         </el-form-item>
-                <el-form-item label="" class="item-column2" v-show="comData.phone!='01'">
+        <el-form-item label="" class="item-column2" v-show="comData.phone!='01'">
           {{comData.phonetxt}}
         </el-form-item>
         <el-tooltip class="item" effect="dark" :content="comData.phonetxt" placement="top">
@@ -126,41 +126,40 @@
         <el-form-item label="核对工作证明人2：" class="item-column3">
           {{comData.jobref2}}
         </el-form-item>
-          <el-form-item label="调查结果：" class="item-column1" style="min-width:600px;">
-            {{comData.conclusion}}
-          </el-form-item>
+        <el-form-item label="调查结果：" class="item-column1" style="min-width:600px;">
+          <div style="white-space: pre-wrap;"> {{comData.conclusion}} </div>
+        </el-form-item>
       </div>
     </el-form>
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-    }
-  },
-  props: ['comData', 'isFull'],
-  mounted() {
-    if (this.isFull == true) { // 全屏
-      $(".textarea-class").css("minWidth", "500px");
-      $(".item-column1 .el-form-item__content").css("width", "calc( 66% - 290px");
-    } else if (this.isFull == false) { // 分屏
-      $(".textarea-class").css("minWidth", "300px");
-      $(".item-column1 .el-form-item__content").css("width", "300px");
-    }
-  },
-  watch: {
-    // 判断全屏 , 更改样式
-    isFull: function(val) {
-      if (val == true) { // 全屏
+  export default {
+    data() {
+      return {}
+    },
+    props: ['comData', 'isFull'],
+    mounted() {
+      if (this.isFull == true) { // 全屏
         $(".textarea-class").css("minWidth", "500px");
         $(".item-column1 .el-form-item__content").css("width", "calc( 66% - 290px");
-      } else if (val == false) { // 分屏
+      } else if (this.isFull == false) { // 分屏
         $(".textarea-class").css("minWidth", "300px");
         $(".item-column1 .el-form-item__content").css("width", "300px");
       }
+    },
+    watch: {
+      // 判断全屏 , 更改样式
+      isFull: function (val) {
+        if (val == true) { // 全屏
+          $(".textarea-class").css("minWidth", "500px");
+          $(".item-column1 .el-form-item__content").css("width", "calc( 66% - 290px");
+        } else if (val == false) { // 分屏
+          $(".textarea-class").css("minWidth", "300px");
+          $(".item-column1 .el-form-item__content").css("width", "300px");
+        }
+      }
     }
   }
-}
 
 </script>

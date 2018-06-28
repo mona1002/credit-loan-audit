@@ -288,8 +288,6 @@ table {
 }
 .brk{
   white-space: pre-wrap;
-  *white-space: pre;
-*word-wrap: break-word;
 }
 .audioInd{
   color:white;

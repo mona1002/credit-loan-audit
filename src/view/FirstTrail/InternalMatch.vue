@@ -166,13 +166,11 @@
         this.fetchData('company');
         // 样式处理
         if (this.isFull == true) { // 全屏
-          console.log('全屏');
           $(".internalMatch-class .mark-textarea").css("width", "800px")
           $(".internalMatch-class .mark-textarea textarea").css("width", "800px");
           // 按钮
           $(".internalMatch-class .mark-button").css("margin-left", "775px")
         } else if (this.isFull == false) { // 分屏
-          console.log("分屏");
           $(".internalMatch-class .mark-textarea").css("width", "600px")
           $(".internalMatch-class .mark-textarea textarea").css("width", "600px");
           // 按钮
@@ -238,9 +236,11 @@
         });
       },
       getTabByFixTel() {
+        console.log(  this.fixTelcustName)
         // 获取固定电话类标签
         this.post('internalMatch/getTabByFixTel', {
-          applySubNo: this.applySubNo
+          applySubNo: this.applySubNo,
+          name: this.fixTelcustName,
           // applySubNo:'2015041301730418582'
         }).then(res => {
           this.fixTelTab = res.data;
@@ -366,13 +366,11 @@
       isFull() {
         // 样式处理
         if (this.isFull == true) { // 全屏
-          console.log('全屏');
           $(".internalMatch-class .mark-textarea").css("width", "800px")
           $(".internalMatch-class .mark-textarea textarea").css("width", "800px");
           // 按钮
           $(".internalMatch-class .mark-button").css("margin-left", "775px")
         } else if (this.isFull == false) { // 分屏
-          console.log("分屏");
           $(".internalMatch-class .mark-textarea").css("width", "600px")
           $(".internalMatch-class .mark-textarea textarea").css("width", "600px");
           // 按钮
@@ -416,6 +414,7 @@
             hangOut: false,
             loadsitu: false,
             adbtn: '确定',
+            fixTelcustName: ''
           };
         },
         mounted() {
@@ -434,8 +433,10 @@
             this.applyId = applicationInformationDetail.applyId;
             var userInfo = JSON.parse(localStorage.getItem('userInf'));
             this.creator_code = userInfo.userCode;
-
+            console.log(applicationInformationDetail.custName)
+            this.fixTelcustName = applicationInformationDetail.custName;
             // 获取匹配信息
+            console.log( this.fixTelcustName)
             this.getOption();
           },
           getOption() {
