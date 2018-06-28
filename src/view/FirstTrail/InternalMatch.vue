@@ -142,6 +142,7 @@
         fixTelTab: '', // 固定电话标签
         mobileTab: '', // 移动电话标签
         // MatchFlag:'internal'
+                    fixTelcustName: ''
       };
     },
     props: ['isFull', 'SplitS'],
@@ -158,6 +159,9 @@
         // 进件编号
         this.applySubNo = applicationInformationDetail.applySubNo;
         this.workName = applicationInformationDetail.workName;
+                    console.log(applicationInformationDetail.custName)
+            this.fixTelcustName = applicationInformationDetail.custName;
+            console.log( this.fixTelcustName)
         // 公司名称
         // this.workName = this.$route.query.workName;
         // 测试数据
@@ -414,7 +418,6 @@
             hangOut: false,
             loadsitu: false,
             adbtn: '确定',
-            fixTelcustName: ''
           };
         },
         mounted() {
@@ -432,11 +435,8 @@
             var applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
             this.applyId = applicationInformationDetail.applyId;
             var userInfo = JSON.parse(localStorage.getItem('userInf'));
-            this.creator_code = userInfo.userCode;
-            console.log(applicationInformationDetail.custName)
-            this.fixTelcustName = applicationInformationDetail.custName;
+            this.creator_code = userInfo.userCode;            
             // 获取匹配信息
-            console.log( this.fixTelcustName)
             this.getOption();
           },
           getOption() {
