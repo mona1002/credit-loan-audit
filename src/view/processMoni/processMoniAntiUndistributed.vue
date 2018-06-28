@@ -1,28 +1,27 @@
 <!-- 系统管理-流程角色管理-反欺诈未分配-->
 <template>
    <div class="taskWatting main-div">
-    
       <div class="taskWinput search-div">
         <el-row class="row row1" type="flex">
-          <el-col :span="8" :offset="0">
+          <el-col :span="6" :offset="0">
             <span class="keywordText">客户姓名</span>
             <el-input @keyup.enter.native="getByKey" v-model.trim="custName_la" placeholder="请输入客户姓名"></el-input>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <span class="keywordText">证件号码</span>
             <el-input @keyup.enter.native="getByKey" v-model.trim="certCode" placeholder="请输入证件号码"></el-input>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <span class="keywordText">进件编号</span>
             <el-input @keyup.enter.native="getByKey" v-model.trim="applySubNo" placeholder="请输入进价编号"></el-input>
           </el-col>
-        </el-row>
-        <el-row class="row row2" type="flex">
-          <el-col :span="8">
+               <el-col :span="6">
             <span class="keywordText">进件机构</span>
             <el-input @keyup.enter.native="getByKey" v-model.trim="appOrgCode" placeholder="请输入进件机构"></el-input>
           </el-col>
-          <el-col :span="8">
+        </el-row>
+        <el-row class="row row2" type="flex">
+          <el-col :span="6">
             <span class="keywordText">产品名称</span>
             <el-select v-model="proId" placeholder="请选择产品名称">
               <p style="height: 34px;line-height: 34px;padding: 0 20px;font-size: 14px;background: #eee;">
@@ -35,45 +34,47 @@
               </el-option>
             </el-select>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <span class="keywordText">任务节点</span>
             <el-select v-model="taskNodeName" placeholder="请选择">
               <el-option v-for="item in taskNodes" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </el-col>
-        </el-row>
-        <el-row class="row row3" type="flex">
-          <el-col :span="8" v-if="routerState!=='03'">
+          <el-col :span="6" >
             <span class="keywordText">任务类型</span>
             <el-select v-model="taskType" placeholder="请选择">
               <el-option v-for="item in taskTypes" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <span class="keywordText">当前处理人员</span>
             <el-input @keyup.enter.native="getByKey" v-model.trim="operatorCode" placeholder="请输入当前处理人员"></el-input>
           </el-col>
-          <el-col :span="8" v-if="routerState!=='03'">
-            <el-button class="btn query" type="primary" @click="getByKey">查询</el-button>
-            <el-button type="primary" class="btn reset" @click="reset">重置</el-button>
-          </el-col>
-          <el-col :span="8" :offset="8" v-else>
-            <el-button class="btn query" type="primary" @click="getByKey">查询</el-button>
-            <el-button type="primary" class="btn reset" @click="reset">重置</el-button>
-          </el-col>
+        </el-row>
+        <el-row class="row row3" type="flex">
+           <el-col :span="6" class="search-item">
+        </el-col>
+        <el-col :span="6" class="search-item">
+        </el-col>
+        <el-col :span="6" class="search-item">
+        </el-col>
+        <el-col :span="6" class="search-btn">
+          <el-button class="btn query" type="primary" @click="getByKey">查询</el-button>
+          <el-button class="btn reset" @click="reset">重置</el-button>
+        </el-col>
         </el-row>
       </div>
       <!-- 列表 -->
-      <div class="title titleContainer">
+      <div class="title titleContainer edit-div">
         <span class="titleText">流程查询</span>
         <span class="iconContainer">
           <span class="icon-item" @click="handleItem('trace')">
             <i class="el-icon liuchengIcon"></i>
             <span class="el-icon-text">流程轨迹</span>
           </span>
-          <span class="icon-item" @click="handleItem('assign')" v-if="routerState!=='03'">
+          <span class="icon-item" @click="handleItem('assign')">
             <i class="el-icon addIcon"></i>
             <span class="el-icon-text">任务分派</span>
           </span>
@@ -84,7 +85,7 @@
         </span>
       </div>
       <div class="listContainer">
-        <el-table :data="moniList" height="400" border show-header highlight-current-row @selection-change="handleSelectionChange"
+        <el-table :data="moniList" height="510" border show-header highlight-current-row @selection-change="handleSelectionChange"
           @row-click="selectRow">
           <el-table-column type="index" label="序号" width="50">
           </el-table-column>
@@ -196,7 +197,6 @@
         </span>
       </el-dialog>
     </div>
-  </div>
 </template>
 
 <script>
@@ -277,7 +277,6 @@
         multipleSelection: [],
         formLabelWidth: "140px",
         routerPath: '',
-        routerState: '',
         rules: {
           toUser: [{
             required: true,
@@ -301,7 +300,7 @@
       getUserInf() {
         // 获取路由参数，来判断是信审、复议、还是反欺诈以及各自对应的未分配、已分配和已完成三个状态
         this.queryParam.processTemplateId = 'antiFraudApp';
-        this.queryParam.taskStatus = this.routerState = '00';
+        this.queryParam.taskStatus = '00';
         this.userInf = JSON.parse(localStorage.getItem("userInf"));
         this.queryParam.userCode = this.userInf.userCode;
         this.queryParam.orgCode = this.userInf.orgCode;
@@ -342,7 +341,6 @@
 
       //查询流程监控
       getProcessMonitorList() {
-
         this.queryParam.custName_la = this.custName_la;
         this.queryParam.certCode = this.certCode;
         this.queryParam.applySubNo = this.applySubNo;
@@ -351,7 +349,6 @@
         this.queryParam.taskNodeName = this.taskNodeName;
         this.queryParam.taskType = this.taskType;
         this.queryParam.operatorCode = this.operatorCode;
-
         processMoniSer
           .getProcessMonitorList(this.queryParam)
           .then(res => {
@@ -364,7 +361,7 @@
         processMoniSer
           .getProcessTraceList({
             processInstanceId: id,
-            processStatus: this.routerState === "03" ? "02" : "01"
+            processStatus:"01"
           })
           .then(res => {
             this.traceList = res.data.taskDetailList;
@@ -383,7 +380,6 @@
 
       // 查询按钮
       getByKey() {
-
         this.getProcessMonitorList(this.queryParam);
       },
 
@@ -503,13 +499,11 @@
         if (!checkFlag) {
           return
         }
-
         var arr = [];
         this.multipleSelection.forEach(function (item) {
           arr.push(item.taskId);
         })
         this.itemOfLists.taskIds = arr;
-
         processMoniSer
           .transmitTask({
             // assignor: this.multipleSelection[0].flowRoleCode,
@@ -542,242 +536,7 @@
       },
 
     },
-
   };
 
 </script>
 
-<style>
-  .Process {
-    height: 100%;
-    height: 100%;
-    overflow: auto;
-  }
-
-  .processMoni {
-    padding: 15px 30px;
-    background-color: #fafbfc;
-  }
-
-  .processMoni .row {
-    margin-bottom: 20px;
-  }
-
-  .processMoni .row1 {
-    margin-top: 21px;
-  }
-
-  .processMoni .titleContainer {
-    background-color: rgba(238, 240, 249, .75);
-    border-radius: 6px;
-    width: 100%;
-    height: 50px;
-  }
-
-  .processMoni .titleText {
-    font-size: 16px;
-    color: #1f2d3d;
-    text-align: left;
-    margin: 15px 25px 13px;
-    display: inline-block;
-    height: 22px;
-    width: 130px;
-    line-height: 22px;
-    font-weight: bold;
-  }
-
-  .processMoni .keywordContainer {
-    background-color: #ffffff;
-    border: 1px solid #e6eaee;
-    margin-bottom: 26px;
-  }
-
-  .processMoni .keywordText {
-    font-size: 14px;
-    color: #475669;
-    text-align: right;
-    display: inline-block;
-    width: 126px;
-    height: 20px;
-    margin-right: 10px;
-  }
-
-  .processMoni .keywordContainer .el-input__inner {
-    border-radius: 6px;
-    height: 35px;
-    width: 258px;
-  }
-
-  .processMoni .el-dialog {
-    width: 720px;
-  }
-
-  .processMoni .el-dialog.trace {
-    width: 988px;
-  }
-
-  .processMoni .el-dialog .el-dialog__body {
-    padding: 10px 20px;
-  }
-
-  .processMoni .el-dialog.trace .el-dialog__body {
-    padding: 10px 20px;
-    height: 492px;
-    overflow: auto;
-  }
-
-  .processMoni .el-dialog.trans .el-dialog__body {
-    padding: 10px 20px;
-    height: 392px;
-    overflow: auto;
-  }
-
-  .processMoni .el-dialog.trace .el-table__body-wrapper,
-  .processMoni .el-dialog.trans .el-table__body-wrapper {
-    overflow-x: hidden;
-  }
-
-  .processMoni .el-dialog .el-input__inner {
-    width: 185px;
-    height: 35px;
-  }
-
-  .processMoni .btn {
-    height: 33px;
-    border-radius: 8px;
-    width: 79px;
-    font-size: 14px;
-    line-height: 33px;
-    padding: 0;
-  }
-
-  .processMoni .query {
-    margin-left: 214px;
-  }
-
-  .processMoni .reset {
-    margin-left: 20px;
-  }
-
-  .processMoni .listContainer {
-    background-color: #ffffff;
-    border: 1px solid #e6eaee;
-    margin-bottom: 40px;
-    padding: 25px;
-    width: 100%;
-  }
-
-  .processMoni .el-table .cell {
-    line-height: 23px;
-  }
-
-  .processMoni .el-table {
-    font-size: 13px;
-  }
-
-  .processMoni .el-table__header-wrapper tr {
-    height: 40px;
-  }
-
-  .processMoni .el-table__body-wrapper tr {
-    height: 35px;
-  }
-
-  .processMoni .btn-sm {
-    border-radius: 3px;
-    width: 44px;
-    height: 24px;
-    font-size: 12px;
-    padding: 0;
-  }
-
-  .processMoni .page {
-    text-align: center;
-    margin-top: 20px;
-  }
-
-  .processMoni .page .el-pagination .el-select .el-input .el-input__inner,
-  .processMoni .page .el-pagination__editor.el-input .el-input__inner {
-    line-height: 28px;
-  }
-
-  .processMoni .iconContainer {
-    float: right;
-    line-height: 50px;
-    margin-right: 29px;
-  }
-
-  .processMoni .iconContainer .icon-item {
-    cursor: pointer;
-    margin-right: 14px;
-    float: left;
-  }
-
-  .processMoni .iconContainer .el-icon {
-    color: #0077ff;
-    margin-right: 6px;
-    vertical-align: middle;
-    height: 30px;
-    width: 30px;
-    display: inline-block;
-    background-repeat: no-repeat;
-    background-size: 30px 30px;
-    background-position: center center;
-  }
-
-  .processMoni .el-icon.addIcon {
-    background-image: url("../../../static/images/add.png");
-  }
-
-  .processMoni .el-icon.liuchengIcon {
-    background-image: url("../../../static/images/liucheng.png");
-  }
-
-  .processMoni .iconContainer .el-icon-text {
-    font-size: 14px;
-    color: #1f2d3d;
-    vertical-align: middle;
-  }
-
-  .processMoni .el-tree {
-    height: 500px;
-    overflow-y: auto;
-  }
-
-  /* 样式冲突的解决 */
-
-  .processMoni .listContainer .el-button {
-    padding: 0;
-  }
-
-  .processMoni .keywordContainer .el-input {
-    width: 258px;
-  }
-
-  /* 必填项小星星上下居中对齐 */
-
-  .processMoni .el-form-item.is-required .el-form-item__label:before {
-    display: inline-block;
-    height: 20px;
-    vertical-align: sub;
-  }
-
-  .processMoni .listContainer .el-table__body-wrapper {
-    overflow-x: hidden;
-  }
-
-  .processMoni .el-dialog .fl {
-    float: left;
-  }
-
-  .processMoni .el-dialog .fr {
-    float: right;
-    margin-right: 18px;
-  }
-
-  .processMoni .el-dialog .bfc {
-    overflow: auto;
-    clear: both;
-  }
-
-</style>

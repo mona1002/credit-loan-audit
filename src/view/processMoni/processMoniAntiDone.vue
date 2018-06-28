@@ -5,26 +5,26 @@
       
         <el-row class="row row1" type="flex">
           <el-col :span="6" :offset="0">
-            <span class="keywordText">客户姓名</span>
+            <span class="keywordText">客户姓名：</span>
             <el-input @keyup.enter.native="getByKey" v-model.trim="custName_la" placeholder="请输入客户姓名"></el-input>
           </el-col>
           <el-col :span="6">
-            <span class="keywordText">证件号码</span>
+            <span class="keywordText">证件号码：</span>
             <el-input @keyup.enter.native="getByKey" v-model.trim="certCode" placeholder="请输入证件号码"></el-input>
           </el-col>
           <el-col :span="6">
-            <span class="keywordText">进件编号</span>
+            <span class="keywordText">进件编号：</span>
             <el-input @keyup.enter.native="getByKey" v-model.trim="applySubNo" placeholder="请输入进价编号"></el-input>
           </el-col>
              <el-col :span="6">
-            <span class="keywordText">进件机构</span>
+            <span class="keywordText">进件机构：</span>
             <el-input @keyup.enter.native="getByKey" v-model.trim="appOrgCode" placeholder="请输入进件机构"></el-input>
           </el-col>
         </el-row>
         <el-row class="row row2" type="flex">
        
           <el-col :span="6">
-            <span class="keywordText">产品名称</span>
+            <span class="keywordText">产品名称：</span>
             <el-select v-model="proId" placeholder="请选择产品名称">
               <p style="height: 34px;line-height: 34px;padding: 0 20px;font-size: 14px;background: #eee;">
                 <span style="width:66px;display:inline-block;">产品代码</span>
@@ -37,48 +37,29 @@
             </el-select>
           </el-col>
           <el-col :span="6">
-            <span class="keywordText">任务节点</span>
+            <span class="keywordText">任务节点：</span>
             <el-select v-model="taskNodeName" placeholder="请选择">
               <el-option v-for="item in taskNodes" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </el-col>
-        </el-row>
-        <el-row class="row row3" type="flex">
-          <el-col :span="8" v-if="routerState!=='03'">
-            <span class="keywordText">任务类型</span>
-            <el-select v-model="taskType" placeholder="请选择">
-              <el-option v-for="item in taskTypes" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-            <!-- <span class="keywordText">当前处理人员</span> -->
-            <!-- <el-input @keyup.enter.native="getByKey" v-model.trim="operatorCode" placeholder="请输入当前处理人员"></el-input> -->
-          </el-col>
-          <el-col :span="8">
-            <span class="keywordText">当前处理人员</span>
+          <el-col :span="6">
+            <span class="keywordText">当前处理人员：</span>
             <el-input @keyup.enter.native="getByKey" v-model.trim="operatorCode" placeholder="请输入当前处理人员"></el-input>
           </el-col>
-          <el-col :span="8" v-if="routerState!=='03'">
-            <el-button class="btn query" type="primary" @click="getByKey">查询</el-button>
-            <el-button type="primary" class="btn reset" @click="reset">重置</el-button>
-          </el-col>
-          <el-col :span="8" :offset="8" v-else>
-            <el-button class="btn query" type="primary" @click="getByKey">查询</el-button>
-            <el-button type="primary" class="btn reset" @click="reset">重置</el-button>
-          </el-col>
+           <el-col :span="6" class="search-btn">
+          <el-button class="btn query" type="primary" @click="getByKey">查询</el-button>
+          <el-button class="btn reset" @click="reset">重置</el-button>
+        </el-col>
         </el-row>
       </div>
       <!-- 列表 -->
-      <div class="title titleContainer">
+      <div class="title titleContainer edit-div">
         <span class="titleText">流程查询</span>
         <span class="iconContainer">
           <span class="icon-item" @click="handleItem('trace')">
             <i class="el-icon liuchengIcon"></i>
             <span class="el-icon-text">流程轨迹</span>
-          </span>
-          <span class="icon-item" @click="handleItem('assign')" v-if="routerState!=='03'">
-            <i class="el-icon addIcon"></i>
-            <span class="el-icon-text">任务分派</span>
           </span>
           <span class="icon-item" @click="handleItem('trans')">
             <i class="el-icon liuchengIcon"></i>
@@ -87,7 +68,7 @@
         </span>
       </div>
       <div class="listContainer">
-        <el-table :data="moniList" height="400" border show-header highlight-current-row @selection-change="handleSelectionChange"
+        <el-table :data="moniList" height="510" border show-header highlight-current-row @selection-change="handleSelectionChange"
           @row-click="selectRow">
           <el-table-column type="index" label="序号" width="50">
           </el-table-column>
@@ -199,7 +180,6 @@
         </span>
       </el-dialog>
     </div>
-  </div>
 </template>
 
 <script>
@@ -279,7 +259,6 @@
         multipleSelection: [],
         formLabelWidth: "140px",
         routerPath: '',
-        routerState: '',
         rules: {
           toUser: [{
             required: true,
@@ -300,9 +279,8 @@
 
     methods: {
       getUserInf() {
-        // 获取路由参数，来判断是信审、复议、还是反欺诈以及各自对应的未分配、已分配和已完成三个状态
         this.queryParam.processTemplateId = 'antiFraudApp';
-        this.queryParam.taskStatus = this.routerState = '03';
+        this.queryParam.taskStatus = '03';
         this.userInf = JSON.parse(localStorage.getItem("userInf"));
         this.queryParam.userCode = this.userInf.userCode;
         this.queryParam.orgCode = this.userInf.orgCode;
@@ -365,7 +343,7 @@
         processMoniSer
           .getProcessTraceList({
             processInstanceId: id,
-            processStatus: this.routerState === "03" ? "02" : "01"
+            processStatus: "02" 
           })
           .then(res => {
             this.traceList = res.data.taskDetailList;
