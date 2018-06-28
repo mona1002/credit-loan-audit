@@ -1,97 +1,92 @@
 <template>
   <div class="taskWatting main-div">
     <!-- 复议已办任务 -->
-    <div class="content">
-      <div class="search">
-        <ul>
-          <li>
-            <p>
-              <label> 进件编号 </label>
-              <el-input v-model="params.applySubNo" placeholder="请输入进件编号"></el-input>
-            </p>
-            <p>
-              <label> 客户名称</label>
-              <el-input v-model="params.custName_la" placeholder="请输入客户名称"></el-input>
-            </p>
-            <p>
-              <label> 证件号码</label>
-              <el-input v-model="params.certCode" placeholder="请输入证件号码"></el-input>
-            </p>
-          </li>
-          <li>
-            <p>
-              <label> 产品名称</label>
+    <div class="taskWinput search-div">
+      <el-row class="row row1" type="flex">
+        <el-col :span="6" class="search-item" :offset="0">
+          <span class="keywordText">进件编号： </span>
+          <el-input v-model="params.applySubNo" placeholder="请输入进件编号"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">客户名称：</span>
+          <el-input v-model="params.custName_la" placeholder="请输入客户名称"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">证件号码：</span>
+          <el-input v-model="params.certCode" placeholder="请输入证件号码"></el-input>
+        </el-col>
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">产品名称：</span>
+          <el-select v-model="params.proCode" placeholder="请选择">
+            <el-option v-for="item in production" :key="item.proCode" :label="item.proName" :value="item.proCode">
+            </el-option>
+          </el-select>
+        </el-col>
+      </el-row>
+      <el-row class="row row2" type="flex">
+        <el-col :span="6" class="search-item" :offset="0">
+          <span class="keywordText">紧急程度： </span>
+          <el-select v-model="params.emerType" placeholder="请选择">
+            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="6" class="search-item date_picker">
+          <span class="keywordText">申请日期：</span>
+          <el-date-picker v-model="applyData" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+          </el-date-picker>
+        </el-col>
+        <el-col :span="6" class="search-item date_picker">
+          <span class="keywordText">本环节处理时间：</span>
+          <el-date-picker v-model="dealDate" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+          </el-date-picker>
+        </el-col>
 
-              <el-select v-model="params.proCode" placeholder="请选择">
-                <el-option v-for="item in production" :key="item.proCode" :label="item.proName" :value="item.proCode">
-                </el-option>
-              </el-select>
-            </p>
-            <p>
-              <label> 紧急程度</label>
-              <el-select v-model="params.emerType" placeholder="请选择">
-                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-            </p>
-            <p>
-              <label>申请日期</label>
-              <el-date-picker v-model="applyData" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
-              </el-date-picker>
-            </p>
-          </li>
-          <li>
-            <p>
-              <label ref='dealtime'> 本环节处理时间</label>
-              <el-date-picker v-model="dealDate" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
-              </el-date-picker>
-            </p>
-            <p>
-            </p>
-            <p class="btn_wrap">
-              <el-button class="btn" type="primary" style="marginLeft:228px"  @click="Rsearch">查询</el-button>
-              <el-button class="btn"  type="primary"  @click="Rreset">重置</el-button>
-            </p>
-          </li>
-        </ul>
-      </div>
-      <div class="title">
-        <h1>复议-已办任务列表</h1>
-      </div>
-      <div class="table_wrap">
-        <!-- 编辑table -->
-        <el-table :data="tableData" style="width: 100%" height="100%" border>
-          <el-table-column type="index" align='center' label=序号 width="45">
-          </el-table-column>
-          <el-table-column label="紧急程度" align='center' min-width="70">
-            <template slot-scope="scope">
-              <span v-if="!scope.row.isEmer">{{ scope.row.emerType }}</span>
-              <span class="emerColor" v-if="scope.row.isEmer">{{ scope.row.emerType }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column prop="applySubNo" label="进件编号" align='center' min-width="180">
-          </el-table-column>
-          <el-table-column prop="appDate" label="申请日期" align='center' min-width="100">
-          </el-table-column>
-          <el-table-column prop="custName" label="客户名称" align='center' min-width="100">
-          </el-table-column>
-          <el-table-column prop="certCode" label="证件号码" align='center' min-width="180">
-          </el-table-column>
-          <el-table-column prop="appOrgCode" label="进件机构" align='center' min-width="100">
-          </el-table-column>
-          <el-table-column prop="proName" label="产品名称" align='center' min-width="100">
-          </el-table-column>
-          <el-table-column prop="activationTime" label="进入本环节时间" align='center' min-width="180">
-          </el-table-column>
-          <el-table-column prop="completeTime" label="本环节处理时间" align='center' min-width="180">
-          </el-table-column>
-        </el-table>
-        <!-- 分页  -->
-        <div class="page">
-          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
-            :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
-          </el-pagination>
-        </div>
+        <el-col :span="6" class="search-btn">
+          <el-button class="btn query" type="primary" @click="Rsearch">查询</el-button>
+          <el-button class="btn reset" @click="Rreset">重置</el-button>
+        </el-col>
+      </el-row>
+    </div>
+    <div class="title titleContainer edit-div">
+      <span class="titleText">
+        <i class="el-icon title-icon"></i>
+        复议-已办任务列表
+      </span>
+    </div>
+    <div class="listContainer">
+      <!-- 编辑table -->
+      <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row border>
+        <el-table-column type="index" align='center' label=序号 width="45">
+        </el-table-column>
+        <el-table-column label="紧急程度" align='center' min-width="70">
+          <template slot-scope="scope">
+            <span v-if="!scope.row.isEmer">{{ scope.row.emerType }}</span>
+            <span class="emerColor" v-if="scope.row.isEmer">{{ scope.row.emerType }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="applySubNo" label="进件编号" align='center' min-width="180">
+        </el-table-column>
+        <el-table-column prop="appDate" label="申请日期" align='center' min-width="100">
+        </el-table-column>
+        <el-table-column prop="custName" label="客户名称" align='center' min-width="100">
+        </el-table-column>
+        <el-table-column prop="certCode" label="证件号码" align='center' min-width="180">
+        </el-table-column>
+        <el-table-column prop="appOrgCode" label="进件机构" align='center' min-width="100">
+        </el-table-column>
+        <el-table-column prop="proName" label="产品名称" align='center' min-width="100">
+        </el-table-column>
+        <el-table-column prop="activationTime" label="进入本环节时间" align='center' min-width="180">
+        </el-table-column>
+        <el-table-column prop="completeTime" label="本环节处理时间" align='center' min-width="180">
+        </el-table-column>
+      </el-table>
+      <!-- 分页  -->
+      <div class="page">
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
+          :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
+        </el-pagination>
       </div>
     </div>
   </div>
@@ -171,7 +166,7 @@
         this.params.completeTime_le = '';
         this.applyData = '';
         this.dealDate = '';
-            this.getInf(this.params);
+        this.getInf(this.params);
       },
       Rsearch() {
         this.params.appDate_ge = this.DateF(this.applyData[0]);
@@ -194,7 +189,7 @@
         });
       },
       getProducts() {
-        this.post( "/credit/productAll").then(res => {
+        this.post("/credit/productAll").then(res => {
           if (res.statusCode == 200) {
             this.production = res.data
           } else {
