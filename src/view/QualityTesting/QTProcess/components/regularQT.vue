@@ -444,7 +444,6 @@
                   <div slot="reference" class="name-wrapper">
                     <b class="required_Red"> * </b>
                     <el-radio-group :disabled='PhoneCredit' v-model="scope.row.insResult" @change="scope.row.insResult=='00'?scope.row.remark='':scope.row.remark">
-                      <!-- <el-radio-group :disabled='PhoneCredit' v-model="scope.row.insResult" @change="scope.row.insResult=='00'?scope.row.remark='':scope.row.remark"> -->
                       <el-radio label="00">正常</el-radio>
                       <el-radio label="01">异常</el-radio>
                     </el-radio-group>
@@ -2168,7 +2167,6 @@
 
   .baseInf p {
     width: 50%;
-    /* border:1px solid; */
     float: left;
     margin-top: 10px;
   }
@@ -2180,7 +2178,6 @@
   .regularQT table {
     border: 1px solid #ebeef5;
     font-size: 14px;
-    /* vertical-align: middle; */
   }
 
   .regularQT tr {

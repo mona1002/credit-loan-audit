@@ -42,7 +42,7 @@
             <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <AborrowerInformationDetail v-if=" this.tabContent2==4"></AborrowerInformationDetail>
-            <PhoneCredit v-if=" this.tabContent2==5"></PhoneCredit>
+            <PhoneCredit v-if=" this.tabContent2==5" :addBtn="false"></PhoneCredit>
             <AntiCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></AntiCreditForm>
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
             <!-- 信审审批结论轨迹 -->

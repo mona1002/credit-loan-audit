@@ -41,7 +41,7 @@
               <InternalMatch v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
               <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
               <cborrowerInformationDetail v-if=" this.tabContent1==4"></cborrowerInformationDetail>
-              <PhoneCredit v-if=" this.tabContent1==5" :SplitS="SplitLeft" :isFull.sync="isFull"></PhoneCredit>
+              <PhoneCredit v-if=" this.tabContent1==5" :SplitS="SplitLeft" :isFull.sync="isFull" :addBtn="false"></PhoneCredit>
               <FcCreditForm v-if=" this.tabContent1==6"></FcCreditForm>
               <creditInvestigation v-if=" this.tabContent1==7"></creditInvestigation>
               <processTrajectory v-if=" this.tabContent1==8"></processTrajectory>
@@ -78,7 +78,7 @@
             <InternalMatch v-if=" this.tabContent2==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <cborrowerInformationDetail v-if=" this.tabContent2==4" :isFull.sync="isFull"></cborrowerInformationDetail>
-            <PhoneCredit v-if=" this.tabContent2==5" :SplitS="SplitLeft" :isFull.sync="isFull"></PhoneCredit>
+            <PhoneCredit v-if=" this.tabContent2==5" :SplitS="SplitLeft" :isFull.sync="isFull" :addBtn="false"></PhoneCredit>
             <FCreditForm v-if=" this.tabContent2==6"></FCreditForm>
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
             <aAntiApplyInf v-if=" this.tabContent2==8"></aAntiApplyInf>

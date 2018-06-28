@@ -43,7 +43,7 @@
               <RapplicationInformationDetail v-if=" this.tabContent1==3">申请信息</RapplicationInformationDetail>
               <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail>
               <!-- <PhoneCredit v-if=" this.tabContent1==5"> 电话征信</PhoneCredit> -->
-              <RPhoneCredit v-if=" this.tabContent1==5"> 电话征信</RPhoneCredit>
+              <RPhoneCredit v-if=" this.tabContent1==5" > 电话征信</RPhoneCredit>
               <FMCreditForm v-if=" this.tabContent1==6">信审表</FMCreditForm>
               <RcreditInvestigation v-if=" this.tabContent1==7">实地征信</RcreditInvestigation>
               <aMAntiApplyInf v-if=" this.tabContent1==8">反欺诈结论</aMAntiApplyInf>

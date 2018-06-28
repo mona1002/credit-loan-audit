@@ -92,7 +92,6 @@
             {{comData.checkIncometxt}}
           </el-form-item>
         </el-tooltip>
-
         <el-tooltip class="item" effect="dark" :content="comData.checkIncometxt" placement="top">
           <el-form-item label="" class="item-column2 item-column3-null" v-show="comData.checkIncome!='00'">
             {{comData.checkIncometxt}}
