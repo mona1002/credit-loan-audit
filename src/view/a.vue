@@ -49,10 +49,10 @@
           </el-table-column>
         </el-table>
         <!-- 分页 -->
-        <div class="page">
+        <!-- <div class="page">
           <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 50, 80, 100]"
             :page-size=setPageSize layout="total, sizes, prev, pager, next, jumper" :total="totals.totalNum">
-          </el-pagination>
+          </el-pagination> -->
         </div>
       </div>
     </div>
