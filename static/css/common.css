@@ -286,6 +286,9 @@ table {
   position: absolute;
   top: -20px;
 }
+.brk{
+  white-space: pre-wrap;
+}
 .audioInd{
   color:white;
   font-size:18px;

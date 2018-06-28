@@ -102,14 +102,9 @@
   margin-right: 12px;
 }
 
-.applicationInformationDetail .el-table__body-wrapper {
-  /* overflow: hidden; */
-}
-
 /*申请信息详情 表格 */
 
 .applicationInformationDetail .el-table th {
-  /*  text-align: center; */
   font-weight: 400;
   color: #1f2d3d;
   font-size: 14px;
@@ -122,7 +117,6 @@
 }
 
 .applicationInformationDetail .el-table__body-wrapper .el-table__body td {
-  /* text-align: center; */
   font-weight: 400;
   color: #909399;
   font-size: 13px;
@@ -170,11 +164,6 @@
   overflow: hidden;
 }
 
-/* @media screen and (min-width: 1327px){
-   .applicationInformationDetail .house .el-table__body-wrapper{
-     overflow: hidden;
-   }
- } */
 
 /* 车辆信息 序号、购买时间 居中 */
 
@@ -217,12 +206,6 @@
 .applicationInformationDetail .people .el-table__body-wrapper {
   overflow: hidden;
 }
-
-/* @media screen and (min-width: 1327px){
-   .applicationInformationDetail .people .el-table__body-wrapper{
-     overflow: hidden;
-   }
- } */
 
 /*申请信息 表格去掉overflow:hidden; */
 
@@ -297,7 +280,6 @@
 /* 借款人资料表格内容居中 */
 
 .borrowerInformation .el-table th {
-  /* text-align: center; */
   font-weight: 400;
   color: #1f2d3d;
   font-size: 14px;
@@ -321,7 +303,6 @@
 }
 
 .borrowerInformation .el-table__body-wrapper .el-table__body td {
-  /* text-align: center; */
   font-weight: 400;
   color: #666666;
   font-size: 14px;

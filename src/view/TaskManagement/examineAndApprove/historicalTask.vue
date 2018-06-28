@@ -61,7 +61,7 @@
         <p>审批-历史任务列表</p>
       </div>
       <div class="taskWtable">
-        <el-table :data="datas" style="width: 100%" height="500" @row-click='goDetail' border>
+        <el-table :data="datas" style="width: 100%" height="500" @row-dblclick='goDetail' border>
           <el-table-column type="index" :index="1" label="序号" width="50">
           </el-table-column>
           <!-- <el-table-column
