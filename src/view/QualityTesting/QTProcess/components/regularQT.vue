@@ -1665,7 +1665,7 @@
                   }
                 })
               }
-              // this.referPort();
+               this.referPort();//保存之后要查询最新信息，否则一直为入参会一直为原始信息，id第二次保存的时候或者提交的时候依旧会为空（应该有值）
             } else {
               this.$message.error(res.msg);
             }
@@ -1778,7 +1778,7 @@
                     }
                   })
                 }
-                // this.referPort();
+                this.referPort();//同上
               } else {
                 this.$message.error(res.msg);
               }

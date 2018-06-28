@@ -120,7 +120,7 @@
           {{hurryData.conclusion}}
         </el-form-item> -->
           <el-form-item label="调查结果：" class="item-column1">
-            {{hurryData.conclusion}}
+            <div class="brk">  {{hurryData.conclusion}}</div>
           </el-form-item>
       </div>
     </el-form>
