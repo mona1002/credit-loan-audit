@@ -68,7 +68,8 @@
     </div>
     <!-- 列表 -->
     <div class="title titleContainer  edit-div">
-      <span class="titleText">流程查询</span>
+      <span class="titleText">
+        <i class="el-icon title-icon"></i>流程查询</span>
       <span class="iconContainer">
         <span class="icon-item" @click="handleItem('trace')">
           <i class="el-icon liuchengIcon"></i>
@@ -87,9 +88,9 @@
     <div class="listContainer">
       <el-table :data="moniList" height="510" border show-header highlight-current-row @selection-change="handleSelectionChange"
         @row-click="selectRow">
-        <el-table-column type="index" label="序号" width="50">
+        <el-table-column type="selection" align="center" width="55">
         </el-table-column>
-        <el-table-column type="selection" width="55">
+        <el-table-column type="index" label="序号" align="center" width="50">
         </el-table-column>
         <el-table-column prop="emerTypeTxt" label="紧急程度" width="80">
         </el-table-column>
