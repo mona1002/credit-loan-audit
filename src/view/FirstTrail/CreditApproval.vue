@@ -714,6 +714,11 @@
           // 申请信息 带过来的 产品名称
           this.baseProName = this.taskInWaitting.proName;
           this.certCode = this.taskInWaitting.certCode;
+                this.options = [{
+            "label": "申请登记",
+            "value": "creditApp_apply",
+            "type": "01"
+          }]
           // 任务状态
           this.taskStatus = JSON.parse(localStorage.getItem('workbenchPass')).taskStatus;
           // 反欺诈专员审批按钮，要判断下，功能角色号有配BX22的
@@ -750,6 +755,13 @@
           // 申请信息 带过来的 产品名称
           this.baseProName = this.FtaskInWaitting.proName;
           this.certCode = this.FtaskInWaitting.certCode;
+                 this.options = [
+            {
+              "label": "初审审批",
+              "value": "creditApp_firstTrial",
+              "type": "02"
+            }
+          ]
           // 任务状态
           this.taskStatus = JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskStatus;
           this.taskName = this.FtaskInWaitting.taskName;
@@ -775,7 +787,8 @@
         //   .replace(/\//g, '-')
         //   .match(/\d{4}\-\d{2}\-\d{1,2}/)[0]
         this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
-        // this.applyId = this.applicationInformationDetail.applyId;    
+       JSON.stringify(this.applicationInformationDetail)==='{}'?this.$message.error('客户信息获取失败！请保存已填写内容，从任务列表重新进入！'):'';
+       // this.applyId = this.applicationInformationDetail.applyId;    
         // this.appOrgId = this.applicationInformationDetail.appOrgId;
         // this.appOrgCode = this.applicationInformationDetail.appOrgCode;
         // // 客户编号
@@ -802,32 +815,33 @@
         // this.certCode = this.applicationInformationDetail.certCode;
         this.Social();
         // 初审 / 终审
-        this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
+        // this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
         //  this.opinionFlag  初审终审标志  
-        if (this.judgeFlag == '01') {
-          // this.opinionFlag = '01';
-          this.options = [{
-            "label": "申请登记",
-            "value": "creditApp_apply",
-            "type": "01"
-          }]
-        } else if (this.judgeFlag == '02') {
-          // this.opinionFlag = '02'; // 终审
-          this.options = [
-            // {
-            //   "label": "申请登记",
-            //   "value": "creditApp_apply",
-            //   "type": "01"
-            // },
-            {
-              "label": "初审审批",
-              "value": "creditApp_firstTrial",
-              "type": "02"
-            }
-          ]
-        } else if (this.judgeFlag == '03') {
 
-        } else if (this.judgeFlag == '04') { // 主管
+        // if (this.judgeFlag == '01') {
+        //   // this.opinionFlag = '01';
+        //   this.options = [{
+        //     "label": "申请登记",
+        //     "value": "creditApp_apply",
+        //     "type": "01"
+        //   }]
+        // } else if (this.judgeFlag == '02') {
+        //   // this.opinionFlag = '02'; // 终审
+        //   this.options = [
+        //     {
+        //       "label": "初审审批",
+        //       "value": "creditApp_firstTrial",
+        //       "type": "02"
+        //     }
+        //   ]
+        // }  else if (this.judgeFlag == '04') { // 主管
+        //   this.options = [{
+        //     "label": "反欺诈专员审批",
+        //     "value": "antiFraudApp_commissioner",
+        //     "type": ''
+        //   }]
+        // }
+        if (this.judgeFlag == '04') { // 主管
           this.options = [{
             "label": "反欺诈专员审批",
             "value": "antiFraudApp_commissioner",
