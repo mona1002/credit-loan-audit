@@ -242,14 +242,17 @@ table {
   float: right;
   margin: 6px 0 0 2px !important;
 }
-.AudioVisualLeft_compareIcon:hover{
+
+.AudioVisualLeft_compareIcon:hover {
   background: rgba(255, 255, 255, .8) !important;
 }
+
 .CreditForm {
   overflow: auto;
   overflow-x: hidden;
   min-width: 1665px;
 }
+
 .SP_middle {
   width: 2px;
   float: left;
@@ -261,7 +264,8 @@ table {
   left: calc(50% - 2px);
   z-index: 400;
 }
-.QT_btns_wrap{
+
+.QT_btns_wrap {
   vertical-align: top;
   cursor: pointer;
   margin-right: 10px;
@@ -270,6 +274,7 @@ table {
 .QT_btns_wrap img {
   vertical-align: middle;
 }
+
 .required_Red {
   color: #ff7676;
   font-weight: 700;
@@ -277,6 +282,7 @@ table {
   vertical-align: middle;
   font-style: normal;
 }
+
 .hint_word {
   color: #ff7676;
   font-size: 12px;
@@ -286,12 +292,19 @@ table {
   position: absolute;
   top: -20px;
 }
-.brk{
+
+.brk {
   white-space: pre-wrap;
 }
-.audioInd{
-  color:white;
-  font-size:18px;
-  display:inline-block;
-  vertical-align:top;
+
+.audioInd {
+  color: white;
+  font-size: 18px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.flexible {
+  display: flex;
+  justify-content: space-between;
 }
