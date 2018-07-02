@@ -109,7 +109,8 @@
    text-align: right;
  }
 
- .search-btn .el-button {
+ /* .search-btn .el-button { */
+  .Abody  .el-button {
    height: 30px;
    width: 65px;
    border-radius:8px;
@@ -222,6 +223,10 @@
  /* 流程监控 */
  .liuchengIcon{
    background-image:url('../images/liucheng.png')
+ }
+ /* 删除 */
+ .deleteIcon{
+   background-image:url('../images/delete.png')
  }
  /* 停用 */
 

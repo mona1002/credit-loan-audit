@@ -67,7 +67,6 @@ import QTResultCheck from '../view/QualityTesting/QTReconsiderProcess/components
 import ManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/ManagerTaskList.vue' //质检复议-初终审主管任务列表
 import ReManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/ReManagerTaskList.vue' //质检复议-复议任务列表（首次）
 import ACManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/ACManagerTaskList.vue' //质检复议流程-区域经理页面- 区域经理任务列表 + 质检复议流程-合规经理页面- 合规经理任务列表
-import ComplianceManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/ComplianceManagerTaskList.vue' //质检复议流程-合规经理页面- 合规经理任务列表
 import ComplianceProcess from '../view/QualityTesting/QTReconsiderProcess/components/ComplianceProcess.vue' //质检复议-
 import MatchingInfQT from '../view/FirstTrail/MatchingInfQT.vue' //质检详情
 import pdf from '../view/pdf.vue'
@@ -322,11 +321,7 @@ const routes = [{
   }, {
     path: "/ACManagerTaskList",
     component: ACManagerTaskList
-  }, {
-    path: "/ComplianceManagerTaskList",
-    component: ComplianceManagerTaskList
-  },
-  {
+  },  {
     path: "/MatchingInfQT",
     component: MatchingInfQT,
     // meta: {
