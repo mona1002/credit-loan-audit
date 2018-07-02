@@ -52,7 +52,7 @@
             <span>{{scope.row.createTime | dateFilter}}</span>
           </template>
         </el-table-column>
-        <el-table-column label="操作" align="center" min-width='120' fixed="right">
+        <el-table-column label="操作"  min-width='120' fixed="right">
           <template slot-scope="scope">
             <el-button class="btn-sm edit" size="small" type="text" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
           </template>

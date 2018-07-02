@@ -68,15 +68,15 @@
         <div class="tes">
           <div class="tab_wrap">
             <el-table :data="tableData" border height="100%" style="width: 100%">
-              <el-table-column prop="rulercode" label="规则编号" align="center" min-width="70">
+              <el-table-column prop="rulercode" label="规则编号"  min-width="70">
               </el-table-column>
-              <el-table-column prop="name" label="规则名称" align="center" min-width="70">
+              <el-table-column prop="name" label="规则名称"  min-width="70">
               </el-table-column>
-              <el-table-column prop="score" label="规则分数" align="center" min-width="100">
+              <el-table-column prop="score" label="规则分数"  min-width="100">
               </el-table-column>
-              <el-table-column prop="decision" label="规则结果" align="center" min-width="100">
+              <el-table-column prop="decision" label="规则结果"  min-width="100">
               </el-table-column>
-              <el-table-column prop="action" label="查看规则详情" align="center" min-width="100">
+              <el-table-column prop="action" label="查看规则详情"  min-width="100">
               </el-table-column>
             </el-table>
           </div>

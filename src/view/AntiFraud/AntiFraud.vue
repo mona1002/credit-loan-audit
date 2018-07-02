@@ -52,7 +52,7 @@
       </div>
       <div class="content">
         <el-table :data="antiTableData.recordList" border stripe fit highlight-current-row class="anti-table" @row-dblclick='goDetail'>
-          <el-table-column type="index" label="序号" align="center" width="50">
+          <el-table-column type="index" label="序号"  width="50">
           </el-table-column>
           <el-table-column prop="applySubno" label="进件编号">
           </el-table-column>
@@ -82,7 +82,7 @@
           </el-table-column>
           <el-table-column prop="fraudStateTxt" label="反欺诈状态" min-width="140">
           </el-table-column>
-          <!-- <el-table-column label="操作" align="center" width="180" class="aaaaaaaaaaaaa">
+          <!-- <el-table-column label="操作"  width="180" class="aaaaaaaaaaaaa">
             <template slot-scope="scope">
               <el-button size="mini" v-if="scope.row.fraudStateTxt=='反欺诈拒绝'||scope.row.fraudStateTxt=='反欺诈放弃'" @click="handleClickEdit(scope.row)">编辑</el-button>
               <el-button size="mini" type="primary" @click="handleClickInfo(scope.row)">查看</el-button>

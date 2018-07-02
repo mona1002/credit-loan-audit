@@ -1,5 +1,5 @@
 <template>
-  <div class="taskWatting main-div">
+  <div class="taskWatting main-div Height_200">
     <!-- 反欺诈案件编号维护 -->
     <div class="taskWinput search-div">
       <el-row class="row row1" type="flex">
@@ -71,9 +71,7 @@
         <el-form-item label="案件编号：" prop="caseNum" :label-width="formLabelWidth">
           <el-input v-model="form.caseNum" type="text" placeholder="请输入内容" @compositionend.native="inputCase(form.caseNum)" @keyup.native="inputCase(form.caseNum)"></el-input>
         </el-form-item>
-        <el-form-item label="案件描述：" prop="desc" :label-width="formLabelWidth">
-          <!-- <el-input v-model="form.caseDesc" type='textarea' resize="none" :maxlength="500" :rows="3" placeholder="请输入内容" @compositionend.native="textArea(form.caseDesc)"
-            @keyup.native="textArea(form.caseDesc)"></el-input> -->
+        <el-form-item label="案件描述：" prop="caseDesc" :label-width="formLabelWidth">
           <el-input v-model="form.caseDesc" type='textarea' resize="none" :rows="3" placeholder="请输入内容"></el-input>
         </el-form-item>
       </el-form>
@@ -88,7 +86,6 @@
   export default {
     data() {
       return {
-        // desc: false,
         casNumAlert: false,
         caseNumInput: '',
         dialogFormVisible: false,
@@ -108,15 +105,20 @@
             message: '请输入数字',
             trigger: 'blur'
           }],
-          desc: [{
+          ccc: [{
+            required: true,
+            message: '请输入数字',
+            trigger: 'blur'
+          }],
+          caseDesc: [{
               required: true,
               message: '请填写活动形式',
               trigger: 'blur'
             },
             {
-              min: 3,
-              max: 5,
-              message: '长度在 3 到 5 个字符',
+              min: 0,
+              max: 500,
+              message: '输入长度不能超过500',
               trigger: 'blur'
             }
           ]
@@ -169,13 +171,6 @@
         this.form.caseDesc = '';
       },
       sure(formName) {
-        // if (this.form.caseNum == '') {
-        //   this.$message.error('请填写案件编号');
-        //   return
-        // } else if (this.form.caseDesc == '') {
-        //   this.$message.error('请填写案件描述');
-        //   return
-        // }
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.dialogFormVisible = false;
@@ -204,9 +199,6 @@
         });
 
       },
-      // textArea(val) {
-      //   val.length >= 500 ? this.desc = true : this.desc = false;
-      // },
       inputCase(val) {
         if (isNaN(val) || val == '') {
           this.form.caseNum = '';
@@ -242,19 +234,3 @@
   }
 
 </script>
-<style scoped>
-  /* .redact p {
-    margin: 20px;
-  }
-
-  .redact label {
-    width: 90px;
-    margin-right: 0;
-  }
-
-  .paging {
-    margin-top: 15px;
-    text-align: center;
-  } */
-
-</style>

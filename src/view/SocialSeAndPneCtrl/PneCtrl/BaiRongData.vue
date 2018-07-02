@@ -1151,13 +1151,13 @@
               <div class="tes">
                 <div class="tab_wrap">
                   <el-table :data="tableData" border height="100%" style="width: 100%">
-                    <el-table-column prop="caseType" label="案件类别 " align="center" min-width="70">
+                    <el-table-column prop="caseType" label="案件类别 "  min-width="70">
                     </el-table-column>
-                    <el-table-column prop="caseTime" label="案发时间 " align="center" min-width="70">
+                    <el-table-column prop="caseTime" label="案发时间 "  min-width="70">
                     </el-table-column>
-                    <el-table-column prop="caseSource" label="案件来源 " align="center" min-width="100">
+                    <el-table-column prop="caseSource" label="案件来源 "  min-width="100">
                     </el-table-column>
-                    <el-table-column prop="caseLevel" label="案件级别 " align="center" min-width="100">
+                    <el-table-column prop="caseLevel" label="案件级别 "  min-width="100">
                     </el-table-column>
                   </el-table>
                 </div>

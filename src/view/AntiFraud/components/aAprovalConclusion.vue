@@ -5,7 +5,7 @@
     <el-table :data="ConclutionInf" border>
       <el-table-column prop="verIncome" label="核实收入[元]" min-width="40" align="right">
       </el-table-column>
-      <el-table-column prop="proName" label="批准产品" min-width="30"  align="center">
+      <el-table-column prop="proName" label="批准产品" min-width="30"  >
       </el-table-column>
       <el-table-column prop="ploanAmt" label="批准金额[元]" min-width="40" align="right">
       </el-table-column>
@@ -21,9 +21,9 @@
       </el-table-column>
       <el-table-column prop="totalRate" label="总负债率" min-width="30" align="right">
       </el-table-column>
-      <el-table-column prop="appConclusion" label="审批结论" min-width="30" align="center">
+      <el-table-column prop="appConclusion" label="审批结论" min-width="30" >
       </el-table-column>
-      <el-table-column prop="auditDate" label="审批时间" min-width="40"  align="center">
+      <el-table-column prop="auditDate" label="审批时间" min-width="40" >
       </el-table-column>
     </el-table>
   </div>

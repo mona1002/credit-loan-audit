@@ -46,7 +46,7 @@
       </div>
       <div class="listContainer">
         <el-table :data="antiTableData.taskDetailList" border stripe fit height="510"  highlight-current-row class="anti-table" v-show="antiFlag!='03'&& antiFlag!='04'">
-          <el-table-column type="index" align="center" label="序号" width="50">
+          <el-table-column type="index"  label="序号" width="50">
           </el-table-column>
           <el-table-column prop="applySubno" label="进件编号" min-width="170">
           </el-table-column>
@@ -76,7 +76,7 @@
           </el-table-column>
           <el-table-column prop="fraudStateTxt" label="反欺诈状态" width="120">
           </el-table-column>
-          <el-table-column label="操作" align="center" width="180" fixed="right">
+          <el-table-column label="操作" width="180" fixed="right">
             <template slot-scope="scope">
               <el-button size="mini" v-if="scope.row.fraudStateTxt=='反欺诈拒绝'||scope.row.fraudStateTxt=='反欺诈放弃'" @click="handleClickEdit(scope.row)">编辑</el-button>
               <el-button size="mini" @click="handleClickInfo(scope.row)">查看</el-button>
@@ -86,7 +86,7 @@
         <!-- 专员 -->
         <el-table :data="directorTableData.taskDetailList" border stripe fit highlight-current-row @row-dblclick="rowDbClick" v-show="antiFlag=='03'||antiFlag=='04'"
           class="director-table">
-          <el-table-column type="index" :index="1" align="center" label="序号" width='50'>
+          <el-table-column type="index" :index="1"  label="序号" width='50'>
           </el-table-column>
           <el-table-column prop="taskTypeTxt" label="任务类型" width="120">
           </el-table-column>

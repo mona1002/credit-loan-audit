@@ -1,5 +1,5 @@
 <template>
-   <div class="taskWatting main-div">
+  <div class="taskWatting main-div">
     <!-- 反欺诈规则设定 -->
     <div class="taskWinput search-div">
       <el-row class="row row1" type="flex">
@@ -25,8 +25,8 @@
     </div>
     <div class="listContainer">
       <!-- 编辑table -->
-      <el-table :data="tableData" style="width: 100%" height="510"  highlight-current-row border>
-        <el-table-column type="index" align='center' label=序号 width="50">
+      <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row border>
+        <el-table-column type="index" label=序号 width="50">
         </el-table-column>
         <el-table-column prop="ruleNum" label="规则编号" min-width="100">
         </el-table-column>
@@ -40,15 +40,15 @@
             </el-popover>
           </template>
         </el-table-column>
-        <el-table-column prop="isGenTaskTxt" label="是否生成任务" align='center' min-width="100">
+        <el-table-column prop="isGenTaskTxt" label="是否生成任务" min-width="100">
         </el-table-column>
-        <el-table-column prop="isDecRejectTxt" label="是否决策拒绝" align='center' min-width="100">
+        <el-table-column prop="isDecRejectTxt" label="是否决策拒绝" min-width="100">
         </el-table-column>
-        <el-table-column prop="isValidTxt" label="是否生效" align='center' min-width="100">
+        <el-table-column prop="isValidTxt" label="是否生效" min-width="100">
         </el-table-column>
-        <el-table-column label="操作" align='center'>
+        <el-table-column label="操作" fixed="right">
           <template slot-scope="scope">
-            <el-button size="mini" type="primary" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            <el-button class="btn-sm edit" size="small" type="text" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -195,5 +195,6 @@
 
 </script>
 <style scoped>
+
 
 </style>
