@@ -967,6 +967,7 @@
 				this.request();
 			},
 			request(){
+				 var query={};
 	    		this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
 		        'id':this.applyId
 		      }).then(res => {
@@ -1233,7 +1234,8 @@
 		        }else if(this.datas.sourcesChan=='06'){
 		            this.datas.sourcesChan="其他";
 		        };
-		        var query={
+		        // var query={
+				 var query={
 		        	appType:this.datas.appType,
 		        	appTypeTxt:this.datas.appTypeTxt,
 		        	certType:this.accepCusBasicInfo.certType,
