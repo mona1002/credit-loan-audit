@@ -1,6 +1,5 @@
 <template>
   <div class="SplitScreen">
-    <myHead></myHead>
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
       <p class="PerDtl">
@@ -117,7 +116,6 @@
   </div>
 </template>
 <script>
-  import myHead from "../header.vue"
   // 编辑
   import AudioVisual from "./detailComponent/AudioVisual";
   import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
@@ -401,7 +399,6 @@
       this.mountedInf();
     },
     components: {
-      myHead,
       AudioVisual,
       AudioVisualLeft,
       remark,

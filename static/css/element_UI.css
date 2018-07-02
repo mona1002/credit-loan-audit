@@ -1,9 +1,9 @@
 /* .Abody 部分 */
 
- .Abody .el-button {
+ /* .Abody .el-button {
   border-radius: 8px;
   padding: 9px 22px;
-}
+} */
 /*
 .Abody .el-button--primary {
   color: white;
@@ -14,9 +14,7 @@
   margin-top: 15vh;
 }
 
-.Abody .el-table th .cell {
-  font-weight: 800;
-} */
+*/
 
 /* 信审审批结论轨迹 th全部居中 */
 
@@ -926,7 +924,7 @@
 /* 信审表-折叠面板title 后面的icon倾斜 */
 
 .CreditForm .el-collapse-item__arrow,
-.regularQT .el-collapse-item__arrow,
+/* .regularQT .el-collapse-item__arrow, */
 .SSComp .el-collapse-item__arrow {
   /* line-height: 40px; */
   line-height: 38px;
@@ -969,7 +967,7 @@
 /* 信审表-去掉所有重复paddingbottom值 */
 
 .CreditForm .el-collapse-item__content,
-.regularQT .el-collapse-item__content,
+/* .regularQT .el-collapse-item__content, */
 .SSComp .el-collapse-item__content {
   padding-bottom: 0;
 }
@@ -990,7 +988,7 @@
 
 .CreditForm .el-collapse-item__header,
 .aAntiApplyInf .el-collapse-item__header,
-.regularQT .el-collapse-item__header,
+/* .regularQT .el-collapse-item__header, */
 .SSComp .el-collapse-item__header {
   border: 1px solid silver;
   background: #eef0f9;
@@ -1006,7 +1004,7 @@
 
 .CreditForm .el-collapse-item,
 .aAntiApplyInf .el-collapse-item,
-.regularQT .el-collapse-item,
+/* .regularQT .el-collapse-item, */
 .SSComp .el-collapse-item {
   position: relative
 }
@@ -1024,8 +1022,10 @@
   height: auto !important;
 }
 
-.SSComp .el-collapse-item__wrap,
-.regularQT .el-collapse-item__wrap {
+.SSComp .el-collapse-item__wrap
+/* ,
+.regularQT .el-collapse-item__wrap  */
+{
   width: 100%;
   border-bottom: none;
 }
@@ -1591,43 +1591,23 @@
 
 /* 信审任务列表 */
 
-.taskWinput .el-input {
+/* .taskWinput .el-input {
   width: auto;
-}
+} */
 
-.taskWinput .el-input__inner {
-  /* height: 35px;
-  border-radius: 6px;
-  width: 258px; */
-}
-
-.taskWatting .el-table__header-wrapper tr {
+/* .taskWatting .el-table__header-wrapper tr {
   background-color: #fff;
-}
-
-.taskWatting .el-table th {
-  /* padding-left: 10px; */
-  /* font-weight: 800;
-  color: #909399;
-  font-size: 13px; */
 }
 
 .taskWatting .el-table th .cell {
   font-weight: 800;
 }
 
-.taskWatting .el-table__body-wrapper .el-table__body td {
-  /* padding-left: 10px; */
-  /* font-weight: 400;
-  color: #909399;
-  font-size: 13px; */
-}
-
 .taskWatting .el-table th:nth-of-type(1) {
   text-align: center;
-}
+} */
 
-@media screen and (max-width: 1485px) {
+/* @media screen and (max-width: 1485px) {
   .taskWatting .el-table__body-wrapper {
     overflow-x: scroll;
   }
@@ -1713,13 +1693,13 @@
 
 .taskWatting .el-table__body-wrapper .el-table__body td:nth-of-type(10) {
   text-align: center;
-}
+} */
 
 /* 信审任务列表 按钮宽度*/
-
+/* 
 .taskWatting .el-col-22 {
   width: calc( 66.6% + 394px);
-}
+} */
 
 /* 信审任务列表 分页去掉浮动-----------------------------------------未成功，待调整*/
 
@@ -1732,9 +1712,9 @@
  float: none;
 } */
 
-.taskWatting .el-select-dropdown__item.selected {
+/* .taskWatting .el-select-dropdown__item.selected {
   font-weight: 400;
-}
+} */
 
 /* 工作台导航 */
 
@@ -2685,7 +2665,7 @@ body .el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu 
   width: 35%;
 } */
 
-.taskWatting.doTheTask .el-table th:nth-of-type(5) {
+/* .taskWatting.doTheTask .el-table th:nth-of-type(5) {
   text-align: left;
 }
 
@@ -2707,7 +2687,7 @@ body .el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu 
 
 .taskWatting.doTheTask .el-table__body-wrapper .el-table__body td:nth-of-type(9) {
   text-align: center;
-}
+} */
 
 .el-button.is-plain:focus,
 .el-button.is-plain:hover,
@@ -2763,11 +2743,10 @@ body .el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu 
 }
 
 /* 综合查询 */
-
+/* 
 .regularQT .el-button,
 .specialQT .el-button {
   border: none;
-  /* vertical-align: bottom; */
   color: #666666
 }
 
@@ -2777,13 +2756,13 @@ body .el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu 
 
 .regularQT .el-input {
   width: 200px;
-}
+} */
 
 .aAntiApplyInf .ccccc {
   width: 800px;
   vertical-align: top;
 }
-
+/* 
 .regularQT .el-collapse-item__wrap {
   overflow: inherit;
 }
@@ -2801,14 +2780,13 @@ body .el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu 
 .regularQT .result_QT .el-table td
  {
   padding: 0;
-}
+} */
 
-.regularQT .weChatNapliay .el-table td:nth-of-type(4),
+/* .regularQT .weChatNapliay .el-table td:nth-of-type(4),
 .regularQT .MobileCheck .el-table td:nth-of-type(10),
 .regularQT .result_QT .el-table td:nth-of-type(4)
  {
   vertical-align: bottom;
-  /* background:red; */
 }
 
 .regularQT .alertBox .el-dialog__header {
@@ -2829,7 +2807,7 @@ body .el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu 
 }
 .regularQT .el-radio__input.is-disabled.is-checked .el-radio__inner::after{
   background-color: #80848c;
-}
+} */
 .ReApply .AntiInf .el-collapse-item__wrap {
   /* background: green; */
 }
