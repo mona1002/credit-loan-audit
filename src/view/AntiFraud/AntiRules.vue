@@ -46,7 +46,7 @@
         </el-table-column>
         <el-table-column prop="isValidTxt" label="是否生效" min-width="100">
         </el-table-column>
-        <el-table-column label="操作" fixed="right">
+        <el-table-column label="操作" width="80" fixed="right">
           <template slot-scope="scope">
             <el-button class="btn-sm edit" size="small" type="text" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
           </template>

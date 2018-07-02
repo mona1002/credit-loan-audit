@@ -312,6 +312,7 @@
    height: 24px;
    font-size: 13px;
    padding: 0;
+   width: auto;
  }
 
  .el-button--mini,
