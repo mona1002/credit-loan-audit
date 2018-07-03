@@ -268,8 +268,8 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="calcAddinfo">取 消</el-button>
-        <el-button type="primary" :loading="loadsitu" @click="SaveAdd('ruleFormAdd')">{{adbtn}}</el-button>
+        <el-button @click="canc">取 消</el-button>
+        <el-button type="primary" :loading="loadsitu" @click="SaveEdit('ruleFormAdd')">{{adbtn}}</el-button>
       </div>
     </el-dialog>
   </div>
@@ -293,7 +293,7 @@
 
         },
         updateInf: {}, //编辑
-        formLabelWidth: '100px',
+        formLabelWidth: '200px',
         recentDays: "",
         rulesAdd: {
           recentDays: [{
@@ -484,14 +484,14 @@
         // this.addNew.creator = '';
         // this.addNew.createTime = '';
       },
-      SaveAdd(ruleFormAdd) { //添加  提交
-        if (this.addNew.recentDays === '' || this.addNew.drawSheetType === '' || this.addNew.makeRatio === '' || this.addNew
-          .passRatio === '' ||
-          this.addNew.minPassNum === '' || this.addNew.refuseRatio === '' || this.addNew.minRefuseNum === '' || this.addNew
-          .creator === '' || this.addNew.createTime === '') {
-          this.$message.error('请输入必填项！');
-          return
-        }
+      SaveAdd(formName) { //添加  提交
+        // if (this.addNew.recentDays === '' || this.addNew.drawSheetType === '' || this.addNew.makeRatio === '' || this.addNew
+        //   .passRatio === '' ||
+        //   this.addNew.minPassNum === '' || this.addNew.refuseRatio === '' || this.addNew.minRefuseNum === '' || this.addNew
+        //   .creator === '' || this.addNew.createTime === '') {
+        //   this.$message.error('请输入必填项！');
+        //   return
+        // }
         //  this.addNew.drawSheetType == '01' ? this.proficiencyCount++ : ''; //熟悉
         //     this.addNew.drawSheetType == '02' ? this.newOneCount++ : ''; //新人
         if ((this.addNew.drawSheetType == '01' && this.proficiencyCount > 0) || (this.addNew.drawSheetType == '02' &&
@@ -499,71 +499,88 @@
           this.$message.error(' 抽单类型设置重复！');
           return
         }
-        this.loadsitu = true;
-        this.adbtn = '保存中';
-        this.post("/insMakeRules/addInfo", {
-          drawSheetType: this.addNew.drawSheetType,
-          recentDays: this.addNew.recentDays,
-          makeRatio: this.addNew.makeRatio / 100,
-          passRatio: this.addNew.passRatio / 100,
-          minPassNum: this.addNew.minPassNum,
-          refuseRatio: this.addNew.refuseRatio / 100,
-          minRefuseNum: this.addNew.minRefuseNum,
-          creator: this.addNew.creator,
-          createTime: this.addNew.createTime
-        }).then(res => {
-          if (res.statusCode == 200) {
-            this.$message({
-              message: '提交成功!',
-              type: 'success'
+
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            this.loadsitu = true;
+            this.adbtn = '保存中';
+            this.post("/insMakeRules/addInfo", {
+              drawSheetType: this.addNew.drawSheetType,
+              recentDays: this.addNew.recentDays,
+              makeRatio: this.addNew.makeRatio / 100,
+              passRatio: this.addNew.passRatio / 100,
+              minPassNum: this.addNew.minPassNum,
+              refuseRatio: this.addNew.refuseRatio / 100,
+              minRefuseNum: this.addNew.minRefuseNum,
+              creator: this.addNew.creator,
+              createTime: this.addNew.createTime
+            }).then(res => {
+              if (res.statusCode == 200) {
+                this.$message({
+                  message: '提交成功!',
+                  type: 'success'
+                });
+                this.calcAddinfo();
+                this.getListInf();
+              } else {
+                this.$message.error(res.msg);
+                this.getListInf();
+              }
             });
-            this.calcAddinfo();
-            this.getListInf();
+            this.add = false;
+
           } else {
-            this.$message.error('添加失败');
-            this.getListInf();
+            console.log('error submit!!');
+            return false;
           }
         });
-        this.add = false;
+
       },
       SaveEdit() { //编辑  提交  
-        if (this.updateInf.recentDays === '' || this.updateInf.recentDays == null ||
-          this.updateInf.drawSheetType === '' || this.updateInf.drawSheetType == null ||
-          this.updateInf.makeRatio === '' || this.updateInf.makeRatio == null ||
-          this.updateInf.passRatio === '' || this.updateInf.passRatio == null ||
-          this.updateInf.minPassNum === '' || this.updateInf.minPassNum == null ||
-          this.updateInf.refuseRatio === '' || this.updateInf.refuseRatio == null ||
-          this.updateInf.minRefuseNum === '' || this.updateInf.minRefuseNum == null
-          // ||this.updateInf.creator === '' || this.updateInf.creator == null ||
-          // this.updateInf.createTime === '' || this.updateInf.createTime == null
-        ) {
-          this.$message.error('请输入必填项！');
-          return
-        }
-        this.loadsitu = true;
-        this.adbtn = '保存中';
-        this.post("/insMakeRules/updateInfo", {
-          id: this.updateInf.id,
-          drawSheetType: this.updateInf.drawSheetType,
-          recentDays: this.updateInf.recentDays,
-          makeRatio: this.updateInf.makeRatio / 100,
-          passRatio: this.updateInf.passRatio / 100,
-          minPassNum: this.updateInf.minPassNum,
-          refuseRatio: this.updateInf.refuseRatio / 100,
-          minRefuseNum: this.updateInf.minRefuseNum
-        }).then(res => {
-          if (res.statusCode == 200) {
-            this.$message({
-              message: '提交成功!',
-              type: 'success'
+        // if (this.updateInf.recentDays === '' || this.updateInf.recentDays == null ||
+        //   this.updateInf.drawSheetType === '' || this.updateInf.drawSheetType == null ||
+        //   this.updateInf.makeRatio === '' || this.updateInf.makeRatio == null ||
+        //   this.updateInf.passRatio === '' || this.updateInf.passRatio == null ||
+        //   this.updateInf.minPassNum === '' || this.updateInf.minPassNum == null ||
+        //   this.updateInf.refuseRatio === '' || this.updateInf.refuseRatio == null ||
+        //   this.updateInf.minRefuseNum === '' || this.updateInf.minRefuseNum == null
+        //   // ||this.updateInf.creator === '' || this.updateInf.creator == null ||
+        //   // this.updateInf.createTime === '' || this.updateInf.createTime == null
+        // ) {
+        //   this.$message.error('请输入必填项！');
+        //   return
+        // }
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            this.loadsitu = true;
+            this.adbtn = '保存中';
+            this.post("/insMakeRules/updateInfo", {
+              id: this.updateInf.id,
+              drawSheetType: this.updateInf.drawSheetType,
+              recentDays: this.updateInf.recentDays,
+              makeRatio: this.updateInf.makeRatio / 100,
+              passRatio: this.updateInf.passRatio / 100,
+              minPassNum: this.updateInf.minPassNum,
+              refuseRatio: this.updateInf.refuseRatio / 100,
+              minRefuseNum: this.updateInf.minRefuseNum
+            }).then(res => {
+              if (res.statusCode == 200) {
+                this.$message({
+                  message: '提交成功!',
+                  type: 'success'
+                });
+                this.getListInf();
+              } else {
+                this.$message.error(res.msg);
+                this.getListInf();
+              }
             });
-            this.getListInf();
+            this.Edit = false;
           } else {
-            this.$message.error(res.msg);
-            this.getListInf();
+            console.log('error submit!!');
+            return false;
           }
         });
-        this.Edit = false;
       },
       CFsave() { //任务分配
         // 生成 质检任务接口
@@ -582,8 +599,10 @@
       },
     },
     mounted() {
-      this.addNew.creator = JSON.parse(localStorage.getItem('userInf')).userCode;
-      console.log(this.addNew.creator)
+      this.userInf = JSON.parse(localStorage.getItem('userInf'));
+      this.addNew.creator = this.userInf.userCode;
+      // this.addNew.creator = JSON.parse(localStorage.getItem('userInf')).userCode;
+      console.log(this.userInf)
       this.getListInf(); //查询
       this.getSystemDate(); //调用系统时间
     },
