@@ -1260,28 +1260,28 @@
           } else {
             this.$message.error(res.msg);
             if (this.judgeFlag.flag == '01') { // 初审 
-              this.$router.push('/taskInWaitting?taskNodeName=creditApp_firstTrial&flag=01');
               this.del('初审详情');
+              this.$router.push('/taskInWaitting?taskNodeName=creditApp_firstTrial&flag=01');
             } else if (this.judgeFlag.flag == '02') { // 终审
               //   this.$route.fullPath.indexOf('?') != -1 ? this.taskNodeName = route.fullPath.split('?')[1].split('&')[
               //       0].split('=')[1] :
               //     this.taskNodeName;
               //   this.taskNodeName != '' ? this.$router.push('FtaskInWaitting?taskNodeName=' + this.taskNodeName +
               //     '&flag=02') : '';
-              window.history.go(-1);
               this.del('终审详情');
+              window.history.go(-1);
             } else if (this.judgeFlag.flag == '03') { //反欺诈专员
+              this.del('反欺诈详情');
               this.$router.push('/AntiFraud34?taskNodeName=antiFraudApp_commissioner&flag=03');
-              this.del('反欺诈详情');
             } else if (this.judgeFlag.flag == '04') { //反欺诈主管
-              this.$router.push('/AntiFraud34?taskNodeName=antiFraudApp_manager&flag=04');
               this.del('反欺诈详情');
+              this.$router.push('/AntiFraud34?taskNodeName=antiFraudApp_manager&flag=04');
             } else if (this.judgeFlag.flag == '05') {
+              this.del('复议详情');
               this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_commissioner&flag=05');
-              this.del('复议详情');
             } else if (this.judgeFlag.flag == '06') { //复议
-              this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_manager&flag=06');
               this.del('复议详情');
+              this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_manager&flag=06');
             }
           }
         });
@@ -1392,11 +1392,11 @@
           name: delname
         }).then((views) => {
           const latestView = views.slice(-1)[0]
-          if (latestView) {
-            this.$router.push(latestView.StatefullPath);
-          } else {
-            this.$router.push('/')
-          }
+          //   if (latestView) {
+          //     this.$router.push(latestView.StatefullPath);
+          //   } else {
+          //     this.$router.push('/')
+          //   }
         })
       },
       dhandleSizeChange(val) {
