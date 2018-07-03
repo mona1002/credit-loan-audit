@@ -749,3 +749,9 @@
  .holidaySetting .el-table th.is-hidden>* {
    visibility: visible;
  } */
+ .Height_200 .el-dialog .el-dialog__body{
+  height: 200px;
+  }
+  .Height_300 .el-dialog .el-dialog__body{
+    height: 300px;
+    }
