@@ -196,27 +196,6 @@
           this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
           this.$refs.right_tab_ul.style.left = "0";
           this.DblScreen();
-          // if (this.tabActiveInd1 === 0) {
-          //   this.$refs.AudioLeft.mountedInf();
-          //   this.$refs.AudioLeftCom ? this.$refs.AudioLeftCom.mountedInf() : '';
-          //   this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
-          // }
-          //         this.tabActiveInd1 === 1 ? this.$refs.markLeft.mountedInf() : '';
-          //          this.tabActiveInd1 === 2 ? this.$refs.InterLeft.mountedInf() : '';
-          //          this.tabActiveInd1 === 3 ? this.$refs.applicationLeft.mountedInf() : '';
-          //          this.tabActiveInd1 === 4 ? this.$refs.borrowLeft.mountedInf() : '';
-          //          this.tabActiveInd1 === 5 ? this.$refs.phoneLeft.mountedInf() : '';
-          //          this.tabActiveInd1 === 6 ? this.$refs.CreditFormLeft.mountedInf() : '';
-          //          this.tabActiveInd1 === 7 ? this.$refs.InvestigationLeft.mountedInf() : '';
-          //          this.tabActiveInd1 === 8 ? this.$refs.processLeft.mountedInf() : '';
-          //         this.tabActiveInd2 === 0 ? this.$refs.Audio.mountedInf() : '';
-          // this.tabActiveInd2 === 3 ? this.$refs.applicationInf.mountedInf() : '';
-          //          this.tabActiveInd2 === 4 ? this.$refs.borrow.mountedInf() : '';
-          // this.tabActiveInd2 === 5 ? this.$refs.phone.mountedInf() : '';
-          // this.tabActiveInd2 === 6 ? this.$refs.CreditForm.mountedInf() : '';
-          // this.tabActiveInd2 === 7 ? this.$refs.Investigation.mountedInf() : '';
-          // this.tabActiveInd2 === 8 ? this.$refs.AntiApply.mountedInf() : '';
-          // this.tabActiveInd2 === 9 ? this.$refs.Approval.mountedInf() : '';
         }
       }
     },
@@ -359,40 +338,8 @@
       }
     },
     // activated() {
-    //   console.log(this.$route.meta.refresh)
-    //   console.log('activated')
-    //   if (this.$route.meta.refresh) {
-    //     this.mountedInf();
-    //     this.tab1Index = this.tabActiveInd1 = this.tabContent1 = 0;
-    //     this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 3;
-    //     this.flag1 = [true, true, true, false, true, true, true, true, true];
-    //     this.flag2 = [true, true, true, true, true, true, true, true, true, true];
-    //   }
-    //   //  // 恢复成默认的false，避免isBack一直是true，导致下次无法获取数据
-    //   //  this.$route.meta.isBack=false
-    //   //  // 恢复成默认的false，避免isBack一直是true，导致每次都获取新数据
-    //   //  this.isFirstEnter=false;
-    // },
     // deactivated(){
-    // console.log('deactivated')
-    // console.log( this.tabContent2)
-    //   //  if( this.tabContent2==3){
-    //   // //     // this.destroyInf=
-    //   //     this.tabContent2=0;
-    //   //   }
-    //     // else{
-    //     //   this.destroyInf=this.tabContent2;
-    //     // }
-    // },
     // beforeRouteLeave(to,from,next){
-    // console.log( this.tabContent2)
-
-    //   //  this.tabContent2==3? this.tabContent2=0:this.tabContent2;
-    // console.log(to)
-    // console.log(from)
-    // // from.meta.refresh=false;
-    // next();
-    // },
     mounted() {
       this.title = "影像资料";
       this.MyMove();

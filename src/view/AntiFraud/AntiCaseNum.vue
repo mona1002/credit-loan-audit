@@ -94,6 +94,8 @@
         pageCount: 10, // 每页显示条数
         totalRecord: 0, //总条数
         formLabelWidth: "100px",
+        adbtn: '确定',
+        loadsitu: false,
         form: {
           caseNum: '',
           caseDesc: '',
@@ -101,11 +103,6 @@
         tableData: [],
         rulesAdd: {
           caseNum: [{
-            required: true,
-            message: '请输入数字',
-            trigger: 'blur'
-          }],
-          ccc: [{
             required: true,
             message: '请输入数字',
             trigger: 'blur'
@@ -170,9 +167,17 @@
         this.form.caseNum = '';
         this.form.caseDesc = '';
       },
+      add() {
+        this.loadsitu = false;
+        this.adbtn = '确定';
+        this.dialogFormVisible = true;
+      },
       sure(formName) {
+        console.log(this.$refs[formName])
         this.$refs[formName].validate((valid) => {
           if (valid) {
+            this.loadsitu = true;
+            this.adbtn = '保存中';
             this.dialogFormVisible = false;
             this.post("/caseInfoController/insert", {
               "param": {
@@ -187,7 +192,7 @@
                 });
                 this.getInf(this.currentPage, this.pageCount, this.caseNumInput);
               } else {
-                this.$message.error('提交失败，请稍后再试！');
+                this.$message.error(res.msg);
               }
             });
             this.form.caseNum = '';

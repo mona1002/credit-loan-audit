@@ -1188,6 +1188,9 @@
         }, {
           value: '06',
           label: '终审建议优化'
+        }, {
+          value: '09',
+          label: '无'
         }],
         QTresultSpecial: [{ //专项下拉
           value: '07',
@@ -1664,7 +1667,7 @@
                   }
                 })
               }
-               this.referPort();//保存之后要查询最新信息，否则一直为入参会一直为原始信息，id第二次保存的时候或者提交的时候依旧会为空（应该有值）
+              this.referPort(); //保存之后要查询最新信息，否则一直为入参会一直为原始信息，id第二次保存的时候或者提交的时候依旧会为空（应该有值）
             } else {
               this.$message.error(res.msg);
             }
@@ -1706,7 +1709,8 @@
               this.$message.error('质检结果专项/纵向/无不能同时存在！')
               return
             } else if (this.checkResultCount09 > 0 && (this.checkResultCount01 > 0 || this.checkResultCount02 > 0 ||
-                this.checkResultCount03 > 0 || this.checkResultCount04 > 0 || this.checkResultCount07 > 0 || this.checkResultCount08 >
+                this.checkResultCount03 > 0 || this.checkResultCount04 > 0 || this.checkResultCount05 > 0 || this.checkResultCount06 >
+                0 || this.checkResultCount07 > 0 || this.checkResultCount08 >
                 0)) {
               this.$message.error('质检结果已经选择无！')
               return
@@ -1777,7 +1781,7 @@
                     }
                   })
                 }
-                this.referPort();//同上
+                this.referPort(); //同上
               } else {
                 this.$message.error(res.msg);
               }

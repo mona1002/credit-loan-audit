@@ -37,7 +37,7 @@
               </p>
               <p v-show="this.InternetShow.commentS">
                 <label class="InternetInf_right_label"> 执行信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wbeexEcutedtxt}} </span>
+                <span class="detail_inf">{{this.FormData.wbeexEcutedtxt}} </span>
               </p>
             </li>
             <li>
@@ -47,7 +47,7 @@
               </p>
               <p v-show="this.InternetShow.commentS1">
                 <label class="InternetInf_right_label"> 单位执行信息说明：</label>
-                  <span class="detail_inf">{{this.FormData.wnetHirecomtxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetHirecomtxt }} </span>
               </p>
             </li>
             <li>
@@ -57,7 +57,7 @@
               </p>
               <p v-show="this.InternetShow.commentS2">
                 <label class="InternetInf_right_label"> 失信记录说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetEcutedBreatxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetEcutedBreatxt }} </span>
               </p>
             </li>
             <li>
@@ -67,7 +67,7 @@
               </p>
               <p v-show="this.InternetShow.commentS3">
                 <label class="InternetInf_right_label"> 单位失信记录说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetHirecomBreatxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetHirecomBreatxt }} </span>
               </p>
             </li>
             <li>
@@ -77,7 +77,7 @@
               </p>
               <p v-show="this.InternetShow.commentS4">
                 <label class="InternetInf_right_label"> 手机异常信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetPhonetxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetPhonetxt }} </span>
               </p>
             </li>
             <li>
@@ -87,7 +87,7 @@
               </p>
               <p v-show="this.InternetShow.commentS5">
                 <label class="InternetInf_right_label"> 单位名称异常信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetHirecomNametxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetHirecomNametxt }} </span>
               </p>
             </li>
             <li>
@@ -97,7 +97,7 @@
               </p>
               <p v-show="this.InternetShow.commentS6">
                 <label class="InternetInf_right_label"> 单位电话异常信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetHirecomPhonetxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetHirecomPhonetxt }} </span>
               </p>
             </li>
             <li>
@@ -107,7 +107,7 @@
               </p>
               <p v-show="this.InternetShow.commentS7">
                 <label class="InternetInf_right_label"> 地址异常信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetAddrandEstatetxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetAddrandEstatetxt }} </span>
               </p>
             </li>
             <li>
@@ -117,7 +117,7 @@
               </p>
               <p v-show="this.InternetShow.commentS8">
                 <label class="InternetInf_right_label"> 单位地址异常信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetHirecomAddresstxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetHirecomAddresstxt }} </span>
               </p>
             </li>
             <li>
@@ -127,7 +127,7 @@
               </p>
               <p v-show="this.InternetShow.commentS9">
                 <label class="InternetInf_right_label"> 工商登记信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetCompanytxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetCompanytxt }} </span>
               </p>
             </li>
             <li>
@@ -137,7 +137,7 @@
               </p>
               <p v-show="this.InternetShow.commentS10" class="bottom">
                 <label class="InternetInf_right_label"> 组织机构代码信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetAddrstatetxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetAddrstatetxt }} </span>
               </p>
             </li>
           </ul>
@@ -232,7 +232,7 @@
             <li>
               <p>
                 <label class="InternetInf_left_label "> 职位级别： </label>
-                  <span class="detail_inf elips">{{this.FormData.workPost }} </span>
+                <span class="detail_inf elips">{{this.FormData.workPost }} </span>
               </p>
               <p>
                 <label class="InternetInf_right_label">单位电话：</label>
@@ -599,23 +599,23 @@
           <ul>
             <li class="top">
               <label class="InternetInf_left_label ">住址电话调查结论：</label>
-                <span class="detail_inf ComAddr">{{this.FormData.hometelConclusion }} </span>
+              <span class="detail_inf ComAddr">{{this.FormData.hometelConclusion }} </span>
             </li>
             <li>
               <label class="InternetInf_left_label">单位电话调查结论：</label>
-                <span class="detail_inf ComAddr">{{this.FormData.companyConclusion }} </span>
+              <span class="detail_inf ComAddr">{{this.FormData.companyConclusion }} </span>
             </li>
             <li>
               <label class="InternetInf_left_label">家庭联系人调查结论：</label>
-                <span class="detail_inf ComAddr">{{this.FormData.fContractConclusion }} </span>
+              <span class="detail_inf ComAddr">{{this.FormData.fContractConclusion }} </span>
             </li>
             <li>
               <label class="InternetInf_left_label">紧急联系人调查结论：</label>
-                <span class="detail_inf ComAddr">{{this.FormData.eContractConclusion }} </span>
+              <span class="detail_inf ComAddr">{{this.FormData.eContractConclusion }} </span>
             </li>
             <li class="bottom">
               <label class="InternetInf_left_label">工作证明人调查结论：</label>
-                <span class="detail_inf ComAddr">{{this.FormData.jobRefConclusion }} </span>
+              <span class="detail_inf ComAddr">{{this.FormData.jobRefConclusion }} </span>
             </li>
           </ul>
         </div>
@@ -649,7 +649,7 @@
               <li>
                 <p>
                   <label class="InternetInf_left_label" style="textAlign:right">初审结果评价：</label>
-                    <span class="detail_inf ComAddr" style="height:115px;">{{this.FormData.oother}} </span>
+                  <span class="detail_inf ComAddr" style="height:115px;">{{this.FormData.oother}} </span>
                 </p>
                 <p class="FinalConclution" style="position:relative">
                   <i class="hint">
@@ -672,13 +672,14 @@
       <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
     </div>
     <!-- ==============================点击确认时提示弹框=================================== -->
-    <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
+    <!-- <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
       <span>确定操作？</span>
       <span slot="footer" class="dialog-footer">
         <button class="calbtn" @click="canc">取消</button>
         <button class="subtn" type="primary" @click="CFsave">确定</button>
       </span>
-    </el-dialog>
+    </el-dialog> -->
+
   </div>
 </template>
 
@@ -748,7 +749,7 @@
           result: false,
         },
         getParams: [], //获取taskwaitting里面的 查询入参 applyId
-        Confirm: false,
+        // Confirm: false,
         reg: {
           payDay: false,
           mMontyP: false,
@@ -808,24 +809,35 @@
     },
     methods: {
       makeSureBtn() {
-        this.Confirm = true;
-      },
-      canc() {
-        this.Confirm = false;
-      },
-      closed() {
-        this.Confirm = false;
-      },
-      CFsave() {
         this.$validator.validateAll().then((result) => {
           if (result) {
+            this.$confirm('确定提交？', '提示', {
+              confirmButtonText: '确定',
+              type: 'warning',
+              showCancelButton: false
+            }).then(() => {
+              this.CFsave();
+            }).catch(() => {
+            });
+          } else {
+            this.$message.error('提交失败，有必填项未填写！');
+          }
+        });
+      },
+      // canc() {
+      //   this.Confirm = false;
+      // },
+      // closed() {
+      //   this.Confirm = false;
+      // },
+      CFsave() {
             this.post("/creauditInfo/updateOtherfinalByPK", {
               applyId: this.FormData.applyId,
               id: this.FormData.id,
               ootherfinal: this.FormData.ootherfinal
             }).then(res => {
               if (res.statusCode == 200) {
-                this.Confirm = false;
+                // this.Confirm = false;
                 this.AreaNPercent();
                 this.$message({
                   message: '提交成功!',
@@ -833,16 +845,11 @@
                 });
                 this.mountC();
               } else {
-                this.Confirm = false;
+                // this.Confirm = false;
                 this.$message.error('提交失败，请稍后再试！');
                 this.mountC();
               }
             });
-          } else {
-            this.Confirm = false;
-            this.$message.error('提交失败，有必填项未填写！');
-          }
-        });
       },
       formatSC() {
         this.FormData.fbalance ? this.FormData.fbalance = this.formatNumber(this.FormData.fbalance, 2, 0) : this.FormData
@@ -945,7 +952,8 @@
             this.FormData.applyId = this.getParams.applyId;
             this.AreaNPercent();
             this.formatSC();
-             this.FormData.aaddress ? this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, ''):this.FormData.aaddress ;
+            this.FormData.aaddress ? this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, '') : this.FormData
+              .aaddress;
             this.mountJ(0, res.data.wbeexEcuted);
             this.mountJ(1, res.data.wnetHirecom);
             this.mountJ(2, res.data.wnetEcutedBrea);
@@ -1063,8 +1071,11 @@
     display: inline-block;
     width: 210px;
   }
+
   /* ------------------------------------------------ */
+
   /* 最下面的 弹窗样式 */
+
   /* 上网信息-两行select下拉 居中 */
 
   .hint {
@@ -1120,14 +1131,17 @@
     opacity:0.75; */
     cursor: pointer;
   }
+
   /* 上网查询 */
 
   .InternetInf_right_label {
     width: 210px;
   }
+
   .top {
     margin-top: 20px;
   }
+
   .CreditForm li {
     color: #475669;
     font-size: 14px;
@@ -1144,6 +1158,7 @@
     display: inline-block;
     text-align: right;
   }
+
   /* ------------------------------上网查询 +核实身份--------------------------- */
 
   .CreditForm_InternetInf p,
@@ -1166,12 +1181,13 @@
     width: 33.3%;
     vertical-align: middle;
   }
+
   /* --------------------------工作信息 + 私营企业--------------------- */
 
   .CheckId_right_label
   /* 第三列p */
 
-  {
+    {
     width: 140px;
   }
 
@@ -1180,7 +1196,7 @@
   .CreditForm_FamilyInf p:nth-of-type(even)
   /* 家庭信息 */
 
-  {
+    {
     width: 66.6%;
   }
 
@@ -1193,7 +1209,7 @@
   .CreditForm_FamilyInf p:nth-of-type(even) span
   /* 家庭信息 */
 
-  {
+    {
     width: calc( 100% - 225px);
     height: 60px;
     vertical-align: top;
@@ -1202,6 +1218,7 @@
     padding: 5px 10px;
     border-radius: 4px;
   }
+
   /* 工作信息-单位地址 + 私营企业-企业经营项目 */
 
   .ComAddr {
@@ -1221,11 +1238,13 @@
     white-space: nowrap;
     vertical-align: middle;
   }
+
   /* 第一经销商 */
 
   .Suppliers {
     width: calc( 100% - 205px);
   }
+
   /* 私营企业-第一分销商 --------------------------------label 为 140 px */
 
   .distributor {
@@ -1235,6 +1254,7 @@
     white-space: nowrap;
     vertical-align: middle;
   }
+
   /*-------------------- 核对现住址-------------------------- */
 
   .CreditForm_check_reside li,
@@ -1251,7 +1271,8 @@
     margin-bottom: 20px;
     width: 66.6%;
   }
-/* .SureAlert{
+
+  /* .SureAlert{
 background: rgba(127, 127, 127, 0.5);
 position: absolute;
 top:48px;
@@ -1259,7 +1280,7 @@ left: 0;
 right:0;
 bottom:0;
 } */
-.SureAlert_content{
-  
-}
+
+  .SureAlert_content {}
+
 </style>

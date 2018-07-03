@@ -142,6 +142,7 @@
         fixTelTab: '', // 固定电话标签
         mobileTab: '', // 移动电话标签
         // MatchFlag:'internal'
+                    fixTelcustName: ''
       };
     },
     props: ['isFull', 'SplitS'],
@@ -158,6 +159,9 @@
         // 进件编号
         this.applySubNo = applicationInformationDetail.applySubNo;
         this.workName = applicationInformationDetail.workName;
+                    console.log(applicationInformationDetail.custName)
+            this.fixTelcustName = applicationInformationDetail.custName;
+            console.log( this.fixTelcustName)
         // 公司名称
         // this.workName = this.$route.query.workName;
         // 测试数据
@@ -166,13 +170,11 @@
         this.fetchData('company');
         // 样式处理
         if (this.isFull == true) { // 全屏
-          console.log('全屏');
           $(".internalMatch-class .mark-textarea").css("width", "800px")
           $(".internalMatch-class .mark-textarea textarea").css("width", "800px");
           // 按钮
           $(".internalMatch-class .mark-button").css("margin-left", "775px")
         } else if (this.isFull == false) { // 分屏
-          console.log("分屏");
           $(".internalMatch-class .mark-textarea").css("width", "600px")
           $(".internalMatch-class .mark-textarea textarea").css("width", "600px");
           // 按钮
@@ -238,9 +240,11 @@
         });
       },
       getTabByFixTel() {
+        console.log(  this.fixTelcustName)
         // 获取固定电话类标签
         this.post('internalMatch/getTabByFixTel', {
-          applySubNo: this.applySubNo
+          applySubNo: this.applySubNo,
+          name: this.fixTelcustName,
           // applySubNo:'2015041301730418582'
         }).then(res => {
           this.fixTelTab = res.data;
@@ -366,13 +370,11 @@
       isFull() {
         // 样式处理
         if (this.isFull == true) { // 全屏
-          console.log('全屏');
           $(".internalMatch-class .mark-textarea").css("width", "800px")
           $(".internalMatch-class .mark-textarea textarea").css("width", "800px");
           // 按钮
           $(".internalMatch-class .mark-button").css("margin-left", "775px")
         } else if (this.isFull == false) { // 分屏
-          console.log("分屏");
           $(".internalMatch-class .mark-textarea").css("width", "600px")
           $(".internalMatch-class .mark-textarea textarea").css("width", "600px");
           // 按钮
@@ -433,8 +435,7 @@
             var applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
             this.applyId = applicationInformationDetail.applyId;
             var userInfo = JSON.parse(localStorage.getItem('userInf'));
-            this.creator_code = userInfo.userCode;
-
+            this.creator_code = userInfo.userCode;            
             // 获取匹配信息
             this.getOption();
           },

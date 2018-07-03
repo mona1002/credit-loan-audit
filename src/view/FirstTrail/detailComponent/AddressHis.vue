@@ -173,7 +173,7 @@
           {{mobileData.hobbyandBehave}}
         </el-form-item>
         <el-form-item label="调查结果：" class="item-column1">
-          <div class="brk">{{mobileData.conclusion}}</div>
+          <div style="white-space:pre-wrap">{{mobileData.conclusion}}</div>
         </el-form-item>
       </div>
     </el-form>

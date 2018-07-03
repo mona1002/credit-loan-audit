@@ -50,7 +50,7 @@
               <RantiFraudInvestigation v-if=" this.tabContent1==9" :isShow='true' :applyId='tastwaitingPass.matchApplyId'>反欺诈调查</RantiFraudInvestigation>
               <RFinanceInformation v-if=" this.tabContent1==10">账务信息</RFinanceInformation>
               <RprocessTrajectory v-if=" this.tabContent1==11">流程轨迹</RprocessTrajectory>
-              <RApprovalConclusion v-if=" this.tabContent1==11">审批结论轨迹</RApprovalConclusion>
+              <RApprovalConclusion v-if=" this.tabContent1==12">审批结论轨迹</RApprovalConclusion>
             </div>
           </div>
         </div>
@@ -262,7 +262,7 @@
       },
       FullScreen() {
         this.showHalfBtn = true;
-        this.originLeft = this.$refs.right_tab_ul.style.left;
+        // this.originLeft = this.$refs.right_tab_ul.style.left;
         this.$refs.right_tab_ul.style.left = "0";
         this.$refs.rLeft.style.display = "none";
         this.watchData = this.$refs.rRight.style.width = "100%";
@@ -273,7 +273,7 @@
       },
       DblScreen() {
         this.showHalfBtn = false;
-        this.$refs.right_tab_ul.style.left = this.originLeft;
+        // this.$refs.right_tab_ul.style.left = this.originLeft;
         this.$refs.rLeft.style.display = "block";
         this.$refs.rRight.style.width = this.$refs.rLeft.style.width = this.$refs.RMQ.style.left = this.watchData =
           "calc(50% - 2px)";
