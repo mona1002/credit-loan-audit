@@ -955,13 +955,13 @@
 		methods:{
 			mountedInf(){
 				//一进入页面就发送请求
-				this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) //初审-匹配查看
+				this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) //匹配查看详情
 				if (this.MatchFlag.MatchFlag == 'internal') {
 				this.taskInWaitting = JSON.parse(localStorage.getItem('internalObj'));
 				} else if (this.MatchFlag.MatchFlag == 'Query') {
-				this.taskInWaitting = JSON.parse(localStorage.getItem("Query")) //初审-匹配查看
+				this.taskInWaitting = JSON.parse(localStorage.getItem("Query")) //综合查询-详情
 				} else if (this.MatchFlag.MatchFlag == 'QT') {
-				this.taskInWaitting = JSON.parse(localStorage.getItem("QT")) //综合查询
+				this.taskInWaitting = JSON.parse(localStorage.getItem("QT")) //质检详情
 				}
 				this.applyId = this.taskInWaitting.matchApplyId;
 				this.request();
