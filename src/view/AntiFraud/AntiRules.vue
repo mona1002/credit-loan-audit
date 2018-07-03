@@ -9,7 +9,7 @@
           <el-input v-model="rules" placeholder="请输入规则编号"></el-input>
         </p>
         <p class="btn_wrap">
-          <el-button class="btn"  style="marginLeft:20px" type="primary"  @click="Rreset">重置</el-button>
+          <el-button class="btn" style="marginLeft:20px" type="primary" @click="Rreset">重置</el-button>
           <el-button class="btn" type="primary" @click="Rsearch">查询</el-button>
         </p>
       </div>
@@ -48,45 +48,38 @@
       </div>
     </div>
     <!-- 编辑 -->
-    <div class="redact">
-      <el-dialog title="添加反欺诈规则" :modal="false" :visible.sync="dialogFormVisible">
-        <p>
-          <label>规则编号：</label>
-          <b>{{form.ruleNum}}</b>
-        </p>
-        <p>
-          <label>内容规则：</label>
-          <b class="rulesContent">{{form.ruleContent}}</b>
-        </p>
-        <p>
-          <span>
-            <label>生成任务：</label>
-            <el-select v-model="form.isGenTask" placeholder="请选择">
-              <el-option v-for="item in isGenTask" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-          </span>
-          <span style="marginLeft:20px;">
-            <label>决策拒绝：</label>
-            <el-select v-model="form.isDecReject" placeholder="请选择">
-              <el-option v-for="item in isDecReject" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-          </span>
-        </p>
-        <p>
-          <label>是否生效： </label>
+    <el-dialog title="添加反欺诈规则" :modal="false" :visible.sync="dialogFormVisible">
+      <el-form :model="form" ref="ruleFormAdd">
+        <el-form-item label="规则编号：" :label-width="formLabelWidth">
+          <el-input readonly v-model="form.ruleNum"></el-input>
+        </el-form-item>
+        <el-form-item label="内容规则：" prop="caseDesc" :label-width="formLabelWidth">
+          <el-input readonly v-model="form.ruleContent" type='textarea' resize="none" :rows="2"></el-input>
+        </el-form-item>
+        <el-form-item label="生成任务：" :label-width="formLabelWidth">
+          <el-select v-model="form.isGenTask" placeholder="请选择">
+            <el-option v-for="item in isGenTask" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="决策拒绝：" :label-width="formLabelWidth">
+          <el-select v-model="form.isDecReject" placeholder="请选择">
+            <el-option v-for="item in isDecReject" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="是否生效：" :label-width="formLabelWidth">
           <el-select v-model="form.isValid" placeholder="请选择">
             <el-option v-for="item in isValid" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
-        </p>
-        <div slot="footer" class="dialog-footer">
-          <el-button @click="dialogFormVisible = false">取 消</el-button>
-          <el-button type="primary" @click="sure">确 定</el-button>
-        </div>
-      </el-dialog>
-    </div>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary"  :loading="loadsitu" @click="sure">{{adbtn}}</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -96,6 +89,9 @@
       return {
         rules: '',
         dialogFormVisible: false,
+        formLabelWidth: "100px",
+        adbtn:'确定',
+          loadsitu:false,
         form: {
           id: '',
           ruleNum: '',
@@ -154,8 +150,13 @@
         this.form.isDecReject = row.isDecReject;
         this.form.isGenTask = row.isGenTask;
         this.form.isValid = row.isValid;
+             this.loadsitu = false;
+        this.adbtn = '确定';
       },
+
       sure() {
+               this.loadsitu = true;
+        this.adbtn = '保存中';
         this.dialogFormVisible = false;
         this.post("/antiFraud/updateAntiFraudRule", this.form).then(res => {
           if (res.statusCode == 200) {
@@ -172,7 +173,7 @@
               }
             });
           } else {
-            this.$message.error('修改失败');
+            this.$message.error(res.msg);
           }
         });
       }

@@ -9,14 +9,14 @@
           <el-input v-model="caseNumInput" placeholder="请输入案件编号"></el-input>
         </p>
         <p class="btn_wrap">
-          <el-button class="btn" style="marginLeft:20px"  type="primary" @click="Rreset">重置</el-button>
-            <el-button class="btn" type="primary" @click="Rsearch">查询</el-button>
+          <el-button class="btn" style="marginLeft:20px" type="primary" @click="Rreset">重置</el-button>
+          <el-button class="btn" type="primary" @click="Rsearch">查询</el-button>
         </p>
       </div>
       <div class="title">
         <h1>反欺诈申请列表
           <span class="title_icon">
-            <span @click="dialogFormVisible = true">
+            <span @click="add">
               <img src="../../../static/images/add.png" class="icon">添加
             </span>
             <span style="marginLeft:25px;" @click="delList">
@@ -58,27 +58,20 @@
         </div>
       </div>
       <!-- 添加 -->
-      <div class="redact">
-        <el-dialog title="添加备案号" :before-close="cal" :modal="false" :visible.sync="dialogFormVisible">
-          <p style="position:relative">
-            <b class="alertMsg" v-show="casNumAlert">*请输入数字</b>
-            <label>
-              <i>*</i> 案件编号：</label>
+      <el-dialog title="添加备案号" :before-close="cal" :modal="false" :visible.sync="dialogFormVisible">
+        <el-form :model="form" :rules="rulesAdd" ref="ruleFormAdd">
+          <el-form-item label="案件编号：" prop="caseNum" :label-width="formLabelWidth">
             <el-input v-model="form.caseNum" type="text" placeholder="请输入内容" @compositionend.native="inputCase(form.caseNum)" @keyup.native="inputCase(form.caseNum)"></el-input>
-          </p>
-          <p style="position:relative">
-            <b class="alertMsg" v-show="desc">* 输入长度不能超过500</b>
-            <label>
-              <i>*</i> 案件描述：</label>
-            <el-input v-model="form.caseDesc" type='textarea' resize="none" :maxlength="500" :rows="3" placeholder="请输入内容" @compositionend.native="textArea(form.caseDesc)"
-              @keyup.native="textArea(form.caseDesc)"></el-input>
-          </p>
-          <div slot="footer" class="dialog-footer">
-            <el-button @click="cal">取 消</el-button>
-            <el-button type="primary" @click="sure">确 定</el-button>
-          </div>
-        </el-dialog>
-      </div>
+          </el-form-item>
+          <el-form-item label="案件描述：" prop="caseDesc" :label-width="formLabelWidth">
+            <el-input v-model="form.caseDesc" type='textarea' resize="none" :rows="3" placeholder="请输入内容"></el-input>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="cal">取 消</el-button>
+          <el-button type="primary"  :loading="loadsitu" @click="sure('ruleFormAdd')">{{adbtn}}</el-button>
+        </div>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -87,7 +80,6 @@
   export default {
     data() {
       return {
-        desc: false,
         casNumAlert: false,
         caseNumInput: '',
         dialogFormVisible: false,
@@ -95,12 +87,42 @@
         currentPage: 1, //分页选中页
         pageCount: 10, // 每页显示条数
         totalRecord: 0, //总条数
+        formLabelWidth: "100px",
+          adbtn:'确定',
+          loadsitu:false,
         form: {
           caseNum: '',
           caseDesc: '',
         },
         tableData: [],
+        rulesAdd: {
+          caseNum: [{
+            required: true,
+            message: '请输入数字',
+            trigger: 'blur'
+          }],
+          ccc: [{
+            required: true,
+            message: '请输入数字',
+            trigger: 'blur'
+          }],
+          caseDesc: [{
+              required: true,
+              message: '请填写活动形式',
+              trigger: 'blur'
+            },
+            {
+              min: 0,
+              max: 500,
+              message: '输入长度不能超过500',
+              trigger: 'blur'
+            }
+          ]
+        }
       }
+    },
+    components:{
+      myHead
     },
     methods: {
       handleSizeChange(val) {
@@ -147,36 +169,42 @@
         this.form.caseNum = '';
         this.form.caseDesc = '';
       },
-      sure() {
-        if (this.form.caseNum == '') {
-          this.$message.error('请填写案件编号');
-          return
-        } else if (this.form.caseDesc == '') {
-          this.$message.error('请填写案件描述');
-          return
-        }
-        this.dialogFormVisible = false;
-        this.post("/caseInfoController/insert", {
-          "param": {
-            "caseNum": this.form.caseNum,
-            "caseDesc": this.form.caseDesc
-          },
-        }).then(res => {
-          if (res.statusCode == 200) {
-            this.$message({
-              message: '提交成功',
-              type: 'success'
+      add(){
+       this.loadsitu = false;
+        this.adbtn = '确定';
+        this.dialogFormVisible = true;
+      },
+      sure(formName) {
+        console.log( this.$refs[formName])
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+             this.loadsitu = true;
+        this.adbtn = '保存中';
+            this.dialogFormVisible = false;
+            this.post("/caseInfoController/insert", {
+              "param": {
+                "caseNum": this.form.caseNum,
+                "caseDesc": this.form.caseDesc
+              },
+            }).then(res => {
+              if (res.statusCode == 200) {
+                this.$message({
+                  message: '提交成功',
+                  type: 'success'
+                });
+                this.getInf(this.currentPage, this.pageCount, this.caseNumInput);
+              } else {
+                this.$message.error(res.msg);
+              }
             });
-            this.getInf(this.currentPage, this.pageCount, this.caseNumInput);
+            this.form.caseNum = '';
+            this.form.caseDesc = '';
           } else {
-            this.$message.error('提交失败，请稍后再试！');
+            console.log('error submit!!');
+            return false;
           }
         });
-        this.form.caseNum = '';
-        this.form.caseDesc = '';
-      },
-      textArea(val) {
-        val.length >= 500 ? this.desc = true : this.desc = false;
+
       },
       inputCase(val) {
         if (isNaN(val) || val == '') {
@@ -210,9 +238,6 @@
     mounted() {
       this.getInf(this.currentPage, this.pageCount, this.caseNumInput);
     },
-    components: {
-      myHead
-    }
   }
 
 </script>
