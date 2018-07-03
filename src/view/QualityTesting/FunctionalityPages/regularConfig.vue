@@ -230,7 +230,7 @@
     <el-dialog title="质检规则编辑" :modal="false" :visible.sync="Edit" width="920px">
       <el-form :model="updateInf" :rules="rulesAdd" ref="ruleFormAdd">
         <el-form-item label="质检天数：" prop="recentDays" :label-width="formLabelWidth">
-          <el-input v-model="updateInf.recentDays" placeholder="请输入质检天数" @blur="Num('质检天数-编辑',updateInf.recentDays)"> </el-input> 天</span>
+          <el-input v-model="updateInf.recentDays" placeholder="请输入质检天数" @blur="Num('质检天数-编辑',updateInf.recentDays)"> </el-input><span> 天</span>
 
         </el-form-item>
         <el-form-item label="抽单类型：" prop="drawSheetType" :label-width="formLabelWidth">
@@ -239,23 +239,23 @@
           </el-select>
         </el-form-item>
         <el-form-item label="抽单比例[每人]：" prop="makeRatio" :label-width="formLabelWidth">
-          <el-input v-model="updateInf.makeRatio" placeholder="请输入抽单比例" @blur="Num('抽单比例-编辑',updateInf.makeRatio)"> </el-input> %</span>
+          <el-input v-model="updateInf.makeRatio" placeholder="请输入抽单比例" @blur="Num('抽单比例-编辑',updateInf.makeRatio)"> </el-input><span> %</span>
 
         </el-form-item>
         <el-form-item label="通过比例[每人]：" prop="passRatio" :label-width="formLabelWidth">
-          <el-input v-model="updateInf.passRatio" placeholder="请输入通过比例" @blur="Num('通过比例-编辑',updateInf.passRatio)"> </el-input> %</span>
+          <el-input v-model="updateInf.passRatio" placeholder="请输入通过比例" @blur="Num('通过比例-编辑',updateInf.passRatio)"> </el-input><span> %</span>
 
         </el-form-item>
         <el-form-item label="通过件最低抽单件数[人·件]：" prop="minPassNum" :label-width="formLabelWidth">
-          <el-input v-model="updateInf.minPassNum" placeholder="请输入最低抽单件数" @blur="Num('通过件最低抽单件数-编辑',updateInf.minPassNum)"> </el-input> 件</span>
+          <el-input v-model="updateInf.minPassNum" placeholder="请输入最低抽单件数" @blur="Num('通过件最低抽单件数-编辑',updateInf.minPassNum)"> </el-input><span> 件</span>
 
         </el-form-item>
         <el-form-item label="拒绝比例[每人]：" prop="refuseRatio" :label-width="formLabelWidth">
-          <el-input v-model="updateInf.refuseRatio" placeholder="请输入拒绝比例" @blur="Num('拒绝比例',addNew.refuseRatio)"> </el-input> %</span>
+          <el-input v-model="updateInf.refuseRatio" placeholder="请输入拒绝比例" @blur="Num('拒绝比例',addNew.refuseRatio)"> </el-input><span> %</span>
 
         </el-form-item>
         <el-form-item label="拒绝件最低抽单件数[人·件]：" prop="minRefuseNum" :label-width="formLabelWidth">
-          <el-input v-model="updateInf.minRefuseNum" placeholder="请输入最低抽单件数" @blur="Num('拒绝件最低抽单件数',addNew.minRefuseNum)"> </el-input> 件</span>
+          <el-input v-model="updateInf.minRefuseNum" placeholder="请输入最低抽单件数" @blur="Num('拒绝件最低抽单件数',addNew.minRefuseNum)"> </el-input><span> 件</span>
 
         </el-form-item>
         <el-form-item label="创建人：" prop="caseNum" :label-width="formLabelWidth">
