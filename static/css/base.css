@@ -749,6 +749,11 @@
  .holidaySetting .el-table th.is-hidden>* {
    visibility: visible;
  } */
+/* 常规质检 弹窗中输入框后面的单位掉行 */
+ .dialog .el-input{
+   width:auto;
+ }
+ /* 弹窗body部分高度 */
  .Height_200 .el-dialog .el-dialog__body{
   height: 200px;
   }
