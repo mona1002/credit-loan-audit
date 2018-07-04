@@ -47,7 +47,6 @@
    width: 200px !important;
  }
 
-
  .date_picker .el-date-editor .el-range-separator {
    width: 8%;
    height: 28px;
@@ -96,13 +95,17 @@
    overflow: hidden;
    color: #606266;
  }
-/* 表格 */
-/* .Abody .el-table__header-wrapper {
+
+ /* 表格 */
+
+ /* .Abody .el-table__header-wrapper {
   overflow: auto;
 } */
-.Abody .el-table th .cell {
-  font-weight: 800;
-} 
+
+ .Abody .el-table th .cell {
+   font-weight: 800;
+ }
+
  /* 查询 */
 
  .search-btn {
@@ -110,10 +113,11 @@
  }
 
  /* .search-btn .el-button { */
-  .Abody  .el-button {
+
+ .Abody .el-button {
    height: 30px;
    width: 65px;
-   border-radius:8px;
+   border-radius: 8px;
    padding: 0 !important;
  }
 
@@ -220,14 +224,19 @@
  .appro {
    background-image: url('../images/appro.png')
  }
+
  /* 流程监控 */
- .liuchengIcon{
-   background-image:url('../images/liucheng.png')
+
+ .liuchengIcon {
+   background-image: url('../images/liucheng.png')
  }
+
  /* 删除 */
- .deleteIcon{
-   background-image:url('../images/delete.png')
+
+ .deleteIcon {
+   background-image: url('../images/delete.png')
  }
+
  /* 停用 */
 
  .restIcon {
@@ -349,10 +358,13 @@
    height: 380px;
    overflow-y: auto;
  }
+
  /* ---------------------------------------影响其他页面样式------------ */
+
  .Abody .el-dialog .dialog_form_auto .el-form {
-height: auto;
+   height: auto;
  }
+
  .Abody .el-dialog .fl {
    float: left;
  }
@@ -361,16 +373,24 @@ height: auto;
    float: right;
    margin-right: 18px;
  }
+
  .Abody .el-dialog .mr {
-  margin-right: 18px;
-}
-.Abody .el-dialog .presentation {
-  /* margin-right: 18px; */
-  float: left;  
-  /* height: 30px; */
-  width:50%;
-  height: auto;
-}
+   margin-right: 18px;
+ }
+
+ .Abody .el-dialog .presentation {
+   /* margin-right: 18px; */
+   float: left;
+   /* height: 30px; */
+   width: 50%;
+   height: auto;
+ }
+
+ .Abody .el-dialog .presentation_one_row {
+   float: left;
+   height: auto;
+ }
+
  .Abody .el-dialog .bfc {
    overflow: hidden;
    clear: both;
@@ -651,14 +671,18 @@ height: auto;
  .Abody .el-dialog.el-dialog-check .el-input.orgStreeCheck .el-input__inner {
    width: 96.5% !important;
  }
+
  /* 弹窗手风琴样式 */
- .Abody .alert_collapse .el-collapse-item__content{
-  padding-bottom:0;
+
+ .Abody .alert_collapse .el-collapse-item__content {
+   padding-bottom: 0;
  }
- .Abody .el-collapse-item__arrow{
+
+ .Abody .el-collapse-item__arrow {
    height: 40px;
    line-height: 40px;
  }
+
  .Abody .el-date-editor .el-range-separator {
    padding: 0 0;
  }
@@ -768,18 +792,20 @@ height: auto;
  .holidaySetting .el-table th.is-hidden>* {
    visibility: visible;
  } */
-/* 常规质检 弹窗中输入框后面的单位掉行 */
- .dialog .el-input{
-   width:auto;
- }
- .dialog_search_table {
 
- }
- .dialog_textarea .el-form-item{
-height: 64px;
- }
- .Abody .keywordText_dialog{
+ /* 常规质检 弹窗中输入框后面的单位掉行 */
 
+ .dialog .el-input {
+   width: auto;
+ }
+
+ .dialog_search_table {}
+
+ .dialog_textarea .el-form-item {
+   height: 64px;
+ }
+
+ .Abody .keywordText_dialog {
    font-size: 14px;
    color: #475669;
    text-align: right;
@@ -789,13 +815,37 @@ height: 64px;
    line-height: 30px;
    margin-left: 5px;
  }
+
  /* 弹窗body部分高度 */
- .Height_200 .el-dialog .el-dialog__body{
-  height: 200px;
-  }
-  .Height_300 .el-dialog .el-dialog__body{
-    height: 300px;
-    }
-    .Height_240 .el-dialog .el-dialog__body{
-      height: 240px;
-      }
+
+ .Height_200 .el-dialog .el-dialog__body {
+   height: 200px;
+ }
+
+ .Height_300 .el-dialog .el-dialog__body {
+   height: 300px;
+ }
+
+ .Height_240 .el-dialog .el-dialog__body {
+   height: 240px;
+ }
+
+ .el-collapse-item__wrap {
+   border-bottom: none;
+ }
+
+ /* 弹窗里部分input必填项，部分展示项 */
+
+ .alert_collapse_inputLabel label::before {
+   content: "*";
+   color: #f56c6c;
+   margin-right: 4px;
+ }
+
+ /* 弹窗全部为必填项 */
+
+ .return_back .el-dialog .el-dialog__body label::before {
+   content: "*";
+   color: #f56c6c;
+   margin-right: 4px;
+ }

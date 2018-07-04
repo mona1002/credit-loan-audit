@@ -368,7 +368,6 @@
                         {{eachTermAmt}}
                       </el-form-item>
                     </div>
-
                     <div class="bfc">
                       <el-form-item class="presentation" label="信用评分：" :label-width="formApproLabLeft" prop="holiday">
                         {{creditScore}}
@@ -387,7 +386,7 @@
                 </el-form-item> -->
                 <div class="dialog_form_auto">
                   <el-form>
-                    <el-form-item label="核实可接受最高每期还款额[元]：" label-width="220px">
+                    <el-form-item class="presentation_one_row" label="核实可接受最高每期还款额[元]：" label-width="220px">
                       {{fbalance2}}
                     </el-form-item>
                   </el-form>
@@ -464,23 +463,23 @@
           && judgeFlag=='02' ">请求更高级审批</el-radio>
                     </el-form-item>
                     <div class="bfc">
-                      <el-form-item class="fl" label="月核实收入[元]：" :label-width="formApproLab">
+                      <el-form-item class="fl alert_collapse_inputLabel" label="月核实收入[元]：" :label-width="formApproLab">
                         <el-input v-model="verIncome " @blur="moneyBlur(verIncome, 'verIncome') "></el-input>
                       </el-form-item>
-                      <el-form-item class="fr" label="批准产品：" :label-width="formApproLab">
+                      <el-form-item class="fr alert_collapse_inputLabel" label="批准产品：" :label-width="formApproLab">
                         <el-select @change="proSlelecChange " v-model="proName ">
                           <el-option v-for="item in products " :key="item.id " :label="item.proName " :value="item "></el-option>
                         </el-select>
                       </el-form-item>
                     </div>
                     <div class="bfc">
-                      <el-form-item class="fl" label="批准期限[月]：" :label-width="formApproLab">
+                      <el-form-item class="fl alert_collapse_inputLabel" label="批准期限[月]：" :label-width="formApproLab">
                         <el-select @change="ploanTermChange " v-model="ploanTerm ">
                           <el-option v-for="item in ploanTerms " :label="item.appDuration " :value="item ">
                           </el-option>
                         </el-select>
                       </el-form-item>
-                      <el-form-item class="fr" label="批准金额[元]：" :label-width="formApproLab">
+                      <el-form-item class="fr alert_collapse_inputLabel" label="批准金额[元]：" :label-width="formApproLab">
                         <el-input v-model="ploanAmt " @blur="moneyBlur(ploanAmt, 'ploanAmt') "></el-input>
                       </el-form-item>
                     </div>
@@ -507,7 +506,7 @@
                     <el-form-item class="presentation" label="总负债率：" :label-width="formApproLab">
                       {{caculData.totalRate | formatValue}}
                     </el-form-item>
-                    <div class="bfc dialog_textarea" style="margin-bottom:10px;">
+                    <div class="bfc dialog_textarea alert_collapse_inputLabel mr" style="margin-bottom:10px;height:80px;">
                       <el-form-item label="意见说明：" :label-width="formApproLab">
                         <el-input type="textarea" resize="none" :rows="3" v-model="appConclusion"></el-input>
                       </el-form-item>
@@ -518,11 +517,15 @@
               </el-collapse-item>
             </el-collapse>
           </div>
-          <div class="back-form-li" style="text-align:right;padding:10px;">
+          <!-- <div class="back-form-li" style="text-align:right;padding:10px;">
             <el-button plain @click="shenPiShow=false;">返回</el-button>
             <el-button type="primary" @click="submitFn('03')" :loading="isLoading">{{loadingTitle}}</el-button>
-          </div>
+          </div> -->
         </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="shenPiShow=false">取 消</el-button>
+          <el-button type="primary" @click="submitFn('03')" :loading="isLoading"> {{loadingTitle}}</el-button>
+        </div>
       </el-dialog>
     </div>
     <!-- 审批结论轨迹弹窗 -->
