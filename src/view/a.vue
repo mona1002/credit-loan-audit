@@ -1,38 +1,26 @@
-   <div class="taskWinput search-div">
-  <el-row class="row row1" type="flex">
-    <el-col :span="6" class="search-item" :offset="0">
-      <span class="keywordText">进件编号： </span>
+<el-form>
+  <el-form-item label="回退节点：" :label-width="formLabelWidth">
+  
+  </el-form-item>
+  <div class="bfc">
+    <el-form-item class="fl" label="主原因：" :label-width="formLabelWidth">
 
-    </el-col>
-    <el-col :span="6" class="search-item">
-      <span class="keywordText">客户名称：</span>
+    </el-form-item>
+    <el-form-item class="fr" label="子原因：" :label-width="formLabelWidth">
 
-    </el-col>
-    <el-col :span="6" class="search-item">
-      <span class="keywordText">证件号码：</span>
+    </el-form-item>
+  </div>
+  <div class="dialog_textarea">
+    <el-form-item class="mr" label="原因说明：" :label-width="formLabelWidth">
 
-    </el-col>
-    <el-col :span="6" class="search-item">
-      <span class="keywordText">产品名称：</span>
+    </el-form-item>
+  </div>
+  <div class="bfc">
+    <el-form-item class="fl" label="经办人：" :label-width="formLabelWidth" prop="holiday">
 
-    </el-col>
-  </el-row>
-    <el-row class="row row2" type="flex">
-    <el-col :span="6" class="search-item" :offset="0">
-      <span class="keywordText">紧急程度： </span>
-
-    </el-col>
-    <el-col :span="6" class="search-item">
-      <span class="keywordText">申请日期：</span>
-
-    </el-col>
-    <el-col :span="6" class="search-item">
-      <span class="keywordText">本环节处理时间：</span>
-      
-    </el-col>
-     <el-col :span="6" class="search-btn">
-      <el-button class="btn query" type="primary" @click="Rsearch">查询</el-button>
-      <el-button class="btn reset" @click="Rreset">重置</el-button>
-    </el-col>
-  </el-row>
-</div>
+    </el-form-item>
+    <el-form-item class="fr" label="经办时间：" :label-width="formLabelWidth" prop="holiday">
+    
+    </el-form-item>
+  </div>
+</el-form>
