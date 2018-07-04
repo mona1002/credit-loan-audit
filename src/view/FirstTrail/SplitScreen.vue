@@ -1,5 +1,5 @@
 <template>
-  <div class="SplitScreen">
+  <div class="SplitScreen"  v-loading="loading" element-loading-text='加载中，请勿重复点击'>
     <myHead></myHead>
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
@@ -144,7 +144,8 @@
         SplitLeft: "left",
         SplitRight: "right",
         watchData: '',
-        originLeft: '',
+        // originLeft: '',
+        loading:false,
         customInf: [], //申请信息页local字段
         tastwaitingPass: [], //详情列表页信息--(含)取applyId
         accepCusBasicInfo: '',
@@ -324,7 +325,9 @@
           e.cancelBubble = true;
         });
       },
+
       mountedInf() {
+        this.loading=true;
         this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
         this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
           id: this.tastwaitingPass.applyId,
@@ -333,6 +336,7 @@
             this.custName = res.data.accepCusBasicInfo.custName;
             this.customInf = res.data;
             this.accepCusBasicInfo = res.data.accepCusBasicInfo
+            this.loading=false;
           } else {
             this.$message.error(res.msg);
           }
