@@ -236,36 +236,31 @@
  .deleteIcon {
    background-image: url('../images/delete.png')
  }
-
- /* 停用 */
-
- .restIcon {
-   /* background-image: url("../images/rest.png"); */
- }
-
- /* 启用 */
-
- .enableIcon {
-   /* background-image: url("../images/enable.png"); */
- }
-
- /* 授权 */
-
- .authIcon {
-   /* background-image: url("../images/auth.png"); */
- }
-
- /* 重置密码 */
-
- .resetIcon {
-   /* background-image: url("../images/reset.png"); */
- }
-
- /* 注销 */
-
- .logoutIcon {
-   /* background-image: url("../images/logout.png"); */
- }
+.HangUpIcon{
+  background-image:url('../images/guaqi.png')
+}
+.backIcon{
+  background-image: url('../images/back.png')
+}
+.rejectIcon{
+  background-image: url('../images/jujue.png')
+}
+.giveUpIcon{
+  background-image: url('../images/fangqi.png')
+}
+.lineChartIcon{
+  background-image: url('../images/jielun.png')
+}
+.dataMaptIcon{
+  background-image: url('../images/social.png')
+}
+.brokenLineIcon{
+  background-image: url('../images/bigdata.png')
+}
+.editIcon{
+  background-image: url('../images/change.png')
+  
+}
 
  /* 列表 区域 */
 
@@ -418,7 +413,14 @@
  .Abody .el-dialog .el-tree-node>.el-tree-node__children {
    overflow: visible;
  }
-
+/* 弹窗中的分页 */
+ .Abody .el-dialog .el-pagination__editor.el-input .el-input__inner{
+width: 45px !important;
+ }
+ .Abody .el-dialog .el-pagination .el-select .el-input .el-input__inner{
+width: 110px !important;
+   
+ }
  .Abody .readonly {
    background-color: #f5f7fa;
    border-color: #dfe4ed;

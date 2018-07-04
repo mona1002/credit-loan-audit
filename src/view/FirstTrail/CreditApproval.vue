@@ -30,12 +30,12 @@
         {{loanTerm}}
       </el-form-item>
     </el-form>
-    <div class="btn-div">
-      <!-- <el-button icon="el-icon-check-hang" class="credit-btn" @click="open">挂起</el-button> -->
-      <el-button icon="el-icon-check-hang" class="credit-btn" @click="hangOoutBtn">挂起</el-button>
-      <el-button icon="el-icon-check-back" class="credit-btn" @click="coverFn('02')">回退</el-button>
-      <!-- BX20 根据角色  -->
-      <el-button icon="el-icon-check-reject" class="credit-btn" v-show="judgeFlag == '01' && jujueBtnShow" @click="coverFn('01')">拒绝</el-button>
+    <!-- <div class="btn-div"> -->
+    <!-- <el-button icon="el-icon-check-hang" class="credit-btn" @click="open">挂起</el-button> -->
+    <!-- <el-button icon="el-icon-check-hang" class="credit-btn" @click="hangOoutBtn">挂起</el-button> -->
+    <!-- <el-button icon="el-icon-check-back" class="credit-btn" @click="coverFn('02')">回退</el-button> -->
+    <!-- BX20 根据角色  -->
+    <!-- <el-button icon="el-icon-check-reject" class="credit-btn" v-show="judgeFlag == '01' && jujueBtnShow" @click="coverFn('01')">拒绝</el-button>
       <el-button icon="el-icon-check-reject" class="credit-btn" v-show="judgeFlag!='01'" @click="coverFn('01')">拒绝</el-button>
       <el-button icon="el-icon-check-giveup" class="credit-btn" @click="coverFn('07')">放弃</el-button>
       <el-button icon="el-icon-check-appro" class="credit-btn" @click="coverFn('03')">审批</el-button>
@@ -44,6 +44,52 @@
       <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('lcgj')">流程轨迹</el-button>
       <el-button icon="el-icon-check-big-data" class="credit-btn" @click="tobigData">大数据风控</el-button>
       <el-button icon="el-icon-check-social" class="credit-btn" @click="roSocialSecurity">社保公积金{{social}}</el-button>
+    </div> -->
+    <div class="approve_btn_area approve_btn_area_width_900">
+      <span class="approve_item" @click="hangOoutBtn">
+        <i class="approve_icon HangUpIcon"></i>
+        <span class="approve_text">挂起</span>
+      </span>
+      <span class="approve_item" @click="coverFn('02')">
+        <i class="approve_icon backIcon"></i>
+        <span class="approve_text">回退</span>
+      </span>
+      <span class="approve_item" v-show="judgeFlag == '01' && jujueBtnShow" @click="coverFn('01')">
+        <i class="approve_icon rejectIcon"></i>
+        <span class="approve_text">拒绝</span>
+      </span>
+      <span class="approve_item" v-show="judgeFlag!='01'" @click="coverFn('01')">
+        <i class="approve_icon rejectIcon"></i>
+        <span class="approve_text">拒绝</span>
+      </span>
+      <span class="approve_item" @click="coverFn('07')">
+        <i class="approve_icon giveUpIcon"></i>
+        <span class="approve_text">放弃</span>
+      </span>
+      <span class="approve_item" @click="coverFn('03')">
+        <i class="approve_icon appro"></i>
+        <span class="approve_text">审批</span>
+      </span>
+      <span class="approve_item" @click="coverFn('fqz')">
+        <i class="approve_icon faqi"></i>
+        <span class="approve_text">发起反欺诈</span>
+      </span>
+      <span class="approve_item" @click="coverFn('spjl')">
+        <i class="approve_icon lineChartIcon"></i>
+        <span class="approve_text">审批结论轨迹</span>
+      </span>
+      <span class="approve_item" @click="coverFn('lcgj')">
+        <i class="approve_icon liuchengIcon"></i>
+        <span class="approve_text">流程轨迹</span>
+      </span>
+      <span class="approve_item" @click="tobigData">
+        <i class="approve_icon brokenLineIcon"></i>
+        <span class="approve_text">大数据风控</span>
+      </span>
+      <span class="approve_item" @click="roSocialSecurity">
+        <i class="approve_icon dataMaptIcon"></i>
+        <span class="approve_text">社保公积金{{social}}</span>
+      </span>
     </div>
     <!-- 回退 -->
     <!-- <div>
@@ -129,11 +175,11 @@
             </el-form-item>
           </div>
           <div class="bfc">
-            <el-form-item class="fl" label="经办人：" :label-width="formLabelWidth" prop="holiday">
+            <el-form-item class="fl" label="经办人：" :label-width="formLabelWidth">
               <!-- 取登录用户 -->
               {{dealroperCode}}
             </el-form-item>
-            <el-form-item class="fr" label="经办时间：" :label-width="formLabelWidth" prop="holiday">
+            <el-form-item class="fr" label="经办时间：" :label-width="formLabelWidth">
               <!-- {{2017-12-1}} -->
               {{dealroperDate | dateFilter}}
             </el-form-item>
@@ -586,7 +632,7 @@
         <el-table-column prop="opinionExplain" label="意见说明" min-width="200" show-overflow-tooltip>
         </el-table-column>
       </el-table>
-      <div class="back-form-li" style="text-align:right;padding:10px;">
+      <div  slot="footer" class="dialog-footer">
         <el-button plain @click="lcgjShow=false;">返回</el-button>
       </div>
     </el-dialog>
@@ -787,7 +833,7 @@
         huiTuiShow: false,
         juJueShow: false,
         fangQiShow: false,
-        shenPiShow: true,
+        shenPiShow: false,
         spjlShow: false,
         lcgjShow: false,
         jujueBtnShow: false, // 拒绝 按钮 BX02
@@ -1056,69 +1102,116 @@
       },
       // open 打开 自定义 弹窗   挂起      
       open() {
-        const h = this.$createElement;
-        this.$msgbox({
-          title: '提示',
-          message: h('p', null, [
-            h('span', null, '确定操作? '),
-            // h('i', { style: 'color: teal' }, 'VNode')
-          ]),
-          showCancelButton: true,
+        this.$confirm('您确定操作？', '提示', {
           confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          modal: false,
-          beforeClose: (action, instance, done) => {
-            if (action === 'confirm') {
-              instance.confirmButtonLoading = true;
-              instance.confirmButtonText = '执行中...';
-              // 区分初审/终审
-              if (this.judgeFlag == '01') {
-                this.busiState = '01';
-              } else if (this.judgeFlag == '02') {
-                this.busiState = '11'
-              }
-              // 点击 确认 提交 方法
-              this.post("/creauditInfo/approveHang ", {
-                taskId: this.taskId,
-                busiState: this.busiState,
-                applyId: this.applyId, // 申请单id
-              }).then(res => {
-                if (res.statusCode == '200') {
-                  done();
-                } else {
-                  if (res.statusCode == 500) {
-                    this.$message({
-                      type: 'warning',
-                      message: '网络异常,请重试!'
-                    });
-                    instance.confirmButtonText = '';
-                    instance.confirmButtonLoading = false;
-                  } else {
-                    this.$message({
-                      type: 'warning',
-                      message: res.msg
-                    });
-                  }
-                }
-                instance.confirmButtonText = '';
-                instance.confirmButtonLoading = false;
-              });
-            } else {
-              done();
-            }
+          type: 'warning',
+          showCancelButton: false
+        }).then(() => {
+          // 区分初审/终审
+          if (this.judgeFlag == '01') {
+            this.busiState = '01';
+          } else if (this.judgeFlag == '02') {
+            this.busiState = '11'
           }
-        }).then(action => {
-          this.$message({
-            type: 'success',
-            message: '挂起成功'
+          //       // 点击 确认 提交 方法
+          this.post("/creauditInfo/approveHang ", {
+            taskId: this.taskId,
+            busiState: this.busiState,
+            applyId: this.applyId, // 申请单id
+          }).then(res => {
+            if (res.statusCode == '200') {
+              this.$message({
+                type: 'success',
+                message: '挂起成功'
+              });
+              // 初审
+              if (this.judgeFlag == '01')
+                this.$router.push('/taskInWaitting');
+              // 终审
+              if (this.judgeFlag == '02')
+                this.$router.push('/FtaskInWaitting' + this.routeParams);
+            } else {
+              if (res.statusCode == 500) {
+                this.$message({
+                  type: 'warning',
+                  message: '网络异常,请重试!'
+                });
+              } else {
+                this.$message({
+                  type: 'warning',
+                  message: res.msg
+                });
+              }
+            }
+
           });
-          // 初审
-          if (this.judgeFlag == '01')
-            this.$router.push('/taskInWaitting');
-          // 终审
-          if (this.judgeFlag == '02')
-            this.$router.push('/FtaskInWaitting' + this.routeParams);
-        });
+        }).catch(() => {});
+
+
+
+        // const h = this.$createElement;
+        // this.$msgbox({
+        //   title: '提示',
+        //   message: h('p', null, [
+        //     h('span', null, '确定操作? '),
+        //     // h('i', { style: 'color: teal' }, 'VNode')
+        //   ]),
+        //   showCancelButton: true,
+        //   confirmButtonText: '确定',
+        //   cancelButtonText: '取消',
+        //   modal: false,
+        //   beforeClose: (action, instance, done) => {
+        //     if (action === 'confirm') {
+        //       instance.confirmButtonLoading = true;
+        //       instance.confirmButtonText = '执行中...';
+        //       // 区分初审/终审
+        //       if (this.judgeFlag == '01') {
+        //         this.busiState = '01';
+        //       } else if (this.judgeFlag == '02') {
+        //         this.busiState = '11'
+        //       }
+        //       // 点击 确认 提交 方法
+        //       this.post("/creauditInfo/approveHang ", {
+        //         taskId: this.taskId,
+        //         busiState: this.busiState,
+        //         applyId: this.applyId, // 申请单id
+        //       }).then(res => {
+        //         if (res.statusCode == '200') {
+        //           done();
+        //         } else {
+        //           if (res.statusCode == 500) {
+        //             this.$message({
+        //               type: 'warning',
+        //               message: '网络异常,请重试!'
+        //             });
+        //             instance.confirmButtonText = '';
+        //             instance.confirmButtonLoading = false;
+        //           } else {
+        //             this.$message({
+        //               type: 'warning',
+        //               message: res.msg
+        //             });
+        //           }
+        //         }
+        //         instance.confirmButtonText = '';
+        //         instance.confirmButtonLoading = false;
+        //       });
+        //     } else {
+        //       done();
+        //     }
+        //   }
+        // }).then(action => {
+        //   this.$message({
+        //     type: 'success',
+        //     message: '挂起成功'
+        //   });
+        //   // 初审
+        //   if (this.judgeFlag == '01')
+        //     this.$router.push('/taskInWaitting');
+        //   // 终审
+        //   if (this.judgeFlag == '02')
+        //     this.$router.push('/FtaskInWaitting' + this.routeParams);
+        // });
       },
       coverFn(flag) {
         // 清空原因
@@ -2398,20 +2491,6 @@
     min-width: 300px;
   }
 
-  /* .creditApproval-class .el-form-item {
-    height: 35px;
-    line-height: 35px;
-    margin: 0;
-    padding: 0;
-  } */
-
-  /* 按钮集合控件 */
-
-  .creditApproval-class .btn-div {
-    text-align: center;
-    width: 80%;
-    float: left;
-  }
 
   /* 信审审批 - btn*/
 
@@ -2436,14 +2515,6 @@
     width: 100%;
     height: 100%;
     z-index: 101;
-
-
-    /*position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    text-align: center;*/
   }
 
   /* 两列 */
@@ -2522,143 +2593,12 @@
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   /* textarea */
 
   .creditApproval-class .back-form .back-form-li .el-textarea {
     width: 80%;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* 单独设置  label*/
-
-  /*.creditApproval-class .back-form .el-form-item__label {
-  width: 80px;
-}
-*/
 
   /* 弹窗页面 关闭按钮*/
 
@@ -2678,68 +2618,6 @@
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   /* 审批 表单 */
 
   .creditApproval-class .appro-form {
@@ -2753,138 +2631,9 @@
     overflow: hidden;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*.creditApproval-class .appro-form .el-form-item__label {
-  width: 220px;
-}*/
-
   .creditApproval-class .appro-form .back-form-li .el-textarea {
     width: 60%;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   /* 审批结论轨迹 */
@@ -2907,68 +2656,6 @@
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   /* 分页 */
 
   .creditApproval-class .tool-bar {
@@ -2976,68 +2663,6 @@
     text-align: center;
     padding: 10px 0 0 10px;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   /* 流程轨迹 */
@@ -3053,87 +2678,12 @@
     height: auto;
   }
 
-
-  /* .creditApproval-class .el-input {
-    width: calc( 100% - 130px);
-    height: 35px;
-    line-height: 35px;
-  } */
-
-  /* .creditApproval-class .el-select {
-    height: 100%;
-    line-height: 100%;
-    width: calc( 100% - 130px);
-  } */
-
   .creditApproval-class .el-input--suffix .el-input__inner {
     margin: 0;
     padding-left: 10px;
     padding-right: 30px;
     text-indent: 5px;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   /* 申请信息 */
@@ -3146,69 +2696,6 @@
     width: 120px;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   /* 报错提示 */
 
   .creditApproval-class .el-form-item__error {
@@ -3217,810 +2704,11 @@
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   /* 有编辑框的 提示信息*/
 
   .creditApproval-class .back-form .back-form-edit-li {
     margin-top: 25px !important;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* icon */
-
-  /*挂起*/
-
-  .creditApproval-class .el-icon-check-hang {
-    background: url(../../../static/images/guaqi.png);
-    width: 30px;
-    height: 30px;
-    background-size: 30px;
-    padding: 0;
-    margin: 0;
-    vertical-align: middle;
-    display: inline-block;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*回退*/
-
-  .creditApproval-class .el-icon-check-back {
-    background: url(../../../static/images/back.png);
-    width: 30px;
-    height: 30px;
-    background-size: 30px;
-    padding: 0;
-    margin: 0;
-    vertical-align: middle;
-    display: inline-block;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*拒绝*/
-
-  .creditApproval-class .el-icon-check-reject {
-    background: url(../../../static/images/jujue.png);
-    width: 30px;
-    height: 30px;
-    background-size: 30px;
-    padding: 0;
-    margin: 0;
-    vertical-align: middle;
-    display: inline-block;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*放弃*/
-
-  .creditApproval-class .el-icon-check-giveup {
-    background: url(../../../static/images/fangqi.png);
-    width: 30px;
-    height: 30px;
-    background-size: 30px;
-    padding: 0;
-    margin: 0;
-    vertical-align: middle;
-    display: inline-block;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*审批*/
-
-  .creditApproval-class .el-icon-check-appro {
-    background: url(../../../static/images/appro.png);
-    width: 30px;
-    height: 30px;
-    background-size: 30px;
-    padding: 0;
-    margin: 0;
-    vertical-align: middle;
-    display: inline-block;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*发起反欺诈*/
-
-  .creditApproval-class .el-icon-check-start {
-    background: url(../../../static/images/faqi.png);
-    width: 30px;
-    height: 30px;
-    background-size: 30px;
-    padding: 0;
-    margin: 0;
-    vertical-align: middle;
-    display: inline-block;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*审批结论轨迹*/
-
-  .creditApproval-class .el-icon-check-spjl {
-    background: url(../../../static/images/jielun.png);
-    width: 30px;
-    height: 30px;
-    background-size: 30px;
-    padding: 0;
-    margin: 0;
-    vertical-align: middle;
-    display: inline-block;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*流程轨迹*/
-
-  .creditApproval-class .el-icon-check-lcgj {
-    background: url(../../../static/images/liucheng.png);
-    width: 30px;
-    height: 30px;
-    background-size: 30px;
-    padding: 0;
-    margin: 0;
-    vertical-align: middle;
-    display: inline-block;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*大数据风控*/
-
-  .creditApproval-class .el-icon-check-big-data {
-    background: url(../../../static/images/bigdata.png);
-    width: 30px;
-    height: 30px;
-    background-size: 30px;
-    padding: 0;
-    margin: 0;
-    vertical-align: middle;
-    display: inline-block;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*社保公积金*/
-
-  .creditApproval-class .el-icon-check-social {
-    background: url(../../../static/images/social.png);
-    width: 30px;
-    height: 30px;
-    background-size: 30px;
-    padding: 0;
-    margin: 0;
-    vertical-align: middle;
-    display: inline-block;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   /* 折叠面板头部背景色和icon */
 
@@ -4032,69 +2720,6 @@
   .creditApproval-class .headFont {
     font-size: 16px;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   /* 信审审批  - - 弹窗*/
 
@@ -4121,138 +2746,6 @@
     padding: 5px 15px 10px;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* 信审审批  - 审批  编辑部分 */
-
-  .creditApproval-class .appro-form .back-form-edit-li .el-form-item__label {
-    /*width: 120px;*/
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* 结论  同意 */
-
-  .creditApproval-class .appro-form .radio-li .el-form-item__label {
-    /*width:120px;*/
-  }
-
   .creditApproval-class .back-form .el-form-item__label {
     width: 125px;
   }
@@ -4269,204 +2762,11 @@
     margin-right: 15px;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   /* 两行文字 样式 */
 
   .creditApproval-class .back-form .line-height2 .el-form-item__label {
     line-height: 20px;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* 2017-12-17 拆分表单 */
-
-  .creditApproval-class .huitui-class {}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   /* label 文字样式 */
 
@@ -4475,69 +2775,6 @@
   }
 
   .creditApproval-class .jujue-class {}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   /* label 文字样式 */
 
@@ -4565,69 +2802,6 @@
     vertical-align: middle;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   /* 审批信息  */
 
   /* .creditApproval-class .el-form-item__content .el-select .el-input {
@@ -4644,48 +2818,5 @@
     padding: 10px;
     overflow: auto;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*大数据*/
-
-  /* .creditApproval-class .bigDataLog .el-dialog__header {
-    display: block;
-  }
-
-  .creditApproval-class .bigDataLog .el-dialog__body {
-    padding: 20px 30px;
-  }
-
- */
-
-  /*社保/公积金*/
-
-  /*大数据*/
-
-  /* .creditApproval-class .bigDataLog .el-dialog__header {
-    display: block;
-  }
-
-  .creditApproval-class .bigDataLog .el-dialog__body {
-    padding: 20px 30px;
-  } */
 
 </style>
