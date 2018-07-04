@@ -1,7 +1,6 @@
 <!-- 反欺诈申请 - - 详情编辑页面 -->
 <template>
   <div date="AntiApplyAdd" class="anti-apply-add-class">
-    <myHead class="top"></myHead>
     <!-- 反欺诈申请信息=========================默认显示1-条？分页？ -->
     <div>
       <div class="address-title">
@@ -112,7 +111,7 @@
         </li>
       </ul>
       <!-- 弹窗 -->
-      <el-dialog :visible.sync="coverShow" :modal="false" top="10vh" width='1130px'>
+      <!-- <el-dialog :visible.sync="coverShow" :modal="false" top="10vh" width='1130px'>
         <div class="detail-list">
           <div class="form-title" style="position:relative;">
             请选择一条信息
@@ -155,7 +154,7 @@
               </li>
             </div>
             <el-table :data="tableData.recordList" height="250" border style="width: 100%" highlight-current-row center @row-click="itemClick">
-              <el-table-column type="index" label="序号"  width="60">
+              <el-table-column type="index" label="序号" width="60">
               </el-table-column>
               <el-table-column prop="applySubno" label="进件编号" width="170">
               </el-table-column>
@@ -168,7 +167,6 @@
               <el-table-column prop="certCode" label="证件号码" width="170">
               </el-table-column>
               <el-table-column prop="operOrgName" label="进件机构名称" width="130">
-                <!-- appOrgName -->
               </el-table-column>
               <el-table-column prop="proName" label="产品名称" width="100">
               </el-table-column>
@@ -186,16 +184,68 @@
             <el-button plain @click="btnClick">取消</el-button>
           </div>
         </div>
+      </el-dialog> -->
+      <!-- =================================================== -->
+      <el-dialog title="请选择一条信息" :visible.sync="coverShow" :modal="false"  width='1130px'>
+        <div>
+          <div class="taskWinput search-div">
+            <el-row class="row row1" type="flex">
+              <el-col :sm='7' class="search-item" :offset="0">
+                <span class="keywordText_dialog">进件编号： </span>
+                <el-input v-model="applySubNos"></el-input>
+              </el-col>
+              <el-col :sm='7' class="search-item">
+                <span class="keywordText_dialog">客户名称：</span>
+                <el-input v-model="custName_la"></el-input>
+              </el-col>
+              <el-col :sm='7' class="search-item">
+                <span class="keywordText_dialog">证件号码：</span>
+                <el-input v-model="subCertCode"></el-input>
+              </el-col>
+              <el-col :sm='4' class="search-item">
+                <el-button class="btn query" type="primary" @click="request">查询</el-button>
+                <el-button class="btn reset" @click="resetQuery">重置</el-button>
+              </el-col>
+            </el-row>
+          </div>
+          <div>
+            <el-table :data="tableData.recordList" height="250" border style="width: 100%" highlight-current-row center @row-click="itemClick">
+              <el-table-column type="index" label="序号" width="60">
+              </el-table-column>
+              <el-table-column prop="applySubno" label="进件编号" width="170">
+              </el-table-column>
+              <el-table-column prop="appDate" label="申请日期" width="170">
+              </el-table-column>
+              <el-table-column prop="custName" label="客户名称" width="120">
+              </el-table-column>
+              <el-table-column prop="certTypeTxt" label="证件类型" width="80">
+              </el-table-column>
+              <el-table-column prop="certCode" label="证件号码" width="170">
+              </el-table-column>
+              <el-table-column prop="operOrgName" label="进件机构名称" width="130">
+              </el-table-column>
+              <el-table-column prop="proName" label="产品名称" width="100">
+              </el-table-column>
+              <el-table-column prop="operName" label="进件客服" width="120" show-overflow-tooltip>
+              </el-table-column>
+            </el-table>
+            <div class="block tool-bar">
+              <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 20, 30]"
+                :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalRecord" v-show="tableData.totalRecord">
+              </el-pagination>
+            </div>
+          </div>
+          <div class="back-form-li" style="text-align:right;padding:10px;">
+            <el-button plain @click="btnClick">取消</el-button>
+            <el-button type="primary" @click="btnClick('sure')">确定</el-button>
+          </div>
+        </div>
       </el-dialog>
     </div>
   </div>
 </template>
 <script>
-  import myHead from "../header.vue"
   export default {
-    components: {
-      myHead
-    },
     data() {
       return {
 
@@ -261,13 +311,13 @@
       '$route' (to, from) {
         if (to.path === '/AntiApplyAdd' && this.$route.params.newOne) {
           this.mountedInf();
-          this.applySubNos='';
-          this.custName_la='';
-          this.subCertCode='';
-          this.applyDesc='';
-          this.mainReason='';
-          this.secondReason='';
-          this.applyDesc='';
+          this.applySubNos = '';
+          this.custName_la = '';
+          this.subCertCode = '';
+          this.applyDesc = '';
+          this.mainReason = '';
+          this.secondReason = '';
+          this.applyDesc = '';
         }
       }
     },
@@ -1163,10 +1213,6 @@
   .anti-apply-add-class .el-dialog {
     width: 700px;
     /* margin-top: 15vh !important; */
-  }
-
-  .anti-apply-add-class .el-dialog__header {
-    display: none;
   }
 
   .anti-apply-add-class .el-dialog__body {

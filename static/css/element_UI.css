@@ -2847,3 +2847,9 @@ font-size: 12px;
 .newContent p span .el-input{
   width:190px;
 }
+/* new */
+.return_back  .el-dialog .el-dialog__body label::before{
+ content: "*";
+    color: #f56c6c;
+    margin-right: 4px;
+}

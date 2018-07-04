@@ -161,8 +161,7 @@
       <el-button icon="el-icon-check-social" class="credit-btn" @click="roSocialSecurity">社保公积金{{social}}</el-button>
     </div>
     <!-- 弹窗 -->
-    <div>
-      <el-dialog :visible.sync="huiTuiShow" :modal="false">
+      <el-dialog  title="回退信息"  :visible.sync="huiTuiShow" :modal="false">
         <!-- 回退 -->
         <el-form class="back-form huitui-class">
           <div class="form-title" style="position:relative;" v-show="showFlag=='02'">
@@ -204,7 +203,6 @@
           </div>
         </el-form>
       </el-dialog>
-    </div>
     <!-- 流程轨迹 -->
     <div>
       <el-dialog :visible.sync="lcgjShow" :modal="false" width="1000px">
