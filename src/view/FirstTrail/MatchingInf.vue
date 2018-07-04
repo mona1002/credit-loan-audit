@@ -1,5 +1,5 @@
 <template>
-  <div class="SplitScreen">
+  <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
     <myHead></myHead>
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
@@ -150,7 +150,7 @@
         accepCusBasicInfo: '',
         certCode: '',
         watchData: '',
-        originLeft: '',
+        loading: false,
         customInf: [],
         tastwaitingPass: [],
         showHalfBtn: false,
@@ -205,17 +205,19 @@
           this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
           this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
           this.$refs.right_tab_ul.style.left = "0";
-           this.DblScreen();
+          this.DblScreen();
         }
       }
     },
     methods: {
       mountedInf() {
+        this.loading = true;
         this.tastwaitingPass = JSON.parse(localStorage.getItem("internalObj"));
         this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
           id: this.tastwaitingPass.matchApplyId,
         }).then(res => {
           if (res.statusCode == 200) {
+            this.loading = false;
             this.customInf = res.data;
             //this.custName = res.data.accepCusBasicInfo.custName;
             this.certCode = res.data.accepCusBasicInfo.certCode;

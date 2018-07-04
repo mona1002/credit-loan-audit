@@ -1,5 +1,5 @@
 <template>
-  <div class="SplitScreen">
+  <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
     <!-- 质检详情-编辑部分- -->
     <!--反欺诈审批结论轨迹，质检部分调另一个新鞋的接口库== 反欺诈-8.反欺诈查询所有审批轨迹 -->
     <myHead></myHead>
@@ -211,7 +211,7 @@
         RoleSHow: 'partOne',
         // /----------------上面为新加的
         watchData: '',
-        originLeft: '',
+        loading: false,
         custName: "",
         certCode: '',
         mobile: '',
@@ -312,16 +312,17 @@
           this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
           this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
           this.$refs.right_tab_ul.style.left = "0";
-           this.DblScreen();
+          this.DblScreen();
         }
       }
     },
     methods: {
       mountedInf() {
+        this.loading = true;
         this.initialInfo(); //判断角色   
         this.QTC.tastwaitingPass = this.tastwaitingPass = JSON.parse(localStorage.getItem(this.LocalList));
         this.QTC.applyId = this.tastwaitingPass.ApplyId;
-        console.log( 1, this.QTC.tastwaitingPass)
+        console.log(1, this.QTC.tastwaitingPass)
         this.getPageInf(); //获取页面个人信息      
         // console.log(this.tastwaitingPass.applyId)
         // console.log('tastwaitingPass：', this.tastwaitingPass)
@@ -466,6 +467,7 @@
           if (res.statusCode == 200) {
             this.customInf = res.data;
             if (res.data.accepCusBasicInfo) {
+              this.loading = false;
               this.custName = res.data.accepCusBasicInfo.custName;
               this.certCode = res.data.accepCusBasicInfo.certCode;
               this.mobile = res.data.accepCusBasicInfo.mobile;

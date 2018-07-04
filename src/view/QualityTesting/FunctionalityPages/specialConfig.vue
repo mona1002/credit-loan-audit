@@ -109,13 +109,13 @@
         </div> -->
     </div>
     <!-- ==============================任务分配=================================== -->
-    <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
+    <!-- <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
       <span>您确定生成质检任务？</span>
       <span slot="footer" class="dialog-footer">
         <el-button class="calbtn" @click="Confirm=false">取消</el-button>
         <el-button class="subtn" type="primary" :loading="loadsitu" @click="allot">{{adbtn}}</el-button>
       </span>
-    </el-dialog>
+    </el-dialog> -->
   </div>
 </template>
 <script>
@@ -123,9 +123,9 @@
   export default {
     data() {
       return {
-        Confirm: false,
-        loadsitu: false,
-        adbtn: '确定',
+        // Confirm: false,
+        // loadsitu: false,
+        // adbtn: '确定',
         ploanDate: '',
         tableData: [],
         production: [], //产品下拉
@@ -166,13 +166,20 @@
     },
     methods: {
       apportion() { //分配 按钮弹窗
-        this.Confirm = true;
-        this.loadsitu = false;
-        this.adbtn = '确定';
+        // this.Confirm = true;
+        // this.loadsitu = false;
+        // this.adbtn = '确定';
+                this.$confirm('您确定生成质检任务？', '提示', {
+          confirmButtonText: '确定',
+          type: 'warning',
+          showCancelButton: false
+        }).then(() => {
+          this.allot();
+        }).catch(() => {});
       },
       allot() { //批量转分派
-        this.loadsitu = true;
-        this.adbtn = '保存中';
+        // this.loadsitu = true;
+        // this.adbtn = '保存中';
         this.post("/insTask/addSpecialInsTask", this.allotParams).then(res => {
           if (res.statusCode == 200) {
             this.$message({
@@ -180,11 +187,11 @@
               message: '提交成功！'
             })
             this.inquire(this.params);
-            this.Confirm = false;
+            // this.Confirm = false;
           } else {
             this.$message.error('批量转分派失败');
             this.inquire(this.params);
-            this.Confirm = false;
+            // this.Confirm = false;
           }
         });
       },

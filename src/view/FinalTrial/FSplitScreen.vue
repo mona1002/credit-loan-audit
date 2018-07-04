@@ -1,5 +1,5 @@
 <template>
-  <div class="SplitScreen">
+  <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
     <myHead></myHead>
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
@@ -142,7 +142,7 @@
         SplitLeft: "left",
         SplitRight: "right",
         watchData: '',
-        originLeft: '',
+        loading: false,
         // 进件人信息
         accepCusBasicInfo: '',
         customInf: [], //申请信息页local字段
@@ -192,18 +192,20 @@
           this.$refs.AudioLeftCom ? this.$refs.AudioLeftCom.mountedInf() : '';
           this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
           this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
-          this.$refs.right_tab_ul.style.left='0';
-           this.DblScreen();
+          this.$refs.right_tab_ul.style.left = '0';
+          this.DblScreen();
         }
       }
     },
     methods: {
       mountedInf() {
+        this.loading = true;
         this.tastwaitingPass = JSON.parse(localStorage.getItem("FtaskInWaitting"));
         this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
           id: this.tastwaitingPass.applyId,
         }).then(res => {
           if (res.statusCode == 200) {
+            this.loading = false;
             //this.custName = res.data.accepCusBasicInfo.custName;
             this.customInf = res.data;
             this.accepCusBasicInfo = res.data.accepCusBasicInfo;
@@ -240,9 +242,9 @@
         console.log(this.$refs.right_tab_ul)
         if (parseFloat(this.$refs.right_tab_ul.style.left) <= -500) {
           this.$refs.right_tab_ul.style.left = "-500px";
-            console.log('>0')
+          console.log('>0')
         } else {
-            console.log('move')
+          console.log('move')
           this.$refs.right_tab_ul.style.left = parseFloat(this.$refs.right_tab_ul.style.left) - 50 + "px";
         }
       },
