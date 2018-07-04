@@ -1,6 +1,7 @@
 <!-- 信审 - 审批 -->
 <template>
-  <div class="creditApproval-class">
+  <!-- <div class="creditApproval-class"> -->
+  <div class="  taskWatting  creditApproval-class">
     <div class="address-title">
       <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
       <span class="headFont">概要信息</span>
@@ -44,56 +45,29 @@
       <el-button icon="el-icon-check-big-data" class="credit-btn" @click="tobigData">大数据风控</el-button>
       <el-button icon="el-icon-check-social" class="credit-btn" @click="roSocialSecurity">社保公积金{{social}}</el-button>
     </div>
-    <!-- 弹窗 -->
-    <!-- <div class="cover-view" v-show="coverShow"> -->
-    <!-- 挂起 -->
-    <div class="hung_class">
-      <el-dialog title="提示" :modal="false" :visible.sync="hangOut" width="420px">
-        <span>确定操作？</span>
-        <span slot="footer" class="dialog-footer">
-          <el-button class="calbtn" @click="canc">取消</el-button>
-          <el-button class="subtn" type="primary" :loading="loadsitu" @click="Csave">{{adbtn}}</el-button>
-        </span>
-      </el-dialog>
-    </div>
     <!-- 回退 -->
-    <div>
-      <el-dialog :visible.sync="huiTuiShow" :modal="false" width="600px" top="10vh">
-        <el-form class="back-form huitui-class">
-          <!-- v-show="showFlag=='02'" -->
-          <div class="form-title" style="position:relative;">
-            回退信息
-            <!-- coverShow=false;showFlag=''; -->
-            <el-tag closable @close="huiTuiShow=false;" style="position:absolute;"></el-tag>
-          </div>
+    <!-- <div>
+      <el-dialog title="回退信息" :visible.sync="huiTuiShow" :modal="false" width="600px" top="10vh">
+        <el-form :model="form" :rules="rulesAdd" ref="ruleFormReturn">
           <div class="back-form-li">
-            <!-- <span style="color:red;display:inline-block;width:0px;float:left;">*</span> -->
             <span style="color:red;display:inline-block;width:0px;float:left;position: relative;left:-5px;font-weight:bold;">*</span>
             <el-form-item label="回退节点：" class="item-column2">
               <el-select @change="backSelectChange" v-model="rollbackNodeName">
-                <!-- 初审只能回退到  申请登记 -->
-                <!-- <el-option label="申请登记" value="creditApp_apply"></el-option>
-                options -->
                 <el-option v-for="item in options" :label="item.label" :value="item">
                 </el-option>
               </el-select>
             </el-form-item>
             <el-form-item class="item-column2"> </el-form-item>
           </div>
-          <div class="back-form-li">
-            <!-- 回退主原因输入 02 -->
-            <!-- 拒绝主原因选择 01 -->
-            <span style="color:red;display:inline-block;width:0px;float:left;position: relative;left:10px;font-weight:bold;">*</span>
-            <el-form-item label="主原因：" class="item-column2">
-              <!-- <el-input v-model="mainReason"></el-input> -->
-              <!-- 改成后台获取   filter-method     visible-change 下拉框 出现/隐藏时触发-->
-              <el-select @change="selectChange" v-model="mainReason">
+          <div class="back-form-li"> -->
+    <!-- <span style="color:red;display:inline-block;width:0px;float:left;position: relative;left:10px;font-weight:bold;">*</span>
+            <el-form-item label="主原因：" class="item-column2"> -->
+    <!-- 改成后台获取   filter-method     visible-change 下拉框 出现/隐藏时触发-->
+    <!-- <el-select @change="selectChange" v-model="mainReason">
                 <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
                 </el-option>
               </el-select>
             </el-form-item>
-            <!-- secondeReasons -->
-            <!-- <span style="color:red;display:inline-block;width:0px;float:left;">*</span> -->
             <el-form-item label="子原因：" class="item-column2">
               <el-select v-model="secondaryReason">
                 <el-option v-for="item in secondeReasons" :key="item.id" :label="item.reasonName" :value="item.reasonName">
@@ -104,247 +78,367 @@
           <div class="back-form-li" style="height:60px;line-height: 60px;padding-top:5px;">
             <span style="color:red;display:inline-block;width:0px;float:left;position:relative;top:-8px;left:-5px;font-weight:bold;">*</span>
             <el-form-item label="原因说明：">
-              <!--             <span style="color:red;display:inline-block;width:0px;float:right;margin-right: 25px;">*</span> -->
               <el-input type="textarea" :row="2" resize="none" v-model="reasonRemark"></el-input>
             </el-form-item>
           </div>
           <div class="back-form-li">
             <el-form-item label="经办人：" class="item-column2">
-              <!-- 取登录用户 -->
               {{dealroperCode}}
             </el-form-item>
             <el-form-item label="经办时间：" class="item-column2">
-              <!-- {{2017-12-1}} -->
               {{dealroperDate | dateFilter}}
             </el-form-item>
           </div>
           <div class="back-form-li" style="text-align:right;">
-            <!-- showFlag=0,coverShow=false; -->
             <el-button plain @click="huiTuiShow=false;">返回</el-button>
-            <!-- 回退 -->
             <el-button type="primary" @click="submitFn('02')" :loading="isLoading">{{loadingTitle}}</el-button>
           </div>
         </el-form>
       </el-dialog>
-    </div>
-    <!-- 拒绝 -->
-    <div>
-      <el-dialog :visible.sync="juJueShow" :modal="false" width="600px" top="10vh">
-        <!-- v-show="showFlag=='01'" -->
-        <el-form class="back-form jujue-class">
-          <!-- v-show="showFlag=='01'" -->
-          <div class="form-title" style="position:relative;">
-            拒绝原因
-            <!-- coverShow=false;showFlag=''; -->
-            <el-tag closable @close="juJueShow=false;" style="position:absolute;"></el-tag>
-          </div>
-          <div class="back-form-li">
+    </div> -->
+    <!-- 回退弹窗 -->
+    <div class="Height_240 return_back">
+      <el-dialog title="回退信息" :visible.sync="huiTuiShow" :modal="false ">
+        <!-- <el-form :model="formReturn" :rules="rulesReturn" ref="ruleFormReturn"> -->
+        <el-form>
+          <el-form-item label="回退节点：" :label-width="formLabelWidth">
+            <el-select @change="backSelectChange" v-model="rollbackNodeName">
+              <el-option v-for="item in options" :label="item.label" :key='item.value' :value="item">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <div class="bfc">
             <!-- 回退主原因输入 02 -->
             <!-- 拒绝主原因选择 01 -->
-            <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:10px;font-weight:bold;">*</span>
-            <!-- 拒绝主原因选择 01 -->
-            <el-form-item label="主原因：" class="item-column2">
+            <el-form-item class="fl" label="主原因：" :label-width="formLabelWidth">
               <el-select @change="selectChange" v-model="mainReason">
                 <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
                 </el-option>
               </el-select>
             </el-form-item>
-            <!-- secondeReasons -->
-            <!-- <span style="color:red;display:inline-block;width:0px;float:left;">*</span> -->
-            <el-form-item label="子原因：" class="item-column2">
+            <el-form-item class="fr" label="子原因：" :label-width="formLabelWidth">
               <el-select v-model="secondaryReason">
                 <el-option v-for="item in secondeReasons" :key="item.id" :label="item.reasonName" :value="item.reasonName">
                 </el-option>
               </el-select>
             </el-form-item>
           </div>
-          <div class="back-form-li" style="height:60px;line-height: 60px;padding-top:5px;">
-            <span style="color:red;display:inline-block;width:0px;float:left;position:relative;top:-8px;left:-5px;font-weight:bold;">*</span>
-            <el-form-item label="原因说明：">
-              <!--             <span style="color:red;display:inline-block;width:0px;float:right;margin-right: 25px;">*</span> -->
+          <div class="dialog_textarea">
+            <el-form-item class="mr" label="原因说明：" :label-width="formLabelWidth">
               <el-input type="textarea" :row="2" resize="none" v-model="reasonRemark"></el-input>
             </el-form-item>
           </div>
-          <div class="back-form-li">
-            <el-form-item label="经办人：" class="item-column2">
+          <div class="bfc">
+            <el-form-item class="fl" label="经办人：" :label-width="formLabelWidth" prop="holiday">
               <!-- 取登录用户 -->
               {{dealroperCode}}
             </el-form-item>
-            <el-form-item label="经办时间：" class="item-column2">
+            <el-form-item class="fr" label="经办时间：" :label-width="formLabelWidth" prop="holiday">
               <!-- {{2017-12-1}} -->
               {{dealroperDate | dateFilter}}
             </el-form-item>
           </div>
-          <div class="back-form-li" style="text-align:right;">
-            <!-- showFlag=0,coverShow=false; -->
-            <el-button plain @click="juJueShow=false;">返回</el-button>
-            <!-- 拒绝 -->
-            <el-button type="primary" @click="submitFn('01')" :loading="isLoading">{{loadingTitle}}</el-button>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="huiTuiShow=false">取 消</el-button>
+          <el-button type="primary" :loading="isLoading" @click="submitFn( '02', 'ruleFormReturn') "> {{loadingTitle}}</el-button>
+        </div>
+      </el-dialog>
+    </div>
+    <!-- 拒绝 -->
+    <!-- <div>
+      <el-dialog :visible.sync="juJueShow " :modal="false ">
+        <el-form class="back-form jujue-class ">
+          <div class="form-title " style="position:relative; ">
+            拒绝原因
+            <el-tag closable @close="juJueShow=false; " style="position:absolute; "></el-tag>
+          </div>
+          <div class="back-form-li ">
+            <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:10px;font-weight:bold; ">*</span>
+            <el-form-item label="主原因： " class="item-column2 ">
+              <el-select @change="selectChange " v-model="mainReason ">
+                <el-option v-for="item in mainReasons " :key="item.id " :label="item.reasonName " :value="item ">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="子原因： " class="item-column2 ">
+              <el-select v-model="secondaryReason ">
+                <el-option v-for="item in secondeReasons " :key="item.id " :label="item.reasonName " :value="item.reasonName ">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </div>
+          <div class="back-form-li " style="height:60px;line-height: 60px;padding-top:5px; ">
+            <span style="color:red;display:inline-block;width:0px;float:left;position:relative;top:-8px;left:-5px;font-weight:bold; ">*</span>
+            <el-form-item label="原因说明： ">
+              <el-input type="textarea " :row="2 " resize="none " v-model="reasonRemark "></el-input>
+            </el-form-item>
+          </div>
+          <div class="back-form-li ">
+            <el-form-item label="经办人： " class="item-column2 ">
+              {{dealroperCode}}
+            </el-form-item>
+            <el-form-item label="经办时间： " class="item-column2 ">
+              {{dealroperDate | dateFilter}}
+            </el-form-item>
+          </div>
+          <div class="back-form-li " style="text-align:right; ">
+            <el-button plain @click="juJueShow=false; ">返回</el-button>
+            <el-button type="primary " @click="submitFn( '01') " :loading="isLoading ">{{loadingTitle}}</el-button>
           </div>
         </el-form>
       </el-dialog>
-    </div>
-    <!-- 放弃 -->
-    <div>
-      <el-dialog :visible.sync="fangQiShow" :modal="false" width="600px" top="10vh">
-        <el-form class="back-form fangqi-class">
-          <!-- v-show="showFlag=='07'" -->
-          <div class="form-title" style="position:relative;">
-            放弃原因
-            <!-- coverShow=false;showFlag=''; -->
-            <el-tag closable @close="fangQiShow=false;" style="position:absolute;"></el-tag>
-          </div>
-          <div class="back-form-li">
+    </div> -->
+    <!-- 拒绝弹窗 -->
+    <div class="Height_240 return_back">
+      <el-dialog title="拒绝原因" :visible.sync="juJueShow" :modal="false">
+        <el-form>
+          <div class="bfc">
             <!-- 回退主原因输入 02 -->
             <!-- 拒绝主原因选择 01 -->
-            <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:10px;font-weight:bold;">*</span>
-            <el-form-item label="主原因：" class="item-column2">
-              <!-- <el-input v-model="mainReason"></el-input> -->
-              <!-- 改成后台获取   filter-method     visible-change 下拉框 出现/隐藏时触发-->
-              <el-select @change="selectChange" v-model="mainReason">
-                <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
+            <el-form-item class="fl" label="主原因：" :label-width="formLabelWidth">
+              <el-select @change="selectChange " v-model="mainReason ">
+                <el-option v-for="item in mainReasons " :key="item.id " :label="item.reasonName " :value="item ">
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="子原因：" class="item-column2">
-              <el-select v-model="secondaryReason">
-                <el-option v-for="item in secondeReasons" :key="item.id" :label="item.reasonName" :value="item.reasonName">
+            <el-form-item class="fr" label="子原因：" :label-width="formLabelWidth">
+              <el-select v-model="secondaryReason ">
+                <el-option v-for="item in secondeReasons " :key="item.id " :label="item.reasonName " :value="item.reasonName ">
                 </el-option>
               </el-select>
             </el-form-item>
           </div>
-          <div class="back-form-li" style="height:60px;line-height: 60px;padding-top:5px;">
-            <span style="color:red;display:inline-block;width:0px;float:left;position:relative;top:-8px;left:-5px;font-weight:bold;">*</span>
-            <el-form-item label="原因说明：">
-              <!--             <span style="color:red;display:inline-block;width:0px;float:right;margin-right: 25px;">*</span> -->
-              <el-input type="textarea" :row="2" resize="none" v-model="reasonRemark"></el-input>
+          <div class="dialog_textarea">
+            <el-form-item class="mr" label="原因说明：" :label-width="formLabelWidth">
+              <el-input type="textarea" :row="2 " resize="none " v-model="reasonRemark "></el-input>
             </el-form-item>
           </div>
-          <div class="back-form-li">
-            <el-form-item label="经办人 ：" class="item-column2">
+          <div class="bfc">
+            <el-form-item class="fl" label="经办人：" :label-width="formLabelWidth">
               <!-- 取登录用户 -->
               {{dealroperCode}}
             </el-form-item>
-            <el-form-item label="经办时间：" class="item-column2">
+            <el-form-item class="fr" label="经办时间：" :label-width="formLabelWidth">
+              <!-- {{2017-12-1}} -->
+              {{dealroperDate}} {{dealroperDate | dateFilter}}
+            </el-form-item>
+          </div>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="juJueShow=false">取 消</el-button>
+          <el-button type="primary" @click="submitFn( '01') " :loading="isLoading "> {{loadingTitle}}</el-button>
+        </div>
+      </el-dialog>
+    </div>
+    <!-- 放弃 -->
+    <!-- <div>
+      <el-dialog :visible.sync="fangQiShow " :modal="false " width="600px " top="10vh ">
+        <el-form class="back-form fangqi-class ">
+          <div class="form-title " style="position:relative; ">
+            放弃原因
+            <el-tag closable @close="fangQiShow=false; " style="position:absolute; "></el-tag>
+          </div>
+          <div class="back-form-li ">
+            <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:10px;font-weight:bold; ">*</span>
+            <el-form-item label="主原因： " class="item-column2 ">
+              <el-select @change="selectChange " v-model="mainReason ">
+                <el-option v-for="item in mainReasons " :key="item.id " :label="item.reasonName " :value="item ">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="子原因： " class="item-column2 ">
+              <el-select v-model="secondaryReason ">
+                <el-option v-for="item in secondeReasons " :key="item.id " :label="item.reasonName " :value="item.reasonName ">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </div>
+          <div class="back-form-li " style="height:60px;line-height: 60px;padding-top:5px; ">
+            <span style="color:red;display:inline-block;width:0px;float:left;position:relative;top:-8px;left:-5px;font-weight:bold; ">*</span>
+            <el-form-item label="原因说明： ">
+              <el-input type="textarea " :row="2 " resize="none " v-model="reasonRemark "></el-input>
+            </el-form-item>
+          </div>
+          <div class="back-form-li ">
+            <el-form-item label="经办人 ： " class="item-column2 ">
+              {{dealroperCode}}
+            </el-form-item>
+            <el-form-item label="经办时间： " class="item-column2 ">
+              {{dealroperDate | dateFilter}}
+            </el-form-item>
+          </div>
+          <div class="back-form-li " style="text-align:right; ">
+            <el-button plain @click="fangQiShow=false; ">返回</el-button>
+            <el-button type="primary " @click="submitFn( '07') " :loading="isLoading ">{{loadingTitle}}</el-button>
+          </div>
+        </el-form>
+      </el-dialog>
+    </div> -->
+    <!-- 放弃弹窗 -->
+    <div class="Height_240 return_back">
+      <el-dialog title="放弃原因" :visible.sync="fangQiShow" :modal="false">
+        <el-form>
+          <div class="bfc">
+            <!-- 回退主原因输入 02 -->
+            <!-- 拒绝主原因选择 01 -->
+            <el-form-item class="fl" label="主原因：" :label-width="formLabelWidth">
+              <el-select @change="selectChange " v-model="mainReason ">
+                <el-option v-for="item in mainReasons " :key="item.id " :label="item.reasonName " :value="item ">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="fr" label="子原因：" :label-width="formLabelWidth">
+              <el-select v-model="secondaryReason ">
+                <el-option v-for="item in secondeReasons " :key="item.id " :label="item.reasonName " :value="item.reasonName ">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </div>
+          <div class="dialog_textarea">
+            <el-form-item class="mr" label="原因说明：" :label-width="formLabelWidth">
+              <el-input type="textarea " :row="2 " resize="none " v-model="reasonRemark "></el-input>
+            </el-form-item>
+          </div>
+          <div class="bfc">
+            <el-form-item class="fl" label="经办人：" :label-width="formLabelWidth">
+              <!-- 取登录用户 -->
+              {{dealroperCode}}
+            </el-form-item>
+            <el-form-item class="fr" label="经办时间：" :label-width="formLabelWidth">
               <!-- {{2017-12-1}} -->
               {{dealroperDate | dateFilter}}
             </el-form-item>
           </div>
-          <div class="back-form-li" style="text-align:right;">
-            <!-- showFlag=0,coverShow=false; -->
-            <el-button plain @click="fangQiShow=false;">返回</el-button>
-            <!-- 放弃 -->
-            <el-button type="primary" @click="submitFn('07')" :loading="isLoading">{{loadingTitle}}</el-button>
-          </div>
         </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="fangQiShow=false">取 消</el-button>
+          <el-button type="primary" @click="submitFn( '07') " :loading="isLoading"> {{loadingTitle}}</el-button>
+        </div>
       </el-dialog>
     </div>
     <!-- 审批 -->
     <div>
-      <el-dialog :visible.sync="shenPiShow" :modal="false" width="676px" top="-8vh">
-        <el-form class="back-form appro-form">
-          <div class="form-title" style="position:relative;">
-            审批信息
-            <!-- coverShow=false;showFlag=''; -->
-            <el-tag closable @close="shenPiShow=false;proName='';" style="position:absolute;"></el-tag>
-          </div>
-          <div style="padding:5px;padding-top:0;height:400px;overflow:auto;">
-            <el-collapse v-model="activeNames">
-              <!-- <div class="form-title">
-              申请信息
-            </div> -->
-              <el-collapse-item title="申请信息" name="applyMsg">
-                <div class="back-form-li">
-                  <el-form-item label="申请金额[元]：" class="item-column2">
-                    <!-- {{loanAmt}} -->
+      <el-dialog title="审批信息" :visible.sync="shenPiShow " :modal="false " width="710px" height='1100px'>
+        <el-form>
+          <!-- <div style="padding:5px;padding-top:0;height:400px;overflow:auto; "> -->
+          <div style="padding:5px;padding-top:0;overflow:auto; ">
+            <el-collapse v-model="activeNames ">
+              <!--   申请信息-->
+              <el-collapse-item title="申请信息 " name="applyMsg " class="alert_collapse">
+                <!-- <div class="back-form-li ">
+                  <el-form-item label="申请金额[元]： " class="item-column2 ">
                     {{loanAmt}}
                   </el-form-item>
-                  <el-form-item label="申请期限[月]：" class="item-column2">
+                  <el-form-item label="申请期限[月]： " class="item-column2 ">
                     {{loanTerm}}
                   </el-form-item>
                 </div>
-                <div class="back-form-li">
-                  <el-form-item label="申请产品：" class="item-column2">
+                <div class="back-form-li ">
+                  <el-form-item label="申请产品： " class="item-column2 ">
                     {{sqproName}}
                   </el-form-item>
-                  <el-form-item label="可接受最高每期还款额[元]：" class="item-column2 line-height2">
+                  <el-form-item label="可接受最高每期还款额[元]： " class="item-column2 line-height2 ">
                     {{eachTermAmt}}
                   </el-form-item>
                 </div>
-                <div class="back-form-li">
-                  <el-form-item label="信用评分：" class="item-column2">
+                <div class="back-form-li ">
+                  <el-form-item label="信用评分： " class="item-column2 ">
                     {{creditScore}}
                   </el-form-item>
-                  <el-form-item label="申请类型：" class="item-column2">
+                  <el-form-item label="申请类型： " class="item-column2 ">
                     {{loanType}}
                   </el-form-item>
+                </div> -->
+                <div class="dialog_form_auto">
+                  <el-form>
+                    <div class="bfc">
+                      <el-form-item class="presentation" label="申请金额[元]：" :label-width="formApproLabLeft">
+                        {{loanAmt}}
+                      </el-form-item>
+                      <el-form-item class="presentation" label="申请期限[月]：" :label-width="formApproLabelWidth">
+                        {{loanTerm}}
+                      </el-form-item>
+                    </div>
+                    <div class="bfc">
+                      <el-form-item class="presentation" label="申请产品：" :label-width="formApproLabLeft">
+                        {{sqproName}}
+                      </el-form-item>
+                      <el-form-item class="presentation" label="可接受最高每期还款额[元]：" :label-width="formApproLabelWidth">
+                        {{eachTermAmt}}
+                      </el-form-item>
+                    </div>
+                    <div class="bfc">
+                      <el-form-item class="presentation" label="信用评分：" :label-width="formApproLabLeft" prop="holiday">
+                        {{creditScore}}
+                      </el-form-item>
+                      <el-form-item class="presentation" label="申请类型：" :label-width="formApproLabelWidth" prop="holiday">
+                        {{loanType}}
+                      </el-form-item>
+                    </div>
+                  </el-form>
                 </div>
               </el-collapse-item>
-              <!-- <div class="form-title">
-              信审核实信息
-            </div> -->
-              <el-collapse-item title="信审核实信息">
-                <el-form-item label="核实可接受最高每期还款额[元]：" style="width:300px;margin-bottom:10px;" class="item-column2 line-height2">
+              <!-- 信审核实信息 -->
+              <el-collapse-item title="信审核实信息 " class="alert_collapse">
+                <!-- <el-form-item label="核实可接受最高每期还款额[元]： " style="width:300px;margin-bottom:10px; " class="item-column2 line-height2 ">
                   {{fbalance2}}
-                </el-form-item>
+                </el-form-item> -->
+                <div class="dialog_form_auto">
+                  <el-form>
+                    <el-form-item class="presentation_one_row" label="核实可接受最高每期还款额[元]：" label-width="220px">
+                      {{fbalance2}}
+                    </el-form-item>
+                  </el-form>
+                </div>
               </el-collapse-item>
-              <!-- <div class="form-title">
-              审批信息
-            </div> -->
-              <el-collapse-item title="审批信息">
-                <div class="back-form-li radio-li">
-                  <el-form-item label="结论：">
-                    <!-- <el-radio-group v-model="applyConclusion"> -->
-                    <el-radio label="00" value='00' v-model="opinionFlag">同意</el-radio>
-                    <el-radio label="03" value='03' v-model="opinionFlag" v-show="taskName!='creditApp_finalTrial_five' && judgeFlag=='02'">请求更高级审批</el-radio>
-                    <!-- </el-radio-group> -->
+              <!-- 审批信息 -->
+              <el-collapse-item title="审批信息 " class="alert_collapse">
+                <!-- <div class="back-form-li radio-li ">
+                  <el-form-item label="结论： ">
+                    <el-radio label="00 " value='00' v-model="opinionFlag ">同意</el-radio>
+                    <el-radio label="03 " value='03' v-model="opinionFlag " v-show="taskName!='creditApp_finalTrial_five'
+                             && judgeFlag=='02' ">请求更高级审批</el-radio>
                   </el-form-item>
                 </div>
-                <div class="back-form-li back-form-edit-li" style="position:relative;">
-                  <span style="color:red;display:inline-block;width:0px;float:left;left:-5px;position:relative;font-weight:bold;">*</span>
-                  <el-form-item label="月核实收入[元]：" class="item-column2 width-120">
-                    <el-input v-model="verIncome" @blur="moneyBlur(verIncome,'verIncome')"></el-input>
+                <div class="back-form-li back-form-edit-li " style="position:relative; ">
+                  <span style="color:red;display:inline-block;width:0px;float:left;left:-5px;position:relative;font-weight:bold; ">*</span>
+                  <el-form-item label="月核实收入[元]： " class="item-column2 width-120 ">
+                    <el-input v-model="verIncome " @blur="moneyBlur(verIncome, 'verIncome') "></el-input>
                   </el-form-item>
-                  <span style="color:red;display:inline-block;width:0px;float:left;left:30px;position:relative;font-weight:bold;">*</span>
-                  <el-form-item label="批准产品：" class="item-column2 width-110">
-                    <el-select @change="proSlelecChange" v-model="proName">
-                      <el-option v-for="item in products" :key="item.id" :label="item.proName" :value="item"></el-option>
-                      <!-- <el-option v-for="item in secondeReasons" :key="item.id" :label="item.reasonName" :value="item.reasonName"> -->
+                  <span style="color:red;display:inline-block;width:0px;float:left;left:30px;position:relative;font-weight:bold; ">*</span>
+                  <el-form-item label="批准产品： " class="item-column2 width-110 ">
+                    <el-select @change="proSlelecChange " v-model="proName ">
+                      <el-option v-for="item in products " :key="item.id " :label="item.proName " :value="item "></el-option>
                     </el-select>
                   </el-form-item>
                 </div>
-                <div class="back-form-li back-form-edit-li" style="position:relative;">
-                  <!-- <span class="require" style="left:150px;top:-25px;" v-show="ploanTermError">* 批准期限1-12月</span> -->
-                  <span style="color:red;display:inline-block;width:0px;float:left;left:5px;position:relative;font-weight:bold;">*</span>
-                  <el-form-item label="批准期限[月]：" class="item-column2 width-120">
-                    <el-select @change="ploanTermChange" v-model="ploanTerm">
-                      <el-option v-for="item in ploanTerms" :label="item.appDuration" :value="item">
+                <div class="back-form-li back-form-edit-li " style="position:relative; ">
+                  <span style="color:red;display:inline-block;width:0px;float:left;left:5px;position:relative;font-weight:bold; ">*</span>
+                  <el-form-item label="批准期限[月]： " class="item-column2 width-120 ">
+                    <el-select @change="ploanTermChange " v-model="ploanTerm ">
+                      <el-option v-for="item in ploanTerms " :label="item.appDuration " :value="item ">
                       </el-option>
                     </el-select>
                   </el-form-item>
-                  <!-- <span class="require" style="left:470px;top:-25px;" v-show="ploanAmtError">* 批准金额不能大于{{minAmount}},小于{{maxAmounnt}}</span> -->
-                  <span style="color:red;display:inline-block;width:0px;float:left;left:5px;position:relative;font-weight:bold;">*</span>
-                  <el-form-item label="批准金额[元]：" class="item-column2 width-110">
-                    <el-input v-model="ploanAmt" @blur="moneyBlur(ploanAmt,'ploanAmt')"></el-input>
+                  <span style="color:red;display:inline-block;width:0px;float:left;left:5px;position:relative;font-weight:bold; ">*</span>
+                  <el-form-item label="批准金额[元]： " class="item-column2 width-110 ">
+                    <el-input v-model="ploanAmt " @blur="moneyBlur(ploanAmt, 'ploanAmt') "></el-input>
                   </el-form-item>
                 </div>
-                <div class="back-form-li">
-                  <!-- <el-form-item label="审批倍数：" class="item-column2 width-120 item-label-show">
-                    {{caculData.appmult | formatAppmult}}
-                  </el-form-item> -->
-                  <el-form-item label="审批倍数：" class="item-column2 width-120 item-label-show">
+                <div class="back-form-li ">
+                  <el-form-item label="审批倍数： " class="item-column2 width-120 item-label-show ">
                     {{caculData.appmult}}
                   </el-form-item>
-                  <el-form-item label="月还款额[元]：" class="item-column2 width-120 item-label-show">
+                  <el-form-item label="月还款额[元]： " class="item-column2 width-120 item-label-show ">
                     {{caculData.eachTermamt | formatMoney}}
                   </el-form-item>
                 </div>
-                <div class="back-form-li">
-                  <el-form-item label="内部负债率：" class="item-column2 item-label-show">
+                <div class="back-form-li ">
+                  <el-form-item label="内部负债率： " class="item-column2 item-label-show ">
                     {{caculData.inteDebitrate | formatValue}}
                   </el-form-item>
-                  <el-form-item label="总信用负债率：" class="item-column2 item-label-show" v-show="caculData.creditDebitRate>0">
-                    {{caculData.creditDebitRate | formatValue}}
+                  <el-form-item label="总信用负债率： " class="item-column2 item-label-show " v-show="caculData.creditDebitRate>0"> {{caculData.creditDebitRate | formatValue}}
                   </el-form-item>
                   <el-form-item label="总信用负债率：" class="item-column2 item-label-show" v-show="caculData.creditDebitRate==0">
                     0.00%
@@ -360,129 +454,143 @@
                   <el-form-item label="意见说明：">
                     <el-input type="textarea" resize="none" :rows="3" v-model="appConclusion"></el-input>
                   </el-form-item>
+                </div> -->
+                <div class="dialog_form_auto">
+                  <el-form>
+                    <el-form-item label="结论：" :label-width="formApproLab">
+                      <el-radio label="00 " value='00' v-model="opinionFlag ">同意</el-radio>
+                      <el-radio label="03 " value='03' v-model="opinionFlag " v-show="taskName!='creditApp_finalTrial_five'
+          && judgeFlag=='02' ">请求更高级审批</el-radio>
+                    </el-form-item>
+                    <div class="bfc">
+                      <el-form-item class="fl alert_collapse_inputLabel" label="月核实收入[元]：" :label-width="formApproLab">
+                        <el-input v-model="verIncome " @blur="moneyBlur(verIncome, 'verIncome') "></el-input>
+                      </el-form-item>
+                      <el-form-item class="fr alert_collapse_inputLabel" label="批准产品：" :label-width="formApproLab">
+                        <el-select @change="proSlelecChange " v-model="proName ">
+                          <el-option v-for="item in products " :key="item.id " :label="item.proName " :value="item "></el-option>
+                        </el-select>
+                      </el-form-item>
+                    </div>
+                    <div class="bfc">
+                      <el-form-item class="fl alert_collapse_inputLabel" label="批准期限[月]：" :label-width="formApproLab">
+                        <el-select @change="ploanTermChange " v-model="ploanTerm ">
+                          <el-option v-for="item in ploanTerms " :label="item.appDuration " :value="item ">
+                          </el-option>
+                        </el-select>
+                      </el-form-item>
+                      <el-form-item class="fr alert_collapse_inputLabel" label="批准金额[元]：" :label-width="formApproLab">
+                        <el-input v-model="ploanAmt " @blur="moneyBlur(ploanAmt, 'ploanAmt') "></el-input>
+                      </el-form-item>
+                    </div>
+
+                    <div class="bfc">
+                      <el-form-item class="presentation" label="审批倍数：" :label-width="formApproLab">
+                        {{caculData.appmult}}
+                      </el-form-item>
+                      <el-form-item class="presentation" label="月还款额[元]：" :label-width="formApproLab">
+                        {{caculData.eachTermamt | formatMoney}}
+                      </el-form-item>
+                    </div>
+                    <div class="bfc">
+                      <el-form-item class="presentation" label="内部负债率：" :label-width="formApproLab">
+                        {{caculData.inteDebitrate | formatValue}}
+                      </el-form-item>
+                      <el-form-item class="presentation" label="总信用负债率：" :label-width="formApproLab" v-show="caculData.creditDebitRate>0">
+                        {{caculData.creditDebitRate | formatValue}}
+                      </el-form-item>
+                      <el-form-item class="presentation" label="总信用负债率：" :label-width="formApproLab" v-show="caculData.creditDebitRate==0">
+                        0.00%
+                      </el-form-item>
+                    </div>
+                    <el-form-item class="presentation" label="总负债率：" :label-width="formApproLab">
+                      {{caculData.totalRate | formatValue}}
+                    </el-form-item>
+                    <div class="bfc dialog_textarea alert_collapse_inputLabel mr" style="margin-bottom:10px;height:80px;">
+                      <el-form-item label="意见说明：" :label-width="formApproLab">
+                        <el-input type="textarea" resize="none" :rows="3" v-model="appConclusion"></el-input>
+                      </el-form-item>
+                    </div>
+                  </el-form>
                 </div>
+
               </el-collapse-item>
             </el-collapse>
           </div>
-          <div class="back-form-li" style="text-align:right;padding:10px;">
-            <!-- showFlag=0,coverShow=false; -->
+          <!-- <div class="back-form-li" style="text-align:right;padding:10px;">
             <el-button plain @click="shenPiShow=false;">返回</el-button>
             <el-button type="primary" @click="submitFn('03')" :loading="isLoading">{{loadingTitle}}</el-button>
-          </div>
-        </el-form>
-      </el-dialog>
-    </div>
-    <!-- 审批结论轨迹 -->
-    <div>
-      <el-dialog :visible.sync="spjlShow" :modal="false" width="1000px" top="11vh">
-        <div class="spjl-div">
-          <div class="form-title" style="position:relative;">
-            信审审批结论轨迹
-            <!-- <el-tag closable @close="coverShow=false;showFlag='';" style="position:absolute;"></el-tag> -->
-            <!-- coverShow=false;showFlag=''; -->
-            <el-tag closable @close="spjlShow=false;" style="position:absolute;"></el-tag>
-          </div>
-          <el-table :data="tableData.recordList" height="280" border style="width: 100%" highlight-current-row v-loading="loading">
-            <el-table-column prop="verIncome" label="核实收入[元]" min-width="100">
-            </el-table-column>
-            <el-table-column prop="proName" label="批准产品" min-width="80">
-            </el-table-column>
-            <el-table-column prop="ploanAmt" label="批准金额[元]" min-width="100">
-            </el-table-column>
-            <el-table-column prop="ploanTerm" label="批准期限[月]" min-width="100">
-            </el-table-column>
-            <el-table-column prop="appmult" label="审批倍数" min-width="80">
-            </el-table-column>
-            <el-table-column prop="eachTermamt" label="每期还款额[元]" min-width="120">
-            </el-table-column>
-            <el-table-column prop="inteDebitrate" label="内部负债率" min-width="100">
-            </el-table-column>
-            <el-table-column prop="creditDebitRate" label="总信用负债率" min-width="100">
-            </el-table-column>
-            <el-table-column prop="totalRate" label="总负债率" min-width="80">
-            </el-table-column>
-            <el-table-column prop="appConclusion" label="审批结论" min-width="100" show-overflow-tooltip>
-            </el-table-column>
-            <el-table-column prop="auditDate" label="审批时间" min-width="180">
-            </el-table-column>
-          </el-table>
-          <!-- 分页 -->
-          <div class="block tool-bar" v-show="tableData.totalRecord > pageSize">
-            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 20, 30]"
-              :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalRecord">
-            </el-pagination>
-          </div>
-          <div class="back-form-li" style="text-align:right;padding:10px;">
-            <!-- showFlag=0,coverShow=false; -->
-            <el-button plain @click="spjlShow=false;">返回</el-button>
-          </div>
-        </div>
-      </el-dialog>
-    </div>
-    <!-- 流程轨迹 -->
-    <div>
-      <el-dialog :visible.sync="lcgjShow" :modal="false" width="1000px" top="10vh">
-        <div class="lcgj-div">
-          <div class="form-title" style="position:relative;">
-            流程轨迹
-            <!-- coverShow=false;showFlag=''; -->
-            <el-tag closable @close="lcgjShow=false;" style="position:absolute;"></el-tag>
-          </div>
-          <div class="xllcgj-div">
-            <!-- <div class="form-title2" style="position:relative;">
-            信审流程轨迹
           </div> -->
-            <el-table :data="lcgjData" height="250" border style="width: 100%" highlight-current-row v-loading="lcgjLoading" center>
-              <el-table-column type="index" label="序号" min-width="50">
-              </el-table-column>
-              <el-table-column prop="taskNameTxt" label="任务节点" min-width="100">
-              </el-table-column>
-              <el-table-column prop="taskTypeTxt" label="任务类型" min-width="100">
-              </el-table-column>
-              <el-table-column prop="activationTime" label="进入本环节时间" min-width="150">
-              </el-table-column>
-              <el-table-column prop="taskStatusTxt" label="任务状态" min-width="100">
-              </el-table-column>
-              <el-table-column prop="operatorCode" label="处理人" min-width="80">
-              </el-table-column>
-              <el-table-column prop="completeTime" label="处理时间" min-width="150">
-              </el-table-column>
-              <el-table-column prop="approvalOpinionTxt" label="处理结论" min-width="100">
-              </el-table-column>
-              <el-table-column prop="opinionExplain" label="意见说明" min-width="200" show-overflow-tooltip>
-              </el-table-column>
-            </el-table>
-          </div>
-          <div class="back-form-li" style="text-align:right;padding:10px;">
-            <!-- showFlag=0,coverShow=false; -->
-            <el-button plain @click="lcgjShow=false;">返回</el-button>
-          </div>
+        </el-form>
+          <div slot="footer" class="dialog-footer">
+          <el-button @click="shenPiShow=false">取 消</el-button>
+          <el-button type="primary"  @click="submitFn('03')" :loading="isLoading"> {{loadingTitle}}</el-button>
         </div>
       </el-dialog>
     </div>
-    <!-- 大数据风控 -->
-    <div class="hung_class">
-      <el-dialog title="提示" :visible.sync="bigDataLogVisible" :modal="false" width="420px" top="10vh">
-        <span>此进件不存在大数据风控明细！</span>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="infoSure">确定</el-button>
-        </span>
-      </el-dialog>
-    </div>
-    <!-- 社保公积金 -->
-    <div class="hung_class">
-      <el-dialog title="提示" :visible.sync="socialLogVisible" :modal="false" width="420px" top="10vh">
-        <span>客户社保公积金未授权！</span>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="socialSure">确定</el-button>
-        </span>
-      </el-dialog>
-    </div>
-    <!-- </div> -->
-    <!-- <el-alert title=warnMsg type="warning" v-show="warnShow"> -->
-    <!-- </el-alert> -->
+    <!-- 审批结论轨迹弹窗 -->
+    <el-dialog title="信审审批结论轨迹" :visible.sync="spjlShow" :modal="false" width="1000px">
+      <el-table :data="tableData.recordList" height="280" border style="width: 100%" highlight-current-row v-loading="loading">
+        <el-table-column prop="verIncome" label="核实收入[元]" min-width="100">
+        </el-table-column>
+        <el-table-column prop="proName" label="批准产品" min-width="80">
+        </el-table-column>
+        <el-table-column prop="ploanAmt" label="批准金额[元]" min-width="100">
+        </el-table-column>
+        <el-table-column prop="ploanTerm" label="批准期限[月]" min-width="100">
+        </el-table-column>
+        <el-table-column prop="appmult" label="审批倍数" min-width="80">
+        </el-table-column>
+        <el-table-column prop="eachTermamt" label="每期还款额[元]" min-width="120">
+        </el-table-column>
+        <el-table-column prop="inteDebitrate" label="内部负债率" min-width="100">
+        </el-table-column>
+        <el-table-column prop="creditDebitRate" label="总信用负债率" min-width="100">
+        </el-table-column>
+        <el-table-column prop="totalRate" label="总负债率" min-width="80">
+        </el-table-column>
+        <el-table-column prop="appConclusion" label="审批结论" min-width="100" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column prop="auditDate" label="审批时间" min-width="180">
+        </el-table-column>
+      </el-table>
+      <!-- 分页 -->
+      <div class="block tool-bar" v-show="tableData.totalRecord > pageSize">
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 20, 30]"
+          :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalRecord">
+        </el-pagination>
+      </div>
+      <div class="back-form-li" style="text-align:right;padding:10px;">
+        <el-button plain @click="spjlShow=false;">返回</el-button>
+      </div>
+    </el-dialog>
+    <!-- 流程轨迹弹窗 -->
+    <el-dialog title="流程轨迹" :visible.sync="lcgjShow" :modal="false" width="1000px">
+      <el-table :data="lcgjData" height="250" border style="width: 100%" highlight-current-row v-loading="lcgjLoading" center>
+        <el-table-column type="index" label="序号" min-width="50">
+        </el-table-column>
+        <el-table-column prop="taskNameTxt" label="任务节点" min-width="100">
+        </el-table-column>
+        <el-table-column prop="taskTypeTxt" label="任务类型" min-width="100">
+        </el-table-column>
+        <el-table-column prop="activationTime" label="进入本环节时间" min-width="150">
+        </el-table-column>
+        <el-table-column prop="taskStatusTxt" label="任务状态" min-width="100">
+        </el-table-column>
+        <el-table-column prop="operatorCode" label="处理人" min-width="80">
+        </el-table-column>
+        <el-table-column prop="completeTime" label="处理时间" min-width="150">
+        </el-table-column>
+        <el-table-column prop="approvalOpinionTxt" label="处理结论" min-width="100">
+        </el-table-column>
+        <el-table-column prop="opinionExplain" label="意见说明" min-width="200" show-overflow-tooltip>
+        </el-table-column>
+      </el-table>
+      <div class="back-form-li" style="text-align:right;padding:10px;">
+        <el-button plain @click="lcgjShow=false;">返回</el-button>
+      </div>
+    </el-dialog>
   </div>
-  <!-- </div> -->
 </template>
 <script>
   import baseurl from '../../util/ConstantSocialAndPn';
@@ -491,6 +599,25 @@
   export default {
     data() {
       return {
+        formLabelWidth: '85px',
+        formApproLabLeft: "100px",
+        formApproLab: "120px",
+        formApproLabelWidth: "200px",
+        formReturn: {},
+        rulesReturn: {
+          name: [{
+              required: true,
+              message: '请输入活动名称',
+              trigger: 'blur'
+            },
+            {
+              min: 3,
+              max: 5,
+              message: '长度在 3 到 5 个字符',
+              trigger: 'blur'
+            }
+          ],
+        },
         // 挂起
         // coverShow: false, // 弹窗
         // showFlag: 0, // 要显示的 模块,默认给0
@@ -654,8 +781,8 @@
         repayWay: '', // 审批  计算审批结论数据  还款方式
         taskName: '', // 角色标志
         social: '', // 社保/公积金  授权标志
-        bigDataLogVisible: false, //大数据风控弹框
-        socialLogVisible: false, //社保公积金
+        // bigDataLogVisible: false, //大数据风控弹框
+        // socialLogVisible: false, //社保公积金
         orgId: '', // 用来请求产品  用户id
         huiTuiShow: false,
         juJueShow: false,
@@ -714,7 +841,7 @@
           // 申请信息 带过来的 产品名称
           this.baseProName = this.taskInWaitting.proName;
           this.certCode = this.taskInWaitting.certCode;
-                this.options = [{
+          this.options = [{
             "label": "申请登记",
             "value": "creditApp_apply",
             "type": "01"
@@ -755,13 +882,11 @@
           // 申请信息 带过来的 产品名称
           this.baseProName = this.FtaskInWaitting.proName;
           this.certCode = this.FtaskInWaitting.certCode;
-                 this.options = [
-            {
-              "label": "初审审批",
-              "value": "creditApp_firstTrial",
-              "type": "02"
-            }
-          ]
+          this.options = [{
+            "label": "初审审批",
+            "value": "creditApp_firstTrial",
+            "type": "02"
+          }]
           // 任务状态
           this.taskStatus = JSON.parse(localStorage.getItem('FinalWorkbenchPass')).taskStatus;
           this.taskName = this.FtaskInWaitting.taskName;
@@ -787,8 +912,9 @@
         //   .replace(/\//g, '-')
         //   .match(/\d{4}\-\d{2}\-\d{1,2}/)[0]
         this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
-       JSON.stringify(this.applicationInformationDetail)==='{}'?this.$message.error('客户信息获取失败！请保存已填写内容，从任务列表重新进入！'):'';
-       // this.applyId = this.applicationInformationDetail.applyId;    
+        JSON.stringify(this.applicationInformationDetail) === '{}' ? this.$message.error('客户信息获取失败！请保存已填写内容，从任务列表重新进入！') :
+          '';
+        // this.applyId = this.applicationInformationDetail.applyId;    
         // this.appOrgId = this.applicationInformationDetail.appOrgId;
         // this.appOrgCode = this.applicationInformationDetail.appOrgCode;
         // // 客户编号
@@ -861,10 +987,17 @@
           }
         });
       },
-      hangOoutBtn() {
-        this.loadsitu = false;
-        this.adbtn = '确定';
-        this.hangOut = true;
+      hangOoutBtn() { //挂起弹窗
+        // this.loadsitu = false;
+        // this.adbtn = '确定';
+        // this.hangOut = true;
+        this.$confirm('您确定操作？', '提示', {
+          confirmButtonText: '确定',
+          type: 'warning',
+          showCancelButton: false
+        }).then(() => {
+          this.Csave();
+        }).catch(() => {});
       },
       canc() {
         this.hangOut = false;
@@ -889,14 +1022,14 @@
             // done();
             if (this.judgeFlag == '01') {
               this.$router.push('/taskInWaitting');
-                  this.del('初审详情');
+              this.del('初审详情');
             }
             // 终审
             else if (this.judgeFlag == '02') {
               this.$router.push('/FtaskInWaitting' + this.routeParams);
               this.del('终审详情');
             }
-        
+
           } else {
             if (res.statusCode == 500) {
               this.hangOut = false;
@@ -1372,10 +1505,6 @@
               });
               return;
             }
-
-            // this.coverShow = false;
-            // this.showFlag = 0;
-            // this.huiTuiShow = false;
             // 回退节点 使用了监听,所以单独赋值
             // this.rollbackNodeName = this.rollbackNodeName.value;
             // this.mainReason = this.mainReason; // 主原因同理
@@ -1600,13 +1729,13 @@
               message: res.msg,
               type: 'success'
             })
-            if (this.judgeFlag == '01'){
-               this.$router.push('/taskInWaitting');
+            if (this.judgeFlag == '01') {
+              this.$router.push('/taskInWaitting');
               this.del('初审详情');
             }
-            if (this.judgeFlag == '02'){
-               this.$router.push('/FtaskInWaitting' + this.routeParams);
-           this.del('终审详情');
+            if (this.judgeFlag == '02') {
+              this.$router.push('/FtaskInWaitting' + this.routeParams);
+              this.del('终审详情');
             }
           } else {
             this.$message({
@@ -1736,7 +1865,7 @@
             // taskId: this.taskId, // 任务id
             if (this.judgeFlag == '01') { // 初审 
               this.$router.push('/taskInWaitting');
-             this.del('初审详情');
+              this.del('初审详情');
             } else if (this.judgeFlag == '02') { // 终审
               this.$router.push('/FtaskInWaitting' + this.routeParams);
               this.del('终审详情');
@@ -2081,7 +2210,12 @@
         }).then(res => {
           if (res.obj == null) {
             // alert('社保')
-            this.bigDataLogVisible = true;
+            // this.bigDataLogVisible = true;
+            this.$confirm('此进件不存在大数据风控明细！', '提示', {
+              confirmButtonText: '确定',
+              type: 'warning',
+              showCancelButton: false
+            }).then(() => {}).catch(() => {});
             // alert(this.bigDataLogVisible)
           } else if (res.obj) {
             this.$router.push({
@@ -2099,7 +2233,7 @@
       },
       //大数据风控 提示弹框关闭
       infoSure() {
-        this.bigDataLogVisible = false;
+        // this.bigDataLogVisible = false;
       },
       //社保/公积金
       Social() {
@@ -2117,7 +2251,12 @@
       roSocialSecurity() {
         // alert('社保')
         if (this.social == "(未授权)") {
-          this.socialLogVisible = true;
+          // this.socialLogVisible = true;
+          this.$confirm('客户社保公积金未授权！', '提示', {
+            confirmButtonText: '确定',
+            type: 'warning',
+            showCancelButton: false
+          }).then(() => {}).catch(() => {});
         } else if (this.social == "(已授权)") {
           this.$router.push({
             path: '/SocialSe'
@@ -2132,9 +2271,9 @@
         }
       },
       //社保公积金 弹窗关闭
-      socialSure() {
-        this.socialLogVisible = false;
-      },
+      // socialSure() {
+      //   this.socialLogVisible = false;
+      // },
       del(delname) {
         this.$store.dispatch('delVisitedViews', {
           name: delname
@@ -2259,12 +2398,12 @@
     min-width: 300px;
   }
 
-  .creditApproval-class .el-form-item {
+  /* .creditApproval-class .el-form-item {
     height: 35px;
     line-height: 35px;
     margin: 0;
     padding: 0;
-  }
+  } */
 
   /* 按钮集合控件 */
 
@@ -2349,13 +2488,12 @@
     width: 100%;
     height: 40px;
     font-size: 18px;
-    /*font-weight: bold;*/
-    /*background: #ededed;*/
+
     background: #eef0f9;
     line-height: 40px;
     padding-left: 10px;
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     overflow: hidden;
     font-size: 16px;
   }
@@ -2916,18 +3054,17 @@
   }
 
 
-  .creditApproval-class .el-input {
+  /* .creditApproval-class .el-input {
     width: calc( 100% - 130px);
-    /*width: 100%;*/
     height: 35px;
     line-height: 35px;
-  }
+  } */
 
-  .creditApproval-class .el-select {
+  /* .creditApproval-class .el-select {
     height: 100%;
     line-height: 100%;
     width: calc( 100% - 130px);
-  }
+  } */
 
   .creditApproval-class .el-input--suffix .el-input__inner {
     margin: 0;
@@ -3966,10 +4103,6 @@
     /*margin-top: 1vh !important;*/
   }
 
-  .creditApproval-class .el-dialog__header {
-    display: none;
-  }
-
 
   .creditApproval-class .el-dialog__body {
     padding: 0;
@@ -4497,74 +4630,9 @@
 
   /* 审批信息  */
 
-  .creditApproval-class .el-form-item__content .el-select .el-input {
+  /* .creditApproval-class .el-form-item__content .el-select .el-input {
     width: 100%;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* 反欺诈表单 */
+  } */
 
   .creditApproval-class .anti-form {
     /*width: 80%;*/
