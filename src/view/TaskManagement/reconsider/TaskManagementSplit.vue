@@ -1,6 +1,6 @@
 <template>
   <!-- 任务管理分屏 -->
-  <div class="SplitScreen">
+  <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
     <myHead></myHead>
     <div class="SplitScreen_content">
       <p class="PerDtl">
@@ -55,6 +55,7 @@
         tabActiveInd2: 0,
         items2: ["申请信息", "影像资料", "实地征信", "流程轨迹"],
         tab2Index: 0,
+        loading: false,
       }
     },
     watch: {
@@ -68,11 +69,13 @@
     },
     methods: {
       mountedInf() {
+        this.loading = true;
         this.tastwaitingPass = JSON.parse(localStorage.getItem("TtaskInWaitting")); //任务管理
         this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
           id: this.tastwaitingPass.applyId,
         }).then(res => {
           if (res.statusCode == 200) {
+            this.loading = false;
             this.custName = res.data.accepCusBasicInfo.custName;
             this.customInf = res.data;
           } else {

@@ -1,6 +1,6 @@
 <template>
   <!-- 反欺诈分屏 -->
-  <div class="SplitScreen">
+  <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
     <myHead></myHead>
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
@@ -82,7 +82,7 @@
         SplitLeft: "left",
         SplitRight: "right",
         watchData: '',
-        originLeft: '',
+        loading: false,
         accepCusBasicInfo: '',
         // 进件人信息
         customInf: [], //申请信息页local字段
@@ -112,6 +112,7 @@
     },
     methods: {
       mountedInf() {
+        this.loading = true;
         this.tastwaitingPass = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈
         // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
         // if (this.judgeFlag.flag == '03') {
@@ -123,6 +124,7 @@
           id: this.tastwaitingPass.applyId,
         }).then(res => {
           if (res.statusCode == 200) {
+            this.loading = false;
             //this.custName=res.data.accepCusBasicInfo.custName;
             this.customInf = res.data;
             this.accepCusBasicInfo = res.data.accepCusBasicInfo;

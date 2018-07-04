@@ -1,5 +1,5 @@
 <template>
-  <div class="SplitScreen">
+  <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
     <myHead></myHead>
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
@@ -41,7 +41,7 @@
               <InternalMatch ref="InterLeft" v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
               <capplicationInformationDetail ref="applicationLeft" v-if=" this.tabContent1==3"></capplicationInformationDetail>
               <cborrowerInformationDetail ref="borrowLeft" v-if=" this.tabContent1==4" :isFull.sync="isFull"></cborrowerInformationDetail>
-              <PhoneCredit ref="phoneLeft" v-if=" this.tabContent1==5" :SplitS="SplitLeft" :isFull.sync="isFull"  :addBtn="false"></PhoneCredit>
+              <PhoneCredit ref="phoneLeft" v-if=" this.tabContent1==5" :SplitS="SplitLeft" :isFull.sync="isFull" :addBtn="false"></PhoneCredit>
               <cCreditForm ref="CreditFormLeft" v-if=" this.tabContent1==6"></cCreditForm>
               <creditInvestigation ref="InvestigationLeft" v-if=" this.tabContent1==7"></creditInvestigation>
               <processTrajectory ref="processLeft" v-if=" this.tabContent1==8"></processTrajectory>
@@ -78,7 +78,7 @@
             <InternalMatch v-if=" this.tabContent2==2" :SplitS="SplitRight" :isFull.sync="isFull"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <borrowerInformation ref="borrow" v-if=" this.tabContent2==4" :isFull.sync="isFull"></borrowerInformation>
-            <PhoneCredit ref="phone" v-if=" this.tabContent2==5" :SplitS="SplitRight" :isFull.sync="isFull"  :addBtn="true"></PhoneCredit>
+            <PhoneCredit ref="phone" v-if=" this.tabContent2==5" :SplitS="SplitRight" :isFull.sync="isFull" :addBtn="true"></PhoneCredit>
             <CreditForm ref="CreditForm" :myWatch="watchData" v-if=" this.tabContent2==6"></CreditForm>
             <creditInvestigation ref="Investigation" v-if=" this.tabContent2==7"></creditInvestigation>
             <aAntiApplyInf ref="AntiApply" v-if=" this.tabContent2==8"></aAntiApplyInf>
@@ -144,7 +144,8 @@
         SplitLeft: "left",
         SplitRight: "right",
         watchData: '',
-        originLeft: '',
+        // originLeft: '',
+        loading: false,
         customInf: [], //申请信息页local字段
         tastwaitingPass: [], //详情列表页信息--(含)取applyId
         accepCusBasicInfo: '',
@@ -324,15 +325,19 @@
           e.cancelBubble = true;
         });
       },
+
       mountedInf() {
+        this.loading = true;
         this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting"));
         this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
           id: this.tastwaitingPass.applyId,
         }).then(res => {
           if (res.statusCode == 200) {
+            this.loading = false;
             this.custName = res.data.accepCusBasicInfo.custName;
             this.customInf = res.data;
             this.accepCusBasicInfo = res.data.accepCusBasicInfo
+
           } else {
             this.$message.error(res.msg);
           }

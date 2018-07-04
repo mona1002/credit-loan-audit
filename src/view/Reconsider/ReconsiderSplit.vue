@@ -1,6 +1,6 @@
 <template>
   <!-- 复议分屏-专员、主管 -->
-  <div class="SplitScreen">
+  <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
     <myHead></myHead>
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
@@ -44,7 +44,7 @@
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <!-- √ -->
             <AborrowerInformationDetail v-if=" this.tabContent2==4"></AborrowerInformationDetail>
-            <PhoneCredit v-if=" this.tabContent2==5"  :addBtn="false" ></PhoneCredit>
+            <PhoneCredit v-if=" this.tabContent2==5" :addBtn="false"></PhoneCredit>
             <!-- √ 内部匹配中信审表 -->
             <FMCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></FMCreditForm>
             <!-- √ -->
@@ -96,7 +96,7 @@
         SplitLeft: "left",
         SplitRight: "right",
         watchData: '',
-        originLeft: '',
+        loading: false,
         // 进件人信息
         customInf: [], //申请信息页local字段
         tastwaitingPass: [], //详情列表页信息--(含)取applyId
@@ -131,6 +131,7 @@
         //   this.tastwaitingPass = JSON.parse(localStorage.getItem("RManagertaskInWaitting")) //复议经理
         //   this.Rcon = 2;
         // }
+        this.loading = true;
         this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
         this.taskName = JSON.parse(localStorage.getItem("RtaskInWaitting")).taskName;
         if (this.taskName == 'reconsiderApp_commissioner') { //复议专员结论
@@ -142,6 +143,7 @@
           id: this.tastwaitingPass.applyId,
         }).then(res => {
           if (res.statusCode == 200) {
+            this.loading = false;
             //this.custName = res.data.accepCusBasicInfo.custName;
             this.customInf = res.data;
             this.accepCusBasicInfo = res.data.accepCusBasicInfo;

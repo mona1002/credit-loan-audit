@@ -1,6 +1,6 @@
 <!-- 综合查询详情 -->
 <template>
-  <div class="SplitScreen">
+  <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
     <myHead></myHead>
     <div class="SplitScreen_content">
       <!-- 进件人详情 -->
@@ -43,7 +43,7 @@
               <RapplicationInformationDetail v-if=" this.tabContent1==3">申请信息</RapplicationInformationDetail>
               <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail>
               <!-- <PhoneCredit v-if=" this.tabContent1==5"> 电话征信</PhoneCredit> -->
-              <RPhoneCredit v-if=" this.tabContent1==5" > 电话征信</RPhoneCredit>
+              <RPhoneCredit v-if=" this.tabContent1==5"> 电话征信</RPhoneCredit>
               <FMCreditForm v-if=" this.tabContent1==6">信审表</FMCreditForm>
               <RcreditInvestigation v-if=" this.tabContent1==7">实地征信</RcreditInvestigation>
               <aMAntiApplyInf v-if=" this.tabContent1==8">反欺诈结论</aMAntiApplyInf>
@@ -148,7 +148,7 @@
     data() {
       return {
         watchData: '',
-        originLeft: '',
+        loading: false,
         customInf: [],
         tastwaitingPass: [],
         showHalfBtn: false,
@@ -206,17 +206,19 @@
           this.$refs.audioChild ? this.$refs.audioChild.mountedInf() : '';
           this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
           this.$refs.right_tab_ul.style.left = "0";
-           this.DblScreen();
+          this.DblScreen();
         }
       }
     },
     methods: {
       mountedInf() {
+        this.loading = true;
         this.tastwaitingPass = JSON.parse(localStorage.getItem("Query"));
         this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
           id: this.tastwaitingPass.matchApplyId,
         }).then(res => {
           if (res.statusCode == 200) {
+            this.loading = false;
             this.customInf = res.data;
             this.certCode = res.data.accepCusBasicInfo.certCode
             //this.custName = res.data.accepCusBasicInfo.custName;
