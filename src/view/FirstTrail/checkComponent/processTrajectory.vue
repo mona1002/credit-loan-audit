@@ -102,10 +102,10 @@ this.mountedInf();
 		        this.applyId = JSON.parse(localStorage.getItem("taskInWaitting")).applyId; // 初审
 		    } else if (this.judgeFlag.flag == '02') {
 		        this.applyId = JSON.parse(localStorage.getItem("FtaskInWaitting")).applyId //终审
-		    } else if (this.judgeFlag.flag == '07') {
-		        this.applyId = JSON.parse(localStorage.getItem("TtaskInWaitting")).applyId //终审
-		    } else if (this.judgeFlag.flag == '08') {
-		        this.applyId = JSON.parse(localStorage.getItem("TtaskInWaitting")).applyId //终审
+		    } else if (this.judgeFlag.flag == '14') {
+		        this.applyId = JSON.parse(localStorage.getItem("TtaskInWaitting")).applyId //任务管理-审批任务
+				}else if (this.judgeFlag.flag == '15') {
+		        this.applyId = JSON.parse(localStorage.getItem("TtaskInWaitting")).applyId //任务管理-质检任务
 		    }
 			this.request()
 			},

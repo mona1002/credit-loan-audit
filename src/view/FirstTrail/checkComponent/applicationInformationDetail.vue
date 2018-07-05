@@ -908,11 +908,11 @@
         } else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
           this.taskInWaitting = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
           this.applyId = this.taskInWaitting.applyId;
-        } else if (this.judgeFlag.flag == '07') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //质检专员
+        } else if (this.judgeFlag.flag == '14') {
+          this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //任务管理-审批任务
           this.applyId = this.taskInWaitting.applyId;
-        } else if (this.judgeFlag.flag == '08') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //质检主管
+        }else if (this.judgeFlag.flag == '15') {
+          this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //任务管理-质检任务
           this.applyId = this.taskInWaitting.applyId;
         }
         /*this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));

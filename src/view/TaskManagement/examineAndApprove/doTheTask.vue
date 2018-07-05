@@ -320,7 +320,7 @@
         });
         localStorage.setItem("TtaskInWaitting", JSON.stringify(row));
         this.judge = {
-          flag: '07'
+          flag: '14'
         };
         localStorage.setItem("judge", JSON.stringify(this.judge));
       },
