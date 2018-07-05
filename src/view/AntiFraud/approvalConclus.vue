@@ -126,16 +126,11 @@
             <el-option v-for="item in caseOptions" :label="item.caseNum" :value="item.caseNum">
             </el-option>
           </el-select> -->
-          <el-autocomplete
-            v-model="caseNum"
-            :fetch-suggestions="querySearchAsync"
-            placeholder="请输入关键词"
-            @select="handleSelect"
-          ></el-autocomplete>
+          <el-autocomplete v-model="caseNum" :fetch-suggestions="querySearchAsync" placeholder="请输入关键词" @select="handleSelect"></el-autocomplete>
         </div>
       </li>
       <li>
-        <el-button class="btn-detail btn-detail2" @click="caseAdd">新增</el-button>
+        <el-button class="btn-detail btn-detail2" @click="caseAdd('ruleForm')">新增</el-button>
       </li>
       <li class="item-column1 item-column3-2">
         <div class="left-title">案件描述：</div>
@@ -147,77 +142,130 @@
         <el-button class="btn-detail" @click="coverFn('showDetail')">详细信息</el-button>
       </li>
     </ul>
-    <div class="btn-div">
+    <!-- <div class="btn-div">
       <el-button icon="el-icon-check-hang" class="credit-btn" @click="open">挂起</el-button>
-      <el-button v-show="judgeFlag != '03'" icon="el-icon-check-back" class="credit-btn" @click="coverFn('02')">回退</el-button>
-      <!-- 专员 多一个审批 -->
-      <el-button v-show="judgeFlag == '03' && shenPiBtnShow" icon="el-icon-check-appro" class="credit-btn" @click="insert('submit')"
-        :loading="isLoading">审批</el-button>
-      <!-- 原审批改为提交 -->
-      <el-button icon="el-icon-check-appro" class="credit-btn" @click="insert()" :loading="isLoading">提交</el-button>
+      <el-button v-show="judgeFlag != '03'" icon="el-icon-check-back" class="credit-btn" @click="coverFn('02')">回退</el-button> -->
+    <!-- 专员 多一个审批 -->
+    <!-- <el-button v-show="judgeFlag == '03' && shenPiBtnShow" icon="el-icon-check-appro" class="credit-btn" @click="insert('submit')"
+        :loading="isLoading">审批</el-button> -->
+    <!-- 原审批改为提交 -->
+    <!-- <el-button icon="el-icon-check-appro" class="credit-btn" @click="insert()" :loading="isLoading">提交</el-button>
       <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('lcgj')">流程轨迹</el-button>
       <el-button icon="el-icon-check-lcgj" class="credit-btn" @click="coverFn('save')">保存</el-button>
       <el-button icon="el-icon-check-big-data" class="credit-btn" @click="tobigData">大数据风控</el-button>
       <el-button icon="el-icon-check-social" class="credit-btn" @click="roSocialSecurity">社保公积金{{social}}</el-button>
+    </div> -->
+    <div class="approve_btn_area approve_btn_area_width_700">
+      <span class="approve_item" @click="open">
+        <i class="approve_icon HangUpIcon"></i>
+        <span class="approve_text">挂起</span>
+      </span>
+      <span class="approve_item" @click="coverFn('02')">
+        <i class="approve_icon backIcon"></i>
+        <span class="approve_text">回退</span>
+      </span>
+      <span class="approve_item" v-show="judgeFlag == '03' && shenPiBtnShow" @click="insert('submit')" :loading="isLoading">
+        <i class="approve_icon appro"></i>
+        <span class="approve_text">审批</span>
+      </span>
+      <span class="approve_item" @click="insert()" :loading="isLoading">
+        <i class="approve_icon addIcon"></i>
+        <span class="approve_text">提交</span>
+      </span>
+      <span class="approve_item" @click="coverFn('lcgj')">
+        <i class="approve_icon liuchengIcon"></i>
+        <span class="approve_text">流程轨迹</span>
+      </span>
+      <span class="approve_item" @click="coverFn('save')">
+        <i class="approve_icon editIcon"></i>
+        <span class="approve_text">保存</span>
+      </span>
+      <span class="approve_item" @click="tobigData">
+        <i class="approve_icon brokenLineIcon"></i>
+        <span class="approve_text">大数据风控</span>
+      </span>
+      <span class="approve_item" @click="roSocialSecurity">
+        <i class="approve_icon dataMaptIcon"></i>
+        <span class="approve_text">社保公积金{{social}}</span>
+      </span>
     </div>
     <!-- 弹窗 -->
-    <div>
-      <el-dialog :visible.sync="huiTuiShow" :modal="false">
-        <!-- 回退 -->
-        <el-form class="back-form huitui-class">
-          <div class="form-title" style="position:relative;" v-show="showFlag=='02'">
-            回退信息
-            <!-- coverShow=false;showFlag=''; -->
-            <el-tag closable @close="huiTuiShow=false;" style="position:absolute;"></el-tag>
-          </div>
-          <div class="back-form-li">
-            <span style="color:red;display:inline-block;width:0px;float:left;">*</span>
-            <el-form-item label="回退节点: ">
-              <el-select @change="backSelectChange" v-model="rollbackNodeName">
-                <el-option v-for="item in options" :label="item.label" :value="item">
-                </el-option>
-              </el-select>
-            </el-form-item>
-          </div>
-          <div class="back-form-li" style="height:60px;line-height: 60px;padding-top:5px;">
-            <span style="color:red;display:inline-block;width:0px;float:left;position:relative;top:-8px;">*</span>
-            <el-form-item label="原因说明 :">
-              <!--             <span style="color:red;display:inline-block;width:0px;float:right;margin-right: 25px;">*</span> -->
+    <!-- <el-dialog title="回退信息" :visible.sync="huiTuiShow" :modal="false">
+      <el-form class="back-form huitui-class">
+        <div class="form-title" style="position:relative;" v-show="showFlag=='02'">
+          回退信息
+          <el-tag closable @close="huiTuiShow=false;" style="position:absolute;"></el-tag>
+        </div>
+        <div class="back-form-li">
+          <span style="color:red;display:inline-block;width:0px;float:left;">*</span>
+          <el-form-item label="回退节点: ">
+            <el-select @change="backSelectChange" v-model="rollbackNodeName">
+              <el-option v-for="item in options" :label="item.label" :value="item">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </div>
+        <div class="back-form-li" style="height:60px;line-height: 60px;padding-top:5px;">
+          <span style="color:red;display:inline-block;width:0px;float:left;position:relative;top:-8px;">*</span>
+          <el-form-item label="原因说明 :">
+            <el-input type="textarea" :row="2" resize="none" v-model="reasonRemark"></el-input>
+          </el-form-item>
+        </div>
+        <div class="back-form-li">
+          <el-form-item label="经办人 :" class="item-column2">
+            {{dealroperCode}}
+          </el-form-item>
+          <el-form-item label="经办时间 :" class="item-column2">
+            {{dealroperDate | dateFilter}}
+          </el-form-item>
+        </div>
+        <div class="back-form-li" style="text-align:right;">
+          <el-button plain @click="huiTuiShow=false;">返回</el-button>
+          <el-button type="primary" @click="submitFn('02')" :loading="isLoading">{{loadingTitle}}</el-button>
+        </div>
+      </el-form>
+    </el-dialog> -->
+    <!-- 回退弹窗 -->
+    <div class="Height_240 ">
+      <el-dialog title="回退信息" :visible.sync="huiTuiShow" :modal="false ">
+        <!-- <el-form :model="formReturn" :rules="rulesReturn" ref="ruleFormReturn"> -->
+        <el-form>
+          <el-form-item class="alert_collapse_inputLabel" label="回退节点：" :label-width="formLabelWidth">
+            <el-select @change="backSelectChange" v-model="rollbackNodeName">
+              <el-option v-for="item in options" :label="item.label" :value="item">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <div class="dialog_textarea alert_collapse_inputLabel">
+            <el-form-item label="原因说明：" :label-width="formLabelWidth">
               <el-input type="textarea" :row="2" resize="none" v-model="reasonRemark"></el-input>
             </el-form-item>
           </div>
-          <div class="back-form-li">
-            <el-form-item label="经办人 :" class="item-column2">
+          <div class="bfc">
+            <el-form-item class="fl" label="经办人：" :label-width="formLabelWidth">
               <!-- 取登录用户 -->
               {{dealroperCode}}
             </el-form-item>
-            <el-form-item label="经办时间 :" class="item-column2">
-              <!-- {{2017-12-1}} -->
+            <el-form-item class="fr" label="经办时间：" :label-width="formLabelWidth">
               {{dealroperDate | dateFilter}}
             </el-form-item>
           </div>
-          <div class="back-form-li" style="text-align:right;">
-            <!-- showFlag=0,coverShow=false; -->
-            <el-button plain @click="huiTuiShow=false;">返回</el-button>
-            <!-- 回退 -->
-            <el-button type="primary" @click="submitFn('02')" :loading="isLoading">{{loadingTitle}}</el-button>
-          </div>
         </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="huiTuiShow=false">取 消</el-button>
+          <el-button type="primary" @click="submitFn('02')" :loading="isLoading"> {{loadingTitle}}</el-button>
+        </div>
       </el-dialog>
     </div>
     <!-- 流程轨迹 -->
-    <div>
+    <!-- <div>
       <el-dialog :visible.sync="lcgjShow" :modal="false" width="1000px">
         <div class="lcgj-div">
           <div class="form-title" style="position:relative;">
             流程轨迹
-            <!-- coverShow=false;showFlag=''; -->
             <el-tag closable @close="lcgjShow=false;" style="position:absolute;"></el-tag>
           </div>
           <div class="xllcgj-div">
-            <!-- <div class="form-title2" style="position:relative;">
-            信审流程轨迹
-          </div> -->
             <el-table :data="lcgjData" height="250" border style="width: 100%" highlight-current-row v-loading="lcgjLoading" center>
               <el-table-column type="index" label="序号" min-width="50">
               </el-table-column>
@@ -240,22 +288,41 @@
             </el-table>
           </div>
           <div class="back-form-li" style="text-align:right;padding:10px;">
-            <!-- showFlag=0,coverShow=false; -->
             <el-button plain @click="lcgjShow=false;">返回</el-button>
           </div>
         </div>
       </el-dialog>
-    </div>
+    </div> -->
+    <!-- 流程轨迹弹窗 -->
+    <el-dialog title="流程轨迹" :visible.sync="lcgjShow" :modal="false" width="1000px">
+      <el-table :data="lcgjData" height="250" border style="width: 100%" highlight-current-row v-loading="lcgjLoading" center>
+        <el-table-column type="index" label="序号" min-width="50">
+        </el-table-column>
+        <el-table-column prop="taskNameTxt" label="任务节点" min-width="140">
+        </el-table-column>
+        <el-table-column prop="taskTypeTxt" label="任务类型" min-width="100">
+        </el-table-column>
+        <el-table-column prop="activationTime" label="进入本环节时间" min-width="150">
+        </el-table-column>
+        <el-table-column prop="taskStatusTxt" label="任务状态" min-width="100">
+        </el-table-column>
+        <el-table-column prop="operatorCode" label="处理人" min-width="120">
+        </el-table-column>
+        <el-table-column prop="completeTime" label="处理时间" min-width="150">
+        </el-table-column>
+        <el-table-column prop="approvalOpinionTxt" label="处理结论" min-width="100">
+        </el-table-column>
+        <el-table-column prop="opinionExplain" label="意见说明" min-width="200" show-overflow-tooltip>
+        </el-table-column>
+      </el-table>
+      <div slot="footer" class="dialog-footer">
+        <el-button plain @click="lcgjShow=false">返回</el-button>
+      </div>
+    </el-dialog>
     <!-- 审批结论轨迹 -->
-    <div>
-      <el-dialog :visible.sync="shenPiShow" :modal="false" width="1000px">
-        <!-- 审批结论轨迹 lcgj-div -->
+    <!-- <div>
+      <el-dialog title="详情信息" :visible.sync="shenPiShow" :modal="false" width="1000px">
         <div class="spjl-div">
-          <div class="form-title" style="position:relative;">
-            详情信息
-            <!-- coverShow=false;showFlag=''; -->
-            <el-tag closable @close="shenPiShow=false;" style="position:absolute;"></el-tag>
-          </div>
           <div style="line-height:30px;">
             <span>
               案件编号：
@@ -283,60 +350,77 @@
           </div>
         </div>
       </el-dialog>
-    </div>
-    <div class="bigDataLog">
-      <el-dialog title="提示" :modal="false" :visible.sync="bigDataLogVisible" width="420px">
-        <span>此进件不存在大数据风控明细！</span>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="infoSure">确定</el-button>
-        </span>
-      </el-dialog>
-    </div>
-    <!-- 社保公积金 -->
-    <div class="bigDataLog">
-      <el-dialog title="提示" :modal="false" :visible.sync="socialLogVisible" width="420px">
-        <span>客户社保公积金未授权！</span>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="socialSure">确定</el-button>
-        </span>
-      </el-dialog>
-    </div>
+    </div> -->
+    <!-- 详情信息弹窗 -->
+    <el-dialog title="详情信息" :visible.sync="shenPiShow" :modal="false" width="1000px">
+      <p style="margin-bottom:3px"> 案件编号：
+        <span>{{caseNum}}</span>
+      </p>
+      <el-table :data="detailData.recordList" height="250" border style="width: 100%" highlight-current-row>
+        <el-table-column type="index" label="序号" min-width="50">
+        </el-table-column>
+        <el-table-column prop="applySubno" label="进件编号" min-width="100">
+        </el-table-column>
+        <el-table-column prop="applyCustName" label="客户名称" min-width="150">
+        </el-table-column>
+        <el-table-column prop="auditTime" label="创建时间" min-width="100">
+        </el-table-column>
+        <el-table-column prop="caseDesc" label="案件描述" min-width="150">
+        </el-table-column>
+      </el-table>
+      <div slot="footer" class="dialog-footer">
+        <!-- <el-button plain @click="lcgjShow=false">返回</el-button> -->
+        <div class="page">
+          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 20, 30]"
+            :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="detailData.totalRecord" v-show="detailData.totalRecord > 0">
+          </el-pagination>
+        </div>
+      </div>
+    </el-dialog>
     <!-- 案件编号-新增弹框 -->
-    <div class="bigDataLog addDataLog">
+    <!-- <div class="bigDataLog addDataLog">
       <el-dialog title="" :visible.sync="addLogVisible" width="430px">
         <p class="addLogP">
-          <label><span class="xing">*</span>案件编号：</label>
-          <el-input
-            :rows="1"
-            placeholder="请输入内容"
-            v-model="caseNums"
-            :maxlength="20"
-            @keyup.native="trimFilter('caseNums')"
-            >
+          <label>
+            <span class="xing">*</span>案件编号：</label>
+          <el-input :rows="1" placeholder="请输入内容" v-model="caseNums" :maxlength="20" @keyup.native="trimFilter('caseNums')">
           </el-input>
           <span class="addWarimg" v-show="caseNums != null && caseNums.length==20">
             输入长度不能超过20
           </span>
         </p>
         <p class="addLogP addLogP2">
-          <label><span class="xing">*</span>案件描述：</label>
+          <label>
+            <span class="xing">*</span>案件描述：</label>
           <span class="addWarimg" v-show="caseDescs != null && caseDescs.length==500">
             输入长度不能超过500
           </span>
-          <el-input
-          type="textarea"
-          :rows="5"
-          placeholder="请输入内容"
-          v-model="caseDescs"
-          :maxlength="500"
-          resize="none"
-          @keyup.native="trimFilter('caseDescs')"
-          >
-        </el-input>
+          <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="caseDescs" :maxlength="500" resize="none" @keyup.native="trimFilter('caseDescs')">
+          </el-input>
         </p>
         <span slot="footer" class="dialog-footer">
           <el-button type="primary" @click="addSure">确认</el-button>
         </span>
+      </el-dialog>
+    </div> -->
+    <!-- 新增弹窗 -->
+    <div class="Height_240 ">
+      <el-dialog title="新增" :visible.sync="addLogVisible"  :modal="false ">
+        <el-form :model="ruleFormAdd" :rules="rules" ref="ruleForm" >
+          <el-form-item class="alert_collapse_inputLabel"  prop="caseNums" label="案件编号：" :label-width="formLabelWidth">
+            <el-input :rows="1" placeholder="请输入内容" v-model="ruleFormAdd.caseNums" @keyup.native="trimFilter('caseNums')">
+            </el-input>
+          </el-form-item>
+          <div class="dialog_textarea alert_collapse_inputLabel">
+            <el-form-item label="案件描述："  prop="caseDescs" :label-width="formLabelWidth">
+              <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="ruleFormAdd.caseDescs" resize="none" @keyup.native="trimFilter('caseDescs')">
+              </el-input>
+            </el-form-item>
+          </div>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="addSure('ruleForm')">确认</el-button>
+        </div>
       </el-dialog>
     </div>
   </div>
@@ -346,10 +430,13 @@
   export default {
     data() {
       return {
-        //list: [],
-        //loading: false,
-        caseNums:'',
-        caseDescs:'',
+        ruleFormAdd:{
+          caseNums:'',
+          caseDescs:''
+        },
+        formLabelWidth: '85px',
+        caseNums: '',
+        caseDescs: '',
         taskName: '',
         // nodeName: '',
         // routeParams: '',
@@ -429,8 +516,8 @@
         shenPiShow: false, // 审批结论轨迹
         shenPiBtnShow: false, // 审批 专员 BX22
         social: '', // 社保/公积金  授权标志
-        bigDataLogVisible: false, //大数据风控弹框
-        socialLogVisible: false, //社保公积金
+        // bigDataLogVisible: false, //大数据风控弹框
+        // socialLogVisible: false, //社保公积金
         isEdit: false,
         mainReason: '', // 主原因
         mainReasonT: '', // 主管临时变量
@@ -445,13 +532,23 @@
         loadingTitle: '提交', // 默认btn title
         taskwaitting: '',
         //案件编号-新增弹框
-        addLogVisible:false,
+        addLogVisible: false,
         //远程搜索案件编号
         restaurants: [],
-        timeout:  null,
-        channel:'',
+        timeout: null,
+        channel: '',
         // mainName:'',
         // secondaryName:''
+       rules:{
+caseNums:[
+  { required: true, message: '请输入活动名称', trigger: 'blur' },
+  { min: 0, max: 20, message: '输入长度不能超过20', trigger: 'blur' }
+],
+caseDescs:[  { required: true, message: '请输入活动名称', trigger: 'blur' },
+  { min: 0, max: 500, message: '输入长度不能超过500', trigger: 'blur' }
+]
+
+       }
       }
     },
     mounted() {
@@ -459,7 +556,7 @@
       this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
       // this.custName = this.applicationInformationDetail.custName;
       // this.certCode = this.applicationInformationDetail.certCode;
-      this.Social();
+
       // 取出 审批结论 所需数据
       this.auditCode = JSON.parse(localStorage.getItem('userInf')).userCode;
 
@@ -471,8 +568,8 @@
       this.judgeFlag = JSON.parse(localStorage.getItem('judge')).flag;
       if (this.judgeFlag == '01') { // 初审 任务 id  taskId
         this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-           this.custName = this.taskInWaitting.custName;
-      this.certCode = this.taskInWaitting.certCode;
+        this.custName = this.taskInWaitting.custName;
+        this.certCode = this.taskInWaitting.certCode;
         // 挂起 任务id
         this.taskId = this.taskInWaitting.taskId;
 
@@ -487,8 +584,8 @@
 
       } else if (this.judgeFlag == '02') { // 终审取终审  taskId
         this.FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
-           this.custName = this.FtaskInWaitting.custName;
-      this.certCode = this.FtaskInWaitting.certCode;
+        this.custName = this.FtaskInWaitting.custName;
+        this.certCode = this.FtaskInWaitting.certCode;
         // 挂起 任务id
         this.taskId = this.FtaskInWaitting.taskId;
 
@@ -508,8 +605,8 @@
         this.channel = '00';
       } else if (this.judgeFlag == '03' || this.judgeFlag == '04') {
         this.taskwaitting = JSON.parse(localStorage.getItem('AntitaskInWaitting'));
-           this.custName = this.taskwaitting.custName;
-      this.certCode = this.taskwaitting.certCode;
+        this.custName = this.taskwaitting.custName;
+        this.certCode = this.taskwaitting.certCode;
         this.taskName = this.taskwaitting.taskName;
         this.taskId = this.taskwaitting.taskId;
         this.applyId = this.taskwaitting.applyId;
@@ -533,7 +630,7 @@
         this.getRiskItems();
         // 专员主管区分
         if (this.taskName == 'antiFraudApp_commissioner') { // 专员
-        this.processTemplateId = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).processTemplateId;
+          this.processTemplateId = JSON.parse(localStorage.getItem('AntiWorkbenchPass')).processTemplateId;
           this.isEdit = true;
           if (this.userInfo.roleCodesList) {
             for (var i = 0; i < this.userInfo.roleCodesList.length; i++)
@@ -543,7 +640,7 @@
           }
           this.queryCaseNumList();
         } else if (this.taskName == 'antiFraudApp_manager') { //主管
-        this.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
+          this.processTemplateId = JSON.parse(localStorage.getItem('AntiManagerWorkbenchPass')).processTemplateId;
           this.options = [{
             "label": "反欺诈专员审批",
             "value": "antiFraudApp_commissioner",
@@ -554,10 +651,11 @@
             this.queryCreauditOpinionObj();
           }
         }
-      }else if(this.judgeFlag == '05' || this.judgeFlag == '06'){
+      } else if (this.judgeFlag == '05' || this.judgeFlag == '06') {
         //channel
         this.channel = '04';
-      }else if(this.judgeFlag == '07' || this.judgeFlag == '08' || this.judgeFlag == '10' || this.judgeFlag == '11' || this.judgeFlag == '12' || this.judgeFlag == '13'){
+      } else if (this.judgeFlag == '07' || this.judgeFlag == '08' || this.judgeFlag == '10' || this.judgeFlag == '11' ||
+        this.judgeFlag == '12' || this.judgeFlag == '13') {
         //channel
         this.channel = '03';
       }
@@ -678,55 +776,75 @@
       // this.getRiskItems();
       // 请求  案件编号
       // this.queryCaseNumList();
-
-
-
+      this.Social();
     },
     methods: {
-      // open 打开 自定义 弹窗   挂起
-      open() {
-        const h = this.$createElement;
-        this.$msgbox({
-          title: '提示',
-          message: h('p', null, [
-            h('span', null, '确定操作? '),
-            // h('i', { style: 'color: teal' }, 'VNode')
-          ]),
-          showCancelButton: true,
+      open() { //挂起
+        this.$confirm('您确定操作？', '提示', {
           confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          modal: false,
-          beforeClose: (action, instance, done) => {
-            if (action === 'confirm') {
-              instance.confirmButtonLoading = true;
-              instance.confirmButtonText = '执行中...';
-
-              this.busiState = '30'
-              // 点击 确认 提交 方法
-              this.post("/creauditInfo/approveHang ", {
-                taskId: this.taskId,
-                busiState: this.busiState,
-                applyId: this.applyId, // 申请单id
-              }).then(res => {
-                if (res.statusCode == '200') {
-                  done();
-                } else {
-                  this.$message(res.msg);
-                  instance.confirmButtonText = '';
-                }
-                instance.confirmButtonLoading = false;
+          type: 'warning',
+          showCancelButton: false
+        }).then(() => {
+          this.busiState = '30'
+          // 点击 确认 提交 方法
+          this.post("/creauditInfo/approveHang ", {
+            taskId: this.taskId,
+            busiState: this.busiState,
+            applyId: this.applyId, // 申请单id
+          }).then(res => {
+            if (res.statusCode == '200') {
+              this.$message({
+                type: 'success',
+                message: '挂起成功'
               });
+              this.$router.push('/AntiFraud34');
             } else {
-              done();
+              this.$message(res.msg);
             }
-          }
-        }).then(action => {
-          this.$message({
-            type: 'success',
-            message: '挂起成功'
           });
-          this.$router.push('/AntiFraud34');
-        });
+        }).catch(() => {});
+        // const h = this.$createElement;
+        // this.$msgbox({
+        //   title: '提示',
+        //   message: h('p', null, [
+        //     h('span', null, '确定操作? '),
+        //     // h('i', { style: 'color: teal' }, 'VNode')
+        //   ]),
+        //   showCancelButton: true,
+        //   confirmButtonText: '确定',
+        //   cancelButtonText: '取消',
+        //   modal: false,
+        //   beforeClose: (action, instance, done) => {
+        //     if (action === 'confirm') {
+        //       instance.confirmButtonLoading = true;
+        //       instance.confirmButtonText = '执行中...';
+
+        //       this.busiState = '30'
+        //       // 点击 确认 提交 方法
+        //       this.post("/creauditInfo/approveHang ", {
+        //         taskId: this.taskId,
+        //         busiState: this.busiState,
+        //         applyId: this.applyId, // 申请单id
+        //       }).then(res => {
+        //         if (res.statusCode == '200') {
+        //           done();
+        //         } else {
+        //           this.$message(res.msg);
+        //           instance.confirmButtonText = '';
+        //         }
+        //         instance.confirmButtonLoading = false;
+        //       });
+        //     } else {
+        //       done();
+        //     }
+        //   }
+        // }).then(action => {
+        //   this.$message({
+        //     type: 'success',
+        //     message: '挂起成功'
+        //   });
+        //   this.$router.push('/AntiFraud34');
+        // });
       },
       // 请求系统时间
       getSystemDate() {
@@ -769,31 +887,30 @@
           if (res.statusCode == '200') {
             //this.list = res.data;
             this.restaurants = res.data;
-           /* this.list = res.data.map(item => {
+            /* this.list = res.data.map(item => {
             return { value: item.caseNum, label: item.caseNum };
           });         */
           }
         })
       },
       //请求远程搜索
-       querySearchAsync(queryString, cb) {
-          for(let i of this.restaurants){
-            i.value = i.caseNum;  //将caseNum作为value  
-          };
-          var restaurants = this.restaurants; 
-          var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants;
-          clearTimeout(this.timeout);
-          this.timeout = setTimeout(() => {
-            cb(results);
-          }, 300 * Math.random());
+      querySearchAsync(queryString, cb) {
+        for (let i of this.restaurants) {
+          i.value = i.caseNum; //将caseNum作为value  
+        };
+        var restaurants = this.restaurants;
+        var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants;
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(() => {
+          cb(results);
+        }, 300 * Math.random());
       },
       createStateFilter(queryString) {
         return (state) => {
-          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) ===0);
+          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
         };
       },
-      handleSelect(item) {
-      },
+      handleSelect(item) {},
       // 审批
       insert(val) {
         // 反欺诈专员
@@ -972,75 +1089,128 @@
             this.$router.push('/AntiFraud34');
           });
         } else {
-          // 专员的 提交  
-          this.busiState = '30';
-          // 原来主管的审批 不变
-          const h = this.$createElement;
-          this.$msgbox({
-            title: '提示',
-            message: h('p', null, [
-              h('span', null, '确定操作? '),
-            ]),
-            showCancelButton: true,
+
+          this.$confirm('您确定操作？', '提示', {
             confirmButtonText: '确定',
-            cancelButtonText: '取消',
-            beforeClose: (action, instance, done) => {
-              if (action === 'confirm') {
-                instance.confirmButtonLoading = true;
-                instance.confirmButtonText = '执行中...';
-                this.post('/fraudAuditOpinion/insert', {
-                  applyId: this.applyId, // 申请单id
-                  mainreasonId: this.mainReason, // 欺诈主原因id
-                  subreasonId: this.secondReason, // 欺诈子原因id
-                  mainreaName: this.mainReasonName, // 欺诈主原因名称
-                  subreaName: this.subreaName, // 欺诈子原因名称
-                  riskSection: this.riskSectionArr, // 风险项
-                  auditDesc: this.auditDesc, // 反欺诈决策反馈
-                  auditResult: this.auditResult, // 审核结论
-                  caseDesc: this.caseDesc, // 案件描述
-                  caseNum: this.caseNum, // 案件编号 caseNum
-                  auditType: '01', // 审批类型
-                  taskNodeName: this.taskName, // 任务节点- 取列表taskName
-                  taskId: this.taskId,
-                  processInstanceId: this.processInstanceId, // 流程实例Id
-                  busiState: this.busiState, //  状态
-                  processTemplateId: this.processTemplateId, // 流程模版Id
-                  channel:this.channel
-                }).then(res => {
-                  if (res.statusCode == '200') {
-                    this.resMsg = res.msg;
-                    done();
-                  } else {
-
-                    if (res.statusCode == '500') {
-                      this.$message({
-                        type: 'warning',
-                        message: '网络异常,请重试!'
-                      });
-                      instance.confirmButtonText = '';
-                      instance.confirmButtonLoading = false;
-                    } else {
-
-                      this.$message({
-                        type: 'warning',
-                        message: res.msg
-                      });
-                    }
-                  }
+            type: 'warning',
+            showCancelButton: false
+          }).then(() => {
+            // 专员的 提交  
+            this.busiState = '30';
+            // 原来主管的审批 不变
+            this.post('/fraudAuditOpinion/insert', {
+              applyId: this.applyId, // 申请单id
+              mainreasonId: this.mainReason, // 欺诈主原因id
+              subreasonId: this.secondReason, // 欺诈子原因id
+              mainreaName: this.mainReasonName, // 欺诈主原因名称
+              subreaName: this.subreaName, // 欺诈子原因名称
+              riskSection: this.riskSectionArr, // 风险项
+              auditDesc: this.auditDesc, // 反欺诈决策反馈
+              auditResult: this.auditResult, // 审核结论
+              caseDesc: this.caseDesc, // 案件描述
+              caseNum: this.caseNum, // 案件编号 caseNum
+              auditType: '01', // 审批类型
+              taskNodeName: this.taskName, // 任务节点- 取列表taskName
+              taskId: this.taskId,
+              processInstanceId: this.processInstanceId, // 流程实例Id
+              busiState: this.busiState, //  状态
+              processTemplateId: this.processTemplateId, // 流程模版Id
+              channel: this.channel
+            }).then(res => {
+              if (res.statusCode == '200') {
+                this.resMsg = res.msg;
+                this.$message({
+                  type: 'success',
+                  message: '反欺诈审批成功!'
+                });
+                this.$router.push('/AntiFraud34');
+              } else {
+                if (res.statusCode == '500') {
+                  this.$message({
+                    type: 'warning',
+                    message: '网络异常,请重试!'
+                  });
                   instance.confirmButtonText = '';
                   instance.confirmButtonLoading = false;
-                })
-              } else {
-                done();
+                } else {
+                  this.$message({
+                    type: 'warning',
+                    message: res.msg
+                  });
+                }
               }
-            }
-          }).then(action => {
-            this.$message({
-              type: 'success',
-              message: '反欺诈审批成功!'
-            });
-            this.$router.push('/AntiFraud34');
-          });
+            })
+          }).catch(() => {});
+
+          // // 专员的 提交  
+          // this.busiState = '30';
+          // // 原来主管的审批 不变
+          // const h = this.$createElement;
+          // this.$msgbox({
+          //   title: '提示',
+          //   message: h('p', null, [
+          //     h('span', null, '确定操作? '),
+          //   ]),
+          //   showCancelButton: true,
+          //   confirmButtonText: '确定',
+          //   cancelButtonText: '取消',
+          //   beforeClose: (action, instance, done) => {
+          //     if (action === 'confirm') {
+          //       instance.confirmButtonLoading = true;
+          //       instance.confirmButtonText = '执行中...';
+          //       this.post('/fraudAuditOpinion/insert', {
+          //         applyId: this.applyId, // 申请单id
+          //         mainreasonId: this.mainReason, // 欺诈主原因id
+          //         subreasonId: this.secondReason, // 欺诈子原因id
+          //         mainreaName: this.mainReasonName, // 欺诈主原因名称
+          //         subreaName: this.subreaName, // 欺诈子原因名称
+          //         riskSection: this.riskSectionArr, // 风险项
+          //         auditDesc: this.auditDesc, // 反欺诈决策反馈
+          //         auditResult: this.auditResult, // 审核结论
+          //         caseDesc: this.caseDesc, // 案件描述
+          //         caseNum: this.caseNum, // 案件编号 caseNum
+          //         auditType: '01', // 审批类型
+          //         taskNodeName: this.taskName, // 任务节点- 取列表taskName
+          //         taskId: this.taskId,
+          //         processInstanceId: this.processInstanceId, // 流程实例Id
+          //         busiState: this.busiState, //  状态
+          //         processTemplateId: this.processTemplateId, // 流程模版Id
+          //         channel: this.channel
+          //       }).then(res => {
+          //         if (res.statusCode == '200') {
+          //           this.resMsg = res.msg;
+          //           done();
+          //         } else {
+
+          //           if (res.statusCode == '500') {
+          //             this.$message({
+          //               type: 'warning',
+          //               message: '网络异常,请重试!'
+          //             });
+          //             instance.confirmButtonText = '';
+          //             instance.confirmButtonLoading = false;
+          //           } else {
+
+          //             this.$message({
+          //               type: 'warning',
+          //               message: res.msg
+          //             });
+          //           }
+          //         }
+          //         instance.confirmButtonText = '';
+          //         instance.confirmButtonLoading = false;
+          //       })
+          //     } else {
+          //       done();
+          //     }
+          //   }
+          // }).then(action => {
+          //   this.$message({
+          //     type: 'success',
+          //     message: '反欺诈审批成功!'
+          //   });
+          //   this.$router.push('/AntiFraud34');
+          // });
         }
 
 
@@ -1051,7 +1221,6 @@
 
         switch (flag) {
           case '02':
-            // this.coverShow = true;
             this.huiTuiShow = true;
             this.showFlag = '02';
             // 获取系统时间
@@ -1062,8 +1231,6 @@
             break;
 
           case 'lcgj':
-            // this.coverShow = true;
-            // this.showFlag = 'lcgj';
             this.lcgjShow = true;
             // 取本地的 流程模版id
             // this.processTemplateId = JSON.parse(localStorage.getItem('workbenchPass')).processTemplateId;
@@ -1104,8 +1271,6 @@
               caseNum: this.caseNum, // 案件编号 caseNum
               caseDesc: this.caseDesc, // 案件描述
             }
-            //  this.mainName=this.$refs.mainReasonName.selectedLabel;
-            //  this.secondaryName=this.$refs.sencondReasonName.selectedLabel;
             // 点击保存 存本地
             localStorage.setItem('saveInsertObj', JSON.stringify(tempObj));
             // 保存 成功
@@ -1154,14 +1319,6 @@
               });
               return;
             }
-            // 主原因
-            // if (!this.mainReason) {
-            //   this.$message({
-            //     message: "提示：请选择主原因!",
-            //     type: 'warning'
-            //   });
-            //   return;
-            // }
             // 原因说明
             if (!this.reasonRemark) {
               this.$message({
@@ -1170,15 +1327,11 @@
               });
               return;
             }
-
             this.coverShow = false;
             this.showFlag = 0;
             // 回退节点 使用了监听,所以单独赋值
             this.rollbackNodeName = this.rollbackNodeName.value;
-            // this.mainReason = this.mainReason; // 主原因同理
             this.creauditAppOperate = 'check_Back';
-            // this.taskId = '180049';
-
             this.approvalFn();
             break;
         }
@@ -1307,8 +1460,7 @@
           this.getReason('main', '08', false);
         } else if (val == '01') {
           this.getReason('main', '09', false);
-        } else if (val == '02') {
-        }
+        } else if (val == '02') {}
       },
       selectChange: function (val) {
         var id = val.id; // 主原因的 id
@@ -1343,8 +1495,7 @@
             mainType = '08';
           } else if (type == '01') {
             mainType = '09';
-          } else if (type == '02') {
-          }
+          } else if (type == '02') {}
           this.get('/credit/firstNodeReason?reasonType=' + mainType + '&' + Math.random()).then(res => {
             if (res.statusCode == '200') {
               this.mainReasons = res.data;
@@ -1445,8 +1596,13 @@
         }).then(res => {
           if (res.obj == null) {
             // alert('社保')
-            this.bigDataLogVisible = true;
+            // this.bigDataLogVisible = true;
             // alert(this.bigDataLogVisible)
+            this.$confirm('此进件不存在大数据风控明细！', '提示', {
+              confirmButtonText: '确定',
+              type: 'warning',
+              showCancelButton: false
+            }).then(() => {}).catch(() => {});
           } else if (res.obj) {
             this.$router.push({
               path: '/PneCtrl'
@@ -1462,9 +1618,9 @@
         });
       },
       //大数据风控 提示弹框关闭
-      infoSure() {
-        this.bigDataLogVisible = false;
-      },
+      // infoSure() {
+      //   this.bigDataLogVisible = false;
+      // },
       //社保/公积金
       Social() {
         this.post(baseurl.BaseUrl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {
@@ -1481,7 +1637,12 @@
       roSocialSecurity() {
         // alert('社保')
         if (this.social == "(未授权)") {
-          this.socialLogVisible = true;
+          // this.socialLogVisible = true;
+          this.$confirm('客户社保公积金未授权！', '提示', {
+            confirmButtonText: '确定',
+            type: 'warning',
+            showCancelButton: false
+          }).then(() => {}).catch(() => {});
         } else if (this.social == "(已授权)") {
           this.$router.push({
             path: '/SocialSe'
@@ -1496,9 +1657,9 @@
         }
       },
       //社保公积金 弹窗关闭
-      socialSure() {
-        this.socialLogVisible = false;
-      },
+      // socialSure() {
+      //   this.socialLogVisible = false;
+      // },
       // 修改 按钮
       editFn() {
         this.isEdit = true;
@@ -1521,71 +1682,109 @@
         this.secondReason = val;
       },
       /*案件编号-新增按钮*/
-      caseAdd(){
+      caseAdd(formName) {
         this.addLogVisible = true;
-        this.caseNums = '';
-        this.caseDescs = '';
+        // this.caseNums = '';
+         this.ruleFormAdd.caseNums = '';
+        // this.caseDescs = '';
+        this.ruleFormAdd.caseDescs = '';
+        this.$refs[formName] ? this.$refs[formName].resetFields() : '';       
       },
       /*案件编号-新增弹框-确认*/
-      addSure(){
-          if (!this.caseNums) {
-              this.$message({
-                showClose: true,
-                message: '请填写案件编号',
-                type: 'warning'
-              });
-              return;
-            }else if(!this.caseDescs){
-              this.$message({
-                showClose: true,
-                message: '请填写案件描述',
-                type: 'warning'
-              });
-              return;
-            };
-            if(this.caseNums && this.caseDescs){
-              this.post('/caseInfoController/insert', {
-                  param:{
-                    caseNum: this.caseNums,
-                    creatorCode:'',
-                    creatorOrgCode:'',
-                    caseDesc:this.caseDescs
-                  }
-                }).then(res => {
-                  if(res.statusCode != 200){
-                    this.$message({
-                    showClose: true,
-                    message: res.msg,
-                    type: 'warning'
-                  });
-                  return;
-                  }else{
-                    this.addLogVisible = false;
-                    this.caseNum = this.caseNums;
-                    this.caseDesc = this.caseDescs;
-                    this.queryCaseNumList();
-                  }
-                })
+      addSure(formName) {
+        // if (!this.caseNums) {
+        //   this.$message({
+        //     showClose: true,
+        //     message: '请填写案件编号',
+        //     type: 'warning'
+        //   });
+        //   return;
+        // } else if (!this.caseDescs) {
+        //   this.$message({
+        //     showClose: true,
+        //     message: '请填写案件描述',
+        //     type: 'warning'
+        //   });
+        //   return;
+        // };
+        // if (this.caseNums && this.caseDescs) {
+          // this.post('/caseInfoController/insert', {
+          //   param: {
+          //     caseNum: this.ruleFormAdd.caseNums,
+          //     creatorCode: '',
+          //     creatorOrgCode: '',
+          //     caseDesc: this.ruleFormAdd.caseDescs
+          //   }
+          // }).then(res => {
+          //   if (res.statusCode != 200) {
+          //     this.$message({
+          //       showClose: true,
+          //       message: res.msg,
+          //       type: 'warning'
+          //     });
+          //     return;
+          //   } else {
+          //     this.addLogVisible = false;
+          //     this.caseNum = this.ruleFormAdd.caseNums;
+          //     this.caseDesc = this.ruleFormAdd.caseDescs;
+          //     this.queryCaseNumList();
+          //   }
+          // })
+        // }
+         this.$refs[formName].validate((valid) => {
+          if (valid) {
+       this.post('/caseInfoController/insert', {
+            param: {
+              caseNum: this.ruleFormAdd.caseNums,
+              creatorCode: '',
+              creatorOrgCode: '',
+              caseDesc: this.ruleFormAdd.caseDescs
             }
+          }).then(res => {
+            if (res.statusCode != 200) {
+              this.$message({
+                showClose: true,
+                message: res.msg,
+                type: 'warning'
+              });
+              return;
+            } else {
+              this.$message({
+                type:'success',
+                message:'新增成功！'
+              })
+              this.addLogVisible = false;
+              this.caseNum = this.ruleFormAdd.caseNums;
+              this.caseDesc = this.ruleFormAdd.caseDescs;
+              this.queryCaseNumList();
+            }
+          })
+} else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
       },
-     trimFilter: function (value) { 
-        switch(value){
+      trimFilter: function (value) {
+        switch (value) {
           case 'caseNums':
-            return this.caseNums = this.caseNums.replace(/\s/g,'');
+            return this.ruleFormAdd.caseNums = this.ruleFormAdd.caseNums.replace(/\s/g, '');
             break;
           case 'caseDescs':
-            return this.caseDescs = this.caseDescs.replace(/\s/g,'');
+            return this.ruleFormAdd.caseDescs = this.ruleFormAdd.caseDescs.replace(/\s/g, '');
             break;
         }
-      }, 
-      del(){
-           this.$store.dispatch('delVisitedViews', {name:'反欺诈详情'}).then((views) => {
-            const latestView = views.slice(-1)[0]
-            if (latestView) {
-              this.$router.push(latestView.StatefullPath);
-            } else {
-              this.$router.push('/')
-            }
+      },
+      del() {
+        this.$store.dispatch('delVisitedViews', {
+          name: '反欺诈详情'
+        }).then((views) => {
+          const latestView = views.slice(-1)[0]
+          if (latestView) {
+            this.$router.push(latestView.StatefullPath);
+          } else {
+            this.$router.push('/')
+          }
         })
       }
     },
@@ -1868,10 +2067,6 @@
     margin-top: 30vh;
   }
 
-  .approval-colun .el-dialog__header {
-    display: none;
-  }
-
   .approval-colun .el-dialog__body {
     padding: 0;
   }
@@ -2008,22 +2203,16 @@
     height: auto;
   }
 
-  .approval-colun .el-input {
-    /*width: calc( 100% - 120px);*/
+  /* .approval-colun .el-input {
     width: 100%;
     height: 35px;
     line-height: 35px;
-  }
+  } */
 
-  .approval-colun .el-select {
+  /* .approval-colun .el-select {
     height: 100%;
     line-height: 100%;
-    /*width:300px;*/
-  }
-
-
-
-
+  } */
 
   /* 反欺诈 -- 审批结论 */
 
@@ -2119,6 +2308,7 @@
     margin-top: 20px;
     margin-left: 10px;
   }
+
   .approval-colun .btn-detail2 {
     margin-top: 0px;
   }
@@ -2297,46 +2487,56 @@
   }
 
   /* 必填 */
-  .xing{
-    color:#ff7676;
+
+  .xing {
+    color: #ff7676;
     font-size: 14px;
     position: relative;
     top: 2px;
     right: 2px;
   }
-  .approval-colun .addLogP{
+
+  .approval-colun .addLogP {
     position: relative;
   }
-  .approval-colun .addLogP .addWarimg{
+
+  .approval-colun .addLogP .addWarimg {
     position: absolute;
     left: 85px;
     top: -20px;
-    color:#ff7676;
+    color: #ff7676;
     font-size: 12px;
   }
-  .approval-colun .addLogP label{
+
+  .approval-colun .addLogP label {
     width: 80px;
     text-align: right;
     display: inline-block;
   }
-  .approval-colun .addLogP div{
+
+  .approval-colun .addLogP div {
     width: 280px;
     display: inline-block;
   }
-  .approval-colun .addLogP2{
+
+  .approval-colun .addLogP2 {
     margin-top: 15px;
   }
-  .approval-colun .addLogP2 label{
+
+  .approval-colun .addLogP2 label {
     float: left;
     height: 114px;
     line-height: 114px;
     margin-right: 5px;
   }
-  .newLi{
-    width: calc( 100% - 130px );
+
+  .newLi {
+    width: calc( 100% - 130px);
     float: right;
   }
-  .newLi div{
+
+  .newLi div {
     width: 100%;
   }
+
 </style>
