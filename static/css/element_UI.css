@@ -1427,12 +1427,7 @@
 
 /* 备注信息表格内容居中 */
 
-.remark .el-table th .cell {
-  font-weight: 800;
-  color: #909399;
-  font-size: 13px;
-}
-
+/* 
 .remark .el-table__body-wrapper {
   overflow: hidden;
 }
@@ -1465,9 +1460,9 @@
 
 .remark .el-table th:nth-of-type(4) {
   text-align: center;
-}
+} */
 
-.remark .el-table__body-wrapper .el-table__body td:nth-of-type(1) {
+/* .remark .el-table__body-wrapper .el-table__body td:nth-of-type(1) {
   text-align: center;
   padding-left: 0;
 }
@@ -1479,22 +1474,22 @@
 
 .remark .el-table__body-wrapper .el-table__body td:nth-of-type(4) {
   text-align: center;
-}
+} */
 
 /* 备注信息弹框 */
-
+/* 
 .remark .addLog .el-dialog__title {
   font-size: 15px;
-}
+} */
 
-.remark .addLog .el-dialog__body {
+/* .remark .addLog .el-dialog__body {
   height: 208px;
   width: 98%;
   margin: 0 auto;
   background: #eee;
   padding: 0 0;
-}
-
+} */
+/* 
 .remark .isLog .el-dialog__body,
 .remark .deletLog .el-dialog__body {
   padding: 0 20px;
@@ -1510,11 +1505,11 @@
   margin: 0 auto;
   background: #eee;
   padding: 0 0;
-}
+} */
 
 /* 备注信息表格内容居中 */
 
-.remarkDetial .el-table th .cell {
+/* .remarkDetial .el-table th .cell {
   font-weight: 800;
   color: #909399;
   font-size: 13px;
@@ -1531,7 +1526,6 @@
 }
 
 .remarkDetial .el-table__body-wrapper .el-table__body td {
-  /* text-align: center; */
   font-weight: 400;
   color: #909399;
   font-size: 13px;
@@ -1567,7 +1561,7 @@
 
 .remarkDetial .el-table__body-wrapper .el-table__body td:nth-of-type(4) {
   text-align: center;
-}
+} */
 
 /* 信审任务列表 */
 
