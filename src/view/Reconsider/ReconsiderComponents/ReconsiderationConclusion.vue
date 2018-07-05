@@ -67,7 +67,7 @@
         </li>
       </ul>
     </div>
-    <div class="buttons">
+    <!-- <div class="buttons">
       <el-button @click="coverFn('back')">
         <img src="/static/images/back.png">
         <label class="labelTxt">回退</label>
@@ -100,9 +100,43 @@
         <img src="/static/images/social.png">
         <label class="labelTxt">社保/公积金{{social}}</label>
       </el-button>
+    </div> -->
+    <div class="approve_btn_area approve_btn_area_width_900">
+      <span class="approve_item" @click="coverFn('back')">
+        <i class="approve_icon backIcon"></i>
+        <span class="approve_text">回退</span>
+      </span>
+      <span class="approve_item" @click="coverFn('refuse')">
+        <i class="approve_icon rejectIcon"></i>
+        <span class="approve_text">拒绝</span>
+      </span>
+      <span class="approve_item" @click="shenpi">
+        <i class="approve_icon appro"></i>
+        <span class="approve_text">审批</span>
+      </span>
+      <span class="approve_item" @click="AntiFraudApplication">
+        <i class="approve_icon faqi"></i>
+        <span class="approve_text">反欺诈申请</span>
+      </span>
+      <span class="approve_item" @click="getSpjlList">
+        <i class="approve_icon editIcon"></i>
+        <span class="approve_text">审批流程轨迹</span>
+      </span>
+      <span class="approve_item" @click="getLcgjList">
+        <i class="approve_icon liuchengIcon"></i>
+        <span class="approve_text">流程轨迹</span>
+      </span>
+      <span class="approve_item" @click="tobigData">
+        <i class="approve_icon brokenLineIcon"></i>
+        <span class="approve_text">大数据风控</span>
+      </span>
+      <span class="approve_item" @click="roSocialSecurity">
+        <i class="approve_icon dataMaptIcon"></i>
+        <span class="approve_text">社保公积金{{social}}</span>
+      </span>
     </div>
     <!-- 回退 -->
-    <div class="huitui">
+    <!-- <div class="huitui">
       <el-dialog title='回退信息' top='20vh' :visible.sync="dialogVisible" :modal="false" width="860px">
         <div class="huituiBody">
           <p class="bodyP">
@@ -157,8 +191,53 @@
           <el-button type="primary" @click="dialogVisible = false">返回</el-button>
         </span>
       </el-dialog>
+    </div> -->
+    <!-- 回退弹窗 -->
+    <div class="Height_240 ">
+      <el-dialog title="回退信息" :visible.sync="dialogVisible" :modal="false ">
+        <el-form :model="FormReturn" :rules="rules" ref="FormReturn">
+          <el-form-item label="回退节点：" :label-width="formLabelWidth" prop="rollbackNodeName">
+            <el-select v-model="FormReturn.rollbackNodeName" placeholder="请选择" @change="backNode">
+              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <div class="bfc">
+            <el-form-item class="fl" label="主原因：" :label-width="formLabelWidth" prop="mainReasonName">
+              <el-select ref="mainReasonName" v-model="FormReturn.mainReasonName" placeholder="请选择" @change="mainReason($event,'mainback')">
+                <el-option v-for="item in mainResions" :key="item.id" :label="item.reasonName" :value="item.id">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="fr" label="子原因：" :label-width="formLabelWidth">
+              <el-select ref="subReasonName" v-model="FormReturn.subReasonName" placeholder="请选择">
+                <el-option v-for="item in childReasons" :key="item.id" :label="item.reasonName" :value="item.id">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </div>
+          <div class="dialog_textarea ">
+            <el-form-item label="原因说明：" :label-width="formLabelWidth" prop="reasonRemark">
+              <el-input type="textarea" :row="2" resize="none" v-model="FormReturn.reasonRemark"></el-input>
+            </el-form-item>
+          </div>
+          <div class="bfc">
+            <el-form-item class="fl" label="经办人：" :label-width="formLabelWidth">
+              {{dealroperCode}}
+            </el-form-item>
+            <el-form-item class="fr" label="经办时间：" :label-width="formLabelWidth">
+              {{dealroperDate | dateFilter}}
+            </el-form-item>
+          </div>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" :loading=huituiLoading @click="hsure('FormReturn')"> {{huituiFont}}</el-button>
+        </div>
+      </el-dialog>
     </div>
-    <div class="huitui jujue">
+    <!-- 拒绝弹窗 -->
+    <!-- <div class="huitui jujue">
       <el-dialog title='拒绝原因' top='20vh' :visible.sync="jdialogVisible" :modal="false" width="860px">
         <div class="huituiBody">
           <p class="bodyP">
@@ -179,7 +258,6 @@
                 </el-select>
               </li>
             </ul>
-
           </p>
           <p class="bodyP bodyP2">
             <label>
@@ -205,8 +283,47 @@
           <el-button type="primary" @click="jdialogVisible = false">返回</el-button>
         </span>
       </el-dialog>
+    </div> -->
+    <div class="Height_240 ">
+      <el-dialog title="拒绝原因" :visible.sync="jdialogVisible" :modal="false ">
+        <el-form :model="FormReject" :rules="rules" ref="FormReject">
+          <div class="bfc">
+            <el-form-item class="fl" label="主原因：" :label-width="formLabelWidth" prop="rmainReasonName">
+              <el-select ref="rmainReasonName" v-model="FormReject.rmainReasonName" placeholder="请选择" @change="mainReason($event,'mainrefuse')">
+                <el-option v-for="item in rmainResions" :key="item.id" :label="item.reasonName" :value="item.id">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="fr" label="子原因：" :label-width="formLabelWidth">
+              <el-select ref="rsubReasonName" v-model="FormReject.rsubReasonName" placeholder="请选择">
+                <el-option v-for="item in rchildReasons" :key="item.id" :label="item.reasonName" :value="item.id">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </div>
+          <div class="dialog_textarea_3rows ">
+            <el-form-item label="原因说明：" :label-width="formLabelWidth" prop="rreasonRemark">
+              <el-input type="textarea" :rows="3" resize='none' placeholder="请输入内容" v-model="FormReject.rreasonRemark">
+              </el-input>
+            </el-form-item>
+          </div>
+          <div class="bfc">
+            <el-form-item class="fl" label="经办人：" :label-width="formLabelWidth">
+              {{dealroperCode}}
+            </el-form-item>
+            <el-form-item class="fr" label="经办时间：" :label-width="formLabelWidth">
+              {{jdealroperDate | dateFilter}}
+            </el-form-item>
+          </div>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="jdialogVisible = false">取 消</el-button>
+          <el-button type="primary" :loading=jujueLoading @click="jSure('FormReject')"> {{jujueFont}}</el-button>
+        </div>
+      </el-dialog>
     </div>
-    <div class="shenpi">
+    <!-- 审批弹窗 -->
+    <!-- <div class="shenpi">
       <el-dialog title='审批信息' :visible.sync="sdialogVisible" :modal="false" width="860px" height="860px" top="10vh">
         <div class="shenpiBody">
           <el-collapse v-model="activeNames" @change="handleChange">
@@ -314,99 +431,184 @@
           <el-button type="primary" @click="sdialogVisible = false">返回</el-button>
         </span>
       </el-dialog>
-    </div>
+    </div> -->
+    <el-dialog title="审批信息" :visible.sync="sdialogVisible " :modal="false " width="710px" height='1100px'>
+      <el-form>
+        <el-collapse v-model="activeNames ">
+          <!--   申请信息-->
+          <el-collapse-item title="申请信息 " name="applyMsg " class="alert_collapse">
+            <div class="dialog_form_auto">
+              <el-form>
+                <div class="bfc">
+                  <el-form-item class="presentation" label="申请金额[元]：" :label-width="formApproLabLeft">
+                    {{datas.loanAmt}}
+                  </el-form-item>
+                  <el-form-item class="presentation" label="申请期限[月]：" :label-width="formApproLabelWidth">
+                    {{datas.loanTerm}}
+                  </el-form-item>
+                </div>
+                <div class="bfc">
+                  <el-form-item class="presentation" label="申请产品：" :label-width="formApproLabLeft">
+                    {{datas.proName}}
+                  </el-form-item>
+                  <el-form-item class="presentation" label="可接受最高每期还款额[元]：" :label-width="formApproLabelWidth">
+                    {{datas.eachTermAmt}}
+                  </el-form-item>
+                </div>
+                <div class="bfc">
+                  <el-form-item class="presentation" label="信用评分：" :label-width="formApproLabLeft" prop="holiday">
+                    {{creditScore}}
+                  </el-form-item>
+                  <el-form-item class="presentation" label="申请类型：" :label-width="formApproLabelWidth" prop="holiday">
+                    {{datas.appTypeTxt}}
+                  </el-form-item>
+                </div>
+              </el-form>
+            </div>
+          </el-collapse-item>
+          <!-- 信审核实信息 -->
+          <el-collapse-item title="信审核实信息 " class="alert_collapse">
+            <div class="dialog_form_auto">
+              <el-form>
+                <el-form-item class="presentation_one_row" label="核实可接受最高每期还款额[元]：" label-width="220px">
+                  {{fbalance2}}
+                </el-form-item>
+              </el-form>
+            </div>
+          </el-collapse-item>
+          <!-- 审批信息 -->
+          <el-collapse-item title="审批信息 " class="alert_collapse">
+            <div class="dialog_form_auto">
+              <el-form>
+                <el-form-item label="结论：" :label-width="formApproLab">
+                  <!--   <el-radio label="00 " value='00' v-model="opinionFlag ">同意</el-radio>
+                      <el-radio label="03 " value='03' v-model="opinionFlag " v-show="taskName!='creditApp_finalTrial_five'
+          && judgeFlag=='02' ">请求更高级审批</el-radio> -->
+                  <el-radio v-model="applyConclusion" label="00">同意</el-radio>
+                </el-form-item>
+                <div class="bfc">
+                  <el-form-item class="fl alert_collapse_inputLabel" label="月核实收入[元]：" :label-width="formApproLab">
+                    <el-input v-model="verIncome" @blur="moneyBlur(verIncome,'verIncome')"> </el-input>
+                  </el-form-item>
+                  <el-form-item class="fr alert_collapse_inputLabel" label="批准产品：" :label-width="formApproLab">
+                    <el-select v-model="proName" @change="proSlelecChange">
+                      <el-option v-for="item in products" :key="item.id" :label="item.proName" :value="item.id">
+                      </el-option>
+                    </el-select>
+                  </el-form-item>
+                </div>
+                <div class="bfc">
+                  <el-form-item class="fl alert_collapse_inputLabel" label="批准期限[月]：" :label-width="formApproLab">
+                    <el-select v-model="ploanTerm" @change="ploanTermChange">
+                      <el-option v-for="item in ploanTerms" :key="item.appDuration" :label="item.appDuration" :value="item">
+                      </el-option>
+                    </el-select>
+                  </el-form-item>
+                  <el-form-item class="fr alert_collapse_inputLabel" label="批准金额[元]：" :label-width="formApproLab">
+                    <el-input v-model="ploanAmt" @blur="moneyBlur(ploanAmt,'ploanAmt')"> </el-input>
+                  </el-form-item>
+                </div>
+                <div class="bfc">
+                  <el-form-item class="presentation" label="审批倍数：" :label-width="formApproLab">
+                    {{caculData.appmult}}
+                  </el-form-item>
+                  <el-form-item class="presentation" label="月还款额[元]：" :label-width="formApproLab">
+                    <!-- {{caculData.eachTermamt | formatMoney}} -->
+                    {{caculData.eachTermamt}}
+                  </el-form-item>
+                </div>
+                <div class="bfc">
+                  <el-form-item class="presentation" label="内部负债率：" :label-width="formApproLab">
+                    <!-- {{caculData.inteDebitrate | formatValue}} -->
+                    {{caculData.inteDebitrate}}
+                  </el-form-item>
+                  <!--          <el-form-item class="presentation" label="总信用负债率：" :label-width="formApproLab" v-show="caculData.creditDebitRate>0">
+                        {{caculData.creditDebitRate | formatValue}}
+                      </el-form-item>
+                      <el-form-item class="presentation" label="总信用负债率：" :label-width="formApproLab" v-show="caculData.creditDebitRate==0">
+                        0.00%
+                      </el-form-item> -->
+                  <el-form-item class="presentation" label="总负债率：" :label-width="formApproLab">
+                    <!-- {{caculData.totalRate | formatValue}} -->
+                    {{caculData.totalRate}}
+                  </el-form-item>
+                </div>
+                <div class="bfc dialog_textarea_3rows alert_collapse_inputLabel mr">
+                  <el-form-item label="意见说明：" :label-width="formApproLab">
+                    <el-input type="textarea" :rows="3" resize="none" v-model="appConclusion">
+                    </el-input>
+                  </el-form-item>
+                </div>
+              </el-form>
+            </div>
+          </el-collapse-item>
+        </el-collapse>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="sdialogVisible=false">取 消</el-button>
+        <el-button type="primary" :loading=shenpiLoading @click="spsure"> {{shenpiFont}}</el-button>
+      </div>
+    </el-dialog>
     <!-- 审批流程轨迹 -->
-    <div class="shenpiliucheng">
-      <el-dialog title='复议审批轨迹' top='20vh' :visible.sync="sldialogVisible" :modal="false" width="860px">
-        <div class="splcBody">
-          <el-table :data="tableData.recordList" style="width: 100%" height="296" border>
-            <el-table-column type="index" label="序号" min-width="50">
-            </el-table-column>
-            <el-table-column prop="verIncome" label="核实收入[元]" min-width="120">
-            </el-table-column>
-            <el-table-column prop="proName" label="批准产品" min-width="100">
-            </el-table-column>
-            <el-table-column prop="ploanAmt" label="批准金额[元]" min-width="120">
-            </el-table-column>
-            <el-table-column prop="ploanTerm" label="批准期限[月]" min-width="120">
-            </el-table-column>
-            <el-table-column prop="appmult" label="审批倍数" min-width="100">
-            </el-table-column>
-            <el-table-column prop="eachTermamt" label="每期还款额[元]" min-width="120">
-            </el-table-column>
-            <el-table-column prop="inteDebitrate" label="内部负债率" min-width="120">
-            </el-table-column>
-            <el-table-column prop="creditDebitRate" label="总信用负债率" min-width="120">
-            </el-table-column>
-            <el-table-column prop="totalRate" label="总负债率" min-width="100">
-            </el-table-column>
-            <el-table-column prop="appConclusion" label="审批结论" min-width="200">
-            </el-table-column>
-            <el-table-column prop="auditDate" label="审批时间" min-width="180">
-            </el-table-column>
-          </el-table>
-          <div class="page">
-            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 20, 30]"
-              :page-size=setPageSize layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalRecord">
-            </el-pagination>
-          </div>
-        </div>
-      </el-dialog>
-    </div>
+    <el-dialog title='复议审批轨迹' :visible.sync="sldialogVisible" :modal="false" width="1000px">
+      <el-table :data="tableData.recordList" style="width: 100%" height="250" border highlight-current-row center>
+        <el-table-column type="index" label="序号" min-width="50">
+        </el-table-column>
+        <el-table-column prop="verIncome" label="核实收入[元]" min-width="120">
+        </el-table-column>
+        <el-table-column prop="proName" label="批准产品" min-width="100">
+        </el-table-column>
+        <el-table-column prop="ploanAmt" label="批准金额[元]" min-width="120">
+        </el-table-column>
+        <el-table-column prop="ploanTerm" label="批准期限[月]" min-width="120">
+        </el-table-column>
+        <el-table-column prop="appmult" label="审批倍数" min-width="100">
+        </el-table-column>
+        <el-table-column prop="eachTermamt" label="每期还款额[元]" min-width="120">
+        </el-table-column>
+        <el-table-column prop="inteDebitrate" label="内部负债率" min-width="120">
+        </el-table-column>
+        <el-table-column prop="creditDebitRate" label="总信用负债率" min-width="120">
+        </el-table-column>
+        <el-table-column prop="totalRate" label="总负债率" min-width="100">
+        </el-table-column>
+        <el-table-column prop="appConclusion" label="审批结论" min-width="200">
+        </el-table-column>
+        <el-table-column prop="auditDate" label="审批时间" min-width="180">
+        </el-table-column>
+      </el-table>
+      <div class="page">
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 20, 30]"
+          :page-size=setPageSize layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalRecord">
+        </el-pagination>
+      </div>
+    </el-dialog>
     <!-- 流程轨迹 -->
-    <div class="liuchenggj">
-      <el-dialog title='流程轨迹' top='20vh' :visible.sync="lcdialogVisible" :modal="false" width="860px">
-        <div class="splcBody">
-          <!-- <el-collapse v-model="activeNames2" @change="handleChange">
-			  		<el-collapse-item title="信审流程轨迹" name="1"> -->
-          <div class="first">
-            <el-table :data="lcgjData" style="width: 100%" height="296" border>
-              <el-table-column type="index" label="序号" min-width="50">
-              </el-table-column>
-              <el-table-column prop="taskNameTxt" label="任务节点" min-width="120">
-              </el-table-column>
-              <el-table-column prop="taskTypeTxt" label="任务类型" min-width="120">
-              </el-table-column>
-              <el-table-column prop="activationTime" label="进入本环节时间" min-width="180">
-              </el-table-column>
-              <el-table-column prop="taskStatusTxt" label="任务状态" min-width="100">
-              </el-table-column>
-              <el-table-column prop="operatorCode" label="处理人" min-width="120">
-              </el-table-column>
-              <el-table-column prop="completeTime" label="处理时间" min-width="180">
-              </el-table-column>
-              <el-table-column prop="approvalOpinionTxt" label="处理结论" min-width="120">
-              </el-table-column>
-              <el-table-column prop="opinionExplain" label="意见说明" min-width="200" show-overflow-tooltip>
-              </el-table-column>
-            </el-table>
-          </div>
-          <!-- </el-collapse-item>
-			  					  	</el-collapse> -->
-        </div>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="lcdialogVisible = false">返回</el-button>
-        </span>
-      </el-dialog>
-    </div>
-    <!-- 大数据风控 -->
-    <div class="bigDataLog">
-      <el-dialog title="提示" top='35vh' :visible.sync="bigDataLogVisible" :modal="false" width="420px">
-        <span>此进件不存在大数据风控明细！</span>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="infoSure">确定</el-button>
-        </span>
-      </el-dialog>
-    </div>
-    <!-- 社保公积金 -->
-    <div class="bigDataLog">
-      <el-dialog title="提示" top='35vh' :visible.sync="socialLogVisible" :modal="false" width="420px">
-        <span>客户社保公积金未授权！</span>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="socialSure">确定</el-button>
-        </span>
-      </el-dialog>
-    </div>
+    <el-dialog title='流程轨迹' :visible.sync="lcdialogVisible" :modal="false" width="1000px">
+      <el-table :data="lcgjData" style="width: 100%" height="250" border highlight-current-row center>
+        <el-table-column type="index" label="序号" min-width="50">
+        </el-table-column>
+        <el-table-column prop="taskNameTxt" label="任务节点" min-width="120">
+        </el-table-column>
+        <el-table-column prop="taskTypeTxt" label="任务类型" min-width="120">
+        </el-table-column>
+        <el-table-column prop="activationTime" label="进入本环节时间" min-width="180">
+        </el-table-column>
+        <el-table-column prop="taskStatusTxt" label="任务状态" min-width="100">
+        </el-table-column>
+        <el-table-column prop="operatorCode" label="处理人" min-width="120">
+        </el-table-column>
+        <el-table-column prop="completeTime" label="处理时间" min-width="180">
+        </el-table-column>
+        <el-table-column prop="approvalOpinionTxt" label="处理结论" min-width="120">
+        </el-table-column>
+        <el-table-column prop="opinionExplain" label="意见说明" min-width="200" show-overflow-tooltip>
+        </el-table-column>
+      </el-table>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="lcdialogVisible = false">返回</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 <script type="text/javascript">
@@ -415,6 +617,52 @@
   export default {
     data() {
       return {
+        formLabelWidth: '85px',
+        formApproLabLeft: "100px",
+        formApproLab: "120px",
+        formApproLabelWidth: "200px",
+        FormReturn: {
+          rollbackNodeName: '',
+          mainReasonName: '',
+          subReasonName: '',
+          reasonRemark: '',
+        },
+        FormReject: {
+          rmainReasonName: '',
+          rreasonRemark: '',
+        },
+        rules: {
+          rollbackNodeName: [{
+            required: true,
+            message: '请选择回退节点',
+            trigger: 'change'
+          }],
+          mainReasonName: [{
+            required: true,
+            message: '请选择主原因',
+            trigger: 'change'
+          }],
+          subReasonName: [{
+            required: true,
+            message: '请选择子原因',
+            trigger: 'change'
+          }],
+          reasonRemark: [{
+            required: true,
+            message: '请输入原因说明',
+            trigger: 'blur'
+          }],
+          rmainReasonName: [{
+            required: true,
+            message: '请输入主原因',
+            trigger: 'change'
+          }],
+          rreasonRemark: [{
+            required: true,
+            message: '请输入原因说明',
+            trigger: 'blur'
+          }]
+        },
         //申请单ID
         id: '',
         //初始化的页面数据
@@ -491,8 +739,8 @@
         proCode: '',
         applyCustId: '',
         processInstanceId: '', //流程实例id
-        bigDataLogVisible: false, //大数据风控弹框
-        socialLogVisible: false, //社保公积金
+        // bigDataLogVisible: false, //大数据风控弹框
+        // socialLogVisible: false, //社保公积金
         social: '', //社保公积金 已绑定 未绑定
         orgId: '',
         huituiFont: '提交',
@@ -501,11 +749,11 @@
         jujueFont: '提交',
         shenpiLoading: false,
         shenpiFont: '提交',
-        RtaskInWaitting:'',
+        RtaskInWaitting: '',
       }
     },
     mounted() {
-        this.RtaskInWaitting = JSON.parse(localStorage.getItem('RtaskInWaitting'));
+      this.RtaskInWaitting = JSON.parse(localStorage.getItem('RtaskInWaitting'));
       //申请单ID
       this.id = JSON.parse(localStorage.getItem('RtaskInWaitting')).applyId;
       this.applyId = this.RtaskInWaitting.applyId;
@@ -514,7 +762,7 @@
       this.custNo = this.RtaskInWaitting.custNo;
       //产品id
       this.sproId = this.RtaskInWaitting.proId;
-       this.proCode = this.RtaskInWaitting.proCode;
+      this.proCode = this.RtaskInWaitting.proCode;
       this.appOrgCode = this.RtaskInWaitting.appOrgCode;
       this.applyCustId = this.RtaskInWaitting.applyCustId;
       this.certType = this.RtaskInWaitting.certType;
@@ -556,16 +804,6 @@
           }
         })
       },
-      // GoPath(){
-      //   this.$router.push( '/reconsiderList?taskNodeName=reconsiderApp_commissioner');
-      //   //  this.$store.dispatch('addVisitedViews', {
-      //   //   name: '复议专员审批',
-      //   //   path: '/reconsiderList',
-      //   //   flag: '05',
-      //   //   params: '?taskNodeName=reconsiderApp_commissioner',    
-      //   //   StatefullPath: '/reconsiderList?taskNodeName=reconsiderApp_commissioner'
-      //   // })
-      // },
       //保留两位小数 整数千分位
       formatNumber(num, cent, isThousand) {
         num = num.toString().replace(/\$|\,/g, '');
@@ -606,6 +844,7 @@
             this.huituiLoading = false;
             this.huituiFont = '提交';
             this.dialogVisible = true;
+
             this.get('system/getSystemDate?' + Math.random()).then(res => {
               // 请求系统时间
               this.dealroperDate = res.data;
@@ -911,154 +1150,283 @@
         })
       },
       //拒绝提交按钮
-      jSure() {
-        //console.log(this.rmainReasonName);
-        //console.log(this.$refs.rmainReasonName);
-        //console.log(this.$refs.rmainReasonName.selectedLabel);
-        //console.log(this.$refs.rmainReasonName.selectedLabel);
-        this.jujueLoading = true;
-        this.jujueFont = '提交中';
-        //this.jdialogVisible = false;
-        this.post("/creauditOpinion/approval", {
-          // 挂起 taskId 任务id
-          taskId: this.taskId,
-          processInstanceId: this.processInstanceId, //流程模版ID
-          custName: this.datas.custName, // 客户名称
-          custNo: this.custNo, // 客户code
-          certType: this.certType, // 证件类型
-          certCode: this.datas.certCode, // 证件号码
-          emerType: this.emerType, // 紧急程度
-          appOrgCode: this.appOrgCode, // 门店代码
-          proName: this.datas.proName, // 产品名称
-          proCode: this.proCode, //  产品代码
-          proId: this.sproId, // 产品id     //"d7fa0628-791d-4cc5-b854-aa8bef9340a6"
-          opinionFlag: '01', // 标志任务类型(复议专员 拒绝)
-          mainReasonName: this.$refs.rmainReasonName.selectedLabel, // 回退主原因
-          subReasonName: this.$refs.rsubReasonName.selectedLabel, // 回退子原因
-          reasonRemark: this.rreasonRemark, // 意见描述/原因说明
-          appOrgId: this.appOrgId, // 进件机构id
-          applyId: this.applyId, // 申请单id
-          rollbackNodeName: '', // 回退节点名称(没有回退节点) 
-          dealroperDate: this.jdealroperDate, // 经办时间
-          creauditAppOperate: '01', // 复议专员 拒绝
-          busiState: '22', //复议拒
-          dealroperCode: this.dealroperCode, //经办人
-          applySubNo: this.datas.applySubNo, //复议申请单ID
-        }).then(res => {
-          this.jdialogVisible = false;
-          console.log(res);
-          if (res.statusCode != '200') {
-            this.$message({
-              message: res.msg,
-              type: 'warning'
-            })
-            return;
-          }
-          if (res.statusCode == '200') {
-            // this.taskId = '';
-            this.datas.custName = ''; // 客户名称
-            this.custNo = ''; // 客户code
-            this.datas.certTypeTxt = ''; // 证件类型
-            this.datas.certCode = ''; // 证件号码
-            this.emerType = ''; // 紧急程度
-            this.appOrgCode, // 门店代码
-              this.datas.proName, // 产品名称
-              this.proId = ''; // 产品id
-            this.opinionFlag = ''; // 标志任务类型
-            this.mainReason = ''; // 回退主原因
-            this.secondaryReason = ''; // 回退子原因
-            this.rreasonRemark = ''; // 意见描述/原因说明
-            this.appOrgId = ''; // 进件机构id
-            this.rollbackNodeName = ''; // 回退节点名称
-            this.dealroperDate = ''; // 经办时间
-            this.dealroperCode = ''; //经办人
-            this.creauditAppOperate = ''; // 操作类型
+      jSure(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            this.post("/creauditOpinion/approval", {
+              // 挂起 taskId 任务id
+              taskId: this.taskId,
+              processInstanceId: this.processInstanceId, //流程模版ID
+              custName: this.datas.custName, // 客户名称
+              custNo: this.custNo, // 客户code
+              certType: this.certType, // 证件类型
+              certCode: this.datas.certCode, // 证件号码
+              emerType: this.emerType, // 紧急程度
+              appOrgCode: this.appOrgCode, // 门店代码
+              proName: this.datas.proName, // 产品名称
+              proCode: this.proCode, //  产品代码
+              proId: this.sproId, // 产品id     //"d7fa0628-791d-4cc5-b854-aa8bef9340a6"
+              opinionFlag: '01', // 标志任务类型(复议专员 拒绝)
+              mainReasonName: this.$refs.rmainReasonName.selectedLabel, // 回退主原因
+              subReasonName: this.$refs.rsubReasonName.selectedLabel, // 回退子原因
+              reasonRemark: this.FormReject.rreasonRemark, // 意见描述/原因说明
+              appOrgId: this.appOrgId, // 进件机构id
+              applyId: this.applyId, // 申请单id
+              rollbackNodeName: '', // 回退节点名称(没有回退节点) 
+              dealroperDate: this.jdealroperDate, // 经办时间
+              creauditAppOperate: '01', // 复议专员 拒绝
+              busiState: '22', //复议拒
+              dealroperCode: this.dealroperCode, //经办人
+              applySubNo: this.datas.applySubNo, //复议申请单ID
+            }).then(res => {
+              this.jdialogVisible = false;
+              console.log(res);
+              if (res.statusCode != '200') {
+                this.$message({
+                  message: res.msg,
+                  type: 'warning'
+                })
+                return;
+              }
+              if (res.statusCode == '200') {
+                // this.taskId = '';
+                this.datas.custName = ''; // 客户名称
+                this.custNo = ''; // 客户code
+                this.datas.certTypeTxt = ''; // 证件类型
+                this.datas.certCode = ''; // 证件号码
+                this.emerType = ''; // 紧急程度
+                this.appOrgCode, // 门店代码
+                  this.datas.proName, // 产品名称
+                  this.proId = ''; // 产品id
+                this.opinionFlag = ''; // 标志任务类型
+                this.mainReason = ''; // 回退主原因
+                this.secondaryReason = ''; // 回退子原因
+                this.FormReject.rreasonRemark = ''; // 意见描述/原因说明
+                this.appOrgId = ''; // 进件机构id
+                this.rollbackNodeName = ''; // 回退节点名称
+                this.dealroperDate = ''; // 经办时间
+                this.dealroperCode = ''; //经办人
+                this.creauditAppOperate = ''; // 操作类型
 
-            this.$message({
-              message: res.msg,
-              type: 'success'
-            })
-
-            // this.$router.push('/reconsiderList');
-            this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_commissioner');
-            this.del();
+                this.$message({
+                  message: res.msg,
+                  type: 'success'
+                })
+                this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_commissioner');
+                this.del();
+              }
+            });
+          } else {
+            console.log('error submit!!');
+            return false;
           }
         });
+        // this.jujueLoading = true;
+        // this.jujueFont = '提交中';
+        //this.jdialogVisible = false;
+        // this.post("/creauditOpinion/approval", {
+        //   // 挂起 taskId 任务id
+        //   taskId: this.taskId,
+        //   processInstanceId: this.processInstanceId, //流程模版ID
+        //   custName: this.datas.custName, // 客户名称
+        //   custNo: this.custNo, // 客户code
+        //   certType: this.certType, // 证件类型
+        //   certCode: this.datas.certCode, // 证件号码
+        //   emerType: this.emerType, // 紧急程度
+        //   appOrgCode: this.appOrgCode, // 门店代码
+        //   proName: this.datas.proName, // 产品名称
+        //   proCode: this.proCode, //  产品代码
+        //   proId: this.sproId, // 产品id     //"d7fa0628-791d-4cc5-b854-aa8bef9340a6"
+        //   opinionFlag: '01', // 标志任务类型(复议专员 拒绝)
+        //   mainReasonName: this.$refs.rmainReasonName.selectedLabel, // 回退主原因
+        //   subReasonName: this.$refs.rsubReasonName.selectedLabel, // 回退子原因
+        //   reasonRemark: this.FormReject.rreasonRemark, // 意见描述/原因说明
+        //   appOrgId: this.appOrgId, // 进件机构id
+        //   applyId: this.applyId, // 申请单id
+        //   rollbackNodeName: '', // 回退节点名称(没有回退节点) 
+        //   dealroperDate: this.jdealroperDate, // 经办时间
+        //   creauditAppOperate: '01', // 复议专员 拒绝
+        //   busiState: '22', //复议拒
+        //   dealroperCode: this.dealroperCode, //经办人
+        //   applySubNo: this.datas.applySubNo, //复议申请单ID
+        // }).then(res => {
+        //   this.jdialogVisible = false;
+        //   console.log(res);
+        //   if (res.statusCode != '200') {
+        //     this.$message({
+        //       message: res.msg,
+        //       type: 'warning'
+        //     })
+        //     return;
+        //   }
+        //   if (res.statusCode == '200') {
+        //     // this.taskId = '';
+        //     this.datas.custName = ''; // 客户名称
+        //     this.custNo = ''; // 客户code
+        //     this.datas.certTypeTxt = ''; // 证件类型
+        //     this.datas.certCode = ''; // 证件号码
+        //     this.emerType = ''; // 紧急程度
+        //     this.appOrgCode, // 门店代码
+        //       this.datas.proName, // 产品名称
+        //       this.proId = ''; // 产品id
+        //     this.opinionFlag = ''; // 标志任务类型
+        //     this.mainReason = ''; // 回退主原因
+        //     this.secondaryReason = ''; // 回退子原因
+        //     this.FormReject.rreasonRemark = ''; // 意见描述/原因说明
+        //     this.appOrgId = ''; // 进件机构id
+        //     this.rollbackNodeName = ''; // 回退节点名称
+        //     this.dealroperDate = ''; // 经办时间
+        //     this.dealroperCode = ''; //经办人
+        //     this.creauditAppOperate = ''; // 操作类型
+
+        //     this.$message({
+        //       message: res.msg,
+        //       type: 'success'
+        //     })
+
+        //     // this.$router.push('/reconsiderList');
+        //     this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_commissioner');
+        //     this.del();
+        //   }
+        // });
       },
       //回退提交按钮
-      hsure() {
-        //console.log(this.mainReasonName);
-        //console.log(this.$refs.mainReasonName);
-        //console.log(this.$refs.mainReasonName.selectedLabel);
-        //console.log(this.values);
-        this.huituiLoading = true;
-        this.huituiFont = '提交中';
-        //this.dialogVisible = false;
-        this.post("/creauditOpinion/approval", {
-          // 挂起 taskId 任务id
-          taskId: this.taskId,
-          processInstanceId: this.processInstanceId, //流程模版ID
-          custName: this.datas.custName, // 客户名称
-          custNo: this.custNo, // 客户code
-          certType: this.certType, // 证件类型
-          certCode: this.datas.certCode, // 证件号码
-          emerType: this.emerType, // 紧急程度
-          appOrgCode: this.appOrgCode, // 门店代码
-          proName: this.datas.proName, // 产品名称
-          proCode: this.proCode, //  产品代码
-          proId: this.sproId, // 产品id     //"d7fa0628-791d-4cc5-b854-aa8bef9340a6"
-          opinionFlag: '02', // 标志任务类型(复议专员 回退)
-          mainReasonName: this.$refs.mainReasonName.selectedLabel, // 回退主原因
-          subReasonName: this.$refs.subReasonName.selectedLabel, // 回退子原因
-          reasonRemark: this.reasonRemark, // 意见描述/原因说明
-          appOrgId: this.appOrgId, // 进件机构id
-          applyId: this.applyId, // 申请单id
-          rollbackNodeName: 'reconsiderApp_apply', // 回退节点名称 
-          dealroperDate: this.dealroperDate, // 经办时间
-          creauditAppOperate: '02', // 复议专员 回退
-          busiState: '20',
-          dealroperCode: this.dealroperCode, //经办人*//复议审批中（回退）
-          applySubNo: this.datas.applySubNo, //复议申请单ID
-        }).then(res => {
-          console.log(res);
-          this.dialogVisible = false;
-          if (res.statusCode != '200') {
-            this.$message({
-              message: res.msg,
-              type: 'warning'
-            })
-            return;
-          }
-          if (res.statusCode == '200') {
-            // this.taskId = '';
-            this.datas.custName = ''; // 客户名称
-            this.custNo = ''; // 客户code
-            this.datas.certTypeTxt = ''; // 证件类型
-            this.datas.certCode = ''; // 证件号码
-            this.emerType = ''; // 紧急程度
-            this.appOrgCode = ''; // 门店代码
-            this.proCode = ''; //  产品代码
-            this.proId = ''; // 产品id
-            this.opinionFlag = ''; // 标志任务类型
-            this.mainReason = ''; // 回退主原因
-            this.secondaryReason = ''; // 回退子原因
-            this.reasonRemark = ''; // 意见描述/原因说明
-            this.appOrgId = ''; // 进件机构id
-            this.rollbackNodeName = ''; // 回退节点名称
-            this.dealroperDate = ''; // 经办时间
-            this.dealroperCode = ''; //经办人
-            this.creauditAppOperate = ''; // 操作类型
-
-            this.$message({
-              message: res.msg,
-              type: 'success'
-            })
-
-            // this.$router.push('/reconsiderList');
-            this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_commissioner');
-            this.del();
+      hsure(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            this.post("/creauditOpinion/approval", {
+              // 挂起 taskId 任务id
+              taskId: this.taskId,
+              processInstanceId: this.processInstanceId, //流程模版ID
+              custName: this.datas.custName, // 客户名称
+              custNo: this.custNo, // 客户code
+              certType: this.certType, // 证件类型
+              certCode: this.datas.certCode, // 证件号码
+              emerType: this.emerType, // 紧急程度
+              appOrgCode: this.appOrgCode, // 门店代码
+              proName: this.datas.proName, // 产品名称
+              proCode: this.proCode, //  产品代码
+              proId: this.sproId, // 产品id     //"d7fa0628-791d-4cc5-b854-aa8bef9340a6"
+              opinionFlag: '02', // 标志任务类型(复议专员 回退)
+              mainReasonName: this.$refs.mainReasonName.selectedLabel, // 回退主原因
+              subReasonName: this.$refs.subReasonName.selectedLabel, // 回退子原因
+              reasonRemark: this.FormReturn.reasonRemark, // 意见描述/原因说明
+              appOrgId: this.appOrgId, // 进件机构id
+              applyId: this.applyId, // 申请单id
+              rollbackNodeName: 'reconsiderApp_apply', // 回退节点名称 
+              dealroperDate: this.dealroperDate, // 经办时间
+              creauditAppOperate: '02', // 复议专员 回退
+              busiState: '20',
+              dealroperCode: this.dealroperCode, //经办人*//复议审批中（回退）
+              applySubNo: this.datas.applySubNo, //复议申请单ID
+            }).then(res => {
+              this.dialogVisible = false;
+              if (res.statusCode != '200') {
+                this.$message({
+                  message: res.msg,
+                  type: 'warning'
+                })
+                return;
+              } else if (res.statusCode == '200') {
+                this.datas.custName = ''; // 客户名称
+                this.custNo = ''; // 客户code
+                this.datas.certTypeTxt = ''; // 证件类型
+                this.datas.certCode = ''; // 证件号码
+                this.emerType = ''; // 紧急程度
+                this.appOrgCode = ''; // 门店代码
+                this.proCode = ''; //  产品代码
+                this.proId = ''; // 产品id
+                this.opinionFlag = ''; // 标志任务类型
+                this.mainReason = ''; // 回退主原因
+                this.secondaryReason = ''; // 回退子原因
+                this.FormReturn.reasonRemark = ''; // 意见描述/原因说明
+                this.appOrgId = ''; // 进件机构id
+                this.rollbackNodeName = ''; // 回退节点名称
+                this.dealroperDate = ''; // 经办时间
+                this.dealroperCode = ''; //经办人
+                this.creauditAppOperate = ''; // 操作类型
+                this.$message({
+                  message: res.msg,
+                  type: 'success'
+                })
+                this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_commissioner&flag=05');
+                this.del();
+              }
+            });
+            return
+          } else {
+            console.log('error submit!!');
+            return false;
           }
         });
+        return
+        // this.huituiLoading = true;
+        // this.huituiFont = '提交中';
+        //this.dialogVisible = false;
+        // this.post("/creauditOpinion/approval", {
+        //   // 挂起 taskId 任务id
+        //   taskId: this.taskId,
+        //   processInstanceId: this.processInstanceId, //流程模版ID
+        //   custName: this.datas.custName, // 客户名称
+        //   custNo: this.custNo, // 客户code
+        //   certType: this.certType, // 证件类型
+        //   certCode: this.datas.certCode, // 证件号码
+        //   emerType: this.emerType, // 紧急程度
+        //   appOrgCode: this.appOrgCode, // 门店代码
+        //   proName: this.datas.proName, // 产品名称
+        //   proCode: this.proCode, //  产品代码
+        //   proId: this.sproId, // 产品id     //"d7fa0628-791d-4cc5-b854-aa8bef9340a6"
+        //   opinionFlag: '02', // 标志任务类型(复议专员 回退)
+        //   mainReasonName: this.$refs.mainReasonName.selectedLabel, // 回退主原因
+        //   subReasonName: this.$refs.subReasonName.selectedLabel, // 回退子原因
+        //   reasonRemark: this.FormReturn.reasonRemark, // 意见描述/原因说明
+        //   appOrgId: this.appOrgId, // 进件机构id
+        //   applyId: this.applyId, // 申请单id
+        //   rollbackNodeName: 'reconsiderApp_apply', // 回退节点名称 
+        //   dealroperDate: this.dealroperDate, // 经办时间
+        //   creauditAppOperate: '02', // 复议专员 回退
+        //   busiState: '20',
+        //   dealroperCode: this.dealroperCode, //经办人*//复议审批中（回退）
+        //   applySubNo: this.datas.applySubNo, //复议申请单ID
+        // }).then(res => {
+        //   console.log(res);
+        //   this.dialogVisible = false;
+        //   if (res.statusCode != '200') {
+        //     this.$message({
+        //       message: res.msg,
+        //       type: 'warning'
+        //     })
+        //     return;
+        //   }else if (res.statusCode == '200') {
+        //     // this.taskId = '';
+        //     this.datas.custName = ''; // 客户名称
+        //     this.custNo = ''; // 客户code
+        //     this.datas.certTypeTxt = ''; // 证件类型
+        //     this.datas.certCode = ''; // 证件号码
+        //     this.emerType = ''; // 紧急程度
+        //     this.appOrgCode = ''; // 门店代码
+        //     this.proCode = ''; //  产品代码
+        //     this.proId = ''; // 产品id
+        //     this.opinionFlag = ''; // 标志任务类型
+        //     this.mainReason = ''; // 回退主原因
+        //     this.secondaryReason = ''; // 回退子原因
+        //     this.FormReturn.reasonRemark = ''; // 意见描述/原因说明
+        //     this.appOrgId = ''; // 进件机构id
+        //     this.rollbackNodeName = ''; // 回退节点名称
+        //     this.dealroperDate = ''; // 经办时间
+        //     this.dealroperCode = ''; //经办人
+        //     this.creauditAppOperate = ''; // 操作类型
+
+        //     this.$message({
+        //       message: res.msg,
+        //       type: 'success'
+        //     })
+
+        //     // this.$router.push('/reconsiderList');
+        //     this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_commissioner');
+        //     this.del();
+        //   }
+        // });
       },
       //回退节点
       backNode() {
@@ -1168,7 +1536,11 @@
         }).then(res => {
           //console.log(res.data);
           if (res.obj == null) {
-            this.bigDataLogVisible = true;
+            this.$confirm('此进件不存在大数据风控明细！', '提示', {
+              confirmButtonText: '确定',
+              type: 'warning',
+              showCancelButton: false
+            }).then(() => {}).catch(() => {});
           } else if (res.obj) {
             this.$router.push({
               path: '/PneCtrl'
@@ -1177,9 +1549,9 @@
         });
       },
       //大数据风控 提示弹框关闭
-      infoSure() {
-        this.bigDataLogVisible = false;
-      },
+      // infoSure() {
+      //   this.bigDataLogVisible = false;
+      // },
       //社保/公积金
       Social() {
         this.post(baseurl.BaseUrl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {
@@ -1195,7 +1567,11 @@
       },
       roSocialSecurity() {
         if (this.social == "(未授权)") {
-          this.socialLogVisible = true;
+          this.$confirm('客户社保公积金未授权！', '提示', {
+            confirmButtonText: '确定',
+            type: 'warning',
+            showCancelButton: false
+          }).then(() => {}).catch(() => {});
         } else if (this.social == "(已授权)") {
           this.$router.push({
             path: '/SocialSe'
@@ -1203,9 +1579,9 @@
         }
       },
       //社保公积金 弹窗关闭
-      socialSure() {
-        this.socialLogVisible = false;
-      },
+      // socialSure() {
+      //   this.socialLogVisible = false;
+      // },
       del() {
         this.$store.dispatch('delVisitedViews', {
           name: '复议详情'

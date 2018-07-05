@@ -1,9 +1,10 @@
 /* .Abody 部分 */
 
- /* .Abody .el-button {
+/* .Abody .el-button {
   border-radius: 8px;
   padding: 9px 22px;
 } */
+
 /*
 .Abody .el-button--primary {
   color: white;
@@ -161,7 +162,6 @@
 .applicationInformationDetail .house .el-table__body-wrapper {
   overflow: hidden;
 }
-
 
 /* 车辆信息 序号、购买时间 居中 */
 
@@ -925,6 +925,7 @@
 
 .CreditForm .el-collapse-item__arrow,
 /* .regularQT .el-collapse-item__arrow, */
+
 .SSComp .el-collapse-item__arrow {
   /* line-height: 40px; */
   line-height: 38px;
@@ -968,6 +969,7 @@
 
 .CreditForm .el-collapse-item__content,
 /* .regularQT .el-collapse-item__content, */
+
 .SSComp .el-collapse-item__content {
   padding-bottom: 0;
 }
@@ -989,6 +991,7 @@
 .CreditForm .el-collapse-item__header,
 .aAntiApplyInf .el-collapse-item__header,
 /* .regularQT .el-collapse-item__header, */
+
 .SSComp .el-collapse-item__header {
   border: 1px solid silver;
   background: #eef0f9;
@@ -1005,6 +1008,7 @@
 .CreditForm .el-collapse-item,
 .aAntiApplyInf .el-collapse-item,
 /* .regularQT .el-collapse-item, */
+
 .SSComp .el-collapse-item {
   position: relative
 }
@@ -1025,7 +1029,8 @@
 .SSComp .el-collapse-item__wrap
 /* ,
 .regularQT .el-collapse-item__wrap  */
-{
+
+  {
   width: 100%;
   border-bottom: none;
 }
@@ -1292,8 +1297,6 @@
   vertical-align: top;
 }
 
-
-
 /* 表格高度 */
 
 .AntiRules .el-table {
@@ -1305,13 +1308,13 @@
   /* background: red; */
 }
 
-.AntiRules .el-table__body-wrapper{
+.AntiRules .el-table__body-wrapper {
   overflow-x: hidden
 }
 
 /* 整个弹框宽度 */
 
-.AntiRules .redact .el-dialog{
+.AntiRules .redact .el-dialog {
   /* min-width:620px; */
   width: 620px;
   /* background: #000; */
@@ -1319,7 +1322,7 @@
 
 /* 弹框内自带padding  去掉 */
 
-.AntiRules .redact .el-dialog__body{
+.AntiRules .redact .el-dialog__body {
   padding: 0;
 }
 
@@ -1673,6 +1676,7 @@
 } */
 
 /* 信审任务列表 按钮宽度*/
+
 /* 
 .taskWatting .el-col-22 {
   width: calc( 66.6% + 394px);
@@ -1783,10 +1787,12 @@
   /* margin: 7px 0 10px 0; */
   margin: 5px 0;
 }
+
 .mheader .el-menu .el-menu div:nth-of-type(1) {
   margin: 0 0 5px 0;
 }
-.mheader .el-menu .el-menu div:last-of-type{
+
+.mheader .el-menu .el-menu div:last-of-type {
   /* margin-bottom: 0; */
 }
 
@@ -1953,7 +1959,9 @@
 }
 
 /* 生产导航样式修改 */
+
 /* 导航一级背景色不变，二级三级背景色改变 */
+
 body .el-menu--horizontal {
   border-bottom: none !important;
   background: rgba(31, 45, 61, .6);
@@ -1962,18 +1970,20 @@ body .el-menu--horizontal {
 body .el-menu--horizontal .el-menu--popup {
   /* padding: 5px 20px !important; */
   background: transparent;
- /*  margin-top: 5px; */
+  /*  margin-top: 5px; */
   /* min-width: 142px; */
   min-width: 120px;
   margin-top: 0;
 }
 
-body .el-menu--horizontal .el-menu--popup div{
+body .el-menu--horizontal .el-menu--popup div {
   margin: 5px 0;
 }
-body .el-menu--horizontal .el-menu--popup div:nth-of-type(1){
+
+body .el-menu--horizontal .el-menu--popup div:nth-of-type(1) {
   margin-top: 0;
 }
+
 /* body .el-menu--horizontal .el-menu--popup div:last-of-type{
   margin-bottom: 0;
 } */
@@ -2052,7 +2062,9 @@ body .el-menu--horizontal .el-menu .el-menu-item:hover {
 body .el-submenu .el-menu-item {
   min-width: 0 !important;
 }
-body .el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu .el-submenu__title{
+
+body .el-menu--horizontal .el-menu .el-menu-item,
+.el-menu--horizontal .el-menu .el-submenu__title {
   height: 20px;
   line-height: 20px;
 }
@@ -2487,37 +2499,9 @@ body .el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu 
   padding-left: 10px;
 }
 
-/*
-.creditApproval-class .el-form-item__label{
- padding: 0;
-}*/
-
-.el-table .cell,
-.el-table th div,
-.el-table--border td:first-child .cell,
-.el-table--border th:first-child .cell {
-  /* padding: 0; */
-}
-
 /* 复议结论 */
 
-.ReconsiderationConclusion .el-dialog {
-  margin: 0 auto;
-}
-
-.ReconsiderationConclusion .el-dialog__wrapper {
-  position: absolute;
-  margin-top: 0;
-}
-
-.ReconsiderationConclusion .el-dialog__header {
-  background-color: #eef0f9;
-  height: 40px;
-  font-size: 16px;
-  padding: 0 0 0 15px;
-}
-
-.ReconsiderationConclusion .el-dialog__header span {
+/* .ReconsiderationConclusion .el-dialog__header span {
   height: 40px;
   line-height: 40px;
   font-size: 16px;
@@ -2525,16 +2509,16 @@ body .el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu 
 
 .ReconsiderationConclusion .el-dialog__header .el-dialog__headerbtn {
   top: 8px;
-}
+} */
 
-.ReconsiderationConclusion .el-dialog__body {
+/* .ReconsiderationConclusion .el-dialog__body {
   padding: 15px 20px;
 }
 
 .ReconsiderationConclusion .el-input__inner {
   height: 35px;
   width: 200px;
-}
+} */
 
 .ReconsiderationConclusion .el-collapse-item__header {
   background: #eef0f9;
@@ -2624,13 +2608,13 @@ body .el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu 
   text-align: center;
 }
 
-.ReconsiderationConclusion .liuchenggj .el-table th:nth-of-type(7) {
+/* .ReconsiderationConclusion .liuchenggj .el-table th:nth-of-type(7) {
   text-align: center;
 }
 
 .ReconsiderationConclusion .liuchenggj .el-table__body-wrapper .el-table__body td:nth-of-type(7) {
   text-align: center;
-}
+} */
 
 /* 审批任务管理——待办任务 */
 
@@ -2720,6 +2704,7 @@ body .el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu 
 }
 
 /* 综合查询 */
+
 /* 
 .regularQT .el-button,
 .specialQT .el-button {
@@ -2739,6 +2724,7 @@ body .el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu 
   width: 800px;
   vertical-align: top;
 }
+
 /* 
 .regularQT .el-collapse-item__wrap {
   overflow: inherit;
@@ -2785,6 +2771,7 @@ body .el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu 
 .regularQT .el-radio__input.is-disabled.is-checked .el-radio__inner::after{
   background-color: #80848c;
 } */
+
 .ReApply .AntiInf .el-collapse-item__wrap {
   /* background: green; */
 }
@@ -2816,34 +2803,39 @@ body .el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu 
   margin-right: 12px;
 }
 
-.RaAntiFraudInvestigation .el-textarea.is-disabled .el-textarea__inner{
+.RaAntiFraudInvestigation .el-textarea.is-disabled .el-textarea__inner {
   background: #fff;
 }
-.RulesReApply .el-collapse{
+
+.RulesReApply .el-collapse {
   overflow: hidden;
 }
-.AlertDialogBox .el-dialog{
-position: absolute;
-left: 0;
-top: 0;
-right: 0;
-bottom: 0;
-}
-.selfRegularQT .el-table td,.selfRegularQT .el-table th,
-.ListTable .el-table td{
-padding:0;
+
+.AlertDialogBox .el-dialog {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
 }
 
-.selfRegularQT .el-table .cell{
-  padding-left: 5px;
-  padding-right:5px;
-font-size: 12px;
-}
-.ListTable .el-table .cell{
-  padding-left: 5px;
-  padding-right:5px;
+.selfRegularQT .el-table td,
+.selfRegularQT .el-table th,
+.ListTable .el-table td {
+  padding: 0;
 }
 
-.newContent p span .el-input{
-  width:190px;
+.selfRegularQT .el-table .cell {
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 12px;
+}
+
+.ListTable .el-table .cell {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.newContent p span .el-input {
+  width: 190px;
 }

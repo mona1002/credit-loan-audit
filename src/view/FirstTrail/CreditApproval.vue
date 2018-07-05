@@ -364,11 +364,9 @@
       </el-dialog>
     </div>
     <!-- 审批 -->
-    <div>
       <el-dialog title="审批信息" :visible.sync="shenPiShow " :modal="false " width="710px" height='1100px'>
         <el-form>
           <!-- <div style="padding:5px;padding-top:0;height:400px;overflow:auto; "> -->
-          <div style="padding:5px;padding-top:0;overflow:auto; ">
             <el-collapse v-model="activeNames ">
               <!--   申请信息-->
               <el-collapse-item title="申请信息 " name="applyMsg " class="alert_collapse">
@@ -562,7 +560,6 @@
 
               </el-collapse-item>
             </el-collapse>
-          </div>
           <!-- <div class="back-form-li" style="text-align:right;padding:10px;">
             <el-button plain @click="shenPiShow=false;">返回</el-button>
             <el-button type="primary" @click="submitFn('03')" :loading="isLoading">{{loadingTitle}}</el-button>
@@ -573,7 +570,6 @@
           <el-button type="primary" @click="submitFn('03')" :loading="isLoading"> {{loadingTitle}}</el-button>
         </div>
       </el-dialog>
-    </div>
     <!-- 审批结论轨迹弹窗 -->
     <el-dialog title="信审审批结论轨迹" :visible.sync="spjlShow" :modal="false" width="1000px">
       <el-table :data="tableData.recordList" height="280" border style="width: 100%" highlight-current-row v-loading="loading">
