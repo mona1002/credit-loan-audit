@@ -1138,7 +1138,13 @@
             };
           } else {
             this.$message.error(res.msg);
-            if (this.MatchFlag.MatchFlag == 'QT') {
+            if (this.MatchFlag.MatchFlag == 'internal') {
+              this.del('匹配信息-查看');
+              this.$router.push('/MatchingInf')
+            } else if (this.MatchFlag.MatchFlag == 'Query') {
+              this.del('综合查询-详情'); //综合查询-详情
+              this.$router.push('/IntegratedQuery')
+            } else if (this.MatchFlag.MatchFlag == 'QT') {
               this.del('质检详情');
               window.history.go(-1);
             }

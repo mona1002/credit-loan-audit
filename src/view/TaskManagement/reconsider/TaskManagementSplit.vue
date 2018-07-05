@@ -80,6 +80,8 @@
             this.customInf = res.data;
           } else {
             this.$message.error(res.msg);
+              this.del('信审任务管理-详情');
+              window.history.go(-1);
           }
         });
       },
