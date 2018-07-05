@@ -80,6 +80,8 @@
             this.customInf = res.data;
           } else {
             this.$message.error(res.msg);
+              // this.del('质检详情');
+              // window.history.go(-1);
           }
         });
       },
