@@ -691,6 +691,10 @@
    padding-bottom: 0;
  }
 
+ .Abody .alert_collapse .el-collapse-item__wrap {
+   overflow: initial;
+ }
+
  .Abody .el-collapse-item__arrow {
    height: 40px;
    line-height: 40px;
