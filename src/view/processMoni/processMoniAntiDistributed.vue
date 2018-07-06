@@ -3,25 +3,25 @@
   <div class="taskWatting main-div">
     <div class="taskWinput search-div">
       <el-row class="row row1" type="flex">
-        <el-col :span="6" :offset="0">
+        <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">客户姓名</span>
           <el-input @keyup.enter.native="getByKey" v-model.trim="custName_la" placeholder="请输入客户姓名"></el-input>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="6" class="search-item">
           <span class="keywordText">证件号码</span>
           <el-input @keyup.enter.native="getByKey" v-model.trim="certCode" placeholder="请输入证件号码"></el-input>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="6" class="search-item">
           <span class="keywordText">进件编号</span>
           <el-input @keyup.enter.native="getByKey" v-model.trim="applySubNo" placeholder="请输入进价编号"></el-input>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="6" class="search-item">
           <span class="keywordText">进件机构</span>
           <el-input @keyup.enter.native="getByKey" v-model.trim="appOrgCode" placeholder="请输入进件机构"></el-input>
         </el-col>
       </el-row>
       <el-row class="row row2" type="flex">
-        <el-col :span="6">
+        <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称</span>
           <el-select v-model="proId" placeholder="请选择产品名称">
             <p style="height: 34px;line-height: 34px;padding: 0 20px;font-size: 14px;background: #eee;">
@@ -34,21 +34,21 @@
             </el-option>
           </el-select>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="6" class="search-item">
           <span class="keywordText">任务节点</span>
           <el-select v-model="taskNodeName" placeholder="请选择">
             <el-option v-for="item in taskNodes" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="6" class="search-item">
           <span class="keywordText">任务类型</span>
           <el-select v-model="taskType" placeholder="请选择">
             <el-option v-for="item in taskTypes" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="6" class="search-item">
           <span class="keywordText">当前处理人员</span>
           <el-input @keyup.enter.native="getByKey" v-model.trim="operatorCode" placeholder="请输入当前处理人员"></el-input>
         </el-col>
@@ -116,11 +116,11 @@
       </div>
     </div>
     <!-- 流程轨迹 -->
-    <el-dialog title="流程轨迹" custom-class="trace" :visible.sync="dialogTraceVisible">
-      <el-table :data="traceList" border show-header highlight-current-row>
+    <el-dialog title="流程轨迹" :visible.sync="dialogTraceVisible" :modal="false" width="1000px">
+      <el-table :data="traceList"  border show-header highlight-current-row>
         <el-table-column type="index" label="序号" width="50">
         </el-table-column>
-        <el-table-column prop="taskNodeNameTxt" label="任务节点" width="80">
+        <el-table-column prop="taskNodeNameTxt" label="任务节点" width="120">
         </el-table-column>
         <el-table-column prop="taskTypeTxt" label="任务类型" width="80">
         </el-table-column>
@@ -142,13 +142,13 @@
       </div>
     </el-dialog>
     <!-- 任务分派 -->
-    <el-dialog title="任务分派" :visible.sync="dialogAssignVisible">
+    <el-dialog title="任务分派" :visible.sync="dialogAssignVisible" :modal="false">
       <el-form :model="itemOfLists" :rules="rules" ref="ruleForm">
         <div class="bfc">
-          <el-form-item class="fl" label="任务角色" :label-width="formLabelWidth">
+          <el-form-item class="fl" label="任务角色：" :label-width="formLabelWidth">
             <el-input readonly v-model="flowRoleName"></el-input>
           </el-form-item>
-          <el-form-item class="fr" label="处理人员" prop="toUser" :label-width="formLabelWidth">
+          <el-form-item class="fr" label="处理人员：" prop="toUser" :label-width="formLabelWidth">
             <el-select v-model="itemOfLists.toUser" placeholder="请选择处理人员">
               <p style="height: 34px;line-height: 34px;padding: 0 20px;font-size: 14px;background: #eee;">
                 <span style="width:66px;display:inline-block;">用户名称</span>
@@ -168,7 +168,7 @@
       </div>
     </el-dialog>
     <!-- 转分派流程轨迹 -->
-    <el-dialog title="转分派流程轨迹" custom-class="trans" :visible.sync="dialogTransVisible">
+    <el-dialog title="转分派流程轨迹" :modal="false" :visible.sync="dialogTransVisible">
       <el-table :data="transList" border show-header highlight-current-row>
         <el-table-column type="index" label="序号" width="50">
         </el-table-column>
@@ -437,14 +437,13 @@ alertBox(){ //操作前提示
 },
       handleItem(flag) {
         if (this.multipleSelection.length == 0) {
-          this.alertBox();
           if (flag === 'trace') {
             this.alertMessage = "请选择一条记录查看流程轨迹！";
           } else if (flag === 'assign') {
             this.alertMessage = "请选择流程进行分派任务！";
           } else if (flag === 'trans') {
             this.alertMessage = "请选择一条记录查看转分派流程轨迹！";
-          }
+          }this.alertBox();
           return
         }
         if (this.multipleSelection.length > 1) {
