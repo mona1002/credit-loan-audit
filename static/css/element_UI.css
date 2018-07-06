@@ -830,23 +830,10 @@ height: auto !important;
 
 /* 各自部分 */
 
-/* 工作台部分修改 */
-
-/* .workbench .el-icon-arrow-right:before {
- content: "";
-} */
-
 /* 工作台 待办任务 hover 小手 */
 
 .workbench .el-table tr:hover {
   cursor: pointer;
-}
-
-/* 工作台 折叠面板 头部 箭头 */
-
-.workbench .el-collapse-item__header .el-collapse-item__arrow {
-  line-height: 40px;
-  margin-top: 4px;
 }
 
 /* 工作台 折叠面板 下面 content部分 */
@@ -858,26 +845,25 @@ height: auto !important;
 
 /* 工作台 - 刷新（refresh）- 按钮  */
 
-.workbench .el-icon-refresh {
+/* .workbench .el-icon-refresh {
   float: right;
   margin-right: 20px;
   line-height: 48px;
-}
+} */
 
 /* 工作通知 下边距 */
 
-.workbench .el-collapse {
+/* .workbench .el-collapse {
   margin-bottom: 10px;
-}
+} */
 
 /* 工作通知title颜色 */
 
-.workbench .el-collapse-item__header {
-  /* background: #f5f7fa; */
+#app .workbench .el-collapse-item__header {
   background: white;
   border: 1px solid #D5D5D5;
-  height: 48px;
-  line-height: 48px;
+  /* height: 40px;
+  line-height: 40px; */
   font-size: 15.5px;
   color: #173a56;
   font-weight: bold;
@@ -888,7 +874,6 @@ height: auto !important;
 
 .workbench .el-collapse-item__content {
   padding: 10px;
-  /* margin-bottom: 10px; */
   height: 38.8vh;
 }
 

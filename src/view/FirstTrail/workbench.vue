@@ -365,7 +365,7 @@
     line-height: 25px;
     text-align: center;
     font-weight: normal;
-    margin-top: 11px;
+    margin-top: 6px;
     margin-right: 8px;
     cursor: pointer;
   }
