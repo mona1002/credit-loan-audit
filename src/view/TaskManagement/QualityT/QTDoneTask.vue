@@ -286,10 +286,10 @@
           }
         });
         localStorage.setItem("TtaskInWaitting", JSON.stringify(row));
-        // this.judge = {
-        //   flag: '07'
-        // };
-        // localStorage.setItem("judge", JSON.stringify(this.judge));
+        this.judge = {
+          flag: '15'
+        };
+        localStorage.setItem("judge", JSON.stringify(this.judge));
       },
       handleSizeChange(val) {
         this.queryParam.pageSize = val;

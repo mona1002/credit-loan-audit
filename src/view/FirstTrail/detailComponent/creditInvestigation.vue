@@ -246,10 +246,10 @@
 				// else if (this.judgeFlag.flag == '06') {
 		    //     this.taskInWaitting = JSON.parse(localStorage.getItem("RManagertaskInWaitting")) //复议经理
 				// }
-				else if (this.judgeFlag.flag == '07') {
-		        this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //审批已办任务
-		    }else if (this.judgeFlag.flag == '08') {
-		        this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //审批历史任务
+				else if (this.judgeFlag.flag == '14') {
+		        this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //任务管理-审批任务
+				}else if (this.judgeFlag.flag == '15') {
+		        this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //任务管理-质检任务
 		    }
 			this.request(this.taskInWaitting.applyId);
 				},
