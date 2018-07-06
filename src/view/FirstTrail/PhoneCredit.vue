@@ -1,6 +1,6 @@
 <!-- 电话征信 -->
 <template>
-  <div class="phone-credit">
+  <div class="phone-credit Height_200">
     <el-container style="height: 100%; border: 1px solid #eee">
       <!-- 左侧 导航列表 -->
       <!-- width="200px" style="heightbackground-color: rgb(238, 241, 246)" -->
@@ -165,39 +165,32 @@
       </el-container>
     </el-container>
     <!-- 更改的 添加电话选项 -->
-    <el-dialog title="添加申请单电话信息" :visible.sync="dialogFormVisible" :modal="false"  top="0">
+    <el-dialog title="添加申请单电话信息" :visible.sync="dialogFormVisible" :modal="false" width="330px" top='20vh'>
       <el-form>
         <span class="require-icon" style="left:20px;line-height:45px;">*</span>
         <el-form-item label="电话类型:" :label-width="addTellFormLabelWidth" prop="addTelType">
-          <!-- <span class="add-label"><span class="require-icon">*</span>电话类型:</span> -->
           <el-select v-model="addTelType" placeholder="请选择">
             <el-option v-for="item in telTypes" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
-        <!-- <span class="require-icon">*</span> -->
         <span class="require-icon" style="left:20px;line-height:45px;">*</span>
         <el-form-item label="电话名称:" :label-width="addTellFormLabelWidth" prop="addTelName">
-          <!-- <span class="add-label"><span class="require-icon">*</span>电话名称:</span> -->
           <el-input v-model="addTelName" auto-complete="off"></el-input>
         </el-form-item>
         <span class="require-icon" style="left:50px;line-height:45px;" v-show="(addTelType!='01'|| addTelType!='02') && (addTelType=='03' || addTelType=='04' || addTelType=='05')">*</span>
         <el-form-item label="关系:" v-show="(addTelType!='01'|| addTelType!='02') && (addTelType=='03' || addTelType=='04' || addTelType=='05')" :label-width="addTellFormLabelWidth">
-          <!-- <span class="add-label"><span class="require-icon">*</span>关系:</span> -->
           <el-select v-model="addRelationShip" placeholder="请选择">
             <el-option v-for="item in relationShips" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
-        <!-- <span class="require-icon">*</span> -->
         <span class="require-icon" style="left:20px;line-height:45px;">*</span>
         <el-form-item label="电话号码:" :label-width="addTellFormLabelWidth" prop="addTelNum">
           <el-input auto-complete="off" v-model="addTelNum"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <!-- <el-button @click="dialogFormVisible = false">取 消</el-button> -->
-        <!-- <el-button type="primary" @click.native="append">确 定</el-button> -->
         <el-button @click.native="append" type="primary" v-show="active" :loading="isLoading">{{loadingTitle}}</el-button>
         <el-button type="primary" disabled v-show="active==false">确认</el-button>
       </div>

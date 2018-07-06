@@ -83,14 +83,14 @@
     </div> -->
     <!-- 大数据风控 -->
     <!-- <div class="bigDataLog"> -->
-    <div class="liuchenggj">
+    <!-- <div class="liuchenggj">
       <el-dialog title="提示" :visible.sync="bigDataLogVisible" :modal="false" width="420px">
         <span>此进件不存在大数据风控明细！</span>
         <span slot="footer" class="dialog-footer">
           <el-button type="primary" @click="bigDataLogVisible=false">确定</el-button>
         </span>
       </el-dialog>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -105,7 +105,7 @@
         lcgjData: [],
         lcdialogVisible: false,
         processInstanceId: '',
-        bigDataLogVisible: false,
+        // bigDataLogVisible: false,
         ToReconsiderParams: {
           id: '',
           taskId: '',
@@ -172,7 +172,12 @@
           applyId: this.taskwaitting.ApplyId
         }).then(res => {
           if (res.obj == null) {
-            this.bigDataLogVisible = true;
+            // this.bigDataLogVisible = true;
+                   this.$confirm('此进件不存在大数据风控明细！', '提示', {
+              confirmButtonText: '确定',
+              type: 'warning',
+              showCancelButton: false
+            }).then(() => {}).catch(() => {});
           } else if (res.obj) {
             this.$router.push({
               path: '/PneCtrl'

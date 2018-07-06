@@ -127,11 +127,10 @@
       </el-collapse-item>
     </el-collapse>
     <!-- 弹框 -->
-    <div class="numLog">
-      <el-dialog :title='aa' :visible.sync="dialogVisible" width="860px" style="height:480px" top="0">
+    <!-- <div class="numLog"> -->
+      <el-dialog :title='aa' :visible.sync="dialogVisible" width="860px">
         <div class="numBody">
-          <div>
-            <el-table ref="multipleTable" :data="recordList" tooltip-effect="dark" style="width: 100%" height="259" border @selection-change="handleSelectionChange">
+            <el-table ref="multipleTable" :data="recordList" style="width: 100%" height="250" border highlight-current-row @selection-change="handleSelectionChange">
               <el-table-column type="index" :index='1' label="序号" min-width="50">
               </el-table-column>
               <el-table-column type="selection" min-width="50">
@@ -142,7 +141,7 @@
               </el-table-column>
               <el-table-column prop="statusTxt" label="状态" min-width="80">
               </el-table-column>
-              <el-table-column label="操作" min-width="50">
+              <el-table-column label="操作" min-width="50" fixed="right">
                 <template slot-scope="scope">
                   <el-button size="mini" @click="handlDetail(scope.$index, scope.row)">详情
                   </el-button>
@@ -155,13 +154,12 @@
                 :page-size=setPageSize layout="total, sizes, prev, pager, next, jumper" :total="totals.totalRecord">
               </el-pagination>
             </div>
-          </div>
         </div>
         <span slot="footer" class="dialog-footer">
           <el-button type="primary" @click="sure">确定</el-button>
         </span>
       </el-dialog>
-    </div>
+    <!-- </div> -->
   </div>
 </template>
 <script type="text/javascript">

@@ -1100,8 +1100,8 @@
 	    	<el-button type="primary" @click="sure">确定</el-button>
 	    </div>
 		<!-- 点击确认时提示弹框 -->
-		<div class="sureLog">
-			<el-dialog
+		<!-- <div class="sureLog"> -->
+			<!-- <el-dialog
 			  title="询问"
 			  :visible.sync="dialogVisible"
 			   :modal="false"
@@ -1112,9 +1112,9 @@
 				<el-button type="primary" :loading=jiekrloading  @click="trueSure">{{jiekrSure}}</el-button>
 			  </span>
 			</el-dialog>
-		</div>
+		</div> -->
 		<!-- 点击确认时提示错误弹框 -->	
-		<div class="sureLog">
+		<!-- <div class="sureLog">
 			<el-dialog
 			  title="提示"
 			  :visible.sync="tidialogVisible"
@@ -1125,7 +1125,7 @@
 			  	<el-button type="primary" @click="infoSure">确定</el-button>
 			  </span>
 			</el-dialog>
-		</div>
+		</div> -->
 
 
 
@@ -1194,9 +1194,8 @@
             postcodes:false,
 
             //确定按钮弹框
-            dialogVisible:false,
-            //确定按钮弹框
-            tidialogVisible:false,
+            // dialogVisible:false,
+     
             
             //信用卡使用总况
             borCard:{
@@ -1385,7 +1384,7 @@
       		//弹框
       		layer:false,
       		info:'',
-      		tidialogVisible:false,
+      		// tidialogVisible:true,
       		ifFull:'', // 标志是否全屏
       		//负债信息 负债合计
       		arr:[],
@@ -2063,67 +2062,83 @@
 					row.avgIncome = this.formatNumber(row.avgIncome,2,0);
 				}
 			},
+			blankHint(){
+       this.$confirm(this.info, '提示', {
+              confirmButtonText: '确定',
+              type: 'warning',
+              showCancelButton: false
+            }).then(() => {}).catch(() => {});
+			},
 			//确定按钮
 			sure(){
 				for(var i=0;i<this.borestateList.length;i++){
 					if(this.borestateList[i].estateType==''){
-						this.tidialogVisible=true;
+						// this.tidialogVisible=true;
 						this.info="房产信息不能为空！"
+						this.blankHint();
 						return
 					}
 				};
 				for(var i=0;i<this.carInfoList.length;i++){
 					if(this.carInfoList[i].carType==''){
-						this.tidialogVisible=true;
+						// this.tidialogVisible=true;
 						this.info="车辆信息不能为空！"
+							this.blankHint();
 						return
 					}
 				};
 				for(var i=0;i<this.cardDetList.length;i++){
 					if(this.cardDetList[i].bankName=='' || this.cardDetList[i].accountStatus==''){
-						this.tidialogVisible=true;
+						// this.tidialogVisible=true;
 						this.info="信用卡使用明细不能为空！"
+							this.blankHint();
 						return　
 					}
 				};
 				for(var i=0;i<this.loanDetailList.length;i++){
 					if(this.loanDetailList[i].loanType=='' || this.loanDetailList[i].guaranteeType=='' || this.loanDetailList[i].accountStatus==''){
-						this.tidialogVisible=true;
+						// this.tidialogVisible=true;
 						this.info="贷款明细不能为空！"　
+							this.blankHint();
 						return
 					}
 				};
 				for(var i=0;i<this.incomeList.length;i++){
 					if(this.incomeList[i].incomeType==''){
-						this.tidialogVisible=true;
+						// this.tidialogVisible=true;
 						this.info="流水明细不能为空！"　
+							this.blankHint();
 						return
 					}
 				};
-				
-				//this.layer=true;
-				//document.getElementsByTagName('body')[0].style.overflow='hidden';
-				this.jiekrloading = false;
-      		    this.jiekrSure = '确定';
-				this.dialogVisible = true;
+				// this.jiekrloading = false;
+      		    // this.jiekrSure = '确定';
+				// this.dialogVisible = true;
+				       this.$confirm('您确定已填写好各项内容并提交？', '提示', {
+              confirmButtonText: '确定',
+              type: 'warning',
+              showCancelButton: false
+            }).then(() => {
+				console.log('ddd')
+				this.trueSure();
+			}).catch(() => {});
 			},
 			//弹框取消
 			Cancle(){
 				//this.layer=false;
 				//document.getElementsByTagName('body')[0].style.overflow='';
-				this.dialogVisible = false;					
+				// this.dialogVisible = false;					
 			},
 			//弹框确认
 			trueSure(){
+				console.log('ccc')
 				if(this.loanInfo.carLoanTotal!='' || this.loanInfo.studentLoanTotal!='' || this.loanInfo.houseLoanTotal!=='' || this.loanInfo.otherLoanTotal!=''){
-					this.countNum(event);
+					()=>this.countNum(event)
 				};
-				
-				//this.layer=false;
-				//document.getElementsByTagName('body')[0].style.overflow='';
-				this.jiekrloading = true;
-      		    this.jiekrSure = '保存中';	
-				this.dialogVisible = false;
+				console.log('eee')
+				// this.jiekrloading = true;
+      		    // this.jiekrSure = '保存中';	
+				// this.dialogVisible = false;
 				this.loanInfo.applyId=this.applyId;
 				this.borCard.applyId=this.applyId;
 				this.borDebt.applyId=this.applyId;
@@ -2218,7 +2233,7 @@
 						};
 					}
 				};
-
+console.log('ggg')
 				this.post("/borrower/saveBorrowerInfo", {
 			        "applyId":this.applyId,
 			        "borestateList":this.borestateList,
@@ -2233,6 +2248,7 @@
 			        "otherInfo":this.otherInfo
 			      }).then(res => {
 			        if(res.statusCode==200){
+						console.log('quest')
 			        	this.request(this.applyId);
 			        	this.$message({
 							message:"保存成功！",
@@ -2247,11 +2263,11 @@
 			    });				
 			},
 			//提示弹框关闭
-			infoSure(){
-				this.tidialogVisible=false;
-				//document.getElementsByTagName('body')[0].style.overflow='';
-				//this.layer=false;
-			},
+			// infoSure(){
+			// 	this.tidialogVisible=false;
+			// 	//document.getElementsByTagName('body')[0].style.overflow='';
+			// 	//this.layer=false;
+			// },
 			/*银行卡使用总况 去焦点时判断只能显示数字并且最大为999*/
 			carNum(num,flag){
 				if (num!=""){

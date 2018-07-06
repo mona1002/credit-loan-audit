@@ -396,15 +396,16 @@
                 <el-button type="primary" @click="hangOoutBtn()">确认</el-button>\
             </el-form-item>\
             </el-form>\
-             <el-dialog title="提示" :modal="false" :visible.sync="hangOut" width="420px">\
-        <span>确定操作？</span>\
-        <span slot="footer" class="dialog-footer">\
-          <el-button class="calbtn" @click="canc">取消</el-button>\
-          <el-button class="subtn" type="primary" :loading="loadsitu" @click="Csave">{{adbtn}}</el-button>\
-        </span>\
-      </el-dialog>\
         </div>\
             ',
+          // 上面com破能说-template中的弹窗
+      //                    <el-dialog title="提示" :modal="false" :visible.sync="hangOut" width="420px">\
+      //   <span>确定操作？</span>\
+      //   <span slot="footer" class="dialog-footer">\
+      //     <el-button class="calbtn" @click="canc">取消</el-button>\
+      //     <el-button class="subtn" type="primary" :loading="loadsitu" @click="Csave">{{adbtn}}</el-button>\
+      //   </span>\
+      // </el-dialog>\
         data() {
           return {
             mark: "",
@@ -449,16 +450,23 @@
             })
           },
           hangOoutBtn() {
-            this.loadsitu = false;
-            this.adbtn = '确定';
-            this.hangOut = true;
+            // this.loadsitu = false;
+            // this.adbtn = '确定';
+            // this.hangOut = true;
+                     this.$confirm('确定操作？', '提示', {
+              confirmButtonText: '确定',
+              type: 'warning',
+              showCancelButton: false
+            }).then(() => {
+              this.Csave();
+            }).catch(() => {});
           },
           canc() {
             this.hangOut = false;
           },
           Csave() {
-            this.loadsitu = true;
-            this.adbtn = '保存中';
+            // this.loadsitu = true;
+            // this.adbtn = '保存中';
             // 提交 匹配结论
             this.post('internalMatch/addInternalMatchOption', {
               // 申请单id
@@ -475,13 +483,14 @@
                   type: 'success',
                   message: this.resMsg
                 });
-                this.hangOut = false;
+                // this.hangOut = false;
               } else {
                 this.resMsg = '提交失败,请重试！';
-                instance.confirmButtonText = '';
-                this.hangOut = false;
+                
+                // instance.confirmButtonText = '';
+                // this.hangOut = false;
               }
-              instance.confirmButtonLoading = false;
+              // instance.confirmButtonLoading = false;
             });
           },
           submitForm: function () {

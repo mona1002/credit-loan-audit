@@ -139,7 +139,6 @@
           this.sendDate[1] ? this.params.dateEnd = this.sendDate[1] : this.params.dateEnd = '';
 
         }
-        console.log()
         // this.sendDate.push( )
         this.params.pageSize = this.pageCount;
         this.inquire(this.params);

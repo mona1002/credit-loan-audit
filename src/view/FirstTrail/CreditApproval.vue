@@ -45,7 +45,7 @@
       <el-button icon="el-icon-check-big-data" class="credit-btn" @click="tobigData">大数据风控</el-button>
       <el-button icon="el-icon-check-social" class="credit-btn" @click="roSocialSecurity">社保公积金{{social}}</el-button>
     </div> -->
-    <div class="approve_btn_area approve_btn_area_width_900">
+    <div class="approve_btn_area approve_btn_area_width_950">
       <span class="approve_item" @click="hangOoutBtn">
         <i class="approve_icon HangUpIcon"></i>
         <span class="approve_text">挂起</span>

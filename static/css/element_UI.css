@@ -259,6 +259,9 @@
 }
 
 /* 借款人资料input框 */
+.Abody .borrowerInformation .el-table{
+height: auto !important;
+}
 
 .borrowerInformation .el-input__icon {
   color: #0077ff;
@@ -277,16 +280,16 @@
 
 /* 借款人资料表格内容居中 */
 
-.borrowerInformation .el-table th {
+/* .borrowerInformation .el-table th {
   font-weight: 400;
   color: #1f2d3d;
   font-size: 14px;
-}
+} */
 
 .borrowerInformation .el-table th .cell {
-  font-weight: 800;
-  color: #909399;
-  font-size: 13px;
+  /* font-weight: 800; */
+  /* color: #909399; */
+  /* font-size: 13px; */
 }
 
 .borrowerInformation .el-input__inner {
@@ -295,7 +298,7 @@
   font-size: 13px;
 }
 
-.borrowerInformation .el-table__body-wrapper .el-table__body td {
+/* .borrowerInformation .el-table__body-wrapper .el-table__body td {
   color: #909399;
   font-size: 13px;
 }
@@ -305,7 +308,7 @@
   color: #666666;
   font-size: 14px;
   position: relative;
-}
+} */
 
 .borrowerInformation .el-table th:nth-of-type(1) .cell {
   padding-left: 0 !important;
@@ -2314,16 +2317,16 @@ body .el-menu--horizontal .el-menu .el-menu-item,
   font-size: 14px;
 }
 
-.aAntiFraudInvestigation .el-table th .cell {
+/* .aAntiFraudInvestigation .el-table th .cell {
   font-weight: 800;
   color: #909399;
   font-size: 13px;
-}
+} */
 
-.aAntiFraudInvestigation .el-table__body-wrapper .el-table__body td {
+/* .aAntiFraudInvestigation .el-table__body-wrapper .el-table__body td {
   color: #909399;
   font-size: 13px;
-}
+} */
 
 .aAntiFraudInvestigation .el-collapse-item__arrow {
   line-height: 38px;
@@ -2383,9 +2386,9 @@ body .el-menu--horizontal .el-menu .el-menu-item,
   text-align: center;
 }
 
-.aAntiFraudInvestigation .numLog .el-dialog__title {
+/* .aAntiFraudInvestigation .numLog .el-dialog__title {
   font-size: 14px;
-}
+} */
 
 .aAntiFraudInvestigation .el-dialog__body {
   padding: 20px 20px;
@@ -2419,31 +2422,31 @@ body .el-menu--horizontal .el-menu .el-menu-item,
 .aAntiFraudInvestigation .numBody .el-table th:nth-of-type(6) {
   text-align: center;
 }
-
+/* 
 .aAntiFraudInvestigation .numBody .page {
   text-align: center;
   margin-top: 20px;
-}
+} */
 
-.aAntiFraudInvestigation .numLog .el-dialog__body {
+/* .aAntiFraudInvestigation .numLog .el-dialog__body {
   padding: 10px 20px;
 }
 
 .aAntiFraudInvestigation .numLog .el-dialog__header {
   border-bottom: 1px solid #ccc;
-}
+} */
 
 .aAntiFraudInvestigation .tableDiv .el-table__body-wrapper .el-table__body td:nth-of-type(3) {
   cursor: pointer;
 }
 
-.aAntiFraudInvestigation .numLog .el-dialog__body {
+/* .aAntiFraudInvestigation .numLog .el-dialog__body {
   padding-bottom: 0;
 }
 
 .aAntiFraudInvestigation .numLog .el-dialog__footer {
   padding-top: 0;
-}
+} */
 
 /* 反欺诈 */
 

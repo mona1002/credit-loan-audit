@@ -162,8 +162,7 @@
       <el-button type="primary" @click="bigSure">确认</el-button>
     </div>
     <!-- 弹框 -->
-    <div class="numLog">
-      <el-dialog :title=aa :visible.sync="dialogVisible" width="860px" top="20vh">
+      <el-dialog title='命中规则名称：' :visible.sync="dialogVisible" width="860px">
         <div class="numBody">
           <div class="markIcon">
             <span @click="relieve">
@@ -176,7 +175,7 @@
             </span>
           </div>
           <div>
-            <el-table ref="multipleTable" :data="recordList" tooltip-effect="dark" style="width: 100%" height="259" border @selection-change="handleSelectionChange">
+            <el-table ref="multipleTable" :data="recordList" style="width: 100%"  height="250" border highlight-current-row @selection-change="handleSelectionChange">
               <el-table-column type="index" :index='1' label="序号" min-width="50">
               </el-table-column>
               <el-table-column type="selection" min-width="50">
@@ -187,7 +186,7 @@
               </el-table-column>
               <el-table-column prop="statusTxt" label="状态" min-width="80">
               </el-table-column>
-              <el-table-column label="操作" min-width="50">
+              <el-table-column label="操作" min-width="50" fixed="right">
                 <template slot-scope="scope">
                   <el-button size="mini" @click="handlDetail(scope.$index, scope.row)">详情
                   </el-button>
@@ -206,32 +205,31 @@
           <el-button type="primary" @click="sure">确定</el-button>
         </span>
       </el-dialog>
-    </div>
     <!-- 解除弹框 -->
-    <div class="delLog">
+    <!-- <div class="delLog">
       <el-dialog title="提示" :visible.sync="deldialogVisible" width="420px" top="35vh">
         <span>只能针对未解除状态数据进行操作，请重新选择！</span>
         <span slot="footer" class="dialog-footer">
           <el-button type="primary" @click="delSure">确定</el-button>
         </span>
       </el-dialog>
-    </div>
+    </div> -->
     <!-- 恢复弹框 -->
-    <div class="backLog">
+    <!-- <div class="backLog">
       <el-dialog title="提示" :visible.sync="backdialogVisible" width="420px" top="35vh">
         <span>只能针对已解除状态数据进行操作，请重新选择</span>
         <span slot="footer" class="dialog-footer">
           <el-button type="primary" @click="backSure">确定</el-button>
         </span>
       </el-dialog>
-    </div>
+    </div> -->
   </div>
 </template>
 <script type="text/javascript">
   export default {
     data() {
       return {
-        aa: '命中规则名称：',
+        // aa: '命中规则名称：',
         activeNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
         fraudApplyInfo: '',
         hitRuleList: [],
@@ -262,9 +260,9 @@
         /*存放多选时选中的数据*/
         multipleSelection: [],
         /*解除弹框*/
-        deldialogVisible: false,
+        // deldialogVisible: true,
         /*恢复弹框*/
-        backdialogVisible: false,
+        // backdialogVisible: false,
         //根据judgeFlag判断取 反欺诈专员 还是 反欺诈主管的申请ID
         judgeFlag: '',
         //理由：主原因+子原因+描述
@@ -563,7 +561,12 @@
           return (item.statusTxt == '未解除')
         });
         if (!fg) {
-          this.deldialogVisible = true;
+          // this.deldialogVisible = true;
+                 this.$confirm('只能针对未解除状态数据进行操作，请重新选择！', '提示', {
+              confirmButtonText: '确定',
+              type: 'warning',
+              showCancelButton: false
+            }).then(() => {}).catch(() => {});
         }
         if (fg) {
           this.newArray = [];
@@ -593,9 +596,9 @@
         }
       },
       /*解除 弹框按钮*/
-      delSure() {
-        this.deldialogVisible = false;
-      },
+      // delSure() {
+      //   this.deldialogVisible = false;
+      // },
       /*恢复*/
       recovery() {
         if (this.multipleSelection.length == 0) return;
@@ -603,7 +606,12 @@
           return (item.statusTxt == '已解除')
         });
         if (!fg) {
-          this.backdialogVisible = true;
+          // this.backdialogVisible = true;
+                 this.$confirm('只能针对已解除状态数据进行操作，请重新选择', '提示', {
+              confirmButtonText: '确定',
+              type: 'warning',
+              showCancelButton: false
+            }).then(() => {}).catch(() => {});
         }
         if (fg) {
           //console.log(this.multipleSelection);
@@ -635,7 +643,7 @@
       },
       /*恢复 弹框按钮*/
       backSure() {
-        this.backdialogVisible = false;
+        // this.backdialogVisible = false;
       },
     }
   }
@@ -835,6 +843,7 @@
   .numBody .markIcon span {
     height: 30px;
     display: inline-block;
+    cursor: pointer;
   }
 
   .numBody .markIcon span img {

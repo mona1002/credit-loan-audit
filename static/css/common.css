@@ -318,7 +318,10 @@ table {
   margin: 0 auto;
   text-align: center;
 }
-
+.approve_btn_area_width_950{
+  width: 950px;
+  
+}
 .approve_btn_area_width_900 {
   width: 900px;
 }

@@ -1090,15 +1090,15 @@
   }
 
   .btn_wrap {
-    width: 66.6%;
+    /* width: 66.6%; */
     height: 60px;
   }
 
   .btn {
-    margin-left: calc( 100% - 95px);
+    margin-left: 235px;
   }
 
-  .calbtn {
+  /* .calbtn {
     background: white;
     border: 1px solid #d8dce5;
     color: #5a5e66;
@@ -1117,7 +1117,7 @@
     padding: 7px 15px;
     font-size: 12px;
     border-radius: 3px;
-  }
+  } */
 
   .icon_hat {
     position: absolute;

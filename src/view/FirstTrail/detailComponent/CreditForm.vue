@@ -926,13 +926,13 @@
       <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
     </div>
     <!-- ==============================点击确认时提示弹框=================================== -->
-    <el-dialog title="提示"  :modal="false" :visible.sync="Confirm" width="420px">
+    <!-- <el-dialog title="提示"  :modal="false" :visible.sync="Confirm" width="420px">
       <span>确定操作？</span>
       <span slot="footer" class="dialog-footer">
         <el-button class="calbtn" @click="canc">取消</el-button>
         <el-button class="subtn" type="primary" :loading="loadsitu" @click="CFsave">{{adbtn}}</el-button>
       </span>
-    </el-dialog>
+    </el-dialog> -->
   </div>
 </template>
 <script>
@@ -2003,11 +2003,18 @@
         this.checkData.workCounty = item;
       },
       makeSureBtn() {
-        this.loadsitu = false;
-        this.adbtn = '确定';
+        // this.loadsitu = false;
+        // this.adbtn = '确定';
         this.$validator.validateAll().then((result) => {
           if (result) {
-            this.Confirm = true;
+            // this.Confirm = true;
+                   this.$confirm('您确定操作？', '提示', {
+              confirmButtonText: '确定',
+              type: 'warning',
+              showCancelButton: false
+            }).then(() => {
+              this.CFsave();
+            }).catch(() => {});
           } else {
             this.$message.error('提交失败，有必填项未填写！');
           }
@@ -2020,8 +2027,8 @@
         this.Confirm = false;
       },
       CFsave() {
-        this.loadsitu = true;
-        this.adbtn = '保存中';
+        // this.loadsitu = true;
+        // this.adbtn = '保存中';
         this.$validator.validateAll().then((result) => {
           if (result) {
             this.checkData.selfpremisesArea = this.acreage;
@@ -2346,7 +2353,7 @@
           this.Txawidth[22].style.width = "calc( 50% + 200px )";
           this.CFwidth[0].style.minWidth = 1665 + "px";
           this.comaddressb[0].style.paddingLeft = 826 + "px";
-          this.Alertbtn[0].style.marginLeft = "calc( 50% + 329px )";
+          this.Alertbtn[0].style.marginLeft = "260px";
         }
       },
       mountM() {
@@ -2489,7 +2496,7 @@
     font-size: 14px;
   }
 
-  .subtn {
+  /* .subtn {
     background: #66b1ff;
     border-color: #66b1ff;
     color: #fff;
@@ -2497,9 +2504,9 @@
     padding: 7px 15px;
     font-size: 12px;
     border-radius: 3px;
-  }
+  } */
 
-  .calbtn {
+  /* .calbtn {
     background: white;
     border: 1px solid #d8dce5;
     color: #5a5e66;
@@ -2508,7 +2515,7 @@
     padding: 7px 15px;
     font-size: 12px;
     border-radius: 3px;
-  }
+  } */
 
   .blueC:hover {
     color: rgba(0, 119, 255, 0.75);
@@ -2555,13 +2562,11 @@
   }
 
   .btn_wrap {
-    width: 66.6%;
     height: 60px;
   }
 
   .btn {
-    margin-left: calc( 100% - 148px);
-    margin-top: 20px;
+    margin: 20px 0 0 260px;
   }
 
   .specialInput {

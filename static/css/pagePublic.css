@@ -33,7 +33,9 @@
     /* background:red; */
   }
   /* 分屏 */
-
+.overFlow_x{
+  overflow-x: hidden;
+}
 
 
 

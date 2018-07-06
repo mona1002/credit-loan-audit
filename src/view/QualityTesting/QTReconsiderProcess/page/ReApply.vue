@@ -1,8 +1,6 @@
 <template>
-  <div class="aAntiApplyInf ReApply">
+  <div class="aAntiApplyInf ReApply overFlow_x">
     <!-- 复议申请页面 -->
-    <myHead></myHead>
-    <div class="content">
       <el-collapse v-model="activeNames">
         <el-collapse-item name="1">
           <template slot="title">
@@ -50,7 +48,7 @@
             <span class="headFont">合规质检结论</span>
           </template>
           <div class="AntiInf">
-            <el-table :data="tableData" border style="width: 100%">
+            <el-table :data="tableData" border style="width: 100%;height:auto !important">
               <el-table-column label='质检结果' prop="checkResultTxt" width="120"></el-table-column>
               <el-table-column label='差错类型' prop="errorType" width="150"></el-table-column>
               <el-table-column label='差错描述' prop="errorDescribe" width="150"></el-table-column>
@@ -93,18 +91,16 @@
         <!-- <el-button @click="cancle">取消</el-button> -->
       </div>
       <!-- 弹窗 -->
-      <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
+      <!-- <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
         <span>确定操作？</span>
         <span slot="footer" class="dialog-footer">
           <el-button class="calbtn" @click="Confirm=false">取消</el-button>
           <el-button class="subtn" type="primary" :loading="loadsitu" @click="SaveInf">{{adbtn}}</el-button>
         </span>
-      </el-dialog>
+      </el-dialog> -->
     </div>
-  </div>
 </template>
 <script>
-  import myHead from '../../../header.vue';
 
   export default {
     data() {
@@ -115,10 +111,10 @@
         manager: false,
         ManagerBtn: true,
         HintStar: true,
-        Confirm: false,
-        adbtn: '确认',
+        // Confirm: false,
+        // adbtn: '确认',
         ReIllustrate: false,
-        loadsitu: false,
+        // loadsitu: false,
         tableData: [],
         conclusionId: '', //提交入参
         // tableData: [{
@@ -148,9 +144,6 @@
       }
     },
     props: ['propReApply'],
-    components: {
-      myHead
-    },
     watch: {
       '$route' (to, from) {
         if (to.path === '/ReApply') {
@@ -183,7 +176,6 @@
           this.applyInfoPool = res.data.applyBaseInfo; //基本信息
           this.tableData.push(res.data.insConclusion); //-----------需要调接口查看返回对象，还是数组
           this.conclusionId = res.data.insConclusion.id;
-          console.log(this.tableData)
         })
         //  this.get('/insReconApply/queryInsConclusionInfo', {
         //     applyId: this.taskwaitting.ApplyId,
@@ -197,18 +189,25 @@
       // // this.$router.push('SelfTaskList?taskNodeName='+this.taskwaitting+'&flag='+this.taskwaitting.mark);
       //       },
       sumt() {
-        this.loadsitu = false;
-        this.adbtn = '确定';
+        // this.loadsitu = false;
+        // this.adbtn = '确定';
         if (this.fraudAuditOpinion.auditDesc == '') { //复议说明如果为空 不提交------复议说明自段待更改
           this.$message.error('有必填项未填写！');
-          this.confirm = false;
+          // this.confirm = false;
           return
         }
-        this.Confirm = true;
+               this.$confirm('您确定操作？', '提示', {
+              confirmButtonText: '确定',
+              type: 'warning',
+              showCancelButton: false
+            }).then(() => {
+              this.SaveInf();
+            }).catch(() => {});
+        // this.Confirm = true;
       },
       SaveInf() { //提交
-        this.loadsitu = true;
-        this.adbtn = '提交中';
+        // this.loadsitu = true;
+        // this.adbtn = '提交中';
         // 提交信息
         this.post("/insReconApply/saveInsReconApply", {
           applyId: this.taskwaitting.ApplyId, //申请单id
@@ -234,7 +233,7 @@
             this.$message.error(res.msg);
           }
         });
-        this.Confirm = false;
+        // this.Confirm = false;
       },
       calc() {
         this.$router.push('/SelfTaskList?taskNodeName=checkApp_trial_self&flag=09');
@@ -260,20 +259,15 @@
 
 </script>
 <style scoped>
-  .aAntiApplyInf {
-    min-width: 1366px;
-    height: 100%;
-  }
-
+.ReApply{
+  height: calc( 100% - 90px );
+  widows: 100%;
+  background: #ffffff;
+}
   .icon_hat {
     position: absolute;
     top: 12px;
     left: 14px
-  }
-
-  .content {
-    height: calc(100% - 95px);
-    overflow: auto;
   }
 
   .textA {
