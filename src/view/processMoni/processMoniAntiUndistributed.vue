@@ -190,13 +190,6 @@
         <el-button type="primary" @click="dialogTransVisible = false">返 回</el-button>
       </div>
     </el-dialog>
-    <!-- 操作前提示 -->
-    <el-dialog title="提示" :visible.sync="dialogAlertVisible" width="30%">
-      <span>{{alertMessage}}</span>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogAlertVisible = false">确定</el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 
@@ -273,7 +266,6 @@
         dialogTraceVisible: false, //流程轨迹
         dialogAssignVisible: false, //任务分派
         dialogTransVisible: false, //转分派流程轨迹
-        dialogAlertVisible: false, // 未选择提示框
         alertMessage: '',
         multipleSelection: [],
         formLabelWidth: "140px",
@@ -437,10 +429,15 @@
       selectRow(row, event, column) {
         this.currentRow = row;
       },
-
+      alertBox() { //操作前提示
+        this.$confirm(this.alertMessage, '提示', {
+          confirmButtonText: '确定',
+          type: 'warning',
+          showCancelButton: false
+        }).then(() => {}).catch(() => {});
+      },
       handleItem(flag) {
         if (this.multipleSelection.length == 0) {
-          this.dialogAlertVisible = true;
           if (flag === 'trace') {
             this.alertMessage = "请选择一条记录查看流程轨迹！";
           } else if (flag === 'assign') {
@@ -448,12 +445,13 @@
           } else if (flag === 'trans') {
             this.alertMessage = "请选择一条记录查看转分派流程轨迹！";
           }
+          this.alertBox();
           return
         }
         if (this.multipleSelection.length > 1) {
           if (flag === 'trace') {
-            this.dialogAlertVisible = true;
             this.alertMessage = "请选择一条记录查看流程轨迹！";
+            this.alertBox();
             return
           } else if (flag === 'assign') {
             var arr = this.multipleSelection;
@@ -461,13 +459,13 @@
               return item.taskNodeNameTxt === arr[0].taskNodeNameTxt
             })
             if (!fg) {
-              this.dialogAlertVisible = true;
               this.alertMessage = "请选择相同 [任务节点] 的流程进行分派任务！";
+              this.alertBox();
               return
             }
           } else if (flag === 'trans') {
-            this.dialogAlertVisible = true;
             this.alertMessage = "请选择一条记录查看转分派流程轨迹！";
+            this.alertBox();
             return
           }
         }

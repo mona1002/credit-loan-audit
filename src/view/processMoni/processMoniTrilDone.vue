@@ -3,25 +3,25 @@
   <div class="taskWatting main-div">
     <div class="taskWinput search-div">
       <el-row class="row row1" type="flex">
-        <el-col :span="6" :offset="0">
+        <el-col :span="6" :offset="0" class="search-item">
           <span class="keywordText">客户姓名</span>
           <el-input @keyup.enter.native="getByKey" v-model.trim="custName_la" placeholder="请输入客户姓名"></el-input>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="6" class="search-item">
           <span class="keywordText">证件号码</span>
           <el-input @keyup.enter.native="getByKey" v-model.trim="certCode" placeholder="请输入证件号码"></el-input>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="6" class="search-item">
           <span class="keywordText">进件编号</span>
           <el-input @keyup.enter.native="getByKey" v-model.trim="applySubNo" placeholder="请输入进价编号"></el-input>
         </el-col>
-                <el-col :span="6">
+        <el-col :span="6" class="search-item">
           <span class="keywordText">进件机构</span>
           <el-input @keyup.enter.native="getByKey" v-model.trim="appOrgCode" placeholder="请输入进件机构"></el-input>
         </el-col>
       </el-row>
       <el-row class="row row2" type="flex">
-        <el-col :span="6">
+        <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称</span>
           <el-select v-model="proId" placeholder="请选择产品名称">
             <p style="height: 34px;line-height: 34px;padding: 0 20px;font-size: 14px;background: #eee;">
@@ -34,18 +34,18 @@
             </el-option>
           </el-select>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="6" class="search-item">
           <span class="keywordText">任务节点</span>
           <el-select v-model="taskNodeName" placeholder="请选择">
             <el-option v-for="item in taskNodes" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
         </el-col>
-         <el-col :span="6">
+        <el-col :span="6" class="search-item">
           <span class="keywordText">当前处理人员</span>
           <el-input @keyup.enter.native="getByKey" v-model.trim="operatorCode" placeholder="请输入当前处理人员"></el-input>
         </el-col>
-             <el-col :span="6" class="search-btn">
+        <el-col :span="6" class="search-btn">
           <el-button class="btn query" type="primary" @click="getByKey">查询</el-button>
           <el-button class="btn reset" @click="reset">重置</el-button>
         </el-col>
@@ -69,9 +69,9 @@
     <div class="listContainer">
       <el-table :data="moniList" height="510" border show-header highlight-current-row @selection-change="handleSelectionChange"
         @row-click="selectRow">
-        <el-table-column type="selection"  width="55">
+        <el-table-column type="selection" width="55">
         </el-table-column>
-        <el-table-column type="index" label="序号"  width="50">
+        <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column prop="emerTypeTxt" label="紧急程度" width="80">
         </el-table-column>
@@ -171,13 +171,6 @@
         <el-button type="primary" @click="dialogTransVisible = false">返 回</el-button>
       </div>
     </el-dialog>
-    <!-- 操作前提示 -->
-    <el-dialog title="提示" :visible.sync="dialogAlertVisible" width="30%">
-      <span>{{alertMessage}}</span>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogAlertVisible = false">确定</el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 
@@ -273,7 +266,6 @@
         dialogTraceVisible: false, //流程轨迹
         dialogAssignVisible: false, //任务分派
         dialogTransVisible: false, //转分派流程轨迹
-        dialogAlertVisible: false, // 未选择提示框
         alertMessage: '',
         multipleSelection: [],
         formLabelWidth: "140px",
@@ -438,10 +430,15 @@
       selectRow(row, event, column) {
         this.currentRow = row;
       },
-
+      alertBox() { //操作前提示
+        this.$confirm(this.alertMessage, '提示', {
+          confirmButtonText: '确定',
+          type: 'warning',
+          showCancelButton: false
+        }).then(() => {}).catch(() => {});
+      },
       handleItem(flag) {
         if (this.multipleSelection.length == 0) {
-          this.dialogAlertVisible = true;
           if (flag === 'trace') {
             this.alertMessage = "请选择一条记录查看流程轨迹！";
           } else if (flag === 'assign') {
@@ -449,12 +446,13 @@
           } else if (flag === 'trans') {
             this.alertMessage = "请选择一条记录查看转分派流程轨迹！";
           }
+          this.alertBox();
           return
         }
         if (this.multipleSelection.length > 1) {
           if (flag === 'trace') {
-            this.dialogAlertVisible = true;
             this.alertMessage = "请选择一条记录查看流程轨迹！";
+            this.alertBox();
             return
           } else if (flag === 'assign') {
             var arr = this.multipleSelection;
@@ -462,13 +460,13 @@
               return item.taskNodeNameTxt === arr[0].taskNodeNameTxt
             })
             if (!fg) {
-              this.dialogAlertVisible = true;
               this.alertMessage = "请选择相同 [任务节点] 的流程进行分派任务！";
+              this.alertBox();
               return
             }
           } else if (flag === 'trans') {
-            this.dialogAlertVisible = true;
             this.alertMessage = "请选择一条记录查看转分派流程轨迹！";
+            this.alertBox();
             return
           }
         }
