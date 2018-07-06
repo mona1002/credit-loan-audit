@@ -69,7 +69,7 @@
     <div class="listContainer">
       <el-table :data="moniList" height="510" border show-header highlight-current-row @selection-change="handleSelectionChange"
         @row-click="selectRow">
-        <el-table-column type="selection"  width="55">
+        <el-table-column type="selection" width="55">
         </el-table-column>
         <el-table-column type="index" label="序号" align='center' width="50">
         </el-table-column>
@@ -152,7 +152,7 @@
       </div>
     </el-dialog>
     <!-- 转分派流程轨迹 -->
-    <el-dialog title="转分派流程轨迹":modal="false" :visible.sync="dialogTransVisible">
+    <el-dialog title="转分派流程轨迹" :modal="false" :visible.sync="dialogTransVisible">
       <el-table :data="transList" border show-header highlight-current-row>
         <el-table-column type="index" label="序号" width="50">
         </el-table-column>
