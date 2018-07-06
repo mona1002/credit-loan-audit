@@ -26,14 +26,12 @@
           <div ref="Left_detail" class="Left_detail_div">
             <p class="Left_right_Title"> {{this.title}}
               <span class="icon_FullScreen"  @click="FullScreen">
-                <!-- <img src="../../../static/images/backcopy 2.png" @click="FullScreen"> -->
               </span>
               <span class="showAllList" @mouseenter="showList" @mouseleave="hid">
                 <img src="../../../static/images/icon-02.png">
               </span>
             </p>
             <div class="Left_right_BigImg">
-              <!--  :AUobj='AULobj'   :AUpreWidth.sync='preWidth' -->
               <AudioVisualLeft ref="AudioLeft" msg="spLone" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></AudioVisualLeft>
               <cremarkDetail ref="markLeft" v-if=" this.tabContent1==1"></cremarkDetail>
               <InternalMatch ref="InterLeft" v-if=" this.tabContent1==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>

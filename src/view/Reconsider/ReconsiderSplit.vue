@@ -1,8 +1,6 @@
 <template>
   <!-- 复议分屏-专员、主管 -->
   <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
-    <myHead></myHead>
-    <div class="SplitScreen_content">
       <!-- 进件人详情 -->
       <p class="PerDtl">
         <span> 借款人：{{accepCusBasicInfo.custName}}</span>
@@ -14,7 +12,7 @@
         <span> 业务员入职时间：{{customInf.salPerEmployDate}}</span>
         <span>{{customInf.adminIntroduce}}</span>
       </p>
-      <div class="SplitScreen_wrap">
+      <div class="SplitScreen_wrap content_not_split">
         <!-- 右侧分屏部分 -->
         <div class="right" ref="rRight">
           <!-- 右屏tab 表头 -->
@@ -26,7 +24,6 @@
             <span class="pre_next_btn_wrap" style="color:red;" @click="rightMovingBtn">
               <img src="../../../static/images/Shaperight@1x.png">
             </span>
-            <!-- tab 2 -=====================tab2里面的ul-->
             <div class="Right_tab_ul_wrap">
               <ul ref="right_tab_ul" style="left:0;right:0;">
                 <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="tab($event,index,val)" :class="{tab2Act:tab2Index==index}">
@@ -34,42 +31,26 @@
               </ul>
             </div>
           </div>
-          <!-- tab 内容 -->
           <div class="tab2_Content">
             <AnitAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AnitAudioVisual>
-            <!-- √ -->
             <cremark v-if=" this.tabContent2==1"></cremark>
-            <!-- √ -->
             <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
-            <!-- √ -->
             <AborrowerInformationDetail v-if=" this.tabContent2==4"></AborrowerInformationDetail>
             <PhoneCredit v-if=" this.tabContent2==5" :addBtn="false"></PhoneCredit>
-            <!-- √ 内部匹配中信审表 -->
             <FMCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></FMCreditForm>
-            <!-- √ -->
-            <!-- 实地征信 -->
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
-            <!-- 复议申请 -->
             <ReconsiderApply v-if=" this.tabContent2==8"></ReconsiderApply>
-            <!-- √ -->
-            <!-- 反欺诈结论 -->
             <aAntiApplyInf v-if=" this.tabContent2==9"></aAntiApplyInf>
-            <!-- 反欺诈调查 -->
             <RantiFraudInvestigation v-if=" this.tabContent2==10" :isShow='false' :applyId='tastwaitingPass.applyId'></RantiFraudInvestigation>
-            <!-- √ -->
-            <!-- 复议结论 -->
             <ReconsiderationConclusion v-if=" this.tabContent2==11 && this.Rcon==1"></ReconsiderationConclusion>
             <ReconjingliConclusion v-if=" this.tabContent2==11 && this.Rcon==2"></ReconjingliConclusion>
-            <!-- √ -->
           </div>
         </div>
-      </div>
     </div>
   </div>
 </template>
 <script>
-  import myHead from "../header.vue"
   import AnitAudioVisual from '../AntiFraud/components/AnitAudioVisual.vue'; //工作台--》 av
   import cremark from '../FirstTrail/checkComponent/remarkDetail.vue' //备注信息
   // import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配查看 --》 aV
@@ -190,7 +171,6 @@
       this.mountedInf();
     },
     components: {
-      myHead,
       AnitAudioVisual,
       cremark,
       capplicationInformationDetail,
@@ -208,159 +188,3 @@
   }
 
 </script>
-<style scoped>
-  .SplitScreen {
-    height: 100%;
-  }
-
-  /* 激活样式 流-css */
-
-  .tab1Default {
-    color: #bfcbd9;
-  }
-
-  .tab1Act {
-    color: white;
-  }
-
-  .tab2Default {
-    color: #bfcbd9;
-  }
-
-  .tab2Default:hover {
-    cursor: pointer;
-  }
-
-  .tab2Act {
-    color: white;
-    border-bottom: 1px solid white;
-  }
-
-  .setGray {
-    color: #bfcbd9;
-  }
-
-  .SplitScreen_content {
-    border: 1px solid #0077ff;
-    height: calc(100% - 100px);
-    overflow: auto;
-    padding: 13px 9px;
-  }
-
-  /* 借款人详情 */
-
-  .PerDtl {
-    color: #0077ff;
-    background: white;
-    height: 20px;
-    line-height: 20px;
-    margin-bottom: 13px;
-  }
-
-  .PerDtl span {
-    display: inline-block;
-    letter-spacing: 0.1px;
-    font-size: 12px;
-    margin-right: 15px;
-  }
-
-  /* 切换按钮 */
-
-  /* 左右分屏 */
-
-  .SplitScreen_wrap {
-    width: 100%;
-    height: calc( 100% - 33px);
-    min-width: 1306px;
-  }
-
-  .right {
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background: #ffffff;
-    border: 1px solid #bfcbd9;
-    border-radius: 4px;
-    float: left;
-    position: relative;
-  }
-
-  /* 左屏 */
-
-  /* 左侧详情 p标签   流-css */
-
-  .right .Right_tab_title_div,
-  .AudioVisual_wrap_compare_right p {
-    font-size: 16px;
-    text-align: center;
-    background: rgba(0, 119, 255, 0.75);
-    height: 48px;
-    line-height: 48px;
-    color: #f8f9fd;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .AudioVisual_wrap_compare_right p {
-    text-align: right;
-    padding-right: 40px;
-  }
-
-  /* 左侧详情 content div 内容   流-css */
-
-  .Left_right_BigImg {
-    background: white;
-    height: calc( 100% - 48px);
-    overflow: auto;
-  }
-
-  /* 右屏 */
-
-  /* 右侧tab切换头外的ul   流 */
-
-  .Right_tab_ul_wrap {
-    overflow: hidden;
-    width: calc( 100% - 100px);
-    margin-left: 50px;
-  }
-
-  .Right_tab_ul_wrap ul {
-    width: 1570px;
-    height: 48px;
-    position: relative;
-    text-align: left;
-    z-index: 16;
-  }
-
-  .Right_tab_ul_wrap ul li {
-    display: inline-block;
-    margin-right: 40px;
-    letter-spacing: 0.11px;
-    height: 38px;
-    line-height: 38px;
-  }
-
-
-  .tab2_Content {
-    /*background: purple;*/
-    height: calc( 100% - 48px);
-    overflow: auto;
-  }
-
-  /* 右侧tab切换头 左右滑动图标  流  */
-
-  .pre_next_btn_wrap {
-    position: absolute;
-    z-index: 2;
-    width: 25px;
-  }
-
-  .pre_next_btn_wrap:nth-of-type(1) {
-    left: 10px;
-  }
-
-  .pre_next_btn_wrap:nth-of-type(2) {
-    right: 10px;
-  }
-
-</style>
