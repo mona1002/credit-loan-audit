@@ -4,8 +4,8 @@
     <el-collapse v-model="activeNames" v-if='AprovalInfolShow'>
       <el-collapse-item name="0">
         <template slot="title">
-          <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">审批信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">审批信息</span>
         </template>
         <div class="baseInf">
           <ul>
@@ -29,8 +29,8 @@
     <el-collapse v-model="activeNames" v-if='MaterialShow'>
       <el-collapse-item name="1">
         <template slot="title">
-          <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">资料核实</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">资料核实</span>
         </template>
         <div class="material">
           <table border="1" cellpadding='2' width='100%'>
@@ -257,8 +257,8 @@
     <el-collapse v-model="activeNames" v-if='InfoSearchShow'>
       <el-collapse-item name="2">
         <template slot="title">
-          <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">三方信息查询</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">三方信息查询</span>
         </template>
         <div class="material">
           <table border="1" cellpadding='2' width='100%'>
@@ -384,8 +384,8 @@
     <el-collapse v-model="activeNames" v-if='MatchingShow'>
       <el-collapse-item name="3">
         <template slot="title">
-          <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">内部匹配核实</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">内部匹配核实</span>
         </template>
         <div class="material">
           <table border="1" cellpadding='2' width='100%'>
@@ -420,8 +420,8 @@
     <el-collapse v-model="activeNames">
       <el-collapse-item name="4">
         <template slot="title">
-          <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">电话征信</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">电话征信</span>
         </template>
         <div class="CreditForm_CheckId">
           <!-- tab-title -->
@@ -570,8 +570,8 @@
     <el-collapse v-model="activeNames" v-if='ReApply'>
       <el-collapse-item name="5">
         <template slot="title">
-          <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">初终审复议申请信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">初终审复议申请信息</span>
         </template>
         <div class="material">
           <el-table :data="TrilSelfTableData" border style="width: 100%">
@@ -589,8 +589,8 @@
     <el-collapse v-model="activeNames" v-if='SuperVisor'>
       <el-collapse-item name="6">
         <template slot="title">
-          <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">审批主管第一次复议申请信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">审批主管第一次复议申请信息</span>
         </template>
         <div class="material">
           <el-table :data="ManagerFirstTableData" border style="width: 100%">
@@ -608,8 +608,8 @@
     <el-collapse v-model="activeNames" v-if='FirstReconsider'>
       <el-collapse-item name="7">
         <template slot="title">
-          <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">第一次复议审批信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">第一次复议审批信息</span>
         </template>
         <div class="material">
           <el-table :data="insReconApproval" border style="width: 100%">
@@ -631,8 +631,8 @@
     <el-collapse v-model="activeNames" v-if='SuperVisorSecond'>
       <el-collapse-item name="8">
         <template slot="title">
-          <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">审批主管第二次复议申请信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">审批主管第二次复议申请信息</span>
         </template>
         <div class="material">
           <el-table :data="ManagerSecondTableData" border style="width: 100%">
@@ -651,8 +651,8 @@
       <el-collapse-item name="9">
         <template slot="title">
           <div>
-            <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-            <p style="display:inline-block" class="headFont">质检结论</p>
+            <i class="collapse_title_icon"></i>
+            <span class="collapse_title_text">质检结论</span>
             <p style="float:right" v-if='QTConclutionBtn'>
               <!-- <span class="btn" @click.stop="addTr=true"> -->
               <span class="btn" @click.stop="addQTResult">
@@ -718,60 +718,56 @@
       </div>
     </div>
     <!-- 底部按钮 -->
-    <div class="QT_btns_wrap" v-if='BottomBtn'>
-      <el-button @click="SaveInf('保存')" v-if="saveBtn">
-        <img src="../../../../../static/images/relieve.png">
-        <label class="labelTxt">保存</label>
-      </el-button>
-      <el-button @click="SubmitAlert" v-if="submitBtn">
-        <!-- <el-button @click="SaveInf('提交')" v-if="submitBtn"> -->
-        <img src="../../../../../static/images/appro.png">
-        <label class="labelTxt">提交</label>
-      </el-button>
-      <el-button @click="NoReconsider" v-if="NoReconsiderBtn">
-        <img src="../../../../../static/images/back.png">
-        <label class="labelTxt">无需复议</label>
-      </el-button>
+    <div class="approve_btn_area approve_btn_area_width_700" v-if='BottomBtn'>
+      <span class="approve_item" @click="SaveInf('保存')" v-if="saveBtn">
+        <i class="approve_icon relieveIcon"></i>
+        <span class="approve_text">保存</span>
+      </span>
+      <span class="approve_item" @click="SubmitAlert" v-if="submitBtn">
+        <i class="approve_icon appro"></i>
+        <span class="approve_text">提交</span>
+      </span>
+      <span class="approve_item" @click="NoReconsider" v-if="NoReconsiderBtn">
+        <i class="approve_icon backIcon"></i>
+        <span class="approve_text">无需复议</span>
+      </span>
       <!-- 区域经理提交按钮 -->
-      <el-button @click="AreaToReconsiderAlert" v-if="AreaReconsiderBtn">
-        <img src="../../../../../static/images/appro.png">
-        <label class="labelTxt">提交</label>
-      </el-button>
-      <!-- <el-button @click="this.ReconsiderShow=true"> -->
-      <el-button @click="ToReconsiderAlert" v-if="ReconsiderBtn">
-        <img src="../../../../../static/images/appro.png">
-        <label class="labelTxt">发起复议</label>
-      </el-button>
-      <el-button @click="ReAprovalAlert" v-if="ReAprovalBtn">
-        <img src="../../../../../static/images/appro.png">
-        <label class="labelTxt">复议审批</label>
-      </el-button>
-      <el-button @click="AprovalAlert" v-if="AprovalBtn">
-        <!-- <el-button @click="ReAprovalShow = true" v-if="ReAprovalBtn"> -->
-        <img src="../../../../../static/images/appro.png">
-        <label class="labelTxt">审批</label>
-      </el-button>
-      <el-button @click="AntiApply" v-if="AntiBtn">
-        <img src="../../../../../static/images/faqi.png">
-        <label class="labelTxt">发起反欺诈</label>
-      </el-button>
-      <el-button @click="getLcgjList">
-        <img src="../../../../../static/images/liucheng.png">
-        <label class="labelTxt">流程轨迹</label>
-      </el-button>
-      <el-button @click="RiskControl" v-if="RiskControlBtn">
-        <!-- <el-button @click="RiskControl"> -->
-        <img src="../../../../../static/images/bigdata.png">
-        <label class="labelTxt">大数据风控</label>
-      </el-button>
-      <el-button @click="roSocialSecurity" v-if="SocialSecurityBtn">
-        <img src="/static/images/social.png">
-        <label class="labelTxt">社保/公积金{{social}}</label>
-      </el-button>
+      <span class="approve_item" @click="AreaToReconsiderAlert" v-if="AreaReconsiderBtn">
+        <i class="approve_icon appro"></i>
+        <span class="approve_text">提交</span>
+      </span>
+      <span class="approve_item" @click="ToReconsiderAlert" v-if="ReconsiderBtn">
+        <i class="approve_icon faqi"></i>
+        <span class="approve_text">发起复议</span>
+      </span>
+      <span class="approve_item" @click="ReAprovalAlert" v-if="ReAprovalBtn">
+        <i class="approve_icon appro"></i>
+        <span class="approve_text">复议审批</span>
+      </span>
+      <span class="approve_item" @click="AprovalAlert" v-if="AprovalBtn">
+        <i class="approve_icon appro"></i>
+        <span class="approve_text">审批</span>
+      </span>
+      <span class="approve_item" @click="AntiApply" v-if="AntiBtn">
+        <i class="approve_icon faqi"></i>
+        <span class="approve_text">发起反欺诈</span>
+      </span>
+      <span class="approve_item" @click="getLcgjList">
+        <i class="approve_icon liuchengIcon"></i>
+        <span class="approve_text">流程轨迹</span>
+      </span>
+      <span class="approve_item" @click="RiskControl" v-if="RiskControlBtn">
+        <i class="approve_icon brokenLineIcon"></i>
+        <span class="approve_text">大数据风控</span>
+      </span>
+      <span class="approve_item" @click="roSocialSecurity" v-if="SocialSecurityBtn">
+        <i class="approve_icon dataMaptIcon"></i>
+        <span class="approve_text">社保/公积金{{social}}</span>
+      </span>
     </div>
     <!-- =================================弹窗===================================== -->
     <!-- 提交 -->
-    <div class='alertBox'>
+    <!-- <div class='alertBox'>
       <el-dialog title="提示" :modal="false" :visible.sync="submitShow" width="420px">
         <span>确定操作？</span>
         <span slot="footer" class="dialog-footer">
@@ -779,9 +775,35 @@
           <el-button class="subtn" type="primary" :loading="loadsitu" @click="SaveInf('提交')">{{adbtn}}</el-button>
         </span>
       </el-dialog>
-    </div>
+    </div> -->
     <!-- 发起复议  -->
-    <div class="alertBox">
+    <div class="Height_240">
+      <el-dialog title="发起复议" :visible.sync="ReconsiderShow" :modal="false ">
+        <el-form>
+          <el-form-item label="复议节点：" :label-width="formLabelWidth">
+            <el-input disabled v-model="ReconsiderNode" placeholder="请选择"> </el-input>
+          </el-form-item>
+          <div class="dialog_textarea alert_collapse_inputLabel">
+            <el-form-item class="mr" label="复议说明：" :label-width="formLabelWidth">
+              <el-input v-model="ReconsiderDes" type="textarea" resize='none' :rows="2"></el-input>
+            </el-form-item>
+          </div>
+          <div class="bfc">
+            <el-form-item class="fl" label="经办人：" :label-width="formLabelWidth">
+              {{userInf. userName}}
+            </el-form-item>
+            <el-form-item class="fr" label="发起复议时间：" label-width="110px">
+              {{systermTime | dateFilter}}
+            </el-form-item>
+          </div>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="huiTuiShow=false">取 消</el-button>
+          <el-button type="primary" :loading="loadSub" @click='ToReconsider'> {{ReconSubmit}}</el-button>
+        </div>
+      </el-dialog>
+    </div>
+    <!-- <div class="alertBox">
       <el-dialog title='发起复议' :visible.sync="ReconsiderShow" :modal="false" width="650px">
         <div>
           <p>
@@ -803,15 +825,14 @@
           <el-button type="primary" @click="ToReconsider" :loading="loadSub">{{ReconSubmit}}</el-button>
         </div>
       </el-dialog>
-    </div>
+    </div> -->
     <!-- 区域经理-提交按钮-发起复议 -->
-    <div class="alertBox">
+    <!-- <div class="alertBox">
       <el-dialog title='发起复议' :visible.sync="AreaReconsiderShow" :modal="false" width="630px">
         <div>
           <p>
             <label class="reconsider_Alert_Label">
               <b class="required_Red"> * </b>复议结果：</label>
-            <!-- xiala -->
             <el-select v-model="ToAteaApprovalParams.reviewResult" placeholder="请选择">
               <el-option v-for="item in RecResult" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
@@ -833,9 +854,38 @@
           <el-button type="primary" @click="AreaToReconsider" :loading="loadSub">{{ReconSubmit}}</el-button>
         </div>
       </el-dialog>
+    </div> -->
+    <div class="Height_240">
+      <el-dialog title="发起复议" :visible.sync="AreaReconsiderShow" :modal="false ">
+        <el-form>
+          <el-form-item label="复议结果：" :label-width="formLabelWidth" class="alert_collapse_inputLabel">
+            <el-select v-model="ToAteaApprovalParams.reviewResult" placeholder="请选择">
+              <el-option v-for="item in RecResult" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <div class="dialog_textarea alert_collapse_inputLabel">
+            <el-form-item class="mr" label="复议说明：" :label-width="formLabelWidth">
+              <el-input v-model="ToAteaApprovalParams.reviewRemark" type="textarea" resize='none' :rows="2"></el-input>
+            </el-form-item>
+          </div>
+          <div class="bfc">
+            <el-form-item class="fl" label="审批人：" :label-width="formLabelWidth">
+              {{userInf. userName}}
+            </el-form-item>
+            <el-form-item class="fr" label="审批时间：" label-width="110px">
+              {{systermTime | dateFilter}}
+            </el-form-item>
+          </div>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="huiTuiShow=false">取 消</el-button>
+          <el-button type="primary" :loading="loadSub" @click='AreaToReconsider'> {{ReconSubmit}}</el-button>
+        </div>
+      </el-dialog>
     </div>
     <!-- 复议审批  -->
-    <div class="alertBox">
+    <!-- <div class="alertBox">
       <el-dialog title='复议审批' :visible.sync="ReAprovalShow" :modal="false" width="800px">
         <div class="reApproval">
           <p>
@@ -867,11 +917,6 @@
             <span>
               <label>
                 <b class="required_Red"> * </b>差错类型：</label>
-              <!-- <el-select v-model="value" placeholder="请选择">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select> -->
-              <!--  :disabled='QTConclution' -->
               <el-input v-model="ToApprovalParams.errorType" :maxlength='arealength' placeholder="请输入内容"></el-input>
             </span>
           </p>
@@ -889,60 +934,102 @@
           <el-button type="primary" @click="ToApproval" :loading="loadSub">{{ReconSubmit}}</el-button>
         </div>
       </el-dialog>
+    </div> -->
+    <div class="Height_240">
+      <el-dialog title="复议审批" :visible.sync="ReAprovalShow" :modal="false ">
+        <el-form>
+
+          <div class="bfc">
+            <el-form-item class="fl alert_collapse_inputLabel" label="复议结果：" :label-width="formApproLabel">
+              <el-select v-model="ToApprovalParams.reviewResult" placeholder="请选择">
+                <el-option v-for="item in RecResult" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="fr" label="质检结果：" :label-width="formApproLabel">
+              <el-select v-model="ToApprovalParams.checkResult" placeholder="请选择">
+                <el-option v-for="item in QTresultAlert" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </div>
+          <div class="bfc">
+            <el-form-item class="fl alert_collapse_inputLabel" label="质检员是否有差错：" :label-width="formApproLabel">
+              <el-select v-model="ToApprovalParams.isError" placeholder="请选择">
+                <el-option v-for="item in ApprolisError" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="fr alert_collapse_inputLabel" label="差错类型：" :label-width="formApproLabel">
+              <el-input v-model="ToApprovalParams.errorType" :maxlength='arealength' placeholder="请输入内容"></el-input>
+            </el-form-item>
+          </div>
+          <div class="dialog_textarea">
+            <el-form-item class="mr" label="复议说明：" :label-width="formApproLabel">
+              <el-input v-model='ToApprovalParams.reviewRemark' type="textarea" resize='none' :rows="2"></el-input>
+            </el-form-item>
+          </div>
+          <div class="bfc">
+            <el-form-item class="fl" label="审批人：" :label-width="formApproLabel" prop="holiday">
+              {{userInf. userName }}
+            </el-form-item>
+            <el-form-item class="fr" label="处理时间：" :label-width="formApproLabel" prop="holiday">
+              {{systermTime | dateFilter}}
+            </el-form-item>
+          </div>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button>取 消</el-button>
+          <el-button type="primary" :loading="loadSub" @click='ToApproval'> {{ReconSubmit}}</el-button>
+        </div>
+      </el-dialog>
     </div>
     <!-- 流程轨迹 -->
     <div class="alertBox pro_alert">
-      <el-dialog title='流程轨迹' :visible.sync="lcdialogVisible" :modal="false" width="860px" style='height:463px;positon:absolute;left:0;right:0;top:0;bottom:0;margin:auto;'
-        top="0">
-        <div class="splcBody">
-          <!-- <el-collapse v-model="activeNames2" @change="handleChange">
-			  		<el-collapse-item title="信审流程轨迹" name="1"> -->
-          <div class="first">
-            <el-table :data="lcgjData" style="width: 100%" height="296" border>
-              <el-table-column type="index" label="序号" min-width="50">
-              </el-table-column>
-              <el-table-column prop="taskNodeNameTxt" label="任务节点" min-width="120">
-              </el-table-column>
-              <el-table-column prop="taskTypeTxt" label="任务类型" min-width="120">
-              </el-table-column>
-              <el-table-column prop="activationTime" label="进入本环节时间" min-width="180">
-              </el-table-column>
-              <el-table-column prop="taskStatusTxt" label="任务状态" min-width="100">
-              </el-table-column>
-              <el-table-column prop="operatorCode" label="处理人" min-width="120">
-              </el-table-column>
-              <el-table-column prop="completeTime" label="处理时间" min-width="180">
-              </el-table-column>
-              <el-table-column prop="approvalOpinionTxt" label="处理结论" min-width="120">
-              </el-table-column>
-              <el-table-column prop="opinionExplain" label="意见说明" min-width="200" show-overflow-tooltip>
-              </el-table-column>
-            </el-table>
-          </div>
-        </div>
+      <el-dialog title='流程轨迹' :visible.sync="lcdialogVisible" :modal="false" width="1000px">
+        <el-table :data="lcgjData" height="250" border style="width: 100%" highlight-current-row>
+          <el-table-column type="index" label="序号" min-width="50">
+          </el-table-column>
+          <el-table-column prop="taskNodeNameTxt" label="任务节点" min-width="120">
+          </el-table-column>
+          <el-table-column prop="taskTypeTxt" label="任务类型" min-width="120">
+          </el-table-column>
+          <el-table-column prop="activationTime" label="进入本环节时间" min-width="180">
+          </el-table-column>
+          <el-table-column prop="taskStatusTxt" label="任务状态" min-width="100">
+          </el-table-column>
+          <el-table-column prop="operatorCode" label="处理人" min-width="120">
+          </el-table-column>
+          <el-table-column prop="completeTime" label="处理时间" min-width="180">
+          </el-table-column>
+          <el-table-column prop="approvalOpinionTxt" label="处理结论" min-width="120">
+          </el-table-column>
+          <el-table-column prop="opinionExplain" label="意见说明" min-width="200" show-overflow-tooltip>
+          </el-table-column>
+        </el-table>
         <span slot="footer" class="dialog-footer">
           <el-button type="primary" @click="lcdialogVisible = false">返回</el-button>
         </span>
       </el-dialog>
     </div>
     <!-- 大数据风控 -->
-    <div class="bigDataLog alertBox">
+    <!-- <div class="bigDataLog alertBox">
       <el-dialog title="提示" :visible.sync="bigDataLogVisible" :modal="false" width="420px">
         <span>此进件不存在大数据风控明细！</span>
         <span slot="footer" class="dialog-footer">
           <el-button type="primary" @click="bigDataLogVisible=false">确定</el-button>
         </span>
       </el-dialog>
-    </div>
+    </div> -->
     <!-- 社保公积金 -->
-    <div class="bigDataLog alertBox">
+    <!-- <div class="bigDataLog alertBox">
       <el-dialog title="提示" :visible.sync="socialLogVisible" :modal="false" width="420px">
         <span>客户社保公积金未授权！</span>
         <span slot="footer" class="dialog-footer">
           <el-button type="primary" @click="this.socialLogVisible=false">确定</el-button>
         </span>
       </el-dialog>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -951,6 +1038,8 @@
   export default {
     data() {
       return {
+        formLabelWidth: '85px',
+        formApproLabel: '140px',
         userInf: '',
         SaveInfParams: '',
         URL: '', //音频路径
@@ -1254,8 +1343,8 @@
         AprovalShow: false,
         lcdialogVisible: false,
         lcgjData: [],
-        socialLogVisible: false,
-        bigDataLogVisible: false,
+        // socialLogVisible: false,
+        // bigDataLogVisible: false,
         social: '', //社保公积金 已绑定 未绑定
         // -------------------单选按钮 disabled-------------
         material: false, //资料核实
@@ -1584,16 +1673,23 @@
         }
       },
       SubmitAlert() { //提交弹窗
-        this.submitShow = true;
-        this.adbtn = '确认';
-        this.loadsitu = false;
+        // this.submitShow = true;
+        // this.adbtn = '确认';
+        // this.loadsitu = false;
+        this.$confirm('确定提交？', '提示', {
+          confirmButtonText: '确定',
+          type: 'warning',
+          showCancelButton: false
+        }).then(() => {
+          this.SaveInf('提交');
+        }).catch(() => {});
       },
       // ---------------------------------按钮事件----------------
       // 保存 或 提交
       SaveInf(type) { //质检主管不需要提交，只有质检专员 显示提交
-        this.loadsitu = true;
-        this.adbtn = '提交中';
-        this.submitShow = false;
+        // this.loadsitu = true;
+        // this.adbtn = '提交中';
+        // this.submitShow = false;
         this.checkResultCount01 = 0;
         this.checkResultCount02 = 0;
         this.checkResultCount03 = 0;
@@ -1671,7 +1767,7 @@
             } else {
               this.$message.error(res.msg);
             }
-            this.submitShow = false;
+            // this.submitShow = false;
           });
         } else { //  常规质检、专纵质检
           // 保存、提交之前都要校验质检结论是否重复添加多条
@@ -1786,7 +1882,7 @@
                 this.$message.error(res.msg);
               }
             });
-          this.submitShow = false;
+          // this.submitShow = false;
         }
       },
       // 无需复议
@@ -2012,7 +2108,12 @@
           applyId: this.propQTconclution.applyId
         }).then(res => {
           if (res.obj == null) {
-            this.bigDataLogVisible = true;
+            // this.bigDataLogVisible = true;
+            this.$confirm('此进件不存在大数据风控明细！', '提示', {
+              confirmButtonText: '确定',
+              type: 'warning',
+              showCancelButton: false
+            }).then(() => {}).catch(() => {});
           } else if (res.obj) {
             this.$router.push({
               path: '/PneCtrl'
@@ -2035,7 +2136,12 @@
       },
       roSocialSecurity() { //社保/公积金-授权显示
         if (this.social == "(未授权)") {
-          this.socialLogVisible = true;
+          // this.socialLogVisible = true;
+          this.$confirm('客户社保公积金未授权！', '提示', {
+            confirmButtonText: '确定',
+            type: 'warning',
+            showCancelButton: false
+          }).then(() => {}).catch(() => {});
         } else if (this.social == "(已授权)") {
           this.$router.push({
             path: '/SocialSe'

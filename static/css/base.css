@@ -268,7 +268,25 @@
  .editIcon {
    background-image: url('../images/change.png')
  }
+ .relieveIcon{
+  background-image: url('../images/relieve.png')
+ }
 
+ .collapse_title_icon {
+   width:40px;
+   height: 40px;
+   display: inline-block;
+   background: url('../images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png') no-repeat center;
+ }
+.collapse_title_text{
+  height: 40px;
+  line-height: 40px;
+  /* background:red; */
+  font-size: 14px;
+  font-weight:800;
+  display: inline-block;
+  vertical-align: top;
+}
  /* 列表 区域 */
 
  .listContainer {

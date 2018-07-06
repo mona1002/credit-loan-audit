@@ -2836,3 +2836,15 @@ body .el-menu--horizontal .el-menu .el-menu-item,
 .newContent p span .el-input {
   width: 190px;
 }
+/* 通用样式 */
+.Abody .el-collapse-item__header{
+  color: #1f2d3d;
+  background: #eef0f9;
+  border: 1px solid #e6eaee;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+}
+.Abody .el-collapse-item__header{
+  
+}
