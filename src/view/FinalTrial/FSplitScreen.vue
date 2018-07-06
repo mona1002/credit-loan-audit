@@ -1,7 +1,5 @@
 <template>
   <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
-    <myHead></myHead>
-    <div class="SplitScreen_content">
       <!-- 进件人详情 -->
       <p class="PerDtl">
         <span> 借款人：{{accepCusBasicInfo.custName}}</span>
@@ -27,8 +25,8 @@
           <!-- 左侧详情 -->
           <div ref="Left_detail" class="Left_detail_div">
             <p class="Left_right_Title"> {{this.title}}
-              <span class="icon_FullScreen">
-                <img src="../../../static/images/backcopy 2.png" @click="FullScreen">
+              <span class="icon_FullScreen" @click="FullScreen">
+                <!-- <img src="../../../static/images/backcopy 2.png" > -->
               </span>
               <span class="showAllList" @mouseenter="showList" @mouseleave="hid">
                 <img src="../../../static/images/icon-02.png">
@@ -52,7 +50,8 @@
         <div class="SP_middle" ref="RM" id="RM" v-show="midShow"></div>
         <!-- 右侧分屏部分 -->
         <div class="right" ref="rRight">
-          <img src="../../../static/images/backcopy.png" class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen">
+          <span class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen"></span>
+          <!-- <img src="../../../static/images/backcopy.png" > -->
           <!-- 右屏tab 表头 -->
           <div class="Right_tab_title_div">
             <!-- 左右滑动 图标  -->
@@ -114,10 +113,8 @@
       </div>
       <!-- 对比弹出层结束 -->
     </div>
-  </div>
 </template>
 <script>
-  import myHead from "../header"
   import FcCreditForm from './FinalComponent/FcCreditForm'; //左侧
   import FCreditForm from './FinalComponent/FCreditForm'; //右侧
   import AudioVisual from "../FirstTrail/detailComponent/AudioVisual.vue";
@@ -351,7 +348,6 @@
       this.mountedInf();
     },
     components: {
-      myHead,
       FcCreditForm,
       FCreditForm,
       AudioVisualLeft,
@@ -372,263 +368,3 @@
   }
 
 </script>
-<style scoped>
-  .SplitScreen {
-    height: 100%;
-  }
-
-  /* 激活样式 */
-
-  .tab1Default {
-    color: #bfcbd9;
-  }
-
-  .tab1Act {
-    color: white;
-  }
-
-  .tab2Default {
-    color: #bfcbd9;
-  }
-
-  .tab2Act {
-    color: white;
-    border-bottom: 1px solid white;
-  }
-
-  .setGray {
-    color: #bfcbd9;
-  }
-
-  /* 对比弹出层关闭按钮 */
-
-  .compareClose {
-    position: absolute;
-    right: 40px;
-    bottom: 19px;
-    z-index: 1;
-  }
-
-  /* 全屏  --  分屏 图标 */
-
-  .icon_showHalf {
-    position: absolute;
-    top: 6px;
-    left: 9px;
-    z-index: 3;
-    background: #4099ff;
-  }
-
-  .icon_FullScreen {
-    position: absolute;
-    top: 7px;
-    right: 17px;
-  }
-
-  .showAllList {
-    position: absolute;
-    padding-top: 2px;
-    width: 55px;
-    height: 50px;
-    left: 0;
-    top: 0;
-  }
-
-  .SplitScreen_content {
-    border: 1px solid #0077ff;
-    height: calc(100% - 100px);
-    overflow: auto;
-    padding: 13px 9px;
-  }
-
-  /* 借款人详情 */
-
-  .PerDtl {
-    color: #0077ff;
-    background: white;
-    height: 20px;
-    line-height: 20px;
-    margin-bottom: 13px;
-  }
-
-  .PerDtl span {
-    display: inline-block;
-    letter-spacing: 0.1px;
-    font-size: 12px;
-    margin-right: 15px;
-  }
-
-  /* 切换按钮 */
-
-  .stretch {
-    position: absolute;
-    left: 5px;
-    top: 2px;
-    z-index: 1;
-  }
-
-  /* 左右分屏 */
-
-  .SplitScreen_wrap {
-    width: 100%;
-    height: calc( 100% - 33px);
-    min-width: 1306px;
-    position: relative;
-  }
-
-  .left,
-  .right,
-  .AudioVisual_wrap_compare_left,
-  .AudioVisual_wrap_compare_right {
-    width: calc(50% - 2px);
-    height: 100%;
-    overflow: auto;
-    background: #ffffff;
-    border: 1px solid #bfcbd9;
-    border-radius: 4px;
-    float: left;
-    position: relative;
-
-  }
-
-  .left,
-  .right {
-    position: absolute;
-  }
-
-  .right {
-    left: 50%;
-  }
-
-  /* 左屏 */
-
-  /* 左侧列表  影像资料等 ul 外包   流 */
-
-  .left .Left_ul {
-    width: 110px;
-    background: rgba(31, 45, 61, 0.59);
-    box-shadow: 0 5px 20px 0 #475669;
-    position: fixed;
-    left: -110px;
-    top: 165px;
-    z-index: 10;
-    padding-top: 24px;
-  }
-
-  .left .Left_ul li {
-    font-size: 15px;
-    letter-spacing: 0.1px;
-    height: 21px;
-    line-height: 12px;
-    padding: 0 0 30px 20px;
-  }
-
-  .left .Left_ul li:hover,
-  .Right_tab_ul_wrap ul li:hover {
-    cursor: pointer;
-  }
-
-  /* 左侧详情 div   流 */
-
-  .Left_detail_div {
-    height: 100%;
-  }
-
-  /* 左侧详情 p标签   */
-
-  .Left_right_Title,
-  .right .Right_tab_title_div,
-  .AudioVisual_wrap_compare_left p,
-  .AudioVisual_wrap_compare_right p {
-    font-size: 16px;
-    text-align: center;
-    background: rgba(0, 119, 255, 0.75);
-    height: 48px;
-    line-height: 48px;
-    color: #f8f9fd;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .AudioVisual_wrap_compare_right p {
-    text-align: right;
-    padding-right: 40px;
-  }
-
-  /* 左侧详情 content div 内容   */
-
-  .Left_right_BigImg {
-    background: white;
-    height: calc( 100% - 48px);
-    overflow: auto;
-  }
-
-  /* 右屏 */
-
-  /* 右侧tab切换头外的ul   */
-
-  .Right_tab_ul_wrap {
-    overflow: hidden;
-    width: calc( 100% - 100px);
-    margin-left: 50px;
-  }
-
-  .Right_tab_ul_wrap ul {
-    width: 1061px;
-    height: 48px;
-    position: relative;
-    text-align: left;
-    z-index: 16;
-  }
-
-  .Right_tab_ul_wrap ul li {
-    display: inline-block;
-    margin-right: 40px;
-    letter-spacing: 0.11px;
-    height: 38px;
-    line-height: 38px;
-  }
-
-  /* ======================================================================================================= */
-
-  .tab2_Content {
-    /*background: purple;*/
-    height: calc( 100% - 48px);
-    overflow: auto;
-  }
-
-  /* 右侧tab切换头 左右滑动图标  流  */
-
-  .pre_next_btn_wrap {
-    position: absolute;
-    z-index: 2;
-    width: 25px;
-  }
-
-  .pre_next_btn_wrap:nth-of-type(1) {
-    left: 10px;
-  }
-
-  .pre_next_btn_wrap:nth-of-type(2) {
-    right: 10px;
-  }
-
-  /*  对比弹出层 外包 div 流 */
-
-  .AudioVisual_wrap_compare {
-    position: absolute;
-    top: 117px;
-    width: calc( 100% - 18px);
-    height: calc( 100% - 161px);
-    z-index: 22;
-    min-width: 1306px;
-  }
-
-  /* 弹出层 - 两侧组件 content  流 */
-
-  .AlertContent {
-    height: calc( 100% - 48px);
-    overflow: auto;
-  }
-
-</style>
