@@ -708,6 +708,7 @@
   color: #475669;
   font-size: 14px;
   padding: 0;
+  width:100%;
  }
  /* 弹窗手风琴样式 */
 
@@ -877,6 +878,7 @@
 
  .el-collapse-item__wrap {
    border-bottom: none;
+   width:100%;
  }
 
  /* 弹窗里部分input必填项，部分展示项 */

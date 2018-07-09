@@ -180,7 +180,7 @@
   box-shadow: 0 5px 20px 0 #475669;
   position: fixed;
   left: -110px;
-  top: 165px;
+  top: 120px;
   z-index: 10;
   padding-top: 24px;
 }
@@ -351,4 +351,8 @@
 /* span输入框宽度 */
 .checkedInf .text_area_span_minus220 {
   width: calc(100% - 220px);
+}
+.title_icon span{
+  /* border: 1px solid; */
+  
 }

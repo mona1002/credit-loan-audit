@@ -1,41 +1,45 @@
 <!-- 备注信息 -->
 <template>
   <div class="remark">
-    <div class="remarkHead">
-      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-      <span class="titleText">备注信息</span>
-      <span class="iconContainer">
-        <span class="icon-item" @click="add">
-          <img src="../../../../static/images/add.png" class="icon">
-          <span class="span-text">添加</span>
-        </span>
-        <span class="icon-item" @click="change">
-          <img src="../../../../static/images/change.png" class="icon">
-          <span class="span-text">修改</span>
-        </span>
-        <span class="icon-item" @click="delet">
-          <img src="../../../../static/images/delete.png" class="icon">
-          <span class="span-text">删除</span>
-        </span>
-      </span>
-    </div>
-    <div class="taskWtable">
-      <el-table :data="tableData" height="710" style="width: 100%" :default-sort="{prop: 'date', order: 'descending'}" show-header
-        highlight-current-row @current-change="handleCurrentChange" border>
-        <!-- order两个参数，顺序和倒序: ascending, descending -->
-        <!-- @row-click="addHeight(backColor)" :class="{active: activeName == backColor}" -->
-        <el-table-column type="index" :index='1' label="序号" min-width="50">
-        </el-table-column>
-        <el-table-column prop="remarkTypeTxt" label="备注类型" min-width="90">
-        </el-table-column>
-        <el-table-column prop="remarker" label="备注人" min-width="130">
-        </el-table-column>
-        <el-table-column prop="remarkTime" label="备注时间" min-width="150" sortable>
-        </el-table-column>
-        <el-table-column prop="remark" label="备注" show-overflow-tooltip min-width="580">
-        </el-table-column>
-      </el-table>
-    </div>
+    <el-collapse v-model="activeNames">
+      <el-collapse-item name="1">
+        <template slot="title">
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">备注信息</span>
+          <div class="title_icon">
+            <span @click.stop="add">
+              <i class="title_icon_img addIcon"></i>
+              <span class="title_icon_span">添加</span>
+            </span>
+            <span @click.stop="change">
+              <i class="title_icon_img editIcon"></i>
+              <span class="title_icon_span">修改</span>
+            </span>
+            <span @click.stop="delet">
+              <i class="title_icon_img deleteIcon"></i>
+              <span class="title_icon_span">删除</span>
+            </span>
+          </div>
+        </template>
+        <div class="taskWtable">
+          <el-table :data="tableData" height="710" style="width: 100%" :default-sort="{prop: 'date', order: 'descending'}" show-header
+            highlight-current-row @current-change="handleCurrentChange" border>
+            <!-- order两个参数，顺序和倒序: ascending, descending -->
+            <!-- @row-click="addHeight(backColor)" :class="{active: activeName == backColor}" -->
+            <el-table-column type="index" :index='1' label="序号" min-width="50">
+            </el-table-column>
+            <el-table-column prop="remarkTypeTxt" label="备注类型" min-width="90">
+            </el-table-column>
+            <el-table-column prop="remarker" label="备注人" min-width="130">
+            </el-table-column>
+            <el-table-column prop="remarkTime" label="备注时间" min-width="150" sortable>
+            </el-table-column>
+            <el-table-column prop="remark" label="备注" show-overflow-tooltip min-width="580">
+            </el-table-column>
+          </el-table>
+        </div>
+      </el-collapse-item>
+    </el-collapse>
     <!-- 添加弹窗 -->
     <div class="Height_240 ">
       <el-dialog title="请输入您要添加的备注信息" :visible.sync="dialogVisible" :modal="false ">
@@ -74,6 +78,7 @@
   export default {
     data() {
       return {
+        activeNames: ['1'],
         ok: false,
         FormAdd: {
           remark: ''
@@ -125,8 +130,8 @@
         addLodaing: false,
         addSure: '确定',
         changeLoading: false,
-		chSure: '确定',
-		title:'',
+        chSure: '确定',
+        title: '',
       }
     },
     mounted() {
@@ -162,15 +167,12 @@
         this.addLodaing = false;
       },
       change() {
-
-
-
         this.changeLoading = false;
         this.chSure = '确定';
         if (this.isChecked == '') {
-		//   this.isdialogVisible = true;
-		  this.title='请选择一条记录！';
-		  this.promptSure();
+          //   this.isdialogVisible = true;
+          this.title = '请选择一条记录！';
+          this.promptSure();
         } else {
           this.FormEdit.changeRemarks = '';
           this.chdialogVisible = true;
@@ -183,11 +185,11 @@
       },
       delet() {
         if (this.isChecked == '') {
-			this.title='请选择一条记录！';
-			 this.promptSure();
+          this.title = '请选择一条记录！';
+          this.promptSure();
         } else {
-		  this.title='您要删除该备注吗？';
-		   this.promptSure();
+          this.title = '您要删除该备注吗？';
+          this.promptSure();
         }
       },
       deletCancle() {
@@ -249,13 +251,13 @@
           });
       },
       promptSure() {
-		         this.$confirm(this.title, '提示', {
-              confirmButtonText: '确定',
-              type: 'warning',
-              showCancelButton: false
-            }).then(() => {
-			this.title=='您要删除该备注吗？'?	this.deletSure():'';
-			}).catch(() => {});
+        this.$confirm(this.title, '提示', {
+          confirmButtonText: '确定',
+          type: 'warning',
+          showCancelButton: false
+        }).then(() => {
+          this.title == '您要删除该备注吗？' ? this.deletSure() : '';
+        }).catch(() => {});
       },
       deletSure() {
         this.post("/applyRemark/deleteApplyRemark", {
@@ -286,163 +288,3 @@
   }
 
 </script>
-<style type="text/css" scoped>
-  .remark {
-    width: 100%;
-    height: 100%;
-    background-color: #fafbfc;
-    min-width: 1258px;
-  }
-
-  /* 备注信息 */
-
-  .remark .remarkHead {
-    opacity: 0.75;
-    background: #ebedf8;
-    border-radius: 6px;
-    width: 100%;
-    height: 40px;
-    line-height: 40px;
-  }
-
-  .remark .remarkHead .titleText {
-    font-size: 16px;
-    color: #1f2d3d;
-    display: inline-block;
-    font-weight: 400;
-  }
-
-  .remark .remarkHead .iconContainer {
-    float: right;
-    display: inline-block;
-    height: 40px;
-    line-height: 40px;
-    margin-right: 29px;
-  }
-
-  .remark .remarkHead .icon-item {
-    cursor: pointer;
-    display: inline-block;
-    height: 40px;
-    margin-right: 14px;
-    float: left;
-  }
-
-  .remark .remarkHead .icon {
-    font-size: 30px;
-    padding-top: 5px;
-    float: left;
-  }
-
-  .remark .remarkHead .span-text {
-    font-size: 15px;
-    color: #1f2d3d;
-    float: left;
-    padding-left: 10px;
-  }
-
-  /* 表格头部 */
-
-  .taskWtable .el-table__header-wrapper {
-    width: 100%;
-  }
-
-  /* 添加的弹层 */
-
-  .addLog .addBody {
-    height: 100%;
-    width: 100%;
-    position: relative;
-  }
-
-  .addLog .addBody label {
-    height: 208px;
-    line-height: 208px;
-    padding: 0 10px;
-    font-size: 14px;
-    float: left;
-  }
-
-  .addLog .addBody div {
-    width: 90%;
-    height: 200px;
-    margin-top: 26px;
-    float: left;
-  }
-
-  .addLog .addBody textarea {
-    width: 100%;
-    height: 100%;
-  }
-
-  .addLog .addBody span {
-    position: absolute;
-    left: 66px;
-    top: 5px;
-    font-size: 12px;
-    color: #ff7676;
-    display: inline-block;
-    height: 17px;
-    line-height: 17px;
-  }
-
-  .addLog .addBody span i {
-    padding-right: 2px;
-    font-style: normal;
-  }
-
-  .changeLog .changeBody {
-    height: 100%;
-    width: 100%;
-    position: relative;
-  }
-
-  .changeLog .changeBody label {
-    height: 208px;
-    line-height: 208px;
-    padding: 0 10px;
-    font-size: 14px;
-    float: left;
-  }
-
-  .changeLog .changeBody div {
-    width: 90%;
-    height: 200px;
-    margin-top: 26px;
-    float: left;
-  }
-
-  .changeLog .changeBody textarea {
-    width: 100%;
-    height: 100%;
-  }
-
-  .changeLog .changeBody span {
-    position: absolute;
-    left: 66px;
-    top: 5px;
-    font-size: 12px;
-    color: #ff7676;
-    display: inline-block;
-    height: 17px;
-    line-height: 17px;
-  }
-
-  .changeLog .changeBody span i {
-    padding-right: 2px;
-    font-style: normal;
-  }
-
-
-  /* 折叠面板头部背景色 */
-
-  .icon_hat {
-    padding: 9px 10px 10px 13px;
-    vertical-align: middle;
-  }
-
-  .headFont {
-    font-size: 16px;
-  }
-
-</style>
