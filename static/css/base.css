@@ -703,6 +703,12 @@
    width: 96.5% !important;
  }
 
+ /* 页面手风琴样式 */
+ .Abody .el-collapse-item__content{
+  color: #475669;
+  font-size: 14px;
+  padding: 0;
+ }
  /* 弹窗手风琴样式 */
 
  .Abody .alert_collapse .el-collapse-item__content {
@@ -714,8 +720,8 @@
  }
 
  .Abody .el-collapse-item__arrow {
-   height: 40px;
-   line-height: 40px;
+   height: 28px;
+   line-height:28px;
  }
 
  .Abody .el-date-editor .el-range-separator {

@@ -64,28 +64,6 @@
   height: 35px;
 }
 
-/* 实地征信 折叠面板头部背景色 */
-
-.creditInvestigation .el-collapse-item__header {
-  background: #eef0f9;
-  border: 1px solid #e6eaee;
-  width: 100%;
-  height: 40px;
-  line-height: 40px;
-}
-
-.creditInvestigation .el-collapse-item__arrow {
-  line-height: 38px;
-  margin-right: 12px;
-}
-
-/*实地征信 字体颜色 */
-
-.creditInvestigation .el-collapse-item__content {
-  color: #475669;
-  font-size: 14px;
-}
-
 /*申请信息详情 折叠面板头部背景色 */
 
 .applicationInformationDetail .el-collapse-item__header {
@@ -1415,124 +1393,6 @@ height: auto !important;
 
 /* 备注信息表格内容居中 */
 
-/* 
-.remark .el-table__body-wrapper {
-  overflow: hidden;
-}
-
-.remark .el-table th {
-  font-weight: 400;
-  color: #1f2d3d;
-  font-size: 14px;
-}
-
-.remark .el-table__body-wrapper .el-table__body td {
-  font-weight: 400;
-  color: #909399;
-  font-size: 13px;
-  padding-left: 10px;
-}
-
-.remark .el-table td .cell {
-  padding-left: 0;
-}
-
-.remark .el-table th:nth-of-type(1) {
-  text-align: center;
-}
-
-.remark .el-table th:nth-of-type(1) .cell {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.remark .el-table th:nth-of-type(4) {
-  text-align: center;
-} */
-
-/* .remark .el-table__body-wrapper .el-table__body td:nth-of-type(1) {
-  text-align: center;
-  padding-left: 0;
-}
-
-.remark .el-table__body-wrapper .el-table__body td:nth-of-type(1) .cell {
-  padding-right: 0;
-  padding-left: 0;
-}
-
-.remark .el-table__body-wrapper .el-table__body td:nth-of-type(4) {
-  text-align: center;
-} */
-
-/* 备注信息弹框 */
-/* 
-.remark .addLog .el-dialog__title {
-  font-size: 15px;
-} */
-
-/* .remark .addLog .el-dialog__body {
-  height: 208px;
-  width: 98%;
-  margin: 0 auto;
-  background: #eee;
-  padding: 0 0;
-} */
-/* 
-.remark .isLog .el-dialog__body,
-.remark .deletLog .el-dialog__body {
-  padding: 0 20px;
-}
-
-.remark .changeLog .el-dialog__title {
-  font-size: 15px;
-}
-
-.remark .changeLog .el-dialog__body {
-  height: 208px;
-  width: 98%;
-  margin: 0 auto;
-  background: #eee;
-  padding: 0 0;
-} */
-
-/* 备注信息表格内容居中 */
-
-/* .remarkDetial .el-table th .cell {
-  font-weight: 800;
-  color: #909399;
-  font-size: 13px;
-}
-
-.remarkDetial .el-table__body-wrapper {
-  overflow: hidden;
-}
-
-.remarkDetial .el-table th {
-  font-weight: 400;
-  color: #1f2d3d;
-  font-size: 14px;
-}
-
-.remarkDetial .el-table__body-wrapper .el-table__body td {
-  font-weight: 400;
-  color: #909399;
-  font-size: 13px;
-  padding-left: 10px;
-}
-
-.remarkDetial .el-table td .cell {
-  padding-left: 0;
-}
-
-.remarkDetial .el-table th:nth-of-type(1) {
-  text-align: center;
-}
-
-.remarkDetial .el-table th:nth-of-type(1) .cell {
-  padding-left: 0;
-  padding-right: 0;
-}
-
 .remarkDetial .el-table th:nth-of-type(4) {
   text-align: center;
 }
@@ -1689,7 +1549,7 @@ height: auto !important;
 .mheader .el-menu--horizontal {
   border-bottom: none;
   top: 0px !important;
-  /* background: pink; */
+  background-color: transparent;
 }
 
 /* 如果没有子集，只有一级导航的情况下 */

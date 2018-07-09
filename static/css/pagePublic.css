@@ -1,315 +1,354 @@
 /* 列表 */
+
 .taskWatting {
-    width: 100%;
-    height: calc( 100% - 90px);
-    background-color: #fafbfc;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-    .taskWatting .taskWinput {
-    background-color: #ffffff;
-    border: 1px solid #e6eaee;
-    margin-bottom: 20px;
-  }
-
-  .taskWattingContain {
-    width: 100%;
-  }
-
-  /* 高级查询下的input */
-
-  .taskWatting .row {
-    margin-bottom: 20px;
-  }
-
-  .taskWatting .row1 {
-    margin-top: 20px;
-  }
-  /* 分页 */
-
-  .page {
-    text-align: center;
-    margin-top: 20px;
-    /* background:red; */
-  }
-
-.overFlow_x{
+  width: 100%;
+  height: calc( 100% - 90px);
+  background-color: #fafbfc;
+  overflow-y: auto;
   overflow-x: hidden;
 }
-  /* 分屏 */
-  .SplitScreen {
-    height: calc(100% - 90px );
-    overflow-y: hidden;
-    padding:0 9px;
-    /* border: 2px solid red; */
-  }
 
-  .SplitScreen  .tab1Default {
-    color: #bfcbd9;
-  }
+.taskWatting .taskWinput {
+  background-color: #ffffff;
+  border: 1px solid #e6eaee;
+  margin-bottom: 20px;
+}
 
-  .SplitScreen  .tab1Act {
-    color: white;
-  }
+.taskWattingContain {
+  width: 100%;
+}
 
-  .SplitScreen  .tab2Default {
-    color: #bfcbd9;
-  }
+/* 高级查询下的input */
 
-  .SplitScreen .tab2Act {
-    color: white;
-    border-bottom: 1px solid white;
-  }
+.taskWatting .row {
+  margin-bottom: 20px;
+}
 
+.taskWatting .row1 {
+  margin-top: 20px;
+}
 
-  /* 对比弹出层关闭按钮 */
+/* 分页 */
 
-  .SplitScreen  .compareClose {
-    position: absolute;
-    right: 40px;
-    bottom: 19px;
-    z-index: 1;
-  }
+.page {
+  text-align: center;
+  margin-top: 20px;
+  /* background:red; */
+}
 
-  /* 全屏  --  分屏 图标 */
+.overFlow_x {
+  overflow-x: hidden;
+}
 
-  .SplitScreen  .icon_showHalf {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    /* top: 6px; */
-    left: 9px;
-    z-index: 3;
-    background: #4099ff url('../images/backcopy.png') no-repeat center center;
-    cursor: pointer;
-  }
+/* 分屏 */
 
-  .SplitScreen  .icon_FullScreen {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    background: url('../images/backcopy 2.png') no-repeat center center;
-    right: 17px;
-    cursor: pointer;
-  }
+.SplitScreen {
+  height: calc(100% - 90px);
+  overflow-y: hidden;
+  padding: 0 9px;
+  /* border: 2px solid red; */
+}
 
-  .SplitScreen   .showAllList {
-    position: absolute;
-    padding-top: 2px;
-    width: 55px;
-    height: 50px;
-    left: 0;
-    top: 0;
-  }
+.SplitScreen .tab1Default {
+  color: #bfcbd9;
+}
 
-  /* .SplitScreen_content {
+.SplitScreen .tab1Act {
+  color: white;
+}
+
+.SplitScreen .tab2Default {
+  color: #bfcbd9;
+}
+
+.SplitScreen .tab2Act {
+  color: white;
+  border-bottom: 1px solid white;
+}
+
+/* 对比弹出层关闭按钮 */
+
+.SplitScreen .compareClose {
+  position: absolute;
+  right: 40px;
+  bottom: 19px;
+  z-index: 1;
+}
+
+/* 全屏  --  分屏 图标 */
+
+.SplitScreen .icon_showHalf {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  /* top: 6px; */
+  left: 9px;
+  z-index: 3;
+  background: #4099ff url('../images/backcopy.png') no-repeat center center;
+  cursor: pointer;
+}
+
+.SplitScreen .icon_FullScreen {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: url('../images/backcopy 2.png') no-repeat center center;
+  right: 17px;
+  cursor: pointer;
+}
+
+.SplitScreen .showAllList {
+  position: absolute;
+  padding-top: 2px;
+  width: 55px;
+  height: 50px;
+  left: 0;
+  top: 0;
+}
+
+/* .SplitScreen_content {
     border: 1px solid #0077ff;
     height: calc(100% - 100px);
     overflow: auto;
     padding: 13px 9px;
   } */
 
-  /* 借款人详情 */
+/* 借款人详情 */
 
-  .SplitScreen .PerDtl {
-    color: #0077ff;
-    background: white;
-    height: 30px;
-    line-height: 30px;
-    /* margin-bottom: 13px; */
-  }
+.SplitScreen .PerDtl {
+  color: #0077ff;
+  background: white;
+  height: 30px;
+  line-height: 30px;
+  /* margin-bottom: 13px; */
+}
 
-  .SplitScreen   .PerDtl span {
-    display: inline-block;
-    letter-spacing: 0.1px;
-    font-size: 12px;
-    margin-right: 15px;
-  }
+.SplitScreen .PerDtl span {
+  display: inline-block;
+  letter-spacing: 0.1px;
+  font-size: 12px;
+  margin-right: 15px;
+}
 
-  /* 左右分屏 */
+/* 左右分屏 */
 
-  .SplitScreen   .SplitScreen_wrap {
-    width: 100%;
-    height: calc( 100% - 33px);
-    min-width: 1306px;
-    position: relative;
-  }
+.SplitScreen .SplitScreen_wrap {
+  width: 100%;
+  height: calc( 100% - 33px);
+  min-width: 1306px;
+  position: relative;
+}
 
-  .SplitScreen  .left,
-  .SplitScreen   .right,
-  .SplitScreen  .AudioVisual_wrap_compare_left,
-  .SplitScreen  .AudioVisual_wrap_compare_right {
-    width: calc(50% - 2px);
-    height: 100%;
-    overflow: auto;
-    background: #ffffff;
-    border: 1px solid #bfcbd9;
-    border-radius: 4px;
-    float: left;
-    position: relative;
-  }
-  .SplitScreen  .left,
-  .SplitScreen  .right {
-    position: absolute;
-  }
+.SplitScreen .left,
+.SplitScreen .right,
+.SplitScreen .AudioVisual_wrap_compare_left,
+.SplitScreen .AudioVisual_wrap_compare_right {
+  width: calc(50% - 2px);
+  height: 100%;
+  overflow: auto;
+  background: #ffffff;
+  border: 1px solid #bfcbd9;
+  border-radius: 4px;
+  float: left;
+  position: relative;
+}
 
-  .SplitScreen  .right {
-    left: 50%;
-  }
-  .SplitScreen .content_not_split .right{
-    width:100%;
-  }
-  .SplitScreen   .content_not_split .right{
-    left: 0;
-  }
-  /* 左屏 */
+.SplitScreen .left,
+.SplitScreen .right {
+  position: absolute;
+}
 
-  /* 左侧列表  影像资料等 ul 外包   流 */
+.SplitScreen .right {
+  left: 50%;
+}
 
-  .SplitScreen  .left .Left_ul {
-    width: 110px;
-    background: rgba(31, 45, 61, 0.59);
-    box-shadow: 0 5px 20px 0 #475669;
-    position: fixed;
-    left: -110px;
-    top: 165px;
-    z-index: 10;
-    padding-top: 24px;
-  }
+.SplitScreen .content_not_split .right {
+  width: 100%;
+}
 
-  .SplitScreen  .left .Left_ul li {
-    font-size: 15px;
-    letter-spacing: 0.1px;
-    height: 21px;
-    line-height: 12px;
-    padding: 0 0 30px 20px;
-  }
+.SplitScreen .content_not_split .right {
+  left: 0;
+}
 
-  .SplitScreen  .left .Left_ul li:hover,
-  .SplitScreen   .Right_tab_ul_wrap ul li:hover {
-    cursor: pointer;
-  }
+/* 左屏 */
 
-  /* 左侧详情 div  */
+/* 左侧列表  影像资料等 ul 外包   流 */
 
-  .SplitScreen   .Left_detail_div {
-    height: 100%;
-  }
+.SplitScreen .left .Left_ul {
+  width: 110px;
+  background: rgba(31, 45, 61, 0.59);
+  box-shadow: 0 5px 20px 0 #475669;
+  position: fixed;
+  left: -110px;
+  top: 165px;
+  z-index: 10;
+  padding-top: 24px;
+}
 
-  /* 左侧详情 p标签  */
+.SplitScreen .left .Left_ul li {
+  font-size: 15px;
+  letter-spacing: 0.1px;
+  height: 21px;
+  line-height: 12px;
+  padding: 0 0 30px 20px;
+}
 
-  .SplitScreen   .Left_right_Title,
-  .SplitScreen  .right .Right_tab_title_div,
-  .SplitScreen  .AudioVisual_wrap_compare_left p,
-  .SplitScreen   .AudioVisual_wrap_compare_right p {
-    font-size: 16px;
-    text-align: center;
-    background: rgba(0, 119, 255, 0.75);
-    height: 40px;
-    line-height: 40px;
-    color: #f8f9fd;
-    overflow: hidden;
-    position: relative;
-  }
+.SplitScreen .left .Left_ul li:hover,
+.SplitScreen .Right_tab_ul_wrap ul li:hover {
+  cursor: pointer;
+}
 
-  .SplitScreen  .AudioVisual_wrap_compare_right p {
-    text-align: right;
-    padding-right: 40px;
-  }
+/* 左侧详情 div  */
 
-  /* 左侧详情 content div 内容  */
+.SplitScreen .Left_detail_div {
+  height: 100%;
+}
 
-  .SplitScreen  .Left_right_BigImg {
-    background: white;
-    height: calc( 100% - 40px);
-    overflow: auto;
-  }
+/* 左侧详情 p标签  */
 
-  /* 右侧tab切换头外的ul  */
+.SplitScreen .Left_right_Title,
+.SplitScreen .right .Right_tab_title_div,
+.SplitScreen .AudioVisual_wrap_compare_left p,
+.SplitScreen .AudioVisual_wrap_compare_right p {
+  font-size: 16px;
+  text-align: center;
+  background: rgba(0, 119, 255, 0.75);
+  height: 40px;
+  line-height: 40px;
+  color: #f8f9fd;
+  overflow: hidden;
+  position: relative;
+}
 
-  .SplitScreen  .Right_tab_ul_wrap {
-    overflow: hidden;
-    width: calc( 100% - 100px);
-    margin-left: 50px;
-  }
+.SplitScreen .AudioVisual_wrap_compare_right p {
+  text-align: right;
+  padding-right: 40px;
+}
 
-  .SplitScreen  .Right_tab_ul_wrap ul {
-    width: 1061px;
-    height: 48px;
-    position: relative;
-    text-align: left;
-    z-index: 16;
-  }
+/* 左侧详情 content div 内容  */
 
-  .SplitScreen   .Right_tab_ul_wrap ul li {
-    display: inline-block;
-    margin-right: 40px;
-    letter-spacing: 0.11px;
-    height: 38px;
-    line-height: 38px;
-  }
+.SplitScreen .Left_right_BigImg {
+  background: white;
+  height: calc( 100% - 40px);
+  overflow: auto;
+}
 
-  .SplitScreen  .tab2_Content {
-    height: calc( 100% - 40px);
-    overflow: auto;
-  }
+/* 右侧tab切换头外的ul  */
 
-  /* 右侧tab切换头 左右滑动图标  流  */
+.SplitScreen .Right_tab_ul_wrap {
+  overflow: hidden;
+  width: calc( 100% - 100px);
+  margin-left: 50px;
+}
 
-  .SplitScreen  .pre_next_btn_wrap {
-    position: absolute;
-    z-index: 2;
-    width: 25px;
-  }
+.SplitScreen .Right_tab_ul_wrap ul {
+  width: 1061px;
+  height: 48px;
+  position: relative;
+  text-align: left;
+  z-index: 16;
+}
 
-  .SplitScreen   .pre_next_btn_wrap:nth-of-type(1) {
-    left: 10px;
-  }
+.SplitScreen .Right_tab_ul_wrap ul li {
+  display: inline-block;
+  margin-right: 40px;
+  letter-spacing: 0.11px;
+  height: 38px;
+  line-height: 38px;
+}
 
-  .SplitScreen  .pre_next_btn_wrap:nth-of-type(2) {
-    right: 10px;
-  }
+.SplitScreen .tab2_Content {
+  height: calc( 100% - 40px);
+  overflow: auto;
+}
 
-  /*  对比弹出层 外包 div 流 */
+/* 右侧tab切换头 左右滑动图标  流  */
 
-  .SplitScreen  .AudioVisual_wrap_compare {
-    position: absolute;
-    top: 117px;
-    width: calc( 100% - 18px);
-    height: calc( 100% - 161px);
-    z-index: 22;
-    min-width: 1306px;
-  }
+.SplitScreen .pre_next_btn_wrap {
+  position: absolute;
+  z-index: 2;
+  width: 25px;
+}
 
-  /* 弹出层 - 两侧组件 content  流 */
+.SplitScreen .pre_next_btn_wrap:nth-of-type(1) {
+  left: 10px;
+}
 
-  .SplitScreen  .AlertContent {
-    height: calc( 100% - 48px);
-    overflow: auto;
-  }
+.SplitScreen .pre_next_btn_wrap:nth-of-type(2) {
+  right: 10px;
+}
+
+/*  对比弹出层 外包 div 流 */
+
+.SplitScreen .AudioVisual_wrap_compare {
+  position: absolute;
+  top: 117px;
+  width: calc( 100% - 18px);
+  height: calc( 100% - 161px);
+  z-index: 22;
+  min-width: 1306px;
+}
+
+/* 弹出层 - 两侧组件 content  流 */
+
+.SplitScreen .AlertContent {
+  height: calc( 100% - 48px);
+  overflow: auto;
+}
 
 /* 折叠面板title */
-.Abody .headFont{
+
+.Abody .headFont {
   font-size: 14px !important;
   font-weight: 800;
 }
-  /*查看部分  */
-  .li_width_half li{
-    width: 50%;
-    border: 2px solid red;
-  }
-  .checkedInf li{
-    float: left;
-  }
-  .checkedInf label{
-border:1px solid;
-float: left;
-text-align: right;
-  }
-  .checkedInf span{
-border:1px solid yellow;
-    
-  }
-  .label_width_200{
-    width:200px;
-  }
+
+/*查看部分  */
+
+.checkedInf {
+  /* border: 1px solid red; */
+  height: auto;
+  width: 100%;
+  padding:5px 0;
+}
+
+.checkedInf_li_width_half li {
+  width: 50%;
+  /* border: 2px solid red; */
+}
+
+.checkedInf li {
+  float: left;
+  min-width: 200px;
+  height: 24px;
+  /* margin-top: 10px; */
+}
+
+.checkedInf label {
+  /* border:1px solid greenyellow; */
+  float: left;
+  text-align: right;
+}
+
+/* 模拟文本域框 */
+
+.checkedInf .text_area_li {
+  height: 74px;
+}
+/* label字段宽度 */
+.label_width_200 {
+  width: 200px;
+}
+
+.checkedInf .text_area_span {
+  /* border:1px solid yellow; */
+  display: inline-block;
+  height: 75px;
+  overflow: auto;
+  padding-left: 10px;
+  border: 1px solid #d8dce5;
+}
+/* span输入框宽度 */
+.checkedInf .text_area_span_minus220 {
+  width: calc(100% - 220px);
+}
