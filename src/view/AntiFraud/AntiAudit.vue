@@ -27,7 +27,7 @@
             </span>
             <!-- tab 2 -=====================tab2里面的ul-->
             <div class="Right_tab_ul_wrap">
-              <ul ref="right_tab_ul" style="left:0;right:0;">
+              <ul ref="right_tab_ul" style="left:0;right:0; width: 1700px;">
                 <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="tab($event,index,val)" :class="{tab2Act:tab2Index==index}">
                   {{val}}</li>
               </ul>

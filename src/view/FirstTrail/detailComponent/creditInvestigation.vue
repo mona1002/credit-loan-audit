@@ -5,9 +5,18 @@
 			<el-collapse v-model="activeNames" @change="handleChange">
 				<el-collapse-item name="1">
 					<template slot="title">
-				      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-				      <span class="headFont">实地调查记录</span>
+							   <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">实地调查记录</span>
 				    </template>
+						<!-- <div class="checkedInf li_width_half">
+									<ul style="background:red;">
+<li> <label class="label_width_200">日期：</label><span>{{datas.creditDate}} </span> </li>
+<li> <label class="label_width_200">实地人员1：</label><span>{{bb}} </span> </li>
+<li> <label class="label_width_200">是否核对借款人有效证件：</label><span>{{datas.creditDate}} </span> </li>
+<li> <label class="label_width_200">日期：</label><span>{{datas.creditDate}} </span> </li>
+						</ul>
+						</div> -->
+				
 				    <ul class="headul">
 						<li><label>日期：</label><span>{{datas.creditDate}}</span></li>
 						<li class="reason" v-show="datas.isCheckDocTxt=='否'"><label>是否核对借款人有效证件：</label><span>{{datas.isCheckDocTxt}}</span></li>

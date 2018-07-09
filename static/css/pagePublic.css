@@ -288,6 +288,28 @@
     overflow: auto;
   }
 
-
-
-  
+/* 折叠面板title */
+.Abody .headFont{
+  font-size: 14px !important;
+  font-weight: 800;
+}
+  /*查看部分  */
+  .li_width_half li{
+    width: 50%;
+    border: 2px solid red;
+  }
+  .checkedInf li{
+    float: left;
+  }
+  .checkedInf label{
+border:1px solid;
+float: left;
+text-align: right;
+  }
+  .checkedInf span{
+border:1px solid yellow;
+    
+  }
+  .label_width_200{
+    width:200px;
+  }
