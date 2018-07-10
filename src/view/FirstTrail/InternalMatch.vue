@@ -1,58 +1,176 @@
 <template>
   <div class="internalMatch-class">
-    <!--     <internal-match-list :title="title1"></internal-match-list>
-    <internal-match-list :title="title2"></internal-match-list>
-    <internal-match-list :title="title3"></internal-match-list> -->
-    <div>
+    <el-collapse v-model="activeNames">
+      <!-- 移动电话 -->
+      <el-collapse-item name="1">
+        <template slot="title">
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">移动号码类(手机号和联系人)</span>
+          <span class="collapse_title_text internalMatch_head_tab">{{mobileTab}}</span>
+        </template>
+        <div class="height_auto">
+          <el-table :data="mobileData.recordList" border style="width: 100%;height:auto;" @row-dblclick="itemDbclickMobiel" highlight-current-row
+            v-loading="mobileLoading">
+            <el-table-column prop="targetCustName" label="命中号码姓名" width="120">
+            </el-table-column>
+            <el-table-column prop="matchTel" label="命中号码" min-width="150">
+            </el-table-column>
+            <el-table-column prop="matchTelTypeTxt" label="电话类型" width="120">
+            </el-table-column>
+            <el-table-column prop="matchApplySubNo" label="进件编号" min-width="180">
+            </el-table-column>
+            <el-table-column prop="matchApplyCustName" label="客户名称" min-width="120">
+            </el-table-column>
+            <el-table-column prop="certCode" label="身份证号" min-width="180">
+            </el-table-column>
+            <el-table-column prop="matchApplyWorkName" label="进件机构" min-width="180">
+            </el-table-column>
+            <el-table-column prop="matchApplyStateTxt" label="业务状态" min-width="140">
+            </el-table-column>
+            <el-table-column prop="remark" width="200" fit="false" class="mark-cell" label="备注" show-overflow-tooltip min-width="100">
+            </el-table-column>
+          </el-table>
+        </div>
+        <div class="block tool-bar" v-show="mobileData.totalRecord>0">
+          <el-pagination @size-change="handleSizeChangeMobile" @current-change="handleCurrentChangeMobile" :current-page="MobilePageNum"
+            :page-sizes="[5, 10, 15, 20]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="mobileData.totalRecord">
+          </el-pagination>
+        </div>
+      </el-collapse-item>
+      <!-- 固定电话 -->
+      <el-collapse-item name="2">
+        <template slot="title">
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">固定电话类(家电、单电)</span>
+          <span class="collapse_title_text internalMatch_head_tab">{{fixTelTab}}</span>
+        </template>
+        <div class="height_auto">
+          <el-table :data="fixTelData.recordList" border style="width: 100%;height:auto;" @row-dblclick="itemDbclickFixTel" highlight-current-row
+            v-loading="fixTelLoading">
+            <el-table-column prop="targetCustName" label="命中号码姓名" width="120">
+            </el-table-column>
+            <el-table-column prop="matchTel" label="命中号码" min-width="150">
+            </el-table-column>
+            <el-table-column prop="matchTelTypeTxt" label="电话类型" width="120">
+            </el-table-column>
+            <el-table-column prop="matchApplySubNo" label="进件编号" min-width="180">
+            </el-table-column>
+            <el-table-column prop="matchApplyCustName" label="客户名称" min-width="120">
+            </el-table-column>
+            <el-table-column prop="certCode" label="身份证号" min-width="180">
+            </el-table-column>
+            <el-table-column prop="matchApplyWorkName" label="进件机构" min-width="180">
+            </el-table-column>
+            <el-table-column prop="matchApplyStateTxt" label="业务状态" min-width="140">
+            </el-table-column>
+            <el-table-column prop="remark" width="200" fit="false" class="mark-cell" label="备注" show-overflow-tooltip>
+            </el-table-column>
+          </el-table>
+        </div>
+        <div class="block tool-bar" v-show="fixTelData.totalRecord>0">
+          <el-pagination @size-change="handleSizeChangeFixTel" @current-change="handleCurrentChangeFixTel" :current-page="FixTelPageNum"
+            :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="fixTelData.totalRecord">
+          </el-pagination>
+        </div>
+      </el-collapse-item>
+      <!-- 单位名称 -->
+      <el-collapse-item name="3">
+        <template slot="title">
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">单位名称</span>
+          <span class="collapse_title_text internalMatch_head_tab">{{workName}}</span>
+        </template>
+        <div class="height_auto">
+          <el-table :data="workData.recordList" border style="width: 100%;height:auto;" @row-dblclick="itemDbclickCompany" highlight-current-row
+            v-loading="companyLoading">
+            <el-table-column prop="targetCustName" label="命中号码姓名" width="120">
+            </el-table-column>
+            <el-table-column prop="applyTelTypeTxt" label="电话类型" width="120">
+            </el-table-column>
+            <el-table-column prop="matchApplySubNo" label="进件编号" min-width="180">
+            </el-table-column>
+            <el-table-column prop="matchApplyCustName" label="客户名称" min-width="120">
+            </el-table-column>
+            <el-table-column prop="certCode" label="身份证号" min-width="180">
+            </el-table-column>
+            <el-table-column prop="matchApplyWorkName" label="进件机构" min-width="180">
+            </el-table-column>
+            <el-table-column prop="matchApplyStateTxt" label="业务状态" min-width="140">
+            </el-table-column>
+            <el-table-column prop="remark" width="200" fit="false" class="mark-cell" label="备注" show-overflow-tooltip>
+            </el-table-column>
+          </el-table>
+        </div>
+        <div class="block tool-bar" v-show="workData.totalRecord>0">
+          <el-pagination @size-change="handleSizeChangeCompany" @current-change="handleCurrentChangeCompany" :current-page="CompanyPageNum"
+            :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="workData.totalRecord">
+          </el-pagination>
+        </div>
+      </el-collapse-item>
+      <!-- 匹配结论 -->
+      <el-collapse-item name="4">
+        <template slot="title">
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">匹配结论</span>
+        </template>
+        <div class="height_auto">
+   <!-- 匹配结论编辑 -->
+    <internal-match-textarea v-show="SplitS=='right'"></internal-match-textarea>
+    <!-- 匹配结论查看 -->
+    <internal-match-read v-show="SplitS!='right'"></internal-match-read>
+        </div>
+      </el-collapse-item>
+    </el-collapse>
+    <!-- 移动电话 -->
+    <!-- <div>
       <div class="title-bar">
         <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">移动号码类(手机号和联系人)</span>
         <span class="head-tab">{{mobileTab}}</span>
       </div>
-      <!-- 移动电话 -->
-      <el-table :data="mobileData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickMobiel" highlight-current-row
-        v-loading="mobileLoading">
-        <el-table-column prop="targetCustName" label="命中号码姓名" min-width="150">
-        </el-table-column>
-        <el-table-column prop="matchTel" label="命中号码" min-width="150">
-        </el-table-column>
-        <el-table-column prop="matchTelTypeTxt" label="电话类型" min-width="100">
-        </el-table-column>
-        <el-table-column prop="matchApplySubNo" label="进件编号" min-width="180">
-        </el-table-column>
-        <el-table-column prop="matchApplyCustName" label="客户名称" min-width="100">
-        </el-table-column>
-        <el-table-column prop="certCode" label="身份证号" min-width="180">
-        </el-table-column>
-        <el-table-column prop="matchApplyWorkName" label="进件机构" min-width="180">
-        </el-table-column>
-        <el-table-column prop="matchApplyStateTxt" label="业务状态" min-width="100">
-        </el-table-column>
-        <el-table-column prop="remark" width="200" fit="false" class="mark-cell" label="备注" show-overflow-tooltip min-width="100">
-        </el-table-column>
-      </el-table>
-      <div class="block tool-bar">
+      <div class="height_auto">
+        <el-table :data="mobileData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickMobiel" highlight-current-row
+          v-loading="mobileLoading">
+          <el-table-column prop="targetCustName" label="命中号码姓名" width="100">
+          </el-table-column>
+          <el-table-column prop="matchTel" label="命中号码" min-width="150">
+          </el-table-column>
+          <el-table-column prop="matchTelTypeTxt" label="电话类型" width="120">
+          </el-table-column>
+          <el-table-column prop="matchApplySubNo" label="进件编号" min-width="180">
+          </el-table-column>
+          <el-table-column prop="matchApplyCustName" label="客户名称" min-width="100">
+          </el-table-column>
+          <el-table-column prop="certCode" label="身份证号" min-width="180">
+          </el-table-column>
+          <el-table-column prop="matchApplyWorkName" label="进件机构" min-width="180">
+          </el-table-column>
+          <el-table-column prop="matchApplyStateTxt" label="业务状态" min-width="100">
+          </el-table-column>
+          <el-table-column prop="remark" width="200" fit="false" class="mark-cell" label="备注" show-overflow-tooltip min-width="100">
+          </el-table-column>
+        </el-table>
+      </div>
+      <div class="block tool-bar" v-show="mobileData.totalRecord>0">
         <el-pagination @size-change="handleSizeChangeMobile" @current-change="handleCurrentChangeMobile" :current-page="MobilePageNum"
-          :page-sizes="[5, 10, 15, 20]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="mobileData.totalRecord"
-          v-show="mobileData.totalRecord>0">
+          :page-sizes="[5, 10, 15, 20]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="mobileData.totalRecord">
         </el-pagination>
       </div>
-    </div>
+    </div> -->
     <!-- 固定电话 -->
-    <div>
+    <!-- <div>
       <div class="title-bar">
-        <!-- {{title2}} -->
         <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">固定电话类(家电、单电)</span>
         <span class="head-tab">{{fixTelTab}}</span>
       </div>
       <el-table :data="fixTelData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickFixTel" highlight-current-row
         v-loading="fixTelLoading">
-        <el-table-column prop="targetCustName" label="命中号码姓名" min-width="150">
+        <el-table-column prop="targetCustName" label="命中号码姓名" width="100">
         </el-table-column>
         <el-table-column prop="matchTel" label="命中号码" min-width="150">
         </el-table-column>
-        <el-table-column prop="matchTelTypeTxt" label="电话类型" min-width="100">
+        <el-table-column prop="matchTelTypeTxt" label="电话类型" width="120">
         </el-table-column>
         <el-table-column prop="matchApplySubNo" label="进件编号" min-width="180">
         </el-table-column>
@@ -73,20 +191,19 @@
           v-show="fixTelData.totalRecord>0">
         </el-pagination>
       </div>
-    </div>
-    <div>
+    </div> -->
+    <!-- 单位名称 -->
+    <!-- <div>
       <div class="title-bar">
-        <!-- {{title3}} -->
         <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
         <span class="headFont">单位名称</span>
         <span class="head-tab">{{workName}}</span>
       </div>
-      <!-- 单位名称 -->
       <el-table :data="workData.recordList" height="250" border style="width: 100%" @row-dblclick="itemDbclickCompany" highlight-current-row
         v-loading="companyLoading">
-        <el-table-column prop="targetCustName" label="命中号码姓名" min-width="150">
+        <el-table-column prop="targetCustName" label="命中号码姓名" width="100">
         </el-table-column>
-        <el-table-column prop="applyTelTypeTxt" label="电话类型" min-width="100">
+        <el-table-column prop="applyTelTypeTxt" label="电话类型" width="120">
         </el-table-column>
         <el-table-column prop="matchApplySubNo" label="进件编号" min-width="180">
         </el-table-column>
@@ -107,17 +224,18 @@
           v-show="workData.totalRecord>0">
         </el-pagination>
       </div>
-    </div>
+    </div> -->
     <!-- 匹配结论编辑 -->
-    <internal-match-textarea v-show="SplitS=='right'"></internal-match-textarea>
+    <!-- <internal-match-textarea v-show="SplitS=='right'"></internal-match-textarea> -->
     <!-- 匹配结论查看 -->
-    <internal-match-read v-show="SplitS!='right'"></internal-match-read>
+    <!-- <internal-match-read v-show="SplitS!='right'"></internal-match-read> -->
   </div>
 </template>
 <script>
   export default {
     data() {
       return {
+        activeNames: ['1', '2', '3', '4'],
         title1: "移动号码类(手机号和联系人)",
         title2: "固定电话类(家电、单电)",
         title3: "单位名称",
@@ -142,7 +260,7 @@
         fixTelTab: '', // 固定电话标签
         mobileTab: '', // 移动电话标签
         // MatchFlag:'internal'
-                    fixTelcustName: ''
+        fixTelcustName: ''
       };
     },
     props: ['isFull', 'SplitS'],
@@ -159,9 +277,9 @@
         // 进件编号
         this.applySubNo = applicationInformationDetail.applySubNo;
         this.workName = applicationInformationDetail.workName;
-                    console.log(applicationInformationDetail.custName)
-            this.fixTelcustName = applicationInformationDetail.custName;
-            console.log( this.fixTelcustName)
+        console.log(applicationInformationDetail.custName)
+        this.fixTelcustName = applicationInformationDetail.custName;
+        console.log(this.fixTelcustName)
         // 公司名称
         // this.workName = this.$route.query.workName;
         // 测试数据
@@ -240,7 +358,7 @@
         });
       },
       getTabByFixTel() {
-        console.log(  this.fixTelcustName)
+        console.log(this.fixTelcustName)
         // 获取固定电话类标签
         this.post('internalMatch/getTabByFixTel', {
           applySubNo: this.applySubNo,
@@ -387,10 +505,6 @@
         template: '\
         <div>\
             <el-form label-width="10px" class="demo-ruleForm">\
-            <el-form-item  class="title-bar">\
-            <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">\
-        <span class="headFont">匹配结论</span>\
-            </el-form-item>\
             <el-input type="textarea" v-model="audit_desc" class="mark-textarea" resize="none" :rows="5" :maxlength="500"></el-input>\
             <el-form-item class="mark-button">\
                 <el-button type="primary" @click="hangOoutBtn()">确认</el-button>\
@@ -398,14 +512,14 @@
             </el-form>\
         </div>\
             ',
-          // 上面com破能说-template中的弹窗
-      //                    <el-dialog title="提示" :modal="false" :visible.sync="hangOut" width="420px">\
-      //   <span>确定操作？</span>\
-      //   <span slot="footer" class="dialog-footer">\
-      //     <el-button class="calbtn" @click="canc">取消</el-button>\
-      //     <el-button class="subtn" type="primary" :loading="loadsitu" @click="Csave">{{adbtn}}</el-button>\
-      //   </span>\
-      // </el-dialog>\
+        // 上面com破能说-template中的弹窗
+        //                    <el-dialog title="提示" :modal="false" :visible.sync="hangOut" width="420px">\
+        //   <span>确定操作？</span>\
+        //   <span slot="footer" class="dialog-footer">\
+        //     <el-button class="calbtn" @click="canc">取消</el-button>\
+        //     <el-button class="subtn" type="primary" :loading="loadsitu" @click="Csave">{{adbtn}}</el-button>\
+        //   </span>\
+        // </el-dialog>\
         data() {
           return {
             mark: "",
@@ -436,7 +550,7 @@
             var applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
             this.applyId = applicationInformationDetail.applyId;
             var userInfo = JSON.parse(localStorage.getItem('userInf'));
-            this.creator_code = userInfo.userCode;            
+            this.creator_code = userInfo.userCode;
             // 获取匹配信息
             this.getOption();
           },
@@ -453,7 +567,7 @@
             // this.loadsitu = false;
             // this.adbtn = '确定';
             // this.hangOut = true;
-                     this.$confirm('确定操作？', '提示', {
+            this.$confirm('确定操作？', '提示', {
               confirmButtonText: '确定',
               type: 'warning',
               showCancelButton: false
@@ -486,7 +600,7 @@
                 // this.hangOut = false;
               } else {
                 this.resMsg = '提交失败,请重试！';
-                
+
                 // instance.confirmButtonText = '';
                 // this.hangOut = false;
               }
@@ -560,10 +674,6 @@
       "internal-match-read": {
         template: '\
             <el-form label-width="10px" class="demo-ruleForm">\
-            <el-form-item  class="title-bar">\
-            <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">\
-        <span class="headFont">匹配结论</span>\
-            </el-form-item>\
             <el-input disabled type="textarea" v-model="audit_desc" class="mark-textarea" resize="none" :rows="5" :maxlength="500"></el-input>\
             </el-form>\
             ',
@@ -616,46 +726,14 @@
 <style lang="css">
   /* 表头 */
 
-  .internalMatch-class .title-bar {
+  /* .internalMatch-class .title-bar {
     width: 100%;
     height: 38px;
     line-height: 38px;
     background: #eef0f9;
     border: 1px solid #e6eaee;
     text-indent: 10px;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  } */
   /* 分页 */
 
   .internalMatch-class .tool-bar {
@@ -664,48 +742,16 @@
     padding: 10px 0 0 10px;
     margin-bottom: 10px;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   /* 匹配结论 */
 
-  .internalMatch-class .mark-title {
+  /* .internalMatch-class .mark-title {
     width: 100%;
     margin: 0;
   }
 
   .internalMatch-class .mark-title label {
     text-align: left;
-  }
+  } */
 
   .internalMatch-class .mark-textarea {
     margin: 10px;
@@ -718,38 +764,6 @@
     width: 800px;
     margin-left: 50px;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   /* 确认按钮 */
 
   .internalMatch-class .mark-button {
@@ -759,199 +773,30 @@
     margin-left: 775px;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* 行高 */
-
-  .internalMatch-class thead tr {
-    height: 40px;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* 表头 header  */
-
-  .internalMatch-class .el-table thead tr {
-    background-color: #f5f7fa;
-    height: 56px;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* 备注 width*/
-
-  .internalMatch-class .mark-cell {
+  /* 备注 width*/  .internalMatch-class .mark-cell {
     overflow: hidden;
     overflow-wrap: break-word;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* tr */
-
-  .internalMatch-class .el-table tr {
-    height: 35px;
-    background: #ffffff;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* 折叠面板头部背景色和icon */
-
-  .internalMatch-class .icon_hat {
+  }  /* 折叠面板头部背景色和icon */  /* .internalMatch-class .icon_hat {
     padding: 9px 10px 10px 13px;
     vertical-align: middle;
   }
 
   .internalMatch-class .headFont {
     font-size: 16px;
-  }
+  } */
 
-
-  .internalMatch-class .el-table th>.cell {
+  /* .internalMatch-class .el-table th>.cell {
     text-align: center;
-  }
+  } */
 
-  .internalMatch-class .head-tab {
+  /* .internalMatch-class .head-tab {
     font-size: 14px;
     color: #2DA8E1;
+  } */
+
+  .internalMatch_head_tab {
+    color: #2DA8E1;
+    font-weight: normal;
   }
 
 </style>

@@ -376,3 +376,13 @@ table {
     vertical-align: top;
     /* margin-right:10px;  */
   }
+  /* .Abody .el-table__body-wrapper .is-scrolling-none{
+  height: auto;
+  } */
+  .common_component_width{
+    min-width:1366px;
+    height:auto;
+  }
+  .clearFloat{
+    clear: both;
+  }

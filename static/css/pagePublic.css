@@ -316,6 +316,9 @@
   width: 50%;
   /* border: 2px solid red; */
 }
+.checkedInf_li_width_triplet li{
+  width: 33.3%;
+}
 
 .checkedInf li {
   float: left;
@@ -333,13 +336,17 @@
 /* 模拟文本域框 */
 
 .checkedInf .text_area_li {
-  height: 74px;
+  height: 75px;
 }
+
 /* label字段宽度 */
 .label_width_200 {
   width: 200px;
 }
-
+.label_width_166{
+  width: 166px;
+  
+}
 .checkedInf .text_area_span {
   /* border:1px solid yellow; */
   display: inline-block;
@@ -347,10 +354,15 @@
   overflow: auto;
   padding-left: 10px;
   border: 1px solid #d8dce5;
+  border-radius:4px;
 }
 /* span输入框宽度 */
 .checkedInf .text_area_span_minus220 {
   width: calc(100% - 220px);
+}
+.checkedInf .text_area_span_minus170 {
+  width: calc(100% - 170px);
+
 }
 .title_icon span{
   /* border: 1px solid; */

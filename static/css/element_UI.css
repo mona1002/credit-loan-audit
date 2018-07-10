@@ -66,7 +66,7 @@
 
 /*申请信息详情 折叠面板头部背景色 */
 
-.applicationInformationDetail .el-collapse-item__header {
+/* .applicationInformationDetail .el-collapse-item__header {
   background: #eef0f9;
   border: 1px solid #e6eaee;
   width: 100%;
@@ -77,30 +77,30 @@
 .applicationInformationDetail .el-collapse-item__arrow {
   line-height: 38px;
   margin-right: 12px;
-}
+} */
 
 /*申请信息详情 表格 */
-
+/* 
 .applicationInformationDetail .el-table th {
   font-weight: 400;
   color: #1f2d3d;
   font-size: 14px;
-}
+} */
 
-.applicationInformationDetail .el-table th .cell {
+/* .applicationInformationDetail .el-table th .cell {
   font-weight: 800;
   color: #909399;
   font-size: 13px;
-}
+} */
 
-.applicationInformationDetail .el-table__body-wrapper .el-table__body td {
+/* .applicationInformationDetail .el-table__body-wrapper .el-table__body td {
   font-weight: 400;
   color: #909399;
   font-size: 13px;
-}
+} */
 
 /* 房产信息 邮政编码、产权比例 居中 */
-
+/* 
 .applicationInformationDetail .house.el-table th:nth-of-type(1),
 .applicationInformationDetail .house.el-table th:nth-of-type(7),
 .applicationInformationDetail .house.el-table th:nth-of-type(8) {
@@ -111,10 +111,10 @@
 .applicationInformationDetail .house .el-table__body-wrapper .el-table__body td:nth-of-type(7),
 .applicationInformationDetail .house .el-table__body-wrapper .el-table__body td:nth-of-type(8) {
   text-align: center;
-}
+} */
 
 /* 保险信息 */
-
+/* 
 .applicationInformationDetail .insur.el-table th:nth-of-type(1) {
   text-align: center;
 }
@@ -139,10 +139,10 @@
 
 .applicationInformationDetail .house .el-table__body-wrapper {
   overflow: hidden;
-}
+} */
 
 /* 车辆信息 序号、购买时间 居中 */
-
+/* 
 .applicationInformationDetail .car.el-table th:nth-of-type(1),
 .applicationInformationDetail .car.el-table th:nth-of-type(12) {
   text-align: center;
@@ -151,10 +151,10 @@
 .applicationInformationDetail .car .el-table__body-wrapper .el-table__body td:nth-of-type(1),
 .applicationInformationDetail .car .el-table__body-wrapper .el-table__body td:nth-of-type(12) {
   text-align: center;
-}
+} */
 
 /* 联系人信息 序号 居中 */
-
+/* 
 .applicationInformationDetail .people.el-table th {
   text-align: center;
 }
@@ -181,25 +181,25 @@
 
 .applicationInformationDetail .people .el-table__body-wrapper {
   overflow: hidden;
-}
+} */
 
 /*申请信息 表格去掉overflow:hidden; */
-
+/* 
 .applicationInformationDetail .el-collapse-item__wrap {
   overflow: inherit;
-}
+} */
 
 /*申请信息详情 字体颜色 */
-
+/* 
 .applicationInformationDetail .el-collapse-item__content {
   color: #475669;
   font-size: 14px;
   padding-bottom: 0px;
-}
+} */
 
 /*申请信息详情 维护日志弹窗 */
 
-.applicationInformationDetail .weihurizhi .el-dialog__body {
+/* .applicationInformationDetail .weihurizhi .el-dialog__body {
   padding: 0 20px;
 }
 
@@ -213,7 +213,7 @@
 
 .applicationInformationDetail .weihurizhi .el-table__body-wrapper .el-table__body td {
   text-align: center;
-}
+} */
 
 /*借款人资料 折叠面板头部背景色 */
 
@@ -942,8 +942,7 @@ height: auto !important;
 
 /* 信审表+反欺诈结论-上网查询等-content 左边距*/
 
-.CreditForm .el-collapse-item__wrap,
-.aAntiApplyInf .el-collapse-item__wrap {
+.CreditForm .el-collapse-item__wrap{
   padding: 0px 0 0px 21px;
 }
 
@@ -955,7 +954,6 @@ height: auto !important;
 /* 信审表+反欺诈结论（初审+终审） ----各个  title 一行 */
 
 .CreditForm .el-collapse-item__header,
-.aAntiApplyInf .el-collapse-item__header,
 /* .regularQT .el-collapse-item__header, */
 
 .SSComp .el-collapse-item__header {
@@ -972,7 +970,6 @@ height: auto !important;
 /* 信审表 ----各个  title 小帽子部分 */
 
 .CreditForm .el-collapse-item,
-.aAntiApplyInf .el-collapse-item,
 /* .regularQT .el-collapse-item, */
 
 .SSComp .el-collapse-item {
@@ -1294,9 +1291,9 @@ height: auto !important;
 
 /* 复议申请-最后一个折叠div border-bottom */
 
-.aAntiApplyInf .el-collapse-item:last-of-type .el-collapse-item__wrap {
+/* .aAntiApplyInf .el-collapse-item:last-of-type .el-collapse-item__wrap {
   border-bottom: none;
-}
+} */
 
 /* 任务管理-复议管理 */
 
@@ -2500,17 +2497,18 @@ body .el-menu--horizontal .el-menu .el-menu-item,
 }
 
 /* 内部匹配表格字体字号修改 */
-
+/* 
 .internalMatch-class .el-table th .cell {
   font-weight: 800;
   color: #909399;
   font-size: 13px;
-}
+} */
 
-.internalMatch-class .el-table__body-wrapper .el-table__body td {
+/* .internalMatch-class .el-table__body-wrapper .el-table__body td {
   color: #909399;
   font-size: 13px;
-}
+} */
+
 
 /* 反欺诈审批结论 流程轨迹 表格字号，颜色调整 */
 
@@ -2542,10 +2540,10 @@ body .el-menu--horizontal .el-menu .el-menu-item,
   width: 200px;
 } */
 
-.aAntiApplyInf .ccccc {
+/* .aAntiApplyInf .ccccc {
   width: 800px;
   vertical-align: top;
-}
+} */
 
 /* 
 .regularQT .el-collapse-item__wrap {
@@ -2673,3 +2671,6 @@ body .el-menu--horizontal .el-menu .el-menu-item,
 .Abody .el-collapse-item__header{
   
 }
+.table_height_auto el-table__body-wrapper is-scrolling-none{
+  height:auto
+    }

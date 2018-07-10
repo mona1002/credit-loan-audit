@@ -334,7 +334,9 @@
  .Abody .el-table th {
    padding: 0px !important;
  }
-
+ .Abody .height_auto .el-table{
+height:auto !important;
+ }
  /* 操作按钮 */
 
  .Abody .el-table .btn-sm {
