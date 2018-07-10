@@ -1,7 +1,88 @@
 <!-- 反欺诈申请 - - 详情编辑页面  菜单进入 -->
 <template>
   <div date="AntiApplyInf" class="anti-apply-edit-class">
-    <myHead class="top"></myHead>
+    <!-- <el-collapse v-model="activeName">
+      <el-collapse-item name='1'>
+        <template slot="title">
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">基本信息</span>
+        </template>
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
+          <ul>
+            <li>
+              <label class="label_width_190">
+                <i class="required_Red">* </i>进件编号：</label>
+              <span style="display:inline-block;width:160px">{{applySubNo}}</span>
+              <el-button icon="el-icon-search" style="width: 30px;height: 30px;" @click="coverFn('shwoList')"></el-button>
+            </li>
+            <li>
+              <label class="label_width_190">客户名称：</label>
+              <span>{{applyCustName}}</span>
+            </li>
+            <li>
+              <label class="label_width_190">证件类型：</label>
+              <span>{{certTypeTxt}}</span>
+            </li>
+            <li>
+              <label class="label_width_190">证件号码：</label>
+              <span>{{certCode}}</span>
+            </li>
+            <li>
+              <label class="label_width_190">移动电话：</label>
+              <span>{{mobile}}</span>
+            </li>
+          </ul>
+        </div>
+      </el-collapse-item>
+      <el-collapse-item name='2'>
+        <template slot="title">
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">反欺诈申请信息</span>
+        </template>
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
+          <ul>
+            <li class="inputInf">
+              <label class="label_width_190">
+                <i class="required_Red">* </i>反欺诈申请类型主原因：</label>
+              <span>
+                <el-select @change="mainselectChange" v-model="mainReason">
+                  <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
+                  </el-option>
+                </el-select>
+              </span>
+            </li>
+            <li class="inputInf">
+              <label class="label_width_190">子原因：</label>
+              <span>
+                <el-select @change="secondselectChange" v-model="secondReason">
+                  <el-option v-for="item in secondReasons" :key="item.id" :label="item.reasonName" :value="item">
+                  </el-option>
+                </el-select>
+              </span>
+            </li>
+            <li class="text_area_li_5rows triplet_textarea_width" style="margin-top:5px;">
+              <label class="label_width_190">
+                <i class="required_Red">* </i>欺诈上报描述：</label>
+              <span>
+                <el-input v-model="applyDesc" style='width:calc( 50% + 170px);' type="textarea" :rows="5" resize=none :maxlength="500"></el-input>
+              </span>
+            </li>
+            <li class='clearFloat'>
+              <label class="label_width_190">反欺诈申请人：</label>
+              <span>{{userCode}}</span>
+            </li>
+            <li>
+              <label class="label_width_190">反欺诈申请日期：</label>
+              <span> {{dealroperDate | dateFilter}}</span>
+            </li>
+            <li>
+              <label class="label_width_190">反欺诈申请机构：</label>
+              <span> {{orgCode}}</span>
+            </li>
+          </ul>
+        </div>
+      </el-collapse-item>
+    </el-collapse> -->
     <div>
       <!-- 反欺诈申请信息=========================默认显示1-条？分页？ -->
       <div class="address-title">
@@ -112,11 +193,7 @@
   </div>
 </template>
 <script>
-  import myHead from "../header.vue"
   export default {
-    components: {
-      myHead
-    },
     data() {
       return {
 
@@ -170,96 +247,96 @@
       }
     },
     mounted() {
-     this.mountedInf();
+      this.mountedInf();
     },
     methods: {
-      mountedInf(){
-   // 经办人 登录用户名
-      var userInfo = JSON.parse(localStorage.getItem('userInf'));
-      this.userCode = userInfo.userCode;
-      this.orgCode = userInfo.orgCode;
-      // 先判断是 初审 终审  /  专员  主管
-      // var judgeFlag = JSON.parse(localStorage.getItem('judge'));
-      // this.antiFlag = judgeFlag.flag;
+      mountedInf() {
+        // 经办人 登录用户名
+        var userInfo = JSON.parse(localStorage.getItem('userInf'));
+        this.userCode = userInfo.userCode;
+        this.orgCode = userInfo.orgCode;
+        // 先判断是 初审 终审  /  专员  主管
+        // var judgeFlag = JSON.parse(localStorage.getItem('judge'));
+        // this.antiFlag = judgeFlag.flag;
 
-      // 初审 终审 取 applyId
-      // if (this.antiFlag == '01' || this.antiFlag == '02') {
-      //   // 先取到 id , 请求 反欺诈 页面信息
-      //   // var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-      //   // this.id = taskInWaitting.applyId;
-      //   this.id = this.$route.params.id;
-      //   console.log(this.$route.params.id)
-      //   // 查询反欺诈信息
-      //   this.getFraudApplyInfo();
+        // 初审 终审 取 applyId
+        // if (this.antiFlag == '01' || this.antiFlag == '02') {
+        //   // 先取到 id , 请求 反欺诈 页面信息
+        //   // var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
+        //   // this.id = taskInWaitting.applyId;
+        //   this.id = this.$route.params.id;
+        //   console.log(this.$route.params.id)
+        //   // 查询反欺诈信息
+        //   this.getFraudApplyInfo();
 
-      // if (this.antiFlag == '01') {
+        // if (this.antiFlag == '01') {
 
-      //   // taskInWaitting
-      //   this.creditappTaskid = JSON.parse(localStorage.getItem('taskInWaitting')).taskId;
-      // } else if (this.antiFlag == '02') {
-      //   // FtaskInWaitting
-      //   this.creditappTaskid = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskId;
-      // }
-      // // }
-      // // 专员/主管 不跳  反欺诈 编辑页面
-      // // else if (this.antiFlag == '03' || this.antiFlag == '04') { // 其他取 列表id
-      // //   console.log(' 主管/专员 ');
-      // //   this.id = this.$route.params.id;
-      // if (this.antiFlag == '03') {
-      //   // AntitaskInWaitting
-      //   this.creditappTaskid = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
-      //   console.log('creditappTaskid===', this.creditappTaskid)
-      // } else if (this.antiFlag == '04') {
-      //   // AntiManagertaskInWaitting
-      //   this.creditappTaskid = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
-      // }
+        //   // taskInWaitting
+        //   this.creditappTaskid = JSON.parse(localStorage.getItem('taskInWaitting')).taskId;
+        // } else if (this.antiFlag == '02') {
+        //   // FtaskInWaitting
+        //   this.creditappTaskid = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskId;
+        // }
+        // // }
+        // // 专员/主管 不跳  反欺诈 编辑页面
+        // // else if (this.antiFlag == '03' || this.antiFlag == '04') { // 其他取 列表id
+        // //   console.log(' 主管/专员 ');
+        // //   this.id = this.$route.params.id;
+        // if (this.antiFlag == '03') {
+        //   // AntitaskInWaitting
+        //   this.creditappTaskid = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
+        //   console.log('creditappTaskid===', this.creditappTaskid)
+        // } else if (this.antiFlag == '04') {
+        //   // AntiManagertaskInWaitting
+        //   this.creditappTaskid = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
+        // }
 
-      // // 05 复议专员  06 复议主管
-      // if (this.antiFlag == '05' || this.antiFlag == '06') {
-      //   this.creditappTaskid = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
-      // }
+        // // 05 复议专员  06 复议主管
+        // if (this.antiFlag == '05' || this.antiFlag == '06') {
+        //   this.creditappTaskid = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
+        // }
 
 
-      //   this.getFraudApplyInfoWithOpinionById();
-      // }
-      var stateParms = JSON.parse(localStorage.getItem('antiApplyFlagEdit')).split(';');
-      for (var i = 0; i < stateParms.length; i++) {
-        stateParms[i] = stateParms[i].split('=');
-      }
-      this.routeId = stateParms[0][1];
-      this.routeFlag = stateParms[1][1];
-      // this.routeBusiState = stateParms[2][1];//如需此入参
-      // 获取到 id
-      this.id = this.$route.params.id || this.routeId;
-      /* 标志  
-       start 发起反欺诈
-       edit  编辑
-       add   添加 
-       */
-      // var pars='';
-      // var pars=this.$route.fullPath.split('?')[1].split('=')[1];
-      this.flag = this.$route.params.flag || this.routeFlag;
-      // 获取到 id
-      // this.applyId =this.$route.params.id||pars;
-      this.applyId = this.$route.params.id || this.routeId;
+        //   this.getFraudApplyInfoWithOpinionById();
+        // }
+        var stateParms = JSON.parse(localStorage.getItem('antiApplyFlagEdit')).split(';');
+        for (var i = 0; i < stateParms.length; i++) {
+          stateParms[i] = stateParms[i].split('=');
+        }
+        this.routeId = stateParms[0][1];
+        this.routeFlag = stateParms[1][1];
+        // this.routeBusiState = stateParms[2][1];//如需此入参
+        // 获取到 id
+        this.id = this.$route.params.id || this.routeId;
+        /* 标志  
+         start 发起反欺诈
+         edit  编辑
+         add   添加 
+         */
+        // var pars='';
+        // var pars=this.$route.fullPath.split('?')[1].split('=')[1];
+        this.flag = this.$route.params.flag || this.routeFlag;
+        // 获取到 id
+        // this.applyId =this.$route.params.id||pars;
+        this.applyId = this.$route.params.id || this.routeId;
 
-      if (this.flag == 'start') {
-        this.getFraudApplyInfo();
-      } else if (this.flag == 'edit') {
-        this.getFraudApplyInfoWithOpinionById();
-      }
+        if (this.flag == 'start') {
+          this.getFraudApplyInfo();
+        } else if (this.flag == 'edit') {
+          this.getFraudApplyInfoWithOpinionById();
+        }
 
-      // 请求系统时间
-      this.getSystemDate();
+        // 请求系统时间
+        this.getSystemDate();
 
-      // 请求主原因
-      this.firstNodeReason();
+        // 请求主原因
+        this.firstNodeReason();
 
       },
       // 请求系统时间
       getSystemDate() {
         // 获取系统时间
-        this.get('system/getSystemDate?'+Math.random()).then(res => {
+        this.get('system/getSystemDate?' + Math.random()).then(res => {
           console.log('回退', res)
           // 请求系统时间
           this.dealroperDate = res.data;
@@ -267,7 +344,7 @@
       },
       // 反欺诈申请 获取 主原因子原因
       firstNodeReason() {
-        this.get('/credit/firstNodeReason?reasonType=' + '08,09'+'&'+Math.random()).then(res => {
+        this.get('/credit/firstNodeReason?reasonType=' + '08,09' + '&' + Math.random()).then(res => {
           this.mainReasons = res.data;
           // 请求回来的 赋值
           this.mainReason = this.mainReasonT;
@@ -498,7 +575,7 @@
       // 获取子原因
       findNodeFirstChildren(val) {
         // 请求子原因
-        this.get('/credit/findNodeFirstChildren?id=' + val+'&'+Math.random()).then(res => {
+        this.get('/credit/findNodeFirstChildren?id=' + val + '&' + Math.random()).then(res => {
           console.log(res);
           if (res.statusCode == '200') {
             this.secondReasons = res.data;

@@ -306,7 +306,6 @@
 /*查看部分  */
 
 .checkedInf {
-  /* border: 1px solid red; */
   height: auto;
   width: 100%;
   padding:5px 0;
@@ -314,7 +313,6 @@
 
 .checkedInf_li_width_half li {
   width: 50%;
-  /* border: 2px solid red; */
 }
 .checkedInf_li_width_triplet li{
   width: 33.3%;
@@ -324,35 +322,30 @@
   float: left;
   min-width: 200px;
   height: 24px;
-  /* margin-top: 10px; */
 }
 
 .checkedInf label {
-  /* border:1px solid greenyellow; */
   float: left;
   text-align: right;
 }
-
+/* span部分 */
+.checkedInf .text_area_span_minus220 {
+  width: calc(100% - 220px);
+}
+.checkedInf .text_area_span_minus170 {
+  width: calc(100% - 170px);
+}
 /* 模拟文本域框 */
 
 .checkedInf .text_area_li {
   height: 75px;
 }
+.checkedInf .text_area_li_5rows {
+  height: 120px;
+}
 .checkedInf .triplet_textarea_width{
   width:66.6%;
-}
-/* label字段宽度 */
-.label_width_200 {
-  width: 200px;
-}
-.label_width_166{
-  width: 166px;
-}
-.label_width_130{
-  width: 130px;
-}
-.checkedInf .text_area_span {
-  /* border:1px solid yellow; */
+}.checkedInf .text_area_span {
   display: inline-block;
   height: 75px;
   overflow: auto;
@@ -360,18 +353,25 @@
   border: 1px solid #d8dce5;
   border-radius:4px;
 }
-/* span输入框宽度 */
-.checkedInf .text_area_span_minus220 {
-  width: calc(100% - 220px);
+/* 编辑-带输入框部分 */
+.checkedInf .inputInf{
+height: 35px;
+line-height: 35px;
 }
-.checkedInf .text_area_span_minus170 {
-  width: calc(100% - 170px);
-
+/* label字段宽度 */
+.label_width_200 {
+  width: 200px;
 }
-.title_icon span{
-  /* border: 1px solid; */
-  
+.label_width_190{
+  width: 190px;
 }
+.label_width_166{
+  width: 166px;
+}
+.label_width_130{
+  width: 130px;
+}
+ 
 /* 借款人资料 */
 .borrowerInformationSetail {
   width: 100%;

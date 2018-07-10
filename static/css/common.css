@@ -204,7 +204,7 @@ textarea {
 }
 .Abody{
   width: 100%;
-  height: 100%;
+  height:calc( 100% -90px);
   background-color: #ffffff;
 }
 table {
@@ -296,7 +296,11 @@ table {
   position: absolute;
   top: -20px;
 }
-
+.submitPage_button{
+  margin-top:100px;
+  width:90%;
+text-align: right;
+}
 .brk {
   white-space: pre-wrap;
 }
@@ -314,7 +318,6 @@ table {
 }
 
 /* new */
-
 .approve_btn_area {
   clear: both;
   height: 40px;
@@ -357,7 +360,6 @@ table {
 }
 /* title按钮 */
 .Abody .title_icon{
-  /* border: 1px solid red; */
   float: right;
   height: 30px;
   margin-right:15px;
@@ -375,17 +377,18 @@ table {
     font-size: 14px;
     color: #1f2d3d;
     vertical-align: top;
-    /* margin-right:10px;  */
   }
-  /* .Abody .el-table__body-wrapper .is-scrolling-none{
-  height: auto;
-  } */
+
   .common_component_width{
     min-width:1366px;
     height:auto;
     background: #ffffff;
   }
-
+.common_component_height{
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+}
   .clearFloat{
     clear: both;
   }

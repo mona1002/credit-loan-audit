@@ -43,11 +43,9 @@
             <PhoneCredit v-if=" this.tabContent2==5" :addBtn="false"></PhoneCredit>
             <AntiCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></AntiCreditForm>
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
-            <!-- 信审审批结论轨迹 -->
             <aAprovalConclusion v-if=" this.tabContent2==8"></aAprovalConclusion>
-            <!-- 反欺诈审批结论轨迹 -->
             <aAntiConclusionPath v-if=" this.tabContent2==9"></aAntiConclusionPath>
-            <AntiApplyInf v-if=" this.tabContent2==10" :isAntiDetail="true">反欺诈申请信息</AntiApplyInf>
+            <AntiApplyInf v-if=" this.tabContent2==10" >反欺诈申请信息</AntiApplyInf>
             <aAntiFraudInvestigation v-if=" this.tabContent2==11">反欺诈调查</aAntiFraudInvestigation>
             <approvalConclus v-if=" this.tabContent2==12">审批结论</approvalConclus>
           </div>

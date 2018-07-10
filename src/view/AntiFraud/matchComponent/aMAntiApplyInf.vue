@@ -1,6 +1,6 @@
 <template>
   <div class="aAntiApplyInf">
-    <!-- 反欺诈结论 -->
+    <!-- 反欺诈结论-内匹详情，质检，综合查询详情用==改为传值，此页面上线之后待删除 -->
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
@@ -8,8 +8,7 @@
           <span class="headFont">基本信息</span>
         </template>
         <div class="baseInf">
-          <!-- <ul>
-            <li> -->
+
           <p>
             <label>进件编号： </label>
             <span>{{applyInfoPool.applySubno}} </span>
@@ -18,8 +17,7 @@
             <label>证件号码： </label>
             <span>{{applyInfoPool.certCode}} </span>
           </p>
-          <!-- </li>
-            <li> -->
+          
           <p>
             <label>客户名称： </label>
             <span>{{applyInfoPool.custName}} </span>
@@ -28,14 +26,11 @@
             <label>移动电话： </label>
             <span>{{applyInfoPool.mobile}} </span>
           </p>
-          <!-- </li>
-            <li> -->
+          
           <p>
             <label>证件类型： </label>
             <span>{{applyInfoPool.certTypeTxt}} </span>
           </p>
-          <!-- </li>
-          </ul> -->
         </div>
       </el-collapse-item>
       <el-collapse-item name="2">

@@ -1,126 +1,97 @@
 <!-- 反欺诈申请 - - 详情编辑页面 初审/终审 发起反欺诈-->
 <template>
-  <div date="AntiApplyInf" class="anti-apply-edit-class">
-    <myHead class="top"></myHead>
-    <div>
-      <!-- 反欺诈申请信息=========================默认显示1-条？分页？ -->
-      <div class="address-title">
-        <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-        <span class="headFont">基本信息</span>
-      </div>
-      <div class="header-area" style="padding-left:20px;">
-        <li class="item-column3">
-          <div class="left-title">
-            进件编号：
-          </div>
-          <div class="item-content">
-            {{applySubno}}
-          </div>
-        </li>
-        <li class="item-column3">
-          <div class="left-title">
-            客户名称：
-          </div>
-          <div class="item-content">
-            {{applyCustName}}
-          </div>
-        </li>
-        <li class="item-column3">
-          <div class="left-title">
-            证件类型：
-          </div>
-          <div class="item-content">
-            {{certTypeTxt}}
-          </div>
-        </li>
-        <li class="item-column3">
-          <div class="left-title">
-            证件号码：
-          </div>
-          <div class="item-content">
-            {{certCode}}
-          </div>
-        </li>
-        <li class="item-column3">
-          <div class="left-title">
-            移动电话：
-          </div>
-          <div class="item-content">
-            {{mobile}}
-          </div>
-        </li>
-      </div>
-      <div class="address-title">
-        <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-        <span class="headFont">反欺诈申请信息</span>
-      </div>
-      <!-- 反欺诈神效信息 表单 -->
-      <ul style="padding-left:20px;">
-        <li class="item-column3">
-          <div class="left-title left-title2">
-            <span class="require-icon" style="left:0px;top:-5px;">*</span> 反欺诈申请类型主原因：
-          </div>
-          <div>
-            <el-select @change="mainselectChange" v-model="mainReason">
-              <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
-              </el-option>
-            </el-select>
-          </div>
-        </li>
-        <li class="item-column3">
-          <div class="left-title">
-            子原因：
-          </div>
-          <el-select @change="secondselectChange" v-model="secondReason">
-            <el-option v-for="item in secondReasons" :key="item.id" :label="item.reasonName" :value="item">
-            </el-option>
-          </el-select>
-        </li>
-        <li class="item-column1">
-          <div class="left-title">
-            <span class="require-icon" style="left:15px;">*</span>欺诈上报描述：</div>
-          <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
-            <div class="textarea-class">
-              <el-input v-model="applyDesc" type="textarea" :rows="5" resize=none :maxlength="500"></el-input>
-            </div>
-          </el-tooltip>
-        </li>
-        <li class="item-column3">
-          <div class="left-title ">反欺诈申请人：</div>
-          <div class="item-content">
-            {{userCode}}
-          </div>
-        </li>
-        <li class="item-column3">
-          <div class="left-title ">反欺诈申请日期：</div>
-          <div class="item-content">
-            {{dealroperDate | dateFilter}}
-          </div>
-        </li>
-        <li class="item-column3">
-          <div class="left-title ">反欺诈申请机构：</div>
-          <div class="item-content">
-            {{orgCode}}
-          </div>
-        </li>
-        <li class="item-column1 submit-class">
-          <el-button plain @click="backRoute()">取消</el-button>
-          <el-button type="primary" @click="submitForm('form')">提交</el-button>
-        </li>
-      </ul>
+  <div date="AntiApplyInf">
+    <el-collapse v-model="activeName">
+      <el-collapse-item name='1'>
+        <template slot="title">
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">基本信息</span>
+        </template>
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
+          <ul>
+            <li>
+              <label class="label_width_190">进件编号：</label>
+              <span>{{applySubno}}</span>
+            </li>
+            <li>
+              <label class="label_width_190">客户名称：</label>
+              <span>{{applyCustName}}</span>
+            </li>
+            <li>
+              <label class="label_width_190">证件类型：</label>
+              <span>{{certTypeTxt}}</span>
+            </li>
+            <li>
+              <label class="label_width_190">证件号码：</label>
+              <span>{{certCode}}</span>
+            </li>
+            <li>
+              <label class="label_width_190">移动电话：</label>
+              <span>{{mobile}}</span>
+            </li>
+          </ul>
+        </div>
+      </el-collapse-item>
+      <el-collapse-item name='2'>
+        <template slot="title">
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">反欺诈申请信息</span>
+        </template>
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
+          <ul>
+            <li class="inputInf">
+              <label class="label_width_190">
+                <i class="required_Red">* </i>反欺诈申请类型主原因：</label>
+              <span>
+                <el-select @change="mainselectChange" v-model="mainReason">
+                  <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
+                  </el-option>
+                </el-select>
+              </span>
+            </li>
+            <li class="inputInf">
+              <label class="label_width_190">子原因：</label>
+              <span>
+                <el-select @change="secondselectChange" v-model="secondReason">
+                  <el-option v-for="item in secondReasons" :key="item.id" :label="item.reasonName" :value="item">
+                  </el-option>
+                </el-select>
+              </span>
+            </li>
+            <li class="text_area_li_5rows triplet_textarea_width" style="margin-top:5px;">
+              <label class="label_width_190">
+                <i class="required_Red">* </i>欺诈上报描述：</label>
+              <span>
+                <el-input v-model="applyDesc" style='width:calc( 50% + 170px);' type="textarea" :rows="5" resize=none :maxlength="500"></el-input>
+              </span>
+            </li>
+            <li class='clearFloat'>
+              <label class="label_width_190">反欺诈申请人：</label>
+              <span>{{userCode}}</span>
+            </li>
+            <li>
+              <label class="label_width_190">反欺诈申请日期：</label>
+              <span> {{dealroperDate | dateFilter}}</span>
+            </li>
+            <li>
+              <label class="label_width_190">反欺诈申请机构：</label>
+              <span> {{orgCode}}</span>
+            </li>
+          </ul>
+        </div>
+      </el-collapse-item>
+    </el-collapse>
+    <div class="submitPage_button">
+      <el-button plain @click="backRoute()">取消</el-button>
+      <el-button type="primary" @click="submitForm('form')">提交</el-button>
     </div>
   </div>
 </template>
 <script>
-  import myHead from "../header.vue"
   export default {
-    components: {
-      myHead
-    },
     data() {
       return {
-
-        // isFull: true, // 全屏
+        activeName: ['1', '2'],
         creditappTaskid: '', // 任务id
         userCode: '', // 用户编号
         orgCode: '', // 机构编号
@@ -169,9 +140,9 @@
         if (to.path === '/AntiApplyEditf') {
           this.mountedInf();
           //编辑部分清空
-          this.mainReason='';
-          this.secondReason='';
-          this.applyDesc='';
+          this.mainReason = '';
+          this.secondReason = '';
+          this.applyDesc = '';
         }
       }
     },
@@ -547,284 +518,3 @@
   }
 
 </script>
-<style>
-  .anti-apply-edit-class {
-    width: 100%;
-    height: 100%;
-    background: #fff;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* 一列 */
-
-  .anti-apply-edit-class .item-column1 {
-    /*width: 100%;*/
-    min-width: 1366px;
-    float: left;
-    /*max-width: 1366px;*/
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* 两列 */
-
-  .anti-apply-edit-class .item-column2 {
-    width: 50%;
-    min-width: 450px;
-    float: left;
-    margin: 0;
-    min-height: 50px;
-    margin-bottom: 10px;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* 三列 */
-
-  .anti-apply-edit-class .item-column3 {
-    width: 33%;
-    min-width: 350px;
-    float: left;
-    margin: 0;
-    margin-bottom: 10px;
-    /*border: 1px solid;*/
-    /*min-width: 300px;*/
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* 折叠面板头部背景色和icon */
-
-  .anti-apply-edit-class .icon_hat {
-    padding: 10px 10px 10px 13px;
-    vertical-align: middle;
-  }
-
-  .anti-apply-edit-class .headFont {
-    font-size: 16px;
-  }
-
-
-  .anti-apply-edit-class .address-title {
-    width: 100%;
-    height: 35px;
-    font-size: 18px;
-    background: #ededed;
-    display: block;
-    margin-bottom: 10px;
-    overflow: hidden;
-    background: #eef0f9;
-    border: 1px solid #e6eaee;
-    height: 38px;
-    width: 100%;
-    font-size: 16px;
-    color: #1f2d3d;
-    text-align: left;
-    vertical-align: middle;
-    line-height: 40px;
-  }
-
-
-  .anti-apply-edit-class .header-area {
-    width: 100%;
-    height: auto;
-  }
-
-  .anti-apply-edit-class .left-title {
-    float: left;
-    width: 130px;
-    line-height: 30px;
-    min-height: 30px;
-    padding-right: 10px;
-    text-align: right;
-    font-size: 14px;
-  }
-
-  .anti-apply-edit-class .left-title2 {
-    line-height: 20px;
-  }
-
-  .anti-apply-edit-class .item-content {
-    float: left;
-    width: calc( 100% - 130px);
-    height: 30px;
-    line-height: 30px;
-    text-align: left;
-    font-size: 14px;
-  }
-
-  .anti-apply-edit-class li .textarea-class {
-    height: auto;
-    float: left;
-    /*width: 795px;*/
-    /*min-width: 300px;*/
-    min-width: 400px;
-    padding-bottom: 10px;
-    width: calc(66% - 195px);
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* 必填 * */
-
-  .anti-apply-edit-class .require-icon {
-    color: #ff0000;
-    display: inline-block;
-    width: 0px;
-    float: left;
-    left: 38px;
-    line-height: 35px;
-    position: relative;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* 提交按钮 */
-
-  .anti-apply-edit-class .submit-class {
-    margin-top: 50px;
-    /*margin-left: calc( 66% - 140px);*/
-    width: calc(66% - 500px);
-    text-align: right;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*.anti-apply-edit-class .el-input{
-  width: 100%;
-}*/
-
-</style>
