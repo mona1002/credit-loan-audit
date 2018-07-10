@@ -78,7 +78,7 @@
             <PhoneCredit ref="phone" v-if=" this.tabContent2==5" :SplitS="SplitRight" :isFull.sync="isFull" :addBtn="true"></PhoneCredit>
             <CreditForm ref="CreditForm" :myWatch="watchData" v-if=" this.tabContent2==6"></CreditForm>
             <creditInvestigation ref="Investigation" v-if=" this.tabContent2==7"></creditInvestigation>
-            <aAntiApplyInf ref="AntiApply" v-if=" this.tabContent2==8"></aAntiApplyInf>
+            <aAntiApplyInf ref="AntiApply" v-if=" this.tabContent2==8" :applyId='tastwaitingPass.applyId'></aAntiApplyInf>
             <CreditApproval ref="Approval" v-if=" this.tabContent2==9"></CreditApproval>
           </div>
         </div>
@@ -123,6 +123,7 @@
   import PhoneCredit from "./PhoneCredit";
   import CreditForm from "./detailComponent/CreditForm";
   import creditInvestigation from "./detailComponent/creditInvestigation"; //实地征信
+  // import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf' //反欺诈结论  
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf' //反欺诈结论  
   import CreditApproval from "./CreditApproval";
   // 查询

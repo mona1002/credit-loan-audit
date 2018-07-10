@@ -1,13 +1,98 @@
 <!-- 信审 - 审批 -->
 <template>
   <!-- <div class="creditApproval-class"> -->
-  <div class="  taskWatting  creditApproval-class">
-    <div class="address-title">
-      <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-      <span class="headFont">概要信息</span>
-      <!-- {{title1}} -->
-    </div>
-    <el-form style="padding:0 20px;width:100%; height:150px; " class="info">
+  <div class="common_component_width creditApproval-class">
+    <el-collapse v-model="activeName">
+      <el-collapse-item name="1">
+        <template slot="title">
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">概要信息</span>
+        </template>
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
+          <ul>
+            <li>
+              <label class="label_width_130">客户名称：</label>
+              <span>{{custName}}</span>
+            </li>
+            <li>
+              <label class="label_width_130">申请类型：</label>
+              <span>{{appTypeTxt}}</span>
+            </li>
+            <li>
+              <label class="label_width_130">进件编号：</label>
+              <span>{{applySubNo}}</span>
+            </li>
+            <li>
+              <label class="label_width_130">证件类型：</label>
+              <span>{{certTypeTxt}}</span>
+            </li>
+            <li>
+              <label class="label_width_130">证件号码：</label>
+              <span>{{certCode}}</span>
+            </li>
+            <li>
+              <label class="label_width_130">产品名称：</label>
+              <span>{{baseProName}}</span>
+            </li>
+            <li>
+              <label class="label_width_130">申请期限[月]：</label>
+              <span>{{loanTerm}}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="approve_btn_area approve_btn_area_width_950" style="margin-top:100px;">
+          <span class="approve_item" @click="hangOoutBtn">
+            <i class="approve_icon HangUpIcon"></i>
+            <span class="approve_text">挂起</span>
+          </span>
+          <span class="approve_item" @click="coverFn('02')">
+            <i class="approve_icon backIcon"></i>
+            <span class="approve_text">回退</span>
+          </span>
+          <span class="approve_item" v-show="judgeFlag == '01' && jujueBtnShow" @click="coverFn('01')">
+            <i class="approve_icon rejectIcon"></i>
+            <span class="approve_text">拒绝</span>
+          </span>
+          <span class="approve_item" v-show="judgeFlag!='01'" @click="coverFn('01')">
+            <i class="approve_icon rejectIcon"></i>
+            <span class="approve_text">拒绝</span>
+          </span>
+          <span class="approve_item" @click="coverFn('07')">
+            <i class="approve_icon giveUpIcon"></i>
+            <span class="approve_text">放弃</span>
+          </span>
+          <span class="approve_item" @click="coverFn('03')">
+            <i class="approve_icon appro"></i>
+            <span class="approve_text">审批</span>
+          </span>
+          <span class="approve_item" @click="coverFn('fqz')">
+            <i class="approve_icon faqi"></i>
+            <span class="approve_text">发起反欺诈</span>
+          </span>
+          <span class="approve_item" @click="coverFn('spjl')">
+            <i class="approve_icon lineChartIcon"></i>
+            <span class="approve_text">审批结论轨迹</span>
+          </span>
+          <span class="approve_item" @click="coverFn('lcgj')">
+            <i class="approve_icon liuchengIcon"></i>
+            <span class="approve_text">流程轨迹</span>
+          </span>
+          <span class="approve_item" @click="tobigData">
+            <i class="approve_icon brokenLineIcon"></i>
+            <span class="approve_text">大数据风控</span>
+          </span>
+          <span class="approve_item" @click="roSocialSecurity">
+            <i class="approve_icon dataMaptIcon"></i>
+            <span class="approve_text">社保公积金{{social}}</span>
+          </span>
+        </div>
+      </el-collapse-item>
+    </el-collapse>
+    <!-- <div class="address-title">
+        <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">概要信息</span>
+    </div> -->
+    <!-- <el-form style="padding:0 20px;width:100%; height:150px; " class="info">
       <el-form-item label="客户名称：" class="item-column3">
         {{custName}}
       </el-form-item>
@@ -29,7 +114,7 @@
       <el-form-item label="申请期限[月]：" class="item-column3">
         {{loanTerm}}
       </el-form-item>
-    </el-form>
+    </el-form> -->
     <!-- <div class="btn-div"> -->
     <!-- <el-button icon="el-icon-check-hang" class="credit-btn" @click="open">挂起</el-button> -->
     <!-- <el-button icon="el-icon-check-hang" class="credit-btn" @click="hangOoutBtn">挂起</el-button> -->
@@ -45,52 +130,6 @@
       <el-button icon="el-icon-check-big-data" class="credit-btn" @click="tobigData">大数据风控</el-button>
       <el-button icon="el-icon-check-social" class="credit-btn" @click="roSocialSecurity">社保公积金{{social}}</el-button>
     </div> -->
-    <div class="approve_btn_area approve_btn_area_width_950">
-      <span class="approve_item" @click="hangOoutBtn">
-        <i class="approve_icon HangUpIcon"></i>
-        <span class="approve_text">挂起</span>
-      </span>
-      <span class="approve_item" @click="coverFn('02')">
-        <i class="approve_icon backIcon"></i>
-        <span class="approve_text">回退</span>
-      </span>
-      <span class="approve_item" v-show="judgeFlag == '01' && jujueBtnShow" @click="coverFn('01')">
-        <i class="approve_icon rejectIcon"></i>
-        <span class="approve_text">拒绝</span>
-      </span>
-      <span class="approve_item" v-show="judgeFlag!='01'" @click="coverFn('01')">
-        <i class="approve_icon rejectIcon"></i>
-        <span class="approve_text">拒绝</span>
-      </span>
-      <span class="approve_item" @click="coverFn('07')">
-        <i class="approve_icon giveUpIcon"></i>
-        <span class="approve_text">放弃</span>
-      </span>
-      <span class="approve_item" @click="coverFn('03')">
-        <i class="approve_icon appro"></i>
-        <span class="approve_text">审批</span>
-      </span>
-      <span class="approve_item" @click="coverFn('fqz')">
-        <i class="approve_icon faqi"></i>
-        <span class="approve_text">发起反欺诈</span>
-      </span>
-      <span class="approve_item" @click="coverFn('spjl')">
-        <i class="approve_icon lineChartIcon"></i>
-        <span class="approve_text">审批结论轨迹</span>
-      </span>
-      <span class="approve_item" @click="coverFn('lcgj')">
-        <i class="approve_icon liuchengIcon"></i>
-        <span class="approve_text">流程轨迹</span>
-      </span>
-      <span class="approve_item" @click="tobigData">
-        <i class="approve_icon brokenLineIcon"></i>
-        <span class="approve_text">大数据风控</span>
-      </span>
-      <span class="approve_item" @click="roSocialSecurity">
-        <i class="approve_icon dataMaptIcon"></i>
-        <span class="approve_text">社保公积金{{social}}</span>
-      </span>
-    </div>
     <!-- 回退 -->
     <!-- <div>
       <el-dialog title="回退信息" :visible.sync="huiTuiShow" :modal="false" width="600px" top="10vh">
@@ -343,7 +382,7 @@
           </div>
           <div class="dialog_textarea">
             <el-form-item class="mr" label="原因说明：" :label-width="formLabelWidth">
-              <el-input type="textarea " :row="2 " resize="none " v-model="reasonRemark "></el-input>
+              <el-input type="textarea" :row="2 " resize="none " v-model="reasonRemark "></el-input>
             </el-form-item>
           </div>
           <div class="bfc">
@@ -364,13 +403,13 @@
       </el-dialog>
     </div>
     <!-- 审批 -->
-      <el-dialog title="审批信息" :visible.sync="shenPiShow " :modal="false " width="710px" height='1100px'>
-        <el-form>
-          <!-- <div style="padding:5px;padding-top:0;height:400px;overflow:auto; "> -->
-            <el-collapse v-model="activeNames ">
-              <!--   申请信息-->
-              <el-collapse-item title="申请信息 " name="applyMsg " class="alert_collapse">
-                <!-- <div class="back-form-li ">
+    <el-dialog title="审批信息" :visible.sync="shenPiShow " :modal="false " width="710px" height='1100px'>
+      <el-form>
+        <!-- <div style="padding:5px;padding-top:0;height:400px;overflow:auto; "> -->
+        <el-collapse v-model="activeNames ">
+          <!--   申请信息-->
+          <el-collapse-item title="申请信息 " name="applyMsg " class="alert_collapse">
+            <!-- <div class="back-form-li ">
                   <el-form-item label="申请金额[元]： " class="item-column2 ">
                     {{loanAmt}}
                   </el-form-item>
@@ -394,51 +433,51 @@
                     {{loanType}}
                   </el-form-item>
                 </div> -->
-                <div class="dialog_form_auto">
-                  <el-form>
-                    <div class="bfc">
-                      <el-form-item class="presentation" label="申请金额[元]：" :label-width="formApproLabLeft">
-                        {{loanAmt}}
-                      </el-form-item>
-                      <el-form-item class="presentation" label="申请期限[月]：" :label-width="formApproLabelWidth">
-                        {{loanTerm}}
-                      </el-form-item>
-                    </div>
-                    <div class="bfc">
-                      <el-form-item class="presentation" label="申请产品：" :label-width="formApproLabLeft">
-                        {{sqproName}}
-                      </el-form-item>
-                      <el-form-item class="presentation" label="可接受最高每期还款额[元]：" :label-width="formApproLabelWidth">
-                        {{eachTermAmt}}
-                      </el-form-item>
-                    </div>
-                    <div class="bfc">
-                      <el-form-item class="presentation" label="信用评分：" :label-width="formApproLabLeft" prop="holiday">
-                        {{creditScore}}
-                      </el-form-item>
-                      <el-form-item class="presentation" label="申请类型：" :label-width="formApproLabelWidth" prop="holiday">
-                        {{loanType}}
-                      </el-form-item>
-                    </div>
-                  </el-form>
+            <div class="dialog_form_auto">
+              <el-form>
+                <div class="bfc">
+                  <el-form-item class="presentation" label="申请金额[元]：" :label-width="formApproLabLeft">
+                    {{loanAmt}}
+                  </el-form-item>
+                  <el-form-item class="presentation" label="申请期限[月]：" :label-width="formApproLabelWidth">
+                    {{loanTerm}}
+                  </el-form-item>
                 </div>
-              </el-collapse-item>
-              <!-- 信审核实信息 -->
-              <el-collapse-item title="信审核实信息 " class="alert_collapse">
-                <!-- <el-form-item label="核实可接受最高每期还款额[元]： " style="width:300px;margin-bottom:10px; " class="item-column2 line-height2 ">
+                <div class="bfc">
+                  <el-form-item class="presentation" label="申请产品：" :label-width="formApproLabLeft">
+                    {{sqproName}}
+                  </el-form-item>
+                  <el-form-item class="presentation" label="可接受最高每期还款额[元]：" :label-width="formApproLabelWidth">
+                    {{eachTermAmt}}
+                  </el-form-item>
+                </div>
+                <div class="bfc">
+                  <el-form-item class="presentation" label="信用评分：" :label-width="formApproLabLeft" prop="holiday">
+                    {{creditScore}}
+                  </el-form-item>
+                  <el-form-item class="presentation" label="申请类型：" :label-width="formApproLabelWidth" prop="holiday">
+                    {{loanType}}
+                  </el-form-item>
+                </div>
+              </el-form>
+            </div>
+          </el-collapse-item>
+          <!-- 信审核实信息 -->
+          <el-collapse-item title="信审核实信息 " class="alert_collapse">
+            <!-- <el-form-item label="核实可接受最高每期还款额[元]： " style="width:300px;margin-bottom:10px; " class="item-column2 line-height2 ">
                   {{fbalance2}}
                 </el-form-item> -->
-                <div class="dialog_form_auto">
-                  <el-form>
-                    <el-form-item class="presentation_one_row" label="核实可接受最高每期还款额[元]：" label-width="220px">
-                      {{fbalance2}}
-                    </el-form-item>
-                  </el-form>
-                </div>
-              </el-collapse-item>
-              <!-- 审批信息 -->
-              <el-collapse-item title="审批信息 " class="alert_collapse">
-                <!-- <div class="back-form-li radio-li ">
+            <div class="dialog_form_auto">
+              <el-form>
+                <el-form-item class="presentation_one_row" label="核实可接受最高每期还款额[元]：" label-width="220px">
+                  {{fbalance2}}
+                </el-form-item>
+              </el-form>
+            </div>
+          </el-collapse-item>
+          <!-- 审批信息 -->
+          <el-collapse-item title="审批信息 " class="alert_collapse">
+            <!-- <div class="back-form-li radio-li ">
                   <el-form-item label="结论： ">
                     <el-radio label="00 " value='00' v-model="opinionFlag ">同意</el-radio>
                     <el-radio label="03 " value='03' v-model="opinionFlag " v-show="taskName!='creditApp_finalTrial_five'
@@ -499,77 +538,77 @@
                     <el-input type="textarea" resize="none" :rows="3" v-model="appConclusion"></el-input>
                   </el-form-item>
                 </div> -->
-                <div class="dialog_form_auto">
-                  <el-form>
-                    <el-form-item label="结论：" :label-width="formApproLab">
-                      <el-radio label="00 " value='00' v-model="opinionFlag ">同意</el-radio>
-                      <el-radio label="03 " value='03' v-model="opinionFlag " v-show="taskName!='creditApp_finalTrial_five'
+            <div class="dialog_form_auto">
+              <el-form>
+                <el-form-item label="结论：" :label-width="formApproLab">
+                  <el-radio label="00 " value='00' v-model="opinionFlag ">同意</el-radio>
+                  <el-radio label="03 " value='03' v-model="opinionFlag " v-show="taskName!='creditApp_finalTrial_five'
           && judgeFlag=='02' ">请求更高级审批</el-radio>
-                    </el-form-item>
-                    <div class="bfc">
-                      <el-form-item class="fl alert_collapse_inputLabel" label="月核实收入[元]：" :label-width="formApproLab">
-                        <el-input v-model="verIncome " @blur="moneyBlur(verIncome, 'verIncome') "></el-input>
-                      </el-form-item>
-                      <el-form-item class="fr alert_collapse_inputLabel" label="批准产品：" :label-width="formApproLab">
-                        <el-select @change="proSlelecChange " v-model="proName ">
-                          <el-option v-for="item in products " :key="item.id " :label="item.proName " :value="item "></el-option>
-                        </el-select>
-                      </el-form-item>
-                    </div>
-                    <div class="bfc">
-                      <el-form-item class="fl alert_collapse_inputLabel" label="批准期限[月]：" :label-width="formApproLab">
-                        <el-select @change="ploanTermChange " v-model="ploanTerm ">
-                          <el-option v-for="item in ploanTerms " :label="item.appDuration " :value="item ">
-                          </el-option>
-                        </el-select>
-                      </el-form-item>
-                      <el-form-item class="fr alert_collapse_inputLabel" label="批准金额[元]：" :label-width="formApproLab">
-                        <el-input v-model="ploanAmt " @blur="moneyBlur(ploanAmt, 'ploanAmt') "></el-input>
-                      </el-form-item>
-                    </div>
-
-                    <div class="bfc">
-                      <el-form-item class="presentation" label="审批倍数：" :label-width="formApproLab">
-                        {{caculData.appmult}}
-                      </el-form-item>
-                      <el-form-item class="presentation" label="月还款额[元]：" :label-width="formApproLab">
-                        {{caculData.eachTermamt | formatMoney}}
-                      </el-form-item>
-                    </div>
-                    <div class="bfc">
-                      <el-form-item class="presentation" label="内部负债率：" :label-width="formApproLab">
-                        {{caculData.inteDebitrate | formatValue}}
-                      </el-form-item>
-                      <el-form-item class="presentation" label="总信用负债率：" :label-width="formApproLab" v-show="caculData.creditDebitRate>0">
-                        {{caculData.creditDebitRate | formatValue}}
-                      </el-form-item>
-                      <el-form-item class="presentation" label="总信用负债率：" :label-width="formApproLab" v-show="caculData.creditDebitRate==0">
-                        0.00%
-                      </el-form-item>
-                    </div>
-                    <el-form-item class="presentation" label="总负债率：" :label-width="formApproLab">
-                      {{caculData.totalRate | formatValue}}
-                    </el-form-item>
-                    <div class="bfc dialog_textarea alert_collapse_inputLabel mr" style="margin-bottom:10px;height:80px;">
-                      <el-form-item label="意见说明：" :label-width="formApproLab">
-                        <el-input type="textarea" resize="none" :rows="3" v-model="appConclusion"></el-input>
-                      </el-form-item>
-                    </div>
-                  </el-form>
+                </el-form-item>
+                <div class="bfc">
+                  <el-form-item class="fl alert_collapse_inputLabel" label="月核实收入[元]：" :label-width="formApproLab">
+                    <el-input v-model="verIncome " @blur="moneyBlur(verIncome, 'verIncome') "></el-input>
+                  </el-form-item>
+                  <el-form-item class="fr alert_collapse_inputLabel" label="批准产品：" :label-width="formApproLab">
+                    <el-select @change="proSlelecChange " v-model="proName ">
+                      <el-option v-for="item in products " :key="item.id " :label="item.proName " :value="item "></el-option>
+                    </el-select>
+                  </el-form-item>
+                </div>
+                <div class="bfc">
+                  <el-form-item class="fl alert_collapse_inputLabel" label="批准期限[月]：" :label-width="formApproLab">
+                    <el-select @change="ploanTermChange " v-model="ploanTerm ">
+                      <el-option v-for="item in ploanTerms " :label="item.appDuration " :value="item ">
+                      </el-option>
+                    </el-select>
+                  </el-form-item>
+                  <el-form-item class="fr alert_collapse_inputLabel" label="批准金额[元]：" :label-width="formApproLab">
+                    <el-input v-model="ploanAmt " @blur="moneyBlur(ploanAmt, 'ploanAmt') "></el-input>
+                  </el-form-item>
                 </div>
 
-              </el-collapse-item>
-            </el-collapse>
-          <!-- <div class="back-form-li" style="text-align:right;padding:10px;">
+                <div class="bfc">
+                  <el-form-item class="presentation" label="审批倍数：" :label-width="formApproLab">
+                    {{caculData.appmult}}
+                  </el-form-item>
+                  <el-form-item class="presentation" label="月还款额[元]：" :label-width="formApproLab">
+                    {{caculData.eachTermamt | formatMoney}}
+                  </el-form-item>
+                </div>
+                <div class="bfc">
+                  <el-form-item class="presentation" label="内部负债率：" :label-width="formApproLab">
+                    {{caculData.inteDebitrate | formatValue}}
+                  </el-form-item>
+                  <el-form-item class="presentation" label="总信用负债率：" :label-width="formApproLab" v-show="caculData.creditDebitRate>0">
+                    {{caculData.creditDebitRate | formatValue}}
+                  </el-form-item>
+                  <el-form-item class="presentation" label="总信用负债率：" :label-width="formApproLab" v-show="caculData.creditDebitRate==0">
+                    0.00%
+                  </el-form-item>
+                </div>
+                <el-form-item class="presentation" label="总负债率：" :label-width="formApproLab">
+                  {{caculData.totalRate | formatValue}}
+                </el-form-item>
+                <div class="bfc dialog_textarea alert_collapse_inputLabel mr" style="margin-bottom:10px;height:80px;">
+                  <el-form-item label="意见说明：" :label-width="formApproLab">
+                    <el-input type="textarea" resize="none" :rows="3" v-model="appConclusion"></el-input>
+                  </el-form-item>
+                </div>
+              </el-form>
+            </div>
+
+          </el-collapse-item>
+        </el-collapse>
+        <!-- <div class="back-form-li" style="text-align:right;padding:10px;">
             <el-button plain @click="shenPiShow=false;">返回</el-button>
             <el-button type="primary" @click="submitFn('03')" :loading="isLoading">{{loadingTitle}}</el-button>
           </div> -->
-        </el-form>
-        <div slot="footer" class="dialog-footer">
-          <el-button @click="shenPiShow=false">取 消</el-button>
-          <el-button type="primary" @click="submitFn('03')" :loading="isLoading"> {{loadingTitle}}</el-button>
-        </div>
-      </el-dialog>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="shenPiShow=false">取 消</el-button>
+        <el-button type="primary" @click="submitFn('03')" :loading="isLoading"> {{loadingTitle}}</el-button>
+      </div>
+    </el-dialog>
     <!-- 审批结论轨迹弹窗 -->
     <el-dialog title="信审审批结论轨迹" :visible.sync="spjlShow" :modal="false" width="1000px">
       <el-table :data="tableData.recordList" height="280" border style="width: 100%" highlight-current-row v-loading="loading">
@@ -628,7 +667,7 @@
         <el-table-column prop="opinionExplain" label="意见说明" min-width="200" show-overflow-tooltip>
         </el-table-column>
       </el-table>
-      <div  slot="footer" class="dialog-footer">
+      <div slot="footer" class="dialog-footer">
         <el-button plain @click="lcgjShow=false;">返回</el-button>
       </div>
     </el-dialog>
@@ -641,6 +680,7 @@
   export default {
     data() {
       return {
+        activeName: ['1'],
         formLabelWidth: '85px',
         formApproLabLeft: "100px",
         formApproLab: "120px",
@@ -2463,356 +2503,16 @@
 
 </script>
 <style>
-  .creditApproval-class .address-title {
-    width: 100%;
-    height: 40px;
-    font-size: 18px;
-    /*font-weight: bold;*/
-    background: #eef0f9;
-    line-height: 40px;
-    padding-left: 10px;
-    display: block;
-    margin-bottom: 10px;
-    /*margin-top: 20px;*/
-    overflow: hidden;
-  }
-
-  /* 三列 */
-
-  .creditApproval-class .item-column3 {
-    width: 30%;
-    float: left;
-    margin: 0;
-    margin-bottom: 10px;
-    min-width: 300px;
-  }
-
-
-  /* 信审审批 - btn*/
-
-  .creditApproval-class .credit-btn {
-    padding: 10px;
-    background: none;
-    color: #333;
-    border: none;
-  }
-
-  /* 弹窗背景 */
-
-  .creditApproval-class .cover-view {
-    background: rgba(0, 0, 0, 0.4);
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    overflow: auto;
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 101;
-  }
-
-  /* 两列 */
-
-  .creditApproval-class .item-column2 {
-    width: 50%;
-    float: left;
-    margin: 0;
-  }
-
-  /* 回退 拒绝 放弃 表单*/
-
-  .creditApproval-class .back-form {
-    min-width: 600px;
-    min-height: 250px;
-    background: #fff;
-    margin: 0 auto;
-    /*margin-top: 300px;*/
-    border-radius: 2px;
-    overflow: hidden;
-    padding-bottom: 10px;
-  }
-
-  /* form-title */
-
-  .creditApproval-class .form-title {
-    width: 100%;
-    height: 40px;
-    font-size: 18px;
-    /*font-weight: bold;*/
-    /*background: #ededed;*/
-    background: #eef0f9;
-    line-height: 40px;
-    padding-left: 10px;
-    display: block;
-    margin-bottom: 10px;
-    overflow: hidden;
-    font-size: 16px;
-  }
-
   .creditApproval-class .el-collapse-item__header {
     width: 100%;
-    height: 40px;
-    font-size: 18px;
-
+    /* height: 30px; */
     background: #eef0f9;
-    line-height: 40px;
+    /* line-height: 30px; */
     padding-left: 10px;
     display: block;
     margin-bottom: 5px;
     overflow: hidden;
     font-size: 16px;
-  }
-
-  .creditApproval-class .form-title2 {
-    width: 100%;
-    height: 40px;
-    font-size: 18px;
-    /*font-weight: bold;*/
-    /*background: #ededed;*/
-    background: #eef0f9;
-    line-height: 40px;
-    padding-left: 10px;
-    display: block;
-    margin-bottom: 10px;
-    overflow: hidden;
-    font-size: 16px;
-  }
-
-  .creditApproval-class .back-form .back-form-li {
-    /*border-top: 0.5px solid #ededed;*/
-    margin: 10px 0px;
-    line-height: 40px;
-    height: 35px;
-    padding: 2px 10px 0 10px;
-  }
-
-
-  /* textarea */
-
-  .creditApproval-class .back-form .back-form-li .el-textarea {
-    width: 80%;
-  }
-
-
-  /* 弹窗页面 关闭按钮*/
-
-  .creditApproval-class .el-tag {
-    width: 0;
-    height: 0;
-    color: none;
-    border: none;
-    position: absolute;
-    right: 20px;
-    top: 0;
-  }
-
-  .creditApproval-class .el-tag .el-icon-close {
-    right: 0px;
-    top: 5px;
-  }
-
-
-  /* 审批 表单 */
-
-  .creditApproval-class .appro-form {
-    /*width: 80%;*/
-    height: 550px;
-    min-width: 685px;
-    margin-top: 100px !important;
-    /*height: auto;*/
-    margin: 0 auto;
-    padding: 10px;
-    overflow: hidden;
-  }
-
-  .creditApproval-class .appro-form .back-form-li .el-textarea {
-    width: 60%;
-  }
-
-
-  /* 审批结论轨迹 */
-
-  .creditApproval-class .spjl-div {
-    /*width: 80%;*/
-    min-width: 500px;
-    /*height: 400px;*/
-    margin: 0 auto;
-    /*margin-top: 250px;*/
-    overflow: hidden;
-    /*padding: 10px;*/
-    background: #fff;
-    border-radius: 5px;
-  }
-
-  .creditApproval-class .el-table {
-    font-size: 12px;
-    line-height: 20px;
-  }
-
-
-  /* 分页 */
-
-  .creditApproval-class .tool-bar {
-    width: 100%;
-    text-align: center;
-    padding: 10px 0 0 10px;
-  }
-
-
-  /* 流程轨迹 */
-
-  .creditApproval-class .lcgj-div {
-    min-width: 760px;
-    width: auto;
-    height: 400px;
-    margin: 0 auto;
-    overflow: hidden;
-    background: #fff;
-    border-radius: 5px;
-    height: auto;
-  }
-
-  .creditApproval-class .el-input--suffix .el-input__inner {
-    margin: 0;
-    padding-left: 10px;
-    padding-right: 30px;
-    text-indent: 5px;
-  }
-
-
-  /* 申请信息 */
-
-  .creditApproval-class .info .el-form-item__content {
-    line-height: 40px;
-  }
-
-  .creditApproval-class .info .el-form-item__label {
-    width: 120px;
-  }
-
-  /* 报错提示 */
-
-  .creditApproval-class .el-form-item__error {
-    top: -22px;
-    left: 220px;
-  }
-
-
-  /* 有编辑框的 提示信息*/
-
-  .creditApproval-class .back-form .back-form-edit-li {
-    margin-top: 25px !important;
-  }
-
-  /* 折叠面板头部背景色和icon */
-
-  .creditApproval-class .icon_hat {
-    padding: 9px 10px 10px 13px;
-    vertical-align: middle;
-  }
-
-  .creditApproval-class .headFont {
-    font-size: 16px;
-  }
-
-  /* 信审审批  - - 弹窗*/
-
-  .creditApproval-class .el-dialog {
-    width: 600px;
-    /*margin-top: 1vh !important;*/
-  }
-
-
-  .creditApproval-class .el-dialog__body {
-    padding: 0;
-  }
-
-  .creditApproval-class .hung_class .el-dialog__body {
-    padding: 10px 15px;
-  }
-
-  .creditApproval-class .hung_class .el-dialog__header {
-    display: block;
-    padding: 20px 20px 10px;
-  }
-
-  .creditApproval-class .hung_class .el-dialog__footer {
-    padding: 5px 15px 10px;
-  }
-
-  .creditApproval-class .back-form .el-form-item__label {
-    width: 125px;
-  }
-
-  .creditApproval-class .back-form .width-120 .el-form-item__label {
-    width: 125px;
-  }
-
-  .creditApproval-class .back-form .width-110 .el-form-item__label {
-    width: 125px;
-  }
-
-  .creditApproval-class .back-form .item-label-show .el-form-item__label {
-    margin-right: 15px;
-  }
-
-  /* 两行文字 样式 */
-
-  .creditApproval-class .back-form .line-height2 .el-form-item__label {
-    line-height: 20px;
-  }
-
-  /* label 文字样式 */
-
-  .creditApproval-class .huitui-class .el-form-item__label {
-    width: 85px;
-  }
-
-  .creditApproval-class .jujue-class {}
-
-  /* label 文字样式 */
-
-  .creditApproval-class .jujue-class .el-form-item__label {
-    width: 85px;
-  }
-
-  .creditApproval-class .fangqi-class {}
-
-  .creditApproval-class .fangqi-class .el-form-item__label {
-    width: 85px;
-  }
-
-  .creditApproval-class .el-input__inner {
-    height: 35px;
-  }
-
-  .creditApproval-class .require {
-    font-size: 14px;
-    color: red;
-    position: absolute;
-    color: red;
-    font-weight: 700;
-    font-size: 16px;
-    vertical-align: middle;
-  }
-
-  /* 审批信息  */
-
-  /* .creditApproval-class .el-form-item__content .el-select .el-input {
-    width: 100%;
-  } */
-
-  .creditApproval-class .anti-form {
-    /*width: 80%;*/
-    height: 600px;
-    min-width: 685px;
-    /*margin-top: 100px !important;*/
-    height: 460px;
-    margin: 0 auto;
-    padding: 10px;
-    overflow: auto;
   }
 
 </style>

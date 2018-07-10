@@ -2,7 +2,7 @@
   <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
       <!-- 进件人详情 -->
       <p class="PerDtl">
-        <span> 借款人：{{accepCusBasicInfo.custName}}</span>
+        <span> 借款人：{{custName}}</span>
         <span> 进件编号：{{customInf.applyMainNo}}</span>
         <span> 证件号码：{{tastwaitingPass.certCode}}</span>
         <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
@@ -80,7 +80,7 @@
             <PhoneCredit v-if=" this.tabContent2==5" :SplitS="SplitLeft" :isFull.sync="isFull" :addBtn="false"></PhoneCredit>
             <FCreditForm v-if=" this.tabContent2==6"></FCreditForm>
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
-            <aAntiApplyInf v-if=" this.tabContent2==8"></aAntiApplyInf>
+            <aAntiApplyInf v-if=" this.tabContent2==8"  :applyId='tastwaitingPass.applyId'></aAntiApplyInf>
             <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>
           </div>
         </div>
@@ -203,7 +203,7 @@
         }).then(res => {
           if (res.statusCode == 200) {
             this.loading = false;
-            //this.custName = res.data.accepCusBasicInfo.custName;
+            this.custName = res.data.accepCusBasicInfo.custName;
             this.customInf = res.data;
             this.accepCusBasicInfo = res.data.accepCusBasicInfo;
           } else {
@@ -224,24 +224,16 @@
         this.CompareAlert = false;
       },
       leftMovingBtn() {
-        console.log('left')
-        console.log(this.$refs.right_tab_ul.style.left)
         if (parseFloat(this.$refs.right_tab_ul.style.left) >= 0) {
-          console.log('>0')
           this.$refs.right_tab_ul.style.left = "0"
         } else {
-          console.log('move')
           this.$refs.right_tab_ul.style.left = parseFloat(this.$refs.right_tab_ul.style.left) + 50 + "px";
         }
       },
       rightMovingBtn() {
-        console.log('right')
-        console.log(this.$refs.right_tab_ul)
         if (parseFloat(this.$refs.right_tab_ul.style.left) <= -500) {
           this.$refs.right_tab_ul.style.left = "-500px";
-          console.log('>0')
         } else {
-          console.log('move')
           this.$refs.right_tab_ul.style.left = parseFloat(this.$refs.right_tab_ul.style.left) - 50 + "px";
         }
       },
