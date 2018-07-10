@@ -4,8 +4,8 @@
     <el-collapse v-model="activeNames" @change="handleChange">
       <el-collapse-item name="1">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">基本信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">基本信息</span>
         </template>
         <table class="table">
           <thead>
@@ -38,38 +38,38 @@
       </el-collapse-item>
       <el-collapse-item name="2">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">提报来源</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">提报来源</span>
         </template>
-        <div class="tibao">
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
             <li>
-              <label>提报人工号：</label>
-              <p>{{fraudApplyInfo.applyCode}}</p>
+              <label class="label_width_166">提报人工号：</label>
+              <span>{{fraudApplyInfo.applyCode}}</span>
             </li>
             <li>
-              <label>提报人姓名：</label>
-              <p>{{fraudApplyInfo.applyPersonName}}</p>
+              <label class="label_width_166">提报人姓名：</label>
+              <span>{{fraudApplyInfo.applyPersonName}}</span>
             </li>
             <li>
-              <label>提报渠道：</label>
-              <p>{{fraudApplyInfo.channelTxt}}</p>
+              <label class="label_width_166">提报渠道：</label>
+              <span>{{fraudApplyInfo.channelTxt}}</span>
+            </li>
+            <li class="text_area_li triplet_textarea_width margin_top_5">
+              <label class="label_width_166">理由：</label>
+              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="reason" disabled>
+              </el-input>
             </li>
           </ul>
-          <div>
-            <label>理由：</label>
-            <el-input type="textarea" :rows="3" v-model="reason" disabled>
-            </el-input>
-          </div>
         </div>
       </el-collapse-item>
       <el-collapse-item name="3">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">命中规则</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">命中规则</span>
         </template>
-        <div class="tableDiv">
-          <el-table :data="hitRuleList" style="width: 100%" height="242" @cell-click="inquiry" border>
+        <div class="height_auto">
+          <el-table :data="hitRuleList" style="width: 100%" @cell-click="inquiry" border>
             <el-table-column type="index" :index='1' label="序号" min-width="50">
             </el-table-column>
             <el-table-column prop="ruleContent" label="命中规则名称" min-width="110">
@@ -81,39 +81,47 @@
       </el-collapse-item>
       <el-collapse-item name="4">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">调查记录</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">调查记录</span>
         </template>
-        <div class="record">
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-            <li>
-              <label>网查：</label>
-              <el-input type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.netCheck">
+            <li class="text_area_li triplet_textarea_width">
+              <label class="label_width_166">网查：</label>
+              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.netCheck"
+                disabled>
               </el-input>
-              <!-- <textarea>{{fraudAuditInfo.netCheck}}</textarea> -->
             </li>
-            <li>
-              <label>114：</label>
-              <el-input type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.oof">
+            <li class="text_area_li triplet_textarea_width margin_top_5">
+              <label class="label_width_166">114：</label>
+              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.oof"
+                disabled>
               </el-input>
-              <!-- <textarea>{{fraudAuditInfo.oof}}</textarea> -->
             </li>
-            <li>
-              <label>其他：</label>
-              <el-input type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.other">
+            <li class="text_area_li triplet_textarea_width margin_top_5">
+              <label class="label_width_166">其他：</label>
+              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.other"
+                disabled>
               </el-input>
-              <!-- <textarea>{{fraudAuditInfo.other}}</textarea> -->
             </li>
           </ul>
         </div>
       </el-collapse-item>
       <el-collapse-item name="5">
         <template slot="title">
-          <div class="left">
-            <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-            <span class="headFont">电核区</span>
+               <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">电核区</span>
+           <div class="title_icon">
+            <span @click.stop="add">
+              <i class="title_icon_img addIcon"></i>
+              <span class="title_icon_span">添加</span>
+            </span>
+            <span @click.stop="delet">
+              <i class="title_icon_img deleteIcon"></i>
+              <span class="title_icon_span">删除</span>
+            </span>
           </div>
-          <div class="remarkIcon right">
+          <!-- <div class="remarkIcon right">
             <span @click="add" class="rightSpans">
               <img src="../../../../static/images/add.png" class="icon">
               <span>添加</span>
@@ -122,9 +130,9 @@
               <img src="../../../../static/images/delete.png" class="icon">
               <span>删除</span>
             </span>
-          </div>
+          </div> -->
         </template>
-        <div class="ElectroNuclear">
+        <div class="height_auto">
           <el-table :data="fraudTelCheckList" style="width: 100%" highlight-current-row border @current-change="handleCurrentChanges">
             <el-table-column type="index" :index='1' label="序号" width="50">
             </el-table-column>
@@ -139,9 +147,6 @@
               </template>
             </el-table-column>
             <el-table-column prop="relation" label="关系" width="180">
-              <!-- <template slot-scope="scope">
-				        	<el-input v-model="scope.row.relation" placeholder="请输入内容" :disabled="scope.row.isInitFlag=='0'"></el-input>
-				        </template> -->
               <template slot-scope="scope">
                 <el-select v-model="scope.row.relation" placeholder="请选择" :disabled="scope.row.isInitFlag=='0'">
                   <el-option v-for="item in relations" :key="item.value" :label="item.label" :value="item.value">
@@ -162,49 +167,49 @@
       <el-button type="primary" @click="bigSure">确认</el-button>
     </div>
     <!-- 弹框 -->
-      <el-dialog title='命中规则名称：' :visible.sync="dialogVisible" width="860px">
-        <div class="numBody">
-          <div class="markIcon">
-            <span @click="relieve">
-              <img src="../../../../static/images/relieve.png" class="icon">
-              <span>解除</span>
-            </span>
-            <span @click="recovery">
-              <img src="../../../../static/images/back.png" class="icon">
-              <span>恢复</span>
-            </span>
-          </div>
-          <div>
-            <el-table ref="multipleTable" :data="recordList" style="width: 100%"  height="250" border highlight-current-row @selection-change="handleSelectionChange">
-              <el-table-column type="index" :index='1' label="序号" min-width="50">
-              </el-table-column>
-              <el-table-column type="selection" min-width="50">
-              </el-table-column>
-              <el-table-column label="进件编号" prop="applySubNo" min-width="120">
-              </el-table-column>
-              <el-table-column prop="ruleContent" label="命中客户名称" min-width="120">
-              </el-table-column>
-              <el-table-column prop="statusTxt" label="状态" min-width="80">
-              </el-table-column>
-              <el-table-column label="操作" min-width="50" fixed="right">
-                <template slot-scope="scope">
-                  <el-button size="mini" @click="handlDetail(scope.$index, scope.row)">详情
-                  </el-button>
-                </template>
-              </el-table-column>
-            </el-table>
-            <!-- 分页 -->
-            <div class="page">
-              <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 50, 80, 100]"
-                :page-size=setPageSize layout="total, sizes, prev, pager, next, jumper" :total="totals.totalRecord">
-              </el-pagination>
-            </div>
+    <el-dialog title='命中规则名称：' :visible.sync="dialogVisible" width="860px">
+      <div class="numBody">
+        <div class="markIcon">
+          <span @click="relieve">
+            <img src="../../../../static/images/relieve.png" class="icon">
+            <span>解除</span>
+          </span>
+          <span @click="recovery">
+            <img src="../../../../static/images/back.png" class="icon">
+            <span>恢复</span>
+          </span>
+        </div>
+        <div>
+          <el-table ref="multipleTable" :data="recordList" style="width: 100%" height="250" border highlight-current-row @selection-change="handleSelectionChange">
+            <el-table-column type="index" :index='1' label="序号" min-width="50">
+            </el-table-column>
+            <el-table-column type="selection" min-width="50">
+            </el-table-column>
+            <el-table-column label="进件编号" prop="applySubNo" min-width="120">
+            </el-table-column>
+            <el-table-column prop="ruleContent" label="命中客户名称" min-width="120">
+            </el-table-column>
+            <el-table-column prop="statusTxt" label="状态" min-width="80">
+            </el-table-column>
+            <el-table-column label="操作" min-width="50" fixed="right">
+              <template slot-scope="scope">
+                <el-button size="mini" @click="handlDetail(scope.$index, scope.row)">详情
+                </el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+          <!-- 分页 -->
+          <div class="page">
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 50, 80, 100]"
+              :page-size=setPageSize layout="total, sizes, prev, pager, next, jumper" :total="totals.totalRecord">
+            </el-pagination>
           </div>
         </div>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="sure">确定</el-button>
-        </span>
-      </el-dialog>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="sure">确定</el-button>
+      </span>
+    </el-dialog>
     <!-- 解除弹框 -->
     <!-- <div class="delLog">
       <el-dialog title="提示" :visible.sync="deldialogVisible" width="420px" top="35vh">
@@ -562,11 +567,11 @@
         });
         if (!fg) {
           // this.deldialogVisible = true;
-                 this.$confirm('只能针对未解除状态数据进行操作，请重新选择！', '提示', {
-              confirmButtonText: '确定',
-              type: 'warning',
-              showCancelButton: false
-            }).then(() => {}).catch(() => {});
+          this.$confirm('只能针对未解除状态数据进行操作，请重新选择！', '提示', {
+            confirmButtonText: '确定',
+            type: 'warning',
+            showCancelButton: false
+          }).then(() => {}).catch(() => {});
         }
         if (fg) {
           this.newArray = [];
@@ -607,11 +612,11 @@
         });
         if (!fg) {
           // this.backdialogVisible = true;
-                 this.$confirm('只能针对已解除状态数据进行操作，请重新选择', '提示', {
-              confirmButtonText: '确定',
-              type: 'warning',
-              showCancelButton: false
-            }).then(() => {}).catch(() => {});
+          this.$confirm('只能针对已解除状态数据进行操作，请重新选择', '提示', {
+            confirmButtonText: '确定',
+            type: 'warning',
+            showCancelButton: false
+          }).then(() => {}).catch(() => {});
         }
         if (fg) {
           //console.log(this.multipleSelection);

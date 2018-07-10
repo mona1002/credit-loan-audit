@@ -146,7 +146,8 @@
   width: calc(50% - 2px);
   height: 100%;
   overflow: auto;
-  background: #ffffff;
+  background: #
+  ;
   border: 1px solid #bfcbd9;
   border-radius: 4px;
   float: left;
@@ -343,6 +344,9 @@
 .checkedInf .text_area_li_5rows {
   height: 120px;
 }
+/* .checkedInf .text_area_li_3rows {
+  height: 100px;
+} */
 .checkedInf .triplet_textarea_width{
   width:66.6%;
 }.checkedInf .text_area_span {
@@ -357,6 +361,9 @@
 .checkedInf .inputInf{
 height: 35px;
 line-height: 35px;
+}
+.margin_top_5{
+  margin-top: 5px;
 }
 /* label字段宽度 */
 .label_width_200 {

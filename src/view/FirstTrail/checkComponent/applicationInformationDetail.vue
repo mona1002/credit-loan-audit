@@ -976,7 +976,7 @@
             </el-table-column>
             <el-table-column prop="estateZip" label="邮政编码" min-width="70">
             </el-table-column>
-            <el-table-column prop="equityRatio" label="产权比例[%]" min-width="70">
+            <el-table-column prop="equityRatio" label="产权比例[%]" min-width="100">
             </el-table-column>
             <el-table-column prop="loanPeriod" label="贷款期限[月]" min-width="120">
             </el-table-column>
