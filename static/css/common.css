@@ -360,6 +360,7 @@ table {
   /* border: 1px solid red; */
   float: right;
   height: 30px;
+  margin-right:15px;
   }
   .title_icon_img{
     font-size: 24px;
@@ -382,7 +383,9 @@ table {
   .common_component_width{
     min-width:1366px;
     height:auto;
+    background: #ffffff;
   }
+
   .clearFloat{
     clear: both;
   }

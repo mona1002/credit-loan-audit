@@ -47,7 +47,7 @@
               <label class="label_width_166">子原因：</label>
               <span>{{fraudApplyInfo.subreaName}}</span>
             </li>
-            <li class="text_area_li" style="width:66.6%;margin:5px 0;">
+            <li class="text_area_li triplet_textarea_width" style="margin:5px 0;">
               <label class="label_width_166">欺诈上报描述：</label>
               <span class="text_area_span text_area_span_minus220">{{fraudApplyInfo.applyDesc}}</span>
             </li>
@@ -73,7 +73,7 @@
         </template>
           <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-            <li class="text_area_li" style="width:66.6%;margin-top:5px;">
+            <li class="text_area_li triplet_textarea_width" style="margin-top:5px;">
               <label class="label_width_166">反欺诈决策反馈：</label>
               <span class="text_area_span text_area_span_minus220">{{fraudAuditOpinion.auditDesc}}</span>
             </li>

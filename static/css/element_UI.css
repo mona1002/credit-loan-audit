@@ -361,153 +361,6 @@ height: auto !important;
 
 /*借款人资料详情 折叠面板头部背景色 */
 
-.borrowerInformationSetail .el-collapse-item:nth-of-type(9) .el-table__body-wrapper {
-  overflow: hidden;
-}
-
-.borrowerInformationSetail .el-collapse-item__header {
-  background: #eef0f9;
-  border: 1px solid #e6eaee;
-  /* border-radius:23px; */
-  width: 100%;
-  height: 40px;
-  line-height: 40px;
-  overflow: hidden;
-}
-
-.borrowerInformationSetail .el-collapse-item__arrow {
-  line-height: 38px;
-  margin-right: 12px;
-}
-
-.borrowerInformationSetail .el-collapse-item__content {
-  font-size: 14px;
-  color: #475669;
-}
-
-.borrowerInformationSetail .el-collapse-item__wrap {
-  clear: both;
-  border-bottom: none;
-}
-
-/* 借款人资料input框 */
-
-.borrowerInformationSetail .el-input {
-  width: auto;
-}
-
-.borrowerInformationSetail .el-input__inner {
-  height: 35px;
-  border-radius: 6px;
-  width: 150px;
-}
-
-/* 借款人资料表格内容 */
-
-.borrowerInformationSetail .el-table th {
-  /* text-align: center; */
-  font-weight: 400;
-  color: #1f2d3d;
-  font-size: 14px;
-}
-
-.borrowerInformationSetail .el-table__body-wrapper .el-table__body td {
-  /* text-align: center; */
-  font-weight: 400;
-  color: #666666;
-  font-size: 14px;
-}
-
-.borrowerInformationSetail .el-table th:nth-of-type(1) .cell {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-.borrowerInformationSetail .el-table__body-wrapper .el-table__body td:nth-of-type(1) {
-  padding-left: 0 !important;
-}
-
-.borrowerInformationSetail .el-table__body-wrapper .el-table__body td:nth-of-type(1) .cell {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-/* 借款人资料 房产信息 表格内容居中 */
-
-/* .borrowerInformationSetail .house .el-table__body-wrapper {
-  overflow: hidden;
-} */
-
-.borrowerInformationSetail .house.el-table th:nth-of-type(1),
-.borrowerInformationSetail .house.el-table th:nth-of-type(7),
-.borrowerInformationSetail .house.el-table th:nth-of-type(8) {
-  text-align: center;
-}
-
-.borrowerInformationSetail .house .el-table__body-wrapper .el-table__body td:nth-of-type(1),
-.borrowerInformationSetail .house .el-table__body-wrapper .el-table__body td:nth-of-type(7),
-.borrowerInformationSetail .house .el-table__body-wrapper .el-table__body td:nth-of-type(8) {
-  text-align: center;
-}
-
-/* 借款人资料 车辆信息 表格内容居中 */
-
-/*  .borrowerInformationSetail .car .el-table__body-wrapper {
- overflow: hidden;
-} */
-
-.borrowerInformationSetail .car.el-table th:nth-of-type(1),
-.borrowerInformationSetail .car.el-table th:nth-of-type(12) {
-  text-align: center;
-}
-
-.borrowerInformationSetail .car .el-table__body-wrapper .el-table__body td:nth-of-type(1),
-.borrowerInformationSetail .car .el-table__body-wrapper .el-table__body td:nth-of-type(12) {
-  text-align: center;
-}
-
-/* 借款人资料 信用卡使用明细 表格内容居中 */
-
-.borrowerInformationSetail .card.el-table th:nth-of-type(1),
-.borrowerInformationSetail .card.el-table th:nth-of-type(3),
-.borrowerInformationSetail .card.el-table th:nth-of-type(6) {
-  text-align: center;
-}
-
-.borrowerInformationSetail .card .el-table__body-wrapper .el-table__body td:nth-of-type(1),
-.borrowerInformationSetail .card .el-table__body-wrapper .el-table__body td:nth-of-type(3),
-.borrowerInformationSetail .card .el-table__body-wrapper .el-table__body td:nth-of-type(6) {
-  text-align: center;
-}
-
-/* 借款人资料 贷款明细 表格内容居中 */
-
-.borrowerInformationSetail .loan.el-table th:nth-of-type(1),
-.borrowerInformationSetail .loan.el-table th:nth-of-type(6),
-.borrowerInformationSetail .loan.el-table th:nth-of-type(7),
-.borrowerInformationSetail .loan.el-table th:nth-of-type(9),
-.borrowerInformationSetail .loan.el-table th:nth-of-type(14) {
-  text-align: center;
-}
-
-.borrowerInformationSetail .loan .el-table__body-wrapper .el-table__body td:nth-of-type(1),
-.borrowerInformationSetail .loan .el-table__body-wrapper .el-table__body td:nth-of-type(6),
-.borrowerInformationSetail .loan .el-table__body-wrapper .el-table__body td:nth-of-type(7),
-.borrowerInformationSetail .loan .el-table__body-wrapper .el-table__body td:nth-of-type(9),
-.borrowerInformationSetail .loan .el-table__body-wrapper .el-table__body td:nth-of-type(14) {
-  text-align: center;
-}
-
-/* 借款人资料 流水明细 表格内容居中 */
-
-.borrowerInformationSetail .income.el-table th:nth-of-type(1) {
-  text-align: center;
-}
-
-.borrowerInformationSetail .income .el-table__body-wrapper .el-table__body td:nth-of-type(1) {
-  text-align: center;
-}
-
 /* 借款人资料 */
 
 /* .borrowerInformation .el-table__body-wrapper .el-select>.el-input .el-input__inner {
@@ -1311,32 +1164,6 @@ height: auto !important;
 
 /* 复议、反欺诈-历史任务 */
 
-/* 借款人资料表格内容居中 */
-
-.borrowerInformationSetail .el-table th {
-  /* text-align: center; */
-  font-weight: 400;
-  color: #1f2d3d;
-  font-size: 14px;
-}
-
-.borrowerInformationSetail .el-table th .cell {
-  font-weight: 800;
-  color: #909399;
-  font-size: 13px;
-}
-
-.borrowerInformationSetail .el-table__body-wrapper .el-table__body td {
-  color: #909399;
-  font-size: 13px;
-}
-
-.borrowerInformationSetail .el-table__body-wrapper .el-table__body td {
-  /* text-align: center; */
-  font-weight: 400;
-  color: #666666;
-  font-size: 14px;
-}
 
 /* 征询报告 */
 
@@ -2049,58 +1876,7 @@ body .el-menu--horizontal .el-menu .el-menu-item,
   text-align: left;
 }
 
-/* 信审审批   */
 
-.creditApproval-class .el-table th .cell {
-  font-weight: 800;
-  color: #909399;
-  font-size: 13px;
-}
-
-.creditApproval-class .el-table__body-wrapper .el-table__body td {
-  color: #909399;
-  font-size: 13px;
-}
-
-/* 金额右*/
-
-.creditApproval-class .spjl-div .el-table th:nth-of-type(1),
-.creditApproval-class .spjl-div .el-table th:nth-of-type(3),
-.creditApproval-class .spjl-div .el-table th:nth-of-type(6) {
-  text-align: right;
-}
-
-.creditApproval-class .spjl-div .el-table__body-wrapper .el-table__body td:nth-of-type(1),
-.creditApproval-class .spjl-div .el-table__body-wrapper .el-table__body td:nth-of-type(3),
-.creditApproval-class .spjl-div .el-table__body-wrapper .el-table__body td:nth-of-type(6) {
-  text-align: right;
-}
-
-/* 时间 中*/
-
-.creditApproval-class .spjl-div .el-table th:nth-of-type(11) {
-  text-align: center;
-}
-
-.creditApproval-class .spjl-div .el-table__body-wrapper .el-table__body td:nth-of-type(11) {
-  text-align: center;
-}
-
-/* 信审审批 - 流程轨迹*/
-
-/* 序号居中*/
-
-.creditApproval-class .xllcgj-div .el-table th:nth-of-type(1),
-.creditApproval-class .xllcgj-div .el-table th:nth-of-type(4),
-.creditApproval-class .xllcgj-div .el-table th:nth-of-type(7) {
-  text-align: center;
-}
-
-.creditApproval-class .xllcgj-div .el-table__body-wrapper .el-table__body td:nth-of-type(1),
-.creditApproval-class .xllcgj-div .el-table__body-wrapper .el-table__body td:nth-of-type(4),
-.creditApproval-class .xllcgj-div .el-table__body-wrapper .el-table__body td:nth-of-type(7) {
-  text-align: center;
-}
 
 /* 电话征信 -- 电话树更改*/
 
@@ -2308,15 +2084,7 @@ body .el-menu--horizontal .el-menu .el-menu-item,
  text-align: center;
 }*/
 
-/* 审批结论 下拉框 padding*/
 
-.creditApproval-class .el-select .el-input.is-focus .el-input__inner {
-  padding-left: 10px;
-}
-
-.creditApproval-class .el-input--suffix .el-input__inner {
-  padding-left: 10px;
-}
 
 /* 复议结论 */
 
@@ -2671,6 +2439,3 @@ body .el-menu--horizontal .el-menu .el-menu-item,
 .Abody .el-collapse-item__header{
   
 }
-.table_height_auto el-table__body-wrapper is-scrolling-none{
-  height:auto
-    }

@@ -1415,8 +1415,6 @@
           this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //任务管理-质检任务
           this.applyId = this.taskInWaitting.applyId;
         }
-        /*this.taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-        this.applyId=this.taskInWaitting.applyId;*/
         this.request();
       },
       request() {

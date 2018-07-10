@@ -80,7 +80,7 @@
           </el-table-column>
           <el-table-column prop="appSuborgName" label="反欺诈申请机构科室名称" width="180">
           </el-table-column>
-          <el-table-column prop="fraudStateTxt" label="反欺诈状态" min-width="140">
+          <el-table-column prop="fraudStateTxt" label="反欺诈查询状态" min-width="140">
           </el-table-column>
           <!-- <el-table-column label="操作"  width="180" class="aaaaaaaaaaaaa">
             <template slot-scope="scope">

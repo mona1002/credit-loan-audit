@@ -338,14 +338,18 @@
 .checkedInf .text_area_li {
   height: 75px;
 }
-
+.checkedInf .triplet_textarea_width{
+  width:66.6%;
+}
 /* label字段宽度 */
 .label_width_200 {
   width: 200px;
 }
 .label_width_166{
   width: 166px;
-  
+}
+.label_width_130{
+  width: 130px;
 }
 .checkedInf .text_area_span {
   /* border:1px solid yellow; */
@@ -367,4 +371,10 @@
 .title_icon span{
   /* border: 1px solid; */
   
+}
+/* 借款人资料 */
+.borrowerInformationSetail {
+  width: 100%;
+  height: 100%;
+  min-width:900px;
 }
