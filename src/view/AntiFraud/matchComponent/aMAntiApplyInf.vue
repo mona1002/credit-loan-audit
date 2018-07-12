@@ -1,6 +1,6 @@
 <template>
   <div class="aAntiApplyInf">
-    <!-- 反欺诈结论-内匹详情，质检，综合查询详情用==改为传值，此页面上线之后待删除 -->
+    <!-- 反欺诈结论-内匹详情，质检，综合查询详情用==改为传值，此页面待删除 -->
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
@@ -8,7 +8,6 @@
           <span class="headFont">基本信息</span>
         </template>
         <div class="baseInf">
-
           <p>
             <label>进件编号： </label>
             <span>{{applyInfoPool.applySubno}} </span>

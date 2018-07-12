@@ -17,7 +17,7 @@
               </p>
               <p v-show="this.InternetShow.commentS">
                 <label class="InternetInf_right_label"> 执行信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wbeexEcutedtxt}} </span>
+                <span class="detail_inf">{{this.FormData.wbeexEcutedtxt}} </span>
               </p>
             </li>
             <li>
@@ -27,7 +27,7 @@
               </p>
               <p v-show="this.InternetShow.commentS1">
                 <label class="InternetInf_right_label"> 单位执行信息说明：</label>
-                  <span class="detail_inf">{{this.FormData.wnetHirecomtxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetHirecomtxt }} </span>
               </p>
             </li>
             <li>
@@ -37,7 +37,7 @@
               </p>
               <p v-show="this.InternetShow.commentS2">
                 <label class="InternetInf_right_label"> 失信记录说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetEcutedBreatxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetEcutedBreatxt }} </span>
               </p>
             </li>
             <li>
@@ -47,7 +47,7 @@
               </p>
               <p v-show="this.InternetShow.commentS3">
                 <label class="InternetInf_right_label"> 单位失信记录说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetHirecomBreatxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetHirecomBreatxt }} </span>
               </p>
             </li>
             <li>
@@ -57,7 +57,7 @@
               </p>
               <p v-show="this.InternetShow.commentS4">
                 <label class="InternetInf_right_label"> 手机异常信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetPhonetxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetPhonetxt }} </span>
               </p>
             </li>
             <li>
@@ -67,7 +67,7 @@
               </p>
               <p v-show="this.InternetShow.commentS5">
                 <label class="InternetInf_right_label"> 单位名称异常信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetHirecomNametxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetHirecomNametxt }} </span>
               </p>
             </li>
             <li>
@@ -77,7 +77,7 @@
               </p>
               <p v-show="this.InternetShow.commentS6">
                 <label class="InternetInf_right_label"> 单位电话异常信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetHirecomPhonetxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetHirecomPhonetxt }} </span>
               </p>
             </li>
             <li>
@@ -87,7 +87,7 @@
               </p>
               <p v-show="this.InternetShow.commentS7">
                 <label class="InternetInf_right_label"> 地址异常信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetAddrandEstatetxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetAddrandEstatetxt }} </span>
               </p>
             </li>
             <li>
@@ -97,7 +97,7 @@
               </p>
               <p v-show="this.InternetShow.commentS8">
                 <label class="InternetInf_right_label"> 单位地址异常信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetHirecomAddresstxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetHirecomAddresstxt }} </span>
               </p>
             </li>
             <li>
@@ -107,7 +107,7 @@
               </p>
               <p v-show="this.InternetShow.commentS9">
                 <label class="InternetInf_right_label"> 工商登记信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetCompanytxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetCompanytxt }} </span>
               </p>
             </li>
             <li>
@@ -117,7 +117,7 @@
               </p>
               <p v-show="this.InternetShow.commentS10" class="bottom">
                 <label class="InternetInf_right_label"> 组织机构代码信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetAddrstatetxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetAddrstatetxt }} </span>
               </p>
             </li>
           </ul>
@@ -186,9 +186,20 @@
       <!-- 工作信息  -->
       <el-collapse-item name="3">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">工作信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">工作信息</span>
         </template>
+        <!-- <div class="checkedInf checkedInf_li_width_triplet clearFix">
+   <ul>
+      <li style="width:100%;"><label class="label_width_166">工作单位：</label><span>{{this.FormData.hirecomName}}</span></li>
+      <li><label class="label_width_166">单位性质：</label><span>{{this.FormData.hirecomSigntext}}</span></li>
+      <li><label class="label_width_166">单位性质：</label><span>{{this.FormData.hirecomSigntext}}</span></li>
+      <li><label class="label_width_166">单位性质：</label><span>{{this.FormData.hirecomSigntext}}</span></li>
+      <li><label class="label_width_166">单位性质：</label><span>{{this.FormData.hirecomSigntext}}</span></li>
+      <li><label class="label_width_166">单位性质：</label><span>{{this.FormData.hirecomSigntext}}</span></li>
+      <li><label class="label_width_166">单位性质：</label><span>{{this.FormData.hirecomSigntext}}</span></li>
+    </ul>
+</div> -->
         <div class="CreditForm_WorkInfs up_padding" style="padding:20px">
           <ul>
             <li style="width:100%;paddingBottom:20px;">
@@ -212,7 +223,7 @@
             <li>
               <p>
                 <label class="InternetInf_left_label "> 职位级别： </label>
-                  <span class="detail_inf elips">{{this.FormData.workPost }} </span>
+                <span class="detail_inf elips">{{this.FormData.workPost }} </span>
               </p>
               <p>
                 <label class="InternetInf_right_label">单位电话：</label>
@@ -580,23 +591,23 @@
           <ul>
             <li class="top">
               <label class="InternetInf_left_label ">住址电话调查结论：</label>
-                <span class="detail_inf ComAddr">{{this.FormData.hometelConclusion }} </span>
+              <span class="detail_inf ComAddr">{{this.FormData.hometelConclusion }} </span>
             </li>
             <li>
               <label class="InternetInf_left_label">单位电话调查结论：</label>
-                <span class="detail_inf ComAddr">{{this.FormData.companyConclusion }} </span>
+              <span class="detail_inf ComAddr">{{this.FormData.companyConclusion }} </span>
             </li>
             <li>
               <label class="InternetInf_left_label">家庭联系人调查结论：</label>
-                <span class="detail_inf ComAddr">{{this.FormData.fContractConclusion }} </span>
+              <span class="detail_inf ComAddr">{{this.FormData.fContractConclusion }} </span>
             </li>
             <li>
               <label class="InternetInf_left_label">紧急联系人调查结论：</label>
-                <span class="detail_inf ComAddr">{{this.FormData.eContractConclusion }} </span>
+              <span class="detail_inf ComAddr">{{this.FormData.eContractConclusion }} </span>
             </li>
             <li class="bottom">
               <label class="InternetInf_left_label">工作证明人调查结论：</label>
-                <span class="detail_inf ComAddr">{{this.FormData.jobRefConclusion }} </span>
+              <span class="detail_inf ComAddr">{{this.FormData.jobRefConclusion }} </span>
             </li>
           </ul>
         </div>
@@ -629,11 +640,11 @@
           <ul>
             <li style="width:66.6%;">
               <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
-                <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
+              <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
             </li>
             <li style="marginTop:20px;width:66.6%;">
               <p class="InternetInf_left_label" style="textAlign:right">终审结果评价：</p>
-                <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.ootherfinal}} </span>
+              <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.ootherfinal}} </span>
             </li>
           </ul>
         </div>
@@ -840,7 +851,7 @@
       },
       AreaNPercent() {
         if (this.FormData.selfpremisesArea) {
-          
+
           this.FormData.selfpremisesArea += "m²";
         } else {
           this.FormData.selfpremisesArea = "";
@@ -927,11 +938,11 @@
       this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
         this.getParams = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈专员-匹配查看
-      } 
+      }
       // else if (this.judgeFlag.flag == '04') {
       //   this.getParams = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")); //反欺诈主管-匹配查看
       // } 
-      else if (this.judgeFlag.flag == '05' ||this.judgeFlag.flag == '06') {
+      else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
         this.getParams = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
       }
       // else if ( this.judgeFlag.flag == '06') {
@@ -988,6 +999,7 @@
     display: inline-block;
     width: 210px;
   }
+
   /* 弹窗样式-上网信息-两行select下拉 居中 */
 
   .icon_hat {
@@ -1000,6 +1012,7 @@
     color: rgba(0, 119, 255, 0.75);
     cursor: pointer;
   }
+
   /* 上网查询 */
 
   .InternetInf_right_label {
@@ -1026,6 +1039,7 @@
     display: inline-block;
     text-align: right;
   }
+
   /* ------------------------------上网查询 +核实身份--------------------------- */
 
   .CreditForm_InternetInf p,
@@ -1048,20 +1062,22 @@
     width: 33.3%;
     vertical-align: middle;
   }
+
   /* --------------------------工作信息 + 私营企业--------------------- */
 
   .CheckId_right_label
   /* 第三列p */
 
-  {
+    {
     width: 140px;
   }
+
   .CreditForm_InternetInf p:nth-of-type(even),
   .CreditForm_CheckId p:nth-of-type(even),
   .CreditForm_FamilyInf p:nth-of-type(even)
   /* 家庭信息 */
 
-  {
+    {
     width: 66.6%;
   }
 
@@ -1074,7 +1090,7 @@
   .CreditForm_FamilyInf p:nth-of-type(even) span
   /* 家庭信息 */
 
-  {
+    {
     width: calc( 100% - 225px);
     height: 60px;
     vertical-align: top;
@@ -1083,6 +1099,7 @@
     padding: 5px 10px;
     border-radius: 4px;
   }
+
   /* 工作信息-单位地址 + 私营企业-企业经营项目-------------label 为 182 px */
 
   .ComAddr {
@@ -1094,6 +1111,7 @@
     padding: 5px 10px;
     border-radius: 4px;
   }
+
   /* 省略号 */
 
   .elips {
@@ -1103,11 +1121,13 @@
     white-space: nowrap;
     vertical-align: middle;
   }
+
   /* 第一经销商 */
 
   .Suppliers {
     width: calc( 100% - 205px);
   }
+
   /* 私营企业-第一分销商 --------------------------------label 为 140 px */
 
   .distributor {
@@ -1117,6 +1137,7 @@
     white-space: nowrap;
     vertical-align: middle;
   }
+
   /*-------------------- 核对现住址-------------------------- */
 
   .CreditForm_check_reside li,
@@ -1126,11 +1147,13 @@
     padding: 0;
     margin-bottom: 20px;
   }
+
   .interMath li,
   .PhontConclution li {
     margin-bottom: 20px;
     width: 66.6%;
   }
+
   /* 初审结果div */
 
   .CreditForm_result {

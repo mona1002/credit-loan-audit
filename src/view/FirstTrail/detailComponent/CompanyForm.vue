@@ -2,8 +2,8 @@
 <template>
   <div class="company-form">
     <div class="address-title">
-      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-      <span class="headFont">新增调查日志</span>
+      <i class="collapse_title_icon"></i>
+      <span class="collapse_title_text">新增调查日志</span>
     </div>
     <ul class="content-ul" style="margin-left:15px;">
       <li class="item-column3">
@@ -27,7 +27,8 @@
         </div>
       </li>
       <li class="item-column3">
-        <div class="left-title"><span class="require-icon" style="left:80px;">*</span>来源：</div>
+        <div class="left-title">
+          <span class="require-icon" style="left:80px;">*</span>来源：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="DanWsource" @change="changes('DanWsource')">
@@ -39,7 +40,8 @@
         <!-- </div> -->
       </li>
       <li class="item-column3">
-        <div class="left-title"><span class="require-icon" style="left:50px;">*</span>接听情况：</div>
+        <div class="left-title">
+          <span class="require-icon" style="left:50px;">*</span>接听情况：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="DanWanswer">
@@ -53,7 +55,8 @@
         <!-- </div> -->
       </li>
       <li class="item-column3">
-        <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查阶段：</div>
+        <div class="left-title">
+          <span class="require-icon" style="left:50px;">*</span>调查阶段：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="DanWcheckStage">
@@ -73,8 +76,8 @@
       </li>
     </ul>
     <div class="address-title">
-      <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-      <span class="headFont">录入单位电话调查信息</span>
+      <i class="collapse_title_icon"></i>
+      <span class="collapse_title_text">录入单位电话调查信息</span>
     </div>
     <ul style="margin-left:15px;">
       <div class="content-ul">
@@ -96,7 +99,8 @@
           </div>
         </li>
         <li class="item-column2 item-column3-2">
-          <div class="left-title" v-show="DanWphone=='01'"><span class="require-icon" style="left:80px;">*</span>说明：</div>
+          <div class="left-title" v-show="DanWphone=='01'">
+            <span class="require-icon" style="left:80px;">*</span>说明：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <div class="textarea-class2" v-show="DanWphone=='01'">
               <el-input v-model="DanWphonetxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
@@ -255,7 +259,8 @@
       </div>
       <div class="content-ul">
         <li class="item-column1">
-          <div class="left-title"><span class="require-icon" style="left:50px;">*</span>调查结果：</div>
+          <div class="left-title">
+            <span class="require-icon" style="left:50px;">*</span>调查结果：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <div class="textarea-class">
               <el-input type="textarea" v-model="DanWconclusion" :rows="5" resize=none :maxlength="500"></el-input>
@@ -270,294 +275,53 @@
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      // custName: '',
-      phoneType: '02',
-      // phoneNum: '',
+  export default {
+    data() {
+      return {
+        // custName: '',
+        phoneType: '02',
+        // phoneNum: '',
 
 
-      DanWsource: this.danweiList.source,
-      DanWanswer: this.danweiList.answer,
-      DanWcheckStage: this.danweiList.checkStage,
-      DanWsourceDesc: this.danweiList.sourceDesc,
-      DanWthirdResult: this.danweiList.thirdResult,
-      DanWphone: this.danweiList.phone,
-      DanWphonetxt: this.danweiList.phonetxt,
-      DanWanswerIdentity: this.danweiList.answerIdentity,
-      DanWanswertxt: this.danweiList.answertxt,
-      DanWcompany: this.danweiList.company,
-      DanWcompanytxt: this.danweiList.companytxt,
-      DanWcheckTime: this.danweiList.checkTime,
-      DanWcheckTimetxt: this.danweiList.checkTimetxt,
-      DanWcheckIncome: this.danweiList.checkIncome,
-      DanWcheckIncometxt: this.danweiList.checkIncometxt,
-      DanWpayrollSituation: this.danweiList.payrollSituation,
-      DanWpayrollSituationtxt: this.danweiList.payrollSituationtxt,
-      DanWpensionInsurance: this.danweiList.pensionInsurance,
-      DanWemploymentmode: this.danweiList.employmentmode,
-      DanWemploymentmodetxt: this.danweiList.employmentmodetxt,
-      DanWhousingFund: this.danweiList.housingFund,
-      DanWjobref1: this.danweiList.jobref1,
-      DanWjobref2: this.danweiList.jobref2,
-      DanWconclusion: this.danweiList.conclusion,
+        DanWsource: this.danweiList.source,
+        DanWanswer: this.danweiList.answer,
+        DanWcheckStage: this.danweiList.checkStage,
+        DanWsourceDesc: this.danweiList.sourceDesc,
+        DanWthirdResult: this.danweiList.thirdResult,
+        DanWphone: this.danweiList.phone,
+        DanWphonetxt: this.danweiList.phonetxt,
+        DanWanswerIdentity: this.danweiList.answerIdentity,
+        DanWanswertxt: this.danweiList.answertxt,
+        DanWcompany: this.danweiList.company,
+        DanWcompanytxt: this.danweiList.companytxt,
+        DanWcheckTime: this.danweiList.checkTime,
+        DanWcheckTimetxt: this.danweiList.checkTimetxt,
+        DanWcheckIncome: this.danweiList.checkIncome,
+        DanWcheckIncometxt: this.danweiList.checkIncometxt,
+        DanWpayrollSituation: this.danweiList.payrollSituation,
+        DanWpayrollSituationtxt: this.danweiList.payrollSituationtxt,
+        DanWpensionInsurance: this.danweiList.pensionInsurance,
+        DanWemploymentmode: this.danweiList.employmentmode,
+        DanWemploymentmodetxt: this.danweiList.employmentmodetxt,
+        DanWhousingFund: this.danweiList.housingFund,
+        DanWjobref1: this.danweiList.jobref1,
+        DanWjobref2: this.danweiList.jobref2,
+        DanWconclusion: this.danweiList.conclusion,
 
 
 
-      phoneId: '',
-      resMsg:''
-    }
-  },
-  /*props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull','source' , 'answer' , 'checkStage' , 'sourceDesc' , 'thirdResult' , 'phone' , 'phonetxt' , 'answerIdentity' , 'answertxt' , 'company' , 'companytxt' , 'checkTime' , 'checkTimetxt' , 'checkIncome' , 'checkIncometxt' , 'payrollSituation' , 'payrollSituationtxt' , 'pensionInsurance' , 'employmentmode' , 'employmentmodetxt' , 'housingFund' , 'jobref1' , 'jobref2' , 'conclusion'],*/
-  props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull','danweiList'],
-  mounted() {
-    this.phoneType = '02'; // 单位电话
-    if (this.isFull == true) { // 全屏
-      console.log('全屏');
-      $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
-      $('.item-column1 textarea').css("width", "100%")
-      $('.item-column1 textarea').css("width", "100%")
-      // 提交按钮
-      $('.submit-class').css("margin-left", "calc( 66% - 140px)")
-      // 显示 column2
-      // $('.item-column3').css({
-      //   "min-height": "50px"
-      // })
-      $('.item-column3-2 .textarea-class2').css("width", "calc( 100% - 211px )");
-      $('.item-column2 textarea').css("width", "100%");
-    } else if (this.isFull == false) { // 分屏
-      console.log("分屏");
-      // $(".textarea-class").css("minWidth", "300px")
-      // 提交按钮
-      $('.submit-class').css("margin-left", "370px")
-
-      $('.item-column3').css({
-        "min-height": "0px",
-        "margin-bottom": "10px"
-      })
-      $('.item-column1 textarea').css("width", "300px")
-      $('.item-column2 textarea').css("width", "300px")
-    }
-  },
-  methods: {
-    submitForm() {
-      console.log('submit!');
-      if (!this.DanWsource || !this.DanWanswer || !this.DanWcheckStage || (this.DanWphone == '01' && !this.DanWphonetxt) || !this.DanWconclusion) {
-        this.$message({
-          message: '请输入必填项!',
-          type: 'warning'
-        });
-        return;
-      }
-      this.open();
-    },
-    // open 打开 是否确认提交弹窗
-    open() {
-      const h = this.$createElement;
-      this.$msgbox({
-        title: '提示',
-        message: h('p', null, [
-          h('span', null, '确定操作? '),
-        ]),
-        showCancelButton: true,
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        beforeClose: (action, instance, done) => {
-          if (action === 'confirm') {
-            instance.confirmButtonLoading = true;
-            instance.confirmButtonText = '执行中...';
-            console.log(this.taskId)
-            // 点击 确认 提交 方法
-            this.post('/creTelResearchHis/addComTelLog', {
-              cretelinvest: {
-                custName: this.custName,
-                phoneType: this.phoneType,
-                phoneNum: this.phoneNum,
-                source: this.DanWsource,
-                answer: this.DanWanswer,
-                checkStage: this.DanWcheckStage,
-                sourceDesc: this.DanWsourceDesc, // 其他来源说明
-                applyId: this.applyId,
-                id: this.phoneId
-              },
-              cretelcompany: {
-                applyId: this.applyId,
-                id: this.phoneId,
-                thirdResult: this.DanWthirdResult,
-                phone: this.DanWphone,
-                phonetxt: this.DanWphonetxt,
-                answer: this.DanWanswerIdentity,
-                answertxt: this.DanWanswertxt,
-                company: this.DanWcompany,
-                companytxt: this.DanWcompanytxt,
-                checkTime: this.DanWcheckTime,
-                checkTimetxt: this.DanWcheckTimetxt,
-                checkIncome: this.DanWcheckIncome,
-                checkIncometxt: this.DanWcheckIncometxt,
-                payrollSituation: this.DanWpayrollSituation,
-                payrollSituationtxt: this.DanWpayrollSituationtxt,
-                pensionInsurance: this.DanWpensionInsurance,
-                employmentmodetxt: this.DanWemploymentmodetxt,
-                employmentmode: this.DanWemploymentmode,
-                housingFund: this.DanWhousingFund,
-                jobref1: this.DanWjobref1,
-                jobref2: this.DanWjobref2,
-                conclusion: this.DanWconclusion
-              }
-            }).then(res => {
-              if (res.statusCode == '200') {
-                this.phoneId ='';
-                // 清数据
-                /* this.source = '';
-                 this.answer = '';
-                 this.checkStage = '';
-                 this.sourceDesc = '';
-                 this.thirdResult = '';
-                 this.phone = '';
-                 this.phonetxt = '';
-                 this.answerIdentity = '';
-                 this.answertxt = '';
-                 this.company = '';
-                 this.companytxt = '';
-                 this.checkTime = '';
-                 this.checkTimetxt = '';
-                 this.checkIncome = '';
-                 this.checkIncometxt = '';
-                 this.payrollSituation = '';
-                 this.payrollSituationtxt = '';
-                 this.pensionInsurance = '';
-                 this.employmentmodetxt = '';
-                 this.employmentmode = '';
-                 this.housingFund = '';
-                 this.jobref1 = '';
-                 this.jobref2 = '';
-                 this.conclusion = '';*/
-                // 提交数据成功,广播事件 重新刷新列表
-                this.$emit('updateList');
-                this.$emit('updateTree');
-                this.resMsg = res.msg;
-                done();
-              } else {
-                this.resMsg = res.msg;
-
-                instance.confirmButtonText = '';
-              }
-              instance.confirmButtonLoading = false;
-            });
-          } else {
-            // this.$message({ message: this.resMsg, type: 'warning' });
-
-            done();
-          }
-        }
-      }).then(action => {
-        this.$message({ type: 'success', message: this.resMsg });
-
-      });
-    },
-    showMessage(value) {
-      this.$message({
-        message: '输入长度不能超出' + value,
-        type: 'warning'
-      });
-      return;
-    },
-    changes(flage){
-      switch (flage){
-        case 'DanWsource':
-          if(this.DanWsource != '02'){
-            this.DanWsourceDesc  = '';
-          }
-        break;
-        case 'DanWphone':
-          if(this.DanWphone == '00'){
-          this.DanWphonetxt  = '';
-        }
-        break;
-        case 'DanWcompany':
-          if(this.DanWcompany != '01'){
-          this.DanWcompanytxt  = '';
-        }
-        break;
-        case 'DanWanswerIdentity':
-          if(this.DanWanswerIdentity == '01'){
-          this.DanWanswertxt  = '';
-        }
-        break;
-        case 'DanWcheckTime':
-          if(this.DanWcheckTime=='01'){
-            this.DanWcheckTimetxt  = '';
-          } 
-        break;
-        case 'DanWcheckIncome':
-          if(this.DanWcheckIncome=='01'){
-          this.DanWcheckIncometxt  = '';
-        }
-        break;
-        case 'DanWpayrollSituation':
-          if(this.DanWpayrollSituation=='01'){
-            this.DanWpayrollSituationtxt  = '';
-          }
-        break;
+        phoneId: '',
+        resMsg: ''
       }
     },
-  },
-  watch: {
-    /*source: function() {
-      this.sourceDesc = '';
-    },
-    phone: function() {
-      this.phonetxt = '';
-    },
-    answerIdentity: function() {
-      this.answertxt = '';
-    },
-    company: function() {
-      this.companytxt = '';
-    },
-    checkTime: function() {
-      this.checkTimetxt = '';
-    },
-    checkIncome: function() {
-      this.checkIncometxt = '';
-    },
-    payrollSituation: function() {
-      this.payrollSituationtxt = '';
-    },*/
-     danweiList(val){
-      console.log(val);
-      this.DanWsource = val.source;
-      this.DanWanswer = val.answer;
-      this.DanWcheckStage = val.checkStage;
-      this.DanWsourceDesc = val.sourceDesc;
-      this.DanWthirdResult = val.thirdResult;
-      this.DanWphone = val.phone;
-      this.DanWphonetxt = val.phonetxt;
-      this.DanWanswerIdentity = val.answerIdentity;
-      this.DanWanswertxt = val.answertxt;
-      this.DanWcompany = val.company;
-      this.DanWcompanytxt = val.companytxt;
-      this.DanWcheckTime = val.checkTime;
-      this.DanWcheckTimetxt = val.checkTimetxt;
-      this.DanWcheckIncome = val.checkIncome;
-      this.DanWcheckIncometxt = val.checkIncometxt;
-      this.DanWpayrollSituation = val.payrollSituation;
-      this.DanWpayrollSituationtxt = val.payrollSituationtxt;
-      this.DanWpensionInsurance = val.pensionInsurance;
-      this.DanWemploymentmode = val.employmentmode;
-      this.DanWemploymentmodetxt = val.employmentmodetxt;
-      this.DanWhousingFund = val.housingFund;
-      this.DanWjobref1 = val.jobref1;
-      this.DanWjobref2 = val.jobref2;
-      this.DanWconclusion = val.conclusion;
-    },
-    // 判断全屏 , 更改样式
-    // 判断全屏 , 更改样式
-    isFull: function(val) {
-      if (val == true) { // 全屏
+    /*props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull','source' , 'answer' , 'checkStage' , 'sourceDesc' , 'thirdResult' , 'phone' , 'phonetxt' , 'answerIdentity' , 'answertxt' , 'company' , 'companytxt' , 'checkTime' , 'checkTimetxt' , 'checkIncome' , 'checkIncometxt' , 'payrollSituation' , 'payrollSituationtxt' , 'pensionInsurance' , 'employmentmode' , 'employmentmodetxt' , 'housingFund' , 'jobref1' , 'jobref2' , 'conclusion'],*/
+    props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull', 'danweiList'],
+    mounted() {
+      this.phoneType = '02'; // 单位电话
+      if (this.isFull == true) { // 全屏
         console.log('全屏');
         $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
+        $('.item-column1 textarea').css("width", "100%")
         $('.item-column1 textarea').css("width", "100%")
         // 提交按钮
         $('.submit-class').css("margin-left", "calc( 66% - 140px)")
@@ -567,7 +331,7 @@ export default {
         // })
         $('.item-column3-2 .textarea-class2').css("width", "calc( 100% - 211px )");
         $('.item-column2 textarea').css("width", "100%");
-      } else if (val == false) { // 分屏
+      } else if (this.isFull == false) { // 分屏
         console.log("分屏");
         // $(".textarea-class").css("minWidth", "300px")
         // 提交按钮
@@ -580,8 +344,253 @@ export default {
         $('.item-column1 textarea').css("width", "300px")
         $('.item-column2 textarea').css("width", "300px")
       }
+    },
+    methods: {
+      submitForm() {
+        console.log('submit!');
+        if (!this.DanWsource || !this.DanWanswer || !this.DanWcheckStage || (this.DanWphone == '01' && !this.DanWphonetxt) ||
+          !this.DanWconclusion) {
+          this.$message({
+            message: '请输入必填项!',
+            type: 'warning'
+          });
+          return;
+        }
+        this.open();
+      },
+      // open 打开 是否确认提交弹窗
+      open() {
+        const h = this.$createElement;
+        this.$msgbox({
+          title: '提示',
+          message: h('p', null, [
+            h('span', null, '确定操作? '),
+          ]),
+          showCancelButton: true,
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          beforeClose: (action, instance, done) => {
+            if (action === 'confirm') {
+              instance.confirmButtonLoading = true;
+              instance.confirmButtonText = '执行中...';
+              console.log(this.taskId)
+              // 点击 确认 提交 方法
+              this.post('/creTelResearchHis/addComTelLog', {
+                cretelinvest: {
+                  custName: this.custName,
+                  phoneType: this.phoneType,
+                  phoneNum: this.phoneNum,
+                  source: this.DanWsource,
+                  answer: this.DanWanswer,
+                  checkStage: this.DanWcheckStage,
+                  sourceDesc: this.DanWsourceDesc, // 其他来源说明
+                  applyId: this.applyId,
+                  id: this.phoneId
+                },
+                cretelcompany: {
+                  applyId: this.applyId,
+                  id: this.phoneId,
+                  thirdResult: this.DanWthirdResult,
+                  phone: this.DanWphone,
+                  phonetxt: this.DanWphonetxt,
+                  answer: this.DanWanswerIdentity,
+                  answertxt: this.DanWanswertxt,
+                  company: this.DanWcompany,
+                  companytxt: this.DanWcompanytxt,
+                  checkTime: this.DanWcheckTime,
+                  checkTimetxt: this.DanWcheckTimetxt,
+                  checkIncome: this.DanWcheckIncome,
+                  checkIncometxt: this.DanWcheckIncometxt,
+                  payrollSituation: this.DanWpayrollSituation,
+                  payrollSituationtxt: this.DanWpayrollSituationtxt,
+                  pensionInsurance: this.DanWpensionInsurance,
+                  employmentmodetxt: this.DanWemploymentmodetxt,
+                  employmentmode: this.DanWemploymentmode,
+                  housingFund: this.DanWhousingFund,
+                  jobref1: this.DanWjobref1,
+                  jobref2: this.DanWjobref2,
+                  conclusion: this.DanWconclusion
+                }
+              }).then(res => {
+                if (res.statusCode == '200') {
+                  this.phoneId = '';
+                  // 清数据
+                  /* this.source = '';
+                   this.answer = '';
+                   this.checkStage = '';
+                   this.sourceDesc = '';
+                   this.thirdResult = '';
+                   this.phone = '';
+                   this.phonetxt = '';
+                   this.answerIdentity = '';
+                   this.answertxt = '';
+                   this.company = '';
+                   this.companytxt = '';
+                   this.checkTime = '';
+                   this.checkTimetxt = '';
+                   this.checkIncome = '';
+                   this.checkIncometxt = '';
+                   this.payrollSituation = '';
+                   this.payrollSituationtxt = '';
+                   this.pensionInsurance = '';
+                   this.employmentmodetxt = '';
+                   this.employmentmode = '';
+                   this.housingFund = '';
+                   this.jobref1 = '';
+                   this.jobref2 = '';
+                   this.conclusion = '';*/
+                  // 提交数据成功,广播事件 重新刷新列表
+                  this.$emit('updateList');
+                  this.$emit('updateTree');
+                  this.resMsg = res.msg;
+                  done();
+                } else {
+                  this.resMsg = res.msg;
+
+                  instance.confirmButtonText = '';
+                }
+                instance.confirmButtonLoading = false;
+              });
+            } else {
+              // this.$message({ message: this.resMsg, type: 'warning' });
+
+              done();
+            }
+          }
+        }).then(action => {
+          this.$message({
+            type: 'success',
+            message: this.resMsg
+          });
+
+        });
+      },
+      showMessage(value) {
+        this.$message({
+          message: '输入长度不能超出' + value,
+          type: 'warning'
+        });
+        return;
+      },
+      changes(flage) {
+        switch (flage) {
+          case 'DanWsource':
+            if (this.DanWsource != '02') {
+              this.DanWsourceDesc = '';
+            }
+            break;
+          case 'DanWphone':
+            if (this.DanWphone == '00') {
+              this.DanWphonetxt = '';
+            }
+            break;
+          case 'DanWcompany':
+            if (this.DanWcompany != '01') {
+              this.DanWcompanytxt = '';
+            }
+            break;
+          case 'DanWanswerIdentity':
+            if (this.DanWanswerIdentity == '01') {
+              this.DanWanswertxt = '';
+            }
+            break;
+          case 'DanWcheckTime':
+            if (this.DanWcheckTime == '01') {
+              this.DanWcheckTimetxt = '';
+            }
+            break;
+          case 'DanWcheckIncome':
+            if (this.DanWcheckIncome == '01') {
+              this.DanWcheckIncometxt = '';
+            }
+            break;
+          case 'DanWpayrollSituation':
+            if (this.DanWpayrollSituation == '01') {
+              this.DanWpayrollSituationtxt = '';
+            }
+            break;
+        }
+      },
+    },
+    watch: {
+      /*source: function() {
+        this.sourceDesc = '';
+      },
+      phone: function() {
+        this.phonetxt = '';
+      },
+      answerIdentity: function() {
+        this.answertxt = '';
+      },
+      company: function() {
+        this.companytxt = '';
+      },
+      checkTime: function() {
+        this.checkTimetxt = '';
+      },
+      checkIncome: function() {
+        this.checkIncometxt = '';
+      },
+      payrollSituation: function() {
+        this.payrollSituationtxt = '';
+      },*/
+      danweiList(val) {
+        console.log(val);
+        this.DanWsource = val.source;
+        this.DanWanswer = val.answer;
+        this.DanWcheckStage = val.checkStage;
+        this.DanWsourceDesc = val.sourceDesc;
+        this.DanWthirdResult = val.thirdResult;
+        this.DanWphone = val.phone;
+        this.DanWphonetxt = val.phonetxt;
+        this.DanWanswerIdentity = val.answerIdentity;
+        this.DanWanswertxt = val.answertxt;
+        this.DanWcompany = val.company;
+        this.DanWcompanytxt = val.companytxt;
+        this.DanWcheckTime = val.checkTime;
+        this.DanWcheckTimetxt = val.checkTimetxt;
+        this.DanWcheckIncome = val.checkIncome;
+        this.DanWcheckIncometxt = val.checkIncometxt;
+        this.DanWpayrollSituation = val.payrollSituation;
+        this.DanWpayrollSituationtxt = val.payrollSituationtxt;
+        this.DanWpensionInsurance = val.pensionInsurance;
+        this.DanWemploymentmode = val.employmentmode;
+        this.DanWemploymentmodetxt = val.employmentmodetxt;
+        this.DanWhousingFund = val.housingFund;
+        this.DanWjobref1 = val.jobref1;
+        this.DanWjobref2 = val.jobref2;
+        this.DanWconclusion = val.conclusion;
+      },
+      // 判断全屏 , 更改样式
+      // 判断全屏 , 更改样式
+      isFull: function (val) {
+        if (val == true) { // 全屏
+          console.log('全屏');
+          $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
+          $('.item-column1 textarea').css("width", "100%")
+          // 提交按钮
+          $('.submit-class').css("margin-left", "calc( 66% - 140px)")
+          // 显示 column2
+          // $('.item-column3').css({
+          //   "min-height": "50px"
+          // })
+          $('.item-column3-2 .textarea-class2').css("width", "calc( 100% - 211px )");
+          $('.item-column2 textarea').css("width", "100%");
+        } else if (val == false) { // 分屏
+          console.log("分屏");
+          // $(".textarea-class").css("minWidth", "300px")
+          // 提交按钮
+          $('.submit-class').css("margin-left", "370px")
+
+          $('.item-column3').css({
+            "min-height": "0px",
+            "margin-bottom": "10px"
+          })
+          $('.item-column1 textarea').css("width", "300px")
+          $('.item-column2 textarea').css("width", "300px")
+        }
+      }
     }
   }
-}
 
 </script>

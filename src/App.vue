@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <myHead></myHead>
-   <keep-alive> <router-view class="Abody"></router-view></keep-alive>
+    <keep-alive>
+      <router-view class="Abody"></router-view>
+    </keep-alive>
     <tag class="fottt"></tag>
   </div>
 </template>
@@ -34,12 +36,11 @@
 
 </script>
 <style>
-
-  /* @import "../static/css/base.css"; */
+  @import "../static/css/base.css";
   @import "../static/css/common.css";
   @import "../static/css/element_UI.css";
   @import "../static/css/pagePublic.css";
-  
+
   .fottt {
     position: absolute;
     left: 0;
@@ -48,4 +49,5 @@
     height: 39px;
     z-index: 2;
   }
+
 </style>

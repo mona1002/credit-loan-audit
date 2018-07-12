@@ -44,7 +44,6 @@
     data() {
       return {
         datas: [],
-        //aaa:false,
       };
     },
     mounted(){
@@ -76,7 +75,6 @@
 
         },
         selectMenu(index, indexPath) {
-          //console.log(indexPath);
           /**
            * 在选择父级菜单时自动关闭其下所有子菜单
            * 选择时获取点击菜单的父级index，并计算得到该index在已打开菜单中的索引值，
@@ -114,7 +112,6 @@
           }
         },
        ri(){
-        console.log(this.$refs.contains.style.left);
         if($('.navContain').width()<=$('.wrap').width()){
             $('#iconr').attr("disabled",true);
           }else if($('.navContain').width()>$('.wrap').width()){
@@ -128,7 +125,6 @@
     },
     computed: {
       onRoutes() {
-        //console.log(this.$route.resUrl);
         return this.$route.resUrl
       },
     },

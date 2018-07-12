@@ -113,8 +113,6 @@
     },
     methods: {
       mountedInf() {
-
-
         // 统一登录平台  
         // this.get(UserURL + 'remote/user/getUserInfo?' + Math.random()).then(response => {
         //   this.userInf = {
@@ -126,7 +124,6 @@
         //     flowRoleCodesList: response.data.flowRoleCodesList
         //   }
         //   localStorage.setItem("userInf", JSON.stringify(this.userInf));
-
         // });
         this.post("/workFlowTaskQuery/getTaskProfile", {
           taskStatus: "01",

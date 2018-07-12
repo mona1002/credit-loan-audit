@@ -176,27 +176,27 @@
     <!-- 更改的 添加电话选项 -->
     <el-dialog title="添加申请单电话信息" :visible.sync="dialogFormVisible" :modal="false" width="330px" top='20vh'>
       <el-form>
-        <span class="require-icon" style="left:20px;line-height:45px;">*</span>
-        <el-form-item label="电话类型:" :label-width="addTellFormLabelWidth" prop="addTelType">
+        <span class="require-icon" style="left:20px;line-height:38px;">*</span>
+        <el-form-item label="电话类型：" :label-width="addTellFormLabelWidth" prop="addTelType">
           <el-select v-model="addTelType" placeholder="请选择">
             <el-option v-for="item in telTypes" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
-        <span class="require-icon" style="left:20px;line-height:45px;">*</span>
-        <el-form-item label="电话名称:" :label-width="addTellFormLabelWidth" prop="addTelName">
+        <span class="require-icon" style="left:20px;line-height:38px;">*</span>
+        <el-form-item label="电话名称：" :label-width="addTellFormLabelWidth" prop="addTelName">
           <el-input v-model="addTelName" auto-complete="off"></el-input>
         </el-form-item>
-        <span class="require-icon" style="left:50px;line-height:45px;" v-show="(addTelType!='01'|| addTelType!='02') && (addTelType=='03' || addTelType=='04' || addTelType=='05')">*</span>
-        <el-form-item label="关系:" v-show="(addTelType!='01'|| addTelType!='02') && (addTelType=='03' || addTelType=='04' || addTelType=='05')"
+        <span class="require-icon" style="left:50px;line-height:38px;" v-show="(addTelType!='01'|| addTelType!='02') && (addTelType=='03' || addTelType=='04' || addTelType=='05')">*</span>
+        <el-form-item label="关系：" v-show="(addTelType!='01'|| addTelType!='02') && (addTelType=='03' || addTelType=='04' || addTelType=='05')"
           :label-width="addTellFormLabelWidth">
           <el-select v-model="addRelationShip" placeholder="请选择">
             <el-option v-for="item in relationShips" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
-        <span class="require-icon" style="left:20px;line-height:45px;">*</span>
-        <el-form-item label="电话号码:" :label-width="addTellFormLabelWidth" prop="addTelNum">
+        <span class="require-icon" style="left:20px;line-height:38px;">*</span>
+        <el-form-item label="电话号码：" :label-width="addTellFormLabelWidth" prop="addTelNum">
           <el-input auto-complete="off" v-model="addTelNum"></el-input>
         </el-form-item>
       </el-form>
@@ -215,7 +215,7 @@
         <ul class="add-content">
           <li>
             <span class="add-label">
-              <span class="require-icon">*</span>电话类型:</span>
+              <span class="require-icon">*</span>电话类型：</span>
             <el-select v-model="addTelType" placeholder="请选择">
               <el-option v-for="item in telTypes" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
@@ -223,13 +223,13 @@
           </li>
           <li>
             <span class="add-label">
-              <span class="require-icon">*</span>电话名称:</span>
+              <span class="require-icon">*</span>电话名称：</span>
             <el-input type="text" name="" v-model="addTelName" value="" placeholder=""></el-input>
           </li>
           <!--  v-show="telType='01'|| telType='02'" -->
           <li v-show="(addTelType!='01'|| addTelType!='02') && (addTelType=='03' || addTelType=='04' || addTelType=='05')">
             <span class="add-label">
-              <span class="require-icon">*</span>关系:</span>
+              <span class="require-icon">*</span>关系：</span>
             <el-select v-model="addRelationShip" placeholder="请选择">
               <el-option v-for="item in relationShips" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
@@ -237,7 +237,7 @@
           </li>
           <li>
             <span class="add-label">
-              <span class="require-icon">*</span>电话号码:</span>
+              <span class="require-icon">*</span>电话号码：</span>
             <el-input type="text" name="" v-model="addTelNum" value=""></el-input>
           </li>
           <li>
@@ -1806,18 +1806,8 @@
   /* 必填 * */
 
   .phone-credit .require-icon {
-    color: #ff0000;
-    display: inline-block;
     width: 0px;
     float: left;
-    position: absolute;
-    left: 38px;
-    line-height: 35px;
-
-    color: red;
-    font-weight: 700;
-    font-size: 16px;
-    vertical-align: middle;
   }
 
 

@@ -648,8 +648,8 @@ height: auto !important;
 #app .workbench .el-collapse-item__header {
   background: white;
   border: 1px solid #D5D5D5;
-  /* height: 40px;
-  line-height: 40px; */
+  height: 40px;
+  line-height: 40px;
   font-size: 15.5px;
   color: #173a56;
   font-weight: bold;
@@ -1569,10 +1569,7 @@ body .el-menu--horizontal {
 }
 
 body .el-menu--horizontal .el-menu--popup {
-  /* padding: 5px 20px !important; */
   background: transparent;
-  /*  margin-top: 5px; */
-  /* min-width: 142px; */
   min-width: 120px;
   margin-top: 0;
 }
@@ -1584,10 +1581,6 @@ body .el-menu--horizontal .el-menu--popup div {
 body .el-menu--horizontal .el-menu--popup div:nth-of-type(1) {
   margin-top: 0;
 }
-
-/* body .el-menu--horizontal .el-menu--popup div:last-of-type{
-  margin-bottom: 0;
-} */
 
 body .el-menu--horizontal .el-menu .el-menu-item {
   background-color: transparent;
@@ -1639,9 +1632,7 @@ body .el-menu--horizontal .el-menu .el-submenu .el-submenu__icon-arrow:before {
 /* 三级 */
 
 body .el-menu--horizontal .el-menu--popup .el-submenu .el-menu--horizontal {
-  /* top:5px !important; */
-  /* left: 137px !important; */
-  left: 148px !important;
+  left: 125px !important;
 }
 
 body .el-menu--horizontal .el-menu--popup .el-submenu .el-menu--horizontal .el-menu--popup {

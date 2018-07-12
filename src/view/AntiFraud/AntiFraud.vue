@@ -39,17 +39,17 @@
         </el-table-column>
         <el-table-column prop="applySubno" label="进件编号" width='160'>
         </el-table-column>
-        <el-table-column prop="appDate" label="申请日期"  width='160'>
+        <el-table-column prop="appDate" label="申请日期" width='160'>
         </el-table-column>
         <el-table-column prop="applyCustName" label="客户名称" width='120'>
         </el-table-column>
         <el-table-column prop="certTypeTxt" label="证件类型">
         </el-table-column>
-        <el-table-column prop="certCode" label="证件号码"  width='160'>
+        <el-table-column prop="certCode" label="证件号码" width='160'>
         </el-table-column>
         <el-table-column prop="mainreaName" label="欺诈类型主原因" width="120">
         </el-table-column>
-        <el-table-column prop="subreaName" label="子原因"  width='120'>
+        <el-table-column prop="subreaName" label="子原因" width='120'>
         </el-table-column>
         <el-table-column prop="applyDesc" label="反欺诈上报描述" width="150">
         </el-table-column>
@@ -215,7 +215,7 @@
       },
       // 反欺诈申请编辑
       handleClickEdit(row) {
-        console.log(1,row)
+        console.log(1, row)
         // row 有值, 跳编辑
         if (row) {
           // 跳转到编辑

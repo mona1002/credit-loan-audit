@@ -293,6 +293,10 @@ table {
   top: -20px;
 }
 
+.font_weight_800 {
+  font-weight: 800;
+}
+
 .submitPage_button {
   margin-top: 100px;
   width: 90%;
@@ -375,7 +379,6 @@ table {
   height: 30px;
   width: 30px;
   display: inline-block;
-  /* background-size:contain; */
 }
 
 .title_icon_span {
