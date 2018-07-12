@@ -3,9 +3,9 @@
     <div ref='tag_wrap' class="tagWrap">
       <div ref='tag_ref' class="tag_Ref" :style="{left:activeLeft+'px'}">
         <nobr>
-          <div :class="[isActive(tag)?'active':'','pai']" :key="ind" v-for="(tag,ind) in visitedViews" @click="changeFlag(tag)">
+          <div class="pai" :key="ind" v-for="(tag,ind) in visitedViews" @click="changeFlag(tag)">
             <router-link :to='tag.StatefullPath' ref="tag_self">
-              <p class="button_bottom">
+              <p class="button_bottom" :class="[isActive(tag)?'active':'']">
                 <span v-show="tag.name!='工作台'" @click.stop.prevent="handleClose(tag,$event)" class="el-icon-close close_tag"> </span> {{tag.name}}
               </p>
             </router-link>
@@ -111,7 +111,7 @@
   }
 
   .active {
-    opacity: .6;
+    background: #0077ffcc;
   }
 
   .close_tag {
