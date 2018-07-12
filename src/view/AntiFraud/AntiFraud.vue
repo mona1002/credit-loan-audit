@@ -37,19 +37,19 @@
       <el-table :data="antiTableData.recordList" border height="510" highlight-current-row class="anti-table" @row-dblclick='goDetail'>
         <el-table-column type="index" label="序号" width="50">
         </el-table-column>
-        <el-table-column prop="applySubno" label="进件编号">
+        <el-table-column prop="applySubno" label="进件编号" width='160'>
         </el-table-column>
-        <el-table-column prop="appDate" label="申请日期">
+        <el-table-column prop="appDate" label="申请日期"  width='160'>
         </el-table-column>
-        <el-table-column prop="applyCustName" label="客户名称">
+        <el-table-column prop="applyCustName" label="客户名称" width='120'>
         </el-table-column>
         <el-table-column prop="certTypeTxt" label="证件类型">
         </el-table-column>
-        <el-table-column prop="certCode" label="证件号码">
+        <el-table-column prop="certCode" label="证件号码"  width='160'>
         </el-table-column>
         <el-table-column prop="mainreaName" label="欺诈类型主原因" width="120">
         </el-table-column>
-        <el-table-column prop="subreaName" label="子原因">
+        <el-table-column prop="subreaName" label="子原因"  width='120'>
         </el-table-column>
         <el-table-column prop="applyDesc" label="反欺诈上报描述" width="150">
         </el-table-column>
@@ -170,12 +170,12 @@
       // }
 
       // 反欺诈申请 - 列表
-      this.queryList();
+      // this.queryList();
     },
     watch: {
       '$route' (to, from) {
         if (to.path === '/AntiFraud') {
-          this.queryList();
+          // this.queryList();
         }
       }
     },
@@ -215,6 +215,7 @@
       },
       // 反欺诈申请编辑
       handleClickEdit(row) {
+        console.log(1,row)
         // row 有值, 跳编辑
         if (row) {
           // 跳转到编辑

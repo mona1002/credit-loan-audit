@@ -160,7 +160,7 @@
         <i class="approve_icon HangUpIcon"></i>
         <span class="approve_text">挂起</span>
       </span>
-      <span class="approve_item" @click="coverFn('02')">
+      <span class="approve_item"  v-show="judgeFlag != '03'"  @click="coverFn('02')">
         <i class="approve_icon backIcon"></i>
         <span class="approve_text">回退</span>
       </span>
