@@ -33,7 +33,6 @@
 .page {
   text-align: center;
   margin-top: 20px;
-  /* background:red; */
 }
 .page_top_bottom_10{
   text-align: center;
@@ -49,7 +48,6 @@
   height: calc(100% - 90px);
   overflow-y: hidden;
   padding: 0 9px;
-  /* border: 2px solid red; */
 }
 
 .SplitScreen .tab1Default {
@@ -339,6 +337,12 @@
 .checkedInf .text_area_span_minus170 {
   width: calc(100% - 170px);
 }
+.checkedInf .text_area_span_minus150 {
+  width: calc(100% - 150px);
+}
+.checkedInf .text_area_span_minus115 {
+  width: calc(100% - 115px);
+}
 /* 模拟文本域框 */
 
 .checkedInf .text_area_li {
@@ -380,6 +384,9 @@ line-height: 35px;
 }
 .label_width_166{
   width: 166px;
+}
+.label_width_145{
+  width: 145px;
 }
 .label_width_130{
   width: 130px;

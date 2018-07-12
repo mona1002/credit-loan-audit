@@ -1,10 +1,134 @@
 <!-- 电话征信 - 单位电话 历史 -->
 <template>
   <div>
-    <el-form ref="form" label-width="150px">
+    <el-collapse ref="form" v-model="activeName">
+      <el-collapse-item name='1'>
+        <template slot="title">
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">新增调查日志</span>
+        </template>
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
+          <ul>
+            <li>
+              <label class="label_width_166">电话名称：</label>
+              <span> {{comData.custName}}</span>
+            </li>
+            <li>
+              <label class="label_width_166">电话类型：</label>
+              <span> {{comData.phoneTypeDes}}</span>
+            </li>
+            <li>
+              <label class="label_width_166">电话号码：</label>
+              <span> {{comData.phoneNum}}</span>
+            </li>
+            <li>
+              <label class="label_width_166">来源：</label>
+              <span> {{comData.sourceDes}}</span>
+            </li>
+            <li>
+              <label class="label_width_166">接听情况：</label>
+              <span> {{comData.answerDes}}</span>
+            </li>
+            <li>
+              <label class="label_width_166">调查情况：</label>
+              <span> {{comData.checkStageDes}}</span>
+            </li>
+          </ul>
+        </div>
+      </el-collapse-item>
+      <el-collapse-item name='2'>
+        <template slot="title">
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">录入单位电话调查信息</span>
+        </template>
+        <div class="checkedInf checkedInf_li_width_half clearFix">
+          <ul>
+            <li class="text_area_li">
+              <label class="label_width_166">第三方查询信息：</label>
+              <span class="text_area_span text_area_span_minus170"> {{comData.thirdResult}}</span>
+            </li>
+            <li class="clearFloat">
+              <label class="label_width_166">拨打电话：</label>
+              <span> {{comData.phoneDes}}</span>
+            </li>
+            <li class="text_area_li" v-show="comData.phone=='01'">
+              <label class="label_width_145">说明：</label>
+              <span class="text_area_span text_area_span_minus150"> {{comData.phonetxt}}</span>
+            </li>
+            <li class="clearFloat">
+              <label class="label_width_166">接电话人身份：</label>
+              <span> {{comData.answerIdentityDes}}</span>
+            </li>
+            <li  class="text_area_li margin_top_5" v-show="comData.answerIdentity=='00'">
+              <label class="label_width_145">说明：</label>
+              <span class="text_area_span text_area_span_minus150"> {{comData.answertxt}}</span>
+            </li>
+            <li class="clearFloat">
+              <label class="label_width_166">核对单位及工作信息：</label>
+              <span> {{comData.companyDes}}</span>
+            </li>
+            <li class="text_area_li margin_top_5"   v-show="comData.company=='01'">
+              <label class="label_width_145">说明：</label>
+              <span class="text_area_span text_area_span_minus150"> {{comData.companytxt}}</span>
+            </li>
+            <li class="clearFloat">
+              <label class="label_width_166">核对工作时间：</label>
+              <span> {{comData.checkTimeDes}}</span>
+            </li>
+            <li class="text_area_li margin_top_5" v-show="comData.checkTime=='01'">
+              <label class="label_width_145">说明：</label>
+              <span class="text_area_span text_area_span_minus150"> {{comData.checkTimetxt}}</span>
+            </li>
+            <li class="clearFloat">
+              <label class="label_width_166">核对收入：</label>
+              <span> {{comData.checkIncomeDes}}</span>
+            </li>
+            <li class="text_area_li margin_top_5" v-show="comData.checkIncome=='00'" >
+              <label class="label_width_145">说明：</label>
+              <span class="text_area_span text_area_span_minus150"> {{comData.checkIncometxt}}</span>
+            </li>
+            <li class="clearFloat">
+              <label class="label_width_166">用工方式：</label>
+              <span> {{comData.employmentmodeDes}}</span>
+            </li>
+            <li  class="clearFloat">
+              <label class="label_width_166">工资发放情况：</label>
+              <span> {{comData.payrollSituationDes}}</span>
+            </li>
+             <li class="text_area_li margin_top_5"  v-show="comData.payrollSituation=='00'">
+              <label class="label_width_145">说明：</label>
+              <span class="text_area_span text_area_span_minus150"> {{comData.payrollSituationtxt}}</span>
+            </li>
+            <li  class="clearFloat">
+              <label class="label_width_166">是否缴纳养老保险：</label>
+              <span> {{comData.pensionInsuranceDes}}</span>
+            </li>
+              <li>
+              <label class="label_width_145">是否缴纳住房公积金：</label>
+              <span> {{comData.housingFundDes}}</span>
+            </li>
+               <li>
+              <label class="label_width_166">核对工作证明人1：</label>
+              <span> {{comData.jobref1}}</span>
+            </li>
+               <li>
+              <label class="label_width_145">核对工作证明人2：</label>
+              <span> {{comData.jobref2}}</span>
+            </li>
+            <li class="text_area_li clearFloat">
+              <label class="label_width_166">调查结果：</label>
+              <span class="text_area_span text_area_span_minus170"> {{comData.conclusion}}</span>
+            </li>
+          </ul>
+        </div>
+      </el-collapse-item>
+    </el-collapse>
+
+
+    <!-- <el-form ref="form" label-width="150px">
       <div class="address-title">
-        <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-        <span class="headFont">新增调查日志</span>
+       <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">新增调查日志</span>
       </div>
       <div style="margin-left:30px;">
         <el-form-item label="电话名称：" class="item-column3">
@@ -30,8 +154,8 @@
         </el-form-item>
       </div>
       <div class="address-title">
-        <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-        <span class="headFont">录入单位电话调查信息</span>
+        <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">录入单位电话调查信息</span>
       </div>
       <div style="margin-left:30px;">
         <el-form-item label="第三方查询信息：" class="item-column1" style="min-width:600px;">
@@ -130,13 +254,13 @@
           <div style="white-space: pre-wrap;"> {{comData.conclusion}} </div>
         </el-form-item>
       </div>
-    </el-form>
+    </el-form> -->
   </div>
 </template>
 <script>
   export default {
     data() {
-      return {}
+      return {activeName: ['1', '2'],   imageUrl: ''}
     },
     props: ['comData', 'isFull'],
     mounted() {

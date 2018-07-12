@@ -41,22 +41,11 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">录入家庭联系人电话调查信息</span>
         </template>
-        <!-- <div class="checkedInf checkedInf_li_width_triplet clearFix">
-          <ul>
-            <li class="text_area_li triplet_textarea_width"><label class="label_width_166">第三方查询信息：</label><span class="text_area_span text_area_span_minus220">   {{familyData.thirdResult}}</span> </li>
-            <li class="clearFloat"><label class="label_width_166">三方查询是否异常：</label><span>   {{familyData.threeQueriesDes}}</span> </li>
-            <li class="text_area_li triplet_textarea_width"><label class="label_width_166">说明：</label><span class="text_area_span text_area_span_minus220">   {{familyData.thirdResult}}</span> </li>  
-            <li><label class="label_width_166">电话名称：</label><span>  {{familyData.threeQueriesDes}}</span> </li>
-            <li><label class="label_width_166">电话名称：</label><span>  {{familyData.threeQueriesDes}}</span> </li>
-            <li><label class="label_width_166">电话名称：</label><span>  {{familyData.threeQueriesDes}}</span> </li>
-            <li><label class="label_width_166">电话名称：</label><span>  {{familyData.threeQueriesDes}}</span> </li>
-           </ul>
-        </div> -->
         <div class="checkedInf checkedInf_li_width_half clearFix">
           <ul>
             <li class="text_area_li">
               <label class="label_width_166">第三方查询信息：</label>
-              <span class="text_area_span text_area_span_minus170"> {{familyData.threeQueriesDes}}</span>
+              <span class="text_area_span text_area_span_minus170"> {{familyData.thirdResult}}</span>
             </li>
             <li class="clearFloat">
               <label class="label_width_166">三方查询是否异常：</label>
@@ -64,7 +53,7 @@
             </li>
             <li v-show="familyData.threeQueries=='1'" class="text_area_li">
               <label class="label_width_110">说明：</label>
-              <span class="text_area_span text_area_span_minus170"> {{familyData.threeQueriestxt}}</span>
+              <span class="text_area_span text_area_span_minus115"> {{familyData.threeQueriestxt}}</span>
             </li>
             <li class="clearFloat">
               <label class="label_width_166">微信/支付宝是否异常：</label>
@@ -72,7 +61,7 @@
             </li>
             <li v-show="familyData.mobilepayment=='1'" class="text_area_li margin_top_5">
               <label class="label_width_110">说明：</label>
-              <span class="text_area_span text_area_span_minus170"> {{familyData.mobilepaymenttxt}}</span>
+              <span class="text_area_span text_area_span_minus115"> {{familyData.mobilepaymenttxt}}</span>
             </li>
             <li class="clearFloat label_height_48">
               <label class="label_width_166">是否与家庭联系人为同一接听人：</label>
@@ -80,7 +69,7 @@
             </li>
             <li class="text_area_li" v-show="familyData.issameFam=='0'">
               <label class="label_width_110">说明：</label>
-              <span class="text_area_span text_area_span_minus170"> {{familyData.issameFamtxt}}</span>
+              <span class="text_area_span text_area_span_minus115"> {{familyData.issameFamtxt}}</span>
             </li>
             <li class="clearFloat">
               <label class="label_width_166">与借款人关系：</label>
@@ -88,7 +77,7 @@
             </li>
             <li class="text_area_li margin_top_5" v-show="familyData.relBorrower=='03'">
               <label class="label_width_110">说明：</label>
-              <span class="text_area_span text_area_span_minus170"> {{familyData.relBorrowertxt}}</span>
+              <span class="text_area_span text_area_span_minus115"> {{familyData.relBorrowertxt}}</span>
             </li>
             <li class="clearFloat">
               <label class="label_width_166">核对工作情况：</label>
@@ -96,7 +85,7 @@
             </li>
             <li class="text_area_li margin_top_5" v-show="familyData.checkWork=='01'">
               <label class="label_width_110">说明：</label>
-              <span class="text_area_span text_area_span_minus170"> {{familyData.checkWorktxt}}</span>
+              <span class="text_area_span text_area_span_minus115"> {{familyData.checkWorktxt}}</span>
             </li>
 
             <li class="clearFloat">
@@ -113,7 +102,7 @@
             </li>
             <li class="text_area_li margin_top_5" v-show="familyData.checkAddr=='01'">
               <label class="label_width_110">说明：</label>
-              <span class="text_area_span text_area_span_minus170"> {{familyData.checkAddrtxt}}</span>
+              <span class="text_area_span text_area_span_minus115"> {{familyData.checkAddrtxt}}</span>
             </li>
 
             <li class="clearFloat">
@@ -122,7 +111,7 @@
             </li>
             <li class="text_area_li margin_top_5" v-show="familyData.checkEstate=='00'">
               <label class="label_width_110">说明：</label>
-              <span class="text_area_span text_area_span_minus170"> {{familyData.checkEstatetxt}}</span>
+              <span class="text_area_span text_area_span_minus115"> {{familyData.checkEstatetxt}}</span>
             </li>
 
             <li class="clearFloat">
@@ -131,7 +120,7 @@
             </li>
             <li class="text_area_li margin_top_5" v-show="familyData.otherIncome=='00'">
               <label class="label_width_110">说明：</label>
-              <span class="text_area_span text_area_span_minus170"> {{familyData.otherIncometxt}}</span>
+              <span class="text_area_span text_area_span_minus115"> {{familyData.otherIncometxt}}</span>
             </li>
             <li class="text_area_li clearFloat">
               <label class="label_width_166">调查结果：</label>
