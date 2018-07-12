@@ -202,11 +202,11 @@ textarea {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   outline: none;
 }
-.Abody{
+/* .Abody{
   width: 100%;
   height:calc( 100% -90px);
   background-color: #ffffff;
-}
+} */
 table {
   border-spacing: 0;
   border-collapse: collapse;

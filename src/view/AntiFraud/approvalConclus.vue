@@ -2,8 +2,8 @@
 <template>
   <div class="approval-colun">
     <div class="address-title">
-      <img src="../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-      <span class="headFont">概要信息</span>
+       <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">概要信息</span>
     </div>
     <ul class="form-ul" style="width:100%;height:auto;overflow:hidden;">
       <li class="item-column3">

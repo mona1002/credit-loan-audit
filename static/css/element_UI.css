@@ -1796,30 +1796,29 @@ body .el-menu--horizontal .el-menu .el-menu-item,
   font-size: 14px;
 }
 
-.phone-credit .el-table th .cell {
+/* .phone-credit .el-table th .cell {
   font-weight: 800;
   color: #909399;
   font-size: 13px;
-}
+} */
 
-.phone-credit .el-table__body-wrapper .el-table__body td {
-  /* text-align: center; */
+/* .phone-credit .el-table__body-wrapper .el-table__body td {
   font-weight: 400;
   color: #909399;
   font-size: 13px;
-}
+} */
 
 /* 序号 时间  居中*/
 
-.phone-credit .el-table th:nth-of-type(1),
+/* .phone-credit .el-table th:nth-of-type(1),
 .phone-credit .el-table th:nth-of-type(2) {
   text-align: center;
-}
+} */
 
-.phone-credit .el-table__body-wrapper .el-table__body td:nth-of-type(1),
+/* .phone-credit .el-table__body-wrapper .el-table__body td:nth-of-type(1),
 .phone-credit .el-table__body-wrapper .el-table__body td:nth-of-type(2) {
   text-align: center;
-}
+} */
 
 /* 来源 居左*/
 
@@ -2235,7 +2234,7 @@ body .el-menu--horizontal .el-menu .el-menu-item,
 
 /* 反欺诈审批结论 流程轨迹 表格字号，颜色调整 */
 
-.approval-colun .xllcgj-div .el-table th .cell {
+/* .approval-colun .xllcgj-div .el-table th .cell {
   font-weight: 800;
   color: #909399;
   font-size: 13px;
@@ -2244,7 +2243,7 @@ body .el-menu--horizontal .el-menu .el-menu-item,
 .approval-colun .xllcgj-div .el-table__body-wrapper .el-table__body td {
   color: #909399;
   font-size: 13px;
-}
+} */
 
 /* 综合查询 */
 
@@ -2315,17 +2314,14 @@ body .el-menu--horizontal .el-menu .el-menu-item,
   background-color: #80848c;
 } */
 
-.ReApply .AntiInf .el-collapse-item__wrap {
-  /* background: green; */
-}
 
-.approval-colun .addDataLog .el-dialog__body {
+/* .approval-colun .addDataLog .el-dialog__body {
   padding: 20px 20px;
 }
 
 .approval-colun .addDataLog .el-dialog__footer {
   padding: 0 20px 10px;
-}
+} */
 
 .RaAntiFraudInvestigation .el-textarea.is-disabled .el-textarea__inner {
   background: #fff;

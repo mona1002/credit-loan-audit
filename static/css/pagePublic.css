@@ -35,7 +35,10 @@
   margin-top: 20px;
   /* background:red; */
 }
-
+.page_top_bottom_10{
+  text-align: center;
+  margin:10px 0;
+}
 .overFlow_x {
   overflow-x: hidden;
 }
@@ -357,6 +360,9 @@
   border: 1px solid #d8dce5;
   border-radius:4px;
 }
+/* .checkedInf .text_area_span_half_width_{
+  width: calc(100% - 170px);
+} */
 /* 编辑-带输入框部分 */
 .checkedInf .inputInf{
 height: 35px;
@@ -378,7 +384,12 @@ line-height: 35px;
 .label_width_130{
   width: 130px;
 }
- 
+.label_width_110{
+  width: 110px;
+}
+.checkedInf .label_height_48{
+   height:48px;
+ }
 /* 借款人资料 */
 .borrowerInformationSetail {
   width: 100%;

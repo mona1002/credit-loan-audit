@@ -626,7 +626,7 @@ height:auto !important;
  }
 
  .Abody {
-   height: calc(100% - 50px);
+   height: calc(100% - 90px);
    background-color: #fafbfc;
    overflow-y: auto;
    overflow-x: hidden;

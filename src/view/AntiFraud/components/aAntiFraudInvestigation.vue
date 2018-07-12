@@ -10,10 +10,10 @@
         <table class="table">
           <thead>
             <tr>
-              <th>进件编号</th>
+              <th style="min-width:180px">进件编号</th>
               <th>案件编号</th>
               <th>客户姓名</th>
-              <th>身份证号</th>
+              <th  style="min-width:180px">身份证号</th>
               <th>申请产品</th>
               <th>进件机构</th>
               <th>销售人员</th>
@@ -685,24 +685,25 @@
   }
 
   .table th {
-    /* color: #1f2d3d; */
-    color: #909399;
+    color: #1f2d3d;
     font-weight: 800;
-    height: 48px;
-    line-height: 48px;
+    height:35px;
+    line-height: 35px;
     border: 1px solid #e6ebf5;
     width: 11.1%;
     min-width: 147px;
+    text-align: left;
+    padding-left: 10px;
   }
 
   .table td {
     color: #666;
-    height: 47px;
-    line-height: 47px;
+    height: 30px;
+    line-height: 30px;
     border: 1px solid #e6ebf5;
     width: 11.1%;
     min-width: 147px;
-    text-align: center;
+    padding-left: 10px;    
   }
 
   /* 提报来源 */
