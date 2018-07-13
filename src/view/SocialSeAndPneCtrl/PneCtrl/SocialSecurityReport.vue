@@ -1,4 +1,5 @@
 <template>
+  <!-- 社保报告 -->
   <div class="SocialSecurity">
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
@@ -652,7 +653,19 @@
   export default {
     data() {
       return {
-        activeNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+        activeNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
+        socReport: null,
+        socRawReport: null,
+        applySubNo: null,
+      }
+    },
+    watch: {
+      '$route' (to, from) {
+        console.log(to, from)
+        if (to.path == '/SocialSecurityReport') {
+          console.log('aaa')
+          this.getInf();
+        }
       }
     },
     methods: {
@@ -660,13 +673,141 @@
         this.post(baseurl.DataUrl + '/channel/threeDataAction!notSession_getSocialInsurReport.action', {
           applySubNo: 'PHDX6409598026121216'
         }).then(res => {
-          console.log(res)
-          if (res.success) {
-
-            this.$message.error('c成功');
-
-          } else {
+          var socReport;
+          var socRawReport
+          if (!res.success) {
             this.$message.error('查询数据失败！');
+            return;
+          }
+          if ("" != res.obj.rpt) {
+            var result = $.parseJSON(res.obj.rpt);
+            if (result && result.result && result.result['10126'] && result.result['10126'].bizInfo && result.result[
+                '10126'].bizInfo.data &&
+              result.result['10126'].bizInfo.data.report && result.result['10126'].bizInfo.data.report.length > 0) {
+              this.socReport = result.result['10126'].bizInfo.data.report[0].data; //报告
+            }
+            //console.log(result);
+          }
+          if ("" != res.obj.rawRpt) {
+            var rawResult = $.parseJSON(res.obj.rawRpt);
+            if (rawResult && rawResult.result && rawResult.result['10125'] && rawResult.result['10125'].bizInfo) {
+              socRawReport = rawResult.result['10125'].bizInfo.data; //原始数据
+            }
+          }
+          // ---------------------------
+          if (socReport) {
+            this.fen_to_yuan(socReport, ['medicare_balance', 'pension_balance', 'yj_month_income', 'max_base',
+              'average_base', 'current_base'
+            ]);
+            $('#div_socInsu #f_1').form('load', socReport);
+            if (socReport.medicareFlow && socReport.medicareFlow.length > 0) {
+              $.each(socReport.medicareFlow, function (i, eh) {
+                this.fen_to_yuan(eh, ['payment_base', 'company_amount', 'person_amount']);
+                //this.addRow($('#div_socInsu #t_2 tbody'),['period','payment_base','company_amount','person_amount','company'],eh);
+                this.addRow($('#div_socInsu #t_2 tbody'), ['period', 'payment_base', 'company_amount',
+                  'person_amount', 'origin_name'
+                ], eh);
+              });
+            }
+            if (socReport.pensionFlow && socReport.pensionFlow.length > 0) {
+              $.each(socReport.pensionFlow, function (i, eh) {
+                this.fen_to_yuan(eh, ['payment_base', 'company_amount', 'person_amount']);
+                //this.addRow($('#div_socInsu #t_3 tbody'),['period','payment_base','company_amount','person_amount','company'],eh);
+                this.addRow($('#div_socInsu #t_3 tbody'), ['period', 'payment_base', 'company_amount',
+                  'person_amount', 'origin_name'
+                ], eh);
+              });
+            }
+            if (socReport.unemploymentFlow && socReport.unemploymentFlow.length > 0) {
+              $.each(socReport.unemploymentFlow, function (i, eh) {
+                this.fen_to_yuan(eh, ['payment_base', 'company_amount', 'person_amount']);
+                this.addRow($('#div_socInsu #t_4 tbody'), ['period', 'payment_base', 'company_amount',
+                  'person_amount', 'origin_name'
+                ], eh);
+              });
+            }
+            if (socReport.injuryFlow && socReport.injuryFlow.length > 0) {
+              $.each(socReport.injuryFlow, function (i, eh) {
+                this.fen_to_yuan(eh, ['payment_base', 'company_amount', 'person_amount']);
+                this.addRow($('#div_socInsu #t_5 tbody'), ['period', 'payment_base', 'company_amount',
+                  'person_amount', 'origin_name'
+                ], eh);
+              });
+            }
+            if (socReport.maternityFlow && socReport.maternityFlow.length > 0) {
+              $.each(socReport.maternityFlow, function (i, eh) {
+                this.fen_to_yuan(eh, ['payment_base', 'company_amount', 'person_amount']);
+                this.addRow($('#div_socInsu #t_6 tbody'), ['period', 'payment_base', 'company_amount',
+                  'person_amount', 'origin_name'
+                ], eh);
+              });
+            }
+          }
+          // ---------------------------------
+          if (socRawReport) {
+            if (socRawReport.accounts && socRawReport.accounts.length > 0) {
+              var formObj = $('#div_socInsu #d_account form').clone();
+              $.each(socRawReport.accounts, function (i, eh) {
+                eh.monthly_income = formatMoney(eh.monthly_income);
+                this.fen_to_yuan(eh, ['medicare_balance', 'pension_balance']);
+                formObj.appendTo($('#div_socInsu #d_account'));
+                $('<br>').appendTo($('#div_socInsu #div_account'));
+                $('#div_socInsu #d_account form:last').form('load', eh);
+              });
+              $('#div_socInsu #d_account form:first').remove();
+            }
+            if (socRawReport.insurances && socRawReport.insurances.length > 0) {
+              $.each(socRawReport.insurances, function (i, eh) {
+                this.fen_to_yuan(eh, ['base']);
+                this.addRow($('#div_socInsu #t_1 tbody'), ['account_id', 'standard_name', 'base',
+                  'insured_status', 'payment_status', 'person_rate', 'company_rate', 'company',
+                  'current_insured_month', 'first_insured_month'
+                ], eh);
+              });
+            }
+            if (socRawReport.consumption && socRawReport.consumption.length > 0) {
+              $.each(socRawReport.consumption, function (i, eh) {
+                this.fen_to_yuan(eh, ['trade_amount', 'person_out', 'pool_out', 'medicare_out', 'own_expense',
+                  'pay_cash', 'pay_big', 'claims_amount'
+                ]);
+                this.addRow($('#div_socInsu #t_7 tbody'), ['trade_time', 'trade_type', 'trade_place',
+                  'trade_amount', 'person_out', 'pool_out', 'medicare_out', 'own_expense', 'pay_cash',
+                  'pay_big', 'claims_amount'
+                ], eh);
+              });
+            }
+          }
+        });
+      },
+      addRow($table, rfields, rdata) {
+        var row = '<tr>';
+        $.each(rfields, function (index, val) {
+          if (rdata[val] != undefined) {
+            //row += '<td>' + formatMoney(rdata[val]) + '</td>';
+            row += '<td>' + rdata[val] + '</td>';
+          } else {
+            row += '<td>' + '' + '</td>';
+          }
+        });
+        row += '</tr>';
+        $table.append(row);
+      },
+      addTdRowSpan($table, fName, rowSpan, rowData) {
+        $.each(rowData, function (i, val) {
+          if (i == 0) {
+            var row = '<tr><td rowspan="' + rowSpan +
+              '" style="text-align: center;vertical-align: middle;width: 15%">' +
+              fName + '</td><td>' + rowData[i] + '</td></tr>';
+            $table.append(row);
+          } else {
+            $table.append('<tr><td>' + rowData[i] + '</td></tr>')
+          }
+        });
+      },
+      fen_to_yuan(jsonObj, fieldsArr) {
+        $.each(fieldsArr, function (i, eh) {
+          if (jsonObj[eh]) {
+            jsonObj[eh] = formatMoney(parseInt(jsonObj[eh]) / 100);
           }
         });
       }
