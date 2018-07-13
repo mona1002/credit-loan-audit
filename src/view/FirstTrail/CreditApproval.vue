@@ -541,8 +541,8 @@
             <div class="dialog_form_auto">
               <el-form>
                 <el-form-item label="结论：" :label-width="formApproLab">
-                  <el-radio label="00 " value='00' v-model="opinionFlag ">同意</el-radio>
-                  <el-radio label="03 " value='03' v-model="opinionFlag " v-show="taskName!='creditApp_finalTrial_five'
+                  <el-radio label="00" value='00' v-model="opinionFlag">同意</el-radio>
+                  <el-radio label="03" value='03' v-model="opinionFlag" v-show="taskName!='creditApp_finalTrial_five'
           && judgeFlag=='02' ">请求更高级审批</el-radio>
                 </el-form-item>
                 <div class="bfc">
@@ -1327,6 +1327,8 @@
                   } else {
                     this.fbalance2 = Number(res.data.fbalance).toLocaleString() + '.00'
                   }
+                }else{
+                  this.$message.error(res.msg)
                 }
               });
               this.getProducts();
@@ -1362,6 +1364,8 @@
                               this.minAmount = this.products[i].minAmount;
                             }
                           };
+                        }else{
+                          this.$message.error(res.msg)
                         }
                       });
                       //获取批准期限

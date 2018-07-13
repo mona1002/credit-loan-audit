@@ -33,5 +33,6 @@ if (host === productionEnv) {
 
 appConstantSP.BaseUrl = "http://" + host + postfix;
 appConstantSP.imgBaseUrl = "http://" + host;
+appConstantSP.DataUrl = "http://" + host+'/ptopCredit';
 appConstantSP.testUrl = testU;
 export default appConstantSP
