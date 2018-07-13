@@ -649,32 +649,31 @@
 
 <script>
   import baseurl from '../../../util/ConstantSocialAndPn'
-
   export default {
     data() {
       return {
         activeNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9']
       }
     },
-    methods:{
-        getInf(){
-                  this.post(baseurl.DataUrl + '/channel/threeDataAction!notSession_getSocialInsurReport.action', {
-        applySubNo : 'PHDX6409598026121216'
-      }).then(res => {
+    methods: {
+      getInf() {
+        this.post(baseurl.DataUrl + '/channel/threeDataAction!notSession_getSocialInsurReport.action', {
+          applySubNo: 'PHDX6409598026121216'
+        }).then(res => {
           console.log(res)
-        if (res.success) {
+          if (res.success) {
 
-          this.$message.error('c成功');
+            this.$message.error('c成功');
 
-        } else {
-          this.$message.error('查询数据失败！');
-        }
-      });
-        }
+          } else {
+            this.$message.error('查询数据失败！');
+          }
+        });
+      }
     },
     mounted() {
-console.log(baseurl )
-this.getInf();
+      console.log(baseurl)
+      this.getInf();
     }
   }
 

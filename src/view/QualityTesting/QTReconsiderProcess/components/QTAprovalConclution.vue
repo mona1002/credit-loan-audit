@@ -8,7 +8,7 @@
       </el-table-column>
       <el-table-column prop="subreaName" label="子原因" min-width="140">
       </el-table-column>
-      <el-table-column prop="riskSection" label="风险项" min-width="140">
+      <el-table-column prop="riskSection" label="风险项" min-width="230">
       </el-table-column>
       <el-table-column prop="auditDesc" label="审批描述" min-width="180">
       </el-table-column>

@@ -2295,7 +2295,7 @@
   }
 
   .regularQT tr:nth-of-type(1) {
-    height: 50px;
+    height: 35px;
     vertical-align: middle;
   }
 
@@ -2303,7 +2303,7 @@
   .regularQT th {
     text-align: center;
     border: 1px solid #ebeef5;
-    color: #909399;
+    color: #000;
   }
 
   .regularQT th {

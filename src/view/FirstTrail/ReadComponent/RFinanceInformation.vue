@@ -8,7 +8,7 @@
           <span class="collapse_title_text">账务信息</span>
         </template>
         <div class="height_auto">
-          <el-table :data="FinanceInf" style="width: 100%"  highlight-current-row border @current-change="handleCurrentChange">
+          <el-table :data="FinanceInf" style="width: 100%"  highlight-current-row border >
             <el-table-column type="index" :index="1" label="序号" min-width="50">
             </el-table-column>
             <el-table-column label="进件编号" prop="applySubNo" min-width="160">
