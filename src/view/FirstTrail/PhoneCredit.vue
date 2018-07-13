@@ -174,7 +174,7 @@
       </el-container>
     </el-container>
     <!-- 更改的 添加电话选项 -->
-    <el-dialog title="添加申请单电话信息" :visible.sync="dialogFormVisible" :modal="false" width="330px" top='20vh'>
+    <el-dialog title="添加申请单电话信息" :visible.sync="dialogFormVisible" :modal-append-to-body='true' :modal="false" width="330px">
       <el-form>
         <span class="require-icon" style="left:20px;line-height:38px;">*</span>
         <el-form-item label="电话类型：" :label-width="addTellFormLabelWidth" prop="addTelType">

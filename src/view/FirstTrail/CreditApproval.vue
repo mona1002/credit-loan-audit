@@ -183,7 +183,7 @@
     </div> -->
     <!-- 回退弹窗 -->
     <div class="Height_240 return_back">
-      <el-dialog title="回退信息" :visible.sync="huiTuiShow" :modal="false ">
+      <el-dialog title="回退信息" :visible.sync="huiTuiShow" :modal="false " width='600px'>
         <!-- <el-form :model="formReturn" :rules="rulesReturn" ref="ruleFormReturn"> -->
         <el-form>
           <el-form-item label="回退节点：" :label-width="formLabelWidth">
@@ -362,7 +362,7 @@
     </div> -->
     <!-- 放弃弹窗 -->
     <div class="Height_240 return_back">
-      <el-dialog title="放弃原因" :visible.sync="fangQiShow" :modal="false">
+      <el-dialog title="放弃原因" :visible.sync="fangQiShow" :modal="false"  width='600px'>
         <el-form>
           <div class="bfc">
             <!-- 回退主原因输入 02 -->

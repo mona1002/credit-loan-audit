@@ -227,7 +227,7 @@
     </el-dialog> -->
     <!-- 回退弹窗 -->
     <div class="Height_240 ">
-      <el-dialog title="回退信息" :visible.sync="huiTuiShow" :modal="false ">
+      <el-dialog title="回退信息" :visible.sync="huiTuiShow" :modal="false"  width='600px'>
         <!-- <el-form :model="formReturn" :rules="rulesReturn" ref="ruleFormReturn"> -->
         <el-form>
           <el-form-item class="alert_collapse_inputLabel" label="回退节点：" :label-width="formLabelWidth">
