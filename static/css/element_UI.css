@@ -2359,6 +2359,6 @@ body .el-menu--horizontal .el-menu .el-submenu__title {
   height: 30px;
   line-height: 30px;
 }
-.Abody .el-collapse-item__header{
-  
+.Abody .el-date-editor .el-range__icon{
+  line-height: 20px;
 }
