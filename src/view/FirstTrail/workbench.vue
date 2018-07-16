@@ -258,6 +258,11 @@
           flowRoleCodesList: response.data.flowRoleCodesList
         }
         localStorage.setItem("userInf", JSON.stringify(this.userInf));
+        console.log(response.data.orgLevel)
+        localStorage.setItem("userc", JSON.stringify(response.data.orgLevel));
+        localStorage.setItem("userctcode", JSON.stringify(response.data.subOrgCode));
+        console.log(JSON.parse(localStorage.getItem('userc')))
+        console.log(JSON.parse(localStorage.getItem('userctcode')))
         this.post("/workFlowTaskQuery/getTaskProfile", {
           taskStatus: "01",
         }).then(res => {

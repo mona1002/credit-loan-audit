@@ -1331,20 +1331,19 @@ height: auto !important;
   height: 50px;
   float: left;
   position: relative;
+  min-width: 120px;
 }
 
 .mheader .el-menu--horizontal .el-submenu .el-submenu__title {
   font-size: 15px;
-  /* color: #bfcbd9; */
   color: #fff !important;
   height: 40px;
   line-height: 50px;
-  /* margin: 0 41px; 
-  margin: 0 44px;*/
-  margin: 0 50px 0 10px;
+  margin: 0 10px;
   padding: 0 0;
   padding-left: 0 !important;
-  font-weight: bold;
+  font-weight: bold;display: inline-block;
+  vertical-align: top;
 }
 
 .mheader .el-menu .el-submenu.is-opened {
@@ -1590,6 +1589,7 @@ body .el-menu--horizontal .el-menu .el-menu-item {
 body .el-menu--horizontal .el-menu .el-submenu__title {
   background-color: transparent;
   color: #bfcbd9;
+  padding:0 20px 0 10px;
 }
 
 body .el-menu--horizontal .el-menu .el-submenu__title:hover {
