@@ -4,8 +4,8 @@
       <!-- 网上查询信息 -->
       <el-collapse-item name="1">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">网上查询信息</span>
+        <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">网上查询信息</span>
         </template>
         <div class="CreditForm_InternetInf">
           <ul>
@@ -236,8 +236,8 @@
       <!-- 核实身份 -->
       <el-collapse-item name="2">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">核实身份</span>
+        <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">核实身份</span>
         </template>
         <div class="CreditForm_CheckId">
           <ul class="CreditForm_CheckId_ul_left">
@@ -461,8 +461,8 @@
       <!-- 私营企业信息 -->
       <el-collapse-item name="4">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">私营企业信息</span>
+             <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">私营企业信息</span>
         </template>
         <div class="CreditForm_CompanyInfs" v-show="this.workInf.private" style="paddingLeft:21px;height:320px;">
           <ul class="CreditForm_CompanyInfs_ul_left">
@@ -575,8 +575,8 @@
       <!-- 家庭信息 -->
       <el-collapse-item name="5">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">家庭信息</span>
+             <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">家庭信息</span>
         </template>
         <div class="CreditForm_FamilyInf">
           <ul>
@@ -846,8 +846,8 @@
       <!-- 居住情况 -->
       <el-collapse-item name="6">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">居住情况</span>
+             <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">居住情况</span>
         </template>
         <div class="CreditForm_live">
           <ul class="CreditForm_live_ul_left">
@@ -875,8 +875,8 @@
       <!-- 核对现住址 -->
       <el-collapse-item name="7">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">核对现住址</span>
+              <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">核对现住址</span>
         </template>
         <div class="CreditForm_check_reside">
           <ul class="CreditForm_check_reside_ul_left">
@@ -2579,7 +2579,7 @@
     padding-left: 211px;
   }
 
-  . {
+  .icon_hat {
     position: absolute;
     top: 12px;
     left: 14px

@@ -26,9 +26,8 @@ if (host === productionEnv) {
   host = "10.20.20.38:8080";
   postfix = '/ptopCredit/rm';
 } else {
-  // host = "10.1.26.6:8080";
-  host='10.1.26.10:8080';
-  
+  host = "10.1.26.6:8080";
+  // host='10.1.26.10:8080';
   testU = "http://10.1.26.10:8080/basePtopCredit/rm" //本地
   postfix = '/ptopCredit/rm';
 }

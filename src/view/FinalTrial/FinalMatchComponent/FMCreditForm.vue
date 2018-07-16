@@ -3,8 +3,8 @@
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">网上查询信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">网上查询信息</span>
         </template>
         <div class="CreditForm_InternetInf">
           <ul>
@@ -157,8 +157,8 @@
       <!-- 核实身份 -->
       <el-collapse-item name="2">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">核实身份</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">核实身份</span>
         </template>
         <div class="CreditForm_CheckId">
           <ul class="CreditForm_CheckId_ul_left">
@@ -217,8 +217,8 @@
       <!-- 工作信息  -->
       <el-collapse-item name="3">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">工作信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">工作信息</span>
         </template>
         <div class="CreditForm_WorkInfs" style="padding:20px">
           <ul>
@@ -243,7 +243,7 @@
             <li>
               <p>
                 <label class="InternetInf_left_label "> 职位级别： </label>
-                  <span class="detail_inf elips">{{this.FormData.workPost }} </span>
+                <span class="detail_inf elips">{{this.FormData.workPost }} </span>
               </p>
               <p>
                 <label class="InternetInf_right_label">单位电话：</label>
@@ -300,8 +300,8 @@
       <!-- 私营企业信息 -->
       <el-collapse-item name="4">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">私营企业信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">私营企业信息</span>
         </template>
         <div class="CreditForm_CompanyInfs" v-show="this.workInf.private">
           <ul>
@@ -383,8 +383,8 @@
       <!-- 家庭信息 -->
       <el-collapse-item name="5">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">家庭信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">家庭信息</span>
         </template>
         <div class="CreditForm_FamilyInf">
           <ul>
@@ -556,8 +556,8 @@
       <!-- 居住情况 -->
       <el-collapse-item name="6">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">居住情况</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">居住情况</span>
         </template>
         <div class="CreditForm_live">
           <ul>
@@ -577,8 +577,8 @@
       <!-- 核对现住址 -->
       <el-collapse-item name="7">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">核对现住址</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">核对现住址</span>
         </template>
         <div class="CreditForm_check_reside">
           <ul class="CreditForm_check_reside_ul_left">
@@ -603,30 +603,30 @@
       <!-- 电话征信结论 -->
       <el-collapse-item name="8">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">电话征信结论</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">电话征信结论</span>
         </template>
         <div class="PhontConclution">
           <ul>
             <li class="top">
               <label class="InternetInf_left_label ">住址电话调查结论：</label>
-                <span class="detail_inf ComAddr">{{this.FormData.hometelConclusion }} </span>
+              <span class="detail_inf ComAddr">{{this.FormData.hometelConclusion }} </span>
             </li>
             <li>
               <label class="InternetInf_left_label">单位电话调查结论：</label>
-                <span class="detail_inf ComAddr">{{this.FormData.companyConclusion }} </span>
+              <span class="detail_inf ComAddr">{{this.FormData.companyConclusion }} </span>
             </li>
             <li>
               <label class="InternetInf_left_label">家庭联系人调查结论：</label>
-                <span class="detail_inf ComAddr">{{this.FormData.fContractConclusion }} </span>
+              <span class="detail_inf ComAddr">{{this.FormData.fContractConclusion }} </span>
             </li>
             <li>
               <label class="InternetInf_left_label">紧急联系人调查结论：</label>
-                <span class="detail_inf ComAddr">{{this.FormData.eContractConclusion }} </span>
+              <span class="detail_inf ComAddr">{{this.FormData.eContractConclusion }} </span>
             </li>
             <li class="bottom">
               <label class="InternetInf_left_label">工作证明人调查结论：</label>
-                <span class="detail_inf ComAddr">{{this.FormData.jobRefConclusion }} </span>
+              <span class="detail_inf ComAddr">{{this.FormData.jobRefConclusion }} </span>
             </li>
           </ul>
         </div>
@@ -634,8 +634,8 @@
       <!-- 内部匹配结论 -->
       <el-collapse-item name="9">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">内部匹配结论</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">内部匹配结论</span>
         </template>
         <div class="interMath">
           <ul>
@@ -652,18 +652,18 @@
       <!-- 审批结论 -->
       <el-collapse-item name="10">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">审批结论</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">审批结论</span>
         </template>
         <div class=" CreditForm_result">
           <ul>
             <li style="width:66.6%;">
               <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
-                <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
+              <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
             </li>
             <li style="marginTop:4px;width:66.6%;">
               <p class="InternetInf_left_label" style="textAlign:right">终审结果评价：</p>
-                <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.ootherfinal}} </span>
+              <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.ootherfinal}} </span>
             </li>
           </ul>
         </div>
@@ -798,7 +798,7 @@
         ],
         activeNames: ['0', '1', "2", "3", "4", "5", "6", "7", "8", '9', '10', '11'],
         checkData: [],
-        MatchFlag:''
+        MatchFlag: ''
       }
     },
     methods: {
@@ -955,14 +955,14 @@
       },
     },
     mounted() {
-      
-       this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) //初审-匹配查看
+
+      this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) //初审-匹配查看
       if (this.MatchFlag.MatchFlag == 'internal') {
-      this.getParams = JSON.parse(localStorage.getItem("internalObj")); // 终审内部匹配
+        this.getParams = JSON.parse(localStorage.getItem("internalObj")); // 终审内部匹配
       } else if (this.MatchFlag.MatchFlag == 'Query') {
         this.getParams = JSON.parse(localStorage.getItem("Query")) //初审-匹配查看
-      }else if (this.MatchFlag.MatchFlag == 'QT') {
-        this.getParams = JSON.parse(localStorage.getItem("QT")) 
+      } else if (this.MatchFlag.MatchFlag == 'QT') {
+        this.getParams = JSON.parse(localStorage.getItem("QT"))
       }
       // 获取查询列表数据
       this.post("/creauditInfo/queryCreauditInfoObj", {
@@ -1005,4 +1005,3 @@
   }
 
 </script>
-

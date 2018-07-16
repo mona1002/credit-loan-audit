@@ -23,8 +23,8 @@
       <!-- 网上查询信息 -->
       <el-collapse-item name="1">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">网上查询信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">网上查询信息</span>
         </template>
         <div class="CreditForm_InternetInf">
           <ul>
@@ -35,7 +35,7 @@
               </p>
               <p v-show="this.InternetShow.commentS">
                 <label class="InternetInf_right_label"> 执行信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wbeexEcutedtxt}} </span>
+                <span class="detail_inf">{{this.FormData.wbeexEcutedtxt}} </span>
               </p>
             </li>
             <li>
@@ -45,7 +45,7 @@
               </p>
               <p v-show="this.InternetShow.commentS1">
                 <label class="InternetInf_right_label"> 单位执行信息说明：</label>
-                  <span class="detail_inf">{{this.FormData.wnetHirecomtxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetHirecomtxt }} </span>
               </p>
             </li>
             <li>
@@ -55,7 +55,7 @@
               </p>
               <p v-show="this.InternetShow.commentS2">
                 <label class="InternetInf_right_label"> 失信记录说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetEcutedBreatxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetEcutedBreatxt }} </span>
               </p>
             </li>
             <li>
@@ -65,7 +65,7 @@
               </p>
               <p v-show="this.InternetShow.commentS3">
                 <label class="InternetInf_right_label"> 单位失信记录说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetHirecomBreatxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetHirecomBreatxt }} </span>
               </p>
             </li>
             <li>
@@ -75,7 +75,7 @@
               </p>
               <p v-show="this.InternetShow.commentS4">
                 <label class="InternetInf_right_label"> 手机异常信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetPhonetxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetPhonetxt }} </span>
               </p>
             </li>
             <li>
@@ -85,7 +85,7 @@
               </p>
               <p v-show="this.InternetShow.commentS5">
                 <label class="InternetInf_right_label"> 单位名称异常信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetHirecomNametxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetHirecomNametxt }} </span>
               </p>
             </li>
             <li>
@@ -95,7 +95,7 @@
               </p>
               <p v-show="this.InternetShow.commentS6">
                 <label class="InternetInf_right_label"> 单位电话异常信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetHirecomPhonetxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetHirecomPhonetxt }} </span>
               </p>
             </li>
             <li>
@@ -105,7 +105,7 @@
               </p>
               <p v-show="this.InternetShow.commentS7">
                 <label class="InternetInf_right_label"> 地址异常信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetAddrandEstatetxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetAddrandEstatetxt }} </span>
               </p>
             </li>
             <li>
@@ -115,7 +115,7 @@
               </p>
               <p v-show="this.InternetShow.commentS8">
                 <label class="InternetInf_right_label"> 单位地址异常信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetHirecomAddresstxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetHirecomAddresstxt }} </span>
               </p>
             </li>
             <li>
@@ -125,7 +125,7 @@
               </p>
               <p v-show="this.InternetShow.commentS9">
                 <label class="InternetInf_right_label"> 工商登记信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetCompanytxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetCompanytxt }} </span>
               </p>
             </li>
             <li>
@@ -135,7 +135,7 @@
               </p>
               <p v-show="this.InternetShow.commentS10" class="bottom">
                 <label class="InternetInf_right_label"> 组织机构代码信息说明： </label>
-                  <span class="detail_inf">{{this.FormData.wnetAddrstatetxt }} </span>
+                <span class="detail_inf">{{this.FormData.wnetAddrstatetxt }} </span>
               </p>
             </li>
           </ul>
@@ -144,8 +144,8 @@
       <!-- 核实身份 -->
       <el-collapse-item name="2">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">核实身份</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">核实身份</span>
         </template>
         <div class="CreditForm_CheckId">
           <ul class="CreditForm_CheckId_ul_left">
@@ -204,8 +204,8 @@
       <!-- 工作信息  -->
       <el-collapse-item name="3">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">工作信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">工作信息</span>
         </template>
         <div class="CreditForm_WorkInfs" style="padding:20px">
           <ul>
@@ -230,7 +230,7 @@
             <li>
               <p>
                 <label class="InternetInf_left_label "> 职位级别： </label>
-                  <span class="detail_inf elips">{{this.FormData.workPost }} </span>
+                <span class="detail_inf elips">{{this.FormData.workPost }} </span>
               </p>
               <p>
                 <label class="InternetInf_right_label">单位电话：</label>
@@ -287,8 +287,8 @@
       <!-- 私营企业信息 -->
       <el-collapse-item name="4">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">私营企业信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">私营企业信息</span>
         </template>
         <div class="CreditForm_CompanyInfs" v-show="this.workInf.private">
           <ul>
@@ -370,8 +370,8 @@
       <!-- 家庭信息 -->
       <el-collapse-item name="5">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">家庭信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">家庭信息</span>
         </template>
         <div class="CreditForm_FamilyInf">
           <ul>
@@ -544,8 +544,8 @@
       <!-- 居住情况 -->
       <el-collapse-item name="6">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">居住情况</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">居住情况</span>
         </template>
         <div class="CreditForm_live">
           <ul>
@@ -565,8 +565,8 @@
       <!-- 核对现住址 -->
       <el-collapse-item name="7">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">核对现住址</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">核对现住址</span>
         </template>
         <div class="CreditForm_check_reside">
           <ul class="CreditForm_check_reside_ul_left">
@@ -591,30 +591,30 @@
       <!-- 电话征信结论 -->
       <el-collapse-item name="8">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">电话征信结论</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">电话征信结论</span>
         </template>
         <div class="PhontConclution">
           <ul>
             <li class="top">
               <label class="InternetInf_left_label ">住址电话调查结论：</label>
-                <span class="detail_inf ComAddr">{{this.FormData.hometelConclusion }} </span>
+              <span class="detail_inf ComAddr">{{this.FormData.hometelConclusion }} </span>
             </li>
             <li>
               <label class="InternetInf_left_label">单位电话调查结论：</label>
-                <span class="detail_inf ComAddr">{{this.FormData.companyConclusion }} </span>
+              <span class="detail_inf ComAddr">{{this.FormData.companyConclusion }} </span>
             </li>
             <li>
               <label class="InternetInf_left_label">家庭联系人调查结论：</label>
-                <span class="detail_inf ComAddr">{{this.FormData.fContractConclusion }} </span>
+              <span class="detail_inf ComAddr">{{this.FormData.fContractConclusion }} </span>
             </li>
             <li>
               <label class="InternetInf_left_label">紧急联系人调查结论：</label>
-                <span class="detail_inf ComAddr">{{this.FormData.eContractConclusion }} </span>
+              <span class="detail_inf ComAddr">{{this.FormData.eContractConclusion }} </span>
             </li>
             <li class="bottom">
               <label class="InternetInf_left_label">工作证明人调查结论：</label>
-                <span class="detail_inf ComAddr">{{this.FormData.jobRefConclusion }} </span>
+              <span class="detail_inf ComAddr">{{this.FormData.jobRefConclusion }} </span>
             </li>
           </ul>
         </div>
@@ -622,8 +622,8 @@
       <!-- 内部匹配结论 -->
       <el-collapse-item name="9">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">内部匹配结论</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">内部匹配结论</span>
         </template>
         <div class="interMath">
           <ul>
@@ -640,18 +640,18 @@
       <!-- 审批结论 -->
       <el-collapse-item name="10">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">审批结论</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">审批结论</span>
         </template>
         <div class=" CreditForm_result">
           <ul>
             <li style="width:66.6%;">
               <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
-                <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
+              <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
             </li>
             <li style="marginTop:4px;width:66.6%;">
               <p class="InternetInf_left_label" style="textAlign:right">终审结果评价：</p>
-                <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.ootherfinal}} </span>
+              <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.ootherfinal}} </span>
             </li>
           </ul>
         </div>
@@ -954,7 +954,8 @@
           this.FormData = res.data;
           this.AreaNPercent();
           this.formatSC();
-          this.FormData.aaddress ? this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, ''):this.FormData.aaddress ;
+          this.FormData.aaddress ? this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, '') : this.FormData
+            .aaddress;
           this.mountJ(0, res.data.wbeexEcuted);
           this.mountJ(1, res.data.wnetHirecom);
           this.mountJ(2, res.data.wnetEcutedBrea);
