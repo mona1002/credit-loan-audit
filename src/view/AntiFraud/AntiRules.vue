@@ -59,9 +59,11 @@
         <el-form-item label="规则编号：" :label-width="formLabelWidth">
           <el-input readonly v-model="form.ruleNum"></el-input>
         </el-form-item>
-        <el-form-item label="内容规则：" prop="caseDesc" :label-width="formLabelWidth">
-          <el-input readonly v-model="form.ruleContent" type='textarea' resize="none" :rows="2"></el-input>
-        </el-form-item>
+        <div class="dialog_textarea">
+        <el-form-item  label="内容规则：" prop="caseDesc" :label-width="formLabelWidth">
+            <el-input readonly v-model="form.ruleContent" type='textarea' resize="none" :rows="2"></el-input>
+          </el-form-item>
+        </div>
         <el-form-item label="生成任务：" :label-width="formLabelWidth">
           <el-select v-model="form.isGenTask" placeholder="请选择">
             <el-option v-for="item in isGenTask" :key="item.value" :label="item.label" :value="item.value">

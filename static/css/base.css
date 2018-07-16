@@ -554,7 +554,8 @@ height:auto !important;
  }
 
  .Abody .el-form-item {
-   height: 44px;
+   /* height: 44px; */
+   height: 40px;
  }
 
  /* 查询框 label宽度 */
