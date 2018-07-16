@@ -32,16 +32,16 @@
           <el-input v-model="params.dataParam.auditNamec" placeholder="请输入初审人员"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
-          <span class="keywordText">终审日期:</span>
+          <span class="keywordText">终审日期：</span>
           <el-date-picker v-model="params.dataParam.auditDatez" type="date" value-format="yyyy-MM-dd">
           </el-date-picker>
         </el-col>
         <el-col :span="6" class="search-item">
-          <span class="keywordText">终审人员:</span>
+          <span class="keywordText">终审人员：</span>
           <el-input v-model="params.dataParam.auditNamez" placeholder="请输入终审人员"></el-input>
         </el-col>
         <el-col :span="6" class="search-item date_picker">
-          <span class="keywordText">质检日期:</span>
+          <span class="keywordText">质检日期：</span>
           <el-date-picker v-model="QTtime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" value-format="yyyy-MM-dd">
           </el-date-picker>
         </el-col>
