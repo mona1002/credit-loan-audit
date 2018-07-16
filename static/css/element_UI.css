@@ -1656,7 +1656,7 @@ body .el-submenu .el-menu-item {
 }
 
 body .el-menu--horizontal .el-menu .el-menu-item,
-.el-menu--horizontal .el-menu .el-submenu__title {
+body .el-menu--horizontal .el-menu .el-submenu__title {
   height: 20px;
   line-height: 20px;
 }
