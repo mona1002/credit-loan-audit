@@ -48,7 +48,7 @@
                             var navJudge = {
                                 "flag":"nav_first"
                             }
-                            localStorage.setItem("navJude",JSON.stringify(navJude))
+                            localStorage.setItem("navJude",JSON.stringify(navJudge))
                         };
                         //终审一级
                         if(strs[0].split('=')[1] == "creditApp_finalTrial_one" && strs[1].split('=')[1] == "02"){
