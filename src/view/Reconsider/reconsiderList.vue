@@ -2,18 +2,18 @@
 <template>
   <div class="taskWatting RtaskWatting main-div">
     <div class="taskWattingContain">
-      <div class="taskWinput">
-        <el-row class="row row1" type="flex">
+      <div class="taskWinput  search-div">
+        <el-row class="row " type="flex">
           <el-col :span="6" class="search-item" :offset="0">
-            <span class="keywordText">进件编号</span>
+            <span class="keywordText">进件编号：</span>
             <el-input class="" v-model="applySubNo" placeholder="请输入进件编号"></el-input>
           </el-col>
           <el-col :span="6" class="search-item">
-            <span class="keywordText">客户名称</span>
+            <span class="keywordText">客户名称：</span>
             <el-input class="" v-model="custName_la" placeholder="请输入客户名称"></el-input>
           </el-col>
           <el-col :span="6" class="search-item">
-            <span class="keywordText">证件号码</span>
+            <span class="keywordText">证件号码：</span>
             <el-input class="" v-model="certCode" placeholder="请输入证件号码"></el-input>
           </el-col>
                  <el-col :span="6" class="search-btn">
