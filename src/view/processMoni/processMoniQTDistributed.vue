@@ -36,13 +36,9 @@
               </p>
               <el-option v-for="item in proNames" :key="item.id" :label="item.proName" :value="item.id">
                 <span style="float:left;width:66px">
-                  { { item.proCode } }
-
-                </span>
+                  {{ item.proCode }}</span>
                 <span style="float:left; color:#8492a6; font-size:13px;margin-left:20px;">
-                  { { item.proName } }
-
-                </span>
+                  {{ item.proName }} </span>
               </el-option>
             </el-select>
           </el-col>
