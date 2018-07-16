@@ -294,10 +294,7 @@
         // // 05 复议专员  06 复议主管
         // if (this.antiFlag == '05' || this.antiFlag == '06') {
         //   this.creditappTaskid = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
-        // }
-
-
-        //   this.getFraudApplyInfoWithOpinionById();
+        // }        //   this.getFraudApplyInfoWithOpinionById();
         // }
         var stateParms = JSON.parse(localStorage.getItem('antiApplyFlagEdit')).split(';');
         for (var i = 0; i < stateParms.length; i++) {
@@ -425,10 +422,7 @@
             this.findNodeFirstChildren(this.secondReasonT);
           }
           // 欺诈上报描述
-          this.applyDesc = this.data.fraudAuditOpinion.auditDesc;
-
-
-        })
+          this.applyDesc = this.data.fraudAuditOpinion.auditDesc;        })
       },
       submitForm() {
         console.log('提交反欺诈')
@@ -600,26 +594,6 @@
     background: #fff;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   /* 一列 */
 
   .anti-apply-edit-class .item-column1 {
@@ -627,29 +601,7 @@
     min-width: 1366px;
     float: left;
     /*max-width: 1366px;*/
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* 两列 */
+  }  /* 两列 */
 
   .anti-apply-edit-class .item-column2 {
     width: 50%;
@@ -658,29 +610,7 @@
     margin: 0;
     min-height: 50px;
     margin-bottom: 10px;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* 三列 */
+  }  /* 三列 */
 
   .anti-apply-edit-class .item-column3 {
     width: 33%;
@@ -690,29 +620,7 @@
     margin-bottom: 10px;
     /*border: 1px solid;*/
     /*min-width: 300px;*/
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* 折叠面板头部背景色和icon */
+  }  /* 折叠面板头部背景色和icon */
 
   .anti-apply-edit-class .icon_hat {
     padding: 10px 10px 10px 13px;
@@ -721,10 +629,7 @@
 
   .anti-apply-edit-class .headFont {
     font-size: 16px;
-  }
-
-
-  .anti-apply-edit-class .address-title {
+  }  .anti-apply-edit-class .address-title {
     width: 100%;
     height: 35px;
     font-size: 18px;
@@ -741,10 +646,7 @@
     text-align: left;
     vertical-align: middle;
     line-height: 40px;
-  }
-
-
-  .anti-apply-edit-class .header-area {
+  }  .anti-apply-edit-class .header-area {
     width: 100%;
     height: auto;
   }
@@ -780,29 +682,7 @@
     min-width: 400px;
     padding-bottom: 10px;
     width: calc(66% - 195px);
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* 必填 * */
+  }  /* 必填 * */
 
   .anti-apply-edit-class .require-icon {
     color: #ff0000;
@@ -812,29 +692,7 @@
     left: 38px;
     line-height: 35px;
     position: relative;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* 提交按钮 */
+  }  /* 提交按钮 */
 
   .anti-apply-edit-class .submit-class {
     margin-top: 50px;
@@ -842,26 +700,6 @@
     width: calc(66% - 500px);
     text-align: right;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   /*.anti-apply-edit-class .el-input{
   width: 100%;
 }*/

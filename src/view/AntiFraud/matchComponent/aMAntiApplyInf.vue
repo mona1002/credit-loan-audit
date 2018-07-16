@@ -136,12 +136,6 @@
     min-width: 788px;
   }
 
-  .icon_hat {
-    position: absolute;
-    top: 12px;
-    left: 14px
-  }
-
   .textA {
     display: inline-block;
     width: calc( 66% - 145px);
@@ -153,16 +147,11 @@
     border-radius: 4px;
   }
 
-  .description {
-    clear: both;
-    margin: 10px 0;
-  }
 
   .AntiInf li:nth-of-type(1) p,
   .AntiInf li:nth-of-type(3) p {
     width: 33.3%;
     float: left;
-    margin: 10px 0;
   }
 
   .baseInf p {

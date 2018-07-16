@@ -7,7 +7,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">网上查询信息</span>
         </template>
-        <div class="CreditForm_InternetInf up_padding">
+        <div class="CreditForm_InternetInf">
           <ul>
             <li class="top">
               <p>
@@ -161,7 +161,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">核实身份</span>
         </template>
-        <div class="CreditForm_CheckId up_padding">
+        <div class="CreditForm_CheckId">
           <ul class="CreditForm_CheckId_ul_left">
             <li class="top">
               <p>
@@ -221,7 +221,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">工作信息</span>
         </template>
-        <div class="CreditForm_WorkInfs up_padding" style="padding:20px">
+        <div class="CreditForm_WorkInfs" style="padding:20px">
           <ul>
             <li style="width:100%;paddingBottom:20px;">
               <label class="InternetInf_left_label">工作单位：</label>
@@ -306,7 +306,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">私营企业信息</span>
         </template>
-        <div class="CreditForm_CompanyInfs up_padding" v-show="this.workInf.private">
+        <div class="CreditForm_CompanyInfs" v-show="this.workInf.private">
           <ul>
             <li class="top">
               <p>
@@ -390,7 +390,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">家庭信息</span>
         </template>
-        <div class="CreditForm_FamilyInf up_padding">
+        <div class="CreditForm_FamilyInf">
           <ul>
             <li>
               <p class="top">
@@ -563,7 +563,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">居住情况</span>
         </template>
-        <div class="CreditForm_live up_padding">
+        <div class="CreditForm_live">
           <ul>
             <li class="top">
               <p>
@@ -584,9 +584,9 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">核对现住址</span>
         </template>
-        <div class="CreditForm_check_reside up_padding">
+        <div class="CreditForm_check_reside">
           <ul class="CreditForm_check_reside_ul_left">
-            <li style="marginTop:20px">
+            <li>
               <label class="InternetInf_left_label ">现住址：</label>
               <span class="detail_inf oneline">{{this.FormData.aaddress}}</span>
             </li>
@@ -610,7 +610,7 @@
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">审批结论</span>
         </template>
-        <div class=" CreditForm_result up_padding">
+        <div class=" CreditForm_result">
           <div style="width:66.6%;" class="bottom">
             <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
               <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
@@ -951,156 +951,3 @@
   }
 
 </script>
-
-<style scoped>
-  .detail_inf {
-    display: inline-block;
-  }
-
-  .InternetInf_left_label {
-    display: inline-block;
-    width: 210px;
-  }
-  /* 上网信息-两行select下拉 居中 */
-
-  .icon_hat {
-    position: absolute;
-    top: 12px;
-    left: 14px
-  }
-
-  .blueC:hover {
-    color: rgba(0, 119, 255, 0.75);
-    cursor: pointer;
-  }
-  /* 上网查询 */
-
-  .InternetInf_right_label {
-    width: 210px;
-  }
-
-  .top {
-    margin-top: 20px;
-  }
-
-  .CreditForm li {
-    color: #475669;
-    font-size: 14px;
-    vertical-align: middle;
-    position: relative;
-    clear: both;
-  }
-
-  .CreditForm p {
-    padding-bottom: 20px;
-  }
-
-  .CreditForm label {
-    display: inline-block;
-    text-align: right;
-  }
-  /* ------------------------------上网查询 +核实身份--------------------------- */
-
-  .CreditForm_InternetInf p,
-  /*  上网查询 */
-
-  .CreditForm_CheckId p,
-  /* 核实信息 ul */
-
-  .CreditForm_WorkInfs p,
-  /* 工作信息 */
-
-  .CreditForm_CompanyInfs p,
-  /* 私营企业 */
-
-  .CreditForm_FamilyInf p,
-  /* 家庭信息 */
-
-  .CreditForm_live p {
-    float: left;
-    width: 33.3%;
-    vertical-align: middle;
-  }
-  /* --------------------------工作信息 + 私营企业--------------------- */
-
-  .CheckId_right_label
-  /* 第三列p */
-
-  {
-    width: 140px;
-  }
-  .CreditForm_InternetInf p:nth-of-type(even),
-  .CreditForm_CheckId p:nth-of-type(even),
-  .CreditForm_FamilyInf p:nth-of-type(even)
-  /* 家庭信息 */
-
-  {
-    width: 66.6%;
-  }
-
-  .CreditForm_InternetInf p:nth-of-type(even) span,
-  /* 上网查询 */
-
-  .CreditForm_CheckId p:nth-of-type(even) span,
-  /* 核实身份-右侧 */
-
-  .CreditForm_FamilyInf p:nth-of-type(even) span
-  /* 家庭信息 */
-
-  {
-    width: calc( 100% - 225px);
-    height: 60px;
-    vertical-align: top;
-    overflow: auto;
-    border: 1px solid #d8dce5;
-    padding: 5px 10px;
-    border-radius: 4px;
-  }
-  /* 省略号 */
-
-  .elips {
-    width: calc( 100% - 225px);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    vertical-align: middle;
-  }
-  /* 工作信息-单位地址 + 私营企业-企业经营项目 */
-
-  .ComAddr {
-    width: calc( 100% - 225px);
-    vertical-align: top;
-    height: 60px;
-    overflow: auto;
-    border: 1px solid #d8dce5;
-    padding: 5px 10px;
-    border-radius: 4px;
-  }
-
-  .Suppliers {
-    width: calc( 100% - 205px);
-  }
-  /* 私营企业-第一分销商  */
-
-  .distributor {
-    width: calc( 100% - 155px);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    vertical-align: middle;
-  }
-  /*-------------------- 核对现住址-------------------------- */
-
-  .CreditForm_check_reside li,
-  .CreditForm_check_reside p {
-    width: 100%;
-    clear: both;
-    padding: 0;
-    margin-bottom: 20px;
-  }
-  /* 初审结果div */
-  .CreditForm_result {
-    padding: 20px 0 30px 0;
-  }
-
-</style>

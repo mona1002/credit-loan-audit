@@ -435,15 +435,6 @@
 
   /* 折叠面板头部背景色和icon */
 
-  .icon_hat {
-    padding: 9px 10px 10px 13px;
-    vertical-align: middle;
-  }
-
-  .headFont {
-    font-size: 16px;
-  }
-
   .table {
     font-weight: 400;
     font-size: 14px;

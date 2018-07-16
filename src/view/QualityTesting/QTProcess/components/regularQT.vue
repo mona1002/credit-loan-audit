@@ -2347,15 +2347,6 @@
     left: -35px;
   }
 
-  .icon_hat {
-    position: absolute;
-    top: 12px;
-    left: 14px
-  }
-
-  .headFont {
-    font-size: 16px;
-  }
 
   .tab1Default {
     float: left;

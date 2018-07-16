@@ -1816,33 +1816,13 @@ caseDescs:[  { required: true, message: '请输入活动名称', trigger: 'blur'
     width: 100%;
     height: 35px;
     font-size: 18px;
-    /*font-weight: bold;*/
     background: #eef0f9;
     line-height: 35px;
     padding-left: 10px;
     display: block;
     margin-bottom: 10px;
-    /*margin-top: 20px;*/
     overflow: hidden;
   }
-
-
-
-
-
-  /* 折叠面板头部背景色和icon */
-
-  .approval-colun .icon_hat {
-    padding: 9px 10px 10px 13px;
-    vertical-align: middle;
-  }
-
-  .approval-colun .headFont {
-    font-size: 16px;
-  }
-
-
-
 
 
   /* 一列 */

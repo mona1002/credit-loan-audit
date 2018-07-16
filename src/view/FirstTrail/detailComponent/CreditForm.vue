@@ -2517,10 +2517,7 @@
     border-radius: 3px;
   } */
 
-  .blueC:hover {
-    color: rgba(0, 119, 255, 0.75);
-    cursor: pointer;
-  }
+
 
   .bottom {
     margin-bottom: 20px;
@@ -2582,15 +2579,15 @@
     padding-left: 211px;
   }
 
-  .icon_hat {
+  . {
     position: absolute;
     top: 12px;
     left: 14px
   }
-
+/* =============================== */
   /* 上网查询左侧label */
 
-  .InternetInf_left_label {
+  .CreditForm  .InternetInf_left_label {
     display: inline-block;
     width: 223px;
     margin-right: 10px;
@@ -2598,10 +2595,12 @@
     font-weight: normal;
   }
 
-  .InternetInf_right_label {
+ .CreditForm .InternetInf_right_label {
     width: 223px;
     margin-right: 10px;
   }
+/* =============================== */
+
 
   .Family_right_label {
     width: 223px;
@@ -2629,20 +2628,6 @@
     padding-left: 212px;
   }
 
-  .CreditForm li {
-    color: #475669;
-    font-size: 14px;
-    vertical-align: middle;
-    position: relative;
-  }
-
-  .CreditForm label {
-    display: inline-block;
-    text-align: right;
-    margin-right: 10px;
-  }
-
-  /* ------------------------------上网查询 +核实身份--------------------------- */
 
   .CreditForm_InternetInf li,
   .CreditForm_CheckId li,
@@ -2741,19 +2726,6 @@
     margin-top: 20px;
   }
 
-  /*-------------------- 核对现住址-------------------------- */
 
-  .CreditForm_check_reside li,
-  .CreditForm_check_reside p {
-    margin-bottom: 20px;
-  }
-
-  /* 初审结果评价 */
-
-  .CreditForm_result {
-    width: 66.6%;
-    position: relative;
-    margin-top: 20px;
-  }
 
 </style>

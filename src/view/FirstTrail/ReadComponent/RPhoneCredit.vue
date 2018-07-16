@@ -1376,16 +1376,6 @@
 
 
 
-  /* 折叠面板头部背景色和icon */
-
-  .phone-credit .icon_hat {
-    padding: 10px 10px 10px 13px;
-    vertical-align: middle;
-  }
-
-  .phone-credit .headFont {
-    font-size: 16px;
-  }
 
   .phone-credit .el-select:hover .el-input__inner {
     background: #ffffff;

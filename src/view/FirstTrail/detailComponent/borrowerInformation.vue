@@ -3409,16 +3409,6 @@
     clear: both;
   }
 
-  /* 折叠面板头部背景色 */
-
-  .icon_hat {
-    padding: 9px 10px 10px 13px;
-    vertical-align: middle;
-  }
-
-  .headFont {
-    font-size: 16px;
-  }
 
   /* 字体图标 */
 

@@ -1228,16 +1228,6 @@
     height: 100%;
   }
 
-  /* 折叠面板头部背景色和icon */
-
-  .icon_hat {
-    padding: 9px 10px 10px 13px;
-    vertical-align: middle;
-  }
-
-  .headFont {
-    font-size: 16px;
-  }
 
   /* 渠道说明 */
 

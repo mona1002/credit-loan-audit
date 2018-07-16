@@ -4,107 +4,90 @@
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">复议基本信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">复议基本信息</span>
         </template>
-        <div class="baseInf">
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
             <li>
-              <p>
-                <label>进件编号： </label>
-                <span>{{this.conclu.applySubno}} </span>
-              </p>
-              <p>
-                <label>客户名称： </label>
-                <span>{{this.conclu.custName}} </span>
-              </p>
-              <p>
-                <label>证件类型： </label>
-                <span>{{this.conclu.certTypeTxt}} </span>
-              </p>
+              <label class="label_width_166">进件编号： </label>
+              <span>{{this.conclu.applySubno}} </span>
             </li>
             <li>
-              <p>
-                <label>证件号码： </label>
-                <span>{{this.conclu.certCode}} </span>
-              </p>
-              <p>
-                <label>移动电话： </label>
-                <span>{{this.conclu.mobile}} </span>
-              </p>
+              <label class="label_width_166">客户名称： </label>
+              <span>{{this.conclu.custName}} </span>
+            </li>
+            <li>
+              <label class="label_width_166">证件类型： </label>
+              <span>{{this.conclu.certTypeTxt}} </span>
+            </li>
+            <li>
+              <label class="label_width_166">证件号码： </label>
+              <span>{{this.conclu.certCode}} </span>
+            </li>
+            <li>
+              <label class="label_width_166">移动电话： </label>
+              <span>{{this.conclu.mobile}} </span>
             </li>
           </ul>
         </div>
       </el-collapse-item>
       <el-collapse-item name="2">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">原审批信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">原审批信息</span>
         </template>
-        <div class="AntiInf">
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
             <li>
-              <p>
-                <label>拒贷日期： </label>
+                <label  class="label_width_166">拒贷日期： </label>
                 <span>{{this.conclu.dealOperDate}} </span>
-              </p>
-              <p>
-                <label>拒贷部门： </label>
+                </li>
+            <li>
+                <label  class="label_width_166">拒贷部门： </label>
                 <span>{{this.conclu.dealOrgCode}} </span>
-              </p>
-              <p>
-                <label>拒贷结论： </label>
+                </li>
+            <li>
+                <label  class="label_width_166">拒贷结论： </label>
                 <span>{{this.conclu.applyConclusion}} </span>
-              </p>
             </li>
             <li>
-              <p>
-                <label>拒贷主原因码： </label>
+                <label  class="label_width_166">拒贷主原因码： </label>
                 <span>{{this.conclu.mainreasonCode}} </span>
-              </p>
             </li>
           </ul>
         </div>
       </el-collapse-item>
       <el-collapse-item name="3">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">复议申请信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">复议申请信息</span>
         </template>
-        <div class="AntiConclution">
-          <ul style="margin:20px 0;">
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
+          <ul>
             <li>
-              <p>
-                <label>申请产品： </label>
+                <label  class="label_width_166">申请产品： </label>
                 <span>{{this.conclu.appProName}} </span>
-              </p>
-              <p>
-                <label>申请期限[月]： </label>
+                </li>
+            <li>
+                <label  class="label_width_166">申请期限[月]： </label>
                 <span>{{this.conclu.appTerm}} </span>
-              </p>
-              <p>
-                <label>申请金额[元]： </label>
+                </li>
+            <li>
+                <label  class="label_width_166">申请金额[元]： </label>
                 <span>{{this.conclu.appAmt}} </span>
-              </p>
             </li>
-            <li>
-              <p style="width:100%;">
-                <label>复议说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.conclu.reconRemark==null||this.conclu.reconRemark==''" :content="this.conclu.reconRemark"
-                  placement="top-start">
-                  <span class="Tarea">{{this.conclu.reconRemark}} </span>
-                </el-tooltip>
-              </p>
+            <li  class="text_area_li triplet_textarea_width"> 
+                <label  class="label_width_166">复议说明： </label>
+                  <span class="text_area_span text_area_span_minus170">{{this.conclu.reconRemark}} </span>
             </li>
-            <li>
-              <p>
-                <label>复议申请人： </label>
+            <li class="clearFloat">
+                <label  class="label_width_166">复议申请人： </label>
                 <span>{{this.conclu.reconOpercode}} </span>
-              </p>
-              <p>
-                <label>复议申请日期： </label>
+                </li>
+            <li>
+                <label  class="label_width_166">复议申请日期： </label>
                 <span>{{this.conclu.reconDate}} </span>
-              </p>
             </li>
           </ul>
         </div>
@@ -128,7 +111,7 @@
       // } else if (this.judgeFlag.flag == '06') {
       //   this.tastwaitingPass = JSON.parse(localStorage.getItem("RManagertaskInWaitting")) //复议经理
       // }
-         this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议
+      this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议
       this.post("/accepApplyReconController/getAccepApplyReconByProcessId", {
         processInstanceId: this.tastwaitingPass.processInstanceId,
         // id:'500001'
@@ -142,54 +125,9 @@
 <style scoped>
   .aAntiApplyInf {
     min-width: 788px;
+    height:calc(100% - 90px);
+    background: #ffffff;
   }
 
-  .icon_hat {
-    position: absolute;
-    top: 12px;
-    left: 14px
-  }
-
-  .textA {
-    display: inline-block;
-    width: calc( 66% - 145px);
-    height: 60px;
-    vertical-align: top;
-    overflow: auto;
-    border: 1px solid #d8dce5;
-    padding: 5px 10px;
-    border-radius: 4px;
-  }
-
-  .aAntiApplyInf li {
-    clear: both;
-    width: 100%;
-  }
-
-  .aAntiApplyInf li p {
-    width: 33.3%;
-    float: left;
-    margin: 10px 0;
-    /* border:1px solid red; */
-  }
-
-  .aAntiApplyInf label {
-    width: 145px;
-    display: inline-block;
-    text-align: right;
-    color: #475669;
-  }
-
-  .Tarea {
-    display: inline-block;
-    /* background: #000; */
-    height: 60px;
-    border: 1px solid #d8dce5;
-    padding: 5px 10px;
-    border-radius: 4px;
-    overflow: auto;
-    vertical-align: top;
-    width: calc( 100% - 150px);
-  }
 
 </style>

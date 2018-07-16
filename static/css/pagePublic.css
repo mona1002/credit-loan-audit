@@ -311,7 +311,7 @@
 .checkedInf {
   height: auto;
   width: 100%;
-  padding: 5px 0;
+  padding-bottom: 5px;
 }
 
 .checkedInf_li_width_half li {
@@ -326,8 +326,8 @@
   float: left;
   min-width: 200px;
   height: 24px;
-  /* margin-top:4px; */
-  margin-top:20px;
+  margin-top:4px;
+  /* margin-top:20px; */
 }
 
 .checkedInf label {
@@ -432,3 +432,160 @@
   height: 100%;
   min-width: 900px;
 }
+/* 信审表 */
+.CreditForm p {
+  padding-bottom: 4px;
+}
+.CreditForm .top {
+  margin-top: 4px;
+}
+.CreditForm li {
+  color: #475669;
+  font-size: 14px;
+  vertical-align: middle;
+  position: relative;
+  clear: both;
+}
+  /* ------------------------------上网查询 +核实身份--------------------------- */
+
+  .CreditForm_InternetInf p,
+  /*  上网查询 */
+
+  .CreditForm_CheckId p,
+  /* 核实信息 ul */
+
+  .CreditForm_WorkInfs p,
+  /* 工作信息 */
+
+  .CreditForm_CompanyInfs p,
+  /* 私营企业 */
+
+  .CreditForm_FamilyInf p,
+  /* 家庭信息 */
+
+  .CreditForm_live p {
+    float: left;
+    width: 33.3%;
+    vertical-align: middle;
+  }
+  .CreditForm_check_reside li,
+  .CreditForm_check_reside p {
+    width: 100%;
+    clear: both;
+    padding: 0;
+    margin: 4px 0;
+  }
+ .CreditForm .interMath li,
+ .CreditForm .PhontConclution li,
+  .CreditForm_result li {
+    margin-bottom: 5px;
+    width: 66.6%;
+  }
+  .CreditForm_result{
+    padding-top:4px;
+  }
+  /* 私营企业-第一分销商  */
+
+  .CreditForm .distributor {
+    width: calc( 100% - 155px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+  .CreditForm_InternetInf p:nth-of-type(even) span,
+  /* 上网查询 */
+
+  .CreditForm_CheckId p:nth-of-type(even) span,
+  /* 核实身份-右侧span width */
+
+  .CreditForm_FamilyInf p:nth-of-type(even) span
+  /* 家庭信息 */
+
+    {
+    width: calc( 100% - 225px);
+    height: 60px;
+    vertical-align: top;
+    overflow: auto;
+    border: 1px solid #d8dce5;
+    border-radius: 4px;
+  }
+  .elips {
+    width: calc( 100% - 225px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+  /* 第一经销商 */  
+  .CreditForm  .Suppliers {
+    width: calc( 100% - 205px);
+  }
+  /* 工作信息-单位地址 + 私营企业-企业经营项目 */  
+  .CreditForm   .ComAddr {
+    width: calc( 100% - 225px);
+    vertical-align: top;
+    height: 60px;
+    overflow: auto;
+    border: 1px solid #d8dce5;
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+    /* --------------------------工作信息 + 私营企业--------------------- */
+
+    .CheckId_right_label
+    /* 第三列p */
+  
+      {
+      width: 140px;
+    }
+  
+    .CreditForm_InternetInf p:nth-of-type(even),
+    .CreditForm_CheckId p:nth-of-type(even),
+    .CreditForm_FamilyInf p:nth-of-type(even)
+    /* 家庭信息 */
+  
+      {
+      width: 66.6%;
+    }
+    .CreditForm label {
+      display: inline-block;
+      text-align: right;
+    }
+    
+  /* 上网查询 */
+
+  .InternetInf_right_label {
+    width: 210px;
+    /* width: 223px; */
+  }  .blueC:hover {
+    color: rgba(0, 119, 255, 0.75);
+    cursor: pointer;
+  }
+  .InternetInf_left_label {
+    display: inline-block;
+    width: 210px;
+  }
+  .detail_inf {
+    display: inline-block;
+  }
+
+  .InternetInf_left_label {
+    display: inline-block;
+    width: 210px;
+  }
+
+
+    /*------------creditform------- 核对现住址-------------------------- */
+/* 
+    .CreditForm_check_reside li,
+    .CreditForm_check_reside p {
+      margin-bottom: 20px;
+    }
+   */
+
+
+   .description {
+    clear: both;
+    margin: 4px 0;
+  }

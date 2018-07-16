@@ -4,48 +4,42 @@
       <el-collapse v-model="activeNames">
         <el-collapse-item name="1">
           <template slot="title">
-            <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-            <span class="headFont">复议基本信息 </span>
+               <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">复议基本信息</span>
           </template>
-          <div class="baseInf baseTop">
+          <div class="checkedInf checkedInf_li_width_triplet clearFix">
             <ul>
               <li>
-                <p>
-                  <label>进件编号： </label>
+                  <label class="label_width_166">进件编号： </label>
                   <span>{{applyInfoPool.applySubNo}} </span>
-                </p>
-                <p>
-                  <label>证件号码： </label>
+                     </li>
+              <li>
+                  <label  class="label_width_166">证件号码： </label>
                   <span>{{applyInfoPool.certCode}} </span>
-                </p>
               </li>
               <li>
-                <p>
-                  <label>客户名称： </label>
+                  <label  class="label_width_166">客户名称： </label>
                   <span>{{applyInfoPool.custName}} </span>
-                </p>
-                <p>
-                  <label>移动电话： </label>
+                     </li>
+              <li>
+                  <label  class="label_width_166">移动电话： </label>
                   <span>{{applyInfoPool.mobile}} </span>
-                </p>
               </li>
               <li>
-                <p>
-                  <label>证件类型： </label>
+                  <label  class="label_width_166">证件类型： </label>
                   <span>{{applyInfoPool.certTypeTxt}} </span>
-                </p>
-                <p>
-                  <label>申请类型： </label>
+                     </li>
+              <li>
+                  <label  class="label_width_166">申请类型： </label>
                   <span>{{applyInfoPool.appTypeTxt}} </span>
-                </p>
               </li>
             </ul>
           </div>
         </el-collapse-item>
         <el-collapse-item name="2">
           <template slot="title">
-            <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-            <span class="headFont">合规质检结论</span>
+               <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">合规质检结论</span>
           </template>
           <div class="AntiInf">
             <el-table :data="tableData" border style="width: 100%;height:auto !important">
@@ -58,18 +52,17 @@
         </el-collapse-item>
         <el-collapse-item name="3">
           <template slot="title">
-            <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-            <span class="headFont">复议申请信息 </span>
+               <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">复议申请信息</span>
           </template>
           <div class="AntiConclution">
-            <ul style="margin:20px 0;">
+            <ul>
               <li>
-                <p class="description" style="position:relative;;">
-                  <i v-show="fraudAuditOpinion.auditDesc&&fraudAuditOpinion.auditDesc.length>=500" class="hint_word" style="left:165px">输入长度不能超过500</i>
-                  <label>
+                <p class="description" style="position:relative;margin-top:10px;">
+                  <i v-show="fraudAuditOpinion.auditDesc&&fraudAuditOpinion.auditDesc.length>=500" class="hint_word" style="left:165px;top:-15px;z-index:9999">输入长度不能超过500</i>
+                  <label style='vertical-align:top;'>
                     <b class="required_Red" v-show="HintStar"> * </b> 复议说明： </label>
-                  <!-- <span class="textA"> {{fraudAuditOpinion.auditDesc}}</span> -->
-                  <el-input :disabled="manager" class="ccccc" type="textarea" :rows='3' resize='none' v-model='fraudAuditOpinion.auditDesc'
+                  <el-input style="width:calc(100% - 200px);" :disabled="manager"  class="ccccc" type="textarea" :rows='3' resize='none' v-model='fraudAuditOpinion.auditDesc'
                     :maxlength="500"></el-input>
                 </p>
               </li>
@@ -264,47 +257,6 @@
   widows: 100%;
   background: #ffffff;
 }
-  .icon_hat {
-    position: absolute;
-    top: 12px;
-    left: 14px
-  }
-
-  .textA {
-    display: inline-block;
-    width: calc( 66% - 145px);
-    height: 60px;
-    vertical-align: top;
-    overflow: auto;
-    border: 1px solid #d8dce5;
-    padding: 5px 10px;
-    border-radius: 4px;
-  }
-
-  .description {
-    clear: both;
-    margin: 10px 0;
-  }
-
-  /* .AntiInf li:nth-of-type(1) p,
-  .AntiInf li:nth-of-type(3) p {
-    width: 33.3%;
-    float: left;
-    margin: 10px 0;
-  } */
-
-  .AntiInf {
-    padding-top: 10px;
-  }
-
-  .baseTop li {
-    width: 33.3%;
-    float: left;
-  }
-
-  .baseTop li p {
-    margin: 10px 0;
-  }
 
   .aAntiApplyInf label {
     width: 145px;

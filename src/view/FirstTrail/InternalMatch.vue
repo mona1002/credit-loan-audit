@@ -776,24 +776,7 @@
   /* 备注 width*/  .internalMatch-class .mark-cell {
     overflow: hidden;
     overflow-wrap: break-word;
-  }  /* 折叠面板头部背景色和icon */  /* .internalMatch-class .icon_hat {
-    padding: 9px 10px 10px 13px;
-    vertical-align: middle;
-  }
-
-  .internalMatch-class .headFont {
-    font-size: 16px;
-  } */
-
-  /* .internalMatch-class .el-table th>.cell {
-    text-align: center;
-  } */
-
-  /* .internalMatch-class .head-tab {
-    font-size: 14px;
-    color: #2DA8E1;
-  } */
-
+  } 
   .internalMatch_head_tab {
     color: #2DA8E1;
     font-weight: normal;

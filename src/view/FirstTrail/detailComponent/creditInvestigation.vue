@@ -596,16 +596,7 @@
     text-align: right;
   }
 
-  /* 折叠面板头部背景色 */
 
-  .icon_hat {
-    padding: 9px 10px 10px 13px;
-    vertical-align: middle;
-  }
-
-  .headFont {
-    font-size: 16px;
-  }
 
   ul.headul li.reason {
     height: 75px;

@@ -140,20 +140,4 @@
     min-width: 950px;
   }
 
-  .textA {
-    display: inline-block;
-    width: calc( 66% - 145px);
-    height: 60px;
-    vertical-align: top;
-    overflow: auto;
-    border: 1px solid #d8dce5;
-    padding: 5px 10px;
-    border-radius: 4px;
-  }
-
-  .description {
-    clear: both;
-    margin: 10px 0;
-  }
-
 </style>

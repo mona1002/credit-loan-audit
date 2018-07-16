@@ -185,11 +185,6 @@
     border-radius: 4px;
   }
 
-  .description {
-    clear: both;
-    margin: 10px 0;
-  }
-
   .area {
     display: inline-block;
     border: 1px solid #ebeef5;
@@ -199,9 +194,6 @@
     vertical-align: top;
   }
 
-  .AntiInf {
-    padding-top: 10px;
-  }
 
   .baseTop li {
     width: 33.3%;
