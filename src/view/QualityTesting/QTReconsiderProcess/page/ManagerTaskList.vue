@@ -1,7 +1,6 @@
 <template>
   <div class="taskWatting main-div">
     <!-- 质检复议流程-质检主管页面- 初终审主管任务列表 -->
-
     <div class="taskWinput search-div">
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item" :offset="0">
@@ -91,7 +90,6 @@
   </div>
 </template>
 <script>
-  import myHead from '../../../header.vue';
   import baseU from '../../../../util/constant';
   export default {
     data() {
@@ -271,9 +269,6 @@
     mounted() {
       this.mountedInf();
     },
-    components: {
-      myHead
-    }
   }
 
 </script>

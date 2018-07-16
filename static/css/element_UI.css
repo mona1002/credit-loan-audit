@@ -10,10 +10,7 @@
   color: white;
 }
 
-.Abody .el-dialog__wrapper {
-  position: absolute;
-  margin-top: 15vh;
-}
+
 
 */
 
@@ -2361,4 +2358,7 @@ body .el-menu--horizontal .el-menu .el-submenu__title {
 }
 .Abody .el-date-editor .el-range__icon{
   line-height: 20px;
+}
+.Abody .el-dialog__wrapper {
+  position: absolute;
 }

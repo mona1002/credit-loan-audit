@@ -1,7 +1,6 @@
 <template>
   <div class="SocialSe">
     <!-- 大数据风控 -->
-    <myHead></myHead>
     <div class="outside">
       <div class="title">
         <ul>
@@ -18,7 +17,6 @@
   </div>
 </template>
 <script>
-  import myHead from '../header.vue'
   import SocialSeComponents from './SocialSeComponents/SocialSecurity.vue'
   import AccumulationFund from './SocialSeComponents/AccumulationFund.vue'
   export default {
@@ -34,7 +32,6 @@
       }
     },
     components: {
-      myHead,
       SocialSeComponents,
       AccumulationFund
     }

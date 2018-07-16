@@ -86,8 +86,6 @@
   </div>
 </template>
 <script>
-  import myHead from '../../../header.vue';
-
   export default {
     data() {
       return {
@@ -112,9 +110,6 @@
       }
     },
     props: ['propReApply', 'applyId'],
-    components: {
-      myHead
-    },
     watch: {
       '$route' (to, from) {
         if (to.path === '/RulesReApply') {

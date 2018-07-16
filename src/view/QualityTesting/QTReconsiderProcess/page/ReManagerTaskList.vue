@@ -100,7 +100,6 @@
   </div>
 </template>
 <script>
-  import myHead from '../../../header.vue';
   import baseU from '../../../../util/constant';
   export default {
     data() {
@@ -267,9 +266,6 @@
     mounted() {
       this.mountedInf();
     },
-    components: {
-      myHead
-    }
   }
 
 </script>

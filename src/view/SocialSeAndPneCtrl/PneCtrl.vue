@@ -1,7 +1,6 @@
 <template>
   <div class="PneCtrl">
     <!-- 大数据风控 -->
-    <myHead></myHead>
     <div class="outside">
       <div class="title">
         <ul>
@@ -18,7 +17,6 @@
   </div>
 </template>
 <script>
-  import myHead from '../header.vue'
   import BaiRongData from './PneCtrl/BaiRongData.vue'
   import RiskDecision from './PneCtrl/RiskDecision.vue'
   export default {
@@ -34,7 +32,6 @@
       }
     },
     components: {
-      myHead,
       BaiRongData,
       RiskDecision
     }

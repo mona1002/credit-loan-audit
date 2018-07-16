@@ -116,11 +116,7 @@
   </div>
 </template>
 <script>
-  import myHead from "../header.vue"
   export default {
-    components: {
-      myHead
-    },
     data() {
       return {
         data: 'test',
