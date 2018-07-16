@@ -686,11 +686,6 @@ height: auto !important;
 
 /* 信审表 */
 
-/* 日历-前面-图标icon */
-
-.CreditForm .el-icon-date:before {
-  color: #0077ff;
-}
 
 /* 信审表-折叠面板title 后面的icon倾斜 */
 

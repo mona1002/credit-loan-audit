@@ -40,7 +40,7 @@
             </li>
           </ul>
         </div>
-        <div class="approve_btn_area approve_btn_area_width_950" style="margin-top:100px;">
+        <div class="approve_btn_area approve_btn_area_width_980" style="margin-top:100px;">
           <span class="approve_item" @click="hangOoutBtn">
             <i class="approve_icon HangUpIcon"></i>
             <span class="approve_text">挂起</span>

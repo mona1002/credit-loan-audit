@@ -2047,8 +2047,8 @@
 
   .phone-credit .phone-tree .item-title {
     width: 100%;
-    height: 38px;
-    line-height: 38px;
+    height: 30px;
+    line-height: 30px;
     padding-left: 5px;
     border-bottom: 1px solid #d8dce5;
   }

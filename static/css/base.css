@@ -1,4 +1,9 @@
  /* 统一样式  */
+/* 日历-前面-图标icon */
+
+.Abody .el-icon-date:before {
+  color: #0077ff;
+}
 
  /* 整体布局 */
 
