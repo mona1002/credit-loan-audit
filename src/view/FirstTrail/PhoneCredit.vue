@@ -1458,7 +1458,6 @@
     background: #ededed;
     line-height: 40px;
     display: block;
-    margin-bottom: 10px;
     overflow: hidden;
     background: #eef0f9;
     border: 1px solid #e6eaee;
@@ -1498,8 +1497,7 @@
     width: 33%;
     min-width: 350px;
     float: left;
-    margin: 0;
-    margin-bottom: 10px;
+    margin-top: 13px;
   }
 
 
@@ -1513,26 +1511,15 @@
     width: 50%;
     min-width: 450px;
     float: left;
-    margin: 0;
-    min-height: 50px;
-    margin-bottom: 10px;
+    margin-top: 13px;
   }
 
   .phone-credit .item-column1 {
     width: 100%;
-    /*min-width: 1366px;*/
     float: left;
-    margin: 0;
+  margin-top: 13px;
   }
 
-
-
-
-
-
-  /*.phone-credit .item-column1 textarea {
-  margin-left: 20px;
-}*/
 
   /* 表单提交 */
 
@@ -1552,8 +1539,6 @@
 
 
   /* input 不可编辑状态*/
-
-  .dis-input {}
 
   .phone-credit .el-select>.el-input {
     height: 30px;
@@ -1633,36 +1618,22 @@
     /* 配合必选 */
     position: relative;
     font-size: 14px;
-    /*letter-spacing: 1.49px;*/
   }
 
   .phone-credit .form-his {
     font-size: 16px;
   }
 
-  /* .phone-credit .form-his ul {
-  padding-left: 23px;
-} */
-
-  .phone-credit .form-his li {
-    /*padding: 10px;*/
-    /*min-height: 30px;*/
-  }
-
   .phone-credit .form-his li .textarea-class {
     height: auto;
     float: left;
-    /*width: 795px;*/
     min-width: 300px;
-    /*min-width: 500px;*/
     padding-bottom: 10px;
   }
 
   .phone-credit .form-his li .textarea-class2 {
     height: auto;
     float: left;
-    /*min-width: 300px;*/
-    /*padding-bottom: 10px;*/
   }
 
 

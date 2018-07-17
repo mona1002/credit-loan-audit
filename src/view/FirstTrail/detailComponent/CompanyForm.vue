@@ -54,7 +54,7 @@
         </el-tooltip>
         <!-- </div> -->
       </li>
-      <li class="item-column3">
+      <li class="item-column3 Phone_credit_Form_search_bottom">
         <div class="left-title">
           <span class="require-icon" style="left:50px;">*</span>调查阶段：</div>
         <!-- <div> -->
@@ -232,11 +232,6 @@
             </el-select>
           </div>
         </li>
-        <li class="item-column3 item-column3-null">
-          <div class="left-title"></div>
-          <div class="textarea-class2">
-          </div>
-        </li>
       </div>
       <div class="content-ul">
         <li class="item-column3">
@@ -249,11 +244,6 @@
           <div class="left-title">核对工作证明人2：</div>
           <div>
             <el-input v-model="DanWjobref2" :maxlength="20"></el-input>
-          </div>
-        </li>
-        <li class="item-column3 item-column3-null">
-          <div class="left-title"></div>
-          <div class="textarea-class2">
           </div>
         </li>
       </div>

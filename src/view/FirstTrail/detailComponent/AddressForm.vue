@@ -29,7 +29,6 @@
       <li class="item-column3">
         <div class="left-title">
           <span class="require-icon" style="left:80px;">*</span> 来源：</div>
-        <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="Addsource" @change="changes('Addsource')">
             <el-option label="申请表" value="00"></el-option>
@@ -37,13 +36,11 @@
             <el-option label="其他" value="02"></el-option>
           </el-select>
         </el-tooltip>
-        <!-- </div> -->
       </li>
       <li class="item-column3">
         <div class="left-title">
           <span class="require-icon" style="left:50px;">*</span> 接听情况：
         </div>
-        <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="Addanswer">
             <el-option label="无人接" value="00"></el-option>
@@ -53,12 +50,10 @@
             <el-option label="接通" value="04"></el-option>
           </el-select>
         </el-tooltip>
-        <!-- </div> -->
       </li>
-      <li class="item-column3">
+      <li class="item-column3 Phone_credit_Form_search_bottom" >
         <div class="left-title">
           <span class="require-icon" style="left:50px;">*</span>调查阶段：</div>
-        <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="AddcheckStage">
             <el-option label="正在调查" value="00"></el-option>
@@ -67,7 +62,6 @@
             <el-option label="未调查" value="03"></el-option>
           </el-select>
         </el-tooltip>
-        <!-- </div> -->
       </li>
       <li class="item-column1" v-show="Addsource=='02'">
         <div class="left-title">其他来源说明：</div>
@@ -93,14 +87,12 @@
         <li class="item-column3">
           <div class="left-title">
             <span class="require-icon" style="left:0px;">*</span>三方查询是否异常：</div>
-          <!-- <div> -->
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <el-select v-model="AddthreeQueries" @change="changes('AddthreeQueries')">
               <el-option label="否" value="0"></el-option>
               <el-option label="是" value="1"></el-option>
             </el-select>
           </el-tooltip>
-          <!-- </div> -->
         </li>
         <li class="item-column2 item-column3-2">
           <div class="left-title" v-show="AddthreeQueries=='1'">
@@ -208,11 +200,6 @@
               <el-option label="有子女" value="00"></el-option>
               <el-option label="无子女" value="01"></el-option>
             </el-select>
-          </div>
-        </li>
-        <li class="item-column3 item-column3-null">
-          <div class="left-title"></div>
-          <div class="textarea-class2">
           </div>
         </li>
       </div>

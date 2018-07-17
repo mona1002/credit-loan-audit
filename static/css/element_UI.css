@@ -626,20 +626,6 @@ height: auto !important;
   width: 100%;
 }
 
-/* 工作台 - 刷新（refresh）- 按钮  */
-
-/* .workbench .el-icon-refresh {
-  float: right;
-  margin-right: 20px;
-  line-height: 48px;
-} */
-
-/* 工作通知 下边距 */
-
-/* .workbench .el-collapse {
-  margin-bottom: 10px;
-} */
-
 /* 工作通知title颜色 */
 
 #app .workbench .el-collapse-item__header {

@@ -54,7 +54,7 @@
         </el-tooltip>
         <!-- </div> -->
       </li>
-      <li class="item-column3">
+      <li class="item-column3 Phone_credit_Form_search_bottom">
         <div class="left-title">
           <span class="require-icon" style="left:50px;">*</span>调查阶段：</div>
         <!-- <div> -->
@@ -210,11 +210,6 @@
               <el-option label="有子女" value="00"></el-option>
               <el-option label="无子女" value="01"></el-option>
             </el-select>
-          </div>
-        </li>
-        <li class="item-column3 item-column3-null">
-          <div class="left-title"></div>
-          <div class="textarea-class2">
           </div>
         </li>
       </div>

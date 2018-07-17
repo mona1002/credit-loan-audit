@@ -50,7 +50,7 @@
           </el-select>
         </el-tooltip>
       </li>
-      <li class="item-column3">
+      <li class="item-column3 Phone_credit_Form_search_bottom" >
         <div class="left-title">
           <span class="require-icon" style="left:50px;">*</span> 调查阶段：</div>
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
@@ -186,9 +186,6 @@
         // 提交按钮
         $('.submit-class').css("margin-left", "calc( 66% - 140px)")
         // 显示 column2
-        $('.item-column3').css({
-          "min-height": "50px"
-        })
         $('.item-column3-2 .textarea-class2').css("width", "calc( 100% - 211px )");
         $('.item-column2 textarea').css("width", "100%");
       } else if (this.isFull == false) { // 分屏
@@ -432,9 +429,6 @@
           // 提交按钮
           $('.submit-class').css("margin-left", "calc( 66% - 140px)")
           // 显示 column2
-          $('.item-column3').css({
-            "min-height": "50px"
-          })
           $('.item-column3-2 .textarea-class2').css("width", "calc( 100% - 211px )");
           $('.item-column2 textarea').css("width", "100%");
         } else if (val == false) { // 分屏

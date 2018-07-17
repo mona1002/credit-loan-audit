@@ -828,3 +828,7 @@
   font-size: 13px;
   cursor: pointer;
 }
+/* 电话征信公共样式 */
+.phone-credit .Phone_credit_Form_search_bottom{
+  margin-bottom: 8px;
+}
