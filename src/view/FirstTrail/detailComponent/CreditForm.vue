@@ -2566,24 +2566,19 @@
     left: 14px
   }
 
-  /* =============================== */
 
   /* 上网查询左侧label */
 
   .CreditForm .InternetInf_left_label {
     display: inline-block;
     width: 223px;
-    /* margin-right: 10px; */
     font-size: 14px;
     font-weight: normal;
   }
 
   .CreditForm .InternetInf_right_label {
     width: 223px;
-    /* margin-right: 10px; */
   }
-
-  /* =============================== */
 
   .Family_right_label {
     width: 223px;
@@ -2598,8 +2593,9 @@
   .Working_right {
     padding-left: 150px;
   }
- .Working_input,
-   .result_textarea,
+
+  .Working_input,
+  .result_textarea,
   .family_textarea {
     padding-left: 235px;
   }
@@ -2634,11 +2630,6 @@
     margin-top: 10px;
   }
 
-  .CreditForm_CheckId p {
-    /* margin-bottom: 14px; */
-    /* margin-top: 14px; */
-  }
-
   .CreditForm_InternetInf li p:nth-of-type(even),
   /*  上网查询 */
 
@@ -2651,9 +2642,11 @@
     {
     width: 66.6%
   }
- .CreditForm_FamilyInf p:nth-of-type(even) span{
-   border:none;
- }
+
+  .CreditForm .CreditForm_FamilyInf li p:nth-of-type(even) span {
+    border: none;
+  }
+
   /* --------------------------工作信息 + 私营企业--------------------- */
 
   .WorkInfs_left_label {
@@ -2701,9 +2694,10 @@
 
   .CreditForm_CompanyInfs_ul_right li {
     margin-top: 14px;
-    /* border: 2px solid; */
   }
-.CreditForm_result{
-  padding-top:14px;
-}
+
+  .CreditForm_result {
+    padding-top: 14px;
+  }
+
 </style>
