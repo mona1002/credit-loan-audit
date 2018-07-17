@@ -26,7 +26,7 @@
         </el-col>
       </el-row>
     </div>
-      <div class="title titleContainer edit-div">
+    <div class="title titleContainer edit-div">
       <span class="titleText">
         <i class="el-icon title-icon"></i>
         异常通知
@@ -40,7 +40,8 @@
     </div>
     <div class="listContainer">
       <!-- 编辑table -->
-      <el-table :data="tableData" style="width: 100%"   height="510"  highlight-current-row @selection-change="handleSelectionChange" border>
+      <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row @selection-change="handleSelectionChange"
+        border>
         <el-table-column type="selection" align='center' width="55">
         </el-table-column>
         <el-table-column type="index" align='center' label=序号 width="55">
@@ -145,7 +146,10 @@
       },
       resend() { //重新发送
         if (!this.selectedList) {
-          this.$message.error('请选择一条数据！');
+          this.$confirm('请选择一条数据！', '提示', {
+            confirmButtonText: '确定',
+            type: 'warning'
+          }).then(() => {}).catch(() => {});
           return
         }
         var obj = {};
