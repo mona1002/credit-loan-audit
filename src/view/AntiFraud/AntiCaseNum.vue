@@ -66,7 +66,7 @@
       </div>
     </div>
     <!-- 添加 -->
-    <el-dialog title="添加备案号" :before-close="cal" :modal="false" :visible.sync="dialogFormVisible">
+    <el-dialog title="添加备案号" :before-close="cal"  :visible.sync="dialogFormVisible">
       <el-form :model="form" :rules="rulesAdd" ref="ruleFormAdd">
         <el-form-item label="案件编号：" prop="caseNum" :label-width="formLabelWidth">
           <el-input v-model="form.caseNum" type="text" placeholder="请输入内容" @compositionend.native="inputCase(form.caseNum)" @keyup.native="inputCase(form.caseNum)"></el-input>

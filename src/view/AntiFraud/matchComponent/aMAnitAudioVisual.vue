@@ -375,40 +375,16 @@ import imgUrl  from '../../../util/ConstantSocialAndPn'
     height: 100%;
   }
 
-  /* public */
-
-  .small_pic_close {
-    position: absolute;
-    right: 18px;
-    top: 13px;
-  }
-
   /* 图片功能按钮 */
 
   .showBtn {
-    position: absolute;
     top: 7px;
-    right: 2px;
   }
 
   .hidBtn {
-    position: absolute;
-    top: 10px;
     right: 10px;
-    z-index: 2;
   }
 
-  .hidDiv {
-    float: left;
-    height: 100%;
-    overflow: auto;
-    width: 20px;
-    background: #eef0f9;
-    margin-right: 11px;
-    border: 1px solid #bfcbd9;
-    position: relative;
-    z-index: 2;
-  }
 
   /* 缩略图-按钮 */
 
@@ -418,65 +394,15 @@ import imgUrl  from '../../../util/ConstantSocialAndPn'
     right: 17px;
   }
 
-  .showHidIcons {
-    display: none;
-  }
-
   /*  放大、缩小 按钮 wrap */
 
   .BtnIcons {
-    position: absolute;
-    z-index: 2;
     right: calc( 50% - 303px);
-    top: calc( 100% - 110px);
     width: 193px;
-    height: 52px;
-    background: rgba(71, 86, 105, 0.6);
-    box-shadow: 0 10px 20px 0 #47566942;
-    border-radius: 6px;
-    padding: 12px 0 11px 19px;
-  }
-
-  .BtnIcons img {
-    margin-right: 10px
-  }
-
-  .position_and_size {
-    position: absolute;
-    font-size: 30px;
-    z-index: 10;
   }
 
   .icon_pre {
-    position: absolute;
     left: 417px;
-    top: 50%;
-    z-index: 2;
-  }
-
-  .icon_next {
-    position: absolute;
-    right: 24px;
-    z-index: 2;
-    top: 50%;
-  }
-
-  .NamParentNode {
-    margin-left: 20px;
-    display: block;
-    font-style: normal;
-    width: 110px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .AudioVisual .AudioVisual_List,
-  .AudioVisual .AudioVisual_Img {
-    float: left;
-    height: 100%;
-    overflow: auto;
-    position: relative;
   }
 
   .AudioVisual .AudioVisual_Img {
@@ -485,48 +411,15 @@ import imgUrl  from '../../../util/ConstantSocialAndPn'
 
   .AudioVisual .AudioVisual_List {
     width: 401px;
-    background: #eef0f9;
-    border: 1px solid #bfcbd9;
-    margin-right: 11px;
   }
 
   /* 左侧折叠面板 */
 
   /* 折叠面板上面的四个 th 表头 */
 
-  .AudioVisual .list_title {
-    line-height: 27px;
-    font-weight: bold;
-  }
-
-  .AudioVisual .list_title span,
-  .AudioVisual .list_title_div p span {
-    height: 35px;
-    line-height: 35px;
-    display: block;
-    float: left;
-    border: 1px solid #e6ebf5;
-    border-bottom: none;
-    text-align: center;
-    position: relative;
-  }
-
-  .AudioVisual .list_title span {
-    font-size: 14px;
-  }
-
-  .AudioVisual .list_title_div p span {
-    font-size: 13px;
-    cursor: pointer;
-  }
-
   .AudioVisual .list_title span:nth-of-type(1),
   .AudioVisual .list_title_div p span:nth-of-type(1) {
     width: 135px;
-    /* 省略号 */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 
   .AudioVisual .list_title span:nth-of-type(2),
@@ -545,79 +438,6 @@ import imgUrl  from '../../../util/ConstantSocialAndPn'
   .AudioVisual .list_title_div p span:nth-of-type(4) {
     width: calc(100% - 255px);
     border-left: none;
-  }
-
-  /* 缩略图最外侧div */
-
-  .AudioVisual .Small_pic_div {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 20;
-    overflow: auto;
-    border: 1px solid #bfcbd9;
-    background: #ffffff;
-    border-radius: 4px;
-  }
-
-  /* 缩略图 p 标签  title */
-
-  .AudioVisual .Small_pic_title {
-    font-size: 16px;
-    text-align: center;
-    background: rgba(0, 119, 255, 0.75);
-    height: 48px;
-    line-height: 48px;
-    color: #f8f9fd;
-    overflow: hidden;
-    position: relative;
-  }
-
-  /* 缩略图 content */
-
-  .AudioVisual .small_pic_content {
-    position: relative;
-    height: calc( 100% - 48px);
-    overflow: auto;
-    padding-top: 30px;
-  }
-
-  /* 缩略图片-figure-wrap */
-
-  .AudioVisual .small_pic_figure {
-    float: left;
-    width: 187px;
-    height: 200px;
-    margin: 0 0 0 18px;
-  }
-
-  /*  缩略图 figure 内 图片名字 p 标签 */
-
-  .AudioVisual .small_pic_figure p {
-    height: 22px;
-    width: 186px;
-    line-height: 22px;
-    margin-top: 15px;
-    text-align: center;
-    font-size: 16px;
-    color: #475669;
-    letter-spacing: 0.11px;
-    /* 超出 省略号显示 */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  /* 缩略图 各个 img 图片 */
-
-  .AudioVisual .Small_pic {
-    height: calc( 100% - 60px);
-    /* UI设计部分 */
-    border-radius: 5px;
-    border: 2px solid #bfcbd9;
-    box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
   }
 
 </style>

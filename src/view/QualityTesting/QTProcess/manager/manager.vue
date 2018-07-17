@@ -59,7 +59,8 @@
     </div>
     <div class="listContainer">
       <!-- 编辑table -->
-      <el-table :data="tableData" style="width: 100%" height="510" border  highlight-current-row @row-dblclick="handleCurrentChange" @selection-change="handleSelectionChange">
+      <el-table :data="tableData" style="width: 100%" height="510" border highlight-current-row @row-dblclick="handleCurrentChange"
+        @selection-change="handleSelectionChange">
         <el-table-column type="selection" align='center' width="55">
         </el-table-column>
         <el-table-column type="index" align='center' label=序号 width="55">
@@ -277,7 +278,10 @@
         }
         this.SubmitParams(); //提取入参 applyId taskId
         if (this.multipleSelectionParams == '') {
-          this.$message.error('请选择一条数据！');
+          this.$confirm('请选择一条数据！', '提示', {
+            confirmButtonText: '确定',
+            type: 'warning'
+          }).then(() => {}).catch(() => {});
           return
         }
         this.post("/insConclusion/submitList", this.multipleSelectionParams)
@@ -303,7 +307,10 @@
         // }
         this.saveParams(); // 提取入参 applyId taskId isSecondIns
         if (this.multipleSelectionParams == '') {
-          this.$message.error('请选择一条数据！');
+             this.$confirm('请选择一条数据！', '提示', {
+            confirmButtonText: '确定',
+            type: 'warning'
+          }).then(() => {}).catch(() => {});
           return
         }
         this.post("/insConclusion/addList", this.multipleSelectionParams).then(res => {

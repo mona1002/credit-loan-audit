@@ -99,13 +99,13 @@
       </div>
     </div>
     <!-- 流程轨迹 -->
-    <el-dialog title="流程轨迹" :modal="false" width="1000px" :visible.sync="dialogTraceVisible">
+    <el-dialog title="流程轨迹"  width="1000px" :visible.sync="dialogTraceVisible">
       <el-table :data="traceList" border show-header highlight-current-row>
         <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column prop="taskNodeNameTxt" label="任务节点" width="120">
         </el-table-column>
-        <el-table-column prop="taskTypeTxt" label="任务类型" width="80">
+        <el-table-column prop="taskTypeTxt" label="任务类型"  width="120">
         </el-table-column>
         <el-table-column prop="activationTime" label="进入本环节时间" show-overflow-tooltip width="150">
         </el-table-column>
@@ -125,7 +125,7 @@
       </div>
     </el-dialog>
     <!-- 任务分派 -->
-    <el-dialog title="任务分派" :modal="false" :visible.sync="dialogAssignVisible">
+    <el-dialog title="任务分派"  :visible.sync="dialogAssignVisible">
       <el-form :model="itemOfLists" :rules="rules" ref="ruleForm">
         <div class="bfc">
           <el-form-item class="fl" label="任务角色" :label-width="formLabelWidth">
@@ -151,7 +151,7 @@
       </div>
     </el-dialog>
     <!-- 转分派流程轨迹 -->
-    <el-dialog title="转分派流程轨迹" :modal="false" :visible.sync="dialogTransVisible">
+    <el-dialog title="转分派流程轨迹"  :visible.sync="dialogTransVisible">
       <el-table :data="transList" border show-header highlight-current-row>
         <el-table-column type="index" label="序号" width="50">
         </el-table-column>

@@ -4,12 +4,12 @@
       <!-- 网上查询信息 -->
       <el-collapse-item name="1">
         <template slot="title">
-        <i class="collapse_title_icon"></i>
+          <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">网上查询信息</span>
         </template>
         <div class="CreditForm_InternetInf">
           <ul>
-            <li>
+            <li style="padding:5px;">
               <p>
                 <i class="hint"> </i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(0)">客户在法网是否有被执行信息：</label>
@@ -236,12 +236,12 @@
       <!-- 核实身份 -->
       <el-collapse-item name="2">
         <template slot="title">
-        <i class="collapse_title_icon"></i>
+          <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">核实身份</span>
         </template>
         <div class="CreditForm_CheckId">
-          <ul class="CreditForm_CheckId_ul_left">
-            <li style="marginTop:20px;">
+          <ul>
+            <li style="marginTop:5px;">
               <p>
                 <i class="hint"> </i>
                 <label class="InternetInf_left_label">接听者是否是借款人本人：</label>
@@ -318,8 +318,8 @@
       <!-- 工作信息  -->
       <el-collapse-item name="3">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">工作信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">工作信息</span>
         </template>
         <div class="CreditForm_WorkInfs">
           <ul class="CreditForm_WorkInfs_ul_left">
@@ -332,7 +332,7 @@
                 @compositionend="wordInput50(checkData.hirecomName,'工作单位')" @keydown="wordInput50(checkData.hirecomName,'工作单位')"
                 @keyup="wordInput50(checkData.hirecomName,'工作单位')">
             </li>
-            <li>
+            <li style="margin-top:14px;">
               <i class="hint"> </i>
               <label class="InternetInf_left_label">单位性质：</label>
               <el-select v-model="checkData.hirecomSign" placeholder="请选择">
@@ -427,7 +427,8 @@
             <li>
               <i class="hint"></i>
               <label class=" CheckId_right_label "> 入职时间： </label>
-              <el-date-picker v-model="checkData.entryDate" value-format="yyyy-MM-dd" style="maxWidth:200px;minWidth:150px;opcity:0;" type="date"  :picker-options="pickerOptions1">
+              <el-date-picker v-model="checkData.entryDate" value-format="yyyy-MM-dd" style="maxWidth:200px;minWidth:150px;opcity:0;" type="date"
+                :picker-options="pickerOptions1">
               </el-date-picker>
             </li>
             <li>
@@ -461,7 +462,7 @@
       <!-- 私营企业信息 -->
       <el-collapse-item name="4">
         <template slot="title">
-             <i class="collapse_title_icon"></i>
+          <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">私营企业信息</span>
         </template>
         <div class="CreditForm_CompanyInfs" v-show="this.workInf.private" style="paddingLeft:21px;height:320px;">
@@ -521,13 +522,13 @@
                 @keyup.native="wordarea200(checkData.projectManage,'经营项目')">
               </el-input>
             </li>
-            <li>
+            <li style="margin-top:14px;">
               <i class="hint"> </i>
               <label class="InternetInf_left_label ">近一年利润[万元]：</label>
               <el-input type="text" placeholder="请输入内容" v-model="checkData.oneYearProfitamt" @blur="formatSC('近一年利润')">
               </el-input>
             </li>
-            <li>
+            <li class="bottom">
               <i class="hint">
                 <b v-show="this.Wordhint.company.Supplier" class="Working_middle">输入长度不能超过50</b>
               </i>
@@ -575,7 +576,7 @@
       <!-- 家庭信息 -->
       <el-collapse-item name="5">
         <template slot="title">
-             <i class="collapse_title_icon"></i>
+          <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">家庭信息</span>
         </template>
         <div class="CreditForm_FamilyInf">
@@ -846,7 +847,7 @@
       <!-- 居住情况 -->
       <el-collapse-item name="6">
         <template slot="title">
-             <i class="collapse_title_icon"></i>
+          <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">居住情况</span>
         </template>
         <div class="CreditForm_live">
@@ -875,12 +876,12 @@
       <!-- 核对现住址 -->
       <el-collapse-item name="7">
         <template slot="title">
-              <i class="collapse_title_icon"></i>
+          <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">核对现住址</span>
         </template>
         <div class="CreditForm_check_reside">
           <ul class="CreditForm_check_reside_ul_left">
-            <li style="marginTop:20px;">
+            <li style="marginTop:10px;">
               <i class="hint"></i>
               <label class="InternetInf_left_label ">现住址：</label>
               <span class="detail_inf oneline"> {{this.checkData.aaddress}}</span>
@@ -894,7 +895,7 @@
               </el-select>
             </li>
           </ul>
-          <p v-show="this.address.permanent" style="clear:both;width:66.6%;position:relative">
+          <p v-show="this.address.permanent" style="clear:both;width:66.6%;position:relative;margin-top:14px;">
             <i class="hint">
               <b v-show="this.Wordhint.address.permanentAddress" class="family_textarea"> 输入长度不能超过100</b>
             </i>
@@ -907,17 +908,18 @@
       <!-- 审批结论 -->
       <el-collapse-item name="8">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">审批结论</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">审批结论</span>
         </template>
-        <div class=" CreditForm_result">
-          <i class="hint">
+        <div class="CreditForm_result">
+          <i class="hint" style="top:27px;">
             <!-- <span v-show="errors.has('conclusion')" class="result_textarea">{{ errors.first('conclusion') }}</span> -->
             <b v-show="checkData.oother && checkData.oother.length>=1000" class="result_textarea"> 输入长度不能超过1000</b>
           </i>
           <p class="InternetInf_left_label" style="textAlign:right;">
             <span class="red"> * </span>初审结果评价：</p>
-          <el-input type="textarea" :rows="5" resize="none" :maxlength="1000" placeholder="请输入内容" v-model="checkData.oother" name="conclusion" v-validate="'required'">
+          <el-input type="textarea" :rows="5" resize="none" :maxlength="1000" placeholder="请输入内容" v-model="checkData.oother" name="conclusion"
+            v-validate="'required'">
           </el-input>
         </div>
       </el-collapse-item>
@@ -939,7 +941,7 @@
   export default {
     data() {
       return {
-        ccccc:null,
+        ccccc: null,
         adbtn: '确认',
         loadsitu: false,
         surbtn: true,
@@ -1458,31 +1460,31 @@
       }
     },
     methods: {
-      mountedInf(){
-      this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
-      this.mountC();
-      // // 省    
-      // this.post("/credit/queryProvince").then(res => {
-      //   this.hirecomAddress = res.data;
-      // });
-      // // 所属行业 
-      // this.post("/credit/industry").then(res => {
-      //   this.hirecomKind = res.data;
-      // })
-      this.Pwidth = document.getElementsByClassName("el-input")
-      this.Txawidth = document.getElementsByClassName("el-textarea")
-      this.CFwidth = document.getElementsByClassName("CreditForm")
-      this.inputWidth = document.getElementsByClassName("specialInput")
-      this.comaddressb = document.getElementsByClassName("comaddressb")
-      this.Alertbtn = document.getElementsByClassName("btn")
-      if (this.myWatch) {
-        this.ElInputStyle(this.myWatch)
-      } else {
-        for (var i = 0; i < this.Pwidth.length; i++) {
-          this.Pwidth[i].style.width = 150 + "px";
-          this.comaddressb[0].style.paddingLeft = 674 + "px";
+      mountedInf() {
+        this.getParams = JSON.parse(localStorage.getItem("taskInWaitting"));
+        this.mountC();
+        // // 省    
+        // this.post("/credit/queryProvince").then(res => {
+        //   this.hirecomAddress = res.data;
+        // });
+        // // 所属行业 
+        // this.post("/credit/industry").then(res => {
+        //   this.hirecomKind = res.data;
+        // })
+        this.Pwidth = document.getElementsByClassName("el-input")
+        this.Txawidth = document.getElementsByClassName("el-textarea")
+        this.CFwidth = document.getElementsByClassName("CreditForm")
+        this.inputWidth = document.getElementsByClassName("specialInput")
+        this.comaddressb = document.getElementsByClassName("comaddressb")
+        this.Alertbtn = document.getElementsByClassName("btn")
+        if (this.myWatch) {
+          this.ElInputStyle(this.myWatch)
+        } else {
+          for (var i = 0; i < this.Pwidth.length; i++) {
+            this.Pwidth[i].style.width = 150 + "px";
+            this.comaddressb[0].style.paddingLeft = 674 + "px";
+          }
         }
-      }
       },
       wordInput20(val, el) {
         if (val.length >= 20) {
@@ -2008,7 +2010,7 @@
         this.$validator.validateAll().then((result) => {
           if (result) {
             // this.Confirm = true;
-                   this.$confirm('您确定操作？', '提示', {
+            this.$confirm('您确定操作？', '提示', {
               confirmButtonText: '确定',
               type: 'warning',
               showCancelButton: false
@@ -2296,7 +2298,8 @@
           this.checkData.fbalance.split(",").join('') : this.checkData.fbalance;
         this.checkData.iloanAmt != null && this.checkData.iloanAmt.toString().indexOf(',') != -1 ? this.checkData.iloanAmt =
           this.checkData.iloanAmt.split(",").join('') : this.checkData.iloanAmt;
-        this.checkData.avgsalaryamt != null && this.checkData.avgsalaryamt.toString().indexOf(',') != -1 ? this.checkData.avgsalaryamt =this.checkData.avgsalaryamt.split(",").join('') : this.checkData.avgsalaryamt;
+        this.checkData.avgsalaryamt != null && this.checkData.avgsalaryamt.toString().indexOf(',') != -1 ? this.checkData
+          .avgsalaryamt = this.checkData.avgsalaryamt.split(",").join('') : this.checkData.avgsalaryamt;
         this.checkData.regcapitalamt != null && this.checkData.regcapitalamt.toString().indexOf(',') != -1 ? this.checkData
           .regcapitalamt =
           this.checkData.regcapitalamt.split(",").join('') : this.checkData.regcapitalamt;
@@ -2338,7 +2341,8 @@
           this.Txawidth[22].style.width = 'calc( 100% - 260px)';
           this.CFwidth[0].style.minWidth = 1665 + "px";
           this.comaddressb[0].style.paddingLeft = 674 + "px";
-          this.Alertbtn[0].style.marginLeft = " calc( 100% - 148px)";
+          // this.Alertbtn[0].style.marginLeft = " calc( 100% - 148px)";
+          this.Alertbtn[0].style.marginLeft = "250px";
         } else if (val == "100%") {
           for (var i = 0; i < this.Pwidth.length; i++) {
             this.Pwidth[i].style.width = 200 + "px";
@@ -2353,7 +2357,7 @@
           this.Txawidth[22].style.width = "calc( 50% + 200px )";
           this.CFwidth[0].style.minWidth = 1665 + "px";
           this.comaddressb[0].style.paddingLeft = 826 + "px";
-          this.Alertbtn[0].style.marginLeft = "260px";
+          this.Alertbtn[0].style.marginLeft = "250px";
         }
       },
       mountM() {
@@ -2469,9 +2473,9 @@
   .CreditForm input {
     border: 1px solid rgb(229, 229, 229);
     border-radius: 4px;
-    height: 36px;
+    height: 30px;
     outline: none;
-    padding: 0 15px;
+    padding: 0 7px;
     font-size: inherit;
     color: #5a5e66;
   }
@@ -2496,31 +2500,8 @@
     font-size: 14px;
   }
 
-  /* .subtn {
-    background: #66b1ff;
-    border-color: #66b1ff;
-    color: #fff;
-    margin-left: 10px;
-    padding: 7px 15px;
-    font-size: 12px;
-    border-radius: 3px;
-  } */
-
-  /* .calbtn {
-    background: white;
-    border: 1px solid #d8dce5;
-    color: #5a5e66;
-    ;
-    margin-left: 10px;
-    padding: 7px 15px;
-    font-size: 12px;
-    border-radius: 3px;
-  } */
-
-
-
   .bottom {
-    margin-bottom: 20px;
+    margin-bottom: 4px;
   }
 
   /* 最下面的 弹窗样式 */
@@ -2532,7 +2513,7 @@
   /* content下边距+左边距 */
 
   .padd {
-    padding: 0 0 20px 21px;
+    padding: 0 0 4px 21px;
   }
 
   /* 上网信息-两行select下拉 居中 */
@@ -2548,7 +2529,7 @@
     width: 100%;
     font-style: normal;
     position: absolute;
-    top: -20px;
+    top: -17px;
   }
 
   .red {
@@ -2563,7 +2544,7 @@
   }
 
   .btn {
-    margin: 20px 0 0 260px;
+    margin: 20px 0 0 250px;
   }
 
   .specialInput {
@@ -2576,7 +2557,7 @@
   }
 
   .internet_textarea {
-    padding-left: 211px;
+    padding-left: 235px;
   }
 
   .icon_hat {
@@ -2584,23 +2565,25 @@
     top: 12px;
     left: 14px
   }
-/* =============================== */
+
+  /* =============================== */
+
   /* 上网查询左侧label */
 
-  .CreditForm  .InternetInf_left_label {
+  .CreditForm .InternetInf_left_label {
     display: inline-block;
     width: 223px;
-    margin-right: 10px;
+    /* margin-right: 10px; */
     font-size: 14px;
     font-weight: normal;
   }
 
- .CreditForm .InternetInf_right_label {
+  .CreditForm .InternetInf_right_label {
     width: 223px;
-    margin-right: 10px;
+    /* margin-right: 10px; */
   }
-/* =============================== */
 
+  /* =============================== */
 
   .Family_right_label {
     width: 223px;
@@ -2608,26 +2591,18 @@
 
   /* 工作信息 */
 
-  .Working_input {
-    padding-left: 214px;
-  }
-
   .Working_middle {
     padding-left: 211px;
   }
 
   .Working_right {
-    padding-left: 170px;
+    padding-left: 150px;
   }
-
+ .Working_input,
+   .result_textarea,
   .family_textarea {
-    padding-left: 212px;
+    padding-left: 235px;
   }
-
-  .result_textarea {
-    padding-left: 212px;
-  }
-
 
   .CreditForm_InternetInf li,
   .CreditForm_CheckId li,
@@ -2656,12 +2631,12 @@
     width: 33.3%;
     position: relative;
     vertical-align: middle;
-    margin-top: 20px;
+    margin-top: 10px;
   }
 
   .CreditForm_CheckId p {
-    margin-bottom: 20px;
-    margin-top: 0;
+    /* margin-bottom: 14px; */
+    /* margin-top: 14px; */
   }
 
   .CreditForm_InternetInf li p:nth-of-type(even),
@@ -2676,7 +2651,9 @@
     {
     width: 66.6%
   }
-
+ .CreditForm_FamilyInf p:nth-of-type(even) span{
+   border:none;
+ }
   /* --------------------------工作信息 + 私营企业--------------------- */
 
   .WorkInfs_left_label {
@@ -2716,16 +2693,17 @@
   .CreditForm_CompanyInfs_ul_left li {
     float: left;
     width: 50%;
-    margin-top: 20px;
+    margin-top: 14px;
   }
 
   .CreditForm_WorkInfs_ul_right li,
   /* 工作信息 */
 
   .CreditForm_CompanyInfs_ul_right li {
-    margin-top: 20px;
+    margin-top: 14px;
+    /* border: 2px solid; */
   }
-
-
-
+.CreditForm_result{
+  padding-top:14px;
+}
 </style>

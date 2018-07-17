@@ -326,7 +326,7 @@
   float: left;
   min-width: 200px;
   height: 24px;
-  margin-top:4px;
+  margin-top: 4px;
   /* margin-top:20px; */
 }
 
@@ -432,13 +432,17 @@
   height: 100%;
   min-width: 900px;
 }
+
 /* 信审表 */
+
 .CreditForm p {
   padding-bottom: 4px;
 }
+
 .CreditForm .top {
   margin-top: 4px;
 }
+
 .CreditForm li {
   color: #475669;
   font-size: 14px;
@@ -446,137 +450,154 @@
   position: relative;
   clear: both;
 }
-  /* ------------------------------上网查询 +核实身份--------------------------- */
 
-  .CreditForm_InternetInf p,
-  /*  上网查询 */
+/* ------------------------------上网查询 +核实身份--------------------------- */
 
-  .CreditForm_CheckId p,
-  /* 核实信息 ul */
+.CreditForm_InternetInf p,
+/*  上网查询 */
 
-  .CreditForm_WorkInfs p,
-  /* 工作信息 */
+.CreditForm_CheckId p,
+/* 核实信息 ul */
 
-  .CreditForm_CompanyInfs p,
-  /* 私营企业 */
+.CreditForm_WorkInfs p,
+/* 工作信息 */
 
-  .CreditForm_FamilyInf p,
-  /* 家庭信息 */
+.CreditForm_CompanyInfs p,
+/* 私营企业 */
 
-  .CreditForm_live p {
-    float: left;
-    width: 33.3%;
-    vertical-align: middle;
-  }
-  .CreditForm_check_reside li,
-  .CreditForm_check_reside p {
-    width: 100%;
-    clear: both;
-    padding: 0;
-    margin: 4px 0;
-  }
- .CreditForm .interMath li,
- .CreditForm .PhontConclution li,
-  .CreditForm_result li {
-    margin-bottom: 5px;
-    width: 66.6%;
-  }
-  .CreditForm_result{
-    padding-top:4px;
-  }
-  /* 私营企业-第一分销商  */
+.CreditForm_FamilyInf p,
+/* 家庭信息 */
 
-  .CreditForm .distributor {
-    width: calc( 100% - 155px);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    vertical-align: middle;
-  }
-  .CreditForm_InternetInf p:nth-of-type(even) span,
-  /* 上网查询 */
+.CreditForm_live p {
+  float: left;
+  width: 33.3%;
+  vertical-align: middle;
+}
 
-  .CreditForm_CheckId p:nth-of-type(even) span,
-  /* 核实身份-右侧span width */
+.CreditForm_check_reside li,
+.CreditForm_check_reside p {
+  width: 100%;
+  clear: both;
+  padding: 0;
+  margin: 4px 0;
+}
 
-  .CreditForm_FamilyInf p:nth-of-type(even) span
-  /* 家庭信息 */
+.CreditForm .interMath li,
+.CreditForm .PhontConclution li,
+.CreditForm_result li {
+  margin-bottom: 5px;
+  width: 66.6%;
+}
 
-    {
-    width: calc( 100% - 225px);
-    height: 60px;
-    vertical-align: top;
-    overflow: auto;
-    border: 1px solid #d8dce5;
-    border-radius: 4px;
-  }
-  .elips {
-    width: calc( 100% - 225px);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    vertical-align: middle;
-  }
-  /* 第一经销商 */  
-  .CreditForm  .Suppliers {
-    width: calc( 100% - 205px);
-  }
-  /* 工作信息-单位地址 + 私营企业-企业经营项目 */  
-  .CreditForm   .ComAddr {
-    width: calc( 100% - 225px);
-    vertical-align: top;
-    height: 60px;
-    overflow: auto;
-    border: 1px solid #d8dce5;
-    padding: 4px 10px;
-    border-radius: 4px;
-  }
-    /* --------------------------工作信息 + 私营企业--------------------- */
+.CreditForm_result {
+  padding-top: 4px;
+}
 
-    .CheckId_right_label
-    /* 第三列p */
-  
-      {
-      width: 140px;
-    }
-  
-    .CreditForm_InternetInf p:nth-of-type(even),
-    .CreditForm_CheckId p:nth-of-type(even),
-    .CreditForm_FamilyInf p:nth-of-type(even)
-    /* 家庭信息 */
-  
-      {
-      width: 66.6%;
-    }
-    .CreditForm label {
-      display: inline-block;
-      text-align: right;
-    }
-    
-  /* 上网查询 */
+/* 私营企业-第一分销商  */
 
-  .InternetInf_right_label {
-    width: 210px;
-    /* width: 223px; */
-  }  .blueC:hover {
-    color: rgba(0, 119, 255, 0.75);
-    cursor: pointer;
-  }
-  .InternetInf_left_label {
-    display: inline-block;
-    width: 210px;
-  }
-  .detail_inf {
-    display: inline-block;
-  }
+.CreditForm .distributor {
+  width: calc( 100% - 155px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+}
 
-  .InternetInf_left_label {
-    display: inline-block;
-    width: 210px;
-  }
+.CreditForm_InternetInf p:nth-of-type(even) span,
+/* 上网查询 */
 
+.CreditForm_CheckId p:nth-of-type(even) span,
+/* 核实身份-右侧span width */
 
-    /*------------creditform------- 核对现住址-------------------------- */
+.CreditForm_FamilyInf p:nth-of-type(even) span
+/* 家庭信息 */
+
+  {
+  width: calc( 100% - 225px);
+  height: 60px;
+  vertical-align: top;
+  overflow: auto;
+  border: 1px solid #d8dce5;
+  border-radius: 4px;
+}
+
+.elips {
+  width: calc( 100% - 225px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* 第一经销商 */
+
+.CreditForm .Suppliers {
+  width: calc( 100% - 205px);
+}
+
+/* 工作信息-单位地址 + 私营企业-企业经营项目 */
+
+.CreditForm .ComAddr {
+  width: calc( 100% - 225px);
+  vertical-align: top;
+  height: 60px;
+  overflow: auto;
+  border: 1px solid #d8dce5;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+/* --------------------------工作信息 + 私营企业--------------------- */
+
+.CheckId_right_label
+/* 第三列p */
+
+  {
+  width: 140px;
+}
+
+.CreditForm_InternetInf p:nth-of-type(even),
+.CreditForm_CheckId p:nth-of-type(even),
+.CreditForm_FamilyInf p:nth-of-type(even)
+/* 家庭信息 */
+
+  {
+  width: 66.6%;
+}
+
+.CreditForm label {
+  display: inline-block;
+  text-align: right;
+}
+
+/* 上网查询 */
+
+.InternetInf_right_label {
+  width: 210px;
+  /* width: 223px; */
+}
+
+.blueC:hover {
+  color: rgba(0, 119, 255, 0.75);
+  cursor: pointer;
+}
+
+.InternetInf_left_label {
+  display: inline-block;
+  width: 210px;
+}
+
+.detail_inf {
+  display: inline-block;
+}
+
+.InternetInf_left_label {
+  display: inline-block;
+  width: 210px;
+}
+
+/*------------creditform------- 核对现住址-------------------------- */
+
 /* 
     .CreditForm_check_reside li,
     .CreditForm_check_reside p {
@@ -584,8 +605,226 @@
     }
    */
 
+.description {
+  clear: both;
+  margin: 4px 0;
+}
 
-   .description {
-    clear: both;
-    margin: 4px 0;
-  }
+/* 影像资料 */
+
+.icon_next {
+  position: absolute;
+  right: 24px;
+  z-index: 2;
+  top: 50%;
+}
+
+.icon_pre {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+}
+
+.BtnIcons img {
+  margin-right: 10px
+}
+
+/* 对比-按钮 */
+
+.showHidIcons {
+  display: none;
+}
+
+.hidDiv {
+  float: left;
+  height: 100%;
+  overflow: auto;
+  width: 20px;
+  background: #eef0f9;
+  margin-right: 11px;
+  border: 1px solid #bfcbd9;
+  position: relative;
+  z-index: 2;
+}
+
+.hidBtn {
+  position: absolute;
+  top: 10px;
+  z-index: 2;
+}
+
+.showBtn {
+  position: absolute;
+  right: 2px;
+}
+
+.BtnIcons {
+  position: absolute;
+  z-index: 2;
+  top: calc( 100% - 110px);
+  height: 52px;
+  background: rgba(71, 86, 105, 0.6);
+  box-shadow: 0 10px 20px 0 #47566942;
+  border-radius: 6px;
+  padding: 12px 0 11px 19px;
+}
+
+.small_pic_close {
+  position: absolute;
+  right: 18px;
+  top: 13px;
+}
+
+.NamParentNode {
+  margin-left: 20px;
+  display: block;
+  font-style: normal;
+  width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 折叠面板上面的四个 th 表头 */
+
+.AudioVisual .list_title span:nth-of-type(1),
+.AudioVisual .list_title_div p span:nth-of-type(1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.AudioVisualLeft .list_title span:nth-of-type(2),
+.AudioVisualLeft .list_title_div p span:nth-of-type(2),
+.AudioVisual .list_title span:nth-of-type(2),
+.AudioVisual .list_title_div p span:nth-of-type(2) {
+  border-right: none;
+  border-left: none;
+}
+
+/*  缩略图 figure 内 图片名字 p 标签 */
+
+.AudioVisual .small_pic_figure p,
+.AudioVisualLeft .small_pic_figure p {
+  height: 22px;
+  width: 186px;
+  line-height: 22px;
+  margin-top: 15px;
+  text-align: center;
+  font-size: 16px;
+  color: #475669;
+  letter-spacing: 0.11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 缩略图 p 标签  title */
+
+.AudioVisualLeft .Small_pic_title,
+.AudioVisual .Small_pic_title {
+  font-size: 16px;
+  text-align: center;
+  background: rgba(0, 119, 255, 0.75);
+  height: 48px;
+  line-height: 48px;
+  color: #f8f9fd;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 缩略图片-figure-wrap */
+
+.AudioVisual .small_pic_figure,
+.AudioVisualLeft .small_pic_figure {
+  float: left;
+  width: 187px;
+  height: 200px;
+  margin: 0 0 0 18px;
+}
+
+.AudioVisual .AudioVisual_List,
+.AudioVisual .AudioVisual_Img,
+.AudioVisualLeft .AudioVisual_List,
+.AudioVisualLeft .AudioVisual_Img {
+  float: left;
+  height: 100%;
+  overflow: auto;
+  position: relative;
+}
+
+.AudioVisual .AudioVisual_List,
+.AudioVisualLeft .AudioVisual_List {
+  background: #eef0f9;
+  border: 1px solid #bfcbd9;
+  margin-right: 11px;
+  position: relative;
+}
+
+/* 缩略图 各个 img 图片 */
+
+.AudioVisual .Small_pic,
+.AudioVisualLeft .Small_pic {
+  height: calc( 100% - 60px);
+  border-radius: 5px;
+  border: 2px solid #bfcbd9;
+  box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
+  overflow: hidden;
+}
+
+/* 缩略图最外侧div */
+
+.AudioVisual .Small_pic_div,
+.AudioVisualLeft .Small_pic_div {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  overflow: auto;
+  border: 1px solid #bfcbd9;
+  background: #ffffff;
+  border-radius: 4px;
+}
+
+/* 缩略图 content */
+
+.AudioVisualLeft .small_pic_content,
+.AudioVisual .small_pic_content {
+  position: relative;
+  height: calc( 100% - 48px);
+  overflow: auto;
+  padding-top: 30px;
+}
+
+.AudioVisual .list_title,
+.AudioVisualLeft .list_title {
+  line-height: 27px;
+}
+
+.AudioVisual .list_title span,
+.AudioVisual .list_title_div p span,
+.AudioVisualLeft .list_title span,
+.AudioVisualLeft .list_title_div p span {
+  height: 35px;
+  line-height: 35px;
+  display: block;
+  float: left;
+  border: 1px solid #e6ebf5;
+  border-bottom: none;
+  text-align: center;
+  position: relative;
+}
+
+.AudioVisualLeft .list_title span,
+.AudioVisual .list_title span {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.AudioVisual .list_title_div p span,
+.AudioVisualLeft .list_title_div p span {
+  font-size: 13px;
+  cursor: pointer;
+}

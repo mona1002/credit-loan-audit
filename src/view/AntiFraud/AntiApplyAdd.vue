@@ -163,7 +163,7 @@
         </div>
       </el-dialog> -->
     <!-- =================================================== -->
-    <el-dialog title="请选择一条信息" :visible.sync="coverShow" :modal="false" width='1130px'>
+    <el-dialog title="请选择一条信息" :visible.sync="coverShow"  width='1130px'>
       <div>
         <div class="taskWinput search-div">
           <el-row class="row row1" type="flex">

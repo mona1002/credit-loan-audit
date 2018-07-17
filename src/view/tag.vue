@@ -111,7 +111,9 @@
   }
 
   .active {
-    background: #0077ffcc;
+    /* background: #0077ffcc; */
+    /* background-attachment: rgba(0, 119, 255, 1); */
+    background: #07f;
   }
 
   .close_tag {

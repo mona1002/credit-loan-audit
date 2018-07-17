@@ -701,7 +701,7 @@ height: auto !important;
 
 .CreditForm .el-input {
   display: inline-block;
-  height: 36px;
+  height: 30px;
   /* 改后 */
   min-width: 150px;
   max-width: 200px;
@@ -716,7 +716,7 @@ height: auto !important;
 .CreditForm .el-input__inner {
   border: 1px solid rgb(229, 229, 229);
   border-radius: 4px;
-  height: 36px;
+  height: 30px;
   /* 改后 */
   /* border-radius:6px;
  width:258px;
@@ -1580,13 +1580,14 @@ body .el-menu--horizontal .el-menu .el-menu-item {
 
 body .el-menu--horizontal .el-menu .el-submenu__title {
   background-color: transparent;
-  color: #bfcbd9;
+  color: #bfcbd9 !important;
   padding:0 20px 0 10px;
+  border-bottom-color:transparent !important;
 }
 
 body .el-menu--horizontal .el-menu .el-submenu__title:hover {
   background-color: transparent;
-  color: #fff;
+  color: #fff !important;
   border-bottom: none;
 }
 

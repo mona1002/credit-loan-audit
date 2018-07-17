@@ -550,93 +550,27 @@
     height: 100%;
   }
 
-  /* public */
-
-  .small_pic_close {
-    position: absolute;
-    right: 18px;
-    top: 13px;
-  }
-
   /* 图片功能按钮 */
 
   .showBtn {
-    position: absolute;
     top: 11px;
-    right: 2px;
   }
 
   .hidBtn {
-    position: absolute;
-    top: 10px;
     right: 5px;
-    z-index: 2;
   }
 
-  .hidDiv {
-    float: left;
-    height: 100%;
-    overflow: auto;
-
-    width: 20px;
-    background: #eef0f9;
-    margin-right: 11px;
-    border: 1px solid #bfcbd9;
-    position: relative;
-    z-index: 2;
-  }
-
-  /* 对比-按钮 */
-
-  .showHidIcons {
-    display: none;
-  }
 
   /*  放大、缩小 按钮 wrap */
 
   .BtnIcons {
-    position: absolute;
-    z-index: 2;
     left: calc( 50% + 9px);
-    top: calc( 100% - 110px);
     width: 270px;
-    height: 52px;
-    background: rgba(71, 86, 105, 0.6);
-    box-shadow: 0 10px 20px 0 #47566942;
-    border-radius: 6px;
-    padding: 12px 0 11px 19px;
   }
 
-  .BtnIcons img {
-    margin-right: 10px
-  }
-
-  .position_and_size {
-    position: absolute;
-    font-size: 30px;
-    z-index: 10;
-  }
 
   .icon_pre {
-    position: absolute;
     left: 223px;
-    top: 50%;
-    z-index: 2;
-  }
-
-  .icon_next {
-    position: absolute;
-    right: 24px;
-    z-index: 2;
-    top: 50%;
-  }
-
-  .AudioVisualLeft .AudioVisual_List,
-  .AudioVisualLeft .AudioVisual_Img {
-    float: left;
-    height: 100%;
-    overflow: auto;
-    position: relative;
   }
 
   .AudioVisualLeft .AudioVisual_Img {
@@ -645,40 +579,12 @@
 
   .AudioVisualLeft .AudioVisual_List {
     width: 203px;
-    background: #eef0f9;
-    border: 1px solid #bfcbd9;
-    margin-right: 11px;
   }
 
   /* 左侧折叠面板 */
 
   /* 折叠面板上面的四个 th 表头 */
 
-  .AudioVisualLeft .list_title {
-    line-height: 27px;
-    font-weight: bold;
-  }
-
-  .AudioVisualLeft .list_title span,
-  .AudioVisualLeft .list_title_div p span {
-    height: 35px;
-    line-height: 35px;
-    display: block;
-    float: left;
-    border: 1px solid #e6ebf5;
-    border-bottom: none;
-    text-align: center;
-    position: relative;
-  }
-
-  .AudioVisualLeft .list_title span {
-    font-size: 14px;
-  }
-
-  .AudioVisualLeft .list_title_div p span {
-    font-size: 13px;
-    cursor: pointer;
-  }
 
   .AudioVisualLeft .list_title span:nth-of-type(1),
   .AudioVisualLeft .list_title_div p span:nth-of-type(1) {
@@ -695,88 +601,6 @@
     width: calc(100% - 125px);
     border-right: none;
     border-left: none;
-  }
-
-  /* 缩略图最外侧div */
-
-  .AudioVisualLeft .Small_pic_div {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 20;
-    overflow: auto;
-    border: 1px solid #bfcbd9;
-    background: #ffffff;
-    border-radius: 4px;
-  }
-
-  /* 缩略图 p 标签  title */
-
-  .AudioVisualLeft .Small_pic_title {
-    font-size: 16px;
-    text-align: center;
-    background: rgba(0, 119, 255, 0.75);
-    height: 48px;
-    line-height: 48px;
-    color: #f8f9fd;
-    overflow: hidden;
-    position: relative;
-  }
-
-  /* 缩略图 content */
-
-  .AudioVisualLeft .small_pic_content {
-    position: relative;
-    height: calc( 100% - 48px);
-    overflow: auto;
-    padding-top: 30px;
-  }
-
-  /* 缩略图片-figure-wrap */
-
-  .AudioVisualLeft .small_pic_figure {
-    float: left;
-    width: 30%;
-    height: 200px;
-    margin: 15px 0 0 2%;
-  }
-
-  /*  缩略图 figure 内 图片名字 p 标签 */
-
-  .AudioVisualLeft .small_pic_figure p {
-    height: 22px;
-    width: 186px;
-    line-height: 22px;
-    margin-top: 15px;
-    text-align: center;
-    font-size: 16px;
-    color: #475669;
-    letter-spacing: 0.11px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  /* 缩略图 各个 img 图片 */
-
-  .AudioVisualLeft .Small_pic {
-    height: calc( 100% - 60px);
-    /* UI设计部分 */
-    border-radius: 5px;
-    border: 2px solid #bfcbd9;
-    box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
-  }
-
-  .NamParentNode {
-    margin-left: 20px;
-    display: block;
-    font-style: normal;
-    width: 110px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 
   .posi {

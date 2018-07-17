@@ -54,7 +54,7 @@
       </el-table>
     </div>
     <!-- 编辑 -->
-    <el-dialog title="添加反欺诈规则" :modal="false" :visible.sync="dialogFormVisible">
+    <el-dialog title="添加反欺诈规则"  :visible.sync="dialogFormVisible">
       <el-form :model="form" ref="ruleFormAdd">
         <el-form-item label="规则编号：" :label-width="formLabelWidth">
           <el-input readonly v-model="form.ruleNum"></el-input>
