@@ -262,12 +262,12 @@
         }
       },
       showList() {
-        this.$refs.Left_title.style.left = "0";
-        this.flexible = false;
+        // this.$refs.Left_title.style.left = "0";
+        // this.flexible = false;
       },
       hid() {
-        this.$refs.Left_title.style.left = "-200px";
-        this.flexible = true;
+        // this.$refs.Left_title.style.left = "-200px";
+        // this.flexible = true;
       },
       FullScreen() {
         this.showHalfBtn = true;
