@@ -5,19 +5,19 @@
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">进件编号： </span>
-          <el-input v-model="params.applySubno" placeholder="请输入进件编号"></el-input>
+          <el-input v-model.trim="params.applySubno" placeholder="请输入进件编号"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">客户名称：</span>
-          <el-input v-model="params.custName" placeholder="请输入客户名称"></el-input>
+          <el-input v-model.trim="params.custName" placeholder="请输入客户名称"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">证件号码：</span>
-          <el-input v-model="params.certCode" placeholder="请输入证件号码"></el-input>
+          <el-input v-model.trim="params.certCode" placeholder="请输入证件号码"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">手机号码：</span>
-          <el-input v-model="params.mobile" placeholder="请输入手机号码"></el-input>
+          <el-input v-model.trim="params.mobile" placeholder="请输入手机号码"></el-input>
         </el-col>
       </el-row>
       <el-row class="row row2" type="flex">

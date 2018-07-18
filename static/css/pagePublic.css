@@ -185,7 +185,7 @@
   left: -110px;
   top: 120px;
   z-index: 10;
-  padding-top: 24px;
+  padding: 20px  20px 0 20px;
 }
 
 .SplitScreen .left .Left_ul li {
@@ -193,7 +193,7 @@
   letter-spacing: 0.1px;
   height: 21px;
   line-height: 12px;
-  padding: 0 0 30px 20px;
+  padding-bottom: 30px;
 }
 
 .SplitScreen .left .Left_ul li:hover,
@@ -245,7 +245,7 @@
 }
 
 .SplitScreen .Right_tab_ul_wrap ul {
-  width: 1061px;
+  min-width: 1061px;
   height: 48px;
   position: relative;
   text-align: left;
