@@ -1,9 +1,10 @@
  /* 统一样式  */
-/* 日历-前面-图标icon */
 
-.Abody .el-icon-date:before {
-  color: #0077ff;
-}
+ /* 日历-前面-图标icon */
+
+ .Abody .el-icon-date:before {
+   color: #0077ff;
+ }
 
  /* 整体布局 */
 
@@ -73,6 +74,10 @@
    padding-left: 30px;
  }
 
+ .el-date-editor .el-range__close-icon {
+   display: none;
+ }
+
  /* 下拉 选择多级机构（自己做的，没用组件）*/
 
  .search-item .dropdown {
@@ -106,9 +111,11 @@
  /* .Abody .el-table__header-wrapper {
   overflow: auto;
 } */
-.Abody .el-table--enable-row-hover .el-table__body tr:hover>td{
-  background-color: lightskyblue;
-}
+
+ .Abody .el-table--enable-row-hover .el-table__body tr:hover>td {
+   background-color: lightskyblue;
+ }
+
  .Abody .el-table th .cell {
    font-weight: 800;
  }
@@ -275,25 +282,28 @@
  .editIcon {
    background-image: url('../images/change.png')
  }
- .relieveIcon{
-  background-image: url('../images/relieve.png')
+
+ .relieveIcon {
+   background-image: url('../images/relieve.png')
  }
 
  .collapse_title_icon {
-   width:30px;
+   width: 30px;
    height: 30px;
    display: inline-block;
    background: url('../images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png') no-repeat center;
  }
-.collapse_title_text{
-  height: 30px;
-  line-height: 30px;
-  /* background:red; */
-  font-size: 14px;
-  font-weight:800;
-  display: inline-block;
-  vertical-align: top;
-}
+
+ .collapse_title_text {
+   height: 30px;
+   line-height: 30px;
+   /* background:red; */
+   font-size: 14px;
+   font-weight: 800;
+   display: inline-block;
+   vertical-align: top;
+ }
+
  /* 列表 区域 */
 
  .listContainer {
@@ -341,9 +351,11 @@
  .Abody .el-table th {
    padding: 0px !important;
  }
- .Abody .height_auto .el-table{
-height:auto !important;
+
+ .Abody .height_auto .el-table {
+   height: auto !important;
  }
+
  /* 操作按钮 */
 
  .Abody .el-table .btn-sm {
@@ -714,12 +726,14 @@ height:auto !important;
  }
 
  /* 页面手风琴样式 */
- .Abody .el-collapse-item__content{
-  color: #475669;
-  font-size: 14px;
-  padding: 0;
-  width:100%;
+
+ .Abody .el-collapse-item__content {
+   color: #475669;
+   font-size: 14px;
+   padding: 0;
+   width: 100%;
  }
+
  /* 弹窗手风琴样式 */
 
  .Abody .alert_collapse .el-collapse-item__content {
@@ -732,7 +746,7 @@ height:auto !important;
 
  .Abody .el-collapse-item__arrow {
    height: 28px;
-   line-height:28px;
+   line-height: 28px;
  }
 
  .Abody .el-date-editor .el-range-separator {
@@ -888,7 +902,7 @@ height:auto !important;
 
  .el-collapse-item__wrap {
    border-bottom: none;
-   width:100%;
+   width: 100%;
  }
 
  /* 弹窗里部分input必填项，部分展示项 */

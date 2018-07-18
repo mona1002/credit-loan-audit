@@ -4,30 +4,26 @@
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">输入参数</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">输入参数</span>
         </template>
-        <div class="lists">
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
             <li>
-              <p>
-                <label>身份证：</label>
-                <b>{{parmaAndRisk.certCode}}</b>
-              </p>
-              <p>
-                <label>手机号：</label>
-                <b>{{parmaAndRisk.mobile }}</b>
-              </p>
-              <p>
-                <label>姓名：</label>
-                <b>{{parmaAndRisk.custName }}</b>
-              </p>
+              <label class="label_width_166">身份证：</label>
+              <span>{{parmaAndRisk.certCode}}</span>
             </li>
             <li>
-              <p>
-                <label>联系人手机号：</label>
-                <b>{{parmaAndRisk.linkmanMobile }}</b>
-              </p>
+              <label class="label_width_166">手机号：</label>
+              <span>{{parmaAndRisk.mobile}}</span>
+            </li>
+            <li>
+              <label class="label_width_166">姓名：</label>
+              <span>{{parmaAndRisk.custName }}</span>
+            </li>
+            <li>
+              <label class="label_width_166">联系人手机号：</label>
+              <span>{{parmaAndRisk.linkmanMobile }}</span>
             </li>
           </ul>
         </div>
@@ -36,24 +32,23 @@
     <el-collapse v-model="activeNames">
       <el-collapse-item name="2">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">风险详情</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">风险详情</span>
         </template>
-        <div class="lists">
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
+
             <li>
-              <p>
-                <label>策略集：</label>
-                <b>{{parmaAndRisk.policy_set_name }}</b>
-              </p>
-              <p>
-                <label>风险状态：</label>
-                <b>{{parmaAndRisk.final_decision }}</b>
-              </p>
-              <p>
-                <label>风险系数：</label>
-                <b>{{parmaAndRisk.final_score }}</b>
-              </p>
+              <label class="label_width_166">策略集：</label>
+              <span>{{parmaAndRisk.policy_set_name }}</span>
+            </li>
+            <li>
+              <label class="label_width_166">风险状态：</label>
+              <span>{{parmaAndRisk.final_decision }}</span>
+            </li>
+            <li>
+              <label class="label_width_166">风险系数：</label>
+              <span>{{parmaAndRisk.final_score }}</span>
             </li>
           </ul>
         </div>
@@ -62,24 +57,22 @@
     <el-collapse v-model="activeNames">
       <el-collapse-item name="3">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">命中规则</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">命中规则</span>
         </template>
-        <div class="tes">
-          <div class="tab_wrap">
-            <el-table :data="tableData" border height="100%" style="width: 100%">
-              <el-table-column prop="rulercode" label="规则编号"  min-width="70">
-              </el-table-column>
-              <el-table-column prop="name" label="规则名称"  min-width="70">
-              </el-table-column>
-              <el-table-column prop="score" label="规则分数"  min-width="100">
-              </el-table-column>
-              <el-table-column prop="decision" label="规则结果"  min-width="100">
-              </el-table-column>
-              <el-table-column prop="action" label="查看规则详情"  min-width="100">
-              </el-table-column>
-            </el-table>
-          </div>
+        <div class="height_auto">
+          <el-table :data="tableData" border height="100%" style="width: 100%">
+            <el-table-column prop="rulercode" label="规则编号" min-width="70">
+            </el-table-column>
+            <el-table-column prop="name" label="规则名称" min-width="70">
+            </el-table-column>
+            <el-table-column prop="score" label="规则分数" min-width="100">
+            </el-table-column>
+            <el-table-column prop="decision" label="规则结果" min-width="100">
+            </el-table-column>
+            <el-table-column prop="action" label="查看规则详情" min-width="100">
+            </el-table-column>
+          </el-table>
         </div>
       </el-collapse-item>
     </el-collapse>
@@ -110,21 +103,20 @@
       // } 
       else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
         this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员 
-      } else if (this.judgeFlag.flag == '07') {
-        this.localInf = JSON.parse(localStorage.getItem("QTTaskWait")) //质检 专员
-      } else if (this.judgeFlag.flag == '08') {
-        this.localInf = JSON.parse(localStorage.getItem("QTManagerTW")) //质检 主管
-      } else if (this.judgeFlag.flag == '09') {
-        this.localInf = JSON.parse(localStorage.getItem("QTSelfTW")) //质检 初终审本人任务列表 
-      } else if (this.judgeFlag.flag == '10') {
-        this.localInf = JSON.parse(localStorage.getItem("QTTrialManagerTW")) //质检 初终审主管
-      } else if (this.judgeFlag.flag == '11') {
-        this.localInf = JSON.parse(localStorage.getItem("QTReManagerTW")) //质检 复议任务列表（首次） ---区域无社保公积金按钮
-      } else if (this.judgeFlag.flag == '13') {
-        this.localInf = JSON.parse(localStorage.getItem("QTComplianceTW")) //质检 合规经理任务列表 
+      } else if (this.judgeFlag.flag == '07' || this.judgeFlag.flag == '08' || this.judgeFlag.flag == '09' || this.judgeFlag
+        .flag == '10' || this.judgeFlag.flag == '11' || this.judgeFlag.flag == '13') {
+        this.localInf = JSON.parse(localStorage.getItem("FGQTTaskWait")) //质检 专员
       }
-      // else if (this.judgeFlag.flag == '06') {
-      //   this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议经理
+      // else if (this.judgeFlag.flag == '08') {
+      //   this.localInf = JSON.parse(localStorage.getItem("FGQTManagerTW")) //质检 主管
+      // } else if (this.judgeFlag.flag == '09') {
+      //   this.localInf = JSON.parse(localStorage.getItem("FGQTSelfTW")) //质检 初终审本人任务列表 
+      // } else if (this.judgeFlag.flag == '10') {
+      //   this.localInf = JSON.parse(localStorage.getItem("QTTrialManagerTW")) //质检 初终审主管
+      // } else if (this.judgeFlag.flag == '11') {
+      //   this.localInf = JSON.parse(localStorage.getItem("FGQTReManagerTW")) //质检 复议任务列表（首次） ---区域无社保公积金按钮
+      // } else if (this.judgeFlag.flag == '13') {
+      //   this.localInf = JSON.parse(localStorage.getItem("QTComplianceTW")) //质检 合规经理任务列表 
       // }
       this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getTdTabInfo.action', {
         //  applyId:'b14455f1-5531-4cf2-883b-f6dc0049e3bb'
@@ -144,40 +136,9 @@
 <style scoped>
   .SSComp {
     overflow-x: hidden;
+    height: calc(100% - 90px);
     height: 100%;
-  }
-
-  .icon_hat {
-    position: absolute;
-    top: 12px;
-    left: 14px;
-  }
-
-  .lists {
-    padding: 10px 0 0 21px;
-  }
-
-  .SSComp p {
-    float: left;
-    width: 33.3%;
-    margin-bottom: 10px;
-  }
-
-  .SSComp label {
-    display: inline-block;
-    width: 95px;
-    text-align: right;
-  }
-
-  .SSComp b {
-    display: inline-block;
-    width: calc(100% - 120px);
-  }
-
-  .tab_wrap {
-    margin: 10px;
-    border-radius: 4px;
-    overflow-x: hidden;
+    background: #ffffff;
   }
 
 </style>

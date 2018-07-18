@@ -4,34 +4,30 @@
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">输入参数</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">输入参数</span>
         </template>
-        <div class="lists inputPar">
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
             <li>
-              <p>
-                <label>姓名：</label>
-                <b>{{InputParameter.custName}}</b>
-              </p>
-              <p>
-                <label>身份证号：</label>
-                <b>{{InputParameter.certCode}}</b>
-              </p>
-              <p>
-                <label>账号：</label>
-                <b>{{InputParameter.account}}</b>
-              </p>
+              <label class="label_width_166">姓名：</label>
+              <b>{{InputParameter.custName}}</b>
             </li>
             <li>
-              <p>
-                <label>密码：</label>
-                <b>{{InputParameter.password}}</b>
-              </p>
-              <p style="marginBottom:15px;">
-                <label>省市：</label>
-                <b>{{InputParameter.area_code}}</b>
-              </p>
+              <label class="label_width_166">身份证号：</label>
+              <b>{{InputParameter.certCode}}</b>
+            </li>
+            <li>
+              <label class="label_width_166">账号：</label>
+              <b>{{InputParameter.account}}</b>
+            </li>
+            <li>
+              <label class="label_width_166">密码：</label>
+              <b>{{InputParameter.password}}</b>
+            </li>
+            <li>
+              <label class="label_width_166">省市：</label>
+              <b>{{InputParameter.area_code}}</b>
             </li>
           </ul>
         </div>
@@ -40,14 +36,14 @@
     <el-collapse v-model="activeNames">
       <el-collapse-item name="2">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">基本信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">基本信息</span>
         </template>
         <div class="lists">
           <div id="responseBaseInfoParams" class="easyui-panel" data-options="title:'基本信息',border:false,collapsible:true">
             <table id="t_01" class="table">
               <tr>
-                <th style="width:15%;text-align:left">基本信息</th>
+                <th class="font_weight_800" style="width:15%;text-align:left">基本信息</th>
                 <td style="width:15%"></td>
                 <th style="width:25%"></th>
                 <td style="width:12%"></td>
@@ -57,7 +53,7 @@
             </table>
             <table id="t_02" class="table">
               <tr>
-                <th style="width:10%;text-align:left">账单记录</th>
+                <th class="font_weight_800" style="width:10%;text-align:left">账单记录</th>
                 <td style="width:18%">
                   <th style="width:8%"></th>
                   <td style="width:8%"></td>
@@ -71,7 +67,7 @@
             </table>
             <table id="t_03" class="table">
               <tr>
-                <th style="width:10%;text-align:left">贷款信息</th>
+                <th class="font_weight_800" style="width:10%;text-align:left">贷款信息</th>
                 <td style="width:18%">
                   <th style="width:8%"></th>
                   <td style="width:8%"></td>
@@ -85,7 +81,7 @@
             </table>
             <table id="t_04" class="table">
               <tr>
-                <th style="width:10%;text-align:left">还款记录</th>
+                <th class="font_weight_800" style="width:10%;text-align:left">还款记录</th>
                 <td style="width:18%"></td>
                 <th style="width:8%"></th>
                 <td style="width:8%"></td>
@@ -104,15 +100,14 @@
     <el-collapse v-model="activeNames">
       <el-collapse-item name="3">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">报告信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">报告信息</span>
         </template>
         <div class="lists">
           <div id="responseParams" class="easyui-panel" data-options="title:'报告信息',border:false,collapsible:true">
             <table id="t_1" class="table">
               <tr>
-                <!-- th style:  padding:10px 19px; -->
-                <th style="width:15%;text-align:left;">用户及账户基本信息</th>
+                <th class="font_weight_800" style="width:15%;text-align:left;">用户及账户基本信息</th>
                 <td style="width:15%"></td>
                 <th style="width:20%"></th>
                 <td style="width:12%"></td>
@@ -122,8 +117,7 @@
             </table>
             <table id="t_2" class="table">
               <tr>
-                <!-- th style:  padding:10px 19px; -->
-                <th style="width:15%;text-align:left;">用户基本信息效验</th>
+                <th class="font_weight_800" style="width:15%;text-align:left;">用户基本信息效验</th>
                 <td style="width:15%"></td>
                 <th style="width:20%"></th>
                 <td style="width:12%"></td>
@@ -133,8 +127,7 @@
             </table>
             <table id="t_3" class="table">
               <tr>
-                <!-- th style:  padding:10px 19px; -->
-                <th style="width:15%;text-align:left;">账户基本信息</th>
+                <th class="font_weight_800" style="width:15%;text-align:left;">账户基本信息</th>
                 <td style="width:15%"></td>
                 <th style="width:20%"></th>
                 <td style="width:12%"></td>
@@ -144,8 +137,7 @@
             </table>
             <table id="t_4" class="table">
               <tr>
-                <!-- th style:  padding:10px 19px; -->
-                <th style="text-align:left;width:15%;">缴纳信息</th>
+                <th class="font_weight_800" style="text-align:left;width:15%;">缴纳信息</th>
                 <td style="width:15%"></td>
                 <th style="width:20%"></th>
                 <td style="width:12%"></td>
@@ -155,8 +147,7 @@
             </table>
             <table id="t_5" class="table">
               <tr>
-                <!-- th style:  padding:10px 19px; -->
-                <th style="text-align:left;width:15%;">还款信息</th>
+                <th class="font_weight_800" style="text-align:left;width:15%;">还款信息</th>
                 <td style="width:15%"></td>
                 <th style="width:20%"></th>
                 <td style="width:12%"></td>
@@ -312,19 +303,21 @@
       // }
       else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
         this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员 
-      } else if (this.judgeFlag.flag == '07') {
-        this.localInf = JSON.parse(localStorage.getItem("QTTaskWait")) //质检 专员
-      } else if (this.judgeFlag.flag == '08') {
-        this.localInf = JSON.parse(localStorage.getItem("QTManagerTW")) //质检 主管
-      } else if (this.judgeFlag.flag == '09') {
-        this.localInf = JSON.parse(localStorage.getItem("QTSelfTW")) //质检 初终审本人任务列表 
-      } else if (this.judgeFlag.flag == '10') {
-        this.localInf = JSON.parse(localStorage.getItem("QTTrialManagerTW")) //质检 初终审主管
-      } else if (this.judgeFlag.flag == '11') {
-        this.localInf = JSON.parse(localStorage.getItem("QTReManagerTW")) //质检 复议任务列表（首次） ---区域无社保公积金按钮
-      } else if (this.judgeFlag.flag == '13') {
-        this.localInf = JSON.parse(localStorage.getItem("QTComplianceTW")) //质检 合规经理任务列表 
+      } else if (this.judgeFlag.flag == '07' || this.judgeFlag.flag == '08' || this.judgeFlag.flag == '09' || this.judgeFlag
+        .flag == '10' || this.judgeFlag.flag == '11' || this.judgeFlag.flag == '13') {
+        this.localInf = JSON.parse(localStorage.getItem("FGQTTaskWait")) //质检 专员
       }
+      //  else if (this.judgeFlag.flag == '08') {
+      //   this.localInf = JSON.parse(localStorage.getItem("FGQTManagerTW")) //质检 主管
+      // } else if (this.judgeFlag.flag == '09') {
+      //   this.localInf = JSON.parse(localStorage.getItem("FGQTSelfTW")) //质检 初终审本人任务列表 
+      // } else if (this.judgeFlag.flag == '10') {
+      //   this.localInf = JSON.parse(localStorage.getItem("QTTrialManagerTW")) //质检 初终审主管
+      // } else if (this.judgeFlag.flag == '11') {
+      //   this.localInf = JSON.parse(localStorage.getItem("FGQTReManagerTW")) //质检 复议任务列表（首次） ---区域无社保公积金按钮
+      // } else if (this.judgeFlag.flag == '13') {
+      //   this.localInf = JSON.parse(localStorage.getItem("QTComplianceTW")) //质检 合规经理任务列表 
+      // }
       // else if (this.judgeFlag.flag == '06') {
       //   this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议经理
       // }
@@ -410,50 +403,8 @@
     height: 100%;
   }
 
-  .icon_hat {
-    position: absolute;
-    top: 12px;
-    left: 14px;
-  }
-
   .lists {
-    padding: 10px 0 0 21px;
-  }
-
-  .SSComp h4 {
-    clear: both;
-    font-weight: bold;
-  }
-
-  .SSComp li {
-    clear: both;
-  }
-
-  .SSComp p {
-    display: inline-block;
-    width: 33.3%;
-    margin-top: 5px;
-  }
-
-  .SSComp label {
-    display: inline-block;
-    width: 180px;
-    text-align: right;
-    vertical-align: top;
-  }
-
-  .SSComp li span {
-    display: inline-block;
-    width: calc(100% - 283px);
-    vertical-align: top;
-  }
-
-  .SSComp li b {
-    vertical-align: top
-  }
-
-  .inputPar p {
-    float: left;
+    padding: 4px 0 4px 21px;
   }
 
   .table {

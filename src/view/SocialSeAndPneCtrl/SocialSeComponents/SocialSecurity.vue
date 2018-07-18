@@ -4,34 +4,30 @@
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">输入参数</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">输入参数</span>
         </template>
-        <div class="lists">
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
             <li>
-              <p>
-                <label>姓名：</label>
-                <b>{{InputParameter.custName}}</b>
-              </p>
-              <p>
-                <label>身份证号：</label>
-                <b>{{InputParameter.certCode}}</b>
-              </p>
-              <p>
-                <label>账号：</label>
-                <b>{{InputParameter.account}}</b>
-              </p>
+              <label class="label_width_166">姓名：</label>
+              <span>{{InputParameter.custName}}</span>
             </li>
             <li>
-              <p>
-                <label>密码：</label>
-                <b>{{InputParameter.password}}</b>
-              </p>
-              <p style="marginBottom:15px;">
-                <label>省市：</label>
-                <b>{{InputParameter.area_code}}</b>
-              </p>
+              <label class="label_width_166">身份证号：</label>
+              <span>{{InputParameter.certCode}}</span>
+            </li>
+            <li>
+              <label class="label_width_166">账号：</label>
+              <span>{{InputParameter.account}}</span>
+            </li>
+            <li>
+              <label class="label_width_166">密码：</label>
+              <span>{{InputParameter.password}}</span>
+            </li>
+            <li>
+              <label class="label_width_166">省市：</label>
+              <span>{{InputParameter.area_code}}</span>
             </li>
           </ul>
         </div>
@@ -40,14 +36,14 @@
     <el-collapse v-model="activeNames">
       <el-collapse-item name="2">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">基本信息 </span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">基本信息</span>
         </template>
         <div class="lists">
           <div id="sec_responseBaseInfoParams" class="easyui-panel" data-options="title:'基本信息',border:false,collapsible:true">
             <table id="t_01" class="table">
               <tr>
-                <th style="width:15%;text-align:left">基本信息</th>
+                <th class="font_weight_800" style="width:15%;text-align:left">基本信息</th>
                 <td style="width:15%"></td>
                 <th style="width:25%"></th>
                 <td style="width:12%"></td>
@@ -57,7 +53,7 @@
             </table>
             <table id="t_02" class="table">
               <tr>
-                <th style="width:15%;text-align:left">保险费用</th>
+                <th class="font_weight_800" style="width:15%;text-align:left">保险费用</th>
                 <td style="width:15%;text-align:right;bgcolor:#ebeef5;"></td>
                 <th style="width:25%"></th>
                 <td style="width:12%"></td>
@@ -67,7 +63,7 @@
             </table>
             <table id="t_03" class="table">
               <tr>
-                <th style="width:10%;text-align:left">保险费用记录</th>
+                <th class="font_weight_800" style="width:10%;text-align:left">保险费用记录</th>
                 <td style="width:8%;">
                   <th style="width:8%"></th>
                   <td style="width:8%"></td>
@@ -83,7 +79,7 @@
             </table>
             <table id="t_04" class="table">
               <tr>
-                <th style="width:10%;text-align:left">医疗保险记录</th>
+                <th class="font_weight_800" style="width:10%;text-align:left">医疗保险记录</th>
                 <td style="width:10%"></td>
                 <th></th>
                 <td></td>
@@ -100,14 +96,14 @@
     <el-collapse v-model="activeNames">
       <el-collapse-item name="3">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">报告信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">报告信息</span>
         </template>
         <div class="lists">
           <div id="sec_responseParams" class="easyui-panel" data-options="title:'报告信息',border:false,collapsible:true">
             <table id="t_1" class="table">
               <tr>
-                <th style="width:15%;text-align:left">用户及账户基本信息</th>
+                <th class="font_weight_800" style="width:15%;text-align:left">用户及账户基本信息</th>
                 <td style="width:15%"></td>
                 <th style="width:25%"></th>
                 <td style="width:12%"></td>
@@ -117,7 +113,7 @@
             </table>
             <table id="t_2" class="table">
               <tr>
-                <th style="width:15%;text-align:left">用户基本信息效验</th>
+                <th class="font_weight_800" style="width:15%;text-align:left">用户基本信息效验</th>
                 <td style="width:15%"></td>
                 <th style="width:25%"></th>
                 <td style="width:12%"></td>
@@ -127,7 +123,7 @@
             </table>
             <table id="t_3" class="table">
               <tr>
-                <th style="width:15%;text-align:left">社保信息</th>
+                <th class="font_weight_800" style="width:15%;text-align:left">社保信息</th>
                 <td style="width:15%"></td>
                 <th style="width:25%"></th>
                 <td style="width:12%"></td>
@@ -137,7 +133,7 @@
             </table>
             <table id="t_4" class="table">
               <tr style="text-align:left">
-                <th style="text-align:left;">医疗保险缴存信息</th>
+                <th class="font_weight_800" style="text-align:left;">医疗保险缴存信息</th>
                 <td style="width:15%"></td>
                 <td style="width:15%"></td>
                 <td style="width:15%"></td>
@@ -148,7 +144,7 @@
             </table>
             <table id="t_5" class="table">
               <tr>
-                <th style="text-align:left">医保消费明细</th>
+                <th class="font_weight_800" style="text-align:left">医保消费明细</th>
                 <td style="width:15%"></td>
                 <td style="width:15%"></td>
                 <td style="width:15%"></td>
@@ -159,7 +155,7 @@
             </table>
             <table id="t_6" class="table">
               <tr>
-                <th style="text-align:left;width:12%">医保卡消费记录</th>
+                <th class="font_weight_800" style="text-align:left;width:12%">医保卡消费记录</th>
                 <td style="width:15%"></td>
                 <th style="width:15%"></th>
                 <td style="width:10%"></td>
@@ -177,6 +173,7 @@
 </template>
 <script>
   import baseurl from '../../../util/ConstantSocialAndPn';
+  import utils from '../../../util/utils';
   export default {
     data() {
       return {
@@ -200,24 +197,24 @@
       }
     },
     methods: {
-      formatMoney(val, row) {
-        var t = "";
-        var i;
-        if (!$.isNumeric(val)) {
-          return val;
-        }
-        //if(val!=null && val!=undefined){
-        var n = 2;
-        val = parseFloat((val + "").replace(/[^\d\.-]/g, "")).toFixed(n) + "";
-        var l = val.split(".")[0].split("").reverse(),
-          r = val.split(".")[1];
+      // formatMoney(val, row) {
+      //   var t = "";
+      //   var i;
+      //   if (!$.isNumeric(val)) {
+      //     return val;
+      //   }
+      //   //if(val!=null && val!=undefined){
+      //   var n = 2;
+      //   val = parseFloat((val + "").replace(/[^\d\.-]/g, "")).toFixed(n) + "";
+      //   var l = val.split(".")[0].split("").reverse(),
+      //     r = val.split(".")[1];
 
-        for (i = 0; i < l.length; i++) {
-          t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");
-        }
-        return t.split("").reverse().join("") + "." + r;
-        //}
-      },
+      //   for (i = 0; i < l.length; i++) {
+      //     t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");
+      //   }
+      //   return t.split("").reverse().join("") + "." + r;
+      //   //}
+      // },
       delBase() {
         this.base['用户信息Id'] ? delete this.base['用户信息Id'] : this.base;
         this.base['保险Id(险种)'] ? delete this.base['保险Id(险种)'] : this.base;
@@ -259,12 +256,12 @@
           //金额字符串格式化
           if (isAllFormat) {
             if (!isNaN(value)) {
-              value = this.formatMoney(value / 100);
+              value = utils.formatMoney(value / 100);
             }
           } else {
             if (name.match(/\[元\]$/)) {
               if (!isNaN(value)) {
-                value = this.formatMoney(value / 100);
+                value = utils.formatMoney(value / 100);
               }
             }
           }
@@ -293,12 +290,12 @@
           //金额字符串格式化
           if (isAllFormat) {
             if (!isNaN(value)) {
-              value = this.formatMoney(value / 100);
+              value = utils.formatMoney(value / 100);
             }
           } else {
             if (name.match(/\[元\]$/)) {
               if (!isNaN(value)) {
-                value = this.formatMoney(value / 100);
+                value = utils.formatMoney(value / 100);
               }
             }
           }
@@ -320,25 +317,26 @@
       // }
       else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
         this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting"))
-      } else if (this.judgeFlag.flag == '07') {
-        this.localInf = JSON.parse(localStorage.getItem("QTTaskWait")) //质检 专员
-      } else if (this.judgeFlag.flag == '08') {
-        this.localInf = JSON.parse(localStorage.getItem("QTManagerTW")) //质检 主管
-      } else if (this.judgeFlag.flag == '09') {
-        this.localInf = JSON.parse(localStorage.getItem("QTSelfTW")) //质检 初终审本人任务列表 
-      } else if (this.judgeFlag.flag == '10') {
-        this.localInf = JSON.parse(localStorage.getItem("QTTrialManagerTW")) //质检 初终审主管
-      } else if (this.judgeFlag.flag == '11') {
-        this.localInf = JSON.parse(localStorage.getItem("QTReManagerTW")) //质检 复议任务列表（首次） ---区域无社保公积金按钮
-      } else if (this.judgeFlag.flag == '13') {
-        this.localInf = JSON.parse(localStorage.getItem("QTComplianceTW")) //质检 合规经理任务列表 
+      } else if (this.judgeFlag.flag == '07' || this.judgeFlag.flag == '08' || this.judgeFlag.flag == '09' || this.judgeFlag
+        .flag == '10' || this.judgeFlag.flag == '11' || this.judgeFlag.flag == '13') {
+        this.localInf = JSON.parse(localStorage.getItem("FGQTTaskWait")) //质检 专员
       }
-      //  else if (this.judgeFlag.flag == '06') {
-      //   this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议经理
+      //  else if (this.judgeFlag.flag == '08') {
+      //   this.localInf = JSON.parse(localStorage.getItem("FGQTManagerTW")) //质检 主管
+      // } else if (this.judgeFlag.flag == '09') {
+      //   this.localInf = JSON.parse(localStorage.getItem("FGQTSelfTW")) //质检 初终审本人任务列表 
+      // } else if (this.judgeFlag.flag == '10') {
+      //   this.localInf = JSON.parse(localStorage.getItem("QTTrialManagerTW")) //质检 初终审主管
+      // } else if (this.judgeFlag.flag == '11') {
+      //   this.localInf = JSON.parse(localStorage.getItem("FGQTReManagerTW")) //质检 复议任务列表（首次） ---区域无社保公积金按钮
+      // } else if (this.judgeFlag.flag == '13') {
+      //   this.localInf = JSON.parse(localStorage.getItem("QTComplianceTW")) //质检 合规经理任务列表 
       // }
       this.post(baseurl.BaseUrl + "/rmMxSecFundQryAction!notSession_getMxSecInfo.action", {
-        custName: this.localInf.custName,
-        certCode: this.localInf.certCode
+        // custName: this.localInf.custName,
+        // certCode: this.localInf.certCode
+        custName: '乔义星',
+        certCode: '37142519720311977X'
       }).then(res => {
         if (res.success) {
           // 输入参数
@@ -463,49 +461,8 @@
     height: 100%;
   }
 
-  /* .bor{
-    border-bottom: 1px solid #ebeef5;
-} */
-
-  .icon_hat {
-    position: absolute;
-    top: 12px;
-    left: 14px;
-  }
-
   .lists {
-    padding: 10px 0 0 21px;
-  }
-
-  .SSComp h4 {
-    clear: both;
-    font-weight: bold;
-  }
-
-  .SSComp li {
-    clear: both;
-  }
-
-  .SSComp p {
-    float: left;
-    width: 33.3%;
-    margin-top: 5px;
-  }
-
-  .SSComp label {
-    display: inline-block;
-    width: 180px;
-    text-align: right;
-  }
-
-  .SSComp li span {
-    display: inline-block;
-    width: calc( 100% - 215px);
-    vertical-align: top;
-  }
-
-  .SSComp li b {
-    vertical-align: top
+    padding: 4px 0 4px 21px;
   }
 
   .table {

@@ -834,3 +834,74 @@
 .phone-credit .Phone_credit_Form_search_bottom {
   margin-bottom: 8px;
 }
+
+/* 大数据风控 */
+
+.SSComp {
+  overflow-x: hidden;
+  height: calc(100% - 90px);
+  height: 100%;
+  background: #ffffff;
+}
+
+/* 大数据风控 社保公积金 */
+
+.PneCtrl .tab,
+.SocialSe .tab {
+  color: white;
+  border-bottom: 1px solid white;
+}
+
+/* 
+.PneCtrl .tabdefault,
+.SocialSe .tabdefault {
+  color: #bfcbd9;
+} */
+
+.PneCtrl .outside,
+.SocialSe .outside {
+  margin: 9px;
+  height: calc(100% - 20px);
+  width: calc(100% - 18px);
+  border: 1px solid #bfcbd9;
+  border-radius: 4px;
+}
+
+.PneCtrl .title,
+.SocialSe .title {
+  font-size: 16px;
+  background: rgba(0, 119, 255, 0.75);
+  height: 40px;
+  line-height: 40px;
+  overflow: hidden;
+  position: relative;
+}
+
+.PneCtrl .title li,
+.SocialSe .title li {
+  display: inline-block;
+  margin-left: 20px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.PneCtrl .wrap,
+.SocialSe .wrap {
+  height: calc(100% - 42px);
+}
+
+.PneCtrl .content,
+.SocialSe .content {
+  height: 100%;
+  overflow: auto;
+}
+
+.PneCtrl .tabdefault,
+.SocialSe .tabdefault {
+  color: #bfcbd9;
+}
+
+.PneCtrl tr,
+.SocialSe tr {
+  height: 30px;
+}

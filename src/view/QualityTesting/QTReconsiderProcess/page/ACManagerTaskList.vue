@@ -207,6 +207,7 @@
         // 存储质检结论参数
         if (this.params.taskNodeName == 'checkApp_regional_manager') { // 区域
           localStorage.setItem("QTAreaTW", JSON.stringify(this.query));
+          localStorage.setItem("FGQTTaskWait", JSON.stringify(val));
         } else if (this.params.taskNodeName == 'checkApp_compliance_manager') { // 合规
           localStorage.setItem("QTComplianceTW", JSON.stringify(this.query));
         }

@@ -179,6 +179,7 @@
         this.query.instaskType = val.instaskType;
         // 存储质检结论参数
         localStorage.setItem("QTTaskWait", JSON.stringify(this.query));
+        localStorage.setItem("FGQTTaskWait", JSON.stringify(val));
         this.$router.push('/MatchingInfQT?checkApp_apply');
         this.$route.meta.newOne = true;
         // 存储components参数

@@ -10,23 +10,21 @@
         <!-- <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
             <li>
-              <label class="label_width_166">申请类型：</label>
+              <label class="label_width_166">姓名：</label>
               <span>{{datas.appTypeTxt}}</span>
             </li>
             <li>
-              <label class="label_width_166">借款人类型：</label>
+              <label class="label_width_166">性别：</label>
               <span>{{datas.borrTypeTxt}}</span>
             </li>
             <li></li>
             <li>
-              <label class="label_width_166">获客渠道：</label>
+              <label class="label_width_166">生日：</label>
               <span>{{datas.sourcesChanTxt}}</span>
             </li>
-            <li style="width:66.6%">
-              <p v-if="datas.sourcesChanTxt == '其他'">
-                <label class="label_width_166">获客渠道说明：</label>
+            <li>
+                <label class="label_width_166">学历：</label>
                 <span>{{datas.sourcesChanRemark}}</span>
-              </p>
             </li>
             <li>
               <label class="label_width_166">团队经理：</label>
@@ -649,7 +647,8 @@
 </template>
 
 <script>
-  import baseurl from '../../../util/ConstantSocialAndPn'
+  import baseurl from '../../../util/ConstantSocialAndPn';
+  import utils from '../../../util/utils';
   export default {
     data() {
       return {
@@ -666,6 +665,13 @@
           console.log('aaa')
           this.getInf();
         }
+      }
+    },
+    props: {
+      applySubNo: {
+        default: '',
+        type: String,
+        required: true
       }
     },
     methods: {
@@ -748,7 +754,7 @@
             if (socRawReport.accounts && socRawReport.accounts.length > 0) {
               var formObj = $('#div_socInsu #d_account form').clone();
               $.each(socRawReport.accounts, function (i, eh) {
-                eh.monthly_income = formatMoney(eh.monthly_income);
+                eh.monthly_income = utils.formatMoney(eh.monthly_income);
                 this.fen_to_yuan(eh, ['medicare_balance', 'pension_balance']);
                 formObj.appendTo($('#div_socInsu #d_account'));
                 $('<br>').appendTo($('#div_socInsu #div_account'));
@@ -783,7 +789,7 @@
         var row = '<tr>';
         $.each(rfields, function (index, val) {
           if (rdata[val] != undefined) {
-            //row += '<td>' + formatMoney(rdata[val]) + '</td>';
+            //row += '<td>' + utils.formatMoney(rdata[val]) + '</td>';
             row += '<td>' + rdata[val] + '</td>';
           } else {
             row += '<td>' + '' + '</td>';
@@ -807,13 +813,12 @@
       fen_to_yuan(jsonObj, fieldsArr) {
         $.each(fieldsArr, function (i, eh) {
           if (jsonObj[eh]) {
-            jsonObj[eh] = formatMoney(parseInt(jsonObj[eh]) / 100);
+            jsonObj[eh] = utils.formatMoney(parseInt(jsonObj[eh]) / 100);
           }
         });
       }
     },
     mounted() {
-      console.log(baseurl)
       this.getInf();
     }
   }

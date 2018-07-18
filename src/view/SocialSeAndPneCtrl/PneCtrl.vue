@@ -12,6 +12,19 @@
           <RiskDecision v-if="ind==0"></RiskDecision>
           <BaiRongData v-if="ind==1"></BaiRongData>
         </div>
+        <!-- <div class="content"> -->
+        <!-- <RiskDecision v-if="ind==0">风控指引</RiskDecision> -->
+        <!-- <RiskDecision v-if="ind==1">复杂网络图谱</RiskDecision> -->
+        <!-- <RiskDecision v-if="ind==2">OCR信息</RiskDecision> -->
+        <!-- <RiskDecision v-if="ind==3">同盾设备画像</RiskDecision> -->
+        <!-- <RiskDecision v-if="ind==4">网查征信报告</RiskDecision> -->
+        <!-- <RiskDecision v-if="ind==5">运营商报告</RiskDecision> -->
+        <!-- <RiskDecision v-if="ind==6">储蓄卡报告</RiskDecision> -->
+        <!-- <RiskDecision v-if="ind==7">公积金报告</RiskDecision> -->
+        <!-- <SocialSecurityReport v-if="ind==8">社保报告</SocialSecurityReport> -->
+        <!-- <RiskDecision v-if="ind==9">百融数据</RiskDecision> -->
+        <!-- <RiskDecision v-if="ind==10">同盾风险决策</RiskDecision> -->
+        <!-- </div> -->
       </div>
     </div>
   </div>
@@ -19,17 +32,41 @@
 <script>
   import BaiRongData from './PneCtrl/BaiRongData.vue'
   import RiskDecision from './PneCtrl/RiskDecision.vue'
+  import SocialSecurityReport from './PneCtrl/SocialSecurityReport.vue'
   export default {
     data() {
       return {
         ind: 0,
-        titles: ['同盾风险决策', '百融数据']
+        titles: ['同盾风险决策', '百融数据'],
+        // titles: ['风控指引', '复杂网络图谱', 'OCR信息', '同盾设备画像', '网查征信报告', '运营商报告', '储蓄卡报告', '公积金报告', '社保报告', '百融数据', '同盾风险决策'],
+        localInf: {},
+        judgeFlag: ''
       }
     },
     methods: {
       swiching(e, index, val) {
         this.ind = index;
+      },
+      getInf() {
+        this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+        if (this.judgeFlag.flag == '01') {
+          this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
+        } else if (this.judgeFlag.flag == '02') {
+          this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
+        } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
+          this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
+        } //  else if (this.judgeFlag.flag == '04') {
+        //   this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
+        // }
+        else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
+          this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员 
+        } else if (this.judgeFlag.flag == '07'||this.judgeFlag.flag == '08'||this.judgeFlag.flag == '09'||this.judgeFlag.flag == '10'||this.judgeFlag.flag == '11'||this.judgeFlag.flag == '13') {
+          this.localInf = JSON.parse(localStorage.getItem("FGQTTaskWait")) //质检 专员、主管、初终审本人任务列表、初终审主管、复议任务列表（首次） ---区域无社保公积金按钮、合规经理任务列表
+        }
       }
+    },
+    mounted() {
+      this.getInf();
     },
     components: {
       BaiRongData,
@@ -40,54 +77,9 @@
 
 </script>
 <style scoped>
-  .tabdefault {
-    color: #bfcbd9;
-  }
-
   .tab {
     color: white;
     border-bottom: 1px solid white;
-  }
-
-  .PneCtrl {
-    width: 100%;
-    height: 100%;
-  }
-
-  .outside {
-    margin: 13px 9px;
-    height: calc(100% - 96px);
-    width: calc(100% - 18px);
-    border: 1px solid #bfcbd9;
-    border-radius: 4px;
-  }
-
-  .title {
-    font-size: 16px;
-    background: rgba(0, 119, 255, 0.75);
-    height: 48px;
-    line-height: 48px;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .title li {
-    display: inline-block;
-    margin-left: 20px;
-    height: 42px;
-  }
-
-  .title li:hover {
-    cursor: pointer;
-  }
-
-  .wrap {
-    height: calc(100% - 48px);
-  }
-
-  .content {
-    height: 100%;
-    overflow: auto;
   }
 
 </style>

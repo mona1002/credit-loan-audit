@@ -354,6 +354,7 @@
         this.query.processInstanceId = val.processInstanceId;
         this.query.instaskType = val.instaskType;
         localStorage.setItem("QTManagerTW", JSON.stringify(this.query));
+        localStorage.setItem("FGQTTaskWait", JSON.stringify(val));
         this.$router.push('/MatchingInfQT?checkApp_check_manager');
         this.$route.meta.newOne = true;
         // 存储components参数

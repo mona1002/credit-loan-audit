@@ -693,7 +693,7 @@
 
 .SSComp .el-collapse-item__arrow {
   /* line-height: 40px; */
-  line-height: 38px;
+  /* line-height: 38px; */
 }
 
 /* 解决测试环境宽高不生效问题 */
@@ -749,10 +749,8 @@
 
 /* 信审表+反欺诈结论（初审+终审） ----各个  title 一行 */
 
-.CreditForm .el-collapse-item__header,
-/* .regularQT .el-collapse-item__header, */
-
-.SSComp .el-collapse-item__header {
+.CreditForm .el-collapse-item__header
+{
   border: 1px solid silver;
   background: #eef0f9;
   border: 1px solid #e6eaee;
@@ -765,10 +763,7 @@
 
 /* 信审表 ----各个  title 小帽子部分 */
 
-.CreditForm .el-collapse-item,
-/* .regularQT .el-collapse-item, */
-
-.SSComp .el-collapse-item {
+.CreditForm .el-collapse-item{
   position: relative
 }
 
@@ -780,18 +775,18 @@
 
 /* 表格x轴滚动条 */
 
-.SSComp .el-table__body-wrapper {
+/* .SSComp .el-table__body-wrapper {
   overflow-x: hidden;
   height: auto !important;
-}
+} */
 
 .SSComp .el-collapse-item__wrap
 /* ,
 .regularQT .el-collapse-item__wrap  */
 
   {
-  width: 100%;
-  border-bottom: none;
+  /* width: 100%;
+  border-bottom: none; */
 }
 
 /* 信审表-textarea 文本域上下居中对齐 统一宽度，覆盖掉width：100%会掉下来的问题 */

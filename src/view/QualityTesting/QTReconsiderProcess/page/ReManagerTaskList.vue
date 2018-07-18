@@ -223,6 +223,7 @@
         this.query.processInstanceId = val.processInstanceId;
         // 存储质检结论参数
         localStorage.setItem("QTReManagerTW", JSON.stringify(this.query));
+        localStorage.setItem("FGQTTaskWait", JSON.stringify(val));
         this.$router.push('/MatchingInfQT?checkApp_check_recon_manager');
         this.$route.meta.newOne = true;
         // 存储components参数

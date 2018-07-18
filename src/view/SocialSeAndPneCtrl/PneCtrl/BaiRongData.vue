@@ -4,9 +4,8 @@
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">百融特殊名单核查
-          </span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">百融特殊名单核查</span>
         </template>
         <div class="lists">
           <el-collapse v-model="activeNames" v-if="this.IDC">
@@ -707,9 +706,8 @@
     <el-collapse v-model="activeNames">
       <el-collapse-item name="2">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">百融多次申请核查
-          </span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">百融多次申请核查</span>
         </template>
         <div class="lists TwoPart">
           <p v-if="  applyloan.al_m3_gid_bank_selfnum|| applyloan.al_m3_gid_bank_selfnum==0">
@@ -934,9 +932,8 @@
     <el-collapse v-model="activeNames">
       <el-collapse-item name="3">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">百融法院执行人
-          </span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">百融法院执行人</span>
         </template>
         <div class="lists">
           <p v-if=" execution.ex_bad1_name">
@@ -1085,9 +1082,8 @@
     <el-collapse v-model="activeNames">
       <el-collapse-item name="4">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">百融个人不良信息
-          </span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">百融个人不良信息</span>
         </template>
         <div class="lists">
           <el-collapse v-model="activeNames">
@@ -1148,26 +1144,23 @@
                 <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="second_icon_hat">
                 <span class="Second_title">案件说明</span>
               </template>
-              <div class="tes">
-                <div class="tab_wrap">
-                  <el-table :data="tableData" border height="100%" style="width: 100%">
-                    <el-table-column prop="caseType" label="案件类别 "  min-width="70">
-                    </el-table-column>
-                    <el-table-column prop="caseTime" label="案发时间 "  min-width="70">
-                    </el-table-column>
-                    <el-table-column prop="caseSource" label="案件来源 "  min-width="100">
-                    </el-table-column>
-                    <el-table-column prop="caseLevel" label="案件级别 "  min-width="100">
-                    </el-table-column>
-                  </el-table>
-                </div>
+              <div class="height_auto">
+                <el-table :data="tableData" border height="100%" style="width: 100%">
+                  <el-table-column prop="caseType" label="案件类别 " min-width="70">
+                  </el-table-column>
+                  <el-table-column prop="caseTime" label="案发时间 " min-width="70">
+                  </el-table-column>
+                  <el-table-column prop="caseSource" label="案件来源 " min-width="100">
+                  </el-table-column>
+                  <el-table-column prop="caseLevel" label="案件级别 " min-width="100">
+                  </el-table-column>
+                </el-table>
               </div>
             </el-collapse-item>
           </el-collapse>
         </div>
       </el-collapse-item>
     </el-collapse>
-
   </div>
 </template>
 <script>
@@ -1202,21 +1195,20 @@
       // } 
       else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
         this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员 
-      } else if (this.judgeFlag.flag == '07') {
-        this.localInf = JSON.parse(localStorage.getItem("QTTaskWait")) //质检 专员
-      } else if (this.judgeFlag.flag == '08') {
-        this.localInf = JSON.parse(localStorage.getItem("QTManagerTW")) //质检 主管
-      } else if (this.judgeFlag.flag == '09') {
-        this.localInf = JSON.parse(localStorage.getItem("QTSelfTW")) //质检 初终审本人任务列表 
-      } else if (this.judgeFlag.flag == '10') {
-        this.localInf = JSON.parse(localStorage.getItem("QTTrialManagerTW")) //质检 初终审主管
-      } else if (this.judgeFlag.flag == '11') {
-        this.localInf = JSON.parse(localStorage.getItem("QTReManagerTW")) //质检 复议任务列表（首次） ---区域无社保公积金按钮
-      } else if (this.judgeFlag.flag == '13') {
-        this.localInf = JSON.parse(localStorage.getItem("QTComplianceTW")) //质检 合规经理任务列表 
+      } else if (this.judgeFlag.flag == '07' || this.judgeFlag.flag == '08' || this.judgeFlag.flag == '09' || this.judgeFlag
+        .flag == '10' || this.judgeFlag.flag == '11' || this.judgeFlag.flag == '13') {
+        this.localInf = JSON.parse(localStorage.getItem("FGQTTaskWait")) //质检 专员
       }
-      // else if (this.judgeFlag.flag == '06') {
-      //   this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议经理
+      // else if (this.judgeFlag.flag == '08') {
+      //   this.localInf = JSON.parse(localStorage.getItem("FGQTManagerTW")) //质检 主管
+      // } else if (this.judgeFlag.flag == '09') {
+      //   this.localInf = JSON.parse(localStorage.getItem("FGQTSelfTW")) //质检 初终审本人任务列表 
+      // } else if (this.judgeFlag.flag == '10') {
+      //   this.localInf = JSON.parse(localStorage.getItem("QTTrialManagerTW")) //质检 初终审主管
+      // } else if (this.judgeFlag.flag == '11') {
+      //   this.localInf = JSON.parse(localStorage.getItem("FGQTReManagerTW")) //质检 复议任务列表（首次） ---区域无社保公积金按钮
+      // } else if (this.judgeFlag.flag == '13') {
+      //   this.localInf = JSON.parse(localStorage.getItem("QTComplianceTW")) //质检 合规经理任务列表 
       // }
       this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrTabInfo.action', {
         // applyId: 'b14455f1-5531-4cf2-883b-f6dc0049e3bb'
@@ -1258,34 +1250,11 @@
 
 </script>
 <style scoped>
-  .SSComp {
-    overflow-x: hidden;
-    height: 100%;
-  }
-
-  .icon_hat {
-    position: absolute;
-    top: 12px;
-    left: 14px;
-  }
-
   .second_icon_hat {
     position: absolute;
     top: 12px;
     left: 35px;
     width: 16px
-  }
-
-  .top_title {
-    border: 1px solid silver;
-    background: #eef0f9;
-    border: 1px solid #e6eaee;
-    font-size: 16px;
-    color: #1f2d3d;
-    padding-left: 44px;
-    height: 40px;
-    line-height: 40px;
-    position: relative;
   }
 
   .second_lists {
@@ -1295,7 +1264,7 @@
   .SSComp p {
     float: left;
     width: 33.3%;
-    margin-bottom: 10px;
+    margin-bottom: 4px;
   }
 
   .SSComp label {
