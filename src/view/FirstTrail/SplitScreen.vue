@@ -38,7 +38,8 @@
               <capplicationInformationDetail ref="applicationLeft" v-if=" this.tabContent1==3"></capplicationInformationDetail>
               <cborrowerInformationDetail ref="borrowLeft" v-if=" this.tabContent1==4" :isFull.sync="isFull"></cborrowerInformationDetail>
               <PhoneCredit ref="phoneLeft" v-if=" this.tabContent1==5" :SplitS="SplitLeft" :isFull.sync="isFull" :addBtn="false"></PhoneCredit>
-              <cCreditForm ref="CreditFormLeft" v-if=" this.tabContent1==6"></cCreditForm>
+              <!-- <cCreditForm ref="CreditFormLeft" v-if=" this.tabContent1==6"></cCreditForm> -->
+              <FCreditForm ref="CreditFormLeft" v-if=" this.tabContent1==6"  :applyId='tastwaitingPass.applyId' :PhoneAndInterShow="false"></FCreditForm>
               <creditInvestigation ref="InvestigationLeft" v-if=" this.tabContent1==7"></creditInvestigation>
               <processTrajectory ref="processLeft" v-if=" this.tabContent1==8"></processTrajectory>
             </div>
@@ -122,12 +123,14 @@
   import borrowerInformation from "./detailComponent/borrowerInformation";
   import PhoneCredit from "./PhoneCredit";
   import CreditForm from "./detailComponent/CreditForm";
+  import FCreditForm from "../FinalTrial/FinalComponent/FCreditForm.vue";
+  
   import creditInvestigation from "./detailComponent/creditInvestigation"; //实地征信
   // import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf' //反欺诈结论  
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf' //反欺诈结论  
   import CreditApproval from "./CreditApproval";
   // 查询
-  import cCreditForm from "./checkComponent/cCreditForm";
+  // import cCreditForm from "./checkComponent/cCreditForm";
   // import cFinanceInformation from "./checkComponent/FinanceInformation";
   import cremarkDetail from "./checkComponent/remarkDetail"; //备注信息
   import cborrowerInformationDetail from "./checkComponent/borrowerInformationDetail"; //借款人资料
@@ -357,9 +360,10 @@
       borrowerInformation,
       PhoneCredit,
       CreditForm,
+      FCreditForm,
       creditInvestigation,
       CreditApproval,
-      cCreditForm,
+      // cCreditForm,
       cremarkDetail,
       cborrowerInformationDetail,
       capplicationInformationDetail,

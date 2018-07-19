@@ -1,4 +1,5 @@
 <template>
+<!-- 终审左侧查看-待删除-已整合 -->
   <div class="CreditForm">
     <el-collapse v-model="activeNames">
       <!-- 初审人员 -->

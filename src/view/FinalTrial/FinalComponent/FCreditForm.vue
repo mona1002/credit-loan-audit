@@ -1,8 +1,9 @@
 <template>
+<!-- 整合后的查看页面 -->
   <div class="CreditForm">
     <el-collapse v-model="activeNames">
       <!-- 初审人员 -->
-      <el-collapse-item name="0">
+      <el-collapse-item name="0" v-if="TrilPersonShow">
         <template slot="title">
           <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">初审人员</span>
@@ -451,7 +452,7 @@
               </p>
               <p>
                 <label class="InternetInf_right_label"> 是否支付其生活费： </label>
-                <span class="detail_inf" style="border:none;vertiAlign:middle;height:auto;">{{this.FormData.childIspaycosttext }} </span>
+                <span class="detail_inf" style="border:none;verticalAlign:middle;height:auto;">{{this.FormData.childIspaycosttext }} </span>
               </p>
             </li>
             <li v-show="this.Children.PayAlimony">
@@ -590,7 +591,7 @@
         </div>
       </el-collapse-item>
       <!-- 电话征信结论 -->
-      <el-collapse-item name="8">
+      <el-collapse-item name="8" v-if="PhoneAndInterShow">
         <template slot="title">
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">电话征信结论</span>
@@ -621,7 +622,7 @@
         </div>
       </el-collapse-item>
       <!-- 内部匹配结论 -->
-      <el-collapse-item name="9">
+      <el-collapse-item name="9"  v-if="PhoneAndInterShow">
         <template slot="title">
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">内部匹配结论</span>
@@ -638,6 +639,7 @@
           </ul>
         </div>
       </el-collapse-item>
+      <!-- 审批结论 -->
       <el-collapse-item name="10">
         <template slot="title">
           <i class="collapse_title_icon"></i>
@@ -651,7 +653,7 @@
                   <label class="InternetInf_left_label" style="textAlign:right">初审结果评价：</label>
                   <span class="detail_inf ComAddr" style="height:115px;">{{this.FormData.oother}} </span>
                 </p>
-                <p class="FinalConclution" style="position:relative">
+                <p class="FinalConclution" style="position:relative" v-if="FinalConEditShow">
                   <i class="hint">
                     <!-- <span v-show="errors.has('Finalconclusion')">{{ errors.first('Finalconclusion') }}</span> -->
                     <b v-show="this.finalResult"> * 输入长度不能超过500</b>
@@ -662,13 +664,18 @@
                     @keyup.native="wordarea(FormData.ootherfinal)" v-model="FormData.ootherfinal" name="Finalconclusion" v-validate="'required'">
                   </el-input>
                 </p>
+
+              </li>
+              <li style="marginTop:4px;width:66.6%;" v-if="FinalConCheckShow">
+                <p class="InternetInf_left_label" style="textAlign:right">终审结果评价：</p>
+                <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.ootherfinal}} </span>
               </li>
             </ul>
           </div>
         </div>
       </el-collapse-item>
     </el-collapse>
-    <div class="btn_wrap">
+    <div class="btn_wrap" v-if="makeSureBtnShow">
       <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
     </div>
     <!-- ==============================点击确认时提示弹框=================================== -->
@@ -807,6 +814,33 @@
         checkData: [],
       }
     },
+    props: {
+      FinalConEditShow: {
+        default: false,
+        type: Boolean
+      },
+      FinalConCheckShow: {
+        default: false,
+        type: Boolean
+      },
+      PhoneAndInterShow:{
+        default:true,
+        type:Boolean
+      },
+      makeSureBtnShow: {
+        default: false,
+        type: Boolean
+
+      },
+      TrilPersonShow: {
+        default: false,
+        type: Boolean
+      },
+      applyId:{
+        default:'',
+        required:true,
+      }
+    },
     methods: {
       makeSureBtn() {
         this.$validator.validateAll().then((result) => {
@@ -831,7 +865,8 @@
       // },
       CFsave() {
         this.post("/creauditInfo/updateOtherfinalByPK", {
-          applyId: this.FormData.applyId,
+          // applyId: this.FormData.applyId,//合并之前
+           applyId: this.applyId,
           id: this.FormData.id,
           ootherfinal: this.FormData.ootherfinal
         }).then(res => {
@@ -873,8 +908,8 @@
           this.FormData.parentIncome;
         this.FormData.fconsumption ? this.FormData.fconsumption = this.formatNumber(this.FormData.fconsumption, 2, 0) :
           this.FormData.fconsumption;
-        this.FormData.selfpremisesArea = this.FormData.selfpremisesArea.slice(0, -2);
-        this.FormData.selfhasProportion = this.FormData.selfhasProportion.slice(0, -1);
+        // this.FormData.selfpremisesArea = this.FormData.selfpremisesArea.slice(0, -2);
+        // this.FormData.selfhasProportion = this.FormData.selfhasProportion.slice(0, -1);
         this.FormData.selfpremisesArea ? this.FormData.selfpremisesArea = this.formatNumber(this.FormData.selfpremisesArea,
           2, 0) + 'm²' : this.FormData.selfpremisesArea;
         this.FormData.selfhasProportion ? this.FormData.selfhasProportion = this.formatNumber(this.FormData.selfhasProportion,
@@ -943,8 +978,10 @@
       mountC() {
         // 获取查询列表数据
         this.post("/creauditInfo/queryCreauditInfoObj", {
-          applyId: this.getParams.applyId,
-          // applyId: "00542",
+          // applyId: this.getParams.applyId,//合并之前
+          // applyId: "00542",applyId
+          applyId: this.applyId,
+          
         }).then(res => {
           if (res.statusCode == 200) {
             this.FormData = res.data;

@@ -1,4 +1,5 @@
 <template>
+<!-- 已整合-待删除 -->
   <div class="CreditForm">
     <el-collapse v-model="activeNames">
       <!-- 网上查询信息 -->
@@ -158,7 +159,7 @@
       <!-- 核实身份 -->
       <el-collapse-item name="2">
         <template slot="title">
-         <i class="collapse_title_icon"></i>
+          <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">核实身份</span>
         </template>
         <div class="CreditForm_CheckId">
@@ -218,7 +219,7 @@
       <!-- 工作信息  -->
       <el-collapse-item name="3">
         <template slot="title">
-           <i class="collapse_title_icon"></i>
+          <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">工作信息</span>
         </template>
         <div class="CreditForm_WorkInfs" style="padding:20px">
@@ -244,7 +245,7 @@
             <li>
               <p>
                 <label class="InternetInf_left_label "> 职位级别： </label>
-                  <span class="detail_inf elips">{{this.FormData.workPost }} </span>
+                <span class="detail_inf elips">{{this.FormData.workPost }} </span>
               </p>
               <p>
                 <label class="InternetInf_right_label">单位电话：</label>
@@ -303,7 +304,7 @@
       <!-- 私营企业信息 -->
       <el-collapse-item name="4">
         <template slot="title">
-             <i class="collapse_title_icon"></i>
+          <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">私营企业信息</span>
         </template>
         <div class="CreditForm_CompanyInfs" v-show="this.workInf.private">
@@ -387,7 +388,7 @@
       <!-- 家庭信息 -->
       <el-collapse-item name="5">
         <template slot="title">
-              <i class="collapse_title_icon"></i>
+          <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">家庭信息</span>
         </template>
         <div class="CreditForm_FamilyInf">
@@ -560,7 +561,7 @@
       <!-- 居住情况 -->
       <el-collapse-item name="6">
         <template slot="title">
-           <i class="collapse_title_icon"></i>
+          <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">居住情况</span>
         </template>
         <div class="CreditForm_live">
@@ -581,7 +582,7 @@
       <!-- 核对现住址 -->
       <el-collapse-item name="7">
         <template slot="title">
-                <i class="collapse_title_icon"></i>
+          <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">核对现住址</span>
         </template>
         <div class="CreditForm_check_reside">
@@ -613,7 +614,7 @@
         <div class=" CreditForm_result">
           <div style="width:66.6%;" class="bottom">
             <p class="InternetInf_left_label" style="textAlign:right">初审结果评价：</p>
-              <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
+            <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.oother}} </span>
           </div>
         </div>
       </el-collapse-item>
@@ -745,51 +746,52 @@
       }
     },
     methods: {
-      mountedInf(){
-  this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '01') {
-        this.getParams = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
-      } else if (this.judgeFlag.flag == '03') {
-        this.getParams = JSON.parse(localStorage.getItem("AntiWorkbenchPass")) //反欺诈专员
-      } else if (this.judgeFlag.flag == '04') {
-        this.getParams = JSON.parse(localStorage.getItem("AntiManagerWorkbenchPass")) //反欺诈主管
-      }
-      // 获取查询列表数据
-      this.post("/creauditInfo/queryCreauditInfoObj", {
-        applyId: this.getParams.applyId,
-        // applyId: "00542",
-      }).then(res => {
-        if (res.statusCode == 200) {
-          this.FormData = res.data;
-          this.AreaNPercent();
-          this.formatSC();
-           this.FormData.aaddress ? this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, ''):this.FormData.aaddress ;
-          this.mountJ(0, res.data.wbeexEcuted);
-          this.mountJ(1, res.data.wnetHirecom);
-          this.mountJ(2, res.data.wnetEcutedBrea);
-          this.mountJ(3, res.data.wnetHirecomBrea);
-          this.mountJ(4, res.data.wnetPhone);
-          this.mountJ(5, res.data.wnetHirecomName);
-          this.mountJ(6, res.data.wnetHirecomPhone);
-          this.mountJ(7, res.data.wnetAddrandEstate);
-          this.mountJ(8, res.data.wnetHirecomAddress);
-          this.mountJ(9, res.data.wnetCompany);
-          this.mountJ(10, res.data.wnetAddrstate);
-          this.mountJ(11, res.data.iisself);
-          this.mountJ(12, res.data.privateOwnerFlag);
-          this.mountJ(13, res.data.fmarrflag);
-          this.mountJ(14, res.data.spouseWork);
-          this.mountJ(15, res.data.spouseSamecity);
-          this.mountJ(16, res.data.childFlag);
-          this.mountJ(17, res.data.childIspaycost);
-          this.mountJ(18, res.data.parentIsliving);
-          this.mountJ(19, res.data.brothersIfhas);
-          this.mountJ(20, res.data.aisresident);
-          this.mountJ(21, res.data.iloanBefore);
-        } else {
-          this.$message.error(res.msg);
+      mountedInf() {
+        this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+        if (this.judgeFlag.flag == '01') {
+          this.getParams = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
+        } else if (this.judgeFlag.flag == '03') {
+          this.getParams = JSON.parse(localStorage.getItem("AntiWorkbenchPass")) //反欺诈专员
+        } else if (this.judgeFlag.flag == '04') {
+          this.getParams = JSON.parse(localStorage.getItem("AntiManagerWorkbenchPass")) //反欺诈主管
         }
-      });
+        // 获取查询列表数据
+        this.post("/creauditInfo/queryCreauditInfoObj", {
+          applyId: this.getParams.applyId,
+          // applyId: "00542",
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.FormData = res.data;
+            this.AreaNPercent();
+            this.formatSC();
+            this.FormData.aaddress ? this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, '') : this.FormData
+              .aaddress;
+            this.mountJ(0, res.data.wbeexEcuted);
+            this.mountJ(1, res.data.wnetHirecom);
+            this.mountJ(2, res.data.wnetEcutedBrea);
+            this.mountJ(3, res.data.wnetHirecomBrea);
+            this.mountJ(4, res.data.wnetPhone);
+            this.mountJ(5, res.data.wnetHirecomName);
+            this.mountJ(6, res.data.wnetHirecomPhone);
+            this.mountJ(7, res.data.wnetAddrandEstate);
+            this.mountJ(8, res.data.wnetHirecomAddress);
+            this.mountJ(9, res.data.wnetCompany);
+            this.mountJ(10, res.data.wnetAddrstate);
+            this.mountJ(11, res.data.iisself);
+            this.mountJ(12, res.data.privateOwnerFlag);
+            this.mountJ(13, res.data.fmarrflag);
+            this.mountJ(14, res.data.spouseWork);
+            this.mountJ(15, res.data.spouseSamecity);
+            this.mountJ(16, res.data.childFlag);
+            this.mountJ(17, res.data.childIspaycost);
+            this.mountJ(18, res.data.parentIsliving);
+            this.mountJ(19, res.data.brothersIfhas);
+            this.mountJ(20, res.data.aisresident);
+            this.mountJ(21, res.data.iloanBefore);
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
       },
       formatSC() {
         this.FormData.fbalance ? this.FormData.fbalance = this.formatNumber(this.FormData.fbalance, 2, 0) : this.FormData

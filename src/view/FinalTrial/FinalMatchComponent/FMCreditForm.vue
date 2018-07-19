@@ -1,4 +1,5 @@
 <template>
+<!-- 已整合-待删除 -->
   <div class="CreditForm">
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
@@ -737,11 +738,6 @@
           result: false,
         },
         getParams: [], //获取taskwaitting里面的 查询入参 applyId
-        pickerOptions1: {
-          disabledDate(time) {
-            return time.getTime() > Date.now();
-          }
-        },
         Confirm: false,
         reg: {
           payDay: false,

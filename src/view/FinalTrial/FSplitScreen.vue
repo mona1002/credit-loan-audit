@@ -40,7 +40,8 @@
               <capplicationInformationDetail v-if=" this.tabContent1==3"></capplicationInformationDetail>
               <cborrowerInformationDetail v-if=" this.tabContent1==4"></cborrowerInformationDetail>
               <PhoneCredit v-if=" this.tabContent1==5" :SplitS="SplitLeft" :isFull.sync="isFull" :addBtn="false"></PhoneCredit>
-              <FcCreditForm v-if=" this.tabContent1==6"></FcCreditForm>
+              <!-- <FcCreditForm v-if=" this.tabContent1==6"></FcCreditForm> -->
+            <FCreditForm v-if=" this.tabContent1==6" :applyId=' this.tastwaitingPass.applyId' :TrilPersonShow='true' :FinalConCheckShow='true'></FCreditForm>
               <creditInvestigation v-if=" this.tabContent1==7"></creditInvestigation>
               <processTrajectory v-if=" this.tabContent1==8"></processTrajectory>
             </div>
@@ -78,7 +79,7 @@
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <cborrowerInformationDetail v-if=" this.tabContent2==4" :isFull.sync="isFull"></cborrowerInformationDetail>
             <PhoneCredit v-if=" this.tabContent2==5" :SplitS="SplitLeft" :isFull.sync="isFull" :addBtn="false"></PhoneCredit>
-            <FCreditForm v-if=" this.tabContent2==6"></FCreditForm>
+            <FCreditForm v-if=" this.tabContent2==6" :applyId=' this.tastwaitingPass.applyId' :TrilPersonShow='true' :FinalConEditShow='true' :makeSureBtnShow="true" ></FCreditForm>
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
             <aAntiApplyInf v-if=" this.tabContent2==8"  :applyId='tastwaitingPass.applyId'></aAntiApplyInf>
             <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>
@@ -115,7 +116,7 @@
     </div>
 </template>
 <script>
-  import FcCreditForm from './FinalComponent/FcCreditForm'; //左侧
+  // import FcCreditForm from './FinalComponent/FcCreditForm'; //左侧
   import FCreditForm from './FinalComponent/FCreditForm'; //右侧
   import AudioVisual from "../FirstTrail/detailComponent/AudioVisual.vue";
   import AudioVisualLeft from '../FirstTrail/detailComponent/AudioVisualLeft';
@@ -340,7 +341,7 @@
       this.mountedInf();
     },
     components: {
-      FcCreditForm,
+      // FcCreditForm,
       FCreditForm,
       AudioVisualLeft,
       AudioVisual,
