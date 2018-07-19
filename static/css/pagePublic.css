@@ -159,6 +159,7 @@
 .SplitScreen .left,
 .SplitScreen .right {
   position: absolute;
+  z-index: 0;
 }
 
 .SplitScreen .right {
@@ -181,7 +182,7 @@
   background: rgba(31, 45, 61, 0.59);
   box-shadow: 0 5px 20px 0 #475669;
   position: fixed;
-  /* left: -200px; */
+  left: -200px;
   top: 120px;
   z-index: 10;
   padding: 20px  20px 0 20px;
@@ -320,15 +321,26 @@
 .checkedInf_li_width_triplet li {
   width: 33.3%;
 }
-
+.checkedInf_li_width_four li {
+  width: 25%;
+}
 .checkedInf li {
   float: left;
   min-width: 200px;
   height: 24px;
   margin-top: 4px;
-  margin-top: 20px;
+  /* margin-top: 20px; */
+  border-bottom: 1px solid #ebeef5;
 }
-
+.checkedInf .li_one_row{
+  width:100%;
+}
+.checkedInf .li_triplet_two_rows{
+  width:66.6%;
+}
+.checkedInf .li_half_two_rows{
+  width:50%;
+}
 .checkedInf label {
   float: left;
   text-align: right;
