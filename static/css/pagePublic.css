@@ -380,10 +380,6 @@
   height: 120px;
 }
 
-/* .checkedInf .text_area_li_3rows {
-  height: 100px;
-} */
-
 .checkedInf .triplet_textarea_width {
   width: 66.6%;
 }
@@ -396,10 +392,6 @@
   border: 1px solid #d8dce5;
   border-radius: 4px;
 }
-
-/* .checkedInf .text_area_span_half_width_{
-  width: calc(100% - 170px);
-} */
 
 /* 编辑-带输入框部分 */
 
@@ -506,25 +498,25 @@
 /* 家庭信息 */
 
 .CreditForm_live p {
-  /* float: left;
+  float: left;
   width: 33.3%;
-  vertical-align: middle; */
+  vertical-align: middle;
 }
 
 .CreditForm_check_reside li,
 .CreditForm_check_reside p {
-  /* width: 100%;
+  width: 100%;
   clear: both;
   padding: 0;
-  margin: 4px 0; */
+  margin: 4px 0;
 }
 
-/* .CreditForm .interMath li,
+.CreditForm .interMath li,
 .CreditForm .PhontConclution li,
 .CreditForm_result li {
   margin-bottom: 5px;
   width: 66.6%;
-} */
+}
 
 
 
@@ -548,12 +540,12 @@
 /* 家庭信息 */
 
   {
-  /* width: calc( 100% - 225px);
+  width: calc( 100% - 225px);
   height: 60px;
   vertical-align: top;
   overflow: auto;
   border: 1px solid #d8dce5;
-  border-radius: 4px; */
+  border-radius: 4px;
 }
 
 .elips {
@@ -600,10 +592,10 @@
   width: 66.6%;
 } */
 
-/* .CreditForm label {
+.CreditForm label {
   display: inline-block;
   text-align: right;
-} */
+}
 
 /* 上网查询 */
 

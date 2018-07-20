@@ -239,7 +239,7 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">核实身份</span>
         </template>
-        <div class="CreditForm_CheckId">
+        <div class="CreditForm_CheckId clearFixed" style="padding-bottom:10px;">
           <ul>
             <li style="marginTop:5px;">
               <p>
@@ -321,8 +321,8 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">工作信息</span>
         </template>
-        <div class="CreditForm_WorkInfs">
-          <ul class="CreditForm_WorkInfs_ul_left">
+        <div class="CreditForm_WorkInfs ">
+          <ul class="CreditForm_WorkInfs_ul_left clearFixed">
             <li style="width:100%">
               <i class="hint">
                 <b v-show="this.Wordhint.Working.address" class="Working_input"> 输入长度不能超过50</b>
@@ -414,7 +414,7 @@
                 @compositionend="wordInput50(checkData.hirelastComname,'前单位')" @keyup="wordInput50(checkData.hirelastComname,'前单位')">
             </li>
           </ul>
-          <ul class="CreditForm_WorkInfs_ul_right" style="paddingTop:58px">
+          <ul class="CreditForm_WorkInfs_ul_right" style="padding:45px 0 5px 0">
             <li>
               <i class="hint">
                 <b v-show="this.Wordhint.Working.department" class="Working_middle Working_right">输入长度不能超过20</b>
@@ -465,7 +465,7 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">私营企业信息</span>
         </template>
-        <div class="CreditForm_CompanyInfs" v-show="this.workInf.private" style="paddingLeft:21px;height:320px;">
+        <div class="CreditForm_CompanyInfs" v-show="this.workInf.private" style="paddingLeft:21px;height:250px;">
           <ul class="CreditForm_CompanyInfs_ul_left">
             <li ref="compTypeDiv">
               <i class="hint">
@@ -538,7 +538,7 @@
               </el-input>
             </li>
           </ul>
-          <ul class="CreditForm_CompanyInfs_ul_right" style="paddingTop:58px">
+          <ul class="CreditForm_CompanyInfs_ul_right" style="paddingTop:45px">
             <li>
               <i class="hint"> </i>
               <label class=" CheckId_right_label "> 经营场所：</label>
