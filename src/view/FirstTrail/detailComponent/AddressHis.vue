@@ -79,7 +79,6 @@
               <label class="label_width_110">说明：</label>
               <span class="text_area_span text_area_span_minus115"> {{mobileData.checkWorktxt}}</span>
             </li>
-
             <li class="clearFloat">
               <label class="label_width_166">核对婚姻情况：</label>
               <span> {{mobileData.maritalStatusDes}}</span>
