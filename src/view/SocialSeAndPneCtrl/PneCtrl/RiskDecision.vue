@@ -89,24 +89,31 @@
         tableData: []
       }
     },
-    mounted() {
-      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '01') {
-        this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
-      } else if (this.judgeFlag.flag == '02') {
-        this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-      } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
-        this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
+    props: {
+      applyId: {
+        type: String,
+        default: '',
+        required: true
       }
+    },
+    mounted() {
+      // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      // if (this.judgeFlag.flag == '01') {
+      //   this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
+      // } else if (this.judgeFlag.flag == '02') {
+      //   this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
+      // } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
+      //   this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
+      // }  else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
+      //   this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员 
+      // } else if (this.judgeFlag.flag == '07' || this.judgeFlag.flag == '08' || this.judgeFlag.flag == '09' || this.judgeFlag
+      //   .flag == '10' || this.judgeFlag.flag == '11' || this.judgeFlag.flag == '13') {
+      //   this.localInf = JSON.parse(localStorage.getItem("FGQTTaskWait")) //质检 专员
+      // }
+
       //  else if (this.judgeFlag.flag == '04') {
       //   this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
-      // } 
-      else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
-        this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员 
-      } else if (this.judgeFlag.flag == '07' || this.judgeFlag.flag == '08' || this.judgeFlag.flag == '09' || this.judgeFlag
-        .flag == '10' || this.judgeFlag.flag == '11' || this.judgeFlag.flag == '13') {
-        this.localInf = JSON.parse(localStorage.getItem("FGQTTaskWait")) //质检 专员
-      }
+      // }
       // else if (this.judgeFlag.flag == '08') {
       //   this.localInf = JSON.parse(localStorage.getItem("FGQTManagerTW")) //质检 主管
       // } else if (this.judgeFlag.flag == '09') {
@@ -118,10 +125,12 @@
       // } else if (this.judgeFlag.flag == '13') {
       //   this.localInf = JSON.parse(localStorage.getItem("QTComplianceTW")) //质检 合规经理任务列表 
       // }
+      console.log( this.applyId)
       this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getTdTabInfo.action', {
         //  applyId:'b14455f1-5531-4cf2-883b-f6dc0049e3bb'
-        applyId: this.localInf.applyId
+        applyId: this.applyId
       }).then(res => {
+        console.log(res)
         if (res.success) {
           this.parmaAndRisk = res.obj.tdResponsec;
           this.tableData = res.obj.rules.rows;

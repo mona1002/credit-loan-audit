@@ -1,5 +1,5 @@
 <template>
-  <!-- 社保报告 -->
+  <!-- 公积金报告 -->
   <div class="SocialSecurity">
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
@@ -8,7 +8,7 @@
           <span class="collapse_title_text">报告信息</span>
         </template>
         <div class="checkedInf checkedInf_li_width_four clearFix">
-          <ul>
+          <!-- <ul>
             <li>
               <label class="label_width_166">姓名：</label>
               <span>{{socReport.name}}</span>
@@ -101,7 +101,7 @@
               <label class="label_width_166">通讯地址：</label>
               <span>{{socReport.address}}</span>
             </li>
-          </ul>
+          </ul> -->
         </div>
       </el-collapse-item>
       <el-collapse-item name="2">
@@ -110,7 +110,7 @@
           <span class="collapse_title_text">账户信息</span>
         </template>
         <div class="checkedInf checkedInf_li_width_four clearFix">
-          <ul>
+          <!-- <ul>
             <li>
               <label class="label_width_166">个人编号：</label>
               <span>{{socReport.customer}}</span>
@@ -203,16 +203,16 @@
               <label class="label_width_166">累计缴纳月数：</label>
               <span>{{socReport.payment_months}}</span>
             </li>
-          </ul>
+          </ul> -->
         </div>
       </el-collapse-item>
       <el-collapse-item name="3">
         <template slot="title">
           <i class="collapse_title_icon"></i>
-          <span class="collapse_title_text">险种信息</span>
+          <span class="collapse_title_text">工作信息</span>
         </template>
         <div class="height_auto">
-          <el-table :data="insurances" style="width:100%;" highlight-current-row border>
+          <!-- <el-table :data="insurances" style="width:100%;" highlight-current-row border>
             <el-table-column prop="account_id" label="账户ID" width="120">
             </el-table-column>
             <el-table-column prop="standard_name" label="险种名称" width="100">
@@ -233,39 +233,16 @@
             </el-table-column>
             <el-table-column prop="first_insured_month" label="首次参保年月" width="120">
             </el-table-column>
-          </el-table>
+          </el-table> -->
         </div>
-        <!-- <div class="table" style="padding-left: 0px">
-          <h5 class="h5">险种信息</h5>
-          <div class="tabbox">
-            <table id="t_1">
-              <thead>
-                <tr>
-                  <th>账户ID</th>
-                  <th>险种名称</th>
-                  <th>缴费基数[元]</th>
-                  <th>参保状态</th>
-                  <th>缴费状态</th>
-                  <th>个人缴费比例(%)</th>
-                  <th>单位缴费比例(%)</th>
-                  <th>参保单位</th>
-                  <th>本次参保年月</th>
-                  <th>首次参保年月</th>
-                </tr>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
-          </div>
-        </div> -->
       </el-collapse-item>
       <el-collapse-item name="4">
         <template slot="title">
           <i class="collapse_title_icon"></i>
-          <span class="collapse_title_text">基本医疗保险</span>
+          <span class="collapse_title_text">账户流水</span>
         </template>
         <div class="height_auto">
-          <el-table :data="medicareFlow" style="width:100%;" highlight-current-row border>
+          <!-- <el-table :data="medicareFlow" style="width:100%;" highlight-current-row border>
             <el-table-column prop="period" label="缴纳时间" width="120">
             </el-table-column>
             <el-table-column prop="payment_base" label="缴纳基数[元]" width="100">
@@ -276,16 +253,16 @@
             </el-table-column>
             <el-table-column prop="origin_name" label="原始保险名称" min-width="190">
             </el-table-column>
-          </el-table>
+          </el-table> -->
         </div>
       </el-collapse-item>
       <el-collapse-item name="5">
         <template slot="title">
           <i class="collapse_title_icon"></i>
-          <span class="collapse_title_text">基本养老保险</span>
+          <span class="collapse_title_text">贷款明细</span>
         </template>
         <div class="height_auto">
-          <el-table :data="pensionFlow" style="width:100%;" highlight-current-row border>
+          <!-- <el-table :data="pensionFlow" style="width:100%;" highlight-current-row border>
             <el-table-column prop="period" label="缴纳时间" width="120">
             </el-table-column>
             <el-table-column prop="payment_base" label="缴纳基数[元]" width="100">
@@ -296,16 +273,16 @@
             </el-table-column>
             <el-table-column prop="origin_name" label="原始保险名称" min-width="190">
             </el-table-column>
-          </el-table>
+          </el-table> -->
         </div>
       </el-collapse-item>
       <el-collapse-item name="6">
         <template slot="title">
           <i class="collapse_title_icon"></i>
-          <span class="collapse_title_text">失业保险</span>
+          <span class="collapse_title_text">贷款还款流水</span>
         </template>
         <div class="height_auto">
-          <el-table :data="unemploymentFlow" style="width:100%;" highlight-current-row border>
+          <!-- <el-table :data="unemploymentFlow" style="width:100%;" highlight-current-row border>
             <el-table-column prop="period" label="缴纳时间" width="120">
             </el-table-column>
             <el-table-column prop="payment_base" label="缴纳基数[元]" width="100">
@@ -316,79 +293,7 @@
             </el-table-column>
             <el-table-column prop="origin_name" label="原始保险名称" min-width="190">
             </el-table-column>
-          </el-table>
-        </div>
-      </el-collapse-item>
-      <el-collapse-item name="7">
-        <template slot="title">
-          <i class="collapse_title_icon"></i>
-          <span class="collapse_title_text">工伤保险</span>
-        </template>
-        <div class="height_auto">
-          <el-table :data="injuryFlow" style="width:100%;" highlight-current-row border>
-            <el-table-column prop="period" label="缴纳时间" width="120">
-            </el-table-column>
-            <el-table-column prop="payment_base" label="缴纳基数[元]" width="100">
-            </el-table-column>
-            <el-table-column prop="company_amount" label="单位缴纳[元]" width="100">
-            </el-table-column>
-            <el-table-column prop="person_amount" label="个人缴纳[元]" width="130">
-            </el-table-column>
-            <el-table-column prop="origin_name" label="原始保险名称" min-width="190">
-            </el-table-column>
-          </el-table>
-        </div>
-      </el-collapse-item>
-      <el-collapse-item name="8">
-        <template slot="title">
-          <i class="collapse_title_icon"></i>
-          <span class="collapse_title_text">生育保险</span>
-        </template>
-        <div class="height_auto">
-          <el-table :data="maternityFlow" style="width:100%;" highlight-current-row border>
-            <el-table-column prop="period" label="缴纳时间" width="120">
-            </el-table-column>
-            <el-table-column prop="payment_base" label="缴纳基数[元]" width="100">
-            </el-table-column>
-            <el-table-column prop="company_amount" label="单位缴纳[元]" width="100">
-            </el-table-column>
-            <el-table-column prop="person_amount" label="个人缴纳[元]" width="130">
-            </el-table-column>
-            <el-table-column prop="origin_name" label="原始保险名称" min-width="190">
-            </el-table-column>
-          </el-table>
-        </div>
-      </el-collapse-item>
-      <el-collapse-item name="9">
-        <template slot="title">
-          <i class="collapse_title_icon"></i>
-          <span class="collapse_title_text">消费明细</span>
-        </template>
-        <div class="height_auto">
-          <el-table :data="consumption" style="width:100%;" highlight-current-row border>
-            <el-table-column prop="trade_time" label="时间" width="120">
-            </el-table-column>
-            <el-table-column prop="trade_type" label="消费类型" width="120">
-            </el-table-column>
-            <el-table-column prop="trade_place" label="医院名称" width="120">
-            </el-table-column>
-            <el-table-column prop="trade_amount" label="总费用[元]" width="100">
-            </el-table-column>
-            <el-table-column prop="person_out" label="个人账号支出[元]" width="130">
-            </el-table-column>
-            <el-table-column prop="pool_out" label="统筹账号支出[元]" width="130">
-            </el-table-column>
-            <el-table-column prop="medicare_out" label="医保支付[元]" width="130">
-            </el-table-column>
-            <el-table-column prop="own_expense" label="自费[元]" width="130">
-            </el-table-column>
-            <el-table-column prop="pay_cash" label="现金支付[元]" width="130">
-            </el-table-column>
-            <el-table-column prop="pay_big" label="大额支付[元]" width="130">
-            </el-table-column>
-            <el-table-column prop="claims_amount" label="报销金额[元]" min-width="130">
-            </el-table-column>
-          </el-table>
+          </el-table> -->
         </div>
       </el-collapse-item>
     </el-collapse>
@@ -402,8 +307,8 @@
     data() {
       return {
         activeNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
-        socReport: null,
-        socRawReport: null,
+        fundReport: null,
+        fundRawReport: null,
         insurances: [], //
         medicareFlow: [],
         pensionFlow: [],
@@ -429,137 +334,91 @@
     },
     methods: {
       getInf() {
-        this.post(baseurl.DataUrl + '/channel/threeDataAction!notSession_getSocialInsurReport.action', {
+        this.post(baseurl.DataUrl + '/channel/threeDataAction!notSession_getFundReport.action', {
           applySubNo: this.applySubNo
+        //   applySubNo : 'PHDX6409598026121216'
         }).then(res => {
-          // var socReport;
-          // var socRawReport
+            console.log(res)
           if (!res.success) {
-            this.$messag1e.error('查询数据失败！');
+            this.$message.error("查询数据失败！");
             return;
           }
           if ("" != res.obj.rpt) {
             var result = $.parseJSON(res.obj.rpt);
-            if (result && result.result && result.result['10126'] && result.result['10126'].bizInfo && result.result[
-                '10126'].bizInfo.data &&
-              result.result['10126'].bizInfo.data.report && result.result['10126'].bizInfo.data.report.length > 0) {
-              this.socReport = result.result['10126'].bizInfo.data.report[0].data; //报告
+            if (result && result.result && result.result['10059'] && result.result['10059'].bizInfo && result.result[
+                '10059'].bizInfo.data &&
+              result.result['10059'].bizInfo.data.report && result.result['10059'].bizInfo.data.report[0] &&
+              result.result['10059'].bizInfo.data.report[0].data) {
+              this.fundReport = result.result['10059'].bizInfo.data.report[0].data[0];
             }
+            console.log(1,this.fundReport);
           }
           if ("" != res.obj.rawRpt) {
             var rawResult = $.parseJSON(res.obj.rawRpt);
-            if (rawResult && rawResult.result && rawResult.result['10125'] && rawResult.result['10125'].bizInfo) {
-              this.socRawReport = rawResult.result['10125'].bizInfo.data; //原始数据
+            if (rawResult && rawResult.result && rawResult.result['10060'] && rawResult.result['10060'].bizInfo) {
+              this.fundRawReport = rawResult.result['10060'].bizInfo.data;
             }
           }
+            console.log(2,this.fundRawReport);
+          
           // ---------------------------
-          if (this.socReport) {
-            // 基本信息2
-            // this.fen_to_yuan(this.socReport, ['medicare_balance', 'pension_balance', 'yj_month_income', 'max_base',
-            //   'average_base', 'current_base'
-            // ]);
-            // $('#div_socInsu #f_1').form('load', this.socReport);
-            // 基本医疗保险
-            this.socReport.medicareFlow && this.socReport.medicareFlow.length > 0 ? this.medicareFlow = this.socReport
-              .medicareFlow : '';
-            // if (this.socReport.medicareFlow && this.socReport.medicareFlow.length > 0) {
-            //   $.each(this.socReport.medicareFlow, (i, eh) => {
-            //     this.fen_to_yuan(eh, ['payment_base', 'company_amount', 'person_amount']);
-            //     //this.addRow($('#div_socInsu #t_2 tbody'),['period','payment_base','company_amount','person_amount','company'],eh);
-            //     this.addRow($('#div_socInsu #t_2 tbody'), ['period', 'payment_base', 'company_amount',
-            //       'person_amount', 'origin_name'
-            //     ], eh);
-            //   });
-            // }
-            // 基本养老保险
-            this.socReport.pensionFlow && this.socReport.pensionFlow.length > 0 ? this.pensionFlow = this.socReport
-              .pensionFlow : '';
-            // if (this.socReport.pensionFlow && this.socReport.pensionFlow.length > 0) {
-            //   $.each(this.socReport.pensionFlow, (i, eh) => {
-            //     this.fen_to_yuan(eh, ['payment_base', 'company_amount', 'person_amount']);
-            //     //this.addRow($('#div_socInsu #t_3 tbody'),['period','payment_base','company_amount','person_amount','company'],eh);
-            //     this.addRow($('#div_socInsu #t_3 tbody'), ['period', 'payment_base', 'company_amount',
-            //       'person_amount', 'origin_name'
-            //     ], eh);
-            //   });
-            // }
-            // 失业保险
-            this.socReport.unemploymentFlow && this.socReport.unemploymentFlow.length > 0 ? this.unemploymentFlow =
-              this.socReport.unemploymentFlow : '';
-            // if (this.socReport.unemploymentFlow && this.socReport.unemploymentFlow.length > 0) {
-            //   $.each(this.socReport.unemploymentFlow, (i, eh) => {
-            //     this.fen_to_yuan(eh, ['payment_base', 'company_amount', 'person_amount']);
-            //     this.addRow($('#div_socInsu #t_4 tbody'), ['period', 'payment_base', 'company_amount',
-            //       'person_amount', 'origin_name'
-            //     ], eh);
-            //   });
-            // }
-            // 
-            // 工伤保险
-            this.socReport.injuryFlow && this.socReport.injuryFlow.length > 0 ? this.injuryFlow = this.socReport.injuryFlow :
-              '';
-            console.log(5, this.socReport)
-            // if (this.socReport.injuryFlow && this.socReport.injuryFlow.length > 0) {
-            //   $.each(this.socReport.injuryFlow, (i, eh) => {
-            //     this.fen_to_yuan(eh, ['payment_base', 'company_amount', 'person_amount']);
-            //     this.addRow($('#div_socInsu #t_5 tbody'), ['period', 'payment_base', 'company_amount',
-            //       'person_amount', 'origin_name'
-            //     ], eh);
-            //   });
-            // }
-            // 生育保险
-            this.socReport.maternityFlow && this.socReport.maternityFlow.length > 0 ? this.maternityFlow = this.socReport
-              .maternityFlow : '';
-            // console.log( )
-            // if (this.socReport.maternityFlow && this.socReport.maternityFlow.length > 0) {
-            //   $.each(this.socReport.maternityFlow, (i, eh) => {
-            //     this.fen_to_yuan(eh, ['payment_base', 'company_amount', 'person_amount']);
-            //     this.addRow($('#div_socInsu #t_6 tbody'), ['period', 'payment_base', 'company_amount',
-            //       'person_amount', 'origin_name'
-            //     ], eh);
-            //   });
-            // }
+          if (this.fundReport) {
+            this.fen_to_yuan(this.fundReport, ['deposit_amount', 'balance', 'loan_repay_amount', 'monthly_income', '']);
+            // $('#div_fund #f_1').form('load', this.fundReport);
+
+            if (this.fundReport.companys && this.fundReport.companys.length > 0) {
+              $.each(this.fundReport.companys, function (i, eh) {
+                this.addRow($('#div_fund #t_2 tbody'), ['name', 'type', 'begin_date', 'end_date'], eh);
+              });
+            }
+
+            if (this.fundReport.flows && this.fundReport.flows.length > 0) {
+              //$('#div_fund #d_3').attr('style','height:500px');
+              $.each(this.fundReport.flows, function (i, eh) {
+                this.fen_to_yuan(eh, ['amount', 'balance']);
+                this.addRow($('#div_fund #t_3 tbody'), ['company', 'operation_date', 'operation_type',
+                  'record_month', 'amount', 'balance'
+                ], eh)
+
+                /* if(eh.record_month!=""){
+                	eh.record_month = eh.record_month.substr(0,4)+'-'+eh.record_month.substr(4);
+                }
+                this.addRow($('#div_fund #t_3 tbody'),['company','operation_date','operation_type','record_month','amount','balance'],eh); */
+              });
+            }
+
+            if (this.fundReport.loans && this.fundReport.loans.length > 0) {
+              $.each(this.fundReport.loans, function (i, eh) {
+                this.fen_to_yuan(eh, ['limit', 'balance']);
+                this.addRow($('#div_fund #t_4 tbody'), ['contract_no', 'name', 'id_card', 'phone', 'bank', 'status',
+                  'limit', 'balance', 'period', 'begin_date', 'end_date', 'loan_rate'
+                ], eh);
+              });
+            }
           }
           // ---------------------------------
-          if (this.socRawReport) { //基本信息1
-            // if (this.socRawReport.accounts && this.socRawReport.accounts.length > 0) {
-            //   var formObj = $('#div_socInsu #d_account form').clone();
-            //   $.each(this.socRawReport.accounts, (i, eh) => {
-            //     eh.monthly_income = utils.formatMoney(eh.monthly_income);
-            //     this.fen_to_yuan(eh, ['medicare_balance', 'pension_balance']);
-            //     formObj.appendTo($('#div_socInsu #d_account'));
-            //     $('<br>').appendTo($('#div_socInsu #div_account'));
-            //     // $('#div_socInsu #d_account form:last').form('load', eh);
-            //   });
-            //   $('#div_socInsu #d_account form:first').remove();
-            // }
-            // 险种信息
-            this.socRawReport.insurances && this.socRawReport.insurances.length > 0 ? this.insurances = this.socRawReport
-              .insurances : this.insurances;
-            // if (this.socRawReport.insurances && this.socRawReport.insurances.length > 0) {
-            //   $.each(this.socRawReport.insurances, (i, eh) => {
-            //     this.fen_to_yuan(eh, ['base']);
-            //     this.addRow($('#div_socInsu #t_1 tbody'), ['account_id', 'standard_name', 'base',
-            //       'insured_status', 'payment_status', 'person_rate', 'company_rate', 'company',
-            //       'current_insured_month', 'first_insured_month'
-            //     ], eh);
-            //   });
-            // }
-            console.log(3, this.socRawReport)
-            // 消费明细
-            this.socRawReport.consumption && this.socRawReport.consumption.length > 0 ? this.consumption = this.socRawReport
-              .consumption : '';
-            // if (this.socRawReport.consumption && this.socRawReport.consumption.length > 0) {
-            //   $.each(this.socRawReport.consumption, (i, eh) => {
-            //     this.fen_to_yuan(eh, ['trade_amount', 'person_out', 'pool_out', 'medicare_out', 'own_expense',
-            //       'pay_cash', 'pay_big', 'claims_amount'
-            //     ]);
-            //     this.addRow($('#div_socInsu #t_7 tbody'), ['trade_time', 'trade_type', 'trade_place',
-            //       'trade_amount', 'person_out', 'pool_out', 'medicare_out', 'own_expense', 'pay_cash',
-            //       'pay_big', 'claims_amount'
-            //     ], eh);
-            //   });
-            // }
+          if (this.fundRawReport) {
+            if (this.fundRawReport.accounts && this.fundRawReport.accounts.length > 0) {
+              var formObj = $('#div_fund #div_account form').clone();
+              $.each(this.this.fundRawReport.accounts, function (i, eh) {
+                this.fen_to_yuan(eh, ['balance', 'deposit_amount', 'deposit_base', 'housing_supplement_base',
+                  'housing_supplement_balance', 'once_balance'
+                ]);
+                formObj.appendTo($('#div_fund #div_account'));
+                $('<br>').appendTo($('#div_fund #div_account'));
+                // $('#div_fund #div_account form:last').form('load', eh);
+              });
+              $('#div_fund #div_account form:first').remove();
+            }
+            if (this.fundRawReport.loan_flows && this.fundRawReport.loan_flows.length > 0) {
+              $.each(this.fundRawReport.loan_flows, function (i, eh) {
+                this.fen_to_yuan(eh, ['repay_principle', 'repay_interest', 'repay_amount', 'principle_balance']);
+                this.addRow($('#div_fund #t_5 tbody'), ['account_id', 'contract_no', 'type', 'record_date',
+                  'record_month', 'repay_principle', 'repay_interest', 'repay_amount', 'principle_balance',
+                  'deduct_date'
+                ], eh);
+              });
+            }
           }
         });
       },

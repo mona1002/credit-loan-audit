@@ -8,23 +8,25 @@
         </ul>
       </div>
       <div class="wrap">
+         <!-- <RiskDecision v-if="ind==0"></RiskDecision>
+          <BaiRongData v-if="ind==1"></BaiRongData> -->
         <div class="content">
-          <RiskDecision v-if="ind==0"></RiskDecision>
-          <BaiRongData v-if="ind==1"></BaiRongData>
+            <BaiRongData v-if="ind==1" :applyId='localInf.applyId'>百融数据</BaiRongData>
+          <RiskDecision v-if="ind==0" :applyId='localInf.applyId'>同盾风险决策</RiskDecision>
         </div>
-        <!-- <div class="content"> -->
-        <!-- <RiskDecision v-if="ind==0">风控指引</RiskDecision> -->
-        <!-- <RiskDecision v-if="ind==1">复杂网络图谱</RiskDecision> -->
-        <!-- <RiskDecision v-if="ind==2">OCR信息</RiskDecision> -->
-        <!-- <RiskDecision v-if="ind==3">同盾设备画像</RiskDecision> -->
-        <!-- <RiskDecision v-if="ind==4">网查征信报告</RiskDecision> -->
-        <!-- <RiskDecision v-if="ind==5">运营商报告</RiskDecision> -->
-        <!-- <RiskDecision v-if="ind==6">储蓄卡报告</RiskDecision> -->
-        <!-- <RiskDecision v-if="ind==7">公积金报告</RiskDecision> -->
-        <!-- <SocialSecurityReport v-if="ind==8">社保报告</SocialSecurityReport> -->
-        <!-- <RiskDecision v-if="ind==9">百融数据</RiskDecision> -->
-        <!-- <RiskDecision v-if="ind==10">同盾风险决策</RiskDecision> -->
-        <!-- </div> -->
+        <!-- <div class="content">
+          <RiskDecision v-if="ind==0" :applyId='localInf.applyId'>风控指引</RiskDecision>
+          <RiskDecision v-if="ind==1" :applyId='localInf.applyId'>复杂网络图谱</RiskDecision>
+          <RiskDecision v-if="ind==2" :applyId='localInf.applyId'>OCR信息</RiskDecision>
+          <RiskDecision v-if="ind==3" :applyId='localInf.applyId'>同盾设备画像</RiskDecision>
+          <RiskDecision v-if="ind==4" :applyId='localInf.applyId'>网查征信报告</RiskDecision>
+          <RiskDecision v-if="ind==5" :applyId='localInf.applyId'>运营商报告</RiskDecision>
+          <RiskDecision v-if="ind==6" :applyId='localInf.applyId'>储蓄卡报告</RiskDecision>
+          <AccumulationFundReport v-if="ind==7"  :applySubNo='localInf.applySubNo'>公积金报告</AccumulationFundReport>
+          <SocialSecurityReport v-if="ind==8" :applySubNo='localInf.applySubNo'>社保报告</SocialSecurityReport>
+          <BaiRongData v-if="ind==9" :applyId='localInf.applyId'>百融数据</BaiRongData>
+          <RiskDecision v-if="ind==10" :applyId='localInf.applyId'>同盾风险决策</RiskDecision>
+        </div> -->
       </div>
     </div>
   </div>
@@ -33,6 +35,9 @@
   import BaiRongData from './PneCtrl/BaiRongData.vue'
   import RiskDecision from './PneCtrl/RiskDecision.vue'
   import SocialSecurityReport from './PneCtrl/SocialSecurityReport.vue'
+  import AccumulationFundReport from './PneCtrl/AccumulationFundReport.vue'
+  
+  
   export default {
     data() {
       return {
@@ -60,9 +65,13 @@
         // }
         else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
           this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员 
-        } else if (this.judgeFlag.flag == '07'||this.judgeFlag.flag == '08'||this.judgeFlag.flag == '09'||this.judgeFlag.flag == '10'||this.judgeFlag.flag == '11'||this.judgeFlag.flag == '13') {
+        } else if (this.judgeFlag.flag == '07' || this.judgeFlag.flag == '08' || this.judgeFlag.flag == '09' || this.judgeFlag
+          .flag == '10' || this.judgeFlag.flag == '11' || this.judgeFlag.flag == '13') {
           this.localInf = JSON.parse(localStorage.getItem("FGQTTaskWait")) //质检 专员、主管、初终审本人任务列表、初终审主管、复议任务列表（首次） ---区域无社保公积金按钮、合规经理任务列表
         }
+        // this.localInf.applySubNo = 'PHDX6409598026121216';
+        // this.localInf.applyId = '9e56e245-bd30-4a51-97e9-c255ea7171b6';
+
       }
     },
     mounted() {
@@ -70,7 +79,9 @@
     },
     components: {
       BaiRongData,
-      RiskDecision
+      RiskDecision,
+      SocialSecurityReport,
+      AccumulationFundReport,
     }
 
   }

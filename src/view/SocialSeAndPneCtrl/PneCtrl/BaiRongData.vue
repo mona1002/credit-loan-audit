@@ -15,7 +15,7 @@
                 <span class="Second_title">通过身份证查询
                 </span>
               </template>
-              <div class="second_lists long_item" ref='IDCheck'>
+              <div ref='IDCheck'>
                 <p v-if=" specialList.sl_id_abnormal">
                   <label>通过身份证查询疑似欺诈：</label>
                   <b>{{specialList.sl_id_abnormal}}</b>
@@ -202,7 +202,7 @@
                 <span class="Second_title">通过手机号查询
                 </span>
               </template>
-              <div class="second_lists long_item" ref='PhoneCheck'>
+              <div ref='PhoneCheck'>
                 <p v-if=" specialList.sl_cell_abnormal">
                   <label>通过手机号查询疑似欺诈： </label>
                   <b>{{specialList.sl_cell_abnormal}}</b>
@@ -373,7 +373,7 @@
                 <span class="Second_title">通过联系人手机号查询
                 </span>
               </template>
-              <div class="second_lists long_item" ref='linkCheck'>
+              <div ref='linkCheck'>
                 <p v-if=" specialList.sl_lm_cell_abnormal">
                   <label>通过联系人手机查询疑似欺诈： </label>
                   <b>{{specialList.sl_lm_cell_abnormal}}</b>
@@ -532,7 +532,7 @@
                 <span class="Second_title">通过GID查询
                 </span>
               </template>
-              <div class="second_lists long_item" ref='GIDCheck'>
+              <div ref='GIDCheck'>
                 <p v-if=" specialList.sl_gid_phone_overdue">
                   <label>通过百融标识查询电信欠费： </label>
                   <b>{{specialList.sl_gid_phone_overdue}}</b>
@@ -1093,12 +1093,12 @@
                 <span class="Second_title">产品输出标识
                 </span>
               </template>
-              <div class="second_lists">
+              <div>
                 <ul>
                   <li>
                     <p style="width:100%;">
-                      <label style="width:240px;">个人不良信息查询高级版产品计费标识：</label>
-                      <b style="width:calc(100% - 245px)">{{outputAndParam.flagCrimeinfoProTxt}}</b>
+                      <label>个人不良信息查询高级版产品计费标识：</label>
+                      <b style="width:800px;">{{outputAndParam.flagCrimeinfoProTxt}}</b>
                     </p>
                   </li>
                 </ul>
@@ -1112,7 +1112,7 @@
                 <span class="Second_title">返回参数
                 </span>
               </template>
-              <div class="second_lists">
+              <div>
                 <ul>
                   <li>
                     <p>
@@ -1181,24 +1181,31 @@
         activeNames: ['1', "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"],
       }
     },
-    mounted() {
-      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '01') {
-        this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
-      } else if (this.judgeFlag.flag == '02') {
-        this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-      } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
-        this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
+    props: {
+      applyId: {
+        type: String,
+        default: '',
+        required: true
       }
+    },
+    mounted() {
+      // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+      // if (this.judgeFlag.flag == '01') {
+      //   this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
+      // } else if (this.judgeFlag.flag == '02') {
+      //   this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
+      // } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
+      //   this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
+      // }
+      // else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
+      //   this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员 
+      // } else if (this.judgeFlag.flag == '07' || this.judgeFlag.flag == '08' || this.judgeFlag.flag == '09' || this.judgeFlag
+      //   .flag == '10' || this.judgeFlag.flag == '11' || this.judgeFlag.flag == '13') {
+      //   this.localInf = JSON.parse(localStorage.getItem("FGQTTaskWait")) //质检 专员
+      // }  
       // else if (this.judgeFlag.flag == '04') {
       //   this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
       // } 
-      else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
-        this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员 
-      } else if (this.judgeFlag.flag == '07' || this.judgeFlag.flag == '08' || this.judgeFlag.flag == '09' || this.judgeFlag
-        .flag == '10' || this.judgeFlag.flag == '11' || this.judgeFlag.flag == '13') {
-        this.localInf = JSON.parse(localStorage.getItem("FGQTTaskWait")) //质检 专员
-      }
       // else if (this.judgeFlag.flag == '08') {
       //   this.localInf = JSON.parse(localStorage.getItem("FGQTManagerTW")) //质检 主管
       // } else if (this.judgeFlag.flag == '09') {
@@ -1211,8 +1218,8 @@
       //   this.localInf = JSON.parse(localStorage.getItem("QTComplianceTW")) //质检 合规经理任务列表 
       // }
       this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrTabInfo.action', {
-        // applyId: 'b14455f1-5531-4cf2-883b-f6dc0049e3bb'
-        applyId: this.localInf.applyId
+        // applyId: '9e56e245-bd30-4a51-97e9-c255ea7171b6',
+        applyId: this.applyId
       }).then(res => {
         if (res.success) {
           this.outputAndParam = res.obj.crimeInfo; //个人不良信息-产品输出标识、返回参数
@@ -1257,33 +1264,20 @@
     width: 16px
   }
 
-  .second_lists {
-    padding-left: 21px;
-  }
-
   .SSComp p {
-    float: left;
-    width: 33.3%;
     margin-bottom: 4px;
+    border-bottom: 1px solid #ebeef5;
   }
 
   .SSComp label {
     display: inline-block;
     text-align: right;
-    width: 190px;
+    width: 350px;
   }
 
   .SSComp b {
     display: inline-block;
-    width: calc(100% - 200px);
-  }
-
-  .TwoPart label {
     width: 300px;
-  }
-
-  .TwoPart b {
-    width: calc(100% - 310px);
   }
 
   .tab_wrap {
