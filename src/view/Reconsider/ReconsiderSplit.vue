@@ -38,7 +38,7 @@
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <AborrowerInformationDetail v-if=" this.tabContent2==4"></AborrowerInformationDetail>
             <PhoneCredit v-if=" this.tabContent2==5" :addBtn="false"></PhoneCredit>
-            <FMCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></FMCreditForm>
+            <FCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"  :applyId='tastwaitingPass.applyId'  :FinalConCheckShow='true'></FCreditForm>
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
             <ReconsiderApply v-if=" this.tabContent2==8"></ReconsiderApply>
             <aAntiApplyInf v-if=" this.tabContent2==9"  :applyId='tastwaitingPass.applyId'></aAntiApplyInf>
@@ -56,7 +56,7 @@
   // import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配查看 --》 aV
   import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息  
   import AborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料
-  import FMCreditForm from "../AntiFraud/matchComponent/AntiCreditForm.vue"; //信审表-与内部匹配打开的是同一个页面
+  import FCreditForm from "../FinalTrial/FinalComponent/FCreditForm.vue"; //信审表
   import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信
   import ReconsiderApply from './ReconsiderComponents/ReconsiderApply.vue' //复议申请
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf.vue' //反欺诈结论
@@ -175,7 +175,7 @@
       cremark,
       capplicationInformationDetail,
       AborrowerInformationDetail,
-      FMCreditForm,
+      FCreditForm,
       creditInvestigation,
       ReconsiderApply, //复议申请
       aAntiApplyInf, //反欺诈结论

@@ -327,11 +327,17 @@
 .checkedInf li {
   float: left;
   min-width: 200px;
-  height: 24px;
+  min-height: 24px;
+  /* height: 25px; */
   margin-top: 4px;
-  /* margin-top: 20px; */
-  border-bottom: 1px solid #ebeef5;
+  /* border-bottom: 1px solid #ebeef5; */
+  /* border-bottom: 1px solid red; */
+
 }
+.checkedInf .border_bottom_none{
+  border-bottom: none;
+}
+/* 查看-li宽度 */
 .checkedInf .li_one_row{
   width:100%;
 }
@@ -346,7 +352,7 @@
   text-align: right;
 }
 
-/* span部分 */
+/* 查看-span宽度 */
 
 .checkedInf .text_area_span_minus220 {
   width: calc(100% - 220px);
@@ -406,8 +412,10 @@
   margin-top: 5px;
 }
 
-/* label字段宽度 */
-
+/*查看- label宽度 */
+.label_width_210 {
+  width: 210px;
+}
 .label_width_200 {
   width: 200px;
 }
@@ -431,11 +439,28 @@
 .label_width_110 {
   width: 110px;
 }
-
+/* 查看-label高度 */
 .checkedInf .label_height_48 {
   height: 48px;
 }
 
+/* 查看-信审表-div设置border */
+.border_top{
+  border-top: 1px solid #d8dce5;
+}
+.divWrap_Padding_top_4 {
+  padding-top: 4px;
+}
+.Padding_top_10{
+  padding-top:10px;
+}
+.Padding_top_4{
+  padding-top:4px;
+}
+.CreditForm_div_border{
+  /* border-bottom: 1px solid #d8dce5;
+  border-bottom: 1px solid green; */
+}
 /* 借款人资料 */
 
 .borrowerInformationSetail {
@@ -446,21 +471,22 @@
 
 /* 信审表 */
 
-.CreditForm p {
-  padding-bottom: 4px;
+.CreditForm li {
+  /* padding-bottom: 4px; */
+  border:none;
 }
 
 .CreditForm .top {
-  margin-top: 4px;
+  /* margin-top: 4px; */
 }
 
-.CreditForm li {
+/* .CreditForm li {
   color: #475669;
   font-size: 14px;
   vertical-align: middle;
   position: relative;
   clear: both;
-}
+} */
 
 /* ------------------------------上网查询 +核实身份--------------------------- */
 
@@ -480,29 +506,27 @@
 /* 家庭信息 */
 
 .CreditForm_live p {
-  float: left;
+  /* float: left;
   width: 33.3%;
-  vertical-align: middle;
+  vertical-align: middle; */
 }
 
 .CreditForm_check_reside li,
 .CreditForm_check_reside p {
-  width: 100%;
+  /* width: 100%;
   clear: both;
   padding: 0;
-  margin: 4px 0;
+  margin: 4px 0; */
 }
 
-.CreditForm .interMath li,
+/* .CreditForm .interMath li,
 .CreditForm .PhontConclution li,
 .CreditForm_result li {
   margin-bottom: 5px;
   width: 66.6%;
-}
+} */
 
-.CreditForm_result {
-  padding-top: 4px;
-}
+
 
 /* 私营企业-第一分销商  */
 
@@ -524,12 +548,12 @@
 /* 家庭信息 */
 
   {
-  width: calc( 100% - 225px);
+  /* width: calc( 100% - 225px);
   height: 60px;
   vertical-align: top;
   overflow: auto;
   border: 1px solid #d8dce5;
-  border-radius: 4px;
+  border-radius: 4px; */
 }
 
 .elips {
@@ -559,54 +583,35 @@
 }
 
 /* --------------------------工作信息 + 私营企业--------------------- */
-
-.CheckId_right_label
 /* 第三列p */
+/* .CheckId_right_label
+
 
   {
   width: 140px;
-}
-
-.CreditForm_InternetInf p:nth-of-type(even),
+} */
+/* 家庭信息 */
+/* .CreditForm_InternetInf p:nth-of-type(even),
 .CreditForm_CheckId p:nth-of-type(even),
 .CreditForm_FamilyInf p:nth-of-type(even)
-/* 家庭信息 */
+
 
   {
   width: 66.6%;
-}
+} */
 
-.CreditForm label {
+/* .CreditForm label {
   display: inline-block;
   text-align: right;
-}
+} */
 
 /* 上网查询 */
 
-.InternetInf_right_label {
-  width: 210px;
-  /* width: 223px; */
-}
 
 .blueC:hover {
   color: rgba(0, 119, 255, 0.75);
   cursor: pointer;
 }
-
-.InternetInf_left_label {
-  display: inline-block;
-  width: 210px;
-}
-
-.detail_inf {
-  display: inline-block;
-}
-
-.InternetInf_left_label {
-  display: inline-block;
-  width: 210px;
-}
-
 /*------------creditform------- 核对现住址-------------------------- */
 
 /* 

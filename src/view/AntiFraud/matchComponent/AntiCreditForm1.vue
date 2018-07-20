@@ -1,5 +1,5 @@
 <template>
-  <!-- 终审-内部匹配中-信审表-（去掉初审人员）-mounted获取分屏-反欺诈专员+主管字段(匹配查看-内部匹配获取的是internal字段) -->
+  <!--已整合===待删除============== 终审-内部匹配中-信审表-（去掉初审人员）-mounted获取分屏-反欺诈专员+主管字段(匹配查看-内部匹配获取的是internal字段) -->
   <div class="CreditForm">
     <el-collapse v-model="activeNames">
       <!-- 网上查询信息 -->

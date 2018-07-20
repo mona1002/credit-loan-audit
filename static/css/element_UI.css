@@ -738,9 +738,9 @@
 
 /* 信审表+反欺诈结论-上网查询等-content 左边距*/
 
-.CreditForm .el-collapse-item__wrap {
+/* .CreditForm .el-collapse-item__wrap {
   padding: 0px 0 0px 21px;
-}
+} */
 
 .CreditForm .el-collapse-item:nth-of-type(4) .el-collapse-item__wrap {
   /* background: red; */
@@ -749,7 +749,7 @@
 
 /* 信审表+反欺诈结论（初审+终审） ----各个  title 一行 */
 
-.CreditForm .el-collapse-item__header
+/* .CreditForm .el-collapse-item__header
 {
   border: 1px solid silver;
   background: #eef0f9;
@@ -759,7 +759,7 @@
   padding-left: 44px;
   height: 40px;
   line-height: 40px;
-}
+} */
 
 /* 信审表 ----各个  title 小帽子部分 */
 

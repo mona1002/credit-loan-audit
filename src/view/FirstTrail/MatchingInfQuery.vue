@@ -41,7 +41,7 @@
             <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail>
             <!-- <PhoneCredit v-if=" this.tabContent1==5"> 电话征信</PhoneCredit> -->
             <RPhoneCredit v-if=" this.tabContent1==5"> 电话征信</RPhoneCredit>
-            <FMCreditForm v-if=" this.tabContent1==6">信审表</FMCreditForm>
+            <FCreditForm v-if=" this.tabContent1==6" :applyId='tastwaitingPass.matchApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
             <RcreditInvestigation v-if=" this.tabContent1==7">实地征信</RcreditInvestigation>
             <aMAntiApplyInf v-if=" this.tabContent1==8" :applyId='tastwaitingPass.matchApplyId'>反欺诈结论</aMAntiApplyInf>
             <RantiFraudInvestigation v-if=" this.tabContent1==9" :isShow='true' :applyId='tastwaitingPass.matchApplyId'>反欺诈调查</RantiFraudInvestigation>
@@ -83,7 +83,7 @@
           <RborrowerInformationSetail v-if=" this.tabContent2==4" :isFull.sync="isFull">借款人资料</RborrowerInformationSetail>
           <!-- <PhoneCredit v-if=" this.tabContent2==5"> 电话征信</PhoneCredit>     -->
           <RPhoneCredit v-if=" this.tabContent2==5"> 电话征信</RPhoneCredit>
-          <FMCreditForm v-if=" this.tabContent2==6">信审表</FMCreditForm>
+          <FCreditForm v-if=" this.tabContent2==6" :applyId='tastwaitingPass.matchApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
           <RcreditInvestigation v-if=" this.tabContent2==7">实地征信</RcreditInvestigation>
           <aMAntiApplyInf v-if=" this.tabContent2==8"  :applyId='tastwaitingPass.matchApplyId'>反欺诈结论</aMAntiApplyInf>
           <RantiFraudInvestigation v-if=" this.tabContent2==9" :isShow='true' :applyId='tastwaitingPass.matchApplyId'>反欺诈调查</RantiFraudInvestigation>
@@ -123,10 +123,10 @@
   </div>
 </template>
 <script>
-  // 编辑
+  // 编辑 02110Z3001
   import RAudioVisual from "./ReadComponent/RAudioVisual";
   import RAudioVisualLeft from "./ReadComponent/RAudioVisualLeft.vue";
-  import FMCreditForm from "../FinalTrial/FinalMatchComponent/FMCreditForm.vue"; //信审表-终审查看-del初审人员-第一个
+  import FCreditForm from "../FinalTrial/FinalComponent/FCreditForm.vue"; //信审表-终审查看-del初审人员-第一个
   import RborrowerInformationSetail from "./ReadComponent/RborrowerInformationSetail.vue"; //借款人资料
   import RapplicationInformationDetail from "./ReadComponent/RapplicationInformationDetail"; //申请信息
   import RFinanceInformation from "./ReadComponent/RFinanceInformation.vue"; //账务信息
@@ -366,7 +366,7 @@
     components: {
       RAudioVisual,
       RAudioVisualLeft,
-      FMCreditForm,
+      FCreditForm,
       RapplicationInformationDetail,
       RborrowerInformationSetail, //借款人资料
       RFinanceInformation, //账务信息

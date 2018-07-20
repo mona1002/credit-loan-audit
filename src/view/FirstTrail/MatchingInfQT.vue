@@ -40,7 +40,7 @@
               <RapplicationInformationDetail v-if=" this.tabContent1==3">申请信息</RapplicationInformationDetail>
               <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail>
               <PhoneCredit v-if=" this.tabContent1==5" :addBtn="false"> 电话征信</PhoneCredit>
-              <FMCreditForm v-if=" this.tabContent1==6">信审表</FMCreditForm>
+              <FCreditForm v-if=" this.tabContent1==6"  :applyId='tastwaitingPass.ApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
               <RcreditInvestigation v-if=" this.tabContent1==7">实地征信</RcreditInvestigation>
               <aMAntiApplyInf v-if=" this.tabContent1==8" :applyId='tastwaitingPass.ApplyId' >反欺诈结论</aMAntiApplyInf>
               <RantiFraudInvestigation v-if=" this.tabContent1==9" :isShow='false' :applyId='tastwaitingPass.ApplyId'> 反欺诈调查</RantiFraudInvestigation>
@@ -108,7 +108,7 @@
             <RapplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
             <RborrowerInformationSetail v-if=" this.tabContent2==4" :isFull.sync="isFull">借款人资料</RborrowerInformationSetail>
             <PhoneCredit v-if=" this.tabContent2==5" :addBtn="false"> 电话征信</PhoneCredit>
-            <FMCreditForm v-if=" this.tabContent2==6">信审表</FMCreditForm>
+            <FCreditForm v-if=" this.tabContent2==6"  :applyId='tastwaitingPass.ApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
             <RcreditInvestigation v-if=" this.tabContent2==7">实地征信</RcreditInvestigation>
             <aMAntiApplyInf v-if=" this.tabContent2==8" :applyId='tastwaitingPass.ApplyId'>反欺诈结论</aMAntiApplyInf>
             <RantiFraudInvestigation v-if=" this.tabContent2==9" :isShow='false' :applyId='tastwaitingPass.ApplyId'> 反欺诈调查</RantiFraudInvestigation>
@@ -176,7 +176,8 @@
   // 编辑
   import RAudioVisual from "./ReadComponent/RAudioVisual";
   import RAudioVisualLeft from "./ReadComponent/RAudioVisualLeft.vue";
-  import FMCreditForm from "../FinalTrial/FinalMatchComponent/FMCreditForm.vue"; //信审表-终审查看-del初审人员-第一个
+  // import FMCreditForm from "../FinalTrial/FinalMatchComponent/FMCreditForm.vue"; //信审表-终审查看-del初审人员-第一个
+  import FCreditForm from "../FinalTrial/FinalComponent/FCreditForm.vue"; //信审表
   import RborrowerInformationSetail from "./ReadComponent/RborrowerInformationSetail.vue"; //借款人资料
   import RapplicationInformationDetail from "./ReadComponent/RapplicationInformationDetail"; //申请信息
   import RFinanceInformation from "./ReadComponent/RFinanceInformation"; //账务信息
@@ -320,7 +321,7 @@
         this.QTC.applyId = this.tastwaitingPass.ApplyId;
         console.log(1, this.QTC.tastwaitingPass)
         this.getPageInf(); //获取页面个人信息      
-        // console.log(this.tastwaitingPass.applyId)
+        // console.log(this.tastwaitingPass.ApplyId)
         // console.log('tastwaitingPass：', this.tastwaitingPass)
         // console.log('QTC：', this.QTC)
         // console.log('pageType：', this.QTC.pageType)
@@ -532,7 +533,8 @@
     components: {
       RAudioVisual,
       RAudioVisualLeft,
-      FMCreditForm,
+      // FMCreditForm,
+      FCreditForm,
       RapplicationInformationDetail,
       RborrowerInformationSetail, //借款人资料
       RFinanceInformation, //账务信息

@@ -1,24 +1,22 @@
 <template>
-<!-- 整合后的查看页面 -->
+  <!-- 整合后的查看页面 -->
   <div class="CreditForm">
     <el-collapse v-model="activeNames">
       <!-- 初审人员 -->
       <el-collapse-item name="0" v-if="TrilPersonShow">
         <template slot="title">
-          <img src="../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">初审人员</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">初审人员</span>
         </template>
-        <div class="CreditForm_live">
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-            <li class="top">
-              <p>
-                <label class="InternetInf_left_label ">初审人员编号：</label>
-                <span class="detail_inf">{{this.FormData.ploanOperCode}} </span>
-              </p>
-              <p class="bottom">
-                <label class="InternetInf_right_label">初审人员姓名：</label>
-                <span class="detail_inf">{{this.FormData.ploanOperName}} </span>
-              </p>
+            <li>
+              <label class="label_width_210 ">初审人员编号：</label>
+              <span>{{this.FormData.ploanOperCode}} </span>
+            </li>
+            <li class="li_triplet_two_rows">
+              <label class="label_width_210">初审人员姓名：</label>
+              <span>{{this.FormData.ploanOperName}} </span>
             </li>
           </ul>
         </div>
@@ -29,118 +27,118 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">网上查询信息</span>
         </template>
-        <div class="CreditForm_InternetInf">
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-            <li class="top">
-              <p>
-                <label class="InternetInf_left_label blueC" @click="NewPage(0)">客户在法网是否有被执行信息：</label>
-                <span class="detail_inf">{{this.FormData.wbeexEcutedtext}} </span>
-              </p>
-              <p v-show="this.InternetShow.commentS">
-                <label class="InternetInf_right_label"> 执行信息说明： </label>
-                <span class="detail_inf">{{this.FormData.wbeexEcutedtxt}} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label blueC" @click="NewPage(0)">单位在法网是否有被执行信息：</label>
-                <span class="detail_inf">{{this.FormData.wnetHirecomtext}} </span>
-              </p>
-              <p v-show="this.InternetShow.commentS1">
-                <label class="InternetInf_right_label"> 单位执行信息说明：</label>
-                <span class="detail_inf">{{this.FormData.wnetHirecomtxt }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label blueC" @click="NewPage(1)">客户在失信网是否有失信记录：</label>
-                <span class="detail_inf">{{this.FormData.wnetEcutedBreatext }} </span>
-              </p>
-              <p v-show="this.InternetShow.commentS2">
-                <label class="InternetInf_right_label"> 失信记录说明： </label>
-                <span class="detail_inf">{{this.FormData.wnetEcutedBreatxt }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label blueC" @click="NewPage(1)">单位在失信网是否有失信记录：</label>
-                <span class="detail_inf">{{this.FormData.wnetHirecomBreatext }} </span>
-              </p>
-              <p v-show="this.InternetShow.commentS3">
-                <label class="InternetInf_right_label"> 单位失信记录说明： </label>
-                <span class="detail_inf">{{this.FormData.wnetHirecomBreatxt }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label blueC" @click="NewPage(2)">网上搜索借款人手机是否有异常：</label>
-                <span class="detail_inf">{{this.FormData.wnetPhonetext }} </span>
-              </p>
-              <p v-show="this.InternetShow.commentS4">
-                <label class="InternetInf_right_label"> 手机异常信息说明： </label>
-                <span class="detail_inf">{{this.FormData.wnetPhonetxt }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label blueC" @click="NewPage(2)">网搜单位名称是否有异常：</label>
-                <span class="detail_inf">{{this.FormData.wnetHirecomNametext }} </span>
-              </p>
-              <p v-show="this.InternetShow.commentS5">
-                <label class="InternetInf_right_label"> 单位名称异常信息说明： </label>
-                <span class="detail_inf">{{this.FormData.wnetHirecomNametxt }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label blueC" @click="NewPage(2)">网搜单位电话是否有异常：</label>
-                <span class="detail_inf">{{this.FormData.wnetHirecomPhonetext }} </span>
-              </p>
-              <p v-show="this.InternetShow.commentS6">
-                <label class="InternetInf_right_label"> 单位电话异常信息说明： </label>
-                <span class="detail_inf">{{this.FormData.wnetHirecomPhonetxt }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label blueC" @click="NewPage(2)">网上搜索借款人现居住地址和房产地址是否有异常：</label>
-                <span class="detail_inf">{{this.FormData.wnetAddrandEstatetext }} </span>
-              </p>
-              <p v-show="this.InternetShow.commentS7">
-                <label class="InternetInf_right_label"> 地址异常信息说明： </label>
-                <span class="detail_inf">{{this.FormData.wnetAddrandEstatetxt }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label blueC" @click="NewPage(2)">网搜单位地址是否有异常：</label>
-                <span class="detail_inf">{{this.FormData.wnetHirecomAddresstext }} </span>
-              </p>
-              <p v-show="this.InternetShow.commentS8">
-                <label class="InternetInf_right_label"> 单位地址异常信息说明： </label>
-                <span class="detail_inf">{{this.FormData.wnetHirecomAddresstxt }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label blueC" @click="NewPage(3)">当地工商网查询企业基本信息中是否有登记：</label>
-                <span class="detail_inf">{{this.FormData.wnetCompanytext }} </span>
-              </p>
-              <p v-show="this.InternetShow.commentS9">
-                <label class="InternetInf_right_label"> 工商登记信息说明： </label>
-                <span class="detail_inf">{{this.FormData.wnetCompanytxt }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label blueC" @click="NewPage(4)">客户工作单位在全国组织代码查询中是否存在：</label>
-                <span class="detail_inf">{{this.FormData.wnetAddrstatetext }} </span>
-              </p>
-              <p v-show="this.InternetShow.commentS10" class="bottom">
-                <label class="InternetInf_right_label"> 组织机构代码信息说明： </label>
-                <span class="detail_inf">{{this.FormData.wnetAddrstatetxt }} </span>
-              </p>
-            </li>
+            <div class=" CreditForm_div_border clearFix">
+              <li class="label_width_210">
+                <label class=" label_width_210 blueC" @click="NewPage(0)">客户在法网是否有被执行信息：</label>
+                <span>{{this.FormData.wbeexEcutedtext}} </span>
+              </li>
+              <li class='li_triplet_two_rows' v-show="this.InternetShow.commentS">
+                <label class="label_width_210"> 执行信息说明： </label>
+                <span class="text_area_span text_area_span_minus220">{{this.FormData.wbeexEcutedtxt}} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class=" label_width_210 blueC" @click="NewPage(0)">单位在法网是否有被执行信息：</label>
+                <span>{{this.FormData.wnetHirecomtext}} </span>
+              </li>
+              <li class='li_triplet_two_rows' v-show="this.InternetShow.commentS1">
+                <label class="label_width_210"> 单位执行信息说明：</label>
+                <span class="text_area_span text_area_span_minus220">{{this.FormData.wnetHirecomtxt }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class=" label_width_210 blueC" @click="NewPage(1)">客户在失信网是否有失信记录：</label>
+                <span>{{this.FormData.wnetEcutedBreatext }} </span>
+              </li>
+              <li class='li_triplet_two_rows' v-show="this.InternetShow.commentS2">
+                <label class="label_width_210"> 失信记录说明： </label>
+                <span class="text_area_span text_area_span_minus220">{{this.FormData.wnetEcutedBreatxt }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class=" label_width_210 blueC" @click="NewPage(1)">单位在失信网是否有失信记录：</label>
+                <span>{{this.FormData.wnetHirecomBreatext }} </span>
+              </li>
+              <li class='li_triplet_two_rows' v-show="this.InternetShow.commentS3">
+                <label class="label_width_210"> 单位失信记录说明： </label>
+                <span class="text_area_span text_area_span_minus220">{{this.FormData.wnetHirecomBreatxt }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class=" label_width_210 blueC" @click="NewPage(2)">网上搜索借款人手机是否有异常：</label>
+                <span>{{this.FormData.wnetPhonetext }} </span>
+              </li>
+              <li class='li_triplet_two_rows' v-show="this.InternetShow.commentS4">
+                <label class="label_width_210"> 手机异常信息说明： </label>
+                <span class="text_area_span text_area_span_minus220">{{this.FormData.wnetPhonetxt }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class=" label_width_210 blueC" @click="NewPage(2)">网搜单位名称是否有异常：</label>
+                <span>{{this.FormData.wnetHirecomNametext }} </span>
+              </li>
+              <li class='li_triplet_two_rows' v-show="this.InternetShow.commentS5">
+                <label class="label_width_210"> 单位名称异常信息说明： </label>
+                <span class="text_area_span text_area_span_minus220">{{this.FormData.wnetHirecomNametxt }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class=" label_width_210 blueC" @click="NewPage(2)">网搜单位电话是否有异常：</label>
+                <span>{{this.FormData.wnetHirecomPhonetext }} </span>
+              </li>
+              <li class='li_triplet_two_rows' v-show="this.InternetShow.commentS6">
+                <label class="label_width_210"> 单位电话异常信息说明： </label>
+                <span class="text_area_span text_area_span_minus220">{{this.FormData.wnetHirecomPhonetxt }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_height_48 label_width_210 blueC" @click="NewPage(2)">网上搜索借款人现居住地址和房产地址是否有异常：</label>
+                <span>{{this.FormData.wnetAddrandEstatetext }} </span>
+              </li>
+              <li class='li_triplet_two_rows' v-show="this.InternetShow.commentS7">
+                <label class="label_width_210"> 地址异常信息说明： </label>
+                <span class="text_area_span text_area_span_minus220">{{this.FormData.wnetAddrandEstatetxt }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class=" label_width_210 blueC" @click="NewPage(2)">网搜单位地址是否有异常：</label>
+                <span>{{this.FormData.wnetHirecomAddresstext }} </span>
+              </li>
+              <li class='li_triplet_two_rows' v-show="this.InternetShow.commentS8">
+                <label class="label_width_210"> 单位地址异常信息说明： </label>
+                <span class="text_area_span text_area_span_minus220">{{this.FormData.wnetHirecomAddresstxt }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class=" label_width_210 blueC" @click="NewPage(3)">当地工商网查询企业基本信息中是否有登记：</label>
+                <span>{{this.FormData.wnetCompanytext }} </span>
+              </li>
+              <li class='li_triplet_two_rows' v-show="this.InternetShow.commentS9">
+                <label class="label_width_210"> 工商登记信息说明： </label>
+                <span class="text_area_span text_area_span_minus220">{{this.FormData.wnetCompanytxt }} </span>
+              </li>
+            </div>
+            <div>
+              <li>
+                <label class=" label_width_210 blueC" @click="NewPage(4)">客户工作单位在全国组织代码查询中是否存在：</label>
+                <span>{{this.FormData.wnetAddrstatetext }} </span>
+              </li>
+              <li class='li_triplet_two_rows' v-show="this.InternetShow.commentS10">
+                <label class="label_width_210"> 组织机构代码信息说明： </label>
+                <span class="text_area_span text_area_span_minus220">{{this.FormData.wnetAddrstatetxt }} </span>
+              </li>
+            </div>
           </ul>
         </div>
       </el-collapse-item>
@@ -150,57 +148,48 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">核实身份</span>
         </template>
-        <div class="CreditForm_CheckId">
-          <ul class="CreditForm_CheckId_ul_left">
-            <li class="top">
-              <p>
-                <label class="InternetInf_left_label">接听者是否是借款人本人：</label>
-                <span class="detail_inf">{{this.FormData.iisselftext }} </span>
-              </p>
-              <p v-show="this.checkId.declearNloaned">
-                <label class=" InternetInf_right_label "> 接听说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.iisselftxt==null||this.FormData.iisselftxt==''" :content="this.FormData.iisselftxt"
-                  placement="top-start">
-                  <span class="detail_inf">{{this.FormData.iisselftxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li>
-              <p v-show="this.checkId.declearNloaned">
-                <label class="InternetInf_left_label">是否在我司申请借款：</label>
-                <span class="detail_inf">{{this.FormData.iloanBeforetext }} </span>
-              </p>
-              <p v-show="this.checkId.loanNot">
-                <label class=" InternetInf_right_label "> 说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.iloanBeforetxt==null||this.FormData.iloanBeforetxt==''" :content="this.FormData.iloanBeforetxt"
-                  placement="top-start">
-                  <span class="detail_inf">{{this.FormData.iloanBeforetxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li>
-              <p v-show="this.checkId.loanNot">
-                <label class="InternetInf_left_label">借款金额[元]：</label>
-                <span class="detail_inf">{{this.FormData.iloanAmt }} </span>
-              </p>
-              <p v-show="this.checkId.loanNot">
-                <label class=" InternetInf_right_label "> 借款期限[月]： </label>
-                <span class="detail_inf" style="border:none;padding:0;height:auto;">{{this.FormData.iloanTerm }} </span>
-              </p>
-            </li>
-            <li>
-              <p v-show="this.checkId.loanNot">
-                <label class="InternetInf_left_label">借款用途：</label>
-                <span class="detail_inf">{{this.FormData.iloanPurposetext }} </span>
-              </p>
-              <p v-show="this.checkId.loanNot" class="bottom">
-                <label class=" InternetInf_right_label "> 借款用途详细说明： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.iloanPurposetxt==null||this.FormData.iloanPurposetxt==''"
-                  :content="this.FormData.iloanPurposetxt" placement="top-start">
-                  <span class="detail_inf">{{this.FormData.iloanPurposetxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
+          <ul>
+            <div class=" clearFix">
+              <li>
+                <label class="label_width_210">接听者是否是借款人本人：</label>
+                <span>{{this.FormData.iisselftext }} </span>
+              </li>
+              <li class="li_triplet_two_rows" v-if="this.checkId.declearNloaned">
+                <label class=" label_width_210 "> 接听说明： </label>
+                <span class="text_area_span text_area_span_minus220">{{this.FormData.iisselftxt }} </span>
+              </li>
+            </div>
+            <div class=" border_top clearFix" v-if="this.checkId.declearNloaned">
+              <li>
+                <label class="label_width_210">是否在我司申请借款：</label>
+                <span>{{this.FormData.iloanBeforetext }} </span>
+              </li>
+              <li class="li_triplet_two_rows" v-if="this.checkId.loanNot">
+                <label class=" label_width_210 "> 说明： </label>
+                <span class="text_area_span text_area_span_minus220">{{this.FormData.iloanBeforetxt }} </span>
+              </li>
+            </div>
+            <div class=" border_top clearFix" v-if="this.checkId.loanNot">
+              <li>
+                <label class="label_width_210">借款金额[元]：</label>
+                <span>{{this.FormData.iloanAmt }} </span>
+              </li>
+              <li>
+                <label class=" label_width_210 "> 借款期限[月]： </label>
+                <span>{{this.FormData.iloanTerm }} </span>
+              </li>
+            </div>
+            <div class=" border_top clearFix" v-if="this.checkId.loanNot">
+              <li>
+                <label class="label_width_210">借款用途：</label>
+                <span>{{this.FormData.iloanPurposetext }} </span>
+              </li>
+              <li i class="li_triplet_two_rows">
+                <label class=" label_width_210 "> 借款用途详细说明： </label>
+                <span>{{this.FormData.iloanPurposetxt }} </span>
+              </li>
+            </div>
           </ul>
         </div>
       </el-collapse-item>
@@ -210,80 +199,76 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">工作信息</span>
         </template>
-        <div class="CreditForm_WorkInfs" style="padding-top:5px">
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-            <li style="width:100%;paddingBottom:5px;">
-              <label class="InternetInf_left_label">工作单位：</label>
-              <span class="detail_inf">{{this.FormData.hirecomName }} </span>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label">单位性质：</label>
-                <span class="detail_inf">{{this.FormData.hirecomSigntext }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label">所属行业：</label>
-                <span class="detail_inf">{{this.FormData.hirecomKind}} </span>
-              </p>
-              <p>
-                <label class=" CheckId_right_label ">所在部门： </label>
-                <span class="detail_inf">{{this.FormData.hiredepartment }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label "> 职位级别： </label>
+            <div class=" CreditForm_div_border clearFix">
+              <li class="li_one_row">
+                <label class="label_width_210">工作单位：</label>
+                <span>{{this.FormData.hirecomName }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_210">单位性质：</label>
+                <span>{{this.FormData.hirecomSigntext }} </span>
+              </li>
+              <li>
+                <label class="label_width_210">所属行业：</label>
+                <span>{{this.FormData.hirecomKind}} </span>
+              </li>
+              <li>
+                <label class="label_width_210">所在部门： </label>
+                <span>{{this.FormData.hiredepartment }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_210"> 职位级别：</label>
                 <span class="detail_inf elips">{{this.FormData.workPost }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label">单位电话：</label>
-                <span class="detail_inf">{{this.FormData.workTel }} </span>
-              </p>
-              <p>
-                <label class=" CheckId_right_label "> 入职时间： </label>
-                <span class="detail_inf">{{this.FormData.entryDate }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label">月均工资[元]：</label>
-                <span class="detail_inf">{{this.FormData.avgsalaryamt }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label">每月发薪日：</label>
-                <span class="detail_inf">{{this.FormData.payDay }} </span>
-              </p>
-              <p>
-                <label class=" CheckId_right_label ">工资发放形式： </label>
-                <span class="detail_inf">{{this.FormData.hirecomPaymentTypetext }} </span>
-              </p>
-            </li>
-            <li class="company_address_select">
-              <p style="width:66.6%">
-                <label class="InternetInf_left_label ">单位地址 ：</label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.addressMsg==null||this.FormData.addressMsg==''" :content="this.FormData.addressMsg"
-                  placement="top-start">
-                  <span class="detail_inf elips">{{this.FormData.addressMsg}} </span>
-                </el-tooltip>
-              </p>
-              <p>
-                <label class=" CheckId_right_label "> 单位地址邮编： </label>
-                <span class="detail_inf">{{this.FormData.workZip }} </span>
-              </p>
-            </li>
-            <li>
-              <p style="width: 66.6%;" class="bottom">
-                <label class="InternetInf_left_label">前单位名称：</label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.hirelastComname==null||this.FormData.hirelastComname==''"
-                  :content="this.FormData.hirelastComname" placement="top-start">
-                  <span class="detail_inf elips">{{this.FormData.hirelastComname }} </span>
-                </el-tooltip>
-              </p>
-              <p>
-                <label class=" CheckId_right_label "> 是否为私营业主： </label>
-                <span class="detail_inf">{{this.FormData.privateOwnerFlagtext}} </span>
-              </p>
-            </li>
+              </li>
+              <li>
+                <label class="label_width_210">单位电话：</label>
+                <span>{{this.FormData.workTel }} </span>
+              </li>
+              <li>
+                <label class=" label_width_210"> 入职时间： </label>
+                <span>{{this.FormData.entryDate }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_210">月均工资[元]：</label>
+                <span>{{this.FormData.avgsalaryamt }} </span>
+              </li>
+              <li>
+                <label class="label_width_210">每月发薪日：</label>
+                <span>{{this.FormData.payDay }} </span>
+              </li>
+              <li>
+                <label class=" label_width_210">工资发放形式： </label>
+                <span>{{this.FormData.hirecomPaymentTypetext }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li class="li_triplet_two_rows">
+                <label class="label_width_210">单位地址：</label>
+                <span class="detail_inf elips">{{this.FormData.addressMsg}} </span>
+              </li>
+              <li>
+                <label class=" label_width_210"> 单位地址邮编：</label>
+                <span>{{this.FormData.workZip }} </span>
+              </li>
+            </div>
+            <div>
+              <li>
+                <label class="label_width_210">前单位名称：</label>
+                <span class="detail_inf elips">{{this.FormData.hirelastComname }} </span>
+              </li>
+              <li>
+                <label class=" label_width_210 "> 是否为私营业主： </label>
+                <span>{{this.FormData.privateOwnerFlagtext}} </span>
+              </li>
+            </div>
           </ul>
         </div>
       </el-collapse-item>
@@ -293,80 +278,79 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">私营企业信息</span>
         </template>
-        <div class="CreditForm_CompanyInfs" v-show="this.workInf.private">
+        <!-- <div class="CreditForm_CompanyInfs" v-show="this.workInf.private"> -->
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-            <li class="top">
-              <p>
-                <label class="InternetInf_left_label ">企业类型：</label>
-                <span class="detail_inf">{{this.FormData.selfTypetext }} </span>
-              </p>
-              <p>
-                <label class=" InternetInf_right_label "> 公司注册时间： </label>
-                <span class="detail_inf">{{this.FormData.compegDate }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label ">注册资金[万元]：</label>
-                <span class="detail_inf">{{this.FormData.regcapitalamt }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label">占股比例：</label>
-                <span class="detail_inf">{{this.FormData.selfhasProportion }} </span>
-              </p>
-              <p>
-                <label class=" CheckId_right_label "> 经营场所：</label>
-                <span class="detail_inf">{{this.FormData.selfpremisestext }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label ">月还款额/租金[万元]：</label>
-                <span class="detail_inf">{{this.FormData.monthrentamt }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label">营业面积：</label>
-                <span class="detail_inf">{{this.FormData.selfpremisesArea }} </span>
-              </p>
-              <p>
-                <label class=" CheckId_right_label "> 员工人数： </label>
-                <span class="detail_inf">{{this.FormData.selfempCount }} </span>
-              </p>
-            </li>
-            <li>
-              <p style="width:66.6%">
-                <label class=" InternetInf_left_label">企业经营项目：</label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.projectManage==null||this.FormData.projectManage==''" :content="this.FormData.projectManage"
-                  placement="top-start">
-                  <span class="detail_inf ComAddr">{{this.FormData.projectManage }} </span>
-                </el-tooltip>
-              </p>
-              <p>
-                <label class=" CheckId_right_label "> 每月净利润额[万元]：</label>
-                <span class="detail_inf">{{this.FormData.profitamountmamt }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label ">近一年利润[万元]：</label>
-                <span class="detail_inf">{{this.FormData.oneYearProfitamt }} </span>
-              </p>
-              <p class="bottom">
-                <label class="InternetInf_right_label">第一供销商：</label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.firstSuppliers==null||this.FormData.firstSuppliers==''" :content="this.FormData.firstSuppliers"
-                  placement="top-start">
-                  <span class="detail_inf elips">{{this.FormData.firstSuppliers }} </span>
-                </el-tooltip>
-              </p>
-              <p>
-                <label class="CheckId_right_label "> 第一分销商： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.firstDistributor==null||this.FormData.firstDistributor==''"
-                  :content="this.FormData.firstDistributor" placement="top-start">
-                  <span class="detail_inf distributor">{{this.FormData.firstDistributor }} </span>
-
-                </el-tooltip>
-              </p>
-            </li>
+            <div class=" CreditForm_div_border clearFix">
+              <li class="li_one_row">
+                <label class="label_width_210 ">企业类型：</label>
+                <span>{{this.FormData.selfTypetext }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li class="li_triplet_two_rows">
+                <label class=" label_width_210 "> 公司注册时间： </label>
+                <span>{{this.FormData.compegDate }} </span>
+              </li>
+              <li>
+                <label class="label_width_210"> 经营场所：</label>
+                <span>{{this.FormData.selfpremisestext }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li class="li_triplet_two_rows">
+                <label class="label_width_210 ">注册资金[万元]：</label>
+                <span>{{this.FormData.regcapitalamt }} </span>
+              </li>
+              <li>
+                <label class="label_width_210 "> 员工人数：</label>
+                <span>{{this.FormData.selfempCount }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li class="li_triplet_two_rows">
+                <label class="label_width_210">占股比例：</label>
+                <span>{{this.FormData.selfhasProportion }} </span>
+              </li>
+              <li>
+                <label class=" label_width_210 "> 每月净利润额[万元]：</label>
+                <span>{{this.FormData.profitamountmamt }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_210 ">月还款额/租金[万元]：</label>
+                <span>{{this.FormData.monthrentamt }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li class="li_triplet_two_rows">
+                <label class="label_width_210">营业面积：</label>
+                <span>{{this.FormData.selfpremisesArea }} </span>
+              </li>
+              <li>
+                <label class="label_width_210">第一供销商：</label>
+                <span>{{this.FormData.firstSuppliers }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li class="li_triplet_two_rows">
+                <label class="label_width_210 ">企业经营项目：</label>
+                <span class="text_area_span text_area_span_minus220">{{this.FormData.projectManage }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_210 ">近一年利润[万元]：</label>
+                <span>{{this.FormData.oneYearProfitamt }} </span>
+              </li>
+            </div>
+            <div class="  clearFix">
+              <li class="li_one_row">
+                <label class="label_width_210 "> 第一分销商： </label>
+                <span class="text_area_span_minus220">{{this.FormData.firstDistributor }} </span>
+              </li>
+            </div>
           </ul>
         </div>
       </el-collapse-item>
@@ -376,170 +360,148 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">家庭信息</span>
         </template>
-        <div class="CreditForm_FamilyInf">
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-            <li>
-              <p class="top">
-                <label class="InternetInf_left_label ">婚姻状况：</label>
-                <span class="detail_inf">{{this.FormData.fmarrflagtext }} </span>
-              </p>
-            </li>
-            <li v-show=" this.marriage.couple">
-              <p>
-                <label class="InternetInf_left_label ">配偶工作情况：</label>
-                <span class="detail_inf">{{this.FormData.spouseWorktext }} </span>
-              </p>
-            </li>
-            <li v-show=" this.marriage.workingCondition">
-              <p>
-                <label class="InternetInf_left_label ">配偶工作类型：</label>
-                <span class="detail_inf">{{this.FormData.spouseWorktypetext }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label"> 配偶收入情况[月/元]： </label>
-                <span class="detail_inf" style="border:none;verticalAlign:middle;height:auto;">{{this.FormData.spouseIncome }} </span>
-              </p>
-            </li>
-            <li v-show=" this.marriage.couple">
-              <p>
-                <label class=" InternetInf_left_label">是否在同一个城市工作生活：</label>
-                <span class="detail_inf">{{this.FormData.spouseSamecitytext }} </span>
-              </p>
-              <p v-show="this.marriage.workingLivingInf">
-                <label class="InternetInf_right_label"> 在同一个城市工作生活信息： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.spouseSamecitytxt==null||this.FormData.spouseSamecitytxt==''"
-                  :content="this.FormData.spouseSamecitytxt" placement="top-start">
-                  <span class="detail_inf family">{{this.FormData.spouseSamecitytxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label ">是否有子女：</label>
-                <span class="detail_inf">{{this.FormData.childFlagtext }} </span>
-              </p>
-            </li>
-            <li v-show="this.Children.ChildrenOrNot">
-              <p>
-                <label class="InternetInf_left_label ">子女数量：</label>
-                <span class="detail_inf">{{this.FormData.childCount }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label"> 子女数量备注： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.childCounttxt==null||this.FormData.childCounttxt==''" :content="this.FormData.childCounttxt"
-                  placement="top-start">
-                  <span class="detail_inf family">{{this.FormData.childCounttxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li v-show="this.Children.ChildrenOrNot">
-              <p>
-                <label class="InternetInf_left_label ">子女现状：</label>
-                <span class="detail_inf">{{this.FormData.childStatustext }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label"> 子女现状备注： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.childStatustxt==null||this.FormData.childStatustxt==''" :content="this.FormData.childStatustxt"
-                  placement="top-start">
-                  <span class="detail_inf">{{this.FormData.childStatustxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li v-show="this.Children.ChildrenOrNot">
-              <p>
-                <label class="InternetInf_left_label ">子女是否在身边：</label>
-                <span class="detail_inf">{{this.FormData.childTogethertext }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label"> 是否支付其生活费： </label>
-                <span class="detail_inf" style="border:none;verticalAlign:middle;height:auto;">{{this.FormData.childIspaycosttext }} </span>
-              </p>
-            </li>
-            <li v-show="this.Children.PayAlimony">
-              <p>
-                <label class="InternetInf_left_label "> 生活费支付额度[元]： </label>
-                <span class="detail_inf">{{this.FormData.childPaycostamt }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label ">父母是否在世：</label>
-                <span class="detail_inf">{{this.FormData.parentIslivingtext }} </span>
-              </p>
-              <p v-show="this.parent.livingOrNot">
-                <label class="InternetInf_right_label"> 父母备注： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.parentIslivingtxt==null||this.FormData.parentIslivingtxt==''"
-                  :content="this.FormData.parentIslivingtxt" placement="top-start">
-                  <span class="detail_inf family">{{this.FormData.parentIslivingtxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li v-show="this.parent.livingOrNot">
-              <p>
-                <label class="InternetInf_left_label ">父母身体状况：</label>
-                <span class="detail_inf">{{this.FormData.parentHealthtext }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label"> 父母身体状况备注： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.parentHealthtxt==null||this.FormData.parentHealthtxt==''"
-                  :content="this.FormData.parentHealthtxt" placement="top-start">
-                  <span class="detail_inf family">{{this.FormData.parentHealthtxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li v-show="this.parent.livingOrNot">
-              <p>
-                <label class="InternetInf_left_label ">父母是否需要赡养：</label>
-                <span class="detail_inf">{{this.FormData.parentPayalimonytext }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label"> 父母是否需要赡养备注： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.parentPayalimonytxt==null||this.FormData.parentPayalimonytxt==''"
-                  :content="this.FormData.parentPayalimonytxt" placement="top-start">
-                  <span class="detail_inf family">{{this.FormData.parentPayalimonytxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li v-show="this.parent.livingOrNot">
-              <p>
-                <label class="InternetInf_left_label ">父母工作情况：</label>
-                <span class="detail_inf">{{this.FormData.parentWorktext }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label"> 父母收入[元]： </label>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_210 ">婚姻状况：</label>
+                <span>{{this.FormData.fmarrflagtext }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix" v-show=" this.marriage.couple">
+              <li>
+                <label class=" label_width_210  ">配偶工作情况：</label>
+                <span>{{this.FormData.spouseWorktext }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix" v-show=" this.marriage.workingCondition">
+              <li>
+                <label class=" label_width_210  ">配偶工作类型：</label>
+                <span>{{this.FormData.spouseWorktypetext }} </span>
+              </li>
+              <li>
+                <label class=" label_width_210 "> 配偶收入情况[月/元]： </label>
+                <span style="border:none;verticalAlign:middle;height:auto;">{{this.FormData.spouseIncome }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix" v-show=" this.marriage.couple">
+              <li>
+                <label class=" label_width_210  ">是否在同一个城市工作生活：</label>
+                <span>{{this.FormData.spouseSamecitytext }} </span>
+              </li>
+              <li v-show="this.marriage.workingLivingInf" class='li_triplet_two_rows'>
+                <label class="label_width_210"> 在同一个城市工作生活信息： </label>
+                <span class="text_area_span text_area_span_minus220">{{this.FormData.spouseSamecitytxt }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_210 ">是否有子女：</label>
+                <span>{{this.FormData.childFlagtext }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix" v-show="this.Children.ChildrenOrNot">
+              <li>
+                <label class="label_width_210 ">子女数量：</label>
+                <span>{{this.FormData.childCount }} </span>
+              </li>
+              <li class='li_triplet_two_rows'>
+                <label class="label_width_210"> 子女数量备注： </label>
+                <span class="text_area_span text_area_span_minus220">{{this.FormData.childCounttxt }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix" v-show="this.Children.ChildrenOrNot">
+              <li>
+                <label class="label_width_210 ">子女现状：</label>
+                <span>{{this.FormData.childStatustext }} </span>
+              </li>
+              <li class='li_triplet_two_rows'>
+                <label class="label_width_210"> 子女现状备注： </label>
+                <span class="text_area_span text_area_span_minus220">{{this.FormData.childStatustxt }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix" v-show="this.Children.ChildrenOrNot">
+              <li>
+                <label class=" label_width_210">子女是否在身边：</label>
+                <span>{{this.FormData.childTogethertext }} </span>
+              </li>
+              <li>
+                <label class="label_width_210"> 是否支付其生活费： </label>
+                <span style="border:none;verticalAlign:middle;height:auto;">{{this.FormData.childIspaycosttext }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix" v-show="this.Children.PayAlimony">
+              <li>
+                <label class="label_width_210 "> 生活费支付额度[元]： </label>
+                <span>{{this.FormData.childPaycostamt }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_210 ">父母是否在世：</label>
+                <span>{{this.FormData.parentIslivingtext }} </span>
+              </li>
+              <li v-show="this.parent.livingOrNot" class='li_triplet_two_rows'>
+                <label class="label_width_210 ">父母备注：</label>
+                <span class="text_area_span text_area_span_minus220">{{this.FormData.parentIslivingtxt }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix" v-show="this.parent.livingOrNot">
+              <li>
+                <label class=" label_width_210">父母身体状况：</label>
+                <span>{{this.FormData.parentHealthtext }} </span>
+              </li>
+              <li class='li_triplet_two_rows'>
+                <label class="label_width_210"> 父母身体状况备注： </label>
+                <span class="text_area_span text_area_span_minus220">{{this.FormData.parentHealthtxt }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix" v-show="this.parent.livingOrNot">
+              <li>
+                <label class=" label_width_210">父母是否需要赡养：</label>
+                <span>{{this.FormData.parentPayalimonytext }} </span>
+              </li>
+              <li class='li_triplet_two_rows'>
+                <label class="label_width_210"> 父母是否需要赡养备注： </label>
+                <span class="text_area_span text_area_span_minus220">{{this.FormData.parentPayalimonytxt }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix" v-show="this.parent.livingOrNot">
+              <li>
+                <label class=" label_width_210">父母工作情况：</label>
+                <span>{{this.FormData.parentWorktext }} </span>
+              </li>
+              <li>
+                <label class="label_width_210"> 父母收入[元]： </label>
                 <span style="border:none;">{{this.FormData.parentIncome }} </span>
-
-              </p>
-            </li>
-            <li v-show="this.parent.livingOrNot">
-              <p>
-                <label class="InternetInf_left_label ">父母是否知情：</label>
-                <span class="detail_inf">{{this.FormData.parentInformedtext }} </span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label ">是否有兄弟姐妹：</label>
-                <span class="detail_inf">{{this.FormData.brothersIfhastext }} </span>
-              </p>
-              <p v-show="this.siblings.siblingsOrNot">
-                <label class="InternetInf_right_label"> 是否有兄弟姐妹备注： </label>
-                <el-tooltip class="item" effect="dark" :disabled="this.FormData.brothersIfhastxt==null||this.FormData.brothersIfhastxt==''"
-                  :content="this.FormData.brothersIfhastxt" placement="top-start">
-                  <span class="detail_inf">{{this.FormData.brothersIfhastxt }} </span>
-                </el-tooltip>
-              </p>
-            </li>
-            <li>
-              <p>
-                <label class="InternetInf_left_label ">个人/家庭月开销[元]：</label>
-                <span class="detail_inf">{{this.FormData.fconsumption }} </span>
-              </p>
-              <p class="bottom">
-                <label class="InternetInf_right_label">可以承受的月还款[元]： </label>
-                <span class="detail_inf" style="border:none;verticalAlign:middle;height:auto;">{{this.FormData.fbalance }} </span>
-              </p>
-            </li>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix" v-show="this.parent.livingOrNot">
+              <li>
+                <label class=" label_width_210">父母是否知情：</label>
+                <span>{{this.FormData.parentInformedtext }} </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class=" label_width_210">是否有兄弟姐妹：</label>
+                <span>{{this.FormData.brothersIfhastext }} </span>
+              </li>
+              <li v-show="this.siblings.siblingsOrNot">
+                <label class="label_width_210"> 是否有兄弟姐妹备注： </label>
+                <span>{{this.FormData.brothersIfhastxt }} </span>
+              </li>
+            </div>
+            <div>
+              <li>
+                <label class="label_width_210">个人/家庭月开销[元]：</label>
+                <span>{{this.FormData.fconsumption }} </span>
+              </li>
+              <li>
+                <label class="label_width_210">可以承受的月还款[元]： </label>
+                <span>{{this.FormData.fbalance }} </span>
+              </li>
+            </div>
           </ul>
         </div>
       </el-collapse-item>
@@ -549,19 +511,15 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">居住情况</span>
         </template>
-        <div class="CreditForm_live">
-          <ul>
-            <li class="top">
-              <p>
-                <label class="InternetInf_left_label ">同住者关系：</label>
-                <span class="detail_inf">{{this.FormData.livingHouseHoldstext }} </span>
-              </p>
-              <p>
-                <label class="InternetInf_right_label">居住房产所属情况：</label>
-                <span class="detail_inf">{{this.FormData.livingEstateBelongstext }} </span>
-              </p>
-            </li>
-          </ul>
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
+          <div class=" CreditForm_div_border clearFix">
+            <label class=" label_width_210">同住者关系：</label>
+            <span>{{this.FormData.livingHouseHoldstext }} </span>
+          </div>
+          <div>
+            <label class="label_width_210">居住房产所属情况：</label>
+            <span>{{this.FormData.livingEstateBelongstext }} </span>
+          </div>
         </div>
       </el-collapse-item>
       <!-- 核对现住址 -->
@@ -570,24 +528,19 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">核对现住址</span>
         </template>
-        <div class="CreditForm_check_reside">
-          <ul class="CreditForm_check_reside_ul_left">
-            <li>
-              <label class="InternetInf_left_label ">现住址：</label>
-              <span class="detail_inf oneline">{{this.FormData.aaddress}}</span>
-            </li>
-            <li>
-              <label class="InternetInf_left_label ">现住地址是否为常住地址 ：</label>
-              <span class="detail_inf">{{this.FormData.aisresidenttext}} </span>
-            </li>
-          </ul>
-          <p v-show="this.address.permanent">
-            <label class="InternetInf_left_label ">常住地址 ：</label>
-            <el-tooltip class="item" effect="dark" :disabled="this.FormData.aisresidenttxt==''" :content="this.FormData.aisresidenttxt"
-              placement="top-start">
-              <span class="detail_inf ComAddr">{{this.FormData.aisresidenttxt}} </span>
-            </el-tooltip>
-          </p>
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
+          <div class=" CreditForm_div_border clearFix">
+            <label class="label_width_210 ">现住址：</label>
+            <span>{{this.FormData.aaddress}}</span>
+          </div>
+          <div class=" clearFix">
+            <label class="label_width_210 ">现住地址是否为常住地址：</label>
+            <span>{{this.FormData.aisresidenttext}} </span>
+          </div>
+          <div class="border_top" v-show="this.address.permanent">
+            <label class="label_width_210 ">常住地址：</label>
+            <span>{{this.FormData.aisresidenttxt}} </span>
+          </div>
         </div>
       </el-collapse-item>
       <!-- 电话征信结论 -->
@@ -596,47 +549,38 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">电话征信结论</span>
         </template>
-        <div class="PhontConclution">
-          <ul>
-            <li class="top">
-              <label class="InternetInf_left_label ">住址电话调查结论：</label>
-              <span class="detail_inf ComAddr">{{this.FormData.hometelConclusion }} </span>
-            </li>
-            <li>
-              <label class="InternetInf_left_label">单位电话调查结论：</label>
-              <span class="detail_inf ComAddr">{{this.FormData.companyConclusion }} </span>
-            </li>
-            <li>
-              <label class="InternetInf_left_label">家庭联系人调查结论：</label>
-              <span class="detail_inf ComAddr">{{this.FormData.fContractConclusion }} </span>
-            </li>
-            <li>
-              <label class="InternetInf_left_label">紧急联系人调查结论：</label>
-              <span class="detail_inf ComAddr">{{this.FormData.eContractConclusion }} </span>
-            </li>
-            <li class="bottom">
-              <label class="InternetInf_left_label">工作证明人调查结论：</label>
-              <span class="detail_inf ComAddr">{{this.FormData.jobRefConclusion }} </span>
-            </li>
-          </ul>
+        <div class="checkedInf checkedInf_li_width_triplet clearFix divWrap_Padding_top_4">
+          <div class=" CreditForm_div_border clearFix">
+            <label class="label_width_210 ">住址电话调查结论：</label>
+            <span class="text_area_span text_area_span_minus220">{{this.FormData.hometelConclusion }} </span>
+          </div>
+          <div class=" CreditForm_div_border clearFix">
+            <label class="label_width_210">单位电话调查结论：</label>
+            <span class="text_area_span text_area_span_minus220">{{this.FormData.companyConclusion }} </span>
+          </div>
+          <div class=" CreditForm_div_border clearFix">
+            <label class="label_width_210">家庭联系人调查结论：</label>
+            <span class="text_area_span text_area_span_minus220">{{this.FormData.fContractConclusion }} </span>
+          </div>
+          <div class=" CreditForm_div_border clearFix">
+            <label class="label_width_210">紧急联系人调查结论：</label>
+            <span class="text_area_span text_area_span_minus220">{{this.FormData.eContractConclusion }} </span>
+          </div>
+          <div>
+            <label class="label_width_210">工作证明人调查结论：</label>
+            <span class="text_area_span text_area_span_minus220">{{this.FormData.jobRefConclusion }} </span>
+          </div>
         </div>
       </el-collapse-item>
       <!-- 内部匹配结论 -->
-      <el-collapse-item name="9"  v-if="PhoneAndInterShow">
+      <el-collapse-item name="9" v-if="PhoneAndInterShow">
         <template slot="title">
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">内部匹配结论</span>
         </template>
-        <div class="interMath">
-          <ul>
-            <li class="top">
-              <label class="InternetInf_left_label">匹配调查结论：</label>
-              <el-tooltip class="item" effect="dark" :disabled="this.FormData.auditDesc==null||this.FormData.auditDesc==''" :content="this.FormData.auditDesc"
-                placement="top-start">
-                <span class="detail_inf ComAddr">{{this.FormData.auditDesc }} </span>
-              </el-tooltip>
-            </li>
-          </ul>
+        <div class="checkedInf checkedInf_li_width_triplet clearFix divWrap_Padding_top_4">
+          <label class="label_width_210">匹配调查结论：</label>
+          <span class="text_area_span text_area_span_minus220">{{this.FormData.auditDesc }} </span>
         </div>
       </el-collapse-item>
       <!-- 审批结论 -->
@@ -645,32 +589,25 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">审批结论</span>
         </template>
-        <div class=" CreditForm_result">
-          <div>
-            <ul>
-              <li>
-                <p>
-                  <label class="InternetInf_left_label" style="textAlign:right">初审结果评价：</label>
-                  <span class="detail_inf ComAddr" style="height:115px;">{{this.FormData.oother}} </span>
-                </p>
-                <p class="FinalConclution" style="position:relative" v-if="FinalConEditShow">
-                  <i class="hint">
-                    <!-- <span v-show="errors.has('Finalconclusion')">{{ errors.first('Finalconclusion') }}</span> -->
-                    <b v-show="this.finalResult"> * 输入长度不能超过500</b>
-                  </i>
-                  <label class="InternetInf_left_label" style="textAlign:right">
-                    <span style="color:#ff7676;"> * </span>终审结果评价：</label>
-                  <el-input type="textarea" :rows="5" resize="none" :maxlength="400" placeholder="请输入内容" @compositionend.native="wordarea(FormData.ootherfinal)"
-                    @keyup.native="wordarea(FormData.ootherfinal)" v-model="FormData.ootherfinal" name="Finalconclusion" v-validate="'required'">
-                  </el-input>
-                </p>
-
-              </li>
-              <li style="marginTop:4px;width:66.6%;" v-if="FinalConCheckShow">
-                <p class="InternetInf_left_label" style="textAlign:right">终审结果评价：</p>
-                <span class="detail_inf ComAddr" style="height:115px">{{this.FormData.ootherfinal}} </span>
-              </li>
-            </ul>
+        <div class="checkedInf checkedInf_li_width_triplet clearFix divWrap_Padding_top_4">
+          <div class=" CreditForm_div_border clearFix">
+            <label class="label_width_210">初审结果评价：</label>
+            <span class="text_area_span text_area_span_minus220" style="height:115px;">{{this.FormData.oother}} </span>
+          </div>
+          <div v-if="FinalConEditShow" class="  clearFix  Padding_top_10" style="position:relative">
+            <i class="hint" style='top:-5px;left:220px;'>
+              <!-- <span v-show="errors.has('Finalconclusion')">{{ errors.first('Finalconclusion') }}</span> -->
+              <b v-show="this.finalResult">输入长度不能超过500</b>
+            </i>
+            <label class="label_width_210">
+              <span style="color:#ff7676;"> * </span>终审结果评价：</label>
+            <el-input type="textarea" :rows="5" resize="none" :maxlength="400" placeholder="请输入内容" @compositionend.native="wordarea(FormData.ootherfinal)"
+              @keyup.native="wordarea(FormData.ootherfinal)" v-model="FormData.ootherfinal" name="Finalconclusion" v-validate="'required'">
+            </el-input>
+          </div>
+          <div class="  clearFix" v-if="FinalConCheckShow">
+            <label class="label_width_210">终审结果评价：</label>
+            <span class="text_area_span text_area_span_minus220" style="height:115px">{{this.FormData.ootherfinal}} </span>
           </div>
         </div>
       </el-collapse-item>
@@ -823,9 +760,9 @@
         default: false,
         type: Boolean
       },
-      PhoneAndInterShow:{
-        default:true,
-        type:Boolean
+      PhoneAndInterShow: {
+        default: true,
+        type: Boolean
       },
       makeSureBtnShow: {
         default: false,
@@ -836,9 +773,9 @@
         default: false,
         type: Boolean
       },
-      applyId:{
-        default:'',
-        required:true,
+      applyId: {
+        default: '',
+        required: true,
       }
     },
     methods: {
@@ -866,7 +803,7 @@
       CFsave() {
         this.post("/creauditInfo/updateOtherfinalByPK", {
           // applyId: this.FormData.applyId,//合并之前
-           applyId: this.applyId,
+          applyId: this.applyId,
           id: this.FormData.id,
           ootherfinal: this.FormData.ootherfinal
         }).then(res => {
@@ -981,7 +918,7 @@
           // applyId: this.getParams.applyId,//合并之前
           // applyId: "00542",applyId
           applyId: this.applyId,
-          
+
         }).then(res => {
           if (res.statusCode == 200) {
             this.FormData = res.data;

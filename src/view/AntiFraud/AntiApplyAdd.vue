@@ -13,7 +13,7 @@
               <label class="label_width_190">
                 <i class="required_Red">* </i>进件编号：</label>
               <span style="display:inline-block;width:160px">{{applySubNo}}</span>
-              <el-button icon="el-icon-search" style="width: 30px;height: 30px;" @click="coverFn('shwoList')"></el-button>
+              <el-button icon="el-icon-search" style="width: 25px;height: 25px;" @click="coverFn('shwoList')"></el-button>
             </li>
             <li>
               <label class="label_width_190">客户名称：</label>

@@ -41,7 +41,7 @@
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <AborrowerInformationDetail v-if=" this.tabContent2==4"></AborrowerInformationDetail>
             <PhoneCredit v-if=" this.tabContent2==5" :addBtn="false"></PhoneCredit>
-            <AntiCreditForm :myWatch="watchData" v-if=" this.tabContent2==6"></AntiCreditForm>
+            <FCreditForm :myWatch="watchData" v-if=" this.tabContent2==6" :applyId='tastwaitingPass.applyId' :FinalConCheckShow='true'></FCreditForm>
             <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
             <aAprovalConclusion v-if=" this.tabContent2==8"></aAprovalConclusion>
             <aAntiConclusionPath v-if=" this.tabContent2==9"></aAntiConclusionPath>
@@ -59,7 +59,7 @@
   import cremark from '../FirstTrail/checkComponent/remarkDetail.vue' //备注信息
   import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息  
   import AborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料
-  import AntiCreditForm from "./matchComponent/AntiCreditForm.vue"; //信审表-反欺诈匹配文件中-与匹配查看页面信审表一致
+  import FCreditForm from "../FinalTrial/FinalComponent/FCreditForm.vue"; //信审表
   import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信
   import aAprovalConclusion from './components/aAprovalConclusion.vue' //信审审批结论轨迹
   import aAntiConclusionPath from './components/aAntiConclusionPath.vue'; //反欺诈审批结论轨迹
@@ -166,7 +166,7 @@
     },
     components: {
       AnitAudioVisual,
-      AntiCreditForm,
+      FCreditForm,
       aAntiConclusionPath,
       aAprovalConclusion,
       AntiApplyInf, //反欺诈申请信息
