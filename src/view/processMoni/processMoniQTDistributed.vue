@@ -185,12 +185,10 @@
                 </p>
                 <el-option v-for="item in flowRoleIds" :key="item.userCode" :label="item.userName" :value="item.userCode">
                   <span style="float:left;width:101px;height:34px">
-                    { { item.userName } }
-
+                    {{ item.userName }}
                   </span>
                   <span style="float:right; color:#8492a6; font-size:13px;margin-left:20px;">
-                    { { item.userCode } }
-
+                    {{ item.userCode }}
                   </span>
                 </el-option>
               </el-select>
