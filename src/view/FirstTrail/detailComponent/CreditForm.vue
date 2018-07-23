@@ -22,7 +22,7 @@
                 <i class="hint">
                   <b v-show="this.Wordhint.Internet.excude" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
-                <label class="InternetInf_right_label"> 执行信息说明： </label>
+                <label class="InternetInf_right_label"> 执行信息说明：</label>
                 <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wbeexEcutedtxt"
                   @compositionend.native="wordarea(checkData.wbeexEcutedtxt,'执行信息')" @keyup.native="wordarea(checkData.wbeexEcutedtxt,'执行信息')">
                 </el-input>

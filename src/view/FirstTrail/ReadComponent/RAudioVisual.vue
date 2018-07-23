@@ -78,17 +78,16 @@
       <p class="Small_pic_title"> 缩略图
         <img src="../../../../static/images/D625BA67-2F56-42C1-9E9D-A47AE03BA028@1x.png" class="small_pic_close" @click="SmallpicClose">
       </p>
-
       <div class="small_pic_content">
         <figure v-for="(val,index) in pngAyyrs" :key="index" class="small_pic_figure" v-show="SmallmyPic">
           <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref"
           />
           <p v-if="SmallmyPic">{{val.arcSubType}} </p>
         </figure>
-        <figure class="small_pic_figure" v-show="SmallmyPdf"  @dblclick="pdfClose()">
-          <div class="Small_pic"  @dblclick="pdfClose()">
-             <p is="RpdfDiv" ID='ReadTrilSmall' :cvsWidth='200' :cvsHeight='200' SmallClass="SmallWrap" v-bind:title="pdfArrys"  @dblclick="pdfClose()"></p> 
-             </div>
+        <figure class="small_pic_figure" v-show="SmallmyPdf" @dblclick="pdfClose()">
+          <div class="Small_pic" @dblclick="pdfClose()">
+            <p is="RpdfDiv" ID='ReadTrilSmall' :cvsWidth='200' :cvsHeight='200' SmallClass="SmallWrap" v-bind:title="pdfArrys" @dblclick="pdfClose()"></p>
+          </div>
           <p> {{pdfTitle}} </p>
         </figure>
       </div>
@@ -124,9 +123,9 @@
         pngAyyrs: [],
         myPng: false,
         myPdf: false,
-        SmallmyPic:false,
-        SmallmyPdf:false,
-        pdfTitle:'',
+        SmallmyPic: false,
+        SmallmyPdf: false,
+        pdfTitle: '',
       }
     },
     methods: {
@@ -167,11 +166,11 @@
           }
         });
       },
-      pdfClose(){
+      pdfClose() {
         console.log('ccc')
-     this.SmallPicShow = false;
-     this.showPage =  1;
-    //  this.defaultBigPicCss();
+        this.SmallPicShow = false;
+        this.showPage = 1;
+        //  this.defaultBigPicCss();
       },
       getImg(ind) {
         this.pdfArrys = [];
@@ -211,19 +210,19 @@
       },
       SmallpicClose() {
         this.SmallPicShow = false;
-        this.SmallmyPdf=false;
-        this.SmallmyPic=false;
+        this.SmallmyPdf = false;
+        this.SmallmyPic = false;
       },
       SmallpicAlert() {
         this.SmallPicShow = true;
-        if(this.myPdf){//显示pdf
-          this.SmallmyPdf=true;
-         this.SmallmyPic=false;
-         this.pdfTitle= this.pdfArrys[0].arcSubType;
-       }  else{//显示图片
-         this.SmallmyPic=true;
-         this.SmallmyPdf=false;
-       }
+        if (this.myPdf) { //显示pdf
+          this.SmallmyPdf = true;
+          this.SmallmyPic = false;
+          this.pdfTitle = this.pdfArrys[0].arcSubType;
+        } else { //显示图片
+          this.SmallmyPic = true;
+          this.SmallmyPdf = false;
+        }
       },
       pre() {
         this.smallPicInd--;
