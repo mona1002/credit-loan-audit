@@ -28,7 +28,7 @@
       </li>
       <li class="item-column3">
         <div class="left-title">
-          <span class="require-icon" style="left:80px;">*</span>来源：</div>
+          <span class="require-icon" style="left:80px;">* </span>来源：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="Hsource" placeholder="请选择来源" @change="changes('Hsource')">
@@ -41,7 +41,7 @@
       </li>
       <li class="item-column3">
         <div class="left-title">
-          <span class="require-icon" style="left:50px;">*</span>接听情况：</div>
+          <span class="require-icon" style="left:50px;">* </span>接听情况：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="Hanswer" placeholder="请选择接听情况">
@@ -56,7 +56,7 @@
       </li>
       <li class="item-column3 Phone_credit_Form_search_bottom">
         <div class="left-title">
-          <span class="require-icon" style="left:50px;">*</span>调查阶段：</div>
+          <span class="require-icon" style="left:50px;">* </span>调查阶段：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="HcheckStage" placeholder="请选择调查阶段">
@@ -91,7 +91,7 @@
       <div class="content-ul">
         <li class="item-column3">
           <div class="left-title">
-            <span class="require-icon" style="left:0px;">*</span>三方查询是否异常：</div>
+            <span class="require-icon" style="left:0px;">* </span>三方查询是否异常：</div>
           <!-- <div> -->
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <el-select v-model="HthreeQueries" placeholder="请选择调查情况" @change="changes('HthreeQueries')">
@@ -103,7 +103,7 @@
         </li>
         <li class="item-column2 item-column3-2">
           <div class="left-title" v-show="HthreeQueries =='1'">
-            <span class="require-icon" style="left:80px;">*</span>说明：</div>
+            <span class="require-icon" style="left:80px;">* </span>说明：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <div class="textarea-class2" v-show="HthreeQueries =='1'">
               <el-input v-model="HthreeQueriestxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
@@ -114,7 +114,7 @@
       <div class="content-ul">
         <li class="item-column3">
           <div class="left-title left-title2">
-            <span class="require-icon" style="top:-5px;left:0px;">*</span>微信/支付宝是否异常：</div>
+            <span class="require-icon" style="top:-5px;left:0px;">* </span>微信/支付宝是否异常：</div>
           <!-- <div> -->
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <el-select v-model="Hmobilepayment" placeholder="请选择调查情况" @change="changes('Hmobilepayment')">
@@ -126,7 +126,7 @@
         </li>
         <li class="item-column2 item-column3-2">
           <div class="left-title" v-show="Hmobilepayment=='1'">
-            <span class="require-icon" style="left:80px;">*</span>说明：</div>
+            <span class="require-icon" style="left:80px;">* </span>说明：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <div class="textarea-class2" v-show="Hmobilepayment=='1'">
               <el-input v-model="Hmobilepaymenttxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
@@ -222,7 +222,7 @@
       <div class="content-ul">
         <li class="item-column1">
           <div class="left-title">
-            <span class="require-icon" style="left:50px;">*</span>调查结果：</div>
+            <span class="require-icon" style="left:50px;">* </span>调查结果：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <div class="textarea-class">
               <el-input type="textarea" v-model="Hconclusion" :rows="5" resize=none :maxlength="500"></el-input>

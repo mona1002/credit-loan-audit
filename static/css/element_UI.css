@@ -763,7 +763,7 @@
 
 /* 信审表 ----各个  title 小帽子部分 */
 
-.CreditForm .el-collapse-item{
+.CreditForm .el-collapse-item {
   position: relative
 }
 
@@ -1814,6 +1814,12 @@ body .el-menu--horizontal .el-menu .el-submenu__title {
   font-weight: 700;
   font-size: 16px;
   vertical-align: middle;
+}
+
+.Phone_credit_Add_alert_requiredStar {
+  left: -80px;
+  line-height: 38px;
+  position: absolute;
 }
 
 /* 反欺诈 反欺诈调查 */

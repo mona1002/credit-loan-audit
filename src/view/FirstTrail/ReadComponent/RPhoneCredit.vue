@@ -1456,10 +1456,10 @@
 
   /* 必填 * */
 
-  .phone-credit .require-icon {
+  /* .phone-credit .require-icon {
       width: 0px;
     float: left;
-  }
+  } */
 
 
 

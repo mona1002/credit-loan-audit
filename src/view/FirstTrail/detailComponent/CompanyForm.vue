@@ -28,7 +28,7 @@
       </li>
       <li class="item-column3">
         <div class="left-title">
-          <span class="require-icon" style="left:80px;">*</span>来源：</div>
+          <span class="require-icon" style="left:80px;">* </span>来源：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="DanWsource" @change="changes('DanWsource')">
@@ -41,7 +41,7 @@
       </li>
       <li class="item-column3">
         <div class="left-title">
-          <span class="require-icon" style="left:50px;">*</span>接听情况：</div>
+          <span class="require-icon" style="left:50px;">* </span>接听情况：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="DanWanswer">
@@ -56,7 +56,7 @@
       </li>
       <li class="item-column3 Phone_credit_Form_search_bottom">
         <div class="left-title">
-          <span class="require-icon" style="left:50px;">*</span>调查阶段：</div>
+          <span class="require-icon" style="left:50px;">* </span>调查阶段：</div>
         <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="DanWcheckStage">
@@ -100,7 +100,7 @@
         </li>
         <li class="item-column2 item-column3-2">
           <div class="left-title" v-show="DanWphone=='01'">
-            <span class="require-icon" style="left:80px;">*</span>说明：</div>
+            <span class="require-icon" style="left:80px;">* </span>说明：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <div class="textarea-class2" v-show="DanWphone=='01'">
               <el-input v-model="DanWphonetxt" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
@@ -250,7 +250,7 @@
       <div class="content-ul">
         <li class="item-column1">
           <div class="left-title">
-            <span class="require-icon" style="left:50px;">*</span>调查结果：</div>
+            <span class="require-icon" style="left:50px;">* </span>调查结果：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <div class="textarea-class">
               <el-input type="textarea" v-model="DanWconclusion" :rows="5" resize=none :maxlength="500"></el-input>

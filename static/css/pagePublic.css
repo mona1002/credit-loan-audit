@@ -156,6 +156,12 @@
   position: relative;
 }
 
+/* 对比右侧弹出层2px间距 */
+
+.SplitScreen .AudioVisual_wrap_compare_right {
+  margin-left: 2px;
+}
+
 .SplitScreen .left,
 .SplitScreen .right {
   position: absolute;
@@ -185,7 +191,7 @@
   left: -200px;
   top: 120px;
   z-index: 10;
-  padding: 20px  20px 0 20px;
+  padding: 20px 20px 0 20px;
 }
 
 .SplitScreen .left .Left_ul li {
@@ -211,8 +217,8 @@
 
 .SplitScreen .Left_right_Title,
 .SplitScreen .right .Right_tab_title_div,
-.SplitScreen .AudioVisual_wrap_compare_left p,
-.SplitScreen .AudioVisual_wrap_compare_right p {
+.SplitScreen .AudioVisual_wrap_compare_left>p,
+.SplitScreen .AudioVisual_wrap_compare_right>p {
   font-size: 16px;
   text-align: center;
   background: rgba(0, 119, 255, 0.75);
@@ -223,10 +229,10 @@
   position: relative;
 }
 
-.SplitScreen .AudioVisual_wrap_compare_right p {
+/* .SplitScreen .AudioVisual_wrap_compare_right p {
   text-align: right;
   padding-right: 40px;
-}
+} */
 
 /* 左侧详情 content div 内容  */
 
@@ -285,20 +291,33 @@
 
 .SplitScreen .AudioVisual_wrap_compare {
   position: absolute;
-  top: 117px;
+  top: 80px;
   width: calc( 100% - 18px);
-  height: calc( 100% - 161px);
+  height: calc( 100% - 123px);
   z-index: 22;
-  min-width: 1306px;
+  min-width: 1348px;
 }
 
 /* 弹出层 - 两侧组件 content  流 */
 
 .SplitScreen .AlertContent {
-  height: calc( 100% - 48px);
+  height: calc( 100% - 40px);
   overflow: auto;
 }
 
+.AlertContent .AudioVisual_List .list_title {
+  background: #ebeef5;
+  /* font-weight: 800; */
+  color:#3b3b3b;
+  height: 35px;
+  line-height: 35px;
+}
+
+/* 对比弹出层客户名称=====================================待更改 */
+.customName{
+  text-align: right !important;
+  padding-right: 148px
+}
 /* 折叠面板title */
 
 .Abody .headFont {
@@ -321,9 +340,11 @@
 .checkedInf_li_width_triplet li {
   width: 33.3%;
 }
+
 .checkedInf_li_width_four li {
   width: 25%;
 }
+
 .checkedInf li {
   float: left;
   min-width: 200px;
@@ -332,21 +353,26 @@
   margin-top: 4px;
   /* border-bottom: 1px solid #ebeef5; */
   /* border-bottom: 1px solid red; */
-
 }
-.checkedInf .border_bottom_none{
+
+.checkedInf .border_bottom_none {
   border-bottom: none;
 }
+
 /* 查看-li宽度 */
-.checkedInf .li_one_row{
-  width:100%;
+
+.checkedInf .li_one_row {
+  width: 100%;
 }
-.checkedInf .li_triplet_two_rows{
-  width:66.6%;
+
+.checkedInf .li_triplet_two_rows {
+  width: 66.6%;
 }
-.checkedInf .li_half_two_rows{
-  width:50%;
+
+.checkedInf .li_half_two_rows {
+  width: 50%;
 }
+
 .checkedInf label {
   float: left;
   text-align: right;
@@ -405,9 +431,11 @@
 }
 
 /*查看- label宽度 */
+
 .label_width_210 {
   width: 210px;
 }
+
 .label_width_200 {
   width: 200px;
 }
@@ -431,28 +459,36 @@
 .label_width_110 {
   width: 110px;
 }
+
 /* 查看-label高度 */
+
 .checkedInf .label_height_48 {
   height: 48px;
 }
 
 /* 查看-信审表-div设置border */
-.border_top{
+
+.border_top {
   border-top: 1px solid #d8dce5;
 }
+
 .divWrap_Padding_top_4 {
   padding-top: 4px;
 }
-.Padding_top_10{
-  padding-top:10px;
+
+.Padding_top_10 {
+  padding-top: 10px;
 }
-.Padding_top_4{
-  padding-top:4px;
+
+.Padding_top_4 {
+  padding-top: 4px;
 }
-.CreditForm_div_border{
+
+.CreditForm_div_border {
   /* border-bottom: 1px solid #d8dce5;
   border-bottom: 1px solid green; */
 }
+
 /* 借款人资料 */
 
 .borrowerInformationSetail {
@@ -465,7 +501,7 @@
 
 .CreditForm li {
   /* padding-bottom: 4px; */
-  border:none;
+  border: none;
 }
 
 .CreditForm .top {
@@ -517,8 +553,6 @@
   margin-bottom: 5px;
   width: 66.6%;
 }
-
-
 
 /* 私营企业-第一分销商  */
 
@@ -575,14 +609,18 @@
 }
 
 /* --------------------------工作信息 + 私营企业--------------------- */
+
 /* 第三列p */
+
 /* .CheckId_right_label
 
 
   {
   width: 140px;
 } */
+
 /* 家庭信息 */
+
 /* .CreditForm_InternetInf p:nth-of-type(even),
 .CreditForm_CheckId p:nth-of-type(even),
 .CreditForm_FamilyInf p:nth-of-type(even)
@@ -599,11 +637,11 @@
 
 /* 上网查询 */
 
-
 .blueC:hover {
   color: rgba(0, 119, 255, 0.75);
   cursor: pointer;
 }
+
 /*------------creditform------- 核对现住址-------------------------- */
 
 /* 
@@ -835,6 +873,8 @@
 .AudioVisualLeft .list_title_div p span {
   font-size: 13px;
   cursor: pointer;
+  height: 30px;
+  line-height: 30px;
 }
 
 /* 电话征信公共样式 */

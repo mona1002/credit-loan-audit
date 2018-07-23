@@ -28,7 +28,7 @@
       </li>
       <li class="item-column3">
         <div class="left-title">
-          <span class="require-icon" style="left:80px;">*</span> 来源：</div>
+          <span class="require-icon" style="left:80px;">* </span> 来源：</div>
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="Addsource" @change="changes('Addsource')">
             <el-option label="申请表" value="00"></el-option>
@@ -39,7 +39,7 @@
       </li>
       <li class="item-column3">
         <div class="left-title">
-          <span class="require-icon" style="left:50px;">*</span> 接听情况：
+          <span class="require-icon" style="left:50px;">* </span> 接听情况：
         </div>
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="Addanswer">
@@ -53,7 +53,7 @@
       </li>
       <li class="item-column3 Phone_credit_Form_search_bottom" >
         <div class="left-title">
-          <span class="require-icon" style="left:50px;">*</span>调查阶段：</div>
+          <span class="require-icon" style="left:50px;">* </span>调查阶段：</div>
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="AddcheckStage">
             <el-option label="正在调查" value="00"></el-option>
@@ -86,7 +86,7 @@
       <div class="content-ul">
         <li class="item-column3">
           <div class="left-title">
-            <span class="require-icon" style="left:0px;">*</span>三方查询是否异常：</div>
+            <span class="require-icon" style="left:0px;">* </span>三方查询是否异常：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <el-select v-model="AddthreeQueries" @change="changes('AddthreeQueries')">
               <el-option label="否" value="0"></el-option>
@@ -96,7 +96,7 @@
         </li>
         <li class="item-column2 item-column3-2">
           <div class="left-title" v-show="AddthreeQueries=='1'">
-            <span class="require-icon" style="left:80px;">*</span>说明：</div>
+            <span class="require-icon" style="left:80px;">* </span>说明：</div>
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <div class="textarea-class2" v-show="AddthreeQueries=='1'">
               <el-input v-model="AddexceptionState" type="textarea" :rows="2" resize=none :maxlength="100"></el-input>
@@ -400,7 +400,7 @@
       </li>
       <li class="item-column1">
         <div class="left-title">
-          <span class="require-icon" style="left:50px;">*</span>调查结果：</div>
+          <span class="require-icon" style="left:50px;">* </span>调查结果：</div>
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <div class="textarea-class">
             <el-input v-model="Addconclusion" type="textarea" :rows="5" resize=none :maxlength="500"></el-input>

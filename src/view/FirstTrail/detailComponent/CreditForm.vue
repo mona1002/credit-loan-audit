@@ -263,11 +263,12 @@
               </p>
               <p v-show="this.checkId.declearNloaned">
                 <i class="hint">
-                  <b v-show="this.Wordhint.checkID.answerDec" class="internet_textarea"> 输入长度不能超过500</b>
+                  <!-- <b v-show="this.Wordhint.checkID.answerDec" class="internet_textarea"> 输入长度不能超过500</b> -->
+                    <b v-show="checkData.iisselftxt&&checkData.iisselftxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class=" InternetInf_right_label "> 接听说明： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.iisselftxt"
-                  @compositionend.native="wordarea(checkData.iisselftxt,'接听说明')" @keyup.native="wordarea(checkData.iisselftxt,'接听说明')">
+                  <!-- @compositionend.native="wordarea(checkData.iisselftxt,'接听说明')" @keyup.native="wordarea(checkData.iisselftxt,'接听说明')" -->
+                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.iisselftxt">
                 </el-input>
               </p>
             </li>
@@ -282,11 +283,14 @@
               </p>
               <p v-show="this.checkId.loanNot">
                 <i class="hint">
-                  <b v-show="this.Wordhint.checkID.Declear" class="internet_textarea"> 输入长度不能超过500</b>
+                  <!-- <b v-show="this.Wordhint.checkID.Declear" class="internet_textarea"> 输入长度不能超过500</b> -->
+                    <b v-show="checkData.iloanBeforetxt&&checkData.iloanBeforetxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
+                  
                 </i>
                 <label class=" InternetInf_right_label "> 说明： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.iloanBeforetxt"
-                  @compositionend.native="wordarea(checkData.iloanBeforetxt,'说明')" @keyup.native="wordarea(checkData.iloanBeforetxt,'说明')">
+                
+                  <!-- @compositionend.native="wordarea(checkData.iloanBeforetxt,'说明')" @keyup.native="wordarea(checkData.iloanBeforetxt,'说明')" -->
+                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.iloanBeforetxt">
                 </el-input>
               </p>
             </li>
@@ -315,11 +319,12 @@
               </p>
               <p v-show="this.checkId.loanNot" class="bottom">
                 <i class="hint">
-                  <b v-show="this.Wordhint.checkID.loanPurposed" class="internet_textarea"> 输入长度不能超过500</b>
+                  <!-- <b v-show="this.Wordhint.checkID.loanPurposed" class="internet_textarea"> 输入长度不能超过500</b> -->
+                  <b v-show="checkData.iloanPurposetxt&&checkData.iloanPurposetxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class=" InternetInf_right_label "> 借款用途详细说明： </label>
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.iloanPurposetxt"
-                  @compositionend.native="wordarea(checkData.iloanPurposetxt,'详细用途')" @keyup.native="wordarea(checkData.iloanPurposetxt,'详细用途')">
+                  <!-- @compositionend.native="wordarea(checkData.iloanPurposetxt,'详细用途')" @keyup.native="wordarea(checkData.iloanPurposetxt,'详细用途')" -->
+                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.iloanPurposetxt">
                 </el-input>
               </p>
             </li>
@@ -1643,111 +1648,111 @@
             break;
         }
       },
-      wordarea(val, el, txt) {
-        if (val.length >= 500) {
-          this.wordareaSC(val, el);
-        } else {
-          this.wordareaSCF(val, el);
-        }
-      },
-      wordareaSC(val, el) {
-        switch (el) {
-          case "执行信息":
-            this.Wordhint.Internet.excude = true;
-            break;
-          case "单位执行信息":
-            this.Wordhint.Internet.comExcude = true;
-            break;
-          case "失信记录":
-            this.Wordhint.Internet.looseCre = true;
-            break;
-          case "单位失信":
-            this.Wordhint.Internet.comLooseCre = true;
-            break;
-          case "手机异常":
-            this.Wordhint.Internet.phoneOUtS = true;
-            break;
-          case "单位名称异常":
-            this.Wordhint.Internet.ComName = true;
-            break;
-          case "单位电话异常":
-            this.Wordhint.Internet.comphoneOUtS = true;
-            break;
-          case "地址异常":
-            this.Wordhint.Internet.address = true;
-            break;
-          case "单位地址异常":
-            this.Wordhint.Internet.comAddress = true;
-            break;
-          case "工商登记":
-            this.Wordhint.Internet.loginOrNot = true;
-            break;
-          case "组织机构代码":
-            this.Wordhint.Internet.institutionCode = true;
-            break;
-          case "接听说明":
-            this.Wordhint.checkID.answerDec = true;
-            break;
-          case "说明":
-            this.Wordhint.checkID.Declear = true;
-            break;
-          case "详细用途":
-            this.Wordhint.checkID.loanPurposed = true;
-            break;
-          case "评价":
-            this.Wordhint.result = true;
-            break;
-        }
-      },
-      wordareaSCF(val, el) {
-        switch (el) {
-          case "执行信息":
-            this.Wordhint.Internet.excude = false;
-            break;
-          case "单位执行信息":
-            this.Wordhint.Internet.comExcude = false;
-            break;
-          case "失信记录":
-            this.Wordhint.Internet.looseCre = false;
-            break;
-          case "单位失信":
-            this.Wordhint.Internet.comLooseCre = false;
-            break;
-          case "手机异常":
-            this.Wordhint.Internet.phoneOUtS = false;
-            break;
-          case "单位名称异常":
-            this.Wordhint.Internet.ComName = false;
-            break;
-          case "单位电话异常":
-            this.Wordhint.Internet.comphoneOUtS = false;
-            break;
-          case "地址异常":
-            this.Wordhint.Internet.address = false;
-            break;
-          case "单位地址异常":
-            this.Wordhint.Internet.comAddress = false;
-            break;
-          case "工商登记":
-            this.Wordhint.Internet.loginOrNot = false;
-            break;
-          case "组织机构代码":
-            this.Wordhint.Internet.institutionCode = false;
-            break;
-          case "接听说明":
-            this.Wordhint.checkID.answerDec = false;
-            break;
-          case "说明":
-            this.Wordhint.checkID.Declear = false;
-            break;
-          case "详细用途":
-            this.Wordhint.checkID.loanPurposed = false;
-            break;
-          case "评价":
-            this.Wordhint.result = false;
-            break;
-        }
-      },
+      // wordarea(val, el, txt) {
+      //   if (val.length >= 500) {
+      //     this.wordareaSC(val, el);
+      //   } else {
+      //     this.wordareaSCF(val, el);
+      //   }
+      // },
+      // wordareaSC(val, el) {
+      //   switch (el) {
+      //     case "执行信息":
+      //       this.Wordhint.Internet.excude = true;
+      //       break;
+      //     case "单位执行信息":
+      //       this.Wordhint.Internet.comExcude = true;
+      //       break;
+      //     case "失信记录":
+      //       this.Wordhint.Internet.looseCre = true;
+      //       break;
+      //     case "单位失信":
+      //       this.Wordhint.Internet.comLooseCre = true;
+      //       break;
+      //     case "手机异常":
+      //       this.Wordhint.Internet.phoneOUtS = true;
+      //       break;
+      //     case "单位名称异常":
+      //       this.Wordhint.Internet.ComName = true;
+      //       break;
+      //     case "单位电话异常":
+      //       this.Wordhint.Internet.comphoneOUtS = true;
+      //       break;
+      //     case "地址异常":
+      //       this.Wordhint.Internet.address = true;
+      //       break;
+      //     case "单位地址异常":
+      //       this.Wordhint.Internet.comAddress = true;
+      //       break;
+      //     case "工商登记":
+      //       this.Wordhint.Internet.loginOrNot = true;
+      //       break;
+      //     case "组织机构代码":
+      //       this.Wordhint.Internet.institutionCode = true;
+      //       break;
+      //     case "接听说明":
+      //       this.Wordhint.checkID.answerDec = true;
+      //       break;
+      //     case "说明":
+      //       this.Wordhint.checkID.Declear = true;
+      //       break;
+      //     case "详细用途":
+      //       this.Wordhint.checkID.loanPurposed = true;
+      //       break;
+      //     case "评价":
+      //       this.Wordhint.result = true;
+      //       break;
+      //   }
+      // },
+      // wordareaSCF(val, el) {
+      //   switch (el) {
+      //     case "执行信息":
+      //       this.Wordhint.Internet.excude = false;
+      //       break;
+      //     case "单位执行信息":
+      //       this.Wordhint.Internet.comExcude = false;
+      //       break;
+      //     case "失信记录":
+      //       this.Wordhint.Internet.looseCre = false;
+      //       break;
+      //     case "单位失信":
+      //       this.Wordhint.Internet.comLooseCre = false;
+      //       break;
+      //     case "手机异常":
+      //       this.Wordhint.Internet.phoneOUtS = false;
+      //       break;
+      //     case "单位名称异常":
+      //       this.Wordhint.Internet.ComName = false;
+      //       break;
+      //     case "单位电话异常":
+      //       this.Wordhint.Internet.comphoneOUtS = false;
+      //       break;
+      //     case "地址异常":
+      //       this.Wordhint.Internet.address = false;
+      //       break;
+      //     case "单位地址异常":
+      //       this.Wordhint.Internet.comAddress = false;
+      //       break;
+      //     case "工商登记":
+      //       this.Wordhint.Internet.loginOrNot = false;
+      //       break;
+      //     case "组织机构代码":
+      //       this.Wordhint.Internet.institutionCode = false;
+      //       break;
+      //     case "接听说明":
+      //       this.Wordhint.checkID.answerDec = false;
+      //       break;
+      //     case "说明":
+      //       this.Wordhint.checkID.Declear = false;
+      //       break;
+      //     case "详细用途":
+      //       this.Wordhint.checkID.loanPurposed = false;
+      //       break;
+      //     case "评价":
+      //       this.Wordhint.result = false;
+      //       break;
+      //   }
+      // },
       commentShow1(name, hidLabel) {
         if (name == "0") {
           switch (hidLabel) {

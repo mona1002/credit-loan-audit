@@ -5,7 +5,7 @@
       <img class="showBtn" src="../../../../static/images/Shape Copy.png" @click="showList" style="transform: rotate(180deg)">
     </div>
     <!-- 左侧 折叠面板 -->
-    <div class="AudioVisual_List" ref="AudioVisual_List_ref" v-show="showListDiv" style="">
+    <div class="AudioVisual_List" ref="AudioVisual_List_ref" v-show="showListDiv">
       <!-- 折叠面板title -->
       <img class="hidBtn" src="../../../../static/images/Shape Copy.png" @click="hid">
       <!-- 折叠面板-手风琴List -->
@@ -67,7 +67,7 @@
       <img src="../../../../static/images/net.png" @click="larger">
       <img src="../../../../static/images/daf.png" @click="AclockWise ">
       <img src="../../../../static/images/dasf.png" @click="clockWise ">
-      <span class="audioInd"> 第 {{showPage }} 页</span>
+      <span class="audioInd"> 第 {{showPage}} 页</span>
     </div>
     <!-- 缩略图弹出层    不在右侧div里面，再 wrap 里面  SmallPicShow-->
     <div class="Small_pic_div" v-show="SmallPicShow">
@@ -133,7 +133,6 @@
           </el-collapse-item>
         </el-collapse>
       </div>
-
     </div>
     <!-- ================================= 结束================================= -->
   </div>
