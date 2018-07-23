@@ -4,6 +4,10 @@
 }.min_width_1550{
   min-width: 1550px;
 }
+/* 内边距 */
+.padding_left_5{
+  padding-left: 5px;
+}
 /* 列表 */
 
 .taskWatting {
