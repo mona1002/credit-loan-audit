@@ -441,13 +441,6 @@
         consumption: []
       }
     },
-    watch: {
-      '$route' (to, from) {
-        if (to.path == '/SocialSecurityReport') {
-          this.getInf();
-        }
-      }
-    },
     props: {
       applySubNo: {
         default: '',

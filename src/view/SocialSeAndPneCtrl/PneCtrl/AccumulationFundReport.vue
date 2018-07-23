@@ -328,13 +328,6 @@
         loanFlows:[]
       }
     },
-    watch: {
-      '$route' (to, from) {
-        if (to.path == '/AccumulationFundReport') {
-          this.getInf();
-        }
-      }
-    },
     props: {
       applySubNo: {
         default: '',
@@ -408,7 +401,7 @@
             //     }
           }
           // ---------------------------------
-          //   if (this.fundRawReport) {
+            if (this.fundRawReport) {
           //     if (this.fundRawReport.accounts && this.fundRawReport.accounts.length > 0) {
           //       var formObj = $('#div_fund #div_account form').clone();
           //       $.each(this.this.fundRawReport.accounts, function (i, eh) {
@@ -431,7 +424,7 @@
           //         ], eh);
           //       });
           //     }
-          //   }
+            }
         });
       },
       //   addRow($table, rfields, rdata) {
