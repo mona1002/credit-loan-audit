@@ -9,7 +9,7 @@
  /* 下拉框内容 */
 
  body .el-select-dropdown {
-   width: 200px;
+  min-width: 200px !important;
  }
 
  /* 整体布局 */
@@ -928,4 +928,9 @@
    content: "*";
    color: #f56c6c;
    margin-right: 4px;
+ }
+ /* 多选下拉框 √ 不显示 */
+
+body .el-select-dropdown.is-multiple .el-select-dropdown__item.selected::after{
+  content:'';
  }
