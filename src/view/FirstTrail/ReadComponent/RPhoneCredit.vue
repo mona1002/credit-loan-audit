@@ -1,6 +1,6 @@
 <!-- 电话征信  综合查询 -->
 <template>
-  <div class="phone-credit">
+  <div class="phone-credit min_width_1200">
     <el-container style="height: 100%; border: 1px solid #eee">
       <!-- 左侧 导航列表 -->
       <!-- width="200px" style="heightbackground-color: rgb(238, 241, 246)" -->

@@ -1,6 +1,6 @@
 <!-- 申请信息详情 -->
 <template>
-  <div class="applicationInformationDetail common_component_width">
+  <div class="applicationInformationDetail">
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">

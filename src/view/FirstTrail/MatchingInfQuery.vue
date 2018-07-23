@@ -85,7 +85,7 @@
           <RPhoneCredit v-if=" this.tabContent2==5"> 电话征信</RPhoneCredit>
           <FCreditForm v-if=" this.tabContent2==6" :applyId='tastwaitingPass.matchApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
           <RcreditInvestigation v-if=" this.tabContent2==7">实地征信</RcreditInvestigation>
-          <aMAntiApplyInf v-if=" this.tabContent2==8"  :applyId='tastwaitingPass.matchApplyId'>反欺诈结论</aMAntiApplyInf>
+          <aMAntiApplyInf v-if=" this.tabContent2==8" :applyId='tastwaitingPass.matchApplyId'>反欺诈结论</aMAntiApplyInf>
           <RantiFraudInvestigation v-if=" this.tabContent2==9" :isShow='true' :applyId='tastwaitingPass.matchApplyId'>反欺诈调查</RantiFraudInvestigation>
           <RFinanceInformation v-if=" this.tabContent2==10">账务信息</RFinanceInformation>
           <RprocessTrajectory v-if=" this.tabContent2==11">流程轨迹</RprocessTrajectory>
@@ -225,11 +225,10 @@
         }).then(res => {
           if (res.statusCode == 200) {
             this.loading = false;
-            console.log(this.loading)
-            // this.customInf = res.data;
-            // this.accepCusBasicInfo = res.data.accepCusBasicInfo;
-            // this.custName = this.accepCusBasicInfo.custName;
-            // this.certCode = res.data.accepCusBasicInfo.certCode;
+            this.customInf = res.data;
+            this.accepCusBasicInfo = res.data.accepCusBasicInfo;
+            this.accepCusBasicInfo.custName ? this.custName = this.accepCusBasicInfo.custName : '';
+            res.data.accepCusBasicInfo.certCode ? this.certCode = res.data.accepCusBasicInfo.certCode : '';
           } else {
             this.$message.error(res.msg);
           }

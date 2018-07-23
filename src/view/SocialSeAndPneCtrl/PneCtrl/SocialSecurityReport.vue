@@ -9,98 +9,110 @@
         </template>
         <div class="checkedInf checkedInf_li_width_four clearFix">
           <ul>
-            <li>
-              <label class="label_width_166">姓名：</label>
-              <span>{{socReport.name}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">性别：</label>
-              <span>{{socReport.gender}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">生日：</label>
-              <span>{{socReport.birth}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">学历：</label>
-              <span>{{socReport.education}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">证件类型：</label>
-              <span>{{socReport.idcard_type}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">证件号码：</label>
-              <span>{{socReport.idcard}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">联系电话：</label>
-              <span>{{socReport.phone}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">预计月收入：</label>
-              <span>{{socReport.pension_balance}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">开始参保时间：</label>
-              <span>{{socReport.insured_begin_date}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">终止参保时间：</label>
-              <span>{{socReport.end_date}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">参保状态：</label>
-              <span>{{socReport.insured_status}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">最近社保机构名称：</label>
-              <span>{{socReport.social_security_name}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">最近参保单位：</label>
-              <span>{{socReport.company}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">最近缴纳时间：</label>
-              <span>{{socReport.period}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">最近单位缴纳月数：</label>
-              <span>{{socReport.current_payment_months}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">最近缴纳基数[元]：</label>
-              <span>{{socReport.current_base}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">累计缴纳月数：</label>
-              <span>{{socReport.payment_months}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">历史连续缴纳最大月数：</label>
-              <span>{{socReport.continuous_payment_max_months}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">历史最大缴纳基数[元]：</label>
-              <span>{{socReport.max_base}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">平均缴纳基数[元]：</label>
-              <span>{{socReport.average_base}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">医疗账户余额[元]：</label>
-              <span>{{socReport.medicare_balance}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">养老账户余额[元]：</label>
-              <span>{{socReport.pension_balance}}</span>
-            </li>
-            <li class="li_half_two_rows">
-              <label class="label_width_166">通讯地址：</label>
-              <span>{{socReport.address}}</span>
-            </li>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">姓名：</label>
+                <span>{{socReport.name}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">性别：</label>
+                <span>{{socReport.gender}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">生日：</label>
+                <span>{{socReport.birth}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">学历：</label>
+                <span>{{socReport.education}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">证件类型：</label>
+                <span>{{socReport.idcard_type}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">证件号码：</label>
+                <span>{{socReport.idcard}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">联系电话：</label>
+                <span>{{socReport.phone}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">预计月收入：</label>
+                <span>{{socReport.pension_balance}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">开始参保时间：</label>
+                <span>{{socReport.insured_begin_date}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">终止参保时间：</label>
+                <span>{{socReport.end_date}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">参保状态：</label>
+                <span>{{socReport.insured_status}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">最近社保机构名称：</label>
+                <span>{{socReport.social_security_name}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">最近参保单位：</label>
+                <span>{{socReport.company}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">最近缴纳时间：</label>
+                <span>{{socReport.period}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">最近单位缴纳月数：</label>
+                <span>{{socReport.current_payment_months}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">最近缴纳基数[元]：</label>
+                <span>{{socReport.current_base}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">累计缴纳月数：</label>
+                <span>{{socReport.payment_months}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">历史连续缴纳最大月数：</label>
+                <span>{{socReport.continuous_payment_max_months}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">历史最大缴纳基数[元]：</label>
+                <span>{{socReport.max_base}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">平均缴纳基数[元]：</label>
+                <span>{{socReport.average_base}}</span>
+              </li>
+            </div>
+            <div>
+              <li>
+                <label class="label_width_166">医疗账户余额[元]：</label>
+                <span>{{socReport.medicare_balance}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">养老账户余额[元]：</label>
+                <span>{{socReport.pension_balance}}</span>
+              </li>
+              <li class="li_half_two_rows">
+                <label class="label_width_166">通讯地址：</label>
+                <span>{{socReport.address}}</span>
+              </li>
+            </div>
           </ul>
         </div>
       </el-collapse-item>
@@ -111,98 +123,114 @@
         </template>
         <div class="checkedInf checkedInf_li_width_four clearFix">
           <ul>
-            <li>
-              <label class="label_width_166">个人编号：</label>
-              <span>{{socReport.customer}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">姓名：</label>
-              <span>{{socReport.name}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">证件类型：</label>
-              <span>{{socReport.idcard_type}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">证件号码：</label>
-              <span>{{socReport.idcard}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">性别：</label>
-              <span>{{socReport.gender}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">出生日期：</label>
-              <span>{{socReport.birth}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">民族：</label>
-              <span>{{socReport.nation}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">文化程度：</label>
-              <span>{{socReport.education}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">联系电话：</label>
-              <span>{{socReport.phone}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">户口性质：</label>
-              <span>{{socReport.account_property}}</span>
-            </li>
-            <li class="li_half_two_rows">
-              <label class="label_width_166">户口所在地：</label>
-              <span>{{socReport.domicile_place}}</span>
-            </li>
-            <li class="li_one_row">
-              <label class="label_width_166">通讯地址：</label>
-              <span>{{socReport.address}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">开始参保时间：</label>
-              <span>{{socReport.insured_begin_date}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">参保人员类别：</label>
-              <span>{{socReport.insured_person_type}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">参保状态：</label>
-              <span>{{socReport.insured_status}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">终止年月：</label>
-              <span>{{socReport.end_date}}</span>
-            </li>
-            <li class="li_half_two_rows">
-              <label class="label_width_166">单位名称：</label>
-              <span>{{socReport.company}}</span>
-            </li>
-            <li class="li_half_two_rows">
-              <label class="label_width_166">社保机构名称：</label>
-              <span>{{socReport.social_security_name}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">缴费人员类别：</label>
-              <span>{{socReport.payment_person_type}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">申报月收入[元]：</label>
-              <span>{{socReport.monthly_income}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">医疗账户月[元]：</label>
-              <span>{{socReport.medicare_balance}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">养老账户余额[元]：</label>
-              <span>{{socReport.pension_balance}}</span>
-            </li>
-            <li class="li_one_row">
-              <label class="label_width_166">累计缴纳月数：</label>
-              <span>{{socReport.payment_months}}</span>
-            </li>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">个人编号：</label>
+                <span>{{socReport.customer}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">姓名：</label>
+                <span>{{socReport.name}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">证件类型：</label>
+                <span>{{socReport.idcard_type}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">证件号码：</label>
+                <span>{{socReport.idcard}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">性别：</label>
+                <span>{{socReport.gender}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">出生日期：</label>
+                <span>{{socReport.birth}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">民族：</label>
+                <span>{{socReport.nation}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">文化程度：</label>
+                <span>{{socReport.education}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">联系电话：</label>
+                <span>{{socReport.phone}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">户口性质：</label>
+                <span>{{socReport.account_property}}</span>
+              </li>
+              <li class="li_half_two_rows">
+                <label class="label_width_166">户口所在地：</label>
+                <span>{{socReport.domicile_place}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li class="li_one_row">
+                <label class="label_width_166">通讯地址：</label>
+                <span>{{socReport.address}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">开始参保时间：</label>
+                <span>{{socReport.insured_begin_date}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">参保人员类别：</label>
+                <span>{{socReport.insured_person_type}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">参保状态：</label>
+                <span>{{socReport.insured_status}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">终止年月：</label>
+                <span>{{socReport.end_date}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li class="li_half_two_rows">
+                <label class="label_width_166">单位名称：</label>
+                <span>{{socReport.company}}</span>
+              </li>
+              <li class="li_half_two_rows">
+                <label class="label_width_166">社保机构名称：</label>
+                <span>{{socReport.social_security_name}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">缴费人员类别：</label>
+                <span>{{socReport.payment_person_type}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">申报月收入[元]：</label>
+                <span>{{socReport.monthly_income}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">医疗账户月[元]：</label>
+                <span>{{socReport.medicare_balance}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">养老账户余额[元]：</label>
+                <span>{{socReport.pension_balance}}</span>
+              </li>
+            </div>
+            <div>
+              <li class="li_one_row">
+                <label class="label_width_166">累计缴纳月数：</label>
+                <span>{{socReport.payment_months}}</span>
+              </li>
+            </div>
           </ul>
         </div>
       </el-collapse-item>

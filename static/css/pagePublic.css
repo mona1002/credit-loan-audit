@@ -1,3 +1,9 @@
+/*最小宽度 */
+.min_width_1200{
+  min-width: 1200px;
+}.min_width_1550{
+  min-width: 1550px;
+}
 /* 列表 */
 
 .taskWatting {
@@ -439,7 +445,9 @@
 .label_width_200 {
   width: 200px;
 }
-
+.label_width_195 {
+  width: 195px;
+}
 .label_width_190 {
   width: 190px;
 }
@@ -485,8 +493,8 @@
 }
 
 .CreditForm_div_border {
-  /* border-bottom: 1px solid #d8dce5;
-  border-bottom: 1px solid green; */
+  border-bottom: 1px solid #d8dce5;
+  border-bottom: 1px solid green;
 }
 
 /* 借款人资料 */
