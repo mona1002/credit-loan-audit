@@ -50,7 +50,7 @@
     <div class="title titleContainer edit-div">
       <span class="titleText">
         <i class="el-icon title-icon"></i>
-        复议-历史任务列表
+        复议历史任务列表
       </span>
     </div>
     <div class="listContainer">

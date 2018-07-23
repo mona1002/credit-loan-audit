@@ -45,7 +45,7 @@
     <div class="title titleContainer edit-div">
       <span class="titleText">
         <i class="el-icon title-icon"></i>
-        反欺诈-已办任务列表 </span>
+        反欺诈已办任务列表 </span>
     </div>
     <div class="listContainer">
       <!-- 编辑table -->

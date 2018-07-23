@@ -13,7 +13,7 @@
               <p>
                 <i class="hint"> </i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(0)">客户在法网是否有被执行信息：</label>
-                <el-select v-model="checkData.wbeexEcuted" placeholder="请选择" @change="commentShow1(checkData.wbeexEcuted,Internet[0])">
+                <el-select v-model="checkData.wbeexEcuted"  @change="commentShow1(checkData.wbeexEcuted,Internet[0])">
                   <el-option v-for="item in beexEcuted" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -33,7 +33,7 @@
               <p>
                 <i class="hint"> </i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(0)">单位在法网是否有被执行信息：</label>
-                <el-select v-model="checkData.wnetHirecom" placeholder="请选择" @change="commentShow1(checkData.wnetHirecom,Internet[1])">
+                <el-select v-model="checkData.wnetHirecom"  @change="commentShow1(checkData.wnetHirecom,Internet[1])">
                   <el-option v-for="item in netHirecom" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -56,7 +56,7 @@
                 </i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(1)">
                   <span class="red"> * </span>客户在失信网是否有失信记录：</label>
-                <el-select v-model="checkData.wnetEcutedBrea" placeholder="请选择" name="BrokenRecord" v-validate="'required'" @change="commentShow1(checkData.wnetEcutedBrea,Internet[2])">
+                <el-select v-model="checkData.wnetEcutedBrea"  name="BrokenRecord" v-validate="'required'" @change="commentShow1(checkData.wnetEcutedBrea,Internet[2])">
                   <el-option v-for="item in netEcutedBrea" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -77,7 +77,7 @@
               <p>
                 <i class="hint"> </i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(1)">单位在失信网是否有失信记录：</label>
-                <el-select v-model="checkData.wnetHirecomBrea" placeholder="请选择" @change="commentShow1(checkData.wnetHirecomBrea,Internet[3])">
+                <el-select v-model="checkData.wnetHirecomBrea"  @change="commentShow1(checkData.wnetHirecomBrea,Internet[3])">
                   <el-option v-for="item in netHirecomBrea" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -100,7 +100,7 @@
                 </i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(2)">
                   <span class="red"> * </span>网上搜索借款人手机是否有异常：</label>
-                <el-select v-model="checkData.wnetPhone" placeholder="请选择" @change="commentShow1(checkData.wnetPhone,Internet[4])" name="abnormalPhone"
+                <el-select v-model="checkData.wnetPhone"  @change="commentShow1(checkData.wnetPhone,Internet[4])" name="abnormalPhone"
                   v-validate="'required'">
                   <el-option v-for="item in netPhone" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
@@ -121,7 +121,7 @@
               <p>
                 <i class="hint"></i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(2)">网搜单位名称是否有异常：</label>
-                <el-select v-model="checkData.wnetHirecomName" placeholder="请选择" @change="commentShow1(checkData.wnetHirecomName,Internet[5])">
+                <el-select v-model="checkData.wnetHirecomName"  @change="commentShow1(checkData.wnetHirecomName,Internet[5])">
                   <el-option v-for="item in netHirecomName" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -141,7 +141,7 @@
               <p>
                 <i class="hint"></i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(2)">网搜单位电话是否有异常：</label>
-                <el-select v-model="checkData.wnetHirecomPhone" placeholder="请选择" @change="commentShow1(checkData.wnetHirecomPhone,Internet[6])">
+                <el-select v-model="checkData.wnetHirecomPhone"  @change="commentShow1(checkData.wnetHirecomPhone,Internet[6])">
                   <el-option v-for="item in netHirecomPhone" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -161,7 +161,7 @@
               <p>
                 <i class="hint"></i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(2)">网上搜索借款人现居住地址和房产地址是否有异常：</label>
-                <el-select v-model="checkData.wnetAddrandEstate" placeholder="请选择" @change="commentShow1(checkData.wnetAddrandEstate,Internet[7])">
+                <el-select v-model="checkData.wnetAddrandEstate"  @change="commentShow1(checkData.wnetAddrandEstate,Internet[7])">
                   <el-option v-for="item in netAddrandEstate" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -181,7 +181,7 @@
               <p>
                 <i class="hint"></i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(2)">网搜单位地址是否有异常：</label>
-                <el-select v-model="checkData.wnetHirecomAddress" placeholder="请选择" @change="commentShow1(checkData.wnetHirecomAddress,Internet[8])">
+                <el-select v-model="checkData.wnetHirecomAddress"  @change="commentShow1(checkData.wnetHirecomAddress,Internet[8])">
                   <el-option v-for="item in netHirecomAddress" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -204,7 +204,7 @@
                 </i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(3)">
                   <span class="red"> * </span>当地工商网查询企业基本信息中是否有登记：</label>
-                <el-select v-model="checkData.wnetCompany" placeholder="请选择" @change="commentShow1(checkData.wnetCompany,Internet[9])" name="registerInfor"
+                <el-select v-model="checkData.wnetCompany"  @change="commentShow1(checkData.wnetCompany,Internet[9])" name="registerInfor"
                   v-validate="'required'">
                   <el-option v-for="item in netCompany" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
@@ -225,7 +225,7 @@
               <p>
                 <i class="hint"></i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(4)">客户工作单位在全国组织代码查询中是否存在：</label>
-                <el-select v-model="checkData.wnetAddrstate" placeholder="请选择" @change="commentShow1(checkData.wnetAddrstate,Internet[10])">
+                <el-select v-model="checkData.wnetAddrstate"  @change="commentShow1(checkData.wnetAddrstate,Internet[10])">
                   <el-option v-for="item in netAddrstate" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>

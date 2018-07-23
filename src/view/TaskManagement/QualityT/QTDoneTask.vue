@@ -51,7 +51,7 @@
     <div class="title titleContainer edit-div">
       <span class="titleText">
         <i class="el-icon title-icon"></i>
-        质检-已办任务列表 </span>
+        质检已办任务列表 </span>
     </div>
     <div class="listContainer">
       <el-table :data="datas" style="width: 100%" height="510" highlight-current-row @row-dblclick='goDetail' border>

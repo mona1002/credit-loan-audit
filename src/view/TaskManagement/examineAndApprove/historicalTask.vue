@@ -60,7 +60,7 @@
     <div class="title titleContainer edit-div">
       <span class="titleText">
         <i class="el-icon title-icon"></i>
-        审批-历史任务列表
+        审批历史任务列表
       </span>
     </div>
     <div class="listContainer">
