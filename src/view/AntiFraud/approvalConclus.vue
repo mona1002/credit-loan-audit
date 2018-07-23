@@ -783,7 +783,8 @@ caseDescs:[  { required: true, message: '请输入活动名称', trigger: 'blur'
         this.$confirm('您确定操作？', '提示', {
           confirmButtonText: '确定',
           type: 'warning',
-          showCancelButton: false
+          cancelButtonText: '取消',
+          showCancelButton: true
         }).then(() => {
           this.busiState = '30'
           // 点击 确认 提交 方法

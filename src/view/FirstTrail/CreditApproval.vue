@@ -362,7 +362,7 @@
     </div> -->
     <!-- 放弃弹窗 -->
     <div class="Height_240 return_back">
-      <el-dialog title="放弃原因" :visible.sync="fangQiShow" :modal="false"  width='600px'>
+      <el-dialog title="放弃原因" :visible.sync="fangQiShow" :modal="false" width='600px'>
         <el-form>
           <div class="bfc">
             <!-- 回退主原因输入 02 -->
@@ -406,9 +406,9 @@
     <el-dialog title="审批信息" :visible.sync="shenPiShow " :modal="false " width="710px" height='1100px'>
       <el-form>
         <!-- <div style="padding:5px;padding-top:0;height:400px;overflow:auto; "> -->
-        <el-collapse v-model="activeNames ">
+        <el-collapse v-model="activeNames">
           <!--   申请信息-->
-          <el-collapse-item title="申请信息 " name="applyMsg " class="alert_collapse">
+          <el-collapse-item title="申请信息" name="1" class="alert_collapse">
             <!-- <div class="back-form-li ">
                   <el-form-item label="申请金额[元]： " class="item-column2 ">
                     {{loanAmt}}
@@ -463,7 +463,7 @@
             </div>
           </el-collapse-item>
           <!-- 信审核实信息 -->
-          <el-collapse-item title="信审核实信息 " class="alert_collapse">
+          <el-collapse-item title="信审核实信息"  name="2" class="alert_collapse">
             <!-- <el-form-item label="核实可接受最高每期还款额[元]： " style="width:300px;margin-bottom:10px; " class="item-column2 line-height2 ">
                   {{fbalance2}}
                 </el-form-item> -->
@@ -476,7 +476,7 @@
             </div>
           </el-collapse-item>
           <!-- 审批信息 -->
-          <el-collapse-item title="审批信息 " class="alert_collapse">
+          <el-collapse-item title="审批信息"  name="3" class="alert_collapse">
             <!-- <div class="back-form-li radio-li ">
                   <el-form-item label="结论： ">
                     <el-radio label="00 " value='00' v-model="opinionFlag ">同意</el-radio>
@@ -873,7 +873,7 @@
         spjlShow: false,
         lcgjShow: false,
         jujueBtnShow: false, // 拒绝 按钮 BX02
-        activeNames: ['applyMsg'], // 更改 审批 为折叠面板
+        activeNames: ['1','2','3'], // 更改 审批 为折叠面板
         isLoading: false, // 审批按钮 是否加载状态
         loadingTitle: '提交', // 默认btn title
         shenPiBtnShow: false, // 初审 审批按钮  BX21
@@ -1076,7 +1076,8 @@
         this.$confirm('您确定操作？', '提示', {
           confirmButtonText: '确定',
           type: 'warning',
-          showCancelButton: false
+          cancelButtonText: '取消',
+          showCancelButton: true
         }).then(() => {
           this.Csave();
         }).catch(() => {});
@@ -1138,10 +1139,12 @@
       },
       // open 打开 自定义 弹窗   挂起      
       open() {
+        alert('dkdjkk')
         this.$confirm('您确定操作？', '提示', {
           confirmButtonText: '确定',
           type: 'warning',
-          showCancelButton: false
+          cancelButtonText: '取消',
+          showCancelButton: true
         }).then(() => {
           // 区分初审/终审
           if (this.judgeFlag == '01') {
@@ -1327,7 +1330,7 @@
                   } else {
                     this.fbalance2 = Number(res.data.fbalance).toLocaleString() + '.00'
                   }
-                }else{
+                } else {
                   this.$message.error(res.msg)
                 }
               });
@@ -1364,7 +1367,7 @@
                               this.minAmount = this.products[i].minAmount;
                             }
                           };
-                        }else{
+                        } else {
                           this.$message.error(res.msg)
                         }
                       });

@@ -11,7 +11,7 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">进件机构：</span>
-          <el-select v-model="params.operOrgCodes" multiple  collapse-tags placeholder="请选择">
+          <el-select v-model="params.operOrgCodes" multiple collapse-tags placeholder="请选择">
             <el-option v-for="item in shopCodesSelection" :key="item.code" :label="item.name" :value="item.code">
               <span style="float: left">{{ item.name }}</span>
               <span style="float: right; color: #8492a6; font-size: 13px">{{ item.code }}</span>
@@ -24,7 +24,7 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称：</span>
-          <el-select v-model="params.proCodes" multiple  collapse-tags placeholder="请选择">
+          <el-select v-model="params.proCodes" multiple collapse-tags placeholder="请选择">
             <el-option v-for="item in production" :key="item.code" :label="item.name" :value="item.code">
               <span style="float: left">{{ item.name }}</span>
               <span style="float: right; color: #8492a6; font-size: 13px">{{ item.code }}</span>
@@ -49,7 +49,7 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">拒绝子原因：</span>
-          <el-select v-model="params.subReasonIds" multiple  collapse-tags placeholder="请选择">
+          <el-select v-model="params.subReasonIds" multiple collapse-tags placeholder="请选择">
             <el-option v-for="item in secondReason" :key="item.id" :label="item.reasonName" :value="item.id">
             </el-option>
           </el-select>
@@ -63,12 +63,12 @@
     <div class="title titleContainer edit-div">
       <span class="titleText">
         <i class="el-icon title-icon"></i>
-        质检任务分派查询
+        质检专纵项抽单配置
       </span>
       <span class="iconContainer">
         <span class="icon-item" @click='apportion'>
           <i class="el-icon addIcon"></i>
-          <span class="el-icon-text">任务分派</span>
+          <span class="el-icon-text">生成任务</span>
         </span>
       </span>
     </div>
@@ -169,7 +169,16 @@
         // this.Confirm = true;
         // this.loadsitu = false;
         // this.adbtn = '确定';
-                this.$confirm('您确定生成质检任务？', '提示', {
+        if (this.allotParams.list.length == 0) {
+          this.$confirm('请选择一条数据！', '提示', {
+            confirmButtonText: '确定',
+            type: 'warning',
+            showCancelButton: false
+          }).then(() => {
+          }).catch(() => {});
+          return
+        }
+        this.$confirm('您确定生成质检任务？', '提示', {
           confirmButtonText: '确定',
           type: 'warning',
           showCancelButton: false
@@ -270,4 +279,3 @@
   }
 
 </script>
-

@@ -571,8 +571,11 @@
  }
 
  .Abody .el-form-item {
-   /* height: 44px; */
    height: 40px;
+ }
+
+ .form_height_44 .el-form-item {
+   height: 44px ;
  }
 
  /* 查询框 label宽度 */

@@ -68,7 +68,7 @@
       </span>
     </el-dialog> -->
     <!-- ==============================添加=================================== -->
-    <el-dialog title="质检规则新增" :modal="false" :visible.sync="add" width="820px" class="dialog">
+    <el-dialog title="质检规则新增" :modal="false" :visible.sync="add" width="820px" class="dialog form_height_44">
       <el-form :model="addNew" :rules="rulesAdd" ref="ruleFormAdd">
         <el-form-item label="质检天数：" prop="recentDays" :label-width="formLeftLabelWidth">
           <el-input v-model="addNew.recentDays" placeholder="请输入质检天数" @blur="Num('质检天数-编辑',addNew.recentDays)"> </el-input>
@@ -198,7 +198,7 @@
     </el-dialog> -->
     <!-- ==============================编辑=================================== -->
     <!-- 编辑 -->
-    <el-dialog title="质检规则编辑" :modal="false" :visible.sync="Edit" width="820px" class="dialog">
+    <el-dialog title="质检规则编辑" :modal="false" :visible.sync="Edit" width="820px" class="dialog form_height_44">
       <el-form :model="updateInf" :rules="rulesAdd" ref="ruleFormAdd">
         <el-form-item label="质检天数：" prop="recentDays" :label-width="formLeftLabelWidth">
           <el-input v-model="updateInf.recentDays" placeholder="请输入质检天数" @blur="Num('质检天数-编辑',updateInf.recentDays)"> </el-input>
@@ -337,12 +337,6 @@
     },
     methods: {
       Num(el, val) { //整数
-        // console.log(el, val)
-        // console.log(val=='')
-        // console.log(Number(val))
-        // console.log(parseInt(val))
-        // console.log(val === '')
-        // console.log(val == null)
         val = val.replace(/\s/g, ''); //去空格，避免输入框出现NaN
         switch (el) {
           case '质检天数':
@@ -425,7 +419,6 @@
       },
       //  编辑按钮-弹出弹窗
       handleEdit(index, row, formName) {
-        console.log(row)
         this.Edit = true;
         // this.updateInf = row;
         // this.recentDays=row.recentDays;
@@ -473,15 +466,16 @@
         //   this.$message.error('请输入必填项！');
         //   return
         // }
-        this.addNew.drawSheetType == '01' ? this.proficiencyCount++ : ''; //熟悉
-        this.addNew.drawSheetType == '02' ? this.newOneCount++ : ''; //新人
-        if ((this.addNew.drawSheetType == '01' && this.proficiencyCount > 0) || (this.addNew.drawSheetType == '02' &&
-            this.newOneCount > 0)) { //熟悉
-          this.$message.error(' 抽单类型设置重复！');
-          return
-        }
         this.$refs[formName].validate((valid) => {
           if (valid) {
+            this.addNew.drawSheetType == '01' ? this.proficiencyCount++ : ''; //熟悉
+            this.addNew.drawSheetType == '02' ? this.newOneCount++ : ''; //新人
+            if ((this.addNew.drawSheetType == '01' && this.proficiencyCount > 0) || (this.addNew.drawSheetType ==
+                '02' &&
+                this.newOneCount > 0)) { //熟悉
+              this.$message.error(' 抽单类型设置重复！');
+              return
+            }
             this.loadsitu = true;
             this.adbtn = '保存中';
             this.post("/insMakeRules/addInfo", {
@@ -582,7 +576,6 @@
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
       this.addNew.creator = this.userInf.userCode;
       // this.addNew.creator = JSON.parse(localStorage.getItem('userInf')).userCode;
-      console.log(this.userInf)
       this.getListInf(); //查询
       this.getSystemDate(); //调用系统时间
     },
