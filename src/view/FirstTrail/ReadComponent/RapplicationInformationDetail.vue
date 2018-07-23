@@ -1,7 +1,7 @@
 <!-- 内匹申请信息详情 -->
 <template>
   <div class="applicationInformationDetail">
-    <el-collapse v-model="activeNames" @change="handleChange">
+    <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
           <i class="collapse_title_icon"></i>
@@ -1093,9 +1093,6 @@
           //     this.$router.push('/')
           //   }
         })
-      },
-      handleChange() {
-
       },
       //保留两位小数 整数千分位
       formatNumber(num, cent, isThousand) {

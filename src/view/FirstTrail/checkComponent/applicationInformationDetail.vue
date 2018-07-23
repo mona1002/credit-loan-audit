@@ -72,70 +72,6 @@
             </li>
           </ul>
         </div>
-        <!-- <ul class="firstUl">
-          <li>
-            <label>申请类型：</label>
-            <span>{{datas.appTypeTxt}}</span>
-          </li>
-          <li>
-            <label>借款人类型：</label>
-            <span>{{datas.borrTypeTxt}}</span>
-          </li>
-          <li></li>
-        </ul>
-        <ul>
-          <li>
-            <label>获客渠道：</label>
-            <span>{{datas.sourcesChanTxt}}</span>
-          </li>
-          <li class="qudaoexplain" v-if="datas.sourcesChanTxt == '其他'">
-            <label>获客渠道说明：</label>
-            <span>{{datas.sourcesChanRemark}}</span>
-          </li>
-          <li v-if="datas.sourcesChanTxt != '其他'"></li>
-        </ul>
-        <ul>
-          <li>
-            <label>团队经理：</label>
-            <span>{{datas.teamLeaderName}}</span>
-          </li>
-          <li>
-            <label>直销人员：</label>
-            <span>{{datas.salPerName}}</span>
-          </li>
-          <li>
-            <label style="float:left">直销人员联系方式：</label>
-            <span>{{datas.salPerTel}}</span>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <label>家人是否知晓本借款：</label>
-            <span>{{datas.famKnowFlagTxt}}</span>
-          </li>
-          <li v-if="datas.famKnowFlag=='1'">
-            <label>知晓人姓名：</label>
-            <span>{{datas.knowerName}}</span>
-          </li>
-          <li v-if="datas.famKnowFlag=='1'">
-            <label>与本人关系：</label>
-            <span>{{datas.knowerRelationTxt}}</span>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <label>客户符合何种产品：</label>
-            <span>{{datas.proName}}</span>
-          </li>
-          <li>
-            <label>紧急程度：</label>
-            <span>{{datas.emerTypeTxt}}</span>
-          </li>
-          <li v-if="datas.emerType=='02'">
-            <label>加急费用[元]：</label>
-            <span>{{datas.emerAmt}}</span>
-          </li>
-        </ul> -->
       </el-collapse-item>
       <el-collapse-item name="2">
         <template slot="title">
@@ -190,64 +126,6 @@
             </li>
           </ul>
         </div>
-        <!-- <ul class="firstUl qitaexplain" v-if="accepApplyLoan.loanPurposeTxt == '其他消费'">
-          <li>
-            <label>借款用途：</label>
-            <span>{{accepApplyLoan.loanPurposeTxt}}</span>
-          </li>
-          <li>
-            <label>借款用途说明：</label>
-            <el-tooltip class="item" effect="dark" :content="accepApplyLoan.loanPurposeNote" :disabled="accepApplyLoan.loanPurposeNote==null"
-              placement="top-start">
-              <div>{{accepApplyLoan.loanPurposeNote}}</div>
-            </el-tooltip>
-          </li>
-        </ul>
-        <ul class="firstUl" v-if="accepApplyLoan.loanPurposeTxt != '其他消费'">
-          <li>
-            <label>借款用途：</label>
-            <span>{{accepApplyLoan.loanPurposeTxt}}</span>
-          </li>
-          <li></li>
-          <li></li>
-        </ul>
-        <ul>
-          <li>
-            <label>申请借款额度[元]：</label>
-            <span>{{accepApplyLoan.loanAmt}}</span>
-          </li>
-          <li>
-            <label>借款期限[月]：</label>
-            <span>{{accepApplyLoan.loanTerm}}</span>
-          </li>
-          <li>
-            <label>可接受最高月还款额[元]：</label>
-            <span>{{accepApplyLoan.eachTermAmt}}</span>
-          </li>
-        </ul>
-        <ul>
-        <li>
-            <label>借款类型：</label>
-            <span>{{accepApplyLoan.loanTypeTxt}}</span>
-          </li>
-          <li>
-            <label>担保方式：</label>
-            <span>{{accepApplyLoan.guarnTypeTxt}}</span>
-          </li>
-          <li>
-            <label>还款资金来源：</label>
-            <span>{{accepApplyLoan.repaySourceTxt}}</span>
-          </li>
-        </ul>
-        <ul class="illustration" v-if="accepApplyLoan.repaySource=='03'">
-          <li>
-            <label>其他渠道还款说明：</label>
-            <el-tooltip class="item" effect="dark" :content="accepApplyLoan.repaySourceRemark" :disabled="accepApplyLoan.repaySourceRemark==null"
-              placement="top-start">
-              <div>{{accepApplyLoan.repaySourceRemark}}</div>
-            </el-tooltip>
-          </li>
-        </ul> -->
       </el-collapse-item>
       <el-collapse-item name="3">
         <template slot="title">
