@@ -6,6 +6,12 @@
    color: #0077ff;
  }
 
+ /* 下拉框内容 */
+
+ body .el-select-dropdown {
+   width: 200px;
+ }
+
  /* 整体布局 */
 
  /* 除 header 外的大盒子*/
@@ -575,7 +581,7 @@
  }
 
  .form_height_44 .el-form-item {
-   height: 44px ;
+   height: 44px;
  }
 
  /* 查询框 label宽度 */
