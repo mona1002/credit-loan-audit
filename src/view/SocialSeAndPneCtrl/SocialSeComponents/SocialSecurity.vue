@@ -333,10 +333,10 @@
       //   this.localInf = JSON.parse(localStorage.getItem("QTComplianceTW")) //质检 合规经理任务列表 
       // }
       this.post(baseurl.BaseUrl + "/rmMxSecFundQryAction!notSession_getMxSecInfo.action", {
-        // custName: this.localInf.custName,
-        // certCode: this.localInf.certCode
-        custName: '乔义星',
-        certCode: '37142519720311977X'
+        custName: this.localInf.custName,
+        certCode: this.localInf.certCode
+        // custName: '乔义星',
+        // certCode: '37142519720311977X'
       }).then(res => {
         if (res.success) {
           // 输入参数

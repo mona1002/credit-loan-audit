@@ -85,11 +85,11 @@
         <div class="left-title">
           风险项：
         </div>
-        <div>
+        <div class="approvalConclus_risk_select">
           <!-- @change="selectChangeRisk" multiple    class="muti-select"   -->
           <!-- <el-select v-model="riskSection" multiple collapse-tags class="muti-select"> -->
-          <el-select v-model="riskSection" multiple collapse-tags placeholder="请选择" class="muti-select">
-            <el-option v-for="item in riskSections" :key="item.enumCode" :label="item.showMsg" :value="item.showMsg">
+          <el-select  v-model="riskSection" multiple collapse-tags placeholder="请选择" class="muti-select approvalConclus_risk_select">
+            <el-option class="dakjfdsklf" v-for="item in riskSections" :key="item.enumCode" :label="item.showMsg" :value="item.showMsg">
             </el-option>
           </el-select>
         </div>
