@@ -25,7 +25,7 @@
                 </i>
                 <label class="InternetInf_right_label"> 执行信息说明：</label>
                 <!--   @compositionend.native="wordarea(checkData.wbeexEcutedtxt,'执行信息')" @keyup.native="wordarea(checkData.wbeexEcutedtxt,'执行信息')" -->
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL"  v-model="checkData.wbeexEcutedtxt">
+                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wbeexEcutedtxt">
                 </el-input>
               </p>
             </li>
@@ -45,7 +45,7 @@
                 </i>
                 <label class="InternetInf_right_label"> 单位执行信息说明：</label>
                 <!-- @compositionend.native="wordarea(checkData.wnetHirecomtxt,'单位执行信息')" @keyup.native="wordarea(checkData.wnetHirecomtxt,'单位执行信息')" -->
-                <el-input type="textarea" resize="none" :maxlength="this.textareaL" :rows="2"  v-model="checkData.wnetHirecomtxt">
+                <el-input type="textarea" resize="none" :maxlength="this.textareaL" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomtxt">
                 </el-input>
               </p>
             </li>
@@ -68,7 +68,7 @@
                 </i>
                 <label class="InternetInf_right_label"> 失信记录说明： </label>
                 <!--  @compositionend.native="wordarea(checkData.wnetEcutedBreatxt,'失信记录')" @keyup.native="wordarea(checkData.wnetEcutedBreatxt,'失信记录')" -->
-                <el-input type="textarea" resize="none" :maxlength="this.textareaL" :rows="2"  v-model="checkData.wnetEcutedBreatxt">
+                <el-input type="textarea" resize="none" :maxlength="this.textareaL" :rows="2" placeholder="请输入内容" v-model="checkData.wnetEcutedBreatxt">
                 </el-input>
               </p>
             </li>
@@ -88,7 +88,7 @@
                 </i>
                 <label class="InternetInf_right_label"> 单位失信记录说明： </label>
                 <!--  @compositionend.native="wordarea(checkData.wnetHirecomBreatxt,'单位失信')" @keyup.native="wordarea(checkData.wnetHirecomBreatxt,'单位失信')" -->
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL"  v-model="checkData.wnetHirecomBreatxt">
+                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetHirecomBreatxt">
                 </el-input>
               </p>
             </li>
@@ -593,7 +593,7 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">家庭信息</span>
         </template>
-        <div class="CreditForm_FamilyInf">
+        <div class="CreditForm_FamilyInf_edit">
           <ul>
             <li>
               <p>
@@ -714,7 +714,7 @@
               <p>
                 <i class="hint"> </i>
                 <label class="Family_right_label"> 是否支付其生活费： </label>
-                <el-select v-model="checkData.childIspaycost" placeholder="请选择" @change="commentShow1(checkData.childIspaycost,Internet[18])">
+                <el-select class="creditForm_Select_special" v-model="checkData.childIspaycost" placeholder="请选择" @change="commentShow1(checkData.childIspaycost,Internet[18])">
                   <el-option v-for="item in childIspaycost" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -2646,7 +2646,7 @@
 
   .CreditForm_InternetInf li,
   .CreditForm_CheckId li,
-  .CreditForm_FamilyInf li
+  .CreditForm_FamilyInf_edit li
   /* 家庭信息 */
 
     {
@@ -2660,7 +2660,7 @@
   .CreditForm_CheckId p,
   /* 核实信息 ul */
 
-  .CreditForm_FamilyInf li p,
+  .CreditForm_FamilyInf_edit li p,
   /* 家庭信息 */
 
   .CreditForm_live_ul_left li
@@ -2680,14 +2680,14 @@
   .CreditForm_CheckId li p:nth-of-type(even),
   /* 核实信息 ul */
 
-  .CreditForm_FamilyInf li p:nth-of-type(even)
+  .CreditForm_FamilyInf_edit li p:nth-of-type(even)
   /* 家庭信息 */
 
     {
     width: 66.6%
   }
 
-  .CreditForm .CreditForm_FamilyInf li p:nth-of-type(even) span {
+  .CreditForm .CreditForm_FamilyInf_edit li p:nth-of-type(even) span {
     border: none;
   }
 
