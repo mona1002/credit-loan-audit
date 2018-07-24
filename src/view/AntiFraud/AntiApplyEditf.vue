@@ -419,8 +419,6 @@
               if (res.statusCode == '200') {
                 // 更加标志来 选择跳转
                 // 初审/终审 发起反欺诈 提交  -> 代办任务列表
-                this.resMsg = res.msg;
-                done();
                 if (this.antiFlag == '01') {
                   this.$router.push('/taskInWaitting');
                   this.del('初审详情');
