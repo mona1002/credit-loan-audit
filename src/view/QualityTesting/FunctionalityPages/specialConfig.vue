@@ -173,15 +173,16 @@
           this.$confirm('请选择一条数据！', '提示', {
             confirmButtonText: '确定',
             type: 'warning',
-            showCancelButton: false
-          }).then(() => {
-          }).catch(() => {});
+            cancelButtonText: '取消',
+            showCancelButton: true
+          }).then(() => {}).catch(() => {});
           return
         }
         this.$confirm('您确定生成质检任务？', '提示', {
           confirmButtonText: '确定',
           type: 'warning',
-          showCancelButton: false
+          cancelButtonText: '取消',
+          showCancelButton: true
         }).then(() => {
           this.allot();
         }).catch(() => {});

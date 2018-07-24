@@ -10,37 +10,41 @@
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-            <li>
-              <label class="label_width_130">客户名称：</label>
-              <span>{{custName}}</span>
-            </li>
-            <li>
-              <label class="label_width_130">申请类型：</label>
-              <span>{{appTypeTxt}}</span>
-            </li>
-            <li>
-              <label class="label_width_130">进件编号：</label>
-              <span>{{applySubNo}}</span>
-            </li>
-            <li>
-              <label class="label_width_130">证件类型：</label>
-              <span>{{certTypeTxt}}</span>
-            </li>
-            <li>
-              <label class="label_width_130">证件号码：</label>
-              <span>{{certCode}}</span>
-            </li>
-            <li>
-              <label class="label_width_130">产品名称：</label>
-              <span>{{baseProName}}</span>
-            </li>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_130">客户名称：</label>
+                <span>{{custName}}</span>
+              </li>
+              <li>
+                <label class="label_width_130">申请类型：</label>
+                <span>{{appTypeTxt}}</span>
+              </li>
+              <li>
+                <label class="label_width_130">进件编号：</label>
+                <span>{{applySubNo}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_130">证件类型：</label>
+                <span>{{certTypeTxt}}</span>
+              </li>
+              <li>
+                <label class="label_width_130">证件号码：</label>
+                <span>{{certCode}}</span>
+              </li>
+              <li>
+                <label class="label_width_130">产品名称：</label>
+                <span>{{baseProName}}</span>
+              </li>
+            </div>
             <li>
               <label class="label_width_130">申请期限[月]：</label>
               <span>{{loanTerm}}</span>
             </li>
           </ul>
         </div>
-        <div class="approve_btn_area approve_btn_area_width_980" style="margin-top:100px;">
+        <div class="approve_btn_area approve_btn_area_width_1050" style="margin-top:100px;">
           <span class="approve_item" @click="hangOoutBtn">
             <i class="approve_icon HangUpIcon"></i>
             <span class="approve_text">挂起</span>
@@ -463,7 +467,7 @@
             </div>
           </el-collapse-item>
           <!-- 信审核实信息 -->
-          <el-collapse-item title="信审核实信息"  name="2" class="alert_collapse">
+          <el-collapse-item title="信审核实信息" name="2" class="alert_collapse">
             <!-- <el-form-item label="核实可接受最高每期还款额[元]： " style="width:300px;margin-bottom:10px; " class="item-column2 line-height2 ">
                   {{fbalance2}}
                 </el-form-item> -->
@@ -476,7 +480,7 @@
             </div>
           </el-collapse-item>
           <!-- 审批信息 -->
-          <el-collapse-item title="审批信息"  name="3" class="alert_collapse">
+          <el-collapse-item title="审批信息" name="3" class="alert_collapse">
             <!-- <div class="back-form-li radio-li ">
                   <el-form-item label="结论： ">
                     <el-radio label="00 " value='00' v-model="opinionFlag ">同意</el-radio>
@@ -683,7 +687,7 @@
         activeName: ['1'],
         formLabelWidth: '85px',
         formApproLabLeft: "100px",
-        formApproLab: "120px",
+        formApproLab: "123px",
         formApproLabelWidth: "200px",
         formReturn: {},
         rulesReturn: {
@@ -873,7 +877,7 @@
         spjlShow: false,
         lcgjShow: false,
         jujueBtnShow: false, // 拒绝 按钮 BX02
-        activeNames: ['1','2','3'], // 更改 审批 为折叠面板
+        activeNames: ['1', '2', '3'], // 更改 审批 为折叠面板
         isLoading: false, // 审批按钮 是否加载状态
         loadingTitle: '提交', // 默认btn title
         shenPiBtnShow: false, // 初审 审批按钮  BX21
@@ -2350,7 +2354,8 @@
             this.$confirm('此进件不存在大数据风控明细！', '提示', {
               confirmButtonText: '确定',
               type: 'warning',
-              showCancelButton: false
+              cancelButtonText: '取消',
+              showCancelButton: true
             }).then(() => {}).catch(() => {});
             // alert(this.bigDataLogVisible)
           } else if (res.obj) {
@@ -2391,7 +2396,8 @@
           this.$confirm('客户社保公积金未授权！', '提示', {
             confirmButtonText: '确定',
             type: 'warning',
-            showCancelButton: false
+            cancelButtonText: '取消',
+            showCancelButton: true
           }).then(() => {}).catch(() => {});
         } else if (this.social == "(已授权)") {
           this.$router.push({

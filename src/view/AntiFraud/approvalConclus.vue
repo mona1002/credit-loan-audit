@@ -2,8 +2,8 @@
 <template>
   <div class="approval-colun">
     <div class="address-title">
-       <i class="collapse_title_icon"></i>
-          <span class="collapse_title_text">概要信息</span>
+      <i class="collapse_title_icon"></i>
+      <span class="collapse_title_text">概要信息</span>
     </div>
     <ul class="form-ul" style="width:100%;height:auto;overflow:hidden;">
       <li class="item-column3">
@@ -160,7 +160,7 @@
         <i class="approve_icon HangUpIcon"></i>
         <span class="approve_text">挂起</span>
       </span>
-      <span class="approve_item"  v-show="judgeFlag != '03'"  @click="coverFn('02')">
+      <span class="approve_item" v-show="judgeFlag != '03'" @click="coverFn('02')">
         <i class="approve_icon backIcon"></i>
         <span class="approve_text">回退</span>
       </span>
@@ -227,7 +227,7 @@
     </el-dialog> -->
     <!-- 回退弹窗 -->
     <div class="Height_240 ">
-      <el-dialog title="回退信息" :visible.sync="huiTuiShow" :modal="false"  width='600px'>
+      <el-dialog title="回退信息" :visible.sync="huiTuiShow" :modal="false" width='600px'>
         <!-- <el-form :model="formReturn" :rules="rulesReturn" ref="ruleFormReturn"> -->
         <el-form>
           <el-form-item class="alert_collapse_inputLabel" label="回退节点：" :label-width="formLabelWidth">
@@ -405,14 +405,14 @@
     </div> -->
     <!-- 新增弹窗 -->
     <div class="Height_240 ">
-      <el-dialog title="新增" :visible.sync="addLogVisible"  :modal="false ">
-        <el-form :model="ruleFormAdd" :rules="rules" ref="ruleForm" >
-          <el-form-item class="alert_collapse_inputLabel"  prop="caseNums" label="案件编号：" :label-width="formLabelWidth">
+      <el-dialog title="新增" :visible.sync="addLogVisible" :modal="false ">
+        <el-form :model="ruleFormAdd" :rules="rules" ref="ruleForm">
+          <el-form-item class="alert_collapse_inputLabel" prop="caseNums" label="案件编号：" :label-width="formLabelWidth">
             <el-input :rows="1" placeholder="请输入内容" v-model="ruleFormAdd.caseNums" @keyup.native="trimFilter('caseNums')">
             </el-input>
           </el-form-item>
           <div class="dialog_textarea alert_collapse_inputLabel">
-            <el-form-item label="案件描述："  prop="caseDescs" :label-width="formLabelWidth">
+            <el-form-item label="案件描述：" prop="caseDescs" :label-width="formLabelWidth">
               <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="ruleFormAdd.caseDescs" resize="none" @keyup.native="trimFilter('caseDescs')">
               </el-input>
             </el-form-item>
@@ -430,9 +430,9 @@
   export default {
     data() {
       return {
-        ruleFormAdd:{
-          caseNums:'',
-          caseDescs:''
+        ruleFormAdd: {
+          caseNums: '',
+          caseDescs: ''
         },
         formLabelWidth: '85px',
         caseNums: '',
@@ -539,16 +539,33 @@
         channel: '',
         // mainName:'',
         // secondaryName:''
-       rules:{
-caseNums:[
-  { required: true, message: '请输入活动名称', trigger: 'blur' },
-  { min: 0, max: 20, message: '输入长度不能超过20', trigger: 'blur' }
-],
-caseDescs:[  { required: true, message: '请输入活动名称', trigger: 'blur' },
-  { min: 0, max: 500, message: '输入长度不能超过500', trigger: 'blur' }
-]
+        rules: {
+          caseNums: [{
+              required: true,
+              message: '请输入活动名称',
+              trigger: 'blur'
+            },
+            {
+              min: 0,
+              max: 20,
+              message: '输入长度不能超过20',
+              trigger: 'blur'
+            }
+          ],
+          caseDescs: [{
+              required: true,
+              message: '请输入活动名称',
+              trigger: 'blur'
+            },
+            {
+              min: 0,
+              max: 500,
+              message: '输入长度不能超过500',
+              trigger: 'blur'
+            }
+          ]
 
-       }
+        }
       }
     },
     mounted() {
@@ -1094,7 +1111,8 @@ caseDescs:[  { required: true, message: '请输入活动名称', trigger: 'blur'
           this.$confirm('您确定操作？', '提示', {
             confirmButtonText: '确定',
             type: 'warning',
-            showCancelButton: false
+            cancelButtonText: '取消',
+            showCancelButton: true
           }).then(() => {
             // 专员的 提交  
             this.busiState = '30';
@@ -1602,7 +1620,8 @@ caseDescs:[  { required: true, message: '请输入活动名称', trigger: 'blur'
             this.$confirm('此进件不存在大数据风控明细！', '提示', {
               confirmButtonText: '确定',
               type: 'warning',
-              showCancelButton: false
+              cancelButtonText: '取消',
+              showCancelButton: true
             }).then(() => {}).catch(() => {});
           } else if (res.obj) {
             this.$router.push({
@@ -1642,7 +1661,8 @@ caseDescs:[  { required: true, message: '请输入活动名称', trigger: 'blur'
           this.$confirm('客户社保公积金未授权！', '提示', {
             confirmButtonText: '确定',
             type: 'warning',
-            showCancelButton: false
+            cancelButtonText: '取消',
+            showCancelButton: true
           }).then(() => {}).catch(() => {});
         } else if (this.social == "(已授权)") {
           this.$router.push({
@@ -1686,10 +1706,10 @@ caseDescs:[  { required: true, message: '请输入活动名称', trigger: 'blur'
       caseAdd(formName) {
         this.addLogVisible = true;
         // this.caseNums = '';
-         this.ruleFormAdd.caseNums = '';
+        this.ruleFormAdd.caseNums = '';
         // this.caseDescs = '';
         this.ruleFormAdd.caseDescs = '';
-        this.$refs[formName] ? this.$refs[formName].resetFields() : '';       
+        this.$refs[formName] ? this.$refs[formName].resetFields() : '';
       },
       /*案件编号-新增弹框-确认*/
       addSure(formName) {
@@ -1709,58 +1729,58 @@ caseDescs:[  { required: true, message: '请输入活动名称', trigger: 'blur'
         //   return;
         // };
         // if (this.caseNums && this.caseDescs) {
-          // this.post('/caseInfoController/insert', {
-          //   param: {
-          //     caseNum: this.ruleFormAdd.caseNums,
-          //     creatorCode: '',
-          //     creatorOrgCode: '',
-          //     caseDesc: this.ruleFormAdd.caseDescs
-          //   }
-          // }).then(res => {
-          //   if (res.statusCode != 200) {
-          //     this.$message({
-          //       showClose: true,
-          //       message: res.msg,
-          //       type: 'warning'
-          //     });
-          //     return;
-          //   } else {
-          //     this.addLogVisible = false;
-          //     this.caseNum = this.ruleFormAdd.caseNums;
-          //     this.caseDesc = this.ruleFormAdd.caseDescs;
-          //     this.queryCaseNumList();
-          //   }
-          // })
+        // this.post('/caseInfoController/insert', {
+        //   param: {
+        //     caseNum: this.ruleFormAdd.caseNums,
+        //     creatorCode: '',
+        //     creatorOrgCode: '',
+        //     caseDesc: this.ruleFormAdd.caseDescs
+        //   }
+        // }).then(res => {
+        //   if (res.statusCode != 200) {
+        //     this.$message({
+        //       showClose: true,
+        //       message: res.msg,
+        //       type: 'warning'
+        //     });
+        //     return;
+        //   } else {
+        //     this.addLogVisible = false;
+        //     this.caseNum = this.ruleFormAdd.caseNums;
+        //     this.caseDesc = this.ruleFormAdd.caseDescs;
+        //     this.queryCaseNumList();
+        //   }
+        // })
         // }
-         this.$refs[formName].validate((valid) => {
+        this.$refs[formName].validate((valid) => {
           if (valid) {
-       this.post('/caseInfoController/insert', {
-            param: {
-              caseNum: this.ruleFormAdd.caseNums,
-              creatorCode: '',
-              creatorOrgCode: '',
-              caseDesc: this.ruleFormAdd.caseDescs
-            }
-          }).then(res => {
-            if (res.statusCode != 200) {
-              this.$message({
-                showClose: true,
-                message: res.msg,
-                type: 'warning'
-              });
-              return;
-            } else {
-              this.$message({
-                type:'success',
-                message:'新增成功！'
-              })
-              this.addLogVisible = false;
-              this.caseNum = this.ruleFormAdd.caseNums;
-              this.caseDesc = this.ruleFormAdd.caseDescs;
-              this.queryCaseNumList();
-            }
-          })
-} else {
+            this.post('/caseInfoController/insert', {
+              param: {
+                caseNum: this.ruleFormAdd.caseNums,
+                creatorCode: '',
+                creatorOrgCode: '',
+                caseDesc: this.ruleFormAdd.caseDescs
+              }
+            }).then(res => {
+              if (res.statusCode != 200) {
+                this.$message({
+                  showClose: true,
+                  message: res.msg,
+                  type: 'warning'
+                });
+                return;
+              } else {
+                this.$message({
+                  type: 'success',
+                  message: '新增成功！'
+                })
+                this.addLogVisible = false;
+                this.caseNum = this.ruleFormAdd.caseNums;
+                this.caseDesc = this.ruleFormAdd.caseDescs;
+                this.queryCaseNumList();
+              }
+            })
+          } else {
             console.log('error submit!!');
             return false;
           }

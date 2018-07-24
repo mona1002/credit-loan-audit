@@ -42,7 +42,7 @@
           <span class="collapse_title_text">提报来源</span>
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
-          <ul>
+          <ul>  <div class=" CreditForm_div_border clearFix">
             <li>
               <label class="label_width_166">提报人工号：</label>
               <span>{{fraudApplyInfo.applyCode}}</span>
@@ -54,7 +54,7 @@
             <li>
               <label class="label_width_166">提报渠道：</label>
               <span>{{fraudApplyInfo.channelTxt}}</span>
-            </li>
+            </li> </div> 
             <li class="text_area_li triplet_textarea_width margin_top_5">
               <label class="label_width_166">理由：</label>
               <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="reason" disabled>
@@ -85,19 +85,19 @@
           <span class="collapse_title_text">调查记录</span>
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
-          <ul>
+          <ul>   <div class=" CreditForm_div_border clearFix">
             <li class="text_area_li triplet_textarea_width">
               <label class="label_width_166">网查：</label>
               <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.netCheck"
                 disabled>
               </el-input>
-            </li>
+            </li> </div>  <div class=" CreditForm_div_border clearFix">
             <li class="text_area_li triplet_textarea_width margin_top_5">
               <label class="label_width_166">114：</label>
               <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.oof"
                 disabled>
               </el-input>
-            </li>
+            </li> </div> 
             <li class="text_area_li triplet_textarea_width margin_top_5">
               <label class="label_width_166">其他：</label>
               <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.other"

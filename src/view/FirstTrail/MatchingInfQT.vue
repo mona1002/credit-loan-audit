@@ -2,175 +2,175 @@
   <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
     <!-- 质检详情-编辑部分- -->
     <!--反欺诈审批结论轨迹，质检部分调另一个新鞋的接口库== 反欺诈-8.反欺诈查询所有审批轨迹 -->
-      <!-- 进件人详情 -->
-      <p class="PerDtl">
-        <span> 借款人： {{custName}}</span>
-        <span> 进件编号: {{customInf.applyMainNo}}</span>
-        <span> 证件号码: {{certCode}}</span>
-        <span> 移动电话：{{mobile}}</span>
-        <span> 进件机构: {{customInf.appOrgName}}</span>
-        <span> 门店成立时间: {{customInf.appOrgRegisterDate}}</span>
-        <span> 业务员入职时间： {{customInf.salPerEmployDate}}</span>
-        <span>{{customInf.adminIntroduce}}</span>
-      </p>
-      <div class="SplitScreen_wrap" id="rWrap" ref="rWrap">
-        <!-- 左侧分屏部分 -->
-        <div class="left" ref="rLeft">
-          <div ref="Left_title" class="Left_ul" @mouseenter="showList" @mouseleave="hid">
-            <!-- 左侧 title列表 -->
-            <ul>
-              <li ref="tabOne" class="tab1Default" v-for="(val,index) in items1" :key="index" @mousedown="flag1[index] &&  tab1($event,index,val)"
-                :class="{tab1Act:tab1Index==index}">
-                {{val}}</li>
-            </ul>
-          </div>
-          <!-- 左侧详情 -->
-          <div ref="Left_detail" class="Left_detail_div">
-            <p class="Left_right_Title"> {{this.title}}
-              <span class="icon_FullScreen"  @click="FullScreen">
-              </span>
-              <span class="showAllList" @mouseenter="showList" @mouseleave="hid">
-                <img src="../../../static/images/icon-02.png">
-              </span>
-            </p>
-            <div class="Left_right_BigImg ">
-              <RAudioVisualLeft ref="AudioLeft" msg="MspLone" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></RAudioVisualLeft>
-              <Rremark v-if=" this.tabContent1==1"></Rremark>
-              <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
-              <RapplicationInformationDetail v-if=" this.tabContent1==3">申请信息</RapplicationInformationDetail>
-              <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail>
-              <PhoneCredit v-if=" this.tabContent1==5" :addBtn="false"> 电话征信</PhoneCredit>
-              <FCreditForm v-if=" this.tabContent1==6"  :applyId='tastwaitingPass.ApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
-              <RcreditInvestigation v-if=" this.tabContent1==7">实地征信</RcreditInvestigation>
-              <aMAntiApplyInf v-if=" this.tabContent1==8" :applyId='tastwaitingPass.ApplyId' >反欺诈结论</aMAntiApplyInf>
-              <RantiFraudInvestigation v-if=" this.tabContent1==9" :isShow='false' :applyId='tastwaitingPass.ApplyId'> 反欺诈调查</RantiFraudInvestigation>
-              <RFinanceInformation v-if=" this.tabContent1==10">财务信息</RFinanceInformation>
-              <!-- <RprocessTrajectory v-if=" this.tabContent1==9">流程轨迹</RprocessTrajectory> -->
-              <div class='tab2_Content_show' v-if="RoleSHow=='partOne'">
-                <!-- 专员部分 -->
-                <QTAprovalConclution v-if=" this.tabContent1==11 ">反欺诈审批结论轨迹 </QTAprovalConclution>
-                <RApprovalConclusion v-if=" this.tabContent1==12 ">审批结论轨迹</RApprovalConclusion>
-                <regularQT v-if=" this.tabContent1==13&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
-                <QTResultCheck v-if=" this.tabContent1==13&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
-              </div>
-              <div class='tab2_Content_show' v-if="RoleSHow=='partTwo'">
-                <!-- 主管部分 -->
-                <regularQT v-if=" this.tabContent1==11&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
-                <QTResultCheck v-if=" this.tabContent1==11&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
-              </div>
-              <div class='tab2_Content_show' v-if="RoleSHow=='partThree'">
-                <!-- 质检部分 -->
-                <QTAprovalConclution v-if=" this.tabContent1==11">反欺诈审批结论轨迹 </QTAprovalConclution>
-                <RApprovalConclusion v-if=" this.tabContent1==12">审批结论轨迹</RApprovalConclusion>
-                <!-- <ComplianceProcess v-if=" this.tabContent1==11 && this.QTmark" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess> -->
-                <!-- <RulesReApply v-if=" this.tabContent1==12 && this.QTmark" :propReApply='ReApplyMark'>合规复议申请</RulesReApply> -->
-                <ComplianceProcess v-if=" this.tabContent1==13" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
-                <RulesReApply v-if=" this.tabContent1==14" :propReApply='ReApplyMark' :applyId='tastwaitingPass.ApplyId'>合规复议申请</RulesReApply>
-                <!-- <regularQT v-if=" this.tabContent1==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC' >质检结论</regularQT> -->
-                <regularQT v-if=" this.tabContent1==15&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
-                <QTResultCheck v-if=" this.tabContent1==15&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
-              </div>
-              <!-- <QTAprovalConclution v-if=" this.tabContent1==9&& this.Managermark">反欺诈审批结论轨迹 </QTAprovalConclution>
+    <!-- 进件人详情 -->
+    <p class="PerDtl">
+      <span> 借款人： {{custName}}</span>
+      <span> 进件编号: {{customInf.applyMainNo}}</span>
+      <span> 证件号码: {{certCode}}</span>
+      <span> 移动电话：{{mobile}}</span>
+      <span> 进件机构: {{customInf.appOrgName}}</span>
+      <span> 门店成立时间: {{customInf.appOrgRegisterDate}}</span>
+      <span> 业务员入职时间： {{customInf.salPerEmployDate}}</span>
+      <span>{{customInf.adminIntroduce}}</span>
+    </p>
+    <div class="SplitScreen_wrap" id="rWrap" ref="rWrap">
+      <!-- 左侧分屏部分 -->
+      <div class="left" ref="rLeft">
+        <div ref="Left_title" class="Left_ul" @mouseenter="showList" @mouseleave="hid">
+          <!-- 左侧 title列表 -->
+          <ul>
+            <li ref="tabOne" class="tab1Default" v-for="(val,index) in items1" :key="index" @mousedown="flag1[index] &&  tab1($event,index,val)"
+              :class="{tab1Act:tab1Index==index}">
+              {{val}}</li>
+          </ul>
+        </div>
+        <!-- 左侧详情 -->
+        <div ref="Left_detail" class="Left_detail_div">
+          <p class="Left_right_Title"> {{this.title}}
+            <span class="icon_FullScreen" @click="FullScreen">
+            </span>
+            <span class="showAllList" @mouseenter="showList" @mouseleave="hid">
+              <img src="../../../static/images/icon-02.png">
+            </span>
+          </p>
+          <div class="Left_right_BigImg ">
+            <RAudioVisualLeft ref="AudioLeft" msg="MspLone" v-if=" this.tabContent1==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></RAudioVisualLeft>
+            <Rremark v-if=" this.tabContent1==1"></Rremark>
+            <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
+            <RapplicationInformationDetail v-if=" this.tabContent1==3">申请信息</RapplicationInformationDetail>
+            <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail>
+            <PhoneCredit v-if=" this.tabContent1==5" :addBtn="false"> 电话征信</PhoneCredit>
+            <FCreditForm v-if=" this.tabContent1==6" :applyId='tastwaitingPass.ApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
+            <RcreditInvestigation v-if=" this.tabContent1==7">实地征信</RcreditInvestigation>
+            <aMAntiApplyInf v-if=" this.tabContent1==8" :applyId='tastwaitingPass.ApplyId'>反欺诈结论</aMAntiApplyInf>
+            <RantiFraudInvestigation v-if=" this.tabContent1==9" :isShow='false' :applyId='tastwaitingPass.ApplyId'> 反欺诈调查</RantiFraudInvestigation>
+            <RFinanceInformation v-if=" this.tabContent1==10">财务信息</RFinanceInformation>
+            <!-- <RprocessTrajectory v-if=" this.tabContent1==9">流程轨迹</RprocessTrajectory> -->
+            <div class='tab2_Content_show' v-if="RoleSHow=='partOne'">
+              <!-- 专员部分 -->
+              <QTAprovalConclution v-if=" this.tabContent1==11 ">反欺诈审批结论轨迹 </QTAprovalConclution>
+              <RApprovalConclusion v-if=" this.tabContent1==12 ">审批结论轨迹</RApprovalConclusion>
+              <regularQT v-if=" this.tabContent1==13&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+              <QTResultCheck v-if=" this.tabContent1==13&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+            </div>
+            <div class='tab2_Content_show' v-if="RoleSHow=='partTwo'">
+              <!-- 主管部分 -->
+              <regularQT v-if=" this.tabContent1==11&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+              <QTResultCheck v-if=" this.tabContent1==11&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+            </div>
+            <div class='tab2_Content_show' v-if="RoleSHow=='partThree'">
+              <!-- 质检部分 -->
+              <QTAprovalConclution v-if=" this.tabContent1==11">反欺诈审批结论轨迹 </QTAprovalConclution>
+              <RApprovalConclusion v-if=" this.tabContent1==12">审批结论轨迹</RApprovalConclusion>
+              <!-- <ComplianceProcess v-if=" this.tabContent1==11 && this.QTmark" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess> -->
+              <!-- <RulesReApply v-if=" this.tabContent1==12 && this.QTmark" :propReApply='ReApplyMark'>合规复议申请</RulesReApply> -->
+              <ComplianceProcess v-if=" this.tabContent1==13" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
+              <RulesReApply v-if=" this.tabContent1==14" :propReApply='ReApplyMark' :applyId='tastwaitingPass.ApplyId'>合规复议申请</RulesReApply>
+              <!-- <regularQT v-if=" this.tabContent1==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC' >质检结论</regularQT> -->
+              <regularQT v-if=" this.tabContent1==15&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+              <QTResultCheck v-if=" this.tabContent1==15&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+            </div>
+            <!-- <QTAprovalConclution v-if=" this.tabContent1==9&& this.Managermark">反欺诈审批结论轨迹 </QTAprovalConclution>
               <RApprovalConclusion v-if=" this.tabContent1==10&& this.Managermark">审批结论轨迹</RApprovalConclusion>
               <ComplianceProcess  v-if=" this.tabContent1==11 && this.QTmark" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
               <RulesReApply  v-if=" this.tabContent1==12 && this.QTmark" :propReApply='ReApplyMark'>合规复议申请</RulesReApply> -->
-            </div>
           </div>
         </div>
-        <!-- 中间 -->
-        <div class="SP_middle" ref="RM" id="RM" v-show="midShow"></div>
-        <!-- 右侧分屏部分 -->
-        <div class="right" ref="rRight">
-          <span  class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen"></span>
-          <!-- 右屏tab 表头 -->
-          <div class="Right_tab_title_div">
-            <!-- 左右滑动 图标  -->
-            <span ref="leftBtn" class="pre_next_btn_wrap" @click="leftMovingBtn">
-              <img src="../../../static/images/Shape@1x.png">
-            </span>
-            <span class="pre_next_btn_wrap" style="color:red;" @click="rightMovingBtn">
-              <img src="../../../static/images/Shaperight@1x.png">
-            </span>
-            <!-- tab 2 -->
-            <div class="Right_tab_ul_wrap">
-              <ul ref="right_tab_ul" style="left:0;right:0;width:1800px">
-                <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="flag2[index] &&  tab2($event,index,val)"
-                  :class="{tab2Act:tab2Index==index}">
-                  {{val}}</li>
-              </ul>
-            </div>
+      </div>
+      <!-- 中间 -->
+      <div class="SP_middle" ref="RM" id="RM" v-show="midShow"></div>
+      <!-- 右侧分屏部分 -->
+      <div class="right" ref="rRight">
+        <span class="icon_showHalf" v-show="showHalfBtn" @click="DblScreen"></span>
+        <!-- 右屏tab 表头 -->
+        <div class="Right_tab_title_div">
+          <!-- 左右滑动 图标  -->
+          <span ref="leftBtn" class="pre_next_btn_wrap" @click="leftMovingBtn" style="background:#4099ff;z-index:40;">
+            <img src="../../../static/images/Shape@1x.png">
+          </span>
+          <span class="pre_next_btn_wrap" style="color:red;" @click="rightMovingBtn">
+            <img src="../../../static/images/Shaperight@1x.png">
+          </span>
+          <!-- tab 2 -->
+          <div class="Right_tab_ul_wrap">
+            <ul ref="right_tab_ul" style="left:0;right:0;width:1800px">
+              <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="flag2[index] &&  tab2($event,index,val)"
+                :class="{tab2Act:tab2Index==index}">
+                {{val}}</li>
+            </ul>
           </div>
-          <!-- 右侧 tab 内容 -->
-          <div class="tab2_Content">
-            <RAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></RAudioVisual>
-            <Rremark v-if=" this.tabContent2==1"></Rremark>
-            <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
-            <RapplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
-            <RborrowerInformationSetail v-if=" this.tabContent2==4" :isFull.sync="isFull">借款人资料</RborrowerInformationSetail>
-            <PhoneCredit v-if=" this.tabContent2==5" :addBtn="false"> 电话征信</PhoneCredit>
-            <FCreditForm v-if=" this.tabContent2==6"  :applyId='tastwaitingPass.ApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
-            <RcreditInvestigation v-if=" this.tabContent2==7">实地征信</RcreditInvestigation>
-            <aMAntiApplyInf v-if=" this.tabContent2==8" :applyId='tastwaitingPass.ApplyId'>反欺诈结论</aMAntiApplyInf>
-            <RantiFraudInvestigation v-if=" this.tabContent2==9" :isShow='false' :applyId='tastwaitingPass.ApplyId'> 反欺诈调查</RantiFraudInvestigation>
-            <RFinanceInformation v-if=" this.tabContent2==10">财务信息</RFinanceInformation>
-            <!-- <RprocessTrajectory v-if=" this.tabContent2==9">流程轨迹</RprocessTrajectory> -->
+        </div>
+        <!-- 右侧 tab 内容 -->
+        <div class="tab2_Content">
+          <RAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :comBtn.sync='comBtn'></RAudioVisual>
+          <Rremark v-if=" this.tabContent2==1"></Rremark>
+          <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
+          <RapplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
+          <RborrowerInformationSetail v-if=" this.tabContent2==4" :isFull.sync="isFull">借款人资料</RborrowerInformationSetail>
+          <PhoneCredit v-if=" this.tabContent2==5" :addBtn="false"> 电话征信</PhoneCredit>
+          <FCreditForm v-if=" this.tabContent2==6" :applyId='tastwaitingPass.ApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
+          <RcreditInvestigation v-if=" this.tabContent2==7">实地征信</RcreditInvestigation>
+          <aMAntiApplyInf v-if=" this.tabContent2==8" :applyId='tastwaitingPass.ApplyId'>反欺诈结论</aMAntiApplyInf>
+          <RantiFraudInvestigation v-if=" this.tabContent2==9" :isShow='false' :applyId='tastwaitingPass.ApplyId'> 反欺诈调查</RantiFraudInvestigation>
+          <RFinanceInformation v-if=" this.tabContent2==10">财务信息</RFinanceInformation>
+          <!-- <RprocessTrajectory v-if=" this.tabContent2==9">流程轨迹</RprocessTrajectory> -->
 
-            <div class='tab2_Content_show' v-if="this.RoleSHow=='partOne'">
-              <!-- 专员部分 -->
-              <QTAprovalConclution v-if=" this.tabContent2==11 ">反欺诈审批结论轨迹 </QTAprovalConclution>
-              <RApprovalConclusion v-if=" this.tabContent2==12 ">审批结论轨迹</RApprovalConclusion>
-              <regularQT v-if=" this.tabContent2==13&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
-              <QTResultCheck v-if=" this.tabContent2==13&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
-            </div>
-            <div class='tab2_Content_show' v-if="this.RoleSHow=='partTwo'">
-              <!-- 主管部分 -->
-              <regularQT v-if=" this.tabContent2==11&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
-              <QTResultCheck v-if=" this.tabContent2==11&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+          <div class='tab2_Content_show' v-if="this.RoleSHow=='partOne'">
+            <!-- 专员部分 -->
+            <QTAprovalConclution v-if=" this.tabContent2==11 ">反欺诈审批结论轨迹 </QTAprovalConclution>
+            <RApprovalConclusion v-if=" this.tabContent2==12 ">审批结论轨迹</RApprovalConclusion>
+            <regularQT v-if=" this.tabContent2==13&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+            <QTResultCheck v-if=" this.tabContent2==13&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
+          </div>
+          <div class='tab2_Content_show' v-if="this.RoleSHow=='partTwo'">
+            <!-- 主管部分 -->
+            <regularQT v-if=" this.tabContent2==11&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+            <QTResultCheck v-if=" this.tabContent2==11&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
 
-            </div>
-            <div class='tab2_Content_show' v-if="this.RoleSHow=='partThree'">
-              <!-- 质检部分 -->
-              <QTAprovalConclution v-if=" this.tabContent2==11">反欺诈审批结论轨迹 </QTAprovalConclution>
-              <RApprovalConclusion v-if=" this.tabContent2==12">审批结论轨迹</RApprovalConclusion>
-              <!-- <ComplianceProcess v-if=" this.tabContent2==11 && this.QTmark" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
+          </div>
+          <div class='tab2_Content_show' v-if="this.RoleSHow=='partThree'">
+            <!-- 质检部分 -->
+            <QTAprovalConclution v-if=" this.tabContent2==11">反欺诈审批结论轨迹 </QTAprovalConclution>
+            <RApprovalConclusion v-if=" this.tabContent2==12">审批结论轨迹</RApprovalConclusion>
+            <!-- <ComplianceProcess v-if=" this.tabContent2==11 && this.QTmark" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
               <RulesReApply v-if=" this.tabContent2==12 && this.QTmark" :propReApply='ReApplyMark'>合规复议申请</RulesReApply> -->
-              <ComplianceProcess v-if=" this.tabContent2==13" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
-              <RulesReApply v-if=" this.tabContent2==14" :propReApply='ReApplyMark' :applyId='tastwaitingPass.ApplyId'>合规复议申请</RulesReApply>
-              <!-- <regularQT v-if=" this.tabContent2==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC' >质检结论</regularQT> -->
-              <regularQT v-if=" this.tabContent2==15&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
-              <QTResultCheck v-if=" this.tabContent2==15&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
-            </div>
+            <ComplianceProcess v-if=" this.tabContent2==13" :propQT='QTC'>合规质检结论轨迹</ComplianceProcess>
+            <RulesReApply v-if=" this.tabContent2==14" :propReApply='ReApplyMark' :applyId='tastwaitingPass.ApplyId'>合规复议申请</RulesReApply>
+            <!-- <regularQT v-if=" this.tabContent2==11&&this.QTConclutionMark=='commissioner'" :propQTconclution='QTC' >质检结论</regularQT> -->
+            <regularQT v-if=" this.tabContent2==15&&QTC.pageType!='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</regularQT>
+            <QTResultCheck v-if=" this.tabContent2==15&&QTC.pageType=='checkApp_trial_self'" :propQTconclution='QTC'>质检结论</QTResultCheck>
           </div>
         </div>
       </div>
-      <!-- 对比弹出层 -->
-      <div class="AudioVisual_wrap_compare" v-show="CompareAlert" v-on:CompareShow="compBtnS">
-        <el-button type="primary compareClose" @click="closeCompareBtn">关闭</el-button>
-        <!-- 弹出层左侧 div -->
-        <div class="AudioVisual_wrap_compare_left ">
-          <p>影像资料</p>
-          <!-- h2 标题栏 -->
-          <div class="AlertContent">
-            <RAudioVisualLeft ref="AudioLeftCom" msg="MspLtwo" :comBtn.sync='alertComBtn'></RAudioVisualLeft>
-          </div>
-        </div>
-        <!-- 弹出层右侧 div -->
-        <div class="AudioVisual_wrap_compare_right ">
-          <!-- 搜索框 -->
-          <p class="customName">客户名称：
-            <el-input v-model="AlertSearch" :disabled="true" style="display:inline;"></el-input>
-            <el-button type="primary" @click="compareProps" class="AudioVisualLeft_compareIcon">
-              <i class="el-icon-search" style="fontSize:16px"></i>
-            </el-button>
-          </p>
-          <!-- h2 标题栏 -->
-          <div class="AlertContent">
-            <RAudioVisualLeft msg="MspLthree" ref="audioChild" :comBtn.sync='alertComBtn' v-on:inputInf="inputInner"></RAudioVisualLeft>
-          </div>
-        </div>
-      </div>
-      <!-- 对比弹出层结束 -->
     </div>
+    <!-- 对比弹出层 -->
+    <div class="AudioVisual_wrap_compare" v-show="CompareAlert" v-on:CompareShow="compBtnS">
+      <el-button type="primary compareClose" @click="closeCompareBtn">关闭</el-button>
+      <!-- 弹出层左侧 div -->
+      <div class="AudioVisual_wrap_compare_left ">
+        <p>影像资料</p>
+        <!-- h2 标题栏 -->
+        <div class="AlertContent">
+          <RAudioVisualLeft ref="AudioLeftCom" msg="MspLtwo" :comBtn.sync='alertComBtn'></RAudioVisualLeft>
+        </div>
+      </div>
+      <!-- 弹出层右侧 div -->
+      <div class="AudioVisual_wrap_compare_right ">
+        <!-- 搜索框 -->
+        <p class="customName">客户名称：
+          <el-input v-model="AlertSearch" :disabled="true" style="display:inline;"></el-input>
+          <el-button type="primary" @click="compareProps" class="AudioVisualLeft_compareIcon">
+            <i class="el-icon-search" style="fontSize:16px"></i>
+          </el-button>
+        </p>
+        <!-- h2 标题栏 -->
+        <div class="AlertContent">
+          <RAudioVisualLeft msg="MspLthree" ref="audioChild" :comBtn.sync='alertComBtn' v-on:inputInf="inputInner"></RAudioVisualLeft>
+        </div>
+      </div>
+    </div>
+    <!-- 对比弹出层结束 -->
+  </div>
 </template>
 <script>
   // 编辑
@@ -310,7 +310,7 @@
           this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
           this.$refs.right_tab_ul.style.left = "0";
           this.DblScreen();
-           this.CompareAlert=false;//关闭弹出层
+          this.CompareAlert = false; //关闭弹出层
         }
       }
     },
@@ -341,6 +341,7 @@
         this.CompareAlert = false;
       },
       leftMovingBtn() {
+        console.log('a')
         if (parseFloat(this.$refs.right_tab_ul.style.left) >= 0) {
           if (this.leftBtnMark) {
             this.$refs.right_tab_ul.style.left = "25px";
@@ -352,6 +353,7 @@
         }
       },
       rightMovingBtn() {
+        console.log('b')
         if (parseFloat(this.$refs.right_tab_ul.style.left) <= -1350) {
           this.$refs.right_tab_ul.style.left = "-1400px";
         } else {

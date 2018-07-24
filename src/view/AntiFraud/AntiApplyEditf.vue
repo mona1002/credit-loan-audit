@@ -9,18 +9,20 @@
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-            <li>
-              <label class="label_width_190">进件编号：</label>
-              <span>{{applySubno}}</span>
-            </li>
-            <li>
-              <label class="label_width_190">客户名称：</label>
-              <span>{{applyCustName}}</span>
-            </li>
-            <li>
-              <label class="label_width_190">证件类型：</label>
-              <span>{{certTypeTxt}}</span>
-            </li>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_190">进件编号：</label>
+                <span>{{applySubno}}</span>
+              </li>
+              <li>
+                <label class="label_width_190">客户名称：</label>
+                <span>{{applyCustName}}</span>
+              </li>
+              <li>
+                <label class="label_width_190">证件类型：</label>
+                <span>{{certTypeTxt}}</span>
+              </li>
+            </div>
             <li>
               <label class="label_width_190">证件号码：</label>
               <span>{{certCode}}</span>
@@ -39,32 +41,36 @@
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-            <li class="inputInf">
-              <label class="label_width_190">
-                <i class="required_Red">* </i>反欺诈申请类型主原因：</label>
-              <span>
-                <el-select @change="mainselectChange" v-model="mainReason">
-                  <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
-                  </el-option>
-                </el-select>
-              </span>
-            </li>
-            <li class="inputInf">
-              <label class="label_width_190">子原因：</label>
-              <span>
-                <el-select @change="secondselectChange" v-model="secondReason">
-                  <el-option v-for="item in secondReasons" :key="item.id" :label="item.reasonName" :value="item">
-                  </el-option>
-                </el-select>
-              </span>
-            </li>
-            <li class="text_area_li_5rows triplet_textarea_width" style="margin-top:5px;">
-              <label class="label_width_190">
-                <i class="required_Red">* </i>欺诈上报描述：</label>
-              <span>
-                <el-input v-model="applyDesc" style='width:calc( 50% + 170px);' type="textarea" :rows="5" resize=none :maxlength="500"></el-input>
-              </span>
-            </li>
+            <div class=" CreditForm_div_border clearFix">
+              <li class="inputInf">
+                <label class="label_width_190">
+                  <i class="required_Red">* </i>反欺诈申请类型主原因：</label>
+                <span>
+                  <el-select @change="mainselectChange" v-model="mainReason">
+                    <el-option v-for="item in mainReasons" :key="item.id" :label="item.reasonName" :value="item">
+                    </el-option>
+                  </el-select>
+                </span>
+              </li>
+              <li class="inputInf">
+                <label class="label_width_190">子原因：</label>
+                <span>
+                  <el-select @change="secondselectChange" v-model="secondReason">
+                    <el-option v-for="item in secondReasons" :key="item.id" :label="item.reasonName" :value="item">
+                    </el-option>
+                  </el-select>
+                </span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li class="text_area_li_5rows triplet_textarea_width" style="margin-top:5px;">
+                <label class="label_width_190">
+                  <i class="required_Red">* </i>欺诈上报描述：</label>
+                <span>
+                  <el-input v-model="applyDesc" style='width:calc( 50% + 170px);' type="textarea" :rows="5" resize=none :maxlength="500"></el-input>
+                </span>
+              </li>
+            </div>
             <li class='clearFloat'>
               <label class="label_width_190">反欺诈申请人：</label>
               <span>{{userCode}}</span>
@@ -368,110 +374,198 @@
           });
           return;
         }
-        const h = this.$createElement;
-        this.$msgbox({
-          title: '提示',
-          message: h('p', null, [
-            h('span', null, '确定操作? '),
-          ]),
-          showCancelButton: true,
+        this.$confirm('确定操作？', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
-          modal: false,
-          beforeClose: (action, instance, done) => {
-            if (action === 'confirm') {
-              instance.confirmButtonLoading = true;
-              instance.confirmButtonText = '执行中...';
-              this.post('/fraudApplyInfoController/startAntiFraudApply', {
-                  userCode: this.userCode, // 用户编号
-                  orgCode: this.orgCode, // 机构编号
-                  fraudApplyInfo: {
-                    creditappTaskid: this.creditappTaskid, // 任务id
-                    applyId: this.id, // 申请单ID
-                    // applyId:'201506260173032182',
-                    applySubno: this.applySubno, // 进件编号
-                    // applyCode: this.applyCode, // 申请人code
-                    // applyPersonName: this.applyPersonName, // 申请人姓名
-                    // appOrgCode: this.appOrgCode, // 申请机构code
-                    // appOrgName: this.appOrgName, // 申请机构名称
-                    mainreasonId: this.mainId, // 欺诈主原因id
-                    subreasonId: this.secondId, // 欺诈子原因id
-                    applyDesc: this.applyDesc, // 反欺诈申请描述
-                    mainreaName: this.mainReason, // 欺诈主原因名称
-                    subreaName: this.secondReason, // 欺诈子原因名称
-                    // appOrgId: this.appOrgId, // 申请机构id
-                    // appSuborgId: this.appSuborgId, // 申请机构科室id
-                    // appSuborgCode: this.appSuborgCode, // 申请机构科室code
-                    // appSuborgName: this.appSuborgName, // 申请机构科室名称
-                    proId: this.proId, // 产品id
-                    proCode: this.proCode, // 产品code
-                    applyCustId: this.applyCustId, // 客户id
-                    applyCustName: this.applyCustName, // 客户姓名
-                    applyCustNo: this.applyCustNo, // 客户编号
-                    channel: this.channel, // 渠道
-                    certCode: this.certCode, // 证件号码
-                    proName: this.proName, // 产品名称
-                    busiState: this.busiState, // 状态
-                    // wayOf:this.wayOf//（00：审批，01：复议，02：质检）--不入了
-                  },
-                  currentTemplateId: this.currentTemplateId, // 流程模版id
-                })
-                .then(res => {
-                  if (res.statusCode == '200') {
-                    // 更加标志来 选择跳转
-                    // 初审/终审 发起反欺诈 提交  -> 代办任务列表
-                    this.resMsg = res.msg;
-                    done();
-                    if (this.antiFlag == '01') {
-                      this.$router.push('/taskInWaitting');
-                      this.del('初审详情');
-                    } else if (this.antiFlag == '02') {
-                      this.$router.push('/FtaskInWaitting');
-                      this.del('终审详情');
-                    } else if (this.antiFlag == '03') {
-                      this.$router.push('/AntiFraud');
-                      this.del('反欺诈详情');
-                    } else if (this.antiFlag == '04') {
-                      this.$router.push('/AntiFraud');
-                      this.del('反欺诈详情');
-                    } else if (this.antiFlag == '05') {
-                      this.$router.push('/reconsiderList');
-                      this.del('复议详情');
-                    } else if (this.antiFlag == '06') {
-                      this.$router.push('/reconsiderList');
-                      this.del('复议详情');
-                    } else if (this.antiFlag == '07' || this.antiFlag == '08' || this.antiFlag == '10' || this.antiFlag ==
-                      '11' || this.antiFlag == '12' || this.antiFlag == '13') {
-                      this.del('质检详情');
-                    }
-                    this.del('反欺诈申请-编辑');
-                  } else {
-                    if (res.msg) {
-                      this.$message({
-                        type: 'warning',
-                        message: res.msg
-                      });
-                    } else {
-                      this.$message({
-                        type: 'warning',
-                        message: '您无此操作权限！'
-                      });
-                    }
-                    instance.confirmButtonText = '';
-                  }
-                  instance.confirmButtonLoading = false;
-                })
-            } else {
-              done();
-            }
-          }
-        }).then(action => {
-          this.$message({
-            type: 'success',
-            message: this.resMsg
-          });
-
+          type: 'warning',
+          showCancelButton: true
+        }).then(() => {
+          console.log('确定')
+          this.post('/fraudApplyInfoController/startAntiFraudApply', {
+              userCode: this.userCode, // 用户编号
+              orgCode: this.orgCode, // 机构编号
+              fraudApplyInfo: {
+                creditappTaskid: this.creditappTaskid, // 任务id
+                applyId: this.id, // 申请单ID
+                // applyId:'201506260173032182',
+                applySubno: this.applySubno, // 进件编号
+                // applyCode: this.applyCode, // 申请人code
+                // applyPersonName: this.applyPersonName, // 申请人姓名
+                // appOrgCode: this.appOrgCode, // 申请机构code
+                // appOrgName: this.appOrgName, // 申请机构名称
+                mainreasonId: this.mainId, // 欺诈主原因id
+                subreasonId: this.secondId, // 欺诈子原因id
+                applyDesc: this.applyDesc, // 反欺诈申请描述
+                mainreaName: this.mainReason, // 欺诈主原因名称
+                subreaName: this.secondReason, // 欺诈子原因名称
+                // appOrgId: this.appOrgId, // 申请机构id
+                // appSuborgId: this.appSuborgId, // 申请机构科室id
+                // appSuborgCode: this.appSuborgCode, // 申请机构科室code
+                // appSuborgName: this.appSuborgName, // 申请机构科室名称
+                proId: this.proId, // 产品id
+                proCode: this.proCode, // 产品code
+                applyCustId: this.applyCustId, // 客户id
+                applyCustName: this.applyCustName, // 客户姓名
+                applyCustNo: this.applyCustNo, // 客户编号
+                channel: this.channel, // 渠道
+                certCode: this.certCode, // 证件号码
+                proName: this.proName, // 产品名称
+                busiState: this.busiState, // 状态
+                // wayOf:this.wayOf//（00：审批，01：复议，02：质检）--不入了
+              },
+              currentTemplateId: this.currentTemplateId, // 流程模版id
+            })
+            .then(res => {
+              if (res.statusCode == '200') {
+                // 更加标志来 选择跳转
+                // 初审/终审 发起反欺诈 提交  -> 代办任务列表
+                this.resMsg = res.msg;
+                done();
+                if (this.antiFlag == '01') {
+                  this.$router.push('/taskInWaitting');
+                  this.del('初审详情');
+                } else if (this.antiFlag == '02') {
+                  this.$router.push('/FtaskInWaitting');
+                  this.del('终审详情');
+                } else if (this.antiFlag == '03') {
+                  this.$router.push('/AntiFraud');
+                  this.del('反欺诈详情');
+                } else if (this.antiFlag == '04') {
+                  this.$router.push('/AntiFraud');
+                  this.del('反欺诈详情');
+                } else if (this.antiFlag == '05') {
+                  this.$router.push('/reconsiderList');
+                  this.del('复议详情');
+                } else if (this.antiFlag == '06') {
+                  this.$router.push('/reconsiderList');
+                  this.del('复议详情');
+                } else if (this.antiFlag == '07' || this.antiFlag == '08' || this.antiFlag == '10' || this.antiFlag ==
+                  '11' || this.antiFlag == '12' || this.antiFlag == '13') {
+                  this.del('质检详情');
+                }
+                this.del('反欺诈申请-编辑');
+              } else {
+                if (res.msg) {
+                  this.$message({
+                    type: 'warning',
+                    message: res.msg
+                  });
+                } else {
+                  this.$message({
+                    type: 'warning',
+                    message: '您无此操作权限！'
+                  });
+                }
+              }
+            })
+        }).catch(() => {
+          console.log('cancle')
         });
+
+        // const h = this.$createElement;
+        // this.$msgbox({
+        //   title: '提示',
+        //   message: h('p', null, [
+        //     h('span', null, '确定操作? '),
+        //   ]),
+        //   showCancelButton: true,
+        //   confirmButtonText: '确定',
+        //   cancelButtonText: '取消',
+        //   modal: false,
+        //   beforeClose: (action, instance, done) => {
+        //     if (action === 'confirm') {
+        //       instance.confirmButtonLoading = true;
+        //       instance.confirmButtonText = '执行中...';
+        //       this.post('/fraudApplyInfoController/startAntiFraudApply', {
+        //           userCode: this.userCode, // 用户编号
+        //           orgCode: this.orgCode, // 机构编号
+        //           fraudApplyInfo: {
+        //             creditappTaskid: this.creditappTaskid, // 任务id
+        //             applyId: this.id, // 申请单ID
+        //             // applyId:'201506260173032182',
+        //             applySubno: this.applySubno, // 进件编号
+        //             // applyCode: this.applyCode, // 申请人code
+        //             // applyPersonName: this.applyPersonName, // 申请人姓名
+        //             // appOrgCode: this.appOrgCode, // 申请机构code
+        //             // appOrgName: this.appOrgName, // 申请机构名称
+        //             mainreasonId: this.mainId, // 欺诈主原因id
+        //             subreasonId: this.secondId, // 欺诈子原因id
+        //             applyDesc: this.applyDesc, // 反欺诈申请描述
+        //             mainreaName: this.mainReason, // 欺诈主原因名称
+        //             subreaName: this.secondReason, // 欺诈子原因名称
+        //             // appOrgId: this.appOrgId, // 申请机构id
+        //             // appSuborgId: this.appSuborgId, // 申请机构科室id
+        //             // appSuborgCode: this.appSuborgCode, // 申请机构科室code
+        //             // appSuborgName: this.appSuborgName, // 申请机构科室名称
+        //             proId: this.proId, // 产品id
+        //             proCode: this.proCode, // 产品code
+        //             applyCustId: this.applyCustId, // 客户id
+        //             applyCustName: this.applyCustName, // 客户姓名
+        //             applyCustNo: this.applyCustNo, // 客户编号
+        //             channel: this.channel, // 渠道
+        //             certCode: this.certCode, // 证件号码
+        //             proName: this.proName, // 产品名称
+        //             busiState: this.busiState, // 状态
+        //             // wayOf:this.wayOf//（00：审批，01：复议，02：质检）--不入了
+        //           },
+        //           currentTemplateId: this.currentTemplateId, // 流程模版id
+        //         })
+        //         .then(res => {
+        //           if (res.statusCode == '200') {
+        //             // 更加标志来 选择跳转
+        //             // 初审/终审 发起反欺诈 提交  -> 代办任务列表
+        //             this.resMsg = res.msg;
+        //             done();
+        //             if (this.antiFlag == '01') {
+        //               this.$router.push('/taskInWaitting');
+        //               this.del('初审详情');
+        //             } else if (this.antiFlag == '02') {
+        //               this.$router.push('/FtaskInWaitting');
+        //               this.del('终审详情');
+        //             } else if (this.antiFlag == '03') {
+        //               this.$router.push('/AntiFraud');
+        //               this.del('反欺诈详情');
+        //             } else if (this.antiFlag == '04') {
+        //               this.$router.push('/AntiFraud');
+        //               this.del('反欺诈详情');
+        //             } else if (this.antiFlag == '05') {
+        //               this.$router.push('/reconsiderList');
+        //               this.del('复议详情');
+        //             } else if (this.antiFlag == '06') {
+        //               this.$router.push('/reconsiderList');
+        //               this.del('复议详情');
+        //             } else if (this.antiFlag == '07' || this.antiFlag == '08' || this.antiFlag == '10' || this.antiFlag ==
+        //               '11' || this.antiFlag == '12' || this.antiFlag == '13') {
+        //               this.del('质检详情');
+        //             }
+        //             this.del('反欺诈申请-编辑');
+        //           } else {
+        //             if (res.msg) {
+        //               this.$message({
+        //                 type: 'warning',
+        //                 message: res.msg
+        //               });
+        //             } else {
+        //               this.$message({
+        //                 type: 'warning',
+        //                 message: '您无此操作权限！'
+        //               });
+        //             }
+        //             instance.confirmButtonText = '';
+        //           }
+        //           instance.confirmButtonLoading = false;
+        //         })
+        //     } else {
+        //       done();
+        //     }
+        //   }
+        // }).then(action => {
+        //   this.$message({
+        //     type: 'success',
+        //     message: this.resMsg
+        //   });
+
+        // });
       },
       // 返回  上级路由
       backRoute() {

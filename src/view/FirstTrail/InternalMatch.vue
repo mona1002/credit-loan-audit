@@ -114,10 +114,10 @@
           <span class="collapse_title_text">匹配结论</span>
         </template>
         <div class="height_auto">
-   <!-- 匹配结论编辑 -->
-    <internal-match-textarea v-show="SplitS=='right'"></internal-match-textarea>
-    <!-- 匹配结论查看 -->
-    <internal-match-read v-show="SplitS!='right'"></internal-match-read>
+          <!-- 匹配结论编辑 -->
+          <internal-match-textarea v-show="SplitS=='right'"></internal-match-textarea>
+          <!-- 匹配结论查看 -->
+          <internal-match-read v-show="SplitS!='right'"></internal-match-read>
         </div>
       </el-collapse-item>
     </el-collapse>
@@ -570,7 +570,8 @@
             this.$confirm('确定操作？', '提示', {
               confirmButtonText: '确定',
               type: 'warning',
-              showCancelButton: false
+              cancelButtonText: '取消',
+              showCancelButton: true
             }).then(() => {
               this.Csave();
             }).catch(() => {});
@@ -734,6 +735,7 @@
     border: 1px solid #e6eaee;
     text-indent: 10px;
   } */
+
   /* 分页 */
 
   .internalMatch-class .tool-bar {
@@ -742,6 +744,7 @@
     padding: 10px 0 0 10px;
     margin-bottom: 10px;
   }
+
   /* 匹配结论 */
 
   /* .internalMatch-class .mark-title {
@@ -764,6 +767,7 @@
     width: 800px;
     margin-left: 50px;
   }
+
   /* 确认按钮 */
 
   .internalMatch-class .mark-button {
@@ -773,10 +777,13 @@
     margin-left: 775px;
   }
 
-  /* 备注 width*/  .internalMatch-class .mark-cell {
+  /* 备注 width*/
+
+  .internalMatch-class .mark-cell {
     overflow: hidden;
     overflow-wrap: break-word;
-  } 
+  }
+
   .internalMatch_head_tab {
     color: #2DA8E1;
     font-weight: normal;

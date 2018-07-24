@@ -32,8 +32,20 @@
       </el-collapse-item>
     </el-collapse>
     <!-- 底部按钮 -->
-    <div class="bottom_btn">
-      <el-button @click="NoReconsider">
+    <div class="approve_btn_area approve_btn_area_width_700">
+      <span class="approve_item" @click="NoReconsider">
+        <i class="approve_icon backIcon"></i>
+        <span class="approve_text">无需复议</span>
+      </span>
+      <span class="approve_item" @click="ToReconsider">
+        <i class="approve_icon appro"></i>
+        <span class="approve_text">发起复议</span>
+      </span>
+      <span class="approve_item" @click="RiskControl">
+        <i class="approve_icon brokenLineIcon"></i>
+        <span class="approve_text">大数据风控</span>
+      </span>
+      <!-- <el-button @click="NoReconsider">
         <img src="../../../../../static/images/back.png">
         <label class="labelTxt">无需复议</label>
       </el-button>
@@ -41,14 +53,10 @@
         <img src="../../../../../static/images/appro.png">
         <label class="labelTxt">发起复议</label>
       </el-button>
-      <!-- <el-button @click="getLcgjList">
-        <img src="../../../../../static/images/liucheng.png">
-        <label class="labelTxt">流程轨迹</label>
-      </el-button> -->
       <el-button @click="RiskControl">
         <img src="../../../../../static/images/bigdata.png">
         <label class="labelTxt">大数据风控</label>
-      </el-button>
+      </el-button> -->
     </div>
     <!-- ===================================弹出层===================================== -->
     <!-- 流程轨迹 -->
@@ -173,10 +181,11 @@
         }).then(res => {
           if (res.obj == null) {
             // this.bigDataLogVisible = true;
-                   this.$confirm('此进件不存在大数据风控明细！', '提示', {
+            this.$confirm('此进件不存在大数据风控明细！', '提示', {
               confirmButtonText: '确定',
               type: 'warning',
-              showCancelButton: false
+              cancelButtonText: '取消',
+              showCancelButton: true
             }).then(() => {}).catch(() => {});
           } else if (res.obj) {
             this.$router.push({

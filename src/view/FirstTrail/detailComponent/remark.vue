@@ -254,7 +254,8 @@
         this.$confirm(this.title, '提示', {
           confirmButtonText: '确定',
           type: 'warning',
-          showCancelButton: false
+          cancelButtonText: '取消',
+          showCancelButton: true
         }).then(() => {
           this.title == '您要删除该备注吗？' ? this.deletSure() : '';
         }).catch(() => {});

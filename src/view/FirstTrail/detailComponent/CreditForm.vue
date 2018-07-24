@@ -66,7 +66,6 @@
                   <!-- <b v-show="this.Wordhint.Internet.looseCre" class="internet_textarea"> 输入长度不能超过500</b> -->
                   <b v-show="checkData.wnetEcutedBreatxt&&checkData.wnetEcutedBreatxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
-                </i>
                 <label class="InternetInf_right_label"> 失信记录说明： </label>
                 <!--  @compositionend.native="wordarea(checkData.wnetEcutedBreatxt,'失信记录')" @keyup.native="wordarea(checkData.wnetEcutedBreatxt,'失信记录')" -->
                 <el-input type="textarea" resize="none" :maxlength="this.textareaL" :rows="2" placeholder="请输入内容" v-model="checkData.wnetEcutedBreatxt">
@@ -2049,7 +2048,8 @@
             this.$confirm('您确定操作？', '提示', {
               confirmButtonText: '确定',
               type: 'warning',
-              showCancelButton: false
+              cancelButtonText: '取消',
+              showCancelButton: true
             }).then(() => {
               this.CFsave();
             }).catch(() => {});

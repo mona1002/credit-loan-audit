@@ -45,27 +45,27 @@
     <div class="listContainer">
       <!-- 编辑table -->
       <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row @row-dblclick="handleCurrentChange" border>
-        <el-table-column type="index" align='center' label=序号 width="55">
+        <el-table-column type="index"  label=序号 width="55">
         </el-table-column>
-        <el-table-column prop="applySubNo" label="进件编号" align='center' min-width="180">
+        <el-table-column prop="applySubNo" label="进件编号"  min-width="180">
         </el-table-column>
-        <el-table-column prop="custName" label="客户名称" align='center' min-width="120">
+        <el-table-column prop="custName" label="客户名称"  min-width="120">
         </el-table-column>
-        <el-table-column prop="certCode" label="证件号码" align='center' min-width="180">
+        <el-table-column prop="certCode" label="证件号码"  min-width="180">
         </el-table-column>
-        <el-table-column prop="auditNamec" label="初审姓名" align='center' min-width="130">
+        <el-table-column prop="auditNamec" label="初审姓名"  min-width="130">
         </el-table-column>
-        <el-table-column prop="auditNamez" label="终审姓名" align='center' min-width="130">
+        <el-table-column prop="auditNamez" label="终审姓名"  min-width="130">
         </el-table-column>
-        <el-table-column prop="enterTime" label="进入本环节时间" align='center' min-width="180">
+        <el-table-column prop="enterTime" label="进入本环节时间"  min-width="180">
         </el-table-column>
-        <el-table-column prop="assignName" label="分派人员" align='center' min-width="120">
+        <el-table-column prop="assignName" label="分派人员"  min-width="120">
         </el-table-column>
-        <el-table-column prop="checkStateTxt" label="质检状态" align='center' min-width="100">
+        <el-table-column prop="checkStateTxt" label="质检状态"  min-width="100">
         </el-table-column>
-        <el-table-column prop="instaskTypeTxt" label="任务类型" align='center' min-width="100">
+        <el-table-column prop="instaskTypeTxt" label="任务类型"  min-width="100">
         </el-table-column>
-        <el-table-column prop="remark" label="备注" align='center' min-width="150">
+        <el-table-column prop="remark" label="备注"  min-width="150">
         </el-table-column>
       </el-table>
       <!-- 分页  -->

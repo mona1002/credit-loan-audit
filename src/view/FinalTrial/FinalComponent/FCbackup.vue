@@ -1,5 +1,5 @@
 <template>
-<!-- 整合后的查看页面 -->
+  <!-- 整合后的查看页面 -->
   <div class="CreditForm">
     <el-collapse v-model="activeNames">
       <!-- 初审人员 -->
@@ -622,7 +622,7 @@
         </div>
       </el-collapse-item>
       <!-- 内部匹配结论 -->
-      <el-collapse-item name="9"  v-if="PhoneAndInterShow">
+      <el-collapse-item name="9" v-if="PhoneAndInterShow">
         <template slot="title">
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">内部匹配结论</span>
@@ -823,9 +823,9 @@
         default: false,
         type: Boolean
       },
-      PhoneAndInterShow:{
-        default:true,
-        type:Boolean
+      PhoneAndInterShow: {
+        default: true,
+        type: Boolean
       },
       makeSureBtnShow: {
         default: false,
@@ -836,9 +836,9 @@
         default: false,
         type: Boolean
       },
-      applyId:{
-        default:'',
-        required:true,
+      applyId: {
+        default: '',
+        required: true,
       }
     },
     methods: {
@@ -848,7 +848,8 @@
             this.$confirm('确定提交？', '提示', {
               confirmButtonText: '确定',
               type: 'warning',
-              showCancelButton: false
+              cancelButtonText: '取消',
+              showCancelButton: true
             }).then(() => {
               this.CFsave();
             }).catch(() => {});
@@ -866,7 +867,7 @@
       CFsave() {
         this.post("/creauditInfo/updateOtherfinalByPK", {
           // applyId: this.FormData.applyId,//合并之前
-           applyId: this.applyId,
+          applyId: this.applyId,
           id: this.FormData.id,
           ootherfinal: this.FormData.ootherfinal
         }).then(res => {
@@ -981,7 +982,7 @@
           // applyId: this.getParams.applyId,//合并之前
           // applyId: "00542",applyId
           applyId: this.applyId,
-          
+
         }).then(res => {
           if (res.statusCode == 200) {
             this.FormData = res.data;

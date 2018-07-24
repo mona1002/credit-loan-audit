@@ -1,7 +1,7 @@
 <!-- 反欺诈调查  -->
 <template>
   <div class="aAntiFraudInvestigation">
-    <el-collapse v-model="activeNames" @change="handleChange">
+    <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
           <i class="collapse_title_icon"></i>
@@ -13,7 +13,7 @@
               <th style="min-width:180px">进件编号</th>
               <th>案件编号</th>
               <th>客户姓名</th>
-              <th  style="min-width:180px">身份证号</th>
+              <th style="min-width:180px">身份证号</th>
               <th>申请产品</th>
               <th>进件机构</th>
               <th>销售人员</th>
@@ -43,18 +43,20 @@
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-            <li>
-              <label class="label_width_166">提报人工号：</label>
-              <span>{{fraudApplyInfo.applyCode}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">提报人姓名：</label>
-              <span>{{fraudApplyInfo.applyPersonName}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">提报渠道：</label>
-              <span>{{fraudApplyInfo.channelTxt}}</span>
-            </li>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">提报人工号：</label>
+                <span>{{fraudApplyInfo.applyCode}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">提报人姓名：</label>
+                <span>{{fraudApplyInfo.applyPersonName}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">提报渠道：</label>
+                <span>{{fraudApplyInfo.channelTxt}}</span>
+              </li>
+            </div>
             <li class="text_area_li triplet_textarea_width margin_top_5">
               <label class="label_width_166">理由：</label>
               <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="reason" disabled>
@@ -86,22 +88,23 @@
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-            <li class="text_area_li triplet_textarea_width">
-              <label class="label_width_166">网查：</label>
-              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.netCheck"
-                disabled>
-              </el-input>
-            </li>
-            <li class="text_area_li triplet_textarea_width margin_top_5">
-              <label class="label_width_166">114：</label>
-              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.oof"
-                disabled>
-              </el-input>
-            </li>
+            <div class=" CreditForm_div_border clearFix">
+              <li class="text_area_li triplet_textarea_width">
+                <label class="label_width_166">网查：</label>
+                <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.netCheck">
+                </el-input>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li class="text_area_li triplet_textarea_width margin_top_5">
+                <label class="label_width_166">114：</label>
+                <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.oof">
+                </el-input>
+              </li>
+            </div>
             <li class="text_area_li triplet_textarea_width margin_top_5">
               <label class="label_width_166">其他：</label>
-              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.other"
-                disabled>
+              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.other">
               </el-input>
             </li>
           </ul>
@@ -109,9 +112,9 @@
       </el-collapse-item>
       <el-collapse-item name="5">
         <template slot="title">
-               <i class="collapse_title_icon"></i>
+          <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">电核区</span>
-           <div class="title_icon">
+          <div class="title_icon">
             <span @click.stop="add">
               <i class="title_icon_img addIcon"></i>
               <span class="title_icon_span">添加</span>
@@ -444,16 +447,12 @@
           }
         })
       },
-      handleChange() {
-
-      },
       handleCurrentChanges(val) {
         if (val == null) {
           this.currentRow = '';
         } else {
           this.currentRow = val;
         };
-        console.log(val);
       },
       add: function (event) {
         event.stopPropagation();
@@ -520,7 +519,6 @@
             return
           }
         };
-
         this.dialogVisible = true;
         console.log(row.ruleId);
         this.ruleId = row.ruleId;
@@ -570,7 +568,8 @@
           this.$confirm('只能针对未解除状态数据进行操作，请重新选择！', '提示', {
             confirmButtonText: '确定',
             type: 'warning',
-            showCancelButton: false
+            cancelButtonText: '取消',
+            showCancelButton: true
           }).then(() => {}).catch(() => {});
         }
         if (fg) {
@@ -615,7 +614,8 @@
           this.$confirm('只能针对已解除状态数据进行操作，请重新选择', '提示', {
             confirmButtonText: '确定',
             type: 'warning',
-            showCancelButton: false
+            cancelButtonText: '取消',
+            showCancelButton: true
           }).then(() => {}).catch(() => {});
         }
         if (fg) {
@@ -663,7 +663,6 @@
 
   /* 折叠面板头部背景色和icon */
 
-
   .table {
     font-weight: 400;
     font-size: 14px;
@@ -679,7 +678,7 @@
   .table th {
     color: #1f2d3d;
     font-weight: 800;
-    height:35px;
+    height: 35px;
     line-height: 35px;
     border: 1px solid #e6ebf5;
     width: 11.1%;
@@ -695,7 +694,7 @@
     border: 1px solid #e6ebf5;
     width: 11.1%;
     min-width: 147px;
-    padding-left: 10px;    
+    padding-left: 10px;
   }
 
   /* 提报来源 */

@@ -85,13 +85,13 @@
     <div class="listContainer">
       <el-table :data="moniList" height="510" border show-header highlight-current-row @selection-change="handleSelectionChange"
         @row-click="selectRow">
-        <el-table-column type="selection"  width="55">
+        <el-table-column type="selection" width="55">
         </el-table-column>
-        <el-table-column type="index" label="序号"  width="50">
+        <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column prop="emerTypeTxt" label="紧急程度" width="80">
         </el-table-column>
-        <el-table-column prop="taskTypeTxt" label="任务类型"  width="80">
+        <el-table-column prop="taskTypeTxt" label="任务类型" width="80">
         </el-table-column>
         <el-table-column prop="applySubNo" label="进件编号" min-width="200">
         </el-table-column>
@@ -116,8 +116,8 @@
       </div>
     </div>
     <!-- 流程轨迹 -->
-    <el-dialog title="流程轨迹" :visible.sync="dialogTraceVisible"  width="1000px">
-      <el-table :data="traceList"  border show-header highlight-current-row>
+    <el-dialog title="流程轨迹" :visible.sync="dialogTraceVisible" width="1000px">
+      <el-table :data="traceList" border show-header highlight-current-row>
         <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column prop="taskNodeNameTxt" label="任务节点" width="120">
@@ -142,7 +142,7 @@
       </div>
     </el-dialog>
     <!-- 任务分派 -->
-    <el-dialog title="任务分派" :visible.sync="dialogAssignVisible" >
+    <el-dialog title="任务分派" :visible.sync="dialogAssignVisible">
       <el-form :model="itemOfLists" :rules="rules" ref="ruleForm">
         <div class="bfc">
           <el-form-item class="fl" label="任务角色：" :label-width="formLabelWidth">
@@ -168,7 +168,7 @@
       </div>
     </el-dialog>
     <!-- 转分派流程轨迹 -->
-    <el-dialog title="转分派流程轨迹"  :visible.sync="dialogTransVisible">
+    <el-dialog title="转分派流程轨迹" :visible.sync="dialogTransVisible">
       <el-table :data="transList" border show-header highlight-current-row>
         <el-table-column type="index" label="序号" width="50">
         </el-table-column>
@@ -428,13 +428,14 @@
       selectRow(row, event, column) {
         this.currentRow = row;
       },
-alertBox(){ //操作前提示
-       this.$confirm(this.alertMessage, '提示', {
-              confirmButtonText: '确定',
-              type: 'warning',
-              showCancelButton: false
-            }).then(() => {}).catch(() => {});
-},
+      alertBox() { //操作前提示
+        this.$confirm(this.alertMessage, '提示', {
+          confirmButtonText: '确定',
+          type: 'warning',
+          cancelButtonText: '取消',
+          showCancelButton: true
+        }).then(() => {}).catch(() => {});
+      },
       handleItem(flag) {
         if (this.multipleSelection.length == 0) {
           if (flag === 'trace') {
@@ -443,13 +444,14 @@ alertBox(){ //操作前提示
             this.alertMessage = "请选择流程进行分派任务！";
           } else if (flag === 'trans') {
             this.alertMessage = "请选择一条记录查看转分派流程轨迹！";
-          }this.alertBox();
+          }
+          this.alertBox();
           return
         }
         if (this.multipleSelection.length > 1) {
           if (flag === 'trace') {
             this.alertMessage = "请选择一条记录查看流程轨迹！";
-              this.alertBox();
+            this.alertBox();
             return
           } else if (flag === 'assign') {
             var arr = this.multipleSelection;
@@ -458,12 +460,12 @@ alertBox(){ //操作前提示
             })
             if (!fg) {
               this.alertMessage = "请选择相同 [任务节点] 的流程进行分派任务！";
-                this.alertBox();
+              this.alertBox();
               return
             }
           } else if (flag === 'trans') {
             this.alertMessage = "请选择一条记录查看转分派流程轨迹！";
-              this.alertBox();
+            this.alertBox();
             return
           }
         }

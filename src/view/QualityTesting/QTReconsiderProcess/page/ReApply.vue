@@ -1,100 +1,99 @@
 <template>
   <div class="aAntiApplyInf ReApply overFlow_x">
     <!-- 复议申请页面 -->
-      <el-collapse v-model="activeNames">
-        <el-collapse-item name="1">
-          <template slot="title">
-               <i class="collapse_title_icon"></i>
+    <el-collapse v-model="activeNames">
+      <el-collapse-item name="1">
+        <template slot="title">
+          <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">复议基本信息</span>
-          </template>
-          <div class="checkedInf checkedInf_li_width_triplet clearFix">
-            <ul>
-              <li>
-                  <label class="label_width_166">进件编号： </label>
-                  <span>{{applyInfoPool.applySubNo}} </span>
-                     </li>
-              <li>
-                  <label  class="label_width_166">证件号码： </label>
-                  <span>{{applyInfoPool.certCode}} </span>
-              </li>
-              <li>
-                  <label  class="label_width_166">客户名称： </label>
-                  <span>{{applyInfoPool.custName}} </span>
-                     </li>
-              <li>
-                  <label  class="label_width_166">移动电话： </label>
-                  <span>{{applyInfoPool.mobile}} </span>
-              </li>
-              <li>
-                  <label  class="label_width_166">证件类型： </label>
-                  <span>{{applyInfoPool.certTypeTxt}} </span>
-                     </li>
-              <li>
-                  <label  class="label_width_166">申请类型： </label>
-                  <span>{{applyInfoPool.appTypeTxt}} </span>
-              </li>
-            </ul>
-          </div>
-        </el-collapse-item>
-        <el-collapse-item name="2">
-          <template slot="title">
-               <i class="collapse_title_icon"></i>
+        </template>
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
+          <ul>
+            <li>
+              <label class="label_width_166">进件编号： </label>
+              <span>{{applyInfoPool.applySubNo}} </span>
+            </li>
+            <li>
+              <label class="label_width_166">证件号码： </label>
+              <span>{{applyInfoPool.certCode}} </span>
+            </li>
+            <li>
+              <label class="label_width_166">客户名称： </label>
+              <span>{{applyInfoPool.custName}} </span>
+            </li>
+            <li>
+              <label class="label_width_166">移动电话： </label>
+              <span>{{applyInfoPool.mobile}} </span>
+            </li>
+            <li>
+              <label class="label_width_166">证件类型： </label>
+              <span>{{applyInfoPool.certTypeTxt}} </span>
+            </li>
+            <li>
+              <label class="label_width_166">申请类型： </label>
+              <span>{{applyInfoPool.appTypeTxt}} </span>
+            </li>
+          </ul>
+        </div>
+      </el-collapse-item>
+      <el-collapse-item name="2">
+        <template slot="title">
+          <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">合规质检结论</span>
-          </template>
-          <div class="AntiInf">
-            <el-table :data="tableData" border style="width: 100%;height:auto !important">
-              <el-table-column label='质检结果' prop="checkResultTxt" width="120"></el-table-column>
-              <el-table-column label='差错类型' prop="errorType" width="150"></el-table-column>
-              <el-table-column label='差错描述' prop="errorDescribe" width="150"></el-table-column>
-              <el-table-column label='备注' prop="remark"></el-table-column>
-            </el-table>
-          </div>
-        </el-collapse-item>
-        <el-collapse-item name="3">
-          <template slot="title">
-               <i class="collapse_title_icon"></i>
+        </template>
+        <div class="AntiInf">
+          <el-table :data="tableData" border style="width: 100%;height:auto !important">
+            <el-table-column label='质检结果' prop="checkResultTxt" width="120"></el-table-column>
+            <el-table-column label='差错类型' prop="errorType" width="150"></el-table-column>
+            <el-table-column label='差错描述' prop="errorDescribe" width="150"></el-table-column>
+            <el-table-column label='备注' prop="remark"></el-table-column>
+          </el-table>
+        </div>
+      </el-collapse-item>
+      <el-collapse-item name="3">
+        <template slot="title">
+          <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">复议申请信息</span>
-          </template>
-          <div class="AntiConclution">
-            <ul>
-              <li>
-                <p class="description" style="position:relative;margin-top:10px;">
-                  <i v-show="fraudAuditOpinion.auditDesc&&fraudAuditOpinion.auditDesc.length>=500" class="hint_word" style="left:165px;top:-15px;z-index:9999">输入长度不能超过500</i>
-                  <label style='vertical-align:top;'>
-                    <b class="required_Red" v-show="HintStar"> * </b> 复议说明： </label>
-                  <el-input style="width:calc(100% - 200px);" :disabled="manager"  class="ccccc" type="textarea" :rows='3' resize='none' v-model='fraudAuditOpinion.auditDesc'
-                    :maxlength="500"></el-input>
-                </p>
-              </li>
-              <li class="ApplyInf">
-                <p>
-                  <label>复议申请人：</label>{{reApplyInf.userCode }}
-                </p>
-                <p>
-                  <label>复议申请日期： </label>{{ systermTime | dateFilter}}
-                </p>
-              </li>
-            </ul>
-          </div>
-        </el-collapse-item>
-      </el-collapse>
-      <div class="ReApply_btn" v-if="ManagerBtn">
-        <el-button type="primary" @click="sumt">提交</el-button>
-        <el-button @click="calc">取消</el-button>
-        <!-- <el-button @click="cancle">取消</el-button> -->
-      </div>
-      <!-- 弹窗 -->
-      <!-- <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
+        </template>
+        <div class="AntiConclution">
+          <ul>
+            <li>
+              <p class="description" style="position:relative;margin-top:10px;">
+                <i v-show="fraudAuditOpinion.auditDesc&&fraudAuditOpinion.auditDesc.length>=500" class="hint_word" style="left:165px;top:-15px;z-index:9999">输入长度不能超过500</i>
+                <label style='vertical-align:top;'>
+                  <b class="required_Red" v-show="HintStar"> * </b> 复议说明： </label>
+                <el-input style="width:calc(100% - 200px);" :disabled="manager" class="ccccc" type="textarea" :rows='3' resize='none' v-model='fraudAuditOpinion.auditDesc'
+                  :maxlength="500"></el-input>
+              </p>
+            </li>
+            <li class="ApplyInf">
+              <p>
+                <label>复议申请人：</label>{{reApplyInf.userCode }}
+              </p>
+              <p>
+                <label>复议申请日期： </label>{{ systermTime | dateFilter}}
+              </p>
+            </li>
+          </ul>
+        </div>
+      </el-collapse-item>
+    </el-collapse>
+    <div class="ReApply_btn" v-if="ManagerBtn">
+      <el-button type="primary" @click="sumt">提交</el-button>
+      <el-button @click="calc">取消</el-button>
+      <!-- <el-button @click="cancle">取消</el-button> -->
+    </div>
+    <!-- 弹窗 -->
+    <!-- <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
         <span>确定操作？</span>
         <span slot="footer" class="dialog-footer">
           <el-button class="calbtn" @click="Confirm=false">取消</el-button>
           <el-button class="subtn" type="primary" :loading="loadsitu" @click="SaveInf">{{adbtn}}</el-button>
         </span>
       </el-dialog> -->
-    </div>
+  </div>
 </template>
 <script>
-
   export default {
     data() {
       return {
@@ -189,13 +188,14 @@
           // this.confirm = false;
           return
         }
-               this.$confirm('您确定操作？', '提示', {
-              confirmButtonText: '确定',
-              type: 'warning',
-              showCancelButton: false
-            }).then(() => {
-              this.SaveInf();
-            }).catch(() => {});
+        this.$confirm('您确定操作？', '提示', {
+          confirmButtonText: '确定',
+          type: 'warning',
+          cancelButtonText: '取消',
+          showCancelButton: true
+        }).then(() => {
+          this.SaveInf();
+        }).catch(() => {});
         // this.Confirm = true;
       },
       SaveInf() { //提交
@@ -252,11 +252,11 @@
 
 </script>
 <style scoped>
-.ReApply{
-  height: calc( 100% - 90px );
-  widows: 100%;
-  background: #ffffff;
-}
+  .ReApply {
+    height: calc( 100% - 90px);
+    widows: 100%;
+    background: #ffffff;
+  }
 
   .aAntiApplyInf label {
     width: 145px;

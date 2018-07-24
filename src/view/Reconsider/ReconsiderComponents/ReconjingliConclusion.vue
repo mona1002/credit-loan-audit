@@ -1629,7 +1629,8 @@
             this.$confirm('此进件不存在大数据风控明细！', '提示', {
               confirmButtonText: '确定',
               type: 'warning',
-              showCancelButton: false
+              cancelButtonText: '取消',
+              showCancelButton: true
             }).then(() => {}).catch(() => {});
           } else if (res.obj) {
             this.$router.push({
@@ -1660,7 +1661,8 @@
           this.$confirm('客户社保公积金未授权！', '提示', {
             confirmButtonText: '确定',
             type: 'warning',
-            showCancelButton: false
+            cancelButtonText: '取消',
+            showCancelButton: true
           }).then(() => {}).catch(() => {});
         } else if (this.social == "(已授权)") {
           this.$router.push({

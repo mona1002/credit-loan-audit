@@ -2019,7 +2019,8 @@
         this.$confirm(this.info, '提示', {
           confirmButtonText: '确定',
           type: 'warning',
-          showCancelButton: false
+          cancelButtonText: '取消',
+          showCancelButton: true
         }).then(() => {}).catch(() => {});
       },
       //确定按钮
@@ -2071,7 +2072,8 @@
         this.$confirm('您确定已填写好各项内容并提交？', '提示', {
           confirmButtonText: '确定',
           type: 'warning',
-          showCancelButton: false
+          cancelButtonText: '取消',
+          showCancelButton: true
         }).then(() => {
           console.log('ddd')
           this.trueSure();

@@ -9,18 +9,20 @@
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-            <li>
-              <label class="label_width_166">进件编号：</label>
-              <span>{{applyInfoPool.applySubno}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">客户名称：</label>
-              <span>{{applyInfoPool.custName}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">证件类型：</label>
-              <span>{{applyInfoPool.certTypeTxt}}</span>
-            </li>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">进件编号：</label>
+                <span>{{applyInfoPool.applySubno}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">客户名称：</label>
+                <span>{{applyInfoPool.custName}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">证件类型：</label>
+                <span>{{applyInfoPool.certTypeTxt}}</span>
+              </li>
+            </div>
             <li>
               <label class="label_width_166">证件号码：</label>
               <span>{{applyInfoPool.certCode}}</span>
@@ -39,18 +41,22 @@
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-            <li>
-              <label class="label_width_166">借欺诈申请类型主原因：</label>
-              <span>{{fraudApplyInfo.mainreaName}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">子原因：</label>
-              <span>{{fraudApplyInfo.subreaName}}</span>
-            </li>
-            <li class="text_area_li triplet_textarea_width" style="margin:5px 0;">
-              <label class="label_width_166">欺诈上报描述：</label>
-              <span class="text_area_span text_area_span_minus220">{{fraudApplyInfo.applyDesc}}</span>
-            </li>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">借欺诈申请类型主原因：</label>
+                <span>{{fraudApplyInfo.mainreaName}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">子原因：</label>
+                <span>{{fraudApplyInfo.subreaName}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li class="text_area_li triplet_textarea_width" style="margin:5px 0;">
+                <label class="label_width_166">欺诈上报描述：</label>
+                <span class="text_area_span text_area_span_minus220">{{fraudApplyInfo.applyDesc}}</span>
+              </li>
+            </div>
             <li class="clearFloat">
               <label class="label_width_166">反欺诈申请人：</label>
               <span>{{fraudApplyInfo.applyPersonName}}</span>
@@ -71,7 +77,7 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">反欺诈结论</span>
         </template>
-          <div class="checkedInf checkedInf_li_width_triplet clearFix">
+        <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
             <li class="text_area_li triplet_textarea_width" style="margin-top:5px;">
               <label class="label_width_166">反欺诈决策反馈：</label>
@@ -110,7 +116,7 @@
         // }
         this.post("/fraudApplyInfoController/getRecentFraudApplyInfoWithOpinion", {
           // applyId: this.tastwaitingPass.applyId,
-         applyId: this.applyId
+          applyId: this.applyId
         }).then(res => {
           if (res.statusCode == 200) {
             this.applyInfoPool = res.data.applyInfoPool;
@@ -122,11 +128,11 @@
         });
       }
     },
-    props:{
-      applyId:{
-        default:'',
-        type:String,
-        required:true
+    props: {
+      applyId: {
+        default: '',
+        type: String,
+        required: true
       }
     },
     mounted() {

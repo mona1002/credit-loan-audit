@@ -785,7 +785,8 @@
             this.$confirm('确定提交？', '提示', {
               confirmButtonText: '确定',
               type: 'warning',
-              showCancelButton: false
+              cancelButtonText: '取消',
+              showCancelButton: true
             }).then(() => {
               this.CFsave();
             }).catch(() => {});

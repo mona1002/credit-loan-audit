@@ -148,7 +148,9 @@
         if (!this.selectedList) {
           this.$confirm('请选择一条数据！', '提示', {
             confirmButtonText: '确定',
-            type: 'warning'
+            type: 'warning',
+            cancelButtonText: '取消',
+            showCancelButton: true
           }).then(() => {}).catch(() => {});
           return
         }
