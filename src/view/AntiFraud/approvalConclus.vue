@@ -2370,7 +2370,8 @@ caseDescs:[  { required: true, message: '请输入活动名称', trigger: 'blur'
     width: 100%;
     height: 100%;
     white-space: nowrap;
-    display: inline-grid
+    /* display: inline-grid; */
+    display: inline-block;
   }
 
   .approval-colun .muti-select .el-tag {
