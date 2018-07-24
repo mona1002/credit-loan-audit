@@ -1260,6 +1260,26 @@
           {
             value: '9',
             label: '个人消费'
+          },
+          {
+            value: '10',
+            label: '资金周转'
+          },
+          {
+            value: '11',
+            label: '扩大经营'
+          },
+          {
+            value: '12',
+            label: '购物（生活用品；原材料；设备）'
+          },
+          {
+            value: '13',
+            label: '装修家居'
+          },
+          {
+            value: '14',
+            label: '旅游'
           }
         ],
         typeOfLoan: [{

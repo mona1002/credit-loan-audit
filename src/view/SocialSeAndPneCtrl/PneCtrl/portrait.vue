@@ -12,39 +12,39 @@
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_195">银行卡号：</label>
-                <span>{{applyInf.name}}</span>
+                <span>{{applyInf.bankCard}}</span>
               </li>
               <li>
                 <label class="label_width_195">设备id：</label>
-                <span>{{applyInf.idcard}}</span>
+                <span>{{applyInf.appId}}</span>
               </li>
               <li>
                 <label class="label_width_195">进件编号：</label>
-                <span>{{applyInf.user_name}}</span>
+                <span>{{applyInf.applyNo}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_195">姓名：</label>
-                <span>{{applyInf.user_phone}}</span>
+                <span>{{applyInf.name}}</span>
               </li>
               <li>
                 <label class="label_width_195">电话：</label>
-                <span>{{applyInf.name_match}}</span>
+                <span>{{applyInf.tel}}</span>
               </li>
               <li>
                 <label class="label_width_195">申请时间：</label>
-                <span>{{applyInf.idcard_match}}</span>
+                <span>{{applyInf.applyTime}}</span>
               </li>
             </div>
             <div>
               <li>
                 <label class="label_width_195">身份证号：</label>
-                <span>{{applyInf.customer_id}}</span>
+                <span>{{applyInf.idNumber}}</span>
               </li>
               <li>
                 <label class="label_width_195">类型编号：</label>
-                <span>{{applyInf.organization_type}}</span>
+                <span>{{applyInf.typeCode}}</span>
               </li>
             </div>
           </ul>
@@ -60,15 +60,15 @@
             <div class="clearFix">
               <li>
                 <label class="label_width_195">tokenId：</label>
-                <span>{{businessInf.id}}</span>
+                <span>{{businessInf.tokenId}}</span>
               </li>
               <li>
                 <label class="label_width_195">版本：</label>
-                <span>{{businessInf.customer}}</span>
+                <span>{{businessInf.fpVersion}}</span>
               </li>
               <li>
                 <label class="label_width_195">设备id：</label>
-                <span>{{businessInf.name}}</span>
+                <span>{{businessInf.deviceId}}</span>
               </li>
             </div>
           </ul>
@@ -389,7 +389,7 @@
             </el-table-column>
             <el-table-column prop="mcc" label="mcc" width="160">
             </el-table-column>
-            <el-table-column prop="simSerial" label="simSerial" width="160">
+            <el-table-column prop="simSerial" label="simSerial" min-width="180">
             </el-table-column>
             <!-- 待确定是否存在 -->
             <!-- <el-table-column prop="radioType" label="radioType" min-width="160">
@@ -424,15 +424,15 @@
     methods: {
       getInf() {
         this.post(baseurl.DataUrl + '/thirdrisk/tdDevicePortraitAction!findByApplySubNo.action', {
-          applySubNo: this.applySubNo
-          //   applySubNo : 'PHDX6409598026121216'
+          // applySubNo: this.applySubNo
+            applySubNo : 'PHDX6409598026121217'
         }).then(res => {
           console.log(res)
-          console.log(result['result']['10108']['reqInfo'])
+         
 
 
-          if (data) {
-            if (!data.data) return;
+          if (res) {
+            if (!res.data) return;
             var result = $.parseJSON(res.data);
             console.log(1, result)
             if (result && result.result && result.result['10108']) {

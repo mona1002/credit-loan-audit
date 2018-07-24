@@ -13,7 +13,7 @@
               <p>
                 <i class="hint"> </i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(0)">客户在法网是否有被执行信息：</label>
-                <el-select v-model="checkData.wbeexEcuted"  @change="commentShow1(checkData.wbeexEcuted,Internet[0])">
+                <el-select v-model="checkData.wbeexEcuted" @change="commentShow1(checkData.wbeexEcuted,Internet[0])">
                   <el-option v-for="item in beexEcuted" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -33,7 +33,7 @@
               <p>
                 <i class="hint"> </i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(0)">单位在法网是否有被执行信息：</label>
-                <el-select v-model="checkData.wnetHirecom"  @change="commentShow1(checkData.wnetHirecom,Internet[1])">
+                <el-select v-model="checkData.wnetHirecom" @change="commentShow1(checkData.wnetHirecom,Internet[1])">
                   <el-option v-for="item in netHirecom" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -56,7 +56,7 @@
                 </i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(1)">
                   <span class="red"> * </span>客户在失信网是否有失信记录：</label>
-                <el-select v-model="checkData.wnetEcutedBrea"  name="BrokenRecord" v-validate="'required'" @change="commentShow1(checkData.wnetEcutedBrea,Internet[2])">
+                <el-select v-model="checkData.wnetEcutedBrea" name="BrokenRecord" v-validate="'required'" @change="commentShow1(checkData.wnetEcutedBrea,Internet[2])">
                   <el-option v-for="item in netEcutedBrea" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -64,7 +64,7 @@
               <p v-show="this.InternetShow.commentS2">
                 <i class="hint">
                   <!-- <b v-show="this.Wordhint.Internet.looseCre" class="internet_textarea"> 输入长度不能超过500</b> -->
-                    <b v-show="checkData.wnetEcutedBreatxt&&checkData.wnetEcutedBreatxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
+                  <b v-show="checkData.wnetEcutedBreatxt&&checkData.wnetEcutedBreatxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 </i>
                 <label class="InternetInf_right_label"> 失信记录说明： </label>
@@ -77,7 +77,7 @@
               <p>
                 <i class="hint"> </i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(1)">单位在失信网是否有失信记录：</label>
-                <el-select v-model="checkData.wnetHirecomBrea"  @change="commentShow1(checkData.wnetHirecomBrea,Internet[3])">
+                <el-select v-model="checkData.wnetHirecomBrea" @change="commentShow1(checkData.wnetHirecomBrea,Internet[3])">
                   <el-option v-for="item in netHirecomBrea" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -85,7 +85,7 @@
               <p v-show="this.InternetShow.commentS3">
                 <i class="hint">
                   <!-- <b v-show="this.Wordhint.Internet.comLooseCre" class="internet_textarea"> 输入长度不能超过500</b> -->
-                    <b v-show="checkData.wnetHirecomBreatxt&&checkData.wnetHirecomBreatxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
+                  <b v-show="checkData.wnetHirecomBreatxt&&checkData.wnetHirecomBreatxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class="InternetInf_right_label"> 单位失信记录说明： </label>
                 <!--  @compositionend.native="wordarea(checkData.wnetHirecomBreatxt,'单位失信')" @keyup.native="wordarea(checkData.wnetHirecomBreatxt,'单位失信')" -->
@@ -100,8 +100,7 @@
                 </i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(2)">
                   <span class="red"> * </span>网上搜索借款人手机是否有异常：</label>
-                <el-select v-model="checkData.wnetPhone"  @change="commentShow1(checkData.wnetPhone,Internet[4])" name="abnormalPhone"
-                  v-validate="'required'">
+                <el-select v-model="checkData.wnetPhone" @change="commentShow1(checkData.wnetPhone,Internet[4])" name="abnormalPhone" v-validate="'required'">
                   <el-option v-for="item in netPhone" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -121,7 +120,7 @@
               <p>
                 <i class="hint"></i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(2)">网搜单位名称是否有异常：</label>
-                <el-select v-model="checkData.wnetHirecomName"  @change="commentShow1(checkData.wnetHirecomName,Internet[5])">
+                <el-select v-model="checkData.wnetHirecomName" @change="commentShow1(checkData.wnetHirecomName,Internet[5])">
                   <el-option v-for="item in netHirecomName" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -129,11 +128,11 @@
               <p v-show="this.InternetShow.commentS5">
                 <i class="hint">
                   <!-- <b v-show="this.Wordhint.Internet.ComName" class="internet_textarea"> 输入长度不能超过500</b> -->
-                    <b v-show="checkData.wnetHirecomNametxt&&checkData.wnetHirecomNametxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
+                  <b v-show="checkData.wnetHirecomNametxt&&checkData.wnetHirecomNametxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class="InternetInf_right_label"> 单位名称异常信息说明： </label>
                 <!--   @compositionend.native="wordarea(checkData.wnetHirecomNametxt,'单位名称异常')" @keyup.native="wordarea(checkData.wnetHirecomNametxt,'单位名称异常')" -->
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetHirecomNametxt" >
+                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetHirecomNametxt">
                 </el-input>
               </p>
             </li>
@@ -141,7 +140,7 @@
               <p>
                 <i class="hint"></i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(2)">网搜单位电话是否有异常：</label>
-                <el-select v-model="checkData.wnetHirecomPhone"  @change="commentShow1(checkData.wnetHirecomPhone,Internet[6])">
+                <el-select v-model="checkData.wnetHirecomPhone" @change="commentShow1(checkData.wnetHirecomPhone,Internet[6])">
                   <el-option v-for="item in netHirecomPhone" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -149,10 +148,10 @@
               <p v-show="this.InternetShow.commentS6">
                 <i class="hint">
                   <b v-show="this.Wordhint.Internet.comphoneOUtS" class="internet_textarea"> 输入长度不能超过500</b>
-                    <b v-show="checkData.wnetHirecomPhonetxt&&checkData.wnetHirecomPhonetxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
+                  <b v-show="checkData.wnetHirecomPhonetxt&&checkData.wnetHirecomPhonetxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class="InternetInf_right_label"> 单位电话异常信息说明： </label>
-                  <!-- @compositionend.native="wordarea(checkData.wnetHirecomPhonetxt,'单位电话异常')" @keyup.native="wordarea(checkData.wnetHirecomPhonetxt,'单位电话异常')" -->
+                <!-- @compositionend.native="wordarea(checkData.wnetHirecomPhonetxt,'单位电话异常')" @keyup.native="wordarea(checkData.wnetHirecomPhonetxt,'单位电话异常')" -->
                 <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetHirecomPhonetxt">
                 </el-input>
               </p>
@@ -161,7 +160,7 @@
               <p>
                 <i class="hint"></i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(2)">网上搜索借款人现居住地址和房产地址是否有异常：</label>
-                <el-select v-model="checkData.wnetAddrandEstate"  @change="commentShow1(checkData.wnetAddrandEstate,Internet[7])">
+                <el-select v-model="checkData.wnetAddrandEstate" @change="commentShow1(checkData.wnetAddrandEstate,Internet[7])">
                   <el-option v-for="item in netAddrandEstate" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -169,10 +168,10 @@
               <p v-show="this.InternetShow.commentS7">
                 <i class="hint">
                   <!-- <b v-show="this.Wordhint.Internet.address" class="internet_textarea"> 输入长度不能超过500</b> -->
-                    <b v-show="checkData.wnetAddrandEstatetxt&&checkData.wnetAddrandEstatetxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
+                  <b v-show="checkData.wnetAddrandEstatetxt&&checkData.wnetAddrandEstatetxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class="InternetInf_right_label"> 地址异常信息说明： </label>
-                  <!-- @compositionend.native="wordarea(checkData.wnetAddrandEstatetxt,'地址异常')" @keyup.native="wordarea(checkData.wnetAddrandEstatetxt,'地址异常')" -->
+                <!-- @compositionend.native="wordarea(checkData.wnetAddrandEstatetxt,'地址异常')" @keyup.native="wordarea(checkData.wnetAddrandEstatetxt,'地址异常')" -->
                 <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetAddrandEstatetxt">
                 </el-input>
               </p>
@@ -181,7 +180,7 @@
               <p>
                 <i class="hint"></i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(2)">网搜单位地址是否有异常：</label>
-                <el-select v-model="checkData.wnetHirecomAddress"  @change="commentShow1(checkData.wnetHirecomAddress,Internet[8])">
+                <el-select v-model="checkData.wnetHirecomAddress" @change="commentShow1(checkData.wnetHirecomAddress,Internet[8])">
                   <el-option v-for="item in netHirecomAddress" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -189,10 +188,10 @@
               <p v-show="this.InternetShow.commentS8">
                 <i class="hint">
                   <!-- <b v-show="this.Wordhint.Internet.comAddress" class="internet_textarea"> 输入长度不能超过500</b> -->
-                    <b v-show="checkData.wnetHirecomAddresstxt&&checkData.wnetHirecomAddresstxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
+                  <b v-show="checkData.wnetHirecomAddresstxt&&checkData.wnetHirecomAddresstxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class="InternetInf_right_label"> 单位地址异常信息说明： </label>
-                  <!-- @compositionend.native="wordarea(checkData.wnetHirecomAddresstxt,'单位地址异常')" @keyup.native="wordarea(checkData.wnetHirecomAddresstxt,'单位地址异常')" -->
+                <!-- @compositionend.native="wordarea(checkData.wnetHirecomAddresstxt,'单位地址异常')" @keyup.native="wordarea(checkData.wnetHirecomAddresstxt,'单位地址异常')" -->
                 <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetHirecomAddresstxt">
                 </el-input>
               </p>
@@ -204,7 +203,7 @@
                 </i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(3)">
                   <span class="red"> * </span>当地工商网查询企业基本信息中是否有登记：</label>
-                <el-select v-model="checkData.wnetCompany"  @change="commentShow1(checkData.wnetCompany,Internet[9])" name="registerInfor"
+                <el-select v-model="checkData.wnetCompany" @change="commentShow1(checkData.wnetCompany,Internet[9])" name="registerInfor"
                   v-validate="'required'">
                   <el-option v-for="item in netCompany" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
@@ -213,7 +212,7 @@
               <p v-show="this.InternetShow.commentS9">
                 <i class="hint">
                   <!-- <b v-show="this.Wordhint.Internet.loginOrNot" class="internet_textarea"> 输入长度不能超过500</b> -->
-                    <b v-show="checkData.wnetCompanytxt&&checkData.wnetCompanytxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
+                  <b v-show="checkData.wnetCompanytxt&&checkData.wnetCompanytxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class="InternetInf_right_label"> 工商登记信息说明： </label>
                 <!--   @compositionend.native="wordarea(checkData.wnetCompanytxt,'工商登记')" @keyup.native="wordarea(checkData.wnetCompanytxt,'工商登记')" -->
@@ -225,7 +224,7 @@
               <p>
                 <i class="hint"></i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(4)">客户工作单位在全国组织代码查询中是否存在：</label>
-                <el-select v-model="checkData.wnetAddrstate"  @change="commentShow1(checkData.wnetAddrstate,Internet[10])">
+                <el-select v-model="checkData.wnetAddrstate" @change="commentShow1(checkData.wnetAddrstate,Internet[10])">
                   <el-option v-for="item in netAddrstate" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -233,10 +232,10 @@
               <p v-show="this.InternetShow.commentS10" class="bottom">
                 <i class="hint">
                   <!-- <b v-show="this.Wordhint.Internet.institutionCode" class="internet_textarea"> 输入长度不能超过500</b> -->
-                    <b v-show="checkData.wnetAddrstatetxt&&checkData.wnetAddrstatetxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
+                  <b v-show="checkData.wnetAddrstatetxt&&checkData.wnetAddrstatetxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class="InternetInf_right_label"> 组织机构代码信息说明： </label>
-                  <!-- @compositionend.native="wordarea(checkData.wnetAddrstatetxt,'组织机构代码')" @keyup.native="wordarea(checkData.wnetAddrstatetxt,'组织机构代码')" -->
+                <!-- @compositionend.native="wordarea(checkData.wnetAddrstatetxt,'组织机构代码')" @keyup.native="wordarea(checkData.wnetAddrstatetxt,'组织机构代码')" -->
                 <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetAddrstatetxt">
                 </el-input>
               </p>
@@ -264,10 +263,10 @@
               <p v-show="this.checkId.declearNloaned">
                 <i class="hint">
                   <!-- <b v-show="this.Wordhint.checkID.answerDec" class="internet_textarea"> 输入长度不能超过500</b> -->
-                    <b v-show="checkData.iisselftxt&&checkData.iisselftxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
+                  <b v-show="checkData.iisselftxt&&checkData.iisselftxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class=" InternetInf_right_label "> 接听说明： </label>
-                  <!-- @compositionend.native="wordarea(checkData.iisselftxt,'接听说明')" @keyup.native="wordarea(checkData.iisselftxt,'接听说明')" -->
+                <!-- @compositionend.native="wordarea(checkData.iisselftxt,'接听说明')" @keyup.native="wordarea(checkData.iisselftxt,'接听说明')" -->
                 <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.iisselftxt">
                 </el-input>
               </p>
@@ -284,12 +283,12 @@
               <p v-show="this.checkId.loanNot">
                 <i class="hint">
                   <!-- <b v-show="this.Wordhint.checkID.Declear" class="internet_textarea"> 输入长度不能超过500</b> -->
-                    <b v-show="checkData.iloanBeforetxt&&checkData.iloanBeforetxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
-                  
+                  <b v-show="checkData.iloanBeforetxt&&checkData.iloanBeforetxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
+
                 </i>
                 <label class=" InternetInf_right_label "> 说明： </label>
-                
-                  <!-- @compositionend.native="wordarea(checkData.iloanBeforetxt,'说明')" @keyup.native="wordarea(checkData.iloanBeforetxt,'说明')" -->
+
+                <!-- @compositionend.native="wordarea(checkData.iloanBeforetxt,'说明')" @keyup.native="wordarea(checkData.iloanBeforetxt,'说明')" -->
                 <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.iloanBeforetxt">
                 </el-input>
               </p>
@@ -323,7 +322,7 @@
                   <b v-show="checkData.iloanPurposetxt&&checkData.iloanPurposetxt.length>=500" class="internet_textarea"> 输入长度不能超过500</b>
                 </i>
                 <label class=" InternetInf_right_label "> 借款用途详细说明： </label>
-                  <!-- @compositionend.native="wordarea(checkData.iloanPurposetxt,'详细用途')" @keyup.native="wordarea(checkData.iloanPurposetxt,'详细用途')" -->
+                <!-- @compositionend.native="wordarea(checkData.iloanPurposetxt,'详细用途')" @keyup.native="wordarea(checkData.iloanPurposetxt,'详细用途')" -->
                 <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.iloanPurposetxt">
                 </el-input>
               </p>
@@ -1180,33 +1179,54 @@
           label: '否'
         }],
         loanPurpose: [{ //借款用途：
-          value: '01',
-          label: '日常生活消费'
-        }, { //借款用途：
-          value: '02',
-          label: '教育支出'
-        }, { //借款用途：
-          value: '03',
-          label: '医疗支出'
-        }, { //借款用途：
-          value: '04',
-          label: '提高生活质量'
-        }, { //借款用途：
-          value: '05',
-          label: '其他消费'
-        }, { //借款用途：
-          value: '06',
-          label: '货物采买'
-        }, { //借款用途：
-          value: '07',
-          label: '商铺运营'
-        }, { //借款用途：
-          value: '08',
-          label: '家庭消费'
-        }, { //借款用途：
-          value: '09',
-          label: '个人消费'
-        }],
+            value: '01',
+            label: '日常生活消费'
+          }, { //借款用途：
+            value: '02',
+            label: '教育支出'
+          }, { //借款用途：
+            value: '03',
+            label: '医疗支出'
+          }, { //借款用途：
+            value: '04',
+            label: '提高生活质量'
+          }, { //借款用途：
+            value: '05',
+            label: '其他消费'
+          }, { //借款用途：
+            value: '06',
+            label: '货物采买'
+          }, { //借款用途：
+            value: '07',
+            label: '商铺运营'
+          }, { //借款用途：
+            value: '08',
+            label: '家庭消费'
+          }, { //借款用途：
+            value: '09',
+            label: '个人消费'
+          },
+          {
+            value: '10',
+            label: '资金周转'
+          },
+          {
+            value: '11',
+            label: '扩大经营'
+          },
+          {
+            value: '12',
+            label: '购物（生活用品；原材料；设备）'
+          },
+          {
+            value: '13',
+            label: '装修家居'
+          },
+          {
+            value: '14',
+            label: '旅游'
+          }
+        ],
         // ---------------- 工作信息  ------------
         hirecomSign: [{ // 单位性质
           value: '01',

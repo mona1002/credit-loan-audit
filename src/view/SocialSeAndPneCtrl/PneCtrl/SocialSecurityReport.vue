@@ -430,8 +430,8 @@
     data() {
       return {
         activeNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
-        socReport: null,
-        socRawReport: null,
+        socReport: {},
+        socRawReport: {},
         insurances: [], //
         medicareFlow: [],
         pensionFlow: [],

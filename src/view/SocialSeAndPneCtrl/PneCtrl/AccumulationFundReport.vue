@@ -305,7 +305,6 @@
     </el-collapse>
   </div>
 </template>
-
 <script>
   import baseurl from '../../../util/ConstantSocialAndPn';
   import utils from '../../../util/utils';
@@ -313,8 +312,31 @@
     data() {
       return {
         activeNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
-        fundReport: null,
-        fundRawReport: null,
+        fundReport: {
+          // name:'',
+          // idcarduser_name:'',
+          // user_idcard:'',
+          // user_phone:'',
+          // name_match:'',
+          // idcard_match:'',
+          // monthly_income:'',
+          // customer_id:'',
+          // organization_type:'',
+          // status:'',
+          // company:'',
+          // corp_scale:'',
+          // corp_type:'',
+          // deposit_rate:'',
+          // deposit_amount:'',
+          // balance:'',
+          // current_corp_continuous_deposit_month:'',
+          // last_record_date:'',
+          // continuous_deposit_month:'',
+          // last_deposit_month:'',
+          // loan_count:'',
+          // loan_repay_amount:'',
+        },
+        fundRawReport: {},
         insurances: [], //
         medicareFlow: [],
         pensionFlow: [],
@@ -325,7 +347,7 @@
         companys: [],
         flows: [],
         loans: [],
-        loanFlows:[]
+        loanFlows: []
       }
     },
     props: {
@@ -336,6 +358,12 @@
       }
     },
     methods: {
+      // checkInf(getdata, showinfo) {
+      //   for (let key in getdata) {
+      //     getdata[key] ? showinfo[key] = getdata[key] : '';
+      //   }
+      //   // return showinfo
+      // },
       getInf() {
         this.post(baseurl.DataUrl + '/channel/threeDataAction!notSession_getFundReport.action', {
           applySubNo: this.applySubNo
@@ -353,6 +381,7 @@
               result.result['10059'].bizInfo.data.report && result.result['10059'].bizInfo.data.report[0] &&
               result.result['10059'].bizInfo.data.report[0].data) {
               this.fundReport = result.result['10059'].bizInfo.data.report[0].data[0];
+              // this.checkInf(result.result['10059'].bizInfo.data.report[0].data[0], this.fundReport)
             }
             console.log(1, this.fundReport);
           }
@@ -363,7 +392,6 @@
             }
           }
           console.log(2, this.fundRawReport);
-
           // ---------------------------
           if (this.fundReport) {
             //     this.fen_to_yuan(this.fundReport, ['deposit_amount', 'balance', 'loan_repay_amount', 'monthly_income', '']);
@@ -401,30 +429,31 @@
             //     }
           }
           // ---------------------------------
-            if (this.fundRawReport) {
-          //     if (this.fundRawReport.accounts && this.fundRawReport.accounts.length > 0) {
-          //       var formObj = $('#div_fund #div_account form').clone();
-          //       $.each(this.this.fundRawReport.accounts, function (i, eh) {
-          //         this.fen_to_yuan(eh, ['balance', 'deposit_amount', 'deposit_base', 'housing_supplement_base',
-          //           'housing_supplement_balance', 'once_balance'
-          //         ]);
-          //         formObj.appendTo($('#div_fund #div_account'));
-          //         $('<br>').appendTo($('#div_fund #div_account'));
-          //         // $('#div_fund #div_account form:last').form('load', eh);
-          //       });
-          //       $('#div_fund #div_account form:first').remove();
-          //     }
-         this.fundRawReport.loan_flows && this.fundRawReport.loan_flows.length > 0?this.loanFlows=this.fundRawReport.loan_flows: this.loanFlows='';
-          //     if (this.fundRawReport.loan_flows && this.fundRawReport.loan_flows.length > 0) {
-          //       $.each(this.fundRawReport.loan_flows, function (i, eh) {
-          //         this.fen_to_yuan(eh, ['repay_principle', 'repay_interest', 'repay_amount', 'principle_balance']);
-          //         this.addRow($('#div_fund #t_5 tbody'), ['account_id', 'contract_no', 'type', 'record_date',
-          //           'record_month', 'repay_principle', 'repay_interest', 'repay_amount', 'principle_balance',
-          //           'deduct_date'
-          //         ], eh);
-          //       });
-          //     }
-            }
+          if (this.fundRawReport) {
+            //     if (this.fundRawReport.accounts && this.fundRawReport.accounts.length > 0) {
+            //       var formObj = $('#div_fund #div_account form').clone();
+            //       $.each(this.fundRawReport.accounts, function (i, eh) {
+            //         this.fen_to_yuan(eh, ['balance', 'deposit_amount', 'deposit_base', 'housing_supplement_base',
+            //           'housing_supplement_balance', 'once_balance'
+            //         ]);
+            //         formObj.appendTo($('#div_fund #div_account'));
+            //         $('<br>').appendTo($('#div_fund #div_account'));
+            //         // $('#div_fund #div_account form:last').form('load', eh);
+            //       });
+            //       $('#div_fund #div_account form:first').remove();
+            //     }
+            this.fundRawReport.loan_flows && this.fundRawReport.loan_flows.length > 0 ? this.loanFlows = this.fundRawReport
+              .loan_flows : '';
+            //     if (this.fundRawReport.loan_flows && this.fundRawReport.loan_flows.length > 0) {
+            //       $.each(this.fundRawReport.loan_flows, function (i, eh) {
+            //         this.fen_to_yuan(eh, ['repay_principle', 'repay_interest', 'repay_amount', 'principle_balance']);
+            //         this.addRow($('#div_fund #t_5 tbody'), ['account_id', 'contract_no', 'type', 'record_date',
+            //           'record_month', 'repay_principle', 'repay_interest', 'repay_amount', 'principle_balance',
+            //           'deduct_date'
+            //         ], eh);
+            //       });
+            //     }
+          }
         });
       },
       //   addRow($table, rfields, rdata) {
