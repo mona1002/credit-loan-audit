@@ -371,10 +371,10 @@
                 @keydown.native="wordInput20(checkData.workPost,'职位级别')" @keyup.native="wordInput20(checkData.workPost,'职位级别')">
               </el-input>
             </li>
-            <li>
+            <li class="position_relative">
               <i class="hint">
-                <span class="Working_middle" v-show="this.reg.mphoneM">请输入：区号+5-8位数字</span>
-                <span class="Working_middle" v-show="this.reg.mphoneR">不可输入：11111，12345等</span>
+                <span class="padding_left_235" v-show="this.reg.mphoneM">请输入：区号+5-8位数字</span>
+                <span class="padding_left_235" v-show="this.reg.mphoneR">不可输入：11111，12345等</span>
               </i>
               <label class="WorkInfs_left_label">单位电话：</label>
               <el-input type="text" placeholder="请输入内容" v-model="checkData.workTel" @blur="mPhone(checkData.workTel,$event)">
@@ -387,9 +387,9 @@
               <el-input type="text" placeholder="请输入内容" v-model="checkData.avgsalaryamt" @blur="formatSC('月均工资')">
               </el-input>
             </li>
-            <li>
-              <i class="hint">
-                <span v-show="this.reg.mpayDay" class="Working_middle"> 请填入1-31之间的数字</span>
+            <li class="position_relative">
+              <i class="hint" v-show="reg.mpayDay" >
+                <span class="padding_left_235"> 请填入1-31之间的数字</span>
               </i>
               <label class="WorkInfs_left_label">每月发薪日：</label>
               <el-input type="text" placeholder="请输入内容" v-model="checkData.payDay" @blur="mday(checkData.payDay,$event)">
@@ -453,7 +453,7 @@
                 </el-option>
               </el-select>
             </li>
-            <li>
+            <li class="position_relative">
               <i class="hint">
                 <b v-show="this.reg.mpostCode" class="Working_middle Working_right">请输入6位邮编</b>
               </i>
@@ -2085,6 +2085,14 @@
                   type: 'success'
                 });
                 this.mountC();
+                // 非必填项提示是语去掉
+                // 单位电话：
+                this.reg.mphoneM = false;
+                this.reg.mphoneR = false;
+                // 每月发薪日：
+                this.reg.mpayDay = false;
+                // 单位地址邮编：
+                this.reg.mpostCode = false;
               } else {
                 this.Confirm = false;
                 this.$message.error('提交失败，请稍后再试！');

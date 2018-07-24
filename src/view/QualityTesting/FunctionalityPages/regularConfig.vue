@@ -469,11 +469,10 @@
         // }
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.addNew.drawSheetType == '01' ? this.proficiencyCount++ : ''; //熟悉
-            this.addNew.drawSheetType == '02' ? this.newOneCount++ : ''; //新人
+            // this.addNew.drawSheetType == '01' ? this.proficiencyCount++ : ''; //熟悉
+            // this.addNew.drawSheetType == '02' ? this.newOneCount++ : ''; //新人
             if ((this.addNew.drawSheetType == '01' && this.proficiencyCount > 0) || (this.addNew.drawSheetType ==
-                '02' &&
-                this.newOneCount > 0)) { //熟悉
+                '02' && this.newOneCount > 0)) { //熟悉
               this.$message.error(' 抽单类型设置重复！');
               return
             }

@@ -1,13 +1,27 @@
 /*最小宽度 */
-.min_width_1200{
+
+.min_width_1200 {
   min-width: 1200px;
-}.min_width_1550{
+}
+
+.min_width_1550 {
   min-width: 1550px;
 }
+
 /* 内边距 */
-.padding_left_5{
+
+.padding_left_5 {
   padding-left: 5px;
 }
+
+.position_relative {
+  position: relative;
+}
+
+.padding_left_235 {
+  padding-left: 235px;
+}
+
 /* 列表 */
 
 .taskWatting {
@@ -318,16 +332,18 @@
 .AlertContent .AudioVisual_List .list_title {
   background: #ebeef5;
   /* font-weight: 800; */
-  color:#3b3b3b;
+  color: #3b3b3b;
   height: 35px;
   line-height: 35px;
 }
 
 /* 对比弹出层客户名称=====================================待更改 */
-.customName{
+
+.customName {
   text-align: right !important;
   padding-right: 148px
 }
+
 /* 折叠面板title */
 
 .Abody .headFont {
@@ -439,9 +455,11 @@
 .margin_top_5 {
   margin-top: 5px;
 }
+
 .margin_top_15 {
   margin-top: 15px;
 }
+
 /*查看- label宽度 */
 
 .label_width_210 {
@@ -451,9 +469,11 @@
 .label_width_200 {
   width: 200px;
 }
+
 .label_width_195 {
   width: 195px;
 }
+
 .label_width_190 {
   width: 190px;
 }
