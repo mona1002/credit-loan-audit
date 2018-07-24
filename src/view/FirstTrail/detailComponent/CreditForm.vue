@@ -25,7 +25,7 @@
                 </i>
                 <label class="InternetInf_right_label"> 执行信息说明：</label>
                 <!--   @compositionend.native="wordarea(checkData.wbeexEcutedtxt,'执行信息')" @keyup.native="wordarea(checkData.wbeexEcutedtxt,'执行信息')" -->
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wbeexEcutedtxt">
+                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL"  v-model="checkData.wbeexEcutedtxt">
                 </el-input>
               </p>
             </li>
@@ -45,7 +45,7 @@
                 </i>
                 <label class="InternetInf_right_label"> 单位执行信息说明：</label>
                 <!-- @compositionend.native="wordarea(checkData.wnetHirecomtxt,'单位执行信息')" @keyup.native="wordarea(checkData.wnetHirecomtxt,'单位执行信息')" -->
-                <el-input type="textarea" resize="none" :maxlength="this.textareaL" :rows="2" placeholder="请输入内容" v-model="checkData.wnetHirecomtxt">
+                <el-input type="textarea" resize="none" :maxlength="this.textareaL" :rows="2"  v-model="checkData.wnetHirecomtxt">
                 </el-input>
               </p>
             </li>
@@ -68,7 +68,7 @@
                 </i>
                 <label class="InternetInf_right_label"> 失信记录说明： </label>
                 <!--  @compositionend.native="wordarea(checkData.wnetEcutedBreatxt,'失信记录')" @keyup.native="wordarea(checkData.wnetEcutedBreatxt,'失信记录')" -->
-                <el-input type="textarea" resize="none" :maxlength="this.textareaL" :rows="2" placeholder="请输入内容" v-model="checkData.wnetEcutedBreatxt">
+                <el-input type="textarea" resize="none" :maxlength="this.textareaL" :rows="2"  v-model="checkData.wnetEcutedBreatxt">
                 </el-input>
               </p>
             </li>
@@ -88,7 +88,7 @@
                 </i>
                 <label class="InternetInf_right_label"> 单位失信记录说明： </label>
                 <!--  @compositionend.native="wordarea(checkData.wnetHirecomBreatxt,'单位失信')" @keyup.native="wordarea(checkData.wnetHirecomBreatxt,'单位失信')" -->
-                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL" placeholder="请输入内容" v-model="checkData.wnetHirecomBreatxt">
+                <el-input type="textarea" :rows="2" resize="none" :maxlength="this.textareaL"  v-model="checkData.wnetHirecomBreatxt">
                 </el-input>
               </p>
             </li>
