@@ -9,18 +9,20 @@
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-            <li>
-              <label class="label_width_166">电话名称：</label>
-              <span> {{comData.custName}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">电话类型：</label>
-              <span> {{comData.phoneTypeDes}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">电话号码：</label>
-              <span> {{comData.phoneNum}}</span>
-            </li>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">电话名称：</label>
+                <span> {{comData.custName}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">电话类型：</label>
+                <span> {{comData.phoneTypeDes}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">电话号码：</label>
+                <span> {{comData.phoneNum}}</span>
+              </li>
+            </div>
             <li>
               <label class="label_width_166">来源：</label>
               <span> {{comData.sourceDes}}</span>
@@ -43,79 +45,97 @@
         </template>
         <div class="checkedInf checkedInf_li_width_half clearFix">
           <ul>
-            <li class="text_area_li">
-              <label class="label_width_166">第三方查询信息：</label>
-              <span class="text_area_span text_area_span_minus170"> {{comData.thirdResult}}</span>
-            </li>
-            <li class="clearFloat">
-              <label class="label_width_166">拨打电话：</label>
-              <span> {{comData.phoneDes}}</span>
-            </li>
-            <li class="text_area_li" v-show="comData.phone=='01'">
-              <label class="label_width_145">说明：</label>
-              <span class="text_area_span text_area_span_minus150"> {{comData.phonetxt}}</span>
-            </li>
-            <li class="clearFloat">
-              <label class="label_width_166">接电话人身份：</label>
-              <span> {{comData.answerIdentityDes}}</span>
-            </li>
-            <li  class="text_area_li margin_top_5" v-show="comData.answerIdentity=='00'">
-              <label class="label_width_145">说明：</label>
-              <span class="text_area_span text_area_span_minus150"> {{comData.answertxt}}</span>
-            </li>
-            <li class="clearFloat">
-              <label class="label_width_166">核对单位及工作信息：</label>
-              <span> {{comData.companyDes}}</span>
-            </li>
-            <li class="text_area_li margin_top_5"   v-show="comData.company=='01'">
-              <label class="label_width_145">说明：</label>
-              <span class="text_area_span text_area_span_minus150"> {{comData.companytxt}}</span>
-            </li>
-            <li class="clearFloat">
-              <label class="label_width_166">核对工作时间：</label>
-              <span> {{comData.checkTimeDes}}</span>
-            </li>
-            <li class="text_area_li margin_top_5" v-show="comData.checkTime=='01'">
-              <label class="label_width_145">说明：</label>
-              <span class="text_area_span text_area_span_minus150"> {{comData.checkTimetxt}}</span>
-            </li>
-            <li class="clearFloat">
-              <label class="label_width_166">核对收入：</label>
-              <span> {{comData.checkIncomeDes}}</span>
-            </li>
-            <li class="text_area_li margin_top_5" v-show="comData.checkIncome=='00'" >
-              <label class="label_width_145">说明：</label>
-              <span class="text_area_span text_area_span_minus150"> {{comData.checkIncometxt}}</span>
-            </li>
-            <li class="clearFloat">
-              <label class="label_width_166">用工方式：</label>
-              <span> {{comData.employmentmodeDes}}</span>
-            </li>
-            <li  class="clearFloat">
-              <label class="label_width_166">工资发放情况：</label>
-              <span> {{comData.payrollSituationDes}}</span>
-            </li>
-             <li class="text_area_li margin_top_5"  v-show="comData.payrollSituation=='00'">
-              <label class="label_width_145">说明：</label>
-              <span class="text_area_span text_area_span_minus150"> {{comData.payrollSituationtxt}}</span>
-            </li>
-            <li  class="clearFloat">
-              <label class="label_width_166">是否缴纳养老保险：</label>
-              <span> {{comData.pensionInsuranceDes}}</span>
-            </li>
+            <div class=" CreditForm_div_border clearFix">
+              <li class="text_area_li">
+                <label class="label_width_166">第三方查询信息：</label>
+                <span class="text_area_span text_area_span_minus170"> {{comData.thirdResult}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
               <li>
-              <label class="label_width_145">是否缴纳住房公积金：</label>
-              <span> {{comData.housingFundDes}}</span>
-            </li>
-               <li>
-              <label class="label_width_166">核对工作证明人1：</label>
-              <span> {{comData.jobref1}}</span>
-            </li>
-               <li>
-              <label class="label_width_145">核对工作证明人2：</label>
-              <span> {{comData.jobref2}}</span>
-            </li>
-            <li class="text_area_li clearFloat">
+                <label class="label_width_166">拨打电话：</label>
+                <span> {{comData.phoneDes}}</span>
+              </li>
+              <li class="text_area_li" v-show="comData.phone=='01'">
+                <label class="label_width_145">说明：</label>
+                <span class="text_area_span text_area_span_minus150"> {{comData.phonetxt}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">接电话人身份：</label>
+                <span> {{comData.answerIdentityDes}}</span>
+              </li>
+              <li class="text_area_li margin_top_5" v-show="comData.answerIdentity=='00'">
+                <label class="label_width_145">说明：</label>
+                <span class="text_area_span text_area_span_minus150"> {{comData.answertxt}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">核对单位及工作信息：</label>
+                <span> {{comData.companyDes}}</span>
+              </li>
+              <li class="text_area_li margin_top_5" v-show="comData.company=='01'">
+                <label class="label_width_145">说明：</label>
+                <span class="text_area_span text_area_span_minus150"> {{comData.companytxt}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">核对工作时间：</label>
+                <span> {{comData.checkTimeDes}}</span>
+              </li>
+              <li class="text_area_li margin_top_5" v-show="comData.checkTime=='01'">
+                <label class="label_width_145">说明：</label>
+                <span class="text_area_span text_area_span_minus150"> {{comData.checkTimetxt}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">核对收入：</label>
+                <span> {{comData.checkIncomeDes}}</span>
+              </li>
+              <li class="text_area_li margin_top_5" v-show="comData.checkIncome=='00'">
+                <label class="label_width_145">说明：</label>
+                <span class="text_area_span text_area_span_minus150"> {{comData.checkIncometxt}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">用工方式：</label>
+                <span> {{comData.employmentmodeDes}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">工资发放情况：</label>
+                <span> {{comData.payrollSituationDes}}</span>
+              </li>
+              <li class="text_area_li margin_top_5" v-show="comData.payrollSituation=='00'">
+                <label class="label_width_145">说明：</label>
+                <span class="text_area_span text_area_span_minus150"> {{comData.payrollSituationtxt}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">是否缴纳养老保险：</label>
+                <span> {{comData.pensionInsuranceDes}}</span>
+              </li>
+              <li>
+                <label class="label_width_145">是否缴纳住房公积金：</label>
+                <span> {{comData.housingFundDes}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">核对工作证明人1：</label>
+                <span> {{comData.jobref1}}</span>
+              </li>
+              <li>
+                <label class="label_width_145">核对工作证明人2：</label>
+                <span> {{comData.jobref2}}</span>
+              </li>
+            </div>
+            <li class="text_area_li">
               <label class="label_width_166">调查结果：</label>
               <span class="text_area_span text_area_span_minus170"> {{comData.conclusion}}</span>
             </li>
@@ -260,7 +280,10 @@
 <script>
   export default {
     data() {
-      return {activeName: ['1', '2'],   imageUrl: ''}
+      return {
+        activeName: ['1', '2'],
+        imageUrl: ''
+      }
     },
     props: ['comData', 'isFull'],
     mounted() {

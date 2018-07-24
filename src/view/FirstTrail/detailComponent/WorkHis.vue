@@ -9,18 +9,20 @@
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-            <li>
-              <label class="label_width_166">电话名称：</label>
-              <span> {{workData.custName}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">电话类型：</label>
-              <span> {{workData.phoneTypeDes}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">电话号码：</label>
-              <span> {{workData.phoneNum}}</span>
-            </li>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">电话名称：</label>
+                <span> {{workData.custName}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">电话类型：</label>
+                <span> {{workData.phoneTypeDes}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">电话号码：</label>
+                <span> {{workData.phoneNum}}</span>
+              </li>
+            </div>
             <li>
               <label class="label_width_166">来源：</label>
               <span> {{workData.sourceDes}}</span>
@@ -42,7 +44,7 @@
           <span class="collapse_title_text">录入工作证明人调查信息</span>
         </template>
         <div class="checkedInf checkedInf_li_width_half clearFix">
-          <ul>
+          <ul>   <div class=" CreditForm_div_border clearFix">
             <li>
               <label class="label_width_166">微信/支付宝是否异常：</label>
               <span> {{workData.mobilepaymentDes}}</span>
@@ -50,24 +52,24 @@
             <li class="text_area_li" v-show="workData.mobilepayment=='1'">
               <label class="label_width_110">异常项说明：</label>
               <span class="text_area_span text_area_span_minus115"> {{workData.mobilepaymenttxt}}</span>
-            </li>
-            <li class="clearFloat">
+            </li> </div>  <div class=" CreditForm_div_border clearFix">
+            <li>
               <label class="label_width_166">接电话人身份：</label>
               <span> {{workData.answerIdentityDes}}</span>
             </li>
             <li class="text_area_li margin_top_5" v-show="workData.answerIdentity=='00'">
               <label class="label_width_110">说明：</label>
               <span class="text_area_span text_area_span_minus115"> {{workData.answertxt}}</span>
-            </li>
-            <li class="clearFloat">
+            </li> </div>  <div class=" CreditForm_div_border clearFix">
+            <li>
               <label class="label_width_166">核对单位工作情况：</label>
               <span> {{workData.checkJobDes}}</span>
             </li>
             <li class="text_area_li margin_top_5" v-show="workData.checkJob=='01'">
               <label class="label_width_110">说明：</label>
               <span class="text_area_span text_area_span_minus115"> {{workData.checkJobtxt}}</span>
-            </li>
-            <li class="text_area_li clearFloat">
+            </li> </div> 
+            <li class="text_area_li">
               <label class="label_width_166">调查结果：</label>
               <span class="text_area_span text_area_span_minus170"> {{workData.conclusion}}</span>
             </li>
@@ -76,7 +78,7 @@
       </el-collapse-item>
     </el-collapse>
     <!-- <el-form ref="form" label-width="130px"> -->
-      <!-- <div class="address-title">
+    <!-- <div class="address-title">
         <i class="collapse_title_icon"></i>
         <span class="collapse_title_text">新增调查日志</span>
       </div>
@@ -103,7 +105,7 @@
           {{workData.sourceDesc}}
         </el-form-item>
       </div> -->
-      <!-- <div class="address-title">
+    <!-- <div class="address-title">
         <i class="collapse_title_icon"></i>
         <span class="collapse_title_text">录入工作证明人调查信息</span>
       </div>

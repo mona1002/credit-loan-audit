@@ -1273,17 +1273,14 @@
 
   /* 历史调查日志 收缩 title */
 
-  .phone-credit .el-collapse-item__header {
+  /* .phone-credit .el-collapse-item__header {
     background: #eef0f9 !important;
-    /*font-family: PingFangSC-Regular;*/
     font-size: 16px;
     color: #1f2d3d;
-    /*letter-spacing: 0.11px;*/
     text-align: left;
-    /*padding-left: 10px;*/
     height: 40px;
     line-height: 40px;
-  }
+  } */
 
 
 
@@ -1292,9 +1289,9 @@
 
   /* 折叠 头 箭头样式*/
 
-  .phone-credit .el-collapse-item__header .el-collapse-item__arrow {
+  /* .phone-credit .el-collapse-item__header .el-collapse-item__arrow {
     padding-right: 20px;
-  }
+  } */
 
 
 
@@ -1486,7 +1483,7 @@
   /* 表头 */
 
   .phone-credit .el-collapse,
-  .phone-credit .el-collapse-item__header,
+  /* .phone-credit .el-collapse-item__header, */
   .el-collapse-item__wrap {
     border: none;
     width: 100%;
@@ -1514,9 +1511,9 @@
 
   /* 历史调查日志  右箭头  */
 
-  .phone-credit .el-collapse-item__header .el-collapse-item__arrow {
+  /* .phone-credit .el-collapse-item__header .el-collapse-item__arrow {
     padding: 0;
-  }
+  } */
 
   /* .phone-credit .el-collapse-item__arrow {
   line-height: 40px

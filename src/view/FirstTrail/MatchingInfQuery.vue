@@ -214,6 +214,7 @@
           this.$refs.applicationInf ? this.$refs.applicationInf.mountedInf() : '';
           this.$refs.right_tab_ul.style.left = "0";
           this.DblScreen();
+           this.CompareAlert=false;//关闭弹出层
         }
       }
     },

@@ -30,40 +30,40 @@
           <ul>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class="label_width_195">银行卡号：</label>
-                <span>{{applyInf.name}}</span>
+                <label class="label_width_145">姓名：</label>
+                <span>{{baseinfo.ocr_name}}</span>
               </li>
               <li>
-                <label class="label_width_195">设备id：</label>
-                <span>{{applyInf.idcard}}</span>
+                <label class="label_width_145">性别：</label>
+                <span>{{baseinfo.ocr_gender}}</span>
               </li>
               <li>
-                <label class="label_width_195">进件编号：</label>
-                <span>{{applyInf.user_name}}</span>
+                <label class="label_width_145">民族：</label>
+                <span>{{baseinfo.ocr_nation}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class="label_width_195">姓名：</label>
-                <span>{{applyInf.user_phone}}</span>
+                <label class="label_width_145">生日：</label>
+                <span>{{baseinfo.ocr_birthday}}</span>
               </li>
               <li>
-                <label class="label_width_195">电话：</label>
-                <span>{{applyInf.name_match}}</span>
+                <label class="label_width_145">住址：</label>
+                <span>{{baseinfo.ocr_address}}</span>
               </li>
               <li>
-                <label class="label_width_195">申请时间：</label>
-                <span>{{applyInf.idcard_match}}</span>
+                <label class="label_width_145">身份证号：</label>
+                <span>{{baseinfo.ocr_number}}</span>
               </li>
             </div>
             <div>
               <li>
-                <label class="label_width_195">身份证号：</label>
-                <span>{{applyInf.customer_id}}</span>
+                <label class="label_width_145">签证机关：</label>
+                <span>{{baseinfo.ocr_authority}}</span>
               </li>
               <li>
-                <label class="label_width_195">类型编号：</label>
-                <span>{{applyInf.organization_type}}</span>
+                <label class="label_width_145">有效期：</label>
+                <span>{{baseinfo.ocr_timeLimit}}</span>
               </li>
             </div>
           </ul>
@@ -78,7 +78,8 @@
   export default {
     data() {
       return {
-        activeNames: ['1', '2', '3']
+        activeNames: ['1', '2', '3'],
+        baseinfo: {}
       }
     },
     props: {
@@ -92,18 +93,17 @@
       getInf() {
         this.post(baseurl.DataUrl + '/thirdrisk/ocrMessageAction!getOcrMessage.action', {
           applySubNo: this.applySubNo
-          //    applySubNo:'test999999'
+          //   applySubNo: 'test999999'
         }).then(res => {
-          console.log(res)
           if (!res || !res.appInfo) return;
           var data = $.parseJSON(res.appInfo);
           if (res.channel == '29') { //电销
-            $('#ocrPersonInfo').form('loadData', data);
+            this.baseinfo = data;
             if (data['b14']) $('#image2').attr('src', data['b14']);
             if (data['b15']) $('#image3').attr('src', data['b15']);
             if (data['k1']) $('#image1').attr('src', data['k1']);
           } else if (res.channel == '01') { //直销
-            $('#ocrPersonInfo').form('loadData', data.auth);
+            this.baseinfo = data.auth;
             if (data.auth.id_front_url) $('#image2').attr('src', data.auth.id_front_url);
             if (data.auth.id_back_url) $('#image3').attr('src', data.auth.id_back_url);
             if (data.auth.face_url) $('#image1').attr('src', data.auth.face_url);
@@ -111,12 +111,6 @@
 
         });
       },
-      checkInf(getdata, showinfo) {
-        for (let key in getdata) {
-          getdata[k] ? showinfo[key] = getdata[k] : '';
-        }
-        return showinfo
-      }
     },
     mounted() {
       this.getInf();

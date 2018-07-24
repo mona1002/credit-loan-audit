@@ -318,13 +318,13 @@
               <li>
                 <!-- ======================================================待确认字段名======================================== -->
                 <label class="label_width_195">gpd纬度：</label>
-                <!-- <span>{{deviceInfo.gpsLocation.latitude}}</span> -->
+                <span>{{deviceInfo.gpsLocation.latitude}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_195">gpd经度：</label>
-                <!-- <span>{{deviceInfo.gpsLocation.longitude}}</span> -->
+                <span>{{deviceInfo.gpsLocation.longitude}}</span>
               </li>
               <li>
                 <label class="label_width_195">屏幕亮度：</label>
@@ -410,7 +410,9 @@
         activeNames: ['1', '2', '3', '4'],
         applyInf: {},
         businessInf: {},
-        deviceInfo: {},
+        deviceInfo: {
+          gpsLocation:{}
+        },
         telephonyInfos: []
       }
     },
@@ -424,8 +426,8 @@
     methods: {
       getInf() {
         this.post(baseurl.DataUrl + '/thirdrisk/tdDevicePortraitAction!findByApplySubNo.action', {
-          // applySubNo: this.applySubNo
-            applySubNo : 'PHDX6409598026121217'
+          applySubNo: this.applySubNo
+            // applySubNo : 'PHDX6409598026121217'
         }).then(res => {
           console.log(res)
          
