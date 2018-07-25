@@ -621,11 +621,11 @@
 /* 表格添加问题 */
 /* .Abody .borrowerInformation td {
   padding-top: 15px !important;
-}
+} */
 .Abody .borrowerInformation .el-table--enable-row-hover .el-table__body tr:hover>td{
   background: #ffffff;
 }
-.Abody .borrowerInformation .el-table__body tr.current-row>td{
+/* .Abody .borrowerInformation .el-table__body tr.current-row>td{
   background: #ffffff !important;
 } */
 /* 各自部分 */

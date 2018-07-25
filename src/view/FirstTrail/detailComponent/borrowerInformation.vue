@@ -42,54 +42,76 @@
             </el-table-column>
             <el-table-column prop="coveredArea" label="建筑面积[m²]" min-width="110">
               <template slot-scope="scope">
-                <span class="regSpan" v-show="scope.row.isShow">
-                  <i>*</i>请输入10-300
+                <el-tooltip class="item" effect="dark" :disabled="scope.row.coveredArea!=''" content="请输入10-300" placement="top">
+                  <el-input v-model="scope.row.coveredArea" @blur="postcode(scope.row,'coveredArea')" placeholder="请输入内容"></el-input>
+                </el-tooltip>
+                <!-- <span class="regSpan" v-show="scope.row.isShow">
+                 请输入10-300
                 </span>
-                <el-input v-model="scope.row.coveredArea" @blur="postcode(scope.row,'coveredArea')" placeholder="请输入内容"></el-input>
+                <el-input v-model="scope.row.coveredArea" @blur="postcode(scope.row,'coveredArea')" placeholder="请输入内容"></el-input> -->
               </template>
             </el-table-column>
             <el-table-column prop="unitPrice" label="建筑单价[元]" min-width="120">
               <template slot-scope="scope">
-                <span class="regSpan" v-show="scope.row.priceShow">
+                <el-tooltip class="item" effect="dark" :disabled="scope.row.unitPrice!=''" content="请输入100-1000000" placement="top">
+                  <el-input v-model="scope.row.unitPrice" @focus="falseShow(scope.row,'unitPrice')" @blur="moneyBlur(scope.row,'unitPrice')"
+                    placeholder="请输入内容"></el-input>
+                </el-tooltip>
+                <!-- <span class="regSpan" v-show="scope.row.priceShow">
                   <i>*</i>请输入100-1000000
                 </span>
                 <el-input v-model="scope.row.unitPrice" @focus="falseShow(scope.row,'unitPrice')" @blur="moneyBlur(scope.row,'unitPrice')"
-                  placeholder="请输入内容"></el-input>
+                  placeholder="请输入内容"></el-input> -->
               </template>
             </el-table-column>
-            <el-table-column prop="estateAddress" label="房产地址" min-width="200" show-overflow-tooltip>
+            <el-table-column prop="estateAddress" label="房产地址" min-width="200">
               <template slot-scope="scope">
-                <span class="regSpan" v-show="scope.row.estateShow">
+                <el-tooltip class="item" effect="dark" :disabled="scope.row.estateAddress!=''" content="100字以内" placement="top">
+                  <el-input v-model="scope.row.estateAddress" @blur="postcode(scope.row,'estateAddress')" @focus="falseShow(scope.row,'estateAddress')"
+                    placeholder="请输入内容">
+                  </el-input>
+                </el-tooltip>
+                <!-- <span class="regSpan" v-show="scope.row.estateShow">
                   <i>*</i>100字以内
                 </span>
                 <el-input v-model="scope.row.estateAddress" @blur="postcode(scope.row,'estateAddress')" @focus="falseShow(scope.row,'estateAddress')"
                   placeholder="请输入内容">
-                </el-input>
+                </el-input> -->
               </template>
             </el-table-column>
             <el-table-column prop="estateZip" label="邮政编码" min-width="80">
               <template slot-scope="scope">
-                <span class="regSpan" v-show="scope.row.zipShow">
-                  <i>*</i>格式不正确
+                <el-tooltip class="item" effect="dark" :disabled="scope.row.estateZip!=''" content="请输入6位邮编" placement="top">
+                  <el-input v-model="scope.row.estateZip" placeholder="请输入内容" @focus="falseShow(scope.row,'estateZip')" v-on:blur="postcode(scope.row,'estateZip')"></el-input>
+                </el-tooltip>
+                <!-- <span class="regSpan" v-show="scope.row.zipShow">
+                  <i>*</i>格式不正确   
                 </span>
-                <el-input v-model="scope.row.estateZip" placeholder="请输入内容" @focus="falseShow(scope.row,'estateZip')" v-on:blur="postcode(scope.row,'estateZip')"></el-input>
+                <el-input v-model="scope.row.estateZip" placeholder="请输入内容" @focus="falseShow(scope.row,'estateZip')" v-on:blur="postcode(scope.row,'estateZip')"></el-input> -->
               </template>
             </el-table-column>
             <el-table-column prop="equityRatio" label="产权比例[%]" min-width="100">
               <template slot-scope="scope">
-                <span class="regSpan" v-show="scope.row.ratioShow">
+                <el-tooltip class="item" effect="dark" :disabled="scope.row.equityRatio!=''" content="请输入0%-100%" placement="top">
+                  <el-input v-model="scope.row.equityRatio" v-on:blur="postcode(scope.row,'equityRatio')" placeholder="请输入内容"></el-input>
+                </el-tooltip>
+                <!-- <span class="regSpan" v-show="scope.row.ratioShow">
                   <i>*</i>请输入0%-100%
                 </span>
-                <el-input v-model="scope.row.equityRatio" v-on:blur="postcode(scope.row,'equityRatio')" placeholder="请输入内容"></el-input>
+                <el-input v-model="scope.row.equityRatio" v-on:blur="postcode(scope.row,'equityRatio')" placeholder="请输入内容"></el-input> -->
               </template>
             </el-table-column>
             <el-table-column prop="loanPeriod" label="贷款期限[月]" min-width="110">
               <template slot-scope="scope">
-                <span class="regSpan" v-show="scope.row.loanShow">
+                <el-tooltip class="item" effect="dark" :disabled="scope.row.loanPeriod!=''" content="请输入1-360" placement="top">
+                  <el-input v-model="scope.row.loanPeriod" @focus="falseShow(scope.row,'loanPeriod')" v-on:blur="postcode(scope.row,'loanPeriod')"
+                    placeholder="请输入内容"></el-input>
+                </el-tooltip>
+                <!-- <span class="regSpan" v-show="scope.row.loanShow">
                   <i>*</i>请输入1-360
                 </span>
                 <el-input v-model="scope.row.loanPeriod" @focus="falseShow(scope.row,'loanPeriod')" v-on:blur="postcode(scope.row,'loanPeriod')"
-                  placeholder="请输入内容"></el-input>
+                  placeholder="请输入内容"></el-input> -->
               </template>
             </el-table-column>
             <el-table-column prop="mortgageStatus" label="抵押状况" min-width="110">
@@ -102,18 +124,24 @@
             </el-table-column>
             <el-table-column prop="monthlyPay" label="月供[元]" min-width="80">
               <template slot-scope="scope">
-                <span class="regSpan" v-show="scope.row.monthShow">
+                <el-tooltip class="item" effect="dark" :disabled="scope.row.monthlyPay!=''" content="请输入500-500000" placement="top">
+                  <el-input v-model="scope.row.monthlyPay" @blur="moneyBlur(scope.row,'monthlyPay')" placeholder="请输入内容"></el-input>
+                </el-tooltip>
+                <!-- <span class="regSpan" v-show="scope.row.monthShow">
                   <i>*</i>请输入500-500000
                 </span>
-                <el-input v-model="scope.row.monthlyPay" @blur="moneyBlur(scope.row,'monthlyPay')" placeholder="请输入内容"></el-input>
+                <el-input v-model="scope.row.monthlyPay" @blur="moneyBlur(scope.row,'monthlyPay')" placeholder="请输入内容"></el-input> -->
               </template>
             </el-table-column>
             <el-table-column prop="restLoans" label="贷款余额[元]" min-width="102">
               <template slot-scope="scope">
-                <span class="regSpan" v-show="scope.row.restShow">
-                  <i>*</i>请输入0-{{hLimit}}
-                </span>
+                <!-- <el-tooltip class="item" effect="dark" :disabled="scope.row.restLoans!=''" :content="'请输入10-'+hLimit" placement="top"> -->
                 <el-input v-model="scope.row.restLoans" @blur="moneyBlur(scope.row,'restLoans')" placeholder="请输入内容"></el-input>
+                <!-- </el-tooltip> -->
+                <!-- <span class="regSpan" v-show="scope.row.restShow">
+                  <i>*</i>请输入0-{{hLimit}}
+                </span> -->
+                <!-- <el-input v-model="scope.row.restLoans" @blur="moneyBlur(scope.row,'restLoans')" placeholder="请输入内容"></el-input> -->
               </template>
             </el-table-column>
             <el-table-column prop="estateShare" label="房产是否共有" min-width="120">
@@ -154,10 +182,13 @@
             </el-table-column>
             <el-table-column prop="carPrice" label="车辆购置价[元]" min-width="120">
               <template slot-scope="scope">
-                <span class="regSpan" v-show="scope.row.carShow">
+                <el-tooltip class="item" effect="dark" :disabled="scope.row.carPrice!=''" content="请输入10000-10000000" placement="top">
+                  <el-input v-model="scope.row.carPrice" @blur="moneyBlur(scope.row,'carPrice')" placeholder="请输入内容"></el-input>
+                </el-tooltip>
+                <!-- <span class="regSpan" v-show="scope.row.carShow">
                   <i>*</i>请输入10000-10000000
                 </span>
-                <el-input v-model="scope.row.carPrice" @blur="moneyBlur(scope.row,'carPrice')" placeholder="请输入内容"></el-input>
+                <el-input v-model="scope.row.carPrice" @blur="moneyBlur(scope.row,'carPrice')" placeholder="请输入内容"></el-input> -->
               </template>
             </el-table-column>
             <el-table-column prop="isYearCheck" label="是否年检" min-width="100">
@@ -178,11 +209,15 @@
             </el-table-column>
             <el-table-column prop="carModel" label="车辆型号" min-width="100">
               <template slot-scope="scope">
-                <span class="regSpan" v-show="scope.row.carModelShow">
+                <el-tooltip class="item" effect="dark" :disabled="scope.row.carModel!=''" content="车牌型号应小于40字" placement="top">
+                  <el-input v-model="scope.row.carModel" @focus="falseShow(scope.row,'carModel')" v-on:blur="moneyBlur(scope.row,'carModel')"
+                    placeholder="请输入内容"></el-input>
+                </el-tooltip>
+                <!-- <span class="regSpan" v-show="scope.row.carModelShow">
                   <i>*</i>车牌型号应小于40字
                 </span>
                 <el-input v-model="scope.row.carModel" @focus="falseShow(scope.row,'carModel')" v-on:blur="moneyBlur(scope.row,'carModel')"
-                  placeholder="请输入内容"></el-input>
+                  placeholder="请输入内容"></el-input> -->
               </template>
             </el-table-column>
             <el-table-column prop="carType" label="车辆类型" min-width="140">
@@ -198,11 +233,15 @@
             </el-table-column>
             <el-table-column prop="loanPeriod" label="贷款期限[月]" min-width="120">
               <template slot-scope="scope">
-                <span class="regSpan" v-show="scope.row.loanPeriodShow">
+                <el-tooltip class="item" effect="dark" :disabled="scope.row.loanPeriod!=''" content="请输入1-60" placement="top">
+                  <el-input v-model="scope.row.loanPeriod" @focus="falseShow(scope.row,'loanPeriods')" @blur="moneyBlur(scope.row,'loanPeriod')"
+                    placeholder="请输入内容"></el-input>
+                </el-tooltip>
+                <!-- <span class="regSpan" v-show="scope.row.loanPeriodShow">
                   <i>*</i>请输入1-60
                 </span>
                 <el-input v-model="scope.row.loanPeriod" @focus="falseShow(scope.row,'loanPeriods')" @blur="moneyBlur(scope.row,'loanPeriod')"
-                  placeholder="请输入内容"></el-input>
+                  placeholder="请输入内容"></el-input> -->
               </template>
             </el-table-column>
             <el-table-column prop="monthlyPay" label="月供[元]" min-width="100">
@@ -212,18 +251,25 @@
             </el-table-column>
             <el-table-column prop="restLoans" label="贷款余额[元]" min-width="120">
               <template slot-scope="scope">
-                <span class="regSpan" v-show="scope.row.restLoansShow">
+                <!-- <el-tooltip class="item" effect="dark" :disabled="scope.row.restLoans!=''&&limit!=''" :content="'请输入0-'+limit" placement="top"> -->
+                <el-tooltip class="item" effect="dark" :disabled="limit==''" :content="'请输入0-'+limit" placement="top">
+                  <el-input v-model="scope.row.restLoans" @blur="postcode(scope.row,'restLoans')" placeholder="请输入内容"></el-input>
+                </el-tooltip>
+                <!-- <span class="regSpan" v-show="scope.row.restLoansShow">
                   <i>*</i>请输入0-{{limit}}
                 </span>
-                <el-input v-model="scope.row.restLoans" @blur="postcode(scope.row,'restLoans')" placeholder="请输入内容"></el-input>
+                <el-input v-model="scope.row.restLoans" @blur="postcode(scope.row,'restLoans')" placeholder="请输入内容"></el-input> -->
               </template>
             </el-table-column>
             <el-table-column prop="carNo" label="车牌号码" min-width="100">
               <template slot-scope="scope">
-                <span class="regSpan" v-show="scope.row.carNoShow">
+                <el-tooltip class="item" effect="dark" :disabled="scope.row.carNo.length<100" content="车牌号码应在100字以内" placement="top">
+                  <el-input v-model="scope.row.carNo" @focus="falseShow(scope.row,'carNo')" @blur="postcode(scope.row,'carNo')" placeholder="请输入内容"></el-input>
+                </el-tooltip>
+                <!-- <span class="regSpan" v-show="scope.row.carNoShow">
                   <i>*</i>车牌号码应在100字以内
                 </span>
-                <el-input v-model="scope.row.carNo" @focus="falseShow(scope.row,'carNo')" @blur="postcode(scope.row,'carNo')" placeholder="请输入内容"></el-input>
+                <el-input v-model="scope.row.carNo" @focus="falseShow(scope.row,'carNo')" @blur="postcode(scope.row,'carNo')" placeholder="请输入内容"></el-input> -->
               </template>
             </el-table-column>
             <el-table-column prop="buyInsur" label="车辆已购保险" min-width="120">
@@ -280,11 +326,14 @@
             </el-table-column>
             <el-table-column prop="bankName" label="银行名称" min-width="160">
               <template slot-scope="scope">
-                <span class="regSpan" v-show="scope.row.bankNameShow">
+                <el-tooltip class="item" effect="dark" :disabled="scope.row.coveredArea!=''" content="请输入10-300" placement="top">
+
+                </el-tooltip>
+                <!-- <span class="regSpan" v-show="scope.row.bankNameShow">
                   <i>*</i>银行名称应小于60字
-                </span>
+                </span> -->
                 <span class="must">*</span>
-                <el-tooltip class="item" effect="dark" :disabled="scope.row.bankName!=''" content="该项为必填项" placement="right">
+                <el-tooltip class="item" effect="dark" :disabled="scope.row.bankName!=''" content="该项为必填项且长度小于60字" placement="right">
                   <el-input v-bind:title="scope.row.bankName" v-model="scope.row.bankName" @focus="falseShow(scope.row,'bankName')" @blur="postcode(scope.row,'bankName')"
                     placeholder="请输入内容"></el-input>
                 </el-tooltip>
@@ -319,10 +368,13 @@
             </el-table-column>
             <el-table-column prop="realRepaymentAmt" label="本期实际还款金额" min-width="140">
               <template slot-scope="scope">
-                <span class="regSpan" v-show="scope.row.realRepaymentAmtShow">
+                <el-tooltip class="item" effect="dark" :disabled="!scope.row.realRepaymentAmtShow" content="应小于本期应还款金额" placement="top">
+                  <el-input v-model="scope.row.realRepaymentAmt" @blur="moneyBlur(scope.row,'realRepaymentAmt')" placeholder="请输入内容"></el-input>
+                </el-tooltip>
+                <!-- <span class="regSpan" v-show="scope.row.realRepaymentAmtShow">
                   <i>*</i>应小于本期应还款金额
                 </span>
-                <el-input v-model="scope.row.realRepaymentAmt" @blur="moneyBlur(scope.row,'realRepaymentAmt')" placeholder="请输入内容"></el-input>
+                <el-input v-model="scope.row.realRepaymentAmt" @blur="moneyBlur(scope.row,'realRepaymentAmt')" placeholder="请输入内容"></el-input> -->
               </template>
             </el-table-column>
             <el-table-column prop="isOverdue" label="是否逾期" min-width="100">
