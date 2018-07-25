@@ -97,7 +97,7 @@
         <el-collapse v-model="activeNames">
           <el-collapse-item title="本人进件列表" name="1">
             <div  class="height_auto">
-              <el-table :data="personal" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
+              <el-table :data="personal"  border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
                 style="width: 100%">
                 <el-table-column property="matchApplyCustName" label="客户名称">
                 </el-table-column>
@@ -113,7 +113,7 @@
           <!-- 折叠2 -->
           <el-collapse-item title="内匹客户进件" name="2">
             <div class="height_auto">
-              <el-table :data="others" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
+              <el-table :data="others" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
                 style="width: 100%">
                 <el-table-column property="matchApplyCustName" label="客户名称">
                 </el-table-column>
