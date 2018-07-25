@@ -61,11 +61,11 @@
             <span class="collapse_title_text">复议申请信息</span>
           </template>
           <div class="AntiConclution checkedInf checkedInf_li_width_triplet clearFix">
-            <ul style="margin:20px 0;">
+            <ul>
               <div class=" CreditForm_div_border clearFix">
                 <li class="li_triplet_two_rows">
                   <label class="label_width_166">复议说明： </label>
-                  <span class="text_area_span_minus170">{{auditDesc.reviewRemark}} </span>
+                  <span class="text_area_span text_area_span_minus170">{{auditDesc.reviewRemark}} </span>
                 </li>
               </div>
               <div>
