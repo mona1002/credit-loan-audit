@@ -563,7 +563,7 @@
             <span class="text_area_span text_area_span_minus220">{{this.FormData.fContractConclusion }} </span>
           </div>
           <div class=" CreditForm_div_border clearFix">
-            <label class="label_width_210">紧急联系人调查结论：</label>
+            <label class="label_width_210">其他联系人调查结论：</label>
             <span class="text_area_span text_area_span_minus220">{{this.FormData.eContractConclusion }} </span>
           </div>
           <div>

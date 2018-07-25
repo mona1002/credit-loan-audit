@@ -91,12 +91,12 @@
     <div v-show="dataa" class="posi">
       <!-- 折叠 -->
       <p>内部匹配客户查询列表
-        <i class="el-icon-close" style="color:white;fontSize:18px;right:13px;top:16px" @click="closeAlertSearch"></i>
+        <i class="el-icon-close" style="color:white;fontSize:18px;right:13px;top:12px" @click="closeAlertSearch"></i>
       </p>
       <div class="posi_content">
         <el-collapse v-model="activeNames">
           <el-collapse-item title="本人进件列表" name="1">
-            <div>
+            <div  class="height_auto">
               <el-table :data="personal" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
                 style="width: 100%">
                 <el-table-column property="matchApplyCustName" label="客户名称">
@@ -112,7 +112,7 @@
           </el-collapse-item>
           <!-- 折叠2 -->
           <el-collapse-item title="内匹客户进件" name="2">
-            <div>
+            <div class="height_auto">
               <el-table :data="others" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
                 style="width: 100%">
                 <el-table-column property="matchApplyCustName" label="客户名称">
@@ -186,10 +186,8 @@
       mountedInf() {
         this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) //初审-匹配查看
         if (this.MatchFlag.MatchFlag == 'internal') {
-          console.log("内部匹配")
           this.localInf = JSON.parse(localStorage.getItem("internalObj")) //初审-匹配查看
         } else if (this.MatchFlag.MatchFlag == 'Query') {
-          console.log("综合查询")
           this.localInf = JSON.parse(localStorage.getItem("Query")) //初审-匹配查看
         } else if (this.MatchFlag.MatchFlag == 'QT') {
           this.localInf = JSON.parse(localStorage.getItem("QT")) //综合查询
@@ -615,18 +613,18 @@
 
   .posi p {
     font-size: 16px;
-    height: 48px;
-    line-height: 48px;
+    height: 40px;
+    line-height: 40px;
     padding: 0 20px;
     background: rgba(0, 119, 255, 0.75);
-
     color: #f8f9fd;
     text-align: center
   }
 
   .posi_content {
-    height: calc(100% - 48px);
+    height: calc(100% - 40px);
     overflow: auto;
+    
   }
 
 </style>

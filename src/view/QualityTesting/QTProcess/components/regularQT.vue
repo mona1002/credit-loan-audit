@@ -1,5 +1,5 @@
 <template>
-  <div class="regularQT">
+  <div class="regularQT table_no_hover_color">
     <!-- 审批信息 -->
     <el-collapse v-model="activeNames" v-if='AprovalInfolShow'>
       <el-collapse-item name="0">
@@ -666,17 +666,24 @@
     <el-collapse v-model="activeNames">
       <el-collapse-item name="9">
         <template slot="title">
-          <div>
-            <i class="collapse_title_icon"></i>
-            <span class="collapse_title_text">质检结论</span>
-            <p style="float:right" v-if='QTConclutionBtn'>
-              <!-- <span class="btn" @click.stop="addTr=true"> -->
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">质检结论</span>
+          <div class="title_icon">
+            <span @click.stop="addQTResult">
+              <i class="title_icon_img addIcon"></i>
+              <span class="title_icon_span">添加</span>
+            </span>
+            <span @click.stop="delQTresult">
+              <i class="title_icon_img deleteIcon"></i>
+              <span class="title_icon_span">删除</span>
+            </span>
+          </div>
+          <!-- <p style="float:right" v-if='QTConclutionBtn'>
               <span class="btn" @click.stop="addQTResult">
                 <img src='../../../../../static/images/add.png'> 添加 </span>
               <span class="btn" @click.stop="delQTresult">
                 <img src="../../../../../static/images/delete.png"> 删除</span>
-            </p>
-          </div>
+            </p> -->
         </template>
         <div class="result_QT height_auto">
           <el-table :data="insConclusion" style="width: 100%" highlight-current-row @current-change='QTtableVal' border min-width='1366px'>
@@ -709,8 +716,8 @@
               <template slot-scope="scope">
                 <b class="hint_word" v-show="scope.row.remark&&scope.row.remark.length>=300"> 输入长度不能超过300</b>
                 <el-tooltip class="item" effect="dark" :content="scope.row.remark" :disabled="!scope.row.remark" placement="top-start">
-                  <el-input type='textarea' :disabled='QTConclution' v-model.trim="scope.row.remark" :rows="2" resize="none" :maxlength='arealength'
-                    placeholder="请输入内容">
+                  <el-input class="margin_top_15" type='textarea' :disabled='QTConclution' v-model.trim="scope.row.remark" :rows="2" resize="none"
+                    :maxlength='arealength' placeholder="请输入内容">
                   </el-input>
                 </el-tooltip>
               </template>
@@ -2130,7 +2137,7 @@
               confirmButtonText: '确定',
               type: 'warning',
               cancelButtonText: '取消',
-          showCancelButton: true
+              showCancelButton: true
             }).then(() => {}).catch(() => {});
           } else if (res.obj) {
             this.$router.push({
@@ -2159,7 +2166,7 @@
             confirmButtonText: '确定',
             type: 'warning',
             cancelButtonText: '取消',
-          showCancelButton: true
+            showCancelButton: true
           }).then(() => {}).catch(() => {});
         } else if (this.social == "(已授权)") {
           this.$router.push({
@@ -2338,7 +2345,7 @@
     position: relative;
     padding: 0 10px;
     /* min-height:30px !important; */
-    height:30px;
+    height: 30px;
   }
 
   .regularQT .material td:nth-of-type(4) {

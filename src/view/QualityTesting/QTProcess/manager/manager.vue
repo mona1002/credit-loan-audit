@@ -357,12 +357,13 @@
         this.query.taskId = val.taskId;
         this.query.processInstanceId = val.processInstanceId;
         this.query.instaskType = val.instaskType;
+        this.query = Object.assign({}, this.query, this.QTquery, val)
         localStorage.setItem("QTManagerTW", JSON.stringify(this.query));
-        localStorage.setItem("FGQTTaskWait", JSON.stringify(val));
+        localStorage.setItem("FGQTTaskWait", JSON.stringify(this.query));
         this.$router.push('/MatchingInfQT?checkApp_check_manager');
         this.$route.meta.newOne = true;
         // 存储components参数
-        localStorage.setItem("QT", JSON.stringify(this.QTquery));
+        localStorage.setItem("QT", JSON.stringify(this.query));
         localStorage.setItem("MatchFlag", JSON.stringify({
           MatchFlag: 'QT'
         }));

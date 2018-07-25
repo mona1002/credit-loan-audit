@@ -168,13 +168,14 @@
         this.QTquery.applySubNo = val.applySubno;
         this.query.taskId = val.taskId;
         this.query.processInstanceId = val.processInstanceId;
+         this.query=Object.assign({},this.query,this.QTquery,val)
         // 存储质检结论参数
         localStorage.setItem("QTSelfTW", JSON.stringify(this.query));
-        localStorage.setItem("FGQTTaskWait", JSON.stringify(val));
+        localStorage.setItem("FGQTTaskWait", JSON.stringify(this.query));
         this.$router.push('/MatchingInfQT?checkApp_trial_self');
         this.$route.meta.newOne = true;
         // 存储components参数
-        localStorage.setItem("QT", JSON.stringify(this.QTquery));
+        localStorage.setItem("QT", JSON.stringify(this.query));
         localStorage.setItem("MatchFlag", JSON.stringify({
           MatchFlag: 'QT'
         }));

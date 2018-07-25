@@ -376,9 +376,10 @@ table {
   font-size: 24px;
   color: #0077ff;
   vertical-align: top;
-  height: 30px;
-  width: 30px;
+  height: 28px;
+  width: 28px;
   display: inline-block;
+  background-size: contain;
 }
 
 .title_icon_span {

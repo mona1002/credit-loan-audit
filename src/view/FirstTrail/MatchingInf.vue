@@ -40,7 +40,7 @@
             <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail>
             <PhoneCredit v-if=" this.tabContent1==5" :addBtn="false"> 电话征信</PhoneCredit>
             <FCreditForm v-if=" this.tabContent1==6" :applyId=' tastwaitingPass.matchApplyId' :FinalConCheckShow="true">信审表</FCreditForm>
-            <creditInvestigation v-if=" this.tabContent1==7"  :applyId=' tastwaitingPass.matchApplyId'>实地征信</creditInvestigation>
+            <creditInvestigation v-if=" this.tabContent1==7" :applyId=' tastwaitingPass.matchApplyId'>实地征信</creditInvestigation>
             <aMAntiApplyInf v-if=" this.tabContent1==8" :applyId='tastwaitingPass.matchApplyId'>反欺诈结论</aMAntiApplyInf>
             <RantiFraudInvestigation v-if=" this.tabContent1==9" :isShow='false' :applyId='tastwaitingPass.matchApplyId'>反欺诈调查</RantiFraudInvestigation>
             <RFinanceInformation v-if=" this.tabContent1==10">账务信息</RFinanceInformation>
@@ -81,7 +81,7 @@
           <RborrowerInformationSetail v-if=" this.tabContent2==4" :isFull.sync="isFull">借款人资料</RborrowerInformationSetail>
           <PhoneCredit v-if=" this.tabContent2==5" :addBtn="false"> 电话征信</PhoneCredit>
           <FCreditForm v-if=" this.tabContent2==6" :applyId=' tastwaitingPass.matchApplyId' :FinalConCheckShow="true">信审表</FCreditForm>
-          <creditInvestigation v-if=" this.tabContent2==7"  :applyId=' tastwaitingPass.matchApplyId'>实地征信</creditInvestigation>
+          <creditInvestigation v-if=" this.tabContent2==7" :applyId=' tastwaitingPass.matchApplyId'>实地征信</creditInvestigation>
           <aMAntiApplyInf v-if=" this.tabContent2==8" :applyId='tastwaitingPass.matchApplyId'>反欺诈结论</aMAntiApplyInf>
           <RantiFraudInvestigation v-if=" this.tabContent2==9" :isShow='false' :applyId='tastwaitingPass.matchApplyId'>反欺诈调查</RantiFraudInvestigation>
           <RFinanceInformation v-if=" this.tabContent2==10">账务信息</RFinanceInformation>
@@ -206,6 +206,7 @@
           this.$refs.right_tab_ul.style.left = "0";
           this.DblScreen();
           this.CompareAlert = false; //关闭弹出层
+          this.AlertSearch = ''; //弹出层客户名称
         }
       }
     },

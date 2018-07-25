@@ -5,12 +5,22 @@
     <el-collapse v-model="activeNames">
       <el-collapse-item name="0">
         <template slot="title">
-          <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-          <span class="headFont">审批信息</span>
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">审批信息</span>
         </template>
-        <div class="baseInf">
-          <p>客户名称：{{baseInfo.custName }} </p>
-          <p>产品名称： {{baseInfo.proName }}</p>
+        <div class="checkedInf checkedInf_li_width_half clearFix">
+          <ul>
+            <div class=" clearFix">
+              <li>
+                <label class="label_width_166">客户名称：</label>
+                <span>{{baseInfo.custName }} </span>
+              </li>
+              <li>
+                <label class="label_width_166">产品名称：</label>
+                <span>{{baseInfo.proName }}</span>
+              </li>
+            </div>
+          </ul>
         </div>
       </el-collapse-item>
     </el-collapse>
@@ -21,7 +31,7 @@
           <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
           <span class="headFont">质检结论</span>
         </template>
-        <div class="result">
+        <div class="result height_auto">
           <el-table :data="tableData" style="width:100%;" border>
             <el-table-column prop="checkResultTxt" label="质检结果" width="120"></el-table-column>
             <el-table-column prop="errorType" label="差错类型" width="252"> </el-table-column>

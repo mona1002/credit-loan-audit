@@ -45,27 +45,27 @@
     <div class="listContainer">
       <!-- 编辑table -->
       <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row @row-dblclick="handleCurrentChange" border>
-        <el-table-column type="index"  label=序号 width="55">
+        <el-table-column type="index" label=序号 width="55">
         </el-table-column>
-        <el-table-column prop="applySubNo" label="进件编号"  min-width="180">
+        <el-table-column prop="applySubNo" label="进件编号" min-width="180">
         </el-table-column>
-        <el-table-column prop="custName" label="客户名称"  min-width="120">
+        <el-table-column prop="custName" label="客户名称" min-width="120">
         </el-table-column>
-        <el-table-column prop="certCode" label="证件号码"  min-width="180">
+        <el-table-column prop="certCode" label="证件号码" min-width="180">
         </el-table-column>
-        <el-table-column prop="auditNamec" label="初审姓名"  min-width="130">
+        <el-table-column prop="auditNamec" label="初审姓名" min-width="130">
         </el-table-column>
-        <el-table-column prop="auditNamez" label="终审姓名"  min-width="130">
+        <el-table-column prop="auditNamez" label="终审姓名" min-width="130">
         </el-table-column>
-        <el-table-column prop="enterTime" label="进入本环节时间"  min-width="180">
+        <el-table-column prop="enterTime" label="进入本环节时间" min-width="180">
         </el-table-column>
-        <el-table-column prop="assignName" label="分派人员"  min-width="120">
+        <el-table-column prop="assignName" label="分派人员" min-width="120">
         </el-table-column>
-        <el-table-column prop="checkStateTxt" label="质检状态"  min-width="100">
+        <el-table-column prop="checkStateTxt" label="质检状态" min-width="100">
         </el-table-column>
-        <el-table-column prop="instaskTypeTxt" label="任务类型"  min-width="100">
+        <el-table-column prop="instaskTypeTxt" label="任务类型" min-width="100">
         </el-table-column>
-        <el-table-column prop="remark" label="备注"  min-width="150">
+        <el-table-column prop="remark" label="备注" min-width="150">
         </el-table-column>
       </el-table>
       <!-- 分页  -->
@@ -157,7 +157,6 @@
         //     this.params.pageSize = this.pageCount, //页面显示行数
       },
       handleCurrentChange(val) {
-        console.log(2, val)
         // 根据两个条件去判断，首先根据 isSecondIns
         // 如果是 1 ，显示常规又专项
         // 如果不是： 根据instaskType 判断， instaskType=00 时：常规质检 ， instaskType=01 或 02：专项质检
@@ -177,13 +176,14 @@
         this.query.taskId = val.taskId;
         this.query.processInstanceId = val.processInstanceId;
         this.query.instaskType = val.instaskType;
+        this.query = Object.assign({}, this.query, this.QTquery, val)
         // 存储质检结论参数
         localStorage.setItem("QTTaskWait", JSON.stringify(this.query));
-        localStorage.setItem("FGQTTaskWait", JSON.stringify(val));
+        localStorage.setItem("FGQTTaskWait", JSON.stringify(this.query));
         this.$router.push('/MatchingInfQT?checkApp_apply');
         this.$route.meta.newOne = true;
         // 存储components参数
-        localStorage.setItem("QT", JSON.stringify(this.QTquery));
+        localStorage.setItem("QT", JSON.stringify(this.query));
         localStorage.setItem("MatchFlag", JSON.stringify({
           MatchFlag: 'QT'
         }));

@@ -618,16 +618,22 @@
 .borrowerInformation .zhengxunbaogao ol:nth-of-type(1) li:nth-of-type(1) div .el-input__inner {
   padding-right: 10px;
 }
+
 /* 表格添加问题 */
+
 /* .Abody .borrowerInformation td {
   padding-top: 15px !important;
 } */
-.Abody .borrowerInformation .el-table--enable-row-hover .el-table__body tr:hover>td{
+
+.Abody .borrowerInformation .el-table--enable-row-hover .el-table__body tr:hover>td,
+.Abody .table_no_hover_color .el-table--enable-row-hover .el-table__body tr:hover>td {
   background: #ffffff;
 }
+
 /* .Abody .borrowerInformation .el-table__body tr.current-row>td{
   background: #ffffff !important;
 } */
+
 /* 各自部分 */
 
 /* 工作台 待办任务 hover 小手 */
@@ -967,8 +973,14 @@
 
 .AudioVisualLeft .posi .el-collapse-item__content,
 .MatchingInf .posi .el-collapse-item__content {
-  /* background: red; */
+  background: #ffffff;
   height: 355px;
+}
+
+/* 影响列表-弹出层-内部匹配客户查询列表 */
+
+.AudioVisualLeft .posi .el-collapse {
+  height: 100%;
 }
 
 /* 影像列表- 对比弹出层-select-搜索框-wrap */
@@ -2224,73 +2236,6 @@ body .el-menu--horizontal .el-menu .el-submenu__title {
 
 /* 综合查询 */
 
-/* 
-.regularQT .el-button,
-.specialQT .el-button {
-  border: none;
-  color: #666666
-}
-
-.regularQT .liuchenggj .el-button {
-  color: white;
-}
-
-.regularQT .el-input {
-  width: 200px;
-} */
-
-/* .aAntiApplyInf .ccccc {
-  width: 800px;
-  vertical-align: top;
-} */
-
-/* 
-.regularQT .el-collapse-item__wrap {
-  overflow: inherit;
-}
-
-.regularQT .weChatNapliay .el-table__row,
-.regularQT .MobileCheck .el-table__row,
-.regularQT .result_QT .el-table__row
-
- {
-  height: 70px;
-}
-
-.regularQT .weChatNapliay .el-table td,
-.regularQT .MobileCheck .el-table td,
-.regularQT .result_QT .el-table td
- {
-  padding: 0;
-} */
-
-/* .regularQT .weChatNapliay .el-table td:nth-of-type(4),
-.regularQT .MobileCheck .el-table td:nth-of-type(10),
-.regularQT .result_QT .el-table td:nth-of-type(4)
- {
-  vertical-align: bottom;
-}
-
-.regularQT .alertBox .el-dialog__header {
-  padding: 10px 0 0 20px;
-}
-
-.regularQT .alertBox .el-dialog__body {
-  padding: 20px;
-}
-
-.regularQT .alertBox .el-dialog__footer {
-  padding: 0;
-  padding: 0 20px 10px;
-}
-
-.regularQT .alertBox .el-button--primary {
-  color: #ffffff;
-}
-.regularQT .el-radio__input.is-disabled.is-checked .el-radio__inner::after{
-  background-color: #80848c;
-} */
-
 /* .approval-colun .addDataLog .el-dialog__body {
   padding: 20px 20px;
 }
@@ -2360,3 +2305,7 @@ body .el-menu--horizontal .el-menu .el-submenu__title {
 body .el-message {
   z-index: 9999 !important;
 }
+
+/* 质检结论 */
+
+.d {}

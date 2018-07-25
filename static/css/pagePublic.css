@@ -827,8 +827,8 @@
   font-size: 16px;
   text-align: center;
   background: rgba(0, 119, 255, 0.75);
-  height: 48px;
-  line-height: 48px;
+  height: 40px;
+  line-height: 40px;
   color: #f8f9fd;
   overflow: hidden;
   position: relative;
@@ -894,7 +894,7 @@
 .AudioVisualLeft .small_pic_content,
 .AudioVisual .small_pic_content {
   position: relative;
-  height: calc( 100% - 48px);
+  height: calc( 100% - 40px);
   overflow: auto;
   padding-top: 30px;
 }

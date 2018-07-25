@@ -204,15 +204,16 @@
         this.QTquery.applySubNo = val.applySubno;
         this.query.taskId = val.taskId;
         this.query.processInstanceId = val.processInstanceId;
+        this.query = Object.assign({}, this.query, this.QTquery, val)
         // 存储质检结论参数
         if (this.params.taskNodeName == 'checkApp_regional_manager') { // 区域
           localStorage.setItem("QTAreaTW", JSON.stringify(this.query));
-          localStorage.setItem("FGQTTaskWait", JSON.stringify(val));
+          localStorage.setItem("FGQTTaskWait", JSON.stringify(this.query));
         } else if (this.params.taskNodeName == 'checkApp_compliance_manager') { // 合规
           localStorage.setItem("QTComplianceTW", JSON.stringify(this.query));
         }
         // 存储components参数
-        localStorage.setItem("QT", JSON.stringify(this.QTquery));
+        localStorage.setItem("QT", JSON.stringify(this.query));
         localStorage.setItem("MatchFlag", JSON.stringify({
           MatchFlag: 'QT'
         }));
