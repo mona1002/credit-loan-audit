@@ -2345,3 +2345,7 @@ body .el-menu--horizontal .el-menu .el-submenu__title {
 .Abody .el-dialog__wrapper {
   position: absolute;
 }
+/* message提示语 */
+ body  .el-message {
+  z-index: 9999 !important;
+}

@@ -529,7 +529,7 @@
 
 .CreditForm_div_border {
   /* border-bottom: 1px solid #d8dce5; */
-  /* border-bottom: 1px solid green; */
+  border-bottom: 1px solid green;
 }
 
 /* 借款人资料 */
@@ -1001,7 +1001,7 @@
   height: 30px;
 }
 /* 反欺诈审批 */
-.approvalConclus_risk_select .el-select-dropdown {
+/* .approvalConclus_risk_select .el-select-dropdown {
   width:calc(66.6% - 172px);
 border:3px solid red;
-}
+} */

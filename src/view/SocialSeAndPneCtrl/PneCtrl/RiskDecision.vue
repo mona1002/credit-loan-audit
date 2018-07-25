@@ -9,18 +9,20 @@
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-            <li>
-              <label class="label_width_166">身份证：</label>
-              <span>{{parmaAndRisk.certCode}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">手机号：</label>
-              <span>{{parmaAndRisk.mobile}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">姓名：</label>
-              <span>{{parmaAndRisk.custName }}</span>
-            </li>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">身份证：</label>
+                <span>{{parmaAndRisk.certCode}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">手机号：</label>
+                <span>{{parmaAndRisk.mobile}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">姓名：</label>
+                <span>{{parmaAndRisk.custName }}</span>
+              </li>
+            </div>
             <li>
               <label class="label_width_166">联系人手机号：</label>
               <span>{{parmaAndRisk.linkmanMobile }}</span>

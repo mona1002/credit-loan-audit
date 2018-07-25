@@ -13,7 +13,7 @@
         </span>
         <span class="icon-item" @click='apportion'>
           <i class="el-icon addIcon"></i>
-          <span class="el-icon-text">任务分派</span>
+          <span class="el-icon-text">生成任务</span>
         </span>
       </span>
     </div>
@@ -526,6 +526,13 @@
         // }
         this.$refs[formName].validate((valid) => {
           if (valid) {
+            // 校验是否重复
+                if ((this.updateInf.drawSheetType == '01' && this.proficiencyCount > 0) || (this.updateInf.drawSheetType ==
+                '02' && this.newOneCount > 0)) { //熟悉
+              this.$message.error(' 抽单类型设置重复！');
+              return
+            }
+            // this..drawSheetType
             this.loadsitu = true;
             this.adbtn = '保存中';
             this.post("/insMakeRules/updateInfo", {
