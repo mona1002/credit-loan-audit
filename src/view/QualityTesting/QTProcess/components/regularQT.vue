@@ -2338,7 +2338,7 @@
     position: relative;
     padding: 0 10px;
     /* min-height:30px !important; */
-    /* height:30px; */
+    height:30px;
   }
 
   .regularQT .material td:nth-of-type(4) {
