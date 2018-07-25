@@ -58,7 +58,7 @@
               </li>
               <li v-show="familyData.threeQueries=='1'" class="text_area_li">
                 <label class="label_width_110">说明：</label>
-                <span class="text_area_span text_area_span_minus115"> {{familyData.threeQueriestxt}}</span>
+                <span class="text_area_span text_area_span_minus115 pre_wrap  "> {{familyData.threeQueriestxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -68,7 +68,7 @@
               </li>
               <li v-show="familyData.mobilepayment=='1'" class="text_area_li margin_top_5">
                 <label class="label_width_110">说明：</label>
-                <span class="text_area_span text_area_span_minus115"> {{familyData.mobilepaymenttxt}}</span>
+                <span class="text_area_span text_area_span_minus115 pre_wrap  "> {{familyData.mobilepaymenttxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -78,7 +78,7 @@
               </li>
               <li class="text_area_li" v-show="familyData.issameFam=='0'">
                 <label class="label_width_110">说明：</label>
-                <span class="text_area_span text_area_span_minus115"> {{familyData.issameFamtxt}}</span>
+                <span class="text_area_span text_area_span_minus115 pre_wrap  "> {{familyData.issameFamtxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -88,7 +88,7 @@
               </li>
               <li class="text_area_li margin_top_5" v-show="familyData.relBorrower=='03'">
                 <label class="label_width_110">说明：</label>
-                <span class="text_area_span text_area_span_minus115"> {{familyData.relBorrowertxt}}</span>
+                <span class="text_area_span text_area_span_minus115 pre_wrap  "> {{familyData.relBorrowertxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -98,7 +98,7 @@
               </li>
               <li class="text_area_li margin_top_5" v-show="familyData.checkWork=='01'">
                 <label class="label_width_110">说明：</label>
-                <span class="text_area_span text_area_span_minus115"> {{familyData.checkWorktxt}}</span>
+                <span class="text_area_span text_area_span_minus115 pre_wrap  "> {{familyData.checkWorktxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -118,7 +118,7 @@
               </li>
               <li class="text_area_li margin_top_5" v-show="familyData.checkAddr=='01'">
                 <label class="label_width_110">说明：</label>
-                <span class="text_area_span text_area_span_minus115"> {{familyData.checkAddrtxt}}</span>
+                <span class="text_area_span text_area_span_minus115 pre_wrap  "> {{familyData.checkAddrtxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -128,7 +128,7 @@
               </li>
               <li class="text_area_li margin_top_5" v-show="familyData.checkEstate=='00'">
                 <label class="label_width_110">说明：</label>
-                <span class="text_area_span text_area_span_minus115"> {{familyData.checkEstatetxt}}</span>
+                <span class="text_area_span text_area_span_minus115 pre_wrap  "> {{familyData.checkEstatetxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -138,12 +138,12 @@
               </li>
               <li class="text_area_li margin_top_5" v-show="familyData.otherIncome=='00'">
                 <label class="label_width_110">说明：</label>
-                <span class="text_area_span text_area_span_minus115"> {{familyData.otherIncometxt}}</span>
+                <span class="text_area_span text_area_span_minus115 pre_wrap  "> {{familyData.otherIncometxt}}</span>
               </li>
             </div>
             <li class="text_area_li clearFloat">
               <label class="label_width_166">调查结果：</label>
-              <span class="text_area_span text_area_span_minus170 pre_wrap" > {{familyData.conclusion}}</span>
+              <span class="text_area_span text_area_span_minus170 pre_wrap"> {{familyData.conclusion}}</span>
             </li>
           </ul>
         </div>

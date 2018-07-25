@@ -68,7 +68,7 @@
               </li>
               <li v-show="mobileData.issameFam=='0'" class="text_area_li margin_top_5">
                 <label class="label_width_110">说明：</label>
-                <span class="text_area_span text_area_span_minus115 preWrap"> {{mobileData.issameFamtxt}}</span>
+                <span class="text_area_span text_area_span_minus115 pre_wrap"> {{mobileData.issameFamtxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -78,7 +78,7 @@
               </li>
               <li class="text_area_li" v-show="mobileData.relBorrower=='03'">
                 <label class="label_width_110">说明：</label>
-                <span class="text_area_span text_area_span_minus115 preWrap"> {{mobileData.relBorrowertxt}}</span>
+                <span class="text_area_span text_area_span_minus115 pre_wrap"> {{mobileData.relBorrowertxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -88,7 +88,7 @@
               </li>
               <li class="text_area_li margin_top_5" v-show="mobileData.checkWork=='01'">
                 <label class="label_width_110">说明：</label>
-                <span class="text_area_span text_area_span_minus115 preWrap"> {{mobileData.checkWorktxt}}</span>
+                <span class="text_area_span text_area_span_minus115 pre_wrap"> {{mobileData.checkWorktxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -108,7 +108,7 @@
               </li>
               <li class="text_area_li margin_top_5" v-show="mobileData.checkAddr=='01'">
                 <label class="label_width_110">说明：</label>
-                <span class="text_area_span text_area_span_minus115 preWrap"> {{mobileData.checkAddrtxt}}</span>
+                <span class="text_area_span text_area_span_minus115 pre_wrap"> {{mobileData.checkAddrtxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -118,7 +118,7 @@
               </li>
               <li class="text_area_li margin_top_5" v-show="mobileData.checkEstate=='00'">
                 <label class="label_width_110">说明：</label>
-                <span class="text_area_span text_area_span_minus115 preWrap"> {{mobileData.checkEstatetxt}}</span>
+                <span class="text_area_span text_area_span_minus115 pre_wrap"> {{mobileData.checkEstatetxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -128,7 +128,7 @@
               </li>
               <li class="text_area_li margin_top_5" v-show="mobileData.otherIncome=='00'">
                 <label class="label_width_110">说明：</label>
-                <span class="text_area_span text_area_span_minus115 preWrap"> {{mobileData.otherIncometxt}}</span>
+                <span class="text_area_span text_area_span_minus115 pre_wrap"> {{mobileData.otherIncometxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -138,7 +138,7 @@
               </li>
               <li class="text_area_li margin_top_5" v-show="mobileData.recentLargespend=='00'">
                 <label class="label_width_110">说明：</label>
-                <span class="text_area_span text_area_span_minus115 preWrap"> {{mobileData.recentlArgespendInfo}}</span>
+                <span class="text_area_span text_area_span_minus115 pre_wrap"> {{mobileData.recentlArgespendInfo}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -148,7 +148,7 @@
               </li>
               <li class="text_area_li margin_top_5" v-show="mobileData.parents=='01'">
                 <label class="label_width_110">说明：</label>
-                <span class="text_area_span text_area_span_minus115 preWrap"> {{mobileData.parentsInfo}}</span>
+                <span class="text_area_span text_area_span_minus115 pre_wrap"> {{mobileData.parentsInfo}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -158,7 +158,7 @@
               </li>
               <li class="text_area_li margin_top_5" v-show="mobileData.brother=='00'">
                 <label class="label_width_110">说明：</label>
-                <span class="text_area_span text_area_span_minus115 preWrap"> {{mobileData.brothertxt}}</span>
+                <span class="text_area_span text_area_span_minus115 pre_wrap"> {{mobileData.brothertxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -168,7 +168,7 @@
               </li>
               <li class="text_area_li margin_top_5" v-show="mobileData.expenses=='00'">
                 <label class="label_width_110">说明：</label>
-                <span class="text_area_span text_area_span_minus115 preWrap"> {{mobileData.expensestxt}}</span>
+                <span class="text_area_span text_area_span_minus115 pre_wrap"> {{mobileData.expensestxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -184,7 +184,7 @@
             <div class=" CreditForm_div_border clearFix">
               <li class="text_area_li clearFloat ">
                 <label class="label_width_166">借款人爱好和品行：</label>
-                <span class="text_area_span text_area_span_minus170 preWrap"> {{mobileData.hobbyandBehave}}</span>
+                <span class="text_area_span text_area_span_minus170 pre_wrap"> {{mobileData.hobbyandBehave}}</span>
               </li>
             </div>
             <li class="text_area_li clearFloat margin_top_5">

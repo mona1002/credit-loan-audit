@@ -22,13 +22,10 @@
   padding-left: 235px;
 }
 
-.pre_wrap{
+body .pre_wrap {
   white-space: pre-wrap;
 }
-body .preWrap{
-  white-space: pre-wrap;
-  
-}
+
 /* 列表 */
 
 .taskWatting {

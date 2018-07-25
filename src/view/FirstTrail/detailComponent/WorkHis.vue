@@ -51,7 +51,7 @@
             </li>
             <li class="text_area_li" v-show="workData.mobilepayment=='1'">
               <label class="label_width_110">异常项说明：</label>
-              <span class="text_area_span text_area_span_minus115"> {{workData.mobilepaymenttxt}}</span>
+              <span class="text_area_span text_area_span_minus115 pre_wrap"> {{workData.mobilepaymenttxt}}</span>
             </li> </div>  <div class=" CreditForm_div_border clearFix">
             <li>
               <label class="label_width_166">接电话人身份：</label>
@@ -59,7 +59,7 @@
             </li>
             <li class="text_area_li margin_top_5" v-show="workData.answerIdentity=='00'">
               <label class="label_width_110">说明：</label>
-              <span class="text_area_span text_area_span_minus115"> {{workData.answertxt}}</span>
+              <span class="text_area_span text_area_span_minus115 pre_wrap"> {{workData.answertxt}}</span>
             </li> </div>  <div class=" CreditForm_div_border clearFix">
             <li>
               <label class="label_width_166">核对单位工作情况：</label>
@@ -67,11 +67,11 @@
             </li>
             <li class="text_area_li margin_top_5" v-show="workData.checkJob=='01'">
               <label class="label_width_110">说明：</label>
-              <span class="text_area_span text_area_span_minus115"> {{workData.checkJobtxt}}</span>
+              <span class="text_area_span text_area_span_minus115 pre_wrap"> {{workData.checkJobtxt}}</span>
             </li> </div> 
             <li class="text_area_li">
               <label class="label_width_166">调查结果：</label>
-              <span class="text_area_span text_area_span_minus170"> {{workData.conclusion}}</span>
+              <span class="text_area_span text_area_span_minus170 pre_wrap"> {{workData.conclusion}}</span>
             </li>
           </ul>
         </div>

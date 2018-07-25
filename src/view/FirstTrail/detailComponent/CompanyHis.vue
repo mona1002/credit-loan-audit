@@ -58,7 +58,7 @@
               </li>
               <li class="text_area_li" v-show="comData.phone=='01'">
                 <label class="label_width_145">说明：</label>
-                <span class="text_area_span text_area_span_minus150"> {{comData.phonetxt}}</span>
+                <span class="text_area_span text_area_span_minus150 pre_wrap"> {{comData.phonetxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -68,7 +68,7 @@
               </li>
               <li class="text_area_li margin_top_5" v-show="comData.answerIdentity=='00'">
                 <label class="label_width_145">说明：</label>
-                <span class="text_area_span text_area_span_minus150"> {{comData.answertxt}}</span>
+                <span class="text_area_span text_area_span_minus150 pre_wrap"> {{comData.answertxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -78,7 +78,7 @@
               </li>
               <li class="text_area_li margin_top_5" v-show="comData.company=='01'">
                 <label class="label_width_145">说明：</label>
-                <span class="text_area_span text_area_span_minus150"> {{comData.companytxt}}</span>
+                <span class="text_area_span text_area_span_minus150 pre_wrap"> {{comData.companytxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -88,7 +88,7 @@
               </li>
               <li class="text_area_li margin_top_5" v-show="comData.checkTime=='01'">
                 <label class="label_width_145">说明：</label>
-                <span class="text_area_span text_area_span_minus150"> {{comData.checkTimetxt}}</span>
+                <span class="text_area_span text_area_span_minus150 pre_wrap"> {{comData.checkTimetxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -98,7 +98,7 @@
               </li>
               <li class="text_area_li margin_top_5" v-show="comData.checkIncome=='00'">
                 <label class="label_width_145">说明：</label>
-                <span class="text_area_span text_area_span_minus150"> {{comData.checkIncometxt}}</span>
+                <span class="text_area_span text_area_span_minus150 pre_wrap"> {{comData.checkIncometxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -112,7 +112,7 @@
               </li>
               <li class="text_area_li margin_top_5" v-show="comData.payrollSituation=='00'">
                 <label class="label_width_145">说明：</label>
-                <span class="text_area_span text_area_span_minus150"> {{comData.payrollSituationtxt}}</span>
+                <span class="text_area_span text_area_span_minus150 pre_wrap"> {{comData.payrollSituationtxt}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -137,7 +137,7 @@
             </div>
             <li class="text_area_li">
               <label class="label_width_166">调查结果：</label>
-              <span class="text_area_span text_area_span_minus170"> {{comData.conclusion}}</span>
+              <span class="text_area_span text_area_span_minus170 pre_wrap"> {{comData.conclusion}}</span>
             </li>
           </ul>
         </div>

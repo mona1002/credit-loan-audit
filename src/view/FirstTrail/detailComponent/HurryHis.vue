@@ -54,7 +54,7 @@
             </li>
             <li v-show="hurryData.threeQueries=='1'" class="text_area_li">
               <label class="label_width_110">异常说明：</label>
-              <span class="text_area_span text_area_span_minus115"> {{hurryData.threeQueriestxt}}</span>
+              <span class="text_area_span text_area_span_minus115 pre_wrap"> {{hurryData.threeQueriestxt}}</span>
             </li> </div>  <div class=" CreditForm_div_border clearFix">
             <li>
               <label class="label_width_166">微信/支付宝是否异常：</label>
@@ -62,7 +62,7 @@
             </li>
             <li v-show="hurryData.mobilepayment=='1'" class="text_area_li margin_top_5">
               <label class="label_width_110">异常项说明：</label>
-              <span class="text_area_span text_area_span_minus115"> {{hurryData.mobilepaymenttxt}}</span>
+              <span class="text_area_span text_area_span_minus115 pre_wrap"> {{hurryData.mobilepaymenttxt}}</span>
             </li> </div>  <div class=" CreditForm_div_border clearFix">
             <li class="clearFloat label_height_48">
               <label class="label_width_166">是否与家庭联系人为同一接听人：</label>
@@ -70,7 +70,7 @@
             </li>
             <li class="text_area_li" v-show="hurryData.issameFam=='0'">
               <label class="label_width_110">说明：</label>
-              <span class="text_area_span text_area_span_minus115"> {{hurryData.issameFamtxt}}</span>
+              <span class="text_area_span text_area_span_minus115 pre_wrap"> {{hurryData.issameFamtxt}}</span>
             </li> </div>  <div class=" CreditForm_div_border clearFix">
             <li>
               <label class="label_width_166">与借款人关系：</label>
@@ -78,7 +78,7 @@
             </li>
             <li class="text_area_li margin_top_5" v-show="hurryData.relBorrower=='03'">
               <label class="label_width_110">说明：</label>
-              <span class="text_area_span text_area_span_minus115"> {{hurryData.relBorrowertxt}}</span>
+              <span class="text_area_span text_area_span_minus115 pre_wrap"> {{hurryData.relBorrowertxt}}</span>
             </li> </div>  <div class=" CreditForm_div_border clearFix">
             <li>
               <label class="label_width_166">核对工作情况：</label>
@@ -86,7 +86,7 @@
             </li>
             <li class="text_area_li margin_top_5" v-show="hurryData.checkWork=='01'">
               <label class="label_width_110">异常项说明：</label>
-              <span class="text_area_span text_area_span_minus115"> {{hurryData.checkWorktxt}}</span>
+              <span class="text_area_span text_area_span_minus115 pre_wrap"> {{hurryData.checkWorktxt}}</span>
             </li> </div>  <div class=" CreditForm_div_border clearFix">
             <li>
               <label class="label_width_166">核对婚姻情况：</label>
@@ -98,7 +98,7 @@
             </li> </div>
             <li class="text_area_li">
               <label class="label_width_166">调查结果：</label>
-              <span class="text_area_span text_area_span_minus170"> {{hurryData.conclusion}}</span>
+              <span class="text_area_span text_area_span_minus170 pre_wrap"> {{hurryData.conclusion}}</span>
             </li>
           </ul>
         </div>
