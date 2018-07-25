@@ -2048,10 +2048,10 @@ body .el-menu--horizontal .el-menu .el-submenu__title {
   padding-left: 15px;
 }
 
-.ReconsiderationConclusion .el-collapse-item__arrow {
+/* .ReconsiderationConclusion .el-collapse-item__arrow {
   line-height: 38px;
   margin-right: 12px;
-}
+} */
 
 .ReconsiderationConclusion .shenpiBody .bodyP2 .el-textarea.is-disabled .el-textarea__inner {
   background-color: #fff;

@@ -1,11 +1,124 @@
 <!-- 复议结论(经理06) -->
 <template>
   <div class="ReconsiderationConclusion">
-    <div class="header">
-      <img src="/static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-      <span class="headFont">概要信息-复议经理</span>
-    </div>
-    <div class="main">
+    <el-collapse v-model="titleNames">
+      <el-collapse-item name="1">
+        <template slot="title">
+          <i class="collapse_title_icon"></i>
+          <span class="collapse_title_text">概要信息</span>
+        </template>
+        <div class="checkedInf checkedInf_li_width_half clearFix">
+          <ul>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">客户名称：</label>
+                <span>{{datas.custName}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">申请类型：</label>
+                <span>{{datas.appTypeTxt}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">证件类型：</label>
+                <span>{{datas.certTypeTxt}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">证件号码：</label>
+                <span>{{datas.certCode}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">产品名称：</label>
+                <span>{{datas.proName}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">最高月还款额：</label>
+                <span>{{datas.eachTermAmt}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">申请金额：</label>
+                <span>{{datas.loanAmt}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">申请期限：</label>
+                <span>{{datas.loanTerm}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">借款用途：</label>
+                <span>{{datas.loanPurposeTxt}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">借款用途说明：</label>
+                <span>{{datas.loanPurposeNote}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">客户来源渠道：</label>
+                <span>{{datas.sourcesChanTxt}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">客户来源渠道说明：</label>
+                <span>{{datas.sourcesChanRemark}}</span>
+              </li>
+            </div>
+            <div>
+              <li>
+                <label class="label_width_166">进件机构：</label>
+                <span>{{datas.appOrgName}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">直销人员：</label>
+                <span>{{datas.salPerName}}</span>
+              </li>
+            </div>
+          </ul>
+        </div>
+        <div class="approve_btn_area approve_btn_area_width_900 margin_top_100">
+          <span class="approve_item" @click="coverFn('back')">
+            <i class="approve_icon backIcon"></i>
+            <span class="approve_text">回退</span>
+          </span>
+          <span class="approve_item" @click="coverFn('refuse')">
+            <i class="approve_icon rejectIcon"></i>
+            <span class="approve_text">拒绝</span>
+          </span>
+          <span class="approve_item" @click="shenpi">
+            <i class="approve_icon appro"></i>
+            <span class="approve_text">审批</span>
+          </span>
+          <span class="approve_item" @click="AntiFraudApplication">
+            <i class="approve_icon faqi"></i>
+            <span class="approve_text">反欺诈申请</span>
+          </span>
+          <span class="approve_item" @click="getSpjlList">
+            <i class="approve_icon editIcon"></i>
+            <span class="approve_text">审批流程轨迹</span>
+          </span>
+          <span class="approve_item" @click="getLcgjList">
+            <i class="approve_icon liuchengIcon"></i>
+            <span class="approve_text">流程轨迹</span>
+          </span>
+          <span class="approve_item" @click="tobigData">
+            <i class="approve_icon brokenLineIcon"></i>
+            <span class="approve_text">大数据风控</span>
+          </span>
+          <span class="approve_item" @click="roSocialSecurity">
+            <i class="approve_icon dataMaptIcon"></i>
+            <span class="approve_text">社保公积金{{social}}</span>
+          </span>
+        </div>
+      </el-collapse-item>
+    </el-collapse>
+
+    <!-- <div class="main">
       <ul class="mainUl">
         <li>
           <label>客户名称：</label>
@@ -66,7 +179,7 @@
           <span>{{datas.salPerName}}</span>
         </li>
       </ul>
-    </div>
+    </div> -->
     <!-- <div class="buttons">
       <el-button @click="coverFn('back')">
         <img src="/static/images/back.png">
@@ -101,40 +214,7 @@
         <label class="labelTxt">社保/公积金{{social}}</label>
       </el-button>
     </div> -->
-    <div class="approve_btn_area approve_btn_area_width_900">
-      <span class="approve_item" @click="coverFn('back')">
-        <i class="approve_icon backIcon"></i>
-        <span class="approve_text">回退</span>
-      </span>
-      <span class="approve_item" @click="coverFn('refuse')">
-        <i class="approve_icon rejectIcon"></i>
-        <span class="approve_text">拒绝</span>
-      </span>
-      <span class="approve_item" @click="shenpi">
-        <i class="approve_icon appro"></i>
-        <span class="approve_text">审批</span>
-      </span>
-      <span class="approve_item" @click="AntiFraudApplication">
-        <i class="approve_icon faqi"></i>
-        <span class="approve_text">反欺诈申请</span>
-      </span>
-      <span class="approve_item" @click="getSpjlList">
-        <i class="approve_icon editIcon"></i>
-        <span class="approve_text">审批流程轨迹</span>
-      </span>
-      <span class="approve_item" @click="getLcgjList">
-        <i class="approve_icon liuchengIcon"></i>
-        <span class="approve_text">流程轨迹</span>
-      </span>
-      <span class="approve_item" @click="tobigData">
-        <i class="approve_icon brokenLineIcon"></i>
-        <span class="approve_text">大数据风控</span>
-      </span>
-      <span class="approve_item" @click="roSocialSecurity">
-        <i class="approve_icon dataMaptIcon"></i>
-        <span class="approve_text">社保公积金{{social}}</span>
-      </span>
-    </div>
+
     <!-- 回退 -->
     <!-- <div class="huitui">
       <el-dialog title='回退信息' :visible.sync="dialogVisible" :modal="false" width="860px" top="20vh">
@@ -434,9 +514,9 @@
     </div> -->
     <el-dialog title="审批信息" :visible.sync="sdialogVisible " :modal="false " width="710px" height='1100px'>
       <el-form>
-        <el-collapse v-model="activeNames ">
+        <el-collapse v-model="activeNames">
           <!--   申请信息-->
-          <el-collapse-item title="申请信息 " name="applyMsg " class="alert_collapse">
+          <el-collapse-item title="申请信息" name="1" class="alert_collapse">
             <div class="dialog_form_auto">
               <el-form>
                 <div class="bfc">
@@ -467,7 +547,7 @@
             </div>
           </el-collapse-item>
           <!-- 信审核实信息 -->
-          <el-collapse-item title="信审核实信息 " class="alert_collapse">
+          <el-collapse-item title="信审核实信息" name='2' class="alert_collapse">
             <div class="dialog_form_auto">
               <el-form>
                 <el-form-item class="presentation_one_row" label="核实可接受最高每期还款额[元]：" label-width="220px">
@@ -477,7 +557,7 @@
             </div>
           </el-collapse-item>
           <!-- 审批信息 -->
-          <el-collapse-item title="审批信息 " class="alert_collapse">
+          <el-collapse-item title="审批信息" name='3' class="alert_collapse">
             <div class="dialog_form_auto">
               <el-form>
                 <el-form-item label="结论：" :label-width="formApproLab">
@@ -621,6 +701,8 @@
         formApproLabLeft: "100px",
         formApproLab: "120px",
         formApproLabelWidth: "200px",
+        fbalance: '',
+        fbalance2: '',
         FormReturn: {
           rollbackNodeName: '',
           mainReasonName: '',
@@ -699,7 +781,8 @@
         rreasonRemark: '',
         //经办人
         dealroperCode: '',
-        activeNames: ['1', '2'],
+        activeNames: ['1', '2', '3'],
+        titleNames: ['1'],
         applyConclusion: '00',
         caculData: {}, // 审批结论数据
         applicationInformationDetail: '', // 申请详情传过来的数据
@@ -893,6 +976,13 @@
             // 单独处理 评分   =>  "评分:51.6"
             //console.log(res.data.creditScore);
             this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
+            this.fbalance = res.data.fbalance;
+            if (res.data.creditScore.split(',')[1]) {
+              this.fbalance2 = Number(res.data.fbalance).toLocaleString() + res.data.creditScore.split(
+                ',')[1];
+            } else {
+              this.fbalance2 = Number(res.data.fbalance).toLocaleString() + '.00'
+            }
             //console.log(this.creditScore);
             //this.sdialogVisible = true;
           } else if (res.statusCode == '700') {
@@ -1695,7 +1785,6 @@
         // 计算 审批记录数据
         if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 &&
           this.repayWay && this.synthesisRateM && this.loanRateYr) {
-          console.log(1111);
           this.calculateByAuditInfo();
         }
       },
@@ -1719,23 +1808,6 @@
     min-width: 1327px;
     height: 100%;
     font-size: 14px;
-  }
-
-  .ReconsiderationConclusion .header {
-    width: 100%;
-    height: 40px;
-    font-size: 16px;
-    background: #eef0f9;
-    line-height: 40px;
-    padding-left: 10px;
-    display: block;
-    margin-bottom: 10px;
-    overflow: hidden;
-  }
-
-  .ReconsiderationConclusion .header .icon_hat {
-    padding: 9px 10px 10px 13px;
-    vertical-align: middle;
   }
 
   .main {

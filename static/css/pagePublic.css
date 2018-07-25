@@ -469,6 +469,14 @@
   margin-top: 15px;
 }
 
+.margin_top_100 {
+  margin-top: 100px;
+}
+
+.margin_right_5 {
+  margin-right: 5px;
+}
+
 /*查看- label宽度 */
 
 .label_width_210 {
@@ -1000,7 +1008,9 @@
 .SocialSe tr {
   height: 30px;
 }
+
 /* 反欺诈审批 */
+
 /* .approvalConclus_risk_select .el-select-dropdown {
   width:calc(66.6% - 172px);
 border:3px solid red;

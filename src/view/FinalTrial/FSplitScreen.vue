@@ -136,7 +136,7 @@
   export default {
     data() {
       return {
-        //custName: '',
+        custName: '',
         SplitLeft: "left",
         SplitRight: "right",
         watchData: '',

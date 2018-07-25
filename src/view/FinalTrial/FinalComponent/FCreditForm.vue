@@ -31,7 +31,7 @@
           <ul>
             <div class=" CreditForm_div_border clearFix">
               <li class="label_width_210">
-                <label class=" label_width_210 blueC" @click="NewPage(0)">客户在法网是否有被执行信息：</label>
+                <label class=" label_width_210 blueC margin_right_5" @click="NewPage(0)">客户在法网是否有被执行信息：</label>
                 <span>{{this.FormData.wbeexEcutedtext}} </span>
               </li>
               <li class='li_triplet_two_rows' v-show="this.InternetShow.commentS">
@@ -41,7 +41,7 @@
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class=" label_width_210 blueC" @click="NewPage(0)">单位在法网是否有被执行信息：</label>
+                <label class=" label_width_210 blueC margin_right_5" @click="NewPage(0)">单位在法网是否有被执行信息：</label>
                 <span>{{this.FormData.wnetHirecomtext}} </span>
               </li>
               <li class='li_triplet_two_rows' v-show="this.InternetShow.commentS1">
@@ -51,7 +51,7 @@
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class=" label_width_210 blueC" @click="NewPage(1)">客户在失信网是否有失信记录：</label>
+                <label class=" label_width_210 blueC margin_right_5" @click="NewPage(1)">客户在失信网是否有失信记录：</label>
                 <span>{{this.FormData.wnetEcutedBreatext }} </span>
               </li>
               <li class='li_triplet_two_rows' v-show="this.InternetShow.commentS2">
@@ -61,7 +61,7 @@
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class=" label_width_210 blueC" @click="NewPage(1)">单位在失信网是否有失信记录：</label>
+                <label class=" label_width_210 blueC margin_right_5" @click="NewPage(1)">单位在失信网是否有失信记录：</label>
                 <span>{{this.FormData.wnetHirecomBreatext }} </span>
               </li>
               <li class='li_triplet_two_rows' v-show="this.InternetShow.commentS3">
@@ -71,7 +71,7 @@
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class=" label_width_210 blueC" @click="NewPage(2)">网上搜索借款人手机是否有异常：</label>
+                <label class=" label_width_210 blueC margin_right_5" @click="NewPage(2)">网上搜索借款人手机是否有异常：</label>
                 <span>{{this.FormData.wnetPhonetext }} </span>
               </li>
               <li class='li_triplet_two_rows' v-show="this.InternetShow.commentS4">
@@ -81,7 +81,7 @@
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class=" label_width_210 blueC" @click="NewPage(2)">网搜单位名称是否有异常：</label>
+                <label class=" label_width_210 blueC margin_right_5" @click="NewPage(2)">网搜单位名称是否有异常：</label>
                 <span>{{this.FormData.wnetHirecomNametext }} </span>
               </li>
               <li class='li_triplet_two_rows' v-show="this.InternetShow.commentS5">
@@ -91,7 +91,7 @@
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class=" label_width_210 blueC" @click="NewPage(2)">网搜单位电话是否有异常：</label>
+                <label class=" label_width_210 blueC margin_right_5" @click="NewPage(2)">网搜单位电话是否有异常：</label>
                 <span>{{this.FormData.wnetHirecomPhonetext }} </span>
               </li>
               <li class='li_triplet_two_rows' v-show="this.InternetShow.commentS6">
@@ -101,7 +101,7 @@
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class="label_height_48 label_width_210 blueC" @click="NewPage(2)">网上搜索借款人现居住地址和房产地址是否有异常：</label>
+                <label class="label_height_48 label_width_210 blueC margin_right_5" @click="NewPage(2)">网上搜索借款人现居住地址和房产地址是否有异常：</label>
                 <span>{{this.FormData.wnetAddrandEstatetext }} </span>
               </li>
               <li class='li_triplet_two_rows' v-show="this.InternetShow.commentS7">
@@ -111,7 +111,7 @@
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class=" label_width_210 blueC" @click="NewPage(2)">网搜单位地址是否有异常：</label>
+                <label class=" label_width_210 blueC margin_right_5" @click="NewPage(2)">网搜单位地址是否有异常：</label>
                 <span>{{this.FormData.wnetHirecomAddresstext }} </span>
               </li>
               <li class='li_triplet_two_rows' v-show="this.InternetShow.commentS8">
@@ -121,7 +121,7 @@
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class=" label_width_210 blueC" @click="NewPage(3)">当地工商网查询企业基本信息中是否有登记：</label>
+                <label class=" label_width_210 blueC margin_right_5" @click="NewPage(3)">当地工商网查询企业基本信息中是否有登记：</label>
                 <span>{{this.FormData.wnetCompanytext }} </span>
               </li>
               <li class='li_triplet_two_rows' v-show="this.InternetShow.commentS9">
@@ -131,7 +131,7 @@
             </div>
             <div>
               <li>
-                <label class=" label_width_210 blueC" @click="NewPage(4)">客户工作单位在全国组织代码查询中是否存在：</label>
+                <label class=" label_width_210 blueC margin_right_5" @click="NewPage(4)">客户工作单位在全国组织代码查询中是否存在：</label>
                 <span>{{this.FormData.wnetAddrstatetext }} </span>
               </li>
               <li class='li_triplet_two_rows' v-show="this.InternetShow.commentS10">
