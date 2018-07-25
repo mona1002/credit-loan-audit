@@ -79,10 +79,11 @@
           />
           <p v-if="SmallmyPic"> {{val.arcSubType}} </p>
         </figure>
-        <figure class="small_pic_figure" v-show="SmallmyPdf"  @dblclick="pdfClose()">
-          <div class="Small_pic"  @dblclick="pdfClose()">
-             <p is="RpdfDivLeft" ID='ReadTrilLeftSmall' :cvsWidth='200' :cvsHeight='200' SmallClass="SmallWrap" v-bind:title="pdfArrys"  @dblclick="pdfClose()"></p> 
-             </div>
+        <figure class="small_pic_figure" v-show="SmallmyPdf" @dblclick="pdfClose()">
+          <div class="Small_pic" @dblclick="pdfClose()">
+            <p is="RpdfDivLeft" ID='ReadTrilLeftSmall' :cvsWidth='200' :cvsHeight='200' SmallClass="SmallWrap" v-bind:title="pdfArrys"
+              @dblclick="pdfClose()"></p>
+          </div>
           <p> {{pdfTitle}} </p>
         </figure>
       </div>
@@ -96,8 +97,8 @@
       <div class="posi_content">
         <el-collapse v-model="activeNames">
           <el-collapse-item title="本人进件列表" name="1">
-            <div  class="height_auto">
-              <el-table :data="personal"  border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
+            <div class="height_auto">
+              <el-table :data="personal" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
                 style="width: 100%">
                 <el-table-column property="matchApplyCustName" label="客户名称">
                 </el-table-column>
@@ -176,9 +177,9 @@
         pngAyyrs: [],
         myPng: false,
         myPdf: false,
-        SmallmyPic:false,
-        SmallmyPdf:false,
-        pdfTitle:'',
+        SmallmyPic: false,
+        SmallmyPdf: false,
+        pdfTitle: '',
       }
     },
     props: ['msg', 'comBtn'],
@@ -192,14 +193,14 @@
         } else if (this.MatchFlag.MatchFlag == 'QT') {
           this.localInf = JSON.parse(localStorage.getItem("QT")) //综合查询
         }
-            // 恢复到初始状态
-         this.ListDetails = [];
+        // 恢复到初始状态
+        this.ListDetails = [];
         this.activeName = [];
         this.pngAyyrs = [];
         this.pdfArrys = [];
         this.SmallmyPic = false;
         this.SmallmyPdf = false;
-        this.myPdf=false;
+        this.myPdf = false;
         this.SmallPicShow = false; //缩略图
         this.imgBaseUrl = imgUrl.imgBaseUrl;
 
@@ -316,11 +317,11 @@
         this.SmallPicShow = false;
         this.defaultBigPicCss();
       },
-      pdfClose(){
+      pdfClose() {
         console.log('ccc')
-     this.SmallPicShow = false;
-     this.showPage =  1;
-    //  this.defaultBigPicCss();
+        this.SmallPicShow = false;
+        this.showPage = 1;
+        //  this.defaultBigPicCss();
       },
       getImg(ind) {
         this.pdfArrys = [];
@@ -358,19 +359,19 @@
       },
       SmallpicClose() {
         this.SmallPicShow = false;
-        this.SmallmyPdf=false;
-        this.SmallmyPic=false;
+        this.SmallmyPdf = false;
+        this.SmallmyPic = false;
       },
       SmallpicAlert() {
         this.SmallPicShow = true;
-       if(this.myPdf){//显示pdf
-          this.SmallmyPdf=true;
-         this.SmallmyPic=false;
-         this.pdfTitle= this.pdfArrys[0].arcSubType;
-       }  else{//显示图片
-         this.SmallmyPic=true;
-         this.SmallmyPdf=false;
-       }
+        if (this.myPdf) { //显示pdf
+          this.SmallmyPdf = true;
+          this.SmallmyPic = false;
+          this.pdfTitle = this.pdfArrys[0].arcSubType;
+        } else { //显示图片
+          this.SmallmyPic = true;
+          this.SmallmyPdf = false;
+        }
       },
       pre() {
         this.smallPicInd--;
@@ -583,7 +584,6 @@
 
   /* 折叠面板上面的四个 th 表头 */
 
-
   .AudioVisualLeft .list_title span:nth-of-type(1),
   .AudioVisualLeft .list_title_div p span:nth-of-type(1) {
     width: 125px;
@@ -624,7 +624,7 @@
   .posi_content {
     height: calc(100% - 40px);
     overflow: auto;
-    
+
   }
 
 </style>

@@ -63,17 +63,19 @@
           <div class="AntiConclution checkedInf checkedInf_li_width_triplet clearFix">
             <ul style="margin:20px 0;">
               <div class=" CreditForm_div_border clearFix">
-                <li class="description" style="position:relative;;">
+                <li class="li_triplet_two_rows">
                   <label class="label_width_166">复议说明： </label>
-                  <span class="area">{{auditDesc.reviewRemark}} </span>
+                  <span class="text_area_span_minus170">{{auditDesc.reviewRemark}} </span>
                 </li>
               </div>
               <div>
                 <li>
-                  <label class="label_width_166">复议申请人：</label>{{auditDesc.approverUserCode}}
+                  <label class="label_width_166">复议申请人：</label>
+                  <span>{{auditDesc.approverUserCode}} </span>
                 </li>
                 <li>
-                  <label class="label_width_166">复议申请日期： </label>{{ systermTime | dateFilter}}
+                  <label class="label_width_166">复议申请日期： </label>
+                   <span>{{ systermTime | dateFilter}}</span>
                 </li>
               </div>
 

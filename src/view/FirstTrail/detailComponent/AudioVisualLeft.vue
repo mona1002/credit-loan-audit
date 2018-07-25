@@ -99,7 +99,7 @@
         <el-collapse v-model="activeNames">
           <el-collapse-item title="本人进件列表" name="1">
             <div>
-              <el-table :data="personal" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
+              <el-table :data="personal" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
                 style="width: 100%">
                 <el-table-column property="matchApplyCustName" label="客户名称">
                 </el-table-column>
@@ -115,7 +115,7 @@
           <!-- 折叠2 -->
           <el-collapse-item title="内匹客户进件" name="2">
             <div class="height_auto">
-              <el-table :data="others" height="250" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
+              <el-table :data="others" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
                 style="width: 100%">
                 <el-table-column property="matchApplyCustName" label="客户名称">
                 </el-table-column>
@@ -202,7 +202,7 @@
         this.pdfArrys = [];
         this.SmallmyPic = false;
         this.SmallmyPdf = false;
-        this.myPdf=false;
+        this.myPdf = false;
         this.SmallPicShow = false; //缩略图
         this.imgBaseUrl = imgUrl.imgBaseUrl;
         // 父菜单
@@ -363,10 +363,10 @@
           //alert("99999");
           this.SmallmyPdf = true;
           this.SmallmyPic = false;
-          console.log( this.pdfArrys )
-          console.log( this.pdfArrys[0] )
-          console.log( this.pdfArrys[0].arcSubType)
-         this.pdfArrys[0].arcSubType?  this.pdfTitle = this.pdfArrys[0].arcSubType:'';
+          console.log(this.pdfArrys)
+          console.log(this.pdfArrys[0])
+          console.log(this.pdfArrys[0].arcSubType)
+          this.pdfArrys[0].arcSubType ? this.pdfTitle = this.pdfArrys[0].arcSubType : '';
         } else { //显示图片
           this.SmallmyPic = true;
           this.SmallmyPdf = false;

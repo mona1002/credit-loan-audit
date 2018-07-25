@@ -61,7 +61,7 @@
               <td> 1</td>
               <td> 申请单表是否符合要求</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isForm" @change="regularInfo.isForm=='1'?regularInfo.isFormRemark='':regularInfo.isFormRemark">
+                <el-radio-group :readonly='material' v-model="regularInfo.isForm" @change="regularInfo.isForm=='1'?regularInfo.isFormRemark='':regularInfo.isFormRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
@@ -77,7 +77,7 @@
               <td> 2</td>
               <td>身份证证明是否符合要求</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isIdcard" @change="regularInfo.isIdcard=='1'?regularInfo.isIdcardRemark='':regularInfo.isIdcardRemark">
+                <el-radio-group :readonly='material' v-model="regularInfo.isIdcard" @change="regularInfo.isIdcard=='1'?regularInfo.isIdcardRemark='':regularInfo.isIdcardRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
@@ -93,14 +93,14 @@
               <td> 3</td>
               <td>收入证明是否符合要求</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isIncome" @change="regularInfo.isIncome=='1'?regularInfo.isIncomeRemark='':regularInfo.isIncomeRemark">
+                <el-radio-group :readonly='material' v-model="regularInfo.isIncome" @change="regularInfo.isIncome=='1'?regularInfo.isIncomeRemark='':regularInfo.isIncomeRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isIncomeRemark && regularInfo.isIncomeRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :disabled='material' v-if="regularInfo.isIncome==0" v-model.trim="regularInfo.isIncomeRemark"
+                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isIncome==0" v-model.trim="regularInfo.isIncomeRemark"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -109,14 +109,14 @@
               <td> 4</td>
               <td>工作证明是否符合要求</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isWork" @change="regularInfo.isWork=='1'?regularInfo.isWorkRemark='':regularInfo.isWorkRemark">
+                <el-radio-group :readonly='material' v-model="regularInfo.isWork" @change="regularInfo.isWork=='1'?regularInfo.isWorkRemark='':regularInfo.isWorkRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isWorkRemark &&regularInfo.isWorkRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :disabled='material' v-if="regularInfo.isWork==0" v-model.trim="regularInfo.isWorkRemark"
+                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isWork==0" v-model.trim="regularInfo.isWorkRemark"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -125,14 +125,14 @@
               <td> 5</td>
               <td>房产资料是否符合要求</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isEstate" @change="regularInfo.isEstate=='1'?regularInfo.isEstateRemark='':regularInfo.isEstateRemark">
+                <el-radio-group :readonly='material' v-model="regularInfo.isEstate" @change="regularInfo.isEstate=='1'?regularInfo.isEstateRemark='':regularInfo.isEstateRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isEstateRemark && regularInfo.isEstateRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :disabled='material' v-if="regularInfo.isEstate==0" v-model.trim="regularInfo.isEstateRemark"
+                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isEstate==0" v-model.trim="regularInfo.isEstateRemark"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -141,14 +141,14 @@
               <td> 6</td>
               <td>居住证明是否符合要求</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isLive" @change="regularInfo.isLive=='1'?regularInfo.isLiveRemark='':regularInfo.isLiveRemark">
+                <el-radio-group :readonly='material' v-model="regularInfo.isLive" @change="regularInfo.isLive=='1'?regularInfo.isLiveRemark='':regularInfo.isLiveRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isLiveRemark && regularInfo.isLiveRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :disabled='material' v-if="regularInfo.isLive==0" v-model.trim="regularInfo.isLiveRemark"
+                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isLive==0" v-model.trim="regularInfo.isLiveRemark"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -157,14 +157,14 @@
               <td> 7</td>
               <td> 经营证明是否符合要求</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isBusiness" @change="regularInfo.isBusiness=='1'?regularInfo.isBusinessRemark='':regularInfo.isBusinessRemark">
+                <el-radio-group :readonly='material' v-model="regularInfo.isBusiness" @change="regularInfo.isBusiness=='1'?regularInfo.isBusinessRemark='':regularInfo.isBusinessRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isBusinessRemark && regularInfo.isBusinessRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :disabled='material' v-if="regularInfo.isBusiness==0" v-model.trim="regularInfo.isBusinessRemark"
+                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isBusiness==0" v-model.trim="regularInfo.isBusinessRemark"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -173,14 +173,14 @@
               <td> 8</td>
               <td>信用报告是否符合要求</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isCredit" @change="regularInfo.isCredit=='1'?regularInfo.isCreditRemark='':regularInfo.isCreditRemark">
+                <el-radio-group :readonly='material' v-model="regularInfo.isCredit" @change="regularInfo.isCredit=='1'?regularInfo.isCreditRemark='':regularInfo.isCreditRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isCreditRemark && regularInfo.isCreditRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :disabled='material' v-if="regularInfo.isCredit==0" v-model.trim="regularInfo.isCreditRemark"
+                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isCredit==0" v-model.trim="regularInfo.isCreditRemark"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -189,14 +189,14 @@
               <td> 9</td>
               <td> 客户流水是否符合要求</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isCustomerflow" @change="regularInfo.isCustomerflow=='1'?regularInfo.isCustomerflowRemark='':regularInfo.isCustomerflowRemark">
+                <el-radio-group :readonly='material' v-model="regularInfo.isCustomerflow" @change="regularInfo.isCustomerflow=='1'?regularInfo.isCustomerflowRemark='':regularInfo.isCustomerflowRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isCustomerflowRemark && regularInfo.isCustomerflowRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :disabled='material' v-if="regularInfo.isCustomerflow==0" v-model.trim="regularInfo.isCustomerflowRemark"
+                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isCustomerflow==0" v-model.trim="regularInfo.isCustomerflowRemark"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -205,14 +205,14 @@
               <td> 10</td>
               <td> 客户其他资料是否符合要求</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isCustomerother" @change="regularInfo.isCustomerother=='1'?regularInfo.isCustomerotherRemark='':regularInfo.isCustomerotherRemark">
+                <el-radio-group :readonly='material' v-model="regularInfo.isCustomerother" @change="regularInfo.isCustomerother=='1'?regularInfo.isCustomerotherRemark='':regularInfo.isCustomerotherRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isCustomerotherRemark && regularInfo.isCustomerotherRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :disabled='material' v-if="regularInfo.isCustomerother==0" v-model.trim="regularInfo.isCustomerotherRemark"
+                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isCustomerother==0" v-model.trim="regularInfo.isCustomerotherRemark"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -221,14 +221,14 @@
               <td> 11 </td>
               <td> 负债计算是否正确</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isLiabilities" @change="regularInfo.isLiabilities=='1'?regularInfo.isLiabilitiesRemark='':regularInfo.isLiabilitiesRemark">
+                <el-radio-group :readonly='material' v-model="regularInfo.isLiabilities" @change="regularInfo.isLiabilities=='1'?regularInfo.isLiabilitiesRemark='':regularInfo.isLiabilitiesRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isLiabilitiesRemark && regularInfo.isLiabilitiesRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :disabled='material' v-if="regularInfo.isLiabilities=='0'" v-model.trim="regularInfo.isLiabilitiesRemark"
+                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isLiabilities=='0'" v-model.trim="regularInfo.isLiabilitiesRemark"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -237,14 +237,14 @@
               <td> 12 </td>
               <td> 流水计算是否正确</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isFlow" @change="regularInfo.isFlow=='1'?regularInfo.isFlowRemark='':regularInfo.isFlowRemark">
+                <el-radio-group :readonly='material' v-model="regularInfo.isFlow" @change="regularInfo.isFlow=='1'?regularInfo.isFlowRemark='':regularInfo.isFlowRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isFlowRemark && regularInfo.isFlowRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :disabled='material' v-if="regularInfo.isFlow=='0'" v-model.trim="regularInfo.isFlowRemark"
+                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isFlow=='0'" v-model.trim="regularInfo.isFlowRemark"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -253,14 +253,14 @@
               <td> 13</td>
               <td> 征信录入是否正确</td>
               <td>
-                <el-radio-group :disabled='material' v-model="regularInfo.isReference" @change="regularInfo.isReference=='1'?regularInfo.isReferenceRemark='':regularInfo.isReferenceRemark">
+                <el-radio-group :readonly='material' v-model="regularInfo.isReference" @change="regularInfo.isReference=='1'?regularInfo.isReferenceRemark='':regularInfo.isReferenceRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isReferenceRemark && regularInfo.isReferenceRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :disabled='material' v-if="regularInfo.isReference=='0'" v-model.trim="regularInfo.isReferenceRemark"
+                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isReference=='0'" v-model.trim="regularInfo.isReferenceRemark"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -289,14 +289,14 @@
               <td> 1</td>
               <td> 客户在人法网是否有被执行信息</td>
               <td>
-                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wbeexEcuted" @change="regularInfo.wbeexEcuted=='0'?regularInfo.wbeexEcutedtxt='':regularInfo.wbeexEcutedtxt">
+                <el-radio-group :readonly='InfoInquire' v-model="regularInfo.wbeexEcuted" @change="regularInfo.wbeexEcuted=='0'?regularInfo.wbeexEcutedtxt='':regularInfo.wbeexEcutedtxt">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.wbeexEcutedtxt&&regularInfo.wbeexEcutedtxt.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :disabled='InfoInquire' v-if="regularInfo.wbeexEcuted==1" v-model.trim="regularInfo.wbeexEcutedtxt"
+                <el-input type='textarea' class='margin_top_15' :readonly='InfoInquire' v-if="regularInfo.wbeexEcuted==1" v-model.trim="regularInfo.wbeexEcutedtxt"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -305,14 +305,14 @@
               <td> 2</td>
               <td> 客户在失信网是否有失信记录</td>
               <td>
-                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetEcutedBrea" @change="regularInfo.wnetEcutedBrea=='0'?regularInfo.wnetEcutedBreatxt='':regularInfo.wnetEcutedBreatxt">
+                <el-radio-group :readonly='InfoInquire' v-model="regularInfo.wnetEcutedBrea" @change="regularInfo.wnetEcutedBrea=='0'?regularInfo.wnetEcutedBreatxt='':regularInfo.wnetEcutedBreatxt">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.wnetEcutedBreatxt&&regularInfo.wnetEcutedBreatxt.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :disabled='InfoInquire' v-if="regularInfo.wnetEcutedBrea==1" v-model.trim="regularInfo.wnetEcutedBreatxt"
+                <el-input type='textarea' class='margin_top_15' :readonly='InfoInquire' v-if="regularInfo.wnetEcutedBrea==1" v-model.trim="regularInfo.wnetEcutedBreatxt"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -321,14 +321,14 @@
               <td> 3</td>
               <td> 网上搜索借款人的手机是否有异常</td>
               <td>
-                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetPhone" @change="regularInfo.wnetPhone=='0'?regularInfo.wnetPhonetxt='':regularInfo.wnetPhonetxt">
+                <el-radio-group :readonly='InfoInquire' v-model="regularInfo.wnetPhone" @change="regularInfo.wnetPhone=='0'?regularInfo.wnetPhonetxt='':regularInfo.wnetPhonetxt">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.wnetPhonetxt&&regularInfo.wnetPhonetxt.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :disabled='InfoInquire' v-if="regularInfo.wnetPhone==1" v-model.trim="regularInfo.wnetPhonetxt"
+                <el-input type='textarea' class='margin_top_15' :readonly='InfoInquire' v-if="regularInfo.wnetPhone==1" v-model.trim="regularInfo.wnetPhonetxt"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -337,14 +337,14 @@
               <td> 4</td>
               <td> 网上搜索借款人现居住地址和房产地址是否异常</td>
               <td>
-                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetAddrandEstate" @change="regularInfo.wnetAddrandEstate=='0'?regularInfo.wnetAddrandEstatetxt='':regularInfo.wnetAddrandEstatetxt">
+                <el-radio-group :readonly='InfoInquire' v-model="regularInfo.wnetAddrandEstate" @change="regularInfo.wnetAddrandEstate=='0'?regularInfo.wnetAddrandEstatetxt='':regularInfo.wnetAddrandEstatetxt">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.wnetAddrandEstatetxt&&regularInfo.wnetAddrandEstatetxt.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :disabled='InfoInquire' v-if="regularInfo.wnetAddrandEstate==1" v-model.trim="regularInfo.wnetAddrandEstatetxt"
+                <el-input type='textarea' class='margin_top_15' :readonly='InfoInquire' v-if="regularInfo.wnetAddrandEstate==1" v-model.trim="regularInfo.wnetAddrandEstatetxt"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -353,14 +353,14 @@
               <td> 5</td>
               <td> 当地工商网查询企业基本信息中是否有登记</td>
               <td>
-                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetCompany" @change="regularInfo.wnetCompany=='1'?regularInfo.wnetCompanytxt='':regularInfo.wnetCompanytxt">
+                <el-radio-group :readonly='InfoInquire' v-model="regularInfo.wnetCompany" @change="regularInfo.wnetCompany=='1'?regularInfo.wnetCompanytxt='':regularInfo.wnetCompanytxt">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.wnetCompanytxt&&regularInfo.wnetCompanytxt.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :disabled='InfoInquire' v-if="regularInfo.wnetCompany=='0'" v-model.trim="regularInfo.wnetCompanytxt"
+                <el-input type='textarea' class='margin_top_15' :readonly='InfoInquire' v-if="regularInfo.wnetCompany=='0'" v-model.trim="regularInfo.wnetCompanytxt"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -369,14 +369,14 @@
               <td> 6</td>
               <td> 客户工作单位在全国组织代码查询中是否存在</td>
               <td>
-                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetAddrstate" @change="regularInfo.wnetAddrstate=='1'?regularInfo.wnetAddrstatetxt='':regularInfo.wnetAddrstatetxt">
+                <el-radio-group :readonly='InfoInquire' v-model="regularInfo.wnetAddrstate" @change="regularInfo.wnetAddrstate=='1'?regularInfo.wnetAddrstatetxt='':regularInfo.wnetAddrstatetxt">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.wnetAddrstatetxt && regularInfo.wnetAddrstatetxt.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :disabled='InfoInquire' v-if="regularInfo.wnetAddrstate=='0'" v-model.trim="regularInfo.wnetAddrstatetxt"
+                <el-input type='textarea' class='margin_top_15' :readonly='InfoInquire' v-if="regularInfo.wnetAddrstate=='0'" v-model.trim="regularInfo.wnetAddrstatetxt"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -387,7 +387,7 @@
               <td>
                 <td>
                   <b class="hint_word" v-show="regularInfo.icbcRegistrationInfo && regularInfo.icbcRegistrationInfo.length>=300"> 输入长度不能超过300</b>
-                  <el-input type='textarea' class='margin_top_15' :disabled='InfoInquire' v-model.trim="regularInfo.icbcRegistrationInfo" :rows="2"
+                  <el-input type='textarea' class='margin_top_15' :readonly='InfoInquire' v-model.trim="regularInfo.icbcRegistrationInfo" :rows="2"
                     resize="none" :maxlength='arealength' placeholder="请输入内容">
                   </el-input>
                 </td>
@@ -416,14 +416,14 @@
               <td> 1</td>
               <td> 内部匹配是否进行排查</td>
               <td>
-                <el-radio-group :disabled='matching' v-model="regularInfo.isInmatch" @change="regularInfo.isInmatch=='1'?regularInfo.isInmatchRemark='':regularInfo.isInmatchRemark">
+                <el-radio-group :readonly='matching' v-model="regularInfo.isInmatch" @change="regularInfo.isInmatch=='1'?regularInfo.isInmatchRemark='':regularInfo.isInmatchRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isInmatchRemark && regularInfo.isInmatchRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :disabled='matching' v-if="regularInfo.isInmatch=='0'" v-model.trim="regularInfo.isInmatchRemark"
+                <el-input type='textarea' class='margin_top_15' :readonly='matching' v-if="regularInfo.isInmatch=='0'" v-model.trim="regularInfo.isInmatchRemark"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -459,7 +459,7 @@
                 <template slot-scope="scope">
                   <div slot="reference" class="name-wrapper">
                     <b class="required_Red"> * </b>
-                    <el-radio-group :disabled='PhoneCredit' v-model="scope.row.insResult" @change="scope.row.insResult=='00'?scope.row.remark='':scope.row.remark">
+                    <el-radio-group :readonly='PhoneCredit' v-model="scope.row.insResult" @change="scope.row.insResult=='00'?scope.row.remark='':scope.row.remark">
                       <el-radio label="00">正常</el-radio>
                       <el-radio label="01">异常</el-radio>
                     </el-radio-group>
@@ -469,7 +469,7 @@
               <el-table-column label="备注" align="center">
                 <template slot-scope="scope">
                   <b class="hint_word" v-show="scope.row.remark&&scope.row.remark.length>=300"> 输入长度不能超过300</b>
-                  <el-input class='margin_top_15' type="textarea" :disabled='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none"
+                  <el-input class='margin_top_15' type="textarea" :readonly='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none"
                     v-model.trim="scope.row.remark" :maxlength='arealength' placeholder="请输入内容">
                   </el-input>
                   <!-- {{scope.row.insResult}} -->
@@ -507,7 +507,7 @@
                 <!-- 质检结果 -->
                 <td>
                   <b class="required_Red"> * </b>
-                  <el-radio-group :disabled='PhoneCredit' v-model="insTelCustInfo.insResult" @change="insTelCustInfo.insResult=='00'?insTelCustInfo.remark='':insTelCustInfo.remark">
+                  <el-radio-group :readonly='PhoneCredit' v-model="insTelCustInfo.insResult" @change="insTelCustInfo.insResult=='00'?insTelCustInfo.remark='':insTelCustInfo.remark">
                     <el-radio label="00">正常</el-radio>
                     <el-radio label="01">异常</el-radio>
                   </el-radio-group>
@@ -515,7 +515,7 @@
                 <!-- 备注 -->
                 <td style="vertical-align:bottom;">
                   <b class="hint_word" v-show="insTelCustInfo.remark&&insTelCustInfo.remark.length>=300"> 输入长度不能超过300</b>
-                  <el-input class='margin_top_15' type='textarea' :disabled='PhoneCredit' v-if="insTelCustInfo.insResult=='01'" v-model.trim="insTelCustInfo.remark"
+                  <el-input class='margin_top_15' type='textarea' :readonly='PhoneCredit' v-if="insTelCustInfo.insResult=='01'" v-model.trim="insTelCustInfo.remark"
                     :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                   </el-input>
                 </td>
@@ -562,7 +562,7 @@
                 <template slot-scope="scope">
                   <div slot="reference" class="name-wrapper">
                     <b class="required_Red"> * </b>
-                    <el-radio-group :disabled='PhoneCredit' v-model="scope.row.insResult" @change="scope.row.insResult=='00'?scope.row.remark='':scope.row.remark">
+                    <el-radio-group :readonly='PhoneCredit' v-model="scope.row.insResult" @change="scope.row.insResult=='00'?scope.row.remark='':scope.row.remark">
                       <el-radio label="00">正常</el-radio>
                       <el-radio label="01">异常</el-radio>
                     </el-radio-group>
@@ -572,7 +572,7 @@
               <el-table-column label="备注" align="center" min-width="180">
                 <template slot-scope="scope">
                   <b class="hint_word" v-show="scope.row.remark&&scope.row.remark.length>=300"> 输入长度不能超过300</b>
-                  <el-input class='margin_top_15' type="textarea" :disabled='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none"
+                  <el-input class='margin_top_15' type="textarea" :readonly='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none"
                     v-model.trim="scope.row.remark" :maxlength="this.textareaL" placeholder="请输入内容">
                   </el-input>
                 </template>
@@ -668,7 +668,7 @@
         <template slot="title">
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">质检结论</span>
-          <div class="title_icon">
+          <div class="title_icon" v-if='QTConclutionBtn'>
             <span @click.stop="addQTResult">
               <i class="title_icon_img addIcon"></i>
               <span class="title_icon_span">添加</span>
@@ -690,7 +690,7 @@
             <el-table-column label="质检结果" align="center" width="240">
               <template slot-scope="scope">
                 <i class="required_Red"> * </i>
-                <el-select :disabled='QTConclution' v-model="scope.row.checkResult" placeholder="请选择">
+                <el-select :readonly='QTConclution' v-model="scope.row.checkResult" placeholder="请选择">
                   <el-option v-for="item in QTresult" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -699,24 +699,24 @@
             <el-table-column label="差错类型" align="center" width="230">
               <template slot-scope="scope">
                 <b class="hint_word" v-show="scope.row.errorType&&scope.row.errorType.length>=50"> 输入长度不能超过50</b>
-                <el-tooltip class="item" effect="dark" :content="scope.row.errorType" :disabled="!scope.row.errorType" placement="top-start">
-                  <el-input :disabled='QTConclution' v-model.trim="scope.row.errorType" :maxlength='fiftyWords' placeholder="请输入内容"></el-input>
+                <el-tooltip class="item" effect="dark" :content="scope.row.errorType" :readonly="!scope.row.errorType" placement="top-start">
+                  <el-input :readonly='QTConclution' v-model.trim="scope.row.errorType" :maxlength='fiftyWords' placeholder="请输入内容"></el-input>
                 </el-tooltip>
               </template>
             </el-table-column>
             <el-table-column label="差错描述" align="center" width="230">
               <template slot-scope="scope">
                 <b class="hint_word" v-show="scope.row.errorDescribe&& scope.row.errorDescribe.length>=300"> 输入长度不能超过300</b>
-                <el-tooltip class="item" effect="dark" :content="scope.row.errorDescribe" :disabled="!scope.row.errorDescribe" placement="top-start">
-                  <el-input :disabled='QTConclution' v-model.trim="scope.row.errorDescribe" :maxlength='arealength' placeholder="请输入内容"></el-input>
+                <el-tooltip class="item" effect="dark" :content="scope.row.errorDescribe" :readonly="!scope.row.errorDescribe" placement="top-start">
+                  <el-input :readonly='QTConclution' v-model.trim="scope.row.errorDescribe" :maxlength='arealength' placeholder="请输入内容"></el-input>
                 </el-tooltip>
               </template>
             </el-table-column>
             <el-table-column label="备注" align="center" min-width="200">
               <template slot-scope="scope">
                 <b class="hint_word" v-show="scope.row.remark&&scope.row.remark.length>=300"> 输入长度不能超过300</b>
-                <el-tooltip class="item" effect="dark" :content="scope.row.remark" :disabled="!scope.row.remark" placement="top-start">
-                  <el-input class="margin_top_15" type='textarea' :disabled='QTConclution' v-model.trim="scope.row.remark" :rows="2" resize="none"
+                <el-tooltip class="item" effect="dark" :content="scope.row.remark" :readonly="!scope.row.remark" placement="top-start">
+                  <el-input class="margin_top_15" type='textarea' :readonly='QTConclution' v-model.trim="scope.row.remark" :rows="2" resize="none"
                     :maxlength='arealength' placeholder="请输入内容">
                   </el-input>
                 </el-tooltip>
@@ -804,7 +804,7 @@
       <el-dialog title="发起复议" :visible.sync="ReconsiderShow" :modal="false ">
         <el-form>
           <el-form-item label="复议节点：" :label-width="formLabelWidth">
-            <el-input disabled v-model="ReconsiderNode" placeholder="请选择"> </el-input>
+            <el-input readonly v-model="ReconsiderNode" placeholder="请选择"> </el-input>
           </el-form-item>
           <div class="dialog_textarea alert_collapse_inputLabel">
             <el-form-item class="mr" label="复议说明：" :label-width="formLabelWidth">
