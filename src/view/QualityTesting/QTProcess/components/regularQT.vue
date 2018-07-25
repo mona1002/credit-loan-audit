@@ -68,7 +68,7 @@
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isFormRemark && regularInfo.isFormRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input class='margin_top_15' type='textarea' :disabled='material' v-if="regularInfo.isForm==0" v-model.trim="regularInfo.isFormRemark"
+                <el-input class='margin_top_15' type='textarea' :readonly='material' v-if="regularInfo.isForm==0" v-model.trim="regularInfo.isFormRemark"
                   @keyup.native='ccc' :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
@@ -84,7 +84,7 @@
               </td>
               <td>
                 <b class="hint_word" v-show="regularInfo.isIdcardRemark && regularInfo.isIdcardRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input class='margin_top_15' type='textarea' :disabled='material' v-if="regularInfo.isIdcard=='0'" v-model.trim="regularInfo.isIdcardRemark"
+                <el-input class='margin_top_15' type='textarea' :readonly='material' v-if="regularInfo.isIdcard=='0'" v-model.trim="regularInfo.isIdcardRemark"
                   :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>

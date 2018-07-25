@@ -54,7 +54,7 @@
           </el-table-column>
           <el-table-column prop="proName" label="产品名称" width="100">
           </el-table-column>
-          <el-table-column prop="activationTime" label="进入本环节时间" min-width="170">
+          <el-table-column prop="activationTime" label="进入本环节时间" width="170">
           </el-table-column>
         </el-table>
         <!-- 分页 -->

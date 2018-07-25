@@ -5,50 +5,48 @@
       <el-collapse v-model="activeNames">
         <el-collapse-item name="1">
           <template slot="title">
-            <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-            <span class="headFont">复议基本信息 </span>
+            <i class="collapse_title_icon"></i>
+            <span class="collapse_title_text">复议基本信息</span>
           </template>
-          <div class="baseInf baseTop">
+          <div class="checkedInf checkedInf_li_width_triplet clearFix">
             <ul>
-              <li>
-                <p>
-                  <label>进件编号： </label>
+              <div class=" CreditForm_div_border clearFix">
+                <li>
+                  <label class="label_width_166">进件编号： </label>
                   <span>{{applyInfoPool.applySubNo}} </span>
-                </p>
-                <p>
-                  <label>证件号码： </label>
-                  <span>{{applyInfoPool.certCode}} </span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <label>客户名称： </label>
+                </li>
+                <li>
+                  <label class="label_width_166">客户名称： </label>
                   <span>{{applyInfoPool.custName}} </span>
-                </p>
-                <p>
-                  <label>移动电话： </label>
-                  <span>{{applyInfoPool.mobile}} </span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <label>证件类型： </label>
+                </li>
+                <li>
+                  <label class="label_width_166">证件类型： </label>
                   <span>{{applyInfoPool.certTypeTxt}} </span>
-                </p>
-                <p>
-                  <label>申请类型： </label>
+                </li>
+              </div>
+              <div class=" clearFix">
+                <li>
+                  <label class="label_width_166">证件号码： </label>
+                  <span>{{applyInfoPool.certCode}} </span>
+                </li>
+                <li>
+                  <label class="label_width_166">移动电话： </label>
+                  <span>{{applyInfoPool.mobile}} </span>
+                </li>
+                <li>
+                  <label class="label_width_166">申请类型： </label>
                   <span>{{applyInfoPool.appTypeTxt}} </span>
-                </p>
-              </li>
+                </li>
+              </div>
             </ul>
           </div>
         </el-collapse-item>
         <el-collapse-item name="2">
           <template slot="title">
-            <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-            <span class="headFont">合规质检结论</span>
+            <i class="collapse_title_icon"></i>
+            <span class="collapse_title_text">合规质检结论</span>
           </template>
-          <div class="AntiInf">
+          <div class="height_auto">
             <el-table :data="tableData" border style="width: 100%">
               <el-table-column label='质检结果' prop="checkResultTxt" width="120"></el-table-column>
               <el-table-column label='差错类型' prop="errorType" width="150"></el-table-column>
@@ -59,25 +57,26 @@
         </el-collapse-item>
         <el-collapse-item name="3">
           <template slot="title">
-            <img src="../../../../../static/images/C4A8A526-401A-43D1-B835-5EFEBC7E2F23@1x.png" class="icon_hat">
-            <span class="headFont">复议申请信息 </span>
+            <i class="collapse_title_icon"></i>
+            <span class="collapse_title_text">复议申请信息</span>
           </template>
-          <div class="AntiConclution">
+          <div class="AntiConclution checkedInf checkedInf_li_width_triplet clearFix">
             <ul style="margin:20px 0;">
-              <li>
-                <p class="description" style="position:relative;;">
-                  <label>复议说明： </label>
+              <div class=" CreditForm_div_border clearFix">
+                <li class="description" style="position:relative;;">
+                  <label class="label_width_166">复议说明： </label>
                   <span class="area">{{auditDesc.reviewRemark}} </span>
-                </p>
-              </li>
-              <li class="ApplyInf">
-                <p>
-                  <label>复议申请人：</label>{{auditDesc.approverUserCode}}
-                </p>
-                <p>
-                  <label>复议申请日期： </label>{{ systermTime | dateFilter}}
-                </p>
-              </li>
+                </li>
+              </div>
+              <div>
+                <li>
+                  <label class="label_width_166">复议申请人：</label>{{auditDesc.approverUserCode}}
+                </li>
+                <li>
+                  <label class="label_width_166">复议申请日期： </label>{{ systermTime | dateFilter}}
+                </li>
+              </div>
+
             </ul>
           </div>
         </el-collapse-item>
