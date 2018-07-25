@@ -41,7 +41,7 @@
             <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail>
             <PhoneCredit v-if=" this.tabContent1==5" :addBtn="false"> 电话征信</PhoneCredit>
             <FCreditForm v-if=" this.tabContent1==6" :applyId='tastwaitingPass.ApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
-            <RcreditInvestigation v-if=" this.tabContent1==7">实地征信</RcreditInvestigation>
+            <creditInvestigation v-if=" this.tabContent1==7"  :applyId='tastwaitingPass.ApplyId'>实地征信</creditInvestigation>
             <aMAntiApplyInf v-if=" this.tabContent1==8" :applyId='tastwaitingPass.ApplyId'>反欺诈结论</aMAntiApplyInf>
             <RantiFraudInvestigation v-if=" this.tabContent1==9" :isShow='false' :applyId='tastwaitingPass.ApplyId'> 反欺诈调查</RantiFraudInvestigation>
             <RFinanceInformation v-if=" this.tabContent1==10">财务信息</RFinanceInformation>
@@ -109,7 +109,7 @@
           <RborrowerInformationSetail v-if=" this.tabContent2==4" :isFull.sync="isFull">借款人资料</RborrowerInformationSetail>
           <PhoneCredit v-if=" this.tabContent2==5" :addBtn="false"> 电话征信</PhoneCredit>
           <FCreditForm v-if=" this.tabContent2==6" :applyId='tastwaitingPass.ApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
-          <RcreditInvestigation v-if=" this.tabContent2==7">实地征信</RcreditInvestigation>
+          <creditInvestigation v-if=" this.tabContent2==7"  :applyId='tastwaitingPass.ApplyId'>实地征信</creditInvestigation>
           <aMAntiApplyInf v-if=" this.tabContent2==8" :applyId='tastwaitingPass.ApplyId'>反欺诈结论</aMAntiApplyInf>
           <RantiFraudInvestigation v-if=" this.tabContent2==9" :isShow='false' :applyId='tastwaitingPass.ApplyId'> 反欺诈调查</RantiFraudInvestigation>
           <RFinanceInformation v-if=" this.tabContent2==10">财务信息</RFinanceInformation>
@@ -184,7 +184,8 @@
   import RApprovalConclusion from "./ReadComponent/RApprovalConclusion"; //信审审批结论轨迹
   import Rremark from "./ReadComponent/Rremark"; //备注信息
   //   import RprocessTrajectory from "./ReadComponent/RprocessTrajectory"; //流程轨迹
-  import RcreditInvestigation from "./ReadComponent/RcreditInvestigation"; //实地征信
+  // import RcreditInvestigation from "./ReadComponent/RcreditInvestigation"; //实地征信
+  import creditInvestigation from "./detailComponent/creditInvestigation.vue"; //实地征信
   // import aMAntiApplyInf from '../AntiFraud/matchComponent/aMAntiApplyInf.vue' //反欺诈结论
   import aMAntiApplyInf from '../AntiFraud/components/aAntiApplyInf.vue' //反欺诈结论
   import QTAprovalConclution from "../QualityTesting/QTReconsiderProcess/components/QTAprovalConclution.vue"; //反欺诈审批结论轨迹--新写页面
@@ -543,7 +544,7 @@
       RFinanceInformation, //账务信息
       RApprovalConclusion, //信审审批结论归结
       Rremark, // 备注信息
-      RcreditInvestigation, //实地征信
+      creditInvestigation, //实地征信
       aMAntiApplyInf, //反欺诈结论
       InternalMatch,
       PhoneCredit,

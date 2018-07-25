@@ -42,7 +42,7 @@
             <!-- <PhoneCredit v-if=" this.tabContent1==5"> 电话征信</PhoneCredit> -->
             <RPhoneCredit v-if=" this.tabContent1==5"> 电话征信</RPhoneCredit>
             <FCreditForm v-if=" this.tabContent1==6" :applyId='tastwaitingPass.matchApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
-            <RcreditInvestigation v-if=" this.tabContent1==7">实地征信</RcreditInvestigation>
+            <creditInvestigation v-if=" this.tabContent1==7"  :applyId='tastwaitingPass.matchApplyId'>实地征信</creditInvestigation>
             <aMAntiApplyInf v-if=" this.tabContent1==8" :applyId='tastwaitingPass.matchApplyId'>反欺诈结论</aMAntiApplyInf>
             <RantiFraudInvestigation v-if=" this.tabContent1==9" :isShow='true' :applyId='tastwaitingPass.matchApplyId'>反欺诈调查</RantiFraudInvestigation>
             <RFinanceInformation v-if=" this.tabContent1==10">账务信息</RFinanceInformation>
@@ -84,7 +84,7 @@
           <!-- <PhoneCredit v-if=" this.tabContent2==5"> 电话征信</PhoneCredit>     -->
           <RPhoneCredit v-if=" this.tabContent2==5"> 电话征信</RPhoneCredit>
           <FCreditForm v-if=" this.tabContent2==6" :applyId='tastwaitingPass.matchApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
-          <RcreditInvestigation v-if=" this.tabContent2==7">实地征信</RcreditInvestigation>
+          <creditInvestigation v-if=" this.tabContent2==7"  :applyId='tastwaitingPass.matchApplyId'>实地征信</creditInvestigation>
           <aMAntiApplyInf v-if=" this.tabContent2==8" :applyId='tastwaitingPass.matchApplyId'>反欺诈结论</aMAntiApplyInf>
           <RantiFraudInvestigation v-if=" this.tabContent2==9" :isShow='true' :applyId='tastwaitingPass.matchApplyId'>反欺诈调查</RantiFraudInvestigation>
           <RFinanceInformation v-if=" this.tabContent2==10">账务信息</RFinanceInformation>
@@ -134,6 +134,7 @@
   import Rremark from "./ReadComponent/Rremark"; //备注信息
   import RprocessTrajectory from "./ReadComponent/RprocessTrajectory"; //流程轨迹
   import RcreditInvestigation from "./ReadComponent/RcreditInvestigation"; //实地征信
+  import creditInvestigation from "./detailComponent/creditInvestigation.vue"; //实地征信
   // import aMAntiApplyInf from '../AntiFraud/matchComponent/aMAntiApplyInf.vue' //反欺诈结论
   import aMAntiApplyInf from '../AntiFraud/components/aAntiApplyInf.vue' //反欺诈结论
 
@@ -372,7 +373,7 @@
       RFinanceInformation, //账务信息
       RApprovalConclusion, //信审审批结论归结
       Rremark, // 备注信息
-      RcreditInvestigation, //实地征信
+      creditInvestigation, //实地征信
       aMAntiApplyInf, //反欺诈结论
       InternalMatch,
       PhoneCredit,

@@ -1,5 +1,5 @@
 <template>
-  <!-- 实地征信 -->
+  <!-- 实地征信-已整合-待删除 -->
   <div class="creditInvestigation">
       <el-collapse v-model="activeNames" @change="handleChange">
         <el-collapse-item name="1">

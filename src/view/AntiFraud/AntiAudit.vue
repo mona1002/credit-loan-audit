@@ -42,7 +42,7 @@
             <AborrowerInformationDetail v-if=" this.tabContent2==4"></AborrowerInformationDetail>
             <PhoneCredit v-if=" this.tabContent2==5" :addBtn="false"></PhoneCredit>
             <FCreditForm :myWatch="watchData" v-if=" this.tabContent2==6" :applyId='tastwaitingPass.applyId' :FinalConCheckShow='true'></FCreditForm>
-            <creditInvestigation v-if=" this.tabContent2==7"></creditInvestigation>
+            <creditInvestigation v-if=" this.tabContent2==7"  :applyId='tastwaitingPass.applyId'></creditInvestigation>
             <aAprovalConclusion v-if=" this.tabContent2==8"></aAprovalConclusion>
             <aAntiConclusionPath v-if=" this.tabContent2==9"></aAntiConclusionPath>
             <AntiApplyInf v-if=" this.tabContent2==10" >反欺诈申请信息</AntiApplyInf>

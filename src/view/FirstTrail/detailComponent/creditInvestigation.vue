@@ -1,5 +1,5 @@
 <template>
-  <!-- 实地征信 -->
+  <!-- 实地征信 = 页面 -->
   <div class="creditInvestigation">
       <el-collapse v-model="activeNames" @change="handleChange">
         <el-collapse-item name="1">
@@ -446,42 +446,53 @@
         judgeFlag: '',
       };
     },
+    props:{
+      applyId:{
+        default:'',
+        required:true,
+        type:String
+      }
+    },
     mounted() {
       this.mountedInf();
     },
     methods: {
       mountedInf() {
         //一进入页面就发送请求
-        this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-        if (this.judgeFlag.flag == '01') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
-        } else if (this.judgeFlag.flag == '02') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-        } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
-        }
-        // else if (this.judgeFlag.flag == '04') {
-        //     this.taskInWaitting = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
+        console.log(this.applyId)
+        // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+        // if (this.judgeFlag.flag == '01') {
+        //   this.taskInWaitting = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
+        // } else if (this.judgeFlag.flag == '02') {
+        //   this.taskInWaitting = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
+        // } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
+        //   this.taskInWaitting = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
         // }
-        else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
-        }
-        // else if (this.judgeFlag.flag == '06') {
-        //     this.taskInWaitting = JSON.parse(localStorage.getItem("RManagertaskInWaitting")) //复议经理
+        // // else if (this.judgeFlag.flag == '04') {
+        // //     this.taskInWaitting = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
+        // // }
+        // else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
+        //   this.taskInWaitting = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
         // }
-        else if (this.judgeFlag.flag == '14') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //任务管理-审批任务
-        } else if (this.judgeFlag.flag == '15') {
-          this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //任务管理-质检任务
-        }
-        this.request(this.taskInWaitting.applyId);
+        // // else if (this.judgeFlag.flag == '06') {
+        // //     this.taskInWaitting = JSON.parse(localStorage.getItem("RManagertaskInWaitting")) //复议经理
+        // // }
+        // else if (this.judgeFlag.flag == '14') {
+        //   this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //任务管理-审批任务
+        // } else if (this.judgeFlag.flag == '15') {
+        //   this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //任务管理-质检任务
+        // }
+        // this.request(this.taskInWaitting.applyId);
+        this.request();
+        
       },
       handleChange() {
 
       },
       request(query) {
         this.get("/credit/fieldReference", {
-          applyId: query
+          // applyId: query
+          applyId:this.applyId
         }).then(res => {
           if (res.statusCode == 200) {
             this.datas = res.data;
@@ -598,7 +609,7 @@
 
 
 
-  ul.headul li.reason {
+  /* ul.headul li.reason {
     height: 75px;
   }
 
@@ -620,6 +631,6 @@
     overflow: auto;
     padding-left: 10px;
     border: 1px solid #d8dce5;
-  }
+  } */
 
 </style>

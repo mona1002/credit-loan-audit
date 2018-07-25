@@ -527,7 +527,7 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             // 校验是否重复
-                if ((this.updateInf.drawSheetType == '01' && this.proficiencyCount > 0) || (this.updateInf.drawSheetType ==
+            if ((this.updateInf.drawSheetType == '01' && this.proficiencyCount > 0) || (this.updateInf.drawSheetType ==
                 '02' && this.newOneCount > 0)) { //熟悉
               this.$message.error(' 抽单类型设置重复！');
               return
