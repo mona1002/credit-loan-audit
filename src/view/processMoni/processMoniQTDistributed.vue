@@ -391,9 +391,11 @@
         })
       }, // 查询按钮
       getByKey() {
+        this.queryParam.pageNum = 1;
         this.getProcessMonitorList(this.queryParam);
       }, // 重置按钮 
       reset() {
+        this.queryParam.pageNum = 1;
         this.custName_la = '';
         this.certCode = '';
         this.applySubNo = '';
