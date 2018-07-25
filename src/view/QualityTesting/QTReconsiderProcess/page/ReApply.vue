@@ -222,6 +222,7 @@
               type: 'success'
             });
             this.del();
+            this.delQTDetail();
           } else {
             this.$message.error(res.msg);
           }
@@ -235,6 +236,18 @@
       del() {
         this.$store.dispatch('delVisitedViews', {
           name: '复议申请'
+        }).then((views) => {
+          const latestView = views.slice(-1)[0]
+          if (latestView) {
+            this.$router.push(latestView.StatefullPath);
+          } else {
+            this.$router.push('/')
+          }
+        })
+      },
+      delQTDetail() {
+        this.$store.dispatch('delVisitedViews', {
+          name: '质检详情'
         }).then((views) => {
           const latestView = views.slice(-1)[0]
           if (latestView) {
