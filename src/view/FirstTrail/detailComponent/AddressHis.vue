@@ -184,7 +184,7 @@
             <div class=" CreditForm_div_border clearFix">
               <li class="text_area_li clearFloat ">
                 <label class="label_width_166">借款人爱好和品行：</label>
-                <span class="text_area_span text_area_span_minus170"> {{mobileData.hobbyandBehave}}</span>
+                <span class="text_area_span text_area_span_minus170 preWrap"> {{mobileData.hobbyandBehave}}</span>
               </li>
             </div>
             <li class="text_area_li clearFloat margin_top_5">
