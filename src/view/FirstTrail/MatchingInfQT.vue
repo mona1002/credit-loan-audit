@@ -158,7 +158,7 @@
       <div class="AudioVisual_wrap_compare_right ">
         <!-- 搜索框 -->
         <p class="customName">客户名称：
-          <el-input v-model="AlertSearch" :disabled="true" style="display:inline;"></el-input>
+          <el-input v-model="AlertSearch" :disabled="true"></el-input>
           <el-button type="primary" @click="compareProps" class="AudioVisualLeft_compareIcon">
             <i class="el-icon-search" style="fontSize:16px"></i>
           </el-button>
