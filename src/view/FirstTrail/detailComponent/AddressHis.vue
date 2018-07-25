@@ -189,7 +189,7 @@
             </div>
             <li class="text_area_li clearFloat margin_top_5">
               <label class="label_width_166">调查结果：</label>
-              <span class="text_area_span text_area_span_minus170 preWrap"> {{mobileData.conclusion}}</span>
+              <span class="text_area_span text_area_span_minus170 pre_wrap"> {{mobileData.conclusion}}</span>
             </li>
           </ul>
         </div>
