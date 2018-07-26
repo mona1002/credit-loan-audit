@@ -16,7 +16,7 @@
         </div>
         <!-- <div class="content">
           <RiskPoint v-if="ind==0" :applySubNo='localInf.applySubNo'>风控指引</RiskPoint>
-          <RiskDecision v-if="ind==1" :applyId='localInf.applyId'>复杂网络图谱</RiskDecision>
+          <complexPic v-if="ind==1"  :applySubNo='localInf.applySubNo'>复杂网络图谱</complexPic>
           <OcrMessage v-if="ind==2" :applySubNo='localInf.applySubNo'>OCR信息</OcrMessage>
           <portrait v-if="ind==3" :applySubNo='localInf.applySubNo'>同盾设备画像</portrait>
           <RiskDecision v-if="ind==4" :applyId='localInf.applyId'>网查征信报告</RiskDecision>
@@ -39,6 +39,7 @@
   import portrait from './PneCtrl/portrait.vue'
   import RiskPoint from './PneCtrl/RiskPoint.vue'
   import OcrMessage from './PneCtrl/OcrMessage.vue'
+  import complexPic from './PneCtrl/complexPic.vue'
 
 
   export default {
@@ -72,7 +73,8 @@
           .flag == '10' || this.judgeFlag.flag == '11' || this.judgeFlag.flag == '13') {
           this.localInf = JSON.parse(localStorage.getItem("FGQTTaskWait")) //质检 专员、主管、初终审本人任务列表、初终审主管、复议任务列表（首次） ---区域无社保公积金按钮、合规经理任务列表
         }
-        this.localInf.applySubNo = 'PHDX6409598026121216';
+        // this.localInf.applySubNo = 'PHDX6409598026121216';
+        //  this.localInf.applySubNo = 'test999999'
         // this.localInf.applyId = '9e56e245-bd30-4a51-97e9-c255ea7171b6';
 
       }
@@ -88,6 +90,7 @@
       portrait,
       RiskPoint,
       OcrMessage,
+      complexPic,
     }
 
   }

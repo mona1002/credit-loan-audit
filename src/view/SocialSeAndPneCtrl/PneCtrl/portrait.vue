@@ -430,9 +430,6 @@
             // applySubNo : 'PHDX6409598026121217'
         }).then(res => {
           console.log(res)
-         
-
-
           if (res) {
             if (!res.data) return;
             var result = $.parseJSON(res.data);

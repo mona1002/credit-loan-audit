@@ -61,7 +61,7 @@
               <td> 1</td>
               <td> 申请单表是否符合要求</td>
               <td>
-                <el-radio-group :readonly='material' v-model="regularInfo.isForm" @change="regularInfo.isForm=='1'?regularInfo.isFormRemark='':regularInfo.isFormRemark">
+                <el-radio-group :disabled='material' v-model="regularInfo.isForm" @change="regularInfo.isForm=='1'?regularInfo.isFormRemark='':regularInfo.isFormRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
@@ -77,7 +77,7 @@
               <td> 2</td>
               <td>身份证证明是否符合要求</td>
               <td>
-                <el-radio-group :readonly='material' v-model="regularInfo.isIdcard" @change="regularInfo.isIdcard=='1'?regularInfo.isIdcardRemark='':regularInfo.isIdcardRemark">
+                <el-radio-group :disabled='material' v-model="regularInfo.isIdcard" @change="regularInfo.isIdcard=='1'?regularInfo.isIdcardRemark='':regularInfo.isIdcardRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
@@ -93,7 +93,7 @@
               <td> 3</td>
               <td>收入证明是否符合要求</td>
               <td>
-                <el-radio-group :readonly='material' v-model="regularInfo.isIncome" @change="regularInfo.isIncome=='1'?regularInfo.isIncomeRemark='':regularInfo.isIncomeRemark">
+                <el-radio-group :disabled='material' v-model="regularInfo.isIncome" @change="regularInfo.isIncome=='1'?regularInfo.isIncomeRemark='':regularInfo.isIncomeRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
@@ -109,7 +109,7 @@
               <td> 4</td>
               <td>工作证明是否符合要求</td>
               <td>
-                <el-radio-group :readonly='material' v-model="regularInfo.isWork" @change="regularInfo.isWork=='1'?regularInfo.isWorkRemark='':regularInfo.isWorkRemark">
+                <el-radio-group :disabled='material' v-model="regularInfo.isWork" @change="regularInfo.isWork=='1'?regularInfo.isWorkRemark='':regularInfo.isWorkRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
@@ -125,7 +125,7 @@
               <td> 5</td>
               <td>房产资料是否符合要求</td>
               <td>
-                <el-radio-group :readonly='material' v-model="regularInfo.isEstate" @change="regularInfo.isEstate=='1'?regularInfo.isEstateRemark='':regularInfo.isEstateRemark">
+                <el-radio-group :disabled='material' v-model="regularInfo.isEstate" @change="regularInfo.isEstate=='1'?regularInfo.isEstateRemark='':regularInfo.isEstateRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
@@ -141,7 +141,7 @@
               <td> 6</td>
               <td>居住证明是否符合要求</td>
               <td>
-                <el-radio-group :readonly='material' v-model="regularInfo.isLive" @change="regularInfo.isLive=='1'?regularInfo.isLiveRemark='':regularInfo.isLiveRemark">
+                <el-radio-group :disabled='material' v-model="regularInfo.isLive" @change="regularInfo.isLive=='1'?regularInfo.isLiveRemark='':regularInfo.isLiveRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
@@ -157,7 +157,7 @@
               <td> 7</td>
               <td> 经营证明是否符合要求</td>
               <td>
-                <el-radio-group :readonly='material' v-model="regularInfo.isBusiness" @change="regularInfo.isBusiness=='1'?regularInfo.isBusinessRemark='':regularInfo.isBusinessRemark">
+                <el-radio-group :disabled='material' v-model="regularInfo.isBusiness" @change="regularInfo.isBusiness=='1'?regularInfo.isBusinessRemark='':regularInfo.isBusinessRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
@@ -173,7 +173,7 @@
               <td> 8</td>
               <td>信用报告是否符合要求</td>
               <td>
-                <el-radio-group :readonly='material' v-model="regularInfo.isCredit" @change="regularInfo.isCredit=='1'?regularInfo.isCreditRemark='':regularInfo.isCreditRemark">
+                <el-radio-group :disabled='material' v-model="regularInfo.isCredit" @change="regularInfo.isCredit=='1'?regularInfo.isCreditRemark='':regularInfo.isCreditRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
@@ -189,7 +189,7 @@
               <td> 9</td>
               <td> 客户流水是否符合要求</td>
               <td>
-                <el-radio-group :readonly='material' v-model="regularInfo.isCustomerflow" @change="regularInfo.isCustomerflow=='1'?regularInfo.isCustomerflowRemark='':regularInfo.isCustomerflowRemark">
+                <el-radio-group :disabled='material' v-model="regularInfo.isCustomerflow" @change="regularInfo.isCustomerflow=='1'?regularInfo.isCustomerflowRemark='':regularInfo.isCustomerflowRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
@@ -205,7 +205,7 @@
               <td> 10</td>
               <td> 客户其他资料是否符合要求</td>
               <td>
-                <el-radio-group :readonly='material' v-model="regularInfo.isCustomerother" @change="regularInfo.isCustomerother=='1'?regularInfo.isCustomerotherRemark='':regularInfo.isCustomerotherRemark">
+                <el-radio-group :disabled='material' v-model="regularInfo.isCustomerother" @change="regularInfo.isCustomerother=='1'?regularInfo.isCustomerotherRemark='':regularInfo.isCustomerotherRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
@@ -221,7 +221,7 @@
               <td> 11 </td>
               <td> 负债计算是否正确</td>
               <td>
-                <el-radio-group :readonly='material' v-model="regularInfo.isLiabilities" @change="regularInfo.isLiabilities=='1'?regularInfo.isLiabilitiesRemark='':regularInfo.isLiabilitiesRemark">
+                <el-radio-group :disabled='material' v-model="regularInfo.isLiabilities" @change="regularInfo.isLiabilities=='1'?regularInfo.isLiabilitiesRemark='':regularInfo.isLiabilitiesRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
@@ -237,7 +237,7 @@
               <td> 12 </td>
               <td> 流水计算是否正确</td>
               <td>
-                <el-radio-group :readonly='material' v-model="regularInfo.isFlow" @change="regularInfo.isFlow=='1'?regularInfo.isFlowRemark='':regularInfo.isFlowRemark">
+                <el-radio-group :disabled='material' v-model="regularInfo.isFlow" @change="regularInfo.isFlow=='1'?regularInfo.isFlowRemark='':regularInfo.isFlowRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
@@ -253,7 +253,7 @@
               <td> 13</td>
               <td> 征信录入是否正确</td>
               <td>
-                <el-radio-group :readonly='material' v-model="regularInfo.isReference" @change="regularInfo.isReference=='1'?regularInfo.isReferenceRemark='':regularInfo.isReferenceRemark">
+                <el-radio-group :disabled='material' v-model="regularInfo.isReference" @change="regularInfo.isReference=='1'?regularInfo.isReferenceRemark='':regularInfo.isReferenceRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
@@ -289,7 +289,7 @@
               <td> 1</td>
               <td> 客户在人法网是否有被执行信息</td>
               <td>
-                <el-radio-group :readonly='InfoInquire' v-model="regularInfo.wbeexEcuted" @change="regularInfo.wbeexEcuted=='0'?regularInfo.wbeexEcutedtxt='':regularInfo.wbeexEcutedtxt">
+                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wbeexEcuted" @change="regularInfo.wbeexEcuted=='0'?regularInfo.wbeexEcutedtxt='':regularInfo.wbeexEcutedtxt">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
@@ -305,7 +305,7 @@
               <td> 2</td>
               <td> 客户在失信网是否有失信记录</td>
               <td>
-                <el-radio-group :readonly='InfoInquire' v-model="regularInfo.wnetEcutedBrea" @change="regularInfo.wnetEcutedBrea=='0'?regularInfo.wnetEcutedBreatxt='':regularInfo.wnetEcutedBreatxt">
+                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetEcutedBrea" @change="regularInfo.wnetEcutedBrea=='0'?regularInfo.wnetEcutedBreatxt='':regularInfo.wnetEcutedBreatxt">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
@@ -321,7 +321,7 @@
               <td> 3</td>
               <td> 网上搜索借款人的手机是否有异常</td>
               <td>
-                <el-radio-group :readonly='InfoInquire' v-model="regularInfo.wnetPhone" @change="regularInfo.wnetPhone=='0'?regularInfo.wnetPhonetxt='':regularInfo.wnetPhonetxt">
+                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetPhone" @change="regularInfo.wnetPhone=='0'?regularInfo.wnetPhonetxt='':regularInfo.wnetPhonetxt">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
@@ -337,7 +337,7 @@
               <td> 4</td>
               <td> 网上搜索借款人现居住地址和房产地址是否异常</td>
               <td>
-                <el-radio-group :readonly='InfoInquire' v-model="regularInfo.wnetAddrandEstate" @change="regularInfo.wnetAddrandEstate=='0'?regularInfo.wnetAddrandEstatetxt='':regularInfo.wnetAddrandEstatetxt">
+                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetAddrandEstate" @change="regularInfo.wnetAddrandEstate=='0'?regularInfo.wnetAddrandEstatetxt='':regularInfo.wnetAddrandEstatetxt">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
@@ -353,7 +353,7 @@
               <td> 5</td>
               <td> 当地工商网查询企业基本信息中是否有登记</td>
               <td>
-                <el-radio-group :readonly='InfoInquire' v-model="regularInfo.wnetCompany" @change="regularInfo.wnetCompany=='1'?regularInfo.wnetCompanytxt='':regularInfo.wnetCompanytxt">
+                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetCompany" @change="regularInfo.wnetCompany=='1'?regularInfo.wnetCompanytxt='':regularInfo.wnetCompanytxt">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
@@ -369,7 +369,7 @@
               <td> 6</td>
               <td> 客户工作单位在全国组织代码查询中是否存在</td>
               <td>
-                <el-radio-group :readonly='InfoInquire' v-model="regularInfo.wnetAddrstate" @change="regularInfo.wnetAddrstate=='1'?regularInfo.wnetAddrstatetxt='':regularInfo.wnetAddrstatetxt">
+                <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetAddrstate" @change="regularInfo.wnetAddrstate=='1'?regularInfo.wnetAddrstatetxt='':regularInfo.wnetAddrstatetxt">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
@@ -416,7 +416,7 @@
               <td> 1</td>
               <td> 内部匹配是否进行排查</td>
               <td>
-                <el-radio-group :readonly='matching' v-model="regularInfo.isInmatch" @change="regularInfo.isInmatch=='1'?regularInfo.isInmatchRemark='':regularInfo.isInmatchRemark">
+                <el-radio-group :disabled='matching' v-model="regularInfo.isInmatch" @change="regularInfo.isInmatch=='1'?regularInfo.isInmatchRemark='':regularInfo.isInmatchRemark">
                   <el-radio label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
@@ -459,7 +459,7 @@
                 <template slot-scope="scope">
                   <div slot="reference" class="name-wrapper">
                     <b class="required_Red"> * </b>
-                    <el-radio-group :readonly='PhoneCredit' v-model="scope.row.insResult" @change="scope.row.insResult=='00'?scope.row.remark='':scope.row.remark">
+                    <el-radio-group :disabled='PhoneCredit' v-model="scope.row.insResult" @change="scope.row.insResult=='00'?scope.row.remark='':scope.row.remark">
                       <el-radio label="00">正常</el-radio>
                       <el-radio label="01">异常</el-radio>
                     </el-radio-group>
@@ -507,7 +507,7 @@
                 <!-- 质检结果 -->
                 <td>
                   <b class="required_Red"> * </b>
-                  <el-radio-group :readonly='PhoneCredit' v-model="insTelCustInfo.insResult" @change="insTelCustInfo.insResult=='00'?insTelCustInfo.remark='':insTelCustInfo.remark">
+                  <el-radio-group :disabled='PhoneCredit' v-model="insTelCustInfo.insResult" @change="insTelCustInfo.insResult=='00'?insTelCustInfo.remark='':insTelCustInfo.remark">
                     <el-radio label="00">正常</el-radio>
                     <el-radio label="01">异常</el-radio>
                   </el-radio-group>
@@ -562,7 +562,7 @@
                 <template slot-scope="scope">
                   <div slot="reference" class="name-wrapper">
                     <b class="required_Red"> * </b>
-                    <el-radio-group :readonly='PhoneCredit' v-model="scope.row.insResult" @change="scope.row.insResult=='00'?scope.row.remark='':scope.row.remark">
+                    <el-radio-group :disabled='PhoneCredit' v-model="scope.row.insResult" @change="scope.row.insResult=='00'?scope.row.remark='':scope.row.remark">
                       <el-radio label="00">正常</el-radio>
                       <el-radio label="01">异常</el-radio>
                     </el-radio-group>
@@ -687,10 +687,10 @@
         </template>
         <div class="result_QT height_auto">
           <el-table :data="insConclusion" style="width: 100%" highlight-current-row @current-change='QTtableVal' border min-width='1366px'>
-            <el-table-column label="质检结果" align="center" width="240">
+            <el-table-column label="质检结果" align="center" width="260">
               <template slot-scope="scope">
                 <i class="required_Red"> * </i>
-                <el-select :readonly='QTConclution' v-model="scope.row.checkResult" placeholder="请选择">
+                <el-select :disabled='QTConclution' v-model="scope.row.checkResult" placeholder="请选择">
                   <el-option v-for="item in QTresult" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -699,7 +699,7 @@
             <el-table-column label="差错类型" align="center" width="230">
               <template slot-scope="scope">
                 <b class="hint_word" v-show="scope.row.errorType&&scope.row.errorType.length>=50"> 输入长度不能超过50</b>
-                <el-tooltip class="item" effect="dark" :content="scope.row.errorType" :readonly="!scope.row.errorType" placement="top-start">
+                <el-tooltip class="item" effect="dark" :content="scope.row.errorType" :disabled="!scope.row.errorType" placement="top-start">
                   <el-input :readonly='QTConclution' v-model.trim="scope.row.errorType" :maxlength='fiftyWords' placeholder="请输入内容"></el-input>
                 </el-tooltip>
               </template>
@@ -707,7 +707,7 @@
             <el-table-column label="差错描述" align="center" width="230">
               <template slot-scope="scope">
                 <b class="hint_word" v-show="scope.row.errorDescribe&& scope.row.errorDescribe.length>=300"> 输入长度不能超过300</b>
-                <el-tooltip class="item" effect="dark" :content="scope.row.errorDescribe" :readonly="!scope.row.errorDescribe" placement="top-start">
+                <el-tooltip class="item" effect="dark" :content="scope.row.errorDescribe" :disabled="!scope.row.errorDescribe" placement="top-start">
                   <el-input :readonly='QTConclution' v-model.trim="scope.row.errorDescribe" :maxlength='arealength' placeholder="请输入内容"></el-input>
                 </el-tooltip>
               </template>
@@ -715,7 +715,7 @@
             <el-table-column label="备注" align="center" min-width="200">
               <template slot-scope="scope">
                 <b class="hint_word" v-show="scope.row.remark&&scope.row.remark.length>=300"> 输入长度不能超过300</b>
-                <el-tooltip class="item" effect="dark" :content="scope.row.remark" :readonly="!scope.row.remark" placement="top-start">
+                <el-tooltip class="item" effect="dark" :content="scope.row.remark" :disabled="!scope.row.remark" placement="top-start">
                   <el-input class="margin_top_15" type='textarea' :readonly='QTConclution' v-model.trim="scope.row.remark" :rows="2" resize="none"
                     :maxlength='arealength' placeholder="请输入内容">
                   </el-input>
