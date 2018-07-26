@@ -316,7 +316,6 @@
                 <span>{{deviceInfo.upTime}}</span>
               </li>
               <li>
-                <!-- ======================================================待确认字段名======================================== -->
                 <label class="label_width_195">gpd纬度：</label>
                 <span>{{deviceInfo.gpsLocation.latitude}}</span>
               </li>

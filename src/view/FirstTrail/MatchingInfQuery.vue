@@ -4,12 +4,12 @@
     <!-- 进件人详情 -->
     <p class="PerDtl">
       <span> 借款人：{{custName}}</span>
-      <span> 进件编号: {{customInf.applyMainNo}}</span>
+      <span> 进件编号：{{customInf.applyMainNo}}</span>
       <!-- <span> 证件号码: {{customInf.accepCusBasicInfo.certCode}}</span> -->
-      <span> 证件号码: {{certCode}}</span>
+      <span> 证件号码：{{certCode}}</span>
       <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
-      <span> 进件机构: {{customInf.appOrgName}}</span>
-      <span> 门店成立时间: {{customInf.appOrgRegisterDate}}</span>
+      <span> 进件机构：{{customInf.appOrgName}}</span>
+      <span> 门店成立时间：{{customInf.appOrgRegisterDate}}</span>
       <span> 业务员入职时间： {{customInf.salPerEmployDate}}</span>
       <span>{{customInf.adminIntroduce}}</span>
     </p>
