@@ -556,7 +556,10 @@
               </el-table-column>
               <el-table-column prop="checkStageTxt" label="最新调查阶段" align="center" width="180">
               </el-table-column>
-              <el-table-column prop="conclusion" label="调查结论" align="center" width="180">
+              <el-table-column label="调查结论" align="center" width="180">
+                <template slot-scope="scope">
+                  <span class="pre_wrap">{{ scope.row.conclusion}}</span>
+                </template>
               </el-table-column>
               <el-table-column label="质检结果" align="center" width="180">
                 <template slot-scope="scope">
@@ -595,7 +598,10 @@
             </el-table-column>
             <el-table-column prop="reconDate" width="180" label="复议申请日期">
             </el-table-column>
-            <el-table-column prop="reviewRemark" label="复议说明" min-width="580">
+            <el-table-column label="复议说明" min-width="580">
+              <template slot-scope="scope">
+                <span class="pre_wrap">{{ scope.row.reviewRemark }}</span>
+              </template>
             </el-table-column>
           </el-table>
         </div>
@@ -614,7 +620,10 @@
             </el-table-column>
             <el-table-column prop="reconDate" width="180" label="发起复议时间">
             </el-table-column>
-            <el-table-column prop="reviewRemark" label="复议说明" min-width="580">
+            <el-table-column label="复议说明" min-width="580">
+              <template slot-scope="scope">
+                <span class="pre_wrap">{{ scope.row.reviewRemark }}</span>
+              </template>
             </el-table-column>
           </el-table>
         </div>
@@ -637,7 +646,10 @@
             </el-table-column>
             <el-table-column prop="approverDate" width="180" label="审批时间">
             </el-table-column>
-            <el-table-column prop="reviewRemark" label="复议说明" min-width="580">
+            <el-table-column label="复议说明" min-width="580">
+              <template slot-scope="scope">
+                <span class="pre_wrap">{{ scope.row.reviewRemark }}</span>
+              </template>
             </el-table-column>
           </el-table>
         </div>
@@ -656,7 +668,10 @@
             </el-table-column>
             <el-table-column prop="reconDate" width="180" label="发起复议时间">
             </el-table-column>
-            <el-table-column prop="reviewRemark" label="复议说明" min-width="580">
+            <el-table-column label="复议说明" min-width="580">
+              <template slot-scope="scope">
+                <span class="pre_wrap">{{ scope.row.reviewRemark }}</span>
+              </template>
             </el-table-column>
           </el-table>
         </div>
