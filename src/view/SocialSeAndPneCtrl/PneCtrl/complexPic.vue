@@ -5,13 +5,6 @@
 <img id="complexPic"  width="40%" onclick="changeSize();" ondblclick="resize();"
      style="cursor:url(${pageContext.request.contextPath}/style/images/blue_face/blueface.ico)"  title="单击放大 ，双击还原"/>
 </div>  -->
-    <el-input class='margin_top_15' type='textarea' :readonly='material' v-if="a=='0'" v-model.trim="cc" :rows="2" resize="none"
-      :maxlength='100' placeholder="请输入内容">
-    </el-input>
-    <el-radio-group :disabled='material' v-model="ccd">
-      <el-radio label="1">是</el-radio>
-      <el-radio label="0">否</el-radio>
-    </el-radio-group>
     <iframe src='' id="iframe_pic" frameborder='0' style="width:100%;height:99%"></iframe>
     <!-- <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
@@ -56,7 +49,7 @@
     },
     methods: {
       getInf() {
-        this.post(baseurl.DataUrl + '/thirdrisk/ocrMessageAction!getComplexPicUrl.action', {
+        this.post(baseurl.DataUrl + '/thirdrisk/ocrMessageAction!notSession_getComplexPicUrl.action', {
           applySubNo: this.applySubNo
           //   applySubNo : 'PHDX6409598026121216'
         }).then(res => {

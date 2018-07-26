@@ -1,204 +1,128 @@
 <template>
   <!-- 运营商报告 -->
-  <div class="SocialSecurity ">
+  <div class="SocialSecurity carrierReport">
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">用户申请表检测</span>
         </template>
-        <div class="checkedInf checkedInf_li_width_four clearFix">
-          <ul>
-            <div class=" CreditForm_div_border clearFix">
-              <li>
-                <label class="label_width_195">姓名：</label>
-                <span>{{fundReport.name}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">身份证号：</label>
-                <span>{{fundReport.idcard}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">用户填写姓名：</label>
-                <span>{{fundReport.user_name}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">用户填写身份证号：</label>
-                <span>{{fundReport.user_idcard}}</span>
-              </li>
-            </div>
-            <div class=" CreditForm_div_border clearFix">
-              <li>
-                <label class="label_width_195">用户填写手机号：</label>
-                <span>{{fundReport.user_phone}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">姓名是否一致：</label>
-                <span>{{fundReport.name_match}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">身份证是否一致：</label>
-                <span>{{fundReport.idcard_match}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">预估月收入[元]：</label>
-                <span>{{fundReport.monthly_income}}</span>
-              </li>
-            </div>
-            <div class=" CreditForm_div_border clearFix">
-              <li>
-                <label class="label_width_195">公积金账号：</label>
-                <span>{{fundReport.customer_id}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">机构类型：</label>
-                <span>{{fundReport.organization_type}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">账户状态：</label>
-                <span>{{fundReport.status}}</span>
-              </li>
-            </div>
-            <div class=" CreditForm_div_border clearFix">
-              <li>
-                <label class="label_width_195">当前缴存单位：</label>
-                <span>{{fundReport.company}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">缴存单位规模：</label>
-                <span>{{fundReport.corp_scale}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">缴存单位性质：</label>
-                <span>{{fundReport.corp_type}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">当前缴存比例(%)：</label>
-                <span>{{fundReport.deposit_rate}}</span>
-              </li>
-            </div>
-            <div class=" CreditForm_div_border clearFix">
-              <li>
-                <label class="label_width_195">当前月缴存金额[元]：</label>
-                <span>{{fundReport.deposit_amount}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">当前账户余额[元]：</label>
-                <span>{{fundReport.balance}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">当前公司连续缴存月份(预估)：</label>
-                <span>{{fundReport.current_corp_continuous_deposit_month}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">最近一次缴存时间：</label>
-                <span>{{fundReport.last_record_date}}</span>
-              </li>
-            </div>
-            <div>
-              <li>
-                <label class="label_width_195">最长连续缴存月份：</label>
-                <span>{{fundReport.continuous_deposit_month}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">最近连续缴存月份：</label>
-                <span>{{fundReport.last_deposit_month}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">公积金贷款笔数：</label>
-                <span>{{fundReport.loan_count}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">公积金贷款月还款额[元]：</label>
-                <span>{{fundReport.loan_repay_amount}}</span>
-              </li>
-            </div>
-          </ul>
-        </div>
+        <table id="t_1" width='100%'>
+          <tbody>
+            <tr>
+              <td class="text_align_right" style="width:130px;">姓名：</td>
+              <td id="name"></td>
+            </tr>
+            <tr>
+              <td class="text_align_right">身份证：</td>
+              <td id="id_card"></td>
+            </tr>
+            <tr>
+              <td class="text_align_right">手机号：</td>
+              <td id="cell_phone"></td>
+            </tr>
+            <tr>
+              <td class="text_align_right">居住地址：</td>
+              <td id="home_addr"></td>
+            </tr>
+            <tr>
+              <td class="text_align_right">家庭电话：</td>
+              <td id="home_phone"></td>
+            </tr>
+            <tr>
+              <td class="text_align_right">联系人：</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="text_align_right">京东账号：</td>
+              <td id="jingdong"></td>
+            </tr>
+            <tr>
+              <td class="text_align_right">淘宝账号：</td>
+              <td id="taobao"></td>
+            </tr>
+          </tbody>
+        </table>
       </el-collapse-item>
       <el-collapse-item name="2">
         <template slot="title">
           <i class="collapse_title_icon"></i>
-          <span class="collapse_title_text">账户信息</span>
+          <span class="collapse_title_text">用户信息表检测</span>
         </template>
-        <div class="checkedInf checkedInf_li_width_four clearFix">
-          <ul>
-            <div class=" CreditForm_div_border clearFix">
-              <li>
-                <label class="label_width_195">账户ID：</label>
-                <span>{{fundRawReport.id}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">客户号：</label>
-                <span>{{fundRawReport.customer}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">姓名：</label>
-                <span>{{fundRawReport.name}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">身份证号：</label>
-                <span>{{fundRawReport.idcard}}</span>
-              </li>
-            </div>
-            <div class=" CreditForm_div_border clearFix">
-              <li>
-                <label class="label_width_195">当前账户状态：</label>
-                <span>{{fundRawReport.status}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">当前账户余额[元]：</label>
-                <span>{{fundRawReport.balance}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">最近一次缴存日期：</label>
-                <span>{{fundRawReport.last_record_date}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">当前缴存公司名称：</label>
-                <span>{{fundRawReport.company}}</span>
-              </li>
-            </div>
-            <div class=" CreditForm_div_border clearFix">
-              <li>
-                <label class="label_width_195">月缴存金额[元]：</label>
-                <span>{{fundRawReport.deposit_amount}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">月缴存基数[元]：</label>
-                <span>{{fundRawReport.deposit_base}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">公司缴存比例(%)：</label>
-                <span>{{fundRawReport.company_rate}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">个人缴存比例(%)：</label>
-                <span>{{fundRawReport.person_rate}}</span>
-              </li>
-            </div>
-            <div>
-              <li>
-                <label class="label_width_195">房补缴存金额[元]：</label>
-                <span>{{fundRawReport.housing_supplement_base}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">房补余额[元]：</label>
-                <span>{{fundRawReport.housing_supplement_balance}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">开户日期：</label>
-                <span>{{fundRawReport.init_date}}</span>
-              </li>
-              <li>
-                <label class="label_width_195">一次性补贴余额[元]：</label>
-                <span>{{fundRawReport.once_balance}}</span>
-              </li>
-            </div>
-          </ul>
-        </div>
+        <h6 class="sort">联系人数据</h6>
+        <table id="t_2_1" width='100%'>
+          <tbody>
+            <tr>
+              <td class="text_align_center" style="width:130px;" rowspan="9">用户查询信息</td>
+              <td style="width:220px">查询过该用户的相关企业数量</td>
+              <td id="searched_org_cnt"></td>
+            </tr>
+            <tr>
+              <td>查询过该用户的相关企业类型</td>
+              <td id="searched_org_type"></td>
+            </tr>
+            <tr>
+              <td>身份证组合过的其他姓名</td>
+              <td id="idcard_with_other_names"></td>
+            </tr>
+            <tr>
+              <td>身份证组合过的其他电话</td>
+              <td id="idcard_with_other_phones"></td>
+            </tr>
+            <tr>
+              <td>电话号码组合过的其他姓名</td>
+              <td id="phone_with_other_names"></td>
+            </tr>
+            <tr>
+              <td>电话号码组合过的其他身份证</td>
+              <td id="phone_with_other_idcards"></td>
+            </tr>
+            <tr>
+              <td>电话号码注册过的相关企业数量</td>
+              <td id="register_org_cnt"></td>
+            </tr>
+            <tr>
+              <td>电话号码注册过的相关企业类型</td>
+              <td id="register_org_type"></td>
+            </tr>
+            <tr>
+              <td>电话号码出现过的公开网站</td>
+              <td id="arised_open_web"></td>
+            </tr>
+          </tbody>
+        </table>
+        <h6 class="sort">黑名单</h6>
+        <table id="t_2_2" width='100%'>
+          <tbody>
+            <tr>
+              <td class="text_align_center" style="width:130px" rowspan="9">黑名单信息</td>
+              <td style="width:220px">用户号码联系黑中介分数</td>
+              <td id="phone_gray_score"></td>
+            </tr>
+            <tr>
+              <td>直接联系人中黑名单人数</td>
+              <td id="contacts_class1_blacklist_cnt"></td>
+            </tr>
+            <tr>
+              <td>间接联系人中黑名单人数</td>
+              <td id="contacts_class2_blacklist_cnt"></td>
+            </tr>
+            <tr>
+              <td>直接联系人人数</td>
+              <td id="contacts_class1_cnt"></td>
+            </tr>
+            <tr>
+              <td>引起间接黑名单人数</td>
+              <td id="contacts_router_cnt"></td>
+            </tr>
+            <tr>
+              <td>直接联系人中引起间接黑名单占比</td>
+              <td id="contacts_router_ratio"></td>
+            </tr>
+          </tbody>
+        </table>
       </el-collapse-item>
-      <el-collapse-item name="3">
+      <!--<el-collapse-item name="3">
         <template slot="title">
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">工作信息</span>
@@ -301,7 +225,7 @@
             </el-table-column>
           </el-table>
         </div>
-      </el-collapse-item>
+      </el-collapse-item> -->
     </el-collapse>
   </div>
 </template>
@@ -312,42 +236,8 @@
     data() {
       return {
         activeNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
-        fundReport: {
-          // name:'',
-          // idcarduser_name:'',
-          // user_idcard:'',
-          // user_phone:'',
-          // name_match:'',
-          // idcard_match:'',
-          // monthly_income:'',
-          // customer_id:'',
-          // organization_type:'',
-          // status:'',
-          // company:'',
-          // corp_scale:'',
-          // corp_type:'',
-          // deposit_rate:'',
-          // deposit_amount:'',
-          // balance:'',
-          // current_corp_continuous_deposit_month:'',
-          // last_record_date:'',
-          // continuous_deposit_month:'',
-          // last_deposit_month:'',
-          // loan_count:'',
-          // loan_repay_amount:'',
-        },
-        fundRawReport: {},
-        insurances: [], //
-        medicareFlow: [],
-        pensionFlow: [],
-        unemploymentFlow: [],
-        injuryFlow: [],
-        maternityFlow: [],
-        consumption: [],
-        companys: [],
-        flows: [],
-        loans: [],
-        loanFlows: []
+        caReport: {},
+
       }
     },
     props: {
@@ -358,136 +248,93 @@
       }
     },
     methods: {
-      // checkInf(getdata, showinfo) {
-      //   for (let key in getdata) {
-      //     getdata[key] ? showinfo[key] = getdata[key] : '';
-      //   }
-      //   // return showinfo
-      // },
       getInf() {
-        this.post(baseurl.DataUrl + '/channel/threeDataAction!notSession_getFundReport.action', {
+        this.post(baseurl.DataUrl + '/channel/threeDataAction!notSession_getCarrReport.action', {
           applySubNo: this.applySubNo
           //   applySubNo : 'PHDX6409598026121216'
         }).then(res => {
-          console.log(res)
           if (!res.success) {
-            this.$message.error("查询数据失败！");
+            $.messager.alert("提示", "查询数据失败！", "error");
             return;
           }
-          if ("" != res.obj.rpt) {
-            var result = $.parseJSON(res.obj.rpt);
-            if (result && result.result && result.result['10059'] && result.result['10059'].bizInfo && result.result[
-                '10059'].bizInfo.data &&
-              result.result['10059'].bizInfo.data.report && result.result['10059'].bizInfo.data.report[0] &&
-              result.result['10059'].bizInfo.data.report[0].data) {
-              this.fundReport = result.result['10059'].bizInfo.data.report[0].data[0];
-              // this.checkInf(result.result['10059'].bizInfo.data.report[0].data[0], this.fundReport)
-            }
-            console.log(1, this.fundReport);
-          }
-          if ("" != res.obj.rawRpt) {
-            var rawResult = $.parseJSON(res.obj.rawRpt);
-            if (rawResult && rawResult.result && rawResult.result['10060'] && rawResult.result['10060'].bizInfo) {
-              this.fundRawReport = rawResult.result['10060'].bizInfo.data;
+          if ('' != res.obj.rpt) {
+            var report = $.parseJSON(res.obj.rpt);
+            if (report && report.result && report.result['10069'] && report.result['10069'].bizInfo) {
+              this.caReport = report.result['10069'].bizInfo.report_data;
             }
           }
-          console.log(2, this.fundRawReport);
-          // ---------------------------
-          if (this.fundReport) {
-            //     this.fen_to_yuan(this.fundReport, ['deposit_amount', 'balance', 'loan_repay_amount', 'monthly_income', '']);
-            //     // $('#div_fund #f_1').form('load', this.fundReport);
-            this.fundReport.companys && this.fundReport.companys.length > 0 ? this.companys = this.fundReport.companys :
-              '';
-            //     if (this.fundReport.companys && this.fundReport.companys.length > 0) {
-            //       $.each(this.fundReport.companys, function (i, eh) {
-            //         this.addRow($('#div_fund #t_2 tbody'), ['name', 'type', 'begin_date', 'end_date'], eh);
-            //       });
-            //     }
-            this.fundReport.flows && this.fundReport.flows.length > 0 ? this.flows = this.fundReport.flows : '';
-            //     if (this.fundReport.flows && this.fundReport.flows.length > 0) {
-            //       //$('#div_fund #d_3').attr('style','height:500px');
-            //       $.each(this.fundReport.flows, function (i, eh) {
-            //         this.fen_to_yuan(eh, ['amount', 'balance']);
-            //         this.addRow($('#div_fund #t_3 tbody'), ['company', 'operation_date', 'operation_type',
-            //           'record_month', 'amount', 'balance'
-            //         ], eh)
-
-            //         /* if(eh.record_month!=""){
-            //         	eh.record_month = eh.record_month.substr(0,4)+'-'+eh.record_month.substr(4);
-            //         }
-            //         this.addRow($('#div_fund #t_3 tbody'),['company','operation_date','operation_type','record_month','amount','balance'],eh); */
-            //       });
-            //     }
-            this.fundReport.loans && this.fundReport.loans.length > 0 ? this.loans = this.fundReport.loans : '';
-            //     if (this.fundReport.loans && this.fundReport.loans.length > 0) {
-            //       $.each(this.fundReport.loans, function (i, eh) {
-            //         this.fen_to_yuan(eh, ['limit', 'balance']);
-            //         this.addRow($('#div_fund #t_4 tbody'), ['contract_no', 'name', 'id_card', 'phone', 'bank', 'status',
-            //           'limit', 'balance', 'period', 'begin_date', 'end_date', 'loan_rate'
-            //         ], eh);
-            //       });
-            //     }
+          console.log(this.caReport)
+          if (!this.caReport) return;
+          //用户申请表检测
+          if (this.caReport.application_check && this.caReport.application_check.length > 0) {
+            var contactNum = 0; //联系人个数
+            $.each(this.caReport.application_check, function (i, eh) {
+              var cps = eh.check_points;
+              var info = '';
+              if (eh.app_point == 'user_name') {
+                $(' #t_1 #name').html(cps.key_value);
+              } else if (eh.app_point == 'id_card') {
+                info += cps.key_value;
+                if (cps.court_blacklist && cps.court_blacklist.arised == true) info += '	在法院黑名单';
+                if (cps.financial_blacklist && cps.financial_blacklist.arised == true) info += '	在金融机构黑名单';
+                info += '	' + cps.gender + ' | ' + cps.age + '	' + cps.province + cps.city + cps.region;
+                $(' #t_1 #id_card').html(info);
+              } else if (eh.app_point == 'cell_phone') {
+                info += cps.website + ' | ' + cps.reliability + '：' + cps.reg_time + '    ' + cps.key_value;
+                if (cps.court_blacklist && cps.court_blacklist.arised == true) info += '	在法院黑名单';
+                if (cps.financial_blacklist && cps.financial_blacklist.arised == true) info += '	在金融机构黑名单';
+                info += '<br><br>' + cps.check_name + '<br><br>' + cps.check_idcard + '<br><br>' + cps.check_ebusiness;
+                $(' #t_1 #cell_phone').html(info);
+              } else if (eh.app_point == 'home_addr') {
+                info += cps.key_value;
+                if (cps.check_addr) info += '<br><br>' + cps.check_addr;
+                if (cps.check_ebusiness) info += '<br><br>' + cps.check_ebusiness;
+                $(' #t_1 #home_addr').html(info);
+              } else if (eh.app_point == 'home_phone') {
+                info += cps.key_value + '	' + cps.check_mobile;
+                $(' #t_1 #home_phone').html(info);
+              } else if (eh.app_point == 'contact') {
+                info += cps.relationship + ' | ' + cps.contact_name + ' | ' + cps.key_value + '	' + cps.check_xiaohao +
+                  '<br><br>' + cps.check_mobile;
+                if (contactNum == 0) $(' #t_1 toboday tr[id="ct_tr"]').remove();
+                $(' #t_1 tobody tr').eq(-2).before('<tr><td>联系人：</td><td>' + info + '</td></tr>');
+                contactNum = contactNum + 1;
+              } else if (eh.app_point == 'jingdong') {
+                info += cps.key_value + '	' + cps.reliability + '		' + cps.reg_time;
+              }
+            });
           }
-          // ---------------------------------
-          if (this.fundRawReport) {
-            //     if (this.fundRawReport.accounts && this.fundRawReport.accounts.length > 0) {
-            //       var formObj = $('#div_fund #div_account form').clone();
-            //       $.each(this.fundRawReport.accounts, function (i, eh) {
-            //         this.fen_to_yuan(eh, ['balance', 'deposit_amount', 'deposit_base', 'housing_supplement_base',
-            //           'housing_supplement_balance', 'once_balance'
-            //         ]);
-            //         formObj.appendTo($('#div_fund #div_account'));
-            //         $('<br>').appendTo($('#div_fund #div_account'));
-            //         // $('#div_fund #div_account form:last').form('load', eh);
-            //       });
-            //       $('#div_fund #div_account form:first').remove();
-            //     }
-            this.fundRawReport.loan_flows && this.fundRawReport.loan_flows.length > 0 ? this.loanFlows = this.fundRawReport
-              .loan_flows : '';
-            //     if (this.fundRawReport.loan_flows && this.fundRawReport.loan_flows.length > 0) {
-            //       $.each(this.fundRawReport.loan_flows, function (i, eh) {
-            //         this.fen_to_yuan(eh, ['repay_principle', 'repay_interest', 'repay_amount', 'principle_balance']);
-            //         this.addRow($('#div_fund #t_5 tbody'), ['account_id', 'contract_no', 'type', 'record_date',
-            //           'record_month', 'repay_principle', 'repay_interest', 'repay_amount', 'principle_balance',
-            //           'deduct_date'
-            //         ], eh);
-            //       });
-            //     }
+          //用户信息检测
+          if (this.caReport.user_info_check) {
+            //联系人数据
+            if (this.caReport.user_info_check.check_search_info) {
+              var sinfo = this.caReport.user_info_check.check_search_info;
+              $(' #t_2_1 #searched_org_cnt').text(sinfo.searched_org_cnt);
+              $(' #t_2_1 #searched_org_type').text(sinfo.searched_org_type.toString());
+              $(' #t_2_1 #idcard_with_other_names').text(sinfo.idcard_with_other_names.toString());
+              $(' #t_2_1 #idcard_with_other_phones').text(sinfo.idcard_with_other_phones.toString());
+              $(' #t_2_1 #phone_with_other_names').text(sinfo.phone_with_other_names.toString());
+              $(' #t_2_1 #phone_with_other_idcards').text(sinfo.phone_with_other_idcards.toString());
+              $(' #t_2_1 #register_org_cnt').text(sinfo.register_org_cnt);
+              $(' #t_2_1 #register_org_type').text(sinfo.register_org_type.toString());
+              $(' #t_2_1 #arised_open_web').text(sinfo.arised_open_web.toString());
+            }
+            //黑名单
+            if (this.caReport.user_info_check.check_black_info) {
+              var binfo = this.caReport.user_info_check.check_black_info;
+              $(' #t_2_2 #phone_gray_score').text(binfo.phone_gray_score + '(分数范围0-100，参考分为10，分数越低关系越紧密)');
+              $(' #t_2_2 #contacts_class1_blacklist_cnt').text(binfo.contacts_class1_blacklist_cnt +
+                '(直接联系人：和被查询号码有通话记录)');
+              $(' #t_2_2 #contacts_class2_blacklist_cnt').text(binfo.contacts_class2_blacklist_cnt +
+                '(间接联系人：和被查询号码的直接联系人有通话记录)');
+              $(' #t_2_2 #contacts_class1_cnt').text(binfo.contacts_class1_cnt + '(直接联系人：和被查询号码有通话记录)');
+              $(' #t_2_2 #contacts_router_cnt').text(binfo.contacts_router_cnt + '(直接联系人有和黑名单用户的通讯记录的号码数量)');
+              // $(' #t_2_2 #contacts_router_ratio').text(formatRatePercentage100(binfo.contacts_router_ratio)+'(直接联系人有和黑名单用户的通讯记录的号码数量在直接联系人数量中的百分比)');
+            }
           }
         });
       },
-      //   addRow($table, rfields, rdata) {
-      //     var row = '<tr>';
-      //     $.each(rfields, (index, val) => {
-      //       if (rdata[val] != undefined) {
-      //         //row += '<td>' + utils.formatMoney(rdata[val]) + '</td>';
-      //         row += '<td>' + rdata[val] + '</td>';
-      //       } else {
-      //         row += '<td>' + '' + '</td>';
-      //       }
-      //     });
-      //     row += '</tr>';
-      //     $table.append(row);
-      //   },
-      //   addTdRowSpan($table, fName, rowSpan, rowData) {
-      //     $.each(rowData, (i, val) => {
-      //       if (i == 0) {
-      //         var row = '<tr><td rowspan="' + rowSpan +
-      //           '" style="text-align: center;vertical-align: middle;width: 15%">' +
-      //           fName + '</td><td>' + rowData[i] + '</td></tr>';
-      //         $table.append(row);
-      //       } else {
-      //         $table.append('<tr><td>' + rowData[i] + '</td></tr>')
-      //       }
-      //     });
-      //   },
-      //   fen_to_yuan(jsonObj, fieldsArr) {
-      //     $.each(fieldsArr, function (i, eh) {
-      //       if (jsonObj[eh]) {
-      //         jsonObj[eh] = utils.formatMoney(parseInt(jsonObj[eh]) / 100);
-      //       }
-      //     });
-      //   }
+
     },
     mounted() {
       this.getInf();
@@ -495,3 +342,13 @@
   }
 
 </script>
+<style scoped>
+  #t_1 td,
+  #t_2_1 td,
+  #t_2_2 td {
+    border: 1px solid #d8dce5;
+    /* border: 1px solid red; */
+    padding-left: 5px;
+  }
+
+</style>

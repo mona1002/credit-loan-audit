@@ -14,14 +14,184 @@
   padding-left: 5px;
 }
 
-.position_relative {
-  position: relative;
-}
-
 .padding_left_235 {
   padding-left: 235px;
 }
 
+/* 外边距 */
+
+.margin_top_5 {
+  margin-top: 5px;
+}
+
+.margin_top_15 {
+  margin-top: 15px;
+}
+
+.margin_top_100 {
+  margin-top: 100px;
+}
+
+.margin_right_5 {
+  margin-right: 5px;
+}
+
+/*查看- label宽度 */
+
+.label_width_210 {
+  width: 210px;
+}
+
+.label_width_200 {
+  width: 200px;
+}
+
+.label_width_195 {
+  width: 195px;
+}
+
+.label_width_190 {
+  width: 190px;
+}
+
+.label_width_166 {
+  width: 166px;
+}
+
+.label_width_145 {
+  width: 145px;
+}
+
+.label_width_130 {
+  width: 130px;
+}
+
+.label_width_110 {
+  width: 110px;
+}
+
+/* 查看-label高度 */
+
+.checkedInf .label_height_48 {
+  height: 48px;
+}
+
+/* 查看-span宽度 */
+
+.checkedInf .text_area_span_minus220 {
+  width: calc(100% - 220px);
+}
+
+.checkedInf .text_area_span_minus170 {
+  width: calc(100% - 170px);
+}
+
+.checkedInf .text_area_span_minus150 {
+  width: calc(100% - 150px);
+}
+
+.checkedInf .text_area_span_minus115 {
+  width: calc(100% - 115px);
+}
+
+/* 查看-li宽度 */
+
+.checkedInf .li_one_row {
+  width: 100%;
+}
+
+.checkedInf .li_triplet_two_rows {
+  width: 66.6%;
+}
+
+.checkedInf .li_half_two_rows {
+  width: 50%;
+}
+
+.checkedInf label {
+  float: left;
+  text-align: right;
+}
+
+/*查看部分 + 查看li宽度比例  */
+
+.checkedInf {
+  height: auto;
+  width: 100%;
+  padding-bottom: 5px;
+}
+
+.checkedInf_li_width_half li {
+  width: 50%;
+}
+
+.checkedInf_li_width_triplet li {
+  width: 33.3%;
+}
+
+.checkedInf_li_width_four li {
+  width: 25%;
+}
+
+.checkedInf li {
+  float: left;
+  min-width: 200px;
+  min-height: 24px;
+  /* height: 25px; */
+  margin-top: 4px;
+  /* border-bottom: 1px solid #ebeef5; */
+  /* border-bottom: 1px solid red; */
+}
+
+.checkedInf .border_bottom_none {
+  border-bottom: none;
+}
+
+/* 编辑-带输入框部分 */
+
+.checkedInf .inputInf {
+  height: 35px;
+  line-height: 35px;
+}
+
+/*查看- 模拟文本域框 */
+
+.checkedInf .text_area_li {
+  height: 75px;
+}
+
+.checkedInf .text_area_li_5rows {
+  height: 120px;
+}
+
+.checkedInf .triplet_textarea_width {
+  width: 66.6%;
+}
+
+.checkedInf .text_area_span {
+  display: inline-block;
+  height: 75px;
+  overflow: auto;
+  padding-left: 10px;
+  border: 1px solid #d8dce5;
+  border-radius: 4px;
+}
+
+/* 定位 */
+
+.position_relative {
+  position: relative;
+}
+
+/* 文本对齐方式 */
+
+.text_align_right {
+  text-align: right;
+}
+.text_align_center{
+  text-align: center;
+
+}
 body .pre_wrap {
   white-space: pre-wrap;
 }
@@ -362,163 +532,6 @@ body .pre_wrap {
 .Abody .headFont {
   font-size: 14px !important;
   font-weight: 800;
-}
-
-/*查看部分  */
-
-.checkedInf {
-  height: auto;
-  width: 100%;
-  padding-bottom: 5px;
-}
-
-.checkedInf_li_width_half li {
-  width: 50%;
-}
-
-.checkedInf_li_width_triplet li {
-  width: 33.3%;
-}
-
-.checkedInf_li_width_four li {
-  width: 25%;
-}
-
-.checkedInf li {
-  float: left;
-  min-width: 200px;
-  min-height: 24px;
-  /* height: 25px; */
-  margin-top: 4px;
-  /* border-bottom: 1px solid #ebeef5; */
-  /* border-bottom: 1px solid red; */
-}
-
-.checkedInf .border_bottom_none {
-  border-bottom: none;
-}
-
-/* 查看-li宽度 */
-
-.checkedInf .li_one_row {
-  width: 100%;
-}
-
-.checkedInf .li_triplet_two_rows {
-  width: 66.6%;
-}
-
-.checkedInf .li_half_two_rows {
-  width: 50%;
-}
-
-.checkedInf label {
-  float: left;
-  text-align: right;
-}
-
-/* 查看-span宽度 */
-
-.checkedInf .text_area_span_minus220 {
-  width: calc(100% - 220px);
-}
-
-.checkedInf .text_area_span_minus170 {
-  width: calc(100% - 170px);
-}
-
-.checkedInf .text_area_span_minus150 {
-  width: calc(100% - 150px);
-}
-
-.checkedInf .text_area_span_minus115 {
-  width: calc(100% - 115px);
-}
-
-/* 模拟文本域框 */
-
-.checkedInf .text_area_li {
-  height: 75px;
-}
-
-.checkedInf .text_area_li_5rows {
-  height: 120px;
-}
-
-.checkedInf .triplet_textarea_width {
-  width: 66.6%;
-}
-
-.checkedInf .text_area_span {
-  display: inline-block;
-  height: 75px;
-  overflow: auto;
-  padding-left: 10px;
-  border: 1px solid #d8dce5;
-  border-radius: 4px;
-}
-
-/* 编辑-带输入框部分 */
-
-.checkedInf .inputInf {
-  height: 35px;
-  line-height: 35px;
-}
-
-.margin_top_5 {
-  margin-top: 5px;
-}
-
-.margin_top_15 {
-  margin-top: 15px;
-}
-
-.margin_top_100 {
-  margin-top: 100px;
-}
-
-.margin_right_5 {
-  margin-right: 5px;
-}
-
-/*查看- label宽度 */
-
-.label_width_210 {
-  width: 210px;
-}
-
-.label_width_200 {
-  width: 200px;
-}
-
-.label_width_195 {
-  width: 195px;
-}
-
-.label_width_190 {
-  width: 190px;
-}
-
-.label_width_166 {
-  width: 166px;
-}
-
-.label_width_145 {
-  width: 145px;
-}
-
-.label_width_130 {
-  width: 130px;
-}
-
-.label_width_110 {
-  width: 110px;
-}
-
-/* 查看-label高度 */
-
-.checkedInf .label_height_48 {
-  height: 48px;
 }
 
 /* 查看-信审表-div设置border */

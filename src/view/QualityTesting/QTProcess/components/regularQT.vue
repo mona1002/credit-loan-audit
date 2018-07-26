@@ -535,7 +535,7 @@
               </el-table-column>
               <el-table-column label="电话录音" align="center" width="100">
                 <template slot-scope="scope">
-                  <span>{{ scope.row.telRecord}}</span>
+                  <!-- <span>{{ scope.row.telRecord}}</span>
                   <audio controls="controls" height="100" width="100">
                     <source :src="URL+scope.row.telRecord" type="audio/mp3" />
                     <source :src="URL+scope.row.telRecord" type="audio/WAV" />
@@ -545,7 +545,7 @@
                     <source :src="URL+scope.row.telRecord" type="audio/ACT" />
                     <source :src="URL+scope.row.telRecord" type="audio/ogg" />
                     <embed height="100" width="100" :src="URL+scope.row.telRecord" /> 您的浏览器不支持该音频播放器格式
-                  </audio>
+                  </audio> -->
                 </template>
               </el-table-column>
               <el-table-column prop="sourceTxt" label="来源" align="center" width="70">
@@ -2319,7 +2319,6 @@
   /* height: 70px; */
 
   .regularQT tr {
-
     min-height: 30px;
   }
 

@@ -424,7 +424,7 @@
     },
     methods: {
       getInf() {
-        this.post(baseurl.DataUrl + '/thirdrisk/tdDevicePortraitAction!findByApplySubNo.action', {
+        this.post(baseurl.DataUrl + '/thirdrisk/tdDevicePortraitAction!notSession_findByApplySubNo.action', {
           applySubNo: this.applySubNo
             // applySubNo : 'PHDX6409598026121217'
         }).then(res => {

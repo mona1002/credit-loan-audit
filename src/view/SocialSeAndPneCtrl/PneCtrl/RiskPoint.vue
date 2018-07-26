@@ -41,7 +41,7 @@
     },
     methods: {
       getInf() {
-        this.post(baseurl.DataUrl + '/thirdrisk/ocrMessageAction!getRiskPoint.action', {
+        this.post(baseurl.DataUrl + '/thirdrisk/ocrMessageAction!notSession_getRiskPoint.action', {
           applySubNo: this.applySubNo
           //   applySubNo : 'PHDX6409598026121216'
         }).then(res => {

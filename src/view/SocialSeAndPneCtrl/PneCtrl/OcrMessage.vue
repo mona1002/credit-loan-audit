@@ -91,7 +91,7 @@
     },
     methods: {
       getInf() {
-        this.post(baseurl.DataUrl + '/thirdrisk/ocrMessageAction!getOcrMessage.action', {
+        this.post(baseurl.DataUrl + '/thirdrisk/ocrMessageAction!notSession_getOcrMessage.action', {
           applySubNo: this.applySubNo
           //   applySubNo: 'test999999'
         }).then(res => {
