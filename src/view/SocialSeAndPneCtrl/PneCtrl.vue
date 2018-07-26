@@ -20,7 +20,7 @@
           <OcrMessage v-if="ind==2" :applySubNo='localInf.applySubNo'>OCR信息</OcrMessage>
           <portrait v-if="ind==3" :applySubNo='localInf.applySubNo'>同盾设备画像</portrait>
           <RiskDecision v-if="ind==4" :applyId='localInf.applyId'>网查征信报告</RiskDecision>
-          <RiskDecision v-if="ind==5" :applyId='localInf.applyId'>运营商报告</RiskDecision>
+          <carrierReport v-if="ind==5" :applySubNo='localInf.applySubNo'>运营商报告</carrierReport>
           <RiskDecision v-if="ind==6" :applyId='localInf.applyId'>储蓄卡报告</RiskDecision>
           <AccumulationFundReport v-if="ind==7" :applySubNo='localInf.applySubNo'>公积金报告</AccumulationFundReport>
           <SocialSecurityReport v-if="ind==8" :applySubNo='localInf.applySubNo'>社保报告</SocialSecurityReport>
@@ -40,6 +40,7 @@
   import RiskPoint from './PneCtrl/RiskPoint.vue'
   import OcrMessage from './PneCtrl/OcrMessage.vue'
   import complexPic from './PneCtrl/complexPic.vue'
+  import carrierReport from './PneCtrl/carrierReport.vue'
 
 
   export default {
@@ -76,7 +77,6 @@
         // this.localInf.applySubNo = 'PHDX6409598026121216';
         //  this.localInf.applySubNo = 'test999999'
         // this.localInf.applyId = '9e56e245-bd30-4a51-97e9-c255ea7171b6';
-
       }
     },
     mounted() {
@@ -91,6 +91,7 @@
       RiskPoint,
       OcrMessage,
       complexPic,
+      carrierReport
     }
 
   }
