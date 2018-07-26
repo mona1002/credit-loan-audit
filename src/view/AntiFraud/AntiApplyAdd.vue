@@ -163,7 +163,7 @@
         </div>
       </el-dialog> -->
     <!-- =================================================== -->
-    <el-dialog title="请选择一条信息" :visible.sync="coverShow"  width='1130px'>
+    <el-dialog title="请选择一条信息" :visible.sync="coverShow" width='1130px'>
       <div>
         <div class="taskWinput search-div">
           <el-row class="row row1" type="flex">
@@ -741,6 +741,10 @@
       btnClick(val) {
         // 确定
         if (val == 'sure') {
+          if (!this.rowObj) {
+            this.$message.error('请选择一条数据')
+            return
+          }
           if (this.rowObj.canStartAntiFraudFlag == '1') {
             this.applySubNo = this.rowObj.applySubno; // 进件编号
             this.applyCustName = this.rowObj.custName; // 客户名称
