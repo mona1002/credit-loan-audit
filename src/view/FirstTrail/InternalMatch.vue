@@ -386,7 +386,7 @@
       itemDbclickMobiel(row, event) {
         let query = {};
         query.id = row.id;
-        query.matchApplyId = row.applyId;
+        query.matchApplyId = row.matchApplyId;
         // 行被双击 事件  移动电话
         this.isInterFlag = query.isInterFlag = true;
         query.applySubNo=row.matchApplySubNo;
@@ -413,7 +413,7 @@
       itemDbclickFixTel(row, event) {
         let query = {};
         query.id = row.id;
-        query.matchApplyId = row.applyId;
+        query.matchApplyId = row.matchApplyId;
         // 行被双击 事件  固定电话
         this.isInterFlag = query.isInterFlag = true;
         // localStorage.setItem("internalObj", JSON.stringify(row.id));
@@ -439,7 +439,7 @@
       itemDbclickCompany(row, event) {
         let query = {};
         query.id = row.id;
-        query.matchApplyId = row.applyId;
+        query.matchApplyId = row.matchApplyId;
         // 行被双击 事件  单位名称
         this.isInterFlag = query.isInterFlag = true;
         console.log(row)
