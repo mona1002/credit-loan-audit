@@ -86,13 +86,12 @@
               }
             }
           }
-
         } else {
           //this.$message.error(res.msg);
-          this.$message({
-            message: "该进件暂无账务信息数据！",
-            type: 'error'
-          })
+          // this.$message({
+          //   message: "该进件暂无账务信息数据！",
+          //   type: 'error'
+          // })
         }
       });
     },
