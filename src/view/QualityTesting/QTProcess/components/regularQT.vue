@@ -976,7 +976,6 @@
     <div class="Height_240">
       <el-dialog title="复议审批" :visible.sync="ReAprovalShow" :modal="false ">
         <el-form>
-
           <div class="bfc">
             <el-form-item class="fl alert_collapse_inputLabel" label="复议结果：" :label-width="formApproLabel">
               <el-select v-model="ToApprovalParams.reviewResult" placeholder="请选择">

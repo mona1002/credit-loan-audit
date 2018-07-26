@@ -122,25 +122,23 @@
           </tbody>
         </table>
       </el-collapse-item>
-      <!--<el-collapse-item name="3">
+     <el-collapse-item name="3">
         <template slot="title">
           <i class="collapse_title_icon"></i>
-          <span class="collapse_title_text">工作信息</span>
+          <span class="collapse_title_text">用户行为检测</span>
         </template>
         <div class="height_auto">
           <el-table :data="companys" style="width:100%;" highlight-current-row border>
-            <el-table-column prop="name" label="单位名称" width="160">
+            <el-table-column prop="name" label="检查项" width="160">
             </el-table-column>
-            <el-table-column prop="type" label="单位性质" width="100">
+            <el-table-column prop="type" label="结果" width="100">
             </el-table-column>
-            <el-table-column prop="begin_date" label="开始时间" min-width="180">
-            </el-table-column>
-            <el-table-column prop="end_date" label="结束时间" min-width="180">
+            <el-table-column prop="begin_date" label="依据" min-width="180">
             </el-table-column>
           </el-table>
         </div>
       </el-collapse-item>
-      <el-collapse-item name="4">
+     <!--  <el-collapse-item name="4">
         <template slot="title">
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">账户流水</span>
@@ -331,6 +329,12 @@
               $(' #t_2_2 #contacts_router_cnt').text(binfo.contacts_router_cnt + '(直接联系人有和黑名单用户的通讯记录的号码数量)');
               // $(' #t_2_2 #contacts_router_ratio').text(formatRatePercentage100(binfo.contacts_router_ratio)+'(直接联系人有和黑名单用户的通讯记录的号码数量在直接联系人数量中的百分比)');
             }
+            	//用户行为检测
+	if(this.caReport.behavior_check && this.caReport.behavior_check.length>0){
+		$.each(this.caReport.behavior_check,function(i,eh){
+			// addRow($('#div_carr #t_3 tbody'),['check_point_cn','result','evidence'],eh);
+		});
+	}
           }
         });
       },
