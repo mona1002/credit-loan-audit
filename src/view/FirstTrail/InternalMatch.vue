@@ -389,7 +389,8 @@
         query.matchApplyId = row.applyId;
         // 行被双击 事件  移动电话
         this.isInterFlag = query.isInterFlag = true;
-        query = Object.assign({}, query, row)
+        query.applySubNo=row.matchApplySubNo;
+        query = Object.assign({}, row,query)
         // id: 客户id     orgCate
         // isInterFlag  标志是否是  内部匹配跳转的  查看
         localStorage.setItem("internalObj", JSON.stringify(query));
@@ -416,7 +417,8 @@
         // 行被双击 事件  固定电话
         this.isInterFlag = query.isInterFlag = true;
         // localStorage.setItem("internalObj", JSON.stringify(row.id));
-        query = Object.assign({}, query, row)
+         query.applySubNo=row.matchApplySubNo;
+        query = Object.assign({}, row,query)
         localStorage.setItem("internalObj", JSON.stringify(query));
         // localStorage.setItem("internalObj", JSON.stringify({
         //   id: row.id,
@@ -440,8 +442,10 @@
         query.matchApplyId = row.applyId;
         // 行被双击 事件  单位名称
         this.isInterFlag = query.isInterFlag = true;
+        console.log(row)
         // localStorage.setItem("internalObj", JSON.stringify(row.id));
-        query = Object.assign({}, query, row)
+         query.applySubNo=row.matchApplySubNo;
+        query = Object.assign({}, row,query)
         localStorage.setItem("internalObj", JSON.stringify(query));
         // localStorage.setItem("internalObj", JSON.stringify({
         //   id: row.id,

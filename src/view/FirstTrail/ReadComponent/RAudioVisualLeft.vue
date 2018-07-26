@@ -75,12 +75,13 @@
       </p>
       <div class="small_pic_content">
         <figure v-for="(val,index) in pngAyyrs" :key="index" class="small_pic_figure" v-show="SmallmyPic">
-          <!-- <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref"
-          /> -->
+          <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref"
+          />
           <!-- <em class="Audio_thumb_img" :style="'background-image:url('+imgBaseUrl+val.imagePath+')'"></em> -->
-          <em class="Audio_thumb_img" style="background-image:url(../../../../static/images/add.png)"></em>
-          <!-- <p v-if="SmallmyPic"> {{val.arcSubType}} </p> -->
-          <p v-if="SmallmyPic">{{imgBaseUrl+val.imagePath }} </p>
+          <!-- <em class="Audio_thumb_img" style="background-image:url(../../../../static/images/add.png)"></em> -->
+          <!-- <em class="Audio_thumb_img" style="background-image:url(http://10.1.26.6:8080/ptopCredit/download/downloadAction!download.action?filepath=/creditFile&filename=upload\2015-12-29\201512290111014260\\D5-06.jpg)"></em> -->
+          <p v-if="SmallmyPic"> {{val.arcSubType}} </p>
+          <!-- <p v-if="SmallmyPic">{{imgBaseUrl+val.imagePath }} </p> -->
         </figure>
         <figure class="small_pic_figure" v-show="SmallmyPdf" @dblclick="pdfClose()">
           <div class="Small_pic" @dblclick="pdfClose()">
@@ -196,7 +197,6 @@
         } else if (this.MatchFlag.MatchFlag == 'QT') {
           this.localInf = JSON.parse(localStorage.getItem("QT")) //综合查询
         }
-        console.log(this.localInf)
         // 恢复到初始状态
         this.ListDetails = [];
         this.activeName = [];
