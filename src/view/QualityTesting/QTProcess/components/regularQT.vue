@@ -2346,6 +2346,7 @@
     padding: 0 10px;
     /* min-height:30px !important; */
     height: 30px;
+    font-size: 13px;
   }
 
   .regularQT .material td:nth-of-type(4) {

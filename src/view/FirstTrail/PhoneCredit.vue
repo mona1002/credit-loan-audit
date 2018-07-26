@@ -86,8 +86,8 @@
         <el-button type="primary" @click.native="dialogFormVisible=true" v-show="addBtnShow">添加</el-button>
       </el-aside>
       <!-- 右侧 表单内容 -->
-      <el-container >
-        <el-main style="overflow-y: auto;font-size:14px;">
+      <el-container>
+        <el-main style="overflow-y: auto;overflow-x:hidden;font-size:14px;">
           <div class="form-his" v-show="!hisListShow" style="background:url(.../../../static/images/3C281C6A-532B-4A55-A9BF-F142E9F09063@1x.png) center no-repeat;">
           </div>
           <div v-if="hisListShow" class="header-class">
