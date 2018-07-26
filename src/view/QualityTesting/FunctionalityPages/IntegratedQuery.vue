@@ -48,9 +48,15 @@
         </el-table-column>
         <el-table-column prop="custName" label="客户名称" align='center' min-width="120">
         </el-table-column>
-        <el-table-column prop="certCode" label="证件号码" align='center' min-width="180">
+        <el-table-column label="证件号码" align='center' min-width="180">
+          <template slot-scope="scope">
+            <span>{{ scope.row.certCode |cerCodeStar }}</span>
+          </template>
         </el-table-column>
-        <el-table-column prop="mobile" label="手机号码" align='center' min-width="140">
+        <el-table-column label="手机号码" align='center' min-width="140">
+          <template slot-scope="scope">
+            <span>{{ scope.row.mobile |MobileStar }}</span>
+          </template>
         </el-table-column>
         <el-table-column prop="appDate" label="申请日期" align='center' min-width="150">
         </el-table-column>
@@ -111,9 +117,11 @@
       //     this.inquire(this.params);
       //   },
       handleCurrentChange(val) {
+        console.log(val)
         this.query.id = val.id;
         this.query.matchApplyId = val.applyId;
         this.query.applySubNo = val.applySubno;
+        this.query=Object.assign({},this.query,val)
         localStorage.setItem("Query", JSON.stringify(this.query));
         localStorage.setItem("MatchFlag", JSON.stringify({
           MatchFlag: 'Query'
@@ -133,7 +141,7 @@
         this.params.custName = '';
         this.params.certCode = '';
         this.params.mobile = '';
-      }, 
+      },
       Rsearch() {
         // this.params.pageNum = this.currentPage = 1;
         if (this.params.applySubno != '' || this.params.custName != '' || this.params.certCode != '' || this.params.mobile !=
@@ -147,14 +155,14 @@
         // 基础接口-综合查询
         this.post("applyInfoPool/multipleQuery", pam).then(res => {
           if (res.statusCode == 200) {
-            for (var i = 0; i < res.data.length; i++) {
-              if (res.data[i].certCode) {
-                res.data[i].certCode = res.data[i].certCode.replace(this.reg, this.reVal);
-              }
-              if (res.data[i].mobile) {
-                res.data[i].mobile = res.data[i].mobile.replace(this.Telreg, this.telVal);
-              }
-            }
+            // for (var i = 0; i < res.data.length; i++) {
+            //   if (res.data[i].certCode) {
+            //     res.data[i].certCode = res.data[i].certCode.replace(this.reg, this.reVal);
+            //   }
+            //   if (res.data[i].mobile) {
+            //     res.data[i].mobile = res.data[i].mobile.replace(this.Telreg, this.telVal);
+            //   }
+            // }
             this.tableData = res.data;
             for (var i = 0; i < res.data.length; i++) {
               var regs = /\d{4}-\d{1,2}-\d{1,2}/g;

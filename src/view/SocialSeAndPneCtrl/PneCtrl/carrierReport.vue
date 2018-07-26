@@ -122,28 +122,48 @@
           </tbody>
         </table>
       </el-collapse-item>
-     <el-collapse-item name="3">
+      <el-collapse-item name="3">
         <template slot="title">
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">用户行为检测</span>
         </template>
         <div class="height_auto">
-          <el-table :data="companys" style="width:100%;" highlight-current-row border>
-            <el-table-column prop="name" label="检查项" width="160">
+          <el-table :data="behaviorCheck" style="width:100%;" highlight-current-row border>
+            <el-table-column prop="check_point_cn" label="检查项" min-width="180">
             </el-table-column>
-            <el-table-column prop="type" label="结果" width="100">
+            <el-table-column prop="result" label="结果" min-width="160">
             </el-table-column>
-            <el-table-column prop="begin_date" label="依据" min-width="180">
+            <el-table-column prop="evidence" label="依据" min-width="180">
             </el-table-column>
           </el-table>
         </div>
       </el-collapse-item>
-     <!--  <el-collapse-item name="4">
+       <el-collapse-item name="4">
         <template slot="title">
           <i class="collapse_title_icon"></i>
-          <span class="collapse_title_text">账户流水</span>
+          <span class="collapse_title_text">运营商数据</span>
         </template>
-        <div class="height_auto">
+                    <table id="t_4">
+            	<thead>
+                <tr>
+                    <th>运营商</th>
+                    <th>号码</th>
+                    <th>归属地</th>
+                    <th>月份</th>
+                    <th>呼叫次数</th>
+                    <th>主叫次数</th>
+                    <th>主叫时间(分钟)</th>
+                    <th>被叫次数</th>
+                    <th>被叫时间(分钟)</th>
+                    <th>短信数量</th>
+                    <th>流量(MB)</th>
+                    <th>话费消费[元]</th>
+                </tr>
+            	</thead>
+                <tbody>
+                </tbody>
+            </table>
+        <!-- <div class="height_auto">
           <el-table :data="flows" style="width:100%;" highlight-current-row border>
             <el-table-column prop="company" label="公司名称" width="120">
             </el-table-column>
@@ -158,9 +178,9 @@
             <el-table-column prop="balance" label="余额[元]">
             </el-table-column>
           </el-table>
-        </div>
+        </div> -->
       </el-collapse-item>
-      <el-collapse-item name="5">
+     <!--  <el-collapse-item name="5">
         <template slot="title">
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">贷款明细</span>
@@ -235,6 +255,7 @@
       return {
         activeNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
         caReport: {},
+behaviorCheck:[],
 
       }
     },
@@ -329,16 +350,50 @@
               $(' #t_2_2 #contacts_router_cnt').text(binfo.contacts_router_cnt + '(直接联系人有和黑名单用户的通讯记录的号码数量)');
               // $(' #t_2_2 #contacts_router_ratio').text(formatRatePercentage100(binfo.contacts_router_ratio)+'(直接联系人有和黑名单用户的通讯记录的号码数量在直接联系人数量中的百分比)');
             }
-            	//用户行为检测
-	if(this.caReport.behavior_check && this.caReport.behavior_check.length>0){
-		$.each(this.caReport.behavior_check,function(i,eh){
-			// addRow($('#div_carr #t_3 tbody'),['check_point_cn','result','evidence'],eh);
-		});
-	}
+            //用户行为检测
+            this.caReport.behavior_check && this.caReport.behavior_check.length > 0?this.behaviorCheck=this.caReport.behavior_check:'';
+            if (this.caReport.behavior_check && this.caReport.behavior_check.length > 0) {
+              $.each(this.caReport.behavior_check, function (i, eh) {
+                // addRow($('#div_carr #t_3 tbody'),['check_point_cn','result','evidence'],eh);
+              });
+            }
+            //运营商数据
+            var sel=this;
+            if (this.caReport.cell_behavior && this.caReport.cell_behavior.length > 0) {
+              $.each(this.caReport.cell_behavior, function (i, eh) {
+                for (var idx = 0;; idx++) {
+                  if (eh.behavior[idx] == undefined) {
+                    break;
+                  }
+                  $.each(eh.behavior[idx], function (name, value) {
+                    if (name.indexOf('_time') != -1) eh.behavior[idx][name] = parseFloat(eh.behavior[idx][
+                      name
+                    ]).toFixed(2);
+                  });
+                  eh.behavior[idx].net_flow = parseFloat(eh.behavior[idx].net_flow).toFixed(2);
+                  eh.behavior[idx].cell_phone_num = eh.phone_num;
+                  sel.addRow($('#div_carr #t_4 tbody'), ['cell_operator_zh', 'cell_phone_num', 'cell_loc',
+                    'cell_mth', 'call_cnt', 'call_out_cnt', 'call_out_time', 'call_in_cnt', 'call_in_time',
+                    'sms_cnt', 'net_flow', 'total_amount'
+                  ], eh.behavior[idx]);
+                }
+              });
+            }
           }
         });
       },
-
+      addRow($table, rfields, rdata) {
+        var row = '<tr>';
+        $.each(rfields, function (index, val) {
+          if (rdata[val] != undefined) {
+            row += '<td>' + rdata[val] + '</td>';
+          } else {
+            row += '<td>' + '' + '</td>';
+          }
+        });
+        row += '</tr>';
+        $table.append(row);
+      }
     },
     mounted() {
       this.getInf();

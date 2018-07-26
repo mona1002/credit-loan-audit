@@ -238,6 +238,11 @@
     data() {
       return {
         // aa: '命中规则名称：',
+        query: {
+          id: '',
+          matchApplyId: '',
+          isInterFlag: false
+        },
         activeNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
         fraudApplyInfo: '',
         hitRuleList: [],
@@ -500,17 +505,22 @@
         // this.$router.push({
         //   path: '/MatchingInf'
         // });
+        this.query.id = row.id;
+        this.query.matchApplyId = row.applyId;
+        this.query.isInterFlag = false;
+        this.query = Object.assign({}, this.query, row)
         this.$router.push({
           name: 'MatchingInf',
           params: {
             newOne: true,
           }
         });
-        localStorage.setItem("internalObj", JSON.stringify({
-          id: row.id,
-          matchApplyId: row.applyId,
-          isInterFlag: false
-        }));
+        localStorage.setItem("internalObj", JSON.stringify(this.query));
+        // localStorage.setItem("internalObj", JSON.stringify({
+        //   id: row.id,
+        //   matchApplyId: row.applyId,
+        //   isInterFlag: false
+        // }));
       },
       /*命中客户数 查询*/
       inquiry(row) {

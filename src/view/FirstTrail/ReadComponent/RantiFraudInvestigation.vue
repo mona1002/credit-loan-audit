@@ -10,10 +10,10 @@
         <table class="table">
           <thead>
             <tr>
-              <th  style="min-width:180px">进件编号</th>
+              <th style="min-width:180px">进件编号</th>
               <th>案件编号</th>
               <th>客户姓名</th>
-              <th  style="min-width:180px">身份证号</th>
+              <th style="min-width:180px">身份证号</th>
               <th>申请产品</th>
               <th>进件机构</th>
               <th>销售人员</th>
@@ -42,19 +42,21 @@
           <span class="collapse_title_text">提报来源</span>
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
-          <ul>  <div class=" CreditForm_div_border clearFix">
-            <li>
-              <label class="label_width_166">提报人工号：</label>
-              <span>{{fraudApplyInfo.applyCode}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">提报人姓名：</label>
-              <span>{{fraudApplyInfo.applyPersonName}}</span>
-            </li>
-            <li>
-              <label class="label_width_166">提报渠道：</label>
-              <span>{{fraudApplyInfo.channelTxt}}</span>
-            </li> </div> 
+          <ul>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">提报人工号：</label>
+                <span>{{fraudApplyInfo.applyCode}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">提报人姓名：</label>
+                <span>{{fraudApplyInfo.applyPersonName}}</span>
+              </li>
+              <li>
+                <label class="label_width_166">提报渠道：</label>
+                <span>{{fraudApplyInfo.channelTxt}}</span>
+              </li>
+            </div>
             <li class="text_area_li triplet_textarea_width margin_top_5">
               <label class="label_width_166">理由：</label>
               <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="reason" disabled>
@@ -85,19 +87,23 @@
           <span class="collapse_title_text">调查记录</span>
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
-          <ul>   <div class=" CreditForm_div_border clearFix">
-            <li class="text_area_li triplet_textarea_width">
-              <label class="label_width_166">网查：</label>
-              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.netCheck"
-                disabled>
-              </el-input>
-            </li> </div>  <div class=" CreditForm_div_border clearFix">
-            <li class="text_area_li triplet_textarea_width margin_top_5">
-              <label class="label_width_166">114：</label>
-              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.oof"
-                disabled>
-              </el-input>
-            </li> </div> 
+          <ul>
+            <div class=" CreditForm_div_border clearFix">
+              <li class="text_area_li triplet_textarea_width">
+                <label class="label_width_166">网查：</label>
+                <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.netCheck"
+                  disabled>
+                </el-input>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li class="text_area_li triplet_textarea_width margin_top_5">
+                <label class="label_width_166">114：</label>
+                <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.oof"
+                  disabled>
+                </el-input>
+              </li>
+            </div>
             <li class="text_area_li triplet_textarea_width margin_top_5">
               <label class="label_width_166">其他：</label>
               <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.other"
@@ -167,6 +173,12 @@
   export default {
     data() {
       return {
+        query: {
+          id: '',
+          matchApplyId: '',
+          applySubNo: '',
+          isInterFlag: false
+        },
         aa: '命中规则名称：',
         activeNames: ['1', '2', '3', '4', '5'],
         fraudApplyInfo: '',
@@ -362,18 +374,24 @@
         // this.$router.push({
         //   path: '/MatchingInfQuery'
         // });
+        this.query.id = row.id;
+        this.query.matchApplyId = row.applyId;
+        this.query.applySubNo = row.applySubNo;
+        this.query.isInterFlag = false;
+        this.query = Object.assign({}, this.query, row)
         this.$router.push({
           name: 'MatchingInfQuery',
           params: {
             newOne: true,
           }
         });
-        localStorage.setItem("Query", JSON.stringify({
-          id: row.id,
-          matchApplyId: row.applyId,
-          applySubNo: row.applySubNo,
-          isInterFlag: false
-        }));
+        localStorage.setItem("Query", JSON.stringify(this.query));
+        // localStorage.setItem("Query", JSON.stringify({
+        //   id: row.id,
+        //   matchApplyId: row.applyId,
+        //   applySubNo: row.applySubNo,
+        //   isInterFlag: false
+        // }));
       },
       /*命中客户数 查询*/
       inquiry(row) {
@@ -450,7 +468,7 @@
   .table th {
     color: #1f2d3d;
     font-weight: 800;
-    height:35px;
+    height: 35px;
     line-height: 35px;
     border: 1px solid #e6ebf5;
     width: 11.1%;
@@ -465,7 +483,7 @@
     width: 11.1%;
     min-width: 147px;
     text-align: left;
-    padding-left: 10px;        
+    padding-left: 10px;
   }
 
   /* 提报来源 */
@@ -476,7 +494,7 @@
 
   .tibao ul {
     width: 100%;
-    padding-left: 10px;        
+    padding-left: 10px;
     margin-top: 20px;
     height: 28px;
   }

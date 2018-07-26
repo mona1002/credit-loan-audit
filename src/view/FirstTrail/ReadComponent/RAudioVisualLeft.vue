@@ -75,9 +75,12 @@
       </p>
       <div class="small_pic_content">
         <figure v-for="(val,index) in pngAyyrs" :key="index" class="small_pic_figure" v-show="SmallmyPic">
-          <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref"
-          />
-          <p v-if="SmallmyPic"> {{val.arcSubType}} </p>
+          <!-- <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref"
+          /> -->
+          <!-- <em class="Audio_thumb_img" :style="'background-image:url('+imgBaseUrl+val.imagePath+')'"></em> -->
+          <em class="Audio_thumb_img" style="background-image:url(../../../../static/images/add.png)"></em>
+          <!-- <p v-if="SmallmyPic"> {{val.arcSubType}} </p> -->
+          <p v-if="SmallmyPic">{{imgBaseUrl+val.imagePath }} </p>
         </figure>
         <figure class="small_pic_figure" v-show="SmallmyPdf" @dblclick="pdfClose()">
           <div class="Small_pic" @dblclick="pdfClose()">
@@ -193,6 +196,7 @@
         } else if (this.MatchFlag.MatchFlag == 'QT') {
           this.localInf = JSON.parse(localStorage.getItem("QT")) //综合查询
         }
+        console.log(this.localInf)
         // 恢复到初始状态
         this.ListDetails = [];
         this.activeName = [];
@@ -318,7 +322,6 @@
         this.defaultBigPicCss();
       },
       pdfClose() {
-        console.log('ccc')
         this.SmallPicShow = false;
         this.showPage = 1;
         //  this.defaultBigPicCss();

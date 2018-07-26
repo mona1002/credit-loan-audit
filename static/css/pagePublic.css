@@ -889,7 +889,18 @@ body .pre_wrap {
   box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
   overflow: hidden;
 }
-
+.Audio_thumb_img{
+  display:inline-block;
+  height: calc( 100% - 60px);
+  width:100%;
+    border-radius: 5px;
+    border: 2px solid #bfcbd9;
+    box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
+    /* overflow: hidden; */
+    background-repeat:no-repeat;
+background-size: contain;
+background-image: url(../images/add.png)
+}
 /* 缩略图最外侧div */
 
 .AudioVisual .Small_pic_div,

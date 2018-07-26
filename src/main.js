@@ -6,8 +6,8 @@ import router from './router'
 import "babel-polyfill"
 import store from './store/store'
 import qs from 'qs'
-import http from '@/util/http' 
-import validation from '@/util/validation' 
+import http from '@/util/http'
+import validation from '@/util/validation'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import $ from 'jquery'
@@ -28,34 +28,46 @@ new Vue({
   router,
   store,
   template: '<App/>',
-  components: { App }
+  components: {
+    App
+  }
 })
 // 定义全局 过滤器
 // 日期过滤器
-Vue.filter('dateFilter',function(value){
-	if(!value) return ''
-	// console.log(new Date(value).toLocaleString().replace(/\//g,'-').match(/\d{4}\-\d{2}\-\d{1,2}/)[0])
-	// return new Date(value).toLocaleString().replace(/\//g,'-').match(/\d{4}\-\d{1,2}\-\d{1,2}/)[0]
-	return String(new Date(value).getFullYear()) + '-' + String(new Date(value).getMonth()+1)  + '-' + String(new Date(value).getDate());
+Vue.filter('dateFilter', function (value) {
+  if (!value) return ''
+  // console.log(new Date(value).toLocaleString().replace(/\//g,'-').match(/\d{4}\-\d{2}\-\d{1,2}/)[0])
+  // return new Date(value).toLocaleString().replace(/\//g,'-').match(/\d{4}\-\d{1,2}\-\d{1,2}/)[0]
+  return String(new Date(value).getFullYear()) + '-' + String(new Date(value).getMonth() + 1) + '-' + String(new Date(value).getDate());
 
 })
 // 信审审批 - 审批 计算倍数
-Vue.filter('formatValue',function(value){
-	if(!value) return ''
-	console.log(value);
-	return Number(value)>0?Math.round(Number(value)*10000)/100 +'%':'0.00%';
+Vue.filter('formatValue', function (value) {
+  if (!value) return ''
+  console.log(value);
+  return Number(value) > 0 ? Math.round(Number(value) * 10000) / 100 + '%' : '0.00%';
 })
 // 金额过滤
-Vue.filter('formatMoney',function(value){
-	if(!value) return ''
-	console.log(value)
-	return value.toLocaleString()
+Vue.filter('formatMoney', function (value) {
+  if (!value) return ''
+  console.log(value)
+  return value.toLocaleString()
 })
 // 精度问题
-Vue.filter('formatAppmult',function(value){
-	if(!value) return ''
-	return Math.ceil(Number(value))
+Vue.filter('formatAppmult', function (value) {
+  if (!value) return ''
+  return Math.ceil(Number(value))
 })
-Vue.filter('percent',function(value){
-	return value!==''?value+'%':'';
+Vue.filter('percent', function (value) {
+  return value !== '' ? value + '%' : '';
+})
+// 证件号码*
+Vue.filter('cerCodeStar', function (value) {
+  value = value.replace(/(\w{6})\w*(\w{4})/, '$1********$2');
+  return value;
+})
+// 手机号码*
+Vue.filter('MobileStar', function (value) {
+  value = value.replace(/(\w{7})\w*/, '$1****');
+  return value;
 })
