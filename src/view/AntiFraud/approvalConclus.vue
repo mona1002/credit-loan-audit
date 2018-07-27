@@ -89,7 +89,7 @@
           <!-- @change="selectChangeRisk" multiple    class="muti-select"   -->
           <!-- <el-select v-model="riskSection" multiple collapse-tags class="muti-select"> -->
           <el-select v-model="riskSection" multiple collapse-tags placeholder="请选择" class="muti-select approvalConclus_risk_select">
-            <el-option class="dakjfdsklf" v-for="item in riskSections" :key="item.enumCode" :label="item.showMsg" :value="item.showMsg">
+            <el-option class="aaaaaa_bbbb" v-for="item in riskSections" :key="item.enumCode" :label="item.showMsg" :value="item.showMsg">
             </el-option>
           </el-select>
         </div>
@@ -104,7 +104,7 @@
           <!-- @change="selectChangeRisk" multiple    class="muti-select"   -->
           <!-- <el-select v-model="riskSection" multiple collapse-tags class="muti-select"> -->
           <el-select v-model="riskSection" multiple collapse-tags placeholder="请选择" class="muti-select">
-            <el-option v-for="item in riskSections" :key="item.enumCode" :label="item.showMsg" :value="item.showMsg">
+            <el-option class="aaaaaa_bbbb" v-for="item in riskSections" :key="item.enumCode" :label="item.showMsg" :value="item.showMsg">
             </el-option>
           </el-select>
         </div>
@@ -2545,6 +2545,11 @@
 
   .newLi div {
     width: 100%;
+  }
+
+  body .aaaaaa_bbbb {
+    min-width: calc( 100% - 130px);
+    min-width: 100% !important;
   }
 
 </style>
