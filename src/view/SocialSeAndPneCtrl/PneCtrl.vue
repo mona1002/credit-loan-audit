@@ -11,7 +11,7 @@
         <!-- <RiskDecision v-if="ind==0"></RiskDecision>
           <BaiRongData v-if="ind==1"></BaiRongData> -->
         <div class="content">
-            <BaiRongData v-if="ind==1" :applyId='localInf.applyId'>百融数据</BaiRongData>
+          <BaiRongData v-if="ind==1" :applyId='localInf.applyId'>百融数据</BaiRongData>
           <RiskDecision v-if="ind==0" :applyId='localInf.applyId'>同盾风险决策</RiskDecision>
         </div>
         <!-- <div class="content">
@@ -79,7 +79,10 @@
         // this.localInf.applyId = '9e56e245-bd30-4a51-97e9-c255ea7171b6';
       }
     },
-    mounted() {
+    activated() {
+      this.getInf();
+    },
+    created() {
       this.getInf();
     },
     components: {

@@ -138,31 +138,31 @@
           </el-table>
         </div>
       </el-collapse-item>
-       <el-collapse-item name="4">
+      <el-collapse-item name="4">
         <template slot="title">
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">运营商数据</span>
         </template>
-                    <table id="t_4">
-            	<thead>
-                <tr>
-                    <th>运营商</th>
-                    <th>号码</th>
-                    <th>归属地</th>
-                    <th>月份</th>
-                    <th>呼叫次数</th>
-                    <th>主叫次数</th>
-                    <th>主叫时间(分钟)</th>
-                    <th>被叫次数</th>
-                    <th>被叫时间(分钟)</th>
-                    <th>短信数量</th>
-                    <th>流量(MB)</th>
-                    <th>话费消费[元]</th>
-                </tr>
-            	</thead>
-                <tbody>
-                </tbody>
-            </table>
+        <table id="t_4">
+          <thead>
+            <tr>
+              <th>运营商</th>
+              <th>号码</th>
+              <th>归属地</th>
+              <th>月份</th>
+              <th>呼叫次数</th>
+              <th>主叫次数</th>
+              <th>主叫时间(分钟)</th>
+              <th>被叫次数</th>
+              <th>被叫时间(分钟)</th>
+              <th>短信数量</th>
+              <th>流量(MB)</th>
+              <th>话费消费[元]</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
         <!-- <div class="height_auto">
           <el-table :data="flows" style="width:100%;" highlight-current-row border>
             <el-table-column prop="company" label="公司名称" width="120">
@@ -180,36 +180,60 @@
           </el-table>
         </div> -->
       </el-collapse-item>
-     <!--  <el-collapse-item name="5">
+      <el-collapse-item name="5">
         <template slot="title">
           <i class="collapse_title_icon"></i>
-          <span class="collapse_title_text">贷款明细</span>
+          <span class="collapse_title_text">联系人区域汇总</span>
         </template>
         <div class="height_auto">
-          <el-table :data="loans" style="width:100%;" highlight-current-row border>
-            <el-table-column prop="contract_no" label="合同号" width="120">
+          <el-table :data="contactRegion" style="width:100%;" highlight-current-row border>
+            <el-table-column prop="region_loc" label="地区" width="120">
             </el-table-column>
-            <el-table-column prop="name" label="姓名" width="100">
+            <el-table-column prop="region_uniq_num_cnt" label="号码数量" width="80">
             </el-table-column>
-            <el-table-column prop="id_card" label="身份证号" width="160">
+            <el-table-column prop="region_call_in_cnt" label="呼入次数" width="80">
             </el-table-column>
-            <el-table-column prop="phone" label="手机号" width="160">
+            <el-table-column prop="region_call_out_cnt" label="呼出次数" width="80">
             </el-table-column>
-            <el-table-column prop="bank" label="贷款银行" width="160">
+            <el-table-column label="呼入时间(分钟)" width="120">
+              <template slot-scope="scope">
+                <span>{{ scope.row.region_call_in_time | NumRound(2)}}</span>
+              </template>
             </el-table-column>
-            <el-table-column prop="status" label="贷款状态" width="160">
+            <el-table-column label="呼出时间(分钟)" width="120">
+              <template slot-scope="scope">
+                <span>{{ scope.row.region_call_out_time | NumRound(2)}}</span>
+              </template>
             </el-table-column>
-            <el-table-column prop="limit" label="贷款额度[元]" width="160">
+            <el-table-column label="平均电话呼入时间(分钟)" width="180">
+              <template slot-scope="scope">
+                <span>{{ scope.row.region_avg_call_in_time | NumRound(2)}}</span>
+              </template>
             </el-table-column>
-            <el-table-column prop="balance" label="贷款余额[元]" width="160">
+            <el-table-column label="平均电话呼出时间(分钟)" width="180">
+              <template slot-scope="scope">
+                <span>{{ scope.row.region_avg_call_out_time | NumRound(2)}}</span>
+              </template>
             </el-table-column>
-            <el-table-column prop="period" label="贷款期限" width="160">
+            <el-table-column label="呼入次数百分比" width="120">
+              <template slot-scope="scope">
+                <span>{{ scope.row.region_call_in_cnt_pct | NumRound(4)}}</span>
+              </template>
             </el-table-column>
-            <el-table-column prop="begin_date" label="贷款开始时间" width="160">
+            <el-table-column label="呼出次数百分比" width="120">
+              <template slot-scope="scope">
+                <span>{{ scope.row.region_call_out_cnt_pct | NumRound(4)}}</span>
+              </template>
             </el-table-column>
-            <el-table-column prop="end_date" label="贷款结束时间" width="160">
+            <el-table-column label="呼入时间百分比" width="120">
+               <template slot-scope="scope">
+                <span>{{ scope.row.region_call_in_time_pct | NumRound(4)}}</span>
+              </template>
             </el-table-column>
-            <el-table-column prop="loan_rate" label="贷款利率(%)" width="160">
+            <el-table-column label="呼出时间百分比" min-width="120">
+               <template slot-scope="scope">
+                <span>{{ scope.row.region_call_out_time_pct | NumRound(4)}}</span>
+              </template>
             </el-table-column>
           </el-table>
         </div>
@@ -217,33 +241,67 @@
       <el-collapse-item name="6">
         <template slot="title">
           <i class="collapse_title_icon"></i>
-          <span class="collapse_title_text">贷款还款流水</span>
+          <span class="collapse_title_text">运营商数据分析</span>
         </template>
+        <h6 class="sort">联系人通话详情</h6>
         <div class="height_auto">
-          <el-table :data="loanFlows" style="width:100%;" highlight-current-row border>
-            <el-table-column prop="account_id" label="账户ID" width="180">
+          <el-table :data="contactList" style="width:100%;" highlight-current-row border>
+            <el-table-column prop="phone_num" label="号码" width="160">
             </el-table-column>
-            <el-table-column prop="contract_no" label="合同号" width="180">
+            <el-table-column prop="phone_num_loc" label="归属地" width="140">
             </el-table-column>
-            <el-table-column prop="type" label="流水类型" width="100">
+            <el-table-column prop="contact_name" label="互联网标识" width="100">
             </el-table-column>
-            <el-table-column prop="record_date" label="记录日期" width="180">
+            <el-table-column prop="needs_type" label="需求类型" min-width="160">
             </el-table-column>
-            <el-table-column prop="record_month" label="所属月份" width="100">
+            <el-table-column prop="call_out_cnt" label="主叫次数" width="80">
             </el-table-column>
-            <el-table-column prop="repay_principle" label="还本金额[元]" width="100">
+            <el-table-column  label="主叫时间" width="100">
+               <template slot-scope="scope">
+                <span>{{ scope.row.call_out_len | NumRound(2)}}</span>
+              </template>
             </el-table-column>
-            <el-table-column prop="repay_interest" label="还息金额[元]" width="130">
+            <el-table-column prop="call_in_cnt" label="被叫次数" width="80">
             </el-table-column>
-            <el-table-column prop="repay_amount" label="还款总金额[元]" width="130">
+            <el-table-column label="被叫时间" width="100">
+               <template slot-scope="scope">
+                <span>{{ scope.row.call_in_len | NumRound(2)}}</span>
+              </template>
             </el-table-column>
-            <el-table-column prop="principle_balance" label="本金余额[元]" width="130">
+            <el-table-column prop="call_cnt" label="联系次数" width="80">
             </el-table-column>
-            <el-table-column prop="deduct_date" label="银行扣款日期" min-width="190">
+            <el-table-column  label="联系时间" width="100">
+               <template slot-scope="scope">
+                <span>{{ scope.row.call_len | NumRound(2)}}</span>
+              </template>
+            </el-table-column>
+              <el-table-column prop="contact_1w" label="最近一周" width="80">
+            </el-table-column>
+              <el-table-column prop="contact_1m" label="最近一月" width="80">
+            </el-table-column>
+              <el-table-column prop="contact_3m" label="最近三月" width="80">
+            </el-table-column>
+              <el-table-column prop="contact_morning" label="上午联系" width="80">
+            </el-table-column>
+              <el-table-column prop="contact_noon" label="中午联系" width="80">
+            </el-table-column>
+              <el-table-column prop="contact_afternoon" label="下午联系" width="80">
+            </el-table-column>
+              <el-table-column prop="contact_night" label="晚上联系" width="80">
+            </el-table-column>
+                   <el-table-column prop="contact_early_morning" label="凌晨联系" width="80">
+            </el-table-column>
+                   <el-table-column prop="contact_all_day" label="全天联系" width="80">
+            </el-table-column>
+                   <el-table-column prop="contact_weekday" label="周中联系" width="80">
+            </el-table-column>
+                   <el-table-column prop="contact_weekend" label="周末联系" width="80">
+            </el-table-column>
+      <el-table-column prop="contact_holiday" label="节假日联系" width="100">
             </el-table-column>
           </el-table>
         </div>
-      </el-collapse-item> -->
+      </el-collapse-item>
     </el-collapse>
   </div>
 </template>
@@ -255,8 +313,9 @@
       return {
         activeNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
         caReport: {},
-behaviorCheck:[],
-
+        behaviorCheck: [],
+        contactRegion: [],
+        contactList:[],
       }
     },
     props: {
@@ -351,14 +410,15 @@ behaviorCheck:[],
               // $(' #t_2_2 #contacts_router_ratio').text(formatRatePercentage100(binfo.contacts_router_ratio)+'(直接联系人有和黑名单用户的通讯记录的号码数量在直接联系人数量中的百分比)');
             }
             //用户行为检测
-            this.caReport.behavior_check && this.caReport.behavior_check.length > 0?this.behaviorCheck=this.caReport.behavior_check:'';
+            this.caReport.behavior_check && this.caReport.behavior_check.length > 0 ? this.behaviorCheck = this.caReport
+              .behavior_check : '';
             if (this.caReport.behavior_check && this.caReport.behavior_check.length > 0) {
               $.each(this.caReport.behavior_check, function (i, eh) {
                 // addRow($('#div_carr #t_3 tbody'),['check_point_cn','result','evidence'],eh);
               });
             }
             //运营商数据
-            var sel=this;
+            var sel = this;
             if (this.caReport.cell_behavior && this.caReport.cell_behavior.length > 0) {
               $.each(this.caReport.cell_behavior, function (i, eh) {
                 for (var idx = 0;; idx++) {
@@ -379,6 +439,61 @@ behaviorCheck:[],
                 }
               });
             }
+            //联系人区域汇总
+            this.caReport.contact_region && this.caReport.contact_region.length > 0 ? this.contactRegion = this.caReport
+              .contact_region : '';
+            // console.log
+            // if(this.caReport.contact_region && this.caReport.contact_region.length>0){
+            // $.each(this.caReport.contact_region,function(i,eh){
+            // 	$.each(eh,function(name,value){
+            //     console.log(3,name)
+            //     console.log(4,value)
+            // 		if(name.indexOf('_pct')!=-1) {
+            // 			//eh[name]=formatRatePercentage100(value);
+            //       eh[name]=parseFloat(value).toFixed(4);
+            //       console.log(5,eh[name])
+            // 		}else if(name.indexOf('_time')!=-1){
+            // 			eh[name]=parseFloat(value).toFixed(2);
+            // 		}
+            // 	});
+            //eh.region_call_out_time_pct = formatRatePercentage100(eh.region_call_out_time_pct);
+            // this.addRow($('#div_carr #t_5 tbody'),['region_loc','region_uniq_num_cnt','region_call_in_cnt','region_call_out_cnt','region_call_in_time'
+            //               ,'region_call_out_time','region_avg_call_in_time','region_avg_call_out_time','region_call_in_cnt_pct','region_call_out_cnt_pct'
+            //               ,'region_call_in_time_pct','region_call_out_time_pct'],eh);
+            // });
+            // }
+  //运营商数据分析——联系人通话详情
+  this.caReport.contact_list && this.caReport.contact_list.length>0?this.contactList= this.caReport.contact_list:'';
+	// if(this.caReport.contact_list && this.caReport.contact_list.length>0){
+	// 	$.each(this.caReport.contact_list,function(i,eh){
+	// 		eh.contact_all_day = eh.contact_all_day==true?'是':'否';
+	// 		$.each(eh,function(name,value){
+	// 			if(name.indexOf('_len')!=-1) eh[name]=parseFloat(eh[name]).toFixed(2);
+	// 		});
+	// 		sel.addRow($('#div_carr #t_6_1 tbody'),['phone_num','phone_num_loc','contact_name','needs_type','call_out_cnt','call_out_len'
+	// 		           ,'call_in_cnt','call_in_len','call_cnt','call_len','contact_1w','contact_1m','contact_3m','contact_morning'
+	// 		           ,'contact_noon','contact_afternoon','contact_night','contact_early_morning','contact_all_day','contact_weekday'
+	// 		           ,'contact_weekend','contact_holiday'],eh);
+	// 	});
+	// }
+	//运营商数据分析——常用服务
+	if(this.caReport.main_service && this.caReport.main_service.length>0){
+		var fieldsArr = ['company_type','company_name','total_service_cnt'];
+		var mthinfo = this.caReport.main_service[0];
+		if(mthinfo.service_details && mthinfo.service_details.length>0){
+			var n = 4;
+			$.each(mthinfo.service_details,function(i,eh){
+				fieldsArr.push(eh.interact_mth);
+				$('#div_carr #t_6_2 thead th').eq(n).text(eh.interact_mth);
+				n++;
+			}); 
+		}
+		$.each(caReport.main_service,function(i,eh){
+			var serviceObj = name_val_jsonArr2Json(eh.service_details,'interact_mth','interact_cnt');
+			$.merge(eh,serviceObj);
+			this.addRow($('#div_carr #t_6_2 tbody'),fieldsArr,eh);
+		});
+	}
           }
         });
       },

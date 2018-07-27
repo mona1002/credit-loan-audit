@@ -1,6 +1,6 @@
 <template>
   <div class="SSComp">
-    <!-- 大数据风控-风险决策 -->
+    <!-- 大数据风控-百融 -->
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
@@ -1217,42 +1217,47 @@
       // } else if (this.judgeFlag.flag == '13') {
       //   this.localInf = JSON.parse(localStorage.getItem("QTComplianceTW")) //质检 合规经理任务列表 
       // }
-      this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrTabInfo.action', {
-        // applyId: '9e56e245-bd30-4a51-97e9-c255ea7171b6',
-        applyId: this.applyId
-      }).then(res => {
-        if (res.success) {
-          this.outputAndParam = res.obj.crimeInfo; //个人不良信息-产品输出标识、返回参数
-          this.tableData = res.obj.crimeInfoDetails.rows; //个人不良信息-命中规则
-          //特殊名单核查
-          for (var key in res.obj.specialListc) {
-            if (res.obj.specialListc[key]) {
-              this.specialList[key] = res.obj.specialListc[key];
+      this.getInf();
+    },
+    methods: {
+      getInf() {
+        this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrTabInfo.action', {
+          // applyId: '9e56e245-bd30-4a51-97e9-c255ea7171b6',
+          applyId: this.applyId
+        }).then(res => {
+          if (res.success) {
+            this.outputAndParam = res.obj.crimeInfo; //个人不良信息-产品输出标识、返回参数
+            this.tableData = res.obj.crimeInfoDetails.rows; //个人不良信息-命中规则
+            //特殊名单核查
+            for (var key in res.obj.specialListc) {
+              if (res.obj.specialListc[key]) {
+                this.specialList[key] = res.obj.specialListc[key];
+              }
             }
-          }
-          // 多次申请核查
-          for (var key in res.obj.applyloanc) {
-            if (res.obj.applyloanc[key] || res.obj.applyloanc[key] == '0') {
-              this.applyloan[key] = res.obj.applyloanc[key];
+            // 多次申请核查
+            for (var key in res.obj.applyloanc) {
+              if (res.obj.applyloanc[key] || res.obj.applyloanc[key] == '0') {
+                this.applyloan[key] = res.obj.applyloanc[key];
+              }
             }
-          }
-          // 法院执行人
-          for (var key in res.obj.executionc) {
-            if (res.obj.executionc[key]) {
-              this.execution[key] = res.obj.executionc[key];
+            // 法院执行人
+            for (var key in res.obj.executionc) {
+              if (res.obj.executionc[key]) {
+                this.execution[key] = res.obj.executionc[key];
+              }
             }
+            this.$nextTick(() => {
+              this.$refs.IDCheck.children.length == 0 ? this.IDC = false : this.IDC = true;
+              this.$refs.PhoneCheck.children.length == 0 ? this.PhoneC = false : this.PhoneC = true;
+              this.$refs.linkCheck.children.length == 0 ? this.linkC = false : this.linkC = true;
+              this.$refs.GIDCheck.children.length == 0 ? this.GIDC = false : this.GIDC = true;
+            })
+          } else {
+            this.$message.error(res.msg);
           }
-          this.$nextTick(() => {
-            this.$refs.IDCheck.children.length == 0 ? this.IDC = false : this.IDC = true;
-            this.$refs.PhoneCheck.children.length == 0 ? this.PhoneC = false : this.PhoneC = true;
-            this.$refs.linkCheck.children.length == 0 ? this.linkC = false : this.linkC = true;
-            this.$refs.GIDCheck.children.length == 0 ? this.GIDC = false : this.GIDC = true;
-          })
-        } else {
-          this.$message.error(res.msg);
-        }
-      });
-    }
+        });
+      }
+    },
   }
 
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="SSComp">
-    <!-- 大数据风控-百融 -->
+    <!-- 大数据风控-风险决策 -->
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
@@ -39,7 +39,6 @@
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
-
             <li>
               <label class="label_width_166">策略集：</label>
               <span>{{parmaAndRisk.policy_set_name }}</span>
@@ -127,12 +126,10 @@
       // } else if (this.judgeFlag.flag == '13') {
       //   this.localInf = JSON.parse(localStorage.getItem("QTComplianceTW")) //质检 合规经理任务列表 
       // }
-      console.log( this.applyId)
       this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getTdTabInfo.action', {
         //  applyId:'b14455f1-5531-4cf2-883b-f6dc0049e3bb'
         applyId: this.applyId
       }).then(res => {
-        console.log(res)
         if (res.success) {
           this.parmaAndRisk = res.obj.tdResponsec;
           this.tableData = res.obj.rules.rows;

@@ -59,15 +59,24 @@ Vue.filter('formatAppmult', function (value) {
   return Math.ceil(Number(value))
 })
 Vue.filter('percent', function (value) {
+  if (!value) return ''
   return value !== '' ? value + '%' : '';
 })
 // 证件号码*
 Vue.filter('cerCodeStar', function (value) {
+  if (!value) return ''
   value = value.replace(/(\w{6})\w*(\w{4})/, '$1********$2');
   return value;
 })
 // 手机号码*
 Vue.filter('MobileStar', function (value) {
+  if (!value) return ''
   value = value.replace(/(\w{7})\w*/, '$1****');
   return value;
+})
+
+Vue.filter('NumRound',function(value,num){
+  if (!value) return '';
+  value= parseFloat(value).toFixed(num);
+  return value
 })
