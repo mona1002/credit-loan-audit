@@ -97,6 +97,26 @@
         required: true
       }
     },
+    watch: {
+      applyId: function (newQuestion, oldQuestion) {
+        newQuestion != oldQuestion ? this.getInf() : '';
+      }
+    },
+    methods: {
+      getInf() {
+        this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getTdTabInfo.action', {
+          //  applyId:'b14455f1-5531-4cf2-883b-f6dc0049e3bb'
+          applyId: this.applyId
+        }).then(res => {
+          if (res.success) {
+            this.parmaAndRisk = res.obj.tdResponsec;
+            this.tableData = res.obj.rules.rows;
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
+      }
+    },
     mounted() {
       // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
       // if (this.judgeFlag.flag == '01') {
@@ -126,17 +146,7 @@
       // } else if (this.judgeFlag.flag == '13') {
       //   this.localInf = JSON.parse(localStorage.getItem("QTComplianceTW")) //质检 合规经理任务列表 
       // }
-      this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getTdTabInfo.action', {
-        //  applyId:'b14455f1-5531-4cf2-883b-f6dc0049e3bb'
-        applyId: this.applyId
-      }).then(res => {
-        if (res.success) {
-          this.parmaAndRisk = res.obj.tdResponsec;
-          this.tableData = res.obj.rules.rows;
-        } else {
-          this.$message.error(res.msg);
-        }
-      });
+      this.getInf();
     }
   }
 

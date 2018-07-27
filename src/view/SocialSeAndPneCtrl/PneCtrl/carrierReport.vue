@@ -226,12 +226,12 @@
               </template>
             </el-table-column>
             <el-table-column label="呼入时间百分比" width="120">
-               <template slot-scope="scope">
+              <template slot-scope="scope">
                 <span>{{ scope.row.region_call_in_time_pct | NumRound(4)}}</span>
               </template>
             </el-table-column>
             <el-table-column label="呼出时间百分比" min-width="120">
-               <template slot-scope="scope">
+              <template slot-scope="scope">
                 <span>{{ scope.row.region_call_out_time_pct | NumRound(4)}}</span>
               </template>
             </el-table-column>
@@ -256,51 +256,52 @@
             </el-table-column>
             <el-table-column prop="call_out_cnt" label="主叫次数" width="80">
             </el-table-column>
-            <el-table-column  label="主叫时间" width="100">
-               <template slot-scope="scope">
+            <el-table-column label="主叫时间" width="100">
+              <template slot-scope="scope">
                 <span>{{ scope.row.call_out_len | NumRound(2)}}</span>
               </template>
             </el-table-column>
             <el-table-column prop="call_in_cnt" label="被叫次数" width="80">
             </el-table-column>
             <el-table-column label="被叫时间" width="100">
-               <template slot-scope="scope">
+              <template slot-scope="scope">
                 <span>{{ scope.row.call_in_len | NumRound(2)}}</span>
               </template>
             </el-table-column>
             <el-table-column prop="call_cnt" label="联系次数" width="80">
             </el-table-column>
-            <el-table-column  label="联系时间" width="100">
-               <template slot-scope="scope">
+            <el-table-column label="联系时间" width="100">
+              <template slot-scope="scope">
                 <span>{{ scope.row.call_len | NumRound(2)}}</span>
               </template>
             </el-table-column>
-              <el-table-column prop="contact_1w" label="最近一周" width="80">
+            <el-table-column prop="contact_1w" label="最近一周" width="80">
             </el-table-column>
-              <el-table-column prop="contact_1m" label="最近一月" width="80">
+            <el-table-column prop="contact_1m" label="最近一月" width="80">
             </el-table-column>
-              <el-table-column prop="contact_3m" label="最近三月" width="80">
+            <el-table-column prop="contact_3m" label="最近三月" width="80">
             </el-table-column>
-              <el-table-column prop="contact_morning" label="上午联系" width="80">
+            <el-table-column prop="contact_morning" label="上午联系" width="80">
             </el-table-column>
-              <el-table-column prop="contact_noon" label="中午联系" width="80">
+            <el-table-column prop="contact_noon" label="中午联系" width="80">
             </el-table-column>
-              <el-table-column prop="contact_afternoon" label="下午联系" width="80">
+            <el-table-column prop="contact_afternoon" label="下午联系" width="80">
             </el-table-column>
-              <el-table-column prop="contact_night" label="晚上联系" width="80">
+            <el-table-column prop="contact_night" label="晚上联系" width="80">
             </el-table-column>
-                   <el-table-column prop="contact_early_morning" label="凌晨联系" width="80">
+            <el-table-column prop="contact_early_morning" label="凌晨联系" width="80">
             </el-table-column>
-                   <el-table-column prop="contact_all_day" label="全天联系" width="80">
+            <el-table-column prop="contact_all_day" label="全天联系" width="80">
             </el-table-column>
-                   <el-table-column prop="contact_weekday" label="周中联系" width="80">
+            <el-table-column prop="contact_weekday" label="周中联系" width="80">
             </el-table-column>
-                   <el-table-column prop="contact_weekend" label="周末联系" width="80">
+            <el-table-column prop="contact_weekend" label="周末联系" width="80">
             </el-table-column>
-      <el-table-column prop="contact_holiday" label="节假日联系" width="100">
+            <el-table-column prop="contact_holiday" label="节假日联系" width="100">
             </el-table-column>
           </el-table>
         </div>
+         <h6 class="sort">常用服务</h6>
       </el-collapse-item>
     </el-collapse>
   </div>
@@ -315,7 +316,7 @@
         caReport: {},
         behaviorCheck: [],
         contactRegion: [],
-        contactList:[],
+        contactList: [],
       }
     },
     props: {
@@ -462,38 +463,39 @@
             //               ,'region_call_in_time_pct','region_call_out_time_pct'],eh);
             // });
             // }
-  //运营商数据分析——联系人通话详情
-  this.caReport.contact_list && this.caReport.contact_list.length>0?this.contactList= this.caReport.contact_list:'';
-	// if(this.caReport.contact_list && this.caReport.contact_list.length>0){
-	// 	$.each(this.caReport.contact_list,function(i,eh){
-	// 		eh.contact_all_day = eh.contact_all_day==true?'是':'否';
-	// 		$.each(eh,function(name,value){
-	// 			if(name.indexOf('_len')!=-1) eh[name]=parseFloat(eh[name]).toFixed(2);
-	// 		});
-	// 		sel.addRow($('#div_carr #t_6_1 tbody'),['phone_num','phone_num_loc','contact_name','needs_type','call_out_cnt','call_out_len'
-	// 		           ,'call_in_cnt','call_in_len','call_cnt','call_len','contact_1w','contact_1m','contact_3m','contact_morning'
-	// 		           ,'contact_noon','contact_afternoon','contact_night','contact_early_morning','contact_all_day','contact_weekday'
-	// 		           ,'contact_weekend','contact_holiday'],eh);
-	// 	});
-	// }
-	//运营商数据分析——常用服务
-	if(this.caReport.main_service && this.caReport.main_service.length>0){
-		var fieldsArr = ['company_type','company_name','total_service_cnt'];
-		var mthinfo = this.caReport.main_service[0];
-		if(mthinfo.service_details && mthinfo.service_details.length>0){
-			var n = 4;
-			$.each(mthinfo.service_details,function(i,eh){
-				fieldsArr.push(eh.interact_mth);
-				$('#div_carr #t_6_2 thead th').eq(n).text(eh.interact_mth);
-				n++;
-			}); 
-		}
-		$.each(caReport.main_service,function(i,eh){
-			var serviceObj = name_val_jsonArr2Json(eh.service_details,'interact_mth','interact_cnt');
-			$.merge(eh,serviceObj);
-			this.addRow($('#div_carr #t_6_2 tbody'),fieldsArr,eh);
-		});
-	}
+            //运营商数据分析——联系人通话详情
+            this.caReport.contact_list && this.caReport.contact_list.length > 0 ? this.contactList = this.caReport.contact_list :
+              '';
+            // if(this.caReport.contact_list && this.caReport.contact_list.length>0){
+            // 	$.each(this.caReport.contact_list,function(i,eh){
+            // 		eh.contact_all_day = eh.contact_all_day==true?'是':'否';
+            // 		$.each(eh,function(name,value){
+            // 			if(name.indexOf('_len')!=-1) eh[name]=parseFloat(eh[name]).toFixed(2);
+            // 		});
+            // 		sel.addRow($('#div_carr #t_6_1 tbody'),['phone_num','phone_num_loc','contact_name','needs_type','call_out_cnt','call_out_len'
+            // 		           ,'call_in_cnt','call_in_len','call_cnt','call_len','contact_1w','contact_1m','contact_3m','contact_morning'
+            // 		           ,'contact_noon','contact_afternoon','contact_night','contact_early_morning','contact_all_day','contact_weekday'
+            // 		           ,'contact_weekend','contact_holiday'],eh);
+            // 	});
+            // }
+            //运营商数据分析——常用服务
+            if (this.caReport.main_service && this.caReport.main_service.length > 0) {
+              var fieldsArr = ['company_type', 'company_name', 'total_service_cnt'];
+              var mthinfo = this.caReport.main_service[0];
+              if (mthinfo.service_details && mthinfo.service_details.length > 0) {
+                var n = 4;
+                $.each(mthinfo.service_details, function (i, eh) {
+                  fieldsArr.push(eh.interact_mth);
+                  $('#div_carr #t_6_2 thead th').eq(n).text(eh.interact_mth);
+                  n++;
+                });
+              }
+              $.each(caReport.main_service, function (i, eh) {
+                var serviceObj = name_val_jsonArr2Json(eh.service_details, 'interact_mth', 'interact_cnt');
+                $.merge(eh, serviceObj);
+                this.addRow($('#div_carr #t_6_2 tbody'), fieldsArr, eh);
+              });
+            }
           }
         });
       },

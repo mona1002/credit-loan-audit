@@ -1724,7 +1724,10 @@
             }).then(() => {}).catch(() => {});
           } else if (res.obj) {
             this.$router.push({
-              path: '/PneCtrl'
+              name: 'PneCtrl',
+              params: {
+                newOne: true,
+              }
             });
           }
         });

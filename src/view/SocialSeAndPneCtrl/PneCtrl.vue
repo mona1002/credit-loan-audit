@@ -53,6 +53,16 @@
         judgeFlag: ''
       }
     },
+    watch: {
+      '$route' (to, from) {
+        from.meta.newOne = false;
+        console.log(this.$route)
+        if (to.path === '/PneCtrl' && this.$route.params.newOne) {
+          this.getInf();
+          this.ind = 0;
+        }
+      }
+    },
     methods: {
       swiching(e, index, val) {
         this.ind = index;
@@ -79,9 +89,9 @@
         // this.localInf.applyId = '9e56e245-bd30-4a51-97e9-c255ea7171b6';
       }
     },
-    activated() {
-      this.getInf();
-    },
+    // activated() {
+    //   this.getInf();
+    // },
     created() {
       this.getInf();
     },

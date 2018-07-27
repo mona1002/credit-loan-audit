@@ -1633,15 +1633,14 @@
             }).then(() => {}).catch(() => {});
           } else if (res.obj) {
             this.$router.push({
-              path: '/PneCtrl'
+              name: 'PneCtrl',
+              params: {
+                newOne: true,
+              }
             });
           }
         });
       },
-      //大数据风控 提示弹框关闭
-      // infoSure() {
-      //   this.bigDataLogVisible = false;
-      // },
       //社保/公积金
       Social() {
         this.post(baseurl.BaseUrl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {

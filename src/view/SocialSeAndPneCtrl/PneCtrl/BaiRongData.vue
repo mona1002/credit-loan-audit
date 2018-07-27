@@ -1229,19 +1229,19 @@
             this.outputAndParam = res.obj.crimeInfo; //个人不良信息-产品输出标识、返回参数
             this.tableData = res.obj.crimeInfoDetails.rows; //个人不良信息-命中规则
             //特殊名单核查
-            for (var key in res.obj.specialListc) {
+            for (let key in res.obj.specialListc) {
               if (res.obj.specialListc[key]) {
                 this.specialList[key] = res.obj.specialListc[key];
               }
             }
             // 多次申请核查
-            for (var key in res.obj.applyloanc) {
+            for (let key in res.obj.applyloanc) {
               if (res.obj.applyloanc[key] || res.obj.applyloanc[key] == '0') {
                 this.applyloan[key] = res.obj.applyloanc[key];
               }
             }
             // 法院执行人
-            for (var key in res.obj.executionc) {
+            for (let key in res.obj.executionc) {
               if (res.obj.executionc[key]) {
                 this.execution[key] = res.obj.executionc[key];
               }
