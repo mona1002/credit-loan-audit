@@ -301,156 +301,167 @@
           }
           $tr.append("<td>" + name + '：' + value + '</td>');
         });
+      },
+      getInf() {
+        this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+        if (this.judgeFlag.flag == '01') {
+          this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
+        } else if (this.judgeFlag.flag == '02') {
+          this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
+        } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
+          this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
+        }
+        // else if (this.judgeFlag.flag == '04') {
+        //   this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
+        // }
+        else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
+          this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting"))
+        } else if (this.judgeFlag.flag == '07' || this.judgeFlag.flag == '08' || this.judgeFlag.flag == '09' || this.judgeFlag
+          .flag == '10' || this.judgeFlag.flag == '11' || this.judgeFlag.flag == '13') {
+          this.localInf = JSON.parse(localStorage.getItem("FGQTTaskWait")) //质检 专员
+        }
+        //  else if (this.judgeFlag.flag == '08') {
+        //   this.localInf = JSON.parse(localStorage.getItem("FGQTManagerTW")) //质检 主管
+        // } else if (this.judgeFlag.flag == '09') {
+        //   this.localInf = JSON.parse(localStorage.getItem("FGQTSelfTW")) //质检 初终审本人任务列表 
+        // } else if (this.judgeFlag.flag == '10') {
+        //   this.localInf = JSON.parse(localStorage.getItem("QTTrialManagerTW")) //质检 初终审主管
+        // } else if (this.judgeFlag.flag == '11') {
+        //   this.localInf = JSON.parse(localStorage.getItem("FGQTReManagerTW")) //质检 复议任务列表（首次） ---区域无社保公积金按钮
+        // } else if (this.judgeFlag.flag == '13') {
+        //   this.localInf = JSON.parse(localStorage.getItem("QTComplianceTW")) //质检 合规经理任务列表 
+        // }
+        this.post(baseurl.BaseUrl + "/rmMxSecFundQryAction!notSession_getMxSecInfo.action", {
+          custName: this.localInf.custName,
+          certCode: this.localInf.certCode
+          // custName: '乔义星',
+          // certCode: '37142519720311977X'
+        }).then(res => {
+          if (res.success) {
+            // 输入参数
+            this.InputParameter = res.obj.inParam;
+            // 基本信息 
+            if (res.obj.baseInfo != '') {
+              this.baseInf = JSON.parse(res.obj.baseInfo);
+              this.base = JSON.parse(this.baseInf.base_info); //基本信息-基本信息
+              this.insurances = JSON.parse(this.baseInf.insurances); //基本信息-保险费用
+              this.insurance_record = JSON.parse(this.baseInf.insurance_record); //基本信息-保险费用记录
+              this.medical_insurance_record = JSON.parse(this.baseInf.medical_insurance_record); //基本信息-医疗保险记录
+              this.delBase();
+              if (this.base != undefined) { //基本信息-基本信息
+                this.addTrThTd(this.base, $('#sec_responseBaseInfoParams #t_01'), 3);
+              };
+              if (this.insurances) { //基本信息-保险费用
+                $.each(this.insurances, (index, each) => {
+                  this.addTrThTd(each, $('#sec_responseBaseInfoParams #t_02'), 3);
+                });
+              }
+              if (this.insurance_record) { //基本信息-保险费用记录
+                $.each(this.insurance_record, (index, each) => {
+                  this.addTrThTd(each, $('#sec_responseBaseInfoParams #t_03'), 6);
+                });
+              }
+              if (this.medical_insurance_record) { //基本信息-医疗保险记录
+                $.each(this.medical_insurance_record, (index, each) => {
+                  this.addTrThTd(each, $('#sec_responseBaseInfoParams #t_04'), 4);
+                });
+              }
+            }
+            // 报告信息
+            if (res.obj.reportInfo != '') {
+              this.reportInf = JSON.parse(res.obj.reportInfo);
+              this.ReportBase = this.reportInf.basic_info.user_basic_info; //用户及账户基本信息
+              this.ReportBaseCheck = this.reportInf.basic_info.user_basic_info_check; //用户基本信息效验
+              this.ReportSocialSec = this.reportInf.social_insurance_summary.society_detail //社保信息
+              this.ReportMedInsu = this.reportInf.medical_insurance_bill.medical_insurance_pay; //医疗保险缴存信息
+              this.ReportExpenseDet = this.reportInf.medical_consumption_details.medical_consumption_basic //医保消费明细
+              this.ReportSecRecord = this.reportInf.medical_consumption_details.medical_consumption_record.securities_report; //医保卡消费记录
+              //用户及账户基本信息
+              if (this.ReportBase != undefined) {
+                this.addTrThTd(this.ReportBase, $('#sec_responseParams #t_1'), 3);
+              }
+              //用户基本信息效验
+              if (this.ReportBaseCheck != undefined) {
+                this.addTrThTd(this.ReportBaseCheck, $('#sec_responseParams #t_2'), 3);
+              }
+              //社保保险信息摘要
+              if (this.ReportSocialSec != undefined) {
+                $.each(this.ReportSocialSec, (index, each) => {
+                  if (each == undefined) return;
+                  this.addTrThTd(each, $('#sec_responseParams #t_3'), 3);
+                });
+              }
+              //医疗保险缴存信息
+              if (this.ReportMedInsu.保险名称 != undefined) {
+                $('#sec_responseParams #t_4').append(
+                  "<tr style='border-bottom:1px solid #ebeef5'><th>保险名称</th></tr>");
+                this.addTd(this.ReportMedInsu.保险名称, $('#sec_responseParams #t_4').find('tr:last'), true);
+                // this.addTrThTd(this.ReportMedInsu.保险名称, $('#sec_responseParams #t_4'), 3, true);
+              }
+              if (this.ReportMedInsu['缴存基数[元]'] != undefined) {
+                $('#sec_responseParams #t_4').append(
+                  "<tr style='border-bottom:1px solid #ebeef5'><th>缴存基数</th></tr>");
+                this.addTd(this.ReportMedInsu['缴存基数[元]'], $('#sec_responseParams #t_4').find('tr:last'), true);
+                // this.addTrThTd(this.ReportMedInsu['缴存基数[元]'], $('#sec_responseParams #t_4'), 3, true);
+              }
+              if (this.ReportMedInsu['单位缴存金额[元]']) {
+                $('#sec_responseParams #t_4').append(
+                  "<tr style='border-bottom:1px solid #ebeef5'><th>单位缴存金额</th></tr>");
+                this.addTd(this.ReportMedInsu['单位缴存金额[元]'], $('#sec_responseParams #t_4').find('tr:last'), true);
+                // this.addTrThTd(this.ReportMedInsu['单位缴存金额[元]'], $('#sec_responseParams #t_4'), 3, true);
+              }
+              if (this.ReportMedInsu['个人缴存金额[元]']) {
+                $('#sec_responseParams #t_4').append(
+                  "<tr style='border-bottom:1px solid #ebeef5'><th>个人缴存金额</th></tr>");
+                this.addTd(this.ReportMedInsu['个人缴存金额[元]'], $('#sec_responseParams #t_4').find('tr:last'), true);
+                // this.addTrThTd(this.ReportMedInsu['个人缴存金额[元]'], $('#sec_responseParams #t_4'), 3, true);
+              }
+              if (this.ReportMedInsu.缴存状态标记) {
+                $('#sec_responseParams #t_4').append(
+                  "<tr  style='border-bottom:1px solid #ebeef5'><th>缴存状态标记</th></tr>");
+                this.addTd(this.ReportMedInsu.缴存状态标记, $('#sec_responseParams #t_4').find('tr:last'), true);
+                // this.addTrThTd(this.ReportMedInsu.缴存状态标记, $('#sec_responseParams #t_4'), 3, true);
+              }
+              //医保消费明细
+              if (this.ReportExpenseDet["消费金额[元]"] != undefined) {
+                $('#sec_responseParams #t_5').append(
+                  "<tr style='border-bottom:1px solid #ebeef5'><th>消费金额</th></tr>");
+                this.addTd(this.ReportExpenseDet["消费金额[元]"], $('#sec_responseParams #t_5').find('tr:last'), true);
+                // this.addTrThTd(this.ReportExpenseDet["消费金额[元]"], $('#sec_responseParams #t_5'), 3, true);
+              }
+              if (this.ReportExpenseDet.消费次数 != undefined) {
+                $('#sec_responseParams #t_5').append(
+                  "<tr style='border-bottom:1px solid #ebeef5'><th>消费次数</th></tr>");
+                this.addTd(this.ReportExpenseDet.消费次数, $('#sec_responseParams #t_5').find('tr:last'), true);
+                // this.addTrThTd(this.ReportExpenseDet.消费次数, $('#sec_responseParams #t_5'), 3, true);
+              }
+              if (this.ReportExpenseDet['每月最大单笔消费[元]'] != undefined) {
+                $('#sec_responseParams #t_5').append(
+                  "<tr style='border-bottom:1px solid #ebeef5'><th>每月最大单笔消费</th></tr>");
+                this.addTd(this.ReportExpenseDet['每月最大单笔消费[元]'], $('#sec_responseParams #t_5').find('tr:last'),
+                  true);
+                // this.addTrThTd(this.ReportExpenseDet['每月最大单笔消费[元]'], $('#sec_responseParams #t_5'), 3, true);
+              }
+              //医保卡消费记录
+              if (this.ReportSecRecord != undefined) {
+                $.each(this.ReportSecRecord, (index, each) => {
+                  if (each == undefined) return;
+                  this.addTrThTd(each, $('#sec_responseParams #t_6'), 4);
+                });
+              }
+              this.delReport();
+            }
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
       }
     },
+    activated() {
+      this.getInf();
+    },
     mounted() {
-      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '01') {
-        this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
-      } else if (this.judgeFlag.flag == '02') {
-        this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-      } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
-        this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
-      }
-      // else if (this.judgeFlag.flag == '04') {
-      //   this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
-      // }
-      else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
-        this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting"))
-      } else if (this.judgeFlag.flag == '07' || this.judgeFlag.flag == '08' || this.judgeFlag.flag == '09' || this.judgeFlag
-        .flag == '10' || this.judgeFlag.flag == '11' || this.judgeFlag.flag == '13') {
-        this.localInf = JSON.parse(localStorage.getItem("FGQTTaskWait")) //质检 专员
-      }
-      //  else if (this.judgeFlag.flag == '08') {
-      //   this.localInf = JSON.parse(localStorage.getItem("FGQTManagerTW")) //质检 主管
-      // } else if (this.judgeFlag.flag == '09') {
-      //   this.localInf = JSON.parse(localStorage.getItem("FGQTSelfTW")) //质检 初终审本人任务列表 
-      // } else if (this.judgeFlag.flag == '10') {
-      //   this.localInf = JSON.parse(localStorage.getItem("QTTrialManagerTW")) //质检 初终审主管
-      // } else if (this.judgeFlag.flag == '11') {
-      //   this.localInf = JSON.parse(localStorage.getItem("FGQTReManagerTW")) //质检 复议任务列表（首次） ---区域无社保公积金按钮
-      // } else if (this.judgeFlag.flag == '13') {
-      //   this.localInf = JSON.parse(localStorage.getItem("QTComplianceTW")) //质检 合规经理任务列表 
-      // }
-      this.post(baseurl.BaseUrl + "/rmMxSecFundQryAction!notSession_getMxSecInfo.action", {
-        custName: this.localInf.custName,
-        certCode: this.localInf.certCode
-        // custName: '乔义星',
-        // certCode: '37142519720311977X'
-      }).then(res => {
-        if (res.success) {
-          // 输入参数
-          this.InputParameter = res.obj.inParam;
-          // 基本信息 
-          if (res.obj.baseInfo != '') {
-            this.baseInf = JSON.parse(res.obj.baseInfo);
-            this.base = JSON.parse(this.baseInf.base_info); //基本信息-基本信息
-            this.insurances = JSON.parse(this.baseInf.insurances); //基本信息-保险费用
-            this.insurance_record = JSON.parse(this.baseInf.insurance_record); //基本信息-保险费用记录
-            this.medical_insurance_record = JSON.parse(this.baseInf.medical_insurance_record); //基本信息-医疗保险记录
-            this.delBase();
-            if (this.base != undefined) { //基本信息-基本信息
-              this.addTrThTd(this.base, $('#sec_responseBaseInfoParams #t_01'), 3);
-            };
-            if (this.insurances) { //基本信息-保险费用
-              $.each(this.insurances, (index, each) => {
-                this.addTrThTd(each, $('#sec_responseBaseInfoParams #t_02'), 3);
-              });
-            }
-            if (this.insurance_record) { //基本信息-保险费用记录
-              $.each(this.insurance_record, (index, each) => {
-                this.addTrThTd(each, $('#sec_responseBaseInfoParams #t_03'), 6);
-              });
-            }
-            if (this.medical_insurance_record) { //基本信息-医疗保险记录
-              $.each(this.medical_insurance_record, (index, each) => {
-                this.addTrThTd(each, $('#sec_responseBaseInfoParams #t_04'), 4);
-              });
-            }
-          }
-          // 报告信息
-          if (res.obj.reportInfo != '') {
-            this.reportInf = JSON.parse(res.obj.reportInfo);
-            this.ReportBase = this.reportInf.basic_info.user_basic_info; //用户及账户基本信息
-            this.ReportBaseCheck = this.reportInf.basic_info.user_basic_info_check; //用户基本信息效验
-            this.ReportSocialSec = this.reportInf.social_insurance_summary.society_detail //社保信息
-            this.ReportMedInsu = this.reportInf.medical_insurance_bill.medical_insurance_pay; //医疗保险缴存信息
-            this.ReportExpenseDet = this.reportInf.medical_consumption_details.medical_consumption_basic //医保消费明细
-            this.ReportSecRecord = this.reportInf.medical_consumption_details.medical_consumption_record.securities_report; //医保卡消费记录
-            //用户及账户基本信息
-            if (this.ReportBase != undefined) {
-              this.addTrThTd(this.ReportBase, $('#sec_responseParams #t_1'), 3);
-            }
-            //用户基本信息效验
-            if (this.ReportBaseCheck != undefined) {
-              this.addTrThTd(this.ReportBaseCheck, $('#sec_responseParams #t_2'), 3);
-            }
-            //社保保险信息摘要
-            if (this.ReportSocialSec != undefined) {
-              $.each(this.ReportSocialSec, (index, each) => {
-                if (each == undefined) return;
-                this.addTrThTd(each, $('#sec_responseParams #t_3'), 3);
-              });
-            }
-            //医疗保险缴存信息
-            if (this.ReportMedInsu.保险名称 != undefined) {
-              $('#sec_responseParams #t_4').append("<tr style='border-bottom:1px solid #ebeef5'><th>保险名称</th></tr>");
-              this.addTd(this.ReportMedInsu.保险名称, $('#sec_responseParams #t_4').find('tr:last'), true);
-              // this.addTrThTd(this.ReportMedInsu.保险名称, $('#sec_responseParams #t_4'), 3, true);
-            }
-            if (this.ReportMedInsu['缴存基数[元]'] != undefined) {
-              $('#sec_responseParams #t_4').append("<tr style='border-bottom:1px solid #ebeef5'><th>缴存基数</th></tr>");
-              this.addTd(this.ReportMedInsu['缴存基数[元]'], $('#sec_responseParams #t_4').find('tr:last'), true);
-              // this.addTrThTd(this.ReportMedInsu['缴存基数[元]'], $('#sec_responseParams #t_4'), 3, true);
-            }
-            if (this.ReportMedInsu['单位缴存金额[元]']) {
-              $('#sec_responseParams #t_4').append(
-                "<tr style='border-bottom:1px solid #ebeef5'><th>单位缴存金额</th></tr>");
-              this.addTd(this.ReportMedInsu['单位缴存金额[元]'], $('#sec_responseParams #t_4').find('tr:last'), true);
-              // this.addTrThTd(this.ReportMedInsu['单位缴存金额[元]'], $('#sec_responseParams #t_4'), 3, true);
-            }
-            if (this.ReportMedInsu['个人缴存金额[元]']) {
-              $('#sec_responseParams #t_4').append(
-                "<tr style='border-bottom:1px solid #ebeef5'><th>个人缴存金额</th></tr>");
-              this.addTd(this.ReportMedInsu['个人缴存金额[元]'], $('#sec_responseParams #t_4').find('tr:last'), true);
-              // this.addTrThTd(this.ReportMedInsu['个人缴存金额[元]'], $('#sec_responseParams #t_4'), 3, true);
-            }
-            if (this.ReportMedInsu.缴存状态标记) {
-              $('#sec_responseParams #t_4').append(
-                "<tr  style='border-bottom:1px solid #ebeef5'><th>缴存状态标记</th></tr>");
-              this.addTd(this.ReportMedInsu.缴存状态标记, $('#sec_responseParams #t_4').find('tr:last'), true);
-              // this.addTrThTd(this.ReportMedInsu.缴存状态标记, $('#sec_responseParams #t_4'), 3, true);
-            }
-            //医保消费明细
-            if (this.ReportExpenseDet["消费金额[元]"] != undefined) {
-              $('#sec_responseParams #t_5').append("<tr style='border-bottom:1px solid #ebeef5'><th>消费金额</th></tr>");
-              this.addTd(this.ReportExpenseDet["消费金额[元]"], $('#sec_responseParams #t_5').find('tr:last'), true);
-              // this.addTrThTd(this.ReportExpenseDet["消费金额[元]"], $('#sec_responseParams #t_5'), 3, true);
-            }
-            if (this.ReportExpenseDet.消费次数 != undefined) {
-              $('#sec_responseParams #t_5').append("<tr style='border-bottom:1px solid #ebeef5'><th>消费次数</th></tr>");
-              this.addTd(this.ReportExpenseDet.消费次数, $('#sec_responseParams #t_5').find('tr:last'), true);
-              // this.addTrThTd(this.ReportExpenseDet.消费次数, $('#sec_responseParams #t_5'), 3, true);
-            }
-            if (this.ReportExpenseDet['每月最大单笔消费[元]'] != undefined) {
-              $('#sec_responseParams #t_5').append(
-                "<tr style='border-bottom:1px solid #ebeef5'><th>每月最大单笔消费</th></tr>");
-              this.addTd(this.ReportExpenseDet['每月最大单笔消费[元]'], $('#sec_responseParams #t_5').find('tr:last'), true);
-              // this.addTrThTd(this.ReportExpenseDet['每月最大单笔消费[元]'], $('#sec_responseParams #t_5'), 3, true);
-            }
-            //医保卡消费记录
-            if (this.ReportSecRecord != undefined) {
-              $.each(this.ReportSecRecord, (index, each) => {
-                if (each == undefined) return;
-                this.addTrThTd(each, $('#sec_responseParams #t_6'), 4);
-              });
-            }
-            this.delReport();
-          }
-        } else {
-          this.$message.error(res.msg);
-        }
-      });
+      this.getInf();
     }
   }
 

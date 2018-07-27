@@ -167,7 +167,7 @@
     data() {
       return {
         activeNames: ['1', "2", "3"],
-        localInf: {},
+        getInf: {},
         InputParameter: {},
         base: {}, //基本信息-基本信息
         bills: [], //基本信息-保险费用
@@ -287,112 +287,119 @@
             item[k]['保险Id(险种)'] ? delete item[k]['保险Id(险种)'] : item[k];
           }
         }
+      },
+      getInfFlag() {
+        this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+        if (this.judgeFlag.flag == '01') {
+          this.getInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
+        } else if (this.judgeFlag.flag == '02') {
+          this.getInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
+        } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
+          this.getInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
+        }
+        //  else if (this.judgeFlag.flag == '04') {
+        //   this.getInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
+        // }
+        else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
+          this.getInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员 
+        } else if (this.judgeFlag.flag == '07' || this.judgeFlag.flag == '08' || this.judgeFlag.flag == '09' || this.judgeFlag
+          .flag == '10' || this.judgeFlag.flag == '11' || this.judgeFlag.flag == '13') {
+          this.getInf = JSON.parse(localStorage.getItem("FGQTTaskWait")) //质检 专员
+        }
+        //  else if (this.judgeFlag.flag == '08') {
+        //   this.getInf = JSON.parse(localStorage.getItem("FGQTManagerTW")) //质检 主管
+        // } else if (this.judgeFlag.flag == '09') {
+        //   this.getInf = JSON.parse(localStorage.getItem("FGQTSelfTW")) //质检 初终审本人任务列表 
+        // } else if (this.judgeFlag.flag == '10') {
+        //   this.getInf = JSON.parse(localStorage.getItem("QTTrialManagerTW")) //质检 初终审主管
+        // } else if (this.judgeFlag.flag == '11') {
+        //   this.getInf = JSON.parse(localStorage.getItem("FGQTReManagerTW")) //质检 复议任务列表（首次） ---区域无社保公积金按钮
+        // } else if (this.judgeFlag.flag == '13') {
+        //   this.getInf = JSON.parse(localStorage.getItem("QTComplianceTW")) //质检 合规经理任务列表 
+        // }
+        // else if (this.judgeFlag.flag == '06') {
+        //   this.getInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议经理
+        // }
+        console.log(this.getInf )
+        this.post(baseurl.BaseUrl + "/rmMxSecFundQryAction!notSession_getMxFundInfo.action", {
+          custName: this.getInf.custName,
+          certCode: this.getInf.certCode
+        }).then(res => {
+          if (res.success) {
+            // 输入参数
+            this.InputParameter = res.obj.inParam;
+            // 基本信息
+            if (res.obj.baseInfo != "") {
+              this.baseInf = JSON.parse(res.obj.baseInfo);
+              this.base = JSON.parse(this.baseInf.user_info); //	基本信息
+              this.bills = JSON.parse(this.baseInf.bill_record); //账单记录
+              this.loan = JSON.parse(this.baseInf.loan_info); //贷款信息
+              this.repay = JSON.parse(this.baseInf.loan_repay_record); //还款记录 
+              //基本信息
+              if (this.base) {
+                this.addTrThTd(this.base, $('#responseBaseInfoParams #t_01'), 3);
+              }
+              //账单记录
+              if (this.bills) {
+                $.each(this.bills, (index, each) => {
+                  this.addTrThTd(each, $('#responseBaseInfoParams #t_02'), 5);
+                });
+              }
+              //贷款信息
+              if (this.loan) {
+                $.each(this.loan, (index, each) => {
+                  this.addTrThTd(each, $('#responseBaseInfoParams #t_03'), 5);
+                });
+              }
+              //还款记录
+              if (this.repay) {
+                $.each(this.repay, (index, each) => {
+                  this.addTrThTd(each, $('#responseBaseInfoParams #t_04'), 5);
+                });
+              }
+              this.delBase();
+            }
+            // 报告信息
+            if (res.obj.reportInfo != "") {
+              this.reportInf = JSON.parse(res.obj.reportInfo);
+              this.ReportBase = this.reportInf.user_basic_info; //		用户及账户基本信息
+              this.ReportBaseCheck = this.reportInf.user_basic_info_check; //用户基本信息校验
+              this.ReportAccountBase = this.reportInf.fund_basic_info //账户基本信息
+              this.Reportpayment = this.reportInf.payment_info //缴纳信息
+              this.ReportRepay = this.reportInf.repay_info //还款信息
+              //用户及账户基本信息
+              if (this.ReportBase != undefined) {
+                this.addTrThTd(this.ReportBase, $('#responseParams #t_1'), 3);
+              }
+              //用户基本信息校验
+              if (this.ReportBaseCheck != undefined) {
+                this.addTrThTd(this.ReportBaseCheck, $('#responseParams #t_2'), 3);
+              }
+              //账户基本信息
+              if (this.ReportAccountBase != undefined) {
+                this.addTrThTd(this.ReportAccountBase, $('#responseParams #t_3'), 3);
+              }
+              //缴纳信息
+              if (this.Reportpayment != undefined) {
+                this.addTrThTd(this.Reportpayment, $('#responseParams #t_4'), 3);
+              }
+              //还款信息
+              if (this.ReportRepay != undefined) {
+                this.addTrThTd(this.ReportRepay, $('#responseParams #t_5'), 3);
+              }
+              this.delReport();
+            }
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
       }
     },
+    activated() {
+      this.getInfFlag();
+    },
     mounted() {
-      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '01') {
-        this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
-      } else if (this.judgeFlag.flag == '02') {
-        this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-      } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
-        this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
-      }
-      //  else if (this.judgeFlag.flag == '04') {
-      //   this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
-      // }
-      else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
-        this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员 
-      } else if (this.judgeFlag.flag == '07' || this.judgeFlag.flag == '08' || this.judgeFlag.flag == '09' || this.judgeFlag
-        .flag == '10' || this.judgeFlag.flag == '11' || this.judgeFlag.flag == '13') {
-        this.localInf = JSON.parse(localStorage.getItem("FGQTTaskWait")) //质检 专员
-      }
-      //  else if (this.judgeFlag.flag == '08') {
-      //   this.localInf = JSON.parse(localStorage.getItem("FGQTManagerTW")) //质检 主管
-      // } else if (this.judgeFlag.flag == '09') {
-      //   this.localInf = JSON.parse(localStorage.getItem("FGQTSelfTW")) //质检 初终审本人任务列表 
-      // } else if (this.judgeFlag.flag == '10') {
-      //   this.localInf = JSON.parse(localStorage.getItem("QTTrialManagerTW")) //质检 初终审主管
-      // } else if (this.judgeFlag.flag == '11') {
-      //   this.localInf = JSON.parse(localStorage.getItem("FGQTReManagerTW")) //质检 复议任务列表（首次） ---区域无社保公积金按钮
-      // } else if (this.judgeFlag.flag == '13') {
-      //   this.localInf = JSON.parse(localStorage.getItem("QTComplianceTW")) //质检 合规经理任务列表 
-      // }
-      // else if (this.judgeFlag.flag == '06') {
-      //   this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议经理
-      // }
-      this.post(baseurl.BaseUrl + "/rmMxSecFundQryAction!notSession_getMxFundInfo.action", {
-        custName: this.localInf.custName,
-        certCode: this.localInf.certCode
-      }).then(res => {
-        if (res.success) {
-          // 输入参数
-          this.InputParameter = res.obj.inParam;
-          // 基本信息
-          if (res.obj.baseInfo != "") {
-            this.baseInf = JSON.parse(res.obj.baseInfo);
-            this.base = JSON.parse(this.baseInf.user_info); //	基本信息
-            this.bills = JSON.parse(this.baseInf.bill_record); //账单记录
-            this.loan = JSON.parse(this.baseInf.loan_info); //贷款信息
-            this.repay = JSON.parse(this.baseInf.loan_repay_record); //还款记录 
-            //基本信息
-            if (this.base) {
-              this.addTrThTd(this.base, $('#responseBaseInfoParams #t_01'), 3);
-            }
-            //账单记录
-            if (this.bills) {
-              $.each(this.bills, (index, each) => {
-                this.addTrThTd(each, $('#responseBaseInfoParams #t_02'), 5);
-              });
-            }
-            //贷款信息
-            if (this.loan) {
-              $.each(this.loan, (index, each) => {
-                this.addTrThTd(each, $('#responseBaseInfoParams #t_03'), 5);
-              });
-            }
-            //还款记录
-            if (this.repay) {
-              $.each(this.repay, (index, each) => {
-                this.addTrThTd(each, $('#responseBaseInfoParams #t_04'), 5);
-              });
-            }
-            this.delBase();
-          }
-          // 报告信息
-          if (res.obj.reportInfo != "") {
-            this.reportInf = JSON.parse(res.obj.reportInfo);
-            this.ReportBase = this.reportInf.user_basic_info; //		用户及账户基本信息
-            this.ReportBaseCheck = this.reportInf.user_basic_info_check; //用户基本信息校验
-            this.ReportAccountBase = this.reportInf.fund_basic_info //账户基本信息
-            this.Reportpayment = this.reportInf.payment_info //缴纳信息
-            this.ReportRepay = this.reportInf.repay_info //还款信息
-            //用户及账户基本信息
-            if (this.ReportBase != undefined) {
-              this.addTrThTd(this.ReportBase, $('#responseParams #t_1'), 3);
-            }
-            //用户基本信息校验
-            if (this.ReportBaseCheck != undefined) {
-              this.addTrThTd(this.ReportBaseCheck, $('#responseParams #t_2'), 3);
-            }
-            //账户基本信息
-            if (this.ReportAccountBase != undefined) {
-              this.addTrThTd(this.ReportAccountBase, $('#responseParams #t_3'), 3);
-            }
-            //缴纳信息
-            if (this.Reportpayment != undefined) {
-              this.addTrThTd(this.Reportpayment, $('#responseParams #t_4'), 3);
-            }
-            //还款信息
-            if (this.ReportRepay != undefined) {
-              this.addTrThTd(this.ReportRepay, $('#responseParams #t_5'), 3);
-            }
-            this.delReport();
-          }
-        } else {
-          this.$message.error(res.msg);
-        }
-      });
+      this.getInfFlag();
     }
   }
 
