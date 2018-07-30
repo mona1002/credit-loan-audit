@@ -51,7 +51,7 @@
       this.request();
     },
     methods: {
-        // request() {
+        request() {
         //   this.post('/smUser/getResTree').then(res => {
         //     if(res.statusCode == 200){
         //       this.datas = res.data;
@@ -61,7 +61,7 @@
         //     }
             
         //   })
-        // },
+        },
         bbb(){
           setTimeout(function(){
             if($('.navContain').width()>$('.wrap').width()){

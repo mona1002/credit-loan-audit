@@ -267,9 +267,12 @@
         localStorage.setItem("userctcode", JSON.stringify(response.data.subOrgCode));
         console.log(JSON.parse(localStorage.getItem('userc')))
         console.log(JSON.parse(localStorage.getItem('userctcode')))
+        alert("data："+ response.data)
         this.post("/workFlowTaskQuery/getTaskProfile", {
           taskStatus: "01",
         }).then(res => {
+        alert("statusCode"+ res.statusCode)
+          
           if (res.statusCode == 200) {
             this.tableData = res.data;
           } else {
