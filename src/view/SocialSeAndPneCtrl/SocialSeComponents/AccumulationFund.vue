@@ -182,6 +182,13 @@
         ReportRepay: {},
       }
     },
+    watch: {
+      '$route' (to, from) {
+        if (to.path === '/SocialSe') {
+          this.getInfFlag();
+        }
+      }
+    },
     methods: {
       formatMoney(val, row) {
         var t = "";
@@ -289,23 +296,7 @@
         }
       },
       getInfFlag() {
-        this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-        if (this.judgeFlag.flag == '01') {
-          this.getInf = JSON.parse(localStorage.getItem("taskInWaitting")) //初审
-        } else if (this.judgeFlag.flag == '02') {
-          this.getInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-        } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
-          this.getInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
-        }
-        //  else if (this.judgeFlag.flag == '04') {
-        //   this.getInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
-        // }
-        else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
-          this.getInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员 
-        } else if (this.judgeFlag.flag == '07' || this.judgeFlag.flag == '08' || this.judgeFlag.flag == '09' || this.judgeFlag
-          .flag == '10' || this.judgeFlag.flag == '11' || this.judgeFlag.flag == '13') {
-          this.getInf = JSON.parse(localStorage.getItem("FGQTTaskWait")) //质检 专员
-        }
+
         //  else if (this.judgeFlag.flag == '08') {
         //   this.getInf = JSON.parse(localStorage.getItem("FGQTManagerTW")) //质检 主管
         // } else if (this.judgeFlag.flag == '09') {
@@ -320,7 +311,6 @@
         // else if (this.judgeFlag.flag == '06') {
         //   this.getInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议经理
         // }
-        console.log(this.getInf )
         this.post(baseurl.BaseUrl + "/rmMxSecFundQryAction!notSession_getMxFundInfo.action", {
           custName: this.getInf.custName,
           certCode: this.getInf.certCode
@@ -395,9 +385,9 @@
         });
       }
     },
-    activated() {
-      this.getInfFlag();
-    },
+    // activated() {
+    //   this.getInfFlag();
+    // },
     mounted() {
       this.getInfFlag();
     }
