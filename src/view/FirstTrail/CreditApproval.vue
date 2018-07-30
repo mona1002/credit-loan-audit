@@ -2359,8 +2359,14 @@
             }).then(() => {}).catch(() => {});
             // alert(this.bigDataLogVisible)
           } else if (res.obj) {
-            this.$router.push({
-              path: '/PneCtrl'
+            // this.$router.push({
+            //   path: '/PneCtrl'
+            // });
+                  this.$router.push({
+              name: 'PneCtrl',
+              params: {
+                newOne: true,
+              }
             });
             // this.$store.dispatch('addVisitedViews', {
             //   name: '大数据风控',

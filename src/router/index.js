@@ -336,7 +336,8 @@ const routes = [{
   // ---------------大数据+社保--------------------
   {
     path: '/PneCtrl',
-    component: PneCtrl
+    component: PneCtrl,
+    name:'PneCtrl'
   },
   {
     path: '/SocialSe',
