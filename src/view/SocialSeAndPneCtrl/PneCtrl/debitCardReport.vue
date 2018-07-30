@@ -295,7 +295,7 @@
                 var dAccountIds = [];
                 $.each(report, (i, eh) => {
                   if ('储蓄卡' == eh.type && eh.data.length > 0) {
-                    this.addTab(dTabs, $('#cardTabs #dTab').html(), eh.data.length - 1, "储蓄卡");
+                    this.addTab(dTabs, $(' #dTab').html(), eh.data.length - 1, "储蓄卡");
                     $.each(eh.data, (n, v) => {
                       dAccountIds.push(v.account_id); //没有该字段
                       //dAccountIds.push(v.card);
