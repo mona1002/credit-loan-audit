@@ -111,8 +111,6 @@
           if (res.success) {
             this.parmaAndRisk = res.obj.tdResponsec;
             this.tableData = res.obj.rules.rows;
-          } else {
-            this.$message.error(res.msg);
           }
         });
       }

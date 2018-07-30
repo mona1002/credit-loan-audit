@@ -189,22 +189,12 @@
         this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
           applyId: this.taskwaitting.ApplyId
         }).then(res => {
-          if (res.obj == null) {
-            // this.bigDataLogVisible = true;
-            this.$confirm('此进件不存在大数据风控明细！', '提示', {
-              confirmButtonText: '确定',
-              type: 'warning',
-              cancelButtonText: '取消',
-              showCancelButton: true
-            }).then(() => {}).catch(() => {});
-          } else if (res.obj) {
-            this.$router.push({
-              name: 'PneCtrl',
-              params: {
-                newOne: true,
-              }
-            });
-          }
+          this.$router.push({
+            name: 'PneCtrl',
+            params: {
+              newOne: true,
+            }
+          });
         });
       },
     },

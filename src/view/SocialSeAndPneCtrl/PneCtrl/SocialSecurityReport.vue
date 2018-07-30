@@ -455,11 +455,7 @@
         }).then(res => {
           // var socReport;
           // var socRawReport
-          if (!res.success) {
-            this.$messag1e.error('查询数据失败！');
-            return;
-          }
-          if ("" != res.obj.rpt) {
+          if (res.obj.rpt) {
             var result = $.parseJSON(res.obj.rpt);
             if (result && result.result && result.result['10126'] && result.result['10126'].bizInfo && result.result[
                 '10126'].bizInfo.data &&
@@ -467,7 +463,7 @@
               this.socReport = result.result['10126'].bizInfo.data.report[0].data; //报告
             }
           }
-          if ("" != res.obj.rawRpt) {
+          if (res.obj.rawRpt) {
             var rawResult = $.parseJSON(res.obj.rawRpt);
             if (rawResult && rawResult.result && rawResult.result['10125'] && rawResult.result['10125'].bizInfo) {
               this.socRawReport = rawResult.result['10125'].bizInfo.data; //原始数据

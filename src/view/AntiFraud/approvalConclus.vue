@@ -184,10 +184,10 @@
         <i class="approve_icon brokenLineIcon"></i>
         <span class="approve_text">大数据风控</span>
       </span>
-      <span class="approve_item" @click="roSocialSecurity">
+      <!-- <span class="approve_item" @click="roSocialSecurity">
         <i class="approve_icon dataMaptIcon"></i>
         <span class="approve_text">社保公积金{{social}}</span>
-      </span>
+      </span> -->
     </div>
     <!-- 弹窗 -->
     <!-- <el-dialog title="回退信息" :visible.sync="huiTuiShow" :modal="false">
@@ -1613,40 +1613,14 @@
         this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
           applyId: this.applyId
         }).then(res => {
-          if (res.obj == null) {
-            // alert('社保')
-            // this.bigDataLogVisible = true;
-            // alert(this.bigDataLogVisible)
-            this.$confirm('此进件不存在大数据风控明细！', '提示', {
-              confirmButtonText: '确定',
-              type: 'warning',
-              cancelButtonText: '取消',
-              showCancelButton: true
-            }).then(() => {}).catch(() => {});
-          } else if (res.obj) {
-            // this.$router.push({
-            //   path: '/PneCtrl'
-            // });
             this.$router.push({
               name: 'PneCtrl',
               params: {
                 newOne: true,
               }
             });
-            // this.$store.dispatch('addVisitedViews', {
-            //   name: '大数据风控',
-            //   path: '/PneCtrl',
-            //   flag: this.judgeFlag,
-            //   params: '',
-            //   StatefullPath: '/PneCtrl',
-            // })
-          }
         });
       },
-      //大数据风控 提示弹框关闭
-      // infoSure() {
-      //   this.bigDataLogVisible = false;
-      // },
       //社保/公积金
       Social() {
         this.post(baseurl.BaseUrl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {

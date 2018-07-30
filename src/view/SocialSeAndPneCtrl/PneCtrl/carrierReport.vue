@@ -498,10 +498,6 @@
           applySubNo: this.applySubNo
           //   applySubNo : 'PHDX6409598026121216'
         }).then(res => {
-          if (!res.success) {
-            $.messager.alert("提示", "查询数据失败！", "error");
-            return;
-          }
           if ('' != res.obj.rpt) {
             var report = $.parseJSON(res.obj.rpt);
             if (report && report.result && report.result['10069'] && report.result['10069'].bizInfo) {

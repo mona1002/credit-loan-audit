@@ -110,10 +110,10 @@
             <i class="approve_icon brokenLineIcon"></i>
             <span class="approve_text">大数据风控</span>
           </span>
-          <span class="approve_item" @click="roSocialSecurity">
+          <!-- <span class="approve_item" @click="roSocialSecurity">
             <i class="approve_icon dataMaptIcon"></i>
             <span class="approve_text">社保公积金{{social}}</span>
-          </span>
+          </span> -->
         </div>
       </el-collapse-item>
     </el-collapse>
@@ -1714,28 +1714,14 @@
         this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
           applyId: this.applyId
         }).then(res => {
-          //console.log(res.data);
-          if (res.obj == null) {
-            this.$confirm('此进件不存在大数据风控明细！', '提示', {
-              confirmButtonText: '确定',
-              type: 'warning',
-              cancelButtonText: '取消',
-              showCancelButton: true
-            }).then(() => {}).catch(() => {});
-          } else if (res.obj) {
             this.$router.push({
               name: 'PneCtrl',
               params: {
                 newOne: true,
               }
             });
-          }
         });
       },
-      //大数据风控 提示弹框关闭
-      // infoSure() {
-      //   this.bigDataLogVisible = false;
-      // },
       //社保/公积金
       Social() {
         this.post(baseurl.BaseUrl + '/rmMxSecFundQryAction!notSession_getLatestSuccRisQuery.action', {

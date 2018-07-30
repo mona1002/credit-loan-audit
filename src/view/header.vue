@@ -2,7 +2,6 @@
   <div class="mheader">
     <!-- 导航图片 -->
     <div class="logoDiv">
-      <!-- <img class="logo" src="/static/images/logo.png"> -->
       风控管理系统
     </div>
     <!-- 左按钮 -->
@@ -13,16 +12,12 @@
     <div class="wrap" ref="wrapRef" style="position:relative;left:198px;">
       <!-- 具体菜单内容 -->
       <div class="navContain"  ref="contains" style="left:0px;">
-        <!-- <div class="contain"> -->
           <nobr>
             <el-menu router unique-opened mode="horizontal" ref="navbar" active-text-color="#ffd04b" :default-active="onRoutes" @select="selectMenu">
               <el-menu-item is="nav-item" v-for="(item, n) in datas" :item="item" :navIndex="String(n)" :key="n">
-                <!-- <nav-item v-for="(item, n) in datas" :item="item" :navIndex="String(n)" :key="n" id="dddfff">
-                </nav-item> -->
               </el-menu-item>
             </el-menu>
           </nobr>
-        <!-- </div> -->
       </div>
     </div>
     <!-- 右按钮 -->

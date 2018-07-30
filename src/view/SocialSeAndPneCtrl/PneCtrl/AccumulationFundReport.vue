@@ -370,11 +370,11 @@
           //   applySubNo : 'PHDX6409598026121216'
         }).then(res => {
           console.log(res)
-          if (!res.success) {
-            this.$message.error("查询数据失败！");
-            return;
-          }
-          if ("" != res.obj.rpt) {
+          // if (!res.success) {
+          //   this.$message.error("查询数据失败！");
+          //   return;
+          // }
+          if (res.obj.rpt) {
             var result = $.parseJSON(res.obj.rpt);
             if (result && result.result && result.result['10059'] && result.result['10059'].bizInfo && result.result[
                 '10059'].bizInfo.data &&
@@ -385,7 +385,7 @@
             }
             console.log(1, this.fundReport);
           }
-          if ("" != res.obj.rawRpt) {
+          if (res.obj.rawRpt) {
             var rawResult = $.parseJSON(res.obj.rawRpt);
             if (rawResult && rawResult.result && rawResult.result['10060'] && rawResult.result['10060'].bizInfo) {
               this.fundRawReport = rawResult.result['10060'].bizInfo.data;

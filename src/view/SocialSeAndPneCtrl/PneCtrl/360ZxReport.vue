@@ -344,10 +344,10 @@
           //   applySubNo : 'PHDX6409598026121216'
         }).then(res => {
           console.log(res);
-          if (!res.success) {
-            this.$messager.error("查询数据失败！");
-            return;
-          }
+          // if (!res.success) {
+          //   this.$messager.error("查询数据失败！");
+          //   return;
+          // }
           if ("" != res.obj.rpt) {
             var result = $.parseJSON(res.obj.rpt);
             if (result && result.result && result.result['10120'] && result.result['10120'].bizInfo) {

@@ -107,14 +107,12 @@
     watch: {
       '$route' (to, from) {
         if (to.path === '/') {
-          console.log('路由')
           this.mountedInf();
         }
       }
     },
     methods: {
       mountedInf() {
-        console.log('方法')
         // 统一登录平台  
         // this.get(UserURL + 'remote/user/getUserInfo?' + Math.random()).then(response => {
         //   this.userInf = {
@@ -250,7 +248,6 @@
     },
     mounted() {
       // 统一登录平台  
-      console.log('挂载')
       this.get(UserURL + 'remote/user/getUserInfo?' + Math.random()).then(response => {
         this.userInf = {
           userCode: response.data.userCode,
@@ -260,18 +257,12 @@
           roleCodesList: response.data.roleCodesList, // 初审拒绝按钮
           flowRoleCodesList: response.data.flowRoleCodesList
         }
-        // alert("data："+ response.data)
         localStorage.setItem("userInf", JSON.stringify(this.userInf));
-        console.log(response.data.orgLevel)
         localStorage.setItem("userc", JSON.stringify(response.data.orgLevel));
         localStorage.setItem("userctcode", JSON.stringify(response.data.subOrgCode));
-        console.log(JSON.parse(localStorage.getItem('userc')))
-        console.log(JSON.parse(localStorage.getItem('userctcode')))
-        // alert("data："+ response.data)
         this.post("/workFlowTaskQuery/getTaskProfile", {
           taskStatus: "01",
         }).then(res => {
-        // alert("statusCode"+ res.statusCode)
           
           if (res.statusCode == 200) {
             this.tableData = res.data;

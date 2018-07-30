@@ -798,10 +798,10 @@
         <i class="approve_icon brokenLineIcon"></i>
         <span class="approve_text">大数据风控</span>
       </span>
-      <span class="approve_item" @click="roSocialSecurity" v-if="SocialSecurityBtn">
+      <!-- <span class="approve_item" @click="roSocialSecurity" v-if="SocialSecurityBtn">
         <i class="approve_icon dataMaptIcon"></i>
         <span class="approve_text">社保/公积金{{social}}</span>
-      </span>
+      </span> -->
     </div>
     <!-- =================================弹窗===================================== -->
     <!-- 提交 -->
@@ -2145,22 +2145,12 @@
         this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
           applyId: this.propQTconclution.applyId
         }).then(res => {
-          if (res.obj == null) {
-            // this.bigDataLogVisible = true;
-            this.$confirm('此进件不存在大数据风控明细！', '提示', {
-              confirmButtonText: '确定',
-              type: 'warning',
-              cancelButtonText: '取消',
-              showCancelButton: true
-            }).then(() => {}).catch(() => {});
-          } else if (res.obj) {
-            this.$router.push({
-              name: 'PneCtrl',
-              params: {
-                newOne: true,
-              }
-            });
-          }
+          this.$router.push({
+            name: 'PneCtrl',
+            params: {
+              newOne: true,
+            }
+          });
         });
       },
       //社保/公积金

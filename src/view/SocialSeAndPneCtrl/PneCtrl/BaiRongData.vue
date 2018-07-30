@@ -1252,9 +1252,7 @@
               this.$refs.linkCheck.children.length == 0 ? this.linkC = false : this.linkC = true;
               this.$refs.GIDCheck.children.length == 0 ? this.GIDC = false : this.GIDC = true;
             })
-          } else {
-            this.$message.error(res.msg);
-          }
+          } 
         });
       }
     },
