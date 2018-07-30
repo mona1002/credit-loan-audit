@@ -107,12 +107,14 @@
     watch: {
       '$route' (to, from) {
         if (to.path === '/') {
+          console.log('路由')
           this.mountedInf();
         }
       }
     },
     methods: {
       mountedInf() {
+        console.log('方法')
         // 统一登录平台  
         // this.get(UserURL + 'remote/user/getUserInfo?' + Math.random()).then(response => {
         //   this.userInf = {
@@ -248,6 +250,7 @@
     },
     mounted() {
       // 统一登录平台  
+      console.log('挂载')
       this.get(UserURL + 'remote/user/getUserInfo?' + Math.random()).then(response => {
         this.userInf = {
           userCode: response.data.userCode,

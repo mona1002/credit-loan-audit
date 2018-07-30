@@ -51,17 +51,17 @@
       this.request();
     },
     methods: {
-        request() {
-          this.post('/smUser/getResTree').then(res => {
-            if(res.statusCode == 200){
-              this.datas = res.data;
-              if(res.data){
-                this.bbb();
-              }
-            }
+        // request() {
+        //   this.post('/smUser/getResTree').then(res => {
+        //     if(res.statusCode == 200){
+        //       this.datas = res.data;
+        //       if(res.data){
+        //         this.bbb();
+        //       }
+        //     }
             
-          })
-        },
+        //   })
+        // },
         bbb(){
           setTimeout(function(){
             if($('.navContain').width()>$('.wrap').width()){
