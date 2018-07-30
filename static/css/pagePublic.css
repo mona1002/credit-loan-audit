@@ -35,7 +35,14 @@
 .margin_right_5 {
   margin-right: 5px;
 }
-
+/* 表格th */
+.table_th{
+  height: 35px;
+  border: 1px solid #d8dce5;
+  font-weight: 800;
+  padding-left: 5px;
+  color: #000;
+}
 /*查看- label宽度 */
 
 .label_width_210 {
@@ -1043,3 +1050,9 @@ background-image: url(../images/add.png)
   width:calc(66.6% - 172px);
 border:3px solid red;
 } */
+/* 大数据h6 */
+.sort{
+font-weight: 800;
+/* font-size: 14px; */
+margin:5px 10px;
+}
