@@ -88,9 +88,9 @@
           .flag == '10' || this.judgeFlag.flag == '11' || this.judgeFlag.flag == '13') {
           this.localInf = JSON.parse(localStorage.getItem("FGQTTaskWait")) //质检 专员、主管、初终审本人任务列表、初终审主管、复议任务列表（首次） ---区域无社保公积金按钮、合规经理任务列表
         }
-        this.localInf.applySubNo = 'PHDX6409598026121216';
+        // this.localInf.applySubNo = 'PHDX6409598026121216';
         //  this.localInf.applySubNo = 'test999999'
-        this.localInf.applySubNo = '201807180173030264';
+        // this.localInf.applySubNo = '201807180173030264';
         // this.localInf.applyId = '9e56e245-bd30-4a51-97e9-c255ea7171b6';
       }
     },

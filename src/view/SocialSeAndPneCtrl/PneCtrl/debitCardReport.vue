@@ -23,15 +23,17 @@
         <!-- {{typeof(item)}} -->
         <!-- {{index}}  -->
         <div v-for="(val,ind) in item.data" :key="ind">
- <debitCardConponent :monthSummaries='val.month_summaries' :reportObj='val'> </debitCardConponent>
-          
+          <!-- {{ val.accounts}} -->
+          {{typeof(val)}}
+          <debitCardConponent :monthSummaries='val.month_summaries' :reportObj='val' :accountObj='val.accounts' :totalVal='val'> </debitCardConponent>
+
           <!-- {{val.account_id}}
   {{val.month_summaries}} -->
-           </div>
-      
+        </div>
+
         <!-- {{typeof(item.data)}} -->
-<!-- {{item.month_summaries}} -->
- <!-- <debitCardConponent :monthSummaries='item.data.month_summaries'> </debitCardConponent> -->
+        <!-- {{item.month_summaries}} -->
+        <!-- <debitCardConponent :monthSummaries='item.data.month_summaries'> </debitCardConponent> -->
       </el-tab-pane>
     </el-tabs>
     <!-- <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
@@ -124,19 +126,19 @@
               // this.editableTabs = arr.concat(report);
               console.log('editableTabs', this.editableTabs)
               if (report.length > 0) {
-                $.each(report,  (i, eh) =>{
-                  console.log(i,eh)
-                  if(eh.data.length>0){
+                $.each(report, (i, eh) => {
+                  console.log(i, eh)
+                  if (eh.data.length > 0) {
                     this.editableTabs.push(eh)
                   }
-                //   if ('储蓄卡' == eh.type && eh.data.length > 0) {
-                //     // addTab(dTabs, $('#cardTabs #dTab').html(), eh.data.length - 1, "储蓄卡");
-                //     $.each(eh.data,  (n, v) =>{
-                //       dAccountIds.push(v.account_id); //没有该字段
-                //       //dAccountIds.push(v.card);
-                //       loadReport(dTabs.tabs('getTab', n), v);
-                //     });
-                //   }
+                  //   if ('储蓄卡' == eh.type && eh.data.length > 0) {
+                  //     // addTab(dTabs, $('#cardTabs #dTab').html(), eh.data.length - 1, "储蓄卡");
+                  //     $.each(eh.data,  (n, v) =>{
+                  //       dAccountIds.push(v.account_id); //没有该字段
+                  //       //dAccountIds.push(v.card);
+                  //       loadReport(dTabs.tabs('getTab', n), v);
+                  //     });
+                  //   }
                 });
 
                 // $.each(report,  (i, eh) =>{
@@ -153,15 +155,36 @@
                 //   }
                 // });
               }
+              console.log('editableTabs.push::::::', this.editableTabs)
             }
           }
           if ("" != res.obj.rawRpt) {
-            // var rawResult = $.parseJSON(res.obj.rawRpt);
-            // var dCardRawReport;
-            // if (rawResult && rawResult.result && rawResult.result['10063'] && rawResult.result['10063'].bizInfo) {
-            //   dCardRawReport = rawResult.result['10063'].bizInfo.data;
-            //   this.loadRawReport(dTabs, dCardRawReport, dAccountIds);
-            // }
+            var rawResult = $.parseJSON(res.obj.rawRpt);
+            console.log('rawResult:', rawResult)
+            var dCardRawReport;
+            if (rawResult && rawResult.result && rawResult.result['10063'] && rawResult.result['10063'].bizInfo) {
+              dCardRawReport = rawResult.result['10063'].bizInfo.data;
+              console.log('bizInfo:', dCardRawReport)
+              console.log(typeof (dCardRawReport))
+              $.each(dCardRawReport.accounts, (i, eh) => {
+                var obj = {
+                  accounts: eh
+                }
+                console.log(111, eh)
+                console.log(1222, i)
+                console.log('我要添加进去', this.editableTabs)
+
+                //  this.editableTabs[i].data[i].push(obj)
+                Object.assign(this.editableTabs[i].data[i], obj)
+                //  this.editableTabs[i].data[i].push(obj)
+
+                // if(eh.data.length>0){
+
+                // }
+              })
+              //   this.loadRawReport(dTabs, dCardRawReport, dAccountIds);
+              console.log('已经添加进去：', this.editableTabs)
+            }
           }
         });
       },
