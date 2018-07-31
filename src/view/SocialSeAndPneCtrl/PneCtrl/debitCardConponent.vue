@@ -1,37 +1,90 @@
 <template>
   <div>
-	<h2>Basic Panel</h2>
-	<p>The panel is a container for other components or elements.</p>
-	<div style="margin:20px 0 10px 0;">
-		<a href="#" class="easyui-linkbutton" onclick="javascript:$('#p').panel('open')">Open</a>
-		<a href="#" class="easyui-linkbutton" onclick="javascript:$('#p').panel('close')">Close</a>
-	</div>
-	<div id="p" class="easyui-panel" title="Basic Panel" style="width:700px;height:200px;padding:10px;">
-		<p style="font-size:14px">jQuery EasyUI framework helps you build your web pages easily.</p>
-		<ul>
-			<li>easyui is a collection of user-interface plugin based on jQuery.</li>
-			<li>easyui provides essential functionality for building modem, interactive, javascript applications.</li>
-			<li>using easyui you don't need to write many javascript code, you usually defines user-interface by writing some HTML markup.</li>
-			<li>complete framework for HTML5 web page.</li>
-			<li>easyui save your time and scales while developing your products.</li>
-			<li>easyui is very easy but powerful.</li>
-		</ul>
-	</div>
+    <div id="dTab" title="储蓄卡1">
+      <!-- <div> -->
+      <!-- <h3 style="padding-left: 0px;font-size: 25px;text-align: center">
+			       	储蓄卡报告
+			   </h3> -->
+      <!-- </div> -->
 
-
-
-
-
-        <div id="dTab" title="储蓄卡1" v-if="defaultPart">
-      <div>
-        <h3 style="padding-left: 0px;font-size: 25px;text-align: center">
-          储蓄卡报告
-        </h3>
-      </div>
+      <el-collapse v-model="activeNames">
+        <el-collapse-item name="1">
+          <template slot="title">
+            <i class="collapse_title_icon"></i>
+            <span class="collapse_title_text">报告信息</span>
+          </template>
+          {{reportInf}}
+          <div class="checkedInf checkedInf_li_width_four clearFix">
+            <ul>
+              <div class=" CreditForm_div_border clearFix">
+                <li>
+                  <label class="label_width_145">姓名：</label>
+                  <span>{{reportInf.name}}</span>
+                </li>
+                <li>
+                  <label class="label_width_145">用户填写姓名</label>
+                  <span>{{reportInf.user_name}}</span>
+                </li>
+                <li>
+                  <label class="label_width_145">用户填写身份证：</label>
+                  <span>{{reportInf.user_idcard}}</span>
+                </li>
+                <li>
+                  <label class="label_width_145">用户填写手机号：</label>
+                  <span>{{reportInf.user_phone}}</span>
+                </li>
+              </div>
+              <div class=" CreditForm_div_border clearFix">
+             
+              <li>
+                <label class="label_width_145">姓名是否一致：</label>
+                <span>{{reportInf.name_match}}</span>
+              </li>
+              <li>
+                <label class="label_width_145">身份证是否一致：</label>
+                <span>{{reportInf.idcard_match}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_145">账户ID</label>
+                <span>{{reportInf.account_id}}</span>
+              </li>
+              <li>
+                <label class="label_width_145">卡号：</label>
+                <span>{{reportInf.card}}</span>
+              </li>
+               <li>
+                <label class="label_width_145">银行名称：</label>
+                <span>{{reportInf.bank}}</span>
+              </li>
+               <li>
+                <label class="label_width_145">开卡时间：</label>
+                <span>{{reportInf.open_date}}</span>
+              </li>
+            </div>
+             <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_145">平均工资：</label>
+                <span>{{reportInf.average_salary}}</span>
+              </li>
+              <li>
+                <label class="label_width_145">工资稳定性水平：</label>
+                <span>{{reportInf.salary_stability}}</span>
+              </li>
+               <li>
+                <label class="label_width_145">月均还款额：</label>
+                <span>{{reportInf.average_repayment_permonth}}</span>
+              </li>
+            </div>
+            </ul>
+          </div>
+        </el-collapse-item>
+      </el-collapse>
       <div class="table" style="padding-left: 0px">
         <h5 class="h5">报告信息</h5>
         <form id="f_1">
-          <table style="width:100%">
+          <table>
             <tbody>
               <tr>
                 <td>姓名：
@@ -87,10 +140,12 @@
           </table>
         </form>
       </div>
+
+
       <div class="table" style="padding-left: 0px">
         <h5 class="h5">账户信息</h5>
         <form id="f_2">
-          <table style="width:100%">
+          <table>
             <tbody>
               <tr>
                 <td>账户ID：
@@ -142,7 +197,7 @@
       <div class="table" style="padding-left: 0px">
         <h5 class="h5">每月汇总列表</h5>
         <div id="d_2" class="tabbox_x">
-          <table id="t_2" style="width:100%">
+          <table id="t_2">
             <thead>
               <tr>
                 <th>月数</th>
@@ -158,12 +213,29 @@
             </tbody>
           </table>
         </div>
+        <div class="height_auto">
+          <el-table :data="monthSummaries" style="width:100%;" highlight-current-row border>
+            <el-table-column prop="month" label="月数" width="100">
+            </el-table-column>
+            <el-table-column prop="outflow_count" label="流出总笔数" width="160">
+            </el-table-column>
+            <el-table-column prop="outflow_sum_amount" label="流出总金额" width="140">
+            </el-table-column>
+            <el-table-column prop="outflow_max_amount" label="最大单笔流出金额" width="140">
+            </el-table-column>
+            <el-table-column prop="inflow_count" label="流入总笔数" width="140">
+            </el-table-column>
+            <el-table-column prop="inflow_sum_amount" label="流入总金额" width="140">
+            </el-table-column>
+
+          </el-table>
+        </div>
       </div>
 
       <div class="table" style="padding-left: 0px">
         <h5 class="h5">结息情况</h5>
         <div class="tabbox">
-          <table id="t_3" style="width:100%">
+          <table id="t_3">
             <thead>
               <tr>
                 <th>日期</th>
@@ -180,7 +252,7 @@
       <div class="table" style="padding-left: 0px">
         <h5 class="h5">工资</h5>
         <div id="d_4" class="tabbox_x">
-          <table id="t_4" style="width:100%">
+          <table id="t_4">
             <thead>
               <tr>
                 <th>日期</th>
@@ -196,7 +268,7 @@
       <div class="table" style="padding-left: 0px">
         <h5 class="h5">第三方借贷</h5>
         <div class="tabbox_x">
-          <table id="t_5" style="width:100%">
+          <table id="t_5">
             <thead>
               <tr>
                 <th>机构名称</th>
@@ -213,7 +285,7 @@
       <div class="table" style="padding-left: 0px">
         <h5 class="h5">流水详情</h5>
         <div class="tabbox_x">
-          <table id="t_6" style="width:100%">
+          <table id="t_6">
             <thead>
               <tr>
                 <th>账户ID</th>
@@ -240,82 +312,46 @@
         </div>
       </div>
     </div>
-    <!-- <div style="margin-bottom: 20px;">
-      <el-button size="small" @click="addTab(editableTabs2)">
-        add tab
-      </el-button>
-    </div>
-    <el-tabs v-model="editableTabsValue2" type="card" closable @tab-remove="removeTab"  @tab-click="handleClick">
-      <el-tab-pane v-for="(item, index) in editableTabs2" :key="item.name" :label="item.title" :name="item.name">
-        {{item.content}}
-      </el-tab-pane>
-
-          </el-tab-pane> 
-    </el-tabs> -->
-            <div class="Right_tab_ul_wrap">
-              <ul ref="right_tab_ul" style="left:0;right:0;">
-                <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="flag2[index] &&  tab2($event,index,val)"
-                  :class="{tab2Act:tab2Index==index}">
-                  {{val}}</li>
-              </ul>
-            </div>
-              <div class="tab2_Content" id="creditcontent">
-            <AudioVisual v-if=" this.tabContent2==0"></AudioVisual>
-          </div>
   </div>
 </template>
-
 <script>
   export default {
     data() {
       return {
-        editableTabsValue2: '2',
-        editableTabs2: [{
-          title: 'Tab 1',
-          name: '1',
-          content: 'Tab 1 content'
-        }, {
-          title: 'Tab 2',
-          name: '2',
-          content: 'Tab 2 content'
-        }],
-        tabIndex: 2
+        activeNames: ['1'],
+        // accountInf: JSON.stringify(this.accountObj) == "{}" ? {} : this.accountObj,
+        reportInf: this.reportObj
+
       }
     },
-    methods: {
-          handleClick(tab, event) {
-        console.log(tab, event);
-        console.log(this.tabIndex )
+    // props:
+    props: {
+      //   totalVal,
+      monthSummaries: {
+        default: function () {
+          return []
+        },
+        type: Array
       },
-      addTab(targetName) {
-          console.log(targetName)
-        let newTabName = ++this.tabIndex + '';
-       targetName.push({
-          title: 'New Tab',
-          name: newTabName,
-          content: 'New Tab content'
-        });
-        // this.editableTabsValue2 = newTabName;
-          console.log(targetName)
+      reportObj: {
+        default: function () {
+          return {
+            name: ''
+          }
+        },
+        type: Object
       },
-      removeTab(targetName) {
-        let tabs = this.editableTabs2;
-        let activeName = this.editableTabsValue2;
-        if (activeName === targetName) {
-          tabs.forEach((tab, index) => {
-            if (tab.name === targetName) {
-              let nextTab = tabs[index + 1] || tabs[index - 1];
-              if (nextTab) {
-                activeName = nextTab.name;
-              }
-            }
-          });
-        }
+      // //   accountObj: {
+      // //     default: {
+      // //       name: ''
+      // //     },
+      //     // type: Object
+      // //   }
+    },
+    mounted() {
 
-        this.editableTabsValue2 = activeName;
-        this.editableTabs2 = tabs.filter(tab => tab.name !== targetName);
-      }
     }
+
   }
 
 </script>

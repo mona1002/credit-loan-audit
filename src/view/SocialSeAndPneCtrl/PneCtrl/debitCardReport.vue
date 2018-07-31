@@ -1,229 +1,37 @@
 <template>
   <!--  储蓄卡   -->
   <div class="SocialSecurity carrierReport">
+    <!-- <div class="Right_tab_ul_wrap">
+              <ul ref="right_tab_ul" style="left:0;right:0;">
+                <li class="tab2Default" ref="tabTwo" v-for="(val,index) in item" :key="index" @mousedown="tab2($event,index,val)"
+                  :class="{tab2Act:tab2Index==index}">
+                  {{val}}</li>
+              </ul>
+            </div>
+              <div class="tab2_Content" id="creditcontent">
+          </div> -->
+
+
+
+
     <el-tabs v-model="editableTabsValue" type="card">
-      <el-tab-pane label="用户管理">
-        <div id="dTab" title="储蓄卡1">
-          <div>
-            <h3 style="padding-left: 0px;font-size: 25px;text-align: center">
-              储蓄卡报告
-            </h3>
-          </div>
-          <div class="table" style="padding-left: 0px">
-            <h5 class="h5">报告信息</h5>
-            <form id="f_1">
-              <table style="width:100%">
-                <tbody>
-                  <tr>
-                    <td>姓名：
-                      <input name="name" type="text" readonly/>
-                    </td>
-                    <td>用户填写姓名:
-                      <input name="user_name" type="text" readonly/>
-                    </td>
-                    <td>用户填写身份证：
-                      <input name="user_idcard" type="text" readonly/>
-                    </td>
-                    <td>用户填写手机号：
-                      <input name="user_phone" type="text" readonly/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>姓名是否一致：
-                      <input name="name_match" type="text" readonly/>
-                    </td>
-                    <td>身份证是否一致：
-                      <input name="idcard_match" type="text" readonly/>
-                    </td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>账户ID:
-                      <input name="account_id" type="text" readonly/>
-                    </td>
-                    <td>卡号：
-                      <input name="card" type="text" readonly/>
-                    </td>
-                    <td>银行名称：
-                      <input name="bank" type="text" readonly/>
-                    </td>
-                    <td>开卡时间：
-                      <input name="open_date" type="text" readonly/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>平均工资：
-                      <input name="average_salary" type="text" readonly/>
-                    </td>
-                    <td>工资稳定性水平：
-                      <input name="salary_stability" type="text" readonly/>
-                    </td>
-                    <td>月均还款额：
-                      <input name="average_repayment_permonth" type="text" readonly/>
-                    </td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-            </form>
-          </div>
-          <div class="table" style="padding-left: 0px">
-            <h5 class="h5">账户信息</h5>
-            <form id="f_2">
-              <table style="width:100%">
-                <tbody>
-                  <tr>
-                    <td>账户ID：
-                      <input name="id" type="text" readonly/>
-                    </td>
-                    <td>账户类型：
-                      <input name="type" type="text" readonly/>
-                    </td>
-                    <td>卡号：
-                      <input name="card" type="text" readonly/>
-                    </td>
-                    <td>主副卡标志：
-                      <input name="main_vice_flag" type="text" readonly/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>银行名称:
-                      <input name="bank" type="text" readonly/>
-                    </td>
-                    <td>持卡人姓名：
-                      <input name="holder" type="text" readonly/>
-                    </td>
-                    <td>证件号码：
-                      <input name="idcard" type="text" readonly/>
-                    </td>
-                    <td>状态：
-                      <input name="status" type="text" readonly/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>开卡时间：
-                      <input name="open_date" type="text" readonly/>
-                    </td>
-                    <td>当前余额[元]：
-                      <input name="balance" type="text" readonly/>
-                    </td>
-                    <td>卡产品名称：
-                      <input name="card_name" type="text" readonly/>
-                    </td>
-                    <td>当前剩余欠款[元]：
-                      <input name="current_arrears" type="text" readonly/>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </form>
-          </div>
-
-          <div class="table" style="padding-left: 0px">
-            <h5 class="h5">每月汇总列表</h5>
-            <div id="d_2" class="tabbox_x">
-              <table id="t_2" style="width:100%">
-                <thead>
-                  <tr>
-                    <th>月数</th>
-                    <th>流出总笔数</th>
-                    <th>流出总金额[元]</th>
-                    <th>最大单笔流出金额[元]</th>
-                    <th>流入总笔数</th>
-                    <th>流入总金额[元]</th>
-                    <th>最大单笔流入金额[元]</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="table" style="padding-left: 0px">
-            <h5 class="h5">结息情况</h5>
-            <div class="tabbox">
-              <table id="t_3" style="width:100%">
-                <thead>
-                  <tr>
-                    <th>日期</th>
-                    <th>余额[元]</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- 没有该字段 -->
-          <div class="table" style="padding-left: 0px">
-            <h5 class="h5">工资</h5>
-            <div id="d_4" class="tabbox_x">
-              <table id="t_4" style="width:100%">
-                <thead>
-                  <tr>
-                    <th>日期</th>
-                    <th>金额[元]</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <!-- 没有该字段 -->
-          <div class="table" style="padding-left: 0px">
-            <h5 class="h5">第三方借贷</h5>
-            <div class="tabbox_x">
-              <table id="t_5" style="width:100%">
-                <thead>
-                  <tr>
-                    <th>机构名称</th>
-                    <th>还款日期</th>
-                    <th>还款金额[元]</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="table" style="padding-left: 0px">
-            <h5 class="h5">流水详情</h5>
-            <div class="tabbox_x">
-              <table id="t_6" style="width:100%">
-                <thead>
-                  <tr>
-                    <th>账户ID</th>
-                    <th>入账时间</th>
-                    <th>入账金额[元]</th>
-                    <th>入账币种</th>
-                    <th>余额[元]</th>
-                    <th>交易账号卡号</th>
-                    <th>交易描述</th>
-                    <th>交易国家</th>
-                    <th>交易地点</th>
-                    <th>交易渠道</th>
-                    <th>对方账户名</th>
-                    <th>对方开户行</th>
-                    <th>对方账号</th>
-                    <th>摘要</th>
-                    <th>附言</th>
-                    <th>现钞/现汇</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </el-tab-pane>
-      <el-tab-pane v-for="(item, index) in editableTabs" :key="item.name" :label="item.title" :name="item.name">
-        {{item.content}}
+      <!-- <el-tab-pane v-for="(item,index) in editableTabs" :key="item.name" :label="item.title" :name="item.name"> -->
+      <!-- <debitCardConponent :monthSummaries='aaa'> </debitCardConponent> -->
+      <!-- {{item}}
+      </el-tab-pane> -->
+      <el-tab-pane :key="item.name" v-for="(item, index) in editableTabs" :label="item.type" :name="index+''">
+        <!-- {{typeof(item)}} -->
+        <!-- {{index}}  -->
+        <div v-for="(val,ind) in item.data" :key="ind">
+ <debitCardConponent :monthSummaries='val.month_summaries' :reportObj='val'> </debitCardConponent>
+          
+          <!-- {{val.account_id}}
+  {{val.month_summaries}} -->
+           </div>
+      
+        <!-- {{typeof(item.data)}} -->
+<!-- {{item.month_summaries}} -->
+ <!-- <debitCardConponent :monthSummaries='item.data.month_summaries'> </debitCardConponent> -->
       </el-tab-pane>
     </el-tabs>
     <!-- <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
@@ -232,232 +40,21 @@
       <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
       <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
     </el-tabs> -->
-    <div id="dTab" title="储蓄卡1">
-      <div>
-        <h3 style="padding-left: 0px;font-size: 25px;text-align: center">
-          储蓄卡报告
-        </h3>
-      </div>
-      <div class="table" style="padding-left: 0px">
-        <h5 class="h5">报告信息</h5>
-        <form id="f_1">
-          <table style="width:100%">
-            <tbody>
-              <tr>
-                <td>姓名：
-                  <input name="name" type="text" readonly/>
-                </td>
-                <td>用户填写姓名:
-                  <input name="user_name" type="text" readonly/>
-                </td>
-                <td>用户填写身份证：
-                  <input name="user_idcard" type="text" readonly/>
-                </td>
-                <td>用户填写手机号：
-                  <input name="user_phone" type="text" readonly/>
-                </td>
-              </tr>
-              <tr>
-                <td>姓名是否一致：
-                  <input name="name_match" type="text" readonly/>
-                </td>
-                <td>身份证是否一致：
-                  <input name="idcard_match" type="text" readonly/>
-                </td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>账户ID:
-                  <input name="account_id" type="text" readonly/>
-                </td>
-                <td>卡号：
-                  <input name="card" type="text" readonly/>
-                </td>
-                <td>银行名称：
-                  <input name="bank" type="text" readonly/>
-                </td>
-                <td>开卡时间：
-                  <input name="open_date" type="text" readonly/>
-                </td>
-              </tr>
-              <tr>
-                <td>平均工资：
-                  <input name="average_salary" type="text" readonly/>
-                </td>
-                <td>工资稳定性水平：
-                  <input name="salary_stability" type="text" readonly/>
-                </td>
-                <td>月均还款额：
-                  <input name="average_repayment_permonth" type="text" readonly/>
-                </td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </form>
-      </div>
-      <div class="table" style="padding-left: 0px">
-        <h5 class="h5">账户信息</h5>
-        <form id="f_2">
-          <table style="width:100%">
-            <tbody>
-              <tr>
-                <td>账户ID：
-                  <input name="id" type="text" readonly/>
-                </td>
-                <td>账户类型：
-                  <input name="type" type="text" readonly/>
-                </td>
-                <td>卡号：
-                  <input name="card" type="text" readonly/>
-                </td>
-                <td>主副卡标志：
-                  <input name="main_vice_flag" type="text" readonly/>
-                </td>
-              </tr>
-              <tr>
-                <td>银行名称:
-                  <input name="bank" type="text" readonly/>
-                </td>
-                <td>持卡人姓名：
-                  <input name="holder" type="text" readonly/>
-                </td>
-                <td>证件号码：
-                  <input name="idcard" type="text" readonly/>
-                </td>
-                <td>状态：
-                  <input name="status" type="text" readonly/>
-                </td>
-              </tr>
-              <tr>
-                <td>开卡时间：
-                  <input name="open_date" type="text" readonly/>
-                </td>
-                <td>当前余额[元]：
-                  <input name="balance" type="text" readonly/>
-                </td>
-                <td>卡产品名称：
-                  <input name="card_name" type="text" readonly/>
-                </td>
-                <td>当前剩余欠款[元]：
-                  <input name="current_arrears" type="text" readonly/>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </form>
-      </div>
 
-      <div class="table" style="padding-left: 0px">
-        <h5 class="h5">每月汇总列表</h5>
-        <div id="d_2" class="tabbox_x">
-          <table id="t_2" style="width:100%">
-            <thead>
-              <tr>
-                <th>月数</th>
-                <th>流出总笔数</th>
-                <th>流出总金额[元]</th>
-                <th>最大单笔流出金额[元]</th>
-                <th>流入总笔数</th>
-                <th>流入总金额[元]</th>
-                <th>最大单笔流入金额[元]</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="table" style="padding-left: 0px">
-        <h5 class="h5">结息情况</h5>
-        <div class="tabbox">
-          <table id="t_3" style="width:100%">
-            <thead>
-              <tr>
-                <th>日期</th>
-                <th>余额[元]</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- 没有该字段 -->
-      <div class="table" style="padding-left: 0px">
-        <h5 class="h5">工资</h5>
-        <div id="d_4" class="tabbox_x">
-          <table id="t_4" style="width:100%">
-            <thead>
-              <tr>
-                <th>日期</th>
-                <th>金额[元]</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <!-- 没有该字段 -->
-      <div class="table" style="padding-left: 0px">
-        <h5 class="h5">第三方借贷</h5>
-        <div class="tabbox_x">
-          <table id="t_5" style="width:100%">
-            <thead>
-              <tr>
-                <th>机构名称</th>
-                <th>还款日期</th>
-                <th>还款金额[元]</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="table" style="padding-left: 0px">
-        <h5 class="h5">流水详情</h5>
-        <div class="tabbox_x">
-          <table id="t_6" style="width:100%">
-            <thead>
-              <tr>
-                <th>账户ID</th>
-                <th>入账时间</th>
-                <th>入账金额[元]</th>
-                <th>入账币种</th>
-                <th>余额[元]</th>
-                <th>交易账号卡号</th>
-                <th>交易描述</th>
-                <th>交易国家</th>
-                <th>交易地点</th>
-                <th>交易渠道</th>
-                <th>对方账户名</th>
-                <th>对方开户行</th>
-                <th>对方账号</th>
-                <th>摘要</th>
-                <th>附言</th>
-                <th>现钞/现汇</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 <script>
   import baseurl from '../../../util/ConstantSocialAndPn';
   import utils from '../../../util/utils';
+  import debitCardConponent from './debitCardConponent.vue';
+
   export default {
     data() {
       return {
+        tab2Index: 0,
+        item: [],
+        aaa: [],
+
         activeNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
         caReport: {},
         behaviorCheck: [],
@@ -469,14 +66,20 @@
         collectionContact: [],
         triInfo: [],
         activeName: 'first',
-        editableTabs: [{
-          title: 'Tab 1',
-          name: '1',
-          content: 'Tab 1 content'
-        }, ],
+        editableTabs: [
+          //   {
+          //   title: 'Tab 1',
+          //   name: '1',
+          //   content: 'Tab 1 content'
+          // }, 
+        ],
         editableTabsValue: '0',
-        tabIndex: 0
+        tabIndex: 0,
+        defaultPart: false,
       }
+    },
+    components: {
+      debitCardConponent
     },
     props: {
       applySubNo: {
@@ -486,6 +89,9 @@
       }
     },
     methods: {
+      tab2() {
+
+      },
       handleClick(tab, event) {
         console.log(tab, event);
       },
@@ -504,54 +110,58 @@
           //   applySubNo : 'PHDX6409598026121216'
         }).then(res => {
           console.log(3, res)
-
+          if (!res.success) {
+            return;
+          }
           if ("" != res.obj.rpt) {
             var result = $.parseJSON(res.obj.rpt);
             if (result && result.result && result.result['10061'] && result.result['10061'].bizInfo && result.result[
                 '10061'].bizInfo.data) {
               var report = result.result['10061'].bizInfo.data.report;
-              // console.log('result',result)
-              console.log('result', result)
-              console.log(report)
-
+              var arr = [];
+              console.log('result:', result)
+              console.log('report:', report)
+              // this.editableTabs = arr.concat(report);
+              console.log('editableTabs', this.editableTabs)
               if (report.length > 0) {
-                var dAccountIds = [];
-                // var dTabs = $('#cardTabs').tabs(); editableTabsValue
-                $.each(report, (i, eh) => {
-                  if ('储蓄卡' == eh.type && eh.data.length > 0) {
-                    this.addTab(this.editableTabs, 'adfaf', eh.data.length - 1, "储蓄卡");
-                    $.each(eh.data, (n, v) => {
-                      dAccountIds.push(v.account_id); //没有该字段
-                      //dAccountIds.push(v.card);
-                      // this.loadReport(this.editableTabsValue.tabs('getTab', n), v);
-                    });
+                $.each(report,  (i, eh) =>{
+                  console.log(i,eh)
+                  if(eh.data.length>0){
+                    this.editableTabs.push(eh)
                   }
+                //   if ('储蓄卡' == eh.type && eh.data.length > 0) {
+                //     // addTab(dTabs, $('#cardTabs #dTab').html(), eh.data.length - 1, "储蓄卡");
+                //     $.each(eh.data,  (n, v) =>{
+                //       dAccountIds.push(v.account_id); //没有该字段
+                //       //dAccountIds.push(v.card);
+                //       loadReport(dTabs.tabs('getTab', n), v);
+                //     });
+                //   }
                 });
 
-                $.each(report, (i, eh) => {
-                  if ('信用卡' == eh.type && eh.data.length > 0) {
-                    if (dAccountIds.length == 0) { //没有储蓄卡时，关闭出卡页签
-                      dTabs.tabs('close', '储蓄卡1');
-                    }
-                    this.addTab(dTabs, $('#cTemplate').html(), eh.data.length, "信用卡");
-                    $.each(eh.data, function (n, v) {
-                      dAccountIds.push(v.account_id); //没有该字段
-                      //dAccountIds.push(v.card);
-                      loadReport_c(dTabs.tabs('getTab', dAccountIds.length - 1), v);
-                    });
-                  }
-                });
+                // $.each(report,  (i, eh) =>{
+                //   if ('信用卡' == eh.type && eh.data.length > 0) {
+                //     if (dAccountIds.length == 0) { //没有储蓄卡时，关闭出卡页签
+                //       dTabs.tabs('close', '储蓄卡1');
+                //     }
+                //     addTab(dTabs, $('#cTemplate').html(), eh.data.length, "信用卡");
+                //     $.each(eh.data,  (n, v) =>{
+                //       dAccountIds.push(v.account_id); //没有该字段
+                //       //dAccountIds.push(v.card);
+                //       loadReport_c(dTabs.tabs('getTab', dAccountIds.length - 1), v);
+                //     });
+                //   }
+                // });
               }
             }
           }
           if ("" != res.obj.rawRpt) {
-            var dCardRawReport;
-            var rawResult = $.parseJSON(res.obj.rawRpt);
-            if (rawResult && rawResult.result && rawResult.result['10063'] && rawResult.result['10063'].bizInfo) {
-              dCardRawReport = rawResult.result['10063'].bizInfo.data;
-              console.log(4, dCardRawReport)
-              // this.loadRawReport(dTabs, dCardRawReport, dAccountIds);
-            }
+            // var rawResult = $.parseJSON(res.obj.rawRpt);
+            // var dCardRawReport;
+            // if (rawResult && rawResult.result && rawResult.result['10063'] && rawResult.result['10063'].bizInfo) {
+            //   dCardRawReport = rawResult.result['10063'].bizInfo.data;
+            //   this.loadRawReport(dTabs, dCardRawReport, dAccountIds);
+            // }
           }
         });
       },
@@ -615,7 +225,7 @@
         console.log('title', title)
         if (tabNum == 0) return;
         let newTabName;
-        for (i = 0; i < tabNum; i++) {
+        for (var i = 0; i < tabNum; i++) {
           var tname = title;
           if (title == '储蓄卡') {
             tname += (i + 2);
@@ -626,7 +236,8 @@
           targetName.push({
             title: tname,
             name: newTabName,
-            content: content
+            content: content,
+            // content:``
           });
         }
         this.editableTabsValue = newTabName;

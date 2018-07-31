@@ -11,8 +11,12 @@ import validation from '@/util/validation'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import $ from 'jquery'
-
-import 'vue-pdf-shower/lib/dist/pdf.js'
+import 'vue-pdf-shower/lib/dist/pdf.js';
+import 'vx-easyui/dist/themes/default/easyui.css';
+import 'vx-easyui/dist/themes/icon.css';
+import 'vx-easyui/dist/themes/vue.css';
+import EasyUI from 'vx-easyui';
+Vue.use(EasyUI);
 PDFJS.workerSrc = 'vue-pdf-shower/lib/dist/pdf.worker.js'
 PDFJS.cMapUrl = '/static/web/cmaps/'
 PDFJS.cMapPacked = true;
