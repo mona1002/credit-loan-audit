@@ -48,13 +48,11 @@ Vue.filter('dateFilter', function (value) {
 // 信审审批 - 审批 计算倍数
 Vue.filter('formatValue', function (value) {
   if (!value) return ''
-  console.log(value);
   return Number(value) > 0 ? Math.round(Number(value) * 10000) / 100 + '%' : '0.00%';
 })
 // 金额过滤
 Vue.filter('formatMoney', function (value) {
   if (!value) return ''
-  console.log(value)
   return value.toLocaleString()
 })
 // 精度问题

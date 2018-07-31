@@ -22,7 +22,7 @@
           <!-- <test v-if="ind==4" :applySubNo='localInf.applySubNo'>网查征信报告</test> -->
           <!-- <ZxReport v-if="ind==4" :applySubNo='localInf.applySubNo'>网查征信报告</ZxReport> -->
           <!-- <carrierReport v-if="ind==5" :applySubNo='localInf.applySubNo'>运营商报告</carrierReport> -->
-          <!-- <debitCardReport v-if="ind==6" :applySubNo='localInf.applySubNo'>储蓄卡报告</debitCardReport> -->
+          <debitCardReport v-if="ind==6" :applySubNo='localInf.applySubNo'>储蓄卡报告</debitCardReport>
           <AccumulationFundReport v-if="ind==7" :applySubNo='localInf.applySubNo'>公积金报告</AccumulationFundReport>
           <SocialSecurityReport v-if="ind==8" :applySubNo='localInf.applySubNo'>社保报告</SocialSecurityReport>
           <BaiRongData v-if="ind==9" :applyId='localInf.applyId'>百融数据</BaiRongData>

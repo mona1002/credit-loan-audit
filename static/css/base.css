@@ -932,3 +932,7 @@
 body .el-select-dropdown.is-multiple .el-select-dropdown__item.selected::after{
   content:'';
  }
+ /* tab切换 */
+ .el-tabs--border-card>.el-tabs__content{
+   padding:0
+ }

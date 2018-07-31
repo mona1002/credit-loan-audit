@@ -1,5 +1,5 @@
 <template>
-  <!-- 网查征信 -->
+  <!-- 网查征信报告 -->
   <div class="SocialSecurity ZxReport">
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
