@@ -733,7 +733,7 @@
 		jsonObj['name'] = eh.valName
 	});
 	return jsonObj;
-}
+},
       formatRatePercentage100(val, row) {
         if (!$.isNumeric(val)) {
           return val;
