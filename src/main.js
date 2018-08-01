@@ -50,9 +50,19 @@ Vue.filter('formatValue', function (value) {
   if (!value) return ''
   return Number(value) > 0 ? Math.round(Number(value) * 10000) / 100 + '%' : '0.00%';
 })
+// // 金额过滤0返回0
+// Vue.filter('formatMoney', function (value) {
+//   // if (!value) return ''
+//   if (value == 0 || value) {
+//     return value.toLocaleString()
+//   } else {
+//     return ''
+//   }
+// })
 // 金额过滤
 Vue.filter('formatMoney', function (value) {
-  if (!value) return ''
+  if (value == 0) return 0;
+  if (!value) return '';
   return value.toLocaleString()
 })
 // 精度问题
@@ -77,8 +87,8 @@ Vue.filter('MobileStar', function (value) {
   return value;
 })
 
-Vue.filter('NumRound',function(value,num){
+Vue.filter('NumRound', function (value, num) {
   if (!value) return '';
-  value= parseFloat(value).toFixed(num);
+  value = parseFloat(value).toFixed(num);
   return value
 })

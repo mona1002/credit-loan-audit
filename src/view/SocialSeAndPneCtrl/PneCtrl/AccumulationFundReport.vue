@@ -42,7 +42,7 @@
               </li>
               <li>
                 <label class="label_width_195">预估月收入[元]：</label>
-                <span>{{fundReport.monthly_income}}</span>
+                <span>{{parseInt(fundReport.monthly_income)/ 100 | formatMoney }}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
@@ -80,11 +80,11 @@
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_195">当前月缴存金额[元]：</label>
-                <span>{{fundReport.deposit_amount}}</span>
+                <span>{{parseInt(fundReport.deposit_amount)/ 100 | formatMoney }}</span>
               </li>
               <li>
                 <label class="label_width_195">当前账户余额[元]：</label>
-                <span>{{fundReport.balance}}</span>
+                <span>{{parseInt(fundReport.balance)/ 100 | formatMoney }}</span>
               </li>
               <li>
                 <label class="label_width_195">当前公司连续缴存月份(预估)：</label>
@@ -110,7 +110,7 @@
               </li>
               <li>
                 <label class="label_width_195">公积金贷款月还款额[元]：</label>
-                <span>{{fundReport.loan_repay_amount}}</span>
+                <span>{{parseInt(fundReport.loan_repay_amount)/ 100 | formatMoney }}</span>
               </li>
             </div>
           </ul>
@@ -148,7 +148,8 @@
               </li>
               <li>
                 <label class="label_width_195">当前账户余额[元]：</label>
-                <span>{{fundRawReport.balance}}</span>
+                <span>{{parseInt(fundRawReport.balance)/ 100 | formatMoney }}</span>
+
               </li>
               <li>
                 <label class="label_width_195">最近一次缴存日期：</label>
@@ -162,11 +163,11 @@
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_195">月缴存金额[元]：</label>
-                <span>{{fundRawReport.deposit_amount}}</span>
+                <span>{{parseInt(fundRawReport.deposit_amount)/ 100 | formatMoney }}</span>
               </li>
               <li>
                 <label class="label_width_195">月缴存基数[元]：</label>
-                <span>{{fundRawReport.deposit_base}}</span>
+                <span>{{parseInt(fundRawReport.deposit_base)/ 100 | formatMoney }}</span>
               </li>
               <li>
                 <label class="label_width_195">公司缴存比例(%)：</label>
@@ -180,11 +181,11 @@
             <div>
               <li>
                 <label class="label_width_195">房补缴存金额[元]：</label>
-                <span>{{fundRawReport.housing_supplement_base}}</span>
+                <span>{{parseInt(fundRawReport.housing_supplement_base)/ 100 | formatMoney }}</span>
               </li>
               <li>
                 <label class="label_width_195">房补余额[元]：</label>
-                <span>{{fundRawReport.housing_supplement_balance}}</span>
+                <span>{{parseInt(fundRawReport.housing_supplement_balance)/ 100 | formatMoney }}</span>
               </li>
               <li>
                 <label class="label_width_195">开户日期：</label>
@@ -192,7 +193,7 @@
               </li>
               <li>
                 <label class="label_width_195">一次性补贴余额[元]：</label>
-                <span>{{fundRawReport.once_balance}}</span>
+                <span>{{parseInt(fundRawReport.once_balance)/ 100 | formatMoney }}</span>
               </li>
             </div>
           </ul>
@@ -231,9 +232,15 @@
             </el-table-column>
             <el-table-column prop="record_month" label="缴纳月份" width="130">
             </el-table-column>
-            <el-table-column prop="amount" label="金额[元]" width="190">
+            <el-table-column label="金额[元]" width="190">
+              <template slot-scope="scope">
+                {{parseInt(scope.row.amount)/ 100 | formatMoney }}
+              </template>
             </el-table-column>
-            <el-table-column prop="balance" label="余额[元]">
+            <el-table-column label="余额[元]">
+              <template slot-scope="scope">
+                {{parseInt(scope.row.balance)/ 100 | formatMoney }}
+              </template>
             </el-table-column>
           </el-table>
         </div>
@@ -257,9 +264,15 @@
             </el-table-column>
             <el-table-column prop="status" label="贷款状态" width="160">
             </el-table-column>
-            <el-table-column prop="limit" label="贷款额度[元]" width="160">
+            <el-table-column label="贷款额度[元]" width="160">
+              <template slot-scope="scope">
+                {{parseInt(scope.row.limit)/ 100 | formatMoney }}
+              </template>
             </el-table-column>
-            <el-table-column prop="balance" label="贷款余额[元]" width="160">
+            <el-table-column label="贷款余额[元]" width="160">
+              <template slot-scope="scope">
+                {{parseInt(scope.row.balance)/ 100 | formatMoney }}
+              </template>
             </el-table-column>
             <el-table-column prop="period" label="贷款期限" width="160">
             </el-table-column>
@@ -289,13 +302,25 @@
             </el-table-column>
             <el-table-column prop="record_month" label="所属月份" width="100">
             </el-table-column>
-            <el-table-column prop="repay_principle" label="还本金额[元]" width="100">
+            <el-table-column label="还本金额[元]" width="100">
+              <template slot-scope="scope">
+                {{parseInt(scope.row.repay_principle)/ 100 | formatMoney }}
+              </template>
             </el-table-column>
-            <el-table-column prop="repay_interest" label="还息金额[元]" width="130">
+            <el-table-column label="还息金额[元]" width="130">
+              <template slot-scope="scope">
+                {{parseInt(scope.row.repay_interest)/ 100 | formatMoney }}
+              </template>
             </el-table-column>
-            <el-table-column prop="repay_amount" label="还款总金额[元]" width="130">
+            <el-table-column label="还款总金额[元]" width="130">
+              <template slot-scope="scope">
+                {{parseInt(scope.row.repay_amount)/ 100 | formatMoney }}
+              </template>
             </el-table-column>
-            <el-table-column prop="principle_balance" label="本金余额[元]" width="130">
+            <el-table-column label="本金余额[元]" width="130">
+              <template slot-scope="scope">
+                {{parseInt(scope.row.principle_balance)/ 100 | formatMoney }}
+              </template>
             </el-table-column>
             <el-table-column prop="deduct_date" label="银行扣款日期" min-width="190">
             </el-table-column>
@@ -387,11 +412,13 @@
           }
           if (res.obj.rawRpt) {
             var rawResult = $.parseJSON(res.obj.rawRpt);
+            var Accounts;
             if (rawResult && rawResult.result && rawResult.result['10060'] && rawResult.result['10060'].bizInfo) {
-              this.fundRawReport = rawResult.result['10060'].bizInfo.data;
+              Accounts = rawResult.result['10060'].bizInfo.data;
+              // this.fundRawReport = rawResult.result['10060'].bizInfo.data;
+              Accounts && Accounts.accounts && Accounts.accounts.length > 0 ? this.fundRawReport = Accounts.accounts[0] : {};
             }
           }
-          console.log(2, this.fundRawReport);
           // ---------------------------
           if (this.fundReport) {
             //     this.fen_to_yuan(this.fundReport, ['deposit_amount', 'balance', 'loan_repay_amount', 'monthly_income', '']);

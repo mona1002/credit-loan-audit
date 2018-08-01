@@ -257,27 +257,27 @@
         </template>
         <div class="height_auto">
           <el-table :data="totalVal.flows" style="width:100%;" highlight-current-row border>
-            <el-table-column prop="account_id" label="账户ID" width='160'>
+            <el-table-column prop="account_id" label="账户ID" width='120'>
             </el-table-column>
-            <el-table-column prop="settle_time" label="交易时间" width='140'>
+            <el-table-column prop="settle_time" label="交易时间" width='100'>
             </el-table-column>
-            <el-table-column label="交易金额[元]" width='140'>
+            <el-table-column label="交易金额[元]" width='100'>
               <template slot-scope="scope">
                 {{parseInt(scope.row.settle_amount)/ 100 | formatMoney }}
               </template>
             </el-table-column>
-            <el-table-column prop="settle_currency" label="交易币种" width='100'>
+            <el-table-column prop="settle_currency" label="交易币种" width='80'>
             </el-table-column>
             <el-table-column label="余额[元]" width='140'>
               <template slot-scope="scope">
                 {{parseInt(scope.row.balance)/ 100 | formatMoney }}
               </template>
             </el-table-column>
-            <el-table-column prop="account_no" label="交易账号卡号" width='180'>
+            <el-table-column prop="account_no" label="交易账号卡号" width='170'>
             </el-table-column>
             <el-table-column prop="trade_description" label="交易描述" width='180'>
             </el-table-column>
-            <el-table-column prop="trade_nation" label="交易国家" width='180'>
+            <el-table-column prop="trade_nation" label="交易国家" width='80'>
             </el-table-column>
             <el-table-column prop="trade_place" label="交易地点" width='180'>
             </el-table-column>
@@ -289,7 +289,7 @@
             </el-table-column>
             <el-table-column prop="oppesite_account" label="对方账号" width='200'>
             </el-table-column>
-            <el-table-column prop="summary" label="摘要" width='180'>
+            <el-table-column prop="summary" label="摘要" width='140'>
             </el-table-column>
             <el-table-column prop="postscript" label="附言" width='180'>
             </el-table-column>

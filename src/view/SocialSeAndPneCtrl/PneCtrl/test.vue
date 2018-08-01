@@ -1,319 +1,61 @@
 <template>
-  <div>
-	<h2>Basic Panel</h2>
-	<p>The panel is a container for other components or elements.</p>
-	<div style="margin:20px 0 10px 0;">
-		<a href="#" class="easyui-linkbutton" onclick="javascript:$('#p').panel('open')">Open</a>
-		<a href="#" class="easyui-linkbutton" onclick="javascript:$('#p').panel('close')">Close</a>
-	</div>
-	<div id="p" class="easyui-panel" title="Basic Panel" style="width:700px;height:200px;padding:10px;">
-		<p style="font-size:14px">jQuery EasyUI framework helps you build your web pages easily.</p>
-		<ul>
-			<li>easyui is a collection of user-interface plugin based on jQuery.</li>
-			<li>easyui provides essential functionality for building modem, interactive, javascript applications.</li>
-			<li>using easyui you don't need to write many javascript code, you usually defines user-interface by writing some HTML markup.</li>
-			<li>complete framework for HTML5 web page.</li>
-			<li>easyui save your time and scales while developing your products.</li>
-			<li>easyui is very easy but powerful.</li>
-		</ul>
-	</div>
-
-
-
-
-
-        <div id="dTab" title="储蓄卡1" v-if="defaultPart">
-      <div>
-        <h3 style="padding-left: 0px;font-size: 25px;text-align: center">
-          储蓄卡报告
-        </h3>
-      </div>
-      <div class="table" style="padding-left: 0px">
-        <h5 class="h5">报告信息</h5>
-        <form id="f_1">
-          <table style="width:100%">
-            <tbody>
-              <tr>
-                <td>姓名：
-                  <input name="name" type="text" readonly/>
-                </td>
-                <td>用户填写姓名:
-                  <input name="user_name" type="text" readonly/>
-                </td>
-                <td>用户填写身份证：
-                  <input name="user_idcard" type="text" readonly/>
-                </td>
-                <td>用户填写手机号：
-                  <input name="user_phone" type="text" readonly/>
-                </td>
-              </tr>
-              <tr>
-                <td>姓名是否一致：
-                  <input name="name_match" type="text" readonly/>
-                </td>
-                <td>身份证是否一致：
-                  <input name="idcard_match" type="text" readonly/>
-                </td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>账户ID:
-                  <input name="account_id" type="text" readonly/>
-                </td>
-                <td>卡号：
-                  <input name="card" type="text" readonly/>
-                </td>
-                <td>银行名称：
-                  <input name="bank" type="text" readonly/>
-                </td>
-                <td>开卡时间：
-                  <input name="open_date" type="text" readonly/>
-                </td>
-              </tr>
-              <tr>
-                <td>平均工资：
-                  <input name="average_salary" type="text" readonly/>
-                </td>
-                <td>工资稳定性水平：
-                  <input name="salary_stability" type="text" readonly/>
-                </td>
-                <td>月均还款额：
-                  <input name="average_repayment_permonth" type="text" readonly/>
-                </td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </form>
-      </div>
-      <div class="table" style="padding-left: 0px">
-        <h5 class="h5">账户信息</h5>
-        <form id="f_2">
-          <table style="width:100%">
-            <tbody>
-              <tr>
-                <td>账户ID：
-                  <input name="id" type="text" readonly/>
-                </td>
-                <td>账户类型：
-                  <input name="type" type="text" readonly/>
-                </td>
-                <td>卡号：
-                  <input name="card" type="text" readonly/>
-                </td>
-                <td>主副卡标志：
-                  <input name="main_vice_flag" type="text" readonly/>
-                </td>
-              </tr>
-              <tr>
-                <td>银行名称:
-                  <input name="bank" type="text" readonly/>
-                </td>
-                <td>持卡人姓名：
-                  <input name="holder" type="text" readonly/>
-                </td>
-                <td>证件号码：
-                  <input name="idcard" type="text" readonly/>
-                </td>
-                <td>状态：
-                  <input name="status" type="text" readonly/>
-                </td>
-              </tr>
-              <tr>
-                <td>开卡时间：
-                  <input name="open_date" type="text" readonly/>
-                </td>
-                <td>当前余额[元]：
-                  <input name="balance" type="text" readonly/>
-                </td>
-                <td>卡产品名称：
-                  <input name="card_name" type="text" readonly/>
-                </td>
-                <td>当前剩余欠款[元]：
-                  <input name="current_arrears" type="text" readonly/>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </form>
-      </div>
-
-      <div class="table" style="padding-left: 0px">
-        <h5 class="h5">每月汇总列表</h5>
-        <div id="d_2" class="tabbox_x">
-          <table id="t_2" style="width:100%">
-            <thead>
-              <tr>
-                <th>月数</th>
-                <th>流出总笔数</th>
-                <th>流出总金额[元]</th>
-                <th>最大单笔流出金额[元]</th>
-                <th>流入总笔数</th>
-                <th>流入总金额[元]</th>
-                <th>最大单笔流入金额[元]</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="table" style="padding-left: 0px">
-        <h5 class="h5">结息情况</h5>
-        <div class="tabbox">
-          <table id="t_3" style="width:100%">
-            <thead>
-              <tr>
-                <th>日期</th>
-                <th>余额[元]</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- 没有该字段 -->
-      <div class="table" style="padding-left: 0px">
-        <h5 class="h5">工资</h5>
-        <div id="d_4" class="tabbox_x">
-          <table id="t_4" style="width:100%">
-            <thead>
-              <tr>
-                <th>日期</th>
-                <th>金额[元]</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <!-- 没有该字段 -->
-      <div class="table" style="padding-left: 0px">
-        <h5 class="h5">第三方借贷</h5>
-        <div class="tabbox_x">
-          <table id="t_5" style="width:100%">
-            <thead>
-              <tr>
-                <th>机构名称</th>
-                <th>还款日期</th>
-                <th>还款金额[元]</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="table" style="padding-left: 0px">
-        <h5 class="h5">流水详情</h5>
-        <div class="tabbox_x">
-          <table id="t_6" style="width:100%">
-            <thead>
-              <tr>
-                <th>账户ID</th>
-                <th>入账时间</th>
-                <th>入账金额[元]</th>
-                <th>入账币种</th>
-                <th>余额[元]</th>
-                <th>交易账号卡号</th>
-                <th>交易描述</th>
-                <th>交易国家</th>
-                <th>交易地点</th>
-                <th>交易渠道</th>
-                <th>对方账户名</th>
-                <th>对方开户行</th>
-                <th>对方账号</th>
-                <th>摘要</th>
-                <th>附言</th>
-                <th>现钞/现汇</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <!-- <div style="margin-bottom: 20px;">
-      <el-button size="small" @click="addTab(editableTabs2)">
-        add tab
-      </el-button>
-    </div>
-    <el-tabs v-model="editableTabsValue2" type="card" closable @tab-remove="removeTab"  @tab-click="handleClick">
-      <el-tab-pane v-for="(item, index) in editableTabs2" :key="item.name" :label="item.title" :name="item.name">
-        {{item.content}}
-      </el-tab-pane>
-
-          </el-tab-pane> 
-    </el-tabs> -->
-            <div class="Right_tab_ul_wrap">
-              <ul ref="right_tab_ul" style="left:0;right:0;">
-                <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="flag2[index] &&  tab2($event,index,val)"
-                  :class="{tab2Act:tab2Index==index}">
-                  {{val}}</li>
-              </ul>
-            </div>
-              <div class="tab2_Content" id="creditcontent">
-            <AudioVisual v-if=" this.tabContent2==0"></AudioVisual>
+  <el-table :data="tableData" style="width: 100%">
+    <el-table-column label="日期" width="180">
+      <template slot-scope="scope">
+        <i class="el-icon-time"></i>
+        <span style="margin-left: 10px">{{scope.row.revers? scope.row.revers.kds:'dsfddf' }}</span>
+      </template>
+    </el-table-column>
+    <el-table-column label="姓名" width="180">
+      <template slot-scope="scope">
+        <el-popover trigger="hover" placement="top">
+          <p>姓名: {{ scope.row.name }}</p>
+          <p>住址: {{ scope.row.revers }}</p>
+          <div slot="reference" class="name-wrapper">
+            <el-tag size="medium">{{ scope.row.name }}</el-tag>
           </div>
-  </div>
+        </el-popover>
+      </template>
+    </el-table-column>
+    <el-table-column label="操作">
+      <template slot-scope="scope">
+        <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+        <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+      </template>
+    </el-table-column>
+  </el-table>
 </template>
 
 <script>
   export default {
     data() {
       return {
-        editableTabsValue2: '2',
-        editableTabs2: [{
-          title: 'Tab 1',
-          name: '1',
-          content: 'Tab 1 content'
+        tableData: [{
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄',
+          revers:{}
         }, {
-          title: 'Tab 2',
-          name: '2',
-          content: 'Tab 2 content'
-        }],
-        tabIndex: 2
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄'
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄'
+        }]
       }
     },
     methods: {
-          handleClick(tab, event) {
-        console.log(tab, event);
-        console.log(this.tabIndex )
+      handleEdit(index, row) {
+        console.log(index, row);
       },
-      addTab(targetName) {
-          console.log(targetName)
-        let newTabName = ++this.tabIndex + '';
-       targetName.push({
-          title: 'New Tab',
-          name: newTabName,
-          content: 'New Tab content'
-        });
-        // this.editableTabsValue2 = newTabName;
-          console.log(targetName)
-      },
-      removeTab(targetName) {
-        let tabs = this.editableTabs2;
-        let activeName = this.editableTabsValue2;
-        if (activeName === targetName) {
-          tabs.forEach((tab, index) => {
-            if (tab.name === targetName) {
-              let nextTab = tabs[index + 1] || tabs[index - 1];
-              if (nextTab) {
-                activeName = nextTab.name;
-              }
-            }
-          });
-        }
-
-        this.editableTabsValue2 = activeName;
-        this.editableTabs2 = tabs.filter(tab => tab.name !== targetName);
+      handleDelete(index, row) {
+        console.log(index, row);
       }
     }
   }
