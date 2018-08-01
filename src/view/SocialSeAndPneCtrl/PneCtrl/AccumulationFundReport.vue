@@ -149,7 +149,6 @@
               <li>
                 <label class="label_width_195">当前账户余额[元]：</label>
                 <span>{{parseInt(fundRawReport.balance)/ 100 | formatMoney }}</span>
-
               </li>
               <li>
                 <label class="label_width_195">最近一次缴存日期：</label>
