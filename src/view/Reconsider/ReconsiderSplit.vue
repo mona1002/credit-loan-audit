@@ -84,7 +84,6 @@
         CompareAlert: false,
         title: "",
         isShow: false,
-        flexible: true,
         tabContent2: 3,
         tabActiveInd2: 3,
         items2: ["影像资料", "备注信息", "内部匹配", "申请信息", "借款人资料", "电话征信", "信审表", "实地征信", "复议申请", "反欺诈结论", "反欺诈调查", "复议结论"],
@@ -152,14 +151,6 @@
         } else {
           this.$refs.right_tab_ul.style.left = parseFloat(this.$refs.right_tab_ul.style.left) - 50 + "px";
         }
-      },
-      showList() {
-        this.$refs.Left_title.style.left = "0";
-        this.flexible = false;
-      },
-      hid() {
-        this.$refs.Left_title.style.left = "-200px";
-        this.flexible = true;
       },
       tab(ev, ind, val) {
         this.tabContent2 = ind;

@@ -264,7 +264,7 @@
         }
       },
       showList() {
-        this.$refs.Left_title.style.left = "0";
+        this.$refs.Left_title.style.left = "9px";
         this.flexible = false;
       },
       hid() {

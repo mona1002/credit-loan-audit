@@ -977,6 +977,7 @@ body .pre_wrap {
   display: block;
   height: 200px;
   width: 200px;
+  background-size: contain;
   border: 1px solid red;
 }
 
