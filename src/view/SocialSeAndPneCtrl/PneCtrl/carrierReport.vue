@@ -665,7 +665,7 @@
                 });
               }
               $.each(this.caReport.main_service, (i, eh) => {
-                var serviceObj = name_val_jsonArr2Json(eh.service_details, 'interact_mth', 'interact_cnt');
+                var serviceObj = this.name_val_jsonArr2Json(eh.service_details, 'interact_mth', 'interact_cnt');
                 $.merge(eh, serviceObj);
                 this.addRow($(' #t_6_2 tbody'), fieldsArr, eh);
               });
@@ -727,13 +727,13 @@
         row += '</tr>';
         $table.append(row);
       },
-      name_val_jsonArr2Json(arr,name,valName){
-	var jsonObj={};
-	$.each(arr,function(i,eh){
-		jsonObj['name'] = eh.valName
-	});
-	return jsonObj;
-},
+      name_val_jsonArr2Json(arr, name, valName) {
+        var jsonObj = {};
+        $.each(arr, function (i, eh) {
+          jsonObj['name'] = eh.valName
+        });
+        return jsonObj;
+      },
       formatRatePercentage100(val, row) {
         if (!$.isNumeric(val)) {
           return val;
