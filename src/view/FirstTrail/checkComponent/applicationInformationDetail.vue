@@ -790,8 +790,8 @@
           </el-table>
           <!-- 分页 -->
           <div class="page">
-            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 50, 80, 100]"
-              :page-size=setPageSize layout="total, sizes, prev, pager, next, jumper" :total="logDatas.total">
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20,50]"
+              :page-size='setPageSize' layout="total, sizes, prev, pager, next, jumper" :total="logDatas.total">
             </el-pagination>
           </div>
         </div>
@@ -813,8 +813,8 @@
           </el-table>
           <!-- 分页 -->
           <div class="page">
-            <el-pagination @size-change="dhandleSizeChange" @current-change="dhandleCurrentChange" :current-page="currentPage" :page-sizes="[10, 50, 80, 100]"
-              :page-size=setPageSize layout="total, sizes, prev, pager, next, jumper" :total="detailLogDatas.total">
+            <el-pagination @size-change="dhandleSizeChange" @current-change="dhandleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20,50]"
+              :page-size='setPageSize' layout="total, sizes, prev, pager, next, jumper" :total="detailLogDatas.total">
             </el-pagination>
           </div>
         </div>

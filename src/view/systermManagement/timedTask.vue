@@ -59,7 +59,7 @@
       </el-table>
       <!-- 分页  -->
       <div class="page">
-        <el-pagination @size-change="handleSizeChange" @current-change="handlePageChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
+        <el-pagination @size-change="handleSizeChange" @current-change="handlePageChange" :page-sizes="[10, 20,50]" :current-page.sync="currentPage"
           :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="totalRecord">
         </el-pagination>
       </div>

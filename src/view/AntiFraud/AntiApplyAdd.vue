@@ -207,7 +207,7 @@
             </el-table-column>
           </el-table>
           <div class="block tool-bar">
-            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 20, 30]"
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[10, 20,50]"
               :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalRecord" v-show="tableData.totalRecord">
             </el-pagination>
           </div>
@@ -271,7 +271,7 @@
         userCode: '',
         // orgCode: '',
         pageNum: 1, // 页码
-        pageSize: 5, // 每页条数
+        pageSize: 10, // 每页条数
         applySubno: '',
         custName_la: '',
         certCode: '',

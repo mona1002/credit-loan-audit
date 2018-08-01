@@ -884,8 +884,8 @@
                 </template>
               </el-table-column>
             </el-table>
-            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage4" :page-sizes="[10, 20, 30, 40, 50]"
-              :page-size="5" layout="total, sizes, prev, pager, next, jumper" :total="50">
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage4" :page-sizes="[10, 20, 50]"
+              :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="totalRecord">
             </el-pagination>
             <div style="width:100%;height:40px;">
               <el-button type="primary" @click="layerSure">确定</el-button>
@@ -913,8 +913,8 @@
               <el-table-column prop="after" label="变更后" sortable>
               </el-table-column>
             </el-table>
-            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage4" :page-sizes="[10, 20, 30, 40, 50]"
-              :page-size="5" layout="total, sizes, prev, pager, next, jumper" :total="50">
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage4" :page-sizes="[10, 20, 50]"
+              :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="totalRecord">
             </el-pagination>
             <div style="width:100%;height:40px;">
               <el-button type="primary" @click="detialLayerSure">确定</el-button>
@@ -933,6 +933,8 @@
         cross_rable_home: 0,
         cross_rable_vehicle: 0,
         cross_rable_people: 0,
+        pageCount:10,
+        totalRecord:0,
         value: '',
         value1: 'ddd',
         value2: '',
@@ -1723,6 +1725,7 @@
       /*弹层表格*/
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
+        this.pageCount = val;
       },
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);

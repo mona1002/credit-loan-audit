@@ -225,7 +225,7 @@
           taskIds: []
         }, // 编辑、查看、授权某一条数据前，根据 id 查询其详细数据
         currentPage: 1, // 默认显示的当前页
-        pageSizesArr: [10, 20, 30, 40, 50], // 每页显示的数据数
+        pageSizesArr: [10, 20,50], // 每页显示的数据数
         setPageSize: 10,
         defaultProps: {
           children: 'children',

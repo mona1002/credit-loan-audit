@@ -641,8 +641,8 @@
       </el-table>
       <!-- 分页 -->
       <div class="block tool-bar" v-show="tableData.totalRecord > pageSize">
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 20, 30]"
-          :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalRecord">
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[10, 20,50]"
+          :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalRecord">
         </el-pagination>
       </div>
       <div class="back-form-li" style="text-align:right;padding:10px;">
@@ -757,7 +757,7 @@
         baseProName: '', // 详情带过了的 产品名称
         // 审批结论轨迹
         pageNum: 1,
-        pageSize: 5,
+        pageSize: 10,
         loading: false, // 加载  审批结论轨迹
         mainId: '', // 主原因 id
         mainReasonTitle: '', // 主原因 title

@@ -33,7 +33,7 @@
         </div>
         <div class="block tool-bar" v-show="mobileData.totalRecord>0">
           <el-pagination @size-change="handleSizeChangeMobile" @current-change="handleCurrentChangeMobile" :current-page="MobilePageNum"
-            :page-sizes="[5, 10, 15, 20]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="mobileData.totalRecord">
+            :page-sizes="[10, 20,50]" :page-size="MobilePageSize" layout="total, sizes, prev, pager, next, jumper" :total="mobileData.totalRecord">
           </el-pagination>
         </div>
       </el-collapse-item>
@@ -69,7 +69,7 @@
         </div>
         <div class="block tool-bar" v-show="fixTelData.totalRecord>0">
           <el-pagination @size-change="handleSizeChangeFixTel" @current-change="handleCurrentChangeFixTel" :current-page="FixTelPageNum"
-            :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="fixTelData.totalRecord">
+            :page-sizes="[10, 20,50]" :page-size="MobilePageSize" layout="total, sizes, prev, pager, next, jumper" :total="fixTelData.totalRecord">
           </el-pagination>
         </div>
       </el-collapse-item>
@@ -103,7 +103,7 @@
         </div>
         <div class="block tool-bar" v-show="workData.totalRecord>0">
           <el-pagination @size-change="handleSizeChangeCompany" @current-change="handleCurrentChangeCompany" :current-page="CompanyPageNum"
-            :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="workData.totalRecord">
+            :page-sizes="[10, 20,50]" :page-size="MobilePageSize" layout="total, sizes, prev, pager, next, jumper" :total="workData.totalRecord">
           </el-pagination>
         </div>
       </el-collapse-item>
@@ -153,7 +153,7 @@
       </div>
       <div class="block tool-bar" v-show="mobileData.totalRecord>0">
         <el-pagination @size-change="handleSizeChangeMobile" @current-change="handleCurrentChangeMobile" :current-page="MobilePageNum"
-          :page-sizes="[5, 10, 15, 20]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="mobileData.totalRecord">
+          :page-sizes="[5, 10, 15, 20]" :page-size="MobilePageSize" layout="total, sizes, prev, pager, next, jumper" :total="mobileData.totalRecord">
         </el-pagination>
       </div>
     </div> -->
@@ -187,7 +187,7 @@
       </el-table>
       <div class="block tool-bar" min-width="100">
         <el-pagination @size-change="handleSizeChangeFixTel" @current-change="handleCurrentChangeFixTel" :current-page="FixTelPageNum"
-          :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="fixTelData.totalRecord"
+          :page-sizes="[10, 20,50]" :page-size="MobilePageSize" layout="total, sizes, prev, pager, next, jumper" :total="fixTelData.totalRecord"
           v-show="fixTelData.totalRecord>0">
         </el-pagination>
       </div>
@@ -220,7 +220,7 @@
       </el-table>
       <div class="block tool-bar" min-width="100">
         <el-pagination @size-change="handleSizeChangeCompany" @current-change="handleCurrentChangeCompany" :current-page="CompanyPageNum"
-          :page-sizes="[5, 10, 20, 30]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="workData.totalRecord"
+          :page-sizes="[10, 20,50]" :page-size="MobilePageSize" layout="total, sizes, prev, pager, next, jumper" :total="workData.totalRecord"
           v-show="workData.totalRecord>0">
         </el-pagination>
       </div>
@@ -246,7 +246,7 @@
         workData: [], // 单位数据
         applySubNo: '', // 进件编号
         workName: '', // 公司名称
-        MobilePageSize: 5, // 移动 每页条数
+        MobilePageSize: 10, // 移动 每页条数
         MobilePageNum: 1, // 移动 当前页
         FixTelPageSize: 5, // 固定电话 每页条数
         FixTelPageNum: 1, // 固定电话 当前页

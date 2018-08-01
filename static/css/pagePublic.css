@@ -35,14 +35,17 @@
 .margin_right_5 {
   margin-right: 5px;
 }
+
 /* 表格th */
-.table_th{
+
+.table_th {
   height: 35px;
   border: 1px solid #d8dce5;
   font-weight: 800;
   padding-left: 5px;
   color: #000;
 }
+
 /*查看- label宽度 */
 
 .label_width_210 {
@@ -195,10 +198,11 @@
 .text_align_right {
   text-align: right;
 }
-.text_align_center{
-  text-align: center;
 
+.text_align_center {
+  text-align: center;
 }
+
 body .pre_wrap {
   white-space: pre-wrap;
 }
@@ -896,18 +900,20 @@ body .pre_wrap {
   box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
   overflow: hidden;
 }
-.Audio_thumb_img{
-  display:inline-block;
+
+.Audio_thumb_img {
+  display: inline-block;
   height: calc( 100% - 60px);
-  width:100%;
-    border-radius: 5px;
-    border: 2px solid #bfcbd9;
-    box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
-    /* overflow: hidden; */
-    background-repeat:no-repeat;
-background-size: contain;
-background-image: url(../images/add.png)
+  width: 100%;
+  border-radius: 5px;
+  border: 2px solid #bfcbd9;
+  box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
+  /* overflow: hidden; */
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url(../images/add.png)
 }
+
 /* 缩略图最外侧div */
 
 .AudioVisual .Small_pic_div,
@@ -965,6 +971,13 @@ background-image: url(../images/add.png)
   cursor: pointer;
   height: 30px;
   line-height: 30px;
+}
+
+.audio_img {
+  display: block;
+  height: 200px;
+  width: 200px;
+  border: 1px solid red;
 }
 
 /* 电话征信公共样式 */
@@ -1050,9 +1063,11 @@ background-image: url(../images/add.png)
   width:calc(66.6% - 172px);
 border:3px solid red;
 } */
+
 /* 大数据h6 */
-.sort{
-font-weight: 800;
-/* font-size: 14px; */
-margin:5px 10px;
+
+.sort {
+  font-weight: 800;
+  /* font-size: 14px; */
+  margin: 5px 10px;
 }

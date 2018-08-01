@@ -1,9 +1,9 @@
 <template>
   <!--  储蓄卡   -->
   <div class="SocialSecurity debitCardReport">
-    <el-tabs v-model="editableTabsValue" type="border-card">
+    <debitCardConponent :totalVal='item' v-if="totalAccount.length==0"> </debitCardConponent>
+    <el-tabs v-model="editableTabsValue" type="border-card" v-eles>
       <el-tab-pane :key="item.name" v-for="(item, index) in totalAccount" :label="item.type" :name="index+''">
-        <debitCardConponent :totalVal='item' v-if="!item||!item.type"> </debitCardConponent>
         <debitCardConponent :totalVal='item' v-if="item.type=='储蓄卡'+ (index==0?'':index)"> </debitCardConponent>
         <creditCardConponent :totalVal='item' v-if="item.type=='信用卡'+ (index-editableTabs.length==0?'':index-editableTabs.length)">
         </creditCardConponent>

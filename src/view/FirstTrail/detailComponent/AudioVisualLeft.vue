@@ -78,6 +78,9 @@
         <figure v-for="(val,index) in pngAyyrs" :key="index" class="small_pic_figure" v-show="SmallmyPic">
           <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref"
           />
+          <em :style="'background:url('+imgBaseUrl+val.imagePath+')'" class="audio_img"></em>
+          <em style="background:url(http://10.1.26.6:8080/ptopCredit/download/downloadAction!download.action?filepath=/creditFile&filename=upload\2015-11-19\201511190173044032\B1-1.png)" class="audio_img"></em>
+          
           <p v-if="SmallmyPic"> {{val.arcSubType}} </p>
         </figure>
         <figure class="small_pic_figure" v-show="SmallmyPdf" @dblclick="pdfClose()">
@@ -311,7 +314,6 @@
         this.defaultBigPicCss();
       },
       pdfClose() {
-        console.log('ccc')
         this.SmallPicShow = false;
         this.showPage = 1;
         //  this.defaultBigPicCss();
@@ -363,9 +365,6 @@
           //alert("99999");
           this.SmallmyPdf = true;
           this.SmallmyPic = false;
-          console.log(this.pdfArrys)
-          console.log(this.pdfArrys[0])
-          console.log(this.pdfArrys[0].arcSubType)
           this.pdfArrys[0].arcSubType ? this.pdfTitle = this.pdfArrys[0].arcSubType : '';
         } else { //显示图片
           this.SmallmyPic = true;

@@ -109,7 +109,7 @@
         </el-table>
       </div>
       <div class="page">
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[5, 10, 15, 20]"
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[10, 20,50]"
           :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="directorTableData.totalNum">
         </el-pagination>
       </div>
