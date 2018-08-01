@@ -133,9 +133,9 @@
             </el-table-column>
             <el-table-column prop="used_amt" label="已使用额度" width="120">
             </el-table-column>
-            <el-table-column prop="is_delq" label="逾期额度" width="100">
+            <el-table-column prop="over_due_amount" label="逾期额度" width="100">
             </el-table-column>
-            <el-table-column prop="call_in_time" label="是否逾期" width="120">
+            <el-table-column prop="is_delq" label="是否逾期" width="120">
             </el-table-column>
             <el-table-column prop="is_active" label="是否激活" width="80">
             </el-table-column>

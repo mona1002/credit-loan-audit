@@ -355,7 +355,8 @@
             </el-table-column>
             <el-table-column prop="phone_num_list" label="个人电话列表" width="100">
               <template slot-scope="scope">
-                <span>{{scope.row.receiver&&scope.row.receiver.phone_num_list? scope.row.receiver.phone_num_list.toString():'' }}</span>
+                <span>{{scope.row.receiver&&scope.row.receiver.phone_num_list? scope.row.receiver.phone_num_list.toString():''
+                  }}</span>
               </template>
             </el-table-column>
             <el-table-column prop="receiver.count" label="个人消费次数" width="120">
@@ -408,37 +409,44 @@
             </el-table-column>
             <el-table-column label="号码" width="140">
               <template slot-scope="scope">
-                <span>{{ scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].phone_num:'' }}</span>
+                <span>{{ scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].phone_num:''
+                  }}</span>
               </template>
             </el-table-column>
             <el-table-column label="号码归属地" width="140">
               <template slot-scope="scope">
-                <span>{{  scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].phone_num_loc:'' }}</span>
+                <span>{{ scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].phone_num_loc:''
+                  }}</span>
               </template>
             </el-table-column>
             <el-table-column label="拨打给申请人次数" width="140">
               <template slot-scope="scope">
-                <span>{{  scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].call_in_cnt:'' }}</span>
+                <span>{{ scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].call_in_cnt:''
+                  }}</span>
               </template>
             </el-table-column>
             <el-table-column label="申请人拨打次数" width="140">
               <template slot-scope="scope">
-                <span>{{  scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].call_out_cnt:'' }}</span>
+                <span>{{ scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].call_out_cnt:''
+                  }}</span>
               </template>
             </el-table-column>
             <el-table-column label="总计电话通数" width="140">
               <template slot-scope="scope">
-                <span>{{  scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].call_cnt:'' }}</span>
+                <span>{{ scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].call_cnt:''
+                  }}</span>
               </template>
             </el-table-column>
             <el-table-column label="通话时长(分钟)" width="140">
               <template slot-scope="scope">
-                <span>{{ scope.row.all_category&& scope.row.all_category.contact_details[0]?  scope.row.all_category.contact_details[0].call_len:'' }}</span>
+                <span>{{ scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].call_len:''
+                  }}</span>
               </template>
             </el-table-column>
             <el-table-column label="短信条数" width="140">
               <template slot-scope="scope">
-                <span>{{  scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].sms_cnt:'' }}</span>
+                <span>{{ scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].sms_cnt:''
+                  }}</span>
               </template>
             </el-table-column>
           </el-table>
@@ -473,7 +481,7 @@
   export default {
     data() {
       return {
-        activeNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9','10'],
+        activeNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
         caReport: {},
         behaviorCheck: [],
         contactRegion: [],
@@ -498,7 +506,7 @@
           applySubNo: this.applySubNo
           //   applySubNo : 'PHDX6409598026121216'
         }).then(res => {
-          if ('' != res.obj.rpt) {
+          if (res.obj.rpt) {
             var report = $.parseJSON(res.obj.rpt);
             if (report && report.result && report.result['10069'] && report.result['10069'].bizInfo) {
               this.caReport = report.result['10069'].bizInfo.report_data;

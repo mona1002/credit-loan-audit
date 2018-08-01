@@ -8,12 +8,6 @@
         </ul>
       </div>
       <div class="wrap">
-        <!-- <RiskDecision v-if="ind==0"></RiskDecision>
-          <BaiRongData v-if="ind==1"></BaiRongData> -->
-        <!-- <div class="content">
-          <BaiRongData v-if="ind==1" :applyId='localInf.applyId'>百融数据</BaiRongData>
-          <RiskDecision v-if="ind==0" :applyId='localInf.applyId'>同盾风险决策</RiskDecision>
-        </div> -->
         <div class="content">
           <RiskPoint v-if="ind==0" :applySubNo='localInf.applySubNo'>风控指引</RiskPoint>
           <complexPic v-if="ind==1"  :applySubNo='localInf.applySubNo'>复杂网络图谱</complexPic>
@@ -21,7 +15,7 @@
           <portrait v-if="ind==3" :applySubNo='localInf.applySubNo'>同盾设备画像</portrait>
           <!-- <test v-if="ind==4" :applySubNo='localInf.applySubNo'>网查征信报告</test> -->
           <ZxReport v-if="ind==4" :applySubNo='localInf.applySubNo'>网查征信报告</ZxReport>
-          <!-- <carrierReport v-if="ind==5" :applySubNo='localInf.applySubNo'>运营商报告</carrierReport> -->
+          <carrierReport v-if="ind==5" :applySubNo='localInf.applySubNo'>运营商报告</carrierReport>
           <debitCardReport v-if="ind==6" :applySubNo='localInf.applySubNo'>储蓄卡报告</debitCardReport>
           <AccumulationFundReport v-if="ind==7" :applySubNo='localInf.applySubNo'>公积金报告</AccumulationFundReport>
           <SocialSecurityReport v-if="ind==8" :applySubNo='localInf.applySubNo'>社保报告</SocialSecurityReport>
@@ -51,7 +45,6 @@
     data() {
       return {
         ind: 0,
-        // titles: ['同盾风险决策', '百融数据'],
         titles: ['风控指引', '复杂网络图谱', 'OCR信息', '同盾设备画像', '网查征信报告', '运营商报告', '储蓄卡报告', '公积金报告', '社保报告', '百融数据', '同盾风险决策'],
         localInf: {},
         judgeFlag: ''
