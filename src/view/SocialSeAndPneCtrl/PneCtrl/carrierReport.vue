@@ -664,7 +664,7 @@
                   n++;
                 });
               }
-              $.each(caReport.main_service, (i, eh) => {
+              $.each(this.caReport.main_service, (i, eh) => {
                 var serviceObj = name_val_jsonArr2Json(eh.service_details, 'interact_mth', 'interact_cnt');
                 $.merge(eh, serviceObj);
                 this.addRow($(' #t_6_2 tbody'), fieldsArr, eh);

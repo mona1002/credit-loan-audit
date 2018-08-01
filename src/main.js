@@ -88,6 +88,7 @@ Vue.filter('MobileStar', function (value) {
 })
 
 Vue.filter('NumRound', function (value, num) {
+  if (value == 0) return 0;
   if (!value) return '';
   value = parseFloat(value).toFixed(num);
   return value
