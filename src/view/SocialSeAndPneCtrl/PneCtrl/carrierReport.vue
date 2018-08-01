@@ -727,6 +727,13 @@
         row += '</tr>';
         $table.append(row);
       },
+      name_val_jsonArr2Json(arr,name,valName){
+	var jsonObj={};
+	$.each(arr,function(i,eh){
+		jsonObj['name'] = eh.valName
+	});
+	return jsonObj;
+}
       formatRatePercentage100(val, row) {
         if (!$.isNumeric(val)) {
           return val;
