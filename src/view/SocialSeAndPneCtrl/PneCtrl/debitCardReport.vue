@@ -2,9 +2,11 @@
   <!--  储蓄卡   -->
   <div class="SocialSecurity debitCardReport">
     <el-tabs v-model="editableTabsValue" type="border-card">
-      <el-tab-pane :key="item.name" v-for="(item, index) in editableTabs" :label="item.type" :name="index+''">
-        <debitCardConponent :totalVal='item' v-if="item.type=='储蓄卡'"> </debitCardConponent>
-        <creditCardConponent :totalVal='item' v-if="item.type=='信用卡'"> </creditCardConponent>
+      <el-tab-pane :key="item.name" v-for="(item, index) in totalAccount" :label="item.type" :name="index+''">
+        <debitCardConponent :totalVal='item' v-if="!item||!item.type"> </debitCardConponent>
+        <debitCardConponent :totalVal='item' v-if="item.type=='储蓄卡'+ (index==0?'':index)"> </debitCardConponent>
+        <creditCardConponent :totalVal='item' v-if="item.type=='信用卡'+ (index-editableTabs.length==0?'':index-editableTabs.length)">
+        </creditCardConponent>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -64,7 +66,7 @@
           if (!res.success) {
             return;
           }
-          if ("" != res.obj.rpt) {
+          if (res.obj.rpt) {
             var result = $.parseJSON(res.obj.rpt);
             if (result && result.result && result.result['10061'] && result.result['10061'].bizInfo && result.result[
                 '10061'].bizInfo.data) {
@@ -105,7 +107,7 @@
               // console.log('editableTabs.push::::::', this.editableTabs);
             }
           }
-          if ("" != res.obj.rawRpt) {
+          if (res.obj.rawRpt) {
             var rawResult = $.parseJSON(res.obj.rawRpt);
             // console.log('rawResult:', rawResult)
             var dCardRawReport;
@@ -186,10 +188,10 @@
               }
             }
           }
-          // console.log('最后结果：', this.editableTabs)
-          // console.log('最后结果：', this.CreditCard)
+          console.log('editableTabs最后结果：', this.editableTabs)
+          console.log('CreditCard最后结果：', this.CreditCard)
           this.totalAccount = this.totalAccount.concat(this.editableTabs, this.CreditCard)
-          // console.log('totalAccountL', this.totalAccount)
+          console.log('totalAccountL最后结果：', this.totalAccount)
         });
       },
     },
