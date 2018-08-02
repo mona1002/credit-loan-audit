@@ -84,7 +84,7 @@
           </el-table-column>
         </el-table>
         <!-- 专员 -->
-        <el-table :data="directorTableData.taskDetailList" border stripe fit highlight-current-row @row-dblclick="rowDbClick" v-show="antiFlag=='03'||antiFlag=='04'"
+        <el-table :data="directorTableData.taskDetailList" border stripe fit  height="510" highlight-current-row @row-dblclick="rowDbClick" v-show="antiFlag=='03'||antiFlag=='04'"
           class="director-table">
           <el-table-column type="index" :index="1"  label="序号" width='50'>
           </el-table-column>
