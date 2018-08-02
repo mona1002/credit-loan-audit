@@ -271,21 +271,21 @@
             </el-table-column>
             <el-table-column prop="call_out_cnt" label="主叫次数" width="80">
             </el-table-column>
-            <el-table-column label="主叫时间（分）" width="110">
+            <el-table-column label="主叫时间(分)" width="110">
               <template slot-scope="scope">
                 <span>{{ scope.row.call_out_len | NumRound(2)}}</span>
               </template>
             </el-table-column>
             <el-table-column prop="call_in_cnt" label="被叫次数" width="80">
             </el-table-column>
-            <el-table-column label="被叫时间（分）" width="110">
+            <el-table-column label="被叫时间(分)" width="110">
               <template slot-scope="scope">
                 <span>{{ scope.row.call_in_len | NumRound(2)}}</span>
               </template>
             </el-table-column>
             <el-table-column prop="call_cnt" label="联系次数" width="80">
             </el-table-column>
-            <el-table-column label="联系时间（分）" width="110">
+            <el-table-column label="联系时间(分)" width="110">
               <template slot-scope="scope">
                 <span>{{ scope.row.call_len | NumRound(2)}}</span>
               </template>
@@ -733,9 +733,9 @@
         var row = '<tr>';
         $.each(rfields, function (index, val) {
           if (rdata[val] != undefined) {
-            row += '<td style="border: 1px solid #d8dce5;">' + rdata[val] + '</td>';
+            row += '<td style="border: 1px solid #d8dce5;padding:0 10px;">' + rdata[val] + '</td>';
           } else {
-            row += '<td style="border: 1px solid #d8dce5;">' + '' + '</td>';
+            row += '<td style="border: 1px solid #d8dce5;padding:0 10px;">' + '' + '</td>';
           }
         });
         row += '</tr>';

@@ -254,9 +254,9 @@
             </el-table-column>
             <el-table-column prop="payment_status" label="缴费状态" width="120">
             </el-table-column>
-            <el-table-column prop="person_rate" label="个人缴费比例(%)" width="120">
+            <el-table-column prop="person_rate" label="个人缴费比例(%)" width="135">
             </el-table-column>
-            <el-table-column prop="company_rate" label="单位缴费比例(%)" width="120">
+            <el-table-column prop="company_rate" label="单位缴费比例(%)" width="135">
             </el-table-column>
             <el-table-column prop="company" label="参保单位" min-width="190">
             </el-table-column>
@@ -542,7 +542,6 @@
               this.socRawReport = rawResult.result['10125'].bizInfo.data; //原始数据
             }
           }
-
           console.log( 0, result)
           console.log( 1, this.socReport)
           console.log( 2, this.socRawReport)
@@ -565,14 +564,12 @@
             // 工伤保险
             this.socReport.injuryFlow && this.socReport.injuryFlow.length > 0 ? this.injuryFlow = this.socReport.injuryFlow :
               '';
-            console.log(5, this.socReport)
             // 生育保险
             this.socReport.maternityFlow && this.socReport.maternityFlow.length > 0 ? this.maternityFlow = this.socReport
               .maternityFlow : '';
           }
           // ---------------------------------
           if (this.socRawReport) { //基本信息1
-          console.log(4,this.socRawReport.accounts[0])
           // 账户信息
             if (this.socRawReport.accounts && this.socRawReport.accounts.length > 0) {
               this.accountReport=this.socRawReport.accounts[0]
@@ -598,7 +595,6 @@
             //     ], eh);
             //   });
             // }
-            console.log(3, this.socRawReport)
             // 消费明细
             this.socRawReport.consumption && this.socRawReport.consumption.length > 0 ? this.consumption = this.socRawReport
               .consumption : '';
