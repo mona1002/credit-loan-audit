@@ -4,8 +4,8 @@
     <el-tabs v-model="editableTabsValue" type="border-card">
       <el-tab-pane :key="item.name" v-for="(item, index) in totalAccount" :label="item.type" :name="index+''">
         <debitCardConponent :totalVal='item' v-if="!item||!item.type"> </debitCardConponent>
-        <debitCardConponent :totalVal='item' v-if="item.type=='储蓄卡'+ (index==0?'':index)"> </debitCardConponent>
-        <creditCardConponent :totalVal='item' v-if="item.type=='信用卡'+ (index-editableTabs.length==0?'':index-editableTabs.length)">
+        <debitCardConponent :totalVal='item' v-if="item.type=='储蓄卡'+(index+1)"> </debitCardConponent>
+        <creditCardConponent :totalVal='item' v-if="item.type=='信用卡'+ ((index-editableTabs.length)+1)">
         </creditCardConponent>
       </el-tab-pane>
     </el-tabs>
@@ -82,7 +82,7 @@
                     // console.log('储蓄卡')
                     $.each(eh.data, (n, v) => {
                       var obj = {
-                        type: n == 0 ? '储蓄卡' : '储蓄卡' + n,
+                        type: '储蓄卡' + (n+1),
                         data: {}
                       }
                       // console.log(n, v)
@@ -96,7 +96,7 @@
                     // console.log('信用卡')
                     $.each(eh.data, (n, v) => {
                       var credObj = {
-                        type: n == 0 ? '信用卡' : '信用卡' + n,
+                        type:'信用卡' + (n+1),
                         data: {}
                       }
                       Object.assign(credObj.data, v)
