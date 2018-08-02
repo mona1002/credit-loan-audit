@@ -206,6 +206,9 @@
             <el-table-column prop="region_call_in_cnt" label="呼入次数" width="80">
             </el-table-column>
             <el-table-column prop="region_call_out_cnt" label="呼出次数" width="80">
+              <!-- <template slot-scope="scope">
+                <span>{{ scope.row.region_call_out_cnt | NumRound(4)}}</span>
+              </template> -->
             </el-table-column>
             <el-table-column label="呼入时间(分钟)" width="120">
               <template slot-scope="scope">
@@ -260,29 +263,29 @@
           <el-table :data="contactList" style="width:100%;" highlight-current-row border>
             <el-table-column prop="phone_num" label="号码" width="160">
             </el-table-column>
-            <el-table-column prop="phone_num_loc" label="归属地" width="140">
+            <el-table-column prop="phone_num_loc" label="归属地" width="100">
             </el-table-column>
             <el-table-column prop="contact_name" label="互联网标识" width="100">
             </el-table-column>
-            <el-table-column prop="needs_type" label="需求类型" min-width="160">
+            <el-table-column prop="needs_type" label="需求类型" min-width="140">
             </el-table-column>
             <el-table-column prop="call_out_cnt" label="主叫次数" width="80">
             </el-table-column>
-            <el-table-column label="主叫时间" width="100">
+            <el-table-column label="主叫时间（分）" width="110">
               <template slot-scope="scope">
                 <span>{{ scope.row.call_out_len | NumRound(2)}}</span>
               </template>
             </el-table-column>
             <el-table-column prop="call_in_cnt" label="被叫次数" width="80">
             </el-table-column>
-            <el-table-column label="被叫时间" width="100">
+            <el-table-column label="被叫时间（分）" width="110">
               <template slot-scope="scope">
                 <span>{{ scope.row.call_in_len | NumRound(2)}}</span>
               </template>
             </el-table-column>
             <el-table-column prop="call_cnt" label="联系次数" width="80">
             </el-table-column>
-            <el-table-column label="联系时间" width="100">
+            <el-table-column label="联系时间（分）" width="110">
               <template slot-scope="scope">
                 <span>{{ scope.row.call_len | NumRound(2)}}</span>
               </template>
@@ -303,7 +306,10 @@
             </el-table-column>
             <el-table-column prop="contact_early_morning" label="凌晨联系" width="80">
             </el-table-column>
-            <el-table-column prop="contact_all_day" label="全天联系" width="80">
+            <el-table-column label="全天联系" width="80">
+              <template slot-scope="scope">
+                <span>{{ scope.row.contact_all_day | YesOrNo}}</span>
+              </template>
             </el-table-column>
             <el-table-column prop="contact_weekday" label="周中联系" width="80">
             </el-table-column>
@@ -356,7 +362,8 @@
             <el-table-column prop="phone_num_list" label="个人电话列表" width="100">
               <template slot-scope="scope">
                 <span>{{scope.row.receiver&&scope.row.receiver.phone_num_list? scope.row.receiver.phone_num_list.toString():''
-                  }}</span>
+                  }}
+                </span>
               </template>
             </el-table-column>
             <el-table-column prop="receiver.count" label="个人消费次数" width="120">
@@ -410,43 +417,50 @@
             <el-table-column label="号码" width="140">
               <template slot-scope="scope">
                 <span>{{ scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].phone_num:''
-                  }}</span>
+                  }}
+                </span>
               </template>
             </el-table-column>
             <el-table-column label="号码归属地" width="140">
               <template slot-scope="scope">
                 <span>{{ scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].phone_num_loc:''
-                  }}</span>
+                  }}
+                </span>
               </template>
             </el-table-column>
             <el-table-column label="拨打给申请人次数" width="140">
               <template slot-scope="scope">
                 <span>{{ scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].call_in_cnt:''
-                  }}</span>
+                  }}
+                </span>
               </template>
             </el-table-column>
             <el-table-column label="申请人拨打次数" width="140">
               <template slot-scope="scope">
                 <span>{{ scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].call_out_cnt:''
-                  }}</span>
+                  }}
+                </span>
               </template>
             </el-table-column>
             <el-table-column label="总计电话通数" width="140">
               <template slot-scope="scope">
                 <span>{{ scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].call_cnt:''
-                  }}</span>
+                  }}
+                </span>
               </template>
             </el-table-column>
             <el-table-column label="通话时长(分钟)" width="140">
               <template slot-scope="scope">
                 <span>{{ scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].call_len:''
-                  }}</span>
+                  }}
+                </span>
               </template>
             </el-table-column>
             <el-table-column label="短信条数" width="140">
               <template slot-scope="scope">
                 <span>{{ scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].sms_cnt:''
-                  }}</span>
+                  }}
+                </span>
               </template>
             </el-table-column>
           </el-table>

@@ -94,3 +94,8 @@ Vue.filter('overdue',function(value){
 if(value==0) return '未逾期'
 if(value==1) return '逾期'
 })
+// false 否 true 是
+Vue.filter('YesOrNo',function(value){
+  if(value==true) return '是';
+  if(value==false) return '否';
+})

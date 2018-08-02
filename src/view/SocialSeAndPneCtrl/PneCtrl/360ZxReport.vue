@@ -7,8 +7,6 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">1.1 基本信息</span>
         </template>
-        <table>
-        </table>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
             <div class=" CreditForm_div_border clearFix">
@@ -55,12 +53,7 @@
             </div>
           </ul>
         </div>
-      </el-collapse-item>
-      <el-collapse-item name="2">
-        <template slot="title">
-          <i class="collapse_title_icon"></i>
-          <span class="collapse_title_text"> </span>
-        </template>
+          
         <h6 class="sort">信用卡</h6>
         <table id="t_1_1" style="width:100%;">
           <tbody>
