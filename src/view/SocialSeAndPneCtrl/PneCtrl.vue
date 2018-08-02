@@ -10,7 +10,7 @@
       <div class="wrap">
         <div class="content">
           <RiskPoint v-if="ind==0" :applySubNo='localInf.applySubNo'>风控指引</RiskPoint>
-          <complexPic v-if="ind==1"  :applySubNo='localInf.applySubNo'>复杂网络图谱</complexPic>
+          <complexPic v-if="ind==1" :applySubNo='localInf.applySubNo'>复杂网络图谱</complexPic>
           <OcrMessage v-if="ind==2" :applySubNo='localInf.applySubNo'>OCR信息</OcrMessage>
           <portrait v-if="ind==3" :applySubNo='localInf.applySubNo'>同盾设备画像</portrait>
           <!-- <test v-if="ind==4" :applySubNo='localInf.applySubNo'>网查征信报告</test> -->
@@ -47,6 +47,9 @@
         ind: 0,
         titles: ['风控指引', '复杂网络图谱', 'OCR信息', '同盾设备画像', '网查征信报告', '运营商报告', '储蓄卡报告', '公积金报告', '社保报告', '百融数据', '同盾风险决策'],
         localInf: {},
+        obj: {
+          applySubNo: ''
+        },
         judgeFlag: ''
       }
     },
@@ -80,6 +83,10 @@
         } else if (this.judgeFlag.flag == '07' || this.judgeFlag.flag == '08' || this.judgeFlag.flag == '09' || this.judgeFlag
           .flag == '10' || this.judgeFlag.flag == '11' || this.judgeFlag.flag == '13') {
           this.localInf = JSON.parse(localStorage.getItem("FGQTTaskWait")) //质检 专员、主管、初终审本人任务列表、初终审主管、复议任务列表（首次） ---区域无社保公积金按钮、合规经理任务列表
+        } else if (this.judgeFlag.flag == '综合查询17') {
+          this.localInf = JSON.parse(localStorage.getItem("IntegratedQuerytask")) //初审
+          this.obj.applySubNo = this.localInf.applySubno
+          Object.assign(this.localInf, this.obj)
         }
         // this.localInf.applySubNo = 'PHDX6409598026121216';
         //  this.localInf.applySubNo = 'test999999'

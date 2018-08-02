@@ -330,7 +330,7 @@
         } else if (route.fullPath == '/processMoniQTUndistributed') {
           this.nodeName = "质检未分配流程";
         } else if (route.path == '/PneCtrl') {
-          this.nodeName = "大数据风控";
+          this.nodeName = "大数据风控详情页";
         } else if (route.path == '/SocialSe') {
           this.nodeName = "社保公积金";
         } else if (route.path == '/IntegratedQuery') {

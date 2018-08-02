@@ -132,6 +132,8 @@
         </el-table-column>
         <el-table-column prop="completeTime" label="处理时间" show-overflow-tooltip width="150">
         </el-table-column>
+        <!-- <el-table-column prop="efficiencyTime" label="本环节耗时" show-overflow-tooltip width="150">
+        </el-table-column> -->
         <el-table-column prop="approvalOpinionTxt" label="处理结论" width="100">
         </el-table-column>
         <el-table-column prop="opinionExplain" label="意见说明" show-overflow-tooltip min-width="100">
