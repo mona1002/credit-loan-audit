@@ -17,77 +17,77 @@
           <ul>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class="label_width_145">姓名：</label>
+                <label class="label_width_166">姓名：</label>
                 <span>{{reportInf.name}}</span>
               </li>
               <li>
-                <label class="label_width_145">用户填写姓名：</label>
+                <label class="label_width_166">用户填写姓名：</label>
                 <span>{{reportInf.user_name}}</span>
               </li>
               <li>
-                <label class="label_width_145">用户填写身份证：</label>
+                <label class="label_width_166">用户填写身份证：</label>
                 <span>{{reportInf.user_idcard}}</span>
               </li>
               <li>
-                <label class="label_width_145">用户填写手机号：</label>
+                <label class="label_width_166">用户填写手机号：</label>
                 <span>{{reportInf.user_phone}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
 
               <li>
-                <label class="label_width_145">姓名是否一致：</label>
+                <label class="label_width_166">姓名是否一致：</label>
                 <span>{{reportInf.name_match}}</span>
               </li>
               <li>
-                <label class="label_width_145">身份证是否一致：</label>
+                <label class="label_width_166">身份证是否一致：</label>
                 <span>{{reportInf.idcard_match}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class="label_width_145">账户ID：</label>
+                <label class="label_width_166">账户ID：</label>
                 <span>{{reportInf.account_id}}</span>
               </li>
               <li>
-                <label class="label_width_145">卡号：</label>
+                <label class="label_width_166">卡号：</label>
                 <span>{{reportInf.card}}</span>
               </li>
               <li>
-                <label class="label_width_145">银行名称：</label>
+                <label class="label_width_166">银行名称：</label>
                 <span>{{reportInf.bank}}</span>
               </li>
               <li>
-                <label class="label_width_145">消费额度[元]</label>
-                <span>{{reportInf.consume_limit}}</span>
+                <label class="label_width_166">消费额度[元]</label>
+                <span> {{parseInt(reportInf.consume_limit)/ 100 | formatMoney }}</span>
               </li>
             </div>
             <div class="CreditForm_div_border clearFix">
               <li>
-                <label class="label_width_145">可用消费额度[元]：</label>
-                <span>{{reportInf.usable_consume_limit}}</span>
+                <label class="label_width_166">可用消费额度[元]：</label>
+                <span> {{parseInt(reportInf.usable_consume_limit)/ 100 | formatMoney }}</span>
               </li>
               <li>
-                <label class="label_width_145">外币消费总笔数(6期)：</label>
+                <label class="label_width_166">外币消费总笔数(6期)：</label>
                 <span>{{reportInf.foreign_consume_count}}</span>
               </li>
               <li>
-                <label class="label_width_145">逾期期数(6期)：</label>
+                <label class="label_width_166">逾期期数(6期)：</label>
                 <span>{{reportInf.overdue_count}}</span>
               </li>
               <li>
-                <label class="label_width_145">逾期金额总和[元](6期)：</label>
-                <span> {{parseInt(reportInf.overdue_amount)/ 100 | formatMoney }}</span>
+                <label class="label_width_166">逾期金额总和[元](6期)：</label>
+                <span> {{reportInf.overdue_amount |overdue }}</span>
               </li>
             </div>
             <div class=" clearFix">
               <li>
-                <label class="label_width_145">最大连续逾期期数(12期)：</label>
-                <span>{{reportInf.max_series_overdue_count}}</span>
+                <label class="label_width_166">最大连续逾期期数(12期)：</label>
+                <span>{{reportInf.max_series_overdue_count |overdue}}</span>
               </li>
               <li>
-                <label class="label_width_145">逾期状态列表(12期)：</label>
-                <span>{{reportInf.overdue_status_txt}}</span>
+                <label class="label_width_166">逾期状态列表(12期)：</label>
+                <span>{{reportInf.overdue_status_txt|overdue}}</span>
               </li>
             </div>
           </ul>
@@ -102,79 +102,79 @@
           <ul>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class="label_width_145">账户ID：</label>
+                <label class="label_width_166">账户ID：</label>
                 <span>{{accountInf.id}}</span>
               </li>
               <li>
-                <label class="label_width_145">账户类型：</label>
+                <label class="label_width_166">账户类型：</label>
                 <span>{{accountInf.type}}</span>
               </li>
               <li>
-                <label class="label_width_145">卡号：</label>
+                <label class="label_width_166">卡号：</label>
                 <span>{{accountInf.card}}</span>
               </li>
               <li>
-                <label class="label_width_145">主副卡标志：</label>
+                <label class="label_width_166">主副卡标志：</label>
                 <span>{{accountInf.main_vice_flag}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class="label_width_145">银行名称：</label>
+                <label class="label_width_166">银行名称：</label>
                 <span>{{accountInf.bank}}</span>
               </li>
               <li>
-                <label class="label_width_145">持卡人姓名：</label>
+                <label class="label_width_166">持卡人姓名：</label>
                 <span>{{accountInf.holder}}</span>
               </li>
               <li>
-                <label class="label_width_145">证件号码：</label>
+                <label class="label_width_166">证件号码：</label>
                 <span>{{accountInf.idcard}}</span>
               </li>
               <li>
-                <label class="label_width_145">状态：</label>
+                <label class="label_width_166">状态：</label>
                 <span>{{accountInf.status}}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class="label_width_145">开卡时间：</label>
+                <label class="label_width_166">开卡时间：</label>
                 <span>{{accountInf.open_date}}</span>
               </li>
               <li>
-                <label class="label_width_145">卡产品名称：</label>
+                <label class="label_width_166">卡产品名称：</label>
                 <span>{{accountInf.card_name}}</span>
               </li>
               <li>
-                <label class="label_width_145">积分：</label>
+                <label class="label_width_166">积分：</label>
                 <span> {{accountInf.points }}</span>
               </li>
               <li>
-                <label class="label_width_145">当前余额[元]：</label>
+                <label class="label_width_166">当前余额[元]：</label>
                 <span> {{parseInt(accountInf.balance)/ 100 | formatMoney }}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
-                <label class="label_width_145">账单日：</label>
+                <label class="label_width_166">账单日：</label>
                 <span>{{accountInf.bill_day}}</span>
               </li>
               <li>
-                <label class="label_width_145">还款日：</label>
+                <label class="label_width_166">还款日：</label>
                 <span>{{accountInf.repay_day}}</span>
               </li>
               <li>
-                <label class="label_width_145">当前剩余欠款[元]：</label>
+                <label class="label_width_166">当前剩余欠款[元]：</label>
                 <span> {{parseInt(accountInf.current_arrears)/ 100 | formatMoney }}</span>
               </li>
               <li>
-                <label class="label_width_145">本期已还[元]：</label>
+                <label class="label_width_166">本期已还[元]：</label>
                 <span> {{parseInt(accountInf.current_payed_amount)/ 100 | formatMoney }}</span>
               </li>
             </div>
             <div class="  clearFix">
               <li>
-                <label class="label_width_145">未出账单已入账金额[元]：</label>
+                <label class="label_width_166">未出账单已入账金额[元]：</label>
                 <span> {{parseInt(accountInf.current_credited_amount)/ 100 | formatMoney }}</span>
               </li>
             </div>

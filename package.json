@@ -19,8 +19,7 @@
     "vue": "^2.5.2",
     "vue-pdf-shower": "^1.0.8",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1",
-    "vx-easyui": "^0.1.1"
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

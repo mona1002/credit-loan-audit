@@ -12,11 +12,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import $ from 'jquery'
 import 'vue-pdf-shower/lib/dist/pdf.js';
-import 'vx-easyui/dist/themes/default/easyui.css';
-import 'vx-easyui/dist/themes/icon.css';
-import 'vx-easyui/dist/themes/vue.css';
-import EasyUI from 'vx-easyui';
-Vue.use(EasyUI);
+
 PDFJS.workerSrc = 'vue-pdf-shower/lib/dist/pdf.worker.js'
 PDFJS.cMapUrl = '/static/web/cmaps/'
 PDFJS.cMapPacked = true;
@@ -92,4 +88,9 @@ Vue.filter('NumRound', function (value, num) {
   if (!value) return '';
   value = parseFloat(value).toFixed(num);
   return value
+})
+// 0 未逾期 1 逾期
+Vue.filter('overdue',function(value){
+if(value==0) return '未逾期'
+if(value==1) return '逾期'
 })
