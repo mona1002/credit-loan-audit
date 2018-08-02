@@ -542,6 +542,8 @@
               this.socRawReport = rawResult.result['10125'].bizInfo.data; //原始数据
             }
           }
+          console.log( 1, this.socReport)
+          console.log( 2, this.socRawReport)
           // ---------------------------
           if (this.socReport) {
             // 基本信息2
@@ -552,63 +554,19 @@
             // 基本医疗保险
             this.socReport.medicareFlow && this.socReport.medicareFlow.length > 0 ? this.medicareFlow = this.socReport
               .medicareFlow : '';
-            // if (this.socReport.medicareFlow && this.socReport.medicareFlow.length > 0) {
-            //   $.each(this.socReport.medicareFlow, (i, eh) => {
-            //     this.fen_to_yuan(eh, ['payment_base', 'company_amount', 'person_amount']);
-            //     //this.addRow($('#div_socInsu #t_2 tbody'),['period','payment_base','company_amount','person_amount','company'],eh);
-            //     this.addRow($('#div_socInsu #t_2 tbody'), ['period', 'payment_base', 'company_amount',
-            //       'person_amount', 'origin_name'
-            //     ], eh);
-            //   });
-            // }
             // 基本养老保险
             this.socReport.pensionFlow && this.socReport.pensionFlow.length > 0 ? this.pensionFlow = this.socReport
               .pensionFlow : '';
-            // if (this.socReport.pensionFlow && this.socReport.pensionFlow.length > 0) {
-            //   $.each(this.socReport.pensionFlow, (i, eh) => {
-            //     this.fen_to_yuan(eh, ['payment_base', 'company_amount', 'person_amount']);
-            //     //this.addRow($('#div_socInsu #t_3 tbody'),['period','payment_base','company_amount','person_amount','company'],eh);
-            //     this.addRow($('#div_socInsu #t_3 tbody'), ['period', 'payment_base', 'company_amount',
-            //       'person_amount', 'origin_name'
-            //     ], eh);
-            //   });
-            // }
             // 失业保险
             this.socReport.unemploymentFlow && this.socReport.unemploymentFlow.length > 0 ? this.unemploymentFlow =
               this.socReport.unemploymentFlow : '';
-            // if (this.socReport.unemploymentFlow && this.socReport.unemploymentFlow.length > 0) {
-            //   $.each(this.socReport.unemploymentFlow, (i, eh) => {
-            //     this.fen_to_yuan(eh, ['payment_base', 'company_amount', 'person_amount']);
-            //     this.addRow($('#div_socInsu #t_4 tbody'), ['period', 'payment_base', 'company_amount',
-            //       'person_amount', 'origin_name'
-            //     ], eh);
-            //   });
-            // }
-            // 
             // 工伤保险
             this.socReport.injuryFlow && this.socReport.injuryFlow.length > 0 ? this.injuryFlow = this.socReport.injuryFlow :
               '';
             console.log(5, this.socReport)
-            // if (this.socReport.injuryFlow && this.socReport.injuryFlow.length > 0) {
-            //   $.each(this.socReport.injuryFlow, (i, eh) => {
-            //     this.fen_to_yuan(eh, ['payment_base', 'company_amount', 'person_amount']);
-            //     this.addRow($('#div_socInsu #t_5 tbody'), ['period', 'payment_base', 'company_amount',
-            //       'person_amount', 'origin_name'
-            //     ], eh);
-            //   });
-            // }
             // 生育保险
             this.socReport.maternityFlow && this.socReport.maternityFlow.length > 0 ? this.maternityFlow = this.socReport
               .maternityFlow : '';
-            // console.log( )
-            // if (this.socReport.maternityFlow && this.socReport.maternityFlow.length > 0) {
-            //   $.each(this.socReport.maternityFlow, (i, eh) => {
-            //     this.fen_to_yuan(eh, ['payment_base', 'company_amount', 'person_amount']);
-            //     this.addRow($('#div_socInsu #t_6 tbody'), ['period', 'payment_base', 'company_amount',
-            //       'person_amount', 'origin_name'
-            //     ], eh);
-            //   });
-            // }
           }
           // ---------------------------------
           if (this.socRawReport) { //基本信息1
