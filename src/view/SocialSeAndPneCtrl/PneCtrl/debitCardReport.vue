@@ -157,7 +157,6 @@
                   }
                 })
               }
-
               // console.log(111111111111, this.CreditCard)
               // 信用卡信息
               if (this.CreditCard.length > 0) {

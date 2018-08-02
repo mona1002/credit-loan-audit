@@ -58,7 +58,7 @@
                 <span>{{reportInf.bank}}</span>
               </li>
               <li>
-                <label class="label_width_166">消费额度[元]</label>
+                <label class="label_width_166">消费额度[元]：</label>
                 <span> {{parseInt(reportInf.consume_limit)/ 100 | formatMoney }}</span>
               </li>
             </div>
@@ -77,17 +77,17 @@
               </li>
               <li>
                 <label class="label_width_166">逾期金额总和[元](6期)：</label>
-                <span> {{reportInf.overdue_amount |overdue }}</span>
+                 <span> {{parseInt(reportInf.overdue_amount)/ 100 | formatMoney }}</span>
               </li>
             </div>
             <div class=" clearFix">
               <li>
                 <label class="label_width_166">最大连续逾期期数(12期)：</label>
-                <span>{{reportInf.max_series_overdue_count |overdue}}</span>
+                 <span> {{parseInt(reportInf.max_series_overdue_count)/ 100 | formatMoney }}</span>
               </li>
-              <li>
+              <li class="li_four_3rows">
                 <label class="label_width_166">逾期状态列表(12期)：</label>
-                <span>{{reportInf.overdue_status_txt|overdue}}</span>
+                <span>{{reportInf.overdue_status|overduemMulti}}</span>
               </li>
             </div>
           </ul>
