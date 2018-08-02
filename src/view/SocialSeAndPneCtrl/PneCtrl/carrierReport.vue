@@ -719,9 +719,9 @@
         var row = '<tr>';
         $.each(rfields, function (index, val) {
           if (rdata[val] != undefined) {
-            row += '<td>' + rdata[val] + '</td>';
+            row += '<td style="border: 1px solid #d8dce5;">' + rdata[val] + '</td>';
           } else {
-            row += '<td>' + '' + '</td>';
+            row += '<td style="border: 1px solid #d8dce5;">' + '' + '</td>';
           }
         });
         row += '</tr>';
