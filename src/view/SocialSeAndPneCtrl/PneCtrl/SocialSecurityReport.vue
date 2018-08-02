@@ -542,6 +542,8 @@
               this.socRawReport = rawResult.result['10125'].bizInfo.data; //原始数据
             }
           }
+
+          console.log( 0, result)
           console.log( 1, this.socReport)
           console.log( 2, this.socRawReport)
           // ---------------------------
