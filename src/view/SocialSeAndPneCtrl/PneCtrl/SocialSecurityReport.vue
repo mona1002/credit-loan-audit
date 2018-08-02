@@ -41,8 +41,8 @@
                 <span>{{socReport.phone}}</span>
               </li>
               <li>
-                <label class="label_width_166">预计月收入：</label>
-                <span>{{parseInt(socReport.pension_balance)/ 100 | formatMoney }}</span>
+                <label class="label_width_166">预计月收入[元]：</label>
+                <span>{{parseInt(socReport.yj_month_income)/ 100 | formatMoney }}</span>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
