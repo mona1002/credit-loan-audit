@@ -59,26 +59,26 @@ Vue.filter('formatValue', function (value) {
 Vue.filter('formatMoney', function (value) {
   if (value == 0) return 0;
   if (!value) return '';
-  return value.toLocaleString()
+  return value.toLocaleString();
 })
 // 精度问题
 Vue.filter('formatAppmult', function (value) {
-  if (!value) return ''
-  return Math.ceil(Number(value))
+  if (!value) return '';
+  return Math.ceil(Number(value));
 })
 Vue.filter('percent', function (value) {
-  if (!value) return ''
+  if (!value) return '';
   return value !== '' ? value + '%' : '';
 })
 // 证件号码*
 Vue.filter('cerCodeStar', function (value) {
-  if (!value) return ''
+  if (!value) return '';
   value = value.replace(/(\w{6})\w*(\w{4})/, '$1********$2');
   return value;
 })
 // 手机号码*
 Vue.filter('MobileStar', function (value) {
-  if (!value) return ''
+  if (!value) return '';
   value = value.replace(/(\w{7})\w*/, '$1****');
   return value;
 })
@@ -90,12 +90,17 @@ Vue.filter('NumRound', function (value, num) {
   return value
 })
 // 0 未逾期 1 逾期
-Vue.filter('overdue',function(value){
-if(value==0) return '未逾期'
-if(value==1) return '逾期'
+Vue.filter('overdue', function (value) {
+  if (value == 0) return '未逾期';
+  if (value == 1) return '逾期';
+})
+// 0 未逾期 1 逾期 -多个
+Vue.filter('overduemMulti', function (value) {
+  if (!value) return '';
+  if (value.length > 0) return value.toString().replace(/[0]/g, '未逾期').replace(/[1]/g, '逾期');
 })
 // false 否 true 是
-Vue.filter('YesOrNo',function(value){
-  if(value==true) return '是';
-  if(value==false) return '否';
+Vue.filter('YesOrNo', function (value) {
+  if (value == true) return '是';
+  if (value == false) return '否';
 })
