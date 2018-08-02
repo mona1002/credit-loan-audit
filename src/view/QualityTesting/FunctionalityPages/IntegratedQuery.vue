@@ -38,10 +38,16 @@
         <i class="el-icon title-icon"></i>
         综合查询
       </span>
+      <span class="iconContainer">
+        <span class="icon-item" @click='RiskControl'>
+          <i class="el-icon brokenLineIcon"></i>
+          <span class="el-icon-text">大数据风控</span>
+        </span>
+      </span>
     </div>
     <div class="listContainer">
-      <!-- 编辑table -->
-      <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row @row-dblclick="handleCurrentChange" border>
+      <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row @current-change="selectRow" @row-dblclick="handleCurrentChange"
+        border>
         <el-table-column type="index" align='center' label=序号 width="55">
         </el-table-column>
         <el-table-column prop="applySubno" label="进件编号" align='center' min-width="180">
@@ -82,6 +88,7 @@
 </template>
 <script>
   import baseU from '../../../util/constant';
+  import baseurl from '../../../util/ConstantSocialAndPn';
   export default {
     data() {
       return {
@@ -90,8 +97,12 @@
           matchApplyId: "",
           applySubNo: ''
         },
+        judge: {
+          flag: '综合查询17'
+        },
         userInf: null,
         tableData: [],
+        currentRow: null,
         reg: /(\w{6})\w*(\w{4})/,
         Telreg: /(\w{7})\w*/,
         reVal: '$1********$2',
@@ -116,12 +127,16 @@
       //     // this.getInf(this.params);
       //     this.inquire(this.params);
       //   },
+      selectRow(val) {
+        this.currentRow = val;
+        console.log(this.currentRow)
+      },
       handleCurrentChange(val) {
         console.log(val)
         this.query.id = val.id;
         this.query.matchApplyId = val.applyId;
         this.query.applySubNo = val.applySubno;
-        this.query=Object.assign({},this.query,val)
+        this.query = Object.assign({}, this.query, val)
         localStorage.setItem("Query", JSON.stringify(this.query));
         localStorage.setItem("MatchFlag", JSON.stringify({
           MatchFlag: 'Query'
@@ -174,6 +189,24 @@
           }
         })
       },
+      // 大数据风控
+      RiskControl() {
+        if (!this.currentRow) {
+          this.$confirm('请选择一条数据！', '提示', {
+            confirmButtonText: '确定',
+            type: 'warning',
+          }).then(() => {}).catch(() => {});
+          return
+        }
+        localStorage.setItem("judge", JSON.stringify(this.judge));
+        localStorage.setItem("IntegratedQuerytask", JSON.stringify(this.currentRow));
+        this.$router.push({
+          name: 'PneCtrl',
+          params: {
+            newOne: true,
+          }
+        });
+      }
     },
     mounted() {
       //   this.params.pageNum = this.currentPage, //页数（第几页）
