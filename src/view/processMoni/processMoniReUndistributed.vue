@@ -136,6 +136,8 @@
         </el-table-column>
         <el-table-column prop="completeTime" label="处理时间" show-overflow-tooltip width="150">
         </el-table-column>
+        <el-table-column prop="efficiencyTime" label="本环节耗时" width="100">
+        </el-table-column>
         <el-table-column prop="approvalOpinionTxt" label="处理结论" width="100">
         </el-table-column>
         <el-table-column prop="opinionExplain" label="意见说明" show-overflow-tooltip min-width="100">
@@ -249,7 +251,7 @@
           taskIds: []
         }, // 编辑、查看、授权某一条数据前，根据 id 查询其详细数据
         currentPage: 1, // 默认显示的当前页
-        pageSizesArr: [10, 20,50], // 每页显示的数据数
+        pageSizesArr: [10, 20, 50], // 每页显示的数据数
         setPageSize: 10,
         defaultProps: {
           children: 'children',
