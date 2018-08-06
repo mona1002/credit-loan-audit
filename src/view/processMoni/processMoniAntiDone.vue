@@ -117,7 +117,7 @@
         </el-table-column>
         <el-table-column prop="completeTime" label="处理时间" show-overflow-tooltip width="150">
         </el-table-column>
-        <el-table-column prop="efficiencyTime" label="本环节耗时" width="100">
+        <el-table-column prop="efficiencyTime" label="本环节耗时(分)" width="110">
         </el-table-column>
         <el-table-column prop="approvalOpinionTxt" label="处理结论" width="100">
         </el-table-column>
