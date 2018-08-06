@@ -3,7 +3,7 @@
   <div class="SocialSecurity debitCardReport">
     <el-tabs v-model="editableTabsValue" type="border-card">
       <el-tab-pane :key="item.name" v-for="(item, index) in totalAccount" :label="item.type" :name="index+''">
-        <debitCardConponent :totalVal='item' v-if="!item||!item.type"> </debitCardConponent>
+        <!-- <debitCardConponent :totalVal='item' v-if="!item||!item.type"> </debitCardConponent> -->
         <debitCardConponent :totalVal='item' v-if="item.type=='储蓄卡'+(index+1)"> </debitCardConponent>
         <creditCardConponent :totalVal='item' v-if="item.type=='信用卡'+ ((index-editableTabs.length)+1)">
         </creditCardConponent>
@@ -67,6 +67,15 @@
             this.$message.error('查询失败！')
             return;
           }
+          if (!!res.obj && !res.obj.rawRpt && !res.obj.rpt) {
+            let def = {
+              data: {},
+              accounts: {},
+              type: '储蓄卡1'
+            }
+            this.totalAccount.push(def);
+            return
+          };
           if (res.obj.rpt) {
             var result = $.parseJSON(res.obj.rpt);
             if (result && result.result && result.result['10061'] && result.result['10061'].bizInfo && result.result[
@@ -82,7 +91,7 @@
                     // console.log('储蓄卡')
                     $.each(eh.data, (n, v) => {
                       var obj = {
-                        type: '储蓄卡' + (n+1),
+                        type: '储蓄卡' + (n + 1),
                         data: {}
                       }
                       // console.log(n, v)
@@ -96,7 +105,7 @@
                     // console.log('信用卡')
                     $.each(eh.data, (n, v) => {
                       var credObj = {
-                        type:'信用卡' + (n+1),
+                        type: '信用卡' + (n + 1),
                         data: {}
                       }
                       Object.assign(credObj.data, v)

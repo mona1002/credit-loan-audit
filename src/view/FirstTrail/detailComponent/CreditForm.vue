@@ -56,7 +56,7 @@
                 </i>
                 <label class="InternetInf_left_label blueC" @click="NewPage(1)">
                   <span class="red"> * </span>客户在失信网是否有失信记录：</label>
-                <el-select v-model="checkData.wnetEcutedBrea" name="BrokenRecord" v-validate="'required'" @change="commentShow1(checkData.wnetEcutedBrea,Internet[2])">
+                <el-select ref="wnetEcutedBrea" v-model="checkData.wnetEcutedBrea" name="BrokenRecord" v-validate="'required'" @change="commentShow1(checkData.wnetEcutedBrea,Internet[2])">
                   <el-option v-for="item in netEcutedBrea" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -388,7 +388,7 @@
               </el-input>
             </li>
             <li class="position_relative">
-              <i class="hint" v-show="reg.mpayDay" >
+              <i class="hint" v-show="reg.mpayDay">
                 <span class="padding_left_235"> 请填入1-31之间的数字</span>
               </i>
               <label class="WorkInfs_left_label">每月发薪日：</label>
@@ -2054,6 +2054,7 @@
               this.CFsave();
             }).catch(() => {});
           } else {
+            // this.$refs.wnetEcutedBrea.focus();
             this.$message.error('提交失败，有必填项未填写！');
           }
         });

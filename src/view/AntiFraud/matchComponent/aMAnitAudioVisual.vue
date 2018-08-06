@@ -56,8 +56,7 @@
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative; left:0; top:0;" id='MAntiFirstAud'>
-        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd"
-        />
+        <img ref="Big_pic_ref" v-for="(val,key) in imgPath" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" />
       </div>
     </div>
     <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" v-show="perfBtn" @mouseenter='PerBtn' @click="pre">
@@ -75,23 +74,23 @@
       </p>
       <div class="small_pic_content">
         <figure v-for="(val,index) in imgPath" :key="index" class="small_pic_figure">
-          <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)"
-            ref="small_pic_ref" />
+          <div class="Small_pic">
+            <img :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref" />
+          </div>
           <p>{{val.arcSubType}} </p>
         </figure>
       </div>
     </div>
-    <!-- </div> -->
   </div>
 </template>
 
 <script>
-import imgUrl  from '../../../util/ConstantSocialAndPn'
+  import imgUrl from '../../../util/ConstantSocialAndPn'
   export default {
     data() {
       return {
         // picData: [],
-        imgBaseUrl:'',
+        imgBaseUrl: '',
         perfBtn: false,
         MatchInf: '',
         opendImg: [],
@@ -109,8 +108,7 @@ import imgUrl  from '../../../util/ConstantSocialAndPn'
       }
     },
     methods: {
-      opend(vv) {
-      },
+      opend(vv) {},
       PerBtn() {
         this.perfBtn = true;
       },
@@ -236,7 +234,7 @@ import imgUrl  from '../../../util/ConstantSocialAndPn'
       },
       smallPic(ev, ind) {
         this.smallPicInd = ind;
-         this.showPage = ind+1;
+        this.showPage = ind + 1;
         this.SmallPicShow = false;
         this.defaultBigPicCss();
       },
@@ -343,7 +341,7 @@ import imgUrl  from '../../../util/ConstantSocialAndPn'
       // } else if (this.judgeFlag.flag == '04') {
       //   this.MatchInf = JSON.parse(localStorage.getItem("AntiManagerinternalObj")); //反欺诈主管-匹配查看
       // }
-        this.imgBaseUrl=imgUrl.imgBaseUrl;
+      this.imgBaseUrl = imgUrl.imgBaseUrl;
       // 父菜单
       this.post("/productArchive/getProductArchiveParentList", {
         applyId: this.MatchInf.matchApplyId,

@@ -79,17 +79,17 @@
       </p>
       <div class="small_pic_content">
         <figure v-for="(val,index) in pngAyyrs" :key="index" class="small_pic_figure" v-show="SmallmyPic">
-          <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref"
-          />
+          <div class="Small_pic">
+            <img :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref" />
+          </div>
           <p v-if="SmallmyPic">{{val.arcSubType}}</p>
         </figure>
-        <figure class="small_pic_figure" v-show="SmallmyPdf"  @dblclick="pdfClose()">
-          <div class="Small_pic"  @dblclick="pdfClose()">
-             <p is="pdfDiv" ID='firstTirlSmall' :cvsWidth='200' :cvsHeight='200' SmallClass="SmallWrap" v-bind:title="pdfArrys"  @dblclick="pdfClose()"></p> 
-             </div>
+        <figure class="small_pic_figure" v-show="SmallmyPdf" @dblclick="pdfClose()">
+          <div class="Small_pic" @dblclick="pdfClose()">
+            <p is="pdfDiv" ID='firstTirlSmall' :cvsWidth='200' :cvsHeight='200' SmallClass="SmallWrap" v-bind:title="pdfArrys" @dblclick="pdfClose()"></p>
+          </div>
           <p> {{pdfTitle}} </p>
         </figure>
-
       </div>
     </div>
   </div>
@@ -124,45 +124,45 @@
         myPng: false,
         myPdf: false,
         style: '',
-        SmallmyPic:false,
-        SmallmyPdf:false,
-        pdfTitle:'',
-        
+        SmallmyPic: false,
+        SmallmyPdf: false,
+        pdfTitle: '',
+
       }
     },
     methods: {
-      mountedInf(){
-      this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      if (this.judgeFlag.flag == '01') {
-        this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
-      } else if (this.judgeFlag.flag == '02') {
-        this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-      } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
-        this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
-      }
-      this.imgBaseUrl = imgUrl.imgBaseUrl;
-      // 父菜单
-      this.post("/productArchive/getProductArchiveParentList", {
-        applyId: this.localInf.applyId,
-      //  applyId:this. applyID
-      }).then(res => {
-        if (res.statusCode == 200) {
-          this.ListParent = res.data;
-          if (this.ListParent) {
-            var MDate = null;
-            for (var i = 0; i < this.ListParent.length; i++) {
-              var MDate = new Date(this.ListParent[i].uploadDate);
-              this.ListParent[i].uploadDate = this.comput(MDate)
-            }
-            for (var i = 0; i < this.ListParent.length; i++) {
-              this.opendImg[i] = true;
-              this.closedImg[i] = false;
-            }
-          }
-        } else {
-          this.$message.error(res.msg);
+      mountedInf() {
+        this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+        if (this.judgeFlag.flag == '01') {
+          this.localInf = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
+        } else if (this.judgeFlag.flag == '02') {
+          this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
+        } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
+          this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
         }
-      });
+        this.imgBaseUrl = imgUrl.imgBaseUrl;
+        // 父菜单
+        this.post("/productArchive/getProductArchiveParentList", {
+          applyId: this.localInf.applyId,
+          //  applyId:this. applyID
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.ListParent = res.data;
+            if (this.ListParent) {
+              var MDate = null;
+              for (var i = 0; i < this.ListParent.length; i++) {
+                var MDate = new Date(this.ListParent[i].uploadDate);
+                this.ListParent[i].uploadDate = this.comput(MDate)
+              }
+              for (var i = 0; i < this.ListParent.length; i++) {
+                this.opendImg[i] = true;
+                this.closedImg[i] = false;
+              }
+            }
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
       },
       PerBtn() {
         this.perfBtn = true;
@@ -203,11 +203,11 @@
           }
         });
       },
-      pdfClose(){
+      pdfClose() {
         console.log('ccc')
-     this.SmallPicShow = false;
-     this.showPage =  1;
-    //  this.defaultBigPicCss();
+        this.SmallPicShow = false;
+        this.showPage = 1;
+        //  this.defaultBigPicCss();
       },
       getImg(ind) {
         this.pdfArrys = [];
@@ -246,19 +246,19 @@
       },
       SmallpicClose() {
         this.SmallPicShow = false;
-        this.SmallmyPdf=false;
-        this.SmallmyPic=false;
+        this.SmallmyPdf = false;
+        this.SmallmyPic = false;
       },
       SmallpicAlert() {
         this.SmallPicShow = true;
-        if(this.myPdf){//显示pdf
-          this.SmallmyPdf=true;
-         this.SmallmyPic=false;
-         this.pdfTitle= this.pdfArrys[0].arcSubType;
-       }  else{//显示图片
-         this.SmallmyPic=true;
-         this.SmallmyPdf=false;
-       }
+        if (this.myPdf) { //显示pdf
+          this.SmallmyPdf = true;
+          this.SmallmyPic = false;
+          this.pdfTitle = this.pdfArrys[0].arcSubType;
+        } else { //显示图片
+          this.SmallmyPic = true;
+          this.SmallmyPdf = false;
+        }
       },
       pre() {
         this.smallPicInd--;
@@ -393,6 +393,7 @@
         if (this.$refs.Big_pic_ref) {
           this.$refs.AudioVisual_Img_ref.onmousewheel = (event) => {
             event = event || window.event;
+            //  this.$refs.AudioVisual_Img_ref.scrollTop = 0;
             if (event.wheelDelta < 0) {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false).height) -
                 100 + "px";
@@ -404,14 +405,15 @@
             }
           };
           this.$refs.AudioVisual_Img_ref.addEventListener("DOMMouseScroll", (event) => {
+            //  this.$refs.AudioVisual_Img_ref.scrollTop = 0;
             if (event.detail > 0) {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
-                  .height) -
-                100 + "px";
+                  .height) -100 + "px";
+                   this.$refs.Big_pic_ref[0].style.width = 'auto';
             } else {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
-                  .height) +
-                100 + "px";
+                  .height) + 100 + "px";
+                   this.$refs.Big_pic_ref[0].style.width = 'auto';
             }
           });
         }

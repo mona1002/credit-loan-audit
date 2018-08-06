@@ -75,8 +75,10 @@
       </p>
       <div class="small_pic_content">
         <figure v-for="(val,index) in pngAyyrs" :key="index" class="small_pic_figure" v-show="SmallmyPic">
-          <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref"
-          />
+          <div class="Small_pic">
+            <img :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref" />
+          </div>
+
           <!-- <em class="Audio_thumb_img" :style="'background-image:url('+imgBaseUrl+val.imagePath+')'"></em> -->
           <!-- <em class="Audio_thumb_img" style="background-image:url(../../../../static/images/add.png)"></em> -->
           <!-- <em class="Audio_thumb_img" style="background-image:url(http://10.1.26.6:8080/ptopCredit/download/downloadAction!download.action?filepath=/creditFile&filename=upload\2015-12-29\201512290111014260\\D5-06.jpg)"></em> -->
