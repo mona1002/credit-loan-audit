@@ -99,17 +99,17 @@
         </el-table-column>
         <el-table-column prop="applySubNo" label="进件编号" min-width="200">
         </el-table-column>
-        <el-table-column prop="custName" label="客户名称" min-width="100">
+        <el-table-column prop="custName" label="客户名称" width="120">
         </el-table-column>
         <el-table-column prop="certCode" label="证件号码" min-width="200">
         </el-table-column>
-        <el-table-column prop="proName" label="产品名称" min-width="120">
+        <el-table-column prop="proName" label="产品名称" width="120">
         </el-table-column>
-        <el-table-column prop="appOrgCode" label="进件机构" min-width="100">
+        <el-table-column prop="appOrgCode" label="进件机构" width="100">
         </el-table-column>
-        <el-table-column prop="taskNodeNameTxt" label="任务节点" min-width="120">
+        <el-table-column prop="taskNodeNameTxt" label="任务节点" width="120">
         </el-table-column>
-        <el-table-column prop="operatorCode" label="当前处理人员" min-width="100">
+        <el-table-column prop="operatorCode" label="当前处理人员" width="140">
         </el-table-column>
       </el-table>
       <!-- 页码 -->

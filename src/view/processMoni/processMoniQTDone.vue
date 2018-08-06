@@ -35,15 +35,15 @@
           </el-select>
         </el-col>
         <el-col :span="6" class="search-item">
-          <span class="keywordText">任务节点：</span>
+          <!-- <span class="keywordText">任务节点：</span>
           <el-select v-model="taskNodeName" placeholder="请选择">
             <el-option v-for="item in taskNodes" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
-          </el-select>
+          </el-select> -->
         </el-col>
         <el-col :span="6" class="search-item">
-          <span class="keywordText">当前处理人员：</span>
-          <el-input @keyup.enter.native="getByKey" v-model.trim="operatorCode" placeholder="请输入当前处理人员"></el-input>
+          <!-- <span class="keywordText">当前处理人员：</span>
+          <el-input @keyup.enter.native="getByKey" v-model.trim="operatorCode" placeholder="请输入当前处理人员"></el-input> -->
         </el-col>
         <el-col :span="6" class="search-btn">
           <el-button class="btn query" type="primary" @click="getByKey">查询</el-button>
@@ -75,21 +75,21 @@
         </el-table-column>
         <el-table-column prop="emerTypeTxt" label="紧急程度" width="80">
         </el-table-column>
-        <el-table-column prop="taskTypeTxt" label="任务类型" min-width="80">
+        <el-table-column prop="taskTypeTxt" label="任务类型" width="120">
         </el-table-column>
         <el-table-column prop="applySubNo" label="进件编号" min-width="200">
         </el-table-column>
-        <el-table-column prop="custName" label="客户名称" min-width="120">
+        <el-table-column prop="custName" label="客户名称" width="120">
         </el-table-column>
         <el-table-column prop="certCode" label="证件号码" min-width="200">
         </el-table-column>
-        <el-table-column prop="proName" label="产品名称" min-width="120">
+        <el-table-column prop="proName" label="产品名称" width="120">
         </el-table-column>
-        <el-table-column prop="appOrgCode" label="进件机构" min-width="100">
+        <el-table-column prop="appOrgCode" label="进件机构" width="100">
         </el-table-column>
-        <el-table-column prop="taskNodeNameTxt" label="任务节点" min-width="120">
+        <el-table-column prop="taskNodeNameTxt" label="任务节点" width="120">
         </el-table-column>
-        <el-table-column prop="operatorCode" label="当前处理人员" min-width="100">
+        <el-table-column prop="operatorCode" label="当前处理人员" width="140">
         </el-table-column>
       </el-table>
       <!-- 页码 -->

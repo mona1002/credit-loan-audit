@@ -42,9 +42,9 @@
       <!-- 编辑table -->
       <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row @selection-change="handleSelectionChange"
         border>
-        <el-table-column type="selection" align='center' width="55">
+        <el-table-column type="selection" width="55">
         </el-table-column>
-        <el-table-column type="index" align='center' label=序号 width="55">
+        <el-table-column type="index" label=序号 width="55">
         </el-table-column>
         <el-table-column prop="applySubNo" label="进件编号" align='center' min-width="180">
         </el-table-column>
