@@ -129,7 +129,6 @@
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf.vue' //反欺诈结论
   // 编辑
   import InternalMatch from "../FirstTrail/InternalMatch.vue";
-  import applicationInformation from "../FirstTrail/detailComponent/applicationInformation.vue";
   import borrowerInformation from "../FirstTrail/detailComponent/borrowerInformation.vue";
   import PhoneCredit from "../FirstTrail/PhoneCredit.vue";
   import CreditApproval from "../FirstTrail/CreditApproval.vue";
@@ -355,7 +354,6 @@
       processTrajectory,
       aAntiApplyInf,
       InternalMatch,
-      applicationInformation,
       borrowerInformation,
       PhoneCredit,
       CreditApproval,

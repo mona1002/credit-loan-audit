@@ -72,6 +72,7 @@ import MatchingInfQT from '../view/FirstTrail/MatchingInfQT.vue' //质检详情
 import pdf from '../view/pdf.vue'
 import RantiFraudInvestigation from '../view/FirstTrail/ReadComponent/RantiFraudInvestigation.vue' //
 import timedTask from '../view/systermManagement/timedTask.vue' //定时任务
+import DirectSeller from '../view/systermManagement/DirectSeller.vue' //直销人员查询
 import SocialSecurityReport from '../view/SocialSeAndPneCtrl/PneCtrl/SocialSecurityReport.vue'//社保报告
 
 Vue.use(Router)
@@ -90,6 +91,10 @@ const routes = [{
   {
     path: '/timedTask',
     component: timedTask
+  },
+  {
+    path: '/DirectSeller',
+    component: DirectSeller
   },
   {
     path: '/ComplianceProcess',
