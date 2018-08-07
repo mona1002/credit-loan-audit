@@ -21,7 +21,7 @@
         </el-col>
       </el-row>
       <el-row class="row row2" type="flex">
-        <el-col :span="6" class="search-item">
+        <!-- <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称：</span>
           <el-select v-model="proId" placeholder="请选择产品名称">
             <p style="height: 34px;line-height: 34px;padding: 0 20px;font-size: 14px;background: #eee;">
@@ -33,6 +33,17 @@
               <span style="float: left; color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.proName }}</span>
             </el-option>
           </el-select>
+        </el-col> -->
+        <el-col :span="6" class="search-item">
+          <span class="keywordText">产品名称：</span>
+          <el-autocomplete popper-class="my-autocomplete" v-model="product" :fetch-suggestions="querySearch" placeholder="请输入内容" @select="handleSelect">
+            <i class="el-icon-edit el-input__icon" slot="suffix">
+            </i>
+            <template slot-scope="{ item }">
+              <span style="float: left; width:66px">{{ item.proName }}</span>
+              <span style="float: left;color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.proCode }}</span>
+            </template>
+          </el-autocomplete>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">任务节点：</span>
@@ -55,7 +66,6 @@
       </el-row>
       <el-row class="row row3" type="flex">
         <el-col :span="6" class="search-item">
-
         </el-col>
         <el-col :span="6" class="search-item">
         </el-col>
@@ -203,6 +213,8 @@
   export default {
     data() {
       return {
+        restaurants: [],
+
         taskNodes: [{
             value: 'reconsiderApp_apply',
             label: '复议申请'
@@ -267,6 +279,7 @@
         applySubNo: '',
         appOrgCode: '',
         proId: '',
+        product: '',
         taskNodeName: '',
         taskType: '',
         operatorCode: '',
@@ -289,14 +302,34 @@
         flowRoleName: '',
       };
     },
-
     mounted() {
       this.userCode = JSON.parse(localStorage.getItem('userInf')).userCode
       this.getUserInf();
       this.getProductForUser();
     },
-
     methods: {
+      querySearch(queryString, cb) {
+        var restaurants = this.proNames;
+        var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
+        // 调用 callback 返回建议列表的数据
+        cb(results);
+      },
+      createFilter(queryString) {
+        return (restaurant) => {
+          return (restaurant.proName.toLowerCase().indexOf(queryString.toLowerCase()) != -1);
+        };
+      },
+      handleSelect(item) {
+        console.log(item);
+        console.log(this.proId)
+        this.product = item.proName;
+        this.proId = item.id;
+      },
+      handleIconClick(ev) {
+        console.log(ev);
+
+      },
+      // -----------------------
       getUserInf() {
         // 获取路由参数，来判断是信审、复议、还是反欺诈以及各自对应的未分配、已分配和已完成三个状态
         this.queryParam.processTemplateId = 'reconsiderApp';
@@ -310,7 +343,9 @@
       getProductForUser(orgId) {
         this.post("/credit/productAll").then(res => {
           if (res.statusCode == 200) {
-            this.proNames = res.data;
+            for (let k in res.data) {
+              this.proNames.push(res.data[k])
+            }
           }
         });
       },
@@ -341,7 +376,6 @@
 
       //查询流程监控
       getProcessMonitorList() {
-
         this.queryParam.custName_la = this.custName_la;
         this.queryParam.certCode = this.certCode;
         this.queryParam.applySubNo = this.applySubNo;
@@ -394,6 +428,7 @@
         this.applySubNo = '';
         this.appOrgCode = '';
         this.proId = '';
+        this.product = '';
         this.taskNodeName = '';
         this.taskType = '';
         this.operatorCode = '';
