@@ -27,7 +27,7 @@
         <el-row class="row row2" type="flex">
           <el-col :span="6" class="search-item">
             <span class="keywordText">所属机构： </span>
-            <div class="dropdown" style="display:inline-block">
+            <div class="dropdown" style="display:inline-block;position:relative;">
               <span class="dropdownInput" v-show="subOrg">{{subOrg}}</span>
               <span class="dropdownInput" v-show="!subOrg" style="color:#B5BCCD;">请选择所属机构</span>
               <div class="dropList" v-show="dropdownFlag">
@@ -102,7 +102,7 @@
         orgDatasEdit: [],
         defaultProps: {
           children: "children",
-          label: "orgName",
+          label: "text",
           isLeaf: 'leaf',
         },
         dropdownFlag: false,
@@ -124,21 +124,9 @@
     methods: {
       // 打开下拉菜单里的树形结构
       getDropDownSelect(event) {
-        console.log(event)
         if (this.isActive == true) {
           this.isActive = false;
         };
-        // if (this.isActives == true) {
-        //   this.isActives = false;
-        // };
-        // if (this.isActivest == true) {
-        //   this.isActivest = false;
-        // };
-        // if (this.isActivess == true) {
-        //   this.isActivess = false;
-        // };
-        console.log(!this.dropdownFlag)
-        console.log(event.target.className);
         // 查询的所属机构
         if ((!this.dropdownFlag && event.target.className === 'dropdownInput') || (!this.dropdownFlag && event.target.id ===
             'dropdownInput-arrow')) {
@@ -150,46 +138,39 @@
             isCurrentOrgCode: '1',
             isVerifySysInfo: '01'
           }).then((res) => {
-            console.log(res)
             if (res.statusCode == 200) {
-              this.orgDatasEdit = res.data.data;
+              this.orgDatasEdit = res.data;
             } else {
               this.$message.error(res.msg)
             }
-
           })
-          //   systemManageHttp
-          //     .getOrgTree({
-          //       // pid: this.userInf.orgId,
-          //       isCurrentOrgCode: "1",
-          //       validFlag: "0",
-          //     })
-          //     .then(res => {
-          //       this.orgDatasEdit = res.data.data;
-          //       //this.isActive = false;
-          //     });
         } else {
           this.dropdownFlag = false;
           console.log('出来else')
-
         }
       },
       // 查询的树形结构选取某一级数据，所属机构
       getItemSelect(row, node, arr) {
+        console.log('aaaa')
         this.dropdownFlag = false;
         this.subOrg = row.orgName;
         if (this.subOrg) {
           this.isActive = false;
         };
         // this.queryParam.orgId = row.id;
-        this. params.orgName = row.text;
+        this.params.orgName = row.text;
       },
       // 点击展开时加载
       loadNode(node, resolve) {
+          console.log(node)
+          console.log(resolve)
+          console.log(22,'vbbb')
         var data;
+        
         if (node.data.hasChildren === '1') {
+            console.log('点击方法' )
           this.post('/credit/getSmOrg', {
-            id:  node.data.id,
+            id: node.data.id,
             isCurrentOrgCode: '0',
           }).then((res) => {
             console.log(res)
@@ -260,9 +241,22 @@
 
 </script>
 <style scoped>
-.wrap{
-    height:100%;
-    width:100%;
-    border:3px solid red;
-}
+  .wrap {
+    height: 100%;
+    width: 100%;
+    border: 3px solid red;
+  }
+
+  .dropList {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #dfe4ed;
+    border-radius: 4px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    height: 235px;
+    width: 100%;
+    background: #fff;
+    z-index: 111;
+  }
+
 </style>
