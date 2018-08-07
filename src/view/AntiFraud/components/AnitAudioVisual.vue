@@ -1,4 +1,5 @@
 <template>
+<!-- 整合到audiovisual中-此页面待删除 -->
   <div class="AudioVisual">
     <!-- <div class="CompareShow"> -->
     <!-- 左侧list隐藏时显示的div     在根元素下面，与left right 平级-->
