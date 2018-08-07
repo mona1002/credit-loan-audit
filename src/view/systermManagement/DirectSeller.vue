@@ -1,6 +1,6 @@
 <template>
   <div class="taskWatting main-div">
-    <div @click="getDropDownSelect" class="wrap">
+    <div @click="dropdownFlag=false" class="wrap">
       <!-- 直销人员查询 -->
       <div class="taskWinput search-div">
         <el-row class="row row1" type="flex">
@@ -27,9 +27,9 @@
         <el-row class="row row2" type="flex">
           <el-col :span="6" class="search-item">
             <span class="keywordText">所属机构： </span>
-            <div class="dropdown" style="display:inline-block;position:relative;">
+            <div @click.stop="getDropDownSelect" class="dropdown" style="display:inline-block;position:relative;">
               <span class="dropdownInput" v-show="subOrg">{{subOrg}}</span>
-              <span class="dropdownInput" v-show="!subOrg" style="color:#B5BCCD;">请选择所属机构</span>
+              <span class="dropdownInput" v-show="!subOrg" style="color:#B5BCCD;">请选择所属机构{{dropdownFlag}}</span>
               <div class="dropList" v-show="dropdownFlag">
                 <el-tree :data="orgDatasEdit" node-key="id" :load="loadNode" lazy :props="defaultProps" :expand-on-click-node='false' @node-click="getItemSelect">
                 </el-tree>
@@ -124,13 +124,12 @@
     methods: {
       // 打开下拉菜单里的树形结构
       getDropDownSelect(event) {
-        if (this.isActive == true) {
-          this.isActive = false;
-        };
+        // if (this.isActive == true) {
+        //   this.isActive = false;
+        // };
         // 查询的所属机构
         if ((!this.dropdownFlag && event.target.className === 'dropdownInput') || (!this.dropdownFlag && event.target.id ===
             'dropdownInput-arrow')) {
-          console.log('进去')
           this.dropdownFlag = true;
           this.isActive = true;
           this.post('/credit/getSmOrg', {
@@ -144,16 +143,14 @@
               this.$message.error(res.msg)
             }
           })
-        } else {
+        }   else {
           this.dropdownFlag = false;
-          console.log('出来else')
         }
       },
       // 查询的树形结构选取某一级数据，所属机构
       getItemSelect(row, node, arr) {
-        console.log('aaaa')
         this.dropdownFlag = false;
-        this.subOrg = row.orgName;
+        this.subOrg = row.text;
         if (this.subOrg) {
           this.isActive = false;
         };
@@ -162,48 +159,27 @@
       },
       // 点击展开时加载
       loadNode(node, resolve) {
-          console.log(node)
-          console.log(resolve)
-          console.log(22,'vbbb')
         var data;
         
-        if (node.data.hasChildren === '1') {
-            console.log('点击方法' )
+        // if (node.data.hasChildren === '1') {
           this.post('/credit/getSmOrg', {
             id: node.data.id,
             isCurrentOrgCode: '0',
           }).then((res) => {
-            console.log(res)
             if (res.statusCode == 200) {
-              data = res.data.data;
+              data = res.data;
               for (var i = 0, len = data.length; i < len; i++) {
-                if (data[i].hasChildren === '0') {
+                if (data[i].children.length === 0) {
                   data[i].leaf = true;
                 }
               }
               return resolve(data);
-            } else {
-              this.$message.error(res.msg)
-            }
+            } 
+            // else {
+            //   this.$message.error(res.msg)
+            // }
 
           })
-          //   systemManageHttp
-          //     .getOrgTree({
-          //       pid: node.data.id,
-          //       validFlag: "0"
-          //     })
-          // .then(res => {
-          //   data = res.data.data;
-          //   for (var i = 0, len = data.length; i < len; i++) {
-          //     if (data[i].hasChildren === '0') {
-          //       data[i].leaf = true;
-          //     }
-          //   }
-          //   return resolve(data);
-          // });
-        } else {
-          return resolve([])
-        }
       },
 
       Rreset() {
@@ -212,10 +188,11 @@
         this.params.tel = '';
         this.params.validFlag = '';
         this.params.orgName = '';
+        this.subOrg='';
       },
       Rsearch() {
         if (this.params.userCode != '' || this.params.userName != '' || this.params.tel != '' || this.params.validFlag !=
-          '') {
+          ''||this.params.orgName != '') {
           this.inquire(this.params);
         } else {
           this.$message.error('请输入查询条件')
@@ -233,9 +210,8 @@
         })
       },
     },
-    mounted() {
+    created() {
       this.orgCode = JSON.parse(localStorage.getItem('userInf')).orgCode;
-      console.log(this.orgCode)
     }
   }
 
@@ -257,6 +233,8 @@
     width: 100%;
     background: #fff;
     z-index: 111;
+    overflow: auto;
+    margin-top:12px;
   }
 
 </style>
