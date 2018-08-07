@@ -320,14 +320,8 @@
         };
       },
       handleSelect(item) {
-        console.log(item);
-        console.log(this.proId)
         this.product = item.proName;
         this.proId = item.id;
-      },
-      handleIconClick(ev) {
-        console.log(ev);
-
       },
       // -----------------------
       getUserInf() {
