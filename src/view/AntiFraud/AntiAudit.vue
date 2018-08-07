@@ -35,7 +35,8 @@
           </div>
           <!-- 右侧 tab 内容  AntiFirstAud-->
           <div class="tab2_Content">
-            <AnitAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AnitAudioVisual>
+            <!-- <AnitAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AnitAudioVisual> -->
+            <AudioVisual v-if=" this.tabContent2==0" ></AudioVisual>
             <cremark v-if=" this.tabContent2==1"></cremark>
             <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
@@ -54,7 +55,8 @@
     </div>
 </template>
 <script>
-  import AnitAudioVisual from './components/AnitAudioVisual.vue'; //工作台--》 av
+  // import AnitAudioVisual from './components/AnitAudioVisual.vue'; //工作台--》 av
+  import AudioVisual from '../FirstTrail/detailComponent/AudioVisual.vue'; //工作台--》 av
   // import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配查看 --》 aV
   import cremark from '../FirstTrail/checkComponent/remarkDetail.vue' //备注信息
   import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息  
@@ -82,7 +84,7 @@
         customInf: [], //申请信息页local字段
         tastwaitingPass: [], //详情列表页信息--(含)取applyId
         // -------------------------------结束
-        CompareAlert: false,
+        // CompareAlert: false,
         title: "",
         isShow: false,
         tabContent2: 3,
@@ -126,12 +128,12 @@
           }
         });
       },
-      compBtnS() {
-        this.CompareAlert = true;
-      },
-      closeCompareBtn() {
-        this.CompareAlert = false;
-      },
+      // compBtnS() {
+      //   this.CompareAlert = true;
+      // },
+      // closeCompareBtn() {
+      //   this.CompareAlert = false;
+      // },
       leftMovingBtn() {
         if (parseFloat(this.$refs.right_tab_ul.style.left) >= 0) {
           this.$refs.right_tab_ul.style.left = "0"
@@ -156,7 +158,8 @@
       this.mountedInf();
     },
     components: {
-      AnitAudioVisual,
+      // AnitAudioVisual,
+      AudioVisual,
       FCreditForm,
       aAntiConclusionPath,
       aAprovalConclusion,

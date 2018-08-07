@@ -106,6 +106,7 @@
         litimgIndex: -1,
         litimgInd: -1,
         perfBtn: false, //功能按钮
+        judgeFlag:{},
         opendImg: [],
         closedImg: [],
         showListDiv: true,
@@ -138,8 +139,12 @@
         } else if (this.judgeFlag.flag == '02') {
           this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
         } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
-          this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
-        }
+          this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈
+        } else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
+          this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议
+        }else if (this.judgeFlag.flag == '14'||this.judgeFlag.flag == '15') {
+        this.localInf = JSON.parse(localStorage.getItem("TtaskInWaitting")) // 任务管理
+      }
         this.imgBaseUrl = imgUrl.imgBaseUrl;
         // 父菜单
         this.post("/productArchive/getProductArchiveParentList", {
