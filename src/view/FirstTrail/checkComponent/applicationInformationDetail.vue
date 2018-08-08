@@ -795,7 +795,7 @@
           <!-- 分页 -->
           <div class="page">
             <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20,50]"
-              :page-size='setPageSize' layout="total, sizes, prev, pager, next, jumper" :total="logDatas.total">
+              :page-size="setPageSize" layout="total, sizes, prev, pager, next, jumper" :total="logDatas.total">
             </el-pagination>
           </div>
         </div>
@@ -817,8 +817,8 @@
           </el-table>
           <!-- 分页 -->
           <div class="page">
-            <el-pagination @size-change="dhandleSizeChange" @current-change="dhandleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20,50]"
-              :page-size='setPageSize' layout="total, sizes, prev, pager, next, jumper" :total="detailLogDatas.total">
+            <el-pagination @size-change="dhandleSizeChange" @current-change="dhandleCurrentChange" :current-page="currentPage1" :page-sizes="[10, 20,50]"
+              :page-size='setPageSize1' layout="total, sizes, prev, pager, next, jumper" :total="detailLogDatas.total">
             </el-pagination>
           </div>
         </div>
@@ -868,9 +868,16 @@
         insurAddr: '',
         /*维护日志*/
         sldialogVisible: false,
-        logDatas: '',
+        logDatas: {
+           total:0
+         },
+        // DefaultTotal: { 
+        //   total:0
+        // },
         currentPage: 1, // 默认显示的当前页
+        currentPage1:1,
         setPageSize: 10,
+        setPageSize1: 10,
         queryParam: {
           businessId: '', //申请单基本信息id
           rows: '', //每页条数
@@ -1316,20 +1323,22 @@
       comrequest(param) {
         this.post("/queryOperLogDetail/queryLogRecords", param).then(res => {
           if (res.statusCode == 200) {
+            console.log(res)
             if (res.data) {
+              console.log('存在')
               this.logDatas = res.data;
             } else {
-              this.logDatas = '';
+              console.log('不存在')
+              // Object.assign(this.logDatas,this.DefaultTotal)
+              console.log(this.logDatas)
+              // this.logDatas = Ob;
             };
             this.$message({
               message: "查询成功！",
               type: 'success'
             })
           } else {
-            this.$message({
-              message: "查询失败！",
-              type: 'error'
-            })
+            this.$message.error(res.msg)
           }
         })
       },
@@ -1397,9 +1406,9 @@
       dhandleSizeChange(val) {
         this.detailParam.rows = val;
         this.detailParam.page = 1;
-        if (this.currentPage !== 1 || this.setPageSize !== 10) {
-          this.currentPage = 1;
-          this.setPageSize = 10;
+        if (this.currentPage1 !== 1 || this.setPageSize1 !== 10) {
+          this.currentPage1 = 1;
+          this.setPageSize1 = 10;
         } else {
           this.detailRequest(this.detailParam);
         };
