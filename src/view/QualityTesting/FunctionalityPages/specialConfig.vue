@@ -35,10 +35,15 @@
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">业务状态： </span>
-          <el-select v-model="params.busiState" placeholder="请选择">
-            <el-option v-for="item in busiStateSelect" :key="item.code" :label="item.name" :value="item.code">
-            </el-option>
-          </el-select>
+          <el-autocomplete popper-class="my-autocomplete" v-model="busiState" :fetch-suggestions="querySearch" placeholder="请输入内容"
+            @select="handleSelect">
+          <!-- <i class="el-icon-close" @click="busiState=selectedBusiState=params.busiState=''" slot="suffix"></i> -->
+            <i class="el-icon-edit el-input__icon" slot="suffix">
+            </i>
+            <template slot-scope="{ item }">
+              <span style="float: left; width:66px">{{ item.name }}</span>
+            </template>
+          </el-autocomplete>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">拒绝主原因：</span>
@@ -134,6 +139,8 @@
         shopCodesSelection: [], //进件机构下拉
         userInf: '',
         mainReasonId: '',
+        busiState: '',
+        selectedBusiState: '',
         allotParams: {
           operCode: '',
           operName: '',
@@ -165,6 +172,21 @@
       }
     },
     methods: {
+      querySearch(queryString, cb) {
+        var restaurants = this.busiStateSelect;
+        var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
+        // 调用 callback 返回建议列表的数据
+        cb(results);
+      },
+      createFilter(queryString) {
+        return (restaurant) => {
+          return (restaurant.name.toLowerCase().indexOf(queryString.toLowerCase()) != -1);
+        };
+      },
+      handleSelect(item) {
+        this.busiState = this.selectedBusiState = item.name;
+        this.params.busiState = item.code;
+      },
       apportion() { //分配 按钮弹窗
         // this.Confirm = true;
         // this.loadsitu = false;
@@ -216,8 +238,11 @@
         this.params.subReasonIds = []; //	拒绝子原因      多选
         this.secondReason = []; //	拒绝子原因     下拉内容
         this.ploanDate = ''; //审批结论时间数组
+        this.busiState = '';
+        this.selectedBusiState = '';
       },
       Rsearch() { // 查询
+       this.busiState != this.selectedBusiState ? (this.busiState = this.selectedBusiState = this.params.busiState = "") : "";
         if (this.ploanDate == '' && this.params.operOrgCodes == '' && this.params.userCode == '' && this.params.proCodes ==
           '' && this.params.busiState == '' && this.params.mainReasonIds == '' && this.params.subReasonIds == '') {
           this.$message.error('请输入查询条件')
@@ -228,6 +253,7 @@
         this.inquire(this.params);
       },
       inquire(pam) { //查询列表     质检-复议结果查询功能
+       this.busiState != this.selectedBusiState ? (this.busiState = this.selectedBusiState = this.params.busiState = "") : "";
         this.post("/insTask/getSpecialInsTaskList", pam).then(res => {
           if (res.statusCode == 200) {
             this.tableData = res.data;
