@@ -22,7 +22,7 @@
       </el-row>
       <el-row class="row row2" type="flex">
         <el-col :span="6" class="search-item">
-  <span class="keywordText">产品名称：</span>
+          <span class="keywordText">产品名称：</span>
           <el-autocomplete popper-class="my-autocomplete" v-model="product" :fetch-suggestions="querySearch" placeholder="请输入内容" @select="handleSelect">
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
@@ -251,12 +251,14 @@
         queryParam: {
           pageNum: 1,
           pageSize: 10,
+          proId: ""
         },
         custName_la: '',
         certCode: '',
         applySubNo: '',
         appOrgCode: '',
-        proId: '', product: '',
+        selectedProName: "",
+        product: '',
         taskNodeName: '',
         taskType: '',
         operatorCode: '',
@@ -287,7 +289,7 @@
     },
 
     methods: {
-            querySearch(queryString, cb) {
+      querySearch(queryString, cb) {
         var restaurants = this.proNames;
         var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
         // 调用 callback 返回建议列表的数据
@@ -300,7 +302,8 @@
       },
       handleSelect(item) {
         this.product = item.proName;
-        this.proId = item.id;
+        this.queryParam.proId = item.id;
+        this.selectedProName = item.proName;
       },
       getUserInf() {
         this.queryParam.processTemplateId = 'antiFraudApp';
@@ -314,7 +317,7 @@
       getProductForUser(orgId) {
         this.post("/credit/productAll").then(res => {
           if (res.statusCode == 200) {
-             for (let k in res.data) {
+            for (let k in res.data) {
               this.proNames.push(res.data[k])
             }
           }
@@ -347,12 +350,11 @@
 
       //查询流程监控
       getProcessMonitorList() {
-
         this.queryParam.custName_la = this.custName_la;
         this.queryParam.certCode = this.certCode;
         this.queryParam.applySubNo = this.applySubNo;
         this.queryParam.appOrgCode = this.appOrgCode;
-        this.queryParam.proId = this.proId;
+        // this.queryParam.proId = this.proId;
         this.queryParam.taskNodeName = this.taskNodeName;
         this.queryParam.taskType = this.taskType;
         this.queryParam.operatorCode = this.operatorCode;
@@ -389,6 +391,7 @@
       // 查询按钮
       getByKey() {
         this.queryParam.pageNum = 1;
+        this.product != this.selectedProName ? (this.product = this.selectedProName = this.queryParam.proId = "") : "";
         this.getProcessMonitorList(this.queryParam);
       },
 
@@ -399,7 +402,8 @@
         this.certCode = '';
         this.applySubNo = '';
         this.appOrgCode = '';
-        this.proId = '';                 this.product = '';
+        this.selectedProName = '';
+        this.product = '';
         this.taskNodeName = '';
         this.taskType = '';
         this.operatorCode = '';

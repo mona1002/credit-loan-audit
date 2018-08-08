@@ -22,7 +22,7 @@
       </el-row>
       <el-row class="row row2" type="flex">
         <el-col :span="6" class="search-item">
-                <span class="keywordText">产品名称：</span>
+          <span class="keywordText">产品名称：</span>
           <el-autocomplete popper-class="my-autocomplete" v-model="product" :fetch-suggestions="querySearch" placeholder="请输入内容" @select="handleSelect">
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
@@ -201,54 +201,54 @@
     data() {
       return {
         taskNodes: [{
-            value: 'creditApp_firstTrial',
-            label: '初审审批'
+            value: "creditApp_firstTrial",
+            label: "初审审批"
           },
           {
-            value: 'creditApp_finalTrial_one',
-            label: '终审一级审批'
+            value: "creditApp_finalTrial_one",
+            label: "终审一级审批"
           },
           {
-            value: 'creditApp_finalTrial_two',
-            label: '终审二级审批'
+            value: "creditApp_finalTrial_two",
+            label: "终审二级审批"
           },
           {
-            value: 'creditApp_finalTrial_three',
-            label: '信审经理审批'
+            value: "creditApp_finalTrial_three",
+            label: "信审经理审批"
           },
           {
-            value: 'creditApp_finalTrial_four',
-            label: '信审高级经理审批'
+            value: "creditApp_finalTrial_four",
+            label: "信审高级经理审批"
           },
           {
-            value: 'creditApp_finalTrial_five',
-            label: '信审总监审批'
+            value: "creditApp_finalTrial_five",
+            label: "信审总监审批"
           },
           {
-            value: 'creditApp_apply',
-            label: '申请登记'
+            value: "creditApp_apply",
+            label: "申请登记"
           },
           {
-            value: 'creditApp_antiFraud_app',
-            label: '反欺诈申请'
+            value: "creditApp_antiFraud_app",
+            label: "反欺诈申请"
           }
         ],
-        userCode: '',
+        userCode: "",
         taskTypes: [{
-            value: '00',
-            label: '新任务'
+            value: "00",
+            label: "新任务"
           },
           {
-            value: '01',
-            label: '回退任务'
+            value: "01",
+            label: "回退任务"
           },
           {
-            value: '02',
-            label: '挂起任务'
+            value: "02",
+            label: "挂起任务"
           },
           {
-            value: '03',
-            label: '回退再审任务'
+            value: "03",
+            label: "回退再审任务"
           }
         ],
 
@@ -259,76 +259,82 @@
         currentRow: {}, // 当前选中的那一行数据
         proNames: [],
         itemOfLists: {
-          assignor: '',
-          toUser: '',
+          assignor: "",
+          toUser: "",
           taskIds: []
         }, // 编辑、查看、授权某一条数据前，根据 id 查询其详细数据
         currentPage: 1, // 默认显示的当前页
         pageSizesArr: [10, 20, 50], // 每页显示的数据数
         setPageSize: 10,
         defaultProps: {
-          children: 'children',
-          label: 'resName'
+          children: "children",
+          label: "resName"
         },
 
         queryParam: {
           pageNum: 1,
           pageSize: 10,
+          proId: ""
         },
-        custName_la: '',
-        certCode: '',
-        applySubNo: '',
-        appOrgCode: '',
-        proId: '',
-         product: '',
-        taskNodeName: '',
-        taskType: '',
-        operatorCode: '',
+        custName_la: "",
+        certCode: "",
+        applySubNo: "",
+        appOrgCode: "",
+        // proId: '',
+        selectedProName: "",
+        product: "",
+        taskNodeName: "",
+        taskType: "",
+        operatorCode: "",
         dialogTraceVisible: false, //流程轨迹
         dialogAssignVisible: false, //任务分派
         dialogTransVisible: false, //转分派流程轨迹
-        alertMessage: '',
+        alertMessage: "",
         multipleSelection: [],
         formLabelWidth: "140px",
-        routerPath: '',
+        routerPath: "",
         rules: {
           toUser: [{
             required: true,
-            message: '该输入项为必输项',
-            trigger: 'change'
+            message: "该输入项为必输项",
+            trigger: "change"
           }]
         },
-        activeNames: ['1'],
+        activeNames: ["1"],
         flowRoleIds: [], //流程角色列表
-        flowRoleName: '',
+        flowRoleName: ""
       };
     },
-
     mounted() {
-      this.userCode = JSON.parse(localStorage.getItem('userInf')).userCode
+      this.userCode = JSON.parse(localStorage.getItem("userInf")).userCode;
       this.getUserInf();
       this.getProductForUser();
     },
 
     methods: {
-            querySearch(queryString, cb) {
+      querySearch(queryString, cb) {
         var restaurants = this.proNames;
         var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
         // 调用 callback 返回建议列表的数据
         cb(results);
       },
       createFilter(queryString) {
-        return (restaurant) => {
-          return (restaurant.proName.toLowerCase().indexOf(queryString.toLowerCase()) != -1);
+        return restaurant => {
+          return (
+            restaurant.proName.toLowerCase().indexOf(queryString.toLowerCase()) !=
+            -1
+          );
         };
       },
       handleSelect(item) {
         this.product = item.proName;
-        this.proId = item.id;
+        // this.proId = item.id;
+        this.queryParam.proId = item.id;
+        this.selectedProName = item.proName;
       },
       getUserInf() {
-        this.queryParam.processTemplateId = 'creditApp';
-        this.queryParam.taskStatus = '01';
+        this.queryParam.processTemplateId = "creditApp";
+        this.queryParam.taskStatus = "01";
         this.userInf = JSON.parse(localStorage.getItem("userInf"));
         this.queryParam.userCode = this.userInf.userCode;
         this.queryParam.orgCode = this.userInf.orgCode;
@@ -338,8 +344,8 @@
       getProductForUser(orgId) {
         this.post("/credit/productAll").then(res => {
           if (res.statusCode == 200) {
-             for (let k in res.data) {
-              this.proNames.push(res.data[k])
+            for (let k in res.data) {
+              this.proNames.push(res.data[k]);
             }
           }
         });
@@ -347,18 +353,18 @@
 
       // 根据任务角色 code 查询 Name
       getFlowRoleName(roleCode) {
-        this.post(constant.baseUrl_user + 'remote/flowRole/getByFlowRoleCode', {
+        this.post(constant.baseUrl_user + "remote/flowRole/getByFlowRoleCode", {
           data: {
             flowRoleCode: roleCode
           }
         }).then(res => {
           this.flowRoleName = res.data.flowRoleName;
-        })
+        });
       },
 
       // 下拉框获取流程角色
       getCurrentUserFlowRole() {
-        this.post(constant.baseUrl_user + 'remote/user/getBpmUser', {
+        this.post(constant.baseUrl_user + "remote/user/getBpmUser", {
           data: {
             flowRoleCode: this.multipleSelection[0].flowRoleCode,
             orgCode: this.multipleSelection[0].orgCode,
@@ -366,27 +372,25 @@
           }
         }).then(res => {
           this.flowRoleIds = res.data;
-        })
+        });
       },
 
       //查询流程监控
       getProcessMonitorList() {
-
         this.queryParam.custName_la = this.custName_la;
         this.queryParam.certCode = this.certCode;
         this.queryParam.applySubNo = this.applySubNo;
         this.queryParam.appOrgCode = this.appOrgCode;
-        this.queryParam.proId = this.proId;
+        // this.queryParam.proId = this.proId;
+        // this.queryParam.proId = this.selectedProName;
         this.queryParam.taskNodeName = this.taskNodeName;
         this.queryParam.taskType = this.taskType;
         this.queryParam.operatorCode = this.operatorCode;
 
-        processMoniSer
-          .getProcessMonitorList(this.queryParam)
-          .then(res => {
-            this.responseDatas = res.data;
-            this.moniList = this.responseDatas.taskDetailList;
-          })
+        processMoniSer.getProcessMonitorList(this.queryParam).then(res => {
+          this.responseDatas = res.data;
+          this.moniList = this.responseDatas.taskDetailList;
+        });
       },
       // 查询流程轨迹
       getProcessTraceList(id) {
@@ -397,37 +401,38 @@
           })
           .then(res => {
             this.traceList = res.data.taskDetailList;
-          })
+          });
       },
       // 转分派流程轨迹
       getTransmitHistoryList(id) {
         processMoniSer
           .getTransmitHistoryList({
-            processInstanceId: id,
+            processInstanceId: id
           })
           .then(res => {
             this.transList = res.data.assignTaskLogList;
-          })
+          });
       },
 
       // 查询按钮
       getByKey() {
         this.queryParam.pageNum = 1;
+        this.product != this.selectedProName ?(this.product = this.selectedProName = this.queryParam.proId = "") :"";
         this.getProcessMonitorList(this.queryParam);
       },
 
       // 重置按钮
       reset() {
         this.queryParam.pageNum = 1;
-        this.custName_la = '';
-        this.certCode = '';
-        this.applySubNo = '';
-        this.appOrgCode = '';
-        this.proId = '';
-        this.product = '';
-        this.taskNodeName = '';
-        this.taskType = '';
-        this.operatorCode = '';
+        this.custName_la = "";
+        this.certCode = "";
+        this.applySubNo = "";
+        this.appOrgCode = "";
+        this.selectedProName = '';
+        this.product = "";
+        this.taskNodeName = "";
+        this.taskType = "";
+        this.operatorCode = "";
         this.queryParam.custName_la = "";
         this.queryParam.certCode = "";
         this.queryParam.applySubNo = "";
@@ -436,12 +441,10 @@
         this.queryParam.taskNodeName = "";
         this.queryParam.taskType = "";
         this.queryParam.operatorCode = "";
-        processMoniSer
-          .getProcessMonitorList(this.queryParam)
-          .then(res => {
-            this.responseDatas = res.data;
-            this.moniList = this.responseDatas.taskDetailList;
-          })
+        processMoniSer.getProcessMonitorList(this.queryParam).then(res => {
+          this.responseDatas = res.data;
+          this.moniList = this.responseDatas.taskDetailList;
+        });
       },
 
       // 每页条数变化时，重新请求
@@ -471,75 +474,81 @@
       selectRow(row, event, column) {
         this.currentRow = row;
       },
-      alertBox() { //操作前提示
-        this.$confirm(this.alertMessage, '提示', {
-          confirmButtonText: '确定',
-          type: 'warning',
-          cancelButtonText: '取消',
-          showCancelButton: true
-        }).then(() => {}).catch(() => {});
+      alertBox() {
+        //操作前提示
+        this.$confirm(this.alertMessage, "提示", {
+            confirmButtonText: "确定",
+            type: "warning",
+            cancelButtonText: "取消",
+            showCancelButton: true
+          })
+          .then(() => {})
+          .catch(() => {});
       },
-      alertBox() { //操作前提示
-        this.$confirm(this.alertMessage, '提示', {
-          confirmButtonText: '确定',
-          type: 'warning',
-          cancelButtonText: '取消',
-          showCancelButton: true
-        }).then(() => {}).catch(() => {});
+      alertBox() {
+        //操作前提示
+        this.$confirm(this.alertMessage, "提示", {
+            confirmButtonText: "确定",
+            type: "warning",
+            cancelButtonText: "取消",
+            showCancelButton: true
+          })
+          .then(() => {})
+          .catch(() => {});
       },
       handleItem(flag) {
         if (this.multipleSelection.length == 0) {
-          if (flag === 'trace') {
+          if (flag === "trace") {
             this.alertMessage = "请选择一条记录查看流程轨迹！";
-          } else if (flag === 'assign') {
+          } else if (flag === "assign") {
             this.alertMessage = "请选择流程进行分派任务！";
-          } else if (flag === 'trans') {
+          } else if (flag === "trans") {
             this.alertMessage = "请选择一条记录查看转分派流程轨迹！";
           }
           this.alertBox();
-          return
+          return;
         }
         if (this.multipleSelection.length > 1) {
-          if (flag === 'trace') {
+          if (flag === "trace") {
             this.alertMessage = "请选择一条记录查看流程轨迹！";
             this.alertBox();
-            return
-          } else if (flag === 'assign') {
+            return;
+          } else if (flag === "assign") {
             var arr = this.multipleSelection;
             var fg = arr.every(function (item) {
-              return item.taskNodeNameTxt === arr[0].taskNodeNameTxt
-            })
+              return item.taskNodeNameTxt === arr[0].taskNodeNameTxt;
+            });
             if (!fg) {
               this.alertMessage = "请选择相同 [任务节点] 的流程进行分派任务！";
               this.alertBox();
-              return
+              return;
             }
-          } else if (flag === 'trans') {
+          } else if (flag === "trans") {
             this.alertMessage = "请选择一条记录查看转分派流程轨迹！";
             this.alertBox();
-            return
+            return;
           }
         }
 
-        if (flag === 'trace') {
+        if (flag === "trace") {
           this.dialogTraceVisible = true;
           this.getProcessTraceList(this.multipleSelection[0].processInstanceId);
-        } else if (flag === 'assign') {
+        } else if (flag === "assign") {
           this.dialogAssignVisible = true;
           this.getFlowRoleName(this.multipleSelection[0].flowRoleCode);
           this.getCurrentUserFlowRole();
-        } else if (flag === 'trans') {
+        } else if (flag === "trans") {
           this.dialogTransVisible = true;
-          this.getTransmitHistoryList(this.multipleSelection[0].processInstanceId);
+          this.getTransmitHistoryList(
+            this.multipleSelection[0].processInstanceId
+          );
         }
-
       },
-
 
       // 任务分派
       taskTransmit(formName) {
-        var checkFlag = '';
-        this.$refs[formName].validate((valid) => {
+        var checkFlag = "";
+        this.$refs[formName].validate(valid => {
           if (valid) {
             checkFlag = true;
           } else {
@@ -547,13 +556,13 @@
           }
         });
         if (!checkFlag) {
-          return
+          return;
         }
 
         var arr = [];
         this.multipleSelection.forEach(function (item) {
           arr.push(item.taskId);
-        })
+        });
         this.itemOfLists.taskIds = arr;
 
         processMoniSer
@@ -567,27 +576,26 @@
             if (res.data.statusCode == 200) {
               this.$message({
                 message: res.data.msg ? res.data.msg : "操作成功！",
-                type: 'success'
-              })
-              this.itemOfLists.toUser = '';
+                type: "success"
+              });
+              this.itemOfLists.toUser = "";
               this.getProcessMonitorList(this.queryParam);
             } else {
               this.$message({
-                message: '操作失败！',
-                type: 'error'
-              })
+                message: "操作失败！",
+                type: "error"
+              });
             }
           })
           .catch(err => {
             this.$message({
-              message: '网络错误！',
-              type: 'error'
-            })
+              message: "网络错误！",
+              type: "error"
+            });
           });
         this.dialogAssignVisible = false;
-      },
-
-    },
+      }
+    }
   };
 
 </script>

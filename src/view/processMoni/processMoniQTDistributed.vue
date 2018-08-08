@@ -27,7 +27,8 @@
       <el-row class="row row2" type="flex">
         <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称：</span>
-          <el-autocomplete @blur='clearId' popper-class="my-autocomplete" v-model="product" :fetch-suggestions="querySearch" placeholder="请输入内容" @select="handleSelect">
+          <el-autocomplete popper-class="my-autocomplete" v-model="product" :fetch-suggestions="querySearch" placeholder="请输入内容"
+            @select="handleSelect">
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
             <template slot-scope="{ item }">
@@ -285,14 +286,14 @@
         queryParam: {
           pageNum: 1,
           pageSize: 10,
+          proId: ""
         },
         custName_la: '',
         certCode: '',
         applySubNo: '',
         appOrgCode: '',
-        proId: '',
+        selectedProName: "",
         product: '',
-
         taskNodeName: '',
         taskType: '',
         operatorCode: '',
@@ -322,9 +323,6 @@
       this.getProductForUser();
     },
     methods: {
-      clearId(){
-        console.log('清楚')
-      },
       querySearch(queryString, cb) {
         var restaurants = this.proNames;
         var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
@@ -338,7 +336,8 @@
       },
       handleSelect(item) {
         this.product = item.proName;
-        this.proId = item.id;
+        this.queryParam.proId = item.id;
+        this.selectedProName = item.proName;
       },
       getUserInf() {
         this.queryParam.processTemplateId = 'checkApp';
@@ -382,7 +381,7 @@
         this.queryParam.certCode = this.certCode;
         this.queryParam.applySubNo = this.applySubNo;
         this.queryParam.appOrgCode = this.appOrgCode;
-        this.queryParam.proId = this.proId;
+        // this.queryParam.proId = this.proId;
         this.queryParam.taskNodeName = this.taskNodeName;
         this.queryParam.taskType =
           this.taskType;
@@ -410,6 +409,7 @@
       }, // 查询按钮
       getByKey() {
         this.queryParam.pageNum = 1;
+        this.product != this.selectedProName ? (this.product = this.selectedProName = this.queryParam.proId = "") : "";
         this.getProcessMonitorList(this.queryParam);
       }, // 重置按钮 
       reset() {
@@ -418,7 +418,7 @@
         this.certCode = '';
         this.applySubNo = '';
         this.appOrgCode = '';
-        this.proId = '';
+        this.selectedProName = '';
         this.product = '';
         this.taskNodeName = '';
         this.taskType = '';

@@ -250,12 +250,13 @@
         queryParam: {
           pageNum: 1,
           pageSize: 10,
+          proId: ""
         },
         custName_la: '',
         certCode: '',
         applySubNo: '',
         appOrgCode: '',
-        proId: '',
+        selectedProName: "",
         product: '',
         taskNodeName: '',
         taskType: '',
@@ -299,7 +300,8 @@
       },
       handleSelect(item) {
         this.product = item.proName;
-        this.proId = item.id;
+        this.queryParam.proId = item.id;
+        this.selectedProName = item.proName;
       },
       getUserInf() {
         // 获取路由参数，来判断是信审、复议、还是反欺诈以及各自对应的未分配、已分配和已完成三个状态
@@ -347,12 +349,11 @@
 
       //查询流程监控
       getProcessMonitorList() {
-
         this.queryParam.custName_la = this.custName_la;
         this.queryParam.certCode = this.certCode;
         this.queryParam.applySubNo = this.applySubNo;
         this.queryParam.appOrgCode = this.appOrgCode;
-        this.queryParam.proId = this.proId;
+        // this.queryParam.proId = this.proId;
         this.queryParam.taskNodeName = this.taskNodeName;
         this.queryParam.taskType = this.taskType;
         this.queryParam.operatorCode = this.operatorCode;
@@ -389,6 +390,7 @@
       // 查询按钮
       getByKey() {
         this.queryParam.pageNum = 1;
+        this.product != this.selectedProName ? (this.product = this.selectedProName = this.queryParam.proId = "") : "";
         this.getProcessMonitorList(this.queryParam);
       },
 
@@ -399,7 +401,7 @@
         this.certCode = '';
         this.applySubNo = '';
         this.appOrgCode = '';
-        this.proId = '';
+        this.selectedProName = '';
         this.product = '';
         this.taskNodeName = '';
         this.taskType = '';
