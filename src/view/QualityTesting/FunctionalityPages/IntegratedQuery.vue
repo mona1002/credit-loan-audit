@@ -22,16 +22,10 @@
       </el-row>
       <el-row class="row row2" type="flex">
         <el-col :span="6" class="search-item">
-          <span class="keywordText">单位名称：</span>
-          <el-input v-model.trim="params.workTel" placeholder="请输入单位名称"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
-          <span class="keywordText">单位电话：</span>
-          <el-input v-model.trim="params.hirecomName" placeholder="请输入单位电话"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
-          <span class="keywordText">联系人电话：</span>
-          <el-input v-model.trim="params.rlMobile" placeholder="请输入联系人电话"></el-input>
         </el-col>
         <el-col :span="6" class="search-btn">
           <el-button class="btn query" type="primary" @click="Rsearch">查询</el-button>
@@ -118,9 +112,6 @@
           custName: '',
           certCode: '',
           mobile: '',
-          workTel:'',
-          hirecomName:'',
-          rlMobile:'',
           //   pageNum: '', //页数（第几页）
           //   pageSize: '', //页面显示行数
         },
@@ -165,15 +156,11 @@
         this.params.custName = '';
         this.params.certCode = '';
         this.params.mobile = '';
-        this.params.workTel = '';
-        this.params.hirecomName = '';
-        this.params.rlMobile = '';
-        
       },
       Rsearch() {
         // this.params.pageNum = this.currentPage = 1;
         if (this.params.applySubno != '' || this.params.custName != '' || this.params.certCode != '' || this.params.mobile !=
-          '' || this.params.workTel != ''|| this.params.hirecomName != ''|| this.params.rlMobile != '') {
+          '' ) {
           this.inquire(this.params);
         } else {
           this.$message.error('请输入查询条件')
