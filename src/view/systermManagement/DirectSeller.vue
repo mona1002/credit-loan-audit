@@ -29,7 +29,7 @@
             <span class="keywordText">所属机构： </span>
             <div @click.stop="getDropDownSelect" class="dropdown" style="display:inline-block;position:relative;">
               <span class="dropdownInput" v-show="subOrg">{{subOrg}}</span>
-              <span class="dropdownInput" v-show="!subOrg" style="color:#B5BCCD;">请选择所属机构{{dropdownFlag}}</span>
+              <span class="dropdownInput" v-show="!subOrg" style="color:#B5BCCD;">请选择所属机构</span>
               <div class="dropList" v-show="dropdownFlag">
                 <el-tree :data="orgDatasEdit" node-key="id" :load="loadNode" lazy :props="defaultProps" :expand-on-click-node='false' @node-click="getItemSelect">
                 </el-tree>
@@ -220,7 +220,6 @@
   .wrap {
     height: 100%;
     width: 100%;
-    border: 3px solid red;
   }
 
   .dropList {
