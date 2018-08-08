@@ -9,6 +9,7 @@
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
+             <div class=" CreditForm_div_border clearFix">
             <li>
               <label class="label_width_190">
                 <i class="required_Red">* </i>进件编号：</label>
@@ -23,6 +24,7 @@
               <label class="label_width_190">证件类型：</label>
               <span>{{certTypeTxt}}</span>
             </li>
+            </div>
             <li>
               <label class="label_width_190">证件号码：</label>
               <span>{{certCode}}</span>
@@ -287,10 +289,17 @@
       '$route' (to, from) {
         if (to.path === '/AntiApplyAdd' && this.$route.params.newOne) {
           this.mountedInf();
+          // 请选择一条信息弹窗
           this.applySubNos = '';
           this.custName_la = '';
           this.subCertCode = '';
-          this.applyDesc = '';
+          // 基本信息
+          this.applySubNo = '';
+          this.applyCustName = '';
+          this.certTypeTxt = '';
+          this.certCode = '';
+          this.mobile = '';
+          // 申请信息
           this.mainReason = '';
           this.secondReason = '';
           this.applyDesc = '';

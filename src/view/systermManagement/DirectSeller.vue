@@ -6,15 +6,15 @@
         <el-row class="row row1" type="flex">
           <el-col :span="6" class="search-item" :offset="0">
             <span class="keywordText">用户名称： </span>
-            <el-input v-model.trim="params.userName" placeholder="请输入进件编号"></el-input>
+            <el-input v-model.trim="params.userName" placeholder="请输入用户名称"></el-input>
           </el-col>
           <el-col :span="6" class="search-item">
             <span class="keywordText">用户编号：</span>
-            <el-input v-model.trim="params.userCode" placeholder="请输入客户名称"></el-input>
+            <el-input v-model.trim="params.userCode" placeholder="请输入用户编号"></el-input>
           </el-col>
           <el-col :span="6" class="search-item">
             <span class="keywordText">手机号码：</span>
-            <el-input v-model.trim="params.tel" placeholder="请输入证件号码"></el-input>
+            <el-input v-model.trim="params.tel" placeholder="请输入手机号码"></el-input>
           </el-col>
           <el-col :span="6" class="search-item">
             <span class="keywordText">用户状态：</span>
@@ -122,6 +122,19 @@
       }
     },
     methods: {
+      getinstitution() {
+        this.post('/credit/getSmOrg', {
+          orgCode: this.orgCode,
+          isCurrentOrgCode: '1',
+          isVerifySysInfo: '01'
+        }).then((res) => {
+          if (res.statusCode == 200) {
+            this.orgDatasEdit = res.data;
+          } else {
+            this.$message.error(res.msg)
+          }
+        })
+      },
       // 打开下拉菜单里的树形结构
       getDropDownSelect(event) {
         // if (this.isActive == true) {
@@ -132,17 +145,6 @@
             'dropdownInput-arrow')) {
           this.dropdownFlag = true;
           this.isActive = true;
-          this.post('/credit/getSmOrg', {
-            orgCode: this.orgCode,
-            isCurrentOrgCode: '1',
-            isVerifySysInfo: '01'
-          }).then((res) => {
-            if (res.statusCode == 200) {
-              this.orgDatasEdit = res.data;
-            } else {
-              this.$message.error(res.msg)
-            }
-          })
         } else {
           this.dropdownFlag = false;
         }
@@ -160,27 +162,27 @@
       // 点击展开时加载
       loadNode(node, resolve) {
         var data;
-
-        // if (node.data.hasChildren === '1') {
-        this.post('/credit/getSmOrg', {
-          id: node.data.id,
-          isCurrentOrgCode: '0',
-        }).then((res) => {
-          if (res.statusCode == 200) {
-            data = res.data;
-            for (var i = 0, len = data.length; i < len; i++) {
-              //   if (data[i].children.length === 0) {
-              //     data[i].leaf = true;
-              //   }
-              // console.log(data[i].length)
+        if (node.data.state == "closed") {
+          this.post('/credit/getSmOrg', {
+            id: node.data.id,
+            isCurrentOrgCode: '0',
+          }).then((res) => {
+            if (res.statusCode == 200) {
+              data = res.data;
+              for (var i = 0, len = data.length; i < len; i++) {
+                if (data[i].state === 'open') {
+                  data[i].leaf = true;
+                }
+              }
+              return resolve(data);
             }
-            return resolve(data);
-          }
-          // else {
-          //   this.$message.error(res.msg)
-          // }
-
-        })
+            // else {
+            //   this.$message.error(res.msg)
+            // }
+          })
+        } else {
+          return resolve([])
+        }
       },
 
       Rreset() {
@@ -213,6 +215,7 @@
     },
     created() {
       this.orgCode = JSON.parse(localStorage.getItem('userInf')).orgCode;
+      this.getinstitution();
     }
   }
 
