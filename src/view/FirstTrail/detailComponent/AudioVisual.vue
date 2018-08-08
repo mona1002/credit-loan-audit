@@ -106,7 +106,7 @@
         litimgIndex: -1,
         litimgInd: -1,
         perfBtn: false, //功能按钮
-        judgeFlag:{},
+        judgeFlag: {},
         opendImg: [],
         closedImg: [],
         showListDiv: true,
@@ -142,9 +142,9 @@
           this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈
         } else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
           this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议
-        }else if (this.judgeFlag.flag == '14'||this.judgeFlag.flag == '15') {
-        this.localInf = JSON.parse(localStorage.getItem("TtaskInWaitting")) // 任务管理
-      }
+        } else if (this.judgeFlag.flag == '14' || this.judgeFlag.flag == '15') {
+          this.localInf = JSON.parse(localStorage.getItem("TtaskInWaitting")) // 任务管理
+        }
         this.imgBaseUrl = imgUrl.imgBaseUrl;
         // 父菜单
         this.post("/productArchive/getProductArchiveParentList", {
@@ -266,26 +266,32 @@
         }
       },
       pre() {
-        this.smallPicInd--;
-        this.showPage--;
-        if (this.$refs.small_pic_ref) {
-          if (this.smallPicInd < 0) {
-            this.smallPicInd = this.$refs.small_pic_ref.length - 1;
-            this.showPage = this.$refs.small_pic_ref.length;
+        if (this.pngAyyrs.length != 0) {
+          this.smallPicInd--;
+          this.showPage--;
+          if (this.$refs.small_pic_ref) {
+            if (this.smallPicInd < 0) {
+              this.smallPicInd = this.$refs.small_pic_ref.length - 1;
+              this.showPage = this.$refs.small_pic_ref.length;
+            }
           }
+          this.defaultBigPicCss();
         }
-        this.defaultBigPicCss();
+
       },
       next() {
-        this.smallPicInd++;
-        this.showPage++;
-        if (this.$refs.small_pic_ref) {
-          if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
-            this.smallPicInd = 0;
-            this.showPage = 1;
+        if (this.pngAyyrs.length != 0) {
+          this.smallPicInd++;
+          this.showPage++;
+          if (this.$refs.small_pic_ref) {
+            if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
+              this.smallPicInd = 0;
+              this.showPage = 1;
+            }
           }
+          this.defaultBigPicCss();
         }
-        this.defaultBigPicCss();
+
       },
       larger() {
         if (this.$refs.Big_pic_ref) {
@@ -413,12 +419,12 @@
             //  this.$refs.AudioVisual_Img_ref.scrollTop = 0;
             if (event.detail > 0) {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
-                  .height) -100 + "px";
-                   this.$refs.Big_pic_ref[0].style.width = 'auto';
+                .height) - 100 + "px";
+              this.$refs.Big_pic_ref[0].style.width = 'auto';
             } else {
               this.$refs.Big_pic_ref[0].style.height = parseFloat(getComputedStyle(this.$refs.Big_pic_ref[0], false)
-                  .height) + 100 + "px";
-                   this.$refs.Big_pic_ref[0].style.width = 'auto';
+                .height) + 100 + "px";
+              this.$refs.Big_pic_ref[0].style.width = 'auto';
             }
           });
         }

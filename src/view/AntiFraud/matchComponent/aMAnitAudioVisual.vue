@@ -1,5 +1,6 @@
 <template>
   <div class="AudioVisual">
+    <!--  已整合-此页面待删除 -->
     <!-- <div class="CompareShow"> -->
     <!-- 左侧list隐藏时显示的div     在根元素下面，与left right 平级-->
     <div class="hidDiv" v-show="!showListDiv" ref="hidDiv_ref">
@@ -174,22 +175,28 @@
         this.SmallPicShow = true;
       },
       pre() {
-        this.smallPicInd--;
+            if (this.pngAyyrs.length != 0) {
+           this.smallPicInd--;
         if (this.$refs.small_pic_ref) {
           if (this.smallPicInd < 0) {
             this.smallPicInd = this.$refs.small_pic_ref.length - 1;
           }
         }
         this.defaultBigPicCss();
+         }
+      
       },
       next() {
-        this.smallPicInd++;
+            if (this.pngAyyrs.length != 0) {
+          this.smallPicInd++;
         if (this.$refs.small_pic_ref) {
           if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
             this.smallPicInd = 0;
           }
         }
         this.defaultBigPicCss();
+         }
+       
       },
       larger() {
         if (this.$refs.Big_pic_ref) {

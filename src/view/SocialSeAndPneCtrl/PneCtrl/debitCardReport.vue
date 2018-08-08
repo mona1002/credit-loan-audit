@@ -68,6 +68,7 @@
             return;
           }
           if (!!res.obj && !res.obj.rawRpt && !res.obj.rpt) {
+          // if ((!!res.obj && !res.obj.rawRpt && !res.obj.rpt)||((res.obj.rpt&&$.parseJSON(res.obj.rpt).message=='noContent')&&(res.obj.rawRpt&&$.parseJSON(res.obj.rawRpt).message=='noContent'))) {//rpt pawRpt都存在且message都为noContent
             let def = {
               data: {},
               accounts: {},

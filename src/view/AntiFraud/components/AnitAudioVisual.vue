@@ -1,5 +1,5 @@
 <template>
-<!-- 整合到audiovisual中-此页面待删除 -->
+  <!-- 已整合到audiovisual中-此页面待删除 -->
   <div class="AudioVisual">
     <!-- <div class="CompareShow"> -->
     <!-- 左侧list隐藏时显示的div     在根元素下面，与left right 平级-->
@@ -223,26 +223,30 @@
         }
       },
       pre() {
-        this.smallPicInd--;
-        this.showPage--;
-        if (this.$refs.small_pic_ref) {
-          if (this.smallPicInd < 0) {
-            this.smallPicInd = this.$refs.small_pic_ref.length - 1;
-            this.showPage = this.$refs.small_pic_ref.length;
+        if (this.pngAyyrs.length != 0) {
+          this.smallPicInd--;
+          this.showPage--;
+          if (this.$refs.small_pic_ref) {
+            if (this.smallPicInd < 0) {
+              this.smallPicInd = this.$refs.small_pic_ref.length - 1;
+              this.showPage = this.$refs.small_pic_ref.length;
+            }
           }
+          this.defaultBigPicCss();
         }
-        this.defaultBigPicCss();
       },
       next() {
-        this.smallPicInd++;
-        this.showPage++;
-        if (this.$refs.small_pic_ref) {
-          if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
-            this.smallPicInd = 0;
-            this.showPage = 1;
+        if (this.pngAyyrs.length != 0) {
+          this.smallPicInd++;
+          this.showPage++;
+          if (this.$refs.small_pic_ref) {
+            if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
+              this.smallPicInd = 0;
+              this.showPage = 1;
+            }
           }
+          this.defaultBigPicCss();
         }
-        this.defaultBigPicCss();
       },
       larger() {
         if (this.$refs.Big_pic_ref) {

@@ -509,3 +509,9 @@
   }
 
 </script>
+<style scoped>
+  #t_2 th {
+    text-align: left;
+  }
+
+</style>
