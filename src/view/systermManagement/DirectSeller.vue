@@ -143,7 +143,7 @@
               this.$message.error(res.msg)
             }
           })
-        }   else {
+        } else {
           this.dropdownFlag = false;
         }
       },
@@ -160,26 +160,27 @@
       // 点击展开时加载
       loadNode(node, resolve) {
         var data;
-        
-        // if (node.data.hasChildren === '1') {
-          this.post('/credit/getSmOrg', {
-            id: node.data.id,
-            isCurrentOrgCode: '0',
-          }).then((res) => {
-            if (res.statusCode == 200) {
-              data = res.data;
-              for (var i = 0, len = data.length; i < len; i++) {
-                if (data[i].children.length === 0) {
-                  data[i].leaf = true;
-                }
-              }
-              return resolve(data);
-            } 
-            // else {
-            //   this.$message.error(res.msg)
-            // }
 
-          })
+        // if (node.data.hasChildren === '1') {
+        this.post('/credit/getSmOrg', {
+          id: node.data.id,
+          isCurrentOrgCode: '0',
+        }).then((res) => {
+          if (res.statusCode == 200) {
+            data = res.data;
+            for (var i = 0, len = data.length; i < len; i++) {
+              //   if (data[i].children.length === 0) {
+              //     data[i].leaf = true;
+              //   }
+              // console.log(data[i].length)
+            }
+            return resolve(data);
+          }
+          // else {
+          //   this.$message.error(res.msg)
+          // }
+
+        })
       },
 
       Rreset() {
@@ -188,11 +189,11 @@
         this.params.tel = '';
         this.params.validFlag = '';
         this.params.orgName = '';
-        this.subOrg='';
+        this.subOrg = '';
       },
       Rsearch() {
         if (this.params.userCode != '' || this.params.userName != '' || this.params.tel != '' || this.params.validFlag !=
-          ''||this.params.orgName != '') {
+          '' || this.params.orgName != '') {
           this.inquire(this.params);
         } else {
           this.$message.error('请输入查询条件')
@@ -233,7 +234,7 @@
     background: #fff;
     z-index: 111;
     overflow: auto;
-    margin-top:12px;
+    margin-top: 12px;
   }
 
 </style>

@@ -13,10 +13,14 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称：</span>
-          <el-select v-model="params.proCode" placeholder="请选择">
-            <el-option v-for="item in production" :key="item.proCode" :label="item.proName" :value="item.proCode">
-            </el-option>
-          </el-select>
+          <el-autocomplete popper-class="my-autocomplete" v-model="proCode" :fetch-suggestions="querySearch" placeholder="请输入内容" @select="handleSelect">
+            <i class="el-icon-edit el-input__icon" slot="suffix">
+            </i>
+            <template slot-scope="{ item }">
+              <span style="float: left; width:66px">{{ item.proName }}</span>
+              <span style="float: left;color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.proCode }}</span>
+            </template>
+          </el-autocomplete>
         </el-col>
         <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">申请日期：</span>
@@ -103,6 +107,8 @@
           completeTime_ge: '',
           completeTime_le: '',
         },
+        proCode: "",
+        selectedProName: "",
         applyData: '',
         dealDate: '',
         desc: false,
@@ -116,11 +122,26 @@
         // totalPage:0,//总页数
         totalRecord: 0, //总条数
         tableData: [],
-        production: null,
+        production: [],
         // value: ''
       }
     },
     methods: {
+      querySearch(queryString, cb) {
+        var restaurants = this.production;
+        var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
+        // 调用 callback 返回建议列表的数据
+        cb(results);
+      },
+      createFilter(queryString) {
+        return (restaurant) => {
+          return (restaurant.proName.toLowerCase().indexOf(queryString.toLowerCase()) != -1);
+        };
+      },
+      handleSelect(item) {
+        this.proCode = this.selectedProName = item.proName;
+        this.params.proCode = item.id;
+      },
       DateF(val) {
         val ? val = val.getFullYear() + '-' + (val.getMonth() + 1) + '-' + val.getDate() : '';
         return val;
@@ -142,6 +163,8 @@
         this.params.appDate_le = '';
         this.params.completeTime_ge = '';
         this.params.completeTime_le = '';
+        this.selectedProName = '';
+        this.proCode = '';
         this.applyData = '';
         this.dealDate = '';
         this.getInf(this.params);
@@ -155,6 +178,7 @@
         this.getInf(this.params);
       },
       getInf(pam) {
+        this.proCode != this.selectedProName ? (this.proCode = this.selectedProName = this.params.proCode = "") : "";
         this.post("/workFlowTaskQuery/getTaskToDoList", pam).then(res => {
           if (res.statusCode == 200 && res.data.taskDetailList != null) {
             this.tableData = res.data.taskDetailList;
@@ -167,7 +191,9 @@
       getProducts() {
         this.post("/credit/productAll").then(res => {
           if (res.statusCode == 200) {
-            this.production = res.data
+            for (let k in res.data) {
+              this.production.push(res.data[k])
+            }
           } else {
             this.$message.error(res.msg);
           }
