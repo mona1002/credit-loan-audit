@@ -23,27 +23,25 @@
       <el-row class="row row2" type="flex">
         <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称：</span>
-          <el-select v-model="proId" placeholder="请选择产品名称">
-            <p style="height: 34px;line-height: 34px;padding: 0 20px;font-size: 14px;background: #eee;">
-              <span style="width:66px;display:inline-block;">产品代码</span>
-              <span style="margin-left: 20px">产品名称</span>
-            </p>
-            <el-option v-for="item in proNames" :key="item.id" :label="item.proName" :value="item.id">
-              <span style="float: left;width:66px">{{ item.proCode }}</span>
-              <span style="float: left; color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.proName }}</span>
-            </el-option>
-          </el-select>
+          <el-autocomplete popper-class="my-autocomplete" v-model="product" :fetch-suggestions="querySearch" placeholder="请输入内容" @select="handleSelect">
+            <i class="el-icon-edit el-input__icon" slot="suffix">
+            </i>
+            <template slot-scope="{ item }">
+              <span style="float: left; width:66px">{{ item.proName }}</span>
+              <span style="float: left;color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.proCode }}</span>
+            </template>
+          </el-autocomplete>
         </el-col>
         <el-col :span="6" class="search-item">
-          <span class="keywordText">任务节点：</span>
+          <!-- <span class="keywordText">任务节点：</span>
           <el-select v-model="taskNodeName" placeholder="请选择">
             <el-option v-for="item in taskNodes" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
-          </el-select>
+          </el-select> -->
         </el-col>
         <el-col :span="6" class="search-item">
-          <span class="keywordText">当前处理人员：</span>
-          <el-input @keyup.enter.native="getByKey" v-model.trim="operatorCode" placeholder="请输入当前处理人员"></el-input>
+          <!-- <span class="keywordText">当前处理人员：</span>
+          <el-input @keyup.enter.native="getByKey" v-model.trim="operatorCode" placeholder="请输入当前处理人员"></el-input> -->
         </el-col>
         <el-col :span="6" class="search-btn">
           <el-button class="btn query" type="primary" @click="getByKey">查询</el-button>
@@ -71,7 +69,7 @@
         @row-click="selectRow">
         <el-table-column type="selection" width="55">
         </el-table-column>
-        <el-table-column type="index" label="序号" align='center' width="50">
+        <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column prop="emerTypeTxt" label="紧急程度" width="80">
         </el-table-column>
@@ -79,17 +77,17 @@
         </el-table-column>
         <el-table-column prop="applySubNo" label="进件编号" min-width="200">
         </el-table-column>
-        <el-table-column prop="custName" label="客户名称" min-width="120">
+        <el-table-column prop="custName" label="客户名称" width="120">
         </el-table-column>
         <el-table-column prop="certCode" label="证件号码" min-width="200">
         </el-table-column>
-        <el-table-column prop="proName" label="产品名称" min-width="120">
+        <el-table-column prop="proName" label="产品名称" width="120">
         </el-table-column>
-        <el-table-column prop="appOrgCode" label="进件机构" min-width="100">
+        <el-table-column prop="appOrgCode" label="进件机构" width="100">
         </el-table-column>
-        <el-table-column prop="taskNodeNameTxt" label="任务节点" min-width="120">
+        <el-table-column prop="taskNodeNameTxt" label="任务节点" width="120">
         </el-table-column>
-        <el-table-column prop="operatorCode" label="当前处理人员" min-width="100">
+        <el-table-column prop="operatorCode" label="当前处理人员" width="140">
         </el-table-column>
       </el-table>
       <!-- 页码 -->
@@ -115,6 +113,8 @@
         <el-table-column prop="operatorCode" label="处理人" show-overflow-tooltip width="100">
         </el-table-column>
         <el-table-column prop="completeTime" label="处理时间" show-overflow-tooltip width="150">
+        </el-table-column>
+        <el-table-column prop="efficiencyTime" label="本环节耗时(分)" width="110">
         </el-table-column>
         <el-table-column prop="approvalOpinionTxt" label="处理结论" width="100">
         </el-table-column>
@@ -224,7 +224,7 @@
           taskIds: []
         }, // 编辑、查看、授权某一条数据前，根据 id 查询其详细数据
         currentPage: 1, // 默认显示的当前页
-        pageSizesArr: [10, 20,50], // 每页显示的数据数
+        pageSizesArr: [10, 20, 50], // 每页显示的数据数
         setPageSize: 10,
         defaultProps: {
           children: 'children',
@@ -234,12 +234,14 @@
         queryParam: {
           pageNum: 1,
           pageSize: 10,
+          proId: ""
         },
         custName_la: '',
         certCode: '',
         applySubNo: '',
         appOrgCode: '',
-        proId: '',
+        selectedProName: "",
+        product: '',
         taskNodeName: '',
         taskType: '',
         operatorCode: '',
@@ -269,6 +271,22 @@
     },
 
     methods: {
+      querySearch(queryString, cb) {
+        var restaurants = this.proNames;
+        var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
+        // 调用 callback 返回建议列表的数据
+        cb(results);
+      },
+      createFilter(queryString) {
+        return (restaurant) => {
+          return (restaurant.proName.toLowerCase().indexOf(queryString.toLowerCase()) != -1);
+        };
+      },
+      handleSelect(item) {
+        this.product = item.proName;
+        this.queryParam.proId = item.id;
+        this.selectedProName = item.proName;
+      },
       getUserInf() {
         // 获取路由参数，来判断是信审、复议、还是反欺诈以及各自对应的未分配、已分配和已完成三个状态
         this.queryParam.processTemplateId = 'reconsiderApp';
@@ -282,7 +300,9 @@
       getProductForUser(orgId) {
         this.post("/credit/productAll").then(res => {
           if (res.statusCode == 200) {
-            this.proNames = res.data;
+            for (let k in res.data) {
+              this.proNames.push(res.data[k])
+            }
           }
         });
       },
@@ -317,7 +337,7 @@
         this.queryParam.certCode = this.certCode;
         this.queryParam.applySubNo = this.applySubNo;
         this.queryParam.appOrgCode = this.appOrgCode;
-        this.queryParam.proId = this.proId;
+        // this.queryParam.proId = this.proId;
         this.queryParam.taskNodeName = this.taskNodeName;
         this.queryParam.taskType = this.taskType;
         this.queryParam.operatorCode = this.operatorCode;
@@ -353,6 +373,7 @@
       // 查询按钮
       getByKey() {
         this.queryParam.pageNum = 1;
+        this.product != this.selectedProName ? (this.product = this.selectedProName = this.queryParam.proId = "") : "";
         this.getProcessMonitorList(this.queryParam);
       },
 
@@ -363,7 +384,8 @@
         this.certCode = '';
         this.applySubNo = '';
         this.appOrgCode = '';
-        this.proId = '';
+        this.selectedProName = '';
+        this.product = '';
         this.taskNodeName = '';
         this.taskType = '';
         this.operatorCode = '';

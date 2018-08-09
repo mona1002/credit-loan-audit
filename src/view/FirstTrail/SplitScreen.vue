@@ -119,7 +119,6 @@
   import AudioVisualLeft from "./detailComponent/AudioVisualLeft";
   import remark from "./detailComponent/remark";
   import InternalMatch from "./InternalMatch";
-  import applicationInformation from "./detailComponent/applicationInformation";
   import borrowerInformation from "./detailComponent/borrowerInformation";
   import PhoneCredit from "./PhoneCredit";
   import CreditForm from "./detailComponent/CreditForm";
@@ -358,7 +357,6 @@
       AudioVisualLeft,
       remark,
       InternalMatch,
-      applicationInformation,
       borrowerInformation,
       PhoneCredit,
       CreditForm,

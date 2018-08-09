@@ -301,12 +301,12 @@
         },
         type: Object
       },
-      month_summaries: {
-        default: function () {
-          return [];
-        },
-        // type: Array
-      },
+      // month_summaries: {
+      //   default: function () {
+      //     return [];
+      //   },
+      //   // type: Array
+      // },
       // reportObj: {
       //   default: function () {
       //     return {

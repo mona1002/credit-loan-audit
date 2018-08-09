@@ -1,4 +1,5 @@
 <template>
+  <!-- 已整合到audiovisual中-此页面待删除 -->
   <div class="AudioVisual">
     <!-- <div class="CompareShow"> -->
     <!-- 左侧list隐藏时显示的div     在根元素下面，与left right 平级-->
@@ -59,7 +60,7 @@
         /> -->
         <img ref="Big_pic_ref" v-for="(val,key) in pngAyyrs" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng"
           @dblclick='next' />
-        <p v-show="myPdf" is="AntiPdfDiv"  ID='AntiTril' v-bind:title="pdfArrys"></p>
+        <p v-show="myPdf" is="AntiPdfDiv" ID='AntiTril' v-bind:title="pdfArrys"></p>
       </div>
     </div>
     <img src="../../../../static/images/left.png" class="icon_pre " v-show="perfBtn" ref="preBtn" @click="pre" @mouseenter='PerBtn'>
@@ -77,20 +78,20 @@
         <img src="../../../../static/images/D625BA67-2F56-42C1-9E9D-A47AE03BA028@1x.png" class="small_pic_close" @click="SmallpicClose">
       </p>
       <div class="small_pic_content">
-        <figure v-for="(val,index) in pngAyyrs" :key="index" class="small_pic_figure" v-show="SmallmyPic"> 
-          <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref"
-          />
+        <figure v-for="(val,index) in pngAyyrs" :key="index" class="small_pic_figure" v-show="SmallmyPic">
+          <div class="Small_pic">
+            <img :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref" />
+          </div>
           <p v-if="SmallmyPic">{{val.arcSubType}} </p>
         </figure>
-        <figure class="small_pic_figure" v-show="SmallmyPdf"  @dblclick="pdfClose()">
-          <div class="Small_pic"  @dblclick="pdfClose()">
-             <p is="AntiPdfDiv"  ID='AntiTrilSmall' :cvsWidth='200' :cvsHeight='200' SmallClass="SmallWrap" v-bind:title="pdfArrys"  @dblclick="pdfClose()"></p> 
-             </div>
+        <figure class="small_pic_figure" v-show="SmallmyPdf" @dblclick="pdfClose()">
+          <div class="Small_pic" @dblclick="pdfClose()">
+            <p is="AntiPdfDiv" ID='AntiTrilSmall' :cvsWidth='200' :cvsHeight='200' SmallClass="SmallWrap" v-bind:title="pdfArrys" @dblclick="pdfClose()"></p>
+          </div>
           <p> {{pdfTitle}} </p>
         </figure>
       </div>
     </div>
-    <!-- </div> -->
   </div>
 </template>
 
@@ -121,9 +122,9 @@
         pngAyyrs: [],
         myPng: false,
         myPdf: false,
-        SmallmyPdf:false,
-        SmallmyPic:false,
-        pdfTitle:'',
+        SmallmyPdf: false,
+        SmallmyPic: false,
+        pdfTitle: '',
       }
     },
     methods: {
@@ -165,11 +166,11 @@
           }
         });
       },
-      pdfClose(){
+      pdfClose() {
         console.log('ccc')
-     this.SmallPicShow = false;
-     this.showPage =  1;
-    //  this.defaultBigPicCss();
+        this.SmallPicShow = false;
+        this.showPage = 1;
+        //  this.defaultBigPicCss();
       },
       getImg(ind) {
         this.pdfArrys = [];
@@ -207,41 +208,45 @@
       },
       SmallpicClose() {
         this.SmallPicShow = false;
-        this.SmallmyPdf=false;
-        this.SmallmyPic=false;
+        this.SmallmyPdf = false;
+        this.SmallmyPic = false;
       },
       SmallpicAlert() {
         this.SmallPicShow = true;
-       if(this.myPdf){//显示pdf
-          this.SmallmyPdf=true;
-         this.SmallmyPic=false;
-         this.pdfTitle= this.pdfArrys[0].arcSubType;
-       }  else{//显示图片
-         this.SmallmyPic=true;
-         this.SmallmyPdf=false;
-       }
+        if (this.myPdf) { //显示pdf
+          this.SmallmyPdf = true;
+          this.SmallmyPic = false;
+          this.pdfTitle = this.pdfArrys[0].arcSubType;
+        } else { //显示图片
+          this.SmallmyPic = true;
+          this.SmallmyPdf = false;
+        }
       },
       pre() {
-        this.smallPicInd--;
-        this.showPage--;
-        if (this.$refs.small_pic_ref) {
-          if (this.smallPicInd < 0) {
-            this.smallPicInd = this.$refs.small_pic_ref.length - 1;
-            this.showPage = this.$refs.small_pic_ref.length;
+        if (this.pngAyyrs.length != 0) {
+          this.smallPicInd--;
+          this.showPage--;
+          if (this.$refs.small_pic_ref) {
+            if (this.smallPicInd < 0) {
+              this.smallPicInd = this.$refs.small_pic_ref.length - 1;
+              this.showPage = this.$refs.small_pic_ref.length;
+            }
           }
+          this.defaultBigPicCss();
         }
-        this.defaultBigPicCss();
       },
       next() {
-        this.smallPicInd++;
-        this.showPage++;
-        if (this.$refs.small_pic_ref) {
-          if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
-            this.smallPicInd = 0;
-            this.showPage = 1;
+        if (this.pngAyyrs.length != 0) {
+          this.smallPicInd++;
+          this.showPage++;
+          if (this.$refs.small_pic_ref) {
+            if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
+              this.smallPicInd = 0;
+              this.showPage = 1;
+            }
           }
+          this.defaultBigPicCss();
         }
-        this.defaultBigPicCss();
       },
       larger() {
         if (this.$refs.Big_pic_ref) {
@@ -470,7 +475,7 @@
   .BtnIcons {
     right: calc( 50% - 303px);
     width: 270px;
-   
+
   }
 
   .icon_pre {
@@ -488,7 +493,6 @@
   /* 左侧折叠面板 */
 
   /* 折叠面板上面的四个 th 表头 */
-
 
   .AudioVisual .list_title span:nth-of-type(1),
   .AudioVisual .list_title_div p span:nth-of-type(1) {
@@ -512,6 +516,5 @@
   }
 
   /* ------------------------------- */
-
 
 </style>

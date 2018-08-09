@@ -80,8 +80,9 @@
       </p>
       <div class="small_pic_content">
         <figure v-for="(val,index) in pngAyyrs" :key="index" class="small_pic_figure" v-show="SmallmyPic">
-          <img class="Small_pic" :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref"
-          />
+          <div class="Small_pic">
+            <img :src="imgBaseUrl+val.imagePath" @click="ChangeCss(index)" @dblclick="smallPic($event,index)" ref="small_pic_ref" />
+          </div>
           <p v-if="SmallmyPic">{{val.arcSubType}} </p>
         </figure>
         <figure class="small_pic_figure" v-show="SmallmyPdf" @dblclick="pdfClose()">
@@ -225,26 +226,30 @@
         }
       },
       pre() {
-        this.smallPicInd--;
-        this.showPage--;
-        if (this.$refs.small_pic_ref) {
-          if (this.smallPicInd < 0) {
-            this.smallPicInd = this.$refs.small_pic_ref.length - 1;
-            this.showPage = this.$refs.small_pic_ref.length;
+        if (this.pngAyyrs.length != 0) {
+          this.smallPicInd--;
+          this.showPage--;
+          if (this.$refs.small_pic_ref) {
+            if (this.smallPicInd < 0) {
+              this.smallPicInd = this.$refs.small_pic_ref.length - 1;
+              this.showPage = this.$refs.small_pic_ref.length;
+            }
           }
+          this.defaultBigPicCss();
         }
-        this.defaultBigPicCss();
       },
       next() {
-        this.smallPicInd++;
-        this.showPage++;
-        if (this.$refs.small_pic_ref) {
-          if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
-            this.smallPicInd = 0;
-            this.showPage = 1;
+        if (this.pngAyyrs.length != 0) {
+          this.smallPicInd++;
+          this.showPage++;
+          if (this.$refs.small_pic_ref) {
+            if (this.smallPicInd >= this.$refs.small_pic_ref.length) {
+              this.smallPicInd = 0;
+              this.showPage = 1;
+            }
           }
+          this.defaultBigPicCss();
         }
-        this.defaultBigPicCss();
       },
       larger() {
         if (this.$refs.Big_pic_ref) {

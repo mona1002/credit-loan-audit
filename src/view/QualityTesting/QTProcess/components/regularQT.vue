@@ -491,6 +491,7 @@
                 <th width='130px'>电话录音 </th>
                 <th width='160px'>接听人是否借款人本人 </th>
                 <th width='200px'>接听说明 </th>
+                <!-- <th width='200px'>初审结论 </th> -->
                 <th width='180px'>质检结果</th>
                 <th>备注 </th>
               </tr>
@@ -504,6 +505,8 @@
                 <td> {{insTelCustInfo.isSelfTxt}}</td>
                 <!-- 接听说明 -->
                 <td> {{insTelCustInfo.iisselftxt}}</td>
+                <!-- 初审结论 -->
+                <!-- <td> {{insTelCustInfo.iisselftxt}}</td>                 -->
                 <!-- 质检结果 -->
                 <td>
                   <b class="required_Red"> * </b>
@@ -531,6 +534,8 @@
             <!-- insTelVerifyList -->
             <el-table :data="TelData(this.ind)" border style="width: 100%">
               <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
+             <!-- <el-table-column prop="telNum" label="姓名" align="center" width="100">
+              </el-table-column> -->
               <el-table-column prop="telNum" label="电话号码" align="center" width="160">
               </el-table-column>
               <el-table-column label="电话录音" align="center" width="100">

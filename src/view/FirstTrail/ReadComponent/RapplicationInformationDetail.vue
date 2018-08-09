@@ -18,6 +18,10 @@
                 <label class="label_width_166">借款人类型：</label>
                 <span>{{datas.borrTypeTxt}}</span>
               </li>
+              <li>
+                <label class="label_width_166">有无授权机构：</label>
+                <span>{{datas.authOrgFlagTxt}}</span>
+              </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
@@ -275,7 +279,7 @@
                 <span>{{accepCusBasicInfo.comeYear}}</span>
               </li>
             </div>
-            <div class=" CreditForm_div_border clearFix">
+            <!-- <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">银行开户名称：</label>
                 <span>{{accepCusBasicInfo.bankName}}</span>
@@ -288,7 +292,7 @@
                 <label class="label_width_166">常用储蓄卡卡号：</label>
                 <span>{{accepCusBasicInfo.accountCode}}</span>
               </li>
-            </div>
+            </div> -->
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">网查征信用户名：</label>
@@ -823,11 +827,9 @@
           if (res.statusCode == 200) {
 
             this.datas = res.data;
-            /*console.log(res);*/
             /*房产信息*/
             this.accepCusEstates = res.data.accepCusEstates;
             for (var i = 0; i < this.accepCusEstates.length; i++) {
-              //console.log(this.accepCusEstates[i].monthlyPay);
               if (this.accepCusEstates[i].mortgageStatus == '0') {
                 this.accepCusEstates[i].mortgageStatus = '已抵押'
               } else if (this.accepCusEstates[i].mortgageStatus == '1') {
@@ -888,7 +890,6 @@
                 this.accepCusEstates[i].coveredArea = this.formatNumber(this.accepCusEstates[i].coveredArea, 2, 0).replace(
                   /,/g, '');
               };
-              //console.log(this.accepCusEstates[i].monthlyPay);
             };
 
             /*车辆信息*/
@@ -1131,7 +1132,6 @@
               custName: this.datas.accepCusBasicInfo.custName
 
             };
-            /*console.log(this.datas);*/
             localStorage.setItem("applicationInformationDetail", JSON.stringify(query));
             /*将房产信息保存到本地*/
             if (res.data.accepCusEstates != '') {
@@ -1170,9 +1170,7 @@
       },
       //保留两位小数 整数千分位
       formatNumber(num, cent, isThousand) {
-        //console.log(num);
         /*if(num == null){
-        	console.log(num);
         };*/
         //if(num != null || num != ''){
         num = num.toString().replace(/\$|\,/g, '');
@@ -1197,15 +1195,12 @@
           num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
 
         if (cent > 0) {
-          //console.log(cent);
-          //console.log(((sign)?'':'-') + num + '.' + cents);
           if (sign == true) {
             return (((sign) ? '' : '-') + num + '.' + cents);
           } else if (sign == false) {
             return '0.00'
           }
         } else {
-          //console.log(((sign)?'':'-') + num);
           return (((sign) ? '' : '-') + num);
         }
         //};

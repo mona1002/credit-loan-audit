@@ -383,6 +383,8 @@
           this.routeParams = '?' + this.taskNodeParams //---------------------------做判断-----
         } else if (route.path == '/timedTask') { // 定时任务
           this.nodeName = "自动通知查询";
+        }else if (route.path == '/DirectSeller') { // 定时任务
+          this.nodeName = "直销人员查询";
         }
         this.RoutePath = route.path;
         this.$store.dispatch('addVisitedViews', {

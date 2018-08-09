@@ -160,7 +160,7 @@
       Rsearch() {
         // this.params.pageNum = this.currentPage = 1;
         if (this.params.applySubno != '' || this.params.custName != '' || this.params.certCode != '' || this.params.mobile !=
-          '') {
+          '' ) {
           this.inquire(this.params);
         } else {
           this.$message.error('请输入查询条件')

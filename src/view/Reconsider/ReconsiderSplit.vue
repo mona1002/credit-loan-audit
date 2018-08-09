@@ -32,7 +32,8 @@
             </div>
           </div>
           <div class="tab2_Content">
-            <AnitAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AnitAudioVisual>
+            <!-- <AnitAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AnitAudioVisual> -->
+            <AudioVisual v-if=" this.tabContent2==0"></AudioVisual>
             <cremark v-if=" this.tabContent2==1"></cremark>
             <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
@@ -51,7 +52,8 @@
   </div>
 </template>
 <script>
-  import AnitAudioVisual from '../AntiFraud/components/AnitAudioVisual.vue'; //工作台--》 av
+  // import AnitAudioVisual from '../AntiFraud/components/AnitAudioVisual.vue'; //工作台--》 av
+  import AudioVisual from '../FirstTrail/detailComponent/AudioVisual.vue'; //工作台--》 av
   import cremark from '../FirstTrail/checkComponent/remarkDetail.vue' //备注信息
   // import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配查看 --》 aV
   import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息  
@@ -132,12 +134,12 @@
           }
         });
       },
-      compBtnS() {
-        this.CompareAlert = true;
-      },
-      closeCompareBtn() {
-        this.CompareAlert = false;
-      },
+      // compBtnS() {
+      //   this.CompareAlert = true;
+      // },
+      // closeCompareBtn() {
+      //   this.CompareAlert = false;
+      // },
       leftMovingBtn() {
         if (parseFloat(this.$refs.right_tab_ul.style.left) >= 0) {
           this.$refs.right_tab_ul.style.left = "0"
@@ -162,7 +164,8 @@
       this.mountedInf();
     },
     components: {
-      AnitAudioVisual,
+      // AnitAudioVisual,
+      AudioVisual,
       cremark,
       capplicationInformationDetail,
       AborrowerInformationDetail,

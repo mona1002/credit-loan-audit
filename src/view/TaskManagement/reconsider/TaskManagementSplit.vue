@@ -1,44 +1,46 @@
 <template>
   <!-- 任务管理分屏 -->
   <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
-      <p class="PerDtl">
-        <span> 借款人：{{custName}}</span>
-        <span> 进件编号：{{customInf.applyMainNo}}</span>
-        <span> 证件号码：{{tastwaitingPass.certCode}}</span>
-        <span> 进件机构：{{customInf.appOrgName}}</span>
-        <span> 门店成立时间:{{customInf.appOrgRegisterDate}}</span>
-        <span> 业务员入职时间： {{customInf.salPerEmployDate}}</span>
-        <span>{{customInf.adminIntroduce}}</span>
-      </p>
-      <div class="SplitScreen_wrap content_not_split">
-        <div class="right" ref="rRight">
-          <div class="Right_tab_title_div">
-            <span class="pre_next_btn_wrap">
-              <img src="../../../../static/images/Shape@1x.png">
-            </span>
-            <span class="pre_next_btn_wrap" style="color:red;">
-              <img src="../../../../static/images/Shaperight@1x.png">
-            </span>
-            <div class="Right_tab_ul_wrap">
-              <ul ref="right_tab_ul" style="left:0;right:0;">
-                <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="tab($event,index,val)" :class="{tab2Act:tab2Index==index}">
-                  {{val}}</li>
-              </ul>
-            </div>
-          </div>
-          <div class="tab2_Content">
-            <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==0"></capplicationInformationDetail>
-            <AnitAudioVisual v-if=" this.tabContent2==1"></AnitAudioVisual>
-            <creditInvestigation v-if=" this.tabContent2==2" :applyId='tastwaitingPass.applyId'></creditInvestigation>
-            <processTrajectory v-if=" this.tabContent2==3"></processTrajectory>
+    <p class="PerDtl">
+      <span> 借款人：{{custName}}</span>
+      <span> 进件编号：{{customInf.applyMainNo}}</span>
+      <span> 证件号码：{{tastwaitingPass.certCode}}</span>
+      <span> 进件机构：{{customInf.appOrgName}}</span>
+      <span> 门店成立时间:{{customInf.appOrgRegisterDate}}</span>
+      <span> 业务员入职时间： {{customInf.salPerEmployDate}}</span>
+      <span>{{customInf.adminIntroduce}}</span>
+    </p>
+    <div class="SplitScreen_wrap content_not_split">
+      <div class="right" ref="rRight">
+        <div class="Right_tab_title_div">
+          <span class="pre_next_btn_wrap">
+            <img src="../../../../static/images/Shape@1x.png">
+          </span>
+          <span class="pre_next_btn_wrap" style="color:red;">
+            <img src="../../../../static/images/Shaperight@1x.png">
+          </span>
+          <div class="Right_tab_ul_wrap">
+            <ul ref="right_tab_ul" style="left:0;right:0;">
+              <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="tab($event,index,val)" :class="{tab2Act:tab2Index==index}">
+                {{val}}</li>
+            </ul>
           </div>
         </div>
+        <div class="tab2_Content">
+          <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==0"></capplicationInformationDetail>
+          <!-- <AnitAudioVisual v-if=" this.tabContent2==1"></AnitAudioVisual> -->
+          <AudioVisual v-if=" this.tabContent2==1"></AudioVisual>
+          <creditInvestigation v-if=" this.tabContent2==2" :applyId='tastwaitingPass.applyId'></creditInvestigation>
+          <processTrajectory v-if=" this.tabContent2==3"></processTrajectory>
+        </div>
       </div>
+    </div>
   </div>
 </template>
 <script>
   import capplicationInformationDetail from "../../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息
-  import AnitAudioVisual from '../../AntiFraud/components/AnitAudioVisual.vue'; //影响列表 --工作台--》 av-反欺诈分屏
+  import AudioVisual from '../../FirstTrail/detailComponent/AudioVisual.vue'; //影响列表 --工作台--》 av-反欺诈分屏
+  // import AnitAudioVisual from '../../AntiFraud/components/AnitAudioVisual.vue'; //影响列表 --工作台--》 av-反欺诈分屏
   import creditInvestigation from "../../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信
   import processTrajectory from '../../FirstTrail/checkComponent/processTrajectory.vue' //流程轨迹
   export default {
@@ -76,8 +78,8 @@
             this.customInf = res.data;
           } else {
             this.$message.error(res.msg);
-              this.del('信审任务管理-详情');
-              window.history.go(-1);
+            this.del('信审任务管理-详情');
+            window.history.go(-1);
           }
         });
       },
@@ -92,7 +94,8 @@
     },
     components: {
       capplicationInformationDetail,
-      AnitAudioVisual,
+      // AnitAudioVisual,
+      AudioVisual,
       creditInvestigation,
       processTrajectory
     }

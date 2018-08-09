@@ -17,10 +17,14 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称：</span>
-          <el-select v-model="proCode" placeholder="请选择">
-            <el-option v-for="item in productNames" :key="item.id" :label="item.proName" :value="item.proCode">
-            </el-option>
-          </el-select>
+          <el-autocomplete popper-class="my-autocomplete" v-model="proCode" :fetch-suggestions="querySearch" placeholder="请输入内容" @select="handleSelect">
+            <i class="el-icon-edit el-input__icon" slot="suffix">
+            </i>
+            <template slot-scope="{ item }">
+              <span style="float: left; width:66px">{{ item.proName }}</span>
+              <span style="float: left;color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.proCode }}</span>
+            </template>
+          </el-autocomplete>
         </el-col>
       </el-row>
       <el-row class="row row2" type="flex">
@@ -118,6 +122,7 @@
         certCode: '', ////证件号码-查询
         proCode: '', //产品code-查询
         emerType: '', //紧急程度-查询
+         selectedProName: "",
         /*appDate_ge:'',//申请日期[大于等于]-查询
         appDate_le:'',//申请日期[小于等于]-查询
         completeTime_ge:'',//本环节处理时间[大于等于]-查询
@@ -177,26 +182,32 @@
       this.request(this.queryParam);
     },
     methods: {
+      querySearch(queryString, cb) {
+        var restaurants = this.productNames;
+        var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
+        // 调用 callback 返回建议列表的数据
+        cb(results);
+      },
+      createFilter(queryString) {
+        return (restaurant) => {
+          return (restaurant.proName.toLowerCase().indexOf(queryString.toLowerCase()) != -1);
+        };
+      },
+      handleSelect(item) {
+        this.proCode =this.selectedProName= item.proName;
+        this.queryParam.proCode = item.id;
+      },
       product() {
         this.post("/credit/productAll").then(res => {
           if (res.statusCode == 200) {
-            this.productNames = res.data;
+                 for (let k in res.data) {
+              this.productNames.push(res.data[k])
+            }
           }
         });
-        /*this.post(baseU.path+'/remote/product/getProductForUser',{
-		           data:{
-		              orgId:this.orgId,
-		              validFlag:'1'
-		           }
-		          }).then(res => {
-		          	if(res.statusCode == 200){
-						this.productNames = res.data;
-					}else {
-			            this.$message.error(res.msg);
-			          }
-	            });*/
       },
       request(param) {
+        this.proCode != this.selectedProName ? (this.proCode = this.selectedProName = this.queryParam.proCode = "") : "";
         this.post('/workFlowTaskQuery/getTaskHistoryList',
           param
         ).then(res => {
@@ -228,7 +239,8 @@
         this.applySubNo = '';
         this.custName_la = '';
         this.certCode = '';
-        this.proCode = ''; //产品code-查询
+              this.selectedProName = '';
+ this.proCode = ''; //产品code-查询
         this.emerType = ''; //紧急程度-查询
         /*this.appDate_ge = '';//申请日期[大于等于]-查询
         this.appDate_le = '';//申请日期[小于等于]-查询
@@ -318,7 +330,7 @@
         this.queryParam.applySubNo = this.applySubNo;
         this.queryParam.custName_la = this.custName_la;
         this.queryParam.certCode = this.certCode;
-        this.queryParam.proCode = this.proCode; //产品code-查询
+        // this.queryParam.proCode = this.proCode; //产品code-查询
         this.queryParam.emerType = this.emerType; //紧急程度-查询
         //this.queryParam.appDate_ge = appgey+'-'+appgem+'-'+appged;//申请日期[大于等于]-查询
         //this.queryParam.appDate_le = appley+'-'+applem+'-'+appled;//申请日期[小于等于]-查询

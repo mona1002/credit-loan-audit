@@ -117,9 +117,11 @@
 .checkedInf .li_half_two_rows {
   width: 50%;
 }
+
 .checkedInf .li_four_3rows {
   width: 75%;
 }
+
 .checkedInf label {
   float: left;
   text-align: right;
@@ -894,28 +896,30 @@ body .pre_wrap {
 
 /* 缩略图 各个 img 图片 */
 
-.AudioVisual .Small_pic,
+/* .AudioVisual .Small_pic,
 .AudioVisualLeft .Small_pic {
   height: calc( 100% - 60px);
   border-radius: 5px;
   border: 2px solid #bfcbd9;
   box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
   overflow: hidden;
+} */
+.AudioVisual .Small_pic,
+.AudioVisualLeft .Small_pic {
+  height: calc( 100% - 60px);
+  overflow: hidden;
 }
 
-/* .AudioVisualLeft .Small_pic {
-  height: calc( 100% - 60px);
-}
 .AudioVisual .Small_pic img,
-.AudioVisualLeft .Small_pic img{
-  width:auto;
-  height:auto;
+.AudioVisualLeft .Small_pic img {
+  width: auto;
+  height: auto;
   border-radius: 5px;
   border: 2px solid #bfcbd9;
   box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
-  max-width:100%;
-  max-height:100%;
-} */
+  max-width: 100%;
+  max-height: 100%;
+}
 
 .Audio_thumb_img {
   display: inline-block;

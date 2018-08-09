@@ -122,10 +122,6 @@
           案件编号：
         </div>
         <div class="newLi">
-          <!-- <el-select v-model="caseNum">
-            <el-option v-for="item in caseOptions" :label="item.caseNum" :value="item.caseNum">
-            </el-option>
-          </el-select> -->
           <el-autocomplete v-model="caseNum" :fetch-suggestions="querySearchAsync" placeholder="请输入关键词" @select="handleSelect"></el-autocomplete>
         </div>
       </li>
@@ -1005,10 +1001,6 @@
             }
             // return;
           }
-
-
-
-
           // 取出主原因name
           if (this.mainReason) {
             for (var i = 0; i < this.mainReasons.length; i++) {
@@ -1016,10 +1008,7 @@
                 this.mainReasonName = this.mainReasons[i].reasonName;
               }
             }
-          }
-
-
-          // 取出子原因name
+          } // 取出子原因name
           if (this.secondReason) {
             for (let i = 0; i < this.secondReasons.length; i++) {
               if (this.secondReasons[i].id == this.secondReason) {
@@ -1231,8 +1220,6 @@
           //   this.$router.push('/AntiFraud34');
           // });
         }
-
-
       },
       coverFn(flag) {
         // 页面点击按钮出现 的 对应 弹窗
@@ -1448,8 +1435,6 @@
               });
             }
           })
-
-
       },
       // 风险项更改
       selectChangeRisk: function (val) {
@@ -1613,12 +1598,12 @@
         this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
           applyId: this.applyId
         }).then(res => {
-            this.$router.push({
-              name: 'PneCtrl',
-              params: {
-                newOne: true,
-              }
-            });
+          this.$router.push({
+            name: 'PneCtrl',
+            params: {
+              newOne: true,
+            }
+          });
         });
       },
       //社保/公积金
@@ -1825,7 +1810,6 @@
     overflow: hidden;
   }
 
-
   /* 一列 */
 
   .approval-colun .item-column1 {
@@ -1835,10 +1819,6 @@
     margin-bottom: 10px;
   }
 
-
-
-
-
   /* 两列 */
 
   .approval-colun .item-column2 {
@@ -1846,10 +1826,6 @@
     float: left;
     margin: 0;
   }
-
-
-
-
 
   /* 三列 */
 
@@ -1871,10 +1847,6 @@
     margin-right: 0px;
   }
 
-
-
-
-
   /* 3列 空位 */
 
   .approval-colun .item-column3-null {
@@ -1889,10 +1861,6 @@
     height: 30px;
     line-height: 30px;
   }
-
-
-
-
 
   /* input hover 样式 */
 
@@ -1909,10 +1877,6 @@
     float: left;
   }
 
-
-
-
-
   /* 按钮集合控件 */
 
   .approval-colun .btn-div {
@@ -1920,112 +1884,6 @@
     width: 80%;
     float: left;
   }
-
-
-
-
-
-  /*挂起*/
-
-  .approval-colun .el-icon-check-hang {
-    background: url(../../../static/images/guaqi.png);
-    width: 30px;
-    height: 30px;
-    background-size: 30px;
-    padding: 0;
-    margin: 0;
-    vertical-align: middle;
-    display: inline-block;
-  }
-
-
-
-
-
-  /*回退*/
-
-  .approval-colun .el-icon-check-back {
-    background: url(../../../static/images/back.png);
-    width: 30px;
-    height: 30px;
-    background-size: 30px;
-    padding: 0;
-    margin: 0;
-    vertical-align: middle;
-    display: inline-block;
-  }
-
-
-
-
-
-  /*拒绝*/
-
-  .approval-colun .el-icon-check-reject {
-    background: url(../../../static/images/jujue.png);
-    width: 30px;
-    height: 30px;
-    background-size: 30px;
-    padding: 0;
-    margin: 0;
-    vertical-align: middle;
-    display: inline-block;
-  }
-
-
-
-
-
-  /*放弃*/
-
-  .approval-colun .el-icon-check-giveup {
-    background: url(../../../static/images/fangqi.png);
-    width: 30px;
-    height: 30px;
-    background-size: 30px;
-    padding: 0;
-    margin: 0;
-    vertical-align: middle;
-    display: inline-block;
-  }
-
-
-
-
-
-  /*审批*/
-
-  .approval-colun .el-icon-check-appro {
-    background: url(../../../static/images/appro.png);
-    width: 30px;
-    height: 30px;
-    background-size: 30px;
-    padding: 0;
-    margin: 0;
-    vertical-align: middle;
-    display: inline-block;
-  }
-
-
-
-
-
-  /*流程轨迹*/
-
-  .approval-colun .el-icon-check-lcgj {
-    background: url(../../../static/images/liucheng.png);
-    width: 30px;
-    height: 30px;
-    background-size: 30px;
-    padding: 0;
-    margin: 0;
-    vertical-align: middle;
-    display: inline-block;
-  }
-
-
-
-
 
   /* 反欺诈 审批结论 - btn*/
 
@@ -2037,178 +1895,15 @@
     padding-top: 0px;
   }
 
-
-
-
-
-  /* 反欺诈 审批结论  - - 弹窗*/
-
-  .approval-colun .el-dialog {
-    width: 600px;
-    margin-top: 30vh;
-  }
-
-  .approval-colun .el-dialog__body {
-    padding: 0;
-  }
-
-  .approval-colun .back-form {
-    min-width: 600px;
-    min-height: 250px;
-    background: #fff;
-    margin: 0 auto;
-    /*margin-top: 300px;*/
-    border-radius: 2px;
-    overflow: hidden;
-    padding-bottom: 10px;
-  }
-
-
-
-
-
-  /* form-title */
-
-  .approval-colun .form-title {
-    width: 100%;
-    height: 35px;
-    font-size: 18px;
-    /*font-weight: bold;*/
-    /*background: #ededed;*/
-    background: #eef0f9;
-    line-height: 35px;
-    padding-left: 10px;
-    display: block;
-    margin-bottom: 10px;
-    overflow: hidden;
-    font-size: 16px;
-  }
-
-  .approval-colun .form-title2 {
-    width: 100%;
-    height: 35px;
-    font-size: 18px;
-    /*font-weight: bold;*/
-    /*background: #ededed;*/
-    background: #eef0f9;
-    line-height: 35px;
-    padding-left: 10px;
-    display: block;
-    margin-bottom: 10px;
-    overflow: hidden;
-    font-size: 16px;
-  }
-
-  .approval-colun .back-form .back-form-li {
-    /*border-top: 0.5px solid #ededed;*/
-    margin: 10px 0px;
-    line-height: 35px;
-    height: 35px;
-    padding: 2px 10px 0 10px;
-  }
-
-
-
-
-
-  /* textarea */
-
-  .approval-colun .back-form .back-form-li .el-textarea {
-    width: 80%;
-  }
-
-
-
-
-
-  /* 弹窗页面 关闭按钮*/
-
-  .approval-colun .el-tag {
-    width: 0;
-    height: 0;
-    color: none;
-    border: none;
-    /*position: absolute;*/
-    right: 20px;
-    top: 0;
-  }
-
-  .approval-colun .el-tag .el-icon-close {
-    right: 0px;
-    top: 5px;
-  }
-
-
-
-
-
-  /* 审批 表单 */
-
-  .approval-colun .appro-form {
-    /*width: 80%;*/
-    height: 600px;
-    min-width: 685px;
-    margin-top: 100px !important;
-    height: auto;
-    margin: 0 auto;
-    padding: 10px;
-    overflow: hidden;
-  }
-
-
-
-
-
-  /*.approval-colun .appro-form .el-form-item__label {
-  width: 220px;
-}*/
-
-  .approval-colun .appro-form .back-form-li .el-textarea {
-    width: 60%;
-  }
-
-
-
-
-
-  /* 流程轨迹 */
-
-  .approval-colun .lcgj-div {
-    min-width: 760px;
-    width: auto;
-    height: 400px;
-    margin: 0 auto;
-    overflow: hidden;
-    background: #fff;
-    border-radius: 5px;
-    height: auto;
-  }
-
-  /* .approval-colun .el-input {
-    width: 100%;
-    height: 35px;
-    line-height: 35px;
-  } */
-
-  /* .approval-colun .el-select {
-    height: 100%;
-    line-height: 100%;
-  } */
-
   /* 反欺诈 -- 审批结论 */
 
   .approval-colun .form-ul {
     padding-left: 30px;
   }
 
-
-
-
-
   /* 默认显示样式 */
 
   .approval-colun .form-ul .el-select {
-    /*width: 300px;*/
     width: calc( 100% - 130px);
   }
 
@@ -2229,62 +1924,15 @@
     width: 100%;
   }
 
-
-
-
-
-  /* 审批 label*/
-
-  .approval-colun .appro-form .back-form-edit-li .el-form-item__label {
-    width: 120px;
-  }
-
-
-
-
-
   /* 结论  同意 */
-
-  .approval-colun .appro-form .radio-li .el-form-item__label {
-    width: 120px;
-  }
 
   .approval-colun .el-form-item__label {
     width: 120px;
   }
 
-
-
-
-
-  /* 两行文字 样式 */
-
-  .approval-colun .back-form .line-height2 .el-form-item__label {
-    line-height: 20px;
-  }
-
-
-
-
-
-  /* 回退样式 */
-
-  /* label 文字样式 */
-
-  .approval-colun .huitui-class .el-form-item__label {
-    width: 85px;
-  }
-
-  .approval-colun .jujue-class {}
-
-
-
-
-
   /* 详细 信息按钮*/
 
   .approval-colun .btn-detail {
-    /*border: none;*/
     float: left;
     margin-top: 20px;
     margin-left: 10px;
@@ -2294,28 +1942,6 @@
     margin-top: 0px;
   }
 
-
-
-
-
-  /* 审批结论 详细信息 */
-
-  .approval-colun .spjl-div {
-    /*width: 80%;*/
-    min-width: 500px;
-    height: 400px;
-    margin: 0 auto;
-    /*margin-top: 250px;*/
-    overflow: hidden;
-    padding: 10px;
-    background: #fff;
-    border-radius: 5px;
-  }
-
-
-
-
-
   /* 分页 */
 
   .approval-colun .tool-bar {
@@ -2324,31 +1950,20 @@
     padding: 10px 0 0 10px;
   }
 
-
-
-
-
   /* 隐藏分页 */
 
   .approval-colun .el-pagination__jump {
     display: none;
   }
 
-
-
-
-
   /*多选下拉*/
 
-  .approval-colun .form-ul .muti-select {
+  /* .approval-colun .form-ul .muti-select {
     display: flex;
     position: relative;
-    /*width: 400px;*/
     height: normal;
     line-height: normal;
     width: normal;
-    /*height: 100px;*/
-    /*border: 1px solid;*/
     line-height: 100%;
   }
 
@@ -2370,7 +1985,6 @@
     width: 100%;
     height: 100%;
     white-space: nowrap;
-    /* display: inline-grid; */
     display: inline-block;
   }
 
@@ -2380,17 +1994,18 @@
     margin: 3px 0 3px 6px;
     background-color: #f0f2f5;
     right: 0;
-    /*position: relative;*/
     height: auto;
-    width: min-content;
-    width: 640px;
-  }
+    width: min-content; */
 
-  .approval-colun .muti-select .el-tag:nth-child(2) {
+  /* width: 640px; */
+
+  /* } */
+
+  /* .approval-colun .muti-select .el-tag:nth-child(2) {
     width: 30px;
-  }
+  } */
 
-  .approval-colun .muti-select>.el-input {
+  /* .approval-colun .muti-select>.el-input {
     display: block;
   }
 
@@ -2405,51 +2020,12 @@
 
   .approval-colun .muti-select .el-input--suffix .el-input__inner {
     height: auto;
-    /*height: 100px;*/
     min-height: 30px;
-  }
+  } */
 
   .approval-colun .risk-select .el-input--suffix .el-input__inner {
     height: 60px;
   }
-
-
-
-
-
-  /*大数据风控*/
-
-  .approval-colun .el-icon-check-big-data {
-    background: url(../../../static/images/bigdata.png);
-    width: 30px;
-    height: 30px;
-    background-size: 30px;
-    padding: 0;
-    margin: 0;
-    vertical-align: middle;
-    display: inline-block;
-  }
-
-
-
-
-
-  /*社保公积金*/
-
-  .approval-colun .el-icon-check-social {
-    background: url(../../../static/images/social.png);
-    width: 30px;
-    height: 30px;
-    background-size: 30px;
-    padding: 0;
-    margin: 0;
-    vertical-align: middle;
-    display: inline-block;
-  }
-
-
-
-
 
   /*修改信息*/
 
@@ -2462,54 +2038,6 @@
     margin: 0;
     vertical-align: middle;
     display: inline-block;
-  }
-
-  .approval-colun .bigDataLog .el-dialog__body {
-    padding: 30px 20px;
-  }
-
-  /* 必填 */
-
-  .xing {
-    color: #ff7676;
-    font-size: 14px;
-    position: relative;
-    top: 2px;
-    right: 2px;
-  }
-
-  .approval-colun .addLogP {
-    position: relative;
-  }
-
-  .approval-colun .addLogP .addWarimg {
-    position: absolute;
-    left: 85px;
-    top: -20px;
-    color: #ff7676;
-    font-size: 12px;
-  }
-
-  .approval-colun .addLogP label {
-    width: 80px;
-    text-align: right;
-    display: inline-block;
-  }
-
-  .approval-colun .addLogP div {
-    width: 280px;
-    display: inline-block;
-  }
-
-  .approval-colun .addLogP2 {
-    margin-top: 15px;
-  }
-
-  .approval-colun .addLogP2 label {
-    float: left;
-    height: 114px;
-    line-height: 114px;
-    margin-right: 5px;
   }
 
   .newLi {
