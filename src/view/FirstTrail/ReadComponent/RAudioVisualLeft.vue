@@ -593,22 +593,21 @@
 
   /* 折叠面板上面的四个 th 表头 */
 
-  .AudioVisualLeft .list_title span:nth-of-type(1),
+  /* .AudioVisualLeft .list_title span:nth-of-type(1),
   .AudioVisualLeft .list_title_div p span:nth-of-type(1) {
     width: 125px;
-    /* 省略号 */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     border-left: none;
-  }
+  } */
 
-  .AudioVisualLeft .list_title span:nth-of-type(2),
+  /* .AudioVisualLeft .list_title span:nth-of-type(2),
   .AudioVisualLeft .list_title_div p span:nth-of-type(2) {
     width: calc(100% - 125px);
     border-right: none;
     border-left: none;
-  }
+  } */
 
   .posi {
     position: absolute;
