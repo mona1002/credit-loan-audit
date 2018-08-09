@@ -127,6 +127,7 @@
         if(to.path=='/DirectSeller'){
           if(!this.Routes[2].closed){
             this. Rreset();
+            this.tableData=[];
             this.Routes[2].closed=true;
           }
         }
