@@ -176,6 +176,7 @@
         taskNodeName: '',
         taskNodeParams: '',
         processMoniParams: '',
+        Routes: [],
         right: null,
         left: null,
         tagWidth: null,
@@ -208,6 +209,7 @@
     },
     mounted() {
       this.addViewTags()
+      this.Routes = this.$router.options.routes;
     },
     methods: {
       addViewTags() {
@@ -383,7 +385,7 @@
           this.routeParams = '?' + this.taskNodeParams //---------------------------做判断-----
         } else if (route.path == '/timedTask') { // 定时任务
           this.nodeName = "自动通知查询";
-        }else if (route.path == '/DirectSeller') { // 定时任务
+        } else if (route.path == '/DirectSeller') { // 定时任务
           this.nodeName = "直销人员查询";
         }
         this.RoutePath = route.path;
@@ -424,6 +426,7 @@
         return route.path == '/MatchingInfQT' ? route.path == this.$route.path : route.StatefullPath == this.$route.fullPath;
       },
       handleClose(view, ev) {
+        view.name == '直销人员查询' ? this.Routes[2].closed = false : '';
         this.$store.dispatch('delVisitedViews', view).then((views) => {
           if (this.isActive(view)) {
             const latestView = views.slice(-1)[0]

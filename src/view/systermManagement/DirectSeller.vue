@@ -96,6 +96,7 @@
           validFlag: '',
           orgName: '',
         },
+        Routes: [],
         // orgnize: [],
         subOrg: '',
         orgCode: "",
@@ -120,6 +121,16 @@
           }
         ]
       }
+    },
+  watch: {
+     '$route'(to, from) {
+        if(to.path=='/DirectSeller'){
+          if(!this.Routes[2].closed){
+            this. Rreset();
+            this.Routes[2].closed=true;
+          }
+        }
+      },
     },
     methods: {
       getinstitution() {
@@ -216,6 +227,7 @@
     created() {
       this.orgCode = JSON.parse(localStorage.getItem('userInf')).orgCode;
       this.getinstitution();
+      this.Routes = this.$router.options.routes;
     }
   }
 
