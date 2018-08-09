@@ -5,10 +5,8 @@ import taskInWaitting from '@/view/FirstTrail/taskInWaitting' //初审审批
 import workbench from '@/view/FirstTrail/workbench'
 import SplitScreen from '@/view/FirstTrail/SplitScreen'
 import MatchingInf from '@/view/FirstTrail/MatchingInf' // 匹配查询页面
-// ----------终审-------------------------
-import FSplitScreen from '@/view/FinalTrial/FSplitScreen'
-//列表页  
-import FtaskInWaitting from '@/view/FinalTrial/FtaskInWaitting'
+import FSplitScreen from '@/view/FinalTrial/FSplitScreen'//终审详情
+import FtaskInWaitting from '@/view/FinalTrial/FtaskInWaitting'//终审列表
 // ------------反欺诈------------------
 import AntiAudit from '@/view/AntiFraud/AntiAudit.vue' //反欺诈分屏
 import AntiRules from '../view/AntiFraud/AntiRules.vue' //反欺诈规则设定
@@ -48,10 +46,7 @@ import doTheTask from '../view/TaskManagement/examineAndApprove/doTheTask.vue' /
 import historicalTask from '../view/TaskManagement/examineAndApprove/historicalTask.vue' //审批任务管理——历史任务
 import QTDoneTask from '../view/TaskManagement/QualityT/QTDoneTask.vue' //质检-已办任务
 import QTHistoryTask from '../view/TaskManagement/QualityT/QTHistoryTask.vue' //质检-历史任务
-
-//  -----------------------大数据风控+社保公积金----------------------
 import PneCtrl from '../view/SocialSeAndPneCtrl/PneCtrl.vue' //大数据
-import SocialSe from '../view/SocialSeAndPneCtrl/SocialSe.vue' //社保公积金
 //  -----------------------质检----------------------
 import MatchingInfQuery from '../view/FirstTrail/MatchingInfQuery.vue'
 import IntegratedQuery from '../view/QualityTesting/FunctionalityPages/IntegratedQuery.vue'
@@ -69,24 +64,17 @@ import ReManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/R
 import ACManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/ACManagerTaskList.vue' //质检复议流程-区域经理页面- 区域经理任务列表 + 质检复议流程-合规经理页面- 合规经理任务列表
 import ComplianceProcess from '../view/QualityTesting/QTReconsiderProcess/components/ComplianceProcess.vue' //质检复议-
 import MatchingInfQT from '../view/FirstTrail/MatchingInfQT.vue' //质检详情
-import pdf from '../view/pdf.vue'
 import RantiFraudInvestigation from '../view/FirstTrail/ReadComponent/RantiFraudInvestigation.vue' //
 import timedTask from '../view/systermManagement/timedTask.vue' //定时任务
 import DirectSeller from '../view/systermManagement/DirectSeller.vue' //直销人员查询
-import SocialSecurityReport from '../view/SocialSeAndPneCtrl/PneCtrl/SocialSecurityReport.vue'//社保报告
 
 Vue.use(Router)
 
 const routes = [{
     path: '/',
-    // component: workbench,
     component(resolve) {
       require(['../view/FirstTrail/workbench.vue'], resolve)
     },
-  },
-  {
-    path: '/SocialSecurityReport',
-    component: SocialSecurityReport
   },
   {
     path: '/timedTask',
@@ -94,7 +82,8 @@ const routes = [{
   },
   {
     path: '/DirectSeller',
-    component: DirectSeller
+    component: DirectSeller,
+    closed:true
   },
   {
     path: '/ComplianceProcess',
@@ -343,14 +332,6 @@ const routes = [{
     path: '/PneCtrl',
     component: PneCtrl,
     name:'PneCtrl'
-  },
-  {
-    path: '/SocialSe',
-    component: SocialSe
-  },
-  {
-    path: '/pdf',
-    component: pdf
   },
   {
     path: '/RantiFraudInvestigation',
