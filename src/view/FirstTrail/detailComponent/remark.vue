@@ -26,17 +26,17 @@
             highlight-current-row @current-change="handleCurrentChange" border>
             <!-- order两个参数，顺序和倒序: ascending, descending -->
             <!-- @row-click="addHeight(backColor)" :class="{active: activeName == backColor}" -->
-            <el-table-column type="index" :index='1' label="序号" min-width="50">
+            <el-table-column type="index" :index='1' label="序号" width="50">
             </el-table-column>
-            <el-table-column prop="remarkTypeTxt" label="备注类型" min-width="90">
+            <el-table-column prop="remarkTypeTxt" label="备注类型" width="90">
             </el-table-column>
-            <el-table-column prop="remarker" label="备注人" min-width="130">
+            <el-table-column prop="remarker" label="备注人" width="100">
             </el-table-column>
-            <el-table-column prop="remarkTime" label="备注时间" min-width="150" sortable>
+            <el-table-column prop="remarkTime" label="备注时间" width="150" sortable>
             </el-table-column>
-            <el-table-column prop="riskTip" label="风险提示" min-width="210">
+            <el-table-column prop="riskTip" label="风险提示" width="180">
             </el-table-column>
-            <el-table-column prop="remark" label="备注" show-overflow-tooltip min-width="580">
+            <el-table-column prop="remark" label="备注" show-overflow-tooltip min-width="90">
             </el-table-column>
           </el-table>
         </div>
@@ -44,7 +44,7 @@
     </el-collapse>
     <!-- 添加弹窗 -->
     <div class="Height_240 ">
-      <el-dialog title="请输入您要添加的备注信息" :visible.sync="dialogVisible" :modal="false ">
+      <el-dialog title="请输入您要添加的备注信息" :visible.sync="dialogVisible" width='600px' :modal="false ">
         <el-form :model="FormAdd" :rules="rules" ref="FormAdd">
           <div class="dialog_textarea ">
             <el-form-item label="备注：" label-width="50px" prop="remark">
@@ -60,7 +60,7 @@
     </div>
     <!-- 修改弹窗 -->
     <div class="Height_240 ">
-      <el-dialog title="请输入您要修改的备注信息" :visible.sync="chdialogVisible" :modal="false ">
+      <el-dialog title="请输入您要修改的备注信息" :visible.sync="chdialogVisible"  width='600px' :modal="false ">
         <el-form :model="FormEdit" :rules="rules" ref="FormEdit">
           <div class="dialog_textarea ">
             <el-form-item label="备注：" label-width="50px" prop="changeRemarks">
@@ -70,7 +70,7 @@
           </div>
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button type="primary" :loading=changeLoading @click="changeSure('FormEdit')"> {{chSure}}</el-button>
+          <el-button type="primary" :loading='changeLoading' @click="changeSure('FormEdit')"> {{chSure}}</el-button>
         </div>
       </el-dialog>
     </div>

@@ -2049,9 +2049,9 @@
     width: 100%;
   }
 
-  body .aaaaaa_bbbb {
+  /* body .aaaaaa_bbbb {
     min-width: calc( 100% - 130px);
     min-width: 100% !important;
-  }
+  } */
 
 </style>

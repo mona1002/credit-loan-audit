@@ -10,10 +10,10 @@
         <table class="table">
           <thead>
             <tr>
-              <th style="min-width:180px">进件编号</th>
+              <th style="width:160px">进件编号</th>
               <th>案件编号</th>
               <th>客户姓名</th>
-              <th style="min-width:180px">身份证号</th>
+              <th style="width:160px">身份证号</th>
               <th>申请产品</th>
               <th>进件机构</th>
               <th>销售人员</th>
@@ -471,8 +471,6 @@
     height: 35px;
     line-height: 35px;
     border: 1px solid #e6ebf5;
-    width: 11.1%;
-    min-width: 147px;
   }
 
   .table td {
@@ -480,8 +478,6 @@
     height: 30px;
     line-height: 30px;
     border: 1px solid #e6ebf5;
-    width: 11.1%;
-    min-width: 147px;
     text-align: left;
     padding-left: 10px;
   }

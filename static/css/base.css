@@ -6,7 +6,7 @@
    color: #0077ff;
  }
 
- /* 下拉框内容 */
+ /* 下拉框内容 *//* 此处影响反欺诈结论下拉框样式，所以去掉 */
 
  body .el-select-dropdown {
   min-width: 200px !important;
