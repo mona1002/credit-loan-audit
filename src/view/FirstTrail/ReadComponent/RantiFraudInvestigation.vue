@@ -1,4 +1,4 @@
-<!-- 内匹-反欺诈调查 -->
+<!-- 反欺诈调查-(内匹、质检、复议详情用)-(调查记录只能查看,无添加删除按钮) -->
 <template>
   <div class="aAntiFraudInvestigation RaAntiFraudInvestigation AlertDialogBox">
     <el-collapse v-model="activeNames" @change="handleChange">
@@ -7,6 +7,32 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">基本信息</span>
         </template>
+        <div class="height_auto">
+          <el-table :data="tableDatas" style="width: 100%" @row-dblclick="inquiry" border>
+            <el-table-column type="index" :index='1' label="序号" min-width="50">
+            </el-table-column>
+            <el-table-column prop="applySubno" label="提报时间" min-width="80">
+            </el-table-column>
+            <el-table-column prop="applySubno" label="进件编号" min-width="110">
+            </el-table-column>
+            <el-table-column prop="caseNum" label="案件编号" min-width="80">
+            </el-table-column>
+            <el-table-column prop="applyCustName" label="客户姓名" min-width="80">
+            </el-table-column>
+            <el-table-column prop="certCode" label="身份证号" min-width="80">
+            </el-table-column>
+            <el-table-column prop="proName" label="申请产品" min-width="80">
+            </el-table-column>
+            <el-table-column prop="operOrgName" label="进件机构" min-width="80">
+            </el-table-column>
+            <el-table-column prop="salePersonName" label="销售人员" min-width="80">
+            </el-table-column>
+            <el-table-column prop="applyPersonName" label="提报人" min-width="80">
+            </el-table-column>
+            <el-table-column prop="appSuborgName" label="提报组别" min-width="80">
+            </el-table-column>
+          </el-table>
+        </div>
         <table class="table">
           <thead>
             <tr>
@@ -173,6 +199,7 @@
   export default {
     data() {
       return {
+        tableDatas: [],
         query: {
           id: '',
           matchApplyId: '',
@@ -284,6 +311,7 @@
           'applyId': val //'1',
         }).then(res => {
           if (res.statusCode == 200 && res.data != null) {
+
             //基本信息
             if (res.data.fraudApplyInfo == null) {
               this.fraudApplyInfo = this.fraudApplyInfo;

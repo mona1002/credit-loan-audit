@@ -69,7 +69,7 @@ import timedTask from '../view/systermManagement/timedTask.vue' //定时任务
 import DirectSeller from '../view/systermManagement/DirectSeller.vue' //直销人员查询
 
 Vue.use(Router)
-
+// 添加路由：添加到最后面，不要改变原路由顺序，会影响其他部分页面
 const routes = [{
     path: '/',
     component(resolve) {

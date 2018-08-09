@@ -1,4 +1,4 @@
-<!-- 反欺诈调查  -->
+<!-- 反欺诈调查-(反欺诈主管、专员用)  -->
 <template>
   <div class="aAntiFraudInvestigation">
     <el-collapse v-model="activeNames">
@@ -124,16 +124,6 @@
               <span class="title_icon_span">删除</span>
             </span>
           </div>
-          <!-- <div class="remarkIcon right">
-            <span @click="add" class="rightSpans">
-              <img src="../../../../static/images/add.png" class="icon">
-              <span>添加</span>
-            </span>
-            <span @click="delet" class="rightSpans">
-              <img src="../../../../static/images/delete.png" class="icon">
-              <span>删除</span>
-            </span>
-          </div> -->
         </template>
         <div class="height_auto">
           <el-table :data="fraudTelCheckList" style="width: 100%" highlight-current-row border @current-change="handleCurrentChanges">
@@ -345,24 +335,9 @@
     },
     mounted() {
       /*获取 反欺诈申请ID*/
-      // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      // if(this.judgeFlag.flag == '03'){
-      // 	this.appinfoId=JSON.parse(localStorage.getItem('AntitaskInWaitting')).businessId;//反欺诈专员
-      // 	this.applyId=JSON.parse(localStorage.getItem('AntitaskInWaitting')).applyId;//反欺诈专员
-      // 	console.log(this.applyId);
-      // }else if (this.judgeFlag.flag == '04') {
-      //     this.appinfoId = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")).businessId; //反欺诈主管
-      //     this.applyId = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")).applyId; //反欺诈主管
-      // }
       this.appinfoId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).businessId; //反欺诈专员+主管
       this.applyId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).applyId; //反欺诈专员+主管
       this.request(this.appinfoId);
-      // //当前审核人编号 登陆人	
-      // this.fraudAuditInfo.auditCode=JSON.parse(localStorage.getItem('userInf')).userCode;
-      // //当前审核人姓名 登陆人
-      // this.fraudAuditInfo.auditName=JSON.parse(localStorage.getItem('userInf')).userName;
-      console.log(this.fraudAuditInfo.auditName + "...." + this.fraudAuditInfo.auditCode);
-      console.log(this.fraudAuditInfo)
     },
     methods: {
       /*先查询列表*/
@@ -370,6 +345,7 @@
         this.post('antiFraud/getAntiFraudSurveyInfo', {
           'appinfoId': val //'1',
         }).then(res => {
+          console.log(res)
           if (res.statusCode == 200 && 　res.data != null) {
             //基本信息
             if (res.data.fraudApplyInfo == null) {
@@ -384,7 +360,6 @@
                 this.reason = this.fraudApplyInfo.mainreaName + this.fraudApplyInfo.subreaName + this.fraudApplyInfo
                   .applyDesc;
                 var reg = /null/g;
-                //var string = 'hdksjkdjnullfhdlfjl';
                 this.reason = this.reason.replace(reg, '');
               };
             };
@@ -422,8 +397,6 @@
         this.fraudAuditInfo.auditCode = JSON.parse(localStorage.getItem('userInf')).userCode;
         //当前审核人姓名 登陆人
         this.fraudAuditInfo.auditName = JSON.parse(localStorage.getItem('userInf')).userName;
-        console.log(this.fraudAuditInfo);
-        console.log("aksdf" + this.fraudAuditInfo.auditName)
         //this.fraudTelCheckList.appinfoId=this.appinfoId;
         this.post('antiFraud/saveAntiFraudSurveyInfo', {
           "appinfoId": this.appinfoId, //'1', // 反欺诈申请id
@@ -473,24 +446,15 @@
       },
       delet: function (event) {
         event.stopPropagation();
-        console.log(this.currentRow);
-        /*for(var i=0;i<this.fraudTelCheckList.length;i++){
-        	if(this.fraudTelCheckList[i]==this.currentRow && this.fraudTelCheckList[i].isInitFlag == '1'){
-        		this.fraudTelCheckList.splice(i,1);
-        	}
-        }*/
         for (var i = 0; i < this.fraudTelCheckList.length; i++) {
           if (this.fraudTelCheckList[i] == this.currentRow && this.fraudTelCheckList[i].isInitFlag == '0') {
             return
-            //console.log('jjjjj');
           } else if (this.fraudTelCheckList[i] == this.currentRow) {
-            //console.log(9999);
             this.fraudTelCheckList.splice(i, 1);
           }
         }
       },
       regPhone(phone) {
-        // console.log(phone.phoneNum);
         // var isValidPhone = /^1[345789]\d{9}$/;
         //   var regLandlinePhone = /^(0[0-9]{2,3}-)?([0-9]{7,8})$/;
         if (!this.isValidPhone.test(phone.phoneNum) && !this.regLandlinePhone.test(phone.phoneNum)) {
@@ -501,7 +465,6 @@
         this.dialogVisible = false;
       },
       handlDetail(index, row) {
-        // console.log(index, row);
         // this.$router.push({
         //   path: '/MatchingInf'
         // });
@@ -530,7 +493,6 @@
           }
         };
         this.dialogVisible = true;
-        console.log(row.ruleId);
         this.ruleId = row.ruleId;
         this.check(this.pageParam, this.ruleId);
       },
@@ -565,7 +527,6 @@
       /*多选框*/
       handleSelectionChange(val) {
         this.multipleSelection = val;
-        console.log(this.multipleSelection);
       },
       /*解除*/
       relieve() {
@@ -590,7 +551,6 @@
               'status': '01'
             });
           };
-          console.log(this.newArray);
           this.post("antiFraud/batchUpdateHitRule",
             this.newArray
           ).then(res => {
@@ -629,7 +589,6 @@
           }).then(() => {}).catch(() => {});
         }
         if (fg) {
-          //console.log(this.multipleSelection);
           this.newArray = [];
           for (var i = 0; i < this.multipleSelection.length; i++) {
             this.newArray.push({
@@ -637,7 +596,6 @@
               'status': '00'
             });
           };
-          console.log(this.newArray);
           this.post("antiFraud/batchUpdateHitRule",
             this.newArray
           ).then(res => {
