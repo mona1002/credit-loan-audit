@@ -9,7 +9,7 @@
         </template>
         <div class="height_auto">
           <el-table :data="tableData" style="width: 100%" @row-dblclick='searchInf' border>
-            <el-table-column prop="custCount" label="提报时间" width="150">
+            <el-table-column prop="creatTime" label="提报时间" width="150">
             </el-table-column>
             <el-table-column prop="applySubno" label="进件编号" width="160">
             </el-table-column>
