@@ -7,7 +7,7 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">基本信息</span>
         </template>
-        <table class="table">
+        <!-- <table class="table">
           <thead>
             <tr>
               <th style="width:160px">进件编号</th>
@@ -34,7 +34,31 @@
               <td>{{fraudApplyInfo.appSuborgName}}</td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
+        <div class="height_auto">
+          <el-table :data="tableData" style="width: 100%" @row-dblclick='searchInf' border>
+            <el-table-column prop="custCount" label="提报时间" width="150">
+            </el-table-column>
+            <el-table-column prop="applySubno" label="进件编号" width="160">
+            </el-table-column>
+            <el-table-column prop="caseNum" label="案件编号" width="175">
+            </el-table-column>
+            <el-table-column prop="applyCustName" label="客户姓名" width="100">
+            </el-table-column>
+            <el-table-column prop="certCode" label="身份证号" width="160">
+            </el-table-column>
+            <el-table-column prop="proName" label="申请产品" width="100">
+            </el-table-column>
+            <el-table-column prop="operOrgName" label="进件机构" width="130">
+            </el-table-column>
+            <el-table-column prop="salePersonName" label="销售人员" width="100">
+            </el-table-column>
+            <el-table-column prop="applyPersonName" label="提报人" width="100">
+            </el-table-column>
+            <el-table-column prop="appSuborgName" label="提报组别" min-width="100">
+            </el-table-column>
+          </el-table>
+        </div>
       </el-collapse-item>
       <el-collapse-item name="2">
         <template slot="title">
@@ -72,11 +96,11 @@
         </template>
         <div class="height_auto">
           <el-table :data="hitRuleList" style="width: 100%" @cell-click="inquiry" border>
-            <el-table-column type="index" :index='1' label="序号" min-width="50">
+            <el-table-column type="index" :index='1' label="序号" width="50">
             </el-table-column>
-            <el-table-column prop="ruleContent" label="命中规则名称" min-width="110">
+            <el-table-column prop="ruleContent" label="命中规则名称">
             </el-table-column>
-            <el-table-column prop="custCount" label="命中客户数" min-width="80">
+            <el-table-column prop="custCount" label="命中客户数">
             </el-table-column>
           </el-table>
         </div>
@@ -194,7 +218,7 @@
           <!-- 分页 -->
           <div class="page">
             <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20,50]"
-              :page-size=setPageSize layout="total, sizes, prev, pager, next, jumper" :total="totals.totalRecord">
+              :page-size='setPageSize' layout="total, sizes, prev, pager, next, jumper" :total="totals.totalRecord">
             </el-pagination>
           </div>
         </div>
@@ -228,6 +252,7 @@
     data() {
       return {
         // aa: '命中规则名称：',
+        tableData: [],
         query: {
           id: '',
           matchApplyId: '',
@@ -337,15 +362,29 @@
       /*获取 反欺诈申请ID*/
       this.appinfoId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).businessId; //反欺诈专员+主管
       this.applyId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).applyId; //反欺诈专员+主管
+      this.infoList();
       this.request(this.appinfoId);
     },
     methods: {
+      // 点击基本信息查询其他信息
+      searchInf(row) {
+        this.request(row.id)
+      },
+      // 基本信息列表      
+      infoList() {
+        this.post('antiFraud/getAntiFraudSurveyInfo', {
+          applyId: this.applyId
+        }).then(res => {
+          if (res.statusCode == 200 && res.data) {
+            this.tableData = res.data;
+          }
+        });
+      },
       /*先查询列表*/
       request(val) {
         this.post('antiFraud/getAntiFraudSurveyInfo', {
           'appinfoId': val //'1',
         }).then(res => {
-          console.log(res)
           if (res.statusCode == 200 && 　res.data != null) {
             //基本信息
             if (res.data.fraudApplyInfo == null) {
@@ -496,6 +535,7 @@
         this.ruleId = row.ruleId;
         this.check(this.pageParam, this.ruleId);
       },
+      // 弹窗list查询
       check(param, id) {
         this.post("antiFraud/getHitRuleCustList", {
           'pageParam': param,
