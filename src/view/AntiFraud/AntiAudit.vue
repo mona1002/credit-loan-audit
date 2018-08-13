@@ -35,8 +35,8 @@
           </div>
           <!-- 右侧 tab 内容  AntiFirstAud-->
           <div class="tab2_Content">
-            <!-- <AnitAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AnitAudioVisual> -->
-            <AudioVisual v-if=" this.tabContent2==0" ></AudioVisual>
+            <!-- <AnitAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS">applyId</AnitAudioVisual> -->
+            <AudioVisual v-if=" this.tabContent2==0" :applyId='tastwaitingPass.applyId' ></AudioVisual>
             <cremark v-if=" this.tabContent2==1"></cremark>
             <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>

@@ -73,13 +73,13 @@
           </div>
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
-            <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AudioVisual>
+            <AudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :applyId='tastwaitingPass.applyId'></AudioVisual>
             <remark v-if=" this.tabContent2==1"></remark>
             <InternalMatch v-if=" this.tabContent2==2" :SplitS="SplitLeft" :isFull.sync="isFull"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
             <cborrowerInformationDetail v-if=" this.tabContent2==4" :isFull.sync="isFull"></cborrowerInformationDetail>
             <PhoneCredit v-if=" this.tabContent2==5" :SplitS="SplitLeft" :isFull.sync="isFull" :addBtn="false"></PhoneCredit>
-            <FCreditForm v-if=" this.tabContent2==6" :applyId=' this.tastwaitingPass.applyId' :TrilPersonShow='true' :FinalConEditShow='true' :makeSureBtnShow="true" ></FCreditForm>
+            <FCreditForm v-if=" this.tabContent2==6" :applyId=' tastwaitingPass.applyId' :TrilPersonShow='true' :FinalConEditShow='true' :makeSureBtnShow="true" ></FCreditForm>
             <creditInvestigation v-if=" this.tabContent2==7" :applyId=' tastwaitingPass.applyId' ></creditInvestigation>
             <aAntiApplyInf v-if=" this.tabContent2==8"  :applyId='tastwaitingPass.applyId'></aAntiApplyInf>
             <CreditApproval v-if=" this.tabContent2==9"></CreditApproval>

@@ -164,7 +164,7 @@
         CompareAlert: true,
         ListParent: [],
         ListDetails: [],
-        applyId: '', //入参
+        // applyId: '', //入参
         imgPath: [],
         imgPathDetail: [],
         // ----------------------------------
@@ -186,7 +186,7 @@
         pdfTitle: '',
       }
     },
-    props: ['msg', 'comBtn'],
+    props: ['applyId','msg', 'comBtn'],
     methods: {
       mountedInf() {
         this.judgeFlag = JSON.parse(localStorage.getItem("judge"));

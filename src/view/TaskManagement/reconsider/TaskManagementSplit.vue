@@ -29,7 +29,7 @@
         <div class="tab2_Content">
           <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==0"></capplicationInformationDetail>
           <!-- <AnitAudioVisual v-if=" this.tabContent2==1"></AnitAudioVisual> -->
-          <AudioVisual v-if=" this.tabContent2==1"></AudioVisual>
+          <AudioVisual v-if=" this.tabContent2==1" :applyId='tastwaitingPass.applyId'></AudioVisual>
           <creditInvestigation v-if=" this.tabContent2==2" :applyId='tastwaitingPass.applyId'></creditInvestigation>
           <processTrajectory v-if=" this.tabContent2==3"></processTrajectory>
         </div>

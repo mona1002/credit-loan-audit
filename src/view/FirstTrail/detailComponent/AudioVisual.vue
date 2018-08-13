@@ -117,7 +117,7 @@
         CompareAlert: true,
         ListParent: [],
         ListDetails: [],
-        applyId: '', //入参
+        // applyId: '', //入参
         imgPath: [],
         localInf: [], //localstorage 接收的所有参数,
         pdfArrys: [],
@@ -148,8 +148,8 @@
         this.imgBaseUrl = imgUrl.imgBaseUrl;
         // 父菜单
         this.post("/productArchive/getProductArchiveParentList", {
-          applyId: this.localInf.applyId,
-          //  applyId:this. applyID
+          // applyId: this.localInf.applyId,
+           applyId:this. applyId
         }).then(res => {
           if (res.statusCode == 200) {
             this.ListParent = res.data;
@@ -190,8 +190,8 @@
         // 二级（子）节点
         console.log("获取子节点");
         this.post("/productArchive/getProductArchiveChildList", {
-          applyId: this.localInf.applyId,
-          // applyId:this. applyID,
+          // applyId: this.localInf.applyId,
+          applyId:this. applyId,
           pid: id
         }).then(res => {
           if (res.statusCode == 200) {
@@ -209,7 +209,6 @@
         });
       },
       pdfClose() {
-        console.log('ccc')
         this.SmallPicShow = false;
         this.showPage = 1;
         //  this.defaultBigPicCss();
@@ -440,7 +439,7 @@
         this.$emit('CompareShow')
       },
     },
-    props: ['AURpreWidth', 'applyID'],
+    props: ['applyId','AURpreWidth', 'applyID'],
     mounted() {
       this.odivMove("FirstAud");
       this.mountedInf();

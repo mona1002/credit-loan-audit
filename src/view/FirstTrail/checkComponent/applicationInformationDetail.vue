@@ -921,6 +921,12 @@
         } else if (this.judgeFlag.flag == '15') {
           this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //任务管理-质检任务
           this.applyId = this.taskInWaitting.applyId;
+        }else if (this.judgeFlag.flag == '16') {
+          this.taskInWaitting = JSON.parse(localStorage.getItem("appLedgerTW")) //申请台账
+          this.applyId = this.taskInWaitting.id;// id就为applyid
+        }else if (this.judgeFlag.flag == '17') {
+          this.taskInWaitting = JSON.parse(localStorage.getItem("brrLedgerTW")) //借款台账
+          // this.applyId = this.taskInWaitting.applyId;
         }
         this.request();
       },

@@ -253,7 +253,7 @@
       },
       // 基本信息列表
       infoList() {
-        this.post('antiFraud/getAntiFraudSurveyInfo', {
+        this.get('antiFraud/getAntiFraudSurveyInfo', {
           applyId: this.applyId
         }).then(res => {
           if (res.statusCode == 200 && res.data) {

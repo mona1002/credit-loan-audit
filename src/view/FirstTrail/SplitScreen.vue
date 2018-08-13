@@ -71,7 +71,7 @@
           </div>
           <!-- 右侧 tab 内容 -->
           <div class="tab2_Content">
-            <AudioVisual ref="Audio" :applyID='tastwaitingPass.applyId' v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" :AURpreWidth.sync='RpreWidth'></AudioVisual>
+            <AudioVisual :applyId='tastwaitingPass.applyId' v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS" ></AudioVisual>
             <remark v-if=" this.tabContent2==1"></remark>
             <InternalMatch v-if=" this.tabContent2==2" :SplitS="SplitRight" :isFull.sync="isFull"></InternalMatch>
             <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
