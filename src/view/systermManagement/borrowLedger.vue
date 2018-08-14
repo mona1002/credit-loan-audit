@@ -1,7 +1,7 @@
 <template>
   <!--接口款台账 -->
-  <div class="taskWatting main-div el-table_450_scroll">
-    <!-- <div class="taskWinput search-div">
+  <div class="taskWatting main-div el-table_400_scroll">
+    <div class="taskWinput search-div">
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">进件编号： </span>
@@ -17,7 +17,7 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">手机号码：</span>
-          <el-input v-model="params.mobile" placeholder="请输入证件号码"></el-input>
+          <el-input v-model="params.loanMobile" placeholder="请输入证件号码"></el-input>
         </el-col>
       </el-row>
       <el-row class="row row1" type="flex">
@@ -47,7 +47,7 @@
             </template>
           </el-autocomplete>
         </el-col>
-        <el-col :span="6" class="search-item">
+        <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">应还款日期： </span>
           <el-date-picker v-model="PaybackDate" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
           </el-date-picker>
@@ -63,14 +63,14 @@
         </el-col>
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">结清标志： </span>
-          <el-select v-model="params.loanPurpose" placeholder="请选择">
+          <el-select v-model="params.payOffFlag" placeholder="请选择">
             <el-option v-for="item in paybackTime" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">账户状态： </span>
-          <el-select v-model="params.loanPurpose" placeholder="请选择">
+          <el-select v-model="params.accountState" placeholder="请选择">
             <el-option v-for="item in accountStatus" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
@@ -84,19 +84,25 @@
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item">
           <span class="keywordText">每期还款日：</span>
-          <el-input v-model="params." placeholder="请输入证件号码"></el-input>
+          <el-input v-model="params.returnDay" placeholder="请输入证件号码"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">托管机构： </span>
-          <el-select v-model="params." placeholder="请选择">
+          <el-select v-model="params.escrowAgency" placeholder="请选择" @change='getBankNameChange'>
             <el-option v-for="item in trusteeAgency" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
+            <el-pagination @size-change="handleSizeChange1" @current-change="handleCurrentChange1" :page-sizes="[10, 20,50]" :page-size="BankNamePageCounts"
+              :current-page="BankNameCurrent" layout="total, sizes, prev, pager, next, jumper" :total="400">
+            </el-pagination>
           </el-select>
+          <!--    
+       -->
+
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">开户行名称： </span>
-          <el-select v-model="params.emerType" placeholder="请选择" :disabled='托管机构params.==""'>
-            <el-option v-for="item in BankName" :key="item.value" :label="item.label" :value="item.value">
+          <el-select v-model="params.bankCode" placeholder="请选择" :disabled='params.escrowAgency==""' >
+            <el-option v-for="item in BankName" :key="item.bankCode" :label="item.bankName" :value="item.bankCode">
             </el-option>
           </el-select>
         </el-col>
@@ -114,31 +120,31 @@
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
             <template slot-scope="{ item }">
-              <span style="float: left; width:66px">{{ item.proName }}</span>
-              <span style="float: left;color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.proCode }}</span>
+              <span style="float: left; width:66px">{{ item.orgName }}</span>
+              <span style="float: left;color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.orgCode }}</span>
             </template>
           </el-autocomplete>
         </el-col>
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">放款方式： </span>
-          <el-select v-model="params." placeholder="请选择" :disabled='托管机构params.==""'>
+          <el-select v-model="params.onlineLoanState" placeholder="请选择">
             <el-option v-for="item in lendingMethods" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
         </el-col>
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">直销人员：</span>
-          <el-input v-model="params." placeholder="请输入直销人员"></el-input>
+          <el-input v-model="params.salPerCode" placeholder="请输入直销人员"></el-input>
         </el-col>
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">当前期次[理论]：</span>
-          <el-input v-model="params." placeholder="请输入当前期次"></el-input>
+          <el-input v-model="params.currTermTheory" placeholder="请输入当前期次"></el-input>
         </el-col>
       </el-row>
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">管户客服名称：</span>
-          <el-input v-model="params." placeholder="请输入管户客服名称"></el-input>
+          <el-input v-model="params.controlerName" placeholder="请输入管户客服名称"></el-input>
         </el-col>
         <el-col :span="6" class="search-item" :offset="0">
         </el-col>
@@ -149,7 +155,7 @@
           <el-button class="btn reset" @click="Rreset">重置</el-button>
         </el-col>
       </el-row>
-    </div> -->
+    </div>
     <div class="title titleContainer edit-div">
       <span class="titleText">
         <i class="el-icon title-icon"></i>
@@ -360,6 +366,8 @@
         PaybackDate: '', //应还款日期
         currentPage: 1, //分页选中页
         pageCount: 10, // 每页显示条数
+        BankNamePageCounts: 10, //开户行名称 分页显示条数
+        BankNameCurrent: 1, //开户行名称分页 分页当前页
         totalRecord: 0, //总条数
         tableData: [],
         tableData1: [{
@@ -451,24 +459,21 @@
             value: '00',
             label: '其他'
           }, {
-            value: '01',
-            label: '通联'
-          }, {
             value: '02',
             label: '银联'
-          }, {
-            value: '03',
-            label: '富友'
-          }, {
-            value: '04',
-            label: '融宝'
-          }
+          },
+          //    {
+          //     value: '01',
+          //     label: '通联'
+          //   }, {
+          //     value: '03',
+          //     label: '富友'
+          //   }, {
+          //     value: '04',
+          //     label: '融宝'
+          //   }
         ],
         agency: [ //进件机构
-          {
-            value: '00',
-            label: '普通'
-          }
         ],
         source: [ //来源渠道
           {
@@ -608,11 +613,13 @@
     watch: {
       '$route' (to, from) {
         if (to.path == '/applyLedger') {
-          if (!this.Routes[3].closed) {
+          if (!this.Routes[4].closed) {
             this.currentRow = {};
+            this.params.pageNum = this.currentPage = 1;
+            this.params.rows = this.pageCount = 10;
             this.Rreset();
-            this.tableData = [];
-            this.Routes[3].closed = true;
+            // this.tableData = [];
+            this.Routes[4].closed = true;
           }
         }
       },
@@ -630,8 +637,19 @@
         }
         return false;
       },
-      getExcel() {
-
+      getExcel() { //导出Excel
+        let obj = Object.assign({}, this.params);
+        // 删除多余入参
+        delete obj.page;
+        delete obj.rows;
+        this.post('/credit/exportLoanLedger', obj).then(res => {
+          if (res.statusCode == 200) {
+            // this.BankName = res.data;
+          } else {
+            // this.$message.error(res.msg);
+            // this.$message.error('获取进件机构失败！');
+          }
+        })
       },
       selectRow(row) {
         this.currentRow = row;
@@ -641,7 +659,7 @@
           return;
         }
         this.$router.push({
-          name: '/brrLedgerDetail',
+          name: 'brrLedgerDetail',
           params: {
             newOne: true,
           }
@@ -649,7 +667,7 @@
         localStorage.setItem("brrLedgerTW", JSON.stringify(row));
         localStorage.setItem("judge", JSON.stringify(this.judge));
       },
-      getSummaries(param) {
+      getSummaries(param) { //
         const {
           columns,
           data
@@ -675,7 +693,6 @@
             sums[index] = 'N/A';
           }
         });
-
         return sums;
       },
       querySearch(queryString, cb) { //进件机构下拉查询
@@ -698,8 +715,8 @@
         this.params.appOrgCode = this.agencyCode = this.selectedAgenName = item.appOrgName;
       },
       ProhandleSelect(item) { //产品下拉选中项
-        console.log(item)
-        this.proCode = this.selectedProName //= item.proName;
+        // console.log(item)
+        this.proCode = this.selectedProName = item.proName;
         this.params.proCode = item.proCode;
       },
       DateF(val) {
@@ -711,38 +728,61 @@
         this.params.pageNum = 1;
         this.getInf(this.params);
       },
+      handleSizeChange1(val) { //每页 N 条
+        //   console.log(1,val)
+        this.BankNamePageCounts = val;
+        this.getBankName();
+      },
       handleCurrentChange(val) { //查看第 N 页
         this.params.pageNum = val;
         this.getInf(this.params);
       },
+      handleCurrentChange1(val) { //查看第 N 页
+        // console.log(2,val)
+        this.BankNameCurrent = val;
+        this.getBankName();
+      },
+      getBankNameChange() {
+        //   重置为第一页
+        this.BankNamePageCounts = 10;
+        this.BankNameCurrent = 1;
+        this.getBankName();
+      },
       Rreset() {
-        this.applySubNo = '';
-        this.proType = '';
-        this.salPerCode = '';
-        this.emerType = '';
-        this.appSerPerCode = '';
-        this.custNo = '';
-        this.proCode = '';
-        this.loanPurpose = '';
-        this.appOrgCode = '';
-        this.appOrgName = '';
-        this.certCode = '';
-        this.appType = '';
-        this.sourcesChan = '';
-        this.appDate_ge = '';
-        this.appDate_le = '';
-        this.mobile = '';
-        this.borrType = '';
-        this.loanTerm = '';
-        this.busiState = '';
+        this.params.applySubNo = ''; //  进件编号
+        this.params.custName_la = ''; //  客户名称
+        this.params.certCode = ''; //  证件号码
+        this.params.loanMobile = ''; //  手机号码
+        this.params.appType = ''; //  申请类型
+        this.params.proType = ''; //  产品类型
+        this.params.proCode = ''; //  产品名称
+        this.params.repayDate_ge = ''; //  应还款日期(始)
+        this.params.repayDate_le = ''; //  应还款日期（末）
+        this.params.loanTerm = ''; // 借款期限
+        this.params.payOffFlag = ''; //  结清标志
+        this.params.accountState = ''; //  账户状态
+        this.params.loanDate_ge = ''; //  放款日期
+        this.params.loanDate_le = ''; //  放款日期
+        this.params.returnDay = ''; // 每期还款日
+        this.params.escrowAgency = ''; //  托管机构
+        this.params.bankCode = ''; //  开户行名称
+        this.params.loanEndDate_ge = ''; //  还款到期日期
+        this.params.loanEndDate_le = ''; //  还款到期日期
+        this.params.appOrgCode = ''; //  进件机构
+        this.params.onlineLoanState = ''; //  放款方式
+        this.params.salPerCode = ''; //  直销人员
+        this.params.currTermTheory = ''; //  当前期次[理论]
+        this.params.controlerName = ''; //  管户客服名称
+
         this.agencyCode = '';
         this.selectedAgenName = '';
         this.proCode = '';
         this.selectedProName = '';
-        this.loanDate = '';
-        this.PaybackDate = '';
-        this.expiritionDate = '';
+        this.loanDate = ''; // 放款日期
+        this.PaybackDate = ''; // 应还款日期
+        this.expiritionDate = ''; // 还款到期日期
         this.BankName = []; //开户行名称下拉
+        this.tableData = []; //清空已查处列表
         // 页码重置
         this.params.page = 1, //	页码  
           //   rows=10, //	每页条数
@@ -751,14 +791,14 @@
       Rsearch() {
         console.log()
         // 放款日期
-        this.params.appDate_ge = this.DateF(this.loanDate[0]);
-        this.params.appDate_le = this.DateF(this.loanDate[1]);
+        this.params.loanDate_ge = this.DateF(this.loanDate[0]);
+        this.params.loanDate_le = this.DateF(this.loanDate[1]);
         // 应还款日期
-        this.params.appDate_ge = this.DateF(this.PaybackDate[0]);
-        this.params.appDate_le = this.DateF(this.PaybackDate[1]);
+        this.params.repayDate_ge = this.DateF(this.PaybackDate[0]);
+        this.params.repayDate_le = this.DateF(this.PaybackDate[1]);
         // 还款到期日期
-        this.params.appDate_ge = this.DateF(this.expiritionDate[0]);
-        this.params.appDate_le = this.DateF(this.expiritionDate[1]);
+        this.params.loanEndDate_ge = this.DateF(this.expiritionDate[0]);
+        this.params.loanEndDate_le = this.DateF(this.expiritionDate[1]);
 
         this.params.pageNum = this.currentPage = 1;
         this.getInf(this.params);
@@ -772,7 +812,7 @@
           if (res.statusCode == 200 && res.data.taskDetailList != null) {
             this.tableData = res.data.rows;
             this.totalRecord = res.data.total; // 总数
-            this.changeColor();
+            // this.changeColor();
           } else {
             this.$message.error(res.msg);
           }
@@ -796,36 +836,59 @@
           } else {
             // this.$message.error(res.msg);
             this.$message.error('获取借款期限失败！');
-
           }
         })
       },
       getAgency() { //获取进件机构下拉
-
+        this.post('/credit/getSmOrgByLevelCate', {
+          orgLevel: '06',
+          orgCate: '01',
+          sort: 'orgCode',
+          order: 'asc'
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.agency = res.data;
+          } else {
+            // this.$message.error(res.msg);
+            this.$message.error('获取进件机构失败！');
+          }
+        })
       },
       getBankName() { //获取开户行名称下拉
-        this.BankName
+        this.post('/credit/getSmBank', {
+          escrowagency: this.params.escrowAgency,
+          page: this.BankNameCurrent,
+          rows: this.BankNamePageCounts,
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.BankName = res.data;
+          } else {
+            // this.$message.error(res.msg);
+            this.$message.error('获取进件机构失败！');
+          }
+        })
       },
-      changeColor() {
-        for (var i = 0; i < this.tableData.length; i++) {
-          this.tableData[i].completeTime * 1 >= 48 ? this.tableData[i].isEmer = true : this.tableData[i].isEmer =
-            false;
-          if (this.tableData[i].emerType == '00') {
-            this.tableData[i].emerType = "普通";
-          } else if (this.tableData[i].emerType == '01') {
-            this.tableData[i].emerType = "免费加急";
-          } else if (this.tableData[i].emerType == '02') {
-            this.tableData[i].emerType = "收费加急";
-          };
-        }
-      }
+
+      //   changeColor() {
+      //     for (var i = 0; i < this.tableData.length; i++) {
+      //       this.tableData[i].completeTime * 1 >= 48 ? this.tableData[i].isEmer = true : this.tableData[i].isEmer =
+      //         false;
+      //       if (this.tableData[i].emerType == '00') {
+      //         this.tableData[i].emerType = "普通";
+      //       } else if (this.tableData[i].emerType == '01') {
+      //         this.tableData[i].emerType = "免费加急";
+      //       } else if (this.tableData[i].emerType == '02') {
+      //         this.tableData[i].emerType = "收费加急";
+      //       };
+      //     }
+      //   }
     },
     mounted() {
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
       this.params.userCode = this.userInf.userCode; //userCode
-      this.getProducts();
-      this.getloanTime();
-      this.getAgency();
+      //   this.getProducts();
+      //   this.getloanTime();
+      //   this.getAgency();
     },
   }
 

@@ -372,7 +372,7 @@
       },
       // 基本信息列表      
       infoList() {
-        this.get('antiFraud/getAntiFraudSurveyInfo', {
+        this.get('antiFraud/getFraudApplyInfosByApplyId', {
           applyId: this.applyId
         }).then(res => {
           if (res.statusCode == 200 && res.data) {

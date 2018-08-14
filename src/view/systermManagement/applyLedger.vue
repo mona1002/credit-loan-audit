@@ -95,8 +95,8 @@
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
             <template slot-scope="{ item }">
-              <span style="float: left; width:66px">{{ item.proName }}</span>
-              <span style="float: left;color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.proCode }}</span>
+              <span style="float: left; width:66px">{{ item.orgName }}</span>
+              <span style="float: left;color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.orgCode }}</span>
             </template>
           </el-autocomplete>
         </el-col>
@@ -250,7 +250,7 @@
           page: 1, //	页码
           rows: 10, //	每页条数
         },
-        judge : {
+        judge: {
           flag: '16'
         },
         proCode: "",
@@ -356,10 +356,6 @@
           }
         ],
         agency: [ //进件机构
-          {
-            value: '00',
-            label: '普通'
-          }
         ],
         source: [ //来源渠道
           {
@@ -501,16 +497,29 @@
         if (to.path == '/applyLedger') {
           if (!this.Routes[3].closed) {
             this.currentRow = {};
+               this.params.pageNum = this.currentPage=1;
+               this.params.rows=this.pageCount=10;
             this.Rreset();
-            this.tableData = [];
+            // this.tableData = [];
             this.Routes[3].closed = true;
           }
         }
       },
     },
     methods: {
-      getExcel(){
-
+      getExcel() { //导出Excel
+        let obj = Object.assign({}, this.params);
+        // 删除多余入参
+        delete obj.page;
+        delete obj.rows;
+        this.post('/credit/getSmBank', obj).then(res => {
+          if (res.statusCode == 200) {
+            // this.BankName = res.data;
+          } else {
+            // this.$message.error(res.msg);
+            // this.$message.error('获取进件机构失败！');
+          }
+        })
       },
       selectRow(row) {
         this.currentRow = row;
@@ -526,7 +535,7 @@
           return
         }
         this.$router.push({
-          name: '/appLedgerDetail',
+          name: 'appLedgerDetail',
           params: {
             newOne: true,
           }
@@ -596,6 +605,7 @@
         this.proCode = '';
         this.selectedProName = '';
         this.applyData = '';
+         this.tableData = [];////清空已查处列表
         // 页码重置
         this.params.page = 1, //	页码  
           //   rows=10, //	每页条数
@@ -646,7 +656,20 @@
         })
       },
       getAgency() { //获取进件机构下拉
+        this.post('/credit/getSmOrgByLevelCate', {
+          orgLevel: '06',
+          orgCate: '01',
+          sort: 'orgCode',
+          order: 'asc'
+        }).then(res => {
+          if (res.statusCode == 200) {
+            this.agency = res.data;
+          } else {
+            // this.$message.error(res.msg);
+            this.$message.error('获取进件机构失败！');
 
+          }
+        })
       },
       changeColor() {
         for (var i = 0; i < this.tableData.length; i++) {

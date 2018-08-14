@@ -259,7 +259,9 @@ body .pre_wrap {
 body .el-table_450_scroll .el-table {
   height: 450px !important;
 }
-
+body .el-table_400_scroll .el-table {
+  height: 435px !important;
+}
 body .el-table_450_scroll .el-table__fixed,
 body .el-table_450_scroll .el-table__fixed-right {
   height: 435px !important;

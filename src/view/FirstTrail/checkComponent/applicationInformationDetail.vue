@@ -926,7 +926,7 @@
           this.applyId = this.taskInWaitting.id;// id就为applyid
         }else if (this.judgeFlag.flag == '17') {
           this.taskInWaitting = JSON.parse(localStorage.getItem("brrLedgerTW")) //借款台账
-          // this.applyId = this.taskInWaitting.applyId;
+          this.applyId = this.taskInWaitting.applyId;
         }
         this.request();
       },

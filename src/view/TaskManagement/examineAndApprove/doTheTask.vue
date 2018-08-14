@@ -1,10 +1,6 @@
 <!-- 已办任务 -->
 <template>
   <div class="taskWatting main-div">
-
-<label>ming:</label>
-<input type="text">
-
     <div class="taskWinput search-div">
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item" :offset="0">
