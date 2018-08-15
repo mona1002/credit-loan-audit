@@ -3,7 +3,7 @@
   <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
     <!-- 进件人详情 -->
     <p class="PerDtl">
-      <span> 借款人：{{custName}}</span>
+      <span> 借款人：{{accepCusBasicInfo.custName}}</span>
       <span> 进件编号：{{customInf.applyMainNo}}</span>
       <span> 证件号码：{{tastwaitingPass.certCode}}</span>
       <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
@@ -48,7 +48,7 @@
     data() {
       return {
         loading: false,
-        custName: '',
+        // custName: '',
         accepCusBasicInfo: {
           mobile: '',
           custName: ''
@@ -56,7 +56,6 @@
         // 进件人信息
         customInf: [], //申请信息页local字段
         tastwaitingPass: [], //详情列表页信息--(含)取applyId
-        title: "",
         tabContent2: 0,
         tabActiveInd2: 0,
         items2: ["申请信息", "实地征信", "影像资料"],

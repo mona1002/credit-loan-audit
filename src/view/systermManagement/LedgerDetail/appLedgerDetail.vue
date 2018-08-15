@@ -3,7 +3,7 @@
   <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
     <!-- 进件人详情 -->
     <p class="PerDtl">
-      <span> 借款人：{{custName}}</span>
+      <span> 借款人：{{accepCusBasicInfo.custName}}</span>
       <span> 进件编号：{{customInf.applyMainNo}}</span>
       <span> 证件号码：{{tastwaitingPass.certCode}}</span>
       <span> 移动电话：{{accepCusBasicInfo.mobile}}</span>
@@ -32,9 +32,9 @@
         </div>
         <!-- tab 内容  AntiFirstAud-->
         <div class="tab2_Content">
-          <AudioVisual v-if=" this.tabContent2==0" :applyId='tastwaitingPass.id'></AudioVisual>
-          <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
-          <creditInvestigation v-if=" this.tabContent2==7" :applyId='tastwaitingPass.id'></creditInvestigation>
+          <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==0"></capplicationInformationDetail>
+          <creditInvestigation v-if=" this.tabContent2==1" :applyId='tastwaitingPass.id'></creditInvestigation>
+       <AudioVisual v-if=" this.tabContent2==2" :applyId='tastwaitingPass.id'></AudioVisual>
         </div>
       </div>
     </div>
@@ -48,12 +48,14 @@
     data() {
       return {
         loading: false,
-        custName:'',
-        accepCusBasicInfo: '',
+        // custName:'',
+         accepCusBasicInfo: {
+          mobile: '',
+          custName: ''
+        },
         // 进件人信息
         customInf: [], //申请信息页local字段
         tastwaitingPass: [], //详情列表页信息--(含)取applyId
-        title: "",
         tabContent2: 0,
         tabActiveInd2: 0,
         items2: ["申请信息", "实地征信", "影像资料"],
@@ -78,10 +80,10 @@
         }).then(res => {
           if (res.statusCode == 200) {
             this.loading = false;
-            res.data.accepCusBasicInfo && res.data.accepCusBasicInfo.custName ? this.custName = res.data.accepCusBasicInfo
-              .custName : '';
+            // res.data.accepCusBasicInfo && res.data.accepCusBasicInfo.custName ? this.custName = res.data.accepCusBasicInfo
+            //   .custName : '';
             this.customInf = res.data;
-            this.accepCusBasicInfo = res.data.accepCusBasicInfo;
+             res.data.accepCusBasicInfo ? this.accepCusBasicInfo = res.data.accepCusBasicInfo : '';
           } else {
             this.$message.error(res.msg);
           }

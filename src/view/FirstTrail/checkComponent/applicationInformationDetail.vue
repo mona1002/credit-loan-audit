@@ -1300,6 +1300,9 @@
       },
       //保留两位小数 整数千分位
       formatNumber(num, cent, isThousand) {
+        if(!num){
+          return ''
+        }
         num = num.toString().replace(/\$|\,/g, '');
         // 检查传入数值为数值类型
         if (isNaN(num))
