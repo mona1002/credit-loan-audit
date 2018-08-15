@@ -1125,8 +1125,8 @@
         // 删除多余入参
         delete obj.page;
         delete obj.rows;
-        // this.post('/export/exportLoanLedger', obj).then(res => {
-        this.post('/export/notSession-exportLoanLedger', obj).then(res => {
+        this.post('/export/exportLoanLedger', obj).then(res => {
+        // this.post('/export/notSession-exportLoanLedger', obj).then(res => {
           if (res.statusCode == 200) {
             // this.BankName = res.data;
           } else {
