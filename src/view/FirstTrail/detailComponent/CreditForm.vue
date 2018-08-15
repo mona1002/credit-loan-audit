@@ -941,14 +941,6 @@
     <div class="btn_wrap">
       <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
     </div>
-    <!-- ==============================点击确认时提示弹框=================================== -->
-    <!-- <el-dialog title="提示"  :modal="false" :visible.sync="Confirm" width="420px">
-      <span>确定操作？</span>
-      <span slot="footer" class="dialog-footer">
-        <el-button class="calbtn" @click="canc">取消</el-button>
-        <el-button class="subtn" type="primary" :loading="loadsitu" @click="CFsave">{{adbtn}}</el-button>
-      </span>
-    </el-dialog> -->
   </div>
 </template>
 <script>
