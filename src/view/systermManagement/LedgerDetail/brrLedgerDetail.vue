@@ -32,9 +32,9 @@
         </div>
         <!-- tab 内容  AntiFirstAud-->
         <div class="tab2_Content">
-          <AudioVisual v-if=" this.tabContent2==0" :applyId='tastwaitingPass.id'></AudioVisual>
-          <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3"></capplicationInformationDetail>
-          <creditInvestigation v-if=" this.tabContent2==7" :applyId='tastwaitingPass.id'></creditInvestigation>
+          <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==0"></capplicationInformationDetail>
+          <creditInvestigation v-if=" this.tabContent2==1" :applyId='tastwaitingPass.applyId'></creditInvestigation>
+          <AudioVisual v-if=" this.tabContent2==2" :applyId='tastwaitingPass.applyId'></AudioVisual>
         </div>
       </div>
     </div>
@@ -48,8 +48,11 @@
     data() {
       return {
         loading: false,
-        custName:'',
-        accepCusBasicInfo: '',
+        custName: '',
+        accepCusBasicInfo: {
+          mobile: '',
+          custName: ''
+        },
         // 进件人信息
         customInf: [], //申请信息页local字段
         tastwaitingPass: [], //详情列表页信息--(含)取applyId
@@ -72,16 +75,16 @@
     methods: {
       mountedInf() {
         this.loading = true;
-        this.tastwaitingPass = JSON.parse(localStorage.getItem("brrLedgerTW")); //申请台账id就为applyid
+        this.tastwaitingPass = JSON.parse(localStorage.getItem("brrLedgerTW"));
         this.post("/creAccepLoanDetailInfo/getAccepLoanDetailInfo", {
-          id: this.tastwaitingPass.id, //申请台账id就为applyid
+          id: this.tastwaitingPass.applyId,
         }).then(res => {
           if (res.statusCode == 200) {
             this.loading = false;
-            res.data.accepCusBasicInfo && res.data.accepCusBasicInfo.custName ? this.custName = res.data.accepCusBasicInfo
-              .custName : '';
+            // res.data.accepCusBasicInfo && res.data.accepCusBasicInfo.custName ? this.custName = res.data.accepCusBasicInfo
+            //   .custName : '';
             this.customInf = res.data;
-            this.accepCusBasicInfo = res.data.accepCusBasicInfo;
+            res.data.accepCusBasicInfo ? this.accepCusBasicInfo = res.data.accepCusBasicInfo : '';
           } else {
             this.$message.error(res.msg);
           }

@@ -5,19 +5,19 @@
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">进件编号： </span>
-          <el-input v-model="params.applySubNo" placeholder="请输入进件编号"></el-input>
+          <el-input v-model.trim="params.applySubNo" placeholder="请输入进件编号"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">客户名称：</span>
-          <el-input v-model="params.custName_la" placeholder="请输入客户名称"></el-input>
+          <el-input v-model.trim="params.custName_la" placeholder="请输入客户名称"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">证件号码：</span>
-          <el-input v-model="params.certCode" placeholder="请输入证件号码"></el-input>
+          <el-input v-model.trim="params.certCode" placeholder="请输入证件号码"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">手机号码：</span>
-          <el-input v-model="params.loanMobile" placeholder="请输入证件号码"></el-input>
+          <el-input v-model.trim="params.loanMobile" placeholder="请输入证件号码"></el-input>
         </el-col>
       </el-row>
       <el-row class="row row1" type="flex">
@@ -49,7 +49,8 @@
         </el-col>
         <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">应还款日期： </span>
-          <el-date-picker v-model="PaybackDate" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+          <el-date-picker v-model="PaybackDate" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"
+            value-format="yyyy-MM-dd">
           </el-date-picker>
         </el-col>
       </el-row>
@@ -77,38 +78,43 @@
         </el-col>
         <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">放款日期：</span>
-          <el-date-picker v-model="loanDate" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+          <el-date-picker v-model="loanDate" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" value-format="yyyy-MM-dd">
           </el-date-picker>
         </el-col>
       </el-row>
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item">
           <span class="keywordText">每期还款日：</span>
-          <el-input v-model="params.returnDay" placeholder="请输入证件号码"></el-input>
+          <el-input v-model.trim="params.returnDay" @blur="params.returnDay&&(parseInt(params.returnDay)>31||parseInt(params.returnDay)<1)?params.returnDay='':''"
+            placeholder="请输入证件号码"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">托管机构： </span>
           <el-select v-model="params.escrowAgency" placeholder="请选择" @change='getBankNameChange'>
             <el-option v-for="item in trusteeAgency" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
-            <el-pagination @size-change="handleSizeChange1" @current-change="handleCurrentChange1" :page-sizes="[10, 20,50]" :page-size="BankNamePageCounts"
+            <!-- <el-pagination @size-change="handleSizeChange1" @current-change="handleCurrentChange1" :page-sizes="[10, 20,50]" :page-size="BankNamePageCounts"
               :current-page="BankNameCurrent" layout="total, sizes, prev, pager, next, jumper" :total="400">
-            </el-pagination>
+            </el-pagination> -->
           </el-select>
-          <!--    
-       -->
-
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">开户行名称： </span>
           <el-select v-model="params.bankCode" placeholder="请选择" :disabled='params.escrowAgency==""'>
             <el-option v-for="item in BankName" :key="item.bankCode" :label="item.bankName" :value="item.bankCode">
+              <span style="float: left">{{ item.bankCode }}</span>
+              <span style="float: right; color: #8492a6; margin-right:3px;">{{ item.bankName }}</span>
             </el-option>
+            <el-pagination style="position:absolute; bottom:0;width:200px;overflow:auto;" @size-change="handleSizeChange1" @current-change="handleCurrentChange1"
+              :page-sizes="[10, 20,50]" :page-size="BankNamePageCounts" :current-page="BankNameCurrent" layout="total, sizes, prev, pager, next, jumper"
+              :total="BankTotal">
+            </el-pagination>
           </el-select>
         </el-col>
         <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">还款到期日期：</span>
-          <el-date-picker v-model="expiritionDate" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+          <el-date-picker v-model="expiritionDate" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"
+            value-format="yyyy-MM-dd">
           </el-date-picker>
         </el-col>
       </el-row>
@@ -134,17 +140,17 @@
         </el-col>
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">直销人员：</span>
-          <el-input v-model="params.salPerCode" placeholder="请输入直销人员"></el-input>
+          <el-input v-model.trim="params.salPerCode" placeholder="请输入直销人员"></el-input>
         </el-col>
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">当前期次[理论]：</span>
-          <el-input v-model="params.currTermTheory" placeholder="请输入当前期次"></el-input>
+          <el-input v-model.trim="params.currTermTheory" @blur='Int' :max='2' :min='1' placeholder="请输入当前期次"></el-input>
         </el-col>
       </el-row>
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">管户客服名称：</span>
-          <el-input v-model="params.controlerName" placeholder="请输入管户客服名称"></el-input>
+          <el-input v-model.trim="params.controlerName" placeholder="请输入管户客服名称"></el-input>
         </el-col>
         <el-col :span="6" class="search-item" :offset="0">
         </el-col>
@@ -223,19 +229,40 @@
         </el-table-column>
         <el-table-column prop="onlineLoanState_name" label="放款方式" width="90">
         </el-table-column>
-        <el-table-column prop="loanAmt" label="借款金额[元]" width="110">
+        <el-table-column label="借款金额[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.loanAmt|formatMoney}}
+          </template>
         </el-table-column>
-        <el-table-column prop="contAmt" label="签约金额[元]" width="110">
+        <el-table-column label="签约金额[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.contAmt|formatMoney}}
+          </template>
         </el-table-column>
-        <el-table-column prop="payAmt" label="放款金额[元]" width="110">
+        <el-table-column label="放款金额[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.payAmt|formatMoney}}
+          </template>
         </el-table-column>
-        <el-table-column prop="insurFeeAmt" label="保险费[元]" width="110">
+        <el-table-column label="保险费[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.insurFeeAmt|formatMoney}}
+          </template>
         </el-table-column>
-        <el-table-column prop="platreFeeAmt" label="平台推荐费[元]" width="110">
+        <el-table-column label="平台推荐费[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.platreFeeAmt|formatMoney}}
+          </template>
         </el-table-column>
-        <el-table-column prop="servFeeAmt" label="服务费金额[元]" width="110">
+        <el-table-column label="服务费金额[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.servFeeAmt|formatMoney}}
+          </template>
         </el-table-column>
-        <el-table-column prop="consFeeAmt" label="咨询费金额[元]" width="110">
+        <el-table-column label="咨询费金额[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.consFeeAmt|formatMoney}}
+          </template>
         </el-table-column>
         <el-table-column prop="loanTerm" label="借款期限[月]" width="100">
         </el-table-column>
@@ -249,15 +276,30 @@
         </el-table-column>
         <el-table-column prop="loanEndDate" label="还款到期日期" width="100">
         </el-table-column>
-        <el-table-column prop="eachTermAmt" label="每期还款额[元]" min-width="110">
+        <el-table-column label="每期还款额[元]" min-width="110">
+          <template slot-scope='scope'>
+            {{scope.row.eachTermAmt|formatMoney}}
+          </template>
         </el-table-column>
-        <el-table-column prop="loanBalAmt" label="剩余本金[元]" min-width="110">
+        <el-table-column label="剩余本金[元]" min-width="110">
+          <template slot-scope='scope'>
+            {{scope.row.loanBalAmt|formatMoney}}
+          </template>
         </el-table-column>
-        <el-table-column prop="totalArrears" label="拖欠总额[元]" min-width="110">
+        <el-table-column label="拖欠总额[元]" min-width="110">
+          <template slot-scope='scope'>
+            {{scope.row.totalArrears|formatMoney}}
+          </template>
         </el-table-column>
-        <el-table-column prop="calcelBalAmt" label="核销金额[元]" width="100">
+        <el-table-column label="核销金额[元]" width="100">
+          <template slot-scope='scope'>
+            {{scope.row.calcelBalAmt|formatMoney}}
+          </template>
         </el-table-column>
-        <el-table-column prop="returnFeeAmt" label="退还服务费[元]" width="110">
+        <el-table-column label="退还服务费[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.returnFeeAmt|formatMoney}}
+          </template>
         </el-table-column>
         <el-table-column prop="arrInteBegin" label="拖欠开始日期" width="100">
         </el-table-column>
@@ -273,7 +315,7 @@
         </el-table-column>
         <el-table-column prop="accountName" label="账户户名" width="80">
         </el-table-column>
-        <el-table-column prop="accountCode" label="银行卡账号" width="155">
+        <el-table-column prop="accountCode" label="银行卡账号" width="170">
         </el-table-column>
         <el-table-column prop="overFlagTxt" label="拖欠标志" width="80">
         </el-table-column>
@@ -307,7 +349,7 @@
       </div>
     </div>
     <!-- 账务信息 -->
-    <el-dialog title="账务信息" :visible.sync="accountShow" width="1000px">
+    <el-dialog title="账务信息" :visible.sync="accountShow" width="1100px">
       <div class="checkedInf checkedInf_li_width_triplet clearFix">
         <ul>
           <div class=" CreditForm_div_border clearFix">
@@ -562,23 +604,94 @@
     </el-dialog>
     <!-- 回收信息 -->
     <el-dialog title="回收信息" :visible.sync="recycleShow" width="1000px">
-      <el-table :data="recycleData" border show-header highlight-current-row>
-        <el-table-column type="index" label="序号" width="50">
-        </el-table-column>
-        <el-table-column prop="taskTypeTxt" label="应还日期" width="120">
-        </el-table-column>
-        <el-table-column prop="activationTime" label="应还本金[元]" show-overflow-tooltip width="150">
-        </el-table-column>
-        <el-table-column prop="taskStatusTxt" label="应还利息[元]" width="80">
-        </el-table-column>
-        <el-table-column prop="operatorCode" label="应还罚息[元] " show-overflow-tooltip width="100">
-        </el-table-column>
-        <el-table-column prop="completeTime" label="应还违约金[元] " show-overflow-tooltip width="150">
-        </el-table-column>
-        <el-table-column prop="efficiencyTime" label="本期应还款额[元]" width="110">
-        </el-table-column>
-
-      </el-table>
+      <div class="el-talble_overflow_auto">
+        <el-table :data="recycleData" border show-header highlight-current-row :summary-method="getRecycleSummaries" show-summary>
+          <el-table-column type="index" label="序号" width="50">
+          </el-table-column>
+          <el-table-column prop="period" label="期次" width="50">
+          </el-table-column>
+          <el-table-column prop="repayDate" label="应还日期" width="110">
+          </el-table-column>
+          <el-table-column label="应还本金[元]" width="110">
+            <template slot-scope='scope'>
+              {{scope.row.eachTermBalAmt|formatMoney}}
+            </template>
+          </el-table-column>
+          <el-table-column label="应还利息[元]" width="110">
+            <template slot-scope='scope'>
+              {{scope.row.eachTermInteAmt|formatMoney}}
+            </template>
+          </el-table-column>
+          <el-table-column label="应还罚息[元] " width="110">
+            <template slot-scope='scope'>
+              {{scope.row.eachTermPenAmt|formatMoney}}
+            </template>
+          </el-table-column>
+          <el-table-column label="应还违约金[元] " width="110">
+            <template slot-scope='scope'>
+              {{scope.row.eachTermDefAmt|formatMoney}}
+            </template>
+          </el-table-column>
+          <el-table-column label="本期应还款额[元]" width="120">
+            <template slot-scope='scope'>
+              {{scope.row.eachTermAmtSum|formatMoney}}
+            </template>
+          </el-table-column>
+          <el-table-column label="实还本金[元]" width="110">
+            <template slot-scope='scope'>
+              {{scope.row.actualBalAmt|formatMoney}}
+            </template>
+          </el-table-column>
+          <el-table-column label="实还利息[元]" width="110">
+            <template slot-scope='scope'>
+              {{scope.row.actualInteAmt|formatMoney}}
+            </template>
+          </el-table-column>
+          <el-table-column label="实还罚息[元]" width="110">
+            <template slot-scope='scope'>
+              {{scope.row.actualPenAmt|formatMoney}}
+            </template>
+          </el-table-column>
+          <el-table-column label="实还违约金[元]" width="110">
+            <template slot-scope='scope'>
+              {{scope.row.actualDefAmt|formatMoney}}
+            </template>
+          </el-table-column>
+          <el-table-column label="减免利息[元]" width="110">
+            <template slot-scope='scope'>
+              {{scope.row.redInteAmt|formatMoney}}
+            </template>
+          </el-table-column>
+          <el-table-column label="减免罚息[元]" width="110">
+            <template slot-scope='scope'>
+              {{scope.row.redPenaltyAmt|formatMoney}}
+            </template>
+          </el-table-column>
+          <el-table-column label="减免违约金[元]" width="110">
+            <template slot-scope='scope'>
+              {{scope.row.redDefaultAmt|formatMoney}}
+            </template>
+          </el-table-column>
+          <el-table-column label="退还服务费[元]" width="110">
+            <template slot-scope='scope'>
+              {{scope.row.returnFeeAmt|formatMoney}}
+            </template>
+          </el-table-column>
+          <el-table-column label="核销金额[元]" width="110">
+            <template slot-scope='scope'>
+              {{scope.row.calcelBalAmt|formatMoney}}
+            </template>
+          </el-table-column>
+          <el-table-column prop='exceedDate' label="转逾期日期" width="110">
+          </el-table-column>
+          <el-table-column prop='overFlagTxt' label="拖欠标志" width="80">
+          </el-table-column>
+          <el-table-column prop='payoffFlagTxt' label="结清标志" width="80">
+          </el-table-column>
+          <!-- <el-table-column prop='loanAcNo' label="借款账号" width="160">
+        </el-table-column> -->
+        </el-table>
+      </div>
       <div class="page">
         <el-pagination @size-change="handleSizeChange2" @current-change="handleCurrentChange2" :page-sizes="[10, 20,50]" :current-page.sync="recycleCurrentPage"
           :page-size="recyclePageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.recycleTotal">
@@ -590,34 +703,63 @@
     </el-dialog>
     <!-- 交易明细 -->
     <el-dialog title="交易明细" :visible.sync="dealShow" width="1000px">
-      <el-table :data="dealData" border show-header show-summary highlight-current-row>
-        <el-table-column type="index" label="序号" width="50">
-        </el-table-column>
-        <el-table-column prop="period" label="期次" sortable width="120">
-        </el-table-column>
-        <el-table-column prop="receiptTypeTxt" label="单据类型" width="120">
-        </el-table-column>
-        <el-table-column prop="accDate" label="交易日期" sortable width="120">
-        </el-table-column>
-        <el-table-column prop="actualBalAmt" label="实还本金[元]" width="100">
-        </el-table-column>
-        <el-table-column prop="actualInteAmt" label="实还利息[元]" width="100">
-        </el-table-column>
-        <el-table-column prop="actualPenAmt" label="实还罚息[元]" width="100">
-        </el-table-column>
-        <el-table-column prop="actualDefAmt	" label="实还违约金[元]" width="100">
-        </el-table-column>
-        <el-table-column prop="redInteAmt" label="减免利息[元]" width="100">
-        </el-table-column>
-        <el-table-column prop="redPenaltyAmt" label="减免罚息[元]" width="100">
-        </el-table-column>
-        <el-table-column prop="redDefaultAmt" label="减免违约金[元]" width="100">
-        </el-table-column>
-        <el-table-column prop="returnFeeAmt" label="退还服务费[元]" width="100">
-        </el-table-column>
-        <el-table-column prop="calcelBalAmt" label="核销金额[元]" width="100">
-        </el-table-column>
-      </el-table>
+      <div class="el-talble_overflow_auto">
+        <el-table :data="dealData" border show-header show-summary highlight-current-row :summary-method="getDealSummaries">
+          <el-table-column type="index" label="序号" width="50">
+          </el-table-column>
+          <el-table-column prop="period" label="期次" sortable width="60">
+          </el-table-column>
+          <el-table-column prop="receiptTypeTxt" label="单据类型" width="100">
+          </el-table-column>
+          <el-table-column prop="accDate" label="交易日期" sortable width="120">
+          </el-table-column>
+          <el-table-column label="实还本金[元]" width="110">
+            <template slot-scope='scope'>
+              {{scope.row.actualBalAmt|formatMoney}}
+            </template>
+          </el-table-column>
+          <el-table-column label="实还利息[元]" width="110">
+            <template slot-scope='scope'>
+              {{scope.row.actualInteAmt|formatMoney}}
+            </template>
+          </el-table-column>
+          <el-table-column label="实还罚息[元]" width="110">
+            <template slot-scope='scope'>
+              {{scope.row.actualPenAmt|formatMoney}}
+            </template>
+          </el-table-column>
+          <el-table-column label="实还违约金[元]" width="110">
+            <template slot-scope='scope'>
+              {{scope.row.actualDefAmt|formatMoney}}
+            </template>
+          </el-table-column>
+          <el-table-column label="减免利息[元]" width="110">
+            <template slot-scope='scope'>
+              {{scope.row.redInteAmt|formatMoney}}
+            </template>
+          </el-table-column>
+          <el-table-column label="减免罚息[元]" width="110">
+            <template slot-scope='scope'>
+              {{scope.row.redPenaltyAmt|formatMoney}}
+            </template>
+          </el-table-column>
+          <el-table-column label="减免违约金[元]" width="110">
+            <template slot-scope='scope'>
+              {{scope.row.redDefaultAmt|formatMoney}}
+            </template>
+          </el-table-column>
+          <el-table-column label="退还服务费[元]" width="110">
+            <template slot-scope='scope'>
+              {{scope.row.returnFeeAmt|formatMoney}}
+            </template>
+          </el-table-column>
+          <el-table-column label="核销金额[元]" width="110">
+            <template slot-scope='scope'>
+              {{scope.row.calcelBalAmt|formatMoney}}
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
       <div class="page">
         <el-pagination @size-change="handleSizeChange3" @current-change="handleCurrentChange3" :page-sizes="[10, 20,50]" :current-page.sync="dealCurrentPage"
           :page-size="dealPageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.dealTotal">
@@ -627,7 +769,6 @@
         <el-button type="primary" @click="dealShow=false">返 回</el-button>
       </div>
     </el-dialog>
-
   </div>
 </template>
 <script>
@@ -635,6 +776,7 @@
     data() {
       return {
         ininin: '',
+        Routes: [],
         getData: {},
         currentRow: {},
         userInf: null,
@@ -647,6 +789,7 @@
         dealPageCount: 10, // 每页显示条数-交易
         recycleTotal: 0,
         dealTotal: 0,
+        BankTotal: 0,
         params: {
           sort: 'loanBeginDate', //  入参“loanBeginDate”
           order: 'desc', //  入参“desc”
@@ -697,8 +840,10 @@
         tableData: [],
         accountDetail: {}, //账务信息弹窗
         accountData: [], //账务信息弹窗
-        recycleData: [], //
+        recycleData: [], //回收信息
+        recycleFooter: {},
         dealData: [], //
+        dealFooter: {},
         tableData1: [{
           applyMainNo: "20150101000311",
           appDate: "XY(黑)借字(2015)第000306号",
@@ -944,7 +1089,7 @@
         if (to.path == '/applyLedger') {
           if (!this.Routes[4].closed) {
             this.currentRow = {};
-            this.params.pageNum = this.currentPage = 1;
+            this.params.page = this.currentPage = 1;
             this.params.rows = this.pageCount = 10;
             this.Rreset();
             // this.tableData = [];
@@ -954,6 +1099,15 @@
       },
     },
     methods: {
+      Int() {
+        this.params.currTermTheory = parseInt(this.params.currTermTheory);
+        if (isNaN(this.params.currTermTheory)) {
+          this.params.currTermTheory = '';
+          return
+        }
+        this.params.currTermTheory > 999 ? this.params.currTermTheory = 999 : '';
+        this.params.currTermTheory < 1 ? this.params.currTermTheory = 1 : '';
+      },
       AlertMessage() {
         if (JSON.stringify(this.currentRow) == '{}') {
           this.$confirm('请选择一条数据！', '提示', {
@@ -971,7 +1125,8 @@
         // 删除多余入参
         delete obj.page;
         delete obj.rows;
-        this.post('/credit/exportLoanLedger', obj).then(res => {
+        // this.post('/export/exportLoanLedger', obj).then(res => {
+        this.post('/export/notSession-exportLoanLedger', obj).then(res => {
           if (res.statusCode == 200) {
             // this.BankName = res.data;
           } else {
@@ -993,7 +1148,7 @@
             newOne: true,
           }
         });
-        localStorage.setItem("brrLedgerTW", JSON.stringify(row));
+        localStorage.setItem("brrLedgerTW", JSON.stringify(this.currentRow));
         localStorage.setItem("judge", JSON.stringify(this.judge));
       },
       toTrilDetail() { //信审信息
@@ -1037,8 +1192,9 @@
           sort: 'period', //	入参“period”
           order: 'asc', //	入参“asc”
         }).then(res => {
-          if (res.statusCode == 200) {
-            this.recycleData
+          if (res.statusCode == 200 && res.data) {
+            this.recycleData = res.data.rows;
+            this.recycleFooter = res.data.footer[0];
             this.recycleTotal = res.data.total;
           }
 
@@ -1052,13 +1208,13 @@
           sort: 'period', //	入参“period”
           order: 'asc', //	入参“asc”
         }).then(res => {
-          if (res.statusCode == 200) {
-            this.dealData
+          if (res.statusCode == 200 && res.data) {
+            this.dealData = res.data.rows;
+            this.dealFooter = res.data.footer[0];
             this.dealTotal = res.data.total;
           }
         })
       },
-
       moneyFilter(value) {
         if (value == 0) return 0;
         if (!value) return '';
@@ -1072,7 +1228,7 @@
         const sums = [];
         columns.forEach((column, index) => {
           if (index === 0) {
-            sums[index] = '总价';
+            sums[index] = '总合计：';
             return;
           }
           if (index === 14) { //借款金额合计
@@ -1107,6 +1263,128 @@
         });
         return sums;
       },
+      getRecycleSummaries(param) { //回收列表
+        const {
+          columns,
+          data
+        } = param;
+        const sums = [];
+        columns.forEach((column, index) => {
+          if (index === 2) {
+            sums[index] = '金额合计[元]：';
+            return;
+          }
+          if (index === 3) { //应还本金
+            sums[index] = this.moneyFilter(this.recycleFooter.eachTermBalAmt);
+            return;
+          }
+          if (index === 4) { //应还利息
+            sums[index] = this.moneyFilter(this.recycleFooter.eachTermInteAmt);
+            return;
+          }
+          if (index === 5) { //应还罚息
+            sums[index] = this.moneyFilter(this.recycleFooter.eachTermPenAmt);
+            return;
+          }
+          if (index === 6) { //应还违约金
+            sums[index] = this.moneyFilter(this.recycleFooter.eachTermDefAmt);
+            return;
+          }
+          if (index === 7) { //本期应还款额
+            sums[index] = this.moneyFilter(this.recycleFooter.eachTermAmtSum);
+            return;
+          }
+          if (index === 8) { //实还本金
+            sums[index] = this.moneyFilter(this.recycleFooter.actualBalAmt);
+            return;
+          }
+          if (index === 9) { //实还利息
+            sums[index] = this.moneyFilter(this.recycleFooter.actualInteAmt);
+            return;
+          }
+          if (index === 10) { //实还罚息
+            sums[index] = this.moneyFilter(this.recycleFooter.actualPenAmt);
+            return;
+          }
+          if (index === 11) { //实还违约金
+            sums[index] = this.moneyFilter(this.recycleFooter.actualDefAmt);
+            return;
+          }
+          if (index === 12) { //减免利息
+            sums[index] = this.moneyFilter(this.recycleFooter.redInteAmt);
+            return;
+          }
+          if (index === 13) { //减免罚息
+            sums[index] = this.moneyFilter(this.recycleFooter.redPenaltyAmt);
+            return;
+          }
+          if (index === 14) { //减免违约金
+            sums[index] = this.moneyFilter(this.recycleFooter.redDefaultAmt);
+            return;
+          }
+          if (index === 15) { //退还服务费
+            sums[index] = this.moneyFilter(this.recycleFooter.returnFeeAmt);
+            return;
+          }
+          if (index === 16) { //核销金额
+            sums[index] = this.moneyFilter(this.recycleFooter.calcelBalAmt);
+            return;
+          }
+          const values = data.map(item => Number(item[column.property]));
+        });
+        return sums;
+      },
+      getDealSummaries(param) { //交易明细列表
+        const {
+          columns,
+          data
+        } = param;
+        const sums = [];
+        columns.forEach((column, index) => {
+          if (index === 3) {
+            sums[index] = '金额合计[元]：';
+            return;
+          }
+          if (index === 4) { //实还本金
+            sums[index] = this.moneyFilter(this.dealFooter.actualBalAmt);
+            return;
+          }
+          if (index === 5) { //实还利息
+            sums[index] = this.moneyFilter(this.dealFooter.actualInteAmt);
+            return;
+          }
+          if (index === 6) { //实还罚息
+            sums[index] = this.moneyFilter(this.dealFooter.actualPenAmt);
+            return;
+          }
+          if (index === 7) { //实还违约金
+            sums[index] = this.moneyFilter(this.dealFooter.actualDefAmt);
+            return;
+          }
+          if (index === 8) { //减免利息
+            sums[index] = this.moneyFilter(this.dealFooter.redInteAmt);
+            return;
+          }
+          if (index === 9) { //减免罚息
+            sums[index] = this.moneyFilter(this.dealFooter.redPenaltyAmt);
+            return;
+          }
+          if (index === 10) { //减免违约金
+            sums[index] = this.moneyFilter(this.dealFooter.redDefaultAmt);
+            return;
+          }
+          if (index === 11) { //退还服务费
+            sums[index] = this.moneyFilter(this.dealFooter.returnFeeAmt);
+            return;
+          }
+          if (index === 12) { //核销金额
+            sums[index] = this.moneyFilter(this.dealFooter.calcelBalAmt);
+            return;
+          }
+          const values = data.map(item => Number(item[column.property]));
+        });
+        return sums;
+      },
       querySearch(queryString, cb) { //进件机构下拉查询
         let restaurants = this.agency;
         let results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
@@ -1123,19 +1401,16 @@
         };
       },
       handleSelect(item) { //进件机构下拉查询选中项
-        this.params.appOrgCode = this.agencyCode = this.selectedAgenName = item.appOrgName;
+        this.params.appOrgCode = item.orgCode;
+        this.agencyCode = this.selectedAgenName = item.orgName;
       },
       ProhandleSelect(item) { //产品下拉选中项
         this.proCode = this.selectedProName = item.proName;
         this.params.proCode = item.proCode;
       },
-      DateF(val) {
-        val ? val = val.getFullYear() + '-' + (val.getMonth() + 1) + '-' + val.getDate() : '';
-        return val;
-      },
       handleSizeChange(val) { //每页 N 条
-        this.params.pageSize = val;
-        this.params.pageNum = 1;
+        this.params.rows = val;
+        this.params.page = this.currentPage = 1; //从第一页开始显示 
         this.getInf(this.params);
       },
       handleSizeChange1(val) { //每页 N 条- 开户行名称下拉
@@ -1151,7 +1426,7 @@
         this.dealPost();
       },
       handleCurrentChange(val) { //查看第 N 页
-        this.params.pageNum = val;
+        this.params.page = val;
         this.getInf(this.params);
       },
       handleCurrentChange1(val) { //查看第 N 页- 开户行名称下拉
@@ -1197,7 +1472,6 @@
         this.params.salPerCode = ''; //  直销人员
         this.params.currTermTheory = ''; //  当前期次[理论]
         this.params.controlerName = ''; //  管户客服名称
-
         this.agencyCode = '';
         this.selectedAgenName = '';
         this.proCode = '';
@@ -1207,41 +1481,48 @@
         this.expiritionDate = ''; // 还款到期日期
         this.BankName = []; //开户行名称下拉
         this.tableData = []; //清空已查处列表
+            this.currentRow={};//清空选中行        
         // 页码重置
-        this.params.page = 1; //	页码 
-        // 清空弹窗及各分页 
+        this.params.page = this.currentPage = 1; //	页码 
+        // 清空弹窗及各分页  
         this.totalRecord = 0;
         this.recycleTotal = 0;
         this.dealTotal = 0;
-        //   rows=10, //	每页条数
-        //   this.getInf(this.params);
       },
       Rsearch() {
         // 放款日期
-        this.params.loanDate_ge = this.DateF(this.loanDate[0]);
-        this.params.loanDate_le = this.DateF(this.loanDate[1]);
+        this.params.loanDate_ge = this.loanDate[0];
+        this.params.loanDate_le = this.loanDate[1];
         // 应还款日期
-        this.params.repayDate_ge = this.DateF(this.PaybackDate[0]);
-        this.params.repayDate_le = this.DateF(this.PaybackDate[1]);
+        this.params.repayDate_ge = this.PaybackDate[0];
+        this.params.repayDate_le = this.PaybackDate[1];
         // 还款到期日期
-        this.params.loanEndDate_ge = this.DateF(this.expiritionDate[0]);
-        this.params.loanEndDate_le = this.DateF(this.expiritionDate[1]);
+        this.params.loanEndDate_ge = this.expiritionDate[0];
+        this.params.loanEndDate_le = this.expiritionDate[1];
 
-        this.params.pageNum = this.currentPage = 1;
+        this.params.page = this.currentPage = 1;
         this.getInf(this.params);
       },
       getInf(pam) {
+            this.currentRow={};//清空选中行        
         this.proCode != this.selectedProName ? (this.proCode = this.selectedProName = this.params.proCode = "") :
           "";
         this.agencyCode != this.selectedAgenName ? (this.agencyCode = this.selectedAgenName = this.params.agencyCode =
           "") : "";
         this.post("/credit/getLoanLedger", pam).then(res => {
           if (res.statusCode == 200) {
-            this.tableData = res.data.loanLedgerList;
-            this.totalRecord = res.data.total; // 总数
-            this.getData = res.data;
-            // this.changeColor();
+            if (res.data) {
+              this.tableData = res.data.loanLedgerList;
+              this.totalRecord = res.data.total; // 总数
+              this.getData = res.data;
+            } else {
+              // 清空上一次数据
+              this.tableData = [];
+              this.totalRecord = 0;
+              this.getData = {};
+            }
           } else {
+
             this.$message.error(res.msg);
           }
         });
@@ -1290,13 +1571,13 @@
         }).then(res => {
           if (res.statusCode == 200) {
             this.BankName = res.data;
+            //  this.BankTotal= res.data.total;
           } else {
             // this.$message.error(res.msg);
             this.$message.error('获取进件机构失败！');
           }
         })
       },
-
       //   changeColor() {
       //     for (var i = 0; i < this.tableData.length; i++) {
       //       this.tableData[i].completeTime * 1 >= 48 ? this.tableData[i].isEmer = true : this.tableData[i].isEmer =
@@ -1311,12 +1592,13 @@
       //     }
       //   }
     },
-    mounted() {
+    created() {
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
       this.params.userCode = this.userInf.userCode; //userCode
-      //   this.getProducts();
-      //   this.getloanTime();
-      //   this.getAgency();
+      this.Routes = this.$router.options.routes;
+      this.getProducts();
+      this.getloanTime();
+      this.getAgency();
     },
   }
 

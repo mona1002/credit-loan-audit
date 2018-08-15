@@ -5,19 +5,19 @@
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">进件编号： </span>
-          <el-input v-model="params.applySubNo" placeholder="请输入进件编号"></el-input>
+          <el-input v-model.trim="params.applySubNo" placeholder="请输入进件编号"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">客户名称：</span>
-          <el-input v-model="params.custName_la" placeholder="请输入客户名称"></el-input>
+          <el-input v-model.trim="params.custName" placeholder="请输入客户名称"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">证件号码：</span>
-          <el-input v-model="params.certCode" placeholder="请输入证件号码"></el-input>
+          <el-input v-model.trim="params.certCode" placeholder="请输入证件号码"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">手机号码：</span>
-          <el-input v-model="params.mobile" placeholder="请输入证件号码"></el-input>
+          <el-input v-model.trim="params.mobile" placeholder="请输入证件号码"></el-input>
         </el-col>
       </el-row>
       <el-row class="row row1" type="flex">
@@ -58,7 +58,7 @@
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">直销人员： </span>
-          <el-input v-model="params.salPerCode" placeholder="请输入进件编号"></el-input>
+          <el-input v-model.trim="params.salPerCode" placeholder="请输入进件编号"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">借款用途： </span>
@@ -69,7 +69,7 @@
         </el-col>
         <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">申请日期：</span>
-          <el-date-picker v-model="applyData" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+          <el-date-picker v-model="applyData" type="daterange"  range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"  value-format="yyyy-MM-dd">
           </el-date-picker>
         </el-col>
         <el-col :span="6" class="search-item">
@@ -118,7 +118,7 @@
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">进件客服： </span>
-          <el-input v-model="params.appSerPerCode" placeholder="请输入进件编号"></el-input>
+          <el-input v-model.trim="params.appSerPerCode" placeholder="请输入进件编号"></el-input>
         </el-col>
         <el-col :span="6" class="search-item" :offset="0">
         </el-col>
@@ -226,6 +226,7 @@
         ininin: '',
         currentRow: {},
         userInf: null,
+        Routes: [],
         params: {
           userCode: '', //	用户编号
           applySubNo: '', //	进件编号
@@ -233,7 +234,7 @@
           salPerCode: '', //	直销人员
           emerType: '', //	紧急程度
           appSerPerCode: '', //	进件客服
-          custNo: '', //	客户名称（输入客户编号）
+          custName: '', //	客户名称（输入客户编号）
           proCode: '', //	产品名称（输入产品编号）
           loanPurpose: '', //	借款用途
           appOrgCode: '', //	进件机构
@@ -497,8 +498,8 @@
         if (to.path == '/applyLedger') {
           if (!this.Routes[3].closed) {
             this.currentRow = {};
-               this.params.pageNum = this.currentPage=1;
-               this.params.rows=this.pageCount=10;
+            this.params.page = this.currentPage = 1;
+            this.params.rows = this.pageCount = 10;
             this.Rreset();
             // this.tableData = [];
             this.Routes[3].closed = true;
@@ -512,7 +513,7 @@
         // 删除多余入参
         delete obj.page;
         delete obj.rows;
-        this.post('/credit/getSmBank', obj).then(res => {
+        this.post('/export/exportApplyLedger', obj).then(res => {
           if (res.statusCode == 200) {
             // this.BankName = res.data;
           } else {
@@ -540,7 +541,7 @@
             newOne: true,
           }
         });
-        localStorage.setItem("appLedgerTW", JSON.stringify(row));
+        localStorage.setItem("appLedgerTW", JSON.stringify(this.currentRow));
         localStorage.setItem("judge", JSON.stringify(this.judge));
       },
       querySearch(queryString, cb) { //进件机构下拉查询
@@ -560,74 +561,81 @@
       },
       handleSelect(item) { //进件机构下拉查询选中项
         console.log(item)
-        this.params.appOrgCode = this.agencyCode = this.selectedAgenName = item.appOrgName;
+       this.params.appOrgName = this.agencyCode = this.selectedAgenName = item.orgName;
+        this.params.appOrgCode=item.orgCode;
       },
       ProhandleSelect(item) { //产品下拉选中项
         console.log(item)
-        this.proCode = this.selectedProName //= item.proName;
+        this.proCode = this.selectedProName = item.proName;
         this.params.proCode = item.proCode;
       },
-      DateF(val) {
-        val ? val = val.getFullYear() + '-' + (val.getMonth() + 1) + '-' + val.getDate() : '';
-        return val;
-      },
       handleSizeChange(val) { //每页 N 条
-        this.params.pageSize = val;
-        this.params.pageNum = 1;
+        console.log(val)
+        this.params.rows = val;
+        this.params.page = this.currentPage = 1;
         this.getInf(this.params);
       },
       handleCurrentChange(val) { //查看第 N 页
-        this.params.pageNum = val;
+        console.log(2, val)
+        this.params.page = val;
+
         this.getInf(this.params);
       },
       Rreset() {
-        this.applySubNo = '';
-        this.proType = '';
-        this.salPerCode = '';
-        this.emerType = '';
-        this.appSerPerCode = '';
-        this.custNo = '';
-        this.proCode = '';
-        this.loanPurpose = '';
-        this.appOrgCode = '';
-        this.appOrgName = '';
-        this.certCode = '';
-        this.appType = '';
-        this.sourcesChan = '';
-        this.appDate_ge = '';
-        this.appDate_le = '';
-        this.mobile = '';
-        this.borrType = '';
-        this.loanTerm = '';
-        this.busiState = '';
-        this.agencyCode = '';
+        this.params.applySubNo = ''; //	进件编号
+        this.params.proType = ''; //	产品类型
+        this.params.salPerCode = ''; //	直销人员
+        this.params.emerType = ''; //	紧急程度
+        this.params.appSerPerCode = ''; //	进件客服
+        this.params.custName = ''; //	客户名称
+        this.params.proCode = ''; //	产品名称（输入产品编号）
+        this.params.loanPurpose = ''; //	借款用途
+        this.params.appOrgCode = ''; //	进件机构
+        this.params.appOrgName = ''; //	进件机构名称
+        this.params.certCode = ''; //	证件号码
+        this.params.appType = ''; //	申请类型
+        this.params.sourcesChan = ''; //	来源渠道
+        this.params.appDate_ge = ''; //	高级查询 起始时间
+        this.params.appDate_le = ''; //	高级查询 终止时间
+        this.params.mobile = ''; //	手机号码
+        this.params.borrType = ''; //	借款人类型
+        this.params.loanTerm = ''; //	借款期限
+        this.params.busiState = ''; //	业务状态
+        this.params.page = this.currentPage = 1; //	页码-页码重置
+        // this.params.rows	='';//	每页条数
+        this.applyData = ''; //申请日期
+        this.agencyCode = ''; //进件机构
         this.selectedAgenName = '';
-        this.proCode = '';
+        this.proCode = ''; //产品名称
         this.selectedProName = '';
-        this.applyData = '';
-         this.tableData = [];////清空已查处列表
-        // 页码重置
-        this.params.page = 1, //	页码  
-          //   rows=10, //	每页条数
-          this.getInf(this.params);
+        this.tableData = []; ////清空已查处列表
+            this.currentRow={};//清空选中行        
       },
       Rsearch() {
-        console.log()
-        this.params.appDate_ge = this.DateF(this.applyData[0]);
-        this.params.appDate_le = this.DateF(this.applyData[1]);
-        this.params.pageNum = this.currentPage = 1;
+        console.log(this.applyData)
+        this.params.appDate_ge = this.applyData[0];
+        this.params.appDate_le = this.applyData[1];
+        this.params.page = this.currentPage = 1;
         this.getInf(this.params);
       },
       getInf(pam) {
+            this.currentRow={};//清空选中行        
         this.proCode != this.selectedProName ? (this.proCode = this.selectedProName = this.params.proCode = "") :
           "";
         this.agencyCode != this.selectedAgenName ? (this.agencyCode = this.selectedAgenName = this.params.agencyCode =
           "") : "";
         this.post("/credit/getApplyLedger", pam).then(res => {
-          if (res.statusCode == 200 && res.data.taskDetailList != null) {
-            this.tableData = res.data.rows;
-            this.totalRecord = res.data.total; // 总数
-            this.changeColor();
+        // this.post("http://10.1.26.47:8099/riskManagement/credit/getApplyLedger", pam).then(res => {
+          if (res.statusCode == 200) {
+            if (res.data) {
+              this.tableData = res.data.rows;
+              this.totalRecord = res.data.total; // 总数
+              // this.changeColor();
+            } else {
+              this.tableData = [];
+              this.totalRecord = 0;
+            }
+
           } else {
             this.$message.error(res.msg);
           }
@@ -671,23 +679,24 @@
           }
         })
       },
-      changeColor() {
-        for (var i = 0; i < this.tableData.length; i++) {
-          this.tableData[i].completeTime * 1 >= 48 ? this.tableData[i].isEmer = true : this.tableData[i].isEmer =
-            false;
-          if (this.tableData[i].emerType == '00') {
-            this.tableData[i].emerType = "普通";
-          } else if (this.tableData[i].emerType == '01') {
-            this.tableData[i].emerType = "免费加急";
-          } else if (this.tableData[i].emerType == '02') {
-            this.tableData[i].emerType = "收费加急";
-          };
-        }
-      }
+      // changeColor() {
+      //   for (var i = 0; i < this.tableData.length; i++) {
+      //     this.tableData[i].completeTime * 1 >= 48 ? this.tableData[i].isEmer = true : this.tableData[i].isEmer =
+      //       false;
+      //     if (this.tableData[i].emerType == '00') {
+      //       this.tableData[i].emerType = "普通";
+      //     } else if (this.tableData[i].emerType == '01') {
+      //       this.tableData[i].emerType = "免费加急";
+      //     } else if (this.tableData[i].emerType == '02') {
+      //       this.tableData[i].emerType = "收费加急";
+      //     };
+      //   }
+      // }
     },
-    mounted() {
+    created() {
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
       this.params.userCode = this.userInf.userCode; //userCode
+      this.Routes = this.$router.options.routes;
       this.getProducts();
       this.getloanTime();
       this.getAgency();

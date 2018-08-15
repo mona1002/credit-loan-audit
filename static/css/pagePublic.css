@@ -266,7 +266,9 @@ body .el-table_450_scroll .el-table__fixed,
 body .el-table_450_scroll .el-table__fixed-right {
   height: 435px !important;
 }
-
+.el-talble_overflow_auto .el-table{
+  overflow: auto;
+}
 /* 分屏 */
 
 .SplitScreen {
