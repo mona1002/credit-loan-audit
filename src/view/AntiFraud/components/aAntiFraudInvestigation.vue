@@ -278,7 +278,7 @@
         recordList: [],
         /*反欺诈申请ID*/
         appinfoId: '',
-        applyId: '',
+        // applyId: '',
         /*命中规则列表参数*/
         ruleId: '',
         pageParam: {
@@ -358,12 +358,19 @@
         ],
       }
     },
+    props: {
+      applyId: {
+        default: '',
+        required: true,
+        type: String
+      }
+    },
     mounted() {
-      /*获取 反欺诈申请ID*/
-      this.appinfoId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).businessId; //反欺诈专员+主管
-      this.applyId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).applyId; //反欺诈专员+主管
+      // /*获取 反欺诈申请ID*/
+      // this.appinfoId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).businessId; //反欺诈专员+主管
+      // this.applyId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).applyId; //反欺诈专员+主管
       this.infoList();
-      this.request(this.appinfoId);
+      // this.request(this.appinfoId);
     },
     methods: {
       // 点击基本信息查询其他信息
@@ -377,6 +384,7 @@
         }).then(res => {
           if (res.statusCode == 200 && res.data) {
             this.tableData = res.data;
+            this.request(this.tableData[0].id)
           }
         });
       },
@@ -547,9 +555,7 @@
           }
         })
       },
-      /*分页*/
-      handleSizeChange(val) {
-        console.log('每页 ${val} 条');
+      handleSizeChange(val) { //每页 N 条
         this.pageParam.pageSize = val;
         this.pageParam.pageNum = 1;
         if (this.currentPage !== 1 || this.setPageSize !== 10) {
@@ -559,8 +565,7 @@
           this.check(this.pageParam, this.ruleId);
         };
       },
-      handleCurrentChange(val) {
-        console.log('当前页: ${val}');
+      handleCurrentChange(val) { //当前页: N
         this.pageParam.pageNum = val;
         this.check(this.pageParam, this.ruleId);
       },

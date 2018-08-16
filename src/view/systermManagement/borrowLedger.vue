@@ -101,14 +101,22 @@
         <el-col :span="6" class="search-item">
           <span class="keywordText">开户行名称： </span>
           <el-select v-model="params.bankCode" placeholder="请选择" :disabled='params.escrowAgency==""'>
-            <el-option v-for="item in BankName" :key="item.bankCode" :label="item.bankName" :value="item.bankCode">
-              <span style="float: left">{{ item.bankCode }}</span>
-              <span style="float: right; color: #8492a6; margin-right:3px;">{{ item.bankName }}</span>
-            </el-option>
-            <el-pagination style="position:absolute; bottom:0;width:200px;overflow:auto;" @size-change="handleSizeChange1" @current-change="handleCurrentChange1"
-              :page-sizes="[10, 20,50]" :page-size="BankNamePageCounts" :current-page="BankNameCurrent" layout="total, sizes, prev, pager, next, jumper"
-              :total="BankTotal">
-            </el-pagination>
+            <div class="clearFix bankName_pagination_header" style=''>
+              <span class="select_left">银行代码</span>
+              <span class="float_left">银行名称</span>
+            </div>
+            <div class="clearFix bankName_pagination_body">
+              <el-option v-for="item in BankName" :key="item.bankCode" :label="item.bankName" :value="item.bankCode">
+                <span class="select_left">{{ item.bankCode }}</span>
+                <span class="select_color float_left">{{ item.bankName }}</span>
+              </el-option>
+            </div>
+            <div style="width:290px;"></div>
+            <div class='select_pageination bankName_pagination_footer'>
+              <el-pagination @size-change="handleSizeChange1" @current-change="handleCurrentChange1" :page-sizes="[10, 20,50]" :page-size="BankNamePageCounts"
+                :current-page="BankNameCurrent" layout="   sizes, prev,pager, next,total,jumper" :total="BankTotal">
+              </el-pagination>
+            </div>
           </el-select>
         </el-col>
         <el-col :span="6" class="search-item date_picker">
@@ -169,32 +177,32 @@
       </span>
       <span class="iconContainer">
         <span class="icon-item" @click='toDetailPage'>
-          <i class="el-icon tijiao"></i>
+          <i class="el-icon checkIcon"></i>
           <span class="el-icon-text">申请信息</span>
         </span>
         <span class="icon-item" @click='toTrilDetail'>
-          <i class="el-icon tijiao"></i>
+          <i class="el-icon checkIcon"></i>
           <span class="el-icon-text">信审信息</span>
         </span>
         <span class="icon-item" @click='toProtocalDetail'>
-          <i class="el-icon tijiao"></i>
+          <i class="el-icon checkIcon"></i>
           <span class="el-icon-text">协议信息</span>
         </span>
         <span class="icon-item" @click='accountAlert'>
-          <i class="el-icon tijiao"></i>
+          <i class="el-icon checkIcon"></i>
           <span class="el-icon-text">账务信息</span>
         </span>
         <span class="icon-item" @click='recycleAlert'>
-          <i class="el-icon tijiao"></i>
+          <i class="el-icon checkIcon"></i>
           <span class="el-icon-text">回收信息</span>
         </span>
         <span class="icon-item" @click='dealAlert'>
-          <i class="el-icon tijiao"></i>
+          <i class="el-icon checkIcon"></i>
           <span class="el-icon-text">交易明细</span>
         </span>
         <span class="icon-item" @click='getExcel'>
-          <i class="el-icon tijiao"></i>
-          <span class="el-icon-text">导出Excel</span>
+          <i class="el-icon appro"></i>
+          <span class="ExcelIcon">导出Excel</span>
         </span>
       </span>
     </div>
@@ -1125,14 +1133,13 @@
         // 删除多余入参
         delete obj.page;
         delete obj.rows;
-        this.post('/export/exportLoanLedger', obj).then(res => {
-        // this.post('/export/notSession-exportLoanLedger', obj).then(res => {
-          if (res.statusCode == 200) {
-            // this.BankName = res.data;
-          } else {
-            // this.$message.error(res.msg);
-            // this.$message.error('获取进件机构失败！');
+        this.post('/export/1exportLoanLedger', obj, {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
           }
+        }).then(res => {
+          console.log(res)
+          // this.post('/export/notSession-exportLoanLedger', obj).then(res => {
         })
       },
       selectRow(row) {
@@ -1481,7 +1488,7 @@
         this.expiritionDate = ''; // 还款到期日期
         this.BankName = []; //开户行名称下拉
         this.tableData = []; //清空已查处列表
-            this.currentRow={};//清空选中行        
+        this.currentRow = {}; //清空选中行        
         // 页码重置
         this.params.page = this.currentPage = 1; //	页码 
         // 清空弹窗及各分页  
@@ -1504,7 +1511,7 @@
         this.getInf(this.params);
       },
       getInf(pam) {
-            this.currentRow={};//清空选中行        
+        this.currentRow = {}; //清空选中行        
         this.proCode != this.selectedProName ? (this.proCode = this.selectedProName = this.params.proCode = "") :
           "";
         this.agencyCode != this.selectedAgenName ? (this.agencyCode = this.selectedAgenName = this.params.agencyCode =
@@ -1570,27 +1577,14 @@
           rows: this.BankNamePageCounts,
         }).then(res => {
           if (res.statusCode == 200) {
-            this.BankName = res.data;
-            //  this.BankTotal= res.data.total;
+            this.BankName = res.data.rows;
+            this.BankTotal = res.data.total;
           } else {
             // this.$message.error(res.msg);
             this.$message.error('获取进件机构失败！');
           }
         })
       },
-      //   changeColor() {
-      //     for (var i = 0; i < this.tableData.length; i++) {
-      //       this.tableData[i].completeTime * 1 >= 48 ? this.tableData[i].isEmer = true : this.tableData[i].isEmer =
-      //         false;
-      //       if (this.tableData[i].emerType == '00') {
-      //         this.tableData[i].emerType = "普通";
-      //       } else if (this.tableData[i].emerType == '01') {
-      //         this.tableData[i].emerType = "免费加急";
-      //       } else if (this.tableData[i].emerType == '02') {
-      //         this.tableData[i].emerType = "收费加急";
-      //       };
-      //     }
-      //   }
     },
     created() {
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
@@ -1606,6 +1600,40 @@
 <style scoped>
   .listContainer {
     margin-bottom: 0;
+  }
+
+  .select_left {
+    float: left;
+    width: 90px;
+  }
+
+  .select_color {
+    color: #8492a6;
+  }
+
+  .bankName_pagination_header {
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+    left: 0;
+    background: #fff;
+    right: 0;
+    height: 25px;
+    line-height: 25px;
+    font-size: 14px;
+    padding: 0 7px;
+  }
+
+  .bankName_pagination_body {
+    margin-top: 20px;
+    margin-bottom: 60px;
+  }
+
+  .bankName_pagination_footer {
+    position: absolute;
+    background: #fff;
+    bottom: 0;
+    width: 290px
   }
 
 </style>

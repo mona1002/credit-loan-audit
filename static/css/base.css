@@ -6,10 +6,12 @@
    color: #0077ff;
  }
 
- /* 下拉框内容 *//* 此处影响反欺诈结论下拉框样式，所以去掉 */
+ /* 下拉框内容 */
+
+ /* 此处影响反欺诈结论下拉框样式，所以去掉 */
 
  body .el-select-dropdown {
-  min-width: 200px !important;
+   min-width: 200px !important;
  }
 
  /* 整体布局 */
@@ -226,7 +228,11 @@
    color: #1f2d3d;
    vertical-align: middle;
  }
-
+.ExcelIcon{
+  font-size: 14px;
+  color: #1f2d3d;
+  vertical-align: middle;
+}
  /* 添加 */
 
  .addIcon {
@@ -239,9 +245,10 @@
    background-image: url('../images/faqi.png')
  }
 
- .tijiao{
-  background-image: url('../images/tijiao.png')   
+ .tijiao {
+   background-image: url('../images/tijiao.png')
  }
+
  /* 人像 */
 
  .appro {
@@ -258,6 +265,12 @@
 
  .deleteIcon {
    background-image: url('../images/delete.png')
+ }
+
+ /* 查看 */
+
+ .checkIcon {
+   background-image: url('../images/check2x.png')
  }
 
  .HangUpIcon {
@@ -306,7 +319,6 @@
  .collapse_title_text {
    height: 30px;
    line-height: 30px;
-   /* background:red; */
    font-size: 14px;
    font-weight: 800;
    display: inline-block;
@@ -930,19 +942,25 @@
    color: #f56c6c;
    margin-right: 4px;
  }
+
  /* 多选下拉框 √ 不显示 */
 
-body .el-select-dropdown.is-multiple .el-select-dropdown__item.selected::after{
-  content:'';
+ body .el-select-dropdown.is-multiple .el-select-dropdown__item.selected::after {
+   content: '';
  }
+
  /* tab切换 */
- .el-tabs--border-card>.el-tabs__content{
-   padding:0
+
+ .el-tabs--border-card>.el-tabs__content {
+   padding: 0
  }
+
  /* 树形结构下拉 */
- body .el-tree .el-tree-node .el-tree-node__content{
+
+ body .el-tree .el-tree-node .el-tree-node__content {
    box-shadow: none;
  }
- body .el-tree .el-tree-node .el-tree-node__children .el-tree-node__content{
-   background:#fff;
+
+ body .el-tree .el-tree-node .el-tree-node__children .el-tree-node__content {
+   background: #fff;
  }

@@ -137,12 +137,12 @@
       </span>
       <span class="iconContainer">
         <span class="icon-item" @click='toDetailPage'>
-          <i class="el-icon faqi"></i>
+          <i class="el-icon checkIcon"></i>
           <span class="el-icon-text">申请信息</span>
         </span>
         <span class="icon-item" @click='getExcel'>
           <i class="el-icon appro"></i>
-          <span class="el-icon-text">导出Excel</span>
+          <span class="ExcelIcon">导出Excel</span>         
         </span>
       </span>
     </div>

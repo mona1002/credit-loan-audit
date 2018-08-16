@@ -203,7 +203,9 @@
 .text_align_center {
   text-align: center;
 }
-
+.float_left{
+  float:left;
+}
 body .pre_wrap {
   white-space: pre-wrap;
 }
@@ -268,6 +270,26 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 .el-talble_overflow_auto .el-table{
   overflow: auto;
+}
+/* 借款台账中-下拉框中分页 */
+.select_pageination .el-pagination{
+  white-space:normal;
+}
+.select_pageination .el-pager li,
+.select_pageination .el-pagination button{
+min-width:16px;
+padding:0;
+}
+.select_pageination .el-pagination .btn-next,
+ .select_pageination .el-pagination .btn-prev{
+width:20px;
+ }
+ .select_pageination  .el-pagination .el-select .el-input{
+margin:0;
+width:82px;
+ }
+ .select_pageination .el-pagination__sizes{
+padding-right:-5px;
 }
 /* 分屏 */
 

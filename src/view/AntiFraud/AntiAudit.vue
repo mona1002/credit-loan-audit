@@ -47,7 +47,7 @@
             <aAprovalConclusion v-if=" this.tabContent2==8"></aAprovalConclusion>
             <aAntiConclusionPath v-if=" this.tabContent2==9"></aAntiConclusionPath>
             <AntiApplyInf v-if=" this.tabContent2==10" >反欺诈申请信息</AntiApplyInf>
-            <aAntiFraudInvestigation v-if=" this.tabContent2==11">反欺诈调查</aAntiFraudInvestigation>
+            <aAntiFraudInvestigation v-if=" this.tabContent2==11" :applyId='tastwaitingPass.applyId'>反欺诈调查</aAntiFraudInvestigation>
             <approvalConclus v-if=" this.tabContent2==12">审批结论</approvalConclus>
           </div>
         </div>

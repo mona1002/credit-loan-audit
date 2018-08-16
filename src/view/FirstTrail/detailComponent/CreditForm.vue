@@ -248,7 +248,7 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">核实身份</span>
         </template>
-        <div class="CreditForm_CheckId clearFixed" style="padding-bottom:10px;">
+        <div class="CreditForm_CheckId clearFix" style="padding-bottom:10px;">
           <ul>
             <li style="marginTop:5px;">
               <p>
@@ -336,7 +336,7 @@
           <span class="collapse_title_text">工作信息</span>
         </template>
         <div class="CreditForm_WorkInfs ">
-          <ul class="CreditForm_WorkInfs_ul_left clearFixed">
+          <ul class="CreditForm_WorkInfs_ul_left clearFix">
             <li style="width:100%">
               <i class="hint">
                 <b v-show="this.Wordhint.Working.address" class="Working_input"> 输入长度不能超过50</b>
