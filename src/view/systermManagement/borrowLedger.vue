@@ -17,7 +17,7 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">手机号码：</span>
-          <el-input v-model.trim="params.loanMobile" placeholder="请输入证件号码"></el-input>
+          <el-input v-model.trim="params.loanMobile" placeholder="请输入手机号码"></el-input>
         </el-col>
       </el-row>
       <el-row class="row row1" type="flex">
@@ -86,7 +86,7 @@
         <el-col :span="6" class="search-item">
           <span class="keywordText">每期还款日：</span>
           <el-input v-model.trim="params.returnDay" @blur="params.returnDay&&(parseInt(params.returnDay)>31||parseInt(params.returnDay)<1)?params.returnDay='':''"
-            placeholder="请输入证件号码"></el-input>
+            placeholder="请输入每期还款日"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">托管机构： </span>
@@ -148,7 +148,7 @@
         </el-col>
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">直销人员：</span>
-          <el-input v-model.trim="params.salPerCode" placeholder="请输入直销人员"></el-input>
+          <el-input v-model.trim="params.salPerCode" placeholder="请输入直销人员编号"></el-input>
         </el-col>
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">当前期次[理论]：</span>
@@ -780,6 +780,7 @@
   </div>
 </template>
 <script>
+  import axios from 'axios'
   export default {
     data() {
       return {
@@ -940,20 +941,21 @@
           {
             value: '00',
             label: '其他'
-          }, {
-            value: '02',
-            label: '银联'
           },
-          //    {
-          //     value: '01',
+          //  {
+          //   value: '02',
+          //   label: '银联'
+          // },{
+          // //     value: '01',
           //     label: '通联'
           //   }, {
           //     value: '03',
           //     label: '富友'
-          //   }, {
-          //     value: '04',
-          //     label: '融宝'
-          //   }
+            // }, 
+            {
+              value: '04',
+              label: '融宝'
+            }
         ],
         agency: [ //进件机构
         ],
@@ -1128,19 +1130,31 @@
         }
         return false;
       },
+      exportExcel(form) {
+        return axios({ // 用axios发送post请求
+          method: 'post',
+          url: '/serviceTime/exportData', // 请求地址
+          data: form, // 参数
+          responseType: 'blob', // 表明返回服务器返回的数据类型
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+      },
       getExcel() { //导出Excel
         let obj = Object.assign({}, this.params);
         // 删除多余入参
         delete obj.page;
         delete obj.rows;
-        this.post('/export/1exportLoanLedger', obj, {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-          }
-        }).then(res => {
-          console.log(res)
-          // this.post('/export/notSession-exportLoanLedger', obj).then(res => {
-        })
+        axios.post('/export/exportLoanLedger', obj, {
+          responseType: 'arraybuffer'
+        }).then((res) => {
+          let blob = new Blob([res.data], {
+            type: "application/vnd.ms-excel"
+          });　　　　　
+          let objectUrl = URL.createObjectURL(blob);　　　　　
+          window.location.href = objectUrl;　　　　
+        }).catch(function (res) {})
       },
       selectRow(row) {
         this.currentRow = row;

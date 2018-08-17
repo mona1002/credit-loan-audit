@@ -17,7 +17,7 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">手机号码：</span>
-          <el-input v-model.trim="params.mobile" placeholder="请输入证件号码"></el-input>
+          <el-input v-model.trim="params.mobile" placeholder="请输入手机号码"></el-input>
         </el-col>
       </el-row>
       <el-row class="row row1" type="flex">
@@ -58,7 +58,7 @@
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">直销人员： </span>
-          <el-input v-model.trim="params.salPerCode" placeholder="请输入进件编号"></el-input>
+          <el-input v-model.trim="params.salPerCode" placeholder="请输入直销人员"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">借款用途： </span>
@@ -95,8 +95,8 @@
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
             <template slot-scope="{ item }">
-              <span style="float: left; width:66px">{{ item.orgName }}</span>
-              <span style="float: left;color: #8492a6; font-size: 13px;margin-left: 20px;">{{ item.orgCode }}</span>
+              <span style="float: left;">{{ item.orgName }}</span>
+              <span style="float: right;color: #8492a6; font-size: 13px;">{{ item.orgCode }}</span>
             </template>
           </el-autocomplete>
         </el-col>
@@ -118,7 +118,7 @@
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">进件客服： </span>
-          <el-input v-model.trim="params.appSerPerCode" placeholder="请输入进件编号"></el-input>
+          <el-input v-model.trim="params.appSerPerCode" placeholder="请输入进件客服"></el-input>
         </el-col>
         <el-col :span="6" class="search-item" :offset="0">
         </el-col>
@@ -220,6 +220,8 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
+
   export default {
     data() {
       return {
@@ -513,14 +515,15 @@
         // 删除多余入参
         delete obj.page;
         delete obj.rows;
-        this.post('/export/exportApplyLedger', obj).then(res => {
-          if (res.statusCode == 200) {
-            // this.BankName = res.data;
-          } else {
-            // this.$message.error(res.msg);
-            // this.$message.error('获取进件机构失败！');
-          }
-        })
+         axios.post('/export/exportApplyLedger', obj, {
+          responseType: 'arraybuffer'
+        }).then((res) => {
+          let blob = new Blob([res.data], {
+            type: "application/vnd.ms-excel"
+          });　　　　　
+          let objectUrl = URL.createObjectURL(blob);　　　　　
+          window.location.href = objectUrl;　　　　
+        }).catch(function (res) {})
       },
       selectRow(row) {
         this.currentRow = row;
@@ -560,25 +563,20 @@
         };
       },
       handleSelect(item) { //进件机构下拉查询选中项
-        console.log(item)
        this.params.appOrgName = this.agencyCode = this.selectedAgenName = item.orgName;
         this.params.appOrgCode=item.orgCode;
       },
       ProhandleSelect(item) { //产品下拉选中项
-        console.log(item)
         this.proCode = this.selectedProName = item.proName;
         this.params.proCode = item.proCode;
       },
       handleSizeChange(val) { //每页 N 条
-        console.log(val)
         this.params.rows = val;
         this.params.page = this.currentPage = 1;
         this.getInf(this.params);
       },
       handleCurrentChange(val) { //查看第 N 页
-        console.log(2, val)
         this.params.page = val;
-
         this.getInf(this.params);
       },
       Rreset() {
@@ -602,6 +600,7 @@
         this.params.loanTerm = ''; //	借款期限
         this.params.busiState = ''; //	业务状态
         this.params.page = this.currentPage = 1; //	页码-页码重置
+        this.totalRecord = 0;
         // this.params.rows	='';//	每页条数
         this.applyData = ''; //申请日期
         this.agencyCode = ''; //进件机构
@@ -612,7 +611,6 @@
             this.currentRow={};//清空选中行        
       },
       Rsearch() {
-        console.log(this.applyData)
         this.params.appDate_ge = this.applyData[0];
         this.params.appDate_le = this.applyData[1];
         this.params.page = this.currentPage = 1;
