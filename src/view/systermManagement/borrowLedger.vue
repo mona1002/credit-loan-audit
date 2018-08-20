@@ -404,7 +404,7 @@
             </li>
             <li>
               <label class="label_width_145">还款方式：</label>
-              <span>{{accountDetail.repayWay}}</span>
+              <span>{{accountDetail.repayWayTxt}}</span>
             </li>
           </div>
           <div class=" CreditForm_div_border clearFix">
@@ -414,7 +414,7 @@
             </li>
             <li>
               <label class="label_width_145">还款起始日期：</label>
-              <span>{{accountDetail.returnDay}}</span>
+              <span>{{accountDetail.loanBeginDate}}</span>
             </li>
             <li>
               <label class="label_width_145">还款到期日期：</label>
@@ -424,21 +424,21 @@
           <div class=" CreditForm_div_border clearFix">
             <li>
               <label class="label_width_145">综合费率[月]：</label>
-              <span>{{accountDetail.synthesisrateM}}</span>
+              <span>{{accountDetail.synthesisrateM | percent_100}}</span>
             </li>
             <li>
               <label class="label_width_145">借款利率[年]：</label>
-              <span>{{accountDetail.loanRateYr}}</span>
+              <span>{{accountDetail.loanRateYr | percent_100}}</span>
             </li>
             <li>
               <label class="label_width_145">罚息比例[日]：</label>
-              <span>{{accountDetail.penaltyRatio}}</span>
+              <span>{{accountDetail.penaltyRatio | percent_100}}</span>
             </li>
           </div>
           <div class=" CreditForm_div_border clearFix">
             <li>
               <label class="label_width_145">违约金比例：</label>
-              <span>{{accountDetail.defaultRatio}}</span>
+              <span>{{accountDetail.defaultRatio | percent_100}}</span>
             </li>
             <li>
               <label class="label_width_145">服务费金额[元]：</label>
@@ -564,7 +564,7 @@
           <div class=" CreditForm_div_border clearFix">
             <li>
               <label class="label_width_145">账户状态：</label>
-              <span>{{accountDetail.accountState}}</span>
+              <span>{{accountDetail.accountStateTxt}}</span>
             </li>
             <li>
               <label class="label_width_145">放款日期：</label>
@@ -572,7 +572,7 @@
             </li>
             <li>
               <label class="label_width_145">结清标志：</label>
-              <span>{{accountDetail.payOffFlag}}</span>
+              <span>{{accountDetail.payOffFlagTxt}}</span>
             </li>
           </div>
           <div class=" CreditForm_div_border clearFix">
@@ -617,94 +617,95 @@
     </el-dialog>
     <!-- 回收信息 -->
     <el-dialog title="回收信息" :visible.sync="recycleShow" width="1000px">
-      <div class="el-talble_overflow_auto">
-        <el-table :data="recycleData" border show-header highlight-current-row :summary-method="getRecycleSummaries" show-summary>
-          <el-table-column type="index" label="序号" width="50">
-          </el-table-column>
-          <el-table-column prop="period" label="期次" width="50">
-          </el-table-column>
-          <el-table-column prop="repayDate" label="应还日期" width="110">
-          </el-table-column>
-          <el-table-column label="应还本金[元]" width="110">
-            <template slot-scope='scope'>
-              {{scope.row.eachTermBalAmt|formatMoney}}
-            </template>
-          </el-table-column>
-          <el-table-column label="应还利息[元]" width="110">
-            <template slot-scope='scope'>
-              {{scope.row.eachTermInteAmt|formatMoney}}
-            </template>
-          </el-table-column>
-          <el-table-column label="应还罚息[元] " width="110">
-            <template slot-scope='scope'>
-              {{scope.row.eachTermPenAmt|formatMoney}}
-            </template>
-          </el-table-column>
-          <el-table-column label="应还违约金[元] " width="110">
-            <template slot-scope='scope'>
-              {{scope.row.eachTermDefAmt|formatMoney}}
-            </template>
-          </el-table-column>
-          <el-table-column label="本期应还款额[元]" width="130">
-            <template slot-scope='scope'>
-              {{scope.row.eachTermAmtSum|formatMoney}}
-            </template>
-          </el-table-column>
-          <el-table-column label="实还本金[元]" width="110">
-            <template slot-scope='scope'>
-              {{scope.row.actualBalAmt|formatMoney}}
-            </template>
-          </el-table-column>
-          <el-table-column label="实还利息[元]" width="110">
-            <template slot-scope='scope'>
-              {{scope.row.actualInteAmt|formatMoney}}
-            </template>
-          </el-table-column>
-          <el-table-column label="实还罚息[元]" width="110">
-            <template slot-scope='scope'>
-              {{scope.row.actualPenAmt|formatMoney}}
-            </template>
-          </el-table-column>
-          <el-table-column label="实还违约金[元]" width="110">
-            <template slot-scope='scope'>
-              {{scope.row.actualDefAmt|formatMoney}}
-            </template>
-          </el-table-column>
-          <el-table-column label="减免利息[元]" width="110">
-            <template slot-scope='scope'>
-              {{scope.row.redInteAmt|formatMoney}}
-            </template>
-          </el-table-column>
-          <el-table-column label="减免罚息[元]" width="110">
-            <template slot-scope='scope'>
-              {{scope.row.redPenaltyAmt|formatMoney}}
-            </template>
-          </el-table-column>
-          <el-table-column label="减免违约金[元]" width="110">
-            <template slot-scope='scope'>
-              {{scope.row.redDefaultAmt|formatMoney}}
-            </template>
-          </el-table-column>
-          <el-table-column label="退还服务费[元]" width="110">
-            <template slot-scope='scope'>
-              {{scope.row.returnFeeAmt|formatMoney}}
-            </template>
-          </el-table-column>
-          <el-table-column label="核销金额[元]" width="110">
-            <template slot-scope='scope'>
-              {{scope.row.calcelBalAmt|formatMoney}}
-            </template>
-          </el-table-column>
-          <el-table-column prop='exceedDate' label="转逾期日期" width="110">
-          </el-table-column>
-          <el-table-column prop='overFlagTxt' label="拖欠标志" width="80">
-          </el-table-column>
-          <el-table-column prop='payoffFlagTxt' label="结清标志" width="80">
-          </el-table-column>
-          <!-- <el-table-column prop='loanAcNo' label="借款账号" width="160">
+      <!-- <div class="el-talble_overflow_auto"> -->
+      <el-table :data="recycleData" height="435" border show-header highlight-current-row :summary-method="getRecycleSummaries"
+        show-summary>
+        <el-table-column type="index" label="序号" width="50">
+        </el-table-column>
+        <el-table-column prop="period" label="期次" width="50">
+        </el-table-column>
+        <el-table-column prop="repayDate" label="应还日期" width="110">
+        </el-table-column>
+        <el-table-column label="应还本金[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.eachTermBalAmt|formatMoney}}
+          </template>
+        </el-table-column>
+        <el-table-column label="应还利息[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.eachTermInteAmt|formatMoney}}
+          </template>
+        </el-table-column>
+        <el-table-column label="应还罚息[元] " width="110">
+          <template slot-scope='scope'>
+            {{scope.row.eachTermPenAmt|formatMoney}}
+          </template>
+        </el-table-column>
+        <el-table-column label="应还违约金[元] " width="110">
+          <template slot-scope='scope'>
+            {{scope.row.eachTermDefAmt|formatMoney}}
+          </template>
+        </el-table-column>
+        <el-table-column label="本期应还款额[元]" width="130">
+          <template slot-scope='scope'>
+            {{scope.row.eachTermAmtSum|formatMoney}}
+          </template>
+        </el-table-column>
+        <el-table-column label="实还本金[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.actualBalAmt|formatMoney}}
+          </template>
+        </el-table-column>
+        <el-table-column label="实还利息[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.actualInteAmt|formatMoney}}
+          </template>
+        </el-table-column>
+        <el-table-column label="实还罚息[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.actualPenAmt|formatMoney}}
+          </template>
+        </el-table-column>
+        <el-table-column label="实还违约金[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.actualDefAmt|formatMoney}}
+          </template>
+        </el-table-column>
+        <el-table-column label="减免利息[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.redInteAmt|formatMoney}}
+          </template>
+        </el-table-column>
+        <el-table-column label="减免罚息[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.redPenaltyAmt|formatMoney}}
+          </template>
+        </el-table-column>
+        <el-table-column label="减免违约金[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.redDefaultAmt|formatMoney}}
+          </template>
+        </el-table-column>
+        <el-table-column label="退还服务费[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.returnFeeAmt|formatMoney}}
+          </template>
+        </el-table-column>
+        <el-table-column label="核销金额[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.calcelBalAmt|formatMoney}}
+          </template>
+        </el-table-column>
+        <el-table-column prop='exceedDate' label="转逾期日期" width="110">
+        </el-table-column>
+        <el-table-column prop='overFlagTxt' label="拖欠标志" width="80">
+        </el-table-column>
+        <el-table-column prop='payoffFlagTxt' label="结清标志" width="80">
+        </el-table-column>
+        <!-- <el-table-column prop='loanAcNo' label="借款账号" width="160">
         </el-table-column> -->
-        </el-table>
-      </div>
+      </el-table>
+      <!-- </div> -->
       <div class="page">
         <el-pagination @size-change="handleSizeChange2" @current-change="handleCurrentChange2" :page-sizes="[10, 20,50]" :current-page.sync="recycleCurrentPage"
           :page-size="recyclePageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.recycleTotal">
@@ -716,63 +717,63 @@
     </el-dialog>
     <!-- 交易明细 -->
     <el-dialog title="交易明细" :visible.sync="dealShow" width="1000px">
-      <div class="el-talble_overflow_auto">
-        <el-table :data="dealData" border show-header show-summary highlight-current-row :summary-method="getDealSummaries">
-          <el-table-column type="index" label="序号" width="50">
-          </el-table-column>
-          <el-table-column prop="period" label="期次" sortable width="60">
-          </el-table-column>
-          <el-table-column prop="receiptTypeTxt" label="单据类型" width="100">
-          </el-table-column>
-          <el-table-column prop="accDate" label="交易日期" sortable width="120">
-          </el-table-column>
-          <el-table-column label="实还本金[元]" width="110">
-            <template slot-scope='scope'>
-              {{scope.row.actualBalAmt|formatMoney}}
-            </template>
-          </el-table-column>
-          <el-table-column label="实还利息[元]" width="110">
-            <template slot-scope='scope'>
-              {{scope.row.actualInteAmt|formatMoney}}
-            </template>
-          </el-table-column>
-          <el-table-column label="实还罚息[元]" width="110">
-            <template slot-scope='scope'>
-              {{scope.row.actualPenAmt|formatMoney}}
-            </template>
-          </el-table-column>
-          <el-table-column label="实还违约金[元]" width="110">
-            <template slot-scope='scope'>
-              {{scope.row.actualDefAmt|formatMoney}}
-            </template>
-          </el-table-column>
-          <el-table-column label="减免利息[元]" width="110">
-            <template slot-scope='scope'>
-              {{scope.row.redInteAmt|formatMoney}}
-            </template>
-          </el-table-column>
-          <el-table-column label="减免罚息[元]" width="110">
-            <template slot-scope='scope'>
-              {{scope.row.redPenaltyAmt|formatMoney}}
-            </template>
-          </el-table-column>
-          <el-table-column label="减免违约金[元]" width="110">
-            <template slot-scope='scope'>
-              {{scope.row.redDefaultAmt|formatMoney}}
-            </template>
-          </el-table-column>
-          <el-table-column label="退还服务费[元]" width="110">
-            <template slot-scope='scope'>
-              {{scope.row.returnFeeAmt|formatMoney}}
-            </template>
-          </el-table-column>
-          <el-table-column label="核销金额[元]" width="110">
-            <template slot-scope='scope'>
-              {{scope.row.calcelBalAmt|formatMoney}}
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
+      <!-- <div class="el-talble_overflow_auto"> -->
+      <el-table :data="dealData" border height="435" show-header show-summary highlight-current-row :summary-method="getDealSummaries">
+        <el-table-column type="index" label="序号" width="50">
+        </el-table-column>
+        <el-table-column prop="period" label="期次" sortable width="70">
+        </el-table-column>
+        <el-table-column prop="receiptTypeTxt" label="单据类型" width="100">
+        </el-table-column>
+        <el-table-column prop="accDate" label="交易日期" sortable width="120">
+        </el-table-column>
+        <el-table-column label="实还本金[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.actualBalAmt|formatMoney}}
+          </template>
+        </el-table-column>
+        <el-table-column label="实还利息[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.actualInteAmt|formatMoney}}
+          </template>
+        </el-table-column>
+        <el-table-column label="实还罚息[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.actualPenAmt|formatMoney}}
+          </template>
+        </el-table-column>
+        <el-table-column label="实还违约金[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.actualDefAmt|formatMoney}}
+          </template>
+        </el-table-column>
+        <el-table-column label="减免利息[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.redInteAmt|formatMoney}}
+          </template>
+        </el-table-column>
+        <el-table-column label="减免罚息[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.redPenaltyAmt|formatMoney}}
+          </template>
+        </el-table-column>
+        <el-table-column label="减免违约金[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.redDefaultAmt|formatMoney}}
+          </template>
+        </el-table-column>
+        <el-table-column label="退还服务费[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.returnFeeAmt|formatMoney}}
+          </template>
+        </el-table-column>
+        <el-table-column label="核销金额[元]" width="110">
+          <template slot-scope='scope'>
+            {{scope.row.calcelBalAmt|formatMoney}}
+          </template>
+        </el-table-column>
+      </el-table>
+      <!-- </div> -->
       <div class="page">
         <el-pagination @size-change="handleSizeChange3" @current-change="handleCurrentChange3" :page-sizes="[10, 20,50]" :current-page.sync="dealCurrentPage"
           :page-size="dealPageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.dealTotal">
@@ -1308,6 +1309,26 @@
           }
           if (index === 20) { //咨询费金额
             sums[index] = this.moneyFilter(this.getData.consFeeAmtSum);
+            return;
+          }
+          if (index === 27) { //每期还款额[元] 
+            sums[index] = this.moneyFilter(this.getData.eachTermAmtSum);
+            return;
+          }
+          if (index === 28) { //剩余本金[元] 
+            sums[index] = this.moneyFilter(this.getData.loanBalAmtSum);
+            return;
+          }
+          if (index === 29) { //拖欠总额[元] 
+            sums[index] = this.moneyFilter(this.getData.totalArrearsSum);
+            return;
+          }
+          if (index === 30) { //核销金额[[元] 
+            sums[index] = this.moneyFilter(this.getData.calcelBalAmtSum);
+            return;
+          }
+          if (index === 31) { //退还服务费[元] 
+            sums[index] = this.moneyFilter(this.getData.returnFeeAmtSum);
             return;
           }
           const values = data.map(item => Number(item[column.property]));

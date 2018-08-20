@@ -527,13 +527,13 @@
           return
         }
         // 日期入参
-         this.params.appDate_ge = this.applyData[0];
+        this.params.appDate_ge = this.applyData[0];
         this.params.appDate_le = this.applyData[1];
         // 删除多余入参
         let obj = Object.assign({}, this.params);
         delete obj.page;
         delete obj.rows;
-        
+
         axios.post('/export/exportApplyLedger', obj, {
           responseType: 'arraybuffer'
         }).then((res) => {
