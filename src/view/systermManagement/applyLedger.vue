@@ -516,6 +516,14 @@
           }
         }
       },
+      applyData(newd,old){
+        console.log(newd);
+        console.log(old);
+        if(newd!==old){
+console.log("different");   this.applyData.pop();
+        this.applyData.pop();
+        }
+      }
     },
     methods: {
       getExcel() { //导出Excel
@@ -640,7 +648,11 @@ console.log("badk")
         this.params.page = this.currentPage = 1; //	页码-页码重置
         this.totalRecord = 0;
         // this.params.rows	='';//	每页条数
+        this.applyData.pop();
+        this.applyData.pop();
         this.applyData = []; //申请日期
+
+        
         // this.applyData = ''; //申请日期
         this.agencyCode = ''; //进件机构
         this.selectedAgenName = '';
