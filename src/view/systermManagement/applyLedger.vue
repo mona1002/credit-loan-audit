@@ -69,7 +69,7 @@
         </el-col>
         <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">申请日期：</span>
-          <el-date-picker v-model="applyData" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"
+          <el-date-picker v-model="applyData"  v-if='applyData' type="daterange" range-separator="至" 
             value-format="yyyy-MM-dd">
           </el-date-picker>
         </el-col>
@@ -96,7 +96,7 @@
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
             <template slot-scope="{ item }">
-              <span style="float: left;">{{ item.orgName }}</span>
+              <span class="float_left">{{ item.orgName }}</span>
               <span style="float: right;color: #8492a6; font-size: 13px;">{{ item.orgCode }}</span>
             </template>
           </el-autocomplete>
@@ -516,14 +516,14 @@
           }
         }
       },
-      applyData(newd,old){
-        console.log(newd);
-        console.log(old);
-        if(newd!==old){
-console.log("different");   this.applyData.pop();
-        this.applyData.pop();
-        }
-      }
+//       applyData(newd,old){
+//         console.log(newd);
+//         console.log(old);
+//         if(newd!==old){
+// console.log("different");   this.applyData.pop();
+//         this.applyData.pop();
+//         }
+//       }
     },
     methods: {
       getExcel() { //导出Excel
@@ -547,7 +547,7 @@ console.log("different");   this.applyData.pop();
         delete obj.page;
         delete obj.rows;
 
-        axios.post('/export/applyLedger', obj, {
+        axios.post('/export/applyLedgers', obj, {
           responseType: 'arraybuffer'
         }).then((res) => {
           //           if(res.statusCode!=200){
