@@ -490,8 +490,7 @@
                 <th width='160px'>电话号码 </th>
                 <th width='130px'>电话录音 </th>
                 <th width='160px'>接听人是否借款人本人 </th>
-                <th width='200px'>接听说明 </th>
-                <!-- <th width='200px'>初审结论 </th> -->
+                <th width='200px'>初审结论 </th>
                 <th width='180px'>质检结果</th>
                 <th>备注 </th>
               </tr>
@@ -503,10 +502,8 @@
                 <td> {{insTelCustInfo.telRecord}}</td>
                 <!-- 接听人是否借款人本人 -->
                 <td> {{insTelCustInfo.isSelfTxt}}</td>
-                <!-- 接听说明 -->
-                <td> {{insTelCustInfo.iisselftxt}}</td>
                 <!-- 初审结论 -->
-                <!-- <td> {{insTelCustInfo.iisselftxt}}</td>                 -->
+                <td> {{insTelCustInfo.appConclusion}}</td>
                 <!-- 质检结果 -->
                 <td>
                   <b class="required_Red"> * </b>
@@ -534,8 +531,10 @@
             <!-- insTelVerifyList -->
             <el-table :data="TelData(this.ind)" border style="width: 100%">
               <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
-             <!-- <el-table-column prop="telNum" label="姓名" align="center" width="100">
-              </el-table-column> -->
+              <el-table-column prop="telName" label="姓名" align="center" width="160">
+              </el-table-column>
+              <el-table-column prop="relation" label="关系" align="center" width="160">
+              </el-table-column>
               <el-table-column prop="telNum" label="电话号码" align="center" width="160">
               </el-table-column>
               <el-table-column label="电话录音" align="center" width="100">
@@ -809,16 +808,6 @@
       </span> -->
     </div>
     <!-- =================================弹窗===================================== -->
-    <!-- 提交 -->
-    <!-- <div class='alertBox'>
-      <el-dialog title="提示" :modal="false" :visible.sync="submitShow" width="420px">
-        <span>确定操作？</span>
-        <span slot="footer" class="dialog-footer">
-          <el-button class="calbtn" @click="submitShow=false">取消</el-button>
-          <el-button class="subtn" type="primary" :loading="loadsitu" @click="SaveInf('提交')">{{adbtn}}</el-button>
-        </span>
-      </el-dialog>
-    </div> -->
     <!-- 发起复议  -->
     <div class="Height_240">
       <el-dialog title="发起复议" :visible.sync="ReconsiderShow" :modal="false ">

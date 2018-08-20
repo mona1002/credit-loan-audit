@@ -1177,7 +1177,7 @@
         let obj = Object.assign({}, this.params);
         delete obj.page;
         delete obj.rows;
-        axios.post('/export/exportLoanLedger', obj, {
+        axios.post('/export/loanLedgers', obj, {
           responseType: 'arraybuffer'
         }).then((res) => {
           let blob = new Blob([res.data], {

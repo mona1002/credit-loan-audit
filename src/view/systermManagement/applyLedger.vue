@@ -534,7 +534,7 @@
         delete obj.page;
         delete obj.rows;
 
-        axios.post('/export/exportApplyLedger', obj, {
+        axios.post('/export/applyLedgers', obj, {
           responseType: 'arraybuffer'
         }).then((res) => {
           //           if(res.statusCode!=200){
