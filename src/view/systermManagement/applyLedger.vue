@@ -124,7 +124,7 @@
         <el-col :span="6" class="search-item" :offset="0">   {{ applyData+','+params.appDate_ge+','+params.appDate_le }}
   
         </el-col>
-        <el-col :span="6" class="search-item" :offset="0"><span> 稍等</span>
+        <el-col :span="6" class="search-item" :offset="0"><button @click='pop'> pop</button>
         </el-col>
         <el-col :span="6" class="search-btn">
           <el-button class="btn query" type="primary" @click="Rsearch">查询</el-button>
@@ -264,7 +264,8 @@
         selectedProName: "",
         agencyCode: '',
         selectedAgenName: "",
-        applyData: [this._getDate(-6), this._getDate()],
+        // applyData: [this._getDate(-6), this._getDate()],
+        applyData: [],
         currentPage: 1, //分页选中页
         pageCount: 10, // 每页显示条数
         totalRecord: 0, //总条数
@@ -719,19 +720,10 @@ console.log("badk")
           }
         })
       },
-      // changeColor() {
-      //   for (var i = 0; i < this.tableData.length; i++) {
-      //     this.tableData[i].completeTime * 1 >= 48 ? this.tableData[i].isEmer = true : this.tableData[i].isEmer =
-      //       false;
-      //     if (this.tableData[i].emerType == '00') {
-      //       this.tableData[i].emerType = "普通";
-      //     } else if (this.tableData[i].emerType == '01') {
-      //       this.tableData[i].emerType = "免费加急";
-      //     } else if (this.tableData[i].emerType == '02') {
-      //       this.tableData[i].emerType = "收费加急";
-      //     };
-      //   }
-      // }
+      pop(){
+  this.applyData.pop();
+  console.log(this.applyData)
+      }
     },
     created() {
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
@@ -752,6 +744,11 @@ console.log("badk")
       this.getloanTime();
       this.getAgency();
     },
+    mounted(){
+      let begin=this._getDate(-6),end=this._getDate();
+      this.applyData.push(begin)
+      this.applyData.push(end)
+    }
   }
 
 </script>
