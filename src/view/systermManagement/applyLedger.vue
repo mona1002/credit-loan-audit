@@ -120,7 +120,7 @@
           <span class="keywordText">进件客服： </span>
           <el-input v-model.trim="params.appSerPerCode" placeholder="请输入进件客服"></el-input>
         </el-col>
-        <el-col :span="6" class="search-item" :offset="0"> {{ applyData+','+params.appDate_ge+','+params.appDate_le }}
+        <el-col :span="6" class="search-item" :offset="0"> {{ applyData+'/'+params.appDate_ge+','+params.appDate_le }}
 
         </el-col>
         <el-col :span="6" class="search-item" :offset="0">
