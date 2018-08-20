@@ -69,7 +69,8 @@
         </el-col>
         <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">申请日期：</span>
-          <el-date-picker v-model="applyData" type="daterange"  range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"  value-format="yyyy-MM-dd">
+          <el-date-picker v-model="applyData" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"
+            value-format="yyyy-MM-dd">
           </el-date-picker>
         </el-col>
         <el-col :span="6" class="search-item">
@@ -140,9 +141,9 @@
           <i class="el-icon checkIcon"></i>
           <span class="el-icon-text">申请信息</span>
         </span>
-        <span class="icon-item" @click='getExcel'>
+        <span class="icon-item" @click='getExcel' v-if='ExcelBtnShow'>
           <i class="el-icon appro"></i>
-          <span class="ExcelIcon">导出Excel</span>         
+          <span class="ExcelIcon">导出Excel</span>
         </span>
       </span>
     </div>
@@ -220,7 +221,7 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
+  import axios from 'axios'
 
   export default {
     data() {
@@ -228,6 +229,7 @@ import axios from 'axios'
         ininin: '',
         currentRow: {},
         userInf: null,
+        ExcelBtnShow: false,
         Routes: [],
         params: {
           userCode: '', //	用户编号
@@ -244,8 +246,8 @@ import axios from 'axios'
           certCode: '', //	证件号码
           appType: '', //	申请类型
           sourcesChan: '', //	来源渠道
-          appDate_ge: '', //	高级查询 起始时间
-          appDate_le: '', //	高级查询 终止时间
+          appDate_ge: this._getDate(-6), //	,高级查询 起始时间
+          appDate_le: this._getDate(), //	高级查询 终止时间
           mobile: '', //	手机号码
           borrType: '', //	借款人类型
           loanTerm: '', //	借款期限
@@ -260,7 +262,7 @@ import axios from 'axios'
         selectedProName: "",
         agencyCode: '',
         selectedAgenName: "",
-        applyData: '',
+        applyData: [this._getDate(-6), this._getDate()],
         currentPage: 1, //分页选中页
         pageCount: 10, // 每页显示条数
         totalRecord: 0, //总条数
@@ -503,6 +505,9 @@ import axios from 'axios'
             this.params.page = this.currentPage = 1;
             this.params.rows = this.pageCount = 10;
             this.Rreset();
+            this.applyData = [this._getDate(-6), this._getDate()];
+            this.params.appDate_ge = this._getDate(-6);
+            this.params.appDate_le = this._getDate();
             // this.tableData = [];
             this.Routes[3].closed = true;
           }
@@ -511,18 +516,39 @@ import axios from 'axios'
     },
     methods: {
       getExcel() { //导出Excel
-        let obj = Object.assign({}, this.params);
+        // 校验：
+        if (this.applyData) {
+          let beginDate = new Date(this.applyData[0].replace(/-/g, '/')).getTime(),
+            endDate = new Date(this.applyData[1].replace(/-/g, '/')).getTime();
+          var day = (endDate - beginDate) / (1000 * 3600 * 24);
+        }
+        if (this.userInf.userCode !== "superadmin" && (!day || day > 31)) {
+          this.$message.error('查询条件【申请日期】项请选择时间跨度小于等于31天的数据进行导出 ！');
+          return
+        }
+        // 日期入参
+         this.params.appDate_ge = this.applyData[0];
+        this.params.appDate_le = this.applyData[1];
         // 删除多余入参
+        let obj = Object.assign({}, this.params);
         delete obj.page;
         delete obj.rows;
-         axios.post('/export/exportApplyLedger', obj, {
+        
+        axios.post('/export/exportApplyLedger', obj, {
           responseType: 'arraybuffer'
         }).then((res) => {
+          //           if(res.statusCode!=200){
+          //             alert(res.msg)
+          //             alert(res.data)
+          // this.$message.error(res.data)
+          //           }else{
           let blob = new Blob([res.data], {
             type: "application/vnd.ms-excel"
           });　　　　　
           let objectUrl = URL.createObjectURL(blob);　　　　　
-          window.location.href = objectUrl;　　　　
+          window.location.href = objectUrl;　
+          // }
+          　　　
         }).catch(function (res) {})
       },
       selectRow(row) {
@@ -554,17 +580,22 @@ import axios from 'axios'
       },
       ProQuerySearch(queryString, cb) { //产品下拉查询
         let restaurants = this.production;
-        let results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
+        let results = queryString ? restaurants.filter(this.ProcreateFilter(queryString)) : restaurants;
         cb(results);
       },
       createFilter(queryString) {
+        return (restaurant) => {
+          return (restaurant.orgName.toLowerCase().indexOf(queryString.toLowerCase()) != -1);
+        };
+      },
+      ProcreateFilter(queryString) {
         return (restaurant) => {
           return (restaurant.proName.toLowerCase().indexOf(queryString.toLowerCase()) != -1);
         };
       },
       handleSelect(item) { //进件机构下拉查询选中项
-       this.params.appOrgName = this.agencyCode = this.selectedAgenName = item.orgName;
-        this.params.appOrgCode=item.orgCode;
+        this.params.appOrgName = this.agencyCode = this.selectedAgenName = item.orgName;
+        this.params.appOrgCode = item.orgCode;
       },
       ProhandleSelect(item) { //产品下拉选中项
         this.proCode = this.selectedProName = item.proName;
@@ -608,7 +639,7 @@ import axios from 'axios'
         this.proCode = ''; //产品名称
         this.selectedProName = '';
         this.tableData = []; ////清空已查处列表
-            this.currentRow={};//清空选中行        
+        this.currentRow = {}; //清空选中行        
       },
       Rsearch() {
         this.params.appDate_ge = this.applyData[0];
@@ -617,13 +648,13 @@ import axios from 'axios'
         this.getInf(this.params);
       },
       getInf(pam) {
-            this.currentRow={};//清空选中行        
+        this.currentRow = {}; //清空选中行        
         this.proCode != this.selectedProName ? (this.proCode = this.selectedProName = this.params.proCode = "") :
           "";
         this.agencyCode != this.selectedAgenName ? (this.agencyCode = this.selectedAgenName = this.params.agencyCode =
           "") : "";
         this.post("/credit/getApplyLedger", pam).then(res => {
-        // this.post("http://10.1.26.47:8099/riskManagement/credit/getApplyLedger", pam).then(res => {
+          // this.post("http://10.1.26.47:8099/riskManagement/credit/getApplyLedger", pam).then(res => {
           if (res.statusCode == 200) {
             if (res.data) {
               this.tableData = res.data.rows;
@@ -633,7 +664,6 @@ import axios from 'axios'
               this.tableData = [];
               this.totalRecord = 0;
             }
-
           } else {
             this.$message.error(res.msg);
           }
@@ -693,6 +723,17 @@ import axios from 'axios'
     },
     created() {
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
+      // 是否显示导出按钮
+      let roleCodesList = false;
+      for (let i = 0; i < this.userInf.roleCodesList.length; i++) {
+        if (this.userInf.roleCodesList[i] === 'DS99') {
+          roleCodesList = true;
+          break;
+        }
+      }
+      if (this.userInf.userCode === "superadmin" || this.roleCodesList) {
+        this.ExcelBtnShow = true;
+      }
       this.params.userCode = this.userInf.userCode; //userCode
       this.Routes = this.$router.options.routes;
       this.getProducts();

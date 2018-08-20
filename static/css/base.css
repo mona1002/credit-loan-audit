@@ -964,3 +964,8 @@
  body .el-tree .el-tree-node .el-tree-node__children .el-tree-node__content {
    background: #fff;
  }
+/* 表格合计行 */
+.has-gutter tr td {
+/* color:#ff7676; */
+color:red;
+}

@@ -112,6 +112,11 @@
               </el-option>
             </div>
             <div style="width:290px;"></div>
+            <!-- <div class="select_pageination bankName_pagination_footer">
+        <el-pagination @size-change="handleSizeChange1" @current-change="handleCurrentChange1" :page-sizes="[10, 20,50]" :page-size="BankNamePageCounts"
+                :current-page="BankNameCurrent" layout="   sizes, prev,pager, next,total,jumper" :total="BankTotal">
+              </el-pagination>
+          </div> -->
             <div class='select_pageination bankName_pagination_footer'>
               <el-pagination @size-change="handleSizeChange1" @current-change="handleCurrentChange1" :page-sizes="[10, 20,50]" :page-size="BankNamePageCounts"
                 :current-page="BankNameCurrent" layout="   sizes, prev,pager, next,total,jumper" :total="BankTotal">
@@ -160,9 +165,9 @@
           <span class="keywordText">管户客服名称：</span>
           <el-input v-model.trim="params.controlerName" placeholder="请输入管户客服名称"></el-input>
         </el-col>
-        <el-col :span="6" class="search-item" :offset="0">
+        <el-col :span="6" class="search-item" :offset="0">{{this.expiritionDate}}
         </el-col>
-        <el-col :span="6" class="search-item" :offset="0">
+        <el-col :span="6" class="search-item" :offset="0">{{this.loanDate+'--'+this.PaybackDate}}
         </el-col>
         <el-col :span="6" class="search-btn">
           <el-button class="btn query" type="primary" @click="Rsearch">查询</el-button>
@@ -173,7 +178,7 @@
     <div class="title titleContainer edit-div">
       <span class="titleText">
         <i class="el-icon title-icon"></i>
-        申请台账
+        借款台账
       </span>
       <span class="iconContainer">
         <span class="icon-item" @click='toDetailPage'>
@@ -200,7 +205,7 @@
           <i class="el-icon checkIcon"></i>
           <span class="el-icon-text">交易明细</span>
         </span>
-        <span class="icon-item" @click='getExcel'>
+        <span class="icon-item" @click='getExcel' v-if='ExcelBtnShow'>
           <i class="el-icon appro"></i>
           <span class="ExcelIcon">导出Excel</span>
         </span>
@@ -640,7 +645,7 @@
               {{scope.row.eachTermDefAmt|formatMoney}}
             </template>
           </el-table-column>
-          <el-table-column label="本期应还款额[元]" width="120">
+          <el-table-column label="本期应还款额[元]" width="130">
             <template slot-scope='scope'>
               {{scope.row.eachTermAmtSum|formatMoney}}
             </template>
@@ -789,6 +794,7 @@
         getData: {},
         currentRow: {},
         userInf: null,
+        ExcelBtnShow: false,
         accountShow: false,
         recycleShow: false,
         dealShow: false,
@@ -951,11 +957,11 @@
           //   }, {
           //     value: '03',
           //     label: '富友'
-            // }, 
-            {
-              value: '04',
-              label: '融宝'
-            }
+          // }, 
+          {
+            value: '04',
+            label: '融宝'
+          }
         ],
         agency: [ //进件机构
         ],
@@ -1096,7 +1102,7 @@
     },
     watch: {
       '$route' (to, from) {
-        if (to.path == '/applyLedger') {
+        if (to.path == '/borrowLedger') {
           if (!this.Routes[4].closed) {
             this.currentRow = {};
             this.params.page = this.currentPage = 1;
@@ -1130,20 +1136,44 @@
         }
         return false;
       },
-      exportExcel(form) {
-        return axios({ // 用axios发送post请求
-          method: 'post',
-          url: '/serviceTime/exportData', // 请求地址
-          data: form, // 参数
-          responseType: 'blob', // 表明返回服务器返回的数据类型
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-      },
       getExcel() { //导出Excel
-        let obj = Object.assign({}, this.params);
+        // 校验：应还款日期： PaybackDate ,放款日期: loanDate  , 还款到期日期： expiritionDate
+        if (this.userInf.userCode !== "superadmin") {
+          if (!this.PaybackDate && !this.loanDate && !this.expiritionDate) {
+            // 只要填了一项就提示这里，如果都没填就提示第一个
+            if (!this.PaybackDate) return this.$message.error('查询条件【应还款日期】项请选择时间跨度小于等于31天的数据进行导出 ！');
+          }
+          if (this.PaybackDate) {
+            let beginDate = new Date(this.PaybackDate[0].replace(/-/g, '/')).getTime(),
+              endDate = new Date(this.PaybackDate[1].replace(/-/g, '/')).getTime();
+            var Payday = (endDate - beginDate) / (1000 * 3600 * 24);
+          }
+          if (this.loanDate) {
+            let beginDate = new Date(this.loanDate[0].replace(/-/g, '/')).getTime(),
+              endDate = new Date(this.loanDate[1].replace(/-/g, '/')).getTime();
+            var loanday = (endDate - beginDate) / (1000 * 3600 * 24);
+          }
+          if (this.expiritionDate) {
+            let beginDate = new Date(this.expiritionDate[0].replace(/-/g, '/')).getTime(),
+              endDate = new Date(this.expiritionDate[1].replace(/-/g, '/')).getTime();
+            var expday = (endDate - beginDate) / (1000 * 3600 * 24);
+          }
+          if (Payday > 31) return this.$message.error('查询条件【应还款日期】项请选择时间跨度小于等于31天的数据进行导出 ！');
+          if (loanday > 31) return this.$message.error('查询条件【放款日期】项请选择时间跨度小于等于31天的数据进行导出 ！');
+          if (expday > 31) return this.$message.error('查询条件【还款到期日期】项请选择时间跨度小于等于31天的数据进行导出 ！');
+        }
+        // 日期入参
+        // 放款日期
+        this.params.loanDate_ge = this.loanDate[0];
+        this.params.loanDate_le = this.loanDate[1];
+        // 应还款日期
+        this.params.repayDate_ge = this.PaybackDate[0];
+        this.params.repayDate_le = this.PaybackDate[1];
+        // 还款到期日期
+        this.params.loanEndDate_ge = this.expiritionDate[0];
+        this.params.loanEndDate_le = this.expiritionDate[1];
         // 删除多余入参
+        let obj = Object.assign({}, this.params);
         delete obj.page;
         delete obj.rows;
         axios.post('/export/exportLoanLedger', obj, {
@@ -1248,7 +1278,7 @@
         } = param;
         const sums = [];
         columns.forEach((column, index) => {
-          if (index === 0) {
+          if (index === 1) {
             sums[index] = '总合计：';
             return;
           }
@@ -1599,14 +1629,30 @@
           }
         })
       },
+
     },
     created() {
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
+      let roleCodesList = false;
+      // 是否显示导出按钮
+      for (let i = 0; i < this.userInf.roleCodesList.length; i++) {
+        if (this.userInf.roleCodesList[i] === 'DS99') {
+          roleCodesList = true;
+          break
+        }
+      }
+      if (this.userInf.userCode === "superadmin" || this.roleCodesList) {
+        this.ExcelBtnShow = true;
+      }
       this.params.userCode = this.userInf.userCode; //userCode
       this.Routes = this.$router.options.routes;
       this.getProducts();
       this.getloanTime();
       this.getAgency();
+
+
+
+
     },
   }
 

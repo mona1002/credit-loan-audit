@@ -1,7 +1,7 @@
 import axios from 'axios'
 import router from '../router/index'
 import appConstant from './constant'
-import platforUrl from'./constantUser'
+import platforUrl from './constantUser'
 
 /*axios.defaults.timeout = 5000;*/
 
@@ -17,8 +17,8 @@ axios.defaults.baseURL = appConstant.baseUrl_common;
 axios.defaults.withCredentials = true;
 
 axios.interceptors.response.use(  response => {    
-  if (response.data&&response.data.statusCode == 900) {
-    window.location.href = platforUrl+"#/";  
+  if (response.data && response.data.statusCode == 900) {
+    window.location.href = platforUrl + "#/";  
   };    
   return response;  
 },   error => {
@@ -35,23 +35,19 @@ export default {
             resolve(response.data);    
           })    .catch(err => {      
             reject(err)   
-            console.log(err) 
           })  
         })
       },
 
       Vue.prototype.post = function (url, data = {}) {
         return new Promise((resolve, reject) => {    
-          axios.post(url, data)     
-           .then(response => {        
-            resolve(response.data);      
-          }, err => {        
-            reject(err);      
-            console.log(err)
-          })
-          .catch((error)=> {
-            console.log(error);
-          })
+          axios.post(url, data)      
+            .then(response => {        
+              resolve(response.data);      
+            }, err => {        
+              reject(err);      
+            })
+            .catch((error) => {})
         })
       }
 
