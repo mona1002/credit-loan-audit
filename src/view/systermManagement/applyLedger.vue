@@ -222,7 +222,6 @@
 </template>
 <script>
   import axios from 'axios'
-
   export default {
     data() {
       return {
@@ -517,7 +516,7 @@
     methods: {
       getExcel() { //导出Excel
         // 校验：
-        if (this.applyData) {
+        if (this.applyData && this.applyData.length > 0) {
           let beginDate = new Date(this.applyData[0].replace(/-/g, '/')).getTime(),
             endDate = new Date(this.applyData[1].replace(/-/g, '/')).getTime();
           var day = (endDate - beginDate) / (1000 * 3600 * 24);
@@ -527,14 +526,16 @@
           return
         }
         // 日期入参
-        this.params.appDate_ge = this.applyData[0];
-        this.params.appDate_le = this.applyData[1];
+        if (this.applyData.length > 0) {
+          this.params.appDate_ge = this.applyData[0];
+          this.params.appDate_le = this.applyData[1];
+        }
         // 删除多余入参
         let obj = Object.assign({}, this.params);
         delete obj.page;
         delete obj.rows;
 
-        axios.post('/export/applyLedgers', obj, {
+        axios.post('/export/applyLedger', obj, {
           responseType: 'arraybuffer'
         }).then((res) => {
           //           if(res.statusCode!=200){
@@ -633,7 +634,8 @@
         this.params.page = this.currentPage = 1; //	页码-页码重置
         this.totalRecord = 0;
         // this.params.rows	='';//	每页条数
-        this.applyData = ''; //申请日期
+        this.applyData = []; //申请日期
+        // this.applyData = ''; //申请日期
         this.agencyCode = ''; //进件机构
         this.selectedAgenName = '';
         this.proCode = ''; //产品名称
@@ -642,8 +644,10 @@
         this.currentRow = {}; //清空选中行        
       },
       Rsearch() {
-        this.params.appDate_ge = this.applyData[0];
-        this.params.appDate_le = this.applyData[1];
+        if (this.applyData.length > 0) {
+          this.params.appDate_ge = this.applyData[0];
+          this.params.appDate_le = this.applyData[1];
+        }
         this.params.page = this.currentPage = 1;
         this.getInf(this.params);
       },
