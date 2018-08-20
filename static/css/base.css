@@ -965,7 +965,7 @@
    background: #fff;
  }
 /* 表格合计行 */
-.has-gutter tr td {
+body .has-gutter tr td {
 /* color:#ff7676; */
 color:red;
 }
