@@ -55,10 +55,10 @@
           <i class="el-icon faqi"></i>
           <span class="el-icon-text">批量提交</span>
         </span>
-        <!-- <span class="icon-item" @click='getExcel'>
+        <span class="icon-item" @click='getExcel'>
           <i class="el-icon appro"></i>
           <span class="ExcelIcon">导出Excel</span>
-        </span> -->
+        </span>
       </span>
     </div>
     <div class="listContainer">

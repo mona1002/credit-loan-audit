@@ -121,7 +121,8 @@
           <span class="keywordText">进件客服： </span>
           <el-input v-model.trim="params.appSerPerCode" placeholder="请输入进件客服"></el-input>
         </el-col>
-        <el-col :span="6" class="search-item" :offset="0">
+        <el-col :span="6" class="search-item" :offset="0">   {{ applyData+','+params.appDate_ge+','+params.appDate_le }}
+  
         </el-col>
         <el-col :span="6" class="search-item" :offset="0">
         </el-col>
@@ -245,8 +246,10 @@
           certCode: '', //	证件号码
           appType: '', //	申请类型
           sourcesChan: '', //	来源渠道
-          appDate_ge: this._getDate(-6), //	,高级查询 起始时间
-          appDate_le: this._getDate(), //	高级查询 终止时间
+          // appDate_ge: this._getDate(-6), //	,高级查询 起始时间
+          // appDate_le: this._getDate(), //	高级查询 终止时间
+           appDate_ge: '', //	,高级查询 起始时间
+          appDate_le: '', //	高级查询 终止时间
           mobile: '', //	手机号码
           borrType: '', //	借款人类型
           loanTerm: '', //	借款期限
@@ -612,6 +615,8 @@
         this.getInf(this.params);
       },
       Rreset() {
+            console.log(this.applyData);
+
         this.params.applySubNo = ''; //	进件编号
         this.params.proType = ''; //	产品类型
         this.params.salPerCode = ''; //	直销人员
@@ -641,7 +646,10 @@
         this.proCode = ''; //产品名称
         this.selectedProName = '';
         this.tableData = []; ////清空已查处列表
-        this.currentRow = {}; //清空选中行        
+        this.currentRow = {}; //清空选中行 
+        console.log(this.applyData)       
+        console.log(this.params.appDate_ge)       
+        console.log(this.params.appDate_le)       
       },
       Rsearch() {
         if (this.applyData.length > 0) {
