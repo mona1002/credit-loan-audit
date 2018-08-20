@@ -69,8 +69,7 @@
         </el-col>
         <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">申请日期：</span>
-          <el-date-picker v-model="applyData"  v-if='applyData' type="daterange" range-separator="至" 
-            value-format="yyyy-MM-dd">
+          <el-date-picker v-model="applyData"  type="daterange" range-separator="至" value-format="yyyy-MM-dd">
           </el-date-picker>
         </el-col>
         <el-col :span="6" class="search-item">
@@ -121,10 +120,10 @@
           <span class="keywordText">进件客服： </span>
           <el-input v-model.trim="params.appSerPerCode" placeholder="请输入进件客服"></el-input>
         </el-col>
-        <el-col :span="6" class="search-item" :offset="0">   {{ applyData+','+params.appDate_ge+','+params.appDate_le }}
-  
+        <el-col :span="6" class="search-item" :offset="0"> {{ applyData+','+params.appDate_ge+','+params.appDate_le }}
+
         </el-col>
-        <el-col :span="6" class="search-item" :offset="0"><button @click='pop'> pop</button>
+        <el-col :span="6" class="search-item" :offset="0">
         </el-col>
         <el-col :span="6" class="search-btn">
           <el-button class="btn query" type="primary" @click="Rsearch">查询</el-button>
@@ -248,7 +247,7 @@
           sourcesChan: '', //	来源渠道
           // appDate_ge: this._getDate(-6), //	,高级查询 起始时间
           // appDate_le: this._getDate(), //	高级查询 终止时间
-           appDate_ge: '', //	,高级查询 起始时间
+          appDate_ge: '', //	,高级查询 起始时间
           appDate_le: '', //	高级查询 终止时间
           mobile: '', //	手机号码
           borrType: '', //	借款人类型
@@ -264,8 +263,7 @@
         selectedProName: "",
         agencyCode: '',
         selectedAgenName: "",
-        // applyData: [this._getDate(-6), this._getDate()],
-        applyData: [],
+        applyData: [this._getDate(-6), this._getDate()],
         currentPage: 1, //分页选中页
         pageCount: 10, // 每页显示条数
         totalRecord: 0, //总条数
@@ -516,14 +514,6 @@
           }
         }
       },
-//       applyData(newd,old){
-//         console.log(newd);
-//         console.log(old);
-//         if(newd!==old){
-// console.log("different");   this.applyData.pop();
-//         this.applyData.pop();
-//         }
-//       }
     },
     methods: {
       getExcel() { //导出Excel
@@ -624,8 +614,6 @@
         this.getInf(this.params);
       },
       Rreset() {
-            console.log(this.applyData);
-console.log("badk")
         this.params.applySubNo = ''; //	进件编号
         this.params.proType = ''; //	产品类型
         this.params.salPerCode = ''; //	直销人员
@@ -648,21 +636,13 @@ console.log("badk")
         this.params.page = this.currentPage = 1; //	页码-页码重置
         this.totalRecord = 0;
         // this.params.rows	='';//	每页条数
-        this.applyData.pop();
-        this.applyData.pop();
-        this.applyData = []; //申请日期
-
-        
-        // this.applyData = ''; //申请日期
+        this.applyData = ''; //申请日期
         this.agencyCode = ''; //进件机构
         this.selectedAgenName = '';
         this.proCode = ''; //产品名称
         this.selectedProName = '';
         this.tableData = []; ////清空已查处列表
         this.currentRow = {}; //清空选中行 
-        console.log(this.applyData)       
-        console.log(this.params.appDate_ge)       
-        console.log(this.params.appDate_le)       
       },
       Rsearch() {
         if (this.applyData.length > 0) {
@@ -732,10 +712,6 @@ console.log("badk")
           }
         })
       },
-      pop(){
-  this.applyData.pop();
-  console.log(this.applyData)
-      }
     },
     created() {
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
@@ -756,11 +732,6 @@ console.log("badk")
       this.getloanTime();
       this.getAgency();
     },
-    mounted(){
-      let begin=this._getDate(-6),end=this._getDate();
-      this.applyData.push(begin)
-      this.applyData.push(end)
-    }
   }
 
 </script>
