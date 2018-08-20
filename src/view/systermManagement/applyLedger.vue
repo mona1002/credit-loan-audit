@@ -124,7 +124,7 @@
         <el-col :span="6" class="search-item" :offset="0">   {{ applyData+','+params.appDate_ge+','+params.appDate_le }}
   
         </el-col>
-        <el-col :span="6" class="search-item" :offset="0">
+        <el-col :span="6" class="search-item" :offset="0"><span> 稍等</span>
         </el-col>
         <el-col :span="6" class="search-btn">
           <el-button class="btn query" type="primary" @click="Rsearch">查询</el-button>
@@ -616,7 +616,7 @@
       },
       Rreset() {
             console.log(this.applyData);
-
+console.log("badk")
         this.params.applySubNo = ''; //	进件编号
         this.params.proType = ''; //	产品类型
         this.params.salPerCode = ''; //	直销人员
