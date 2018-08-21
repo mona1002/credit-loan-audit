@@ -165,9 +165,9 @@
           <span class="keywordText">管户客服名称：</span>
           <el-input v-model.trim="params.controlerName" placeholder="请输入管户客服名称"></el-input>
         </el-col>
-        <el-col :span="6" class="search-item" :offset="0">{{this.expiritionDate}}
+        <el-col :span="6" class="search-item" :offset="0">
         </el-col>
-        <el-col :span="6" class="search-item" :offset="0">{{this.loanDate+'--'+this.PaybackDate}}
+        <el-col :span="6" class="search-item" :offset="0">
         </el-col>
         <el-col :span="6" class="search-btn">
           <el-button class="btn query" type="primary" @click="Rsearch">查询</el-button>
