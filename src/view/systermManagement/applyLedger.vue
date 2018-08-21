@@ -725,7 +725,7 @@
           break;
         }
       }
-      if (this.userInf.userCode === "superadmin" || this.roleCodesList) {
+      if (this.userInf.userCode === "superadmin" || roleCodesList) {
         this.ExcelBtnShow = true;
       }
       this.params.userCode = this.userInf.userCode; //userCode
