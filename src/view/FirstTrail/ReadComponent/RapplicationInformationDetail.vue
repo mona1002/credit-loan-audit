@@ -91,6 +91,12 @@
         </template>
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
+               <div class=" CreditForm_div_border clearFix">
+              <li>
+                <label class="label_width_166">是否加入保险计划：</label>
+                <span>{{accepApplyLoan.insurancePlanTxt}}</span>
+              </li>
+            </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
                 <label class="label_width_166">借款用途：</label>

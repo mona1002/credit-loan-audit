@@ -69,7 +69,7 @@
         </el-col>
         <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">申请日期：</span>
-          <el-date-picker v-model="applyData"  type="daterange" range-separator="至" value-format="yyyy-MM-dd">
+          <el-date-picker v-model="applyData" type="daterange" range-separator="至" value-format="yyyy-MM-dd">
           </el-date-picker>
         </el-col>
         <el-col :span="6" class="search-item">
@@ -120,8 +120,7 @@
           <span class="keywordText">进件客服： </span>
           <el-input v-model.trim="params.appSerPerCode" placeholder="请输入进件客服"></el-input>
         </el-col>
-        <el-col :span="6" class="search-item" :offset="0"> {{ applyData+'/'+params.appDate_ge+','+params.appDate_le }}
-
+        <el-col :span="6" class="search-item" :offset="0">
         </el-col>
         <el-col :span="6" class="search-item" :offset="0">
         </el-col>
@@ -230,6 +229,7 @@
         userInf: null,
         ExcelBtnShow: false,
         Routes: [],
+        Date: this._getDate(),
         params: {
           userCode: '', //	用户编号
           applySubNo: '', //	进件编号
@@ -494,7 +494,6 @@
             value: "42",
             label: "回退-权证登记"
           },
-
         ],
       }
     },
@@ -536,23 +535,26 @@
         let obj = Object.assign({}, this.params);
         delete obj.page;
         delete obj.rows;
-
-        axios.post('/export/applyLedgers', obj, {
-          responseType: 'arraybuffer'
-        }).then((res) => {
-          //           if(res.statusCode!=200){
-          //             alert(res.msg)
-          //             alert(res.data)
-          // this.$message.error(res.data)
-          //           }else{
-          let blob = new Blob([res.data], {
-            type: "application/vnd.ms-excel"
-          });　　　　　
-          let objectUrl = URL.createObjectURL(blob);　　　　　
-          window.location.href = objectUrl;　
-          // }
-          　　　
-        }).catch(function (res) {})
+        axios({ // 用axios发送post请求
+          method: 'post',
+          url: '/export/applyLedgers', // 请求地址
+          data: obj, // 参数
+          responseType: 'blob', // 表明返回服务器返回的数据类型
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then(res => { // 处理返回的文件流
+          const blob = new Blob([res.data]); //new Blob([res])中不加data就会返回下图中[objece objece]内容（少取一层）
+          const fileName = 'SQTZ_' + this.Date + '.xlsx'; //下载文件名称
+          const elink = document.createElement('a');
+          elink.download = fileName;
+          elink.style.display = 'none';
+          elink.href = URL.createObjectURL(blob);
+          document.body.appendChild(elink);
+          elink.click();
+          URL.revokeObjectURL(elink.href); // 释放URL 对象
+          document.body.removeChild(elink);
+        })
       },
       selectRow(row) {
         this.currentRow = row;

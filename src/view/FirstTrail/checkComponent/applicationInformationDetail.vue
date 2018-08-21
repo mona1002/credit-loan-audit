@@ -93,6 +93,12 @@
           <ul>
             <div class=" CreditForm_div_border clearFix">
               <li>
+                <label class="label_width_166">是否加入保险计划：</label>
+                <span>{{accepApplyLoan.insurancePlanTxt}}</span>
+              </li>
+            </div>
+            <div class=" CreditForm_div_border clearFix">
+              <li>
                 <label class="label_width_166">借款用途：</label>
                 <span>{{accepApplyLoan.loanPurposeTxt}}</span>
               </li>
@@ -869,13 +875,13 @@
         /*维护日志*/
         sldialogVisible: false,
         logDatas: {
-           total:0
-         },
+          total: 0
+        },
         // DefaultTotal: { 
         //   total:0
         // },
         currentPage: 1, // 默认显示的当前页
-        currentPage1:1,
+        currentPage1: 1,
         setPageSize: 10,
         setPageSize1: 10,
         queryParam: {
@@ -921,10 +927,10 @@
         } else if (this.judgeFlag.flag == '15') {
           this.taskInWaitting = JSON.parse(localStorage.getItem("TtaskInWaitting")) //任务管理-质检任务
           this.applyId = this.taskInWaitting.applyId;
-        }else if (this.judgeFlag.flag == '16') {
+        } else if (this.judgeFlag.flag == '16') {
           this.taskInWaitting = JSON.parse(localStorage.getItem("appLedgerTW")) //申请台账
-          this.applyId = this.taskInWaitting.id;// id就为applyid
-        }else if (this.judgeFlag.flag == '17') {
+          this.applyId = this.taskInWaitting.id; // id就为applyid
+        } else if (this.judgeFlag.flag == '17') {
           this.taskInWaitting = JSON.parse(localStorage.getItem("brrLedgerTW")) //借款台账
           this.applyId = this.taskInWaitting.applyId;
         }
@@ -1300,7 +1306,7 @@
       },
       //保留两位小数 整数千分位
       formatNumber(num, cent, isThousand) {
-        if(!num){
+        if (!num) {
           return ''
         }
         num = num.toString().replace(/\$|\,/g, '');

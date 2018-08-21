@@ -806,6 +806,7 @@
         recycleTotal: 0,
         dealTotal: 0,
         BankTotal: 0,
+        Date: this._getDate(),
         params: {
           sort: 'loanBeginDate', //  入参“loanBeginDate”
           order: 'desc', //  入参“desc”
@@ -1177,15 +1178,26 @@
         let obj = Object.assign({}, this.params);
         delete obj.page;
         delete obj.rows;
-        axios.post('/export/loanLedgers', obj, {
-          responseType: 'arraybuffer'
-        }).then((res) => {
-          let blob = new Blob([res.data], {
-            type: "application/vnd.ms-excel"
-          });　　　　　
-          let objectUrl = URL.createObjectURL(blob);　　　　　
-          window.location.href = objectUrl;　　　　
-        }).catch(function (res) {})
+        axios({ // 用axios发送post请求
+          method: 'post',
+          url: '/export/loanLedgers', // 请求地址
+          data: obj, // 参数
+          responseType: 'blob', // 表明返回服务器返回的数据类型
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then(res => { // 处理返回的文件流
+          const blob = new Blob([res.data]); //new Blob([res])中不加data就会返回下图中[objece objece]内容（少取一层）
+          const fileName = 'JKTZ_' + this.Date + '.xlsx'; //下载文件名称
+          const elink = document.createElement('a');
+          elink.download = fileName;
+          elink.style.display = 'none';
+          elink.href = URL.createObjectURL(blob);
+          document.body.appendChild(elink);
+          elink.click();
+          URL.revokeObjectURL(elink.href); // 释放URL 对象
+          document.body.removeChild(elink);
+        })
       },
       selectRow(row) {
         this.currentRow = row;
@@ -1670,10 +1682,6 @@
       this.getProducts();
       this.getloanTime();
       this.getAgency();
-
-
-
-
     },
   }
 
