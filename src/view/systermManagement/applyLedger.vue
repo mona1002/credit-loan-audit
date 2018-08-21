@@ -544,7 +544,6 @@
             'Content-Type': 'application/json'
           }
         }).then(res => { 
-        console.log(res)
           const blob = new Blob([res.data]); 
           const fileName = 'SQTZ_' + this.Date + '.xls'; 
           const elink = document.createElement('a');

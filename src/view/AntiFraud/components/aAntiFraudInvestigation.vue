@@ -7,34 +7,6 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">基本信息</span>
         </template>
-        <!-- <table class="table">
-          <thead>
-            <tr>
-              <th style="width:160px">进件编号</th>
-              <th>案件编号</th>
-              <th>客户姓名</th>
-              <th style="width:160px">身份证号</th>
-              <th>申请产品</th>
-              <th>进件机构</th>
-              <th>销售人员</th>
-              <th>提报人</th>
-              <th>提报组别</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{{fraudApplyInfo.applySubno}}</td>
-              <td>{{fraudApplyInfo.caseNum}}</td>
-              <td>{{fraudApplyInfo.applyCustName}}</td>
-              <td>{{fraudApplyInfo.certCode}}</td>
-              <td>{{fraudApplyInfo.proName}}</td>
-              <td>{{fraudApplyInfo.operOrgName}}</td>
-              <td>{{fraudApplyInfo.salePersonName}}</td>
-              <td>{{fraudApplyInfo.applyPersonName}}</td>
-              <td>{{fraudApplyInfo.appSuborgName}}</td>
-            </tr>
-          </tbody>
-        </table> -->
         <div class="height_auto">
           <el-table :data="tableData" style="width: 100%" @row-dblclick='searchInf' border>
             <el-table-column prop="creatTime" label="提报时间" width="150">

@@ -31,34 +31,6 @@
             </el-table-column>
           </el-table>
         </div>
-        <!-- <table class="table">
-          <thead>
-            <tr>
-              <th style="width:160px">进件编号</th>
-              <th>案件编号</th>
-              <th>客户姓名</th>
-              <th style="width:160px">身份证号</th>
-              <th>申请产品</th>
-              <th>进件机构</th>
-              <th>销售人员</th>
-              <th>提报人</th>
-              <th>提报组别</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{{fraudApplyInfo.applySubno}}</td>
-              <td>{{fraudApplyInfo.caseNum}}</td>
-              <td>{{fraudApplyInfo.applyCustName}}</td>
-              <td>{{fraudApplyInfo.certCode}}</td>
-              <td>{{fraudApplyInfo.proName}}</td>
-              <td>{{fraudApplyInfo.operOrgName}}</td>
-              <td>{{fraudApplyInfo.salePersonName}}</td>
-              <td>{{fraudApplyInfo.applyPersonName}}</td>
-              <td>{{fraudApplyInfo.appSuborgName}}</td>
-            </tr>
-          </tbody>
-        </table> -->
       </el-collapse-item>
       <el-collapse-item name="2">
         <template slot="title">
@@ -290,7 +262,6 @@
             } else {
               this.hitRuleList = res.data.hitRuleList;
             };
-
             if (res.data.fraudAuditInfo == null) {
               this.fraudAuditInfo = this.fraudAuditInfo;
             } else {
