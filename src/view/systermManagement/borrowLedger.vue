@@ -285,7 +285,7 @@
         </el-table-column>
         <el-table-column prop="payedTerm" label="已还款期数" width="90">
         </el-table-column>
-        <el-table-column prop="loanBeginDate" label="还款起始日期" sortable width="120">
+        <el-table-column prop="loanBeginDate" label="还款起始日期" sortable width="130">
         </el-table-column>
         <el-table-column prop="loanEndDate" label="还款到期日期" width="100">
         </el-table-column>
