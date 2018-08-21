@@ -7,9 +7,8 @@
     </div>
     <ul class="form-ul" style="width:100%;height:auto;overflow:hidden;">
       <li class="item-column3">
-        <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:40px;top:10px;font-weight:bold;">*</span>
         <div class="left-title item-label-show">
-          审核结论：
+        <b class="required_Red"> * </b> 审核结论：
         </div>
         <div class="item-label-show" v-show="!isEdit">
           {{auditResulttext}}
@@ -36,15 +35,13 @@
         </div>
       </li>
       <li class="item-column3" v-show="auditResult!='02'">
-        <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:10px;font-weight:bold;">*</span>
         <div class="left-title item-label-show">
-          主原因：
+        <b class="required_Red"> * </b>   主原因：
         </div>
         <div class="item-label-show" v-show="!isEdit" v-model="mainReason">
           {{mainReasonName}}
         </div>
         <div v-show="isEdit">
-          <!-- <el-select v-model="mainReason" @change="mainReasonChange" ref="mainReason"> -->
           <el-select v-model="mainReasonName" @change="mainReasonChange" ref="mainReasonName">
             <el-option v-for="item in mainReasons" :label="item.reasonName" :value="item.id">
             </el-option>
@@ -52,15 +49,13 @@
         </div>
       </li>
       <li class="item-column3" v-show="auditResult!='02'">
-        <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:55px;top:10px;font-weight:bold;">*</span>
         <div class="left-title item-label-show">
-          子原因：
+        <b class="required_Red"> * </b>   子原因：
         </div>
         <div class="item-label-show" v-show="!isEdit" v-model="secondReason">
           {{subreaName}}
         </div>
         <div v-show="isEdit">
-          <!-- <el-select v-model="secondReason" ref="sencondReasonName"> -->
           <el-select v-model="subreaName" ref="sencondReasonName" @change='getSecond'>
             <el-option v-for="item in secondReasons" :label="item.reasonName" :value="item.id">
             </el-option>
@@ -106,16 +101,14 @@
       </li>
       <li class="item-column1 item-column3-2">
         <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:0px;top:10px;font-weight:bold;">*</span>
-        <div class="left-title">反欺诈决策反馈：</div>
+        <div class="left-title"><b class="required_Red"> * </b> 反欺诈决策反馈：</div>
         <div class="textarea-class2">
           <el-input v-model="auditDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
         </div>
       </li>
       <li class="item-column1 item-column3-2">
-        <!-- <span style="color:red;display:inline-block;width:0px;float:left;position:relative;left:40px;top:10px;font-weight:bold;">*</span> -->
         <div class="left-title">
-          案件编号：
-        </div>
+         <b class="required_Red" v-show="auditResult=='00'||auditResult=='01'"> * </b> 案件编号：</div>
         <div class="newLi">
           <el-autocomplete v-model="caseNum" :fetch-suggestions="querySearchAsync" placeholder="请输入关键词" @select="handleSelect"></el-autocomplete>
         </div>
@@ -124,7 +117,7 @@
         <el-button class="btn-detail btn-detail2" @click="caseAdd('ruleForm')">新增</el-button>
       </li>
       <li class="item-column1 item-column3-2">
-        <div class="left-title">案件描述：</div>
+        <div class="left-title"><b class="required_Red" v-show="auditResult=='00'||auditResult=='01'"> * </b> 案件描述：</div>
         <div class="textarea-class2">
           <el-input v-model="caseDesc" type="textarea" :rows="3" resize=none :maxlength="100"></el-input>
         </div>
@@ -256,7 +249,6 @@
         </el-table-column>
       </el-table>
       <div slot="footer" class="dialog-footer">
-        <!-- <el-button plain @click="lcgjShow=false">返回</el-button> -->
         <div class="page">
           <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[10, 20,50]"
             :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="detailData.totalRecord" v-show="detailData.totalRecord > 0">
@@ -350,7 +342,7 @@
         mainId: '', // 主原因 id
         secondId: '', // 子原因id
         // appinfoId:'', // 反欺诈申请id
-        applicationInformationDetail: '', // 取到 本地存储的 申请信息
+        // applicationInformationDetail: '', // 取到 本地存储的 申请信息
         riskSectionArr: [], // 风险项
         riskSection: [],
         auditDesc: '', // 反欺诈决策反馈
@@ -627,11 +619,9 @@
             }
           }
         }
-
         if (this.auditResult != '02') {
           // 判断必填项
-          if (!this.auditResult || !this.mainReason || !this.secondReason || !this.auditDesc) {
-
+          if (!this.auditResult || !this.mainReason || !this.secondReason || !this.auditDesc||!this.caseNum||!this.caseDesc) {
             this.$message({
               showClose: true,
               message: '请输入必填项',
@@ -697,7 +687,6 @@
           // 31 风险拒绝
           this.busiState = '31';
         }
-
         // 专员的审批 相当于是主管的审批
         if (val == 'submit') {
           // 原来主管的审批 不变
@@ -1292,7 +1281,7 @@
 
   .approval-colun .left-title {
     float: left;
-    width: 130px;
+    width: 140px;
     line-height: 35px;
     min-height: 35px;
     padding-right: 10px;
@@ -1322,12 +1311,11 @@
     background: #ffffff;
     border: 1px solid #475669;
     border-radius: 4px;
-    /*width: 258px;*/
     height: 30px;
   }
 
   .approval-colun .textarea-class2 {
-    width: calc( 100% - 130px);
+    width: calc( 100% - 145px);
     float: left;
   }
 
@@ -1358,7 +1346,7 @@
   /* 默认显示样式 */
 
   .approval-colun .form-ul .el-select {
-    width: calc( 100% - 130px);
+    width: calc( 100% - 145px);
   }
 
   .approval-colun .el-input--suffix .el-input__inner {
@@ -1430,8 +1418,8 @@
   }
 
   .newLi {
-    width: calc( 100% - 130px);
-    float: right;
+    width: calc( 100% - 145px);
+    float: left;
   }
 
   .newLi div {
