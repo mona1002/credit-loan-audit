@@ -45,11 +45,9 @@
           applySubNo: this.applySubNo
           //   applySubNo : 'PHDX6409598026121216'
         }).then(res => {
-          console.log(res)
           if (res) {
             //风控结论	
             var conclusion = res.msg + "\n" + res.scoreMsg;
-            console.log(conclusion)
             if (conclusion != undefined) {
               conclusion = conclusion.replace(/\|\|/g, "\n");
             }

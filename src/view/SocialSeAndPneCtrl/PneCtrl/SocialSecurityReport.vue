@@ -526,8 +526,6 @@
         this.post(baseurl.DataUrl + '/channel/threeDataAction!notSession_getSocialInsurReport.action', {
           applySubNo: this.applySubNo
         }).then(res => {
-          // var socReport;
-          // var socRawReport
           if (res.obj.rpt) {
             var result = $.parseJSON(res.obj.rpt);
             if (result && result.result && result.result['10126'] && result.result['10126'].bizInfo && result.result[
@@ -542,16 +540,8 @@
               this.socRawReport = rawResult.result['10125'].bizInfo.data; //原始数据
             }
           }
-          console.log( 0, result)
-          console.log( 1, this.socReport)
-          console.log( 2, this.socRawReport)
-          // ---------------------------
           if (this.socReport) {
             // 基本信息2
-            // this.fen_to_yuan(this.socReport, ['medicare_balance', 'pension_balance', 'yj_month_income', 'max_base',
-            //   'average_base', 'current_base'
-            // ]);
-            // $('#div_socInsu #f_1').form('load', this.socReport);
             // 基本医疗保险
             this.socReport.medicareFlow && this.socReport.medicareFlow.length > 0 ? this.medicareFlow = this.socReport
               .medicareFlow : '';
@@ -568,47 +558,17 @@
             this.socReport.maternityFlow && this.socReport.maternityFlow.length > 0 ? this.maternityFlow = this.socReport
               .maternityFlow : '';
           }
-          // ---------------------------------
           if (this.socRawReport) { //基本信息1
           // 账户信息
             if (this.socRawReport.accounts && this.socRawReport.accounts.length > 0) {
               this.accountReport=this.socRawReport.accounts[0]
-            //   var formObj = $('#div_socInsu #d_account form').clone();
-            //   $.each(this.socRawReport.accounts, (i, eh) => {
-            //     eh.monthly_income = utils.formatMoney(eh.monthly_income);
-            //     this.fen_to_yuan(eh, ['medicare_balance', 'pension_balance']);
-            //     formObj.appendTo($('#div_socInsu #d_account'));
-            //     $('<br>').appendTo($('#div_socInsu #div_account'));
-            //     // $('#div_socInsu #d_account form:last').form('load', eh);
-            //   });
-            //   $('#div_socInsu #d_account form:first').remove();
             }
             // 险种信息
             this.socRawReport.insurances && this.socRawReport.insurances.length > 0 ? this.insurances = this.socRawReport
               .insurances : this.insurances;
-            // if (this.socRawReport.insurances && this.socRawReport.insurances.length > 0) {
-            //   $.each(this.socRawReport.insurances, (i, eh) => {
-            //     this.fen_to_yuan(eh, ['base']);
-            //     this.addRow($('#div_socInsu #t_1 tbody'), ['account_id', 'standard_name', 'base',
-            //       'insured_status', 'payment_status', 'person_rate', 'company_rate', 'company',
-            //       'current_insured_month', 'first_insured_month'
-            //     ], eh);
-            //   });
-            // }
             // 消费明细
             this.socRawReport.consumption && this.socRawReport.consumption.length > 0 ? this.consumption = this.socRawReport
               .consumption : '';
-            // if (this.socRawReport.consumption && this.socRawReport.consumption.length > 0) {
-            //   $.each(this.socRawReport.consumption, (i, eh) => {
-            //     this.fen_to_yuan(eh, ['trade_amount', 'person_out', 'pool_out', 'medicare_out', 'own_expense',
-            //       'pay_cash', 'pay_big', 'claims_amount'
-            //     ]);
-            //     this.addRow($('#div_socInsu #t_7 tbody'), ['trade_time', 'trade_type', 'trade_place',
-            //       'trade_amount', 'person_out', 'pool_out', 'medicare_out', 'own_expense', 'pay_cash',
-            //       'pay_big', 'claims_amount'
-            //     ], eh);
-            //   });
-            // }
           }
         });
       },
@@ -616,7 +576,6 @@
         var row = '<tr>';
         $.each(rfields, (index, val) => {
           if (rdata[val] != undefined) {
-            //row += '<td>' + utils.formatMoney(rdata[val]) + '</td>';
             row += '<td>' + rdata[val] + '</td>';
           } else {
             row += '<td>' + '' + '</td>';

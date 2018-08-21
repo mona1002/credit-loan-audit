@@ -13,7 +13,6 @@
           <complexPic v-if="ind==1" :applySubNo='localInf.applySubNo'>复杂网络图谱</complexPic>
           <OcrMessage v-if="ind==2" :applySubNo='localInf.applySubNo'>OCR信息</OcrMessage>
           <portrait v-if="ind==3" :applySubNo='localInf.applySubNo'>同盾设备画像</portrait>
-          <!-- <test v-if="ind==4" :applySubNo='localInf.applySubNo'>网查征信报告</test> -->
           <ZxReport v-if="ind==4" :applySubNo='localInf.applySubNo'>网查征信报告</ZxReport>
           <carrierReport v-if="ind==5" :applySubNo='localInf.applySubNo'>运营商报告</carrierReport>
           <debitCardReport v-if="ind==6" :applySubNo='localInf.applySubNo'>储蓄卡报告</debitCardReport>
@@ -38,7 +37,6 @@
   import carrierReport from './PneCtrl/carrierReport.vue'
   import ZxReport from './PneCtrl/360ZxReport.vue'
   import debitCardReport from './PneCtrl/debitCardReport.vue'
-  import test from './PneCtrl/test.vue'
 
 
   export default {
@@ -56,7 +54,6 @@
     watch: {
       '$route' (to, from) {
         from.meta.newOne = false;
-        console.log(this.$route)
         if (to.path === '/PneCtrl' && this.$route.params.newOne) {
           this.getInf();
           this.ind = 0;
@@ -75,10 +72,7 @@
           this.localInf = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
         } else if (this.judgeFlag.flag == '03' || this.judgeFlag.flag == '04') {
           this.localInf = JSON.parse(localStorage.getItem("AntitaskInWaitting")) //反欺诈专员
-        } //  else if (this.judgeFlag.flag == '04') {
-        //   this.localInf = JSON.parse(localStorage.getItem("AntiManagertaskInWaitting")) //反欺诈主管
-        // }
-        else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
+        } else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
           this.localInf = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员 
         } else if (this.judgeFlag.flag == '07' || this.judgeFlag.flag == '08' || this.judgeFlag.flag == '09' || this.judgeFlag
           .flag == '10' || this.judgeFlag.flag == '11' || this.judgeFlag.flag == '13') {
@@ -88,10 +82,6 @@
           this.obj.applySubNo = this.localInf.applySubno
           Object.assign(this.localInf, this.obj)
         }
-        // this.localInf.applySubNo = 'PHDX6409598026121216';
-        //  this.localInf.applySubNo = 'test999999'
-        // this.localInf.applySubNo = '201807180173030264';
-        // this.localInf.applyId = '9e56e245-bd30-4a51-97e9-c255ea7171b6';
       }
     },
     created() {
@@ -109,7 +99,6 @@
       carrierReport,
       ZxReport,
       debitCardReport,
-      test
     }
 
   }

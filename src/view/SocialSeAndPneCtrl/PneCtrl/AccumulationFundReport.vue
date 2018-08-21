@@ -382,22 +382,11 @@
       }
     },
     methods: {
-      // checkInf(getdata, showinfo) {
-      //   for (let key in getdata) {
-      //     getdata[key] ? showinfo[key] = getdata[key] : '';
-      //   }
-      //   // return showinfo
-      // },
       getInf() {
         this.post(baseurl.DataUrl + '/channel/threeDataAction!notSession_getFundReport.action', {
           applySubNo: this.applySubNo
           //   applySubNo : 'PHDX6409598026121216'
         }).then(res => {
-          console.log(res)
-          // if (!res.success) {
-          //   this.$message.error("查询数据失败！");
-          //   return;
-          // }
           if (res.obj.rpt) {
             var result = $.parseJSON(res.obj.rpt);
             if (result && result.result && result.result['10059'] && result.result['10059'].bizInfo && result.result[
@@ -405,115 +394,28 @@
               result.result['10059'].bizInfo.data.report && result.result['10059'].bizInfo.data.report[0] &&
               result.result['10059'].bizInfo.data.report[0].data) {
               this.fundReport = result.result['10059'].bizInfo.data.report[0].data[0];
-              // this.checkInf(result.result['10059'].bizInfo.data.report[0].data[0], this.fundReport)
             }
-            console.log(1, this.fundReport);
           }
           if (res.obj.rawRpt) {
             var rawResult = $.parseJSON(res.obj.rawRpt);
             var Accounts;
             if (rawResult && rawResult.result && rawResult.result['10060'] && rawResult.result['10060'].bizInfo) {
               Accounts = rawResult.result['10060'].bizInfo.data;
-              // this.fundRawReport = rawResult.result['10060'].bizInfo.data;
               Accounts && Accounts.accounts && Accounts.accounts.length > 0 ? this.fundRawReport = Accounts.accounts[0] : {};
             }
           }
-          // ---------------------------
           if (this.fundReport) {
-            //     this.fen_to_yuan(this.fundReport, ['deposit_amount', 'balance', 'loan_repay_amount', 'monthly_income', '']);
-            //     // $('#div_fund #f_1').form('load', this.fundReport);
             this.fundReport.companys && this.fundReport.companys.length > 0 ? this.companys = this.fundReport.companys :
               '';
-            //     if (this.fundReport.companys && this.fundReport.companys.length > 0) {
-            //       $.each(this.fundReport.companys, function (i, eh) {
-            //         this.addRow($('#div_fund #t_2 tbody'), ['name', 'type', 'begin_date', 'end_date'], eh);
-            //       });
-            //     }
             this.fundReport.flows && this.fundReport.flows.length > 0 ? this.flows = this.fundReport.flows : '';
-            //     if (this.fundReport.flows && this.fundReport.flows.length > 0) {
-            //       //$('#div_fund #d_3').attr('style','height:500px');
-            //       $.each(this.fundReport.flows, function (i, eh) {
-            //         this.fen_to_yuan(eh, ['amount', 'balance']);
-            //         this.addRow($('#div_fund #t_3 tbody'), ['company', 'operation_date', 'operation_type',
-            //           'record_month', 'amount', 'balance'
-            //         ], eh)
-
-            //         /* if(eh.record_month!=""){
-            //         	eh.record_month = eh.record_month.substr(0,4)+'-'+eh.record_month.substr(4);
-            //         }
-            //         this.addRow($('#div_fund #t_3 tbody'),['company','operation_date','operation_type','record_month','amount','balance'],eh); */
-            //       });
-            //     }
             this.fundReport.loans && this.fundReport.loans.length > 0 ? this.loans = this.fundReport.loans : '';
-            //     if (this.fundReport.loans && this.fundReport.loans.length > 0) {
-            //       $.each(this.fundReport.loans, function (i, eh) {
-            //         this.fen_to_yuan(eh, ['limit', 'balance']);
-            //         this.addRow($('#div_fund #t_4 tbody'), ['contract_no', 'name', 'id_card', 'phone', 'bank', 'status',
-            //           'limit', 'balance', 'period', 'begin_date', 'end_date', 'loan_rate'
-            //         ], eh);
-            //       });
-            //     }
           }
-          // ---------------------------------
           if (this.fundRawReport) {
-            //     if (this.fundRawReport.accounts && this.fundRawReport.accounts.length > 0) {
-            //       var formObj = $('#div_fund #div_account form').clone();
-            //       $.each(this.fundRawReport.accounts, function (i, eh) {
-            //         this.fen_to_yuan(eh, ['balance', 'deposit_amount', 'deposit_base', 'housing_supplement_base',
-            //           'housing_supplement_balance', 'once_balance'
-            //         ]);
-            //         formObj.appendTo($('#div_fund #div_account'));
-            //         $('<br>').appendTo($('#div_fund #div_account'));
-            //         // $('#div_fund #div_account form:last').form('load', eh);
-            //       });
-            //       $('#div_fund #div_account form:first').remove();
-            //     }
             this.fundRawReport.loan_flows && this.fundRawReport.loan_flows.length > 0 ? this.loanFlows = this.fundRawReport
               .loan_flows : '';
-            //     if (this.fundRawReport.loan_flows && this.fundRawReport.loan_flows.length > 0) {
-            //       $.each(this.fundRawReport.loan_flows, function (i, eh) {
-            //         this.fen_to_yuan(eh, ['repay_principle', 'repay_interest', 'repay_amount', 'principle_balance']);
-            //         this.addRow($('#div_fund #t_5 tbody'), ['account_id', 'contract_no', 'type', 'record_date',
-            //           'record_month', 'repay_principle', 'repay_interest', 'repay_amount', 'principle_balance',
-            //           'deduct_date'
-            //         ], eh);
-            //       });
-            //     }
           }
         });
       },
-      //   addRow($table, rfields, rdata) {
-      //     var row = '<tr>';
-      //     $.each(rfields, (index, val) => {
-      //       if (rdata[val] != undefined) {
-      //         //row += '<td>' + utils.formatMoney(rdata[val]) + '</td>';
-      //         row += '<td>' + rdata[val] + '</td>';
-      //       } else {
-      //         row += '<td>' + '' + '</td>';
-      //       }
-      //     });
-      //     row += '</tr>';
-      //     $table.append(row);
-      //   },
-      //   addTdRowSpan($table, fName, rowSpan, rowData) {
-      //     $.each(rowData, (i, val) => {
-      //       if (i == 0) {
-      //         var row = '<tr><td rowspan="' + rowSpan +
-      //           '" style="text-align: center;vertical-align: middle;width: 15%">' +
-      //           fName + '</td><td>' + rowData[i] + '</td></tr>';
-      //         $table.append(row);
-      //       } else {
-      //         $table.append('<tr><td>' + rowData[i] + '</td></tr>')
-      //       }
-      //     });
-      //   },
-      //   fen_to_yuan(jsonObj, fieldsArr) {
-      //     $.each(fieldsArr, function (i, eh) {
-      //       if (jsonObj[eh]) {
-      //         jsonObj[eh] = utils.formatMoney(parseInt(jsonObj[eh]) / 100);
-      //       }
-      //     });
-      //   }
     },
     mounted() {
       this.getInf();

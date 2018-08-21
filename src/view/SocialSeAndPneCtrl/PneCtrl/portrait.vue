@@ -436,46 +436,30 @@
             if (result && result.result && result.result['10108']) {
               //  申请信息   
               result['result']['10108']['reqInfo'] ? this.applyInf = result['result']['10108']['reqInfo'] : '';
-              // $('#reqInfo').form('loadData',result['result']['10108']['reqInfo']);
-              // this.stringToDate($('#applyTime'));
               this.applyInf.applyTime = this.stringToDate(this.applyInf.applyTime)
               if (result['result']['10108']['bizInfo']['reason_code'] == '200') {
                 //  业务信息
                 result['result']['10108']['bizInfo']['data'] ? this.businessInf = result['result']['10108'][
                   'bizInfo'
                 ]['data'] : '';
-                // $('#bizDatagrid1Form').form('load',result['result']['10108']['bizInfo']['data']);
                 // 设备信息
                 result['result']['10108']['bizInfo']['data']['deviceInfo'] ? this.deviceInfo = result['result'][
                   '10108'
                 ]['bizInfo']['data']['deviceInfo'] : '';
-                // $('#bizDatagrid2Form').form('loadData',result['result']['10108']['bizInfo']['data']['deviceInfo']);
                 // 通话信息 
                 result['result']['10108']['bizInfo']['data']['deviceInfo']['telephonyInfos'] ? this.telephonyInfos =
                   result['result']['10108']['bizInfo']['data']['deviceInfo']['telephonyInfos'] : '';
-                // $('#phoneDatagrid').datagrid('loadData', result['result']['10108']['bizInfo']['data']['deviceInfo']
-                //   ['telephonyInfos']);
-                // -----------------------------------------------------此处作用
-                // this.tranDate($('#currentTime')); //
-                // this.tranDate($('#bootTime')); //bootTime activeTime
                 this.deviceInfo.currentTime = this.tranDate(this.deviceInfo.currentTime);
                 this.deviceInfo.bootTime = this.tranDate(this.deviceInfo.bootTime);
                 this.deviceInfo.activeTime = this.millsToHours(this.deviceInfo.activeTime);
                 this.deviceInfo.upTime = this.millsToHours(this.deviceInfo.upTime);
-                // this.millsToHours($('#activeTime'));
-                // this.millsToHours($('#upTime'));
               }
             }
           }
         });
       },
       tranDate(t) {
-        // var date = new Date((Number)(t.val()));
         var date = new Date(Number(t));
-        // if (date) {
-        //   t.val(date.toLocaleDateString() + date.toLocaleTimeString());
-        //   t.val(date.toLocaleDateString() + date.toLocaleTimeString());
-        // }
         return date ? date.toLocaleDateString() + date.toLocaleTimeString() : '';
       },
       millsToHours(t) {
@@ -485,23 +469,13 @@
         }
         return hours ? hours : '';
       },
-      //       function millsToHours($obj){
-      //   var mills=(Number)($obj.val());
-      //   if(mills){
-      //   var hours=(mills/(3600*1000)).toFixed(2);
-      //   $obj.val(hours);
-      //   }
-
-      // } 
       stringToDate(t) {
         if (t) {
           var d = new Date(t.substring(0, 4), t.substring(4, 6), t.substring(6, 8), t.substring(8, 10),
             t.substring(10, 12), t.substring(12, 14));
-          // t.val(d.toLocaleDateString() + d.toLocaleTimeString());
         }
         return d ? d.toLocaleDateString() + d.toLocaleTimeString() : '';
       }
-
     },
     mounted() {
       this.getInf();

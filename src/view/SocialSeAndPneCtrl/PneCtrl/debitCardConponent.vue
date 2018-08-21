@@ -149,7 +149,6 @@
             <el-table-column prop="outflow_count" label="流出总笔数" width="160">
             </el-table-column>
             <el-table-column label="流出总金额[元]" width="160">
-              <!--  prop="outflow_sum_amount"  -->
               <template slot-scope="scope">
                 {{parseInt(scope.row.outflow_sum_amount)/ 100 | formatMoney }}
               </template>
@@ -295,31 +294,7 @@
         },
         type: Object
       },
-      // month_summaries: {
-      //   default: function () {
-      //     return [];
-      //   },
-      //   // type: Array
-      // },
-      // reportObj: {
-      //   default: function () {
-      //     return {
-      //       // name: ''
-      //     };
-      //   },
-      //   // type: Object
-      // },
-      // accountObj: {
-      //   default: function () {
-      //     return {};
-      //   },
-      // type: Object
-      // }
-    },
-    mounted() {
-
     }
-
   }
 
 </script>

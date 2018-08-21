@@ -336,7 +336,6 @@
           applySubNo: this.applySubNo
           //   applySubNo : 'PHDX6409598026121216'
         }).then(res => {
-          console.log(res);
           // if (!res.success) {
           //   this.$messager.error("查询数据失败！");
           //   return;

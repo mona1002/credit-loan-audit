@@ -526,7 +526,6 @@
               this.caReport = report.result['10069'].bizInfo.report_data;
             }
           }
-          console.log(this.caReport)
           if (!this.caReport) return;
           //用户申请表检测
           if (this.caReport.application_check && this.caReport.application_check.length > 0) {
@@ -600,7 +599,6 @@
               .behavior_check : '';
             if (this.caReport.behavior_check && this.caReport.behavior_check.length > 0) {
               $.each(this.caReport.behavior_check, function (i, eh) {
-                // addRow($('#div_carr #t_3 tbody'),['check_point_cn','result','evidence'],eh);
               });
             }
             //运营商数据
@@ -620,10 +618,6 @@
                   eh.behavior[idx].net_flow = parseFloat(eh.behavior[idx].net_flow).toFixed(2);
                   eh.behavior[idx].cell_phone_num = eh.phone_num;
                   _cellBehavior.push(eh.behavior[idx]);
-                  // sel.addRow($('#div_carr #t_4 tbody'), ['cell_operator_zh', 'cell_phone_num', 'cell_loc',
-                  //   'cell_mth', 'call_cnt', 'call_out_cnt', 'call_out_time', 'call_in_cnt', 'call_in_time',
-                  //   'sms_cnt', 'net_flow', 'total_amount'
-                  // ], eh.behavior[idx]);
                 }
               });
               this.cellBehavior = _cellBehavior;
@@ -631,41 +625,9 @@
             //联系人区域汇总
             this.caReport.contact_region && this.caReport.contact_region.length > 0 ? this.contactRegion = this.caReport
               .contact_region : '';
-            // console.log
-            // if(this.caReport.contact_region && this.caReport.contact_region.length>0){
-            // $.each(this.caReport.contact_region,function(i,eh){
-            // 	$.each(eh,function(name,value){
-            //     console.log(3,name)
-            //     console.log(4,value)
-            // 		if(name.indexOf('_pct')!=-1) {
-            // 			//eh[name]=formatRatePercentage100(value);
-            //       eh[name]=parseFloat(value).toFixed(4);
-            //       console.log(5,eh[name])
-            // 		}else if(name.indexOf('_time')!=-1){
-            // 			eh[name]=parseFloat(value).toFixed(2);
-            // 		}
-            // 	});
-            //eh.region_call_out_time_pct = formatRatePercentage100(eh.region_call_out_time_pct);
-            // this.addRow($('#div_carr #t_5 tbody'),['region_loc','region_uniq_num_cnt','region_call_in_cnt','region_call_out_cnt','region_call_in_time'
-            //               ,'region_call_out_time','region_avg_call_in_time','region_avg_call_out_time','region_call_in_cnt_pct','region_call_out_cnt_pct'
-            //               ,'region_call_in_time_pct','region_call_out_time_pct'],eh);
-            // });
-            // }
             //运营商数据分析——联系人通话详情
             this.caReport.contact_list && this.caReport.contact_list.length > 0 ? this.contactList = this.caReport.contact_list :
               '';
-            // if(this.caReport.contact_list && this.caReport.contact_list.length>0){
-            // 	$.each(this.caReport.contact_list,function(i,eh){
-            // 		eh.contact_all_day = eh.contact_all_day==true?'是':'否';
-            // 		$.each(eh,function(name,value){
-            // 			if(name.indexOf('_len')!=-1) eh[name]=parseFloat(eh[name]).toFixed(2);
-            // 		});
-            // 		sel.addRow($('#div_carr #t_6_1 tbody'),['phone_num','phone_num_loc','contact_name','needs_type','call_out_cnt','call_out_len'
-            // 		           ,'call_in_cnt','call_in_len','call_cnt','call_len','contact_1w','contact_1m','contact_3m','contact_morning'
-            // 		           ,'contact_noon','contact_afternoon','contact_night','contact_early_morning','contact_all_day','contact_weekday'
-            // 		           ,'contact_weekend','contact_holiday'],eh);
-            // 	});
-            // }
             //运营商数据分析——常用服务
             if (this.caReport.main_service && this.caReport.main_service.length > 0) {
               var fieldsArr = ['company_type', 'company_name', 'total_service_cnt'];
@@ -688,44 +650,18 @@
             this.caReport.deliver_address && this.caReport.deliver_address.length > 0 ? this.deliverAddress = this.caReport
               .deliver_address : '';
             if (this.caReport.deliver_address && this.caReport.deliver_address.length > 0) {
-              // $.each(this.caReport.deliver_address,function(i,eh){
-              // 	eh.phone_num_list = eh.receiver.phone_num_list.toString();
-              // 	addRow($('#div_carr #t_7 tbody'),['address','predict_addr_type','begin_date','end_date','total_count','total_amount'
-              // 	            ,'receiver.name','phone_num_list','receiver.count','receiver.amount'],eh);
-              // });
             }
             //电商月消费分析
             this.caReport.ebusiness_expense && this.caReport.ebusiness_expense.length > 0 ? this.ebusinessExpense =
               this.caReport.ebusiness_expense : '';
             if (this.caReport.ebusiness_expense && this.caReport.ebusiness_expense.length > 0) {
-              // $.each(this.caReport.ebusiness_expense,function(i,eh){
-              // 	eh.all_category_txt = eh.all_category.toString();
-              // 	addRow($('#div_carr #t_8 tbody'),['trans_mth','all_count','all_amount','all_category_txt'],eh);
-              // });
             }
             //联系人名单
             this.caReport.collection_contact && this.caReport.collection_contact.length > 0 ? this.collectionContact =
               this.caReport.collection_contact : '';
-            // if (this.caReport.collection_contact && this.caReport.collection_contact.length > 0) {
-            //   $.each(this.caReport.collection_contact, function (i, eh) {
-            //     addRow($('#div_carr #t_9 tbody'), ['contact_name', 'begin_date', 'end_date', 'total_count',
-            //       'total_amount', 'contact_details[0].phone_num', 'contact_details[0].phone_num_loc',
-            //       'contact_details[0].call_in_cnt', 'contact_details[0].call_out_cnt',
-            //       'contact_details[0].call_cnt', 'contact_details[0].call_len',
-            //       'contact_details[0].sms_cnt'
-            //     ], eh);
-            //   });
-            // }
             //出行分析
             this.caReport.trip_info && this.caReport.trip_info.length > 0 ? this.triInfo = this.caReport.trip_info :
               '';
-            // if (this.caReport.trip_info && this.caReport.trip_info.length > 0) {
-            //   $.each(this.caReport.trip_info, function (i, eh) {
-            //     addRow($('#div_carr #t_10 tbody'), ['trip_type', 'trip_start_time', 'trip_end_time',
-            //       'trip_leave', 'trip_dest'
-            //     ], eh);
-            //   });
-            // }
           }
         });
       },
@@ -774,7 +710,6 @@
   #t_6_2 td,
   #t_6_2 th {
     border: 1px solid #d8dce5;
-    /* border: 1px solid red; */
     padding-left: 5px;
   }
 

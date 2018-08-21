@@ -302,7 +302,6 @@
         activeNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '2'],
         accountInf: this.totalVal.accounts,
         reportInf: this.totalVal.data
-
       }
     },
     props: {
@@ -316,13 +315,8 @@
         default: function () {
           return [];
         },
-        // type: Array
       },
     },
-    mounted() {
-
-    }
-
   }
 
 </script>
