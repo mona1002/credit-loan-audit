@@ -1,12 +1,6 @@
 <template>
   <div>
-    <!-- <div> -->
-    <!-- <h3 style="padding-left: 0px;font-size: 25px;text-align: center">
-			       	储蓄卡报告
-			   </h3> -->
-    <!-- </div> -->
-    <!-- {{totalVal}} -->
-    <!-- {{reportInf}} -->
+    <!-- 储蓄卡报告 -->
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">

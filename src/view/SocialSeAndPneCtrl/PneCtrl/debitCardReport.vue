@@ -1,5 +1,5 @@
 <template>
-  <!--  储蓄卡   -->
+  <!--  储蓄卡报告   -->
   <div class="SocialSecurity debitCardReport">
     <el-tabs v-model="editableTabsValue" type="border-card">
       <el-tab-pane :key="item.name" v-for="(item, index) in totalAccount" :label="item.type" :name="index+''">
@@ -67,8 +67,8 @@
             this.$message.error('查询失败！')
             return;
           }
-          if (!!res.obj && !res.obj.rawRpt && !res.obj.rpt) {
-          // if ((!!res.obj && !res.obj.rawRpt && !res.obj.rpt)||((res.obj.rpt&&$.parseJSON(res.obj.rpt).message=='noContent')&&(res.obj.rawRpt&&$.parseJSON(res.obj.rawRpt).message=='noContent'))) {//rpt pawRpt都存在且message都为noContent
+          // if (!!res.obj && !res.obj.rawRpt && !res.obj.rpt) {
+          if ((!!res.obj && !res.obj.rawRpt && !res.obj.rpt)||((res.obj.rpt&&$.parseJSON(res.obj.rpt).message=='noContent')&&(res.obj.rawRpt&&$.parseJSON(res.obj.rawRpt).message=='noContent'))) {//rpt pawRpt都存在且message都为noContent
             let def = {
               data: {},
               accounts: {},

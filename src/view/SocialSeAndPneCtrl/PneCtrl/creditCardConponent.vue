@@ -1,12 +1,6 @@
 <template>
   <div>
-    <!-- <div> -->
-    <!-- <h3 style="padding-left: 0px;font-size: 25px;text-align: center">
-			       	信用卡报告
-			   </h3> -->
-    <!-- </div> -->
-    <!-- {{totalVal}} -->
-    <!-- {{reportInf}} -->
+    <!-- 信用卡报告 -->
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
@@ -77,13 +71,13 @@
               </li>
               <li>
                 <label class="label_width_166">逾期金额总和[元](6期)：</label>
-                 <span> {{parseInt(reportInf.overdue_amount)/ 100 | formatMoney }}</span>
+                <span> {{parseInt(reportInf.overdue_amount)/ 100 | formatMoney }}</span>
               </li>
             </div>
             <div class=" clearFix">
               <li>
                 <label class="label_width_166">最大连续逾期期数(12期)：</label>
-                 <span> {{parseInt(reportInf.max_series_overdue_count)/ 100 | formatMoney }}</span>
+                <span> {{parseInt(reportInf.max_series_overdue_count)/ 100 | formatMoney }}</span>
               </li>
               <li class="li_four_3rows">
                 <label class="label_width_166">逾期状态列表(12期)：</label>
