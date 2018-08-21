@@ -370,9 +370,9 @@
         </template>
         <div class="height_auto">
           <el-table :data="telephonyInfos" style="width:100%;" highlight-current-row border>
-            <el-table-column prop="carrier" label="运营商" width="180">
+            <el-table-column prop="carrier" label="运营商" width="80">
             </el-table-column>
-            <el-table-column prop="phoneType" label="通话类型" width="180">
+            <el-table-column prop="phoneType" label="通话类型" width="80">
             </el-table-column>
             <el-table-column prop="mnc" label="mnc" width="180">
             </el-table-column>

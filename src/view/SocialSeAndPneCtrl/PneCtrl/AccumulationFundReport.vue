@@ -253,7 +253,7 @@
           <el-table :data="loans" style="width:100%;" highlight-current-row border>
             <el-table-column prop="contract_no" label="合同号" width="120">
             </el-table-column>
-            <el-table-column prop="name" label="姓名" width="100">
+            <el-table-column prop="name" label="姓名" width="80">
             </el-table-column>
             <el-table-column prop="id_card" label="身份证号" width="160">
             </el-table-column>
@@ -261,7 +261,7 @@
             </el-table-column>
             <el-table-column prop="bank" label="贷款银行" width="160">
             </el-table-column>
-            <el-table-column prop="status" label="贷款状态" width="160">
+            <el-table-column prop="status" label="贷款状态" width="80">
             </el-table-column>
             <el-table-column label="贷款额度[元]" width="160">
               <template slot-scope="scope">
@@ -273,13 +273,13 @@
                 {{parseInt(scope.row.balance)/ 100 | formatMoney }}
               </template>
             </el-table-column>
-            <el-table-column prop="period" label="贷款期限" width="160">
+            <el-table-column prop="period" label="贷款期限" width="80">
             </el-table-column>
-            <el-table-column prop="begin_date" label="贷款开始时间" width="160">
+            <el-table-column prop="begin_date" label="贷款开始时间" width="105">
             </el-table-column>
-            <el-table-column prop="end_date" label="贷款结束时间" width="160">
+            <el-table-column prop="end_date" label="贷款结束时间" width="105">
             </el-table-column>
-            <el-table-column prop="loan_rate" label="贷款利率(%)" width="160">
+            <el-table-column prop="loan_rate" label="贷款利率(%)" min-width="160">
             </el-table-column>
           </el-table>
         </div>
@@ -297,9 +297,9 @@
             </el-table-column>
             <el-table-column prop="type" label="流水类型" width="100">
             </el-table-column>
-            <el-table-column prop="record_date" label="记录日期" width="180">
+            <el-table-column prop="record_date" label="记录日期" width="90">
             </el-table-column>
-            <el-table-column prop="record_month" label="所属月份" width="100">
+            <el-table-column prop="record_month" label="所属月份" width="80">
             </el-table-column>
             <el-table-column label="还本金额[元]" width="100">
               <template slot-scope="scope">
@@ -321,7 +321,7 @@
                 {{parseInt(scope.row.principle_balance)/ 100 | formatMoney }}
               </template>
             </el-table-column>
-            <el-table-column prop="deduct_date" label="银行扣款日期" min-width="190">
+            <el-table-column prop="deduct_date" label="银行扣款日期" min-width="90">
             </el-table-column>
           </el-table>
         </div>

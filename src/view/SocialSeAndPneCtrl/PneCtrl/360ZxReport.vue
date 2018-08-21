@@ -112,9 +112,9 @@
         </template>
         <div class="height_auto">
           <el-table :data="creditCardDetail" style="width:100%;" highlight-current-row border>
-            <el-table-column prop="bank" label="发行银行" min-width="260">
+            <el-table-column prop="bank" label="发行银行" width="140">
             </el-table-column>
-            <el-table-column prop="release_date" label="发行日期" min-width="160">
+            <el-table-column prop="release_date" label="发行日期" width="90">
             </el-table-column>
             <el-table-column prop="card_type" label="卡类型" min-width="100">
             </el-table-column>
@@ -128,7 +128,7 @@
             </el-table-column>
             <el-table-column prop="over_due_amount" label="逾期额度" width="100">
             </el-table-column>
-            <el-table-column prop="is_delq" label="是否逾期" width="120">
+            <el-table-column prop="is_delq" label="是否逾期" width="80">
             </el-table-column>
             <el-table-column prop="is_active" label="是否激活" width="80">
             </el-table-column>
@@ -146,21 +146,21 @@
         </template>
         <div class="height_auto">
           <el-table :data="houseLoanDetail" style="width:100%;" highlight-current-row border>
-            <el-table-column prop="bank" label="发卡银行" min-width="260">
+            <el-table-column prop="bank" label="发卡银行" width="140">
             </el-table-column>
-            <el-table-column prop="release_date" label="发卡日期" min-width="160">
+            <el-table-column prop="release_date" label="发卡日期" width="90">
             </el-table-column>
             <el-table-column prop="release_count" label="发放金额" width="80">
             </el-table-column>
-            <el-table-column prop="account_type" label="账户类型" width="100">
+            <el-table-column prop="account_type" label="账户类型" width="80">
             </el-table-column>
-            <el-table-column prop="loan_type" label="贷款类型" width="120">
+            <el-table-column prop="loan_type" label="贷款类型" width="80">
             </el-table-column>
-            <el-table-column prop="deadline" label="到期日期" width="160">
+            <el-table-column prop="deadline" label="到期日期" width="90">
             </el-table-column>
-            <el-table-column prop="due_date" label="截至日期" width="160">
+            <el-table-column prop="due_date" label="截至日期" width="90">
             </el-table-column>
-            <el-table-column prop="is_delq" label="是否逾期" width="120">
+            <el-table-column prop="is_delq" label="是否逾期" width="80">
             </el-table-column>
             <el-table-column prop="balance" label="余额" width="120">
             </el-table-column>
@@ -170,7 +170,7 @@
             </el-table-column>
             <el-table-column prop="delq_l5y_90day_amt" label="近五年内逾期超过90天数" width="180">
             </el-table-column>
-            <el-table-column prop="status" label="状态" width="120">
+            <el-table-column prop="status" label="状态" min-width="120">
             </el-table-column>
           </el-table>
         </div>
@@ -218,7 +218,7 @@
             </el-table-column>
             <el-table-column prop="guarantee_place" label="担保地址" min-width="180">
             </el-table-column>
-            <el-table-column prop="card_type" label="证件类型" width="140">
+            <el-table-column prop="card_type" label="证件类型" width="80">
             </el-table-column>
             <el-table-column prop="card_num" label="证件号" width="180">
             </el-table-column>
@@ -228,7 +228,7 @@
             </el-table-column>
             <el-table-column prop="guarantee_count" label="担保额" width="120">
             </el-table-column>
-            <el-table-column prop="due_date" label="截至日期" width="160">
+            <el-table-column prop="due_date" label="截至日期" width="90">
             </el-table-column>
             <el-table-column prop="balance" label="余额" width="100">
             </el-table-column>
