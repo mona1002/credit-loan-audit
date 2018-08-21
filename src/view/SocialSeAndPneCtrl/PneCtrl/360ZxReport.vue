@@ -1,6 +1,6 @@
 <template>
   <!-- 网查征信报告 -->
-  <div class="SocialSecurity ZxReport">
+  <div class="SocialSecurity ZxReport" >
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
@@ -162,15 +162,15 @@
             </el-table-column>
             <el-table-column prop="is_delq" label="是否逾期" width="80">
             </el-table-column>
-            <el-table-column prop="balance" label="余额" width="120">
+            <el-table-column prop="balance" label="余额" width="105">
             </el-table-column>
-            <el-table-column prop="overdue_amount" label="逾期金额" width="120">
+            <el-table-column prop="overdue_amount" label="逾期金额" width="105">
             </el-table-column>
             <el-table-column prop="delq_l5y_amt" label="近五年内逾期数" width="120">
             </el-table-column>
             <el-table-column prop="delq_l5y_90day_amt" label="近五年内逾期超过90天数" width="180">
             </el-table-column>
-            <el-table-column prop="status" label="状态" min-width="120">
+            <el-table-column prop="status" label="状态" min-width="80">
             </el-table-column>
           </el-table>
         </div>

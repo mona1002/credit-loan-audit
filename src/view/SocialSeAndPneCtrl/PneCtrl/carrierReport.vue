@@ -404,24 +404,24 @@
         </template>
         <div class="height_auto">
           <el-table :data="collectionContact" style="width:100%;" highlight-current-row border>
-            <el-table-column prop="contact_name" label="联系人姓名" width="100">
+            <el-table-column prop="contact_name" label="联系人姓名" width="90">
             </el-table-column>
             <el-table-column prop="begin_date" label="最早时间" width="160">
             </el-table-column>
             <el-table-column prop="end_date" label="最晚时间" width="140">
             </el-table-column>
-            <el-table-column prop="total_count" label="总消费次数" width="140">
+            <el-table-column prop="total_count" label="总消费次数" width="90">
             </el-table-column>
             <el-table-column prop="total_amount" label="总消费金额[元]" width="140">
             </el-table-column>
-            <el-table-column label="号码" width="140">
+            <el-table-column label="号码" width="130">
               <template slot-scope="scope">
                 <span>{{ scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].phone_num:''
                   }}
                 </span>
               </template>
             </el-table-column>
-            <el-table-column label="号码归属地" width="140">
+            <el-table-column label="号码归属地" width="90">
               <template slot-scope="scope">
                 <span>{{ scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].phone_num_loc:''
                   }}
@@ -435,28 +435,28 @@
                 </span>
               </template>
             </el-table-column>
-            <el-table-column label="申请人拨打次数" width="140">
+            <el-table-column label="申请人拨打次数" width="120">
               <template slot-scope="scope">
                 <span>{{ scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].call_out_cnt:''
                   }}
                 </span>
               </template>
             </el-table-column>
-            <el-table-column label="总计电话通数" width="140">
+            <el-table-column label="总计电话通数" width="110">
               <template slot-scope="scope">
                 <span>{{ scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].call_cnt:''
                   }}
                 </span>
               </template>
             </el-table-column>
-            <el-table-column label="通话时长(分钟)" width="140">
+            <el-table-column label="通话时长(分钟)" width="120">
               <template slot-scope="scope">
                 <span>{{ scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].call_len:''
                   }}
                 </span>
               </template>
             </el-table-column>
-            <el-table-column label="短信条数" width="140">
+            <el-table-column label="短信条数" width="80">
               <template slot-scope="scope">
                 <span>{{ scope.row.all_category&& scope.row.all_category.contact_details[0]? scope.row.all_category.contact_details[0].sms_cnt:''
                   }}
