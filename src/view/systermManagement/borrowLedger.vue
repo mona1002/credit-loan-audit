@@ -1186,16 +1186,16 @@
           headers: {
             'Content-Type': 'application/json'
           }
-        }).then(res => { // 处理返回的文件流
-          const blob = new Blob([res.data]); //new Blob([res])中不加data就会返回下图中[objece objece]内容（少取一层）
-          const fileName = 'JKTZ_' + this.Date + '.xlsx'; //下载文件名称
+        }).then(res => { 
+          const blob = new Blob([res.data]); 
+          const fileName = 'JKTZ_' + this.Date + '.xls'; 
           const elink = document.createElement('a');
           elink.download = fileName;
           elink.style.display = 'none';
           elink.href = URL.createObjectURL(blob);
           document.body.appendChild(elink);
           elink.click();
-          URL.revokeObjectURL(elink.href); // 释放URL 对象
+          URL.revokeObjectURL(elink.href); 
           document.body.removeChild(elink);
         })
       },
