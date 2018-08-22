@@ -1120,7 +1120,7 @@
           telNum: '',
           telRecord: '',
           iisself: '',
-          iisselftxt: '',
+          appConclusion: '',
           insResult: '00', // 质检结果(00:正常，01:异常)		
           remark: '',
         }, //客户本人-拨打核实-本人只有一条电话拨打核实记录---obj
@@ -1375,8 +1375,9 @@
               this.insTelCustInfo.telNum = res.data.insTelCustInfo.telNum; //电话号码
               this.insTelCustInfo.telRecord = res.data.insTelCustInfo.telRecord; //电话录音
               this.insTelCustInfo.iisself = res.data.insTelCustInfo.iisself; //接听人是否借款人本人
-              this.insTelCustInfo.iisselftxt = res.data.insTelCustInfo.iisselftxt; //接听说明
+              this.insTelCustInfo.appConclusion = res.data.insTelCustInfo.appConclusion; //接听说明
               this.insTelCustInfo.remark = res.data.insTelCustInfo.remark; //备注
+              
             } else {
               this.insTelCustInfo = res.data.insTelCustInfo;
               // this.insTelCustInfo.insResult = res.data.insTelCustInf.insResult//电话拨打核实-质检结果
