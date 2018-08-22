@@ -32,7 +32,6 @@
             <li>
               <label class="label_width_166">终审人员：</label>
               <span> {{baseInfo.auditNamez }} </span>
-              <!-- <button @click='verify' style="background:red;width:100px;">das</button> -->
             </li>
             <li>
               <label class="label_width_166">终审日期：</label>
@@ -70,7 +69,7 @@
               <td>
                 <b class="hint_word" v-show="regularInfo.isFormRemark && regularInfo.isFormRemark.length>=300"> 输入长度不能超过300</b>
                 <el-input class='margin_top_15' type='textarea' :readonly='material' v-if="regularInfo.isForm==0" v-model.trim="regularInfo.isFormRemark"
-                 :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                  :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -291,7 +290,7 @@
               <td> 客户在人法网是否有被执行信息</td>
               <td>
                 <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wbeexEcuted" @change="regularInfo.wbeexEcuted=='0'?regularInfo.wbeexEcutedtxt='':regularInfo.wbeexEcutedtxt">
-                  <el-radio label="1">是</el-radio>
+                  <el-radio class="bbb" label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
@@ -307,7 +306,7 @@
               <td> 客户在失信网是否有失信记录</td>
               <td>
                 <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetEcutedBrea" @change="regularInfo.wnetEcutedBrea=='0'?regularInfo.wnetEcutedBreatxt='':regularInfo.wnetEcutedBreatxt">
-                  <el-radio label="1">是</el-radio>
+                  <el-radio class="bbb" label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
@@ -323,7 +322,7 @@
               <td> 网上搜索借款人的手机是否有异常</td>
               <td>
                 <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetPhone" @change="regularInfo.wnetPhone=='0'?regularInfo.wnetPhonetxt='':regularInfo.wnetPhonetxt">
-                  <el-radio label="1">是</el-radio>
+                  <el-radio class="bbb" label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
@@ -339,7 +338,7 @@
               <td> 网上搜索借款人现居住地址和房产地址是否异常</td>
               <td>
                 <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetAddrandEstate" @change="regularInfo.wnetAddrandEstate=='0'?regularInfo.wnetAddrandEstatetxt='':regularInfo.wnetAddrandEstatetxt">
-                  <el-radio label="1">是</el-radio>
+                  <el-radio class="bbb" label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
@@ -355,7 +354,7 @@
               <td> 当地工商网查询企业基本信息中是否有登记</td>
               <td>
                 <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetCompany" @change="regularInfo.wnetCompany=='1'?regularInfo.wnetCompanytxt='':regularInfo.wnetCompanytxt">
-                  <el-radio label="1">是</el-radio>
+                  <el-radio class="bbb" label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
@@ -371,7 +370,7 @@
               <td> 客户工作单位在全国组织代码查询中是否存在</td>
               <td>
                 <el-radio-group :disabled='InfoInquire' v-model="regularInfo.wnetAddrstate" @change="regularInfo.wnetAddrstate=='1'?regularInfo.wnetAddrstatetxt='':regularInfo.wnetAddrstatetxt">
-                  <el-radio label="1">是</el-radio>
+                  <el-radio class="bbb" label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
@@ -418,7 +417,7 @@
               <td> 内部匹配是否进行排查</td>
               <td>
                 <el-radio-group :disabled='matching' v-model="regularInfo.isInmatch" @change="regularInfo.isInmatch=='1'?regularInfo.isInmatchRemark='':regularInfo.isInmatchRemark">
-                  <el-radio label="1">是</el-radio>
+                  <el-radio class="bbb" label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
@@ -1322,21 +1321,6 @@
     },
     props: ['propQTconclution'],
     methods: {
-      verify() {
-        // let lab = $('.bbb');
-        // let val = [this.regularInfo.isLiabilities, this.regularInfo.isFlow, this.regularInfo.isReference];
-        // let len = $('.bbb').length;
-        // for (let i = 0; i < val.length; i++) {
-        //   if (val[i] == '') {
-        //     lab.eq(i).focus();
-        //     break;
-        //   }
-        // }
-        console.log()
-        // this.$refs.verify2.focus();
-        // this.$refs.verify1.$el.focus();
-        // this.$refs.verify1.focus();
-      },
       clearContent(mark) {
         if (mark = "AC") {
           this.ToAteaApprovalParams.checkResult = '';
@@ -1477,6 +1461,7 @@
               }
             }
             this.WechatData(0); //客户本人 微信支付宝赋值为客户本人AlipayCus
+            // this.addQTResult(); //进页面默认添加一条
             this.Social(); //社保公积金接口
           } else {
             this.$message.error(res.msg);
@@ -1513,6 +1498,24 @@
           }
         });
         // 
+      },
+      verify() {
+        // 负债计算是否正确  流水计算是否正确  征信录入是否正确  客户在人法网是否有被执行信息  客户在失信网是否有失信记录  网上搜索借款人的手机是否有异常  网上搜索借款人现居住地址和房产地址是否异常  当地工商网查询企业基本信息中是否有登记  客户工作单位在全国组织代码查询中是否存在 内部匹配是否进行排查
+        // let lab = $('.bbb');
+        // let val = [this.regularInfo.isLiabilities, this.regularInfo.isFlow, this.regularInfo.isReference, this.regularInfo
+        //   .wbeexEcuted, this.regularInfo.wnetEcutedBrea, this.regularInfo.wnetPhone, this.regularInfo.wnetAddrandEstate,
+        //   this.regularInfo.wnetCompany, this.regularInfo.wnetAddrstate, this.regularInfo.isInmatch
+        // ];
+        // let len = $('.bbb').length;
+        // for (let i = 0; i < val.length; i++) {
+        //   if (val[i] == '') {
+        //     lab.eq(i).focus();
+        //     break;
+        //   }
+        // }------------------------------------------分割线----------------------------------------
+        // this.$refs.verify2.focus();
+        // this.$refs.verify1.$el.focus();
+        // this.$refs.verify1.focus();
       },
       addQTResult() { //添加
         if (this.insConclusion.length == 0) {
