@@ -106,7 +106,7 @@ Vue.filter('YesOrNo', function (value) {
   if (value == false) return '否';
 })
 // *100 之后，变百分号留两位小数
-Vue.filter("percent_100",function(value){
+Vue.filter("percent100",function(value){
 if (value==0) return '0.00%';
 if(!value) return '';
 return (value*100).toFixed(2) + '%';

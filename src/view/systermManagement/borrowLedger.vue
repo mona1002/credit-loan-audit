@@ -100,7 +100,7 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">开户行名称： </span>
-          <el-select v-model="params.bankCode" placeholder="请选择" :disabled='params.escrowAgency==""'>
+          <el-select class='page_style' v-model="params.bankCode" placeholder="请选择" :disabled='params.escrowAgency==""'>
             <div class="clearFix bankName_pagination_header" style=''>
               <span class="select_left">银行代码</span>
               <span class="float_left">银行名称</span>
@@ -111,15 +111,16 @@
                 <span class="select_color float_left">{{ item.bankName }}</span>
               </el-option>
             </div>
-            <div style="width:290px;"></div>
-            <!-- <div class="select_pageination bankName_pagination_footer">
-        <el-pagination @size-change="handleSizeChange1" @current-change="handleCurrentChange1" :page-sizes="[10, 20,50]" :page-size="BankNamePageCounts"
+            <!-- 为下面的分页占位，避免下面分页absolute定位显示不全 -->
+            <div class="select_pageination fixedWidth">
+              <el-pagination @size-change="handleSizeChange1" small @current-change="handleCurrentChange1" :page-sizes="[10, 20,50]" :page-size="BankNamePageCounts"
                 :current-page="BankNameCurrent" layout="   sizes, prev,pager, next,total,jumper" :total="BankTotal">
               </el-pagination>
-          </div> -->
+            </div>
+            <!-- 结束 -->
             <div class='select_pageination bankName_pagination_footer'>
               <el-pagination @size-change="handleSizeChange1" @current-change="handleCurrentChange1" :page-sizes="[10, 20,50]" :page-size="BankNamePageCounts"
-                :current-page="BankNameCurrent" layout="   sizes, prev,pager, next,total,jumper" :total="BankTotal">
+                :current-page="BankNameCurrent" layout="sizes, prev,pager, next,total,jumper" :total="BankTotal">
               </el-pagination>
             </div>
           </el-select>
@@ -424,21 +425,21 @@
           <div class=" CreditForm_div_border clearFix">
             <li>
               <label class="label_width_145">综合费率[月]：</label>
-              <span>{{accountDetail.synthesisrateM | percent_100}}</span>
+              <span>{{accountDetail.synthesisrateM | percent100}}</span>
             </li>
             <li>
               <label class="label_width_145">借款利率[年]：</label>
-              <span>{{accountDetail.loanRateYr | percent_100}}</span>
+              <span>{{accountDetail.loanRateYr | percent100}}</span>
             </li>
             <li>
               <label class="label_width_145">罚息比例[日]：</label>
-              <span>{{accountDetail.penaltyRatio | percent_100}}</span>
+              <span>{{accountDetail.penaltyRatio | percent100}}</span>
             </li>
           </div>
           <div class=" CreditForm_div_border clearFix">
             <li>
               <label class="label_width_145">违约金比例：</label>
-              <span>{{accountDetail.defaultRatio | percent_100}}</span>
+              <span>{{accountDetail.defaultRatio | percent100}}</span>
             </li>
             <li>
               <label class="label_width_145">服务费金额[元]：</label>
@@ -1186,16 +1187,16 @@
           headers: {
             'Content-Type': 'application/json'
           }
-        }).then(res => { 
-          const blob = new Blob([res.data]); 
-          const fileName = 'JKTZ_' + this.Date + '.xls'; 
+        }).then(res => {
+          const blob = new Blob([res.data]);
+          const fileName = 'JKTZ_' + this.Date + '.xls';
           const elink = document.createElement('a');
           elink.download = fileName;
           elink.style.display = 'none';
           elink.href = URL.createObjectURL(blob);
           document.body.appendChild(elink);
           elink.click();
-          URL.revokeObjectURL(elink.href); 
+          URL.revokeObjectURL(elink.href);
           document.body.removeChild(elink);
         })
       },
@@ -1715,14 +1716,14 @@
 
   .bankName_pagination_body {
     margin-top: 20px;
-    margin-bottom: 60px;
   }
 
   .bankName_pagination_footer {
     position: absolute;
     background: #fff;
     bottom: 0;
-    width: 290px
+    left: 0;
+    right: 0;
   }
 
 </style>

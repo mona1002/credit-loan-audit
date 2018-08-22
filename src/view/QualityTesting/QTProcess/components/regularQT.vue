@@ -841,7 +841,7 @@
         <el-form>
           <div class="bfc">
             <el-form-item label="复议结果：" :label-width="formApproLabel" class="fl alert_collapse_inputLabel">
-              <el-select v-model="ToAteaApprovalParams.reviewResult" placeholder="请选择">
+              <el-select v-model="ToAteaApprovalParams.reviewResult" placeholder="请选择" @change="clearContent('AC')">
                 <el-option v-for="item in RecResult" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
@@ -890,7 +890,7 @@
         <el-form>
           <div class="bfc">
             <el-form-item class="fl alert_collapse_inputLabel" label="复议结果：" :label-width="formApproLabel">
-              <el-select v-model="ToApprovalParams.reviewResult" placeholder="请选择">
+              <el-select v-model="ToApprovalParams.reviewResult" placeholder="请选择" @change="clearContent('First')">
                 <el-option v-for="item in RecResult" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
@@ -1325,6 +1325,30 @@
         console.log(this.regularInfo.isFormRemark.length)
         console.log('a' + this.regularInfo.isFormRemark + "b")
       },
+      verify() {
+        // // console.log($('textarea[name=verify]'))
+        // console.log(this.$refs.verify1.$el)
+        // console.log(this.$refs.verify2.$el)
+        // console.log($('#ddd'))
+        // // $('#ddd').focus();
+        // // $('#fff').focus();
+
+        // this.$refs.verify2.focus();
+        // this.$refs.verify1.$el.focus();
+        // // focus()
+        // this.$refs.verify1.focus();
+      },
+      clearContent(mark) {
+        if (mark = "AC") {
+          this.ToAteaApprovalParams.checkResult = '';
+          this.ToAteaApprovalParams.isError = '';
+          this.ToAteaApprovalParams.errorType = '';
+        } else if (mark = 'First') {
+          this.ToApprovalParams.checkResult = '';
+          this.ToApprovalParams.isError = '';
+          this.ToApprovalParams.errorType = '';
+        }
+      },
       getSystermTime() { // 获取系统时间-质检结论-质检日期取值---基础接口
         this.get('system/getSystemDate?' + Math.random()).then(res => {
           if (res.statusCode == 200) {
@@ -1377,7 +1401,6 @@
               this.insTelCustInfo.iisself = res.data.insTelCustInfo.iisself; //接听人是否借款人本人
               this.insTelCustInfo.appConclusion = res.data.insTelCustInfo.appConclusion; //接听说明
               this.insTelCustInfo.remark = res.data.insTelCustInfo.remark; //备注
-              
             } else {
               this.insTelCustInfo = res.data.insTelCustInfo;
               // this.insTelCustInfo.insResult = res.data.insTelCustInf.insResult//电话拨打核实-质检结果
