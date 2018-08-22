@@ -32,6 +32,7 @@
             <li>
               <label class="label_width_166">终审人员：</label>
               <span> {{baseInfo.auditNamez }} </span>
+              <!-- <button @click='verify' style="background:red;width:100px;">das</button> -->
             </li>
             <li>
               <label class="label_width_166">终审日期：</label>
@@ -69,7 +70,7 @@
               <td>
                 <b class="hint_word" v-show="regularInfo.isFormRemark && regularInfo.isFormRemark.length>=300"> 输入长度不能超过300</b>
                 <el-input class='margin_top_15' type='textarea' :readonly='material' v-if="regularInfo.isForm==0" v-model.trim="regularInfo.isFormRemark"
-                  @keyup.native='ccc' :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                 :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -222,7 +223,7 @@
               <td> 负债计算是否正确</td>
               <td>
                 <el-radio-group :disabled='material' v-model="regularInfo.isLiabilities" @change="regularInfo.isLiabilities=='1'?regularInfo.isLiabilitiesRemark='':regularInfo.isLiabilitiesRemark">
-                  <el-radio label="1">是</el-radio>
+                  <el-radio class="bbb" label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
@@ -238,7 +239,7 @@
               <td> 流水计算是否正确</td>
               <td>
                 <el-radio-group :disabled='material' v-model="regularInfo.isFlow" @change="regularInfo.isFlow=='1'?regularInfo.isFlowRemark='':regularInfo.isFlowRemark">
-                  <el-radio label="1">是</el-radio>
+                  <el-radio class="bbb" label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
@@ -254,7 +255,7 @@
               <td> 征信录入是否正确</td>
               <td>
                 <el-radio-group :disabled='material' v-model="regularInfo.isReference" @change="regularInfo.isReference=='1'?regularInfo.isReferenceRemark='':regularInfo.isReferenceRemark">
-                  <el-radio label="1">是</el-radio>
+                  <el-radio class="bbb" label="1">是</el-radio>
                   <el-radio label="0">否</el-radio>
                 </el-radio-group>
               </td>
@@ -1321,21 +1322,19 @@
     },
     props: ['propQTconclution'],
     methods: {
-      ccc() {
-        console.log(this.regularInfo.isFormRemark.length)
-        console.log('a' + this.regularInfo.isFormRemark + "b")
-      },
       verify() {
-        // // console.log($('textarea[name=verify]'))
-        // console.log(this.$refs.verify1.$el)
-        // console.log(this.$refs.verify2.$el)
-        // console.log($('#ddd'))
-        // // $('#ddd').focus();
-        // // $('#fff').focus();
-
+        // let lab = $('.bbb');
+        // let val = [this.regularInfo.isLiabilities, this.regularInfo.isFlow, this.regularInfo.isReference];
+        // let len = $('.bbb').length;
+        // for (let i = 0; i < val.length; i++) {
+        //   if (val[i] == '') {
+        //     lab.eq(i).focus();
+        //     break;
+        //   }
+        // }
+        console.log()
         // this.$refs.verify2.focus();
         // this.$refs.verify1.$el.focus();
-        // // focus()
         // this.$refs.verify1.focus();
       },
       clearContent(mark) {
@@ -1671,6 +1670,7 @@
               !this.regularInfo.isInmatch ||
               (this.insConclusion.length > 0 && this.insConclusion[this.insConclusion.length - 1].checkResult == '') //质检结论最后一条质检结果校验是否为空
             ) {
+              this.verify();
               this.$message.error('请输入必填项！')
               return
             } else if (this.insConclusion.length == 0) { //必须添加一条质检结论校验

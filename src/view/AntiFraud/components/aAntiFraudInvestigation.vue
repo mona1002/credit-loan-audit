@@ -340,14 +340,13 @@
     mounted() {
       // /*获取 反欺诈申请ID*/
       // this.appinfoId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).businessId; //反欺诈专员+主管
-      // this.applyId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).applyId; //反欺诈专员+主管
       this.infoList();
-      // this.request(this.appinfoId);
     },
     methods: {
       // 点击基本信息查询其他信息
       searchInf(row) {
-        this.request(row.id)
+        this.appinfoId = row.id;
+        this.request(this.appinfoId)
       },
       // 基本信息列表      
       infoList() {
@@ -356,7 +355,8 @@
         }).then(res => {
           if (res.statusCode == 200 && res.data) {
             this.tableData = res.data;
-            this.request(this.tableData[0].id)
+            this.appinfoId = this.tableData[0].id;
+            this.request(this.appinfoId)
           }
         });
       },
@@ -416,7 +416,6 @@
         this.fraudAuditInfo.auditCode = JSON.parse(localStorage.getItem('userInf')).userCode;
         //当前审核人姓名 登陆人
         this.fraudAuditInfo.auditName = JSON.parse(localStorage.getItem('userInf')).userName;
-        //this.fraudTelCheckList.appinfoId=this.appinfoId;
         this.post('antiFraud/saveAntiFraudSurveyInfo', {
           "appinfoId": this.appinfoId, //'1', // 反欺诈申请id
           "fraudAuditInfo": {
@@ -552,7 +551,6 @@
           return (item.statusTxt == '未解除')
         });
         if (!fg) {
-          // this.deldialogVisible = true;
           this.$confirm('只能针对未解除状态数据进行操作，请重新选择！', '提示', {
             confirmButtonText: '确定',
             type: 'warning',
@@ -586,10 +584,6 @@
           })
         }
       },
-      /*解除 弹框按钮*/
-      // delSure() {
-      //   this.deldialogVisible = false;
-      // },
       /*恢复*/
       recovery() {
         if (this.multipleSelection.length == 0) return;
@@ -597,7 +591,6 @@
           return (item.statusTxt == '已解除')
         });
         if (!fg) {
-          // this.backdialogVisible = true;
           this.$confirm('只能针对已解除状态数据进行操作，请重新选择', '提示', {
             confirmButtonText: '确定',
             type: 'warning',
