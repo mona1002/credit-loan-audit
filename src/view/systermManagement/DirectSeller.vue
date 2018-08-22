@@ -127,7 +127,6 @@
         if(to.path=='/DirectSeller'){
           if(!this.Routes[2].closed){
             this. Rreset();
-            this.tableData=[];
             this.Routes[2].closed=true;
           }
         }
@@ -204,6 +203,7 @@
         this.params.validFlag = '';
         this.params.orgName = '';
         this.subOrg = '';
+       this.tableData = [];////清空已查处列表
       },
       Rsearch() {
         if (this.params.userCode != '' || this.params.userName != '' || this.params.tel != '' || this.params.validFlag !=

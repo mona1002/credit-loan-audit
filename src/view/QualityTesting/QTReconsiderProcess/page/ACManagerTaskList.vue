@@ -31,7 +31,6 @@
     <div class="listContainer">
       <!-- 编辑table -->
       <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row @row-dblclick="handleCurrentChange" border>
-        <!-- <el-table-column type="selection"  width="55"> </el-table-column> -->
         <el-table-column type="index" align='center' label=序号 width="55">
         </el-table-column>
         <el-table-column prop="applySubNo" label="进件编号" align='center' min-width="180">
@@ -67,12 +66,6 @@
         <el-table-column prop="checkStateTxt" label="质检状态" align='center' min-width="180">
         </el-table-column>
       </el-table>
-      <!-- 分页  -->
-      <!-- <div class="paging">
-          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
-            :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
-          </el-pagination>
-        </div> -->
     </div>
   </div>
 </template>
@@ -148,12 +141,7 @@
           applySubNo: '',
           custName_la: '',
           certCode: '',
-          //   pageNum: '', //页数（第几页）
-          //   pageSize: '', //页面显示行数
         },
-        // currentPage: 1, //分页选中页
-        // pageCount: 10, // 每页显示条数
-        // totalRecord: 0, //总条数
       }
     },
     watch: {
@@ -164,25 +152,16 @@
       }
     },
     methods: {
-      //   handleSizeChange(val) {
-      //     this.params.pageSize = val;
-      //     this.params.pageNum = 1;
-      //     // this.getInf(this.params);
-      //     this.inquire(this.params);
-      //   },
       mountedInf() {
         this.flag = JSON.parse(localStorage.getItem('judge'));
         if (this.flag.flag == '12') {
           this.taskList = JSON.parse(localStorage.getItem('QTAreaWorkbenchPass'));
-          //console.log(this.taskList);
           this.params.processTemplateId = this.taskList.processTemplateId;
           this.params.taskNodeName = this.taskList.taskNodeName;
           this.params.taskStatus = this.taskList.taskStatus;
           this.inquire(this.params);
         } else if (this.flag.flag == '13') {
-          //this.taskList = JSON.parse(localStorage.getItem('QTAreaWorkbenchPass'));
           this.taskList = JSON.parse(localStorage.getItem('QTComplianceWorkbenchPass'));
-          //console.log(this.taskList);
           this.params.processTemplateId = this.taskList.processTemplateId;
           this.params.taskNodeName = this.taskList.taskNodeName;
           this.params.taskStatus = this.taskList.taskStatus;
@@ -190,14 +169,8 @@
         }
         // QTAreaWorkbenchPass 区域
         // QTComplianceWorkbenchPass 合规
-        //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
-        //   this.params.applySubno = this.params.applySubno.replace(this.reg, this.reVal)
-        //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
-        //   this.params.pageNum = this.currentPage, //页数（第几页）
-        //     this.params.pageSize = this.pageCount, //页面显示行数
       },
       handleCurrentChange(val) {
-        console.log(val)
         this.query.reconType = val.reconType;
         this.QTquery.id = this.query.id = val.id;
         this.QTquery.matchApplyId = this.query.ApplyId = val.applyId;
@@ -219,8 +192,6 @@
         }));
         this.$router.push('/MatchingInfQT?' + this.params.taskNodeName);
         this.$route.meta.newOne = true;
-        // this.params.pageNum = val;
-        // this.inquire(this.params);
       },
       Rreset() {
         this.params.applySubNo = '';
@@ -250,13 +221,6 @@
           }
         })
       },
-    },
-    watch: {
-      '$route' (to, from) {
-        if (to.fullPath !== from.fullPath) {
-          //  this.inquire(this.params);
-        }
-      }
     },
     mounted() {
       this.mountedInf();

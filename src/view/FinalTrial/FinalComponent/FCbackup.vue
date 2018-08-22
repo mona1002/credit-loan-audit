@@ -678,15 +678,6 @@
     <div class="btn_wrap" v-if="makeSureBtnShow">
       <el-button type="primary" class="btn" @click="makeSureBtn">确认</el-button>
     </div>
-    <!-- ==============================点击确认时提示弹框=================================== -->
-    <!-- <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
-      <span>确定操作？</span>
-      <span slot="footer" class="dialog-footer">
-        <button class="calbtn" @click="canc">取消</button>
-        <button class="subtn" type="primary" @click="CFsave">确定</button>
-      </span>
-    </el-dialog> -->
-
   </div>
 </template>
 

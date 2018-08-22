@@ -30,13 +30,10 @@ let mutations = {
       state.locFlag = JSON.parse(localStorage.getItem("judge")).flag;
       view.flag ? view.flag : view.flag = state.locFlag;
     }
-    // console.log(view)
       if (state.visitedViews.some(v => v.name === view.name)&& view.name==='质检详情'){
         state.visitedViews.forEach((val,ind,arr)=>{//val为数组中当前的值，index为当前值的下表，arr为原数组
           if( state.visitedViews[ind].name==='质检详情'){
-            // console.log(22222, state.visitedViews[ind])
             state.visitedViews[ind]=view;
-            // console.log(22222, state.visitedViews[ind])            
             return
           }
       })

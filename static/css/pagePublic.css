@@ -151,10 +151,7 @@
   float: left;
   min-width: 200px;
   min-height: 24px;
-  /* height: 25px; */
   margin-top: 4px;
-  /* border-bottom: 1px solid #ebeef5; */
-  /* border-bottom: 1px solid red; */
 }
 
 .checkedInf .border_bottom_none {
@@ -207,6 +204,10 @@
   text-align: center;
 }
 
+.float_left {
+  float: left;
+}
+
 body .pre_wrap {
   white-space: pre-wrap;
 }
@@ -255,6 +256,67 @@ body .pre_wrap {
 
 .overFlow_x {
   overflow-x: hidden;
+}
+
+/* el-table特殊高度  +  带fixed属性 出滚动条时 fixed部分高度 */
+
+body .el-table_450_scroll .el-table {
+  height: 450px !important;
+}
+
+body .el-table_400_scroll .el-table {
+  height: 435px !important;
+}
+
+body .el-table_450_scroll .el-table__fixed,
+body .el-table_450_scroll .el-table__fixed-right {
+  height: 435px !important;
+}
+
+.el-talble_overflow_auto .el-table {
+  overflow: auto;
+}
+
+/* 借款台账中-下拉框中分页 */
+
+.select_pageination .el-pagination {
+  white-space: normal;
+}
+
+.select_pageination .el-pager li,
+.select_pageination .el-pagination button {
+  min-width: 16px;
+  padding: 0;
+}
+
+.select_pageination .el-pagination .btn-next,
+.select_pageination .el-pagination .btn-prev {
+  width: 20px;
+}
+
+.select_pageination .el-pagination .el-select .el-input {
+  margin: 0;
+  width: 82px;
+}
+
+.select_pageination .el-pagination__sizes {
+  padding-right: -5px;
+}
+
+.fixedWidth {
+  visibility: hidden;
+}
+
+.el-pagination button,
+.el-pagination span:not([class*=suffix]) {
+  display: inline;
+}
+
+.bankName_pagination_footer .el-pagination>span:nth-of-type(2)::before,
+.fixedWidth .el-pagination>span:nth-of-type(2)::before {
+  content: '';
+  display: block;
+  height: 0;
 }
 
 /* 分屏 */
@@ -827,18 +889,18 @@ body .pre_wrap {
   white-space: nowrap;
 }
 
-  /* 左侧折叠面板 */
+/* 左侧折叠面板 */
 
-  /* 折叠面板上面的四个 th 表头 */
+/* 折叠面板上面的四个 th 表头 */
 
-  .AudioVisualLeft .list_title span:nth-of-type(1),
-  .AudioVisualLeft .list_title_div p span:nth-of-type(1) {
-    width: 125px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    border-left: none;
-  }
+.AudioVisualLeft .list_title span:nth-of-type(1),
+.AudioVisualLeft .list_title_div p span:nth-of-type(1) {
+  width: 125px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-left: none;
+}
 
 .AudioVisualLeft .list_title span:nth-of-type(2),
 .AudioVisualLeft .list_title_div p span:nth-of-type(2),
@@ -847,10 +909,12 @@ body .pre_wrap {
   border-right: none;
   border-left: none;
 }
+
 .AudioVisualLeft .list_title span:nth-of-type(2),
 .AudioVisualLeft .list_title_div p span:nth-of-type(2) {
   width: calc(100% - 125px);
 }
+
 /*  缩略图 figure 内 图片名字 p 标签 */
 
 .AudioVisual .small_pic_figure p,
@@ -920,6 +984,7 @@ body .pre_wrap {
   box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
   overflow: hidden;
 } */
+
 .AudioVisual .Small_pic,
 .AudioVisualLeft .Small_pic {
   height: calc( 100% - 60px);
@@ -1105,6 +1170,5 @@ border:3px solid red;
 
 .sort {
   font-weight: 800;
-  /* font-size: 14px; */
   margin: 5px 10px;
 }

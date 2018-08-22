@@ -5,8 +5,8 @@ import taskInWaitting from '@/view/FirstTrail/taskInWaitting' //初审审批
 import workbench from '@/view/FirstTrail/workbench'
 import SplitScreen from '@/view/FirstTrail/SplitScreen'
 import MatchingInf from '@/view/FirstTrail/MatchingInf' // 匹配查询页面
-import FSplitScreen from '@/view/FinalTrial/FSplitScreen'//终审详情
-import FtaskInWaitting from '@/view/FinalTrial/FtaskInWaitting'//终审列表
+import FSplitScreen from '@/view/FinalTrial/FSplitScreen' //终审详情
+import FtaskInWaitting from '@/view/FinalTrial/FtaskInWaitting' //终审列表
 // ------------反欺诈------------------
 import AntiAudit from '@/view/AntiFraud/AntiAudit.vue' //反欺诈分屏
 import AntiRules from '../view/AntiFraud/AntiRules.vue' //反欺诈规则设定
@@ -23,7 +23,7 @@ import ReconsiderApply from '../view/Reconsider/ReconsiderComponents/ReconsiderA
 import reconsiderList from '../view/Reconsider/reconsiderList.vue' //复议申请任务列表
 import ReconsiderSplit from '../view/Reconsider/ReconsiderSplit.vue' //复议专员主管分屏
 // -------------------------流程监控---------------------
-import processMoni from '../view/processMoni/processMoni.vue' //
+// import processMoni from '../view/processMoni/processMoni.vue' //
 import processMoniAntiDistributed from '../view/processMoni/processMoniAntiDistributed.vue' //流程监控-反欺诈已分配
 import processMoniAntiDone from '../view/processMoni/processMoniAntiDone.vue' //流程监控-反欺诈已完成
 import processMoniAntiUndistributed from '../view/processMoni/processMoniAntiUndistributed.vue' //流程监控-反欺诈未完成
@@ -62,14 +62,18 @@ import QTResultCheck from '../view/QualityTesting/QTReconsiderProcess/components
 import ManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/ManagerTaskList.vue' //质检复议-初终审主管任务列表
 import ReManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/ReManagerTaskList.vue' //质检复议-复议任务列表（首次）
 import ACManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/ACManagerTaskList.vue' //质检复议流程-区域经理页面- 区域经理任务列表 + 质检复议流程-合规经理页面- 合规经理任务列表
-import ComplianceProcess from '../view/QualityTesting/QTReconsiderProcess/components/ComplianceProcess.vue' //质检复议-
+// import ComplianceProcess from '../view/QualityTesting/QTReconsiderProcess/components/ComplianceProcess.vue' //质检复议-
 import MatchingInfQT from '../view/FirstTrail/MatchingInfQT.vue' //质检详情
-import RantiFraudInvestigation from '../view/FirstTrail/ReadComponent/RantiFraudInvestigation.vue' //
+// import RantiFraudInvestigation from '../view/FirstTrail/ReadComponent/RantiFraudInvestigation.vue' //
 import timedTask from '../view/systermManagement/timedTask.vue' //定时任务
 import DirectSeller from '../view/systermManagement/DirectSeller.vue' //直销人员查询
+import applyLedger from '../view/systermManagement/applyLedger.vue' //申请台账
+import appLedgerDetail from '../view/systermManagement/LedgerDetail/appLedgerDetail.vue' //申请台账-详情
+import borrowLedger from '../view/systermManagement/borrowLedger.vue' //借款台账
+import brrLedgerDetail from '../view/systermManagement/LedgerDetail/brrLedgerDetail.vue' //借款台账-详情
 
 Vue.use(Router)
-
+// 添加路由：添加到最后面，不要改变原路由顺序，会影响其他部分页面
 const routes = [{
     path: '/',
     component(resolve) {
@@ -83,11 +87,17 @@ const routes = [{
   {
     path: '/DirectSeller',
     component: DirectSeller,
-    closed:true
+    closed: true
   },
   {
-    path: '/ComplianceProcess',
-    component: ComplianceProcess,
+    path: '/applyLedger',
+    component: applyLedger,
+    closed: true
+  },
+  {
+    path: '/borrowLedger',
+    component: borrowLedger,
+    closed: true
   },
   /*初审审批*/
   {
@@ -180,7 +190,7 @@ const routes = [{
   {
     path: '/ReconsiderApply',
     component: ReconsiderApply
-  },  {
+  }, {
     path: '/reconsiderList',
     component: reconsiderList,
   }, {
@@ -189,26 +199,27 @@ const routes = [{
     name: 'ReconsiderSplit'
   },
   // ---------------------流程监控---------
+  // {
+  //   path: '/processMoni',
+  //   component: processMoni,
+  // }, 
   {
-    path: '/processMoni',
-    component: processMoni,
-  }, {
     path: '/processMoniAntiDistributed',
     component: processMoniAntiDistributed,
   }, {
     path: '/processMoniAntiDone',
     component: processMoniAntiDone,
-  },  {
+  }, {
     path: '/processMoniAntiUndistributed',
     component: processMoniAntiUndistributed,
-  },  {
+  }, {
     path: '/processMoniQTUndistributed',
     component: processMoniQTUndistributed,
   },
   {
     path: '/processMoniQTDistributed',
     component: processMoniQTDistributed,
-  },{
+  }, {
     path: '/processMoniQTDone',
     component: processMoniQTDone,
   }, {
@@ -220,7 +231,7 @@ const routes = [{
   }, {
     path: '/processMoniReUndistributed',
     component: processMoniReUndistributed,
-  },{
+  }, {
     path: '/processMoniTrilUndistributed',
     component: processMoniTrilUndistributed,
   }, {
@@ -320,7 +331,7 @@ const routes = [{
   }, {
     path: "/ACManagerTaskList",
     component: ACManagerTaskList
-  },  {
+  }, {
     path: "/MatchingInfQT",
     component: MatchingInfQT,
     // meta: {
@@ -331,11 +342,17 @@ const routes = [{
   {
     path: '/PneCtrl',
     component: PneCtrl,
-    name:'PneCtrl'
+    name: 'PneCtrl'
   },
   {
-    path: '/RantiFraudInvestigation',
-    component: RantiFraudInvestigation
+    path: '/appLedgerDetail',
+    component: appLedgerDetail,
+    name:'appLedgerDetail'
+  },
+    {
+    path: '/brrLedgerDetail',
+    component: brrLedgerDetail,
+    name:'brrLedgerDetail'
   },
 ];
 

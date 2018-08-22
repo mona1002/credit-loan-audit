@@ -387,7 +387,16 @@
           this.nodeName = "自动通知查询";
         } else if (route.path == '/DirectSeller') { // 定时任务
           this.nodeName = "直销人员查询";
-        }
+        }else if (route.path == '/applyLedger') { // 定时任务
+          this.nodeName = "申请台账";
+        } else if (route.path == '/appLedgerDetail') { // 定时任务
+          this.nodeName = "申请台账-详情";
+        } else if (route.path == '/borrowLedger') { // 定时任务
+          this.nodeName = "借款台账";
+        }else if (route.path == '/brrLedgerDetail') { // 定时任务
+          this.nodeName = "借款台账-申请信息";
+        } 
+        
         this.RoutePath = route.path;
         this.$store.dispatch('addVisitedViews', {
           name: this.nodeName,
@@ -426,7 +435,11 @@
         return route.path == '/MatchingInfQT' ? route.path == this.$route.path : route.StatefullPath == this.$route.fullPath;
       },
       handleClose(view, ev) {
+        console.log(  this.Routes)
+        //关闭页签，清空列表内容
         view.name == '直销人员查询' ? this.Routes[2].closed = false : '';
+        view.name == '申请台账' ? this.Routes[3].closed = false : '';
+        view.name == '借款台账' ? this.Routes[4].closed = false : '';
         this.$store.dispatch('delVisitedViews', view).then((views) => {
           if (this.isActive(view)) {
             const latestView = views.slice(-1)[0]

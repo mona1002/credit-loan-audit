@@ -220,6 +220,8 @@
           RoutePath = '/ACManagerTaskList'
           this.LSworkbench = "QTComplianceWorkbenchPass";
         }
+        // 任务管理： 信审-历史 、 信审已办 = 14 ； 质检-历史 、 质检已办 = 15 ；
+        // 申请台账：16 - appLedgerTW  ；   借款台账：17  brrLedgerTW
         routeParams = '?taskNodeName=' + val.taskNodeName + "&flag=" + this.judge.flag;
         localStorage.setItem(this.LSworkbench, JSON.stringify(this.workbenchPass)); //工作台部分信息，带入workbenchPass
         localStorage.setItem("judge", JSON.stringify(this.judge));

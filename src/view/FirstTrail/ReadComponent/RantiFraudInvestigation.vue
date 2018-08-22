@@ -1,4 +1,4 @@
-<!-- 内匹-反欺诈调查 -->
+<!-- 反欺诈调查-(内匹、质检、复议详情用)-(调查记录只能查看,无添加删除按钮) -->
 <template>
   <div class="aAntiFraudInvestigation RaAntiFraudInvestigation AlertDialogBox">
     <el-collapse v-model="activeNames" @change="handleChange">
@@ -7,34 +7,30 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">基本信息</span>
         </template>
-        <table class="table">
-          <thead>
-            <tr>
-              <th style="width:160px">进件编号</th>
-              <th>案件编号</th>
-              <th>客户姓名</th>
-              <th style="width:160px">身份证号</th>
-              <th>申请产品</th>
-              <th>进件机构</th>
-              <th>销售人员</th>
-              <th>提报人</th>
-              <th>提报组别</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{{fraudApplyInfo.applySubno}}</td>
-              <td>{{fraudApplyInfo.caseNum}}</td>
-              <td>{{fraudApplyInfo.applyCustName}}</td>
-              <td>{{fraudApplyInfo.certCode}}</td>
-              <td>{{fraudApplyInfo.proName}}</td>
-              <td>{{fraudApplyInfo.operOrgName}}</td>
-              <td>{{fraudApplyInfo.salePersonName}}</td>
-              <td>{{fraudApplyInfo.applyPersonName}}</td>
-              <td>{{fraudApplyInfo.appSuborgName}}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="height_auto">
+          <el-table :data="tableData" style="width: 100%" @row-dblclick='searchInf' border>
+            <el-table-column prop="creatTime" label="提报时间" width="150">
+            </el-table-column>
+            <el-table-column prop="applySubno" label="进件编号" width="160">
+            </el-table-column>
+            <el-table-column prop="caseNum" label="案件编号" width="175">
+            </el-table-column>
+            <el-table-column prop="applyCustName" label="客户姓名" width="100">
+            </el-table-column>
+            <el-table-column prop="certCode" label="身份证号" width="160">
+            </el-table-column>
+            <el-table-column prop="proName" label="申请产品" width="100">
+            </el-table-column>
+            <el-table-column prop="operOrgName" label="进件机构" width="130">
+            </el-table-column>
+            <el-table-column prop="salePersonName" label="销售人员" width="100">
+            </el-table-column>
+            <el-table-column prop="applyPersonName" label="提报人" width="100">
+            </el-table-column>
+            <el-table-column prop="appSuborgName" label="提报组别" min-width="100">
+            </el-table-column>
+          </el-table>
+        </div>
       </el-collapse-item>
       <el-collapse-item name="2">
         <template slot="title">
@@ -72,11 +68,11 @@
         </template>
         <div class="height_auto">
           <el-table :data="hitRuleList" style="width: 100%" @cell-click="inquiry" border>
-            <el-table-column type="index" :index='1' label="序号" min-width="50">
+            <el-table-column type="index" :index='1' label="序号" width="50">
             </el-table-column>
-            <el-table-column prop="ruleContent" label="命中规则名称" min-width="110">
+            <el-table-column prop="ruleContent" label="命中规则名称">
             </el-table-column>
-            <el-table-column prop="custCount" label="命中客户数" min-width="80">
+            <el-table-column prop="custCount" label="命中客户数">
             </el-table-column>
           </el-table>
         </div>
@@ -173,6 +169,7 @@
   export default {
     data() {
       return {
+        tableData: [],
         query: {
           id: '',
           matchApplyId: '',
@@ -214,74 +211,32 @@
         reason: '',
         //恢复、解除的新数组
         newArray: [],
-        /*relations: [{
-            'value': '01',
-            'label': '夫妻'
-          },
-          {
-            'value': '02',
-            'label': '父母'
-          },
-          {
-            'value': '03',
-            'label': '子女'
-          },
-          {
-            'value': '04',
-            'label': '兄弟'
-          },
-          {
-            'value': '05',
-            'label': '姐妹'
-          },
-          {
-            'value': '06',
-            'label': '兄妹'
-          },
-          {
-            'value': '07',
-            'label': '姐弟'
-          },
-          {
-            'value': '08',
-            'label': '朋友'
-          },
-          {
-            'value': '09',
-            'label': '同事'
-          },
-          {
-            'value': '10',
-            'label': '房东'
-          },
-          {
-            'value': '11',
-            'label': '亲属'
-          },
-          {
-            'value': '12',
-            'label': '其他'
-          },
-          {
-            'value': '13',
-            'label': '本人'
-          },
-          {
-            'value': '14',
-            'label': '单位'
-          }
-        ],*/
       }
     },
     props: ['applyId', 'isShow'],
     mounted() {
-      this.request(this.applyId);
+      this.infoList();
     },
     methods: {
+      // 点击基本信息查询其他信息
+      searchInf(row) {
+        this.request(row.id)
+      },
+      // 基本信息列表
+      infoList() {
+        this.get('antiFraud/getFraudApplyInfosByApplyId', {
+          applyId: this.applyId
+        }).then(res => {
+          if (res.statusCode == 200 && res.data) {
+            this.tableData = res.data;
+            this.request(this.tableData[0].id);
+          }
+        });
+      },
       /*先查询列表*/
       request(val) {
-        this.post('antiFraud/getAntiFraudSurveyInfoByApplyId', {
-          'applyId': val //'1',
+        this.post('antiFraud/getAntiFraudSurveyInfo', {
+          appinfoId: val
         }).then(res => {
           if (res.statusCode == 200 && res.data != null) {
             //基本信息
@@ -307,7 +262,6 @@
             } else {
               this.hitRuleList = res.data.hitRuleList;
             };
-
             if (res.data.fraudAuditInfo == null) {
               this.fraudAuditInfo = this.fraudAuditInfo;
             } else {

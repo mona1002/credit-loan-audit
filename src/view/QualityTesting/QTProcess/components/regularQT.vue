@@ -490,8 +490,7 @@
                 <th width='160px'>电话号码 </th>
                 <th width='130px'>电话录音 </th>
                 <th width='160px'>接听人是否借款人本人 </th>
-                <th width='200px'>接听说明 </th>
-                <!-- <th width='200px'>初审结论 </th> -->
+                <th width='200px'>初审结论 </th>
                 <th width='180px'>质检结果</th>
                 <th>备注 </th>
               </tr>
@@ -503,10 +502,8 @@
                 <td> {{insTelCustInfo.telRecord}}</td>
                 <!-- 接听人是否借款人本人 -->
                 <td> {{insTelCustInfo.isSelfTxt}}</td>
-                <!-- 接听说明 -->
-                <td> {{insTelCustInfo.iisselftxt}}</td>
                 <!-- 初审结论 -->
-                <!-- <td> {{insTelCustInfo.iisselftxt}}</td>                 -->
+                <td> {{insTelCustInfo.appConclusion}}</td>
                 <!-- 质检结果 -->
                 <td>
                   <b class="required_Red"> * </b>
@@ -534,8 +531,10 @@
             <!-- insTelVerifyList -->
             <el-table :data="TelData(this.ind)" border style="width: 100%">
               <el-table-column label='序号' align="center" type="index" width="50"> </el-table-column>
-             <!-- <el-table-column prop="telNum" label="姓名" align="center" width="100">
-              </el-table-column> -->
+              <el-table-column prop="telName" label="姓名" align="center" width="160">
+              </el-table-column>
+              <el-table-column prop="relation" label="关系" align="center" width="160">
+              </el-table-column>
               <el-table-column prop="telNum" label="电话号码" align="center" width="160">
               </el-table-column>
               <el-table-column label="电话录音" align="center" width="100">
@@ -809,16 +808,6 @@
       </span> -->
     </div>
     <!-- =================================弹窗===================================== -->
-    <!-- 提交 -->
-    <!-- <div class='alertBox'>
-      <el-dialog title="提示" :modal="false" :visible.sync="submitShow" width="420px">
-        <span>确定操作？</span>
-        <span slot="footer" class="dialog-footer">
-          <el-button class="calbtn" @click="submitShow=false">取消</el-button>
-          <el-button class="subtn" type="primary" :loading="loadsitu" @click="SaveInf('提交')">{{adbtn}}</el-button>
-        </span>
-      </el-dialog>
-    </div> -->
     <!-- 发起复议  -->
     <div class="Height_240">
       <el-dialog title="发起复议" :visible.sync="ReconsiderShow" :modal="false ">
@@ -846,69 +835,37 @@
         </div>
       </el-dialog>
     </div>
-    <!-- <div class="alertBox">
-      <el-dialog title='发起复议' :visible.sync="ReconsiderShow" :modal="false" width="650px">
-        <div>
-          <p>
-            <label class="reconsider_Alert_Label">复议节点：</label>
-            <el-input disabled v-model="ReconsiderNode" placeholder="请选择"> </el-input>
-          </p>
-          <p style="margin:10px 0;">
-            <label class="reconsider_Alert_Label">
-              <b class="required_Red"> * </b>复议说明：</label>
-            <el-input v-model="ReconsiderDes" style="width:500px;vertical-align:top;" type="textarea" resize='none' :rows="2"></el-input>
-          </p>
-          <p>
-            <span class="reconsider_Alert_Label"> 经办人：</span>
-            <span>{{userInf. userName}}</span>
-            <span style="float:right;width:280px;"> 发起复议时间：{{systermTime | dateFilter}}</span>
-          </p>
-        </div>
-        <div style="text-align:right;">
-          <el-button type="primary" @click="ToReconsider" :loading="loadSub">{{ReconSubmit}}</el-button>
-        </div>
-      </el-dialog>
-    </div> -->
     <!-- 区域经理-提交按钮-发起复议 -->
-    <!-- <div class="alertBox">
-      <el-dialog title='发起复议' :visible.sync="AreaReconsiderShow" :modal="false" width="630px">
-        <div>
-          <p>
-            <label class="reconsider_Alert_Label">
-              <b class="required_Red"> * </b>复议结果：</label>
-            <el-select v-model="ToAteaApprovalParams.reviewResult" placeholder="请选择">
-              <el-option v-for="item in RecResult" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-          </p>
-          <p style="margin:10px 0;">
-            <label class="reconsider_Alert_Label">
-              <b class="required_Red"> * </b>复议说明：</label>
-            <el-input v-model="ToAteaApprovalParams.reviewRemark" style="width:500px;vertical-align:top;" type="textarea" resize='none'
-              :rows="2"></el-input>
-          </p>
-          <p>
-            <span class="reconsider_Alert_Label"> 审批人：</span>
-            <span>{{userInf. userName}}</span>
-            <span style="float:right;width:280px;"> 审批时间：{{systermTime | dateFilter}}</span>
-          </p>
-        </div>
-        <div style="text-align:right;">
-          <el-button type="primary" @click="AreaToReconsider" :loading="loadSub">{{ReconSubmit}}</el-button>
-        </div>
-      </el-dialog>
-    </div> -->
     <div class="Height_240">
       <el-dialog title="发起复议" :visible.sync="AreaReconsiderShow" :modal="false ">
         <el-form>
-          <el-form-item label="复议结果：" :label-width="formLabelWidth" class="alert_collapse_inputLabel">
-            <el-select v-model="ToAteaApprovalParams.reviewResult" placeholder="请选择">
-              <el-option v-for="item in RecResult" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
+          <div class="bfc">
+            <el-form-item label="复议结果：" :label-width="formApproLabel" class="fl alert_collapse_inputLabel">
+              <el-select v-model="ToAteaApprovalParams.reviewResult" placeholder="请选择" @change="clearContent('AC')">
+                <el-option v-for="item in RecResult" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item :class="['fr',ToAteaApprovalParams.reviewResult=='02'? 'alert_collapse_inputLabel':'']" label="质检结果：" :label-width="formApproLabel">
+              <el-select v-model="ToAteaApprovalParams.checkResult" placeholder="请选择">
+                <el-option v-for="item in QTresultAlert" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </div>
+          <div class="bfc">
+            <el-form-item :class="['fl',ToAteaApprovalParams.reviewResult=='02'? 'alert_collapse_inputLabel':'']" label="质检员是否有差错：" :label-width="formApproLabel">
+              <el-select v-model="ToAteaApprovalParams.isError" placeholder="请选择">
+                <el-option v-for="item in ApprolisError" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item :class="['fr',ToAteaApprovalParams.reviewResult=='02'? 'alert_collapse_inputLabel':'']" label="差错类型：" :label-width="formApproLabel">
+              <el-input v-model="ToAteaApprovalParams.errorType" :maxlength='arealength' placeholder="请输入内容"></el-input>
+            </el-form-item>
+          </div>
           <div class="dialog_textarea alert_collapse_inputLabel">
-            <el-form-item class="mr" label="复议说明：" :label-width="formLabelWidth">
+            <el-form-item class="mr" label="复议说明：" :label-width="formApproLabel">
               <el-input v-model="ToAteaApprovalParams.reviewRemark" type="textarea" resize='none' :rows="2"></el-input>
             </el-form-item>
           </div>
@@ -923,72 +880,22 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="huiTuiShow=false">取 消</el-button>
-          <el-button type="primary" :loading="loadSub" @click='AreaToReconsider'> {{ReconSubmit}}</el-button>
+          <el-button type="primary" :loading="loadSub" @click='AreaToReconsider(ToAteaApprovalParams.reviewResult)'> {{ReconSubmit}}</el-button>
         </div>
       </el-dialog>
     </div>
-    <!-- 复议审批  -->
-    <!-- <div class="alertBox">
-      <el-dialog title='复议审批' :visible.sync="ReAprovalShow" :modal="false" width="800px">
-        <div class="reApproval">
-          <p>
-            <span>
-              <label>
-                <b class="required_Red"> * </b>复议结果：</label>
-              <el-select v-model="ToApprovalParams.reviewResult" placeholder="请选择">
-                <el-option v-for="item in RecResult" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-            </span>
-            <span>
-              <label>质检结果：</label>
-              <el-select v-model="ToApprovalParams.checkResult" placeholder="请选择">
-                <el-option v-for="item in QTresultAlert" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-            </span>
-          </p>
-          <p>
-            <span>
-              <label>
-                <b class="required_Red"> * </b>质检员是否有差错：</label>
-              <el-select v-model="ToApprovalParams.isError" placeholder="请选择">
-                <el-option v-for="item in ApprolisError" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-            </span>
-            <span>
-              <label>
-                <b class="required_Red"> * </b>差错类型：</label>
-              <el-input v-model="ToApprovalParams.errorType" :maxlength='arealength' placeholder="请输入内容"></el-input>
-            </span>
-          </p>
-          <p style="margin:10px 0;">
-            <label class="ReDec">
-              <b class="required_Red"> * </b>复议说明：</label>
-            <el-input v-model='ToApprovalParams.reviewRemark' style="width:510px;vertical-align:top;" type="textarea" resize='none' :rows="2"></el-input>
-          </p>
-          <p>
-            <span> 审批人：{{userInf. userName }}</span>
-            <span style="float:right;width:280px;"> 处理时间：{{systermTime | dateFilter}}</span>
-          </p>
-        </div>
-        <div style="text-align:right;">
-          <el-button type="primary" @click="ToApproval" :loading="loadSub">{{ReconSubmit}}</el-button>
-        </div>
-      </el-dialog>
-    </div> -->
+    <!-- 复议审批 复议（首次）+ 合规经理-查询区域经理审批内容 (共用)  -->
     <div class="Height_240">
       <el-dialog title="复议审批" :visible.sync="ReAprovalShow" :modal="false ">
         <el-form>
           <div class="bfc">
             <el-form-item class="fl alert_collapse_inputLabel" label="复议结果：" :label-width="formApproLabel">
-              <el-select v-model="ToApprovalParams.reviewResult" placeholder="请选择">
+              <el-select v-model="ToApprovalParams.reviewResult" placeholder="请选择" @change="clearContent('First')">
                 <el-option v-for="item in RecResult" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item class="fr" label="质检结果：" :label-width="formApproLabel">
+            <el-form-item :class="['fr',ToApprovalParams.reviewResult=='02'? 'alert_collapse_inputLabel':'']" label="质检结果：" :label-width="formApproLabel">
               <el-select v-model="ToApprovalParams.checkResult" placeholder="请选择">
                 <el-option v-for="item in QTresultAlert" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
@@ -996,18 +903,18 @@
             </el-form-item>
           </div>
           <div class="bfc">
-            <el-form-item class="fl alert_collapse_inputLabel" label="质检员是否有差错：" :label-width="formApproLabel">
+            <el-form-item :class="['fl',ToApprovalParams.reviewResult=='02'? 'alert_collapse_inputLabel':'']" label="质检员是否有差错：" :label-width="formApproLabel">
               <el-select v-model="ToApprovalParams.isError" placeholder="请选择">
                 <el-option v-for="item in ApprolisError" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item class="fr alert_collapse_inputLabel" label="差错类型：" :label-width="formApproLabel">
+            <el-form-item :class="['fr',ToApprovalParams.reviewResult=='02'? 'alert_collapse_inputLabel':'']" label="差错类型：" :label-width="formApproLabel">
               <el-input v-model="ToApprovalParams.errorType" :maxlength='arealength' placeholder="请输入内容"></el-input>
             </el-form-item>
           </div>
           <div class="dialog_textarea">
-            <el-form-item class="mr" label="复议说明：" :label-width="formApproLabel">
+            <el-form-item class="mr alert_collapse_inputLabel" label="复议说明：" :label-width="formApproLabel">
               <el-input v-model='ToApprovalParams.reviewRemark' type="textarea" resize='none' :rows="2"></el-input>
             </el-form-item>
           </div>
@@ -1022,7 +929,7 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button>取 消</el-button>
-          <el-button type="primary" :loading="loadSub" @click='ToApproval'> {{ReconSubmit}}</el-button>
+          <el-button type="primary" :loading="loadSub" @click='ToApproval(ToApprovalParams.reviewResult)'> {{ReconSubmit}}</el-button>
         </div>
       </el-dialog>
     </div>
@@ -1054,24 +961,6 @@
         </span>
       </el-dialog>
     </div>
-    <!-- 大数据风控 -->
-    <!-- <div class="bigDataLog alertBox">
-      <el-dialog title="提示" :visible.sync="bigDataLogVisible" :modal="false" width="420px">
-        <span>此进件不存在大数据风控明细！</span>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="bigDataLogVisible=false">确定</el-button>
-        </span>
-      </el-dialog>
-    </div> -->
-    <!-- 社保公积金 -->
-    <!-- <div class="bigDataLog alertBox">
-      <el-dialog title="提示" :visible.sync="socialLogVisible" :modal="false" width="420px">
-        <span>客户社保公积金未授权！</span>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="this.socialLogVisible=false">确定</el-button>
-        </span>
-      </el-dialog>
-    </div> -->
   </div>
 </template>
 <script>
@@ -1231,7 +1120,7 @@
           telNum: '',
           telRecord: '',
           iisself: '',
-          iisselftxt: '',
+          appConclusion: '',
           insResult: '00', // 质检结果(00:正常，01:异常)		
           remark: '',
         }, //客户本人-拨打核实-本人只有一条电话拨打核实记录---obj
@@ -1436,6 +1325,30 @@
         console.log(this.regularInfo.isFormRemark.length)
         console.log('a' + this.regularInfo.isFormRemark + "b")
       },
+      verify() {
+        // // console.log($('textarea[name=verify]'))
+        // console.log(this.$refs.verify1.$el)
+        // console.log(this.$refs.verify2.$el)
+        // console.log($('#ddd'))
+        // // $('#ddd').focus();
+        // // $('#fff').focus();
+
+        // this.$refs.verify2.focus();
+        // this.$refs.verify1.$el.focus();
+        // // focus()
+        // this.$refs.verify1.focus();
+      },
+      clearContent(mark) {
+        if (mark = "AC") {
+          this.ToAteaApprovalParams.checkResult = '';
+          this.ToAteaApprovalParams.isError = '';
+          this.ToAteaApprovalParams.errorType = '';
+        } else if (mark = 'First') {
+          this.ToApprovalParams.checkResult = '';
+          this.ToApprovalParams.isError = '';
+          this.ToApprovalParams.errorType = '';
+        }
+      },
       getSystermTime() { // 获取系统时间-质检结论-质检日期取值---基础接口
         this.get('system/getSystemDate?' + Math.random()).then(res => {
           if (res.statusCode == 200) {
@@ -1486,7 +1399,7 @@
               this.insTelCustInfo.telNum = res.data.insTelCustInfo.telNum; //电话号码
               this.insTelCustInfo.telRecord = res.data.insTelCustInfo.telRecord; //电话录音
               this.insTelCustInfo.iisself = res.data.insTelCustInfo.iisself; //接听人是否借款人本人
-              this.insTelCustInfo.iisselftxt = res.data.insTelCustInfo.iisselftxt; //接听说明
+              this.insTelCustInfo.appConclusion = res.data.insTelCustInfo.appConclusion; //接听说明
               this.insTelCustInfo.remark = res.data.insTelCustInfo.remark; //备注
             } else {
               this.insTelCustInfo = res.data.insTelCustInfo;
@@ -1969,7 +1882,7 @@
         this.loadSub = false;
         this.ReconSubmit = '提交';
       },
-      ReAprovalAlert() { //复议审批-弹窗-编辑
+      ReAprovalAlert() { //复议审批-弹窗-编辑  复议（首次）
         this.ReAprovalShow = true;
         this.ReconSubmit = '提交';
         this.loadSub = false;
@@ -2036,13 +1949,22 @@
         this.ReconsiderShow = false;
       },
       // 区域经理提交按钮-发起复议
-      AreaToReconsider() {
-        if (this.ToAteaApprovalParams.reviewResult == '' || this.ToAteaApprovalParams.reviewRemark == '') {
-          this.$message.error('有必填项未填！');
-          return
+      AreaToReconsider(mark) {
+        //  校验：通过 - 质检结果、质检员是否有差错、差错类型为非必填，拒绝：全为必填
+        if (this.ToAteaApprovalParams.reviewResult == '') return this.$message.error('有必填项未填写！');
+        if (mark == '02') {
+          if (this.ToAteaApprovalParams.reviewRemark == '' || this.ToAteaApprovalParams.checkResult == '' || this.ToAteaApprovalParams
+            .errorType == '' || this.ToAteaApprovalParams.isError ==
+            '' || this.ToAteaApprovalParams.reviewResult == '') {
+            this.$message.error('有必填项未填写！');
+            return
+          }
         }
+        if (mark == '01' && this.ToAteaApprovalParams.reviewRemark == '') return this.$message.error('有必填项未填写！');
         this.loadSub = true;
         this.ReconSubmit = '提交中';
+        this.ToAteaApprovalParams.approverUserCode = this.userInf.userCode;
+        this.ToAteaApprovalParams.approverDate = this.systermTime;
         this.post("/insReconApply/saveInsReconApproval", this.ToAteaApprovalParams).then(res => {
           if (res.statusCode == 200) {
             this.$message({
@@ -2086,12 +2008,18 @@
           }
         });
       },
-      ToApproval() { //复议审批、审批
-        if (this.ToApprovalParams.reviewRemark == '' || this.ToApprovalParams.errorType == '' || this.ToApprovalParams.isError ==
-          '' || this.ToApprovalParams.reviewResult == '') {
-          this.$message.error('有必填项未填写！');
-          return
+      ToApproval(mark) { //复议审批、审批
+        //  校验：通过 - 质检结果、质检员是否有差错、差错类型为非必填，拒绝：全为必填
+        if (this.ToApprovalParams.reviewResult == '') return this.$message.error('有必填项未填写！');
+        if (mark == '02') {
+          if (this.ToApprovalParams.reviewRemark == '' || this.ToApprovalParams.checkResult == '' || this.ToApprovalParams
+            .errorType == '' || this.ToApprovalParams.isError ==
+            '' || this.ToApprovalParams.reviewResult == '') {
+            this.$message.error('有必填项未填写！');
+            return
+          }
         }
+        if (mark == '01' && this.ToApprovalParams.reviewRemark == '') return this.$message.error('有必填项未填写！');
         this.ReconSubmit = '提交中';
         this.loadSub = true;
         this.ToApprovalParams.approverUserCode = this.userInf.userCode;

@@ -52,8 +52,12 @@
           <span class="el-icon-text">批量完成</span>
         </span>
         <span class="icon-item" @click='allotSubmit'>
-          <i class="el-icon appro"></i>
+          <i class="el-icon faqi"></i>
           <span class="el-icon-text">批量提交</span>
+        </span>
+        <span class="icon-item" @click='getExcel'>
+          <i class="el-icon appro"></i>
+          <span class="ExcelIcon">导出Excel</span>
         </span>
       </span>
     </div>
@@ -94,21 +98,17 @@
         <el-table-column prop="instaskTypeTxt" label="任务类型" min-width="100">
         </el-table-column>
       </el-table>
-      <!-- 分页  -->
-      <!-- <div class="paging">
-          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
-            :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
-          </el-pagination>
-        </div> -->
     </div>
   </div>
 </template>
 <script>
   import baseU from '../../../../util/constant';
+  import axios from 'axios'
   export default {
     data() {
       return {
         taskList: '',
+        Date: this._getDate(),
         query: {
           id: '',
           ApplyId: "",
@@ -209,7 +209,7 @@
         if (to.path === '/manager') {
           this.mountedInf();
         }
-      }
+      },
     },
     methods: {
       mountedInf() {
@@ -219,12 +219,29 @@
         this.params.taskStatus = this.taskList.taskStatus;
         this.getQTsituation(); //质检状态下拉框
         this.inquire(this.params);
-        // QTManagerWorkbenchPass
-        //   this.userInf = JSON.parse(localStorage.getItem('userInf'));
-        //   this.params.applySubNo = this.params.applySubNo.replace(this.reg, this.reVal)
-        //   this.params.mobile = this.params.mobile.replace(this.Telreg, this.telVal)
-        //   this.params.pageNum = this.currentPage, //页数（第几页）
-        //     this.params.pageSize = this.pageCount, //页面显示行数
+      },
+      getExcel() { //导出Excel
+        // 不做权限判断
+        axios({ // 用axios发送post请求
+          method: 'post',
+          url: 'export/ZJZGTasks', // 请求地址
+          data: this.params, // 参数
+          responseType: 'blob', // 表明返回服务器返回的数据类型
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then(res => {
+          const blob = new Blob([res.data]); 
+          const fileName = 'ZJZG_' + this.Date + '.xls'; 
+          const elink = document.createElement('a');
+          elink.download = fileName;
+          elink.style.display = 'none';
+          elink.href = URL.createObjectURL(blob);
+          document.body.appendChild(elink);
+          elink.click();
+          URL.revokeObjectURL(elink.href); 
+          document.body.removeChild(elink);
+        })
       },
       getQTsituation() { //获取质检状态下拉
         this.get("/system/getAllCheckState?" + Math.random())
@@ -332,12 +349,6 @@
       handleSelectionChange(val) { //列表勾选框
         this.multipleSelection = val;
       },
-      //   handleSizeChange(val) {
-      //     this.params.pageSize = val;
-      //     this.params.pageNum = 1;
-      //     // this.getInf(this.params);
-      //     this.inquire(this.params);
-      //   },
       handleCurrentChange(val) { //跳转页面
         // 根据两个条件去判断，首先根据 isSecondIns
         // 如果是 1 ，显示常规又专项
@@ -367,8 +378,6 @@
         localStorage.setItem("MatchFlag", JSON.stringify({
           MatchFlag: 'QT'
         }));
-        // this.params.pageNum = val;
-        // this.inquire(this.params);
       },
       Rreset() {
         this.params.applySubNo = '';
