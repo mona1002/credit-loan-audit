@@ -164,12 +164,12 @@
         </el-table-column>
         <el-table-column label="证件号码" fixed width="160">
           <template slot-scope='scope'>
-            {{ scope.row.certCode |cerCodeStar }}
+            {{ scope.row.certCode | cerCodeStar }}
           </template>
         </el-table-column>
         <el-table-column label="手机号码" width="115">
           <template slot-scope='scope'>
-            {{ scope.row.mobile |MobileStar }}
+            {{ scope.row.mobile | MobileStar }}
           </template>
         </el-table-column>
         <el-table-column prop="appTypeTxt" label="申请类型" width="80">
