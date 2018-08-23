@@ -158,7 +158,7 @@
         </el-table-column>
         <el-table-column prop="custName" label="客户名称" fixed width="80">
         </el-table-column>
-        <el-table-column prop="sex" label="性别" fixed width="50">
+        <el-table-column prop="sexTxt" label="性别" fixed width="50">
         </el-table-column>
         <el-table-column prop="certTypeTxt" label="证件类型" fixed width="105">
         </el-table-column>
