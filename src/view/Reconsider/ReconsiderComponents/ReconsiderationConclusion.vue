@@ -378,7 +378,7 @@
       return {
         formLabelWidth: '85px',
         formApproLabLeft: "100px",
-        formApproLab: "120px",
+        formApproLab: "122px",
         formApproLabelWidth: "200px",
         fbalance: '',
         fbalance2: '',
