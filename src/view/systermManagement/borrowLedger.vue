@@ -186,14 +186,14 @@
           <i class="el-icon checkIcon"></i>
           <span class="el-icon-text">申请信息</span>
         </span>
-        <span class="icon-item" @click='toTrilDetail'>
+        <!-- <span class="icon-item" @click='toTrilDetail'>
           <i class="el-icon checkIcon"></i>
           <span class="el-icon-text">信审信息</span>
         </span>
         <span class="icon-item" @click='toProtocalDetail'>
           <i class="el-icon checkIcon"></i>
           <span class="el-icon-text">协议信息</span>
-        </span>
+        </span> -->
         <span class="icon-item" @click='accountAlert'>
           <i class="el-icon checkIcon"></i>
           <span class="el-icon-text">账务信息</span>
