@@ -35,7 +35,7 @@
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">业务状态： </span>
-          <!-- <el-autocomplete popper-class="my-autocomplete" v-model="busiState" :fetch-suggestions="querySearch" placeholder="请输入内容"
+          <!-- <el-autocomplete popper-class="my-autocomplete" v-model="busiState" :debounce='0' :fetch-suggestions="querySearch" placeholder="请输入内容"
             @select="handleSelect">
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>

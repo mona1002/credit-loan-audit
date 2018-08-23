@@ -37,7 +37,7 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称：</span>
-          <el-autocomplete popper-class="my-autocomplete" v-model="proCode" :fetch-suggestions="ProQuerySearch" placeholder="请输入内容"
+          <el-autocomplete popper-class="my-autocomplete" v-model="proCode" :debounce='0' :fetch-suggestions="ProQuerySearch" placeholder="请输入内容"
             @select="ProhandleSelect">
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
@@ -135,7 +135,7 @@
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item">
           <span class="keywordText">进件机构：</span>
-          <el-autocomplete popper-class="my-autocomplete" v-model="agencyCode" :fetch-suggestions="querySearch" placeholder="请输入内容"
+          <el-autocomplete popper-class="my-autocomplete" v-model="agencyCode" :debounce='0' :fetch-suggestions="querySearch" placeholder="请输入内容"
             @select="handleSelect">
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
