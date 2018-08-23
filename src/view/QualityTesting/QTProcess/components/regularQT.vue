@@ -1322,11 +1322,11 @@
     props: ['propQTconclution'],
     methods: {
       clearContent(mark) {
-        if (mark = "AC") {
+        if (mark == "AC") {
           this.ToAteaApprovalParams.checkResult = '';
           this.ToAteaApprovalParams.isError = '';
           this.ToAteaApprovalParams.errorType = '';
-        } else if (mark = 'First') {
+        } else if (mark == 'First') {
           this.ToApprovalParams.checkResult = '';
           this.ToApprovalParams.isError = '';
           this.ToApprovalParams.errorType = '';
