@@ -150,9 +150,9 @@
       <el-table :data="tableData" style="width: 100%" height="410" highlight-current-row border @row-click='selectRow'>
         <el-table-column type="index" label=序号 fixed width="50">
         </el-table-column>
-        <el-table-column prop="applyMainNo" label="主进件编号" fixed width="160">
+        <el-table-column prop="applyMainNo" label="主进件编号" fixed width="185">
         </el-table-column>
-        <el-table-column prop="applyMainNo" label="进件编号" fixed width="160">
+        <el-table-column prop="applyMainNo" label="进件编号" fixed width="185">
         </el-table-column>
         <el-table-column prop="appDate" label="申请日期" fixed sortable width="150">
         </el-table-column>
@@ -162,9 +162,15 @@
         </el-table-column>
         <el-table-column prop="certTypeTxt" label="证件类型" fixed width="105">
         </el-table-column>
-        <el-table-column prop="certCode" label="证件号码" fixed width="160">
+        <el-table-column label="证件号码" fixed width="160">
+          <template slot-scope='scope'>
+            {{ scope.row.certCode |cerCodeStar }}
+          </template>
         </el-table-column>
-        <el-table-column prop="mobile" label="手机号码" width="115">
+        <el-table-column label="手机号码" width="115">
+          <template slot-scope='scope'>
+            {{ scope.row.mobile |MobileStar }}
+          </template>
         </el-table-column>
         <el-table-column prop="appTypeTxt" label="申请类型" width="80">
         </el-table-column>
@@ -543,16 +549,16 @@
           headers: {
             'Content-Type': 'application/json'
           }
-        }).then(res => { 
-          const blob = new Blob([res.data]); 
-          const fileName = 'SQTZ_' + this.Date + '.xls'; 
+        }).then(res => {
+          const blob = new Blob([res.data]);
+          const fileName = 'SQTZ_' + this.Date + '.xls';
           const elink = document.createElement('a');
           elink.download = fileName;
           elink.style.display = 'none';
           elink.href = URL.createObjectURL(blob);
           document.body.appendChild(elink);
           elink.click();
-          URL.revokeObjectURL(elink.href); 
+          URL.revokeObjectURL(elink.href);
           document.body.removeChild(elink);
         })
       },

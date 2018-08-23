@@ -61,7 +61,7 @@
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">命中规则</span>
         </template>
-        <div class="height_auto">
+        <!-- <div class="height_auto"> -->
           <el-table :data="tableData" border height="100%" style="width: 100%">
             <el-table-column prop="rulercode" label="规则编号" min-width="70">
             </el-table-column>
@@ -74,7 +74,7 @@
             <el-table-column prop="action" label="查看规则详情" min-width="100">
             </el-table-column>
           </el-table>
-        </div>
+        <!-- </div> -->
       </el-collapse-item>
     </el-collapse>
   </div>

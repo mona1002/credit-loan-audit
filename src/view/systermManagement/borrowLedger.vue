@@ -219,7 +219,7 @@
         </el-table-column>
         <el-table-column prop="loanAcNo" label="借款账号" width="130">
         </el-table-column>
-        <el-table-column prop="applySubNo" label="进件编号" width="160">
+        <el-table-column prop="applySubNo" label="进件编号" width="185">
         </el-table-column>
         <el-table-column prop="contNo" label="协议编号" sortable width="200">
         </el-table-column>
@@ -227,9 +227,15 @@
         </el-table-column>
         <el-table-column prop="custName" label="客户名称" width="80">
         </el-table-column>
-        <el-table-column prop="certCode" label="证件号码" width="160">
+        <el-table-column label="证件号码" width="160">
+          <template slot-scope='scope'>
+            {{ scope.row.certCode |cerCodeStar }}
+          </template>
         </el-table-column>
-        <el-table-column prop="loanMobile" label="手机号码" width="110">
+        <el-table-column label="手机号码" width="110">
+          <template slot-scope='scope'>
+            {{ scope.row.loanMobile |MobileStar }}
+          </template>
         </el-table-column>
         <el-table-column prop="appTypeTxt" label="申请类型" width="80">
         </el-table-column>
