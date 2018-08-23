@@ -1349,7 +1349,6 @@
           // }
         ).then(res => {
           if (res.statusCode == 200) {
-            // console.log(this.Alipay)
             // 除基本信息以外，专员获取都为空，applyid要一个个赋值进去
             //  基本信息                                -Object
             this.baseInfo = res.data.applyBaseInfo;
@@ -1360,7 +1359,6 @@
             // !res.data.insRegularInfo ? this.regularInfo.applyId = this.propQTconclution.applyId : this.regularInfo =
             //   res.data.insRegularInfo;
             !res.data.insRegularInfo ? this.regularInfo : this.regularInfo = res.data.insRegularInfo;
-            // console.log(this.propQTconclution.applyId)
             // 质检结论                                  -Object
             !res.data.insConclusionList ? this.insConclusion.applyId = this.propQTconclution.applyId : this.insConclusion =
               res.data.insConclusionList;
@@ -1479,7 +1477,6 @@
             this.TrilSelfTableData = []; //初终审本人
             this.ManagerFirstTableData = []; //初终审主管首次
             this.ManagerSecondTableData = []; //初终审主管二次
-            // console.log(this.insReconApply )
             for (var m = 0; m < this.insReconApply.length; m++) {
               console.log(this.insReconApply[m].reconType)
               this.insReconApply[m].reconType == '00' ? this.TrilSelfTableData.push(this.insReconApply[m]) : ''; //00:初终审本人---初终审复议申请信息
@@ -1535,7 +1532,6 @@
             isSubmit: "0", // 0：保存 1：提交
             // "checkResult": "", // 任务类型（00:常规质检，01:专项质检）
           });
-          console.log(this.insConclusion)
         } else {
           if (this.insConclusion[this.insConclusion.length - 1].checkResult == '') { //质检结果不能为空
             this.$message.error('质检结果不能为空！');
