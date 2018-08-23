@@ -117,164 +117,9 @@
         </div>
       </el-collapse-item>
     </el-collapse>
-
-    <!-- <div class="main">
-      <ul class="mainUl">
-        <li>
-          <label>客户名称：</label>
-          <span>{{datas.custName}}</span>
-        </li>
-        <li>
-          <label>证件类型：</label>
-          <span>{{datas.certTypeTxt}}</span>
-        </li>
-        <li>
-          <label>产品名称：</label>
-          <span>{{datas.proName}}</span>
-        </li>
-        <li>
-          <label>申请金额：</label>
-          <span>{{datas.loanAmt}}</span>
-        </li>
-        <li>
-          <label>借款用途：</label>
-          <span>{{datas.loanPurposeTxt}}</span>
-        </li>
-        <li>
-          <label>客户来源渠道：</label>
-          <span>{{datas.sourcesChanTxt}}</span>
-        </li>
-        <li>
-          <label>进件机构：</label>
-          <span>{{datas.appOrgName}}</span>
-        </li>
-      </ul>
-      <ul class="mainUl secondUl">
-        <li>
-          <label>申请类型：</label>
-          <span>{{datas.appTypeTxt}}</span>
-        </li>
-        <li>
-          <label>证件号码：</label>
-          <span>{{datas.certCode}}</span>
-        </li>
-        <li>
-          <label>最高月还款额：</label>
-          <span>{{datas.eachTermAmt}}</span>
-        </li>
-        <li>
-          <label>申请期限：</label>
-          <span>{{datas.loanTerm}}</span>
-        </li>
-        <li>
-          <label>借款用途说明：</label>
-          <span>{{datas.loanPurposeNote}}</span>
-        </li>
-        <li>
-          <label>客户来源渠道说明：</label>
-          <span>{{datas.sourcesChanRemark}}</span>
-        </li>
-        <li>
-          <label>直销人员：</label>
-          <span>{{datas.salPerName}}</span>
-        </li>
-      </ul>
-    </div> -->
-    <!-- <div class="buttons">
-      <el-button @click="coverFn('back')">
-        <img src="/static/images/back.png">
-        <label class="labelTxt">回退</label>
-      </el-button>
-      <el-button @click="coverFn('refuse')">
-        <img src="/static/images/jujue.png">
-        <label class="labelTxt">拒绝</label>
-      </el-button>
-      <el-button @click="shenpi">
-        <img src="/static/images/back.png">
-        <label class="labelTxt">审批</label>
-      </el-button>
-      <el-button @click="AntiFraudApplication">
-        <img src="/static/images/faqi.png">
-        <label class="labelTxt">反欺诈申请</label>
-      </el-button>
-      <el-button @click="getSpjlList">
-        <img src="/static/images/jielun.png">
-        <label class="labelTxt">审批流程轨迹</label>
-      </el-button>
-      <el-button @click="getLcgjList">
-        <img src="/static/images/liucheng.png">
-        <label class="labelTxt">流程轨迹</label>
-      </el-button>
-      <el-button @click="tobigData">
-        <img src="/static/images/liucheng.png">
-        <label class="labelTxt">大数据风控</label>
-      </el-button>
-      <el-button @click="roSocialSecurity">
-        <img src="/static/images/liucheng.png">
-        <label class="labelTxt">社保/公积金{{social}}</label>
-      </el-button>
-    </div> -->
-
-    <!-- 回退 -->
-    <!-- <div class="huitui">
-      <el-dialog title='回退信息' :visible.sync="dialogVisible" :modal="false" width="860px" top="20vh">
-        <div class="huituiBody">
-          <p class="bodyP">
-            <label>
-              <span>*</span>回退节点：</label>
-            <el-select v-model="values" placeholder="请选择" @change="backNode">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-          </p>
-          <p class="bodyP">
-            <ul>
-              <li>
-                <label>
-                  <span>*</span>主原因：</label>
-                <el-select ref="mainReasonName" v-model="mainReasonName" placeholder="请选择" @change="mainReason($event,'mainback')">
-                  <el-option v-for="item in mainResions" :key="item.id" :label="item.reasonName" :value="item.id">
-                  </el-option>
-                </el-select>
-              </li>
-              <li>
-                <label>子原因：</label>
-                <el-select ref="subReasonName" v-model="subReasonName" placeholder="请选择">
-                  <el-option v-for="item in childReasons" :key="item.id" :label="item.reasonName" :value="item.id">
-                  </el-option>
-                </el-select>
-              </li>
-            </ul>
-          </p>
-          <p class="bodyP bodyP2">
-            <label>
-              <span>*</span>原因说明：</label>
-            <el-input type="textarea" :rows="3" resize='none' placeholder="请输入内容" v-model="reasonRemark">
-            </el-input>
-          </p>
-          <p class="bodyP">
-            <ul>
-              <li>
-                <label>经办人：</label>
-                <span>{{dealroperCode}}</span>
-              </li>
-              <li>
-                <label>经办时间：</label>
-                <span>{{dealroperDate | dateFilter}}</span>
-              </li>
-            </ul>
-          </p>
-        </div>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" :loading=huituiLoading @click="hsure">{{huituiFont}}</el-button>
-          <el-button type="primary" @click="dialogVisible = false">返回</el-button>
-        </span>
-      </el-dialog>
-    </div> -->
     <!-- 回退弹窗 -->
     <div class="Height_240 ">
       <el-dialog title="回退信息" :visible.sync="dialogVisible" :modal="false ">
-        <!-- <el-form :model="formReturn" :rules="rulesReturn" ref="ruleFormReturn"> -->
         <el-form :model="FormReturn" :rules="rules" ref="FormReturn">
           <el-form-item label="回退节点：" :label-width="formLabelWidth" prop="rollbackNodeName">
             <el-select v-model="FormReturn.rollbackNodeName" placeholder="请选择" @change="backNode">
@@ -317,53 +162,6 @@
       </el-dialog>
     </div>
     <!-- 拒绝弹窗 -->
-    <!-- <div class="huitui jujue">
-      <el-dialog title='拒绝原因' :visible.sync="jdialogVisible" :modal="false" width="860px" top="20vh">
-        <div class="huituiBody">
-          <p class="bodyP">
-            <ul>
-              <li>
-                <label>
-                  <span>*</span>主原因：</label>
-                <el-select ref="rmainReasonName" v-model="rmainReasonName" placeholder="请选择" @change="mainReason($event,'mainrefuse')">
-                  <el-option v-for="item in rmainResions" :key="item.id" :label="item.reasonName" :value="item.id">
-                  </el-option>
-                </el-select>
-              </li>
-              <li>
-                <label>子原因：</label>
-                <el-select ref="rsubReasonName" v-model="rsubReasonName" placeholder="请选择">
-                  <el-option v-for="item in rchildReasons" :key="item.id" :label="item.reasonName" :value="item.id">
-                  </el-option>
-                </el-select>
-              </li>
-            </ul>
-          </p>
-          <p class="bodyP bodyP2">
-            <label>
-              <span>*</span>原因说明：</label>
-            <el-input type="textarea" :rows="3" resize='none' placeholder="请输入内容" v-model="rreasonRemark">
-            </el-input>
-          </p>
-          <p class="bodyP">
-            <ul>
-              <li>
-                <label>经办人：</label>
-                <span>{{dealroperCode}}</span>
-              </li>
-              <li>
-                <label>经办时间：</label>
-                <span>{{jdealroperDate | dateFilter}}</span>
-              </li>
-            </ul>
-          </p>
-        </div>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" :loading=jujueLoading @click="jSure">{{jujueFont}}</el-button>
-          <el-button type="primary" @click="jdialogVisible = false">返回</el-button>
-        </span>
-      </el-dialog>
-    </div> -->
     <div class="Height_240 ">
       <el-dialog title="拒绝原因" :visible.sync="jdialogVisible" :modal="false ">
         <el-form :model="FormReject" :rules="rules" ref="FormReject">
@@ -403,115 +201,6 @@
       </el-dialog>
     </div>
     <!-- 审批 -->
-    <!-- <div class="shenpi">
-      <el-dialog title='审批信息' :visible.sync="sdialogVisible" :modal="false" width="860px" height="860px" top="10vh">
-        <div class="shenpiBody">
-          <el-collapse v-model="activeNames" @change="handleChange">
-            <el-collapse-item title="申请信息" name="1">
-              <div class="first">
-                <ul>
-                  <li>
-                    <label>申请金额[元]：</label>
-                    <span>{{datas.loanAmt}}</span>
-                  </li>
-                  <li>
-                    <label>申请产品：</label>
-                    <span>{{datas.proName}}</span>
-                  </li>
-                  <li>
-                    <label>信用评分：</label>
-                    <span>{{creditScore}}</span>
-                  </li>
-                </ul>
-                <ul>
-                  <li>
-                    <label>申请期限[月]：</label>
-                    <span> {{datas.loanTerm}}</span>
-                  </li>
-                  <li>
-                    <label>可接受最高每期还款额[元]：</label>
-                    <span>{{datas.eachTermAmt}}</span>
-                  </li>
-                  <li>
-                    <label>申请类型：</label>
-                    <span>{{datas.appTypeTxt}}</span>
-                  </li>
-                </ul>
-              </div>
-            </el-collapse-item>
-            <el-collapse-item title="审批信息" name="2">
-              <p class="sbodyP">
-                <label>结论：</label>
-                <el-radio v-model="applyConclusion" label="00">同意</el-radio>
-              </p>
-              <div class="sfirst">
-                <ul>
-                  <li>
-                    <label>
-                      <span>*</span>月核实收入[元]：</label>
-                    <el-input v-model="verIncome" @blur="moneyBlur(verIncome,'verIncome')">
-
-                    </el-input>
-                  </li>
-                  <li>
-                    <label>
-                      <span>*</span>批准金额[元]：</label>
-                    <el-input v-model="ploanAmt" @blur="moneyBlur(ploanAmt,'ploanAmt')">
-
-                    </el-input>
-                  </li>
-                  <li>
-                    <label>审批倍数：</label>
-                    <span>{{caculData.appmult}}</span>
-                  </li>
-                  <li>
-                    <label>内部负债率：</label>
-                    <span>{{caculData.inteDebitrate}}</span>
-                  </li>
-                </ul>
-                <ul>
-                  <li>
-                    <label>
-                      <span>*</span>批准产品：</label>
-                    <el-select v-model="proName" @change="proSlelecChange">
-                      <el-option v-for="item in products" :key="item.id" :label="item.proName" :value="item.id">
-                      </el-option>
-                    </el-select>
-                  </li>
-                  <li>
-                    <label>
-                      <span>*</span>批准期限[月]：</label>
-                    <el-select v-model="ploanTerm" @change="ploanTermChange">
-                      <el-option v-for="item in ploanTerms" :key="item.appDuration" :label="item.appDuration" :value="item">
-                      </el-option>
-                    </el-select>
-                  </li>
-                  <li>
-                    <label>月还款额[元]：</label>
-                    <span>{{caculData.eachTermamt}}</span>
-                  </li>
-                  <li>
-                    <label>总负债率：</label>
-                    <span>{{caculData.totalRate}}</span>
-                  </li>
-                </ul>
-              </div>
-              <p class="bodyP bodyP2">
-                <label>意见说明：</label>
-                <el-input type="textarea" :rows="3" resize="none" v-model="appConclusion">
-                </el-input>
-              </p>
-            </el-collapse-item>
-            <el-collapse-item title="循环贷信息" name="3">
-            </el-collapse-item>
-          </el-collapse>
-        </div>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" :loading=shenpiLoading @click="spsure">{{shenpiFont}}</el-button>
-          <el-button type="primary" @click="sdialogVisible = false">返回</el-button>
-        </span>
-      </el-dialog>
-    </div> -->
     <el-dialog title="审批信息" :visible.sync="sdialogVisible " :modal="false " width="710px" height='1100px'>
       <el-form>
         <el-collapse v-model="activeNames">
@@ -593,23 +282,14 @@
                     {{caculData.appmult}}
                   </el-form-item>
                   <el-form-item class="presentation" label="月还款额[元]：" :label-width="formApproLab">
-                    <!-- {{caculData.eachTermamt | formatMoney}} -->
                     {{caculData.eachTermamt}}
                   </el-form-item>
                 </div>
                 <div class="bfc">
                   <el-form-item class="presentation" label="内部负债率：" :label-width="formApproLab">
-                    <!-- {{caculData.inteDebitrate | formatValue}} -->
                     {{caculData.inteDebitrate}}
                   </el-form-item>
-                  <!--          <el-form-item class="presentation" label="总信用负债率：" :label-width="formApproLab" v-show="caculData.creditDebitRate>0">
-                        {{caculData.creditDebitRate | formatValue}}
-                      </el-form-item>
-                      <el-form-item class="presentation" label="总信用负债率：" :label-width="formApproLab" v-show="caculData.creditDebitRate==0">
-                        0.00%
-                      </el-form-item> -->
                   <el-form-item class="presentation" label="总负债率：" :label-width="formApproLab">
-                    <!-- {{caculData.totalRate | formatValue}} -->
                     {{caculData.totalRate}}
                   </el-form-item>
                 </div>
@@ -693,13 +373,12 @@
 </template>
 <script type="text/javascript">
   import baseurl from '../../../util/ConstantSocialAndPn';
-  //import baseU from'../../../util/constant';
   export default {
     data() {
       return {
         formLabelWidth: '85px',
         formApproLabLeft: "100px",
-        formApproLab: "120px",
+        formApproLab: "122px",
         formApproLabelWidth: "200px",
         fbalance: '',
         fbalance2: '',
@@ -789,7 +468,6 @@
         applyId: '',
         sproId: '', // 审批 proId
         appOrgId: '', //进件ID
-
         //审批
         creditScore: '', // 单独处理的评分
         verIncome: '', // 核实收入
@@ -805,17 +483,14 @@
         synthesisRateM: '', // 审批 - 计算审批结论数据 - 综合费率
         loanRateYr: '', // 审批 - 计算审批结论数据 - 借款利率
         repayWay: '', // 审批  计算审批结论数据  还款方式
-
         //审批流程轨迹
         tableData: {},
         currentPage: 1, // 默认显示的当前页
         setPageSize: 10,
-
         //流程轨迹
         activeNames2: ['1'],
         lcgjData: [],
         processTemplateId: '',
-
         taskId: '', //任务id
         custNo: '', // 客户code 空
         emerType: '', // 紧急程度 空
@@ -823,8 +498,6 @@
         proCode: '',
         applyCustId: '',
         processInstanceId: '', //流程实例id
-        // bigDataLogVisible: false, //大数据风控弹框
-        // socialLogVisible: false, //社保公积金
         social: '', //社保公积金 已绑定 未绑定
         orgId: '',
         huituiFont: '提交',
@@ -833,8 +506,6 @@
         jujueFont: '提交',
         shenpiLoading: false,
         shenpiFont: '提交',
-        nodeName: '',
-        routeParams: '',
         RtaskInWaitting: '',
       }
     },
@@ -856,10 +527,8 @@
       //经办人
       this.dealroperCode = JSON.parse(localStorage.getItem('userInf')).userCode;
       this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
-
       //登陆人id
       this.orgId = JSON.parse(localStorage.getItem('userInf')).orgId;
-
       // this.applyId = this.applicationInformationDetail.applyId;
       // this.appOrgId = this.applicationInformationDetail.appOrgId;
       // // 客户编号
@@ -893,36 +562,27 @@
       //保留两位小数 整数千分位
       formatNumber(num, cent, isThousand) {
         num = num.toString().replace(/\$|\,/g, '');
-
         // 检查传入数值为数值类型
         if (isNaN(num))
           num = "0";
-
         // 获取符号(正/负数)
         let sign = (num == (num = Math.abs(num)));
-
         num = Math.floor(num * Math.pow(10, cent) + 0.50000000001); // 把指定的小数位先转换成整数.多余的小数位四舍五入
         let cents = num % Math.pow(10, cent); // 求出小数位数值
         num = Math.floor(num / Math.pow(10, cent)).toString(); // 求出整数位数值
         cents = cents.toString(); // 把小数位转换成字符串,以便求小数位长度
-
         // 补足小数位到指定的位数
         while (cents.length < cent)
           cents = "0" + cents;
-
         for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
           num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
-
         if (cent > 0) {
-          //console.log(cent);
-          //console.log(((sign)?'':'-') + num + '.' + cents);
           if (sign == true) {
             return (((sign) ? '' : '-') + num + '.' + cents);
           } else if (sign == false) {
             return '0.00'
           }
         } else {
-          //console.log(((sign)?'':'-') + num);
           return (((sign) ? '' : '-') + num);
         }
       },
@@ -930,14 +590,11 @@
       coverFn(flag) {
         switch (flag) {
           case 'back':
-            //this.huituiLoading = false;
             this.huituiFont = '提交';
             this.dialogVisible = true;
             this.get('system/getSystemDate?' + Math.random()).then(res => {
-              //console.log('回退', res)
               // 请求系统时间
               this.dealroperDate = res.data;
-              //console.log('this.', this.dealroperDate);
             })
             break;
           case 'refuse':
@@ -945,13 +602,10 @@
             this.jujueFont = '提交';
             this.jdialogVisible = true;
             this.get('system/getSystemDate?' + Math.random()).then(res => {
-              //console.log('回退', res)
               // 请求系统时间
               this.jdealroperDate = res.data;
-              //console.log('this.', this.jdealroperDate);
             });
             this.get('/credit/firstNodeReason?reasonType=03' + '&' + Math.random()).then(res => {
-              console.log(res);
               if (res.statusCode == '200') {
                 this.rmainResions = res.data;
               }
@@ -970,11 +624,9 @@
           proId: this.sproId,
           appOrgId: this.appOrgId
         }).then(res => {
-          console.log(res);
           if (res.statusCode == '200') {
             this.quotaData = res.data;
             // 单独处理 评分   =>  "评分:51.6"
-            //console.log(res.data.creditScore);
             this.creditScore = res.data.creditScore.split(',')[0].substr(3, 4);
             this.fbalance = res.data.fbalance;
             if (res.data.creditScore.split(',')[1]) {
@@ -983,30 +635,14 @@
             } else {
               this.fbalance2 = Number(res.data.fbalance).toLocaleString() + '.00'
             }
-            //console.log(this.creditScore);
-            //this.sdialogVisible = true;
           } else if (res.statusCode == '700') {
             this.$message({
               message: res.msg,
               type: 'error'
             });
-            //this.sdialogVisible = false; 
           }
         });
         //请求产品
-        /*this.post(baseU.path+'/remote/product/getProductForUser',{
-
-		           data:{
-		              orgId:this.orgId,
-		              validFlag:'1'
-		           }
-		          }).then(res => {
-		          	if(res.statusCode == 200){
-						this.products = res.data;
-					}else {
-			            this.$message.error(res.msg);
-			          }
-	            });*/
         this.post("/credit/product").then(res => {
           if (res.statusCode == 200) {
             this.products = res.data;
@@ -1014,7 +650,6 @@
             this.post('/creauditOpinion/queryCreauditOpinionObj', {
               applyId: this.applyId
             }).then(res => {
-              console.log(res.data);
               if (res.statusCode == 200) {
                 //批准期限[月]
                 if (res.data.ploanTerm) {
@@ -1024,7 +659,6 @@
                 };
                 // 批准产品
                 if (res.data.proId) {
-                  //alert('lll');
                   this.proId = res.data.proId;
                   for (var i = 0; i < this.products.length; i++) {
                     if (res.data.proId == this.products[i].id) {
@@ -1034,16 +668,13 @@
                     }
                   };
                   //批准期限[月]的列表
-                  /*this.post('/credit/ploanTermByPro',{proId : res.data.proId}).then(res => {*/
                   this.post('/credit/ploanTermByPro?proId=' + res.data.proId).then(res => {
-                    console.log(res.data);
                     if (res.statusCode == '200')
                       this.ploanTerms = res.data;
                   });
                 } else {
                   this.proName = this.proName;
                 };
-
                 // 核实收入
                 if (res.data.verIncome) {
                   this.verIncome = this.formatNumber(res.data.verIncome, 2, 0);
@@ -1056,7 +687,6 @@
                 } else {
                   this.ploanAmt = this.ploanAmt;
                 };
-
                 //审批结论数据
                 //审批倍数
                 if (res.data.appmult) {
@@ -1126,7 +756,6 @@
         //按钮加“加载中”
         this.shenpiLoading = true;
         this.shenpiFont = '提交中';
-        //this.sdialogVisible = false; 
         var reg = /,/;
         this.post('/creauditOpinion/add', {
           applyId: this.applyId,
@@ -1189,7 +818,6 @@
           case 'verIncome':
             if (!this.verIncome) {
               this.verIncome = this.formatNumber('0', 2, 0);
-              console.log(this.verIncome);
             } else if (this.verIncome) {
               this.verIncome = this.formatNumber(this.verIncome, 2, 0);
               if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length >
@@ -1208,9 +836,7 @@
               //console.log(typeof(this.maxAmounnt));
               // 大于最大
               if (this.ploanAmt * 1 > this.maxAmounnt) {
-                // this.ploanAmtError = true;
                 this.$message({
-                  /*showClose: true,*/
                   message: '批准金额不能大于产品最高上限' + this.maxAmounnt + '元',
                   type: 'warning'
                 });
@@ -1219,9 +845,7 @@
               };
               // 小于最小
               if (this.ploanAmt * 1 < this.minAmount) {
-                // this.ploanAmtError = true;
                 this.$message({
-                  /*showClose: true,*/
                   message: '批准金额不能小于产品最低下限' + this.minAmount + '元',
                   type: 'warning'
                 });
@@ -1230,9 +854,7 @@
               };
               // 大于申请金额
               if (this.ploanAmt * 1 > this.datas.loanAmt) {
-                // this.ploanAmtError = true;
                 this.$message({
-                  /*showClose: true,*/
                   message: '此金额不能大于申请金额,请重新输入!',
                   type: 'warning'
                 });
@@ -1267,8 +889,6 @@
 
         console.log(val);
         this.proId = val;
-        //console.log(this.products);
-        //console.log(this.products.length);
         for (var i = 0; i < this.products.length; i++) {
           if (this.products[i].id == val) {
             // 最大金额
@@ -1292,7 +912,6 @@
       // 批准期限更改
       ploanTermChange: function (val) {
         console.log('批准期限更改!');
-        console.log(val);
         // 批准期限
         this.ploanTerm = val.appDuration;
         // 综合费率
@@ -1323,8 +942,6 @@
           this.caculData.eachTermamt = this.formatNumber(this.caculData.eachTermamt, 2, 0); //月还款额
           this.caculData.inteDebitrate = (this.caculData.inteDebitrate * 100).toFixed(2) + "%"; //内部负债率
           this.caculData.totalRate = (this.caculData.totalRate * 100).toFixed(2) + "%"; //总负债率
-          //console.log(this.caculData.inteDebitrate*100);
-          //console.log(this.caculData.totalRate*100);
         })
       },
       //拒绝提交按钮
@@ -1358,7 +975,6 @@
               applySubNo: this.datas.applySubNo, //复议申请单ID
             }).then(res => {
               this.jdialogVisible = false;
-              console.log(res);
               if (res.statusCode != '200') {
                 this.$message({
                   message: res.msg,
@@ -1398,72 +1014,6 @@
             return false;
           }
         });
-        // this.jujueLoading = true;
-        // this.jujueFont = '提交中';
-        //this.jdialogVisible = false;
-        // this.post("/creauditOpinion/approval", {
-        //   // 挂起 taskId 任务id
-        //   taskId: this.taskId,
-        //   processInstanceId: this.processInstanceId, //流程实例ID
-        //   custName: this.datas.custName, // 客户名称
-        //   custNo: this.custNo, // 客户code
-        //   certType: this.certType, // 证件类型
-        //   certCode: this.datas.certCode, // 证件号码
-        //   emerType: this.emerType, // 紧急程度
-        //   appOrgCode: this.appOrgCode, // 门店代码
-        //   proName: this.datas.proName, // 产品名称
-        //   proCode: this.proCode, //  产品代码
-        //   proId: this.sproId, // 产品id     //"d7fa0628-791d-4cc5-b854-aa8bef9340a6"
-        //   opinionFlag: '01', // 标志任务类型(复议经理 拒绝)
-        //   mainReasonName: this.$refs.rmainReasonName.selectedLabel, // 拒绝主原因
-        //   subReasonName: this.$refs.rsubReasonName.selectedLabel, // 拒绝次原因
-        //   reasonRemark: this.rreasonRemark, // 意见描述/原因说明
-        //   appOrgId: this.appOrgId, // 进件机构id
-        //   applyId: this.applyId, // 申请单id
-        //   rollbackNodeName: '', // 回退节点名称(没有回退节点) 
-        //   dealroperDate: this.jdealroperDate, // 经办时间
-        //   creauditAppOperate: '01', // 复议经理 拒绝creauditAppOperate: 'check_Refuse'
-        //   busiState: '22', //复议审批中（回退）
-        //   dealroperCode: this.dealroperCode, //经办人
-        //   applySubNo: this.datas.applySubNo, //复议申请单ID
-        // }).then(res => {
-        //   this.jdialogVisible = false;
-        //   console.log(res);
-        //   if (res.statusCode != '200') {
-        //     this.$message({
-        //       message: res.msg,
-        //       type: 'warning'
-        //     })
-        //     return;
-        //   }
-        //   if (res.statusCode == '200') {
-        //     // this.taskId = '';
-        //     this.datas.custName = ''; // 客户名称
-        //     this.custNo = ''; // 客户code
-        //     this.datas.certTypeTxt = ''; // 证件类型
-        //     this.datas.certCode = ''; // 证件号码
-        //     this.emerType = ''; // 紧急程度
-        //     this.appOrgCode, // 门店代码
-        //       this.datas.proName, // 产品名称
-        //       this.proId = ''; // 产品id
-        //     this.opinionFlag = ''; // 标志任务类型
-        //     this.mainReason = ''; // 回退主原因
-        //     this.secondaryReason = ''; // 回退子原因
-        //     this.rreasonRemark = ''; // 意见描述/原因说明
-        //     this.appOrgId = ''; // 进件机构id
-        //     this.rollbackNodeName = ''; // 回退节点名称
-        //     this.dealroperDate = ''; // 经办时间
-        //     this.dealroperCode = ''; //经办人
-        //     this.creauditAppOperate = ''; // 操作类型
-
-        //     this.$message({
-        //       message: res.msg,
-        //       type: 'success'
-        //     })
-        //     this.$router.push('/reconsiderList');
-        //     this.del();
-        //   }
-        // });
       },
       //回退提交按钮
       hsure(formName) {
@@ -1536,82 +1086,10 @@
             return false;
           }
         });
-        //console.log(this.mainReasonName);
-        //console.log(this.$refs.mainReasonName);
-        //console.log(this.$refs.mainReasonName.selectedLabel);
-        //console.log(this.values);
-        // this.huituiLoading = true;
-        // this.huituiFont = '提交中';
-        //this.dialogVisible = false;
-        // this.post("/creauditOpinion/approval", {
-        //   // 挂起 taskId 任务id
-        //   taskId: this.taskId,
-        //   processInstanceId: this.processInstanceId, //流程实例ID
-        //   custName: this.datas.custName, // 客户名称
-        //   custNo: this.custNo, // 客户code
-        //   certType: this.certType, // 证件类型
-        //   certCode: this.datas.certCode, // 证件号码
-        //   emerType: this.emerType, // 紧急程度
-        //   appOrgCode: this.appOrgCode, // 门店代码
-        //   proName: this.datas.proName, // 产品名称
-        //   proCode: this.proCode, //  产品代码
-        //   proId: this.sproId, // 产品id     //"d7fa0628-791d-4cc5-b854-aa8bef9340a6"
-        //   opinionFlag: '02', // 标志任务类型(复议经理 回退)
-        //   mainReasonName: this.$refs.mainReasonName.selectedLabel, // 回退主原因
-        //   subReasonName: this.$refs.subReasonName.selectedLabel, // 回退子原因
-        //   reasonRemark: this.reasonRemark, // 意见描述/原因说明
-        //   appOrgId: this.appOrgId, // 进件机构id
-        //   applyId: this.applyId, // 申请单id
-        //   rollbackNodeName: 'reconsiderApp_commissioner', // 回退节点名称 this.values
-        //   dealroperDate: this.dealroperDate, // 经办时间
-        //   creauditAppOperate: '02', //check_Back
-        //   busiState: '20', //复议审批中（回退） // 复议经理 回退
-        //   applySubNo: this.datas.applySubNo, //复议申请单ID
-        //   dealroperCode: this.dealroperCode, //经办人
-        // }).then(res => {
-        //   this.dialogVisible = false;
-        //   console.log(res);
-        //   if (res.statusCode != '200') {
-        //     this.$message({
-        //       message: res.msg,
-        //       type: 'warning'
-        //     })
-        //     return;
-        //   }
-        //   if (res.statusCode == '200') {
-        //     // this.taskId = '';
-        //     this.datas.custName = ''; // 客户名称
-        //     this.custNo = ''; // 客户code
-        //     this.datas.certTypeTxt = ''; // 证件类型
-        //     this.datas.certCode = ''; // 证件号码
-        //     this.emerType = ''; // 紧急程度
-        //     this.appOrgCode = ''; // 门店代码
-        //     this.proCode = ''; //  产品代码
-        //     this.proId = ''; // 产品id
-        //     this.opinionFlag = ''; // 标志任务类型
-        //     this.mainReason = ''; // 回退主原因
-        //     this.secondaryReason = ''; // 回退子原因
-        //     this.reasonRemark = ''; // 意见描述/原因说明
-        //     this.appOrgId = ''; // 进件机构id
-        //     this.rollbackNodeName = ''; // 回退节点名称
-        //     this.dealroperDate = ''; // 经办时间
-        //     this.dealroperCode = ''; //经办人
-        //     this.creauditAppOperate = ''; // 操作类型
-
-        //     this.$message({
-        //       message: res.msg,
-        //       type: 'success'
-        //     })
-
-        //     this.$router.push('/reconsiderList');
-        //     this.del();
-        //   }
-        // });
       },
       //回退节点
       backNode() {
         this.get('/credit/firstNodeReason?reasonType=01' + '&' + Math.random()).then(res => {
-          console.log(res);
           if (res.statusCode == '200') {
             this.mainResions = res.data;
           }
@@ -1622,17 +1100,13 @@
         //"mainback":回退
         //"mainrefuse":拒绝
         if (flag == 'mainback') {
-          //console.log('回退555'+$event);
           this.get('/credit/findNodeFirstChildren?id=' + $event + '&' + Math.random()).then(res => {
-            //console.log('回退'+res);
             if (res.statusCode == '200') {
               this.childReasons = res.data;
             }
           })
         } else if (flag == 'mainrefuse') {
-          console.log('拒绝' + $event);
           this.get('/credit/findNodeFirstChildren?id=' + $event + '&' + Math.random()).then(res => {
-            console.log(res);
             if (res.statusCode == '200') {
               this.rchildReasons = res.data;
             }
@@ -1684,24 +1158,19 @@
           pageNum: this.pageNum, // 页码
           pageSize: this.pageSize // 每页条数
         }).then(res => {
-          console.log('审批结论轨迹');
-          console.log(res);
           if (res.statusCode == '200') {
             this.loading = false;
             this.tableData = res.data;
           } else {
             this.$message(res.msg);
           }
-
         })
       },
       // 流程轨迹
       getLcgjList() {
         this.lcdialogVisible = true;
-        console.log(this.processInstanceId)
         this.get('/creauditInfo/getProcessTraceList?processInstanceId=' + this.processInstanceId + '&' + Math.random())
           .then(res => {
-            console.log(res);
             if (res.statusCode == '200') {
               this.lcgjData = res.data;
             } else {
@@ -1714,12 +1183,12 @@
         this.post(baseurl.BaseUrl + '/rmCreAuditOpinionAction!notSession_getBrRecord.action', {
           applyId: this.applyId
         }).then(res => {
-            this.$router.push({
-              name: 'PneCtrl',
-              params: {
-                newOne: true,
-              }
-            });
+          this.$router.push({
+            name: 'PneCtrl',
+            params: {
+              newOne: true,
+            }
+          });
         });
       },
       //社保/公积金
@@ -1749,10 +1218,6 @@
           });
         }
       },
-      //社保公积金 弹窗关闭
-      // socialSure() {
-      //   this.socialLogVisible = false;
-      // },
       del() {
         this.$store.dispatch('delVisitedViews', {
           name: '复议详情'
