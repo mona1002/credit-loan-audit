@@ -381,9 +381,12 @@
 
  /* 特殊表格宽度 */
 
- .Abody .el_table_500 .el-table {
+ /* .Abody .el_table_500 .el-table {
    height: 500px !important;
- }
+ } */
+ .Abody .el_table_100Percent .el-table {
+  height: 100% !important;
+}
 
  /* 操作按钮 */
 

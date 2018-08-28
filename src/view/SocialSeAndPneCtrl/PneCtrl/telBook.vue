@@ -1,6 +1,6 @@
 <template>
   <!-- 通讯录-->
-  <div class="SocialSecurity el_table_500">
+  <div class="SocialSecurity el_table_100Percent">
     <el-table :data="tableData" highlight-current-row border style="width: 100%">
       <el-table-column type="index" label="序号" width="55">
       </el-table-column>
@@ -29,8 +29,8 @@
     methods: {
       getInf() {
         this.post(baseurl.DataUrl + '/thirdrisk/ocrMessageAction!notSession_getTelBook.action', {
-          // applySubNo: this.applySubNo
-           applySubNo : '201506260111012193'
+          applySubNo: this.applySubNo
+          //  applySubNo : '201506260111012193'
         }).then(res => {
           if (res && res.success == true && res.obj) {
             this.tableData = res.obj;
@@ -44,3 +44,8 @@
   }
 
 </script>
+<style scoped>
+.SocialSecurity{
+  overflow: hidden;
+}
+</style>
