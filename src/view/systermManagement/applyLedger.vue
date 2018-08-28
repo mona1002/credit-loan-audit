@@ -378,7 +378,7 @@
             label: '网络'
           }, {
             value: '03',
-            label: '促销朋友'
+            label: '促销活动'
           }, {
             value: '04',
             label: '朋友介绍'
