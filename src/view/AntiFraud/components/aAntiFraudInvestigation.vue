@@ -241,7 +241,9 @@
           "oof": "", // 114
           "other": "", // 其他
           "auditCode": "", // 当前审核人编号
-          "auditName": "" // 当前审核人姓名
+          "auditName": "", // 当前审核人姓名
+          "userName": '', //操作人姓名
+          "userCode": '' //操作人code
         },
         dialogVisible: false,
         totals: {},
@@ -425,7 +427,9 @@
             "other": this.fraudAuditInfo.other, // 其他
             "auditCode": this.fraudAuditInfo.auditCode, // 当前审核人编号
             "auditName": this.fraudAuditInfo.auditName, // 当前审核人姓名
-            "id": this.fraudAuditInfo.id // 当前审核人姓名
+            "id": this.fraudAuditInfo.id, // 当前审核人姓名
+            "userName": this.fraudAuditInfo.userName, //操作人姓名
+            "userCode": this.fraudAuditInfo.userCode //操作人code
           },
           "fraudTelCheckList": this.fraudTelCheckList
         }).then(res => {

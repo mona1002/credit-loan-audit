@@ -13,13 +13,14 @@
           <complexPic v-if="ind==1" :applySubNo='localInf.applySubNo'>复杂网络图谱</complexPic>
           <OcrMessage v-if="ind==2" :applySubNo='localInf.applySubNo'>OCR信息</OcrMessage>
           <portrait v-if="ind==3" :applySubNo='localInf.applySubNo'>同盾设备画像</portrait>
-          <ZxReport v-if="ind==4" :applySubNo='localInf.applySubNo'>网查征信报告</ZxReport>
-          <carrierReport v-if="ind==5" :applySubNo='localInf.applySubNo'>运营商报告</carrierReport>
-          <debitCardReport v-if="ind==6" :applySubNo='localInf.applySubNo'>储蓄卡报告</debitCardReport>
-          <AccumulationFundReport v-if="ind==7" :applySubNo='localInf.applySubNo'>公积金报告</AccumulationFundReport>
-          <SocialSecurityReport v-if="ind==8" :applySubNo='localInf.applySubNo'>社保报告</SocialSecurityReport>
-          <BaiRongData v-if="ind==9" :applyId='localInf.applyId'>百融数据</BaiRongData>
-          <RiskDecision v-if="ind==10" :applyId='localInf.applyId'>同盾风险决策</RiskDecision>
+          <telBook v-if="ind==4" :applySubNo='localInf.applySubNo'>通讯录</telBook>
+          <ZxReport v-if="ind==5" :applySubNo='localInf.applySubNo'>网查征信报告</ZxReport>
+          <carrierReport v-if="ind==6" :applySubNo='localInf.applySubNo'>运营商报告</carrierReport>
+          <debitCardReport v-if="ind==7" :applySubNo='localInf.applySubNo'>储蓄卡报告</debitCardReport>
+          <AccumulationFundReport v-if="ind==8" :applySubNo='localInf.applySubNo'>公积金报告</AccumulationFundReport>
+          <SocialSecurityReport v-if="ind==9" :applySubNo='localInf.applySubNo'>社保报告</SocialSecurityReport>
+          <BaiRongData v-if="ind==10" :applyId='localInf.applyId'>百融数据</BaiRongData>
+          <RiskDecision v-if="ind==11" :applyId='localInf.applyId'>同盾风险决策</RiskDecision>
         </div>
       </div>
     </div>
@@ -30,6 +31,7 @@
   import RiskDecision from './PneCtrl/RiskDecision.vue'
   import SocialSecurityReport from './PneCtrl/SocialSecurityReport.vue'
   import AccumulationFundReport from './PneCtrl/AccumulationFundReport.vue'
+  import telBook from './PneCtrl/telBook.vue'
   import portrait from './PneCtrl/portrait.vue'
   import RiskPoint from './PneCtrl/RiskPoint.vue'
   import OcrMessage from './PneCtrl/OcrMessage.vue'
@@ -37,13 +39,13 @@
   import carrierReport from './PneCtrl/carrierReport.vue'
   import ZxReport from './PneCtrl/360ZxReport.vue'
   import debitCardReport from './PneCtrl/debitCardReport.vue'
-
-
   export default {
     data() {
       return {
         ind: 0,
-        titles: ['风控指引', '复杂网络图谱', 'OCR信息', '同盾设备画像', '网查征信报告', '运营商报告', '储蓄卡报告', '公积金报告', '社保报告', '百融数据', '同盾风险决策'],
+        titles: ['风控指引', '复杂网络图谱', 'OCR信息', '同盾设备画像', '通讯录', '网查征信报告', '运营商报告', '储蓄卡报告', '公积金报告', '社保报告', '百融数据',
+          '同盾风险决策'
+        ],
         localInf: {},
         obj: {
           applySubNo: ''
@@ -92,6 +94,7 @@
       RiskDecision,
       SocialSecurityReport,
       AccumulationFundReport,
+      telBook,
       portrait,
       RiskPoint,
       OcrMessage,

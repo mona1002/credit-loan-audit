@@ -8,7 +8,10 @@
           <span class="collapse_title_text">人脸信息</span>
         </template>
         <div class="padding_left_5">
-          <img id="image1" alt="人脸信息" src="" border="false" />
+          <!-- 图片标签 -->
+          <img id="image1" alt="人脸图片信息" src="" border="false" />
+          <!-- 视频媒体标签 -->
+          <video id="video1" alt="人脸视频信息" src="" width="25%" controls preload></video>
         </div>
       </el-collapse-item>
       <el-collapse-item name="2">
@@ -106,7 +109,26 @@
             this.baseinfo = data.auth;
             if (data.auth.id_front_url) $('#image2').attr('src', data.auth.id_front_url);
             if (data.auth.id_back_url) $('#image3').attr('src', data.auth.id_back_url);
-            if (data.auth.face_url) $('#image1').attr('src', data.auth.face_url);
+            // if (data.auth.face_url) $('#image1').attr('src', data.auth.face_url);
+          var ImgOrTv='';
+            if (data.auth.face_url) {
+              var face_url = data.auth.face_url; //获取face_url
+              var index = face_url.lastIndexOf("."); //根据"."获取face_url中最后一个"."的角标
+              ImgOrTv = face_url.substring(index + 1); //根据角标截断最后一个"."之后的，得到后缀
+            }
+            if (ImgOrTv == "mp4" || ImgOrTv == "Mp4" || ImgOrTv == "MP4" || ImgOrTv == "rmvb" || ImgOrTv == "avi" ||
+              ImgOrTv == "AVI" || ImgOrTv == "wmv" || ImgOrTv == "mkv" || ImgOrTv == "MOV" || ImgOrTv == "mov" ||
+              ImgOrTv == "rm") { //根据后缀，判断是否符合视频格式
+              $('#image1').hide();
+              if (data.auth.face_url) $('#video1').attr('src', data.auth.face_url);
+              //测试视频格式
+              // if(data.auth.face_url) $('#video1').attr('src','http://prefile.nuoyuan.com.cn/group1/M00/00/45/cjf4JFtZt4yAQE_5AD_4CTHqMxI875.mp4');
+              // if(data.auth.face_url) $('#video1').attr('src','http://prefile.nuoyuan.com.cn/group1/M00/00/54/cjf4JFtqUMqAYhK_AA9EQin5w8M193.MOV');
+              // $('#image1').hide();
+            } else { //按照图片格式处理
+              $('#video1').hide();
+              if (data.auth.face_url) $('#image1').attr('src', data.auth.face_url);
+            }
           }
 
         });
