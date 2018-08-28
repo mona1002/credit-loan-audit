@@ -192,7 +192,7 @@
         </el-table-column>
         <el-table-column prop="comBorrFlagTxt" label="是否共同借款" width="100">
         </el-table-column>
-        <el-table-column prop="comBorrFlagTxt" label="来源渠道" width="80">
+        <el-table-column prop="sourcesChanTxt" label="来源渠道" width="80">
         </el-table-column>
         <el-table-column prop="salPerCode" label="直销人员" width="100">
         </el-table-column>
@@ -200,7 +200,7 @@
         </el-table-column>
         <el-table-column prop="teamLeaderCode" label="团队经理" width="100">
         </el-table-column>
-        <el-table-column prop="teamLeaderCode" label="团队经理名称" width="100">
+        <el-table-column prop="teamLeaderName" label="团队经理名称" width="100">
         </el-table-column>
         <el-table-column prop="subOrgCode" label="进件团队" width="100">
         </el-table-column>
