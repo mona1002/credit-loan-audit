@@ -55,7 +55,7 @@
             </div>
             <li class="text_area_li triplet_textarea_width margin_top_5">
               <label class="label_width_166">理由：</label>
-              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="reason" disabled>
+              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="reason" readonly>
               </el-input>
             </li>
           </ul>
@@ -87,20 +87,20 @@
             <div class=" CreditForm_div_border clearFix">
               <li class="text_area_li triplet_textarea_width">
                 <label class="label_width_166">网查：</label>
-                <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.netCheck">
+                <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"  :readonly=' !showBtn' v-model="fraudAuditInfo.netCheck">
                 </el-input>
               </li>
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li class="text_area_li triplet_textarea_width margin_top_5">
                 <label class="label_width_166">114：</label>
-                <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.oof">
+                <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"  :readonly=' !showBtn' v-model="fraudAuditInfo.oof">
                 </el-input>
               </li>
             </div>
             <li class="text_area_li triplet_textarea_width margin_top_5">
               <label class="label_width_166">其他：</label>
-              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none" v-model="fraudAuditInfo.other">
+              <el-input class="text_area_li_3rows text_area_span_minus170" type="textarea" :rows="3" resize="none"  :readonly=' !showBtn' v-model="fraudAuditInfo.other">
               </el-input>
             </li>
           </ul>
@@ -110,7 +110,7 @@
         <template slot="title">
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">电核区</span>
-          <div class="title_icon">
+          <div class="title_icon" v-if="showBtn">
             <span @click.stop="add">
               <i class="title_icon_img addIcon"></i>
               <span class="title_icon_span">添加</span>
@@ -127,17 +127,17 @@
             </el-table-column>
             <el-table-column label="姓名" width="120">
               <template slot-scope="scope">
-                <el-input v-model="scope.row.name" placeholder="请输入姓名" :disabled="scope.row.isInitFlag=='0'"></el-input>
+                <el-input v-model="scope.row.name" placeholder="请输入姓名" :readonly="scope.row.isInitFlag=='0' || !showBtn"></el-input>
               </template>
             </el-table-column>
             <el-table-column prop="phoneNum" label="手机号码" width="180">
               <template slot-scope="scope">
-                <el-input v-model="scope.row.phoneNum" placeholder="请输入内容" @blur="regPhone(scope.row)" :disabled="scope.row.isInitFlag=='0'"></el-input>
+                <el-input v-model="scope.row.phoneNum" placeholder="请输入内容" @blur="regPhone(scope.row)" :readonly="scope.row.isInitFlag=='0'|| !showBtn"></el-input>
               </template>
             </el-table-column>
             <el-table-column prop="relation" label="关系" width="180">
               <template slot-scope="scope">
-                <el-select v-model="scope.row.relation" placeholder="请选择" :disabled="scope.row.isInitFlag=='0'">
+                <el-select v-model="scope.row.relation" placeholder="请选择" :readonly="scope.row.isInitFlag=='0' || !showBtn">
                   <el-option v-for="item in relations" :key="item.value" :label="item.label" :value="item.value">
                   </el-option>
                 </el-select>
@@ -145,14 +145,14 @@
             </el-table-column>
             <el-table-column prop="record" label="记录录入" min-width="150">
               <template slot-scope="scope">
-                <el-input v-model="scope.row.record" placeholder="请输入内容"></el-input>
+                <el-input v-model="scope.row.record" placeholder="请输入内容" :readonly=' !showBtn'></el-input>
               </template>
             </el-table-column>
           </el-table>
         </div>
       </el-collapse-item>
     </el-collapse>
-    <div class="button">
+    <div class="button" v-if="showBtn">
       <el-button type="primary" @click="bigSure">确认</el-button>
     </div>
     <!-- 弹框 -->
@@ -225,6 +225,8 @@
       return {
         // aa: '命中规则名称：',
         tableData: [],
+        showBtn: this.PropshowBtn,
+        ind: '',
         query: {
           id: '',
           matchApplyId: '',
@@ -337,6 +339,10 @@
         default: '',
         required: true,
         type: String
+      },
+      PropshowBtn: {
+        default: false,
+        type: Boolean
       }
     },
     mounted() {
@@ -347,6 +353,15 @@
     methods: {
       // 点击基本信息查询其他信息
       searchInf(row) {
+        if (this.PropshowBtn == true) {
+          this.ind = this.tableData.indexOf(row);
+          console.log(this.ind)
+          if (this.ind == '0') {
+            this.showBtn = true;
+          } else {
+            this.showBtn = false;
+          }
+        }
         this.appinfoId = row.id;
         this.request(this.appinfoId)
       },

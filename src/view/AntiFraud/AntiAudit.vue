@@ -47,7 +47,7 @@
             <aAprovalConclusion v-if=" this.tabContent2==8"></aAprovalConclusion>
             <aAntiConclusionPath v-if=" this.tabContent2==9"></aAntiConclusionPath>
             <AntiApplyInf v-if=" this.tabContent2==10" >反欺诈申请信息</AntiApplyInf>
-            <aAntiFraudInvestigation v-if=" this.tabContent2==11" :applyId='tastwaitingPass.applyId'>反欺诈调查</aAntiFraudInvestigation>
+            <aAntiFraudInvestigation v-if=" this.tabContent2==11" :applyId='tastwaitingPass.applyId' :PropshowBtn='Flag=="03"?true:false'>反欺诈调查</aAntiFraudInvestigation>
             <approvalConclus v-if=" this.tabContent2==12">审批结论</approvalConclus>
           </div>
         </div>
@@ -79,6 +79,7 @@
         SplitRight: "right",
         watchData: '',
         loading: false,
+        Flag:'',
         accepCusBasicInfo: '',
         // 进件人信息
         customInf: [], //申请信息页local字段
@@ -110,6 +111,8 @@
         this.loading = true;
         this.tastwaitingPass = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈
         // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
+        this.Flag=JSON.parse(localStorage.getItem("judge")).flag;
+        
         // if (this.judgeFlag.flag == '03') {
         //   this.tastwaitingPass = JSON.parse(localStorage.getItem("AntitaskInWaitting")); //反欺诈专员
         // } else if (this.judgeFlag.flag == '04') {
