@@ -188,7 +188,9 @@
           "oof": "", // 114
           "other": "", // 其他
           "auditCode": "", // 当前审核人编号
-          "auditName": "" // 当前审核人姓名
+          "auditName": "", // 当前审核人姓名
+          "userName": '', //操作人姓名
+          "userCode": '' //操作人code
         },
         dialogVisible: false,
         totals: {},

@@ -228,11 +228,13 @@
    color: #1f2d3d;
    vertical-align: middle;
  }
-.ExcelIcon{
-  font-size: 14px;
-  color: #1f2d3d;
-  vertical-align: middle;
-}
+
+ .ExcelIcon {
+   font-size: 14px;
+   color: #1f2d3d;
+   vertical-align: middle;
+ }
+
  /* 添加 */
 
  .addIcon {
@@ -376,6 +378,15 @@
  .Abody .height_auto .el-table {
    height: auto !important;
  }
+
+ /* 特殊表格宽度 */
+
+ /* .Abody .el_table_500 .el-table {
+   height: 500px !important;
+ } */
+ .Abody .el_table_100Percent .el-table {
+  height: 100% !important;
+}
 
  /* 操作按钮 */
 
@@ -964,8 +975,10 @@
  body .el-tree .el-tree-node .el-tree-node__children .el-tree-node__content {
    background: #fff;
  }
-/* 表格合计行 */
-body .has-gutter tr td {
-/* color:#ff7676; */
-color:red;
-}
+
+ /* 表格合计行 */
+
+ body .has-gutter tr td {
+   /* color:#ff7676; */
+   color: red;
+ }

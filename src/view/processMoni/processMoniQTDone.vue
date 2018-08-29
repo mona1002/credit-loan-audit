@@ -23,7 +23,8 @@
       <el-row class="row row2" type="flex">
         <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称：</span>
-          <el-autocomplete popper-class="my-autocomplete" v-model="product" :debounce='0' :fetch-suggestions="querySearch" placeholder="请输入内容" @select="handleSelect">
+          <el-autocomplete popper-class="my-autocomplete" v-model="product" :debounce='0' :fetch-suggestions="querySearch" placeholder="请输入内容"
+            @select="handleSelect">
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
             <template slot-scope="{ item }">
@@ -87,7 +88,7 @@
         </el-table-column>
         <el-table-column prop="taskNodeNameTxt" label="任务节点" width="120">
         </el-table-column>
-        <el-table-column prop="operatorCode" label="当前处理人员" width="140">
+        <el-table-column prop="operatorCode" label="当前处理人员" min-width="140">
         </el-table-column>
       </el-table>
       <!-- 页码 -->

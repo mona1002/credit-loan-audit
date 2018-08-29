@@ -1105,12 +1105,6 @@ body .el-table_450_scroll .el-table__fixed-right {
   border-bottom: 1px solid white;
 }
 
-/* 
-.PneCtrl .tabdefault,
-.SocialSe .tabdefault {
-  color: #bfcbd9;
-} */
-
 .PneCtrl .outside,
 .SocialSe .outside {
   margin: 9px;
@@ -1147,6 +1141,7 @@ body .el-table_450_scroll .el-table__fixed-right {
 .SocialSe .content {
   height: 100%;
   overflow: auto;
+  background: #fff;
 }
 
 .PneCtrl .tabdefault,

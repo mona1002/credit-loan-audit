@@ -65,12 +65,14 @@ import ACManagerTaskList from '../view/QualityTesting/QTReconsiderProcess/page/A
 // import ComplianceProcess from '../view/QualityTesting/QTReconsiderProcess/components/ComplianceProcess.vue' //质检复议-
 import MatchingInfQT from '../view/FirstTrail/MatchingInfQT.vue' //质检详情
 // import RantiFraudInvestigation from '../view/FirstTrail/ReadComponent/RantiFraudInvestigation.vue' //
+//--------------其他--------------
 import timedTask from '../view/systermManagement/timedTask.vue' //定时任务
 import DirectSeller from '../view/systermManagement/DirectSeller.vue' //直销人员查询
 import applyLedger from '../view/systermManagement/applyLedger.vue' //申请台账
 import appLedgerDetail from '../view/systermManagement/LedgerDetail/appLedgerDetail.vue' //申请台账-详情
 import borrowLedger from '../view/systermManagement/borrowLedger.vue' //借款台账
 import brrLedgerDetail from '../view/systermManagement/LedgerDetail/brrLedgerDetail.vue' //借款台账-详情
+import telBook from '../view/SocialSeAndPneCtrl/PneCtrl/telBook.vue' //通讯录
 
 Vue.use(Router)
 // 添加路由：添加到最后面，不要改变原路由顺序，会影响其他部分页面
@@ -354,6 +356,10 @@ const routes = [{
     component: brrLedgerDetail,
     name:'brrLedgerDetail'
   },
+  {
+    path: '/telBook',
+    component: telBook,
+  }
 ];
 
 const router = new Router({
