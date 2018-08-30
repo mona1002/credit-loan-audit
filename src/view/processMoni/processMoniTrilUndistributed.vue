@@ -226,10 +226,6 @@
             label: '信审总监审批'
           },
           {
-            value: 'creditApp_apply',
-            label: '申请登记'
-          },
-          {
             value: 'creditApp_antiFraud_app',
             label: '反欺诈申请'
           }
