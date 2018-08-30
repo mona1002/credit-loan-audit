@@ -33,7 +33,7 @@
           //  applySubNo : '201506260111012193'
         }).then(res => {
           if (res && res.success == true && res.obj) {
-            this.tableData = res.obj;
+            this.tableData = res.obj.contracts;
           }
         });
       },
