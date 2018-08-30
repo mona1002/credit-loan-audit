@@ -271,7 +271,8 @@
         queryParam: {
           pageNum: 1,
           pageSize: 10,
-          proId: ""
+          proId: "",
+          taskNodeFlag:'1'
         },
         custName_la: '',
         certCode: '',
