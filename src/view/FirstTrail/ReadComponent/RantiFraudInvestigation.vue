@@ -260,12 +260,12 @@
             };
             //命中规则
             if (res.data.hitRuleList == null) {
-              this.hitRuleList = this.hitRuleList;
+              this.hitRuleList = [];
             } else {
               this.hitRuleList = res.data.hitRuleList;
             };
             if (res.data.fraudAuditInfo == null) {
-              this.fraudAuditInfo = this.fraudAuditInfo;
+              this.fraudAuditInfo = '';
             } else {
               this.fraudAuditInfo = res.data.fraudAuditInfo;
             };
