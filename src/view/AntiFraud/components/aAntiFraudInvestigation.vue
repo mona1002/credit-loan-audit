@@ -408,7 +408,7 @@
             };
 
             if (res.data.fraudAuditInfo == null) {
-              this.fraudAuditInfo = '';
+              this.fraudAuditInfo = {};
             } else {
               this.fraudAuditInfo = res.data.fraudAuditInfo;
             };
