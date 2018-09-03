@@ -1,4 +1,4 @@
-<!-- 复议结论(专员05) -->
+<!-- 复议结论(经理06) -->
 <template>
   <div class="ReconsiderationConclusion">
     <el-collapse v-model="titleNames">
@@ -236,7 +236,7 @@
             </div>
           </el-collapse-item>
           <!-- 信审核实信息 -->
-          <el-collapse-item title="信审核实信息" name="2" class="alert_collapse">
+          <el-collapse-item title="信审核实信息" name='2' class="alert_collapse">
             <div class="dialog_form_auto">
               <el-form>
                 <el-form-item class="presentation_one_row" label="核实可接受最高每期还款额[元]：" label-width="220px">
@@ -424,6 +424,7 @@
             trigger: 'blur'
           }]
         },
+        creditDebitRate: null, //信用负债率
         //申请单ID
         id: '',
         //初始化的页面数据
@@ -447,9 +448,14 @@
         //拒绝子原因
         rsubReasonName: '',
         rchildReasons: [],
-        options: [{
+        options: [],
+        options1: [{ //复议专员用
           value: 'reconsiderApp_apply',
           label: '复议申请'
+        }],
+        options2: [{ //复议经理用
+          value: 'reconsiderApp_commissioner',
+          label: '复议专员审批'
         }],
         //经办时间
         dealroperDate: '',
@@ -460,6 +466,7 @@
         //经办人
         dealroperCode: '',
         activeNames: ['1', '2', '3'],
+        titleNames: ['1'],
         applyConclusion: '00',
         caculData: {}, // 审批结论数据
         applicationInformationDetail: '', // 申请详情传过来的数据
@@ -487,7 +494,6 @@
         setPageSize: 10,
         //流程轨迹
         activeNames2: ['1'],
-        titleNames: ['1'],
         lcgjData: [],
         processTemplateId: '',
         taskId: '', //任务id
@@ -508,10 +514,18 @@
         RtaskInWaitting: '',
       }
     },
+    props: {
+      type: {
+        default: '',
+        required: true,
+        type: String
+      }
+    },
     mounted() {
-      this.RtaskInWaitting = JSON.parse(localStorage.getItem('RtaskInWaitting'));
+      this.RtaskInWaitting = JSON.parse(localStorage.getItem('RtaskInWaitting'))
       //申请单ID
       this.id = JSON.parse(localStorage.getItem('RtaskInWaitting')).applyId;
+      this.request();
       this.applyId = this.RtaskInWaitting.applyId;
       this.appOrgId = this.RtaskInWaitting.appOrgId;
       // 客户编号
@@ -522,7 +536,6 @@
       this.appOrgCode = this.RtaskInWaitting.appOrgCode;
       this.applyCustId = this.RtaskInWaitting.applyCustId;
       this.certType = this.RtaskInWaitting.certType;
-      this.request();
       //经办人
       this.dealroperCode = JSON.parse(localStorage.getItem('userInf')).userCode;
       this.applicationInformationDetail = JSON.parse(localStorage.getItem('applicationInformationDetail'));
@@ -535,8 +548,14 @@
       // //产品id
       // this.sproId = this.applicationInformationDetail.proId;
       //流程模版ID
-      this.processTemplateId = JSON.parse(localStorage.getItem('ReWorkbenchPass')).processTemplateId;
-      //流程实例ID
+      if (this.type == 'commissioner') { //复议专员
+        this.options = this.options1;
+        this.processTemplateId = JSON.parse(localStorage.getItem('ReWorkbenchPass')).processTemplateId; //专员
+      } else { //复议经理
+        this.options = this.options2;
+        this.processTemplateId = JSON.parse(localStorage.getItem('ReManagerWorkbenchPass')).processTemplateId; //主管
+      }
+      //流程实例id
       this.processInstanceId = JSON.parse(localStorage.getItem('RtaskInWaitting')).processInstanceId;
       //任务id
       this.taskId = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
@@ -645,7 +664,69 @@
         this.post("/credit/product").then(res => {
           if (res.statusCode == 200) {
             this.products = res.data;
-          }
+            //请求复议专员带过来的审批信息
+            this.post('/creauditOpinion/queryCreauditOpinionObj', {
+              applyId: this.applyId
+            }).then(res => {
+              if (res.statusCode == 200) {
+                //批准期限[月]
+                if (res.data.ploanTerm) {
+                  this.ploanTerm = res.data.ploanTerm;
+                } else {
+                  this.ploanTerm = this.ploanTerm;
+                };
+                // 批准产品
+                if (res.data.proId) {
+                  this.proId = res.data.proId;
+                  for (var i = 0; i < this.products.length; i++) {
+                    if (res.data.proId == this.products[i].id) {
+                      this.proName = this.products[i].proName;
+                      this.maxAmounnt = this.products[i].maxAmounnt;
+                      this.minAmount = this.products[i].minAmount;
+                    }
+                  };
+                  //批准期限[月]的列表
+                  this.post('/credit/ploanTermByPro?proId=' + res.data.proId).then(res => {
+                    if (res.statusCode == '200')
+                      this.ploanTerms = res.data;
+                  });
+                } else {
+                  this.proName = this.proName;
+                };
+                // 核实收入
+                if (res.data.verIncome) {
+                  this.verIncome = this.formatNumber(res.data.verIncome, 2, 0);
+                } else {
+                  this.verIncome = this.verIncome;
+                };
+                // 批准金额
+                if (res.data.ploanAmt) {
+                  this.ploanAmt = this.formatNumber(res.data.ploanAmt, 2, 0);
+                } else {
+                  this.ploanAmt = this.ploanAmt;
+                };
+                //审批结论数据
+                //审批倍数
+                if (res.data.appmult) {
+                  this.caculData.appmult = this.formatNumber(res.data.appmult, 2, 0);
+                };
+                //内部负债率
+                if (res.data.inteDebitrate) {
+                  this.caculData.inteDebitrate = (res.data.inteDebitrate * 100).toFixed(2) + "%";
+                };
+                //总负债率
+                if (res.data.totalRate) {
+                  this.caculData.totalRate = (res.data.totalRate * 100).toFixed(2) + "%";
+                };
+                //月还款额
+                if (res.data.eachTermamt) {
+                  this.caculData.eachTermamt = this.formatNumber(res.data.eachTermamt, 2, 0);
+                };
+                //意见说明
+                this.appConclusion = res.data.appConclusion;
+              }
+            })
+          };
         });
       },
       //审批提交按钮
@@ -719,12 +800,12 @@
           applyCustId: this.applyCustId, //申请客户ID（申请登记-个人信息）
           applyConclusion: this.applyConclusion, //申请结论（00-通过）
           ploanOperId: '', // 批准人员
-          creditDebitRate: (this.caculData.creditDebitRate == 0 || this.caculData.creditDebitRate == '') ? 0 : this
-            .caculData.creditDebitRate.replace("%", "") / 100, // 信用负债率
+          creditDebitRate: (this.caculData.creditDebitRate == 0 || this.caculData.creditDebitRate == '' || !this.caculData
+            .creditDebitRate) ? 0 : this.caculData.creditDebitRate.replace("%", "") / 100, // 信用负债率
           approvalFlag: '0', // 终审通过标志  0 未
           ploanDate: '', // 批准日期
           auditDate: '', // 批准时间
-          auditFlag: '0', // 终审结束标识 0 初审 1终审 , 只有 终审 点审批的时候 才变为1 , 同 approvalFlag 字段
+          auditFlag: this.type == 'commissioner' ? '0' : '1', // 终审结束标识 0 初审 1终审 , 只有 终审 点审批的时候 才变为1 , 同 approvalFlag 字段
           proId: this.proId, //产品id
           taskId: this.taskId, // 任务id
           opinionFlag: '00', // 任务类型  初审 00 
@@ -743,7 +824,11 @@
               message: res.msg,
               type: 'success'
             })
-            this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_commissioner');
+            if (this.type == 'commissioner') {
+              this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_commissioner&flag=05');
+            } else {
+              this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_manager&flag=06');
+            }
             this.del();
           };
         })
@@ -755,11 +840,10 @@
           case 'verIncome':
             if (!this.verIncome) {
               this.verIncome = this.formatNumber('0', 2, 0);
-              console.log(this.verIncome);
             } else if (this.verIncome) {
               this.verIncome = this.formatNumber(this.verIncome, 2, 0);
               if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length >
-                0) {
+                0 && this.repayWay && this.synthesisRateM && this.loanRateYr) {
                 this.calculateByAuditInfo();
               };
             }
@@ -768,10 +852,10 @@
             if (!this.ploanAmt) {
               this.ploanAmt = this.formatNumber('0', 2, 0);
             } else if (this.ploanAmt) {
-              console.log(this.ploanAmt * 1);
-              console.log(typeof (this.ploanAmt * 1));
-              console.log("$$$$$" + this.maxAmounnt);
-              console.log(typeof (this.maxAmounnt));
+              //console.log(this.ploanAmt*1);
+              //console.log(typeof(this.ploanAmt*1));
+              //console.log("$$$$$"+this.maxAmounnt);
+              //console.log(typeof(this.maxAmounnt));
               // 大于最大
               if (this.ploanAmt * 1 > this.maxAmounnt) {
                 this.$message({
@@ -801,7 +885,7 @@
               };
               this.ploanAmt = this.formatNumber(this.ploanAmt, 2, 0);
               if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length >
-                0) {
+                0 && this.repayWay && this.synthesisRateM && this.loanRateYr) {
                 this.calculateByAuditInfo();
               };
             }
@@ -810,13 +894,20 @@
 
         // return Number(val).toLocaleString() + '.00';
         // 检测 数据 并 请求计算接口
-        console.log("计算审批结论数据计算审批结论数据计算审批结论数据计算审批结论数据")
+        //console.log("计算审批结论数据计算审批结论数据计算审批结论数据计算审批结论数据")
         //console.log(this.proId, this.ploanTerm, this.ploanAmt, this.verIncome, this.eachTermamt);
         //console.log(this.proId.length, this.ploanTerm.length, this.ploanAmt.length, this.verIncome.length, this.eachTermamt.length);
       },
       //根据产品 请求 月份数
       proSlelecChange(val) {
-        console.log(val);
+        //批准金额、批准期限清空
+        this.ploanAmt = '';
+        this.ploanTerm = '';
+        //审批倍数、月还款额、内部负债率、总负债率 清空
+        this.caculData.appmult = '';
+        this.caculData.inteDebitrate = '';
+        this.caculData.totalRate = '';
+        this.caculData.eachTermamt = '';
         this.proId = val;
         for (var i = 0; i < this.products.length; i++) {
           if (this.products[i].id == val) {
@@ -890,16 +981,16 @@
               proName: this.datas.proName, // 产品名称
               proCode: this.proCode, //  产品代码
               proId: this.sproId, // 产品id     //"d7fa0628-791d-4cc5-b854-aa8bef9340a6"
-              opinionFlag: '01', // 标志任务类型(复议专员 拒绝)
-              mainReasonName: this.$refs.rmainReasonName.selectedLabel, // 回退主原因
-              subReasonName: this.$refs.rsubReasonName.selectedLabel, // 回退子原因
+              opinionFlag: '01', // 标志任务类型(复议 拒绝)
+              mainReasonName: this.$refs.rmainReasonName.selectedLabel, // 拒绝/回退主原因
+              subReasonName: this.$refs.rsubReasonName.selectedLabel, // 拒绝/回退次原因
               reasonRemark: this.FormReject.rreasonRemark, // 意见描述/原因说明
               appOrgId: this.appOrgId, // 进件机构id
               applyId: this.applyId, // 申请单id
               rollbackNodeName: '', // 回退节点名称(没有回退节点) 
               dealroperDate: this.jdealroperDate, // 经办时间
-              creauditAppOperate: '01', // 复议专员 拒绝
-              busiState: '22', //复议拒
+              creauditAppOperate: '01', // 复议 拒绝creauditAppOperate: 'check_Refuse'
+              busiState: '22', //复议审批中（回退）
               dealroperCode: this.dealroperCode, //经办人
               applySubNo: this.datas.applySubNo, //复议申请单ID
             }).then(res => {
@@ -934,7 +1025,7 @@
                   message: res.msg,
                   type: 'success'
                 })
-                this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_commissioner');
+                this.$router.push('/reconsiderList');
                 this.del();
               }
             });
@@ -961,18 +1052,18 @@
               proName: this.datas.proName, // 产品名称
               proCode: this.proCode, //  产品代码
               proId: this.sproId, // 产品id     //"d7fa0628-791d-4cc5-b854-aa8bef9340a6"
-              opinionFlag: '02', // 标志任务类型(复议专员 回退)
+              opinionFlag: '02', // 标志任务类型(复议经理 回退)
               mainReasonName: this.$refs.mainReasonName.selectedLabel, // 回退主原因
               subReasonName: this.$refs.subReasonName.selectedLabel, // 回退子原因
-              reasonRemark: this.FormReturn.reasonRemark, // 意见描述/原因说明
+              reasonRemark: this.reasonRemark, // 意见描述/原因说明
               appOrgId: this.appOrgId, // 进件机构id
               applyId: this.applyId, // 申请单id
-              rollbackNodeName: 'reconsiderApp_apply', // 回退节点名称 
+              rollbackNodeName: this.type == 'commissioner' ? 'reconsiderApp_apply' : 'reconsiderApp_commissioner', // 回退节点名称
               dealroperDate: this.dealroperDate, // 经办时间
-              creauditAppOperate: '02', // 复议专员 回退
-              busiState: '20',
-              dealroperCode: this.dealroperCode, //经办人*//复议审批中（回退）
-              applySubNo: this.datas.applySubNo, //复议申请单ID
+              creauditAppOperate: '02', //check_Back
+              busiState: '20', //复议审批中（回退） // 复议经理 回退
+              applySubNo: this.datas.applySubNo, //复议申请单ID    
+              dealroperCode: this.dealroperCode, //经办人
             }).then(res => {
               this.dialogVisible = false;
               if (res.statusCode != '200') {
@@ -981,7 +1072,9 @@
                   type: 'warning'
                 })
                 return;
-              } else if (res.statusCode == '200') {
+              }
+              if (res.statusCode == '200') {
+                // this.taskId = '';
                 this.datas.custName = ''; // 客户名称
                 this.custNo = ''; // 客户code
                 this.datas.certTypeTxt = ''; // 证件类型
@@ -993,7 +1086,8 @@
                 this.opinionFlag = ''; // 标志任务类型
                 this.mainReason = ''; // 回退主原因
                 this.secondaryReason = ''; // 回退子原因
-                this.FormReturn.reasonRemark = ''; // 意见描述/原因说明
+                this.reasonRemark = ''; // 意见描述/原因说明
+                //  this.FormReturn.reasonRemark = ''; // 意见描述/原因说明z
                 this.appOrgId = ''; // 进件机构id
                 this.rollbackNodeName = ''; // 回退节点名称
                 this.dealroperDate = ''; // 经办时间
@@ -1003,7 +1097,7 @@
                   message: res.msg,
                   type: 'success'
                 })
-                this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_commissioner&flag=05');
+                this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_manager&flag=06');
                 this.del();
               }
             });
@@ -1013,7 +1107,6 @@
             return false;
           }
         });
-        return
       },
       //回退节点
       backNode() {
@@ -1165,7 +1258,8 @@
         console.log('批准期限');
         //console.log(this.verIncome+'###'+this.proId.length+'###'+this.ploanTerm+"###"+this.ploanAmt);
         // 计算 审批记录数据
-        if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0) {
+        if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 &&
+          this.repayWay && this.synthesisRateM && this.loanRateYr) {
           this.calculateByAuditInfo();
         }
       },
@@ -1173,8 +1267,10 @@
       proId: function () {
         console.log('产品id');
         console.log(this.proId.length);
+        console.log(this.verIncome + '###' + this.proId.length + '###' + this.ploanTerm + "###" + this.ploanAmt);
+        //月核实收入+产品id+批准期限+批准金额[元]
         if (this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.verIncome.length > 0 &&
-          this.eachTermamt.length > 0)
+          this.repayWay && this.synthesisRateM && this.loanRateYr)
           this.calculateByAuditInfo();
       },
     }
@@ -1248,7 +1344,7 @@
     height: 30px;
   }
 
-  .huituiBody .bodyP {
+  .bodyP {
     margin-bottom: 15px;
     height: 35px;
   }

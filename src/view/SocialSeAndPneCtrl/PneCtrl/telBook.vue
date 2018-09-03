@@ -1,6 +1,7 @@
 <template>
   <!-- 通讯录-->
   <div class="SocialSecurity el_table_100Percent">
+    <div class="source" v-if="type"> 客户提交授信来源：{{type}}</div>
     <el-table :data="tableData" highlight-current-row border style="width: 100%">
       <el-table-column type="index" label="序号" width="55">
       </el-table-column>
@@ -16,7 +17,8 @@
   export default {
     data() {
       return {
-        tableData: []
+        tableData: [],
+        type: ''
       }
     },
     props: {
@@ -34,6 +36,12 @@
         }).then(res => {
           if (res && res.success == true && res.obj) {
             this.tableData = res.obj.contracts;
+            this.type = '';
+            if (res.obj.td_clientType) {
+              if (res.obj.td_clientType == '2') this.type = '苹果';
+              else if (res.obj.td_clientType == '1') this.type = '安卓';
+              else this.type = 'web';
+            }
           }
         });
       },
@@ -45,7 +53,17 @@
 
 </script>
 <style scoped>
-.SocialSecurity{
-  overflow: hidden;
-}
+  .SocialSecurity {
+    overflow: hidden;
+  }
+
+  .source {
+    font-weight: 800;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    padding-left: 10px;
+    color: #777;
+  }
+
 </style>

@@ -30,8 +30,8 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称：</span>
-          <el-autocomplete popper-class="my-autocomplete" v-model="proCode" :debounce='0' :fetch-suggestions="ProQuerySearch" placeholder="请输入内容"
-            @select="ProhandleSelect">
+          <el-autocomplete popper-class="my-autocomplete" v-model="proCode" :debounce='0' :fetch-suggestions="ProQuerySearch"
+            placeholder="请输入内容" @select="ProhandleSelect">
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
             <template slot-scope="{ item }">
@@ -90,8 +90,8 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">进件机构：</span>
-          <el-autocomplete popper-class="my-autocomplete" v-model="agencyCode" :debounce='0' :fetch-suggestions="querySearch" placeholder="请输入内容"
-            @select="handleSelect">
+          <el-autocomplete popper-class="my-autocomplete" v-model="agencyCode" :debounce='0' :fetch-suggestions="querySearch"
+            placeholder="请输入内容" @select="handleSelect">
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
             <template slot-scope="{ item }">
@@ -120,9 +120,12 @@
           <span class="keywordText">进件客服： </span>
           <el-input v-model.trim="params.appSerPerCode" placeholder="请输入进件客服"></el-input>
         </el-col>
-        <el-col :span="6" class="search-item" :offset="0">
+        <el-col :span="6" class="search-item date_picker">
+          <span class="keywordText">授信日期： </span>
+          <el-date-picker v-model="creditTime" type="daterange" range-separator="至" value-format="yyyy-MM-dd">
+          </el-date-picker>
         </el-col>
-        <el-col :span="6" class="search-item" :offset="0">
+        <el-col :span="6" class="search-item">
         </el-col>
         <el-col :span="6" class="search-btn">
           <el-button class="btn query" type="primary" @click="Rsearch">查询</el-button>
@@ -154,7 +157,9 @@
         </el-table-column>
         <el-table-column prop="applyMainNo" label="进件编号" fixed width="185">
         </el-table-column>
-        <el-table-column prop="appDate" label="申请日期" fixed sortable width="150">
+        <el-table-column prop="creditTime" label="授信日期" fixed width="100">
+        </el-table-column>
+        <el-table-column prop="appDate" label="申请日期" fixed sortable width="100">
         </el-table-column>
         <el-table-column prop="custName" label="客户名称" fixed width="80">
         </el-table-column>
@@ -218,8 +223,9 @@
         </el-table-column>
       </el-table>
       <div class="page">
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 20,50]" :current-page.sync="currentPage"
-          :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 20,50]"
+          :current-page.sync="currentPage" :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper"
+          :total="this.totalRecord">
         </el-pagination>
       </div>
     </div>
@@ -270,6 +276,7 @@
         agencyCode: '',
         selectedAgenName: "",
         applyData: [this._getDate(-6), this._getDate()],
+        creditTime: '', //授信日期
         currentPage: 1, //分页选中页
         pageCount: 10, // 每页显示条数
         totalRecord: 0, //总条数
@@ -504,7 +511,7 @@
       }
     },
     watch: {
-      '$route' (to, from) {
+      '$route'(to, from) {
         if (to.path == '/applyLedger') {
           if (!this.Routes[3].closed) {
             this.currentRow = {};
@@ -512,6 +519,7 @@
             this.params.rows = this.pageCount = 10;
             this.Rreset();
             this.applyData = [this._getDate(-6), this._getDate()];
+            this.creditTime = '';
             this.params.appDate_ge = this._getDate(-6);
             this.params.appDate_le = this._getDate();
             // this.tableData = [];
@@ -536,6 +544,11 @@
         if (this.applyData.length > 0) {
           this.params.appDate_ge = this.applyData[0];
           this.params.appDate_le = this.applyData[1];
+        }
+        // 授信日期
+        if (this.creditTime.length > 0) {
+          this.params.creditTime_ge = this.creditTime[0];
+          this.params.creditTime_le = this.creditTime[1];
         }
         // 删除多余入参
         let obj = Object.assign({}, this.params);
@@ -637,6 +650,9 @@
         this.params.sourcesChan = ''; //	来源渠道
         this.params.appDate_ge = ''; //	高级查询 起始时间
         this.params.appDate_le = ''; //	高级查询 终止时间
+        this.params.creditTime_ge = ''; //	授信日期 起始时间
+        this.params.creditTime_le = ''; //	授信日期 终止时间
+        creditTime
         this.params.mobile = ''; //	手机号码
         this.params.borrType = ''; //	借款人类型
         this.params.loanTerm = ''; //	借款期限
@@ -645,6 +661,8 @@
         this.totalRecord = 0;
         // this.params.rows	='';//	每页条数
         this.applyData = ''; //申请日期
+        this.creditTime = ''; //授信日期
+
         this.agencyCode = ''; //进件机构
         this.selectedAgenName = '';
         this.proCode = ''; //产品名称
@@ -656,6 +674,10 @@
         if (this.applyData.length > 0) {
           this.params.appDate_ge = this.applyData[0];
           this.params.appDate_le = this.applyData[1];
+        }
+        if (this.creditTime.length > 0) {
+          this.params.creditTime_ge = this.creditTime[0];
+          this.params.creditTime_le = this.creditTime[1];
         }
         this.params.page = this.currentPage = 1;
         this.getInf(this.params);
