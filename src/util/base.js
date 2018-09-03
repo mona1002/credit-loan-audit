@@ -7,7 +7,7 @@ exports.install = function (Vue, options) {
     time.setDate(new Date(b).getDate() + a);
     let year = time.getFullYear(),
       month = (time.getMonth() + 1 + '').length == 1 ? '0' + (time.getMonth() + 1) : time.getMonth() + 1,
-      day = time.getDate();
+      day = (time.getDate() + '').length==1?'0' +time.getDate():time.getDate();
     return year + '-' + month + '-' + day;
   };
 }
