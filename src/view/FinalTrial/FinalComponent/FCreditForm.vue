@@ -683,7 +683,7 @@
           },
           result: false,
         },
-        getParams: [], //获取taskwaitting里面的 查询入参 applyId
+        // getParams: [], //获取taskwaitting里面的 查询入参 applyId
         // Confirm: false,
         reg: {
           payDay: false,
@@ -914,7 +914,7 @@
         }).then(res => {
           if (res.statusCode == 200) {
             this.FormData = res.data;
-            this.FormData.applyId = this.getParams.applyId;
+            // this.FormData.applyId = this.getParams.applyId;
             this.AreaNPercent();
             this.formatSC();
             this.FormData.aaddress ? this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, '') : this.FormData
@@ -1019,7 +1019,7 @@
       },
     },
     mounted() {
-      this.getParams = JSON.parse(localStorage.getItem("FtaskInWaitting")); // 终审工作台
+      // this.getParams = JSON.parse(localStorage.getItem("FtaskInWaitting")); // 终审工作台
       // // 获取查询列表数据
       this.mountC();
     },

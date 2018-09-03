@@ -40,7 +40,7 @@
             <RapplicationInformationDetail v-if=" this.tabContent1==3">申请信息</RapplicationInformationDetail>
             <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail>
             <!-- <PhoneCredit v-if=" this.tabContent1==5"> 电话征信</PhoneCredit> -->
-            <RPhoneCredit v-if=" this.tabContent1==5"> 电话征信</RPhoneCredit>
+            <RPhoneCredit v-if=" this.tabContent1==5" :applyId='tastwaitingPass.matchApplyId' > 电话征信</RPhoneCredit>
             <FCreditForm v-if=" this.tabContent1==6" :applyId='tastwaitingPass.matchApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
             <creditInvestigation v-if=" this.tabContent1==7"  :applyId='tastwaitingPass.matchApplyId'>实地征信</creditInvestigation>
             <aMAntiApplyInf v-if=" this.tabContent1==8" :applyId='tastwaitingPass.matchApplyId'>反欺诈结论</aMAntiApplyInf>
@@ -82,7 +82,7 @@
           <RapplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
           <RborrowerInformationSetail v-if=" this.tabContent2==4" :isFull.sync="isFull">借款人资料</RborrowerInformationSetail>
           <!-- <PhoneCredit v-if=" this.tabContent2==5"> 电话征信</PhoneCredit>     -->
-          <RPhoneCredit v-if=" this.tabContent2==5"> 电话征信</RPhoneCredit>
+          <RPhoneCredit v-if=" this.tabContent2==5" :applyId='tastwaitingPass.matchApplyId' > 电话征信</RPhoneCredit>
           <FCreditForm v-if=" this.tabContent2==6" :applyId='tastwaitingPass.matchApplyId' :FinalConCheckShow='true'>信审表</FCreditForm>
           <creditInvestigation v-if=" this.tabContent2==7"  :applyId='tastwaitingPass.matchApplyId'>实地征信</creditInvestigation>
           <aMAntiApplyInf v-if=" this.tabContent2==8" :applyId='tastwaitingPass.matchApplyId'>反欺诈结论</aMAntiApplyInf>

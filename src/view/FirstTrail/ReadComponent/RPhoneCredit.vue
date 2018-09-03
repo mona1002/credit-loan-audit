@@ -42,8 +42,8 @@
               <el-tooltip effect="dark" placement="right-end">
                 <div slot="content">
                   {{item.children[0].label}}
-                  <br/>
-                  <br/> {{item.children[0].relation}}
+                  <br />
+                  <br /> {{item.children[0].relation}}
                 </div>
                 <div class="item-title" @click="handleNodeClick(item)">
                   {{item.label}}
@@ -56,8 +56,8 @@
               <el-tooltip effect="dark" placement="right-end">
                 <div slot="content">
                   {{item.children[0].label}}
-                  <br/>
-                  <br/> {{item.children[0].relation}}
+                  <br />
+                  <br /> {{item.children[0].relation}}
                 </div>
                 <div class="item-title" @click="handleNodeClick(item)">
                   {{item.label}}
@@ -70,8 +70,8 @@
               <el-tooltip effect="dark" placement="right-end">
                 <div slot="content">
                   {{item.children[0].label}}
-                  <br/>
-                  <br/> {{item.children[0].relation}}
+                  <br />
+                  <br /> {{item.children[0].relation}}
                 </div>
                 <div class="item-title" @click="handleNodeClick(item)">
                   {{item.label}}
@@ -87,7 +87,6 @@
       <!-- 右侧 表单内容 -->
       <el-container>
         <el-main style="overflow-y: auto;overflow-x:hidden;font-size:14px;">
-          <!-- 默认的背景 -->
           <div class="form-his" v-show="!hisListShow" style="background:url(.../../../static/images/3C281C6A-532B-4A55-A9BF-F142E9F09063@1x.png) center no-repeat;">
           </div>
           <div v-if="hisListShow" class="header-class">
@@ -100,7 +99,8 @@
                 <!-- 历史记录 -->
                 <div>
                   <div class="height_auto">
-                    <el-table :data="listData.recordList" height="250" border style="" @row-dblclick="rowDbClick" v-loading="mobileLoading" highlight-current-row>
+                    <el-table :data="listData.recordList" height="250" border style="" @row-dblclick="rowDbClick"
+                      v-loading="mobileLoading" highlight-current-row>
                       <el-table-column type="index" label="序号" min-width="60">
                       </el-table-column>
                       <el-table-column prop="phoneTypeDes" label="电话类型" min-width="100">
@@ -122,9 +122,9 @@
 
                   <!-- 分页 -->
                   <div class="page_top_bottom_10">
-                    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[10, 20,50]"
-                      :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="listData.totalRecord"
-                      v-show="listData.totalRecord>0">
+                    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum"
+                      :page-sizes="[10, 20,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper"
+                      :total="listData.totalRecord" v-show="listData.totalRecord>0">
                     </el-pagination>
                   </div>
 
@@ -137,30 +137,40 @@
           <div class="form-class" style="width:100%;height:auto;">
             <!-- 默认的新增表单 -->
             <!-- 住址电话 - 表单 -->
-            <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId"
-              :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull"></AddressForm>
+            <AddressForm class="form-his" v-if="formShow && phoneType =='01'" :custName="custName" :phoneNum="phoneNum"
+              :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
+              :isFull.sync="isFull"></AddressForm>
             <!-- 住址电话 - 历史 -->
-            <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :mobileData="newList?newList:mobileData" :isFull.sync="isFull"></AddressHis>
+            <AddressHis class="form-his" v-if="hisShow && phoneType == '01'" :mobileData="newList?newList:mobileData"
+              :isFull.sync="isFull"></AddressHis>
             <!-- 单位电话 - 表单 -->
-            <CompanyForm class="form-his" v-if="formShow && phoneType=='02'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId"
-              :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull"></CompanyForm>
+            <CompanyForm class="form-his" v-if="formShow && phoneType=='02'" :custName="custName" :phoneNum="phoneNum"
+              :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
+              :isFull.sync="isFull"></CompanyForm>
             <!-- 单位电话 - 历史 -->
-            <CompanyHis class="form-his" v-if="hisShow && phoneType=='02'" :comData="newList?newList:comData" :isFull.sync="isFull"></CompanyHis>
+            <CompanyHis class="form-his" v-if="hisShow && phoneType=='02'" :comData="newList?newList:comData"
+              :isFull.sync="isFull"></CompanyHis>
             <!-- 家庭联系人 - 表单 -->
-            <FamilyForm class="form-his" v-if="formShow && phoneType=='03'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId"
-              :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull"></FamilyForm>
+            <FamilyForm class="form-his" v-if="formShow && phoneType=='03'" :custName="custName" :phoneNum="phoneNum"
+              :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
+              :isFull.sync="isFull"></FamilyForm>
             <!-- 家庭联系人 - 历史 -->
-            <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :familyData="newList?newList:familyData" :isFull.sync="isFull"></FamilyHis>
+            <FamilyHis class="form-his" v-if="hisShow && phoneType=='03'" :familyData="newList?newList:familyData"
+              :isFull.sync="isFull"></FamilyHis>
             <!-- 紧急联系人 - 表单 -->
-            <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId"
-              :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull"></HurryForm>
+            <HurryForm class="form-his" v-if="formShow && phoneType=='04'" :custName="custName" :phoneNum="phoneNum"
+              :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
+              :isFull.sync="isFull"></HurryForm>
             <!-- 紧急联系人 - 历史 -->
-            <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :hurryData="newList?newList:hurryData" :isFull.sync="isFull"></HurryHis>
+            <HurryHis class="form-his" v-if="hisShow && phoneType=='04'" :hurryData="newList?newList:hurryData"
+              :isFull.sync="isFull"></HurryHis>
             <!-- 工作证明人 - 表单 -->
-            <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum" :applyId="applyId"
-              :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData" :isFull.sync="isFull"></WorkForm>
+            <WorkForm class="form-his" v-if="formShow && phoneType=='05'" :custName="custName" :phoneNum="phoneNum"
+              :applyId="applyId" :formId.sync="formId" @updateList="queryTelLogByPage" @updateTree="fetchData"
+              :isFull.sync="isFull"></WorkForm>
             <!-- 工作证明人 - 历史 -->
-            <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="newList?newList:workData" :isFull.sync="isFull"></WorkHis>
+            <WorkHis class="form-his" v-if="hisShow && phoneType=='05'" :workData="newList?newList:workData"
+              :isFull.sync="isFull"></WorkHis>
             <!-- 子组件 -->
             <!-- <router-link to="/AddressForm/formTag='testtag'/id='123'/phoneType='01'">
             <el-button type="primary">住址电话</el-button>
@@ -409,7 +419,7 @@
         addTelNum: '',
 
         //  历史列表相关
-        applyId: '', // 申请单id
+        // applyId: '', // 申请单id
         phoneNum: '', // 电话号码
         phoneType: '', // 电话类型
         id: '', // 历史入参 
@@ -477,22 +487,32 @@
         taskInWaitting: ''
       }
     },
-    props: ['isFull', 'SplitS'],
+    // props: ['applyId','isFull', 'SplitS'],
+    props: {
+    applyId:{
+      required:true,
+      default:'',
+      type:String
+    },
+    isFull:{},
+    SplitS:{}
+    },
     mounted() {
       // 组件 创建 估计完成后获取数据
       // 此时 data 已经被 observed 了
       // 测试数据
       // 调用历史数据
-      this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) //初审-匹配查看
-      if (this.MatchFlag.MatchFlag == 'internal') {
-        //  var  taskInWaitting = JSON.parse(localStorage.getItem('internalObj'));
-        this.taskInWaitting = JSON.parse(localStorage.getItem('internalObj'));
+      // this.MatchFlag = JSON.parse(localStorage.getItem("MatchFlag")) //初审-匹配查看
+      // console.log( this.MatchFlag)
+      // if (this.MatchFlag.MatchFlag == 'internal') {
+      //   //  var  taskInWaitting = JSON.parse(localStorage.getItem('internalObj'));
+      //   this.taskInWaitting = JSON.parse(localStorage.getItem('internalObj'));
 
-      } else if (this.MatchFlag.MatchFlag == 'Query') {
-        //  var taskInWaitting = JSON.parse(localStorage.getItem("Query")) //综合查询
-        this.taskInWaitting = JSON.parse(localStorage.getItem("Query")) //综合查询
-      }
-      this.applyId = this.taskInWaitting.matchApplyId;
+      // } else if (this.MatchFlag.MatchFlag == 'Query') {
+      //   //  var taskInWaitting = JSON.parse(localStorage.getItem("Query")) //综合查询
+      //   this.taskInWaitting = JSON.parse(localStorage.getItem("Query")) //综合查询
+      // }
+      // this.applyId = this.taskInWaitting.matchApplyId;
       this.applySubNo = this.taskInWaitting.applySubNo;
       // 电话树数据
       this.fetchData();
@@ -961,7 +981,7 @@
     position: relative;
     width: 338px;
     border-radius: 4px;
-    top: calc( 50% - 100px);
+    top: calc(50% - 100px);
     padding: 5px;
   }
 
@@ -1204,14 +1224,14 @@
     width: 50%;
     min-width: 450px;
     float: left;
-  margin-top: 13px;
+    margin-top: 13px;
     margin-top: 13px;
   }
 
   .phone-credit .item-column1 {
     width: 100%;
     float: left;
-  margin-top: 13px;
+    margin-top: 13px;
   }
 
   /* 表单提交 */
@@ -1552,7 +1572,7 @@
   /* textarea */
 
   .phone-credit .item-column3-2 .textarea-class2 {
-    width: calc( 100% - 211px);
+    width: calc(100% - 211px);
   }
 
 
