@@ -652,7 +652,6 @@
         this.params.appDate_le = ''; //	高级查询 终止时间
         this.params.creditTime_ge = ''; //	授信日期 起始时间
         this.params.creditTime_le = ''; //	授信日期 终止时间
-        creditTime
         this.params.mobile = ''; //	手机号码
         this.params.borrType = ''; //	借款人类型
         this.params.loanTerm = ''; //	借款期限
@@ -662,7 +661,6 @@
         // this.params.rows	='';//	每页条数
         this.applyData = ''; //申请日期
         this.creditTime = ''; //授信日期
-
         this.agencyCode = ''; //进件机构
         this.selectedAgenName = '';
         this.proCode = ''; //产品名称
