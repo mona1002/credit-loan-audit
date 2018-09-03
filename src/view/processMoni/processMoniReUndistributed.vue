@@ -132,7 +132,7 @@
     </div>
     <!-- 流程轨迹 -->
     <el-dialog title="流程轨迹" width="1000px" :visible.sync="dialogTraceVisible">
-      <el-table :data="traceList" border show-header highlight-current-row>
+      <el-table :data="traceList"  height="510" border show-header highlight-current-row>
         <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column prop="taskNodeNameTxt" label="任务节点" width="120">
