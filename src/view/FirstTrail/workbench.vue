@@ -19,7 +19,7 @@
                 </span>
               </template>
               <div class="height_auto">
-                <el-table ref="singleTable" :data="tableData" highlight-current-row @current-change="handleCurrentChange" style="width: 100%">
+                <el-table ref="singleTable" :data="tableData" highlight-current-row @row-click="handleCurrentChange" style="width: 100%">
                   <el-table-column property="processTemplateTxt" label="任务名称" >
                   </el-table-column>
                   <el-table-column property="taskNodeNameTxt" label="节点名称" >

@@ -225,10 +225,10 @@
                   </el-form-item>
                 </div>
                 <div class="bfc">
-                  <el-form-item class="presentation" label="信用评分：" :label-width="formApproLabLeft" prop="holiday">
+                  <el-form-item class="presentation" label="信用评分：" :label-width="formApproLabLeft">
                     {{creditScore}}
                   </el-form-item>
-                  <el-form-item class="presentation" label="申请类型：" :label-width="formApproLabelWidth" prop="holiday">
+                  <el-form-item class="presentation" label="申请类型：" :label-width="formApproLabelWidth">
                     {{datas.appTypeTxt}}
                   </el-form-item>
                 </div>
@@ -260,7 +260,8 @@
                     <el-input v-model="verIncome" @blur="moneyBlur(verIncome,'verIncome')"> </el-input>
                   </el-form-item>
                   <el-form-item class="fr alert_collapse_inputLabel" label="批准产品：" :label-width="formApproLab">
-                    <el-select v-model="proName" @change="proSlelecChange">
+                    <!-- <el-select v-model="proName"  @change="proSlelecChange"> -->
+                    <el-select v-model="proName" disabled>
                       <el-option v-for="item in products" :key="item.id" :label="item.proName" :value="item.id">
                       </el-option>
                     </el-select>
@@ -899,36 +900,36 @@
         //console.log(this.proId.length, this.ploanTerm.length, this.ploanAmt.length, this.verIncome.length, this.eachTermamt.length);
       },
       //根据产品 请求 月份数
-      proSlelecChange(val) {
-        //批准金额、批准期限清空
-        this.ploanAmt = '';
-        this.ploanTerm = '';
-        //审批倍数、月还款额、内部负债率、总负债率 清空
-        this.caculData.appmult = '';
-        this.caculData.inteDebitrate = '';
-        this.caculData.totalRate = '';
-        this.caculData.eachTermamt = '';
-        this.proId = val;
-        for (var i = 0; i < this.products.length; i++) {
-          if (this.products[i].id == val) {
-            // 最大金额
-            this.maxAmounnt = this.products[i].maxAmounnt;
-            // 最小金额
-            this.minAmount = this.products[i].minAmount;
-          }
-        }
-        // 最大金额
-        //this.maxAmounnt = val.maxAmounnt;
-        // 最小金额
-        //this.minAmount = val.minAmount;
-        console.log(this.maxAmounnt + "#########" + this.minAmount);
-        /*this.post('/credit/ploanTermByPro',{proId : this.proId}).then(res => {*/
-        this.post('/credit/ploanTermByPro?proId=' + this.proId).then(res => {
-          //console.log(res.data);
-          if (res.statusCode == '200')
-            this.ploanTerms = res.data;
-        });
-      },
+      // proSlelecChange(val) {
+      //   //批准金额、批准期限清空
+      //   this.ploanAmt = '';
+      //   this.ploanTerm = '';
+      //   //审批倍数、月还款额、内部负债率、总负债率 清空
+      //   this.caculData.appmult = '';
+      //   this.caculData.inteDebitrate = '';
+      //   this.caculData.totalRate = '';
+      //   this.caculData.eachTermamt = '';
+      //   this.proId = val;
+      //   for (var i = 0; i < this.products.length; i++) {
+      //     if (this.products[i].id == val) {
+      //       // 最大金额
+      //       this.maxAmounnt = this.products[i].maxAmounnt;
+      //       // 最小金额
+      //       this.minAmount = this.products[i].minAmount;
+      //     }
+      //   }
+      //   // 最大金额
+      //   //this.maxAmounnt = val.maxAmounnt;
+      //   // 最小金额
+      //   //this.minAmount = val.minAmount;
+      //   console.log(this.maxAmounnt + "#########" + this.minAmount);
+      //   /*this.post('/credit/ploanTermByPro',{proId : this.proId}).then(res => {*/
+      //   this.post('/credit/ploanTermByPro?proId=' + this.proId).then(res => {
+      //     //console.log(res.data);
+      //     if (res.statusCode == '200')
+      //       this.ploanTerms = res.data;
+      //   });
+      // },
       // 批准期限更改
       ploanTermChange: function (val) {
         console.log('批准期限更改!');
