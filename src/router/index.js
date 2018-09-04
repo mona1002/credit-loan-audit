@@ -23,7 +23,6 @@ import ReconsiderApply from '../view/Reconsider/ReconsiderComponents/ReconsiderA
 import reconsiderList from '../view/Reconsider/reconsiderList.vue' //复议申请任务列表
 import ReconsiderSplit from '../view/Reconsider/ReconsiderSplit.vue' //复议专员主管分屏
 // -------------------------流程监控---------------------
-// import processMoni from '../view/processMoni/processMoni.vue' //
 import processMoniAntiDistributed from '../view/processMoni/processMoniAntiDistributed.vue' //流程监控-反欺诈已分配
 import processMoniAntiDone from '../view/processMoni/processMoniAntiDone.vue' //流程监控-反欺诈已完成
 import processMoniAntiUndistributed from '../view/processMoni/processMoniAntiUndistributed.vue' //流程监控-反欺诈未完成
@@ -200,11 +199,7 @@ const routes = [{
     component: ReconsiderSplit,
     name: 'ReconsiderSplit'
   },
-  // ---------------------流程监控---------
-  // {
-  //   path: '/processMoni',
-  //   component: processMoni,
-  // }, 
+  // ---------------------流程监控--------- 
   {
     path: '/processMoniAntiDistributed',
     component: processMoniAntiDistributed,

@@ -43,7 +43,7 @@
         </div>
         <div v-show="isEdit">
           <el-select v-model="mainReasonName" @change="mainReasonChange" ref="mainReasonName">
-            <el-option v-for="item in mainReasons" :label="item.reasonName" :value="item.id">
+            <el-option v-for="item in mainReasons" :label="item.reasonName" :value="item.id" :key="item.id">
             </el-option>
           </el-select>
         </div>
@@ -57,7 +57,7 @@
         </div>
         <div v-show="isEdit">
           <el-select v-model="subreaName" ref="sencondReasonName" @change='getSecond'>
-            <el-option v-for="item in secondReasons" :label="item.reasonName" :value="item.id">
+            <el-option v-for="item in secondReasons" :label="item.reasonName" :value="item.id" :key="item.id">
             </el-option>
           </el-select>
         </div>
@@ -180,7 +180,7 @@
         <el-form>
           <el-form-item class="alert_collapse_inputLabel" label="回退节点：" :label-width="formLabelWidth">
             <el-select @change="backSelectChange" v-model="rollbackNodeName">
-              <el-option v-for="item in options" :label="item.label" :value="item">
+              <el-option v-for="item in options" :label="item.label" :value="item" :key="item.value">
               </el-option>
             </el-select>
           </el-form-item>

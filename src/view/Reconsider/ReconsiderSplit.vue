@@ -33,7 +33,6 @@
           </div>
         </div>
         <div class="tab2_Content">
-          <!-- <AnitAudioVisual v-if=" this.tabContent2==0" v-on:CompareShow="compBtnS"></AnitAudioVisual> -->
           <AudioVisual v-if=" this.tabContent2==0" :applyId='tastwaitingPass.applyId'></AudioVisual>
           <cremark v-if=" this.tabContent2==1"></cremark>
           <InternalMatch v-if=" this.tabContent2==2"></InternalMatch>
@@ -56,10 +55,8 @@
   </div>
 </template>
 <script>
-  // import AnitAudioVisual from '../AntiFraud/components/AnitAudioVisual.vue'; //工作台--》 av
   import AudioVisual from '../FirstTrail/detailComponent/AudioVisual.vue'; //工作台--》 av
   import cremark from '../FirstTrail/checkComponent/remarkDetail.vue' //备注信息
-  // import aMAnitAudioVisual from'./matchComponent/aMAnitAudioVisual.vue';//匹配查看 --》 aV
   import capplicationInformationDetail from "../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息  
   import AborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料
   import FCreditForm from "../FinalTrial/FinalComponent/FCreditForm.vue"; //信审表
@@ -172,7 +169,6 @@
       this.mountedInf();
     },
     components: {
-      // AnitAudioVisual,
       AudioVisual,
       cremark,
       capplicationInformationDetail,

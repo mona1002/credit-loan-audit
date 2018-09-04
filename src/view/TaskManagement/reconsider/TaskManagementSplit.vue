@@ -28,7 +28,6 @@
         </div>
         <div class="tab2_Content">
           <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==0"></capplicationInformationDetail>
-          <!-- <AnitAudioVisual v-if=" this.tabContent2==1"></AnitAudioVisual> -->
           <AudioVisual v-if=" this.tabContent2==1" :applyId='tastwaitingPass.applyId'></AudioVisual>
           <creditInvestigation v-if=" this.tabContent2==2" :applyId='tastwaitingPass.applyId'></creditInvestigation>
           <processTrajectory v-if=" this.tabContent2==3"></processTrajectory>
@@ -40,7 +39,6 @@
 <script>
   import capplicationInformationDetail from "../../FirstTrail/checkComponent/applicationInformationDetail.vue"; //申请信息
   import AudioVisual from '../../FirstTrail/detailComponent/AudioVisual.vue'; //影响列表 --工作台--》 av-反欺诈分屏
-  // import AnitAudioVisual from '../../AntiFraud/components/AnitAudioVisual.vue'; //影响列表 --工作台--》 av-反欺诈分屏
   import creditInvestigation from "../../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信
   import processTrajectory from '../../FirstTrail/checkComponent/processTrajectory.vue' //流程轨迹
   export default {
@@ -94,7 +92,6 @@
     },
     components: {
       capplicationInformationDetail,
-      // AnitAudioVisual,
       AudioVisual,
       creditInvestigation,
       processTrajectory
