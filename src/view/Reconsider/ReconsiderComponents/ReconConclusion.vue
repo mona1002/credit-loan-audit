@@ -972,7 +972,7 @@
           loanRateYr: this.loanRateYr, // 借款利率
         }).then(res => {
           // 审批结论数据
-          if (res.statusCode != '200') {
+          if (res.statusCode == '200') {
             console.log('ddddddd')
             this.caculData = res.data;
             this.caculData.appmult = this.formatNumber(this.caculData.appmult, 2, 0); //审批倍数
