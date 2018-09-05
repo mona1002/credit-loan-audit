@@ -109,7 +109,7 @@
                       </el-table-column>
                       <el-table-column prop="sourceDes" label="来源" min-width="150">
                       </el-table-column>
-                      <el-table-column prop="phoneNum" label="电话号码" min-width="120">
+                      <el-table-column prop="phoneNum" label="电话号码" width="105">
                       </el-table-column>
                       <el-table-column prop="answerDes" label="接听情况" min-width="100">
                       </el-table-column>
@@ -417,7 +417,6 @@
         addRelationShip: '',
         // 电话号码
         addTelNum: '',
-
         //  历史列表相关
         // applyId: '', // 申请单id
         phoneNum: '', // 电话号码
@@ -425,10 +424,6 @@
         id: '', // 历史入参 
         pageNum: 1, // 当前页数
         pageSize: 10, // 每页条数
-        // // 当前页码
-        // currentPage: 1,
-        // // 每页显示的条数
-        // currentPageSize: 5,
         // 加载
         mobileLoading: true,
         // 传给表单的 数据

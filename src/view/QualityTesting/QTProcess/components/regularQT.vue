@@ -487,7 +487,7 @@
             <table border="1" cellpadding='2' width='100%'>
               <tr>
                 <th width='50px'> 序号</th>
-                <th width='160px'>电话号码 </th>
+                <th width='105px'>电话号码 </th>
                 <th width='130px'>电话录音 </th>
                 <th width='160px'>接听人是否借款人本人 </th>
                 <th width='200px'>初审结论 </th>
@@ -535,7 +535,7 @@
               </el-table-column>
               <el-table-column prop="relation" label="关系" align="center" width="160">
               </el-table-column>
-              <el-table-column prop="telNum" label="电话号码" align="center" width="160">
+              <el-table-column prop="telNum" label="电话号码" align="center" width="105">
               </el-table-column>
               <el-table-column label="电话录音" align="center" width="100">
                 <template slot-scope="scope">
