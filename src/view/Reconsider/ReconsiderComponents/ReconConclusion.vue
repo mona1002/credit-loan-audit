@@ -782,7 +782,7 @@
           proCode: this.proCode, //产品编号
           verIncome: this.verIncome.replace(reg, '') * 1, //核实收入[元]
           ploanAmt: this.ploanAmt.replace(reg, '') * 1, //批准金额[元]
-          ploanTerm: this.caculData.ploanTerm, //批准期限
+          ploanTerm: this.ploanTerm, //批准期限
           appmult: this.caculData.appmult * 1, // 审批倍数
           eachTermamt: this.caculData.eachTermamt.replace(reg, '') * 1, //每期还款额[元]
           inteDebitrate: (this.caculData.inteDebitrate == 0 || this.caculData.inteDebitrate == '') ? 0 : this.caculData
