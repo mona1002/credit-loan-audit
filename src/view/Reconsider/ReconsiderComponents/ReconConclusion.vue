@@ -295,7 +295,7 @@
                   </el-form-item>
                 </div>
                 <div class="bfc dialog_textarea_3rows alert_collapse_inputLabel mr">
-                  <el-form-item label="意见说明：" :label-width="formApproLab">
+                  <el-form-item label="意见说明：" :label-width="formApproLab" style="margin-bottom:10px" >
                     <el-input type="textarea" :rows="3" resize="none" v-model="appConclusion">
                     </el-input>
                   </el-form-item>
