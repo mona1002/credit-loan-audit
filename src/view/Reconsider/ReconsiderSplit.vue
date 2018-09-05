@@ -45,8 +45,7 @@
           <ReconsiderApply v-if=" this.tabContent2==8"></ReconsiderApply>
           <aAntiApplyInf v-if=" this.tabContent2==9" :applyId='tastwaitingPass.applyId'></aAntiApplyInf>
           <RantiFraudInvestigation v-if=" this.tabContent2==10" :isShow='false' :applyId='tastwaitingPass.applyId'></RantiFraudInvestigation>
-          <ReconsiderationConclusion v-if=" this.tabContent2==11 && this.Rcon==1"></ReconsiderationConclusion>
-          <!-- <ReconjingliConclusion v-if=" this.tabContent2==11 && this.Rcon==2"></ReconjingliConclusion> -->
+          <!-- <ReconsiderationConclusion v-if=" this.tabContent2==11 && this.Rcon==1"></ReconsiderationConclusion> -->
           <!-- <ReconjingliConclusion v-if=" this.tabContent2==11 && this.Rcon==2"></ReconjingliConclusion> -->
           <ReconConclusion v-if=" this.tabContent2==11" :type='type'></ReconConclusion>
         </div>

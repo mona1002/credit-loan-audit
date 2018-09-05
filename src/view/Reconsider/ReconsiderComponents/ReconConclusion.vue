@@ -313,29 +313,29 @@
     <!-- 审批流程轨迹 -->
     <el-dialog title='复议审批轨迹' :visible.sync="sldialogVisible" :modal="false" width="1000px">
       <el-table :data="tableData.recordList" style="width: 100%" height="250" border highlight-current-row center>
-        <el-table-column type="index" label="序号" min-width="50">
+        <el-table-column type="index" label="序号" width="55">
         </el-table-column>
-        <el-table-column prop="verIncome" label="核实收入[元]" min-width="120">
+        <el-table-column prop="verIncome" label="核实收入[元]" width="90">
         </el-table-column>
-        <el-table-column prop="proName" label="批准产品" min-width="100">
+        <el-table-column prop="proName" label="批准产品" width="100">
         </el-table-column>
-        <el-table-column prop="ploanAmt" label="批准金额[元]" min-width="120">
+        <el-table-column prop="ploanAmt" label="批准金额[元]" width="100">
         </el-table-column>
-        <el-table-column prop="ploanTerm" label="批准期限[月]" min-width="120">
+        <el-table-column prop="ploanTerm" label="批准期限[月]" width="100">
         </el-table-column>
-        <el-table-column prop="appmult" label="审批倍数" min-width="100">
+        <el-table-column prop="appmult" label="审批倍数" width="70">
         </el-table-column>
-        <el-table-column prop="eachTermamt" label="每期还款额[元]" min-width="120">
+        <el-table-column prop="eachTermamt" label="每期还款额[元]" width="100">
         </el-table-column>
-        <el-table-column prop="inteDebitrate" label="内部负债率" min-width="120">
+        <el-table-column prop="inteDebitrate" label="内部负债率" width="85">
         </el-table-column>
-        <el-table-column prop="creditDebitRate" label="总信用负债率" min-width="120">
+        <el-table-column prop="creditDebitRate" label="总信用负债率" width="100">
         </el-table-column>
-        <el-table-column prop="totalRate" label="总负债率" min-width="100">
+        <el-table-column prop="totalRate" label="总负债率" width="80">
         </el-table-column>
         <el-table-column prop="appConclusion" label="审批结论" min-width="200">
         </el-table-column>
-        <el-table-column prop="auditDate" label="审批时间" min-width="180">
+        <el-table-column prop="auditDate" label="审批时间" width="160">
         </el-table-column>
       </el-table>
       <div class="page">
@@ -1256,7 +1256,6 @@
     watch: {
       //审批 计算 审批倍数 等
       ploanTerm: function () {
-        console.log('批准期限');
         //console.log(this.verIncome+'###'+this.proId.length+'###'+this.ploanTerm+"###"+this.ploanAmt);
         // 计算 审批记录数据
         if (this.verIncome.length > 0 && this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 &&
@@ -1266,9 +1265,7 @@
       },
       // 产品 id
       proId: function () {
-        console.log('产品id');
-        console.log(this.proId.length);
-        console.log(this.verIncome + '###' + this.proId.length + '###' + this.ploanTerm + "###" + this.ploanAmt);
+        // console.log(this.verIncome + '###' + this.proId.length + '###' + this.ploanTerm + "###" + this.ploanAmt);
         //月核实收入+产品id+批准期限+批准金额[元]
         if (this.proId.length > 0 && this.ploanTerm > 0 && this.ploanAmt.length > 0 && this.verIncome.length > 0 &&
           this.repayWay && this.synthesisRateM && this.loanRateYr)

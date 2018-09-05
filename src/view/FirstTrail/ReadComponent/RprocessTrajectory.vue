@@ -1,28 +1,29 @@
 <template>
+  <!-- 流程轨迹 -->
   <div class="processTrajectory">
-    <el-collapse v-model="activeNames" @change="handleChange">
+    <el-collapse v-model="activeNames">
       <el-collapse-item title="信审流程轨迹" name="1">
         <template slot="title">
           <i class="collapse_title_icon"></i>
           <span class="collapse_title_text">信审流程轨迹</span>
         </template>
-        <div class="containDiv">
-          <el-table :data="taskDetailList" style="width: 100%" height="744" highlight-current-row border @current-change="handleCurrentChange">
-            <el-table-column type="index" :index="1" label="序号" min-width="50">
+        <div class="hundred_percent">
+          <el-table :data="taskDetailList" style="width: 100%" height="100%" highlight-current-row border>
+            <el-table-column type="index" :index="1" label="序号" width="55">
             </el-table-column>
-            <el-table-column label="任务节点" prop="taskNodeNameTxt" min-width="170">
+            <el-table-column label="任务节点" prop="taskNodeNameTxt" width="170">
             </el-table-column>
-            <el-table-column prop="taskTypeTxt" label="任务类型" min-width="120">
+            <el-table-column prop="taskTypeTxt" label="任务类型" width="120">
             </el-table-column>
-            <el-table-column prop="activationTime" label="进入本环节时间" min-width="160">
+            <el-table-column prop="activationTime" label="进入本环节时间" width="160">
             </el-table-column>
-            <el-table-column prop="taskStatusTxt" label="任务状态" min-width="80">
+            <el-table-column prop="taskStatusTxt" label="任务状态" width="80">
             </el-table-column>
-            <el-table-column prop="operatorCode" label="处理人" min-width="120">
+            <el-table-column prop="operatorCode" label="处理人" width="120">
             </el-table-column>
-            <el-table-column prop="completeTime" label="处理时间" min-width="160">
+            <el-table-column prop="completeTime" label="处理时间" width="160">
             </el-table-column>
-            <el-table-column prop="approvalOpinionTxt" label="处理结论" min-width="100">
+            <el-table-column prop="approvalOpinionTxt" label="处理结论" width="120">
             </el-table-column>
             <el-table-column prop="opinionExplain" label="意见说明" show-overflow-tooltip min-width="170">
             </el-table-column>
@@ -58,10 +59,13 @@
           this.taskDetailList = res.data.taskDetailList;
         })
       },
-      handleCurrentChange() {
-
-      },
     },
   }
 
 </script>
+<style>
+  /* .processTrajectory{
+  height:100%;
+} */
+
+</style>
