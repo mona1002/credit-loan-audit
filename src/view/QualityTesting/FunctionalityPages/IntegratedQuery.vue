@@ -5,19 +5,19 @@
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">进件编号： </span>
-          <el-input v-model.trim="params.applySubno" placeholder="请输入进件编号"></el-input>
+          <el-input v-model.trim="params.applySubno" @keyup.enter.native='Rsearch' placeholder="请输入进件编号"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">客户名称：</span>
-          <el-input v-model.trim="params.custName" placeholder="请输入客户名称"></el-input>
+          <el-input v-model.trim="params.custName" @keyup.enter.native='Rsearch' placeholder="请输入客户名称"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">证件号码：</span>
-          <el-input v-model.trim="params.certCode" placeholder="请输入证件号码"></el-input>
+          <el-input v-model.trim="params.certCode" @keyup.enter.native='Rsearch' placeholder="请输入证件号码"></el-input>
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">手机号码：</span>
-          <el-input v-model.trim="params.mobile" placeholder="请输入手机号码"></el-input>
+          <el-input v-model.trim="params.mobile" @keyup.enter.native='Rsearch' placeholder="请输入手机号码"></el-input>
         </el-col>
       </el-row>
       <el-row class="row row2" type="flex">
@@ -46,8 +46,8 @@
       </span>
     </div>
     <div class="listContainer">
-      <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row @current-change="selectRow" @row-dblclick="handleCurrentChange"
-        border>
+      <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row @current-change="selectRow"
+        @row-dblclick="handleCurrentChange" border>
         <el-table-column type="index" align='center' label=序号 width="55">
         </el-table-column>
         <el-table-column prop="applySubno" label="进件编号" align='center' min-width="180">
@@ -160,7 +160,7 @@
       Rsearch() {
         // this.params.pageNum = this.currentPage = 1;
         if (this.params.applySubno != '' || this.params.custName != '' || this.params.certCode != '' || this.params.mobile !=
-          '' ) {
+          '') {
           this.inquire(this.params);
         } else {
           this.$message.error('请输入查询条件')

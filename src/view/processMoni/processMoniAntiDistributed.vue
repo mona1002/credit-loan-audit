@@ -23,8 +23,8 @@
       <el-row class="row row2" type="flex">
         <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称：</span>
-          <el-autocomplete popper-class="my-autocomplete" v-model="product" :debounce='0' :fetch-suggestions="querySearch" placeholder="请输入内容"
-            @select="handleSelect">
+          <el-autocomplete popper-class="my-autocomplete" v-model="product" :debounce='0' :fetch-suggestions="querySearch"
+            placeholder="请输入内容" @select="handleSelect">
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
             <template slot-scope="{ item }">
@@ -109,14 +109,14 @@
       </el-table>
       <!-- 页码 -->
       <div class="page">
-        <el-pagination @size-change="changePageSize" @current-change="changeCurrentPage" :current-page.sync="currentPage" :page-sizes='pageSizesArr'
-          :page-size='setPageSize' layout="total, sizes, prev, pager, next, jumper" :total='responseDatas.totalNum'>
+        <el-pagination @size-change="changePageSize" @current-change="changeCurrentPage" :current-page.sync="currentPage"
+          :page-sizes='pageSizesArr' :page-size='setPageSize' layout="total, sizes, prev, pager, next, jumper" :total='responseDatas.totalNum'>
         </el-pagination>
       </div>
     </div>
     <!-- 流程轨迹 -->
     <el-dialog title="流程轨迹" :visible.sync="dialogTraceVisible" width="1000px">
-      <el-table :data="traceList" border show-header highlight-current-row>
+      <el-table :data="traceList" height="510" border show-header highlight-current-row>
         <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column prop="taskNodeNameTxt" label="任务节点" width="120">
@@ -391,14 +391,14 @@
 
       // 查询按钮
       getByKey() {
-        this.queryParam.pageNum = 1;
+        this.queryParam.pageNum = this.currentPage = 1;
         this.product != this.selectedProName ? (this.product = this.selectedProName = this.queryParam.proId = "") : "";
         this.getProcessMonitorList(this.queryParam);
       },
 
       // 重置按钮
       reset() {
-        this.queryParam.pageNum = 1;
+        this.queryParam.pageNum = this.currentPage = 1;
         this.custName_la = '';
         this.certCode = '';
         this.applySubNo = '';
@@ -427,7 +427,7 @@
       // 每页条数变化时，重新请求
       changePageSize(val) {
         this.queryParam.pageSize = val;
-        this.queryParam.pageNum = 1;
+        this.queryParam.pageNum = this.currentPage = 1;
         if (this.currentPage !== 1 || this.setPageSize !== 10) {
           this.currentPage = 1;
           this.setPageSize = 10;
@@ -438,7 +438,7 @@
 
       // 改变页码时，重新请求
       changeCurrentPage(val) {
-        this.queryParam.pageNum = val;
+        this.queryParam.pageNum = this.currentPage = val;
         this.getProcessMonitorList(this.queryParam);
       },
 

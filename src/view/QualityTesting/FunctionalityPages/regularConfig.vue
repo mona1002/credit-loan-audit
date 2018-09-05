@@ -59,49 +59,48 @@
         </el-table-column>
       </el-table>
     </div>
-    <!-- ==============================任务分配=================================== -->
-    <!-- <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
-      <span>您确定生成质检任务？</span>
-      <span slot="footer" class="dialog-footer">
-        <el-button class="calbtn" @click="canc">取消</el-button>
-        <el-button class="subtn" type="primary" :loading="loadsitu" @click="CFsave">{{adbtn}}</el-button>
-      </span>
-    </el-dialog> -->
     <!-- ==============================添加=================================== -->
     <el-dialog title="质检规则新增" :modal="false" :visible.sync="add" width="820px" class="dialog form_height_44">
       <el-form :model="addNew" :rules="rulesAdd" ref="ruleFormAdd">
         <el-form-item label="质检天数：" prop="recentDays" :label-width="formLeftLabelWidth">
-          <el-input v-model="addNew.recentDays" placeholder="请输入质检天数" @blur="Num('质检天数-编辑',addNew.recentDays)"> </el-input>
+          <el-input v-model="addNew.recentDays" placeholder="请输入质检天数" @blur="Num('质检天数-编辑',addNew.recentDays)">
+          </el-input>
           <span> 天</span>
         </el-form-item>
         <div class="bfc">
           <el-form-item class="fl" label="抽单类型：" prop="drawSheetType" :label-width="formLeftLabelWidth">
             <el-select v-model="addNew.drawSheetType" placeholder="请选择">
-              <el-option v-for=" item in QTSituation" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+              <el-option v-for=" item in QTSituation" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
             </el-select>
           </el-form-item>
           <el-form-item class="fr" label="抽单比例[每人]：" prop="makeRatio" :label-width="formLabelWidth">
-            <el-input v-model="addNew.makeRatio" placeholder="请输入抽单比例" @blur="Num('抽单比例-编辑',addNew.makeRatio)"> </el-input>
+            <el-input v-model="addNew.makeRatio" placeholder="请输入抽单比例" @blur="Num('抽单比例-编辑',addNew.makeRatio)">
+            </el-input>
             <span> %</span>
           </el-form-item>
         </div>
         <div class="bfc">
           <el-form-item class="fl" label="通过比例[每人]：" prop="passRatio" :label-width="formLeftLabelWidth">
-            <el-input v-model="addNew.passRatio" placeholder="请输入通过比例" @blur="Num('通过比例-编辑',addNew.passRatio)"> </el-input>
+            <el-input v-model="addNew.passRatio" placeholder="请输入通过比例" @blur="Num('通过比例-编辑',addNew.passRatio)">
+            </el-input>
             <span> %</span>
           </el-form-item>
           <el-form-item class="fr" label="通过件最低抽单件数[人·件]：" prop="minPassNum" :label-width="formLabelWidth">
-            <el-input v-model="addNew.minPassNum" placeholder="请输入最低抽单件数" @blur="Num('通过件最低抽单件数-编辑',addNew.minPassNum)"> </el-input>
+            <el-input v-model="addNew.minPassNum" placeholder="请输入最低抽单件数" @blur="Num('通过件最低抽单件数-编辑',addNew.minPassNum)">
+            </el-input>
             <span> 件</span>
           </el-form-item>
         </div>
         <div class="bfc">
           <el-form-item class="fl" label="拒绝比例[每人]：" prop="refuseRatio" :label-width="formLeftLabelWidth">
-            <el-input v-model="addNew.refuseRatio" placeholder="请输入拒绝比例" @blur="Num('拒绝比例',addNew.refuseRatio)"> </el-input>
+            <el-input v-model="addNew.refuseRatio" placeholder="请输入拒绝比例" @blur="Num('拒绝比例',addNew.refuseRatio)">
+            </el-input>
             <span>%</span>
           </el-form-item>
           <el-form-item class="fr" label="拒绝件最低抽单件数[人·件]：" prop="minRefuseNum" :label-width="formLabelWidth">
-            <el-input v-model="addNew.minRefuseNum" placeholder="请输入最低抽单件数" @blur="Num('拒绝件最低抽单件数',addNew.minRefuseNum)"> </el-input>
+            <el-input v-model="addNew.minRefuseNum" placeholder="请输入最低抽单件数" @blur="Num('拒绝件最低抽单件数',addNew.minRefuseNum)">
+            </el-input>
             <span>件</span>
           </el-form-item>
         </div>
@@ -119,119 +118,48 @@
         <el-button type="primary" :loading="loadsitu" @click="SaveAdd('ruleFormAdd')">{{adbtn}}</el-button>
       </div>
     </el-dialog>
-    <!-- <el-dialog title="质检规则新增" :modal="false" :visible.sync="add" width="920px">
-      <div class="newContent">
-        <ul>
-          <li>
-            <p>
-              <label>
-                <b class="required_Red"> * </b>质检天数：</label>
-              <span>
-                <el-input v-model="addNew.recentDays" placeholder="请输入质检天数" @blur="Num('质检天数',addNew.recentDays)"> </el-input> 天</span>
-            </p>
-            <p>
-              <label></label>
-              <span></span>
-            </p>
-          </li>
-          <li>
-            <p>
-              <label>
-                <b class="required_Red"> * </b>抽单类型：</label>
-              <span>
-                <el-select v-model="addNew.drawSheetType" placeholder="请选择">
-                  <el-option v-for=" item in QTSituation" :key="item.value" :label="item.label" :value="item.value"> </el-option>
-                </el-select>
-              </span>
-            </p>
-            <p>
-              <label>
-                <b class="required_Red"> * </b>抽单比例[每人]：</label>
-              <span>
-                <el-input v-model="addNew.makeRatio" placeholder="请输入抽单比例" @blur="Num('抽单比例',addNew.makeRatio)"> </el-input> %</span>
-            </p>
-          </li>
-          <li>
-            <p>
-              <label>
-                <b class="required_Red"> * </b>通过比例[每人]：</label>
-              <span>
-                <el-input v-model="addNew.passRatio" placeholder="请输入通过比例" @blur="Num('通过比例',addNew.passRatio)"> </el-input> %</span>
-            </p>
-            <p>
-              <label>
-                <b class="required_Red"> * </b>通过件最低抽单件数[人·件]：</label>
-              <span>
-                <el-input v-model="addNew.minPassNum" placeholder="请输入最低抽单件数" @blur="Num('通过件最低抽单件数',addNew.minPassNum)"> </el-input> 件</span>
-            </p>
-          </li>
-          <li>
-            <p>
-              <label>
-                <b class="required_Red"> * </b>拒绝比例[每人]：</label>
-              <span>
-                <el-input v-model="addNew.refuseRatio" placeholder="请输入拒绝比例" @blur="Num('拒绝比例',addNew.refuseRatio)"> </el-input> %</span>
-            </p>
-            <p>
-              <label>
-                <b class="required_Red"> * </b>拒绝件最低抽单件数[人·件]：</label>
-              <span>
-                <el-input v-model="addNew.minRefuseNum" placeholder="请输入最低抽单件数" @blur="Num('拒绝件最低抽单件数',addNew.minRefuseNum)"> </el-input> 件</span>
-            </p>
-          </li>
-          <li class="colorGray">
-            <p>
-              <label>创建人：</label>
-              <span>{{ addNew.creator }}</span>
-            </p>
-            <p>
-              <label>创建日期：</label>
-              <span>{{ addNew.createTime | dateFilter }}</span>
-            </p>
-          </li>
-        </ul>
-      </div>
-      <span slot="footer" class="dialog-footer">
-        <el-button class="calbtn" @click="calcAddinfo">取消</el-button>
-        <el-button class="subtn" type="primary" :loading="loadsitu" @click="SaveAdd">{{adbtn}}</el-button>
-      </span>
-    </el-dialog> -->
     <!-- ==============================编辑=================================== -->
-    <!-- 编辑 -->
     <el-dialog title="质检规则编辑" :modal="false" :visible.sync="Edit" width="820px" class="dialog form_height_44">
       <el-form :model="updateInf" :rules="rulesAdd" ref="ruleFormAdd">
         <el-form-item label="质检天数：" prop="recentDays" :label-width="formLeftLabelWidth">
-          <el-input v-model="updateInf.recentDays" placeholder="请输入质检天数" @blur="Num('质检天数-编辑',updateInf.recentDays)"> </el-input>
+          <el-input v-model="updateInf.recentDays" placeholder="请输入质检天数" @blur="Num('质检天数-编辑',updateInf.recentDays)">
+          </el-input>
           <span> 天</span>
         </el-form-item>
         <div class="bfc">
           <el-form-item class="fl" label="抽单类型：" prop="drawSheetType" :label-width="formLeftLabelWidth">
-            <el-select v-model="updateInf.drawSheetType" placeholder="请选择">
-              <el-option v-for=" item in QTSituation" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+            <el-select v-model="updateInf.drawSheetType" disabled placeholder="请选择">
+              <el-option v-for=" item in QTSituation" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
             </el-select>
           </el-form-item>
           <el-form-item class="fr" label="抽单比例[每人]：" prop="makeRatio" :label-width="formLabelWidth">
-            <el-input v-model="updateInf.makeRatio" placeholder="请输入抽单比例" @blur="Num('抽单比例-编辑',updateInf.makeRatio)"> </el-input>
+            <el-input v-model="updateInf.makeRatio" placeholder="请输入抽单比例" @blur="Num('抽单比例-编辑',updateInf.makeRatio)">
+            </el-input>
             <span> %</span>
           </el-form-item>
         </div>
         <div class="bfc">
           <el-form-item class="fl" label="通过比例[每人]：" prop="passRatio" :label-width="formLeftLabelWidth">
-            <el-input v-model="updateInf.passRatio" placeholder="请输入通过比例" @blur="Num('通过比例-编辑',updateInf.passRatio)"> </el-input>
+            <el-input v-model="updateInf.passRatio" placeholder="请输入通过比例" @blur="Num('通过比例-编辑',updateInf.passRatio)">
+            </el-input>
             <span> %</span>
           </el-form-item>
           <el-form-item class="fr" label="通过件最低抽单件数[人·件]：" prop="minPassNum" :label-width="formLabelWidth">
-            <el-input v-model="updateInf.minPassNum" placeholder="请输入最低抽单件数" @blur="Num('通过件最低抽单件数-编辑',updateInf.minPassNum)"> </el-input>
+            <el-input v-model="updateInf.minPassNum" placeholder="请输入最低抽单件数" @blur="Num('通过件最低抽单件数-编辑',updateInf.minPassNum)">
+            </el-input>
             <span> 件</span>
           </el-form-item>
         </div>
         <div class="bfc">
           <el-form-item class="fl" label="拒绝比例[每人]：" prop="refuseRatio" :label-width="formLeftLabelWidth">
-            <el-input v-model="updateInf.refuseRatio" placeholder="请输入拒绝比例" @blur="Num('拒绝比例',addNew.refuseRatio)"> </el-input>
+            <el-input v-model="updateInf.refuseRatio" placeholder="请输入拒绝比例" @blur="Num('拒绝比例',addNew.refuseRatio)">
+            </el-input>
             <span>%</span>
           </el-form-item>
           <el-form-item class="fr" label="拒绝件最低抽单件数[人·件]：" prop="minRefuseNum" :label-width="formLabelWidth">
-            <el-input v-model="updateInf.minRefuseNum" placeholder="请输入最低抽单件数" @blur="Num('拒绝件最低抽单件数',addNew.minRefuseNum)"> </el-input>
+            <el-input v-model="updateInf.minRefuseNum" placeholder="请输入最低抽单件数" @blur="Num('拒绝件最低抽单件数',addNew.minRefuseNum)">
+            </el-input>
             <span>件</span>
           </el-form-item>
         </div>
@@ -266,11 +194,8 @@
           minRefuseNum: '',
           creator: '',
           createTime: '',
-
         },
-
         updateInf: {}, //弹窗
-        // EditInf:{},//编辑
         formLabelWidth: '200px',
         formLeftLabelWidth: '140px',
         recentDays: "",
@@ -420,8 +345,6 @@
       //  编辑按钮-弹出弹窗
       handleEdit(index, row, formName) {
         this.Edit = true;
-        // this.updateInf = row;
-        // this.recentDays=row.recentDays;
         this.updateInf = Object.assign({}, row);
         this.loadsitu = false;
         this.adbtn = '确定';
@@ -460,17 +383,8 @@
         // this.addNew.createTime = '';
       },
       SaveAdd(formName) { //添加  提交
-        // if (this.addNew.recentDays === '' || this.addNew.drawSheetType === '' || this.addNew.makeRatio === '' || this.addNew
-        //   .passRatio === '' ||
-        //   this.addNew.minPassNum === '' || this.addNew.refuseRatio === '' || this.addNew.minRefuseNum === '' || this.addNew
-        //   .creator === '' || this.addNew.createTime === '') {
-        //   this.$message.error('请输入必填项！');
-        //   return
-        // }
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            // this.addNew.drawSheetType == '01' ? this.proficiencyCount++ : ''; //熟悉
-            // this.addNew.drawSheetType == '02' ? this.newOneCount++ : ''; //新人
             if ((this.addNew.drawSheetType == '01' && this.proficiencyCount > 0) || (this.addNew.drawSheetType ==
                 '02' && this.newOneCount > 0)) { //熟悉
               this.$message.error(' 抽单类型设置重复！');
@@ -508,31 +422,10 @@
             return false;
           }
         });
-
       },
       SaveEdit(formName) { //编辑  提交  
-        // if (this.updateInf.recentDays === '' || this.updateInf.recentDays == null ||
-        //   this.updateInf.drawSheetType === '' || this.updateInf.drawSheetType == null ||
-        //   this.updateInf.makeRatio === '' || this.updateInf.makeRatio == null ||
-        //   this.updateInf.passRatio === '' || this.updateInf.passRatio == null ||
-        //   this.updateInf.minPassNum === '' || this.updateInf.minPassNum == null ||
-        //   this.updateInf.refuseRatio === '' || this.updateInf.refuseRatio == null ||
-        //   this.updateInf.minRefuseNum === '' || this.updateInf.minRefuseNum == null
-        //   // ||this.updateInf.creator === '' || this.updateInf.creator == null ||
-        //   // this.updateInf.createTime === '' || this.updateInf.createTime == null
-        // ) {
-        //   this.$message.error('请输入必填项！');
-        //   return
-        // }
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            // 校验是否重复
-            if ((this.updateInf.drawSheetType == '01' && this.proficiencyCount > 0) || (this.updateInf.drawSheetType ==
-                '02' && this.newOneCount > 0)) { //熟悉
-              this.$message.error(' 抽单类型设置重复！');
-              return
-            }
-            // this..drawSheetType
             this.loadsitu = true;
             this.adbtn = '保存中';
             this.post("/insMakeRules/updateInfo", {
@@ -582,7 +475,6 @@
     mounted() {
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
       this.addNew.creator = this.userInf.userCode;
-      // this.addNew.creator = JSON.parse(localStorage.getItem('userInf')).userCode;
       this.getListInf(); //查询
       this.getSystemDate(); //调用系统时间
     },

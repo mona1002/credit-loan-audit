@@ -38,7 +38,9 @@
             <InternalMatch v-if=" this.tabContent1==2">内部匹配</InternalMatch>
             <RapplicationInformationDetail v-if=" this.tabContent1==3">申请信息</RapplicationInformationDetail>
             <RborrowerInformationSetail v-if=" this.tabContent1==4">借款人资料</RborrowerInformationSetail>
-            <PhoneCredit v-if=" this.tabContent1==5" :addBtn="false"> 电话征信</PhoneCredit>
+            <!-- <PhoneCredit v-if=" this.tabContent1==5" :addBtn="false"> 电话征信</PhoneCredit> -->
+            <RPhoneCredit v-if=" this.tabContent1==5" :applyId=' tastwaitingPass.matchApplyId'> 电话征信</RPhoneCredit>
+            
             <FCreditForm v-if=" this.tabContent1==6" :applyId=' tastwaitingPass.matchApplyId' :FinalConCheckShow="true">信审表</FCreditForm>
             <creditInvestigation v-if=" this.tabContent1==7" :applyId=' tastwaitingPass.matchApplyId'>实地征信</creditInvestigation>
             <aMAntiApplyInf v-if=" this.tabContent1==8" :applyId='tastwaitingPass.matchApplyId'>反欺诈结论</aMAntiApplyInf>
@@ -79,7 +81,8 @@
           <InternalMatch v-if=" this.tabContent2==2">内部匹配</InternalMatch>
           <RapplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==3">申请信息</RapplicationInformationDetail>
           <RborrowerInformationSetail v-if=" this.tabContent2==4" :isFull.sync="isFull">借款人资料</RborrowerInformationSetail>
-          <PhoneCredit v-if=" this.tabContent2==5" :addBtn="false"> 电话征信</PhoneCredit>
+          <!-- <PhoneCredit v-if=" this.tabContent2==5" :addBtn="false"> 电话征信</PhoneCredit> -->
+          <RPhoneCredit v-if=" this.tabContent2==5" :applyId=' tastwaitingPass.matchApplyId'> 电话征信</RPhoneCredit>
           <FCreditForm v-if=" this.tabContent2==6" :applyId=' tastwaitingPass.matchApplyId' :FinalConCheckShow="true">信审表</FCreditForm>
           <creditInvestigation v-if=" this.tabContent2==7" :applyId=' tastwaitingPass.matchApplyId'>实地征信</creditInvestigation>
           <aMAntiApplyInf v-if=" this.tabContent2==8" :applyId='tastwaitingPass.matchApplyId'>反欺诈结论</aMAntiApplyInf>
@@ -140,7 +143,9 @@
   import aMAntiApplyInf from '../AntiFraud/components/aAntiApplyInf.vue' //反欺诈结论
   import InternalMatch from "./InternalMatch";
   import borrowerInformation from "./detailComponent/borrowerInformation";
-  import PhoneCredit from "./PhoneCredit"; //电话征信
+  // import PhoneCredit from "./PhoneCredit"; //电话征信
+  import RPhoneCredit from "./ReadComponent/RPhoneCredit.vue"; //电话征信
+  
   import CreditApproval from "./CreditApproval";
   export default {
     data() {
@@ -369,7 +374,8 @@
       aMAntiApplyInf, //反欺诈结论
       InternalMatch,
       borrowerInformation,
-      PhoneCredit,
+      // PhoneCredit,
+      RPhoneCredit,
       CreditApproval,
       RprocessTrajectory,
       RantiFraudInvestigation, //反欺诈调查
