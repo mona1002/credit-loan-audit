@@ -52,7 +52,8 @@
         <p v-show="myPdf" is="pdfDivLeft" ID='firstTirlLeft' v-bind:title="pdfArrys"></p>
       </div>
     </div>
-    <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" v-show="perfBtn" @click="pre" @mouseenter='PerBtn'>
+    <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" v-show="perfBtn" @click="pre"
+      @mouseenter='PerBtn'>
     <img src="../../../../static/images/pc1.png" class="icon_next" v-show="perfBtn" @click="next" @mouseenter='PerBtn'>
     <div class="BtnIcons" v-show="perfBtn" @mouseenter='PerBtn' ref="PbtnIcons">
       <img src="../../../../static/images/efw.png" @click="smaller ">
@@ -75,8 +76,8 @@
         </figure>
         <figure class="small_pic_figure" v-show="SmallmyPdf" @dblclick="pdfClose()">
           <div class="Small_pic" @dblclick="pdfClose()">
-            <p is="pdfDivLeft" ID='firstTirlLeftSmall' :cvsWidth='200' :cvsHeight='200' SmallClass="SmallWrap" v-bind:title="pdfArrys"
-              @dblclick="pdfClose()"></p>
+            <p is="pdfDivLeft" ID='firstTirlLeftSmall' :cvsWidth='200' :cvsHeight='200' SmallClass="SmallWrap"
+              v-bind:title="pdfArrys" @dblclick="pdfClose()"></p>
           </div>
           <p> {{pdfTitle}} </p>
         </figure>
@@ -90,8 +91,8 @@
         <el-collapse v-model="activeNames">
           <el-collapse-item title="本人进件列表" name="1">
             <div>
-              <el-table :data="personal" border @dblclick.native="getParentList(currentRow.matchApplyId)" @current-change="handleCurrentChange"
-                style="width: 100%">
+              <el-table :data="personal" border @dblclick.native="getParentList(currentRow.matchApplyId)"
+                @current-change="handleCurrentChange" style="width: 100%">
                 <el-table-column property="matchApplyCustName" label="客户名称">
                 </el-table-column>
                 <el-table-column property="matchApplySubNo" label="进件编号">
@@ -167,7 +168,7 @@
         pdfTitle: '',
       }
     },
-    props: ['applyId','msg', 'comBtn'],
+    props: ['applyId', 'msg', 'comBtn'],
     methods: {
       mountedInf() {
         this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
@@ -200,9 +201,12 @@
                 this.closedImg[i] = false;
               }
             }
+            this.$parent.$data.loading = false;
           } else {
             this.$message.error(res.msg);
+            this.$parent.$data.loading = false;
           }
+
         });
       },
       closeAlertSearch() {
@@ -512,7 +516,7 @@
       },
     },
     mounted() {
-      this.odivMove(this.msg); 
+      this.odivMove(this.msg);
       this.mountedInf();
     },
     components: {
@@ -540,7 +544,7 @@
   /*  放大、缩小 按钮 wrap */
 
   .BtnIcons {
-    left: calc( 50% - 34px);
+    left: calc(50% - 34px);
     width: 270px;
   }
 
@@ -552,7 +556,7 @@
     position: absolute;
     left: 214px;
     right: 0;
-    height: calc( 100% - 48px);
+    height: calc(100% - 48px);
   }
 
   .AudioVisualLeft .AudioVisual_List {

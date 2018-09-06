@@ -1237,6 +1237,7 @@
             if (res.data.accepCusCarInfos != '') {
               localStorage.setItem("car", JSON.stringify(res.data.accepCusCarInfos));
             };
+            this.$parent.$data.loading = false;
           } else {
             this.$message.error(res.msg);
             if (this.judgeFlag.flag == '01') { // 初审 
@@ -1258,6 +1259,7 @@
               this.del('复议详情');
               this.$router.push('/reconsiderList?taskNodeName=reconsiderApp_manager&flag=06');
             }
+            this.$parent.$data.loading = false;
           }
         });
 

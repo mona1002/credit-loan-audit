@@ -52,12 +52,13 @@
     <!-- 右侧 图片 -->
     <div class="AudioVisual_Img" ref="AudioVisual_Img_ref" @mouseenter="Imgscroll" @mouseleave="ImgScrollRemove">
       <div ref="img_wrap" style="position:relative; left:0; top:0;" id='FirstAud'>
-        <img ref="Big_pic_ref" v-for="(val,key) in pngAyyrs" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd" v-show="myPng"
-          @dblclick='next' />
+        <img ref="Big_pic_ref" v-for="(val,key) in pngAyyrs" :key="key" :src="imgBaseUrl+val.imagePath" v-if="key==smallPicInd"
+          v-show="myPng" @dblclick='next' />
         <p v-show="myPdf" is="pdfDiv" ID='firstTirl' v-bind:title="pdfArrys"></p>
       </div>
     </div>
-    <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" @click="pre" v-show="perfBtn" @mouseenter='PerBtn'>
+    <img src="../../../../static/images/left.png" class="icon_pre " ref="preBtn" @click="pre" v-show="perfBtn"
+      @mouseenter='PerBtn'>
     <img src="../../../../static/images/pc1.png" class="icon_next" @click="next" v-show="perfBtn" @mouseenter='PerBtn'>
     <div class="BtnIcons" v-show="perfBtn" @mouseenter='PerBtn' ref="PbtnIcons">
       <img src="../../../../static/images/efw.png" @click="smaller ">
@@ -80,7 +81,8 @@
         </figure>
         <figure class="small_pic_figure" v-show="SmallmyPdf" @dblclick="pdfClose()">
           <div class="Small_pic" @dblclick="pdfClose()">
-            <p is="pdfDiv" ID='firstTirlSmall' :cvsWidth='200' :cvsHeight='200' SmallClass="SmallWrap" v-bind:title="pdfArrys" @dblclick="pdfClose()"></p>
+            <p is="pdfDiv" ID='firstTirlSmall' :cvsWidth='200' :cvsHeight='200' SmallClass="SmallWrap" v-bind:title="pdfArrys"
+              @dblclick="pdfClose()"></p>
           </div>
           <p> {{pdfTitle}} </p>
         </figure>
@@ -140,7 +142,7 @@
         this.imgBaseUrl = imgUrl.imgBaseUrl;
         // 父菜单
         this.post("/productArchive/getProductArchiveParentList", {
-           applyId:this. applyId
+          applyId: this.applyId
         }).then(res => {
           if (res.statusCode == 200) {
             this.ListParent = res.data;
@@ -155,7 +157,9 @@
                 this.closedImg[i] = false;
               }
             }
+            this.$parent.$data.loading = false;
           } else {
+            this.$parent.$data.loading = false;
             this.$message.error(res.msg);
           }
         });
@@ -181,7 +185,7 @@
         // 二级（子）节点
         console.log("获取子节点");
         this.post("/productArchive/getProductArchiveChildList", {
-          applyId:this. applyId,
+          applyId: this.applyId,
           pid: id
         }).then(res => {
           if (res.statusCode == 200) {
@@ -422,7 +426,7 @@
         this.$emit('CompareShow')
       },
     },
-    props: ['applyId','AURpreWidth', 'applyID'],
+    props: ['applyId', 'AURpreWidth', 'applyID'],
     mounted() {
       this.odivMove("FirstAud");
       this.mountedInf();
@@ -451,7 +455,7 @@
   /*  放大、缩小 按钮 wrap */
 
   .BtnIcons {
-    left: calc( 50% + 65px);
+    left: calc(50% + 65px);
     width: 270px;
   }
 
@@ -469,7 +473,7 @@
 
   .AU_mid {
     background: lightblue;
-    height: calc( 100% - 48px);
+    height: calc(100% - 48px);
     width: 5px;
     position: absolute;
     left: 401px;
@@ -480,7 +484,7 @@
     position: absolute;
     left: 412px;
     right: 0;
-    height: calc( 100% - 48px);
+    height: calc(100% - 48px);
   }
 
   /* 左侧折叠面板 */

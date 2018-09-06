@@ -66,6 +66,7 @@
         }).then(res => {
           if (res.statusCode == '200') {
             this.taskDetailList = res.data.taskDetailList;
+            this.$parent.$data.loading = false;
           } else {
             this.taskDetailList = [];
             this.$message.error(res.msg);
