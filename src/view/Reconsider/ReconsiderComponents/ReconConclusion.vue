@@ -769,9 +769,6 @@
           })
           return;
         };
-        this.$message.error('dddddddddddd')
-        return
-
         //按钮加“加载中”
         this.shenpiLoading = true;
         this.shenpiFont = '提交中';
