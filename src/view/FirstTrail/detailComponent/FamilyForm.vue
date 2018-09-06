@@ -29,7 +29,6 @@
       <li class="item-column3">
         <div class="left-title">
           <span class="require-icon" style="left:80px;">* </span>来源：</div>
-        <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="Fsource">
             <el-option label="申请表" value="00"></el-option>
@@ -37,12 +36,10 @@
             <el-option label="其他" value="02"></el-option>
           </el-select>
         </el-tooltip>
-        <!-- </div> -->
       </li>
       <li class="item-column3">
         <div class="left-title">
           <span class="require-icon" style="left:50px;">* </span>接听情况：</div>
-        <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="Fanswer">
             <el-option label="无人接" value="00"></el-option>
@@ -52,12 +49,10 @@
             <el-option label="接通" value="04"></el-option>
           </el-select>
         </el-tooltip>
-        <!-- </div> -->
       </li>
       <li class="item-column3 Phone_credit_Form_search_bottom">
         <div class="left-title">
           <span class="require-icon" style="left:50px;">* </span>调查阶段：</div>
-        <!-- <div> -->
         <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
           <el-select v-model="FcheckStage">
             <el-option label="正在调查" value="00"></el-option>
@@ -66,7 +61,6 @@
             <el-option label="未调查" value="03"></el-option>
           </el-select>
         </el-tooltip>
-        <!-- </div> -->
       </li>
       <li class="item-column1" v-show="Fsource=='02'">
         <div class="left-title">其他来源说明：</div>
@@ -92,14 +86,12 @@
         <li class="item-column3">
           <div class="left-title">
             <span class="require-icon" style="left:0px;">* </span>三方查询是否异常：</div>
-          <!-- <div> -->
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <el-select v-model="FthreeQueries" @change="changes('FthreeQueries')">
               <el-option label="否" value="0"></el-option>
               <el-option label="是" value="1"></el-option>
             </el-select>
           </el-tooltip>
-          <!-- </div> -->
         </li>
         <li class="item-column2 item-column3-2">
           <div class="left-title" v-show="FthreeQueries=='1'">
@@ -115,14 +107,12 @@
         <li class="item-column3">
           <div class="left-title left-title2">
             <span class="require-icon" style="left:0px; top:-8px;">* </span>微信/支付宝是否异常：</div>
-          <!-- <div> -->
           <el-tooltip class="item" effect="dark" content="该输入项为必填项" placement="right-end">
             <el-select v-model="Fmobilepayment" @change="changes('Fmobilepayment')">
               <el-option label="否" value="0"></el-option>
               <el-option label="是" value="1"></el-option>
             </el-select>
           </el-tooltip>
-          <!-- </div> -->
         </li>
         <li class="item-column2 item-column3-2">
           <div class="left-title" v-show="Fmobilepayment=='1'">
@@ -294,9 +284,7 @@
     data() {
       return {
         phoneType: '03',
-
-
-        Fsource: this.familyList.source,
+ Fsource: this.familyList.source,
         Fanswer: this.familyList.answer,
         FsourceDesc: this.familyList.sourceDesc,
         FcheckStage: this.familyList.checkStage,
@@ -305,12 +293,8 @@
         FthreeQueriestxt: this.familyList.threeQueriestxt,
         FissameFam: this.familyList.issameFam,
         FissameFamtxt: this.familyList.issameFamtxt,
-
-
         wetherThirdAbnormal: '',
         wetherThirdAbnormaltxt: '',
-
-
         Fmobilepayment: this.familyList.mobilepayment,
         Fmobilepaymenttxt: this.familyList.mobilepaymenttxt,
         FrelBorrower: this.familyList.relBorrower,
@@ -326,35 +310,24 @@
         FotherIncome: this.familyList.otherIncome,
         FotherIncometxt: this.familyList.otherIncometxt,
         Fconclusion: this.familyList.conclusion,
-
-
-
         phoneId: '',
         resMsg: '',
         newLists: '',
       }
     },
-    /* props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull', 'source' , 'answer' , 'checkStage' , 'sourceDesc' , 'thirdResult' , 'threeQueries' , 'threeQueriestxt' , 'mobilepayment' , 'mobilepaymenttxt' , 'issameFam' , 'issameFamtxt' , 'relBorrower' , 'relBorrowertxt' , 'checkWork' , 'checkWorktxt' , 'maritalStatus' , 'maritalStatustxt' , 'checkAddr' , 'checkAddrtxt' , 'checkEstate' , 'checkEstatetxt' , 'otherIncome' , 'otherIncometxt' , 'conclusion'],*/
     props: ['custName', 'phoneNum', 'applyId', 'formId', 'isFull', 'familyList'],
     mounted() {
-      console.log(this.mobilepayment);
       this.phoneType = '03'; // 住址电话
       if (this.isFull == true) { // 全屏
-        console.log('全屏');
         $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
         $('.item-column1 textarea').css("width", "100%")
         $('.item-column1 textarea').css("width", "100%")
         // 提交按钮
         $('.submit-class').css("margin-left", "calc( 66% - 140px)")
         // 显示 column2
-        // $('.item-column3').css({
-        //   "min-height": "50px"
-        // })
         $('.item-column3-2 .textarea-class2').css("width", "calc( 100% - 211px )");
         $('.item-column2 textarea').css("width", "100%");
       } else if (this.isFull == false) { // 分屏
-        console.log("分屏");
-        // $(".textarea-class").css("minWidth", "300px")
         // 提交按钮
         $('.submit-class').css("margin-left", "370px")
 
@@ -365,45 +338,9 @@
         $('.item-column1 textarea').css("width", "300px")
         $('.item-column2 textarea').css("width", "300px")
       };
-      /* this.request();*/
-      console.log("88888");
-      console.log(this.newList);
-      /*if(this.newList){
-        this.source = this.newList.sourceDes;
-        this.answer = this.newList.answerDes;
-        this.checkStage = this.newList.checkStageDes;
-        this.sourceDesc = this.newList.sourceDesc;
-        this.thirdResult = this.newList.thirdResult;
-        this.threeQueries = this.newList.threeQueriesDes;
-        this.threeQueriestxt = this.newList.threeQueriestxt;
-        this.mobilepayment = this.newList.mobilepaymentDes;
-        this.mobilepaymenttxt = this.newList.mobilepaymenttxt;
-        this.issameFam = this.newList.issameFamDes;
-        this.issameFamtxt = this.newList.issameFamtxt;
-        this.relBorrower = this.newList.relBorrowerDes;
-        this.relBorrowertxt = this.newList.relBorrowertxt;
-        this.checkWork = this.newList.checkWorkDes;
-        this.checkWorktxt = this.newList.checkWorktxt;
-        this.maritalStatus = this.newList.maritalStatusDes;
-        this.maritalStatustxt = this.newList.maritalStatustxt;
-        this.checkAddr = this.newList.checkAddrDes;
-        this.checkAddrtxt = this.newList.checkAddrtxt;
-        this.checkEstate = this.newList.checkEstateDes;
-        this.checkEstatetxt = this.newList.checkEstatetxt;
-        this.otherIncome = this.newList.otherIncomeDes;
-        this.otherIncometxt = this.newList.otherIncometxt;
-        this.conclusion = this.newList.conclusion;
-      }else{
-        return
-      };*/
     },
     methods: {
-      /* request(){
-
-       },*/
       submitForm() {
-        console.log('submit!');
-
         if (!this.Fsource || !this.Fanswer || !this.FcheckStage || !this.FthreeQueries || (this.FthreeQueries == '1' &&
             !this.FthreeQueriestxt) || !this.Fmobilepayment || (this.Fmobilepayment == '1' && !this.Fmobilepaymenttxt) ||
           !this.Fconclusion) {
@@ -413,9 +350,7 @@
           });
           return;
         }
-
         this.open();
-
       },
       // open 打开 是否确认提交弹窗
       open() {
@@ -432,7 +367,6 @@
             if (action === 'confirm') {
               instance.confirmButtonLoading = true;
               instance.confirmButtonText = '执行中...';
-              console.log(this.taskId)
               // 点击 确认 提交 方法
               this.post('/creTelResearchHis/addTelfContract', {
                 cretelinvest: {
@@ -475,52 +409,18 @@
               }).then(res => {
                 if (res.statusCode == '200') {
                   this.phoneId = '';
-                  // 清数据
-                  /*this.source = '';
-                  this.answer = '';
-                  this.sourceDesc = '';
-                  this.checkStage = '';
-                  this.thirdResult = '';
-                  this.threeQueries = '';
-                  this.threeQueriestxt = '';
-                  this.issameFam = '';
-                  this.issameFamtxt = '';
-                  this.wetherThirdAbnormal = '';
-                  this.wetherThirdAbnormaltxt = '';
-                  this.mobilepayment = '';
-                  this.mobilepaymenttxt = '';
-                  this.relBorrower = '';
-                  this.relBorrowertxt = '';
-                  this.checkWork = '';
-                  this.checkWorktxt = '';
-                  this.maritalStatus = '';
-                  this.maritalStatustxt = '';
-                  this.checkAddr = '';
-                  this.checkAddrtxt = '';
-                  this.checkEstate = '';
-                  this.checkEstatetxt = '';
-                  this.otherIncome = '';
-                  this.otherIncometxt = '';
-                  this.conclusion = '';*/
-
-
                   // 提交数据成功,广播事件 重新刷新列表
                   this.$emit('updateList');
                   this.$emit('updateTree');
-
-
-
                   this.resMsg = res.msg;
                   done();
                 } else {
-                  // this.$message(res.msg);
                   this.resMsg = res.msg;
                   instance.confirmButtonText = '';
                 }
                 instance.confirmButtonLoading = false;
               });
             } else {
-              // this.$message({ message: this.resMsg, type: 'warning' });
               done();
             }
           }
@@ -529,7 +429,6 @@
             type: 'success',
             message: this.resMsg
           });
-
         });
       },
       changes(flage) {
@@ -572,81 +471,8 @@
         }
       }
     },
-    /*computed:{
-      threeQueriestxt: function() {
-        if(this.threeQueries == '0'){
-          this.threeQueriestxt = '';
-        }
-      },
-      mobilepayment: function() {
-        if(mobilepayment == '0'){
-          this.mobilepaymenttxt = '';
-        }
-      },
-      issameFam: function() {
-        if(issameFam=='0'){
-          this.issameFamtxt = '';
-        } 
-      },
-      relBorrower: function() {
-        if(relBorrower!='03'){
-          this.relBorrowertxt = '';
-        } 
-      },
-      checkWork: function() {
-        if(checkWork!='01'){
-          this.checkWorktxt = '';
-        }
-      },
-      checkAddr: function() {
-        if(checkAddr!='01'){
-          this.checkAddrtxt = '';
-        }
-      },
-      otherIncome: function() {
-        if(otherIncome!='00'){
-          this.otherIncometxt = '';
-        }
-      },
-    },*/
     watch: {
-      /*threeQueries: function() {
-        if(threeQueries == '0'){
-          this.threeQueriestxt = '';
-        }
-      },
-      mobilepayment: function() {
-        if(mobilepayment == '0'){
-          this.mobilepaymenttxt = '';
-        }
-      },
-      issameFam: function() {
-        if(issameFam=='0'){
-          this.issameFamtxt = '';
-        } 
-      },
-      relBorrower: function() {
-        if(relBorrower!='03'){
-          this.relBorrowertxt = '';
-        } 
-      },
-      checkWork: function() {
-        if(checkWork!='01'){
-          this.checkWorktxt = '';
-        }
-      },
-      checkAddr: function() {
-        if(checkAddr!='01'){
-          this.checkAddrtxt = '';
-        }
-      },
-      otherIncome: function() {
-        if(otherIncome!='00'){
-          this.otherIncometxt = '';
-        }
-      },*/
       familyList(val) {
-        console.log(val);
         this.Fsource = val.source;
         this.Fanswer = val.answer;
         this.FsourceDesc = val.sourceDesc;
@@ -675,20 +501,14 @@
       // 判断全屏 , 更改样式
       isFull: function (val) {
         if (val == true) { // 全屏
-          console.log('全屏');
           $(".item-column1 .textarea-class").css("width", "calc(66% - 290px)")
           $('.item-column1 textarea').css("width", "100%")
           // 提交按钮
           $('.submit-class').css("margin-left", "calc( 66% - 140px)")
           // 显示 column2
-          // $('.item-column3').css({
-          //   "min-height": "50px"
-          // })
           $('.item-column3-2 .textarea-class2').css("width", "calc( 100% - 211px )");
           $('.item-column2 textarea').css("width", "100%");
         } else if (val == false) { // 分屏
-          console.log("分屏");
-          // $(".textarea-class").css("minWidth", "300px")
           // 提交按钮
           $('.submit-class').css("margin-left", "370px")
 

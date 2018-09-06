@@ -77,12 +77,6 @@
         <el-table-column prop="fraudStateTxt" label="反欺诈状态" align='center' min-width="100">
         </el-table-column>
       </el-table>
-      <!-- 分页  -->
-      <!-- <div class="paging">
-          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
-            :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
-          </el-pagination>
-        </div> -->
     </div>
   </div>
 </template>
@@ -112,27 +106,14 @@
           custName: '',
           certCode: '',
           mobile: '',
-          //   pageNum: '', //页数（第几页）
-          //   pageSize: '', //页面显示行数
         },
-        // currentPage: 1, //分页选中页
-        // pageCount: 10, // 每页显示条数
-        // totalRecord: 0, //总条数
       }
     },
     methods: {
-      //   handleSizeChange(val) {
-      //     this.params.pageSize = val;
-      //     this.params.pageNum = 1;
-      //     // this.getInf(this.params);
-      //     this.inquire(this.params);
-      //   },
       selectRow(val) {
         this.currentRow = val;
-        console.log(this.currentRow)
       },
       handleCurrentChange(val) {
-        console.log(val)
         this.query.id = val.id;
         this.query.matchApplyId = val.applyId;
         this.query.applySubNo = val.applySubno;
@@ -141,15 +122,12 @@
         localStorage.setItem("MatchFlag", JSON.stringify({
           MatchFlag: 'Query'
         }));
-        // this.$router.push('/MatchingInfQuery');
         this.$router.push({
           name: 'MatchingInfQuery',
           params: {
             newOne: true,
           }
         });
-        // this.params.pageNum = val;
-        // this.inquire(this.params);
       },
       Rreset() {
         this.params.applySubno = '';
@@ -158,7 +136,6 @@
         this.params.mobile = '';
       },
       Rsearch() {
-        // this.params.pageNum = this.currentPage = 1;
         if (this.params.applySubno != '' || this.params.custName != '' || this.params.certCode != '' || this.params.mobile !=
           '') {
           this.inquire(this.params);
@@ -170,18 +147,9 @@
         // 基础接口-综合查询
         this.post("applyInfoPool/multipleQuery", pam).then(res => {
           if (res.statusCode == 200) {
-            // for (var i = 0; i < res.data.length; i++) {
-            //   if (res.data[i].certCode) {
-            //     res.data[i].certCode = res.data[i].certCode.replace(this.reg, this.reVal);
-            //   }
-            //   if (res.data[i].mobile) {
-            //     res.data[i].mobile = res.data[i].mobile.replace(this.Telreg, this.telVal);
-            //   }
-            // }
             this.tableData = res.data;
             for (var i = 0; i < res.data.length; i++) {
               var regs = /\d{4}-\d{1,2}-\d{1,2}/g;
-              //this.appDate = res.data.recordList[i].appDate.replace(regs,'');
               this.tableData[i].appDate = regs.exec(res.data[i].appDate)[0];
             }
           } else {
@@ -207,10 +175,6 @@
           }
         });
       }
-    },
-    mounted() {
-      //   this.params.pageNum = this.currentPage, //页数（第几页）
-      //     this.params.pageSize = this.pageCount, //页面显示行数
     },
   }
 

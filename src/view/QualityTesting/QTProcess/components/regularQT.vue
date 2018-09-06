@@ -67,9 +67,10 @@
                 </el-radio-group>
               </td>
               <td>
-                <b class="hint_word" v-show="regularInfo.isFormRemark && regularInfo.isFormRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input class='margin_top_15' type='textarea' :readonly='material' v-if="regularInfo.isForm==0" v-model.trim="regularInfo.isFormRemark"
-                  :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                <b class="hint_word" v-show="regularInfo.isFormRemark && regularInfo.isFormRemark.length>=300">
+                  输入长度不能超过300</b>
+                <el-input class='margin_top_15' type='textarea' :readonly='material' v-if="regularInfo.isForm==0"
+                  v-model.trim="regularInfo.isFormRemark" :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -83,9 +84,10 @@
                 </el-radio-group>
               </td>
               <td>
-                <b class="hint_word" v-show="regularInfo.isIdcardRemark && regularInfo.isIdcardRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input class='margin_top_15' type='textarea' :readonly='material' v-if="regularInfo.isIdcard=='0'" v-model.trim="regularInfo.isIdcardRemark"
-                  :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                <b class="hint_word" v-show="regularInfo.isIdcardRemark && regularInfo.isIdcardRemark.length>=300">
+                  输入长度不能超过300</b>
+                <el-input class='margin_top_15' type='textarea' :readonly='material' v-if="regularInfo.isIdcard=='0'"
+                  v-model.trim="regularInfo.isIdcardRemark" :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -99,9 +101,10 @@
                 </el-radio-group>
               </td>
               <td>
-                <b class="hint_word" v-show="regularInfo.isIncomeRemark && regularInfo.isIncomeRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isIncome==0" v-model.trim="regularInfo.isIncomeRemark"
-                  :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                <b class="hint_word" v-show="regularInfo.isIncomeRemark && regularInfo.isIncomeRemark.length>=300">
+                  输入长度不能超过300</b>
+                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isIncome==0"
+                  v-model.trim="regularInfo.isIncomeRemark" :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -115,9 +118,10 @@
                 </el-radio-group>
               </td>
               <td>
-                <b class="hint_word" v-show="regularInfo.isWorkRemark &&regularInfo.isWorkRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isWork==0" v-model.trim="regularInfo.isWorkRemark"
-                  :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                <b class="hint_word" v-show="regularInfo.isWorkRemark &&regularInfo.isWorkRemark.length>=300">
+                  输入长度不能超过300</b>
+                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isWork==0"
+                  v-model.trim="regularInfo.isWorkRemark" :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -131,9 +135,10 @@
                 </el-radio-group>
               </td>
               <td>
-                <b class="hint_word" v-show="regularInfo.isEstateRemark && regularInfo.isEstateRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isEstate==0" v-model.trim="regularInfo.isEstateRemark"
-                  :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                <b class="hint_word" v-show="regularInfo.isEstateRemark && regularInfo.isEstateRemark.length>=300">
+                  输入长度不能超过300</b>
+                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isEstate==0"
+                  v-model.trim="regularInfo.isEstateRemark" :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -147,9 +152,10 @@
                 </el-radio-group>
               </td>
               <td>
-                <b class="hint_word" v-show="regularInfo.isLiveRemark && regularInfo.isLiveRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isLive==0" v-model.trim="regularInfo.isLiveRemark"
-                  :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                <b class="hint_word" v-show="regularInfo.isLiveRemark && regularInfo.isLiveRemark.length>=300">
+                  输入长度不能超过300</b>
+                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isLive==0"
+                  v-model.trim="regularInfo.isLiveRemark" :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -163,9 +169,11 @@
                 </el-radio-group>
               </td>
               <td>
-                <b class="hint_word" v-show="regularInfo.isBusinessRemark && regularInfo.isBusinessRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isBusiness==0" v-model.trim="regularInfo.isBusinessRemark"
-                  :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                <b class="hint_word" v-show="regularInfo.isBusinessRemark && regularInfo.isBusinessRemark.length>=300">
+                  输入长度不能超过300</b>
+                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isBusiness==0"
+                  v-model.trim="regularInfo.isBusinessRemark" :rows="2" resize="none" :maxlength='arealength'
+                  placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -179,9 +187,10 @@
                 </el-radio-group>
               </td>
               <td>
-                <b class="hint_word" v-show="regularInfo.isCreditRemark && regularInfo.isCreditRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isCredit==0" v-model.trim="regularInfo.isCreditRemark"
-                  :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                <b class="hint_word" v-show="regularInfo.isCreditRemark && regularInfo.isCreditRemark.length>=300">
+                  输入长度不能超过300</b>
+                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isCredit==0"
+                  v-model.trim="regularInfo.isCreditRemark" :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -195,9 +204,11 @@
                 </el-radio-group>
               </td>
               <td>
-                <b class="hint_word" v-show="regularInfo.isCustomerflowRemark && regularInfo.isCustomerflowRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isCustomerflow==0" v-model.trim="regularInfo.isCustomerflowRemark"
-                  :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                <b class="hint_word" v-show="regularInfo.isCustomerflowRemark && regularInfo.isCustomerflowRemark.length>=300">
+                  输入长度不能超过300</b>
+                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isCustomerflow==0"
+                  v-model.trim="regularInfo.isCustomerflowRemark" :rows="2" resize="none" :maxlength='arealength'
+                  placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -211,9 +222,11 @@
                 </el-radio-group>
               </td>
               <td>
-                <b class="hint_word" v-show="regularInfo.isCustomerotherRemark && regularInfo.isCustomerotherRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isCustomerother==0" v-model.trim="regularInfo.isCustomerotherRemark"
-                  :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                <b class="hint_word" v-show="regularInfo.isCustomerotherRemark && regularInfo.isCustomerotherRemark.length>=300">
+                  输入长度不能超过300</b>
+                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isCustomerother==0"
+                  v-model.trim="regularInfo.isCustomerotherRemark" :rows="2" resize="none" :maxlength='arealength'
+                  placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -227,9 +240,11 @@
                 </el-radio-group>
               </td>
               <td>
-                <b class="hint_word" v-show="regularInfo.isLiabilitiesRemark && regularInfo.isLiabilitiesRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isLiabilities=='0'" v-model.trim="regularInfo.isLiabilitiesRemark"
-                  :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                <b class="hint_word" v-show="regularInfo.isLiabilitiesRemark && regularInfo.isLiabilitiesRemark.length>=300">
+                  输入长度不能超过300</b>
+                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isLiabilities=='0'"
+                  v-model.trim="regularInfo.isLiabilitiesRemark" :rows="2" resize="none" :maxlength='arealength'
+                  placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -243,9 +258,10 @@
                 </el-radio-group>
               </td>
               <td>
-                <b class="hint_word" v-show="regularInfo.isFlowRemark && regularInfo.isFlowRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isFlow=='0'" v-model.trim="regularInfo.isFlowRemark"
-                  :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                <b class="hint_word" v-show="regularInfo.isFlowRemark && regularInfo.isFlowRemark.length>=300">
+                  输入长度不能超过300</b>
+                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isFlow=='0'"
+                  v-model.trim="regularInfo.isFlowRemark" :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -259,9 +275,11 @@
                 </el-radio-group>
               </td>
               <td>
-                <b class="hint_word" v-show="regularInfo.isReferenceRemark && regularInfo.isReferenceRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isReference=='0'" v-model.trim="regularInfo.isReferenceRemark"
-                  :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                <b class="hint_word" v-show="regularInfo.isReferenceRemark && regularInfo.isReferenceRemark.length>=300">
+                  输入长度不能超过300</b>
+                <el-input type='textarea' class='margin_top_15' :readonly='material' v-if="regularInfo.isReference=='0'"
+                  v-model.trim="regularInfo.isReferenceRemark" :rows="2" resize="none" :maxlength='arealength'
+                  placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -295,9 +313,10 @@
                 </el-radio-group>
               </td>
               <td>
-                <b class="hint_word" v-show="regularInfo.wbeexEcutedtxt&&regularInfo.wbeexEcutedtxt.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :readonly='InfoInquire' v-if="regularInfo.wbeexEcuted==1" v-model.trim="regularInfo.wbeexEcutedtxt"
-                  :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                <b class="hint_word" v-show="regularInfo.wbeexEcutedtxt&&regularInfo.wbeexEcutedtxt.length>=300">
+                  输入长度不能超过300</b>
+                <el-input type='textarea' class='margin_top_15' :readonly='InfoInquire' v-if="regularInfo.wbeexEcuted==1"
+                  v-model.trim="regularInfo.wbeexEcutedtxt" :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -311,9 +330,11 @@
                 </el-radio-group>
               </td>
               <td>
-                <b class="hint_word" v-show="regularInfo.wnetEcutedBreatxt&&regularInfo.wnetEcutedBreatxt.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :readonly='InfoInquire' v-if="regularInfo.wnetEcutedBrea==1" v-model.trim="regularInfo.wnetEcutedBreatxt"
-                  :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                <b class="hint_word" v-show="regularInfo.wnetEcutedBreatxt&&regularInfo.wnetEcutedBreatxt.length>=300">
+                  输入长度不能超过300</b>
+                <el-input type='textarea' class='margin_top_15' :readonly='InfoInquire' v-if="regularInfo.wnetEcutedBrea==1"
+                  v-model.trim="regularInfo.wnetEcutedBreatxt" :rows="2" resize="none" :maxlength='arealength'
+                  placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -327,9 +348,10 @@
                 </el-radio-group>
               </td>
               <td>
-                <b class="hint_word" v-show="regularInfo.wnetPhonetxt&&regularInfo.wnetPhonetxt.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :readonly='InfoInquire' v-if="regularInfo.wnetPhone==1" v-model.trim="regularInfo.wnetPhonetxt"
-                  :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                <b class="hint_word" v-show="regularInfo.wnetPhonetxt&&regularInfo.wnetPhonetxt.length>=300">
+                  输入长度不能超过300</b>
+                <el-input type='textarea' class='margin_top_15' :readonly='InfoInquire' v-if="regularInfo.wnetPhone==1"
+                  v-model.trim="regularInfo.wnetPhonetxt" :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -343,9 +365,11 @@
                 </el-radio-group>
               </td>
               <td>
-                <b class="hint_word" v-show="regularInfo.wnetAddrandEstatetxt&&regularInfo.wnetAddrandEstatetxt.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :readonly='InfoInquire' v-if="regularInfo.wnetAddrandEstate==1" v-model.trim="regularInfo.wnetAddrandEstatetxt"
-                  :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                <b class="hint_word" v-show="regularInfo.wnetAddrandEstatetxt&&regularInfo.wnetAddrandEstatetxt.length>=300">
+                  输入长度不能超过300</b>
+                <el-input type='textarea' class='margin_top_15' :readonly='InfoInquire' v-if="regularInfo.wnetAddrandEstate==1"
+                  v-model.trim="regularInfo.wnetAddrandEstatetxt" :rows="2" resize="none" :maxlength='arealength'
+                  placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -359,9 +383,10 @@
                 </el-radio-group>
               </td>
               <td>
-                <b class="hint_word" v-show="regularInfo.wnetCompanytxt&&regularInfo.wnetCompanytxt.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :readonly='InfoInquire' v-if="regularInfo.wnetCompany=='0'" v-model.trim="regularInfo.wnetCompanytxt"
-                  :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                <b class="hint_word" v-show="regularInfo.wnetCompanytxt&&regularInfo.wnetCompanytxt.length>=300">
+                  输入长度不能超过300</b>
+                <el-input type='textarea' class='margin_top_15' :readonly='InfoInquire' v-if="regularInfo.wnetCompany=='0'"
+                  v-model.trim="regularInfo.wnetCompanytxt" :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -375,9 +400,11 @@
                 </el-radio-group>
               </td>
               <td>
-                <b class="hint_word" v-show="regularInfo.wnetAddrstatetxt && regularInfo.wnetAddrstatetxt.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :readonly='InfoInquire' v-if="regularInfo.wnetAddrstate=='0'" v-model.trim="regularInfo.wnetAddrstatetxt"
-                  :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                <b class="hint_word" v-show="regularInfo.wnetAddrstatetxt && regularInfo.wnetAddrstatetxt.length>=300">
+                  输入长度不能超过300</b>
+                <el-input type='textarea' class='margin_top_15' :readonly='InfoInquire' v-if="regularInfo.wnetAddrstate=='0'"
+                  v-model.trim="regularInfo.wnetAddrstatetxt" :rows="2" resize="none" :maxlength='arealength'
+                  placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -385,12 +412,13 @@
               <td> 7</td>
               <td> 工商登记信息说明</td>
               <td>
-                <td>
-                  <b class="hint_word" v-show="regularInfo.icbcRegistrationInfo && regularInfo.icbcRegistrationInfo.length>=300"> 输入长度不能超过300</b>
-                  <el-input type='textarea' class='margin_top_15' :readonly='InfoInquire' v-model.trim="regularInfo.icbcRegistrationInfo" :rows="2"
-                    resize="none" :maxlength='arealength' placeholder="请输入内容">
-                  </el-input>
-                </td>
+              <td>
+                <b class="hint_word" v-show="regularInfo.icbcRegistrationInfo && regularInfo.icbcRegistrationInfo.length>=300">
+                  输入长度不能超过300</b>
+                <el-input type='textarea' class='margin_top_15' :readonly='InfoInquire' v-model.trim="regularInfo.icbcRegistrationInfo"
+                  :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                </el-input>
+              </td>
             </tr>
           </table>
         </div>
@@ -422,9 +450,11 @@
                 </el-radio-group>
               </td>
               <td>
-                <b class="hint_word" v-show="regularInfo.isInmatchRemark && regularInfo.isInmatchRemark.length>=300"> 输入长度不能超过300</b>
-                <el-input type='textarea' class='margin_top_15' :readonly='matching' v-if="regularInfo.isInmatch=='0'" v-model.trim="regularInfo.isInmatchRemark"
-                  :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                <b class="hint_word" v-show="regularInfo.isInmatchRemark && regularInfo.isInmatchRemark.length>=300">
+                  输入长度不能超过300</b>
+                <el-input type='textarea' class='margin_top_15' :readonly='matching' v-if="regularInfo.isInmatch=='0'"
+                  v-model.trim="regularInfo.isInmatchRemark" :rows="2" resize="none" :maxlength='arealength'
+                  placeholder="请输入内容">
                 </el-input>
               </td>
             </tr>
@@ -440,14 +470,13 @@
           <span class="collapse_title_text">电话征信</span>
         </template>
         <div class="CreditForm_CheckId">
-          <!-- tab-title -->
           <ul>
-            <li ref="tabOne" class="tab1Default" v-for="(val,index) in tabTitle" :key="index" @click="tabClick($event,index,val)" :class="{tabAct:tabIndex==index}">
+            <li ref="tabOne" class="tab1Default" v-for="(val,index) in tabTitle" :key="index" @click="tabClick($event,index,val)"
+              :class="{tabAct:tabIndex==index}">
               {{val}}</li>
           </ul>
           <!-- pay-content 微信/支付宝核实 -->
           <div v-show="this.payment" class="weChatNapliay height_auto">
-            <!-- <p class="P_title">微信/支付宝核实</p> -->
             <p style='clear:both;padding:3px 0;'>
               <el-tag>微信/支付宝核实</el-tag>
             </p>
@@ -469,21 +498,18 @@
               <el-table-column label="备注" align="center">
                 <template slot-scope="scope">
                   <b class="hint_word" v-show="scope.row.remark&&scope.row.remark.length>=300"> 输入长度不能超过300</b>
-                  <el-input class='margin_top_15' type="textarea" :readonly='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none"
-                    v-model.trim="scope.row.remark" :maxlength='arealength' placeholder="请输入内容">
+                  <el-input class='margin_top_15' type="textarea" :readonly='PhoneCredit' v-if="scope.row.insResult=='01'"
+                    :rows="2" resize="none" v-model.trim="scope.row.remark" :maxlength='arealength' placeholder="请输入内容">
                   </el-input>
-                  <!-- {{scope.row.insResult}} -->
                 </template>
               </el-table-column>
             </el-table>
           </div>
           <!-- 客户本人中-电话拨打核实  -->
           <div v-show="custom">
-            <!-- <p class="P_title">电话拨打核实</p> -->
             <p style='clear:both;padding:3px 0;'>
               <el-tag>电话拨打核实</el-tag>
             </p>
-            <!-- ============对象形式============= -->
             <table border="1" cellpadding='2' width='100%'>
               <tr>
                 <th width='50px'> 序号</th>
@@ -515,13 +541,12 @@
                 <!-- 备注 -->
                 <td style="vertical-align:bottom;">
                   <b class="hint_word" v-show="insTelCustInfo.remark&&insTelCustInfo.remark.length>=300"> 输入长度不能超过300</b>
-                  <el-input class='margin_top_15' type='textarea' :readonly='PhoneCredit' v-if="insTelCustInfo.insResult=='01'" v-model.trim="insTelCustInfo.remark"
-                    :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
+                  <el-input class='margin_top_15' type='textarea' :readonly='PhoneCredit' v-if="insTelCustInfo.insResult=='01'"
+                    v-model.trim="insTelCustInfo.remark" :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                   </el-input>
                 </td>
               </tr>
             </table>
-            <!-- ====================== -->
           </div>
           <!--  除客户本人的 电话拨打核实-->
           <div v-show="this.others" class="MobileCheck height_auto">
@@ -579,8 +604,8 @@
               <el-table-column label="备注" align="center" min-width="180">
                 <template slot-scope="scope">
                   <b class="hint_word" v-show="scope.row.remark&&scope.row.remark.length>=300"> 输入长度不能超过300</b>
-                  <el-input class='margin_top_15' type="textarea" :readonly='PhoneCredit' v-if="scope.row.insResult=='01'" :rows="2" resize="none"
-                    v-model.trim="scope.row.remark" :maxlength="this.textareaL" placeholder="请输入内容">
+                  <el-input class='margin_top_15' type="textarea" :readonly='PhoneCredit' v-if="scope.row.insResult=='01'"
+                    :rows="2" resize="none" v-model.trim="scope.row.remark" :maxlength="this.textareaL" placeholder="请输入内容">
                   </el-input>
                 </template>
               </el-table-column>
@@ -697,15 +722,10 @@
               <span class="title_icon_span">删除</span>
             </span>
           </div>
-          <!-- <p style="float:right" v-if='QTConclutionBtn'>
-              <span class="btn" @click.stop="addQTResult">
-                <img src='../../../../../static/images/add.png'> 添加 </span>
-              <span class="btn" @click.stop="delQTresult">
-                <img src="../../../../../static/images/delete.png"> 删除</span>
-            </p> -->
         </template>
         <div class="result_QT height_auto">
-          <el-table :data="insConclusion" style="width: 100%" highlight-current-row @current-change='QTtableVal' border min-width='1366px'>
+          <el-table :data="insConclusion" style="width: 100%" highlight-current-row @current-change='QTtableVal' border
+            min-width='1366px'>
             <el-table-column label="质检结果" align="center" width="260">
               <template slot-scope="scope">
                 <i class="required_Red"> * </i>
@@ -718,25 +738,31 @@
             <el-table-column label="差错类型" align="center" width="230">
               <template slot-scope="scope">
                 <b class="hint_word" v-show="scope.row.errorType&&scope.row.errorType.length>=50"> 输入长度不能超过50</b>
-                <el-tooltip class="item" effect="dark" :content="scope.row.errorType" :disabled="!scope.row.errorType" placement="top-start">
-                  <el-input :readonly='QTConclution' v-model.trim="scope.row.errorType" :maxlength='fiftyWords' placeholder="请输入内容"></el-input>
+                <el-tooltip class="item" effect="dark" :content="scope.row.errorType" :disabled="!scope.row.errorType"
+                  placement="top-start">
+                  <el-input :readonly='QTConclution' v-model.trim="scope.row.errorType" :maxlength='fiftyWords'
+                    placeholder="请输入内容"></el-input>
                 </el-tooltip>
               </template>
             </el-table-column>
             <el-table-column label="差错描述" align="center" width="230">
               <template slot-scope="scope">
-                <b class="hint_word" v-show="scope.row.errorDescribe&& scope.row.errorDescribe.length>=300"> 输入长度不能超过300</b>
-                <el-tooltip class="item" effect="dark" :content="scope.row.errorDescribe" :disabled="!scope.row.errorDescribe" placement="top-start">
-                  <el-input :readonly='QTConclution' v-model.trim="scope.row.errorDescribe" :maxlength='arealength' placeholder="请输入内容"></el-input>
+                <b class="hint_word" v-show="scope.row.errorDescribe&& scope.row.errorDescribe.length>=300">
+                  输入长度不能超过300</b>
+                <el-tooltip class="item" effect="dark" :content="scope.row.errorDescribe" :disabled="!scope.row.errorDescribe"
+                  placement="top-start">
+                  <el-input :readonly='QTConclution' v-model.trim="scope.row.errorDescribe" :maxlength='arealength'
+                    placeholder="请输入内容"></el-input>
                 </el-tooltip>
               </template>
             </el-table-column>
             <el-table-column label="备注" align="center" min-width="200">
               <template slot-scope="scope">
                 <b class="hint_word" v-show="scope.row.remark&&scope.row.remark.length>=300"> 输入长度不能超过300</b>
-                <el-tooltip class="item" effect="dark" :content="scope.row.remark" :disabled="!scope.row.remark" placement="top-start">
-                  <el-input class="margin_top_15" type='textarea' :readonly='QTConclution' v-model.trim="scope.row.remark" :rows="2" resize="none"
-                    :maxlength='arealength' placeholder="请输入内容">
+                <el-tooltip class="item" effect="dark" :content="scope.row.remark" :disabled="!scope.row.remark"
+                  placement="top-start">
+                  <el-input class="margin_top_15" type='textarea' :readonly='QTConclution' v-model.trim="scope.row.remark"
+                    :rows="2" resize="none" :maxlength='arealength' placeholder="请输入内容">
                   </el-input>
                 </el-tooltip>
               </template>
@@ -802,13 +828,8 @@
         <i class="approve_icon brokenLineIcon"></i>
         <span class="approve_text">大数据风控</span>
       </span>
-      <!-- <span class="approve_item" @click="roSocialSecurity" v-if="SocialSecurityBtn">
-        <i class="approve_icon dataMaptIcon"></i>
-        <span class="approve_text">社保/公积金{{social}}</span>
-      </span> -->
     </div>
-    <!-- =================================弹窗===================================== -->
-    <!-- 发起复议  -->
+    <!-- 发起复议弹窗  -->
     <div class="Height_240">
       <el-dialog title="发起复议" :visible.sync="ReconsiderShow" :modal="false ">
         <el-form>
@@ -835,7 +856,7 @@
         </div>
       </el-dialog>
     </div>
-    <!-- 区域经理-提交按钮-发起复议 -->
+    <!-- 区域经理-提交按钮-发起复议弹窗 -->
     <div class="Height_240">
       <el-dialog title="发起复议" :visible.sync="AreaReconsiderShow" :modal="false ">
         <el-form>
@@ -846,7 +867,8 @@
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item :class="['fr',ToAteaApprovalParams.reviewResult=='02'? 'alert_collapse_inputLabel':'']" label="质检结果：" :label-width="formApproLabel">
+            <el-form-item :class="['fr',ToAteaApprovalParams.reviewResult=='02'? 'alert_collapse_inputLabel':'']" label="质检结果："
+              :label-width="formApproLabel">
               <el-select v-model="ToAteaApprovalParams.checkResult" placeholder="请选择">
                 <el-option v-for="item in QTresultAlert" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
@@ -854,13 +876,15 @@
             </el-form-item>
           </div>
           <div class="bfc">
-            <el-form-item :class="['fl',ToAteaApprovalParams.reviewResult=='02'? 'alert_collapse_inputLabel':'']" label="质检员是否有差错：" :label-width="formApproLabel">
+            <el-form-item :class="['fl',ToAteaApprovalParams.reviewResult=='02'? 'alert_collapse_inputLabel':'']" label="质检员是否有差错："
+              :label-width="formApproLabel">
               <el-select v-model="ToAteaApprovalParams.isError" placeholder="请选择">
                 <el-option v-for="item in ApprolisError" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item :class="['fr',ToAteaApprovalParams.reviewResult=='02'? 'alert_collapse_inputLabel':'']" label="差错类型：" :label-width="formApproLabel">
+            <el-form-item :class="['fr',ToAteaApprovalParams.reviewResult=='02'? 'alert_collapse_inputLabel':'']" label="差错类型："
+              :label-width="formApproLabel">
               <el-input v-model="ToAteaApprovalParams.errorType" :maxlength='arealength' placeholder="请输入内容"></el-input>
             </el-form-item>
           </div>
@@ -880,11 +904,12 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="huiTuiShow=false">取 消</el-button>
-          <el-button type="primary" :loading="loadSub" @click='AreaToReconsider(ToAteaApprovalParams.reviewResult)'> {{ReconSubmit}}</el-button>
+          <el-button type="primary" :loading="loadSub" @click='AreaToReconsider(ToAteaApprovalParams.reviewResult)'>
+            {{ReconSubmit}}</el-button>
         </div>
       </el-dialog>
     </div>
-    <!-- 复议审批 复议（首次）+ 合规经理-查询区域经理审批内容 (共用)  -->
+    <!-- 复议审批 复议（首次）+ 合规经理-查询区域经理审批内容 (共用) 弹窗  -->
     <div class="Height_240">
       <el-dialog title="复议审批" :visible.sync="ReAprovalShow" :modal="false ">
         <el-form>
@@ -895,7 +920,8 @@
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item :class="['fr',ToApprovalParams.reviewResult=='02'? 'alert_collapse_inputLabel':'']" label="质检结果：" :label-width="formApproLabel">
+            <el-form-item :class="['fr',ToApprovalParams.reviewResult=='02'? 'alert_collapse_inputLabel':'']" label="质检结果："
+              :label-width="formApproLabel">
               <el-select v-model="ToApprovalParams.checkResult" placeholder="请选择">
                 <el-option v-for="item in QTresultAlert" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
@@ -903,13 +929,15 @@
             </el-form-item>
           </div>
           <div class="bfc">
-            <el-form-item :class="['fl',ToApprovalParams.reviewResult=='02'? 'alert_collapse_inputLabel':'']" label="质检员是否有差错：" :label-width="formApproLabel">
+            <el-form-item :class="['fl',ToApprovalParams.reviewResult=='02'? 'alert_collapse_inputLabel':'']" label="质检员是否有差错："
+              :label-width="formApproLabel">
               <el-select v-model="ToApprovalParams.isError" placeholder="请选择">
                 <el-option v-for="item in ApprolisError" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item :class="['fr',ToApprovalParams.reviewResult=='02'? 'alert_collapse_inputLabel':'']" label="差错类型：" :label-width="formApproLabel">
+            <el-form-item :class="['fr',ToApprovalParams.reviewResult=='02'? 'alert_collapse_inputLabel':'']" label="差错类型："
+              :label-width="formApproLabel">
               <el-input v-model="ToApprovalParams.errorType" :maxlength='arealength' placeholder="请输入内容"></el-input>
             </el-form-item>
           </div>
@@ -929,11 +957,12 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button>取 消</el-button>
-          <el-button type="primary" :loading="loadSub" @click='ToApproval(ToApprovalParams.reviewResult)'> {{ReconSubmit}}</el-button>
+          <el-button type="primary" :loading="loadSub" @click='ToApproval(ToApprovalParams.reviewResult)'>
+            {{ReconSubmit}}</el-button>
         </div>
       </el-dialog>
     </div>
-    <!-- 流程轨迹 -->
+    <!-- 流程轨迹 弹窗 -->
     <div class="alertBox pro_alert">
       <el-dialog title='流程轨迹' :visible.sync="lcdialogVisible" :modal="false" width="1000px">
         <el-table :data="lcgjData" height="250" border style="width: 100%" highlight-current-row>
@@ -1258,7 +1287,6 @@
           value: '09',
           label: '无'
         }],
-        // ----------------------------------------
         ApprolisError: [{
           value: '1',
           label: '是'
@@ -1267,7 +1295,7 @@
           label: '否'
         }],
         value: '',
-        // -----------弹窗---
+        // -----------弹窗----------------
         ReconsiderShow: false,
         AreaReconsiderShow: false,
         ReAprovalShow: false,
@@ -1343,128 +1371,114 @@
         this.ReconsiderShow = true;
       },
       referPort() { // 质检页面查询接口
-        this.get("/insConclusion/queryInsConclusionObj?applyId=" + this.propQTconclution.applyId + '&' + Math.random()
-          // , {
-          //   applyId: this.propQTconclution.applyId, //入参待更新+测试-------------------------------------------------------
-          // }
-        ).then(res => {
-          if (res.statusCode == 200) {
-            // 除基本信息以外，专员获取都为空，applyid要一个个赋值进去
-            //  基本信息                                -Object
-            this.baseInfo = res.data.applyBaseInfo;
-            // 质检流程-质检页面查询接口-基本信息中取流程轨迹入参  processInstanceIdSecond不为空取 processInstanceIdSecond ，为空取processInstanceId
-            this.baseInfo && this.baseInfo.processInstanceIdSecond ? this.processInstanceIdParams = this.baseInfo.processInstanceIdSecond :
-              this.processInstanceIdParams = this.baseInfo.processInstanceId;
-            // 资料核实+三方信息查询+ 内部匹配核实         -Object
-            // !res.data.insRegularInfo ? this.regularInfo.applyId = this.propQTconclution.applyId : this.regularInfo =
-            //   res.data.insRegularInfo;
-            !res.data.insRegularInfo ? this.regularInfo : this.regularInfo = res.data.insRegularInfo;
-            // 质检结论                                  -Object
-            !res.data.insConclusionList ? this.insConclusion.applyId = this.propQTconclution.applyId : this.insConclusion =
-              res.data.insConclusionList;
-            this.insConclusion[0] && this.insConclusion[0].id ? this.addId = this.insConclusion[0].id : this.addId =
-              ''; //取添加质检结论时，id值 
-            // 循环质检结论，取issend为1的那条数据的id，作为发起复议弹窗入参
-            for (var n = 0; n < this.insConclusion.length; n++) {
-              this.insConclusion[n].isSend && this.insConclusion[n].isSend == '1' ? this.conclusionId = this.insConclusion[
-                n].id : '';
-            }
-            // 复核结论   -----obj
-            !res.data.insReviewConclusion ? this.reviewConclusion.applyId = this.propQTconclution.applyId : this.reviewConclusion =
-              res.data.insReviewConclusion;
-            // 电话征信：客户本人-电话拨打核实 - 本人只有一条电话拨打核实记录            -object
-            // 专员第一次进，只返回电话号码-因为是从申请表取的。保存之后其他字段都会有，applyid也会被存入
-            if (!res.data.insTelCustInfo.applyId) { //第一次进来，无数据（除电话号码），除默认选正常其他分别赋值进去
-              // 质检结果不赋值，因为默认选正常-00
-              this.insTelCustInfo.applyId = this.propQTconclution.applyId;
-              this.insTelCustInfo.telNum = res.data.insTelCustInfo.telNum; //电话号码
-              this.insTelCustInfo.telRecord = res.data.insTelCustInfo.telRecord; //电话录音
-              this.insTelCustInfo.iisself = res.data.insTelCustInfo.iisself; //接听人是否借款人本人
-              this.insTelCustInfo.appConclusion = res.data.insTelCustInfo.appConclusion; //接听说明
-              this.insTelCustInfo.remark = res.data.insTelCustInfo.remark; //备注
+        this.get("/insConclusion/queryInsConclusionObj?applyId=" + this.propQTconclution.applyId + '&' + Math.random())
+          .then(res => {
+            if (res.statusCode == 200) {
+              // 除基本信息以外，专员获取都为空，applyid要一个个赋值进去
+              //  基本信息                                -Object
+              this.baseInfo = res.data.applyBaseInfo;
+              // 质检流程-质检页面查询接口-基本信息中取流程轨迹入参  processInstanceIdSecond不为空取 processInstanceIdSecond ，为空取processInstanceId
+              this.baseInfo && this.baseInfo.processInstanceIdSecond ? this.processInstanceIdParams = this.baseInfo.processInstanceIdSecond :
+                this.processInstanceIdParams = this.baseInfo.processInstanceId;
+              // 资料核实+三方信息查询+ 内部匹配核实         -Object
+              !res.data.insRegularInfo ? this.regularInfo : this.regularInfo = res.data.insRegularInfo;
+              // 质检结论                                  -Object
+              !res.data.insConclusionList ? this.insConclusion.applyId = this.propQTconclution.applyId : this.insConclusion =
+                res.data.insConclusionList;
+              this.insConclusion[0] && this.insConclusion[0].id ? this.addId = this.insConclusion[0].id : this.addId =
+                ''; //取添加质检结论时，id值 
+              // 循环质检结论，取issend为1的那条数据的id，作为发起复议弹窗入参
+              for (var n = 0; n < this.insConclusion.length; n++) {
+                this.insConclusion[n].isSend && this.insConclusion[n].isSend == '1' ? this.conclusionId = this.insConclusion[
+                  n].id : '';
+              }
+              // 复核结论   -----obj
+              !res.data.insReviewConclusion ? this.reviewConclusion.applyId = this.propQTconclution.applyId : this.reviewConclusion =
+                res.data.insReviewConclusion;
+              // 电话征信：客户本人-电话拨打核实 - 本人只有一条电话拨打核实记录            -object
+              // 专员第一次进，只返回电话号码-因为是从申请表取的。保存之后其他字段都会有，applyid也会被存入
+              if (!res.data.insTelCustInfo.applyId) { //第一次进来，无数据（除电话号码），除默认选正常其他分别赋值进去
+                // 质检结果不赋值，因为默认选正常-00
+                this.insTelCustInfo.applyId = this.propQTconclution.applyId;
+                this.insTelCustInfo.telNum = res.data.insTelCustInfo.telNum; //电话号码
+                this.insTelCustInfo.telRecord = res.data.insTelCustInfo.telRecord; //电话录音
+                this.insTelCustInfo.iisself = res.data.insTelCustInfo.iisself; //接听人是否借款人本人
+                this.insTelCustInfo.appConclusion = res.data.insTelCustInfo.appConclusion; //接听说明
+                this.insTelCustInfo.remark = res.data.insTelCustInfo.remark; //备注
+              } else {
+                this.insTelCustInfo = res.data.insTelCustInfo;
+                // this.insTelCustInfo.insResult = res.data.insTelCustInf.insResult//电话拨打核实-质检结果
+              }
+              // !res.data.insTelCustInfo.applyId ? this.insTelCustInfo.applyId = this.propQTconclution.applyId : this.insTelCustInfo =
+              //   res.data.insTelCustInfo; //this.insTelCustInfo 是obj / 查询接口 -只返回客户本人-电话核实信息
+              // !res.data.insTelCustInfo.insResult ? '' : this.insTelCustInfo.insResult = res.data.insTelCustInf.insResult; //本人拨打电话核实-默认选00           
+              // 电话征信：电话拨打核实-除客户本人,保存之后清空数组重新保存最新值
+              this.insTelVerifyListAddress = [];
+              this.insTelVerifyListCompany = [];
+              this.insTelVerifyListFamily = [];
+              this.insTelVerifyListWork = [];
+              this.insTelVerifyListOthers = [];
+              if (res.data.insTelVerifyList) {
+                for (var k = 0; k < res.data.insTelVerifyList.length; k++) {
+                  res.data.insTelVerifyList[k].insResult == '' || res.data.insTelVerifyList[k].insResult == null ?
+                    res.data.insTelVerifyList[k].insResult = '00' : ''; //质检结果如果没有值，默认选00 正常
+                  !res.data.insTelVerifyList[k].applyId ? res.data.insTelVerifyList[k].applyId = this.propQTconclution
+                    .applyId : ''; //质检结果如果没有值，默认选00 正常
+                  res.data.insTelVerifyList[k].telType === '01' ? this.insTelVerifyListAddress.push(res.data.insTelVerifyList[
+                    k]) : ''; //住址电话
+                  res.data.insTelVerifyList[k].telType === '02' ? this.insTelVerifyListCompany.push(res.data.insTelVerifyList[
+                    k]) : ''; //单位电话
+                  res.data.insTelVerifyList[k].telType === '03' ? this.insTelVerifyListFamily.push(res.data.insTelVerifyList[
+                    k]) : ''; //家庭联系人
+                  res.data.insTelVerifyList[k].telType === '04' ? this.insTelVerifyListOthers.push(res.data.insTelVerifyList[
+                    k]) : ''; //其他联系人
+                  res.data.insTelVerifyList[k].telType === '05' ? this.insTelVerifyListWork.push(res.data.insTelVerifyList[
+                    k]) : ''; //工作证明
+                }
+              }
+              // 电话征信：微信/支付宝核实  ----  单位电话无微信支付宝--- -Array  (专员进来为空，提交/保存之后八条都会返回)
+              for (var k = 0; k < res.data.insWechatAlipayList.length; k++) {
+                if (res.data.insWechatAlipayList[k].telType == '06') { //客户本人
+                  if (res.data.insWechatAlipayList[k].insVerifyType == '00') {
+                    this.AlipayCus.shift();
+                    this.AlipayCus.unshift(res.data.insWechatAlipayList[k]);
+                  } else {
+                    this.AlipayCus.pop();
+                    this.AlipayCus.push(res.data.insWechatAlipayList[k]);
+                  }
+                } else if (res.data.insWechatAlipayList[k].telType == '03') { //家庭联系人
+                  if (res.data.insWechatAlipayList[k].insVerifyType == '00') {
+                    this.AlipayFamily.shift();
+                    this.AlipayFamily.unshift(res.data.insWechatAlipayList[k]);
+                  } else {
+                    this.AlipayFamily.pop();
+                    this.AlipayFamily.push(res.data.insWechatAlipayList[k]);
+                  }
+                } else if (res.data.insWechatAlipayList[k].telType == '04') { //其他联系人
+                  if (res.data.insWechatAlipayList[k].insVerifyType == '00') {
+                    this.AlipayOthers.shift();
+                    this.AlipayOthers.unshift(res.data.insWechatAlipayList[k]);
+                  } else {
+                    this.AlipayOthers.pop();
+                    this.AlipayOthers.push(res.data.insWechatAlipayList[k]);
+                  }
+                } else if (res.data.insWechatAlipayList[k].telType == '05') { //工作证明
+                  if (res.data.insWechatAlipayList[k].insVerifyType == '00') {
+                    this.AlipayWork.shift();
+                    this.AlipayWork.unshift(res.data.insWechatAlipayList[k]);
+                  } else {
+                    this.AlipayWork.pop();
+                    this.AlipayWork.push(res.data.insWechatAlipayList[k]);
+                  }
+                }
+              }
+              this.WechatData(0); //客户本人 微信支付宝赋值为客户本人AlipayCus
+              // this.addQTResult(); //进页面默认添加一条
+              this.Social(); //社保公积金接口
             } else {
-              this.insTelCustInfo = res.data.insTelCustInfo;
-              // this.insTelCustInfo.insResult = res.data.insTelCustInf.insResult//电话拨打核实-质检结果
+              this.$message.error(res.msg);
             }
-            // !res.data.insTelCustInfo.applyId ? this.insTelCustInfo.applyId = this.propQTconclution.applyId : this.insTelCustInfo =
-            //   res.data.insTelCustInfo; //this.insTelCustInfo 是obj / 查询接口 -只返回客户本人-电话核实信息
-            // !res.data.insTelCustInfo.insResult ? '' : this.insTelCustInfo.insResult = res.data.insTelCustInf.insResult; //本人拨打电话核实-默认选00           
-            // 电话征信：电话拨打核实-除客户本人,保存之后清空数组重新保存最新值
-            this.insTelVerifyListAddress = [];
-            this.insTelVerifyListCompany = [];
-            this.insTelVerifyListFamily = [];
-            this.insTelVerifyListWork = [];
-            this.insTelVerifyListOthers = [];
-            if (res.data.insTelVerifyList) {
-              for (var k = 0; k < res.data.insTelVerifyList.length; k++) {
-                res.data.insTelVerifyList[k].insResult == '' || res.data.insTelVerifyList[k].insResult == null ?
-                  res.data.insTelVerifyList[k].insResult = '00' : ''; //质检结果如果没有值，默认选00 正常
-                !res.data.insTelVerifyList[k].applyId ? res.data.insTelVerifyList[k].applyId = this.propQTconclution
-                  .applyId : ''; //质检结果如果没有值，默认选00 正常
-                res.data.insTelVerifyList[k].telType === '01' ? this.insTelVerifyListAddress.push(res.data.insTelVerifyList[
-                  k]) : ''; //住址电话
-                res.data.insTelVerifyList[k].telType === '02' ? this.insTelVerifyListCompany.push(res.data.insTelVerifyList[
-                  k]) : ''; //单位电话
-                res.data.insTelVerifyList[k].telType === '03' ? this.insTelVerifyListFamily.push(res.data.insTelVerifyList[
-                  k]) : ''; //家庭联系人
-                res.data.insTelVerifyList[k].telType === '04' ? this.insTelVerifyListOthers.push(res.data.insTelVerifyList[
-                  k]) : ''; //其他联系人
-                res.data.insTelVerifyList[k].telType === '05' ? this.insTelVerifyListWork.push(res.data.insTelVerifyList[
-                  k]) : ''; //工作证明
-              }
-            }
-            // 电话征信：微信/支付宝核实  ----  单位电话无微信支付宝--- -Array  (专员进来为空，提交/保存之后八条都会返回)
-            for (var k = 0; k < res.data.insWechatAlipayList.length; k++) {
-              if (res.data.insWechatAlipayList[k].telType == '06') { //客户本人
-                if (res.data.insWechatAlipayList[k].insVerifyType == '00') {
-                  // this.AlipayCus[0] = res.data.insWechatAlipayList[k];
-                  // this.AlipayCus[0].insResult = res.data.insWechatAlipayList[k].insResult;
-                  this.AlipayCus.shift();
-                  this.AlipayCus.unshift(res.data.insWechatAlipayList[k]);
-                } else {
-                  // this.AlipayCus[1] = res.data.insWechatAlipayList[k];
-                  this.AlipayCus.pop();
-                  this.AlipayCus.push(res.data.insWechatAlipayList[k]);
-                }
-              } else if (res.data.insWechatAlipayList[k].telType == '03') { //家庭联系人
-                if (res.data.insWechatAlipayList[k].insVerifyType == '00') {
-                  // this.AlipayFamily[0] = res.data.insWechatAlipayList[k];
-                  this.AlipayFamily.shift();
-                  this.AlipayFamily.unshift(res.data.insWechatAlipayList[k]);
-                } else {
-                  // this.AlipayFamily[1] = res.data.insWechatAlipayList[k];
-                  this.AlipayFamily.pop();
-                  this.AlipayFamily.push(res.data.insWechatAlipayList[k]);
-                }
-              } else if (res.data.insWechatAlipayList[k].telType == '04') { //其他联系人
-                if (res.data.insWechatAlipayList[k].insVerifyType == '00') {
-                  // this.AlipayOthers[0] = res.data.insWechatAlipayList[k];
-                  this.AlipayOthers.shift();
-                  this.AlipayOthers.unshift(res.data.insWechatAlipayList[k]);
-                } else {
-                  // this.AlipayOthers[1] = res.data.insWechatAlipayList[k];
-                  this.AlipayOthers.pop();
-                  this.AlipayOthers.push(res.data.insWechatAlipayList[k]);
-                }
-              } else if (res.data.insWechatAlipayList[k].telType == '05') { //工作证明
-                if (res.data.insWechatAlipayList[k].insVerifyType == '00') {
-                  // this.AlipayWork[0] = res.data.insWechatAlipayList[k];
-                  this.AlipayWork.shift();
-                  this.AlipayWork.unshift(res.data.insWechatAlipayList[k]);
-                } else {
-                  // this.AlipayWork[1] = res.data.insWechatAlipayList[k];
-                  this.AlipayWork.pop();
-                  this.AlipayWork.push(res.data.insWechatAlipayList[k]);
-                }
-              }
-            }
-            this.WechatData(0); //客户本人 微信支付宝赋值为客户本人AlipayCus
-            // this.addQTResult(); //进页面默认添加一条
-            this.Social(); //社保公积金接口
-          } else {
-            this.$message.error(res.msg);
-          }
-        });
+          });
       },
       getManagerList() { //获取各主管查看table信息
         this.get("/insReconApply/getReconApplyReconApproval", {
@@ -1487,9 +1501,6 @@
             // 第一次复议审批信息--审批信息取值-obj
             this.insReconApproval = [];
             res.data.insReconApproval ? this.insReconApproval.push(res.data.insReconApproval) : '';
-            // res.data.insReconApproval && res.data.insReconApproval.reviewRemark ? this.insReconApproval.push(res.data
-            //   .insReconApproval) : ''; //复议申请表
-            // res.data.insReconApproval.reviewRemark?this.insReconApproval.push(res.data.insReconApproval):'';//复议申请表
           } else {
             this.$message.error(res.msg);
           }
@@ -1626,9 +1637,6 @@
         }
       },
       SubmitAlert() { //提交弹窗
-        // this.submitShow = true;
-        // this.adbtn = '确认';
-        // this.loadsitu = false;
         this.$confirm('确定提交？', '提示', {
           confirmButtonText: '确定',
           type: 'warning',
@@ -1641,9 +1649,6 @@
       // ---------------------------------按钮事件----------------
       // 保存 或 提交
       SaveInf(type) { //质检主管不需要提交，只有质检专员 显示提交
-        // this.loadsitu = true;
-        // this.adbtn = '提交中';
-        // this.submitShow = false;
         this.checkResultCount01 = 0;
         this.checkResultCount02 = 0;
         this.checkResultCount03 = 0;
@@ -1722,7 +1727,6 @@
             } else {
               this.$message.error(res.msg);
             }
-            // this.submitShow = false;
           });
         } else { //  常规质检、专纵质检
           // 保存、提交之前都要校验质检结论是否重复添加多条
@@ -1785,7 +1789,6 @@
           this.AlipayConcat = this.AlipayCus.concat(this.AlipayFamily).concat(this.AlipayWork).concat(this.AlipayOthers)
           // 循环质检结论list 改变对应的值-不能跟上面的循环校验一起，校验不过不用修改
           for (var i = 0; i < this.insConclusion.length; i++) {
-            console.log('isSubmit：', this.insConclusion[i].isSubmit)
             type == '保存' ? this.insConclusion[i].isSubmit = '0' : this.insConclusion[i].isSubmit = '1'; // 质检结论 保存：0，修改：1
             this.propQTconclution.pageType !== 'checkApp_apply' ? this.insConclusion[i].checkType = '02' : this.insConclusion[
               i].checkType = '01'; // 质检主管保存 质检结论 CheckType 改为02，初检01
@@ -1837,7 +1840,6 @@
                 this.$message.error(res.msg);
               }
             });
-          // this.submitShow = false;
         }
       },
       // 无需复议
@@ -2035,7 +2037,6 @@
             this.ToApprovalParams.isError = '';
             this.ToApprovalParams.errorType = '';
             this.ToApprovalParams.reviewRemark = '';
-            // checkApp_check_recon_manager   复议首次
             this.propQTconclution.pageType == 'checkApp_check_recon_manager' ? this.$router.push(
               'ReManagerTaskList?taskNodeName=checkApp_check_recon_manager&flag=11') : ''; //复议首次-成功跳转到列表页
             this.propQTconclution.pageType == 'checkApp_compliance_manager' ? this.$router.push(
@@ -2059,11 +2060,6 @@
       // 流程轨迹-工作流接口-查询流程轨迹
       getLcgjList() {
         this.lcdialogVisible = true;
-        // POST
-        // {
-        //   processInstanceId:this.processInstanceIdParams,
-        //   processStatus:'01'
-        // }
         this.post(baseurlBPM.baseUrl_common2 + '/bpmService/getProcessTraceList', {
             processInstanceId: this.processInstanceIdParams,
             processStatus: '01'
@@ -2100,7 +2096,6 @@
       },
       roSocialSecurity() { //社保/公积金-授权显示
         if (this.social == "(未授权)") {
-          // this.socialLogVisible = true;
           this.$confirm('客户社保公积金未授权！', '提示', {
             confirmButtonText: '确定',
             type: 'warning',
@@ -2255,16 +2250,9 @@
     font-size: 14px;
   }
 
-  /* height: 70px; */
-
   .regularQT tr {
     min-height: 30px;
   }
-
-  /* .regularQT tr:nth-of-type(1) {
-    height: 35px;
-    vertical-align: middle;
-  } */
 
   .regularQT td,
   .regularQT th {
@@ -2282,7 +2270,6 @@
     color: #606266;
     position: relative;
     padding: 0 10px;
-    /* min-height:30px !important; */
     height: 30px;
     font-size: 13px;
   }

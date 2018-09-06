@@ -59,11 +59,12 @@
           <ul>
             <li>
               <p class="description" style="position:relative;margin-top:10px;">
-                <i v-show="fraudAuditOpinion.auditDesc&&fraudAuditOpinion.auditDesc.length>=500" class="hint_word" style="left:165px;top:-15px;z-index:9999">输入长度不能超过500</i>
+                <i v-show="fraudAuditOpinion.auditDesc&&fraudAuditOpinion.auditDesc.length>=500" class="hint_word"
+                  style="left:165px;top:-15px;z-index:9999">输入长度不能超过500</i>
                 <label style='vertical-align:top;'>
                   <b class="required_Red" v-show="HintStar"> * </b> 复议说明： </label>
-                <el-input style="width:calc(100% - 200px);" :disabled="manager" class="ccccc" type="textarea" :rows='3' resize='none' v-model='fraudAuditOpinion.auditDesc'
-                  :maxlength="500"></el-input>
+                <el-input style="width:calc(100% - 200px);" :disabled="manager" class="ccccc" type="textarea" :rows='3'
+                  resize='none' v-model='fraudAuditOpinion.auditDesc' :maxlength="500"></el-input>
               </p>
             </li>
             <li class="ApplyInf">
@@ -81,16 +82,7 @@
     <div class="ReApply_btn" v-if="ManagerBtn">
       <el-button type="primary" @click="sumt">提交</el-button>
       <el-button @click="calc">取消</el-button>
-      <!-- <el-button @click="cancle">取消</el-button> -->
     </div>
-    <!-- 弹窗 -->
-    <!-- <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
-        <span>确定操作？</span>
-        <span slot="footer" class="dialog-footer">
-          <el-button class="calbtn" @click="Confirm=false">取消</el-button>
-          <el-button class="subtn" type="primary" :loading="loadsitu" @click="SaveInf">{{adbtn}}</el-button>
-        </span>
-      </el-dialog> -->
   </div>
 </template>
 <script>
@@ -103,33 +95,11 @@
         manager: false,
         ManagerBtn: true,
         HintStar: true,
-        // Confirm: false,
-        // adbtn: '确认',
         ReIllustrate: false,
-        // loadsitu: false,
         tableData: [],
         conclusionId: '', //提交入参
-        // tableData: [{
-        //   date: '2016-05-02',
-        //   name: '王小虎',
-        //   address: '上海市普陀区金沙江路 1518 弄'
-        // }, {
-        //   date: '2016-05-04',
-        //   name: '王小虎',
-        //   address: '上海市普陀区金沙江路 1517 弄'
-        // }, {
-        //   date: '2016-05-01',
-        //   name: '王小虎',
-        //   address: '上海市普陀区金沙江路 1519 弄'
-        // }, {
-        //   date: '2016-05-03',
-        //   name: '王小虎',
-        //   address: '上海市普陀区金沙江路 1516 弄'
-        // }],
         activeNames: ['0', '1', "2", "3"], //折叠面板 默认显示下标
-        applyInfoPool: {
-          // applySubno: '',
-        },
+        applyInfoPool: {},
         fraudAuditOpinion: {
           auditDesc: '',
         }
@@ -137,7 +107,7 @@
     },
     props: ['propReApply'],
     watch: {
-      '$route' (to, from) {
+      '$route'(to, from) {
         if (to.path === '/ReApply') {
           this.mountedInf();
         }
@@ -145,11 +115,9 @@
     },
     methods: {
       mountedInf() {
-        console.log(this.propReApply)
         this.propReApply && this.propReApply.pageType == 'ComponentPage' ? this.ManagerBtn = false : ''; //是否显示提交按钮
         this.getSystermTime();
         this.taskwaitting = JSON.parse(localStorage.getItem('QTToReconsiderParams'));
-        console.log('reconType:', this.taskwaitting.reconType)
         this.reApplyInf = JSON.parse(localStorage.getItem('userInf'));
         this.getInf();
       },
@@ -169,23 +137,10 @@
           this.tableData.push(res.data.insConclusion); //-----------需要调接口查看返回对象，还是数组
           this.conclusionId = res.data.insConclusion.id;
         })
-        //  this.get('/insReconApply/queryInsConclusionInfo', {
-        //     applyId: this.taskwaitting.ApplyId,
-        //   }).then(res => {
-        //     this.baseInfo = res.data.applyBaseInfo; //基本信息
-        //     this.tableData = res.data.insConclusion; //-----------需要调接口查看返回对象，还是数组
-        //   })
       },
-      //       cancle(){
-      // this.$router.push('SelfTaskList?taskNodeName=checkApp_trial_self&flag=09');
-      // // this.$router.push('SelfTaskList?taskNodeName='+this.taskwaitting+'&flag='+this.taskwaitting.mark);
-      //       },
       sumt() {
-        // this.loadsitu = false;
-        // this.adbtn = '确定';
         if (this.fraudAuditOpinion.auditDesc == '') { //复议说明如果为空 不提交------复议说明自段待更改
           this.$message.error('有必填项未填写！');
-          // this.confirm = false;
           return
         }
         this.$confirm('您确定操作？', '提示', {
@@ -196,12 +151,8 @@
         }).then(() => {
           this.SaveInf();
         }).catch(() => {});
-        // this.Confirm = true;
       },
       SaveInf() { //提交
-        // this.loadsitu = true;
-        // this.adbtn = '提交中';
-        // 提交信息
         this.post("/insReconApply/saveInsReconApply", {
           applyId: this.taskwaitting.ApplyId, //申请单id
           // taskNode: '', //复议节点----暂时不入
@@ -227,7 +178,6 @@
             this.$message.error(res.msg);
           }
         });
-        // this.Confirm = false;
       },
       calc() {
         this.$router.push('/SelfTaskList?taskNodeName=checkApp_trial_self&flag=09');
@@ -266,7 +216,7 @@
 </script>
 <style scoped>
   .ReApply {
-    height: calc( 100% - 90px);
+    height: calc(100% - 90px);
     widows: 100%;
     background: #ffffff;
   }

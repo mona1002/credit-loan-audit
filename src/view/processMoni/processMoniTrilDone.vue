@@ -533,7 +533,6 @@
 
         processMoniSer
           .transmitTask({
-            // assignor: this.multipleSelection[0].flowRoleCode,
             assignor: this.userCode,
             toUser: this.itemOfLists.toUser,
             taskIds: this.itemOfLists.taskIds

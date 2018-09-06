@@ -17,7 +17,8 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称：</span>
-          <el-autocomplete popper-class="my-autocomplete" v-model="proCode" :debounce='0' :fetch-suggestions="querySearch" placeholder="请输入内容" @select="handleSelect">
+          <el-autocomplete popper-class="my-autocomplete" v-model="proCode" :debounce='0' :fetch-suggestions="querySearch"
+            placeholder="请输入内容" @select="handleSelect">
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
             <template slot-scope="{ item }">
@@ -37,12 +38,14 @@
         </el-col>
         <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">申请日期：</span>
-          <el-date-picker v-model="applyData" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+          <el-date-picker v-model="applyData" type="daterange" range-separator="至" start-placeholder="开始日期"
+            end-placeholder="结束日期">
           </el-date-picker>
         </el-col>
         <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">本环节处理时间：</span>
-          <el-date-picker v-model="dealDate" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+          <el-date-picker v-model="dealDate" type="daterange" range-separator="至" start-placeholder="开始日期"
+            end-placeholder="结束日期">
           </el-date-picker>
         </el-col>
 
@@ -59,7 +62,7 @@
       </span>
     </div>
     <div class="listContainer">
-      <!-- 编辑table -->
+      <!-- 编辑 -->
       <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row border>
         <el-table-column type="index" align='center' label=序号 width="45">
         </el-table-column>
@@ -86,10 +89,10 @@
         <el-table-column prop="completeTime" label="本环节处理时间" align='center' min-width="180">
         </el-table-column>
       </el-table>
-      <!-- 分页  -->
       <div class="page">
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 20,50]" :current-page.sync="currentPage"
-          :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 20,50]"
+          :current-page.sync="currentPage" :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper"
+          :total="this.totalRecord">
         </el-pagination>
       </div>
     </div>
@@ -150,7 +153,6 @@
       querySearch(queryString, cb) {
         var restaurants = this.production;
         var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
-        // 调用 callback 返回建议列表的数据
         cb(results);
       },
       createFilter(queryString) {

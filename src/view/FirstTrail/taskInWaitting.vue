@@ -56,7 +56,6 @@
           <el-table-column prop="approveTimeLong" label="进入本环节时长（小时）" min-width="180">
           </el-table-column>
         </el-table>
-        <!-- 分页 -->
         <div class="page">
           <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20,50]"
             :page-size='setPageSize' layout="total, sizes, prev, pager, next, jumper" :total="totals.totalNum">
@@ -73,13 +72,10 @@
         activeNames: ['1'],
         totals: {},
         currentPage: 1, // 默认显示的当前页
-        //data:[],
         datas: [],
         applySubNo: '',
         custName_la: '',
         certCode: '',
-        //pageNum:1,
-        //pageSize:20,
         setPageSize: 10,
         queryParam: {
           processTemplateId: '',
@@ -93,8 +89,6 @@
           custName_la: '',
           certCode: ''
         },
-        //taskType:'',
-        // timeColor:false,
       }
     },
     watch: {
@@ -104,25 +98,6 @@
         }
       }
     },
-    // beforeRouteLeave(to, from, next) {
-    // 	to.meta.refresh=true;
-    // 	next();
-    // },
-    // 	      beforeRouteEnter(to, from, next) {
-    // 		console.log('addddddzdzdzd')
-    // 		console.log(222222,from)
-    // 		console.log(33333333,to)
-    //   // 路由导航钩子，此时还不能获取组件实例 `this`，所以无法在data中定义变量（利用vm除外）
-    //   // 参考 https://router.vuejs.org/zh-cn/advanced/navigation-guards.html
-    //   // 所以，利用路由元信息中的meta字段设置变量，方便在各个位置获取。这就是为什么在meta中定义isBack
-    //   // 参考 https://router.vuejs.org/zh-cn/advanced/meta.html
-    //   if(to.meta.keepAlive!=''){
-    //       to.meta.isBack=true;
-    //       //判断是从哪个路由过来的，
-    //       //如果是page2过来的，表明当前页面不需要刷新获取新数据，直接用之前缓存的数据即可
-    //   }
-    //   next();
-    // },
     mounted() {
       this.mountedInf();
     },
@@ -193,7 +168,6 @@
       },
       //跳转到详情页
       goDetail(row, event, column) {
-        // this.$router.push({path:'/SplitScreen'});
         this.$router.push({
           name: 'SplitScreen',
           params: {

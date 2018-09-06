@@ -27,12 +27,10 @@
                   <el-table-column property="count" label="任务数目" >
                   </el-table-column>
                 </el-table>
-                <!-- 表格结束 -->
               </div>
             </el-collapse-item>
           </el-collapse>
         </div>
-        <!-- 右边 -->
         <div class="main_right_work">
           <!-- 工作通知 -->
           <div class="workbench_right_top">
@@ -113,18 +111,6 @@
     },
     methods: {
       mountedInf() {
-        // 统一登录平台  
-        // this.get(UserURL + 'remote/user/getUserInfo?' + Math.random()).then(response => {
-        //   this.userInf = {
-        //     userCode: response.data.userCode,
-        //     orgCode: response.data.orgCode,
-        //     orgId: response.data.orgId,
-        //     userName: response.data.userName,
-        //     roleCodesList: response.data.roleCodesList, // 初审拒绝按钮
-        //     flowRoleCodesList: response.data.flowRoleCodesList
-        //   }
-        //   localStorage.setItem("userInf", JSON.stringify(this.userInf));
-        // });
         this.post("/workFlowTaskQuery/getTaskProfile", {
           taskStatus: "01",
         }).then(res => {
@@ -144,7 +130,6 @@
       refresh() {
         this.rot += 360;
         this.$refs.worktask.style.transform = "rotate(" + this.rot + "deg)";
-        // this.$refs.worktask.style = " -ms-transform: rotate("+this.rot+"deg)"; IE9
         this.post("/workFlowTaskQuery/getTaskProfile", {
           taskStatus: "01",
         }).then(res => {
@@ -230,11 +215,6 @@
         });
       },
     },
-    //        beforeRouteLeave(to, from, next) {  
-    //     from.meta.keepAlive = ''; 
-    //       // this.$route.meta.keepAlive='' 
-    //     next();  
-    // }  ,
     computed: {
       taskCount() {
         this.TaskCount = null;
@@ -302,7 +282,6 @@
   }
 
   .workbench .main {
-    /* height: calc( 100% - 40px); */
     height: 100%;
     overflow: hidden;
     background: #ededed;
@@ -342,11 +321,8 @@
   .main_right .main_right_work {
     float: left;
     width: 50%;
-    /* height: 100vh; */
-    /* height: calc( 100% - 40px); */
     height: 100%;
     padding: 19px 20px 0 20px;
-    /* background: black; */
     background: #ededed;
   }
 
@@ -360,7 +336,6 @@
     padding-left: 20px;
     padding-right: 20px;
     height: 25px;
-    /* display: inline-block; */
     background-color: #f3f3f3;
     color: #3b5469;
     font-size: 13px;

@@ -333,7 +333,6 @@
                 <label class="label_width_130">总内存：</label>
                 <span>{{deviceInfo.totalMemory}}</span>
               </li>
-
             </div>
             <div class=" CreditForm_div_border clearFix">
               <li>
@@ -428,11 +427,9 @@
           applySubNo: this.applySubNo
           // applySubNo : 'PHDX6409598026121217'
         }).then(res => {
-          console.log(res)
           if (res) {
             if (!res.data) return;
             var result = $.parseJSON(res.data);
-            console.log(1, result)
             if (result && result.result && result.result['10108']) {
               //  申请信息   
               result['result']['10108']['reqInfo'] ? this.applyInf = result['result']['10108']['reqInfo'] : '';

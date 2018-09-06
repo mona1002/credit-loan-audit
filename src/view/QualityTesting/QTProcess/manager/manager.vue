@@ -136,59 +136,8 @@
           instaskType: '',
           checkState: '',
           isSend: '1',
-          //   pageNum: '', //页数（第几页）
-          //   pageSize: '', //页面显示行数
         },
-        // currentPage: 1, //分页选中页
-        // pageCount: 10, // 每页显示条数
-        // totalRecord: 0, //总条数
         tableData: [],
-        // tableData: [{
-        //   checkResult: '07',
-        //   isSecondIns: "1",
-        //   appType: null,
-        //   applyId: "879d8e00-6d3f-4e07-87f5-0f0c675c06e1",
-        //   applyIdList: null,
-        //   applyMainNo: null,
-        //   applySubNo: "201511190111013763",
-        //   assignCode: null,
-        //   assignName: "system",
-        //   auditCodec: null,
-        //   auditCodez: null,
-        //   auditDatec: null,
-        //   auditDatez: null,
-        //   auditNamec: "李翠萍",
-        //   auditNamez: "刘杰",
-        //   certCode: "431129198001010178",
-        //   checkState: "01",
-        //   checkStateTxt: "待质检员审批",
-        //   certType: null,
-        //   createTime: null,
-        //   custCode: null,
-        //   custName: "0508测试D009",
-        //   enterTime: "2018-05-23 11:06:25",
-        //   id: "Fwn2yzQIZ1GS8Czoqf7g4MoF1TVEeSGB",
-        //   insDate: null,
-        //   insMemberName: null,
-        //   instaskType: "00",
-        //   instaskTypeTxt: "常规质检",
-        //   lastModifyTime: null,
-        //   mobile: null,
-        //   proCode: null,
-        //   proName: null,
-        //   processInstanceId: null,
-        //   processInstanceIdSecond: null,
-        //   remark: null,
-        //   taskId: '98988',
-        // }, {
-        //   date: '2016-05-02',
-        //   name: '王小虎',
-        //   address: '上海市普陀区金沙江路 1518 弄'
-        // }, {
-        //   date: '2016-05-04',
-        //   name: '王小虎',
-        //   address: '上海市普陀区金沙江路 1518 弄'
-        // }],
         multipleSelection: [], //多选框
         multipleSelectionParams: [], //多选框
         QTSituation: [], //质检状态
@@ -205,7 +154,7 @@
       }
     },
     watch: {
-      '$route' (to, from) {
+      '$route'(to, from) {
         if (to.path === '/manager') {
           this.mountedInf();
         }
@@ -231,15 +180,15 @@
             'Content-Type': 'application/json'
           }
         }).then(res => {
-          const blob = new Blob([res.data]); 
-          const fileName = 'ZJZG_' + this.Date + '.xls'; 
+          const blob = new Blob([res.data]);
+          const fileName = 'ZJZG_' + this.Date + '.xls';
           const elink = document.createElement('a');
           elink.download = fileName;
           elink.style.display = 'none';
           elink.href = URL.createObjectURL(blob);
           document.body.appendChild(elink);
           elink.click();
-          URL.revokeObjectURL(elink.href); 
+          URL.revokeObjectURL(elink.href);
           document.body.removeChild(elink);
         })
       },
@@ -281,13 +230,6 @@
       },
       allotSubmit() { //批量提交
         for (var i = 0; i < this.multipleSelection.length; i++) { //可以提交质检结果为初审一般差错、初审重大差错、终审一般差错、终审重大差错、初审建议优化、终审建议的单子
-          //   if (this.multipleSelection[i].checkResult != '01' && this.multipleSelection[i].checkResult != '02' && this.multipleSelection[
-          //       i].checkResult != '03' && this.multipleSelection[i].checkResult != '04' && this.multipleSelection[i].checkResult !=
-          //     '05' && this.multipleSelection[i].checkResult != '06') {
-          //     this.$message.error('质检结果不符！');
-          //     console.log(this.multipleSelection[i].checkResult)
-          //     return
-          // } else 
           if (this.multipleSelection[i].isSecondIns == 1) { //有质检二次标识的件(抽中常规又专纵)，只能够批量完成，不能批量提交
             this.$message.error('有不符合批量提交状态的进件！');
             return
@@ -317,13 +259,6 @@
           });
       },
       allotFinished() { //批量完成
-        // for (var i = 0; i < this.multipleSelection.length; i++) { //可以提交质检结果为初审一般差错、初审重大差错、终审一般差错、终审重大差错、初审建议优化、终审建议的单子
-        //   if (this.multipleSelection[i].checkResult != '07' && this.multipleSelection[i].checkResult != '08' && this.multipleSelection[
-        //       i].checkResult != '09') {
-        //     this.$message.error('质检结果不符！');
-        //     return
-        //   }
-        // }
         this.saveParams(); // 提取入参 applyId taskId isSecondIns
         if (this.multipleSelectionParams == '') {
           this.$confirm('请选择一条数据！', '提示', {
@@ -388,21 +323,12 @@
         this.inquire(this.params);
       },
       Rsearch() {
-        // this.params.pageNum = this.currentPage = 1;
         this.inquire(this.params);
       },
       inquire(pam) {
         // 查询列表
         this.post("insConclusion/queryZJZGTaskList", pam).then(res => {
           if (res.statusCode == 200) {
-            // for (var i = 0; i < res.data.length; i++) {
-            //   if (res.data[i].certCode) {
-            //     res.data[i].certCode = res.data[i].certCode.replace(this.reg, this.reVal);
-            //   }
-            //   if (res.data[i].mobile) {
-            //     res.data[i].mobile = res.data[i].mobile.replace(this.Telreg, this.telVal);
-            //   }
-            // }
             this.tableData = res.data;
           } else {
             this.$message.error(res.msg);

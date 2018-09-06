@@ -76,7 +76,6 @@
 </template>
 <script>
   export default {
-
     data() {
       return {
         activeName: ['1', '2'],
@@ -107,31 +106,6 @@
     },
     methods: {
       mountedInf() {
-        // 先判断是 初审 终审  /  专员  主管
-        /*var judgeFlag = JSON.parse(localStorage.getItem('judge'));
-        this.antiFlag = judgeFlag.flag;
-        if (this.isAntiDetail == true) {
-          // 初审 终审 取 applyId
-          if (this.antiFlag == '01' || this.antiFlag == '02') {
-            // 先取到 id , 请求 反欺诈 页面信息
-            // var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-            this.id = JSON.parse(localStorage.getItem('taskInWaitting')).applyId;
-          } else if (this.antiFlag == '02') {
-            // FtaskInWaitting
-            // var FtaskInWaitting = JSON.parse(localStorage.getItem('FtaskInWaitting'));
-            this.id = JSON.parse(localStorage.getItem('FtaskInWaitting')).applyId;
-          } else
-          if (this.antiFlag == '03') { // 其他取 列表id 取本地
-            console.log(' 专员 ');
-            this.applyId = JSON.parse(localStorage.getItem('AntitaskInWaitting')).applyId;
-          } else if (this.antiFlag == '04') {
-            console.log(' 主管 ');
-            this.applyId = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).applyId;
-          }
-        } else {
-          // 获取到 id
-          this.applyId = this.$route.params.id;
-        }*/
         this.applyId = this.$route.params.applyId;
         // 经办人 登录用户名
         var userInfo = JSON.parse(localStorage.getItem('userInf'));

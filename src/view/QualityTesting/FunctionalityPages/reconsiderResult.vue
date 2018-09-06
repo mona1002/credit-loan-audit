@@ -42,7 +42,8 @@
         </el-col>
         <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">质检日期：</span>
-          <el-date-picker v-model="QTtime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" value-format="yyyy-MM-dd">
+          <el-date-picker v-model="QTtime" type="daterange" range-separator="至" start-placeholder="开始日期"
+            end-placeholder="结束日期" value-format="yyyy-MM-dd">
           </el-date-picker>
         </el-col>
       </el-row>
@@ -69,8 +70,6 @@
     <div class="listContainer">
       <!-- 编辑table -->
       <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row border>
-        <!-- <el-table-column type="index" align='center' label=序号 width="55">
-          </el-table-column> -->
         <el-table-column prop="applySubNo" label="进件编号" align='center' min-width="180">
         </el-table-column>
         <el-table-column prop="custName" label="客户名称" align='center' min-width="120">
@@ -96,10 +95,10 @@
         <el-table-column prop="errorDescribe" label="差错描述" align='center' min-width="100">
         </el-table-column>
       </el-table>
-      <!-- 分页  -->
       <div class="page">
-        <el-pagination @size-change="handleSizeChange" @current-change="handlePageChange" :page-sizes="[10, 20,50]" :current-page.sync="currentPage"
-          :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
+        <el-pagination @size-change="handleSizeChange" @current-change="handlePageChange" :page-sizes="[10, 20,50]"
+          :current-page.sync="currentPage" :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper"
+          :total="this.totalRecord">
         </el-pagination>
       </div>
     </div>
@@ -111,10 +110,6 @@
     data() {
       return {
         tableData: [],
-        // reg: /(\w{6})\w*(\w{4})/,
-        // Telreg: /(\w{7})\w*/,
-        // reVal: '$1********$2',
-        // telVal: '$1****',
         params: {
           pageParam: {
             pageNum: 1, //当前页
@@ -138,7 +133,6 @@
         totalRecord: 0, //总条数
         ProductName: [], //产品名称
         QTSituation: [], //质检状态
-
       }
     },
     methods: {
@@ -170,20 +164,11 @@
         this.inquire(this.params);
       },
       inquire(pam) {
-        // 质检-复议结果查询功能----------------------------------------------------接口地址未添加
+        // 质检-复议结果查询功能
         this.post("/insReconApply/getReviewResultQueryResponse", pam).then(res => {
           if (res.statusCode == 200) {
-            // for (var i = 0; i < res.data.length; i++) {
-            //   if (res.data[i].certCode) {
-            //     res.data[i].certCode = res.data[i].certCode.replace(this.reg, this.reVal);
-            //   }
-            //   if (res.data[i].mobile) {
-            //     res.data[i].mobile = res.data[i].mobile.replace(this.Telreg, this.telVal);
-            //   }
-            // }
             this.tableData = res.data.recordList;
             this.totalRecord = res.data.totalRecord; //总记录数
-            // res.data. totalPage // 总页数
           } else {
             this.$message.error(res.msg);
           }

@@ -75,10 +75,9 @@
                 </li>
                 <li>
                   <label class="label_width_166">复议申请日期： </label>
-                   <span>{{ systermTime | dateFilter}}</span>
+                  <span>{{ systermTime | dateFilter}}</span>
                 </li>
               </div>
-
             </ul>
           </div>
         </el-collapse-item>
@@ -102,9 +101,7 @@
         loadsitu: false,
         tableData: [],
         activeNames: ['0', '1', "2", "3"], //折叠面板 默认显示下标
-        applyInfoPool: {
-          // applySubno: '',
-        },
+        applyInfoPool: {},
         auditDesc: {
           reviewRemark: ''
         },
@@ -112,7 +109,7 @@
     },
     props: ['propReApply', 'applyId'],
     watch: {
-      '$route' (to, from) {
+      '$route'(to, from) {
         if (to.path === '/RulesReApply') {
           this.mountedInf();
         }
@@ -133,9 +130,6 @@
         })
       },
       getInf() { //查询页面信息
-        // this.get('/insReconApply/queryInsConclusionInfo', {
-        //   applyId: this.applyId
-        // }
         this.get('/insReconApply/queryInsConclusionInfo?applyId=' + this.applyId + "&" + Math.random())
           .then(res => {
             this.tableData = [];
@@ -161,7 +155,6 @@
     min-width: 1366px;
     height: 100%;
     width: 100%;
-    /* overflow-x: hidden; */
   }
 
   .icon_hat {
@@ -177,7 +170,7 @@
 
   .textA {
     display: inline-block;
-    width: calc( 66% - 145px);
+    width: calc(66% - 145px);
     height: 60px;
     vertical-align: top;
     overflow: auto;

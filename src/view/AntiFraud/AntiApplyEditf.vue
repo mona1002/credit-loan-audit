@@ -171,39 +171,17 @@
         if (this.flag == 'start' || this.flag == 'fuyi' || this.flag == 'zhijian') {
           this.getFraudApplyInfo();
         }
-
-        // 初审 终审 取 applyId
-        // if (this.antiFlag == '01' || this.antiFlag == '02') {
-        //   // 先取到 id , 请求 反欺诈 页面信息
-        //   // var taskInWaitting = JSON.parse(localStorage.getItem('taskInWaitting'));
-        //   // this.id = taskInWaitting.applyId;
-        //   this.id = this.$route.params.id;
-        //   // 查询反欺诈信息
-        //   this.getFraudApplyInfo();
         if (this.antiFlag == '01') {
-          // taskInWaitting
           this.creditappTaskid = JSON.parse(localStorage.getItem('taskInWaitting')).taskId;
           this.taskName = JSON.parse(localStorage.getItem('taskInWaitting')).taskName;
         } else if (this.antiFlag == '02') {
-          // FtaskInWaitting
           this.creditappTaskid = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskId;
           this.taskName = JSON.parse(localStorage.getItem('FtaskInWaitting')).taskName;
         }
-        // }
-        // 专员/主管 不跳  反欺诈 编辑页面
-        // else if (this.antiFlag == '03' || this.antiFlag == '04') { // 其他取 列表id
-        //   (' 主管/专员 ');
-        //   this.id = this.$route.params.id;
         if (this.antiFlag == '03' || this.antiFlag == '04') {
-          // AntitaskInWaitting
           this.creditappTaskid = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskId;
           this.taskName = JSON.parse(localStorage.getItem('AntitaskInWaitting')).taskName;
         }
-        // else if (this.antiFlag == '04') {
-        //   // AntiManagertaskInWaitting
-        //   this.creditappTaskid = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskId;
-        //   this.taskName = JSON.parse(localStorage.getItem('AntiManagertaskInWaitting')).taskName;
-        // }
         // 05 复议专员  06 复议主管
         if (this.antiFlag == '05' || this.antiFlag == '06') {
           this.creditappTaskid = JSON.parse(localStorage.getItem('RtaskInWaitting')).taskId;
@@ -211,10 +189,6 @@
           this.currentTemplateId = 'reconsiderApp';
         }
         // 质检各角色
-        // if (this.antiFlag == '07' || this.antiFlag == '08' || this.antiFlag == '10' || this.antiFlag == '11' || this.antiFlag ==
-        //   '12' || this.antiFlag == '13') {
-        //   this.currentTemplateId = 'checkApp';
-        // }
         if (this.antiFlag == '07') { // 专员
           this.creditappTaskid = JSON.parse(localStorage.getItem('QTTaskWait')).taskId;
           this.taskName = JSON.parse(localStorage.getItem('QTTaskWait')).taskName;
@@ -245,38 +219,6 @@
           this.taskName = JSON.parse(localStorage.getItem('QTComplianceTW')).taskName;
           this.currentTemplateId = 'checkApp';
         }
-
-        //   this.getFraudApplyInfoWithOpinionById();
-        // }
-        // var stateParms = JSON.parse(localStorage.getItem('antiApplyFlag')).split(';');
-        // for (var i = 0; i < stateParms.length; i++) {
-        //   stateParms[i] = stateParms[i].split('=');
-        // }
-        // this.routeId = stateParms[0][1];
-        // this.routeFlag = stateParms[1][1];
-        // this.routeBusiState = stateParms[2][1];
-
-        //  JSON.stringify($scope.addalerts);
-        // 获取到 id
-        //this.id = this.$route.params.id || this.routeId;
-        /* 标志  
-         start 发起反欺诈
-         edit  编辑
-         add   添加 
-         */
-
-        //this.flag = this.$route.params.flag || this.routeFlag;
-
-        //this.channel = this.$route.params.channel;
-        // 拿到状态
-        // this.busiState = this.$route.params.busiState || this.routeBusiState;
-        // if (this.flag == 'start' || this.flag == 'fuyi') {
-        //   this.getFraudApplyInfo();
-        // }
-        //  else if (this.flag == 'edit' || this.flag == 'add') {
-        //   this.getFraudApplyInfoWithOpinionById();
-        // }
-
         // 请求系统时间
         this.getSystemDate();
 
@@ -300,15 +242,11 @@
       // 查询 反欺诈信息  , 发起反欺诈 , 根据 applyId 查询 , 编辑页面根据 row.id
       getFraudApplyInfo() {
         // 测试 id
-        // this.id = 'ed353288-758d-4699-bec7-094bd6444556';
         this.post('/fraudApplyInfoController/getFraudApplyInfo', {
             applyId: this.id
-            // applyId:'201506260173032182'
           })
           .then(res => {
             if (res.statusCode == 200) {
-              // 任务id
-              // this.creditappTaskid = res.data.applyInfoPool.id;
               // 进件编号
               this.applySubno = res.data.applyInfoPool.applySubno;
               // 申请人code
@@ -337,8 +275,6 @@
               this.applyCustName = res.data.applyInfoPool.custName;
               // 客户编号
               this.applyCustNo = res.data.applyInfoPool.applyCustNo;
-              // 渠道
-              // this.channel = res.data.applyInfoPool.channel;
               // 证件号码
               this.certCode = res.data.applyInfoPool.certCode;
               // 证件类型
@@ -350,14 +286,6 @@
             }
           })
       },
-      // 查询 反欺诈信息  , 从列表过来 , 根据列表 id 查询
-      // getFraudApplyInfoWithOpinionById() {
-      //   this.post('/fraudApplyInfoController/getFraudApplyInfoWithOpinionById', {
-      //     // id: this.id
-      //     // id:'201506260173032182'
-      //   }).then(res => {
-      //   })
-      // },
       submitForm() {
         var taskNodeName, nodeName, RoutePath, routeParams;
         if (!this.mainId || !this.mainReason) {
@@ -380,28 +308,18 @@
           type: 'warning',
           showCancelButton: true
         }).then(() => {
-          console.log('确定')
           this.post('/fraudApplyInfoController/startAntiFraudApply', {
               userCode: this.userCode, // 用户编号
               orgCode: this.orgCode, // 机构编号
               fraudApplyInfo: {
                 creditappTaskid: this.creditappTaskid, // 任务id
                 applyId: this.id, // 申请单ID
-                // applyId:'201506260173032182',
                 applySubno: this.applySubno, // 进件编号
-                // applyCode: this.applyCode, // 申请人code
-                // applyPersonName: this.applyPersonName, // 申请人姓名
-                // appOrgCode: this.appOrgCode, // 申请机构code
-                // appOrgName: this.appOrgName, // 申请机构名称
                 mainreasonId: this.mainId, // 欺诈主原因id
                 subreasonId: this.secondId, // 欺诈子原因id
                 applyDesc: this.applyDesc, // 反欺诈申请描述
                 mainreaName: this.mainReason, // 欺诈主原因名称
                 subreaName: this.secondReason, // 欺诈子原因名称
-                // appOrgId: this.appOrgId, // 申请机构id
-                // appSuborgId: this.appSuborgId, // 申请机构科室id
-                // appSuborgCode: this.appSuborgCode, // 申请机构科室code
-                // appSuborgName: this.appSuborgName, // 申请机构科室名称
                 proId: this.proId, // 产品id
                 proCode: this.proCode, // 产品code
                 applyCustId: this.applyCustId, // 客户id
@@ -411,14 +329,11 @@
                 certCode: this.certCode, // 证件号码
                 proName: this.proName, // 产品名称
                 busiState: this.busiState, // 状态
-                // wayOf:this.wayOf//（00：审批，01：复议，02：质检）--不入了
               },
               currentTemplateId: this.currentTemplateId, // 流程模版id
             })
             .then(res => {
               if (res.statusCode == '200') {
-                // 更加标志来 选择跳转
-                // 初审/终审 发起反欺诈 提交  -> 代办任务列表
                 this.$message({
                   type: 'success',
                   message: '提交成功'
@@ -461,113 +376,7 @@
               }
             })
         }).catch(() => {
-          console.log('cancle')
         });
-
-        // const h = this.$createElement;
-        // this.$msgbox({
-        //   title: '提示',
-        //   message: h('p', null, [
-        //     h('span', null, '确定操作? '),
-        //   ]),
-        //   showCancelButton: true,
-        //   confirmButtonText: '确定',
-        //   cancelButtonText: '取消',
-        //   modal: false,
-        //   beforeClose: (action, instance, done) => {
-        //     if (action === 'confirm') {
-        //       instance.confirmButtonLoading = true;
-        //       instance.confirmButtonText = '执行中...';
-        //       this.post('/fraudApplyInfoController/startAntiFraudApply', {
-        //           userCode: this.userCode, // 用户编号
-        //           orgCode: this.orgCode, // 机构编号
-        //           fraudApplyInfo: {
-        //             creditappTaskid: this.creditappTaskid, // 任务id
-        //             applyId: this.id, // 申请单ID
-        //             // applyId:'201506260173032182',
-        //             applySubno: this.applySubno, // 进件编号
-        //             // applyCode: this.applyCode, // 申请人code
-        //             // applyPersonName: this.applyPersonName, // 申请人姓名
-        //             // appOrgCode: this.appOrgCode, // 申请机构code
-        //             // appOrgName: this.appOrgName, // 申请机构名称
-        //             mainreasonId: this.mainId, // 欺诈主原因id
-        //             subreasonId: this.secondId, // 欺诈子原因id
-        //             applyDesc: this.applyDesc, // 反欺诈申请描述
-        //             mainreaName: this.mainReason, // 欺诈主原因名称
-        //             subreaName: this.secondReason, // 欺诈子原因名称
-        //             // appOrgId: this.appOrgId, // 申请机构id
-        //             // appSuborgId: this.appSuborgId, // 申请机构科室id
-        //             // appSuborgCode: this.appSuborgCode, // 申请机构科室code
-        //             // appSuborgName: this.appSuborgName, // 申请机构科室名称
-        //             proId: this.proId, // 产品id
-        //             proCode: this.proCode, // 产品code
-        //             applyCustId: this.applyCustId, // 客户id
-        //             applyCustName: this.applyCustName, // 客户姓名
-        //             applyCustNo: this.applyCustNo, // 客户编号
-        //             channel: this.channel, // 渠道
-        //             certCode: this.certCode, // 证件号码
-        //             proName: this.proName, // 产品名称
-        //             busiState: this.busiState, // 状态
-        //             // wayOf:this.wayOf//（00：审批，01：复议，02：质检）--不入了
-        //           },
-        //           currentTemplateId: this.currentTemplateId, // 流程模版id
-        //         })
-        //         .then(res => {
-        //           if (res.statusCode == '200') {
-        //             // 更加标志来 选择跳转
-        //             // 初审/终审 发起反欺诈 提交  -> 代办任务列表
-        //             this.resMsg = res.msg;
-        //             done();
-        //             if (this.antiFlag == '01') {
-        //               this.$router.push('/taskInWaitting');
-        //               this.del('初审详情');
-        //             } else if (this.antiFlag == '02') {
-        //               this.$router.push('/FtaskInWaitting');
-        //               this.del('终审详情');
-        //             } else if (this.antiFlag == '03') {
-        //               this.$router.push('/AntiFraud');
-        //               this.del('反欺诈详情');
-        //             } else if (this.antiFlag == '04') {
-        //               this.$router.push('/AntiFraud');
-        //               this.del('反欺诈详情');
-        //             } else if (this.antiFlag == '05') {
-        //               this.$router.push('/reconsiderList');
-        //               this.del('复议详情');
-        //             } else if (this.antiFlag == '06') {
-        //               this.$router.push('/reconsiderList');
-        //               this.del('复议详情');
-        //             } else if (this.antiFlag == '07' || this.antiFlag == '08' || this.antiFlag == '10' || this.antiFlag ==
-        //               '11' || this.antiFlag == '12' || this.antiFlag == '13') {
-        //               this.del('质检详情');
-        //             }
-        //             this.del('反欺诈申请-编辑');
-        //           } else {
-        //             if (res.msg) {
-        //               this.$message({
-        //                 type: 'warning',
-        //                 message: res.msg
-        //               });
-        //             } else {
-        //               this.$message({
-        //                 type: 'warning',
-        //                 message: '您无此操作权限！'
-        //               });
-        //             }
-        //             instance.confirmButtonText = '';
-        //           }
-        //           instance.confirmButtonLoading = false;
-        //         })
-        //     } else {
-        //       done();
-        //     }
-        //   }
-        // }).then(action => {
-        //   this.$message({
-        //     type: 'success',
-        //     message: this.resMsg
-        //   });
-
-        // });
       },
       // 返回  上级路由
       backRoute() {

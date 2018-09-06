@@ -1,6 +1,5 @@
 <!-- 反欺诈申请 - 列表页 -->
 <template>
-  <!-- <div class="anti-fraud main-div"> -->
   <div class="taskWatting main-div">
     <div class="taskWinput search-div">
       <el-row class="row row1" type="flex">
@@ -45,7 +44,8 @@
       </div>
     </div>
     <div class="listContainer">
-      <el-table :data="antiTableData.taskDetailList" border fit height="510" highlight-current-row class="anti-table" v-show="antiFlag!='03'&& antiFlag!='04'">
+      <el-table :data="antiTableData.taskDetailList" border fit height="510" highlight-current-row class="anti-table"
+        v-show="antiFlag!='03'&& antiFlag!='04'">
         <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column prop="applySubno" label="进件编号" min-width="170">
@@ -109,8 +109,8 @@
       </el-table>
     </div>
     <div class="page">
-      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[10, 20,50]"
-        :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="directorTableData.totalNum">
+      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum"
+        :page-sizes="[10, 20,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="directorTableData.totalNum">
       </el-pagination>
     </div>
   </div>
@@ -214,7 +214,7 @@
       this.toinner();
     },
     watch: {
-      '$route' (to, from) {
+      '$route'(to, from) {
         if (to.path === '/AntiFraud34') {
           this.toinner();
         }

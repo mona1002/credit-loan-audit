@@ -1,6 +1,6 @@
 <template>
   <div class="aAntiApplyInf">
-    <!-- 复议申请 ======================= -->
+    <!-- 复议申请  -->
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
@@ -40,20 +40,20 @@
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
             <li>
-                <label  class="label_width_166">拒贷日期： </label>
-                <span>{{this.conclu.dealOperDate}} </span>
-                </li>
-            <li>
-                <label  class="label_width_166">拒贷部门： </label>
-                <span>{{this.conclu.dealOrgCode}} </span>
-                </li>
-            <li>
-                <label  class="label_width_166">拒贷结论： </label>
-                <span>{{this.conclu.applyConclusion}} </span>
+              <label class="label_width_166">拒贷日期： </label>
+              <span>{{this.conclu.dealOperDate}} </span>
             </li>
             <li>
-                <label  class="label_width_166">拒贷主原因码： </label>
-                <span>{{this.conclu.mainreasonCode}} </span>
+              <label class="label_width_166">拒贷部门： </label>
+              <span>{{this.conclu.dealOrgCode}} </span>
+            </li>
+            <li>
+              <label class="label_width_166">拒贷结论： </label>
+              <span>{{this.conclu.applyConclusion}} </span>
+            </li>
+            <li>
+              <label class="label_width_166">拒贷主原因码： </label>
+              <span>{{this.conclu.mainreasonCode}} </span>
             </li>
           </ul>
         </div>
@@ -66,28 +66,28 @@
         <div class="checkedInf checkedInf_li_width_triplet clearFix">
           <ul>
             <li>
-                <label  class="label_width_166">申请产品： </label>
-                <span>{{this.conclu.appProName}} </span>
-                </li>
-            <li>
-                <label  class="label_width_166">申请期限[月]： </label>
-                <span>{{this.conclu.appTerm}} </span>
-                </li>
-            <li>
-                <label  class="label_width_166">申请金额[元]： </label>
-                <span>{{this.conclu.appAmt}} </span>
+              <label class="label_width_166">申请产品： </label>
+              <span>{{this.conclu.appProName}} </span>
             </li>
-            <li  class="text_area_li triplet_textarea_width"> 
-                <label  class="label_width_166">复议说明： </label>
-                  <span class="text_area_span text_area_span_minus170">{{this.conclu.reconRemark}} </span>
+            <li>
+              <label class="label_width_166">申请期限[月]： </label>
+              <span>{{this.conclu.appTerm}} </span>
+            </li>
+            <li>
+              <label class="label_width_166">申请金额[元]： </label>
+              <span>{{this.conclu.appAmt}} </span>
+            </li>
+            <li class="text_area_li triplet_textarea_width">
+              <label class="label_width_166">复议说明： </label>
+              <span class="text_area_span text_area_span_minus170">{{this.conclu.reconRemark}} </span>
             </li>
             <li class="clearFloat">
-                <label  class="label_width_166">复议申请人： </label>
-                <span>{{this.conclu.reconOpercode}} </span>
-                </li>
+              <label class="label_width_166">复议申请人： </label>
+              <span>{{this.conclu.reconOpercode}} </span>
+            </li>
             <li>
-                <label  class="label_width_166">复议申请日期： </label>
-                <span>{{this.conclu.reconDate}} </span>
+              <label class="label_width_166">复议申请日期： </label>
+              <span>{{this.conclu.reconDate}} </span>
             </li>
           </ul>
         </div>
@@ -105,16 +105,9 @@
       }
     },
     mounted() {
-      // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-      // if (this.judgeFlag.flag == '05') {
-      //   this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议专员
-      // } else if (this.judgeFlag.flag == '06') {
-      //   this.tastwaitingPass = JSON.parse(localStorage.getItem("RManagertaskInWaitting")) //复议经理
-      // }
       this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议
       this.post("/accepApplyReconController/getAccepApplyReconByProcessId", {
         processInstanceId: this.tastwaitingPass.processInstanceId,
-        // id:'500001'
       }).then(res => {
         this.conclu = res.data;
       });
@@ -125,9 +118,8 @@
 <style scoped>
   .aAntiApplyInf {
     min-width: 788px;
-    height:calc(100% - 90px);
+    height: calc(100% - 90px);
     background: #ffffff;
   }
-
 
 </style>

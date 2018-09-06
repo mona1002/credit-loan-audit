@@ -5,8 +5,8 @@
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item date_picker" :offset="0">
           <span class="keywordText">审批结论时间： </span>
-          <el-date-picker class='date_picker' v-model="ploanDate" value-format="yyyy-MM-dd" type="daterange" range-separator="至" start-placeholder="开始日期"
-            end-placeholder="结束日期">
+          <el-date-picker class='date_picker' v-model="ploanDate" value-format="yyyy-MM-dd" type="daterange"
+            range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
           </el-date-picker>
         </el-col>
         <el-col :span="6" class="search-item">
@@ -35,14 +35,6 @@
       <el-row class="row row1" type="flex">
         <el-col :span="6" class="search-item" :offset="0">
           <span class="keywordText">业务状态： </span>
-          <!-- <el-autocomplete popper-class="my-autocomplete" v-model="busiState" :debounce='0' :fetch-suggestions="querySearch" placeholder="请输入内容"
-            @select="handleSelect">
-            <i class="el-icon-edit el-input__icon" slot="suffix">
-            </i>
-            <template slot-scope="{ item }">
-              <span style="float: left; width:66px">{{ item.name }}</span>
-            </template>
-          </el-autocomplete> -->
           <el-select v-model="params.busiState" placeholder="请选择">
             <el-option v-for="item in busiStateSelect" :key="item.code" :label="item.name" :value="item.code">
             </el-option>
@@ -109,21 +101,7 @@
         <el-table-column prop="subReasonName" label="拒绝子原因" align='center' min-width="160">
         </el-table-column>
       </el-table>
-      <!-- 分页  -->
-      <!-- <div class="paging">
-          <el-pagination @size-change="handleSizeChange" @current-change="handlePageChange" :page-sizes="[10, 50, 80, 100]" :current-page.sync="currentPage"
-            :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
-          </el-pagination>
-        </div> -->
     </div>
-    <!-- ==============================任务分配=================================== -->
-    <!-- <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
-      <span>您确定生成质检任务？</span>
-      <span slot="footer" class="dialog-footer">
-        <el-button class="calbtn" @click="Confirm=false">取消</el-button>
-        <el-button class="subtn" type="primary" :loading="loadsitu" @click="allot">{{adbtn}}</el-button>
-      </span>
-    </el-dialog> -->
   </div>
 </template>
 <script>
@@ -131,9 +109,6 @@
   export default {
     data() {
       return {
-        // Confirm: false,
-        // loadsitu: false,
-        // adbtn: '确定',
         ploanDate: '',
         tableData: [],
         production: [], //产品下拉
@@ -149,15 +124,7 @@
           operName: '',
           list: []
         },
-        // reg: /(\w{6})\w*(\w{4})/,
-        // Telreg: /(\w{7})\w*/,
-        // reVal: '$1********$2',
-        // telVal: '$1****',
         params: {
-          // pageParam: {
-          //   pageNum: 1, //当前页
-          //   pageSize: 10, //每页的显示数量
-          // },
           ploanDateBegin: '', //审批结论开始时间
           ploanDateEnd: '', //审批结论结束时间
           operOrgCodes: '', //	进件机构       多选
@@ -175,24 +142,11 @@
       }
     },
     methods: {
-      // querySearch(queryString, cb) {//业务状态搜索查询
-      //   var restaurants = this.busiStateSelect;
-      //   var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
-      //   cb(results);
-      // },
-      // createFilter(queryString) {
-      //   return (restaurant) => {
-      //     return (restaurant.name.toLowerCase().indexOf(queryString.toLowerCase()) != -1);
-      //   };
-      // },
       handleSelect(item) {
         this.busiState = this.selectedBusiState = item.name;
         this.params.busiState = item.code;
       },
       apportion() { //分配 按钮弹窗
-        // this.Confirm = true;
-        // this.loadsitu = false;
-        // this.adbtn = '确定';
         if (this.allotParams.list.length == 0) {
           this.$confirm('请选择一条数据！', '提示', {
             confirmButtonText: '确定',
@@ -212,8 +166,6 @@
         }).catch(() => {});
       },
       allot() { //批量转分派
-        // this.loadsitu = true;
-        // this.adbtn = '保存中';
         this.post("/insTask/addSpecialInsTask", this.allotParams).then(res => {
           if (res.statusCode == 200) {
             this.$message({
@@ -221,11 +173,9 @@
               message: '提交成功！'
             })
             this.inquire(this.params);
-            // this.Confirm = false;
           } else {
             this.$message.error('批量转分派失败');
             this.inquire(this.params);
-            // this.Confirm = false;
           }
         });
       },
@@ -261,8 +211,6 @@
         this.post("/insTask/getSpecialInsTaskList", pam).then(res => {
           if (res.statusCode == 200) {
             this.tableData = res.data;
-            // this.totalRecord = res.data.totalRecord; //总记录数
-            // res.data. totalPage // 总页数
           } else {
             this.$message.error(res.msg);
           }
@@ -286,7 +234,6 @@
         }).then(res => {
           if (res.statusCode == 200) {
             this.secondReason = res.data;
-
           } else {
             this.$message.error(res.msg);
           }
@@ -300,12 +247,7 @@
       this.userInf = JSON.parse(localStorage.getItem('userInf'));
       this.allotParams.operCode = this.userInf.userCode;
       this.allotParams.operName = this.userInf.userName;
-      // this.getProducts(); //查询产品
-      // this.getBusiState(); //获取业务状态下拉
       this.getSelection(); //获取所有下拉
-      //   this.params.pageNum = this.currentPage, //页数（第几页）
-      //  this.params.pageParam.pageNum = this.currentPage = 1;
-      //     this.params.pageSize = this.pageCount, //页面显示行数
     },
   }
 

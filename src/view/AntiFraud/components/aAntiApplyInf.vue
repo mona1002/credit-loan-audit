@@ -1,6 +1,6 @@
 <template>
   <div class="aAntiApplyInf">
-    <!-- 反欺诈结论  ======================= -->
+    <!-- 反欺诈结论  -->
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
@@ -105,17 +105,7 @@
         //基本信息:applyInfoPool
         // 反欺诈申请信息 fraudApplyInfo
         // 反欺诈结论 fraudAuditOpinion 
-        console.log(this.applyId)
-        // this.judgeFlag = JSON.parse(localStorage.getItem("judge"));
-        // if (this.judgeFlag.flag == '01') {
-        //   this.tastwaitingPass = JSON.parse(localStorage.getItem("taskInWaitting")); // 初审
-        // } else if (this.judgeFlag.flag == '02') {
-        //   this.tastwaitingPass = JSON.parse(localStorage.getItem("FtaskInWaitting")) //终审
-        // } else if (this.judgeFlag.flag == '05' || this.judgeFlag.flag == '06') {
-        //   this.tastwaitingPass = JSON.parse(localStorage.getItem("RtaskInWaitting")) //复议申请专员+主管
-        // }
         this.post("/fraudApplyInfoController/getRecentFraudApplyInfoWithOpinion", {
-          // applyId: this.tastwaitingPass.applyId,
           applyId: this.applyId
         }).then(res => {
           if (res.statusCode == 200) {

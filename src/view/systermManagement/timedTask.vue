@@ -9,8 +9,8 @@
         </el-col>
         <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">发送日期：</span>
-          <el-date-picker v-model="sendDate" value-format="yyyy-MM-dd" type="daterange" range-separator="至" start-placeholder="开始日期"
-            end-placeholder="结束日期">
+          <el-date-picker v-model="sendDate" value-format="yyyy-MM-dd" type="daterange" range-separator="至"
+            start-placeholder="开始日期" end-placeholder="结束日期">
           </el-date-picker>
         </el-col>
         <el-col :span="6" class="search-item">
@@ -39,7 +39,7 @@
       </span>
     </div>
     <div class="listContainer">
-      <!-- 编辑table -->
+      <!-- 编辑 -->
       <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row @selection-change="handleSelectionChange"
         border>
         <el-table-column type="selection" width="55">
@@ -57,22 +57,14 @@
         <el-table-column prop="errorMsg" label="错误原因" align='center' min-width="130">
         </el-table-column>
       </el-table>
-      <!-- 分页  -->
       <div class="page">
-        <el-pagination @size-change="handleSizeChange" @current-change="handlePageChange" :page-sizes="[10, 20,50]" :current-page.sync="currentPage"
-          :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="totalRecord">
+        <el-pagination @size-change="handleSizeChange" @current-change="handlePageChange" :page-sizes="[10, 20,50]"
+          :current-page.sync="currentPage" :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper"
+          :total="totalRecord">
         </el-pagination>
       </div>
     </div>
   </div>
-  <!-- ==============================任务分配=================================== -->
-  <!-- <el-dialog title="提示" :modal="false" :visible.sync="Confirm" width="420px">
-      <span>您确定重新发送？</span>
-      <span slot="footer" class="dialog-footer">
-        <el-button class="calbtn" @click="Confirm=false">取消</el-button>
-        <el-button class="subtn" type="primary" :loading="loadsitu" @click="allot">{{adbtn}}</el-button>
-      </span>
-    </el-dialog> -->
 </template>
 <script>
   export default {
@@ -101,9 +93,6 @@
           dateBegin: '', //	发送时间最小值
           dateEnd: '', //	发送时间最大值
         },
-        // Confirm: false,
-        // loadsitu: false,
-        // adbtn: '确定',
       }
     },
     methods: {
@@ -140,7 +129,6 @@
           this.sendDate[1] ? this.params.dateEnd = this.sendDate[1] : this.params.dateEnd = '';
 
         }
-        // this.sendDate.push( )
         this.params.pageSize = this.pageCount;
         this.inquire(this.params);
       },

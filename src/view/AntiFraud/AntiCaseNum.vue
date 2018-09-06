@@ -34,7 +34,7 @@
       </span>
     </div>
     <div class="listContainer">
-      <!-- 编辑table -->
+      <!-- 编辑 -->
       <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row @current-change="handleCurrentChange"
         border>
         <el-table-column type="index" align='center' label=序号 width="50">
@@ -58,7 +58,6 @@
           </template>
         </el-table-column>
       </el-table>
-      <!-- 分页 -->
       <div class="page">
         <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 20,50]" :current-page.sync="currentPage"
           :page-size="pageCount" layout="total, sizes, prev, pager, next, jumper" :total="this.totalRecord">
@@ -173,7 +172,6 @@
         this.dialogFormVisible = true;
       },
       sure(formName) {
-        console.log(this.$refs[formName])
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.loadsitu = true;
@@ -198,7 +196,6 @@
             this.form.caseNum = '';
             this.form.caseDesc = '';
           } else {
-            console.log('error submit!!');
             return false;
           }
         });

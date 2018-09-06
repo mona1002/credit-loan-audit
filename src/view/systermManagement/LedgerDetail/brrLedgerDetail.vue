@@ -1,7 +1,6 @@
 <template>
   <!-- 借款台账详情 -->
   <div class="SplitScreen" v-loading="loading" element-loading-text='加载中，请稍后'>
-    <!-- 进件人详情 -->
     <p class="PerDtl">
       <span> 借款人：{{accepCusBasicInfo.custName}}</span>
       <span> 进件编号：{{customInf.applyMainNo}}</span>
@@ -14,9 +13,7 @@
     </p>
     <div class="SplitScreen_wrap content_not_split">
       <div class="right" ref="rRight">
-        <!-- tab 表头 -->
         <div class="Right_tab_title_div">
-          <!-- 左右滑动 图标  -->
           <span class="pre_next_btn_wrap" @click="leftMovingBtn">
             <img src="../../../../static/images/Shape@1x.png">
           </span>
@@ -25,12 +22,12 @@
           </span>
           <div class="Right_tab_ul_wrap">
             <ul ref="right_tab_ul" style="left:0;right:0;">
-              <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="tab($event,index,val)" :class="{tab2Act:tab2Index==index}">
+              <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="tab($event,index,val)"
+                :class="{tab2Act:tab2Index==index}">
                 {{val}}</li>
             </ul>
           </div>
         </div>
-        <!-- tab 内容  AntiFirstAud-->
         <div class="tab2_Content">
           <capplicationInformationDetail ref="applicationInf" v-if=" this.tabContent2==0"></capplicationInformationDetail>
           <creditInvestigation v-if=" this.tabContent2==1" :applyId='tastwaitingPass.applyId'></creditInvestigation>
@@ -48,7 +45,6 @@
     data() {
       return {
         loading: false,
-        // custName: '',
         accepCusBasicInfo: {
           mobile: '',
           custName: ''
@@ -63,7 +59,7 @@
       }
     },
     watch: {
-      '$route' (to, from) {
+      '$route'(to, from) {
         if (to.path === '/brrLedgerDetail' && this.$route.params.newOne) {
           this.mountedInf();
           this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 0;
@@ -80,8 +76,6 @@
         }).then(res => {
           if (res.statusCode == 200) {
             this.loading = false;
-            // res.data.accepCusBasicInfo && res.data.accepCusBasicInfo.custName ? this.custName = res.data.accepCusBasicInfo
-            //   .custName : '';
             this.customInf = res.data;
             res.data.accepCusBasicInfo ? this.accepCusBasicInfo = res.data.accepCusBasicInfo : '';
           } else {

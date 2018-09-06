@@ -17,7 +17,8 @@
         </el-col>
         <el-col :span="6" class="search-item">
           <span class="keywordText">产品名称：</span>
-          <el-autocomplete popper-class="my-autocomplete" v-model="proCode" :debounce='0' :fetch-suggestions="querySearch" placeholder="请输入内容" @select="handleSelect">
+          <el-autocomplete popper-class="my-autocomplete" v-model="proCode" :debounce='0' :fetch-suggestions="querySearch"
+            placeholder="请输入内容" @select="handleSelect">
             <i class="el-icon-edit el-input__icon" slot="suffix">
             </i>
             <template slot-scope="{ item }">
@@ -37,17 +38,20 @@
         </el-col>
         <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">申请日期：</span>
-          <el-date-picker v-model="applicationDate" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+          <el-date-picker v-model="applicationDate" type="daterange" range-separator="至" start-placeholder="开始日期"
+            end-placeholder="结束日期">
           </el-date-picker>
         </el-col>
         <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">本环节处理时间：</span>
-          <el-date-picker v-model="processingTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+          <el-date-picker v-model="processingTime" type="daterange" range-separator="至" start-placeholder="开始日期"
+            end-placeholder="结束日期">
           </el-date-picker>
         </el-col>
         <el-col :span="6" class="search-item date_picker">
           <span class="keywordText">流程结束时间：</span>
-          <el-date-picker v-model="ProcessEndTime " type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+          <el-date-picker v-model="ProcessEndTime " type="daterange" range-separator="至" start-placeholder="开始日期"
+            end-placeholder="结束日期">
           </el-date-picker>
         </el-col>
       </el-row>
@@ -100,10 +104,9 @@
         <el-table-column prop="processEndDate" label="流程结束时间" min-width="170">
         </el-table-column>
       </el-table>
-      <!-- 分页 -->
       <div class="page">
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20,50]"
-          :page-size='setPageSize' layout="total, sizes, prev, pager, next, jumper" :total="totals.totalNum">
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage"
+          :page-sizes="[10, 20,50]" :page-size='setPageSize' layout="total, sizes, prev, pager, next, jumper" :total="totals.totalNum">
         </el-pagination>
       </div>
     </div>
@@ -124,10 +127,6 @@
         proCode: '', //产品code-查询
         emerType: '', //紧急程度-查询
         selectedProName: "",
-        /*appDate_ge:'',//申请日期[大于等于]-查询
-        appDate_le:'',//申请日期[小于等于]-查询
-        completeTime_ge:'',//本环节处理时间[大于等于]-查询
-        completeTime_le:'', //本环节处理时间[小于等于]-查询*/
         queryParam: {
           processTemplateId: 'checkApp', //流程模板
           taskNodeName: '', //任务名称
@@ -186,7 +185,6 @@
       querySearch(queryString, cb) {
         var restaurants = this.productNames;
         var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
-        // 调用 callback 返回建议列表的数据
         cb(results);
       },
       createFilter(queryString) {
@@ -213,7 +211,7 @@
         this.post('/workFlowTaskQuery/getTaskHistoryList',
           param
         ).then(res => {
-          if (res.statusCode == 200 && 　res.data.taskDetailList != null) {
+          if (res.statusCode == 200 && res.data.taskDetailList != null) {
             this.totals = res.data;
             this.datas = res.data.taskDetailList;
             for (var i = 0; i < this.datas.length; i++) {
@@ -244,10 +242,6 @@
         this.selectedProName = '';
         this.proCode = ''; //产品code-查询
         this.emerType = ''; //紧急程度-查询
-        /*this.appDate_ge = '';//申请日期[大于等于]-查询
-        this.appDate_le = '';//申请日期[小于等于]-查询
-        this.completeTime_ge = '';//本环节处理时间[大于等于]-查询
-        this.completeTime_le = '';//本环节处理时间[小于等于]-查询*/
         this.applicationDate = '', //申请信息 时间 数组
           this.processingTime = '', //本环节处理时间 时间 数组
           this.ProcessEndTime = '', //流程结束时间 数组
@@ -332,12 +326,7 @@
         this.queryParam.applySubNo = this.applySubNo;
         this.queryParam.custName_la = this.custName_la;
         this.queryParam.certCode = this.certCode;
-        // this.queryParam.proCode = this.proCode; //产品code-查询
         this.queryParam.emerType = this.emerType; //紧急程度-查询
-        //this.queryParam.appDate_ge = appgey+'-'+appgem+'-'+appged;//申请日期[大于等于]-查询
-        //this.queryParam.appDate_le = appley+'-'+applem+'-'+appled;//申请日期[小于等于]-查询
-        //this.queryParam.completeTime_ge = comgey+'-'+comgem+'-'+comged;//本环节处理时间[大于等于]-查询
-        //this.queryParam.completeTime_le = comley+'-'+comlem+'-'+comled; //本环节处理时间[小于等于]-查询
         this.request(this.queryParam);
       },
       //跳转到详情页

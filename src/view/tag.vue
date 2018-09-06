@@ -21,7 +21,6 @@
     </div>
   </div>
 </template>
-
 <style>
   .tag {
     font-size: 16px;
@@ -58,7 +57,6 @@
   .button_bottom:hover {
     background: white;
     color: rgb(0, 119, 255);
-
   }
 
   a:hover {
@@ -111,8 +109,6 @@
   }
 
   .active {
-    /* background: #0077ffcc; */
-    /* background-attachment: rgba(0, 119, 255, 1); */
     background: #07f;
   }
 
@@ -186,7 +182,6 @@
         views: null,
         styleLeft: 0,
         activeLeft: 30,
-        // styleTop: 0,
         fggggg: '',
         judge: {
           flag: ''
@@ -374,8 +369,6 @@
           this.nodeName = "质检常规抽单配置";
         } else if (route.path == '/reconsiderResult') { // 质检功能 - 复议结果查询
           this.nodeName = "质检复议结果查询";
-          // }  else if (route.path == '/batchApportion') { // 质检功能
-          //   this.nodeName = "质检任务批量转分派";
         } else if (route.path == '/specialConfig') { // 质检功能
           this.nodeName = "质检专纵向抽单配置";
         } else if (route.path == '/MatchingInfQT') {
@@ -435,7 +428,6 @@
         return route.path == '/MatchingInfQT' ? route.path == this.$route.path : route.StatefullPath == this.$route.fullPath;
       },
       handleClose(view, ev) {
-        console.log(  this.Routes)
         //关闭页签，清空列表内容
         view.name == '直销人员查询' ? this.Routes[2].closed = false : '';
         view.name == '申请台账' ? this.Routes[3].closed = false : '';
@@ -482,15 +474,6 @@
         localStorage.setItem("MatchFlag", JSON.stringify(this.MatchFlag));
       },
     },
-    // beforeRouteLeave(to, from, next) {
-    //   console.log(to)
-    //   // if (to.path == "/") {  
-    //   //   to.meta.keepAlive = true;  
-    //   // } else {  
-    //   //   to.meta.keepAlive = false;  
-    //   // }  
-    //   next();
-    // }
   }
 
 </script>

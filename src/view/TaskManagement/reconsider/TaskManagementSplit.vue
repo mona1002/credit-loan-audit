@@ -21,7 +21,8 @@
           </span>
           <div class="Right_tab_ul_wrap">
             <ul ref="right_tab_ul" style="left:0;right:0;">
-              <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="tab($event,index,val)" :class="{tab2Act:tab2Index==index}">
+              <li class="tab2Default" ref="tabTwo" v-for="(val,index) in items2" :key="index" @mousedown="tab($event,index,val)"
+                :class="{tab2Act:tab2Index==index}">
                 {{val}}</li>
             </ul>
           </div>
@@ -55,7 +56,7 @@
       }
     },
     watch: {
-      '$route' (to, from) {
+      '$route'(to, from) {
         if (to.path === '/TaskManagementSplit' && this.$route.params.newOne) {
           this.mountedInf();
           this.tab2Index = this.tabActiveInd2 = this.tabContent2 = 0;

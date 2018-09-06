@@ -59,7 +59,7 @@
         </el-table-column>
       </el-table>
     </div>
-    <!-- ==============================添加=================================== -->
+    <!--   添加   -->
     <el-dialog title="质检规则新增" :modal="false" :visible.sync="add" width="820px" class="dialog form_height_44">
       <el-form :model="addNew" :rules="rulesAdd" ref="ruleFormAdd">
         <el-form-item label="质检天数：" prop="recentDays" :label-width="formLeftLabelWidth">
@@ -118,7 +118,7 @@
         <el-button type="primary" :loading="loadsitu" @click="SaveAdd('ruleFormAdd')">{{adbtn}}</el-button>
       </div>
     </el-dialog>
-    <!-- ==============================编辑=================================== -->
+    <!--   编辑   -->
     <el-dialog title="质检规则编辑" :modal="false" :visible.sync="Edit" width="820px" class="dialog form_height_44">
       <el-form :model="updateInf" :rules="rulesAdd" ref="ruleFormAdd">
         <el-form-item label="质检天数：" prop="recentDays" :label-width="formLeftLabelWidth">
@@ -379,8 +379,6 @@
         this.addNew.minPassNum = '';
         this.addNew.refuseRatio = '';
         this.addNew.minRefuseNum = '';
-        // this.addNew.creator = '';
-        // this.addNew.createTime = '';
       },
       SaveAdd(formName) { //添加  提交
         this.$refs[formName].validate((valid) => {
@@ -416,9 +414,7 @@
               }
             });
             this.add = false;
-
           } else {
-            console.log('error submit!!');
             return false;
           }
         });
@@ -451,7 +447,6 @@
             });
             this.Edit = false;
           } else {
-            console.log('error submit!!');
             return false;
           }
         });

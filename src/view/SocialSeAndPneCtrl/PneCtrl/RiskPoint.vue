@@ -52,16 +52,9 @@
               conclusion = conclusion.replace(/\|\|/g, "\n");
             }
             $('#riskGuide').val(conclusion);
-
             var scoreFee = res.scoreFee;
             var temp = parseFloat(scoreFee);
             var scoreFeeFormat;
-            /* if(isNaN(temp)) {
-             scoreFeeFormat="月综合费率： 无 \n";
-            }else{
-            var tempFormat=(Number)(temp*100).toFixed(2)+'%';
-             scoreFeeFormat="月综合费率："+tempFormat+"\n";
-            } */
             var scoreLevel = "评分级别：" + res.scoreLevel;
             var str = "";
             if (res.amountAndTerm) {

@@ -24,7 +24,7 @@
       </span>
     </div>
     <div class="listContainer">
-      <!-- 编辑table -->
+      <!-- 编辑 -->
       <el-table :data="tableData" style="width: 100%" height="510" highlight-current-row border>
         <el-table-column type="index" label=序号 width="50">
         </el-table-column>
@@ -53,7 +53,7 @@
         </el-table-column>
       </el-table>
     </div>
-    <!-- 编辑 -->
+    <!-- 添加 -->
     <el-dialog title="添加反欺诈规则"  :visible.sync="dialogFormVisible">
       <el-form :model="form" ref="ruleFormAdd">
         <el-form-item label="规则编号：" :label-width="formLabelWidth">
@@ -160,7 +160,6 @@
         this.loadsitu = false;
         this.adbtn = '确定';
       },
-
       sure() {
         this.loadsitu = true;
         this.adbtn = '保存中';
@@ -195,9 +194,4 @@
       });
     },
   }
-
 </script>
-<style scoped>
-
-
-</style>
