@@ -23,7 +23,7 @@
             </el-table-column>
             <el-table-column prop="certCode" label="身份证号" width="160">
             </el-table-column>
-            <el-table-column prop="matchApplyWorkName" label="进件机构" width="130">
+            <el-table-column prop="matchApplyWorkName" label="进件机构" width="100">
             </el-table-column>
             <el-table-column prop="matchApplyStateTxt" label="业务状态" width="110">
             </el-table-column>
@@ -48,23 +48,23 @@
         <div class="height_auto">
           <el-table :data="fixTelData.recordList" border style="width: 100%;height:auto;" @row-dblclick="itemDbclickFixTel"
             highlight-current-row v-loading="fixTelLoading">
-            <el-table-column prop="targetCustName" label="命中号码姓名" width="120">
+            <el-table-column prop="targetCustName" label="命中号码姓名" width="105">
             </el-table-column>
-            <el-table-column prop="matchTel" label="命中号码" min-width="150">
+            <el-table-column prop="matchTel" label="命中号码" width="110">
             </el-table-column>
-            <el-table-column prop="matchTelTypeTxt" label="电话类型" width="120">
+            <el-table-column prop="matchTelTypeTxt" label="电话类型" width="100">
             </el-table-column>
-            <el-table-column prop="matchApplySubNo" label="进件编号" min-width="180">
+            <el-table-column prop="matchApplySubNo" label="进件编号" width="160">
             </el-table-column>
-            <el-table-column prop="matchApplyCustName" label="客户名称" min-width="120">
+            <el-table-column prop="matchApplyCustName" label="客户名称" width="80">
             </el-table-column>
-            <el-table-column prop="certCode" label="身份证号" min-width="180">
+            <el-table-column prop="certCode" label="身份证号" width="160">
             </el-table-column>
-            <el-table-column prop="matchApplyWorkName" label="进件机构" min-width="180">
+            <el-table-column prop="matchApplyWorkName" label="进件机构" width="100">
             </el-table-column>
-            <el-table-column prop="matchApplyStateTxt" label="业务状态" min-width="140">
+            <el-table-column prop="matchApplyStateTxt" label="业务状态" width="110">
             </el-table-column>
-            <el-table-column prop="remark" width="200" fit="false" class="mark-cell" label="备注" show-overflow-tooltip>
+            <el-table-column prop="remark" min-width="100" fit="false" class="mark-cell" label="备注" show-overflow-tooltip>
             </el-table-column>
           </el-table>
         </div>
@@ -85,21 +85,21 @@
         <div class="height_auto">
           <el-table :data="workData.recordList" border style="width: 100%;height:auto;" @row-dblclick="itemDbclickCompany"
             highlight-current-row v-loading="companyLoading">
-            <el-table-column prop="targetCustName" label="命中号码姓名" width="120">
+            <el-table-column prop="targetCustName" label="命中号码姓名" width="105">
             </el-table-column>
-            <el-table-column prop="applyTelTypeTxt" label="电话类型" width="120">
+            <el-table-column prop="applyTelTypeTxt" label="电话类型" width="100">
             </el-table-column>
-            <el-table-column prop="matchApplySubNo" label="进件编号" min-width="180">
+            <el-table-column prop="matchApplySubNo" label="进件编号" width="160">
             </el-table-column>
-            <el-table-column prop="matchApplyCustName" label="客户名称" min-width="120">
+            <el-table-column prop="matchApplyCustName" label="客户名称" width="80">
             </el-table-column>
-            <el-table-column prop="certCode" label="身份证号" min-width="180">
+            <el-table-column prop="certCode" label="身份证号" width="160">
             </el-table-column>
-            <el-table-column prop="matchApplyWorkName" label="进件机构" min-width="180">
+            <el-table-column prop="matchApplyWorkName" label="进件机构" width="100">
             </el-table-column>
-            <el-table-column prop="matchApplyStateTxt" label="业务状态" min-width="140">
+            <el-table-column prop="matchApplyStateTxt" label="业务状态" width="110">
             </el-table-column>
-            <el-table-column prop="remark" width="200" fit="false" class="mark-cell" label="备注" show-overflow-tooltip>
+            <el-table-column prop="remark" min-width="100" fit="false" class="mark-cell" label="备注" show-overflow-tooltip>
             </el-table-column>
           </el-table>
         </div>

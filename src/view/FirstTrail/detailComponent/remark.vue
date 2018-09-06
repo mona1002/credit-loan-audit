@@ -32,7 +32,7 @@
             </el-table-column>
             <el-table-column prop="remarkTime" label="备注时间" width="150" sortable>
             </el-table-column>
-            <el-table-column prop="riskTip" label="风险提示" width="180">
+            <el-table-column prop="riskTip" label="风险提示" width="130">
             </el-table-column>
             <el-table-column prop="remark" label="备注" show-overflow-tooltip min-width="90">
             </el-table-column>

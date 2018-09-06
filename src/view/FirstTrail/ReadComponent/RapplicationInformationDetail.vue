@@ -736,25 +736,25 @@
         </template>
         <div class="height_auto">
           <el-table :data="accepCusRelations" style="width: 100%" highlight-current-row border class="people">
-            <el-table-column type="index" :index='1' label="序号" min-width="50">
+            <el-table-column type="index" :index='1' label="序号" width="55">
             </el-table-column>
-            <el-table-column prop="contactName" label="姓名" min-width="100">
+            <el-table-column prop="contactName" label="姓名" width="80">
             </el-table-column>
-            <el-table-column prop="contactTypeTxt" label="类型" min-width="100">
+            <el-table-column prop="contactTypeTxt" label="类型" width="90">
             </el-table-column>
-            <el-table-column prop="relationshipTxt" label="关系" min-width="100">
+            <el-table-column prop="relationshipTxt" label="关系" width="50">
             </el-table-column>
-            <el-table-column prop="mobile" label="手机号码" min-width="120">
+            <el-table-column prop="mobile" label="手机号码" width="105">
             </el-table-column>
-            <el-table-column prop="homeTel" label="住宅电话" min-width="100">
+            <el-table-column prop="homeTel" label="住宅电话" width="80">
             </el-table-column>
-            <el-table-column prop="contactAge" label="年龄" min-width="50">
+            <el-table-column prop="contactAge" label="年龄" width="50">
             </el-table-column>
-            <el-table-column prop="certTypeTxt" label="证件类型" min-width="110">
+            <el-table-column prop="certTypeTxt" label="证件类型" width="80">
             </el-table-column>
-            <el-table-column prop="certCode" label="证件号码" min-width="120">
+            <el-table-column prop="certCode" label="证件号码" width="120">
             </el-table-column>
-            <el-table-column prop="workName" label="单位名称" show-overflow-tooltip min-width="180">
+            <el-table-column prop="workName" label="单位名称" show-overflow-tooltip width="180">
             </el-table-column>
             <el-table-column prop="workTel" label="单位电话" min-width="100">
             </el-table-column>

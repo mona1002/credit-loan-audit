@@ -8,18 +8,17 @@
         </template>
         <div class="taskWtable">
           <el-table :data="datas" height="743" style="width: 100%" :default-sort="{prop: 'date', order: 'descending'}" border>
-            <!-- order两个参数，顺序和倒序: ascending, descending -->
-            <el-table-column type="index" :index='1' label="序号" min-width="50">
+            <el-table-column type="index" :index='1' label="序号" width="50">
             </el-table-column>
-            <el-table-column prop="remarkTypeTxt" label="备注类型" min-width="70">
+            <el-table-column prop="remarkTypeTxt" label="备注类型" width="90">
             </el-table-column>
-            <el-table-column prop="remarker" label="备注人" min-width="120">
+            <el-table-column prop="remarker" label="备注人" width="100">
             </el-table-column>
-            <el-table-column prop="remarkTime" label="备注时间" sortable min-width="120">
+            <el-table-column prop="remarkTime" label="备注时间" sortable width="150">
             </el-table-column>
-            <el-table-column prop="riskTip" label="风险提示" min-width="210">
+            <el-table-column prop="riskTip" label="风险提示" width="130">
             </el-table-column>
-            <el-table-column prop="remark" label="备注" min-width="600" show-overflow-tooltip>
+            <el-table-column prop="remark" label="备注" min-width="90" show-overflow-tooltip>
             </el-table-column>
           </el-table>
         </div>
