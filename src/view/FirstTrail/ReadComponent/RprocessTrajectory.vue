@@ -25,7 +25,7 @@
             </el-table-column>
             <el-table-column prop="approvalOpinionTxt" label="处理结论" width="120">
             </el-table-column>
-            <el-table-column prop="opinionExplain" label="意见说明" show-overflow-tooltip min-width="170">
+            <el-table-column prop="opinionExplain" label="意见说明" show-overflow-tooltip min-width="325">
             </el-table-column>
           </el-table>
         </div>

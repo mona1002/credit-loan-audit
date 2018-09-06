@@ -596,7 +596,6 @@
           </div>
           <div v-if="FinalConEditShow" class="  clearFix  Padding_top_10" style="position:relative">
             <i class="hint" style='top:-5px;left:220px;'>
-              <!-- <span v-show="errors.has('Finalconclusion')">{{ errors.first('Finalconclusion') }}</span> -->
               <b v-show="this.finalResult">输入长度不能超过500</b>
             </i>
             <label class="label_width_210">
@@ -617,7 +616,6 @@
     </div>
   </div>
 </template>
-
 <script>
   export default {
     data() {
@@ -683,8 +681,6 @@
           },
           result: false,
         },
-        // getParams: [], //获取taskwaitting里面的 查询入参 applyId
-        // Confirm: false,
         reg: {
           payDay: false,
           mMontyP: false,
@@ -786,21 +782,13 @@
           }
         });
       },
-      // canc() {
-      //   this.Confirm = false;
-      // },
-      // closed() {
-      //   this.Confirm = false;
-      // },
       CFsave() {
         this.post("/creauditInfo/updateOtherfinalByPK", {
-          // applyId: this.FormData.applyId,//合并之前
           applyId: this.applyId,
           id: this.FormData.id,
           ootherfinal: this.FormData.ootherfinal
         }).then(res => {
           if (res.statusCode == 200) {
-            // this.Confirm = false;
             this.AreaNPercent();
             this.$message({
               message: '提交成功!',
@@ -808,7 +796,6 @@
             });
             this.mountC();
           } else {
-            // this.Confirm = false;
             this.$message.error('提交失败，请稍后再试！');
             this.mountC();
           }
@@ -837,8 +824,6 @@
           this.FormData.parentIncome;
         this.FormData.fconsumption ? this.FormData.fconsumption = this.formatNumber(this.FormData.fconsumption, 2, 0) :
           this.FormData.fconsumption;
-        // this.FormData.selfpremisesArea = this.FormData.selfpremisesArea.slice(0, -2);
-        // this.FormData.selfhasProportion = this.FormData.selfhasProportion.slice(0, -1);
         this.FormData.selfpremisesArea ? this.FormData.selfpremisesArea = this.formatNumber(this.FormData.selfpremisesArea,
           2, 0) + 'm²' : this.FormData.selfpremisesArea;
         this.FormData.selfhasProportion ? this.FormData.selfhasProportion = this.formatNumber(this.FormData.selfhasProportion,
@@ -907,14 +892,10 @@
       mountC() {
         // 获取查询列表数据
         this.post("/creauditInfo/queryCreauditInfoObj", {
-          // applyId: this.getParams.applyId,//合并之前
-          // applyId: "00542",applyId
           applyId: this.applyId,
-
         }).then(res => {
           if (res.statusCode == 200) {
             this.FormData = res.data;
-            // this.FormData.applyId = this.getParams.applyId;
             this.AreaNPercent();
             this.formatSC();
             this.FormData.aaddress ? this.FormData.aaddress = this.FormData.aaddress.replace(/null/g, '') : this.FormData
@@ -1019,8 +1000,6 @@
       },
     },
     mounted() {
-      // this.getParams = JSON.parse(localStorage.getItem("FtaskInWaitting")); // 终审工作台
-      // // 获取查询列表数据
       this.mountC();
     },
   }
@@ -1028,10 +1007,8 @@
 </script>
 
 <style scoped>
-  /* ------------------------------------------------ */
 
   /* 最下面的 弹窗样式 */
-
   /* 上网信息-两行select下拉 居中 */
 
   .hint {
@@ -1046,35 +1023,10 @@
   }
 
   .btn_wrap {
-    /* width: 66.6%; */
     height: 60px;
   }
 
   .btn {
     margin-left: 235px;
   }
-
-  /* .calbtn {
-    background: white;
-    border: 1px solid #d8dce5;
-    color: #5a5e66;
-    ;
-    margin-left: 10px;
-    padding: 7px 15px;
-    font-size: 12px;
-    border-radius: 3px;
-  }
-
-  .subtn {
-    background: #66b1ff;
-    border-color: #66b1ff;
-    color: #fff;
-    margin-left: 10px;
-    padding: 7px 15px;
-    font-size: 12px;
-    border-radius: 3px;
-  } */
-
-  .SureAlert_content {}
-
 </style>

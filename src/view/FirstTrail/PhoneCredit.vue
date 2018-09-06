@@ -1405,13 +1405,6 @@
     width: calc(100% - 211px);
   }
 
-  /* 气泡 */
-
-  .el-tooltip__popper {
-    max-width: 400px;
-    height: auto;
-  }
-
   /*  历史  */
 
   .phone-credit .item-column1 .el-form-item__content {

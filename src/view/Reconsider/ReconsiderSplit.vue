@@ -58,13 +58,13 @@
   import AborrowerInformationDetail from "../FirstTrail/checkComponent/borrowerInformationDetail.vue"; //借款人资料
   import FCreditForm from "../FinalTrial/FCreditForm.vue"; //信审表
   import creditInvestigation from "../FirstTrail/detailComponent/creditInvestigation.vue"; //实地征信
-  import ReconsiderApply from './ReconsiderComponents/ReconsiderApply.vue' //复议申请
+  import ReconsiderApply from './ReconsiderApply.vue' //复议申请
   import aAntiApplyInf from '../AntiFraud/components/aAntiApplyInf.vue' //反欺诈结论
   // 编辑
   import InternalMatch from "../FirstTrail/InternalMatch.vue";
   import PhoneCredit from "../FirstTrail/PhoneCredit.vue";
   import RantiFraudInvestigation from "../FirstTrail/ReadComponent/RantiFraudInvestigation"; //反欺诈调查
-  import ReconConclusion from './ReconsiderComponents/ReconConclusion.vue' //复议结论
+  import ReconConclusion from './ReconConclusion.vue' //复议结论
   export default {
     data() {
       return {

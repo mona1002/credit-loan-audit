@@ -19,7 +19,7 @@ import AntiApplyInf from '@/view/AntiFraud/AntiApplyInf.vue'
 import AntiApplyAdd from '@/view/AntiFraud/AntiApplyAdd.vue'
 import aAntiApplyInf from '@/view/AntiFraud/components/aAntiApplyInf.vue'
 // -------------------------复议---------------------
-import ReconsiderApply from '../view/Reconsider/ReconsiderComponents/ReconsiderApply.vue' //复议申请
+import ReconsiderApply from '../view/Reconsider/ReconsiderApply.vue' //复议申请
 import reconsiderList from '../view/Reconsider/reconsiderList.vue' //复议申请任务列表
 import ReconsiderSplit from '../view/Reconsider/ReconsiderSplit.vue' //复议专员主管分屏
 // -------------------------流程监控---------------------

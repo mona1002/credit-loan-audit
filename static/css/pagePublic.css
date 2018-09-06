@@ -1,5 +1,4 @@
 /*最小宽度 */
-
 .min_width_1200 {
   min-width: 1200px;
 }
@@ -9,7 +8,6 @@
 }
 
 /* 内边距 */
-
 .padding_left_5 {
   padding-left: 5px;
 }
@@ -19,7 +17,6 @@
 }
 
 /* 外边距 */
-
 .margin_top_5 {
   margin-top: 5px;
 }
@@ -36,8 +33,16 @@
   margin-right: 5px;
 }
 
-/* 表格th */
+/* 气泡 */
+.el-tooltip__popper {
+  max-width: 320px;
+  height: auto;
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-all;
+}
 
+/* 表格th */
 .table_th {
   height: 35px;
   border: 1px solid #d8dce5;
@@ -47,7 +52,6 @@
 }
 
 /*查看- label宽度 */
-
 .label_width_210 {
   width: 210px;
 }
@@ -81,13 +85,11 @@
 }
 
 /* 查看-label高度 */
-
 .checkedInf .label_height_48 {
   height: 48px;
 }
 
 /* 查看-span宽度 */
-
 .checkedInf .text_area_span_minus220 {
   width: calc(100% - 220px);
 }
@@ -105,7 +107,6 @@
 }
 
 /* 查看-li宽度 */
-
 .checkedInf .li_one_row {
   width: 100%;
 }
@@ -128,7 +129,6 @@
 }
 
 /*查看部分 + 查看li宽度比例  */
-
 .checkedInf {
   height: auto;
   width: 100%;
@@ -159,14 +159,12 @@
 }
 
 /* 编辑-带输入框部分 */
-
 .checkedInf .inputInf {
   height: 35px;
   line-height: 35px;
 }
 
 /*查看- 模拟文本域框 */
-
 .checkedInf .text_area_li {
   height: 75px;
 }
@@ -189,13 +187,11 @@
 }
 
 /* 定位 */
-
 .position_relative {
   position: relative;
 }
 
 /* 文本对齐方式 */
-
 .text_align_right {
   text-align: right;
 }
@@ -213,10 +209,9 @@ body .pre_wrap {
 }
 
 /* 列表 */
-
 .taskWatting {
   width: 100%;
-  height: calc( 100% - 90px);
+  height: calc(100% - 90px);
   background-color: #fafbfc;
   overflow-y: auto;
   overflow-x: hidden;
@@ -233,7 +228,6 @@ body .pre_wrap {
 }
 
 /* 高级查询下的input */
-
 .taskWatting .row {
   margin-bottom: 20px;
 }
@@ -243,7 +237,6 @@ body .pre_wrap {
 }
 
 /* 分页 */
-
 .page {
   text-align: center;
   margin-top: 20px;
@@ -259,7 +252,6 @@ body .pre_wrap {
 }
 
 /* el-table特殊高度  +  带fixed属性 出滚动条时 fixed部分高度 */
-
 body .el-table_450_scroll .el-table {
   height: 450px !important;
 }
@@ -278,7 +270,6 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 借款台账中-下拉框中分页 */
-
 .select_pageination .el-pagination {
   white-space: normal;
 }
@@ -320,7 +311,6 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 分屏 */
-
 .SplitScreen {
   height: calc(100% - 90px);
   overflow-y: hidden;
@@ -345,7 +335,6 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 对比弹出层关闭按钮 */
-
 .SplitScreen .compareClose {
   position: absolute;
   right: 40px;
@@ -354,7 +343,6 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 全屏  --  分屏 图标 */
-
 .SplitScreen .icon_showHalf {
   position: absolute;
   width: 40px;
@@ -390,9 +378,7 @@ body .el-table_450_scroll .el-table__fixed-right {
     overflow: auto;
     padding: 13px 9px;
   } */
-
 /* 借款人详情 */
-
 .SplitScreen .PerDtl {
   color: #0077ff;
   background: white;
@@ -409,10 +395,9 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 左右分屏 */
-
 .SplitScreen .SplitScreen_wrap {
   width: 100%;
-  height: calc( 100% - 33px);
+  height: calc(100% - 33px);
   min-width: 1306px;
   position: relative;
 }
@@ -432,7 +417,6 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 对比右侧弹出层2px间距 */
-
 .SplitScreen .AudioVisual_wrap_compare_right {
   margin-left: 2px;
 }
@@ -456,9 +440,7 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 左屏 */
-
 /* 左侧列表  影像资料等 ul 外包   流 */
-
 .SplitScreen .left .Left_ul {
   background: rgba(31, 45, 61, 0.59);
   box-shadow: 0 5px 20px 0 #475669;
@@ -483,13 +465,11 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 左侧详情 div  */
-
 .SplitScreen .Left_detail_div {
   height: 100%;
 }
 
 /* 左侧详情 p标签  */
-
 .SplitScreen .Left_right_Title,
 .SplitScreen .right .Right_tab_title_div,
 .SplitScreen .AudioVisual_wrap_compare_left>p,
@@ -508,20 +488,17 @@ body .el-table_450_scroll .el-table__fixed-right {
   text-align: right;
   padding-right: 40px;
 } */
-
 /* 左侧详情 content div 内容  */
-
 .SplitScreen .Left_right_BigImg {
   background: white;
-  height: calc( 100% - 40px);
+  height: calc(100% - 40px);
   overflow: auto;
 }
 
 /* 右侧tab切换头外的ul  */
-
 .SplitScreen .Right_tab_ul_wrap {
   overflow: hidden;
-  width: calc( 100% - 100px);
+  width: calc(100% - 100px);
   margin-left: 50px;
 }
 
@@ -542,12 +519,11 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 .SplitScreen .tab2_Content {
-  height: calc( 100% - 40px);
+  height: calc(100% - 40px);
   overflow: auto;
 }
 
 /* 右侧tab切换头 左右滑动图标  流  */
-
 .SplitScreen .pre_next_btn_wrap {
   position: absolute;
   z-index: 2;
@@ -563,20 +539,18 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /*  对比弹出层 外包 div 流 */
-
 .SplitScreen .AudioVisual_wrap_compare {
   position: absolute;
   top: 80px;
-  width: calc( 100% - 18px);
-  height: calc( 100% - 123px);
+  width: calc(100% - 18px);
+  height: calc(100% - 123px);
   z-index: 22;
   min-width: 1348px;
 }
 
 /* 弹出层 - 两侧组件 content  流 */
-
 .SplitScreen .AlertContent {
-  height: calc( 100% - 40px);
+  height: calc(100% - 40px);
   overflow: auto;
 }
 
@@ -589,7 +563,6 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 对比弹出层客户名称=====================================待更改 */
-
 .customName {
   text-align: right !important;
   padding-right: 5px;
@@ -605,14 +578,12 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 折叠面板title */
-
 .Abody .headFont {
   font-size: 14px !important;
   font-weight: 800;
 }
 
 /* 查看-信审表-div设置border */
-
 .border_top {
   border-top: 1px solid #d8dce5;
 }
@@ -635,7 +606,6 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 借款人资料 */
-
 .borrowerInformationSetail {
   width: 100%;
   height: 100%;
@@ -643,7 +613,6 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 信审表 */
-
 .CreditForm li {
   /* padding-bottom: 4px; */
   border: none;
@@ -660,24 +629,17 @@ body .el-table_450_scroll .el-table__fixed-right {
   position: relative;
   clear: both;
 } */
-
 /* ------------------------------上网查询 +核实身份--------------------------- */
-
 .CreditForm_InternetInf p,
 /*  上网查询 */
-
 .CreditForm_CheckId p,
 /* 核实信息 ul */
-
 .CreditForm_WorkInfs p,
 /* 工作信息 */
-
 .CreditForm_CompanyInfs p,
 /* 私营企业 */
-
 .CreditForm_FamilyInf p,
 /* 家庭信息 */
-
 .CreditForm_live p {
   float: left;
   width: 33.3%;
@@ -700,9 +662,8 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 私营企业-第一分销商  */
-
 .CreditForm .distributor {
-  width: calc( 100% - 155px);
+  width: calc(100% - 155px);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -711,15 +672,13 @@ body .el-table_450_scroll .el-table__fixed-right {
 
 .CreditForm_InternetInf p:nth-of-type(even) span,
 /* 上网查询 */
-
 .CreditForm_CheckId p:nth-of-type(even) span,
 /* 核实身份-右侧span width */
-
 .CreditForm_FamilyInf p:nth-of-type(even) span
-/* 家庭信息 */
 
+/* 家庭信息 */
   {
-  width: calc( 100% - 225px);
+  width: calc(100% - 225px);
   height: 60px;
   vertical-align: top;
   overflow: auto;
@@ -728,7 +687,7 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 .elips {
-  width: calc( 100% - 225px);
+  width: calc(100% - 225px);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -736,15 +695,13 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 第一经销商 */
-
 .CreditForm .Suppliers {
-  width: calc( 100% - 205px);
+  width: calc(100% - 205px);
 }
 
 /* 工作信息-单位地址 + 私营企业-企业经营项目 */
-
 .CreditForm .ComAddr {
-  width: calc( 100% - 225px);
+  width: calc(100% - 225px);
   vertical-align: top;
   height: 60px;
   overflow: auto;
@@ -754,18 +711,14 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* --------------------------工作信息 + 私营企业--------------------- */
-
 /* 第三列p */
-
 /* .CheckId_right_label
 
 
   {
   width: 140px;
 } */
-
 /* 家庭信息 */
-
 /* .CreditForm_InternetInf p:nth-of-type(even),
 .CreditForm_CheckId p:nth-of-type(even),
 .CreditForm_FamilyInf p:nth-of-type(even)
@@ -774,7 +727,6 @@ body .el-table_450_scroll .el-table__fixed-right {
   {
   width: 66.6%;
 } */
-
 .CreditForm label {
   display: inline-block;
   text-align: right;
@@ -785,28 +737,24 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 上网查询 */
-
 .blueC:hover {
   color: rgba(0, 119, 255, 0.75);
   cursor: pointer;
 }
 
 /*------------creditform------- 核对现住址-------------------------- */
-
 /* 
     .CreditForm_check_reside li,
     .CreditForm_check_reside p {
       margin-bottom: 20px;
     }
    */
-
 .description {
   clear: both;
   margin: 4px 0;
 }
 
 /* 影像资料 */
-
 .icon_next {
   position: absolute;
   right: 24px;
@@ -825,7 +773,6 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 对比-按钮 */
-
 .showHidIcons {
   display: none;
 }
@@ -856,7 +803,7 @@ body .el-table_450_scroll .el-table__fixed-right {
 .BtnIcons {
   position: absolute;
   z-index: 2;
-  top: calc( 100% - 110px);
+  top: calc(100% - 110px);
   height: 52px;
   background: rgba(71, 86, 105, 0.6);
   box-shadow: 0 10px 20px 0 #47566942;
@@ -881,7 +828,6 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 折叠面板上面的四个 th 表头 */
-
 .AudioVisual .list_title span:nth-of-type(1),
 .AudioVisual .list_title_div p span:nth-of-type(1) {
   overflow: hidden;
@@ -890,9 +836,7 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 左侧折叠面板 */
-
 /* 折叠面板上面的四个 th 表头 */
-
 .AudioVisualLeft .list_title span:nth-of-type(1),
 .AudioVisualLeft .list_title_div p span:nth-of-type(1) {
   width: 125px;
@@ -916,7 +860,6 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /*  缩略图 figure 内 图片名字 p 标签 */
-
 .AudioVisual .small_pic_figure p,
 .AudioVisualLeft .small_pic_figure p {
   height: 22px;
@@ -933,7 +876,6 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 缩略图 p 标签  title */
-
 .AudioVisualLeft .Small_pic_title,
 .AudioVisual .Small_pic_title {
   font-size: 16px;
@@ -947,7 +889,6 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 缩略图片-figure-wrap */
-
 .AudioVisual .small_pic_figure,
 .AudioVisualLeft .small_pic_figure {
   float: left;
@@ -975,7 +916,6 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 缩略图 各个 img 图片 */
-
 /* .AudioVisual .Small_pic,
 .AudioVisualLeft .Small_pic {
   height: calc( 100% - 60px);
@@ -984,10 +924,9 @@ body .el-table_450_scroll .el-table__fixed-right {
   box-shadow: 2px 4px 10px 0 #bfcbd9, inset 0 1px 3px 0 #bfcbd9;
   overflow: hidden;
 } */
-
 .AudioVisual .Small_pic,
 .AudioVisualLeft .Small_pic {
-  height: calc( 100% - 60px);
+  height: calc(100% - 60px);
   overflow: hidden;
 }
 
@@ -1004,7 +943,7 @@ body .el-table_450_scroll .el-table__fixed-right {
 
 .Audio_thumb_img {
   display: inline-block;
-  height: calc( 100% - 60px);
+  height: calc(100% - 60px);
   width: 100%;
   border-radius: 5px;
   border: 2px solid #bfcbd9;
@@ -1016,7 +955,6 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 缩略图最外侧div */
-
 .AudioVisual .Small_pic_div,
 .AudioVisualLeft .Small_pic_div {
   position: absolute;
@@ -1032,11 +970,10 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 缩略图 content */
-
 .AudioVisualLeft .small_pic_content,
 .AudioVisual .small_pic_content {
   position: relative;
-  height: calc( 100% - 40px);
+  height: calc(100% - 40px);
   overflow: auto;
   padding-top: 30px;
 }
@@ -1083,13 +1020,11 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 电话征信公共样式 */
-
 .phone-credit .Phone_credit_Form_search_bottom {
   margin-bottom: 8px;
 }
 
 /* 大数据风控 */
-
 .SSComp {
   overflow-x: hidden;
   height: calc(100% - 90px);
@@ -1098,7 +1033,6 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 大数据风控 社保公积金 */
-
 .PneCtrl .tab,
 .SocialSe .tab {
   color: white;
@@ -1155,14 +1089,11 @@ body .el-table_450_scroll .el-table__fixed-right {
 }
 
 /* 反欺诈审批 */
-
 /* .approvalConclus_risk_select .el-select-dropdown {
   width:calc(66.6% - 172px);
 border:3px solid red;
 } */
-
 /* 大数据h6 */
-
 .sort {
   font-weight: 800;
   margin: 5px 10px;

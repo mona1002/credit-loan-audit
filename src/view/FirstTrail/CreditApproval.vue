@@ -296,7 +296,6 @@
                     <el-input v-model="ploanAmt " @blur="moneyBlur(ploanAmt, 'ploanAmt') "></el-input>
                   </el-form-item>
                 </div>
-
                 <div class="bfc">
                   <el-form-item class="presentation" label="审批倍数：" :label-width="formApproLab">
                     {{caculData.appmult}}
@@ -361,7 +360,6 @@
         <el-table-column prop="auditDate" label="审批时间" min-width="180">
         </el-table-column>
       </el-table>
-      <!-- 分页 -->
       <div class="block tool-bar" v-show="tableData.totalRecord > pageSize">
         <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pageNum" :page-sizes="[10, 20,50]"
           :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="tableData.totalRecord">
@@ -374,23 +372,23 @@
     <!-- 流程轨迹弹窗 -->
     <el-dialog title="流程轨迹" :visible.sync="lcgjShow" :modal="false" width="1000px">
       <el-table :data="lcgjData" height="250" border style="width: 100%" highlight-current-row v-loading="lcgjLoading" center>
-        <el-table-column type="index" label="序号" min-width="50">
+        <el-table-column type="index" label="序号" width="50">
         </el-table-column>
-        <el-table-column prop="taskNameTxt" label="任务节点" min-width="100">
+        <el-table-column prop="taskNameTxt" label="任务节点" width="100">
         </el-table-column>
-        <el-table-column prop="taskTypeTxt" label="任务类型" min-width="100">
+        <el-table-column prop="taskTypeTxt" label="任务类型" width="100">
         </el-table-column>
-        <el-table-column prop="activationTime" label="进入本环节时间" min-width="150">
+        <el-table-column prop="activationTime" label="进入本环节时间" width="150">
         </el-table-column>
-        <el-table-column prop="taskStatusTxt" label="任务状态" min-width="100">
+        <el-table-column prop="taskStatusTxt" label="任务状态" width="100">
         </el-table-column>
-        <el-table-column prop="operatorCode" label="处理人" min-width="80">
+        <el-table-column prop="operatorCode" label="处理人" width="80">
         </el-table-column>
-        <el-table-column prop="completeTime" label="处理时间" min-width="150">
+        <el-table-column prop="completeTime" label="处理时间" width="150">
         </el-table-column>
-        <el-table-column prop="approvalOpinionTxt" label="处理结论" min-width="100">
+        <el-table-column prop="approvalOpinionTxt" label="处理结论" width="100">
         </el-table-column>
-        <el-table-column prop="opinionExplain" label="意见说明" min-width="200" show-overflow-tooltip>
+        <el-table-column prop="opinionExplain" label="意见说明" min-width="325" show-overflow-tooltip>
         </el-table-column>
       </el-table>
       <div slot="footer" class="dialog-footer">
