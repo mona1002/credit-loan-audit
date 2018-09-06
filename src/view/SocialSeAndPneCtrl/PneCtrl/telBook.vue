@@ -38,9 +38,9 @@
             this.tableData = res.obj.contracts;
             this.type = '';
             if (res.obj.td_clientType) {
-              if (res.obj.td_clientType == '2') this.type = '苹果';
-              else if (res.obj.td_clientType == '1') this.type = '安卓';
-              else this.type = 'web';
+              if (res.obj.td_clientType == '3') this.type = 'IOS';
+              else if (res.obj.td_clientType == '2') this.type = 'Android';
+              else this.type = 'Web';
             }
           }
         });
